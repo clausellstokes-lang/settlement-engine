@@ -312,10 +312,13 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       `${wallNote}${charNote}${threatNote}`;
   } else if (effectiveSafety >= 2) {
     safetyLabel = 'Safe';
-    const lawRef  = inst.hasGarrison ? 'The garrison' : inst.hasWatch ? 'The watch' : inst.hasMilitia ? 'The militia' : 'Local enforcement';
+    // COHERENCE-UPKEEP-7 (item 3, the round-three cut's #104): where no garrison, watch or militia stands, no
+    // enforcement is "present": the neighbours keep order (the tab's own "Nobody here is paid to keep order").
+    const lawLine = inst.hasGarrison ? 'The garrison is present and responsive.' : inst.hasWatch ? 'The watch is present and responsive.'
+      : inst.hasMilitia ? 'The militia is present and responsive.' : 'Neighbours notice trouble and deal with it themselves.';
     const wallNote = inst.hasWalls ? ' The walls keep most trouble outside.' : '';
     const courtNote = inst.hasCourtSystem ? ' With a working court, organised crime treads carefully.' : '';
-    safetyDesc = `Crime exists but is well-managed. ${lawRef} is present and responsive. Petty theft is the primary risk; ` +
+    safetyDesc = `Crime exists but is well-managed. ${lawLine} Petty theft is the primary risk; ` +
       `organized crime has a limited foothold.${courtNote}${wallNote}`;
   } else if (effectiveSafety >= 1.2) {
     safetyLabel = 'Moderate';
@@ -392,7 +395,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
         guardEffectivenessDesc = `The citizen militia musters when needed but cannot maintain consistent patrol. ` +
           `Volunteers with other work to do; reliable in a crisis, absent during routine crime.${prisonNote}`;
       }
-    } else if (inst.hasMercenary && !inst.hasGarrison) {
+    } else if (inst.hasMercenary && !inst.hasGarrison && !inst.hasWatch) { // COHERENCE-UPKEEP-7 (the cut's #640): where a watch stands, its own line
       guardEffectivenessDesc = `A mercenary company provides enforcement: professional and effective, but loyal to the contract, not the community. ` +
         `When the coin stops, so does the protection.${prisonNote}${wallNote}`;
     } else if (inst.hasCharterHall && !inst.hasGarrison && !inst.hasWatch) {

@@ -99,6 +99,7 @@ export const DECLARATION_CHANNELS = Object.freeze([
   { module: 'src/domain/threatProfile.js', name: 'THREAT_TEXT_SIBLINGS', kind: 'siblings' },
   { module: 'src/generators/economy/foodBalance.js', name: 'OUTLOOK_HOOK_SIBLINGS', kind: 'siblings' },
   { module: 'src/generators/economy/incomeLineSiblings.js', name: 'INCOME_LINE_SIBLINGS', kind: 'siblings' }, // COHERENCE-AGREE-3: the income lines on the town's own land
+  { module: 'src/generators/economy/incomeLineSiblings.js', name: 'INCOME_STATE_SIBLINGS', kind: 'siblings' }, // UPKEEP-8: the income lines the finished record makes true (the round-three cut)
   { module: 'src/generators/economy/prosperity.js', name: 'PROSPERITY_LINE_SIBLINGS', kind: 'siblings' }, // COHERENCE-AGREE: the market lines' twins
   { module: 'src/generators/foodLand.js', name: 'FOOD_RECORD_LINE_SIBLINGS', kind: 'siblings' }, // COHERENCE-AGREE-3: the diversity line's own-plots twin
   { module: 'src/generators/narrativeText.js', name: 'POLITICAL_FLAVOR_SIBLINGS', kind: 'siblings' },

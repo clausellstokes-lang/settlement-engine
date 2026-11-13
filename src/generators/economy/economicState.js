@@ -24,7 +24,7 @@ import { hasLocalAgriculturalSupply } from './localSupplyEvidence.js';
 import { generateFoodSecurity } from '../foodGenerator.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, the file sits at its line cap
 import { goodsHeldByFoodRecord } from './foodBalance.js';
 import { liveMaterialFor } from './localMaterials.js'; import { hasMarketInstitution } from '../../domain/facts/market.js';
-import { GRAIN_OWN_FIELDS_LINE, GRAIN_SURPLUS_LINE, LOCAL_COAL_LINE, LOCAL_COAL_SOLD_LINE, FORGE_HOUSE_WORDS } from './incomeLineSiblings.js'; import { offersFoodSurplus } from '../../domain/foodSurplus.js';
+import { GRAIN_OWN_FIELDS_LINE, GRAIN_SURPLUS_LINE, LOCAL_COAL_LINE, LOCAL_COAL_SOLD_LINE, FORGE_HOUSE_WORDS, ALCHEMY_TRADE_LINE, ALCHEMIST_SUPPLEMENTS_LINE, GRAIN_BOUGHT_LINE, WOOL_LOCAL_LINE, WOOL_BOUGHT_LINE, LOCAL_ORE_LINE, IRON_IMPORTED_LINE, FISH_EXPORT_LINE, QUARRY_LINE, MASONS_LINE, TIMBER_LINE, TIMBER_BOUGHT_LINE, trueIncomeDesc } from './incomeLineSiblings.js'; import { offersFoodSurplus } from '../../domain/foodSurplus.js';
 
 
 export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggles = {}, config = {}) => {
@@ -280,8 +280,8 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         percentage: pct,
         desc:
           magPri < 35
-            ? 'Herbal remedies, minor alchemical preparations, and potion sales. The local alchemist supplements conventional trade.'
-            : 'A thriving alchemical trade in reagents, preparations, and curative potions draws customers from surrounding settlements.',
+            ? ALCHEMIST_SUPPLEMENTS_LINE // UPKEEP-8: the originals print by their declared constants (incomeLineSiblings.js)
+            : ALCHEMY_TRADE_LINE,
       });
     }
 
@@ -417,7 +417,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         percentage: Math.max(6, Math.round(ecoInstFlags.economyOutput / 9)),
         desc: hasNearbyResource('grain_field', 'fertile_flood') // the surplus words read the food record below (F7)
           ? GRAIN_SURPLUS_LINE
-          : 'Grain purchased from farming regions and resold or processed locally; margin depends on stable supply routes.',
+          : GRAIN_BOUGHT_LINE,
       });
     }
     if (
@@ -435,8 +435,8 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         source: 'Wool & Textile Trade',
         percentage: Math.max(8, Math.round(ecoInstFlags.economyOutput / 7)),
         desc: hasNearbyResource('grazing_land')
-          ? 'Local flocks provide raw wool; weavers and fullers convert it to cloth sold across the region.'
-          : 'Wool bought from pastoral regions and processed locally: value-add trade dependent on consistent supply.',
+          ? WOOL_LOCAL_LINE
+          : WOOL_BOUGHT_LINE,
       });
     }
     if (
@@ -457,10 +457,10 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         // COHERENCE-AGREE: "local ore" only where the town has ore; coal fires the forges and is not ore. The smith's
         // ore is iron, the material table's one answer (COHERENCE-AGREE-3, F3): gold or silver alone buys its iron in.
         desc: liveMaterialFor('metals', nearbyResources)
-          ? 'Local ore feeds the smithy directly. Metalwork income is not trade-route dependent.'
+          ? LOCAL_ORE_LINE
           : hasNearbyResource('coal_deposit')
             ? (FORGE_HOUSE_WORDS.some((w) => hasInstNamed(w)) ? LOCAL_COAL_LINE : LOCAL_COAL_SOLD_LINE) // declared in incomeLineSiblings.js (F13; COHERENCE-AGREE-8 T3: the twin where no forge house stands)
-            : 'Iron imported from mining regions and worked locally; this income stream is vulnerable to supply disruption.',
+            : IRON_IMPORTED_LINE,
       });
     }
     // Timber income. Old needles 'forest_access'/'timber_rights' matched no
@@ -476,8 +476,8 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         source: 'Timber Trade',
         percentage: Math.max(7, Math.round(ecoInstFlags.economyOutput / 8)),
         desc: (hasNearbyResource('managed_forest', 'shipbuilding_timber') || ['sawmill', 'lumber', 'timber', 'carpent', 'wood', 'forest'].some((w) => hasInstNamed(w))) // COHERENCE-AGREE-8 (T2): a managed or shipbuilding forest, or a wild stand a wood house works
-          ? 'Local forest provides sustainable timber revenue; managed felling and sawmilling keep production consistent.'
-          : 'Timber sourced from more distant forests and resold or processed locally: trade route dependent.',
+          ? TIMBER_LINE
+          : TIMBER_BOUGHT_LINE,
       });
     }
     if (
@@ -496,7 +496,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           ? 'Fish & Maritime Produce'
           : 'Fish & Preserved Produce',
         percentage: Math.max(8, Math.round(ecoInstFlags.economyOutput / 8)),
-        desc: 'Catch landed and sold fresh or preserved; salt fish are a major regional export commodity.',
+        desc: FISH_EXPORT_LINE,
       });
     }
     if (
@@ -513,8 +513,8 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         source: 'Stone Quarrying',
         percentage: Math.max(6, Math.round(ecoInstFlags.economyOutput / 10)),
         desc: hasNearbyResource('stone_quarry') // COHERENCE-AGREE: a gem deposit is not a quarry of dressed stone
-          ? 'Local quarry provides dressed stone to regional builders: reliable income with low transport overhead.'
-          : 'Stone masons work imported material; the quarrying income notation reflects processing margin only.',
+          ? QUARRY_LINE
+          : MASONS_LINE,
       });
     }
     // Custom goods the caller has force-toggled on — one income line each.
@@ -820,6 +820,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   // localeCompare) — this list is persisted in the settlement, so the tiebreak
   // must resolve identically across devices/locales — must be LAST
   incomeNormalized.sort((a, b) => b.percentage - a.percentage || compareCodepoint(a.source, b.source));
+  for (const entry of incomeNormalized) entry.desc = trueIncomeDesc(entry.desc, { roster: instNamesLower, siege: stressArr.includes('under_siege'), imports: primaryImports, exports: primaryExports, chains: activeChainsList, top: entry === incomeNormalized[0], source: entry.source, managedForest: hasResource(['managed_forest', 'shipbuilding_timber']) }); // UPKEEP-8: each income line says only what the finished record holds
   const { label: baseProsperity } = computeBaseProsperity(
     tier,
     tradeRoute,
