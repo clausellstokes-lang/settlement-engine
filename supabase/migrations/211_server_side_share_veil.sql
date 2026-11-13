@@ -116,7 +116,7 @@ returns jsonb language sql immutable as $$
     },
     "relationship": {
       "lists": [["relationships"]],
-      "floor": ["id", "type", "typeName", "strength", "from", "to", "npc1Id", "npc2Id", "npc1Name", "npc2Name", "npc1Role", "npc2Role"],
+      "floor": ["id", "type", "typeName", "strength", "from", "to", "npc1Name", "npc2Name", "npc1Role", "npc2Role"],
       "fields": { "tension": ["tension"], "description": ["description"], "hooks": ["plotHooks"] }
     }
   }'::jsonb

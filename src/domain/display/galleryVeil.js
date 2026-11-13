@@ -238,7 +238,7 @@ export const CARD_KINDS = Object.freeze({
     // each end reads `from`, else `npc1Id`, else the name, so an eye master's panel shut on a stored
     // tie keeps its address (COHERENCE-VEIL-4, V4-1; master's rule db832c892:galleryVeil.js:221).
     idOf: (card) => ownIdOr(card, 'relationship', card.from || card.npc1Id || card.npc1Name, card.to || card.npc2Id || card.npc2Name, card.type),
-    floor: ['id', 'type', 'typeName', 'strength', 'from', 'to', 'npc1Id', 'npc2Id', 'npc1Name', 'npc2Name', 'npc1Role', 'npc2Role'],
+    floor: ['id', 'type', 'typeName', 'strength', 'from', 'to', 'npc1Name', 'npc2Name', 'npc1Role', 'npc2Role'],
     fields: {
       tension: ['tension'],
       description: ['description'],
