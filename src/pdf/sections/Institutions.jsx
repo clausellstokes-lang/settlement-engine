@@ -192,7 +192,10 @@ function InstitutionCard({ inst, idx, entityIndex, services = [], backs = [] }) 
     inst.prominence ? { label: 'Scale', value: humanize(inst.prominence) } : null,
     inst.chainDepth != null ? { label: 'Chain', value: `depth ${inst.chainDepth}` } : null,
     // SW-8 RENAME-POWERS (the owner's map, B2): the source key `faction_boost` stays; its words leave the page.
-    inst.source ? { label: 'Source', value: inst.source === 'faction_boost' ? 'Raised by a power' : humanize(inst.source) } : null,
+    // ROUND THREE, ruling (b): the other sources ("Required", "Generated", "Cascade", "Coherence Repair")
+    // are the generator's provenance, the PDF twin of the roster's "REQ": they leave the card. A house a
+    // power raised says so in words; a custom house keeps its own mark.
+    inst.source === 'faction_boost' ? { label: 'Source', value: 'Raised by a power' } : null,
     inst.founded ? {
       label: 'Established',
       value: typeof inst.founded === 'number' ? `${inst.founded}` : inst.founded,

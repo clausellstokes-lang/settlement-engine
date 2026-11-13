@@ -74,7 +74,7 @@ import { FLUSH, FLUSH_PAGE, FLUSH_STACK } from '../../../design/flush.js';
 // *ByWorldPulseOutcomeId stamps into a single answer to "who put this here". Nothing is
 // persisted: the record is derived per render. 'forced' (the player force-added it at
 // generation) wears the same YOU mark as a DM event, and the legend says so once.
-const PROVENANCE_TONE = { you:'#2d7a44', world:'#2a6b6b', required:'#a0762a', auto:'#2a3a7a', none:'#6b5340' };
+const PROVENANCE_TONE = { you:'#2d7a44', world:'#2a6b6b', auto:'#2a3a7a', none:'#6b5340' };
 
 /** @param {object} inst */
 export function institutionBadge(inst) {
@@ -90,7 +90,10 @@ export function institutionBadge(inst) {
       title: created.reason ? `Grown by the living world. ${created.reason}` : 'Grown by the living world',
     };
   }
-  if (created.sourceTag === 'required') return { label:'REQ', color:PROVENANCE_TONE.required, title:'Historically required' };
+  // ROUND THREE, ruling (b) (the chair, 2026-11-13; ROUND-3-CUT §7 (b)): "REQ" was the generator's
+  // provenance (a row the tier's catalogue requires), run onto the house's name: machinery, not a fact
+  // of the place. It leaves the roster; the row is unbadged, like an unstamped generated row.
+  if (created.sourceTag === 'required') return { label:null, color:PROVENANCE_TONE.none, title:undefined };
   // R2-CODE-B item 2 (the cold list REVIEW-W2A-3 #893 #894: "Hedge wizard YOU" with no house added by
   // the user): `source: 'forced'` is written by every generator that forces a row — the user's toggle
   // AND the isolation pass (isolationGenerator.js, `forcedByIsolation`). The record's own word for the
