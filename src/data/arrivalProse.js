@@ -74,10 +74,12 @@ export const ARRIVAL_SENSES = Object.freeze([
     trade: ['weapon', 'armour', 'armor'],
     lines: [],
     dominant: [
-      { text: (n) => `The hammering echoes throughout ${n}, and most of it is the sound of blades being made.`, crisis: ['any'] },
-      { text: () => 'Racks of spearheads and helms stand outside the workshops, waiting for the carts.', crisis: ['any'] },
-      { text: () => 'Every forge you pass is making something meant for a war, and the carts on the road out are full of it.', excludes: ['crisis: under_siege'], crisis: ['any'] },
-      { text: () => 'A smith tests a new blade against a post, frowns, and sends it back to the fire.', crisis: ['any'] },
+      // W2-FIX-DATA-4 (REVIEW-W2A-3 #184; ROUND-3 #600): the arms key is reached by a bowyer or a trade word with no smith on the roster, and
+      // three of its lines speak of many forges and workshops: each needs a smith, and the three a town (a hamlet has one part-time smith)
+      { text: (n) => `The hammering echoes throughout ${n}, and most of it is the sound of blades being made.`, needs: ['institution: smith', 'tier: ≥ town'], crisis: ['any'] },
+      { text: () => 'Racks of spearheads and helms stand outside the workshops, waiting for the carts.', needs: ['institution: smith', 'tier: ≥ town'], crisis: ['any'] },
+      { text: () => 'Every forge you pass is making something meant for a war, and the carts on the road out are full of it.', needs: ['institution: smith', 'tier: ≥ town'], excludes: ['crisis: under_siege'], crisis: ['any'] },
+      { text: () => 'A smith tests a new blade against a post, frowns, and sends it back to the fire.', needs: ['institution: smith'], crisis: ['any'] },
     ] },
   { key: 'bread',
     institutions: ['bakery', 'baker', 'bakehouse', 'mill', 'mills'],
@@ -181,8 +183,8 @@ export const ARRIVAL_SENSES = Object.freeze([
     ],
     dominant: [
       { text: () => "Pilgrims crowd the road in, and every second stall sells candles, tokens or someone's blessing.", needs: ['market'], excludes: ['crisis: threat'], crisis: ['any'] },
-      { text: (n) => `The bells of ${n} answer one another across the roofs, and the streets slow for them.`, crisis: ['any'] },
-      { text: () => 'Pilgrims in travel-stained cloaks queue patiently for their turn at the holy places.', excludes: ['crisis: threat', 'crisis: unrest'], crisis: ['any'] },
+      { text: (n) => `The bells of ${n} answer one another across the roofs, and the streets slow for them.`, needs: ['church', 'tier: ≥ town'], crisis: ['any'] }, // W2-FIX-DATA-4 (ROUND-3 #46): bells answering one another and streets want a house of worship (a shrine is not one) and a town (rr2s-thorp-famine-rand-1: a wayside shrine, 12 people)
+      { text: () => 'Pilgrims in travel-stained cloaks queue patiently for their turn at the holy places.', needs: ['church'], excludes: ['crisis: threat', 'crisis: unrest'], crisis: ['any'] }, // W2-FIX-DATA-4 (ROUND-3 #46): the holy places want a house of worship (a wayside shrine is not one) (the line a refused bell line redraws onto)
     ] },
   { key: 'stone',
     institutions: ['quarry', 'stone quarry', 'mason', 'mine', 'mines', 'stonecutter'],

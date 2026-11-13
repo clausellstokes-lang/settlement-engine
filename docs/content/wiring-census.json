@@ -53770,10 +53770,12 @@
       "lines": 320,
       "declares": [],
       "lineDeclares": {
+        "church": 2,
         "colour": 6,
         "crisis: any": 40,
         "fish": 6,
         "institution: mill": 2,
+        "institution: smith": 4,
         "market": 8,
         "navigable": 3,
         "no crisis: hunger": 6,
@@ -53782,7 +53784,7 @@
         "no crisis: under_siege": 10,
         "no crisis: unrest": 1,
         "sacredHouse": 3,
-        "tier: ≥ town": 4
+        "tier: ≥ town": 8
       },
       "undeclared": 258,
       "crisisScoped": false

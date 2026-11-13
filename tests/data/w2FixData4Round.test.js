@@ -101,4 +101,15 @@ describe('W2-FIX-DATA-4: round two\'s medium lines in this lane\'s files', () =>
       expect(String(town.arrivalScene), seed).toMatch(/\S/);
     }
   }, 60_000);
+
+  test('a sense line that fills the place needs the house it names: bells a church in a town, the arms trade a smith (ROUND-3 HIGH #46 #600; REVIEW-W2A-3 #184)', () => {
+    const thorp = bornRr2s('rr2s-thorp-famine-rand-1');
+    expect(String(thorp.arrivalScene)).not.toMatch(/answer one another across the roofs/);
+    const town = bornRr2s('rr2s-town-indebted-port-1');
+    expect(town.institutions.some((/** @type {any} */ i) => /smith|forge/i.test(i.name)), 'no smith').toBe(false);
+    expect(String(town.arrivalScene)).not.toMatch(/Every forge you pass/);
+    const hamlet = bornRw3('rw3-hamlet-calm-1');
+    expect(String(hamlet.arrivalScene)).not.toMatch(/most of it is the sound of blades being made/);
+    expect(String(hamlet.arrivalScene)).toContain('A smith tests a new blade against a post');
+  }, 60_000);
 });
