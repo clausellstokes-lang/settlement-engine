@@ -64,7 +64,7 @@ export const ARRIVAL_SENSES = Object.freeze([
     dominant: [
       (n) => `The hammering echoes through all of ${n}, and the place plainly lives by its forges.`,
       () => 'Forge smoke hangs over everything here, and the ring of the anvils never quite stops.',
-      () => 'Racks of new ironwork stand outside the workshops, waiting for the carts.',
+      { text: () => 'Racks of new ironwork stand outside the workshops, waiting for the carts.', excludes: ['crisis: under_siege'] }, // W2-FIX-DATA: the carts a siege stops (c22)
       (n) => `${n} lives by its forges: the clang of iron is in every lane.`,
     ] },
   // ARMS speaks only where the settlement EXPORTS weapons or armour (no `lines`, so it is never a candidate on a
@@ -129,7 +129,7 @@ export const ARRIVAL_SENSES = Object.freeze([
       // CENSUS-2f, R-AP: the picker reaches `fish` by a fish market's or a fishmonger's NAME, which guarantees no
       // catch (soak1k-152), so every line here declares `fish` (the food record's source) and a refused beat redraws.
       { text: () => "Gulls quarrel over the fish stalls, and the air smells of the morning's catch.", needs: ['market', 'navigable', 'fish'] },
-      { text: () => 'A fishmonger shouts a price over the slap of wet baskets.', needs: ['fish'] },
+      { text: () => 'A fishmonger shouts a price over the slap of wet baskets.', needs: ['fish', 'market'] }, // W2-FIX-DATA: a price is shouted at a market (c05)
       { text: () => 'Nets hang drying on poles, and the smell of the catch follows you.', needs: ['fish'] },
       { text: () => 'A basket of fish, still flapping, is carried past at a run.', needs: ['fish'] },
     ],
@@ -296,8 +296,8 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     { text: () => 'A notice of the next fair is nailed up beside a doorway, and someone is reading it aloud for the others.', needs: ['market'] },
   ],
   latin: [
-    { text: () => 'A patron moves through the crowd with clients at their heels, greeting people by name.', crisis: ['any'] },
-    { text: () => "A notary's clerk hurries past with a satchel of contracts.", crisis: ['any'] },
+    { text: () => 'A patron moves through the crowd with clients at their heels, greeting people by name.', needs: ['tier: ≥ town'], crisis: ['any'] }, // W2-FIX-DATA: a crowd and a patron's clients (c09 at 33)
+    { text: () => "A notary's clerk hurries past with a satchel of contracts.", needs: ['tier: ≥ town'], crisis: ['any'] }, // W2-FIX-DATA: a notary's trade (c03 at 9)
     { text: () => 'People argue politics in the open, loudly, and seem to enjoy it.', excludes: ['crisis: occupied'], crisis: ['any'] },
     { text: () => 'A benefactor\'s name is carved fresh above a mended well, and people make sure you notice it.', crisis: ['any'] },
   ],
@@ -309,7 +309,7 @@ export const ARRIVAL_PEOPLE = Object.freeze({
   ],
   arabic: [
     () => 'A broker sits in the shade, matching buyers to goods from routes you have never travelled.',
-    () => 'Travellers are offered water before anyone asks their business.',
+    { text: () => 'Travellers are offered water before anyone asks their business.', excludes: ['crisis: under_siege'] }, // W2-FIX-DATA: no traveller reaches a besieged gate (c12)
     () => 'Two partners go over their accounts in a courtyard with a mediator sitting between them.',
     () => 'A merchant swears an oath on his scales, and the buyer watches the scales anyway.',
   ],

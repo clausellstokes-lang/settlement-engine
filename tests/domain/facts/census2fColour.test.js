@@ -19,10 +19,12 @@ const needsOf = (line) => (typeof line === 'function' ? [] : declarationOf(line)
 const isColour = (line) => Boolean(line && typeof line === 'object' && line.colour === true);
 
 describe('R-AP amended: the fish key\'s lines declare the catch and the water they presume', () => {
-  it('lines: the stalls\' catch (market, navigable, fish); the wet baskets, the nets, the flapping basket (fish)', () => {
+  it('lines: the stalls\' catch (market, navigable, fish); the wet baskets (fish, market); the nets, the flapping basket (fish)', () => {
     const [stalls, monger, nets, basket] = sense('fish').lines;
     expect(needsOf(stalls)).toEqual(['market', 'navigable', 'fish']);
-    for (const l of [monger, nets, basket]) expect(needsOf(l)).toEqual(['fish']);
+    // W2-FIX-DATA (the REVIEW-W2B cold list, c05): the fishmonger shouts a price at a market, so the wet baskets need one too
+    expect(needsOf(monger)).toEqual(['fish', 'market']);
+    for (const l of [nets, basket]) expect(needsOf(l)).toEqual(['fish']);
   });
   it('dominant: the racks of catch (navigable, fish); the gutting (fish); the salt barrels and their gulls (navigable)', () => {
     const [racks, gutting, barrels] = sense('fish').dominant;
