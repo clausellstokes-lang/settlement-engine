@@ -619,3 +619,160 @@ CRIM_STRUCTURE_DATA a 6 NEW (re-take after 82e8fab6e); BROUGHT_BANDS a 6 NEW (th
 words beside a trade the town lacks); computeActiveChains.js :: INSTITUTIONAL_SERVICE_MAP b 3 (cut#1038) + 2 NEW (the
 #367/#630 family, a generator write); EconomicsTab b 2 + 2 NEW. The chair's packaged command was not received before
 this seat's final statement: run it on the lane's tip first.
+
+# PART 4 — the fourth seat (W2-C-LEAVES-4, 2026-11-13, from 408c2e30c)
+
+**Seat:** session_01FE9mEu8L6LmtRYLz1VwBF7. The lane split by file (the chair's assignment): this seat holds
+EconomicsTab.jsx, the readers it reads (chainStateShown.js, tradeListDisplay.js), one line each in the PDF's
+EconomicsTrade.jsx and the Foundry journal (item 8) and the lane's ONE final statement; W2-C-LEAVES-SIDE holds
+defenseDisplay.js, ResourcesTab.jsx, validationOnPage.js, MagicTab.jsx, facts/chainWorking.js, facts/magic.js on
+lane/w2-c-leaves-side-2026-11-13 and hands its branch to this seat to merge on the chair's word.
+Scratch worktree on a local branch at the lane's tip (read back from origin: 408c2e30c); `npm ci` there (it wrote
+core.hooksPath=.husky/_ into the shared local config, kept for the lane hook); a clean worktree at 408c2e30c holds the
+"before" for every red-first and every count. Corpora: the census's 720 (SECOND-WAVE-CENSUS/births.mjs), 180 fresh
+app-shape births never tuned on (fr4-<tier>-<calm|under_siege|famine|occupied|under_siege+famine|plague_onset>-<1..5>),
+the readers' 50 (the increment's 30 rww- and REVIEW-R2-STAGES' 20 rr2s-, each in its own reader's cfgFor).
+HAZARD MET: the lane's pre-push hook runs the three gates on the WORKING TREE, not the pushed commit: a push made with
+the next item's edits uncommitted was refused (two type errors in the unfinished item). Pushed again from a clean tree.
+
+## The chair's assignment to this seat (the rulings this seat works to; copied, the chair's messages are not on the branch)
+Items in order, each writer its own commit, measured first on the 720 in the app's shape and on the reader's own town,
+red first, pushed as made: (1) a chain card "Running" under a siege: extend the famine reader ("CRISIS LEFT"), no second
+one; a chain on a ground outside the walls or only through an "Access to ..." row prints no state chip, or the state the
+famine reader prints where true; no new state word; the generator's 'running' under a siege NAMED for the seat after
+the merges. (2) The goods pills, one reader (localProductionAsPrinted and the chain leaf it reads): (i) raw by the leaf;
+(ii) made only where a chain that makes it works here and its houses stand; (iii) a service only where a house offers
+it (an Access row is no house); (iv) a key that is not a good never; (v) a good bought in not listed as local unless the
+leaf says worked; (vi) an export of a made good whose chain is impaired or broken on a depleted ground not listed;
+display only; record disagreements counted and NAMED. (3) The food sentences (share words true of every figure in the
+band; the carriers' clause reads the route's home and the crisis; "nothing to spare" not beside stores of three months
+or more). (4) The food balance row reads ONE home with the sentence; figures add up; no rounding remainder as an import;
+the two homes' disagreement NAMED. (5) The clergy's provision (record 387): one home, the defence's tradition fact
+(facts/magic.js); no divine/druidic provision claimed in words where it says no; the "40% recovery" chip leaves
+everywhere. (6) "Needs X · affects: a, b, c" → one plain sentence of consequence naming only services the roster holds;
+listed with five towns. (7) The chain card's Outputs pills by rule 2(iii). (8) #169's twins in the PDF (EconomicsTrade.jsx)
+and the Foundry journal, ONE condition each, the same test. (9) CENSUS-2's hits read; re-run at the tip and 4534ea5e3.
+(10) On the chair's word only: merge the side branch; THE ONE FINAL STATEMENT. The METHOD (records 386, 387, 404): read
+where it prints (three towns, a crisis among them, smallest and largest tier); twins carry their siblings' conditions;
+a line naming a house reads the roster; a line that cannot be true is not written; every cure has its guard town; a
+reworded sentence is owned whole. No new record key; no new vocabulary word; a hideable name never in a stored
+sentence; a claim of zero counted on every surface; a count falling is not a cure. NOT this seat's: the side seat's six
+files; the flow card's facts (chainFlowFacts, chainHouses.js: house lists, "From", "Import: X", upstream notes, the
+"Access to" chains — round two's second code lane); the income rows' words and the food endurance line (the defence
+lane); computeActiveChains.js and every generator (no record byte moves).
+
+## Items (this seat)
+| item | commit | on the 720 (before → after) | fresh / readers | read | guard (red at → green) |
+|---|---|---|---|---|---|
+| 1 siege cards, the access-only class | 9c05cf939 | siege cards printing a working state 89 → 82 (the 7 that reach their church only by an "Access to" row print no chip) | fresh 60 sieges 225 → 210; readers 3 | 7 + 3: each false; no chip in place, the siege note stands | economicsSiegeAccessOnlyCard.test.jsx (408c2e30c: 1 of 2 red) |
+| 1 cont. a port's sea fishing | 8e3f159eb | 1 card back to its record state (Impaired → ✓ Running) | fresh 2; reader rw3-hamlet-under_siege-1 | all 4: ports whose record ships fish "(naval route only)" | the same file's new case (408c2e30c red) |
+| 2 the goods pills | 1e72843b6 | 593 pills leave in 272 towns; 149 exports re-marked transit; 0 added; needs line unchanged | fresh 364 in 87 towns, transit 22; readers 15 towns | 30 read: 27 false, 3 doubtful | economicsGoodsPillsBorneOut.test.jsx (408c2e30c: 4 of 5 red) |
+
+| 3 the food sentences | 1f4b15fb6 | grown word false 81 → 0, brought word 30 → 0, carrier with no wharf 19 → 0, "nothing to spare" beside 3+ months 196 → 0, "brought in" with no trade 15 → 0, "a little more" > twice the harvest 2 → 0; 599 of 950 sentences changed | fresh 21/19/8/12/3/14 → 0; readers 3/3/5/9/1/1 → 0 | the cut's five towns, the increment's, a siege, a famine, thorps and metropolises; every sentence checked against its stat line by script | economicsFoodSentenceTrue.test.jsx (408c2e30c: 5 of 5 red) |
+
+The increment's two HIGH cards of item 1 (rww-hamlet-under_siege-1 River Mill Industry, rww-city-under_siege-1 Hunting &
+Trapping) already read Impaired at 408c2e30c (832d140fe); measured, not re-cured.
+
+## Calls taken without the chair (this seat)
+1. **Item 1, "no chip" is the access-only class only.** A ground-carried or trade-carried chain under a siege keeps the
+   Impaired the famine reader's siege branch already printed (the words are true there: the fields and roads are
+   taken); only the chain whose sole house is a neighbour's, reached by an "Access to ..." row, prints no chip.
+2. **Item 1 cont., the sea.** Read where it prints, the siege branch was false in ports: a land siege does not take a
+   port's sea grounds, and the record's own exports go out "(naval route only)". SEA_GROUNDS (fishing_grounds,
+   deep_harbour) keep their state in a port; a river's fish stays the land's.
+3. **Item 2, Exports of a resource's own raw good stand** (P1-b's fact: the record's export is the worked fact); rule (i)
+   is applied to Produced locally, where the cut's and the increment's lines sit.
+4. **Item 2, a carried good is a true export, as transit.** A good an entrepôt only carries through (the spices "produced
+   in distant lands", silk, extraplanar goods, caravan goods, furs that pass through) prints on the Exports as the blue
+   transit pill the page already has (its legend: "Blue = re-exported transit goods"), never as "Produced locally";
+   the record's dedup had dropped that mark. No new word.
+5. **Item 2, the crisis state is read for raw goods too.** The chain leaf (the side seat's file) answers from the record's
+   state; a raw good whose every working chain prints as stopped by the crisis, or whose ground the famine failed, is not
+   produced locally. The leaf is not changed.
+6. **Item 2, the house lists are a closed list in the reader** (MADE_GOOD_HOUSES, each entry with its cause); "Cavalry
+   mounts" was tried and withdrawn (merchant guilds on a grazing ground may trade horses raised there: not provably
+   false).
+
+7. **Item 3, share words within five points** of every figure in the band (e.g. "about a third" 29–37.5 in a hundred);
+   the brought words are the same bands "of the rest"; the provision clause states its own share. New wording is listed
+   in 1f4b15fb6's message with three towns each (for the owner's veto).
+8. **Item 3, no quarantine branch:** plague at this tree does not close the roads (its record note "Fewer people come to
+   market … some goods stop arriving"; CENSUS-2 counts no plague line). #218 is the no-wharf case.
+9. **Item 3, under a siege** no carrier brings food in but a port's own ships (a dock on the roster; the record ships by
+   the naval route); the sentence says "No food comes into <town> by trade." beside the siege's own note.
+
+## Found, not mine (this seat)
+- **Under a siege the food record keeps an import share** in non-port towns (2 of the 720's 31 sieges, 4 of the fresh
+  60): the record's two answers to "does food come in" disagree. The sentence follows the siege; the stat line is item 4.
+- **The generator's 'running' under a siege** (computeActiveChains.js): 82 chains in 27 siege towns of the 720 (191 in 52
+  of the fresh 60) whose record holds a working state the tab does not print; the PDF's chain flow colours by it and the
+  Foundry journal prints it raw ("*(running)*"). For the seat after the merges.
+- **The record's trade lists name goods its chains and roster do not bear out** (593 pills, 272 of 720 towns:
+  computeActiveChains.js :: deriveLocalProductionFromChains / deriveExportsFromChains; economy/tradeGoods.js ::
+  deriveLocalCommodities); its export dedup drops a carried good's transit mark (149 in 108 towns).
+- **Two homes of "worked here" disagree** (rule (v) keeps the leaf's yes): a necessity import says the town "cannot
+  produce its own" a good the chain leaf says is worked here: 53 local pills in 48 towns of the 720 (the increment's
+  rww-thorp-plague_onset-1 herbs, the cut's #1365).
+- **The PDF's Economics chapter and the Foundry journal print the trade lists without the tab's reader**
+  (EconomicsTrade.jsx prints the record's exports and local list raw; journalPages.js prints displayTradeList's Exports):
+  691 of 720 towns list a pill there the tab does not print. Item 8 gives this seat ONE line each, for #169 only.
+- **Three doubtful removals** of item 2 (processed textiles beside "Craft guilds (5-15)", r2r-town-22; river craft by a
+  boatyard under a siege, r2s-under_siege-metropolis-3; containers by a Potter, r2s-slave_revolt-village-3).
+
+## Stops (this seat)
+- (none blocking)
+
+## STATUS AT THE HAND-BACK (code tip 1f4b15fb6; this seat handed back by file at its context mark)
+- Item 1 — DONE 9c05cf939 + 8e3f159eb. Item 2 — DONE 1e72843b6. Item 3 — DONE 1f4b15fb6.
+- Items 4 to 10 — NOT STARTED, line by line below. The chair was told when items 1 and 2 were pushed.
+- EconomicsTab.jsx sits at 600 effective lines, the max-lines ceiling (eslint, skipBlank/skipComments): item 5's chip
+  removal frees three. Its prose-numerics rows key it by LINE (238, 246, 436, 438, 663, 669 at this tip): keep line
+  numbers above 669 fixed (replace lines in place, as every seat here has), or regenerate the baseline by the test's
+  own scanner when a row falls (item 5: the two rows at 238) and lower REVIEWED_*_CEILING in tests/lint/proseNumerics.test.js.
+- Pre-existing reds met (identical bodies at 408c2e30c): factLayers.walker READERS (the hasHospital row) and
+  defenceFactReaders.walker (pageCensusFindings.js reads one atom unbanked). Not this seat's.
+
+## NOT DONE, LINE BY LINE (for the successor; each measured first, red first, in this order)
+4. **The food balance row** (#442 "+ 1 imported" under a siege; #785, #1040, #1366, rww-metropolis-famine-1: the row's
+   figures are economicViability.metrics.foodBalance, the sentence's and the food record's are
+   economicState.foodSecurity; the cut quotes importCoverage 7,025 vs the page's 7,040, deficit 237 vs 177). RULED: one
+   home, the food record the sentence reads; the figures add up; no rounding remainder printed as an import. The row is
+   EconomicsTab.jsx lines 561-564 (`fb.dailyProduction`, `fb.importCoverage`, `fb.magicFoodOffset`, `fb.deficit`); the bar
+   (`foodBarSegments`) and `deriveFoodBalance` read `fb` too. Name the two homes' disagreement with its count.
+5. **The clergy's provision (#1153; record 387).** One home: facts/magic.js (the side seat's file; `defenceHoldsArcane`
+   is there since 30f3404ff; a divine twin is the side seat's to add if missing: name it). Where it says no: the food
+   sentence's provision clause (item 3's "<Kind> provision makes up …"), the stat row's "+ N by divine provision", the
+   bar's magic run and the chain card's magicNote ("Blessed stores; divine provision fills the gap", the record's
+   chain.magicNote) claim nothing divine or druidic in words; the figures stand as the record's, the disagreement NAMED
+   with its count. The "40% recovery" chip (EconomicsTab.jsx lines 237-239, `chain.magicRecovery`) leaves everywhere:
+   replace its three lines in place with a three-line note (line numbers below stay), regenerate the prose-numerics
+   baseline (two rows at 238 fall), lower the ceilings. The rendered probe (probes/W2-C-LEAVES-4/foodrender.test.jsx)
+   already captures the chips and the "provision" notes.
+6. **"Needs X · affects: a, b, c"** (#920 #1044 #1047 #1049; EconomicsTab.jsx lines 220-225, `chain.dependency`): ONE
+   plain sentence of consequence naming only services the roster holds; nothing where nothing the town has depends on
+   it; list the form with five towns; a false data row NAMED for the data lane.
+7. **The chain card's Outputs pills** (#555 "Civil disputes, Criminal trials, Notary services" with no courthouse;
+   lines 204-211): the rule of item 2(iii): reuse tradeListDisplay.js's reader (`pillBorneOut`'s chain rule:
+   MADE_GOOD_HOUSES / a chain house standing) for the card's outputs, the same reading.
+8. **#169's twins** (one condition each, `tradeStoppedHere`, the tab's test): src/pdf/sections/EconomicsTrade.jsx (the
+   imports row under a siege) and src/foundry/journalPages.js (kv('Imports', …)). Named as shared; nothing else there.
+9. **CENSUS-2** at the tip and at 4534ea5e3 (the command as given; the file list in probes/W2-C-LEAVES-3/c2files.txt; to a
+   file, ~12 min each); read the tip's hits on EconomicsTab.jsx (a 498 towns / 14 lines, f 309 / 36, b 3 / 3 at
+   30f3404ff: the f kind is the flow card's house labels, r2-code-b's) against their towns; each cured or named.
+10. **On the chair's word only:** merge lane/w2-c-leaves-side-2026-11-13 (plain merge; registers re-made through their
+   doors); then THE ONE FINAL STATEMENT as the lane's brief and Part 3's EXACT NEXT STEP give it (the first census's
+   counter at 4534ea5e3 and the tip, its own rows checked — census.sh exits 0 on a failed counter; the whole suite at
+   both, every red classed; the field diff, which must be zero — no generator was touched by this seat, so births at
+   1f4b15fb6 equal 4534ea5e3's by construction, but run it; CENSUS-2 per kind at base and tip; the draft shift record
+   docs/chair/2026-11-13/W2-C-LEAVES-SHIFT-RECORD-DRAFT.md; the edge bundles as the last commit, alone).
+
+## The probes (docs/chair/2026-11-13/probes/W2-C-LEAVES-4/; every one takes trees by absolute path, writes nothing in a tree)
+| probe | run | measures |
+|---|---|---|
+| birthsR.mjs | `SEEDS=<file> TREE=<tree> OUT=<file.ndjson.gz> node birthsR.mjs` | app-shape births: rr2s-, rww-, rw3-, fr4- seeds (each reader's cfgFor) |
+| fresh.txt / readers.txt | — | the 180 fresh seeds; the readers' 50 |
+| siegeCards.mjs | `node siegeCards.mjs <corpus> <tree>` | siege cards printing a working state, by carrier and house |
+| portsiege.mjs / otherSurf1.mjs | `node … <corpus> <tree>` | port sieges' cards; the record's working states the tab does not print |
+| pills.mjs / pillclass.mjs / why.mjs / townpills.mjs / boughtkept.mjs | `node pillclass.mjs <corpus> <beforeTree> <afterTree>` (READ=30 for a stride read) | item 2's classes, reads, per-town diffs, the named disagreements |
+| foodrender.probe.jsx.txt | copy into `<tree>/probe4/foodrender.test.jsx`; i.e. copy into `<tree>/probe4/`, `CORPUS=<corpus> OUT=<ndjson> npx vitest run --maxWorkers=1 probe4/foodrender.test.jsx` (remove the dir before a push: the hook lints the working tree) | the rendered food section, chips and provision notes per town |
+| foodcls.mjs | `node foodcls.mjs <corpus> <food.ndjson> <tree>` | item 3's classes against the stat line's figures |

@@ -1,0 +1,24 @@
+/** @vitest-environment jsdom */
+// Probe (not a test): renders each corpus town's Economics tab and writes its Food Security section's lines. CORPUS, OUT env.
+import React from 'react';
+import fs from 'node:fs'; import zlib from 'node:zlib';
+import { test, vi } from 'vitest';
+import { cleanup, render } from '@testing-library/react';
+vi.mock('../src/store/index.js', () => { const data = { campaigns: [] }; function useStore(sel) { return sel(data); } useStore.subscribe = () => () => {}; useStore.getState = () => data; return { useStore, default: useStore }; });
+vi.mock('../src/hooks/useIsMobile.js', () => ({ default: () => false }));
+import { EconomicsTab } from '../src/components/new/tabs/EconomicsTab.jsx';
+test('probe', () => {
+  const out = [];
+  for (const l of zlib.gunzipSync(fs.readFileSync(process.env.CORPUS)).toString().split('\n')) { if (!l) continue; const { seed, s } = JSON.parse(l);
+    const { container } = render(<EconomicsTab settlement={s} narrativeNote={null} />);
+    const head = [...container.querySelectorAll('button,div,h2,h3,span')].find((d) => /^Food Security/.test(d.textContent || '') && (d.textContent || '').length < 40);
+    let sec = head; for (let i = 0; i < 6 && sec && !(sec.textContent || '').includes('lbs/day'); i++) sec = sec.parentElement;
+    const stat = sec ? [...sec.querySelectorAll('div')].find((d) => /^Production:/.test(d.textContent || ''))?.textContent || '' : '';
+    const sentence = sec ? [...sec.querySelectorAll('div')].filter((d) => /eats|covers each day|No food comes|grows/.test(d.textContent || '') && d.children.length <= 1).map((d) => d.textContent).pop() || '' : '';
+    const chips = [...container.querySelectorAll('span')].filter((x) => /recovery$/.test(x.textContent || '')).map((x) => x.textContent);
+    const prov = [...container.querySelectorAll('em')].map((x) => x.textContent).filter((t) => /provision|Blessed|divine|druid/i.test(t || ''));
+    out.push(JSON.stringify({ seed, stat, sentence, chips, prov }));
+    cleanup();
+  }
+  fs.writeFileSync(process.env.OUT, out.join('\n') + '\n');
+}, 3600000);
