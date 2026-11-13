@@ -79,3 +79,39 @@ export function recordNamesAMage(record) {
     return (!status || status === 'active') && MAGE_ROLE.test(`${typeof p?.role === 'string' ? p.role : ''} ${typeof p?.title === 'string' ? p.title : ''}`);
   });
 }
+
+/**
+ * The defence profile's tradition flags, read as stored (`defenseProfile.traditions`, written by
+ * `generators/defenseGenerator.js`: hasArcane, hasDivine, hasDruid, …).
+ * @param {unknown} record the settlement record
+ * @returns {{ hasDivine?: unknown, hasDruid?: unknown } | null}
+ */
+function defenceTraditionsOf(record) {
+  const profile = record && typeof record === 'object'
+    ? /** @type {{ defenseProfile?: { traditions?: { hasDivine?: unknown, hasDruid?: unknown } | null } | null }} */ (record).defenseProfile
+    : null;
+  return profile?.traditions ?? null;
+}
+
+/**
+ * WHETHER THE DEFENCE HOLDS A DIVINE TRADITION: THE TOWN HAS CLERGY WITH POWERS (W2-C-LEAVES-SIDE, 2026-11-13; the chair's
+ * word, record 387: one home for "the town has clergy with powers", the defence's tradition leaf): the stored
+ * `defenseProfile.traditions.hasDivine`, the twin of `defenceHoldsArcane`. The Economics tab's "divine provision" and
+ * its recovery chip ask this one home (the main seat's lines). Measured on the census's 720 at 408c2e30c: 339 hold it.
+ * @param {unknown} record the settlement record
+ * @returns {boolean}
+ */
+export function defenceHoldsDivine(record) {
+  return defenceTraditionsOf(record)?.hasDivine === true;
+}
+
+/**
+ * WHETHER THE DEFENCE HOLDS A DRUIDIC TRADITION (W2-C-LEAVES-SIDE, 2026-11-13; the chair's word): the defence profile
+ * keeps the druid's tradition apart from the divine one (`defenseProfile.traditions.hasDruid`), so "+ N by druidic
+ * provision" asks it here, not the divine flag. Measured on the census's 720 at 408c2e30c: 84 hold it.
+ * @param {unknown} record the settlement record
+ * @returns {boolean}
+ */
+export function defenceHoldsDruidic(record) {
+  return defenceTraditionsOf(record)?.hasDruid === true;
+}
