@@ -120,7 +120,7 @@ describe('the CARTESIAN unit set is the attach set times the spines times the fa
     // their faces, and a spine's attach set is empty on all 708 by construction. Under the old
     // rule the gate composed NOTHING for the very pools the wave is about.
     const units = unitsOfPool('DS-DEF-11', 'WALLED-STRAINED');
-    expect(units.length, 'four variants, one face each').toBe(4); // W2-WRITE round 1, the cold list's corpus variants (2026-11-13): 2 -> 4, the pool's two siege lines
+    expect(units.length, 'eight variants, one face each').toBe(8); // W2-WRITE round 1, the cold list's corpus variants (2026-11-13): 2 -> 4, the pool's two siege lines // W2-WRITE-3 the round's touched lines still false (2026-11-13): 4 -> 8, v2 declared guardPresence and four lines for the cases with no guard and with guards but no watch
     for (const unit of units) {
       expect(unit.pieces, 'a bare spine is ONE piece').toHaveLength(1);
       expect(unit.pieces[0].role).toBe('spine');
@@ -168,14 +168,14 @@ describe('the CARTESIAN unit set is the attach set times the spines times the fa
     // (c66099791), DS-DEF-4 FIXTURE pools +8 (ec73f09f3), DS-DEF-5 FIXTURE pools +6 (e4cbe50db) and gates v3-v4 +2
     // (4aaa0f230), DS-DEF-5 ARCANE pools +12 (15e146c53), DS-DEF-12 +15 (the third seat). This pin was not re-keyed by
     // the lane's first two seats; the sum is measured, not inferred.
-    expect(total, 'the units actually compared').toBe(626); // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 444 -> 458 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 458 -> 557 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 557 -> 558 // W2-WRITE DEF-3 districts in small places (2026-11-13): 558 -> 562 // W2-WRITE round 1, the cold list's corpus variants (2026-11-13): 562 -> 584 // W2-WRITE stage 3, three lines for every case (layer 2) (2026-11-13): 584 -> 604 // W2-WRITE W2-WRITE-3 DEF-2 STRONG debt (2026-11-13): 604 -> 607 // W2-WRITE W2-WRITE-3 stage 3 crisis cases (2026-11-13): 607 -> 615 // W2-WRITE W2-WRITE-3 M3 no line and no force beside a watch (2026-11-13): 615 -> 619 // W2-WRITE W2-WRITE-3 M1 strong posture under a siege or a war (2026-11-13): 619 -> 623 // W2-WRITE W2-WRITE-3 the round's three high lines (2026-11-13): 623 -> 626
+    expect(total, 'the units actually compared').toBe(630); // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 444 -> 458 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 458 -> 557 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 557 -> 558 // W2-WRITE DEF-3 districts in small places (2026-11-13): 558 -> 562 // W2-WRITE round 1, the cold list's corpus variants (2026-11-13): 562 -> 584 // W2-WRITE stage 3, three lines for every case (layer 2) (2026-11-13): 584 -> 604 // W2-WRITE W2-WRITE-3 DEF-2 STRONG debt (2026-11-13): 604 -> 607 // W2-WRITE W2-WRITE-3 stage 3 crisis cases (2026-11-13): 607 -> 615 // W2-WRITE W2-WRITE-3 M3 no line and no force beside a watch (2026-11-13): 615 -> 619 // W2-WRITE W2-WRITE-3 M1 strong posture under a siege or a war (2026-11-13): 619 -> 623 // W2-WRITE W2-WRITE-3 the round's three high lines (2026-11-13): 623 -> 626 // W2-WRITE W2-WRITE-3 the round's touched lines still false (2026-11-13): 626 -> 630
     // AND THE FLAG IS A FLAG: without `bareSpine` the lib answers the SHAPE REPORT's question
     // (the units a corpus LICENSES), which on a spine pool is none. The two populations are
     // different on purpose, and this is the line that says so.
     expect(libUnitsOfPool(CORPUS_ALL, 'DS-DEF-11', 'WALLED-STRAINED'), 'a spine licenses no'
       + ' composed unit, which is the shape report\'s subject').toEqual([]);
     expect(libUnitsOfPool(CORPUS_ALL, 'DS-DEF-11', 'WALLED-STRAINED', { bareSpine: true }).length)
-      .toBe(4); // W2-WRITE round 1, the cold list's corpus variants (2026-11-13): 2 -> 4, the pool's two siege lines
+      .toBe(8); // W2-WRITE round 1, the cold list's corpus variants (2026-11-13): 2 -> 4, the pool's two siege lines // W2-WRITE-3 the round's touched lines still false (2026-11-13): 4 -> 8, the same four lines
   });
 });
 

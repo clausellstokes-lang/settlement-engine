@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2948,
+    "variants": 2952,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -11479,7 +11479,7 @@
         "defwork"
       ],
       "hasBag": true,
-      "variants": 4,
+      "variants": 8,
       "grammars": 1,
       "predicate": [
         {
@@ -11541,7 +11541,10 @@
       "declares": [],
       "lineDeclares": {
         "crisis: under_siege": 2,
-        "no crisis: under_siege": 2,
+        "guardPresence": 3,
+        "no crisis: under_siege": 6,
+        "no guardPresence": 2,
+        "no watch": 2,
         "watch": 1
       },
       "undeclared": 0,
@@ -18297,14 +18300,13 @@
       ],
       "slotsNamed": [
         "good",
-        "institution",
         "resource",
         "settlement"
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 5,
-      "grammars": 4,
+      "grammars": 3,
       "predicate": [
         {
           "field": "leading.bucket",
@@ -55198,7 +55200,7 @@
         "DS-ECO-11 :: EXPLOITATION: fullyExploited"
       ],
       "variants": 11,
-      "grammars": 7,
+      "grammars": 6,
       "blocks": [
         "DS-ECO-11"
       ]
@@ -55423,7 +55425,7 @@
       "pools": [
         "DS-DEF-11 :: WALLED-STRAINED"
       ],
-      "variants": 4,
+      "variants": 8,
       "grammars": 1,
       "blocks": [
         "DS-DEF-11"
@@ -67872,7 +67874,7 @@
         "settlement.defenseProfile.economicGates.military"
       ],
       "readingFunction": "wallRationalePoolKey",
-      "count": "4 variant(s) · 1 grammar(s) · slots {defwork, settlement}"
+      "count": "8 variant(s) · 1 grammar(s) · slots {defwork, settlement}"
     },
     {
       "tier": "THIN",
@@ -68776,7 +68778,7 @@
         "leading.bucket"
       ],
       "readingFunction": "exploitationPoolKey",
-      "count": "5 variant(s) · 4 grammar(s) · slots {good, institution, resource, settlement}"
+      "count": "5 variant(s) · 3 grammar(s) · slots {good, resource, settlement}"
     },
     {
       "tier": "COVERED",

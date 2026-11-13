@@ -1375,7 +1375,7 @@ sentence in two voices. **No named deaths.**
 **FOOD SOURCES: one source**
 1. `[ledger · no crisis: famine]` {settlement} lives off its {good} and little else. One bad year for the {good} would be a hungry year for the whole town.
 2. `[street · colour]` Nearly every meal at {settlement} goes back to the {good}, and after a poor season for the {good}, everyone eats less.
-3. `[unfolding · no crisis: famine]` With only its {good} to fall back on, {settlement} would feel a single failure there at every table within the season.
+3. `[unfolding · no crisis: famine]` With only its {good} to fall back on, {settlement} feels every bad season there at every table.
 4. `[ledger · crisis: famine]` {settlement} lived off its {good} and little else, and the {good} has failed; there is nothing else to turn to.
 
 **FOOD SOURCES: several, the largest named**
@@ -1719,7 +1719,7 @@ A composed page draws one of each grain, never two.
 6. `[ledger · crisis: under_siege]` Half of this trade was always done elsewhere, and with the siege closing the roads, the half the town does has nowhere to go.
 
 **EXPLOITATION: `fullyExploited`**
-1. `[ledger · no crisis: under_siege]` The {resource} in {settlement}'s country is worked all the way through: the ground gives it, {institution} finishes it, and it leaves as {good}.
+1. `[ledger · no crisis: under_siege]` The {resource} in {settlement}'s country is worked all the way to the finished {good}.
 2. `[visitor · gate]` Every stage of the {resource} trade at {settlement} is done here, from the ground to the gate.
 3. `[street · colour]` The town has taken this trade as far as it goes, from the ground to the finished thing.
 4. `[street · colour]` {settlement} takes everything it can from the {resource} its country gives.
@@ -6994,9 +6994,13 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 
 **`WALLED-STRAINED`**
 1. `[ledger · watch · no crisis: under_siege]` {settlement}'s accounts keep its {defwork} in repair but fall short on the watch's wages, so the defences are sound and too few people man them.
-2. `[unfolding · no crisis: under_siege]` {settlement}'s defences are sound, but fewer people turn out each season to man the {defwork}, and the town is slow to notice.
+2. `[unfolding · guardPresence · no crisis: under_siege]` {settlement}'s defences are sound, but fewer people turn out each season to man the {defwork}, and the town is slow to notice.
 3. `[unfolding · crisis: under_siege]` {settlement}'s {defwork} was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.
 4. `[ledger · crisis: under_siege]` The siege has put more people on {settlement}'s {defwork} than the town could ever find for it in quieter seasons.
+5. `[ledger · no guardPresence · no crisis: under_siege]` {settlement} keeps its {defwork} in repair and pays nobody to stand guard there.
+6. `[street · no guardPresence · no crisis: under_siege]` {settlement} has nobody whose work it is to stand on its {defwork}, though the town keeps the {defwork} in repair.
+7. `[ledger · guardPresence · no watch · no crisis: under_siege]` {settlement} keeps its {defwork} in repair before it pays anyone to stand guard there, and the few who do turn out are stretched thin.
+8. `[street · guardPresence · no watch · no crisis: under_siege]` {settlement}'s people under arms are too few to cover its {defwork}, and the town spends on the {defwork} before it spends on them.
 
 **`UNWALLED-SMALL`** {crisis-scoped}
 1. `[street · no threat · crisis: any]` {settlement} is too small to wall and knows it; the town's safety is its neighbours, its distance, and its unimportance.

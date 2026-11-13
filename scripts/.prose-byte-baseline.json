@@ -55,14 +55,14 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 262412,
-      "gzip": 35416,
+      "raw": 264150,
+      "gzip": 35592,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 185251,
-      "gzip": 25966,
+      "raw": 185143,
+      "gzip": 25938,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
@@ -787,6 +787,14 @@
       "toRaw": 185251,
       "gzipAfter": 25966,
       "reason": "+363 B raw over the committed 184888 (gzip level 9: 25907 -> 25966): the round's cut, its three high corpus lines (DS-DEF-3 Moderate, DS-GEN-13 MARKET-OPEN, DS-ECO-12 CRITICAL IMPORT): declared, reworded, four lines (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE-3 T",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 262463,
+      "toRaw": 264150,
+      "gzipAfter": 35592,
+      "reason": "+1738 B raw over the committed 262412 (gzip level 9: 35416 -> 35592): the round's cut, item 2: three corpus lines touched and still false, cured by a declaration or a rewording; four lines (2026-11-13)"
     }
   ],
   "ceilingTransfersNewLeaves": [
