@@ -189,6 +189,20 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-13, THE COHERENCE-AGREE MERGE OVER THE INTEGRATION BRANCH, SIGNED AT THE STYLE WAVE'S MERGE (STYLE-2-MERGE RECORD 47) ──
+ * THE HUNDRED-AND-TENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the coherence wave (the chair's ruling: this wave is the window for the lanes'
+ * own leaves, on condition of attribution at each merge point); the record is
+ * docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json. THE MOVER, FOUND: the COHERENCE-AGREE merge 22cc9ef7d
+ * (69b53decd into the integration branch); its cause one fact, one answer (the town's own drawn record overrides a terrain or
+ * institution table, and a fact has one reader): the resource roll's refused members refilled, the income, import, food,
+ * safety, defence and hook lines read off the record, the toll named at print time. FIELD-DIFFED: resourceAnalysis and the
+ * config's rolled resources, the economy, viability, defence, culture and trace families, the re-dealt holders' rosters, cast
+ * and ties, the coherence receipt and the isolation support; the espionage subsystem stays dormant.
+ * On THIS corpus 359 of 360 rows (thorp 60, hamlet 60, village 59, town 60, city 60, metropolis 60) move against record 46's
+ * post-state (the stage of f572d12b7) (`f3f4be91…`); 360/360 hashes stay distinct. Written from the staged tree (9e2ae9035 with
+ * the door paths carried from the integration branch), measured by scripts/audit/refence.mjs before the write. `f3f4be91…` -> `05f70cf9…`.
+ *
  * ── 2026-11-13, THE COHERENCE-POWERS MERGE OVER THE INTEGRATION BRANCH, SIGNED AT THE STYLE WAVE'S MERGE (STYLE-2-MERGE RECORD 46) ──
  * THE HUNDRED-AND-NINTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
  * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the coherence wave (the chair's ruling: this wave is the window for the lanes'
@@ -1315,7 +1329,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = 'f3f4be914caae9183e6a29db79e7919a2c076dcec00e324963f92936cf6825f3';
+const PRE_COUPLING_CORPUS_SHA = '05f70cf9287be54860d7085e0140b9cbb29249b6c213e4e5af9f3e97f7a67461';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);

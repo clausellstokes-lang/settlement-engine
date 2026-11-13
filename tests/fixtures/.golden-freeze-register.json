@@ -288,11 +288,11 @@
         "PRE_COUPLING_CORPUS_SHA"
       ],
       "frozenConstants": null,
-      "sha256": "dba4f5bc754676fe499edfc3207320849c3dcacf4ddbbf5b49d59695fc8a8d32",
+      "sha256": "13fd7c7799822d359661a9213f9ef5a849bbf114d0eeaf16ba09a185c9d8e7ca",
       "rows": null,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair); the owner's order of 2026-11-11 on the outside critique (ODQ-934.105 draft: THE OWNER: FIXED BEFORE THE RELEASE — THE COHERENCE WAVE, 2026-11-11 21:41 UTC), the chair's COHERENCE-POWERS charter (docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md §0, §5)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair, re-confirmed to the new chair 2026-11-13); the ODQ draft's entries 'AN OUTSIDE CRITIQUE OF ONE GENERATED TOWN, MEASURED', 'THE CRITIQUE READ AS CLASSES' and 'THE OWNER: FIXED BEFORE THE RELEASE — THE COHERENCE WAVE' (docs/chair/2026-11-07/ODQ-934.105-DRAFT.md, 2026-11-11); the charter docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md §2; the chair's food-sources ruling of 2026-11-11 (variant S, cultivated sources)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON.",
       "governance": "Charter §1.1 row 15 / §1.1a. Its header carries a hand-maintained enumeration of chartered movement windows which the freeze act retires into one sentence. Implementation-leave: the fence itself is not rebuilt."
     },
