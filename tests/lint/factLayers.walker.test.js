@@ -24,8 +24,8 @@
  */
 import { describe, expect, test, beforeAll } from 'vitest';
 import {
-  FAMILIES, POOL_TABLE_REL, REGISTER_REL, corpusPools, gridBirths, leafArm, leafTouches, poolArm, readJson,
-  readerArm, readsFamily, verdictOf,
+  FAMILIES, POOL_TABLE_REL, REGISTER_REL, bankedReaderLines, corpusPools, gridBirths, leafArm, leafTouches,
+  lineKey, outsideHomeCalls, poolArm, readJson, readerArm, readsFamily, verdictOf,
 } from './factLayers.shared.mjs';
 import { linesReading } from './defenceFactReaders.shared.mjs';
 import { LEAVES, LEAVES_OWED, STRATA, stratumOf } from '../../src/domain/facts/factLayers.js';
@@ -114,6 +114,17 @@ describe('guard-the-guard: each arm reds its planted fault', () => {
     expect(linesReading("const W = 'tavern';\nconst inn = names.some((n) => n.includes(W));\n", (line) => readsFamily('tavern', line))).toBe(1);
     expect(Object.keys(FAMILIES).length).toBeGreaterThan(10);
   });
+  test('READERS (REVIEW-W2A F6): a call of the home\'s own reader is the home\'s; a private helper over words is not; a swap is a new line', () => {
+    expect(readsFamily('faith', outsideHomeCalls("get sacredHouse() { return hasInstitution(record, 'temple'); },"))).toBe(false);
+    expect(readsFamily('tavern', outsideHomeCalls("...(facts.hasInstitution('tavern') ? ['the tavern'] : []),"))).toBe(false);
+    // the generator's private helper over a list of words is a name test of its own
+    expect(readsFamily('mill', outsideHomeCalls("if (hasResource(['river_mills']) && hasInstitution(['mill'])) agriMod += 0.08;"))).toBe(true);
+    // banked by content: the same count with one line swapped for another is not the register
+    const banked = { 'src/x.js': { crime: [{ line: "const f = factions.find((x) => /thieves/.test(x.name));", reason: 'r' }] } };
+    const swapped = { 'src/x.js': { crime: [lineKey("  const s = names.some((n) =>  n.includes('smuggler'));")] } };
+    expect(swapped).not.toEqual(bankedReaderLines(banked)); // anchored: the same file and family, one line each
+    expect(bankedReaderLines(banked)['src/x.js'].crime).toHaveLength(1);
+  });
 });
 
 describe('nothing reads at or above its own layer (shrink-only)', () => {
@@ -127,14 +138,15 @@ describe('nothing reads at or above its own layer (shrink-only)', () => {
     expect(r.unlayered).toEqual([]);
     expect(r.violations).toEqual(REGISTER.pools);
   });
-  test('READERS: every file reads exactly its banked count, and no file reads outside the register', () => {
-    expect(readerArm()).toEqual(REGISTER.readers);
+  test('READERS: every file reads exactly its banked LINES (by content, each with its reason), and no file reads outside the register', () => {
+    expect(readerArm()).toEqual(bankedReaderLines(REGISTER.readers));
+    for (const fams of Object.values(REGISTER.readers)) for (const rows of Object.values(fams)) for (const row of rows) expect(row.reason.length).toBeGreaterThan(20);
   });
   test('no arm\'s total ever rises above its first commit\'s', () => {
     const count = (/** @type {Record<string, string[]>} */ o) => Object.values(o).reduce((s, l) => s + l.length, 0);
     expect(count(REGISTER.leaves)).toBeLessThanOrEqual(FIRST.leaves);
     expect(count(REGISTER.pools)).toBeLessThanOrEqual(FIRST.pools);
-    const readers = Object.values(REGISTER.readers).reduce((s, f) => s + Object.values(/** @type {Record<string, number>} */ (f)).reduce((a, b) => a + b, 0), 0);
+    const readers = Object.values(REGISTER.readers).reduce((s, f) => s + Object.values(/** @type {Record<string, unknown[]>} */ (f)).reduce((a, b) => a + b.length, 0), 0);
     expect(readers).toBeLessThanOrEqual(FIRST.readers);
   });
 });

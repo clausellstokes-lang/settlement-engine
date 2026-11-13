@@ -16,6 +16,7 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { codeOf, resolveNameConstants } from './defenceFactReaders.shared.mjs';
+import { INSTITUTION_KINDS } from '../../src/domain/facts/institutions.js';
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const SRC = join(ROOT, 'src');
@@ -265,11 +266,24 @@ const LITERALS = Object.fromEntries(Object.entries(FAMILIES).map(([k, v]) => [k,
 export const readsFamily = (family, line) => CALL.test(line) && LITERALS[family].test(line);
 
 /**
- * The roots and exclusions: the fact homes' folder, the data tables, generated files and each family's own homes are
- * not counted; nor the page battery's instruments (`src/domain/coherence/`), which test the PRINTED page's words
- * against the record by design and derive no fact (W2-A-LEAVES's call, 2026-11-12: three banked lines fell).
+ * A CALL OF THE HOME'S OWN READER is the home's reading, not a second derivation (W2-A-LEAVES-2, REVIEW-W2A F6):
+ * `hasInstitution(record, 'temple')` or `facts.hasInstitution('tavern')` with ONE quoted kind of the institutions
+ * home (`facts/institutions.js :: INSTITUTION_KINDS`) asks the home. Such a call is struck from the line before
+ * the name test is read; a private helper over a list of words (`hasInstitution(['mill', 'farm'])`) is not a call
+ * of the home and still counts.
  */
-const EXCLUDED = /^src\/(?:domain\/facts|domain\/coherence|data)\//;
+const HOME_CALL = new RegExp(String.raw`\b(?:\w+\.)?hasInstitution\(\s*(?:\w+\s*,\s*)?'(?:${INSTITUTION_KINDS.join('|')})'\s*\)`, 'g');
+/** The line as the name test reads it: calls of the home's own reader struck. @param {string} line */
+export const outsideHomeCalls = (line) => line.replace(HOME_CALL, '');
+
+/**
+ * The roots and exclusions: the data tables, generated files and EACH FAMILY'S OWN HOMES are not counted; nor the
+ * page battery's instruments (`src/domain/coherence/`), which test the PRINTED page's words against the record by
+ * design and derive no fact (W2-A-LEAVES's call, 2026-11-12: three banked lines fell). The fact homes' folder is
+ * NOT excluded as a whole (REVIEW-W2A F6: a name test planted in `facts/leaderLead.js` stayed green): a file there
+ * that is no family's home is read like any other.
+ */
+const EXCLUDED = /^src\/(?:domain\/coherence|data)\//;
 
 /** @param {string} dir @param {string[]} [out] @returns {string[]} */
 const walk = (dir, out = []) => {
@@ -280,25 +294,37 @@ const walk = (dir, out = []) => {
   return out;
 };
 
+/** A banked line's form: the code line as the arm reads it, its whitespace collapsed. @param {string} line */
+export const lineKey = (line) => line.trim().replace(/\s+/g, ' ');
+
 /**
- * Per file, per family: the lines that answer a homed fact by a name test.
+ * Per file, per family: THE LINES (by content, sorted) that answer a homed fact by a name test. Banked by content,
+ * not by count (REVIEW-W2A F6): a banked line swapped for a new one in the same file and family is red.
  * @param {(family: string, line: string) => boolean} [test]
- * @returns {Record<string, Record<string, number>>}
+ * @returns {Record<string, Record<string, string[]>>}
  */
 export function readerArm(test = readsFamily) {
-  /** @type {Record<string, Record<string, number>>} */ const out = {};
+  /** @type {Record<string, Record<string, string[]>>} */ const out = {};
   for (const path of walk(SRC)) {
     const rel = relative(ROOT, path).replace(/\\/g, '/');
     if (!/\.(js|jsx)$/.test(rel) || /\.generated\.js$/.test(rel) || EXCLUDED.test(rel)) continue;
-    const lines = resolveNameConstants(codeOf(readFileSync(path, 'utf8'))).split('\n');
+    const lines = resolveNameConstants(codeOf(readFileSync(path, 'utf8'))).split('\n').map(outsideHomeCalls);
     for (const [family, def] of Object.entries(FAMILIES)) {
       if (def.homes.includes(rel)) continue;
-      const n = lines.filter((line) => test(family, line)).length;
-      if (n) (out[rel] ||= {})[family] = n;
+      const hit = lines.filter((line) => test(family, line)).map(lineKey).sort();
+      if (hit.length) (out[rel] ||= {})[family] = hit;
     }
   }
   return out;
 }
+
+/**
+ * The register's readers in the arm's shape (each banked row is `{ line, reason }`).
+ * @param {Record<string, Record<string, Array<{ line: string, reason: string }>>>} banked
+ * @returns {Record<string, Record<string, string[]>>}
+ */
+export const bankedReaderLines = (banked) => Object.fromEntries(Object.entries(banked).map(([file, fams]) => [file,
+  Object.fromEntries(Object.entries(fams).map(([fam, rows]) => [fam, rows.map((r) => r.line).sort()]))]));
 
 /** Read a JSON file under the root. @param {string} rel */
 export const readJson = (rel) => JSON.parse(readFileSync(join(ROOT, rel), 'utf8'));
