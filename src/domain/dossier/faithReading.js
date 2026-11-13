@@ -56,6 +56,7 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
  * @property {string} name
  * @property {number} power
  * @property {boolean} governs the faction holds the seat
+ * @property {boolean} [anotherGoverns] another power governs (R2-CODE-B round 3, #ww-536)
  */
 
 /**
@@ -233,6 +234,12 @@ function religiousFactionOf(s) {
     if (best && best.power >= power) continue;
     best = { name, power, governs: f?.isGoverning === true };
   }
+  // R2-CODE-B round 3 (the increment's #ww-536, the chair's ruling): where ANOTHER power governs, the religious power is
+  // a contender, and the line says only what the powers' record holds: never "the real political weight".
+  if (best && !best.governs) {
+    const factions = Array.isArray(s.powerStructure?.factions) ? s.powerStructure.factions : [];
+    best.anotherGoverns = factions.some((f) => f?.isGoverning === true && (text(f?.faction) || text(f?.name)) !== best?.name);
+  }
   return best;
 }
 
@@ -352,7 +359,7 @@ function clericLead(c) {
  */
 function factionLine(f, place) {
   if (f.governs) return `${cap(place)} is governed by the ${f.name}.`;
-  if (f.power >= 30) return `Real political weight rests with the ${f.name}.`;
+  if (f.power >= 30 && !f.anotherGoverns) return `Real political weight rests with the ${f.name}.`;
   if (f.power >= 15) return `A voice in ${place}’s affairs belongs to the ${f.name}.`;
   return `A small voice in ${place}’s affairs belongs to the ${f.name}.`;
 }
