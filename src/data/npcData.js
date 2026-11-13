@@ -2352,3 +2352,15 @@ export const NPC_HOOK_SIBLINGS = Object.freeze({
  * @type {ReadonlySet<string>}
  */
 export const MILITARY_HOOKS_TRUE_OF_ANY_HOLDER = Object.freeze(new Set(NPC_FACTION_LOYALTY.military.flatMap((l) => (typeof l === 'string' && /^They've noticed the same group of faces |^They signed for supplies that never arrived,/.test(l) ? [l] : []))));
+
+/**
+ * R2-CODE-A-3 (round three's cut, lane ra, MEDIUM #518–#524 and #1322–#1334): THE RELIGIOUS POOL'S LINES THAT ARE
+ * TRUE OF ANY HOLDER. Under an outbreak or a conversion the crisis bias (`npcGenerator.js :: generatePlotHook`) pulls
+ * any person's hook into the religious pool, so a cooper, a tanner or a toll-keeper carried a congregation, a
+ * confession, a ceremony or a healing they do not lead. A religious line is refused for a holder outside the pool and
+ * resolves draw-free into the holder's own pool, as the soldier's do (above). These two need no office of worship:
+ * knowing who will fall from grace, and a predecessor's sealed letter. Bare lines read from the pool itself, at the
+ * file's end so no cited line moves. A new religious line presumes the office until it is named here.
+ * @type {ReadonlySet<string>}
+ */
+export const RELIGIOUS_HOOKS_TRUE_OF_ANY_HOLDER = Object.freeze(new Set(NPC_FACTION_LOYALTY.religious.flatMap((l) => (typeof l === 'string' && /^They know which of the current leadership will be the next to fall from grace\.|^Their predecessor left a sealed letter to be opened at their death;/.test(l) ? [l] : []))));
