@@ -507,6 +507,12 @@ const buildHistoricalEvent = (
       if (tmpl && tensionAdmitted(tmpl, hookFacts) && trueToRecordAt(tmpl, hookFacts, true, context.stability, context.prosperity)) { // W2-FIX-DATA-2 item 2
         selected.push({ ...tmpl });
         usedTypes.add(tensionType);
+      } else if (tmpl && HISTORY_TEMPLATE_RECORD_DECLARATIONS[tensionType]) {
+        // W2-FIX-DATA-5 item 1 (ROUND-3 #1003): a crisis's own template that its declaration refuses (the occupation's
+        // legacy under an occupation in force) leaves the fill's pool too, so the fill draws exactly as it did when the
+        // template took the slot, and only the slot it leaves is filled by the loop's next pick: no other tension of
+        // the town is re-dealt.
+        usedTypes.add(tensionType);
       }
     }
   }
@@ -1136,12 +1142,18 @@ import { declarationAdmits, declarationOf } from '../domain/facts/factVocabulary
 
 /**
  * WHAT MAKES A TEMPLATE FALSE, declared beside the selection (never on the template object, which is spread into the
- * record). `needs` are vocabulary atoms, read through the birth's facts; `timeline`: the past event too (a guild war
- * is a war between guilds whenever it was fought), else the current tension only.
- * @type {Readonly<Record<string, Readonly<{ needs: ReadonlyArray<string>, timeline: boolean }>>>}
+ * record). `needs` are vocabulary atoms, read through the birth's facts; `excludes`, atoms the record must NOT hold
+ * (the vocabulary's own `excludes` arm: a crisis atom refuses under that crisis in force); `timeline`: the past event
+ * too (a guild war is a war between guilds whenever it was fought), else the current tension only.
+ * W2-FIX-DATA-5 item 1 (ROUND-3 #1003, R2 #1036): the occupation's legacy speaks of an occupation that is OVER (its
+ * description, both memory forms, its factions and its hooks), and the occupation's crisis maps to it
+ * (`historyPolicyData.js :: STRESS_TO_TENSION`): under an occupation in force it is no tension of the town. The past
+ * event keeps its account: a town may have been occupied before.
+ * @type {Readonly<Record<string, Readonly<{ needs?: ReadonlyArray<string>, excludes?: ReadonlyArray<string>, timeline: boolean }>>>}
  */
 export const HISTORY_TEMPLATE_RECORD_DECLARATIONS = Object.freeze({
   guild_conflict: Object.freeze({ needs: Object.freeze(['guild']), timeline: true }),
+  occupation_legacy: Object.freeze({ excludes: Object.freeze(['crisis: occupied']), timeline: false }),
 });
 
 /** The stability bands that say the power is settled: a leadership vacuum is false under them (`labelBands.js`). */
@@ -1187,7 +1199,7 @@ function trueToRecord(tmpl, facts, at) {
     && RICH_PROSPERITY_BANDS.includes(prosperityLabelOf(at.prosperity))) return false;
   const decl = HISTORY_TEMPLATE_RECORD_DECLARATIONS[type];
   if (!decl || (!at.tension && !decl.timeline)) return true;
-  return declarationAdmits(declarationOf({ text: type, needs: decl.needs }), typeof facts === 'function' ? facts() : facts).admitted;
+  return declarationAdmits(declarationOf({ text: type, needs: decl.needs, excludes: decl.excludes }), typeof facts === 'function' ? facts() : facts).admitted;
 }
 
 /**
