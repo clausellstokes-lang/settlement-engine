@@ -40,7 +40,9 @@ describe('the two fixture towns are the ones §R c-22 names, taken as the genera
     // and the control rate-9-2, by the rule and scan named in tests/fixtures/tasteTowns.js.
     // rate-69-0 -> rate-105-2 on 2026-11-08 (ALLEGIANCE-CAR2): the capture state derived from the ruling three's agents
     // (J-13); the same rule and scan, tests/fixtures/tasteTowns.js names the cause.
-    expect(INTERESTED_TOWNS[0].seed).toBe('rate-105-2');
+    // rate-105-2 -> rate-33-1 on 2026-11-13 (STYLE-2-MERGE point 46, STOP 46c): the dual hat leaves rate-105-2 uncaptured;
+    // tests/fixtures/tasteTowns.js names the cause, the rule of choice and k of n (2 of 3).
+    expect(INTERESTED_TOWNS[0].seed).toBe('rate-33-1');
     expect(INTERESTED_TOWNS[1].seed).toBe('rate-9-2');
     expect(captured.powerStructure?.criminalCaptureState, 'the chair\'s own worked example').toBe('corrupted');
     expect(clean.powerStructure?.criminalCaptureState, 'and the control').toBe('none');
