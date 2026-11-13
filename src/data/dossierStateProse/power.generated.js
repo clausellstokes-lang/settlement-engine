@@ -2503,7 +2503,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "guardPresence"
           ],
-          "text": "{settlement} has people paid to keep order, and they keep the order the gang bosses want; a complaint against the bosses goes nowhere.",
+          "text": "{settlement} has people paid to keep order, but the gang bosses keep their own order alongside them, and charge the town for it.",
           "slots": [
             "settlement"
           ],

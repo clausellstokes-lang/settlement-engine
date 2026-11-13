@@ -2463,7 +2463,7 @@ and never an assertion that the feared thing is happening.
 1. `[street · no guardPresence]` There is no law at {settlement} but what the gang bosses enforce. They keep a kind of order and charge for it, and whoever cannot pay goes unprotected.
 2. `[ledger · colour]` The {seat} at {settlement} holds the title and little else. The gang bosses settle disputes, collect debts and hand out punishments, and the town pays them as it would pay a tax.
 3. `[visitor · colour]` Newcomers at {settlement} learn quickly that a grievance goes to whoever runs their part of the place, not to the {seat}, and that the hearing has a price.
-4. `[watch · guardPresence]` {settlement} has people paid to keep order, and they keep the order the gang bosses want; a complaint against the bosses goes nowhere.
+4. `[watch · guardPresence]` {settlement} has people paid to keep order, but the gang bosses keep their own order alongside them, and charge the town for it.
 
 **FLAG: merchantArmy** *(WIRING W3 C4: `safetyProfile.flags.merchantArmy`)*
 1. `[ledger · colour]` The trading houses at {settlement} pay for their own armed guards, a private army that keeps order wherever the houses do business. Where the guards and the {seat} disagree, the guards usually win.
