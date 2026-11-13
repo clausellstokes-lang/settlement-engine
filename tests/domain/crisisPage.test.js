@@ -4,11 +4,13 @@
  * tab"): one section per active crisis, worst first, each with exactly the design's sections, every
  * cast door resolving through the dossier's entity index, and the crisis itself indexed for the tab.
  */
-import { describe, it, expect } from 'vitest';
+import { beforeAll, describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { composeCrisisPage, hasActiveCrisis, CRISIS_PAGE_COPY } from '../../src/domain/crisis/crisisPage.js';
 import { buildDossierEntityIndex, TYPE_TO_TAB } from '../../src/domain/dossier/entityLinks.js';
 import { _resolveEntity } from '../../src/store/settlementSliceHelpers.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 
 const gen = (seed, settType, stressTypes) => generateSettlementPipeline({ settType, stressTypes }, null, { seed, customContent: {} });
 const entriesOf = (s) => (Array.isArray(s.stress) ? s.stress : [s.stress]).filter(Boolean);
@@ -87,5 +89,32 @@ describe('the Crisis page: an untouched power is never "split"', () => {
       }
     }
     expect(composeCrisisPage(s).some((x) => x.stakes.some((k) => k.stake === 'untouched'))).toBe(true);
+  });
+});
+
+// R3-CODE-C-3 (ROUND-3-CUT-INCREMENT #ww-702, #ww-1263): the page's two claims of zero say only what the record holds.
+// THE GUARD TOWNS are the readers' own, born in the app's shape.
+describe('R3-CODE-C-3: an empty cast and an empty lever list claim no zero the record does not hold', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const appShape = (seed) => {
+    const m = seed.match(/^rww-(\w+)-([a-z_]+)-(\d+)$/);
+    return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : [m[2]], _randomizePriorities: true }), null, { seed, customContent: {} });
+  };
+  it('the copy: no institution lever is not nobody holding the lever; an empty cast is not a crisis that touches nobody', () => {
+    expect(CRISIS_PAGE_COPY.noLevers).not.toMatch(/^nobody/i);
+    expect(CRISIS_PAGE_COPY.nobody).not.toBe('nobody');
+  });
+  it('rww-thorp-monster_pressure-1: the acting warden holds the lever role, and the lever line says no house holds it', () => {
+    const [section] = composeCrisisPage(appShape('rww-thorp-monster_pressure-1'));
+    expect(section.cast.some((r) => r.role === 'lever' && r.temporary)).toBe(true);
+    expect(section.levers).toEqual([]);
+    expect(CRISIS_PAGE_COPY.noLevers).toBe('No house here holds what this crisis turns on.');
+  });
+  it('rww-metropolis-infiltrated-1: the cast is empty (the infiltrator is the roster\'s secret), and the page does not say nobody', () => {
+    const s = appShape('rww-metropolis-infiltrated-1');
+    const [section] = composeCrisisPage(s);
+    expect(section.cast).toEqual([]);
+    expect((s.npcs || []).some((n) => /infiltrat/i.test(String(n?.secret?.what ?? '')))).toBe(true);
+    expect(CRISIS_PAGE_COPY.nobody).toBe('no one yet named');
   });
 });
