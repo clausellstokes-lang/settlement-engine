@@ -1,0 +1,16 @@
+tests/lint/newsHeadlineContract.walker.test.js :: complete Wizard News address and headline rewrite contract A1 reconstructs once and proves the persisted publi
+tests/lint/newsHeadlineContract.walker.test.js :: complete Wizard News address and headline rewrite contract A2 freezes all 80 address rows and their canonical 
+tests/lint/newsHeadlineContract.walker.test.js :: complete Wizard News address and headline rewrite contract A3 freezes both raw lanes and all 26 exact rewrite 
+tests/lint/newsHeadlineContract.walker.test.js :: complete Wizard News address and headline rewrite contract A4 rejects malformed envelopes and address identiti
+tests/lint/newsHeadlineContract.walker.test.js :: complete Wizard News address and headline rewrite contract A5 keeps a scoped written reason on exactly the zer
+tests/lint/newsHeadlineContract.walker.test.js :: complete Wizard News address and headline rewrite contract A6 closes the sole live challenge gap with the exac
+tests/lint/newsHeadlineContract.walker.test.js :: complete Wizard News address and headline rewrite contract A7 leaves unrelated prose and every non-headline fe
+tests/lint/newsHeadlineContract.walker.test.js :: complete Wizard News address and headline rewrite contract A8 fails closed on duplicate, overlapping, indicati
+tests/lint/newsVoiceContract.walker.test.js :: cross-home Wizard News voice contract reconstructs one deterministic, conserved AO-0 Wizard News history
+tests/lint/newsVoiceContract.walker.test.js :: cross-home Wizard News voice contract preserves duplicate occurrences and keeps reasons inside canonical ident
+tests/lint/newsVoiceContract.walker.test.js :: cross-home Wizard News voice contract fails closed on empty, malformed, or incomplete scalar snapshots
+tests/lint/newsVoiceContract.walker.test.js :: cross-home Wizard News voice contract holds a closed seven-address and two-class voice vocabulary
+tests/lint/newsVoiceContract.walker.test.js :: cross-home Wizard News voice contract validates the immutable denominator and rejects malformed baseline envel
+tests/lint/newsVoiceContract.walker.test.js :: cross-home Wizard News voice contract rejects new, grown, shrunk, and vanished debt identities in both directi
+tests/lint/newsVoiceContract.walker.test.js :: cross-home Wizard News voice contract leaves proposals, unowned summaries, and nonmatching applied summaries u
+tests/lint/newsVoiceContract.walker.test.js :: cross-home Wizard News voice contract contract -> cure -> bank completion is aligned and debt-free

@@ -1,0 +1,8 @@
+__birth_default__: same
+quiet_local: same
+realistic_regional: same
+dramatic_campaign: same
+static_campaign: same
+narrative_campaign: same
+living_realm: same
+full_simulation: MOVED worldStateSha256 ["d87d08538f5a1f371d9c023aedd37f04b0ea893bcd51936bef7c518576480ce3"] -> ["65dc2e75e255e61049560d78bee57fe7f0c973b5b62c520f8ff1b266e003a8b8"] ; wizardNewsSha256 ["f29a6f8bc221037b3733dd482e3229ea227ecedd5ff92e82ddd5f5306b1ac54c"] -> ["2b573a738c3f10289ec3994b7e6c8e38a72f2c5f2275fe54f5b6276bfcb92610"]

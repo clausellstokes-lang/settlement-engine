@@ -1,0 +1,10 @@
+tests/property/worldpulseDeityGolden.test.js
+tests/property/npcLedgerDormancyGolden.test.js
+tests/property/settlementPoliticsDormancyGolden.test.js
+tests/property/rumorLedgerGolden.test.js
+tests/property/chroniclersLetterGolden.test.js
+tests/property/npcCredibilityDormancyGolden.test.js
+tests/property/corruptionWebDormancyGolden.test.js
+tests/property/townMapGolden.test.js
+tests/property/beliefMapGolden.test.js
+tests/property/worldpulseSeasonsGolden.test.js

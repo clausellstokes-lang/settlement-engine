@@ -1,0 +1,33 @@
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/12]⎯
+
+ FAIL  tests/property/dossierProseManifest.test.js > the two controls no one-audience manifest can see > ⭐ THE MIXED-POOL AUDIENCE ARM: the two faces differ only where a pool is mixed
+AssertionError: positions the DM sees and the player does not, pinned as lawful: expected 204 to be 203 // Object.is equality
+
+- Expected
++ Received
+
+- 203
++ 204
+
+ ❯ tests/property/dossierProseManifest.test.js:572:94
+    570|     // every merge point's stage: ALLEGIANCE-CAR2 +15 (the guild's pus…
+    571|     // the lawful direction still (the player-only list stays empty).
+    572|     expect(dmOnly.length, 'positions the DM sees and the player does n…
+       |                                                                                              ^
+    573|     // The paired control on the direction split itself, so it cannot …
+    574|     const synthetic = new Map([['a', { dm: {} }], ['b', { player: {} }…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/12]⎯
+
+
+ Test Files  6 failed | 39 passed (45)
+      Tests  10 failed | 443 passed | 16 skipped (469)
+   Start at  17:49:36
+   Duration  882.25s (transform 24.07s, setup 739ms, import 95.01s, tests 1656.63s, environment 1.14s)
+
+JSON report written to /home/user/wt/red-base.json
+[gate-tail] end:  18:04:19 up 55 min,  0 user,  load average: 6.10, 5.86, 5.06
+[gate-tail] full log: /home/user/wt/gate-tail.22386.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+EXIT 1

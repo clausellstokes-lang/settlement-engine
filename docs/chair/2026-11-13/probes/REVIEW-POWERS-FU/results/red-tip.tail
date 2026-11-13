@@ -1,0 +1,33 @@
+      "ruleKeyCount": 79,
+      "rulesSha256": "d57a8cb812f38910e0ec8f0c4bbfe4ba3e425db177fb31534069b515352b08b3",
+      "settlementUpdatesSha256": "b27179985cbac0f0f1ff75cfec057ec6e1968adf3da5df04bf92ff40e0571651",
+      "status": "complete",
+-     "wizardNewsSha256": "f29a6f8bc221037b3733dd482e3229ea227ecedd5ff92e82ddd5f5306b1ac54c",
+-     "worldStateSha256": "d87d08538f5a1f371d9c023aedd37f04b0ea893bcd51936bef7c518576480ce3",
++     "wizardNewsSha256": "2b573a738c3f10289ec3994b7e6c8e38a72f2c5f2275fe54f5b6276bfcb92610",
++     "worldStateSha256": "65dc2e75e255e61049560d78bee57fe7f0c973b5b62c520f8ff1b266e003a8b8",
+    },
+  ]
+
+ ❯ tests/simulation/presetLightingWitness.test.js:138:7
+    136|       + ' on purpose, record the cause under the golden-shift discipli…
+    137|       + ' manifest in the same commit; if nothing was meant to change,…
+    138|     ).toEqual(recorded);
+       |       ^
+    139|   });
+    140|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[52/52]⎯
+
+
+  Snapshots  1 failed
+ Test Files  31 failed | 14 passed (45)
+      Tests  50 failed | 401 passed | 18 skipped (469)
+   Start at  17:49:36
+   Duration  888.65s (transform 22.55s, setup 719ms, import 94.84s, tests 1664.20s, environment 1.17s)
+
+JSON report written to /home/user/wt/red-tip.json
+[gate-tail] end:  18:04:26 up 55 min,  0 user,  load average: 5.70, 5.78, 5.04
+[gate-tail] full log: /home/user/wt/gate-tail.22387.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+EXIT 1
