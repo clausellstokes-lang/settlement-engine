@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2827,
+    "variants": 2830,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -13810,7 +13810,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
+      "variants": 7,
       "grammars": 1,
       "predicate": [
         {
@@ -13864,7 +13864,7 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
+        "colour": 5,
         "guild": 1,
         "market": 1
       },
@@ -54879,7 +54879,7 @@
         "DS-ECO-6 :: TIER: significant off-book activity (≥15)",
         "DS-ECO-6 :: TIER: minor shadow activity (≥3)"
       ],
-      "variants": 12,
+      "variants": 15,
       "grammars": 4,
       "blocks": [
         "DS-ECO-6"
@@ -68056,7 +68056,7 @@
         "eco.safetyProfile.blackMarketCapture"
       ],
       "readingFunction": "shadowEconomyPoolKey",
-      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "7 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

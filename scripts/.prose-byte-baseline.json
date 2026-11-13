@@ -61,8 +61,8 @@
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 170255,
-      "gzip": 23958,
+      "raw": 171347,
+      "gzip": 24131,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
@@ -555,6 +555,14 @@
       "toRaw": 292806,
       "gzipAfter": 37418,
       "reason": "+2222 B raw over the committed 290584 (gzip level 9: 37122 -> 37418): DS-GEN-3's Undefended and military CRITICAL pools gain six lines (walls with nobody to hold them; a militia and no standing force), projected through node scripts/generate-dossier-state-prose.mjs (--check exit 0); no pool added"
+    },
+    {
+      "car": "W2-WRITE ECO-6 off-book trade with no guild (2026-11-13)",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 170551,
+      "toRaw": 171347,
+      "gzipAfter": 24131,
+      "reason": "+1092 B raw over the committed 170255 (gzip level 9: 23958 -> 24131): DS-ECO-6's significant off-book pool gains three player lines that name no guild, projected through node scripts/generate-dossier-state-prose.mjs (--check exit 0); no pool added"
     }
   ],
   "ceilingTransfersNewLeaves": [

@@ -1127,6 +1127,9 @@ register and stand as canonical-at-zero for the two lower tiers (R-DST-C).
 1. `[ledger · dm-only · colour]` A real portion of {settlement}'s trade sits outside the rolls, enough that the men who do pay their duties are competing at a disadvantage.
 2. `[street · dm-only · colour]` There is a cheaper way to do most things here, and most people know somebody who knows it.
 3. `[visitor · dm-only · market]` The prices in this market do not quite add up for a stranger who assumes everyone is paying the same fees. They are not.
+4. `[visitor · colour]` Goods change hands at {settlement} without anyone writing them down, and the price a buyer is quoted depends on whether a duty is to be paid at all.
+5. `[ledger · colour]` The duties gathered at {settlement} fall short of the trade that plainly goes on there, and nobody is pressed to make up the difference.
+6. `[street · colour]` Ask how to bring goods into {settlement} cheaply and somebody will tell you, with a nod toward the quieter way in.
 
 **TIER: minor shadow activity (≥3)**
 0. *(canonical)* `[colour]` Some petty theft goes on here, and some trading without a licence. It is a nuisance, nothing more.
