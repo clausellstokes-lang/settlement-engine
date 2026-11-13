@@ -126,7 +126,10 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 442 → 446 at STYLE-2-MERGE RECORD 38, THE HERALD GOLDEN OF POINT 36 SIGNED AT THE RESIDUE MERGE (ODQ §934.105, the chair's ruling
     // of 2026-11-10; record docs/shift-records/2026-11-11-style-2-merge-38-residue-herald.json): the pulse reads a person's powers by
     // membership (GREEN-TIP ae6693ccb, PULSE-SITES 0db374102); four more items on rr-fresh-full|1 (440 → 444).
-    expect(Object.keys(manifest)).toHaveLength(446);
+    // 446 → 440 at STYLE-2-MERGE RECORD 46, THE COHERENCE-POWERS MERGE (ODQ §934.105; record
+    // docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json): the dual hat re-deals the fresh campaign's cast, so
+    // its simulated year's news is re-dealt — on rr-fresh-full|1 99 section rows leave and 93 arrive (itemCount moves with them).
+    expect(Object.keys(manifest)).toHaveLength(440);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {

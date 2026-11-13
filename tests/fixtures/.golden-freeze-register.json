@@ -850,11 +850,11 @@
       "suite": "tests/property/heraldKnowledgeDeskGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "ef734661fd9e1afb312f37cf827b184a28ecb37620691940dc016d96d75a5acc",
-      "rows": 446,
+      "sha256": "899a7ee27ee43cba09ad9cf06846ea004979e1fad4b39e4d33c61b612950b6cb",
+      "rows": 440,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair); the owner's order of 2026-11-11 on the outside critique (ODQ-934.105 draft: THE OWNER: FIXED BEFORE THE RELEASE — THE COHERENCE WAVE, 2026-11-11 21:41 UTC), the chair's VISIBLE-BUGS lane of 2026-11-12",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair); the owner's order of 2026-11-11 on the outside critique (ODQ-934.105 draft: THE OWNER: FIXED BEFORE THE RELEASE — THE COHERENCE WAVE, 2026-11-11 21:41 UTC), the chair's COHERENCE-POWERS charter (docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md §0, §5)",
       "note": "ENROLLED 2026-09-24 by lane FP-I5 (IN-5) under the FP chair's dispatch, record docs/shift-records/2026-09-24-in5-herald-knowledge-desk.json (action enroll, chair-signed). THE NON-OMNISCIENT HERALD GOLDEN of the belief_misjudgment refile (J-INF-6), captured FIRST at the clean base 57b52b510 before the routing table moved: the reader corpus full_simulation row rr-fresh-full after one year, read through buildHeraldFeed campaign lens. Keys: <row>|contentSha256 (every item's content except its desk, sorted by id), <row>|itemCount, and <row>|section|<id> (the desk at capture). tests/property/heraldKnowledgeDeskGolden.test.js holds the digest and count byte-stable and asserts every desk equals its captured desk except the declared refile set, which reads the knowledge desk: the one-time shift, recorded. The single producer is tests/helpers/heraldDeskGolden.js, imported by the suite; the capture ran it byte-identical from outside the tree so the door's clean-tree refusal held."
     }
   ]
