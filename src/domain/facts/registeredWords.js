@@ -68,6 +68,8 @@ import { CRISIS_FAMILY_KINDS, CRISIS_KIND_ALIASES, CRISIS_KIND_WORDS, FACT_DIMEN
  * @property {RegExp} [context] the word names only in a sentence of this context (a famine to come: a sentence of food)
  * @property {string} [pageWithdrawn] WITHDRAWN FROM THE PAGE LIST, with its reason (the third seat's precision read: a
  *   family wrong more than one time in ten that no word or leaf narrows surely); the walker's source arm still reads it
+ * @property {RegExp} [pageKept] a NARROW phrase family of a withdrawn word that stays on the page list (F7 of REVIEW-W2B's
+ *   second read: each read nine or more in ten); a naming sentence of the word that matches it is a finding again
  */
 
 /**
@@ -610,6 +612,26 @@ const STATE_FAMILIES = {
 
 /** The generated families, joined to the new words (the walker's source arm and the page check read them all). */
 Object.assign(NEW_WORDS_OPEN, HOUSE_FAMILIES, RESOURCE_FAMILIES, ROLE_FAMILIES, STATE_FAMILIES);
+
+/**
+ * THE NARROW FAMILIES KEPT ON THE PAGE LIST (F7 of REVIEW-W2B's second read: "the withdrawal took four HIGH cold lines
+ * that narrower families keep at ten in ten"). Each is a phrase of a withdrawn word, read with that word's own leaf (one
+ * home): the market phrase by `market` (factsOf(record).market), the alchemist phrase by `house: alchemist` (the live
+ * roster). The reviewer read each ten in ten on the census's 720; this lane's fourth seat read ten more of each on its own
+ * draw (the hand-back, part four). The bare words stay withdrawn: of ten bare alchemist hits about five are true.
+ */
+const PAGE_KEPT = Object.freeze({
+  market: /\bmarket (?:levies|dues|day|wardens|tolls)\b|\bcome to market\b|\bthe market (?:still )?opens\b|\bat (?:the|its) market\b/i,
+  'house: alchemist': /\b(?:the local|its|from its|comes from its|the town's) alchemists?\b/i,
+});
+/** @type {RegisteredWord} */ (THINGS.market).pageKept = PAGE_KEPT.market;
+NEW_WORDS_OPEN['house: alchemist'].pageKept = PAGE_KEPT['house: alchemist'];
+
+/**
+ * Is a NAMING sentence of the word on the page list: the word is not withdrawn, or the sentence is one of its kept narrow
+ * families? @param {RegisteredWord} w @param {string} sentence
+ */
+export const onPageList = (w, sentence) => !w.pageWithdrawn || (!!w.pageKept && w.pageKept.test(sentence));
 Object.freeze(NEW_WORDS_OPEN);
 
 export const NEW_WORD_IDS = Object.freeze(Object.keys(NEW_WORDS));

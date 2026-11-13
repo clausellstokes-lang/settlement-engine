@@ -103,7 +103,9 @@ describe('F1 — the generated vocabulary', () => {
 
   test('planted: each family is a finding where the town makes it false, and none where it is true', () => {
     // the house and resource families left the page list at the third seat's precision read (item 1; the walker still reads them)
-    expect(words(hamlet)).toEqual(['armedForce', 'clergy', 'openTrade', 'smith', 'streets']);
+    // F7 of the second read: DS-DEF-5's "comes from its alchemists" is the kept alchemist phrase, false in a hamlet with
+    // no alchemist (the cold list's c26 and c30 lines)
+    expect(words(hamlet)).toEqual(['armedForce', 'clergy', 'house: alchemist', 'openTrade', 'smith', 'streets']);
     expect(words(town)).toEqual([]);
   });
 
@@ -316,5 +318,28 @@ describe('F8 (second read) — "the church\'s name" names no church here', () =>
   test('the invitation to name the church is spared; a church\'s bell is not', () => {
     expect(thingsNamedIn('The faith\'s god and the church\'s name are yours to set.')).toEqual([]);
     expect(thingsNamedIn('The church\'s bell rings over the square at noon.')).toEqual(['temple']);
+  });
+});
+
+/**
+ * F7 of the second read (REVIEW-W2B-1fb15980d: "the withdrawal took four HIGH cold lines that narrower families keep at
+ * ten in ten"). Two NARROW phrase families of withdrawn words return to the page list, each read ten in ten by the
+ * reviewer and nine or more in ten by this seat: the market phrase (market levies / dues / day / wardens / tolls, come to
+ * market, the market opens, at its market) where the town has no market, and the alchemist phrase (the local / its /
+ * the town's alchemist) where no alchemist house stands. The bare words stay withdrawn. Red at f1a48b12f.
+ */
+describe('F7 (second read) — the market phrase and the alchemist phrase are on the page list', () => {
+  const place = (institutions) => ({ tier: 'village', population: 300, config: {}, stress: [], institutions, powerStructure: { factions: [{ faction: 'Elder Council' }] } });
+  const words = (record, line) => vocabularyPageFindings(record, { 'Systems/Power': [line] }).map((f) => f.word);
+  test('the market phrase where the town has no market; the bare word stays withdrawn', () => {
+    expect(words(place([]), 'The Elder Council has been debating market levies for three months.')).toEqual(['market']);
+    expect(words(place([]), 'Fewer people come to market than did ten years ago.')).toEqual(['market']);
+    expect(words(place([{ name: 'Market square' }]), 'The Elder Council has been debating market levies for three months.')).toEqual([]);
+    expect(words(place([]), 'Grain goes to the market in the next valley each autumn.')).toEqual([]);
+  });
+  test('the alchemist phrase where no alchemist stands; the bare word stays withdrawn', () => {
+    expect(words(place([{ name: 'Herbalist' }]), 'The local alchemist supplements conventional trade.')).toEqual(['house: alchemist']);
+    expect(words(place([{ name: 'Alchemist shop' }]), 'The local alchemist supplements conventional trade.')).toEqual([]);
+    expect(words(place([{ name: 'Herbalist' }]), 'Not to be confused with the alchemist.')).toEqual([]);
   });
 });
