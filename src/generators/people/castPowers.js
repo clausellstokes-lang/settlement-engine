@@ -59,6 +59,7 @@ import { veiledEpithetFor } from '../npcDisplayNames.js';
 import { RUNG_KEYS, rungBandsForTier } from '../../domain/density/densityRungs.js';
 import { allegianceOf, isCriminalPower, organizedCrimeOf } from '../../domain/people/allegiance.js';
 import { isSeatVacant } from '../../domain/people/seatKeeper.js';
+import { coupContenders } from '../../domain/rulingPowerCoup.js';
 
 /** The keyed fork the late mints and the ranks draw under (declared in the fork census). */
 export const POWERS_FORK_LABEL = 'people-powers';
@@ -274,8 +275,11 @@ export function landMemberships(settlement, cards, rng, seed = settlement?._seed
   });
   // COHERENCE-POWERS-6 (item 1): a noble body with no landed house's head among its members mints its lord, AFTER every
   // other mint (the hook registry and the names the earlier mints read are as before)
+  // COHERENCE-POWERS-6 (item 2): in a vacancy the keeper's house heads no body that contests the seat
+  const keeperKey = keeperHouseKeyOf(settlement, institutions, governing, seatKey);
+  const contending = keeperKey ? contendersOf(settlement) : new Set();
   const lordless = factions.filter((f) => isNobleBody(settlement, f, governing) && !sentFaced.includes(f)
-    && !existingIds.has(mintIdOf(f)) && !landedMemberOf(members.get(nameOf(f)) || []));
+    && !existingIds.has(mintIdOf(f)) && !landedMemberOf(members.get(nameOf(f)) || [], contending.has(nameOf(f)) ? keeperKey : null));
   const unfaced = [...sentFaced, ...lordless];
   if (unfaced.length) {
     const tier = String(settlement?.tier || 'town');
@@ -438,6 +442,7 @@ export function rankPowers(settlement, landed, pushTuning = GUILD_PUSH_TUNING) {
   seatStressPowers(settlement, all, members);
   settleCrisisLeaders(settlement, all);
   keeperLeavesTheClaim(settlement, all);
+  keeperLeavesTheContest(settlement, all);
   nobleFacesAtStanding(settlement, all, governing);
 
   // ── THE IMPORTANCE BAND, from the rank ──────────────────────────────────────────────────
@@ -600,10 +605,12 @@ function isNobleBody(settlement, f, governing) {
 /**
  * The head of a landed house among a noble body's members: the face of one of the lord's own houses
  * (NOBLE_BODY_FACE.landedFamilies) whose largest loyalty lands on the body; null where none stands.
- * @param {Member[]} pool @returns {Member | null}
+ * @param {Member[]} pool @param {string | null} [exceptKey] a house whose face may not head it (the keeper's, item 2)
+ * @returns {Member | null}
  */
-function landedMemberOf(pool) {
+function landedMemberOf(pool, exceptKey = null) {
   return [...pool].sort((x, y) => x.at - y.at).find((m) => m.largest && m.card?.institution?.kind === 'house'
+    && (exceptKey === null || m.card.institution.key !== exceptKey)
     && NOBLE_BODY_FACE.landedFamilies.includes(String(familyOfInstitution({ name: m.card.institution.key })?.key || ''))) || null;
 }
 
@@ -624,6 +631,54 @@ function nobleFacesAtStanding(settlement, all, governing) {
     const minted = first.institution?.kind === 'power' && first.institution?.key === power;
     if (minted && stressPowerRowOf(settlement, f)?.claimant === true) raiseToOfficeBand(first, seatPoolFor(tier).role);
     else if (isNobleBody(settlement, f, governing)) raiseToBand(first, NOBLE_BODY_FACE.standingBand[String(f.powerLabel || '')] || 'low');
+  }
+}
+
+/**
+ * The powers the Power tab prints as contesting the seat (rulingPowerCoup.js :: coupContenders, the challengers; read from
+ * the roster alone). @param {Record<string, any>} settlement @returns {Set<string>}
+ */
+function contendersOf(settlement) {
+  return new Set(coupContenders(/** @type {any} */ (settlement)).challengers.map((c) => c.name).filter(Boolean));
+}
+
+/**
+ * The house of the card that will keep an empty seat (the governing power's FLOOR 1: the dual hat's house, else the seat's
+ * house), or null where the seat is held or the keeper is a minted seat. Read at the land, before the ranks (item 2).
+ * @param {Record<string, any>} settlement @param {Array<Record<string, any>>} institutions @param {string | null} governing
+ * @param {string | null} seatKey @returns {string | null}
+ */
+function keeperHouseKeyOf(settlement, institutions, governing, seatKey) {
+  if (!governing || !isSeatVacant(settlement)) return null;
+  const factions = Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : [];
+  const rulerRow = factions.find((f) => nameOf(f) === governing) || null;
+  const hat = rulerRow ? dualHatHouseOf(institutions, rulerRow) : null;
+  return hat ? String(hat.house.name || '') || null : seatKey;
+}
+
+/**
+ * THE KEEPER OF AN EMPTY SEAT HEADS NO CONTENDER (COHERENCE-POWERS-6, item 2; the chair's ruling of 2026-11-13, vetoable by
+ * the owner; the same rule as keeperLeavesTheClaim, one step on): where a succession leaves the seat empty, the keeper (the
+ * governing power's first) who is first of a power the Power tab prints as contesting the seat gives that rung to the
+ * contender's own next person: the keeper stays a member, unranked, and the others' ranks are re-dealt in their order (the
+ * ranked first, the unranked after, in cast order). A noble body that contests is faced by its lord, minted at the land
+ * (item 1). Where no other member stands (none on the lane's corpora), the keeper keeps the rung. Draw-free.
+ * @param {Record<string, any>} settlement @param {Array<Record<string, any>>} all
+ */
+function keeperLeavesTheContest(settlement, all) {
+  if (!isSeatVacant(settlement)) return;
+  const governing = nameOf(governingFactionOf(settlement));
+  const keeper = all.find((c) => Array.isArray(c?.memberships) && c.memberships.some((m) => m.power === governing && m.rank === 1));
+  if (!keeper) return;
+  const contending = contendersOf(settlement);
+  for (const held of keeper.memberships.filter((m) => m.rank === 1 && m.power !== governing && contending.has(m.power))) {
+    const power = held.power;
+    const own = (/** @type {Record<string, any>} */ c) => c.memberships.find((m) => m.power === power);
+    const others = all.filter((c) => c !== keeper && Array.isArray(c?.memberships) && c.memberships.some((m) => m.power === power));
+    if (!others.length) continue;
+    held.rank = null;
+    [...others.filter((c) => Number.isInteger(own(c).rank)).sort((a, b) => own(a).rank - own(b).rank),
+      ...others.filter((c) => !Number.isInteger(own(c).rank))].forEach((c, i) => { own(c).rank = i < RANKS ? i + 1 : null; });
   }
 }
 
