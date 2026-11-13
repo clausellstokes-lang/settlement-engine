@@ -54029,11 +54029,11 @@
         "terrain: forest": 10,
         "tier: = metropolis": 4,
         "tier: ≤ hamlet": 6,
-        "tier: ≥ city": 15,
+        "tier: ≥ city": 9,
         "walls": 8,
         "watch": 7
       },
-      "undeclared": 135,
+      "undeclared": 141,
       "crisisScoped": false
     },
     {
