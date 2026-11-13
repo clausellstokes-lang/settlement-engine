@@ -1064,7 +1064,6 @@
   ],
   "src/generators/structuralValidator.js": [
    ["docks", "after-release", "A river settlement should exploit its water access: mills, docks, or fishmongers."],
-   ["garrison", "after-release", "/100. Infrastructure exists on paper but this level of underfunding means the defences are barely maintained and the gar"],
    ["garrison", "after-release", "A garrison without walls is untenable in an embattled region. Defenders have nowhere to make a stand."],
    ["garrison", "after-release", "A metropolis requires multiple garrisons or a professional guard force of hundreds. A single garrison cannot secure a ci"],
    ["garrison", "after-release", "Embattled region with no military force. Walls without defenders are a convenient funnel. A garrison, militia, or mercen"],
