@@ -67,8 +67,8 @@
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 290584,
-      "gzip": 37122,
+      "raw": 292806,
+      "gzip": 37418,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -547,6 +547,14 @@
       "toRaw": 290584,
       "gzipAfter": 37122,
       "reason": "+3357 B raw over the committed 287227 (gzip level 9: 36672 -> 37122): DS-GEN-5's and DS-GEN-6's river pools: the pool's river atom moved onto each line, nine lines declaring coast, projected through node scripts/generate-dossier-state-prose.mjs (--check exit 0); no pool added"
+    },
+    {
+      "car": "W2-WRITE GEN-3 readiness and the military score (2026-11-13)",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 290584,
+      "toRaw": 292806,
+      "gzipAfter": 37418,
+      "reason": "+2222 B raw over the committed 290584 (gzip level 9: 37122 -> 37418): DS-GEN-3's Undefended and military CRITICAL pools gain six lines (walls with nobody to hold them; a militia and no standing force), projected through node scripts/generate-dossier-state-prose.mjs (--check exit 0); no pool added"
     }
   ],
   "ceilingTransfersNewLeaves": [
