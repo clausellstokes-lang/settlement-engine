@@ -133,8 +133,11 @@ describe('a capped birth: every surface that prints the label says both', () => 
     }
   });
 
-  test('the realm register: its line names the label and says both', () => {
-    expect(registerLine(capped)).toBe(`A struggling town, at peace. ${sentence}`);
+  // Re-keyed at the chair's ruling C on the third read (1a-M1): the register's war word reads the campaign's map
+  // while the sentence reads the town's own crisis ("at peace. Moderate before the war"), so the sentence leaves
+  // the register's row; the row names the printed word alone, as before ruling 1(a).
+  test('the realm register: its row names the printed word alone (ruling C)', () => {
+    expect(registerLine(capped)).toBe('A struggling town, at peace.');
   });
 });
 
