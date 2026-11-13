@@ -32,6 +32,7 @@ describe('a service row prints facts, never the machinery', () => {
     const text = container.textContent || '';
     expect(text).toContain('Impaired');
     expect(text).toContain('Needs Timber');
+    // anchored: the same text holds the row's status and need, asserted present just above
     expect(text).not.toMatch(/order chain/);
   });
 
@@ -41,14 +42,16 @@ describe('a service row prints facts, never the machinery', () => {
       depReasons={new Map([['Law enforcement', { resource: 'Timber', impact: 'Supply route severed.', inst: 'Town watch' }]])} />);
     const text = container.textContent || '';
     expect(text).toContain('Supply route severed.');
+    // anchored: the same text holds the impact sentence, asserted present just above
     expect(text).not.toMatch(/covers/);
   });
 
   test.each(SERVICE_PROVENANCE_SENTINELS)('a row whose provider slot holds %s prints no provider line', (tag) => {
     const svc = { name: 'Contraband transport', desc: 'Goods move past checkpoints.', institution: tag };
     const { container } = render(<ServiceItem svc={svc} isCriminal />);
-    expect(blockLines(container)).not.toContain(tag);
     expect(container.textContent).toContain('Contraband transport');
+    // anchored: the row's own name is asserted present on the line above, in the same render
+    expect(blockLines(container)).not.toContain(tag);
   });
 
   test('a row whose provider is a house still names the house', () => {

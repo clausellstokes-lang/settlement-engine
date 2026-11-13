@@ -79,6 +79,7 @@ describe('the NPC card names its house without the catalogue\'s count or gate', 
     const door = getByTestId('npc-institution-door');
     expect(door.textContent).toBe(label);
     expect(within(door).getByRole('button')).toBeTruthy();
+    // anchored: the door inside this line is asserted to read its label just above
     expect(door.closest('[data-testid="npc-card-line"]').textContent).not.toMatch(machinery);
   });
   test('an unresolved door (no dossier index) prints the same label as plain text', () => {
