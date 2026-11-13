@@ -282,6 +282,12 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
         // each hidden name in its own spelling and folded; an open house whose name holds it is blanked first
         const openFold = openCards.map((i) => foldTrim(i.name)).filter(Boolean);
         const names = gone.map((nm) => ({ nm, f: foldTrim(nm), re: new RegExp(`(^|_)${foldTrim(nm)}(_|$)`) }));
+        // COHERENCE-VEIL-8 (T1): every event's lasting effects, shut by hand here, in ANY case (a composer lower-cases
+        // the first letter of what it embeds: legacyGenerator.js :: annotationBody). The marker rides the list as an
+        // entry of its own, so an effect embedded elsewhere carries none: it is searched as folded text.
+        const effects = [...new Set((['historicalEvents', 'eventsTimeline']).flatMap((k) => (isRec(record.history) && Array.isArray(record.history[k]) ? record.history[k] : []))
+          .filter(isRec).flatMap((ev) => (Array.isArray(ev.lastingEffects) ? ev.lastingEffects : []))
+          .filter((x) => typeof x === 'string' && !marked(x)).map(foldTrim).filter((x) => x.length >= 12))];
         for (const [read, body] of Object.entries(resp)) {
           reads += 1;
           if (!body) { sent.push(`${label} dm=${dm} ${mode} ${read}: NO ROW`); continue; }
@@ -296,6 +302,7 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
                 if (!how) { let fb = fv; for (const o of openFold) if (o !== h.f && o.includes(h.f)) fb = fb.split(o).join('#'); if (h.re.test(fb)) how = 'folded, slugged or an id'; }
                 if (how) sent.push(`${label} dm=${dm} ${mode} ${read}: the house "${h.nm}", hidden whole, or its name in a chain (${how}), at ${p}`);
               }
+              for (const e of effects) if (`_${fv}_`.includes(`_${e}_`)) sent.push(`${label} dm=${dm} ${mode} ${read}: an event's lasting effect, shut, in any case, at ${p}`);
             }
           };
           walk(body, '');

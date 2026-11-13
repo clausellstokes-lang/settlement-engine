@@ -34,6 +34,9 @@
 --       (`institution.<snake>`) and each cause that names it, in any case (_gallery_veil_fold, _folded_name, _names).
 --       The same name inside the economy's fixed prose goes too: an income source whose label names it is withheld
 --       whole, a description that names it leaves its source, and the safety profile's description that names it.
+--   (13) A HIDDEN TEXT IN ANOTHER SPELLING (COHERENCE-VEIL-8): a second home's text is matched in any case, and the
+--       legacy annotation (history.legacyAnnotations[].annotation), which embeds its event's first lasting effect
+--       with the first letter lower-cased, goes when it embeds a shut string of an event.
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -126,10 +129,11 @@ returns text[] language sql immutable as $$
 $$;
 
 -- [212: NEW] public._gallery_veil_embeds
--- embedsAny: the text holds one of the pieces.
+-- embedsAny: the text holds one of the pieces, in any case (COHERENCE-VEIL-8: a composer that lower-cases the
+-- first letter of what it embeds, legacyGenerator.js :: annotationBody, still embeds it).
 create or replace function public._gallery_veil_embeds(txt jsonb, pieces text[])
 returns boolean language sql immutable as $$
-  select jsonb_typeof(txt) = 'string' and exists (select 1 from unnest(pieces) p where position(p in (txt #>> '{}')) > 0)
+  select jsonb_typeof(txt) = 'string' and exists (select 1 from unnest(pieces) p where position(lower(p) in lower(txt #>> '{}')) > 0)
 $$;
 
 -- [212: NEW] public._gallery_veil_fold
@@ -183,8 +187,8 @@ $$;
 
 -- [212: NEW] public._gallery_veil_sources
 -- What each second home's source said, read BEFORE the eyes run: the ties with a shut eye
--- [{n1, n2, ty, d, t, ds, ts}], the pieces of every shut tension description, and each house's shut
--- eyes by name {name: {desc, fn}}.
+-- [{n1, n2, ty, d, t, ds, ts}], the pieces of every shut tension description, each house's shut
+-- eyes by name {name: {desc, fn}}, and (COHERENCE-VEIL-8) the pieces of every shut string of an event.
 create or replace function public._gallery_veil_sources(s jsonb, fields jsonb, classes jsonb, excj jsonb)
 returns jsonb language sql immutable as $$
   with shut(kind, id, eye, card) as (
@@ -205,6 +209,19 @@ returns jsonb language sql immutable as $$
     select card, bool_or(is_shut) filter (where eye = 'description') as ds, bool_or(is_shut) filter (where eye = 'tension') as ts, min(ord) as ord
       from (select e.*, row_number() over () as ord from eyes e where kind = 'relationship') q
      group by card, id
+  ),
+  -- an event's eyes, as the card applier reads them: an anonymous legacy event (no id) takes every eye addressed to
+  -- any legacy event (fail-closed, _gallery_veil_card)
+  evs as (
+    select c.card, e.eye,
+           coalesce(case when i.id is null
+                         then (select jsonb_agg(distinct f) from jsonb_each(case when jsonb_typeof(fields -> 'event') = 'object' then fields -> 'event' else '{}' end) l(k, v),
+                                      jsonb_array_elements_text(case when jsonb_typeof(l.v) = 'array' then l.v else '[]' end) f where l.k like 'event.legacy-%')
+                         else fields #> array['event', i.id] end, '[]') ? e.eye
+             or (coalesce(classes -> 'event', '[]') ? e.eye and (i.id is null or not (excj ? ('field:event:' || i.id || ':' || e.eye)))) as is_shut
+      from public._gallery_veil_cards(s, 'event') c,
+           lateral (select public._gallery_veil_card_id('event', c.card) as id) i,
+           unnest(array['description', 'lastingEffects', 'hooks']) e(eye)
   )
   select jsonb_build_object(
     'ties', coalesce((select jsonb_agg(jsonb_build_object('n1', card -> 'npc1Name', 'n2', card -> 'npc2Name', 'ty', card -> 'typeName',
@@ -212,6 +229,10 @@ returns jsonb language sql immutable as $$
                         from ties where ds or ts), '[]'),
     'tension_pieces', coalesce((select to_jsonb(array_agg(p)) from eyes, unnest(public._gallery_veil_pieces(jsonb_build_array(card -> 'description', card -> 'desc'))) p
                                  where kind = 'tension' and is_shut), '[]'),
+    'event_pieces', coalesce((select to_jsonb(array_agg(p)) from evs,
+                                     unnest(public._gallery_veil_pieces(case eye when 'description' then jsonb_build_array(card -> 'description', card -> 'desc')
+                                                                                 when 'lastingEffects' then card -> 'lastingEffects' else card -> 'plotHooks' end)) p
+                               where is_shut), '[]'),
     'houses', coalesce((select jsonb_object_agg(name, jsonb_build_object('desc', d, 'fn', f)) from (
         select card ->> 'name' as name, bool_or(is_shut) filter (where eye = 'description') as d, bool_or(is_shut) filter (where eye = 'function') as f
           from eyes where kind = 'institution' and public._gallery_veil_str(card -> 'name') <> '' group by 1) h), '{}'))
@@ -263,6 +284,17 @@ begin
   if jsonb_typeof(s -> 'history') = 'object'
      and public._gallery_veil_embeds(s #> '{history,siegeNarrative}', array(select jsonb_array_elements_text(coalesce(src -> 'tension_pieces', '[]')))) then
     s := s #- '{history,siegeNarrative}';
+  end if;
+  -- COHERENCE-VEIL-8 (T1): the legacy annotation embeds its event's first lasting effect, its first letter
+  -- lower-cased (legacyGenerator.js :: annotationBody); a shut string of an event inside it takes the annotation
+  -- with it (the entry's event name, type and years, which are the event card's floor, stay)
+  if jsonb_typeof(s -> 'history') = 'object' and jsonb_typeof(s #> '{history,legacyAnnotations}') = 'array'
+     and jsonb_array_length(coalesce(src -> 'event_pieces', '[]')) > 0 then
+    s := jsonb_set(s, '{history,legacyAnnotations}', (
+      select coalesce(jsonb_agg(case when jsonb_typeof(a) = 'object'
+                                       and public._gallery_veil_embeds(a -> 'annotation', array(select jsonb_array_elements_text(src -> 'event_pieces')))
+                                     then a - 'annotation' else a end order by o), '[]')
+        from jsonb_array_elements(s #> '{history,legacyAnnotations}') with ordinality x(a, o)));
   end if;
 
   if jsonb_typeof(s -> 'defenseProfile') = 'object' and jsonb_typeof(s #> '{defenseProfile,institutions}') = 'object' then
@@ -408,7 +440,7 @@ begin
   services_of := gone_houses || services_of;
 
   -- V5-1 (COHERENCE-VEIL-6): the second homes' sources, read before any card is touched
-  src := case when fields ?| array['relationship', 'tension', 'institution'] or classes ?| array['relationship', 'tension', 'institution']
+  src := case when fields ?| array['relationship', 'tension', 'institution', 'event'] or classes ?| array['relationship', 'tension', 'institution', 'event']
               then public._gallery_veil_sources(s, fields, classes, excj) else '{}'::jsonb end;
 
   -- cards: class switches, then per-card eyes
