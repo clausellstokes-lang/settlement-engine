@@ -104,13 +104,13 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     },
     defence: {
       watch: 'Hunger has made {name} tense: what food is stored is watched day and night, and every quarrel over food turns ugly fast.',
-      official: 'Those who keep order in {name} spend their days guarding the stores and breaking up fights in the queues.',
+      official: 'Those who answer for {name} spend their days settling quarrels over food, and every week there are more of them.', // R3-CODE-C-3 #ww-15: no force is the kind's to promise
       local: 'In {name} stealing food is the crime of the season, and neighbours who once shared now bar their doors.',
       traveller: 'On the road into {name}, hungry eyes follow anyone carrying a sack or driving a cart.',
     },
     tonight: {
       official: '{name} has lost a second harvest. Its leaders have begun rationing, while the families who can afford it hoard what they have.',
-      watch: 'In {name} the food stores are under guard, and the guards are as hungry as everyone else.',
+      watch: 'In {name} what food is left is watched day and night, and those watching it are as hungry as everyone else.', // R3-CODE-C-3 #pf-85: watched, by whoever keeps it
       newcomer: 'Anyone who comes to {name} with food to sell is welcome; anyone who comes to eat is not.',
       trade: 'In {name} whoever holds grain decides who eats, and they know it.',
     },
@@ -157,7 +157,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     defence: {
       watch: '{name} is split between rival powers, and a quarrel where their ground meets can turn into a brawl.',
       official: 'No one in {name} can call everyone to its defence; each power guards its own ground and trusts nobody else\'s.',
-      local: 'People in {name} avoid the streets where one power\'s ground meets another\'s, most of all after dark.',
+      local: 'People in {name} keep away from where one power\'s ground meets another\'s, most of all after dark.', // R3-CODE-C-3 (CENSUS-2 c36): no streets in a thorp
       traveller: 'Crossing {name}, you pass from one power\'s ground to another\'s, and each side notes which way you came.',
     },
     tonight: {
@@ -294,7 +294,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
       official: 'No one in {name} has the standing to give an order others must obey, and every rival for the seat knows it.',
       watch: 'The rivals for {name}\'s empty seat each count their followers, and each fears the others will move first.',
       newcomer: 'Every claimant in {name} wants backing from outside, and anyone newly arrived will be asked for theirs.',
-      trade: 'Until {name} has a leader again, no large bargain can be struck there, and the merchants are losing patience.',
+      trade: 'Until {name} has a leader again, no large bargain can be struck there, and those waiting on one are losing patience.', // R3-CODE-C-3 #pf-667: no merchant is the kind's to promise
     },
   }),
   monster_pressure: pools({

@@ -6,7 +6,7 @@
  * column of a Latin square, so one PDF never prints one paragraph twice and sibling towns under
  * one crisis print different frames.
  */
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import {
   CRISIS_SUMMARY_POOLS, SUMMARY_COLUMNS, SURFACE_VANTAGE_COLUMNS, crisisSummaryForSurface, summaryColumnOf,
 } from '../../../src/domain/crisis/crisisSummaryVantage.js';
@@ -16,6 +16,8 @@ import { buildViewModel } from '../../../src/pdf/lib/viewModel.js';
 import { composeTonightSheet } from '../../../src/domain/summary/tonightSheet.js';
 import { composeCrisisPage } from '../../../src/domain/crisis/crisisPage.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
+import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
 
 const KINDS = Object.keys(STRESS_TYPE_MAP);
 const SURFACES = /** @type {const} */ (['cover', 'overview', 'defence', 'tonight']);
@@ -121,5 +123,34 @@ describe('#29 and the §8 floor — the crisis summary by surface, four vantages
       expect(new Set([cover, overview, entry.summary]).size, `${kind}: no surface repeats another`).toBe(3);
     });
     expectNoSeedFailures(failures, 'every surface prints its own line of the crisis');
+  });
+});
+
+// R3-CODE-C-3 (ROUND-3-CUT-INCREMENT #ww-15, #pf-85, #pf-667; CENSUS-2 c36): four lines presumed what their
+// crisis kind does not guarantee (the file's own law: a line states only what its kind guarantees and names no
+// force): a body that keeps order and guards the stores, merchants, streets. Reworded to what holds in a thorp with
+// no watch and no market and in a metropolis alike. THE GUARD TOWNS are the readers' own, born in the app's shape.
+describe('R3-CODE-C-3: a vantage promises no force, no merchant and no streets its kind does not', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const appShape = (seed) => {
+    const m = seed.match(/^(?:rww|rpf)-(\w+)-([a-z_+]+)-(\d+)$/);
+    const stresses = m[2] === 'calm' ? [] : m[2].split('+');
+    return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: stresses, _randomizePriorities: true }), null, { seed, customContent: {} });
+  };
+  const linesOf = (s) => (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : [])
+    .flatMap((e) => SURFACES.map((sf) => crisisSummaryForSurface(e, s.name, sf) || ''));
+  it('the four lines, reworded', () => {
+    expect(CRISIS_SUMMARY_POOLS.famine.defence.official).not.toMatch(/keep order|guard/i);
+    expect(CRISIS_SUMMARY_POOLS.famine.tonight.watch).not.toMatch(/guard/i);
+    expect(CRISIS_SUMMARY_POOLS.succession_void.tonight.trade).not.toMatch(/merchant/i);
+    expect(CRISIS_SUMMARY_POOLS.politically_fractured.defence.local).not.toMatch(/streets?/i);
+  });
+  it('rww-thorp-calm-1 (a famine; nobody paid to keep order): no line guards its stores', () => {
+    const s = appShape('rww-thorp-calm-1');
+    expect(linesOf(s).filter((l) => /guarding the stores|under guard|the guards/i.test(l))).toEqual([]);
+  });
+  it('rpf-thorp-succession_void-13 (no market, no merchant): no line speaks of its merchants', () => {
+    const s = appShape('rpf-thorp-succession_void-13');
+    expect(linesOf(s).filter((l) => /merchant/i.test(l))).toEqual([]);
   });
 });
