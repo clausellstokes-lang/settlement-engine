@@ -30,6 +30,7 @@ import { INSTITUTION_SERVICES } from '../../data/institutionServices.js';
 import { institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { magicPractitioners } from '../magicReliance.js';
+import { dmPowerViewOf } from '../people/patronage.js';
 import { CRISIS_FAMILY_KINDS, CRISIS_KIND_ALIASES, CRISIS_KIND_WORDS, FACT_DIMENSIONS, parseAtom } from './factVocabulary.js';
 
 /**
@@ -259,9 +260,20 @@ const NEW_WORDS_OPEN = /** @type {Record<string, RegisteredWord>} */ ({
   },
   powersCount: {
     kind: 'count', layer: 'S', leaf: 'the record :: powerStructure.factions (a count dimension waits for factsOf)',
-    words: /\b(two|three|four|five|six)\s+(?:rival\s+|great\s+|competing\s+|ruling\s+|leading\s+|standing\s+)?(?:powers|factions)\b|\bthe ruling (two|three|four|five)\b|\b(both) (?:powers|factions)\b/i,
+    words: /\b(two|three|four|five|six)\s+(?:rival\s+|great\s+|competing\s+|ruling\s+|leading\s+|standing\s+)?(?:powers|factions)\b|\b(both) (?:powers|factions)\b/i,
     atoms: [],
     absent: (_f, _names, record, sentence) => { const n = statedCount(NEW_WORDS.powersCount.words, sentence); return n !== null && powerCount(record) < n; },
+  },
+  // F2 (the third seat; REVIEW-W2B: "pattern 16a uses the wrong leaf"): "The ruling three of {ruler}" heads the RULER'S
+  // OWN FACES — the panel lists `dmPowerViewOf(...).rulingThree` under it — not the number of powers
+  rulingFaces: {
+    kind: 'count', layer: 'S', leaf: 'patronage.js :: dmPowerViewOf (rulingThree: the ruler\'s ranked faces)',
+    words: /\bthe ruling (two|three|four|five)\b/i,
+    atoms: [],
+    absent: (_f, _names, record, sentence) => {
+      const n = statedCount(NEW_WORDS.rulingFaces.words, sentence);
+      return n !== null && (dmPowerViewOf(record)?.rulingThree.length ?? 0) < n;
+    },
   },
   housesCount: {
     kind: 'count', layer: 'P', leaf: 'institutions.js :: liveInstitutionNames',

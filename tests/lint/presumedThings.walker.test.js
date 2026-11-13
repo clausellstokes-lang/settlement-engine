@@ -138,7 +138,7 @@ describe('the rule book', () => {
       'siege :: The town has been under siege since the thaw.',
       'siege :: The town has been under siege since the thaw, again.',
       'quarters :: Smoke rises from the poorest quarters at dusk.',
-      'powersCount :: The ruling three meet each spring at the hall.',
+      'rulingFaces :: The ruling three meet each spring at the hall.', // F2: the ruler's faces, its own word
     ]);
   });
 

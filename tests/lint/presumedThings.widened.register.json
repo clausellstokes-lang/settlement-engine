@@ -910,7 +910,7 @@
   ],
   "src/components/new/tabs/WhoRunsThisTownPanel.jsx": [
    [
-    "powersCount",
+    "rulingFaces",
     "word",
     "The ruling three of"
    ]

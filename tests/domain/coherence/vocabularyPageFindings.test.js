@@ -16,7 +16,8 @@ const thorp = { tier: 'thorp', population: 40, config: {}, stress: [], instituti
 const city = {
   tier: 'city', population: 20000, config: {}, stress: [{ type: 'under_siege' }, { type: 'famine' }],
   institutions: [{ name: 'Chapel' }, { name: 'Parish church' }, { name: 'Granary' }],
-  powerStructure: { factions: [{ faction: 'A' }, { faction: 'B' }, { faction: 'C' }] },
+  powerStructure: { factions: [{ faction: 'A', isGoverning: true }, { faction: 'B' }, { faction: 'C' }] },
+  npcs: [1, 2, 3].map((rank) => ({ id: `n${rank}`, name: `Face ${rank}`, memberships: [{ power: 'A', rank }] })),
 };
 const views = {
   'Systems/Defense': [
@@ -36,7 +37,7 @@ describe('vocabularyPageFindings', () => {
     expect(shape(vocabularyPageFindings(thorp, views))).toEqual([
       'Systems/Defense :: siege :: names',
       'Systems/Defense :: granary :: names',
-      'Systems/Defense :: powersCount :: names',
+      'Systems/Defense :: rulingFaces :: names', // F2: the heading reads the ruler's faces (none here), not the powers
       'Systems/Defense :: quarters :: names',
       'Systems/Defense :: housesCount :: names',
     ]);
@@ -105,5 +106,26 @@ describe('F1 — the generated vocabulary', () => {
     const risk = { 'Systems/Economics': ['One bad year for the grain harvest would be a hungry year for everyone here.'] };
     expect(vocabularyPageFindings({ ...town, stress: [{ type: 'famine' }] }, risk).map((f) => f.word)).toEqual(['famineToCome']);
     expect(vocabularyPageFindings(town, risk)).toEqual([]);
+  });
+});
+
+/**
+ * W2-B-DECLARE third seat, F2 (REVIEW-W2B: "pattern 16a uses the wrong leaf … 146 true lines called false"): "The ruling
+ * three of {ruler}" heads the ruler's own FACES (`patronage.js :: dmPowerViewOf(...).rulingThree`, the panel's own list),
+ * not the number of powers; "three powers" still counts the powers. Red at 83c84a8ed, which read both off the powers.
+ */
+describe('F2 — the ruling three counts the ruler\'s faces', () => {
+  const faces = (n) => Array.from({ length: n }, (_, i) => ({ id: `f${i}`, name: `Face ${i}`, memberships: [{ power: 'Council', rank: i + 1 }] }));
+  const one = { tier: 'town', population: 3000, config: {}, stress: [], institutions: [], npcs: faces(3), powerStructure: { factions: [{ faction: 'Council', isGoverning: true }] } };
+  const three = { ...one, npcs: faces(2), powerStructure: { factions: [{ faction: 'Council', isGoverning: true }, { faction: 'B' }, { faction: 'C' }] } };
+  const page = { 'Systems/Power': ['The ruling three of Council sit in the old hall.', 'Three powers contend for the town.'] };
+  const found = (record) => vocabularyPageFindings(record, page).map((f) => `${f.word} :: ${f.quote.slice(0, 18)}`);
+
+  test('one power whose ruler shows three faces: the heading is true; "three powers" is not', () => {
+    expect(found(one)).toEqual(['powersCount :: Three powers conte']);
+  });
+
+  test('three powers whose ruler shows two faces: the heading is false; "three powers" is true', () => {
+    expect(found(three)).toEqual(['rulingFaces :: The ruling three o']);
   });
 });
