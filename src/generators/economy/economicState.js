@@ -475,7 +475,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       incomeBuild.push({
         source: 'Timber Trade',
         percentage: Math.max(7, Math.round(ecoInstFlags.economyOutput / 8)),
-        desc: hasNearbyResource('managed_forest', 'timber') // COHERENCE-AGREE: the town's own timber, as the line's gate reads it
+        desc: (hasNearbyResource('managed_forest', 'shipbuilding_timber') || ['sawmill', 'lumber', 'timber', 'carpent', 'wood', 'forest'].some((w) => hasInstNamed(w))) // COHERENCE-AGREE-8 (T2): a managed or shipbuilding forest, or a wild stand a wood house works
           ? 'Local forest provides sustainable timber revenue; managed felling and sawmilling keep production consistent.'
           : 'Timber sourced from more distant forests and resold or processed locally: trade route dependent.',
       });

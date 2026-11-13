@@ -503,6 +503,32 @@ describe('Agriculture: what the land offers, where the town farms it', () => {
 });
 
 /**
+ * THE FELLING LINE, AN ORIGIN (COHERENCE-AGREE-8, REVIEW-AGREE-3 FINDING 3 / T2): cure 7 widened the Timber Trade
+ * line's gate from a managed or shipbuilding forest to any timber (`hasNearbyResource('managed_forest', 'timber')`,
+ * whose substring takes `mountain_timber`), so a town whose wild mountain stand nobody works, and whose resources the
+ * lane did not change, turned from "Timber sourced from more distant forests" (the line's) to "managed felling and
+ * sawmilling keep production consistent" beside "No one here works the timber". The felling line now stands on a
+ * managed or shipbuilding forest, as before the lane, or on a wild stand a wood house works; otherwise the line's own.
+ * The six towns below never held a pass and entered the census row at faa20bc6c.
+ */
+describe('the felling line: a wild stand is felled and sawn only where a wood house works it', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const born = (/** @type {string} */ seed) => {
+    const m = /^r2s-(\w+)-(thorp|hamlet|village|town|city|metropolis)-\d+$/.exec(seed);
+    return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: m ? m[2] : seed.split('-')[1], ...(m ? { selectedStresses: [m[1]], selectedStressesRandom: false } : {}) }), null, { seed, customContent: {} });
+  };
+  test('r2r-thorp-32, -47, r2r-town-12, -30, r2r-city-46 and r2s-religious_conversion-thorp-1: mountain timber, no wood house, no felling line', () => {
+    expectNoSeedFailures(collectSeedFailures(['r2r-thorp-32', 'r2r-thorp-47', 'r2r-town-12', 'r2r-town-30', 'r2r-city-46', 'r2s-religious_conversion-thorp-1'], (seed) => {
+      const s = born(seed);
+      expect(s.config.nearbyResources.filter((r) => /timber|forest/.test(r)), `${seed}: anchored, a wild stand only`).toEqual(['mountain_timber']);
+      expect(s.institutions.filter((i) => /sawmill|lumber|timber|carpent|wood|forest/i.test(String(i.name))), `${seed}: anchored, no wood house`).toEqual([]);
+      const timber = s.economicState.incomeSources.find((e) => e.source === 'Timber Trade');
+      expect(timber?.desc, seed).toBe('Timber sourced from more distant forests and resold or processed locally: trade route dependent.');
+    }), 'a stand nobody works is felled and sawn');
+  });
+});
+
+/**
  * F8 (ii) (COHERENCE-AGREE-6, the chair's ruling of 2026-11-12): the flag bag's prison and hospital are the defence
  * home's answers (`defenseFactsOf`), off the live roster: the lane's own two private readers in
  * `priorityHelpers.js :: getInstitutionNames`, cured rather than banked when the walker learned the four atoms.
