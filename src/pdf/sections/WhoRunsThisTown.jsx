@@ -10,6 +10,8 @@ import { View, Text } from '@react-pdf/renderer';
 import { Callout } from '../primitives/Callout.jsx';
 import { type, palette, pt, space } from '../theme.js';
 import { boostWords, rulingHeadOf } from '../../data/people/dmPowerLines.js';
+// ROUND THREE, ruling (a): a person's house is printed by its label, the one display leaf the page reads.
+import { institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
 
 const PLACE = Object.freeze({ 1: 'Head', 2: 'Second', 3: 'Third', steward: 'Steward' });
 const RANK_WORD = Object.freeze({ 1: 'first', 2: 'second', 3: 'third' });
@@ -42,10 +44,10 @@ export function WhoRunsThisTown({ dm }) {
             <Text style={rowStyle}>{`${g.guild}${g.boss ? ` · led by ${g.boss.name}${g.boss.title ? `, ${g.boss.title}` : ''}` : ''}`}</Text>
             {g.handlers.map((h) => (
               <View key={h.id} style={{ marginLeft: 8 }}>
-                <Text style={rowStyle}>{`handled by ${h.name}${h.title ? `, ${h.title}` : ''}${h.house ? ` (${h.house})` : ''}`}</Text>
+                <Text style={rowStyle}>{`handled by ${h.name}${h.title ? `, ${h.title}` : ''}${h.house ? ` (${institutionHouseLabel(h.house)})` : ''}`}</Text>
                 {h.agents.map((a) => (
                   <Text key={a.id} style={{ ...rowStyle, marginLeft: 8 }}>
-                    {`${a.name}${a.title ? `, ${a.title}` : ''}${a.house ? ` (${a.house})` : ''} · brings ${a.brings}${a.tie ? ` · ${a.tie}` : ''}`}
+                    {`${a.name}${a.title ? `, ${a.title}` : ''}${a.house ? ` (${institutionHouseLabel(a.house)})` : ''} · brings ${a.brings}${a.tie ? ` · ${a.tie}` : ''}`}
                   </Text>
                 ))}
               </View>
@@ -55,7 +57,7 @@ export function WhoRunsThisTown({ dm }) {
 
         {dm.fronts.length > 0 && <Text style={headStyle}>THE FRONTS</Text>}
         {dm.fronts.map((f) => (
-          <Text key={f.id} style={rowStyle}>{`${f.house} · ${f.name} · fronts for ${f.guild}${f.handler ? ` · handled by ${f.handler}` : ''}`}</Text>
+          <Text key={f.id} style={rowStyle}>{`${institutionHouseLabel(f.house)} · ${f.name} · fronts for ${f.guild}${f.handler ? ` · handled by ${f.handler}` : ''}`}</Text>
         ))}
 
         <Text style={headStyle}>THE HALL</Text>

@@ -18,6 +18,8 @@ import { chromeFontSize } from '../../../design/proseScale.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { LITERARY_TITLE } from '../labelLadder.js';
 import { FLUSH } from '../../../design/flush.js';
+// ROUND THREE, ruling (a): a person's house is printed by its label, the one display leaf.
+import { institutionHouseLabel } from '../../../domain/display/institutionDisplayName.js';
 import EntityLink from '../../primitives/EntityLink.jsx';
 import { entityIdFor } from '../../../domain/dossier/entityLinks.js';
 import { dmPowerViewOf } from '../../../domain/people/patronage.js';
@@ -68,10 +70,10 @@ export default function WhoRunsThisTownPanel({ settlement }) {
             <div style={row}><strong>{g.guild}</strong>{g.boss && <>{' · led by '}<Face face={g.boss} />{g.boss.title ? `, ${g.boss.title}` : ''}</>}</div>
             {g.handlers.map((h) => (
               <div key={h.id} style={{ marginLeft: 12 }}>
-                <div style={row}>{'handled by '}<Face face={h} />{h.title ? `, ${h.title}` : ''}{h.house ? ` (${h.house})` : ''}</div>
+                <div style={row}>{'handled by '}<Face face={h} />{h.title ? `, ${h.title}` : ''}{h.house ? ` (${institutionHouseLabel(h.house)})` : ''}</div>
                 {h.agents.map((a) => (
                   <div key={a.id} style={{ ...row, marginLeft: 12 }}>
-                    <Face face={a} />{a.title ? `, ${a.title}` : ''}{a.house ? ` (${a.house})` : ''}
+                    <Face face={a} />{a.title ? `, ${a.title}` : ''}{a.house ? ` (${institutionHouseLabel(a.house)})` : ''}
                     <span style={{ color: MUTED }}>{` · brings ${a.brings}${a.tie ? ` · ${a.tie}` : ''}`}</span>
                   </div>
                 ))}
@@ -85,7 +87,7 @@ export default function WhoRunsThisTownPanel({ settlement }) {
         <div style={headStyle}>The fronts</div>
         {view.fronts.map((f) => (
           <div key={f.id} style={row}>
-            <strong>{f.house}</strong>{' · '}<Face face={f} />{` · fronts for ${f.guild}`}{f.handler ? ` · handled by ${f.handler}` : ''}
+            <strong>{institutionHouseLabel(f.house)}</strong>{' · '}<Face face={f} />{` · fronts for ${f.guild}`}{f.handler ? ` · handled by ${f.handler}` : ''}
           </div>
         ))}
       </>}
