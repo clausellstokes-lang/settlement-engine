@@ -200,3 +200,23 @@ check-domain-strict exit 0 (1113, ceiling 1113) · typecheck:ratchet exit 0 (167
 
 **The reading, for the chair's ruling.** The generator's `anchored: false` means the anchor pass did not place the event. It does not mean the event left no mark. The "not anchored" variants of the event-type pools read it the second way. The cure is display-only and prints nothing today. If the mount is ever promoted from glance, about half of these lines would print false. **Recommendation:** keep the cure (it makes the dimension answer), and hand the event-type pools' "not anchored" variants to W2-WRITE (§9: wording owed). The variants must not claim the event left no mark, because many of these events are ongoing; or the pools could partition on the event's tense. Not this seat's to write: it is the prose corpus.
 
+## 1. Item 1: the precision read (IN PROGRESS; the first sample is recorded here so a stop loses nothing)
+
+**The measure at `3ff343284` over the census's 720** (`probes/W2-B-DECLARE/precisionFindings.mjs`; the dumps rendered at `83c84a8ed`, whose page differs from `3ff343284` in no instrument file): **18,477 findings in 720 towns.** One finding is one (view, sentence, word). By family: house 6,389 · state 3,817 · thing 2,457 · resource 2,163 · handthing 1,204 · role 1,093 · size 800 · value 227 · count 212 · normal 115.
+
+**Sample one (seed `p1`): sixty findings, six per family, distinct words first** (`precisionSample.mjs <findings> 6 p1`). Each was read against its town's record (tier, population, crises, the faith reading, defence, resources, powers, roster).
+
+| family | true / read | the false ones, by shape |
+|---|---|---|
+| count | 6/6 | — (`rulingFaces` 4, `powersCount`, `housesCount`) |
+| size | 6/6 | — |
+| value | 6/6 | — (patterns 1a, 1b, 4) |
+| handthing | 4/6 | an Outlook suggestion to ADD a practitioner; "Access to a house of worship" (access wording) |
+| role | 4/6 | a visiting priest ("when a priest comes through"); the War tab's help text ("From here you raise … troops") |
+| thing | 2/6 | "the war party"; "competition from nearby markets"; "Mill · Access to external mill" (a list of alternatives); "Find workers, mercenaries" (an inn's service) |
+| normal | 2/6 | "passes through the shop"; "a bad year and could not pay" (past); "foot traffic" in a description; "Harbour traffic" (a label) |
+| state | 1/6 (the one is pattern 20) | past events: "came through the succession crisis", "The Uprising is why …", "The Plague Years" (a history table); a refugee sanctuary in a description; the heading "Disasters & Famine" |
+| house | 0/6 | NPC titles where the trade stands ("the master fishmonger" beside a Fish market; "the stable master" beside a Stable district); catalogue descriptions naming other houses ("between mine and smithy", "Swordsmiths, armourers, jewellers"); an arcane power's description ("Wizard towers and mage guilds hold … weight"); a list of houses |
+| resource | 0/6 | "X (depleted)" ×4 (the line SAYS it is gone); "Requires clay deposits" (a requirement); a listed node whose source is not `config.nearbyResources` (doubtful) |
+| **all** | **31/60 (52%); 30/59 without pattern 20** | weighted by the families' sizes: about 23% |
+
