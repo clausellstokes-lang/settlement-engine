@@ -719,7 +719,7 @@ export const mergeNPCLists = (npcs, factions, institutions, _tier, _config) => {
   // criminal faction and no criminal house, no NPC is filed under a "criminal network" or a
   // "Thieves' Guild" (471 and 17 NPCs in 1,000 soak places), and a secret or goal naming a
   // thieves' guild takes the pool's own "a powerful outside interest". No draw.
-  const noCrime = !crimeFaction && !crimeSignalOf({ seats: factions, estate: institutions }).present;
+  const crimeSignal = crimeSignalOf({ seats: factions, estate: institutions }); const noCrime = !crimeFaction && !crimeSignal.present; const noThievesGuild = ![crimeFaction?.faction, ...crimeSignal.factions, ...crimeSignal.houses].some((n) => /thie|criminal guild/i.test(String(n || ''))); const underworld = crimeSignal.factions.find((n) => /^The [A-Z]/.test(n))?.replace(/^The /, 'the ') || 'the local underworld'; // R2-CODE-A item 7: crime with no thieves' guild names the signal's own (its named power, else the local underworld), never a guild it lacks; one line, so no cited line moves
   const milFaction = factions.find(
     f =>
       f.category === 'military' ||
@@ -1018,9 +1018,9 @@ export const mergeNPCLists = (npcs, factions, institutions, _tier, _config) => {
       // F4 unit 3: the guard reads the crime signal (it implies the old institution-name test), and
       // the pattern reads "the thieves' guild" too: the pool spells it with the apostrophe, which
       // `/thieves guild/` never matched, so the secret printed unsanitised in 17 soak places.
-      if (mentionsCriminalGuild && noCrime) {
+      if (mentionsCriminalGuild && (noCrime || noThievesGuild)) { // R2-CODE-A item 7: also where crime stands but no thieves' guild does
         enriched.secret = {
-          what: withoutCriminalGuild(npc.secret.what || ''),
+          what: noCrime ? withoutCriminalGuild(npc.secret.what || '') : String(npc.secret.what || '').replace(/on (?:the )?thieves['’]? guild payroll/gi, `on the payroll of ${underworld}`).replace(/(?:the )?(?:thieves['’]?|criminal) guild/gi, underworld),
           stakes: npc.secret.stakes,
         };
       }
