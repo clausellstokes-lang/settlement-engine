@@ -13,12 +13,19 @@
  * master); 9 old families' bodies printing their line while a free landed rung stood (R 1, S 8).
  *
  * Births through birthConfig with the browser's dials, on the review's and the second seat's own seeds; literals.
+ *
+ * COHERENCE-POWERS-5 (REVIEW-POWERS-2 at e86d069be, N4; THE CHAIR'S EARLIER RULE CORRECTED): the old families' body is a
+ * noble claimant's party, so it is faced by a person OF THAT LINE — a face of the noble line among its members where one
+ * stands, otherwise a claimant minted and named as the occupier's governor is ("the lord") — never a tradesperson borrowed
+ * from another house (the review: 7 millers, 2 impresarios, 2 mine captains, 2 college masters, a head shepherd over the
+ * 24 succession births), and it no longer prints a leaderless line.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { rulingChainOf } from '../../../src/domain/dossier/powerStrata.js';
 import { leaderlessLineOf, stressPowerRowOf } from '../../../src/domain/people/stressPowerFaces.js';
+import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
 
 const DIALS = Object.freeze({
   tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat',
@@ -30,8 +37,11 @@ const LANDED = Object.freeze(['Noble Families', 'Noble Houses', 'Landed Gentry',
 const born = (settType, seed) => generateSettlementPipeline(
   birthConfig({ ...DIALS, settType, selectedStresses: ['succession_void'], selectedStressesRandom: false }), null, { seed, customContent: {} });
 
-/** The old families' declared line (data/stressPowerFaces.js), a literal. */
-const LINE = 'No one claimant has stepped forward yet: the old families press the claim together.';
+/** The census's births (docs/chair/2026-11-12/probes/SECOND-WAVE-CENSUS/births.mjs), so a review town is the review's. */
+const bornCensus = (settType, seed, stress = null) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType,
+  ...(stress ? { selectedStresses: [stress], selectedStressesRandom: false } : {}) }), null, { seed, customContent: {} });
+/** The titles of the noble line (a claimant minted as the occupier's governor is; a royal house's face), literals. */
+const OF_THE_LINE = Object.freeze(['the lord', 'the monarch']);
 /** @param {any} s @param {string} power */
 const firstOf = (s, power) => (s.npcs || []).find((c) => (c.memberships || []).some((m) => m.power === power && m.rank === 1)) || null;
 /** @param {any} c */
@@ -51,20 +61,14 @@ function missesOf(s, key) {
     if (leaderlessLineOf(s, f.faction)) out.push(`${key}: ${f.faction} prints "${leaderlessLineOf(s, f.faction)}"`);
     if (first && !seatLine.includes(first.name)) out.push(`${key}: the seat row does not name ${first.name} (${seatLine})`);
   }
-  const bodies = [];
+  // COHERENCE-POWERS-5 (N4): the old families' body is faced by a person of the line, never a tradesperson, and prints no line
   for (const f of factions) {
     const row = stressPowerRowOf(s, f);
-    if (!row || row.stress !== 'succession_void' || /claimant/i.test(f.faction || '') || firstOf(s, f.faction)) continue;
-    bodies.push(f);
-    const free = (s.npcs || []).filter((c) => (c.memberships || []).some((m) => LANDED.includes(m.power)) && !leads(c));
-    if (free.length) out.push(`${key}: ${f.faction} prints its line while ${free.map((c) => c.name).join(', ')} leads no power`);
-  }
-  // the leaderless line ONCE (the chair's ruling on the fourth seat's parked item 1): under the stronger body (power, then
-  // roster order); every other faceless body points at it in its own declared line
-  const stronger = bodies.reduce((best, f) => (!best || Number(f.power) > Number(best.power) ? f : best), null);
-  for (const f of bodies) {
-    const want = f === stronger ? LINE : `Presses the claim with ${stronger.faction}.`;
-    if (leaderlessLineOf(s, f.faction) !== want) out.push(`${key}: ${f.faction} prints "${leaderlessLineOf(s, f.faction)}", not "${want}"`);
+    if (!row || row.stress !== 'succession_void' || /claimant/i.test(f.faction || '')) continue;
+    const first = firstOf(s, f.faction);
+    if (!first) out.push(`${key}: ${f.faction} has no one on the page`);
+    else if (!OF_THE_LINE.includes(first.title)) out.push(`${key}: ${f.faction} is faced by ${first.name}, ${first.title} (${first.institution?.key})`);
+    if (leaderlessLineOf(s, f.faction)) out.push(`${key}: ${f.faction} prints "${leaderlessLineOf(s, f.faction)}"`);
   }
   return out;
 }
@@ -94,7 +98,7 @@ describe('COHERENCE-POWERS-4 (F3) — a claimant is the succession crisis\'s own
     expect(misses).toEqual([]);
   }, 120_000);
 
-  it('the old families\' body takes the next free landed rung where one stands (the review\'s town and the second seat\'s)', () => {
+  it('the old families\' body is faced by a person of its line, never a tradesperson (the fourth seat\'s towns, re-keyed by identity to the corrected rule)', () => {
     const misses = [];
     for (const [tier, key] of [['metropolis', 'rvf-succession_void-metropolis-7'], ['metropolis', 'l2-succession_void-metropolis-11'],
       ['metropolis', 'l2-succession_void-metropolis-15'], ['town', 'l2-succession_void-town-17'], ['city', 'l2-succession_void-city-1'],
@@ -103,18 +107,36 @@ describe('COHERENCE-POWERS-4 (F3) — a claimant is the succession crisis\'s own
   }, 120_000);
 
   // The chair's ruling on the fourth seat's parked item 1 (2026-11-12): two old families' bodies with no free landed rung
-  // printed the line twice on one Power tab (X-50, x50-trim-21, the generator's own corpus). It prints once, under the
-  // stronger body; the other carries a declared line that points at it, never bare.
-  it('two faceless bodies: the line prints once, under the stronger; the other presses the claim with it', () => {
+  // printed the line twice on one Power tab (X-50, x50-trim-21, the generator's own corpus). COHERENCE-POWERS-5 (N4, the
+  // chair's earlier rule corrected): each body is faced by its own claimant, so neither prints a line (re-keyed by identity:
+  // the same town, the same two bodies).
+  it('two bodies on one tab (x50-trim-21): each faced by its own claimant of the line, neither prints a line', () => {
     const s = generateSettlementPipeline({ settType: 'town', culture: 'mediterranean' }, null, { seed: 'x50-trim-21', customContent: {} });
-    expect(leaderlessLineOf(s, 'The Highborn Circle')).toBe(LINE);
-    expect(leaderlessLineOf(s, 'The Peerage')).toBe('Presses the claim with The Highborn Circle.');
+    for (const power of ['The Highborn Circle', 'The Peerage']) {
+      expect(firstOf(s, power)?.title).toBe('the lord');
+      expect(leaderlessLineOf(s, power)).toBe('');
+    }
+    expect(firstOf(s, 'The Highborn Circle')).not.toBe(firstOf(s, 'The Peerage'));
     expect(missesOf(s, 'x50-trim-21')).toEqual([]);
   }, 120_000);
 
+  it('N4: the review\'s towns — the noble party is faced by its line', () => {
+    const misses = [];
+    for (const [tier, seed, stress] of [['town', 'r2s-succession_void-town-0', 'succession_void'], ['hamlet', 'r2s-succession_void-hamlet-0', 'succession_void'],
+      ['village', 'r2s-succession_void-village-3', 'succession_void'], ['town', 'r2s-succession_void-town-2', 'succession_void'], ['metropolis', 'r2r-metropolis-8', null],
+      ['city', 'r2r-city-2', null], ['metropolis', 'r2r-metropolis-6', null]]) {
+      const s = bornCensus(tier, seed, stress);
+      misses.push(...missesOf(s, seed));
+    }
+    expect(misses).toEqual([]);
+  }, 240_000);
+
   it('on a corpus of succession births at every size, no claimant and no body breaks the rule', () => {
     const misses = [];
-    for (const settType of TIERS) for (let i = 0; i < 6; i++) misses.push(...missesOf(born(settType, `claim-${settType}-${i}`), `claim-${settType}-${i}`));
+    for (const settType of TIERS) for (let i = 0; i < 6; i++) {
+      const s = born(settType, `claim-${settType}-${i}`);
+      misses.push(...missesOf(s, `claim-${settType}-${i}`));
+    }
     expect(misses).toEqual([]);
   }, 240_000);
 });

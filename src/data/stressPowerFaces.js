@@ -22,14 +22,15 @@
  * roster's own, not the density law's rival and not the ruler.
  * `claimant` (COHERENCE-POWERS-4, REVIEW-POWERS F3): the power IS a claimant, so the claimant faces it: the crisis's cast
  * is derived after the powers' people and never holds one at the mint, so the claimant is minted (CLAIMANT_FACE) and named
- * as the occupier's governor is; it carries no leaderless line. `rungOf`: where no house of the power's nature is free,
- * its first is the next member of these powers, in their rank order, who leads no power (the next FREE rung).
+ * as the occupier's governor is; it carries no leaderless line. `ofTheLine` (COHERENCE-POWERS-5, N4): a claimant's party
+ * whose member already bears one of these titles (a person of the noble line) is faced by that member, and no claimant
+ * is minted for it.
  */
 
 /**
  * @typedef {{ stress: string, power?: string, archetype?: string, house?: { kinds?: string[], names?: RegExp },
  *   cast?: RegExp, leaderless?: string, pointer?: string, appointed?: boolean, veiled?: boolean, seated?: boolean, claimant?: boolean,
- *   rungOf?: ReadonlyArray<string> }} StressPowerFace
+ *   ofTheLine?: ReadonlyArray<string> }} StressPowerFace
  */
 
 /** @type {ReadonlyArray<Readonly<StressPowerFace>>} */
@@ -84,12 +85,11 @@ export const STRESS_POWER_FACES = Object.freeze([
   // COHERENCE-POWERS-4 (F3): a royal vacancy's two claimants are each a claimant in person, minted as the occupier's man is
   { stress: 'succession_void', power: 'Noble Claimant (Senior Line)', claimant: true },
   { stress: 'succession_void', power: 'Noble Claimant (Reform Line)', claimant: true },
-  // the old families' body (a pool-drawn noble power): a free noble house's face, else the next free rung of the landed
-  // powers, else its line
-  { stress: 'succession_void', archetype: 'noble', house: { kinds: ['noble'] },
-    rungOf: Object.freeze(['Noble Families', 'Noble Houses', 'Landed Gentry', 'Manor Household']),
-    leaderless: 'No one claimant has stepped forward yet: the old families press the claim together.',
-    pointer: 'Presses the claim with {power}.' },
+  // the old families' body (a pool-drawn noble power) is a noble claimant's party (COHERENCE-POWERS-5, N4; the chair's
+  // earlier rule corrected): faced by a person OF THAT LINE — a member whose face is of the noble line (`ofTheLine`, the
+  // titles that line's persons bear) where one stands, otherwise its claimant minted and named as the occupier's governor
+  // is; never a tradesperson borrowed from another house, so it carries no leaderless line
+  { stress: 'succession_void', archetype: 'noble', claimant: true, ofTheLine: Object.freeze(['the lord', 'the monarch']) },
 ]);
 
 /**

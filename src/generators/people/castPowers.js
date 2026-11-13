@@ -246,9 +246,11 @@ export function landMemberships(settlement, cards, rng, seed = settlement?._seed
   // COHERENCE-POWERS-3 (F4): a power is housed only where a house's face has joined it above (a share dealt to a house
   // with no face, or to one that backs no power, puts no one on the page)
   const housed = (/** @type {string} */ name) => (members.get(name) || []).some((m) => m.card?.institution?.kind === 'house');
-  // COHERENCE-POWERS-4 (F3): a claimant power is faced by the claimant in person, minted as the occupier's man is
+  // COHERENCE-POWERS-4 (F3): a claimant power is faced by the claimant in person, minted as the occupier's man is;
+  // COHERENCE-POWERS-5 (N4): unless a member already of its line stands (`ofTheLine`), who faces it instead
   const mintsBySent = (/** @type {Record<string, unknown>} */ f) => stressPowerRowOf(settlement, f)?.appointed === true
-    || stressPowerRowOf(settlement, f)?.claimant === true || (isCriminalPower(f) && !housed(nameOf(f)));
+    || (stressPowerRowOf(settlement, f)?.claimant === true && !lineMemberOf(stressPowerRowOf(settlement, f), members.get(nameOf(f)) || []))
+    || (isCriminalPower(f) && !housed(nameOf(f)));
   const unfaced = factions.filter((f) => {
     const name = nameOf(f);
     return name && name !== governing && (!BACKING_ARCHETYPES.includes(backingArchetypeOf(f)) || mintsBySent(f))
@@ -378,6 +380,8 @@ export function rankPowers(settlement, landed, pushTuning = GUILD_PUSH_TUNING) {
       }
     } else {
       take(remaining.find((m) => m.card.institution?.kind === 'power' && m.card.institution?.key === power));
+      // COHERENCE-POWERS-5 (N4): a claimant's party with no mint is faced by its member of the line
+      if (!chosen.length) take(lineMemberOf(stressPowerRowOf(settlement, factions.find((f) => nameOf(f) === power)), remaining));
     }
     // FLOOR 2, THE RULER'S KIND (COHERENCE-POWERS): a ruler of a kind whose first is not of its kind (a
     // government that sent its own man) seats the heaviest house of its kind among its members second
@@ -429,13 +433,23 @@ export function rankPowers(settlement, landed, pushTuning = GUILD_PUSH_TUNING) {
 }
 
 /**
+ * A CLAIMANT'S PARTY'S MEMBER OF THE LINE (COHERENCE-POWERS-5, N4): the first member, in cast order, whose face bears one of
+ * the row's `ofTheLine` titles; null for a row without them or where none stands.
+ * @param {{ ofTheLine?: ReadonlyArray<string> } | null | undefined} row @param {Member[]} pool @returns {Member | null}
+ */
+function lineMemberOf(row, pool) {
+  const titles = row?.ofTheLine;
+  if (!titles?.length) return null;
+  return [...pool].sort((x, y) => x.at - y.at).find((m) => titles.includes(String(m.card?.title || ''))) || null;
+}
+
+/**
  * THE POWER A STRESS BRINGS WITH NO ONE ON THE PAGE (COHERENCE-POWERS item 3; the chair's ruling of 2026-11-12, the rule
  * in data/stressPowerFaces.js). A power of the table that the deal left with no member takes, as its first, the face of
  * (0) the heaviest house of the town it sits in by its nature, else (a) of the stress's own cast's houses — in each
  * case the next house where that face already leads another power — joined at share 0 (the face keeps its own powers,
- * as the dual hat's leader does); else, for a row with `rungOf` (COHERENCE-POWERS-4, F3: the old families' body), the
- * next member of those powers in their rank order who leads no power (the next free rung). Where none stands, the power
- * keeps no one and the page prints its declared line (b). A claimant, like the appointed, has its mint. Draw-free. A
+ * as the dual hat's leader does). Where none stands, the power keeps no one and the page prints its declared line (b). A
+ * claimant (COHERENCE-POWERS-5, N4: the old families' body too), like the appointed, has its mint. Draw-free. A
  * clandestine power's membership is veiled.
  * @param {Record<string, any>} settlement @param {Array<Record<string, any>>} all @param {Map<string, Member[]>} members
  */
@@ -457,25 +471,9 @@ function seatStressPowers(settlement, all, members) {
     if (!row || row.appointed || row.claimant || (members.get(power) || []).length) continue;
     const byHouse = row.house ? faceFrom((house) => (row.house.kinds || []).includes(String(houseKindOf(house)))
       || !!row.house.names?.test(String(house.name || ''))) : null;
-    const card = byHouse || (row.cast ? faceFrom((house) => /** @type {RegExp} */ (row.cast).test(String(house.name || ''))) : null)
-      || (row.rungOf ? freeRungOf(row.rungOf, all, leads) : null);
+    const card = byHouse || (row.cast ? faceFrom((house) => /** @type {RegExp} */ (row.cast).test(String(house.name || ''))) : null);
     if (card) card.memberships.push({ power, rank: 1, share: 0, veiled: row.veiled === true || isVeiledPower(f) });
   }
-}
-
-/**
- * THE NEXT FREE RUNG of the named powers (COHERENCE-POWERS-4, F3): their members power by power in the order named, then
- * their rank (the ranked first, the unranked after, in cast order), the first who leads no power; null where none does.
- * @param {ReadonlyArray<string>} powers @param {Array<Record<string, any>>} all @param {(card: Record<string, any>) => boolean} leads
- */
-function freeRungOf(powers, all, leads) {
-  for (const power of powers) {
-    const own = (/** @type {Record<string, any>} */ c) => (Array.isArray(c?.memberships) ? c.memberships.find((m) => m.power === power) : null);
-    const ranked = all.filter((c) => own(c)).sort((a, b) => (own(a).rank ?? RANKS + 1) - (own(b).rank ?? RANKS + 1));
-    const free = ranked.find((c) => !leads(c));
-    if (free) return free;
-  }
-  return null;
 }
 
 /**
