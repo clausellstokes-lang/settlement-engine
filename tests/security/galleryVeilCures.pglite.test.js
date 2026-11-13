@@ -254,7 +254,9 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
   function docText(r) {
     const card = () => {
       const keys = [...ID_KEYS, 'category', 'priorityCategory', 'facets', 'tags', 'serviceKeys', 'desc', 'description', 'secret', 'plotHooks',
-        'institution', 'linkedInstitutionIds', 'members', 'captureState', 'reason', 'personality', 'allegiance', 'stakes'].filter(() => r() < 0.3);
+        'institution', 'linkedInstitutionIds', 'members', 'captureState', 'reason', 'personality', 'allegiance', 'stakes',
+        // master's stored person (COHERENCE-VEIL-4, V4-2): the retired names a goals or ties eye governs on the server
+        'factionGoal', 'linkedFactionIds'].filter(() => r() < 0.3);
       return `{${keys.map((k) => `${JSON.stringify(k)}:${k === 'category' && r() < 0.5 ? '"criminal"' : k === 'tags' && r() < 0.5 ? '["facet:clandestine:clandestine","brokerage","criminal"]' : valueToken(r)}`).join(',')}}`;
     };
     const list = () => (r() < 0.85 ? `[${Array.from({ length: Math.floor(r() * 5) }, () => (r() < 0.9 ? card() : valueToken(r))).join(',')}]` : valueToken(r));
@@ -269,7 +271,8 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
     return `{${parts.join(',')}}`;
   }
   const GOOD_ADDRESSES = ['tab:plot_hooks', 'block:services.criminal', 'block:power.criminalUnderside', 'class:npc:secret', 'class:institution:services',
-    'class:event:description', 'field:event:event.legacy-1:description', 'card:institution:house', 'card:npc:npc.a', 'field:npc:1e-7:personality'];
+    'class:event:description', 'field:event:event.legacy-1:description', 'card:institution:house', 'card:npc:npc.a', 'field:npc:1e-7:personality',
+    'class:npc:goals', 'class:npc:ties', 'field:npc:npc.a:goals'];
   function overridesText(r) {
     const parts = [];
     for (let i = Math.floor(r() * 4); i > 0; i -= 1) parts.push(`${JSON.stringify(STRINGS[Math.floor(r() * STRINGS.length)] || 'k')}:${r() < 0.6 ? `{"revealDm":${r() < 0.5 ? 'false' : 'true'},"allowImport":${r() < 0.5 ? 'false' : 'true'}}` : r() < 0.6 ? `{"revealDm":${valueToken(r)},"allowImport":${valueToken(r)}}` : valueToken(r)}`);
@@ -872,6 +875,105 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
     // anchored: most ties were moved by the migration, so the twin is the new shape
     expect(moved).toBeGreaterThan(2000);
     expect(bad.slice(0, 20)).toEqual([]);
+  }, ROW_TIMEOUT_MS);
+
+  // ── V4-2 (the census's second find; the chair's ruling 331, form b') ─────────────────────────────
+  // THE PRINCIPLE: by every one of the four reads, in either stored shape, content the owner hid by
+  // hand is never sent; content not hidden is sent as before. An npc stored by master's client carries
+  // `factionGoal` and `linkedFactionIds`, which master's goals and ties eyes governed; on the server
+  // only, a shut goals eye withholds factionGoal and a shut ties eye linkedFactionIds (the client's
+  // source names neither: the retired-field register does not grow). Red at 5a2399cf9 on the read-only
+  // count's three fixture shares (veil-probe-3/v42-fixture.sql).
+  const v42Doc = () => ({
+    name: 'T',
+    npcs: [
+      { id: 'a', name: 'Ada', role: 'smith', personality: { core: 'V42_ANCHOR' }, factionGoal: 'V42_SHUT_GOAL', linkedFactionIds: ['faction.v42_shut_link'] },
+      { id: 'b', name: 'Bel', role: 'clerk', factionGoal: 'V42_OPEN_GOAL', linkedFactionIds: ['faction.v42_open_link'] },
+    ],
+  });
+  const v42Shut = (v) => has(v, 'V42_SHUT_GOAL') || has(v, 'v42_shut_link');
+  const v42Open = (v) => has(v, 'V42_OPEN_GOAL') && has(v, 'v42_open_link');
+
+  it('V4-2 (the count\'s fixture rows): a shut goals or ties eye withholds the retired names in every read; open eyes send them as before', async () => {
+    const rows = [
+      // q1: Reveal DM, the eyes on the card
+      ['Reveal DM, the card\'s eyes', veil.writeShareVeil({}, [{ address: 'field:npc:a:goals', hidden: true }, { address: 'field:npc:a:ties', hidden: true }]), true, true],
+      // q2: Reveal DM, the class switches (they shut every person's: no open control)
+      ['Reveal DM, the class switches', veil.writeShareVeil({}, [{ address: 'class:npc:goals', hidden: true }, { address: 'class:npc:ties', hidden: true }]), true, false],
+      // q3: one person revealed, no Reveal DM
+      ['one person revealed', { ...veil.writeShareVeil({}, [{ address: 'field:npc:a:goals', hidden: true }, { address: 'field:npc:a:ties', hidden: true }]), a: { revealDm: true }, b: { revealDm: true } }, false, true],
+    ];
+    const out = {};
+    for (const [tag, ov, dm, openControl] of rows) {
+      const r = await v31Reads(LIVE.db, v42Doc(), ov, { dm });
+      expect(has(r.gallery, 'V42_ANCHOR'), `${tag}: the town's read`).toBe(true);
+      // content not hidden is sent as before: the open person's retired names, as 210 sends them
+      if (openControl) {
+        const before = await v31Reads(AT210.db, v42Doc(), ov, { dm });
+        expect([v42Open(r.gallery), v42Open(r.import), v42Open(r.page)], `${tag}: open eyes`).toEqual([v42Open(before.gallery), v42Open(before.import), true]);
+      }
+      out[tag] = { gallery: v42Shut(r.gallery), link: v42Shut(r.link), import: v42Shut(r.import), map: v42Shut(r.map), page: v42Shut(r.page) };
+    }
+    // the red control: 210 sends them in the gallery response (master's page then removed them itself)
+    expect(v42Shut((await v31Reads(AT210.db, v42Doc(), rows[0][1], { dm: true })).gallery)).toBe(true);
+    const clean = { gallery: false, link: false, import: false, map: false, page: false };
+    expect(out).toEqual(Object.fromEntries(rows.map(([tag]) => [tag, clean])));
+  }, ROW_TIMEOUT_MS);
+
+  it('V4 (the class): 60 towns in master\'s shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210', async () => {
+    slugify = (await import('../../src/domain/dossier/entityLinks.js')).slugifyEntity;
+    const r = rngOf(4242);
+    const pick = (xs) => xs[Math.floor(r() * xs.length)];
+    const breaches = []; const tally = { towns: 0, hidden: 0, open: 0, dm: 0, revealedOne: 0, classes: 0 };
+    for (let i = 0; i < 60; i += 1) {
+      const npcs = [0, 1, 2].map((j) => ({ id: `n${i}_${j}`, name: `Person ${i} ${j}`, role: 'smith',
+        factionGoal: `V4C_GOAL_${i}_${j}_`, linkedFactionIds: [`faction.v4c_link_${i}_${j}_`] }));
+      const ties = [[0, 1, 'rival'], [1, 2, 'ally'], [2, 0, 'debtor']].map(([x, y, type], k) => ({ npc1Id: npcs[x].id, npc2Id: npcs[y].id,
+        npc1Name: npcs[x].name, npc2Name: npcs[y].name, type, typeName: type, description: `V4C_TIE_${i}_${k}_` }));
+      const deltas = []; const hidden = new Set(); const members = {};
+      const dm = r() < 0.5; if (dm) tally.dm += 1;
+      const classGoals = r() < 0.15; const classTies = r() < 0.15;
+      if (classGoals) deltas.push({ address: 'class:npc:goals', hidden: true });
+      if (classTies) deltas.push({ address: 'class:npc:ties', hidden: true });
+      if (classGoals || classTies) tally.classes += 1;
+      for (const n of npcs) {
+        const eyes = pick([[], ['goals'], ['ties'], ['goals', 'ties']]);
+        for (const e of eyes) deltas.push({ address: `field:npc:${n.id}:${e}`, hidden: true });
+        if (eyes.includes('goals') || classGoals) hidden.add(n.factionGoal);
+        if (eyes.includes('ties') || classTies) hidden.add(n.linkedFactionIds[0].slice('faction.'.length));
+        const m = r();
+        if (m < 0.15) { members[n.id] = { revealDm: false }; hidden.add(n.factionGoal); hidden.add(n.linkedFactionIds[0].slice('faction.'.length)); } else if (m < 0.35) { members[n.id] = { revealDm: true }; tally.revealedOne += 1; }
+      }
+      for (const t of ties) {
+        const how = pick(['none', 'description', 'card']);
+        if (how === 'description') deltas.push({ address: `field:relationship:${masterRelId(t)}:description`, hidden: true });
+        if (how === 'card') deltas.push({ address: `card:relationship:${masterRelId(t)}`, hidden: true });
+        if (how !== 'none') hidden.add(t.description);
+      }
+      const doc = { name: 'T', npcs, relationships: ties };
+      const ov = { ...veil.writeShareVeil({}, deltas), ...members };
+      const now = await v31Reads(LIVE.db, doc, ov, { dm });
+      const before = await v31Reads(AT210.db, doc, ov, { dm });
+      tally.towns += 1;
+      const markers = [...npcs.flatMap((n) => [n.factionGoal, n.linkedFactionIds[0].slice('faction.'.length)]), ...ties.map((t) => t.description)];
+      for (const m of markers) {
+        if (hidden.has(m)) {
+          tally.hidden += 1;
+          for (const read of ['gallery', 'link', 'import', 'map', 'page']) if (has(now[read], m)) breaches.push(`#${i} ${m} hidden, sent by ${read}`);
+        } else {
+          tally.open += 1;
+          if (has(now.gallery, m) !== has(before.gallery, m)) breaches.push(`#${i} ${m} open: 211 ${has(now.gallery, m)}, 210 ${has(before.gallery, m)}`);
+        }
+      }
+    }
+    // anchored: both halves of the law are exercised, over shares with and without a reveal
+    expect(tally.towns).toBe(60);
+    expect(tally.hidden).toBeGreaterThan(100);
+    expect(tally.open).toBeGreaterThan(100);
+    expect(tally.dm).toBeGreaterThan(10);
+    expect(tally.revealedOne).toBeGreaterThan(10);
+    expect(tally.classes).toBeGreaterThan(5);
+    expect(breaches.slice(0, 20)).toEqual([]);
   }, ROW_TIMEOUT_MS);
 
   // ── THE ROLLBACK ──────────────────────────────────────────────────────────────────────────────

@@ -821,9 +821,16 @@ begin
     own := byid -> id;
   end if;
   drops := drops || array(select jsonb_array_elements_text(coalesce(own, '[]')));
+  -- SERVER ONLY (COHERENCE-VEIL-4, V4-2; the chair's ruling 331): a person stored by master's client
+  -- carries `factionGoal` and `linkedFactionIds`, which master's goals and ties eyes governed
+  -- (db832c892:galleryVeil.js:155,159). The people car retired both names, so the client's table no
+  -- longer lists them; here they are the same content as the eye that governs them, withheld with it
+  -- and sent as before while it is open. Never the client's table: it stays the client's, field for field.
   return c - array(
     select k from unnest(drops) f2,
-      lateral (select jsonb_array_elements_text(case when kd -> 'fields' ? f2 then kd -> 'fields' -> f2 else jsonb_build_array(f2) end) k) kk
+      lateral (select jsonb_array_elements_text(case when kd -> 'fields' ? f2
+        then (kd -> 'fields' -> f2) || coalesce('{"npc": {"goals": ["factionGoal"], "ties": ["linkedFactionIds"]}}'::jsonb -> kind -> f2, '[]')
+        else jsonb_build_array(f2) end) k) kk
      where not (kd -> 'floor' ? k));
 end $$;
 
