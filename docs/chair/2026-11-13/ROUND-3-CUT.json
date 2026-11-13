@@ -61026,5 +61026,248 @@
    "package": null,
    "ownHolders": []
   }
- ]
+ ],
+ "defenceClasses": {
+  "source": "REVIEW-UPKEEP-3, lane/review-upkeep-2026-11-13 at 1e7ba20a1; births are its 1,440 at 0a07f98c7; writers at the line aac79b808; holders by own commits",
+  "postureLadderHolder": {
+   "file": "src/domain/display/stateProse/defenseStateProse.js",
+   "holder": "wa (lane/w2-a-leaves-2026-11-12)",
+   "why": "own commits 08c9f15bd, 8f96276a9; wc carries the same two; up does not change the file"
+  },
+  "classes": [
+   {
+    "id": "A",
+    "births": 151,
+    "sentence1": {
+     "file": "src/data/dossierStateProse/defense.generated.js",
+     "pool": "DS-DEF-2 › Invasion & War: walls with NO force",
+     "variants": [
+      1,
+      2,
+      3
+     ],
+     "selector": "src/domain/display/stateProse/defenseStateProse.js :: invasionRowSituation / invasionRowPoolKey",
+     "facts": "src/domain/institutions/defenseInstitutionBuckets.js :: standingDefenseForces (walls, garrison, militia only)"
+    },
+    "sentence2": {
+     "file": "src/components/new/tabs/DefenseTab.jsx",
+     "what": "force cards: the watch or a contracted company (defenseProfile watch / mercenary)"
+    },
+    "mustRead": "no garrison, militia, watch AND no contracted company (a watch and a company bucket, or the derived defence part \"who stands\")",
+    "holders": {
+     "corpus": "wr",
+     "selector": "wa",
+     "buckets": "up",
+     "tab": "none"
+    },
+    "package": "lane up",
+    "joins": [
+     461,
+     642
+    ]
+   },
+   {
+    "id": "A1/F",
+    "births": "59/16",
+    "sentence1": {
+     "file": "src/data/dossierStateProse/defense.generated.js",
+     "pool": "A row, or DS-DEF-1 › readiness WEAK v1",
+     "selector": "src/domain/display/stateProse/defenseStateProse.js :: posturePoolKey(readiness.score) via scoreBand"
+    },
+    "sentence2": {
+     "file": "src/components/new/tabs/DefenseTab.jsx",
+     "what": "Invasion & War bar: statusCase(scoreBand(scores.military))"
+    },
+    "mustRead": "the band the bar prints (scores.military) for the row; the readiness badge (one ladder) for the posture",
+    "holders": {
+     "selector": "wa",
+     "tab": "none",
+     "corpus": "wr"
+    },
+    "package": "lane wa (with the ladder); the bar gate has no holder",
+    "joins": [
+     319,
+     810
+    ]
+   },
+   {
+    "id": "B",
+    "births": 36,
+    "sentence1": {
+     "file": "src/data/dossierStateProse/defense.generated.js",
+     "pool": "DS-DEF-2 › Invasion & War: neither walls nor force",
+     "variants": [
+      1,
+      4
+     ],
+     "selector": "src/domain/display/stateProse/defenseStateProse.js :: invasionRowSituation"
+    },
+    "sentence2": {
+     "file": "src/components/new/tabs/DefenseTab.jsx",
+     "what": "as A"
+    },
+    "mustRead": "as A",
+    "holders": {
+     "corpus": "wr",
+     "selector": "wa",
+     "buckets": "up"
+    },
+    "package": "lane up",
+    "joins": [
+     571
+    ]
+   },
+   {
+    "id": "D",
+    "births": 77,
+    "sentence1": {
+     "file": "src/data/dossierStateProse/defense.generated.js",
+     "pool": "DS-DEF-1 › readiness STRONG",
+     "variants": [
+      2,
+      3
+     ],
+     "selector": "src/domain/display/stateProse/defenseStateProse.js :: posturePoolKey"
+    },
+    "sentence2": {
+     "what": "the crisis in force, stress.type under_siege / wartime"
+    },
+    "mustRead": "stress.type: a war or siege pool, or silence",
+    "holders": {
+     "selector": "wa",
+     "corpus": "wr"
+    },
+    "package": "lane wa",
+    "joins": []
+   },
+   {
+    "id": "E",
+    "births": 63,
+    "sentence1": {
+     "file": "src/data/dossierStateProse/defense.generated.js",
+     "pool": "DS-DEF-1 › readiness CRITICAL",
+     "variants": [
+      1
+     ],
+     "selector": "src/domain/display/stateProse/defenseStateProse.js :: posturePoolKey (scoreBand < 20)"
+    },
+    "sentence2": {
+     "what": "walls and a force on the roster and force cards"
+    },
+    "mustRead": "the badge Undefended (the ruled ladder)",
+    "holders": {
+     "selector": "wa",
+     "corpus": "wr"
+    },
+    "package": "lane wa",
+    "joins": [
+     182
+    ]
+   },
+   {
+    "id": "K",
+    "births": 8,
+    "sentence1": {
+     "file": "src/data/dossierStateProse/defense.generated.js",
+     "pool": "DS-DEF-1 › readiness WEAK",
+     "selector": "src/domain/display/stateProse/defenseStateProse.js :: posturePoolKey (scoreBand < 40)"
+    },
+    "sentence2": {
+     "file": "src/generators/defenseGenerator.js :: computeDefenseReadiness",
+     "what": "the badge Defensible"
+    },
+    "mustRead": "the ladder: Defensible reads the ADEQUATE pool",
+    "holders": {
+     "selector": "wa"
+    },
+    "package": "lane wa",
+    "joins": []
+   },
+   {
+    "id": "C-M2",
+    "births": 201,
+    "sentence1": {
+     "file": "src/data/stressTypes.js",
+     "what": "viabilityNote; and src/data/dossierStateProse/defense.generated.js DS-DEF-8 › override active, viability threatened v2"
+    },
+    "sentence2": {
+     "file": "src/data/dossierStateProse/defense.generated.js",
+     "pool": "DS-DEF-2 › Economic Survival: STRONG",
+     "variants": [
+      1,
+      2,
+      3
+     ],
+     "selector": "src/domain/display/stateProse/defenseStateProse.js :: economicRowPoolKey(scores.economic)",
+     "pdf": "src/domain/display/threatAssessment.js (econA)"
+    },
+    "mustRead": "the Economic Survival score read with the crisis in force, once",
+    "holders": {
+     "stressTypes": "none",
+     "selector": "wa",
+     "threatAssessment": "up",
+     "corpus": "wr"
+    },
+    "package": "lane up",
+    "joins": [
+     136
+    ]
+   },
+   {
+    "id": "C-M4",
+    "births": "all",
+    "writers": [
+     "src/pdf/sections/DefenseSecurity.jsx (five scores as figures, Score avg): no holder",
+     "src/components/new/tabs/PowerTab.jsx (Breakdown): pw, cured on pw (75 -> 0 on my 20, EXECUTED)",
+     "src/lib/worldExport.js via src/domain/display/publicSafe.js :: toPublicSafe (player export carries breakdown, multipliers, weights): no holder, PLAUSIBLE"
+    ],
+    "mustRead": "the band only",
+    "package": "Power tab cured on pw; the PDF and the export: no lane",
+    "joins": "class (b), the Breakdown rows cured on pw"
+   },
+   {
+    "id": "C-L3",
+    "births": 107,
+    "writers": [
+     "src/foundry/journalPages.js (Member of, people table)",
+     "src/pdf/lib/viewModel.js :: npcsSlice (factionLabel falls back to n.category)"
+    ],
+    "mustRead": "a power name, never the raw category",
+    "holders": "up (both)",
+    "package": "lane up"
+   },
+   {
+    "id": "C-L4",
+    "writers": [
+     "src/domain/dailyLife.js :: deriveOutsiderImpressions, deriveRecentChanges"
+    ],
+    "holders": "none",
+    "package": "no lane: domain"
+   },
+   {
+    "id": "C-L5",
+    "births": 6,
+    "writers": [
+     "src/domain/display/stateProse/defenseStateProse.js :: economicRowPoolKey (PLAUSIBLE)"
+    ],
+    "holders": "wa",
+    "package": "lane wa"
+   },
+   {
+    "id": "C-L6",
+    "writers": [
+     "src/domain/display/threatAssessment.js (PDF monster/invasion sentences)"
+    ],
+    "mustRead": "the band printed (scoreBand(scores.monster))",
+    "holders": "up",
+    "package": "lane up"
+   },
+   {
+    "id": "C-L7",
+    "writers": [],
+    "note": "not located: no 60/35 tone ladder found by grep at aac79b808 or 0a07f98c7",
+    "package": "not traced"
+   }
+  ]
+ }
 }
