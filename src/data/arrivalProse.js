@@ -300,7 +300,7 @@ export const ARRIVAL_PEOPLE = Object.freeze({
   latin: [
     { text: () => 'A patron moves through the crowd with clients at their heels, greeting people by name.', needs: ['tier: ≥ town'], crisis: ['any'] }, // W2-FIX-DATA: a crowd and a patron's clients (c09 at 33)
     { text: () => "A notary's clerk hurries past with a satchel of contracts.", needs: ['tier: ≥ town'], crisis: ['any'] }, // W2-FIX-DATA: a notary's trade (c03 at 9)
-    { text: () => 'People argue politics in the open, loudly, and seem to enjoy it.', excludes: ['crisis: occupied'], crisis: ['any'] },
+    { text: () => 'People argue politics in the open, loudly, and seem to enjoy it.', excludes: ['crisis: occupied', 'crisis: under_siege'], crisis: ['any'] }, // W2-FIX-DATA-5 (ww-473): not with the enemy at the walls
     { text: () => 'A benefactor\'s name is carved fresh above a mended well, and people make sure you notice it.', crisis: ['any'] },
   ],
   celtic: [
@@ -316,7 +316,7 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     () => 'A merchant swears an oath on his scales, and the buyer watches the scales anyway.',
   ],
   norse: [
-    { text: () => 'People argue law in the open as freely as they trade.', excludes: ['crisis: occupied'], crisis: ['any'] },
+    { text: () => 'People argue law in the open as freely as they trade.', excludes: ['crisis: occupied', 'crisis: under_siege'], crisis: ['any'] }, // W2-FIX-DATA-5 (ww-473's sibling): no trade moves under a siege
     { text: () => 'Racks of drying fish and smoked meat stand beside the houses, laid in against the winter.', needs: ['navigable'], excludes: ['crisis: hunger'], crisis: ['any'] },
     { text: () => 'A household leader hands out gifts in the open, and everyone watching keeps count.', crisis: ['any'] },
     { text: () => 'Neighbours work together to mend a roof, and nobody seems to be in charge of it.', crisis: ['any'] },

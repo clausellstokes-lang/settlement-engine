@@ -61,4 +61,10 @@ describe('W2-FIX-DATA-5: round three\'s rows in the data lane\'s files', () => {
     expect(historyText(town)).toContain('A would-be heir approaches outsiders');
   }, 60_000);
 
+  test('ww-473 (HIGH): no open, cheerful politics in the arrival under a siege (rww-town-under_siege-1)', () => {
+    const town = bornInc('rww-town-under_siege-1');
+    expect(arrivalText(town).length).toBeGreaterThan(100);
+    expect(arrivalText(town)).not.toMatch(/argue politics in the open|argue law in the open/);
+  }, 60_000);
+
 });
