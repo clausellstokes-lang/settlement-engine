@@ -1138,7 +1138,7 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       "A would-be heir approaches outsiders to investigate a rival's past",
       { text: 'The ailing ruler wants a final errand completed before naming a successor', excludes: ['ruler: council'] }, // CENSUS-3d unit 6
-      { text: 'Someone is poisoning the ruler slowly, and the physician knows', excludes: ['ruler: council'] }, // CENSUS-3d unit 6
+      { text: 'Someone is poisoning the ruler slowly, and someone in the household knows', excludes: ['ruler: council'] }, // CENSUS-3d unit 6
     ],
     severity: ['minor', 'major'],
   },
@@ -1308,9 +1308,9 @@ export const HISTORICAL_EVENTS_DATA = [
     // URBAN-FIX D-1: the tension's words when its own event sits on the timeline older than 80 years (historyGenerator.js :: tensionByMemory)
     byMemory: { dated: { description: 'The occupation ended long ago, but the families who collaborated and the families who resisted still keep apart', factions: ['Collaborator families', 'Resistance families', 'Those who want it forgotten'] },
       // URBAN-FIX D-1b: the words when the timeline holds no occupation at all: the template's own lasting effects, naming no past event
-      unanchored: { description: 'Collaborator and resistance families still keep to separate quarters, and old property seizures remain legally unresolved', factions: ['Collaborator families', 'Resistance families', 'Those who want it forgotten'] } },
+      unanchored: { description: 'Collaborator and resistance families still keep apart, and old property seizures remain legally unresolved', factions: ['Collaborator families', 'Resistance families', 'Those who want it forgotten'] } },
     lastingEffects: [
-      'Collaborator and resistance families still keep to separate quarters',
+      'Collaborator and resistance families still keep apart',
       'Wartime property seizures remain legally unresolved',
     ],
     plotHooks: [
@@ -1469,7 +1469,7 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       'The evidence that convicted the heretic was fabricated, and a witness is finally willing to say so',
       "The condemned doctrine is quietly practised still, by more of the town's leaders than would admit it",
-      { text: 'A relic seized during the trial never reached the temple vault it was bound for', needs: ['institution: temple'] }, // CENSUS-3d unit 6
+      { text: 'A relic seized during the trial never reached the vault it was bound for', needs: ['institution: temple'] }, // CENSUS-3d unit 6
     ],
     severity: ['minor', 'major'],
   },

@@ -32,7 +32,7 @@
   },
   {
    "id": "hooks.HISTORY_EVENT_HOOKS::succession_crisis#2",
-   "text": "Someone is poisoning the ruler slowly, and the physician knows",
+   "text": "Someone is poisoning the ruler slowly, and someone in the household knows",
    "needs": [],
    "excludes": [
     "ruler: council"
@@ -517,7 +517,7 @@
   },
   {
    "id": "hooks.HISTORY_EVENT_HOOKS::heresy_trial#2",
-   "text": "A relic seized during the trial never reached the temple vault it was bound for",
+   "text": "A relic seized during the trial never reached the vault it was bound for",
    "needs": [
     "institution: temple"
    ],

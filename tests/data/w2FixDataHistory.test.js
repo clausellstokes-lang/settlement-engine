@@ -7,6 +7,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import { HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
+import { HISTORY_DESC_VARIANTS } from '../../src/data/historyDescVariants.js';
 import { declarationAdmits, declarationOf } from '../../src/domain/facts/factVocabulary.js';
 import { lineText } from '../../src/domain/facts/drawDeclared.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
@@ -15,6 +16,7 @@ const hooks = HISTORICAL_EVENTS_DATA.flatMap((t) => t.plotHooks || []);
 const hook = (/** @type {string} */ start) => hooks.find((h) => String(lineText(h)).startsWith(start));
 const town = (/** @type {string[]} */ houses) => factsOf({ tier: 'town', institutions: houses.map((name) => ({ name })), config: {} });
 const admits = (/** @type {any} */ l, /** @type {any} */ f) => declarationAdmits(declarationOf(l), f).admitted;
+const texts = JSON.stringify([HISTORICAL_EVENTS_DATA, HISTORY_DESC_VARIANTS]);
 
 describe('W2-FIX-DATA: a history hook prints only where it is true', () => {
   it('a guard captain only where a watch stands, not a household levy (c04)', () => {
@@ -27,4 +29,12 @@ describe('W2-FIX-DATA: a history hook prints only where it is true', () => {
       expect(admits(hook(start), town(['Craft guilds (5-15)']))).toBe(true);
     }
   });
+});
+
+describe('W2-FIX-DATA: history lines reworded to presume nothing false', () => {
+  it('no physician the town may lack knows of the poisoning (c15)', () => expect(texts).not.toMatch(/and the physician knows/));
+  it('the seized relic was bound for a vault, not a temple\'s the town may lack (c20)', () => expect(texts).not.toMatch(/temple vault/));
+  it('collaborators and resisters keep apart, not to quarters a hamlet has none of (c02, c07)', () => expect(texts).not.toMatch(/separate quarters/));
+  it('a succession crisis names no throne an elder council lacks (c03)', () => expect(texts).not.toMatch(/maneuvered quietly for the throne/));
+  it('the economic divide names no merchants a hamlet lacks (c08)', () => expect(texts).not.toMatch(/between wealthy merchants and working poor/));
 });
