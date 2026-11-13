@@ -434,7 +434,7 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // STYLE-2 records called these figures "the base's, unchanged" while the values moved): {32, 6} -> {31, 6}
     // at FIX-FOOD-ISOLATION's merge c6e8a4ad6 (501c97412 reads 32): town|germanic|forest|isolated leaves declared-only, one
     // of the twelve forest-isolated towns that lane's record says moved. Unmoved to the tip.
-    expect(tally(census().rows.filter((row) => row.declaredOnly.length > 0).map((row) => row.label))).toEqual({ E7: 31, E8: 6 });
+    expect(tally(census().rows.filter((row) => row.declaredOnly.length > 0).map((row) => row.label))).toEqual({ E7: 31, E8: 9 }); // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; a figure its drafted record names for the merge seat): E8 6 -> 9 (the draft: A4's E8 5 -> 9 on the lane's base)
     // anchored: the layer channel is clean on all three counts, and a widening reds here.
     expect(layerRows.filter((row) => row.escalations.length > 0)).toEqual([]);
     expect(layerRows.filter((row) => row.live.length > 0)).toEqual([]);
@@ -449,11 +449,11 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // car 1 -> {28, 8} car 2 -> {14, 2} car 3 90dc22f18 -> {15, 2} car 1b-2 -> {19, 4} PINS -> {22, 4} car 3 I7 -> {18, 3}
     // F6; steps {104, 36} -> {72, 12} at the same steps; every one still EXHAUSTED; the live residue 35 -> 21, all
     // V-DEFENSE-INST. The layer channel is clean at every stage.
-    expect(tally(configRows.filter((row) => row.escalations.length > 0).map((row) => row.label))).toEqual({ E7: 18, E8: 3 });
-    expect(tally(configRows.flatMap((row) => Array(row.escalations.length).fill(row.label)))).toEqual({ E7: 72, E8: 12 });
-    expect(tally(configRows.filter((row) => row.escalations.some((each) => each.step === 'EXHAUSTED')).map((row) => row.label))).toEqual({ E7: 18, E8: 3 });
-    expect(census().rows.filter((row) => row.live.length > 0).length, 'EM-B2b seam, asserted AT the figure').toBe(21);
-    expect(tally(census().rows.flatMap((row) => row.live))).toEqual({ 'V-DEFENSE-INST': 21 });
+    expect(tally(configRows.filter((row) => row.escalations.length > 0).map((row) => row.label))).toEqual({ E7: 21, E8: 3 }); // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d): the same escalation counts as mergeLadderHeldKeys A2: E7 18 -> 21
+    expect(tally(configRows.flatMap((row) => Array(row.escalations.length).fill(row.label)))).toEqual({ E7: 84, E8: 12 }); // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d): the same escalations, four seats each: E7 72 -> 84
+    expect(tally(configRows.filter((row) => row.escalations.some((each) => each.step === 'EXHAUSTED')).map((row) => row.label))).toEqual({ E7: 21, E8: 3 }); // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d): the same escalation counts as mergeLadderHeldKeys A2: E7 18 -> 21
+    expect(census().rows.filter((row) => row.live.length > 0).length, 'EM-B2b seam, asserted AT the figure').toBe(24); // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d): the same escalations (E7 21 + E8 3), equal to the lane's own tip: 21 -> 24
+    expect(tally(census().rows.flatMap((row) => row.live))).toEqual({ 'V-DEFENSE-INST': 24 }); // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d): the same escalations (E7 21 + E8 3): 21 -> 24
   }, ARM_TIMEOUT);
 
   it('A5 a chain is deterministic, undo then re-edit reproduces the town, and the ordered pairs are counted', () => {
@@ -504,7 +504,7 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // stage of the landing with this count alone): 52 → 50 X-46 car 1 (1264a8152) → 39 X-46 car 3 (90dc22f18) → 41 PINS
     // (37b1e746d) → 44 X-46 car 3, I7 (6ca454d2b) → 46 PINS (11467ed57) → 40 F6 BUDGET-FLOOR (6d84aa834), unmoved since and by
     // record 28's cure (the same 40 rows).
-    expect(byChannel('config').filter((row) => row.orderMoved.length > 0).length, 'a counted diagnostic with a LIVE population, so the branch is not asserted on nothing').toBe(40); // 2026-10-01: 51 → 54, the same re-deal; 2026-11-04 (REGISTERS seat, traced in DOORS-4): 54 → 53 FOOD-2 → 52 SIZE-3
+    expect(byChannel('config').filter((row) => row.orderMoved.length > 0).length, 'a counted diagnostic with a LIVE population, so the branch is not asserted on nothing').toBe(44); // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; a figure its drafted record names for the merge seat): 40 -> 44 (the draft: A6 40 -> 44); // 2026-10-01: 51 → 54, the same re-deal; 2026-11-04 (REGISTERS seat, traced in DOORS-4): 54 → 53 FOOD-2 → 52 SIZE-3
   }, ARM_TIMEOUT);
 
   it('A7 the honesty figures are re-measured and the ride-along has its first population in the chain', () => {
@@ -660,7 +660,7 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // STYLE-2 records called these figures "the base's, unchanged" while the values moved): 21/36 -> 20/36 at
     // FIX-FOOD-ISOLATION's merge c6e8a4ad6 (501c97412 reads 21/36): legitimacy scores {25, 62} gone, {42} new; readiness
     // unmoved. Unmoved to the tip.
-    expect([witnessed.legitimacy.size, witnessed.readiness.size], 'the scores are WITNESSED, not assumed').toEqual([20, 36]);
+    expect([witnessed.legitimacy.size, witnessed.readiness.size], 'the scores are WITNESSED, not assumed').toEqual([20, 32]); // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; the draft names it for the merge seat): measured at the signed tree EQUAL to the lane's own tip 69b53decd: readiness 36 -> 32, legitimacy 20 held
     // (b) the witnessed score set of the ladders, RECORDED (charter addenda 71 and 73)
     expect([Math.min(...witnessed.legitimacy), Math.max(...witnessed.legitimacy)]).toEqual([0, 75]);
     expect([Math.min(...witnessed.readiness), Math.max(...witnessed.readiness)]).toEqual([7, 83]);
