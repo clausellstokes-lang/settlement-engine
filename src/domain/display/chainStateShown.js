@@ -15,11 +15,19 @@
  *     court) keeps its state.
  * Only a state that reads as working is replaced (running, operational, entrepôt), and only by the record's own
  * word for a chain a crisis has hit, `impaired`; a vulnerable, impaired or magically sustained chain keeps its own.
+ *   · under that siege, a chain whose only house is a neighbour's, reached through an "Access to ..." row
+ *     (`facts/institutions.js :: ACCESS_ONLY`; "Faith & Worship" in a thorp whose roster holds "Access to parish
+ *     church" and no church), prints NO state (`NO_STATE_SHOWN`): the roads to that house are cut, and the siege's
+ *     own note stands on the tab (W2-C-LEAVES-4 item 1, the chair's ruling of 2026-11-13; no new state word).
  *
  * Pure: no randomness, no clock, no write.
  */
 import { crisisOf } from '../facts/crisisKind.js';
 import { chainCarrierOf } from '../facts/chainCarrier.js';
+import { ACCESS_ONLY, liveInstitutionNames } from '../facts/institutions.js';
+
+/** The state a card prints as nothing: no chip (W2-C-LEAVES-4 item 1). */
+export const NO_STATE_SHOWN = '';
 
 /** The ground each food source of the food record is grown, grazed, fished or hunted on (`generators/foodLand.js`). */
 const FOOD_SOURCE_GROUND = Object.freeze({
@@ -56,8 +64,25 @@ export function chainStateShown(chain, record) {
     const fieldWork = carrier === 'own' && typeof c.resourceInputKey === 'string' && c.resourceInputKey !== '';
     const trade = c.entrepot === true || c.needKey === 'trade_entrepot' || carrier === 'transit' || carrier === 'bought';
     if (fieldWork || trade) return 'impaired';
+    if (runsOnlyThroughAccess(chain, record)) return NO_STATE_SHOWN;
   }
   return status;
+}
+
+/**
+ * WHETHER A CHAIN'S ONLY HOUSE IS A NEIGHBOUR'S (W2-C-LEAVES-4 item 1): each of its houses is met on the live roster
+ * only by an "Access to ..." row, by the flow card's own reading of a house as present (the house's first word in a
+ * roster name, `SupplyChainsPanel.jsx :: chainFlowFacts`), and at least one is met so.
+ * @param {unknown} chain @param {unknown} record
+ * @returns {boolean}
+ */
+function runsOnlyThroughAccess(chain, record) {
+  const houses = chain && typeof chain === 'object' && Array.isArray(/** @type {{ processingInstitutions?: unknown }} */ (chain).processingInstitutions)
+    ? /** @type {ReadonlyArray<unknown>} */ (/** @type {{ processingInstitutions: unknown[] }} */ (chain).processingInstitutions) : [];
+  const roster = liveInstitutionNames(/** @type {any} */ (record)).map((n) => n.toLowerCase());
+  const heads = houses.map((h) => String(h).toLowerCase().split(/[\s(]/)[0]).filter(Boolean);
+  const met = (/** @type {boolean} */ access) => heads.some((w) => roster.some((n) => ACCESS_ONLY.test(n) === access && n.includes(w)));
+  return heads.length > 0 && met(true) && !met(false);
 }
 
 /**
