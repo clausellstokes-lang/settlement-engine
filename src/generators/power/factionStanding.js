@@ -64,8 +64,9 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
                     : 'The order is settled for now; they are busy holding on to second place and make no move on first.')),
           rank === 2 &&
             (gapAbove <= 5 && gapBelow <= 5
-              ? (standing =
-                  'Three powers stand almost level here, and no one leads; every council vote has to be bargained for.')
+              ? (standing = topTwoGap <= 5
+                  ? 'Three powers stand almost level here, and no one leads; every council vote has to be bargained for.'
+                  : 'They are always at the table, but cannot set their own terms.')
               : gapAbove <= 10
                 ? (standing =
                     'Close enough to the two above that their support is worth buying; they play ' +
