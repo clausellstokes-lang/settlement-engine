@@ -304,20 +304,39 @@ const chainFor = (rawResource) => /** @type {[string, ResourceChain]|undefined} 
   Object.entries(RESOURCE_CHAINS).find(([, c]) => c.rawResource === rawResource)) || null;
 
 /**
+ * EXPORTS THAT ANSWER A CHAIN'S INPUT WORDS AND ARE ANOTHER GROUND'S GOOD (P1-b, measured on the census's 720: of the 58
+ * cards an export moved, 22 timber cards moved on "Sacred wood" alone; "Sea salt" beside salt pans is their own and stays). A closed
+ * list, each with its cause; such an export says nothing of the card's own resource.
+ * @type {ReadonlyArray<string>}
+ */
+const OTHER_GROUNDS_GOODS = Object.freeze([
+  'sacred wood', // the ancient grove's ritual wood, gathered by its keepers; not timber felled from the forest (r2r-thorp-22, r2s-mass_migration-hamlet-3)
+]);
+
+/**
  * WHETHER THE RESOURCE A CARD OR A GAP LINE NAMES IS WORKED HERE, AS THE PAGE SAYS IT (W2-C-LEAVES-3, P1; record 303:
  * the chain model homes "worked here"). ONE reading for the "No one here works the …" sentence and the grade cards,
  * so the two never disagree: the record's live resource keys the chain's input words answer (`gapResourceKeys`),
  * asked of the chain leaf with the good the line names (`chainWorksResource`, R3's list); `modelled` is false where
  * no chain of the record takes the resource at all (the model is silent: "not known", never "not worked").
+ * A SECOND FACT BESIDE THE LEAF (the chair's ruling P1-b, 2026-11-13): `sold`, the economy's exports name the resource's
+ * OWN raw good (the chain's input words, `CHAIN_INPUTS`: "Raw wool" for the wool or the alpine pasture, "Rock salt" for
+ * the desert salt): someone gathers what is sold, so the resource is worked here, and "No one here works the …" never
+ * prints beside it. The leaf itself is not widened: `leaf` is its answer alone.
  * @param {PageRecord} s the settlement record @param {unknown} rawResource the card's or gap's raw resource ("timber")
- * @returns {{ modelled: boolean, worked: boolean, keys: string[], good: string | undefined }} `good`: the noun the leaf is asked of
+ * @returns {{ modelled: boolean, worked: boolean, leaf: boolean, sold: boolean, keys: string[], good: string | undefined }}
+ *   `worked`: the leaf's yes or the export's; `good`: the noun the leaf is asked of
  */
 export function resourceWorkReading(s, rawResource) {
   const entry = chainFor(str(rawResource));
   const spec = entry ? CHAIN_INPUTS[entry[0]] : null;
   const keys = gapResourceKeys(s, entry ? entry[0] : null);
-  const worked = chainWorksResource(s, keys, spec?.noun);
-  return { modelled: worked || chainModelsResource(s, keys), worked, keys, good: spec?.noun };
+  const leaf = chainWorksResource(s, keys, spec?.noun);
+  const exportsText = arr(s?.economicState?.primaryExports).map(str)
+    .filter((x) => !OTHER_GROUNDS_GOODS.some((o) => norm(x).includes(norm(o)))).map(norm).join('|');
+  const sold = !!spec && spec.words.some((w) => holds(exportsText, w));
+  const worked = leaf || sold;
+  return { modelled: worked || chainModelsResource(s, keys), worked, leaf, sold, keys, good: spec?.noun };
 }
 
 /** @typedef {'unexploited'|'partial'|'full'} ExploitationStage */
@@ -395,7 +414,6 @@ export function resourceGapLines(s) {
   const gaps = arr(ra?.gaps);
   if (!gaps.length) return [];
   const goods = recordGoods(s);
-  const exportsText = arr(s?.economicState?.primaryExports).map(str).map(norm).join('|');
   const institutions = arr(s?.institutions);
   /** @type {GapLine[]} */
   const out = [];
@@ -408,7 +426,8 @@ export function resourceGapLines(s) {
     const entry = chainFor(str(g.chain));
     const spec = entry ? CHAIN_INPUTS[entry[0]] : null;
     const raw = (spec?.raw || str(resourceDisplayName(str(g.chain)))).toLowerCase();
-    if (spec && spec.words.some((w) => holds(exportsText, w))) continue; // the economy sells it: someone works it
+    const reading = resourceWorkReading(s, g.chain); // R3: asked of the good the line names
+    if (reading.sold) continue; // the economy sells its raw good: someone works it (P1-b: the grade reads the same fact)
     // The houses the line names as missing are read by kind: a house of the roster that is the named one's own
     // family or ladder rung is not missing (W2-C-LEAVES, item 1). R1 (the chair, from REVIEW-R2-STAGES finding 1):
     // a house that does a missing one's trade finishes the work too (`tradeFinisherHere`), and where ONE finisher of
@@ -420,7 +439,7 @@ export function resourceGapLines(s) {
     // WORKED HERE is the chain model's (facts/chainWorking.js :: chainWorksResource, record 303): "No one here works"
     // prints only where the leaf says no; a half-way grade, which says the work is done in part, never where the model
     // holds a chain on the resource and none of its chains works it (where it holds none, the model is silent).
-    const { worked, modelled } = resourceWorkReading(s, g.chain); // R3: asked of the good the line names
+    const { worked, modelled } = reading;
     const modelledIdle = !worked && modelled;
     if (/not being processed/.test(str(g.impact))) {
       if (worked) continue;
