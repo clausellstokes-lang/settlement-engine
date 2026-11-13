@@ -59,6 +59,7 @@ import { veiledEpithetFor } from '../npcDisplayNames.js';
 import { RUNG_KEYS, rungBandsForTier } from '../../domain/density/densityRungs.js';
 import { allegianceOf, isCriminalPower, organizedCrimeOf } from '../../domain/people/allegiance.js';
 import { isSeatVacant } from '../../domain/people/seatKeeper.js';
+import { crimeSignalOf, withTownsOwnUnderworld } from '../../domain/crimeSignal.js';
 import { coupContenders } from '../../domain/rulingPowerCoup.js';
 
 /** The keyed fork the late mints and the ranks draw under (declared in the fork census). */
@@ -297,6 +298,8 @@ export function landMemberships(settlement, cards, rng, seed = settlement?._seed
       secrets: new Set(cards.map((c) => c?.secret?.what).filter(Boolean)),
     };
     const mintCtx = { tier, culture, config, economicState, powerStructure: settlement?.powerStructure, institutions, hookRegistry, worldLaw };
+    // the crime signal (one home) and the roster's crime faction as mergeNPCLists reads it, for the minted secrets
+    const crime = { signal: crimeSignalOf({ seats: factions, estate: institutions }), faction: factions.find((f) => f?.category === 'criminal' || /thieve|criminal|smuggl|underworld/i.test(String(f?.faction || '')))?.faction || null };
     // the pipeline's own npcConfig, as the birth seam spells it, for the hook draw's templates
     const npcConfig = {
       ...config,
@@ -315,6 +318,9 @@ export function landMemberships(settlement, cards, rng, seed = settlement?._seed
         : isCriminalPower(f) && otherMintRowFor(name).fallback ? HOUSELESS_CRIMINAL_FACE : otherMintRowFor(name);
       const draw = () => mintPowerFace(row, mintCtx, { hook: false });
       const card = mintStream ? onStream(mintStream.fork(powerSlug(name)), draw) : draw();
+      // COHERENCE-POWERS-7 (leftover 1): a late face's secret names no thieves' guild the town lacks (the rule
+      // mergeNPCLists runs on the roster's cards; crimeSignal.js :: withTownsOwnUnderworld), after the draw
+      if (card.secret && typeof card.secret === 'object') card.secret = { ...card.secret, what: withTownsOwnUnderworld(card.secret.what, crime.signal, crime.faction) };
       card.id = id;
       card.title = row.title;
       card.role = row.title; // M-1b
