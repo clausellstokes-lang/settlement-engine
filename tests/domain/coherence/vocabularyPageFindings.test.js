@@ -331,6 +331,17 @@ describe('F2 (second read) — streets are false only in a thorp or a hamlet', (
     expect(words(place('hamlet', 82), line)).toEqual(['streets']);
     expect(words(place('thorp', 20), line)).toEqual(['streets']);
   });
+  /**
+   * Finding 8 of the third read (REVIEW-W2B-c3913f999: "`neighbourhoods` sits in `quarters` as well as `streets`, so a
+   * village's neighbourhoods are flagged"). The ruled size standard: plural neighbourhoods are a size error only in a thorp
+   * or a hamlet (`streets`), so the word leaves `quarters`. Red at faace95de (the village of 331 was a `quarters` finding).
+   */
+  test('finding 8 (third read): neighbourhoods are a size error only in a thorp or a hamlet', () => {
+    const n = 'Its neighbourhoods keep to themselves after dark.';
+    expect(words(place('village', 331), n)).toEqual([]);
+    expect(words(place('hamlet', 82), n)).toEqual(['streets']);
+    expect(words(place('village', 331), 'The poorest quarters keep to themselves after dark.')).toEqual(['quarters']);
+  });
   test('quarters keep the population band: a small village has no merchant quarter, a middling town does', () => {
     const q = 'The merchant quarter shuts its gates at dusk.';
     expect(words(place('village', 331), q)).toEqual(['quarters']);

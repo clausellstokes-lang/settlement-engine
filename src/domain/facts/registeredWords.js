@@ -335,9 +335,10 @@ const NEW_WORDS_OPEN = /** @type {Record<string, RegisteredWord>} */ ({
     atoms: [], kinds: ['succession_void', 'politically_fractured'],
     absent: (f) => !inForce(f, 'succession_void') && !inForce(f, 'politically_fractured'),
   },
+  // finding 8 of REVIEW-W2B's third read: `neighbourhoods` is `streets`' alone (a size error only in a thorp or a hamlet)
   quarters: {
     kind: 'size', layer: 'P', leaf: 'populationBand.js :: populationBandOf',
-    words: /\bdistricts?\b|\b(?:poor|poorer|poorest|rich|richer|wealthy|merchant|merchants'|craft|crafts|artisan|artisans'|foreign|old|new|temple|harbour|dock|river|eastern|western|northern|southern|outer|inner|lower|upper|noble|guild|market|slum|working)\s+quarters?\b|\burban\b|\bmetropolitan\b|\bneighbou?rhoods\b|\bslums?\b|\btenements?\b/i,
+    words: /\bdistricts?\b|\b(?:poor|poorer|poorest|rich|richer|wealthy|merchant|merchants'|craft|crafts|artisan|artisans'|foreign|old|new|temple|harbour|dock|river|eastern|western|northern|southern|outer|inner|lower|upper|noble|guild|market|slum|working)\s+quarters?\b|\burban\b|\bmetropolitan\b|\bslums?\b|\btenements?\b/i,
     atoms: [], bands: { population: ['middling', 'large'] },
     absent: (f) => f?.populationBand === 'small',
   },
