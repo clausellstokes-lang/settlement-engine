@@ -312,3 +312,87 @@ checked last.
 144 `r3t-` fresh seeds, app shape), m4.mjs (the threat/posture rows, tree A against tree B), m5.mjs + m5cls.mjs (the
 desk's rows on the defence reader's 1,440 and classes3's patterns), mycount.mjs (this seat's page patterns on census
 dumps), c2mine.mjs (census-2 hits by this seat's files).
+
+---
+
+# THE SECOND SEAT (R3-TABS-2, 2026-11-13)
+
+Read the lane's tip back from origin at the start: **fdfd471d9**, unmoved. Worked in a scratch worktree on a local
+branch at that tip (`npm ci` there); every measurement after the cure is of a COMMITTED sha in its own `git archive`
+(the counts of a run whose tree I touched mid-run were checked against the first seat's own figures: equal).
+
+## The rulings this seat works to (the chair's assignment, copied: the chair's messages are not on the branch)
+- **The severity chips (item 5 and item 15's H9): A RANGE IS NOT A RATING.** Where the record holds more than one
+  severity for a tension, NO severity word prints for it: on the History tab's row, in the PDF's text, in the Foundry
+  journal and in any export that prints it (every surface counted before and after). One severity prints that one word
+  as now. Nothing is chosen for the reader, not the worst, not the least. The row's border colour and the sort order
+  are left exactly as they are, and NAMED here for the owner's veto. The generator's unresolved range is NAMED for the
+  seat after the merges (resolve at birth as an event's severity is: a declared move, not this seat's). Display only:
+  births byte-identical. Measured first on the 720 and the first seat's three towns, red first; a guard that reds on two
+  severity words printed for one tension on any rendered surface; ten rows read across tiers, a siege among them. A line
+  of the PDF or the journal in a file another lane holds is ONE condition there, named as shared.
+- **The command's rule (record 403)** after item 1: CENSUS-2's `census2.sh` at the tip with `--files` the lane's files;
+  every hit in them read against its town, cured or named; the count per kind at base and tip; its limits beside any zero.
+- **The lane's ONE final statement** at the final tip, as the first seat's last section lists it.
+- **Not this seat's** (passed on by the chair): the Services tab's "Needs X" and "covers" (serviceComponents.jsx,
+  R2-CODE-B); the founding "Origin:" (#488 #594 #845) and the founder line (#571 #916) (round two's first code lane);
+  the food endurance line and "Legal Infrastructure · Court only" (#575) (defenseDisplay.js); a house's name on these
+  tabs (the label leaf; FOR THE JOIN stands as written).
+- The method for every line written (records 386, 387, 404); the page shows the ratings, never the machinery; no new
+  record key, no new vocabulary word; a claim of zero counted on every surface; a count falling is not a cure.
+
+## Item 1 (the first seat's 5 and 15/H9) — the severity chips — DONE (b2682f748, d6b0526cb)
+- **Lines:** the cut's #486 #487 #592 #593 #743 #744 #1422 #1423; the increment's HIGH #ww-466 #ww-467 #ww-530 #ww-531,
+  #ww-468, #ww-569; CENSUS-2 kind d "Legitimacy crisismajorcatastrophic" / "Succession Crisisminormajor".
+- **The surfaces that print a tension's severity** (traced by every reader of `history.currentTensions`): the History
+  tab's `TensionRow` (also mounted by the dossier search, `DossierSearchResults.jsx`); the PDF's Overview
+  ("Tensions & Conflicts" Pill, through `viewModel.js :: normSeverity`, joined "minor / major"); the PDF's History
+  ("Live tensions" Pill, the raw list, run together). The Foundry journal prints none (its Power page drops it by
+  design; the timeline packet writes no journal pages at all); the Tonight sheet composes none; the world export and
+  the AI prompt carry the record's array as DATA (not a printed word; `supabase/functions/generate-narrative/prompts.ts`
+  hands it to the model): NAMED, not touched.
+- **The cure, display only:** `HistoryTab.jsx :: TensionRow` prints one chip for one severity, none for more than one;
+  `HistoryFounding.jsx :: TensionRow` prints no Pill for a range (the condition `isSeverityRange` at the file's end, so
+  no line above moves: the prose-numerics register keys this file by line, row 382); `viewModel.js :: normSeverity`
+  returns null for a range (it joined "a / b"). **SHARED:** `src/pdf/lib/viewModel.js` is held by
+  lane/coherence-upkeep-2026-11-12 and lane/upkeep-capacity-2026-11-13 (their hunks there do not touch normSeverity):
+  ONE condition in it. `HistoryFounding.jsx` and `HistoryTab.jsx` are held by no other lane.
+- **NAMED for the owner's veto, left exactly as they were:** the History row's border colour (the worst of the range:
+  `maxSev` in `TensionRow`) and the PDF row's tone; the dossier search's sort (`dossierSearch.js :: severityRank`, the
+  worst of the range).
+- **NAMED for the seat after the merges:** the generator's unresolved range: `historyGenerator.js :: buildHistoricalEvent`
+  copies the template's `severity` list onto a tension, where an event's is `pick(eventTemplate.severity)`. Resolving it
+  at birth is a declared move of the births (a signed shift); the tab then prints that one word.
+- **Red first:** `tests/components/tensionSeverityOneWord.test.jsx` on the first seat's three towns
+  (rr2s-town-under_siege-rand-1, rr2s-city-calm-rand-1, rr2s-metropolis-plague_onset-port-1): reds on two severity
+  words printed for one tension on the tab, each ranged row, the PDF (canon, draft, timeline) and the journal (canon,
+  draft); a one-severity tension prints its one word. At fdfd471d9: 10 of 16 red (tab, row and PDF in all three towns;
+  the view model's join); the journal green (it printed none). At b2682f748 and d6b0526cb: 16 of 16 green.
+- **Counted on every surface, base fdfd471d9 against tip b2682f748** (`probes/R3-TABS/sevcount.mjs`; the census's 720
+  plus the three towns; the PDF, journal and Tonight by REVIEW-R2-STAGES's own `surfaces.sh` on the same records; the
+  page by CENSUS-2's render of the 720):
+
+| surface | range lines at base | at tip | one-severity lines base → tip | any other line moved |
+|---|---|---|---|---|
+| History tab (page, the 720) | 1,089 lines / 653 towns | 0 | unchanged (no other line differs) | none |
+| PDF canon dossier (723) | 2,190 / 656 towns | 0 | 5,106 → 5,106 | none |
+| PDF draft brief (723) | 2,190 / 656 towns | 0 | 5,106 → 5,106 | none |
+| PDF timeline packet (723) | 0 | 0 | — | none |
+| Foundry journal canon, draft (723) | 0 | 0 | — | none |
+| Tonight sheet (723) | 0 | 0 | — | none |
+| CENSUS-2 kind d, run-together severity (720) | 146 hits / 144 towns | 0 | — | kind d 277 → 131 hits, exactly −146 |
+
+  On the page, 1,060 of the 1,089 lines now read the tension's label alone; the other 29 fold into a label line the
+  town already prints (the dump keeps each distinct line once a view: two ranged tensions of one type).
+- **Read where they print** (the tip's page against the record), ten towns across every tier, three sieges, a famine and
+  an occupation among them: r2r-thorp-5 "External threat" (record major/catastrophic); r2s-under_siege-hamlet-1
+  "Resource Scarcity", "Occupation Legacy"; r2r-village-7 "Crime Wave" (minor/major) and "Trade collapse · major"
+  (record ["major"]: the one word, as before); r2s-under_siege-town-2; r2r-town-14 "Guild Conflict"; r2s-famine-city-0;
+  r2r-city-22 ("Wild magic", "Guild Conflict", "External threat"); r2s-occupied-metropolis-1 ("Occupation Legacy",
+  "Plague years"); r2r-metropolis-9 (three); r2s-under_siege-metropolis-3. Every ranged row prints its label and its
+  description and no severity word; every one-severity row prints its word. True in each town by its record.
+- **The governing files** (85: every test file naming HistoryTab, HistoryFounding, the view model, SettlementPDF or the
+  search results, plus the two chrome-floor censuses) at the tip: 83 green; `proseNumerics` red at b2682f748 (row 382
+  moved to 386) and cured by d6b0526cb without moving the register; `dossierMountRegistry.walker` › "THE SHIPPED TABLE"
+  red with byte-identical failure text at fdfd471d9: not this lane's.
+- Births: no generator file is touched (three display files); the field diff is in the final statement.
