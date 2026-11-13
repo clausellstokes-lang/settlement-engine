@@ -380,3 +380,131 @@ RULED (the chair): the counterfactual watch takes the rung of the watch the cata
 - The other three change no line.
 
 **Gates on the touched files:** eslint 0, typecheck:domain:strict 0 (1,113 at its ceiling), typecheck:ratchet 0 (167 at its ceiling). The defence suites are green: upkeepHired, defenceParts, magicCountOnce, and the defence walker.
+
+## C1. A house counts by its rung (the chair's ruling B), with the counterfactual watch at its tier's rung
+
+Commit **94c5d408f**, then the tuning inventory refrozen by its own ritual at that clean tip in **4cb6a7f27** (verified by an ordinary run, 76 of 76).
+
+**What it does:**
+- `DEFENCE_TUNING.houseScale = { least: 0.8, greatest: 1.2 }`, with its reason row.
+- **The one reader** is a new file, `src/domain/institutions/houseScale.js :: houseRungsOf`. It reads the catalogue's `UPGRADE_CHAINS` restricted to the houses that do the job, comparing names by identity; it holds no table of names. `jobRungAtTier` reads a house no roster holds.
+- The generator's `SCALED_PARTS` gives each part its own opener, asked of one house alone. `add` and `paid` multiply the weights by `scaleOf(id)`.
+
+**The move:** `move-C1.txt`, against C0.
+- 2,677 move: 1,297 up, 1,380 down; mean +0.41; from −9 to +9.
+- 343 bands change.
+- Score-band changes: military 56, beasts 324, order 614, supply 59, magic 28.
+- 337 power structures are re-drawn, every one with a band move; 7 powers appear or vanish.
+- Magic against the page: +4 (cold-famine-town-77, cold-town-2, fresh5-infiltrated-town-0, fresh5-town-27).
+- AI threats change in 285 births.
+- **Golden corpus:** 273 of 525 rows move, 16 of them change band. This is measured only; no door is opened.
+
+**Pins:**
+- `defenseEconomicGate` "identical buildings" is re-keyed by identity: it uses a one-rung market house.
+- `upkeepHired` gains a case per tier.
+- **Pin census:** the generators, lint, pdf and display suites at C1 against 8ef42a051 (`reds-base-8ef42a051.txt`, `reds-C1.txt`, `pins-C1.txt`). The only new red was the inventory, cured by 4cb6a7f27.
+- The domain any-cast ratchet holds at 0 for the new file. Its "every declared overrun is attributed" row is red at base too: the commit it names is not in this shallow clone.
+
+**Registers, each through its own door:**
+- The tuning register gains the units for `houseScale`.
+- The wiring census stamp is re-taken by its own writer. Its CLI crashes standalone on import order at base too, so run it as `node --import ./src/generators/generateSettlementPipeline.js scripts/wiring-census.mjs`. The producer index goes 1,329 → 1,330; no row moves; `--check` passes.
+
+**Gates:** eslint 0; typecheck:domain:strict 0; typecheck:ratchet 0; validate:tuning-bands 0.
+
+## THE HIRED-ONLY RULE: the band-word count the chair asked for (`r2-bands.txt`, executed)
+
+**7 print a higher readiness band word than their counterfactual with a watch.** That is 7 of the 21 at the base (8ef42a051) and 7 of the 16 after C0: the same seven towns.
+
+| Town | Hired-only | With a watch instead |
+|---|---|---|
+| cold-hamlet-56 | 25, Lightly Defended | 23, Vulnerable |
+| cold-hamlet-91 | 24, Lightly Defended | 23, Vulnerable |
+| cold-hamlet-238 | 12, Vulnerable | 11, Undefended |
+| cold-village-65 | 14, Vulnerable | 11, Undefended |
+| cold-village-98 | 39, Defensible | 35, Lightly Defended |
+| cold-village-220 | 24, Lightly Defended | 21, Vulnerable |
+| fresh6-hamlet-22 | 24, Lightly Defended | 23, Vulnerable |
+
+**One of my example towns is hired-only:** cold-village-65 (a charter hall and a parish church). Side by side, it reads **14, Vulnerable**; the same village with a Village watch in the hall's stead reads **11, Undefended**. That is the charter's own work against beasts, which the chair ruled true of the world.
+
+# HAND-BACK (2026-11-13, context past the brief's 400k): for a successor on this branch
+
+**Tip:** 4cb6a7f27 on `lane/upkeep-capacity-2026-11-13`, read back from origin.
+
+**Done:**
+- the merge of the defence lane at 8ef42a051;
+- **C0** at 2c3bd62a4;
+- **C1** at 94c5d408f;
+- the inventory refreeze at 4cb6a7f27.
+
+**Not done:** C2 to C6, and the eight towns. In every step below, measure on the corpus with `corpus2.mjs` (`CAP_CANDS=base`, drops `0`, at the tree) and `compare.py` against the previous commit's run.
+
+## How to work here (helpers, all in probes/UPKEEP-CAPACITY/)
+
+- **One commit's move:** `CAP_CANDS=base node corpus2.mjs <tree> census.json <out>/c2-<i>.ndjson <i> <n> 0`, then `python3 compare.py <before-dir> <after-dir> <label>`. Readiness, the five scores and their bands, power structures, powers in and out, AI threats, and magic against the page. About 10 minutes on 3 shards.
+- **The golden corpus:** `node goldens.mjs <tree> <out>`, then `python3 goldcmp.py a b`.
+- **The pages:** `TREE=<tree> node pages.mjs <keys-file> <out-dir>` renders every tab, the PDF and the Foundry journal through the repo's harness.
+- **R2:** `node r2scan.mjs <tree> <out> 0 1`, then `python3 r2sum.py <dir> <prefix>`.
+- **The pin census:** `sh suites.sh <tree> <log>` runs the generators, lint, pdf and display suites (about 45 minutes, 2 workers). Compare the `^ FAIL ` lines against `reds-base-8ef42a051.txt`.
+- **Gates:**
+  - `sh scripts/gate-tail.sh npx eslint <files>`;
+  - `sh scripts/gate-tail.sh npm run typecheck:domain:strict`;
+  - `sh scripts/gate-tail.sh npm run typecheck:ratchet`;
+  - tests through `GATE_MUTEX_TIER=shared sh scripts/gate-mutex.sh --run -- npx vitest run --maxWorkers=2 …`.
+- **The tuning inventory:** refrozen only at a clean committed tip, by `TUNING_INVENTORY_REFREEZE=… TUNING_INVENTORY_NOTE=…` on `tests/lint/tuningRegister.walker.test.js`. That run exits 1 by design; verify with a second, ordinary run.
+- **Scratch worktrees** I registered (remove with `git worktree remove`): `wt`, `wt2`, `wt3`, `wt-c72917251`, `wt-0a07f98c7` and `wt-2133873fe` under the session scratchpad. `wt3` is the base 8ef42a051.
+- **Before touching `src/domain/institutions/defenseInstitutionBuckets.js`** (C2 and C6): fetch the defence lane and merge its tip again (the seventh seat edits it). Never edit `standingDefenseForces`.
+
+## C2 to C6: what is measured, what is not, and what is settled
+
+All five were measured APART on the corrected tree, with no factor (section 5, `measure4.txt`). **None has been measured on top of C1.** The factor interacts, so each needs its own move measured at its commit.
+
+**C2, G1 (the professional city watch is the watch, on every home).**
+- **Settled:** take 'professional city watch' out of `priorityHelpers.js :: getInstitutionNames.hasGarrison` (the `PROFESSIONAL_CITY_WATCH` constant) and out of `DEFENSE_BUCKET_KEYWORDS.garrison` in the buckets file. The facts home (`defenseFactsOf.hasGarrison`, `hasCommander`, `forceName`) follows the bucket.
+- **Expected on births:** no rating move with C1. A city's garrison factor is the Garrison's 1.0 either way, and a metropolis's the Multiple garrisons' 1.2.
+- **But the stored `defenseProfile.institutions.garrison` loses the city watch in every city and metropolis** (1,304 births). That bucket is persisted, so the golden corpus moves and the Defense tab's force cards change. List every page line that changes with `pages.mjs` on a sample of cities, at C1 against C2.
+- **Measured apart:** an edited city holding the watch alone, −9.43 on average.
+
+**C3, G2 (the household levy opens the militia, at its ladder's least rung).**
+- **Settled:** add 'household levy' to `hasMilitia` in `getInstitutionNames`.
+- **Note:** with C1 the militia ladder becomes two rungs (Household levy → Citizen militia, the family pair). So the levy reads 0.8 and **the hamlets' and villages' Citizen militia rises to 1.2**. Declare it.
+- **Measured apart without a factor:** 143 levy thorps up, +7.67, 98 bands. 108 of the 143 also hold a palisade, which today counts as unmanned.
+- **The chair's read:** twenty levy thorps after; the force card, the Invasion row and the posture line must agree with the new bands. Not done.
+
+**C4, G3 (the walk to another's church opens no clergy part; the parish row stays) and the one count test.**
+- **Settled:** the divine names are read over the roster without fabric rows, via `institutionalCatalog.js :: isFabricInstitution`, which reads its registry by exact name. Use it in the generator, and in `scaledPartsOfHouse` too, so the clergy ladder agrees. `hasChurch` (the parish row) is untouched.
+- **Measured apart:** 346 down, beasts Weak → Critical 202.
+- **The chair's read:** twenty of those places' Beasts lines on the tab and the PDF; the sentence must be true of a place with no cleric. Not done.
+- **THE COUNT TEST, one with `tests/generators/magicCountOnce.test.js`.**
+  - **The static arm:** for each house of each birth, take the parts the house opens alone in that place's config, minus the parts an empty roster opens. Keep those standing in the birth that share a score, by the part line's `feeds`.
+  - It must read exactly the named two-job houses that share a score: the **village's Parish church** (its clergy's powers; the building as the community's rallying point) and the **Monastery or friary** (its clergy's powers; its infirmary). The magic houses stay named with their two jobs (`TWO_ROLES`).
+  - **At base the static arm finds** the professional city watch (1,304), Access to parish church (463), Parish church (280) and Monastery (110). So it is red before G1 and G3, and reads the named two after.
+  - **Corpus:** the seventh seat's once8 births have no thorp or hamlet. Add some (the walk to church is a thorp and hamlet row).
+  - **The drop arm's "no score through two parts" must exempt the named houses.** The traditions' shared cap against beasts (R2) moves the arcane, clergy and druid parts when one tradition drops. That is a side effect, not a double feed, and the test must class it so.
+
+**C5, G4 (`successor: 'Elder Grove Council'` on the Druid Circle family, that ONE key).**
+- **Measured apart:** the rows never stand together (0 births). Under B's steps on that ladder alone (circle 0.8, council 1.2): 46 move by ±1, 2 bands, 2 power structures.
+- **To prove: the field diff for the key alone is empty.** Re-birth the corpus at C5 with `druids` taken out of `SCALED_PARTS` in a scratch copy, and compare the whole-record hashes with C4. Then declare the factor's own move.
+
+**C6, G5 (the alchemist is a trade, on every home).**
+- **Settled reading:** the arcane opener is `t.hasArcane = … (inst.hasMagicInst || names.arcane)`, and `hasMagicInst` matches 'alchemist'. **Do not change `hasMagicInst` itself**: other generators read it. Give the arcane gate the magic-house flag over the roster without the shop and the quarter, as `alch-measure.patch` measured, or a narrower named flag. The arcane reliefs follow `t.hasArcane`.
+- **The page:** drop 'alchemist' from `DEFENSE_BUCKET_KEYWORDS.magicDef`. That bucket is persisted, so the goldens move. Check what `defenseDisplay.js :: deriveSupportingCapabilities` reads for "Arcane Support … Detection, wards, counterspell": it is `magicReliance.js :: magicPractitioners`, the Magic tab's own census. Decide with the chair whether that census changes, because it also feeds the Magic tab.
+- **Keep:** the alchemists part and its reliefs, and the magic presence.
+- **Measured apart (E):** 79 down, 40 bands; magic falls in 39 through limit 1. **Owed:** the births where Magical Capability then reads against the Magic tab, listed with both lines.
+
+**The cumulative move after C6 against 8ef42a051, and THE EIGHT TOWNS for the owner** (ratings only, after the whole). The six are cold-town-116, cold-city-227, cold-thorp-0, cold-village-65 (hired-only: show both labels as above), fresh6-metropolis-30 and cold-under_siege-town-52. The other two:
+- **a thorp with a levy and a palisade:** cold-thorp-191 (22, Vulnerable → 35, Lightly Defended under G2 apart) or fresh6-thorp-52;
+- **a hamlet that walks to church:** cold-hamlet-123 (24, Lightly Defended → 15, Vulnerable under G3 apart).
+
+## Executed against plausible
+
+**EXECUTED (each with its probe and output in this directory):**
+- C0's and C1's moves, goldens, gates and pin census;
+- the R2 history at four trees, the willpay check at 0 of 1,440, and the band-word count;
+- the eight hired-only towns' Defense tab before and after C0;
+- the candidates G1 to G5 apart, and E/BE, on the corrected tree.
+
+**PLAUSIBLE, not executed:**
+- every expectation above for C2 to C6 on top of C1;
+- the page-line lists the two read-only search seats gave in sections 4 and 5 (three entries of each spot-checked by grep);
+- the C5 normalizer effect of the successor key (0 births hold both rows, so none is expected).
