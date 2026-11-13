@@ -110,12 +110,20 @@ describe('settlementHookFacts — a fact the record does not carry licenses noth
       .toContain('armed_force_without_one');
   });
 
-  test("a building's walls are not the settlement's walls", () => {
+  // R3-CODE-C-2, ROUND-3-CUT-INCREMENT #ww-4 (HIGH, rww-thorp-calm-1, Summary/Plot Hooks): re-keyed by
+  // identity (the walls arm on the sealed-walls hook) with its cause, the chair's ruling of
+  // 2026-11-13 (record 386: a hook that names walls reads the roster). It pinned the opposite
+  // ("a building's walls are not the settlement's walls"); the reader read the hook in a thorp
+  // whose page says "Unfortified. No perimeter walls." and found it false.
+  test("'inside the walls' is the place's walls; 'inside the walls of' a building is that building's", () => {
     const facts = settlementHookFacts({ tier: 'thorp', defenseProfile: { institutions: { walls: [] } } });
-    const findings = hookTruthViolations('Something was sealed inside the walls during construction, deliberately', facts);
-    // anchored: the same reader DOES refuse the fortification sentence on the next line, so
-    // this empty answer is a narrow matcher rather than a dead one.
-    expect(findings).toEqual([]);
+    expect(hookTruthViolations('Something was sealed inside the walls during construction, deliberately', facts).map((f) => f.code))
+      .toEqual(['walls_without_walls']);
+    // anchored: the same reader passes a building's walls, and the walled place's hook
+    expect(hookTruthViolations('Something was sealed inside the walls of the old chapel, deliberately', facts)).toEqual([]);
+    const walled = settlementHookFacts({ tier: 'thorp', institutions: [{ name: 'Palisade', category: 'Defense' }], defenseProfile: { institutions: { walls: ['Palisade'] } } });
+    expect(walled.hasWalls).toBe(true);
+    expect(hookTruthViolations('Something was sealed inside the walls during construction, deliberately', walled)).toEqual([]);
     expect(hookTruthViolations('The town walls have a gap nobody will admit to leaving.', facts).map((f) => f.code))
       .toContain('walls_without_walls');
   });

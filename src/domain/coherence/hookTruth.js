@@ -206,9 +206,14 @@ export function settlementHookFacts(settlement) {
  *   - FAMINE: the measured sentence's own two words.
  *   - ARMED_FORCE: a standing force. "guard captain" is NOT here — a watch captain is a
  *     person, not a garrison, and the criminal-network hooks that name one are true.
- *   - WALLS: settlement fortification only. Bare "walls" is deliberately excluded: the
- *     measured corpus prints "Something was sealed inside the walls during construction"
- *     for a thorp, and those are a BUILDING's walls. Gating on it would delete a true hook.
+ *   - WALLS: settlement fortification. A bare "walls" is still not read, but "inside (or
+ *     within) the walls" with no "of …" after it is the place's walls, and so is a claim of
+ *     walls: the chair's ruling of 2026-11-13 (record 386: "a hook that names walls reads the
+ *     roster") on ROUND-3-CUT-INCREMENT #ww-4, where the reader found "Something was sealed
+ *     inside the walls during construction, deliberately" (historyGenerator.js, The Great
+ *     Construction) printed in a thorp whose page says "Unfortified. No perimeter walls."
+ *     This module's earlier reading (a building's walls) is retired by that ruling. "inside
+ *     the walls of the temple" names its building and is not read.
  *   - HOSPITAL / MAGIC / VILLAGERS as named in the rulings.
  * @type {Readonly<Record<string, RegExp>>}
  */
@@ -217,7 +222,7 @@ const WORDS = Object.freeze({
   armedForce: /\bmen[- ]at[- ]arms\b/i,
   garrison: /\bgarrisons?\b|\bbarracks\b/i,
   soldiers: /\bsoldiers?\b/i,
-  walls: /\b(?:town|city|settlement|curtain) walls?\b|\bthe walls of the (?:town|city|settlement)\b|\bramparts?\b|\bbattlements?\b|\bgatehouse\b|\bpalisade\b/i,
+  walls: /\b(?:inside|within) the walls\b(?! of\b)|\b(?:town|city|settlement|curtain) walls?\b|\bthe walls of the (?:town|city|settlement)\b|\bramparts?\b|\bbattlements?\b|\bgatehouse\b|\bpalisade\b/i,
   watch: /\bthe (?:city |town )?watch\b|\bwatchmen\b|\bwatchman\b/i,
   hospital: /\bhospitals?\b/i,
   magic: /\bmagic(?:al|s)?\b|\bmages?\b|\bwizards?\b|\bspell(?:s|caster|casters)?\b|\barcane\b|\bsorcer\w*\b|\benchant\w*\b|\bconjur\w*\b|\bthaumat\w*\b/i,

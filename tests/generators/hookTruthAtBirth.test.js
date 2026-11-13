@@ -18,6 +18,8 @@ import { hookTruthFindings, storeTrueHooksOnly, withoutFalseHooks } from '../../
 import { recordInvariants } from '../../src/domain/edit/recordInvariants.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
+import { birthConfig } from '../../src/domain/density/densityCreateBoundary.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 
 const STARVING = 'The settlement is starving. Villagers are turning to banditry, and a merchant has offered to supply food at a price the settlement cannot pay in coin.';
 const SOLDIERS = "Someone is paying their soldiers more than their salary. The soldiers aren't saying who.";
@@ -37,6 +39,21 @@ function storedTexts(s) {
 
 describe('the record stores only hooks true of it', () => {
   beforeAll(async () => { await ensureLaws(); });
+
+  // R3-CODE-C-2, ROUND-3-CUT-INCREMENT #ww-4 (HIGH): the reader's own town, born in the app's shape
+  // (the stress panel off, nothing ticked). Its Great Construction stored "Something was sealed inside
+  // the walls during construction, deliberately" in a thorp with no walls; the walls arm now reads
+  // "inside the walls" (hookTruth.js :: WORDS.walls), so the hook is not stored and the event keeps
+  // its other one. THE GUARD TOWN for the cure.
+  it('rww-thorp-calm-1: the sealed-walls hook is not stored where no walls stand, and its event keeps a hook', () => {
+    const seed = 'rww-thorp-calm-1';
+    const config = birthConfig({ ...DEFAULT_CONFIG, settType: 'thorp', selectedStressesRandom: false, selectedStresses: [], _randomizePriorities: true });
+    const settlement = generateSettlementPipeline(config, null, { seed, customContent: {} });
+    const event = (settlement.history?.historicalEvents || []).find((e) => e?.name === 'The Great Construction');
+    expect(event?.plotHooks?.length).toBeGreaterThan(0);
+    expect(storedTexts(settlement).filter((t) => /inside the walls during construction/.test(t))).toEqual([]);
+    expect(hookTruthFindings(settlement)).toEqual([]);
+  });
 
   it('soak1k-28: the starving hook on a fed place is not stored, and the place keeps hooks', () => {
     const { settlement } = birth(28);
