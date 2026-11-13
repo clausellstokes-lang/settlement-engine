@@ -261,6 +261,23 @@ describe('the martial will (R13, R14)', () => {
     expect(moved, 'the factor reaches the will').toBeGreaterThan(0);
   });
 
+  // COHERENCE-UPKEEP-6, the chair's ruling 5 on REVIEW-UPKEEP-2 (C7, confirmed by execution first: with no hold
+  // and no crisis, pay alone cut the will at Moderate, Poor and Struggling): THE MARTIAL WILL IS NOT A PAID PART.
+  // It is base configuration, held to the armed bodies that carry it; pay reaches it only through that limit.
+  test('RED-FIRST: the martial will is not paid — where its hold does not bind and no crisis touches it, pay leaves it whole', () => {
+    let compared = 0;
+    for (const [key, s] of Object.entries(births)) {
+      const keep = keepOfRecord(s.economicState);
+      if (keep.funded >= 1) continue;
+      const atPay = defencePartsOf(s, keep).find((p) => p.id === 'will');
+      const atFull = defencePartsOf(s, { bought: 1, funded: 1 }).find((p) => p.id === 'will');
+      if (!atPay || atPay.held !== undefined || atFull.held !== undefined || atPay.crisis || atFull.crisis) continue;
+      compared += 1;
+      expect(atPay.points, `${key}: the will at its standing pay`).toBe(atFull.points);
+    }
+    expect(compared, 'anchored: the corpus holds paid-short places with a will').toBeGreaterThan(0);
+  });
+
   test('R13: where something is built or standing, the will counts no more than the armed bodies that carry it', () => {
     const ARMED = new Set(['garrison', 'militia', 'watch', 'company', 'charter', 'households', 'wardens']);
     let held = 0;

@@ -281,11 +281,13 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
   if (inst.hasCourtSystem) paid('STANDS', 'court', W.court);
   if (inst.hasPrison) paid('STANDS', 'prison', W.prison);
   if (t.hasWardens) paid('STANDS', 'wardens', W.wardens);
-  // The martial will: the base configuration's slider (R9) × the neighbour factor (R14).
+  // The martial will: the base configuration's slider (R9) × the neighbour factor (R14). NOT A PAID PART
+  // (COHERENCE-UPKEEP-6, the chair's ruling 5): base configuration, held to the armed bodies that carry it
+  // (R13, below); pay reaches it only through that hold.
   const D = W.dial;
   const dial = pri.military * neighbourMilitaryFactorOf(config);
   if (bos) {
-    paid('STANDS', 'will', { mil: Math.round(dial * D.mil), int: Math.round(dial * (law ? D.int : D.intNoLaw)) });
+    add('STANDS', 'will', { mil: Math.round(dial * D.mil), int: Math.round(dial * (law ? D.int : D.intNoLaw)) });
   } else {
     const rate = hired ? D.none + D.hiredExtra * keep.bought : D.none;
     add('STANDS', 'will', { mil: Math.round(dial * rate), int: Math.round(dial * (law ? D.int : D.intNoLaw)) });
