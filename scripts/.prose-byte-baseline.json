@@ -67,8 +67,8 @@
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 296086,
-      "gzip": 37845,
+      "raw": 296510,
+      "gzip": 37906,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -851,6 +851,14 @@
       "toRaw": 266434,
       "gzipAfter": 35843,
       "reason": "+313 B raw over the committed 266121 (gzip level 9: 35801 -> 35843): DS-DEF-2 Economic Survival STRONG speaks of the purse, never the crisis's outcome (the chair's ruling): v2 off any crisis; v3, v6, v9 said as what the purse holds; one slot-free purse line (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE-4 round 3 #514",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 296086,
+      "toRaw": 296510,
+      "gzipAfter": 37906,
+      "reason": "+424 B raw over the committed 296086 (gzip level 9: 37845 -> 37906): DS-GEN-13 MARKET-OPEN v1, v2 declared off the onset of a plague; one plague line (2026-11-13)"
     }
   ],
   "ceilingTransfersNewLeaves": [

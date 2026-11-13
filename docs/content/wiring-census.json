@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2963,
+    "variants": 2964,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -29857,8 +29857,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 5,
-      "grammars": 2,
+      "variants": 6,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -29915,7 +29915,9 @@
       ],
       "lineDeclares": {
         "crisis: any": 4,
+        "crisis: plague_onset": 1,
         "crisis: under_siege": 1,
+        "no crisis: plague_onset": 2,
         "no crisis: under_siege": 2,
         "tier: ≤ town": 1
       },
@@ -70412,7 +70414,7 @@
       "subject": "MARKET-OPEN",
       "fields": [],
       "readingFunction": "marketPoolKey",
-      "count": "5 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "6 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

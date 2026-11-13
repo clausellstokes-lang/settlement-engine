@@ -6900,11 +6900,12 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 **PROVENANCE:** The accretion mechanism (stalls crowd where the traffic is) is engine-native at the habit level, and this block speaks it as ORIENTATION and CUSTOM only, never as map geometry: which gate, which square and which frontage are the map engine's facts, not the dossier's, and none of them exists here. `DS-ECO-4` owns prices and `DS-ECO-12` owns the trade-profile rows; this block owns why the town's exchange has the shape it has at all. The one-value extension of `DS-ECO-1`'s narrow convention is recorded above rather than made silently.
 
 **`MARKET-OPEN`** {crisis-scoped · market}
-1. `[street · no crisis: under_siege · crisis: any · tier: ≤ town]` Market day is when {settlement} fills: the roads bring buyers, and the stalls are there for them.
-2. `[ledger · crisis: any · no crisis: under_siege]` {settlement}'s market lives off through-traffic; the town sells to the road as much as to itself.
+1. `[street · no crisis: under_siege · no crisis: plague_onset · crisis: any · tier: ≤ town]` Market day is when {settlement} fills: the roads bring buyers, and the stalls are there for them.
+2. `[ledger · crisis: any · no crisis: under_siege · no crisis: plague_onset]` {settlement}'s market lives off through-traffic; the town sells to the road as much as to itself.
 3. `[visitor · crisis: any]` Visitors find {settlement}'s market without asking; the busiest street through town leads straight to it.
 4. `[elder · crisis: any]` The market stands where carts always stopped; stalls followed the carts, and {settlement} grew around them.
 5. `[ledger · crisis: under_siege]` {settlement}'s market grew up on the road's trade, and with the siege closing the road it has almost nobody left to sell to.
+6. `[street · crisis: plague_onset]` The sickness has thinned {settlement}'s market: the stalls still open, and fewer people come to them.
 
 **`MARKET-NARROW`** {colour · market}
 1. `[ledger]` {settlement}'s market serves the town itself; little passes through that was not always coming here.
