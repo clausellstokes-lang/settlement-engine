@@ -185,7 +185,7 @@ check-domain-strict exit 0 (1113, ceiling 1113) · typecheck:ratchet exit 0 (167
 **Kept current after every item; a stop at any moment loses nothing.** Every count is executed unless marked PLAUSIBLE.
 
 ## 0. Status
-- [ ] 1 precision read · [x] 2 the ten cases · [ ] 3 F2 F4 F5 F6 F7 F8 F9 F11 F12 F13 · [ ] 4 more recall · [ ] 5 lane whole
+- [x] 1 precision read · [x] 2 the ten cases · [ ] 3 F2 F4 F5 F6 F7 F8 F9 F11 F12 F13 · [ ] 4 more recall · [ ] 5 lane whole
 
 ## 2. Item 2: the second seat's owed proof of the ten cases (DS-GEN-9, `aa41b1f25`)
 
@@ -200,7 +200,7 @@ check-domain-strict exit 0 (1113, ceiling 1113) · typecheck:ratchet exit 0 (167
 
 **The reading, for the chair's ruling.** The generator's `anchored: false` means the anchor pass did not place the event. It does not mean the event left no mark. The "not anchored" variants of the event-type pools read it the second way. The cure is display-only and prints nothing today. If the mount is ever promoted from glance, about half of these lines would print false. **Recommendation:** keep the cure (it makes the dimension answer), and hand the event-type pools' "not anchored" variants to W2-WRITE (§9: wording owed). The variants must not claim the event left no mark, because many of these events are ongoing; or the pools could partition on the event's tense. Not this seat's to write: it is the prose corpus.
 
-## 1. Item 1: the precision read (IN PROGRESS; the first sample is recorded here so a stop loses nothing)
+## 1. Item 1: the precision read (DONE, `28222eea7`)
 
 **The measure at `3ff343284` over the census's 720** (`probes/W2-B-DECLARE/precisionFindings.mjs`; the dumps rendered at `83c84a8ed`, whose page differs from `3ff343284` in no instrument file): **18,477 findings in 720 towns.** One finding is one (view, sentence, word). By family: house 6,389 · state 3,817 · thing 2,457 · resource 2,163 · handthing 1,204 · role 1,093 · size 800 · value 227 · count 212 · normal 115.
 
@@ -219,4 +219,34 @@ check-domain-strict exit 0 (1113, ceiling 1113) · typecheck:ratchet exit 0 (167
 | house | 0/6 | NPC titles where the trade stands ("the master fishmonger" beside a Fish market; "the stable master" beside a Stable district); catalogue descriptions naming other houses ("between mine and smithy", "Swordsmiths, armourers, jewellers"); an arcane power's description ("Wizard towers and mage guilds hold … weight"); a list of houses |
 | resource | 0/6 | "X (depleted)" ×4 (the line SAYS it is gone); "Requires clay deposits" (a requirement); a listed node whose source is not `config.nearbyResources` (doubtful) |
 | **all** | **31/60 (52%); 30/59 without pattern 20** | weighted by the families' sizes: about 23% |
+
+
+**Samples two and three** (`p2`: 64 findings after the first narrowing; `p3`: the three narrowed families):
+
+| family | p1 | p2 | p3 | ruling |
+|---|---|---|---|---|
+| count | 6/6 | 8/8 | — | kept |
+| size | 6/6 | 8/8 | — | kept |
+| value | 6/6 | 8/8 | — | kept |
+| handthing | 4/6 | 6/8 | 6/6 | narrowed by words: elsewhere ("the nearest house of worship", "miles to"), a suggestion to add |
+| normal | 2/6 | 4/8 | 6/6 | narrowed by words: "passes through" only for trade's subjects or the town; a famine to come only in a sentence of food |
+| role | 4/6 | 7/8 | 4/6 | narrowed by words (a visiting priest, "raise … troops", "Needs:", an example list) and by LEAF (a person among the town's people who holds the role). The one false line left in p3 is a fair's name ("The Common Forge Fair"): **PLAUSIBLE below one in ten, not proven.** |
+| thing | 2/6 | 2/8 | — | **WITHDRAWN** from the page list (arm 2 of the walker still reads it) |
+| state | 1/6 | 3/8 | — | **WITHDRAWN** (the past tense, headings, purposes; no word family reads tense surely) |
+| house | 0/6 | — | — | **WITHDRAWN** |
+| resource | 0/6 | — | — | **WITHDRAWN** |
+
+**RECALL AND PRECISION TOGETHER** (the fixture: the cold list's 361 lines in 30 towns; `recallByFamily.mjs`):
+
+| tree | recall | HIGH | findings on the fixture (naming a cold line) | findings on the 720 | precision, read |
+|---|---|---|---|---|---|
+| `83c84a8ed` (the second seat) | 109/361 | 45/67 | 796 (118, 15%) | — | — (none read) |
+| `3ff343284` (F2, F4) | 112/361 | 45/67 | 799 (121, 15%) | 18,477 | 31/60, about 23% by weight |
+| **`28222eea7` (item 1)** | **73/361** | **41/67** | **121 (77, 64%)** | **2,496 in 606 towns** | the kept families: 52/56 across p2 and p3 |
+
+Recall by class at `28222eea7`: a house, role or force lacked 21/79 · normal times under a crisis 19/60 · a size 17/39 · a count 7/14 · two homes 4/22 · a figure 3/45 · internal text 2/19 · a resource or chain state 0/42 · the "other" classes 0/41. **By family, the cold lines caught (caught only by it):** role 20 (17) · size 22 (19) · normal 19 (19) · count 7 (7) · handthing 5 (5) · value 3 (3). The withdrawals cost 39 cold lines: house 21, state 7, thing 7, resource 4. **Pattern 20 (F8):** it left with the crisis states, so every total is the same with and without it (at `3ff343284`: 112/361 with, 107/351 without).
+
+**F2 on the 720:** `rulingFaces` flags 173 headings (one per town). That is the reviewer's measured count of truly false headings (318 flagged, 146 of them true, 1 missed). At `83c84a8ed`, `powersCount` flagged the heading in the reviewer's 318 towns.
+
+**A correction to part two §3.** `VOCABULARY_SIZE.houses` reads **152** at `83c84a8ed` (measured), not 157. The vocabulary now holds: written 34 (`rulingFaces`, `shrine` added) · houses 152 · resources 33 · roles 9 · states 3.
 
