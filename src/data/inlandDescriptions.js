@@ -8,7 +8,7 @@
  * market's sells the salted and smoked fish the catalogue's inland Fishmonger describes.
  */
 const AUCTION =
-  'A formal house for the sale of costly goods: estates, livestock, art, and now and then persons. It takes a premium from buyer and seller both.';
+  'A formal house for the sale of costly goods: estates, livestock, art, and now and then a whole household\'s goods. It takes a premium from buyer and seller both.'; // W2-FIX-DATA-3 item 5: the canonical variant's cure (915bf42db), the ships still out
 
 /** @type {Readonly<Record<string, string>>} */
 export const INLAND_DESCRIPTIONS = Object.freeze({
