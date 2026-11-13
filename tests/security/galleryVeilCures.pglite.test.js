@@ -1133,4 +1133,32 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
       expect((await rolled.db.query(def)).rows[0].d, f).toBe((await AT210.db.query(def)).rows[0].d);
     }
   }, ROW_TIMEOUT_MS);
+
+  // V5-7 (COHERENCE-VEIL-6; the fifth review §7.5): the owner applies 211 AS IT STOOD AT 333b33973 (sha256 eface6d0...)
+  // alone, before this file lands. A helper that file created and this file no longer creates under the same signature
+  // would be LEFT BEHIND on production (uncallable, never dropped). So every one of its forty is either still created
+  // here or dropped here by signature, and the down file drops each, and every helper this file creates. Rehearsed on
+  // native chains: docs/chair/2026-11-13/veil-probe-6/native/rehearse.sh (203 + that 211 + this 211 = 203 + this 211).
+  it('V5-7: every helper the early-deployed 211 created is created again here or dropped here by signature; the down file drops all of them', async () => {
+    const EARLY = ['_gallery_veil(jsonb,jsonb,boolean,boolean)', '_gallery_veil_apply(jsonb,jsonb)', '_gallery_veil_card(text,jsonb,jsonb,jsonb,jsonb,jsonb)',
+      '_gallery_veil_card_id(text,jsonb)', '_gallery_veil_cards(jsonb,text)', '_gallery_veil_clandestine(jsonb)', '_gallery_veil_copy_bound()',
+      '_gallery_veil_criminal(jsonb)', '_gallery_veil_drop_hooks(jsonb)', '_gallery_veil_facet(jsonb,text)', '_gallery_veil_grouping(jsonb,text)',
+      '_gallery_veil_groupings()', '_gallery_veil_hideable(text)', '_gallery_veil_hideable_p(jsonb,text)', '_gallery_veil_house(jsonb)',
+      '_gallery_veil_illegal_brokerage(jsonb)', '_gallery_veil_inst_id(jsonb)', '_gallery_veil_join(jsonb,text)', '_gallery_veil_jslen(text)',
+      '_gallery_veil_jsstr(jsonb)', '_gallery_veil_kind_order()', '_gallery_veil_kinds()', '_gallery_veil_lower(text)', '_gallery_veil_map(jsonb,text,text,jsonb)',
+      '_gallery_veil_map_list(jsonb,text,text,jsonb)', '_gallery_veil_npc_house(jsonb)', '_gallery_veil_npc_id(jsonb)', '_gallery_veil_npc_pass(jsonb,jsonb)',
+      '_gallery_veil_num_inf(numeric)', '_gallery_veil_num_zero(numeric)', '_gallery_veil_numstr(text)', '_gallery_veil_or(jsonb,jsonb,jsonb)',
+      '_gallery_veil_own_id(jsonb,text,jsonb)', '_gallery_veil_parse(text)', '_gallery_veil_resolve(jsonb,jsonb,boolean,text[])',
+      '_gallery_veil_served(jsonb,jsonb,jsonb,boolean)', '_gallery_veil_slug(text)', '_gallery_veil_snake(text)', '_gallery_veil_str(jsonb)', '_gallery_veil_truthy(jsonb)'];
+    expect(EARLY.length).toBe(40);
+    const live = (await LIVE.db.query(`select p.oid::regprocedure::text as sig from pg_proc p join pg_namespace ns on ns.oid = p.pronamespace
+      where ns.nspname = 'public' and p.proname like '\\_gallery\\_veil%'`)).rows.map((x) => x.sig.replace(/\s+/g, ''));
+    const squash = (t) => t.replace(/\s+/g, '').toLowerCase();
+    const up = squash(readFileSync(join(MIGRATIONS, '211_server_side_share_veil.sql'), 'utf-8'));
+    const down = squash(readFileSync(join(ROLLBACK, '211_server_side_share_veil.down.sql'), 'utf-8'));
+    const leftBehind = EARLY.filter((sig) => !live.includes(sig) && !up.includes(`dropfunctionifexistspublic.${sig}`.toLowerCase()));
+    expect(leftBehind).toEqual([]);
+    const undropped = [...new Set([...EARLY, ...live])].filter((sig) => !down.includes(`dropfunctionifexistspublic.${sig}`.toLowerCase()));
+    expect(undropped).toEqual([]);
+  }, ROW_TIMEOUT_MS);
 });

@@ -15,7 +15,7 @@ hosted database, no production credential, no `supabase db push`, no `migration 
 |---|---|---|
 | 1. The ten second homes (V5-1) | BUILT, pushed; the attack and sentence search at item 1 running | the commit carrying this line |
 | 2. The public prose from the stripped record (V5-2) | DONE, pushed | the commit carrying this line |
-| 3. 211's helpers, an early-applied copy (V5-7) | not started | — |
+| 3. 211's helpers, an early-applied copy (V5-7) | DONE, pushed | the commit carrying this line |
 
 ## 1. Item 1 — the ten second homes
 
@@ -128,6 +128,33 @@ domain/publicProse, publicCrisisHookLabel, people6InstitutionFaceLinks): **11 fi
 
 **Stored towns.** The deployed client (master) writes no `publicProse`, so no stored town carries an owner-composed
 stamp; a town the new client saves is stamped by this composer. Nothing stored needs re-stamping.
+
+## 3. Item 3 — an early-applied copy of today's 211 (V5-7)
+
+**Measured first: no helper of today's 211 changed its signature.** Item 1 added six helpers and changed the bodies
+of `_gallery_veil_card` and `_gallery_veil_apply`; every one of the forty early-deployed signatures is created again,
+so nothing is left behind, and this file needs no drop. The chair's message of 17:20 UTC says the owner will apply
+today's 211 (sha256 `eface6d0…`, the file at 333b33973) alone: this path is now certain.
+
+**Rehearsed on local chains only** (`veil-probe-6/native/rehearse.sh`, the review's `chain.sh` and `catalog.sql`;
+203 built from master's own migrations, which equal the lane's 001..203 byte for byte; each file in one transaction,
+as the owner's `begin; … commit;`) (`out/rehearse-item3.txt`):
+
+| | lines that differ |
+|---|---|
+| (a) 203 + today's 211 + this 211, against 203 + this 211 alone | **0** (control, today's 211 against this one: 10) |
+| (b) 203 + this 211, then this 211 again over itself | **0**; 001..211 then this 211 again: **0** |
+| (c) from 203 + today's 211 + this 211: this down file, then 203's `get_unlisted_dossier` (the review's §7.6), against 203 | **0** |
+| (c) the same from 203 + this 211 alone | **0** |
+| (d) 001..211, then this down file, against a chain at 210 | **0**; the down file again: 0; this 211 again, against 001..211: 0 (control 210 against 211: 56) |
+| (e) the release after the early deploy: 203 + today's 211 + 204..210 + this 211, against 001..211 in order | **0** |
+| (f) after the early deploy and this 211: helpers / callable by `anon` or `authenticated` | **46 / 0** (the owner's check of §7.4 now expects `46 | 0`, not `40 | 0`) |
+
+**A pin so a later seat cannot leave one behind** (`galleryVeilCures.pglite.test.js`, "V5-7: …"): the forty
+signatures today's 211 creates are frozen in the test; each must be created again by the chain's 211 or dropped by it
+by signature, and the down file must drop all forty and every helper the chain creates. Red first on a planted fault
+(the early helper `_gallery_veil_jslen(text)` given a second parameter, its down line moved to the new signature, no
+drop): **1 failed**, naming `_gallery_veil_jslen(text)` (`v57-pin-red-planted.txt`); on this tree **1 passed**.
 
 ## 9. This brief's rulings, copied in (the chair, session_01FE9mEws7PXYRYdjQPbSX15, 2026-11-13)
 
