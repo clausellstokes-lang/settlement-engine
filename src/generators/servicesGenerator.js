@@ -11,8 +11,12 @@ import {
 import {
   resolveGenerationWorldLaw,
 } from './generationContext.js';
+import { hasInstitution } from '../domain/facts/institutions.js';
 // Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
 const ASK_AROUND_AT_THE_RIGHT_TAVERN_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS = 'Ask around at the right tavern. Someone moves goods without questions.';
+// R3-CODE-C-3 (CENSUS-2 kind a, e.g. r2r-village-19): "the right tavern" names a house, so it reads the roster (record 386);
+// where no inn, tavern or ale house stands (facts/institutions.js, kind `tavern`) its twin, same branches, no draw.
+const ASK_AROUND_QUIETLY_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS = 'Ask around quietly. Someone moves goods without questions.';
 const FENCE_WORD_OF_MOUTH = 'Fence (word of mouth)';
 const INFORMAL_NO_CONTRACT_VIOLENCE_AVAILABLE_FOR_COIN_TO_THOSE_WHO_KNOW_WHERE_TO_ASK = 'Informal, no contract. Violence available for coin to those who know where to ask.';
 // COHERENCE-PRESUME (the chair's ruling A, 2026-11-11): the row DENIED the law ("No law", "There is no
@@ -86,6 +90,8 @@ export const generateAvailableServices = (
     config,
     worldLaw,
   });
+  const fenceAskLine = hasInstitution({ institutions }, 'tavern') // R3-CODE-C-3: the tavern only where one stands
+    ? ASK_AROUND_AT_THE_RIGHT_TAVERN_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS : ASK_AROUND_QUIETLY_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS;
   const hasCriminalInst = institutions.some((inst) => {
       if (isMaterializedCustomContent(inst)) return false;
       const name = nativeSemanticName(inst).toLowerCase();
@@ -126,7 +132,7 @@ export const generateAvailableServices = (
       buckets.criminal.push(
         {
           name: FENCE_WORD_OF_MOUTH,
-          desc: ASK_AROUND_AT_THE_RIGHT_TAVERN_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS,
+          desc: fenceAskLine,
           institution: '(covert)',
         },
         {
@@ -160,7 +166,7 @@ export const generateAvailableServices = (
         buckets.criminal.push(
           {
             name: FENCE_WORD_OF_MOUTH,
-            desc: ASK_AROUND_AT_THE_RIGHT_TAVERN_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS,
+            desc: fenceAskLine,
             institution: '(covert)',
           },
           {
@@ -361,7 +367,7 @@ export const generateAvailableServices = (
   if (crimeTypes.has('Background crime')) {
     addCrimeService(
       FENCE_WORD_OF_MOUTH,
-      ASK_AROUND_AT_THE_RIGHT_TAVERN_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS,
+      fenceAskLine,
       '(covert)'
     );
   }
