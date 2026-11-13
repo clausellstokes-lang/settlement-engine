@@ -1284,7 +1284,7 @@
         "crisis: under_siege": 2,
         "no crisis: under_siege": 5,
         "no mercenary": 6,
-        "no watch": 3,
+        "no watch": 4,
         "watch": 2
       },
       "undeclared": 0,

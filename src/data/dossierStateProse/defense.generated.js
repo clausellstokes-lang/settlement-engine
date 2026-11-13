@@ -974,6 +974,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "unfolding",
           "marks": [
+            "no watch",
             "no mercenary",
             "crisis: under_siege"
           ],
