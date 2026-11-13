@@ -1,5 +1,10 @@
 # COHERENCE-POWERS-7 — the powers follow-up lane's second seat: hand-back (kept current after every item)
 
+**STATE AT HAND-BACK (by file, near the 400k the brief names):** the leftovers, 30 of the list's 45 rows, and the chair's
+R1 and R3 are cured and pushed; R2's cure is written (probes/COHERENCE-POWERS-7/r2patch.py) and not applied; R4's line and
+R5 are listed below with their reasons; ROUND THREE'S LIST (the chair, 18:45 UTC) and #312 are NOT begun; THE FINAL
+STATEMENT IS NOT RUN (the chair: it comes after round three, once). The next seat starts at section 5.
+
 Lane `lane/powers-follow-up-2026-11-13`, read back from origin at **714381934** before the first act (equal to the
 brief's). Builder: COHERENCE-POWERS-7, session `session_01FE9mEwtAdLFpgRhTCjnQMx`. Scratch worktree on a local branch
 `pfu7` at the lane's tip, `npm ci` there, plain pushes `git push origin pfu7:refs/heads/lane/powers-follow-up-2026-11-13`.
@@ -150,6 +155,41 @@ resolved draw-free to the title's next admitted line. 159 births, five leaves (s
 ### I — a crown in a self-governing city (governingStressVignettes.js, stressFactions.js, governanceNarrative.js) — DONE, 7f97b6d59
 Rows #706 #707 #709 #712. One town (rw3-city-wartime-1) of 740; four lines take their words without the crown.
 
+### R3 — the DM view's hand-formed possessives (dmPowerLines.js) — DONE, bc74e40dc
+35 of 720 towns by the reader's possess.mjs at the base; all four hand-formed possessives through powerPossessive; guard
+dmPowerLinesPossessive (source scan + executed lines), 2 of 2 red at the base. The zero on the render is the next seat's
+census render (the tip's dumps through possess.mjs).
+
+### G — the head of its kind's strongest power is not "behind the leading one" (npcStructure.js) — DONE, 330b75b11
+Needed by R1. 71 births. Row #532 NOT cured: see Parked 5.
+
+### R1 — a minted lord is not of the government (data/stressPowerFaces.js) — DONE, c2ba674af
+The 720: office lines 45 -> 0; "Financial Dependence" with a lord on the governing side 11 -> 0; a read of thirty lords
+true. THE 4,305 IS NOT MEASURED (the acceptance asks it): run the reader's births4305.mjs at the tip and claims4305.mjs /
+govrows.mjs against e969a75b7. The re-deal (110 births of the 720) is declared in the commit.
+
+### R2 — a woman lord is "the lord" on the rows — WRITTEN, NOT APPLIED
+`probes/COHERENCE-POWERS-7/r2patch.py <tree>`: one home `faceHonorifics.js :: styledTitleOf(title, gender)` ("the lord" ->
+"the lady", "the abbot" -> "the abbess", men and ungendered titles unchanged), read by both row writers (people/ties.js and
+generateSettlementPipeline.js :: refreshRelationshipProjections). Measured before it: 120 rows on the 720 (my lords.mjs; the
+reader's 100 counts lords only). To do: apply, measure the 720 and 4,305 by the reader's count (women's rows 0, men's
+unchanged), red first, commit. generateSettlementPipeline.js and ties.js: no lane in flight changes them.
+
+### R4 — "named <the seat holder> as successor": PARKED (needs a new atom)
+The line is npcData.js :: STRESS_ECONOMIC_EFFECTS.mentor_legacy, variant 8 ("${r.name} named ${s.name} as successor in front
+of witnesses …"). Its pool's condition carriers (needs/excludes/crisis) read the fact vocabulary, which has no atom for "the
+second end holds the seat" (factVocabulary.js has only `npc`-scoped presence); the brief forbids a new word there. Also
+npcData.js is named to the first round-two seat in this brief (no lane in flight changes it). RECOMMENDATION: the chair grants
+one ctx atom (the seat's holder, read from rulingChainOf) or a draw-site refusal in people/ties.js (this lane's) keyed by
+the line's own text; then count the class on the 4,305 and read what prints instead.
+
+### R5 — the page guard by source: LISTED, not done
+Founding it on the line's source needs the holder's structural row to carry where it came from (the government-dominant
+pool) on the card, a new key in the record (refused by the brief), or the guard re-running the template lookup itself (a
+second home of npcStructure's table). The reader's ten plants pass the phrase-list guard. F6's two lows, listed: the
+crisis cast gives a minted lord the instigator's reason that belongs to its body (crisisCast.js :: instigatorCandidates, 4
+births of the 720); a lord's house row repeats its body ("Noble Families · first of Noble Families").
+
 ## 3. Parked (one list, sent once)
 
 1. **Leftover 2 — the church and militia originals (governanceNarrative.js).** The original's text is the KEY of its sibling
@@ -173,7 +213,47 @@ Rows #706 #707 #709 #712. One town (rw3-city-wartime-1) of 740; four lines take 
 4. **Row #766 (a slow war beside a corrupted arrangement)**: the standing table runs before the relationships are dealt
    (rulingStructure.js); a disqualifier needs the order changed. 5 of 720. Left for a later seat with this measure.
 
+5. **Row #532 and the wider "smaller house / lesser old family" class** (npcStructure.js): a strict oracle against the powers
+   alone finds "lesser old family" false on 229 and "smaller house" false on 68 lines of the 720, but the sixth seat's
+   reviewer read two such lines TRUE (a tailor third in an elder council, a vintner third in a noble circle; pinned by
+   mintedLordKeepsLines). "The trade" and "an old family" are facts of the HOUSES, with no home. RECOMMENDATION: a leaf for
+   a house's trade and lineage first (the data lane's catalogue), then the rows read it.
+6. **observedShapeReaders, one NEW row: `contestsNiche on factions`, 2 reads** (rosterText.js, H-b). The walker misses its
+   writer (applyDensityLaw.js :: resizeSeats writes `contestsNiche: key` on the minted rival). Not banked here (a growth).
+   RECOMMENDATION: the merge seat banks it through the walker's door with this cause, or the next seat re-keys H-b to find
+   the host by the description's tail (no read of the field).
+7. **The list's rows not reached** (by file): factionStanding #766; rulingStructure #53 #111 #295 #639 #807 #912;
+   stressFactions #640; patronage #114 #115 #117 #762 (Parked 3); governanceNarrative leftover 2 (Parked 1).
+
+## 5. FOR THE NEXT SEAT, in order
+1. R2 (the patch), then R1's 4,305 measure, then R4 if the chair grants an atom.
+2. ROUND THREE (the chair, 18:45 UTC, copied): `git fetch origin lane/round-3-cut-2026-11-13` (3bae61499),
+   docs/chair/2026-11-13/ROUND-3-CUT-2026-11-13.md sections 2, 6, 6b and ROUND-3-CUT.json; the reader's towns at
+   lane/review-r2-stages-2026-11-13 (be53f933b). This lane's packages: "lane pw" (npcStructure.js, 3 medium); "no lane:
+   power generators" (3 high, 21 medium: rulingStructure.js 9, factionStanding.js 8, conflictIssues.js 3,
+   governingStressVignettes.js 2, governanceNarrative.js 1, settlementNarrative.js 1); "no lane: people data" (10 medium:
+   titleSecretsPresentations.js 7, goalFamilies.js 3). HIGH first; each writer its own commit; a `round2` line already held
+   is cured once. NOT this lane's: #1180 ("Mills (2-5)", the house-label class: R2-CODE-B's display leaf; its writer is
+   patronage.js :: faceOf's `house` and the Power panel's lists). Plus #312 (the chair, 18:55 UTC): a goal that presumes a
+   working resource is not dealt where the chain model's leaf marks it depleted or unworked (goalFamilies.js), its stream
+   unmoved, the moved records declared.
+3. Then THE FINAL STATEMENT once (the brief's section): the census at the tip against `cen-base` (re-made by census.sh on
+   714381934), the field diff on the 720 and the 4,305, the draft record's 51 surfaces, the whole suite, the new words, the
+   edge bundles last.
+
+## 6. New words for the owner's veto (so far, with the town each was read in)
+- "the local underworld" (R2-CODE-A's), on four minted faces (r2r-metropolis-39, r2s-politically_fractured-city-1,
+  r2s-indebted-city-0, r2s-succession_void-city-2).
+- "Goodman" for a male midwife (rw3-town-calm-1, rw3-city-infiltrated-1): the registry's existing word.
+- rw3-city-wartime-1: "the city treasury pays its bills"; "The army's supply carts take what they need first";
+  "An army quartermaster came last week …"; "Authority flows through military channels now."; "Emergency body …".
+- No other printed word is new: items A, E (silence), H (the table's own lines), D (the title's own lines), G and R1 (the
+  templates' own rows) and R3 (a spelling through the leaf).
+
 ## 4. Hazard log
 - `npm ci` in the scratch worktree set `core.hookspath=.husky/_` on the shared repository's local config (husky), before the
   first commit; it is what runs the lane hook. lint-staged backs up through `git stash` on every commit and drops it: the
-  stash list is read empty after each commit.
+  stash list is read empty after each commit. Refs and local config snapshotted before and after every push and suite
+  (scratchpad snap/): only `refs/heads/pfu7`, its tracking ref and the fetched lanes moved; the stash list empty.
+- One unpushed commit was amended (R1's message, to state the read of thirty as executed); nothing at or below 714381934 or
+  on origin was rewritten.
