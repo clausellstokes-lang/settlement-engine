@@ -16,7 +16,7 @@ import { pick, random01, randInt } from './helpers.js';
 import { random as _rng, getActiveRng } from '../kernel/rngContext.js';
 
 import { genArrivalDetail } from './narrativeGenerator.js';
-import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription, historyDescVariantsOf, tensionDescription, HISTORY_QUARTER_WORDS, HISTORY_DESC_SIBLINGS } from '../data/historyData.js';
+import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription, historyDescVariantsOf, tensionDescription, HISTORY_QUARTER_WORDS, HISTORY_DESC_SIBLINGS, tensionHeldByTimeline } from '../data/historyData.js';
 import { resolveGenerationWorldLaw } from './generationContext.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3b): one line, so no cited line moves
 import {
   STRESS_TO_TENSION,
@@ -504,7 +504,7 @@ const buildHistoricalEvent = (
     const tensionType = STRESS_TO_TENSION[primaryStress];
     if (tensionType && !usedTypes.has(tensionType)) {
       const tmpl = HISTORICAL_EVENTS_DATA.find(e => e.type === tensionType);
-      if (tmpl && tensionAdmitted(tmpl, hookFacts) && trueToRecordAt(tmpl, hookFacts, true, context.stability, context.prosperity)) { // W2-FIX-DATA-2 item 2
+      if (tmpl && tensionAdmitted(tmpl, hookFacts) && trueToRecordAt(tmpl, hookFacts, true, context.stability, context.prosperity) && tensionHeldByTimeline(tmpl, timeline)) { // W2-FIX-DATA-2 item 2; W2-FIX-DATA-HISTORY item C: a legacy needs its own past on the timeline
         selected.push({ ...tmpl });
         usedTypes.add(tensionType);
       } else if (tmpl && HISTORY_TEMPLATE_RECORD_DECLARATIONS[tensionType]) {
@@ -550,7 +550,7 @@ const buildHistoricalEvent = (
     // the record says the place ends the year with money to spare, a guild war where no guild stands. Set aside
     // exactly as the crime signal's own above (R-Q: the template leaves the pool and the loop draws again; no draw is
     // added or re-mapped), so only those places' streams move.
-    if (!trueToRecordAt(candidate, hookFacts, true, context.stability, context.prosperity)) continue;
+    if (!trueToRecordAt(candidate, hookFacts, true, context.stability, context.prosperity) || !tensionHeldByTimeline(candidate, timeline)) continue; // W2-FIX-DATA-HISTORY item C
     selected.push({ ...candidate });
     usedTypes.add(candidate.type);
   }

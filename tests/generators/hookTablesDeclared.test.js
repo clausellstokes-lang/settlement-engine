@@ -31,7 +31,9 @@ describe('the history hooks declare what their event does not guarantee', () => 
   // W2-FIX-DATA (2026-11-13, the REVIEW-W2B cold list): guild_conflict's two guild hooks declare the guild (homed by facts/guild.js), and
   // the crime wave's guard captain declares a watch, not any guard (a household levy has no captain): 15 → 17 rows.
   // W2-FIX-DATA-5 (2026-11-13, ROUND-3-CUT-INCREMENT ww-544): the succession crisis's ailing and poisoned ruler exclude the vacant seat's crisis too (re-keyed by cause; still 17 rows).
-  it('the seventeen declaring rows carry their atoms, every atom declarable', () => {
+  // W2-FIX-DATA-HISTORY item C (2026-11-13, the review of the data lane, L4): the occupation's "former occupier officer"
+  // excludes an occupation in force ("former" says it is over; re-keyed by cause: 17 → 18 rows).
+  it('the eighteen declaring rows carry their atoms, every atom declarable', () => {
     const declaring = HISTORY_ROWS.filter(({ row }) => typeof row === 'object');
     expect(declaring.map(({ type, row }) => `${type}: ${[...(row.needs || []), ...(row.excludes || []).map((x) => `no ${x}`)].join(', ')}`)).toEqual([
       'succession_crisis: no ruler: council, no crisis: succession_void',
@@ -42,6 +44,7 @@ describe('the history hooks declare what their event does not guarantee', () => 
       'guild_conflict: market',
       'resource_scarcity: market',
       'crime_wave: watch',
+      'occupation_legacy: no crisis: occupied',
       'market_crash: market',
       'great_flood: navigable',
       'great_flood: navigable',

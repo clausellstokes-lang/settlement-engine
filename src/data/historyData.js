@@ -1316,7 +1316,7 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       "A collaborator family's wartime fortune was built on betrayals that are finally surfacing",
       'Resistance fighters kept records that would expose people still in power',
-      'A former occupier officer has returned under a false identity',
+      { text: 'A former occupier officer has returned under a false identity', excludes: ['crisis: occupied'] }, // W2-FIX-DATA-HISTORY item C: "former" says the occupation is over; not under one in force
     ],
     severity: ['major', 'catastrophic'],
   },
@@ -1701,3 +1701,24 @@ export const HISTORY_DESC_SIBLINGS = Object.freeze({
     Object.freeze({ text: "Beginning in {location}, the blaze took house after house before it was put out", twinOf: "Beginning in {location}, the blaze took {building_type} street by street until whole quarters were gone", needs: Object.freeze(['tier: ≤ village']) }),
   ]),
 });
+
+/**
+ * W2-FIX-DATA-HISTORY item C (2026-11-13; the review of the data lane, L4; ROUND-3-CUT-INCREMENT ww-254, ww-724, ww-752,
+ * ww-754, ww-755, ww-756): A TENSION THAT IS ITS OWN PAST'S LEGACY NEEDS THAT PAST ON THE TIMELINE. The occupation's
+ * legacy speaks of collaborators and resisters, of wartime fortunes and records kept by resistance fighters, and of a
+ * former occupier officer: every one of its words presumes an occupation the town lived through. Where the town's own
+ * timeline holds no occupation it printed all the same (a thorp of five under a siege; a city whose past is a religious
+ * conflict, an economic divide and a great fire). The chair's ruling: a history line speaks of an event only where the
+ * town's own timeline holds it. Such a tension is set aside at the selection exactly as a refused template is (the
+ * selection's own loop, R-Q), read by the event's identity on the timeline (`templateType`, as
+ * `historyGenerator.js :: tensionByMemory` reads it). Its memory words for an absent event (`byMemory.unanchored`) are
+ * kept in the table and reached by no town.
+ */
+export const TENSIONS_THAT_NEED_THEIR_OWN_EVENT = Object.freeze(['occupation_legacy']);
+
+/**
+ * May this tension stand beside this timeline? @param {{ type?: string }} tmpl @param {ReadonlyArray<any>} timeline
+ * @returns {boolean}
+ */
+export const tensionHeldByTimeline = (tmpl, timeline) => !TENSIONS_THAT_NEED_THEIR_OWN_EVENT.includes(String(tmpl?.type))
+  || (Array.isArray(timeline) ? timeline : []).some((e) => e?.templateType === tmpl.type);
