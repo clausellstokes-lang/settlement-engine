@@ -5,7 +5,7 @@ The seat: AGREE-FOLLOW-UP, seated by the chair (session_01FE9mEws7PXYRYdjQPbSX15
 - The line before the point is `f572d12b7`.
 - The agreement lane's own range is `3575cf061..69b53decd`. It merged the line at `3575cf061` (d0f0d022b); its earlier commits sit on the line at point 43.
 
-Rulings worked to: the brief, then the chair's rulings of 2026-11-13 18:02 UTC on the two tables (section 3; the chair's messages are not on the branch, so they are restated there). Nothing in `src/` is changed. One test file is changed as ruled (7e471bb23). No baseline row is banked.
+Rulings worked to: the brief, then the chair's rulings of 2026-11-13 18:02 UTC on the two tables (section 3), and ruling (b) of 18:14 UTC on the HIGH_WATER stop (section 4). The chair's messages are not on the branch, so they are restated there. Nothing in `src/` is changed. One test file is changed as ruled (7e471bb23, d80bbc6dc). No baseline row is banked.
 
 Probes (`docs/chair/2026-11-13/probes/AGREE-FOLLOW-UP/`), each runnable as `node <probe> <tree root> ...`:
 1. `siteScan.mjs`: the site ratchet's 462-town corpus, row by row.
@@ -15,6 +15,9 @@ Probes (`docs/chair/2026-11-13/probes/AGREE-FOLLOW-UP/`), each runnable as `node
 5. `sewerProsperityIdentities.mjs`: each RAISES cause over the 42 × K identities.
 6. `sewerWitnessCivic.mjs`: the sewer witness's civic houses at one tree.
 7. `sewerHighWaterPath.mjs`: HIGH_WATER's rung lifts, split by the path they take.
+8. `sewerCalamityCrossTalk.mjs`: which causes the calamity perturbation moves.
+
+Probe 4 also reports the score's rises over the 42 × K.
 
 ## 1. The site inventory (siteCoherenceRatchet C1)
 
@@ -217,6 +220,58 @@ For the closing acts:
   - (b) a tooth arm for the weight alone: the same perturbation with the tier floor held, i.e. the score compared, not the rung;
   - (c) another ruling.
   The test file is unchanged beyond the ruled input.
+
+## 4. The chair's ruling (b) on the HIGH_WATER stop (received 18:14 UTC), and what was done
+
+**The ruling, as received:** one assertion beside the two rung claims, over the same 42 × 8. For each of the four RAISES causes, the SCORE rises somewhere, read through what the derivation already exposes. It comes with one comment line (HIGH_WATER's rung moves by the peak tier's floor), and the teeth: each weight at zero reds the new assertion in its own slot, and the earlier plants still red as before.
+
+**Done (commit d80bbc6dc, test file only).**
+- `deriveSewerLadder(...).score` was already exposed and already read by the file, so no export was added.
+- The assertion is at line 252.
+- Score rises over the 336 (probe 4, `sewerProsperityIdentities.mjs <tree> 8`), the same at both trees because the score does not depend on identity:
+
+| Cause | Score rises (of 336) |
+|---|---|
+| PROSPERITY_BAND | 264 |
+| CIVIC_CAPACITY | 320 |
+| CALAMITY_REBUILD | 264 |
+| HIGH_WATER_POPULATION | 232 |
+
+- Green 8 of 8 at aac79b808 (6.53 s, tests 1.07 s) and at f572d12b7 (6.46 s, tests 1.10 s), each run through `sh scripts/gate-tail.sh npx vitest run tests/domain/undercitySewerDerivation.test.js`. eslint exits 0.
+
+### TEETH: plant-and-restore in a scratch worktree at aac79b808; the arm's own failure read from vitest's JSON report
+
+**Pass (i): the committed file.**
+
+| Plant | The arm reds at | Received |
+|---|---|---|
+| none | passed | — |
+| PROSPERITY_BAND weight 0 | 250, the rung's "right way somewhere" | `[false, true, true, true]` |
+| CIVIC_CAPACITY weight 0 | 250 | `[true, false, true, true]` |
+| CALAMITY_REBUILD weight 0 | 250 | `[true, true, false, true]` |
+| HIGH_WATER_POPULATION weight 0 | **252, the new score tooth** | `[true, true, true, false]`: the gap of section 3 is closed |
+| CALAMITY_REBUILD inverted | 249, "never the wrong way" | `[0, 0, 4, 0]` |
+| PROSPERITY_BAND inverted | 250 | `[false, false, false, true]`, as before |
+
+**Pass (ii): a scratch-only variant** with lines 249 and 250 deleted. The arm stops at its first failing expect, so this is the only way the score tooth can be read for the three causes whose plant reds line 250 first.
+
+| Plant | The score tooth |
+|---|---|
+| none | passed |
+| PROSPERITY_BAND weight 0 | **red**, `[false, true, true, true]` |
+| CIVIC_CAPACITY weight 0 | **red**, `[true, false, true, true]` |
+| **CALAMITY_REBUILD weight 0** | **PASSED: the plant does not red its slot. STOP.** |
+| HIGH_WATER_POPULATION weight 0 | **red**, `[true, true, true, false]` |
+
+### STOP: CALAMITY_REBUILD's perturbation also raises HIGH_WATER_POPULATION
+- **Measured** (probe 8, `sewerCalamityCrossTalk.mjs <tree>`, both trees alike): the arm's calamity extreme is nine stamps, each with deaths 10 and exodus 5. It moves CALAMITY_REBUILD's value on 42 of 42 births and **HIGH_WATER_POPULATION's value on 7 of 42**.
+  - `highWater.js` counts each exodus as population that used to be present (its channel 3, the dated losses), so the peak rises.
+  - On those 7 births × 8 identities the score rises with CALAMITY's weight at zero, so the score tooth cannot convict that weight.
+- **In the rung claim** (section 3) CALAMITY's own weight-zero plant did red its slot at 250. There the cross-talk is not enough to cross a rung.
+- **For the chair; nothing done beyond the ruled assertion:**
+  - (a) the score tooth reads each cause's OWN term instead, `sewerCauses(...)` / `.causes[].contribution` (= weight × value), already exposed and already read by the file. That isolates the weight for all four alike.
+  - (b) the calamity extreme's stamps carry exodus 0, so the perturbation touches only its own cause (an input change; the law untouched).
+  - (c) accept, with CALAMITY's weight convicted by the rung claim alone.
 
 ## Found, not mine (reported, not touched)
 - **#135** (town/desert/road@scw0-a1/arabic): its smelting chain on iron_deposits runs (vulnerable) and a Smelter stands, yet no iron good is in its exports after A′'s re-deal at 6b932d3e8. The site's win rests on that absence.
