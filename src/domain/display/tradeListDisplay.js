@@ -139,11 +139,10 @@ export function revenuesOffTheLists(settlement) {
  *   - `needed`: a good the town needs that the land cannot give and no import brings — each terrain-critical item
  *     no import already names, through the same filter. A NEED THAT IS NOT MET, never an import.
  * Both lists are the one composition the tab made inline (moved here verbatim, then split by origin), so nothing
- * is filtered differently from what the page printed. ⚠ `needed` keeps the tab's own test of "no import names it"
- * (a substring): a need an import meets under ANOTHER name stays in it (luxury goods beside "Luxury textiles and
- * exotic goods", metals beside "Iron"; 8 of 30 read on the census's 720). It is safe as the gap reader's
- * complement; before a surface prints `needed` as "not met", that match must be made (the hand-back names it
- * for W2-C-LEAVES).
+ * is filtered differently from what the page printed. `needed` keeps the tab's own test of "no import names it"
+ * (a substring) AND, since W2-C-LEAVES item 4(b), leaves out a need an arriving import meets under ANOTHER name
+ * (`needMetBy`: luxury goods beside "Luxury textiles and exotic goods", metals beside "Iron"; 8 of 30 read on the
+ * census's 720 by the first leaves lane), so a surface may print it as a need not met.
  *
  * WHO READS IT. The gap reader (`validationOnPage.js :: recordGoods`) reads `arriving` only, so a gap whose good is
  * merely needed prints ("No clay reaches the potter." is true by the record). THE ECONOMICS TAB DOES NOT READ IT
@@ -169,8 +168,68 @@ export function importsAsPrinted(settlement) {
     .filter((tc) => !primary.some((imp) => imp.toLowerCase().includes(tc.toLowerCase())));
   const kept = displayTradeList([...primary, ...terrain], /** @type {Parameters<typeof factsOf>[0]} */ (settlement), { side: 'imports', exports: eco.primaryExports });
   const fromTrade = new Set(primary);
+  const arriving = kept.filter((x) => fromTrade.has(x));
   return {
-    arriving: kept.filter((x) => fromTrade.has(x)),
-    needed: kept.filter((x) => !fromTrade.has(x)),
+    arriving,
+    // W2-C-LEAVES item 4(b): a need an arriving import already meets UNDER ANOTHER NAME is not a need left unmet
+    // (`needMetBy`: "luxury goods" beside "Luxury textiles and exotic goods", "iron ore" beside "Iron").
+    needed: kept.filter((x) => !fromTrade.has(x) && !arriving.some((imp) => needMetBy(x, imp))),
   };
+}
+
+/**
+ * THE MATERIAL FAMILIES A NEED AND AN IMPORT ARE MATCHED BY (W2-C-LEAVES item 4(b), 2026-11-13; REVIEW-W2A-3 R2 and the
+ * first leaves lane's hand-back: of 30 needs read beside the Imports line, 8 were met by an import under another name).
+ * A word of the need names the families it asks for; an import meets it when a word of the import's own name (its
+ * reason in brackets struck) is of one of them. A worked good (tools, arms, fittings, candles, torcs, supplies) meets
+ * no raw need. Words are matched whole, singular or plural.
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+const NEED_FAMILY_WORDS = Object.freeze({
+  iron: ['iron', 'steel'],
+  copper: ['copper'],
+  precious: ['gold', 'silver', 'precious'],
+  tin: ['tin'],
+  timber: ['timber', 'lumber', 'plank'],
+  stone: ['stone', 'masonry'],
+  clay: ['clay'],
+  salt: ['salt'],
+  grain: ['grain', 'flour', 'wheat', 'barley'],
+  textile: ['textile', 'cloth', 'linen', 'silk'],
+  luxury: ['luxury', 'exotic'],
+  spice: ['spice'],
+  grape: ['grape'],
+  livestock: ['livestock', 'cattle', 'ox', 'oxen'],
+  herb: ['herb'],
+  hide: ['hide', 'leather', 'fur', 'pelt'],
+  fish: ['fish'],
+  fuel: ['charcoal', 'fuel', 'peat', 'coal'],
+  provision: ['provision', 'foodstuff'],
+  glass: ['glass'],
+});
+/** A need's word that asks for several families ("metals": any metal). */
+const NEED_WIDE_WORDS = Object.freeze({ metal: ['iron', 'copper', 'precious', 'tin'] });
+/** The words of a worked good: it meets no raw need. */
+const WORKED_GOOD = /\b(?:tools?|arms|armou?r|weapons?|fittings?|components?|torcs?|jewel(?:le)?ry|candles?|supplies|equipment|vessels?|rigging|cordage)\b/i;
+
+/** @param {string} label @returns {string[]} the label's words, lower case, singular, its bracketed reason struck */
+const wordsOf = (label) => label.toLowerCase().replace(/\([^)]*\)/g, ' ').split(/[^a-z]+/).filter(Boolean)
+  .map((w) => (w.length > 3 && /[^su]s$/.test(w) ? w.slice(0, -1) : w));
+/** @param {string[]} words @returns {Set<string>} the families the words name */
+const familiesOf = (words) => new Set(Object.entries(NEED_FAMILY_WORDS).filter(([, ws]) => ws.some((w) => words.includes(w))).map(([f]) => f));
+
+/**
+ * Whether an arriving import meets a need under another name.
+ * @param {string} need a need's raw label ("luxury goods", "mountain_timber", "timber (for large vessels)")
+ * @param {string} imp an arriving import's raw label
+ * @returns {boolean}
+ */
+export function needMetBy(need, imp) {
+  if (WORKED_GOOD.test(imp)) return false;
+  const needWords = wordsOf(need);
+  const asked = familiesOf(needWords);
+  for (const [w, fams] of Object.entries(NEED_WIDE_WORDS)) if (needWords.includes(w)) for (const f of fams) asked.add(f);
+  if (!asked.size) return false;
+  const have = familiesOf(wordsOf(imp));
+  return [...asked].some((f) => have.has(f));
 }
