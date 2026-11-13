@@ -2886,9 +2886,6 @@ supplies the ancestry.
 5. `[street · watch · no mercenary · no crisis: under_siege]` The only people on {settlement}'s walls are the watch on their rounds, and everyone knows that would not stop an army.
 6. `[unfolding · no mercenary · crisis: under_siege]` {settlement} had nobody to put on its walls until the siege came; the people on them now are townsfolk who have never held a wall before.
 7. `[street · crisis: under_siege]` Since the siege began, {settlement}'s walls are manned by whoever can be spared from everything else.
-8. `[ledger · mercenary · no crisis: under_siege]` {settlement} keeps no soldiers of its own for its walls; the fighters it would put on them are a hired company.
-9. `[street · mercenary · no crisis: under_siege]` The swords {settlement} would put on its walls are hired ones, and the town has no garrison of its own to stand beside them.
-10. `[visitor · mercenary · no crisis: under_siege]` Some of the armed men you see about {settlement}'s walls belong to a hired company and answer to their captain, not to the town.
 
 **`Invasion & War`: force with NO walls** {colour}
 1. `[ledger]` {settlement} keeps a professional force and no perimeter. It answers raiders well and cannot hold a siege, because there is nothing here to hold.

@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2964,
+    "variants": 2961,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -1229,8 +1229,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 10,
-      "grammars": 4,
+      "variants": 7,
+      "grammars": 3,
       "predicate": [
         {
           "field": "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)",
@@ -1282,8 +1282,7 @@
       "declares": [],
       "lineDeclares": {
         "crisis: under_siege": 2,
-        "mercenary": 3,
-        "no crisis: under_siege": 8,
+        "no crisis: under_siege": 5,
         "no mercenary": 6,
         "no watch": 3,
         "watch": 2
@@ -55170,8 +55169,8 @@
         "DS-DEF-2 :: Invasion & War: militia only",
         "DS-DEF-2 :: Invasion & War: neither walls nor force"
       ],
-      "variants": 33,
-      "grammars": 17,
+      "variants": 30,
+      "grammars": 16,
       "blocks": [
         "DS-DEF-2"
       ]
@@ -66423,7 +66422,7 @@
         "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "INVASION_ROW_POOL",
-      "count": "10 variant(s) · 4 grammar(s) · slots {settlement}"
+      "count": "7 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
