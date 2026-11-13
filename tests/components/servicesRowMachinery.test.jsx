@@ -46,12 +46,16 @@ describe('a service row prints facts, never the machinery', () => {
     expect(text).not.toMatch(/covers/);
   });
 
-  test.each(SERVICE_PROVENANCE_SENTINELS)('a row whose provider slot holds %s prints no provider line', (tag) => {
-    const svc = { name: 'Contraband transport', desc: 'Goods move past checkpoints.', institution: tag };
-    const { container } = render(<ServiceItem svc={svc} isCriminal />);
-    expect(container.textContent).toContain('Contraband transport');
-    // anchored: the row's own name is asserted present on the line above, in the same render
-    expect(blockLines(container)).not.toContain(tag);
+  test('a row whose provider slot holds any provenance tag prints no provider line', () => {
+    expect(SERVICE_PROVENANCE_SENTINELS.length).toBe(11);
+    for (const tag of SERVICE_PROVENANCE_SENTINELS) {
+      const svc = { name: 'Contraband transport', desc: 'Goods move past checkpoints.', institution: tag };
+      const { container } = render(<ServiceItem svc={svc} isCriminal />);
+      expect(container.textContent).toContain('Contraband transport');
+      // anchored: the row's own name is asserted present on the line above, in the same render
+      expect(blockLines(container), tag).not.toContain(tag);
+      cleanup();
+    }
   });
 
   test('a row whose provider is a house still names the house', () => {

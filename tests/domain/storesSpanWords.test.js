@@ -25,13 +25,16 @@ function claimedDays(span) {
 }
 
 describe('the stores span says the record\'s time in store', () => {
-  test.each([
+  test('the table of stores lines', () => {
+    const TABLE = [
     [{ storageMonths: 0.1, hasGranary: false }, 'No granary; about three days in the larder.'],
     [{ storageMonths: 0.1, hasGranary: true, storesHeld: false }, 'Stores: a granary, about three days of grain.'],
     [{ storageMonths: 0.5, hasGranary: true }, 'Stores: a granary, about two weeks of grain.'],
     [{ storageMonths: 1.2, hasGranary: true }, 'Stores: a granary, about a month of grain.'],
     [{ storageMonths: 2.4, hasGranary: true, storesHeld: false }, 'Stores: a granary, two months of grain.'],
-  ])('%j reads %s', (record, line) => { expect(foodStoresWords(record)).toBe(line); });
+    ];
+    for (const [record, line] of TABLE) expect(foodStoresWords(record), JSON.stringify(record)).toBe(line);
+  });
 
   test('every span from a day to a month reads within half a unit of the record', () => {
     const wrong = [];

@@ -61,26 +61,32 @@ beforeEach(() => { act(() => { useStore.setState({ settlement: SETTLEMENT }); })
 afterEach(cleanup);
 
 describe('the one home: institutionHouseLabel', () => {
-  test.each([
-    ['Merchant guilds (15-40)', 'Merchant guilds'],
-    ['Craft guilds (100-150+)', 'Craft guilds'],
-    ['Dream parlors (high magic)', 'Dream parlors'],
-    ['Cathedral (10,000+ only)', 'Cathedral'],
-    ['Parish churches (2-5)', 'Houses of worship'],
-    ['Bowyers & fletchers (guild)', 'Bowyers & fletchers (guild)'],
-    ['Resident smith (part-time)', 'Resident smith (part-time)'],
-    ['Stormwatch Keep', 'Stormwatch Keep'],
-  ])('%s reads %s', (raw, label) => { expect(institutionHouseLabel(raw)).toBe(label); });
+  test('each catalogue name reads its house label', () => {
+    const TABLE = [
+      ['Merchant guilds (15-40)', 'Merchant guilds'],
+      ['Craft guilds (100-150+)', 'Craft guilds'],
+      ['Dream parlors (high magic)', 'Dream parlors'],
+      ['Cathedral (10,000+ only)', 'Cathedral'],
+      ['Parish churches (2-5)', 'Houses of worship'],
+      ['Bowyers & fletchers (guild)', 'Bowyers & fletchers (guild)'],
+      ['Resident smith (part-time)', 'Resident smith (part-time)'],
+      ['Stormwatch Keep', 'Stormwatch Keep'],
+    ];
+    for (const [raw, label] of TABLE) expect(institutionHouseLabel(raw), raw).toBe(label);
+  });
 });
 
 describe('the NPC card names its house without the catalogue\'s count or gate', () => {
-  test.each([[GUILDSMAN, 'Merchant guilds', /\(15-40\)/], [DREAMER, 'Dream parlors', /high magic/]])('%#: resolved link', (npc, label, machinery) => {
-    const { getByTestId } = render(<Dossier settlement={SETTLEMENT}><NPCInlineCard npc={npc} /></Dossier>);
-    const door = getByTestId('npc-institution-door');
-    expect(door.textContent).toBe(label);
-    expect(within(door).getByRole('button')).toBeTruthy();
-    // anchored: the door inside this line is asserted to read its label just above
-    expect(door.closest('[data-testid="npc-card-line"]').textContent).not.toMatch(machinery);
+  test('resolved links: the guild\'s count and the parlour\'s gate leave the card line', () => {
+    for (const [npc, label, machinery] of [[GUILDSMAN, 'Merchant guilds', /\(15-40\)/], [DREAMER, 'Dream parlors', /high magic/]]) {
+      const { getByTestId } = render(<Dossier settlement={SETTLEMENT}><NPCInlineCard npc={npc} /></Dossier>);
+      const door = getByTestId('npc-institution-door');
+      expect(door.textContent).toBe(label);
+      expect(within(door).getByRole('button')).toBeTruthy();
+      // anchored: the door inside this line is asserted to read its label just above
+      expect(door.closest('[data-testid="npc-card-line"]').textContent).not.toMatch(machinery);
+      cleanup();
+    }
   });
   test('an unresolved door (no dossier index) prints the same label as plain text', () => {
     const { getByTestId } = render(<NPCInlineCard npc={GUILDSMAN} />);
