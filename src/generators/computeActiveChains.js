@@ -1031,3 +1031,14 @@ export function deriveServiceExports(institutionalServices, refusedOnly = new Se
 
 // COHERENCE-AGREE-4 (item 3′): at the end of the file so no line cited above it moves.
 import { chainYieldRefused, goodsOnlyRefusedChainsMake } from '../domain/chainYield.js';
+
+/**
+ * The good a service export sells (COHERENCE-AGREE-8, F2's fifth writer): the map's `output` for its export label,
+ * so the receipt's member judges "Educational services (degrees, training)" by "Higher education", the good the
+ * chain card names. At the end of the file so no line cited above it moves.
+ * @param {unknown} label @returns {string | null}
+ */
+export function serviceGoodOfExportLabel(label) {
+  if (label === 'Maritime services (cargo, pilotage)') return 'Port & maritime services';
+  return INSTITUTIONAL_SERVICE_MAP.find((d) => d.exportLabel === label)?.output ?? null;
+}

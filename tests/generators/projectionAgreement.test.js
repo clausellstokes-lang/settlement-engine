@@ -197,6 +197,19 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     // twins: a good a yielding chain also makes, and a good no chain makes
     expect(lists(['Charcoal (transit)'], ['Salt'])).toEqual([]);
   });
+  test('F2\'s fifth writer (COHERENCE-AGREE-8): the member reads every writer\'s good, a service\'s export label too', () => {
+    // the member reads the FINAL lists, so it judges every writer's good; a writer's own parenthetical (the service
+    // map's "(letters of credit)") is read off as the list's suffixes are
+    const bank = [{ status: 'impaired', outputs: ['Financial services', 'International banking services'] }];
+    const lists = (primaryExports) => details(record({ economicState: { activeChains: bank, primaryExports, localProduction: [] } }));
+    expect(lists(['Financial services (letters of credit)'])).toContain('A trade list carries a good only a refused chain makes.');
+    // twin: a service no refused chain makes
+    expect(lists(['Legal services (contracts, notarial)'])).toEqual([]);
+    // a service whose label is not its good: the member reads the good the service map names
+    const school = [{ status: 'impaired', resourceInputCondition: 'depleted', outputs: ['Higher education'] }];
+    const taught = details(record({ economicState: { activeChains: school, primaryExports: ['Educational services (degrees, training)'], localProduction: [] } }));
+    expect(taught).toContain('A trade list carries a good only a refused chain makes.');
+  });
   test('Part B (i): "no established food chains" beside a roster that works its own land', () => {
     const said = (institutions) => details({ ...record({ institutions, economicState: { foodSecurity: { diversityNote: 'no established food chains', foodRecord: { grownPct: 90 } } } }), tier: 'village' });
     expect(said([{ name: 'Farmland' }, { name: 'Common grazing land' }])).toContain('The food record says no food chains beside a roster that works its own land.');
