@@ -1825,8 +1825,8 @@ shape.
 
 **CRITICAL IMPORT: a house needs what the land lacks** *(`resourceAnalysis.imports.critical[]` with its `reasons` entry naming the house; slots from that one import, never the export bag)*
 1. `[ledger · no crisis: under_siege]` Some of {settlement}'s work cannot go on without {good}, and the country around the town produces none, so the town buys it from outside or that work stops.
-2. `[visitor · no crisis: under_siege]` Every load of {good} that {settlement}'s {institution} uses comes in from elsewhere; a closed road would stop its work within the season.
-3. `[ledger · crisis: under_siege]` {settlement}'s {institution} has had no {good} since the siege closed the roads, and its work has stopped or soon will.
+2. `[visitor · no crisis: under_siege]` Every load of {good} that {settlement}'s work needs comes in from elsewhere; a closed road would stop that work within the season.
+3. `[ledger · crisis: under_siege]` Since the siege closed the roads, none of the {good} that {settlement}'s work needs has reached it, and that work has stopped or soon will.
 4. `[visitor · crisis: under_siege]` {settlement} has no {good} of its own, and the siege lets none in, so the work that needs it is stopping.
 
 **CRITICAL IMPORT: the land cannot give it** *(the `reasons` entry names the terrain alone)*

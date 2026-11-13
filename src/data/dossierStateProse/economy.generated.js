@@ -6381,11 +6381,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "Every load of {good} that {settlement}'s {institution} uses comes in from elsewhere; a closed road would stop its work within the season.",
+          "text": "Every load of {good} that {settlement}'s work needs comes in from elsewhere; a closed road would stop that work within the season.",
           "slots": [
             "good",
-            "settlement",
-            "institution"
+            "settlement"
           ],
           "vid": 2
         },
@@ -6394,11 +6393,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: under_siege"
           ],
-          "text": "{settlement}'s {institution} has had no {good} since the siege closed the roads, and its work has stopped or soon will.",
+          "text": "Since the siege closed the roads, none of the {good} that {settlement}'s work needs has reached it, and that work has stopped or soon will.",
           "slots": [
-            "settlement",
-            "institution",
-            "good"
+            "good",
+            "settlement"
           ],
           "vid": 3
         },

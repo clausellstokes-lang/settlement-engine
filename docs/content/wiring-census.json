@@ -19385,7 +19385,6 @@
       ],
       "slotsNamed": [
         "good",
-        "institution",
         "settlement"
       ],
       "slotsWithoutProvider": [],
@@ -68901,7 +68900,7 @@
         "criticalRow.institution"
       ],
       "readingFunction": "criticalImportPoolKey",
-      "count": "4 variant(s) · 2 grammar(s) · slots {good, institution, settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {good, settlement}"
     },
     {
       "tier": "THIN",
