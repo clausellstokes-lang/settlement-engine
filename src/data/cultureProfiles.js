@@ -131,7 +131,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     architecturalDetails: [
       { text: 'arcaded market fronts define the principal square', needs: ['market'] },
-      'warm tile roofs and enclosed courtyards break up the stone streets',
+      { text: 'warm tile roofs and enclosed courtyards break up the stone streets', needs: ['tier: ≥ town'] }, // W2-FIX-DATA-2 item 4: stone streets are a town's
       'fountains, steps, and reused columns give the civic center a layered age',
     ],
     institutionBias: {
@@ -259,7 +259,7 @@ export const CULTURE_PROFILES = Object.freeze({
       'Seasonal scarcity makes storage, mutual aid, and dependable leadership visibly political.',
     ],
     architecturalDetails: [
-      'carved roof beams and long hall ridges dominate the older quarter',
+      { text: 'carved roof beams and long hall ridges dominate the older quarter', needs: ['tier: ≥ town'] }, // W2-FIX-DATA-2 item 4: a quarter is a town's
       { text: 'turf roofs and timber sheds gather behind the working waterfront', needs: ['navigable'] },
       { text: 'the assembly ground sits between the principal hall and the landing', needs: ['navigable'] },
     ],
@@ -489,8 +489,8 @@ export const CULTURE_PROFILES = Object.freeze({
     label: 'Greek-inspired',
     scope: 'An agora at the centre, civic associations, and houses climbing the hillside.',
     builtForm: [
-      { text: 'Stone and plaster courtyard houses rise around an agora, stoas, shrines, and steep connecting lanes.', needs: ['market'] },
-      { text: 'A fortified high precinct overlooks the market, theater, and workshops; where geography permits, it also overlooks a working harbor.', needs: ['market'] },
+      { text: 'Stone and plaster courtyard houses rise around an agora, stoas, shrines, and steep connecting lanes.', needs: ['market', 'tier: ≥ town'] }, // W2-FIX-DATA-2 item 4
+      { text: 'A fortified high precinct overlooks the market, theater, and workshops; where geography permits, it also overlooks a working harbor.', needs: ['market', 'tier: ≥ town'] }, // W2-FIX-DATA-2 item 4
     ],
     civicPattern: [
       'Assemblies, magistrates, councils, patrons, sanctuaries, and civic associations compete through public office.',
@@ -518,7 +518,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     architecturalDetails: [
       { text: 'a colonnaded market edge frames the busiest civic ground', needs: ['market'] },
-      'whitewashed courts and stone stairs climb toward a fortified high precinct',
+      'whitewashed courts and stone steps catch the light between the houses', // W2-FIX-DATA-2 item 4 (cold list rows 2, 17): reworded to presume nothing; was "whitewashed courts and stone stairs climb toward a fortified high precinct"
       { text: 'workshops, shrines, and meeting halls crowd the approaches to the agora', needs: ['market', 'institution: temple'] },
     ],
     institutionBias: {
@@ -526,6 +526,37 @@ export const CULTURE_PROFILES = Object.freeze({
       keywords: { council: 1.08, market: 1.08, theater: 1.12, dock: 1.08, academy: 1.06 },
     },
   }),
+});
+
+/**
+ * W2-FIX-DATA-2 item 4 (2026-11-13; the REVIEW-W2B cold list, rows 2, 17, 253, 268, 298): A CULTURE LINE'S SMALL-PLACE
+ * TWIN. The culture named stone streets, an older quarter and a fortified high precinct in thorps, hamlets and villages.
+ * A line that presumes a town now declares its size, and its twin, in the same voice, says what a place of village size
+ * or smaller has. A twin stands outside its list, so the materializer's one pick over the list is the base's; it is
+ * reached only by resolution, at the materializer, which knows the tier (VETOABLE wording, the owner's).
+ * The greek detail ("… climb toward a fortified high precinct") is REWORDED instead: the arrival scene's redraw reads the
+ * detail lists, and a declared greek row would leave a small place without a market no line there, so that draw would
+ * be skipped and every later beat of the arrival re-dealt (measured: c01, c11). The greek built form, which the arrival
+ * does not read, declares and twins.
+ * @type {Readonly<Record<string, ReadonlyArray<Readonly<{ text: string, needs: ReadonlyArray<string>, twinOf?: string }>>>>}
+ */
+export const CULTURE_LINE_SIBLINGS = Object.freeze({
+  'Stone and plaster courtyard houses rise around an agora, stoas, shrines, and steep connecting lanes.': Object.freeze([
+    Object.freeze({ text: 'Stone and plaster courtyard houses rise around an agora, stoas, shrines, and steep connecting lanes.', needs: Object.freeze(['market', 'tier: ≥ town']) }),
+    Object.freeze({ text: 'Stone and plaster houses with whitewashed courts stand close together.', twinOf: 'Stone and plaster courtyard houses rise around an agora, stoas, shrines, and steep connecting lanes.', needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  'A fortified high precinct overlooks the market, theater, and workshops; where geography permits, it also overlooks a working harbor.': Object.freeze([
+    Object.freeze({ text: 'A fortified high precinct overlooks the market, theater, and workshops; where geography permits, it also overlooks a working harbor.', needs: Object.freeze(['market', 'tier: ≥ town']) }),
+    Object.freeze({ text: 'Whitewashed stone and plaster houses look out over the fields around them.', twinOf: 'A fortified high precinct overlooks the market, theater, and workshops; where geography permits, it also overlooks a working harbor.', needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  'warm tile roofs and enclosed courtyards break up the stone streets': Object.freeze([
+    Object.freeze({ text: 'warm tile roofs and enclosed courtyards break up the stone streets', needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: 'warm tile roofs and enclosed yards keep close together', twinOf: 'warm tile roofs and enclosed courtyards break up the stone streets', needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  'carved roof beams and long hall ridges dominate the older quarter': Object.freeze([
+    Object.freeze({ text: 'carved roof beams and long hall ridges dominate the older quarter', needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: 'carved roof beams and a long hall ridge stand above the other roofs', twinOf: 'carved roof beams and long hall ridges dominate the older quarter', needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
 });
 
 export const CULTURE_PROFILE_KEYS = Object.freeze(Object.keys(CULTURE_PROFILES));
@@ -550,36 +581,60 @@ export function resolveCultureProfileKey(value) {
 }
 
 /**
+ * @typedef {object} KnownFacts what the configuration answers before the roster exists (W2-FIX-DATA-2 item 4)
+ * @property {(row: unknown) => boolean} refuses true when an atom the row declares is ANSWERED false by those facts (the
+ *   tier); an atom they cannot answer (walls, a market, a house) is not a refusal here: the print side reads it
+ */
+
+/**
  * @param {readonly (string | { text: string })[]} values a profile list (a row may be declared: R-C)
  * @param {{ pick?: (values: readonly any[]) => any } | null | undefined} rng
+ * @param {KnownFacts | null} [known]
  * @returns {string}
  */
-function choose(values, rng) {
+function choose(values, rng, known = null) {
   if (!values.length) return '';
   // R-C (CENSUS-2d): a declared row `{ text, needs?, excludes? }` gives back its text; the pick is
   // over the same array, so no roll moves. CENSUS-1e's wiring enforces the declarations.
-  if (rng?.pick) return textOf(rng.pick(values) || values[0]);
-  return textOf(values[0]);
+  const drawn = rng?.pick ? (rng.pick(values) || values[0]) : values[0];
+  return textOf(known ? resolveKnown(drawn, values, known) : drawn);
+}
+
+/**
+ * W2-FIX-DATA-2 item 4: a pick the known facts refuse resolves DRAW-FREE: its small-place twin
+ * (`CULTURE_LINE_SIBLINGS`) if admitted, else the next admitted row of its list (wrapping), else the pick as drawn.
+ * @param {unknown} drawn @param {readonly unknown[]} values @param {KnownFacts} known @returns {unknown}
+ */
+function resolveKnown(drawn, values, known) {
+  if (!known.refuses(drawn)) return drawn;
+  const twin = (CULTURE_LINE_SIBLINGS[textOf(/** @type {any} */ (drawn))] || []).find((l) => typeof l.twinOf === 'string');
+  if (twin && !known.refuses(twin)) return twin;
+  const at = values.indexOf(drawn);
+  for (let k = 1; k < values.length; k++) {
+    const row = values[(at + k) % values.length];
+    if (!known.refuses(row)) return row;
+  }
+  return drawn;
 }
 
 /**
  * @param {string} key
  * @param {{ pick?: (values: readonly string[]) => string } | null | undefined} rng
  */
-function materializeOne(key, rng) {
+function materializeOne(key, rng, known = null) {
   const source = CULTURE_PROFILES[key] || CULTURE_PROFILES.germanic;
   return Object.freeze({
     key: source.key,
     label: source.label,
     scope: source.scope,
-    builtForm: choose(source.builtForm, rng),
-    civicPattern: choose(source.civicPattern, rng),
-    exchangePattern: choose(source.exchangePattern, rng),
-    foodways: choose(source.foodways, rng),
-    sacredLife: choose(source.sacredLife, rng),
-    defensePattern: choose(source.defensePattern, rng),
-    socialTexture: choose(source.socialTexture, rng),
-    architecturalDetail: choose(source.architecturalDetails, rng),
+    builtForm: choose(source.builtForm, rng, known),
+    civicPattern: choose(source.civicPattern, rng, known),
+    exchangePattern: choose(source.exchangePattern, rng, known),
+    foodways: choose(source.foodways, rng, known),
+    sacredLife: choose(source.sacredLife, rng, known),
+    defensePattern: choose(source.defensePattern, rng, known),
+    socialTexture: choose(source.socialTexture, rng, known),
+    architecturalDetail: choose(source.architecturalDetails, rng, known),
   });
 }
 
@@ -588,18 +643,22 @@ function materializeOne(key, rng) {
  * expected to be a named child stream, so adding a prose variant here cannot
  * shift unrelated generation decisions.
  *
+ * W2-FIX-DATA-2 item 4: `known` is what the configuration answers here (the generator hands the tier); a row it refuses
+ * resolves draw-free (`resolveKnown`). Absent, nothing is refused, as before.
+ *
  * @param {unknown} culture
  * @param {{ pick?: (values: readonly string[]) => string } | null} [rng]
+ * @param {KnownFacts | null} [known]
  */
-export function materializeCulturalIdentity(culture, rng = null) {
+export function materializeCulturalIdentity(culture, rng = null, known = null) {
   const resolvedKey = resolveCultureProfileKey(culture);
-  if (resolvedKey !== 'mixed') return materializeOne(resolvedKey, rng);
+  if (resolvedKey !== 'mixed') return materializeOne(resolvedKey, rng, known);
 
   const firstKey = choose(CULTURE_PROFILE_KEYS, rng) || 'germanic';
   const remaining = CULTURE_PROFILE_KEYS.filter((key) => key !== firstKey);
   const secondKey = choose(remaining, rng) || 'latin';
-  const first = materializeOne(firstKey, rng);
-  const second = materializeOne(secondKey, rng);
+  const first = materializeOne(firstKey, rng, known);
+  const second = materializeOne(secondKey, rng, known);
 
   return Object.freeze({
     key: 'mixed',

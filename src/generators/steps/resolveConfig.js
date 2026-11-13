@@ -12,6 +12,7 @@ import { TIER_ORDER, POPULATION_RANGES, getMagicLevel, TOWN_PLUS_TIERS, popToTie
 import { MONSTER_THREAT_RANDOM_POOL, normalizeMonsterThreat } from '../../data/monsterThreat.js';
 import { getTerrainType } from '../terrainHelpers.js';
 import { recordTrace } from '../../domain/trace.js';
+import { atomHolds, declarationOf } from '../../domain/facts/factVocabulary.js';
 import {
   materializeCulturalIdentity,
   resolveCultureProfileKey,
@@ -174,6 +175,7 @@ registerStep('resolveConfig', {
   const culturalIdentity = materializeCulturalIdentity(
     culture,
     rng.fork('cultural-identity'),
+    knownAtResolve(tier), // W2-FIX-DATA-2 item 4: the tier, the one fact a culture line declares that is answered here
   );
   // Keep the authored boundary object explicit at the deterministic seam. It is
   // generation input in its own right, not merely metadata attached to a named
@@ -372,3 +374,22 @@ registerStep('resolveConfig', {
     institutionToggles, categoryToggles, goodsToggles, servicesToggles,
   };
 });
+
+/**
+ * W2-FIX-DATA-2 item 4 (2026-11-13; the REVIEW-W2B cold list, rows 2, 17, 253, 268, 298): WHAT THE CONFIGURATION
+ * ANSWERS when the culture is materialized. The roster does not exist yet, so of the atoms a culture line declares only
+ * the TIER is answered here: a row is refused where one of its atoms is ANSWERED false by the tier (read by the
+ * vocabulary's own reader, `factVocabulary.js :: atomHolds`). Walls, a market, a house, the water: unanswered here, so
+ * never a refusal here; the print side reads them (the arrival scene's redraw honours the whole declaration). Draw-free.
+ * @param {string} tier the resolved tier
+ * @returns {{ refuses: (row: unknown) => boolean }}
+ */
+function knownAtResolve(tier) {
+  const facts = { tier };
+  return {
+    refuses: (row) => {
+      const d = declarationOf(row);
+      return d.needs.some((a) => atomHolds(a, facts) === false) || d.excludes.some((a) => atomHolds(a, facts) === true);
+    },
+  };
+}
