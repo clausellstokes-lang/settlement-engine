@@ -21,7 +21,7 @@ paths re-pointed: `master` = a worktree of db832c892 with `npm ci`; `pgmod` = `n
 Build three native chains from the tip's files (`native/chain.sh m203 203 <migs>`, `mfull 211`, `m203p211 203 <migs> <migs>/211_*.sql`),
 run `npx vitest run --config master-client/vitest.config.mjs` from the master worktree, then
 `node master-client/classify.mjs mfull m203p211` (show-more on master's page by path: expected empty) and
-`classify-less.mjs` (hide-more by path). Records: `out/master-client-review-2026-11-13.json` (the review's run, before
+`classify-less.mjs` (hide-more by path). Records: `out/master-client-review.json` (the review's run, before
 the cures), `out/master-client-pre.json` / `out/master-client-merged.json` (this seat's, before and after the merge).
 
 ## Native (`native/`)
