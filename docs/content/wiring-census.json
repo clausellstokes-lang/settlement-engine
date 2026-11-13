@@ -2,7 +2,7 @@
   "schema": "wiring-census/1",
   "stamp": {
     "files": {
-      "src/domain/display/stateProse/generalStateProse.js": "24b8a57117ced4d8cdb047df1e915fbdc8cb1f46fb6192f8e8c3d63976c9e7f9",
+      "src/domain/display/stateProse/generalStateProse.js": "3ed396f7ef5d6f42fca58446646f1b7591120505df425f816909b5c856454218",
       "src/domain/display/stateProse/powerStateProse.js": "523abd0abf701f5398a4f4e54f11724ea674325edbf3b141bc768a7f3d60b569",
       "src/domain/display/stateProse/economyStateProse.js": "1f730c5bac18dd1491b979cd16cded450c80ad9f832e5dc8bdda85cc89ad65c9",
       "src/domain/display/stateProse/defenseStateProse.js": "afa7daa4602d68f9871058a6759fe067a004ba8c99744d2f31cab063146121b0",
@@ -18,7 +18,7 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1328
+    "producerIndexFiles": 1333
   },
   "totals": {
     "pools": 856,
@@ -49,9 +49,9 @@
     "objectClassed": 112,
     "mountedRows": 725,
     "absent": {
-      "measured": 582,
+      "measured": 590,
       "default": 3,
-      "not-produced": 70,
+      "not-produced": 62,
       "method-call": 18
     },
     "zeroK": 85,
@@ -1522,8 +1522,8 @@
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "court": "not-produced",
-        "prison": "not-produced"
+        "court": "measured",
+        "prison": "measured"
       },
       "covert": false,
       "objectClasses": [
@@ -1596,8 +1596,8 @@
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "court": "not-produced",
-        "prison": "not-produced"
+        "court": "measured",
+        "prison": "measured"
       },
       "covert": false,
       "objectClasses": [
@@ -1661,8 +1661,8 @@
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "court": "not-produced",
-        "prison": "not-produced"
+        "court": "measured",
+        "prison": "measured"
       },
       "covert": false,
       "objectClasses": [],
@@ -1724,8 +1724,8 @@
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "court": "not-produced",
-        "prison": "not-produced"
+        "court": "measured",
+        "prison": "measured"
       },
       "covert": false,
       "objectClasses": [],
@@ -4888,8 +4888,7 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 1,
-        "gate": 2
+        "gate": 3
       },
       "undeclared": 0,
       "crisisScoped": false
