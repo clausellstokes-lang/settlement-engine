@@ -109,11 +109,19 @@ describe('economic survival respects the actual economy', () => {
     );
   });
 
+  // ⭐ RE-KEYED BY IDENTITY (COHERENCE-UPKEEP-5, V3, one cause: limit 1, "what sustains a force counts for no
+  // more than the force"). This town's one force is a watch, so after the limit its supply score reads the
+  // watch, rich or poor alike (57 against 44). The claim is about what the economy PAYS for, so it is read
+  // where pay acts: the supply score of the SUSTAINS parts before the limit (their listed points × the
+  // number of scores), with the same margins (76 against 60).
   test('a healthy economy with identical buildings scores meaningfully higher', () => {
+    /** @param {any} d */
+    const supplyBeforeTheLimit = (d) => Math.round(d.parts.filter((x) => x.group === 'SUSTAINS').reduce((a, x) => a + x.points, 0) * 4);
     const poor = profile(town({ priorityEconomy: 15, prosperity: 'Struggling' }));
     const rich = profile(town({ priorityEconomy: 80, prosperity: 'Prosperous' }));
-    expect(rich.scores.economic).toBeGreaterThan(poor.scores.economic + 15);
-    expect(rich.scores.economic).toBeGreaterThanOrEqual(60);
+    expect(poor.parts.some((x) => x.id === 'sustainsHeld'), 'anchored: the limit binds this town').toBe(true);
+    expect(supplyBeforeTheLimit(rich)).toBeGreaterThan(supplyBeforeTheLimit(poor) + 15);
+    expect(supplyBeforeTheLimit(rich)).toBeGreaterThanOrEqual(60);
   });
 
   test('the gate scales monotonically with economy priority', () => {
@@ -144,9 +152,12 @@ describe('economic survival respects the actual economy', () => {
 });
 
 describe('famine degrades monster defense', () => {
+  // ⭐ RE-KEYED BY IDENTITY (COHERENCE-UPKEEP-5, V3, one cause: a crisis takes from the parts it touches). The
+  // default town's one force is a watch, which patrols no bandit road (no monster points), so a famine has
+  // no patrol to cut; the claim is about a town that patrols, so it is read on the funded apparatus.
   test('a starving town patrols its bandit roads less', () => {
-    const fed = generateDefenseProfile(town({}));
-    const starving = generateDefenseProfile(town({ stressTypes: ['famine'] }));
+    const fed = generateDefenseProfile(town({ institutions: FUNDED_DEFENSES }));
+    const starving = generateDefenseProfile(town({ stressTypes: ['famine'], institutions: FUNDED_DEFENSES }));
     expect(starving.scores.monster).toBeLessThan(fed.scores.monster);
   });
 });
@@ -289,14 +300,16 @@ describe('magical defense respects degraded magic influence', () => {
     { name: 'Arcane Academy' },
   ];
 
+  // ⭐ RE-KEYED BY IDENTITY (COHERENCE-UPKEEP-5, R5 and count once): magic keeps 0.45 + 0.55 × funded from the
+  // ONE label, and crime counts once, in Crime. The destitute city is the one whose label is Struggling.
   test('a crime-ridden destitute city fields weaker arcane defenses than a healthy one', () => {
-    const healthy = generateDefenseProfile(town({
+    const healthy = profile(town({
       magicExists: true, priorityMagic: 70, priorityEconomy: 70, priorityCriminal: 10,
-      institutions: arcaneInstitutions,
+      institutions: arcaneInstitutions, prosperity: 'Prosperous',
     }));
-    const rotten = generateDefenseProfile(town({
+    const rotten = profile(town({
       magicExists: true, priorityMagic: 70, priorityEconomy: 10, priorityCriminal: 85,
-      institutions: arcaneInstitutions,
+      institutions: arcaneInstitutions, prosperity: 'Struggling',
     }));
     expect(healthy.scores.magical).toBeGreaterThan(0);
     expect(rotten.scores.magical).toBeLessThan(healthy.scores.magical);
@@ -312,8 +325,12 @@ describe('magical defense respects degraded magic influence', () => {
     const presence = computeEffectiveMagicPresence(arcaneInstitutions, {
       magicExists: true, priorityMagic: 70, nearbyResources: [],
     });
-    // Ungated baseline: presence score + the arcane-guild profile bonus (+8).
-    expect(healthy.scores.magical).toBe(Math.min(100, presence.score + 8));
+    // ⭐ RE-KEYED BY IDENTITY (COHERENCE-UPKEEP-5, V3): the magic PART keeps all of itself at full funding (the
+    // identity), and it is the presence alone: the guild stands as its own part, never added again (count
+    // once, so no +8). The score is then held by limit 1 (this town fields no force), a separate rule.
+    const magic = healthy.parts.find((x) => x.id === 'magic');
+    expect(magic.full).toBe(Math.round((presence.score / 5) * 10) / 10);
+    expect(magic.points).toBe(magic.full);
   });
 });
 

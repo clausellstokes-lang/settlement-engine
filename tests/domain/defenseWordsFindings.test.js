@@ -171,10 +171,17 @@ describe('the Defense tab says only what the place has', () => {
   // Comfortable, so its gate stands at the identity and writes no note. The first place of this
   // corpus whose one defence is a palisade and whose label is below Comfortable is
   // defense-hamlet-13 (Struggling; its roster names it "Palisade or earthworks").
+  // ⭐ RE-KEYED BY IDENTITY TO THE STANDING LABEL (COHERENCE-UPKEEP-5, the chair's R3): pay reads the label the
+  // place had before its crisis, and defense-hamlet-13 was Comfortable before it (Struggling while it lasts),
+  // so its gate stands at the identity and writes no note. No place of this corpus has a palisade for its one
+  // defence below Comfortable standing; the first of its seed family that does is defense-thorp-20
+  // (Moderate; its roster names it "Palisade"), born here beside the corpus.
   it('a palisade never pays "garrison pay": the note names the palisade', () => {
-    const row = deriveDefenseReadiness(world('defense-hamlet-13')).find((r) => r.label === 'Invasion & War');
-    expect(defenseFactsOf(world('defense-hamlet-13')).defenceNames, 'anchored: the palisade is its one defence').toEqual(['Palisade or earthworks']);
-    expect(row.fundingNote).toMatch(/^Upkeep underfunded: defence upkeep for the palisade or earthworks at \d+%$/);
+    const thorp20 = born('thorp', 20);
+    const row = deriveDefenseReadiness(thorp20).find((r) => r.label === 'Invasion & War');
+    expect(defenseFactsOf(thorp20).defenceNames, 'anchored: the palisade is its one defence').toEqual(['Palisade']);
+    expect(row.fundingNote).not.toMatch(/garrison pay/);
+    expect(row.fundingNote).toMatch(/^Upkeep underfunded: defence upkeep for the palisade at \d+%$/);
   });
 
   it('"Hospital present" only with a real hospital; a healer is named as a healer', () => {
