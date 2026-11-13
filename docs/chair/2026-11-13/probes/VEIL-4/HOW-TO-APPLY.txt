@@ -1,0 +1,34 @@
+THE VEIL LANE'S FOURTH SEAT COULD NOT PUSH. These are its three cure commits, saved by the chair on 2026-11-13.
+
+WHY: the lane's base predates the hook's lane rule, so its push runs the whole check, which reds by one compressed
+byte on the first-paint ceiling (a lazy chunk's hash name; the lane adds no byte to the closure, raw size identical).
+The seat was told to merge the line into the lane to gain the lane rule; its permission layer refused the merge and
+the refusal was not routed round. Nothing of the seat's reached origin: the lane stands at 5a2399cf9.
+
+WHAT IS HERE: VEIL-4-cures.mbox, three patches in order:
+  1. b672694c2  V4-1: each end of a relationship reads from, else npc1Id, else the name (client and migration 211).
+  2. 3fcf695aa  the seat's own addition to the floor list dropped (not needed for the cure).
+  3. a557bf8c8  V4-2, on the server only: a shut goals or ties eye withholds the retired names factionGoal and
+                linkedFactionIds; open eyes send them as before.
+
+VERIFIED BY THE CHAIR on a scratch worktree at 5a2399cf9: all three apply with `git apply` in order, and the blob
+ids after each patch equal the ids in the patch headers for the client file and the migration (byte for byte), and
+for the test file after patch 1. Patch 3's test hunks were written on top of a small commit not saved here
+(bbeeb2bd3: it only added npc1Id and npc2Id to ID_KEYS in the same test file, with a header comment); they apply
+at 5a2399cf9 with offsets and the file passes a syntax check, but that file's final blob id could not be compared.
+
+TO CONTINUE: in a worktree of lane/coherence-veil-2026-11-11, `git am` the mbox (or `git apply` each patch).
+Then the lane must gain the hook's lane rule before it can push: merge origin/lane/integration-2026-11-07 into it
+as its own commit (one conflict, the lighting census baseline: take the line's side, then run the lighting ritual
+through its door; the mutation manifest merges by itself; see the merge book's section 2g). If a session's
+permission layer refuses that merge, the owner's one permitting line in that session is the way; do not route round it.
+
+PROOFS THE SEAT RAN, on the tree BEFORE any merge: the veil's pins 44 of 44; the rollback 0/0/0; the census counts
+2/3/1/1 on a fixture of 203; red-first logs. NOT RE-RUN after patch 3: the six-size probe and the id diff.
+NEVER RUN ON A MERGED TREE: every proof, and the composition with the powers lane (a hidden row must stay hidden
+for the leaders and claimants that lane names, in both stored shapes). The lane's own hand-back part 6 predates
+patch 3 and the floor ruling.
+
+THE LAW THESE CURES SERVE (the chair's record 331): hidden by hand is never sent, by any of the four reads, in
+either stored shape; what is not hidden is sent as before, so that applying 211 alone takes nothing from the
+client deployed today; no ceiling moves; the retired-field register does not grow.

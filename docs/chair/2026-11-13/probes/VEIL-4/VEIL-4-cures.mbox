@@ -1,0 +1,447 @@
+From b672694c22ef97d165890c37555b54ba842289ee Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Fri, 13 Nov 2026 06:55:33 +0000
+Subject: [PATCH] fix(211, veil): a tie stored in master's shape keeps the eyes
+ master's DM shut (V4-1)
+
+THE FOURTH REVIEW (REVIEW-VEIL-211-master-client-2026-11-13, lane/review-veil-3-2026-11-12):
+every town already saved was saved by master's client. Master's panel addressed a relationship
+as relationship.<npc1Id>-<npc2Id>-<type> (db832c892:galleryVeil.js:221); the new rule reads
+from/to (141383cd4), and 211 and the client's veil read rows as stored (the client's v1 -> v2
+step, which maps npc1Id -> from, runs on load, never on the server). So a description eye or a
+whole tie master's DM shut fell away: drawn on the gallery page, and served.
+
+THE CURE: both shapes are the same two ends. Each end reads `from`, else `npc1Id`, else the
+name (`to`, `npc2Id`, the name), in CARD_KINDS.relationship.idOf and in 211's
+_gallery_veil_card_id; the floor keeps both spellings, as master's kept npc1Id/npc2Id (the
+kinds table stays the client's, field for field, galleryServerVeil's pin). A new-shape tie
+has no npc1Id and reads as before.
+
+Red at 5a2399cf9, green after (tests/security/galleryVeilCures.pglite.test.js):
+- the review row: a town in master's shape, a description eye and a whole tie shut by master's
+  addresses, Reveal DM off and on: gallery, link, import, map and page all carried them
+  (old dm=false and dm=true, 5 of 5 each) -> none; the same ties in the new shape held before
+  and after (the control); the open tie drawn and served (the anchor);
+- the client: idOf of a stored tie was relationship.peiyun-huang-jiahao-luo-rival, master's is
+  relationship.npc-1-npc-3-rival -> equal, and equal to the migrated twin's; projectShareVeil
+  hides them;
+- the class: 3,000 fuzzed ties in master's shape: server id = client id = master's id = the
+  migrated twin's id (red: 20 of the first 20 shown differ).
+Both veil pin files: 42 passed, the one red being V4-2's pin, which is not in this commit.
+typecheck:domain:strict 0, typecheck:ratchet 0, eslint 0.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01FbPLbg57D8AQHBtj8HvcLx
+---
+ src/domain/display/galleryVeil.js             |   8 +-
+ .../migrations/211_server_side_share_veil.sql |   7 +-
+ .../security/galleryVeilCures.pglite.test.js  | 100 ++++++++++++++++++
+ 3 files changed, 111 insertions(+), 4 deletions(-)
+
+diff --git a/src/domain/display/galleryVeil.js b/src/domain/display/galleryVeil.js
+index 28e78cac5..e35557210 100644
+--- a/src/domain/display/galleryVeil.js
++++ b/src/domain/display/galleryVeil.js
+@@ -233,8 +233,12 @@ export const CARD_KINDS = Object.freeze({
+   relationship: {
+     lists: [['relationships']],
+     // PEOPLE-4 TIES (R-P7): the tie's ends are `from`/`to` (directed); the names keep their fields.
+-    idOf: (card) => ownIdOr(card, 'relationship', card.from || card.npc1Name, card.to || card.npc2Name, card.type),
+-    floor: ['id', 'type', 'typeName', 'strength', 'from', 'to', 'npc1Name', 'npc2Name', 'npc1Role', 'npc2Role'],
++    // A tie stored by master's client spells the same two ends `npc1Id`/`npc2Id` (the v1 -> v2 step,
++    // settlementMigrations.js, maps npc1Id -> from and npc2Id -> to, and the veil reads rows as stored):
++    // each end reads `from`, else `npc1Id`, else the name, so an eye master's panel shut on a stored
++    // tie keeps its address (COHERENCE-VEIL-4, V4-1; master's rule db832c892:galleryVeil.js:221).
++    idOf: (card) => ownIdOr(card, 'relationship', card.from || card.npc1Id || card.npc1Name, card.to || card.npc2Id || card.npc2Name, card.type),
++    floor: ['id', 'type', 'typeName', 'strength', 'from', 'to', 'npc1Id', 'npc2Id', 'npc1Name', 'npc2Name', 'npc1Role', 'npc2Role'],
+     fields: {
+       tension: ['tension'],
+       description: ['description'],
+diff --git a/supabase/migrations/211_server_side_share_veil.sql b/supabase/migrations/211_server_side_share_veil.sql
+index 966ace38d..809a9fec3 100644
+--- a/supabase/migrations/211_server_side_share_veil.sql
++++ b/supabase/migrations/211_server_side_share_veil.sql
+@@ -116,7 +116,7 @@ returns jsonb language sql immutable as $$
+     },
+     "relationship": {
+       "lists": [["relationships"]],
+-      "floor": ["id", "type", "typeName", "strength", "from", "to", "npc1Name", "npc2Name", "npc1Role", "npc2Role"],
++      "floor": ["id", "type", "typeName", "strength", "from", "to", "npc1Id", "npc2Id", "npc1Name", "npc2Name", "npc1Role", "npc2Role"],
+       "fields": { "tension": ["tension"], "description": ["description"], "hooks": ["plotHooks"] }
+     }
+   }'::jsonb
+@@ -424,8 +424,11 @@ begin
+   end if;
+   if kind = 'tension' then return public._gallery_veil_own_id(c, 'tension', jsonb_build_array(public._gallery_veil_or(c -> 'name', c -> 'title', c -> 'type'))); end if;
+   if kind = 'conflict' then return public._gallery_veil_own_id(c, 'conflict', jsonb_build_array(c -> 'parties', c -> 'issue')); end if;
++  -- a tie's end is `from`, else master's stored `npc1Id`, else the name (and `to`, `npc2Id`): both
++  -- shapes are the same two ends (the client's v1 -> v2 step maps npc1Id -> from; the veil reads rows
++  -- as stored, and every row saved before the new client is in master's shape)
+   if kind = 'relationship' then return public._gallery_veil_own_id(c, 'relationship', jsonb_build_array(
+-      public._gallery_veil_or(c -> 'from', c -> 'npc1Name'), public._gallery_veil_or(c -> 'to', c -> 'npc2Name'), c -> 'type')); end if;
++      public._gallery_veil_or(c -> 'from', c -> 'npc1Id', c -> 'npc1Name'), public._gallery_veil_or(c -> 'to', c -> 'npc2Id', c -> 'npc2Name'), c -> 'type')); end if;
+   return null;
+ end $$;
+
+diff --git a/tests/security/galleryVeilCures.pglite.test.js b/tests/security/galleryVeilCures.pglite.test.js
+index fdcefa647..73ec7e881 100644
+--- a/tests/security/galleryVeilCures.pglite.test.js
++++ b/tests/security/galleryVeilCures.pglite.test.js
+@@ -772,6 +772,106 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
+       .toEqual(Object.fromEntries(Object.keys(out).filter((k) => k.startsWith('211')).map((k) => [k, { page: false, response: false }])));
+   }, ROW_TIMEOUT_MS);
+
++  // ── V4 (the FOURTH review, REVIEW-VEIL-211-master-client-2026-11-13) ──────────────────────────
++  // Every town already saved was saved by master's client, in master's shape, and the veil reads
++  // those rows as stored (211 never runs the client's v1 -> v2 migration). Master's panel addressed
++  // a relationship by its `npc1Id`/`npc2Id` ends (galleryVeil.js:221 at db832c892); the new rule
++  // reads `from`/`to` (141383cd4), so an eye master's DM shut on a relationship fell away. And the
++  // CENSUS of every key master's veil read that the new one no longer reads: master removed an
++  // npc's `factionGoal` under its `goals` eye and its `linkedFactionIds` under its `ties` eye
++  // (db832c892:galleryVeil.js:155,159; master's generator writes both, npcGenerator.js:1285 and
++  // factionRoles.js:262), which the people car retired from the record, so the new tables dropped
++  // them: under Reveal DM (the full record, which keeps both) a shut eye left them served.
++  // Red at 5a2399cf9.
++  /** Master's relationship id, its own rule (db832c892:galleryVeil.js:221), for the addresses its panel wrote. */
++  const masterRelId = (c) => {
++    const own = typeof c.id === 'string' ? c.id : '';
++    if (own) return own;
++    const s = (v) => (typeof v === 'string' ? v : '');
++    const parts = [c.npc1Id || c.npc1Name, c.npc2Id || c.npc2Name, c.type];
++    return `relationship.${slugify(parts.map((p) => (Array.isArray(p) ? p.join('-') : s(p))).filter(Boolean).join('-'))}`;
++  };
++  let slugify;
++  /** The ends of a tie in master's stored shape (the inverse of settlementMigrations.js's tie step). */
++  const toOldShape = ({ from, to, ...rest }) => ({ ...rest, npc1Id: from, npc2Id: to });
++  const V41_NEW = {
++    name: 'T',
++    npcs: [{ id: 'npc-1', name: 'Peiyun Huang', role: 'smith' }, { id: 'npc-3', name: 'Jiahao Luo', role: 'guard' }],
++    relationships: [
++      { from: 'npc-1', to: 'npc-3', type: 'rival', typeName: 'Rival', npc1Name: 'Peiyun Huang', npc2Name: 'Jiahao Luo', description: 'V41_DESC_FIELD' },
++      { from: 'npc-3', to: 'npc-1', type: 'debtor', typeName: 'Debtor', npc1Name: 'Jiahao Luo', npc2Name: 'Peiyun Huang', description: 'V41_DESC_CARD', tension: 'V41_TENSION_CARD' },
++      { from: 'npc-1', to: 'npc-3', type: 'ally', typeName: 'Ally', npc1Name: 'Peiyun Huang', npc2Name: 'Jiahao Luo', description: 'V41_KEEP' },
++    ],
++  };
++  const V41_OLD = { ...V41_NEW, relationships: V41_NEW.relationships.map(toOldShape) };
++  // the addresses master's panel wrote: one description eye, one whole card
++  const V41_DELTAS = () => [
++    { address: `field:relationship:${masterRelId(V41_OLD.relationships[0])}:description`, hidden: true },
++    { address: `card:relationship:${masterRelId(V41_OLD.relationships[1])}`, hidden: true },
++  ];
++  const v41Secret = (v) => has(v, 'V41_DESC_FIELD') || has(v, 'V41_DESC_CARD') || has(v, 'V41_TENSION_CARD');
++
++  it('V4-1 (the review row): a relationship eye master\'s DM shut on a town stored in master\'s shape holds in every read', async () => {
++    slugify = (await import('../../src/domain/dossier/entityLinks.js')).slugifyEntity;
++    expect(masterRelId(V41_OLD.relationships[0])).toBe('relationship.npc-1-npc-3-rival');
++    const out = {};
++    for (const [shape, doc] of [['old', V41_OLD], ['new', V41_NEW]]) {
++      for (const dm of [false, true]) {
++        const r = await v31Reads(LIVE.db, doc, veil.writeShareVeil({}, V41_DELTAS()), { dm });
++        // anchored: the open tie's description is drawn and served, so the reads are the town's ties
++        expect(has(r.page, 'V41_KEEP') && has(r.gallery, 'V41_KEEP') && has(r.import, 'V41_KEEP'), `${shape} dm=${dm}: anchor`).toBe(true);
++        out[`${shape} dm=${dm}`] = { gallery: v41Secret(r.gallery), link: v41Secret(r.link), import: v41Secret(r.import), map: v41Secret(r.map), page: v41Secret(r.page) };
++      }
++    }
++    const clean = { gallery: false, link: false, import: false, map: false, page: false };
++    // the control: the same ties in the new shape (the same ends, as the migration maps them) hold already
++    expect(out['new dm=false']).toEqual(clean);
++    expect(out['new dm=true']).toEqual(clean);
++    expect(out).toEqual(Object.fromEntries(Object.keys(out).map((k) => [k, clean])));
++  }, ROW_TIMEOUT_MS);
++
++  it('V4-1 (the client): both shapes are the same two ends — the client\'s id on a stored tie is master\'s, and its migrated twin\'s', async () => {
++    slugify = (await import('../../src/domain/dossier/entityLinks.js')).slugifyEntity;
++    const { migrateV1toV2 } = await import('../../src/domain/settlementMigrations.js');
++    const migrated = migrateV1toV2(structuredClone(V41_OLD)).settlement.relationships;
++    for (const [i, old] of V41_OLD.relationships.entries()) {
++      expect(veil.CARD_KINDS.relationship.idOf(old), `tie ${i}: master's address`).toBe(masterRelId(old));
++      expect(veil.CARD_KINDS.relationship.idOf(migrated[i]), `tie ${i}: the migrated twin`).toBe(masterRelId(old));
++    }
++    // and the client's own projection of an unmarked-era delta list over the stored town hides them
++    const projected = veil.projectShareVeil(veil.galleryPayloadFor(V41_OLD, {}), veil.writeShareVeil({}, V41_DELTAS()));
++    expect(has(projected, 'V41_KEEP')).toBe(true);
++    expect(v41Secret(projected)).toBe(false);
++  }, ROW_TIMEOUT_MS);
++
++  it('V4-1 (the class): 3,000 fuzzed ties in master\'s shape: server id = client id = master\'s id = the migrated twin\'s id', async () => {
++    slugify = (await import('../../src/domain/dossier/entityLinks.js')).slugifyEntity;
++    const { migrateV1toV2 } = await import('../../src/domain/settlementMigrations.js');
++    const r = rngOf(4101);
++    const OLD_KEYS = ['id', 'npc1Id', 'npc2Id', 'npc1Name', 'npc2Name', 'type'];
++    const texts = Array.from({ length: 3000 }, () => {
++      // both ends present most of the time (what master wrote), sometimes one or neither (a hand edit)
++      const keys = OLD_KEYS.filter((k) => (k === 'npc1Id' || k === 'npc2Id' ? r() < 0.9 : k === 'id' ? r() < 0.15 : r() < 0.6));
++      return `{${keys.map((k) => `${JSON.stringify(k)}:${valueToken(r)}`).join(',')}}`;
++    });
++    const rows = (await LIVE.db.query(`select e::text as t, public._gallery_veil_card_id('relationship', e) as id
++        from jsonb_array_elements($1::jsonb) with ordinality x(e, o) order by o`, [`[${texts.join(',')}]`])).rows;
++    expect(rows).toHaveLength(3000);
++    const bad = []; let moved = 0;
++    for (const { t, id } of rows) {
++      const card = JSON.parse(t);
++      const master = masterRelId(card);
++      const client = veil.CARD_KINDS.relationship.idOf(card);
++      const twin = migrateV1toV2({ relationships: [card] }).settlement.relationships[0];
++      if ('from' in twin) moved += 1;
++      const twinId = veil.CARD_KINDS.relationship.idOf(twin);
++      if (id !== master || client !== master || twinId !== master) bad.push(`${t.slice(0, 120)} -> server ${id}, client ${client}, twin ${twinId}, master ${master}`);
++    }
++    // anchored: most ties were moved by the migration, so the twin is the new shape
++    expect(moved).toBeGreaterThan(2000);
++    expect(bad.slice(0, 20)).toEqual([]);
++  }, ROW_TIMEOUT_MS);
++
+   // ── THE ROLLBACK ──────────────────────────────────────────────────────────────────────────────
+   it('the rollback: 001..211 then supabase/rollback/211_*.down.sql equals a chain stopped at 210, byte for byte', async () => {
+     const down = readdirSync(ROLLBACK).filter((f) => /^211_.*\.down\.sql$/.test(f));
+--
+2.43.0
+
+From 3fcf695aa565cb4a0a42ab93064b8612c8282e42 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Fri, 13 Nov 2026 09:32:28 +0000
+Subject: [PATCH] fix(211, veil): the relationship floor as it was — the npc1Id/npc2Id addition dropped (the chair's ruling 331)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+V4-1's cure is the id (each end reads from, else npc1Id, else the name); the floor
+addition was this seat's call and not needed for it (part 6 §0.2). The chair's ruling 331
+drops it: it widened the reviewer's read and drew most of the first-paint overage. A hidden
+tie stored in master's shape now loses npc1Id/npc2Id with its depth, which hides more.
+Client and 211 together (the kinds table stays the client's, field for field).
+
+The V4-1 pins 3/3; galleryServerVeil 16/16 (its kinds-table pin included); eslint 0.
+First paint (scratch meter = the arm's own walk): as committed before this, gzip 357,233
+(+8) / Brotli 300,036 (+51); after it, 357,226 (+1) / 299,874 (-111); raw 1,121,260
+unchanged in every build: the closure differs only in one chunk hash (part 6 §6).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01FbPLbg57D8AQHBtj8HvcLx
+---
+ src/domain/display/galleryVeil.js                  | 2 +-
+ supabase/migrations/211_server_side_share_veil.sql | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/domain/display/galleryVeil.js b/src/domain/display/galleryVeil.js
+index e35557210..2ee3987e3 100644
+--- a/src/domain/display/galleryVeil.js
++++ b/src/domain/display/galleryVeil.js
+@@ -238,7 +238,7 @@ export const CARD_KINDS = Object.freeze({
+     // each end reads `from`, else `npc1Id`, else the name, so an eye master's panel shut on a stored
+     // tie keeps its address (COHERENCE-VEIL-4, V4-1; master's rule db832c892:galleryVeil.js:221).
+     idOf: (card) => ownIdOr(card, 'relationship', card.from || card.npc1Id || card.npc1Name, card.to || card.npc2Id || card.npc2Name, card.type),
+-    floor: ['id', 'type', 'typeName', 'strength', 'from', 'to', 'npc1Id', 'npc2Id', 'npc1Name', 'npc2Name', 'npc1Role', 'npc2Role'],
++    floor: ['id', 'type', 'typeName', 'strength', 'from', 'to', 'npc1Name', 'npc2Name', 'npc1Role', 'npc2Role'],
+     fields: {
+       tension: ['tension'],
+       description: ['description'],
+diff --git a/supabase/migrations/211_server_side_share_veil.sql b/supabase/migrations/211_server_side_share_veil.sql
+index 809a9fec3..6cc82965b 100644
+--- a/supabase/migrations/211_server_side_share_veil.sql
++++ b/supabase/migrations/211_server_side_share_veil.sql
+@@ -116,7 +116,7 @@ returns jsonb language sql immutable as $$
+     },
+     "relationship": {
+       "lists": [["relationships"]],
+-      "floor": ["id", "type", "typeName", "strength", "from", "to", "npc1Id", "npc2Id", "npc1Name", "npc2Name", "npc1Role", "npc2Role"],
++      "floor": ["id", "type", "typeName", "strength", "from", "to", "npc1Name", "npc2Name", "npc1Role", "npc2Role"],
+       "fields": { "tension": ["tension"], "description": ["description"], "hooks": ["plotHooks"] }
+     }
+   }'::jsonb
+--
+2.43.0
+
+From a557bf8c8e5cffa51c9171db7741ad711ad5e62f Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Fri, 13 Nov 2026 09:44:23 +0000
+Subject: [PATCH] fix(211): a shut goals or ties eye withholds master's
+ factionGoal and linkedFactionIds (V4-2, form b')
+
+The census's second find, ruled by the chair (record 331): hidden by hand means never sent,
+in either stored shape, by every read; what is not hidden is sent as before. A person stored
+by master's client carries factionGoal and linkedFactionIds, which master's goals and ties
+eyes governed; the people car retired both, so the tables dropped them, and under a DM
+reveal (Reveal DM, or one member revealDm: true) a shut eye left them served.
+
+THE CURE, ON THE SERVER ONLY: 211's applier (_gallery_veil_card) expands a shut npc goals
+eye to factionGoal and a shut ties eye to linkedFactionIds, card eye or class switch, and
+nothing while the eye is open. The kinds table stays the client's field for field
+(galleryServerVeil's pin); the client's source names neither key, so the shrink-only
+retired-field register does not grow. No new function: the rollback is unchanged.
+
+Red at 3fcf695aa, green after (tests/security/galleryVeilCures.pglite.test.js):
+- the read-only count's three fixture shares (Reveal DM with the card's eyes, Reveal DM with
+  the class switches, one person revealed): gallery, import and page carried them -> none;
+  link and map never did; the open person's names are sent as 210 sends them;
+- the class: 60 towns in master's shape (npcs with both keys, ties in npc1Id/npc2Id), eyes
+  shut at random by card, class switch and member, Reveal DM on and off: every hidden marker
+  absent from gallery, link, import, map and page; every open one sent by the gallery read
+  exactly as at 210 (red: hidden markers sent by gallery, import and page);
+- the parity fuzz (400 documents, four reads, 211 against 210) now draws both keys and the
+  goals and ties switches.
+Both veil pin files: 44/44. eslint 0.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01FbPLbg57D8AQHBtj8HvcLx
+---
+ .../migrations/211_server_side_share_veil.sql |   9 +-
+ .../security/galleryVeilCures.pglite.test.js  | 106 +++++++++++++++++-
+ 2 files changed, 112 insertions(+), 3 deletions(-)
+
+diff --git a/supabase/migrations/211_server_side_share_veil.sql b/supabase/migrations/211_server_side_share_veil.sql
+index 6cc82965b..767f39e91 100644
+--- a/supabase/migrations/211_server_side_share_veil.sql
++++ b/supabase/migrations/211_server_side_share_veil.sql
+@@ -821,9 +821,16 @@ begin
+     own := byid -> id;
+   end if;
+   drops := drops || array(select jsonb_array_elements_text(coalesce(own, '[]')));
++  -- SERVER ONLY (COHERENCE-VEIL-4, V4-2; the chair's ruling 331): a person stored by master's client
++  -- carries `factionGoal` and `linkedFactionIds`, which master's goals and ties eyes governed
++  -- (db832c892:galleryVeil.js:155,159). The people car retired both names, so the client's table no
++  -- longer lists them; here they are the same content as the eye that governs them, withheld with it
++  -- and sent as before while it is open. Never the client's table: it stays the client's, field for field.
+   return c - array(
+     select k from unnest(drops) f2,
+-      lateral (select jsonb_array_elements_text(case when kd -> 'fields' ? f2 then kd -> 'fields' -> f2 else jsonb_build_array(f2) end) k) kk
++      lateral (select jsonb_array_elements_text(case when kd -> 'fields' ? f2
++        then (kd -> 'fields' -> f2) || coalesce('{"npc": {"goals": ["factionGoal"], "ties": ["linkedFactionIds"]}}'::jsonb -> kind -> f2, '[]')
++        else jsonb_build_array(f2) end) k) kk
+      where not (kd -> 'floor' ? k));
+ end $$;
+
+diff --git a/tests/security/galleryVeilCures.pglite.test.js b/tests/security/galleryVeilCures.pglite.test.js
+index b7f22c43e..554fe7641 100644
+--- a/tests/security/galleryVeilCures.pglite.test.js
++++ b/tests/security/galleryVeilCures.pglite.test.js
+@@ -254,7 +254,9 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
+   function docText(r) {
+     const card = () => {
+       const keys = [...ID_KEYS, 'category', 'priorityCategory', 'facets', 'tags', 'serviceKeys', 'desc', 'description', 'secret', 'plotHooks',
+-        'institution', 'linkedInstitutionIds', 'members', 'captureState', 'reason', 'personality', 'allegiance', 'stakes'].filter(() => r() < 0.3);
++        'institution', 'linkedInstitutionIds', 'members', 'captureState', 'reason', 'personality', 'allegiance', 'stakes',
++        // master's stored person (COHERENCE-VEIL-4, V4-2): the retired names a goals or ties eye governs on the server
++        'factionGoal', 'linkedFactionIds'].filter(() => r() < 0.3);
+       return `{${keys.map((k) => `${JSON.stringify(k)}:${k === 'category' && r() < 0.5 ? '"criminal"' : k === 'tags' && r() < 0.5 ? '["facet:clandestine:clandestine","brokerage","criminal"]' : valueToken(r)}`).join(',')}}`;
+     };
+     const list = () => (r() < 0.85 ? `[${Array.from({ length: Math.floor(r() * 5) }, () => (r() < 0.9 ? card() : valueToken(r))).join(',')}]` : valueToken(r));
+@@ -269,7 +271,8 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
+     return `{${parts.join(',')}}`;
+   }
+   const GOOD_ADDRESSES = ['tab:plot_hooks', 'block:services.criminal', 'block:power.criminalUnderside', 'class:npc:secret', 'class:institution:services',
+-    'class:event:description', 'field:event:event.legacy-1:description', 'card:institution:house', 'card:npc:npc.a', 'field:npc:1e-7:personality'];
++    'class:event:description', 'field:event:event.legacy-1:description', 'card:institution:house', 'card:npc:npc.a', 'field:npc:1e-7:personality',
++    'class:npc:goals', 'class:npc:ties', 'field:npc:npc.a:goals'];
+   function overridesText(r) {
+     const parts = [];
+     for (let i = Math.floor(r() * 4); i > 0; i -= 1) parts.push(`${JSON.stringify(STRINGS[Math.floor(r() * STRINGS.length)] || 'k')}:${r() < 0.6 ? `{"revealDm":${r() < 0.5 ? 'false' : 'true'},"allowImport":${r() < 0.5 ? 'false' : 'true'}}` : r() < 0.6 ? `{"revealDm":${valueToken(r)},"allowImport":${valueToken(r)}}` : valueToken(r)}`);
+@@ -876,6 +879,105 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
+     expect(bad.slice(0, 20)).toEqual([]);
+   }, ROW_TIMEOUT_MS);
+
++  // ── V4-2 (the census's second find; the chair's ruling 331, form b') ─────────────────────────────
++  // THE PRINCIPLE: by every one of the four reads, in either stored shape, content the owner hid by
++  // hand is never sent; content not hidden is sent as before. An npc stored by master's client carries
++  // `factionGoal` and `linkedFactionIds`, which master's goals and ties eyes governed; on the server
++  // only, a shut goals eye withholds factionGoal and a shut ties eye linkedFactionIds (the client's
++  // source names neither: the retired-field register does not grow). Red at 5a2399cf9 on the read-only
++  // count's three fixture shares (veil-probe-3/v42-fixture.sql).
++  const v42Doc = () => ({
++    name: 'T',
++    npcs: [
++      { id: 'a', name: 'Ada', role: 'smith', personality: { core: 'V42_ANCHOR' }, factionGoal: 'V42_SHUT_GOAL', linkedFactionIds: ['faction.v42_shut_link'] },
++      { id: 'b', name: 'Bel', role: 'clerk', factionGoal: 'V42_OPEN_GOAL', linkedFactionIds: ['faction.v42_open_link'] },
++    ],
++  });
++  const v42Shut = (v) => has(v, 'V42_SHUT_GOAL') || has(v, 'v42_shut_link');
++  const v42Open = (v) => has(v, 'V42_OPEN_GOAL') && has(v, 'v42_open_link');
++
++  it('V4-2 (the count\'s fixture rows): a shut goals or ties eye withholds the retired names in every read; open eyes send them as before', async () => {
++    const rows = [
++      // q1: Reveal DM, the eyes on the card
++      ['Reveal DM, the card\'s eyes', veil.writeShareVeil({}, [{ address: 'field:npc:a:goals', hidden: true }, { address: 'field:npc:a:ties', hidden: true }]), true, true],
++      // q2: Reveal DM, the class switches (they shut every person's: no open control)
++      ['Reveal DM, the class switches', veil.writeShareVeil({}, [{ address: 'class:npc:goals', hidden: true }, { address: 'class:npc:ties', hidden: true }]), true, false],
++      // q3: one person revealed, no Reveal DM
++      ['one person revealed', { ...veil.writeShareVeil({}, [{ address: 'field:npc:a:goals', hidden: true }, { address: 'field:npc:a:ties', hidden: true }]), a: { revealDm: true }, b: { revealDm: true } }, false, true],
++    ];
++    const out = {};
++    for (const [tag, ov, dm, openControl] of rows) {
++      const r = await v31Reads(LIVE.db, v42Doc(), ov, { dm });
++      expect(has(r.gallery, 'V42_ANCHOR'), `${tag}: the town's read`).toBe(true);
++      // content not hidden is sent as before: the open person's retired names, as 210 sends them
++      if (openControl) {
++        const before = await v31Reads(AT210.db, v42Doc(), ov, { dm });
++        expect([v42Open(r.gallery), v42Open(r.import), v42Open(r.page)], `${tag}: open eyes`).toEqual([v42Open(before.gallery), v42Open(before.import), true]);
++      }
++      out[tag] = { gallery: v42Shut(r.gallery), link: v42Shut(r.link), import: v42Shut(r.import), map: v42Shut(r.map), page: v42Shut(r.page) };
++    }
++    // the red control: 210 sends them in the gallery response (master's page then removed them itself)
++    expect(v42Shut((await v31Reads(AT210.db, v42Doc(), rows[0][1], { dm: true })).gallery)).toBe(true);
++    const clean = { gallery: false, link: false, import: false, map: false, page: false };
++    expect(out).toEqual(Object.fromEntries(rows.map(([tag]) => [tag, clean])));
++  }, ROW_TIMEOUT_MS);
++
++  it('V4 (the class): 60 towns in master\'s shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210', async () => {
++    slugify = (await import('../../src/domain/dossier/entityLinks.js')).slugifyEntity;
++    const r = rngOf(4242);
++    const pick = (xs) => xs[Math.floor(r() * xs.length)];
++    const breaches = []; const tally = { towns: 0, hidden: 0, open: 0, dm: 0, revealedOne: 0, classes: 0 };
++    for (let i = 0; i < 60; i += 1) {
++      const npcs = [0, 1, 2].map((j) => ({ id: `n${i}_${j}`, name: `Person ${i} ${j}`, role: 'smith',
++        factionGoal: `V4C_GOAL_${i}_${j}_`, linkedFactionIds: [`faction.v4c_link_${i}_${j}_`] }));
++      const ties = [[0, 1, 'rival'], [1, 2, 'ally'], [2, 0, 'debtor']].map(([x, y, type], k) => ({ npc1Id: npcs[x].id, npc2Id: npcs[y].id,
++        npc1Name: npcs[x].name, npc2Name: npcs[y].name, type, typeName: type, description: `V4C_TIE_${i}_${k}_` }));
++      const deltas = []; const hidden = new Set(); const members = {};
++      const dm = r() < 0.5; if (dm) tally.dm += 1;
++      const classGoals = r() < 0.15; const classTies = r() < 0.15;
++      if (classGoals) deltas.push({ address: 'class:npc:goals', hidden: true });
++      if (classTies) deltas.push({ address: 'class:npc:ties', hidden: true });
++      if (classGoals || classTies) tally.classes += 1;
++      for (const n of npcs) {
++        const eyes = pick([[], ['goals'], ['ties'], ['goals', 'ties']]);
++        for (const e of eyes) deltas.push({ address: `field:npc:${n.id}:${e}`, hidden: true });
++        if (eyes.includes('goals') || classGoals) hidden.add(n.factionGoal);
++        if (eyes.includes('ties') || classTies) hidden.add(n.linkedFactionIds[0].slice('faction.'.length));
++        const m = r();
++        if (m < 0.15) { members[n.id] = { revealDm: false }; hidden.add(n.factionGoal); hidden.add(n.linkedFactionIds[0].slice('faction.'.length)); } else if (m < 0.35) { members[n.id] = { revealDm: true }; tally.revealedOne += 1; }
++      }
++      for (const t of ties) {
++        const how = pick(['none', 'description', 'card']);
++        if (how === 'description') deltas.push({ address: `field:relationship:${masterRelId(t)}:description`, hidden: true });
++        if (how === 'card') deltas.push({ address: `card:relationship:${masterRelId(t)}`, hidden: true });
++        if (how !== 'none') hidden.add(t.description);
++      }
++      const doc = { name: 'T', npcs, relationships: ties };
++      const ov = { ...veil.writeShareVeil({}, deltas), ...members };
++      const now = await v31Reads(LIVE.db, doc, ov, { dm });
++      const before = await v31Reads(AT210.db, doc, ov, { dm });
++      tally.towns += 1;
++      const markers = [...npcs.flatMap((n) => [n.factionGoal, n.linkedFactionIds[0].slice('faction.'.length)]), ...ties.map((t) => t.description)];
++      for (const m of markers) {
++        if (hidden.has(m)) {
++          tally.hidden += 1;
++          for (const read of ['gallery', 'link', 'import', 'map', 'page']) if (has(now[read], m)) breaches.push(`#${i} ${m} hidden, sent by ${read}`);
++        } else {
++          tally.open += 1;
++          if (has(now.gallery, m) !== has(before.gallery, m)) breaches.push(`#${i} ${m} open: 211 ${has(now.gallery, m)}, 210 ${has(before.gallery, m)}`);
++        }
++      }
++    }
++    // anchored: both halves of the law are exercised, over shares with and without a reveal
++    expect(tally.towns).toBe(60);
++    expect(tally.hidden).toBeGreaterThan(100);
++    expect(tally.open).toBeGreaterThan(100);
++    expect(tally.dm).toBeGreaterThan(10);
++    expect(tally.revealedOne).toBeGreaterThan(10);
++    expect(tally.classes).toBeGreaterThan(5);
++    expect(breaches.slice(0, 20)).toEqual([]);
++  }, ROW_TIMEOUT_MS);
++
+   // ── THE ROLLBACK ──────────────────────────────────────────────────────────────────────────────
+   it('the rollback: 001..211 then supabase/rollback/211_*.down.sql equals a chain stopped at 210, byte for byte', async () => {
+     const down = readdirSync(ROLLBACK).filter((f) => /^211_.*\.down\.sql$/.test(f));
+--
+2.43.0
+
