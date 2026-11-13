@@ -1,5 +1,6 @@
 # UPKEEP-CAPACITY, the second corpus (corpus2.mjs). python3 an2.py <dir-with-c2-*.ndjson> <census.json>
-import json, sys, glob, collections as C
+import json, sys, glob, os, collections as C
+VARS = os.environ.get('CAP_VARIANTS', 'A,B').split(',')  # a merged file (merge3.py) carries base, E and BE
 d, cj = sys.argv[1], sys.argv[2]
 rows = [json.loads(l) for f in sorted(glob.glob(f'{d}/c2-*.ndjson')) for l in open(f)]
 census = json.load(open(cj))
@@ -12,7 +13,7 @@ for r in rows:
         for h in hs: off[(p, h[0], h[1], h[2], r['tier'])] += 1
 print('houses by rung and tier (scaled parts):')
 for k in sorted({k[:4] for k in off}): print(f'  {k[0]:10s} {k[1]:34s} {k[2]}/{k[3]} ' + ' '.join(f'{off[k + (t,)]:4d}' for t in T))
-for v in ['A', 'B']:
+for v in VARS:
     print(f'\n======== {v} against base (each seed born three times, the factor through the whole pipeline) ========')
     dl = [r[v]['score'] - r['base']['score'] for r in rows]
     mv = [x for x in dl if x]
@@ -51,7 +52,7 @@ for v in ['A', 'B']:
         for n in a - b: gv[('out', n)] += 1
     print('          powers in/out: ' + str(gv.most_common(12)))
 print('\n======== THE COUNT LAW (each house dropped alone; two HOUSE parts moving on one score) ========')
-for v in ['base', 'A', 'B']:
+for v in ['base'] + VARS:
     tw = C.Counter(); births = 0; der = C.Counter()
     for r in rows:
         t = r[v]['count']['twice']
@@ -78,3 +79,28 @@ for r in rows:
     sb += hit
 print(f'\n  STATIC (a house that opens two parts sharing a score, both parts standing; the weights\' scores, not the birth\'s): births {sb}')
 for k, n in st.most_common(20): print(f'     {n:5d}  {k}')
+# The drop test, split: a house that ITSELF opens two of the parts that moved on one score (a double feed), against
+# a move in a part the house does not open (the traditions' shared cap against beasts, R2; or a factor whose
+# greatest house was the one dropped). Openers from the census, keyed by the part id.
+PID = lambda p: PARTID.get(p, p)
+opens_id = C.defaultdict(set)
+for n, ps in opens.items():
+    for p in ps: opens_id[n].add(PID(p))
+for p, hs in census['parts'].items():
+    if p in ('arcaneTower', 'arcaneGuild'):
+        for h in hs: opens_id[h['name']].add('arcane')
+    if p in ('clergyShrine', 'clergyStrong'):
+        for h in hs: opens_id[h['name']].add('clergy')
+print('\n======== THE COUNT LAW, split: the house\'s OWN parts (a double feed) | a part it does not open (side effect) ========')
+for v in ['base'] + VARS:
+    own = C.Counter(); side = C.Counter(); bo = 0
+    for r in rows:
+        hit = False
+        for h, s, ids in r[v]['count']['twice']:
+            mine = sorted(set(ids) & opens_id.get(h, set()))
+            if len(mine) > 1: own[(h, s, '+'.join(mine))] += 1; hit = True
+            else: side[(h, s, '+'.join(sorted(ids)))] += 1
+        bo += hit
+    print(f'  {v}: births with a house feeding one score through two of ITS OWN parts: {bo}')
+    for k, n in own.most_common(10): print(f'     own  {n:5d}  {k}')
+    print(f'     side effects (not a double feed): {sum(side.values())} rows; top: {side.most_common(4)}')

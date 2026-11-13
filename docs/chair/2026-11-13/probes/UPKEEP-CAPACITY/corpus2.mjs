@@ -35,7 +35,11 @@ const factorOf = (pick) => (id, institutions) => {
   const hs = (institutions || []).map((i) => L[id][nativeSemanticName(i).toLowerCase()]).filter(Boolean);
   return hs.length ? Math.max(...hs.map(pick)) : 1;
 };
-const CAND = { base: null, A: factorOf(FA), B: factorOf(FB) };
+// CAP_CANDS (default base,A,B): E = the alchemist shop and quarter leave the arcane opener (a trade, not a retained
+// caster), no factor; BE = B with E. The base of a later run is the base of the first (same tree, same seeds).
+const ALL = { base: null, A: factorOf(FA), B: factorOf(FB), E: null, BE: factorOf(FB) };
+const ALCH_LEAVES = new Set(['E', 'BE']);
+const CAND = Object.fromEntries((process.env.CAP_CANDS || 'base,A,B').split(',').map((k) => [k, ALL[k]]));
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 const rows = [];
 for (const tier of TIERS) for (let i = 0; i < (tier === 'metropolis' ? 40 : 240); i++) rows.push({ key: `cold-${tier}-${i}`, tier, stress: null });
@@ -72,6 +76,7 @@ for (let r = shard; r < rows.length; r += shards) {
   const line = { key: row.key, tier: row.tier, forced: row.stress };
   for (const [name, f] of Object.entries(CAND)) {
     if (f) globalThis.__CAP_f = f; else delete globalThis.__CAP_f;
+    if (ALCH_LEAVES.has(name)) globalThis.__U6_alchNoArcane = ['alchemist shop', 'alchemist quarter']; else delete globalThis.__U6_alchNoArcane;
     try {
       const s = generateSettlementPipeline(cfg(), null, { seed: row.key, customContent: {} });
       const d = s.defenseProfile || {}; const ps = s.powerStructure || {};
@@ -85,11 +90,11 @@ for (let r = shard; r < rows.length; r += shards) {
         hPow: hash(ps), powers: (ps.factions || []).map((x) => x.faction).sort(), legit: ps.publicLegitimacy?.score ?? null, legitLabel: ps.publicLegitimacy?.label ?? null,
         hRest: hash(rest), hAll: hash(s),
         parts: Object.fromEntries(defencePartsOf(s, k).map((x) => [x.id, x.points])),
-        houses: name === 'base' ? Object.fromEntries(SCALED.map((p) => [p, (s.institutions || []).map((i) => L[p][nativeSemanticName(i).toLowerCase()]).filter(Boolean).map((h) => [h.name, h.rung, h.of])]).filter(([, v]) => v.length)) : undefined,
+        houses: (name === 'base' || name === 'E') ? Object.fromEntries(SCALED.map((p) => [p, (s.institutions || []).map((i) => L[p][nativeSemanticName(i).toLowerCase()]).filter(Boolean).map((h) => [h.name, h.rung, h.of])]).filter(([, v]) => v.length)) : undefined,
         count: DROPS ? countLaw(s, k) : undefined,
-        names: name === 'base' ? (s.institutions || []).map((i) => nativeSemanticName(i)) : undefined,
+        names: (name === 'base' || name === 'E') ? (s.institutions || []).map((i) => nativeSemanticName(i)) : undefined,
       };
-    } finally { delete globalThis.__CAP_f; }
+    } finally { delete globalThis.__CAP_f; delete globalThis.__U6_alchNoArcane; }
   }
   o.write(`${JSON.stringify(line)}\n`);
 }

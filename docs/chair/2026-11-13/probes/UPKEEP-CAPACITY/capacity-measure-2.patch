@@ -1,7 +1,16 @@
 diff --git a/src/generators/defenseGenerator.js b/src/generators/defenseGenerator.js
-index f94ed25f0..00133ddb2 100644
+index f94ed25f0..c0589f1dc 100644
 --- a/src/generators/defenseGenerator.js
 +++ b/src/generators/defenseGenerator.js
+@@ -211,7 +211,7 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
+   const names = defenseTraditionNamesOf(institutions);
+   const G = W.traditionGates;
+   const t = {
+-    hasArcane: magicOn && magPri >= G.arcane && (inst.hasMagicInst || names.arcane),
++    hasArcane: magicOn && magPri >= G.arcane && ((globalThis.__U6_alchNoArcane ? getInstFlags(config, institutions.filter((i) => !globalThis.__U6_alchNoArcane.some((h) => String(i?.name || '').toLowerCase().includes(h)))).inst.hasMagicInst : inst.hasMagicInst) || names.arcane), // probe: an alchemist is a trade, not a retained caster (inert unless set)
+     hasArcaneGuild: magicOn && magPri >= G.arcaneGuild && names.arcaneGuild,
+     hasDivine: magicOn && relPri >= G.divine && (names.divine || (relPri >= G.divineShrine && names.divineShrine)),
+     hasDivineStrong: magicOn && relPri >= G.divineStrong && names.divineStrong,
 @@ -235,7 +235,7 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
    // (alchemists, druids, arcane, the hospital) leaves the presence: count once (ruling 4, reading A).
    const hasActualMagic = inst.hasMagicInst || t.hasDruid || t.hasArcane || names.actualMagic;
