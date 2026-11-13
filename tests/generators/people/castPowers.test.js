@@ -65,8 +65,13 @@ function assertPowers(s, label) {
       expect(powerSet.has(m.power), `${label}: ${card.id} names a power that exists (${m.power})`).toBe(true);
       expect([1, 2, 3, null], `${label}: ${card.id} rank`).toContain(m.rank);
       // COHERENCE-POWERS re-key (the dual hat, the chair's ruling of 2026-11-11): the one membership at share 0 is
-      // the leader's office — the governing power's first, held whatever its house backs
-      if (!(m.power === governing && m.rank === 1)) expect(m.share, `${label}: ${card.id} share > 0`).toBeGreaterThan(0);
+      // the leader's office — the governing power's first, held whatever its house backs. COHERENCE-POWERS-5 (N8;
+      // REVIEW-POWERS-2): restored to its strictness, re-keyed BY IDENTITY: every membership is a share > 0, but the
+      // dual-hat leader's office (a house's face carrying the office in its role, first of the governing power), which
+      // is exactly 0 where its house backs elsewhere and > 0 where it backs the governing power
+      const office = m.power === governing && m.rank === 1 && card.institution?.kind === 'house' && card.role !== card.title;
+      if (office && m.share === 0) expect(Object.is(m.share, 0), `${label}: ${card.id} the office at share exactly 0`).toBe(true);
+      else expect(m.share, `${label}: ${card.id} share > 0`).toBeGreaterThan(0);
     }
     expect(new Set(card.memberships.map((m) => m.power)).size, `${label}: ${card.id} one membership per power`).toBe(card.memberships.length);
   }
