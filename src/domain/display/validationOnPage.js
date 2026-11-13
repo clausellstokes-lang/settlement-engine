@@ -37,7 +37,7 @@ import { institutionDisplayName } from './institutionDisplayName.js';
 import { resourceDisplayName } from './resourceDisplayName.js';
 import { compareCodepoint } from '../deterministicSort.js';
 import { importsAsPrinted } from './tradeListDisplay.js';
-import { chainModelsResource, chainWorksResource, housesOfTradeFor } from '../facts/chainWorking.js';
+import { chainModelsResource, chainWorksResource } from '../facts/chainWorking.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { familyOfInstitution, institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { institutionLadderEvicts } from '../../data/institutionLadders.js';
@@ -340,19 +340,18 @@ export function resourceWorkReading(s, rawResource) {
  *  - a modelled chain idle here, filed Partial or Full: shown UNEXPLOITED (P1-a). MEASURED and read (all 9 on the
  *    census's 720, d6e355a9d): every one was the medicinal herbs of a hot spring, 8 of them beside an Apothecary; the
  *    leaf now knows that house (`facts/chainWorking.js :: WORKED_BY_HOUSE`, where no herb is imported), so
- *    the 8 stand as filed (3 worked by their apothecary, 5 whose apothecary works herbs the town imports), and the one
- *    with no such house (r2r-village-8: clergy and a divine healer at the springs) reads Unexploited, as its record says.
+ *    the 3 whose apothecary works the town's own herbs read worked and stand as filed; the 5 whose herbs come in by trade
+ *    and the one with no such house (r2r-village-8: clergy and a divine healer at the springs) read Unexploited, as
+ *    their records say (the chair's ruling on the correction, 19:49 UTC).
  * @param {PageRecord} s the settlement record @param {ExploitationCard} card @param {ExploitationStage} filed
  * @returns {ExploitationShown}
  */
 export function exploitationCardShown(s, card, filed) {
   const reading = resourceWorkReading(s, card?.rawResource);
   if (filed === 'unexploited' && reading.worked) return { card, stage: 'partial', filed, moved: true };
-  // P1-a: a modelled chain idle here and no house of the leaf's list at the good (`housesOfTradeFor`): the record bears
-  // the leaf out. Where such a house stands (an apothecary working herbs the town buys) the filing stands, as ruled.
-  if (filed !== 'unexploited' && reading.modelled && !reading.worked && !housesOfTradeFor(s, reading.good).length) {
-    return { card, stage: 'unexploited', filed, moved: true };
-  }
+  // P1-a (the chair's second word): a modelled chain idle here, the leaf's house list included: the record bears the
+  // leaf out, and the card reads Unexploited (an apothecary working herbs the town buys does not work its ground).
+  if (filed !== 'unexploited' && reading.modelled && !reading.worked) return { card, stage: 'unexploited', filed, moved: true };
   return { card, stage: filed, filed, moved: false };
 }
 

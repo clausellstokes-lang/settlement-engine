@@ -51,13 +51,15 @@ export function ResourceChainCard({ chain, stage, settlement = null, moved = fal
       {/* Chain flow */}
       <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap',marginBottom:6}}>
         <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600}}>{resourceDisplayName(chain.rawResource)}</span>
-        {(chain.intermediateGoods||[]).map((g,j)=>(
+        {/* P1-a: a card the analysis filed worked that the record shows idle (exploitationCardShown :: moved) prints the
+            resource alone: the chain table's goods and what it draws on are not what the record holds of a spent ground. */}
+        {(moved ? [] : (chain.intermediateGoods||[])).map((g,j)=>(
           <React.Fragment key={j}>
             <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span>
             <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{g}</span>
           </React.Fragment>
         ))}
-        {(chain.finalProducts||[]).slice(0,2).map((g,j)=>(
+        {(chain.finalProducts||[]).slice(0,moved?0:2).map((g,j)=>(
           <React.Fragment key={j}>
             <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span>
             <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.success,background:swatch['#E8F5EC'],border:'1px solid #a8d8b0',padding:'1px 6px',fontWeight:600}}>{g}</span>
@@ -67,7 +69,7 @@ export function ResourceChainCard({ chain, stage, settlement = null, moved = fal
       {needs.length>0&&<div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch['#5A3A10']}}>
         Needs: {needs.map((n) => institutionDisplayName(n) || n).join(', ')}
       </div>}
-      <DrawsOn deps={chain.dependsOn} mobile={mobile} />
+      {!moved&&<DrawsOn deps={chain.dependsOn} mobile={mobile} />}
     </div>
   );
   if (stage === 'partial') return (
@@ -175,7 +177,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
 
           {/* Unexploited — most interesting for DMs */}
-          {unexploited.map((x,i)=><ResourceChainCard key={i} chain={x.card} stage="unexploited" settlement={r}/>)}
+          {unexploited.map((x,i)=><ResourceChainCard key={i} chain={x.card} stage="unexploited" settlement={r} moved={x.moved}/>)}
 
           {/* Partially exploited */}
           {partExploited.map((x,i)=><ResourceChainCard key={i} chain={x.card} stage="partial" moved={x.moved}/>)}

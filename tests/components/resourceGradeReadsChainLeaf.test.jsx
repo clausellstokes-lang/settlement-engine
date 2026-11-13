@@ -128,6 +128,19 @@ describe('the grade cards read the chain leaf through the sentence\'s own readin
     expect(cards[0].badge).toBe('Partial');
   }, 60000);
 
+  test('P1-a: the herbs a metropolis buys, its gathering grounds spent, are not "Fully exploited" and say nothing of a ground ready to work (rr2s-metropolis-calm-rand-1, #1160)', () => {
+    const town = birthApp('rr2s-metropolis-calm-rand-1');
+    expect((town.resourceAnalysis.exploitation.fullyExploited || []).map((/** @type {any} */ c) => c.rawResource), 'anchored: filed Full').toContain('medicinal herbs');
+    expect(town.economicState.primaryImports, 'anchored: herbs come in by trade').toEqual(expect.arrayContaining(['Herbs and forage (local gathering areas exhausted)']));
+    const { container, unmount } = render(<ResourcesTab settlement={town} narrativeNote={null} />);
+    const text = container.textContent || '';
+    unmount();
+    const cards = cardsOf(town).filter((c) => c.resource === resourceDisplayName('medicinal herbs'));
+    expect(cards.map((c) => c.badge)).toEqual(['Unexploited']);
+    expect(cards[0].chips, 'the body: the resource alone').toEqual([resourceDisplayName('medicinal herbs')]);
+    expect(text).not.toMatch(/Draws on: herb gathering areas/);
+  }, 60000);
+
   test('on the reader\'s twenty towns: no Unexploited card beside a working chain, no Partial or Full card beside "No one here works", the PDF\'s groups the tab\'s', () => {
     /** @type {string[]} */ const faults = [];
     for (const seed of READER_SEEDS) {

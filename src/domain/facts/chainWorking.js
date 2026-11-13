@@ -65,7 +65,7 @@ export const WORKED_BY_HOUSE = Object.freeze([
  * @param {unknown} record @param {string | undefined} good
  * @returns {ReadonlyArray<(typeof WORKED_BY_HOUSE)[number]>}
  */
-export function housesOfTradeFor(record, good) {
+function housesOfTradeFor(record, good) {
   if (good === undefined || !record || typeof record !== 'object') return [];
   const g = good.toLowerCase();
   const houses = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (record))
