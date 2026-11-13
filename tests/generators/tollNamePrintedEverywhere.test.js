@@ -48,3 +48,18 @@ describe('FINDING 1: an NPC\'s goal names the toll by the town\'s access', () =>
     });
   }
 });
+
+describe('FINDING 1: the pipeline rail\'s chain receipts name the toll\'s source by the town\'s access', () => {
+  // `simulationTrace[]` (economyReconcilePass) is printed by the pipeline rail: "Because of Resource: …", and the
+  // cause's reason beside it
+  const PRINTED_SOURCE = { river: 'River traffic', port: 'Harbour traffic' };
+  for (const [seed, [access]] of Object.entries(SEEDS)) {
+    test(`${seed} (${access}): no chain receipt names a crossroads, and the toll's names "${PRINTED_SOURCE[access]}"`, () => {
+      const s = births[seed];
+      const causes = s.simulationTrace.filter((t) => t.targetType === 'supply_chain').flatMap((t) => t.causes || []);
+      expect(causes.filter((c) => CATALOGUE.test(`${c.source} ${c.reason} ${c.effect}`))).toEqual([]);
+      // anchored: the toll's receipt still carries its resource cause, under the printed source
+      expect(causes.some((c) => c.source === `resource.${PRINTED_SOURCE[access]}` && c.reason.startsWith(PRINTED_SOURCE[access]))).toBe(true);
+    });
+  }
+});
