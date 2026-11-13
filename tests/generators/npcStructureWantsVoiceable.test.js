@@ -40,10 +40,14 @@ function allGoals() {
       const settlement = { ...state, powerStructure: { ...(state.powerStructure || {}), factions } };
       // MERGE-CAR-2 (2026-11-08): the cards in the people car's shape (the rank axis reads the first-rank
       // membership; `factionAffiliation` left the card at PEOPLE-5): A heads Top (dominant), B heads Second
-      // (subordinate — a lesser power of the category), the two ranks the affiliations meant.
+      // (subordinate — a lesser power of the category; since COHERENCE-POWERS-8 a member below A in Top), the two ranks the
+      // affiliations meant.
       const npcs = [
         { name: 'A', category, memberships: [{ power: 'Top', rank: 1, share: 1 }], role: 'Head' },
-        { name: 'B', category, memberships: [{ power: 'Second', rank: 1, share: 1 }], role: 'Second' },
+        // COHERENCE-POWERS-8 (re-keyed by identity): B reads the subordinate row as a member BELOW the first of Top (rank 2),
+        // since the head of a lesser power of the faith, the crews or the casters is never "under" its own body's leaders
+        // (npcStructure.js :: UNDER_KINDS); the same two rows, dominant and subordinate, for every category
+        { name: 'B', category, memberships: [{ power: 'Top', rank: 2, share: 0.5 }], role: 'Second' },
       ];
       for (const npc of enrichNPCsWithStructure(npcs, settlement)) {
         expect(npc.settlementCondition).toBe(condition);

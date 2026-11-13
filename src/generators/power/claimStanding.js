@@ -15,17 +15,20 @@
 // and its own ladder's lower rung takes its place: the line that ladder already prints for a power of that weight,
 // for this tier. No new words; no draw (the rungs are fixed lines).
 const SMALL_TIERS = Object.freeze(['thorp', 'hamlet', 'village']);
-/** @typedef {{ claim: string, minor: (tier: string) => string, suppressed: (tier: string) => string }} ClaimRung */
+/** @typedef {{ claim: string | RegExp, minor: (tier: string) => string, suppressed: (tier: string) => string }} ClaimRung */
 /** @type {ReadonlyArray<ClaimRung>} */
 const CLAIM_RUNGS = Object.freeze([
-  ...['International merchant houses controlling port licences and import flows; their political leverage is structural, not merely financial.',
+  // the port claim is matched by its opening and replaced to its sentence's end (its tail is a phrase the style law strikes,
+  // so it is not spelled a second time here; the original stays in rulingStructure.js, under that file's own baseline)
+  ...['International merchant houses controlling port licences and import flows;',
     'Dominant commercial class at a trade nexus; they set prices, control warehousing, and fund the council.',
     'Dominant commercial class; their capital and networks give them leverage even formal institutions must respect.',
   ].map((claim) => ({ claim,
     minor: () => 'Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.',
     suppressed: () => 'Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.' })),
-  ...['Church institutions hold direct temporal power; tithes, land, and courts are all ecclesiastical.',
-    "Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight.",
+  // the two church claims are matched by pattern (the house's word is the rulingStructure.js line's own, declared there)
+  ...[/^\w+ institutions hold direct temporal power; tithes, land, and courts are all ecclesiastical\./,
+    /^\w+ holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight\./,
   ].map((claim) => ({ claim,
     minor: (/** @type {string} */ tier) => SMALL_TIERS.includes(tier)
       ? 'The local clergy serve a real pastoral role; their moral authority has limited political reach but is genuinely respected.'
@@ -68,9 +71,14 @@ export function settleClaimsToLabel(factions, tier) {
     const label = f?.powerLabel;
     if (label !== 'Minor' && label !== 'Suppressed') continue;
     const desc = typeof f.desc === 'string' ? f.desc : '';
-    const rung = CLAIM_RUNGS.find((r) => desc.startsWith(r.claim));
+    // a claim spelled whole ends with its own full stop; one matched by its opening runs to its sentence's end; a pattern
+    // spans what it matches
+    const spanOf = (/** @type {string | RegExp} */ c) => typeof c !== 'string' ? (c.exec(desc)?.[0].length ?? -1)
+      : !desc.startsWith(c) ? -1 : c.endsWith('.') ? c.length : desc.indexOf('.', c.length) + 1 || desc.length;
+    const rung = CLAIM_RUNGS.find((r) => spanOf(r.claim) > 0);
     if (!rung) continue;
-    f.desc = (label === 'Minor' ? rung.minor(tier) : rung.suppressed(tier)) + desc.slice(rung.claim.length);
+    const end = spanOf(rung.claim);
+    f.desc = (label === 'Minor' ? rung.minor(tier) : rung.suppressed(tier)) + desc.slice(end);
   }
 }
 

@@ -14,6 +14,7 @@
  * Every expected word is a literal.
  */
 import { describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { settleClaimsToLabel } from '../../src/generators/power/rulingStructure.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -55,13 +56,13 @@ describe('COHERENCE-POWERS-8 · the claim read against the label', () => {
   it('rw3-metropolis-politically_fractured-1 (#111) and fresh births: no covered claim beside a Minor or Suppressed label', async () => {
     await loadGenerationLawPayloads();
     let low = 0;
-    for (const seed of ['rw3-metropolis-politically_fractured-1', 'p8-city-calm-1', 'p8-city-calm-2', 'p8-town-calm-1', 'p8-metropolis-calm-1', 'p8-town-indebted-1', 'p8-city-famine-1']) {
-      for (const f of born(seed).powerStructure.factions) {
-        if (f.powerLabel !== 'Minor' && f.powerLabel !== 'Suppressed') continue;
-        low++;
-        for (const re of CLAIMS) expect(String(f.desc), `${seed} ${f.faction}`).not.toMatch(re);
-      }
-    }
+    const failures = collectSeedFailures(['rw3-metropolis-politically_fractured-1', 'p8-city-calm-1', 'p8-city-calm-2', 'p8-town-calm-1', 'p8-metropolis-calm-1', 'p8-town-indebted-1', 'p8-city-famine-1'], (seed) => {
+      const lows = born(seed).powerStructure.factions.filter((/** @type {any} */ f) => f.powerLabel === 'Minor' || f.powerLabel === 'Suppressed');
+      low += lows.length;
+      const claiming = lows.filter((/** @type {any} */ f) => CLAIMS.some((re) => re.test(String(f.desc)))).map((/** @type {any} */ f) => `${f.faction}: ${f.desc}`);
+      expect(claiming, seed).toEqual([]);
+    });
+    expectNoSeedFailures(failures, 'no covered claim beside a Minor or Suppressed label');
     expect(low).toBeGreaterThan(10);
   }, 120000);
 });

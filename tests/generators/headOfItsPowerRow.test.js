@@ -12,6 +12,7 @@
  * Every expected word is a literal.
  */
 import { describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -35,7 +36,7 @@ describe('COHERENCE-POWERS-8 · the head of its power is not under its leaders',
     const mage = s.npcs.find((/** @type {any} */ c) => c.name === 'Malinalxochitl Jalach');
     const boss = s.npcs.find((/** @type {any} */ c) => c.name === 'Chimalxochitl Chi');
     expect(mage.structuralPosition).toBe('Heads the casters among bribe-taking officials, where spells that hide things buy favour and debt.');
-    expect(String(boss.structuralPosition ?? '')).not.toMatch(UNDER);
+    expect(boss.structuralPosition).toBeUndefined(); // the first of a lesser criminal power: no row (the refusal's rule)
   }, 60000);
   it('rr2s-metropolis-plague_onset-port-1: Bebinn MacIntyre, the guild archmage, heads the casters', async () => {
     await loadGenerationLawPayloads();
@@ -46,13 +47,13 @@ describe('COHERENCE-POWERS-8 · the head of its power is not under its leaders',
   it('fresh births: no card ranked first of its power reads an "under" row; a member below the first still may', async () => {
     await loadGenerationLawPayloads();
     let heads = 0;
-    for (const seed of ['p8-town-calm-1', 'p8-city-calm-1', 'p8-city-calm-2', 'p8-metropolis-calm-1', 'p8-city-famine-1', 'p8-metropolis-succession_void-1', 'p8-village-calm-3']) {
-      for (const c of born(seed).npcs) {
-        if (bestRank(c) !== 1) continue;
-        heads++;
-        expect(String(c.structuralPosition ?? ''), `${seed} ${c.name}`).not.toMatch(UNDER);
-      }
-    }
+    const failures = collectSeedFailures(['p8-town-calm-1', 'p8-city-calm-1', 'p8-city-calm-2', 'p8-metropolis-calm-1', 'p8-city-famine-1', 'p8-metropolis-succession_void-1', 'p8-village-calm-3'], (seed) => {
+      const firsts = born(seed).npcs.filter((/** @type {any} */ c) => bestRank(c) === 1);
+      heads += firsts.length;
+      const under = firsts.filter((/** @type {any} */ c) => UNDER.test(String(c.structuralPosition ?? ''))).map((/** @type {any} */ c) => `${c.name}: ${c.structuralPosition}`);
+      expect(under, seed).toEqual([]);
+    });
+    expectNoSeedFailures(failures, 'no card ranked first of its power reads an "under" row');
     expect(heads).toBeGreaterThan(20);
   }, 120000);
 });

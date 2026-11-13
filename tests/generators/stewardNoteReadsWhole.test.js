@@ -5,6 +5,7 @@
  * and the lane's 4,305 (a rare variant); 0 after. Every expected word is a literal.
  */
 import { describe, expect, it } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -15,7 +16,7 @@ describe('COHERENCE-POWERS-8 #565 · the steward\'s note reads whole', () => {
     const cfg = birthConfig({ ...DEFAULT_CONFIG, settType: 'town', selectedStressesRandom: false, selectedStresses: ['plague_onset'], _randomizePriorities: true });
     const s = /** @type {any} */ (generateSettlementPipeline(cfg, null, { seed: 'rr2s-town-plague_onset-rand-1', customContent: {} }));
     const text = JSON.stringify(s.powerStructure.factions.map((/** @type {any} */ f) => f.desc));
-    expect(text).not.toContain('both would say themselves');
     expect(text).toContain('Which one actually governs depends on the day and the question; each would say it does.');
+    expectAbsentWithAnchor(text, 'both would say themselves', 'each would say it does', 'the steward note reads whole');
   }, 60000);
 });

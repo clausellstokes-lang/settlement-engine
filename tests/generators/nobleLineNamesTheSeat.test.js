@@ -21,6 +21,6 @@ describe('COHERENCE-POWERS-8 #295 · the noble line names the seat that is there
     expect(s.powerStructure.government).toBe('Ducal Governorship');
     const nobles = s.powerStructure.factions.find((/** @type {any} */ f) => f.faction === 'Noble Houses');
     expect(nobles.desc.startsWith('Landed noble families whose hereditary rights, land rents, and marriage networks give them structural influence the seat cannot easily override.')).toBe(true);
-    for (const f of s.powerStructure.factions) expect(String(f.desc)).not.toMatch(/elected council/);
+    expect(s.powerStructure.factions.filter((/** @type {any} */ f) => /elected council/.test(String(f.desc))).map((/** @type {any} */ f) => f.faction)).toEqual([]);
   }, 60000);
 });

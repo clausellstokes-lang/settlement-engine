@@ -14,6 +14,7 @@
  * Every expected word is a literal.
  */
 import { describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
@@ -80,14 +81,15 @@ describe('COHERENCE-POWERS-8 R2 · a woman\'s row agrees with her card', () => {
     // chosen by a scan of p8-<size>-1..12 at 91a3a9623 for a woman lord or abbot with a row (the class's exposure), plus two
     // controls with none; the scan read the base only, never this file's expectations
     let gendered = 0;
-    for (const seed of ['p8-town-8', 'p8-town-10', 'p8-city-10', 'p8-metropolis-11', 'p8-city-1', 'p8-village-1']) {
-      for (const [c, word] of ends(born(seed))) {
-        if (c.gender === 'female') {
-          expect(word, `${seed} ${c.name}`).toBe(styledTitleOf(c.role, 'female'));
-          if (/^the (?:lord|abbot|senior abbot)$/.test(c.role)) { gendered++; expect(word, `${seed} ${c.name}`).not.toMatch(MASCULINE); }
-        } else expect(word, `${seed} ${c.name}`).toBe(c.role);
-      }
-    }
+    const failures = collectSeedFailures(['p8-town-8', 'p8-town-10', 'p8-city-10', 'p8-metropolis-11', 'p8-city-1', 'p8-village-1'], (seed) => {
+      const wrong = ends(born(seed)).filter(([c, word]) => {
+        if (c.gender !== 'female') return word !== c.role;
+        if (/^the (?:lord|abbot|senior abbot)$/.test(c.role)) gendered++;
+        return word !== styledTitleOf(c.role, 'female') || (/^the (?:lord|abbot|senior abbot)$/.test(c.role) && MASCULINE.test(word));
+      }).map(([c, word]) => `${c.name}: "${word}"`);
+      expect(wrong, seed).toEqual([]);
+    });
+    expectNoSeedFailures(failures, 'every row end reads its card\'s styled title (a woman\'s feminine, a man\'s role)');
     expect(gendered).toBeGreaterThanOrEqual(10); // 12 at 91a3a9623
   }, 120000);
 });
