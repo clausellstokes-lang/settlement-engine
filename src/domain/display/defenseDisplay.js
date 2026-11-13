@@ -444,6 +444,9 @@ export function deriveSupportingCapabilities(settlement) {
   }
   // The Arcane Support row is the list's one magic row.
   if (practitioners.length > 0 && !defenceHoldsArcane(r)) caps.splice(1, 1); // record 369 G5: the list's second row (below)
+  // W2-C-LEAVES-SIDE item 3: "None … No arcane practitioners" is not printed beside a governing arcane power or a named
+  // mage (below): the list's second row, as above (no practitioner, so nothing was taken out before it).
+  if (!arcane && arcaneNamedHere(r)) caps.splice(1, 1);
   return magicWorksAt({ settlement: r }) === false ? caps.filter((c) => c.label !== 'Arcane Support') : caps;
 }
 
@@ -785,3 +788,10 @@ import { tradeRouteOf } from '../facts/terrain.js';
 function navalRowStandsOn(settlement) {
   return tradeRouteOf(settlement) === 'port' || settlement?.economicState?.foodSecurity?.stockpile?.blockaded === true;
 }
+
+// ─── W2-C-LEAVES-SIDE item 3: NO "NO ARCANE PRACTITIONERS" BESIDE A MAGE THE RECORD NAMES (at the end of the file) ───
+// The chair's ruling on the round-three increment's rww-town-calm-1 ("Arcane Support · None · No arcane practitioners on
+// the rolls" where an Arcane Council governs and the council's archmage is named): the row is left out where the record
+// holds a governing arcane power or a named mage, read in the magic fact's home (`facts/magic.js :: recordNamesAMage`).
+// Record 394 stands for "Present". Measured on the census's 720 at 408c2e30c: 13 rows out.
+import { recordNamesAMage as arcaneNamedHere } from '../facts/magic.js';
