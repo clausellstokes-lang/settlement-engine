@@ -2274,22 +2274,35 @@ export const TITLE_PRESENTATIONS = Object.freeze(Object.fromEntries(ROWS.map(([t
  * THE DISQUALIFIERS (COHERENCE-POWERS-7; the cold list REVIEW-W2A-3, MEDIUM #478 #488 #489 #534 #719 #1026 #1071): a line
  * that presumes a water or a content its title's house does not guarantee says so here, keyed by its own text (a secret by
  * its `secret`, a presentation by its `impression`), so the rows keep the shape the draw copies onto the card. `needs`
- * holds atoms of the fact vocabulary (the water home: `navigable`, `coast`, `river`); `topic` a governed content topic
- * (domain/generationContentProfile.js) the town's content settings must admit. A fishmonger or a chandler stands inland,
- * a boatwright on a coast with no river, a foundling home under settings that forbid trading in people.
- * @type {Readonly<{ secret: Readonly<Record<string, Readonly<{ needs?: readonly string[], topic?: string }>>>, presentation: Readonly<Record<string, Readonly<{ needs?: readonly string[], topic?: string }>>> }>}
+ * holds atoms of the fact vocabulary (the water home: `navigable`, `coast`, `river`); `topic` a governed content topic, or
+ * several (domain/generationContentProfile.js :: GENERATED_CONTENT_TOPICS), the town's content settings must ALL admit. A
+ * fishmonger or a chandler stands inland, a boatwright on a coast with no river, a foundling home under settings that forbid
+ * trading in people.
+ * PERSONS BOUGHT, SOLD OR HELD (POWERS-9; ROUND-3-CUT-INCREMENT HIGH ww#449, MEDIUM ww#178 ww#1137; the chair's ruling of
+ * 2026-11-13): a line that speaks of slavery, or of persons bought, sold or held, is not dealt where the town's own content
+ * settings exclude slavery or trafficking; it declares both topics, and the title's next admitted line (a twin true of
+ * the town) prints in its place. The fighters "taken against their will" and kept "in chains" or "locked up", the lanista
+ * "who buys and sells people", the apprentice kept past the indenture by holding back the papers that would free them.
+ * @type {Readonly<{ secret: Readonly<Record<string, Readonly<{ needs?: readonly string[], topic?: string | readonly string[] }>>>, presentation: Readonly<Record<string, Readonly<{ needs?: readonly string[], topic?: string | readonly string[] }>>> }>}
  */
+/** The two governed topics a line of persons bought, sold or held needs admitted (slavery AND trafficking). */
+const PERSONS_HELD = Object.freeze(['slavery', 'human_trafficking']);
+
 export const TITLE_LINE_DECLARATIONS = Object.freeze({
   secret: Object.freeze({
     'Buys fish from boats that fished where they are forbidden to, and never asks where the catch came from': Object.freeze({ needs: Object.freeze(['navigable']) }),
     "Has been buying stolen ship's stores at night and selling them in the shop the next morning": Object.freeze({ needs: Object.freeze(['coast']) }),
     "Has been taking timber from the river's driftwood that belongs to the mill upstream": Object.freeze({ needs: Object.freeze(['river']) }),
     'Has been selling some of the foundlings to families who pay, without any record': Object.freeze({ topic: 'human_trafficking' }),
+    'Buys fighters who were taken against their will, and keeps them in chains between bouts': Object.freeze({ topic: PERSONS_HELD }),
+    'Buys fighters who were taken against their will and keeps them locked up between bouts': Object.freeze({ topic: PERSONS_HELD }),
+    'Has kept an apprentice on for years past the indenture by holding back the papers that would free them': Object.freeze({ topic: PERSONS_HELD }),
   }),
   presentation: Object.freeze({
     'Cheerful in the cold and the stink of the market. Knows every regular by name and by order.': Object.freeze({ needs: Object.freeze(['navigable']) }),
     'Smells of wax and soap, friendly and talkative, with a little of everything on the shelves.': Object.freeze({ needs: Object.freeze(['coast']) }),
     'Easy and talkative, proud of every boat on the river that came from the yard.': Object.freeze({ needs: Object.freeze(['river']) }),
     'Watches visitors near the slipway. Keeps the half-built hulls under cover.': Object.freeze({ needs: Object.freeze(['river']) }),
+    'Thick-necked and scarred, with the eye of someone who buys and sells people.': Object.freeze({ topic: PERSONS_HELD }),
   }),
 });

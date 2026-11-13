@@ -389,8 +389,9 @@ export function titleLinesFor(title) {
 export function settleTitleLines(card, title, town) {
   const lines = titleLinesFor(title);
   if (!lines || !card) return card;
-  const admits = (/** @type {Readonly<{ needs?: readonly string[], topic?: string }> | undefined} */ d) => !d
-    || ((!d.topic || town.boundaries?.[d.topic] === true) && declarationAdmits(declarationOf({ needs: d.needs || [] }), town.facts).admitted);
+  const admits = (/** @type {Readonly<{ needs?: readonly string[], topic?: string | readonly string[] }> | undefined} */ d) => !d
+    || ((/** @type {readonly string[]} */ ([])).concat(d.topic || []).every((t) => town.boundaries?.[t] === true)
+      && declarationAdmits(declarationOf({ needs: d.needs || [] }), town.facts).admitted);
   const nextAdmitted = (/** @type {readonly any[]} */ rows, /** @type {number} */ at, /** @type {(r: any) => string} */ keyOf, /** @type {Record<string, any>} */ table, /** @type {(r: any) => boolean} */ free) => {
     for (let k = 1; k < rows.length; k += 1) { const r = rows[(at + k) % rows.length]; if (admits(table[keyOf(r)]) && free(r)) return r; }
     return null;
