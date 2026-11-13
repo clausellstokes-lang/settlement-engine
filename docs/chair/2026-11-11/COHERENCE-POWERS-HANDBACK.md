@@ -738,7 +738,7 @@ are red at 178601d5a already; this was the 76th.
 | rosterDuplicateDraws (1) | 823 -> 826 at 97759b837 (F1), 826 -> 853 at 9bcda8ff6 (the crisis seats), each commit measured | re-measured with the commits (d36fbd25e) |
 | locksEngine (1), npcStateRegenRebind (2), pinnedNpcRegenRemap (1) | the same keeper on the same seed moved index under the lane's deal: crier 14 -> 17 (23a2015d4), innkeeper 9 -> 2 -> 3 (23a2015d4, 04334d6ef) | re-keyed by identity, still the first move of -0..-60 under each mint (d3e089be9) |
 | tonightSeatSecret (1) | five of twelve seam seeds are no longer seams under the dual hat (31, 80, 62, 43, 127, each measured) | re-keyed by identity, seven kept, five next seams (ee1608329) |
-| dossierPhoneFloorAllViews (2) | the fixture city's lines move with the cast, bisected per view by the file's own walk at every lane commit touching src: rule A 23a2015d4, the dual hat e0c8bb357, cure (i) 04334d6ef, the seat row's two hats 4509d4add; F3 nothing; no token moved, zero violations | both pins re-measured with those causes (2fd6cf8a2) |
+| dossierPhoneFloorAllViews (2) | the fixture city's lines move with the cast, bisected per view by the file's own walk at every lane commit touching src: rule A 23a2015d4, the dual hat e0c8bb357, cure (i) 04334d6ef, the seat row's two hats 4509d4add; F3 nothing; no token moved, zero violations (@enforced-by tests/components/dossierPhoneFloorAllViews.test.jsx) | both pins re-measured with those causes (2fd6cf8a2) |
 
 **PARKED (a ruled design or a pin would change; the chair's, with my recommendation): 2 titles.** See section 12.
 tabSentencesOnce (x50-trim-21) and tonightSheetOnce (x51-tonight-51).
