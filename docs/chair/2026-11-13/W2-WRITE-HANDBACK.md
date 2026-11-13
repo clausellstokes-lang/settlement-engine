@@ -69,7 +69,79 @@ At 202e58953 (and still at the tip), red and NOT red on either parent alone:
 - (green now) presumedThings › no stale row: cured by the door's shrink (call 6).
 The other base reds of the corpus set (proseComposed FAIL LIMB, proseWaveGate (d) x3, proseTasteInterested x3, sovereigntyLighting, dossierProseManifest x3) stand at the base unchanged.
 
-## Stage 3 — three lines for every case (NOT STARTED; for the second seat)
+## THE SECOND SEAT'S ORDER (the chair's messages of 2026-11-13 03:58 and 04:12 UTC, read after stage 2 had landed)
+1. **FIRST: the reviewer's cold list** (`git fetch origin lane/review-w2b-2026-11-13`; `docs/chair/2026-11-13/REVIEW-W2B-COLD-LIST.json`, 361 false lines, 124 of them corpus variants; `REVIEW-W2B-COLD-CLASSES.md` §4 names the ten worst blocks: DS-GEN-18 BOUGHT-IN v1, v4, v5, v6 and STALLED v2; DS-ECO-1 COMBINATION C4 v1-v3; DS-POW-6 capture ADVANCING v1, v3; ...). Per false variant: read the towns it is false in; declare the disqualifier for each thing, state, size, count or figure that makes it false there (a line for normal times is disqualified under the crisis that breaks it); where a case is left with no line, write one true in it; never delete a line true somewhere. Hand back per variant: the fixture towns it printed false in, before and after, and what they print now. NOT STARTED by this seat.
+2. **The chair's reading law, applied to THIS seat's lines too**: section 3 step 2 is done BY READING (house, role, force, resource, state, size, count, figure, registered or not); a line that presumes normal times is disqualified under each crisis that makes it false; and each new line read against one town of each case it can print in, the town named. This seat declared every REGISTERED word and every thing it saw on reading its own lines; it did NOT do the per-town read. The machine-picked town per case for each of its 62 new lines is below (from the case probe at the tip; "(n)" = towns in the case): the second seat reads each and records the verdict.
+3. Then the cases with no line (above); then three for every case (below).
+
+**The towns to read each new line against (one per case it prints in):**
+| line | case → town (towns in case) |
+|---|---|
+| DS-ECO-6::TIER: significant off-book activity (≥15) v4 | {"guild":0,"market":0,"thing market":"absent"} → r2r-thorp-10 (20) · {"guild":0,"market":1,"thing market":"present"} → r2r-village-55 (3) · {"guild":1,"market":1,"thing market":"present"} → r2r-town-0 (102) |
+| DS-ECO-6::TIER: significant off-book activity (≥15) v5 | {"guild":0,"market":0,"thing market":"absent"} → r2r-thorp-10 (20) · {"guild":0,"market":1,"thing market":"present"} → r2r-village-55 (3) · {"guild":1,"market":1,"thing market":"present"} → r2r-town-0 (102) |
+| DS-ECO-6::TIER: significant off-book activity (≥15) v6 | {"guild":0,"market":0,"thing market":"absent"} → r2r-thorp-10 (20) · {"guild":0,"market":1,"thing market":"present"} → r2r-village-55 (3) · {"guild":1,"market":1,"thing market":"present"} → r2r-town-0 (102) |
+| DS-ECO-8::FOOD AND PROSPERITY: full stores lift the town v4 | not reached on the 720 |
+| DS-ECO-8::FOOD AND PROSPERITY: full stores lift the town v5 | not reached on the 720 |
+| DS-ECO-8::FOOD AND PROSPERITY: full stores lift the town v6 | not reached on the 720 |
+| DS-ECO-12::INCOME WEIGHT: the religious houses v3 | {"sacredHouse":0} → r2r-thorp-0 (74) |
+| DS-ECO-12::INCOME WEIGHT: the religious houses v4 | {"sacredHouse":0} → r2r-thorp-0 (74) |
+| DS-ECO-12::INCOME WEIGHT: the religious houses v5 | {"sacredHouse":0} → r2r-thorp-0 (74) |
+| DS-DEF-3::COMPOUND: insurgency v4 | {"guardPresence":0,"population: ≥ middling":0} → r2r-thorp-22 (12) · {"guardPresence":1,"population: ≥ middling":0} → r2r-thorp-25 (4) · {"guardPresence":0,"population: ≥ middling":1} → r2r-village-34 (1) · {"guardPresence":1,"population: ≥ middling":1} → r2r-town-3 (18) |
+| DS-DEF-3::COMPOUND: insurgency v5 | {"guardPresence":1,"population: ≥ middling":0} → r2r-thorp-25 (4) · {"guardPresence":1,"population: ≥ middling":1} → r2r-town-3 (18) |
+| DS-DEF-3::COMPOUND: political fracture v4 | {"population: ≥ middling":0} → r2r-hamlet-4 (20) · {"population: ≥ middling":1} → r2r-city-7 (18) |
+| DS-DEF-3::COMPOUND: political fracture v5 | {"population: ≥ middling":0} → r2r-hamlet-4 (20) · {"population: ≥ middling":1} → r2r-city-7 (18) |
+| DS-GEN-3::scores.military: CRITICAL v4 | {"crisis: any":1,"crisis: threat":1,"crisis: wartime":0,"gate":0,"walls":1,"dim walls":"walls"} → r2r-thorp-1 (5) · {"crisis: any":1,"crisis: threat":0,"crisis: wartime":0,"gate":1,"walls":1,"dim walls":"walls"} → r2r-town-7 (2) · {"crisis: any":1,"crisis: threat":1,"crisis: wartime":0,"gate":1,"walls":1,"dim walls":"walls"} → r2s-occupied-town-0 (3) |
+| DS-GEN-3::scores.military: CRITICAL v5 | {"crisis: any":1,"crisis: threat":1,"crisis: wartime":0,"gate":0,"walls":1,"dim walls":"walls"} → r2r-thorp-1 (5) · {"crisis: any":1,"crisis: threat":0,"crisis: wartime":0,"gate":1,"walls":1,"dim walls":"walls"} → r2r-town-7 (2) · {"crisis: any":1,"crisis: threat":1,"crisis: wartime":0,"gate":1,"walls":1,"dim walls":"walls"} → r2s-occupied-town-0 (3) |
+| DS-GEN-3::scores.military: CRITICAL v6 | {"crisis: any":1,"crisis: threat":1,"crisis: wartime":0,"gate":0,"walls":1,"dim walls":"walls"} → r2r-thorp-1 (5) · {"crisis: any":1,"crisis: threat":1,"crisis: wartime":0,"gate":0,"walls":0,"dim walls":"no walls"} → r2r-thorp-5 (38) · {"crisis: any":1,"crisis: threat":1,"crisis: wartime":0,"gate":1,"walls":1,"dim walls":"walls"} → r2s-occupied-town-0 (3) |
+| DS-GEN-3::defenseProfile.readiness.label: Undefended v3 | {"garrison":0,"militia":1,"walls":1,"dim walls":"walls","thing militia":"present","thing walls":"present"} → r2r-thorp-1 (15) |
+| DS-GEN-3::defenseProfile.readiness.label: Undefended v4 | {"garrison":0,"militia":1,"walls":1,"dim walls":"walls","thing militia":"present","thing walls":"present"} → r2r-thorp-1 (15) · {"garrison":0,"militia":0,"walls":1,"dim walls":"walls","thing militia":"absent","thing walls":"present"} → r2r-town-7 (1) |
+| DS-GEN-3::defenseProfile.readiness.label: Undefended v5 | {"garrison":0,"militia":1,"walls":1,"dim walls":"walls","thing militia":"present","thing walls":"present"} → r2r-thorp-1 (15) · {"garrison":0,"militia":1,"walls":0,"dim walls":"no walls","thing militia":"present","thing walls":"absent"} → r2r-village-50 (2) |
+| DS-GEN-5::river v5 | {"coast":1,"river":0} → r2r-thorp-22 (21) |
+| DS-GEN-5::river v6 | {"coast":1,"river":0} → r2r-thorp-22 (21) |
+| DS-GEN-5::river v7 | {"coast":1,"river":0} → r2r-thorp-22 (21) |
+| DS-GEN-6::river v5 | {"coast":1,"river":0,"dim deficit":"no deficit"} → r2r-thorp-22 (10) |
+| DS-GEN-6::river v6 | {"coast":1,"river":0,"dim deficit":"no deficit"} → r2r-thorp-22 (10) |
+| DS-GEN-6::river v7 | {"coast":1,"river":0,"dim deficit":"no deficit"} → r2r-thorp-22 (10) |
+| DS-GEN-6::river v8 | {"coast":1,"river":0,"dim deficit":"deficit"} → r2r-village-21 (11) |
+| DS-GEN-6::river v9 | {"coast":1,"river":0,"dim deficit":"deficit"} → r2r-village-21 (11) |
+| DS-GEN-6::river v10 | {"coast":1,"river":0,"dim deficit":"deficit"} → r2r-village-21 (11) |
+| DS-GEN-9::event type: disaster v5 | {"dim anchor":"anchored"} → r2r-thorp-13 (85) · {"dim anchor":"-"} → r2r-thorp-34 (9) |
+| DS-GEN-9::event type: disaster v6 | {"dim anchor":"anchored"} → r2r-thorp-13 (85) · {"dim anchor":"-"} → r2r-thorp-34 (9) |
+| DS-GEN-9::event type: disaster v7 | {"dim anchor":"anchored"} → r2r-thorp-13 (85) · {"dim anchor":"-"} → r2r-thorp-34 (9) |
+| DS-GEN-9::event type: political v5 | {"dim anchor":"anchored"} → r2r-thorp-0 (131) · {"dim anchor":"-"} → r2r-thorp-3 (20) |
+| DS-GEN-9::event type: political v6 | {"dim anchor":"anchored"} → r2r-thorp-0 (131) · {"dim anchor":"-"} → r2r-thorp-3 (20) |
+| DS-GEN-9::event type: political v7 | {"dim anchor":"anchored"} → r2r-thorp-0 (131) · {"dim anchor":"-"} → r2r-thorp-3 (20) |
+| DS-GEN-9::event type: economic v5 | {"market":0,"dim anchor":"anchored","thing market":"absent"} → r2r-thorp-1 (37) · {"market":1,"dim anchor":"anchored","thing market":"present"} → r2r-hamlet-15 (57) · {"market":0,"dim anchor":"not anchored","thing market":"absent"} → r2r-hamlet-21 (6) · {"market":0,"dim anchor":"-","thing market":"absent"} → r2r-hamlet-34 (9) · {"market":1,"dim anchor":"not anchored","thing market":"present"} → r2r-town-38 (2) · {"market":1,"dim anchor":"-","thing market":"present"} → r2s-recently_betrayed-village-3 (1) |
+| DS-GEN-9::event type: economic v6 | {"market":0,"dim anchor":"anchored","thing market":"absent"} → r2r-thorp-1 (37) · {"market":1,"dim anchor":"anchored","thing market":"present"} → r2r-hamlet-15 (57) · {"market":0,"dim anchor":"not anchored","thing market":"absent"} → r2r-hamlet-21 (6) · {"market":0,"dim anchor":"-","thing market":"absent"} → r2r-hamlet-34 (9) · {"market":1,"dim anchor":"not anchored","thing market":"present"} → r2r-town-38 (2) · {"market":1,"dim anchor":"-","thing market":"present"} → r2s-recently_betrayed-village-3 (1) |
+| DS-GEN-9::event type: economic v7 | {"market":0,"dim anchor":"anchored","thing market":"absent"} → r2r-thorp-1 (37) · {"market":1,"dim anchor":"anchored","thing market":"present"} → r2r-hamlet-15 (57) · {"market":0,"dim anchor":"not anchored","thing market":"absent"} → r2r-hamlet-21 (6) · {"market":0,"dim anchor":"-","thing market":"absent"} → r2r-hamlet-34 (9) · {"market":1,"dim anchor":"not anchored","thing market":"present"} → r2r-town-38 (2) · {"market":1,"dim anchor":"-","thing market":"present"} → r2s-recently_betrayed-village-3 (1) |
+| DS-GEN-9::event type: religious v5 | {"institution: temple":0,"dim anchor":"anchored"} → r2r-thorp-2 (17) · {"institution: temple":1,"dim anchor":"anchored"} → r2r-thorp-11 (68) · {"institution: temple":0,"dim anchor":"-"} → r2r-thorp-49 (5) · {"institution: temple":1,"dim anchor":"-"} → r2r-village-10 (6) |
+| DS-GEN-9::event type: religious v6 | {"institution: temple":0,"dim anchor":"anchored"} → r2r-thorp-2 (17) · {"institution: temple":1,"dim anchor":"anchored"} → r2r-thorp-11 (68) · {"institution: temple":0,"dim anchor":"-"} → r2r-thorp-49 (5) · {"institution: temple":1,"dim anchor":"-"} → r2r-village-10 (6) |
+| DS-GEN-9::event type: religious v7 | {"institution: temple":0,"dim anchor":"anchored"} → r2r-thorp-2 (17) · {"institution: temple":1,"dim anchor":"anchored"} → r2r-thorp-11 (68) · {"institution: temple":0,"dim anchor":"-"} → r2r-thorp-49 (5) · {"institution: temple":1,"dim anchor":"-"} → r2r-village-10 (6) |
+| DS-GEN-9::event type: magical v5 | {"dim anchor":"anchored"} → r2r-thorp-15 (40) · {"dim anchor":"-"} → r2r-thorp-59 (4) · {"dim anchor":"not anchored"} → r2r-hamlet-28 (1) |
+| DS-GEN-9::event type: magical v6 | {"dim anchor":"anchored"} → r2r-thorp-15 (40) · {"dim anchor":"-"} → r2r-thorp-59 (4) · {"dim anchor":"not anchored"} → r2r-hamlet-28 (1) |
+| DS-GEN-9::event type: magical v7 | {"dim anchor":"anchored"} → r2r-thorp-15 (40) · {"dim anchor":"-"} → r2r-thorp-59 (4) · {"dim anchor":"not anchored"} → r2r-hamlet-28 (1) |
+| DS-GEN-9::event type: demographic v5 | {"dim anchor":"anchored"} → r2r-thorp-30 (59) · {"dim anchor":"-"} → r2r-hamlet-29 (6) |
+| DS-GEN-9::event type: demographic v6 | {"dim anchor":"anchored"} → r2r-thorp-30 (59) · {"dim anchor":"-"} → r2r-hamlet-29 (6) |
+| DS-GEN-9::event type: demographic v7 | {"dim anchor":"anchored"} → r2r-thorp-30 (59) · {"dim anchor":"-"} → r2r-hamlet-29 (6) |
+| DS-GEN-9::event type: exile_return v5 | {"dim anchor":"anchored"} → r2r-thorp-14 (61) · {"dim anchor":"-"} → r2s-politically_fractured-thorp-0 (4) |
+| DS-GEN-9::event type: exile_return v6 | {"dim anchor":"anchored"} → r2r-thorp-14 (61) · {"dim anchor":"-"} → r2s-politically_fractured-thorp-0 (4) |
+| DS-GEN-9::event type: exile_return v7 | {"dim anchor":"anchored"} → r2r-thorp-14 (61) · {"dim anchor":"-"} → r2s-politically_fractured-thorp-0 (4) |
+| DS-GEN-9::event type: occupation_infiltration v5 | {"dim anchor":"anchored"} → r2r-thorp-4 (82) · {"dim anchor":"-"} → r2r-thorp-7 (6) |
+| DS-GEN-9::event type: occupation_infiltration v6 | {"dim anchor":"anchored"} → r2r-thorp-4 (82) · {"dim anchor":"-"} → r2r-thorp-7 (6) |
+| DS-GEN-9::event type: occupation_infiltration v7 | {"dim anchor":"anchored"} → r2r-thorp-4 (82) · {"dim anchor":"-"} → r2r-thorp-7 (6) |
+| DS-POW-5::FLAG: crimeIsGovt v4 | {"guardPresence":1} → r2s-slave_revolt-town-3 (3) |
+| DS-POW-6::GM ADVISORY: the commander is a political actor v3 | {"commander":0} → r2r-hamlet-10 (21) · {"commander":1} → r2r-city-7 (17) |
+| DS-POW-6::GM ADVISORY: the commander is a political actor v4 | {"commander":0} → r2r-hamlet-10 (21) · {"commander":1} → r2r-city-7 (17) |
+| DS-POW-6::GM ADVISORY: the commander is a political actor v5 | {"commander":0} → r2r-hamlet-10 (21) · {"commander":1} → r2r-city-7 (17) |
+| DS-FTH-4::FLAG: heresySuppression: hunted v3 | {"institution: temple":1,"thing temple":"present"} → r2r-hamlet-45 (25) · {"institution: temple":0,"thing temple":"absent"} → r2r-hamlet-55 (3) |
+| DS-FTH-4::FLAG: heresySuppression: hunted v4 | {"institution: temple":1,"thing temple":"present"} → r2r-hamlet-45 (25) · {"institution: temple":0,"thing temple":"absent"} → r2r-hamlet-55 (3) |
+| DS-FTH-4::FLAG: heresySuppression: hunted v5 | {"institution: temple":1,"thing temple":"present"} → r2r-hamlet-45 (25) · {"institution: temple":0,"thing temple":"absent"} → r2r-hamlet-55 (3) |
+| DS-FTH-4::FLAG: heresySuppression: preached v3 | {"institution: temple":1,"thing temple":"present"} → r2r-town-24 (7) · {"institution: temple":0,"thing temple":"absent"} → r2s-wartime-hamlet-2 (1) |
+| DS-FTH-4::FLAG: heresySuppression: preached v4 | {"institution: temple":1,"thing temple":"present"} → r2r-town-24 (7) · {"institution: temple":0,"thing temple":"absent"} → r2s-wartime-hamlet-2 (1) |
+| DS-FTH-4::FLAG: heresySuppression: preached v5 | {"institution: temple":1,"thing temple":"present"} → r2r-town-24 (7) · {"institution: temple":0,"thing temple":"absent"} → r2s-wartime-hamlet-2 (1) |
+
+
+## Stage 3 — three lines for every case (NOT STARTED; for the second seat, after items 1 and 2)
 Owner view at the tip (depth.mjs, the census's 720; P = the pool table's layer 2, S = 3, T = 4 and above):
 **P: 22 cases, 26 lines owed. S: 53 cases, 65. T: 158, 213.** The P list, by towns reached:
 DS-DEF-11 UNWALLED-SMALL (157, 76 and 40 towns, 2 each) · DS-DEF-2 Beasts plagued/perimeter+force {no gate} (67, 2) · DS-DEF-11 UNWALLED-LARGE (43, 2) · DS-DEF-2 Invasion: neither walls nor force {threat} (43, 1) · DS-DEF-8 MIGRATION arrivals {guard} (21, 2) · DS-DEF-2 Beasts settled/nothing organized {threat} (20, 2) · DS-DEF-2 Beasts frontier deterrence {threat} (17, 2) · DS-DEF-8 BEAST PRESSURE {no guard} (17, 1) · DS-DEF-8 INTERNAL (famine), COMMAND SPLIT, INSURGENCY, UNDER TRIBUTE, SECURITY COMPROMISED, ACTIVE SIEGE, MIGRATION, QUARANTINE {no guard} (8-17 each, 2) · DS-DEF-2 Beasts settled/beyond the need (14 and 7, 2) · DS-DEF-5 garrison PRESENT {no gate} (8, 2).
