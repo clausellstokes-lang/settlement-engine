@@ -334,3 +334,16 @@ final statement comes AFTER this list, once.
    src/generators src/data` is empty at 695425a33), the draft shift record, the whole suite, the edge bundles last.
 - Reminder: the `core.hooksPath=.husky/_` line `npm ci` writes to the shared config; this seat unset it after its last
   push.
+
+## Two later notes from the chair (18:51 and 18:55 UTC; copied in, NOT begun by this seat)
+- **The cut's file was re-pushed:** lane/round-3-cut-2026-11-13 is at 892904c1d; package labels changed (defenseDisplay.js
+  and computeActiveChains.js now "lane wc"; MagicTab.jsx "several lanes, shared commits only"); no line changed owner:
+  take round three's list BY FILE from the latest JSON. `src/domain/display/stateProse/defenseStateProse.js` (the
+  Defence page's posture selector) goes to another seat after point 48 lands: do not change it.
+- **#452 joins R1 (same fault):** "Needs: Tannery, Leatherworkers' guild" on the Resources tab beside a "Tanner
+  (established)" on the roster (38 towns of the second code lane's 740; the gap's `missing` list traced to
+  src/data/resourceChains.js and its reader). RULED as R1: a finisher is any live-roster house that does that
+  finishing; a need the roster's own house meets is not listed as needed. Cure it at the reader, with R1's
+  `finisherHere`-style test (validationOnPage.js :: houseOfKindHere + FINISHING_TRADES; note FINISHING_TRADES has no
+  tannery entry by design — a "Tanner (established)" answers "Tannery" by family or needs a tannery trade entry for
+  this reader); if the true cure is a data row, name it for the data lane and go on. NEXT STEP 0, before P1.
