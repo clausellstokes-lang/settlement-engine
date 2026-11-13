@@ -70,6 +70,7 @@ import { factionIdFromName } from '../../lib/entities.js';
 import { cardHouseOf } from '../people/cardPowers.js';
 import { brokerageLegalityOf } from '../../data/informationBrokerageTuning.js';
 import { isCriminalInstitution, isClandestineInstitution, isHideableHouse } from '../people/cardVeil.js';
+import { secondHomeSources, withholdImpression, withholdSecondHomes } from './gallerySecondHomes.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {{ address: string, hidden: boolean }} VeilDelta */
@@ -687,6 +688,13 @@ export function applyVeil(publicSettlement, veil) {
     if (name && veiled('people')) peopleOf.add(name);
   }
 
+  // THE SECOND HOMES' SOURCES (COHERENCE-VEIL-6, V5-1), read BEFORE any card is touched: what each
+  // shut eye governs, as its source said it.
+  /** @param {string} kind @param {string} id @param {string} eye @returns {boolean} */
+  const eyeShut = (kind, id, eye) => !!(fields.get(kind)?.get(id)?.has(eye)
+    || (classes.get(kind)?.has(eye) && !exceptions.has(`field:${kind}:${id}:${eye}`)));
+  const sources = secondHomeSources(s, eyeShut, cardsOf, CARD_KINDS);
+
   // Cards: class switches, then per-card eyes.
   for (const kindName of Object.keys(CARD_KINDS)) {
     const kind = CARD_KINDS[kindName];
@@ -696,10 +704,11 @@ export function applyVeil(publicSettlement, veil) {
     for (const card of cardsOf(s, kindName)) {
       const id = kind.idOf(card);
       const own = byId?.get(id);
-      for (const f of cls || []) {
-        if (!exceptions.has(`field:${kindName}:${id}:${f}`)) dropField(card, kind, f);
-      }
-      for (const f of own || []) dropField(card, kind, f);
+      /** @type {string[]} */
+      const drops = [...[...(cls || [])].filter(f => !exceptions.has(`field:${kindName}:${id}:${f}`)), ...(own || [])];
+      // V5-1 (the impression): a sentence of the appearance the eye shuts goes with it from the card's face
+      if (kindName === 'npc' && drops.includes('physical')) withholdImpression(card);
+      for (const f of drops) dropField(card, kind, f);
     }
   }
 
@@ -734,6 +743,9 @@ export function applyVeil(publicSettlement, veil) {
       }
     }
   }
+
+  // V5-1: each second home goes with the eye that governs its source.
+  withholdSecondHomes(s, sources, goneHouses, CARD_KINDS.institution.fields);
 
   // Groupings last (a tab remover sees the cards already trimmed).
   for (const g of groupings) GROUPING_REMOVERS[g](s);

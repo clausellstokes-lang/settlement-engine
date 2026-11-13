@@ -1,0 +1,35 @@
+     × every string hidden by hand, marked at birth: nothing of it, and no name of a house hidden whole, in any of the four reads, both shapes, DM off and on, live and frozen 53431ms
+     × THE GUARD IS LIVE: a second home this test plants itself, at a path no rule names, is found 13812ms
+     × THE SAME-STEP CLASS (the limit the marker cannot reach): the composed homes of a tie and a person's impression, written from marked sources, are not sent 37211ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+AssertionError: expected [ …(744) ] to deeply equal []
+AssertionError: expected +0 to be 16 // Object.is equality
+AssertionError: expected [ …(784) ] to deeply equal []
+      Tests  3 failed (3)
+exit 1
+     32 new |  institution.desc at defenseProfile.institutions.charter[].desc
+     32 new |  institution.desc at defenseProfile.institutions.garrison[].desc
+     32 new |  institution.desc at defenseProfile.institutions.magicDef[].desc
+     16 new |  institution.desc at defenseProfile.institutions.mercenary[].desc
+     16 new |  institution.desc at defenseProfile.institutions.militia[].desc
+     48 new |  institution.desc at defenseProfile.institutions.walls[].desc
+     32 new |  institution.desc at defenseProfile.institutions.watch[].desc
+     16 new |  tension.description at history.siegeNarrative
+     16 new |  the house H, hidden whole, at economicState.activeChains[].label
+     80 new |  the house H, hidden whole, at economicState.activeChains[].processingInstitutions[]
+     20 new |  the house H, hidden whole, at simulationTrace[].causes[].reason
+     16 new |  the house H, hidden whole, at simulationTrace[].causes[].source
+     16 new |  the house H, hidden whole, at simulationTrace[].downstreamEffects[].target
+     32 old |  institution.desc at defenseProfile.institutions.charter[].desc
+     32 old |  institution.desc at defenseProfile.institutions.garrison[].desc
+     32 old |  institution.desc at defenseProfile.institutions.magicDef[].desc
+     16 old |  institution.desc at defenseProfile.institutions.mercenary[].desc
+     16 old |  institution.desc at defenseProfile.institutions.militia[].desc
+     48 old |  institution.desc at defenseProfile.institutions.walls[].desc
+     32 old |  institution.desc at defenseProfile.institutions.watch[].desc
+     16 old |  tension.description at history.siegeNarrative
+     16 old |  the house H, hidden whole, at economicState.activeChains[].label
+     80 old |  the house H, hidden whole, at economicState.activeChains[].processingInstitutions[]
+     20 old |  the house H, hidden whole, at simulationTrace[].causes[].reason
+     16 old |  the house H, hidden whole, at simulationTrace[].causes[].source
+     16 old |  the house H, hidden whole, at simulationTrace[].downstreamEffects[].target
