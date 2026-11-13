@@ -191,3 +191,47 @@ export function standingDefenseForces(settlement) {
   }
   return Object.freeze(out);
 }
+
+/**
+ * THE DEFENCE TRADITIONS' AND THE SMALL PLACE'S NAME QUESTIONS (COHERENCE-UPKEEP-5, the addendum's
+ * SOURCE table): moved VERBATIM from `defenseGenerator.js :: computeDefenseScores`, where they were
+ * a second reading of the roster outside its home. Same keywords, same substring test over the
+ * same lowered native semantic name, so every answer is the answer the generator gave. The
+ * dials that open a tradition (the magic and religion sliders) are defence's own weights, not
+ * names, and stay with defence.
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+export const DEFENSE_TRADITION_KEYWORDS = Object.freeze({
+  arcane: Object.freeze(['wizard', 'mages', 'arcane', 'enchant', 'spellcasting', 'academy of magic', "mages' district"]),
+  arcaneGuild: Object.freeze(["mages' guild", "wizard's tower", 'arcane academy', "mages' district", 'academy of magic']),
+  divine: Object.freeze(['cathedral', 'monastery', 'great cathedral', 'parish church']),
+  divineShrine: Object.freeze(['shrine', 'temple', 'friary']),
+  divineStrong: Object.freeze(['cathedral', 'monastery', 'great cathedral']),
+  druid: Object.freeze(['druid circle', 'grove shrine', 'elder grove', 'sacred grove']),
+  wardens: Object.freeze(["warden's lodge"]), // a ranger post, defence in every world (J31)
+  alchemy: Object.freeze(['alchemist', 'apothecary district', 'alchemist quarter']),
+  tower: Object.freeze(["wizard's tower"]),
+  teleport: Object.freeze(['teleportation', 'teleport']),
+  elders: Object.freeze(['reeve', 'steward', 'elder', 'household council', 'free elder']),
+  criminalDen: Object.freeze(['fence', 'smuggl', 'gang', 'outlaw']),
+  actualMagic: Object.freeze(['healer', 'monastery', 'cathedral', 'divine', 'healing', 'druid', 'wizard', 'mage', 'arcane', 'enchant']),
+});
+
+/**
+ * Whether the roster holds a house of each defence tradition (and the small place's elders and
+ * criminal den, and the houses that count as actual magic), by name. RUIN-BLIND, as the
+ * partition: the generator hands the roster as built. One name reading per institution.
+ * @param {unknown} institutions
+ * @returns {Readonly<Record<string, boolean>>} one answer per key of DEFENSE_TRADITION_KEYWORDS
+ */
+export function defenseTraditionNamesOf(institutions) {
+  /** @type {ReadonlyArray<unknown>} */
+  const list = Array.isArray(institutions) ? institutions : [];
+  const lowered = list.map((inst) => nativeSemanticName(inst).toLowerCase());
+  /** @type {Record<string, boolean>} */
+  const out = {};
+  for (const [key, keywords] of Object.entries(DEFENSE_TRADITION_KEYWORDS)) {
+    out[key] = lowered.some((name) => keywords.some((kw) => name.includes(kw)));
+  }
+  return Object.freeze(out);
+}

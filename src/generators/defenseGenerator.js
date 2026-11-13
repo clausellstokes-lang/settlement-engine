@@ -11,11 +11,8 @@
 
 import {getInstFlags, getPriorities} from './helpers.js';
 import {computeEffectiveMagicPresence} from './priorityHelpers.js';
-import {
-  nativeSemanticName,
-} from '../domain/content/customContentSemanticAuthority.js';
 import { hasTradeRouteConnection } from '../domain/tradeRouteSemantics.js';
-import { partitionDefenseInstitutions } from '../domain/institutions/defenseInstitutionBuckets.js';
+import { partitionDefenseInstitutions, defenseTraditionNamesOf } from '../domain/institutions/defenseInstitutionBuckets.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { readinessBandOf } from '../data/bandLadders.js';
 import { deriveMagicReliance } from '../domain/magicReliance.js';
@@ -94,40 +91,33 @@ const computeDefenseScores = (
 
   // ── Tradition detection ─────────────────────────────────────────────────────
   const institutions = config._institutions || [];
-  const hasInst = (...kws) => institutions.some(i =>
-    kws.some(kw => nativeSemanticName(i).toLowerCase().includes(kw)));
+  // COHERENCE-UPKEEP-5: the name questions are the roster's defence home's (one reader, same keywords).
+  const names = defenseTraditionNamesOf(institutions);
 
   // Arcane: wizard/mage/sorcerer/enchanter
   const hasArcane   = magicOn && magPri >= 35 && (
-    inst.hasMagicInst ||
-    hasInst('wizard','mages','arcane','enchant','spellcasting','academy of magic','mages\' district')
+    inst.hasMagicInst || names.arcane
   );
   // Strong arcane: organised guild-level
-  const hasArcaneGuild = magicOn && magPri >= 55 && hasInst(
-    'mages\' guild','wizard\'s tower','arcane academy','mages\' district','academy of magic'
-  );
+  const hasArcaneGuild = magicOn && magPri >= 55 && names.arcaneGuild;
 
   // Divine: cleric/temple — uses religion priority as primary gate (not magic)
   // Suppressed in no-magic mode for supernatural effects
   const hasDivine   = magicOn && relPri >= 55 && (
-    hasInst('cathedral','monastery','great cathedral','parish church') ||
-    (relPri >= 65 && hasInst('shrine','temple','friary'))
+    names.divine ||
+    (relPri >= 65 && names.divineShrine)
   );
   // Strong divine: cathedral/monastery level
-  const hasDivineStrong = magicOn && relPri >= 65 && hasInst('cathedral','monastery','great cathedral');
+  const hasDivineStrong = magicOn && relPri >= 65 && names.divineStrong;
 
   // Druid/nature tradition — not route-gated, but more likely in certain contexts
-  const hasDruid    = magicOn && magPri >= 30 && hasInst(
-    'druid circle','grove shrine','elder grove','sacred grove'
-  );
+  const hasDruid    = magicOn && magPri >= 30 && names.druid;
   // Warden's Lodge is DEFENCE, NOT DRUID (the owner, 2026-10-01): a ranger post, not a druid tradition, so it
   // defends in every world, magic or not, with the druid tradition's own +12 for beast lore and tracking (J31).
-  const hasWardens  = hasInst('warden\'s lodge');
+  const hasWardens  = names.wardens;
 
   // Alchemy — amplifier tradition, lower magic threshold
-  const hasAlchemy  = magicOn && magPri >= 15 && hasInst(
-    'alchemist','apothecary district','alchemist quarter'
-  );
+  const hasAlchemy  = magicOn && magPri >= 15 && names.alchemy;
 
   // ── Tier-appropriate community defense baseline (thorp/hamlet/village) ─────
   // Small settlements don't have garrison/walls — they have terrain, cohesion,
@@ -159,10 +149,10 @@ const computeDefenseScores = (
     // Church/shrine as social authority and emergency coordination
     if (inst.hasChurch) { communityIntBase += 8; communityMilBase += 3; }
     // Government institution (reeve, elder, lord's steward) = coordination ability
-    if (hasInst('reeve','steward','elder','household council','free elder'))
+    if (names.elders)
       { communityIntBase += 6; communityMilBase += 3; }
     // No criminal infrastructure = strangers and troublemakers visible immediately
-    const hasCrimOrg = hasInst('fence','smuggl','gang','outlaw');
+    const hasCrimOrg = names.criminalDen;
     if (!hasCrimOrg) communityIntBase += 6;
   }
 
@@ -206,7 +196,7 @@ const computeDefenseScores = (
     // Arcane deterrence — scaled (replaces flat +8)
     if (hasArcane) {
       m += Math.round(10 + Math.min(15, (magPri - 35) * 0.25));
-      if (hasInst('wizard\'s tower')) m += 5; // visible high-level fortification
+      if (names.tower) m += 5; // visible high-level fortification
       if (hasArcaneGuild)             m += 8; // organised coordinated magic defense
     }
     // Divine martial blessing (a battle blessing, crusading morale)
@@ -340,7 +330,7 @@ const computeDefenseScores = (
   // J30: a druid opens none where the world law reads no magic ("their effect of food or defense does not exist in non
   // magic settings") — `!magicOn` below is that reading (J32), so the druid needs no gate of its own here.
   const _hasActualMagic = inst.hasMagicInst || hasDruid || hasArcane
-    || hasInst('healer','monastery','cathedral','divine','healing','druid','wizard','mage','arcane','enchant');
+    || names.actualMagic;
   const _hasMagicInstitution = _hasActualMagic;
   let magical;
   if (!magicOn || (_isSmallTier && !_hasMagicInstitution)) {
@@ -378,7 +368,7 @@ const computeDefenseScores = (
     let econPenalty     = 25;
     let internalPenalty = 15;
     // Arcane: Teleportation supplies in/out, Sending for morale
-    if (hasArcane && magPri >= 65 && hasInst('teleportation','teleport'))
+    if (hasArcane && magPri >= 65 && names.teleport)
       econPenalty = Math.round(econPenalty * 0.4);   // -25 → -10
     else if (hasArcaneGuild && magPri >= 50)
       internalPenalty = Math.round(internalPenalty * 0.53); // -15 → -8
