@@ -257,3 +257,76 @@ births of the 720); a lord's house row repeats its body ("Noble Families · firs
   (scratchpad snap/): only `refs/heads/pfu7`, its tracking ref and the fetched lanes moved; the stash list empty.
 - One unpushed commit was amended (R1's message, to state the read of thirty as executed); nothing at or below 714381934 or
   on origin was rewritten.
+
+---
+
+# PART 3 — COHERENCE-POWERS-8, the lane's third seat (kept current after every item)
+
+Lane read back from origin at **91a3a9623** before the first act (equal to the brief's). Builder: POWERS-8. Scratch
+worktree on a local branch `p8` at the lane's tip, `npm ci` there (it wrote `core.hookspath=.husky/_` into the shared
+config, as before: it runs the lane hook; kept), plain pushes `git push origin p8:refs/heads/lane/powers-follow-up-2026-11-13`.
+Probes: `probes/COHERENCE-POWERS-8/`.
+
+## P3.0 The brief's rulings, copied in (the chair, 2026-11-13; the messages are not on the branch)
+- THE WORK, in order, each its own commit, measured first on births in the app's shape and on the reader's corpus, red
+  first: (1) R2, one home for a person's styled title (acceptance: zero rows where the card's style and the row's role word
+  disagree, the men's rows unchanged, by the reader's count); (2) R1's measure on the 4,305 (office lines and governing-side
+  debt rows on a lord or claimant at ZERO; a residue is cured, not listed); (3) the rows not reached: rulingStructure #53
+  #111 #295 #639 #807 #912, stressFactions #640 (#766 stays for a later seat with its measure); (4) round three's list, HIGH
+  first, by file: npcStructure.js (3 MED), power/ (3 HIGH, 21 MED), data/people (10 MED); a `round2` line may be already
+  cured; (5) #312, a goal that presumes a working resource is not dealt where the chain model's leaf marks it depleted or
+  unworked (its silence is "not known" and leaves the goal), the goal draw on its own stream, the moved records declared;
+  (6) the final statement once, declaring the re-deal ACCEPTED AS DECLARED with the reader's counts (4,305: 6,170 short,
+  9,401 long, ties in 875 births; 720: 1,146, 1,672, importance 338, ties in 124 towns, 28 with no mint), R1's move, every
+  new or changed sentence with its town.
+- RULED ON THE SECOND SEAT'S PARKED LIST: none of it is this seat's. Church/militia originals, patronage count ranges and
+  the phone-floor rows wait for the joins (carried as they stand); R4 parked for the missing word; R5 listed; #532's class
+  parked (a house's trade and lineage have no home); `contestsNiche on factions` NOT banked, named for the merge seat.
+- THE LAWS: a cure's field diff confined to its family and declared with counts; the false sentence gone and what prints
+  in its place true in its town; a claim of zero counted on every surface (tabs, Tonight, PDF text, Foundry journal,
+  exports); the page shows ratings, never the machinery; no new key in the record, no new word in the vocabulary file; no
+  hideable name in a stored composed sentence; no rewrite at or below 91a3a9623.
+- THE CHAIR'S HAZARD NOTICE (19:28 UTC): census.sh exits 0 when its counter fails; after every census run check the
+  counter's own exit and that counts.txt holds its rows; say so in the final statement.
+
+## P3.1 Item by item
+
+### 1. R2 — DONE, ab5c7084f
+One home `faceHonorifics.js :: styledTitleOf` (the second seat's proposal, with a missing role kept as copied), read by
+both row writers. The 720: women's row ends disagreeing 347 -> 0 (lord 120, abbot 22, senior abbot 205); men's 20,670
+unchanged. The 4,305, the reader's `claims4305.mjs` against e969a75b7: femaleLordRows 479 -> 0; men's 122,605 ends
+unchanged. Field diff (720): 142 births, `relationships[].npc1Role/npc2Role` only. Pin re-keyed by identity
+(regenPreservesUserCanon). **Other surfaces that print a woman's raw role beside her name** (not rows; counted at 91a3a9623,
+femrole.mjs): Power tab patronage rows ("Grainne Shaughnessy, the lord (Noble Families) · brings protection") 10, NPC
+tab tie card ("Mentor and Successor Járnsaxa Helgason (the senior abbot)") 6, plot hooks 2, Institutions connection
+("Lady Abbess Járnsaxa Helgason (the senior abbot)") 1. Re-counted at the final tip in P3.3.
+
+### 2. R1's measure on the 4,305 — DONE (no code)
+births4305x.mjs (the reader's rows + each card's position and constraint) at ab5c7084f: 986 lords and claimants; office
+lines 0; "Financial Dependence" with a lord first 0 (the reader's claims4305 govSide 0); governing text naming a lord
+(chamber / common works / governs on) 0 (e969a75b7: 3). No residue.
+
+### 3. The lane's rows not reached
+- **#111 #639 — DONE, 4653685a8** (with round three's #374 #567 #597 and #251's claim): a description claiming a
+  commanding standing beside a Minor/Suppressed label takes its own ladder's rung. 720: covered families 342 -> 0 (of 462
+  in 195 towns); 170 births, `factions[].desc` only. NOT covered, listed: the military "Standing army"/"Significant
+  military" (21; its lower rungs presume a watch or militia, the #807 class) and the moderate "Major church institutions"
+  (40), "Well-organised craft guilds" (59).
+- **#640 — DONE, f628cab05**: "embedded assets in at least two powers" false in 12 of 12; now "with its own people
+  placed inside the settlement".
+- **#295 — DONE, 0f8d05428**: "the elected council" only under a Town/City/Grand Council; else "the seat" (4 -> 0).
+- **#53 — PARKED, a stop for this row.** "The oldest heads of the community decide things together" beside a one-card
+  thorp: 47 of 720 towns print the Elder Council's line with one card or none in the power. The line is written at the
+  power step, before the cast exists; the count of the council's people is the cast's fact (castPowers). A cure needs a
+  second writer of the governing description after the cast, or the cast's size read at the power step (a new input).
+  RECOMMENDATION: the seam that settles the roster's texts (rosterText.js, called from assembleSettlement.js, which the
+  upkeep lane holds) re-reads the governing line against the members once assembleSettlement is joined.
+- **#807 — PARKED (RULED).** "Armed patrol of able-bodied residents" with no militia: rulingStructure.js's own note R-Q/R-U
+  (the chair's ruling of 2026-11-05 05:25): the militia atom is not settled at the power step, so the militia lines print
+  their guard-free wording; a disqualifier there re-decides that ruling. For the chair.
+- **#912 (and round three's #98) — PARKED (RULED).** The governing power's modifier ("arcane-advised", "mage-advised",
+  "corruption-riddled") prints raw beside the power line in 394 of 720 towns (Power tab; the PDF's Power chapter). The chip
+  is ruled the modifier's one screen home (PowerTab.jsx, STOP-1 R7); removing or rewording it re-decides that ruling. #98's
+  "mage-advised" in a thorp with no arcane practitioner is the modifier's writer (rulingStructure.js :: chooseGoverning,
+  from the magic priority alone). RECOMMENDATION: the chair rules plain words for the ten ids, or the chip goes; and the
+  modifier reads the roster's practitioners (a fact the power step has: defenseFactsOf) before it says "advised".
