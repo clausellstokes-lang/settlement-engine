@@ -112,16 +112,16 @@ const FIXED = Object.freeze([0, 21, 42]);
  */
 const PRE_CHANGE = Object.freeze({
   0: Object.freeze({
-    derived: '84b32de4209055bd484afd4f6149ea5465473f155111fea23a6f7366b3f631ec',
-    replay: 'cd97cba0535b3c485cba13ab47f55d7c2b2e9de8c93ee6a03c2867bd70f52139',
+    derived: '3acd72dd0e077d7e04f02036203120c0c55b35b679835710528fa2ea7309d7b8',
+    replay: '214e7d3c6964a28d706bf01dda0f672ce1001ca7c7e4bab3600b49aae7b514f5',
   }),
   21: Object.freeze({
-    derived: '4c561fca47d4958e791283078316da01353ff1db6be653e82ef3d1275849655c',
-    replay: '9bf783b7d18054fe9a183acd5fb78e81bb7a69d844e341a1f3c223cedf52839d',
+    derived: 'de99d51912d61b643bfd55b73f6bed4e28b360f67a9a3f7c3aaa69e1f451a753',
+    replay: '27d4e02a37b293fe5e7340abf5f45677a0ac148def0270e4f2eb02c53c65905f',
   }),
   42: Object.freeze({
-    derived: 'a3ddf3056dbd4ac7fd18a5dadb68bb99241ee90554a056531b437db5cb0585f9',
-    replay: 'd80535ce5dff2f0ac00c7fdb787a93fa9d3021adca8931b83f9cc8f36032f8f1',
+    derived: '9e7c1127a769b26bcd48b0e64c9fd3d6b2d624672fdd2f38928ec13c1ef1e408',
+    replay: '3133bc6e3e0edd3f4384441b5f5ef02766fecce11388911bf5762d36d8dd237c',
   }),
 });
 // ── RE-CAPTURED 2026-10-01, the urban band (ODQ §934.86), BY THE SAME PLANT AND NEVER FROM THE LIVE STEP ALONE ─────
@@ -258,6 +258,11 @@ describe('EM-B2b2 — the DM\'s nearby-resources word survives resolveResources'
 
 // ── RE-CAPTURED 2026-11-12, STYLE-2-MERGE point 43 (STYLE-2-MERGE-8), BY THE SAME PLANT ── Rows 0, 21, 42 moved by the COHERENCE-PRESUME
 // merge f922124d0 (docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json: a line names a thing the town does not have: the culture lines, the re-titled watch role and the ties it re-deals, the history and institution texts); the line before the merge reads all six green. Re-captured: the pre-EM-B2b2 step (12c437de4,
+// sha256 62e16d59...) planted over a COPY of the merged tree and the live step produced the SAME six digests (cmp-equal,
+// the live run twice and equal); on every row the fresh generation equals the dormant re-derivation.
+
+// ── RE-CAPTURED 2026-11-12, STYLE-2-MERGE point 46 (STYLE-2-MERGE-9), BY THE SAME PLANT ── Rows 0, 21, 42 moved by the COHERENCE-POWERS
+// merge 6aeaa4154 (docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json: the dual hat re-deals the cast); the line before the merge reads all six green. Re-captured: the pre-EM-B2b2 step (12c437de4,
 // sha256 62e16d59...) planted over a COPY of the merged tree and the live step produced the SAME six digests (cmp-equal,
 // the live run twice and equal); on every row the fresh generation equals the dormant re-derivation.
 

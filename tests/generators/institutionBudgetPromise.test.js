@@ -112,67 +112,70 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 // RE-KEYED BY IDENTITY 2026-11-12 (STYLE-2-MERGE-8, point 43): 56 of 60 moved, none by the budget (densityFactor still
 // forced to 1), by the COHERENCE-PRESUME merge f922124d0 (docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json: a line names a thing the town does not have: the culture lines, the re-titled watch role and the ties it re-deals, the history and institution texts); the line before the merge reads all sixty green.
 // Re-captured at the merge with the factor forced to 1.0, this file's own loop (an untracked probe), twice and equal.
+// RE-KEYED BY IDENTITY 2026-11-12 (STYLE-2-MERGE-9, point 46): 50 of 60 moved, none by the budget (densityFactor still
+// forced to 1), by the COHERENCE-POWERS merge 6aeaa4154 (docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json: the dual hat re-deals the cast); the line before the merge reads all sixty green.
+// Re-captured at the merge with the factor forced to 1.0, this file's own loop (an untracked probe), twice and equal.
 const BEFORE = Object.freeze([
-  '9ea891a6cd71384f', // 0
-  'bfca5063e51c068b', // 1
-  'be745caa97c8e33e', // 2
-  '9e8232476e4f38be', // 3
-  '39ba1d8f074f6916', // 4
-  '70c586705e5510c7', // 5
+  '2b60523027fef7ee', // 0
+  '48526b38cd16a94c', // 1
+  'c1b21bfc5f9da85f', // 2
+  '28752b3150ee5b68', // 3
+  'be062f132f324100', // 4
+  '61b14b47058a2a5a', // 5
   '0bb8610778a4989a', // 6
-  'c633ac56124699e0', // 7
-  '8ad4969d64ed8d14', // 8
+  '7b3f87a78b647229', // 7
+  '0e8e2f4f2da9a43a', // 8
   'a03d8566e0ca8dc3', // 9
-  'cc42558320907b6a', // 10
-  '1efe90eebfc78c15', // 11
-  '87feee0b9d0216cb', // 12
+  '2ad75b96c48adfee', // 10
+  '117537ec68701c2c', // 11
+  '7f8bcb8a8c84f2c7', // 12
   '070ea2663c87366d', // 13
   'b9e9457eb9d2b04a', // 14
-  'd5ad3a9bc46b2da0', // 15
-  'a41c48bec78895ae', // 16
-  '60c25179a5ae5dac', // 17
-  '6aa92c6a184cb31d', // 18
-  'c5609e515649b766', // 19
-  '19ac4131b60acbe7', // 20
-  '736e8fc96c36c874', // 21
-  '7cb6bd6f457ff0e3', // 22
-  'fa50fbd71c663444', // 23
+  'db65fa52f3fb791a', // 15
+  '866fe49bfe6b4695', // 16
+  '5604f037ea5834f0', // 17
+  '5f77e2b794cd06e6', // 18
+  '3ffbb53fd890c712', // 19
+  '15eb35f3cf10d0cd', // 20
+  '3f26124e5b59c389', // 21
+  'b91243858d8b4b6f', // 22
+  '8c22d692da8bfbfd', // 23
   '70bae71dd604e229', // 24
-  '28c61f0da1dee9e7', // 25
-  '6ea19e9bbedae660', // 26
-  '294086c482d7c4a4', // 27
-  '74f51f9d03b4dfce', // 28
-  '460d60851d789d3b', // 29
-  '8a87eda6cd3bb8d5', // 30
-  'ebc8b4e0dc62e073', // 31
-  'cbd95b1043687ae7', // 32
-  'c10435c18b134be9', // 33
-  '136acc8fba335d12', // 34
-  'd032c9776c404a1d', // 35
-  '1013c3fa48e6f8b0', // 36
-  '4657230f79fb9ed4', // 37
-  'd75a5536042bb32b', // 38
-  '3295bc181100917e', // 39
-  '726c777b1986d371', // 40
-  '2a5d92947ecebf06', // 41
+  'f6529e35dfcab296', // 25
+  'b35e3d4d8415ef3b', // 26
+  '985ed3a6494879d8', // 27
+  '9a88b74af76d3e8d', // 28
+  '2440ab5f9dd991c0', // 29
+  '8a4e0b647f2d40f1', // 30
+  'a5800931bdc3cfd6', // 31
+  'b86950234efbd1ed', // 32
+  '0bd550753629182e', // 33
+  '5315ac68b83ec304', // 34
+  'a8e9e655a493294a', // 35
+  'a0d9630df473df7f', // 36
+  'b82f723a336ae6b8', // 37
+  '04abcd4c14888966', // 38
+  '5a74692078df43e6', // 39
+  'c7f24de4dedf7516', // 40
+  'f0d601abc601d361', // 41
   '71a0ca608a347c49', // 42
   '5c3f1eacb3704c14', // 43
-  'd494d03e15926eff', // 44
+  '1259bc01b362d868', // 44
   'bd7af3252a4210a5', // 45
-  'a0c0d9fb6e78feb8', // 46
-  '89d468b57749660d', // 47
-  '851cfd098245a663', // 48
+  '12ea47b72c7b3164', // 46
+  '17982ab80c3df654', // 47
+  'da1b4d690f6aa55f', // 48
   '2e73d1fbd65b1ec9', // 49
-  '768d2a9aa0e2d297', // 50
-  'de46e2c9193643f9', // 51
-  'af61f251b2dfe945', // 52
-  'c0b68af6baca6889', // 53
-  '13887d83f3ea8566', // 54
-  'b19cc38e9f58b57a', // 55
-  'ee7b25971b180448', // 56
+  '34905d324cd39c8b', // 50
+  '39d44e28765b82f8', // 51
+  '7d97c4b3e2476f6f', // 52
+  '0cbade26d7f28efe', // 53
+  'f14efc2d652b5229', // 54
+  '6341af3ea433eb27', // 55
+  'e73ed3dd80156d96', // 56
   '1979f45e0ccaea49', // 57
-  '7de1a7027f434268', // 58
-  '1346020966ace15b', // 59
+  'b18c6fa308e1865e', // 58
+  '89654c68c3072323', // 59
 ]);
 
 const hashOf = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex').slice(0, 16);

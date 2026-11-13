@@ -207,6 +207,9 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
   // RE-KEYED BY IDENTITY 2026-11-12 (STYLE-2-MERGE-8, point 43): 56 of 60 moved by the COHERENCE-PRESUME merge f922124d0 (docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json:
   // a line names a thing the town does not have: the culture lines, the re-titled watch role and the ties it re-deals, the history and institution texts); the line before the merge reads every digest green. Re-captured at the merge by this file's own loop (an
   // untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-12 (STYLE-2-MERGE-9, point 46): 51 of 60 moved by the COHERENCE-POWERS merge 6aeaa4154 (docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json:
+  // the dual hat re-deals the cast); the line before the merge reads every digest green. Re-captured at the merge by this file's own loop (an
+  // untracked probe), twice and equal.
   const DARK =/** @type {Record<string, string>} */ (JSON.parse(readFileSync(
     fileURLToPath(new URL('../fixtures/x46-npc-band-dark-digests.json', import.meta.url)), 'utf8',
   )));
