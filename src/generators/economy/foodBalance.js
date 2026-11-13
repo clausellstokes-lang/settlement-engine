@@ -24,7 +24,7 @@ import {
   hasTradeRouteConnection,
   isTradeRouteDisconnected,
   SEASONAL_ROUTE_FOOD_IMPORT_RATE, waterAccessKind, // R2-CODE-A-4 (A15): the water home's rule
-} from '../../domain/tradeRouteSemantics.js';
+} from '../../domain/tradeRouteSemantics.js'; import { hasMarketInstitution } from '../../domain/facts/market.js'; // R2-CODE-A-4 (A26): the market home
 // Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
 const ESTABLISH_SEASONAL_ACCESS_PATRONAGE_OR_A_DEPENDABLE_TRADE_ROUTE = 'Establish seasonal access, patronage, or a dependable trade route';
 const FERTILE_FLOODPLAIN = 'fertile_floodplain';
@@ -547,7 +547,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
       }
       plotHooks.push({
         category: !(importCoverageFinal > 0 && importChannelLabel) ? 'Scarce Food' : 'Trade Politics', // R2-CODE-A-2 (cold #152): the line reads the famine and the channel this balance reads; nothing coming in, no trade to speak of
-        hook: !(importCoverageFinal > 0 && importChannelLabel) ? `No food can be bought in from outside now, so the ${foodStoreWord(foodSecurity?.foodRecord)} already here is all there is, and its price climbs every week. The settlement must decide how to share it, and those who hold it are watching it decide.` : stresses.includes('famine') ? `The ${FAILED_SOURCE_WORDS[/** @type {keyof typeof FAILED_SOURCE_WORDS} */ (foodSecurity?.foodRecord?.failedSource)] || 'crops'} failed here this year, and what food can still be bought from outside costs more every week. The settlement must decide what it can still afford to import, and the merchants are watching it decide.` : 'A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still afford to import, and the merchants are watching it decide.',
+        hook: !(importCoverageFinal > 0 && importChannelLabel) ? `No food can be bought in from outside now, so the ${foodStoreWord(foodSecurity?.foodRecord)} already here is all there is, and its price climbs every week. The settlement must decide how to share it, and those who hold it are watching it decide.` : stresses.includes('famine') ? `The ${FAILED_SOURCE_WORDS[/** @type {keyof typeof FAILED_SOURCE_WORDS} */ (foodSecurity?.foodRecord?.failedSource)] || 'crops'} failed here this year, and what food can still be bought from outside costs more every week. The settlement must decide what it can still afford to import, and ${hasMarketInstitution(institutions) ? 'the merchants are' : 'whoever brings the food in is'} watching it decide.` : `A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still afford to import, and ${hasMarketInstitution(institutions) ? 'the merchants are' : 'whoever brings the food in is'} watching it decide.`, // R2-CODE-A-4 (the reader's A26, the chair's ruling): merchants only where the roster holds a market (the market home)
         severity: 'medium',
       });
     }
