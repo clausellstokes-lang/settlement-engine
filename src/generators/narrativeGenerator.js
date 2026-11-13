@@ -764,7 +764,7 @@ export const SMALL_PLACE_TIER_LINES = Object.freeze([
  *                                 When it records a meaningful deficit, the isolated
  *                                 wording acknowledges the gap instead of seeding the
  *                                 AI pass with a self-sufficiency claim.
- * @param {{ hasDocks?: boolean }} [roster] - #10: the roster's docks/wharf flag; an explicit false
+ * @param {{ hasDocks?: boolean, hasTravellerHouse?: boolean }} [roster] - #10: the roster's docks/wharf flag; an explicit false
  *                                 takes the terrain's arm, absent keeps the port arm.
  * @returns {string[]} Array of reason strings (shown as bullet list)
  */
@@ -801,7 +801,7 @@ export const generateSettlementReason = (tier, route, neighbor, _config = {}, fo
     hasDocks: roster?.hasDocks,
     supportChannels,
     specialResources: _config.specialResources ?? null,
-    seed: _config._seed ?? null,
+    seed: _config._seed ?? null, siege: Array.isArray(_config.stressTypes) && _config.stressTypes.includes('under_siege'), tier, hasTravellerHouse: roster?.hasTravellerHouse, // R2-CODE-A-4 (#154, #ww-1227): the rows a siege, the size or the roster refuses; one line so no cited line moves
   }));
 
   // Tier-specific context. THE OWNER'S STYLE LAW (W5 HIS 2026-11-07, STYLE-AUDIT §2a #11 and §2b-5):

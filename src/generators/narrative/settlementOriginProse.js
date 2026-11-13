@@ -183,6 +183,57 @@ export const ORIGIN_POOLS = Object.freeze({
 /** Every arm key, frozen, so a pin can walk the corpus without hard-coding it. */
 export const ORIGIN_ARMS = Object.freeze(Object.keys(ORIGIN_POOLS));
 
+/** The sizes a "living from other people's journeys" is not said of. */
+const TRAVELLER_LIVING_REFUSED_TIERS = new Set(['city', 'metropolis']);
+
+/** @param {{ siege?: boolean }} state */
+const noSiege = (state) => state.siege !== true;
+
+/**
+ * THE ROWS A FOUNDING STATE REFUSES (R2-CODE-A-4: round three's #154 and the increment's #ww-1227, the
+ * chair's rulings of 2026-11-13 20:33 and 21:14). A row listed here is said only where its test holds;
+ * a refused pick resolves DRAW-FREE to the next admitted row of the same pool (pickVariant's index,
+ * then onward, wrapping), so law 1 holds: no draw is added or moved. A pool or a row not listed is
+ * admitted everywhere, and a state that does not say (no `siege`, no `tier`, no traveller flag) is
+ * admitted, so a seedless or bare caller keeps the pre-RR sentence (law 2).
+ *   - Present traffic (trade flowing in, a day measured in traffic, a living from journeys, busy roads,
+ *     trade on every road) is refused while a siege is in force: nothing comes in by road.
+ *   - "A living from other people's journeys, in stabling and meals" needs a house that serves
+ *     travellers (an inn or a tavern: the vocabulary's `tavern` atom, read by the caller), and is not
+ *     said of a city or a metropolis, whose living is not other people's journeys.
+ * @type {Readonly<Record<string, Readonly<Record<number, (state: { siege?: boolean, tier?: string|null, hasTravellerHouse?: boolean }) => boolean>>>>}
+ */
+export const ORIGIN_ROW_ADMITS = Object.freeze({
+  road: Object.freeze({
+    0: noSiege,
+    2: noSiege,
+    3: (state) => noSiege(state)
+      && state.hasTravellerHouse !== false
+      && !TRAVELLER_LIVING_REFUSED_TIERS.has(String(state.tier || '')),
+  }),
+  crossroads: Object.freeze({ 0: noSiege, 1: noSiege, 2: noSiege }),
+});
+
+/**
+ * The index the founding state takes in its arm's pool: the hash's pick, or, where the state refuses
+ * that row, the next admitted row (draw-free). Where no row is admitted the pick stands.
+ * @param {string} arm
+ * @param {readonly string[]} pool
+ * @param {number} at the hash's pick
+ * @param {{ siege?: boolean, tier?: string|null, hasTravellerHouse?: boolean }} state
+ * @returns {number}
+ */
+const admittedIndex = (arm, pool, at, state) => {
+  const admits = ORIGIN_ROW_ADMITS[arm];
+  if (!admits) return at;
+  for (let k = 0; k < pool.length; k++) {
+    const i = (at + k) % pool.length;
+    const test = admits[i];
+    if (!test || test(state)) return i;
+  }
+  return at;
+};
+
 /**
  * Resolve the ARM for a founding state. This is the pre-RR branch structure
  * exactly: route, with the port terrain sub-arms and the isolated deficit split.
@@ -242,13 +293,14 @@ export const originVariantKey = ({ seed, arm, terrainType = null, hasFoodDeficit
  *
  * @param {{ route?: string, terrainType?: string|null, hasFoodDeficit?: boolean, hasDocks?: boolean,
  *           supportChannels?: string, specialResources?: readonly string[]|null,
- *           seed?: string|null }} state
+ *           seed?: string|null, siege?: boolean, tier?: string|null, hasTravellerHouse?: boolean }} state
  * @returns {string}
  */
 export const selectOriginBody = (state) => {
   const arm = originArmKey(state);
   const pool = ORIGIN_POOLS[arm];
-  const picked = pickVariant(pool, originVariantKey({ ...state, arm }));
+  const hashed = pickVariant(pool, originVariantKey({ ...state, arm }));
+  const picked = pool[admittedIndex(arm, pool, pool.indexOf(hashed), state)];
   const body = arm === 'ground'
     ? picked.split(GROUND_TOKEN).join(GROUND_PHRASE[/** @type {string} */ (state.terrainType)])
     : picked;
