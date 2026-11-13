@@ -976,6 +976,143 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
     expect(breaches.slice(0, 20)).toEqual([]);
   }, ROW_TIMEOUT_MS);
 
+  // ── V5 (COHERENCE-VEIL-5): THE COMPOSITION WITH THE POWERS LANE ──────────────────────────────────
+  // The line's point 46 (6aeaa4154) merged COHERENCE-POWERS: every power now has a named person, its
+  // leader (a membership of rank 1), and a void of succession seats the claimants' powers with their
+  // faces (`institution: { kind: 'power' }`). THE LAW on them (the chair's ruling 331): a row the DM hid
+  // by hand on a leader or a claimant is never sent, in either stored shape, by any of the four reads or
+  // on the page, Reveal DM off and on; what is not hidden draws on the page as it did at 210. MASTER'S
+  // SHAPE is the new record taken back through settlementMigrations.js's two steps: memberships as
+  // factionAffiliation / secondaryAffiliation / linkedFactionIds, a house as its name, an allegiance as
+  // the corrupt mark, ties in npc1Id/npc2Id, and the goals eye's factionGoal beside the goal.
+  // Red at 5a2399cf9's 211 and client (the old shape's ties and factionGoal).
+  it('V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page', async () => {
+    slugify = (await import('../../src/domain/dossier/entityLinks.js')).slugifyEntity;
+    const { factionIdFromName } = await import('../../src/lib/entities.js');
+    const { galleryMemberKey: galleryMemberKeyOf } = await import('../../src/domain/display/publicSafe.js');
+    /** A person as master's client stored it (the inverse of the v1 -> v2 and v2 -> v3 steps). */
+    const oldPerson = (p) => {
+      const { memberships, allegiance, institution, ...rest } = p;
+      const ms = (Array.isArray(memberships) ? memberships : []).filter((m) => isRec(m) && typeof m.power === 'string');
+      const out = { ...rest };
+      if (ms[0]) out.factionAffiliation = ms[0].power;
+      if (ms[1]) out.secondaryAffiliation = ms[1].power;
+      if (ms.length) out.linkedFactionIds = ms.map((m) => factionIdFromName(m.power));
+      if (isRec(institution) && institution.kind === 'house' && typeof institution.key === 'string') out.institution = institution.key;
+      if (isRec(allegiance)) { out.corrupt = true; out.corruptionVector = allegiance.vector ?? null; }
+      return out;
+    };
+    const r = rngOf(5005);
+    const pick = (xs) => xs[Math.floor(r() * xs.length)];
+    const TOWNS = [...['hamlet', 'village', 'town', 'city', 'metropolis'].flatMap((size) => [[size, null], [size, 'succession_void']]), ['city', 'infiltrated']];
+    const EYES = ['secret', 'goals', 'personality', 'hooks'];
+    const tally = { towns: 0, shares: 0, leaders: 0, claimants: 0, hidden: 0, open: 0, openDrawn: 0, dm: 0, revealedOne: 0, classes: 0, cards: 0, ties: 0, control210: 0 };
+    const breaches = [];
+    for (const [k, [settType, stress]] of TOWNS.entries()) {
+      const raw = gen({ ...BROWSER, settType, ...(stress ? { selectedStresses: [stress], selectedStressesRandom: false } : {}) }, null,
+        { seed: `veil5-powers-${settType}-${stress || 'calm'}`, customContent: {} });
+      const isLeader = (p) => (Array.isArray(p.memberships) ? p.memberships : []).some((m) => isRec(m) && m.rank === 1);
+      const isClaimant = (p) => isRec(p.institution) && p.institution.kind === 'power';
+      const targets = raw.npcs.filter((p) => isRec(p) && typeof p.id === 'string' && (isLeader(p) || isClaimant(p)));
+      tally.towns += 1; tally.leaders += targets.filter(isLeader).length; tally.claimants += targets.filter(isClaimant).length;
+      // a marker on every field an eye governs, on each target, and on the description of each tie it starts
+      const live = structuredClone(raw);
+      const marks = [];
+      const markedTies = new Set();
+      for (const [i, t0] of targets.entries()) {
+        const p = live.npcs.find((x) => isRec(x) && x.id === t0.id);
+        const tag = `V5M_${k}_${i}_`;
+        p.secret = { text: `${tag}SECRET` }; marks.push({ m: `${tag}SECRET`, id: p.id, eye: 'secret' });
+        p.goal = { intent: `${tag}GOAL` }; marks.push({ m: `${tag}GOAL`, id: p.id, eye: 'goals' });
+        p.personality = { core: `${tag}PERSONA` }; marks.push({ m: `${tag}PERSONA`, id: p.id, eye: 'personality' });
+        p.plotHooks = [`${tag}HOOK`]; marks.push({ m: `${tag}HOOK`, id: p.id, eye: 'hooks' });
+        marks.push({ m: `${tag}FGOAL`, id: p.id, eye: 'goals', oldOnly: true });
+        for (const [j, t] of (live.relationships || []).entries()) {
+          if (!isRec(t) || t.from !== p.id || markedTies.has(j)) continue;
+          markedTies.add(j); t.description = `${tag}TIE_${j}_`; marks.push({ m: `${tag}TIE_${j}_`, tie: j });
+        }
+      }
+      const docs = {
+        new: { ...live, publicProse: compose(live) },
+        old: (() => {
+          const s = structuredClone(live);
+          s.npcs = s.npcs.map((p) => (isRec(p) ? oldPerson(p) : p));
+          for (const [i, t0] of targets.entries()) s.npcs.find((x) => isRec(x) && x.id === t0.id).factionGoal = `V5M_${k}_${i}_FGOAL`;
+          s.relationships = (s.relationships || []).map((t) => (isRec(t) && 'from' in t ? toOldShape(t) : t));
+          s.schemaVersion = 1;
+          delete s.publicProse;
+          return s;
+        })(),
+      };
+      for (const shape of ['new', 'old']) {
+        for (const dm of [false, true]) {
+          const doc = docs[shape];
+          const deltas = []; const members = {}; const hiddenEyes = new Map(); const hiddenTies = new Set();
+          const cls = EYES.filter(() => r() < 0.15);
+          for (const e of cls) deltas.push({ address: `class:npc:${e}`, hidden: true });
+          if (cls.length) tally.classes += 1;
+          for (const t0 of targets) {
+            const person = doc.npcs.find((x) => isRec(x) && x.id === t0.id);
+            const id = veil.CARD_KINDS.npc.idOf(person);
+            const how = pick(['none', 'none', 'card', 'one', 'two']);
+            const eyes = how === 'card' ? EYES : how === 'one' ? [pick(EYES)] : how === 'two' ? [pick(EYES), pick(EYES)] : [];
+            if (how === 'card') { deltas.push({ address: `card:npc:${id}`, hidden: true }); tally.cards += 1; } else for (const e of eyes) deltas.push({ address: `field:npc:${id}:${e}`, hidden: true });
+            hiddenEyes.set(t0.id, new Set([...eyes, ...cls]));
+            if (!dm && r() < 0.25) { members[galleryMemberKeyOf(person)] = { revealDm: true }; tally.revealedOne += 1; }
+          }
+          for (const j of markedTies) {
+            const tie = doc.relationships[j];
+            const id = veil.CARD_KINDS.relationship.idOf(tie);
+            const how = pick(['none', 'description', 'card']);
+            if (how === 'description') deltas.push({ address: `field:relationship:${id}:description`, hidden: true });
+            if (how === 'card') deltas.push({ address: `card:relationship:${id}`, hidden: true });
+            if (how !== 'none') hiddenTies.add(j);
+            tally.ties += 1;
+          }
+          // the panel's own order: the stored member reveals first, then the deltas (a whole-card hide on a
+          // person is written as that person's revealDm: false, over any reveal: writeShareVeil)
+          const ov = veil.writeShareVeil(members, deltas);
+          const now = await v31Reads(LIVE.db, doc, ov, { dm });
+          const before = await v31Reads(AT210.db, doc, ov, { dm });
+          tally.shares += 1; if (dm) tally.dm += 1;
+          // anchored: the reads are this town's, its leaders named in the gallery response
+          expect(targets.some((t0) => has(now.gallery, t0.name)), `${settType} ${stress} ${shape} dm=${dm}: anchor`).toBe(true);
+          for (const mk of marks) {
+            if (mk.oldOnly && shape !== 'old') continue;
+            const hidden = mk.tie !== undefined ? hiddenTies.has(mk.tie) : hiddenEyes.get(mk.id).has(mk.eye);
+            const where = `${settType}/${stress || 'calm'} ${shape} dm=${dm} ${mk.m}`;
+            if (hidden) {
+              tally.hidden += 1;
+              if (has(before.gallery, mk.m)) tally.control210 += 1;
+              for (const read of ['gallery', 'link', 'import', 'map', 'page']) if (has(now[read], mk.m)) breaches.push(`${where} hidden, sent by ${read}`);
+            } else {
+              tally.open += 1;
+              const drawn = has(before.page, mk.m);
+              if (drawn) tally.openDrawn += 1;
+              if (has(now.page, mk.m) !== drawn) breaches.push(`${where} open: page at 211 ${has(now.page, mk.m)}, at 210 ${drawn}`);
+              if (drawn && !has(now.gallery, mk.m)) breaches.push(`${where} open and drawn at 210, not sent at 211`);
+            }
+          }
+        }
+      }
+    }
+    // anchored: both halves of the law, both shapes, Reveal DM on and off, a member reveal, cards and
+    // classes, the leaders and the claimants; and the red control: 210 sends hidden markers
+    expect(tally.towns).toBe(11);
+    expect(tally.shares).toBe(44);
+    expect(tally.leaders).toBeGreaterThan(50);
+    expect(tally.claimants).toBeGreaterThan(5);
+    expect(tally.hidden).toBeGreaterThan(300);
+    expect(tally.open).toBeGreaterThan(300);
+    expect(tally.openDrawn).toBeGreaterThan(50);
+    expect(tally.revealedOne).toBeGreaterThan(10);
+    expect(tally.classes).toBeGreaterThan(3);
+    expect(tally.cards).toBeGreaterThan(20);
+    expect(tally.ties).toBeGreaterThan(50);
+    expect(tally.control210).toBeGreaterThan(50);
+    expect(breaches.slice(0, 20)).toEqual([]);
+  }, ROW_TIMEOUT_MS);
+
   // ── THE ROLLBACK ──────────────────────────────────────────────────────────────────────────────
   it('the rollback: 001..211 then supabase/rollback/211_*.down.sql equals a chain stopped at 210, byte for byte', async () => {
     const down = readdirSync(ROLLBACK).filter((f) => /^211_.*\.down\.sql$/.test(f));
