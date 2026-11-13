@@ -22,7 +22,7 @@ import { whereaboutsLine, whereaboutsBadge } from '../../domain/roads/whereabout
 import { cardTieLines } from '../../domain/relationships/cardTies.js';
 import { cardPowerLine, cardPowerNames, cardHouseOf, governingNameOf } from '../../domain/people/cardPowers.js';
 import { cardInstitutionDoorOf } from '../../domain/people/cardDoor.js';
-import { seatKeeperOf } from '../../domain/people/seatKeeper.js';
+import { keeperFormOf, seatKeeperOf } from '../../domain/people/seatKeeper.js';
 import { shownHonorificOf } from '../../domain/people/seatKeeperDisplay.js';
 import { allegianceOf } from '../../domain/people/allegiance.js';
 import {
@@ -128,6 +128,13 @@ export function NPCCategoryGroup({
 
 
 export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e0d0b0'}}) {
+  // R2-CODE-B round 3 (the increment's #pf-717 #pf-718, the chair's ruling): the keeper of an EMPTY seat is styled as the
+  // Power tab styles it ("Acting First Magnate"), from the powers lane's one home (people/seatKeeper.js), never by the
+  // bare title of the office no one holds. The stored role is read unchanged for everyone else.
+  const keeperSettlement = useStore(s => s.settlement);
+  const seatKeeper = seatKeeperOf(keeperSettlement);
+  const seatKeeperForm = seatKeeper ? keeperFormOf(keeperSettlement) : '';
+  const roleShown = (/** @type {unknown} */ id, /** @type {unknown} */ stored) => (seatKeeper && seatKeeperForm && seatKeeper.id && seatKeeper.id === id ? seatKeeperForm : stored);
   const [open,setOpen]=useState(false);
   // THE TWO PHONE FLOORS — the card's two paragraphs take the PROSE floor; the
   // role line beneath the names takes the CHROME floor.
@@ -155,7 +162,7 @@ export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e
           {rel.flagDriven&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.magic,background:swatch['#F0EBFF'],padding:'1px 6px',textTransform:'uppercase'}}>◆ Emergent</span>}
         </div>
         <button type="button" aria-expanded={open} aria-label={`Toggle relationship between ${rel.npc1Name} and ${rel.npc2Name}`} onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'flex-start',gap:8,background:'none',border:'none',cursor:'pointer',padding:'0 14px 10px',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
-          <div data-sf-chrome="" style={{flex:1,fontSize:chromeFontSize(FS.xs,mobile),color:MUTED}}>{rel.npc1Role} · {rel.strength} · {rel.npc2Role}</div>
+          <div data-sf-chrome="" style={{flex:1,fontSize:chromeFontSize(FS.xs,mobile),color:MUTED}}>{roleShown(rel.from, rel.npc1Role)} · {rel.strength} · {roleShown(rel.to, rel.npc2Role)}</div>
           <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED,flexShrink:0,paddingTop:2}}>{open?'▲':'▼'}</span>
         </button>
       </div>
