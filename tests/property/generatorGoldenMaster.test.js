@@ -18,6 +18,21 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-13 — STYLE-2-MERGE RECORD 46, THE COHERENCE-POWERS MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   393 of 525 rows (thorp 24, hamlet 12, village 84, town 105, city 84, metropolis 84) against record 43's post-state. THE CAUSE, ONE (first-parent step 6aeaa4154): the COHERENCE-POWERS merge (lane/coherence-powers-2026-11-11 at 313c67e2b; the owner's dual-hat law: the leader comes from a house of the town and keeps its hat, the powers stand on the houses). FIELD-DIFFED: npcs, relationships, conflicts, capture states, the stress casts, the coherence receipt, the trace, the prominent relationship and the pressure line, the families the draft declares.
+ *   Written from the staged tree S46 (the tree of 6aeaa4154 with the door paths carried from the branch). 083542bb.. -> 5ef18089..
+ *
+ * 2026-11-12 — STYLE-2-MERGE RECORD 43, THE COHERENCE-PRESUME MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   505 of 525 rows (thorp 78, hamlet 84, village 84, town 105, city 76, metropolis 78) against record 42's post-state. THE CAUSE, ONE (first-parent step f922124d0): the COHERENCE-PRESUME merge (lane/coherence-presume-2026-11-11 at 02c5f8fbd; a line names a thing the town does not have, its components named in the record). FIELD-DIFFED: text leaves only (culture, NPC names and roles and the ties that read them, quarters, history, institution texts, arrival, pressure, criminal services); no band, label or score.
+ *   Written from the staged tree S43 (the tree of f922124d0 with the door paths carried from the branch). 6f8317a8.. -> 083542bb..
+ *
+ * 2026-11-12 — STYLE-2-MERGE RECORD 42, THE COHERENCE-QUARREL MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-12-style-2-merge-42-coherence-quarrel.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   476 of 525 rows (thorp 72, hamlet 84, village 84, town 68, city 84, metropolis 84) against record 27's post-state. THE CAUSE, ONE (first-parent step d4723749a): the COHERENCE-QUARREL merge (lane/coherence-quarrel-2026-11-11 at 1c7b5786c; cures 1-4: the quarrels' cast-declared issues with hooks of their own, the touched power's clause, the smuggling hook's tellings). FIELD-DIFFED: conflicts[] and powerStructure.conflicts[] issue/stakes/desc/plotHooks, economicState.safetyProfile.plotHooks[]; no other leaf.
+ *   Written from the staged tree S42 (the tree of d4723749a with the door paths carried from the branch). 97936ac1.. -> 6f8317a8..
+ *
  * 2026-11-09 — STYLE-2-MERGE RECORD 27, THE SW-9b-B MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
  *   record docs/shift-records/2026-11-10-style-2-merge-27-sw9b-b.json; the cloud chair signs under the owner's delegation, vetoable).
  *   167 of 525 rows (village 12, city 84, metropolis 71) against record 25's post-state. THE CAUSE, ONE (first-parent step ee364b3ef): the SW-9b-B merge (lane/style-2-sw9b-b-2026-11-09 at df52ccd34; b23e4e91b, the cast's fixed reason instigatorBacked). FIELD-DIFFED: stress/stressors cast.roles[].reason, 0 non-string leaves.

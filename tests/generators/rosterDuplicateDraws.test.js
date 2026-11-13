@@ -43,7 +43,19 @@ describe('REVIEW-INTAKE-4 — no roster carries one secret or one goal twice', (
     // 2026-11-07 PEOPLE-1 CAST: 101 thorps and hamlets of the 1,000 carry ONE card (a roster with one face-bearing
     // house and no `other` power to mint beside it; the envelope thorp 0–5), measured at the lane's tip; 899 carry
     // two or more (the 952 read at 5f455dcb9 counted the population-step mints of powers the record did not carry).
-    expect(rosters).toBe(899);
+    // RE-MEASURED 2026-11-12, COHERENCE-POWERS cure (i) (the chair's ruling of 2026-11-11, "ONE PERSON, ONE FACE"): where a
+    // house of the town leads, the seat's house bears no face and no seat is minted beside it, so 65 more births (thorps and
+    // hamlets whose one house now leads) carry ONE card: 834 carry two or more, measured by this file at the lane's tip.
+    // RE-MEASURED 2026-11-12, COHERENCE-POWERS 2B (5915e3af0, the council of a kind): 11 thorps and hamlets drawn as Priestly
+    // Guidance with no religious house become Household or Elder Councils; their leader is then a house of the town (the dual
+    // hat) and no seat is minted beside it, so they carry ONE card (soak1k-18, -24, -108, -223, -391, -565 and five more):
+    // 823 carry two or more, measured by this file at the lane's tip.
+    // RE-MEASURED 2026-11-12 (COHERENCE-POWERS-4, by the commit, on this file's own 1,000 births): 823 -> 826 at 97759b837
+    // (COHERENCE-POWERS-3 F1, the dual hat does not shrink a place's political mass: soak1k-612, -618, -888 carry a second
+    // card), 826 -> 853 at 9bcda8ff6 (the chair's rulings (1) and (2): an occupation seats its occupier and a
+    // fractured realm shows two powers, at every size: 27 one-card births, soak1k-37, -48, -108 and 24 more, now
+    // carry two cards or more). No birth went the other way. 853 at the lane's tip.
+    expect(rosters).toBe(853);
   });
 
   it('no roster repeats a secret', () => {

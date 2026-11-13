@@ -54,6 +54,8 @@ import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { disambiguateNPCDisplayNames } from '../npcDisplayNames.js';
 import { hookPoolFor, poolFor, seatPoolFor } from './poolMap.js';
 import { seatMintTitleFor } from './mintTitles.js';
+import { CIVIC_OFFICE_BY_SIZE, OFFICE_TITLES } from '../../data/officeTitles.js';
+import { backingArchetypeOf, RULER_KINDS } from '../../domain/dossier/powerSupport.js';
 import { isHideableHouse, isVeiledPower, veiledCardIdFor } from '../../domain/people/cardVeil.js';
 
 /** The keyed fork every card is drawn under (declared in the fork census). */
@@ -128,6 +130,131 @@ export function seatHouseOf(institutions) {
   });
   if (government) return { index: government.index, house: government.house, kind: 'government' };
   return hall;
+}
+
+/**
+ * THE GOVERNMENTS THAT SEND THEIR OWN MAN (COHERENCE-POWERS; the chair's ruling of 2026-11-11, 23:22
+ * UTC, on the owner's word "unless appointed by an appropriate government type"): a government whose own
+ * name says its leader is sent. Its leader is the seat as before (the office's face, or the minted seat),
+ * with no house in the town; every other government's leader wears the dual hat (`dualHatHouseOf`).
+ */
+export const APPOINTED_GOVERNMENTS = Object.freeze([
+  'Feudal Stewardship', 'Feudal Appointee', 'Noble Governorship', 'Ducal Governorship', 'Royal Authority',
+  'Noble Regency', 'Foreign Stewardship', 'Foreign Administration', 'Occupation Authority', 'Martial Administration',
+]);
+/** The kinds of house a civic government's leader comes from: the town's trades and its landed houses. */
+const CIVIC_HOUSE_KINDS = Object.freeze(['craft', 'merchant', 'noble']);
+
+/**
+ * A house's KIND for the dual hat: the largest share of its backing row; 'government' for a
+ * Government-shelf house or a hall (the offices), null for a house the catalogue does not place.
+ * @param {RosterRow} house @returns {string | null}
+ */
+export function houseKindOf(house) {
+  if (faceOfInstitution(house) === FACE_SEAT || familyOfInstitution(house)?.shelf === 'Government') return 'government';
+  const row = backingRowFor(house?.name);
+  if (!row) return null;
+  return Object.entries(row.shares).sort((x, y) => y[1] - x[1])[0][0];
+}
+
+/**
+ * Does the roster hold an open, face-bearing house of `kind` — a house a ruler of that kind could come from
+ * (the candidates `dualHatHouseOf` draws, COHERENCE-POWERS 2B: a council of a kind is drawn only where one stands)?
+ * @param {RosterRow[]} institutions @param {string} kind @returns {boolean}
+ */
+export function hasHouseOfKind(institutions, kind) {
+  return (Array.isArray(institutions) ? institutions : []).some((house) => {
+    if (!house || isFabricInstitution(house) || isHideableHouse(house)) return false;
+    const face = faceOfInstitution(house);
+    return typeof face === 'string' && face !== FACE_SEAT && houseKindOf(house) === kind;
+  });
+}
+
+/**
+ * The roster's houses that bear a face of their own (the cast's house cards: not the fabric, not a hall, not a
+ * family that yields to a faced one, YIELDS_TO), by roster name. Pure over the roster (COHERENCE-POWERS 2B: the
+ * fold asks which powers the deal would leave with no one).
+ * @param {RosterRow[]} institutions @returns {Set<string>}
+ */
+export function faceBearingHouseNames(institutions) {
+  const rows = (Array.isArray(institutions) ? institutions : [])
+    .filter((house) => house && !isFabricInstitution(house) && typeof faceOfInstitution(house) === 'string' && faceOfInstitution(house) !== FACE_SEAT);
+  const families = new Set(rows.map((house) => familyOfInstitution(house)?.key).filter(Boolean));
+  return new Set(rows.filter((house) => {
+    const family = familyOfInstitution(house);
+    return !(family && YIELDS_TO[family.key] && families.has(YIELDS_TO[family.key]));
+  }).map((house) => String(house.name || '')).filter(Boolean));
+}
+
+/**
+ * THE DUAL HAT (COHERENCE-POWERS, the owner's word of 2026-11-11: "whoever leads teh town, in any type
+ * of government is wearing a dual hat (where appropraite) they come from an institution, and are elevated
+ * yet still tied to an institution"): the house the governing power's leader comes from, or null where
+ * the government sends its own man (APPOINTED_GOVERNMENTS), rules in the dark (a criminal ruler: the
+ * veil), or the town has no such house. A ruler of a kind takes the heaviest face-bearing house of that
+ * kind; a civic ruler, the heaviest of the town's trades and landed houses, and where none stands, the heaviest
+ * open house the town has of any other kind (the chair's ruling of 2026-11-12, item 1 (ii): a small place whose
+ * one house is a charter hall is led from it, never by the office in a vacuum). Ties by roster order; a
+ * hideable house never leads. Reads the roster and the governing power only, so the birth step and the
+ * coherence seam answer alike.
+ * @param {RosterRow[]} institutions @param {unknown} governing the governing power's row
+ * @returns {{ index: number, house: RosterRow } | null}
+ */
+export function dualHatHouseOf(institutions, governing) {
+  const name = nameOf(/** @type {any} */ (governing));
+  if (!name || APPOINTED_GOVERNMENTS.includes(name) || isVeiledPower(governing)) return null;
+  const arch = backingArchetypeOf(/** @type {any} */ (governing));
+  if (arch === 'criminal') return null;
+  const kinds = RULER_KINDS.includes(arch) ? [arch] : CIVIC_HOUSE_KINDS;
+  const rows = Array.isArray(institutions) ? institutions : [];
+  /** @param {(kind: string) => boolean} fits @returns {{ index: number, house: RosterRow } | null} */
+  const heaviest = (fits) => {
+    /** @type {{ index: number, house: RosterRow, weight: number } | null} */
+    let best = null;
+    rows.forEach((house, index) => {
+      if (!house || isFabricInstitution(house) || isHideableHouse(house)) return;
+      const face = faceOfInstitution(house);
+      if (typeof face !== 'string' || face === FACE_SEAT) return;
+      if (!fits(String(houseKindOf(house)))) return;
+      const weight = backingRowFor(house.name)?.weight ?? 1;
+      if (!best || weight > best.weight) best = { index, house, weight };
+    });
+    return best ? { index: best.index, house: best.house } : null;
+  };
+  const own = heaviest((kind) => kinds.includes(kind));
+  if (own || RULER_KINDS.includes(arch)) return own;
+  return heaviest((kind) => kind !== 'government' && kind !== 'null');
+}
+
+/**
+ * THE SEAT'S FACE THE DUAL HAT FOLDED (COHERENCE-POWERS-3, F1): 1 where a house of the town leads (`dualHatHouseOf`)
+ * and the cast carries no face of the seat's own (one person, one face: the leader holds the office), else 0. The
+ * density law's seat ceiling reads the cast's size as the town's political mass; before the dual hat the office and the
+ * house it is held from were two cards, and they are two in that count still, so a small place keeps the power the
+ * fold of one face into another would cut. A cast that carries its seat's own face (a save from before the dual hat, a
+ * held roster) folded nothing. Pure over the record.
+ * @param {{ institutions?: unknown, powerStructure?: unknown, npcs?: unknown }} settlement
+ * @returns {0 | 1}
+ */
+export function seatFacesFoldedByDualHat(settlement) {
+  const institutions = /** @type {RosterRow[]} */ (Array.isArray(settlement?.institutions) ? settlement.institutions : []);
+  const governing = governingFactionOf(/** @type {any} */ (settlement));
+  if (!governing || !dualHatHouseOf(institutions, governing)) return 0;
+  const seat = seatHouseOf(institutions);
+  const seatKey = seat ? String(seat.house?.name || '') : '';
+  const cards = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
+  const facesSeat = cards.some((card) => card?.id === SEAT_CARD_ID
+    || (!!seatKey && card?.institution?.kind === 'house' && card.institution.key === seatKey));
+  return facesSeat ? 0 : 1;
+}
+
+// COHERENCE-POWERS-3 (F10): the office-title table moved verbatim to data/officeTitles.js (one source; the card's
+// honorific row reads it too), re-exported here for its importers
+export { OFFICE_TITLES } from '../../data/officeTitles.js';
+
+/** @param {string} government @param {string} tier @returns {string} */
+export function officeTitleFor(government, tier) {
+  return OFFICE_TITLES[government] || CIVIC_OFFICE_BY_SIZE[tier] || 'Mayor';
 }
 
 /**
@@ -332,6 +459,7 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
   const governing = governingFactionOf(/** @type {any} */ ({ powerStructure }));
   const governingName = nameOf(governing) || null;
   const seat = seatHouseOf(institutions);
+  const hat = governingName ? dualHatHouseOf(institutions, governing) : null;
   // The same config context generateNPCs handed every figure: the goal and secret pools read the
   // trade commodity, the dominant power and the prosperity through it.
   const npcConfig = {
@@ -388,6 +516,10 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
     if (family && YIELDS_TO[family.key] && facedFamilies.has(YIELDS_TO[family.key])) return;
     const key = String(house.name || '');
     const isSeat = seat !== null && seat.index === index;
+    // ONE PERSON, ONE FACE (COHERENCE-POWERS, the chair's ruling of 2026-11-11, cure (i)): where a house leads
+    // (the dual hat), the seat's house bears no face of its own — its face IS the leader, as the hall's is the
+    // seat's (R-P1 (c)); the readers that find a house's face by key fall back to the seat holder
+    if (isSeat && hat) return;
     if (face === FACE_SEAT) {
       // R-P1 (c): the hall is the seat's building. Where a Government-shelf house rolls, no face;
       // where none does, the hall IS the seat's house and its face is the seat, titled from the
@@ -405,8 +537,9 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
       hookPoolFor(face, family?.shelf ?? null, { seat: isSeat }).pool);
   });
 
-  // R-P2: no seat house and no hall — the seat's face is minted from the governing power.
-  if (!seat && governingName) {
+  // R-P2: no seat house and no hall — the seat's face is minted from the governing power; but where the
+  // leader wears the dual hat (a house of the town leads, COHERENCE-POWERS), no seat is minted.
+  if (!seat && governingName && !hat) {
     const { title } = seatMintTitleFor(governingName);
     taken.add(SEAT_CARD_ID);
     birth(SEAT_CARD_ID, seatPoolFor(tier), title, { kind: 'power', key: governingName, family: null, title, veiled: isVeiledPower(governing) },

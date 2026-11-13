@@ -229,6 +229,7 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   // this row's deletion rather than its rewording.
   // ⚠ Do NOT re-add it: an exempt entry for a non-reader is the stale state that arm forbids.
   'src/domain/display/dossierViewModel.js': 'display — roster count for the dossier overview',
+  'src/domain/dossier/seatHolder.js': 'name-lookup — seatHouseFaceOf (COHERENCE-POWERS cure (i)) names the seat\'s house on the roster (powerSupport.js :: seatHouseName) to find its face; it credits no house with function, and a ruined hall is faced as the card itself already stands',
   'src/domain/dossier/powerSupport.js': 'display/list — lists institutions aligned to each power for the Power-tab support web (a relationship/alignment display keyed on category + factionSource, NOT a live-provider capacity aggregate); each row is an InstitutionLink that surfaces the institution\'s actual state, so a ruin is shown, never credited with function',
   // ── canon-path string literal: RETIRED 2026-08-14, THE READ WAS NEVER A READ ────
   // parityContract.js was exempted for `'headcounts.institutions'` at :75 — a
@@ -517,7 +518,9 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // allegiance.js (EXEMPT; the lane's 107 counted cardVeil.js once with it) = 108, measured by this file's own scan at the merged tip.
     // STYLE-2-MERGE at the SW-B2 merge (2026-11-09): 108 -> 109, src/domain/summary/settlementQuickGuide.js :: scopeAgainstRecord's
     // roster read (SW-B2's 966709f9c, A·O2: the identity line reads the institutions), COMPLIANT (liveInstitutions), measured by this file's own scan.
-    expect(readers.length).toBe(109);
+    // COHERENCE-POWERS (2026-11-12): 109 -> 110, src/domain/dossier/seatHolder.js :: seatHouseFaceOf's roster-name read (EXEMPT above:
+    // the seat's house where a house leads is faced by the dual-hat leader), measured by this file's own scan.
+    expect(readers.length).toBe(110);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {

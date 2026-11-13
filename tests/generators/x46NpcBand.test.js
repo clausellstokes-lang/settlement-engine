@@ -201,6 +201,15 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
   // Every stage is a lane merge with its own signed shift record (the movers inside each merge are not isolated:
   // PLAUSIBLE per commit, CONFIRMED per stage). Re-captured at the green-tip lane over bf14617ca (whose generation is
   // bf14617ca's byte for byte), twice and equal (fixture tests/fixtures/x46-npc-band-dark-digests.json).
+  // RE-KEYED BY IDENTITY 2026-11-12 (STYLE-2-MERGE-8): 38 of 60 moved by the COHERENCE-QUARREL merge d4723749a (STYLE-2-MERGE point 42; lane/coherence-quarrel-2026-11-11 at 1c7b5786c, record docs/shift-records/2026-11-12-style-2-merge-42-coherence-quarrel.json: the quarrels' issues, stakes, descriptions and hooks, and the safety record's plot hooks); the line's tip
+  // decc7bf15 reads every digest green, the merge reads these 38 red (the lane's own predicted 38). Re-captured at the merge
+  // by this file's own loop (an untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-12 (STYLE-2-MERGE-8, point 43): 56 of 60 moved by the COHERENCE-PRESUME merge f922124d0 (docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json:
+  // a line names a thing the town does not have: the culture lines, the re-titled watch role and the ties it re-deals, the history and institution texts); the line before the merge reads every digest green. Re-captured at the merge by this file's own loop (an
+  // untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-12 (STYLE-2-MERGE-9, point 46): 51 of 60 moved by the COHERENCE-POWERS merge 6aeaa4154 (docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json:
+  // the dual hat re-deals the cast); the line before the merge reads every digest green. Re-captured at the merge by this file's own loop (an
+  // untracked probe), twice and equal.
   const DARK =/** @type {Record<string, string>} */ (JSON.parse(readFileSync(
     fileURLToPath(new URL('../fixtures/x46-npc-band-dark-digests.json', import.meta.url)), 'utf8',
   )));

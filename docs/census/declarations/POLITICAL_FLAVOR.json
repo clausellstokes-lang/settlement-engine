@@ -72,6 +72,24 @@
           "colour": true,
           "stop": []
         }
+      ],
+      "twins": [
+        {
+          "text": "Power here has changed hands ${more than once}, and since the ${event} nobody has been sure who really rules",
+          "twinOf": "Power here has changed hands ${more than once} within living memory, and since the ${event} nobody has been sure who really rules",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "why": "COHERENCE-PRESUME (the chair's ruling B, 2026-11-11): the line's event past sixty years (TIME_BANDS: older than its bearers) has no living witness; chosen by the picked event's own age, draw-free"
+        },
+        {
+          "text": "People here still argue about the ${event}, and every family still teaches its children which side it took",
+          "twinOf": "People here still argue about the ${event}: those who lived through it speak of it as if it were last year, and their children treat it as a warning",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "why": "COHERENCE-PRESUME (the chair's ruling B, 2026-11-11): the line's event past sixty years (TIME_BANDS: older than its bearers) has no living witness; chosen by the picked event's own age, draw-free"
+        }
       ]
     },
     {
@@ -360,6 +378,16 @@
           "crisis": null,
           "colour": true,
           "stop": []
+        }
+      ],
+      "twins": [
+        {
+          "text": "The ${event} is this place's defining story, and every family here still tells its own part of it",
+          "twinOf": "The ${event} is this place's defining story, and the people who lived through it are still here to tell it",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "why": "COHERENCE-PRESUME (the chair's ruling B, 2026-11-11): the line's event past sixty years (TIME_BANDS: older than its bearers) has no living witness; chosen by the picked event's own age, draw-free"
         }
       ]
     },

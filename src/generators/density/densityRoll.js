@@ -244,7 +244,7 @@ export function rollRival(rng, ordered) {
  * @param {DensityPower[]} ordered
  * @param {number} factionCount
  * @param {number} doubledNiches
- * @param {{rivalBonusSeat?: number, seatCeiling?: number}} [limits]
+ * @param {{rivalBonusSeat?: number, seatCeiling?: number, crisisSeatKey?: string|null}} [limits]
  * @returns {{seated: DensityPower[], doubled: string[], rival: ReturnType<typeof rollRival>, bonusSeatTaken: boolean}}
  */
 export function chooseSeats(rng, ordered, factionCount, doubledNiches, limits = {}) {
@@ -279,6 +279,8 @@ export function chooseSeats(rng, ordered, factionCount, doubledNiches, limits = 
     seated.push(p);
   };
   seat(ruling);
+  // COHERENCE-POWERS-3: the crisis's own power stands second (rollDensityPlan's `crisisSeatKeys`)
+  if (limits.crisisSeatKey) seat(ordered.find(p => p.key === limits.crisisSeatKey));
   if (rival.taken) seat(ordered.find(p => p.key === rival.candidateKey));
   for (const p of ordered) seat(p);
 
@@ -488,7 +490,12 @@ export function rollRoster(rng, tier, size, vacancyMult, options = {}) {
  *   floorLift?: {lifted?: boolean, stressor?: string|null}|null,
  *   seatAll?: boolean,
  *   massOverride?: number|null,
+ *   crisisSeatKeys?: string[],
  * }} input
+ *
+ * `crisisSeatKeys` (COHERENCE-POWERS-3, the chair's rulings (1) and (2) of 2026-11-12): the powers a crisis seats
+ * whatever the roll (an occupation's authority, a fractured realm's blocs; data/stressPowerFaces.js's `seated` mark).
+ * The strongest of them stands second, after the ruling power, and the floor of the ceiling and of the count is two.
  *
  * ⭐ `seatAll` + `massOverride` are the RE-DERIVATION mode, and they exist for a
  * lifecycle reason. The law is rolled twice on every world: once at the
@@ -544,9 +551,13 @@ export function rollDensityPlan(input) {
   // candidate ladder is feasible at every tier (thorp 1/1–2 … metropolis
   // 7–10/18–30); this guard exists so a future retune degrades honestly instead
   // of minting empty houses.
-  const factionCeiling = Math.max(1, Math.min(namedMass, ordered.length || 1));
+  // COHERENCE-POWERS-3: the crisis's seat (its strongest marked power; none in re-derivation, where the roster is a fact)
+  const crisisSeat = seatAll ? null
+    : ordered.find((p) => !p.isGoverning && (input.crisisSeatKeys || []).includes(p.key)) || null;
+  const seatFloor = crisisSeat ? 2 : 1;
+  const factionCeiling = Math.max(seatFloor, Math.min(namedMass, ordered.length || 1));
   const factionsSqueezed = factionCount > factionCeiling;
-  factionCount = Math.min(factionCount, factionCeiling);
+  factionCount = Math.max(seatFloor, Math.min(factionCount, factionCeiling));
 
   // ── Stage 2: seats ─────────────────────────────────────────────────────────
   const { seated, doubled, rival, bonusSeatTaken } = chooseSeats(
@@ -563,6 +574,7 @@ export function rollDensityPlan(input) {
       // that the roster in front of us does not already hold.
       rivalBonusSeat: seatAll ? 0 : (bands.rivalBonusSeat || 0),
       seatCeiling: factionCeiling,
+      crisisSeatKey: crisisSeat ? crisisSeat.key : null,
     },
   );
   const rulingKey = (seated.find(p => p.isGoverning) || seated[0] || null)?.key || null;

@@ -29,6 +29,7 @@ import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { membershipsOf } from './membership.js';
 import { allegianceOf, criminalPowersOf, hiddenMembershipOf, isCriminalPower } from './allegiance.js';
 import { CAPTURE_LINES, CAPTURE_RUNG_LABELS, PATRONAGE_LINES } from '../../data/people/dmPowerLines.js';
+import { keeperFormOf } from './seatKeeper.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {1 | 2 | 3 | 'steward'} PatronRank */
@@ -252,6 +253,8 @@ export function dmPowerViewOf(settlement) {
       .map((pt) => ({ powerName: p.power, kind: pt.kind, share: pt.share, boost: pt.boost, line: patronLine(pt, p.power, rank === 2 ? 2 : 1) })));
     return {
       rank, ...faceOf(card),
+      // COHERENCE-POWERS-5 (N7): the keeper of an empty seat is labelled in the seat row's caretaker form (seatKeeper.js)
+      ...(rank === 'steward' && keeperFormOf(s) ? { place: keeperFormOf(s) } : {}),
       openPowers: membershipsOf(card).filter((m) => m.power !== ruler).map((m) => ({ powerName: m.power, rank: m.rank })),
       answersTo: a ? { guild: a.power || a.house, handler: handler ? String(handler.name ?? '') : null } : null,
       lends,

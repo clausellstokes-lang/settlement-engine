@@ -5,15 +5,52 @@
 import { getInstFlags, getStressFlags, pick, randInt } from '../helpers.js';
 import { createGenerationWorldLaw } from '../generationContext.js';
 import { nameOf } from '../../domain/rulingPower.js';
+import { drawDeclared, lineText } from '../../domain/facts/drawDeclared.js';
+import { fnv1a32 } from '../../kernel/proseHash.js';
+import { getActiveRng } from '../../kernel/rngContext.js';
+import { factsOf } from '../../domain/facts/factsOf.js';
+import { BASE_ISSUES, STRESS_ISSUES, castFilled, kindsOfPower } from './conflictIssues.js';
 
-// computeRelTension
-// buildConflictPlotHooks — build up to 3 plot hooks for a conflict between two
-// factions, given the institution flags and stress flags.
-//   factionA, factionB — the two opposing factions
-//   conflict           — the conflict-issue object (unused here)
-//   instFlags          — institution flags (gov faction name, criminal score)
+// buildConflictPlotHooks — the quarrel's plot hook (COHERENCE-QUARREL cure 2). One hook per
+// quarrel, as the dossier prints it (the chair's ruling 3): drawn from the issue's OWN hooks and
+// the flag hooks whose flag is up, without a roll — a hash of the town's seed, the two parties
+// and the issue picks it, so no other draw of the birth moves. The two generic sentences (the
+// neutral figure, the letter) retire to the fallback of an issue that has no hooks of its own.
+//   factionA, factionB — the two opposing powers
+//   conflict           — the drawn issue row (its `hooks`)
+//   instFlags          — institution flags (gov power name, criminal score)
 //   stressFlags        — active stress flags
-const buildConflictPlotHooks = (factionA, factionB, conflict, instFlags, stressFlags) => {
+//   facts              — the town's facts, for a hook that declares a thing
+const buildConflictPlotHooks = (factionA, factionB, conflict, instFlags, stressFlags, facts = null) => {
+  // ONE HASH PER QUARREL: it picks the hook and the offer's wording, so no other draw moves.
+  const seedKey = `${getActiveRng()?.seed ?? ''}::${factionA.name}>${factionB.name}::${conflict?.issue}`;
+  const seedHash = fnv1a32(seedKey);
+  const flagHooks = [];
+  if (stressFlags.merchantCriminalBlur)
+    flagHooks.push(
+      'Leading members of both powers are partners in the same business, one that skirts the law, and neither side wants that said aloud during arbitration.'
+    );
+  if (stressFlags.stateCrime)
+    flagHooks.push(
+      "One power has been using official authority to harass the other's members. The harassment is technically legal."
+    );
+  // The offer has two wordings, the same thought, so one sentence does not stand in every
+  // place where crime runs deep: the quarrel's hash chooses, without a roll.
+  if (instFlags.criminalEffective > 55)
+    flagHooks.push(
+      (seedHash >>> 16) % 2 === 0
+        ? 'Someone is offering to resolve the conflict "permanently" for a price. Both powers have received the offer. Neither has refused yet.'
+        : 'Each side has been told, in secret, that the other can be made to go away for good. The price is the same for both.'
+    );
+  const own = Array.isArray(conflict?.hooks) ? conflict.hooks : [];
+  if (own.length) {
+    // Each hook carries its own text as its id, so the ledger counts a line, not a slot.
+    const drawn = drawDeclared([...own, ...flagHooks].map((line) => ({ id: line, text: line })), {
+      draw: (pool) => pool[seedHash % pool.length], facts, key: seedKey,
+      poolId: 'conflicts:HOOKS', surface: 'plot_hooks', drawKind: 'H',
+    });
+    if (drawn.line != null) return [String(lineText(drawn.line))];
+  }
   const govFacName = (instFlags == null ? void 0 : instFlags._govFacName) || '',
     isFeudal =
       govFacName.includes('Feudal') ||
@@ -30,24 +67,12 @@ const buildConflictPlotHooks = (factionA, factionB, conflict, instFlags, stressF
       ? "the lord's next court hearing"
       : isChurch
         ? 'the next chapter assembly'
-        : 'the next council session',
-    hooks = [
-      `A neutral figure is being pressured by both ${factionA.name} and ${factionB.name} to take a side before ${arbitrationVenue}.`,
-      'A letter has turned up showing that someone outside both powers paid for the last clash between them.',
-    ];
-  if (stressFlags.merchantCriminalBlur)
-    hooks.push(
-      'Leading members of both powers are partners in the same business, one that skirts the law, and neither side wants that said aloud during arbitration.'
-    );
-  if (stressFlags.stateCrime)
-    hooks.push(
-      "One power has been using official authority to harass the other's members. The harassment is technically legal."
-    );
-  if (instFlags.criminalEffective > 55)
-    hooks.push(
-      'Someone is offering to resolve the conflict "permanently" for a price. Both powers have received the offer. Neither has refused yet.'
-    );
-  return hooks.slice(0, 3);
+        : 'the next council session';
+  return [
+    `A neutral figure is being pressured by both ${factionA.name} and ${factionB.name} to take a side before ${arbitrationVenue}.`,
+    'A letter has turned up showing that someone outside both powers paid for the last clash between them.',
+    ...flagHooks,
+  ].slice(0, 3);
 };
 
 /**
@@ -110,7 +135,7 @@ const crossFactionRivalPairs = (powers, relationships, npcs) => {
 //   each person's home power is read from its memberships — PEOPLE-3 HOOKS, never the grouping)
 export const generateConflicts = (powers, relationships, config = {}, institutions = [], npcs = []) => {
   const named = (Array.isArray(powers) ? powers : [])
-    .map((row) => ({ name: nameOf(row) }))
+    .map((row) => ({ name: nameOf(row), category: row?.category, isGoverning: row?.isGoverning === true }))
     .filter((row) => row.name !== '');
   if (named.length < 2) return [];
   const rivalPairs = crossFactionRivalPairs(named, relationships, npcs);
@@ -123,153 +148,14 @@ export const generateConflicts = (powers, relationships, config = {}, institutio
     stressFlags = getStressFlags(config, institutions),
     conflicts = [],
     conflictCount = Math.min(randInt(1, 3), rivalPairs.length),
+    stressTypes = config.stressTypes || (config.stressType ? [config.stressType] : []),
+    // THE ISSUES (COHERENCE-QUARREL): the table lives beside this file, each issue with its cast.
+    // The stress issues join in the table's own order, as the old chain of pushes added them.
     issueTemplates = [
-      {
-        issue: 'Control of the market licensing process',
-        stakes: 'Commercial supremacy',
-        flag: null,
-      },
-      {
-        issue: 'Jurisdiction over a disputed arrest',
-        stakes: 'Institutional authority',
-        flag: 'stateCrime',
-      },
-      {
-        issue: 'Church land claims on guild property',
-        stakes: 'Institutional power',
-        flag: 'theocraticEconomy',
-      },
-      {
-        issue: 'Arcane research permit regulations',
-        stakes: 'Magical autonomy',
-        flag: 'heresySuppression',
-        requires: 'magic',
-      },
-      {
-        issue: 'Control of the dock taxation authority',
-        stakes: 'Port revenue',
-        flag: null,
-        requires: 'water_trade',
-      },
-      {
-        issue: 'Military conscription of guild apprentices',
-        stakes: 'Labor control',
-        flag: null,
-      },
-      {
-        issue: "Access to the criminal network's intelligence",
-        stakes: 'Operational advantage',
-        flag: 'merchantCriminalBlur',
-      },
-      {
-        issue: 'Succession to a council seat',
-        stakes: 'Political influence',
-        flag: null,
-      },
-      {
-        issue: 'A mercenary contract being disputed by both parties',
-        stakes: 'Military contract rights',
-        flag: 'merchantArmy',
-      },
-      {
-        issue: 'Control of a key trade route checkpoint',
-        stakes: 'Economic leverage',
-        flag: null,
-      },
+      ...BASE_ISSUES,
+      ...Object.keys(STRESS_ISSUES).filter((type) => stressTypes.includes(type)).flatMap((type) => STRESS_ISSUES[type]),
     ],
-    stressTypes = config.stressTypes || (config.stressType ? [config.stressType] : []);
-  if (stressTypes.includes('wartime'))
-    issueTemplates.push(
-      {
-        issue: 'Rights to a lucrative war supply contract',
-        stakes: 'Economic windfall',
-        flag: null,
-      },
-      {
-        issue: 'Authority over military conscription lists',
-        stakes: 'Labour and loyalty control',
-        flag: null,
-      },
-      {
-        issue: 'Control of the requisition enforcement apparatus',
-        stakes: 'Political leverage',
-        flag: null,
-      }
-    );
-  if (stressTypes.includes('insurgency'))
-    issueTemplates.push(
-      {
-        issue: 'Legitimacy of the current governing authority',
-        stakes: 'Political survival',
-        flag: null,
-      },
-      {
-        issue: 'Whether to open back-channel negotiations with the insurgency',
-        stakes: 'Settlement stability',
-        flag: null,
-      },
-      {
-        issue: 'Control of the intelligence on insurgent cells',
-        stakes: 'Operational advantage',
-        flag: null,
-      }
-    );
-  if (stressTypes.includes('mass_migration'))
-    issueTemplates.push(
-      {
-        issue: 'Allocation of housing and resources between established residents and newcomers',
-        stakes: 'Social cohesion',
-        flag: null,
-      },
-      {
-        issue: 'Control of the documentation and registration process for new arrivals',
-        stakes: 'Legal and financial leverage',
-        flag: null,
-      }
-    );
-  if (stressTypes.includes('religious_conversion'))
-    issueTemplates.push(
-      {
-        issue: "Custody of the settlement's religious records and property",
-        stakes: 'Institutional legitimacy',
-        flag: null,
-      },
-      {
-        issue: 'Whether the governing authority should formally declare a religious allegiance',
-        stakes: 'Political and legal authority',
-        flag: null,
-      }
-    );
-  if (stressTypes.includes('slave_revolt'))
-    issueTemplates.push(
-      {
-        issue: 'Whether to suppress, contain, or negotiate with the revolt leadership',
-        stakes: 'Settlement order and precedent',
-        flag: null,
-      },
-      {
-        issue: 'Accountability for the conditions that produced the revolt',
-        stakes: 'Political survival',
-        flag: null,
-      },
-      {
-        issue: 'Control of the escape routes and networks supporting the revolt',
-        stakes: 'Security and leverage',
-        flag: null,
-      }
-    );
-  if (stressTypes.includes('occupied'))
-    issueTemplates.push({
-      issue: 'Degree of collaboration with the occupying authority',
-      stakes: 'Survival vs dignity',
-      flag: null,
-    });
-  if (stressTypes.includes('famine'))
-    issueTemplates.push({
-      issue: 'Control of the remaining grain stores',
-      stakes: 'Survival',
-      flag: null,
-    });
+    facts = () => factsOf({ institutions, config, powerStructure: { factions: powers } });
   for (let i = 0; i < conflictCount; i++) {
     const { factionA, factionB, ties } = rivalPairs[i];
     const applicableTemplates = issueTemplates.filter((template) => {
@@ -288,15 +174,33 @@ export const generateConflicts = (powers, relationships, config = {}, institutio
         `${template.issue} ${template.stakes}`,
       );
     }),
-      chosen = pick(applicableTemplates.length ? applicableTemplates : issueTemplates),
+      // EVERY ISSUE DECLARES ITS CAST (COHERENCE-QUARREL cure 1): a pair is offered only the
+      // issues its two powers can fill; with none, the issues that need no cast.
+      kindsA = kindsOfPower(factionA),
+      kindsB = kindsOfPower(factionB),
+      castOpen = applicableTemplates.filter((template) => castFilled(template, kindsA, kindsB)),
+      castFree = applicableTemplates.filter((template) => !template.cast.length),
+      offered = castOpen.length ? castOpen : castFree.length ? castFree : applicableTemplates.length ? applicableTemplates : issueTemplates,
+      chosen = drawDeclared(offered, {
+        draw: (pool) => pick(pool), facts, key: `${getActiveRng()?.seed ?? ''}::${factionA.name}>${factionB.name}::conflict-issue`,
+        poolId: 'conflicts:ISSUES', surface: 'power', drawKind: 'R', keepRefused: true,
+      }).line || offered[0],
       intensity = ties > 1 ? 'high' : 'moderate';
+    // THE TOUCHED POWERS ARE NAMED (COHERENCE-QUARREL cure 3): an issue that reaches a kind of
+    // power that need not be a party (the craft guilds, in a conscription quarrel) says so in one
+    // clause, naming the first such power the town has, when it is not a party.
+    const reached = (chosen.touches || []).length
+      ? named.filter((power) => power !== factionA && power !== factionB
+        && [...kindsOfPower(power)].some((kind) => chosen.touches.includes(kind)))
+      : [];
+    const touched = (chosen.touchesFirst && reached.find((power) => chosen.touchesFirst.test(power.name))) || reached[0] || null;
     conflicts.push({
       parties: [factionA.name, factionB.name],
       issue: chosen.issue,
       stakes: chosen.stakes,
       intensity,
-      desc: `${factionA.name} and ${factionB.name} are in ${intensity} conflict over ${chosen.issue.toLowerCase()}. The stakes are ${chosen.stakes.toLowerCase()}.`,
-      plotHooks: buildConflictPlotHooks(factionA, factionB, chosen, instFlags, stressFlags),
+      desc: `${factionA.name} and ${factionB.name} are in ${intensity} conflict over ${chosen.issue.toLowerCase()}. The stakes are ${chosen.stakes.toLowerCase()}.${touched ? ` It reaches ${touched.name} too, who are not a party to it.` : ''}`,
+      plotHooks: buildConflictPlotHooks(factionA, factionB, chosen, instFlags, stressFlags, facts),
     });
   }
   return conflicts;

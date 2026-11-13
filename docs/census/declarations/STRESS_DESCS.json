@@ -554,7 +554,9 @@
     {
      "lineId": "STRESS_DESCS.indebted[4]",
      "text": "The finest building in {name} is new, stone-built, and belongs to nobody local: a counting house, its brass plate polished daily by a clerk who arrived with the ledgers. It is what everything else in town is working to pay for.",
-     "needs": [],
+     "needs": [
+      "institution: bank"
+     ],
      "excludes": [],
      "crisis": [
       "indebted"

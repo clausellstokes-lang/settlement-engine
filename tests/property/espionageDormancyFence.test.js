@@ -189,6 +189,43 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-13, THE COHERENCE-POWERS MERGE OVER THE INTEGRATION BRANCH, SIGNED AT THE STYLE WAVE'S MERGE (STYLE-2-MERGE RECORD 46) ──
+ * THE HUNDRED-AND-NINTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the coherence wave (the chair's ruling: this wave is the window for the lanes'
+ * own leaves, on condition of attribution at each merge point); the record is
+ * docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json. THE MOVER, FOUND: the COHERENCE-POWERS merge 6aeaa4154
+ * (313c67e2b into the integration branch); its cause the owner's dual-hat law (the leader comes from a house of the town and
+ * keeps its hat; the powers stand on the houses): the cast re-dealt, the ruling three's ranks, the claimants in person.
+ * FIELD-DIFFED: npcs, relationships, conflicts, capture states, the stress casts, the coherence receipt, the trace, the
+ * prominent relationship and the pressure line move; the espionage subsystem stays dormant.
+ * On THIS corpus 310 of 360 rows (thorp 44, hamlet 41, village 57, town 60, city 58, metropolis 50) move against record 43's
+ * post-state (the stage of 358e072ab) (`38a52b05…`); 360/360 hashes stay distinct. Written from the staged tree (6aeaa4154 with
+ * the door paths carried from the integration branch), measured by scripts/audit/refence.mjs before the write. `38a52b05…` -> `f3f4be91…`.
+ *
+ * ── 2026-11-12, THE COHERENCE-PRESUME MERGE OVER THE INTEGRATION BRANCH, SIGNED AT THE STYLE WAVE'S MERGE (STYLE-2-MERGE RECORD 43) ──
+ * THE HUNDRED-AND-EIGHTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the coherence wave (the chair's ruling: this wave is the window for the lanes'
+ * own text leaves, on condition of attribution at each merge point); the record is
+ * docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json. THE MOVER, FOUND: the COHERENCE-PRESUME merge f922124d0
+ * (02c5f8fbd into the integration branch); its causes the components (a line names a thing the town does not have: the culture
+ * lines, the watch office's re-titled role and the ties it re-deals, the quarters, history and tension lines, institution texts,
+ * the arrival scene, the pressure line, the criminal services row). FIELD-DIFFED: text leaves only; the espionage subsystem stays dormant.
+ * On THIS corpus 353 of 360 rows (thorp 57, hamlet 59, village 58, town 60, city 59, metropolis 60) move against record 42's
+ * post-state (the stage of d4723749a) (`152defbd…`); 360/360 hashes stay distinct. Written from the staged tree (f922124d0 with
+ * the door paths carried from the integration branch), measured by scripts/audit/refence.mjs before the write. `152defbd…` -> `38a52b05…`.
+ *
+ * ── 2026-11-12, THE COHERENCE-QUARREL MERGE OVER THE INTEGRATION BRANCH, SIGNED AT THE STYLE WAVE'S MERGE (STYLE-2-MERGE RECORD 42) ──
+ * THE HUNDRED-AND-SEVENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the coherence wave (the chair's ruling: this wave is the window for the lanes'
+ * own text leaves, on condition of attribution at each merge point); the record is
+ * docs/shift-records/2026-11-12-style-2-merge-42-coherence-quarrel.json. THE MOVER, FOUND: the COHERENCE-QUARREL merge d4723749a
+ * (1c7b5786c into the integration branch); its causes the components (cures 1-4: the quarrels' cast-declared issues and their
+ * own hooks, the touched power's clause, the smuggling hook's four tellings). FIELD-DIFFED: only the quarrels' issue, stakes,
+ * desc and plotHooks (both lists) and the safety record's plotHooks move; the espionage subsystem stays dormant.
+ * On THIS corpus 242 of 360 rows (thorp 10, hamlet 23, village 30, town 59, city 60, metropolis 60) move against record 27's
+ * post-state (the stage of decc7bf15) (`291c7695…`); 360/360 hashes stay distinct. Written from the staged tree (d4723749a with
+ * the door paths carried from the integration branch), measured by scripts/audit/refence.mjs before the write. `291c7695…` -> `152defbd…`.
+ *
  * ── 2026-11-10, THE SW-9b-B MERGE OVER THE INTEGRATION BRANCH, SIGNED AT THE STYLE WAVE'S MERGE (STYLE-2-MERGE RECORD 27) ──
  * THE HUNDRED-AND-SIXTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
  * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the style wave's merge (BRIEF-STYLE-2-WAVE §3, the law of the chain); the
@@ -1278,7 +1315,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '291c769541e61b2a700b51051b02275674f658fd67b3ec6303ee7faccb49b5ae';
+const PRE_COUPLING_CORPUS_SHA = 'f3f4be914caae9183e6a29db79e7919a2c076dcec00e324963f92936cf6825f3';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);

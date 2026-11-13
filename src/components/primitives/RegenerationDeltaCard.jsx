@@ -145,7 +145,7 @@ export function RegenerationDeltaCard({ delta, onDismiss, heading = 'What change
       {!collapsed && (
         <div id="regen-delta-body" style={{ padding: '8px 12px 10px' }}>
           {/* Broken dependencies — warn loudly */}
-          <BrokenDependenciesRow items={delta.brokenDependencies} />
+          <BrokenDependenciesRow items={delta.brokenDependencies} removed={delta.removedEntities} />
 
           {/* The seven sections */}
           <Section title="Direct effects"
@@ -295,7 +295,36 @@ function Section({ title, items, color, describe, detail }) {
   );
 }
 
-function BrokenDependenciesRow({ items }) {
+/**
+ * The kind of a catalog entry in words, for a broken dependency the catalog
+ * gave no usable name. Keys are entityCatalog's `type`s and the id prefixes
+ * it mints (`history.`, `var.`, `capacity.`).
+ */
+const KIND_WORDS = Object.freeze({
+  institution: 'an institution', faction: 'a faction', npc: 'a person', chain: 'a supply chain',
+  supplyChain: 'a supply chain', hook: 'a hook', condition: 'a condition', clock: 'a clock',
+  history_beat: 'a history beat', history: 'a history beat', system_variable: 'a town measure',
+  var: 'a town measure', threat: 'a threat', capacity: 'a capacity', district: 'a district',
+});
+
+/**
+ * What a reader is shown for one broken dependency. `brokenDependencies` holds
+ * the removed entries' internal ids (`hook.…`, `faction.…`); the card printed
+ * them raw. The reader is shown the name the rest of this card prints for the
+ * same entry (its catalog label, from `removedEntities`); where there is none,
+ * or it is the id itself, the entry's kind in words.
+ * @param {string} id @param {any[]|undefined} removed
+ * @returns {string}
+ */
+export function brokenDependencyName(id, removed) {
+  const entry = Array.isArray(removed) ? removed.find((e) => e?.id === id) : undefined;
+  const label = typeof entry?.label === 'string' ? entry.label.trim() : '';
+  if (label && label !== id) return label;
+  const kind = entry?.type || String(id ?? '').split('.')[0];
+  return KIND_WORDS[kind] || 'a removed entry';
+}
+
+function BrokenDependenciesRow({ items, removed }) {
   const mobile = useIsMobile();
   if (!Array.isArray(items) || items.length === 0) return null;
   return (
@@ -309,7 +338,7 @@ function BrokenDependenciesRow({ items }) {
         fontSize: proseFontSize(FS.xs, mobile), color: swatch['#7A4F0F'], lineHeight: 1.5,
       }}
     >
-      <strong>Broken dependencies:</strong> {items.join(' · ')}
+      <strong>Broken dependencies:</strong> {items.map((id) => brokenDependencyName(id, removed)).join(' · ')}
     </div>
   );
 }

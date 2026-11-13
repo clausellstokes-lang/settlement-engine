@@ -15,10 +15,14 @@ import {
 const ASK_AROUND_AT_THE_RIGHT_TAVERN_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS = 'Ask around at the right tavern. Someone moves goods without questions.';
 const FENCE_WORD_OF_MOUTH = 'Fence (word of mouth)';
 const INFORMAL_NO_CONTRACT_VIOLENCE_AVAILABLE_FOR_COIN_TO_THOSE_WHO_KNOW_WHERE_TO_ASK = 'Informal, no contract. Violence available for coin to those who know where to ask.';
-const NO_LAW_BRING_COIN = 'No law, bring coin';
+// COHERENCE-PRESUME (the chair's ruling A, 2026-11-11): the row DENIED the law ("No law", "There is no
+// official recourse here") in towns with a watch and a hall, court or council (22 of the 360 corpus
+// towns, every one). Every town this generator births has some law, so the row says what it meant:
+// the law is there and coin beats it. One row, reworded; no twin (the thought holds everywhere).
+const NO_LAW_BRING_COIN = 'Weak law, bring coin';
 const PAY_A_LOCAL_STRONGMAN_A_NEIGHBOR_OR_A_GANG_FOR_SOME_MEASURE_OF_SAFETY_NO_CONTRACTS_NO_GUARANTEES = 'Pay a local strongman, a neighbor, or a gang for some measure of safety. No contracts, no guarantees.';
 const PROTECTION_INFORMAL = 'Protection (informal)';
-const THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION = 'There is no official recourse here. Disputes end with whoever can apply more violence or pay more for protection.';
+const THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION = 'The law here is slow and easily outbid. Disputes end with whoever can apply more violence or pay more for protection.';
 const _ARCANE_UNDERGROUND = '(arcane underground)';
 
 

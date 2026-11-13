@@ -73,14 +73,19 @@ describe('SW-B1 · P51: a power card names a power above it only when that power
 
 describe('SW-B1 · P50: the government line is the seat\'s own, never the unread "no dominant authority"', () => {
   it('a thorp seated as economy, military or religion and a town as economy-and-military each print their own line', () => {
-    for (const [tier, prio, seat] of /** @type {Array<[string, Record<string, number>, string]>} */ ([
-      ['thorp', { priorityEconomy: 80 }, 'Household Council'],
-      ['thorp', { priorityMilitary: 80 }, "Headman's Authority"],
-      ['thorp', { priorityReligion: 80 }, 'Priestly Guidance'],
-      ['town', { priorityEconomy: 40, priorityMilitary: 40 }, 'Town Mayor'],
+    // RE-KEYED BY IDENTITY 2026-11-12, COHERENCE-POWERS 2B (the council of a kind: a government of a kind is drawn
+    // only where the town has a house of that kind, else the next priority, else the size's civic government): the
+    // religion row's thorp now stands its priest's house, so Priestly Guidance is still the seat it names; with no
+    // house at all, the same thorp is an Elder Council (asserted below).
+    for (const [tier, prio, seat, houses] of /** @type {Array<[string, Record<string, number>, string, Array<{ name: string }>]>} */ ([
+      ['thorp', { priorityEconomy: 80 }, 'Household Council', []],
+      ['thorp', { priorityMilitary: 80 }, "Headman's Authority", []],
+      ['thorp', { priorityReligion: 80 }, 'Priestly Guidance', [{ name: 'Priest (resident)' }]],
+      ['thorp', { priorityReligion: 80 }, 'Elder Council', []],
+      ['town', { priorityEconomy: 40, priorityMilitary: 40 }, 'Town Mayor', []],
     ])) {
       const config = { priorityMilitary: 20, priorityReligion: 20, priorityEconomy: 20, priorityCriminal: 10, priorityMagic: 10, tradeRouteAccess: 'road', ...prio };
-      const result = generatePowerStructure(tier, { prosperity: 'Moderate' }, null, config, []);
+      const result = generatePowerStructure(tier, { prosperity: 'Moderate' }, null, config, houses);
       const gov = result.factions.find((f) => f.isGoverning);
       expect(gov?.faction, `${tier} ${JSON.stringify(prio)}`).toBe(seat);
       expect(gov.desc.startsWith(MIXED), gov.desc).toBe(false);

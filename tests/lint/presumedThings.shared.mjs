@@ -1,0 +1,508 @@
+/**
+ * presumedThings.shared.mjs — THE WORD-TO-THING WALKER's rule book (COHERENCE-PRESUME, the chair's
+ * charter `docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md` §1; the pool census's "false
+ * presumption", `docs/DESIGN_POOL_CENSUS.md`).
+ *
+ * A line that names a thing presumes the town has it. Each THING below has its words, written once,
+ * beside the vocabulary atoms that answer for it (`src/domain/facts/factVocabulary.js ::
+ * FACT_DIMENSIONS`), the way `src/domain/foodways.js :: SOURCE_WORDS` gives the food sources theirs.
+ *
+ *   ARM 1 (source)  every string literal of three words or more under ARM1_ROOTS that uses a thing's
+ *                   words either DECLARES the thing (an atom of `atoms`, on its needs or its excludes,
+ *                   in the declaration around it: `needs`, `excludes`, `tags`, `marks`, `cast`,
+ *                   `poolDeclares`, or an array handed to the same call) or stands in the register
+ *                   under a named reason.
+ *   ARM 2 (printed) every sentence of a generated record that uses a thing's words, printed in a town
+ *                   where the vocabulary's own readers (`factsOf`) say the thing is ABSENT, is listed;
+ *                   a listed line stands in the register under a named reason, or the walker reds.
+ * Arm 2 is what finds the lines that code pushes; arm 1 is what finds the lines no corpus reached.
+ *
+ * The register (`tests/lint/presumedThings.register.json`) is SHRINK-ONLY: a row is never added to
+ * absorb a new line. A cure removes its row in the same commit.
+ *
+ * Pure apart from the file reads of arm 1; arm 2 reads the records it is handed.
+ */
+import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { join } from 'node:path';
+import { createRequire } from 'node:module';
+
+import { timeBandOf } from '../../src/domain/display/heraldCausalGrammar.js';
+import { INSTITUTION_SERVICES } from '../../src/data/institutionServices.js';
+
+/**
+ * THE HOUSES THAT TRY DISPUTES (the chair's correction of 2026-11-12, measured by COHERENCE-AGREE-2):
+ * a court is a house whose OWN catalogued service tries disputes under the public law, read from its
+ * service rows, never from its name alone — the Town hall's "Dispute arbitration: Bring commercial and
+ * civil disputes before a magistrate", the City hall's "Appeals court", the Town council's "Dispute
+ * adjudication", the City administration's "Courts and adjudication", a Courthouse's "Civil disputes" and
+ * "Criminal trials", the court buildings' "Appeals", Mayor and council's "Legal appeals", a city-state's
+ * "Civic law enforcement". A headman's, elder's or reeve's mediation, a guild's arbitration and a church's
+ * court are not the town's court.
+ */
+const COURT_SERVICE = /^(?:civil disputes|criminal trials|dispute arbitration|dispute adjudication|courts and adjudication|appeals(?: court)?|legal appeals|civic law enforcement)$/i;
+export const COURT_HOUSES = Object.freeze(new Set(Object.entries(INSTITUTION_SERVICES)
+  .filter(([, rows]) => Object.keys(rows || {}).some((service) => COURT_SERVICE.test(service)))
+  .map(([name]) => name.toLowerCase())));
+
+const require = createRequire(import.meta.url);
+const ts = require('typescript');
+
+export const REGISTER_REL = 'tests/lint/presumedThings.register.json';
+
+/** The trees arm 1 reads: the pool data and the writers that hold prose. */
+export const ARM1_ROOTS = Object.freeze(['src/data', 'src/generators']);
+
+/**
+ * THE THINGS. `words`: the words that name it (a building's own walls are not the perimeter, ruling
+ * 3; a moneylender is a person, not a house). `atoms`: the vocabulary atoms whose declaration answers
+ * for it (a line declaring any of them, on either side, declares the thing). `absent(facts, names)`:
+ * true when the record lacks it — the vocabulary's own readers where an atom exists; the live roster's
+ * names (`liveInstitutionNames`) where the vocabulary has no atom yet.
+ * @type {Readonly<Record<string, { words: RegExp, atoms: ReadonlyArray<string>, absent: (f: any, names: string[]) => boolean }>>}
+ */
+export const THINGS = Object.freeze({
+  walls: {
+    words: /\b(?:town|city) walls\b|\bthe walls\b|\bwalls and gates\b|\bramparts?\b|\bbattlements\b/i,
+    atoms: ['walls', 'palisade', 'gate'],
+    absent: (f) => !f.defence.walls && !f.defence.palisade,
+  },
+  garrison: {
+    words: /\bgarrison(?:s|ed)?\b|\bbarracks\b/i,
+    atoms: ['garrison', 'soldiers', 'commander'],
+    absent: (f) => !f.defence.garrison,
+  },
+  militia: { words: /\bmilitias?\b/i, atoms: ['militia'], absent: (f) => !f.defence.militia },
+  watch: {
+    words: /\b(?:town|city|night|village) watch\b|\bwatchm[ae]n\b|\bthe watch\b|\bwatch captain\b|\bwatch rota\b/i,
+    atoms: ['watch'],
+    absent: (f) => !f.defence.watch,
+  },
+  mercenary: {
+    words: /\bmercenar(?:y|ies)\b|\bsellswords?\b|\bfree compan(?:y|ies)\b/i,
+    atoms: ['mercenary', 'soldiers'],
+    absent: (f) => !f.defence.mercenary,
+  },
+  docks: {
+    words: /\bdocks?\b|\bharbou?rs?\b|\bquays?\b|\bwharf\b|\bwharves\b|\bdockside\b|\bdockworkers?\b|\bdockhands?\b/i,
+    atoms: ['docks', 'navigable', 'coast', 'river', 'port', 'institution: docks', 'route: port', 'route: river'],
+    absent: (f) => !f.water.navigable && !f.hasInstitution('docks'),
+    presentForDenial: (f) => f.hasInstitution('docks'),
+  },
+  granary: { words: /\bgranar(?:y|ies)\b/i, atoms: ['institution: granary'], absent: (f) => !f.hasInstitution('granary') },
+  mill: { words: /\bmill(?:s|er|ers)?\b/i, atoms: ['institution: mill'], absent: (f) => !f.hasInstitution('mill') },
+  market: {
+    words: /(?<!\bblack |\bwhisper )\bmarket(?:place|s| square| day| days| cross)?\b/i,
+    atoms: ['market'],
+    absent: (f) => !f.market,
+  },
+  temple: {
+    words: /\btemples?\b|\bchurch(?:es)?\b|\bchapels?\b|\bshrines?\b|\bcathedrals?\b|\babbey\b/i,
+    atoms: ['temple', 'sacredHouse', 'clergy', 'priest', 'institution: temple', 'institution: monastery'],
+    absent: (f) => !f.sacredHouse,
+  },
+  prison: {
+    words: /\bprisons?\b|\bgaols?\b|\bjails?\b/i,
+    atoms: [],
+    absent: (_f, names) => !names.some((n) => /prison|gaol|jail|stocks/i.test(n)),
+  },
+  court: {
+    words: /\bcourthouses?\b|\bcourts? of law\b|\blaw ?courts?\b/i,
+    atoms: [],
+    absent: (_f, names) => !names.some((n) => /court/i.test(n) || COURT_HOUSES.has(n.toLowerCase())),
+  },
+  bank: {
+    words: /\bbankers?\b|\bbanking\b|\bmoney.?changers?\b|\bcounting.?houses?\b/i,
+    atoms: ['institution: bank'],
+    absent: (f) => !f.hasInstitution('bank'),
+  },
+  guildhall: { words: /\bguild ?halls?\b/i, atoms: ['guild'], absent: (f) => !f.guild },
+  war: {
+    words: /\bthe war\b|\bwartime\b|\bat war\b|\bthe armies\b/i,
+    atoms: ['war: front', 'war: aggressor', 'war: at war', 'war: peace', 'crisis: wartime', 'crisis: under_siege', 'crisis: occupied'],
+    absent: (f) => f.warState === 'peace' && !f.crisis?.has?.('wartime') && !f.crisis?.has?.('under_siege') && !f.crisis?.has?.('occupied'),
+  },
+  // THE LAW (the chair's ruling A of 2026-11-11, "denials"): read on the DENIAL side only
+  // (`denialOnly`), because every town has some law and naming it presumes nothing; denying it
+  // ("No law, bring coin", "There is no official recourse here") presumes there is none. The town
+  // has law where a peace-keeping house stands (the vocabulary's watch or garrison) or a house
+  // that judges (a court, a council, a hall, a headman, a magistrate). "No law permits" is the
+  // law of anywhere, not of this town.
+  law: {
+    words: /\blaw enforcement\b|\bofficial recourse\b|\blaw\b(?! permits)/i,
+    atoms: ['watch', 'garrison', 'guardPresence'],
+    absent: (f, names) => !f.defence.watch && !f.defence.garrison
+      && !names.some((n) => /court|council|\bhall\b|headman|magistrat|reeve|justiciar|sheriff/i.test(n)),
+    denialOnly: true,
+  },
+});
+
+export const THING_IDS = Object.freeze(Object.keys(THINGS));
+
+/**
+ * A NEGATION the sentence itself states ("no militia could handle", "without courts or prison"):
+ * the line names the thing to say it is not there. Read the same way by both arms.
+ * @param {string} sentence @param {RegExp} words
+ */
+export function negates(sentence, words) {
+  const m = new RegExp(words.source, 'ig');
+  for (const hit of sentence.matchAll(m)) {
+    const before = sentence.slice(Math.max(0, hit.index - 48), hit.index);
+    const after = sentence.slice(hit.index + hit[0].length, hit.index + hit[0].length + 24);
+    const denied = /\b(?:no|not|without|nor|lacks?|lacking|beyond any|than any)\s+(?:[\w'-]+,?\s+(?:or\s+|and\s+)?){0,3}$/i.test(before)
+      || /^\s+(?:cannot|could not|can't|couldn't)\b/i.test(after);
+    if (!denied) return false;
+  }
+  return true;
+}
+
+/** The sentences of a printed text (a semicolon closes one, as the scan of the critique read them). */
+export const sentencesOf = (text) => String(text).split(/(?<=[.!?;])\s+/).map((s) => s.trim()).filter(Boolean);
+
+/** The things a sentence names and does not negate. @param {string} sentence */
+export function thingsNamedIn(sentence) {
+  return THING_IDS.filter((id) => !THINGS[id].denialOnly && THINGS[id].words.test(sentence) && !negates(sentence, THINGS[id].words));
+}
+
+/**
+ * A DENIAL OF EXISTENCE: some use of the thing's words is "no X", "without (a, any) X", "lacks
+ * (a) X", with at most one plain qualifier between ("no public law", "no official recourse").
+ * Narrower than `negates` on purpose: "not a prison" denies an identity, "no single barracks"
+ * a size, "the watch cannot" an ability, "would not call the law" a choice, and "no market dues"
+ * a market's toll; none says the thing is not there. @param {string} sentence @param {RegExp} words
+ */
+export function deniesExistence(sentence, words) {
+  const m = new RegExp(words.source, 'ig');
+  for (const hit of sentence.matchAll(m)) {
+    const before = sentence.slice(Math.max(0, hit.index - 32), hit.index);
+    const after = sentence.slice(hit.index + hit[0].length, hit.index + hit[0].length + 16);
+    if (/^\s+(?:dues|tolls?|fees?|rights?|prices?|value|permits)\b/i.test(after)) continue;
+    if (/\b(?:no|without(?:\s+(?:an?|any))?|lacks?(?:\s+(?:an?|any))?|lacking(?:\s+(?:an?|any))?)\s+(?:(?:public|official|lawful|legal|real|proper|working|standing|organised|organized)\s+)?$/i.test(before)) return true;
+  }
+  return false;
+}
+
+/**
+ * The things a sentence DENIES: such a line presumes the thing's ABSENCE (the chair's ruling A of
+ * 2026-11-11). @param {string} sentence
+ */
+export function thingsDeniedIn(sentence) {
+  return THING_IDS.filter((id) => THINGS[id].words.test(sentence) && deniesExistence(sentence, THINGS[id].words));
+}
+
+/**
+ * Does the town HAVE the thing, for a denial? The thing's own reader, except where the denial names
+ * a narrower thing than the presumption does: "no wharf of its own" denies the dock HOUSE, which a
+ * navigable town may lack. @param {string} thing @param {any} facts @param {string[]} names
+ */
+export function presentForDenial(thing, facts, names) {
+  const t = THINGS[thing];
+  return t.presentForDenial ? !!t.presentForDenial(facts, names) : !t.absent(facts, names);
+}
+
+// ── ARM 1: the source ─────────────────────────────────────────────────────────────────────────
+
+const DECL_PROPS = new Set(['needs', 'excludes', 'tags', 'marks', 'cast', 'poolDeclares', 'requires']);
+
+/** The atom a declaration word answers (`no X` → X), lower-cased. @param {string} w */
+const atomWord = (w) => w.trim().replace(/^no\s+/i, '').toLowerCase();
+
+/**
+ * Every string a declaration around `node` carries: the declaration properties of each object
+ * literal on the way up (four levels), and the array arguments of each call on the way up (a
+ * `declaredSet(text, ['watch'])`).
+ * @param {any} node
+ */
+function declarationWordsAround(node) {
+  /** @type {string[]} */ const out = [];
+  const strings = (n) => collectStrings(n, out);
+  let cur = node.parent;
+  for (let depth = 0; cur && depth < 5; depth++, cur = cur.parent) {
+    if (ts.isObjectLiteralExpression(cur)) {
+      for (const p of cur.properties) {
+        const name = p.name && (ts.isIdentifier(p.name) || ts.isStringLiteral(p.name)) ? p.name.text : null;
+        if (name && DECL_PROPS.has(name) && ts.isPropertyAssignment(p)) strings(p.initializer);
+      }
+    } else if (ts.isCallExpression(cur)) {
+      for (const a of cur.arguments) if (ts.isArrayLiteralExpression(a)) strings(a);
+    }
+    if (ts.isVariableStatement(cur) || ts.isFunctionDeclaration(cur) || ts.isSourceFile(cur)) break;
+  }
+  return out.map(atomWord);
+}
+
+/** Is this literal a property NAME (a sibling table's key: its line is declared beside it), or a `twinOf`? */
+function isKeyOrTwinOf(node) {
+  const p = node.parent;
+  if (p && ts.isPropertyAssignment(p) && p.name === node) return true;
+  if (p && ts.isPropertyAssignment(p) && ts.isIdentifier(p.name) && p.name.text === 'twinOf') return true;
+  return false;
+}
+
+/**
+ * The TEXT-KEYED declarations of one source text: a table whose key is a line's own text and whose
+ * value declares it (`DESC_VARIANT_DECLARATIONS`, a sibling set `'<text>': declaredSet(…)`). Text →
+ * the declaration words. Read over the whole tree first, because a line and its declaration may
+ * live in two files (`rulingStructure.js` prints what `powerSiblings.js` declares).
+ * @param {string} rel @param {string} src
+ * @returns {Map<string, string[]>}
+ */
+export function keyedDeclarations(rel, src) {
+  const sf = ts.createSourceFile(rel, src, ts.ScriptTarget.Latest, true, ts.ScriptKind.JSX);
+  /** @type {Map<string, string[]>} */ const out = new Map();
+  const visit = (n) => {
+    if (ts.isPropertyAssignment(n) && (ts.isStringLiteral(n.name) || ts.isNoSubstitutionTemplateLiteral(n.name))) {
+      const words = [];
+      const read = (m) => {
+        if (ts.isObjectLiteralExpression(m)) {
+          for (const p of m.properties) {
+            const name = p.name && (ts.isIdentifier(p.name) || ts.isStringLiteral(p.name)) ? p.name.text : null;
+            if (name && DECL_PROPS.has(name) && ts.isPropertyAssignment(p)) collectStrings(p.initializer, words);
+          }
+        }
+        if (ts.isCallExpression(m)) for (const a of m.arguments) if (ts.isArrayLiteralExpression(a)) collectStrings(a, words);
+        ts.forEachChild(m, read);
+      };
+      read(n.initializer);
+      if (words.length) out.set(n.name.text, [...(out.get(n.name.text) || []), ...words.map(atomWord)]);
+    }
+    ts.forEachChild(n, visit);
+  };
+  visit(sf);
+  return out;
+}
+
+/** @param {any} n @param {string[]} out */
+function collectStrings(n, out) {
+  if (ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n)) out.push(n.text);
+  ts.forEachChild(n, (m) => collectStrings(m, out));
+}
+
+/**
+ * Arm 1 over one source text: one hit per (literal, thing) that is NOT declared.
+ * @param {string} rel the file's path from the repository root
+ * @param {string} src
+ * @param {Map<string, string[]>} [keyed] the tree's text-keyed declarations (`keyedDeclarations`)
+ * @returns {Array<{ file: string, thing: string, text: string }>}
+ */
+export function scanSource(rel, src, keyed = keyedDeclarations(rel, src)) {
+  const sf = ts.createSourceFile(rel, src, ts.ScriptTarget.Latest, true, ts.ScriptKind.JSX);
+  /** @type {Array<{ file: string, thing: string, text: string }>} */ const hits = [];
+  const visit = (n) => {
+    const isText = ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n) || ts.isTemplateHead(n) || ts.isTemplateMiddle(n) || ts.isTemplateTail(n);
+    if (isText && n.text.trim().split(/\s+/).length >= 3 && !isKeyOrTwinOf(n)) {
+      let declared = null;
+      for (const sentence of sentencesOf(n.text)) {
+        for (const thing of thingsNamedIn(sentence)) {
+          declared ??= [...declarationWordsAround(n), ...(keyed.get(n.text) || [])];
+          const atoms = THINGS[thing].atoms.map((a) => a.toLowerCase());
+          if (declared.some((w) => atoms.includes(w))) continue;
+          if (!hits.some((h) => h.thing === thing && h.text === n.text)) hits.push({ file: rel, thing, text: n.text });
+        }
+      }
+    }
+    ts.forEachChild(n, visit);
+  };
+  visit(sf);
+  return hits;
+}
+
+/** @param {string} root the repository root @returns {string[]} the files arm 1 reads */
+export function listFiles(root) {
+  /** @type {string[]} */ const files = [];
+  const walk = (rel) => {
+    for (const e of readdirSync(join(root, rel)).sort()) {
+      const p = `${rel}/${e}`;
+      if (statSync(join(root, p)).isDirectory()) walk(p);
+      else if (/\.(?:js|jsx|mjs)$/.test(e)) files.push(p);
+    }
+  };
+  for (const r of ARM1_ROOTS) walk(r);
+  return files;
+}
+
+/** @param {string} root @returns {Array<{ file: string, thing: string, text: string }>} */
+export function scanTree(root) {
+  const files = listFiles(root).map((rel) => [rel, readFileSync(join(root, rel), 'utf8')]);
+  /** @type {Map<string, string[]>} */ const keyed = new Map();
+  for (const [rel, src] of files) for (const [k, v] of keyedDeclarations(rel, src)) keyed.set(k, [...(keyed.get(k) || []), ...v]);
+  return files.flatMap(([rel, src]) => scanSource(rel, src, keyed));
+}
+
+// ── ARM 2: the printed record ─────────────────────────────────────────────────────────────────
+
+/**
+ * Record paths that are NOT printed, each with its reason. A path matches when it starts with one
+ * of these (or equals it).
+ */
+export const NOT_PRINTED = Object.freeze({
+  '.generationCoherenceReceipt': 'the birth receipt: a component reads its verdict (generalDeskRead.js :: recordCleanOf), never its findings, whose evidence quotes lines listed at their own paths',
+  '.simulationTrace': 'the simulation trace: ids and targets for the engine',
+});
+
+/**
+ * LICENSED ROWS (the chair's ruling of 2026-11-11, point 2): a chain's service output and a service
+ * menu row are answered by their OWN institution — where the row stands, the service is offered.
+ * Arm 2 does not read their words; instead `unlicensedServiceRows` asserts each row's institution is
+ * live on the roster.
+ */
+export const LICENSED = Object.freeze(['.economicState.institutionalServices', '.availableServices']);
+
+/**
+ * The service rows whose licensing institution is NOT on the live roster (names lower-cased).
+ * @param {any} record @param {string[]} names the live roster's names
+ * @returns {string[]}
+ */
+export function unlicensedServiceRows(record, names) {
+  const live = new Set(names.map((n) => n.toLowerCase()));
+  /** @type {string[]} */ const out = [];
+  for (const row of record?.economicState?.institutionalServices || []) {
+    const insts = Array.isArray(row?.institutions) ? row.institutions : [];
+    if (!insts.length || !insts.some((n) => live.has(String(n).toLowerCase()))) out.push(`institutionalServices :: ${row?.output} :: ${insts.join(', ')}`);
+  }
+  for (const [cat, rows] of Object.entries(record?.availableServices || {})) {
+    for (const row of Array.isArray(rows) ? rows : []) {
+      // a parenthetical house ('(covert)', '(street gang)', '(lawless)') is the criminal structure's
+      // houseless service, stated as such: it names no institution to stand
+      if (/^\(.*\)$/.test(String(row?.institution ?? '').trim())) continue;
+      if (!row?.institution || !live.has(String(row.institution).toLowerCase())) out.push(`availableServices.${cat} :: ${row?.name} :: ${row?.institution}`);
+    }
+  }
+  return out;
+}
+
+/** The ids and keys a record carries beside its prose. */
+const ID_PATH = /(?:\.id|\.key|\.family|targetId|\.inst\.names\[\])$/;
+
+/** @param {string} path */
+const under = (path, p) => path === p || path.startsWith(p + '.') || path.startsWith(p + '[');
+export const isPrinted = (path) => !ID_PATH.test(path) && !Object.keys(NOT_PRINTED).some((p) => under(path, p));
+/** @param {string} path a licensed row's path (`LICENSED`) */
+export const isLicensed = (path) => LICENSED.some((p) => under(path, p));
+
+/** @param {unknown} v @param {string} p @param {Array<[string, string]>} out */
+function leaves(v, p, out) {
+  if (typeof v === 'string') out.push([p, v]);
+  else if (Array.isArray(v)) for (const x of v) leaves(x, `${p}[]`, out);
+  else if (v && typeof v === 'object') for (const [k, x] of Object.entries(v)) leaves(x, `${p}.${k}`, out);
+  return out;
+}
+
+/**
+ * Arm 2 over one record: each (thing, path, sentence) printed while the thing is absent, and (the
+ * chair's ruling A) each sentence printed DENYING a thing the town has, marked `denies: true`. The
+ * denial side reads the licensed service rows too: a houseless row ('(lawless)') is answered by no
+ * institution, so nothing licenses what it denies.
+ * @param {object} record @param {object} facts `factsOf(record)` @param {string[]} names the live roster's names
+ * @returns {Array<{ thing: string, path: string, sentence: string, denies?: true }>}
+ */
+export function printedAbsent(record, facts, names) {
+  /** @type {Map<string, boolean>} */ const absent = new Map();
+  const isAbsent = (thing) => {
+    if (!absent.has(thing)) absent.set(thing, !!THINGS[thing].absent(facts, names));
+    return absent.get(thing);
+  };
+  /** @type {Array<{ thing: string, path: string, sentence: string }>} */ const out = [];
+  const seen = new Set();
+  for (const [path, text] of leaves(record, '', [])) {
+    if (text.length < 15 || !isPrinted(path)) continue;
+    const licensed = isLicensed(path);
+    for (const sentence of sentencesOf(text)) {
+      if (!licensed && text.length >= 20) {
+        for (const thing of thingsNamedIn(sentence)) {
+          if (!isAbsent(thing)) continue;
+          const k = `${thing}\t${path}\t${sentence}`;
+          if (!seen.has(k)) { seen.add(k); out.push({ thing, path, sentence }); }
+        }
+      }
+      for (const thing of thingsDeniedIn(sentence)) {
+        if (!presentForDenial(thing, facts, names)) continue;
+        const k = `denies\t${thing}\t${path}\t${sentence}`;
+        if (!seen.has(k)) { seen.add(k); out.push({ thing, path, sentence, denies: true }); }
+      }
+    }
+  }
+  return out;
+}
+
+// ── TIME: a line can presume its witnesses (the chair's ruling B of 2026-11-11) ──────────────────
+
+/**
+ * The words that put the people who LIVED THROUGH an event among the living ("those who lived
+ * through it are still here", "within living memory", "as if it were last year", "first-hand").
+ * The fact vocabulary has no atom for time, so a line cannot DECLARE it: this reading answers it
+ * from the record's own dates instead.
+ */
+export const WITNESS_WORDS = /\blived through it\b|\bliving memory\b|\bstill here to tell\b|\bas if it were last year\b|\bfirst-hand\b/i;
+
+/**
+ * Is an event older than its bearers? The estate's own time ladder answers it
+ * (`heraldCausalGrammar.js :: TIME_BANDS`: past "a generation", sixty years, the band is "older
+ * than its bearers"). @param {unknown} yearsAgo
+ */
+export const olderThanBearers = (yearsAgo) => typeof yearsAgo === 'number' && timeBandOf(yearsAgo, 52).id === 'older_than_bearers';
+
+/** An event's name as a sentence names it ("The Siege" → "siege"), lower-cased. @param {unknown} name */
+const bareName = (name) => String(name ?? '').replace(/^(?:the|a|an)\s+/i, '').trim().toLowerCase();
+
+/**
+ * Arm 2's TIME reading over one record. Listed, each as { thing: 'time', path, sentence, why }:
+ *   • 'witness'  a sentence claiming living witnesses, printed under an event older than its
+ *     bearers (the event's own prose), or naming only such events (anywhere else);
+ *   • 'echo'     a current tension whose sentence is word for word a past event's in the same town.
+ * @param {any} record
+ * @returns {Array<{ thing: 'time', path: string, sentence: string, why: 'witness'|'echo' }>}
+ */
+export function printedOutOfTime(record) {
+  const events = Array.isArray(record?.history?.historicalEvents) ? record.history.historicalEvents : [];
+  /** @type {Array<{ thing: 'time', path: string, sentence: string, why: 'witness'|'echo' }>} */ const out = [];
+  const seen = new Set();
+  const push = (path, sentence, why) => {
+    const k = `${why}\t${path}\t${sentence}`;
+    if (!seen.has(k)) { seen.add(k); out.push({ thing: 'time', path, sentence, why }); }
+  };
+  for (const e of events) {
+    if (!olderThanBearers(e?.yearsAgo)) continue;
+    for (const [path, text] of leaves(e, '.history.historicalEvents[]', [])) {
+      if (!isPrinted(path)) continue;
+      for (const sentence of sentencesOf(text)) if (WITNESS_WORDS.test(sentence)) push(path, sentence, 'witness');
+    }
+  }
+  const named = events.map((e) => ({ name: bareName(e?.name), old: olderThanBearers(e?.yearsAgo) })).filter((e) => e.name.length > 2);
+  for (const [path, text] of leaves(record, '', [])) {
+    if (path.startsWith('.history.historicalEvents') || !isPrinted(path)) continue;
+    for (const sentence of sentencesOf(text)) {
+      if (!WITNESS_WORDS.test(sentence)) continue;
+      const lower = sentence.toLowerCase();
+      // the event the sentence is ABOUT is the one it names first ("The Siege is still present in
+      // living memory: a previous occupation ended …" is about the siege)
+      let first = null;
+      for (const e of named) {
+        const at = lower.search(new RegExp(`\\b${e.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`));
+        if (at >= 0 && (first === null || at < first.at)) first = { at, old: e.old };
+      }
+      if (first?.old) push(path, sentence, 'witness');
+    }
+  }
+  const past = new Set(events.map((e) => e?.description).filter((d) => typeof d === 'string' && d.length >= 20));
+  for (const t of Array.isArray(record?.history?.currentTensions) ? record.history.currentTensions : []) {
+    if (past.has(t?.description)) push('.history.currentTensions[].description', t.description, 'echo');
+  }
+  return out;
+}
+
+/** THE CORPUS (the charter §0.4): the configuration a real browser sends, every dial on random. */
+export const CORPUS_PLAN = Object.freeze([['village', 60], ['town', 160], ['city', 100], ['metropolis', 40]]);
+export const corpusConfig = (tier) => ({
+  settType: tier, tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat',
+  nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded',
+});
+export const corpusSeeds = () => CORPUS_PLAN.flatMap(([tier, n]) => Array.from({ length: n }, (_, i) => ({ tier, seed: `presume-${tier}-${i}` })));
+
+/**
+ * Does a register row cover this arm-2 listing? A row names its thing, its path and a stable
+ * fragment of the sentence (`text`; names vary between towns, so the fragment leaves them out).
+ * @param {{ thing: string, path: string, text: string }} row
+ * @param {{ thing: string, path: string, sentence: string }} hit
+ */
+export const rowCovers = (row, hit) => row.thing === hit.thing && row.path === hit.path && hit.sentence.includes(row.text)
+  && !!row.denies === !!hit.denies;
