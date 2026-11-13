@@ -15,6 +15,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { buildThreatAssessment } from '../../src/domain/display/threatAssessment.js';
 import { scoreBand } from '../../src/domain/display/defenseScoreBands.js';
+import { partitionDefenseInstitutions } from '../../src/domain/institutions/defenseInstitutionBuckets.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 const MONEY = { STRONG: 'Money enough to ride out a long crisis', ADEQUATE: 'Money enough for a short crisis', WEAK: 'The defenders are already paid late', CRITICAL: 'There is no money' };
@@ -61,5 +62,28 @@ describe('one home for pay (ruling A)', () => {
     }
     expect(swords, 'anchored: the corpus prints hired swords').toBeGreaterThan(5);
     expect(bad).toEqual([]);
+  });
+});
+
+describe('hired swords only where hired (ruling B)', () => {
+  test('RED-FIRST: no "hired swords" without a contracted company on the roster', () => {
+    const bad = [];
+    let contracted = 0;
+    for (const { seed, s } of births) {
+      const hired = partitionDefenseInstitutions(s.institutions).mercenary.length > 0;
+      const desc = s.economicState.safetyProfile.guardEffectivenessDesc;
+      if (hired && desc.includes(SWORDS)) contracted += 1;
+      if (!hired && desc.includes(SWORDS)) bad.push([seed, s.institutions.filter((i) => /company|charter|merc|hire/i.test(i.name)).map((i) => i.name)]);
+    }
+    expect(contracted, 'anchored: hired swords still print beside a contracted company').toBeGreaterThan(0);
+    expect(bad).toEqual([]);
+  });
+
+  test('the reviewer\'s seed rv2-under_siege-town-1 (a free company hall and a charter hall, no company) prints no hired swords', () => {
+    const cfg = birthConfig({ ...DEFAULT_CONFIG, settType: 'town', selectedStresses: ['under_siege'], selectedStressesRandom: false });
+    const s = generateSettlementPipeline(cfg, null, { seed: 'rv2-under_siege-town-1', customContent: {} });
+    expect(s.institutions.some((i) => /free company hall/i.test(i.name)), 'anchored: the free company hall stands').toBe(true);
+    // anchored: the line above pins the roster this claim is about, so a drifted birth reds there
+    expect(s.economicState.safetyProfile.guardEffectivenessDesc.includes(SWORDS)).toBe(false);
   });
 });

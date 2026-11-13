@@ -915,6 +915,7 @@ export const SAFETY_LINE_SIBLINGS = Object.freeze({
 // producer writes by LINE, so nothing is inserted above them.
 import { hashKey } from '../domain/display/stateProse/stateProseKernel.js';
 import { getActiveRng } from '../kernel/rngContext.js';
+import { partitionDefenseInstitutions } from '../domain/institutions/defenseInstitutionBuckets.js';
 
 /**
  * ⭐ THE FRAMES GET VANTAGES (lane SW-B5 FRAMES, 2026-11-09; STYLE-RULINGS-2 B5; the owner's
@@ -1057,7 +1058,11 @@ export function keptGuardLine(desc, institutions, prosperity) {
   if (text.startsWith(CHARTER_LEAD)) {
     return resolved("The adventurers' charter hall takes bounty work against threats, but the coin for bounties runs short.") + text.slice(CHARTER_LEAD.length);
   }
-  if (d.mercenary && d.garrison && !text.startsWith(MERCENARY_LEAD) && !text.startsWith(MERCHANT_ARMY_LEAD)) {
+  // "Hired swords" only where a company is CONTRACTED (COHERENCE-UPKEEP-6, the chair's ruling B on the third read,
+  // 1b-M2): the defence home's mercenary bucket (a mercenary company or quarter, hired muscle). A charter hall or a
+  // free company hall offers swords for hire; it does not back the garrison.
+  const contracted = partitionDefenseInstitutions(institutions).mercenary.length > 0;
+  if (contracted && d.garrison && !text.startsWith(MERCENARY_LEAD) && !text.startsWith(MERCHANT_ARMY_LEAD)) {
     return `${text} ${resolved('Hired swords back the garrison when the purse allows.')}`;
   }
   return text;
