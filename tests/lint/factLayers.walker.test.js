@@ -24,7 +24,7 @@
  */
 import { describe, expect, test, beforeAll } from 'vitest';
 import {
-  FAMILIES, POOL_TABLE_REL, REGISTER_REL, bankedReaderLines, corpusPools, gridBirths, leafArm, leafTouches,
+  FAMILIES, POOL_TABLE_REL, REGISTER_REL, bankedReaderLines, corpusPools, gridBirths, keyReadArm, leafArm, leafTouches,
   lineKey, outsideHomeCalls, poolArm, readJson, readerArm, readsFamily, verdictOf,
 } from './factLayers.shared.mjs';
 import { linesReading } from './defenceFactReaders.shared.mjs';
@@ -103,6 +103,12 @@ describe('guard-the-guard: each arm reds its planted fault', () => {
     const green = await poolArm(plant.slice(0, 2), { 'PLANT::a': { layer: 2, src: 'plant' }, 'PLANT::b': { layer: 5, src: 'plant' } });
     expect(green.violations).toEqual({});
   });
+  test('POOLS by their KEY: a pool placed below what its key reads is red; a key site that is gone is red', async () => {
+    const table = { ...POOL_TABLE, 'DS-POW-6::capture reached a LEADER': { layer: 3, src: 'plant' } };
+    expect((await keyReadArm(table)).violations['DS-POW-6::capture reached a LEADER']).toEqual(['key reads powerStructure.criminalCaptureState (layer 4)']);
+    const gone = [{ file: 'src/domain/display/stateProse/powerStateProse.js', site: /plantedKeyFunction\(/, reads: ['npcs'], pools: [] }];
+    expect((await keyReadArm(POOL_TABLE, gone)).rotted).toHaveLength(1);
+  });
   test('READERS: a private name test of a homed fact is caught; a home and a bare name are not', () => {
     expect(readsFamily('market', "const hasMarket = names.some((n) => n.includes('market'));")).toBe(true);
     expect(readsFamily('faith', "const church = insts.find((i) => /church|temple/i.test(i.name));")).toBe(true);
@@ -137,6 +143,11 @@ describe('nothing reads at or above its own layer (shrink-only)', () => {
     expect(r.unplaced).toEqual([]);
     expect(r.unlayered).toEqual([]);
     expect(r.violations).toEqual(REGISTER.pools);
+  });
+  test('POOLS by their KEY (REVIEW-W2A F5): no key reads at or above its pool\'s layer, and no key site has rotted', async () => {
+    const k = await keyReadArm(POOL_TABLE);
+    expect(k.rotted).toEqual([]);
+    expect(k.violations).toEqual({});
   });
   test('READERS: every file reads exactly its banked LINES (by content, each with its reason), and no file reads outside the register', () => {
     expect(readerArm()).toEqual(bankedReaderLines(REGISTER.readers));

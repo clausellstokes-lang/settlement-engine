@@ -234,6 +234,58 @@ export async function poolArm(pools, poolTable) {
   return { violations, unplaced, unlayered: [...new Set(unlayered)] };
 }
 
+// ── THE KEY-READ ARM (W2-A-LEAVES-2, REVIEW-W2A F5) ───────────────────────────────────────────────────
+/**
+ * The pool arm sees only what a pool's LINES declare; a pool is also drawn by its KEY, and a key that reads a fact
+ * at or above the pool's layer is the same fault (`DS-POW-6`'s capture lens sat at layer 3 and `DS-DEF-4`'s at 4,
+ * both keyed on the capture climate, a layer-4 stratum). Each row names a key site in source — the call that hands
+ * the stored field to the key function — and the pools that key draws; the arm reds a site that is gone (the
+ * declaration has rotted) and a pool whose key reads at or above its layer. The crime desk's struck lines
+ * (`crimeLineDisqualifiers.js`) are read the same way: a pool whose lines a declared fact strikes reads that
+ * fact's leaf.
+ */
+export const KEY_SITES = Object.freeze([
+  Object.freeze({
+    file: 'src/domain/display/stateProse/powerStateProse.js', site: /capturePoolKey\(power\.criminalCaptureState\b/, reads: ['powerStructure.criminalCaptureState'],
+    pools: ['DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)', 'DS-POW-6::capture pressure RECOVERING (strong security, prosperity)',
+      'DS-POW-6::capture reached an AGENT of a faction', 'DS-POW-6::capture reached a LEADER'],
+  }),
+  Object.freeze({
+    file: 'src/domain/display/stateProse/defenseStateProse.js', site: /criminalCapturePoolKey\(power\.criminalCaptureState\b/, reads: ['powerStructure.criminalCaptureState'],
+    pools: ['DS-DEF-4::capture none', 'DS-DEF-4::capture adversarial', 'DS-DEF-4::capture equilibrium', 'DS-DEF-4::capture corrupted', 'DS-DEF-4::capture capture'],
+  }),
+]);
+/** The leaf each crime-line fact is read from. */
+const CRIME_FACT_LEAF = Object.freeze({ 'no official in pay': 'officialsInPay', 'an official in pay': 'officialsInPay', 'no agent in the hall': 'captureClimate' });
+
+/**
+ * @param {Record<string, { layer: number|'W', src: string }>} poolTable
+ * @param {ReadonlyArray<{ file: string, site: RegExp, reads: string[], pools: string[] }>} [sites]
+ * @returns {Promise<{ violations: Record<string, string[]>, rotted: string[] }>}
+ */
+export async function keyReadArm(poolTable, sites = KEY_SITES) {
+  const { STRATA, LEAVES } = await import(join(SRC, 'domain/facts/factLayers.js'));
+  const { CRIME_LINE_DISQUALIFIERS } = await import(join(SRC, 'domain/display/stateProse/crimeLineDisqualifiers.js'));
+  /** @type {Record<string, Set<string>>} */ const found = {};
+  /** @type {string[]} */ const rotted = [];
+  /** @param {string} id @param {string} what @param {number} layer */
+  const check = (id, what, layer) => {
+    const row = poolTable[id];
+    if (row && row.layer !== 'W' && layer >= row.layer) (found[id] ||= new Set()).add(`${what} (layer ${layer})`);
+  };
+  for (const k of sites) {
+    if (!k.site.test(readFileSync(join(ROOT, k.file), 'utf8'))) { rotted.push(`${k.file} ${k.site}`); continue; }
+    for (const id of k.pools) for (const r of k.reads) check(id, `key reads ${r}`, STRATA[r]);
+  }
+  for (const [id, byVid] of Object.entries(CRIME_LINE_DISQUALIFIERS)) {
+    for (const d of Object.values(/** @type {Record<string, { falseWhere: string }>} */ (byVid))) {
+      const leaf = CRIME_FACT_LEAF[/** @type {keyof typeof CRIME_FACT_LEAF} */ (d.falseWhere)];
+      check(id, `lines struck by ${leaf}`, LEAVES[leaf].layer);
+    }
+  }
+  return { violations: Object.fromEntries(Object.entries(found).map(([k, v]) => [k, [...v].sort()])), rotted };
+}
+
 // ── THE READER ARM (the defence-reader walker, generalised) ──────────────────────────────────────
 /**
  * Each homed fact's house words, and the home(s) where a name test of them is the fact's own reading.
