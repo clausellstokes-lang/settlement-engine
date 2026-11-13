@@ -104,7 +104,7 @@ const TRADE_OUT_COLOR = swatch['#1A5A28'];  // → exported to a neighbour
  * Props are the slices of eco that the section actually consumes — keeps
  * the prop surface narrow and the component cheap to memoize.
  */
-function EconomicFlowsSection({ chains, institutionalServices = [], incomeSources = [], instNames = [], town = null }) {
+function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = [], incomeSources = [], instNames = [], town = null }) {
   const [flowFilter, setFlowFilter] = useState('all');
   // THE TWO PHONE FLOORS — a chain's impairment line, its entrepot note and its magic
   // substitution note take the PROSE floor. Its `Via` institution LIST and its income
@@ -116,11 +116,11 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
   // and white-screen the whole tab — in the live generate flow this section is
   // rendered without an error boundary around it. Filter to entries we can
   // safely .toLowerCase() before the .some/.find matching below.
-  const safeIncome = incomeSources.filter(inc => typeof inc?.source === 'string');
+  const safeIncome = incomeSources.filter(inc => typeof inc?.source === 'string'); const chains = chainsAsRead.map(c => shownStateOf(c, town)); // W2-C-LEAVES item 4(c): the state a crisis left (chainStateShown.js)
   const impairedCount   = chains.filter(c => c.status === 'impaired').length;
   const vulnerableCount = chains.filter(c => c.status === 'vulnerable').length;
   const entrepotCount   = chains.filter(c => c.entrepot).length;
-  const runningCount    = chains.filter(c => c.status === 'running').length;
+  const runningCount    = chains.filter(c => c.status === 'running').length; const impairedHouses = impairedHousesOf(town);
 
   const filtered = flowFilter === 'all'        ? chains
     : flowFilter === 'impaired'   ? chains.filter(c => c.status === 'impaired' || c.status === 'vulnerable')
@@ -267,7 +267,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
                   <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{svc.label}</span>
                   <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:svc.color,background:`${svc.color}15`,padding:'0 5px'}}>Service</span>
                   {svc.exportable && <span style={{fontSize:chromeFontSize(FS.micro, mobile),color:swatch.success,background:swatch['#E8F5EC'],padding:'0 5px'}}>Export</span>}
-                  <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch.inkMag3,background:swatch['#EDE3CC'],padding:'0 5px',marginLeft:'auto'}}>○ Operational</span>
+                  {((svcImpaired) => <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:svcImpaired?FLOW_STATUS.impaired.color:swatch.inkMag3,background:svcImpaired?`${FLOW_STATUS.impaired.color}15`:swatch['#EDE3CC'],padding:'0 5px',marginLeft:'auto'}}>{svcImpaired?FLOW_STATUS.impaired.label:'○ Operational'}</span>)(serviceStateShown(svc, impairedHouses) === 'impaired')}
                 </div>
                 <div style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag2}}>
                   <span style={{color:MUTED,marginRight:4}}>Via:</span>{svc.institutions.map(institutionDisplayName).join(' · ')}
@@ -826,4 +826,24 @@ function NeedsNotMet({ needs, mobile }) {
   return <p data-testid="economics-needs-not-met" style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,margin:'6px 0 0',lineHeight:1.45}}>
     Needed, and not brought in: {names.join(', ')}.
   </p>;
+}
+
+/**
+ * W2-C-LEAVES item 4(c) (2026-11-13; the cold list REVIEW-W2A-3 #165, #273, #276, #278, #875): A CARD STATES THE STATE A
+ * CRISIS LEFT. A chain's card printed the record's calm state ("✓ Running") under a famine that failed its own harvest
+ * and under a siege whose record says field work and trade have stopped; a service card printed "○ Operational"
+ * beside houses the Institutions tab marks impaired. The card reads `domain/display/chainStateShown.js` (the crisis,
+ * the carrier, the food record) and the Institutions tab's impaired houses (`tabHelpers.js :: computeChainSets`); the
+ * record is not touched. At the end of the file, so no line-keyed row above moves.
+ */
+import { chainStateShown, serviceStateShown } from '../../../domain/display/chainStateShown.js';
+import { computeChainSets } from '../tabHelpers.js';
+/** @param {any} chain @param {unknown} town @returns {any} the chain with the state its card prints */
+function shownStateOf(chain, town) {
+  const status = chainStateShown(chain, town);
+  return status === chain?.status ? chain : { ...chain, status };
+}
+/** @param {unknown} town @returns {Set<string>} the houses the Institutions tab marks impaired, lower case */
+function impairedHousesOf(town) {
+  return new Set([...computeChainSets(/** @type {any} */ (town) || {}).impaired].map((h) => String(h).toLowerCase()));
 }
