@@ -245,104 +245,54 @@ describe('the guard assessment says what the place can pay for its hired force',
 });
 
 /**
- * THE PAGE UNDER A CRISIS (the chair's ruling of 2026-11-12, point 1): where a famine or a siege
- * caps the label at Struggling, the hired force's purse lines must say the crisis is why, never
- * that the place is poor. Each purse line carries a declared crisis line (the `crisis` atom on
- * famine and siege), whose twin is the purse line itself; found here by their atoms. The red
- * seed is agree-force-famine-city-0, a forced famine with a hired company beside a garrison.
+ * THE PAGE UNDER A CRISIS. Re-keyed by identity at COHERENCE-UPKEEP-6, the chair's ruling 1(b) on
+ * REVIEW-UPKEEP-2 (H1, H2): ONE LABEL SPEAKS FOR PAY. The crisis lines that stood here (the chair's
+ * ruling of 2026-11-12, point 1: "paid from what the hunger leaves", and F4's siege twins) were written
+ * because a famine or a siege capped the label the purse lines read; the purse lines now read the
+ * STANDING label (the caller hands `keep.js :: standingLabelOf`), so the claim becomes: a crisis in force
+ * changes no purse line, no line says hunger or siege, and the line is the standing label's. The red seed
+ * is agree-force-famine-city-0, a forced famine with a hired company beside a garrison.
  */
-describe('under a famine or a siege, the hired lines name the crisis, not the purse', () => {
+describe('under a famine or a siege, the hired lines read the label that speaks for pay', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  // Re-keyed by identity at COHERENCE-UPKEEP-6 (F4): the one crisis line per purse line, declared on
-  // `crisis: famine, under_siege`, is now a line per kind — the siege line, its twin the purse line, and
-  // the hunger line, its twin the siege line. The claim is kept: each purse line has its crisis lines.
   /** The purse lines: declared originals needing a `prosperity: ≤ …` atom. */
   const purseLines = () => Object.values(SAFETY_LINE_SIBLINGS).map((set) => set[0])
     .filter((line) => line.needs.some((atom) => atom.startsWith('prosperity: ≤')));
-  /** The declared line on this crisis kind whose twin is `text`, if any. @param {string} text @param {string} kind */
-  const declaredOn = (text, kind) => Object.values(SAFETY_LINE_SIBLINGS)
-    .find((set) => atomsOf(declarationOf(set[0])).includes(`crisis: ${kind}`) && set[1]?.text === text)?.[0];
-  /** This purse line's crisis line for a kind: the siege line, or the hunger line over it. @param {string} text @param {string} kind */
-  const crisisLineFor = (text, kind) => {
-    const siege = declaredOn(text, 'under_siege');
-    return kind === 'under_siege' ? siege : siege && declaredOn(siege.text, 'famine');
-  };
 
-  test('RED-FIRST: each purse line has a declared crisis line, its twin the purse line', () => {
-    // Re-keyed at COHERENCE-UPKEEP-6 (F7): the charter hall's short line stands between its siege line and its
-    // purse line, so each of the three branches' FIRST purse line (a siege line's twin) has its crisis lines,
-    // and every purse line is reached from one by its twins.
-    const lines = purseLines();
-    expect(lines.length, 'anchored: the four purse lines (the charter pair)').toBe(4);
-    const first = lines.filter((line) => crisisLineFor(line.text, 'under_siege'));
-    expect(first.length, 'the three branches').toBe(3);
-    for (const line of first) expect(crisisLineFor(line.text, 'famine'), `${line.text} has its famine line`).toBeDefined();
-    const setOf = (/** @type {string} */ text) => Object.values(SAFETY_LINE_SIBLINGS).find((set) => set[0].text === text);
-    for (const line of lines) {
-      const reached = first.some((f) => { for (let t = f.text; t; t = setOf(t)?.[1]?.text) if (t === line.text) return true; return false; });
-      expect(reached, `${line.text} is reached from a crisis line`).toBe(true);
-    }
+  test('RED-FIRST: no hired line is declared on a crisis, and every purse line on what the place can buy', () => {
+    const crisisDeclared = Object.values(SAFETY_LINE_SIBLINGS).map((set) => set[0])
+      .filter((line) => atomsOf(declarationOf(line)).some((atom) => atom.startsWith('crisis:')) && /hired|charter hall/i.test(line.text));
+    expect(purseLines().length, 'anchored: the four purse lines (the charter pair)').toBe(4);
+    // anchored: the line above proves the table is read (its four purse lines), so an empty read reds there
+    expect(crisisDeclared.map((line) => line.text)).toEqual([]);
   });
 
-  test('RED-FIRST agree-force-famine-city-0 (famine, Struggling, hired swords beside a garrison): the guard line names the crisis', () => {
+  test('RED-FIRST agree-force-famine-city-0 (famine, hired swords beside a garrison): the guard line is its standing label\'s', () => {
     const s = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: 'city', selectedStressesRandom: false, selectedStresses: ['famine'] }), null, { seed: 'agree-force-famine-city-0' });
     expect(s.economicState.prosperity).toBe('Struggling');
     const desc = s.economicState.safetyProfile.guardEffectivenessDesc;
-    const garrisonPurse = purseLines().find((line) => /garrison/.test(line.text));
-    // anchored: the next line pins the crisis line in the same text, so a drifted text reds there
-    expect(desc, 'no purse line under a famine').not.toContain(garrisonPurse.text);
-    expect(desc).toContain(crisisLineFor(garrisonPurse.text, 'famine')?.text);
+    const swords = purseLines().find((line) => /garrison/.test(line.text));
+    const standingPoor = ['Struggling', 'Subsistence', 'Poor', 'Moderate', 'Comfortable'].includes(s.economicState.prosperityStanding);
+    expect(desc.includes(swords.text), `the purse line follows the standing label (${s.economicState.prosperityStanding})`).toBe(standingPoor);
+    expect(desc.includes('Hired swords back the garrison'), 'anchored: the hired line prints').toBe(true);
+    // anchored: the line above pins the hired line in the same text, so a drifted text reds there
+    expect(/hunger|siege/.test(desc)).toBe(false);
   });
 
-  test('planted rosters: each branch names the crisis under a famine and a siege, and the purse with none', () => {
+  test('planted rosters: a crisis in force changes no purse line', () => {
     const merc = [{ name: 'Mercenary company', category: 'Defense' }, { name: 'Town hall', category: 'Government' }];
     const beside = [{ name: 'Mercenary company', category: 'Defense' }, { name: 'Garrison', category: 'Defense' }];
     const charter = [{ name: "Adventurers' charter hall", category: 'Defense' }, { name: 'Town hall', category: 'Government' }];
     for (const roster of [merc, beside, charter]) {
       const today = generateSafetyProfile({ priorityMilitary: 60, priorityEconomy: 60 }, 'town', roster).guardEffectivenessDesc;
-      const calm = keptGuardLine(today, roster, 'Struggling', []);
-      const purse = purseLines().find((line) => calm.includes(line.text));
-      expect(purse, `anchored: a purse line prints with no crisis (${roster[0].name})`).toBeDefined();
-      for (const stress of ['famine', 'under_siege']) {
-        const hard = keptGuardLine(today, roster, 'Struggling', [stress]);
-        // anchored: the next line pins the crisis line in the same text, so a drifted text reds there
-        expect(hard, `${roster[0].name} under ${stress}`).not.toContain(purse.text);
-        expect(hard).toContain(crisisLineFor(purse.text, stress)?.text);
+      for (const label of ['Poor', 'Comfortable', 'Prosperous']) {
+        const calm = keptGuardLine(today, roster, label, []);
+        for (const stress of ['famine', 'under_siege', 'wartime']) {
+          expect(keptGuardLine(today, roster, label, [stress]), `${roster[0].name}, ${label}, ${stress}`).toBe(calm);
+        }
       }
-      expect(keptGuardLine(today, roster, 'Struggling', ['wartime']), 'wartime is no cap: the purse stays').toContain(purse.text);
-    }
-  });
-});
-
-/**
- * COHERENCE-UPKEEP-6, the review's F4: a siege is not a hunger. Under a siege with no famine the
- * crisis line names the siege; the hunger line is the famine's alone (a besieged town may hold a
- * year of grain). Each crisis line is found by its declared `crisis` atom, never by a literal.
- */
-describe('a siege with no famine names the siege, not the hunger (F4)', () => {
-  beforeAll(async () => { await loadGenerationLawPayloads(); });
-  /** The declared originals whose crisis atom is exactly this one kind. @param {string} kind */
-  const crisisLinesOf = (kind) => Object.values(SAFETY_LINE_SIBLINGS).map((set) => set[0])
-    .filter((line) => atomsOf(declarationOf(line)).includes(`crisis: ${kind}`));
-
-  test('RED-FIRST: each hired branch prints its siege line under a siege alone, and its hunger line under a famine', () => {
-    const merc = [{ name: 'Mercenary company', category: 'Defense' }, { name: 'Town hall', category: 'Government' }];
-    const beside = [{ name: 'Mercenary company', category: 'Defense' }, { name: 'Garrison', category: 'Defense' }];
-    const charter = [{ name: "Adventurers' charter hall", category: 'Defense' }, { name: 'Town hall', category: 'Government' }];
-    const siegeLines = crisisLinesOf('under_siege').map((line) => line.text);
-    const hungerLines = crisisLinesOf('famine').map((line) => line.text);
-    expect(siegeLines.length, 'a siege line for each of the three branches').toBe(3);
-    expect(hungerLines.length, 'a hunger line for each of the three branches').toBe(3);
-    for (const roster of [merc, beside, charter]) {
-      const today = generateSafetyProfile({ priorityMilitary: 60, priorityEconomy: 60 }, 'town', roster).guardEffectivenessDesc;
-      const siege = keptGuardLine(today, roster, 'Struggling', ['under_siege']);
-      expect(siegeLines.some((line) => siege.includes(line)), `${roster[0].name}: the siege line`).toBe(true);
-      // anchored: the line above pins the siege line in the same text, so a drifted text reds there
-      expect(hungerLines.some((line) => siege.includes(line)), `${roster[0].name}: no hunger line under a siege alone`).toBe(false);
-      const famine = keptGuardLine(today, roster, 'Struggling', ['famine']);
-      expect(hungerLines.some((line) => famine.includes(line)), `${roster[0].name}: the hunger line`).toBe(true);
-      const both = keptGuardLine(today, roster, 'Struggling', ['under_siege', 'famine']);
-      expect(hungerLines.some((line) => both.includes(line)), `${roster[0].name}: a famine in a siege is a hunger`).toBe(true);
+      const short = keptGuardLine(today, roster, 'Poor');
+      expect(purseLines().some((line) => short.includes(line.text)), `anchored: a purse line prints (${roster[0].name})`).toBe(true);
     }
   });
 });
@@ -370,9 +320,11 @@ describe('the charter hall says whether the town can pay its bounties (F7)', () 
     expect(keptGuardLine(today, charter, 'Prosperous'), 'Prosperous: today\'s lead').toBe(today);
   });
 
-  test('agree-village-40 (Poor, a charter hall and no standing guard) prints the short line', () => {
-    const s = born('agree-village-40');
-    expect(s.economicState.prosperity).toBe('Poor');
+  // Re-keyed by identity at the chair's ruling 1(b) (the purse lines read the STANDING label): agree-village-40
+  // prints Poor but stands Moderate, so the Poor birth that stands Poor is agree-village-43.
+  test('agree-village-43 (Poor in ordinary years, a charter hall and no standing guard) prints the short line', () => {
+    const s = born('agree-village-43');
+    expect(s.economicState.prosperityStanding).toBe('Poor');
     expect(s.economicState.safetyProfile.guardEffectivenessDesc).toContain(charterLine('prosperity: ≤ poor')?.text);
   });
 });

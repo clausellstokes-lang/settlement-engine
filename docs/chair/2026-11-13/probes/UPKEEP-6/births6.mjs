@@ -15,6 +15,7 @@ const { generateSettlementPipeline } = await imp('src/generators/generateSettlem
 const { readinessBandOf } = await imp('src/data/bandLadders.js');
 const buckets = await imp('src/domain/institutions/defenseInstitutionBuckets.js');
 const { defenseFactsOf } = await imp('src/domain/defense/defenseFacts.js');
+const { buildThreatAssessment } = await imp('src/domain/display/threatAssessment.js');
 await loadGenerationLawPayloads();
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -69,6 +70,7 @@ for (let r = shard; r < rows.length; r += shards) {
     held: fr.storesHeld ?? null, months: fr.storageMonths ?? es.foodSecurity?.storageMonths ?? null, granary: fr.hasGranary ?? null, foodBand: fr.band ?? null,
     foodLabel: es.foodSecurity?.label ?? es.foodSecurity?.status ?? null,
     guard: es.safetyProfile?.guardEffectivenessDesc ?? null,
+    money: buildThreatAssessment(s).find((row) => row.label === 'Economic Survival')?.assess ?? null,
     hired: { company: part.mercenary.length > 0, charter: part.charter.length > 0, garrison: part.garrison.length > 0, watch: part.watch.length > 0, militia: part.militia.length > 0 },
   };
   o.write(`${JSON.stringify(line)}\n`);

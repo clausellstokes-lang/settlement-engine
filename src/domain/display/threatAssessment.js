@@ -36,6 +36,28 @@
 
 import { defenseFactsOf } from '../defense/defenseFacts.js';
 import { SCORE_BAND_CUTS } from './defenseScoreBands.js';
+import { keepOf, keepOfRecord } from '../facts/keep.js';
+
+/**
+ * WHAT MONEY THE PLACE HAS TO MEET A CRISIS (COHERENCE-UPKEEP-6, the chair's ruling 1(b): one label speaks
+ * for pay). The Economic Survival row's sentence speaks of money, so it reads what the place can keep up
+ * in ordinary years, the standing label, through its one home (`keep.js :: keepOfRecord`), on the keep
+ * table's own rungs of what it can buy, the rungs the guard's purse lines read: Prosperous and above,
+ * Moderate and Comfortable, Poor, and below. A town saved before the standing
+ * label existed reads its stored score's rung, as it did. The row's colour stays its score's.
+ * @param {any} r @param {number} econScore
+ * @returns {'long' | 'short' | 'late' | 'none'}
+ */
+function moneyRungOf(r, econScore) {
+  const es = r?.economicState;
+  if (es?.prosperityStanding == null) {
+    return econScore >= 65 ? 'long' : econScore >= 40 ? 'short' : econScore >= 25 ? 'late' : 'none';
+  }
+  const { bought } = keepOfRecord(es);
+  return bought >= keepOf('Prosperous').bought ? 'long'
+    : bought >= keepOf('Moderate').bought ? 'short'
+      : bought >= keepOf('Poor').bought ? 'late' : 'none';
+}
 
 /** The top of the Weak band: the highest a famine-struck place's disaster readiness may read. */
 export const FAMINE_DISASTER_CEILING = SCORE_BAND_CUTS.adequate - 1;
@@ -240,13 +262,14 @@ export function buildThreatAssessment(r) {
       ? '#7a5010'
       : '#8b1a1a';
   let econA;
-  if (econScore >= 65) {
+  const money = moneyRungOf(r, econScore);
+  if (money === 'long') {
     econA = 'Money enough to ride out a long crisis: emergency measures can be paid for, and '
       + (hasGarrison ? 'the garrison kept paid' : 'the defenders kept paid')
       + ' while it lasts.';
-  } else if (econScore >= 40) {
+  } else if (money === 'short') {
     econA = 'Money enough for a short crisis; a long siege would start eating the reserves within months.';
-  } else if (econScore >= 25) {
+  } else if (money === 'late') {
     econA = 'The defenders are already paid late; a long crisis would empty the reserves and '
       + (hasGarrison ? 'wear out the garrison\'s patience.' : 'wear down the people who defend the place.');
   } else {

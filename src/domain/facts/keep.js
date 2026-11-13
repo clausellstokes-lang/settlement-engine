@@ -73,7 +73,18 @@ export function keepOf(prosperity) {
  * @returns {Readonly<{ bought: number, funded: number }>}
  */
 export function keepOfRecord(economicState) {
-  return keepOf(economicState?.prosperityStanding ?? economicState?.prosperity);
+  return keepOf(standingLabelOf(economicState));
+}
+
+/**
+ * THE LABEL THAT SPEAKS FOR PAY (COHERENCE-UPKEEP-6, the chair's ruling 1(b) on REVIEW-UPKEEP-2): the
+ * standing label, or the printed one on a record written before the standing label existed. Every
+ * sentence about paying for defence reads it here, as the score's pay does through `keepOfRecord`.
+ * @param {{ prosperity?: unknown, prosperityStanding?: unknown } | null | undefined} economicState
+ * @returns {unknown}
+ */
+export function standingLabelOf(economicState) {
+  return economicState?.prosperityStanding ?? economicState?.prosperity;
 }
 
 /**
