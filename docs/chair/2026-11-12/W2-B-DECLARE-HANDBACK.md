@@ -297,3 +297,23 @@ Every push ran its three pre-push gates: `83c84a8ed..3ff343284` exit 0, then to 
 3. The door gained `--thing`, a first-register arm-1 shrink and `--shrink-arm2`. All are shrink-only or banking at the base, as before.
 4. F4 adds a seventeenth thing (`shrine`) and F6 an eighteenth (`lawEnforcement`).
 5. DS-GEN-9's "not anchored" variants are mostly false where they would print (§2). Handed to W2-WRITE as a recommendation, not changed.
+
+# PART FOUR — the fourth seat (2026-11-13), from `1fb15980d`, on REVIEW-W2B second read (NOT CLEAR)
+
+**Kept current after every item; a stop at any moment loses nothing.** Every count is executed unless marked PLAUSIBLE. Work tree: a scratch worktree of the lane (`npm ci`); the main checkout untouched.
+
+## 0. Status
+- [x] F1 (HIGH) seven files, nine titles · [ ] F4 whole-literal key + forecast · [ ] F3 strip ban · [ ] F2 streets / quarters · [ ] F9 + F8 · [ ] F7 two narrow families · [ ] F5 + F6 · [ ] the page unmoved · [ ] the whole suite
+
+## 1. F1: the seven files (DONE, `6cdd54e18`…`a25246bea`)
+Each was red at `1fb15980d` (9 titles) and is green at `a25246bea` (`npx vitest run` over the seven files: 7 files passed, 245 passed, 28 skipped, 0 failed). Every cause is the lane's own, and every cure went through the file's own door:
+
+| file (titles) | what turned it red (second seat) | cure, door | commit |
+|---|---|---|---|
+| `tests/data/dossierStateProseProjection.contract.test.js` (2), `tests/lint/proseWiringCensus.walker.test.js` (2) | `aa41b1f25` (DS-GEN-9) moved `generalStateProse.js`; the stamp of `docs/content/wiring-census.json` was stale | `node scripts/wiring-census.mjs` (its `--dry`: **0 rows move**, the stamp only); the projection's `--check` passes with no leaf regenerated | `6cdd54e18` |
+| `tests/lint/negativeAssertionAnchor.walker.test.js` (1) | `97daac24b` (F3): a bare `.not.toContain` at `presumedThings.walker.test.js:102` | `expectPresentThenAbsent`: the line is a hit in a data file and answered in a kernel pool file | `ab2ae85d9` |
+| `tests/lint/proseDrawnAnchors.walker.test.js` (1) | `a51634ede` (F1): two literal state-prose sentences in `vocabularyPageFindings.test.js` (DS-DEF-5 v1, DS-ECO-9 v1) | drawn with `variantByVid`; the assertions are unchanged | `8e70d2bed` |
+| `tests/lint/spAxisVocabulary.walker.test.js` (1) | `97daac24b`: a doc comment in `registeredWords.js` spelled the minted rung `` `sufficient` `` | the comment reworded (comment only) | `cbb44879d` |
+| `tests/build/vendorPdfLazy.test.js` (1) | `a51634ede`: `registeredWords.js` became a direct goods consumer (identity half) | the roster row in `src/domain/goods.schema.js`'s doc comment (**outside the instrument; announced to the chair before it was made**; comment only) | `bb0e27be5` |
+| `tests/lint/sovereigntyLightingContract.walker.test.js` (1) | the second and third seats' +25 titles (vocabularyPageFindings 4→21, presumedThings.walker 29→37) and +6 suite titles | `LIGHTING_CENSUS_REFREEZE` at the clean tip `bb0e27be5`: titles 29230→29255, suiteTitles 7921→7927, the other three unchanged; the plain re-run is green | `a25246bea` |
+
