@@ -388,7 +388,7 @@ export const CULTURE_PROFILES = Object.freeze({
       'Civic labor and festival obligations make the settlement a visibly collective project.',
     ],
     architecturalDetails: [
-      'a raised ceremonial precinct overlooks a broad and busy open plaza',
+      { text: 'a raised ceremonial precinct overlooks a broad and busy open plaza', needs: ['tier: ≥ town'] }, // W2-FIX-DATA-3 (REVIEW-W2A-3 #33): a precinct over a busy plaza is a town's (a thorp of twelve printed it)
       'terraces, plastered platforms, and residential compounds step with the terrain',
       'causeways and managed water divide the settlement into organized neighborhoods',
     ],
@@ -556,6 +556,11 @@ export const CULTURE_LINE_SIBLINGS = Object.freeze({
   'carved roof beams and long hall ridges dominate the older quarter': Object.freeze([
     Object.freeze({ text: 'carved roof beams and long hall ridges dominate the older quarter', needs: Object.freeze(['tier: ≥ town']) }),
     Object.freeze({ text: 'carved roof beams and a long hall ridge stand above the other roofs', twinOf: 'carved roof beams and long hall ridges dominate the older quarter', needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  // W2-FIX-DATA-3 (REVIEW-W2A-3 #33): the mesoamerican precinct and plaza are a town's. VETOABLE wording (the owner's).
+  'a raised ceremonial precinct overlooks a broad and busy open plaza': Object.freeze([
+    Object.freeze({ text: 'a raised ceremonial precinct overlooks a broad and busy open plaza', needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: 'plastered house platforms face one another across a swept open yard', twinOf: 'a raised ceremonial precinct overlooks a broad and busy open plaza', needs: Object.freeze(['tier: ≤ village']) }),
   ]),
 });
 
