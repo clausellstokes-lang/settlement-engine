@@ -11,8 +11,9 @@ import { CRISIS_SUMMARY_POOLS } from '../../../src/domain/crisis/crisisSummaryVa
 
 describe('an outbreak\'s vantages say the quarantine is resisted, never that it holds nowhere (ROUND-3-CUT #1386)', () => {
   const lines = Object.values(CRISIS_SUMMARY_POOLS.plague_onset).flatMap((pool) => Object.values(pool));
-  it.each(lines)('%s', (line) => {
-    expect(line).not.toMatch(/holds nowhere|nobody keeps|no one keeps/i);
+  it('no line of the four surfaces says the quarantine holds nowhere', () => {
+    expect(lines.length).toBe(16);
+    expect(lines.filter((line) => /holds nowhere|nobody keeps|no one keeps/i.test(line))).toEqual([]);
   });
   it('the Defence watch vantage still speaks of the quarantine and those who keep it', () => {
     expect(CRISIS_SUMMARY_POOLS.plague_onset.defence.watch).toMatch(/quarantine/);

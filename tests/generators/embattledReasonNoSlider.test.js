@@ -13,10 +13,12 @@ const reasonAt = (priorityMilitary) => checkStructuralValidity(ROSTER, { tier: '
   .violations.find((v) => v.type === 'survival_crisis')?.reason;
 
 describe('the embattled-region warning never prints the military slider (ROUND-3-CUT #325, #468)', () => {
-  it.each([[12], [29], [38]])('priority %i: a reason in plain words, with no slider name or figure', (p) => {
-    const reason = String(reasonAt(p));
-    expect(reason).toMatch(/^Embattled region\. /);
-    expect(reason).not.toMatch(/priority|\/100|\d/i);
+  it('at priorities 12, 29 and 38: a reason in plain words, with no slider name or figure', () => {
+    for (const p of [12, 29, 38]) {
+      const reason = String(reasonAt(p));
+      expect(reason, `priority ${p}`).toMatch(/^Embattled region\. /);
+      expect(reason.match(/priority|\/100|\d/gi), `priority ${p}`).toBeNull(); // the reason is present (the line above), and holds no figure
+    }
   });
 
   it('the two bands keep their own sense', () => {

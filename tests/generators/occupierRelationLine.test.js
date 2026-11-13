@@ -22,15 +22,13 @@ const rowFor = (occupierPower, stresses = ['occupied']) => computeFactionRelatio
 ], 'city', {}, {}, stresses, null).find((r) => r.pair.includes('Occupation Authority'));
 
 describe('the occupier is never written as the hall\'s soldiers (ROUND-3-CUT #1074)', () => {
-  it.each([
-    ['subordinate band', 10],
-    ['symbiotic band', 20],
-    ['tense band', 26],
-    ['competitive band', 40],
-  ])('%s: the hall carries out what the occupier decides', (_band, power) => {
-    const row = rowFor(power);
-    expect(row.narrative).toBe(LINE);
-    expect(['subordinate', 'symbiotic']).not.toContain(row.type);
+  it('at every band (subordinate, symbiotic, tense, competitive): the hall carries out what the occupier decides', () => {
+    const kinds = [10, 20, 26, 40].map((power) => {
+      const row = rowFor(power);
+      expect(row.narrative, `occupier power ${power}`).toBe(LINE);
+      return row.type;
+    });
+    expect(kinds).toEqual(['tense', 'tense', 'tense', 'competitive']);
   });
 
   it('a town\'s own military keeps its banded line (no occupation in force)', () => {
