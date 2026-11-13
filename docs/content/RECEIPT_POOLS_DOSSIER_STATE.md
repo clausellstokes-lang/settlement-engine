@@ -2879,11 +2879,11 @@ supplies the ancestry.
 3. `[unfolding]` The walls and townsfolk of {settlement} would see off a raid but not a proper army, and nothing now under way will change that.
 
 **`Invasion & War`: walls with NO force** {colour}
-1. `[ledger · no watch · no mercenary · no crisis: under_siege]` {settlement} has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
-2. `[visitor · no watch · no mercenary · no crisis: under_siege]` You can walk the length of {settlement}'s walls and meet nobody on them.
-3. `[street · no watch · no mercenary · no crisis: under_siege]` People at {settlement} admit it when asked: the town has walls and nobody to stand on them.
-4. `[ledger · watch · no mercenary · no crisis: under_siege]` {settlement}'s walls are kept by its watch and nobody else, which is enough to see who comes and goes and nothing like enough to hold them.
-5. `[street · watch · no mercenary · no crisis: under_siege]` The only people on {settlement}'s walls are the watch on their rounds, and everyone knows that would not stop an army.
+1. `[ledger · no watch · no mercenary · no crisis: under_siege · no crisis: occupied]` {settlement} has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+2. `[visitor · no watch · no mercenary · no crisis: under_siege · no crisis: occupied]` You can walk the length of {settlement}'s walls and meet nobody on them.
+3. `[street · no watch · no mercenary · no crisis: under_siege · no crisis: occupied]` People at {settlement} admit it when asked: the town has walls and nobody to stand on them.
+4. `[ledger · watch · no mercenary · no crisis: under_siege · no crisis: occupied]` {settlement}'s walls are kept by its watch and nobody else, which is enough to see who comes and goes and nothing like enough to hold them.
+5. `[street · watch · no mercenary · no crisis: under_siege · no crisis: occupied]` The only people on {settlement}'s walls are the watch on their rounds, and everyone knows that would not stop an army.
 6. `[unfolding · no watch · no mercenary · crisis: under_siege]` {settlement} had nobody to put on its walls until the siege came; the people on them now are townsfolk who have never held a wall before.
 7. `[street · crisis: under_siege]` Since the siege began, {settlement}'s walls are manned by whoever can be spared from everything else.
 

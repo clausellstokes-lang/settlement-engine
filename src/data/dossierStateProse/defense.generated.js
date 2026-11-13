@@ -911,7 +911,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no watch",
             "no mercenary",
-            "no crisis: under_siege"
+            "no crisis: under_siege",
+            "no crisis: occupied"
           ],
           "text": "{settlement} has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.",
           "slots": [
@@ -924,7 +925,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no watch",
             "no mercenary",
-            "no crisis: under_siege"
+            "no crisis: under_siege",
+            "no crisis: occupied"
           ],
           "text": "You can walk the length of {settlement}'s walls and meet nobody on them.",
           "slots": [
@@ -937,7 +939,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no watch",
             "no mercenary",
-            "no crisis: under_siege"
+            "no crisis: under_siege",
+            "no crisis: occupied"
           ],
           "text": "People at {settlement} admit it when asked: the town has walls and nobody to stand on them.",
           "slots": [
@@ -950,7 +953,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "watch",
             "no mercenary",
-            "no crisis: under_siege"
+            "no crisis: under_siege",
+            "no crisis: occupied"
           ],
           "text": "{settlement}'s walls are kept by its watch and nobody else, which is enough to see who comes and goes and nothing like enough to hold them.",
           "slots": [
@@ -963,7 +967,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "watch",
             "no mercenary",
-            "no crisis: under_siege"
+            "no crisis: under_siege",
+            "no crisis: occupied"
           ],
           "text": "The only people on {settlement}'s walls are the watch on their rounds, and everyone knows that would not stop an army.",
           "slots": [

@@ -39,6 +39,8 @@ const GUARDS = [
   { seed: 'w5-village-under_siege-1', pool: 'DS-DEF-2::Invasion & War: neither walls nor force', vid: 5, why: 'a siege: "each household is deciding for itself whether to stay" where nobody can leave (LINES-READ, village-under_siege-1)' },
   { seed: 'w5-hamlet-occupied-2', pool: 'DS-DEF-2::Invasion & War: neither walls nor force', vid: 4, why: 'an occupation: "the threat now at hand has noticed both" of a town the threat already holds' },
   { seed: 'w5-town-under_siege-1', pool: 'DS-DEF-2::Invasion & War: walls with NO force', vid: 6, why: 'a town watch: "had nobody to put on its walls until the siege came" (the read\'s H3; its siblings v1-v3 carry `no watch`)' },
+  { seed: 'rww-town-occupied-1', pool: 'DS-DEF-2::Invasion & War: walls with NO force', vid: 4, why: 'an occupation: "kept by its watch and nobody else" beside the occupiers\' troops (the read\'s H5, its own town)' },
+  { seed: 'w5-hamlet-occupied-104', pool: 'DS-DEF-2::Invasion & War: walls with NO force', vid: 1, why: 'an occupation: "has walls and nobody to put on them" of walls the occupier holds' },
 ];
 
 /** @param {string} seed */

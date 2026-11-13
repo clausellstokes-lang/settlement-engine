@@ -1282,6 +1282,7 @@
       "declares": [],
       "lineDeclares": {
         "crisis: under_siege": 2,
+        "no crisis: occupied": 5,
         "no crisis: under_siege": 5,
         "no mercenary": 6,
         "no watch": 4,
