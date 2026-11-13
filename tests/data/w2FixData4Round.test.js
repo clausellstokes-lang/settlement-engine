@@ -68,4 +68,18 @@ describe('W2-FIX-DATA-4: round two\'s medium lines in this lane\'s files', () =>
       expect(String(quarry.desc), seed).toMatch(/quarry/i);
     }
   }, 60_000);
+
+  test('a house the cascade adds meets the declared draw: no customs "via the port" with no docks, no river craft with no river (F2; #502)', () => {
+    const roadTown = bornCensus('r2r-town-8');
+    const customs = roadTown.institutions.find((/** @type {any} */ i) => i.name === 'Customs house');
+    expect(customs?.source, 'the cascade added it').toBe('cascade');
+    expect(roadTown.institutions.some((/** @type {any} */ i) => /\bdocks?\b|wharf|harbour/i.test(i.name)), 'no docks').toBe(false);
+    expect(String(customs.desc)).not.toMatch(/\bport\b|harbour/i);
+    expect(String(customs.desc)).toMatch(/main roads/);
+    const coastTown = bornCensus('r2r-village-11');
+    const yard = coastTown.institutions.find((/** @type {any} */ i) => i.name === 'River boatyard');
+    expect(yard?.source, 'the cascade added it').toBe('cascade');
+    expect([coastTown.config.terrainType, coastTown.config.tradeRouteAccess]).toEqual(['coastal', 'port']);
+    expect(String(yard.desc)).not.toMatch(/\briver\b/i);
+  }, 60_000);
 });

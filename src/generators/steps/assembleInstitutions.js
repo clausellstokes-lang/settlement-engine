@@ -1036,7 +1036,7 @@ import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
  * @param {Record<string, any>} effectiveConfig @param {Record<string, any>} config
  * @returns {string[]}
  */
-function settledStressTypes(effectiveConfig, config) {
+export function settledStressTypes(effectiveConfig, config) {
   const forced = new Set([
     ...(effectiveConfig.intendedStressTypes || []),
     ...(config.selectedStressesRandom === false ? (config.selectedStresses || []) : []),
