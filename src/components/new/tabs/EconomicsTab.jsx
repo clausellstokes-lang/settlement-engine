@@ -559,19 +559,19 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
         <div style={{marginBottom:10}}>
           <div style={{display:'flex',justifyContent:'space-between',fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,marginBottom:4}}>
             <span>Production: {formatCount(fb.dailyProduction)} lbs/day</span>
-            {fb.importCoverage>0&&<span style={{color:swatch['#2A5A8A']}}>+ {formatCount(fb.importCoverage)} imported</span>}
+            {fb.importCoverage>0&&foodComesByTrade(eco)&&<span style={{color:swatch['#2A5A8A']}}>+ {formatCount(fb.importCoverage)} imported</span>}
             {fb.magicFoodOffset>0&&<span style={{color:swatch.info}}>+ {formatCount(fb.magicFoodOffset)} by {foodBar.magicChannel} provision</span>}
             <span>Need: {formatCount(fb.dailyNeed)} lbs/day</span>{fb.deficit>0&&<span style={{color:swatch.danger}}>Short: {formatCount(fb.deficit)} lbs/day</span>}
           </div>
           <div style={{height:10,background:swatch['#E8DCC8'],overflow:'hidden',position:'relative'}}>
             <div style={{height:'100%',width:`${foodBar.production}%`,background:foodDeficit?'#c08080':foodSurplus?'#1a5a28':'#a0762a'}}/>
-            {foodBar.imports>0&&<div style={{position:'absolute',top:0,left:`${foodBar.production}%`,height:'100%',width:`${foodBar.imports}%`,background:swatch['#2A5A8A']}}/>}
+            {foodBar.imports>0&&foodComesByTrade(eco)&&<div style={{position:'absolute',top:0,left:`${foodBar.production}%`,height:'100%',width:`${foodBar.imports}%`,background:swatch['#2A5A8A']}}/>}
             {foodBar.magic>0&&<div style={{position:'absolute',top:0,left:`${foodBar.production+foodBar.imports}%`,height:'100%',width:`${foodBar.magic}%`,background:swatch.info}}/>}
           </div>
           <div style={{display:'flex',justifyContent:'space-between',gap:8,color:MUTED,marginTop:3}}>
             <span style={{fontSize:chromeFontSize(FS.xxs, mobile)}}>Agriculture modifier: {Math.round((fb.agricultureModifier||1)*100)}%</span>
             {fb.stressModifier&&fb.stressModifier<1&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.danger}}>Stress penalty: ×{fb.stressModifier}</span>}
-            {fb.importCoverage>0&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch['#2A5A8A']}}>Trade covers {Math.round(fb.importCoverage/(fb.rawDeficit||fb.importCoverage)*100)}% of gap</span>}
+            {fb.importCoverage>0&&foodComesByTrade(eco)&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch['#2A5A8A']}}>Trade covers {Math.round(fb.importCoverage/(fb.rawDeficit||fb.importCoverage)*100)}% of gap</span>}
           </div>
         </div>
         {/* Narrative */}
@@ -781,7 +781,7 @@ function foodSentence(s, eco, fb, fbal, foodBar, foodDeficit, foodSurplus) {
     return `${name} grows ${over < 0.1 ? 'a little more than it eats' : over < 0.3 ? 'more than it eats' : 'far more than it eats'}, with some to put by against a bad year.`;
   }
   const short = shortWords(fbal.deficitPct);
-  if (!(fb.importCoverage > 0)) return `No food comes into ${name} by trade.${magic} ${short}`;
+  if (!(fb.importCoverage > 0) || !foodComesByTrade(eco)) return `No food comes into ${name} by trade.${magic} ${short}`;
   const grown = shareWords(fb.dailyProduction / Math.max(1, fb.dailyNeed), GROWN_BANDS, 'nearly all');
   const brought = shareWords(fb.importCoverage / (fb.rawDeficit || fb.importCoverage), BROUGHT_BANDS, 'nearly all the rest');
   return `${name} grows ${grown} of what it eats, and ${carriers} bring in ${brought}.${magic} ${short}`;
@@ -792,3 +792,18 @@ export default React.memo(EconomicsTab);
 // COHERENCE-AGREE-4 (item 3′): at the end of the file so no line-keyed register row above it moves.
 import { NORMALLY_YIELDS, chainYieldRefused } from '../../../domain/chainYield.js';
 import { chainPrintName } from '../../../domain/display/chainPrintName.js'; // COHERENCE-AGREE-6 (F1): what a chain prints under
+
+/**
+ * W2-C-LEAVES item 4(a) (2026-11-13; the cold list REVIEW-W2A-3 #995, HIGH: "Lagomagnum grows about a quarter of what it
+ * eats, and carts bring in a little of the rest." under a siege that has cut every road in). WHETHER FOOD COMES IN BY
+ * TRADE is the food record's (`economicState.foodSecurity.foodRecord.normalImportPct`, the one food record every surface
+ * states its shares from): the viability metric's `importCoverage` kept a trickle the siege had cut (12 lb/day beside a
+ * record of none). The sentence, the "imported" figure, the bar's import run and the "Trade covers" note read it; a
+ * record with no food record keeps the metric's answer. At the end of the file, so no line-keyed row above moves.
+ * @param {{ foodSecurity?: { foodRecord?: { normalImportPct?: unknown } | null } | null } | null | undefined} eco
+ * @returns {boolean}
+ */
+function foodComesByTrade(eco) {
+  const record = eco?.foodSecurity?.foodRecord;
+  return record ? Number(record.normalImportPct) > 0 : true;
+}
