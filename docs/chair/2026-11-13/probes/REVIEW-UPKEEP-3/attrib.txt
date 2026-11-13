@@ -1,0 +1,8 @@
+# hashscan.mjs on 1,440 births at each step; base=65cb03ef1, tip=0a07f98c7; w-<sha> = scratch tree at that commit
+base -> w-d585d51f5: {} readiness moved 0 (up 0, down 0); bands {}; scores {}
+w-d585d51f5 -> w-c893b4998: {} readiness moved 0 (up 0, down 0); bands {}; scores {}
+w-c893b4998 -> w-008fc3328: {'record': 190, 'rest': 15, 'power': 11} readiness moved 137 (up 137, down 0); bands {'Undefended->Vulnerable': 5, 'Vulnerable->Lightly Defended': 4, 'Defensible->Well-Defended': 1, 'Lightly Defended->Defensible': 1}; scores {'military': 182, 'internal': 55, 'economic': 31, 'magical': 17, 'monster': 1}
+w-008fc3328 -> w-b79970bec: {'record': 28, 'guard': 28} readiness moved 0 (up 0, down 0); bands {}; scores {}
+w-b79970bec -> w-22a8a956b: {'record': 9, 'guard': 9} readiness moved 0 (up 0, down 0); bands {}; scores {}
+w-22a8a956b -> w-c72917251: {} readiness moved 0 (up 0, down 0); bands {}; scores {}
+w-c72917251 -> tip: {'record': 402, 'guard': 23, 'rest': 51, 'power': 51} readiness moved 325 (up 0, down 325); bands {'Well-Defended->Defensible': 4, 'Fortress->Well-Defended': 47}; scores {'magical': 381, 'economic': 27, 'military': 7, 'monster': 5}

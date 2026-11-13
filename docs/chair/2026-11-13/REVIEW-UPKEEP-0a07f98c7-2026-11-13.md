@@ -10,6 +10,39 @@
 > its own home (ruling D)`. I also read the source diff 65cb03ef1..0a07f98c7 (code, not prose of the builder's) to
 > build my probes. Nothing else of the builder's was read before this section was pushed.
 
+## VERDICT (written after §1 was pushed at 141151b38)
+
+| Cure | Verdict | Worst finding |
+|---|---|---|
+| **A** one home for pay on every surface | **CLEAR** for what it cures | Residue, MEDIUM (C-M2, carried, for the chair): the crisis's own spending line still disagrees with the band on 201 births |
+| **B** hired swords only where a company is contracted | **CLEAR** | — |
+| **C** the two-label sentence leaves the realm register | **CLEAR** | Residue, MEDIUM (C-M3, listed by the ruling, not cured): the row says "at peace" of a besieged town |
+| **D** the sentence in its own home | **CLEAR** | LOW (C-L1): "before the war and the betrayal; Poor while they last." |
+| **E** count once, the first half | **NOT CLEAR** | HIGH (C-H1): the town's Magical Capability rating falls on 206 births; it now contradicts the Magic tab and the PDF, and plants a "Magical instability" threat in the AI prompt |
+| the martial will is not a paid part | **NOT CLEAR** | MEDIUM (E-M1): pay still reaches the will on 11 births; MEDIUM (C-M1): 6 births made to say "Strong" beside "an attacker walks in" |
+| the earthwork's row leaves the table | **CLEAR** | — (births byte-identical, 1,440/1,440) |
+| the PDF's money line reads its row's score again | **CLEAR** | — |
+
+**Findings by rank:**
+- HIGH 1: C-H1.
+- MEDIUM 7, each EXECUTED:
+  - new at the tip: C-M1, E-M1, E-M2;
+  - carried from the base: C-M2, C-M3, C-M4, C-M5.
+- LOW 9:
+  - from §1: C-L1 to C-L6, EXECUTED, and C-L7, PLAUSIBLE;
+  - from §2: E-L1 and W-L1, EXECUTED.
+
+**THE ONE THING THE CHAIR MUST RULE.** Count-once is a rule about the readiness *sum*. The cure applies it to the
+magic *presence*, and the magic presence is also the whole of the town's Magical Capability score: no named
+house's own part feeds that score.
+
+Either:
+- **(a)** the named houses leave the presence for the readiness sum only, and the magical score keeps them. The
+  Magical Capability band, the PDF's "Magical n/100", "It leans on magic to hold", the Magic tab and the AI
+  threat then go back to agreeing;
+- **(b)** the falls stand, and then the Magic tab, the PDF's readiness strip and the AI threat each need a ruling
+  of their own.
+
 ## §1 — COLD: every false or contradicting sentence, and every machinery sentence
 
 ### The births
@@ -224,3 +257,275 @@ Read by eye on my own births:
 `render4.mjs` (every surface, with the register and the whole export), `scan4.mjs` (per-birth record with the
 computed parts), `payclasses.py`, `pairdiff.py`, `newlines.py`, `eye.py`, `digest.py`, `machinery.py`,
 `countonce.mjs` (for §2E), `own.seeds`.
+
+---
+
+## §2 — THE CURES, each apart, by my own execution on the same births
+
+The hand-back was opened only after §1 was pushed.
+
+### Method: one scratch tree per changed commit
+
+I built a scratch worktree at each changed commit and hashed every birth's whole stored record at each
+(`hashscan.mjs`). Every move is then charged to the commit that made it. A "record" is the whole
+`generateSettlementPipeline` output.
+
+| Step (commit) | Records differ | Readiness moves | Band moves | Other |
+|---|---|---|---|---|
+| d585d51f5, the earthwork row leaves | 0 | 0 | 0 | births byte-identical |
+| d398faebe to c893b4998, the PDF money line | 0 | 0 | 0 | display only |
+| 008fc3328, the will unpaid | 190 | 137, all up (mean +1.07, max +3) | 11 up | military 182, internal 55, economic 31, magical 17 (through limit 1); power 11; a crisis's severity band 4 |
+| b79970bec, A | 28 | 0 | 0 | the guard line only |
+| 22a8a956b, B | 9 | 0 | 0 | the guard line only |
+| 6c8501fcc and c72917251, C and D | 0 | 0 | 0 | display only |
+| 13782cf82, E | 402 | 325, all down | 51 down (Fortress → Well-Defended 47, Well-Defended → Defensible 4) | magical 381, economic 27, military 7, monster 5; guard line 23; power 51 |
+
+### A — one home for pay: CLEAR for its cure (EXECUTED, `payclasses.py`, 1,440 births)
+
+| Class | Base | Tip |
+|---|---|---|
+| The PDF's band word against its own money sentence (A2) | 670 | 0 |
+| The PDF's band word against the tab's (A1) | 0 | 0 |
+| The tab's band against the stored score (A0) | 0 | 0 |
+| A guard purse clause beside a band it is not true under (A4) | 26 | 0 |
+| A short-purse guard line beside a can-pay line (the third read's J) | 5 | 0 |
+| "When the purse allows" beside "money in hand" (L1) | 2 | 0 |
+| The export's stored guard line against the page's | — | 0 |
+
+- **The A2 row at base** is the third read's 83 in its widest form: the 83 were the births where the two said
+  opposite things.
+- **The A4 row at base:** "when the purse allows" under a Strong band 5; "Hired swords back the garrison."
+  under Adequate 5; the charter hall's "as far as the purse runs" under Weak 16.
+- **The tab's own sentences:** every Economic Survival sentence on the tab sits under one band only, so the
+  pools agree with the PDF's rungs. Only C-L5's empty row prints under two bands.
+- **A saved town** (§5) moves only onto its own badge.
+- **The brief's wider question, "do any two pay sentences on one town's pages still disagree?" Yes, on 201
+  births (224 at base): C-M2.** The crisis's own spending lines read the crisis, not the band:
+  - "every coin goes on food";
+  - "The war takes most of the money";
+  - "The occupiers take the revenue".
+  The hand-back routes this residue (1b-M3) to ruling 8's declaration at the final tip. I hold A CLEAR on the
+  cure it was given and leave that residue to the chair.
+
+### B — hired swords only where a company is contracted: CLEAR (EXECUTED)
+
+- **The third read's seven:**
+  - `rv2-under_siege-town-1`, `rv2-wartime-town-9`, `rv2-wartime-town-10`, `rv2-under_siege-town-4`,
+    `rv2-under_siege-town-15`, `rv2-succession_void-town-2` and `rv2-famine-town-8`;
+  - 4 "Hired swords" lines each at base, 0 at tip;
+  - every one holds a Free company hall, five of them also a charter hall, and none a contracted company.
+- **Over all 1,440:** "Hired swords" prints on 376 births at tip, every one with a contracted company in the
+  defence home (385 at base, 9 without).
+- No birth with a company lost the line (376 → 376).
+
+### C — the two-label sentence leaves the realm register: CLEAR (EXECUTED)
+
+| Surface | Labels differ (920 births) | Labels equal (520 births) |
+|---|---|---|
+| Overview | 920 | 0 |
+| Economics glance | 920 | 0 |
+| PDF | 920 | 0 |
+| Foundry | 920 | 0 |
+| Realm register (player and owner) | 0 | 0 |
+| Tonight, Defense tab, both exports, both AI payloads | 0 | 0 |
+
+- **The register row:** the sentence is on 0 of 2,880 rows at tip (1,840 of 2,880 at base).
+- **The Summary tab and the public and player Overview** print it (`player.mjs`, four births, including the
+  "since" form).
+- **The register's "at peace" beside the town's own siege or war** was listed by the ruling, not cured: C-M3.
+
+### D — the sentence in its own home: CLEAR (EXECUTED)
+
+- **Every form on every surface** at tip, 24 distinct forms, was read:
+  - **fourteen crisis nouns:** siege, famine, war, split between the powers, revolt, raids (plural), migration,
+    insurgency, conversion, betrayal, debt crisis, outbreak, occupation, succession crisis;
+  - **pairs:** famine and war, siege and outbreak, migration and insurgency, debt crisis and succession crisis,
+    succession crisis and famine, siege and famine, war and famine, war and betrayal, outbreak and debt crisis,
+    betrayal and conversion.
+- **"since"** prints where every named crisis is an event (betrayal 91 lines, conversion 91, the two together
+  49).
+- **The PDF leads it with its word** on the cover, the Overview chapter and the Economics chapter
+  (*"Prosperity: Prosperous before the siege; Struggling while it lasts."*, directly under the cover's "SAFETY /
+  Desperate — Active Siege / Defense: Well-Defended").
+- The screen and the Foundry keep the bare sentence, beneath their own Prosperity row.
+- Plain, true, no machinery. Two LOWs:
+  - C-L1: an event beside a lasting crisis still reads "while they last";
+  - C-L2: a crisis that lowers nothing is named. The builder left D(ii) and said why.
+
+### E — count once, the first half: NOT CLEAR (EXECUTED)
+
+**The rating equals the sum of its parts exactly:** 1,440/1,440 at tip (`scan4.mjs`), and 330/330 in the
+count-once probe.
+
+**The readiness move is as the builder states.**
+
+| | Births | Moved | Mean | Band down |
+|---|---|---|---|---|
+| Builder | 3,756 | 899 (24%) | −2.43 | 104 (2.8%) |
+| Mine | 1,440 | 325 (22.6%), all down | −2.66 over movers (min −5) | 51 (3.5%) |
+
+The military and monster moves of ±1 (12 births) are limit 1's apportionment: `sustainsHeld` shrinks as the
+magic part does. Explained.
+
+**The count-once test** (the earlier reader's: drop each house alone and recompute; `countonce.mjs`, 300 claims
+seeds and my 30): births where one house moves two parts fall from 55 to 14.
+
+| House | Parts it moves | Births | Status |
+|---|---|---|---|
+| Alchemist shop | arcane + alchemists | 10 | known, ruled to a later seat |
+| Druid Circle | druids + magic | 1 | **not on the eight-house list**: it is its own named part (druids) and stays in the magic presence. `rv2-under_siege-village-6`: magic part full 7.0 with it, 6.6 without (E-L1, EXECUTED) |
+| Hedge wizard | arcane + magic | 2 | **left the presence**, yet in a village it is the house that opens the small-place gate. Dropping it removes the whole magic part (7.4 → none) |
+| Healer (divine, 1st level) | hospital + magic | 1 | same gate; dropping it removes the magic part (6.6 → none) |
+
+The gate cases are `rv2-famine-village-6`, `rv2-under_siege-village-3` and `rv2-famine-village-7`. The house
+still counts twice: once as its part, once as the switch on a magic part that the dial alone fills.
+
+**What E moves that the hand-back does not name (EXECUTED):**
+
+- **E-H1, the same finding as C-H1.** The magical score moves on 381 births at this commit, and the Magical
+  Capability band on 206 of my 1,440 at this commit alone: Adequate → Weak 129, Strong → Adequate 75, Weak →
+    Critical 2. The will commit moved 2 others, Critical → Weak, which is why §1's base-to-tip net shows one each
+    way. Its four classes are in §1 (82, 113, 129 births, and the PDF's figure).
+  - The magical score is fed by the magic part alone (`defenseGenerator.js`: `add('SUSTAINS', 'magic', { mag:
+    presence })`). The arcane part feeds military, monster and internal; alchemists and the hospital feed the
+    economic score; druids feed monster.
+  - So no named house was ever counted twice *in the magical score*. The cure takes the houses out of the one
+    rating that measured them.
+  - The hand-back says "the magic part's mean 11.7 → 10.3" and reports the readiness moves. It says nothing of
+    the Magical Capability rating, the Magic tab, the PDF's readiness strip or the AI threat.
+- **E-M2, the power re-draw, 51 births here (60 with the will).** The births whose readiness band moves are
+  exactly the births whose power structure moves (51 of 51), through public legitimacy and the power reconcile.
+  - On ten cities whole powers appear or vanish, and the NPCs' factions, relationships, goals and plot tensions
+    are re-drawn.
+  - `rv2-calm-city-37`: Arcane Orders and The Arcane Circle gone; Religious Authorities and The Faithful
+    Assembly in; the guild archmage "In no power".
+  - This is the estate's coupling, not a sentence made false. But "a declared move" here declares the readiness
+    move only. The chair should know a band move re-draws the town's politics.
+- **The guard line changes on 23 births and the economic score on 27.** Both come through limit 1's hold (the
+  builder's "88 rise ... 8 births" on its own count). Explained.
+
+## The smaller changes since 65cb03ef1
+
+**The martial will is no longer a paid part: NOT CLEAR (EXECUTED).**
+
+What it does:
+- 137 births rise, none falls; every mover stands Moderate (49), Poor (87) or Struggling (1).
+- Comfortable and above: 0 move. Band moves: 11, all up.
+
+What stops it:
+- **E-M1 — pay still reaches the will outside its hold.** The ruling: "pay reaches it only through that hold".
+  - On 11 of 1,440 births the will's points still move with pay, with no hold binding and no crisis touching
+    it (`willpay.mjs`).
+  - Example: `rv2-calm-hamlet-14`, Poor: the will reads 2.6 at its pay and 4.0 at full pay. The others are
+    calm hamlets and villages with a charter hall.
+  - The commit changed only the branch with a standing body. The other branch,
+    `rate = hired ? D.none + D.hiredExtra * keep.bought : D.none`, still scales the will by `keep.bought`.
+  - Its red-first test (`defenceParts.test.js`, "the martial will is not paid …") passes at the tip because
+    its corpus never meets that branch.
+- **C-M1 — the rise makes 6 contradictions at the tip.** The military score crosses 65, so "Invasion & War:
+  Strong" stands beside "an attacker takes this village with ladders" or "could not hold off a raid".
+  `rv2-under_siege-village-30`, `rv2-calm-village-18`, and four more.
+- **W-L1 — a crisis's severity band moves** on 4 births (`activeConditions[0].severityBand` high → medium):
+  `rv2-under_siege-village-12`, `rv2-succession_void-town-18`, `-36`, `rv3-famine-town-2`. The severity reads
+  defence. Explained, not named.
+
+**The earthwork's row leaves the tuning table: CLEAR (EXECUTED).**
+- Births byte-identical across the commit: 1,440/1,440 whole-record hashes equal.
+- The table holds `{ stone: 1, palisade: 0.6 }`; the roster's "Palisade or earthworks" reads as a palisade, as
+  before.
+
+**The PDF's money line reads its row's score again: CLEAR (EXECUTED).**
+- Births byte-identical across d398faebe.
+- At the tip, the PDF's band word and its money sentence agree on 1,440/1,440 (A2: 670 → 0).
+- On a master-stored town it moves onto its own badge (§5).
+
+## §3 — THE GUARDS (EXECUTED; refs and local config snapshotted before and after each suite: unchanged)
+
+**The earlier reader's plants, at 0a07f98c7** (`plant4.sh`, `tests/lint/defenceDerived.walker.test.js`): clean
+13/13 green. Each plant reds exactly one test, on its arm:
+
+| Plant | What it adds | Arm that reds |
+|---|---|---|
+| (i) | a stored read | stored |
+| (ii) | `getActiveRng()` | random |
+| (ii′) | `createPRNG(seed)()` | random |
+| (iii) | a name test `/wizard/i` | name |
+| (iv) | a literal 0.37 | number |
+| (v) | `defenseProfile.parts` in the Defense tab | (v) surface |
+| (v′) | `JSON.stringify(s.defenseProfile)` in `worldExport.js` | (v) surface |
+
+**My plants, one per guard added since 65cb03ef1** (`plant5.sh`; the six test files clean 66/66 green). Each is
+reverted after its run.
+
+| Plant | One-line change | Result |
+|---|---|---|
+| A, money line | `moneyRungOf` reads `"STRONG"` | red, 1 (payOneHome) |
+| A, purse word | `purseWordOfBand` returns the standing label | red, 2 (upkeepHired, payOneHome) |
+| B | `contracted = true` | red, 2 (payOneHome: the rule and `rv2-under_siege-town-1`) |
+| C | the register row re-gains a two-label sentence | red, 2 (prosperityInCrisisSurfaces) |
+| D(i) | no crisis is an event | red, 1 ("since") |
+| D(iii), all | the lead word dropped | red, 1 |
+| D(iii), cover only | `Cover.jsx` alone loses the lead | red, 1, through the saved-record byte test, not the lead test |
+| E | the presence reads the whole roster | red, 1 (magicCountOnce) |
+| Will | the standing-body branch paid again | red, 1 |
+| Earthwork | the earthwork row restored | red, 1 |
+
+**One gap.** No guard covers the will's hired branch: E-M1 passes the will's red-first test.
+
+## §4 — THE MACHINERY (EXECUTED, `machinery.py` over every section of all 2,880 dumps)
+
+**Nothing of the defence lane's.** Not one of the defence words' labels or sources prints on any surface,
+export, prompt or journal. The search covered:
+- "Martial will", "Walls with no one to man them", "Stores and supply can carry no more than the force can
+  use", "Rounded to the whole point the page prints", "rule (limit 1)", "magic presence (roster, magic dial)",
+  "standing label";
+- no part, no part's points, no limit, no share.
+
+**Pre-existing figures, at both trees** (C-M4):
+- **PDF, 1,440/1,440:** "Monster 74/100 · Economic 78/100 · Magical 33/100 · Disaster 56/100", "Score avg 67"
+  and "Output 20.1".
+- **Economics tab, 1,440/1,440:** "Output 50/100".
+- **Power tab (DM), 1,313:** "Public legitimacy 72 Approved · Breakdown · Prosperity +15 · Defense +7".
+- **The PLAYER world export:**
+  - the sliders by name, `"priorityEconomy": 50` and its siblings (1,440/1,440);
+  - `publicLegitimacy.breakdown`, `govMultiplier`, `crimMultiplier`, per-power `weight`;
+  - `readiness.score` and the five scores.
+- **The AI prompt:** "Economic score: 47/100" and "commands religious influence at 46/100".
+
+None of these is the defence lane's, and none is new. Under the owner's "no points, sums, pay shares, limits,
+slider names … on any page, PDF or export", each is the chair's to route.
+
+## §5 — A TOWN SAVED BY THE DEPLOYED CLIENT (EXECUTED)
+
+The earlier reader's ten towns were born at master db832c892 (`saved-birth.mjs`) and stored as JSON. Each was
+rendered on every surface at 65cb03ef1 and at 0a07f98c7 (`saved-render.mjs`).
+- **Eight render byte-identical.**
+- **Two move, on one line of the PDF only:** `rv2-famine-village-19` (stored economic 23) and
+  `rv2-under_siege-town-39` (22).
+  - At base: *"There is no money to meet a crisis; any lasting trouble would find nothing to spend."*
+  - At tip: *"The defenders are already paid late; a long crisis would empty the reserves and wear down the
+    people who defend the place."*
+- **Each move is right.** Both rows print the band "Weak" on the PDF and on the tab. The tab's sentence is
+  "pay book is always behind: its defenders are paid late". At base the PDF's sentence for a record with no
+  standing label cut at 25, not the band's 20, so the PDF disagreed with its own badge. It now agrees.
+- **Nothing else moves.** Neither the stored guard line, nor the Defense tab, nor the Magic tab.
+
+## Not measured
+
+- The whole suite, the goldens, the census and the edge bundles: the seventh seat's.
+- The PDF as an image: C-L7 is read from the source.
+- The TableView header.
+- A user-edited town.
+- A record stored at 65cb03ef1 (the lane's own shape, never deployed) and rendered at the tip.
+- The alchemist measure: the builder's, for the chair.
+- The AI layer's live output: only its prompt and grounding payload.
+- The thirty-town read the builder filed: not mine.
+
+## Probes (`docs/chair/2026-11-13/probes/REVIEW-UPKEEP-3/`)
+
+- §1: `render4.mjs`, `scan4.mjs`, `payclasses.py`, `pairdiff.py`, `newlines.py`, `eye.py`, `digest.py`.
+- §2: `hashscan.mjs` (the per-commit attribution), `countonce.mjs`, `willpay.mjs`.
+- §3: `plant4.sh` and `plant5.sh`.
+- §4: `machinery.py`.
+- The seeds and logs: `own.seeds`, and the result files `attrib.txt`, `countonce.tip.ndjson`,
+  `countonce.base.ndjson`, `willpay.tip.ndjson`, `plants.log`.
