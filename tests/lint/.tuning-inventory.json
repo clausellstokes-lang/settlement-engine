@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "5f2a702bc3e652cae091391efecce8f6cb6be2ee",
+  "measuredAtSha": "d585d51f5b50f9f70f1d6c14d53e4df26405bdbd",
   "measuredBy": "COHERENCE-UPKEEP-6",
   "date": "2026-11-13",
-  "note": "COHERENCE-UPKEEP-6 ruling 1(a): prosperityInCrisis.js reads keep.js (KEEP tables gain a dependent); no value moved",
+  "note": "COHERENCE-UPKEEP-6 (d585d51f5): DEFENCE_TUNING.wallKind loses earthwork (no birth reached it)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -133,13 +133,12 @@
       "idiom": "literal",
       "keys": 32,
       "line": 14,
-      "spanDigest": "c557ffcfbfd338c247a5a34bd8380d096a21e196a877f2f39dd3414e62976cc1",
+      "spanDigest": "56252cbd76ea48e2a184a92e438d9c4d8053ece6cb083e22cf4a23c075a793da",
       "leaves": {
         "walls.mil": 30,
         "walls.mon": 20,
         "wallKind.stone": 1,
         "wallKind.palisade": 0.6,
-        "wallKind.earthwork": 0.4,
         "garrison.mil": 28,
         "garrison.mon": 20,
         "garrison.int": 15,
