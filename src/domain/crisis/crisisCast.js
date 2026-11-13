@@ -32,7 +32,9 @@ import { governingFactionOf } from '../rulingPower.js';
 import { outrankingRivalOf, rulingChainOf } from '../dossier/powerStrata.js';
 import { isOfficeStandIn, seatHouseFaceOf } from '../dossier/seatHolder.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { partitionDefenseInstitutions } from '../institutions/defenseInstitutionBuckets.js';
 import { factsOf } from '../facts/factsOf.js';
+import { TIER_WORDS } from '../facts/factVocabulary.js';
 import { resolveSibling } from '../facts/drawDeclared.js';
 import { CAST_EDIT_PATH, CAST_EDIT_SEPARATOR } from '../userEditLines.js';
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
@@ -182,7 +184,12 @@ export const CAST_REASONS = Object.freeze({
   defenderMilitary: 'leads the military',
   defenderOffice: "holds the garrison's office",
   defenderInstitution: "the town's defence, with no one on the roster leading it",
+  defenderInstitutionPlace: 'the defence of the place, with no one named to lead it', // R2-CODE-B item 4: below the town tier
   treaterMerchant: 'a merchant, with the seat itself in dispute', // SW-6 second seat (B3): any member of a merchant house, so no "leads"
+  // R2-CODE-B item 4 (the cold list REVIEW-W2A-3 #855: "Zuma Kanil · a merchant" for the master smith):
+  // "a merchant" is said of the person, so only of one whose own role is trade (TRADE_ROLE); any other
+  // member of the merchant power is named by the power, not by a trade the record does not give them.
+  treaterMerchantMember: "a member of the merchants' power, with the seat itself in dispute",
   treaterSeat: 'holds the seat',
   collaboratorCorrupt: 'corrupt, with ties to the underworld',
   collaboratorAmbition: 'the most ambitious of a power that gains',
@@ -748,6 +755,12 @@ export function scapegoatCandidates(s, stakes, leverRow) {
   return { candidates: out, absent: CAST_ABSENCES.noLoser };
 }
 
+/** The tier ladder, low to high (the vocabulary's own `tier` band, facts/factVocabulary.js :: TIER_WORDS). */
+const TIER_ORDER = TIER_WORDS;
+
+/** The defence buckets whose standing members defend the place (`defenseFacts.js :: defenceNames`'s own six). */
+const DEFENDING_BUCKETS = Object.freeze(['walls', 'garrison', 'watch', 'militia', 'mercenary', 'charter']);
+
 /**
  * Rule 7 — the defender.
  * @param {CastSettlement} s
@@ -765,12 +778,27 @@ export function defenderCandidates(s) {
   }
   // The house fallback credits a house with the town's defence, so it reads the STANDING roster
   // only (`liveInstitutions`): a closed garrison defends nothing.
-  // A custom house's name is presentation only (`nativeSemanticName`, as in `deriveLevers`).
-  for (const i of liveInstitutions(s).filter((x) => /garrison|barracks|watch|militia|wall|guard/i.test(nativeSemanticName(x)))) {
-    out.push({ role: 'defender', kind: 'institution', id: str(i.name), name: str(i.name), reason: CAST_REASONS.defenderInstitution, temporary: false });
+  // R2-CODE-B item 4 (the cold list REVIEW-W2A-3 #328: "defends: no military, garrison or watch
+  // stands" beside the Tonight sheet's "Defence: Adventurers' charter hall."): the houses that defend
+  // are the defence buckets' standing members (walls, garrison, militia, watch, mercenary, charter;
+  // `partitionDefenseInstitutions`, the one keyword table `defenseFactsOf(s).defenceNames` reads for
+  // that "Defence:" line), never a second regex of this file's own. Roster order kept.
+  const roster = liveInstitutions(s);
+  const buckets = partitionDefenseInstitutions(roster);
+  const defends = new Set(DEFENDING_BUCKETS.flatMap((k) => buckets[k] || []));
+  // "the town's defence" names the place a town: below the town tier the reason names the place
+  // (the chair's size ruling of 2026-11-13; a reason written in code is a pool of two, chosen here).
+  const houseReason = TIER_ORDER.indexOf(str(s.tier)) >= TIER_ORDER.indexOf('town') || !str(s.tier)
+    ? CAST_REASONS.defenderInstitution
+    : CAST_REASONS.defenderInstitutionPlace;
+  for (const i of roster.filter((x) => defends.has(x))) {
+    out.push({ role: 'defender', kind: 'institution', id: str(i.name), name: str(i.name), reason: houseReason, temporary: false });
   }
   return { candidates: out, absent: CAST_ABSENCES.noMilitary };
 }
+
+/** A person's own role that is trade (the record's `role`), the one case "a merchant" is said of them. */
+const TRADE_ROLE = /\b(?:merchant|trader|factor|broker|magnate|banker|chandler)/i;
 
 /**
  * Rule 8 — the one who would treat.
@@ -782,7 +810,7 @@ export function treaterCandidates(s) {
   const out = [];
   if (legitimacyContested(s)) {
     for (const f of factionsOf(s).filter((x) => factionArchetype(x) === A.MERCHANT)) {
-      for (const n of membersOf(s, factionName(f))) out.push(npcRow(n, 'treater', CAST_REASONS.treaterMerchant));
+      for (const n of membersOf(s, factionName(f))) out.push(npcRow(n, 'treater', TRADE_ROLE.test(str(n.role)) ? CAST_REASONS.treaterMerchant : CAST_REASONS.treaterMerchantMember));
     }
   }
   out.push(...seatRows(s, 'treater', CAST_REASONS.treaterSeat, CAST_REASONS.treaterSeat));
