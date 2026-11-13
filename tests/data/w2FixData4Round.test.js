@@ -112,4 +112,12 @@ describe('W2-FIX-DATA-4: round two\'s medium lines in this lane\'s files', () =>
     expect(String(hamlet.arrivalScene)).not.toMatch(/most of it is the sound of blades being made/);
     expect(String(hamlet.arrivalScene)).toContain('A smith tests a new blade against a post');
   }, 60_000);
+
+  test('the docks are described, never by the catalogue\'s condition for them (ROUND-3 HIGH #1343)', () => {
+    const town = bornRr2s('rr2s-metropolis-plague_onset-port-1');
+    const docks = town.institutions.find((/** @type {any} */ i) => i.name === 'Docks/port facilities');
+    expect(docks, 'the port keeps its docks').toBeTruthy();
+    expect(String(docks.desc)).not.toMatch(/^If |\bIf coastal\b/);
+    expect(town.institutions.map((/** @type {any} */ i) => String(i.desc)).filter((d) => /If coastal or river access/.test(d))).toEqual([]);
+  }, 60_000);
 });

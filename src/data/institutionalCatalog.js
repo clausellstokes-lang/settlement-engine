@@ -476,7 +476,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: 'Docks/port facilities', face: 'the wharfinger', tradeRouteRequired: ['port', 'river'], desc: 'If coastal or river access. Essential for bulk trade.', tags: ['port', 'trade'], priorityCategory: 'economy' },
+      shared: { name: 'Docks/port facilities', face: 'the wharfinger', tradeRouteRequired: ['port', 'river'], desc: 'Where the bulk trade is loaded and unloaded, and the cargoes are tallied in and out.', tags: ['port', 'trade'], priorityCategory: 'economy' },
       at: {
         town: { baseChance: 0.55, desc: 'River or coastal dock. Essential for bulk water trade and river transport.' },
         city: { baseChance: 0.6 },
