@@ -259,7 +259,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
       newcomer: 'Newcomers in {name} are eyed as the likely source of the sickness, whatever the truth.',
     },
     defence: {
-      watch: 'Those trying to keep {name}\'s sick apart from the healthy are being ignored, and the quarantine holds nowhere.',
+      watch: 'Those trying to keep {name}\'s sick apart from the healthy are being resisted, and not everyone keeps the quarantine.', // R3-CODE-C #1386: the kind guarantees resistance, not a quarantine that holds nowhere
       official: 'Those in charge of {name} have ordered a quarantine they cannot make people keep.',
       local: 'In {name} some families shut themselves in and some carry on as before, and the sickness passes between them.',
       traveller: 'Coming into {name}, you pass shuttered doors, and nobody can tell you which houses hold the sick.',
