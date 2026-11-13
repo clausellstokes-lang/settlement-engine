@@ -377,6 +377,7 @@ pre-push gates; refs and config compared before and after every push since.
 | CENSUS-2 facts/officialsInPay.js kind f (20 towns) | the same panel's ` (${a.house})`, where patronage.js :: faceOf writes `house: String(rec(card.institution).key ?? '')`, the catalogue key ("Parish churches (2-5)") | FOR THE JOIN (below) | — |
 | #ww-15, #pf-85, #pf-667, CENSUS-2 c36 (2 towns) | crisisSummaryVantage.js :: CRISIS_SUMMARY_POOLS (famine.defence.official, famine.tonight.watch, succession_void.tonight.trade, politically_fractured.defence.local); the call sites (tonightSheet.js rb, the PDF view model up/uc/wc, DefenseTab.jsx rt) pass only the entry and the name | CURED by rewording to what the kind guarantees (the file's own law): "Those who answer for {name} spend their days settling quarrels over food, and every week there are more of them."; "In {name} what food is left is watched day and night, and those watching it are as hungry as everyone else."; "…, and those waiting on one are losing patience."; "People in {name} keep away from where one power's ground meets another's, most of all after dark." Display only; read in 9 rendered towns (thorp of 5 to metropolis of 142,726); guards rww-thorp-calm-1, rpf-thorp-succession_void-13 | b6208d93a |
 | #ww-702, #ww-1263 | crisisPage.js :: CRISIS_PAGE_COPY (noLevers, nobody), printed by the Crisis tab, the PDF chapter and the Foundry journal | CURED: "No house here holds what this crisis turns on." (the levers are institutions; the cast's lever role is a person's); "no one yet named" (an empty cast is an infiltration, its people the roster's secrets, or a war with no defender: 31 + 21 of 960). Display only; read in 6 rendered towns; guards the two readers' towns. NAMED to rb: crisisCast.js takes no cast role for an infiltration's infiltrator and recruits, whose secrets the roster holds (rww-metropolis-infiltrated-1: Caecilia Hispallus, Antonia Varus) | 2ce44a973 |
+| THE CHAIR'S ROW of 23:40Z (servicesGenerator.js: a service under a house's name) | servicesGenerator.js's criminal fallback names its fence row FENCE_WORD_OF_MOUTH, "Fence (word of mouth)", a catalogue house (the only house name among its 23) | CURED: the house's name only where the roster holds it (6 rows), else "Fencing stolen goods" (139); 102 of 720, 37 of 240, availableServices only; read in ten towns, thorp to metropolis, two sieges. "Black market bazaar" (22 towns here with no such house) is a catalogue SERVICE of the Underground city house, src/data/institutionServices.js: NAMED to the data lane | 06fe8a86b |
 
 ### FOR THE JOIN (the 21:51Z ruling)
 
@@ -390,16 +391,21 @@ pre-push gates; refs and config compared before and after every push since.
   owed; if rb's print-site change does not land, the one-line change is in faceOf:
   `house: institutionHouseLabel(String(rec(card.institution).key ?? ''))`.
 
+### The chair's messages to this seat (copied: the messages are not on the branch)
+
+- 23:40Z: ONE ADDED ROW with item 2 (servicesGenerator.js): the data lane traced 119 towns to the criminal fallback, a SERVICE printed under the name of a catalogue house the town does not hold ("Fence (word of mouth)" 101, "Black market bazaar" 24, its text "Ask around at the right tavern…"; the measuring seat filed it under institutionServiceKeys.generated.js, which prints nothing). RULED: a service is never printed under the name of a house the roster does not hold: the fallback's service reads the roster's own criminal house (and takes its label) or carries a plain name that names no house (new wording, listed with five towns across tiers, a siege among them); "the right tavern" only where a tavern stands (one cure for the whole sentence). Measure first on the 720; read ten after; a declared move confined to the services.
+
 ### Found on the way (EXECUTED; NAMED, not changed: no adjacent repair)
 
 - **The same presumption in other lines of CRISIS_SUMMARY_POOLS** (counted over the 960 at 8e9046124, where each prints;
   the call sites pass no roster, so a cure is a rewording): "Those who keep order in {name} …" (defence.official of
   indebted, insurgency, mass_migration arrivals, religious_conversion, slave_revolt; "everyone set to keep order" in
-  slave_revolt's cover and defence.watch): printed in 33 towns with no watch, militia, garrison or company and 37 with
-  one; "the merchants" (occupied cover.trade 6 towns with no market or merchant house of 12; succession_void
+  slave_revolt's cover and defence.watch): 30 prints (a town and surface each) with no watch, militia, garrison or
+  company, 38 with one (corrected: 1df088d31 said 33 and 37); "the merchants" (occupied cover.trade 6 towns with no market or merchant house of 12; succession_void
   cover.trade "Big business waits … the merchants hold back their coin", 2 of 14; insurgency cover.trade 2 of 9);
   "streets" in thorps and hamlets (indebted cover, plague_onset cover and tonight.watch, religious_conversion cover,
-  succession_void cover.watch, insurgency defence.watch, occupied overview.local): 31 small towns, PDF cover and
+  succession_void cover.watch, insurgency defence.watch, occupied overview.local, religious_conversion defence.local):
+  33 prints in thorps and hamlets (corrected: 1df088d31 said 31 small towns), the PDF cover and
   overview and the Tonight sheet mostly (CENSUS-2's render covers neither the PDF nor the Tonight sheet).
   Recommendation: one rewording pass of the table by its own law, the same shape as b6208d93a.
 - **The Succession Crisis event under a council** (historyGenerator.js, fd's): its description "The ruler of the time was
