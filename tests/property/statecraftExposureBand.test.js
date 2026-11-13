@@ -132,8 +132,16 @@ describe('STATECRAFT-BAND U1 — the seeded run: the chain at the band', () => {
     // mutant is still caught, 59 > 57, and the live 38 sits under it), the floor at the floor-to-live
     // ratio 5:7 (38 × 5/7 → 27), the mobilization floor the dark twin − 10 (82 − 10 = 72). The head
     // again RAISES mobilizations far above the twin (338 vs 82); recorded, not pinned, as before.
+    // RE-MEASURED 2026-11-13 (STYLE-2-MERGE point 46, the COHERENCE-POWERS merge 6aeaa4154; THE MOBILIZATION FLOOR, a driven figure
+    // of the coherence wave that the lane's drafted record hands to the merge seat, keyed by this note's own rule). The probe, this
+    // test's seeded-run code at the merged tree: 0.01 (live) -> scandals 28, mobilizations 27; head dark -> mobilizations 12. THE
+    // CAUSE: the dual hat re-seats the four courts' rulers from their houses, and the war decision reads the ruler (the lane's
+    // thirty-realm count: realms losing half their mobilized weeks 4 of 30, totals -52.7%). Only the mobilization floor is red, so
+    // only it is re-keyed: the dark twin - 10 (12 - 10 = 2). The scandal band holds (28 inside 27-57); the 0.06 mutant was not
+    // re-run here (SIGHT_TUNING is frozen to an import-time write), so the ceiling stays as recorded. The head again RAISES
+    // mobilizations above the twin (27 vs 12); recorded, not pinned.
     expect.soft(scandals, 'spy scandals in twenty years').toBeGreaterThanOrEqual(27);
     expect.soft(scandals).toBeLessThanOrEqual(57);
-    expect.soft(mobilizations, 'war mobilizations in twenty years (the dark twin: 82)').toBeGreaterThanOrEqual(72);
+    expect.soft(mobilizations, 'war mobilizations in twenty years (the dark twin: 12)').toBeGreaterThanOrEqual(2);
   }, 480_000);
 });
