@@ -54,4 +54,11 @@ describe('W2-FIX-DATA-5: round three\'s rows in the data lane\'s files', () => {
     expect(historyText(town)).not.toMatch(/civic buildings|cathedral|The Great Construction/i);
   }, 60_000);
 
+  test('ww-544 (HIGH): no hook of an ailing or poisoned ruler while the seat stands empty (rww-hamlet-succession_void-1)', () => {
+    const town = bornInc('rww-hamlet-succession_void-1');
+    expect((Array.isArray(town.stress) ? town.stress : [town.stress]).map((/** @type {any} */ x) => x?.type)).toContain('succession_void');
+    expect(historyText(town)).not.toMatch(/ailing ruler wants|poisoning the ruler/);
+    expect(historyText(town)).toContain('A would-be heir approaches outsiders');
+  }, 60_000);
+
 });

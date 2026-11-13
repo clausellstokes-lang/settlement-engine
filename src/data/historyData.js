@@ -1137,8 +1137,8 @@ export const HISTORICAL_EVENTS_DATA = [
     ],
     plotHooks: [
       "A would-be heir approaches outsiders to investigate a rival's past",
-      { text: 'The ailing ruler wants a final errand completed before naming a successor', excludes: ['ruler: council'] }, // CENSUS-3d unit 6
-      { text: 'Someone is poisoning the ruler slowly, and someone in the household knows', excludes: ['ruler: council'] }, // CENSUS-3d unit 6
+      { text: 'The ailing ruler wants a final errand completed before naming a successor', excludes: ['ruler: council', 'crisis: succession_void'] }, // CENSUS-3d unit 6; W2-FIX-DATA-5 (ww-544): no living ruler while the seat stands empty
+      { text: 'Someone is poisoning the ruler slowly, and someone in the household knows', excludes: ['ruler: council', 'crisis: succession_void'] }, // CENSUS-3d unit 6; W2-FIX-DATA-5 (ww-545's sibling): the same
     ],
     severity: ['minor', 'major'],
   },
