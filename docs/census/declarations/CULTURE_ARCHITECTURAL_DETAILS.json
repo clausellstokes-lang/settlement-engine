@@ -350,7 +350,9 @@
         {
           "lineId": "CULTURE_PROFILES.mesoamerican.architecturalDetails[0]",
           "text": "a raised ceremonial precinct overlooks a broad and busy open plaza",
-          "needs": [],
+          "needs": [
+            "tier: ≥ town"
+          ],
           "excludes": [],
           "crisis": null,
           "colour": false,
