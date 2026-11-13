@@ -21,9 +21,10 @@ const MIRROR = [withElement(recs[0], 'tide', 'The Fair of the Tide'), withElemen
 
 describe('the water-keyed rows print only where the water is', () => {
   // RE-KEYED (R2-CODE-B item 4, the cold list REVIEW-W2A-3 #536): the Market element declares its market too.
-  it('declares exactly the three water elements, and the market', () => {
+  it('declares exactly the three water elements, the market and the forge', () => {
     const declared = Object.fromEntries(TRADITION_ELEMENTS.filter((e) => e.needs).map((e) => [e.id, e.needs]));
-    expect(declared).toEqual({ 'first-landing': ['navigable'], river: ['river'], tide: ['coast'], market: ['market'] });
+    // R2-CODE-B-SIDE item 6: the Forge element declares its smith.
+    expect(declared).toEqual({ 'first-landing': ['navigable'], river: ['river'], tide: ['coast'], market: ['market'], forge: ['institution: smith'] });
   });
   it('a plains road prints neither the Tide nor the River; the Hearth stands', () => {
     render(<TraditionsTab settlement={{ ...BASE, traditions: MIRROR }} />);
