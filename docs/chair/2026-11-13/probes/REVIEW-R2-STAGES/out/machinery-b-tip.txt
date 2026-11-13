@@ -1,0 +1,44 @@
+7 page Summary/Crisis :: countRange
+      Mills (2-5) · held by Sak Xul    ⟵  / 
+      Bakers (5-15) · held by Tao Xoc    ⟵  / 
+      Mills (2-5) · held by Theofanis Melas    ⟵  / 
+      Bakers (5-15) · held by Kyr Mosele    ⟵  / 
+1 page Summary/Crisis :: gate
+      Gates (if walled)    ⟵  / 
+1 page Systems/Defense :: gate
+      Gates (if walled)    ⟵  / 
+1 page Systems/Economics :: countRange
+      Via:major monasteries (5-10) · great cathedral    ⟵  / 
+47 page Systems/Institutions :: countRange
+      Craft guilds (30-80)REQCrafts    ⟵  / 
+      Merchant guilds (15-40)Economy    ⟵  / 
+      Houses of worship (10-30)REQReligious    ⟵  / 
+      Dwellings (5-25)REQInfrastructure    ⟵  / 
+1 page Systems/Outlook :: countRange
+      5 institutions critically impaired by siege: Taverns (5-20), Town granary, Mills, Town wat    ⟵  / 
+40 page Systems/Power :: countRange
+      Merchant guilds (15-40)    ⟵  / 
+      Craft guilds (30-80)    ⟵  / 
+      Houses of worship (10-30)    ⟵  / 
+      Zosime Phakrases, the dean (Parish churches (10-30)) · brings protection and decisions · a    ⟵  / 
+47 page Systems/Services :: countRange
+      Houses of worship (10-30)    ⟵  / 
+      Craft guilds (30-80)    ⟵  / 
+      Merchant guilds (15-40)    ⟵  / 
+      Dwellings (5-25)    ⟵  / 
+85 pdf-canon_dossier :: countRange
+      Houses of worship (10-30)    ⟵ Religious / 2 institutions
+      Merchant guilds (15-40)    ⟵ Merchant guilds (3-8) / >
+      Craft guilds (30-80)    ⟵ Rope (standard) / : Hemp rope in coils. Standard gauges st
+      Merchant guilds (3-8)    ⟵ Marshlands (depleted) / >
+2 pdf-canon_dossier :: gate
+      Gates (if walled).    ⟵ Town watch, held by Rashid al-Farabi. / Town walls.
+      Gates (if walled)    ⟵ FORCED / Gated stone defences. Costly to raise an
+85 pdf-draft_brief :: countRange
+      Houses of worship (10-30)    ⟵ Religious / 2 institutions
+      Merchant guilds (15-40)    ⟵ Merchant guilds (3-8) / >
+      Craft guilds (30-80)    ⟵ Rope (standard) / : Hemp rope in coils. Standard gauges st
+      Merchant guilds (3-8)    ⟵ Marshlands (depleted) / >
+2 pdf-draft_brief :: gate
+      Gates (if walled).    ⟵ Town watch, held by Rashid al-Farabi. / Town walls.
+      Gates (if walled)    ⟵ FORCED / Gated stone defences. Costly to raise an

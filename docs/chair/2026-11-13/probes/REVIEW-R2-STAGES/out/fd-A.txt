@@ -1,0 +1,14 @@
+births base 720 tip 720 missing 0; leaf diffs 281; towns moved 188
+family pressureSentence: 90 towns
+family npcs: 75 towns
+family arrivalScene: 34 towns
+family powerStructure: 26 towns
+family economicViability: 14 towns
+  90	.pressureSentence	 e.g. r2r-thorp-0
+  74	.npcs[].secret.what	 e.g. r2r-thorp-45
+  34	.arrivalScene	 e.g. r2r-thorp-53
+  26	.powerStructure.recentConflict	 e.g. r2r-thorp-0
+  14	.economicViability.plotHooks[].category	 e.g. r2r-thorp-45
+  14	.economicViability.plotHooks[].hook	 e.g. r2r-thorp-45
+  14	.npcs[].goal.short	 e.g. r2r-village-21
+  1	.npcs[].secret.stakes	 e.g. r2r-metropolis-50

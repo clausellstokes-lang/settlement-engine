@@ -1,0 +1,3 @@
+births base 720 tip 720 missing 0; leaf diffs 34; towns moved 34
+family arrivalScene: 34 towns
+  34	.arrivalScene	 e.g. r2r-thorp-53

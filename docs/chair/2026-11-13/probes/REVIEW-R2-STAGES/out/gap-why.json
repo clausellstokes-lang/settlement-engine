@@ -1,0 +1,3124 @@
+[
+ {
+  "seed": "r2r-thorp-9",
+  "line": "No one here works the medicinal herbs near Raasmahal.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Subsistence farming",
+   "Faith & Worship[running] key=null via=Parish church"
+  ],
+  "cfg": "hunting_grounds,ancient_grove,iron_deposits",
+  "depl": "",
+  "keys": [
+   "ancient_grove"
+  ],
+  "why": [
+   "Foraging & Smallholding on ancient_grove via Subsistence farming"
+  ]
+ },
+ {
+  "seed": "r2r-thorp-23",
+  "line": "No one here works the medicinal herbs near Zelenosk.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=marshlands via=Subsistence farming",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "marshlands,hot_springs,stone_quarry",
+  "depl": "",
+  "keys": [
+   "marshlands",
+   "hot_springs"
+  ],
+  "why": [
+   "Foraging & Smallholding on marshlands via Subsistence farming"
+  ]
+ },
+ {
+  "seed": "r2r-thorp-33",
+  "line": "No one here works the medicinal herbs near Prabhamala.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Subsistence farming",
+   "Faith & Worship[running] key=null via=Parish church"
+  ],
+  "cfg": "grazing_land,ancient_grove,gemstone_deposits",
+  "depl": "",
+  "keys": [
+   "ancient_grove"
+  ],
+  "why": [
+   "Foraging & Smallholding on ancient_grove via Subsistence farming"
+  ]
+ },
+ {
+  "seed": "r2r-thorp-34",
+  "line": "No one here works the medicinal herbs near Tihoin.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Subsistence farming",
+   "Faith & Worship[running] key=null via=Parish church+Wayside shrine"
+  ],
+  "cfg": "grazing_land,ancient_grove,stone_quarry",
+  "depl": "",
+  "keys": [
+   "ancient_grove"
+  ],
+  "why": [
+   "Foraging & Smallholding on ancient_grove via Subsistence farming"
+  ]
+ },
+ {
+  "seed": "r2r-thorp-35",
+  "line": "No one here works the medicinal herbs near Fortemonte.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Subsistence farming",
+   "Faith & Worship[running] key=null via=Parish church"
+  ],
+  "cfg": "hunting_grounds,ancient_grove,stone_quarry",
+  "depl": "",
+  "keys": [
+   "ancient_grove"
+  ],
+  "why": [
+   "Foraging & Smallholding on ancient_grove via Subsistence farming"
+  ]
+ },
+ {
+  "seed": "r2r-thorp-42",
+  "line": "No one here works the medicinal herbs near Qaratala.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Subsistence farming",
+   "Faith & Worship[running] key=null via=Parish church"
+  ],
+  "cfg": "hunting_grounds,ancient_grove,stone_quarry",
+  "depl": "",
+  "keys": [
+   "ancient_grove"
+  ],
+  "why": [
+   "Foraging & Smallholding on ancient_grove via Subsistence farming"
+  ]
+ },
+ {
+  "seed": "r2r-thorp-48",
+  "line": "No one here works the medicinal herbs near Huawan.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[running] key=foraging_areas via=Subsistence farming",
+   "Faith & Worship[running] key=null via=Parish church+Wayside shrine"
+  ],
+  "cfg": "foraging_areas,ancient_grove,gemstone_deposits",
+  "depl": "",
+  "keys": [
+   "foraging_areas",
+   "ancient_grove"
+  ],
+  "why": [
+   "Foraging & Smallholding on foraging_areas via Subsistence farming"
+  ]
+ },
+ {
+  "seed": "r2r-hamlet-12",
+  "line": "No one here works the medicinal herbs near Aristoburg.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Subsistence farming",
+   "Faith & Worship[running] key=null via=Parish church",
+   "Taverns & Social Life[operational] key=null via=Alehouse"
+  ],
+  "cfg": "managed_forest,ancient_grove,precious_metals,coal_deposits",
+  "depl": "",
+  "keys": [
+   "ancient_grove"
+  ],
+  "why": [
+   "Foraging & Smallholding on ancient_grove via Subsistence farming"
+  ]
+ },
+ {
+  "seed": "r2r-hamlet-15",
+  "line": "No one here works the animal hides near Sübeteiordu.",
+  "res": "animal hides",
+  "chains": [
+   "Mining & Quarrying[vulnerable] key=coal_deposits via=Peat cutter",
+   "Livestock & Dairy[running] key=grazing_land via=Common grazing land+Dairy farmer",
+   "Fuel & Heating[running] key=coal_deposits via=Peat cutter",
+   "Taverns & Social Life[operational] key=null via=Alehouse",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "grazing_land,crossroads_position,coal_deposits",
+  "depl": "",
+  "keys": [
+   "grazing_land"
+  ],
+  "why": [
+   "Livestock & Dairy on grazing_land via Common grazing land+Dairy farmer"
+  ]
+ },
+ {
+  "seed": "r2r-hamlet-21",
+  "line": "No one here works the medicinal herbs near Celoburg.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Subsistence farming",
+   "Grain & Bread[running] key=grain_fields via=Mill+Access to external mill",
+   "Faith & Worship[running] key=null via=Parish church+Wayside shrine",
+   "Pilgrimage & Holy Sites[running] key=hot_springs via=Parish church"
+  ],
+  "cfg": "grain_fields,hot_springs,iron_deposits,ancient_grove",
+  "depl": "",
+  "keys": [
+   "hot_springs",
+   "ancient_grove"
+  ],
+  "why": [
+   "Foraging & Smallholding on ancient_grove via Subsistence farming",
+   "Pilgrimage & Holy Sites on hot_springs via Parish church"
+  ]
+ },
+ {
+  "seed": "r2r-hamlet-23",
+  "line": "No one here works the animal hides near Castelsaltus.",
+  "res": "animal hides",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Subsistence farming",
+   "Livestock & Dairy[running] key=grazing_land via=Common grazing land+Dairy farmer",
+   "Faith & Worship[running] key=null via=Parish church",
+   "Taverns & Social Life[operational] key=null via=Alehouse"
+  ],
+  "cfg": "grazing_land,ancient_grove,precious_metals",
+  "depl": "",
+  "keys": [
+   "grazing_land"
+  ],
+  "why": [
+   "Livestock & Dairy on grazing_land via Common grazing land+Dairy farmer"
+  ]
+ },
+ {
+  "seed": "r2r-hamlet-24",
+  "line": "No one here works the alpine pastures near Jayakota.",
+  "res": "alpine pastures",
+  "chains": [
+   "Livestock & Dairy[vulnerable] key=alpine_pasture via=Common grazing land",
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Subsistence farming",
+   "Faith & Worship[running] key=null via=Parish church"
+  ],
+  "cfg": "alpine_pasture,hot_springs_mineral,marshlands,ancient_grove,precious_metals",
+  "depl": "",
+  "keys": [],
+  "why": []
+ },
+ {
+  "seed": "r2r-hamlet-30",
+  "line": "No one here works the animal hides near Karakkala.",
+  "res": "animal hides",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Subsistence farming",
+   "Livestock & Dairy[running] key=grazing_land via=Common grazing land",
+   "Faith & Worship[running] key=null via=Parish church",
+   "Taverns & Social Life[operational] key=null via=Alehouse"
+  ],
+  "cfg": "hunting_grounds,ancient_grove,coal_deposits,grazing_land",
+  "depl": "",
+  "keys": [
+   "hunting_grounds",
+   "grazing_land"
+  ],
+  "why": [
+   "Livestock & Dairy on grazing_land via Common grazing land"
+  ]
+ },
+ {
+  "seed": "r2r-hamlet-37",
+  "line": "No one here works the medicinal herbs near Madinatdarya.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Subsistence farming",
+   "Faith & Worship[running] key=null via=Parish church+Wayside shrine"
+  ],
+  "cfg": "hunting_grounds,ancient_grove,gemstone_deposits",
+  "depl": "",
+  "keys": [
+   "ancient_grove"
+  ],
+  "why": [
+   "Foraging & Smallholding on ancient_grove via Subsistence farming"
+  ]
+ },
+ {
+  "seed": "r2r-hamlet-43",
+  "line": "No one here works the alpine pastures near Devamala.",
+  "res": "alpine pastures",
+  "chains": [
+   "Livestock & Dairy[vulnerable] key=alpine_pasture via=Common grazing land",
+   "Foraging & Smallholding[vulnerable] key=marshlands via=Subsistence farming",
+   "Pilgrimage & Holy Sites[running] key=hot_springs via=Parish church",
+   "Faith & Worship[operational] key=null via=Parish church+Wayside shrine"
+  ],
+  "cfg": "alpine_pasture,hot_springs_mineral,marshlands,hot_springs,stone_quarry",
+  "depl": "stone_quarry",
+  "keys": [],
+  "why": []
+ },
+ {
+  "seed": "r2r-hamlet-43",
+  "line": "No one here works the mineral hot springs near Devamala.",
+  "res": "mineral hot springs",
+  "chains": [
+   "Livestock & Dairy[vulnerable] key=alpine_pasture via=Common grazing land",
+   "Foraging & Smallholding[vulnerable] key=marshlands via=Subsistence farming",
+   "Pilgrimage & Holy Sites[running] key=hot_springs via=Parish church",
+   "Faith & Worship[operational] key=null via=Parish church+Wayside shrine"
+  ],
+  "cfg": "alpine_pasture,hot_springs_mineral,marshlands,hot_springs,stone_quarry",
+  "depl": "stone_quarry",
+  "keys": [
+   "hot_springs_mineral",
+   "hot_springs"
+  ],
+  "why": [
+   "Pilgrimage & Holy Sites on hot_springs via Parish church"
+  ]
+ },
+ {
+  "seed": "r2r-hamlet-46",
+  "line": "No one here works the medicinal herbs near Celogorod.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Subsistence farming",
+   "Faith & Worship[running] key=null via=Parish church"
+  ],
+  "cfg": "hunting_grounds,ancient_grove,stone_quarry",
+  "depl": "hunting_grounds",
+  "keys": [
+   "ancient_grove"
+  ],
+  "why": [
+   "Foraging & Smallholding on ancient_grove via Subsistence farming"
+  ]
+ },
+ {
+  "seed": "r2r-hamlet-51",
+  "line": "No one here works the stone near Velipol.",
+  "res": "stone",
+  "chains": [
+   "Fortifications[vulnerable] key=stone_quarry via=Palisade",
+   "Grain & Bread[running] key=grain_fields via=Mill+Access to external mill",
+   "Foraging & Smallholding[running] key=foraging_areas via=Subsistence farming",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "foraging_areas,crossroads_position,stone_quarry,grain_fields",
+  "depl": "",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Fortifications on stone_quarry via Palisade"
+  ]
+ },
+ {
+  "seed": "r2r-hamlet-57",
+  "line": "No one here works the animal hides near Ulanköl.",
+  "res": "animal hides",
+  "chains": [
+   "Livestock & Dairy[running] key=grazing_land via=Common grazing land+Dairy farmer+Stable yard",
+   "Horse & Animal Trade[running] key=grazing_land via=Stable yard",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "grazing_land,crossroads_position,iron_deposits",
+  "depl": "",
+  "keys": [
+   "grazing_land"
+  ],
+  "why": [
+   "Livestock & Dairy on grazing_land via Common grazing land+Dairy farmer+Stable yard",
+   "Horse & Animal Trade on grazing_land via Stable yard"
+  ]
+ },
+ {
+  "seed": "r2r-village-2",
+  "line": "No one here works the timber near Staroka.",
+  "res": "timber",
+  "chains": [
+   "Timber & Lumber[vulnerable] key=shipbuilding_timber via=Thatcher",
+   "Boatbuilding & River Transport[vulnerable] key=shipbuilding_timber via=River boatyard+River ferry+Boatyard",
+   "Salt & Preservation[running] key=salt_flats via=Salt works",
+   "Fishing & Seafood[running] key=fishing_grounds via=Fisher's landing+Salt works+Weekly market+Fish market",
+   "Furs & Pelts[entrepot] key=hunting_grounds via=Hunter's lodge",
+   "Strategic Crossroads Toll[entrepot] key=crossroads_position via=Toll bridge",
+   "Taverns & Social Life[operational] key=null via=Travelers' inn",
+   "Faith & Worship[operational] key=null via=Parish church",
+   "Caravan & Overland Trade[vulnerable] key=null via=Pack animal trader"
+  ],
+  "cfg": "deep_harbour,shipbuilding_timber,magical_node,salt_flats,fishing_grounds",
+  "depl": "",
+  "keys": [
+   "shipbuilding_timber"
+  ],
+  "why": [
+   "Timber & Lumber on shipbuilding_timber via Thatcher",
+   "Boatbuilding & River Transport on shipbuilding_timber via River boatyard+River ferry+Boatyard"
+  ]
+ },
+ {
+  "seed": "r2r-village-4",
+  "line": "No one here works the animal hides near Huaji.",
+  "res": "animal hides",
+  "chains": [
+   "Mining & Quarrying[vulnerable] key=stone_quarry via=Stone quarry",
+   "Grain & Bread[running] key=grain_fields via=Mill",
+   "Livestock & Dairy[running] key=grazing_land via=Common grazing land+Dairy farmer",
+   "Food Processing[running] key=grain_fields via=Dairy farmer",
+   "Stone & Construction[running] key=stone_quarry via=Stone quarry",
+   "Fuel & Heating[running] key=coal_deposits via=Peat cutter",
+   "Faith & Worship[running] key=null via=Parish church",
+   "Taverns & Social Life[operational] key=null via=Travelers' inn",
+   "News & Public Information[vulnerable] key=null via=Cartographer's guild",
+   "Caravan & Overland Trade[vulnerable] key=null via=Carriers' hiring hall"
+  ],
+  "cfg": "grazing_land,ancient_grove,coal_deposits,grain_fields,stone_quarry",
+  "depl": "",
+  "keys": [
+   "grazing_land"
+  ],
+  "why": [
+   "Livestock & Dairy on grazing_land via Common grazing land+Dairy farmer"
+  ]
+ },
+ {
+  "seed": "r2r-village-5",
+  "line": "No one here works the timber near Karakabad.",
+  "res": "timber",
+  "chains": [
+   "Boatbuilding & River Transport[vulnerable] key=shipbuilding_timber via=River ferry",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "deep_harbour,shipbuilding_timber,magical_node,salt_flats,fishing_grounds",
+  "depl": "",
+  "keys": [
+   "shipbuilding_timber"
+  ],
+  "why": [
+   "Boatbuilding & River Transport on shipbuilding_timber via River ferry"
+  ]
+ },
+ {
+  "seed": "r2r-village-23",
+  "line": "No one here works the mineral hot springs near Padmatala.",
+  "res": "mineral hot springs",
+  "chains": [
+   "Divine & Magical Healing[running] key=hot_springs via=Parish church",
+   "Pilgrimage & Holy Sites[running] key=hot_springs via=Parish church",
+   "Taverns & Social Life[operational] key=null via=Travelers' inn",
+   "News & Public Information[vulnerable] key=null via=Cartographer's guild",
+   "Faith & Worship[operational] key=null via=Parish church",
+   "Caravan & Overland Trade[vulnerable] key=null via=Waystation"
+  ],
+  "cfg": "hot_springs_mineral,mountain_timber,hunting_grounds,hot_springs,gemstone_deposits",
+  "depl": "",
+  "keys": [
+   "hot_springs_mineral",
+   "hot_springs"
+  ],
+  "why": [
+   "Divine & Magical Healing on hot_springs via Parish church",
+   "Pilgrimage & Holy Sites on hot_springs via Parish church"
+  ]
+ },
+ {
+  "seed": "r2r-village-34",
+  "line": "No one here works the alpine pastures near Lagoorum.",
+  "res": "alpine pastures",
+  "chains": [
+   "Livestock & Dairy[vulnerable] key=alpine_pasture via=Common grazing land",
+   "Faith & Worship[running] key=null via=Parish church",
+   "Taverns & Social Life[operational] key=null via=Travelers' inn"
+  ],
+  "cfg": "alpine_pasture,hot_springs_mineral,hunting_grounds,ancient_grove,coal_deposits",
+  "depl": "",
+  "keys": [],
+  "why": []
+ },
+ {
+  "seed": "r2r-village-36",
+  "line": "No one here works the timber near Pianofossae.",
+  "res": "timber",
+  "chains": [
+   "Timber & Lumber[vulnerable] key=shipbuilding_timber via=Thatcher",
+   "Boatbuilding & River Transport[vulnerable] key=shipbuilding_timber via=River boatyard+River ferry+Boatyard",
+   "Smuggling & Contraband[entrepot] key=null via=Smuggling waypoint",
+   "Salt & Preservation[entrepot] key=salt_flats via=Salt works",
+   "Taverns & Social Life[operational] key=null via=Travelers' inn",
+   "Faith & Worship[operational] key=null via=Parish church",
+   "Caravan & Overland Trade[vulnerable] key=null via=Pack animal trader"
+  ],
+  "cfg": "deep_harbour,shipbuilding_timber,ancient_ruins,magical_node",
+  "depl": "ancient_ruins",
+  "keys": [
+   "shipbuilding_timber"
+  ],
+  "why": [
+   "Timber & Lumber on shipbuilding_timber via Thatcher",
+   "Boatbuilding & River Transport on shipbuilding_timber via River boatyard+River ferry+Boatyard"
+  ]
+ },
+ {
+  "seed": "r2r-village-38",
+  "line": "No one here works the medicinal herbs near Drumdale.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Grain & Bread[running] key=grain_fields via=Mill",
+   "Livestock & Dairy[running] key=grazing_land via=Stable master+Common grazing land",
+   "Horse & Animal Trade[running] key=grazing_land via=Stable master",
+   "Divine & Magical Healing[running] key=hot_springs via=Parish church",
+   "Pilgrimage & Holy Sites[running] key=hot_springs via=Parish church",
+   "Salt & Preservation[entrepot] key=salt_flats via=Salt works",
+   "Taverns & Social Life[operational] key=null via=Travelers' inn",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "grazing_land,hot_springs,coal_deposits,grain_fields",
+  "depl": "coal_deposits",
+  "keys": [
+   "hot_springs"
+  ],
+  "why": [
+   "Divine & Magical Healing on hot_springs via Parish church",
+   "Pilgrimage & Holy Sites on hot_springs via Parish church"
+  ]
+ },
+ {
+  "seed": "r2r-village-41",
+  "line": "No one here works the timber near Hukou.",
+  "res": "timber",
+  "chains": [
+   "Boatbuilding & River Transport[vulnerable] key=shipbuilding_timber via=River boatyard+River ferry+Boatyard",
+   "Salt & Preservation[running] key=salt_flats via=Salt works",
+   "Fishing & Seafood[running] key=fishing_grounds via=Fisher's landing+Salt works",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "fishing_grounds,shipbuilding_timber,ancient_ruins,deep_harbour,salt_flats",
+  "depl": "",
+  "keys": [
+   "shipbuilding_timber"
+  ],
+  "why": [
+   "Boatbuilding & River Transport on shipbuilding_timber via River boatyard+River ferry+Boatyard"
+  ]
+ },
+ {
+  "seed": "r2r-village-45",
+  "line": "No one here works the timber near Mönkhkul.",
+  "res": "timber",
+  "chains": [
+   "Fishing & Seafood[vulnerable] key=fishing_grounds via=Fisher's landing+Salt works+Weekly market+Fish market",
+   "Boatbuilding & River Transport[vulnerable] key=shipbuilding_timber via=River boatyard+River ferry+Boatyard",
+   "Salt & Preservation[running] key=salt_flats via=Salt works",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "fishing_grounds,shipbuilding_timber,ancient_ruins,salt_flats",
+  "depl": "fishing_grounds",
+  "keys": [
+   "shipbuilding_timber"
+  ],
+  "why": [
+   "Boatbuilding & River Transport on shipbuilding_timber via River boatyard+River ferry+Boatyard"
+  ]
+ },
+ {
+  "seed": "r2r-village-46",
+  "line": "No one here works the timber near Glenheath.",
+  "res": "timber",
+  "chains": [
+   "Timber & Lumber[vulnerable] key=shipbuilding_timber via=Thatcher",
+   "Boatbuilding & River Transport[vulnerable] key=shipbuilding_timber via=River boatyard+River ferry+Boatyard",
+   "Salt & Preservation[running] key=salt_flats via=Salt works",
+   "Fishing & Seafood[running] key=fishing_grounds via=Fisher's landing+Salt works",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "fishing_grounds,shipbuilding_timber,magical_node,salt_flats,deep_harbour",
+  "depl": "",
+  "keys": [
+   "shipbuilding_timber"
+  ],
+  "why": [
+   "Timber & Lumber on shipbuilding_timber via Thatcher",
+   "Boatbuilding & River Transport on shipbuilding_timber via River boatyard+River ferry+Boatyard"
+  ]
+ },
+ {
+  "seed": "r2r-village-55",
+  "line": "No one here works the wool near Megaikon.",
+  "res": "wool",
+  "chains": [
+   "Iron & Metalwork[impaired] key=iron_deposits via=Blacksmith",
+   "Livestock & Dairy[running] key=grazing_land via=Common grazing land",
+   "Textiles & Cloth[running] key=grazing_land via=Dyer",
+   "Cloth Finishing & Clothing[running] key=grazing_land via=Dyer",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "grazing_land,crossroads_position,iron_deposits,stone_quarry,ancient_ruins",
+  "depl": "iron_deposits,stone_quarry",
+  "keys": [
+   "grazing_land"
+  ],
+  "why": [
+   "Livestock & Dairy on grazing_land via Common grazing land",
+   "Textiles & Cloth on grazing_land via Dyer",
+   "Cloth Finishing & Clothing on grazing_land via Dyer"
+  ]
+ },
+ {
+  "seed": "r2r-village-56",
+  "line": "No one here works the stone near Treford.",
+  "res": "stone",
+  "chains": [
+   "Fishing & Seafood[vulnerable] key=river_fish via=Fisher's landing+Salt works",
+   "Fortifications[vulnerable] key=stone_quarry via=Palisade",
+   "River Fishing[running] key=river_fish via=Fisher's landing",
+   "Divine & Magical Healing[running] key=hot_springs via=Parish church",
+   "Pilgrimage & Holy Sites[running] key=hot_springs via=Parish church",
+   "Salt & Preservation[entrepot] key=salt_flats via=Salt works",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "river_fish,hunting_grounds,hot_springs,stone_quarry",
+  "depl": "",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Fortifications on stone_quarry via Palisade"
+  ]
+ },
+ {
+  "seed": "r2r-village-57",
+  "line": "No one here works the timber near Tlalche.",
+  "res": "timber",
+  "chains": [
+   "Timber & Lumber[running] key=managed_forest via=Carpenter",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "mountain_timber,hot_springs_mineral,managed_forest,defended_pass,coal_deposits",
+  "depl": "mountain_timber",
+  "keys": [
+   "managed_forest"
+  ],
+  "why": [
+   "Timber & Lumber on managed_forest via Carpenter"
+  ]
+ },
+ {
+  "seed": "r2r-town-8",
+  "line": "No one here works the stone near Hagiokastro.",
+  "res": "stone",
+  "chains": [
+   "Weapons & Armor[impaired] key=iron_deposits via=Blacksmiths (3-10)",
+   "Iron & Metalwork[impaired] key=iron_deposits via=Blacksmith+Blacksmiths (3-10)",
+   "Standing Watch[vulnerable] key=null via=Town watch",
+   "Taverns & Social Life[vulnerable] key=null via=Taverns (5-20)+Public bathhouse",
+   "Fortifications[vulnerable] key=stone_quarry via=Town walls",
+   "Herbalism & Remedies[running] key=foraging_areas via=Apothecary",
+   "Beekeeping & Wax[running] key=foraging_areas via=Apothecary (established)",
+   "Faith & Worship[running] key=null via=Parish church+Monastery",
+   "Gambling & Arena[operational] key=null via=Gambling den",
+   "Law & Governance[operational] key=null via=Town hall",
+   "Caravan & Overland Trade[vulnerable] key=null via=Caravaneer's post+Carriers' guild"
+  ],
+  "cfg": "foraging_areas,ancient_grove,stone_quarry,iron_deposits,precious_metals",
+  "depl": "iron_deposits,precious_metals",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Fortifications on stone_quarry via Town walls"
+  ]
+ },
+ {
+  "seed": "r2r-town-13",
+  "line": "No one here works the stone near Vatankher.",
+  "res": "stone",
+  "chains": [
+   "Standing Garrison[vulnerable] key=null via=Barracks+Town watch",
+   "Taverns & Social Life[vulnerable] key=null via=Taverns (5-20)",
+   "Fortifications[vulnerable] key=stone_quarry via=Town walls+Citadel",
+   "Spices & Dyes[running] key=null via=Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Faith & Worship[operational] key=null via=Parish church",
+   "Law & Governance[operational] key=null via=Courthouse+Town hall"
+  ],
+  "cfg": "foraging_areas,crossroads_position,coal_deposits,stone_quarry,gemstone_deposits",
+  "depl": "foraging_areas,coal_deposits",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Fortifications on stone_quarry via Town walls+Citadel"
+  ]
+ },
+ {
+  "seed": "r2r-town-16",
+  "line": "No one here works the stone near Birkhel.",
+  "res": "stone",
+  "chains": [
+   "Grain & Bread[impaired] key=grain_fields via=Mills (2-5)+Mill",
+   "Livestock & Dairy[impaired] key=grazing_land via=Cooper",
+   "Brewing & Malting[impaired] key=grain_fields via=Cooper",
+   "Horse & Animal Trade[impaired] key=grazing_land via=Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Textiles & Cloth[impaired] key=grazing_land via=Tailor's guild+Weavers/Textile workers+Dyer",
+   "Cloth Finishing & Clothing[impaired] key=grazing_land via=Tailor+Dyer+Tailor's guild",
+   "Leatherworking & Cordwaining[impaired] key=grazing_land via=Tanner (established)",
+   "Standing Garrison[vulnerable] key=null via=Barracks+Town watch",
+   "Taverns & Social Life[vulnerable] key=null via=Taverns (5-20)",
+   "Fortifications[running] key=stone_quarry via=Town walls",
+   "Stone & Construction[running] key=stone_quarry via=Brickmaker",
+   "Faith & Worship[running] key=null via=Parish church",
+   "Law & Governance[operational] key=null via=Town hall"
+  ],
+  "cfg": "grain_fields,ancient_grove,stone_quarry,grazing_land",
+  "depl": "grain_fields,grazing_land",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Fortifications on stone_quarry via Town walls",
+   "Stone & Construction on stone_quarry via Brickmaker"
+  ]
+ },
+ {
+  "seed": "r2r-town-20",
+  "line": "No one here works the stone near Sübeteikhurel.",
+  "res": "stone",
+  "chains": [
+   "Weapons & Armor[impaired] key=iron_deposits via=Blacksmiths (3-10)",
+   "Bowyer & fletcher[impaired] key=managed_forest via=Craft guilds (5-15)",
+   "Timber & Lumber[impaired] key=managed_forest via=Carpenters (5-15)+Carpenter",
+   "Iron & Metalwork[impaired] key=iron_deposits via=Blacksmith+Blacksmiths (3-10)",
+   "Fishing & Seafood[vulnerable] key=river_fish via=Weekly market",
+   "Standing Watch[vulnerable] key=null via=Town watch",
+   "Fortifications[vulnerable] key=stone_quarry via=Town walls+Citadel",
+   "Grain & Bread[running] key=grain_fields via=Mills (2-5)+Mill",
+   "River Fishing[running] key=river_fish via=Weekly market",
+   "Divine & Magical Healing[running] key=hot_springs via=Parish church",
+   "Food Processing[running] key=grain_fields via=Bakers (5-15)",
+   "Pilgrimage & Holy Sites[running] key=hot_springs via=Parish church",
+   "Storage & Logistics[entrepot] key=null via=Caravaneer's post",
+   "Strategic Crossroads Toll[entrepot] key=crossroads_position via=Caravaneer's post",
+   "Camel Caravan Trade[entrepot] key=camel_herds via=Caravaneer's post",
+   "Taverns & Social Life[operational] key=null via=Taverns (5-20)",
+   "Faith & Worship[operational] key=null via=Parish church",
+   "Law & Governance[operational] key=null via=Town hall",
+   "Caravan & Overland Trade[operational] key=null via=Caravaneer's post"
+  ],
+  "cfg": "river_fish,grain_fields,hot_springs,stone_quarry,iron_deposits,managed_forest",
+  "depl": "iron_deposits,managed_forest",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Fortifications on stone_quarry via Town walls+Citadel"
+  ]
+ },
+ {
+  "seed": "r2r-town-21",
+  "line": "No one here works the animal hides near Campoplenum.",
+  "res": "animal hides",
+  "chains": [
+   "Leatherworking & Cordwaining[vulnerable] key=hunting_grounds via=Tanner (established)",
+   "Taverns & Social Life[vulnerable] key=null via=Taverns (5-20)+Public bathhouse",
+   "Hunting & Trapping[running] key=hunting_grounds via=Tanner (established)",
+   "Divine & Magical Healing[running] key=hot_springs via=Parish church",
+   "Leather & Hides[vulnerable] key=hunting_grounds via=Tanner (established)",
+   "Bowyer & fletcher[running] key=managed_forest via=Craft guilds (5-15)",
+   "Timber & Lumber[running] key=managed_forest via=Sawmill",
+   "Pilgrimage & Holy Sites[running] key=hot_springs via=Parish church",
+   "Wine & Spirits[entrepot] key=null via=Brewer+Brewery",
+   "Standing Watch[vulnerable] key=null via=Town watch",
+   "Performance & Theater[operational] key=null via=Traveling performers",
+   "Faith & Worship[operational] key=null via=Parish church",
+   "Law & Governance[operational] key=null via=Town hall",
+   "Caravan & Overland Trade[vulnerable] key=null via=Carriers' guild"
+  ],
+  "cfg": "hunting_grounds,hot_springs,stone_quarry,iron_deposits,managed_forest,coal_deposits",
+  "depl": "",
+  "keys": [
+   "hunting_grounds"
+  ],
+  "why": [
+   "Leatherworking & Cordwaining on hunting_grounds via Tanner (established)",
+   "Hunting & Trapping on hunting_grounds via Tanner (established)",
+   "Leather & Hides on hunting_grounds via Tanner (established)"
+  ]
+ },
+ {
+  "seed": "r2r-town-27",
+  "line": "No one here works the timber near Markazzamin.",
+  "res": "timber",
+  "chains": [
+   "Leatherworking & Cordwaining[vulnerable] key=hunting_grounds via=Tanner (established)",
+   "Standing Watch[vulnerable] key=null via=Town watch",
+   "Taverns & Social Life[vulnerable] key=null via=Taverns (5-20)",
+   "Hunting & Trapping[running] key=hunting_grounds via=Tanner (established)+Warden's Lodge",
+   "Herbalism & Remedies[running] key=foraging_areas via=Apothecary+Midwife+Warden's Lodge",
+   "Leather & Hides[vulnerable] key=hunting_grounds via=Tanner (established)",
+   "Bowyer & fletcher[running] key=managed_forest via=Craft guilds (5-15)+Bowyers & fletchers (guild)",
+   "Beekeeping & Wax[running] key=foraging_areas via=Apothecary (established)",
+   "Faith & Worship[running] key=null via=Parish church",
+   "Organised Crime[operational] key=null via=Street gang",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild",
+   "Law & Governance[operational] key=null via=Town hall"
+  ],
+  "cfg": "hunting_grounds,managed_forest,gemstone_deposits,foraging_areas,ancient_grove",
+  "depl": "gemstone_deposits,ancient_grove",
+  "keys": [
+   "managed_forest"
+  ],
+  "why": [
+   "Bowyer & fletcher on managed_forest via Craft guilds (5-15)+Bowyers & fletchers (guild)"
+  ]
+ },
+ {
+  "seed": "r2r-town-43",
+  "line": "No one here works the medicinal herbs near Svetoka.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Bowyer & fletcher[impaired] key=managed_forest via=Craft guilds (5-15)",
+   "Boatbuilding & River Transport[impaired] key=managed_forest via=River boatyard+Boatyard",
+   "Grain & Bread[running] key=grain_fields via=Mills (2-5)+Mill",
+   "Divine & Magical Healing[running] key=hot_springs via=Parish church",
+   "Pilgrimage & Holy Sites[running] key=hot_springs via=Parish church",
+   "Standing Watch[vulnerable] key=null via=Town watch",
+   "Taverns & Social Life[operational] key=null via=Taverns (5-20)",
+   "Faith & Worship[operational] key=null via=Parish church",
+   "Law & Governance[operational] key=null via=Courthouse+Town hall"
+  ],
+  "cfg": "managed_forest,hot_springs,iron_deposits,coal_deposits,grain_fields",
+  "depl": "managed_forest",
+  "keys": [
+   "hot_springs"
+  ],
+  "why": [
+   "Divine & Magical Healing on hot_springs via Parish church",
+   "Pilgrimage & Holy Sites on hot_springs via Parish church"
+  ]
+ },
+ {
+  "seed": "r2r-town-53",
+  "line": "No one here works the animal hides near Khanhan.",
+  "res": "animal hides",
+  "chains": [
+   "Gem Mining & Lapidary[vulnerable] key=gemstone_deposits via=Jeweller",
+   "Grain & Bread[running] key=grain_fields via=Mills (2-5)+Mill",
+   "Livestock & Dairy[running] key=grazing_land via=Cooper",
+   "Brewing & Malting[running] key=grain_fields via=Cooper",
+   "Horse & Animal Trade[running] key=grazing_land via=Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Textiles & Cloth[running] key=grazing_land via=Tailor's guild+Weavers/Textile workers+Fuller",
+   "Food Processing[running] key=grain_fields via=Bakers (5-15)+Butchers (3-8)",
+   "Cloth Finishing & Clothing[running] key=grazing_land via=Tailor+Fuller+Tailor's guild",
+   "Smelting & Refining[vulnerable] key=iron_deposits via=Smelter",
+   "Spices & Dyes[running] key=null via=Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Storage & Logistics[running] key=null via=Caravaneer's post",
+   "Caravan & Overland Trade[running] key=null via=Caravaneer's post+Carriers' guild",
+   "Strategic Crossroads Toll[running] key=crossroads_position via=Caravaneer's post+Coaching inn",
+   "Camel Caravan Trade[entrepot] key=camel_herds via=Caravaneer's post",
+   "Standing Watch[operational] key=null via=Town watch",
+   "Taverns & Social Life[operational] key=null via=Taverns (5-20)+Public bathhouse",
+   "Performance & Theater[operational] key=null via=Theater",
+   "Faith & Worship[operational] key=null via=Parish church",
+   "Law & Governance[operational] key=null via=Courthouse+Town hall"
+  ],
+  "cfg": "grain_fields,crossroads_position,gemstone_deposits,foraging_areas,grazing_land,iron_deposits",
+  "depl": "foraging_areas",
+  "keys": [
+   "grazing_land"
+  ],
+  "why": [
+   "Livestock & Dairy on grazing_land via Cooper",
+   "Horse & Animal Trade on grazing_land via Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Textiles & Cloth on grazing_land via Tailor's guild+Weavers/Textile workers+Fuller",
+   "Cloth Finishing & Clothing on grazing_land via Tailor+Fuller+Tailor's guild"
+  ]
+ },
+ {
+  "seed": "r2r-town-54",
+  "line": "No one here works the stone near Erdenbuurt.",
+  "res": "stone",
+  "chains": [
+   "Brewing & Malting[vulnerable] key=date_palms via=Cooper",
+   "Food Processing[vulnerable] key=date_palms via=Bakers (5-15)+Butchers (3-8)",
+   "Date Palms and Orchards[vulnerable] key=date_palms via=Caravanserai+Market square",
+   "Standing Watch[vulnerable] key=null via=Town watch",
+   "Taverns & Social Life[vulnerable] key=null via=Taverns (5-20)",
+   "Divine & Magical Healing[running] key=hot_springs via=Parish church+Monastery",
+   "Bowyer & fletcher[running] key=managed_forest via=Craft guilds (5-15)",
+   "Timber & Lumber[running] key=managed_forest via=Carpenters (5-15)+Carpenter",
+   "Stone & Construction[running] key=stone_quarry via=Brickmaker",
+   "Pilgrimage & Holy Sites[running] key=hot_springs via=Parish church+Monastery",
+   "Performance & Theater[operational] key=null via=Traveling performers",
+   "Faith & Worship[operational] key=null via=Parish church+Monastery",
+   "Law & Governance[operational] key=null via=Town hall",
+   "Caravan & Overland Trade[vulnerable] key=null via=Caravanserai+Carriers' guild"
+  ],
+  "cfg": "desert_salt,date_palms,managed_forest,hot_springs,stone_quarry",
+  "depl": "",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Stone & Construction on stone_quarry via Brickmaker"
+  ]
+ },
+ {
+  "seed": "r2r-city-12",
+  "line": "No one here works the timber near Markaztappa.",
+  "res": "timber",
+  "chains": [
+   "Alchemy & Reagents[impaired] key=magical_node via=Alchemist",
+   "Spellcasting Services[vulnerable] key=null via=Mages' guild",
+   "Timber & Lumber[vulnerable] key=shipbuilding_timber via=Sawmill+Carpenters (5-15)+Carpenter",
+   "Boatbuilding & River Transport[vulnerable] key=shipbuilding_timber via=River ferry",
+   "Letters of Credit & Finance[vulnerable] key=null via=Banking houses",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Hospital & Surgery[vulnerable] key=null via=Major hospital",
+   "Intelligence & Communications[vulnerable] key=null via=Sage's quarter",
+   "Luxury Goods[vulnerable] key=precious_metals via=Specialized metalworkers+Luxury goods quarter",
+   "Glass & Print[vulnerable] key=null via=Glassmakers+Printing house",
+   "Spices & Dyes[vulnerable] key=null via=Merchant guilds (3-8)+Merchant guilds (15-40)+Luxury goods quarter+Annual fair",
+   "Silk & Luxury Textiles[vulnerable] key=null via=Luxury goods quarter+Merchant guilds (15-40)",
+   "Salt & Preservation[running] key=salt_flats via=Salt works",
+   "Fishing & Seafood[running] key=fishing_grounds via=Cooper+Salt works+Merchant guilds (3-8)+Fish market",
+   "Harbour and Maritime[running] key=deep_harbour via=Harbour master's office+Docks/port facilities+Shipyard",
+   "Shipbuilding and Timber[running] key=shipbuilding_timber via=Shipyard+Sawmill",
+   "Smuggling & Contraband[entrepot] key=null via=Smuggling network",
+   "Furs & Pelts[entrepot] key=hunting_grounds via=Furrier's district",
+   "Wine & Spirits[entrepot] key=null via=Vintner+Brewer+Brewery",
+   "Strategic Crossroads Toll[entrepot] key=crossroads_position via=Toll bridge+Customs house",
+   "Black market[operational] key=null via=Front businesses+Black market+Thieves' guild (powerful)",
+   "Organised Crime[operational] key=null via=Thieves' guild (powerful)",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds+Veteran's lodge",
+   "Gambling & Arena[operational] key=null via=Gambling halls",
+   "Maps & Cartography[operational] key=null via=Cartographer's guild",
+   "News & Public Information[operational] key=null via=Cartographer's guild",
+   "Faith & Worship[operational] key=null via=Parish church+Multiple monasteries",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "fishing_grounds,salt_flats,magical_node,shipbuilding_timber,deep_harbour",
+  "depl": "magical_node",
+  "keys": [
+   "shipbuilding_timber"
+  ],
+  "why": [
+   "Timber & Lumber on shipbuilding_timber via Sawmill+Carpenters (5-15)+Carpenter",
+   "Boatbuilding & River Transport on shipbuilding_timber via River ferry",
+   "Shipbuilding and Timber on shipbuilding_timber via Shipyard+Sawmill"
+  ]
+ },
+ {
+  "seed": "r2r-city-14",
+  "line": "No one here works the stone near Serrasinum.",
+  "res": "stone",
+  "chains": [
+   "Fishing & Seafood[impaired] key=fishing_grounds via=Merchant guilds (3-8)+Fish market",
+   "Spellcasting Services[vulnerable] key=null via=Wizard's tower",
+   "Magical Items & Enchanting[vulnerable] key=magical_node via=Wizard's tower",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Intelligence & Communications[vulnerable] key=null via=Post relay station+Sage's quarter",
+   "Luxury Goods[vulnerable] key=precious_metals via=Specialized metalworkers+Luxury goods quarter",
+   "Letters of Credit & Finance[vulnerable] key=null via=Banking houses",
+   "Storage & Logistics[vulnerable] key=null via=Caravan masters' exchange+Barge and river transport company",
+   "Caravan & Overland Trade[vulnerable] key=null via=Caravan masters' exchange",
+   "Camel Caravan Trade[vulnerable] key=camel_herds via=Caravan masters' exchange",
+   "Fortifications[running] key=stone_quarry via=City walls and gates+Citadel",
+   "Grain & Bread[running] key=grain_fields via=Mills (2-5)+Mill",
+   "Livestock & Dairy[running] key=grazing_land via=Stable district",
+   "Brewing & Malting[running] key=grain_fields via=Brewer+Brewery",
+   "Horse & Animal Trade[running] key=grazing_land via=Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Herbalism & Remedies[running] key=foraging_areas via=Apothecary+Midwife",
+   "Divine & Magical Healing[running] key=hot_springs via=Parish church",
+   "Textiles & Cloth[running] key=grazing_land via=Tailor's guild+Weavers/Textile workers",
+   "Food Processing[running] key=grain_fields via=Bakers (5-15)+Butchers (3-8)",
+   "Cloth Finishing & Clothing[running] key=grazing_land via=Tailor+Tailor's guild",
+   "Leatherworking & Cordwaining[running] key=grazing_land via=Tanner (established)+Cobbler's guild",
+   "Stone & Construction[running] key=stone_quarry via=Brickmaker",
+   "Pilgrimage & Holy Sites[running] key=hot_springs via=Parish church",
+   "Smuggling & Contraband[entrepot] key=null via=Smuggling network",
+   "Spices & Dyes[entrepot] key=null via=Merchant guilds (3-8)+Merchant guilds (15-40)+Luxury goods quarter+Annual fair",
+   "Silk & Luxury Textiles[entrepot] key=null via=Luxury goods quarter+Merchant guilds (15-40)",
+   "Furs & Pelts[entrepot] key=hunting_grounds via=Furrier's district",
+   "Wine & Spirits[entrepot] key=null via=Brewer+Brewery",
+   "Strategic Crossroads Toll[entrepot] key=crossroads_position via=Coaching inn",
+   "Black market[operational] key=null via=Front businesses+Black market",
+   "Mercenary Forces[operational] key=null via=Mercenary quarter",
+   "Taverns & Social Life[operational] key=null via=Inns and taverns (district)",
+   "Performance & Theater[operational] key=null via=Bardic college",
+   "Hospital & Surgery[operational] key=null via=Major hospital",
+   "Faith & Worship[operational] key=null via=Parish church",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "fishing_grounds,foraging_areas,hot_springs,stone_quarry,grain_fields,grazing_land",
+  "depl": "fishing_grounds",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Fortifications on stone_quarry via City walls and gates+Citadel",
+   "Stone & Construction on stone_quarry via Brickmaker"
+  ]
+ },
+ {
+  "seed": "r2r-city-16",
+  "line": "No one here works the timber near Copantzin.",
+  "res": "timber",
+  "chains": [
+   "Alchemy & Reagents[impaired] key=magical_node via=Alchemist",
+   "Scholarship & Publishing[vulnerable] key=ancient_ruins via=Sage's quarter",
+   "Intelligence & Communications[vulnerable] key=null via=Sage's quarter",
+   "Timber & Lumber[vulnerable] key=shipbuilding_timber via=Sawmill+Carpenters (5-15)+Carpenter",
+   "Letters of Credit & Finance[vulnerable] key=null via=Banking houses",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Mercenary Forces[vulnerable] key=null via=Mercenary quarter",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Hospital & Surgery[vulnerable] key=null via=Major hospital",
+   "Luxury Goods[vulnerable] key=precious_metals via=Specialized metalworkers+Luxury goods quarter",
+   "Glass & Print[vulnerable] key=null via=Glassmakers+Printing house",
+   "Spices & Dyes[vulnerable] key=null via=Merchant guilds (3-8)+Merchant guilds (15-40)+Luxury goods quarter+Annual fair",
+   "Silk & Luxury Textiles[vulnerable] key=null via=Luxury goods quarter+Merchant guilds (15-40)",
+   "Fishing & Seafood[running] key=fishing_grounds via=Cooper+Merchant guilds (3-8)+Fish market",
+   "Harbour and Maritime[running] key=deep_harbour via=Harbour master's office+Docks/port facilities+Shipyard",
+   "Shipbuilding and Timber[running] key=shipbuilding_timber via=Shipyard+Sawmill",
+   "Smuggling & Contraband[entrepot] key=null via=Smuggling network",
+   "Furs & Pelts[entrepot] key=hunting_grounds via=Furrier's district",
+   "Wine & Spirits[entrepot] key=null via=Vintner+Brewer+Brewery",
+   "Strategic Crossroads Toll[entrepot] key=crossroads_position via=Toll bridge+Customs house",
+   "Black market[operational] key=null via=Front businesses+Black market+Thieves' guild (powerful)",
+   "Organised Crime[operational] key=null via=Thieves' guild (powerful)",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds",
+   "Performance & Theater[operational] key=null via=Theater",
+   "Gambling & Arena[operational] key=null via=Gambling halls",
+   "Maps & Cartography[operational] key=null via=Cartographer's guild",
+   "News & Public Information[operational] key=null via=Cartographer's guild",
+   "Faith & Worship[operational] key=null via=Parish church",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "deep_harbour,shipbuilding_timber,magical_node,fishing_grounds,ancient_ruins",
+  "depl": "magical_node",
+  "keys": [
+   "shipbuilding_timber"
+  ],
+  "why": [
+   "Timber & Lumber on shipbuilding_timber via Sawmill+Carpenters (5-15)+Carpenter",
+   "Shipbuilding and Timber on shipbuilding_timber via Shipyard+Sawmill"
+  ]
+ },
+ {
+  "seed": "r2r-city-19",
+  "line": "No one here works the timber near Dunbury.",
+  "res": "timber",
+  "chains": [
+   "Scholarship & Publishing[impaired] key=ancient_ruins via=Sage's quarter",
+   "Intelligence & Communications[vulnerable] key=null via=Sage's quarter",
+   "Timber & Lumber[vulnerable] key=shipbuilding_timber via=Sawmill+Carpenters (5-15)+Carpenter",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Mercenary Forces[vulnerable] key=null via=Mercenary quarter",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)",
+   "Hospital & Surgery[vulnerable] key=null via=Major hospital+Foundling home",
+   "Luxury Goods[vulnerable] key=precious_metals via=Specialized metalworkers+Luxury goods quarter",
+   "Glass & Print[vulnerable] key=null via=Glassmakers+Printing house",
+   "Faith & Worship[vulnerable] key=null via=Parish church+Cathedral+Multiple monasteries+Foundling home",
+   "Spices & Dyes[vulnerable] key=null via=Luxury goods quarter+Annual fair",
+   "Silk & Luxury Textiles[vulnerable] key=null via=Luxury goods quarter",
+   "Salt & Preservation[running] key=salt_flats via=Salt works",
+   "Fishing & Seafood[running] key=fishing_grounds via=Cooper+Salt works",
+   "Harbour and Maritime[running] key=deep_harbour via=Docks/port facilities",
+   "Shipbuilding and Timber[running] key=shipbuilding_timber via=Sawmill",
+   "Magical Items & Enchanting[entrepot] key=magical_node via=Enchanter's shop+Scroll scribe",
+   "Smuggling & Contraband[entrepot] key=null via=Smuggling network",
+   "Furs & Pelts[entrepot] key=hunting_grounds via=Furrier's district",
+   "Wine & Spirits[entrepot] key=null via=Brewer+Brewery",
+   "Strategic Crossroads Toll[entrepot] key=crossroads_position via=Customs house",
+   "Black market[operational] key=null via=Front businesses+Black market",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds+Veteran's lodge",
+   "Performance & Theater[operational] key=null via=Theater+Bardic college",
+   "Gambling & Arena[operational] key=null via=Gambling halls",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "fishing_grounds,salt_flats,ancient_ruins,shipbuilding_timber,deep_harbour",
+  "depl": "ancient_ruins",
+  "keys": [
+   "shipbuilding_timber"
+  ],
+  "why": [
+   "Timber & Lumber on shipbuilding_timber via Sawmill+Carpenters (5-15)+Carpenter",
+   "Shipbuilding and Timber on shipbuilding_timber via Sawmill"
+  ]
+ },
+ {
+  "seed": "r2r-city-20",
+  "line": "No one here works the timber near Teotiucan.",
+  "res": "timber",
+  "chains": [
+   "Bowyer & fletcher[vulnerable] key=managed_forest via=Craft guilds (5-15)+Bowyers & fletchers (guild)",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Livestock & Dairy[vulnerable] key=alpine_pasture via=Cooper",
+   "Textiles & Cloth[vulnerable] key=alpine_pasture via=Tailor's guild+Weavers/Textile workers+Dyer",
+   "Timber & Lumber[vulnerable] key=mountain_timber via=Sawmill+Carpenters (5-15)+Carpenter",
+   "Alpine Wool and Dairy[vulnerable] key=alpine_pasture via=Weavers/Textile workers",
+   "Mountain Pass Control[vulnerable] key=defended_pass via=Toll bridge+Garrison+Customs house",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)",
+   "Hospital & Surgery[vulnerable] key=null via=Major hospital",
+   "Glass & Print[vulnerable] key=null via=Glassmakers+Printing house",
+   "Luxury Goods[running] key=precious_metals via=Specialized metalworkers",
+   "Mining & Coinage[running] key=precious_metals via=Specialized metalworkers",
+   "Mountain Timber[running] key=mountain_timber via=Sawmill+Charcoal burner",
+   "Spellcasting Services[operational] key=null via=Hedge wizard",
+   "Black market[operational] key=null via=Front businesses+Black market",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds",
+   "Performance & Theater[operational] key=null via=Theater+Bardic college",
+   "Faith & Worship[operational] key=null via=Parish church+Multiple monasteries",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "alpine_pasture,mountain_timber,managed_forest,defended_pass,gemstone_deposits,precious_metals",
+  "depl": "managed_forest",
+  "keys": [
+   "mountain_timber"
+  ],
+  "why": [
+   "Timber & Lumber on mountain_timber via Sawmill+Carpenters (5-15)+Carpenter",
+   "Mountain Timber on mountain_timber via Sawmill+Charcoal burner"
+  ]
+ },
+ {
+  "seed": "r2r-city-26",
+  "line": "No one here works the animal hides near Miropol.",
+  "res": "animal hides",
+  "chains": [
+   "Hunting & Trapping[impaired] key=hunting_grounds via=Tanner (established)",
+   "Leather & Hides[impaired] key=hunting_grounds via=Tanner (established)+Furrier's district",
+   "Furs & Pelts[impaired] key=hunting_grounds via=Furrier's district",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Caravan & Overland Trade[vulnerable] key=null via=Caravan masters' exchange",
+   "Livestock & Dairy[running] key=grazing_land via=Cooper+Stable district",
+   "Horse & Animal Trade[running] key=grazing_land via=Beast trainers+Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Herbalism & Remedies[running] key=foraging_areas via=Apothecary",
+   "Textiles & Cloth[running] key=grazing_land via=Tailor's guild+Weavers/Textile workers+Fuller+Dyer",
+   "Weapons & Armor[running] key=iron_deposits via=Specialized metalworkers+Blacksmiths (3-10)",
+   "Bowyer & fletcher[running] key=managed_forest via=Craft guilds (5-15)+Bowyers & fletchers (guild)",
+   "Cloth Finishing & Clothing[running] key=grazing_land via=Tailor+Fuller+Dyer+Tailor's guild",
+   "Leatherworking & Cordwaining[vulnerable] key=grazing_land via=Tanner (established)",
+   "Timber & Lumber[running] key=managed_forest via=Sawmill+Carpenters (5-15)+Carpenter",
+   "Iron & Metalwork[running] key=iron_deposits via=Blacksmith+Blacksmiths (3-10)",
+   "Fuel & Heating[running] key=coal_deposits via=Charcoal burner",
+   "Smelting & Refining[running] key=iron_deposits via=Smelter+Specialized metalworkers",
+   "Faith & Worship[running] key=null via=Parish church",
+   "Black market[operational] key=null via=Front businesses+Black market",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds",
+   "Performance & Theater[operational] key=null via=Bardic college",
+   "Maps & Cartography[operational] key=null via=Cartographer's guild",
+   "Intelligence & Communications[operational] key=null via=Sage's quarter",
+   "News & Public Information[operational] key=null via=Cartographer's guild",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "grazing_land,ancient_grove,iron_deposits,foraging_areas,coal_deposits,managed_forest,hunting_grounds",
+  "depl": "hunting_grounds",
+  "keys": [
+   "grazing_land"
+  ],
+  "why": [
+   "Livestock & Dairy on grazing_land via Cooper+Stable district",
+   "Horse & Animal Trade on grazing_land via Beast trainers+Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Textiles & Cloth on grazing_land via Tailor's guild+Weavers/Textile workers+Fuller+Dyer",
+   "Cloth Finishing & Clothing on grazing_land via Tailor+Fuller+Dyer+Tailor's guild",
+   "Leatherworking & Cordwaining on grazing_land via Tanner (established)"
+  ]
+ },
+ {
+  "seed": "r2r-city-29",
+  "line": "No one here works the stone near Kamalapalli.",
+  "res": "stone",
+  "chains": [
+   "Food Processing[vulnerable] key=grain_fields via=Butchers (3-8)",
+   "Beekeeping & Wax[vulnerable] key=ancient_grove via=Chandler",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Fortifications[running] key=stone_quarry via=City walls and gates",
+   "Grain & Bread[running] key=grain_fields via=Mills (2-5)+Mill",
+   "Brewing & Malting[running] key=grain_fields via=Cooper",
+   "Stone & Construction[running] key=stone_quarry via=Brickmaker",
+   "Reed & Marsh Harvest[running] key=marshlands via=Chandler+Ropemaker+Merchant guilds (3-8)",
+   "Faith & Worship[running] key=null via=Parish church+Multiple monasteries",
+   "Black market[operational] key=null via=Front businesses+Black market",
+   "Mercenary Forces[operational] key=null via=Mercenary quarter",
+   "Taverns & Social Life[operational] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Hospital & Surgery[operational] key=null via=Major hospital",
+   "Glass & Print[vulnerable] key=null via=Glassmakers",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "marshlands,ancient_grove,coal_deposits,grain_fields,stone_quarry",
+  "depl": "coal_deposits",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Fortifications on stone_quarry via City walls and gates",
+   "Stone & Construction on stone_quarry via Brickmaker"
+  ]
+ },
+ {
+  "seed": "r2r-city-39",
+  "line": "No one here works the stone near Novotsy.",
+  "res": "stone",
+  "chains": [
+   "Bowyer & fletcher[vulnerable] key=managed_forest via=Craft guilds (5-15)",
+   "Timber & Lumber[vulnerable] key=managed_forest via=Carpenters (5-15)+Carpenter",
+   "Date Palms and Orchards[impaired] key=date_palms via=Caravanserai+Market square",
+   "Caravan & Overland Trade[vulnerable] key=null via=Caravanserai+Caravan masters' exchange",
+   "Spellcasting Services[vulnerable] key=null via=Wizard's tower",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Mercenary Forces[vulnerable] key=null via=Mercenary quarter",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Fortifications[vulnerable] key=stone_quarry via=City walls and gates",
+   "Oasis Water and Agriculture[running] key=oasis_water via=Caravanserai",
+   "Faith & Worship[running] key=null via=Parish church+Multiple monasteries+Foundling home",
+   "Black market[operational] key=null via=Front businesses+Black market",
+   "Almshouse Care[operational] key=null via=Foundling home",
+   "Maps & Cartography[operational] key=null via=Cartographer's guild",
+   "News & Public Information[operational] key=null via=Cartographer's guild",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "date_palms,oasis_water,salt_flats,ancient_grove,stone_quarry,managed_forest",
+  "depl": "date_palms,salt_flats,managed_forest",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Fortifications on stone_quarry via City walls and gates"
+  ]
+ },
+ {
+  "seed": "r2r-city-44",
+  "line": "No one here works the stone near Kallition.",
+  "res": "stone",
+  "chains": [
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Luxury Goods[vulnerable] key=precious_metals via=Specialized metalworkers",
+   "Fortifications[vulnerable] key=stone_quarry via=City walls and gates",
+   "Fishing & Seafood[running] key=fishing_grounds via=Merchant guilds (3-8)+Fish market",
+   "Herbalism & Remedies[running] key=foraging_areas via=Apothecary+Midwife",
+   "Faith & Worship[running] key=null via=Parish church+Multiple monasteries",
+   "Spices & Dyes[entrepot] key=null via=Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Silk & Luxury Textiles[entrepot] key=null via=Merchant guilds (15-40)",
+   "Storage & Logistics[entrepot] key=null via=Barge and river transport company",
+   "Furs & Pelts[entrepot] key=hunting_grounds via=Furrier's district",
+   "Wine & Spirits[entrepot] key=null via=Vintner",
+   "Strategic Crossroads Toll[entrepot] key=crossroads_position via=Customs house",
+   "Black market[operational] key=null via=Black market",
+   "Glass & Print[vulnerable] key=null via=Glassmakers",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "fishing_grounds,foraging_areas,ancient_grove,coal_deposits,stone_quarry",
+  "depl": "coal_deposits",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Fortifications on stone_quarry via City walls and gates"
+  ]
+ },
+ {
+  "seed": "r2r-city-50",
+  "line": "No one here works the stone near Capocolonia.",
+  "res": "stone",
+  "chains": [
+   "Food Processing[vulnerable] key=grain_fields via=Bakers (5-15)+Butchers (3-8)",
+   "Spellcasting Services[vulnerable] key=null via=Mages' guild",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Fortifications[vulnerable] key=stone_quarry via=City walls and gates+Citadel",
+   "Grain & Bread[running] key=grain_fields via=Mills (2-5)+Mill",
+   "Foraging & Smallholding[running] key=foraging_areas via=Elder Grove Council",
+   "Brewing & Malting[running] key=grain_fields via=Cooper+Brewer+Brewery",
+   "Herbalism & Remedies[running] key=foraging_areas via=Apothecary+Midwife+Elder Grove Council",
+   "Bowyer & fletcher[running] key=managed_forest via=Craft guilds (5-15)",
+   "Timber & Lumber[running] key=managed_forest via=Sawmill+Carpenters (5-15)+Carpenter",
+   "Faith & Worship[running] key=null via=Parish church+Almshouse+Foundling home",
+   "Magical Items & Enchanting[entrepot] key=magical_node via=Enchanter's shop+Scroll scribe",
+   "Black market[operational] key=null via=Front businesses+Black market+Thieves' guild (powerful)",
+   "Organised Crime[operational] key=null via=Thieves' guild (powerful)",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds+Veteran's lodge",
+   "Taverns & Social Life[operational] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Performance & Theater[operational] key=null via=Theater",
+   "Gambling & Arena[operational] key=null via=Gambling halls",
+   "Almshouse Care[operational] key=null via=Almshouse+Foundling home",
+   "Glass & Print[vulnerable] key=null via=Glassmakers",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "grain_fields,ancient_grove,stone_quarry,foraging_areas,managed_forest",
+  "depl": "",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Fortifications on stone_quarry via City walls and gates+Citadel"
+  ]
+ },
+ {
+  "seed": "r2r-city-51",
+  "line": "No one here works the stone near Benham.",
+  "res": "stone",
+  "chains": [
+   "Bowyer & fletcher[vulnerable] key=managed_forest via=Craft guilds (5-15)",
+   "Timber & Lumber[vulnerable] key=managed_forest via=Carpenters (5-15)+Carpenter",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)",
+   "Fortifications[vulnerable] key=stone_quarry via=City walls and gates",
+   "Divine & Magical Healing[running] key=hot_springs via=Parish church+Multiple monasteries",
+   "Luxury Goods[running] key=precious_metals via=Specialized metalworkers",
+   "Mining & Coinage[running] key=precious_metals via=Specialized metalworkers",
+   "Pilgrimage & Holy Sites[running] key=hot_springs via=Parish church+Multiple monasteries",
+   "Spellcasting Services[operational] key=null via=Hedge wizard",
+   "Black market[operational] key=null via=Front businesses+Black market",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds",
+   "Almshouse Care[operational] key=null via=Foundling home",
+   "Maps & Cartography[operational] key=null via=Cartographer's guild",
+   "News & Public Information[operational] key=null via=Cartographer's guild",
+   "Glass & Print[vulnerable] key=null via=Glassmakers",
+   "Faith & Worship[operational] key=null via=Parish church+Multiple monasteries+Foundling home",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "managed_forest,hot_springs,stone_quarry,precious_metals,gemstone_deposits",
+  "depl": "managed_forest,gemstone_deposits",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Fortifications on stone_quarry via City walls and gates"
+  ]
+ },
+ {
+  "seed": "r2r-city-54",
+  "line": "No one here works the timber near Terralitus.",
+  "res": "timber",
+  "chains": [
+   "Reed & Marsh Harvest[vulnerable] key=marshlands via=Chandler+Ropemaker+Merchant guilds (3-8)",
+   "Mountain Timber[impaired] key=mountain_timber via=Sawmill",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Mountain Pass Control[vulnerable] key=defended_pass via=Garrison+Customs house",
+   "Spellcasting Services[vulnerable] key=null via=Mages' guild",
+   "Mercenary Forces[vulnerable] key=null via=Mercenary quarter",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Fortifications[running] key=stone_quarry via=City walls and gates",
+   "Livestock & Dairy[running] key=grazing_land via=Stable district",
+   "Horse & Animal Trade[running] key=grazing_land via=Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Almshouse Care[running] key=null via=Almshouse",
+   "Textiles & Cloth[running] key=grazing_land via=Weavers/Textile workers",
+   "Bowyer & fletcher[running] key=managed_forest via=Craft guilds (5-15)",
+   "Leatherworking & Cordwaining[running] key=grazing_land via=Tanner (established)+Cobbler's guild",
+   "Timber & Lumber[running] key=managed_forest via=Sawmill+Carpenters (5-15)+Carpenter",
+   "Stone & Construction[running] key=stone_quarry via=Brickmaker",
+   "Black market[operational] key=null via=Front businesses",
+   "Gambling & Arena[operational] key=null via=Gambling halls",
+   "Glass & Print[vulnerable] key=null via=Glassmakers",
+   "Faith & Worship[operational] key=null via=Parish church+Multiple monasteries+Almshouse",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "hot_springs_mineral,mountain_timber,grazing_land,defended_pass,stone_quarry,managed_forest,marshlands",
+  "depl": "mountain_timber,marshlands",
+  "keys": [
+   "managed_forest"
+  ],
+  "why": [
+   "Bowyer & fletcher on managed_forest via Craft guilds (5-15)",
+   "Timber & Lumber on managed_forest via Sawmill+Carpenters (5-15)+Carpenter"
+  ]
+ },
+ {
+  "seed": "r2r-city-54",
+  "line": "No one here works the stone near Terralitus.",
+  "res": "stone",
+  "chains": [
+   "Reed & Marsh Harvest[vulnerable] key=marshlands via=Chandler+Ropemaker+Merchant guilds (3-8)",
+   "Mountain Timber[impaired] key=mountain_timber via=Sawmill",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Mountain Pass Control[vulnerable] key=defended_pass via=Garrison+Customs house",
+   "Spellcasting Services[vulnerable] key=null via=Mages' guild",
+   "Mercenary Forces[vulnerable] key=null via=Mercenary quarter",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Fortifications[running] key=stone_quarry via=City walls and gates",
+   "Livestock & Dairy[running] key=grazing_land via=Stable district",
+   "Horse & Animal Trade[running] key=grazing_land via=Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Almshouse Care[running] key=null via=Almshouse",
+   "Textiles & Cloth[running] key=grazing_land via=Weavers/Textile workers",
+   "Bowyer & fletcher[running] key=managed_forest via=Craft guilds (5-15)",
+   "Leatherworking & Cordwaining[running] key=grazing_land via=Tanner (established)+Cobbler's guild",
+   "Timber & Lumber[running] key=managed_forest via=Sawmill+Carpenters (5-15)+Carpenter",
+   "Stone & Construction[running] key=stone_quarry via=Brickmaker",
+   "Black market[operational] key=null via=Front businesses",
+   "Gambling & Arena[operational] key=null via=Gambling halls",
+   "Glass & Print[vulnerable] key=null via=Glassmakers",
+   "Faith & Worship[operational] key=null via=Parish church+Multiple monasteries+Almshouse",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "hot_springs_mineral,mountain_timber,grazing_land,defended_pass,stone_quarry,managed_forest,marshlands",
+  "depl": "mountain_timber,marshlands",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Fortifications on stone_quarry via City walls and gates",
+   "Stone & Construction on stone_quarry via Brickmaker"
+  ]
+ },
+ {
+  "seed": "r2r-city-56",
+  "line": "No one here works the animal hides near Spitzgate.",
+  "res": "animal hides",
+  "chains": [
+   "Fuel & Heating[vulnerable] key=coal_deposits via=Charcoal burner",
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Elder Grove Council",
+   "Beekeeping & Wax[vulnerable] key=ancient_grove via=Chandler",
+   "Spellcasting Services[vulnerable] key=null via=Mages' guild",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Caravan & Overland Trade[vulnerable] key=null via=Caravan masters' exchange",
+   "Livestock & Dairy[running] key=grazing_land via=Cooper+Stable district",
+   "Horse & Animal Trade[running] key=grazing_land via=Beast trainers+Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Textiles & Cloth[running] key=grazing_land via=Tailor's guild+Weavers/Textile workers+Fuller+Dyer",
+   "Weapons & Armor[vulnerable] key=iron_deposits via=Specialized metalworkers+Blacksmiths (3-10)",
+   "Cloth Finishing & Clothing[running] key=grazing_land via=Tailor+Fuller+Dyer+Tailor's guild",
+   "Leatherworking & Cordwaining[running] key=grazing_land via=Tanner (established)+Cobbler's guild",
+   "Iron & Metalwork[running] key=iron_deposits via=Mine+Blacksmith+Blacksmiths (3-10)",
+   "Smelting & Refining[vulnerable] key=iron_deposits via=Smelter+Specialized metalworkers",
+   "Reed & Marsh Harvest[running] key=marshlands via=Chandler+Ropemaker+Merchant guilds (3-8)",
+   "Faith & Worship[running] key=null via=Parish church+Multiple monasteries+Almshouse",
+   "Magical Items & Enchanting[entrepot] key=magical_node via=Enchanter's shop+Scroll scribe",
+   "Black market[operational] key=null via=Front businesses+Black market+Thieves' guild (powerful)",
+   "Organised Crime[operational] key=null via=Thieves' guild (powerful)",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Mercenary Forces[operational] key=null via=Mercenary quarter",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds",
+   "Performance & Theater[operational] key=null via=Theater",
+   "Gambling & Arena[operational] key=null via=Gambling halls",
+   "Almshouse Care[operational] key=null via=Almshouse",
+   "Maps & Cartography[operational] key=null via=Cartographer's guild",
+   "Intelligence & Communications[operational] key=null via=Post relay station",
+   "News & Public Information[operational] key=null via=Cartographer's guild",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "marshlands,ancient_grove,coal_deposits,grazing_land,gemstone_deposits,iron_deposits",
+  "depl": "coal_deposits,gemstone_deposits",
+  "keys": [
+   "grazing_land"
+  ],
+  "why": [
+   "Livestock & Dairy on grazing_land via Cooper+Stable district",
+   "Horse & Animal Trade on grazing_land via Beast trainers+Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Textiles & Cloth on grazing_land via Tailor's guild+Weavers/Textile workers+Fuller+Dyer",
+   "Cloth Finishing & Clothing on grazing_land via Tailor+Fuller+Dyer+Tailor's guild",
+   "Leatherworking & Cordwaining on grazing_land via Tanner (established)+Cobbler's guild"
+  ]
+ },
+ {
+  "seed": "r2r-metropolis-11",
+  "line": "No one here works the stone near Tighfell.",
+  "res": "stone",
+  "chains": [
+   "Livestock & Dairy[vulnerable] key=grazing_land via=Stable district",
+   "River Fishing[vulnerable] key=river_fish via=Merchant guilds (3-8)",
+   "Horse & Animal Trade[vulnerable] key=grazing_land via=Beast trainers+Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Herbalism & Remedies[vulnerable] key=foraging_areas via=Apothecary+Midwife",
+   "Textiles & Cloth[impaired] key=grazing_land via=Tailor's guild+Weavers/Textile workers+Fuller+Dyer",
+   "Bowyer & fletcher[vulnerable] key=managed_forest via=Craft guilds (5-15)",
+   "Cloth Finishing & Clothing[impaired] key=grazing_land via=Tailor+Fuller+Dyer+Tailor's guild",
+   "Leatherworking & Cordwaining[impaired] key=grazing_land via=Tanner (established)+Cobbler's guild",
+   "Beekeeping & Wax[vulnerable] key=foraging_areas via=Chandler",
+   "Timber & Lumber[vulnerable] key=managed_forest via=Sawmill+Carpenters (5-15)+Carpenter",
+   "Spellcasting Services[vulnerable] key=null via=Mages' district",
+   "Magical Items & Enchanting[vulnerable] key=magical_node via=Enchanter's shop+Scroll scribe+Academy of magic+Mages' district",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Hospital & Surgery[vulnerable] key=null via=Hospital network",
+   "Caravan & Overland Trade[vulnerable] key=null via=Caravan masters' exchange",
+   "Stone & Construction[running] key=stone_quarry via=Brickmaker",
+   "Faith & Worship[running] key=null via=Parish church+Cathedral+Major monasteries",
+   "Planar Trade[entrepot] key=null via=Planar traders",
+   "Black market[operational] key=null via=Front businesses",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds",
+   "Performance & Theater[operational] key=null via=Theater+Bardic college",
+   "Gambling & Arena[operational] key=null via=Arena+Gambling district",
+   "Maps & Cartography[operational] key=null via=Message Network",
+   "Glass & Print[vulnerable] key=null via=Glassmakers",
+   "Law & Governance[operational] key=null via=City hall+Multiple court buildings"
+  ],
+  "cfg": "river_fish,foraging_areas,stone_quarry,gemstone_deposits,grazing_land,ancient_grove,managed_forest",
+  "depl": "river_fish,foraging_areas,grazing_land,ancient_grove,managed_forest",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Stone & Construction on stone_quarry via Brickmaker"
+  ]
+ },
+ {
+  "seed": "r2r-metropolis-24",
+  "line": "No one here works the animal hides near Achillimani.",
+  "res": "animal hides",
+  "chains": [
+   "Grain & Bread[magically_sustained] key=grain_fields via=Mills (2-5)+Mill",
+   "Foraging & Smallholding[magically_sustained] key=foraging_areas via=Elder Grove Council",
+   "Hunting & Trapping[magically_sustained] key=hunting_grounds via=Tanner (established)",
+   "Brewing & Malting[magically_sustained] key=grain_fields via=Cooper+Brewer+Brewery",
+   "Herbalism & Remedies[vulnerable] key=foraging_areas via=Apothecary+Midwife+Elder Grove Council",
+   "Leather & Hides[impaired] key=hunting_grounds via=Tanner (established)+Cobbler's guild+Furrier's district",
+   "Food Processing[impaired] key=grain_fields via=Bakers (5-15)+Butchers (3-8)",
+   "Weapons & Armor[impaired] key=iron_deposits via=Specialized metalworkers+Blacksmiths (3-10)",
+   "Beekeeping & Wax[magically_sustained] key=foraging_areas via=Chandler",
+   "Iron & Metalwork[impaired] key=iron_deposits via=Mine+Blacksmith+Blacksmiths (3-10)",
+   "Smelting & Refining[impaired] key=iron_deposits via=Smelter+Specialized metalworkers",
+   "Furs & Pelts[impaired] key=hunting_grounds via=Furrier's district",
+   "Mining & Quarrying[vulnerable] key=coal_deposits via=Charcoal burner",
+   "Letters of Credit & Finance[vulnerable] key=null via=Banking district",
+   "Spellcasting Services[vulnerable] key=null via=Mages' district",
+   "Magical Items & Enchanting[vulnerable] key=magical_node via=Enchanter's shop+Scroll scribe+Academy of magic+Mages' district",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Hospital & Surgery[vulnerable] key=null via=Hospital network",
+   "Maps & Cartography[vulnerable] key=null via=Great library+Cartographer's guild",
+   "Intelligence & Communications[vulnerable] key=null via=Post relay station+Sage's quarter",
+   "Faith & Worship[vulnerable] key=null via=Parish church+Cathedral+Major monasteries",
+   "Livestock & Dairy[running] key=grazing_land via=Cooper+Stable district",
+   "Horse & Animal Trade[vulnerable] key=grazing_land via=Beast trainers+Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Textiles & Cloth[running] key=grazing_land via=Tailor's guild+Weavers/Textile workers+Fuller+Dyer",
+   "Luxury Goods[vulnerable] key=precious_metals via=Specialized metalworkers+Luxury goods quarter",
+   "Cloth Finishing & Clothing[running] key=grazing_land via=Tailor+Fuller+Dyer+Tailor's guild",
+   "Leatherworking & Cordwaining[vulnerable] key=grazing_land via=Tanner (established)+Cobbler's guild",
+   "Fuel & Heating[running] key=coal_deposits via=Charcoal burner",
+   "Spices & Dyes[running] key=null via=Merchant guilds (3-8)+Merchant guilds (15-40)+Luxury goods quarter+Annual fair",
+   "Strategic Crossroads Toll[running] key=crossroads_position via=Toll bridge+Coaching inn+Customs house",
+   "Smuggling & Contraband[entrepot] key=null via=Smuggling network",
+   "Silk & Luxury Textiles[entrepot] key=null via=Luxury goods quarter+Merchant guilds (15-40)+International trade center",
+   "Wine & Spirits[entrepot] key=null via=Vintner+Brewer+Brewery",
+   "Black market[operational] key=null via=Thieves' guild (powerful)",
+   "Organised Crime[operational] key=null via=Thieves' guild (powerful)",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds+Veteran's lodge",
+   "Performance & Theater[operational] key=null via=Theater+Bardic college",
+   "Gambling & Arena[operational] key=null via=Arena+Gambling district",
+   "News & Public Information[vulnerable] key=null via=Cartographer's guild",
+   "Glass & Print[vulnerable] key=null via=Glassmakers",
+   "Law & Governance[operational] key=null via=City hall+Multiple court buildings"
+  ],
+  "cfg": "foraging_areas,crossroads_position,coal_deposits,gemstone_deposits,grain_fields,iron_deposits,hunting_grounds,grazing_land",
+  "depl": "foraging_areas,gemstone_deposits,grain_fields,iron_deposits,hunting_grounds",
+  "keys": [
+   "grazing_land"
+  ],
+  "why": [
+   "Livestock & Dairy on grazing_land via Cooper+Stable district",
+   "Horse & Animal Trade on grazing_land via Beast trainers+Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Textiles & Cloth on grazing_land via Tailor's guild+Weavers/Textile workers+Fuller+Dyer",
+   "Cloth Finishing & Clothing on grazing_land via Tailor+Fuller+Dyer+Tailor's guild",
+   "Leatherworking & Cordwaining on grazing_land via Tanner (established)+Cobbler's guild"
+  ]
+ },
+ {
+  "seed": "r2r-metropolis-38",
+  "line": "No one here works the timber near Ulfstrand.",
+  "res": "timber",
+  "chains": [
+   "Stone & Construction[impaired] key=stone_quarry via=Brickmaker",
+   "Alpine Wool and Dairy[impaired] key=alpine_pasture via=Weavers/Textile workers+Fuller",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Food Processing[vulnerable] key=grain_fields via=Bakers (5-15)+Butchers (3-8)",
+   "Timber & Lumber[vulnerable] key=mountain_timber via=Sawmill+Carpenters (5-15)+Carpenter",
+   "Spellcasting Services[vulnerable] key=null via=Mages' district",
+   "Hospital & Surgery[vulnerable] key=null via=Hospital network",
+   "Maps & Cartography[vulnerable] key=null via=Great library+Cartographer's guild",
+   "Intelligence & Communications[vulnerable] key=null via=Post relay station+Sage's quarter",
+   "Faith & Worship[vulnerable] key=null via=Parish church+Cathedral+Major monasteries",
+   "Grain & Bread[running] key=grain_fields via=Mills (2-5)+Mill",
+   "Brewing & Malting[running] key=grain_fields via=Cooper+Brewer+Brewery",
+   "Luxury Goods[running] key=precious_metals via=Specialized metalworkers+Luxury goods quarter",
+   "Mining & Coinage[running] key=precious_metals via=Specialized metalworkers",
+   "Mountain Timber[running] key=mountain_timber via=Sawmill",
+   "Mountain Pass Control[running] key=defended_pass via=Garrison+Customs house",
+   "Black market[operational] key=null via=Thieves' guild (powerful)",
+   "Organised Crime[operational] key=null via=Thieves' guild (powerful)",
+   "Mercenary Forces[operational] key=null via=Mercenary quarter",
+   "Taverns & Social Life[operational] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Performance & Theater[operational] key=null via=Theater+Bardic college",
+   "Gambling & Arena[operational] key=null via=Arena+Gambling district",
+   "News & Public Information[vulnerable] key=null via=Cartographer's guild",
+   "Glass & Print[vulnerable] key=null via=Glassmakers",
+   "Law & Governance[operational] key=null via=City hall+Multiple court buildings"
+  ],
+  "cfg": "mountain_timber,alpine_pasture,grain_fields,defended_pass,precious_metals,stone_quarry",
+  "depl": "alpine_pasture,stone_quarry",
+  "keys": [
+   "mountain_timber"
+  ],
+  "why": [
+   "Timber & Lumber on mountain_timber via Sawmill+Carpenters (5-15)+Carpenter",
+   "Mountain Timber on mountain_timber via Sawmill"
+  ]
+ },
+ {
+  "seed": "r2r-metropolis-43",
+  "line": "No one here works the timber near Hochstift.",
+  "res": "timber",
+  "chains": [
+   "Fortifications[impaired] key=stone_quarry via=Citadel",
+   "Livestock & Dairy[magically_sustained] key=grazing_land via=Cooper+Stable district",
+   "Hunting & Trapping[magically_sustained] key=hunting_grounds via=Tanner (established)",
+   "Horse & Animal Trade[vulnerable] key=grazing_land via=Beast trainers+Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Textiles & Cloth[impaired] key=grazing_land via=Weavers/Textile workers+Dyer",
+   "Leather & Hides[impaired] key=hunting_grounds via=Tanner (established)+Cobbler's guild+Furrier's district",
+   "Cloth Finishing & Clothing[impaired] key=grazing_land via=Dyer",
+   "Leatherworking & Cordwaining[impaired] key=grazing_land via=Tanner (established)+Cobbler's guild",
+   "Stone & Construction[vulnerable] key=stone_quarry via=Stone quarry",
+   "Mountain Timber[impaired] key=mountain_timber via=Sawmill+Charcoal burner",
+   "Furs & Pelts[impaired] key=hunting_grounds via=Furrier's district",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Bowyer & fletcher[vulnerable] key=managed_forest via=Craft guilds (5-15)+Bowyers & fletchers (guild)",
+   "Mountain Pass Control[vulnerable] key=defended_pass via=Toll bridge+Garrison+Customs house",
+   "Spellcasting Services[vulnerable] key=null via=Mages' district",
+   "Magical Items & Enchanting[vulnerable] key=magical_node via=Enchanter's shop+Scroll scribe+Academy of magic+Mages' district",
+   "Planar Trade[vulnerable] key=null via=Planar traders+Planar embassy",
+   "Mercenary Forces[vulnerable] key=null via=Mercenary quarter",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Faith & Worship[vulnerable] key=null via=Parish church+Cathedral+Major monasteries",
+   "Hospital & Surgery[running] key=null via=Hospital network",
+   "Timber & Lumber[running] key=managed_forest via=Sawmill+Carpenters (5-15)+Carpenter",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds+Veteran's lodge",
+   "Performance & Theater[operational] key=null via=Theater+Bardic college",
+   "Gambling & Arena[operational] key=null via=Arena+Gambling district",
+   "Maps & Cartography[operational] key=null via=Great library+Cartographer's guild+Message Network",
+   "Intelligence & Communications[operational] key=null via=Sage's quarter",
+   "News & Public Information[operational] key=null via=Cartographer's guild",
+   "Glass & Print[vulnerable] key=null via=Glassmakers",
+   "Law & Governance[operational] key=null via=City hall+Multiple court buildings"
+  ],
+  "cfg": "mountain_timber,hot_springs_mineral,managed_forest,defended_pass,stone_quarry,hunting_grounds,gemstone_deposits,grazing_land",
+  "depl": "mountain_timber,stone_quarry,hunting_grounds,gemstone_deposits,grazing_land",
+  "keys": [
+   "managed_forest"
+  ],
+  "why": [
+   "Bowyer & fletcher on managed_forest via Craft guilds (5-15)+Bowyers & fletchers (guild)",
+   "Timber & Lumber on managed_forest via Sawmill+Carpenters (5-15)+Carpenter"
+  ]
+ },
+ {
+  "seed": "r2s-under_siege-thorp-3",
+  "line": "No one here works the medicinal herbs near Tailing.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[running] key=foraging_areas via=Subsistence farming",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "foraging_areas,hot_springs,iron_deposits",
+  "depl": "",
+  "keys": [
+   "foraging_areas",
+   "hot_springs"
+  ],
+  "why": [
+   "Foraging & Smallholding on foraging_areas via Subsistence farming"
+  ]
+ },
+ {
+  "seed": "r2s-under_siege-hamlet-3",
+  "line": "No one here works the animal hides near Rotholz.",
+  "res": "animal hides",
+  "chains": [
+   "Hunting & Trapping[running] key=hunting_grounds via=Hunter's lodge",
+   "Iron & Metalwork[running] key=iron_deposits via=Resident smith (part-time)",
+   "Faith & Worship[running] key=null via=Parish church",
+   "Furs & Pelts[running] key=hunting_grounds via=Hunter's lodge",
+   "Taverns & Social Life[operational] key=null via=Alehouse"
+  ],
+  "cfg": "hunting_grounds,ancient_grove,iron_deposits",
+  "depl": "ancient_grove",
+  "keys": [
+   "hunting_grounds"
+  ],
+  "why": [
+   "Hunting & Trapping on hunting_grounds via Hunter's lodge",
+   "Furs & Pelts on hunting_grounds via Hunter's lodge"
+  ]
+ },
+ {
+  "seed": "r2s-under_siege-village-2",
+  "line": "No one here works the alpine pastures near Dionpyrgos.",
+  "res": "alpine pastures",
+  "chains": [
+   "Livestock & Dairy[vulnerable] key=alpine_pasture via=Common grazing land",
+   "Foraging & Smallholding[running] key=foraging_areas via=Beekeeper",
+   "Beekeeping & Wax[running] key=foraging_areas via=Beekeeper",
+   "Faith & Worship[running] key=null via=Parish church"
+  ],
+  "cfg": "mountain_timber,alpine_pasture,foraging_areas,ancient_grove,stone_quarry",
+  "depl": "stone_quarry",
+  "keys": [],
+  "why": []
+ },
+ {
+  "seed": "r2s-under_siege-town-2",
+  "line": "No one here works the timber near Yekehiid.",
+  "res": "timber",
+  "chains": [
+   "Taverns & Social Life[impaired] key=null via=Taverns (5-20)",
+   "Standing Garrison[vulnerable] key=null via=Barracks+Town watch",
+   "Weapons & Armor[vulnerable] key=iron_deposits via=Blacksmiths (3-10)",
+   "Bowyer & fletcher[running] key=managed_forest via=Craft guilds (5-15)",
+   "Iron & Metalwork[running] key=iron_deposits via=Blacksmith+Blacksmiths (3-10)",
+   "Mountain Pass Control[running] key=defended_pass via=Customs house",
+   "Organised Crime[operational] key=null via=Street gang",
+   "Faith & Worship[operational] key=null via=Parish church",
+   "Law & Governance[operational] key=null via=Town hall"
+  ],
+  "cfg": "hot_springs_mineral,alpine_pasture,managed_forest,defended_pass,iron_deposits",
+  "depl": "alpine_pasture",
+  "keys": [
+   "managed_forest"
+  ],
+  "why": [
+   "Bowyer & fletcher on managed_forest via Craft guilds (5-15)"
+  ]
+ },
+ {
+  "seed": "r2s-under_siege-city-3",
+  "line": "No one here works the timber near Weichhof.",
+  "res": "timber",
+  "chains": [
+   "Spellcasting Services[impaired] key=null via=Mages' guild",
+   "Taverns & Social Life[impaired] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Caravan & Overland Trade[impaired] key=null via=Caravan masters' exchange",
+   "Horse & Animal Trade[running] key=grazing_land via=Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Herbalism & Remedies[running] key=foraging_areas via=Apothecary+Midwife",
+   "Textiles & Cloth[running] key=grazing_land via=Tailor's guild+Weavers/Textile workers+Fuller",
+   "Weapons & Armor[vulnerable] key=iron_deposits via=Specialized metalworkers+Blacksmiths (3-10)",
+   "Bowyer & fletcher[running] key=managed_forest via=Craft guilds (5-15)+Bowyers & fletchers (guild)",
+   "Cloth Finishing & Clothing[running] key=grazing_land via=Tailor+Fuller+Tailor's guild",
+   "Beekeeping & Wax[running] key=foraging_areas via=Chandler",
+   "Timber & Lumber[running] key=managed_forest via=Sawmill+Carpenters (5-15)+Carpenter",
+   "Iron & Metalwork[running] key=iron_deposits via=Mine+Blacksmith+Blacksmiths (3-10)",
+   "Smelting & Refining[vulnerable] key=iron_deposits via=Smelter+Specialized metalworkers",
+   "Faith & Worship[running] key=null via=Parish church+Multiple monasteries+Almshouse",
+   "Black market[operational] key=null via=Front businesses+Black market",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds",
+   "Almshouse Care[operational] key=null via=Almshouse",
+   "Intelligence & Communications[vulnerable] key=null via=Sage's quarter",
+   "Glass & Print[vulnerable] key=null via=Printing house",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "foraging_areas,managed_forest,coal_deposits,ancient_grove,grazing_land,iron_deposits",
+  "depl": "",
+  "keys": [
+   "managed_forest"
+  ],
+  "why": [
+   "Bowyer & fletcher on managed_forest via Craft guilds (5-15)+Bowyers & fletchers (guild)",
+   "Timber & Lumber on managed_forest via Sawmill+Carpenters (5-15)+Carpenter"
+  ]
+ },
+ {
+  "seed": "r2s-under_siege-metropolis-0",
+  "line": "No one here works the timber near Grünmoor.",
+  "res": "timber",
+  "chains": [
+   "Standing Garrison[impaired] key=null via=Garrison+Professional city watch",
+   "Hospital & Surgery[vulnerable] key=null via=Hospital network",
+   "Timber & Lumber[impaired] key=mountain_timber via=Sawmill+Carpenters (5-15)+Carpenter",
+   "Fuel & Heating[impaired] key=coal_deposits via=Charcoal burner",
+   "Mountain Pass Control[impaired] key=defended_pass via=Toll bridge+Garrison+Customs house",
+   "Mercenary Forces[impaired] key=null via=Mercenary quarter",
+   "Taverns & Social Life[impaired] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Maps & Cartography[impaired] key=null via=Great library",
+   "Intelligence & Communications[impaired] key=null via=Post relay station+Sage's quarter",
+   "Faith & Worship[impaired] key=null via=Parish church+Cathedral+Major monasteries",
+   "Foraging & Smallholding[vulnerable] key=marshlands via=Elder Grove Council",
+   "Leatherworking & Cordwaining[vulnerable] key=hunting_grounds via=Tanner (established)+Cobbler's guild",
+   "Hunting & Trapping[running] key=hunting_grounds via=Tanner (established)",
+   "Leather & Hides[vulnerable] key=hunting_grounds via=Tanner (established)+Cobbler's guild+Furrier's district",
+   "Reed & Marsh Harvest[running] key=marshlands via=Ropemaker+Merchant guilds (3-8)",
+   "Mountain Timber[running] key=mountain_timber via=Sawmill+Charcoal burner",
+   "Furs & Pelts[running] key=hunting_grounds via=Furrier's district",
+   "Black market[operational] key=null via=Front businesses+Black market",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds+Veteran's lodge",
+   "Performance & Theater[operational] key=null via=Theater+Bardic college",
+   "Gambling & Arena[operational] key=null via=Arena+Gambling district",
+   "Glass & Print[vulnerable] key=null via=Glassmakers",
+   "Law & Governance[operational] key=null via=City hall+Multiple court buildings"
+  ],
+  "cfg": "hot_springs_mineral,mountain_timber,hunting_grounds,defended_pass,coal_deposits,marshlands",
+  "depl": "coal_deposits",
+  "keys": [
+   "mountain_timber"
+  ],
+  "why": [
+   "Mountain Timber on mountain_timber via Sawmill+Charcoal burner"
+  ]
+ },
+ {
+  "seed": "r2s-famine-hamlet-3",
+  "line": "No one here works the animal hides near Malosk.",
+  "res": "animal hides",
+  "chains": [
+   "Livestock & Dairy[running] key=grazing_land via=Common grazing land",
+   "Foraging & Smallholding[running] key=foraging_areas via=Subsistence farming",
+   "Faith & Worship[running] key=null via=Parish church"
+  ],
+  "cfg": "foraging_areas,ancient_grove,precious_metals,grazing_land",
+  "depl": "",
+  "keys": [
+   "grazing_land"
+  ],
+  "why": [
+   "Livestock & Dairy on grazing_land via Common grazing land"
+  ]
+ },
+ {
+  "seed": "r2s-famine-town-2",
+  "line": "No one here works the timber near Vatanserai.",
+  "res": "timber",
+  "chains": [
+   "Fishing & Seafood[impaired] key=fishing_grounds via=Salt works+Weekly market",
+   "Boatbuilding & River Transport[vulnerable] key=shipbuilding_timber via=River boatyard+River ferry+Boatyard",
+   "Standing Watch[vulnerable] key=null via=Town watch",
+   "Taverns & Social Life[vulnerable] key=null via=Taverns (5-20)",
+   "Salt & Preservation[running] key=salt_flats via=Salt works",
+   "Shipbuilding and Timber[running] key=shipbuilding_timber via=River boatyard",
+   "Faith & Worship[operational] key=null via=Parish church",
+   "Law & Governance[operational] key=null via=Town hall"
+  ],
+  "cfg": "fishing_grounds,shipbuilding_timber,ancient_ruins,salt_flats",
+  "depl": "fishing_grounds,ancient_ruins",
+  "keys": [
+   "shipbuilding_timber"
+  ],
+  "why": [
+   "Boatbuilding & River Transport on shipbuilding_timber via River boatyard+River ferry+Boatyard",
+   "Shipbuilding and Timber on shipbuilding_timber via River boatyard"
+  ]
+ },
+ {
+  "seed": "r2s-famine-city-3",
+  "line": "No one here works the animal hides near Vatanabad.",
+  "res": "animal hides",
+  "chains": [
+   "Hunting & Trapping[vulnerable] key=hunting_grounds via=Tanner (established)",
+   "Leather & Hides[impaired] key=hunting_grounds via=Tanner (established)+Cobbler's guild+Furrier's district",
+   "Furs & Pelts[impaired] key=hunting_grounds via=Furrier's district",
+   "Mining & Quarrying[vulnerable] key=coal_deposits via=Charcoal burner",
+   "Hospital & Surgery[vulnerable] key=null via=Major hospital",
+   "Intelligence & Communications[vulnerable] key=null via=Post relay station+Sage's quarter",
+   "Glass & Print[vulnerable] key=null via=Glassmakers+Printing house",
+   "Faith & Worship[vulnerable] key=null via=Parish church+Cathedral+Multiple monasteries",
+   "Grain & Bread[running] key=grain_fields via=Mills (2-5)+Mill",
+   "Livestock & Dairy[running] key=grazing_land via=Stable district",
+   "Brewing & Malting[running] key=grain_fields via=Brewer+Brewery",
+   "Horse & Animal Trade[running] key=grazing_land via=Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Textiles & Cloth[running] key=grazing_land via=Tailor's guild+Weavers/Textile workers+Dyer",
+   "Food Processing[running] key=grain_fields via=Bakers (5-15)+Butchers (3-8)",
+   "Luxury Goods[vulnerable] key=precious_metals via=Specialized metalworkers+Luxury goods quarter",
+   "Cloth Finishing & Clothing[running] key=grazing_land via=Tailor+Dyer+Tailor's guild",
+   "Leatherworking & Cordwaining[vulnerable] key=grazing_land via=Tanner (established)+Cobbler's guild",
+   "Fuel & Heating[running] key=coal_deposits via=Charcoal burner",
+   "Spices & Dyes[running] key=null via=Merchant guilds (3-8)+Merchant guilds (15-40)+Luxury goods quarter+Annual fair",
+   "Strategic Crossroads Toll[running] key=crossroads_position via=Coaching inn+Customs house",
+   "Silk & Luxury Textiles[entrepot] key=null via=Luxury goods quarter+Merchant guilds (15-40)",
+   "Wine & Spirits[entrepot] key=null via=Vintner+Brewer+Brewery",
+   "Standing Garrison[operational] key=null via=Garrison+Professional city watch",
+   "Mercenary Forces[operational] key=null via=Mercenary quarter",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds",
+   "Taverns & Social Life[operational] key=null via=Inns and taverns (district)",
+   "Performance & Theater[operational] key=null via=Theater+Bardic college",
+   "Maps & Cartography[operational] key=null via=Cartographer's guild",
+   "News & Public Information[operational] key=null via=Cartographer's guild",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "grain_fields,crossroads_position,gemstone_deposits,coal_deposits,grazing_land,hunting_grounds",
+  "depl": "gemstone_deposits,hunting_grounds",
+  "keys": [
+   "grazing_land"
+  ],
+  "why": [
+   "Livestock & Dairy on grazing_land via Stable district",
+   "Horse & Animal Trade on grazing_land via Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Textiles & Cloth on grazing_land via Tailor's guild+Weavers/Textile workers+Dyer",
+   "Cloth Finishing & Clothing on grazing_land via Tailor+Dyer+Tailor's guild",
+   "Leatherworking & Cordwaining on grazing_land via Tanner (established)+Cobbler's guild"
+  ]
+ },
+ {
+  "seed": "r2s-occupied-hamlet-0",
+  "line": "No one here works the alpine pastures near Qarahiid.",
+  "res": "alpine pastures",
+  "chains": [
+   "Livestock & Dairy[vulnerable] key=alpine_pasture via=Common grazing land",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "alpine_pasture,mountain_timber,marshlands,defended_pass,stone_quarry",
+  "depl": "marshlands",
+  "keys": [],
+  "why": []
+ },
+ {
+  "seed": "r2s-occupied-village-1",
+  "line": "No one here works the medicinal herbs near Celoichi.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Divine & Magical Healing[running] key=hot_springs via=Parish church",
+   "Faith & Worship[running] key=null via=Parish church",
+   "Pilgrimage & Holy Sites[running] key=hot_springs via=Parish church",
+   "Caravan & Overland Trade[vulnerable] key=null via=Pack animal trader"
+  ],
+  "cfg": "managed_forest,hot_springs,precious_metals,stone_quarry,ancient_grove",
+  "depl": "precious_metals",
+  "keys": [
+   "hot_springs",
+   "ancient_grove"
+  ],
+  "why": [
+   "Divine & Magical Healing on hot_springs via Parish church",
+   "Pilgrimage & Holy Sites on hot_springs via Parish church"
+  ]
+ },
+ {
+  "seed": "r2s-occupied-city-1",
+  "line": "No one here works the animal hides near Qaranuur.",
+  "res": "animal hides",
+  "chains": [
+   "Hunting & Trapping[impaired] key=hunting_grounds via=Tanner (established)",
+   "Leather & Hides[impaired] key=hunting_grounds via=Tanner (established)+Cobbler's guild+Furrier's district",
+   "Furs & Pelts[impaired] key=hunting_grounds via=Furrier's district",
+   "Mining & Quarrying[vulnerable] key=coal_deposits via=Charcoal burner",
+   "Letters of Credit & Finance[vulnerable] key=null via=Banking houses",
+   "Spellcasting Services[vulnerable] key=null via=Mages' guild",
+   "Mercenary Forces[vulnerable] key=null via=Mercenary quarter",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)",
+   "Intelligence & Communications[vulnerable] key=null via=Post relay station+Sage's quarter",
+   "Glass & Print[vulnerable] key=null via=Glassmakers+Printing house",
+   "Livestock & Dairy[running] key=grazing_land via=Cooper+Stable district",
+   "Foraging & Smallholding[running] key=foraging_areas via=Elder Grove Council",
+   "Horse & Animal Trade[running] key=grazing_land via=Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Herbalism & Remedies[running] key=foraging_areas via=Apothecary+Midwife+Elder Grove Council",
+   "Textiles & Cloth[running] key=grazing_land via=Tailor's guild+Weavers/Textile workers+Fuller+Dyer",
+   "Cloth Finishing & Clothing[running] key=grazing_land via=Tailor+Fuller+Dyer+Tailor's guild",
+   "Leatherworking & Cordwaining[vulnerable] key=grazing_land via=Tanner (established)+Cobbler's guild",
+   "Beekeeping & Wax[running] key=foraging_areas via=Chandler",
+   "Fuel & Heating[running] key=coal_deposits via=Charcoal burner",
+   "Spices & Dyes[running] key=null via=Merchant guilds (3-8)+Merchant guilds (15-40)+Luxury goods quarter+Annual fair",
+   "Storage & Logistics[running] key=null via=Caravan masters' exchange",
+   "Caravan & Overland Trade[running] key=null via=Caravan masters' exchange",
+   "Strategic Crossroads Toll[running] key=crossroads_position via=Toll bridge+Coaching inn+Customs house",
+   "Luxury Goods[entrepot] key=precious_metals via=Specialized metalworkers+Luxury goods quarter",
+   "Silk & Luxury Textiles[entrepot] key=null via=Luxury goods quarter+Merchant guilds (15-40)",
+   "Camel Caravan Trade[entrepot] key=camel_herds via=Caravan masters' exchange",
+   "Black market[operational] key=null via=Front businesses+Black market+Thieves' guild (powerful)",
+   "Organised Crime[operational] key=null via=Thieves' guild (powerful)",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds+Veteran's lodge",
+   "Performance & Theater[operational] key=null via=Theater",
+   "Maps & Cartography[operational] key=null via=Cartographer's guild",
+   "News & Public Information[operational] key=null via=Cartographer's guild",
+   "Faith & Worship[operational] key=null via=Parish church",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "foraging_areas,crossroads_position,coal_deposits,hunting_grounds,grazing_land",
+  "depl": "hunting_grounds",
+  "keys": [
+   "grazing_land"
+  ],
+  "why": [
+   "Livestock & Dairy on grazing_land via Cooper+Stable district",
+   "Horse & Animal Trade on grazing_land via Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Textiles & Cloth on grazing_land via Tailor's guild+Weavers/Textile workers+Fuller+Dyer",
+   "Cloth Finishing & Clothing on grazing_land via Tailor+Fuller+Dyer+Tailor's guild",
+   "Leatherworking & Cordwaining on grazing_land via Tanner (established)+Cobbler's guild"
+  ]
+ },
+ {
+  "seed": "r2s-indebted-hamlet-0",
+  "line": "No one here works the medicinal herbs near Gantulgabulag.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Subsistence farming",
+   "Faith & Worship[running] key=null via=Parish church+Wayside shrine"
+  ],
+  "cfg": "managed_forest,ancient_grove,gemstone_deposits",
+  "depl": "gemstone_deposits",
+  "keys": [
+   "ancient_grove"
+  ],
+  "why": [
+   "Foraging & Smallholding on ancient_grove via Subsistence farming"
+  ]
+ },
+ {
+  "seed": "r2s-indebted-village-1",
+  "line": "No one here works the timber near Olympnea.",
+  "res": "timber",
+  "chains": [
+   "Fishing & Seafood[vulnerable] key=fishing_grounds via=Fisher's landing+Salt works",
+   "Boatbuilding & River Transport[vulnerable] key=shipbuilding_timber via=River boatyard+River ferry+Boatyard",
+   "Salt & Preservation[running] key=salt_flats via=Salt works",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "fishing_grounds,shipbuilding_timber,magical_node,salt_flats",
+  "depl": "fishing_grounds",
+  "keys": [
+   "shipbuilding_timber"
+  ],
+  "why": [
+   "Boatbuilding & River Transport on shipbuilding_timber via River boatyard+River ferry+Boatyard"
+  ]
+ },
+ {
+  "seed": "r2s-indebted-town-1",
+  "line": "No one here works the stone near Xiaba.",
+  "res": "stone",
+  "chains": [
+   "Standing Watch[vulnerable] key=null via=Town watch",
+   "Taverns & Social Life[vulnerable] key=null via=Taverns (5-20)",
+   "Fortifications[vulnerable] key=stone_quarry via=Town walls",
+   "Textiles & Cloth[running] key=grazing_land via=Fuller+Dyer",
+   "Bowyer & fletcher[running] key=managed_forest via=Craft guilds (5-15)",
+   "Cloth Finishing & Clothing[running] key=grazing_land via=Fuller+Dyer",
+   "Faith & Worship[running] key=null via=Parish church",
+   "Black market[operational] key=null via=Fence (word of mouth)",
+   "Law & Governance[operational] key=null via=Town hall",
+   "Caravan & Overland Trade[vulnerable] key=null via=Caravaneer's post"
+  ],
+  "cfg": "grazing_land,ancient_grove,gemstone_deposits,stone_quarry,managed_forest",
+  "depl": "gemstone_deposits",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Fortifications on stone_quarry via Town walls"
+  ]
+ },
+ {
+  "seed": "r2s-indebted-city-3",
+  "line": "No one here works the stone near Oberheim.",
+  "res": "stone",
+  "chains": [
+   "Herbalism & Remedies[vulnerable] key=foraging_areas via=Apothecary+Midwife+Elder Grove Council",
+   "Weapons & Armor[impaired] key=iron_deposits via=Specialized metalworkers+Blacksmiths (3-10)",
+   "Iron & Metalwork[vulnerable] key=iron_deposits via=Blacksmith+Blacksmiths (3-10)",
+   "Smelting & Refining[vulnerable] key=iron_deposits via=Smelter+Specialized metalworkers",
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Elder Grove Council",
+   "Spellcasting Services[vulnerable] key=null via=Wizard's tower",
+   "Magical Items & Enchanting[vulnerable] key=magical_node via=Wizard's tower+Enchanter's shop+Scroll scribe",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)",
+   "Intelligence & Communications[vulnerable] key=null via=Sage's quarter",
+   "Glass & Print[vulnerable] key=null via=Glassmakers+Printing house",
+   "Fortifications[vulnerable] key=stone_quarry via=City walls and gates",
+   "Faith & Worship[running] key=null via=Parish church+Multiple monasteries+Foundling home",
+   "Performance & Theater[operational] key=null via=Theater",
+   "Gambling & Arena[operational] key=null via=Gambling halls",
+   "Hospital & Surgery[operational] key=null via=Major hospital+Foundling home",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "marshlands,ancient_grove,stone_quarry,iron_deposits,gemstone_deposits,foraging_areas,coal_deposits",
+  "depl": "marshlands,iron_deposits,foraging_areas,coal_deposits",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Fortifications on stone_quarry via City walls and gates"
+  ]
+ },
+ {
+  "seed": "r2s-indebted-metropolis-1",
+  "line": "No one here works the animal hides near Olympskala.",
+  "res": "animal hides",
+  "chains": [
+   "Fortifications[impaired] key=stone_quarry via=Citadel",
+   "Grain & Bread[magically_sustained] key=grain_fields via=Mills (2-5)+Mill",
+   "Foraging & Smallholding[magically_sustained] key=foraging_areas via=Elder Grove Council",
+   "Hunting & Trapping[magically_sustained] key=hunting_grounds via=Tanner (established)",
+   "Brewing & Malting[magically_sustained] key=grain_fields via=Cooper+Brewer+Brewery",
+   "Herbalism & Remedies[vulnerable] key=foraging_areas via=Apothecary+Midwife+Elder Grove Council",
+   "Leather & Hides[impaired] key=hunting_grounds via=Tanner (established)+Cobbler's guild+Furrier's district",
+   "Food Processing[impaired] key=grain_fields via=Bakers (5-15)+Butchers (3-8)",
+   "Weapons & Armor[impaired] key=iron_deposits via=Specialized metalworkers+Blacksmiths (3-10)",
+   "Bowyer & fletcher[magically_sustained] key=managed_forest via=Craft guilds (5-15)+Bowyers & fletchers (guild)",
+   "Beekeeping & Wax[magically_sustained] key=foraging_areas via=Chandler",
+   "Timber & Lumber[magically_sustained] key=managed_forest via=Sawmill+Carpenters (5-15)+Carpenter",
+   "Iron & Metalwork[vulnerable] key=iron_deposits via=Mine+Blacksmith+Blacksmiths (3-10)",
+   "Stone & Construction[vulnerable] key=stone_quarry via=Stone quarry+Brickmaker",
+   "Smelting & Refining[vulnerable] key=iron_deposits via=Smelter+Specialized metalworkers",
+   "Boatbuilding & River Transport[magically_sustained] key=managed_forest via=Barge and river transport company",
+   "Furs & Pelts[impaired] key=hunting_grounds via=Furrier's district",
+   "Divine & Magical Healing[vulnerable] key=hot_springs via=Parish church+Cathedral+Major monasteries",
+   "Pilgrimage & Holy Sites[vulnerable] key=hot_springs via=Parish church+Cathedral+Major monasteries",
+   "Spellcasting Services[vulnerable] key=null via=Mages' district",
+   "Magical Items & Enchanting[vulnerable] key=magical_node via=Enchanter's shop+Scroll scribe+Academy of magic+Mages' district",
+   "Planar Trade[vulnerable] key=null via=Planar traders+Planar embassy",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Mercenary Forces[vulnerable] key=null via=Mercenary quarter",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Hospital & Surgery[vulnerable] key=null via=Hospital network",
+   "Maps & Cartography[vulnerable] key=null via=Great library+Cartographer's guild+Message Network",
+   "Intelligence & Communications[vulnerable] key=null via=Post relay station+Sage's quarter",
+   "Luxury Goods[vulnerable] key=precious_metals via=Specialized metalworkers+Luxury goods quarter",
+   "Faith & Worship[vulnerable] key=null via=Parish church+Cathedral+Major monasteries",
+   "Silk & Luxury Textiles[vulnerable] key=null via=Luxury goods quarter+Merchant guilds (15-40)+International trade center",
+   "Letters of Credit & Finance[vulnerable] key=null via=Banking district",
+   "Livestock & Dairy[running] key=grazing_land via=Cooper+Stable district",
+   "Horse & Animal Trade[vulnerable] key=grazing_land via=Beast trainers+Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Textiles & Cloth[running] key=grazing_land via=Tailor's guild+Weavers/Textile workers+Fuller+Dyer",
+   "Cloth Finishing & Clothing[running] key=grazing_land via=Tailor+Fuller+Dyer+Tailor's guild",
+   "Leatherworking & Cordwaining[vulnerable] key=grazing_land via=Tanner (established)+Cobbler's guild",
+   "Smuggling & Contraband[entrepot] key=null via=Smuggling network",
+   "Spices & Dyes[entrepot] key=null via=Merchant guilds (3-8)+Merchant guilds (15-40)+Luxury goods quarter+Annual fair",
+   "Storage & Logistics[entrepot] key=null via=Barge and river transport company",
+   "Wine & Spirits[entrepot] key=null via=Vintner+Brewer+Brewery",
+   "Strategic Crossroads Toll[entrepot] key=crossroads_position via=Toll bridge+Coaching inn+Customs house",
+   "Black market[operational] key=null via=Front businesses+Thieves' guild (powerful)",
+   "Organised Crime[operational] key=null via=Thieves' guild (powerful)",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds+Veteran's lodge",
+   "Performance & Theater[operational] key=null via=Theater+Bardic college",
+   "Gambling & Arena[operational] key=null via=Arena+Gambling district",
+   "News & Public Information[vulnerable] key=null via=Cartographer's guild",
+   "Glass & Print[vulnerable] key=null via=Glassmakers",
+   "Law & Governance[operational] key=null via=City hall+Multiple court buildings"
+  ],
+  "cfg": "foraging_areas,hot_springs,stone_quarry,managed_forest,hunting_grounds,grain_fields,iron_deposits,grazing_land",
+  "depl": "foraging_areas,stone_quarry,managed_forest,hunting_grounds,grain_fields,iron_deposits",
+  "keys": [
+   "grazing_land"
+  ],
+  "why": [
+   "Livestock & Dairy on grazing_land via Cooper+Stable district",
+   "Horse & Animal Trade on grazing_land via Beast trainers+Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Textiles & Cloth on grazing_land via Tailor's guild+Weavers/Textile workers+Fuller+Dyer",
+   "Cloth Finishing & Clothing on grazing_land via Tailor+Fuller+Dyer+Tailor's guild",
+   "Leatherworking & Cordwaining on grazing_land via Tanner (established)+Cobbler's guild"
+  ]
+ },
+ {
+  "seed": "r2s-recently_betrayed-thorp-3",
+  "line": "No one here works the medicinal herbs near Castelstagnum.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Subsistence farming",
+   "Grain & Bread[running] key=grain_fields via=Mill+Access to external mill"
+  ],
+  "cfg": "grain_fields,ancient_grove,stone_quarry",
+  "depl": "",
+  "keys": [
+   "ancient_grove"
+  ],
+  "why": [
+   "Foraging & Smallholding on ancient_grove via Subsistence farming"
+  ]
+ },
+ {
+  "seed": "r2s-recently_betrayed-hamlet-0",
+  "line": "No one here works the medicinal herbs near Ioannodion.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Subsistence farming",
+   "Livestock & Dairy[running] key=grazing_land via=Common grazing land",
+   "Reed & Marsh Harvest[running] key=marshlands via=Peat cutter",
+   "Faith & Worship[running] key=null via=Parish church+Wayside shrine"
+  ],
+  "cfg": "grazing_land,ancient_grove,precious_metals,marshlands",
+  "depl": "",
+  "keys": [
+   "ancient_grove",
+   "marshlands"
+  ],
+  "why": [
+   "Foraging & Smallholding on ancient_grove via Subsistence farming",
+   "Reed & Marsh Harvest on marshlands via Peat cutter"
+  ]
+ },
+ {
+  "seed": "r2s-recently_betrayed-hamlet-1",
+  "line": "No one here works the medicinal herbs near Olymplathra.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Subsistence farming",
+   "Iron & Metalwork[running] key=iron_deposits via=Mine (open cast)+Mine+Resident smith (part-time)",
+   "Mining & Quarrying[running] key=iron_deposits via=Mine (open cast)",
+   "Faith & Worship[running] key=null via=Parish church"
+  ],
+  "cfg": "marshlands,ancient_grove,iron_deposits",
+  "depl": "",
+  "keys": [
+   "marshlands",
+   "ancient_grove"
+  ],
+  "why": [
+   "Foraging & Smallholding on ancient_grove via Subsistence farming"
+  ]
+ },
+ {
+  "seed": "r2s-recently_betrayed-town-3",
+  "line": "No one here works the animal hides near Milopol.",
+  "res": "animal hides",
+  "chains": [
+   "Grain & Bread[impaired] key=grain_fields via=Mills (2-5)+Mill",
+   "Standing Watch[vulnerable] key=null via=Town watch",
+   "Taverns & Social Life[vulnerable] key=null via=Taverns (5-20)",
+   "Horse & Animal Trade[running] key=grazing_land via=Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Leatherworking & Cordwaining[vulnerable] key=grazing_land via=Tanner (established)",
+   "Reed & Marsh Harvest[running] key=marshlands via=Merchant guilds (3-8)",
+   "Faith & Worship[running] key=null via=Parish church",
+   "Law & Governance[operational] key=null via=Town hall"
+  ],
+  "cfg": "grain_fields,ancient_grove,gemstone_deposits,grazing_land,marshlands",
+  "depl": "grain_fields,gemstone_deposits",
+  "keys": [
+   "grazing_land"
+  ],
+  "why": [
+   "Horse & Animal Trade on grazing_land via Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Leatherworking & Cordwaining on grazing_land via Tanner (established)"
+  ]
+ },
+ {
+  "seed": "r2s-recently_betrayed-city-0",
+  "line": "No one here works the timber near Ormhammer.",
+  "res": "timber",
+  "chains": [
+   "Spellcasting Services[vulnerable] key=null via=Wizard's tower",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Almshouse Care[running] key=null via=Almshouse",
+   "Luxury Goods[running] key=precious_metals via=Specialized metalworkers+Luxury goods quarter",
+   "Bowyer & fletcher[running] key=managed_forest via=Craft guilds (5-15)",
+   "Mining & Coinage[running] key=precious_metals via=Specialized metalworkers",
+   "Faith & Worship[running] key=null via=Parish church+Multiple monasteries+Almshouse",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "hot_springs_mineral,mountain_timber,managed_forest,ancient_grove,precious_metals,gemstone_deposits",
+  "depl": "ancient_grove",
+  "keys": [
+   "mountain_timber",
+   "managed_forest"
+  ],
+  "why": [
+   "Bowyer & fletcher on managed_forest via Craft guilds (5-15)"
+  ]
+ },
+ {
+  "seed": "r2s-infiltrated-hamlet-3",
+  "line": "No one here works the medicinal herbs near Linfeng.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Subsistence farming",
+   "Faith & Worship[running] key=null via=Parish church+Wayside shrine"
+  ],
+  "cfg": "managed_forest,ancient_grove,iron_deposits",
+  "depl": "",
+  "keys": [
+   "ancient_grove"
+  ],
+  "why": [
+   "Foraging & Smallholding on ancient_grove via Subsistence farming"
+  ]
+ },
+ {
+  "seed": "r2s-infiltrated-village-3",
+  "line": "No one here works the animal hides near Yaxchtitlan.",
+  "res": "animal hides",
+  "chains": [
+   "Livestock & Dairy[running] key=grazing_land via=Common grazing land",
+   "Faith & Worship[running] key=null via=Parish church",
+   "News & Public Information[vulnerable] key=null via=Cartographer's guild"
+  ],
+  "cfg": "grazing_land,ancient_grove,coal_deposits",
+  "depl": "coal_deposits",
+  "keys": [
+   "grazing_land"
+  ],
+  "why": [
+   "Livestock & Dairy on grazing_land via Common grazing land"
+  ]
+ },
+ {
+  "seed": "r2s-infiltrated-town-1",
+  "line": "No one here works the stone near Waldstadt.",
+  "res": "stone",
+  "chains": [
+   "Fishing & Seafood[vulnerable] key=river_fish via=Merchant guilds (3-8)+Weekly market",
+   "Taverns & Social Life[vulnerable] key=null via=Taverns (5-20)",
+   "Fortifications[vulnerable] key=stone_quarry via=Town walls",
+   "River Fishing[running] key=river_fish via=Merchant guilds (3-8)+Weekly market",
+   "Smelting & Refining[vulnerable] key=iron_deposits via=Smelter",
+   "Spices & Dyes[running] key=null via=Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Caravan & Overland Trade[vulnerable] key=null via=Carriers' guild",
+   "Black market[operational] key=null via=Fence (word of mouth)",
+   "Standing Watch[vulnerable] key=null via=Town watch",
+   "Faith & Worship[operational] key=null via=Parish church",
+   "Law & Governance[operational] key=null via=Town hall"
+  ],
+  "cfg": "river_fish,foraging_areas,crossroads_position,stone_quarry,iron_deposits,coal_deposits",
+  "depl": "coal_deposits",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Fortifications on stone_quarry via Town walls"
+  ]
+ },
+ {
+  "seed": "r2s-infiltrated-town-3",
+  "line": "No one here works the animal hides near Padmagiri.",
+  "res": "animal hides",
+  "chains": [
+   "Leatherworking & Cordwaining[vulnerable] key=hunting_grounds via=Tanner (established)",
+   "Standing Watch[vulnerable] key=null via=Town watch",
+   "Taverns & Social Life[vulnerable] key=null via=Taverns (5-20)+Public bathhouse",
+   "Hunting & Trapping[running] key=hunting_grounds via=Tanner (established)",
+   "Leather & Hides[vulnerable] key=hunting_grounds via=Tanner (established)",
+   "Spices & Dyes[running] key=null via=Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Storage & Logistics[running] key=null via=Caravaneer's post",
+   "Caravan & Overland Trade[running] key=null via=Caravaneer's post+Carriers' guild",
+   "Strategic Crossroads Toll[running] key=crossroads_position via=Caravaneer's post+Customs house",
+   "Smuggling & Contraband[entrepot] key=null via=Smuggling operation",
+   "Wine & Spirits[entrepot] key=null via=Vintner",
+   "Camel Caravan Trade[entrepot] key=camel_herds via=Caravaneer's post",
+   "Maps & Cartography[operational] key=null via=Cartographer's guild",
+   "News & Public Information[operational] key=null via=Cartographer's guild",
+   "Faith & Worship[operational] key=null via=Parish church",
+   "Law & Governance[operational] key=null via=Town hall"
+  ],
+  "cfg": "hunting_grounds,crossroads_position,gemstone_deposits,iron_deposits",
+  "depl": "iron_deposits",
+  "keys": [
+   "hunting_grounds"
+  ],
+  "why": [
+   "Leatherworking & Cordwaining on hunting_grounds via Tanner (established)",
+   "Hunting & Trapping on hunting_grounds via Tanner (established)",
+   "Leather & Hides on hunting_grounds via Tanner (established)"
+  ]
+ },
+ {
+  "seed": "r2s-infiltrated-city-3",
+  "line": "No one here works the stone near Terraium.",
+  "res": "stone",
+  "chains": [
+   "Weapons & Armor[impaired] key=iron_deposits via=Specialized metalworkers+Blacksmiths (3-10)",
+   "Iron & Metalwork[vulnerable] key=iron_deposits via=Blacksmith+Blacksmiths (3-10)",
+   "Smelting & Refining[vulnerable] key=iron_deposits via=Smelter+Specialized metalworkers",
+   "Food Processing[vulnerable] key=grain_fields via=Bakers (5-15)+Butchers (3-8)",
+   "Luxury Goods[vulnerable] key=precious_metals via=Specialized metalworkers+Luxury goods quarter",
+   "Spices & Dyes[vulnerable] key=null via=Merchant guilds (3-8)+Merchant guilds (15-40)+Luxury goods quarter",
+   "Spellcasting Services[vulnerable] key=null via=Wizard's tower",
+   "Magical Items & Enchanting[vulnerable] key=magical_node via=Wizard's tower+Scroll scribe",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Intelligence & Communications[vulnerable] key=null via=Sage's quarter",
+   "Glass & Print[vulnerable] key=null via=Glassmakers+Printing house",
+   "Silk & Luxury Textiles[vulnerable] key=null via=Luxury goods quarter+Merchant guilds (15-40)",
+   "Fortifications[vulnerable] key=stone_quarry via=City walls and gates",
+   "Grain & Bread[running] key=grain_fields via=Mills (2-5)+Mill",
+   "Brewing & Malting[running] key=grain_fields via=Brewer+Brewery",
+   "Herbalism & Remedies[running] key=foraging_areas via=Apothecary+Midwife",
+   "Beekeeping & Wax[running] key=foraging_areas via=Chandler",
+   "Smuggling & Contraband[entrepot] key=null via=Smuggling network",
+   "Furs & Pelts[entrepot] key=hunting_grounds via=Furrier's district",
+   "Wine & Spirits[entrepot] key=null via=Brewer+Brewery",
+   "Black market[operational] key=null via=Front businesses+Black market",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds+Veteran's lodge",
+   "Taverns & Social Life[operational] key=null via=Inns and taverns (district)",
+   "Faith & Worship[operational] key=null via=Parish church",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "foraging_areas,crossroads_position,iron_deposits,grain_fields,gemstone_deposits,coal_deposits,stone_quarry",
+  "depl": "iron_deposits,gemstone_deposits,coal_deposits",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Fortifications on stone_quarry via City walls and gates"
+  ]
+ },
+ {
+  "seed": "r2s-plague_onset-thorp-0",
+  "line": "No one here works the medicinal herbs near Huzhou.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Subsistence farming"
+  ],
+  "cfg": "grazing_land,ancient_grove,precious_metals",
+  "depl": "",
+  "keys": [
+   "ancient_grove"
+  ],
+  "why": [
+   "Foraging & Smallholding on ancient_grove via Subsistence farming"
+  ]
+ },
+ {
+  "seed": "r2s-plague_onset-town-1",
+  "line": "No one here works the animal hides near Olymparion.",
+  "res": "animal hides",
+  "chains": [
+   "Leatherworking & Cordwaining[vulnerable] key=hunting_grounds via=Tanner (established)",
+   "Standing Watch[vulnerable] key=null via=Town watch",
+   "Taverns & Social Life[vulnerable] key=null via=Taverns (5-20)",
+   "Hospital & Surgery[vulnerable] key=null via=Small hospital",
+   "Fortifications[running] key=stone_quarry via=Town walls",
+   "Hunting & Trapping[running] key=hunting_grounds via=Tanner (established)",
+   "Divine & Magical Healing[running] key=hot_springs via=Parish church",
+   "Leather & Hides[vulnerable] key=hunting_grounds via=Tanner (established)",
+   "Stone & Construction[running] key=stone_quarry via=Brickmaker",
+   "Pilgrimage & Holy Sites[running] key=hot_springs via=Parish church",
+   "Salt & Preservation[entrepot] key=salt_flats via=Salt works",
+   "Strategic Crossroads Toll[entrepot] key=crossroads_position via=Coaching inn",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild",
+   "Faith & Worship[operational] key=null via=Parish church",
+   "Law & Governance[operational] key=null via=Town hall"
+  ],
+  "cfg": "grazing_land,hot_springs,stone_quarry,hunting_grounds,coal_deposits",
+  "depl": "grazing_land,coal_deposits",
+  "keys": [
+   "hunting_grounds"
+  ],
+  "why": [
+   "Leatherworking & Cordwaining on hunting_grounds via Tanner (established)",
+   "Hunting & Trapping on hunting_grounds via Tanner (established)",
+   "Leather & Hides on hunting_grounds via Tanner (established)"
+  ]
+ },
+ {
+  "seed": "r2s-plague_onset-city-0",
+  "line": "No one here works the stone near Novono.",
+  "res": "stone",
+  "chains": [
+   "Hunting & Trapping[impaired] key=hunting_grounds via=Tanner (established)",
+   "Leather & Hides[impaired] key=hunting_grounds via=Tanner (established)+Cobbler's guild+Furrier's district",
+   "Weapons & Armor[impaired] key=iron_deposits via=Specialized metalworkers+Blacksmiths (3-10)",
+   "Iron & Metalwork[impaired] key=iron_deposits via=Blacksmith+Blacksmiths (3-10)",
+   "Smelting & Refining[impaired] key=iron_deposits via=Specialized metalworkers",
+   "Furs & Pelts[impaired] key=hunting_grounds via=Furrier's district",
+   "Fishing & Seafood[vulnerable] key=river_fish via=Merchant guilds (3-8)+Fish market",
+   "Food Processing[vulnerable] key=grain_fields via=Bakers (5-15)+Butchers (3-8)",
+   "Spices & Dyes[vulnerable] key=null via=Merchant guilds (3-8)+Merchant guilds (15-40)+Luxury goods quarter+Annual fair",
+   "Letters of Credit & Finance[vulnerable] key=null via=Banking houses",
+   "Spellcasting Services[vulnerable] key=null via=Mages' guild",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Intelligence & Communications[vulnerable] key=null via=Sage's quarter",
+   "Luxury Goods[vulnerable] key=precious_metals via=Specialized metalworkers+Luxury goods quarter",
+   "Silk & Luxury Textiles[vulnerable] key=null via=Luxury goods quarter+Merchant guilds (15-40)",
+   "Fortifications[running] key=stone_quarry via=City walls and gates+Citadel",
+   "Grain & Bread[running] key=grain_fields via=Mills (2-5)+Mill",
+   "River Fishing[running] key=river_fish via=Merchant guilds (3-8)",
+   "Stone & Construction[running] key=stone_quarry via=Brickmaker",
+   "Storage & Logistics[running] key=null via=Caravan masters' exchange",
+   "Caravan & Overland Trade[running] key=null via=Caravan masters' exchange",
+   "Strategic Crossroads Toll[running] key=crossroads_position via=Coaching inn",
+   "Camel Caravan Trade[entrepot] key=camel_herds via=Caravan masters' exchange",
+   "Black market[operational] key=null via=Front businesses+Black market",
+   "Mercenary Forces[operational] key=null via=Mercenary quarter",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds",
+   "Taverns & Social Life[operational] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Performance & Theater[operational] key=null via=Theater+Bardic college",
+   "Almshouse Care[operational] key=null via=Foundling home",
+   "Maps & Cartography[operational] key=null via=Cartographer's guild",
+   "News & Public Information[operational] key=null via=Cartographer's guild",
+   "Glass & Print[vulnerable] key=null via=Glassmakers",
+   "Faith & Worship[operational] key=null via=Parish church+Multiple monasteries+Foundling home",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "river_fish,hunting_grounds,crossroads_position,iron_deposits,grain_fields,stone_quarry",
+  "depl": "hunting_grounds,iron_deposits",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Fortifications on stone_quarry via City walls and gates+Citadel",
+   "Stone & Construction on stone_quarry via Brickmaker"
+  ]
+ },
+ {
+  "seed": "r2s-plague_onset-city-1",
+  "line": "No one here works the stone near Sundbø.",
+  "res": "stone",
+  "chains": [
+   "Luxury Goods[impaired] key=precious_metals via=Specialized metalworkers+Luxury goods quarter",
+   "Bowyer & fletcher[magically_sustained] key=managed_forest via=Craft guilds (5-15)",
+   "Timber & Lumber[magically_sustained] key=managed_forest via=Sawmill+Carpenters (5-15)+Carpenter",
+   "Mining & Coinage[impaired] key=precious_metals via=Specialized metalworkers",
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Elder Grove Council",
+   "Food Processing[vulnerable] key=grain_fields via=Bakers (5-15)+Butchers (3-8)",
+   "Beekeeping & Wax[vulnerable] key=ancient_grove via=Chandler",
+   "Spellcasting Services[vulnerable] key=null via=Mages' guild",
+   "Intelligence & Communications[vulnerable] key=null via=Sage's quarter",
+   "Fortifications[running] key=stone_quarry via=City walls and gates+Citadel",
+   "Grain & Bread[running] key=grain_fields via=Mills (2-5)+Mill",
+   "Brewing & Malting[running] key=grain_fields via=Cooper+Brewer+Brewery",
+   "Stone & Construction[running] key=stone_quarry via=Brickmaker",
+   "Faith & Worship[running] key=null via=Parish church+Cathedral+Multiple monasteries",
+   "Black market[operational] key=null via=Front businesses+Thieves' guild (powerful)",
+   "Organised Crime[operational] key=null via=Thieves' guild (powerful)",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Mercenary Forces[operational] key=null via=Mercenary quarter",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds+Veteran's lodge",
+   "Taverns & Social Life[operational] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Performance & Theater[operational] key=null via=Theater+Bardic college",
+   "Gambling & Arena[operational] key=null via=Gambling halls",
+   "Hospital & Surgery[operational] key=null via=Major hospital",
+   "Glass & Print[vulnerable] key=null via=Glassmakers",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "grain_fields,ancient_grove,gemstone_deposits,stone_quarry,managed_forest,coal_deposits,precious_metals",
+  "depl": "gemstone_deposits,managed_forest,precious_metals",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Fortifications on stone_quarry via City walls and gates+Citadel",
+   "Stone & Construction on stone_quarry via Brickmaker"
+  ]
+ },
+ {
+  "seed": "r2s-succession_void-thorp-1",
+  "line": "No one here works the medicinal herbs near Schwarzdorf.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=marshlands via=Subsistence farming",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "marshlands,hot_springs,precious_metals",
+  "depl": "precious_metals",
+  "keys": [
+   "marshlands",
+   "hot_springs"
+  ],
+  "why": [
+   "Foraging & Smallholding on marshlands via Subsistence farming"
+  ]
+ },
+ {
+  "seed": "r2s-succession_void-thorp-3",
+  "line": "No one here works the medicinal herbs near Markazmahal.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Subsistence farming",
+   "Grain & Bread[running] key=grain_fields via=Mill+Access to external mill",
+   "Faith & Worship[running] key=null via=Parish church+Wayside shrine"
+  ],
+  "cfg": "grain_fields,ancient_grove,coal_deposits",
+  "depl": "",
+  "keys": [
+   "ancient_grove"
+  ],
+  "why": [
+   "Foraging & Smallholding on ancient_grove via Subsistence farming"
+  ]
+ },
+ {
+  "seed": "r2s-succession_void-hamlet-1",
+  "line": "No one here works the stone near Skalddal.",
+  "res": "stone",
+  "chains": [
+   "Fortifications[vulnerable] key=stone_quarry via=Palisade",
+   "Foraging & Smallholding[running] key=foraging_areas via=Subsistence farming",
+   "Pilgrimage & Holy Sites[running] key=hot_springs via=Parish church",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "river_fish,foraging_areas,hot_springs,stone_quarry",
+  "depl": "",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Fortifications on stone_quarry via Palisade"
+  ]
+ },
+ {
+  "seed": "r2s-succession_void-hamlet-2",
+  "line": "No one here works the stone near Weichturm.",
+  "res": "stone",
+  "chains": [
+   "Livestock & Dairy[vulnerable] key=alpine_pasture via=Common grazing land",
+   "Foraging & Smallholding[vulnerable] key=marshlands via=Subsistence farming",
+   "Fortifications[vulnerable] key=stone_quarry via=Palisade",
+   "Faith & Worship[running] key=null via=Parish church"
+  ],
+  "cfg": "mountain_timber,alpine_pasture,marshlands,ancient_grove,stone_quarry",
+  "depl": "ancient_grove",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Fortifications on stone_quarry via Palisade"
+  ]
+ },
+ {
+  "seed": "r2s-succession_void-hamlet-2",
+  "line": "No one here works the alpine pastures near Weichturm.",
+  "res": "alpine pastures",
+  "chains": [
+   "Livestock & Dairy[vulnerable] key=alpine_pasture via=Common grazing land",
+   "Foraging & Smallholding[vulnerable] key=marshlands via=Subsistence farming",
+   "Fortifications[vulnerable] key=stone_quarry via=Palisade",
+   "Faith & Worship[running] key=null via=Parish church"
+  ],
+  "cfg": "mountain_timber,alpine_pasture,marshlands,ancient_grove,stone_quarry",
+  "depl": "ancient_grove",
+  "keys": [],
+  "why": []
+ },
+ {
+  "seed": "r2s-succession_void-village-1",
+  "line": "No one here works the timber near Chrissoeia.",
+  "res": "timber",
+  "chains": [
+   "Boatbuilding & River Transport[vulnerable] key=shipbuilding_timber via=River ferry",
+   "Fishing & Seafood[running] key=fishing_grounds via=Fisher's landing",
+   "Taverns & Social Life[operational] key=null via=Travelers' inn",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "fishing_grounds,shipbuilding_timber,ancient_ruins,magical_node",
+  "depl": "magical_node",
+  "keys": [
+   "shipbuilding_timber"
+  ],
+  "why": [
+   "Boatbuilding & River Transport on shipbuilding_timber via River ferry"
+  ]
+ },
+ {
+  "seed": "r2s-succession_void-town-3",
+  "line": "No one here works the medicinal herbs near Skaldtun.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Beekeeping & Wax[vulnerable] key=ancient_grove via=Chandler",
+   "Standing Watch[vulnerable] key=null via=Town watch",
+   "Fortifications[vulnerable] key=stone_quarry via=Town walls",
+   "Grain & Bread[running] key=grain_fields via=Mills (2-5)+Mill",
+   "Food Processing[running] key=grain_fields via=Bakers (5-15)",
+   "Faith & Worship[running] key=null via=Parish church",
+   "Taverns & Social Life[operational] key=null via=Taverns (5-20)",
+   "Law & Governance[operational] key=null via=Town hall"
+  ],
+  "cfg": "grain_fields,ancient_grove,iron_deposits,coal_deposits,stone_quarry,precious_metals",
+  "depl": "iron_deposits,coal_deposits",
+  "keys": [
+   "ancient_grove"
+  ],
+  "why": [
+   "Beekeeping & Wax on ancient_grove via Chandler"
+  ]
+ },
+ {
+  "seed": "r2s-succession_void-city-1",
+  "line": "No one here works the animal hides near Lipono.",
+  "res": "animal hides",
+  "chains": [
+   "Fortifications[impaired] key=stone_quarry via=City walls and gates",
+   "Hunting & Trapping[impaired] key=hunting_grounds via=Tanner (established)",
+   "Herbalism & Remedies[vulnerable] key=foraging_areas via=Apothecary+Midwife",
+   "Leather & Hides[impaired] key=hunting_grounds via=Tanner (established)+Cobbler's guild+Furrier's district",
+   "Weapons & Armor[impaired] key=iron_deposits via=Specialized metalworkers+Blacksmiths (3-10)",
+   "Beekeeping & Wax[impaired] key=foraging_areas via=Chandler",
+   "Iron & Metalwork[impaired] key=iron_deposits via=Blacksmith+Blacksmiths (3-10)",
+   "Stone & Construction[impaired] key=stone_quarry via=Stone quarry+Brickmaker",
+   "Smelting & Refining[impaired] key=iron_deposits via=Smelter+Specialized metalworkers",
+   "Furs & Pelts[impaired] key=hunting_grounds via=Furrier's district",
+   "Luxury Goods[vulnerable] key=precious_metals via=Specialized metalworkers+Luxury goods quarter",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Mercenary Forces[vulnerable] key=null via=Mercenary quarter",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Hospital & Surgery[vulnerable] key=null via=Major hospital",
+   "Livestock & Dairy[running] key=grazing_land via=Cooper+Stable district",
+   "Horse & Animal Trade[running] key=grazing_land via=Beast trainers+Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Textiles & Cloth[running] key=grazing_land via=Tailor's guild+Weavers/Textile workers+Dyer",
+   "Cloth Finishing & Clothing[running] key=grazing_land via=Tailor+Dyer+Tailor's guild",
+   "Leatherworking & Cordwaining[vulnerable] key=grazing_land via=Tanner (established)+Cobbler's guild",
+   "Spices & Dyes[running] key=null via=Merchant guilds (3-8)+Merchant guilds (15-40)+Luxury goods quarter+Annual fair",
+   "Storage & Logistics[running] key=null via=Caravan masters' exchange",
+   "Caravan & Overland Trade[running] key=null via=Caravan masters' exchange",
+   "Strategic Crossroads Toll[running] key=crossroads_position via=Toll bridge+Coaching inn+Customs house",
+   "Silk & Luxury Textiles[entrepot] key=null via=Luxury goods quarter+Merchant guilds (15-40)",
+   "Wine & Spirits[entrepot] key=null via=Brewer+Brewery",
+   "Camel Caravan Trade[entrepot] key=camel_herds via=Caravan masters' exchange",
+   "Black market[operational] key=null via=Front businesses+Black market",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds",
+   "Gambling & Arena[operational] key=null via=Gambling halls",
+   "Maps & Cartography[operational] key=null via=Cartographer's guild",
+   "Intelligence & Communications[operational] key=null via=Post relay station",
+   "News & Public Information[operational] key=null via=Cartographer's guild",
+   "Faith & Worship[operational] key=null via=Parish church+Multiple monasteries",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "grazing_land,crossroads_position,iron_deposits,foraging_areas,stone_quarry,hunting_grounds,gemstone_deposits",
+  "depl": "iron_deposits,foraging_areas,stone_quarry,hunting_grounds",
+  "keys": [
+   "grazing_land"
+  ],
+  "why": [
+   "Livestock & Dairy on grazing_land via Cooper+Stable district",
+   "Horse & Animal Trade on grazing_land via Beast trainers+Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Textiles & Cloth on grazing_land via Tailor's guild+Weavers/Textile workers+Dyer",
+   "Cloth Finishing & Clothing on grazing_land via Tailor+Dyer+Tailor's guild",
+   "Leatherworking & Cordwaining on grazing_land via Tanner (established)+Cobbler's guild"
+  ]
+ },
+ {
+  "seed": "r2s-monster_pressure-hamlet-1",
+  "line": "No one here works the animal hides near Zlatoovo.",
+  "res": "animal hides",
+  "chains": [
+   "Livestock & Dairy[running] key=grazing_land via=Common grazing land",
+   "Foraging & Smallholding[running] key=foraging_areas via=Subsistence farming",
+   "Iron & Metalwork[running] key=iron_deposits via=Resident smith (part-time)",
+   "Pilgrimage & Holy Sites[running] key=hot_springs via=Parish church",
+   "Taverns & Social Life[operational] key=null via=Alehouse+Wayside inn",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "foraging_areas,hot_springs,iron_deposits,grazing_land",
+  "depl": "",
+  "keys": [
+   "grazing_land"
+  ],
+  "why": [
+   "Livestock & Dairy on grazing_land via Common grazing land"
+  ]
+ },
+ {
+  "seed": "r2s-monster_pressure-village-0",
+  "line": "No one here works the camel herds near Dharmagiri.",
+  "res": "camel herds",
+  "chains": [
+   "Livestock & Dairy[vulnerable] key=camel_herds via=Common grazing land",
+   "Grain & Bread[running] key=grain_fields via=Mill",
+   "Date Palms and Orchards[running] key=date_palms via=Farmland",
+   "Faith & Worship[running] key=null via=Parish church"
+  ],
+  "cfg": "camel_herds,date_palms,grain_fields,ancient_grove,iron_deposits",
+  "depl": "",
+  "keys": [
+   "camel_herds"
+  ],
+  "why": [
+   "Livestock & Dairy on camel_herds via Common grazing land"
+  ]
+ },
+ {
+  "seed": "r2s-insurgency-thorp-2",
+  "line": "No one here works the medicinal herbs near Uaymkin.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=marshlands via=Subsistence farming",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "marshlands,hot_springs,iron_deposits",
+  "depl": "",
+  "keys": [
+   "marshlands",
+   "hot_springs"
+  ],
+  "why": [
+   "Foraging & Smallholding on marshlands via Subsistence farming"
+  ]
+ },
+ {
+  "seed": "r2s-insurgency-hamlet-0",
+  "line": "No one here works the alpine pastures near Dioneia.",
+  "res": "alpine pastures",
+  "chains": [
+   "Livestock & Dairy[vulnerable] key=alpine_pasture via=Common grazing land",
+   "Foraging & Smallholding[vulnerable] key=marshlands via=Subsistence farming",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "mountain_timber,alpine_pasture,marshlands,defended_pass,precious_metals",
+  "depl": "",
+  "keys": [],
+  "why": []
+ },
+ {
+  "seed": "r2s-insurgency-hamlet-1",
+  "line": "No one here works the medicinal herbs near Neuhof.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Subsistence farming",
+   "Mining & Quarrying[vulnerable] key=coal_deposits via=Peat cutter+Charcoal burner",
+   "Grain & Bread[running] key=grain_fields via=Mill+Access to external mill",
+   "Fuel & Heating[running] key=coal_deposits via=Charcoal burner+Peat cutter",
+   "Faith & Worship[running] key=null via=Parish church+Wayside shrine"
+  ],
+  "cfg": "grain_fields,ancient_grove,coal_deposits",
+  "depl": "",
+  "keys": [
+   "ancient_grove"
+  ],
+  "why": [
+   "Foraging & Smallholding on ancient_grove via Subsistence farming"
+  ]
+ },
+ {
+  "seed": "r2s-insurgency-village-0",
+  "line": "No one here works the alpine pastures near Kamentsy.",
+  "res": "alpine pastures",
+  "chains": [
+   "Livestock & Dairy[vulnerable] key=alpine_pasture via=Common grazing land",
+   "Faith & Worship[running] key=null via=Parish church"
+  ],
+  "cfg": "mountain_timber,alpine_pasture,hunting_grounds,ancient_grove,stone_quarry",
+  "depl": "mountain_timber",
+  "keys": [],
+  "why": []
+ },
+ {
+  "seed": "r2s-insurgency-city-2",
+  "line": "No one here works the stone near Jalalkul.",
+  "res": "stone",
+  "chains": [
+   "Grain & Bread[impaired] key=grain_fields via=Mills (2-5)+Mill",
+   "Food Processing[impaired] key=grain_fields via=Bakers (5-15)+Butchers (3-8)",
+   "Mountain Timber[impaired] key=mountain_timber via=Sawmill",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Mountain Pass Control[vulnerable] key=defended_pass via=Garrison+Customs house",
+   "Mercenary Forces[vulnerable] key=null via=Mercenary quarter",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Fortifications[running] key=stone_quarry via=City walls and gates",
+   "Stone & Construction[running] key=stone_quarry via=Brickmaker",
+   "Faith & Worship[running] key=null via=Parish church",
+   "Black market[operational] key=null via=Front businesses+Black market",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds",
+   "Performance & Theater[operational] key=null via=Theater",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "mountain_timber,hot_springs_mineral,grain_fields,ancient_grove,stone_quarry,defended_pass",
+  "depl": "mountain_timber,grain_fields,ancient_grove",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Fortifications on stone_quarry via City walls and gates",
+   "Stone & Construction on stone_quarry via Brickmaker"
+  ]
+ },
+ {
+  "seed": "r2s-religious_conversion-thorp-3",
+  "line": "No one here works the medicinal herbs near Lidocolonia.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Subsistence farming",
+   "Grain & Bread[running] key=grain_fields via=Mill+Access to external mill"
+  ],
+  "cfg": "grain_fields,ancient_grove,stone_quarry",
+  "depl": "",
+  "keys": [
+   "ancient_grove"
+  ],
+  "why": [
+   "Foraging & Smallholding on ancient_grove via Subsistence farming"
+  ]
+ },
+ {
+  "seed": "r2s-religious_conversion-village-1",
+  "line": "No one here works the timber near Anwan.",
+  "res": "timber",
+  "chains": [
+   "Boatbuilding & River Transport[vulnerable] key=shipbuilding_timber via=River boatyard+River ferry+Boatyard",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "deep_harbour,salt_flats,magical_node,shipbuilding_timber",
+  "depl": "",
+  "keys": [
+   "shipbuilding_timber"
+  ],
+  "why": [
+   "Boatbuilding & River Transport on shipbuilding_timber via River boatyard+River ferry+Boatyard"
+  ]
+ },
+ {
+  "seed": "r2s-religious_conversion-village-3",
+  "line": "No one here works the timber near Archodion.",
+  "res": "timber",
+  "chains": [
+   "River Fishing[vulnerable] key=river_fish via=Fisher's landing",
+   "Divine & Magical Healing[running] key=hot_springs via=Parish church",
+   "Timber & Lumber[running] key=managed_forest via=Thatcher+Carpenter",
+   "Boatbuilding & River Transport[running] key=managed_forest via=River boatyard+River ferry+Boatyard",
+   "Pilgrimage & Holy Sites[running] key=hot_springs via=Parish church",
+   "Salt & Preservation[entrepot] key=salt_flats via=Salt works",
+   "News & Public Information[vulnerable] key=null via=Cartographer's guild",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "river_fish,foraging_areas,hot_springs,coal_deposits,managed_forest",
+  "depl": "river_fish,coal_deposits",
+  "keys": [
+   "managed_forest"
+  ],
+  "why": [
+   "Timber & Lumber on managed_forest via Thatcher+Carpenter",
+   "Boatbuilding & River Transport on managed_forest via River boatyard+River ferry+Boatyard"
+  ]
+ },
+ {
+  "seed": "r2s-religious_conversion-city-2",
+  "line": "No one here works the timber near Ventomunicipium.",
+  "res": "timber",
+  "chains": [
+   "Alchemy & Reagents[vulnerable] key=magical_node via=Alchemist",
+   "Timber & Lumber[vulnerable] key=shipbuilding_timber via=Carpenters (5-15)+Carpenter",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Mercenary Forces[vulnerable] key=null via=Mercenary quarter",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Luxury Goods[vulnerable] key=precious_metals via=Specialized metalworkers+Luxury goods quarter",
+   "Glass & Print[vulnerable] key=null via=Glassmakers+Printing house",
+   "Spices & Dyes[vulnerable] key=null via=Merchant guilds (3-8)+Merchant guilds (15-40)+Luxury goods quarter",
+   "Silk & Luxury Textiles[vulnerable] key=null via=Luxury goods quarter+Merchant guilds (15-40)",
+   "Spellcasting Services[running] key=null via=Mages' guild",
+   "Magical Items & Enchanting[running] key=magical_node via=Scroll scribe",
+   "Fishing & Seafood[running] key=fishing_grounds via=Cooper+Merchant guilds (3-8)+Fish market",
+   "Harbour and Maritime[running] key=deep_harbour via=Harbour master's office+Docks/port facilities+Shipyard",
+   "Shipbuilding and Timber[running] key=shipbuilding_timber via=Shipyard",
+   "Smuggling & Contraband[entrepot] key=null via=Smuggling network",
+   "Furs & Pelts[entrepot] key=hunting_grounds via=Furrier's district",
+   "Wine & Spirits[entrepot] key=null via=Vintner+Brewer+Brewery",
+   "Strategic Crossroads Toll[entrepot] key=crossroads_position via=Customs house",
+   "Black market[operational] key=null via=Front businesses+Black market",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds",
+   "Almshouse Care[operational] key=null via=Almshouse+Foundling home",
+   "Faith & Worship[operational] key=null via=Parish church+Almshouse+Foundling home",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "fishing_grounds,shipbuilding_timber,magical_node,salt_flats,deep_harbour",
+  "depl": "",
+  "keys": [
+   "shipbuilding_timber"
+  ],
+  "why": [
+   "Timber & Lumber on shipbuilding_timber via Carpenters (5-15)+Carpenter",
+   "Shipbuilding and Timber on shipbuilding_timber via Shipyard"
+  ]
+ },
+ {
+  "seed": "r2s-slave_revolt-town-1",
+  "line": "No one here works the timber near Sübeteikotan.",
+  "res": "timber",
+  "chains": [
+   "Taverns & Social Life[vulnerable] key=null via=Taverns (5-20)",
+   "Divine & Magical Healing[running] key=hot_springs via=Parish church",
+   "Bowyer & fletcher[running] key=managed_forest via=Craft guilds (5-15)+Bowyers & fletchers (guild)",
+   "Boatbuilding & River Transport[running] key=managed_forest via=River boatyard+River ferry+Boatyard",
+   "River Mill Industry[running] key=river_mills via=Mills (2-5)+Mill",
+   "Pilgrimage & Holy Sites[running] key=hot_springs via=Parish church+Almshouse",
+   "Standing Watch[vulnerable] key=null via=Town watch",
+   "Almshouse Care[operational] key=null via=Almshouse",
+   "Faith & Worship[operational] key=null via=Parish church+Almshouse",
+   "Law & Governance[operational] key=null via=Courthouse+Town hall"
+  ],
+  "cfg": "river_mills,hunting_grounds,hot_springs,iron_deposits,managed_forest",
+  "depl": "",
+  "keys": [
+   "managed_forest"
+  ],
+  "why": [
+   "Bowyer & fletcher on managed_forest via Craft guilds (5-15)+Bowyers & fletchers (guild)",
+   "Boatbuilding & River Transport on managed_forest via River boatyard+River ferry+Boatyard"
+  ]
+ },
+ {
+  "seed": "r2s-wartime-thorp-2",
+  "line": "No one here works the medicinal herbs near Hadithaoasis.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Foraging & Smallholding[vulnerable] key=marshlands via=Subsistence farming",
+   "Faith & Worship[operational] key=null via=Parish church"
+  ],
+  "cfg": "marshlands,hot_springs,gemstone_deposits",
+  "depl": "",
+  "keys": [
+   "marshlands",
+   "hot_springs"
+  ],
+  "why": [
+   "Foraging & Smallholding on marshlands via Subsistence farming"
+  ]
+ },
+ {
+  "seed": "r2s-wartime-city-0",
+  "line": "No one here works the timber near Wadiabad.",
+  "res": "timber",
+  "chains": [
+   "Herbalism & Remedies[vulnerable] key=foraging_areas via=Apothecary",
+   "Luxury Goods[impaired] key=precious_metals via=Specialized metalworkers+Luxury goods quarter",
+   "Faith & Worship[vulnerable] key=null via=Parish church+Cathedral+Multiple monasteries+Foundling home",
+   "Spellcasting Services[vulnerable] key=null via=Mages' guild",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)",
+   "Caravan & Overland Trade[vulnerable] key=null via=Caravan masters' exchange",
+   "Livestock & Dairy[running] key=grazing_land via=Cooper+Stable district",
+   "Horse & Animal Trade[running] key=grazing_land via=Beast trainers+Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Textiles & Cloth[running] key=grazing_land via=Tailor's guild+Weavers/Textile workers+Fuller+Dyer",
+   "Bowyer & fletcher[running] key=managed_forest via=Craft guilds (5-15)+Bowyers & fletchers (guild)",
+   "Cloth Finishing & Clothing[running] key=grazing_land via=Tailor+Fuller+Dyer+Tailor's guild",
+   "Leatherworking & Cordwaining[running] key=grazing_land via=Tanner (established)+Cobbler's guild",
+   "Timber & Lumber[running] key=managed_forest via=Carpenters (5-15)+Carpenter",
+   "Reed & Marsh Harvest[running] key=marshlands via=Ropemaker+Merchant guilds (3-8)",
+   "Black market[operational] key=null via=Front businesses+Black market",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds+Veteran's lodge",
+   "Performance & Theater[operational] key=null via=Theater+Bardic college",
+   "Gambling & Arena[operational] key=null via=Gambling halls",
+   "Hospital & Surgery[operational] key=null via=Major hospital+Foundling home",
+   "Maps & Cartography[operational] key=null via=Cartographer's guild",
+   "Intelligence & Communications[operational] key=null via=Post relay station+Sage's quarter",
+   "News & Public Information[operational] key=null via=Cartographer's guild",
+   "Glass & Print[vulnerable] key=null via=Glassmakers",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "grazing_land,gemstone_deposits,precious_metals,foraging_areas,marshlands,managed_forest,ancient_grove",
+  "depl": "precious_metals,foraging_areas,ancient_grove",
+  "keys": [
+   "managed_forest"
+  ],
+  "why": [
+   "Bowyer & fletcher on managed_forest via Craft guilds (5-15)+Bowyers & fletchers (guild)",
+   "Timber & Lumber on managed_forest via Carpenters (5-15)+Carpenter"
+  ]
+ },
+ {
+  "seed": "r2s-mass_migration-village-2",
+  "line": "No one here works the stone near Hisnistan.",
+  "res": "stone",
+  "chains": [
+   "Stone & Construction[running] key=stone_quarry via=Brickmaker",
+   "Faith & Worship[running] key=null via=Parish church+Wayside shrine"
+  ],
+  "cfg": "managed_forest,ancient_grove,precious_metals,coal_deposits,stone_quarry",
+  "depl": "",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Stone & Construction on stone_quarry via Brickmaker"
+  ]
+ },
+ {
+  "seed": "r2s-mass_migration-town-2",
+  "line": "No one here works the medicinal herbs near Shivanand.",
+  "res": "medicinal herbs",
+  "chains": [
+   "Taverns & Social Life[impaired] key=null via=Taverns (5-20)+Public bathhouse",
+   "Divine & Magical Healing[running] key=hot_springs via=Parish church",
+   "Weapons & Armor[vulnerable] key=iron_deposits via=Blacksmiths (3-10)",
+   "Bowyer & fletcher[running] key=managed_forest via=Craft guilds (5-15)+Bowyers & fletchers (guild)",
+   "Timber & Lumber[running] key=managed_forest via=Sawmill+Carpenters (5-15)+Carpenter",
+   "Iron & Metalwork[running] key=iron_deposits via=Mine+Blacksmith+Blacksmiths (3-10)",
+   "Fuel & Heating[running] key=coal_deposits via=Charcoal burner",
+   "Faith & Worship[running] key=null via=Parish church",
+   "Pilgrimage & Holy Sites[running] key=hot_springs via=Parish church",
+   "Black market[operational] key=null via=Front businesses",
+   "Organised Crime[operational] key=null via=Street gang",
+   "Standing Watch[vulnerable] key=null via=Town watch",
+   "Maps & Cartography[operational] key=null via=Cartographer's guild",
+   "News & Public Information[operational] key=null via=Cartographer's guild",
+   "Law & Governance[operational] key=null via=Town hall"
+  ],
+  "cfg": "managed_forest,hot_springs,iron_deposits,ancient_grove,coal_deposits",
+  "depl": "",
+  "keys": [
+   "hot_springs",
+   "ancient_grove"
+  ],
+  "why": [
+   "Divine & Magical Healing on hot_springs via Parish church",
+   "Pilgrimage & Holy Sites on hot_springs via Parish church"
+  ]
+ },
+ {
+  "seed": "r2s-mass_migration-city-0",
+  "line": "No one here works the stone near Fjordhammer.",
+  "res": "stone",
+  "chains": [
+   "Bowyer & fletcher[magically_sustained] key=managed_forest via=Craft guilds (5-15)",
+   "Timber & Lumber[magically_sustained] key=managed_forest via=Carpenters (5-15)+Carpenter",
+   "Foraging & Smallholding[vulnerable] key=ancient_grove via=Elder Grove Council",
+   "Spellcasting Services[vulnerable] key=null via=Wizard's tower",
+   "Magical Items & Enchanting[vulnerable] key=magical_node via=Wizard's tower+Enchanter's shop+Scroll scribe",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Intelligence & Communications[vulnerable] key=null via=Sage's quarter",
+   "Glass & Print[vulnerable] key=null via=Glassmakers+Printing house",
+   "Caravan & Overland Trade[vulnerable] key=null via=Caravan masters' exchange",
+   "Fortifications[running] key=stone_quarry via=City walls and gates+Citadel",
+   "Horse & Animal Trade[running] key=grazing_land via=Merchant guilds (3-8)+Merchant guilds (15-40)",
+   "Textiles & Cloth[running] key=grazing_land via=Tailor's guild+Weavers/Textile workers+Fuller+Dyer",
+   "Weapons & Armor[vulnerable] key=iron_deposits via=Specialized metalworkers+Blacksmiths (3-10)",
+   "Cloth Finishing & Clothing[running] key=grazing_land via=Tailor+Fuller+Dyer+Tailor's guild",
+   "Leatherworking & Cordwaining[vulnerable] key=grazing_land via=Tanner (established)+Cobbler's guild",
+   "Iron & Metalwork[running] key=iron_deposits via=Blacksmith+Blacksmiths (3-10)",
+   "Stone & Construction[running] key=stone_quarry via=Brickmaker",
+   "Smelting & Refining[vulnerable] key=iron_deposits via=Smelter+Specialized metalworkers",
+   "Faith & Worship[running] key=null via=Parish church",
+   "Black market[operational] key=null via=Front businesses+Black market",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Mercenary Forces[operational] key=null via=Mercenary quarter",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds+Veteran's lodge",
+   "Gambling & Arena[operational] key=null via=Gambling halls",
+   "Maps & Cartography[operational] key=null via=Cartographer's guild",
+   "News & Public Information[operational] key=null via=Cartographer's guild",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "grazing_land,ancient_grove,stone_quarry,managed_forest,iron_deposits",
+  "depl": "managed_forest",
+  "keys": [
+   "stone_quarry"
+  ],
+  "why": [
+   "Fortifications on stone_quarry via City walls and gates+Citadel",
+   "Stone & Construction on stone_quarry via Brickmaker"
+  ]
+ },
+ {
+  "seed": "r2s-mass_migration-city-3",
+  "line": "No one here works the timber near Rossmere.",
+  "res": "timber",
+  "chains": [
+   "Alchemy & Reagents[vulnerable] key=magical_node via=Alchemist",
+   "Timber & Lumber[vulnerable] key=shipbuilding_timber via=Sawmill+Carpenters (5-15)+Carpenter",
+   "Boatbuilding & River Transport[vulnerable] key=shipbuilding_timber via=River ferry",
+   "Letters of Credit & Finance[vulnerable] key=null via=Banking houses",
+   "Standing Garrison[vulnerable] key=null via=Garrison+Professional city watch",
+   "Mercenary Forces[vulnerable] key=null via=Mercenary quarter",
+   "Taverns & Social Life[vulnerable] key=null via=Inns and taverns (district)+Public bathhouse",
+   "Hospital & Surgery[vulnerable] key=null via=Major hospital+Foundling home",
+   "Intelligence & Communications[vulnerable] key=null via=Sage's quarter",
+   "Luxury Goods[vulnerable] key=precious_metals via=Specialized metalworkers+Luxury goods quarter",
+   "Glass & Print[vulnerable] key=null via=Glassmakers+Printing house",
+   "Spices & Dyes[vulnerable] key=null via=Merchant guilds (3-8)+Merchant guilds (15-40)+Luxury goods quarter+Annual fair",
+   "Silk & Luxury Textiles[vulnerable] key=null via=Luxury goods quarter+Merchant guilds (15-40)",
+   "Spellcasting Services[running] key=null via=Mages' guild",
+   "Magical Items & Enchanting[running] key=magical_node via=Enchanter's shop+Scroll scribe",
+   "Salt & Preservation[running] key=salt_flats via=Salt works",
+   "Fishing & Seafood[running] key=fishing_grounds via=Cooper+Salt works+Merchant guilds (3-8)+Fish market",
+   "Harbour and Maritime[running] key=deep_harbour via=Harbour master's office+Docks/port facilities+Shipyard",
+   "Shipbuilding and Timber[running] key=shipbuilding_timber via=Shipyard+Sawmill",
+   "Smuggling & Contraband[entrepot] key=null via=Smuggling network",
+   "Furs & Pelts[entrepot] key=hunting_grounds via=Furrier's district",
+   "Wine & Spirits[entrepot] key=null via=Brewer+Brewery",
+   "Strategic Crossroads Toll[entrepot] key=crossroads_position via=Customs house",
+   "Black market[operational] key=null via=Black market",
+   "Adventuring & Escort[operational] key=null via=Adventurers' charter hall+Adventurers' guild+Multiple adventurers' guilds+Veteran's lodge",
+   "Maps & Cartography[operational] key=null via=Cartographer's guild",
+   "News & Public Information[operational] key=null via=Cartographer's guild",
+   "Faith & Worship[operational] key=null via=Parish church+Multiple monasteries+Foundling home",
+   "Law & Governance[operational] key=null via=Courthouse+City hall+Multiple court buildings"
+  ],
+  "cfg": "deep_harbour,shipbuilding_timber,magical_node,salt_flats,fishing_grounds",
+  "depl": "",
+  "keys": [
+   "shipbuilding_timber"
+  ],
+  "why": [
+   "Timber & Lumber on shipbuilding_timber via Sawmill+Carpenters (5-15)+Carpenter",
+   "Boatbuilding & River Transport on shipbuilding_timber via River ferry",
+   "Shipbuilding and Timber on shipbuilding_timber via Shipyard+Sawmill"
+  ]
+ }
+]

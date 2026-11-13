@@ -1,0 +1,60 @@
+NO RULE r2r-thorp-0 The church wants approval rights over who may trade and when
+NO RULE r2r-thorp-2 The church wants approval rights over who may trade and when
+r2r-thorp-5                        thorp      needs institution: mill admitted=false | houses: Access to external mill
+NO RULE r2r-thorp-6 The church wants approval rights over who may trade and when
+NO RULE r2r-thorp-12 The church wants approval rights over who may trade and when
+NO RULE r2r-thorp-15 The church wants approval rights over who may trade and when
+r2r-thorp-17                       thorp      needs market admitted=false | houses: 
+NO RULE r2r-thorp-23 The church wants approval rights over who may trade and when
+NO RULE r2r-thorp-28 The church wants approval rights over who may trade and when
+NO RULE r2r-thorp-34 The church wants approval rights over who may trade and when
+NO RULE r2r-thorp-36 The church wants approval rights over who may trade and when
+r2r-thorp-45                       thorp      needs gate admitted=false | houses: 
+NO RULE r2r-thorp-47 The church wants approval rights over who may trade and when
+NO RULE r2r-thorp-48 The church wants approval rights over who may trade and when
+NO RULE r2r-thorp-50 The church wants approval rights over who may trade and when
+r2r-thorp-58                       thorp      needs gate admitted=false | houses: 
+r2r-hamlet-0                       hamlet     needs gate admitted=false | houses: 
+NO RULE r2r-hamlet-2 The church wants approval rights over who may trade and when
+NO RULE r2r-hamlet-7 The church wants approval rights over who may trade and when
+NO RULE r2r-hamlet-28 Ravenoy is two bad weeks from genuine starvation; Elder Coun
+NO RULE r2r-hamlet-29 The church wants approval rights over who may trade and when
+NO RULE r2r-hamlet-30 The church wants approval rights over who may trade and when
+NO RULE r2r-hamlet-37 The church wants approval rights over who may trade and when
+NO RULE r2r-hamlet-39 The church wants approval rights over who may trade and when
+NO RULE r2r-hamlet-57 The church wants approval rights over who may trade and when
+r2r-village-43                     village    needs gate admitted=false | houses: 
+r2r-village-50                     village    needs healer admitted=false | houses: Apothecary
+r2r-village-57                     village    needs institution: granary admitted=false | houses: 
+r2r-town-13                        town       needs starving admitted=false | houses: 
+r2r-town-36                        town       needs starving admitted=false | houses: 
+r2r-metropolis-31                  metropolis needs starving admitted=false | houses: 
+r2s-under_siege-hamlet-2           hamlet     needs gate admitted=false | houses: 
+r2s-under_siege-town-2             town       needs gate admitted=false | houses: 
+r2s-famine-thorp-0                 thorp      needs market admitted=false | houses: 
+NO RULE r2s-famine-village-1 Humen is two bad weeks from genuine starvation; Military/Gua
+NO RULE r2s-famine-town-3 Shattkarez is two bad weeks from genuine starvation; Arcane 
+NO RULE r2s-famine-city-0 Weizhen is two bad weeks from genuine starvation; Noble Fami
+NO RULE r2s-famine-metropolis-0 Ormvoll is two bad weeks from genuine starvation; Royal Auth
+r2s-plague_onset-thorp-0           thorp      needs healer admitted=false | houses: 
+r2s-plague_onset-thorp-2           thorp      needs healer admitted=false | houses: 
+r2s-plague_onset-thorp-3           thorp      needs healer admitted=false | houses: 
+r2s-plague_onset-village-3         village    needs population: > small admitted=false | houses: 
+r2s-plague_onset-town-2            town       needs healer admitted=false | houses: Apothecary (established)
+NO RULE r2s-succession_void-thorp-1 Schwarzdorf is two bad weeks from genuine starvation; Elder 
+r2s-succession_void-thorp-2        thorp      needs institution: granary admitted=false | houses: 
+r2s-succession_void-thorp-3        thorp      needs institution: granary admitted=false | houses: 
+r2s-succession_void-hamlet-1       hamlet     needs institution: granary admitted=false | houses: 
+r2s-succession_void-village-2      village    needs institution: granary admitted=false | houses: 
+r2s-succession_void-village-3      village    needs institution: granary admitted=false | houses: 
+r2s-monster_pressure-thorp-3       thorp      needs institution: mill admitted=false | houses: Access to external mill
+r2s-monster_pressure-hamlet-0      hamlet     needs institution: mill admitted=false | houses: Access to external mill
+r2s-religious_conversion-thorp-3   thorp      needs institution: temple admitted=false | houses: 
+r2s-mass_migration-thorp-2         thorp      needs starving admitted=false | houses: 
+r2s-mass_migration-hamlet-0        hamlet     needs starving admitted=false | houses: 
+r2s-mass_migration-hamlet-3        hamlet     needs starving admitted=false | houses: 
+r2s-mass_migration-village-0       village    needs starving admitted=false | houses: 
+r2s-mass_migration-village-3       village    needs starving admitted=false | houses: 
+r2s-mass_migration-town-3          town       needs starving admitted=false | houses: 
+r2s-mass_migration-metropolis-1    metropolis needs starving admitted=false | houses: 
+r2s-mass_migration-metropolis-2    metropolis needs starving admitted=false | houses: 

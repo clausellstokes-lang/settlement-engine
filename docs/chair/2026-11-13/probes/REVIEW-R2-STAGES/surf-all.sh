@@ -1,0 +1,3 @@
+#!/bin/sh
+for t in b-tip ab-base a-tip c-tip c-base; do sh /tmp/claude-0/-home-user-settlement-engine/ed9a7fac-3574-5fcd-a762-3429f90b7a9d/scratchpad/probes/surfaces.sh /tmp/claude-0/-home-user-settlement-engine/ed9a7fac-3574-5fcd-a762-3429f90b7a9d/scratchpad/wt/$t /tmp/claude-0/-home-user-settlement-engine/ed9a7fac-3574-5fcd-a762-3429f90b7a9d/scratchpad/r20/$t/records /tmp/claude-0/-home-user-settlement-engine/ed9a7fac-3574-5fcd-a762-3429f90b7a9d/scratchpad/surf/$t /tmp/claude-0/-home-user-settlement-engine/ed9a7fac-3574-5fcd-a762-3429f90b7a9d/scratchpad/probes/seeds20.txt; echo "surf $t done"; done
+echo SURF-DONE
