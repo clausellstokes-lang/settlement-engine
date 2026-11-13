@@ -1,0 +1,11 @@
+P1-crisis-panel-arm	GREEN(exit 0)	tests/generators/w2FixData3CrisisDescs.test.js	the forced set loses the panel arm (selectedStresses with Random off)	
+P2-dedup-offbyone	RED(exit 1)	tests/generators/w2FixData3TensionDedup.test.js	the splice removes the neighbour, not the drawn candidate	
+P3-hooknote-mirror	RED(exit 1)	tests/generators/w2FixData3TimelineHookNote.test.js	the note keyed by the mirrored row index	two different hook lines of one template note two line ids
+P4-grove-second-clause	RED(exit 1)	tests/data/w2FixData3Grove.test.js	one clause of the town-voice variant speaks the city again	
+P5-inland-key-miss	RED(exit 1)	tests/data/w2FixData3Inland.test.js	the draw misses the inland text (key typo): the ship text prints	a road city that rolls an auction house prints the household goods, not persons (r2r-city-0)
+P6-mine-twin-city	RED(exit 1)	tests/data/w2FixData3Mine.test.js	the twin narrowed to city: a town has no admitted line	
+P7a-forge-racks-undeclared	RED(exit 1)	tests/data/w2FixData3Round.test.js	one of the four forge lines loses its size	a place of one forge does not "live by its forges"; a town of many still may (rw3-hamlet-plague_onset-1)
+P7b-precinct-twin-hamlet	RED(exit 1)	tests/data/w2FixData3Round.test.js	the small-place twin refused in a village	a ceremonial precinct over a busy plaza is a town's; a small place has its own line (rw3-thorp-calm-2)
+# tree after: ?? node_modules
+P1b-crisis-raw-forced	RED(exit 1)	tests/generators/w2FixData3CrisisDescs.test.js	the forced set read from the raw caller config only (the review-base shape of the bug)	
+# tree after: ?? node_modules

@@ -1,0 +1,73 @@
+{
+ "towns": 720,
+ "crisis": {
+  "famine:original:true:none": 81,
+  "siege:original:true:none": 74,
+  "siege:twin:true:forced": 3,
+  "famine:twin:true:forced": 4
+ },
+ "tensionDup": [],
+ "customs": {
+  "cascade": 27,
+  "cascadePortWord": 27,
+  "cascadePortWordNoDocks": 21,
+  "examples": [
+   "r2r-town-8: Levies duties on goods entering and leaving via the port or main roads. Run by royal or mu",
+   "r2r-city-7: Levies duties on goods entering and leaving via the port or main roads. Run by royal or mu",
+   "r2r-city-10: Levies duties on goods entering and leaving via the port or main roads. Run by royal or mu",
+   "r2r-city-15: Levies duties on goods entering and leaving via the port or main roads. Run by royal or mu"
+  ]
+ },
+ "forge": {
+  "town|Blacksmiths (3-10)": 12,
+  "town|none": 2,
+  "city|Blacksmiths (3-10)": 15,
+  "metropolis|Blacksmiths (3-10)": 18
+ },
+ "precinct": {
+  "town": 4,
+  "city": 4,
+  "metropolis": 1
+ },
+ "plaza": {
+  "thorp": 1,
+  "hamlet": 2,
+  "village": 2
+ },
+ "crafts": {
+  "withMarket": 8,
+  "noMarket": []
+ },
+ "grove": {
+  "town:settlement": 7,
+  "town:town": 4,
+  "city:settlement": 22,
+  "city:city": 14,
+  "metropolis:settlement": 41,
+  "metropolis:metropolis": 32
+ },
+ "auction": 0,
+ "mineSvc": {
+  "surface:hamlet": 20,
+  "surface:village": 9,
+  "underground:town": 15,
+  "underground:city": 17,
+  "underground:metropolis": 63
+ },
+ "smallPlace": {
+  "the low ground|small": 32,
+  "the houses|small": 31,
+  "the yards behind the houses|small": 4,
+  "the houses nearest the river|small": 10,
+  "the edge of the fields|small": 2,
+  "the houses nearest the shore|small": 7,
+  "lower districts|large": 68,
+  "the residential district|large": 20,
+  "the houses|large": 16,
+  "riverside quarter|large": 29,
+  "the merchants' quarter|large": 33,
+  "the waterfront|large": 14,
+  "the temple district|large": 24
+ },
+ "tensionDupCount": 0
+}

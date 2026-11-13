@@ -1,0 +1,79 @@
+{
+ "towns": 720,
+ "crisis": {
+  "famine:original:true:none": 81,
+  "siege:original:true:none": 74,
+  "siege:original:FALSE:forced": 3,
+  "famine:original:FALSE:forced": 4
+ },
+ "tensionDup": [],
+ "customs": {
+  "cascade": 27,
+  "cascadePortWord": 27,
+  "cascadePortWordNoDocks": 21,
+  "examples": [
+   "r2r-town-8: Levies duties on goods entering and leaving via the port or main roads. Run by royal or mu",
+   "r2r-city-7: Levies duties on goods entering and leaving via the port or main roads. Run by royal or mu",
+   "r2r-city-10: Levies duties on goods entering and leaving via the port or main roads. Run by royal or mu",
+   "r2r-city-15: Levies duties on goods entering and leaving via the port or main roads. Run by royal or mu"
+  ]
+ },
+ "forge": {
+  "hamlet|Resident smith (part-time)": 15,
+  "village|Blacksmith": 12,
+  "town|Blacksmiths (3-10)": 12,
+  "town|none": 2,
+  "city|Blacksmiths (3-10)": 15,
+  "metropolis|Blacksmiths (3-10)": 18
+ },
+ "precinct": {
+  "thorp": 1,
+  "hamlet": 2,
+  "village": 2,
+  "town": 4,
+  "city": 4,
+  "metropolis": 1
+ },
+ "plaza": {},
+ "crafts": {
+  "withMarket": 8,
+  "noMarket": [
+   "r2s-under_siege-village-3|village",
+   "r2s-politically_fractured-thorp-1|thorp",
+   "r2s-insurgency-thorp-2|thorp",
+   "r2s-religious_conversion-thorp-0|thorp",
+   "r2s-wartime-hamlet-2|hamlet",
+   "r2s-mass_migration-hamlet-3|hamlet"
+  ]
+ },
+ "grove": {
+  "town:city": 11,
+  "city:city": 36,
+  "metropolis:city": 73
+ },
+ "auction": 93,
+ "mineSvc": {
+  "surface:hamlet": 20,
+  "surface:village": 9,
+  "surface:town": 15,
+  "surface:city": 17,
+  "surface:metropolis": 63
+ },
+ "smallPlace": {
+  "lower districts|small": 22,
+  "the houses|small": 12,
+  "the temple district|small": 4,
+  "riverside quarter|small": 10,
+  "the residential district|small": 3,
+  "the merchants' quarter|small": 6,
+  "the waterfront|small": 2,
+  "lower districts|large": 68,
+  "the residential district|large": 19,
+  "the houses|large": 16,
+  "riverside quarter|large": 29,
+  "the merchants' quarter|large": 27,
+  "the waterfront|large": 31,
+  "the temple district|large": 16
+ },
+ "tensionDupCount": 0
+}

@@ -1,0 +1,13 @@
+== f-tip
+{"famine|famine|twin-true":45,"famine|siege|original-true":47,"none|famine|original-true":50,"none|siege|original-true":39,"random|famine|original-true":86,"random|siege|ORIGINAL-FALSE":1,"random|siege|original-true":98,"under_siege+famine|famine|twin-true":45,"under_siege+famine|siege|twin-true":50,"under_siege|famine|original-true":43,"under_siege|siege|twin-true":39} 
+ rf2x-city-random-40 ["under_siege"] The old grounds inside the walls filled generations ago, so the dead a
+== f-prev
+{"famine|famine|ORIGINAL-FALSE":45,"famine|siege|original-true":47,"none|famine|original-true":50,"none|siege|original-true":39,"random|famine|original-true":86,"random|siege|ORIGINAL-FALSE":1,"random|siege|original-true":98,"under_siege+famine|famine|ORIGINAL-FALSE":45,"under_siege+famine|siege|ORIGINAL-FALSE":50,"under_siege|famine|original-true":43,"under_siege|siege|ORIGINAL-FALSE":39} 
+ rf2x-town-famine-6 ["famine"] Communal grain storage. Buffers harvests, prevents famine.
+ rf2x-city-under_siege-10 ["under_siege"] The old grounds inside the walls filled generations ago, so the dead a
+ rf2x-town-under_siege+famine-12 ["under_siege","famine"] Communal grain storage. Buffers harvests, prevents famine.
+ rf2x-city-under_siege+famine-13 ["under_siege","famine"] Carts go out at dusk to ground bought beyond the walls, and the charne
+ rf2x-city-under_siege-28 ["under_siege"] Carts go out at dusk to ground bought beyond the walls, and the charne
+ rf2x-town-under_siege+famine-30 ["under_siege","famine"] Shared grain stores that even out the harvests and hold off famine.
+== census720 under the reviewer's wide form (plant)
+{"famine:original:true:none":80,"famine:twin:FALSE:none":1,"siege:original:true:none":71,"siege:twin:FALSE:none":3,"siege:twin:true:forced":3,"famine:twin:true:forced":4}
