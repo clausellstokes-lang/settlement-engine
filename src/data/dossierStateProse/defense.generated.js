@@ -802,7 +802,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "angle": "street",
           "marks": [
             "threat",
-            "crisis: any"
+            "crisis: any",
+            "no crisis: under_siege",
+            "no crisis: occupied",
+            "no guardPresence"
           ],
           "text": "{settlement} kept no defence because the country never asked for one, and the country is asking now; the town is improvising what it never built.",
           "slots": [
@@ -814,7 +817,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "angle": "ledger",
           "marks": [
             "threat",
-            "crisis: any"
+            "crisis: any",
+            "no crisis: under_siege",
+            "no crisis: occupied",
+            "no guardPresence"
           ],
           "text": "Nothing at {settlement} was organized against the country, and the threat now at hand has found the gap.",
           "slots": [
@@ -826,7 +832,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "angle": "visitor",
           "marks": [
             "threat",
-            "crisis: any"
+            "crisis: any",
+            "no crisis: under_siege",
+            "no crisis: occupied",
+            "no guardPresence"
           ],
           "text": "You find {settlement} with nothing organised against what has come out of the country, and people arming themselves with whatever is at hand.",
           "slots": [

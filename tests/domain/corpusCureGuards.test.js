@@ -41,6 +41,9 @@ const GUARDS = [
   { seed: 'w5-town-under_siege-1', pool: 'DS-DEF-2::Invasion & War: walls with NO force', vid: 6, why: 'a town watch: "had nobody to put on its walls until the siege came" (the read\'s H3; its siblings v1-v3 carry `no watch`)' },
   { seed: 'rww-town-occupied-1', pool: 'DS-DEF-2::Invasion & War: walls with NO force', vid: 4, why: 'an occupation: "kept by its watch and nobody else" beside the occupiers\' troops (the read\'s H5, its own town)' },
   { seed: 'w5-hamlet-occupied-104', pool: 'DS-DEF-2::Invasion & War: walls with NO force', vid: 1, why: 'an occupation: "has walls and nobody to put on them" of walls the occupier holds' },
+  { seed: 'w5-town-monster_pressure-2', pool: 'DS-DEF-2::Beasts & Monsters: settled, nothing organized', vid: 6, why: 'a town watch: "nothing organised against what has come out of the country" (the read\'s H4)' },
+  { seed: 'w5-village-under_siege-3', pool: 'DS-DEF-2::Beasts & Monsters: settled, nothing organized', vid: 6, why: 'a siege: the threat at hand is an army, not what came out of the country' },
+  { seed: 'w5-hamlet-occupied-2', pool: 'DS-DEF-2::Beasts & Monsters: settled, nothing organized', vid: 6, why: 'an occupation with no beasts on the page (the read\'s H4, Malotsy)' },
 ];
 
 /** @param {string} seed */

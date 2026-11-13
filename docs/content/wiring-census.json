@@ -1072,6 +1072,9 @@
       "declares": [],
       "lineDeclares": {
         "crisis: any": 6,
+        "no crisis: occupied": 3,
+        "no crisis: under_siege": 3,
+        "no guardPresence": 3,
         "no threat": 3,
         "threat": 3
       },

@@ -863,6 +863,8 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
         // double answers no migration (a keyed presence holds one key, and the double names none), so the
         // facts gate holds both walls states silent here, the same class as the seven below. A real
         // record answers its own direction (the desk suite's banner arm proves every banner speaks).
+        // + DS-DEF-2 Beasts & Monsters: settled, nothing organized :: threat=threat at W2-WRITE-5 A H4 (2026-11-13): its three threat twins declare `no guardPresence` ("nothing organised" is false beside a watch, the read's H4), and the calm admit-all double holds every presence, so the state admits no line under the double; a declared cause.
+        'DS-DEF-2 :: Beasts & Monsters: settled, nothing organized :: threat=threat',
         'DS-STR-1 :: MASS MIGRATION :: walls=walls',
         'DS-STR-1 :: MASS MIGRATION :: walls=no walls',
         'DS-GEN-1 :: economic_disparity :: severity=minor with {"walls":"no walls"}',
@@ -976,6 +978,8 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     // so the FACTS gate empties them, not the dimension. Named exactly, so a new silence reds.
     // + DS-STR-1 MASS MIGRATION's two walls states at W4 PEOPLE second seat 2026-11-07 (the T2 arm's note above).
     expect(silent.map(({ id, key, dimension, value }) => `${id} :: ${key} :: ${dimension}=${value}`)).toEqual([
+      // + DS-DEF-2 Beasts & Monsters: settled, nothing organized :: threat=threat at W2-WRITE-5 A H4 (2026-11-13): its three threat twins declare `no guardPresence` ("nothing organised" is false beside a watch, the read's H4), and the calm admit-all double holds every presence, so the state admits no line under the double; a declared cause.
+      'DS-DEF-2 :: Beasts & Monsters: settled, nothing organized :: threat=threat',
       'DS-STR-1 :: MASS MIGRATION :: walls=walls',
       'DS-STR-1 :: MASS MIGRATION :: walls=no walls',
       'DS-GEN-1 :: economic_disparity :: severity=minor',
