@@ -404,6 +404,9 @@ below d6e355a9d rewritten.
 | P1-b an export of the own raw good is worked | 8e0be75e4 | Unexploited beside an export of its own raw good 36 → 0 (Partial); gap lines +18 (14 true, 2 true half-way, 2 doubtful: a Charcoal burner, declared exposure) | 1 | 12 of the moves true; all 18 lines read | exportedRawGoodIsWorked.test.js (c32787d80: 2 of 2 red) |
 | (registers) goods roster, negative anchors | 3bd484cd0 | none | — | — | vendorPdfLazy, negativeAssertionAnchor green |
 | P1-c DS-ECO-11 reads the cards | f57b61629 | the line beside a card at another grade 187 → 0; the line speaks 560 → 476; Partial lines 75 → 99 | 20 of 20 agree | 12 old Partial: 4 true (kept), 4 false (out), 4 doubtful; 12 now: 9 true, 3 doubtful | economyDeskReadsTheCards.test.js (8e0be75e4: 3 of 3 red) |
+| #1172 #1202 (#716 #750 #813) no "one ring" beside rival rings | 82e8fab6e | "organized" → "semi-organized" in 118 towns (beside two or more non-governing criminal powers or the roster's "Multiple criminal factions"); field diff 0 of 720 | 3 towns | 14 read by hand: "one ring" false, the semi row true in each | noOneRingWhereRingsRival.test.js (e0dec1e3c: 2 of 2 red) |
+| #169 refit to the chair's ruling (20:34 UTC) | 5ab1d2c7c | the 31 siege towns print no Imports row (left out beside the siege's own note); "Nothing comes into …" withdrawn | 3 towns | thorp and metropolis sieges by script; hamlet and city by the guard | economicsImportsUnderSiege.test.jsx re-keyed |
+| record 369 G5: Arcane Support needs the defence's own tradition | 28d401ef3 + cure 30f3404ff | "Present" 230 → 157 (73 rows out beside hasArcane false; never "None"); fresh 52 → 42 | — | read where it prints (hamlet, town, siege thorps and metropolises) | arcaneRowReadsTheDefence.test.js (d6e355a9d: 1 of 2 red); defenseMagicReliance.test.js 2 pins re-keyed |
 
 ## Calls taken without the chair (this seat)
 1. **#452's "by kind" reads the catalogue's SCALE groups** (an exclusiveGroup named "…Scale": tanneryScale holds Tanners
@@ -454,8 +457,165 @@ below d6e355a9d rewritten.
   r2s-wartime-hamlet-0; the same pairing at the base in r2s-under_siege-village-0): the chain data's charcoal row (the data
   lane's), or a `WORKED_BY_HOUSE` entry the chair rules.
 
-## THE EXACT NEXT STEPS (kept current)
-Round three's list HIGH first: #1172 and #1202 (defenseDisplay.js :: CRIM_STRUCTURE_DATA, "one criminal ring" beside two
-criminal powers), #1375 (computeActiveChains.js: a generator write; a display cure only, or a stop: no record byte may
-move); #506 is the flow card's house list through SupplyChainsPanel.jsx :: chainFlowFacts (r2-code-b's: leave). Then the
-mediums by file; then the older list; then the final statement.
+## A slip, stated
+- 28d401ef3 was committed before its factLayers READERS diff was read: it raised that shrink-only register (the banked
+  magic line's content and a new label read in defenseDisplay.js). Cured in the next commit, 30f3404ff (the defence's fact
+  read in the magic fact's home, facts/magic.js :: defenceHoldsArcane; the banked line byte-identical again). No
+  commit was rewritten.
+
+## STATUS AT THE HAND-BACK (the chair's word of 22:09 UTC: hand back now; code tip 30f3404ff)
+Every item this seat was given, and every message of the day, each DONE with its commit, NOT STARTED, or IN HAND:
+- #452 "Needs:" by kind and trade — DONE 3866cc6c7.
+- P1 the grade cards — DONE 9bcf0127a. P1-a — DONE 4c6a692f6 + c32787d80 (the chair's second word). P1-b — DONE
+  8e0be75e4. P1-c — DONE f57b61629 (the file call: economyStateProse.js). Registers — DONE 3bd484cd0.
+- Round three HIGH: #169 — DONE 7bbe8c119, refit 5ab1d2c7c (the chair's ruling of 20:34). #1172 #1202 (+ MED #716 #750
+  #813) — DONE 82e8fab6e. #1375 — NOT STARTED (a generator write; recommendation below). #506 — NOT MINE (r2-code-b).
+- Round three MED: the other lines by file — NOT STARTED, listed line by line below (with those likely already cured).
+- The increment's 18 MED (20:4x UTC) — NOT STARTED, listed below.
+- The seven rows traced to this lane's files — NOT STARTED (#512 #1310 #1145 #1204 likely cured by 48bfc15c0/5ab1d2c7c:
+  verify), listed below.
+- The Arcane Support ruling (record 369 G5) — DONE 28d401ef3 + 30f3404ff (the register cure).
+- The census's two writers (BROUGHT_BANDS, INSTITUTIONAL_SERVICE_MAP) — NOT STARTED, listed below.
+- The command's rule (CENSUS-2 at the tip, every hit read) — IN HAND: RUN at the tip 30f3404ff (lane/census-2 at
+  2686272b1; exit 0, the counter's rows present; births+render 1392 s): this lane's files, kinds by towns / lines:
+  EconomicsTab.jsx a 498 / 14, f 309 / 36, b 3 / 3; defenseDisplay.js a 68 / 2; computeActiveChains.js b 5 / 5; the
+  other files none. By writer: EconomicFlowsSection 1,690 hits (the flow cards' house lists: a house the town lacks,
+  "Merchant guilds (15-40)"-style ranges — the chainFlowFacts / label seam of r2-code-b, the cut's #506 #931 #1157
+  #1370 family), deriveSupportingCapabilities 62, CRIM_STRUCTURE_DATA 6, BROUGHT_BANDS 6, INSTITUTIONAL_SERVICE_MAP 5,
+  EconomicsTab 3. Saved: probes/W2-C-LEAVES-3/census2-tip-30f3404ff.files.txt and .hits.txt (every hit line). The base
+  run (4534ea5e3) NOT STARTED (the chair: do not start it); the hits NOT READ. Its limits: the dossier's views only.
+- THE FINAL STATEMENT — NOT DONE. On disk in this container only (lost when it ends): the census at d6e355a9d
+  (c-tip0, counter rows checked), the two whole suites (stopped part-way at the hand-back: unread), the field diff.
+  EXECUTED and recorded here: the FIELD DIFF, merged base 4534ea5e3 against 5ab1d2c7c's births (no generator change
+  since): 0 of the golden's 525 configurations and 0 of the census's 720 differ; and 82e8fab6e against e0dec1e3c:
+  0 of 720. The seat's seven classes on the 720 and on 150 fresh seeds (items.mjs, d6e355a9d → 5ab1d2c7c, judged by the
+  tip's readers): #452 158 → 0 (fresh 37 → 0; zero by construction of the reader); P1 196 → 0 (40 → 0); P1-a 6 → 0
+  (2 → 0); P1-b 125 → 0 (21 → 0; counts overlap P1's); P1-c 187 → 0 (40 → 0); #169 186 goods → 0 (59 → 0; by
+  construction); the rings 118 → 0 (21 → 0). Arcane Support (record 369): 73 → 0 (fresh 10 → 0).
+- New words for the owner's veto (this seat): NONE standing ("Nothing comes into <town> by trade." was withdrawn in
+  5ab1d2c7c). The lane's earlier new words are listed in Part 1 above.
+- Golden surfaces (declared by measure): the dossier prose manifest MOVED by P1-c (+50 rows, 1,040 against 990; above);
+  the generator golden master, the PDF golden view model: red at d6e355a9d with byte-identical bodies at 9bcf0127a (their suites run then), and the field diff 0 since
+  (unmoved); the espionage fence, the Herald desk golden, the preset-lighting witness: NOT MEASURED by this seat.
+- The edge bundles — NOT COMMITTED (stale: `node scripts/build-edge-shared.mjs` writes 11 files; the lane's last commit,
+  alone, after the successor's final statement).
+- Config: `npm ci` set core.hooksPath=.husky/_ in the shared local config at this seat's start (kept for the lane hook);
+  the successor unsets it after the last push. The local branch review-fixes-2026-07-08 was fetched for the suite.
+
+## THE EXACT NEXT STEP (for a successor)
+1. Fetch the lane, read this file whole, make a scratch worktree at the tip, `npm ci`.
+2. Run CENSUS-2 at the tip and at 4534ea5e3 over this lane's files (the chair's command of 21:51 UTC; the file list is in
+   probes/W2-C-LEAVES-3/c2files.txt), READ every hit in this lane's files against its town, cure or name each.
+3. Then the final statement as the brief gives it: the census counter (SECOND-WAVE-CENSUS) at 4534ea5e3 and at the tip
+   (check the counter's own rows: census.sh exits 0 on a failed counter); the whole suite at both (`npx vitest run
+   --maxWorkers=2`, ~100 min each, to a file), every red classed; the draft record
+   docs/chair/2026-11-13/W2-C-LEAVES-SHIFT-RECORD-DRAFT.md (the six surfaces + the registered surfaces the reds pin);
+   the edge bundles as the last commit, alone.
+4. The rows below by file, HIGH first (#1375's family), each measured first, red first, read where it prints (record 386).
+
+## NOT REACHED, LINE BY LINE, FOR A SUCCESSOR (this seat stopped building at 30f3404ff for the final statement)
+### Round three's cut (ROUND-3-CUT.json, this lane's files; the status of each at this tip)
+- #28 MED EconomicsTab.jsx [rr2s-thorp-calm-rand-1] "House of worship · Wayside shrine" — NOT MINE: #195/#196 ruling, an Access-to chain (r2-code-b)
+- #66 MED EconomicsTab.jsx [rr2s-thorp-famine-rand-1] "Archodion grows about a third of what it eats, and boats bring in abou" — NOT REACHED
+- #68 MED EconomicsTab.jsx [rr2s-thorp-famine-rand-1] "House of worship · Wayside shrine" — NOT MINE: as #28
+- #93 MED EconomicsTab.jsx [rr2s-thorp-calm-port-1] "Agricultural Rents Payments in kind or coin from tenant farmers; the p" — NOT REACHED
+- #129 MED EconomicsTab.jsx [rr2s-hamlet-calm-rand-1] "Raw woolLive sheepMineral saltsAlumSulfurLivestock" — NOT REACHED
+- #169 HIGH EconomicsTab.jsx [rr2s-hamlet-under_siege-rand-1] "GrainIncense and votive candlesIron (weapons)Livestock for meat and dr" — CURED 7bbe8c119/5ab1d2c7c (left out under the siege)
+- #196 MED EconomicsTab.jsx [rr2s-hamlet-under_siege-rand-1] "graindatesglasspeathoneymedicinal herbsluxuryHoney and beeswaxForaged " — NOT REACHED
+- #213 MED EconomicsTab.jsx [rr2s-hamlet-plague_onset-rand-1] "Timber Trade Local forest provides sustainable timber revenue; managed" — NOT REACHED
+- #218 MED EconomicsTab.jsx [rr2s-hamlet-plague_onset-rand-1] "Breitenheim grows nearly all of what it eats, and ships bring in most " — NOT REACHED
+- #276 MED EconomicsTab.jsx [rr2s-village-famine-rand-1] "Timber Trade Local forest provides sustainable timber revenue; managed" — NOT REACHED
+- #362 MED EconomicsTab.jsx [rr2s-town-calm-rand-1] "What is grown here and brought in covers each day's food, with nothing" — NOT REACHED
+- #366 MED EconomicsTab.jsx [rr2s-town-calm-rand-1] "Import: Food Processing" — NOT REACHED
+- #368 MED EconomicsTab.jsx [rr2s-town-calm-rand-1] "Adventurers' charter hall · Adventurers' guild" — NOT MINE: the flow card house list (r2-code-b, chainFlowFacts)
+- #442 MED EconomicsTab.jsx [rr2s-town-under_siege-rand-1] "Production: 413 lbs/day+ 1 importedNeed: 1,294 lbs/dayShort: 880 lbs/d" — NOT REACHED
+- #448 MED EconomicsTab.jsx [rr2s-town-under_siege-rand-1] "Needs imported livestock: no local source" — NOT REACHED
+- #506 HIGH EconomicsTab.jsx [rr2s-town-under_siege-rand-1] "Merchant guilds (3-8) · Merchant guilds (15-40)" — NOT MINE: the flow card house list via SupplyChainsPanel.jsx :: chainFlowFacts (r2-code-b) and the label seam
+- #546 MED EconomicsTab.jsx [rr2s-town-plague_onset-rand-1] "Timber Trade Local forest provides sustainable timber revenue; managed" — NOT REACHED
+- #555 MED EconomicsTab.jsx [rr2s-town-plague_onset-rand-1] "Civil disputesCriminal trialsNotary services" — NOT REACHED
+- #691 MED EconomicsTab.jsx [rr2s-city-calm-rand-1] "honeymedicinal herbstrade accesscoalgame meatanimal hidesfurslivestock" — NOT REACHED
+- #699 MED EconomicsTab.jsx [rr2s-city-calm-rand-1] "Precious metal veins · Import: Mining & Coinage" — NOT REACHED
+- #785 MED EconomicsTab.jsx [rr2s-city-famine-rand-1] "Production: 4,022 lbs/day+ 7,040 imported+ 5,486 by druidic provisionN" — NOT REACHED
+- #790 MED EconomicsTab.jsx [rr2s-city-famine-rand-1] "Grazing land" — NOT REACHED
+- #799 MED EconomicsTab.jsx [rr2s-city-famine-rand-1] "Import: Food Processing" — NOT REACHED
+- #920 MED EconomicsTab.jsx [rr2s-city-under_siege+famine-rand-1] "Needs Iron + fuel · affects: law enforcement, patrol, investigation" — RULED (b): one plain sentence of consequence; the data rows are rb (record 371): NOT REACHED
+- #923 MED EconomicsTab.jsx [rr2s-city-under_siege+famine-rand-1] "Grazing land" — NOT REACHED
+- #1038 MED EconomicsTab.jsx [rr2s-city-occupied-rand-1] "Sacred wood (taxed by occupation)Ritual components (taxed by occupatio" — NOT REACHED
+- #1040 MED EconomicsTab.jsx [rr2s-city-occupied-rand-1] "Production: 11,590 lbs/day+ 5,928 importedNeed: 17,695 lbs/dayShort: 1" — NOT REACHED
+- #1044 MED EconomicsTab.jsx [rr2s-city-occupied-rand-1] "Needs Timber · affects: construction, furniture, barrel making" — as #920
+- #1047 MED EconomicsTab.jsx [rr2s-city-occupied-rand-1] "Needs Iron + fuel · affects: law enforcement, patrol, investigation" — as #920
+- #1055 MED EconomicsTab.jsx [rr2s-city-occupied-rand-1] "Grazing land" — NOT REACHED
+- #1146 MED EconomicsTab.jsx [rr2s-metropolis-calm-rand-1] "medicinal herbslivestockwooldairyanimal hidesMedical care (basic)Spell" — CURED d5d156deb (Produced locally reads the leaf; the herbs bought): verify
+- #1147 MED EconomicsTab.jsx [rr2s-metropolis-calm-rand-1] "What is grown here and brought in covers each day's food, with nothing" — NOT REACHED
+- #1251 MED EconomicsTab.jsx [rr2s-metropolis-wartime-rand-1] "Becancoatl grows about a third of what it eats, and carts bring in mos" — NOT REACHED
+- #1254 MED EconomicsTab.jsx [rr2s-metropolis-wartime-rand-1] "Grazing land" — NOT REACHED
+- #1365 MED EconomicsTab.jsx [rr2s-metropolis-plague_onset-port-1] "medicinal herbsSpellcasting (minor)Magical identificationMagical item " — NOT REACHED
+- #1366 MED EconomicsTab.jsx [rr2s-metropolis-plague_onset-port-1] "Production: 33,017 lbs/day+ 49,091 importedNeed: 89,248 lbs/dayShort: " — NOT REACHED
+- #455 MED ResourcesTab.jsx [rr2s-town-under_siege-rand-1] "Work on the wool here stops half-way: no weavers' guild, dyers' guild " — CURED d2bcf0e3d (R1: weavers/fullers by trade): verify
+- #558 MED ResourcesTab.jsx [rr2s-town-plague_onset-rand-1] "UnexploitedTimbermedium value" — CURED 9bcf0127a (Partial)
+- #560 MED ResourcesTab.jsx [rr2s-town-plague_onset-rand-1] "Work on the timber here stops half-way: no sawmill or carpenters' guil" — CURED d2bcf0e3d (R1; Carpenters finish the timber): verify in its town
+- #937 MED ResourcesTab.jsx [rr2s-city-under_siege+famine-rand-1] "Foraging AreasGrain FieldsHunting GroundsStone Quarry" — NOT REACHED
+- #1065 MED ResourcesTab.jsx [rr2s-city-occupied-rand-1] "UnexploitedAnimal hideshigh value" — CURED 9bcf0127a (Partial) + 3866cc6c7 (no Needs)
+- #1160 MED ResourcesTab.jsx [rr2s-metropolis-calm-rand-1] "✓ Fully exploitedMedicinal herbsvery high value" — CURED c32787d80 (Unexploited, its herbs bought)
+- #716 MED defenseDisplay.js [rr2s-city-calm-rand-1] "Ask who runs crime here and the answer is one ring." — CURED 82e8fab6e
+- #750 MED defenseDisplay.js [rr2s-city-calm-rand-1] "Ask who runs crime here and the answer is one ring. It sets the rules " — CURED 82e8fab6e
+- #813 MED defenseDisplay.js [rr2s-city-famine-rand-1] "Crime here answers to one ring." — CURED 82e8fab6e
+- #961 MED defenseDisplay.js [rr2s-city-under_siege+famine-rand-1] "Port facility but no naval force. Sea approaches are accessible to any" — NOT REACHED
+- #1172 HIGH defenseDisplay.js [rr2s-metropolis-calm-rand-1] "One criminal ring decides what crime is allowed here." — CURED 82e8fab6e
+- #1202 HIGH defenseDisplay.js [rr2s-metropolis-calm-rand-1] "One criminal ring decides what crime is allowed here. Its rules are pr" — CURED 82e8fab6e
+- #791 MED computeActiveChains.js [rr2s-city-famine-rand-1] "Upstream smelting chain is impaired" — computeActiveChains.js upstream note "is impaired" where vulnerable (generator write): NOT REACHED
+- #793 MED computeActiveChains.js [rr2s-city-famine-rand-1] "Needs imported fuel: no local source" — as #1255: NOT REACHED
+- #800 MED computeActiveChains.js [rr2s-city-famine-rand-1] "Needs imported Food Processing: no local source" — as #1255: NOT REACHED
+- #1255 MED computeActiveChains.js [rr2s-metropolis-wartime-rand-1] "Needs imported hunting: no local source" — computeActiveChains.js upstreamNote (generator write: no record byte may move; the cure is a display reader of the note or the generator lane): NOT REACHED
+- #1256 MED computeActiveChains.js [rr2s-metropolis-wartime-rand-1] "Upstream cartography chain is impaired" — as #791
+- #1375 HIGH computeActiveChains.js [rr2s-metropolis-plague_onset-port-1] "Upstream cartography chain is impaired" — as #791 (HIGH)
+- #1086 MED MagicTab.jsx [rr2s-city-occupied-rand-1] "Economic role: absent" — NOT REACHED
+- #1394 MED MagicTab.jsx [rr2s-metropolis-plague_onset-port-1] "Military role: absent" — NOT REACHED
+### The chair's increment of 20:4x UTC (ROUND-3-CUT-INCREMENT.json at fe6d5b741; 18 MED, class NEW)
+- MED EconomicsTab.jsx [rww-thorp-calm-1] "game meatanimal hidesfursmedicinal herbsstone" — Produced locally / exports pill: re-read at this tip (d5d156deb reads the chain leaf; P1-a/P1-b changed the leaf) — likely cured where the pill is a raw resource; a chain OUTPUT pill (Glassware, Books) is NOT REACHED
+- MED EconomicsTab.jsx [rww-hamlet-famine-1] "timbertrade access" — Produced locally / exports pill: re-read at this tip (d5d156deb reads the chain leaf; P1-a/P1-b changed the leaf) — likely cured where the pill is a raw resource; a chain OUTPUT pill (Glassware, Books) is NOT REACHED
+- MED defenseDisplay.js [rww-village-religious_conversion-1] "Food endurance: No granary: under siege the outlying fields would be l" — the food endurance line (defenseDisplay.js :: foodEnduranceLine): NOT REACHED
+- MED EconomicsTab.jsx [rww-town-famine-1] "Cartographer's guild" — NOT REACHED
+- MED EconomicsTab.jsx [rww-metropolis-famine-1] "Quarried stoneIron oreWeapons and armourMilled flourLuxury manufacture" — Produced locally / exports pill: re-read at this tip (d5d156deb reads the chain leaf; P1-a/P1-b changed the leaf) — likely cured where the pill is a raw resource; a chain OUTPUT pill (Glassware, Books) is NOT REACHED
+- MED EconomicsTab.jsx [rww-metropolis-famine-1] "Production: 11,814 lbs/day+ 39,452 imported+ 11,910 by druidic provisi" — NOT REACHED
+- MED EconomicsTab.jsx [rww-hamlet-succession_void-1] "Faith & WorshipReligion & civic✓ Running" — NOT REACHED
+- MED EconomicsTab.jsx [rww-town-slave_revolt-1] "honeymedicinal herbstrade accessstonecoallivestockwooldairyanimal hide" — Produced locally / exports pill: re-read at this tip (d5d156deb reads the chain leaf; P1-a/P1-b changed the leaf) — likely cured where the pill is a raw resource; a chain OUTPUT pill (Glassware, Books) is NOT REACHED
+- MED defenseDisplay.js [rww-town-slave_revolt-1] "Crime here answers to one ring. It keeps the streets quiet because tro" — ring note: CURED 82e8fab6e where rival rings stand; a slave revolt in force beside "one ring" is NOT REACHED (the crisis)
+- MED EconomicsTab.jsx [rww-thorp-plague_onset-1] "fishsaltpeathoneymedicinal herbsironmetalworkHoney and beeswaxForaged " — Produced locally / exports pill: re-read at this tip (d5d156deb reads the chain leaf; P1-a/P1-b changed the leaf) — likely cured where the pill is a raw resource; a chain OUTPUT pill (Glassware, Books) is NOT REACHED
+- MED EconomicsTab.jsx [rww-metropolis-under_siege-1] "No food comes into Naranjotepec by trade. Divine provision makes up a " — the food sentence beside divine provision larger than the harvest: NOT REACHED
+- MED computeActiveChains.js [rww-metropolis-under_siege-1] "Needs imported hunting: no local source" — upstreamNote (generator write): NOT REACHED, the family below
+- MED EconomicsTab.jsx [rww-city-famine-1] "GlasswareBooks and manuscriptsPrinting services" — Produced locally / exports pill: re-read at this tip (d5d156deb reads the chain leaf; P1-a/P1-b changed the leaf) — likely cured where the pill is a raw resource; a chain OUTPUT pill (Glassware, Books) is NOT REACHED
+- MED ResourcesTab.jsx [rww-metropolis-infiltrated-1] "UnexploitedTimbermedium value" — Unexploited Timber beside a running chain: CURED by P1 (9bcf0127a) — verify in its town
+- MED validationOnPage.js [rww-city-recently_betrayed-1] "No one here works the stone near Qaryatqala." — "No one here works the stone" beside a running Stone & Construction chain: re-read at this tip (R3 left walls and brickmakers out)
+- MED defenseDisplay.js [rww-city-recently_betrayed-1] "One criminal ring decides what crime is allowed here. Its rules are pr" — ring note: CURED 82e8fab6e where rival rings stand; a slave revolt in force beside "one ring" is NOT REACHED (the crisis)
+- MED defenseDisplay.js [rww-village-calm-1] "Food endurance: No granary: under siege the outlying fields would be l" — the food endurance line (defenseDisplay.js :: foodEnduranceLine): NOT REACHED
+- MED EconomicsTab.jsx [rww-village-famine-1] "woollivestockdairyanimal hidestimbertrade accessstonePreserved foodsLe" — Produced locally / exports pill: re-read at this tip (d5d156deb reads the chain leaf; P1-a/P1-b changed the leaf) — likely cured where the pill is a raw resource; a chain OUTPUT pill (Glassware, Books) is NOT REACHED
+### The seven rows R3-CODE-C traced to this lane's files
+- #367, #630 (+ #793, #800, #1255, round two's #703): computeActiveChains.js :: upstreamNote "Needs imported X: no local
+  source" beside a local source; and #791, #1256, #1375 HIGH "Upstream X chain is impaired" where it is vulnerable. A
+  GENERATOR WRITE: a cure there moves record bytes (this lane's law: none may move); the cure is a display reader of the
+  note on the Economics flow card (the page shows ratings, not the machinery: the note may simply leave the page), or
+  the generator's lane. NOT REACHED; recommendation: the note leaves the flow card (machinery), one commit.
+- #1153: the "40% recovery" chip (EconomicsTab, chain.magicRecovery) and "divine provision" (computeActiveChains.js's own
+  traditions.divine). RULED: one home for "the town has clergy with powers", the defence's tradition leaf; where it says
+  no, no divine provision is claimed; no percentage of recovery printed. NOT REACHED.
+- #512, #1310, #1145, #1204: the Trade Profile's imports: the missing inputs are out of Imports since 48bfc15c0/17f1af7bd;
+  under a siege the row is left out since 5ab1d2c7c. Likely CURED: verify each in its town.
+### The rule (b) row
+- "Needs X · affects: a, b, c" (#920, #1044, #1047): RULED (b) one plain sentence of consequence naming only services
+  the town's roster holds; its data rows are rb's (record 371). NOT REACHED.
+### The lane's older list (the second seat's next steps), NOT REACHED
+- validationOnPage.js mediums (#106, #453, #630, #388, #629: the idle-house line "No grapes/timber reaches …" beside an
+  import or a woodcutter: inputAnswered); defenseDisplay.js mediums (#122, #299 — cured by 82e8fab6e where rival rings
+  stand; #304 sea approaches inland — the cut's #961; #357 food endurance months; #1013 coordinated crime vs capture
+  none); item 5 (the flow card's "From Grazing land" where the chain's resource is absent: #790, #923, #1055, #1254 —
+  read facts/chainCarrier.js :: chainCarrierOf; the food band; the agreement review's G1–G4).
+### The measuring seat's CENSUS-2 (lane/census-2-2026-11-13 at a5cda3915; the chair's message of 21:27 UTC), NOT REACHED
+Counted at the census's own tree, NOT at this lane's tip (towns of 720 per writer, kind, and the cold list's line or NEW;
+a hit is a candidate, read it against the record): deriveSupportingCapabilities a 221 (cut#35) + 62 NEW (partly met at
+30f3404ff: the Arcane Support row; re-take); EconomicFlowsSection a 168 (cut#133), 125 (cut#1157), 120 NEW, 89 (cut#931),
+55 (cut#28, the "Access to" chains: r2-code-b), 41 (ww#305), 8, 1; shortWords b 17 (ww#303), 8 (cut#787);
+CRIM_STRUCTURE_DATA a 6 NEW (re-take after 82e8fab6e); BROUGHT_BANDS a 6 NEW (the chair named it: the carriers' share
+words beside a trade the town lacks); computeActiveChains.js :: INSTITUTIONAL_SERVICE_MAP b 3 (cut#1038) + 2 NEW (the
+#367/#630 family, a generator write); EconomicsTab b 2 + 2 NEW. The chair's packaged command was not received before
+this seat's final statement: run it on the lane's tip first.
