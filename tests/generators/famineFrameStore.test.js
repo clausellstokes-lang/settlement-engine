@@ -33,17 +33,18 @@ describe('the famine pool: a common store, a failed source, the powers counted',
 
   it('one power, a failed fishing, no granary: no harvest, no count, no stores', () => {
     const line = textOf(PRESSURE_SENTENCES.famine({ ...base, powerCount: 1 })[1]);
-    expect(line).toBe('Since the fishing failed, food is power in X, and everyone is watching who eats well.');
+    expect(line).toMatch(/^Since the fishing failed, food is power in X, /); // a pattern (proseDrawnAnchors)
+    expect(line).not.toMatch(/harvest|three powers|the stores/);
   });
 
   it('two powers: the two, over what food is left', () => {
     expect(textOf(PRESSURE_SENTENCES.famine({ ...base, powerCount: 2, foodRecord: { hasGranary: false, failedSource: 'game' } })[1]))
-      .toBe('Since the hunt failed, whoever holds the food in X holds the power, and its two powers are fighting over what food is left.');
+      .toMatch(/^Since the hunt failed, .+ its two powers are fighting over what food is left\.$/); // a pattern (proseDrawnAnchors)
   });
 
   it('three powers, a failed grain harvest, a granary: the original line', () => {
     expect(textOf(PRESSURE_SENTENCES.famine({ ...base, powerCount: 3, foodRecord: { hasGranary: true, failedSource: 'grain' } })[1]))
-      .toBe('Since the harvest failed, whoever holds the food in X holds the power, and at least three powers are fighting over the stores.');
+      .toMatch(/^Since the harvest failed, .+ at least three powers are fighting over the stores\.$/); // a pattern, not the literal sentence (proseDrawnAnchors)
   });
 });
 
