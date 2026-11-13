@@ -14,7 +14,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, test } from 'vitest';
 import { nativeSemanticName } from '../../src/domain/content/customContentSemanticAuthority.js';
-import { defenseTraditionNamesOf, DEFENSE_TRADITION_KEYWORDS } from '../../src/domain/institutions/defenseInstitutionBuckets.js';
+import { defenseTraditionNamesOf, DEFENSE_TRADITION_KEYWORDS, defenseWallOf } from '../../src/domain/institutions/defenseInstitutionBuckets.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -58,5 +58,15 @@ describe('the defence traditions are read by the roster\'s defence home', () => 
     const src = readFileSync(join(ROOT, 'src/generators/defenseGenerator.js'), 'utf8');
     expect(src).not.toMatch(/nativeSemanticName/);
     expect(src).not.toMatch(/\bhasInst\s*\(/);
+  });
+
+  test('R17: the home also answers the wall\'s kind (stone by default); nothing in defence reads it', () => {
+    expect(defenseWallOf([])).toEqual({ present: false, kind: null });
+    expect(defenseWallOf([{ name: 'Town Walls' }])).toEqual({ present: true, kind: 'stone' });
+    expect(defenseWallOf([{ name: 'Massive Walls' }, { name: 'Inner Citadel' }])).toEqual({ present: true, kind: 'stone' });
+    expect(defenseWallOf([{ name: 'Palisade' }])).toEqual({ present: true, kind: 'palisade' });
+    expect(defenseWallOf([{ name: 'Palisade or earthworks' }])).toEqual({ present: true, kind: 'palisade' });
+    expect(defenseWallOf([{ name: 'Earthwork ring' }])).toEqual({ present: true, kind: 'earthwork' });
+    expect(readFileSync(join(ROOT, 'src/generators/defenseGenerator.js'), 'utf8')).not.toMatch(/defenseWallOf/);
   });
 });

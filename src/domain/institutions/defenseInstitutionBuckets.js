@@ -235,3 +235,28 @@ export function defenseTraditionNamesOf(institutions) {
   }
   return Object.freeze(out);
 }
+
+/**
+ * THE WALL'S KIND (the chair's R17, optional): read from the walls row's name by the same keyword
+ * discipline, stone by default. NO term of the defence profile reads it, and no record stores it;
+ * it is the home's answer, ready for a later reader.
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+export const WALL_KIND_KEYWORDS = Object.freeze({
+  palisade: Object.freeze(['palisade']),
+  earthwork: Object.freeze(['earthwork']),
+});
+
+/**
+ * Whether the roster holds a wall, and of which kind ('stone', 'palisade' or 'earthwork'), read
+ * from the first walls row. RUIN-BLIND, as the partition.
+ * @param {unknown} institutions
+ * @returns {Readonly<{ present: boolean, kind: 'stone' | 'palisade' | 'earthwork' | null }>}
+ */
+export function defenseWallOf(institutions) {
+  const walls = partitionDefenseInstitutions(institutions).walls;
+  if (!walls.length) return Object.freeze({ present: false, kind: null });
+  const name = nativeSemanticName(walls[0]).toLowerCase();
+  const hit = Object.entries(WALL_KIND_KEYWORDS).find(([, keywords]) => keywords.some((kw) => name.includes(kw)));
+  return Object.freeze({ present: true, kind: /** @type {'palisade' | 'earthwork' | 'stone'} */ (hit ? hit[0] : 'stone') });
+}
