@@ -44,7 +44,9 @@ function callsIn(src) {
       else if (src[i] === ')') depth -= 1;
       i += 1;
     }
-    out.push({ text: src.slice(m.index, i), line: src.slice(0, m.index).split('\n').length });
+    // the line is counted, never split out: every probe in this file reads a WHOLE source text
+    // (tests/lint/contractTestAntiVacuity.walker.test.js Rule 3 reads a line split as a per-line probe)
+    out.push({ text: src.slice(m.index, i), line: (src.slice(0, m.index).match(/\n/g) ?? []).length + 1 });
   }
   return out;
 }
