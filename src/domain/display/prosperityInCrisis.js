@@ -51,11 +51,13 @@ const LEAD_WORD = 'Prosperity';
 const listOf = (items) => (items.length < 2 ? items.join('') : `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}`);
 
 /**
- * The sentence, or null where it must say nothing.
+ * The two words and the crisis nouns that set them apart, or null where the sentence must say nothing (the
+ * silences above). The ONE reading both writers below share, so the money line names exactly the crises the
+ * two-label sentence names, and prints exactly where it prints.
  * @param {{ economicState?: { prosperity?: unknown, prosperityStanding?: unknown } | null } | null | undefined} settlement
- * @returns {string | null}
+ * @returns {{ standing: string, shown: string, nouns: string[], events: boolean } | null}
  */
-export function prosperityInCrisisLine(settlement) {
+function crisisApartOf(settlement) {
   const eco = settlement?.economicState;
   const shown = eco?.prosperity;
   const standing = standingLabelOf(eco); // the one reader of the standing label (the printed one on an older record: then equal, so silent)
@@ -72,10 +74,39 @@ export function prosperityInCrisisLine(settlement) {
     if (!nouns.includes(noun)) nouns.push(noun);
     if (!kind || !EVENT_KINDS.has(kind)) events = false;
   }
-  if (!nouns.length) return null;
+  return nouns.length ? { standing, shown, nouns, events } : null;
+}
+
+/** @param {string[]} nouns @returns {string} "the famine", "the famine and the siege" */
+const theNouns = (nouns) => listOf(nouns.map((n) => `the ${n}`));
+
+/**
+ * The sentence, or null where it must say nothing.
+ * @param {{ economicState?: { prosperity?: unknown, prosperityStanding?: unknown } | null } | null | undefined} settlement
+ * @returns {string | null}
+ */
+export function prosperityInCrisisLine(settlement) {
+  const apart = crisisApartOf(settlement);
+  if (!apart) return null;
+  const { standing, shown, nouns, events } = apart;
   const plural = nouns.length > 1 || PLURAL_NOUNS.has(nouns[0]);
   const after = events ? 'since' : `while ${plural ? 'they last' : 'it lasts'}`;
-  return `${standing} before ${listOf(nouns.map((n) => `the ${n}`))}; ${shown} ${after}.`;
+  return `${standing} before ${theNouns(nouns)}; ${shown} ${after}.`;
+}
+
+/**
+ * THE MONEY WAS LAID BY BEFORE THE CRISIS (COHERENCE-UPKEEP-7, the chair's ruling on the third read's 1b-M3): where
+ * the two words differ, the sentence that says what the town can pay says so in ONE clause, "laid by before the
+ * famine", so "money enough to ride out a long crisis" never stands unexplained beside "every coin goes on food".
+ * It claims only what the model holds: what the town can pay is reckoned at its ordinary-years word, so its
+ * defenders stay paid from what was laid by. It prints exactly where the two-label sentence prints, and names the
+ * same crises; elsewhere null, and the money line reads as before.
+ * @param {{ economicState?: { prosperity?: unknown, prosperityStanding?: unknown } | null } | null | undefined} settlement
+ * @returns {string | null} "laid by before the famine"
+ */
+export function laidByBeforeCrisis(settlement) {
+  const apart = crisisApartOf(settlement);
+  return apart ? `laid by before ${theNouns(apart.nouns)}` : null;
 }
 
 /**
