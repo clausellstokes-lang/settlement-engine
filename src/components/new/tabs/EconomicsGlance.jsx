@@ -83,7 +83,7 @@ import ProseBlock from '../ProseBlock.jsx'; // the shared one-paragraph renderer
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { FLUSH } from '../../../design/flush.js';
-import { prosperityInCrisisLine } from '../../../domain/display/prosperityInCrisis.js';
+import { prosperityInCrisisLine } from '../../../domain/display/prosperityInCrisis.js'; import { outputChipBesideWord } from '../../../domain/display/dossierViewModel.js';
 
 /**
  * The prosperity header: the page's one-line answer (the prosperity word) and its chips.
@@ -129,7 +129,7 @@ export default function EconomicsGlance({
               <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:MUTED,marginBottom:2}}>Trade</div>
               <div style={{fontSize:FS.sm,fontWeight:600,color:swatch.inkMag,textTransform:'capitalize'}}>{tradeLabel}</div>
             </div>
-            {ecoScore>0&&<div style={{textAlign:'center',background:swatch['#FAF8F4'],border:'1px solid #d8c090',padding:'6px 12px'}}>
+            {outputChipBesideWord(ecoScore, eco.prosperity)&&<div style={{textAlign:'center',background:swatch['#FAF8F4'],border:'1px solid #d8c090',padding:'6px 12px'}}>{/* UPKEEP-8 (#608): the word alone where the figure stands two bands from it */}
               <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:MUTED,marginBottom:2}}>Output</div>
               <div style={{fontSize:FS.md,fontWeight:700,color:ecoScore>=60?'#1a5a28':ecoScore>=35?'#a0762a':'#8b1a1a'}}>{ecoScore}/100</div>
             </div>}
