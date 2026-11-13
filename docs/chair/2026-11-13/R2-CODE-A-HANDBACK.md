@@ -172,3 +172,44 @@ Probes (scratchpad, not committed): `births.mjs` (the census's 720 with its own 
 - **Guard:** `tests/generators/stableHistoryMajorCount.test.js` — red first 4 of 5, green 5 of 5.
 - **Gates:** as above; the 44 suites naming narrativeText, POLITICAL_FLAVOR, historicalCharacter or historyCoherence: red only the golden-master byte reads (generatorGoldenMaster, espionageDormancyFence, rosterFinalUnderHeldRoster A1), red at the base.
 - **New words (ruling (g), with the town read):** "It has come through the X and the Y, and travellers still remember the place kindly" (rw3-village-insurgency-1, r2r-thorp-3); "It has come through the X and the Y and simply continued, and that took more work than it looks" (r2r-hamlet-26); "The X and the Y are the events people here still date things by" (r2r-thorp-7).
+
+### Medium: "A poor harvest somewhere else" (#152) — DONE, 1d72106dd (pushed)
+- **Measured at 68b4d0893:** the import-dependent hook prints in 42 towns; 31 false (22 under a famine with food still coming in; 9 with no channel carrying food in: 4 isolated famines, 4 sieges, 1 wartime thorp), 11 true.
+- **Cure** (`foodBalance.js :: deriveFoodBalanceAnalysis`, a T branch): no channel → "No food can be bought in from outside now, so the {grain|food} already here is all there is, and its price climbs every week. The settlement must decide how to share it, and those who hold it are watching it decide." (category "Scarce Food"); a famine with a channel → "The {grain harvest|herds|fishing|hunt|crops} failed here this year, and what food can still be bought from outside costs more every week. …" (the failed source from the food record). **Field diff: 31 of 740**, the hook text and, in 9, its category. After: 0 of 31; the 11 true unchanged. Read: all 31.
+- **Guard:** `tests/generators/harvestHookFamineHere.test.js` — red first 6 of 7, green 7 of 7.
+- **New words:** the two hooks (r2s-under_siege-hamlet-2; rw3-city-famine-1) and "Scarce Food".
+
+### Medium: the food-supply crisis heading (#1068) — DONE, d5b50b4f4 (pushed)
+- **Measured at 1d72106dd:** 231 food-supply crisis notes; 30 towns print a heading and line that disagree with the balance beside them. The heading read the LOCAL legacy surplus (a second home), and an occupation or an influx, which adds eaters, was "Crisis Thinning the Harvest".
+- **Cure:** the heading reads the published gap; no gap → "Crisis Thinning the Harvest" (a crisis that takes from the fields) or "Crisis Adding Mouths to Feed" (the occupiers' and the newcomers' notes), and the line says whether what is grown still covers what is eaten or the shortfall is still made up. **Field diff: 30 of 740**, `issues[].title` and `.priorityNote` only. After: 0 of 30.
+- **Guard:** `tests/generators/foodCrisisHeadingReadsRecord.test.js` — red first 9 of 9, green; the SW-B1 pin green.
+- **New words:** "Crisis Adding Mouths to Feed" (rw3-town-occupied-1); "There are more mouths to feed, but what is grown still covers what is eaten." (r2s-mass_migration-thorp-1); "There are more mouths to feed, but the shortfall is still made up." (rw3-town-occupied-1); "The crisis has cut the harvest, but the shortfall is still made up." (r2s-wartime-hamlet-0).
+
+### Medium: "recent enough" for an event 88 years old (#181) — DONE, d0ff7e7ec (pushed)
+- **Measured at d5b50b4f4:** the two `economic_heavy` lines print in 14 towns; 7 name an event over sixty years old (the chair's ruling B of COHERENCE-PRESUME). **Cure:** the one pick, then its age. **Field diff: 7 of 740**, `historicalCharacter` only; after 0 of 7. **Guard:** `tests/generators/economicHistoryRecent.test.js` — red first 2 of 3, green.
+- **New words:** "…is long past, but nobody here has forgotten that prosperity has always been earned and can always be lost" (rw3-hamlet-calm-1); "…is long past, but flaunting wealth still looks like having learned nothing from it" (r2r-town-32).
+
+### Medium: the war-contracts secret in a poor town (#723) — DONE, 78d255b62 (pushed)
+- **Measured at d0ff7e7ec:** 16 prints; 5 true (comfortable, prosperous), 11 false (moderate, struggling, poor). **Cure:** the row declares `prosperity: ≥ comfortable`; the secret draw resolves draw-free. **Field diff: 11 of 740 — exactly the 11** — `.npcs[].secret` and, for 7, the `.presentation` keyed on a secret: **DECLARED, the held-secret refusal re-deals later persons' secrets inside those 11 towns**; no roster or person moves. One count pin re-keyed by its cause (`stressSecretDeclared.test.js` 34 → 35). **Guard:** `tests/generators/warContractsSecretProsperity.test.js` — red first 5 of 6, green.
+- **My miss, recorded:** the wiring census's walker was not in that item's governing set, so 78d255b62 left `docs/content/wiring-census.json` stale; re-taken through its writer in 31603f652.
+
+### Medium: the clerk in a thorp (#6), and the government lines that share its presumption — DONE, 2bdb29c42 + 31603f652 (pushed)
+- **Measured at 78d255b62:** in thorps and hamlets the five lines that presume an office with staff print 21 times; "Their most trusted advisor … The official story" 3 (the first resolution put it in 4 more thorps); "buying up property in a district" 1 in a hamlet and 6 in villages (ruling (f)). The first fix printed "…fool their own staff" in the clerk's place, so the cause is the presumption, line by line.
+- **Cure:** six lines `tier: ≥ village`, the district line `population: ≥ middling`. **Field diff: 29 of 740**, `plotHooks` only (60 persons: the holders and the registry's re-deal inside those towns). After: 0 / 0. Read: 58 of 60 true; 2 questionable and not this cause ("They promised the same post to two people" on a thorp's elder; the clerk line on a village miller, the crisis bias pulling the government pool).
+- **Pins re-keyed by identity:** `npcLoyaltyGuardRows.test.js` (seven rows by index and atom); `hookThemeDraws.test.js` pin:source-cure (it read raw rows, so a declared row read as untyped; it now reads the text as `drawLoyalty` does: green at the base and here). The wiring census re-taken (31603f652). **Guard:** `tests/generators/clerkHookSmallPlace.test.js` — red first 10 of 10, green.
+- **Noticed, not this lane's list:** the crisis bias pulls the government pool onto holders with no office (the clerk line on potters and sawyers in cities): the soldier's mechanism for another pool.
+
+### Ruling (b): the pool-dominance row — NAMED for the merge seat's door
+`scripts/census/pool-dominance.register.json` row `ledger:ARRIVAL_SCENES.port`: its top-5 ceiling 1 sits above its measure 0.9156 since item 4 deepened the pool (def678c3d); `poolDominance.walker` "no ceiling sits loose above its measure" red at every tip since, and no other row of that walker is red at 31603f652. Shrink only, by the door; this seat runs none.
+
+### Ruling (c): the person re-dealt in r2r-metropolis-50 — TRACED: the stated consequence of item 7, not a stray
+Born at every lane commit touching `src/` (e969a75b7 … 0e1c6b5ba): Raghallach Forbes ("the bloc's speaker", a minted face) carries "Has been systematically bribing…" through db71b52a0 and "On the payroll of the thieves' guild as a silent informant" from **0e11e87a4** (item 7) on. At db71b52a0 the blade captain Morrigan MacGillivray carries the guild informant line (false: no guild); item 7 rewrites it to "the local underworld", the roster's held set (printed texts) no longer holds the guild text, and the late face draws it. It is one of the three remaining false guild lines item 7's commit declares (owed to the powers lane's seat, ruling (e)).
+
+### Parked, each with its measure at this tree (31603f652's corpus)
+| row | prints (false by a rough read) | why parked |
+|---|---|---|
+| the watch "Well-funded … keeps order reliably" (#110 #290 #765) | 96 (the first seat's rough read: 26) | the sibling site's facts hold the roster's names only; the line needs a read of safety or capture (P3: no new read) |
+| "Records here are kept carefully … precedent" with no court (#4) | 26 (24 with no court-like house) | the vocabulary has no court atom; the draw site honours declarations and a sentence-keyed sibling table (`POLITICAL_FLAVOR_SIBLINGS`) could twin it once one exists — it needs an atom (the vocabulary file, five lanes) |
+| "A valuable cargo was reported lost at sea" in a river town (#732) | 45 (25 neither coastal nor a port) | ruling (a): the repetition guard's own reading when `coast` replaced `navigable` (the first seat): `ledger:npcData:NPC_HOOK_SIBLINGS` top-1 0.885 against its ceiling 0.621; a river twin must be written before the atom moves |
+| "discussed (carefully) by the practitioners who work here" (#852) | 4 (4) | a practitioner atom is not in the vocabulary |
+| "…the debt X owes is now the only asset" beside a second debt (#142) | 339 (0 by this read) | the second debt is another relationship's: a read across relationships |
