@@ -1,0 +1,16 @@
+0386ff35a: 33 passed, 3 failed
+   dailyLifeGrammar.test.js :: a plural power takes a bare apostrophe ("Merchant Guilds' mark")
+   dailyLifeGrammar.test.js :: no slot repeats its label inside its text
+   dailyLifeGrammar.test.js :: a warning, a topic or a change is said once
+476800e1d: 36 passed, 0 failed
+6c0db2bb6: 35 passed, 1 failed
+   plagueVantageQuarantine.test.js :: no line of the four surfaces says the quarantine holds nowhere
+9494a7bce: 34 passed, 2 failed
+   conditionWords.test.js :: a beast threat is not called wartime pressure
+   conditionWords.test.js :: two crises, each by its own name, in the record's condition order
+cdf84d431: 35 passed, 1 failed
+   embattledReasonNoSlider.test.js :: at priorities 12, 29 and 38: a reason in plain words, with no slider name or figure
+d166e8261: 35 passed, 1 failed
+   wave1CohesionFixes.test.js :: a magic-heavy town with weak arcane defenses reads NO instability from the score; a magical crisis does
+hand-occupier: 35 passed, 1 failed
+   occupierRelationLine.test.js :: at every band (subordinate, symbiotic, tense, competitive): the hall carries out what the occupier decides

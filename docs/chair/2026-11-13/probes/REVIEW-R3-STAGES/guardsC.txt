@@ -1,0 +1,1 @@
+tests/domain/crisis/plagueVantageQuarantine.test.js tests/domain/dailyLifeGrammar.test.js tests/domain/display/conditionWords.test.js tests/domain/wave1CohesionFixes.test.js tests/generators/embattledReasonNoSlider.test.js tests/generators/occupierRelationLine.test.js

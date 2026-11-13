@@ -1,0 +1,4 @@
+rr2s-city-occupied-rand-1
+rr2s-village-monster_pressure-rand-1
+rr2s-town-under_siege-rand-1
+rr2s-metropolis-plague_onset-port-1

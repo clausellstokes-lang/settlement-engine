@@ -1,0 +1,45 @@
+=== 476800e1d (fix(R3-CODE-C #1074): the occupier's relation row says the hall carries out what it decide)
+births base 720 tip 720 missing 0; leaf diffs 613; towns moved 28
+family powerStructure: 28 towns
+family npcs: 9 towns
+NEW/GONE KEY rows 0 []
+{"goal.short":38,"goal.long":88}
+towns {"goal.short":8,"goal.long":9}
+roster moved 0 
+=== de27f9fd6 (fix(R3-CODE-C #1074, follow-up): the occupier import on the file's first import line, so t)
+births base 720 tip 720 missing 0; leaf diffs 0; towns moved 0
+NEW/GONE KEY rows 0 []
+{}
+towns {}
+roster moved 0 
+=== cdf84d431 (fix(R3-CODE-C #325 #468): the embattled-region warning says what the underfunding means, n)
+births base 720 tip 720 missing 0; leaf diffs 54; towns moved 54
+family structuralViolations: 54 towns
+NEW/GONE KEY rows 0 []
+{}
+towns {}
+roster moved 0 
+=== 9494a7bce (fix(R3-CODE-C #304): the Foundations sentence names a crisis by its own name, so a beast t)
+births base 720 tip 720 missing 0; leaf diffs 0; towns moved 0
+NEW/GONE KEY rows 0 []
+{}
+towns {}
+roster moved 0 
+=== 6c0db2bb6 (fix(R3-CODE-C #1386): the outbreak's Defence watch vantage says the quarantine is resisted)
+births base 720 tip 720 missing 0; leaf diffs 0; towns moved 0
+NEW/GONE KEY rows 0 []
+{}
+towns {}
+roster moved 0 
+=== 0386ff35a (fix(R3-CODE-C, C-L4): the daily-life lines form a power's possessive by its leaf, never re)
+births base 720 tip 720 missing 0; leaf diffs 0; towns moved 0
+NEW/GONE KEY rows 0 []
+{}
+towns {}
+roster moved 0 
+=== d166e8261 (fix(R3-CODE-C, C-H1): a weak magical defence is not "Magical instability"; the threat stan)
+births base 720 tip 720 missing 0; leaf diffs 0; towns moved 0
+NEW/GONE KEY rows 0 []
+{}
+towns {}
+roster moved 0 

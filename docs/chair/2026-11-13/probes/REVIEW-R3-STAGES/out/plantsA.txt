@@ -1,0 +1,64 @@
+0d3972d8f: 55 passed, 2 failed
+   plagueFoodNoteSource.test.js :: rr2s-metropolis-plague_onset-port-1: the note names the boats, not the fields, and calls no onset a plague
+   plagueFoodNoteSource.test.js :: rr2s-hamlet-plague_onset-rand-1: the note names the boats, not the fields, and calls no onset a plague
+1d72106dd: 51 passed, 6 failed
+   harvestHookFamineHere.test.js :: rw3-city-famine-1: a famine with food still coming in tells the failure here, and the import
+   harvestHookFamineHere.test.js :: r2s-famine-town-0: a famine with food still coming in tells the failure here, and the import
+   harvestHookFamineHere.test.js :: r2r-hamlet-16: a famine with food still coming in tells the failure here, and the import
+   harvestHookFamineHere.test.js :: r2s-under_siege-hamlet-2: nothing coming in, so the food already here is told, and no import
+   harvestHookFamineHere.test.js :: r2r-thorp-54: nothing coming in, so the food already here is told, and no import
+   harvestHookFamineHere.test.js :: r2s-wartime-thorp-3: nothing coming in, so the food already here is told, and no import
+2bdb29c42: 47 passed, 10 failed
+   clerkHookSmallPlace.test.js :: the five office lines declare the size they presume
+   clerkHookSmallPlace.test.js :: rw3-thorp-calm-1: no one in a thorp or a hamlet has an office with staff, and each keeps one hook
+   clerkHookSmallPlace.test.js :: r2r-hamlet-34: no one in a thorp or a hamlet has an office with staff, and each keeps one hook
+   clerkHookSmallPlace.test.js :: r2s-recently_betrayed-hamlet-2: no one in a thorp or a hamlet has an office with staff, and each keeps one hook
+   clerkHookSmallPlace.test.js :: r2s-slave_revolt-thorp-0: no one in a thorp or a hamlet has an office with staff, and each keeps one hook
+   clerkHookSmallPlace.test.js :: r2r-hamlet-45: no one in a thorp or a hamlet has an office with staff, and each keeps one hook
+   clerkHookSmallPlace.test.js :: r2r-thorp-17: no one in a thorp or a hamlet has an office with staff, and each keeps one hook
+   clerkHookSmallPlace.test.js :: r2s-insurgency-thorp-3: no one in a thorp or a hamlet has an office with staff, and each keeps one hook
+   clerkHookSmallPlace.test.js :: r2r-village-53: a village below the middling band buys up no property in a district
+   clerkHookSmallPlace.test.js :: r2r-village-59: a village below the middling band buys up no property in a district
+3973660ed: 53 passed, 4 failed
+   stableHistoryMajorCount.test.js :: two major events: no line names one and denies the rest; each names the first two
+   stableHistoryMajorCount.test.js :: three major events: no line names one and denies the rest; each names the first two
+   stableHistoryMajorCount.test.js :: two major events and nothing else: the dating line names both and claims no quieter rest
+   stableHistoryMajorCount.test.js :: rw3-village-insurgency-1 (#817): its history character names no single major event as the only one
+48e034922: 55 passed, 2 failed
+   pressureCommodityNoun.test.js :: with no commodity, the levy is of the food the record keeps
+   pressureCommodityNoun.test.js :: Qal'atqala (#601): the debt line names no first word of an export
+5841c15ba: 54 passed, 3 failed
+   stressSecretNoCommodity.test.js :: no secret or stakes carries {commodity}
+   stressSecretNoCommodity.test.js :: Qal'atqala (#651): the debt's contract names no first word
+   stressSecretNoCommodity.test.js :: the monster village (#327): the work that disturbed the nest names no first word
+78d255b62: 52 passed, 5 failed
+   warContractsSecretProsperity.test.js :: declares the prosperity band it presumes
+   warContractsSecretProsperity.test.js :: rw3-city-wartime-1: a town below comfortable carries no such secret
+   warContractsSecretProsperity.test.js :: r2s-wartime-town-0: a town below comfortable carries no such secret
+   warContractsSecretProsperity.test.js :: r2s-wartime-village-1: a town below comfortable carries no such secret
+   warContractsSecretProsperity.test.js :: r2s-wartime-city-1: a town below comfortable carries no such secret
+910082d4a: 57 passed, 0 failed
+d0ff7e7ec: 55 passed, 2 failed
+   economicHistoryRecent.test.js :: older than sixty years: neither line calls it recent, and each still names it
+   economicHistoryRecent.test.js :: rw3-hamlet-calm-1 (#181): an 88-year-old event is not called recent
+d5b50b4f4: 57 passed, 0 failed
+dca86dfe1: 57 passed, 0 failed
+hand-famine: 52 passed, 5 failed
+   famineFrameStore.test.js :: the two reserves rows need a granary
+   famineFrameStore.test.js :: one power, a failed fishing, no granary: no harvest, no count, no stores
+   famineFrameStore.test.js :: two powers: the two, over what food is left
+   famineFrameStore.test.js :: Sahlfort (#40): no granary, so no reserves are promised
+   famineFrameStore.test.js :: Archodion (#48): one power and a failed fishing, so no harvest and no three powers
+hand-heading: 48 passed, 9 failed
+   foodCrisisHeadingReadsRecord.test.js :: rw3-town-occupied-1 (#1068): occupiers, no gap (imports close it): more mouths to feed, the shortfall made up
+   foodCrisisHeadingReadsRecord.test.js :: r2s-occupied-village-2: the heading and its line agree with the gap and the harvest
+   foodCrisisHeadingReadsRecord.test.js :: r2r-village-28: the heading and its line agree with the gap and the harvest
+   foodCrisisHeadingReadsRecord.test.js :: r2s-wartime-village-2: the heading and its line agree with the gap and the harvest
+   foodCrisisHeadingReadsRecord.test.js :: r2s-plague_onset-thorp-2: the heading and its line agree with the gap and the harvest
+   foodCrisisHeadingReadsRecord.test.js :: r2r-thorp-27: the heading and its line agree with the gap and the harvest
+   foodCrisisHeadingReadsRecord.test.js :: r2s-occupied-thorp-3: the heading and its line agree with the gap and the harvest
+   foodCrisisHeadingReadsRecord.test.js :: r2s-wartime-hamlet-0: the heading and its line agree with the gap and the harvest
+   foodCrisisHeadingReadsRecord.test.js :: r2s-slave_revolt-village-3: the heading and its line agree with the gap and the harvest
+hand-soldier: 55 passed, 2 failed
+   soldierHookCivilianHolder.test.js :: rw3-city-wartime-1: no holder outside the military carries a soldier's hook
+   soldierHookCivilianHolder.test.js :: rw3-town-under_siege-1: no holder outside the military carries a soldier's hook

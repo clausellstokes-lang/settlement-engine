@@ -1,0 +1,96 @@
+=== dca86dfe1 (fix(R2-CODE-A-2, medium #676 #678 #968 #969): a soldier's hook is the military's own; a ci)
+births base 720 tip 720 missing 0; leaf diffs 2535; towns moved 112
+family npcs: 112 towns
+NEW/GONE KEY rows 0 []
+{"hook+":2535,"hook-":2535}
+towns {"hook":112}
+roster moved 0 
+ALL1536: births base 1536 tip 1536 missing 0; leaf diffs 7907; towns moved 331
+=== ce1f02a0c (fix(R2-CODE-A-2, medium #676 #678 #968 #969, follow-up): the military lines true of any ho)
+births base 720 tip 720 missing 0; leaf diffs 0; towns moved 0
+NEW/GONE KEY rows 0 []
+{}
+towns {}
+roster moved 0 
+ALL1536: births base 1536 tip 1536 missing 0; leaf diffs 0; towns moved 0
+=== 3973660ed (fix(R2-CODE-A-2, medium #817): the three history lines that name one major event read how )
+births base 720 tip 720 missing 0; leaf diffs 44; towns moved 44
+family history: 44 towns
+NEW/GONE KEY rows 0 []
+{}
+towns {}
+roster moved 0 
+ALL1536: births base 1536 tip 1536 missing 0; leaf diffs 85; towns moved 85
+=== 1d72106dd (fix(R2-CODE-A-2, medium #152): the import-dependent hook reads the famine and the import c)
+births base 720 tip 720 missing 0; leaf diffs 38; towns moved 29
+family economicViability: 29 towns
+NEW/GONE KEY rows 0 []
+{}
+towns {}
+roster moved 0 
+ALL1536: births base 1536 tip 1536 missing 0; leaf diffs 107; towns moved 81
+=== d5b50b4f4 (fix(R2-CODE-A-2, medium #1068): the food-supply crisis heading reads the gap its balance p)
+births base 720 tip 720 missing 0; leaf diffs 58; towns moved 29
+family economicViability: 29 towns
+NEW/GONE KEY rows 0 []
+{}
+towns {}
+roster moved 0 
+ALL1536: births base 1536 tip 1536 missing 0; leaf diffs 141; towns moved 71
+=== d0ff7e7ec (fix(R2-CODE-A-2, medium #181): the two economic history lines that call their event recent)
+births base 720 tip 720 missing 0; leaf diffs 6; towns moved 6
+family history: 6 towns
+NEW/GONE KEY rows 0 []
+{}
+towns {}
+roster moved 0 
+ALL1536: births base 1536 tip 1536 missing 0; leaf diffs 10; towns moved 10
+=== 78d255b62 (fix(R2-CODE-A-2, medium #723): the war-contracts secret needs a town the war made rich)
+births base 720 tip 720 missing 0; leaf diffs 97; towns moved 10
+family npcs: 10 towns
+NEW/GONE KEY rows 0 []
+{"secret.what":32,"secret.stakes":31,"presentation.impression":12,"presentation.disposition":10,"presentation.behaviour":12}
+towns {"secret.what":10,"secret.stakes":10,"presentation.impression":7,"presentation.disposition":7,"presentation.behaviour":7}
+roster moved 0 
+ALL1536: births base 1536 tip 1536 missing 0; leaf diffs 313; towns moved 31
+=== 2bdb29c42 (fix(R2-CODE-A-2, medium #6): the government hooks that presume an office with staff, or a )
+births base 720 tip 720 missing 0; leaf diffs 52; towns moved 27
+family npcs: 27 towns
+NEW/GONE KEY rows 0 []
+{"hook+":52,"hook-":52}
+towns {"hook":27}
+roster moved 0 
+ALL1536: births base 1536 tip 1536 missing 0; leaf diffs 106; towns moved 54
+=== 910082d4a (fix(R2-CODE-A-3, round three HIGH #48, MED #40 and #4): the famine pool's reserves need a )
+births base 720 tip 720 missing 0; leaf diffs 14; towns moved 14
+family pressureSentence: 14 towns
+NEW/GONE KEY rows 0 []
+{}
+towns {}
+roster moved 0 
+ALL1536: births base 1536 tip 1536 missing 0; leaf diffs 34; towns moved 34
+=== 48e034922 (fix(R2-CODE-A-3, round three HIGH #601): the pressure lines read the commodity scan's labe)
+births base 720 tip 720 missing 0; leaf diffs 23; towns moved 23
+family pressureSentence: 23 towns
+NEW/GONE KEY rows 0 []
+{}
+towns {}
+roster moved 0 
+ALL1536: births base 1536 tip 1536 missing 0; leaf diffs 52; towns moved 52
+=== 5841c15ba (fix(R2-CODE-A-3, round three HIGH #651 #327): no crisis secret reads the {commodity} slot)
+births base 720 tip 720 missing 0; leaf diffs 61; towns moved 61
+family npcs: 61 towns
+NEW/GONE KEY rows 0 []
+{"secret.what":61}
+towns {"secret.what":61}
+roster moved 0 
+ALL1536: births base 1536 tip 1536 missing 0; leaf diffs 149; towns moved 149
+=== 0d3972d8f (fix(R2-CODE-A-3, round three HIGH #1312, MED #203): the outbreak's food note reads the rec)
+births base 720 tip 720 missing 0; leaf diffs 102; towns moved 28
+family economicViability: 28 towns
+family history: 20 towns
+NEW/GONE KEY rows 0 []
+{}
+towns {}
+roster moved 0 
+ALL1536: births base 1536 tip 1536 missing 0; leaf diffs 256; towns moved 76

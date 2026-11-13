@@ -1,0 +1,13 @@
+rw3-thorp-calm-1
+rw3-thorp-famine-1
+rw3-hamlet-calm-1
+rw3-city-wartime-1
+rw3-village-insurgency-1
+rw3-town-under_siege-1
+rw3-town-occupied-1
+rr2s-thorp-calm-rand-1
+rr2s-thorp-famine-rand-1
+rr2s-hamlet-plague_onset-rand-1
+rr2s-village-monster_pressure-rand-1
+rr2s-town-indebted-port-1
+rr2s-metropolis-plague_onset-port-1
