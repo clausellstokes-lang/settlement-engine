@@ -1001,7 +1001,7 @@ registerStep('assembleInstitutions', {
       const pool = [inst.desc, ...variants];
       const dry = worldLaw.portKind === 'none' ? pool.filter((desc) => !SHIP_WORD.test(desc)) : pool;
       const inland = dry.length ? null : INLAND_DESCRIPTIONS[`${tier}|${inst.category}|${inst.name}`];
-      inst.desc = speakTierNoun(inland ? resolveSibling(inland, DESC_VARIANT_SIBLINGS, { facts: () => factsOf({ institutions }), poolId: 'institutionDescVariants:DESC_VARIANT_SIBLINGS', surface: 'institutions', drawKind: 'H' }) : drawInstitutionDesc(dry.length ? dry : pool, `${ctx._seed}:${inst.name}`, () => birthFactsOf({ institutions, config, tier }, worldLaw), `${tier}|${inst.category}|${inst.name}`), tierNounFor(tier)); // F10, CENSUS-1c, CENSUS-1f (site 18): the same pick, resolved through drawDeclared against the declaration column and the walls siblings (steps/institutionDescDraw.js), draw-free
+      inst.desc = speakTierNoun(inland ? resolveSibling(inland, DESC_VARIANT_SIBLINGS, { facts: () => factsOf({ institutions }), poolId: 'institutionDescVariants:DESC_VARIANT_SIBLINGS', surface: 'institutions', drawKind: 'H' }) : drawInstitutionDesc(dry.length ? dry : pool, `${ctx._seed}:${inst.name}`, () => birthFactsOf({ institutions, config: { ...config, stressTypes: settledStressTypes(effectiveConfig, config) }, tier }, worldLaw), `${tier}|${inst.category}|${inst.name}`), tierNounFor(tier)); // F10, CENSUS-1c, CENSUS-1f (site 18): the same pick, resolved through drawDeclared against the declaration column and the walls siblings (steps/institutionDescDraw.js), draw-free; W2-FIX-DATA-3 (REVIEW-W2-FIX-DATA F1): the crisis is the one the birth has settled (`settledStressTypes`, below), not the caller's raw config (the app's selectedStresses shape carries no stressTypes)
     }
   }
 
@@ -1023,3 +1023,24 @@ registerStep('assembleInstitutions', {
 // draws, and no pool byte moves. @enforced-by tests/generators/tierNounPoolDraws.test.js
 import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js';
 import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
+
+/**
+ * THE CRISES A DESCRIPTION DRAWN HERE MAY READ (W2-FIX-DATA-3, REVIEW-W2-FIX-DATA F1). The draw above
+ * runs before `stressConfirmPass`, which may still DROP an emergent crisis against the real roster (a
+ * granary halves a famine's odds, walls cut a siege's). So the draw reads only the crises resolveStress
+ * threaded into `effectiveConfig` that the confirm pass can never drop: its own forced set (the
+ * caller's `stressTypes`/`stressType` as `intendedStressTypes`, the panel's `selectedStresses` with
+ * random off, an editor's `stressorEdits.added`; `stressConfirmPass.js`). Measured on the census's 720:
+ * handing the draw every threaded crisis printed a famine or siege twin in four towns whose crisis the
+ * confirm pass then dropped. An emergent crisis that survives is read by no description drawn here.
+ * @param {Record<string, any>} effectiveConfig @param {Record<string, any>} config
+ * @returns {string[]}
+ */
+function settledStressTypes(effectiveConfig, config) {
+  const forced = new Set([
+    ...(effectiveConfig.intendedStressTypes || []),
+    ...(config.selectedStressesRandom === false ? (config.selectedStresses || []) : []),
+    ...((config.stressorEdits?.added || []).map((/** @type {any} */ e) => e?.type).filter(Boolean)),
+  ]);
+  return (effectiveConfig.stressTypes || []).filter((/** @type {string} */ type) => forced.has(type));
+}
