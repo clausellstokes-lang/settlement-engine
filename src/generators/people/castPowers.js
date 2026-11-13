@@ -58,6 +58,7 @@ import { isHideableHouse, isVeiledPower, veiledCardIdFor } from '../../domain/pe
 import { veiledEpithetFor } from '../npcDisplayNames.js';
 import { RUNG_KEYS, rungBandsForTier } from '../../domain/density/densityRungs.js';
 import { allegianceOf, isCriminalPower, organizedCrimeOf } from '../../domain/people/allegiance.js';
+import { isSeatVacant } from '../../domain/people/seatKeeper.js';
 
 /** The keyed fork the late mints and the ranks draw under (declared in the fork census). */
 export const POWERS_FORK_LABEL = 'people-powers';
@@ -414,6 +415,7 @@ export function rankPowers(settlement, landed, pushTuning = GUILD_PUSH_TUNING) {
 
   seatStressPowers(settlement, all, members);
   settleCrisisLeaders(settlement, all);
+  keeperLeavesTheClaim(settlement, all);
 
   // ── THE IMPORTANCE BAND, from the rank ──────────────────────────────────────────────────
   // The retired rung roll expressed itself through `importance` on EVERY figure (densityRungs.js:
@@ -523,6 +525,32 @@ export function raiseToOfficeBand(card, officeRole) {
   const offset = Math.max(0, Math.min(office.span - 1, (Number(card.power) || own.floor) - own.floor));
   card.influence = office.level;
   card.power = office.floor + offset;
+}
+
+/**
+ * THE KEEPER OF AN EMPTY SEAT SITS IN NO CLAIMANT'S PARTY (COHERENCE-POWERS-5, N4; REVIEW-POWERS-2 at e86d069be): where a
+ * succession leaves the seat empty (seatKeeper.js :: isSeatVacant), the governing power's first keeps it meanwhile; any
+ * membership that card holds in a power the succession pushes (data/stressPowerFaces.js: the claimants and the old
+ * families' body) is dropped, and that power's ranks are re-dealt in their order (the ranked first, the unranked after,
+ * in cast order), as settleCrisisLeaders re-deals. Draw-free.
+ * @param {Record<string, any>} settlement @param {Array<Record<string, any>>} all
+ */
+function keeperLeavesTheClaim(settlement, all) {
+  if (!isSeatVacant(settlement)) return;
+  const factions = Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : [];
+  const governing = nameOf(governingFactionOf(settlement));
+  const keeper = all.find((c) => Array.isArray(c?.memberships) && c.memberships.some((m) => m.power === governing && m.rank === 1));
+  if (!keeper) return;
+  const claims = new Set(factions.filter((f) => stressPowerRowOf(settlement, f)?.stress === 'succession_void').map((f) => nameOf(f)));
+  const left = keeper.memberships.filter((m) => claims.has(m.power)).map((m) => m.power);
+  if (!left.length) return;
+  keeper.memberships = keeper.memberships.filter((m) => !claims.has(m.power));
+  for (const power of left) {
+    const own = (/** @type {Record<string, any>} */ c) => c.memberships.find((m) => m.power === power);
+    const members = all.filter((c) => Array.isArray(c?.memberships) && c.memberships.some((m) => m.power === power));
+    [...members.filter((c) => Number.isInteger(own(c).rank)).sort((a, b) => own(a).rank - own(b).rank),
+      ...members.filter((c) => !Number.isInteger(own(c).rank))].forEach((c, i) => { own(c).rank = i < RANKS ? i + 1 : null; });
+  }
 }
 
 /** A member's house kind (representatives.js :: houseKindOf); null for a minted face. @param {Member} m */

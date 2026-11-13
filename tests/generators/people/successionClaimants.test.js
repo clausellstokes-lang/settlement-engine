@@ -18,13 +18,15 @@
  * noble claimant's party, so it is faced by a person OF THAT LINE — a face of the noble line among its members where one
  * stands, otherwise a claimant minted and named as the occupier's governor is ("the lord") — never a tradesperson borrowed
  * from another house (the review: 7 millers, 2 impresarios, 2 mine captains, 2 college masters, a head shepherd over the
- * 24 succession births), and it no longer prints a leaderless line.
+ * 24 succession births), and it no longer prints a leaderless line. And the keeper of an empty seat sits in no
+ * claimant's party (the review: 4 of 31 vacancies; on its 720, 3 in a claimant's).
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { rulingChainOf } from '../../../src/domain/dossier/powerStrata.js';
 import { leaderlessLineOf, stressPowerRowOf } from '../../../src/domain/people/stressPowerFaces.js';
+import { seatKeeperOf } from '../../../src/domain/people/seatKeeper.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
 
 const DIALS = Object.freeze({
@@ -71,6 +73,14 @@ function missesOf(s, key) {
     if (leaderlessLineOf(s, f.faction)) out.push(`${key}: ${f.faction} prints "${leaderlessLineOf(s, f.faction)}"`);
   }
   return out;
+}
+
+/** N4's caretaker: the keeper of an empty seat is a member of no succession power. @param {any} s @param {string} key */
+function keeperMissesOf(s, key) {
+  const keeper = seatKeeperOf(s);
+  if (!keeper) return [];
+  return (keeper.memberships || []).filter((m) => stressPowerRowOf(s, (s.powerStructure?.factions || []).find((f) => f.faction === m.power))?.stress === 'succession_void')
+    .map((m) => `${key}: the keeper ${keeper.name} sits in ${m.power} (rank ${m.rank})`);
 }
 
 beforeAll(async () => { await loadGenerationLawPayloads(); });
@@ -120,13 +130,13 @@ describe('COHERENCE-POWERS-4 (F3) — a claimant is the succession crisis\'s own
     expect(missesOf(s, 'x50-trim-21')).toEqual([]);
   }, 120_000);
 
-  it('N4: the review\'s towns — the noble party is faced by its line', () => {
+  it('N4: the review\'s towns — the noble party is faced by its line, and the keeper sits in no claimant\'s party', () => {
     const misses = [];
     for (const [tier, seed, stress] of [['town', 'r2s-succession_void-town-0', 'succession_void'], ['hamlet', 'r2s-succession_void-hamlet-0', 'succession_void'],
       ['village', 'r2s-succession_void-village-3', 'succession_void'], ['town', 'r2s-succession_void-town-2', 'succession_void'], ['metropolis', 'r2r-metropolis-8', null],
       ['city', 'r2r-city-2', null], ['metropolis', 'r2r-metropolis-6', null]]) {
       const s = bornCensus(tier, seed, stress);
-      misses.push(...missesOf(s, seed));
+      misses.push(...missesOf(s, seed), ...keeperMissesOf(s, seed));
     }
     expect(misses).toEqual([]);
   }, 240_000);
@@ -135,7 +145,7 @@ describe('COHERENCE-POWERS-4 (F3) — a claimant is the succession crisis\'s own
     const misses = [];
     for (const settType of TIERS) for (let i = 0; i < 6; i++) {
       const s = born(settType, `claim-${settType}-${i}`);
-      misses.push(...missesOf(s, `claim-${settType}-${i}`));
+      misses.push(...missesOf(s, `claim-${settType}-${i}`), ...keeperMissesOf(s, `claim-${settType}-${i}`));
     }
     expect(misses).toEqual([]);
   }, 240_000);
