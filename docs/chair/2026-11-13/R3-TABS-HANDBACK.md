@@ -178,3 +178,70 @@ Legacy" (11) and "Occupation" → "Infiltration Fear" (9) on the event cards, th
 Pressured or Deficit, Surplus → Secure in rr2s-village-monster_pressure-rand-1, whose Overview reads Secure);
 Trade connectivity → "Under siege" in the three siege towns; the three Underworld lines lose their band. No other line
 of any page moved.
+
+## After point 48 (the line at 9e57f5023, merged by de0872aa5, a plain merge: no conflict)
+
+The chair's rulings by message, 2026-11-13: 20:34 (three increment rows), 20:37 (point 48's hash, L0-L3), 19:35 (L0
+first), 21:24 (crime rows; ServicesTab.jsx), 21:45 (#ww-569), 21:51 (census-2 before the final statement). Copied
+in substance under each item below. Measured with `m5.mjs` (the desk's own output, on the defence reader's 1,440
+rv2/rv3/rv4 seeds in the app's shape; classes by classes3.py's own patterns) and on the 884 census/reader/fresh births.
+
+### 9. defenseStateProse.js L0 — "no force" reads every armed body — DONE (2ac3fa8c8)
+- 77 walled and 41 unwalled watch-only towns of 884 change on the Invasion and Beasts rows. A watch reads the
+  townspeople's pools, a contracted company the paid professionals'. Unwalled watch-only: the Invasion row is SILENT
+  (the corpus wrote no true pool: `militia only` names a militia) — PARKED CELL for the corpus lane, three towns:
+  r2r-village-25, r2r-village-45, r2r-town-2. Classes on the 1,440: A 151 -> 0, B 36 -> 0. Births byte-identical.
+- New wording printed in a new place, for the owner's veto: "Every household at … would send someone to the walls"
+  (the walls-with-militia pool) in walled towns whose only force is the watch (r2r-town-1, r2r-town-3).
+
+### 10. L1 — the posture reads the readiness badge — DONE (aac97a657)
+- 519 of 1,440 posture lines change, none lost: Vulnerable CRITICAL -> WEAK 307, Well-Defended ADEQUATE -> STRONG 142,
+  Defensible WEAK -> ADEQUATE 17, 53 re-drawn in their pool. K 10 -> 0, E 56 -> 26.
+- DECLARED (vetoable): the move alone raised class D (peace lines under a siege or war) by 21 and the empty-perimeter
+  line beside a force by 9. Those four lines carry desk-level disqualifiers, struck at the draw, in a new leaf
+  `postureLineDisqualifiers.js` (the crime desk's precedent): STRONG v2/v3/v4 "at war", WEAK v2 "a force stands". D
+  35 -> 0, the empty perimeter 21 -> 0. For the corpus lane: carry the four declarations onto the variants.
+- E's 26 left: the badge itself reads "Undefended" beside walls and a force (rv2-calm-hamlet-12, rv2-famine-hamlet-34,
+  rv2-famine-hamlet-36): the badge is `defenseGenerator.js :: computeDefenseReadiness`'s (the defence lane's). NAMED.
+
+### 11. L2 — the lines within the band the Invasion bar prints — DONE (f0adcd83a)
+- A1 2 -> 0, F 55 -> 0; 74 lines removed (posture WEAK 67, CRITICAL 5, Invasion "walls with NO force" 2), none added.
+  The two Invasion lines (rv2-wartime-hamlet-5, rv3-under_siege-village-1) were true by the roster (walls, no force)
+  and false by the bar: a military score of Strong with no force on the roster is the defence generator's. NAMED.
+
+### 12. L3 — every band has its line — DONE (e40e164ad)
+- No key is missing: the six towns' names open on Á/Ö, and `properFill`'s `/^[A-Z]/` refused the {settlement} slot, so
+  the whole defence desk was silent there. Now `/^\p{Lu}/u`. NAMED, not touched: the same test in
+  economyStateProse.js, generalStateProse.js, powerStateProse.js, stressorsStateProse.js.
+- Registers by their doors: the wiring census re-taken and the leaves projected (eaca79fcd: four posture pools gain
+  readsCount); the lighting census re-frozen at a clean tip (66fd07e91: +9 files); pins re-keyed with causes (fc2e15afd).
+
+### 13. DefenseTab — crime rows cut mid-sentence (#1274 #1389 HIGH; #718 #817 #1174 #1082) — DONE (87d361dae)
+- 339 of 1,657 rows were cut by `truncateAtWord(desc, 200)`; each now ends on its last whole sentence within 200
+  (all 339 have one). NAMED: #1082's "Territorial gangs" with no gang house is safetyProfile.js's flag.
+
+### 14. ServicesTab.jsx (#163 #427 #497 #891 HIGH) — STOP (named; nothing changed)
+- The "· covers …" chip and the run-together "Needs TimberSupply route severed." are both printed by
+  `serviceComponents.jsx :: ServiceItem`, the file R2-CODE-B holds and has changed (its item 1 already removes the
+  "· covers" tail and re-keys servicesImpactOnce.test.jsx, on lane/r2-code-b-2026-11-13). ServicesTab.jsx only feeds
+  the chip its list (`impactPlan`); cutting it here would cure the chip twice and collide on the same test hunk at the
+  join. The separation ("Needs X" and the sentence as two things, in text taken from the page too) is a one-element
+  change in ServiceItem's `<p>`. Recommendation: R2-CODE-B's ServiceItem sets them apart; ServicesTab's
+  `impactCovers` computation then goes (read by nothing after R2-CODE-B).
+
+### 15. The increment's rows (fe6d5b741)
+- #571 HIGH and #916 MED, "Founded by: a miller who built a mill and found customers before they found customers":
+  the writer is `narrativeGenerator.js :: genArrivalDetail` (FOUNDERS_BY_TIER.hamlet[1]), held by r2-code-a,
+  w2-b-declare, w2-fix-data and w2-write; generalStateProse.js only names it in a comment. STOP, NAMED.
+- #867 MED, "FoodCritical" beside "Secure" (rww-thorp-plague_onset-1): CURED by item 7 (the row reads "Secure").
+- The severity chips, H9 (#ww-466/467/530/531 HIGH, #ww-468, and #ww-569 by the data lane's trace): the same fault as
+  item 5 and the same STOP (the record holds the template's range, no value). RECOMMENDATION for the chair: either the
+  range leaves the page as a count range does (the border colour already carries the worst), or historyGenerator
+  resolves a tension's severity at birth as it does an event's (a signed shift). These are HIGH lines this seat cannot
+  cure under ruling b2 without a ruling.
+
+## FOR THE JOIN — a house's name printed without a shared name leaf, in this seat's tabs
+- DefenseTab.jsx :: ForceCard prints `defenseProfile.institutions[*].name` raw (e.g. "Palisade or earthworks"; a
+  "Gates (if walled)" would print as stored).
+- DefenseTab.jsx's "Active criminal operations" prints `safetyProfile.criminalInstitutions[]` raw.
+- HistoryTab.jsx and SubstrateTab.jsx print no house name.
