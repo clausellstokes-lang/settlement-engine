@@ -40,7 +40,6 @@ const STATUS = {
 };
 const getStatus = (s) => STATUS[s] || STATUS.vulnerable;
 
-const IMPORT = { color: '#2a5a8a', bg: '#eef2fb', border: '#a0b0d8' };
 const MISSING = { color: '#9c8068', bg: '#f8f5f0', border: '#c8b898' };
 const EXPORT = { color: '#1a5a28', bg: '#f0faf2', border: '#88c880' };
 const OUTPUT = { color: '#6b5340', bg: '#faf8f4', border: '#d8c8a8' };
@@ -72,7 +71,6 @@ function Connector() {
 function ChainRow({ chain, instNames, primaryExports }) {
   const st = getStatus(chain.status);
   const def = CHAIN_DEFS[chain.chainId] || {};
-  const missing = chain.upstreamMissing || [];
   const isExportable = chain.exportable && !chain.entrepot;
 
   // R2-CODE-B item 1b, the chair's ruling R1 (REVIEW-R2-STAGES finding 3): the houses by the seam's house
@@ -101,8 +99,6 @@ function ChainRow({ chain, instNames, primaryExports }) {
     };
   });
 
-  const importedUpstream = missing.map((uid) => CHAIN_DEFS[uid]?.label || uid);
-
   return (
     <View
       wrap={false}
@@ -127,12 +123,8 @@ function ChainRow({ chain, instNames, primaryExports }) {
           </>
         ) : null}
 
-        {importedUpstream.map((imp, i) => (
-          <View key={`im-${i}`} style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Node {...IMPORT} dashed>{`Import: ${safe(imp)}`}</Node>
-            <Connector />
-          </View>
-        ))}
+        {/* R2-CODE-B-SIDE item 2: no "Import: <a chain's label>" (a category of work is not a good), as the
+            screen's card (SupplyChainsPanel.jsx :: chainFlowFacts.importedUpstream). */}
 
         {insts.map((inst, i) => (
           <View key={`in-${i}`} style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -180,7 +172,7 @@ function Legend() {
   return (
     <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginBottom: 4 }}>
       <Swatch color={STATUS.running.bg} border={STATUS.running.border} label="Running" />
-      <Swatch color={STATUS.vulnerable.bg} border={STATUS.vulnerable.border} label="Vulnerable / upstream imported" />
+      <Swatch color={STATUS.vulnerable.bg} border={STATUS.vulnerable.border} label="Vulnerable" />
       <Swatch color={STATUS.impaired.bg} border={STATUS.impaired.border} label="Impaired / institution missing" />
       <Swatch color={EXPORT.bg} border={EXPORT.border} label="EXPORT = exported for income" />
     </View>

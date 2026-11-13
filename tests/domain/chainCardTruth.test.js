@@ -42,3 +42,20 @@ describe('the upstream note leaves the card (item 1)', () => {
     expect(facts.institutions.map((h) => h.name)).toEqual(['Palisade']);
   });
 });
+
+// r2r-city-51 :: Glass & Print (the From line read "Import: Clay & Ceramics"; the record buys in "Clay and raw materials").
+const GLASS = {
+  chainId: 'glass_print', label: 'Glass & Print', status: 'vulnerable', upstreamChains: ['clay'], resource: null,
+  processingInstitutions: ['Glassblower'], outputs: ['Glassware'],
+  upstreamNote: 'Needs imported clay: no local source', upstreamMissing: ['clay'],
+};
+
+describe('a chain\'s category is not a good on the From line (item 2)', () => {
+  test('no "Import: <a chain\'s label>": the card is not handed the goods the town buys in', () => {
+    expect(chainFlowFacts(GLASS, ['Glassblower']).importedUpstream).toEqual([]);
+    expect(chainFlowFacts(WALLS, ['Palisade']).importedUpstream).toEqual([]);
+  });
+  test('the guard: a ground the town holds stays the From line', () => {
+    expect(chainFlowFacts(WALLS, ['Palisade']).resource).toBe('Stone quarry');
+  });
+});
