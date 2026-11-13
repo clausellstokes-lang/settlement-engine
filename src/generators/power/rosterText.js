@@ -89,7 +89,10 @@ export function settleStandingToRoster(powerStructure, annotated, force) {
   let moved = false;
   const next = factions.map((f) => {
     const name = String(f?.faction || '');
-    const old = before.get(name);
+    // COHERENCE-POWERS-7 (cold list REVIEW-W2A-3 #291): a density-law rival (`contestsNiche`) was minted as a copy of its
+    // host, its host's standing sentence included; it settles from that sentence to its own
+    const host = !before.get(name) && f?.contestsNiche ? String(f.contestsNiche) : null;
+    const old = before.get(name) || (host ? before.get(host) : undefined);
     const now = after.get(name);
     if (!old || !now || !old.standing || old.standing === now.standing) return f;
     if (!namesGone(old.standing) && old.rank === now.rank) return f;

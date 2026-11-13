@@ -51,3 +51,13 @@ describe('(a) "no one leads" is refused where a leader stands clear', () => {
       expect(s.powerStructure.factions.filter((f) => String(f.desc || '').includes(LEVEL)).map((f) => f.faction)).toEqual([]);
     }, 60_000);
 });
+
+describe('(b) a rival of the density law carries its own standing, never its host\'s', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  it('rw3-metropolis-under_siege-1: The Garrison Bloc (a rival of Military/Guard) does not read its host\'s "narrow gap"', () => {
+    const s = born('rw3-metropolis-under_siege-1');
+    const bloc = s.powerStructure.factions.find((f) => f.faction === 'The Garrison Bloc');
+    expect(bloc?.contestsNiche, 'premise: the bloc is the density law\'s rival').toBe('Military/Guard');
+    expect(String(bloc.desc)).not.toContain('is narrow');
+  }, 60_000);
+});
