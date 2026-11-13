@@ -9,6 +9,7 @@
  * shallow pit keeps the surface line. Red until it does.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -31,12 +32,12 @@ describe('W2-FIX-DATA-3: the mine\'s service line agrees with the mine it descri
   beforeAll(async () => { await loadGenerationLawPayloads(); }, 120_000);
 
   test('a shaft mine of town size or more is not called surface digging', () => {
-    for (const [seed, tier] of /** @type {const} */ ([['r2r-town-11', 'town'], ['r2r-city-6', 'city'], ['r2r-metropolis-0', 'metropolis']])) {
+    expectNoSeedFailures(collectSeedFailures(/** @type {const} */ ([['r2r-town-11', 'town'], ['r2r-city-6', 'city'], ['r2r-metropolis-0', 'metropolis']]), ([seed, tier]) => {
       const { mine, line } = extraction(seed, tier);
       expect(mine, seed).toMatch(/shaft/);
       expect(line, seed).toMatch(/underground/);
       expect([line].filter((t) => SURFACE.test(t)), seed).toEqual([]);
-    }
+    }), 'every shaft mine of town size or more takes the underground line');
   }, 120_000);
 
   test('a hamlet\'s open-cast mine keeps the surface line (r2r-hamlet-3)', () => {
