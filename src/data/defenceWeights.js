@@ -68,6 +68,12 @@ export const DEFENCE_TUNING = Object.freeze({
   }),
 });
 
+/**
+ * R2's counterfactual, as roster flags laid over the place's own (the owner's rule: a hired-only place
+ * never reads above the same place with a watch in its hired force's stead).
+ */
+export const WATCH_IN_STEAD = Object.freeze({ hasMercenary: false, hasCharterHall: false, hasWatch: true });
+
 /** Each weight row's one-line reason (the addendum's weight table), keyed as DEFENCE_TUNING. */
 export const DEFENCE_WEIGHT_REASONS = Object.freeze({
   walls: 'the largest built defence; holds against raiders and beasts alike',

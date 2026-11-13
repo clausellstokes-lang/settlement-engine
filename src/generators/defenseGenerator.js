@@ -43,7 +43,7 @@ import { resolveGenerationWorldLaw } from './generationContext.js';
 import { readinessBandOf } from '../data/bandLadders.js';
 import { deriveMagicReliance } from '../domain/magicReliance.js';
 import { keepOf, fundedGate } from '../domain/facts/keep.js';
-import { DEFENCE_TUNING as W, DEFENCE_WORDS } from '../data/defenceWeights.js';
+import { DEFENCE_TUNING as W, DEFENCE_WORDS, WATCH_IN_STEAD } from '../data/defenceWeights.js';
 
 // ─── getDefenseInstitutions ───────────────────────────────────────────────────
 /**
@@ -171,10 +171,13 @@ const tenths = (v) => Math.round(v * 10) / 10;
 
 // ─── computeDefenseScores ─────────────────────────────────────────────────────
 /**
- * THE PARTS, and what they sum to (the reference's `itemise`, V4). Pure in the record and `keep`.
- * @param {any} settlement @param {{ bought: number, funded: number }} keep
+ * THE PARTS, and what they sum to (the reference's `itemise`, V4, with R2's hired-only rule run on
+ * the product's own parts). Pure in the record and `keep`. `instead` replaces the roster's flags:
+ * the counterfactual of R2 is THIS place, run through this same code, with a watch in its hired
+ * force's stead.
+ * @param {any} settlement @param {{ bought: number, funded: number }} keep @param {any} [instead]
  */
-const computeDefenseScores = (settlement, keep) => {
+const computeDefenseScores = (settlement, keep, instead = null) => {
   const config = settlement.config || {};
   const institutions = settlement.institutions || [];
   const stressTypes = settlement.stress
@@ -182,7 +185,7 @@ const computeDefenseScores = (settlement, keep) => {
     : (config.stressTypes || config.intendedStressTypes || []);
   const stressSet = new Set(stressTypes);
   const flags = getInstFlags(config, institutions);
-  const inst = flags.inst;
+  const inst = instead || flags.inst;
   const pri = getPriorities(config);
   const tier = settlement.tier || 'town';
   const threat = config.monsterThreat || 'frontier';
@@ -330,22 +333,6 @@ const computeDefenseScores = (settlement, keep) => {
     wallsPart.dims = Object.fromEntries(Object.entries(wallsPart.dims).map(([d, v]) => [d, v / 2]));
   }
 
-  // R2: a hired-only place never reads above the same place with a watch in its hired force's stead.
-  if (hired && !hasStanding) {
-    /** @param {any} q */
-    const milOf = (q) => q.dims.mil || 0;
-    const hiredParts = parts.filter((q) => q.id === 'company' || q.id === 'charter');
-    const willPart = parts.find((q) => q.id === 'will');
-    const now = parts.reduce((a, q) => a + milOf(q), 0);
-    const cf = now - hiredParts.reduce((a, q) => a + milOf(q), 0) - (willPart ? milOf(willPart) : 0)
-      + W.watch.mil * F(W.floors.mil) + Math.round(pri.military * D.mil) * F(W.floors.mil);
-    const hm = hiredParts.reduce((a, q) => a + milOf(q), 0);
-    if (now > cf && hm > 0) {
-      const cut = Math.min(hm, now - cf);
-      for (const q of hiredParts) q.dims.mil = milOf(q) * (1 - cut / hm);
-    }
-  }
-
   // CRISES: each takes today's points from the parts it touches, pro rata, no more than they hold.
   const crises = [];
   for (const [name, pts] of crisisPointsOf((k) => stressSet.has(k), t, magPri)) {
@@ -394,6 +381,26 @@ const computeDefenseScores = (settlement, keep) => {
     const k = sustains > 0 ? Math.max(0, force) / sustains : 0;
     for (const q of parts) if (q.group === 'SUSTAINS') { for (const d of Object.keys(q.dims)) q.dims[d] *= k; q.points *= k; }
     sustainsHeld = groupSum('SUSTAINS') - sustains;
+  }
+  // R2 (the owner's rule; the lane writer's ruling of 2026-11-13): a hired-only place's military never reads
+  // above the same place with a watch in its hired force's stead — that place's REAL military, run through
+  // this same code (the pay, the terrain, the crises, R13's hold, limit 1). Where it would, the hired parts'
+  // military is held, together, to the difference. The last rule before fullness, as the cap was today's last
+  // word on the military.
+  if (!instead && hired && !hasStanding) {
+    const watchInStead = computeDefenseScores(settlement, keep, { ...inst, ...WATCH_IN_STEAD });
+    const hiredParts = parts.filter((q) => q.id === 'company' || q.id === 'charter');
+    const milNow = parts.reduce((a, q) => a + (q.dims.mil || 0), 0);
+    const hm = hiredParts.reduce((a, q) => a + Math.max(0, q.dims.mil || 0), 0);
+    const cf = watchInStead.dims.mil || 0;
+    if (milNow > cf && hm > 0) {
+      const cut = Math.min(hm, milNow - cf);
+      for (const q of hiredParts) {
+        q.dims.mil = (q.dims.mil || 0) * (1 - cut / hm);
+        q.points = sumOf(q.dims) / n;
+        q.listed = q.points;
+      }
+    }
   }
   /** @type {Record<string, number>} */
   const dims = {};
