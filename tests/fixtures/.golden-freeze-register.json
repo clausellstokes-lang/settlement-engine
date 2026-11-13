@@ -205,11 +205,11 @@
       "suite": "tests/domain/townCartographyCalibration.test.js",
       "recordEnv": "UPDATE_CARTOGRAPHY_CALIBRATION",
       "proofForm": null,
-      "sha256": "d9dd31114a330858f9a15ee9a77190c255512504341f3d1fe5e9376ff4f7bde8",
+      "sha256": "98f7254262e160180eb0e263262dca1b1c9098e1089b96cc80c5df380d13ea6c",
       "rows": 504,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the wave MERGE-WAVE, 2026-11-08)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair, re-confirmed to the new chair 2026-11-13); the ODQ draft's entries 'AN OUTSIDE CRITIQUE OF ONE GENERATED TOWN, MEASURED', 'THE CRITIQUE READ AS CLASSES' and 'THE OWNER: FIXED BEFORE THE RELEASE — THE COHERENCE WAVE' (docs/chair/2026-11-07/ODQ-934.105-DRAFT.md, 2026-11-11); the charter docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md §2; the chair's food-sources ruling of 2026-11-11 (variant S, cultivated sources)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
