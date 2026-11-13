@@ -1,5 +1,7 @@
 /**
- * domain/coherence/vocabularyPageFindings.js — THE PAGE MEASURED BY VOCABULARY (W2-B-DECLARE item 2; the
+ * domain/coherence/vocabularyPageFindings.js — THE REGISTERED-WORD FINDINGS of a page (W2-B-DECLARE item 2; named
+ * for what they are by the second seat, REVIEW-W2B F1: a list of the sentences that use a REGISTERED word the town
+ * makes false — not every false line a reader finds; its recall is scored against the cold list at every tip). The
  * chair's record 288, ruling 3: "B's first measure runs the walker's own matcher, with the new vocabularies,
  * over every VISIBLE sentence of the rendered dossiers against each town's leaves: a sentence that names what
  * the town lacks, or denies what it has, is a finding, whether or not anyone has named its pattern").

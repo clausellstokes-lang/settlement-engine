@@ -8,7 +8,8 @@
 import { describe, expect, test } from 'vitest';
 
 import { vocabularyPageFindings } from '../../../src/domain/coherence/vocabularyPageFindings.js';
-import { NEW_WORDS, REGISTERED_WORDS, THINGS } from '../../../src/domain/facts/registeredWords.js';
+import { NEW_WORDS, REGISTERED_WORDS, THINGS, VOCABULARY_SIZE } from '../../../src/domain/facts/registeredWords.js';
+import { RESOURCE_DATA } from '../../../src/data/resourceData.js';
 import { parseAtom } from '../../../src/domain/facts/factVocabulary.js';
 
 const thorp = { tier: 'thorp', population: 40, config: {}, stress: [], institutions: [{ name: 'Chapel' }], powerStructure: { factions: [{ faction: 'A' }, { faction: 'B' }] } };
@@ -58,5 +59,51 @@ describe('vocabularyPageFindings', () => {
     }
     expect(bad).toEqual([]);
     expect(Object.keys(REGISTERED_WORDS).length).toBe(Object.keys(THINGS).length + Object.keys(NEW_WORDS).length);
+  });
+});
+
+/**
+ * W2-B-DECLARE second seat, F1 (REVIEW-W2B: "the measure flags 23 of 361"; record 306: "a vocabulary generated from
+ * the catalogues"). The registered words are GENERATED: every house of the institution catalogue, every resource of the
+ * resource catalogue, the roles, staff and forces, open trade under a siege, a famine written as a risk to come, the
+ * size nouns. Each family is planted here where it is false and where it is true. Red at 97daac24b, whose vocabulary
+ * listed thirty-two words and none of these.
+ */
+describe('F1 — the generated vocabulary', () => {
+  const hamlet = {
+    tier: 'hamlet', population: 40, config: { nearbyResources: ['grain_fields'], nearbyResourcesDepleted: [] },
+    stress: [{ type: 'under_siege' }], institutions: [{ name: 'Access to parish church' }, { name: 'Wayside shrine' }],
+    powerStructure: { factions: [{ faction: 'Elder Council' }] },
+  };
+  const town = {
+    tier: 'town', population: 3000, config: { nearbyResources: ['iron_deposits'], nearbyResourcesDepleted: [] }, stress: [],
+    institutions: [{ name: 'Alchemist shop' }, { name: 'Parish church' }, { name: 'Town watch' }, { name: 'Blacksmiths (3-10)' }],
+    powerStructure: { factions: [{ faction: 'Town council' }] },
+  };
+  const lines = [
+    'The magical help here comes from its alchemists, who brew for the defenders.',
+    'Funeral rites and burial. The priest manages the graveyard.',
+    'The military command has taken charge of the streets, and more harshly as the food runs down.',
+    'Carts bring the town what its workshops need, and carry the goods away again.',
+    'Iron ore deposits feed the forges here.',
+  ];
+  const words = (record) => [...new Set(vocabularyPageFindings(record, { 'Systems/Economics': lines }).map((f) => f.word))].sort();
+
+  test('the vocabulary is generated from the catalogues, and its families are counted', () => {
+    expect(VOCABULARY_SIZE.houses).toBeGreaterThan(100);
+    expect(VOCABULARY_SIZE.resources).toBe(Object.keys(RESOURCE_DATA).length);
+    expect(Object.keys(NEW_WORDS).filter((id) => id.startsWith('house: ')).length).toBe(VOCABULARY_SIZE.houses);
+    for (const id of ['house: alchemist', "house: mages' guild", 'resource: iron_deposits', 'clergy', 'armedForce', 'openTrade', 'famineToCome', 'streets']) expect(NEW_WORDS[id], id).toBeTruthy();
+  });
+
+  test('planted: each family is a finding where the town makes it false, and none where it is true', () => {
+    expect(words(hamlet)).toEqual(['armedForce', 'clergy', 'house: alchemist', 'openTrade', 'resource: iron_deposits', 'smith', 'streets']);
+    expect(words(town)).toEqual([]);
+  });
+
+  test('planted: a famine written as a risk to come is false while a famine is in force', () => {
+    const risk = { 'Systems/Economics': ['One bad year for the grain harvest would be a hungry year for everyone here.'] };
+    expect(vocabularyPageFindings({ ...town, stress: [{ type: 'famine' }] }, risk).map((f) => f.word)).toEqual(['famineToCome']);
+    expect(vocabularyPageFindings(town, risk)).toEqual([]);
   });
 });

@@ -96,6 +96,8 @@ Met by W2-B-DECLARE:
 - **The walker reads `src/domain` and `src/components`**, a component's JSX text, and every registered word, states, sizes, counts and the hand cures' words included; the habitat is banked shrink-only. @enforced-by tests/lint/presumedThings.walker.test.js
 - **No stripping a declaration before a draw**: every strip-shaped call stands in the register under its reason; a new one is red. @enforced-by tests/lint/presumedThings.walker.test.js
 - **Every registered word carries its disqualifier** (atoms of the vocabulary, or the leaf its atom waits for). @enforced-by tests/lint/presumedThings.walker.test.js
+- **The vocabulary is GENERATED, not listed** (REVIEW-W2B F1; `registeredWords.js`): every house of the institution catalogue by its head phrase, every resource of the resource catalogue, the roles, staff and forces (clergy, an armed force, a guard captain, a notary, a smith, a mason, a physician, an armoury, a prisoner), open trade (false under a siege in force), a famine written as a risk to come (false while one is in force) and the size nouns, each with its ONE leaf. A word that is new to the catalogue is a word of the vocabulary the day it is catalogued. @enforced-by tests/domain/coherence/vocabularyPageFindings.test.js
+- **The page check's list is what it is: REGISTERED-WORD FINDINGS**, scored for recall against the cold list's classes at every tip (`docs/chair/2026-11-12/probes/W2-B-DECLARE/fixture.sh`); the release is cured against a cold read, not against this list alone (record 306).
 - **The page measure by vocabulary** exists as a member for the page arm. @enforced-by tests/domain/coherence/vocabularyPageFindings.test.js
 
 Not yet met, and whose:

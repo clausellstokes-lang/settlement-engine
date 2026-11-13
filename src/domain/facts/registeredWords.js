@@ -27,6 +27,8 @@
  * @enforced-by tests/domain/coherence/vocabularyPageFindings.test.js
  */
 import { INSTITUTION_SERVICES } from '../../data/institutionServices.js';
+import { institutionalCatalog } from '../../data/institutionalCatalog.js';
+import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { magicPractitioners } from '../magicReliance.js';
 import { CRISIS_FAMILY_KINDS, CRISIS_KIND_ALIASES, CRISIS_KIND_WORDS, FACT_DIMENSIONS, parseAtom } from './factVocabulary.js';
 
@@ -198,16 +200,16 @@ const COUNTED_HOUSES = /** @type {Readonly<Record<string, string>>} */ (Object.f
  * quarters; a count that the town holds at least that many.
  * @type {Readonly<Record<string, RegisteredWord>>}
  */
-export const NEW_WORDS = Object.freeze({
+const NEW_WORDS_OPEN = /** @type {Record<string, RegisteredWord>} */ ({
   siege: {
     kind: 'state', layer: 'P', leaf: 'crisisKind.js :: crisisFactsOf (under_siege)',
-    words: /\bunder siege\b|\bbesieged\b|\bsiege lines?\b|\bblockaded\b/i,
+    words: /\bunder siege\b|\bbesieged\b|\bsiege lines?\b|\bblockaded\b|\bthe siege\b|\bbesieg(?:ers|ing)\b/i,
     atoms: [], kinds: ['under_siege'],
     absent: (f) => !inForce(f, 'under_siege'),
   },
   famine: {
     kind: 'state', layer: 'P', leaf: 'famine.js :: famineOf · crisisKind.js (famine)',
-    words: /\bfamine\b/i,
+    words: /\bfamine\b|\bthe hunger\b/i,
     atoms: ['famine'], kinds: ['famine'], bands: { food: ['famine'] },
     absent: (f) => !inForce(f, 'famine') && f?.famine?.famine !== true,
   },
@@ -309,8 +311,209 @@ export const NEW_WORDS = Object.freeze({
     },
   },
 });
+export const NEW_WORDS = NEW_WORDS_OPEN;
+
+// ── THE GENERATED VOCABULARY (W2-B-DECLARE second seat, F1: "the vocabulary is generated, not listed") ─────────
+
+/** A roster row that names a house ELSEWHERE, or the dwellings: it does not put the house in the town. */
+const NOT_HERE = /^access to\b|\bexternal\b|^dwellings\b|^housing\b/i;
+
+/** The powers' names (`powerStructure.factions[].faction`). @param {WordRecord | null | undefined} record @returns {string[]} */
+const powerNames = (record) => (Array.isArray(record?.powerStructure?.factions) ? record.powerStructure.factions : [])
+  .map((/** @type {{ faction?: unknown, name?: unknown }} */ x) => String(x?.faction ?? x?.name ?? '')).filter(Boolean);
+
+/** The live roster has a row whose name matches. @param {string[]} names @param {RegExp} re */
+const rosterHas = (names, re) => names.some((n) => !NOT_HERE.test(n) && re.test(n));
+
+/** A catalogue name's QUALIFIERS: they size or place a house, they do not name it. */
+const QUALIFIER = new Set(('multiple major minor small large massive great grand local free daily weekly annual periodic resident '
+  + 'traveling travelling village town city official established commercial part-time public international advanced '
+  + 'professional specialized high magic the and of or if only').split(' '));
+/** A catalogue name's CONTAINERS: the building or body that holds the house the word before it names. */
+const CONTAINER = new Set(('shop shops quarter quarters district districts hall halls house houses works yard post office network '
+  + 'system systems complex camp collective community lodge exchange circle tower college company facilities facility ring '
+  + 'center centre operation operations chapter infrastructure source sources ground grounds land').split(' '));
+/** Single words that are no house of their own, and the shelf's general nouns. */
+const NOT_A_HOUSE = new Set(('dwellings housing households water farming farmland subsistence grazing burial cemetery graveyard '
+  + 'consensus elder elders head-of-household governance government administration council assembly oligarchy appointee '
+  + 'governor seat embassy roster informal criminal underground noble royal democratic planar dream golem undead luxury goods '
+  + 'listening human front fortune charlatan supply delving black whisper red light bazaar contract trade custom message '
+  + 'dragon dream stable salt fence fair mint printing').split(' '));
+/** The heads the hand-written words and the role families own (a market, the walls, the watch, a priest, a smith …): one home each. */
+const HAND_WRITTEN_HEAD = /^(?:watch|walls?|gates?|palisade|earthworks?|monaster(?:y|ies)|friar(?:y|ies)|court|market|mill|temple|church|granar(?:y|ies)|bank|prison|garrison|militia|docks?|port|harbou?r|priests?|(?:black)?smiths?|healers?|hospitals?|masons?)$/;
+
+/** A phrase's family pattern: its words, the last one with its plural (`tanner` → tanners). @param {string[]} words */
+const phrasePattern = (words) => {
+  const esc = (/** @type {string} */ w) => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const last = words[words.length - 1].replace(/'s$|s'$|'$/, '').replace(/ies$/, 'y').replace(/(?<!s)s$/, '');
+  const body = [...words.slice(0, -1).map((w) => esc(w).replace(/'s$|s'$/, "(?:'s|s'|s)?")), esc(last).replace(/y$/, '(?:y|ies)')].join('\\s+');
+  return { key: [...words.slice(0, -1), last].join(' '), re: new RegExp(`\\b${body}(?:s|es|'s|s')?\\b`, 'i') };
+};
+
+/**
+ * THE HOUSES, generated from the institution catalogue (`data/institutionalCatalog.js :: institutionalCatalog`, every
+ * tier and shelf): each house's HEAD PHRASE is a family — its name less its qualifiers and its container, at most its
+ * last two words (`Alchemist shop`, `Alchemist quarter` → `alchemist`; `Mages' guild` → `mages' guild`; `Pack animal
+ * trader` → `animal trader`). A phrase a hand-written word already registers (a market, a temple, the watch …) is that
+ * word's, one home each. The ONE leaf: the live roster names a house of the family here (`institutions.js ::
+ * liveInstitutionNames`; an access row or an external house is not here). The atom (`house: <phrase>`) waits for its
+ * `factsOf` getter.
+ * @type {Record<string, RegisteredWord>}
+ */
+const HOUSE_FAMILIES = (() => {
+  /** @type {Set<string>} */ const names = new Set();
+  for (const tier of Object.values(institutionalCatalog)) for (const shelf of Object.values(tier || {})) for (const n of Object.keys(shelf || {})) names.add(n);
+  const registered = [...Object.values(THINGS), ...Object.values(NEW_WORDS)].map((w) => w.words);
+  /** @type {Map<string, RegExp>} */ const families = new Map();
+  for (const name of names) {
+    if (NOT_HERE.test(name)) continue;
+    let words = name.toLowerCase().replace(/\([^)]*\)/g, ' ').replace(/[/&,]/g, ' ').split(/\s+/).filter(Boolean).filter((w) => !QUALIFIER.has(w));
+    while (words.length > 1 && CONTAINER.has(words[words.length - 1]) && !/'s$|s'$/.test(words[words.length - 2])) words = words.slice(0, -1);
+    words = words.slice(-2);
+    if (!words.length || words.every((w) => NOT_A_HOUSE.has(w.replace(/'s$|s'$|s$/, '')) || NOT_A_HOUSE.has(w))) continue;
+    if (words.length === 1 && (NOT_A_HOUSE.has(words[0]) || CONTAINER.has(words[0]) || words[0].length < 4)) continue;
+    if (words.some((w) => HAND_WRITTEN_HEAD.test(w))) continue;
+    const { key, re } = phrasePattern(words);
+    if (registered.some((r) => r.test(words.join(' ')))) continue;
+    if (!families.has(key)) families.set(key, re);
+  }
+  /** @type {Record<string, RegisteredWord>} */ const out = {};
+  for (const [key, re] of families) {
+    // the leaf reads the house's STEM, so a brewer is answered by a brewery and a smith by a blacksmith, and a power of
+    // that name counts as the house (a Thieves' Guild on the powers' roster)
+    const stem = new RegExp(key.split(' ').map((w) => w.replace(/'s$|s'$/, '').replace(/(?:ery|ers|er|ry|y)$/, '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('\\S*\\s+'), 'i');
+    out[`house: ${key}`] = {
+      kind: 'thing', layer: 'P', leaf: `institutions.js :: liveInstitutionNames, or a power of the name (a house named ${key}); its atom \`house: ${key}\` waits for a factsOf getter`,
+      words: re, atoms: [], absent: (_f, rosterNames, record) => !rosterHas(rosterNames, stem) && !powerNames(record).some((n) => stem.test(n)),
+    };
+  }
+  return out;
+})();
+
+/**
+ * THE RESOURCES, generated from the resource catalogue (`data/resourceData.js :: RESOURCE_DATA`): each resource's label
+ * is a family (`Iron Deposits` → "iron deposits", "iron ore deposits"). The ONE leaf: the town's own country holds it —
+ * named in the record's `config.nearbyResources` and not in `config.nearbyResourcesDepleted`. Its atom waits.
+ * @type {Record<string, RegisteredWord>}
+ */
+const RESOURCE_FAMILIES = Object.fromEntries(Object.entries(RESOURCE_DATA).map(([key, r]) => {
+  const label = String(/** @type {{ label?: unknown }} */ (r)?.label || key.replace(/_/g, ' ')).toLowerCase();
+  const words = label.split(' ').map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  const deposits = words.length === 2 && words[1] === 'deposits' ? `|\\b${words[0]} ore deposits\\b` : '';
+  const re = new RegExp(`\\b${words.join('\\s+')}\\b${deposits}`, 'i');
+  /** @type {RegisteredWord} */ const w = {
+    kind: 'thing', layer: 'P', leaf: `the record :: config.nearbyResources (${key}), less config.nearbyResourcesDepleted; its atom waits`,
+    words: re, atoms: [],
+    absent: (_f, _n, record) => {
+      const cfg = /** @type {{ config?: { nearbyResources?: unknown, nearbyResourcesDepleted?: unknown } } | null | undefined} */ (record)?.config;
+      const near = Array.isArray(cfg?.nearbyResources) ? cfg.nearbyResources : [];
+      const gone = Array.isArray(cfg?.nearbyResourcesDepleted) ? cfg.nearbyResourcesDepleted : [];
+      return !!record && (!near.includes(key) || gone.includes(key));
+    },
+  };
+  return [`resource: ${key}`, w];
+}));
+
+/**
+ * THE ROLES, THE STAFF AND THE FORCES (the brief's own list: a priest, a guard captain, a notary, alchemists, a military
+ * command): a person or a body who stands only where a house or a force does, each with the leaf of that house or force.
+ * @type {Record<string, RegisteredWord>}
+ */
+const ROLE_FAMILIES = {
+  clergy: {
+    kind: 'thing', layer: 'P', leaf: 'faithReading.js :: faithReadingOf (hasChurch; seniorCleric)',
+    words: /\bpriests?\b|\bclergy\b|\bclerics?\b|\bvicars?\b|\bchaplains?\b/i,
+    atoms: ['church', 'priest'],
+    absent: (f) => !(f?.faith?.hasChurch === true || (f?.faith && f.faith.seniorCleric != null)),
+  },
+  armedForce: {
+    kind: 'thing', layer: 'P', leaf: 'factsOf.js :: guardPresence (watch ∨ garrison ∨ militia ∨ hired company)',
+    words: /\bthe military\b|\bmilitary command\b|\bsoldiers\b|\btroops\b|\bdefenders\b|\bguardsmen\b|\bthe guards?\b/i,
+    atoms: ['guardPresence'], sufficient: ['watch', 'garrison', 'militia', 'mercenary', 'soldiers', 'commander'],
+    absent: (f) => !f?.guardPresence,
+  },
+  guardCaptain: {
+    kind: 'thing', layer: 'P', leaf: 'defence.js :: defenceOf (watch, garrison)',
+    words: /\bguard captains?\b|\bcaptain of the (?:guard|watch)\b|\bwatch captains?\b/i,
+    atoms: ['watch', 'garrison'],
+    absent: (f) => !f?.defence?.watch && !f?.defence?.garrison,
+  },
+  notary: {
+    kind: 'thing', layer: 'P', leaf: 'institutions.js :: liveInstitutionNames (a house that writes or tries the law: a scribe, a court, a hall)',
+    words: /\bnotar(?:y|ies|y's)\b|\blawyers?\b|\badvocates?\b/i,
+    atoms: [],
+    absent: (_f, names) => !rosterHas(names, /scribe|notary|court|town hall|city hall|chancery|administration|government|guild/i),
+  },
+  smith: {
+    kind: 'thing', layer: 'P', leaf: 'institutions.js :: liveInstitutionNames (a smith or metalworker); its atom `institution: smith` reads the kind',
+    words: /\bsmith(?:s|y|ies)?\b|\bforges?\b/i,
+    atoms: ['institution: smith'],
+    absent: (f) => !(typeof f?.hasInstitution === 'function' && f.hasInstitution('smith')),
+  },
+  mason: {
+    kind: 'thing', layer: 'P', leaf: 'institutions.js :: liveInstitutionNames (a quarry or a mason); its atom `institution: quarry` reads the kind',
+    words: /\b(?:stone)?masons?\b/i,
+    atoms: ['institution: quarry'],
+    absent: (f, names) => !(typeof f?.hasInstitution === 'function' && f.hasInstitution('quarry')) && !rosterHas(names, /mason|brick/i),
+  },
+  physician: {
+    kind: 'thing', layer: 'P', leaf: 'defence.js :: defenceOf (hospital, healer)',
+    words: /\bphysicians?\b|\bdoctors?\b/i,
+    atoms: ['hospital', 'healer'],
+    absent: (f) => !f?.defence?.hospital && !f?.defence?.healer,
+  },
+  armoury: {
+    kind: 'thing', layer: 'P', leaf: 'defence.js :: defenceOf (garrison, militia: a force keeps the arms)',
+    words: /\barmou?r(?:y|ies)\b/i,
+    atoms: ['garrison', 'militia'],
+    absent: (f) => !f?.defence?.garrison && !f?.defence?.militia,
+  },
+  prisoner: {
+    kind: 'thing', layer: 'P', leaf: 'defence.js :: defenceOf (prison)',
+    words: /\bprisoners?\b|\bin (?:their|its|his|her) custody\b/i,
+    atoms: ['prison'],
+    absent: (f) => !f?.defence?.prison,
+  },
+};
+
+/**
+ * THE WORDS OF NORMAL TIMES AND OF SIZE (the review's named families): open trade, which a siege in force makes false;
+ * a famine written as a risk to come, which a famine in force makes false; the size nouns of a large place.
+ * @type {Record<string, RegisteredWord>}
+ */
+const STATE_FAMILIES = {
+  openTrade: {
+    kind: 'state', layer: 'P', leaf: 'crisisKind.js :: crisisFactsOf (no under_siege in force)',
+    words: /\b(?:carts?|wagons?|caravans?|coaches|barges|boats|importers?)\s+(?:bring|brings|come|comes|arrive|arrives|carry|carries|feed|feeds|go out|leave|leaves)\b|\bthrough-traffic\b|\btraffic\b|\bpasses through\b|\bbrought in by (?:cart|road|boat|barge)\b/i,
+    atoms: [], notKinds: ['under_siege'],
+    absent: (f) => inForce(f, 'under_siege'),
+  },
+  famineToCome: {
+    kind: 'state', layer: 'P', leaf: 'crisisKind.js :: crisisFactsOf (no famine in force)',
+    words: /\b(?:a|one|any) (?:bad|poor|hard|lean|failed) (?:year|season|harvest)s?\b[^.;]{0,48}\b(?:would|could|will)\b|\bwould (?:bring|mean) (?:real )?hunger\b|\bif the harvests? (?:fail|fails|failed)\b/i,
+    atoms: [], notKinds: ['famine'],
+    absent: (f) => inForce(f, 'famine'),
+  },
+  streets: {
+    kind: 'size', layer: 'P', leaf: 'populationBand.js :: populationBandOf',
+    words: /\bstreets\b|\bthe agora\b|\b(?:a|the) (?:civic|town|market) square\b|\bin masonry\b|\bin quarters\b|\bneighbou?rhoods?\b|\bsuburbs\b/i,
+    atoms: [], bands: { population: ['middling', 'large'] },
+    absent: (f) => f?.populationBand === 'small',
+  },
+};
+
+/** The generated families, joined to the new words (the walker's source arm and the page check read them all). */
+Object.assign(NEW_WORDS_OPEN, HOUSE_FAMILIES, RESOURCE_FAMILIES, ROLE_FAMILIES, STATE_FAMILIES);
+Object.freeze(NEW_WORDS_OPEN);
 
 export const NEW_WORD_IDS = Object.freeze(Object.keys(NEW_WORDS));
+
+/** The size of the vocabulary and where each part is generated from (the hand-back reads it). */
+export const VOCABULARY_SIZE = Object.freeze({
+  written: Object.keys(THINGS).length + Object.keys(NEW_WORDS).length - Object.keys(HOUSE_FAMILIES).length - Object.keys(RESOURCE_FAMILIES).length - Object.keys(ROLE_FAMILIES).length - Object.keys(STATE_FAMILIES).length,
+  houses: Object.keys(HOUSE_FAMILIES).length, resources: Object.keys(RESOURCE_FAMILIES).length,
+  roles: Object.keys(ROLE_FAMILIES).length, states: Object.keys(STATE_FAMILIES).length,
+});
 
 /** Every registered word: the things and the new words. @type {Readonly<Record<string, RegisteredWord>>} */
 export const REGISTERED_WORDS = Object.freeze({ ...THINGS, ...NEW_WORDS });
