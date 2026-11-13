@@ -59,6 +59,49 @@
 4. "The adventurers' charter hall takes bounty work against threats, but the coin for bounties runs short."
 None names a part, a point, a share or a rule (the guard's reader-surface arm is green).
 
+## THE REVIEW'S RULINGS (REVIEW-UPKEEP-2 at 73b1304de, NOT CLEAR; the chair's message of 2026-11-13 12:3x, copied in)
+
+The chair, verbatim in substance (each vetoable; in order; each its own commit, red first, measured):
+1. ONE LABEL SPEAKS FOR PAY, AND THE PAGE SAYS BOTH (H1, H2). (a) Wherever the shown prosperity label prints and the standing label differs, that surface says both in the world's words: one plain sentence, what the place is in ordinary years and what the crisis has made of it; no word of pay, score, "standing" or "label"; list every surface (pages, PDF, Foundry, exports); new words to the owner's veto list. (b) Every sentence about paying for defence reads the standing label through keep.js :: keepOfRecord: the guard lines (F7) and the PDF's line in threatAssessment.js. "Hired swords" only where a contracted force is on the roster (M4); "hunger" only in a famine (F4). (c) Then read thirty capped towns and list any line still claiming present ease against its page, with its town; a corpus-document line is named for the corpus lane.
+2. THE PARTS ARE NOT STORED (§3): one exported function computes them from the record; the stored profile keeps its old shape; stop if anything at runtime needs stored parts. The walker's fifth arm reds on a stored or serialised part (plant v-prime); its second arm on getActiveRng() and createPRNG(seed)() (plant ii). PUSH after item 2 and send the tip in one line.
+3. EVERY EFFECT OF A CRISIS ON A DEFENCE SCORE IS A ROW OF THE ONE CRISIS TABLE (C6): the Crime part reads crime before the stress multiplier; what famine and siege take from order through it becomes explicit rows at the measured size, so no famine or siege rating moves; wartime gets no such row.
+4. COUNT ONCE (C5) is law, but MEASURE BEFORE BUILDING and send the table (each magic house, the parts it feeds and by how much; what is left of magic and of each tradition if it keeps only its named part; the movement on unseen births under both readings). The chair rules from the table.
+5. THE MARTIAL WILL IS NOT A PAID PART (C7): base configuration, held to the armed bodies; pay reaches it only through that limit. Confirm the reviewer's plausible reading by execution first.
+6. ONE LADDER FOR ONE NUMBER (§4): the posture line reads the badge's band through one home (Fortress and Well-Defended the strong pool; Defensible and Lightly Defended the adequate; below, the weak), no new words; read ten towns of each cell that changes pool. A home in another lane's file: name it and leave it.
+7. KEPT: services and the Magic tab read the shown label in this release; L3 and C11 listed for the owner, not cured.
+8. EXPOSURE, DECLARED, NOT EDITED: M1, M2, M3, M5, L2 are corpus lines; declare each rise town by town in the draft record under the charter's four conditions.
+Then A (done), B, C and E. Read notifications after every commit; hand back by file at the context guard.
+
+**Later ruling (13:1x), on the reader's CLEAR of A, B, C (REVIEW-UPKEEP-9fccbd8ed at 7e94454a3):** the earthwork's 0.4 is reached by no birth; its row leaves DEFENCE_TUNING until the roster names an earthwork of its own; prove no rating moves; the inventory through its ritual. After ruling 3, before ruling 4.
+
+### What is built (in commit order)
+
+| Commit | Ruling | What, and its measure (3,036 + 720 fresh6 unless named) |
+|---|---|---|
+| 0c0e8f99f | 1(b) | guard purse lines read the standing label (keep.js :: standingLabelOf); the crisis lines (hunger, and F4's siege twins) RETIRED: their reason was the capped label. Short-purse or crisis guard line beside "money enough": 652 -> 0; hunger/siege guard lines 346 -> 0. (Its money-line half is cured below.) |
+| 9a9f7c10e | 2 | parts not stored; defenseGenerator.js :: defencePartsOf computes them; the export carries none; recordRegister's parts row leaves; walker arms ii and v' planted. Nothing at runtime read stored parts. |
+| 798a5719a | — | inventory refreeze |
+| fe5786c97 | 3 | crime read before the stress multiplier (priorityHelpers :: criminalPreStress); each crisis's crime a table row at today's size (ten rows; wartime none). Calm, famine, siege, other crises: 0 of 3,205 move. Wartime: 476 of 551 up, mean 0.56 (max 2); 11 up a band. |
+| ddaa03935 | — | inventory refreeze |
+| d8986c04c | 1(a) | built by a builder subagent (its commit 2d031acac, picked -x): src/domain/display/prosperityInCrisis.js :: prosperityInCrisisLine, "<Standing> before the <crisis>; <Shown> while it lasts." on the Overview tag, the Economics glance, the Summary tab and its copied text, the Tonight table view, the PDF cover, Overview and Economics, both Foundry rows, the realm register line. Left without it (reasons in its commit): the gazetteer cell, the gallery chips, the PDF/Foundry headlines (their page prints it), the desk prose. 1,676 of 3,036 births differ; a calm birth's surfaces byte-identical. |
+| 5f2a702bc | 1(b) cure | the money line's reader typed (one domain any-hole) |
+| 65cb03ef1 | — | inventory refreeze |
+| d585d51f5 | 13:1x | the earthwork row leaves; an earthwork reads as a palisade in both homes. Births byte-identical. |
+| 89641364f | — | inventory refreeze |
+| d398faebe | 1(b) cure | the PDF money line reads its row's own score again: keyed to the label it contradicted its own badge and the screen's row (found by 1(c)) |
+| c893b4998 | — | inventory refreeze |
+
+**NEW WORDS for the owner's veto (1(a)):** "<Standing> before the <noun>; <Shown> while it lasts." · "<Standing> before the <a> and the <b>; <Shown> while they last." · the fallback noun "the crisis". The nouns are the estate's own (crisis/crisisHooks.js :: CRISIS_NOUN). A's four new strings (the three siege lines, the charter short line): the three siege lines are RETIRED by 1(b); the charter short line stands.
+
+**1(c), the thirty capped towns** (`probes/UPKEEP-6/read30/READ30.md`; a read-only seat, at 65cb03ef1, every claim executed): money or ease lines CORPUS 26 (+19 "trade as usual" lines on besieged pages), CODE 70, TRUE ON READING 168.
+- CODE lines, by home, for the chair (none is in a file this lane holds but threatAssessment.js, now cured): `economicState.js :: generateEconomicState` "A thriving alchemical trade..." in 12 famine or siege towns; `rulingStructure.js :: generatePowerStructure` "Well-funded city watch..." (6 towns); `stressNarrative.js :: RENDERERS.wartime` "...doing well out of it" (7 wartime towns); `narrativeData.js :: STRESS_DESCS.wartime` "...prosperous in a way that feels wrong" (2); `historyData.js` "...wealth it once carried drained away" (1); `dossierViewModel.js :: deriveViability` "keeps order and pays its way" in a debt crisis (supplementary, 1). The PDF money line's nine pre-1(b) "money enough to ride out a long crisis" beside "It may not survive" (viability) stand on its score, as at the base.
+- CORPUS, named for the corpus lane: DS-DEF-2 Economic Survival STRONG ("has not turned into a collapse" 7, "arrangements intact" 2, "money in hand" 2), DS-DEF-2 CHAIN defence supplied 8, CHAIN food trades working 2, DS-DEF-2 Invasion & War walls and garrison "raiders stay away" on besieged pages 3, DS-DEF-11 WALLED-QUIET 1; trade lines DS-GEN-13 and DS-ECO-1 C4 (19).
+- Made false by 1(a): Treshaw's corpus "short of money for years" (DS-DEF-2 WEAK) and Dharmapura's "Trade collapse" tension, each beside "Prosperous before the famine"; and 1(a) sharpens the two wartime narrative lines above.
+
+**Ruling 4, measured, NOT built (`probes/UPKEEP-6/magic-count-once.md`):** 1,559 of 3,756 births hold one of the eight houses. Reading A (each keeps its named part, leaves magic): 895 move, mean -1.4 (max -6), 103 down a band, none up; the magic part's mean 11.7 -> 10.3. Reading B (keeps magic, leaves its named part): 1,037 move, mean -2.7 (max -26), 212 down a band. Per house in the file. Sent to the chair; it rules.
+
+M4 (hired swords with none hired), by execution: the three named births each hold a "Free company hall", which the defence home counts as a hired company (defenseFacts.js :: defenseFactsOf, FREE_COMPANY_RE) and whose catalogue line reads "garrison contracts, and short-term military hire". True as printed; nothing cured.
+
 ## Incidents
 - A `tests/lint` run I started in the live worktree overlapped my next edits, so its result is discarded. My stop of it by PID was refused by the permission layer, so it ran to its end. `tests/lint` is re-run in clean, detached measurement worktrees (`/home/user/wt6-m` at 05b8ee712, `/home/user/wt6-b` at ce3bceda9).
 - lint-staged backs the index up in `git stash` at each commit and drops it again. The refs and local config were compared after every commit and suite: only `refs/heads/u6-local` and the fetched remote refs differ. `npm ci` set `core.hooksPath=.husky/_` (the lane hook), as expected.
