@@ -5085,7 +5085,8 @@
       "declares": [],
       "lineDeclares": {
         "colour": 3,
-        "gate": 1
+        "gate": 1,
+        "no crisis: under_siege": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -19607,6 +19608,7 @@
       },
       "declares": [],
       "lineDeclares": {
+        "no crisis: under_siege": 2,
         "no sacredHouse": 3,
         "sacredHouse": 2
       },
@@ -32362,7 +32364,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "institution: monastery": 4
+        "institution: monastery": 4,
+        "no crisis: under_siege": 2
       },
       "undeclared": 0,
       "crisisScoped": false

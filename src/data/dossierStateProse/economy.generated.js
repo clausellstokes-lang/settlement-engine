@@ -6489,7 +6489,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "no sacredHouse"
+            "no sacredHouse",
+            "no crisis: under_siege"
           ],
           "text": "Faith carries real weight in {settlement}'s money, though the place keeps no house for it: what its people give for their faith leaves with them on the feast days.",
           "slots": [
@@ -6500,7 +6501,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "no sacredHouse"
+            "no sacredHouse",
+            "no crisis: under_siege"
           ],
           "text": "At {settlement} the feast days set the calendar of buying and selling, and the offerings leave the place with the people who carry them.",
           "slots": [

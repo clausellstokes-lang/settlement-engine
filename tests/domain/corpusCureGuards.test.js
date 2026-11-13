@@ -44,6 +44,11 @@ const GUARDS = [
   { seed: 'w5-town-monster_pressure-2', pool: 'DS-DEF-2::Beasts & Monsters: settled, nothing organized', vid: 6, why: 'a town watch: "nothing organised against what has come out of the country" (the read\'s H4)' },
   { seed: 'w5-village-under_siege-3', pool: 'DS-DEF-2::Beasts & Monsters: settled, nothing organized', vid: 6, why: 'a siege: the threat at hand is an army, not what came out of the country' },
   { seed: 'w5-hamlet-occupied-2', pool: 'DS-DEF-2::Beasts & Monsters: settled, nothing organized', vid: 6, why: 'an occupation with no beasts on the page (the read\'s H4, Malotsy)' },
+  { seed: 'w5-metropolis-under_siege-6', pool: 'DS-GEN-17::GREAT HOUSE: monastery', vid: 1, why: 'a siege: "a common sight on the way into" a town nobody can enter by road (the read\'s H5)' },
+  { seed: 'w5-town-under_siege-102', pool: 'DS-GEN-17::GREAT HOUSE: monastery', vid: 3, why: 'a siege: "anyone new ... is sent to the monks" where nobody new arrives' },
+  { seed: 'w5-metropolis-under_siege-2', pool: 'DS-DEF-5::garrison PRESENT', vid: 3, why: 'a siege: "everyone entering is counted at the gate" of a town nobody enters' },
+  { seed: 'w5-thorp-under_siege-3', pool: 'DS-ECO-12::INCOME WEIGHT: the religious houses', vid: 4, why: 'a siege: "the feast days set the calendar of buying and selling" where nothing is bought or sold (the read\'s H5)' },
+  { seed: 'w5-thorp-under_siege-3', pool: 'DS-ECO-12::INCOME WEIGHT: the religious houses', vid: 3, why: 'a siege: "what its people give for their faith leaves with them on the feast days" out of a town nobody leaves' },
 ];
 
 /** @param {string} seed */

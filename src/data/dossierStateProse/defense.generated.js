@@ -4477,7 +4477,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "gate"
+            "gate",
+            "no crisis: under_siege"
           ],
           "text": "Everyone entering {settlement} is counted at the gate by a soldier whose job it is, and counted again on the way out.",
           "slots": [

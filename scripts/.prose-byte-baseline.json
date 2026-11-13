@@ -55,20 +55,20 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 265619,
-      "gzip": 35709,
+      "raw": 265657,
+      "gzip": 35710,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 185684,
-      "gzip": 25957,
+      "raw": 185760,
+      "gzip": 25963,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 296510,
-      "gzip": 37906,
+      "raw": 296586,
+      "gzip": 37912,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -859,6 +859,14 @@
       "toRaw": 296510,
       "gzipAfter": 37906,
       "reason": "+424 B raw over the committed 296086 (gzip level 9: 37845 -> 37906): DS-GEN-13 MARKET-OPEN v1, v2 declared off the onset of a plague; one plague line (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE-5 A H5 road",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 296510,
+      "toRaw": 296586,
+      "gzipAfter": 37912,
+      "reason": "+76 B raw over the committed 296510 (gzip level 9: 37906 -> 37912): road lines off a siege"
     }
   ],
   "ceilingTransfersNewLeaves": [

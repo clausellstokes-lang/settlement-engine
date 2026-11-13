@@ -1838,8 +1838,8 @@ shape.
 **INCOME WEIGHT: the religious houses** *(`compound.religionInfluence` high)*
 1. `[ledger · sacredHouse]` Faith carries real weight in {settlement}'s money. What the religious houses take in and spend is a large part of the town's business.
 2. `[street · sacredHouse]` The religious houses at {settlement} are among its biggest buyers and employers, and a bad year for them is a bad year for the town.
-3. `[ledger · no sacredHouse]` Faith carries real weight in {settlement}'s money, though the place keeps no house for it: what its people give for their faith leaves with them on the feast days.
-4. `[street · no sacredHouse]` At {settlement} the feast days set the calendar of buying and selling, and the offerings leave the place with the people who carry them.
+3. `[ledger · no sacredHouse · no crisis: under_siege]` Faith carries real weight in {settlement}'s money, though the place keeps no house for it: what its people give for their faith leaves with them on the feast days.
+4. `[street · no sacredHouse · no crisis: under_siege]` At {settlement} the feast days set the calendar of buying and selling, and the offerings leave the place with the people who carry them.
 5. `[threshold · no sacredHouse]` {settlement} spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.
 
 **INCOME WEIGHT: the practice of magic** *(`compound.magicInfluence` high)*
@@ -3321,7 +3321,7 @@ may not say the contract is failing unless the economic arm supplies that.
 **garrison PRESENT**
 1. `[ledger · colour]` {settlement} keeps a standing force: people whose work is the defense of this town and who are answerable for it as work.
 2. `[street · colour]` {settlement}'s soldiers serve all year, not for a season; the town relies on them and grumbles about them in equal measure.
-3. `[visitor · gate]` Everyone entering {settlement} is counted at the gate by a soldier whose job it is, and counted again on the way out.
+3. `[visitor · gate · no crisis: under_siege]` Everyone entering {settlement} is counted at the gate by a soldier whose job it is, and counted again on the way out.
 4. `[unfolding · colour]` {settlement}'s soldiers are paid by the season and drilled by the week, whether or not anything comes.
 
 **militia PRESENT (no garrison)** {colour}
@@ -7291,9 +7291,9 @@ no compass word, no real-world place, no named analogy.*
 4. `[official · institution: temple]` {settlement} keeps a cathedral, a bishop's church that the clergy of the whole district answer to.
 
 **`GREAT HOUSE: monastery`**
-1. `[traveller · institution: monastery]` Robed monks and nuns are a common sight on the way into {settlement}.
+1. `[traveller · institution: monastery · no crisis: under_siege]` Robed monks and nuns are a common sight on the way into {settlement}.
 2. `[local · institution: monastery]` The monks keep their own hours, and the rest of {settlement} leaves them to it.
-3. `[newcomer · institution: monastery]` Anyone new to {settlement} who needs a meal or a bed is sent to the monks.
+3. `[newcomer · institution: monastery · no crisis: under_siege]` Anyone new to {settlement} who needs a meal or a bed is sent to the monks.
 4. `[official · institution: monastery]` The monks answer to their own order before they answer to whoever governs {settlement}.
 
 ---

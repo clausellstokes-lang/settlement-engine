@@ -11180,7 +11180,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "traveller",
           "marks": [
-            "institution: monastery"
+            "institution: monastery",
+            "no crisis: under_siege"
           ],
           "text": "Robed monks and nuns are a common sight on the way into {settlement}.",
           "slots": [
@@ -11202,7 +11203,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "newcomer",
           "marks": [
-            "institution: monastery"
+            "institution: monastery",
+            "no crisis: under_siege"
           ],
           "text": "Anyone new to {settlement} who needs a meal or a bed is sent to the monks.",
           "slots": [
