@@ -262,7 +262,9 @@ describe('F13 / F6 — the counts', () => {
     expect(words(town([{ name: 'Merchant guild' }]), 'Three guilds share the market square between them.')).toEqual(['housesCount']);
     expect(words(town([{ name: 'Merchant guilds (3-8)' }]), 'Three guilds share the market square between them.')).toEqual([]);
   });
-  test('F6: a range row holds at least its own minimum', () => {
+  // renamed by identity at the sixth seat (REVIEW-W2B's third read, finding 9): the title stated the rule F9 replaced; the
+  // body asserts the rule as F9 re-read it (a count inside the range is true)
+  test('F6, as F9 re-read it: a range row holds up to its own maximum; a single row holds one', () => {
     expect(words(town([{ name: 'Parish churches (2-5)' }]), 'Two churches serve the parish and the market both.')).toEqual([]);
     expect(words(town([{ name: 'Parish church' }]), 'Two churches serve the parish and the market both.')).toEqual(['housesCount']);
     // F9 of the second read: a number INSIDE the range is no longer false (it was, at 1fb15980d, read at the minimum)
