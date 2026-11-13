@@ -28,3 +28,14 @@ AssertionError: expected [ …(8) ] to deeply equal []
      × V5-7: every helper the early-deployed 211 created is created again here or dropped here by signature; the down file drops all of them 40ms
 AssertionError: expected [ Array(482) ] to deeply equal [ Array(481) ]
 AssertionError: expected [ Array(1) ] to deeply equal []
+== F2 (the client's withholdSecondHomes returns at once), every veil pin of the lane at 45317ee3f: ⎯⎯⎯⎯⎯⎯⎯ Failed Tests 9 ⎯⎯⎯⎯⎯⎯⎯; Test Files 1 failed | 33 passed (34); Tests 9 failed | 557 passed (566);
+     × server-veil-village-3: nothing the page hides is sent; no page changes; 210 is red on the same rows 16507ms
+     × server-veil-village-0: nothing the page hides is sent; no page changes; 210 is red on the same rows 12511ms
+     × server-veil-town-2: nothing the page hides is sent; no page changes; 210 is red on the same rows 32599ms
+     × server-veil-town-0: nothing the page hides is sent; no page changes; 210 is red on the same rows 38564ms
+     × server-veil-city-2: nothing the page hides is sent; no page changes; 210 is red on the same rows 69827ms
+     × server-veil-city-infiltrated-0: nothing the page hides is sent; no page changes; 210 is red on the same rows 72638ms
+     × server-veil-metropolis-3: nothing the page hides is sent; no page changes; 210 is red on the same rows 91505ms
+     × server-veil-metropolis-7: nothing the page hides is sent; no page changes; 210 is red on the same rows 71900ms
+     × a share past the client's clamp: the server reads the same last 2,000 well-formed deltas the page reads 811ms
+      9 FAIL  tests/security/galleryServerVeil.pglite.test.js
