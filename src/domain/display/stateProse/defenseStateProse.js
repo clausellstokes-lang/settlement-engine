@@ -682,7 +682,7 @@ function chainArm(chainModifiers, arm) {
  * why a ruined citadel does not read here as standing walls.
  *
  * @param {{name?: string, config?: {monsterThreat?: unknown}|null, institutions?: unknown,
- *   defenseProfile?: {scores?: {economic?: unknown}|null, chainModifiers?: {military?: unknown, economic?: unknown}|null}|null,
+ *   defenseProfile?: {scores?: {economic?: unknown, military?: unknown}|null, chainModifiers?: {military?: unknown, economic?: unknown}|null}|null,
  *   economicState?: {compound?: {inst?: Record<string, unknown>}|null}|null}|null|undefined} settlement
  * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{beasts: object|null, invasion: object|null, internal: object|null,
@@ -754,7 +754,7 @@ export function defenseThreatProse(settlement, options = {}) {
   return Object.freeze({
     beasts: rung(beastsRowPoolKey(settlement?.config?.monsterThreat, walls, force)),
     invasion: rungWith(
-      watchAloneUnwalled ? null : invasionRowPoolKey(walls, garrison || contracted, militia || watch),
+      withinTheBar(watchAloneUnwalled ? null : invasionRowPoolKey(walls, garrison || contracted, militia || watch), dp.scores?.military),
       defenceSupplyPoolKey(settlement?.defenseProfile?.chainModifiers, force),
     ),
     internal: rung(internalRowPoolKey(
@@ -857,6 +857,25 @@ const POSTURE_POOL_OF_BADGE = Object.freeze({
 });
 
 /**
+ * ⛔ L2, THE SENTENCE IS DRAWN WITHIN THE BAND ITS BAR PRINTS (R3-TABS; the chair's ruling of 2026-11-13;
+ * the defence lane's fourth read, classes A1 and F). Where the Invasion & War bar reads Strong
+ * (`scoreBand(scores.military)`, the band the tab prints beside it), no sentence says an attacker walks in:
+ * the Invasion row's two no-force pools ("walls and nobody to put on them", "no line and no force") and the
+ * posture's weak and critical pools ("could not hold off a raid", "would struggle to hold", "all but
+ * undefended") are silent there. The bar and the badge stay; nothing is said against them.
+ * @type {ReadonlySet<string>}
+ */
+const AGAINST_A_STRONG_BAR = new Set([
+  'Invasion & War: walls with NO force', 'Invasion & War: neither walls nor force',
+  'readiness WEAK', 'readiness CRITICAL',
+]);
+/** @param {string|null} poolKey @param {unknown} militaryScore @returns {string|null} */
+function withinTheBar(poolKey, militaryScore) {
+  const strong = typeof militaryScore === 'number' && Number.isFinite(militaryScore) && scoreBand(militaryScore) === 'STRONG';
+  return poolKey && strong && AGAINST_A_STRONG_BAR.has(poolKey) ? null : poolKey;
+}
+
+/**
  * DS-DEF-1 lens 1 — THE READINESS BAND.
  *
  * ⭐ Reads `defenseProfile.readiness.score`, NOT `avgScore(scores)`. See the header: the
@@ -912,7 +931,7 @@ export function strategicPrizePoolKey(terrain) {
  * against the registry. Reasoning about which fields "feel" DM-editable is how the
  * overwrite gets written.
  *
- * @param {{name?: string, defenseProfile?: {readiness?: {score?: unknown}|null}|null,
+ * @param {{name?: string, defenseProfile?: {readiness?: {score?: unknown}|null, scores?: {military?: unknown}|null}|null,
  *   resourceAnalysis?: {terrain?: unknown}|null,
  *   economicState?: {safetyProfile?: {guardEffectivenessDesc?: unknown}|null}|null,
  *   stress?: unknown, institutions?: unknown
@@ -945,7 +964,9 @@ export function defensePostureProse(settlement, options = {}) {
   };
 
   return Object.freeze({
-    posture: projected(posturePoolKey(settlement?.defenseProfile?.readiness?.score), corpusAdmittingPostureLines(CORPUS, settlement)),
+    posture: projected(withinTheBar(
+      posturePoolKey(settlement?.defenseProfile?.readiness?.score), settlement?.defenseProfile?.scores?.military,
+    ), corpusAdmittingPostureLines(CORPUS, settlement)),
     terrain: projected(terrainDefencePoolKey(terrain)),
     prize: projected(strategicPrizePoolKey(terrain)),
   });
