@@ -1,0 +1,143 @@
+{
+ "guards": [
+  "tests/generators/arrivalHarbourDocks.test.js",
+  "tests/generators/churchLineNoOffice.test.js",
+  "tests/generators/crisisFoodWord.test.js",
+  "tests/generators/famineReservesHolder.test.js",
+  "tests/generators/importerHookNoTrade.test.js",
+  "tests/generators/informantNoThievesGuild.test.js",
+  "tests/generators/pressureHonoursNeeds.test.js"
+ ],
+ "plants": [
+  {
+   "id": "A1 siege days slot reads the export again",
+   "expect": [
+    "tests/generators/crisisFoodWord.test.js"
+   ],
+   "edits": [
+    {
+     "file": "src/generators/narrativeText.js",
+     "old": "counts its mouths and its days of ${foodStoreWord(r.foodRecord)} every morning",
+     "new": "counts its mouths and its days of ${r.commodity || \"grain\"} every morning"
+    }
+   ]
+  },
+  {
+   "id": "A1b a food secret reads {commodity} again",
+   "expect": [
+    "tests/generators/crisisFoodWord.test.js"
+   ],
+   "edits": [
+    {
+     "file": "src/data/stressInstitutionEffects.js",
+     "old": "Controls a hidden cache of {food} reserves",
+     "new": "Controls a hidden cache of {commodity} reserves"
+    }
+   ]
+  },
+  {
+   "id": "A1c siege goal reads the export again",
+   "expect": [
+    "tests/generators/crisisFoodWord.test.js"
+   ],
+   "edits": [
+    {
+     "file": "src/generators/npcGenerator.js",
+     "old": "short: `Secure enough ${foodStoreWord(foodRecord)} reserves to outlast the blockade`",
+     "new": "short: `Secure enough ${_commodity || 'food'} reserves to outlast the blockade`"
+    }
+   ]
+  },
+  {
+   "id": "A2 famine line names the leading power again",
+   "expect": [
+    "tests/generators/famineReservesHolder.test.js"
+   ],
+   "edits": [
+    {
+     "file": "src/generators/narrativeText.js",
+     "old": "the remaining ${foodStoreWord(r.foodRecord)} reserves are in few hands, and whoever holds them is not discussing it openly.",
+     "new": "${r.topFaction || \"the merchant class\"} controls the remaining ${foodStoreWord(r.foodRecord)} reserves and is not discussing it openly."
+    }
+   ]
+  },
+  {
+   "id": "A3 a harbour row loses its docks need",
+   "expect": [
+    "tests/generators/arrivalHarbourDocks.test.js"
+   ],
+   "edits": [
+    {
+     "file": "src/data/narrativeData.js",
+     "old": "masts above the roofs, gulls wheeling over the quays, and salt bright in the air.`, needs: ['docks'] }",
+     "new": "masts above the roofs, gulls wheeling over the quays, and salt bright in the air.`, needs: ['coast'] }"
+    }
+   ]
+  },
+  {
+   "id": "A4 the church twin restored",
+   "expect": [
+    "tests/generators/churchLineNoOffice.test.js"
+   ],
+   "edits": [
+    {
+     "file": "src/data/powerSiblings.js",
+     "old": "'The most devout households want a say over who may trade and when, and not everyone here agrees.'",
+     "new": "'The church wants approval rights over who may trade and when. The village reeve disagrees.'"
+    }
+   ]
+  },
+  {
+   "id": "A5 the importer hook under a siege restored",
+   "expect": [
+    "tests/generators/importerHookNoTrade.test.js"
+   ],
+   "edits": [
+    {
+     "file": "src/generators/economy/foodBalance.js",
+     "old": "const siegeCutsImports = (config, foodBalance) => (config?.stressTypes || []).includes('under_siege') && !foodBalance?.importChannel;",
+     "new": "const siegeCutsImports = (config, foodBalance) => false && (config?.stressTypes || []).includes('under_siege') && !foodBalance?.importChannel;"
+    }
+   ]
+  },
+  {
+   "id": "A6 the thieves-guild secret where crime stands but no guild",
+   "expect": [
+    "tests/generators/informantNoThievesGuild.test.js"
+   ],
+   "edits": [
+    {
+     "file": "src/generators/npcGenerator.js",
+     "old": "if (mentionsCriminalGuild && (noCrime || noThievesGuild)) {",
+     "new": "if (mentionsCriminalGuild && (noCrime)) {"
+    }
+   ]
+  },
+  {
+   "id": "A7 pressure row needs ignored after the pick",
+   "expect": [
+    "tests/generators/pressureHonoursNeeds.test.js"
+   ],
+   "edits": [
+    {
+     "file": "src/generators/narrativeGenerator.js",
+     "old": "const template = textOf(admitted(drawn) ? drawn :",
+     "new": "const template = textOf(true ? drawn :"
+    }
+   ]
+  },
+  {
+   "id": "A8 the gates line loses its gate need",
+   "expect": [
+    "tests/generators/pressureHonoursNeeds.test.js"
+   ],
+   "edits": [
+    {
+     "file": "src/generators/narrativeText.js",
+     "old": "which means they control everything else too, for now.`, needs: ['gate'] }",
+     "new": "which means they control everything else too, for now.` }"
+    }
+   ]
+  }
+ ]
+}

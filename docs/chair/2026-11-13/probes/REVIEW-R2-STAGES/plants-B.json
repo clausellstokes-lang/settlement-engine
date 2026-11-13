@@ -1,0 +1,116 @@
+{
+ "guards": [
+  "tests/components/dailyLifeFoodTileBand.test.jsx",
+  "tests/components/houseLabelMachinery.test.jsx",
+  "tests/components/institutionBadgeWhoAdded.test.jsx",
+  "tests/components/servicesRowMachinery.test.jsx",
+  "tests/domain/storesSpanWords.test.js",
+  "tests/ui/relationshipsEmptyTensions.test.js"
+ ],
+ "plants": [
+  {
+   "id": "B1 the chain-depth chip back",
+   "expect": [
+    "tests/components/servicesRowMachinery.test.jsx"
+   ],
+   "edits": [
+    {
+     "file": "src/components/new/serviceComponents.jsx",
+     "old": "{statusLabel&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:statusColor,background:`${statusColor}18`,padding:'0 5px',letterSpacing:'0.04em',flexShrink:0}}>{statusLabel}</span>}",
+     "new": "{statusLabel&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:statusColor,background:`${statusColor}18`,padding:'0 5px',letterSpacing:'0.04em',flexShrink:0}}>{statusLabel}</span>}{(isImp||isDeg||isVul)&&_chainDepth>1&&<span>{_chainDepth}-order chain</span>}"
+    }
+   ]
+  },
+  {
+   "id": "B2 the covers tail back",
+   "expect": [
+    "tests/components/servicesRowMachinery.test.jsx"
+   ],
+   "edits": [
+    {
+     "file": "src/components/new/serviceComponents.jsx",
+     "old": "{r.impact&&!impactShown&&<span style={{fontStyle:'italic',marginLeft:4}}>{truncateAtWord(r.impact, 70)}</span>}",
+     "new": "{r.impact&&!impactShown&&<span style={{fontStyle:'italic',marginLeft:4}}>{truncateAtWord(r.impact, 70)}</span>}{r.impact&&!impactShown&&_impactCovers?.length>0&&<span style={{marginLeft:4}}>\u00b7 covers {_impactCovers.join(', ')}</span>}"
+    }
+   ]
+  },
+  {
+   "id": "B3 a provenance word printed as the provider",
+   "expect": [
+    "tests/components/servicesRowMachinery.test.jsx"
+   ],
+   "edits": [
+    {
+     "file": "src/components/new/serviceComponents.jsx",
+     "old": "const provider = SERVICE_PROVENANCE_SENTINELS.includes(inst) ? '' : inst;",
+     "new": "const provider = inst;"
+    }
+   ]
+  },
+  {
+   "id": "B4 the house label keeps the count range",
+   "expect": [
+    "tests/components/houseLabelMachinery.test.jsx"
+   ],
+   "edits": [
+    {
+     "file": "src/domain/display/institutionDisplayName.js",
+     "old": "const bare = label.replace(CATALOGUE_MACHINERY_BRACKET, '').trim();",
+     "new": "const bare = label;"
+    }
+   ]
+  },
+  {
+   "id": "B5 YOU on every forced row",
+   "expect": [
+    "tests/components/institutionBadgeWhoAdded.test.jsx"
+   ],
+   "edits": [
+    {
+     "file": "src/components/new/tabs/InstitutionsTab.jsx",
+     "old": "return inst?.forcedByToggle === true",
+     "new": "return true"
+    }
+   ]
+  },
+  {
+   "id": "B6 the empty line denies conflicts again",
+   "expect": [
+    "tests/ui/relationshipsEmptyTensions.test.js"
+   ],
+   "edits": [
+    {
+     "file": "src/components/new/tabs/RelationshipsTab.jsx",
+     "old": "const conflictsElsewhere=(Array.isArray(r.history?.currentTensions)",
+     "new": "const conflictsElsewhere=false&&(Array.isArray(r.history?.currentTensions)"
+    }
+   ]
+  },
+  {
+   "id": "B7 the food tile reads the percent again",
+   "expect": [
+    "tests/components/dailyLifeFoodTileBand.test.jsx"
+   ],
+   "edits": [
+    {
+     "file": "src/components/new/tabs/DailyLifeTab.jsx",
+     "old": "hasSurplus: typeof band === 'string' && band ? band === 'surplus' : ctx.foodSurplus > 10",
+     "new": "hasSurplus: ctx.foodSurplus > 10"
+    }
+   ]
+  },
+  {
+   "id": "B8 a few weeks under a month again",
+   "expect": [
+    "tests/domain/storesSpanWords.test.js"
+   ],
+   "edits": [
+    {
+     "file": "src/domain/summary/tonightSheet.js",
+     "old": "  const days = months * DAYS_PER_MONTH;\n  if (days < 1) return 'less than a day';",
+     "new": "  const days = months * DAYS_PER_MONTH; return 'a few weeks';\n  if (days < 1) return 'less than a day';"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,117 @@
+{
+ "guards": [
+  "tests/components/economicsFoodFamineWords.test.jsx",
+  "tests/components/economicsFoodTradeUnderSiege.test.jsx",
+  "tests/components/economicsImportsAreArrivals.test.jsx",
+  "tests/domain/display/clericalCareNeedsClergy.test.js",
+  "tests/domain/display/gapLineHousesByKind.test.js",
+  "tests/domain/display/gapLineReadsChainLeaf.test.js",
+  "tests/domain/display/needMetUnderAnotherName.test.js"
+ ],
+ "plants": [
+  {
+   "id": "C1 houses read by one name again",
+   "expect": [
+    "tests/domain/display/gapLineHousesByKind.test.js"
+   ],
+   "edits": [
+    {
+     "file": "src/domain/display/validationOnPage.js",
+     "old": "const missing = arr(g.missing).map(str).filter((n) => n && !houseOfKindHere(s, n))",
+     "new": "const missing = arr(g.missing).map(str).filter((n) => n)"
+    }
+   ]
+  },
+  {
+   "id": "C2 no-one-works ignores the chain leaf",
+   "expect": [
+    "tests/domain/display/gapLineReadsChainLeaf.test.js"
+   ],
+   "edits": [
+    {
+     "file": "src/domain/display/validationOnPage.js",
+     "old": "      if (worked) continue;\n",
+     "new": ""
+    }
+   ]
+  },
+  {
+   "id": "C2b half-way ignores the idle model",
+   "expect": [
+    "tests/domain/display/gapLineReadsChainLeaf.test.js"
+   ],
+   "edits": [
+    {
+     "file": "src/domain/display/validationOnPage.js",
+     "old": "} else if (missing.length && !modelledIdle) {",
+     "new": "} else if (missing.length) {"
+    }
+   ]
+  },
+  {
+   "id": "C3 clerical care reads the church flag again",
+   "expect": [
+    "tests/domain/display/clericalCareNeedsClergy.test.js"
+   ],
+   "edits": [
+    {
+     "file": "src/domain/display/defenseDisplay.js",
+     "old": "          : clergyHere(r) ? 'Clerical care. Basic wound and disease management.'",
+     "new": "          : f.hasChurch ? 'Clerical care. Basic wound and disease management.'"
+    }
+   ]
+  },
+  {
+   "id": "C4 the famine words ignored",
+   "expect": [
+    "tests/components/economicsFoodFamineWords.test.jsx"
+   ],
+   "edits": [
+    {
+     "file": "src/components/new/tabs/EconomicsTab.jsx",
+     "old": "const short = shortWords(fbal.deficitPct, famineOf(s).famine);",
+     "new": "const short = shortWords(fbal.deficitPct, false);"
+    }
+   ]
+  },
+  {
+   "id": "C5 food by trade under a siege again",
+   "expect": [
+    "tests/components/economicsFoodTradeUnderSiege.test.jsx"
+   ],
+   "edits": [
+    {
+     "file": "src/components/new/tabs/EconomicsTab.jsx",
+     "old": "  return record ? Number(record.normalImportPct) > 0 : true;",
+     "new": "  return true;"
+    }
+   ]
+  },
+  {
+   "id": "C6 needs printed as imports again",
+   "expect": [
+    "tests/components/economicsImportsAreArrivals.test.jsx"
+   ],
+   "edits": [
+    {
+     "file": "src/components/new/tabs/EconomicsTab.jsx",
+     "old": "const { arriving: shownImports, needed: unmetNeeds } = importsAsPrinted({ ...s, economicState: eco });",
+     "new": "const { arriving: _a, needed: _n } = importsAsPrinted({ ...s, economicState: eco }); const shownImports = [..._a, ..._n]; const unmetNeeds = [];"
+    }
+   ]
+  },
+  {
+   "id": "C7 a need met under another name stays unmet",
+   "expect": [
+    "tests/domain/display/needMetUnderAnotherName.test.js"
+   ],
+   "edits": [
+    {
+     "file": "src/domain/display/tradeListDisplay.js",
+     "old": "  if (WORKED_GOOD.test(imp)) return false;",
+     "new": "  return false;"
+    }
+   ]
+  }
+ ]
+}
