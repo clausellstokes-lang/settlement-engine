@@ -73,6 +73,18 @@ describe('defence is the sum of its parts', () => {
     expect(bad).toEqual([]);
   });
 
+  test('each line is its own measure to the tenth: a part counts no more than its full measure, and size and threat are the table\'s', () => {
+    const bad = [];
+    for (const [key, s] of Object.entries(births)) {
+      for (const p of s.defenseProfile.parts) {
+        if (typeof p.full === 'number' && Math.abs(p.points) > Math.abs(p.full) + 0.1 + 1e-9) bad.push([key, p.id, p.points, p.full]);
+        if (p.id === 'size' && p.points !== DEFENCE_TUNING.size[s.tier]) bad.push([key, 'size', p.points]);
+        if (p.id === 'danger' && p.points !== -DEFENCE_TUNING.threat.penalty[s.config.monsterThreat]) bad.push([key, 'danger', p.points]);
+      }
+    }
+    expect(bad).toEqual([]);
+  });
+
   test('readiness sits on its scale and its band is the ladder\'s for the score; the five scores sit on theirs', () => {
     for (const [key, s] of Object.entries(births)) {
       const { readiness, scores } = s.defenseProfile;

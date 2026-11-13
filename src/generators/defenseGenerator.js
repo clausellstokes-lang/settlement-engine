@@ -383,7 +383,7 @@ const computeDefenseScores = (settlement, keep) => {
     }
   }
 
-  for (const p of parts) p.points = sumOf(p.dims) / n;
+  for (const p of parts) { p.points = sumOf(p.dims) / n; p.listed = p.points; } // `listed`: its points before limit 1, which is its own line
   /** @param {string} g */
   const groupSum = (g) => parts.filter((p) => p.group === g).reduce((a, p) => a + p.points, 0);
   const sustains = groupSum('SUSTAINS');
@@ -431,7 +431,7 @@ const listOf = (r) => {
     line.full = tenths(pointsOf(p.raw));
     if (p.crisis) line.crisis = Object.fromEntries(Object.entries(p.crisis).map(([k, v]) => [k, -tenths(v / n)]));
     if (p.id === 'will' && r.willHeld) line.held = -tenths(r.willHeld);
-    rows.push({ exact: p === r.wallsPart && r.wallsFull ? pointsOf(r.wallsFull) : p.points, line });
+    rows.push({ exact: p === r.wallsPart && r.wallsFull ? pointsOf(r.wallsFull) : p.listed, line });
   }
   if (r.size) rows.push({ exact: r.size, line: lineOf('size', 'GROUND') });
   if (r.danger) rows.push({ exact: -r.danger, line: lineOf('danger', 'GROUND') });
