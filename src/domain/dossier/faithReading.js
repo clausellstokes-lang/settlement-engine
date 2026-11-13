@@ -226,6 +226,8 @@ function seniorClericOf(s) {
 function religiousFactionOf(s) {
   /** @type {ReligiousFaction|null} */
   let best = null;
+  /** @type {unknown} */
+  let bestRow = null;
   for (const f of Array.isArray(s.powerStructure?.factions) ? s.powerStructure.factions : []) {
     if (text(f?.category) !== 'religious') continue;
     const name = text(f?.faction) || text(f?.name);
@@ -233,12 +235,13 @@ function religiousFactionOf(s) {
     const power = num(f?.power, 0);
     if (best && best.power >= power) continue;
     best = { name, power, governs: f?.isGoverning === true };
+    bestRow = f;
   }
   // R2-CODE-B round 3 (the increment's #ww-536, the chair's ruling): where ANOTHER power governs, the religious power is
   // a contender, and the line says only what the powers' record holds: never "the real political weight".
   if (best && !best.governs) {
     const factions = Array.isArray(s.powerStructure?.factions) ? s.powerStructure.factions : [];
-    best.anotherGoverns = factions.some((f) => f?.isGoverning === true && (text(f?.faction) || text(f?.name)) !== best?.name);
+    best.anotherGoverns = factions.some((f) => f !== bestRow && f?.isGoverning === true);
   }
   return best;
 }

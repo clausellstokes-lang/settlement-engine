@@ -240,7 +240,7 @@ function plotHooksPage(vm) {
   );
 }
 
-function powerPage(vm) {
+function powerPage(vm, houses = []) {
   const p = vm.power;
   return md(
     lede(powerHeadline(p, vm.identity)),
@@ -254,7 +254,7 @@ function powerPage(vm) {
       `- **${esc(f.name)}**${f.isGoverning ? ' *(governing)*' : ''}${f.description ? `: ${esc(f.description)}` : ''}`)) : null,
     p.tensions.length ? md('', '## Tensions', p.tensions.map(tn =>
       // The tension's key in words ("Resource scarcity"), no severity range ("minor / major").
-      `- **${esc(tn.label ? cap(humanize(tn.label)) : 'Tension')}**${tn.description ? `: ${esc(houseLabelsInText(tn.description, vm.raw?.institutions))}` : ''}`)) : null,
+      `- **${esc(tn.label ? cap(humanize(tn.label)) : 'Tension')}**${tn.description ? `: ${esc(houseLabelsInText(tn.description, houses))}` : ''}`)) : null,
     p.conflicts.length ? md('', '## Conflicts', p.conflicts.map(c =>
       `- **${esc((c.parties || []).join(' vs '))}**${c.intensity ? ` (${esc(c.intensity)})` : ''}${c.issue ? `: ${esc(c.issue)}` : ''}${c.stakes ? ` Stakes: ${esc(c.stakes)}` : ''}`)) : null,
   );
@@ -388,7 +388,7 @@ function historyPage(vm) {
   );
 }
 
-function viabilityPage(vm) {
+function viabilityPage(vm, houses = []) {
   const v = vm.viability;
   return md(
     lede(viabilityHeadline(v)),
@@ -397,7 +397,7 @@ function viabilityPage(vm) {
     // The summary without its opening verdict token: the Verdict row above is the label (W7 HOOKS).
     v.summary ? md('', esc(stripViabilityToken(v.summary))) : null,
     (v.issues || []).length ? md('', '## Issues', v.issues.map(i =>
-      `- **${esc(i.title || 'Issue')}**${i.severity ? ` (${esc(i.severity)})` : ''}${i.description ? `: ${esc(houseLabelsInText(i.description, vm.raw?.institutions))}` : ''}`)) : null,
+      `- **${esc(i.title || 'Issue')}**${i.severity ? ` (${esc(i.severity)})` : ''}${i.description ? `: ${esc(houseLabelsInText(i.description, houses))}` : ''}`)) : null,
   );
 }
 
@@ -522,7 +522,7 @@ export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked
     }
   }
   if (inc('plotHooks'))           push('Plot Hooks', plotHooksPage(vm));
-  if (inc('powerStructure'))      push('Power', powerPage(vm));
+  if (inc('powerStructure'))      push('Power', powerPage(vm, settlement?.institutions));
   if (inc('identityDailyLife'))   push('Identity & Daily Life', identityPage(vm, settlement));
   if (inc('services'))            push('Services', servicesPage(vm));
   if (inc('institutions'))        push('Institutions', institutionsPage(vm));
@@ -530,7 +530,7 @@ export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked
   if (inc('resourcesProduction')) push('Resources & Production', resourcesPage(vm));
   if (inc('defenseSecurity'))     push('Defense & Security', defensePage(vm));
   if (inc('historyFounding'))     push('History & Founding', historyPage(vm));
-  if (inc('viabilityAssessment')) push('Viability Assessment', viabilityPage(vm));
+  if (inc('viabilityAssessment')) push('Viability Assessment', viabilityPage(vm, settlement?.institutions));
   if (inc('relationships'))       push('Relationships & Neighbours', relationshipsPage(vm));
   if (inc('timeline'))            push('Timeline', timelinePage(vm, { faithUnlocked }));
 
