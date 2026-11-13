@@ -21,7 +21,7 @@
       "lines": [
         {
           "lineId": "PRESSURE_SENTENCES.under_siege[0]",
-          "text": "${name} is surrounded. Supply lines are cut, morale is fracturing, and ${topNPCName}, the ${topNPCRole}, is deciding whether to negotiate terms or hold out for relief that may not be coming.",
+          "text": "${name} is surrounded. Supply lines are cut, morale is fracturing, and ${govFaction} is deciding whether to negotiate terms or hold out for relief that may not be coming.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -145,7 +145,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.famine[3]",
-          "text": "The bakers of ${name} have started cutting the bread with things that are not flour; everyone can taste it, and the fact that nobody complains is the most alarming part.",
+          "text": "${bakers ? 'The bakers of ${name} have started cutting the bread with things that are not flour' : 'What people eat in ${name} is being stretched with things that are not food'}; everyone can taste it, and the fact that nobody complains is the most alarming part.",
           "needs": [],
           "excludes": [],
           "crisis": [
