@@ -1181,8 +1181,8 @@ export const HISTORICAL_EVENTS_DATA = [
       "One guild's charter was revoked and never fully restored",
     ],
     plotHooks: [
-      "A guild master's records have gone missing ahead of an audit",
-      'A journeyman denied mastership has proof the exam was rigged',
+      { text: "A guild master's records have gone missing ahead of an audit", needs: ['guild'] }, // W2-FIX-DATA: the guild homed (facts/guild.js)
+      { text: 'A journeyman denied mastership has proof the exam was rigged', needs: ['guild'] }, // W2-FIX-DATA: no mastership without a guild (c10)
       { text: 'Someone is sabotaging both guilds to destabilize the market for a third party', needs: ['market'] }, // CENSUS-3d unit 6
     ],
     severity: ['minor', 'major'],
@@ -1227,7 +1227,7 @@ export const HISTORICAL_EVENTS_DATA = [
     ],
     plotHooks: [
       'The crime wave is coordinated. Someone is directing it to create a pretext',
-      { text: 'A guard captain is on the payroll of the criminal network', needs: ['guardPresence'] }, // CENSUS-3d unit 6
+      { text: 'A guard captain is on the payroll of the criminal network', needs: ['watch'] }, // CENSUS-3d unit 6; W2-FIX-DATA: a captain of the guard needs a watch, not a household levy (c04)
       'The vigilantes have begun targeting innocents based on bad information',
     ],
     severity: ['minor', 'major'],

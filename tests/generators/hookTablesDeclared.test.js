@@ -28,15 +28,19 @@ const textOf = (row) => (typeof row === 'string' ? row : row.text);
 
 describe('the history hooks declare what their event does not guarantee', () => {
   // CENSUS-3e (R-AA): demographic_pressure's three hooks declare their migration direction (15 rows).
-  it('the fifteen declaring rows carry their atoms, every atom declarable', () => {
+  // W2-FIX-DATA (2026-11-13, the REVIEW-W2B cold list): guild_conflict's two guild hooks declare the guild (homed by facts/guild.js), and
+  // the crime wave's guard captain declares a watch, not any guard (a household levy has no captain): 15 → 17 rows.
+  it('the seventeen declaring rows carry their atoms, every atom declarable', () => {
     const declaring = HISTORY_ROWS.filter(({ row }) => typeof row === 'object');
     expect(declaring.map(({ type, row }) => `${type}: ${[...(row.needs || []), ...(row.excludes || []).map((x) => `no ${x}`)].join(', ')}`)).toEqual([
       'succession_crisis: no ruler: council',
       'succession_crisis: no ruler: council',
       'economic_disparity: tier: >= town',
+      'guild_conflict: guild',
+      'guild_conflict: guild',
       'guild_conflict: market',
       'resource_scarcity: market',
-      'crime_wave: guardPresence',
+      'crime_wave: watch',
       'market_crash: market',
       'great_flood: navigable',
       'great_flood: navigable',

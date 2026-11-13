@@ -89,18 +89,22 @@
   {
    "id": "hooks.HISTORY_EVENT_HOOKS::guild_conflict#0",
    "text": "A guild master's records have gone missing ahead of an audit",
-   "needs": [],
+   "needs": [
+    "guild"
+   ],
    "excludes": [],
-   "colour": true,
-   "notes": "unhomed: guild (the template presumes a guild; hasGuild only biases the draw, Appendix C P20-10..12)"
+   "colour": false,
+   "notes": "W2-FIX-DATA: guild, homed (facts/guild.js); the REVIEW-W2B cold list (c10)"
   },
   {
    "id": "hooks.HISTORY_EVENT_HOOKS::guild_conflict#1",
    "text": "A journeyman denied mastership has proof the exam was rigged",
-   "needs": [],
+   "needs": [
+    "guild"
+   ],
    "excludes": [],
-   "colour": true,
-   "notes": "unhomed: guild"
+   "colour": false,
+   "notes": "W2-FIX-DATA: guild, homed (facts/guild.js); the REVIEW-W2B cold list (c10)"
   },
   {
    "id": "hooks.HISTORY_EVENT_HOOKS::guild_conflict#2",
@@ -168,11 +172,11 @@
    "id": "hooks.HISTORY_EVENT_HOOKS::crime_wave#1",
    "text": "A guard captain is on the payroll of the criminal network",
    "needs": [
-    "guardPresence"
+    "watch"
    ],
    "excludes": [],
    "colour": false,
-   "notes": "\"A guard captain\" (reader:hook-pools [guard], soak1k-32/42/54)"
+   "notes": "\"A guard captain\" (reader:hook-pools [guard], soak1k-32/42/54); W2-FIX-DATA: watch, not guardPresence (a household levy has no guard captain, c04)"
   },
   {
    "id": "hooks.HISTORY_EVENT_HOOKS::crime_wave#2",
