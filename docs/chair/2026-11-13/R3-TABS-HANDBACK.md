@@ -260,3 +260,55 @@ rv2/rv3/rv4 seeds in the app's shape; classes by classes3.py's own patterns) and
     716 towns (catalogue ranges in house labels) at base and tip alike: named (item 14; the label leaf is R2-CODE-B's,
     for the join).
 - Its limits, beside any zero: the dossier's views only; it cannot see two lines of a page disagreeing.
+
+## STATUS, LINE BY LINE (at hand-back; the chair's context check of 22:10 UTC: this seat hands back here)
+
+| row(s) | status | commit |
+|---|---|---|
+| #185 HIGH, #323 #378 #465 #719 #956 #1177 #1391 (REQ/FORCED, b1) | DONE | f19e75e41 |
+| #816 (Underworld band) | DONE | 17637e1b2 |
+| #1104 (event category word) | DONE | 18d7fa48e |
+| #494 #1317, increment #867 (Foundations Food) | DONE | 712db076f |
+| round two #329 #858 (trade row under a siege) | DONE | 46e5c1002 |
+| #486 #487 #592 #593 #743 #744 #1422 #1423, H9 #ww-466/467/530/531, #ww-468, #ww-569 (severity chips, b2) | STOP: the record holds a range, no value (item 5); needs the chair's ruling | — |
+| #488 #594 #845 (founding Origin) | STOP, named: narrativeData.js pool (lane ra) | — |
+| #571 HIGH, #916 (founder "a miller who …") | STOP, named: narrativeGenerator.js (held by r2-code-a, w2-b-declare, w2-fix-data, w2-write) | — |
+| #34 #75 #103 #137 #184 #226 #290 (food endurance), #575 (Legal Infrastructure) | STOP, named: defenseDisplay.js (wc) | — |
+| L0 (classes A, B) | DONE | 2ac3fa8c8 |
+| L1 (classes K, E; D and the empty perimeter held by line disqualifiers) | DONE | aac97a657, 317f1e19c |
+| L2 (classes A1, F) | DONE | f0adcd83a |
+| L3 (C-L5) | DONE | e40e164ad |
+| the wiring census re-taken, leaves projected | DONE | eaca79fcd |
+| pins re-keyed, new tests made total (chrome floor, readsCount, anchors, seed loops) | DONE | fc2e15afd |
+| the lighting census re-frozen | DONE | 66fd07e91 (re-freeze again at the final tip: no test file was added after it) |
+| #1274 #1389 HIGH, #718 #817 #1174 #1082 (crime rows cut) | DONE | 87d361dae |
+| #163 #427 #497 #891 HIGH (Services "Needs X" run-together, "· covers") | STOP, named: serviceComponents.jsx (R2-CODE-B; it cures the chip) | — |
+| CENSUS-2 in this seat's files, base and tip | DONE (read, one cure) | 317f1e19c |
+| THE FINAL STATEMENT | NOT STARTED (see below) | — |
+
+**The reader's own instrument (classes3.py over render4.mjs) at the line with point 48 (9e57f5023, EXECUTED):**
+A 151, A1 45, B 36, D 35, E 56, F 50, K 10, equal to this seat's `m5.mjs` + `m5cls.mjs` reading of the desk's own
+output on the same 1,440 seeds. At the tip by `m5`: A 0, A1 0, B 0, D 0, E 22 (the badge itself, named), F 0, K 0,
+L3 0, the empty perimeter beside a force 0. The render4 run at the tip was IN HAND at hand-back (not finished): a
+successor re-runs `render4.mjs` + `scan4.mjs` + `classes3.py` (lane/review-upkeep-2026-11-13) at the final tip for the
+acceptance figures by the reader's own instrument.
+
+**The final statement, NOT STARTED** (a successor does it at the final tip): the census counter base aac79b808 against
+the final tip (done once at 46e5c1002: 26 rows all OLD, the counter re-run outside its pipe, exit 0, 50 lines); the
+births at every tip measured so far are byte-identical to the base (no display change here moves a record); ONE draft
+shift record naming the six golden surfaces (expected unmoved: every change is a read-time display or desk line; the
+dossier-prose manifest's three reds were red at the base too, by the pre-run below); the whole suite once at the final
+tip, reds classed; the lighting census re-frozen if a test file is added; the edge bundles (`npm run build:edge-shared`)
+checked last.
+- A PRE-RUN of the whole suite at 38f49e420 (before point 48; not the final statement): 13 files red. Red at the base
+  too (aac79b808, by a targeted re-run): dossierProseManifest (3), proseFamilyContract.walker (5). This lane's own,
+  since cured: sovereigntyLightingContract (re-frozen), phoneChromeFloor (re-recorded), negativeAssertionAnchor and
+  seedLoopTotality (the new tests). NOT CLASSED (a successor re-runs them at base): siteCoherenceRatchet,
+  undercitySewerDerivation, foundingWorldBones, stressSummaryName, landingFixtureFreshness (2).
+- A push hazard seen here: one push of a lane branch (`git push origin lane/r3-tabs-2026-11-13`) ran the WHOLE
+  `npm run check` in the pre-push hook instead of the three fast gates; the next push used the explicit refspec.
+
+**Helpers** (copied to docs/chair/2026-11-13/probes/R3-TABS/): births.mjs (the census's 720, the reader's 20 and the
+144 `r3t-` fresh seeds, app shape), m4.mjs (the threat/posture rows, tree A against tree B), m5.mjs + m5cls.mjs (the
+desk's rows on the defence reader's 1,440 and classes3's patterns), mycount.mjs (this seat's page patterns on census
+dumps), c2mine.mjs (census-2 hits by this seat's files).
