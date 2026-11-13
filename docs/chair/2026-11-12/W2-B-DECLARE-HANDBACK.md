@@ -303,7 +303,7 @@ Every push ran its three pre-push gates: `83c84a8ed..3ff343284` exit 0, then to 
 **Kept current after every item; a stop at any moment loses nothing.** Every count is executed unless marked PLAUSIBLE. Work tree: a scratch worktree of the lane (`npm ci`); the main checkout untouched.
 
 ## 0. Status
-- [x] F1 (HIGH) seven files, nine titles · [ ] F4 whole-literal key + forecast · [ ] F3 strip ban · [ ] F2 streets / quarters · [ ] F9 + F8 · [ ] F7 two narrow families · [ ] F5 + F6 · [ ] the page unmoved · [ ] the whole suite
+- [x] F1 (HIGH) seven files, nine titles · [x] F4 whole-literal key + forecast · [x] F3 strip ban · [~] F2 streets (cure done; the ten read owed) · [x] F9 + F8 · [ ] F7 two narrow families · [ ] F5 + F6 · [ ] the page unmoved · [ ] the whole suite
 
 ## 1. F1: the seven files (DONE, `6cdd54e18`…`a25246bea`)
 Each was red at `1fb15980d` (9 titles) and is green at `a25246bea` (`npx vitest run` over the seven files: 7 files passed, 245 passed, 28 skipped, 0 failed). Every cause is the lane's own, and every cure went through the file's own door:
@@ -317,3 +317,32 @@ Each was red at `1fb15980d` (9 titles) and is green at `a25246bea` (`npx vitest 
 | `tests/build/vendorPdfLazy.test.js` (1) | `a51634ede`: `registeredWords.js` became a direct goods consumer (identity half) | the roster row in `src/domain/goods.schema.js`'s doc comment (**outside the instrument; announced to the chair before it was made**; comment only) | `bb0e27be5` |
 | `tests/lint/sovereigntyLightingContract.walker.test.js` (1) | the second and third seats' +25 titles (vocabularyPageFindings 4→21, presumedThings.walker 29→37) and +6 suite titles | `LIGHTING_CENSUS_REFREEZE` at the clean tip `bb0e27be5`: titles 29230→29255, suiteTitles 7921→7927, the other three unchanged; the plain re-run is green | `a25246bea` |
 
+
+## 2. F4: the bank keyed by the whole literal (DONE, `0b092c5f1`)
+- **The cure.** `hitKey` = file, thing, sha-256 of the WHOLE literal (16 hex). A row is `[thing, reason, first-120 label, hash]`; the label is read by no key. The door's `--bank` writes one row per whole literal. **The plant:** the appended sentence and an edit before character 120 are fresh hits (red against the old key, green here). The reviewer's own plant on the real tree (Fish market's desc + "On feast days the market wardens shut the market at noon."): `door --check` reports it **fresh** (and its old row stale).
+- **The re-key, through its door** (`--rekey-whole`, new): **826 + 4,717 rows before = 826 + 4,717 after.** Every row's (file, thing, reason, label) is identical, and the registers' other sections are identical (checked by script). Five rows covered two literals that share their first 120 characters (`warFaith.generated.js` war ×2, `stressors.generated.js` armedForce, `safetyProfile.js` quarters and streets). Each keeps exactly those two, as a list of hashes, so none is added. The door refuses if a row matches nothing or the count moves.
+
+**THE FORECAST** (touching nothing). Each lane's tip was merged with this lane at `0b092c5f1` by `git merge-tree` (no src conflict on any of the six; the conflicted registers were taken from this lane), then this lane's walker was run over the merged tree (`<scratchpad>/tools/forecast.mjs`). A row is "edited" when its literal is gone and a literal of the same file is at least 50% the same words; a "fresh hit" is that edited literal undeclared under the new key.
+
+| lane (tip) | banked keys not found | edited | **of those, fresh hits** | fresh only under the new key (edit past char 120) | edited AND carries a declaration | edited, word gone | removed | unedited, newly declared there | other fresh hits in the merge (new lines, either key) | register rows it changed |
+|---|---|---|---|---|---|---|---|---|---|---|
+| w2-fix-data `4114cf5a6` | 47 | 12 | **8** | 7 | 0 | 4 | 2 | 33 | 26 | removed 21 + 18, added 0 |
+| w2-write `589c9817f` | 33 | 6 | **2** | 0 | 1 | 3 | 4 | 23 | 25 | removed 17 + 17, added 0 |
+| w2-a-leaves `395cb592f` | 2 | 2 | **2** | 1 | 0 | 0 | 0 | 0 | 15 | — (no widened register there) |
+| coherence-agree `69b53decd` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | — |
+| coherence-upkeep `412dc2129` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 11 | — |
+| integration `f572d12b7` | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 2 | — |
+
+**Reading.** The new key adds **8 fresh hits in all**: 7 on w2-fix-data and 1 on w2-a-leaves. They are edits past character 120 that the old key would have let through. Examples: `institutionDescVariants.js` house: druid / streets, and `defenseDisplay.js` streets. Each is a red at merge until the line declares or the merge seat banks it under its reason (it stood at the base). Of the edited lines, **only one already carries a declaration** (w2-write). A control run of the forecast on this lane alone gives 0 in every column. No lane adds a row in the old shape (0 added on both lanes that touch the registers), so no un-hashed row arrives at a merge. If one ever does, `--rekey-whole` keys it. The "other fresh hits" are each lane's own new lines, red under either key. CONFIRMED by execution, but the pairing of an edit to its row (50% of words) is a heuristic: PLAUSIBLE to within a line or two per lane.
+
+## 3. F3: the strip ban (DONE, `9d44475fb`)
+- **The cure.** A callback strips when its handed-on expression takes the line's text ANYWHERE (`l.text`, `l?.text`, `l['text']`, a destructured or locally bound alias, `textOf`/`lineText` or a local helper of that shape), wrapped or not. A nested function and an object that carries the line whole (`{ ...l, … }`) are not read. New sites: `Array.from(R, fn)`, `R.reduce(fn)`, `R.forEach(fn)`, for-of loops that push/add/yield, and index loops pushing `R[i].text`.
+- **The plants**, red at `0b092c5f1` and measured shape by shape: the reviewer's eight, **0 of 8 → 8 of 8**; four of this seat's own (`forEach` push, for-of `{ text }` push, a local alias returned, a generator `yield`), **0 of 4 → 4 of 4**. The controls stay clean (a carried line, a sum, a door's own draw, a map to another field).
+- **The habitat the widening sees:** 90 sites in `src` that stood at `1fb15980d`. Each line was printed by script and read. Every one is a list printed whole, a join, a check or a collection of non-pool rows (hooks, facts, musings, segments, census literals, corpus entries); none picks from a pool after its declarations are dropped. They are banked `not-a-draw` through the door (`--bank-strip … --base 1fb15980d`), 16 → 106. The F5 pin's "second strip of a banked receiver" is re-keyed by identity onto `standingInstructions.js :: rec`, because `grammarWalker.js :: pool #2` is now a real banked site. The door skips arm 1's walk for `--bank-strip`.
+
+## 4. F9 and F8 (DONE, `4f912cb2b`, `f1a48b12f`)
+- **F9.** A range row holds at most its maximum ("(2-5)" five, "(5-15)" fifteen; an open range "50-100+" / "5+" has none). A count is false only above the sum. Plants: "Three temples" over (2-5) and "Twelve" / "A dozen guilds" over (5-15) are not findings; "Six mills" over (2-5) and "The 20 guilds" over (5-15) are. The F6 row "Three mills over Mills (2-5)" is re-keyed with this cause.
+- **F8.** The church word spares "church's name". Pinned: "The church's bell …" still names `temple`. The cure answers the banked source line itself (`faithReading.js`, `temple` / `root`), and its row leaves through `--shrink` in the same commit (widened 4,717 → 4,716).
+
+## 5. F2: `streets` (cure DONE `418e56b9c`; the ten read OWED until the census lands)
+`streets` is absent only for a thorp or a hamlet (the tier); its true bands are tier village and up. `quarters` keeps the population band (pinned: a small village has no merchant quarter, a middling town has one). Plant red at `9d44475fb`. Arm 1: no source line moves.
