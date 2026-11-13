@@ -123,7 +123,7 @@ const RENDERERS = Object.freeze({
   tension: { Component: TensionRow, props: (o) => ({ t: o.raw }) },
   tradition: { Component: TraditionRow, props: (o) => ({ rec: o.raw, preview: !!o.meta.preview }) },
   hook: { Component: PlotHookCard, props: (o) => ({ hook: o.raw }) },
-  resource: { Component: ResourceChainCard, props: (o) => ({ chain: o.raw, stage: o.meta.stage }) },
+  resource: { Component: ResourceChainCard, props: (o, ctx) => ({ chain: o.raw, stage: o.meta.stage, settlement: ctx.settlement }) },
   // SW-B7b item 3: one shipped site's carried text, verbatim — no new words; the group's header
   // above is the jump to the tab that prints it.
   prose: { Component: ShippedProse, props: (o) => ({ lines: Array.isArray(o.raw) ? o.raw.map(String) : [] }) },

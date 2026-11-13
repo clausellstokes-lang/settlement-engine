@@ -13,7 +13,7 @@ import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 // READER-R1 ruling 3: the gap rows the DM reads are the record-read lines, in the house voice.
-import { resourceGapLines } from '../../../domain/display/validationOnPage.js';
+import { resourceGapLines, housesStillNeeded } from '../../../domain/display/validationOnPage.js';
 import { FLUSH } from '../../../design/flush.js';
 
 /**
@@ -37,8 +37,10 @@ const valBg    = v => v==='high'?'#e8f5ec':v==='medium'?'#faf4e8':'#f0ead8';
  * (BUILD-W2-SEARCH U2, no behaviour change): `stage` is 'unexploited', 'partial' or 'full',
  * the section's three variants, so the dossier search mounts a chain through its own card.
  */
-export function ResourceChainCard({ chain, stage }) {
+export function ResourceChainCard({ chain, stage, settlement = null }) {
   const mobile = useIsMobile();
+  // #452 (W2-C-LEAVES-3, ruled with R1): "Needs:" names only the houses the live roster does not hold by kind or trade.
+  const needs = stage === 'unexploited' ? housesStillNeeded(settlement, chain?.processingInstitutions) : [];
   if (stage === 'unexploited') return (
     <div style={{background:swatch['#FDF8E8'],border:'1px solid #e0c060',borderLeft:'3px solid #b8860b',padding:'10px 14px'}}>
       <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
@@ -62,8 +64,8 @@ export function ResourceChainCard({ chain, stage }) {
           </React.Fragment>
         ))}
       </div>
-      {chain.processingInstitutions?.length>0&&<div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch['#5A3A10']}}>
-        Needs: {chain.processingInstitutions.map((n) => institutionDisplayName(n) || n).join(', ')}
+      {needs.length>0&&<div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch['#5A3A10']}}>
+        Needs: {needs.map((n) => institutionDisplayName(n) || n).join(', ')}
       </div>}
       <DrawsOn deps={chain.dependsOn} mobile={mobile} />
     </div>
@@ -168,7 +170,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
 
           {/* Unexploited — most interesting for DMs */}
-          {unexploited.map((chain,i)=><ResourceChainCard key={i} chain={chain} stage="unexploited"/>)}
+          {unexploited.map((chain,i)=><ResourceChainCard key={i} chain={chain} stage="unexploited" settlement={r}/>)}
 
           {/* Partially exploited */}
           {partExploited.map((chain,i)=><ResourceChainCard key={i} chain={chain} stage="partial"/>)}

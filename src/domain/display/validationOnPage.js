@@ -39,7 +39,7 @@ import { compareCodepoint } from '../deterministicSort.js';
 import { importsAsPrinted } from './tradeListDisplay.js';
 import { chainModelsResource, chainWorksResource } from '../facts/chainWorking.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
-import { familyOfInstitution } from '../../data/institutionalCatalog.js';
+import { familyOfInstitution, institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { institutionLadderEvicts } from '../../data/institutionLadders.js';
 
 /** @typedef {{ chain: string|null, impact: string, severity: string }} GapLine */
@@ -203,14 +203,46 @@ function gapResourceKeys(s, chainKey) {
  */
 function houseOfKindHere(s, name) {
   const want = familyOfInstitution({ name });
+  const wantScales = scaleGroupsOf(name, want?.key);
   return liveInstitutions(s).some((inst) => {
     const have = str(inst?.name);
     if (!have) return false;
     if (have.toLowerCase() === name.toLowerCase()) return true;
     const family = familyOfInstitution(inst);
     if (want && family && want.key === family.key) return true;
+    if (wantScales.size && [...scaleGroupsOf(have, family?.key)].some((g) => wantScales.has(g))) return true;
     return institutionLadderEvicts(have, name) || institutionLadderEvicts(name, have);
   });
+}
+
+/** @type {Map<string, Set<string>> | null} */
+let SCALE_GROUPS = null;
+/**
+ * THE CATALOGUE'S SCALE GROUPS (W2-C-LEAVES-3, #452 with R1): an `exclusiveGroup` the catalogue names "…Scale" holds ONE
+ * trade at two sizes, of which a town keeps one ("tanneryScale": Tanners and Tanner (established)). A house of the
+ * group answers a chain's house of the same group by kind: a "Tanner (established)" is the town's tannery. Read from
+ * the catalogue's rows, the house's own home; built once.
+ * @param {...(string | null | undefined)} names a house's name and its family's key
+ * @returns {Set<string>}
+ */
+function scaleGroupsOf(...names) {
+  if (!SCALE_GROUPS) {
+    SCALE_GROUPS = new Map();
+    for (const tier of Object.values(/** @type {Record<string, Record<string, Record<string, { exclusiveGroup?: unknown }>>>} */ (institutionalCatalog))) {
+      for (const group of Object.values(tier)) {
+        for (const [rowName, row] of Object.entries(group)) {
+          const g = str(row?.exclusiveGroup);
+          if (!/Scale$/.test(g)) continue;
+          const key = rowName.toLowerCase();
+          if (!SCALE_GROUPS.has(key)) SCALE_GROUPS.set(key, new Set());
+          SCALE_GROUPS.get(key)?.add(g);
+        }
+      }
+    }
+  }
+  /** @type {Set<string>} */ const out = new Set();
+  for (const n of names) for (const g of SCALE_GROUPS.get(str(n).toLowerCase()) || []) out.add(g);
+  return out;
 }
 
 /**
@@ -251,6 +283,18 @@ function tradeFinisherHere(s, name) {
     const have = str(inst?.name).toLowerCase();
     return !!have && !have.startsWith('access to') && trades.some((w) => have.includes(w));
   });
+}
+
+/**
+ * THE HOUSES A CHAIN STILL NEEDS HERE (W2-C-LEAVES-3, #452, ruled with R1: "a need the roster's own house meets is not
+ * listed"). Of the houses a chain's list names, the ones the live roster holds neither by kind (`houseOfKindHere`) nor
+ * by a house of the same finishing trade (`tradeFinisherHere`): "Needs: Tannery, Leatherworkers' guild" is not printed
+ * beside a Tanner (established) and a Cobbler's guild. The Resources tab's "Needs:" line reads this.
+ * @param {PageRecord} s the settlement record @param {unknown} names the chain's houses (`processingInstitutions`)
+ * @returns {string[]} the named houses still needed, in the chain's order
+ */
+export function housesStillNeeded(s, names) {
+  return arr(names).map(str).filter((n) => n && !houseOfKindHere(s, n) && !tradeFinisherHere(s, n));
 }
 
 /** @typedef {(typeof RESOURCE_CHAINS)[keyof typeof RESOURCE_CHAINS]} ResourceChain */
