@@ -402,3 +402,135 @@ Each finding gives: what; where; how to reproduce; how bad; and what would cure 
   - 114 rite rows (F2).
 - **The "hall will not open" clause, in 4 births** (F3).
 - **No guard sentence was lost.** The charter hall's old lead became the purse line.
+
+## Appendix — the reviewer's probes, for the next reader
+
+**Read first:** §1 for the page, then F1 and F2. Every probe below writes nothing in the tree it reads.
+
+**The births** (the census dials):
+- calm: `cold-<size>-<i>`;
+- forced: `cold-<crisis>-<size>-<i>`.
+
+**The seed lists:**
+- **§1's forty:** listed in §1.
+- **The 1,288:** `cold-<thorp|hamlet|village|town|city>-0..239`, `cold-metropolis-0..39`, and `cold-<famine|under_siege>-<size>-0..3`.
+- **The 720 forced (F1):** `cold-<famine|under_siege|wartime>-<town|city|metropolis>-4..83`.
+
+**How to run them:**
+- **Run a probe** with `cd <tree> && TREE=<tree> node <probe> <seedfile>`.
+- **Render §1's pages** with the census's `render.census.jsx`, swapping its `cfgFor` for the one in `scan3.mjs` below, then run it as `census.sh` does.
+- **Measure the 660 and the golden** with the lane's harness (`docs/chair/2026-11-13/probes/UPKEEP-4/`) on fresh trees.
+
+### F1 — the gates of the three two-band towns (`gates.mjs`)
+```js
+const R=process.env.TREE+'/src';
+const { generateSettlementPipeline } = await import(R+'/generators/generateSettlementPipeline.js');
+const { birthConfig, loadGenerationLawPayloads } = await import(R+'/domain/density/densityCreateBoundary.js');
+const { DEFAULT_CONFIG } = await import(R+'/store/configSlice.js');
+const { getInstFlags } = await import(R+'/generators/priorityHelpers.js');
+await loadGenerationLawPayloads();
+const dials={ tradeRouteAccess:'random_trade', culture:'random_culture', monsterThreat:'random_threat', nearbyResourcesRandom:true, selectedStressesRandom:true, _randomizePriorities:true, magicExists:true, contentProfile:'grounded' };
+for(const seed of ['cold-famine-city-0','cold-famine-town-25','cold-famine-town-68']){
+  const m=seed.match(/^cold-(\w+)-(town|city)-(\d+)$/);
+  const s=generateSettlementPipeline(birthConfig({...DEFAULT_CONFIG,...dials,selectedStresses:[m[1]],selectedStressesRandom:false,settType:m[2]}),null,{seed,customContent:{}});
+  const sc=Object.fromEntries(Object.entries(s.defenseProfile.scores).filter(([k,v])=>typeof v!=='object').map(([k,v])=>[k,v]));
+  console.log(seed,s.economicState.prosperity,'econOut',Math.round(getInstFlags(s.config,s.institutions).economyOutput),s.defenseProfile.readiness.label,s.defenseProfile.readiness.score,JSON.stringify(s.defenseProfile.economicGates),JSON.stringify(sc));
+}
+```
+
+### The band and score scan, one line per birth (`scan3.mjs`)
+
+Diff base against tip by seed. Columns: seed, tier, prosperity, readiness score, label, military, monster, internal, economic, disaster, months.
+
+```js
+const R=process.env.TREE+'/src'; import fs from 'node:fs';
+const { generateSettlementPipeline } = await import(R+'/generators/generateSettlementPipeline.js');
+const { birthConfig, loadGenerationLawPayloads } = await import(R+'/domain/density/densityCreateBoundary.js');
+const { DEFAULT_CONFIG } = await import(R+'/store/configSlice.js');
+await loadGenerationLawPayloads();
+const dials={ tradeRouteAccess:'random_trade', culture:'random_culture', monsterThreat:'random_threat', nearbyResourcesRandom:true, selectedStressesRandom:true, _randomizePriorities:true, magicExists:true, contentProfile:'grounded' };
+function cfgFor(seed){
+  let m=seed.match(/^cold-(thorp|hamlet|village|town|city|metropolis)-(\d+)$/); if(m) return birthConfig({...DEFAULT_CONFIG,...dials,settType:m[1]});
+  m=seed.match(/^cold-(\w+)-(thorp|hamlet|village|town|city|metropolis)-(\d+)$/); if(m) return birthConfig({...DEFAULT_CONFIG,...dials,selectedStresses:[m[1]],selectedStressesRandom:false,settType:m[2]});
+}
+for(const seed of fs.readFileSync(process.argv[2],'utf8').trim().split('\n')){
+  const s=generateSettlementPipeline(cfgFor(seed),null,{seed,customContent:{}});
+  const sc=s.defenseProfile?.scores||{}; const g=k=>sc[k]?.score??sc[k];
+  console.log([seed,s.tier,s.economicState?.prosperity,s.defenseProfile?.readiness?.score,s.defenseProfile?.readiness?.label,g('military'),g('monster'),g('internal'),g('economic'),g('disaster'),s.economicState?.foodSecurity?.storageMonths].join('\t'));
+}
+```
+
+### The power, capture and people check, restated (d) (`cap.mjs`)
+```js
+const R=process.env.TREE+'/src'; import fs from 'node:fs';
+const { generateSettlementPipeline } = await import(R+'/generators/generateSettlementPipeline.js');
+const { birthConfig, loadGenerationLawPayloads } = await import(R+'/domain/density/densityCreateBoundary.js');
+const { DEFAULT_CONFIG } = await import(R+'/store/configSlice.js');
+await loadGenerationLawPayloads();
+const dials={ tradeRouteAccess:'random_trade', culture:'random_culture', monsterThreat:'random_threat', nearbyResourcesRandom:true, selectedStressesRandom:true, _randomizePriorities:true, magicExists:true, contentProfile:'grounded' };
+function cfgFor(seed){
+  let m=seed.match(/^cold-(thorp|hamlet|village|town|city|metropolis)-(\d+)$/); if(m) return birthConfig({...DEFAULT_CONFIG,...dials,settType:m[1]});
+  m=seed.match(/^cold-(\w+)-(thorp|hamlet|village|town|city|metropolis)-(\d+)$/); if(m) return birthConfig({...DEFAULT_CONFIG,...dials,selectedStresses:[m[1]],selectedStressesRandom:false,settType:m[2]});
+}
+for(const seed of fs.readFileSync(process.argv[2],'utf8').trim().split('\n')){
+  const s=generateSettlementPipeline(cfgFor(seed),null,{seed,customContent:{}});
+  const ps=s.powerStructure||{}; const pl=ps.publicLegitimacy||{};
+  const cap=ps.criminalCaptureState; const st=ps.stability;
+  console.log(JSON.stringify({seed,r:s.defenseProfile?.readiness?.label,rs:s.defenseProfile?.readiness?.score,cap:typeof cap==='string'?cap:cap?.state??JSON.stringify(cap),stab:typeof st==='string'?st:st?.label,gov:ps.governingName,pl:{s:pl.score,l:pl.label,c:!!pl.isContested,x:!!pl.isLegitimacyCrisis,f:!!pl.governanceFractured},fac:(ps.factions||[]).map(f=>f.faction).sort().join('|'),npc:(s.npcs||[]).map(n=>n.id+':'+n.name).sort().join('|').length,npcIds:(s.npcs||[]).map(n=>n.id+':'+n.name+':'+JSON.stringify(n.personality)).sort().join('|')}));
+}
+```
+
+### F2 — rite and namesake rows removed, over the harness summaries (`svc.py`)
+
+Run it in the directory that holds `base/` and `tip/`.
+
+```python
+import json,collections,re,sys
+def load(p): return {o['key']:o for o in map(json.loads,open(p))}
+B=load('base/660.summary.0.ndjson'); T=load('tip/660.summary.0.ndjson')
+RITE=re.compile(r'rite|ceremon|religious|burial|funeral|last rites|poor relief|blessing|worship|pilgrim|sacra|wedding|marriage|confession|sanctuary',re.I)
+rem=collections.Counter(); remcat=collections.Counter(); towns_rite=set(); namesake=[]
+for k,t in T.items():
+    b=B[k]
+    bc=collections.Counter(map(tuple,b['svcRows'])); tc=collections.Counter(map(tuple,t['svcRows']))
+    for row,n in bc.items():
+        d=n-tc.get(row,0)
+        if d>0:
+            cat,name,inst=row; remcat[cat]+=d
+            if RITE.search(name or ''): rem[name]+=d; towns_rite.add(k)
+            # namesake: removed service word appears in institution name
+            w=[x for x in re.findall(r'[a-z]{5,}',(name or '').lower())]
+            if any(x[:5] in (inst or '').lower() for x in w) or (re.search(r'burial|cemetery|grave',inst or '',re.I) and re.search(r'burial',name or '',re.I)):
+                namesake.append((k,t['prosperity'],inst,name))
+print('removed by category',dict(remcat))
+print('rite rows removed',sum(rem.values()),'in',len(towns_rite),'births'); print(rem.most_common(25))
+print('namesake losses',len(namesake))
+for x in namesake: print('  ',x)
+```
+
+### The page diff, per view, between two dump directories (`viewdiff.py`)
+```python
+import sys,os,re
+B,T=sys.argv[1],sys.argv[2]; views=sys.argv[3].split(',') if len(sys.argv)>3 else None
+def parse(p):
+    d={};cur=None
+    for l in open(p):
+        l=l.rstrip('\n')
+        m=re.match(r'^== (.*) ==',l)
+        if m: cur=m.group(1); d[cur]=[]; continue
+        d.setdefault(cur,[]).append(l)
+    return d
+for f in sorted(os.listdir(B)):
+    b=parse(os.path.join(B,f)); t=parse(os.path.join(T,f))
+    out=[]
+    for v in b.keys()|t.keys():
+        if views and not any(x in v for x in views): continue
+        bl,tl=b.get(v,[]),t.get(v,[])
+        bs,ts=set(bl),set(tl)
+        gone=[l for l in bl if l not in ts]; new=[l for l in tl if l not in bs]
+        if gone or new:
+            out.append(f'  -- {v}')
+            out+= ['    - '+l for l in gone]+['    + '+l for l in new]
+    print(f'## {f[:-4]}'+('' if out else ' (page unchanged in these views)'))
+    print('\n'.join(out))
+```
