@@ -223,7 +223,7 @@ export function deriveCriminalStructure(settlement) {
   // printed "Diffuse, no gang" beside a criminal power on the Power tab (2 of the census's 720). A criminal power
   // is a hierarchy, the pool's own reading of one; the ladder answers only where no criminal power stands.
   // (The ladder is a reader of the crime fact: tests/lint/factLayers.walker.test.js counts it, family crime.)
-  const key = signal.factions.length ? 'organized'
+  const key = rivalRingsHere(r) ? 'semi-organized' : signal.factions.length ? 'organized'
     : ladder ?? (signal.houses.length || listed ? 'semi-organized' : null);
   return key ? withRingVantage(CRIM_STRUCTURE_DATA[key], r) : null;
 }
@@ -704,3 +704,20 @@ function clergyHere(settlement) {
   return reading.hasChurch || reading.seniorCleric !== null
     || rulerKindOf(/** @type {Parameters<typeof rulerKindOf>[0]} */ (/** @type {unknown} */ (settlement))) === 'priest';
 }
+
+// ─── W2-C-LEAVES-3, round three: NO ONE RING WHERE RINGS RIVAL (at the end of the file, so no line above moves) ───
+/**
+ * WHETHER MORE THAN ONE CRIMINAL RING STANDS HERE (the cold list REVIEW-R2-STAGES #1172 and #1202, HIGH, #716, #750 and
+ * #813: "One criminal ring decides what crime is allowed here" beside a Thieves' Guild and The Black Circle on the Power
+ * tab, and the roster's "Multiple criminal factions", which the Institutions tab prints as rival gangs disputing their
+ * turf). The power roster is the home of who stands (`crimeSignal.js :: crimeSignalOf`'s seats): a criminal power that
+ * GOVERNS (`isGoverning`: a council bought outright) is the captured hall, not a rival ring. Two rings or more, or the
+ * roster's own "Multiple criminal factions", is no single controlling authority: the structure table's own
+ * "semi-organized" row ("lacks a single controlling authority. Several gangs may be competing."), never "one ring".
+ * @param {DefenseDisplaySettlement} settlement
+ * @returns {boolean}
+ */
+function rivalRingsHere(settlement) {
+  return rivalRingsOf(settlement?.powerStructure?.factions, settlement?.institutions);
+}
+import { rivalRingsOf } from '../corruption.js';
