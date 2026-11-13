@@ -76,11 +76,11 @@ describe('the chain\'s carrier (pattern 11: never the catalogue\'s resource wher
   });
 });
 
-describe('the imports as printed (pattern 6: one list, read by the pills and the gap reader)', () => {
-  test('the record\'s imports, then each terrain-critical import none of them names; the export wins', () => {
+describe('the imports as printed (pattern 6, re-ruled by REVIEW-W2A F1: what arrives and what is needed, kept apart)', () => {
+  test('arriving: the record\'s imports (the export wins); needed: each terrain-critical good no import names', () => {
     const s = { tier: 'town', economicState: { primaryImports: ['Iron', 'Salt'], primaryExports: ['Salt'] }, resourceAnalysis: { imports: { critical: ['iron', 'timber'] } } };
-    expect(importsAsPrinted(s)).toEqual(['Iron', 'timber']);
-    expect(importsAsPrinted({ economicState: { primaryImports: ['Grain'] }, resourceAnalysis: { imports: [] } })).toEqual(['Grain']);
-    expect(importsAsPrinted(null)).toEqual([]);
+    expect(importsAsPrinted(s)).toEqual({ arriving: ['Iron'], needed: ['timber'] });
+    expect(importsAsPrinted({ economicState: { primaryImports: ['Grain'] }, resourceAnalysis: { imports: [] } })).toEqual({ arriving: ['Grain'], needed: [] });
+    expect(importsAsPrinted(null)).toEqual({ arriving: [], needed: [] });
   });
 });

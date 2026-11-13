@@ -57,12 +57,13 @@
    "integration": 2,
    "banked": 0
   },
-  "P6": {
-   "label": "6 a gap naming what the imports bring",
+  "P6need": {
+   "label": "6 an import printed beside its own unmet need",
    "reader": "CROSS",
-   "master": 463,
-   "integration": 296,
-   "banked": 0
+   "master": null,
+   "integration": null,
+   "base": 642,
+   "banked": 642
   },
   "P7a": {
    "label": "7a two founders",
@@ -189,6 +190,7 @@
    "F4",
    "P13",
    "P14",
+   "P6need",
    "P8any",
    "P9"
   ],
@@ -197,22 +199,26 @@
    "P13",
    "P16three",
    "P17",
+   "P6need",
    "P8any"
   ],
   "r2r-hamlet-0": [
    "P16three",
    "P17",
+   "P6need",
    "P8any"
   ],
   "r2s-occupied-hamlet-0": [
    "P11",
    "P16three",
    "P17",
+   "P6need",
    "P8any",
    "P9"
   ],
   "r2r-village-0": [
    "P17",
+   "P6need",
    "P9"
   ],
   "r2s-indebted-village-0": [
@@ -220,17 +226,20 @@
    "NEW2",
    "P11",
    "P14",
-   "P17"
+   "P17",
+   "P6need"
   ],
   "r2r-town-0": [
    "P16powers",
    "P17",
-   "P18"
+   "P18",
+   "P6need"
   ],
   "r2s-infiltrated-town-0": [
    "P17",
    "P18",
-   "P4"
+   "P4",
+   "P6need"
   ],
   "r2r-city-0": [
    "P11",
@@ -239,6 +248,7 @@
    "P18",
    "P1b",
    "P4",
+   "P6need",
    "P7a"
   ],
   "r2s-succession_void-city-0": [
@@ -247,19 +257,22 @@
    "P16three",
    "P17",
    "P18",
-   "P1b"
+   "P1b",
+   "P6need"
   ],
   "r2r-metropolis-0": [
    "P16powers",
    "P17",
    "P18",
-   "P1b"
+   "P1b",
+   "P6need"
   ],
   "r2s-insurgency-metropolis-0": [
    "P16powers",
    "P17",
    "P18",
    "P1b",
+   "P6need",
    "P7a"
   ]
  },
@@ -281,6 +294,15 @@
    "atRetirement": 190,
    "reason": "it counted the words, not the explanation: a town whose temples or alchemists supply the magic it relies on has no arcane practitioner on its rolls and is no fault, and an envelope that reads magic common states no reliance. Retired by the chair's ruling of 2026-11-12; replaced by P3source.",
    "replacedBy": "P3source"
+  },
+  "P6": {
+   "label": "6 a gap naming what the imports bring",
+   "reader": "CROSS",
+   "master": 463,
+   "integration": 296,
+   "atRetirement": 296,
+   "reason": "it read the true half as the fault: every gap it counted carries the record's own gap kind `missing`, and the good the Imports line printed beside it came from the terrain's list of needs, not from trade (REVIEW-W2A F1: 29 of 30 read true). 296 at the base and 296 again here, where the gaps print once more; 0 at 96d698de7 only because that tip silenced them. Retired by the chair's ruling of 2026-11-13; replaced by P6need.",
+   "replacedBy": "P6need"
   }
  }
 }

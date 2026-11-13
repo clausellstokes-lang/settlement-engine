@@ -23,6 +23,8 @@ import { DOSSIER_STATE_PROSE_ECONOMY } from '../../data/dossierStateProse/econom
 import { NOT_A_GOOD } from '../../data/tradeListDeclarations.js';
 import { institutionDisplayName } from '../display/institutionDisplayName.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { importsAsPrinted } from '../display/tradeListDisplay.js';
+import { resourceDisplayName } from '../display/resourceDisplayName.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {Readonly<Record<string, ReadonlyArray<string>>>} Views */
@@ -47,7 +49,7 @@ export const PAGE_CENSUS_ROWS = Object.freeze({
   P4: ['4 "three powers stand almost level" beside a leader far ahead', 'SECOND'],
   P5a: ['5a the hall "free of the criminals" beside criminal money reaching the officials', 'SECOND'],
   P5b: ['5b "Diffuse, no gang" beside a criminal power', 'SECOND'],
-  P6: ['6 a gap naming what the imports bring', 'CROSS'],
+  P6need: ['6 an import printed beside its own unmet need', 'CROSS'],
   P7a: ['7a two founders', 'GLANCE'],
   P7b: ['7b a harbour origin where no wharf stands', 'CROSS'],
   P8any: ['8 no church, and worship in the economy', 'CROSS'],
@@ -79,6 +81,9 @@ export const RETIRED_PAGE_CENSUS_ROWS = Object.freeze({
   P3any: ['3 magic relied upon or common, and no practitioner on the rolls',
     'it counted the words, not the explanation: a town whose temples or alchemists supply the magic it relies on has no arcane practitioner on its rolls and is no fault, and an envelope that reads magic common states no reliance (the chair\'s ruling of 2026-11-12)',
     'P3source'],
+  P6: ['6 a gap naming what the imports bring',
+    'it read the true half as the fault: every gap it counted carries the record\'s own gap kind `missing`, and the good the Imports line printed beside it came from the terrain\'s list of needs, not from trade (REVIEW-W2A F1, 29 of 30 read true; the chair\'s ruling of 2026-11-13)',
+    'P6need'],
 });
 
 // ── the tree's own pools, as the counter reads them ──────────────────────────────────────────
@@ -200,14 +205,14 @@ export function pageCensusFindings(settlement, views) {
     const gangDefense = D.find((l) => /^Underworld: /.test(l));
     return diffuse && (gangPower || gangDefense) ? [diffuse, `Power: ${gangPower || ''} / Defense: ${gangDefense || ''}`] : null;
   });
-  run('P6', () => {
-    const at = E.indexOf('Imports'); const imports = (at >= 0 ? E[at + 1] || '' : '').toLowerCase();
-    for (const l of V('Systems/Resources')) {
-      const m = l.match(/^No (.+?) (?:reaches|reach) the (.+)\.$/); const m2 = l.match(/exists but lacks access to (.+?)\.?$/);
-      const named = m ? m[1] : m2 ? m2[1] : null;
-      if (named && named.split(/, | or | and /).some((n) => imports.includes(n.toLowerCase()))) return [l, `Imports: ${E[at + 1]}`];
-    }
-    return null;
+  run('P6need', () => {
+    // the Imports line prints a good the record NEEDS and no trade brings (the terrain's need list, never an
+    // arrival: `importsAsPrinted(record).needed`), by the label the pills print
+    const at = E.indexOf('Imports'); const line = at >= 0 ? E[at + 1] || '' : '';
+    if (!line) return null;
+    const { needed } = importsAsPrinted(/** @type {Parameters<typeof importsAsPrinted>[0]} */ (rec));
+    const hit = needed.find((n) => line.toLowerCase().includes(resourceDisplayName(n).toLowerCase()));
+    return hit ? [`Imports: ${line}`, `${resourceDisplayName(hit)}: needed, and no trade brings it`] : null;
   });
   const origin = (H.find((l) => /^Origin:/.test(l)) || '').replace('Origin:', '');
   run('P7a', () => {
