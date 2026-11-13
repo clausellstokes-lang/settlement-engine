@@ -24,7 +24,7 @@
  */
 
 import { textOf } from '../domain/facts/textOf.js';
-import { defenseWordsFindings } from '../domain/coherence/defenseWordsFindings.js'; import { factsOf } from '../domain/facts/factsOf.js'; // F11, CENSUS-1c: one line
+import { defenseWordsFindings } from '../domain/coherence/defenseWordsFindings.js'; import { factsOf } from '../domain/facts/factsOf.js'; import { declarationAdmits, declarationOf } from '../domain/facts/factVocabulary.js'; // F11, CENSUS-1c, R2-CODE-A P1: one line
 import {
   clearActiveRng,
   getActiveRng,
@@ -843,8 +843,8 @@ export const generatePressureSentence = settlement => {
     if (Array.isArray(templates) && templates.length) {
       // F1: a line that names walls, a garrison or soldiers the record lacks is not drawn.
       // R-C (CENSUS-2d): a declared row gives back its text; the pick is over the same arrays.
-      const licensed = templates.filter((t) => typeof textOf(t) !== 'string' || defenseWordsFindings(settlement, textOf(t)).length === 0);
-      const template = textOf(pickRandom2(licensed.length ? licensed : templates));
+      const licensed = templates.filter((t) => typeof textOf(t) !== 'string' || defenseWordsFindings(settlement, textOf(t)).length === 0), pool = licensed.length ? licensed : templates, drawn = pickRandom2(pool), facts = factsOf(settlement), admitted = (/** @type {unknown} */ t) => declarationAdmits(declarationOf(t), /** @type {any} */ (facts)).admitted, at = pool.indexOf(drawn);
+      const template = textOf(admitted(drawn) ? drawn : ([...pool.slice(at + 1), ...pool.slice(0, at)].find(admitted) ?? drawn)); // R2-CODE-A P1 (the chair's ruling (a)): a row's own `needs` are honoured after the one pick; a refused row resolves draw-free to the next admitted one
       return typeof template === 'function' ? template(detail) : template;
     }
   }
