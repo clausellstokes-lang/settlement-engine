@@ -32,6 +32,18 @@
  *       written from marked sources on born towns, in both shapes, and must not be sent.
  * The second arm proves the guard is live: a second home this test plants itself, at a path no rule names, is
  * found.
+ *
+ * THE WIDER EYE (COHERENCE-VEIL-8; REVIEW-VEIL-6's twelfth: the names of houses hidden whole were still sent
+ * LOWER-CASED in `economicState.compound.inst.names[]` and `economicState.safetyProfile.compound.inst.names[]`, and as
+ * `institution.<snake>` in the trace's `targetId`, where every earlier search looked for the card's own spelling only).
+ * A marker is letters and digits only (`Sh6K<n>Q`), so a case fold, a slug or a join keeps it; every string of every
+ * response, and every key, is searched in its FOLDED form (lower case, every run of characters that are not a letter
+ * or a digit made one `_`). The name of a house hidden whole is searched in its own spelling and folded on `_`
+ * boundaries (a case fold, a slug, a snake or kebab key, an id such as `institution.<snake>`); an open house whose
+ * name holds the hidden one is blanked first (it is not the hidden name). (A JOINED form, every separator removed,
+ * meets the model's own camel-case vocabulary, `hasBlackMarket`, in every town; the lane's probe lists it,
+ * docs/chair/2026-11-13/veil-probe-8/.) Six reads: the gallery read, the party link, the map page, the map's party
+ * link, the town's import and the map's import.
  */
 import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
@@ -45,7 +57,7 @@ const TOWN_TIMEOUT_MS = 1_800_000;
 const H = vi.hoisted(() => ({ db: null, uid: '' }));
 vi.mock('../../src/lib/supabase.js', () => {
   const tableFns = new Set(['get_gallery_dossier', 'import_gallery_dossier']);
-  const served = new Set(['get_gallery_dossier', 'get_unlisted_dossier', 'import_gallery_dossier', 'get_gallery_map']);
+  const served = new Set(['get_gallery_dossier', 'get_unlisted_dossier', 'import_gallery_dossier', 'get_gallery_map', 'get_unlisted_map', 'import_gallery_map']);
   const supabase = {
     rpc: async (name, args = {}) => {
       if (!served.has(name)) return { data: name.startsWith('list_') ? [] : null, error: null };
@@ -113,8 +125,13 @@ async function buildDb() {
 }
 
 const isRec = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
-const TOKEN_RE = /SH6~[A-Za-z0-9_.-]+~[0-9]+~[A-Za-z0-9_.-]+~Z/g;
-const marked = (v) => JSON.stringify(v ?? null).includes('SH6~');
+// THE MARKER: letters and digits only, so a case fold, a slug or a join keeps it (COHERENCE-VEIL-8)
+const MARK = (n) => `Sh6K${n}Q`;
+const TOKEN_RE = /sh6k(\d+)q/g; // read on the FOLDED string
+const marked = (v) => /sh6k\d+q/i.test(JSON.stringify(v ?? null));
+const fold = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '_');
+const foldTrim = (s) => fold(s).replace(/^_+|_+$/g, '');
+const ORIGIN = new Map(); // marker number -> 'kind.key'
 const at = (root, path) => path.reduce((c, seg) => (isRec(c) ? c[seg] : undefined), root);
 const BROWSER = Object.freeze({ tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat',
   nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' });
@@ -157,8 +174,8 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
 
   /** The marker planter: every string an eye or a grouping governs, at the step it first exists after. */
   function planter() {
-    let seq = 0;
-    const tok = (kind, key) => { seq += 1; return `SH6~${kind}~${seq}~${key}~Z`; };
+    let seq = 1000; // 1, 2 and 901..904 are the hand-planted markers below
+    const tok = (kind, key) => { seq += 1; ORIGIN.set(String(seq), `${kind}.${key}`); return MARK(seq); };
     const plant = (holder, key, kind) => {
       const v = holder[key];
       if (v == null || typeof v === 'boolean' || typeof v === 'number' || marked(v)) return;
@@ -238,15 +255,17 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
             gallery_member_overrides, gallery_share_dm, gallery_importable)
           values ($1, $2, $3, $4, $5, true, $6, now(), $7, 'unlisted', $8, $9, true)`,
         [id, OWNER, String(record.name || 'T'), String(record.tier || 'town'), JSON.stringify(record), `sh${n}`, `shl${n}`, JSON.stringify(ov), dm]);
-        await db.query(`insert into public.saved_maps (id, user_id, name, map_data, is_public, public_slug, share_kind, gallery_share_campaign)
-          values (gen_random_uuid(), $1, 'm', $2, true, $3, 'map_with_campaign', true)`, [OWNER, JSON.stringify({ campaign: { settlementIds: [id] } }), `shm${n}`]);
+        await db.query(`insert into public.saved_maps (id, user_id, name, map_data, is_public, public_slug, unlisted_slug, visibility, share_kind, gallery_share_campaign, gallery_importable)
+          values (gen_random_uuid(), $1, 'm', $2, true, $3, $4, 'unlisted', 'map_with_campaign', true, true)`, [OWNER, JSON.stringify({ campaign: { settlementIds: [id] } }), `shm${n}`, `shn${n}`]);
         await db.exec(`set test.uid = '';`);
         const g = (await db.query('select * from public.get_gallery_dossier($1)', [`sh${n}`])).rows[0];
         const resp = { gallery: g,
           link: (await db.query('select public.get_unlisted_dossier($1) x', [`shl${n}`])).rows[0]?.x,
-          map: (await db.query('select public.get_gallery_map($1) x', [`shm${n}`])).rows[0]?.x };
+          map: (await db.query('select public.get_gallery_map($1) x', [`shm${n}`])).rows[0]?.x,
+          maplink: (await db.query('select public.get_unlisted_map($1) x', [`shn${n}`])).rows[0]?.x };
         await db.exec(`set test.uid = '${READER}';`);
         resp.import = (await db.query('select * from public.import_gallery_dossier($1)', [`sh${n}`])).rows[0];
+        resp.mapimport = (await db.query('select public.import_gallery_map($1) x', [`shm${n}`])).rows[0]?.x;
         await db.exec(`set test.uid = '';`);
         // the names of the houses this share hid whole (the gallery response no longer lists them)
         const listed = new Set((g?.data?.institutions || []).filter(isRec).map((i) => i.name));
@@ -260,15 +279,23 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
             if (typeof x === 'string' && x.length >= 6 && !gone.includes(x) && goneCards.some((h) => matchesProcessor(h, x)) && !openCards.some((h) => matchesProcessor(h, x))) gone.push(x);
           }
         }
+        // each hidden name in its own spelling and folded; an open house whose name holds it is blanked first
+        const openFold = openCards.map((i) => foldTrim(i.name)).filter(Boolean);
+        const names = gone.map((nm) => ({ nm, f: foldTrim(nm), re: new RegExp(`(^|_)${foldTrim(nm)}(_|$)`) }));
         for (const [read, body] of Object.entries(resp)) {
           reads += 1;
           if (!body) { sent.push(`${label} dm=${dm} ${mode} ${read}: NO ROW`); continue; }
           const walk = (v, p) => {
             if (Array.isArray(v)) v.forEach((x) => walk(x, `${p}[]`));
-            else if (isRec(v)) for (const [k, x] of Object.entries(v)) walk(x, p ? `${p}.${k}` : k);
+            else if (isRec(v)) for (const [k, x] of Object.entries(v)) { walk(k, `${p ? `${p}.` : ''}<key>`); walk(x, p ? `${p}.${k}` : k); }
             else if (typeof v === 'string') {
-              for (const t of v.match(TOKEN_RE) || []) sent.push(`${label} dm=${dm} ${mode} ${read}: ${t.split('~').slice(1, 2)[0]}.${t.split('~')[3]} at ${p}`);
-              for (const nm of gone) if (v.includes(nm)) sent.push(`${label} dm=${dm} ${mode} ${read}: the house "${nm}", hidden whole, or its name in a chain, at ${p}`);
+              const fv = fold(v);
+              for (const t of fv.matchAll(TOKEN_RE)) sent.push(`${label} dm=${dm} ${mode} ${read}: ${ORIGIN.get(t[1]) || '?'} (${v.includes(MARK(t[1])) ? 'its own spelling' : 'folded'}) at ${p}`);
+              for (const h of names) {
+                let how = v.includes(h.nm) ? 'its own spelling' : null;
+                if (!how) { let fb = fv; for (const o of openFold) if (o !== h.f && o.includes(h.f)) fb = fb.split(o).join('#'); if (h.re.test(fb)) how = 'folded, slugged or an id'; }
+                if (how) sent.push(`${label} dm=${dm} ${mode} ${read}: the house "${h.nm}", hidden whole, or its name in a chain (${how}), at ${p}`);
+              }
             }
           };
           walk(body, '');
@@ -290,8 +317,9 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
       if (onStepExtra) onStepExtra(name, ctx);
     } });
     plantAll(born);
-    born.decrees = [{ id: 'd1', text: 'SH6~grouping~1~decrees~Z' }];
-    born.dmLayer = { notes: 'SH6~grouping~2~dmLayer~Z' };
+    ORIGIN.set('1', 'grouping.decrees'); ORIGIN.set('2', 'grouping.dmLayer');
+    born.decrees = [{ id: 'd1', text: `A decree ${MARK(1)}` }];
+    born.dmLayer = { notes: `A note ${MARK(2)}` };
     return born;
   };
 
@@ -300,14 +328,14 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
     const sent = []; let reads = 0; let pages = 0; let markers = 0;
     for (const t of TOWNS) {
       const born = birth(t);
-      markers += (JSON.stringify(born).match(TOKEN_RE) || []).length;
+      markers += (fold(JSON.stringify(born)).match(TOKEN_RE) || []).length;
       for (const [shape, record] of Object.entries(shapes(born))) {
         const r = await sharesOf(record, `${t.seed} ${shape}`);
         sent.push(...r.sent); reads += r.reads; pages += r.pages;
       }
     }
     expect(markers).toBeGreaterThan(1000);
-    expect(reads).toBe(TOWNS.length * 2 * 4 * 4);
+    expect(reads).toBe(TOWNS.length * 2 * 4 * 6);
     expect(pages).toBe(TOWNS.length * 2 * 4);
     expect([...new Set(sent)]).toEqual([]);
   }, TOWN_TIMEOUT_MS);
@@ -316,12 +344,13 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
     // after the birth's last step, a hidden house's description is copied to a key nothing withholds
     const t = TOWNS[0];
     const born = birth(t);
-    const house = (born.institutions || []).find((i) => isRec(i) && typeof i.desc === 'string' && i.desc.includes('SH6~'));
+    const house = (born.institutions || []).find((i) => isRec(i) && typeof i.desc === 'string' && marked(i.desc));
     expect(house).toBeTruthy();
     born.economicState.secondHomePlantedByTheGuard = house.desc;
     const r = await sharesOf(shapes(born).new, `${t.seed} planted`);
     const found = r.sent.filter((x) => x.includes('economicState.secondHomePlantedByTheGuard'));
-    expect(found.length).toBe(4 * 4);
+    // five of the six reads carry the town (the map's party link, get_unlisted_map, carries no member town at all)
+    expect(found.length).toBe(4 * 5);
   }, TOWN_TIMEOUT_MS);
 
   it('THE SAME-STEP CLASS (the limit the marker cannot reach): the composed homes of a tie and a person\'s impression, written from marked sources, are not sent', async () => {
@@ -331,15 +360,16 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
       const ties = (born.relationships || []).filter(isRec);
       const tie = ties[0];
       expect(tie).toBeTruthy();
-      tie.description = `${tie.description || 'A tie.'} — the detail SH6~relationship~901~description~Z`;
-      tie.tension = `${tie.tension || 'Strain.'} SH6~relationship~902~tension~Z`;
+      ORIGIN.set('901', 'relationship.description'); ORIGIN.set('902', 'relationship.tension'); ORIGIN.set('903', 'relationship.tension'); ORIGIN.set('904', 'npc.physical');
+      tie.description = `${tie.description || 'A tie.'} — the detail ${MARK(901)}`;
+      tie.tension = `${tie.tension || 'Strain.'} ${MARK(902)}`;
       born.prominentRelationship = { npc1: tie.npc1Name, npc2: tie.npc2Name, type: tie.typeName,
         phrasing: `${tie.npc1Name} and ${tie.npc2Name} are closely tied. ${tie.tension}`, full: tie.description, tension: tie.tension };
       const other = ties[ties.length - 1];
-      other.tension = `${other.tension || 'Strain.'} SH6~relationship~903~tension~Z`;
+      other.tension = `${other.tension || 'Strain.'} ${MARK(903)}`;
       born.pressureSentence = `Word is that ${other.tension}`;
       const person = (born.npcs || []).find((p) => isRec(p) && isRec(p.physical) && isRec(p.presentation));
-      person.physical.clothes = 'Plain clothes and a habit of watching the door SH6~npc~904~physical~Z.';
+      person.physical.clothes = `Plain clothes and a habit of watching the door ${MARK(904)}.`;
       person.presentation.impression = `Guarded. ${person.physical.clothes}`;
       for (const [shape, record] of Object.entries(shapes(born))) {
         const r = await sharesOf(record, `${t.seed} ${shape} same-step`);
