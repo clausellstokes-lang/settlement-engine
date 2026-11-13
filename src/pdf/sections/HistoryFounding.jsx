@@ -26,6 +26,7 @@ import { StateProse } from '../primitives/StateProse.jsx';
 // THE STILL-RELEVANT MARK, read from the screen's own derivation (owner addendum X-14b): an
 // event carries an open thread when it has a plot hook or a current tension names it.
 import { eventHasOpenThread } from '../../domain/display/historyOpenThreads.js';
+import { houseLabelsInText } from '../../domain/display/institutionDisplayName.js';
 
 const FOUNDING_FIELDS = [
   { key: 'origin',           label: 'Origin' },
@@ -43,7 +44,12 @@ export function HistoryFounding({ settlement, narrativeMode, vm, stateProse }) {
   const h = vm.history;
   // The view-model slice renames the fields (title, hooks; tensions' hooks), so it is handed to
   // the shared derivation in the record's own spelling: one function marks screen and print.
-  const tensions = h.tensions || [];
+  // ROUND THREE, ruling (a): a tension's stored sentence that names a house (the stockpile line, copied from
+  // the viability record at birth) is read with each held house's label; the record keeps its bytes.
+  const housesHeld = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  const tensions = (h.tensions || []).map((t) => (t && typeof t === 'object' && typeof t.description === 'string'
+    ? { ...t, description: houseLabelsInText(t.description, housesHeld) }
+    : (typeof t === 'string' ? houseLabelsInText(t, housesHeld) : t)));
   const threadHistory = { currentTensions: tensions.map(t => ({ description: t?.description, plotHooks: t?.hooks || [] })) };
   const events = [...(h.events || [])]
     .sort((a, b) => (a?.yearsAgo ?? 0) - (b?.yearsAgo ?? 0))

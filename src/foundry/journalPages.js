@@ -36,7 +36,7 @@ import { composeCrisisPage, CRISIS_PAGE_COPY } from '../domain/crisis/crisisPage
 // the crisis page's two print rules are the PDF's, from one module.
 import { stakeLines, unprintedFacts } from '../pdf/lib/crisisPrint.js';
 // ROUND THREE, ruling (a): every house this journal prints is printed by its label, the one display leaf.
-import { institutionHouseLabel } from '../domain/display/institutionDisplayName.js';
+import { houseLabelsInText, institutionHouseLabel } from '../domain/display/institutionDisplayName.js';
 import { resourceDisplayName } from '../domain/display/resourceDisplayName.js';
 import { displayTradeList, revenuesOffTheLists } from '../domain/display/tradeListDisplay.js';
 import { foodwaysLineOf } from '../domain/foodways.js';
@@ -254,7 +254,7 @@ function powerPage(vm) {
       `- **${esc(f.name)}**${f.isGoverning ? ' *(governing)*' : ''}${f.description ? `: ${esc(f.description)}` : ''}`)) : null,
     p.tensions.length ? md('', '## Tensions', p.tensions.map(tn =>
       // The tension's key in words ("Resource scarcity"), no severity range ("minor / major").
-      `- **${esc(tn.label ? cap(humanize(tn.label)) : 'Tension')}**${tn.description ? `: ${esc(tn.description)}` : ''}`)) : null,
+      `- **${esc(tn.label ? cap(humanize(tn.label)) : 'Tension')}**${tn.description ? `: ${esc(houseLabelsInText(tn.description, vm.raw?.institutions))}` : ''}`)) : null,
     p.conflicts.length ? md('', '## Conflicts', p.conflicts.map(c =>
       `- **${esc((c.parties || []).join(' vs '))}**${c.intensity ? ` (${esc(c.intensity)})` : ''}${c.issue ? `: ${esc(c.issue)}` : ''}${c.stakes ? ` Stakes: ${esc(c.stakes)}` : ''}`)) : null,
   );
@@ -397,7 +397,7 @@ function viabilityPage(vm) {
     // The summary without its opening verdict token: the Verdict row above is the label (W7 HOOKS).
     v.summary ? md('', esc(stripViabilityToken(v.summary))) : null,
     (v.issues || []).length ? md('', '## Issues', v.issues.map(i =>
-      `- **${esc(i.title || 'Issue')}**${i.severity ? ` (${esc(i.severity)})` : ''}${i.description ? `: ${esc(i.description)}` : ''}`)) : null,
+      `- **${esc(i.title || 'Issue')}**${i.severity ? ` (${esc(i.severity)})` : ''}${i.description ? `: ${esc(houseLabelsInText(i.description, vm.raw?.institutions))}` : ''}`)) : null,
   );
 }
 
