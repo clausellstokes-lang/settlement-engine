@@ -369,3 +369,26 @@ export function honorificOfTitle(title, gender, seed, place = {}) {
   const bare = t.replace(/^the\s+/i, '');
   return bare.charAt(0).toUpperCase() + bare.slice(1);
 }
+
+/**
+ * THE STYLED TITLE (COHERENCE-POWERS-8, the chair's R2 from REVIEW-POWERS-FU F2): one home for the title a person is called
+ * by in words ("the lord", "the lady"), read by every row that names a person by role. A title whose registry form is
+ * gendered ({ male, female }) and whose last word is the masculine form's last word takes the feminine's for a woman:
+ * "the lord" → "the lady", "the abbot" → "the abbess", "the high priest" → "the high priestess" — the word her card's
+ * honorific already gives her. Any other title, every man's, and a value that is no title (missing, not a string) is
+ * returned as it is, so a row keeps exactly what it copied before. Pure, draw-free.
+ * @template T @param {T} title @param {unknown} gender @returns {T | string}
+ */
+export function styledTitleOf(title, gender) {
+  if (gender !== 'female' || typeof title !== 'string' || !title) return title;
+  const t = title;
+  const pool = FACE_HONORIFICS[t.trim()];
+  const form = (pool || []).find((h) => typeof h !== 'string');
+  if (!form || typeof form === 'string') return t;
+  const male = form.male.split(' ').at(-1) || ''; const female = form.female.split(' ').at(-1) || '';
+  const words = t.split(' ');
+  const last = words.at(-1) || '';
+  if (!male || male.toLowerCase() === female.toLowerCase() || last.toLowerCase() !== male.toLowerCase()) return t;
+  words[words.length - 1] = female.toLowerCase();
+  return words.join(' ');
+}
