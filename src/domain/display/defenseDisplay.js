@@ -418,7 +418,7 @@ export function deriveSupportingCapabilities(settlement) {
     // 2026-11-03: "Do add storehouse months the economy tab."). It was the granary read; stored
     // food is printed once, in months, on the Economy tab, and no Defense surface prints it.
   ];
-  if (f.hasNavy || f.hasPort) {
+  if ((f.hasNavy || f.hasPort) && navalRowStandsOn(r)) { // W2-C-LEAVES-SIDE item 2: the sea route (below)
     // experience-product-fit-5: the STANDING naval reality, not just the static
     // institution boolean — when a hostile fleet blockades the port RIGHT NOW,
     // the note reflects it (the live `blockaded` flag is written each pulse and
@@ -766,4 +766,22 @@ function ringNoteUnderStreetFighting(row, settlement) {
   if (typeof sp?.safetyLabel !== 'string' || !CRISIS_IN_LABEL.test(sp.safetyLabel)) return row;
   const lines = [sp?.safetyDesc, ...(Array.isArray(sp?.crimeTypes) ? sp.crimeTypes : []).map((c) => /** @type {{ desc?: unknown } | null} */ (c)?.desc)];
   return lines.some((l) => typeof l === 'string' && STREETS_FOUGHT_OVER.test(l)) ? Object.freeze({ ...row, note: '' }) : row;
+}
+
+// ─── W2-C-LEAVES-SIDE item 2: THE NAVAL ROW STANDS ON THE SEA (at the end of the file) ───
+import { tradeRouteOf } from '../facts/terrain.js';
+
+/**
+ * WHETHER THE NAVAL DEFENSE ROW HAS A SEA TO SPEAK OF (W2-C-LEAVES-SIDE, 2026-11-13; the cut's #961, "Port facility but no
+ * naval force. Sea approaches are accessible to any vessel." in a river town in a forest). The chair's ruling (record 387,
+ * the port's two homes): the trade route is the home of "this is a port" and of which water it stands on, so the row's
+ * lines (every one of them speaks of the sea approaches) print only where the route is the sea (`tradeRouteOf` 'port').
+ * A river town's docks get no river twin: none was read true (silence, as ruled). A live blockade (the pulse's own
+ * `stockpile.blockaded`, a fleet the record names) keeps the row on any route. Measured on the census's 720 at
+ * 408c2e30c: 121 rows, 48 on the sea route stand; 73 out (river 56, road 11, isolated 4, crossroads 2); none blockaded.
+ * @param {DefenseDisplaySettlement} settlement
+ * @returns {boolean}
+ */
+function navalRowStandsOn(settlement) {
+  return tradeRouteOf(settlement) === 'port' || settlement?.economicState?.foodSecurity?.stockpile?.blockaded === true;
 }
