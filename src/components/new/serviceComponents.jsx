@@ -105,12 +105,18 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
         {(()=>{
           const r=serviceImpactReason(svc, { impaired, degraded, depReasons });
           if (!r) return null;
+          // ROUND THREE (the chair's ruling; the cut's #163 #427 #497 #891, HIGH): the need and the impact sentence
+          // after it are TWO things. They were two inline siblings with a margin between them and no character, so
+          // the page's own text read "Needs TimberSupply route severed." wherever it is copied, exported or read
+          // aloud. They are two elements now, and the need closes with a full stop and a real space before the
+          // sentence that follows, so no surface prints them run together. No word changes.
+          const sentence = r.impact && !impactShown ? truncateAtWord(r.impact, 70) : '';
           return <p style={{fontSize:proseFontSize(FS.xxs,mobile),color:isImp?'#8b1a1a':'#8a4010',margin:'3px 0 0',lineHeight:1.3}}>
             {/* The dependency's `resource` is a catalogue KEY on thirteen of this tab's rows
                 (`oasis_water`, `camel_herds`, `glass_sand`); `depReasons` is keyed by the raw
                 name above and stays that way — only the printed word goes through the seam. */}
-             Needs <strong>{resourceDisplayName(r.resource)}</strong>
-            {r.impact&&!impactShown&&<span style={{fontStyle:'italic',marginLeft:4}}>{truncateAtWord(r.impact, 70)}</span>}
+            <span data-testid="service-need">Needs <strong>{resourceDisplayName(r.resource)}</strong>{sentence ? '.' : ''}</span>
+            {sentence&&<>{' '}<span data-testid="service-need-impact" style={{fontStyle:'italic'}}>{sentence}</span></>}
           </p>;
         })()}
       </div>

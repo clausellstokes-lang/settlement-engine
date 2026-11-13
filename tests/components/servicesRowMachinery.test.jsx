@@ -58,6 +58,26 @@ describe('a service row prints facts, never the machinery', () => {
     }
   });
 
+  // ROUND THREE (the chair's ruling; the cut's #163 #427 #497 #891, HIGH): the need and the sentence after it are two
+  // things, and the page's own text — what is copied, exported or read aloud — keeps them apart.
+  test('the need and its impact sentence print apart in the page\'s own text, words unchanged', () => {
+    const svc = { name: 'Lumber supply', institution: 'Sawmill' };
+    const { container } = render(<ServiceItem svc={svc} impaired={new Set(['Lumber supply'])}
+      depReasons={new Map([['Lumber supply', { resource: 'Timber', impact: 'Supply route severed. Operating at minimal capacity or shut down.', inst: 'Sawmill' }]])} />);
+    const need = (container.textContent || '').replace(/\s+/g, ' ');
+    expect(need).toContain('Needs Timber. Supply route severed. Operating at minimal capacity or shut down.');
+    // anchored: the same text holds the need and its sentence apart, asserted present just above
+    expect(need).not.toContain('TimberSupply');
+  });
+
+  test('a need with no impact sentence after it prints as it did', () => {
+    const svc = { name: 'Lumber supply', institution: 'Sawmill' };
+    const { container } = render(<ServiceItem svc={svc} impaired={new Set(['Lumber supply'])} impactShown
+      depReasons={new Map([['Lumber supply', { resource: 'Timber', impact: 'Supply route severed.', inst: 'Sawmill' }]])} />);
+    const line = [...container.querySelectorAll('p')].map((p) => (p.textContent || '').replace(/\s+/g, ' ').trim()).find((t) => t.startsWith('Needs '));
+    expect(line).toBe('Needs Timber');
+  });
+
   test('a row whose provider is a house still names the house', () => {
     const { container } = render(<ServiceItem svc={{ name: 'Fresh bread', institution: 'Bakers (5-15)' }} />);
     expect(container.textContent).toContain('Bakers');
@@ -90,6 +110,13 @@ describe('the Services tab of generated towns', () => {
     expect(TABS.reduce((n, t) => n + t.sentinelRows, 0), 'no generated row carried a provenance tag').toBeGreaterThan(0);
     const offenders = TABS.flatMap(({ seed, lines }) => lines
       .filter((l) => /\d-order chain|· covers /.test(l) || SENTINEL_LINE.test(l)).map((l) => `${seed}: ${l}`));
+    expect([...new Set(offenders)], offenders.slice(0, 20).join('\n')).toEqual([]);
+  });
+
+  test('ROUND THREE: no need line runs into the sentence after it ("Needs TimberSupply route severed.")', () => {
+    const needs = TABS.flatMap(({ seed, lines }) => lines.filter((l) => l.startsWith('Needs ')).map((l) => ({ seed, l })));
+    expect(needs.filter(({ l }) => /\. [A-Z]/.test(l)).length, 'no generated need line carried its sentence').toBeGreaterThan(0);
+    const offenders = needs.filter(({ l }) => /^Needs [^.]*?[a-z)][A-Z]/.test(l)).map(({ seed, l }) => `${seed}: ${l}`);
     expect([...new Set(offenders)], offenders.slice(0, 20).join('\n')).toEqual([]);
   });
 });
