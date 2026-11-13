@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "742ff4e4318317f9fed776439f53bed43341b3a2",
+ "frozenAtSha": "42028f01d32cdd00760b1f3205e55b653025dcc7",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "2df7f38658d5d4281b46d2c23a0fb1009c686a6e619c9a4fe025eccc7f94235e",
  "detectorDigest": "14605c3fe30040fdfe646114e930a9bf8f85969011a37f72142821f1015f18d4",
- "verdictDigest": "577f183c4c27bd17ee1140771b75d29603a89f369c47ca360552cb69dbad708b",
+ "verdictDigest": "59386f70ffef9b677d186da8e9e59bd74bf0b6b47cdeab57a8915057e39d4775",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -92,14 +92,14 @@
  },
  "scanStats": {
   "files": 1779,
-  "sites": 42601,
-  "propRead": 40351,
+  "sites": 42652,
+  "propRead": 40402,
   "elemRead": 0,
   "destructure": 2232,
   "inOp": 18,
-  "rGrades": 6785,
-  "nGrades": 1773900,
-  "resolvedReceivers": 7697
+  "rGrades": 6798,
+  "nGrades": 1776958,
+  "resolvedReceivers": 7713
  },
  "registerDigest": "da8c042fcdd188d4324d0f6037bff9c68a8b9a6a2bffbc5a0ca6c804210b5924",
  "pendingSurfaceCeiling": 0,
@@ -8334,7 +8334,7 @@
   "resourceCondition on activeChains": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "resourceDepleted on activeChains": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "resourceIcon on activeChains": "web-display=N web-transitive=N",
-  "resourceInputAvailable on activeChains": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
+  "resourceInputAvailable on activeChains": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "resourceInputCondition on activeChains": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "resourceInputKey on activeChains": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "resourceKey on activeChains": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
