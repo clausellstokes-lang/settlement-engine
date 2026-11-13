@@ -4518,9 +4518,6 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "river": [
         {
           "angle": "visitor",
-          "marks": [
-            "river"
-          ],
           "text": "{settlement} is laid along its water rather than around a square, and you meet it lengthwise.",
           "slots": [
             "settlement"
@@ -4529,9 +4526,6 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "marks": [
-            "river"
-          ],
           "text": "Everything in {settlement} is upstream or downstream of something else, and the town gives directions that way.",
           "slots": [
             "settlement"
@@ -4540,9 +4534,6 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "marks": [
-            "river"
-          ],
           "text": "The barge traffic sets {settlement}'s calendar; what the river cannot carry in season, {settlement} does without.",
           "slots": [
             "settlement"
@@ -4551,9 +4542,6 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "marks": [
-            "river"
-          ],
           "text": "{settlement} sits on a river barges could use, but few tie up here; the landing is overgrown and the boats pass by.",
           "slots": [
             "settlement"
@@ -4725,7 +4713,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           7
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "declares": [
+          "river"
+        ]
       },
       "smoke (route isolated / mountain_pass)": {
         "role": "spine",
@@ -4874,8 +4865,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "no deficit",
-            "river"
+            "no deficit"
           ],
           "text": "{settlement} is built on its water because the water is the cheapest thing here to move goods on.",
           "slots": [
@@ -4886,8 +4876,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "no deficit",
-            "river"
+            "no deficit"
           ],
           "text": "Every decision {settlement} has ever made about where to put a building started with the river.",
           "slots": [
@@ -4898,8 +4887,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "deficit",
-            "river"
+            "deficit"
           ],
           "text": "{settlement}'s ground gives less than the town needs and the river makes up the rest, which is why the town is on the river and not on better ground.",
           "slots": [
@@ -4910,8 +4898,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "elder",
           "marks": [
-            "deficit",
-            "river"
+            "deficit"
           ],
           "text": "{settlement} has too few fields and plenty of river traffic; it buys its food with what the boats bring.",
           "slots": [
@@ -5261,7 +5248,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           10
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "declares": [
+          "river"
+        ]
       },
       "isolated": {
         "role": "spine",

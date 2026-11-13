@@ -25088,10 +25088,11 @@
         "standing": "SOURCE-UNRESOLVED",
         "twoSource": false
       },
-      "declares": [],
+      "declares": [
+        "river"
+      ],
       "lineDeclares": {
-        "coast": 3,
-        "river": 4
+        "coast": 3
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -25417,10 +25418,11 @@
         "standing": "SOURCE-UNRESOLVED",
         "twoSource": false
       },
-      "declares": [],
+      "declares": [
+        "river"
+      ],
       "lineDeclares": {
-        "coast": 6,
-        "river": 4
+        "coast": 6
       },
       "undeclared": 0,
       "crisisScoped": false
