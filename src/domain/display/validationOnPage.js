@@ -37,6 +37,7 @@ import { institutionDisplayName } from './institutionDisplayName.js';
 import { resourceDisplayName } from './resourceDisplayName.js';
 import { compareCodepoint } from '../deterministicSort.js';
 import { importsAsPrinted } from './tradeListDisplay.js';
+import { chainModelsResource, chainWorksResource } from '../facts/chainWorking.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { familyOfInstitution } from '../../data/institutionalCatalog.js';
 import { institutionLadderEvicts } from '../../data/institutionLadders.js';
@@ -177,6 +178,22 @@ function houseWords(inst) {
 const orList = (nouns) => (nouns.length < 2 ? nouns.join('') : `${nouns.slice(0, -1).join(', ')} or ${nouns[nouns.length - 1]}`);
 
 /**
+ * The nearby resources a gap row is about: every live key of the record (`availableNativeResourceKeys`) whose own
+ * name or commodities answer the chain's input words (`CHAIN_INPUTS`; "stone_quarry" for the stone, "hunting_grounds"
+ * and "grazing_land" for the hides). W2-C-LEAVES (2026-11-13): the keys the chain leaf is asked about.
+ * @param {PageRecord} s @param {string | null} chainKey the gap's chain in `RESOURCE_CHAINS`
+ * @returns {string[]}
+ */
+function gapResourceKeys(s, chainKey) {
+  const spec = chainKey ? CHAIN_INPUTS[chainKey] : null;
+  if (!spec) return [];
+  return availableNativeResourceKeys(s?.config || {}).filter((/** @type {string} */ k) => {
+    const text = [k, ...arr(/** @type {Readonly<Record<string, { commodities?: unknown } | undefined>>} */ (RESOURCE_DATA)[k]?.commodities)].map(str).map(norm).join('|');
+    return spec.words.some((w) => holds(text, w));
+  });
+}
+
+/**
  * Whether the roster holds a house OF THIS KIND, live (W2-C-LEAVES, 2026-11-13; REVIEW-W2A-3 #628, #911: "no tannery
  * … finishes it" beside Tanners, "no apothecary … finishes it" beside an Apothecary district). A chain's list names
  * one spelling of a house; the catalogue's family is the house's own home and holds every spelling of it at every
@@ -209,7 +226,7 @@ const chainFor = (rawResource) => /** @type {[string, ResourceChain]|undefined} 
  *    record holds none of the inputs the house could work (a smelter with iron ore coming in
  *    is not idle because it has no gold);
  *  - a raw resource no house works: "No one here works the stone near Ashford." — unless
- *    the economy already exports it;
+ *    the economy already exports it, or a chain works it (the chain leaf, `chainWorksResource`);
  *  - a chain worked part-way: "Work on the glass sand here stops half-way: no glassblower
  *    finishes it." — naming only the houses the roster lacks BY KIND (`houseOfKindHere`), and
  *    nothing where it holds every one.
@@ -239,9 +256,16 @@ export function resourceGapLines(s) {
     // family or ladder rung is not missing (W2-C-LEAVES, item 1).
     const missing = arr(g.missing).map(str).filter((n) => n && !houseOfKindHere(s, n))
       .map((n) => str(institutionDisplayName(n) || n)).filter(Boolean).map((n) => n.charAt(0).toLowerCase() + n.slice(1));
+    // WORKED HERE is the chain model's (facts/chainWorking.js :: chainWorksResource, record 303): "No one here works"
+    // prints only where the leaf says no; a half-way grade, which says the work is done in part, never where the model
+    // holds a chain on the resource and none of its chains works it (where it holds none, the model is silent).
+    const keys = gapResourceKeys(s, entry ? entry[0] : null);
+    const worked = chainWorksResource(s, keys);
+    const modelledIdle = !worked && chainModelsResource(s, keys);
     if (/not being processed/.test(str(g.impact))) {
+      if (worked) continue;
       push({ chain: null, impact: `No one here works the ${raw} near ${str(s?.name) || 'the place'}.`, severity: str(g.severity) || 'low' });
-    } else if (missing.length) {
+    } else if (missing.length && !modelledIdle) {
       push({ chain: null, impact: `Work on the ${raw} here stops half-way: no ${orList(missing)} finishes it.`, severity: str(g.severity) || 'medium' });
     }
   }

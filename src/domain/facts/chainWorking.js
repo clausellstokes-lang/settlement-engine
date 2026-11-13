@@ -55,3 +55,24 @@ export function chainsWorking(record, resourceKeys) {
 export function chainWorksResource(record, resourceKeys) {
   return chainsWorking(record, resourceKeys).length > 0;
 }
+
+/**
+ * WHETHER THE CHAIN MODEL SPEAKS OF THIS RESOURCE AT ALL (W2-C-LEAVES, 2026-11-13): some chain of the record takes it
+ * as its input, in any state. Where none does, the leaf's "no" is the model's silence and not a reading: measured
+ * at the merged base on the census's 720, every half-way gap line the leaf would answer "no" (9) sits on a resource
+ * no chain of the record takes (fish in a thorp, a hot spring, gemstones), beside the house that works it part-way.
+ * @param {unknown} record the settlement record
+ * @param {string | ReadonlyArray<string>} resourceKeys one catalogue resource key, or a family of them (any)
+ * @returns {boolean}
+ */
+export function chainModelsResource(record, resourceKeys) {
+  const keys = new Set((Array.isArray(resourceKeys) ? resourceKeys : [resourceKeys]).map(String));
+  const economicState = record && typeof record === 'object'
+    ? /** @type {{ economicState?: { activeChains?: unknown } }} */ (record).economicState
+    : null;
+  const chains = Array.isArray(economicState?.activeChains) ? economicState.activeChains : [];
+  return chains.some((chain) => {
+    const key = chain && typeof chain === 'object' ? /** @type {{ resourceInputKey?: unknown }} */ (chain).resourceInputKey : null;
+    return typeof key === 'string' && keys.has(key);
+  });
+}
