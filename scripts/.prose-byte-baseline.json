@@ -73,8 +73,8 @@
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 125572,
-      "gzip": 17677,
+      "raw": 125953,
+      "gzip": 17744,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
@@ -571,6 +571,14 @@
       "toRaw": 236101,
       "gzipAfter": 31990,
       "reason": "+1654 B raw over the committed 234447 (gzip level 9: 31731 -> 31990): DS-DEF-3's insurgency and political-fracture district lines declare population: >= middling, and four lines that name no district, projected through node scripts/generate-dossier-state-prose.mjs (--check exit 0); no pool added"
+    },
+    {
+      "car": "W2-WRITE POW-5 no law where a watch stands (2026-11-13)",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 125681,
+      "toRaw": 125953,
+      "gzipAfter": 17744,
+      "reason": "+381 B raw over the committed 125572 (gzip level 9: 17677 -> 17744): DS-POW-5 crimeIsGovt v1 declares no guardPresence, and one line for a guard the gang bosses run, projected through node scripts/generate-dossier-state-prose.mjs (--check exit 0); no pool added"
     }
   ],
   "ceilingTransfersNewLeaves": [

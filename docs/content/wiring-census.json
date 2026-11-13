@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2834,
+    "variants": 2835,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -35542,8 +35542,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
-      "grammars": 2,
+      "variants": 4,
+      "grammars": 3,
       "predicate": [
         {
           "field": "settlement.economicState.safetyProfile.flags.crimeIsGovt",
@@ -35605,7 +35605,9 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 3
+        "colour": 2,
+        "guardPresence": 1,
+        "no guardPresence": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -55469,8 +55471,8 @@
       "pools": [
         "DS-POW-5 :: FLAG: crimeIsGovt"
       ],
-      "variants": 3,
-      "grammars": 2,
+      "variants": 4,
+      "grammars": 3,
       "blocks": [
         "DS-POW-5"
       ]
@@ -71035,7 +71037,7 @@
         "settlement.economicState.safetyProfile.flags.crimeIsGovt"
       ],
       "readingFunction": "structureFlagPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {seat, settlement}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "THIN",
