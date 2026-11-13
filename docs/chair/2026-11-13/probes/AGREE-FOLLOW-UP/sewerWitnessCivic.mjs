@@ -1,0 +1,10 @@
+import { join, resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
+const root = resolve(process.argv[2]);
+const imp = (p) => import(pathToFileURL(join(root, p)).href);
+const { generateSettlementPipeline } = await imp('src/generators/generateSettlementPipeline.js');
+const { facetOf } = await imp('src/domain/spatial/cohesionWeave.js');
+const { liveInstitutions } = await imp('src/domain/institutions/institutionRoster.js');
+const s = generateSettlementPipeline({ settType: 'town', culture: 'germanic', terrainOverride: 'hills', tradeRouteAccess: 'road', monsterThreat: 'civilized' }, null, { seed: 'uc1-acc-town-hills', customContent: {} });
+const civic = s.institutions.filter((i) => facetOf(i, 'institutionNature') === 'civic').map((i) => i.name + (i.status ? `[${i.status}]` : ''));
+console.log(JSON.stringify({ civic, n: s.institutions.length, res: (s.config?.nearbyResources || []).map((r) => r.key || r) }));
