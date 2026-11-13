@@ -1,3 +1,5 @@
+NOT CLEAR
+
 # REVIEW-POWERS-2 — lane/coherence-powers-2026-11-11 at e86d069be (2026-11-12)
 
 A fresh, independent review. The reviewer changes nothing on the lane. Line = `lane/integration-2026-11-07` at 3575cf061 (an ancestor of the tip). Tip = e86d069be.
@@ -146,4 +148,31 @@ Re-run, line and tip, ten of the thirty realms: the four that lose half (pop-6, 
 
 **N10 — LOW — An unlisted moved family.** `coherenceNotes` moves (1 of 720, `r2r-town-2`, a council-of-a-kind birth); the record's family table does not name it. Cure: name it.
 
+**N11 — MEDIUM — A red the lane owns, outside the classed set.** `tests/docs/enforcement-claims.test.js`, 2 titles ("every completeness claim carries an @enforced-by tag" and "the banked naked-claim debt is frozen PER CLAIM"), red at 463eb0b04 (RUN; the row it reads predates e86d069be): `docs/chair/2026-11-11/COHERENCE-POWERS-HANDBACK.md:741` — the dossierPhoneFloorAllViews row's "zero violations" — is a completeness claim with no `@enforced-by` tag. The file does not exist on the line; the row was written at 09b220277, after the fourth seat's final suite run at 2fd6cf8a2, so the hand-back's "No title is YOURS TO CURE" never saw it. Reproduce: `npx vitest run tests/docs/enforcement-claims.test.js` at the tip. How bad: the lane's failing set is not the classed set, and the lane's own words red a gate. Cure: tag the claim with the enforcer that proves it (`@enforced-by tests/components/dossierPhoneFloorAllViews.test.jsx`) or reword it.
+
 Not findings (checked): F1–F13's cures (step 2); the field diff's causes (step 3); the ten wars (step 5); the step-7 commits; the three gates at 463eb0b04 (typecheck:ratchet 167/167, domain-strict 1113/1113, lint 0 errors, 37 warnings; each exit 0 through `scripts/gate-tail.sh`); the step-7 delta's seven test files at 463eb0b04 (83 passed, 2 skipped, exit 0).
+
+---
+
+## STEP 3 (continued) — THE SIX SURFACES AND THE WHOLE SUITE, RUN AT THE FINAL TIP 463eb0b04
+
+The suite was started twice as one run and killed twice by container restarts. It was then run to completion as 64 resumable chunks (each top directory, `tests/domain` and `tests/components` split by subdirectory and by first letter), every chunk `npx vitest run <files> --maxWorkers=2` in a worktree at 463eb0b04 with its own `npm ci`, after `git fetch origin review-fixes-2026-07-08:review-fixes-2026-07-08` (235efce1a). Merged by file (no file counted twice): **3,221 files, 38,947 tests (the seat: 38,945; +2 from the step-7 commits), 55 failed plus the two file-level news walkers = 57 failing titles in 32 files, 147 skipped (the suite's own).**
+
+**Against the hand-back's classed 57 (at 2fd6cf8a2):** the same set, title for title, LESS the two parked titles (tabSentencesOnce on x50-trim-21, tonightSheetOnce on x51-tonight-51), which the step-7 commits cure (green here), PLUS the two `enforcement-claims` titles of N11, which are the lane's and not classed. Every other title is a row the record names: the line's 8 (landingFixtureFreshness 2, newsHeadlineContract, newsVoiceContract, proseFamilyContract A1 A3 A5, dossierProseManifest's drift arm), the founding worlds' 1, and the merge seat's 46 (the goldens and their null-change pins, the re-taken digests, the measured figures, proseFamilyContract A2, proseComposed A13, proseTasteInterested 2, writerReach 9, observedShapeReaders 4, statecraftExposureBand's floor (mobilizations 27 against 72), poolDominance).
+
+**The six surfaces, by this run (MOVED = red here):** generator golden master MOVED (376 of 525 configurations differ — the record's 376); espionage dormancy fence MOVED (1 of 21, the driven golden's hash); dossier prose manifest MOVED (3 arms: the drift corpus tally, the drift arm, the audience arm 204 against 203); PDF golden MOVED (pdf.6); Herald knowledge desk golden MOVED (its hash); preset-lighting witness UNMOVED (`tests/simulation` 187 of 187 green). **Each equals the record's MOVED / UNMOVED.**
+
+---
+
+## WHAT WAS RE-RUN, IN ONE PLACE
+- Two trees born and rendered as the owner reads them, 720 dossiers each (SECOND-WAVE-CENSUS); forty towns read side by side; probes over all 720.
+- The thirteen findings' proofs on that corpus (F9 by a planted fault in a scratch tree).
+- The whole-lane field diff on 720 births; the per-birth cause classes.
+- The census counter and `compare.mjs` on both trees.
+- Ten of the thirty realms' twenty-year wars at line and tip, four of them again with the ladder order reverted; the first-light courts of three realms.
+- The three gates and the step-7 delta's seven test files at 463eb0b04.
+- The whole suite at 463eb0b04 (chunked).
+Not done: the other twenty realms (READ from the hand-back; the ten re-run equal it to the unit); the seat's 4,305-birth corpora (this review used its own 720).
+
+## VERDICT
+**NOT CLEAR.** The thirteen first-review findings are cured, the field diff and the six surfaces are as declared, and the wars' fall is a re-deal, not a systematic change. But the finished page contradicts itself on the leader, the person the owner's principle is about: the leader's own card says "the seat's offices take up more of what the family once did" (N1, 39 → 96 subordinate readings; 584 → 170 leaders whose card says they hold the seat), the people list ranks the leader of a city as a low-influence figure (N2, 295 of 480 village-to-metropolis leaders), and the occupier's governor reads "Holds the seat" beside someone else's seat (N3). The page count rises on one row (N5), and the lane leaves one red of its own outside its classed set (N11).
