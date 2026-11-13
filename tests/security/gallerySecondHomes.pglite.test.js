@@ -155,7 +155,7 @@ const TOWNS = Object.freeze([
 describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sent (V5-1)', () => {
   /** @type {any} */ let LIVE; /** @type {any} */ let veil; /** @type {any} */ let gallery; /** @type {any} */ let gen;
   /** @type {any} */ let compose; /** @type {any} */ let birthConfig; /** @type {any} */ let DEFAULT_CONFIG; /** @type {any} */ let factionIdFromName;
-  /** @type {any} */ let matchesProcessor;
+  /** @type {any} */ let matchesProcessor; /** @type {any} */ let instFlags;
   let n = 0;
 
   beforeAll(async () => {
@@ -170,6 +170,7 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
     ({ DEFAULT_CONFIG } = await import('../../src/store/configSlice.js'));
     ({ factionIdFromName } = await import('../../src/lib/entities.js'));
     ({ institutionMatchesProcessor: matchesProcessor } = await import('../../src/generators/computeActiveChains.js'));
+    ({ getInstFlags: instFlags } = await import('../../src/generators/priorityHelpers.js'));
   }, PGLITE_BOOT_TIMEOUT_MS);
 
   /** The marker planter: every string an eye or a grouping governs, at the step it first exists after. */
@@ -288,8 +289,12 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
         const effects = [...new Set((['historicalEvents', 'eventsTimeline']).flatMap((k) => (isRec(record.history) && Array.isArray(record.history[k]) ? record.history[k] : []))
           .filter(isRec).flatMap((ev) => (Array.isArray(ev.lastingEffects) ? ev.lastingEffects : []))
           .filter((x) => typeof x === 'string' && !marked(x)).map(foldTrim).filter((x) => x.length >= 12))];
+        // THE CLIENT'S TWIN (COHERENCE-VEIL-8; REVIEW-VEIL-6's V6-2: a page arm draws a response the server already
+        // cut, so it cannot hold the twin): the client's own veil over the share's own projection, searched with the
+        // same eye as a read of its own (`client`), never served
+        resp.client = veil.projectShareVeil(veil.galleryPayloadFor(record, { shareDm: dm, memberOverrides: ov }), ov);
         for (const [read, body] of Object.entries(resp)) {
-          reads += 1;
+          if (read !== 'client') reads += 1;
           if (!body) { sent.push(`${label} dm=${dm} ${mode} ${read}: NO ROW`); continue; }
           const walk = (v, p) => {
             if (Array.isArray(v)) v.forEach((x) => walk(x, `${p}[]`));
@@ -306,6 +311,21 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
             }
           };
           walk(body, '');
+          // COHERENCE-VEIL-8, the chair's ruling (b): the engine's five criminal-house booleans read as the houses the
+          // response still lists would raise them (the engine's own getInstFlags over that list); and (c): a criminal
+          // income row (its label made from the hidden criminal list, its sentence the hidden capture figure) is not
+          // sent where the groupings that hide them are shut (every grouping is shut on these shares)
+          const FIVE = ['hasCriminalInst', 'hasThievesGuild', 'hasBlackMarket', 'hasSmuggling', 'hasGangInfra'];
+          const settled = (v) => (Array.isArray(v) ? v.flatMap(settled) : isRec(v) ? [...(isRec(v.economicState) ? [v] : []), ...Object.values(v).filter((x) => x !== v.economicState).flatMap(settled)] : []);
+          for (const t of settled(body)) {
+            const listed = instFlags({}, (Array.isArray(t.institutions) ? t.institutions : []).filter(isRec)).inst;
+            for (const at2 of [t.economicState?.compound?.inst, t.economicState?.safetyProfile?.compound?.inst]) {
+              if (isRec(at2)) for (const f of FIVE) if (at2[f] === true && !listed[f]) sent.push(`${label} dm=${dm} ${mode} ${read}: the boolean ${f}, raised only by a house the response does not list`);
+            }
+            for (const r of Array.isArray(t.economicState.incomeSources) ? t.economicState.incomeSources : []) {
+              if (isRec(r) && r.isCriminal === true) sent.push(`${label} dm=${dm} ${mode} ${read}: a criminal income row (${r.source}), its groupings shut`);
+            }
+          }
           // COHERENCE-VEIL-8 (N3): a tie's copy of an end's role, where that person's own entry in the same response
           // carries no role (a person the share does not reveal, sent as a veiled public card: 206)
           const towns = (v) => (Array.isArray(v) ? v.flatMap(towns) : isRec(v) ? [...(Array.isArray(v.npcs) && Array.isArray(v.relationships) ? [v] : []), ...Object.values(v).flatMap(towns)] : []);
@@ -367,8 +387,9 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
     born.economicState.secondHomePlantedByTheGuard = house.desc;
     const r = await sharesOf(shapes(born).new, `${t.seed} planted`);
     const found = r.sent.filter((x) => x.includes('economicState.secondHomePlantedByTheGuard'));
-    // five of the six reads carry the town (the map's party link, get_unlisted_map, carries no member town at all)
-    expect(found.length).toBe(4 * 5);
+    // five of the six reads carry the town (the map's party link, get_unlisted_map, carries no member town at all),
+    // and the client's twin does (COHERENCE-VEIL-8)
+    expect(found.length).toBe(4 * 6);
   }, TOWN_TIMEOUT_MS);
 
   it('THE SAME-STEP CLASS (the limit the marker cannot reach): the composed homes of a tie and a person\'s impression, written from marked sources, are not sent', async () => {
