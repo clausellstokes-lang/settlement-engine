@@ -335,7 +335,7 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     () => 'Porters bent under loaded frames file past, and someone counts them in.',
     () => 'The neighbours turn out together to sweep and mend their own street.',
     () => 'Festival banners hang above the doors, faded from one year and waiting for the next.',
-    () => 'Craftspeople sit in rows, each row a different trade, each worker deep in their own work.',
+    { text: () => 'Craftspeople sit in rows, each row a different trade, each worker deep in their own work.', needs: ['market'] }, // W2-FIX-DATA-3 (REVIEW-W2A-3 #2): rows to each trade are a market's (a thorp of twelve printed it)
   ],
   south_asian: [
     () => 'A moneylender sits at a low table with a queue of familiar faces waiting.',

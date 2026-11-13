@@ -53729,7 +53729,7 @@
       "lineDeclares": {
         "crisis: any": 28,
         "institution: bank": 1,
-        "market": 2,
+        "market": 3,
         "navigable": 1,
         "no crisis: hunger": 3,
         "no crisis: infiltrated": 1,
@@ -53740,7 +53740,7 @@
         "no crisis: under_siege": 2,
         "tier: ≥ town": 2
       },
-      "undeclared": 17,
+      "undeclared": 16,
       "crisisScoped": false
     },
     {

@@ -43,4 +43,15 @@ describe('W2-FIX-DATA-3: the round\'s high lines in this lane\'s files', () => {
     expect(text).toContain(String(twin?.text));
     expect(text.split('\n').filter((t) => t.toLowerCase().includes('ceremonial precinct'))).toEqual([]);
   }, 60_000);
+
+  test('rows of craftspeople, a row to each trade, stand only where a market does (rw3-thorp-calm-1)', async () => {
+    const { ARRIVAL_PEOPLE } = await import('../../src/data/arrivalProse.js');
+    const ROWS = 'Craftspeople sit in rows, each row a different trade, each worker deep in their own work.';
+    const row = ARRIVAL_PEOPLE.mesoamerican.find((l) => (typeof l === 'function' ? l() : typeof l.text === 'function' ? l.text() : l.text) === ROWS);
+    expect(declarationOf(row).needs).toContain('market');
+    const town = born('rw3-thorp-calm-1');
+    expect(town.institutions.some((/** @type {any} */ i) => /market/i.test(i.name)), 'the thorp has no market').toBe(false);
+    expect(String(town.arrivalScene)).toMatch(/\S/);
+    expect([String(town.arrivalScene)].filter((t) => t.includes('Craftspeople sit in rows'))).toEqual([]);
+  }, 60_000);
 });
