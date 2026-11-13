@@ -260,6 +260,8 @@ const COUNTED_HOUSES = /** @type {Readonly<Record<string, string>>} */ (Object.f
   temples: 'temple', churches: 'temple', chapels: 'temple', shrines: 'shrine', mills: 'mill', markets: 'market', granaries: 'granary', guildhalls: 'guildhall',
   guilds: 'guilds',
 }));
+/** The nouns a count of houses reads (`COUNTED_HOUSES`' keys), as a pattern group's body. */
+const HOUSE_NOUNS = 'temples|churches|chapels|shrines|mills|markets|granaries|guildhalls|guilds';
 /** F13: guilds are a counted noun, read off the roster's guild rows (a guild hall's words name a building, not a guild). */
 const GUILD_ROW = /\bguilds?\b/i;
 /**
@@ -358,15 +360,18 @@ const NEW_WORDS_OPEN = /** @type {Record<string, RegisteredWord>} */ ({
   },
   housesCount: {
     kind: 'count', layer: 'P', leaf: 'institutions.js :: liveInstitutionNames',
-    words: new RegExp(`\\b(${COUNT})\\s+(?:\\w+\\s+)?(temples|churches|chapels|shrines|mills|markets|granaries|guildhalls|guilds)\\b`, 'i'),
+    // finding 7 of REVIEW-W2B's third read: `both` counts as two, where it counts the houses ("both granaries", "both the
+    // mills"); "both Merchant Guilds and the reeve" joins two names and counts nothing (no word between, no "and" after)
+    words: new RegExp(`\\b(${COUNT})\\s+(?:\\w+\\s+)?(${HOUSE_NOUNS})\\b|\\b(both)\\s+(?:the\\s+|its\\s+|of\\s+(?:the|its)\\s+)?(${HOUSE_NOUNS})\\b(?!\\s+and\\b)`, 'i'),
     atoms: [],
     absent: (_f, names, _record, sentence) => {
       const m = new RegExp(NEW_WORDS.housesCount.words.source, 'i').exec(String(sentence ?? ''));
       if (!m) return false;
-      const n = countOf(m[1]); const key = COUNTED_HOUSES[m[2].toLowerCase()];
+      const n = countOf(m[1] ?? m[3]); const key = COUNTED_HOUSES[(m[2] ?? m[4]).toLowerCase()];
       const re = key === 'guilds' ? GUILD_ROW : THINGS[key]?.words;
       if (n === null || !re) return false;
-      return names.filter((name) => re.test(name)).reduce((sum, name) => sum + rowCount(name), 0) < n;
+      // finding 7: a row that names a house ELSEWHERE ("Access to external mill") is no house of that kind here (NOT_HERE)
+      return names.filter((name) => !NOT_HERE.test(name) && re.test(name)).reduce((sum, name) => sum + rowCount(name), 0) < n;
     },
   },
   // ── THE WORDS OF THE HAND CURES (W2-B-DECLARE item 4; record 288, ruling 2: "EVERY HAND CURE REGISTERS ITS

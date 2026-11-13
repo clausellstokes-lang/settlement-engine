@@ -4569,6 +4569,12 @@
     "implied",
     "A relic seized during the trial never reached the temple vault it was bound for",
     "33ad8c61c23cfe16"
+   ],
+   [
+    "housesCount",
+    "word",
+    "Someone is sabotaging both guilds to destabilize the market for a third party",
+    "326f3781fe734942"
    ]
   ],
   "src/data/historyDescVariants.js": [

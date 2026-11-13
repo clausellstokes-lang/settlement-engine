@@ -293,6 +293,21 @@ describe('F13 / F6 — the counts', () => {
     expect(words(town([], 2), 'Two to four factions each run part of the town and its trade.')).toEqual([]);
     expect(words(town([], 2), 'Three powers each run part of the town and its trade.')).toEqual(['powersCount']);
   });
+  /**
+   * Finding 7 of the third read (REVIEW-W2B-c3913f999: "`both` is not counted as a count of houses, and an access row
+   * counts as a mill"). `both` counts as two; a roster row that names a house ELSEWHERE ("Access to external mill") is no
+   * house of that kind here (the lane's own NOT_HERE). Red at 718fffc51 (neither line was a finding).
+   */
+  test('finding 7 (third read): "both" counts as two, and an access row is no house here', () => {
+    expect(words(town([{ name: 'Granary' }]), 'Both granaries stand full after the harvest.')).toEqual(['housesCount']);
+    expect(words(town([{ name: 'Granaries (2-4)' }]), 'Both granaries stand full after the harvest.')).toEqual([]);
+    expect(words(town([{ name: 'Mill' }, { name: 'Access to external mill' }]), 'Two mills grind for the whole valley each autumn.')).toEqual(['housesCount']);
+    expect(words(town([{ name: 'Mill' }, { name: 'Grain mill' }]), 'Two mills grind for the whole valley each autumn.')).toEqual([]);
+    // "both" that joins two names counts nothing (the 720's two lines of this shape, read false at the first cut)
+    expect(words(town([{ name: 'Granary' }]), 'Wants whatever both Merchant Guilds and Elected Reeve want this season first.')).toEqual([]);
+    expect(words(town([{ name: 'Granary' }, { name: 'Mill' }]), 'Both granaries and mills stand full after the harvest.')).toEqual([]);
+    expect(words(town([{ name: 'Mill' }]), 'Both the mills grind for the whole valley each autumn.')).toEqual(['housesCount']);
+  });
   test('F6: law enforcement is a watch or a garrison; a headman keeps the law but is not law enforcement', () => {
     const f = (institutions) => factsOf(town(institutions));
     expect(thingsDeniedIn('There is effectively no law enforcement here.')).toEqual(['lawEnforcement']);
