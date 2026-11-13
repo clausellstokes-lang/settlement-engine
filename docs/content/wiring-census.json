@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2803,
+    "variants": 2812,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -24941,8 +24941,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
-      "grammars": 3,
+      "variants": 7,
+      "grammars": 5,
       "predicate": [],
       "branchReads": [
         "readings",
@@ -24990,10 +24990,11 @@
         "standing": "SOURCE-UNRESOLVED",
         "twoSource": false
       },
-      "declares": [
-        "river"
-      ],
-      "lineDeclares": {},
+      "declares": [],
+      "lineDeclares": {
+        "coast": 3,
+        "river": 4
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -25269,8 +25270,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
-      "grammars": 4,
+      "variants": 10,
+      "grammars": 6,
       "predicate": [],
       "branchReads": [
         "readings",
@@ -25318,10 +25319,11 @@
         "standing": "SOURCE-UNRESOLVED",
         "twoSource": false
       },
-      "declares": [
-        "river"
-      ],
-      "lineDeclares": {},
+      "declares": [],
+      "lineDeclares": {
+        "coast": 6,
+        "river": 4
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -69574,7 +69576,7 @@
       "subject": "river",
       "fields": [],
       "readingFunction": "situationPoolKey",
-      "count": "4 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "7 variant(s) · 5 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69620,7 +69622,7 @@
       "subject": "river",
       "fields": [],
       "readingFunction": "situationPoolKey",
-      "count": "4 variant(s) · 4 grammar(s) · slots {settlement}"
+      "count": "10 variant(s) · 6 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

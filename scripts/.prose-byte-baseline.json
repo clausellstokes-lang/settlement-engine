@@ -67,8 +67,8 @@
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 287227,
-      "gzip": 36672,
+      "raw": 290584,
+      "gzip": 37122,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -539,6 +539,14 @@
       "toRaw": 147483,
       "gzipAfter": 20773,
       "reason": "+7 B raw (gzip level 9: 20,772 -> 20,773): C8's word-only swaps in the stressors annex lines ('faction' -> 'power' and the map's hand wordings, Appendix X) projected through node scripts/generate-dossier-state-prose.mjs; no pool, variant, mark or slot added. The same commit SHRANK five leaves (defense -6, general -2, power -13, warFaith -7, the causal leaf -10), lowered in the same register commit. Measured per commit over bd07005b9..e63c6aae6: every leaf unmoved until e63c6aae6."
+    },
+    {
+      "car": "W2-WRITE GEN-5/GEN-6 the river route on a coast (2026-11-13)",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 287856,
+      "toRaw": 290584,
+      "gzipAfter": 37122,
+      "reason": "+3357 B raw over the committed 287227 (gzip level 9: 36672 -> 37122): DS-GEN-5's and DS-GEN-6's river pools: the pool's river atom moved onto each line, nine lines declaring coast, projected through node scripts/generate-dossier-state-prose.mjs (--check exit 0); no pool added"
     }
   ],
   "ceilingTransfersNewLeaves": [
