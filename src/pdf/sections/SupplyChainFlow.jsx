@@ -21,7 +21,6 @@ import { compareCodepoint } from '../../domain/deterministicSort.js';
 import { safe } from '../lib/format.js';
 import { tokenCase } from '../../domain/display/labelCase.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
-import { supplyChainNoteInWords } from '../../domain/display/engineKeysInText.js';
 import { chainHousesOf, chainSourceOf } from '../../domain/display/chainHouses.js';
 
 // chainId -> definition (for upstream import labels + fallback outputs).
@@ -162,11 +161,8 @@ function ChainRow({ chain, instNames, primaryExports }) {
         ) : null}
       </View>
 
-      {chain.upstreamNote ? (
-        <Text style={{ ...type.caption, fontSize: pt['7'], color: palette.muted, fontStyle: 'italic', marginTop: 2 }}>
-          · {safe(supplyChainNoteInWords(chain.upstreamNote, CHAIN_DEFS))}
-        </Text>
-      ) : null}
+      {/* R2-CODE-B-SIDE item 1: the generator's upstream note leaves the row, as it leaves the screen's card
+          (SupplyChainsPanel.jsx :: chainFlowFacts): no read the row holds makes it true. */}
     </View>
   );
 }
