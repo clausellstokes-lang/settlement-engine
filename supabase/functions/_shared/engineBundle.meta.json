@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-13T20:03:34.219Z",
+  "generatedAt": "2026-11-13T23:04:17.642Z",
   "entry": "src/engine/serviceEntry.js",
-  "sourceHash": "fe1e46feac3e3111",
-  "engineVersion": "0df11b932746328d",
-  "builtFromCommit": "c015159406c6df074a52a49ed31443ee8c923201",
+  "sourceHash": "f504719c3f298276",
+  "engineVersion": "bd3a8e386901f052",
+  "builtFromCommit": "7e46dad55745c0be677003484e6a2d0f0cc82887",
   "inputs": [
     "node_modules/seedrandom/seedrandom.js",
     "src/data/arrivalProse.js",
@@ -32,6 +32,7 @@
     "src/data/institutionLadders.js",
     "src/data/institutionServices.js",
     "src/data/institutionalCatalog.js",
+    "src/data/magicTraditionHouses.js",
     "src/data/monsterThreat.js",
     "src/data/namingData.js",
     "src/data/narrativeData.js",

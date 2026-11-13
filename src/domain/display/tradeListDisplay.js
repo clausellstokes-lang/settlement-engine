@@ -125,3 +125,52 @@ export function revenuesOffTheLists(settlement) {
     drawKind: 'A',
   }).map((home) => ({ text: home.text, desc: home.desc }));
 }
+
+/**
+ * THE IMPORTS AS PRINTED (W2-A-LEAVES, 2026-11-12; re-ruled by W2-A-LEAVES-2, 2026-11-13, REVIEW-W2A F1 and F4).
+ *
+ * The Economics tab printed two lists as one Imports line: the record's trade imports (`primaryImports`) and the
+ * terrain viability report's NEED list (`resourceAnalysis.imports.critical`, "Required by Potter but not available
+ * in Hills terrain"). The second is not trade: the record's own gap kind for the same house is `missing`, and in
+ * 440 of the 445 cases the census counted the good is nowhere in the economy's imports. So a need was printed as an
+ * arrival. This leaf KEEPS THE TWO APART:
+ *   - `arriving`: what trade brings in — the record's imports through `displayTradeList` (the export wins; the
+ *     category errors and the undeclared luxuries leave);
+ *   - `needed`: a good the town needs that the land cannot give and no import brings — each terrain-critical item
+ *     no import already names, through the same filter. A NEED THAT IS NOT MET, never an import.
+ * Both lists are the one composition the tab made inline (moved here verbatim, then split by origin), so nothing
+ * is filtered differently from what the page printed. ⚠ `needed` keeps the tab's own test of "no import names it"
+ * (a substring): a need an import meets under ANOTHER name stays in it (luxury goods beside "Luxury textiles and
+ * exotic goods", metals beside "Iron"; 8 of 30 read on the census's 720). It is safe as the gap reader's
+ * complement; before a surface prints `needed` as "not met", that match must be made (the hand-back names it
+ * for W2-C-LEAVES).
+ *
+ * WHO READS IT. The gap reader (`validationOnPage.js :: recordGoods`) reads `arriving` only, so a gap whose good is
+ * merely needed prints ("No clay reaches the potter." is true by the record). THE ECONOMICS TAB DOES NOT READ IT
+ * YET: `EconomicsTab.jsx` still composes the same list inline and prints both halves as Imports (REVIEW-W2A F4: the
+ * first seat's "nothing composes it again" was false). Moving the tab onto this leaf — `arriving` as Imports,
+ * `needed` as a need not met — is W2-C-LEAVES's (the chair's ruling, 2026-11-13); until then the page arm's row
+ * P6need counts the towns whose Imports line prints a need.
+ *
+ * Layer 4: it reads the economy and the resource analysis (stored at layer 3).
+ * @param {{
+ *   economicState?: { primaryImports?: ReadonlyArray<unknown> | null, primaryExports?: ReadonlyArray<unknown> | null } | null,
+ *   resourceAnalysis?: { imports?: unknown } | null,
+ * } | null | undefined} settlement
+ * @returns {{ arriving: string[], needed: string[] }} the raw items of each, in the order the record gives them
+ */
+export function importsAsPrinted(settlement) {
+  const eco = settlement?.economicState || {};
+  const res = settlement?.resourceAnalysis;
+  const imports = /** @type {{ critical?: unknown } | unknown[] | null | undefined} */ (res?.imports);
+  const critical = !res || Array.isArray(imports) ? [] : (Array.isArray(imports?.critical) ? imports.critical : []);
+  const primary = (eco.primaryImports || []).filter((x) => typeof x === 'string').map(String);
+  const terrain = critical.filter((x) => typeof x === 'string').map(String)
+    .filter((tc) => !primary.some((imp) => imp.toLowerCase().includes(tc.toLowerCase())));
+  const kept = displayTradeList([...primary, ...terrain], /** @type {Parameters<typeof factsOf>[0]} */ (settlement), { side: 'imports', exports: eco.primaryExports });
+  const fromTrade = new Set(primary);
+  return {
+    arriving: kept.filter((x) => fromTrade.has(x)),
+    needed: kept.filter((x) => !fromTrade.has(x)),
+  };
+}

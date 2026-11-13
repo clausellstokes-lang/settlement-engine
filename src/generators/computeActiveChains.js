@@ -6,6 +6,7 @@
 import {SUPPLY_CHAIN_NEEDS} from '../data/goods/chains.js';
 import {RESOURCE_TO_CHAINS} from '../data/goods/chains.js';
 import {applyMagicSubstitution} from './chainMagicSubstitution.js';
+import { MAGIC_TRADITION_HOUSES } from '../data/magicTraditionHouses.js'; // W2-A-LEAVES: one tradition table, read by the leaf that names magic's source
 import { chainNeedsMagic } from '../domain/magicReliance.js';
 import {RESOURCE_DATA} from '../data/goods/identity.js';
 import {customDeps} from '../lib/dependencyEngine.js';
@@ -194,13 +195,13 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
     return depletedResourceKeys.has(key) ? 'depleted' : 'available';
   };
 
-  // Tradition detection — which magical traditions are present?
+  // Tradition detection — which magical traditions are present? (the table: data/magicTraditionHouses.js)
   // Id-first for stamped institutions (a renamed-but-stamped "Mages' guild"
   // still enables the arcane tradition), substring fallback for unstamped.
   const hasTradition = (...kws) => insts.some(i => kws.some(kw => institutionMatchesKeyword(i, kw)));
 
   const traditions = {
-    druid:   magicPriority >= 30 && hasTradition("druid circle","grove shrine","elder grove","sacred grove"), // J33: Warden's Lodge is defence, not druid (the owner, 2026-10-01)
+    druid:   magicPriority >= 30 && hasTradition(...MAGIC_TRADITION_HOUSES.druid), // J33: Warden's Lodge is defence, not druid (the owner, 2026-10-01)
     // Divine PROVISION is supernatural — it needs a world where magic functions,
     // not just a church. resolveConfig zeroes the magic dial when
     // config.magicExists === false, so magicPriority > 0 is the world's magic
@@ -208,11 +209,11 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
     // not magically refill granaries ('Temple granaries blessed' stays out of
     // no-magic campaigns). Any magic-enabled world (dial >= 1) is unchanged.
     divine:  magicPriority > 0 &&
-             hasTradition("cathedral","monastery","great cathedral","parish church","friary") &&
+             hasTradition(...MAGIC_TRADITION_HOUSES.divine) &&
              // religionInfluence check not available here, use institution presence as proxy
-             hasTradition("priest","cathedral","monastery","friary","great cathedral"),
-    arcane:  magicPriority >= 35 && hasTradition("wizard","mages","arcane","enchant","spellcasting","academy of magic"),
-    alchemy: magicPriority >= 15 && hasTradition("alchemist","apothecary district","alchemist quarter"),
+             hasTradition(...MAGIC_TRADITION_HOUSES.divinePriest),
+    arcane:  magicPriority >= 35 && hasTradition(...MAGIC_TRADITION_HOUSES.arcane),
+    alchemy: magicPriority >= 15 && hasTradition(...MAGIC_TRADITION_HOUSES.alchemy),
   };
   // Depleted: resource is present but over-exploited — chains run locally but cannot 
   // Which resource keys activate which chains (reverse lookup)

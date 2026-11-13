@@ -107,6 +107,7 @@ const EXEMPT = Object.freeze({
   'src/generators/computeActiveChains.js': [6, 'the record\'s writer: it sets the catalogue\'s strings the chair\'s ruling keeps'],
   'src/generators/economy/economicState.js': [1, 'a logic read (`allowsGeneratedContent(label)`)'],
   'src/generators/economy/viability.js': [4, 'a logic read (the resource against the analysis\'s resource names)'],
+  'src/domain/coherence/pageCensusFindings.js': [3, 'the page census instrument (W2-A-LEAVES b84d3ab76): it renders nothing; it reads the record\'s chains to test the printed words (rows P11 and P3source), so no chain name it reads is printed. Admitted BY NAME, not by directory, at STYLE-2-MERGE point 48 (the chair\'s ruling on STOP 48b, 2026-11-13): COMPOSED, green at the lane\'s tip and on the line, red only together'],
   [LEAF]: [1, 'the leaf itself, which reads the record'],
 });
 

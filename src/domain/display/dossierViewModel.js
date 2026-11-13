@@ -733,6 +733,30 @@ export function deriveMagicRelianceView(settlement) {
 }
 
 /**
+ * WHERE THE MAGIC COMES FROM, as the Magic tab's reliance line prints it (W2-A-LEAVES, 2026-11-12; census row 3,
+ * the chair's ruling: "the Magic tab names where the magic it says the town relies on comes from, read from the
+ * leaf; where nothing supplies it, the reliance line does not print"). Read from `facts/magicSource.js`: every
+ * house by name (those that practise, then those that supply a dependent chain), then the people who practise,
+ * one by name and more than one counted ("Mages' guild and 3 practitioners").
+ *   - `supply`: that phrase, where the place relies on magic and something supplies it; null otherwise.
+ *   - `statable`: false only where the place relies on magic and nothing on the record supplies it; the line
+ *     is then not printed.
+ * @param {DossierSettlementView | null | undefined} settlement
+ * @returns {{ supply: string|null, statable: boolean }}
+ */
+export function deriveMagicSupplyView(settlement) {
+  const reliance = deriveMagicRelianceView(settlement);
+  if (!reliance.reliesOnMagic) return { supply: null, statable: true };
+  const { houses, people } = magicSourceOf(settlement);
+  const parts = houses.map(proseHouseName).filter((n, i, all) => n && all.findIndex((p) => p.toLowerCase() === n.toLowerCase()) === i);
+  if (people.length === 1) parts.push(people[0]);
+  else if (people.length > 1) parts.push(`${people.length} practitioners`);
+  if (parts.length === 0) return { supply: null, statable: false };
+  const supply = parts.length === 1 ? parts[0] : `${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1]}`;
+  return { supply, statable: true };
+}
+
+/**
  * The settlement as the DS-DEF-9 reliance desk must read it: its `magicDependency` flag
  * READ FROM the one reliance reading (relied-upon or integral ⇒ true), not from the frozen
  * defence flag, which the defence generator sets only during a siege, famine or plague. The
@@ -750,4 +774,20 @@ export function magicRelianceDeskSettlement(settlement) {
     ...rec,
     defenseProfile: { ...defenseProfile, magicDependency: reliance.reliesOnMagic },
   }));
+}
+// W2-A-LEAVES (row 3): the leaf the Magic tab's reliance line names its source from (an import at the foot, so the
+// lines the prose wiring census cites above keep their numbers).
+import { magicSourceOf } from '../facts/magicSource.js';
+import { institutionDisplayName } from './institutionDisplayName.js';
+
+/**
+ * A house as running prose names it (W2-A-LEAVES-2, 2026-11-13; REVIEW-W2A F2: 73 of 289 reliance lines printed a
+ * catalogue count range or condition — "Cathedral (10,000+ only)", "Dream parlors (high magic)"). Its display
+ * label (`institutionDisplayName`, the one seam for a house's label), with any bracketed count or note struck: in
+ * a sentence a house is named, never counted or qualified.
+ * @param {string} house a roster house's name
+ * @returns {string}
+ */
+function proseHouseName(house) {
+  return institutionDisplayName(house).replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
 }
