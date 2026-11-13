@@ -129,10 +129,15 @@ it(`second homes by planted marker, the wider eye (${SIDE})`, async () => {
       const m = veil.curateModelFor(pub, []);
       const eyes = m.sections.flatMap((s) => [...s.groupings.map((g) => g.address), ...s.switches.map((x) => x.address),
         ...s.cards.flatMap((c) => [...(c.whole ? [c.whole.address] : []), ...c.eyes.map((e) => e.address), ...(c.kind === 'npc' ? [`card:npc:${c.id}`] : [])])]);
-      for (const mode of ['live', 'snapshot']) {
-        n += 1; out.shares += 1; out.handHides += eyes.length;
+      // RV8_HOUSES_ONLY: a third share a reveal, live: the houses hidden whole and EVERY OTHER EYE OPENED (each default
+      // opened by hand), so a name in a home a grouping would otherwise remove is seen; only names count on it
+      const houseEyes = m.sections.flatMap((s) => s.cards.flatMap((c) => (c.whole ? [c.whole.address] : [])));
+      const modes = process.env.RV8_HOUSES_ONLY ? ['live', 'snapshot', 'houses'] : ['live', 'snapshot'];
+      for (const mode of modes) {
+        n += 1; out.shares += 1; out.handHides += mode === 'houses' ? houseEyes.length : eyes.length;
         const id = `abcd88${String(SHARD[0]).padStart(2, '0')}-0000-0000-0000-${String(n).padStart(12, '0')}`; const slug = `qp${SHARD[0]}x${n}`; const link = `ql${SHARD[0]}x${n}`; const map = `qm${SHARD[0]}x${n}`; const maplink = `qn${SHARD[0]}x${n}`;
-        const ov = veil.writeShareVeil({}, eyes.map((a) => ({ address: a, hidden: true })), mode === 'snapshot' ? { mode, at: '2026-11-01T00:00:00.000Z', snapshot: pub } : { mode, at: '2026-11-01T00:00:00.000Z' });
+        const deltas = mode === 'houses' ? eyes.map((a) => ({ address: a, hidden: houseEyes.includes(a) })) : eyes.map((a) => ({ address: a, hidden: true }));
+        const ov = veil.writeShareVeil({}, deltas, mode === 'snapshot' ? { mode, at: '2026-11-01T00:00:00.000Z', snapshot: pub } : { mode: 'live', at: '2026-11-01T00:00:00.000Z' });
         for (const c of CHAINS) {
           const db = dbs[c.db];
           try {
@@ -168,9 +173,9 @@ it(`second homes by planted marker, the wider eye (${SIDE})`, async () => {
               out.reads += 1; bump(out.readsBy, `${c.db} ${read}`);
               if (!body) { out.raised.push(`${c.db} ${seed} dm=${dm} ${mode} ${read}: no row`); continue; }
               const walk = (v, p) => { if (Array.isArray(v)) v.forEach((x) => walk(x, `${p}[]`)); else if (isRec(v)) for (const [k2, x] of Object.entries(v)) { walk(k2, `${p ? `${p}.` : ''}<key>`); walk(x, p ? `${p}.${k2}` : k2); } else if (typeof v === 'string') {
-                const pre = `${c.db} | ${dm ? 'DM reveal on' : 'no reveal'} | `; const where = label(p); const ex = `${seed} ${mode} ${read}: `;
+                const pre = `${c.db} | ${dm ? 'DM reveal on' : 'no reveal'}${mode === 'houses' ? ' | HOUSES ONLY' : ''} | `; const where = label(p); const ex = `${seed} ${mode} ${read}: `;
                 const fv = fold(v);
-                for (const mm of fv.matchAll(MARK_FOLD_RE)) { const how = v.includes(MARK(mm[1])) ? 'exact' : 'folded';
+                if (mode !== 'houses') for (const mm of fv.matchAll(MARK_FOLD_RE)) { const how = v.includes(MARK(mm[1])) ? 'exact' : 'folded';
                   hit(`${pre}marker [${how}] ${origin.get(mm[1]) || '?'}  ->  ${where}`, read, seed, `${ex}${v.slice(0, 150)}`); }
                 for (const h of H) {
                   let how = null;
@@ -180,7 +185,7 @@ it(`second homes by planted marker, the wider eye (${SIDE})`, async () => {
                     else if (h.j.length >= 10) { let jb = join(v); for (const o of openJoin) if (o !== h.j && o.includes(h.j)) jb = jb.split(o).join('#'); if (jb.includes(h.j)) how = 'joined'; } }
                   if (how) hit(`${pre}name [${how}] ${h.how === 'alias' ? "a chain's name for a house hidden whole" : 'a house hidden whole'}  ->  ${where}`, read, seed, `${ex}"${h.name}" in "${v.slice(0, 120)}"`);
                 }
-                if (fv.length >= 12) { let r = cache.get(fv); if (r === undefined) { r = []; for (const [hs, [org, raw]] of hiddenText) if (fv.includes(hs)) r.push([hs, org, raw]); cache.set(fv, r); }
+                if (mode !== 'houses' && fv.length >= 12) { let r = cache.get(fv); if (r === undefined) { r = []; for (const [hs, [org, raw]] of hiddenText) if (fv.includes(hs)) r.push([hs, org, raw]); cache.set(fv, r); }
                   for (const [hs, org, raw] of r) { if (!v.includes(raw) && !/vh8k\d+q/.test(fv)) hit(`${pre}text [folded only] ${org}  ->  ${where}`, read, seed, `${ex}"${hs.slice(0, 60)}" in "${v.slice(0, 120)}"`); } }
               } };
               walk(body, '');
