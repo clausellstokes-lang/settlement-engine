@@ -3,7 +3,7 @@
  * supporting capabilities.
  *
  *   - Active military status override banner (siege/occupied/civil war)
- *   - Readiness banner + score average
+ *   - Readiness banner (the rating's word; no average of the scores: COHERENCE-UPKEEP-7, W4)
  *   - Defense readiness rows (threat assessment reframed: label + bar + badge + prose)
  *   - Armed forces & fortifications, grouped (fortifications/standing/contracted/charter/arcane)
  *   - Criminal architecture: capture state, operations, criminal faction
@@ -80,7 +80,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
           // a page that prints 'Well-Defended' where the tab prints 'Well-defended' is the
           // two-spellings defect this file's parity suite exists to refuse.
           { label: 'Readiness', value: statusCase(d.readiness?.label) },
-          { label: 'Score avg', value: smart(d.scoreAvg), tone: scoreTone(d.scoreAvg) },
+          // ⛔ NO "Score avg" (COHERENCE-UPKEEP-7, the chair's ruling W4): the mean of the five scores says how the rating is worked out.
           { label: 'Safety', value: statusCase(d.safetyLabel) },
           { label: 'Watch to population', value: smart(d.safetyRatio) },
           { label: 'Food resilience', value: smart(d.foodResilience) },
@@ -362,13 +362,6 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
       )}
     </PageChrome>
   );
-}
-
-function scoreTone(v) {
-  if (v == null) return 'muted';
-  if (v >= 70) return 'good';
-  if (v >= 40) return 'warn';
-  return 'bad';
 }
 
 export default DefenseSecurity;
