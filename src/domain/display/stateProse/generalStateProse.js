@@ -570,15 +570,18 @@ function nearestEvent(list) {
 }
 
 /**
- * DS-GEN-9's demoted `anchor` dimension (kernel law 5). STRICTLY BOOLEAN, and `undefined` is
- * NOT "not anchored": measured over 202 generated events the field is a real boolean on most
- * rows and simply absent on others, and an absent flag is a record that has not answered the
- * question rather than one that answered no. An unanswered dimension reads as silence.
+ * DS-GEN-9's demoted `anchor` dimension (kernel law 5). An ABSENT flag is "not anchored" (the chair's ruling of
+ * 2026-11-13 to W2-B-DECLARE's second seat, on the writing lane's request): the generator sets `anchored: true` only
+ * on an event its anchor pass put in (`historyGenerator.js`, the anchor replacement), and its own timeline reads every
+ * other event as `anchored: e.anchored || false` — so an event with no flag is one the anchor pass did not place, not
+ * one whose answer is unknown. Measured on the census's 720 births: 70 towns' marker events carry no flag, and the
+ * pool fell silent in every one (law 5 silences a pool partitioned by a dimension the desk did not answer). A value
+ * that is neither a boolean nor absent answers nothing.
  * @param {unknown} anchored @returns {string|null} a value of STATE_MARK_DIMENSIONS.anchor
  */
 export function eventAnchorDimension(anchored) {
   if (anchored === true) return 'anchored';
-  if (anchored === false) return 'not anchored';
+  if (anchored === false || anchored === undefined) return 'not anchored';
   return null;
 }
 
