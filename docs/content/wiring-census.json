@@ -27803,7 +27803,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 7,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -27969,7 +27969,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 7,
-      "grammars": 4,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -28022,7 +28022,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 7,
-      "grammars": 4,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -70080,7 +70080,7 @@
       "subject": "event type: religious",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "7 variant(s) · 3 grammar(s) · slots {event, settlement, timeband_since}"
+      "count": "7 variant(s) · 2 grammar(s) · slots {event, settlement, timeband_since}"
     },
     {
       "tier": "COVERED",
@@ -70104,7 +70104,7 @@
       "subject": "event type: exile_return",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "7 variant(s) · 4 grammar(s) · slots {event, settlement, timeband_age, timeband_since}"
+      "count": "7 variant(s) · 3 grammar(s) · slots {event, settlement, timeband_age, timeband_since}"
     },
     {
       "tier": "COVERED",
@@ -70112,7 +70112,7 @@
       "subject": "event type: occupation_infiltration",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "7 variant(s) · 4 grammar(s) · slots {event, settlement, timeband_since}"
+      "count": "7 variant(s) · 3 grammar(s) · slots {event, settlement, timeband_since}"
     },
     {
       "tier": "THIN",

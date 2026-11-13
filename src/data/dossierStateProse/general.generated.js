@@ -6969,10 +6969,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "marks": [
-            "not anchored"
-          ],
-          "text": "{settlement} remembers {event} as a hard time, and holds no grudge over it.",
+          "text": "{settlement} remembers {event} as a hard time, and the people who tell it do not make it smaller than it was.",
           "slots": [
             "settlement",
             "event"
@@ -6981,10 +6978,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "marks": [
-            "not anchored"
-          ],
-          "text": "{settlement} came through {event} {timeband_since} and does not show it.",
+          "text": "Anyone in {settlement} will tell a visitor about {event} if asked, even {timeband_since}.",
           "slots": [
             "settlement",
             "event",
@@ -7049,14 +7043,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "marks": [
-            "not anchored"
-          ],
-          "text": "{event} is a thing that happened to {settlement}'s hall {timeband_since} and does not come up.",
+          "text": "Even {timeband_since}, {event} is one of the stories the street in {settlement} tells about its hall.",
           "slots": [
+            "timeband_since",
             "event",
-            "settlement",
-            "timeband_since"
+            "settlement"
           ],
           "vid": 3
         },
@@ -7131,26 +7122,22 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "not anchored",
             "market"
           ],
-          "text": "{event} turned {settlement}'s fortunes {timeband_since}, though nothing in today's market shows it.",
+          "text": "Even {timeband_since}, the older stallholders in {settlement}'s market can say which way {event} turned their trade.",
           "slots": [
-            "event",
+            "timeband_since",
             "settlement",
-            "timeband_since"
+            "event"
           ],
           "vid": 3
         },
         {
           "angle": "counterforce",
-          "marks": [
-            "not anchored"
-          ],
-          "text": "{event} should have remade {settlement} and did not; the town absorbed it and went on doing what it had been doing.",
+          "text": "Some in {settlement} say {event} is given more weight than it deserves; others say it is given less.",
           "slots": [
-            "event",
-            "settlement"
+            "settlement",
+            "event"
           ],
           "vid": 4
         },
@@ -7221,10 +7208,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "marks": [
-            "not anchored"
-          ],
-          "text": "{settlement} remembers {event} as a passing upset, not a change of faith.",
+          "text": "People in {settlement} know {event} by name, and know which households it touched.",
           "slots": [
             "settlement",
             "event"
@@ -7234,12 +7218,12 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "not anchored",
             "institution: temple"
           ],
-          "text": "{settlement}'s altars carry a history visitors only learn by asking.",
+          "text": "Ask at {settlement}'s altars about {event} and you will be given the faith's own account of it.",
           "slots": [
-            "settlement"
+            "settlement",
+            "event"
           ],
           "vid": 4
         },
@@ -7308,26 +7292,20 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "marks": [
-            "not anchored"
-          ],
-          "text": "{event} happened at {settlement} {timeband_since} and is now a story told to children with the frightening part left in.",
+          "text": "Even {timeband_since}, the people of {settlement} who were there at {event} do not all tell it the same way.",
           "slots": [
-            "event",
+            "timeband_since",
             "settlement",
-            "timeband_since"
+            "event"
           ],
           "vid": 3
         },
         {
           "angle": "counterforce",
-          "marks": [
-            "not anchored"
-          ],
-          "text": "{event} could have marked {settlement} permanently and did not; what it touched has grown back.",
+          "text": "There are people in {settlement} who say {event} was less strange than the story makes it, and they say it quietly.",
           "slots": [
-            "event",
-            "settlement"
+            "settlement",
+            "event"
           ],
           "vid": 4
         },
@@ -7388,12 +7366,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "marks": [
-            "not anchored"
-          ],
-          "text": "{settlement} was a different size {timeband_since}, and almost nobody here thinks about that.",
+          "text": "{settlement} was a different size before {event}, and even {timeband_since} the people old enough to remember can say how different.",
           "slots": [
             "settlement",
+            "event",
             "timeband_since"
           ],
           "vid": 3
@@ -7465,11 +7441,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "marks": [
-            "not anchored"
-          ],
-          "text": "{settlement} once exiled some of its own and later took them back, and nobody here talks about either.",
+          "text": "{event} is still told in {settlement}, and each family tells it a little differently.",
           "slots": [
+            "event",
             "settlement"
           ],
           "vid": 3
@@ -7540,24 +7514,20 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "marks": [
-            "not anchored"
-          ],
-          "text": "{settlement} was taken and released {timeband_since}, and the town has put it behind it.",
+          "text": "Even {timeband_since}, people in {settlement} know who stood where during {event}.",
           "slots": [
+            "timeband_since",
             "settlement",
-            "timeband_since"
+            "event"
           ],
           "vid": 3
         },
         {
           "angle": "counterforce",
-          "marks": [
-            "not anchored"
-          ],
-          "text": "{settlement} was occupied and gave nothing up that mattered; what the occupier took, the town had already moved.",
+          "text": "Not everyone in {settlement} tells {event} the same way, and the difference lies in who their families were at the time.",
           "slots": [
-            "settlement"
+            "settlement",
+            "event"
           ],
           "vid": 4
         },
