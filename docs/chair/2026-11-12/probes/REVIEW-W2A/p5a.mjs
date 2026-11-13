@@ -1,0 +1,20 @@
+import fs from 'node:fs'; import zlib from 'node:zlib';
+const OUT=process.argv[2];
+const corpus=zlib.gunzipSync(fs.readFileSync(OUT+'/corpus.ndjson.gz')).toString().trim().split('\n').map(l=>JSON.parse(l));
+const per=JSON.parse(fs.readFileSync(OUT+'/counts.perseed.json','utf8'));
+const P=(await import(process.env.TREE+'/src/data/dossierStateProse/power.generated.js')).DOSSIER_STATE_PROSE_POWER;
+const toRe=(t)=>new RegExp(t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&').replace(/\\\{[a-z]+\\\}/g,'.+?').replace(/\btown\b/g,'(?:thorp|hamlet|village|town|city|metropolis)'));
+const pools=[]; for(const b of Object.values(P)) for(const [k,vs] of Object.entries(b.pools||{})) if(/^capture pressure/.test(k)) for(const v of vs) pools.push({k:k.split(' ')[2]+':v'+v.vid,re:toRe(v.text)});
+const tally={}; let n=0; const states={}; const rows=[];
+for(const {seed,s} of corpus){ if(!(per[seed]||[]).includes('P5a')) continue; n++;
+ const txt=fs.readFileSync(`${OUT}/dumps/${seed}.txt`,'utf8'); const L=txt.split('\n');
+ const p=pools.find(p=>L.some(l=>p.re.test(l))); tally[p?.k]=(tally[p?.k]||0)+1;
+ const st=s.powerStructure?.criminalCaptureState; states[st]=(states[st]||0)+1;
+ const bm=s.economicState?.safetyProfile?.blackMarketCapture||0; const ci=(s.institutions||[]).filter(i=>/criminal/i.test(i.category||'')).length;
+ const org=/Criminal structure: Organized/.test(txt), semi=/Criminal structure: Semi/.test(txt), payroll=/on the payroll of the criminal|bought officials|bribed officials/.test(txt);
+ rows.push({seed,st,k:p?.k,bm,ci,org,semi,payroll});
+}
+console.log('P5a towns',n,'states',JSON.stringify(states)); console.log('pool:variant',JSON.stringify(tally));
+const c=(f)=>rows.filter(f).length;
+console.log('blackMarketCapture>0',c(r=>r.bm>0),'| criminal institutions>0',c(r=>r.ci>0),'| Organized structure line',c(r=>r.org),'| Semi-organized',c(r=>r.semi),'| page elsewhere says bought/bribed officials or payroll',c(r=>r.payroll));
+console.log('ADVANCING',c(r=>/ADVANCING/.test(r.k)),'RECOVERING',c(r=>/RECOVERING/.test(r.k)), '| ADV with bm>0', c(r=>/ADVANCING/.test(r.k)&&r.bm>0), '| REC with ci>0', c(r=>/RECOVERING/.test(r.k)&&r.ci>0));

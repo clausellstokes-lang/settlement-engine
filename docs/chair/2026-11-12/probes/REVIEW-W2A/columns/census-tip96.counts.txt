@@ -1,0 +1,46 @@
+NEW1           total 6 calm 6 crisis 0 | thor 0/0 haml 0/0 vill 0/0 town 4/0 city 2/0 metr 0/0
+NEW1b          total 5 calm 4 crisis 1 | thor 0/0 haml 3/1 vill 1/0 town 0/0 city 0/0 metr 0/0
+NEW2           total 3 calm 2 crisis 1 | thor 0/0 haml 0/0 vill 1/1 town 1/0 city 0/0 metr 0/0
+P10            total 17 calm 11 crisis 6 | thor 0/0 haml 0/0 vill 0/0 town 11/6 city 0/0 metr 0/0
+P11            total 410 calm 208 crisis 202 | thor 22/20 haml 30/31 vill 26/18 town 37/34 city 43/49 metr 50/50
+P11noForage    total 301 calm 155 crisis 146 | thor 1/0 haml 13/14 vill 25/17 town 33/27 city 38/44 metr 45/44
+P11noSubstitute total 120 calm 53 crisis 67 | thor 0/0 haml 4/4 vill 5/5 town 4/6 city 16/23 metr 24/29
+P11substitute  total 290 calm 155 crisis 135 | thor 22/20 haml 26/27 vill 21/13 town 33/28 city 27/26 metr 26/21
+P12coal        total 51 calm 25 crisis 26 | thor 9/6 haml 5/9 vill 6/7 town 5/2 city 0/2 metr 0/0
+P12ore         total 68 calm 36 crisis 32 | thor 17/10 haml 9/7 vill 7/10 town 3/5 city 0/0 metr 0/0
+P12oreImport   total 6 calm 1 crisis 5 | thor 0/0 haml 0/0 vill 0/0 town 1/2 city 0/3 metr 0/0
+P12quarry      total 80 calm 49 crisis 31 | thor 10/7 haml 4/3 vill 11/5 town 13/4 city 9/12 metr 2/0
+P12saw         total 67 calm 30 crisis 37 | thor 6/12 haml 8/9 vill 9/8 town 5/6 city 2/2 metr 0/0
+P13            total 172 calm 76 crisis 96 | thor 22/28 haml 19/24 vill 14/16 town 13/20 city 7/5 metr 1/3
+P14            total 59 calm 32 crisis 27 | thor 12/11 haml 10/5 vill 10/11 town 0/0 city 0/0 metr 0/0
+P14district    total 128 calm 60 crisis 68 | thor 20/22 haml 16/21 vill 24/25 town 0/0 city 0/0 metr 0/0
+P15            total 720 calm 360 crisis 360 | thor 60/60 haml 60/60 vill 60/60 town 60/60 city 60/60 metr 60/60
+P16n           720
+P16powers      total 291 calm 147 crisis 144 | thor 0/0 haml 0/0 vill 1/2 town 29/22 city 58/60 metr 59/60
+P16three       total 331 calm 175 crisis 156 | thor 57/59 haml 23/28 vill 10/10 town 28/16 city 27/22 metr 30/21
+P17            total 680 calm 341 crisis 339 | thor 46/44 haml 56/60 vill 60/58 town 59/58 city 60/60 metr 60/59
+P18npc         total 360 calm 180 crisis 180 | thor 0/0 haml 0/0 vill 0/0 town 60/60 city 60/60 metr 60/60
+P18rec         total 338 calm 169 crisis 169 | thor 0/0 haml 0/0 vill 0/0 town 60/60 city 53/52 metr 56/57
+P18via         total 58 calm 30 crisis 28 | thor 0/0 haml 0/0 vill 0/0 town 15/17 city 13/9 metr 2/2
+P19            total 7 calm 4 crisis 3 | thor 0/0 haml 1/1 vill 2/1 town 1/1 city 0/0 metr 0/0
+P1a            total 57 calm 34 crisis 23 | thor 10/9 haml 15/9 vill 8/4 town 1/1 city 0/0 metr 0/0
+P1b            total 64 calm 34 crisis 30 | thor 0/0 haml 0/0 vill 0/0 town 0/0 city 16/17 metr 18/13
+P2             total 569 calm 302 crisis 267 | thor 29/20 haml 35/21 vill 58/51 town 60/56 city 60/60 metr 60/59
+P21            total 720 calm 360 crisis 360 | thor 60/60 haml 60/60 vill 60/60 town 60/60 city 60/60 metr 60/60
+P2n            720
+P3any          total 190 calm 96 crisis 94 | thor 22/17 haml 15/19 vill 26/31 town 23/19 city 3/4 metr 7/4
+P3avail        total 139 calm 67 crisis 72 | thor 22/17 haml 15/19 vill 15/22 town 15/14 city 0/0 metr 0/0
+P3rel          total 74 calm 41 crisis 33 | thor 0/0 haml 0/0 vill 17/14 town 14/11 city 3/4 metr 7/4
+P4             total 106 calm 63 crisis 43 | thor 0/0 haml 0/0 vill 1/4 town 14/17 city 24/14 metr 24/8
+P4dominant     total 29 calm 24 crisis 5 | thor 0/0 haml 0/0 vill 0/0 town 5/1 city 10/2 metr 9/2
+P4labels       0
+P4n            184
+P7a            total 128 calm 67 crisis 61 | thor 11/9 haml 6/12 vill 8/8 town 13/16 city 15/8 metr 14/8
+P7b            total 27 calm 16 crisis 11 | thor 2/8 haml 9/1 vill 5/2 town 0/0 city 0/0 metr 0/0
+P7n            720
+P8any          total 220 calm 110 crisis 110 | thor 50/50 haml 60/60 vill 0/0 town 0/0 city 0/0 metr 0/0
+P8flow         total 220 calm 110 crisis 110 | thor 50/50 haml 60/60 vill 0/0 town 0/0 city 0/0 metr 0/0
+P8houses       total 111 calm 56 crisis 55 | thor 29/23 haml 27/32 vill 0/0 town 0/0 city 0/0 metr 0/0
+P9             total 149 calm 71 crisis 78 | thor 20/23 haml 20/14 vill 13/23 town 18/18 city 0/0 metr 0/0
+P9n            507
+{ dumps: 720 }
