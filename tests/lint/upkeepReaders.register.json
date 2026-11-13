@@ -1,15 +1,6 @@
 {
   "_doc": "COHERENCE-UPKEEP (the chair's ruling of 2026-11-12 on item 4, ruling 1): every read of the economy's OUTPUT score used to gate upkeep, outside the one home (src/domain/facts/keep.js :: keepOf), counted by tests/lint/upkeepReaders.walker.test.js. SHRINK-ONLY from its first commit: a row retires the commit its read moves home; no row is ever added. Banked at the lane's base 65ce74ce6.",
   "rows": {
-    "src/generators/defenseGenerator.js :: inst, milEffective, crimEffective, econOutput, magInfluence, relInfluence,": {
-      "reason": "The defence scores' parameter: it carries the output to the economic score's capacity term (the row above); held while that term reads it."
-    },
-    "src/generators/defenseGenerator.js :: economic = Math.min(100, economic + Math.round(econOutput * 0.2));": {
-      "reason": "Not an upkeep gate: the economy's own trade adds to crisis logistics as capacity (the economic score's additive stack). Held, and it stays at its row unless a later ruling moves it."
-    },
-    "src/generators/defenseGenerator.js :: Math.round(instFlags.economyOutput),": {
-      "reason": "The defence profile hands the output to computeDefenseScores for the capacity term; held while that term reads it."
-    },
     "src/generators/services/serviceAvailability.js :: ? priorityToMultiplier(flags.economyOutput)": {
       "reason": "HELD (the chair's ruling (A) on the services STOP, 2026-11-12). The commercial services' demand roll reads the economy's output for BOTH its threshold (rng() > output/50) and whether it draws at all (only below 1), as it did before this lane; it is kept so the services step's seeded stream does not move. What a place can keep up is the home's share, boughtShare('services', keepOf(prosperity)), applied after this roll by the draw-free upkeep roll in serviceRollMaterialization.js, so the rule only takes rows away. The single read (the threshold from the home with the draw pattern held) is a named debt for after the release."
     }

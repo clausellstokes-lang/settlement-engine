@@ -201,8 +201,8 @@ export const HOLDER_SOURCES = Object.freeze({
   force: Object.freeze({ kind: 'muster', cite: 'src/generators/threatDefensePolicy.js:13', read: true }),
   // ⭐ CITED BY SYMBOL (rule 32; COHERENCE-UPKEEP, 2026-11-12): the lane's edits to defenseGenerator.js moved these
   // two writes from :467/:476 to :497/:506; a drifted cite is re-addressed to the symbol that writes the token.
-  magicDependency: Object.freeze({ kind: 'muster', cite: 'src/generators/defenseGenerator.js :: computeDefenseScores', read: true }),
-  economicGates: Object.freeze({ kind: 'muster', cite: 'src/generators/defenseGenerator.js :: computeDefenseScores', read: true }),
+  magicDependency: Object.freeze({ kind: 'muster', cite: 'src/generators/defenseGenerator.js :: generateDefenseProfile', read: true }),
+  economicGates: Object.freeze({ kind: 'muster', cite: 'src/generators/defenseGenerator.js :: generateDefenseProfile', read: true }),
   besiegedBy: Object.freeze({ kind: 'muster', cite: 'src/domain/display/warStatus.js:297', read: true }),
   besiegingTargets: Object.freeze({ kind: 'muster', cite: 'src/domain/display/warStatus.js:297', read: true }),
   ticksToDeploy: Object.freeze({ kind: 'muster', cite: 'src/domain/display/mobilizationStatus.js:94', read: true }),

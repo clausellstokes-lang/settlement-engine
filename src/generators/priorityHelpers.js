@@ -4,7 +4,7 @@
  * Extracted from helpers.js to keep it focused.
  */
 
-import {clamp} from './helpers.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { hasMarketInstitution } from '../domain/facts/market.js';
+import {clamp} from './helpers.js'; import { DEFENCE_TUNING } from '../data/defenceWeights.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { hasMarketInstitution } from '../domain/facts/market.js';
 import {
   isMaterializedCustomContent,
   nativeSemanticNames,
@@ -22,6 +22,20 @@ export const getPriorities = (config = {}) => ({
   magic:    config.priorityMagic    ?? 50,
   criminal: config.priorityCriminal ?? 50,
 });
+
+/**
+ * THE NEIGHBOUR FACTOR on a town's will to arms (COHERENCE-UPKEEP-5, the chair's R14): the
+ * neighbour relationship's type, read by name, against the weight table's row
+ * (`DEFENCE_TUNING.neighbour`, checked in its order: hostile or rival, cold war, tense, allied,
+ * trade partner). 1 with no neighbour. One home: `militaryEffective` below and the defence
+ * profile's martial will both read it here.
+ * @param {any} [config] @returns {number}
+ */
+export const neighbourMilitaryFactorOf = (config = {}) => {
+  const neighborType = (config?.neighborRelationship?.relationshipType || '').toLowerCase();
+  for (const [kind, factor] of Object.entries(DEFENCE_TUNING.neighbour)) if (neighborType.includes(kind)) return factor;
+  return 1;
+};
 
 // ─── Institution classification ──────────────────────────────────────────────
 
@@ -380,12 +394,7 @@ export const getInstFlags = (config = {}, institutions = []) => {
   const militaryInstMult     = inst.hasMilitaryInst ? 1.0 : 0.4;
 
   const neighborType = (config.neighborRelationship?.relationshipType || '').toLowerCase();
-  const neighborMilMult =
-    (neighborType.includes('hostile') || neighborType.includes('rival')) ? 1.20 :
-     neighborType.includes('cold_war')      ? 1.18 :
-     neighborType.includes('tense')         ? 1.10 :
-     neighborType.includes('allied')        ? 0.92 :
-     neighborType.includes('trade_partner') ? 0.96 : 1.0;
+  const neighborMilMult = neighbourMilitaryFactorOf(config); // COHERENCE-UPKEEP-5 (R14): the one reading, shared with defence
 
   const militaryEffective = clamp(
     pri.military         *

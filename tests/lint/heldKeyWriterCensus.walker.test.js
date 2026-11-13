@@ -237,7 +237,7 @@ const DISCOVERY_EXEMPT = Object.freeze([
   // URBAN-FIX C-1 (935c961fd), composed at STYLE-2-MERGE point 25: the food record's composed line, read for the stored foodways.
   { symbol: 'foodwaysLineOf', reason: 'a pure READ of economicState.foodSecurity.foodRecord.foodwaysLine (trimmed, or null); it writes nothing at all.' },
   // COHERENCE-UPKEEP (d7d7f7787, the keep home), named at the lane's whole-suite run 2026-11-12.
-  { symbol: 'keepOf', reason: 'a pure READ of the prosperity label into what the place can keep up ({ bought, funded }, domain/facts/keep.js), handed to generateDefenseProfile; it writes nothing at all.' },
+  { symbol: 'keepOfRecord', reason: 'a pure READ of the standing prosperity label (economicState.prosperityStanding, else the label) into what the place can keep up ({ bought, funded }, domain/facts/keep.js), handed to generateDefenseProfile; it writes nothing at all (COHERENCE-UPKEEP-5, R3).' },
 ]);
 
 /** The held denominator, DERIVED from its producers and never re-typed. */

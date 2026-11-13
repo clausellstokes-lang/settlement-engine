@@ -20,7 +20,7 @@
 
 ## (a) The formula as it stands
 
-Readiness = the average of five scores (military, monster, internal, economic, magical; four in a world with no magic), plus a size bonus, minus a threat penalty, held between 0 and 100 (`src/generators/defenseGenerator.js:526-556`). Each score is built from contributions, then multiplied by gates, then cut by crises, and held between 0 and 100. Line numbers are at the tip.
+Readiness = the average of five scores (military, monster, internal, economic, magical; four in a world with no magic), plus a size bonus, minus a threat penalty, held between 0 and 100 (`src/generators/defenseGenerator.js`, lines 526-556 at e1b2f9c1f, before V3 replaced the formula). Each score is built from contributions, then multiplied by gates, then cut by crises, and held between 0 and 100. Line numbers are at the tip.
 
 | Term | Class | Where |
 |---|---|---|
