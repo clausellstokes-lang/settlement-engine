@@ -381,7 +381,7 @@ The seat: W2-B-DECLARE-4, the fourth builder on `lane/w2-b-declare-2026-11-12` f
 **Kept current after every item.** Every count is executed unless marked PLAUSIBLE. Work tree: a scratch worktree on a local branch at the lane's tip (`npm ci`); the reviewed base `1fb15980d` in a second detached worktree with the lane's `node_modules` linked (the lockfile is byte-identical between the two); the main checkout untouched. Refs and local config are snapshotted before and after every suite and every push.
 
 ## 0. Status
-- IN PROGRESS. DONE: the base census (§2), F7 (§3), F2's read (§4), the F5/F6 measure with one residue cured (§5). NEXT: the lighting refreeze, the whole suite, the tip census and compare, the forecast.
+- **DONE; handed back.** Every item of PART FOUR §7 is done: the base census (§2); F7, both families 10/10 (§3); F2's read, `streets` 10/10 and `quarters` 9/10, both stay (§4); the F5/F6 measure with one residue cured (§5); the lighting refreeze (§6); the whole suite, 58 reds classed, none this seat's, one the lane's (the tuning register row, the merge seat's door: §7); the page unmoved, 720 dump pairs identical (§8); the forecast against the five lanes (§9). The final `src` tip is `8bb923678`; this hand-back is the commit on top of it.
 
 ## 1. The brief's rulings, copied (the chair's messages are not on the branch)
 The seat: W2-B-DECLARE-5, the fifth builder on `lane/w2-b-declare-2026-11-12`, from `c4f76c5c2`; the chair is session `session_01FE9mEws7PXYRYdjQPbSX15` (a new chair on a new account; the owner re-confirmed the standing delegation on 2026-11-13). THE PAGE MUST NOT MOVE: this lane changes instruments, never what a town prints. Read first: the operating standard, CONTRIBUTING, the chair's handoff of 2026-11-13 (its section 5 binds), the second wave's charter (section 0 as amended, records 303 and 306; where the brief and the charter differ, the brief governs), the second review (NOT CLEAR), PART FOUR whole (its §10's rules bind), the cold list at `origin/lane/review-w2b-2026-11-13` `1d1d90e2f` (`REVIEW-W2B-COLD-LIST`), queried by script.
@@ -442,3 +442,70 @@ Over the base census's dumps, the page list of `1fb15980d`'s instrument (2,495 l
   - The 14 left are each a physician hook framed as past ("The records of that time say: someone is poisoning the ruler slowly …"), which the review read as past.
 - **F6.** Unattributed 532 → 355: `smallMargin` 64 → 0, `onlyJust` 57 → 0, `religiousHouses` 119 → 8. Left: `streets` 205 (the truth home names no writer, by design: PART FOUR §6), `quarters` 41, `openTrade` 24, `powersCount` 17, `smith` 15, `mason` 15, `notary` 14, `practitioner` 12, others ≤ 8.
 - **On the tip's page list** (2,430 lines / 633 towns: F2's `streets` leaves villages and up; F7 adds 101): `past` 14, eventhook 62, unattributed 307.
+
+## 6. The lighting census, refrozen through its own door (DONE, `8bb923678`)
+At the clean tip `3eb4dbc94`: `LIGHTING_CENSUS_REFREEZE='W2-B-DECLARE-5' LIGHTING_CENSUS_NOTE=… npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js` (it failed by design), then a plain re-run, green. Titles 29255 → 29265, suiteTitles 7927 → 7930; files 3221, parked 399, credited 2822 unchanged. The +10 titles are the fourth seat's (F4 +2, F3 +2, F2 +2, F9 +1, F8 +1) and this seat's (F7 +2). In the whole suite (§7) the walker is green, 34 of 34.
+
+## 7. The whole suite at the final `src` tip `8bb923678` (DONE; ALONE, two workers, 12:24 → 13:40 UTC)
+`git fetch origin review-fixes-2026-07-08:review-fixes-2026-07-08` (`235efce1a`), then `npx vitest run --maxWorkers=2` to a file. **Test Files 40 failed | 3173 passed | 8 skipped (3221); Tests 53 failed | 38729 passed | 252 skipped (39034); EXIT 1.** Refs and local config before and after: identical. No stash left.
+
+**Classed.** The 40 red files were run ALONE (two workers, one run per tree) at `9d5d6e091` and at `1fb15980d`, and each red title (53, plus 5 files that fail at file level) was compared by title. Script: `<scratchpad>/tools/clsred.mjs`.
+
+| at `9d5d6e091` / at `1fb15980d` | rows |
+|---|---|
+| red / red (not this lane's: the base's reds) | **57** |
+| green / red (this lane's, from before this seat) | **1** |
+| green / green (this seat's) | **0** |
+
+- The 57 are the base's: golden and byte-identity fences (generator golden master, engine bundle replay, the edge bundles' freshness, the pinned-mode null changes, the dossier drift corpus, the Herald desk, …), the `osr-tier-14` corpus seed (five walker files at file level), the site-coherence ratchet, the cartography calibration, and others. Each is red under the same title at `9d5d6e091`.
+- **The one that is the lane's: `tests/lint/tuningRegister.walker.test.js` › "the measured tree matches the committed inventory exactly".** The row: `src/domain/people/patronage.js#RULING_PATRONAGE_TUNING: dependents + src/domain/facts/registeredWords.js` (named by `<scratchpad>/tools/tuningdiff.mjs`; the only moved row). Cause: F2's leaf (`registeredWords.js` imports `dmPowerViewOf`, third seat) adds a dependent to a signed tuning value. Its door is the tuning register's refreeze ritual, which the brief gives to **the merge seat, at this lane's merge point**. **Named, not cured** (the brief's rule for a door that is not this seat's). It is red at `1fb15980d` too; no title this seat added is red.
+
+## 8. THE PAGE DID NOT MOVE: the tip census at `8bb923678` against the base `1fb15980d` (DONE; ALONE, two workers, 14:12 → 14:31 UTC)
+The same instrument, `sh SECOND-WAVE-CENSUS/census.sh <tip> <out> 2`: births 720, errors 0; both render workers `Tests 360 passed (360)`; `EXIT 0`; 720 dumps.
+- `compare.mjs <base>/counts.perseed.json <tip>/counts.perseed.json`: **every row OLD, each with base = tip** (28 rows, 1a to NEW-2: 57/57, 64/64, 569/569, … 3/3). GLANCE 717 / 717; median rows per town identical. Saved as `probes/W2-B-DECLARE-5/census-compare.1fb15980d-8bb923678.txt`.
+- **`cmp` of every rendered dump pair: 720 pairs, 0 differ**; the two dump sets have the same 720 names. `counts.perseed.json` is byte-identical between base and tip.
+- This turns PART FOUR §7.3's PLAUSIBLE ("no product file reads anything this lane changed") into executed, over the 720.
+
+## 9. The forecast re-run at the final tip (DONE; saved beside the draws, `probes/W2-B-DECLARE-5/forecast.8bb923678.jsonl` and `forecast2.8bb923678.jsonl`)
+**Tips used** (fetched after the suite, before 14:00 UTC): w2-fix-data `7574ae27e`, w2-write `4f52408b7`, w2-a-leaves `817980b33`, coherence-upkeep `9fccbd8ed`, integration-2026-11-07 `e969a75b7`. Three have moved since the fourth seat's run (w2-fix-data was `379186c96`, w2-write `543a92793`, coherence-upkeep `ce3bceda9`). Method: PART FOUR §7.7 (`git merge-tree --write-tree HEAD origin/<lane>`, `git archive <tree> src tests/lint tests/helpers scripts package.json`, this lane's two registers overlaid, `node_modules` linked); `forecast.mjs` and `forecast2.mjs` from `probes/W2-B-DECLARE-4/`, unchanged; a control (this tip against itself).
+
+| lane (tip) | banked rows still found | gone | of which verbatim and now declared | removed | edited, fresh | edited, declared | edited, word gone | other fresh hits | fresh, new key / old key / new key only |
+|---|---|---|---|---|---|---|---|---|---|
+| CONTROL (`8bb923678`) | 5545 / 5545 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 / 0 / 0 |
+| w2-fix-data (`7574ae27e`) | 5493 | 52 | 34 | 6 | 7 | 0 | 5 | 30 | 37 / 37 / 0 |
+| w2-write (`4f52408b7`) | 5510 | 35 | 24 | 5 | 1 | 2 | 3 | 26 | 27 / 27 / 0 |
+| w2-a-leaves (`817980b33`) | 5543 | 2 | 0 | 0 | 2 | 0 | 0 | 15 | 17 / 16 / **1** |
+| coherence-upkeep (`9fccbd8ed`) | 5544 | 1 | 0 | 1 | 0 | 0 | 0 | 24 | 24 / 24 / 0 |
+| integration-2026-11-07 (`e969a75b7`) | 5544 | 1 | 0 | 1 | 0 | 0 | 0 | 2 | 2 / 2 / 0 |
+
+- **The cross-check (old key, first 120 characters, against the new key, the whole literal):** they agree on every lane except one row. The new key alone sees an edit in w2-a-leaves, `src/domain/display/defenseDisplay.js` :: `streets` :: "… money and on whatever official it can pay, and anyone who needs something from it can bar…". The edit falls past character 120, so the old key would have kept it banked. This is the F4 design doing its job.
+- **Merge-tree conflicts** (textual, for the chair's order): w2-fix-data and w2-write each conflict on both presumedThings registers and on `docs/content/wiring-census.json`; w2-a-leaves on `wiring-census.json`; coherence-upkeep on `scripts/mutation-coverage-manifest.json` and the lighting census baseline; integration on the lighting baseline and ten `supabase/functions/_shared/*Bundle*` files.
+- The banked total is 5545, not the fourth seat's 5546. PLAUSIBLE: F8 (`f1a48b12f`) dropped a row from the widened register after the `0b092c5f1` run.
+- **The order of merges is the chair's** (the brief). This seat recommends none.
+
+## 10. Not this seat's (listed; none built)
+- F12: the getters, their dimensions and readers (a seat on the line after the lanes that hold the getters' file have merged).
+- The tuning register's refreeze, the merge seat's: the row is `src/domain/people/patronage.js#RULING_PATRONAGE_TUNING: dependents + src/domain/facts/registeredWords.js` (§7).
+- Other lanes' asks of the instrument: the six key-implied lines to re-bank; the river-route pools; vocabulary atoms for an official in a criminal's pay and for an agent in the hall; a stability band; an `inn` word.
+- More recall.
+- For the owner of `src/generators/economy/economicState.js`: `hasAlch` reads an apothecary as an alchemist (§3). Reported, not touched.
+
+## 11. The surfaces this seat changed (six), each inside the instrument, its tests, its probes or a register through its own door
+1. `src/domain/facts/registeredWords.js`: `pageKept` and `onPageList` (F7). This file is read only by the page member and by tests and probes; §8 proves the page is unmoved.
+2. `src/domain/coherence/vocabularyPageFindings.js`: lists a naming sentence when `onPageList` (F7).
+3. `tests/domain/coherence/vocabularyPageFindings.test.js`: the F7 plants, plus the F1 hamlet pin re-keyed by identity with its cause (§3).
+4. `docs/chair/2026-11-12/probes/W2-B-DECLARE/classify.mjs`: the `past` rule no longer reads quotation marks (§5).
+5. `docs/chair/2026-11-12/probes/W2-B-DECLARE/f5plant.sh`: the review's named line, in quotation marks, as a plant, and a quoted past control (§5).
+6. `tests/lint/.lighting-census-baseline.json`: through its own door (§6).
+
+Plus this hand-back, and the probes under `docs/chair/2026-11-13/probes/W2-B-DECLARE-5/`. Each `src` commit (`971d82122`) ran its gates through `sh scripts/gate-tail.sh`: domain-strict, the type ratchet, and eslint on the touched files, all green.
+
+## 12. Calls taken without the chair (vetoable)
+1. **F2, the `streets` reading:** a hamlet's plural streets read as a size error (10/10). The second review's contrary standard (5/10) is named in §4, with the recommendation that the chair rule it at the third read.
+2. **The F5 residue cure:** the quotation-mark marker dropped from `past`, red first (§5). The brief asked for the measure, and the residue was the measure's own finding.
+3. **The `economicState.js` alchemist line:** read as a second false writer, not a truth home. Reported to its owner, not touched (§3).
+4. **The tuning register red:** named and not cured, because its door is the merge seat's (§7).
+
+## 13. Parked for the chair (sent together, once, in the hand-back message)
+- The `streets` standard for hamlets (§4, §12.1).
+- The `economicState.js` `hasAlch` presumption (§3): another lane's file.
