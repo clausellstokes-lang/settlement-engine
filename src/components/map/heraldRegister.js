@@ -47,6 +47,7 @@
 import { lifecycleStatusOf } from '../../domain/worldPulse/settlementLifecycleFirstClass.js';
 import { settlementWarStatus } from '../../domain/display/warStatus.js';
 import { popToTier, prosperityRank } from '../../data/constants.js';
+import { activeCrisisTypes, crisisKindOf } from '../../domain/facts/crisisKind.js';
 
 /** Codepoint comparator. Never localeCompare: host ICU tables are not a stable order. */
 function codepoint(a, b) {
@@ -111,14 +112,26 @@ function article(phrase) {
   return /^[aeiou]/i.test(phrase) ? 'An' : 'A';
 }
 
-/** The register's war clause for a settlement's live status — one closed
- *  three-word vocabulary shared by the sentence AND the DESK-1 table column. */
-function warClauseOf(warStatus) {
-  return warStatus?.besiegedBy?.length
-    ? 'under siege'
-    : warStatus?.besiegingTargets?.length
-      ? 'with its armies in the field'
-      : 'at peace';
+/** The town's own crises that are fighting, but neither a siege nor a war: the register names none of them, so where
+ *  one holds and the map is silent the clause is left out rather than called peace (COHERENCE-UPKEEP-7, ruling 2b). */
+const FIGHTING_UNNAMED = Object.freeze(new Set(['occupied', 'insurgency', 'slave_revolt', 'monster_pressure']));
+
+/** The register's war clause — one closed vocabulary shared by the sentence AND the DESK-1 table column.
+ *  Where the campaign's map speaks (its live war ledgers: besieged, or besieging), the map's word stands. Where the
+ *  map is silent, the clause reads the town's OWN crisis, through the two-label sentence's public home
+ *  (`facts/crisisKind.js`; COHERENCE-UPKEEP-7, the chair's ruling 2b on the third read's 1a-M1): a siege "under
+ *  siege"; a war and no siege "at war"; an occupation, an insurgency, a revolt or raids and neither of those, NO
+ *  clause (''); any other crisis, or none, "at peace". Derived at render; nothing is stored.
+ *  @param {{ besiegingTargets?: string[], besiegedBy?: string[] } | null} warStatus @param {any} settlement
+ *  @returns {string} the clause, or '' for none */
+function warClauseOf(warStatus, settlement) {
+  if (warStatus?.besiegedBy?.length) return 'under siege';
+  if (warStatus?.besiegingTargets?.length) return 'with its armies in the field';
+  const kinds = new Set(activeCrisisTypes(settlement).map((type) => crisisKindOf(type)).filter(Boolean));
+  if (kinds.has('under_siege')) return 'under siege';
+  if (kinds.has('wartime')) return 'at war';
+  for (const kind of kinds) if (FIGHTING_UNNAMED.has(String(kind))) return '';
+  return 'at peace';
 }
 
 /**
@@ -134,9 +147,9 @@ function livingLine(settlement, warStatus) {
   const tier = tierWordOf(settlement);
   const prosperity = prosperityWordOf(settlement);
   const subject = prosperity ? `${prosperity} ${tier}` : tier;
-  // No two-label sentence on this row (COHERENCE-UPKEEP-6, the chair's ruling C on the third read): the war word
-  // reads the campaign's map, the sentence would read the town's own crisis, and the two can disagree.
-  return `${article(subject)} ${subject}, ${warClauseOf(warStatus)}.`;
+  // No two-label sentence on this row (COHERENCE-UPKEEP-6, the chair's ruling C on the third read).
+  const clause = warClauseOf(warStatus, settlement);
+  return clause ? `${article(subject)} ${subject}, ${clause}.` : `${article(subject)} ${subject}.`;
 }
 
 /**
@@ -155,6 +168,7 @@ function livingLine(settlement, warStatus) {
  * @param {ReadonlyArray<RegisterSave>} [args.saves]
  * @param {boolean} [args.seesSecrets]  a proven owner session (viewerSeesDmSecrets)
  * @returns {Array<{ id: string, name: string, tier: string, line: string, threat: string|null, prosperity: string, war: string, population: number|null }>}
+ *   (`war` is '' where the clause is left out: the table prints its own mark for no value)
  */
 export function gazetteerRows({ campaign, saves, seesSecrets = false }) {
   const worldState = campaign?.worldState || {};
@@ -171,7 +185,7 @@ export function gazetteerRows({ campaign, saves, seesSecrets = false }) {
       tier: tierWordOf(settlement),
       line: livingLine(settlement, warStatus),
       prosperity: prosperityWordOf(settlement),
-      war: warClauseOf(warStatus),
+      war: warClauseOf(warStatus, settlement),
       // The threat read is a DM assessment of the country around the walls, not
       // a register fact — it is built only for a proven owner session.
       threat: seesSecrets ? String(settlement?.config?.monsterThreat || '') || null : null,
