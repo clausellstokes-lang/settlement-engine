@@ -224,7 +224,8 @@ describe('PRESSURE_SENTENCES (narrativeText.js, R: the rows inside each stressor
     }
     expect(wrong).toEqual([]);
     // 17 -> 16 (COHERENCE-PRESUME): the mass-migration line no longer names a market, so it declares nothing
-    expect(declaring).toBe(16);
+    // 16 -> 18 (R2-CODE-A-3, round three #40 / #4): famine[0] and famine[4] presume a common store and need a granary
+    expect(declaring).toBe(18);
   });
 });
 

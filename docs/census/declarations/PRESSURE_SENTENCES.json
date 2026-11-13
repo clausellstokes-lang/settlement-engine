@@ -110,18 +110,20 @@
       "lines": [
         {
           "lineId": "PRESSURE_SENTENCES.famine[0]",
-          "text": "${name} is two bad weeks from genuine starvation; ${topFaction} controls the remaining ${commodity} reserves and is not discussing it openly.",
-          "needs": [],
+          "text": "${name} is two bad weeks from genuine starvation; the remaining ${food} reserves are in few hands, and whoever holds them is not discussing it openly.",
+          "needs": [
+            "institution: granary"
+          ],
           "excludes": [],
           "crisis": [
             "famine"
           ],
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
           "lineId": "PRESSURE_SENTENCES.famine[1]",
-          "text": "Since the harvest failed, whoever holds the food in ${name} holds the power, and at least three powers are fighting over the stores.",
+          "text": "Since ${failed}, whoever holds the food in ${name} holds the power, and at least three powers are fighting over ${stores}.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -154,13 +156,15 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.famine[4]",
-          "text": "${govFaction} of ${name} promised a fair share of the ${commodity} reserves last week, and little of it has reached the poor.",
-          "needs": [],
+          "text": "${govFaction} of ${name} promised a fair share of the ${food} reserves last week, and little of it has reached the poor.",
+          "needs": [
+            "institution: granary"
+          ],
           "excludes": [],
           "crisis": [
             "famine"
           ],
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
