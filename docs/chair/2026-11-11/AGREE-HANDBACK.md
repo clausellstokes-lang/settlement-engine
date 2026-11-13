@@ -675,3 +675,148 @@ original on the ONE atom the pair is keyed on, and on no other. The plant (keyed
 garrison) was RED under the old rule and is GREEN here. Existing pairs the narrower rule asks a declaration of: **0 of
 21**. Nothing was banked. The upkeep lane's four lines meet the rule at their merge. The lighting census was re-taken
 after it (326e711b0).
+
+---
+
+# PART SIX — the seventh seat (COHERENCE-AGREE-7, 2026-11-12), from 525d064f1 / a8875fa96
+
+The five parked items as the chair ruled them, then the lane made whole. One writer, in a scratch worktree of the lane
+branch; every push plain, through the hook's three lane gates. The sixth seat's patches
+(`probes/COHERENCE-AGREE-6/`) were the start of P1's widening, P3 and P5; each was applied as this seat's own commit,
+red first, and re-measured.
+
+## The instrument (L2, L3)
+
+The corpus is PART FIVE's 4,141: L2 2,866 + the golden's 525 + REVIEW-AGREE-2's 750 (r2r 360, r2s 360, r2read 30,
+its ten crises forced). Every birth is `birthConfig({ ...DEFAULT_CONFIG, ...dials, settType })` (forced crises as
+`selectedStresses: [s], selectedStressesRandom: false`); the golden rows as `generatorGoldenMaster` births them.
+A "no move" is a field diff: every leaf flattened, base against tip, moved leaves counted by pattern; labels read by
+direction on the five ladders (`bandLadders.js`; safety by its head word). Same-tree re-births are byte-identical
+(1,036 of 1,036 checked). HOLDERS (P2, P3) come from an instrumented scratch copy that lists every birth's refused
+slots: A′'s 666 crossroads holders and (c)'s 963 pass holders. The harness lives in the seat's scratch space and is not
+committed; its definition is this paragraph.
+
+## Per item: commit, count before -> after, pin, plant
+
+| Item | Commit | Before -> after (the 4,141) | Pin, and the plant executed |
+|---|---|---|---|
+| P1 the hospital cure | 293167b6f | The two readers disagree in 176 births, every one a plural monastery row ("Multiple monasteries" 154, "Major monasteries (5-10)" 22) -> 0. Moves all toward safety: readiness up in 20 (Well-Defended -> Fortress 16, Defensible -> Well-Defended 3, Undefended -> Vulnerable 1), legitimacy up in 3; 0 toward danger | coherenceAgreeCures "a house of many monasteries tends the sick; a ruined hospital does not": red at the parent |
+| P1 the widening | 7cf4f0c2e | The third member (palisade, prison, hospital, healer), banked at 16 lines in 14 files, every one present at 99bcc6944; the atom test (11 defence-homed atoms); the nine plants | Red at the parent (13 titles; the review's prison plant counted 0). PLANT, the old hospital list restored: the third member's exact arm red (priorityHelpers 1 -> 2) |
+| P2's rule | e11750d62 | A refilled slot arrives depleted: 125 births -> 0 (all A′ holders; food band up 1, 0 toward danger) | coherenceAgreeCures "P2's rule": six holders and the besieged village, red at the parent (6 of 6) |
+| P3 (F5 b) | df2249ff8 | Refill passes off the mountains 269 -> 0; 269 holders move, 0 non-holders; readiness 17/6, legitimacy 5/2, safety 3/2, prosperity 5/1, food 1/0 (toward safety / danger) | coherenceAgreeCures "F5 (b)": six holders, red at the parent (6 of 6) |
+| P2 (F5 c) | aa08dc10b | Base-roll passes off the mountains 963 -> 0. THE THREE PROOFS: nothing live lost 11 -> 0 (without the rule: 11); non-holders moved 0; every family under 19.3 (prosperity 10/18, the worst; readiness 41/8; legitimacy 37/17; safety 17/1; food 4/7) | coherenceAgreeCures "P2 / F5 (c)": eight holders, red at the parent (8 of 8); the Mountain Pass route guard. PLANT, the step's local terrain read: the guard red |
+| P4 (F5 d, validator) | 1359d2435 | 0 leaves (no rolled pass stands off the mountains to warn on) | coherenceAgreeCures "the validator warns on a pass forced off the mountains": red at the parent |
+| P5 (F4) the leaf | 3cd18491a | 0 leaves (nothing imports it) | tests/domain/chainWorking.test.js: red at the parent (no module). PLANT, the availability read removed: 2 of 5 red |
+| upkeep | ea366a282, 485938c27, a62d984e1, 335fb1313 | prose-numerics re-keyed by identity (2 rows, 613 -> 631); three anchors; the repetition guard's one new pool; the lighting census | each walker green after |
+
+**THE LEAF THE SIBLINGS WAIT FOR (P5):** `src/domain/facts/chainWorking.js :: chainWorksResource(record, resourceKeys)`
+(and `chainsWorking(record, resourceKeys)`, `WORKING_CHAIN_STATUSES`). A chain of `economicState.activeChains` works a
+resource where its `resourceInputKey` is the resource, `resourceInputAvailable === true`, and its status is running,
+operational, entrepot, vulnerable or magically_sustained. For lane/w2-a-leaves-2026-11-12 and
+lane/w2-b-declare-2026-11-12. The income source is unchanged; the line naming a house the town lacks is theirs.
+
+## Calls taken without the chair (declared or named only)
+
+- **P3 reads the RECORD's terrain** (`terrainType`, resolveConfig's), not the step's `terrainOverride`. The patch as
+  built refused a pass on the wizard's "Mountain Pass" route with terrain 'auto' (the record stands on the mountains,
+  the step's value is null: agree7-mp-village-4, -8, -12, -16, -19, -23). The corpus holds no such birth: patch as
+  built -> this, 0 leaves. (c) carries a guard for the route.
+- **P2 landed as three causes**, each with its own field diff: the rule first (it cures A′'s depleted arrivals on its
+  own: 125 births), then P3, then (c). Built without the rule, P3 alone leaves 3 holders with nothing live; in this
+  order no commit does.
+- **Re-keyed by identity**: the rule's besieged-village pin after (c) re-deals it (its pass slot takes iron, so its
+  crossroads slot takes marshlands; the band is deficit by that re-deal). The prose-numerics baseline's two
+  resolveResources rows (613 -> 631, path, category and snippet unchanged).
+- **P4's words have one home**: `resourceTerrainCompatibility.js :: requiredTerrainRefusal`, read by the wizard (its
+  answers unchanged) and the validator (no claim on an unknown terrain). A row its access refuses warns once.
+- **The third member's register** is banked at its first commit (as the second member's was), 16 lines, all present at
+  the lane's base. Three rows name their own sense (generalStateProse reads the home on its next line; threatAssessment
+  words the home's healerName; historyBeats tests an effect string). Two shapes are ruled out by rule (a role
+  archetype list; an agreement check reading the home on the same line), as the sixth seat's patch wrote them.
+- **The repetition guard's lane door** `--bank-new` for the one pool (c)'s re-deal first draws
+  (`NPC_STRUCTURE.magic__contested__dominant`; green at 525d064f1 and df2249ff8). No ceiling moved.
+- **The census base** is the line the lane holds (3575cf061), and 525d064f1 was counted too, to split the seats.
+
+## The field diffs (L3)
+
+- **This seat, 525d064f1's generator -> the tip**: P1 176, the rule 125, P3 269, (c) 963 births; P4 and P5 0. Every
+  move of the rule, P3 and (c) is in a holder.
+- **The lane's total, the line 3575cf061 -> the tip**: 4,112 of 4,141 births (L2 2,842, R2 745, golden 525). The
+  families most touched: economicStrengths 3,872, safetyProfile 2,203, primaryImports 2,046, defence scores 1,816,
+  incomeSources 1,763, foodSecurity 1,659, localProduction 1,466, the resource roster 1,458, plotHooks 1,437,
+  primaryExports 1,419, activeChains 1,391, strategicValue 1,140, foodways 1,110, readiness 1,080.
+
+Label moves by direction, the line -> the tip (toward safety / toward danger):
+
+| Family | L2 | R2 | Golden |
+|---|---|---|---|
+| Readiness | 69 / 50 | 12 / 5 | 23 / 0 |
+| Public legitimacy | 25 / 18 | 6 / 1 | 23 / 16 |
+| Prosperity | 15 / 14 | 4 / 1 | 1 / 17 |
+| Safety | 11 / 8 (3 unordered) | 3 / 0 (1) | 10 / 0 |
+| Food band | 5 / 1 | 3 / 1 | 1 / 5 |
+
+Every family moves both ways; the golden's prosperity and food moves toward danger are (c)'s re-deal of 297 golden
+holders (prosperity 1 / 16 and food 1 / 5 of them at aa08dc10b).
+
+## The census counter (SECOND-WAVE-CENSUS, 720 births), the line 3575cf061 -> 525d064f1 -> the tip
+
+NO NEW ROW (every verdict OLD; GLANCE towns 717 -> 717). COUNTS THAT RISE, by seat:
+
+| Pattern | Line | 525d064f1 | Tip | This seat |
+|---|---|---|---|---|
+| 11 flow source town lacks | 396 | 410 | 448 | +38 |
+| F4 income line, no working | 274 | 245 | 254 | +9 |
+| NEW-2 magic income, no practitioner | 3 | 3 | 6 | +3 |
+| 2 two store durations | 561 | 569 | 571 | +2 |
+| 3 magic tab vs Arcane None | 188 | 190 | 191 | +1 |
+| 8 no church vs worship economy | 220 | 220 | 221 | +1 |
+| 14 size words in small places | 167 | 167 | 168 | +1 |
+
+Falls this seat: 6 302 -> 296 -> 285; 17 681 -> 680 -> 671; 7a 128 -> 128 -> 125; 9 149 -> 148; 16a 331 -> 330.
+
+**EVERY TOWN THAT ENTERS OR LEAVES ANY PATTERN THIS SEAT IS A HOLDER** (the rule's, P3's or (c)'s: 0 non-holders). The
+rise in 11 is ONE mechanism: 41 holders enter, the key `foraging_areas` (109 -> 155): the refill's 'special' slot
+takes `ancient_grove`, which runs the forage chain as a SUBSTITUTE for foraging areas, and the flow card prints "From
+Foraging areas" in a town that holds none (r2r-thorp-10, r2r-hamlet-14, r2r-city-5: the pass became an ancient
+grove). That is 11's substitute variant (P11substitute 46 in, 4 out), the class lane/w2-a-leaves-2026-11-12's
+`chainCarrier.js :: chainCarrierOf` ('substitute') cures. F4's +9 are holders whose new stone or forest meets the
+income line the P5 leaf exists to cure (quarry 6, saw 4, coal 1).
+
+## The fifth law: the whole suite, once
+
+PENDING: this section is brought current when the run ends (the seat's worker restarted twice and killed the first
+run at 00:22 UTC).
+
+
+## PARKED (for the chair: the brief's bar, a ruled design)
+
+- **THE CENSUS'S "NO COUNT RISES" IS NOT MET** (above): 11 +38, F4 +9, NEW-2 +3, and four rows +1/+2, every one by a
+  holder's re-deal into an existing class. RECOMMENDATION: keep P2, P3 and the rule (the review's F5 is cured, the
+  three proofs hold, and the rises are what the second wave's two leaves cure: chainCarrier's substitute and P5's
+  chain-worked line); re-count 11 and F4 after W2-C's cure lands. The alternative (the refill avoiding a member that
+  only runs a substitute chain) would re-touch A′'s ruled refill.
+- **TWO MODELS ANSWER "WORKED HERE"** (P5): the chain model the leaf reads and the resource analysis's exploitation
+  model (`resourceGenerator.js :: evaluateInstitutionChain`, which the page prints as "No one here works the stone").
+  Over the 4,141, on live resources: timber worked by a chain and "unexploited" in the analysis 735 births; stone 245;
+  iron 5; and the reverse (no chain, the analysis partial) timber 20. A sibling that prints through the leaf will still
+  sit beside "No one here works the X" in those towns. RECOMMENDATION: the chair rules which model homes "worked"
+  before W2-C prints through the leaf; the measure is above.
+
+## Found, not mine
+
+- The flag bag's `hasMonastery` and `hasChurch` read 'monastery' as a substring too, so "Multiple monasteries" is no
+  monastery there (the P1 class; not ruled): `priorityHelpers.js :: getInstitutionNames`.
+- A golden row on the "Mountain Pass" route with a plains override (`gm|town|germanic|plains|mountain_pass|…`): the
+  roll no longer keeps a pass there, while the route is still named for one. The wizard lets the two disagree.
+- `structuralValidator.js`'s line citations in `scripts/lib/writer-dark-register.mjs` (833, 699) were stale before
+  this seat.
+
+## New words, for the owner's veto
+
+None printed. The validator's warning reuses the wizard's "Only available in mountain terrain".
+
+## What was banked
+
+The third member's register at its first commit (16, all pre-lane); one repetition-guard row by `--bank-new`. No
+ceiling raised, no test skipped, no pin loosened, no golden door run, never `--tighten`.
