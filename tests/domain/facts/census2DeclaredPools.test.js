@@ -96,7 +96,9 @@ describe('the declarations do their work on the real pools', () => {
   it("DS-GEN-13's NO-MARKET lines (trade 'at the gate, at the inn') are refused where neither stands", () => {
     // vid 3 is unit 5's twin, which presumes neither
     expect(read('DS-GEN-13', 'NO-MARKET', CALM)).toEqual([3]);
-    expect(read('DS-GEN-13', 'NO-MARKET', SIEGE)).toEqual([3]);
+    // W2-WRITE (2026-11-13), re-keyed by identity: [3] -> [4, 5, 6] at the fourth seat's 2f2aec623 (round two #325: v1-v3
+    // "what trade the town does is done ... on the road" refused under a siege; v4-v6, the siege's own lines, added).
+    expect(read('DS-GEN-13', 'NO-MARKET', SIEGE)).toEqual([4, 5, 6]);
     const gated = factsOf({ ...TOWN, institutions: [{ name: 'Town walls', category: 'Defense' }, { name: 'Tavern', category: 'Hospitality' }] });
     expect(gated.defence.gate && gated.hasInstitution('tavern')).toBe(true);
     expect(read('DS-GEN-13', 'NO-MARKET', gated)).toEqual([1, 2, 3]);
