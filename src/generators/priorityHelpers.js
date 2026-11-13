@@ -70,7 +70,7 @@ const getInstitutionNames = (institutions = []) => {
     hasPort:          names.some(n => PORT_INFRA_RE.test(n)),
     hasNavy:          hasAny(names, ['navy','major port']),
     hasGranary:       hasAny(names, ['granar']),
-    hasHospital:      hasAny(names, ['hospital','monastery','healer','friary']),
+    hasHospital:      home.hasHospital || home.hasHealer, // COHERENCE-AGREE-7 (P1): the defence home's hospital or healer (the plural monasteries tend the sick; a ruined hospital does not)
     hasChurch:        hasAny(names, ['church','cathedral','temple','monastery','friary','shrine','priest','abbey']),
     hasCathedral:     hasAny(names, ['cathedral','great cathedral']),
     hasMonastery:     hasAny(names, ['monastery','friary','major monasteries']),

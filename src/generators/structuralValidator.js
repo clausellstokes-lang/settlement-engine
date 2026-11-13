@@ -10,7 +10,7 @@ export { getBaseChance } from './institutionProbability.js';
 
 import {GOODS_MODIFIERS_BY_TIER} from '../data/goods/chains.js';
 import {GATE_FEATURES, INSTITUTION_SPATIAL, GOVERNMENT_INSTITUTIONS} from '../data/spatialData.js';
-import { RESOURCE_DATA } from '../data/goods/identity.js';
+import { RESOURCE_DATA } from '../data/goods/identity.js'; import { requiredTerrainRefusal } from '../domain/resourceTerrainCompatibility.js';
 import {
   nativeSemanticNames,
   nativeSemanticResourceKeys,
@@ -383,7 +383,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
     magicExists,
     monsterThreat:  threat = 'frontier',
     priorityMagic:  magicPriority,
-    priorityMilitary: milPriority,
+    priorityMilitary: milPriority, terrainType, // COHERENCE-AGREE-7 (P4): the record's terrain, one line so the line-keyed rows below keep their addresses
   } = config;
 
   // Resolve effective magic level.
@@ -797,6 +797,13 @@ export const checkStructuralValidity = (institutions, config = {}) => {
         reason:      data.incompatibleReason || data.warning || `${data.label} is not compatible with ${route} access.`,
         severity:    'warning',
       });
+      return;
+    }
+    // COHERENCE-AGREE-7 (P4, REVIEW-AGREE-2 F5 (d)'s validator half): the terrain a row requires is read as its access
+    // is. The roll keeps no pass off the mountains (F5 (c)), so only a person's forced pass warns, in the wizard's words.
+    const terrainRefusal = data ? requiredTerrainRefusal(resourceKey, terrainType, { unknownRefuses: false }) : null;
+    if (terrainRefusal !== null) {
+      violations.push({ type: 'resource_access_violation', institution: data.label, reason: terrainRefusal, severity: 'warning' });
     }
   });
 
