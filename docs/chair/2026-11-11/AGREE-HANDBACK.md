@@ -783,10 +783,69 @@ grove). That is 11's substitute variant (P11substitute 46 in, 4 out), the class 
 `chainCarrier.js :: chainCarrierOf` ('substitute') cures. F4's +9 are holders whose new stone or forest meets the
 income line the P5 leaf exists to cure (quarry 6, saw 4, coal 1).
 
-## The fifth law: the whole suite, once
+## The fifth law: the whole suite, once, every red classed
 
-PENDING: this section is brought current when the run ends (the seat's worker restarted twice and killed the first
-run at 00:22 UTC).
+One `npx vitest run --maxWorkers=2` at **107fd0a2d**, the ledger ref fetched first (235efce1a), 4,930 s: **57 failing
+titles in 40 of 3,219 files**; 38,700 passed; 252 skipped. Every title that is new against PART FIVE's set was re-run
+at 525d064f1 (green there) and bisected over this seat's commits. After 107fd0a2d the seat changed one test seed
+(622ed1d51, below), docs, and the bundles (the last commit).
+
+**THE LINE'S KNOWN SET (PART FIVE's):** landingFixtureFreshness ×2; newsHeadlineContract; newsVoiceContract;
+proseFamilyContract; the prose manifest's DRIFT arm.
+
+**THE INSTRUMENT SEEDS (PART FOUR's):** observedShapeReaders and writerReach (at load, osr-tier-14);
+proseTasteInterested ×3; proseWaveGate (d) ×2 (three at PART FIVE).
+
+**THE EDGE BUNDLES, CURED BY THE LAST COMMIT:** engineBundleReplay ×3, engineServiceStoreParity ×2,
+edgeSharedBundleReproducibility (engine). Stale against this seat's `src/`; re-emitted alone as the last commit.
+
+**THE MERGE SEAT'S, ALREADY NAMED (PART FIVE's rows), at this tip's figures:** generatorGoldenMaster (525 of 525);
+espionageDormancyFence (driven 366d5c20, expected 38a52b05); heraldKnowledgeDeskGolden (02d3fa8e, expected 0fa1f3ca);
+the prose manifest's four-seed arm; goldenViewModel; generationForkCensus A1; dmLayerGoldenIsolation A7;
+nameHeldThroughAssembly A1; pipelinePinnedChoosers A1; pipelinePinnedMode A1, A2, A5; powerEconomyFreshness A4;
+rosterFinalUnderHeldRoster A1; worldFactRederive A7; x46NpcBand; institutionBudgetPromise; editWorldFactResources A2,
+A6; editCorpusRatchet A4, A7, A8; mergeLadderHeldKeys A2, A5, A6; hookThemeDraws (2148 against 2157; 2149 at PART
+FIVE); institutionTable (1843 against 1849; 1847 at PART FIVE: P3 -2, (c) -2); siteCoherenceRatchet C1 (see PARKED);
+townCartographyCalibration W2; undercitySewerDerivation; intentAtlasSoakDistiller.
+
+**THE MERGE SEAT'S, NEW THIS SEAT, named in the draft** (figures over generated output; each green at 525d064f1, the
+invariant beneath it measured and holding):
+
+| Title | Moved by | Figure | What still holds |
+|---|---|---|---|
+| generationCertificationCorpus "pins the advisory battery failures BY IDENTITY" | P3 | + certification-v1-plagued-martial-city-bracken (30 -> 31) | the specimen is P3's re-dealt role-only person; the merge seat re-keys it by identity |
+| foodModelSingleWriter "no row states a count its own list does not hold" | (c) | the non-vacuity floor: 272 rows state a count -> 241 (floor > 250) | offenders 0 (measured with the floor read out) |
+| dossierPhoneFloorAllViews ×2 (MOBILE_ and DESKTOP_BASELINE) | (c) | line counts of the fixture town (prose 12 -> 13, 87 -> 89, 15 -> 16; one chrome 8 -> 7) | every sub-12 count 0; no sub-14 prose count rises |
+| generationForkCensus A3e, A4 | (c) | economyReconcilePass availableServices keyMoves 60 -> 62; institutions producedOnRecord same/transformed 22/41 -> 21/42 | the register's door is a measured paste; not run |
+| mergeLadderHeldKeys A3 | (c) | trials whose citations the post-pass rebuilt 62 -> 66 | the mirror's own rows |
+| recordMerge A6 | (c) | rows whose active chains have an order 56 -> 61 | both arms counted |
+| pipelinePinnedChoosers A6 | (c) | the uncloned control's power write-through 37 -> 38 | the member path [0, 0]; the control live |
+| editCorpusRatchet A6 | (c) | 40 -> 44 (and A4's E8 5 -> 9) | the layer channel zero |
+| the prose manifest's mixed-pool audience arm | (c) | 203 -> 177 | the two faces differ only where a pool is mixed |
+
+Dropped out since PART FIVE (green now): statecraftExposureBand, proseComposed A13, aiGroundingBundle.freshness, one
+proseWaveGate (d) title.
+
+**YOURS TO CURE: one, cured.** powerConfig "ruling_authority gains a governing_power contributor": P3 (bisected: green
+at 293167b6f and e11750d62, red at df2249ff8) lands `powercfg-leg-1` on neutral governing power. Re-probed by identity
+as the test's comment re-probed it three times before: `-4`, which gives a non-neutral governing faction at 525d064f1
+and at the tip (622ed1d51; the file 12 of 12; eslint 0). The assertion is unchanged.
+
+**siteCoherenceRatchet's two ADDED identities** (`forest|mountain-flank|iron`, `plains|mountain-flank|iron`, by (c);
+P3 grew `forest|` and `plains|mountain-flank|coal` 11 -> 14 and 12 -> 14, (c) to 15; `desert|mountain-flank|iron` and
+`plains|mountain-flank|stone` vanished): a holder's re-deal into the mountain-flank class that the base roll already
+fills. Not banked (the ratchet's door would raise rows). PARKED below with the census's rises.
+
+## The six golden surfaces (the fourth law), measured at the tip; no door run
+
+| Surface | At the tip | By |
+|---|---|---|
+| generator golden master | 525 of 525 rows moved | P1 12 rows; the rule, P3, (c) the rest (297 golden holders under (c)) |
+| espionage dormancy fence | driven hash 366d5c20… (expected 38a52b05…) | the lane's generator |
+| dossier prose manifest | DRIFT arm (the line's); four-seed arm (gm-seed-a 408 -> 410, gm-seed-b 394 -> 398, …); mixed-pool arm 203 -> 177 ((c)) | the lane; (c) |
+| PDF golden view model | scoreAvg: the snapshot 43, 40 at 525d064f1, 41 at the tip; headcounts.institutions 44 -> 43, npcs 36 -> 35 | (c) |
+| Herald knowledge desk | contentSha 02d3fa8e… (expected 0fa1f3ca…) | the lane's generator |
+| preset-lighting witness | GREEN | — |
 
 
 ## PARKED (for the chair: the brief's bar, a ruled design)
@@ -796,6 +855,9 @@ run at 00:22 UTC).
   three proofs hold, and the rises are what the second wave's two leaves cure: chainCarrier's substitute and P5's
   chain-worked line); re-count 11 and F4 after W2-C's cure lands. The alternative (the refill avoiding a member that
   only runs a substitute chain) would re-touch A′'s ruled refill.
+  THE SITE RATCHET'S TWO ADDED IDENTITIES (`forest|` and `plains|mountain-flank|iron`, (c)) are the same mechanism and
+  take the same recommendation; the alternative (a refill that refuses a mountain-sited mineral off the mountains)
+  would change the ruled refill and P2's ruled rule.
 - **TWO MODELS ANSWER "WORKED HERE"** (P5): the chain model the leaf reads and the resource analysis's exploitation
   model (`resourceGenerator.js :: evaluateInstitutionChain`, which the page prints as "No one here works the stone").
   Over the 4,141, on live resources: timber worked by a chain and "unexploited" in the analysis 735 births; stone 245;
