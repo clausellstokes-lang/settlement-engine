@@ -755,8 +755,8 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
 
 /** A share of the whole as plain words, by the first band it falls under. @param {number} x @param {ReadonlyArray<[number, string]>} bands @param {string} top */
 const shareWords = (x, bands, top) => (bands.find(([under]) => x < under) || [0, top])[1];
-const GROWN_BANDS = Object.freeze([[0.18, 'less than a fifth'], [0.23, 'about a fifth'], [0.29, 'about a quarter'], [0.42, 'about a third'], [0.58, 'about half'], [0.71, 'about two parts in three'], [0.82, 'about three parts in four']]);
-const BROUGHT_BANDS = Object.freeze([[0.4, 'a little of the rest'], [0.6, 'about half the rest'], [0.9, 'most of the rest']]);
+const GROWN_BANDS = Object.freeze([[0.15, 'less than a fifth'], [0.225, 'about a fifth'], [0.29, 'about a quarter'], [0.375, 'about a third'], [0.45, 'about two parts in five'], [0.55, 'about half'], [0.625, 'about three parts in five'], [0.7, 'about two parts in three'], [0.775, 'about three parts in four'], [0.85, 'about four parts in five'], [0.94, 'about nine parts in ten']]); // W2-C-LEAVES-4 item 3(a): each word within five points of every figure in its band
+const BROUGHT_BANDS = GROWN_BANDS.map(([under, w]) => [under, w === 'about half' ? 'about half the rest' : `${w} of the rest`]); // the same bands, of what is left to find
 /**
  * @param {number} pct the record's residual share of the need left unmet; a whole sentence, the season ahead last
  * @param {boolean} [famine] a famine in force (`facts/famine.js :: famineOf`): the bad season is not ahead, it is here
@@ -777,19 +777,32 @@ const shortWords = (pct, famine = false) => (pct <= 0 ? 'Between them, nobody go
  */
 function foodSentence(s, eco, fb, fbal, foodBar, foodDeficit, foodSurplus) {
   const name = s?.name || 'This place';
-  const carriers = eco?.tradeAccess === 'port' ? 'ships' : eco?.tradeAccess === 'river' ? 'boats' : 'carts';
-  const magic = fb.magicFoodOffset > 0 ? ` ${foodBar.magicChannel.charAt(0).toUpperCase()}${foodBar.magicChannel.slice(1)} provision makes up a little more.` : '';
+  const carriers = carriersOf(s, eco); // W2-C-LEAVES-4 item 3(b): the route's own home and the wharf on the roster
+  const magic = fb.magicFoodOffset > 0 ? ` ${foodBar.magicChannel.charAt(0).toUpperCase()}${foodBar.magicChannel.slice(1)} provision makes up ${shareWords(fb.magicFoodOffset / Math.max(1, fb.dailyNeed), GROWN_BANDS, 'nearly all')} of what it eats.` : '';
   if (!foodDeficit) {
-    if (!foodSurplus) return 'What is grown here and brought in covers each day\'s food, with nothing to spare against a bad year.';
+    if (!foodSurplus) return `What is grown here${fb.importCoverage > 0 && foodComesByTrade(eco) && carriers ? ' and brought in' : ''} covers each day's food${Math.round(Number(eco?.foodSecurity?.foodRecord?.storageMonths)) >= 3 ? '.' : ', with nothing to spare against a bad year.'}`;
     const over = fb.surplus / Math.max(1, fb.dailyNeed);
     return `${name} grows ${over < 0.1 ? 'a little more than it eats' : over < 0.3 ? 'more than it eats' : 'far more than it eats'}, with some to put by against a bad year.`;
   }
   const short = shortWords(fbal.deficitPct, famineOf(s).famine);
-  if (!(fb.importCoverage > 0) || !foodComesByTrade(eco)) return `No food comes into ${name} by trade.${magic} ${short}`;
+  if (!(fb.importCoverage > 0) || !foodComesByTrade(eco) || !carriers) return `No food comes into ${name} by trade.${magic} ${short}`;
   const grown = shareWords(fb.dailyProduction / Math.max(1, fb.dailyNeed), GROWN_BANDS, 'nearly all');
   const brought = shareWords(fb.importCoverage / (fb.rawDeficit || fb.importCoverage), BROUGHT_BANDS, 'nearly all the rest');
-  return `${name} grows ${grown} of what it eats, and ${carriers} bring in ${brought}.${magic} ${short}`;
+  return `${name} grows ${grown} of what it eats, and ${carriers} in ${brought}.${magic} ${short}`;
 }
+
+/**
+ * W2-C-LEAVES-4 item 3(b) (the cut's #218, CENSUS-2's six BROUGHT_BANDS hits: "ships bring in" in a thorp with no wharf):
+ * WHO BRINGS THE FOOD IN reads the route's own home (`economicState.tradeAccess`) and the roster: ships only where a
+ * dock, wharf, quay or harbour stands (`facts/institutions.js :: hasInstitution(s, 'docks')`), boats only where one or a
+ * ferry, a barge or a boatyard does; else no carrier is named ("trade brings in"). A road town's carts need no house.
+ * Under a siege in force (`chainStateShown.js :: tradeStoppedHere`) nothing is said to come in but by a port's own ships:
+ * '' (the sentence says no food comes in by trade, beside the siege's own note).
+ * @type {(s: unknown, eco: { tradeAccess?: unknown } | null | undefined) => string} the carriers and their verb
+ */
+const carriersOf = (s, eco) => (eco?.tradeAccess === 'port' && hasInstitution(/** @type {any} */ (s), 'docks') ? 'ships bring' : tradeStoppedHere(s) ? '' : eco?.tradeAccess === 'port' ? 'trade brings' : eco?.tradeAccess !== 'river' ? 'carts bring'
+  : hasInstitution(/** @type {any} */ (s), 'docks') || liveInstitutionNames(/** @type {any} */ (s)).some((n) => /\bferry|\bbarge|\bboat/i.test(n)) ? 'boats bring' : 'trade brings');
+import { hasInstitution, liveInstitutionNames } from '../../../domain/facts/institutions.js';
 
 export default React.memo(EconomicsTab);
 
