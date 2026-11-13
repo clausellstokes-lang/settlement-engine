@@ -1,0 +1,74 @@
+== FISH_LANDED: prints 50, tiers thorp/hamlet/village
+   rv2-famine-thorp-28 | famine | Fishing community, Access to parish church |  | Grain
+   rv2-calm-thorp-0 | calm | Fishing community, Access to parish church |  | 
+   rv4-famine-village-0 | famine | Fisher's landing, Fish market, Parish church |  | Grain
+== SILENT Iron & Metalwork: prints 213, tiers thorp/hamlet/village/town/city
+   rv2-under_siege-thorp-0 | under_siege | Fishing community, Access to parish church |  | Grain;Iron (weapons)
+   rv2-famine-thorp-4 | famine | Access to parish church |  | Grain
+   rv3-occupied-village-0 | occupied | Parish church |  | 
+   rv2-calm-thorp-1 | calm | Access to parish church |  | 
+   rv4-mass_migration-city-0 | mass_migration | Stone quarry, Apothecary district, Alchemist quarter, Parish churches (10-30) | Herbalism:running | Iron
+== SILENT Stone Quarrying: prints 211, tiers thorp/hamlet/village/town/city/metropolis
+   rv2-under_siege-thorp-3 | under_siege | Fishing community, Access to parish church |  | Grain;Iron (weapons)
+   rv2-famine-thorp-0 | famine |  |  | Grain
+   rv3-occupied-village-1 | occupied | Fish market, Parish church |  | 
+   rv2-calm-thorp-11 | calm | Fishing community, Access to parish church |  | 
+   rv4-under_siege-metropolis-0 | under_siege | Fish market, Stone quarry, Blacksmiths (3-10), Specialized metalworkers, Apothecary district, Fuller, Weavers/ | Herbalism:running,Textiles:running,Silk:entrepot | Bulk grain (local grain fields depleted);Iron (weapons)
+== METAL: prints 177, tiers hamlet/village/town/city/metropolis
+   rv2-under_siege-hamlet-16 | under_siege | Access to parish church, Resident smith (part-time) |  | Grain;Iron (weapons)
+   rv2-famine-hamlet-20 | famine | Fisher's landing, Stone quarry, Access to parish church, Resident smith (part-time) |  | Grain
+   rv2-calm-hamlet-3 | calm | Resident smith (part-time), Access to parish church |  | 
+   rww-metropolis-under_siege-1 | under_siege | Blacksmiths (3-10), Specialized metalworkers, Apothecary district, Weavers/Textile workers, Smelter, Parish ch | Herbalism:running,Textiles:running | Iron (weapons);Grain
+== REMEDIES: prints 449, tiers village/town/city/metropolis
+   rv2-under_siege-village-0 | under_siege | Apothecary, Parish church | Herbalism:running | Grain;Iron (weapons)
+   rv2-famine-village-6 | famine | Blacksmith, Apothecary, Parish church, Hedge wizard, Fish market |  | Grain
+   rv3-occupied-town-0 | occupied | Apothecary (established), Parish churches (2-5) | Herbalism:running | Iron;Grain;Chariot fittings and iron
+   rv2-calm-village-1 | calm | Stone quarry, Apothecary, Parish church | Herbalism:running | 
+   rww-metropolis-wartime-1 | wartime | Fish market, Blacksmiths (3-10), Specialized metalworkers, Apothecary district, Fuller, Weavers/Textile worker |  | Iron;Grain
+== FISH_SOLD: prints 216, tiers village/town/city/metropolis
+   rv2-famine-town-4 | famine | Fish market, Stone quarry, Blacksmiths (3-10), Smelter, Parish churches (2-5) |  | Iron ore (local iron mines exhausted);Grain
+   rv3-occupied-city-2 | occupied | Fish market, Stone quarry, Blacksmiths (3-10), Specialized metalworkers, Apothecary district, Weavers/Textile  | Silk:vulnerable,Herbalism:running | Iron ore (local iron mines exhausted);Grain
+   rv2-calm-village-8 | calm | Parish church, Fishmonger |  | 
+   rww-metropolis-calm-1 | calm | Fish market, Blacksmiths (3-10), Specialized metalworkers, Apothecary district, Fuller, Weavers/Textile worker | Silk:vulnerable | Iron ore (local iron mines exhausted);Grain
+== SILENT Fish & Preserved Produce: prints 75, tiers thorp/hamlet/village/town/city/metropolis
+   rv2-under_siege-thorp-3 | under_siege | Fishing community, Access to parish church |  | Grain;Iron (weapons)
+   rv2-famine-town-9 | famine | Parish churches (2-5) |  | Iron;Grain
+   rv2-calm-town-0 | calm | Weavers/Textile workers, Parish churches (2-5) |  | Iron;Grain (a little, beside its own harvest)
+   rv3-under_siege-metropolis-2 | under_siege | Fish market, Stone quarry, Blacksmiths (3-10), Specialized metalworkers, Apothecary district, Fuller, Weavers/ | Silk:impaired | Bulk grain (local grain fields depleted);Iron ore (local iro
+== CLOTH: prints 364, tiers village/town/city/metropolis
+   rv2-under_siege-village-23 | under_siege | Fisher's landing, Fish market, Parish church, Fuller |  | Grain;Iron (weapons)
+   rv2-famine-village-36 | famine | Fishmonger, Apothecary, Parish church, Fuller |  | Grain
+   rv3-occupied-town-2 | occupied | Fish market, Stone quarry, Apothecary (established), Weavers/Textile workers, Parish churches (2-5) | Herbalism:impaired | Grain
+   rv2-calm-town-0 | calm | Weavers/Textile workers, Parish churches (2-5) |  | Iron;Grain (a little, beside its own harvest)
+   rww-metropolis-infiltrated-1 | infiltrated | Blacksmiths (3-10), Specialized metalworkers, Apothecary district, Weavers/Textile workers, Alchemist quarter, | Herbalism:vulnerable | Iron;Grain
+== CLOTH_SHORT: prints 124, tiers village/town/city/metropolis
+   rv2-under_siege-town-15 | under_siege | Fish market, Blacksmiths (3-10), Parish churches (2-5), Fuller, Weavers/Textile workers | Textiles:impaired | Wool;Grain;Iron (weapons)
+   rv2-famine-village-10 | famine | Stone quarry, Blacksmith, Fuller, Parish church | Textiles:impaired | Grain
+   rv2-calm-town-4 | calm | Stone quarry, Blacksmiths (3-10), Weavers/Textile workers, Parish churches (2-5) | Textiles:impaired | Iron;Quality iron tools and fittings
+   rv4-wartime+recently_betrayed-metropolis-0 | wartime+recently_betrayed | Fish market, Stone quarry, Blacksmiths (3-10), Specialized metalworkers, Apothecary district, Fuller, Weavers/ | Herbalism:vulnerable,Textiles:impaired | Wool;Iron;Grain
+== WOOL_WORKED: prints 55, tiers town/city/metropolis
+   rv2-under_siege-town-2 | under_siege | Fish market, Apothecary (established), Weavers/Textile workers, Alchemist shop, Parish churches (2-5) | Herbalism:running,Textiles:running | Iron (weapons);Grain
+   rv2-famine-town-15 | famine | Fish market, Stone quarry, Weavers/Textile workers, Alchemist shop, Parish churches (2-5) | Textiles:running | Iron;Grain
+   rv3-occupied-metropolis-0 | occupied | Fish market, Blacksmiths (3-10), Apothecary district, Weavers/Textile workers, Smelter, Alchemist quarter, Par | Herbalism:vulnerable,Textiles:running,Silk:entrepot | Iron;Grain
+   rv2-calm-town-9 | calm | Stone quarry, Apothecary (established), Weavers/Textile workers, Smelter, Alchemist shop, Parish churches (2-5 | Textiles:running | Iron
+   rww-metropolis-under_siege-1 | under_siege | Blacksmiths (3-10), Specialized metalworkers, Apothecary district, Weavers/Textile workers, Smelter, Parish ch | Herbalism:running,Textiles:running | Iron (weapons);Grain
+== SILENT Fish & Maritime Produce: prints 52, tiers thorp/hamlet/village/town/city/metropolis
+   rv2-under_siege-thorp-5 | under_siege | Fishing community |  | Grain;Iron (weapons)
+   rv2-famine-town-6 | famine | Parish churches (2-5) |  | Iron;Grain
+   rv2-calm-town-16 | calm | Fuller, Weavers/Textile workers, Parish churches (2-5) | Textiles:impaired | Iron;Quality iron tools and fittings
+   rv2-under_siege-metropolis-35 | under_siege | Fish market, Blacksmiths (3-10), Specialized metalworkers, Apothecary district, Fuller, Weavers/Textile worker | Silk:impaired | Iron;Grain
+== REM_SHORT: prints 22, tiers town/city
+   rv2-under_siege-town-5 | under_siege | Blacksmiths (3-10), Apothecary (established), Parish churches (2-5) | Herbalism:impaired | Iron (weapons);Grain
+   rv2-famine-town-1 | famine | Apothecary (established), Parish churches (2-5) | Herbalism:impaired | Iron;Grain
+   rv3-occupied-town-2 | occupied | Fish market, Stone quarry, Apothecary (established), Weavers/Textile workers, Parish churches (2-5) | Herbalism:impaired | Grain
+   rv2-calm-town-17 | calm | Blacksmiths (3-10), Apothecary (established), Weavers/Textile workers, Parish churches (2-5) | Herbalism:impaired | Iron;Quality iron tools and fittings
+   rv2-under_siege-city-17 | under_siege | Fish market, Blacksmiths (3-10), Specialized metalworkers, Apothecary district, Fuller, Weavers/Textile worker | Alchemy:impaired,Silk:impaired | Iron (weapons);Grain
+== SILENT Grain Sales: prints 41, tiers town/city/metropolis
+   rv2-under_siege-town-2 | under_siege | Fish market, Apothecary (established), Weavers/Textile workers, Alchemist shop, Parish churches (2-5) | Herbalism:running,Textiles:running | Iron (weapons);Grain
+   rww-metropolis-under_siege-1 | under_siege | Blacksmiths (3-10), Specialized metalworkers, Apothecary district, Weavers/Textile workers, Smelter, Parish ch | Herbalism:running,Textiles:running | Iron (weapons);Grain
+== ALCH_SIEGE: prints 28, tiers town/city/metropolis
+   rv2-under_siege-town-2 | under_siege | Fish market, Apothecary (established), Weavers/Textile workers, Alchemist shop, Parish churches (2-5) | Herbalism:running,Textiles:running | Iron (weapons);Grain
+   rr2s-city-under_siege+famine-rand-1 | under_siege+famine | Blacksmiths (3-10), Apothecary district, Alchemist quarter, Parish churches (10-30), Specialized metalworkers | Herbalism:running,Silk:entrepot | Iron (weapons);Grain
+   rv2-under_siege-metropolis-36 | under_siege | Fish market, Stone quarry, Blacksmiths (3-10), Specialized metalworkers, Apothecary district, Weavers/Textile  | Silk:impaired | Bulk grain (local grain fields depleted);Iron (weapons)
+== TITHE: prints 1, tiers metropolis
+   rww-metropolis-wartime-1 | wartime | Fish market, Blacksmiths (3-10), Specialized metalworkers, Apothecary district, Fuller, Weavers/Textile worker |  | Iron;Grain
