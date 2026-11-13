@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "32001a6b346e96cac5d81dd5d4ca181daccfa4b3",
+ "frozenAtSha": "742ff4e4318317f9fed776439f53bed43341b3a2",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -23,8 +23,8 @@
   "transitionCount": 22742
  },
  "shapesDigest": "2df7f38658d5d4281b46d2c23a0fb1009c686a6e619c9a4fe025eccc7f94235e",
- "detectorDigest": "356d3b9c9dc7d2da453b8dc5b7d9331f8895d1384dff6f60cd02153d320edcb1",
- "verdictDigest": "55c9939d3081e7da3fbc24a72e239040af6069198b8453b7e4b6eb6b2e63966a",
+ "detectorDigest": "14605c3fe30040fdfe646114e930a9bf8f85969011a37f72142821f1015f18d4",
+ "verdictDigest": "577f183c4c27bd17ee1140771b75d29603a89f369c47ca360552cb69dbad708b",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -72,9 +72,9 @@
   "json-export"
  ],
  "closureSizes": {
-  "web-display": 769,
-  "web-transitive": 1007,
-  "dossier-pdf": 515,
+  "web-display": 770,
+  "web-transitive": 1008,
+  "dossier-pdf": 516,
   "campaign-pdf": 148,
   "world-book": 163,
   "foundry": 421,
@@ -84,26 +84,26 @@
  "population": {
   "judged": 12336,
   "lit": 674,
-  "litName": 10264,
-  "dark": 1398,
+  "litName": 10265,
+  "dark": 1397,
   "thinKeys": 16699,
   "thinShapes": 1195,
   "knownShapes": 536
  },
  "scanStats": {
-  "files": 1777,
-  "sites": 42575,
-  "propRead": 40325,
+  "files": 1779,
+  "sites": 42601,
+  "propRead": 40351,
   "elemRead": 0,
   "destructure": 2232,
   "inOp": 18,
-  "rGrades": 6774,
-  "nGrades": 1773484,
-  "resolvedReceivers": 7686
+  "rGrades": 6785,
+  "nGrades": 1773900,
+  "resolvedReceivers": 7697
  },
- "registerDigest": "fc0fc44e0bd1a0d58bfb03caeee1ecd4c5c51037478b5b9a93a223a117943c8b",
+ "registerDigest": "da8c042fcdd188d4324d0f6037bff9c68a8b9a6a2bffbc5a0ca6c804210b5924",
  "pendingSurfaceCeiling": 0,
- "reviewableDarkCount": 397,
+ "reviewableDarkCount": 396,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -9583,7 +9583,7 @@
   "factionSource on institutions": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "forbiddenResources on institutions": "web-transitive=R",
   "forbiddenTradeRoutes on institutions": "web-transitive=N",
-  "forcedByToggle on institutions": "web-transitive=R",
+  "forcedByToggle on institutions": "web-display=N web-transitive=R",
   "garrison on institutions": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "impairments on institutions": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "magicDef on institutions": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N world-book=N",

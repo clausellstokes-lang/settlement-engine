@@ -328,22 +328,6 @@ export const WRITER_DARK_REGISTER = Object.freeze([
       + 'W6, section ECO), consumer CONFIRMED at src/domain/generationOwnership.js:119',
   }),
   Object.freeze({
-    identity: 'forcedByToggle on institutions',
-    key: 'forcedByToggle',
-    shape: 'institutions',
-    writer: 'src/generators/steps/assembleInstitutions.js',
-    reason: 'engine-internal',
-    consumer: Object.freeze({
-      file: 'src/domain/generationOwnership.js',
-      symbol: 'the ownership law, which keeps an institution the DM\'s toggle demanded out of the regenerable set',
-    }),
-    why: 'Provenance of the DM\'s own choice: the toggle demanded this institution. The ownership law reads it '
-      + '(generationOwnership.js:78, :93, :233) so a regeneration never drops what the DM forced; the DM '
-      + 'already knows they forced it, and the player is shown the institution, not how it was chosen.',
-    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
-      + 'W6, section ECO), consumer CONFIRMED at src/domain/generationOwnership.js:78',
-  }),
-  Object.freeze({
     identity: 'exclusiveGroupCoexists on institutions',
     key: 'exclusiveGroupCoexists',
     shape: 'institutions',
