@@ -415,20 +415,33 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
   // R2 (the owner's rule; the lane writer's ruling of 2026-11-13): a hired-only place's military never reads
   // above the same place with a watch in its hired force's stead — that place's REAL military, run through
   // this same code (the pay, the terrain, the crises, R13's hold, limit 1). Where it would, the hired parts'
-  // military is held, together, to the difference. The last rule before fullness, as the cap was today's last
-  // word on the military.
+  // military is held, together, to the difference; and where that is not enough, the martial will's military
+  // as well (UPKEEP-CAPACITY C0, the chair's ruling on the stop at C1): the will is held to the armed bodies'
+  // whole points (R13), so a hired body's beasts and order points carry will a watch's do not, and since the will
+  // on the hired branch went unpaid (befa936dc) that will alone could lift the place above its watch. The last
+  // rule before fullness, as the cap was today's last word on the military.
   if (!instead && hired && !hasStanding) {
     const watchInStead = computeDefenseScores(settlement, keep, { ...inst, ...WATCH_IN_STEAD });
     const hiredParts = parts.filter((q) => q.id === 'company' || q.id === 'charter');
+    const will = parts.find((q) => q.id === 'will');
     const milNow = parts.reduce((a, q) => a + (q.dims.mil || 0), 0);
     const hm = hiredParts.reduce((a, q) => a + Math.max(0, q.dims.mil || 0), 0);
+    const wm = will ? Math.max(0, will.dims.mil || 0) : 0;
     const cf = watchInStead.dims.mil || 0;
-    if (milNow > cf && hm > 0) {
+    if (milNow > cf && hm + wm > 0) {
       const cut = Math.min(hm, milNow - cf);
-      for (const q of hiredParts) {
-        q.dims.mil = (q.dims.mil || 0) * (1 - cut / hm);
-        q.points = sumOf(q.dims) / n;
-        q.listed = q.points;
+      if (cut > 0) {
+        for (const q of hiredParts) {
+          q.dims.mil = (q.dims.mil || 0) * (1 - cut / hm);
+          q.points = sumOf(q.dims) / n;
+          q.listed = q.points;
+        }
+      }
+      const willCut = Math.min(wm, milNow - cf - cut);
+      if (will && willCut > 0) {
+        will.dims.mil -= willCut;
+        will.points = sumOf(will.dims) / n;
+        will.listed = will.points;
       }
     }
   }

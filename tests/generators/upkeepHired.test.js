@@ -51,6 +51,21 @@ function withWatchInstead(s) {
   return { ...s, institutions };
 }
 
+/**
+ * EVERY HIRED-ONLY BIRTH OF THE CAPACITY CORPUS (UPKEEP-CAPACITY C0, the chair's ruling on the stop at C1): the five
+ * villages above held the rule only because they missed the eight that broke it at 8ef42a051, where the will on the
+ * hired branch went unpaid (befa936dc) and carried more military than the cap could take back from the hired parts
+ * (probes/UPKEEP-CAPACITY/r2scan.mjs: 0 at c72917251, 0 at 0a07f98c7 and 2133873fe, 8 at 8ef42a051). The 36 hired-only
+ * births of the corpus (docs/chair/2026-11-13/UPKEEP-CAPACITY-MEASURE.md), in the app's own shape.
+ */
+const HIRED_ONLY = ['agree-village-28', 'agree-village-30', 'agree-village-40', 'agree-village-43', 'agree-village-45',
+  'cold-hamlet-113', 'cold-hamlet-120', 'cold-hamlet-122', 'cold-hamlet-132', 'cold-hamlet-152', 'cold-hamlet-162',
+  'cold-hamlet-181', 'cold-hamlet-182', 'cold-hamlet-201', 'cold-hamlet-206', 'cold-hamlet-238', 'cold-hamlet-239',
+  'cold-hamlet-56', 'cold-hamlet-91', 'cold-village-130', 'cold-village-133', 'cold-village-139', 'cold-village-168',
+  'cold-village-193', 'cold-village-203', 'cold-village-220', 'cold-village-46', 'cold-village-65', 'cold-village-73',
+  'cold-village-80', 'cold-village-98', 'fresh6-hamlet-22', 'fresh6-hamlet-38', 'fresh6-hamlet-41', 'fresh6-hamlet-58',
+  'fresh6-hamlet-8'];
+
 describe('a hired force stands in for a standing one, to a lesser degree', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
@@ -75,6 +90,18 @@ describe('a hired force stands in for a standing one, to a lesser degree', () =>
       expect(hired, `${seed}: hired-only ${hired} against a watch's ${watch}`).toBeLessThanOrEqual(watch);
     }), 'every hired-only corpus village is at or under its watch');
   });
+
+  test('RED-FIRST (C0): on every hired-only birth of the capacity corpus, military with hired force only is not above the same place with a watch instead', () => {
+    expectNoSeedFailures(collectSeedFailures(HIRED_ONLY, (seed) => {
+      const s = born(seed);
+      const home = forcesOf(s);
+      expect(home.hasCharterHall || home.hasMercenary, `${seed} holds a hired force`).toBe(true);
+      expect(home.hasGarrison || home.hasWatch || home.hasMilitia, `${seed} holds no standing force`).toBe(false);
+      const hired = generateDefenseProfile(s, keepOf(s.economicState.prosperity)).scores.military;
+      const watch = generateDefenseProfile(withWatchInstead(s), keepOf(s.economicState.prosperity)).scores.military;
+      expect(hired, `${seed}: hired-only ${hired} against a watch's ${watch}`).toBeLessThanOrEqual(watch);
+    }), 'every hired-only birth of the capacity corpus is at or under its watch');
+  }, 240000);
 });
 
 /**

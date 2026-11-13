@@ -319,3 +319,64 @@ Where G5 bites: cold-wartime-town-75, an alchemist's shop and no other arcane ho
 - `six2.txt`.
 - The first measure (0a07f98c7, ruling E on): `corpus.mjs`, `an.py`, `measure.txt`, `six.txt`, `capacity-measure.patch` and `corpus.ndjson.gz`.
 - Local refs and config were snapshotted before and after every push; the only change is the upstream tracking line that `push -u` added.
+
+---
+
+# THE BUILD (the chair's rulings of 2026-11-13, after section 8)
+
+Branch `lane/upkeep-capacity-2026-11-13`. The defence lane's tip 7a5f76dc2 is merged in at 8ef42a051 (a merge, not a rebase).
+- **The merged base against the measured tree:** the magic presence is identical. The only residual is the will commit befa936dc: 43 of 3,756 records differ, the will part differs in all 43, 34 readiness rise, 3 change band, and the magic score moves in 2 through limit 1.
+- **Each commit is measured against its predecessor** on the 3,756 births, born through the whole pipeline (`compare.py`, files `move-<commit>.txt`).
+- **The golden corpus is measured, not signed** (`goldens.mjs`: 525 rows, record and defence hashes). No golden's door is opened.
+
+## Correction (my own error, in section 4.3 and the C1 proposal)
+
+I wrote that "the R2 counterfactual watch (a hired-only place with a watch in its stead) takes factor 1: the middle rung under B". That is true only in a town. A village's own watch is the Village watch, the least rung (0.8); a city's is the Professional city watch, the greatest (1.2).
+
+With the counterfactual at 1, `tests/generators/upkeepHired.test.js` reds on four of its five villages:
+
+| Village | Hired-only | With a watch instead |
+|---|---|---|
+| agree-village-30 | 32 | 30 |
+| agree-village-40 | 35 | 33 |
+| agree-village-43 | 52 | 51 |
+| agree-village-45 | 75 | 71 |
+
+RULED (the chair): the counterfactual watch takes the rung of the watch the catalogue writes at the place's own tier. A thorp and a hamlet, which have no watch written, take the least rung. This is built in C1.
+
+## C0. R2's cap takes the martial will's military as well (the chair's ruling on the stop at C1)
+
+**When R2 broke** (`r2scan.mjs`, `r2-history.txt`). The test's own reading: each of the 36 hired-only births of the corpus against the same record with its hired houses out and its tier's watch in.
+
+| Tree | Military above its watch | Readiness above |
+|---|---|---|
+| c72917251 (before the will ceased to be paid) | 0 of 36 | 14 |
+| 0a07f98c7 (the fourth read's tip) | 0 | 14 |
+| 2133873fe (the presence whole) | 0 | 14 |
+| **8ef42a051** (with befa936dc, the will unpaid on the hired branch) | **8** | **21** |
+
+**The chair's own ruling W3 opened the military break and widened the readiness gap.** The cap cut only the hired parts' own military. The will is held to the armed bodies' whole points (R13), so a charter hall's 35 against beasts carries more will than a watch does. Once the will on the hired branch went unpaid, that will alone lifted these hamlets and villages above their watch.
+
+**The cure:** where cutting the hired parts' military is not enough, the will's military is held as well, down to the counterfactual. It is a named limit inside the one function; nothing is stored, no weight changes, and readiness stays the exact sum of its parts.
+- **Military above its watch:** 0 of 36.
+- **Pay reaching the will outside its hold** (the reader's `willpay.mjs`, 1,440 births): 0.
+- **Test:** `upkeepHired.test.js` gains the 36 births as a red-first case. It was red on exactly the eight, with the scan's figures, and is green after. No expectation of the five villages changes.
+
+**STILL OPEN, for the chair: readiness above the counterfactual stays in 16 of 36** (14 before W3, 21 at the base).
+- The military cap cannot reach it. It is the hired body's own points against beasts and for order: a charter hall's 35 beasts points against a watch's 0.
+- Holding readiness too would mean capping the charter's work against beasts at a watch's, which removes the charter's own job in a hired-only place.
+- The rule as coded and tested is military only ("as the cap was today's last word on the military"). Not built; the chair rules.
+
+**The declared move** (`move-C0.txt`, against 8ef42a051):
+- 20 records differ, all hired-only hamlets and villages.
+- Military falls in 20 (as much as −12). Its band changes in 6: Adequate → Weak 5, Strong → Adequate 1.
+- Readiness falls in 16 (by 1 to 3). 1 band changes (Lightly Defended → Vulnerable), and 1 power structure is re-drawn (with that band).
+- No other score moves; no AI threat; no magic against the page.
+- Golden corpus: 0 of 525 rows move.
+
+**The eight, read on their Defense tab** (`pages.mjs` at both trees):
+- Only the Invasion & War band word changes, in 5 of them: Adequate → Weak on cold-village-130, fresh6-hamlet-8, cold-hamlet-181 and fresh6-hamlet-41; Strong → Adequate on cold-village-203.
+- The sentence under each band already says there is no line and no force ("The village's plan for an army is to not be interesting to one…"; "Knockness has no line and no force…"), so it agrees with the lower band.
+- The other three change no line.
+
+**Gates on the touched files:** eslint 0, typecheck:domain:strict 0 (1,113 at its ceiling), typecheck:ratchet 0 (167 at its ceiling). The defence suites are green: upkeepHired, defenceParts, magicCountOnce, and the defence walker.

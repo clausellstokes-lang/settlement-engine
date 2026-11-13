@@ -27,7 +27,8 @@ for (let r = Number(sh); r < rows.length; r += Number(shs)) {
   if (!(f.hasCharterHall || f.hasMercenary) || f.hasGarrison || f.hasWatch || f.hasMilitia) continue;
   const k = keepOf(s.economicState.prosperity);
   const w = { ...s, institutions: [...s.institutions.filter((i) => !HIRED.test(i.name)), { name: WATCH_OF[tier], category: 'Defense' }] };
-  const hired = generateDefenseProfile(s, k).scores.military, watch = generateDefenseProfile(w, k).scores.military;
-  o.write(JSON.stringify({ key, tier, hired, watch, above: hired > watch }) + '\n');
+  const H = generateDefenseProfile(s, k), Wp = generateDefenseProfile(w, k);
+  const hired = H.scores.military, watch = Wp.scores.military;
+  o.write(JSON.stringify({ key, tier, hired, watch, above: hired > watch, rHired: H.readiness.score, rWatch: Wp.readiness.score, aboveR: H.readiness.score > Wp.readiness.score, hiredScores: H.scores, watchScores: Wp.scores }) + '\n');
 }
 o.end();
