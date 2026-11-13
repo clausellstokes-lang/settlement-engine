@@ -53905,7 +53905,7 @@
       "name": "CAST_REASONS",
       "drawKind": "T",
       "drawSite": "crisisCast.js:461-701 (src/domain/crisis/crisisCast.js)",
-      "lines": 48,
+      "lines": 50,
       "declares": [],
       "lineDeclares": {
         "crisis: hunger": 1,
@@ -53917,7 +53917,7 @@
         "no walls": 1,
         "walls": 1
       },
-      "undeclared": 40,
+      "undeclared": 42,
       "crisisScoped": false
     },
     {
