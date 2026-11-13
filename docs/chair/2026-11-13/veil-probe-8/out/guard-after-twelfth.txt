@@ -1,0 +1,216 @@
+
+ RUN  v4.1.8 /tmp/claude-0/-home-user-settlement-engine/7e9291bd-44ea-54a0-8961-9933d99191c8/scratchpad/wt
+
+ ❯ tests/security/gallerySecondHomes.pglite.test.js (3 tests | 2 failed) 170185ms
+     × every string hidden by hand, marked at birth: nothing of it, and no name of a house hidden whole, in any of the four reads, both shapes, DM off and on, live and frozen 100217ms
+     × THE SAME-STEP CLASS (the limit the marker cannot reach): the composed homes of a tie and a person's impression, written from marked sources, are not sent 45841ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/gallerySecondHomes.pglite.test.js > COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sent (V5-1) > every string hidden by hand, marked at birth: nothing of it, and no name of a house hidden whole, in any of the four reads, both shapes, DM off and on, live and frozen
+AssertionError: expected [ …(120) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "rv5-plant-city-infiltrated-0 new dm=false live gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new dm=false live link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new dm=false live map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new dm=false live import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new dm=false live mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new dm=false snapshot gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new dm=false snapshot link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new dm=false snapshot map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new dm=false snapshot import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new dm=false snapshot mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new dm=true live gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new dm=true live link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new dm=true live map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new dm=true live import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new dm=true live mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new dm=true snapshot gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new dm=true snapshot link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new dm=true snapshot map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new dm=true snapshot import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new dm=true snapshot mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old dm=false live gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old dm=false live link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old dm=false live map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old dm=false live import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old dm=false live mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old dm=false snapshot gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old dm=false snapshot link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old dm=false snapshot map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old dm=false snapshot import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old dm=false snapshot mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old dm=true live gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old dm=true live link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old dm=true live map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old dm=true live import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old dm=true live mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old dm=true snapshot gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old dm=true snapshot link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old dm=true snapshot map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old dm=true snapshot import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old dm=true snapshot mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 new dm=false live gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 new dm=false live link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 new dm=false live map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 new dm=false live import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 new dm=false live mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 new dm=false snapshot gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 new dm=false snapshot link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 new dm=false snapshot map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 new dm=false snapshot import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 new dm=false snapshot mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 new dm=true live gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 new dm=true live link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 new dm=true live map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 new dm=true live import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 new dm=true live mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 new dm=true snapshot gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 new dm=true snapshot link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 new dm=true snapshot map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 new dm=true snapshot import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 new dm=true snapshot mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 old dm=false live gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 old dm=false live link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 old dm=false live map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 old dm=false live import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 old dm=false live mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 old dm=false snapshot gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 old dm=false snapshot link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 old dm=false snapshot map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 old dm=false snapshot import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 old dm=false snapshot mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 old dm=true live gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 old dm=true live link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 old dm=true live map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 old dm=true live import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 old dm=true live mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 old dm=true snapshot gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 old dm=true snapshot link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 old dm=true snapshot map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 old dm=true snapshot import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-metropolis-infiltrated-0 old dm=true snapshot mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 new dm=false live gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 new dm=false live link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 new dm=false live map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 new dm=false live import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 new dm=false live mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 new dm=false snapshot gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 new dm=false snapshot link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 new dm=false snapshot map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 new dm=false snapshot import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 new dm=false snapshot mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 new dm=true live gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 new dm=true live link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 new dm=true live map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 new dm=true live import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 new dm=true live mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 new dm=true snapshot gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 new dm=true snapshot link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 new dm=true snapshot map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 new dm=true snapshot import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 new dm=true snapshot mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 old dm=false live gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 old dm=false live link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 old dm=false live map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 old dm=false live import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 old dm=false live mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 old dm=false snapshot gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 old dm=false snapshot link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 old dm=false snapshot map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 old dm=false snapshot import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 old dm=false snapshot mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 old dm=true live gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 old dm=true live link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 old dm=true live map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 old dm=true live import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 old dm=true live mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 old dm=true snapshot gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 old dm=true snapshot link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 old dm=true snapshot map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 old dm=true snapshot import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "cv6-proc-city-infiltrated-2 old dm=true snapshot mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++ ]
+
+ ❯ tests/security/gallerySecondHomes.pglite.test.js:340:32
+    338|     expect(reads).toBe(TOWNS.length * 2 * 4 * 6);
+    339|     expect(pages).toBe(TOWNS.length * 2 * 4);
+    340|     expect([...new Set(sent)]).toEqual([]);
+       |                                ^
+    341|   }, TOWN_TIMEOUT_MS);
+    342|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/security/gallerySecondHomes.pglite.test.js > COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sent (V5-1) > THE SAME-STEP CLASS (the limit the marker cannot reach): the composed homes of a tie and a person's impression, written from marked sources, are not sent
+AssertionError: expected [ …(40) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "rv5-plant-city-infiltrated-0 new same-step dm=false live gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new same-step dm=false live link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new same-step dm=false live map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new same-step dm=false live import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new same-step dm=false live mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new same-step dm=false snapshot gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new same-step dm=false snapshot link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new same-step dm=false snapshot map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new same-step dm=false snapshot import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new same-step dm=false snapshot mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new same-step dm=true live gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new same-step dm=true live link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new same-step dm=true live map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new same-step dm=true live import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new same-step dm=true live mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new same-step dm=true snapshot gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new same-step dm=true snapshot link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new same-step dm=true snapshot map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new same-step dm=true snapshot import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 new same-step dm=true snapshot mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old same-step dm=false live gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old same-step dm=false live link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old same-step dm=false live map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old same-step dm=false live import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old same-step dm=false live mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old same-step dm=false snapshot gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old same-step dm=false snapshot link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old same-step dm=false snapshot map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old same-step dm=false snapshot import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old same-step dm=false snapshot mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old same-step dm=true live gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old same-step dm=true live link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old same-step dm=true live map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old same-step dm=true live import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old same-step dm=true live mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old same-step dm=true snapshot gallery: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old same-step dm=true snapshot link: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at dossier.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old same-step dm=true snapshot map: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old same-step dm=true snapshot import: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at data.economicState.incomeSources[].desc",
++   "rv5-plant-city-infiltrated-0 old same-step dm=true snapshot mapimport: the house \"Black market\", hidden whole, or its name in a chain (folded, slugged or an id), at members[].settlement.economicState.incomeSources[].desc",
++ ]
+
+ ❯ tests/security/gallerySecondHomes.pglite.test.js:379:32
+    377|       }
+    378|     }
+    379|     expect([...new Set(sent)]).toEqual([]);
+       |                                ^
+    380|   }, TOWN_TIMEOUT_MS);
+    381| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 1 passed (3)
+   Start at  21:36:53
+   Duration  170.49s (transform 3.28s, setup 38ms, import 131ms, tests 170.18s, environment 0ms)
+
+exit 1

@@ -27,6 +27,11 @@
 --       name the engine's processor match gives it; and the chain that is its own) and in the simulation trace; a
 --       sentence of a person's appearance inside the card's impression.
 --       A composed sentence that embeds a hidden string is withheld whole; a list loses the hidden name only.
+--   (12) A HIDDEN NAME IN ANOTHER SPELLING (COHERENCE-VEIL-8; REVIEW-VEIL-6's twelfth): the name of a house hidden whole
+--       is not sent lower-cased, slugged or as an id either. The engine's two rosters of house names
+--       (economicState.compound.inst.names[], economicState.safetyProfile.compound.inst.names[]) lose each entry that
+--       is such a name; on a Reveal-DM read the trace loses each entry that targets such a house
+--       (`institution.<snake>`) and each cause that names it, in any case (_gallery_veil_fold, _folded_name, _names).
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -38,12 +43,12 @@
 --       Reveal-DM projection of the gallery read and the import, beside 211's decrees and dmLayer; before, every
 --       reader and every importer of such a share received both.
 --
--- NEW: ten helpers (_gallery_veil_pieces, _embeds, _names, _hidden_name, _sources, _tie_pieces, _second_homes,
--- _member_revealed, _roster_members, _roster_splice). RESTATED, each as 211's statement plus the cure:
+-- NEW: twelve helpers (_gallery_veil_pieces, _embeds, _fold, _folded_name, _names, _hidden_name, _sources,
+-- _tie_pieces, _second_homes, _member_revealed, _roster_members, _roster_splice). RESTATED, each as 211's statement plus the cure:
 -- _gallery_veil_card, _gallery_veil_apply, _gallery_apply_member_overrides, get_gallery_dossier and
 -- import_gallery_dossier (their grants restated as 211 states them). No helper of 211 changes its
 -- signature, so nothing 211 created is left behind. 211's section 7 is restated last: no _gallery_veil*
--- helper is callable by public, anon or authenticated (50 in all). NOT CHANGED: get_unlisted_dossier,
+-- helper is callable by public, anon or authenticated (52 in all). NOT CHANGED: get_unlisted_dossier,
 -- get_gallery_map and every other function. No table, column, constraint, policy or row.
 --
 -- COUPLED CLIENT TWIN: src/domain/display/gallerySecondHomes.js (the second homes, (9)), called by
@@ -51,7 +56,7 @@
 -- and tests/security/galleryVeilCures.pglite.test.js (V5-3, V5-4, V5-7 and the rollback pins).
 --
 -- @rollback: supabase/rollback/212_share_veil_later_cures.down.sql, run FIRST, before 211's own: it recreates the
---   five functions at 211's statements (the file at 333b33973, verbatim) and drops the ten helpers by signature.
+--   five functions at 211's statements (the file at 333b33973, verbatim) and drops 212's helpers by signature.
 --   No row is written or lost either way. Rehearsed on local chains: 001..211 + 212 + this down file equals
 --   001..211; 203 + 211 + 212 + this down file equals 203 + 211.
 
@@ -125,12 +130,42 @@ returns boolean language sql immutable as $$
   select jsonb_typeof(txt) = 'string' and exists (select 1 from unnest(pieces) p where position(p in (txt #>> '{}')) > 0)
 $$;
 
+-- [212: NEW] public._gallery_veil_fold
+-- COHERENCE-VEIL-8 (REVIEW-VEIL-6's twelfth): a name in ANOTHER SPELLING. The fold: lower case, every run of
+-- characters that are not a letter or a digit one '_', none at either end. 'Thieves'' guild (powerful)',
+-- 'thieves'' guild (powerful)' and 'institution.thieves_guild_powerful' all hold 'thieves_guild_powerful'.
+create or replace function public._gallery_veil_fold(t text)
+returns text language sql immutable as $$
+  select btrim(regexp_replace(lower(coalesce(t, '')), '[^a-z0-9]+', '_', 'g'), '_')
+$$;
+
+-- [212: NEW] public._gallery_veil_folded_name
+-- The text, folded, holds the name, folded, between '_' boundaries, outside every open house's folded name that
+-- holds it (`opens`: a list of folded names; 'Black market' hidden, 'Black market bazaar' open: the open name is
+-- not the hidden one).
+create or replace function public._gallery_veil_folded_name(t text, nm text, opens jsonb)
+returns boolean language plpgsql immutable as $$
+declare
+  hay text := '_' || public._gallery_veil_fold(t) || '_';
+  needle text := public._gallery_veil_fold(nm);
+  o text;
+begin
+  if needle = '' then return false; end if;
+  for o in select jsonb_array_elements_text(case when jsonb_typeof(opens) = 'array' then opens else '[]' end) loop
+    hay := replace(hay, '_' || o || '_', '_#_');
+  end loop;
+  return position('_' || needle || '_' in hay) > 0;
+end $$;
+
 -- [212: NEW] public._gallery_veil_names
--- names: some string anywhere in the value holds the name of a house removed whole.
+-- names: some string anywhere in the value holds the name of a house removed whole, in its own spelling or folded
+-- (a case fold, a slug, an id such as `institution.<snake>`: COHERENCE-VEIL-8). `gone` maps each name to the folded
+-- names of the open houses that hold it (or to anything else: none).
 create or replace function public._gallery_veil_names(v jsonb, gone jsonb)
 returns boolean language sql immutable as $$
-  select exists (select 1 from jsonb_path_query(coalesce(v, 'null'), 'lax $.**') x(j), jsonb_object_keys(gone) g
-                  where jsonb_typeof(x.j) = 'string' and position(g in (x.j #>> '{}')) > 0)
+  select exists (select 1 from jsonb_path_query(coalesce(v, 'null'), 'lax $.**') x(j), jsonb_each(gone) g(nm, opens)
+                  where jsonb_typeof(x.j) = 'string'
+                    and (position(g.nm in (x.j #>> '{}')) > 0 or public._gallery_veil_folded_name(x.j #>> '{}', g.nm, g.opens)))
 $$;
 
 -- [212: NEW] public._gallery_veil_hidden_name
@@ -201,6 +236,9 @@ declare
   k text;
   v jsonb;
   open_names text[];
+  open_folds text[];
+  named_folds text[];
+  pth text[];
   named jsonb;
 begin
   if jsonb_array_length(ties) > 0 then
@@ -246,6 +284,27 @@ begin
       from jsonb_array_elements(case when jsonb_typeof(s #> '{economicState,activeChains}') = 'array' then s #> '{economicState,activeChains}' else '[]' end) c,
            jsonb_array_elements(case when jsonb_typeof(c -> 'processingInstitutions') = 'array' then c -> 'processingInstitutions' else '[]' end) x
      where jsonb_typeof(c) = 'object' and jsonb_typeof(x) = 'string' and public._gallery_veil_hidden_name(x, gone, open_names)), '{}');
+  -- COHERENCE-VEIL-8: each name, with the folded names of the open houses that hold it (blanked before a folded
+  -- search: an open name is not the hidden one)
+  open_folds := array(select f from (select public._gallery_veil_fold(o) as f from unnest(open_names) o) q where f <> '');
+  named := (select coalesce(jsonb_object_agg(nk, coalesce((select jsonb_agg(distinct o) from unnest(open_folds) o
+                                                           where o <> public._gallery_veil_fold(nk)
+                                                             and position('_' || public._gallery_veil_fold(nk) || '_' in '_' || o || '_') > 0), '[]')), '{}')
+              from jsonb_object_keys(named) q(nk));
+  named_folds := array(select public._gallery_veil_fold(nk) from jsonb_object_keys(named) q(nk));
+
+  -- COHERENCE-VEIL-8 (REVIEW-VEIL-6's twelfth): the engine's roster of house names, stamped once at birth and
+  -- LOWER-CASED (priorityHelpers.js :: getInstitutionNames), in the economy's and the safety profile's flags: each
+  -- list loses every entry that is the name of a house removed whole, in any spelling, and nothing else (an entry
+  -- an open house answers to stays)
+  for pth in select p from (values (array['economicState', 'compound', 'inst', 'names']),
+                                   (array['economicState', 'safetyProfile', 'compound', 'inst', 'names'])) v(p) loop
+    if jsonb_typeof(s #> pth) = 'array' then
+      s := jsonb_set(s, pth, coalesce((select jsonb_agg(x order by xo) from jsonb_array_elements(s #> pth) with ordinality y(x, xo)
+        where not (jsonb_typeof(x) = 'string' and public._gallery_veil_fold(x #>> '{}') = any(named_folds)
+                   and not public._gallery_veil_fold(x #>> '{}') = any(open_folds))), '[]'));
+    end if;
+  end loop;
 
   if jsonb_typeof(s -> 'economicState') = 'object' and jsonb_typeof(s #> '{economicState,activeChains}') = 'array' then
     s := jsonb_set(s, '{economicState,activeChains}', coalesce((
