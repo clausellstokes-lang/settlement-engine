@@ -700,7 +700,25 @@ Both registers are shrink-only and forbid a new row ("no row is ever added"); th
 4. **The lighting census, 91f581649** (on the clean committed tree 18bab7b53, `LIGHTING_CENSUS_REFREEZE='STYLE-2-MERGE-13'`, then a plain run 34/34): files 3242 → **3245**, parked 402, credited 2840 → **2843**, titles 29345 → **29405**, suiteTitles 7960 → **7974**.
 5. Save branch pushed after each act (the lane hook's three gates: typecheck:ratchet 167/167, strict 1113/1113, lint 0 errors).
 
-### 2k.2 The draft's figures, re-measured (written as each measure completes)
+### 2k.2 The draft's figures, re-measured on this seat's trees
+
+**The stages** (`stage49.sh`: `landing-stage.sh build 9e57f5023 s48`, `build 91f581649 s49`, `measure s48 m48`, `measure s49 m49 m48`). THE CONTROL: m48 reproduces records 47/48's gm 7b7089fd and fence 05f70cf9 (360 distinct). **m48 → m49: gm 0/525 (7b7089fd both), fence 0/360 (05f70cf9 both), herald 0/446, witness 0/8, PDF 0/18, prose rows 30/1,050.** The gm and fence corpora hash-equal at both stages, so no leaf moves (no field diff owed).
+
+**The 720 births** (the lane's own `probes/W2-B-DECLARE/births.mjs` + `fielddiff.mjs`, the census's seeds) at the line 9e57f5023 against the merge: **4 births move, in ONE family, `.coherenceNotes` (16 leaves: one `power_economic` note each in r2r-town-54, r2s-occupied-metropolis-1, r2s-indebted-metropolis-0, r2s-plague_onset-city-2)**, each note byte-equal to the lane's own tip's; nothing else moves.
+
+**The prose manifest** (closing act 2's; NOT signed per point). The reader's own probe (`REVIEW-W2B-3/manifestmoved.mjs`, cc0dd4ed2, unchanged) against the one unchanged fixture: drift rows **the line 1,036 · the lane's tip 956 (= the draft) · the merge 1,038**; **line → merge: EXACTLY the draft's 30 keys move** (`W2-B-DECLARE-6/manifest-moved.json`), the 2 newly moved = the draft's two (`town|germanic|mountain|random_trade|civilized|gm-seed-c` dm and player), none leaves; at the merge 28 of the 30 hash EQUAL to the lane's tip, and **2 are COMPOSED** (`town|germanic|plains|road|civilized|gm-seed-c` dm and player: neither the line's hash nor the lane's — the line's generation and the lane's composer both reach that configuration). Per cell (`cell1.sh` + `cellattr.py`): **30 rows of 1,050, 30 cells ADDED, 0 removed, 0 changed (74,618 → 74,648), every one DS-GEN-9 "event type: disaster"** — the draft's one declared cause (aa41b1f25, an absent anchor flag reads "not anchored"). Kept for closing act 2 at `/home/user/stages/cells/`.
+
+| the draft says | measured here | verdict |
+|---|---|---|
+| gm UNMOVED, 0 of 525 | m48 → m49 0/525, 7b7089fd both | EQUAL |
+| fence UNMOVED | 0/360, 05f70cf9 both | EQUAL |
+| prose manifest MOVED by aa41b1f25, 30 rows (2 newly) | the same 30 keys line → merge, the same 2 newly; 28 = the lane's hashes, 2 COMPOSED; per cell 30 added, all DS-GEN-9 | EQUAL in keys and cause; 2 hashes composed (said); signed at the closing acts |
+| PDF UNMOVED | 0/18 | EQUAL |
+| herald UNMOVED | 0/446 | EQUAL |
+| witness UNMOVED (green) | 0/8 | EQUAL |
+| 4 births move, `.coherenceNotes` only (item 5, 1ae138b47) | line → merge: the same 4 births, `.coherenceNotes` only, each = the lane's tip | EQUAL |
+| the strip ban catches the shapes it names and no others (known gaps pinned) | not re-measured: record 379's known limit, not a stop | — |
+| the banked total 5,545 (fifth seat), "not the fourth seat's 5,546" | both true at their trees (2k.3); 5,543 at the tip and the merge | VERIFIED |
 
 ### 2k.3 THE STOPS — each measured at three trees (the line 9e57f5023, the lane's own tip 9f83ffbb2, the merge 91f581649)
 **THE PATTERN UNDER ALL FOUR.** The lane's tip cannot run three of the line's instruments, and does not carry the fourth: the observed-shape corpus and the writer-reach instrument THROW at the lane's tip ("the tier-coverage seed osr-tier-14 minted no tier candidate in 12 intervals": the agreement lane's generation, cured on the line at point 47's rung 42), and the layer walker is W2-A-LEAVES's (point 48), not on the lane. So the lane never saw what these read of its own changes; the lane's own reads classed those walkers as red at its base. Every one of the four is green on the line and red only at the merge. **The cheapest cure of all four, offered for the chair's ruling: the lane's sixth seat (still open) merges the line into the lane before its final tip, so the four surface there and are cured on the lane, by the lane, under its review; phase two then merges a tip that carries them.**
