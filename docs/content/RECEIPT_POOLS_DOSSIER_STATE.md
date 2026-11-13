@@ -2974,7 +2974,6 @@ in about two towns in five that keep a force.
 3. `[visitor · no crisis: hunger]` You can see that the trades behind {settlement}'s defence do it more good than harm.
 4. `[unfolding · no crisis: hunger]` While the trades behind {settlement}'s defence keep working, its defenders will not go short.
 5. `[street · crisis: hunger]` Food is short at {settlement}, but the trades behind its defence still do it more good than harm.
-6. `[visitor · crisis: hunger]` You can see that {settlement}'s defence still gains from the trades behind it; you can also see that its defenders eat no better than anyone else.
 
 **CHAIN: defence short** {colour}
 1. `[ledger]` The supply book for {settlement}'s defenders runs short: the trades that should feed and equip them are failing, so the defence is weaker than its numbers suggest.
@@ -3116,7 +3115,6 @@ the ledger).
 2. `[visitor · colour]` Nobody at {settlement} will say whose side they are on, and visitors are asked their business at every turn.
 3. `[ledger · population: ≥ middling]` Some districts of {settlement} are closed off now, and whatever happens there goes unrecorded and unpunished.
 4. `[street · colour]` People at {settlement} keep to their own doorways after dark, and nobody goes to the far end of the place without a reason.
-5. `[watch · guardPresence]` Those who keep order at {settlement} walk in pairs now, and there are lanes they no longer walk at all.
 
 **COMPOUND: slave revolt**
 1. `[street · guardPresence]` Fighting between the rebels and the town's guards has closed whole streets of {settlement}.
@@ -3677,7 +3675,6 @@ street, the unfolding).
 1. `[ledger · guardPresence]` With an army outside, {settlement}'s defence is now about holding out: every guard and every store is counted against how long the siege can last.
 2. `[street · colour]` Everyone at {settlement} who can hold a weapon has a place in the defence, and the whole day is arranged around the siege.
 3. `[unfolding · colour]` Each week the siege lasts, {settlement} has less to hold out with, and its defence is a race against its stores.
-4. `[street · no guardPresence]` {settlement} had nobody whose work was its defence before the army came, so the siege is being held by householders taking turns.
 
 **override: INTERNAL PRESSURE (famine)**
 1. `[ledger · guardPresence]` The guards' rations at {settlement} are cut like everyone else's, and a hungry guard cannot be asked for much for long.
@@ -3758,7 +3755,6 @@ street, the unfolding).
 1. `[ledger · guardPresence]` More people are arriving at {settlement} than its guards can keep in order, so they spend their days on the crowds, not on the roads.
 2. `[street · no guardPresence]` There is no watch at {settlement}, and nobody can tell who has just arrived. Every quarrel over a roof or a meal is a fight no one is placed to stop.
 3. `[unfolding · colour]` Each week more newcomers arrive at {settlement}, and every quarrel over a roof or a meal is one more thing to keep in order.
-4. `[visitor · guardPresence]` At {settlement} you find the guards posted where the newcomers camp, not at the edges of the place.
 
 **override: MIGRATION, departures**
 1. `[ledger · guardPresence]` The guard rota at {settlement} has gaps where departed families used to stand, and the gaps are not being filled.
@@ -7019,7 +7015,6 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 **`UNWALLED-LARGE`** {colour}
 1. `[counterforce]` {settlement} is as big as places that usually raise a wall of stone, and it never has; whether from confidence or thrift, the town lies open.
 2. `[ledger]` {settlement}'s accounts show nothing spent on a wall: the money a place its size would put into stone goes to other needs, and the town stays open.
-3. `[visitor · no crisis: under_siege]` {settlement} is large enough that anyone arriving expects a wall around it, and is surprised to walk straight in from open country.
 
 ---
 

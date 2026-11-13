@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2961,
+    "variants": 2956,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -2049,7 +2049,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 6,
+      "variants": 5,
       "grammars": 1,
       "predicate": [],
       "branchReads": [
@@ -2100,7 +2100,7 @@
       },
       "declares": [],
       "lineDeclares": {
-        "crisis: hunger": 2,
+        "crisis: hunger": 1,
         "no crisis: hunger": 4
       },
       "undeclared": 0,
@@ -3202,7 +3202,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 5,
+      "variants": 4,
       "grammars": 1,
       "predicate": [
         {
@@ -3251,7 +3251,7 @@
       "declares": [],
       "lineDeclares": {
         "colour": 2,
-        "guardPresence": 2,
+        "guardPresence": 1,
         "population: ≥ middling": 2
       },
       "undeclared": 0,
@@ -8271,7 +8271,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
+      "variants": 3,
       "grammars": 1,
       "predicate": [
         {
@@ -8320,8 +8320,7 @@
       "declares": [],
       "lineDeclares": {
         "colour": 2,
-        "guardPresence": 1,
-        "no guardPresence": 1
+        "guardPresence": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -9175,7 +9174,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
+      "variants": 3,
       "grammars": 2,
       "predicate": [],
       "branchReads": [
@@ -9220,7 +9219,7 @@
       "declares": [],
       "lineDeclares": {
         "colour": 1,
-        "guardPresence": 2,
+        "guardPresence": 1,
         "no guardPresence": 1
       },
       "undeclared": 0,
@@ -11644,7 +11643,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 2,
       "grammars": 1,
       "predicate": [],
       "branchReads": [
@@ -11698,9 +11697,7 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {
-        "no crisis: under_siege": 1
-      },
+      "lineDeclares": {},
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -54832,7 +54829,7 @@
         "DS-DEF-3 :: COMPOUND: authoritarian rule",
         "DS-DEF-3 :: COMPOUND: criminal governance"
       ],
-      "variants": 49,
+      "variants": 48,
       "grammars": 19,
       "blocks": [
         "DS-DEF-3"
@@ -55737,7 +55734,7 @@
         "DS-DEF-8 :: override: REVOLT ACTIVE",
         "DS-DEF-8 :: override: WAR FOOTING"
       ],
-      "variants": 53,
+      "variants": 52,
       "grammars": 20,
       "blocks": [
         "DS-DEF-8"
@@ -66550,7 +66547,7 @@
       "subject": "CHAIN: defence supplied",
       "fields": [],
       "readingFunction": "defenceSupplyPoolKey",
-      "count": "6 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -66722,7 +66719,7 @@
         "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
       ],
       "readingFunction": "COMPOUND_POOL_BY_CONDITION",
-      "count": "5 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -67428,7 +67425,7 @@
         "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
       ],
       "readingFunction": "OVERRIDE_POOL_BY_TYPE",
-      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -67566,7 +67563,7 @@
       "subject": "override: MIGRATION, arrivals",
       "fields": [],
       "readingFunction": "militaryOverridePoolKey",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -67912,7 +67909,7 @@
       "subject": "UNWALLED-LARGE",
       "fields": [],
       "readingFunction": "wallRationalePoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
