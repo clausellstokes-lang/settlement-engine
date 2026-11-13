@@ -372,3 +372,213 @@ RECOMMENDATION: at the join (or once the leaf is picked onto this lane by blob),
 people/goals.js: a goal of the INSTITUTION solvency cell that says "keep the work going" is refused where the house's
 resource key is held and `chainWorksResource(record, key)` is false; the leaf's silence (no chain names the key) leaves
 the goal; the refused pick takes the cell's next admitted line on the card's own goal stream, no new draw.
+
+### R2 on a second surface — DONE, a0504f61e (found by the final render)
+The census's 720 rendered at 1900b88fe, every view (femrole.mjs): a woman's masculine role beside her name still printed
+on the Power tab's patronage rows (10; domain/people/patronage.js :: faceOf, display only): now through styledTitleOf.
+**Residue, LISTED (a record field, another writer):** two cards whose NAME carries a shared-name qualifier with the
+masculine role — "Járnsaxa Helgason (the senior abbot)" (r2r-metropolis-18), "Mönkhtsetseg Dzungar (the lord)"
+(r2r-metropolis-53) — written by generators/npcDisplayNames.js :: disambiguateNPCDisplayNames into `name`, so it prints
+wherever the name prints (Relationships 12 lines, NPCs 6, plot hooks 2, Institutions 1, in those two towns).
+RECOMMENDATION: the qualifier reads styledTitleOf(role, gender) (one line; it moves two cards' names on the 720, a
+names-family move to declare).
+
+## P3.3 THE FINAL STATEMENT (once; code tip 1900b88fe for the suite, census and births; a0504f61e display-only after it)
+
+### The census counter (SECOND-WAVE-CENSUS), this seat's base 91a3a9623 against the code tip 1900b88fe
+census.sh on both trees, 720 dumps each. THE CHAIR'S HAZARD CHECKED: the counter (count.mjs) re-run by itself on both
+trees, outside the pipe: exit 0 and 48 rows each (counts.raw), equal to counts.txt. compare.mjs: EVERY ROW EQUAL, base
+against tip (row 4 "almost level" 0 -> 0; GLANCE towns 713 -> 713; median rows per town unchanged). No row rises: no
+origin, no exposure to rule.
+
+### Counts before -> after (same seeds; the census's 720 born and rendered, the lane's 4,305 born)
+| item | instrument | before (91a3a9623) | after |
+|---|---|---|---|
+| R2 rows, women disagreeing with the card | r2rows.mjs, 720 | 347 | 0 |
+| R2 rows, the reader's femaleLordRows | claims4305.mjs vs e969a75b7, 4,305 | 479 | 0 |
+| R2 men's row ends unchanged | r2rows / compact, 720 / 4,305 | 20,670 / 122,605 | equal |
+| R2 on every rendered view (Power tab) | femrole.mjs, 720 dumps | 10 | 0 (a0504f61e; the name-qualifier residue above) |
+| R1 office lines / debt rows / governing text on lords+claimants | births4305x + r1lords, 4,305 | 0 / 0 / 0 (e969a75b7: claimants' 3) | 0 / 0 / 0 |
+| R3 hand-formed possessives | the reader's possess.mjs, every view of the 720 | 0 | 0 |
+| #111 #639 class: commanding claims beside Minor/Suppressed | descclaim.mjs, 720 records | 342 covered (462 all) | 0 covered (120 uncovered, listed) |
+| on the page: "hold direct temporal power" / "Dominant commercial class" | grep, 720 dumps | 68 / 90 towns | 36 / 53 towns (each beside a Significant or stronger label) |
+| #640 "embedded assets" | 720 dumps | 8 towns | 0 |
+| #295 "the elected council" under another seat | 720 dumps / records | 20 towns print the line / 4 under another seat | 0 / 0 |
+| #337 broken issue | records, 720 + 20 | 23 | 0 |
+| #723 class: a power's head "under" its leaders | headsub.mjs, 720 | 290 cards, 191 towns | 0 |
+| on the page: "under the senior casters" / "Serves the faith under its leaders" | 720 dumps | 47 / 128 towns | 0 / 12 (members below the first: true) |
+| #565 "both would say themselves" | the reader's twenty | 1 | 0 |
+
+### The field diff by family
+- **This seat, the 720, whole records, 91a3a9623 -> 1900b88fe: 314 births.** relationships[].npc1Role 142, .npc2Role 95
+  (R2); powerStructure.factions[].desc 177 (the claim cure 170, #640 and #295 16 lines); npcs[].structuralPosition 191,
+  .activeConstraint 191, .settlementCondition 72 (the head-row cure); (powerStructure.)conflicts[].issue/.desc 21 (#337).
+  Nothing else moves: no draw, no name, goal, secret, label, band, score or seat.
+- **This seat, the 4,305 (compact rows: no descriptions, no positions at the base): 686 births, rel.npc1Role and
+  rel.npc2Role only.**
+- **The whole lane, the 4,305, e969a75b7 -> 1900b88fe: 1,412 births.** The first seat's mint and re-deal (npcs.new and
+  npcs.count 762; memberships 852, structural rank 828, importance 852, goals short 860 / long 864; ties re-dealt: from/to
+  833, type, typeName, description, tension 888; influence and power 130), the second seat's (secrets 496: leftover 1 and
+  D's presentation lines; category 89: R1; cast 47) and this seat's role words (npc1Role 1,120, npc2Role 1,024 with the
+  first seats' new ends).
+
+### THE RE-DEAL, ACCEPTED AS DECLARED (the chair's R4 of 2026-11-13, F4)
+Existing cards' goals and ties are re-dealt by the mint (goals and ties pick from the cast; a new card changes the
+picks); no existing card's name, secret or flaw moves by the mint. The reader's counts: the 4,305: 6,170 short goals,
+9,401 long goals re-dealt, ties in 875 births; the 720: 1,146 short, 1,672 long, importance 338, ties in 124 towns, 28 of
+them with no mint (a claimant's band raised). Re-measured at the tip (claims4305.mjs, e969a75b7 against 1900b88fe):
+6,174 short, 9,397 long, ties in 888 births (the second seat's R1 re-deal and this lane's later cures included).
+
+### R1's move, declared
+CLAIMANT_FACE is minted in the card pools' `other` category (c2ba674af): every minted lord and claimant, 151 on the 720
+and 986 on the 4,305, government -> other; on the 720 office lines 45 -> 0 and governing-side debt rows 11 -> 0; 110
+births of the 720 re-dealt against G's tree (the lords' own cards; 53 births' ties by the category pair; goals in 21).
+On the 4,305 (this seat, measured): office lines, governing-side debt rows and governing text on a lord or claimant 0.
+
+### The whole suite (1900b88fe; `git fetch origin review-fixes-2026-07-08:review-fixes-2026-07-08` first; `npx vitest run --maxWorkers=2` through the mutex, to a file with its JSON report)
+39,035 tests in 3,243 files: 38,814 passed, 76 failed (79 red titles with the file-level ones), 145 skipped. Classed:
+- **55 titles in the independent reader's red list at 714381934** (the lane's goldens, null-change pins, digests, measured
+  figures, registers and parked rows, classed in the first hand-back and REVIEW-POWERS-FU section 4).
+- **10 bundle titles** (engineBundleReplay 4, engineServiceCore 1, engineServiceStoreParity 2, aiGroundingBundle
+  freshness 1, edgeSharedBundleReproducibility 2): the committed bundles predate the lane's src; they leave with the last
+  commit (the bundles re-emitted, alone).
+- **Red at this seat's base 91a3a9623 with byte-equal offenders** (the same files run there, `walk-tip0.log`):
+  phoneChromeFloor (the second seat's parked row), tuningRegister (its six "dependents moved"), noLegacyFactionReaders,
+  wiringCensusDeclared, negativeAssertionAnchor (2), presumedThings ARM 1 (after cda44d8b7).
+- **poolDominance "every drawn pool has a row": EXPOSURE of 6127afa05, NAMED, NOT BANKED** — six pools the head-row cure
+  makes reachable (NPC_STRUCTURE.criminal__stable__dominant; magic__contested / corruption / economic_stress /
+  governance_fractured / stable__dominant); the seventh (other__corruption__dominant) is the base's. For the merge seat's
+  door.
+- **This seat's origin, CURED at cda44d8b7** (no row banked): seedLoopTotality (4 test files), negativeAssertionAnchor's
+  new rows (3 test files), styleLaw and presumedThings (the claim table spelled three lines twice), proseWiringCensus (the
+  stamp, re-taken by its own writer: 0 rows), npcStructureWantsVoiceable (its fixture re-keyed by identity). F31's ceiling
+  (powerStructure) was cured at 1900b88fe, before the run.
+- After the run: a0504f61e (patronage, display only), fb4561b03 (a new leaf, no reader) and cda44d8b7 (tests, the census
+  stamp, a refactor with output identical on the 720): their own suites and the walkers named above, run after each.
+- **The draft record** (`POWERS-FOLLOW-UP-shift-record.DRAFT.json`), brought current from this run: all 51 surfaces
+  declared by measure (`measurePOWERS8`); MOVED 6 (generator golden master, espionage dormancy fence, Herald knowledge
+  desk, PDF golden, dossier prose manifest, preset lighting witness), UNMOVED 45; none changed state since the first seat.
+  Signing is the merge seat's: no golden's door was run.
+- **Hazard:** refs, local config and the stash list read before and after the suite and every push: config and stash
+  unchanged; refs moved only by this seat's own branch, the fetched lanes and the ledger branch the brief fetches.
+
+### Observed shape, for the merge seat's door
+`contestsNiche on factions` (observedShapeReaders, the second seat's H-b): NOT banked here, as ruled.
+
+### New or changed sentences, with their towns (this seat; the owner vetoes by exception)
+- Relationship rows and the Power tab's patronage rows: "the lady", "the abbess", "the senior abbess", "the high
+  priestess" for a woman (r2r-town-15 Kyriake Limniotes; r2r-town-19; r2r-city-3; r2r-city-19 Grainne Shaughnessy).
+- "A ruling that one power refuses to obey" (rr2s-town-calm-rand-1, rr2s-city-calm-rand-1).
+- "An external interest with its own people placed inside the settlement. Its presence is not known to the settlement."
+  (r2r-village-48, r2s-infiltrated-city-0, rw3-city-infiltrated-1).
+- "… give them structural influence the seat cannot easily override." (r2r-metropolis-3, r2s-recently_betrayed-metropolis-0).
+- "… depends on the day and the question; each would say it does." (rr2s-town-plague_onset-rand-1).
+- Existing lines in new places, no new words: the claim cure's lower rungs (e.g. "Clergy are present but operate at the
+  margins of civic life …" for Religious Authorities, Minor, rw3-city-infiltrated-1; "Merchants with local reach …",
+  r2r-city-0); the head rows ("Heads the casters among bribe-taking officials …", rr2s-city-calm-rand-1 Malinalxochitl
+  Jalach; "Leads the faith in quiet times, at peace with the seat beside it.", r2r-town-21).
+
+### Hazard log (this seat)
+- `npm ci` wrote `core.hookspath=.husky/_` into the shared config (kept: it runs the lane hook, as for the seats before).
+- The first push's hook ran several minutes; git sent the branch as it stood when the hook finished, so 527198c17 and
+  6127afa05 (committed meanwhile, gated) rode with it. Nothing at or below 91a3a9623 or on origin was rewritten.
+- One governing-suite run on the live worktree was stopped (it would have read a red-first plant mid-run) and re-run on a
+  snapshot worktree.
+
+## P3.4 THE LANE'S NEXT STAGE — NOT BEGUN (the chair, 20:4x UTC: past 300k of context, hand back with the rows listed)
+The chair's message, copied: the cut seat read the two newer cold lists against the cut (`lane/round-3-cut-2026-11-13`
+at fe6d5b741, docs/chair/2026-11-13/ROUND-3-CUT-INCREMENT-2026-11-13.md and ROUND-3-CUT-INCREMENT.json, key `lines`; this
+lane's: class NEW, `at.line` not empty, `writer.file` among the files below). The lane's share: 1 HIGH, 77 MED. ORDER:
+the HIGH first, then the widest writer first. The writer is a script's trace: find the true writer first. From now
+stressFactions.js, officeTitles.js, PowerStrata.jsx, domain/people/allegiance.js, seatKeeper.js, cardPowers.js,
+generators/people/goals.js and domain/dossier/powerStrata.js are this lane's. RULED (record 386) for every line written
+or reworded from now: a line is READ WHERE IT PRINTS before it is pushed (three towns, a siege, a famine or an
+occupation among them where it can print under one, the smallest and the largest tier it reaches; in the commit body);
+a twin carries every condition its siblings carry; a line that names a house, a role or a force reads the roster; a
+line that cannot be made true by its conditions is not written; every disqualifier cure has its guard town. The stage
+gets a short statement of its own at its end (the deltas only).
+ONE THING ANOTHER LANE READS: the keeper of an empty seat, styled, in one call: DONE, fb4561b03
+(`seatKeeper.js :: seatKeeperStyledNameOf`, "Acting Burgomaster <name>" / "Regent <name>"; rb's Tonight sheet and
+conflict card read it for #pf-84 #pf-717 #pf-718 #pf-720).
+By file: npcStructure.js 16, goalFamilies.js 12, faceHonorifics.js 10, rulingStructure.js 10, stressFactions.js 6,
+titleSecretsPresentations.js 4 (the HIGH), PowerStrata.jsx 4, officeTitles.js 4, factionStanding.js 3, dmPowerLines.js 2,
+allegiance.js 2, domain/dossier/powerStrata.js 1, governingStressVignettes.js 1, people/goals.js 1, seatKeeper.js 1,
+cardPowers.js 1. The 78, line by line (list#index, rank, the script's writer, town [tab], sentence, against):
+- ww#449 HIGH `src/data/people/titleSecretsPresentations.js :: ROWS` rww-metropolis-wartime-1 [World/NPCs]: "Secret: Buys fighters who were taken against their will, and keeps them in chains between bouts" — against: config.contentBoundaries.slavery false and human_trafficking false (the owner's boundaries exclude it)
+- pf#235 MED `src/components/new/tabs/power/PowerStrata.jsx :: ` rpf-village-occupied-13 [Systems/Power]: "ContenderOccupation AuthorityMilitarySignificant▼" — against: the occupying power is filed as a Contender that 'Contests the seat' (and Headman's Authority '↑ Holds power' 55 vs 45) while stress occupie
+- pf#335 MED `src/components/new/tabs/power/PowerStrata.jsx :: ` rpf-city-succession_void-13 [Systems/Power]: "ContenderMerchant GuildsMerchantMinor▼" — against: Merchant Guilds is shown as a contender ('Contests the seat'), but the crisis puts it on neither side: record stress.cast.stakes Merchant Gu
+- pf#480 MED `src/components/new/tabs/power/PowerStrata.jsx :: ThePowers` rpf-town-succession_void-13 [Systems/Power]: "↳2 members · first Fronto Fronto · second Servilia Serranus" — against: The Highborn Circle (category "noble") is said to have as its second Servilia Serranus, npcs[npc_mills_2_5] title "the miller", category "ot
+- pf#783 MED `src/components/new/tabs/power/PowerStrata.jsx :: ` rpf-town-calm-13 [Systems/Power]: "Contests the seatMilitary14▲" — against: powerStructure.factionRelationships Merchant Council/Military/Guard type "subordinate" stable: "Military/Guard carries out what Merchant Cou
+- ww#164 MED `src/data/faceHonorifics.js :: FACE_HONORIFICS.the guildmaster of thieves` rww-metropolis-calm-1 [Systems/Power]: "The Shadow Compact · led by Rashid Arlat, the guildmaster of thieves" — against: the Thieves' guild (powerful) is Rashid Arlat's house (Systems/Institutions "Connection: Guildmaster Rashid Arlat"), yet the power "Thieves'
+- ww#799 MED `src/data/faceHonorifics.js :: FACE_HONORIFICS.the sage` rww-city-calm-1 [Systems/Power]: "handled by Lesya Komarov, the network's head (Smuggling network)" — against: listed under Thieves' guild chapter; NPCs: "Emil Bogdanov ... Thieves' guild chapter" is the guild's head; Lesya Komarov heads the Smuggling
+- ww#800 MED `src/data/faceHonorifics.js :: FACE_HONORIFICS.the guildmaster of thieves` rww-city-calm-1 [Systems/Power]: "handled by Emil Bogdanov, the guildmaster of thieves (Thieves' guild chapter)" — against: listed under Smuggling network, whose head is Lesya Komarov (NPCs: "Smuggling network · member of Merchant Guilds / Spymaster")
+- pf#250 MED `src/data/faceHonorifics.js :: FACE_HONORIFICS.the alewife` rpf-village-occupied-13 [World/NPCs]: "Alewife" — against: npcs Lorcan Hayes gender "male", title "the alewife"
+- pf#267 MED `src/data/faceHonorifics.js :: FACE_HONORIFICS.the guildmaster of thieves` rpf-city-succession_void+politically_fractured-13 [Systems/Power]: "handled by Vibia Strabo, the guildmaster of thieves (Thieves' guild chapter)" — against: printed under 'Front businesses', but Front businesses' own face is Nerva Serranus 'the front man' (npcs institution.key "Front businesses",
+- pf#268 MED `src/data/faceHonorifics.js :: FACE_HONORIFICS.the healer` rpf-city-succession_void+politically_fractured-13 [Systems/Power]: "handled by Walpurga Calvus, the network's spider (Underground network)" — against: printed under 'Thieves' guild chapter', whose own face is Vibia Strabo 'the guildmaster of thieves'; Walpurga Calvus's house is the Undergro
+- pf#288 MED `src/data/faceHonorifics.js :: FACE_HONORIFICS.the midwife` rpf-city-succession_void+politically_fractured-13 [World/NPCs]: "Goodwife" — against: npcs Valerianus Laevinus gender "male", title "the midwife"
+- pf#481 MED `src/data/faceHonorifics.js :: FACE_HONORIFICS.the guildmaster` rpf-town-succession_void-13 [Systems/Power]: "Acting Fixer · Vipsanius Caesar, the council's fixer" — against: "Acting Fixer · Vipsanius Caesar, the council's fixer": the office word printed twice, the first in a caretaker form that names no office of
+- pf#630 MED `src/data/faceHonorifics.js :: FACE_HONORIFICS.the sage` rpf-metropolis-politically_fractured-13 [Systems/Power]: "handled by Basilissa Strategopoulos, the network's head (Smuggling network)" — against: printed under 'Underground network', but Basilissa Strategopoulos's institution is 'Smuggling network'; the Underground network's head is St
+- pf#682 MED `src/data/faceHonorifics.js :: FACE_HONORIFICS.the senior guild master` rpf-town-occupied-13 [Systems/Power]: "Head · Skallag Bjornsson, the senior guild master · also first in Merchant Guilds · answers to Fence (word of mouth) through Thordis Gormsso" — against: Catalogue name 'Fence (word of mouth)' printed as a criminal house's name (institutions[] name).
+- pf#314 MED `src/data/officeTitles.js :: OFFICE_TITLES` rpf-hamlet-succession_void-13 [World/Relationships]: "the lord · devoted · Headman" — against: Sadeq al-Dimashqi is labelled 'Headman' outright, but the seat is empty (Power tab: 'Stands empty; ... Acting Headman Sadeq al-Dimashqi ... 
+- pf#315 MED `src/data/officeTitles.js :: OFFICE_TITLES` rpf-hamlet-succession_void-13 [World/Relationships]: "Headman · lifelong · the alewife" — against: Same: 'Headman' for Sadeq al-Dimashqi while the seat stands empty and he only keeps it as Acting Headman (record modifiers ['vacant']).
+- pf#316 MED `src/data/officeTitles.js :: OFFICE_TITLES` rpf-hamlet-succession_void-13 [World/Relationships]: "the alewife · substantial · Headman" — against: Same: 'Headman' for Sadeq al-Dimashqi while the seat stands empty (Power tab 'No one holds the seat at Mintarmahal').
+- pf#355 MED `src/data/officeTitles.js :: OFFICE_TITLES` rpf-city-succession_void-13 [World/Relationships]: "Master of the Guilds · crushing · the master smith" — against: Same: 'Master of the Guilds' for Yang Deng while the seat stands empty (Power tab 'Stands empty').
+- ww#375 MED `src/data/people/dmPowerLines.js :: CAPTURE_LINES` rww-metropolis-famine-1 [Systems/Power]: "Free of the criminals. Nobody at the head of Grand Guild Consortium answers to a criminal house, and no criminal power here is strong enough" — against: record criminalCaptureState "none", but the page: Thieves' guild (powerful) "A dominant underworld power", Defense "Deeply embedded in civic
+- pf#520 MED `src/data/people/dmPowerLines.js :: cap` rpf-metropolis-occupied-13 [Systems/Power]: "Hakon Raudsson is third in Royal Authority and holds a third share in Merchant Guilds, and carries Merchant Guilds's requests to the two abo" — against: Bad possessive "Merchant Guilds's requests"; also share machinery: memberships Merchant Guilds share 0.4 printed as "a third share".
+- ww#654 MED `src/data/people/goalFamilies.js :: GOAL_FAMILY_LINES` rww-city-under_siege-1 [World/NPCs]: "Wants Lay in a season of grain at the city granaries while it can still be had." — against: stress.type 'under_siege': 'Enemies are camped around Panteakra, and nothing comes in by road'; viabilityNote 'Field work and trade have sto
+- ww#1254 MED `src/data/people/goalFamilies.js :: GOAL_FAMILY_LINES` rww-village-under_siege-1 [World/NPCs]: "Wants Get the most out of Grain & Bread while it runs well, and put the gains by." — against: Siege in force: Outlook "outlying farms are abandoned or burned"; Economics "Qaryatsaray is running short of grain, and the siege lets none 
+- pf#51 MED `src/data/people/goalFamilies.js :: GOAL_FAMILY_LINES` rpf-city-calm-13 [World/NPCs]: "Wants Have those who govern confirm, in writing, who may give orders at the smuggling network." — against: Smuggling network is a veiled criminal house (institutions category "Criminal"; npc institution.veiled true); asking the governors for a wri
+- pf#80 MED `src/data/people/goalFamilies.js :: GOAL_FAMILY_LINES` rpf-village-succession_void+famine-13 [World/NPCs]: "Wants Take on more hands for Brewing & Malting at the brewer's brewhouse, and keep them busy all season." — against: stress includes famine: 'No one can earn a normal living while the famine lasts' and brewing eats grain; also 'Brewing & Malting' is a catal
+- pf#203 MED `src/data/people/goalFamilies.js :: GOAL_FAMILY_LINES` rpf-city-politically_fractured-13 [World/NPCs]: "Wants Keep Food Processing going at the butchers through the season, whatever it takes." — against: 'Food Processing' is the economy chain label (record chainId food_processing, label "Food Processing") dropped into the goal with its capita
+- pf#496 MED `src/data/people/goalFamilies.js :: GOAL_FAMILY_LINES` rpf-town-succession_void-13 [World/NPCs]: "Wants Find a new source of supply for Grain & Bread before the stores run out." — against: "Grain & Bread" is a supply-chain identifier (src/data/supplyChainData.js label), printed in a goal; and "before the stores run out" while f
+- pf#548 MED `src/data/people/goalFamilies.js :: GOAL_FAMILY_LINES` rpf-metropolis-occupied-13 [World/NPCs]: "Wants Look for a way to do more for Livestock & Dairy with the same hands." — against: "Livestock & Dairy" is a supply-chain identifier printed in a goal.
+- pf#556 MED `src/data/people/goalFamilies.js :: GOAL_FAMILY_LINES` rpf-metropolis-occupied-13 [World/NPCs]: "Wants Look for a way to do more for Fishing & Seafood with the same hands." — against: "Fishing & Seafood" is a supply-chain identifier printed in a goal.
+- pf#639 MED `src/data/people/goalFamilies.js :: GOAL_FAMILY_LINES` rpf-metropolis-politically_fractured-13 [World/NPCs]: "Wants Bring in from outside what Stone & Construction can no longer get close to home." — against: supply-chain catalogue label 'Stone & Construction' printed as a thing: economicState.activeChains chainId 'stone' label 'Stone & Constructi
+- pf#640 MED `src/data/people/goalFamilies.js :: GOAL_FAMILY_LINES` rpf-metropolis-politically_fractured-13 [World/NPCs]: "Wants Bring in from outside what Iron & Metalwork can no longer get close to home." — against: supply-chain catalogue label 'Iron & Metalwork' printed as a thing: activeChains 'iron' label 'Iron & Metalwork'
+- pf#641 MED `src/data/people/goalFamilies.js :: GOAL_FAMILY_LINES` rpf-metropolis-politically_fractured-13 [World/NPCs]: "Wants Find whoever can still supply Smelting & Refining, and pay them what they ask." — against: supply-chain catalogue label 'Smelting & Refining' printed as a thing: activeChains 'smelting' label 'Smelting & Refining'
+- pf#642 MED `src/data/people/goalFamilies.js :: GOAL_FAMILY_LINES` rpf-metropolis-politically_fractured-13 [World/NPCs]: "Wants Take on more hands for Gambling & Arena at the gambling district, and keep them busy all season." — against: supply-chain catalogue label 'Gambling & Arena' printed as a thing: a supply-chain/category label used as a noun
+- ww#178 MED `src/data/people/titleSecretsPresentations.js :: ROWS` rww-metropolis-calm-1 [World/NPCs]: "Secret: Buys fighters who were taken against their will, and keeps them in chains between bouts" — against: config.contentBoundaries {slavery:false, human_trafficking:false}
+- ww#656 MED `src/data/people/titleSecretsPresentations.js :: ROWS` rww-city-under_siege-1 [World/NPCs]: "Secret: Bought the vineyard by lending its old owner money at a rate that could never be paid back" — against: resourceAnalysis.gaps: 'Vintner exists but lacks access to grapes'; Resources 'No grapes reach the vintner.'; Vintner: 'In a region without 
+- ww#1137 MED `src/data/people/titleSecretsPresentations.js :: ROWS` rww-metropolis-under_siege-1 [World/NPCs]: "Secret: Buys fighters who were taken against their will, and keeps them in chains between bouts" — against: config.contentBoundaries.slavery false and human_trafficking false.
+- ww#850 MED `src/domain/dossier/powerStrata.js :: crisisNoteFor` rww-town-slave_revolt-1 [Systems/Power]: "Holds the title; the decisions that matter are made by Religious Authorities." — against: same tab: "Tarkhanörtöö is run by criminals in all but name. The hall still meets and keeps its forms, but the real decisions are bought." a
+- pf#285 MED `src/domain/people/allegiance.js :: leaveAllegianceReceipts` rpf-city-succession_void+politically_fractured-13 [World/NPCs]: "Hidden allegianceanswers to Front businesses, through Vibia Strabo" — against: Front businesses' face is Nerva Serranus (npcs institution.key "Front businesses"); Vibia Strabo is 'Thieves' guild chapter' (her card, 'In 
+- pf#286 MED `src/domain/people/allegiance.js :: leaveAllegianceReceipts` rpf-city-succession_void+politically_fractured-13 [World/NPCs]: "Hidden allegianceanswers to Thieves' guild chapter, through Walpurga Calvus" — against: the Thieves' guild chapter's face is Vibia Strabo; Walpurga Calvus is 'Underground network'
+- pf#488 MED `src/domain/people/cardPowers.js :: caretakerFormOf` rpf-town-succession_void-13 [World/NPCs]: "Acting Fixer" — against: npcs[npc_town_hall].title "the council's fixer"; "Acting Fixer" says he acts as fixer, not that he keeps the empty seat.
+- pf#474 MED `src/domain/people/seatKeeper.js :: keeperFormOf` rpf-town-succession_void-13 [Systems/Power]: "The seatStands empty; the succession is unsettled. Acting Fixer Vipsanius Caesar keeps the seat meanwhile." — against: npcs[npc_town_hall].title "the council's fixer"; caretakerFormOf("Fixer") prints "Acting Fixer": he is the fixer, not acting as one, and "fi
+- pf#47 MED `src/generators/npcStructure.js :: reg` rpf-city-calm-13 [World/NPCs]: "Holds a place in a crew in quiet times, with order well kept around it." — against: Usama al-Hakim is "the network's head" (Smuggling network) and first of Merchant Guilds (memberships rank 1, structuralRank "head"; Power "↳
+- pf#49 MED `src/generators/npcStructure.js :: reg` rpf-city-calm-13 [World/NPCs]: "Serves the faith under its leaders in quiet times." — against: Kamal ibn Ahmed is first of Religious Authorities (memberships rank 1, structuralRank "head"; Power "↳2 members · first Kamal ibn Ahmed"; hi
+- pf#65 MED `src/generators/npcStructure.js :: reg` rpf-hamlet-famine-13 [World/NPCs]: "Heads an old family while the seat fails, and old names count for more when the seat counts for less." — against: Tertullian Brutus: npcs[].title 'the charter master', institution 'Adventurers' charter hall', category 'other' (the noble/other row); no ol
+- pf#77 MED `src/generators/npcStructure.js :: reg` rpf-village-succession_void+famine-13 [World/NPCs]: "Heads an old family while the seat fails, and old names count for more when the seat counts for less." — against: Konstantinos Chrysoberges: title 'the smith', institution 'Blacksmith', first of Grain Holders (category economy); no old family or noble ho
+- pf#105 MED `src/generators/npcStructure.js :: reg` rpf-city-occupied-13 [World/NPCs]: "Holds an office whose purse shrinks with everyone else's." — against: Gráinne MacQuarrie leads the occupier; stress.cast.stakes Occupation Authority 'gains'; viabilityNote 'The occupiers take the revenue'
+- pf#246 MED `src/generators/npcStructure.js :: reg` rpf-village-occupied-13 [World/NPCs]: "Holds an office whose purse shrinks with everyone else's." — against: Moira Brennan is the occupying governor (npcs title "the occupying governor"); stress occupied viabilityNote: 'The occupiers take the revenu
+- pf#491 MED `src/generators/npcStructure.js :: reg` rpf-town-succession_void-13 [World/NPCs]: "Works spells under the senior casters, among officials who take bribes." — against: Licinia Denter (the circle-keeper) is the only magic person (npcs[] category "magic" = 1) and the Teleportation circle the only Magic instit
+- pf#530 MED `src/generators/npcStructure.js :: reg` rpf-metropolis-occupied-13 [World/NPCs]: "Holds an office whose purse shrinks with everyone else's." — against: Mord Halfdarson leads the occupying power (stress.cast face), and stress.viabilityNote: "The occupiers take the revenue, and local offices w
+- pf#595 MED `src/generators/npcStructure.js :: reg` rpf-town-politically_fractured-13 [World/NPCs]: "Belongs to a lesser family behind the leading one while the seat fails." — against: Úna Hennessy: npcs[].category 'other', institution 'Adventurers' charter hall', third of Military/Guard; the town has no noble houses or fam
+- pf#596 MED `src/generators/npcStructure.js :: reg` rpf-town-politically_fractured-13 [World/NPCs]: "Constraint: Getting ahead of the greater family now will look like seizing a chance, not earning a place." — against: Úna Hennessy is the charter master of Adventurers' charter hall; no family/house power in powerStructure.factions
+- pf#636 MED `src/generators/npcStructure.js :: reg` rpf-metropolis-politically_fractured-13 [World/NPCs]: "Leads a squad whose members are being pulled toward one side or the other in the fight for the seat." — against: Trifena Palaiologos is 'the garrison commander' of 'Multiple garrisons' in a metropolis of 45,539, influence high (power 9), head of The Gar
+- pf#662 MED `src/generators/npcStructure.js :: reg` rpf-thorp-succession_void-13 [World/NPCs]: "Holds a place under the crew's boss while the seat fails." — against: Yoshiko Chen is the only criminal (npcs[1] category 'criminal', structuralRank 'unaffiliated', memberships []); there is no crew boss: Defen
+- pf#663 MED `src/generators/npcStructure.js :: reg` rpf-thorp-succession_void-13 [World/NPCs]: "Constraint: Climbing means being worth more to the boss or being more of a danger, and the boss can see both." — against: No boss exists: Defense 'there is no boss to threaten or to bribe'; Yoshiko Chen is the only criminal in the record.
+- pf#797 MED `src/generators/npcStructure.js :: reg` rpf-town-calm-13 [World/NPCs]: "Leads a squad in quiet times, where the work is routine and the risks are low." — against: npcs[Osterhild Gärtner]: title "the garrison commander", Barracks, influence "high", power 9, structuralRank "head", first of Military/Guard
+- pf#799 MED `src/generators/npcStructure.js :: reg` rpf-town-calm-13 [World/NPCs]: "Belongs to a lesser old family, behind the leading one." — against: npcs[Udelhild Brauer] is "the master smith" (Blacksmiths), category "other", first of Craft Guilds; the town has no noble or family power (f
+- pf#831 MED `src/generators/npcStructure.js :: reg` rpf-metropolis-wartime-13 [World/NPCs]: "Leads a squad whose members are being pulled toward one side or the other in the fight for the seat." — against: npcs[Narantuya Tanghud]: "the watch commander" of the Professional city watch of a 69,368-person metropolis, first of War Council; Tonight s
+- pf#421 MED `src/generators/people/goals.js :: PERSON_HOUSE_PLACE` rpf-metropolis-calm-13 [World/NPCs]: "Wants Win the governor's office first call on any help those who govern can give this season." — against: Predrag Lazarev IS the governor and holds the seat (structuralRank 'head', Ducal Governorship:1); asking 'those who govern' for help is a su
+- ww#162 MED `src/generators/power/factionStanding.js :: annotateFactionStanding` rww-metropolis-calm-1 [Systems/Power]: "They are roughly even with the military: the garrison can arrest their people, and the guild can make every investigation costly." — against: powerStructure.factions: Thieves' Guild power 7 ("Suppressed") vs Military/Guard 17; same tab "Criminal7", "Military17"
+- pf#525 MED `src/generators/power/factionStanding.js :: annotateFactionStanding` rpf-metropolis-occupied-13 [Systems/Power]: "Maritime traders and factor houses controlling import and export flows; prosperous, well-connected, and aware of both. Three powers stand al" — against: factions power: Royal Authority 20, Occupation Authority 15, Merchant Guilds 13, Religious Authorities 13, Arcane Orders 12 (nine powers). R
+- pf#627 MED `src/generators/power/factionStanding.js :: annotateFactionStanding` rpf-metropolis-politically_fractured-13 [Systems/Power]: "Church institutions hold direct temporal power; tithes, land, and courts are all ecclesiastical. They denounce the guild from the pulpit; th" — against: no thieves' guild among powerStructure.factions (Religious Authorities, Military/Guard, The Independent Bloc, City-State Council, Noble Hous
+- ww#1048 MED `src/generators/power/governingStressVignettes.js :: buildInsurgencyNarrative` rww-city-insurgency-1 [Systems/Power]: "The trouble is inside the government, not in the streets." — against: Defense tab: 'Armed rebels are active. Patrols have changed their routes, some districts are closed off' and 'political violence: Street-lev
+- ww#377 MED `src/generators/power/rulingStructure.js :: generatePowerStructure` rww-metropolis-famine-1 [Systems/Power]: "Undermanned and underfunded; unable to enforce law consistently and aware of it." — against: defenseProfile.readiness.label "Well-Defended" (score 75); Defense: "The garrison and city watch patrols on a regular round"; "Everyone ente
+- ww#440 MED `src/generators/power/rulingStructure.js :: generatePowerStructure` rww-metropolis-wartime-1 [Systems/Power]: "Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice. Trade disruption and requisition ar" — against: Craft Guilds card: 'Ahead of the merchant guilds in current influence'; both power 5
+- ww#639 MED `src/generators/power/rulingStructure.js :: generatePowerStructure` rww-city-under_siege-1 [Systems/Power]: "The powerMerchant Guild Council (minor)arcane-advised" — against: identifier 'arcane-advised' (rulingStructure magic key) printed
+- ww#980 MED `src/generators/power/rulingStructure.js :: generatePowerStructure` rww-town-occupied-1 [Systems/Power]: "The powerGuild Council (significant)arcane-advised" — against: faction modifier identifier 'arcane-advised' printed raw; the town has no arcane house (hasMagicInst false; Defense 'No arcane practitioners
+- pf#1 MED `src/generators/power/rulingStructure.js :: generatePowerStructure` rpf-hamlet-calm-13 [Systems/Power]: "The powerHeadman's Authority (dominant)military-dominated" — against: powerStructure.factions[0].modifier "military-dominated" (drawn from config.priorityMilitary 73), but the town has no force: Defense tab "No
+- pf#23 MED `src/generators/power/rulingStructure.js :: generatePowerStructure` rpf-city-calm-13 [Systems/Power]: "The powerMerchant oligarchy (strong)theocratic-aligned" — against: faction modifier "theocratic-aligned" (from config.priorityReligion 70), but same tab: "Religious Authorities answers to Merchant oligarchy.
+- pf#27 MED `src/generators/power/rulingStructure.js :: generatePowerStructure` rpf-city-calm-13 [Systems/Power]: "Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight. Close eno" — against: Religious Authorities power 16, "Minor", vs Merchant oligarchy 37; same tab: "Religious Authorities answers to Merchant oligarchy. Its pries
+- pf#524 MED `src/generators/power/rulingStructure.js :: generatePowerStructure` rpf-metropolis-occupied-13 [Systems/Power]: "The crown rules here directly. How far its word carries depends on the monarch's strength and on whether the nobles stay loyal." — against: stress.type "occupied"; Royal Authority modifiers ["occupied"]; Overview: "nothing it decides stands until the occupiers agree". The crown d
+- pf#526 MED `src/generators/power/rulingStructure.js :: generatePowerStructure` rpf-metropolis-occupied-13 [Systems/Power]: "Hereditary landowners with genuine but not dominant feudal claims; they shape decisions at the margins more than they command them. Under oc" — against: Merchant Guilds power 13 vs Noble Houses 7: the merchants are already well ahead, not "closing the gap"; same tab, Web: "Noble Houses still 
+- pf#734 MED `src/generators/power/rulingStructure.js :: generatePowerStructure` rpf-metropolis-succession_void-13 [Systems/Power]: "Hereditary great families with land grants, court appointments, and dynastic marriage networks; structurally embedded in governance even whe" — against: factions: Merchant Guilds power 16, Grand Merchant Oligarchy 13 vs Noble Houses 10. The merchants are already ahead, not 'closing the gap'.
+- pf#164 MED `src/generators/power/stressFactions.js :: applyStressEventFactions` rpf-village-politically_fractured-13 [Systems/Power]: "Claims legitimate authority through different means; controls a distinct district or institution." — against: Bloc desc says it 'controls a distinct district or institution', but the same tab lists all 20 institutions behind the Elected Reeve and non
+- pf#234 MED `src/generators/power/stressFactions.js :: applyStressEventFactions` rpf-village-occupied-13 [Systems/Power]: "External administrative body; all significant decisions require approval or reversal. Locally hated. Their actual power depends on how much " — against: the occupier is said to operate in the shadow of the local headman; stress occupied: 'its own officials take their orders'; stress cast face
+- pf#486 MED `src/generators/power/stressFactions.js :: applyStressEventFactions` rpf-town-succession_void-13 [Systems/Power]: "Hereditary or institutional claim; has legal arguments; lacks popular support. Three powers stand almost level here, and no one leads; every" — against: powerStructure.factions power: Religious Authorities 48 (Strong), Corrupt Council 27, The Highborn Circle 25 (Minor). The three are not "alm
+- pf#626 MED `src/generators/power/stressFactions.js :: applyStressEventFactions` rpf-metropolis-politically_fractured-13 [Systems/Power]: "Claims legitimate authority through different means; controls a distinct district or institution. Three powers stand almost level here, and " — against: factions power: Religious Authorities 26 leads Military/Guard 15, The Independent Bloc 15, City-State Council 14 by 11 points (Power tab 'Co
+- pf#673 MED `src/generators/power/stressFactions.js :: applyStressEventFactions` rpf-town-occupied-13 [Systems/Power]: "External administrative body; all significant decisions require approval or reversal. Locally hated. Their actual power depends on how much " — against: Powers 43 / 31 / 26 (factions[].power) are not 'almost level'; Merchant Council is 'Ruler' and holds the seat (Skallag Bjornsson), and the o
+- pf#738 MED `src/generators/power/stressFactions.js :: applyStressEventFactions` rpf-metropolis-succession_void-13 [Systems/Power]: "Hereditary or institutional claim; has legal arguments; lacks popular support." — against: Desc of The Highborn Circle and The Peerage (succession claimant pool) names a claim to the seat, but neither is listed among 'Who holds and
