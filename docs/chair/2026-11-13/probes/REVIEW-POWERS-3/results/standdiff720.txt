@@ -1,0 +1,772 @@
+standing-tail changes 257 opening changes 553
+r2r-hamlet-20 | Merchant Guilds #2 45/Significant | roster Feudal Stewardship:55, Merchant Guilds:45
+   BASE tail: . The gap between them and Feudal Stewardship is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.
+   TIP  tail: . They operate in the shadow of Feudal Stewardship but not comfortably: they are waiting for a chance to push back.
+r2r-village-2 | Merchant Guilds #2 33/Strong | roster Household Council:43, Merchant Guilds:33, Craft Guilds:24
+   BASE tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to
+   TIP  tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants 
+r2r-village-2 | Craft Guilds #3 24/Significant | roster Household Council:43, Merchant Guilds:33, Craft Guilds:24
+   BASE tail: . Close enough to the two above that their support is worth buying; they play Merchant Guilds and Household Council against each other when they can. Running close behind the merchant guilds in a sustained dispute over w
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Merchant Guilds and Household Council against each other when they can. The merchants consistently outvote them on pricing and labour standard
+r2r-village-7 | Religious Authorities #2 28/Significant | roster Elder Council:46, Religious Authorit:28, Military/Guard:26
+   BASE tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back.
+   TIP  tail: . Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead.
+r2r-village-36 | Religious Authorities #2 32/Strong | roster Priestly Guidance:45, Religious Authorit:32, Merchant Guilds:23
+   BASE tail: . They operate in the shadow of Priestly Guidance but not comfortably: they are waiting for a chance to push back. They denounce the guild from the pulpit; the guild funds two charitable institutions and makes the denunc
+   TIP  tail: . They operate in the shadow of Priestly Guidance but not comfortably: they are waiting for a chance to push back.
+r2r-village-43 | War Council #2 42/Strong | roster Elder Council:58, War Council:42
+   BASE tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back.
+   TIP  tail: . Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead.
+r2r-village-50 | Military/Guard #3 28/Significant | roster Religious Authorit:38, Headman's Authorit:34, Military/Guard:28
+   BASE tail: . Close enough to the two above that their support is worth buying; they play Headman's Authority and Religious Authorities against each other when they can. They and the religious authorities both keep people in line. T
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Headman's Authority and Religious Authorities against each other when they can.
+r2r-village-55 | War Council #2 40/Significant | roster Household Council:60, War Council:40
+   BASE tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back.
+   TIP  tail: . Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead.
+r2r-village-57 | Craft Guilds #2 29/Significant | roster Merchant Guilds:48, Craft Guilds:29, Elected Reeve:23
+   BASE tail: . They operate in the shadow of Merchant Guilds but not comfortably: they are waiting for a chance to push back. The merchants consistently outvote them on pricing and labour standards, so craft masters now win what they
+   TIP  tail: . Behind Merchant Guilds by too much to challenge openly, so they get their way through petitions and procedure instead. The merchants consistently outvote them on pricing and labour standards, so craft masters now win w
+r2r-village-57 | Elected Reeve #3 23/Minor GOV | roster Merchant Guilds:48, Craft Guilds:29, Elected Reeve:23
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Craft Guilds and Merchant Guilds against each other when they can.
+r2r-town-0 | Thieves' Guild #2 37/Significant | roster Corrupt Council:38, Thieves' Guild:37, Merchant Guilds:25
+   BASE tail: . The gap between them and the governing council is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. They are roughly even with the military: the watch can arrest their people, an
+   TIP  tail: . The gap between them and the governing council is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.
+r2r-town-1 | Religious Authorities #2 22/Minor | roster Arcane Council:38, Religious Authorit:22, Arcane Orders:20, Creditor's Represe:20
+   BASE tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back. The arcane orders have more say right now, and the clergy cannot accept it.
+   TIP  tail: . Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead. The arcane orders have more say right now, and the clergy cannot accept it.
+r2r-town-4 | Craft Guilds #3 17/Minor | roster Town Mayor:55, Merchant Guilds:28, Craft Guilds:17
+   BASE tail: . Close enough to the two above that their support is worth buying; they play Merchant Guilds and Town Mayor against each other when they can. The merchants consistently outvote them on pricing and labour standards, so c
+   TIP  tail: . They are always at the table, but cannot set their own terms. The merchants consistently outvote them on pricing and labour standards, so craft masters now win what they can by adding their own conditions to each deal.
+r2r-town-17 | Craft Guilds #5 12/Minor | roster Feudal Appointee:35, Merchant Guilds:21, Landed Gentry:18, Religious Authorit:14, Craft Guilds:12
+   BASE tail: . Running close behind the merchant guilds in a sustained dispute over who sets the terms for finished goods.
+   TIP  tail: . The merchants consistently outvote them on pricing and labour standards, so craft masters now win what they can by adding their own conditions to each deal.
+r2r-town-18 | Thieves' Guild #3 23/Significant | roster Corrupt Council:45, Religious Authorit:32, Thieves' Guild:23
+   BASE tail: . Close enough to the two above that their support is worth buying; they play Religious Authorities and Corrupt Council against each other when they can. They have more real pull than the military right now: officers on 
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Religious Authorities and Corrupt Council against each other when they can.
+r2r-town-23 | Military/Guard #3 17/Minor | roster Town Council:43, Merchant Guilds:23, Military/Guard:17, Religious Authorit:17
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. They and the religious authorities both keep people in line. The hired company deals with bodies and the clergy with m
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Merchant Guilds and Town Council against each other when they can. They and the religious authorities both keep people in line. The hired comp
+r2r-town-24 | Religious Authorities #2 38/Strong | roster Guild Council:38, Religious Authorit:38, Merchant Guilds:24
+   BASE tail: . The gap between them and the governing council is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. They denounce the guild from the pulpit; the guild funds two charitable instit
+   TIP  tail: . The gap between them and the governing council is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.
+r2r-town-25 | Military/Guard #2 21/Significant | roster Military Council:36, Military/Guard:21, Merchant Guilds:18, Landed Gentry:13, Religious Authorit:12
+   BASE tail: . Operationally distinct from the command council: these are the soldiers and watchmen, not the officers who govern. They operate in the shadow of the governing council but not comfortably: they are waiting for a chance 
+   TIP  tail: . Operationally distinct from the command council: these are the soldiers and watchmen, not the officers who govern. Behind the governing council by too much to challenge openly, so they get their way through petitions a
+r2r-town-27 | Landed Gentry #2 27/Significant | roster Military/Guard:35, Landed Gentry:27, Religious Authorit:26, Feudal Appointee:12
+   BASE tail: . The gap between them and Military/Guard is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. Still ahead of merchant interests in real influence, for now. They know the gap is na
+   TIP  tail: . They operate in the shadow of Military/Guard but not comfortably: they are waiting for a chance to push back. They hold more direct influence than the steward appointed to govern in their name, which raises questions a
+r2r-town-30 | Merchant Guilds #2 26/Significant | roster Guild Council:41, Merchant Guilds:26, Religious Authorit:18, Craft Guilds:15
+   BASE tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants 
+   TIP  tail: . Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead. The craft guilds are present but outpaced; merchants set prices, craft masters object, and me
+r2r-town-34 | Merchant Guilds #3 20/Significant | roster Guild Council:30, Military/Guard:21, Merchant Guilds:20, Religious Authorit:17, Craft Guilds:12
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often th
+   TIP  tail: . They are always at the table, but cannot set their own terms. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not.
+r2r-town-37 | Landed Gentry #5 13/Minor | roster Thieves' Guild:29, Feudal Appointee:26, Religious Authorit:17, Quarantine Council:15, Landed Gentry:13
+   BASE tail: . Still ahead of merchant interests in real influence, for now. They know the gap is narrowing and are arranging marriages accordingly. Which one actually governs depends on the day and the question; both would say thems
+   TIP  tail: . The steward runs things day to day; the household gives the steward the right to. When a petitioner finds one of them more willing than the other, the line between them blurs.
+r2r-town-41 | Religious Authorities #3 21/Significant | roster Town Council:54, Merchant Guilds:25, Religious Authorit:21
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Merchant Guilds and Town Council against each other when they can.
+r2r-town-42 | Merchant Guilds #3 19/Minor | roster Town Mayor:46, Religious Authorit:21, Merchant Guilds:19, Military/Guard:14
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2r-town-43 | Merchant Guilds #2 32/Significant | roster Guild Council:48, Merchant Guilds:32, Craft Guilds:20
+   BASE tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants 
+   TIP  tail: . Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead. The craft guilds are present but outpaced; merchants set prices, craft masters object, and me
+r2r-town-49 | Merchant Guilds #3 13/Minor | roster Arcane Council:60, Military/Guard:16, Merchant Guilds:13, Religious Authorit:11
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2r-town-51 | Military/Guard #5 11/Minor | roster Merchant oligarchy:34, Merchant Guilds:28, Religious Authorit:14, Craft Guilds:13, Military/Guard:11
+   BASE tail: . A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken. They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds
+   TIP  tail: . They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds, and each wishes the other would keep quieter.
+r2r-town-52 | Merchant Guilds #2 21/Significant | roster Guild Council:34, Merchant Guilds:21, Religious Authorit:18, Military/Guard:14, Craft Guilds:13
+   BASE tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to
+   TIP  tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants 
+r2r-town-54 | Merchant Guilds #3 15/Minor | roster Feudal Appointee:36, Religious Authorit:26, Merchant Guilds:15, Landed Gentry:13, Craft Guilds:10
+   BASE tail: . Close enough to the two above that their support is worth buying; they play Religious Authorities and Feudal Appointee against each other when they can. The craft guilds are close behind, contesting every pricing and q
+   TIP  tail: . They are always at the table, but cannot set their own terms. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through council.
+r2r-town-54 | Landed Gentry #4 13/Minor | roster Feudal Appointee:36, Religious Authorit:26, Merchant Guilds:15, Landed Gentry:13, Craft Guilds:10
+   BASE tail: . The merchants are closing the gap, and the noble families are using every law and every social tie they have to slow them down. The steward rules in the lord's name, and the household is where that right comes from, bu
+   TIP  tail: . The merchants are closing the gap, and the noble families are using every law and every social tie they have to slow them down. The steward runs things day to day; the household gives the steward the right to. When a p
+r2r-town-55 | Landed Gentry #3 17/Minor | roster Corrupt Council:52, Military/Guard:31, Landed Gentry:17
+   BASE tail: . They are always at the table, but cannot set their own terms. Still ahead of merchant interests in real influence, for now. They know the gap is narrowing and are arranging marriages accordingly.
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2r-town-59 | Landed Gentry #2 33/Strong | roster Feudal Appointee:43, Landed Gentry:33, Military/Guard:24
+   BASE tail: . Their word is law within their demesne. They operate in the shadow of Feudal Appointee but not comfortably: they are waiting for a chance to push back. Still ahead of merchant interests in real influence, for now. They
+   TIP  tail: . Their word is law within their demesne. They operate in the shadow of Feudal Appointee but not comfortably: they are waiting for a chance to push back. They and the steward both claim the same authority, so petitioners
+r2r-city-1 | Merchant Guilds #3 14/Minor | roster Military City Coun:39, Military/Guard:17, Merchant Guilds:14, Noble Families:12, Arcane Orders:10, Craft Guilds:8
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through cou
+   TIP  tail: . They are always at the table, but cannot set their own terms. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through council.
+r2r-city-3 | The Guild Alliance #5 8/Minor rival-of Merchant Guilds | roster City-State Council:36, Religious Authorit:27, The Holy Compact:15, Merchant Guilds:14, The Guild Alliance:8
+   BASE tail: . The arrival of skilled workers outside guild structures is an existential concern being discussed at every chapter meeting. Close enough to the two above that their support is worth buying; they play Religious Authorit
+   TIP  tail: . The arrival of skilled workers outside guild structures is an existential concern being discussed at every chapter meeting.
+r2r-city-3 | The Holy Compact #3 15/Significant rival-of Religious Authorities | roster City-State Council:36, Religious Authorit:27, The Holy Compact:15, Merchant Guilds:14, The Guild Alliance:8
+   BASE tail: . The institution's charitable work among new arrivals has dramatically expanded its community standing. They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back
+   TIP  tail: . The institution's charitable work among new arrivals has dramatically expanded its community standing. They are always at the table, but cannot set their own terms.
+r2r-city-4 | Religious Authorities #2 33/Strong | roster Noble Governorship:49, Religious Authorit:33, The Holy Compact:18
+   BASE tail: . They operate in the shadow of Noble Governorship but not comfortably: they are waiting for a chance to push back.
+   TIP  tail: . Behind Noble Governorship by too much to challenge openly, so they get their way through petitions and procedure instead.
+r2r-city-4 | The Holy Compact #3 18/Strong rival-of Religious Authorities | roster Noble Governorship:49, Religious Authorit:33, The Holy Compact:18
+   BASE tail: . They operate in the shadow of Noble Governorship but not comfortably: they are waiting for a chance to push back.
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2r-city-10 | Merchant Guilds #3 20/Minor | roster Religious Authorit:24, Merchant Guild Cou:20, Merchant Guilds:20, The Highborn Circl:14, The Peerage:12, Craft Guilds:10
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often th
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Merchant Guild Council and Religious Authorities against each other when they can. The craft guilds are present but outpaced; merchants set pr
+r2r-city-12 | The Faithful Assembly #6 7/Minor rival-of Religious Authorities | roster Merchant City Coun:37, Merchant Guilds:19, Thieves' Guild:13, Religious Authorit:12, Craft Guilds:12, The Faithful Assem:7
+   BASE tail: . Land grants, hospital networks, and moral authority give them leverage across multiple civic domains. The arcane orders are present but operate in the clergy's shadow. Questions of what is sanctioned magic and what is 
+   TIP  tail: . Land grants, hospital networks, and moral authority give them leverage across multiple civic domains.
+r2r-city-14 | Military/Guard #3 16/Minor | roster Corrupt City Counc:36, Merchant Guilds:16, Military/Guard:16, Thieves' Guild:16, The Merchant Bloc:8, The Order of the W:8
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken.
+   TIP  tail: . They are always at the table, but cannot set their own terms. A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken.
+r2r-city-14 | The Merchant Bloc #5 8/Minor rival-of Merchant Guilds | roster Corrupt City Counc:36, Merchant Guilds:16, Military/Guard:16, Thieves' Guild:16, The Merchant Bloc:8, The Order of the W:8
+   BASE tail: . Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead. The craft guilds are close behind, contesting every pricing and quality-standard decision the
+   TIP  tail: . The criminal network reaches further than the merchant guilds right now. Some merchants are paying for protection; others have become silent partners.
+r2r-city-16 | Military/Guard #3 16/Minor | roster Noble Governorship:32, Noble Families:19, Military/Guard:16, Thieves' Guild:13, Merchant Guilds:7, The Hidden Hand:7, Craft Guilds:6
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken.
+   TIP  tail: . They are always at the table, but cannot set their own terms. A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken.
+r2r-city-17 | Military/Guard #2 15/Minor | roster Democratic assembl:29, Military/Guard:15, Merchant Guilds:13, Arcane Orders:12, Noble Families:11, Religious Authorit:9, The Old Houses:6, The Holy Compact:5
+   BASE tail: . They operate in the shadow of Democratic assembly but not comfortably: they are waiting for a chance to push back. A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken. Th
+   TIP  tail: . They operate in the shadow of Democratic assembly but not comfortably: they are waiting for a chance to push back. They and the religious authorities both keep people in line. The garrison deals with bodies and the cle
+r2r-city-17 | The Holy Compact #8 5/Suppressed rival-of Religious Authorities | roster Democratic assembl:29, Military/Guard:15, Merchant Guilds:13, Arcane Orders:12, Noble Families:11, Religious Authorit:9, The Old Houses:6, The Holy Compact:5
+   BASE tail: . Land grants, hospital networks, and moral authority give them leverage across multiple civic domains. The arcane orders have more say right now, and the clergy cannot accept it.
+   TIP  tail: . Land grants, hospital networks, and moral authority give them leverage across multiple civic domains.
+r2r-city-18 | Military/Guard #3 13/Minor | roster Royal Authority:30, Noble Families:18, Military/Guard:13, Religious Authorit:13, Merchant Guilds:11, Arcane Orders:8, The Order of the W:7
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds,
+   TIP  tail: . They are always at the table, but cannot set their own terms. They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds, and each wishes the other would keep 
+r2r-city-19 | The Faithful Assembly #2 16/Strong rival-of Religious Authorities | roster Religious Authorit:30, The Faithful Assem:16, Royal Authority:15, Noble Families:12, Military/Guard:10, Thieves' Guild:10, The Peerage:7
+   BASE tail: . The arcane orders are present but operate in the clergy's shadow. Questions of what is sanctioned magic and what is heresy remain deliberately unresolved. They denounce the guild from the pulpit; the guild funds two ch
+   TIP  tail: . They operate in the shadow of Religious Authorities but not comfortably: they are waiting for a chance to push back.
+r2r-city-20 | Religious Authorities #2 29/Strong | roster Ecclesiastical Cou:43, Religious Authorit:29, The Devout Circle:16, Arcane Orders:12
+   BASE tail: . Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead. The arcane orders are present but operate in the clergy's shadow. Questions of what is sancti
+   TIP  tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back. The arcane orders are present but operate in the clergy's shadow. Questions of what is sanctioned mag
+r2r-city-20 | The Devout Circle #3 16/Strong rival-of Religious Authorities | roster Ecclesiastical Cou:43, Religious Authorit:29, The Devout Circle:16, Arcane Orders:12
+   BASE tail: . Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead. The arcane orders are present but operate in the clergy's shadow. Questions of what is sancti
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2r-city-22 | Merchant Guilds #3 13/Minor | roster City-State Council:36, Religious Authorit:17, Merchant Guilds:13, Craft Guilds:9, Thieves' Guild:9, Arcane Orders:8, Military/Guard:5, The Martial Allian:3
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through cou
+   TIP  tail: . They are always at the table, but cannot set their own terms. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through council.
+r2r-city-23 | Noble Families #3 10/Suppressed | roster Merchant oligarchy:43, Merchant Guilds:13, Noble Families:10, Thieves' Guild:10, Military/Guard:10, Craft Guilds:9, The Merchant Bloc:5
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. The merchant guilds now have more say: the noble families keep their titles, their land and their precedence, but the 
+   TIP  tail: . They are always at the table, but cannot set their own terms. The merchant guilds now have more say: the noble families keep their titles, their land and their precedence, but the money has moved.
+r2r-city-23 | The Merchant Bloc #7 5/Suppressed rival-of Craft Guilds | roster Merchant oligarchy:43, Merchant Guilds:13, Noble Families:10, Thieves' Guild:10, Military/Guard:10, Craft Guilds:9, The Merchant Bloc:5
+   BASE tail: . The merchants consistently outvote them on pricing and labour standards, so craft masters now win what they can by adding their own conditions to each deal.
+   TIP  tail: . The craft guilds currently carry more weight than they do, and the merchants are working to change that.
+r2r-city-24 | Military/Guard #3 17/Minor | roster Arcane Council:39, Merchant Guilds:18, Military/Guard:17, Religious Authorit:16, The Faithful Assem:10
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken. They and the reli
+   TIP  tail: . They are always at the table, but cannot set their own terms. They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds, and each wishes the other would keep 
+r2r-city-25 | The Merchant Bloc #5 8/Minor rival-of Merchant Guilds | roster Merchant oligarchy:40, Religious Authorit:21, Thieves' Guild:18, Merchant Guilds:13, The Merchant Bloc:8
+   BASE tail: . The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through council. The criminal network reaches further than the merchant guilds right now. Some merchants are pa
+   TIP  tail: . The criminal network reaches further than the merchant guilds right now. Some merchants are paying for protection; others have become silent partners.
+r2r-city-26 | Thieves' Guild #3 19/Significant | roster Merchant Guild Cou:35, Merchant Guilds:23, Thieves' Guild:19, The Merchant Bloc:13, The Black Circle:10
+   BASE tail: . Close enough to the two above that their support is worth buying; they play Merchant Guilds and Merchant Guild Council against each other when they can. They are roughly even with the military: the garrison can arrest 
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Merchant Guilds and Merchant Guild Council against each other when they can.
+r2r-city-26 | The Merchant Bloc #4 13/Significant rival-of Merchant Guilds | roster Merchant Guild Cou:35, Merchant Guilds:23, Thieves' Guild:19, The Merchant Bloc:13, The Black Circle:10
+   BASE tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants 
+   TIP  tail: . The criminal network reaches further than the merchant guilds right now. Some merchants are paying for protection; others have become silent partners.
+r2r-city-27 | Military/Guard #3 14/Minor | roster Royal Authority:42, Noble Families:17, Military/Guard:14, Religious Authorit:13, The Martial Allian:8, Merchant Guilds:6
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds,
+   TIP  tail: . They are always at the table, but cannot set their own terms. They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds, and each wishes the other would keep 
+r2r-city-32 | Merchant Guilds #2 18/Significant | roster Arcane Council:30, Merchant Guilds:18, Arcane Orders:12, Craft Guilds:11, The Merchant Bloc:10, Religious Authorit:8, Military/Guard:7, The Shield Compact:4
+   BASE tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants 
+   TIP  tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to
+r2r-city-32 | The Merchant Bloc #5 10/Significant rival-of Merchant Guilds | roster Arcane Council:30, Merchant Guilds:18, Arcane Orders:12, Craft Guilds:11, The Merchant Bloc:10, Religious Authorit:8, Military/Guard:7, The Shield Compact:4
+   BASE tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants 
+   TIP  tail: . The craft guilds currently carry more weight than they do, and the merchants are working to change that.
+r2r-city-33 | The Devout Circle #5 9/Minor rival-of Religious Authorities | roster Thieves' Guild:34, Merchant oligarchy:23, The Underground:19, Religious Authorit:15, The Devout Circle:9
+   BASE tail: . Land grants, charity, and moral authority give them leverage across multiple civic domains. Currently under pressure from both sides to publicly endorse the legitimate authority. Close enough to the two above that thei
+   TIP  tail: . Land grants, charity, and moral authority give them leverage across multiple civic domains. Currently under pressure from both sides to publicly endorse the legitimate authority.
+r2r-city-33 | The Underground #3 19/Strong rival-of Thieves' Guild | roster Thieves' Guild:34, Merchant oligarchy:23, The Underground:19, Religious Authorit:15, The Devout Circle:9
+   BASE tail: . They have more real pull than the military right now: officers on their payroll, and commanders who know better than to ask questions.
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2r-city-36 | The Clergy Alliance #3 16/Strong rival-of Religious Authorities | roster Ecclesiastical Cou:44, Religious Authorit:29, The Clergy Allianc:16, Merchant Guilds:7, The Merchant Bloc:4
+   BASE tail: . Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead. The arcane orders are present but operate in the clergy's shadow. Questions of what is sancti
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2r-city-38 | Military/Guard #3 15/Minor | roster Ecclesiastical Cou:48, Religious Authorit:20, Military/Guard:15, Noble Families:10, Merchant Guilds:7
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds,
+   TIP  tail: . They are always at the table, but cannot set their own terms. They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds, and each wishes the other would keep 
+r2r-city-40 | Merchant Guilds #3 16/Minor | roster Merchant Guild Cou:37, Military/Guard:17, Merchant Guilds:16, Religious Authorit:13, The Trade Compact:9, The Clergy Allianc:8
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2r-city-41 | The Merchant Bloc #5 13/Strong rival-of Merchant Guilds | roster Merchant Guild Cou:32, Merchant Guilds:25, Religious Authorit:16, Craft Guilds:14, The Merchant Bloc:13
+   BASE tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants 
+   TIP  tail: . The craft guilds currently carry more weight than they do, and the merchants are working to change that.
+r2r-city-43 | Merchant oligarchy #1 39/Dominant GOV | roster Merchant oligarchy:39, Merchant Guilds:19, Thieves' Guild:11, Craft Guilds:10, Military/Guard:8, Arcane Orders:8, The Commercial Cir:5
+   BASE tail: . The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not.
+   TIP  tail: . The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not. They tolerate the guild's cut because fighting it costs more than paying it, and nobody says
+r2r-city-43 | Merchant Guilds #2 19/Significant | roster Merchant oligarchy:39, Merchant Guilds:19, Thieves' Guild:11, Craft Guilds:10, Military/Guard:8, Arcane Orders:8, The Commercial Cir:5
+   BASE tail: . Behind Merchant oligarchy by too much to challenge openly, so they get their way through petitions and procedure instead. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merch
+   TIP  tail: . Behind Merchant oligarchy by too much to challenge openly, so they get their way through petitions and procedure instead. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merch
+r2r-city-44 | Military/Guard #2 24/Significant | roster Religious Authorit:31, Military/Guard:24, The Holy Compact:17, Ecclesiastical Cou:15, The Order of the W:13
+   BASE tail: . The gap between them and Religious Authorities is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. They are stronger than the guild, enough to keep it down but not to stamp it o
+   TIP  tail: . They operate in the shadow of Religious Authorities but not comfortably: they are waiting for a chance to push back. They and the religious authorities both keep people in line. The garrison deals with bodies and the c
+r2r-city-44 | The Holy Compact #3 17/Strong rival-of Religious Authorities | roster Religious Authorit:31, Military/Guard:24, The Holy Compact:17, Ecclesiastical Cou:15, The Order of the W:13
+   BASE tail: . The arcane orders are present but operate in the clergy's shadow. Questions of what is sanctioned magic and what is heresy remain deliberately unresolved.
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Military/Guard and Religious Authorities against each other when they can.
+r2r-city-46 | Military/Guard #3 17/Minor | roster Military City Coun:31, Merchant Guilds:18, Military/Guard:17, Noble Families:12, Craft Guilds:12, The Commercial Cir:10
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2r-city-47 | Military/Guard #3 18/Minor | roster Merchant Guild Cou:32, Merchant Guilds:26, Military/Guard:18, The Commercial Cir:14, The Martial Allian:10
+   BASE tail: . Close enough to the two above that their support is worth buying; they play Merchant Guilds and Merchant Guild Council against each other when they can. A slow war with the guild: arrests are made, the gangs rebuild, d
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Merchant Guilds and Merchant Guild Council against each other when they can.
+r2r-city-49 | Military/Guard #3 16/Minor | roster Merchant Guild Cou:35, Religious Authorit:24, Military/Guard:16, Noble Families:10, Arcane Orders:10, The Arcane Circle:5
+   BASE tail: . Close enough to the two above that their support is worth buying; they play Religious Authorities and Merchant Guild Council against each other when they can. A slow war with the guild: arrests are made, the gangs rebu
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Religious Authorities and Merchant Guild Council against each other when they can. They and the religious authorities both keep people in line
+r2r-city-49 | The Arcane Circle #6 5/Suppressed rival-of Arcane Orders | roster Merchant Guild Cou:35, Religious Authorit:24, Military/Guard:16, Noble Families:10, Arcane Orders:10, The Arcane Circle:5
+   BASE tail: . The clergy have more say in public affairs, so the arcane orders work around them and never challenge them openly.
+   TIP  tail: . They have a say on only a few matters; on everything else they side with whoever will deal with them that week. The clergy have more say in public affairs, so the arcane orders work around them and never challenge them
+r2r-city-50 | Merchant Guilds #3 12/Minor | roster Corrupt City Counc:39, Thieves' Guild:13, Merchant Guilds:12, Religious Authorit:12, Arcane Orders:11, The Black Circle:7, The Merchant Bloc:6
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. The criminal network reaches further than the merchant guilds right now. Some merchants are paying for protection; oth
+   TIP  tail: . They are always at the table, but cannot set their own terms. The criminal network reaches further than the merchant guilds right now. Some merchants are paying for protection; others have become silent partners.
+r2r-city-50 | The Merchant Bloc #7 6/Minor rival-of Merchant Guilds | roster Corrupt City Counc:39, Thieves' Guild:13, Merchant Guilds:12, Religious Authorit:12, Arcane Orders:11, The Black Circle:7, The Merchant Bloc:6
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through cou
+   TIP  tail: . The criminal network reaches further than the merchant guilds right now. Some merchants are paying for protection; others have become silent partners.
+r2r-city-52 | Military/Guard #2 20/Significant | roster City-State Council:32, Military/Guard:20, Religious Authorit:15, Noble Families:13, Merchant Guilds:11, The Holy Compact:9
+   BASE tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back. They are stronger than the guild, enough to keep it down but not to stamp it out. They and the religi
+   TIP  tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back. They and the religious authorities both keep people in line. The garrison deals with bodies and the c
+r2r-city-54 | Religious Authorities #3 13/Minor | roster Arcane Council:43, Military/Guard:17, Religious Authorit:13, Arcane Orders:11, The Order of the W:9, The Faithful Assem:7
+   BASE tail: . Land grants, charity, and moral authority give them leverage across multiple civic domains. Three powers stand almost level here, and no one leads; every council vote has to be bargained for. The arcane orders have mor
+   TIP  tail: . Land grants, charity, and moral authority give them leverage across multiple civic domains. They are always at the table, but cannot set their own terms. The arcane orders have more say right now, and the clergy cannot
+r2r-city-54 | The Faithful Assembly #6 7/Minor rival-of Religious Authorities | roster Arcane Council:43, Military/Guard:17, Religious Authorit:13, Arcane Orders:11, The Order of the W:9, The Faithful Assem:7
+   BASE tail: . Land grants, charity, and moral authority give them leverage across multiple civic domains. Three powers stand almost level here, and no one leads; every council vote has to be bargained for. The arcane orders have mor
+   TIP  tail: . Land grants, charity, and moral authority give them leverage across multiple civic domains.
+r2r-city-55 | Noble Families #3 11/Minor | roster Merchant oligarchy:41, Merchant Guilds:11, Noble Families:11, Religious Authorit:9, Thieves' Guild:9, Arcane Orders:8, The Commercial Cir:6, The Holy Compact:5
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. The merchant guilds now have more say: the noble families keep their titles, their land and their precedence, but the 
+   TIP  tail: . They are always at the table, but cannot set their own terms. The merchant guilds now have more say: the noble families keep their titles, their land and their precedence, but the money has moved.
+r2r-city-56 | Merchant Guild Council #3 12/Minor GOV | roster Merchant Guilds:21, Thieves' Guild:15, Merchant Guild Cou:12, Craft Guilds:12, Arcane Orders:12, Religious Authorit:10, Creditor's Represe:10, The Black Circle:8
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through cou
+   TIP  tail: . They are always at the table, but cannot set their own terms. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through council. The criminal network reaches fur
+r2r-city-56 | Craft Guilds #4 12/Minor | roster Merchant Guilds:21, Thieves' Guild:15, Merchant Guild Cou:12, Craft Guilds:12, Arcane Orders:12, Religious Authorit:10, Creditor's Represe:10, The Black Circle:8
+   BASE tail: . Running close behind the merchant guilds in a sustained dispute over who sets the terms for finished goods.
+   TIP  tail: . The merchants consistently outvote them on pricing and labour standards, so craft masters now win what they can by adding their own conditions to each deal.
+r2r-city-57 | Merchant Guilds #3 12/Minor | roster Democratic assembl:39, Religious Authorit:23, Merchant Guilds:12, Military/Guard:8, Craft Guilds:7, Arcane Orders:7, The Mages' Compact:4
+   BASE tail: . Close enough to the two above that their support is worth buying; they play Religious Authorities and Democratic assembly against each other when they can. The craft guilds are close behind, contesting every pricing an
+   TIP  tail: . They are always at the table, but cannot set their own terms. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through council.
+r2r-metropolis-0 | Military/Guard #2 21/Significant | roster Shadow Senate:39, Military/Guard:21, Noble Houses:14, Religious Authorit:12, The Highborn Circl:7, The Devout Circle:7
+   BASE tail: . Behind Shadow Senate by too much to challenge openly, so they get their way through petitions and procedure instead. A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken. 
+   TIP  tail: . Behind Shadow Senate by too much to challenge openly, so they get their way through petitions and procedure instead. They and the religious authorities both keep people in line. The garrison deals with bodies and the c
+r2r-metropolis-0 | The Devout Circle #6 7/Minor rival-of Religious Authorities | roster Shadow Senate:39, Military/Guard:21, Noble Houses:14, Religious Authorit:12, The Highborn Circl:7, The Devout Circle:7
+   BASE tail: . Land grants, hospital networks, and moral authority give them leverage across multiple civic domains. The arcane orders are present but operate in the clergy's shadow. Questions of what is sanctioned magic and what is 
+   TIP  tail: . Land grants, hospital networks, and moral authority give them leverage across multiple civic domains.
+r2r-metropolis-2 | High Theocratic Council #3 11/Minor GOV | roster Religious Authorit:21, Thieves' Guild:12, High Theocratic Co:11, The Independent Bl:11, Merchant Guilds:11, Noble Houses:9, Military/Guard:9, Arcane Orders:8, The Tower Alliance:4, The Peerage:4
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2r-metropolis-3 | Military/Guard #3 20/Significant | roster Ducal Governorship:28, Noble Houses:22, Military/Guard:20, Religious Authorit:16, The Holy Compact:9, Merchant Guilds:5
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. They are stronger than the guild, enough to keep it down but not to stamp it out. They and the religious authorities b
+   TIP  tail: . They are always at the table, but cannot set their own terms. They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds, and each wishes the other would keep 
+r2r-metropolis-5 | The Merchant Bloc #8 5/Suppressed rival-of Craft Guilds | roster Grand Guild Consor:36, Merchant Guilds:13, Thieves' Guild:11, Religious Authorit:10, Arcane Orders:10, Craft Guilds:9, The Hidden Hand:6, The Merchant Bloc:5
+   BASE tail: . Running close behind the merchant guilds in a sustained dispute over who sets the terms for finished goods.
+   TIP  tail: . The craft guilds currently carry more weight than they do, and the merchants are working to change that. The criminal network reaches further than the merchant guilds right now. Some merchants are paying for protection
+r2r-metropolis-6 | The Merchant Bloc #10 7/Minor rival-of Merchant Guilds | roster Grand Council:13, Merchant Guilds:12, Religious Authorit:11, The Highborn Circl:11, Thieves' Guild:10, Arcane Orders:10, Noble Houses:9, The Peerage:9, Craft Guilds:8, The Merchant Bloc:7
+   BASE tail: . The gap between them and the governing council is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. The craft guilds are close behind, contesting every pricing and quality-standa
+   TIP  tail: . The craft guilds currently carry more weight than they do, and the merchants are working to change that.
+r2r-metropolis-9 | Merchant Guilds #3 11/Minor | roster Ducal Governorship:47, Arcane Orders:15, Merchant Guilds:11, Religious Authorit:9, Craft Guilds:8, The Trade Compact:6, The Commercial Cir:4
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through cou
+   TIP  tail: . They are always at the table, but cannot set their own terms. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through council.
+r2r-metropolis-10 | Noble Houses #3 10/Minor | roster Royal Authority:44, Thieves' Guild:14, Noble Houses:10, Merchant Guilds:9, Military/Guard:8, Craft Guilds:7, Arcane Orders:5, The Enlightened:3
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. Still ahead of merchant interests in real influence, for now. They know the gap is narrowing and are arranging marriag
+   TIP  tail: . They are always at the table, but cannot set their own terms. Still ahead of merchant interests in real influence, for now. They know the gap is narrowing and are arranging marriages accordingly.
+r2r-metropolis-10 | The Enlightened #8 3/Suppressed rival-of Arcane Orders | roster Royal Authority:44, Thieves' Guild:14, Noble Houses:10, Merchant Guilds:9, Military/Guard:8, Craft Guilds:7, Arcane Orders:5, The Enlightened:3
+   BASE tail: . Their influence is advisory, transactional, and quietly resented. Ahead of the religious authorities in current influence, which they hold carefully: too much visible power invites accusations that they prefer to avoid
+   TIP  tail: . Their influence is advisory, transactional, and quietly resented.
+r2r-metropolis-11 | Religious Authorities #2 24/Strong | roster High Theocratic Co:42, Religious Authorit:24, The Devout Circle:13, Arcane Orders:11, Thieves' Guild:10
+   BASE tail: . Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead. The arcane orders are present but operate in the clergy's shadow. Questions of what is sancti
+   TIP  tail: . Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead. The arcane orders are present but operate in the clergy's shadow. Questions of what is sancti
+r2r-metropolis-11 | The Devout Circle #3 13/Strong rival-of Religious Authorities | roster High Theocratic Co:42, Religious Authorit:24, The Devout Circle:13, Arcane Orders:11, Thieves' Guild:10
+   BASE tail: . Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead. The arcane orders are present but operate in the clergy's shadow. Questions of what is sancti
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2r-metropolis-14 | Military/Guard #3 13/Minor | roster High Theocratic Co:24, Religious Authorit:23, Military/Guard:13, The Holy Compact:13, War Council:12, Arcane Orders:6, Noble Houses:5, Craft Guilds:4
+   BASE tail: . They are always at the table, but cannot set their own terms. A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken.
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Religious Authorities and High Theocratic Council against each other when they can.
+r2r-metropolis-15 | Noble Houses #4 10/Minor | roster Ducal Governorship:34, Religious Authorit:20, Merchant Guilds:11, Noble Houses:10, Military/Guard:8, Craft Guilds:8, Arcane Orders:6, The Mages' Compact:3
+   BASE tail: . Still ahead of merchant interests in real influence, for now. They know the gap is narrowing and are arranging marriages accordingly.
+   TIP  tail: . The merchants are closing the gap, and the noble families are using every law and every social tie they have to slow them down.
+r2r-metropolis-19 | Religious Authorities #3 14/Minor | roster Grand Merchant Oli:32, Merchant Guilds:19, Religious Authorit:14, Craft Guilds:11, The Commercial Cir:10, Military/Guard:9, The Martial Allian:5
+   BASE tail: . Land grants, hospital networks, and moral authority give them leverage across multiple civic domains. Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . Land grants, hospital networks, and moral authority give them leverage across multiple civic domains. They are always at the table, but cannot set their own terms.
+r2r-metropolis-23 | Religious Authorities #3 14/Minor | roster Royal Authority:36, Noble Houses:16, Religious Authorit:14, Military/Guard:12, Thieves' Guild:7, Craft Guilds:6, Arcane Orders:6, The Mages' Compact:3
+   BASE tail: . Land grants, hospital networks, and moral authority give them leverage across multiple civic domains. Three powers stand almost level here, and no one leads; every council vote has to be bargained for. The arcane order
+   TIP  tail: . Land grants, hospital networks, and moral authority give them leverage across multiple civic domains. They are always at the table, but cannot set their own terms. The arcane orders are present but operate in the clerg
+r2r-metropolis-23 | The Mages' Compact #8 3/Suppressed rival-of Arcane Orders | roster Royal Authority:36, Noble Houses:16, Religious Authorit:14, Military/Guard:12, Thieves' Guild:7, Craft Guilds:6, Arcane Orders:6, The Mages' Compact:3
+   BASE tail: . Their influence is advisory, transactional, and quietly resented. The clergy have more say in public affairs, so the arcane orders work around them and never challenge them openly.
+   TIP  tail: . Their influence is advisory, transactional, and quietly resented.
+r2r-metropolis-27 | Grand Merchant Oligarchy #1 36/Strong GOV | roster Grand Merchant Oli:36, Religious Authorit:19, Merchant Guilds:16, Craft Guilds:12, Arcane Orders:11, The Tower Alliance:6
+   BASE tail: . The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not. They tolerate the guild's cut because fighting it costs more than paying it, and nobody says
+   TIP  tail: . The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not.
+r2r-metropolis-27 | Religious Authorities #2 19/Significant | roster Grand Merchant Oli:36, Religious Authorit:19, Merchant Guilds:16, Craft Guilds:12, Arcane Orders:11, The Tower Alliance:6
+   BASE tail: . Behind Grand Merchant Oligarchy by too much to challenge openly, so they get their way through petitions and procedure instead. The arcane orders are present but operate in the clergy's shadow. Questions of what is san
+   TIP  tail: . Behind Grand Merchant Oligarchy by too much to challenge openly, so they get their way through petitions and procedure instead. The arcane orders are present but operate in the clergy's shadow. Questions of what is san
+r2r-metropolis-28 | Military/Guard #3 15/Minor | roster High Theocratic Co:30, Religious Authorit:17, Military/Guard:15, Noble Houses:10, The Clergy Allianc:10, Merchant Guilds:8, Arcane Orders:6, The Guild Alliance:4
+   BASE tail: . Close enough to the two above that their support is worth buying; they play Religious Authorities and High Theocratic Council against each other when they can. They are stronger than the guild, enough to keep it down b
+   TIP  tail: . They are always at the table, but cannot set their own terms. They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds, and each wishes the other would keep 
+r2r-metropolis-29 | The Merchant Bloc #8 4/Suppressed rival-of Craft Guilds | roster City-State Council:33, Military/Guard:15, Merchant Guilds:15, Religious Authorit:14, Craft Guilds:8, The Independent Bl:6, Arcane Orders:5, The Merchant Bloc:4
+   BASE tail: . Running close behind the merchant guilds in a sustained dispute over who sets the terms for finished goods.
+   TIP  tail: . The craft guilds currently carry more weight than they do, and the merchants are working to change that.
+r2r-metropolis-30 | Merchant Guilds #2 17/Significant | roster Royal Authority:34, Merchant Guilds:17, Noble Houses:12, Religious Authorit:12, Craft Guilds:10, Military/Guard:8, The Highborn Circl:7
+   BASE tail: . Behind Royal Authority by too much to challenge openly, so they get their way through petitions and procedure instead. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchant
+   TIP  tail: . Behind Royal Authority by too much to challenge openly, so they get their way through petitions and procedure instead. The craft guilds are close behind, contesting every pricing and quality-standard decision they try 
+r2r-metropolis-31 | The Landed Bloc #4 13/Strong rival-of Noble Houses | roster Royal Authority:29, Noble Houses:25, Military/Guard:20, The Landed Bloc:13, Arcane Orders:8, The Tower Alliance:5
+   BASE tail: . Their word is law within their demesne. The gap between them and Royal Authority is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.
+   TIP  tail: . Their word is law within their demesne.
+r2r-metropolis-32 | Military/Guard #2 18/Significant | roster Grand Guild Consor:29, Military/Guard:18, Merchant Guilds:16, Craft Guilds:9, The Commercial Cir:8, Noble Houses:7, Religious Authorit:7, Arcane Orders:6
+   BASE tail: . They operate in the shadow of Grand Guild Consortium but not comfortably: they are waiting for a chance to push back. They are stronger than the guild, enough to keep it down but not to stamp it out.
+   TIP  tail: . They operate in the shadow of Grand Guild Consortium but not comfortably: they are waiting for a chance to push back.
+r2r-metropolis-34 | Thieves' Guild #3 11/Minor | roster City-State Council:59, Arcane Orders:15, Thieves' Guild:11, The Tower Alliance:9, The Black Circle:6
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. They are roughly even with the military: the garrison can arrest their people, and the guild can make every investigat
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2r-metropolis-35 | Military/Guard #5 10/Minor | roster Grand Merchant Oli:33, Merchant Guilds:18, Religious Authorit:12, Craft Guilds:12, Military/Guard:10, The Guild Alliance:9, The Commercial Cir:6
+   BASE tail: . A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken. They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds
+   TIP  tail: . They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds, and each wishes the other would keep quieter.
+r2r-metropolis-38 | The Holy Compact #3 11/Significant rival-of Religious Authorities | roster Grand Merchant Oli:36, Religious Authorit:21, The Holy Compact:11, Merchant Guilds:10, Arcane Orders:9, Craft Guilds:8, The Commercial Cir:5
+   BASE tail: . Behind Grand Merchant Oligarchy by too much to challenge openly, so they get their way through petitions and procedure instead. The arcane orders are present but operate in the clergy's shadow. Questions of what is san
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Religious Authorities and Grand Merchant Oligarchy against each other when they can.
+r2r-metropolis-40 | Religious Authorities #2 25/Strong | roster Ducal Governorship:39, Religious Authorit:25, The Holy Compact:14, Noble Houses:8, Arcane Orders:7, Merchant Guilds:7
+   BASE tail: . Behind Ducal Governorship by too much to challenge openly, so they get their way through petitions and procedure instead. The arcane orders are present but operate in the clergy's shadow. Questions of what is sanctione
+   TIP  tail: . They operate in the shadow of Ducal Governorship but not comfortably: they are waiting for a chance to push back. The arcane orders are present but operate in the clergy's shadow. Questions of what is sanctioned magic 
+r2r-metropolis-40 | The Holy Compact #3 14/Strong rival-of Religious Authorities | roster Ducal Governorship:39, Religious Authorit:25, The Holy Compact:14, Noble Houses:8, Arcane Orders:7, Merchant Guilds:7
+   BASE tail: . Behind Ducal Governorship by too much to challenge openly, so they get their way through petitions and procedure instead. The arcane orders are present but operate in the clergy's shadow. Questions of what is sanctione
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2r-metropolis-42 | Military/Guard #3 13/Minor | roster City-State Council:35, Religious Authorit:16, Military/Guard:13, Merchant Guilds:12, Arcane Orders:10, Noble Houses:8, The Merchant Bloc:6
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken. They and the reli
+   TIP  tail: . They are always at the table, but cannot set their own terms. They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds, and each wishes the other would keep 
+r2r-metropolis-43 | Merchant Guilds #3 11/Minor | roster Royal Authority:40, Religious Authorit:16, Merchant Guilds:11, Noble Houses:10, Arcane Orders:10, Craft Guilds:7, The Guild Alliance:6
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through cou
+   TIP  tail: . They are always at the table, but cannot set their own terms. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through council.
+r2r-metropolis-44 | Military/Guard #3 13/Minor | roster Grand Guild Consor:25, Merchant Guilds:16, Military/Guard:13, Thieves' Guild:12, Craft Guilds:10, Religious Authorit:9, Arcane Orders:9, The Trade Compact:6
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken. They and the reli
+   TIP  tail: . They are always at the table, but cannot set their own terms. A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken. They and the religious authorities both keep people in 
+r2r-metropolis-45 | Military/Guard #3 13/Minor | roster High Theocratic Co:26, Religious Authorit:15, Military/Guard:13, Merchant Guilds:13, Noble Houses:9, Arcane Orders:9, The Shield Compact:8, Craft Guilds:7
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken. They and the reli
+   TIP  tail: . They are always at the table, but cannot set their own terms. They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds, and each wishes the other would keep 
+r2r-metropolis-47 | Military/Guard #2 17/Minor | roster Grand Merchant Oli:32, Military/Guard:17, Merchant Guilds:14, Noble Houses:12, Religious Authorit:10, Arcane Orders:8, The Peerage:7
+   BASE tail: . They operate in the shadow of Grand Merchant Oligarchy but not comfortably: they are waiting for a chance to push back. They and the religious authorities both keep people in line. The garrison deals with bodies and th
+   TIP  tail: . Behind Grand Merchant Oligarchy by too much to challenge openly, so they get their way through petitions and procedure instead. They and the religious authorities both keep people in line. The garrison deals with bodie
+r2r-metropolis-48 | Military/Guard #3 13/Minor | roster Grand Council:33, Merchant Guilds:17, Military/Guard:13, Craft Guilds:11, Noble Houses:10, The Guild Alliance:10, The Old Houses:6
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2r-metropolis-49 | Military/Guard #3 16/Minor | roster Grand Guild Consor:26, Merchant Guilds:18, Military/Guard:16, Religious Authorit:13, Craft Guilds:10, The Guild Alliance:10, Arcane Orders:7
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds,
+   TIP  tail: . They are always at the table, but cannot set their own terms. They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds, and each wishes the other would keep 
+r2r-metropolis-49 | Craft Guilds #5 10/Minor | roster Grand Guild Consor:26, Merchant Guilds:18, Military/Guard:16, Religious Authorit:13, Craft Guilds:10, The Guild Alliance:10, Arcane Orders:7
+   BASE tail: . The merchants consistently outvote them on pricing and labour standards, so craft masters now win what they can by adding their own conditions to each deal.
+   TIP  tail: . Running close behind the merchant guilds in a sustained dispute over who sets the terms for finished goods.
+r2r-metropolis-52 | Thieves' Guild #3 12/Minor | roster Ducal Governorship:39, Religious Authorit:23, Thieves' Guild:12, The Clergy Allianc:12, Noble Houses:7, Arcane Orders:7
+   BASE tail: . They are always at the table, but cannot set their own terms. They are roughly even with the military: the garrison can arrest their people, and the guild can make every investigation costly.
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2r-metropolis-53 | Military/Guard #3 16/Minor | roster Ducal Governorship:29, Noble Houses:18, Military/Guard:16, Religious Authorit:16, The Landed Bloc:9, Arcane Orders:7, Merchant Guilds:5
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. They are stronger than the guild, enough to keep it down but not to stamp it out. They and the religious authorities b
+   TIP  tail: . They are always at the table, but cannot set their own terms. They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds, and each wishes the other would keep 
+r2r-metropolis-54 | Craft Guilds #4 10/Minor | roster City-State Council:30, Merchant Guilds:18, Military/Guard:17, Craft Guilds:10, Arcane Orders:10, The Order of the W:9, The Mages' Compact:6
+   BASE tail: . The merchants consistently outvote them on pricing and labour standards, so craft masters now win what they can by adding their own conditions to each deal.
+   TIP  tail: . Running close behind the merchant guilds in a sustained dispute over who sets the terms for finished goods.
+r2r-metropolis-55 | Military/Guard #5 8/Suppressed | roster City-State Council:34, Merchant Guilds:14, Arcane Orders:12, Religious Authorit:9, Military/Guard:8, Craft Guilds:8, The Trade Compact:8, The Arcane Circle:7
+   BASE tail: . A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken. They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds
+   TIP  tail: . They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds, and each wishes the other would keep quieter.
+r2r-metropolis-58 | The Martial Alliance #6 9/Minor rival-of Military/Guard | roster Grand Military Cou:24, Military/Guard:15, Merchant Guilds:15, Noble Houses:11, Craft Guilds:10, The Martial Allian:9, Creditor's Represe:8, The Guild Alliance:8
+   BASE tail: . Operationally distinct from the command council: these are the soldiers and watchmen, not the officers who govern. They operate in the shadow of the governing council but not comfortably: they are waiting for a chance 
+   TIP  tail: . Operationally distinct from the command council: these are the soldiers and watchmen, not the officers who govern.
+r2s-under_siege-city-2 | Military/Guard #2 20/Significant | roster Noble Governorship:27, Military/Guard:20, War Council:19, Religious Authorit:16, The Garrison Bloc:10, The Faithful Assem:8
+   BASE tail: . They operate in the shadow of Noble Governorship but not comfortably: they are waiting for a chance to push back. They are stronger than the guild, enough to keep it down but not to stamp it out. They and the religious
+   TIP  tail: . They operate in the shadow of Noble Governorship but not comfortably: they are waiting for a chance to push back. They and the religious authorities both keep people in line. The garrison deals with bodies and the cler
+r2s-under_siege-city-2 | War Council #3 19/Significant | roster Noble Governorship:27, Military/Guard:20, War Council:19, Religious Authorit:16, The Garrison Bloc:10, The Faithful Assem:8
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2s-under_siege-city-2 | The Faithful Assembly #6 8/Minor rival-of Religious Authorities | roster Noble Governorship:27, Military/Guard:20, War Council:19, Religious Authorit:16, The Garrison Bloc:10, The Faithful Assem:8
+   BASE tail: . Land grants, hospital networks, and moral authority give them leverage across multiple civic domains. The arcane orders are present but operate in the clergy's shadow. Questions of what is sanctioned magic and what is 
+   TIP  tail: . Land grants, hospital networks, and moral authority give them leverage across multiple civic domains.
+r2s-under_siege-metropolis-0 | Military/Guard #1 25/Significant | roster Military/Guard:25, High Theocratic Co:23, Religious Authorit:20, War Council:11, Noble Houses:8, Arcane Orders:5, Craft Guilds:5, The Arcane Circle:3
+   BASE tail: . They are stronger than the guild, enough to keep it down but not to stamp it out. They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds, and each wishes t
+   TIP  tail: . They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds, and each wishes the other would keep quieter.
+r2s-under_siege-metropolis-1 | Military/Guard #2 26/Strong | roster Grand Military Cou:32, Military/Guard:26, The Garrison Bloc:14, Noble Houses:8, War Council:8, Arcane Orders:7, The Shield Compact:5
+   BASE tail: . Operationally distinct from the command council: these are the soldiers and watchmen, not the officers who govern. They operate in the shadow of the governing council but not comfortably: they are waiting for a chance 
+   TIP  tail: . Operationally distinct from the command council: these are the soldiers and watchmen, not the officers who govern. The gap between them and the governing council is narrow. A single shift in patronage, scandal, or arme
+r2s-under_siege-metropolis-1 | The Garrison Bloc #3 14/Strong rival-of Military/Guard | roster Grand Military Cou:32, Military/Guard:26, The Garrison Bloc:14, Noble Houses:8, War Council:8, Arcane Orders:7, The Shield Compact:5
+   BASE tail: . Operationally distinct from the command council: these are the soldiers and watchmen, not the officers who govern. They operate in the shadow of the governing council but not comfortably: they are waiting for a chance 
+   TIP  tail: . Operationally distinct from the command council: these are the soldiers and watchmen, not the officers who govern. They are always at the table, but cannot set their own terms.
+r2s-under_siege-metropolis-3 | The Merchant Bloc #8 3/Suppressed rival-of Merchant Guilds | roster Grand Merchant Sen:19, War Council:19, Religious Authorit:16, Arcane Orders:15, Military/Guard:11, Thieves' Guild:11, Merchant Guilds:6, The Merchant Bloc:3
+   BASE tail: . The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through council. The criminal network reaches further than the merchant guilds right now. Some merchants are pa
+   TIP  tail: . The criminal network reaches further than the merchant guilds right now. Some merchants are paying for protection; others have become silent partners.
+r2s-famine-village-2 | Grain Holders #2 41/Significant | roster Headman's Authorit:59, Grain Holders:41
+   BASE tail: . They operate in the shadow of Headman's Authority but not comfortably: they are waiting for a chance to push back.
+   TIP  tail: . Behind Headman's Authority by too much to challenge openly, so they get their way through petitions and procedure instead.
+r2s-famine-town-1 | Merchant Guilds #3 21/Minor | roster Religious Authorit:36, Merchant oligarchy:26, Merchant Guilds:21, Military/Guard:17
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2s-famine-town-2 | Thieves' Guild #2 34/Significant | roster Town Mayor:39, Thieves' Guild:34, Grain Holders:27
+   BASE tail: . The gap between them and Town Mayor is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. They have more real pull than the military right now: officers on their payroll, and comm
+   TIP  tail: . The gap between them and Town Mayor is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.
+r2s-famine-town-3 | Thieves' Guild #2 33/Significant | roster Arcane Council:35, Thieves' Guild:33, Religious Authorit:32
+   BASE tail: . The gap between them and the governing council is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. They are roughly even with the military: the watch can arrest their people, an
+   TIP  tail: . The gap between them and the governing council is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.
+r2s-famine-city-1 | Thieves' Guild #2 25/Significant | roster Merchant Guild Cou:27, Thieves' Guild:25, Merchant Guilds:21, Grain Holders:16, The Commercial Cir:11
+   BASE tail: . The gap between them and the governing council is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. They have more real pull than the military right now: officers on their payrol
+   TIP  tail: . The gap between them and the governing council is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.
+r2s-famine-city-2 | The Merchant Bloc #7 8/Minor rival-of Merchant Guilds | roster Merchant oligarchy:19, Religious Authorit:16, Merchant Guilds:15, Thieves' Guild:15, Grain Holders:11, Arcane Orders:10, The Merchant Bloc:8, The Commercial Cir:6
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through cou
+   TIP  tail: . The criminal network reaches further than the merchant guilds right now. Some merchants are paying for protection; others have become silent partners.
+r2s-famine-city-3 | Noble Families #2 16/Significant | roster Religious Authorit:21, Noble Families:16, Military/Guard:16, Noble Governorship:15, The Holy Compact:12, Grain Holders:11, The Old Houses:9
+   BASE tail: . The gap between them and Religious Authorities is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. Still ahead of merchant interests in real influence, for now. They know the ga
+   TIP  tail: . The gap between them and Religious Authorities is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.
+r2s-occupied-hamlet-3 | Occupation Authority #2 46/Strong | roster Headman's Authorit:54, Occupation Authori:46
+   BASE tail: . Locally hated. Their actual power depends on how much force they can bring here, which varies. The gap between them and Headman's Authority is narrow. A single shift in patronage, scandal, or armed muscle could swap th
+   TIP  tail: . Locally hated. Their actual power depends on how much force they can bring here, which varies. They operate in the shadow of Headman's Authority but not comfortably: they are waiting for a chance to push back.
+r2s-occupied-village-2 | Occupation Authority #2 32/Significant | roster Merchant Guilds:39, Occupation Authori:32, Household Council:29
+   BASE tail: . Locally hated. Their actual power depends on how much force they can bring here, which varies. The gap between them and Merchant Guilds is narrow. A single shift in patronage, scandal, or armed muscle could swap their 
+   TIP  tail: . Locally hated. Their actual power depends on how much force they can bring here, which varies. They operate in the shadow of Merchant Guilds but not comfortably: they are waiting for a chance to push back.
+r2s-occupied-village-2 | Household Council #3 29/Significant GOV | roster Merchant Guilds:39, Occupation Authori:32, Household Council:29
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Occupation Authority and Merchant Guilds against each other when they can.
+r2s-occupied-town-0 | Resistance Network #3 17/Minor | roster Occupation Authori:41, Town Council:28, Resistance Network:17, Merchant Guilds:14
+   BASE tail: . Currently cautious. Close enough to the two above that their support is worth buying; they play Town Council and Occupation Authority against each other when they can.
+   TIP  tail: . Currently cautious. They are always at the table, but cannot set their own terms.
+r2s-occupied-town-2 | Occupation Authority #3 29/Significant | roster Guild Council:36, Religious Authorit:35, Occupation Authori:29
+   BASE tail: . Locally hated. Their actual power depends on how much force they can bring here, which varies. Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . Locally hated. Their actual power depends on how much force they can bring here, which varies. Close enough to the two above that their support is worth buying; they play Religious Authorities and Guild Council against
+r2s-occupied-town-3 | Merchant Guilds #4 19/Minor | roster Corrupt Council:26, Occupation Authori:22, Religious Authorit:22, Merchant Guilds:19, Craft Guilds:11
+   BASE tail: . The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through council.
+   TIP  tail: . The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not.
+r2s-occupied-city-0 | Arcane Orders #3 17/Minor | roster Occupation Authori:38, The Shield Compact:21, Arcane Orders:17, Military City Coun:15, The Tower Alliance:9
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2s-occupied-metropolis-1 | Noble Houses #4 10/Minor | roster Religious Authorit:26, Occupation Authori:25, Grand Military Cou:10, Noble Houses:10, Resistance Network:10, Arcane Orders:8, Military/Guard:7, The Garrison Bloc:4
+   BASE tail: . Under occupation, several noble families have made private accommodations with the new authority. Others have not, and are watched. Still ahead of merchant interests in real influence, for now. They know the gap is nar
+   TIP  tail: . Under occupation, several noble families have made private accommodations with the new authority. Others have not, and are watched.
+r2s-occupied-metropolis-2 | Thieves' Guild #3 13/Minor | roster Ducal Governorship:22, Occupation Authori:17, Thieves' Guild:13, Arcane Orders:12, Merchant Guilds:10, Craft Guilds:9, Resistance Network:7, The Enlightened:6, The Guild Alliance:4
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. They are roughly even with the military: the garrison can arrest their people, and the guild can make every investigat
+   TIP  tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+r2s-occupied-metropolis-3 | The Garrison Bloc #6 10/Significant rival-of Occupation Authority | roster Grand Merchant Oli:20, Occupation Authori:17, Religious Authorit:17, Arcane Orders:15, Merchant Guilds:12, The Garrison Bloc:10, Craft Guilds:9
+   BASE tail: . Locally hated. Their actual power depends on how many soldiers they have here, which varies. The gap between them and Grand Merchant Oligarchy is narrow. A single shift in patronage, scandal, or armed muscle could swap
+   TIP  tail: . Locally hated. Their actual power depends on how many soldiers they have here, which varies.
+r2s-politically_fractured-village-1 | Religious Authorities #2 36/Significant | roster The Independent Bl:44, Religious Authorit:36, Headman's Authorit:20
+   BASE tail: . The gap between them and The Independent Bloc is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.
+   TIP  tail: . They operate in the shadow of The Independent Bloc but not comfortably: they are waiting for a chance to push back.
+r2s-politically_fractured-town-0 | Thieves' Guild #2 31/Significant | roster Merchant Guilds:31, Thieves' Guild:31, The Independent Bl:21, Guild Council:17
+   BASE tail: . The gap between them and Merchant Guilds is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. They have more real pull than the military right now: officers on their payroll, and
+   TIP  tail: . The gap between them and Merchant Guilds is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.
+r2s-politically_fractured-town-2 | Landed Gentry #1 42/Strong | roster Landed Gentry:42, Military/Guard:24, The Independent Bl:20, Feudal Appointee:14
+   BASE tail: . Still ahead of merchant interests in real influence, for now. They know the gap is narrowing and are arranging marriages accordingly. The steward governs in name, but gives way to them more often than was ever intended
+   TIP  tail: . They hold more direct influence than the steward appointed to govern in their name, which raises questions about why the steward exists at all.
+r2s-politically_fractured-town-2 | The Independent Bloc #3 20/Minor | roster Landed Gentry:42, Military/Guard:24, The Independent Bl:20, Feudal Appointee:14
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Military/Guard and Landed Gentry against each other when they can.
+r2s-politically_fractured-town-3 | Merchant Guilds #3 15/Minor | roster Religious Authorit:39, The Independent Bl:20, Merchant Guilds:15, Third Bloc (Neutra:15, Church Council:11
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2s-politically_fractured-metropolis-2 | The Grey Council #6 9/Minor rival-of Third Bloc (Neutrals) | roster Noble Houses:25, The Independent Bl:24, Third Bloc (Neutra:16, Ducal Governorship:13, The Common Interes:13, The Grey Council:9
+   BASE tail: . Currently being courted by both sides. Close enough to the two above that their support is worth buying; they play The Independent Bloc and Noble Houses against each other when they can.
+   TIP  tail: . Currently being courted by both sides.
+r2s-indebted-town-1 | Military/Guard #2 34/Significant | roster Merchant Guilds:36, Military/Guard:34, Corrupt Council:30
+   BASE tail: . The gap between them and Merchant Guilds is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and
+   TIP  tail: . The gap between them and Merchant Guilds is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.
+r2s-indebted-town-1 | Corrupt Council #3 30/Significant GOV | roster Merchant Guilds:36, Military/Guard:34, Corrupt Council:30
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Military/Guard and Merchant Guilds against each other when they can.
+r2s-indebted-town-2 | Creditor's Representative #3 27/Minor | roster Town Mayor:40, Merchant Guilds:33, Creditor's Represe:27
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Merchant Guilds and Town Mayor against each other when they can.
+r2s-indebted-town-3 | Thieves' Guild #2 28/Significant | roster Arcane Council:34, Thieves' Guild:28, Creditor's Represe:19, Religious Authorit:19
+   BASE tail: . The gap between them and the governing council is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. They are roughly even with the military: the watch can arrest their people, an
+   TIP  tail: . The gap between them and the governing council is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.
+r2s-indebted-city-0 | Merchant Guilds #3 12/Minor | roster Military City Coun:28, Military/Guard:16, Merchant Guilds:12, Religious Authorit:11, Noble Families:10, Creditor's Represe:9, The Martial Allian:8, The Peerage:6
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2s-indebted-city-1 | Craft Guilds #3 16/Minor | roster Democratic assembl:33, Merchant Guilds:28, Craft Guilds:16, Military/Guard:15, The Shield Compact:8
+   BASE tail: . Close enough to the two above that their support is worth buying; they play Merchant Guilds and Democratic assembly against each other when they can. The merchants consistently outvote them on pricing and labour standa
+   TIP  tail: . They are always at the table, but cannot set their own terms. The merchants consistently outvote them on pricing and labour standards, so craft masters now win what they can by adding their own conditions to each deal.
+r2s-indebted-city-2 | Craft Guilds #3 12/Minor | roster City Council:25, Merchant Guilds:17, Craft Guilds:12, Thieves' Guild:12, Arcane Orders:12, Creditor's Represe:12, The Trade Compact:10
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. Running close behind the merchant guilds in a sustained dispute over who sets the terms for finished goods.
+   TIP  tail: . They are always at the table, but cannot set their own terms. Running close behind the merchant guilds in a sustained dispute over who sets the terms for finished goods.
+r2s-indebted-city-3 | Religious Authorities #2 22/Significant | roster Arcane Council:37, Religious Authorit:22, Arcane Orders:13, Creditor's Represe:11, Military/Guard:7, The Free Alliance:6, The Martial Allian:4
+   BASE tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back. The arcane orders have more say right now, and the clergy cannot accept it.
+   TIP  tail: . Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead. The arcane orders have more say right now, and the clergy cannot accept it.
+r2s-indebted-metropolis-1 | Merchant Guilds #3 14/Minor | roster Grand Guild Consor:31, Military/Guard:15, Merchant Guilds:14, Noble Houses:11, Craft Guilds:9, Arcane Orders:9, The Highborn Circl:6, The Enlightened:5
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through cou
+   TIP  tail: . They are always at the table, but cannot set their own terms. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through council.
+r2s-indebted-metropolis-2 | The Merchant Bloc #7 9/Significant rival-of Merchant Guilds | roster Grand Council:25, Merchant Guilds:18, Craft Guilds:11, Creditor's Represe:11, Arcane Orders:10, Religious Authorit:9, The Merchant Bloc:9, The Common Interes:7
+   BASE tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to
+   TIP  tail: . The craft guilds currently carry more weight than they do, and the merchants are working to change that.
+r2s-recently_betrayed-village-3 | Craft Guilds #3 27/Significant | roster Merchant Guilds:45, Elder Council:28, Craft Guilds:27
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. The merchants consistently outvote them on pricing and labour standards, so craft masters now win what they can by add
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Elder Council and Merchant Guilds against each other when they can. The merchants consistently outvote them on pricing and labour standards, s
+r2s-recently_betrayed-town-0 | Merchant Guilds #3 18/Minor | roster Religious Authorit:30, Guild Council:22, Merchant Guilds:18, Thieves' Guild:17, Craft Guilds:13
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through cou
+   TIP  tail: . They are always at the table, but cannot set their own terms. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through council. They tolerate the guild's cut be
+r2s-recently_betrayed-town-2 | Merchant Guilds #3 19/Significant | roster Corrupt Council:42, The Inquiry:21, Merchant Guilds:19, Military/Guard:18
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2s-recently_betrayed-city-1 | Arcane Orders #3 13/Minor | roster Ecclesiastical Cou:45, Religious Authorit:34, Arcane Orders:13, The Mages' Compact:8
+   BASE tail: . Close enough to the two above that their support is worth buying; they play Ecclesiastical Council and Religious Authorities against each other when they can. The clergy have more say in public affairs, so the arcane o
+   TIP  tail: . They are always at the table, but cannot set their own terms. The clergy have more say in public affairs, so the arcane orders work around them and never challenge them openly.
+r2s-recently_betrayed-city-3 | Military/Guard #2 26/Minor | roster Military City Coun:34, Military/Guard:26, Religious Authorit:24, Noble Families:16
+   BASE tail: . The gap between them and the governing council is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. A slow war with the guild: arrests are made, the gangs rebuild, deals are stru
+   TIP  tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back. They and the religious authorities both keep people in line. The garrison deals with bodies and the c
+r2s-recently_betrayed-metropolis-0 | Merchant Guilds #2 19/Significant | roster Ducal Governorship:19, Merchant Guilds:19, Noble Houses:18, Military/Guard:14, Craft Guilds:12, The Commercial Cir:11, The Guild Alliance:7
+   BASE tail: . The gap between them and Ducal Governorship is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. The craft guilds are present but outpaced; merchants set prices, craft masters ob
+   TIP  tail: . The gap between them and Ducal Governorship is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. The craft guilds are close behind, contesting every pricing and quality-standard 
+r2s-recently_betrayed-metropolis-1 | The Arcane Circle #7 7/Minor rival-of Arcane Orders | roster City-State Council:31, Religious Authorit:25, Arcane Orders:12, The Inquiry:10, Merchant Guilds:8, Military/Guard:7, The Arcane Circle:7
+   BASE tail: . They are always at the table, but cannot set their own terms. The clergy have more say in public affairs, so the arcane orders work around them and never challenge them openly.
+   TIP  tail: . The clergy have more say in public affairs, so the arcane orders work around them and never challenge them openly.
+r2s-recently_betrayed-metropolis-2 | The Merchant Bloc #9 4/Suppressed rival-of Craft Guilds | roster High Theocratic Co:23, Religious Authorit:22, Arcane Orders:11, Merchant Guilds:10, Thieves' Guild:10, Craft Guilds:7, The Inquiry:7, The Enlightened:6, The Merchant Bloc:4
+   BASE tail: . Running close behind the merchant guilds in a sustained dispute over who sets the terms for finished goods.
+   TIP  tail: . The craft guilds currently carry more weight than they do, and the merchants are working to change that.
+r2s-recently_betrayed-metropolis-3 | Religious Authorities #3 14/Minor | roster Shadow Senate:24, Thieves' Guild:18, Religious Authorit:14, Military/Guard:13, Noble Houses:8, The Inquiry:8, Merchant Guilds:7, The Guild Alliance:4, The Grey Council:4
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. The criminal network is stronger than they are. The clergy preach against it loudly, and few people listen.
+   TIP  tail: . They are always at the table, but cannot set their own terms. The criminal network is stronger than they are. The clergy preach against it loudly, and few people listen.
+r2s-infiltrated-hamlet-0 | Military/Guard #2 46/Strong | roster Free Elder Council:54, Military/Guard:46
+   BASE tail: . The gap between them and the governing council is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.
+   TIP  tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back.
+r2s-infiltrated-town-0 | Craft Guilds #4 15/Minor | roster Corrupt Council:43, Merchant Guilds:24, Religious Authorit:18, Craft Guilds:15
+   BASE tail: . Running close behind the merchant guilds in a sustained dispute over who sets the terms for finished goods.
+   TIP  tail: . The merchants consistently outvote them on pricing and labour standards, so craft masters now win what they can by adding their own conditions to each deal.
+r2s-infiltrated-town-2 | Merchant Guilds #2 31/Significant | roster Corrupt Council:49, Merchant Guilds:31, Craft Guilds:20
+   BASE tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants 
+   TIP  tail: . Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead. The craft guilds are present but outpaced; merchants set prices, craft masters object, and me
+r2s-infiltrated-town-2 | Craft Guilds #3 20/Minor | roster Corrupt Council:49, Merchant Guilds:31, Craft Guilds:20
+   BASE tail: . Close enough to the two above that their support is worth buying; they play Merchant Guilds and Corrupt Council against each other when they can. Running close behind the merchant guilds in a sustained dispute over who
+   TIP  tail: . They are always at the table, but cannot set their own terms. The merchants consistently outvote them on pricing and labour standards, so craft masters now win what they can by adding their own conditions to each deal.
+r2s-infiltrated-town-3 | Military/Guard #4 15/Minor | roster Military Council:44, Merchant Guilds:21, Religious Authorit:20, Military/Guard:15
+   BASE tail: . Operationally distinct from the command council: these are the watchmen, not the officers who govern. A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken. They and the re
+   TIP  tail: . Operationally distinct from the command council: these are the watchmen, not the officers who govern. They and the religious authorities both keep people in line. The watch deals with bodies and the clergy with minds, 
+r2s-infiltrated-city-0 | Military/Guard #4 10/Suppressed | roster Merchant City Coun:31, Merchant Guilds:19, Craft Guilds:12, Military/Guard:10, Religious Authorit:10, The Independent Bl:8, The Commercial Cir:6, The Free Alliance:4
+   BASE tail: . A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken. They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds
+   TIP  tail: . They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds, and each wishes the other would keep quieter.
+r2s-infiltrated-city-2 | Military/Guard #3 17/Minor | roster Noble Governorship:30, Noble Families:19, Military/Guard:17, The Independent Bl:13, Arcane Orders:12, The Martial Allian:9
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2s-infiltrated-city-3 | Thieves' Guild #2 17/Minor | roster Merchant Guild Cou:49, Thieves' Guild:17, The Independent Bl:16, The Free Alliance:9, The Hidden Hand:9
+   BASE tail: . Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead. They are roughly even with the military: the garrison can arrest their people, and the guild 
+   TIP  tail: . Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead.
+r2s-infiltrated-metropolis-1 | Military/Guard #2 17/Minor | roster Grand Guild Consor:31, Military/Guard:17, Merchant Guilds:14, Noble Houses:13, Craft Guilds:9, The Garrison Bloc:9, The Commercial Cir:7
+   BASE tail: . They operate in the shadow of Grand Guild Consortium but not comfortably: they are waiting for a chance to push back. A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken.
+   TIP  tail: . They operate in the shadow of Grand Guild Consortium but not comfortably: they are waiting for a chance to push back.
+r2s-plague_onset-village-3 | Thieves' Guild #2 49/Significant | roster Elder Council:51, Thieves' Guild:49
+   BASE tail: . The gap between them and the governing council is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. They are roughly even with the military: the militia can arrest their people, 
+   TIP  tail: . The gap between them and the governing council is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.
+r2s-plague_onset-town-0 | Landed Gentry #3 23/Minor | roster Military/Guard:45, Military Council:32, Landed Gentry:23
+   BASE tail: . Close enough to the two above that their support is worth buying; they play Military Council and Military/Guard against each other when they can. Still ahead of merchant interests in real influence, for now. They know 
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Military Council and Military/Guard against each other when they can.
+r2s-plague_onset-town-2 | Thieves' Guild #3 27/Minor | roster Religious Authorit:46, Feudal Appointee:27, Thieves' Guild:27
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. They are roughly even with the military: the hired company can arrest their people, and the guild can make every inves
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Feudal Appointee and Religious Authorities against each other when they can.
+r2s-plague_onset-town-3 | Military/Guard #3 29/Minor | roster Arcane Council:41, Religious Authorit:30, Military/Guard:29
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. They and the religious authorities both keep people in line. The watch deals with bodies and the clergy with minds, an
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Religious Authorities and Arcane Council against each other when they can. They and the religious authorities both keep people in line. The wa
+r2s-plague_onset-city-3 | The Devout Circle #4 17/Strong rival-of Religious Authorities | roster Religious Authorit:31, Corrupt City Counc:23, Thieves' Guild:19, The Devout Circle:17, The Hidden Hand:10
+   BASE tail: . Land grants, charity, and moral authority give them leverage across multiple civic domains. The arcane orders are present but operate in the clergy's shadow. Questions of what is sanctioned magic and what is heresy rem
+   TIP  tail: . Land grants, charity, and moral authority give them leverage across multiple civic domains.
+r2s-plague_onset-metropolis-0 | Noble Houses #2 24/Strong | roster Royal Authority:31, Noble Houses:24, Military/Guard:20, The Shield Compact:11, Quarantine Council:9, The Establishment:5
+   BASE tail: . They operate in the shadow of Royal Authority but not comfortably: they are waiting for a chance to push back. Still ahead of merchant interests in real influence, for now. They know the gap is narrowing and are arrang
+   TIP  tail: . They operate in the shadow of Royal Authority but not comfortably: they are waiting for a chance to push back.
+r2s-plague_onset-metropolis-2 | The Clergy Alliance #3 14/Strong rival-of Religious Authorities | roster Religious Authorit:26, Grand Council:22, The Clergy Allianc:14, Arcane Orders:13, Military/Guard:10, Quarantine Council:9, Craft Guilds:6
+   BASE tail: . The arcane orders are present but operate in the clergy's shadow. Questions of what is sanctioned magic and what is heresy remain deliberately unresolved.
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Grand Council and Religious Authorities against each other when they can.
+r2s-succession_void-village-0 | The Highborn Circle #3 21/Significant | roster Religious Authorit:55, Priestly Guidance:24, The Highborn Circl:21
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Priestly Guidance and Religious Authorities against each other when they can.
+r2s-succession_void-town-0 | Feudal Appointee #3 23/Minor GOV | roster Landed Gentry:52, The Highborn Circl:25, Feudal Appointee:23
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play The Highborn Circle and Landed Gentry against each other when they can.
+r2s-succession_void-town-2 | The Peerage #3 18/Minor | roster Church Council:60, The Highborn Circl:22, The Peerage:18
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play The Highborn Circle and Church Council against each other when they can.
+r2s-succession_void-town-3 | Landed Gentry #2 36/Minor | roster Military/Guard:38, Landed Gentry:36, Corrupt Council:26
+   BASE tail: . The succession crisis has transformed latent noble power into active leverage. Every claimant needs their backing. The gap between them and Military/Guard is narrow. A single shift in patronage, scandal, or armed muscl
+   TIP  tail: . The succession crisis has transformed latent noble power into active leverage. Every claimant needs their backing. The gap between them and Military/Guard is narrow. A single shift in patronage, scandal, or armed muscl
+r2s-succession_void-city-0 | Military/Guard #2 16/Minor | roster Religious Authorit:23, Military/Guard:16, Merchant Guilds:15, Ecclesiastical Cou:14, The Devout Circle:12, Noble Families:11, The Martial Allian:9
+   BASE tail: . The gap between them and Religious Authorities is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. A slow war with the guild: arrests are made, the gangs rebuild, deals are stru
+   TIP  tail: . They operate in the shadow of Religious Authorities but not comfortably: they are waiting for a chance to push back. They and the religious authorities both keep people in line. The garrison deals with bodies and the c
+r2s-succession_void-metropolis-0 | Ducal Governorship #3 14/Minor GOV | roster Noble Houses:26, Religious Authorit:19, Ducal Governorship:14, Military/Guard:14, Merchant Guilds:7, The Highborn Circl:7, The Garrison Bloc:7, Arcane Orders:6
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2s-succession_void-metropolis-1 | Military/Guard #3 13/Minor | roster Grand Guild Consor:15, Merchant Guilds:15, Military/Guard:13, Religious Authorit:11, Craft Guilds:10, The Highborn Circl:9, Noble Houses:8, The Peerage:8, Arcane Orders:7, The Enlightened:4
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken. They and the reli
+   TIP  tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds,
+r2s-succession_void-metropolis-2 | Military/Guard #3 12/Minor | roster Merchant Guilds:18, Grand Merchant Oli:12, Military/Guard:12, Craft Guilds:12, Noble Houses:10, Religious Authorit:10, Arcane Orders:10, The Guild Alliance:10, The Devout Circle:6
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds,
+   TIP  tail: . They are always at the table, but cannot set their own terms. They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds, and each wishes the other would keep 
+r2s-succession_void-metropolis-3 | Military/Guard #6 9/Suppressed | roster Merchant Guilds:17, Grand Merchant Sen:16, Religious Authorit:14, Craft Guilds:10, Arcane Orders:10, Military/Guard:9, The Highborn Circl:8, The Peerage:7, Noble Houses:6, The Landed Bloc:3
+   BASE tail: . A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken. They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds
+   TIP  tail: . They and the religious authorities both keep people in line. The garrison deals with bodies and the clergy with minds, and each wishes the other would keep quieter.
+r2s-succession_void-metropolis-3 | The Landed Bloc #10 3/Suppressed rival-of Noble Houses | roster Merchant Guilds:17, Grand Merchant Sen:16, Religious Authorit:14, Craft Guilds:10, Arcane Orders:10, Military/Guard:9, The Highborn Circl:8, The Peerage:7, Noble Houses:6, The Landed Bloc:3
+   BASE tail: . The succession crisis has transformed latent noble power into active leverage. Every claimant needs their backing. The merchants are closing the gap, and the noble families are using every law and every social tie they
+   TIP  tail: . The succession crisis has transformed latent noble power into active leverage. Every claimant needs their backing.
+r2s-monster_pressure-town-1 | Military/Guard #2 32/Significant | roster Military Council:47, Military/Guard:32, Merchant Guilds:21
+   BASE tail: . Operationally distinct from the command council: these are the soldiers and watchmen, not the officers who govern. They operate in the shadow of the governing council but not comfortably: they are waiting for a chance 
+   TIP  tail: . Operationally distinct from the command council: these are the soldiers and watchmen, not the officers who govern. Behind the governing council by too much to challenge openly, so they get their way through petitions a
+r2s-monster_pressure-town-3 | Town Council #3 23/Significant GOV | roster Military/Guard:31, Religious Authorit:29, Town Council:23, Merchant Guilds:17
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Religious Authorities and Military/Guard against each other when they can.
+r2s-monster_pressure-city-2 | The Merchant Bloc #7 4/Suppressed rival-of Craft Guilds | roster Merchant oligarchy:31, Religious Authorit:21, Merchant Guilds:17, Military/Guard:10, Craft Guilds:9, Arcane Orders:8, The Merchant Bloc:4
+   BASE tail: . The merchants consistently outvote them on pricing and labour standards, so craft masters now win what they can by adding their own conditions to each deal.
+   TIP  tail: . The craft guilds currently carry more weight than they do, and the merchants are working to change that.
+r2s-monster_pressure-city-3 | Military/Guard #2 22/Significant | roster Merchant City Coun:25, Military/Guard:22, Merchant Guilds:17, Craft Guilds:10, The Commercial Cir:10, Arcane Orders:9, Religious Authorit:7
+   BASE tail: . The gap between them and the governing council is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. They are stronger than the guild, enough to keep it down but not to stamp it o
+   TIP  tail: . The gap between them and the governing council is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.
+r2s-monster_pressure-metropolis-0 | The Merchant Bloc #6 10/Significant rival-of Merchant Guilds | roster Grand Merchant Sen:25, Merchant Guilds:18, Thieves' Guild:16, Military/Guard:15, Craft Guilds:11, The Merchant Bloc:10, Monster Hunters / :5
+   BASE tail: . They operate in the shadow of Grand Merchant Senate but not comfortably: they are waiting for a chance to push back. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to
+   TIP  tail: . The craft guilds currently carry more weight than they do, and the merchants are working to change that. The criminal network reaches further than the merchant guilds right now. Some merchants are paying for protection
+r2s-monster_pressure-metropolis-1 | Military/Guard #2 20/Significant | roster Grand Merchant Sen:24, Military/Guard:20, Merchant Guilds:18, Craft Guilds:12, Arcane Orders:10, Religious Authorit:10, The Guild Alliance:6
+   BASE tail: . The gap between them and Grand Merchant Senate is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. They and the religious authorities both keep people in line. The garrison deal
+   TIP  tail: . The gap between them and Grand Merchant Senate is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.
+r2s-monster_pressure-metropolis-3 | Merchant Guilds #2 17/Significant | roster Grand Merchant Sen:23, Merchant Guilds:17, Military/Guard:16, Craft Guilds:10, The Merchant Bloc:9, The Martial Allian:9, Religious Authorit:8, Arcane Orders:8
+   BASE tail: . They operate in the shadow of Grand Merchant Senate but not comfortably: they are waiting for a chance to push back. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to
+   TIP  tail: . The gap between them and Grand Merchant Senate is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. The craft guilds are close behind, contesting every pricing and quality-standa
+r2s-monster_pressure-metropolis-3 | The Merchant Bloc #5 9/Significant rival-of Merchant Guilds | roster Grand Merchant Sen:23, Merchant Guilds:17, Military/Guard:16, Craft Guilds:10, The Merchant Bloc:9, The Martial Allian:9, Religious Authorit:8, Arcane Orders:8
+   BASE tail: . They operate in the shadow of Grand Merchant Senate but not comfortably: they are waiting for a chance to push back. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to
+   TIP  tail: . The craft guilds currently carry more weight than they do, and the merchants are working to change that.
+r2s-insurgency-town-1 | Religious Authorities #3 27/Minor | roster Military Council:37, Merchant Guilds:36, Religious Authorit:27
+   BASE tail: . Currently under pressure from both sides to publicly endorse the legitimate authority. Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . Currently under pressure from both sides to publicly endorse the legitimate authority. Close enough to the two above that their support is worth buying; they play Merchant Guilds and Military Council against each other
+r2s-insurgency-town-3 | Religious Authorities #3 20/Significant | roster Merchant Guilds:29, Merchant Council:20, Religious Authorit:20, Reform Movement:17, Craft Guilds:14
+   BASE tail: . Currently under pressure from both sides to publicly endorse the legitimate authority. Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . Currently under pressure from both sides to publicly endorse the legitimate authority. They are always at the table, but cannot set their own terms.
+r2s-insurgency-city-0 | Noble Families #3 15/Minor | roster Noble Governorship:22, Reform Movement:16, Noble Families:15, Arcane Orders:15, Merchant Guilds:12, Military/Guard:12, The Mages' Compact:8
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. Still ahead of merchant interests in real influence, for now. They know the gap is narrowing and are arranging marriag
+   TIP  tail: . They are always at the table, but cannot set their own terms. Still ahead of merchant interests in real influence, for now. They know the gap is narrowing and are arranging marriages accordingly.
+r2s-insurgency-city-1 | The Holy Compact #3 14/Strong rival-of Religious Authorities | roster Religious Authorit:24, Ecclesiastical Cou:21, The Holy Compact:14, Military/Guard:13, Reform Movement:13, Noble Families:8, The Order of the W:7
+   BASE tail: . Currently under pressure from both sides to publicly endorse the legitimate authority. The arcane orders are present but operate in the clergy's shadow. Questions of what is sanctioned magic and what is heresy remain d
+   TIP  tail: . Currently under pressure from both sides to publicly endorse the legitimate authority. Close enough to the two above that their support is worth buying; they play Ecclesiastical Council and Religious Authorities agains
+r2s-insurgency-city-2 | People's Council #3 20/Significant | roster Thieves' Guild:30, Noble Governorship:23, People's Council:20, The Underground:16, The Civic Authorit:11
+   BASE tail: . Growing quickly. No unified leadership yet, which makes negotiation impossible. Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . Growing quickly. No unified leadership yet, which makes negotiation impossible. They are always at the table, but cannot set their own terms.
+r2s-insurgency-city-2 | The Civic Authority #5 11/Significant rival-of People's Council | roster Thieves' Guild:30, Noble Governorship:23, People's Council:20, The Underground:16, The Civic Authorit:11
+   BASE tail: . Growing quickly. No unified leadership yet, which makes negotiation impossible. Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . Growing quickly. No unified leadership yet, which makes negotiation impossible.
+r2s-insurgency-city-3 | People's Council #3 18/Minor | roster Thieves' Guild:31, Noble Governorship:24, People's Council:18, The Shadow Compact:18, The Establishment:9
+   BASE tail: . Growing quickly. No unified leadership yet, which makes negotiation impossible. Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . Growing quickly. No unified leadership yet, which makes negotiation impossible. Close enough to the two above that their support is worth buying; they play Noble Governorship and Thieves' Guild against each other when 
+r2s-insurgency-city-3 | The Establishment #5 9/Minor rival-of People's Council | roster Thieves' Guild:31, Noble Governorship:24, People's Council:18, The Shadow Compact:18, The Establishment:9
+   BASE tail: . Growing quickly. No unified leadership yet, which makes negotiation impossible. Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . Growing quickly. No unified leadership yet, which makes negotiation impossible.
+r2s-insurgency-metropolis-0 | Merchant Guilds #2 16/Minor | roster Grand Council:24, Merchant Guilds:16, People's Council:16, Arcane Orders:14, Thieves' Guild:13, Craft Guilds:11, The Guild Alliance:6
+   BASE tail: . The gap between them and the governing council is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. The craft guilds are close behind, contesting every pricing and quality-standa
+   TIP  tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to
+r2s-insurgency-metropolis-0 | People's Council #3 16/Minor | roster Grand Council:24, Merchant Guilds:16, People's Council:16, Arcane Orders:14, Thieves' Guild:13, Craft Guilds:11, The Guild Alliance:6
+   BASE tail: . Growing quickly. No unified leadership yet, which makes negotiation impossible. Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . Growing quickly. No unified leadership yet, which makes negotiation impossible. They are always at the table, but cannot set their own terms.
+r2s-insurgency-metropolis-0 | The Guild Alliance #7 6/Suppressed rival-of Craft Guilds | roster Grand Council:24, Merchant Guilds:16, People's Council:16, Arcane Orders:14, Thieves' Guild:13, Craft Guilds:11, The Guild Alliance:6
+   BASE tail: . Running close behind the merchant guilds in a sustained dispute over who sets the terms for finished goods.
+   TIP  tail: . They have a say on only a few matters; on everything else they side with whoever will deal with them that week.
+r2s-religious_conversion-village-0 | Reform Congregation #2 41/Strong | roster Elected Reeve:59, Reform Congregatio:41
+   BASE tail: . Claims doctrinal legitimacy and holds parallel services. Legal standing of its records and sacraments is disputed by the established institution. They operate in the shadow of Elected Reeve but not comfortably: they ar
+   TIP  tail: . Claims doctrinal legitimacy and holds parallel services. Legal standing of its records and sacraments is disputed by the established institution. Behind Elected Reeve by too much to challenge openly, so they get their 
+r2s-religious_conversion-village-3 | Religious Authorities #3 22/Minor | roster Military/Guard:43, Headman's Authorit:35, Religious Authorit:22
+   BASE tail: . One of two rival sides claiming the legitimate succession: legal standing of their records is contested. Close enough to the two above that their support is worth buying; they play Headman's Authority and Military/Guar
+   TIP  tail: . One of two rival sides claiming the legitimate succession: legal standing of their records is contested. They are always at the table, but cannot set their own terms.
+r2s-religious_conversion-town-1 | Thieves' Guild #2 26/Significant | roster Merchant Guilds:26, Thieves' Guild:26, Corrupt Council:24, Religious Authorit:24
+   BASE tail: . The gap between them and Merchant Guilds is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. They have more real pull than the military right now: officers on their payroll, and
+   TIP  tail: . The gap between them and Merchant Guilds is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.
+r2s-religious_conversion-city-1 | Merchant Guilds #2 18/Minor | roster Merchant Guild Cou:34, Merchant Guilds:18, Arcane Orders:16, Reform Congregatio:12, Craft Guilds:11, The Tower Alliance:9
+   BASE tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to
+   TIP  tail: . Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead. The craft guilds are close behind, contesting every pricing and quality-standard decision the
+r2s-religious_conversion-city-2 | Thieves' Guild #2 20/Minor | roster City Council:27, Thieves' Guild:20, New Faith Communit:13, Arcane Orders:12, The Hidden Hand:11, Merchant Guilds:10, The Faithful Assem:7
+   BASE tail: . The gap between them and the governing council is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. They are roughly even with the military: the garrison can arrest their people,
+   TIP  tail: . They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back.
+r2s-religious_conversion-city-2 | The Faithful Assembly #7 7/Minor rival-of New Faith Community | roster City Council:27, Thieves' Guild:20, New Faith Communit:13, Arcane Orders:12, The Hidden Hand:11, Merchant Guilds:10, The Faithful Assem:7
+   BASE tail: . Meeting in homes, sharing resources, organising mutual aid. Politically naive but numerically significant and increasingly confident. Close enough to the two above that their support is worth buying; they play Thieves'
+   TIP  tail: . Meeting in homes, sharing resources, organising mutual aid. Politically naive but numerically significant and increasingly confident.
+r2s-slave_revolt-town-0 | Military/Guard #2 29/Significant | roster Religious Authorit:37, Military/Guard:29, Church Council:22, Revolt Leadership:12
+   BASE tail: . Fully deployed for containment. Soldiers are being asked to do things that will complicate their relationship with the civilian population. The gap between them and Religious Authorities is narrow. A single shift in pa
+   TIP  tail: . Fully deployed for containment. Soldiers are being asked to do things that will complicate their relationship with the civilian population. They operate in the shadow of Religious Authorities but not comfortably: they 
+r2s-slave_revolt-town-1 | Military/Guard #2 31/Significant | roster Religious Authorit:49, Military/Guard:31, Corrupt Council:20
+   BASE tail: . Fully deployed for containment. Watchmen are being asked to do things that will complicate their relationship with the civilian population. They operate in the shadow of Religious Authorities but not comfortably: they 
+   TIP  tail: . Fully deployed for containment. Watchmen are being asked to do things that will complicate their relationship with the civilian population. Behind Religious Authorities by too much to challenge openly, so they get thei
+r2s-slave_revolt-town-1 | Corrupt Council #3 20/Minor GOV | roster Religious Authorit:49, Military/Guard:31, Corrupt Council:20
+   BASE tail: . Says in public that the revolt is under control; in private it can barely keep it from spreading. Close enough to the two above that their support is worth buying; they play Military/Guard and Religious Authorities aga
+   TIP  tail: . Says in public that the revolt is under control; in private it can barely keep it from spreading. They are always at the table, but cannot set their own terms.
+r2s-slave_revolt-town-2 | Religious Authorities #1 29/Significant | roster Religious Authorit:29, Revolt Leadership:26, Corrupt Council:24, Military/Guard:21
+   BASE tail: . Under pressure from both sides to publicly declare the revolt either just or sacrilegious. Has so far avoided a direct statement. They denounce the guild from the pulpit; the guild funds two charitable institutions and
+   TIP  tail: . Under pressure from both sides to publicly declare the revolt either just or sacrilegious. Has so far avoided a direct statement.
+r2s-slave_revolt-town-2 | Military/Guard #4 21/Minor | roster Religious Authorit:29, Revolt Leadership:26, Corrupt Council:24, Military/Guard:21
+   BASE tail: . Fully deployed for containment. Soldiers are being asked to do things that will complicate their relationship with the civilian population. A slow war with the guild: arrests are made, the gangs rebuild, deals are stru
+   TIP  tail: . Fully deployed for containment. Soldiers are being asked to do things that will complicate their relationship with the civilian population. They and the religious authorities both keep people in line. The garrison deal
+r2s-slave_revolt-city-0 | Military/Guard #1 40/Strong | roster Military/Guard:40, Noble Families:26, The Shield Compact:22, Noble Governorship:12
+   BASE tail: . Fully deployed for containment. Soldiers are being asked to do things that will complicate their relationship with the civilian population. They are stronger than the guild, enough to keep it down but not to stamp it o
+   TIP  tail: . Fully deployed for containment. Soldiers are being asked to do things that will complicate their relationship with the civilian population.
+r2s-slave_revolt-city-0 | The Shield Compact #3 22/Strong rival-of Military/Guard | roster Military/Guard:40, Noble Families:26, The Shield Compact:22, Noble Governorship:12
+   BASE tail: . Fully deployed for containment. Soldiers are being asked to do things that will complicate their relationship with the civilian population. They are stronger than the guild, enough to keep it down but not to stamp it o
+   TIP  tail: . Fully deployed for containment. Soldiers are being asked to do things that will complicate their relationship with the civilian population. Close enough to the two above that their support is worth buying; they play No
+r2s-slave_revolt-city-2 | The Martial Alliance #5 11/Minor rival-of Military/Guard | roster Religious Authorit:34, Military/Guard:20, The Faithful Assem:18, Noble Governorship:17, The Martial Allian:11
+   BASE tail: . Fully deployed for containment. Soldiers are being asked to do things that will complicate their relationship with the civilian population. They operate in the shadow of Religious Authorities but not comfortably: they 
+   TIP  tail: . Fully deployed for containment. Soldiers are being asked to do things that will complicate their relationship with the civilian population.
+r2s-slave_revolt-city-3 | Military/Guard #3 16/Minor | roster Religious Authorit:38, Merchant Guild Cou:17, Military/Guard:16, Revolt Leadership:14, Merchant Guilds:10, The Commercial Cir:5
+   BASE tail: . Fully deployed for containment. Soldiers are being asked to do things that will complicate their relationship with the civilian population. Three powers stand almost level here, and no one leads; every council vote has
+   TIP  tail: . Fully deployed for containment. Soldiers are being asked to do things that will complicate their relationship with the civilian population. They are always at the table, but cannot set their own terms.
+r2s-slave_revolt-city-3 | The Commercial Circle #6 5/Suppressed rival-of Merchant Guilds | roster Religious Authorit:38, Merchant Guild Cou:17, Military/Guard:16, Revolt Leadership:14, Merchant Guilds:10, The Commercial Cir:5
+   BASE tail: . The revolt has disrupted labour supply and market operations. The power is divided between those demanding immediate suppression and those quietly calculating whether a negotiated settlement might be cheaper. The craft
+   TIP  tail: . The revolt has disrupted labour supply and market operations. The power is divided between those demanding immediate suppression and those quietly calculating whether a negotiated settlement might be cheaper. They have
+r2s-slave_revolt-metropolis-2 | The Order of the Watch #5 11/Significant rival-of Military/Guard | roster Military/Guard:20, Noble Houses:16, Religious Authorit:16, Royal Authority:12, The Order of the W:11, The Highborn Circl:9, Merchant Guilds:6, Revolt Leadership:6, Abolitionist Netwo:4
+   BASE tail: . Fully deployed for containment. Soldiers are being asked to do things that will complicate their relationship with the civilian population. They and the religious authorities both keep people in line. The garrison deal
+   TIP  tail: . Fully deployed for containment. Soldiers are being asked to do things that will complicate their relationship with the civilian population.
+r2s-slave_revolt-metropolis-2 | The Highborn Circle #6 9/Significant rival-of Noble Houses | roster Military/Guard:20, Noble Houses:16, Religious Authorit:16, Royal Authority:12, The Order of the W:11, The Highborn Circl:9, Merchant Guilds:6, Revolt Leadership:6, Abolitionist Netwo:4
+   BASE tail: . Their word is law within their demesne. The gap between them and Military/Guard is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions. Still ahead of merchant interests in real inf
+   TIP  tail: . Their word is law within their demesne.
+r2s-slave_revolt-metropolis-3 | Grand Merchant Oligarchy #3 13/Minor GOV | roster Religious Authorit:26, Thieves' Guild:16, Grand Merchant Oli:13, Revolt Leadership:12, Military/Guard:11, The Black Circle:9, Abolitionist Netwo:5, Craft Guilds:5, The Guild Alliance:3
+   BASE tail: . Says in public that the revolt is under control; in private it can barely keep it from spreading. The revolt has disrupted labour supply and market operations. The power is divided between those demanding immediate sup
+   TIP  tail: . Says in public that the revolt is under control; in private it can barely keep it from spreading. The revolt has disrupted labour supply and market operations. The power is divided between those demanding immediate sup
+r2s-slave_revolt-metropolis-3 | The Guild Alliance #9 3/Suppressed rival-of Craft Guilds | roster Religious Authorit:26, Thieves' Guild:16, Grand Merchant Oli:13, Revolt Leadership:12, Military/Guard:11, The Black Circle:9, Abolitionist Netwo:5, Craft Guilds:5, The Guild Alliance:3
+   BASE tail: . The revolt has disrupted labour supply and market operations. The power is divided between those demanding immediate suppression and those quietly calculating whether a negotiated settlement might be cheaper. Running c
+   TIP  tail: . The revolt has disrupted labour supply and market operations. The power is divided between those demanding immediate suppression and those quietly calculating whether a negotiated settlement might be cheaper.
+r2s-wartime-village-1 | War Council #2 29/Significant | roster Religious Authorit:44, War Council:29, Feudal Stewardship:27
+   BASE tail: . Unpopular. Accused of favouritism in contract awards. Probably correct on the military decisions. They operate in the shadow of Religious Authorities but not comfortably: they are waiting for a chance to push back.
+   TIP  tail: . Unpopular. Accused of favouritism in contract awards. Probably correct on the military decisions. Behind Religious Authorities by too much to challenge openly, so they get their way through petitions and procedure inst
+r2s-wartime-village-1 | Feudal Stewardship #3 27/Minor GOV | roster Religious Authorit:44, War Council:29, Feudal Stewardship:27
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play War Council and Religious Authorities against each other when they can.
+r2s-wartime-town-2 | Military/Guard #2 24/Minor | roster Feudal Appointee:32, Military/Guard:24, Landed Gentry:22, War Council:22
+   BASE tail: . Wartime has transformed this power from a civic institution into a primary power centre. Crown authority flows through military channels now. The gap between them and Feudal Appointee is narrow. A single shift in patro
+   TIP  tail: . Wartime has transformed this power from a civic institution into a primary power centre. Crown authority flows through military channels now. They operate in the shadow of Feudal Appointee but not comfortably: they are
+r2s-wartime-city-1 | The Commercial Circle #4 12/Minor rival-of Merchant Guilds | roster Merchant oligarchy:35, Merchant Guilds:22, Military/Guard:20, The Commercial Cir:12, The Shield Compact:11
+   BASE tail: . War contracts have made the well-connected wealthy. The power is divided between those profiting and those whose trade routes are severed. They operate in the shadow of Merchant oligarchy but not comfortably: they are 
+   TIP  tail: . War contracts have made the well-connected wealthy. The power is divided between those profiting and those whose trade routes are severed.
+r2s-wartime-city-1 | The Shield Compact #5 11/Minor rival-of Military/Guard | roster Merchant oligarchy:35, Merchant Guilds:22, Military/Guard:20, The Commercial Cir:12, The Shield Compact:11
+   BASE tail: . Wartime has transformed this power from a civic institution into a primary power centre. Crown authority flows through military channels now. Close enough to the two above that their support is worth buying; they play 
+   TIP  tail: . Wartime has transformed this power from a civic institution into a primary power centre. Crown authority flows through military channels now.
+r2s-wartime-city-2 | Corrupt City Council #3 16/Minor GOV | roster Religious Authorit:24, Military/Guard:18, Corrupt City Counc:16, War Council:12, The Shield Compact:10, Thieves' Guild:9, Noble Families:7, The Highborn Circl:4
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+   TIP  tail: . They are always at the table, but cannot set their own terms.
+r2s-wartime-city-2 | The Shield Compact #5 10/Significant rival-of Military/Guard | roster Religious Authorit:24, Military/Guard:18, Corrupt City Counc:16, War Council:12, The Shield Compact:10, Thieves' Guild:9, Noble Families:7, The Highborn Circl:4
+   BASE tail: . Wartime has transformed this power from a civic institution into a primary power centre. Crown authority flows through military channels now. The gap between them and Religious Authorities is narrow. A single shift in 
+   TIP  tail: . Wartime has transformed this power from a civic institution into a primary power centre. Crown authority flows through military channels now.
+r2s-wartime-city-3 | Military/Guard #3 17/Minor | roster Religious Authorit:27, Merchant Guild Cou:18, Military/Guard:17, War Council:15, The Clergy Allianc:15, The Shield Compact:8
+   BASE tail: . Wartime has transformed this power from a civic institution into a primary power centre. Crown authority flows through military channels now. Three powers stand almost level here, and no one leads; every council vote h
+   TIP  tail: . Wartime has transformed this power from a civic institution into a primary power centre. Crown authority flows through military channels now. They are always at the table, but cannot set their own terms.
+r2s-wartime-metropolis-0 | Military/Guard #3 14/Minor | roster Democratic assembl:22, Merchant Guilds:15, Military/Guard:14, Religious Authorit:12, Craft Guilds:10, Arcane Orders:8, War Council:7, The Clergy Allianc:7, Noble Houses:5
+   BASE tail: . Wartime has transformed this power from a civic institution into a primary power centre. Crown authority flows through military channels now. Three powers stand almost level here, and no one leads; every council vote h
+   TIP  tail: . Wartime has transformed this power from a civic institution into a primary power centre. Crown authority flows through military channels now. They are always at the table, but cannot set their own terms. They and the r
+r2s-wartime-metropolis-3 | Military/Guard #1 25/Significant | roster Military/Guard:25, Democratic assembl:21, Merchant Guilds:14, Craft Guilds:9, Arcane Orders:9, War Council:7, Noble Houses:6, The Mages' Compact:5, The Shield Compact:4
+   BASE tail: . Wartime has transformed this power from a civic institution into a primary power centre. Crown authority flows through military channels now. They are stronger than the guild, enough to keep it down but not to stamp it
+   TIP  tail: . Wartime has transformed this power from a civic institution into a primary power centre. Crown authority flows through military channels now.
+r2s-mass_migration-town-2 | Thieves' Guild #2 28/Significant | roster Merchant Guilds:28, Thieves' Guild:28, Guild Council:27, Craft Guilds:17
+   BASE tail: . The arrival of skilled workers outside guild structures is an existential concern being discussed at every chapter meeting. The gap between them and Merchant Guilds is narrow. A single shift in patronage, scandal, or a
+   TIP  tail: . The arrival of skilled workers outside guild structures is an existential concern being discussed at every chapter meeting. The gap between them and Merchant Guilds is narrow. A single shift in patronage, scandal, or a
+r2s-mass_migration-town-2 | Craft Guilds #4 17/Minor | roster Merchant Guilds:28, Thieves' Guild:28, Guild Council:27, Craft Guilds:17
+   BASE tail: . The arrival of skilled workers outside guild structures is an existential concern being discussed at every chapter meeting. Running close behind the merchant guilds in a sustained dispute over who sets the terms for fi
+   TIP  tail: . The arrival of skilled workers outside guild structures is an existential concern being discussed at every chapter meeting. The merchants consistently outvote them on pricing and labour standards, so craft masters now 
+r2s-mass_migration-city-0 | Military/Guard #3 11/Minor | roster City-State Council:41, Arcane Orders:13, Military/Guard:11, Religious Authorit:8, Thieves' Guild:8, Newcomers' Settlem:8, The Enlightened:7, The Black Circle:4
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken. They and the reli
+   TIP  tail: . They are always at the table, but cannot set their own terms. A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken. They and the religious authorities both keep people in 
+r2s-mass_migration-city-0 | The Black Circle #8 4/Suppressed rival-of Thieves' Guild | roster City-State Council:41, Arcane Orders:13, Military/Guard:11, Religious Authorit:8, Thieves' Guild:8, Newcomers' Settlem:8, The Enlightened:7, The Black Circle:4
+   BASE tail: . The arrival of skilled workers outside guild structures is an existential concern being discussed at every chapter meeting. They are roughly even with the military: the garrison can arrest their people, and the guild c
+   TIP  tail: . The arrival of skilled workers outside guild structures is an existential concern being discussed at every chapter meeting.
+r2s-mass_migration-city-2 | The Trade Compact #5 8/Minor rival-of Craft Guilds | roster Merchant oligarchy:36, Merchant Guilds:27, The Guild Alliance:15, Craft Guilds:14, The Trade Compact:8
+   BASE tail: . The arrival of skilled workers outside guild structures is an existential concern being discussed at every chapter meeting. They are always at the table, but cannot set their own terms. The merchants consistently outvo
+   TIP  tail: . The arrival of skilled workers outside guild structures is an existential concern being discussed at every chapter meeting.
+r2s-mass_migration-city-2 | The Guild Alliance #3 15/Strong rival-of Merchant Guilds | roster Merchant oligarchy:36, Merchant Guilds:27, The Guild Alliance:15, Craft Guilds:14, The Trade Compact:8
+   BASE tail: . The arrival of skilled workers outside guild structures is an existential concern being discussed at every chapter meeting. They operate in the shadow of Merchant oligarchy but not comfortably: they are waiting for a c
+   TIP  tail: . The arrival of skilled workers outside guild structures is an existential concern being discussed at every chapter meeting. They are always at the table, but cannot set their own terms.
+r2s-mass_migration-city-3 | Military/Guard #3 13/Minor | roster Democratic assembl:22, Religious Authorit:19, Military/Guard:13, Merchant Guilds:10, Arcane Orders:10, The Holy Compact:10, Noble Families:9, Craft Guilds:7
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken. They and the reli
+   TIP  tail: . Close enough to the two above that their support is worth buying; they play Religious Authorities and Democratic assembly against each other when they can. They and the religious authorities both keep people in line. T
+r2s-mass_migration-city-3 | The Holy Compact #6 10/Significant rival-of Religious Authorities | roster Democratic assembl:22, Religious Authorit:19, Military/Guard:13, Merchant Guilds:10, Arcane Orders:10, The Holy Compact:10, Noble Families:9, Craft Guilds:7
+   BASE tail: . The institution's charitable work among new arrivals has dramatically expanded its community standing. The gap between them and Democratic assembly is narrow. A single shift in patronage, scandal, or armed muscle could
+   TIP  tail: . The institution's charitable work among new arrivals has dramatically expanded its community standing.
+r2s-mass_migration-metropolis-0 | Noble Houses #3 11/Minor | roster Royal Authority:39, Thieves' Guild:14, Noble Houses:11, Merchant Guilds:9, Arcane Orders:8, Newcomers' Settlem:8, Military/Guard:7, The Shield Compact:4
+   BASE tail: . Three powers stand almost level here, and no one leads; every council vote has to be bargained for. Still ahead of merchant interests in real influence, for now. They know the gap is narrowing and are arranging marriag
+   TIP  tail: . They are always at the table, but cannot set their own terms. Still ahead of merchant interests in real influence, for now. They know the gap is narrowing and are arranging marriages accordingly.
+r2s-mass_migration-metropolis-1 | The Merchant Bloc #7 6/Minor rival-of Craft Guilds | roster Grand Guild Consor:32, Merchant Guilds:16, Thieves' Guild:16, Military/Guard:10, Craft Guilds:10, Newcomers' Settlem:10, The Merchant Bloc:6
+   BASE tail: . The arrival of skilled workers outside guild structures is an existential concern being discussed at every chapter meeting. Running close behind the merchant guilds in a sustained dispute over who sets the terms for fi
+   TIP  tail: . The arrival of skilled workers outside guild structures is an existential concern being discussed at every chapter meeting. The craft guilds currently carry more weight than they do, and the merchants are working to ch
+r2s-mass_migration-metropolis-2 | The Guild Alliance #8 5/Suppressed rival-of Merchant Guilds | roster Grand Military Cou:23, Military/Guard:18, Religious Authorit:17, Noble Houses:12, Arcane Orders:10, Merchant Guilds:9, The Enlightened:6, The Guild Alliance:5
+   BASE tail: . The arrival of skilled workers outside guild structures is an existential concern being discussed at every chapter meeting. The craft guilds are close behind, contesting every pricing and quality-standard decision they
+   TIP  tail: . The arrival of skilled workers outside guild structures is an existential concern being discussed at every chapter meeting.

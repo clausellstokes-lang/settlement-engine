@@ -1,0 +1,480 @@
+{
+ "(volatile) generationCoherenceReceipt": {
+  "towns": 8,
+  "n": 8,
+  "ex": []
+ },
+ "conflicts": {
+  "towns": 36,
+  "n": 36,
+  "ex": []
+ },
+ "conflicts.desc": {
+  "towns": 31,
+  "n": 36,
+  "ex": [
+   "r2r-town-11: \"Arcane Council and Military/Guard are in moderate conflict over a ruling one power refuses to obey. The stakes are authority.\" -> \"Arcane Council and Military/Guard are in moderate conflict over a ruling that one power refuses to obey. The stakes are authority.\"",
+   "r2r-town-53: \"Guild Council and Craft Guilds are in moderate conflict over a ruling one power refuses to obey. The stakes are authority.\" -> \"Guild Council and Craft Guilds are in moderate conflict over a ruling that one power refuses to obey. The stakes are authority.\"",
+   "r2r-city-1: \"Military City Council and Craft Guilds are in high conflict over a ruling one power refuses to obey. The stakes are authority.\" -> \"Military City Council and Craft Guilds are in high conflict over a ruling that one power refuses to obey. The stakes are authority.\"",
+   "r2r-city-18: \"Royal Authority and Merchant Guilds are in high conflict over a ruling one power refuses to obey. The stakes are authority.\" -> \"Royal Authority and Merchant Guilds are in high conflict over a ruling that one power refuses to obey. The stakes are authority.\"",
+   "r2r-city-28: \"Democratic assembly and Military/Guard are in high conflict over members leaving one power for the other. The stakes are loyalty and number -> \"Noble Families and Craft Guilds are in high conflict over a broken promise of support. The stakes are trust.\"",
+   "r2r-city-28: \"Noble Families and Craft Guilds are in high conflict over who may take on apprentices. The stakes are the trades' future.\" -> \"Democratic assembly and Military/Guard are in high conflict over who commands when danger comes. The stakes are command.\""
+  ]
+ },
+ "conflicts.intensity": {
+  "towns": 4,
+  "n": 4,
+  "ex": [
+   "r2s-under_siege-metropolis-1: \"high\" -> \"moderate\"",
+   "r2s-indebted-town-0: null -> \"moderate\"",
+   "r2s-recently_betrayed-city-2: \"moderate\" -> \"high\"",
+   "r2s-succession_void-town-0: null -> \"moderate\""
+  ]
+ },
+ "conflicts.issue": {
+  "towns": 30,
+  "n": 33,
+  "ex": [
+   "r2r-town-11: \"A ruling one power refuses to obey\" -> \"A ruling that one power refuses to obey\"",
+   "r2r-town-53: \"A ruling one power refuses to obey\" -> \"A ruling that one power refuses to obey\"",
+   "r2r-city-1: \"A ruling one power refuses to obey\" -> \"A ruling that one power refuses to obey\"",
+   "r2r-city-18: \"A ruling one power refuses to obey\" -> \"A ruling that one power refuses to obey\"",
+   "r2r-city-28: \"Members leaving one power for the other\" -> \"A broken promise of support\"",
+   "r2r-city-28: \"Who may take on apprentices\" -> \"Who commands when danger comes\""
+  ]
+ },
+ "conflicts.parties": {
+  "towns": 12,
+  "n": 16,
+  "ex": [
+   "r2r-city-28: [\"Democratic assembly\",\"Military/Guard\"] -> [\"Noble Families\",\"Craft Guilds\"]",
+   "r2r-city-28: [\"Noble Families\",\"Craft Guilds\"] -> [\"Democratic assembly\",\"Military/Guard\"]",
+   "r2r-metropolis-8: [\"Royal Authority\",\"The Peerage\"] -> [\"Royal Authority\",\"Noble Claimant (Reform Line)\"]",
+   "r2r-metropolis-23: [\"Royal Authority\",\"Noble Houses\"] -> [\"Royal Authority\",\"Military/Guard\"]",
+   "r2r-metropolis-23: [\"Royal Authority\",\"Military/Guard\"] -> [\"Royal Authority\",\"Craft Guilds\"]",
+   "r2r-metropolis-51: [\"Royal Authority\",\"Loyalist Noble Opposition\"] -> [\"Royal Authority\",\"Merchant Guilds\"]"
+  ]
+ },
+ "conflicts.plotHooks": {
+  "towns": 11,
+  "n": 13,
+  "ex": [
+   "r2r-city-28: [\"A member who crossed over wants to go back, and needs someone to carry the message quietly.\"] -> [\"The promise was made in writing, and the paper is now in the hands of someone who wants a price for it.\"]",
+   "r2r-city-28: [\"A boy has been taken on by two masters at once, and his father has signed for both.\"] -> [\"A plan of the defences has been copied, and someone wants to know who has the copy.\"]",
+   "r2r-metropolis-23: [\"A witness to what went wrong is willing to talk, but only to someone neither side can lean on.\"] -> [\"The debt is due at the end of the month, and the man who signed for it has gone away.\"]",
+   "r2r-metropolis-23: [\"The ruling was given in writing, and the copy that was posted is not the one that was signed.\"] -> [\"A man sent to enforce the ruling was turned away, and has asked for others to go with him.\"]",
+   "r2r-metropolis-51: [\"The betrothal was ended by letter, and one family says the letter is forged.\"] -> [\"A good stall has been taken over by night, and its holder wants it back before market day.\"]",
+   "r2r-metropolis-56: [\"A witness to what went wrong is willing to talk, but only to someone neither side can lean on.\"] -> [\"A moneylender has bought the debt and means to collect it from whichever side pays first.\"]"
+  ]
+ },
+ "conflicts.stakes": {
+  "towns": 11,
+  "n": 12,
+  "ex": [
+   "r2r-city-28: \"Loyalty and numbers\" -> \"Trust\"",
+   "r2r-city-28: \"The trades' future\" -> \"Command\"",
+   "r2r-metropolis-23: \"Reputation\" -> \"Money and face\"",
+   "r2r-metropolis-51: \"Family honour\" -> \"Custom\"",
+   "r2r-metropolis-56: \"Reputation\" -> \"Money and face\"",
+   "r2s-under_siege-city-0: \"Property\" -> \"Loyalty and numbers\""
+  ]
+ },
+ "factions.desc": {
+  "towns": 329,
+  "n": 810,
+  "ex": [
+   "r2r-hamlet-20: Merchant Guilds Significant: \"Dominant commercial class; their capital and networks give them leverage even formal institutions must respect. The gap between them and Feudal Stewardship is narrow. A single shift in patronage, sca -> \"Dominant commercial class; their capital and networks give them leverage even formal institutions must respect. They operate in the shadow of Feudal St",
+   "r2r-village-2: Merchant Guilds Strong: \"International merchant houses controlling port licences and import flows; their political leverage is structural, not merely financial. They operate in the shadow of the governing council but not com -> \"International merchant houses controlling port licences and import flows; their political leverage is structural, not merely financial. They operate in the ",
+   "r2r-village-2: Craft Guilds Significant: \"Craft masters controlling production standards and apprenticeships; present in every civic dispute over prices and supply. Close enough to the two above that their support is worth buying; they play  -> \"Craft masters controlling production standards and apprenticeships; present in every civic dispute over prices and supply. Close enough to the two above t",
+   "r2r-village-7: Religious Authorities Significant: \"The village priest is the most educated person for miles; moral authority and practical influence are inseparable at this scale. They operate in the shadow of the governing council but not comfortabl -> \"The village priest is the most educated person for miles; moral authority and practical influence are inseparable at this scale. Behind the gover",
+   "r2r-village-36: Religious Authorities Strong: \"Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight. They operate in the shadow of Priestly Guidance but not comfortably: -> \"Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight. They operate in th",
+   "r2r-village-43: War Council Strong: \"Emergency committee with authority over rationing, conscription, and defence spending; not accountable to normal governance. They operate in the shadow of the governing council but not comfortably: t -> \"Emergency committee with authority over rationing, conscription, and defence spending; not accountable to normal governance. Behind the governing council by to"
+  ]
+ },
+ "npcs.activeConstraint": {
+  "towns": 223,
+  "n": 412,
+  "ex": [
+   "r2r-hamlet-20: Auðr Bjarnarson (the stable keeper, economy): \"Growing into the leading house's trade invites a reply; staying out of it means staying small.\" -> \"Every new privilege it gathers in plain sight draws the eye of the seat and of its rivals.\"",
+   "r2r-village-7: Ollin Chel (the priest, religious): \"With less to give, there is less reason for the post to exist.\" -> \"Anything it does to guard its own wealth while people go short is seen by all.\"",
+   "r2r-village-12: Manlia Nero (the priest, religious): \"The flock's trust is easy to earn now, but it buys no say once someone holds the seat firmly again.\" -> \"Whatever the faith takes on now, whoever next holds the seat firmly may resent and take back.\"",
+   "r2r-village-13: Börte Arulad (the priest, religious): \"Doing the work well, the leaders' way, goes unnoticed; doing it another way brings trouble.\" -> \"With nothing pressing, it is easy to grow comfortable and hard to argue for growing.\"",
+   "r2r-village-15: Drifa Asgersson (the priest, religious): \"Doing the work well, the leaders' way, goes unnoticed; doing it another way brings trouble.\" -> \"With nothing pressing, it is easy to grow comfortable and hard to argue for growing.\"",
+   "r2r-village-16: Imma Bauer (the priest, religious): \"Doing the work well, the leaders' way, goes unnoticed; doing it another way brings trouble.\" -> \"With nothing pressing, it is easy to grow comfortable and hard to argue for growing.\""
+  ]
+ },
+ "npcs.category": {
+  "towns": 110,
+  "n": 151,
+  "ex": [
+   "r2r-village-27: Radbot Klein (the lord, other): \"government\" -> \"other\"",
+   "r2r-village-56: Eanán Burke (the lord, other): \"government\" -> \"other\"",
+   "r2r-town-9: Ingvar Bjornsson (the lord, other): \"government\" -> \"other\"",
+   "r2r-town-13: Noyans Olqunu'ud (the lord, other): \"government\" -> \"other\"",
+   "r2r-town-15: Kyriake Limniotes (the lord, other): \"government\" -> \"other\"",
+   "r2r-town-25: Sanjay Mukherjee (the lord, other): \"government\" -> \"other\""
+  ]
+ },
+ "npcs.goal.intent": {
+  "towns": 31,
+  "n": 46,
+  "ex": [
+   "r2r-village-56: Eanán Burke (the lord): {\"short\":{\"family\":\"TIES\",\"kind\":\"rival_enemy\",\"key\":\"settle_rivalry\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_fisher_s_landing\"}},\"long\":{\"family\":\"POWER\",\"k -> {\"short\":{\"family\":\"TIES\",\"kind\":\"ally\",\"key\":\"protect_ally\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_fisher_s_landing\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"ten",
+   "r2r-town-9: Ingvar Bjornsson (the lord): {\"short\":{\"family\":\"RANK\",\"kind\":\"defend\",\"key\":\"consolidate_power\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_mills_2_5\"}},\"long\":{\"family\":\"TIES\",\"kind\":\"debt -> {\"short\":{\"family\":\"RANK\",\"kind\":\"defend\",\"key\":\"consolidate_power\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_mills_2_5\"}},\"long\":{\"family\":\"TIES\",\"kind\":\"ment",
+   "r2r-town-13: Uranchimeg Budaad (the castellan): {\"short\":{\"family\":\"INSTITUTION\",\"kind\":\"solvency\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Citadel\"}},\"long\":{\"family\":\"TIES\",\"kind -> {\"short\":{\"family\":\"INSTITUTION\",\"kind\":\"solvency\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Citadel\"}},\"long\":{\"family\":\"TIES\",\"kind",
+   "r2r-town-13: Noyans Olqunu'ud (the lord): {\"short\":{\"family\":\"TIES\",\"kind\":\"rival_enemy\",\"key\":\"settle_rivalry\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_citadel\"}},\"long\":{\"family\":\"PERSONALITY\",\"kind -> {\"short\":{\"family\":\"TIES\",\"kind\":\"debtor\",\"key\":\"repay_debt\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_citadel\"}},\"long\":{\"family\":\"PERSONALITY\",\"kind\":\"grudge",
+   "r2r-town-28: Gorm Thorsson (the lord): {\"short\":{\"family\":\"TIES\",\"kind\":\"rival_enemy\",\"key\":\"settle_rivalry\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_town_watch\"}},\"long\":{\"family\":\"RANK\",\"kind\":\"d -> {\"short\":{\"family\":\"TIES\",\"kind\":\"mentor_student\",\"key\":\"protect_ally\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_town_watch\"}},\"long\":{\"family\":\"RANK\",\"kind\":\"",
+   "r2r-city-1: Oengus Treacy (the lord): {\"short\":{\"family\":\"TIES\",\"kind\":\"rival_enemy\",\"key\":\"settle_rivalry\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_professional_city_watch\"}},\"long\":{\"family\":\"PE -> {\"short\":{\"family\":\"TIES\",\"kind\":\"family\",\"key\":\"protect_ally\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_professional_city_watch\"}},\"long\":{\"family\":\"PERSONALI"
+  ]
+ },
+ "npcs.goal.long": {
+  "towns": 20,
+  "n": 29,
+  "ex": [
+   "r2r-town-9: Ingvar Bjornsson (the lord): \"Repay Ulf Ulfsson in full, and owe nobody anything again.\" -> \"Be remembered alongside Ulf Ulfsson as one of the best at the work.\"",
+   "r2r-town-13: Uranchimeg Budaad (the castellan): \"Outlast Noyans Olqunu'ud, and be the one still standing.\" -> \"Keep the bond with Organa Jirgin as the work and the years change them both.\"",
+   "r2r-city-19: Brennan MacGregor (the monarch): \"Leave Olwen MacLachlan with no power left to do them harm.\" -> \"Protect Olwen MacLachlan from anyone who would bring them down.\"",
+   "r2r-city-19: Olwen MacLachlan (the lord): \"Outlast Brennan MacGregor, and be the one still standing.\" -> \"Keep the alliance with Brennan MacGregor strong for as long as both live.\"",
+   "r2r-city-28: Eustathios Choniates (the lord): \"Leave Noble Families stronger than they found it, with Ioasaph Botaneiates still second and content.\" -> \"Live a quiet life, out of other people's quarrels.\"",
+   "r2r-metropolis-22: Erdenebayar Barlas (the tanner): \"Make sure Unurtsetseg Balkar never has reason to doubt them.\" -> \"Turn the debt to Unurtsetseg Balkar into a friendship between equals.\""
+  ]
+ },
+ "npcs.goal.short": {
+  "towns": 21,
+  "n": 24,
+  "ex": [
+   "r2r-village-56: Eanán Burke (the lord): \"Find the weak spot in what Muirenn Flaherty is doing, and press on it.\" -> \"Warn Muirenn Flaherty of any trouble before it reaches them.\"",
+   "r2r-town-9: Ulf Ulfsson (the senior guild master): \"Call in one part of what Leidolf Leidolfsson owes this season.\" -> \"Make sure Leidolf Leidolfsson keeps paying, even if late.\"",
+   "r2r-town-13: Noyans Olqunu'ud (the lord): \"Find the weak spot in what Uranchimeg Budaad is doing, and press on it.\" -> \"Do Uranchimeg Budaad a favour big enough to count against what is owed.\"",
+   "r2r-town-28: Gorm Thorsson (the lord): \"Find the weak spot in what Asger Gormsson is doing, and press on it.\" -> \"Ask Asger Gormsson for advice on one hard decision this season.\"",
+   "r2r-city-1: Oengus Treacy (the lord): \"Beat Ide O'Flaherty at something this season, in front of people who matter.\" -> \"Keep the family trouble with Ide O'Flaherty from reaching anyone outside the family.\"",
+   "r2r-city-28: Eustathios Choniates (the lord): \"Keep the friendship with Euphemia Hyaleas quiet, where it does the most good.\" -> \"Find the weak spot in what Euphemia Hyaleas is doing, and press on it.\""
+  ]
+ },
+ "npcs.physical": {
+  "towns": 110,
+  "n": 151,
+  "ex": [
+   "r2r-village-27: Radbot Klein (the lord, other): {\"age\":\"mid-thirties\",\"build\":\"compact and powerful\",\"feature\":\"a branded mark they keep covered\",\"clothes\":\"expensive but conservative merchant dress -> {\"age\":\"mid-thirties\",\"build\":\"compact and powerful\",\"feature\":\"a branded mark they keep covered\",\"clothes\":\"travel-worn but well-maintained gear\"}",
+   "r2r-village-56: Eanán Burke (the lord, other): {\"age\":\"mid-twenties\",\"build\":\"tall with a slight stoop\",\"feature\":\"heavy-lidded eyes that suggest either wisdom or exhaustion\",\"clothes\":\"immaculate  -> {\"age\":\"mid-twenties\",\"build\":\"tall with a slight stoop\",\"feature\":\"heavy-lidded eyes that suggest either wisdom or exhaustion\",\"clothes\":\"weathered g",
+   "r2r-town-9: Ingvar Bjornsson (the lord, other): {\"age\":\"late thirties\",\"build\":\"lean and wiry\",\"feature\":\"sun-darkened skin that suggests years outdoors\",\"clothes\":\"robes cut for a taller predecesso -> {\"age\":\"late thirties\",\"build\":\"lean and wiry\",\"feature\":\"sun-darkened skin that suggests years outdoors\",\"clothes\":\"work clothes patched by someone w",
+   "r2r-town-13: Noyans Olqunu'ud (the lord, other): {\"age\":\"early thirties\",\"build\":\"stocky and broad-shouldered\",\"feature\":\"surprisingly soft hands\",\"clothes\":\"sombre official black with a jewelled cla -> {\"age\":\"early thirties\",\"build\":\"stocky and broad-shouldered\",\"feature\":\"surprisingly soft hands\",\"clothes\":\"dress entirely without signal (deliberate",
+   "r2r-town-15: Kyriake Limniotes (the lord, other): {\"age\":\"mid-fifties\",\"build\":\"imposingly tall\",\"feature\":\"a prosthetic hand, finely crafted\",\"clothes\":\"expensive but conservative merchant dress\"} -> {\"age\":\"mid-fifties\",\"build\":\"imposingly tall\",\"feature\":\"a prosthetic hand, finely crafted\",\"clothes\":\"travel-worn but well-maintained gear\"}",
+   "r2r-town-25: Sanjay Mukherjee (the lord, other): {\"age\":\"mid-forties\",\"build\":\"barrel-chested\",\"feature\":\"a jaw set permanently as if biting back words\",\"clothes\":\"expensive but conservative merchant -> {\"age\":\"mid-forties\",\"build\":\"barrel-chested\",\"feature\":\"a jaw set permanently as if biting back words\",\"clothes\":\"travel-worn but well-maintained gea"
+  ]
+ },
+ "npcs.plotHooks": {
+  "towns": 98,
+  "n": 127,
+  "ex": [
+   "r2r-village-27: Radbot Klein (the lord, other): [\"They've been meeting privately with someone from outside the settlement whose identity they won't disclose.\"] -> [\"Their predecessor left something behind (in a place where it shouldn't have been), and they haven't reported finding it.\"]",
+   "r2r-town-9: Ingvar Bjornsson (the lord, other): [\"Their sister has been taking gifts from people who need their signature, and they found out from the person who paid most.\"] -> [\"A cousin has arrived to stay without warning, and spends every day watching one particular house.\"]",
+   "r2r-town-15: Kyriake Limniotes (the lord, other): [\"They signed an order last month on bad information, and the family it ruined has learned whose seal is on it.\"] -> [\"Someone has been asking the neighbours what time they leave in the morning and when they come home.\"]",
+   "r2r-town-28: Gorm Thorsson (the lord, other): [\"A routine appointment they made three weeks ago has been rescheduled four times. Each time they initiated the change.\"] -> [\"They lent their savings to a friend who has since left, and the friend's family says there was no loan.\"]",
+   "r2r-town-55: Rorik Gunnarsson (the lord, other): [\"They've been meeting privately with someone from outside the settlement whose identity they won't disclose.\"] -> [\"A neighbour has accused them of moving a fence, and the neighbour has witnesses who were not there.\"]",
+   "r2r-city-1: Oengus Treacy (the lord, other): [\"They received a deposition in a civil case that, if acted on, would be correct, and would ruin someone they need.\"] -> [\"Someone has been asking the neighbours what time they leave in the morning and when they come home.\"]"
+  ]
+ },
+ "npcs.presentation.behaviour": {
+  "towns": 143,
+  "n": 169,
+  "ex": [
+   "r2r-village-11: Darya Aleksandrov (the boatwright): \"Talks about the river; not about the boats being built for whom.\" -> \"Builds to order and repairs anything that floats; wants half paid before starting.\"",
+   "r2r-village-22: Ragnhild Haraldsson (the master fishmonger): \"Talks about the boats, the catch and who has been in today; a good ear for market news.\" -> \"Polite and quick; keeps the talk to the fish and asks nothing about you.\"",
+   "r2r-village-36: Terentia Gratus (the boatwright): \"Points out the boats they built and tells you who owns each one.\" -> \"Builds to order and repairs anything that floats; wants half paid before starting.\"",
+   "r2r-village-41: Eun Luo (the boatwright): \"Points out the boats they built and tells you who owns each one.\" -> \"Builds to order and repairs anything that floats; wants half paid before starting.\"",
+   "r2r-village-45: Möngke Tayichi'ud (the boatwright): \"Points out the boats they built and tells you who owns each one.\" -> \"Builds to order and repairs anything that floats; wants half paid before starting.\"",
+   "r2r-village-46: Liber Lynch (the boatwright): \"Talks about the river; not about the boats being built for whom.\" -> \"Builds to order and repairs anything that floats; wants half paid before starting.\""
+  ]
+ },
+ "npcs.presentation.disposition": {
+  "towns": 143,
+  "n": 168,
+  "ex": [
+   "r2r-village-11: Darya Aleksandrov (the boatwright): \"cautious\" -> \"transactional\"",
+   "r2r-village-22: Ragnhild Haraldsson (the master fishmonger): \"welcoming\" -> \"cautious\"",
+   "r2r-village-36: Terentia Gratus (the boatwright): \"welcoming\" -> \"transactional\"",
+   "r2r-village-41: Eun Luo (the boatwright): \"welcoming\" -> \"transactional\"",
+   "r2r-village-45: Möngke Tayichi'ud (the boatwright): \"welcoming\" -> \"transactional\"",
+   "r2r-village-46: Liber Lynch (the boatwright): \"cautious\" -> \"transactional\""
+  ]
+ },
+ "npcs.presentation.impression": {
+  "towns": 193,
+  "n": 286,
+  "ex": [
+   "r2r-village-11: Darya Aleksandrov (the boatwright): \"Watches visitors near the slipway. Keeps the half-built hulls under cover.\" -> \"Sawdust and tar on the hands, a pencil behind the ear and a boat half-built behind them.\"",
+   "r2r-village-22: Ragnhild Haraldsson (the master fishmonger): \"Cheerful in the cold and the stink of the market. Knows every regular by name and by order.\" -> \"Watches the scales and the customers' hands at the same time.\"",
+   "r2r-village-27: Radbot Klein (the lord): \"Efficient, slightly distracted: someone with too many things in their head and a practised way of not showing it.\" -> \"Ordinary in a way that is itself a kind of presence.\"",
+   "r2r-village-36: Terentia Gratus (the boatwright): \"Easy and talkative, proud of every boat on the river that came from the yard.\" -> \"Sawdust and tar on the hands, a pencil behind the ear and a boat half-built behind them.\"",
+   "r2r-village-41: Eun Luo (the boatwright): \"Easy and talkative, proud of every boat on the river that came from the yard.\" -> \"Sawdust and tar on the hands, a pencil behind the ear and a boat half-built behind them.\"",
+   "r2r-village-45: Möngke Tayichi'ud (the boatwright): \"Easy and talkative, proud of every boat on the river that came from the yard.\" -> \"Sawdust and tar on the hands, a pencil behind the ear and a boat half-built behind them.\""
+  ]
+ },
+ "npcs.secret.stakes": {
+  "towns": 85,
+  "n": 90,
+  "ex": [
+   "r2r-village-2: Dubravka Alexeyev (the boatwright): \"The miller has started counting logs and asking where they went\" -> \"When one of those boats is searched, the work will lead back to the yard\"",
+   "r2r-village-17: Ronan Carey (the master fishmonger): \"The boats' owners would name every buyer to save themselves, and the fishmonger's name would be first\" -> \"The market would close the stall, and the families of the sick would want more than a fine\"",
+   "r2r-village-22: Ragnhild Haraldsson (the master fishmonger): \"The boats' owners would name every buyer to save themselves, and the fishmonger's name would be first\" -> \"The market would close the stall, and the families of the sick would want more than a fine\"",
+   "r2r-village-51: Andrei Fedorov (the boatwright): \"The miller has started counting logs and asking where they went\" -> \"When one of those boats is searched, the work will lead back to the yard\"",
+   "r2r-town-12: Bashir al-Mawsili (the chandler): \"The owners of those stores have started marking them, and one of the marked barrels is on the shelf\" -> \"The rival's family never believed it, and a witness has turned up\"",
+   "r2r-town-13: Unurtsetseg Ongut (the master fishmonger): \"The boats' owners would name every buyer to save themselves, and the fishmonger's name would be first\" -> \"The market would close the stall, and the families of the sick would want more than a fine\""
+  ]
+ },
+ "npcs.secret.what": {
+  "towns": 89,
+  "n": 94,
+  "ex": [
+   "r2r-village-2: Dubravka Alexeyev (the boatwright): \"Has been taking timber from the river's driftwood that belongs to the mill upstream\" -> \"Built boats with false bottoms for a buyer who carries goods no one is meant to see\"",
+   "r2r-village-17: Ronan Carey (the master fishmonger): \"Buys fish from boats that fished where they are forbidden to, and never asks where the catch came from\" -> \"Sells yesterday's fish as this morning's, washed and packed in fresh ice, and has made people sick more than once\"",
+   "r2r-village-22: Ragnhild Haraldsson (the master fishmonger): \"Buys fish from boats that fished where they are forbidden to, and never asks where the catch came from\" -> \"Sells yesterday's fish as this morning's, washed and packed in fresh ice, and has made people sick more than once\"",
+   "r2r-village-51: Andrei Fedorov (the boatwright): \"Has been taking timber from the river's driftwood that belongs to the mill upstream\" -> \"Built boats with false bottoms for a buyer who carries goods no one is meant to see\"",
+   "r2r-town-12: Bashir al-Mawsili (the chandler): \"Has been buying stolen ship's stores at night and selling them in the shop the next morning\" -> \"Lit the fire that burned out a rival's shop three years ago, and told everyone it was an accident with a lamp\"",
+   "r2r-town-13: Unurtsetseg Ongut (the master fishmonger): \"Buys fish from boats that fished where they are forbidden to, and never asks where the catch came from\" -> \"Sells yesterday's fish as this morning's, washed and packed in fresh ice, and has made people sick more than once\""
+  ]
+ },
+ "npcs.settlementCondition": {
+  "towns": 81,
+  "n": 95,
+  "ex": [
+   "r2r-village-36: Pius Aquila (the archdruid, religious): \"stable\" -> null",
+   "r2r-village-56: Eanán Burke (the lord, other): null -> \"governance_fractured\"",
+   "r2r-town-0: Macrina Cicero (the gang boss, criminal): \"governance_fractured\" -> null",
+   "r2r-town-1: Majid al-Suri (the alchemist, magic): \"governance_fractured\" -> null",
+   "r2r-town-2: Stylianos Nestongos (the abbot, religious): \"stable\" -> null",
+   "r2r-town-8: Demetrios Kamytzes (the house boss, criminal): \"governance_fractured\" -> null"
+  ]
+ },
+ "npcs.structuralPosition": {
+  "towns": 223,
+  "n": 412,
+  "ex": [
+   "r2r-hamlet-20: Auðr Bjarnarson (the stable keeper, economy): \"Runs a smaller house behind the leading one in quiet times.\" -> \"Heads the leading house in the trade in quiet times; its hold is secure and its say is real.\"",
+   "r2r-village-7: Ollin Chel (the priest, religious): \"Serves the faith on shrinking alms while money is short.\" -> \"Leads the faith while money is short; its lands and alms are both a help and a target.\"",
+   "r2r-village-12: Manlia Nero (the priest, religious): \"Serves the faith under its leaders while the seat fails around them.\" -> \"Leads the faith while the seat fails, and people bring it the quarrels the seat no longer settles.\"",
+   "r2r-village-13: Börte Arulad (the priest, religious): \"Serves the faith under its leaders in quiet times.\" -> \"Leads the faith in quiet times, at peace with the seat beside it.\"",
+   "r2r-village-15: Drifa Asgersson (the priest, religious): \"Serves the faith under its leaders in quiet times.\" -> \"Leads the faith in quiet times, at peace with the seat beside it.\"",
+   "r2r-village-16: Imma Bauer (the priest, religious): \"Serves the faith under its leaders in quiet times.\" -> \"Leads the faith in quiet times, at peace with the seat beside it.\""
+  ]
+ },
+ "npcs: +field activeConstraint": {
+  "towns": 6,
+  "n": 6,
+  "ex": []
+ },
+ "npcs: +field settlementCondition": {
+  "towns": 6,
+  "n": 6,
+  "ex": []
+ },
+ "npcs: +field structuralPosition": {
+  "towns": 6,
+  "n": 6,
+  "ex": []
+ },
+ "npcs: -field activeConstraint": {
+  "towns": 75,
+  "n": 89,
+  "ex": []
+ },
+ "npcs: -field settlementCondition": {
+  "towns": 75,
+  "n": 89,
+  "ex": []
+ },
+ "npcs: -field structuralPosition": {
+  "towns": 75,
+  "n": 89,
+  "ex": []
+ },
+ "powerStructure.conflicts.desc": {
+  "towns": 31,
+  "n": 36,
+  "ex": [
+   "r2r-town-11: \"Arcane Council and Military/Guard are in moderate conflict over a ruling one power refuses to obey. The stakes are authority.\" -> \"Arcane Council and Military/Guard are in moderate conflict over a ruling that one power refuses to obey. The stakes are authority.\"",
+   "r2r-town-53: \"Guild Council and Craft Guilds are in moderate conflict over a ruling one power refuses to obey. The stakes are authority.\" -> \"Guild Council and Craft Guilds are in moderate conflict over a ruling that one power refuses to obey. The stakes are authority.\"",
+   "r2r-city-1: \"Military City Council and Craft Guilds are in high conflict over a ruling one power refuses to obey. The stakes are authority.\" -> \"Military City Council and Craft Guilds are in high conflict over a ruling that one power refuses to obey. The stakes are authority.\"",
+   "r2r-city-18: \"Royal Authority and Merchant Guilds are in high conflict over a ruling one power refuses to obey. The stakes are authority.\" -> \"Royal Authority and Merchant Guilds are in high conflict over a ruling that one power refuses to obey. The stakes are authority.\"",
+   "r2r-city-28: \"Democratic assembly and Military/Guard are in high conflict over members leaving one power for the other. The stakes are loyalty and number -> \"Noble Families and Craft Guilds are in high conflict over a broken promise of support. The stakes are trust.\"",
+   "r2r-city-28: \"Noble Families and Craft Guilds are in high conflict over who may take on apprentices. The stakes are the trades' future.\" -> \"Democratic assembly and Military/Guard are in high conflict over who commands when danger comes. The stakes are command.\""
+  ]
+ },
+ "powerStructure.conflicts.intensity": {
+  "towns": 4,
+  "n": 4,
+  "ex": [
+   "r2s-under_siege-metropolis-1: \"high\" -> \"moderate\"",
+   "r2s-indebted-town-0: null -> \"moderate\"",
+   "r2s-recently_betrayed-city-2: \"moderate\" -> \"high\"",
+   "r2s-succession_void-town-0: null -> \"moderate\""
+  ]
+ },
+ "powerStructure.conflicts.issue": {
+  "towns": 30,
+  "n": 33,
+  "ex": [
+   "r2r-town-11: \"A ruling one power refuses to obey\" -> \"A ruling that one power refuses to obey\"",
+   "r2r-town-53: \"A ruling one power refuses to obey\" -> \"A ruling that one power refuses to obey\"",
+   "r2r-city-1: \"A ruling one power refuses to obey\" -> \"A ruling that one power refuses to obey\"",
+   "r2r-city-18: \"A ruling one power refuses to obey\" -> \"A ruling that one power refuses to obey\"",
+   "r2r-city-28: \"Members leaving one power for the other\" -> \"A broken promise of support\"",
+   "r2r-city-28: \"Who may take on apprentices\" -> \"Who commands when danger comes\""
+  ]
+ },
+ "powerStructure.conflicts.parties": {
+  "towns": 12,
+  "n": 16,
+  "ex": [
+   "r2r-city-28: [\"Democratic assembly\",\"Military/Guard\"] -> [\"Noble Families\",\"Craft Guilds\"]",
+   "r2r-city-28: [\"Noble Families\",\"Craft Guilds\"] -> [\"Democratic assembly\",\"Military/Guard\"]",
+   "r2r-metropolis-8: [\"Royal Authority\",\"The Peerage\"] -> [\"Royal Authority\",\"Noble Claimant (Reform Line)\"]",
+   "r2r-metropolis-23: [\"Royal Authority\",\"Noble Houses\"] -> [\"Royal Authority\",\"Military/Guard\"]",
+   "r2r-metropolis-23: [\"Royal Authority\",\"Military/Guard\"] -> [\"Royal Authority\",\"Craft Guilds\"]",
+   "r2r-metropolis-51: [\"Royal Authority\",\"Loyalist Noble Opposition\"] -> [\"Royal Authority\",\"Merchant Guilds\"]"
+  ]
+ },
+ "powerStructure.conflicts.plotHooks": {
+  "towns": 11,
+  "n": 13,
+  "ex": [
+   "r2r-city-28: [\"A member who crossed over wants to go back, and needs someone to carry the message quietly.\"] -> [\"The promise was made in writing, and the paper is now in the hands of someone who wants a price for it.\"]",
+   "r2r-city-28: [\"A boy has been taken on by two masters at once, and his father has signed for both.\"] -> [\"A plan of the defences has been copied, and someone wants to know who has the copy.\"]",
+   "r2r-metropolis-23: [\"A witness to what went wrong is willing to talk, but only to someone neither side can lean on.\"] -> [\"The debt is due at the end of the month, and the man who signed for it has gone away.\"]",
+   "r2r-metropolis-23: [\"The ruling was given in writing, and the copy that was posted is not the one that was signed.\"] -> [\"A man sent to enforce the ruling was turned away, and has asked for others to go with him.\"]",
+   "r2r-metropolis-51: [\"The betrothal was ended by letter, and one family says the letter is forged.\"] -> [\"A good stall has been taken over by night, and its holder wants it back before market day.\"]",
+   "r2r-metropolis-56: [\"A witness to what went wrong is willing to talk, but only to someone neither side can lean on.\"] -> [\"A moneylender has bought the debt and means to collect it from whichever side pays first.\"]"
+  ]
+ },
+ "powerStructure.conflicts.stakes": {
+  "towns": 11,
+  "n": 12,
+  "ex": [
+   "r2r-city-28: \"Loyalty and numbers\" -> \"Trust\"",
+   "r2r-city-28: \"The trades' future\" -> \"Command\"",
+   "r2r-metropolis-23: \"Reputation\" -> \"Money and face\"",
+   "r2r-metropolis-51: \"Family honour\" -> \"Custom\"",
+   "r2r-metropolis-56: \"Reputation\" -> \"Money and face\"",
+   "r2s-under_siege-city-0: \"Property\" -> \"Loyalty and numbers\""
+  ]
+ },
+ "pressureSentence": {
+  "towns": 4,
+  "n": 4,
+  "ex": []
+ },
+ "prominentRelationship": {
+  "towns": 15,
+  "n": 15,
+  "ex": []
+ },
+ "relationships.archetypeKey": {
+  "towns": 53,
+  "n": 79,
+  "ex": [
+   "r2r-village-56: \"peer_rivalry\" -> \"genuine_respect\"",
+   "r2r-town-9: \"gov_econ_dependence\" -> \"mentor_legacy\"",
+   "r2r-town-13: \"peer_rivalry\" -> \"old_debt\"",
+   "r2r-town-25: \"wary_alliance\" -> \"genuine_respect\"",
+   "r2r-town-28: \"mutual_leverage\" -> \"mentor_legacy\"",
+   "r2r-town-55: \"mentor_legacy\" -> \"mutual_leverage\""
+  ]
+ },
+ "relationships.description": {
+  "towns": 53,
+  "n": 903,
+  "ex": [
+   "r2r-village-56: \"Eanán Burke and Muirenn Flaherty want the same thing and compete hard for it, but neither has let it turn into hatred.\" -> \"Eanán Burke and Muirenn Flaherty consult each other before any decision that matters. The advice is honest and is always taken seriously.\"",
+   "r2r-village-56: \"Only one of Kilian Sullivan and Dáirine O'Brien can come out ahead, and both know it. They stay polite and give no ground.\" -> \"Kilian Sullivan and Dáirine O'Brien are rivals for the same patron's favour. Each has spent the year trying to be first through the patron'",
+   "r2r-village-56: \"Seanchán Kennedy and Dáirine O'Brien have stood on opposite sides of three disputes and praised each other after every one.\" -> \"Seanchán Kennedy trusts Dáirine O'Brien's word over any written contract. Dáirine O'Brien has never given a reason to regret it.\"",
+   "r2r-town-9: \"Ulf Ulfsson holds the debts Ingvar Bjornsson has run up, and so Ulf Ulfsson decides what Ingvar Bjornsson can afford to do.\" -> \"Ingvar Bjornsson taught Ulf Ulfsson everything, including how to get the better of Ingvar Bjornsson.\"",
+   "r2r-town-9: \"Jorvik Mordsson taught Yngvar Dagsson everything, including how to get the better of Jorvik Mordsson.\" -> \"Jorvik Mordsson took Yngvar Dagsson in as an apprentice and taught them the trade, the clients, and the names worth knowing.\"",
+   "r2r-town-9: \"Olaf Snorrason took Magnr Egilsson in as an apprentice and taught them the trade, the clients, and the names worth knowing.\" -> \"Magnr Egilsson learned the work at Olaf Snorrason's side for seven years. Half of Magnr Egilsson's clients first came through Olaf Snorraso"
+  ]
+ },
+ "relationships.npc1Role": {
+  "towns": 142,
+  "n": 178,
+  "ex": [
+   "r2r-town-15: \"the lord\" -> \"the lady\"",
+   "r2r-town-19: \"the abbot\" -> \"the abbess\"",
+   "r2r-town-40: \"the abbot\" -> \"the abbess\"",
+   "r2r-town-49: \"the abbot\" -> \"the abbess\"",
+   "r2r-town-54: \"the abbot\" -> \"the abbess\"",
+   "r2r-city-2: \"the lord\" -> \"the lady\""
+  ]
+ },
+ "relationships.npc2Role": {
+  "towns": 95,
+  "n": 169,
+  "ex": [
+   "r2r-town-15: \"the lord\" -> \"the lady\"",
+   "r2r-town-19: \"the abbot\" -> \"the abbess\"",
+   "r2r-town-49: \"the abbot\" -> \"the abbess\"",
+   "r2r-town-49: \"the abbot\" -> \"the abbess\"",
+   "r2r-city-2: \"the lord\" -> \"the lady\"",
+   "r2r-city-2: \"the lord\" -> \"the lady\""
+  ]
+ },
+ "relationships.proseVariant": {
+  "towns": 53,
+  "n": 895,
+  "ex": [
+   "r2r-village-56: 0 -> 6",
+   "r2r-village-56: 1 -> 7",
+   "r2r-village-56: 4 -> 7",
+   "r2r-town-9: 1 -> 2",
+   "r2r-town-9: 2 -> 3",
+   "r2r-town-9: 3 -> 4"
+  ]
+ },
+ "relationships.strength": {
+  "towns": 54,
+  "n": 84,
+  "ex": [
+   "r2r-village-56: \"personal\" -> \"deep\"",
+   "r2r-town-9: \"substantial\" -> \"lifelong\"",
+   "r2r-town-13: \"personal\" -> \"substantial\"",
+   "r2r-town-25: \"weak\" -> \"grudging\"",
+   "r2r-town-28: \"convenience\" -> \"formal\"",
+   "r2r-town-55: \"formal\" -> \"stable\""
+  ]
+ },
+ "relationships.tension": {
+  "towns": 53,
+  "n": 903,
+  "ex": [
+   "r2r-village-56: \"A decision coming next season will favour Eanán Burke or Muirenn Flaherty heavily, and both of them know it.\" -> \"The council has asked Eanán Burke and Muirenn Flaherty to audit each other's accounts. Both agreed, and neither is comfortable.\"",
+   "r2r-village-56: \"A patron they share has let it be known there is room for only Kilian Sullivan or Dáirine O'Brien at the next table.\" -> \"Kilian Sullivan lost the last contract to Dáirine O'Brien by a single vote, and has learned who cast it.\"",
+   "r2r-village-56: \"Dáirine O'Brien has been offered Seanchán Kennedy's post by people who want Seanchán Kennedy gone.\" -> \"Dáirine O'Brien has publicly backed a plan that Seanchán Kennedy thinks will fail. Seanchán Kennedy has said so once, in private.\"",
+   "r2r-town-9: \"The interest falls due at midsummer and the treasury will not cover it. Ulf Ulfsson has already drafted the terms of the extension.\" -> \"A third party has asked Ingvar Bjornsson, quietly, whether Ulf Ulfsson can be trusted. The answer took too long.\"",
+   "r2r-town-9: \"A third party has asked Jorvik Mordsson, quietly, whether Yngvar Dagsson can be trusted. The answer took too long.\" -> \"Yngvar Dagsson has taken on a client Jorvik Mordsson turned away on principle.\"",
+   "r2r-town-9: \"Magnr Egilsson has taken on a client Olaf Snorrason turned away on principle.\" -> \"Olaf Snorrason has taken a new apprentice, and Magnr Egilsson has heard the apprentice is being taught things Magnr Egilsson never was.\""
+  ]
+ },
+ "relationships.type": {
+  "towns": 52,
+  "n": 77,
+  "ex": [
+   "r2r-village-56: \"rival\" -> \"respect\"",
+   "r2r-town-9: \"debtor_creditor\" -> \"mentor_student\"",
+   "r2r-town-13: \"rival\" -> \"debtor_creditor\"",
+   "r2r-town-25: \"ally\" -> \"respect\"",
+   "r2r-town-28: \"political\" -> \"mentor_student\"",
+   "r2r-town-55: \"mentor_student\" -> \"political\""
+  ]
+ },
+ "relationships.typeName": {
+  "towns": 53,
+  "n": 79,
+  "ex": [
+   "r2r-village-56: \"Professional Rivalry\" -> \"Genuine Respect\"",
+   "r2r-town-9: \"Financial Dependence\" -> \"Mentor and Successor\"",
+   "r2r-town-13: \"Professional Rivalry\" -> \"Outstanding Debt\"",
+   "r2r-town-25: \"Pragmatic Alliance\" -> \"Genuine Respect\"",
+   "r2r-town-28: \"Mutual Leverage\" -> \"Mentor and Successor\"",
+   "r2r-town-55: \"Mentor and Successor\" -> \"Mutual Leverage\""
+  ]
+ }
+}
