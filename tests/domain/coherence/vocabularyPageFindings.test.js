@@ -12,6 +12,7 @@ import { NEW_WORDS, REGISTERED_WORDS, THINGS, VOCABULARY_SIZE, declarationImplie
 import { RESOURCE_DATA } from '../../../src/data/resourceData.js';
 import { parseAtom } from '../../../src/domain/facts/factVocabulary.js';
 import { factsOf } from '../../../src/domain/facts/factsOf.js';
+import { variantByVid } from '../../helpers/drawnProse.js';
 
 const thorp = { tier: 'thorp', population: 40, config: {}, stress: [], institutions: [{ name: 'Chapel' }], powerStructure: { factions: [{ faction: 'A' }, { faction: 'B' }] } };
 const city = {
@@ -84,7 +85,8 @@ describe('F1 — the generated vocabulary', () => {
     powerStructure: { factions: [{ faction: 'Town council' }] },
   };
   const lines = [
-    'The magical help here comes from its alchemists, who brew for the defenders.',
+    // computed, not a literal state-prose anchor (proseDrawnAnchors): DS-DEF-5 'ARCANE: alchemists' v1
+    variantByVid({ leaf: 'defense', blockId: 'DS-DEF-5', poolKey: 'ARCANE: alchemists', vid: 1, slots: { settlement: 'Ford' } }),
     'Funeral rites and burial. The priest manages the graveyard.',
     'The military command has taken charge of the streets, and more harshly as the food runs down.',
     'Carts bring the town what its workshops need, and carry the goods away again.',
@@ -106,7 +108,8 @@ describe('F1 — the generated vocabulary', () => {
   });
 
   test('planted: a famine written as a risk to come is false while a famine is in force', () => {
-    const risk = { 'Systems/Economics': ['One bad year for the grain harvest would be a hungry year for everyone here.'] };
+    // computed, not a literal state-prose anchor (proseDrawnAnchors): DS-ECO-9 'FOOD SOURCES: one source' v1
+    const risk = { 'Systems/Economics': [variantByVid({ leaf: 'economy', blockId: 'DS-ECO-9', poolKey: 'FOOD SOURCES: one source', vid: 1, slots: { settlement: 'Ford', good: 'grain' } })] };
     expect(vocabularyPageFindings({ ...town, stress: [{ type: 'famine' }] }, risk).map((f) => f.word)).toEqual(['famineToCome']);
     expect(vocabularyPageFindings(town, risk)).toEqual([]);
   });
