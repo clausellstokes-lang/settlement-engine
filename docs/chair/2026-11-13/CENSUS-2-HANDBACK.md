@@ -21,6 +21,7 @@ register is changed.
 - Package: `sh docs/chair/2026-11-13/probes/CENSUS-2/census2.sh <tree> <out> [workers] [--files a,b] [--seeds f]
   [--reuse] [--count-only]`; reads every stage's own exit; fails on an empty count. Measured: births+render 10m21s
   (720, 4 workers, the same render through the first census's script), count+trace+report of eight kinds 107s.
-- Open: a from-scratch run of census2.sh on the 720 (launched after this push; its time is added below when read).
+- From-scratch run of census2.sh on the 720 at 9e57f5023: 12m12s, exit 0 (births+render 618s, count+trace+report
+  114s); every kind's hit count identical to the earlier run.
 - Not done (outside the brief or out of budget): a chain-state denial test (most of the readers' kind-e lines);
   grammar breaks (most of their kind-d lines); 124 label lines of kind f on NPC-card and member rows left untraced.
