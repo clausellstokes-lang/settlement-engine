@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 265308,
-      "gzip": 35701,
+      "raw": 266121,
+      "gzip": 35801,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -835,6 +835,14 @@
       "toRaw": 265418,
       "gzipAfter": 35721,
       "reason": "+1351 B raw over the committed 264067 (gzip level 9: 35570 -> 35721): DS-DEF-2 walls with NO force declared off a hired company (no mercenary on v1-v6); three lines for walls with a hired company (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE-4 round 3 #954",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 265418,
+      "toRaw": 266121,
+      "gzipAfter": 35801,
+      "reason": "+813 B raw over the committed 265308 (gzip level 9: 35701 -> 35801): DS-DEF-2 CHAIN food trades working: the siege line declared off a famine (food: > famine); two lines for a siege with hunger already here (2026-11-13)"
     }
   ],
   "ceilingTransfersNewLeaves": [

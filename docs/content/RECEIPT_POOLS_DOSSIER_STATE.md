@@ -2989,7 +2989,9 @@ in about two towns in five that keep a force.
 1. `[ledger · no crisis: under_siege]` The tally of salted and preserved food at {settlement} is kept up by its working food trades, so the town would not run short at once if it were cut off.
 2. `[street · no crisis: under_siege]` The people who salt, dry and preserve food at {settlement} are working steadily, which matters a great deal if the town is ever cut off.
 3. `[unfolding · no crisis: under_siege]` As long as {settlement}'s food trades keep salting and drying, the town has provisions to fall back on if it is cut off.
-4. `[ledger · crisis: under_siege]` {settlement} is cut off now, and what its food trades salted and dried before the siege is what stands between the town and hunger.
+4. `[ledger · crisis: under_siege · food: > famine]` {settlement} is cut off now, and what its food trades salted and dried before the siege is what stands between the town and hunger.
+5. `[ledger · crisis: under_siege · food: famine]` {settlement} is cut off and already hungry, and what its food trades salted and dried before the siege is being eked out.
+6. `[street · crisis: under_siege · food: famine]` The siege has brought hunger to {settlement}, and the salted and dried stores its food trades put by are rationed now.
 
 **CHAIN: food trades failing** {colour}
 1. `[ledger · no crisis: under_siege]` The tally of preserved food at {settlement} is falling, because the trades that salt and dry it are failing; if the town were cut off, it would run short quickly.

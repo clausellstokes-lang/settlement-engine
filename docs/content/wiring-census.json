@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2960,
+    "variants": 2962,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -2177,7 +2177,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
+      "variants": 6,
       "grammars": 1,
       "predicate": [],
       "branchReads": [
@@ -2221,7 +2221,9 @@
       },
       "declares": [],
       "lineDeclares": {
-        "crisis: under_siege": 1,
+        "crisis: under_siege": 3,
+        "food: > famine": 1,
+        "food: famine": 2,
         "no crisis: under_siege": 3
       },
       "undeclared": 0,
@@ -66550,7 +66552,7 @@
       "subject": "CHAIN: food trades working",
       "fields": [],
       "readingFunction": "foodTradesPoolKey",
-      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "6 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
