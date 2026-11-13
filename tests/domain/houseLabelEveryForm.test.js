@@ -40,7 +40,10 @@ describe('the house label: every parenthetical form the catalogue holds', () => 
     expect(machinery.length).toBeGreaterThan(20);
     for (const { name, inner } of machinery) {
       const label = institutionHouseLabel(name);
+      expect(name, 'the catalogue name carries the bracket').toContain(`(${inner})`);
+      // anchored: the same name carried the bracket on the line above
       expect(label, name).not.toContain(`(${inner})`);
+      // anchored: the catalogue name carried a machinery bracket two lines above
       expect(label, name).not.toMatch(/\(\s*\d|\(if |\(high magic\)|\(multiple\)/i);
       expect(label.length, name).toBeGreaterThan(2);
     }
