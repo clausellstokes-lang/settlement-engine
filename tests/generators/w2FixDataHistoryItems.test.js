@@ -34,6 +34,10 @@
  * through `historyData.js :: HISTORY_DESC_SIBLINGS` where the event is written (`sizedResourceEvent`). And two timeline
  * hooks declare: the plague's healer (`healer`) and the wild magic's district (`tier: ≥ town`).
  *
+ * ITEM F (ROUND-3-CUT-INCREMENT ww-541; CENSUS-2 kinds a and b on `arrivalProse.js` and `inlandDescriptions.js`): lanes of
+ * trades in a hamlet, a merchant bargaining where no market stands, planks waiting for carts on a road a siege has cut,
+ * and an inland fish stall's fish "brought in by cart" at a steady price under a siege.
+ *
  * THIS FILE REDS WHEN: a cured line prints again in its guard town, or a declaration is dropped or turned.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
@@ -234,3 +238,23 @@ describe('W2-FIX-DATA-HISTORY item E: the resource events and two timeline hooks
   }
 });
 
+describe('W2-FIX-DATA-HISTORY item F: the arrival and the inland fish stall say only what the town holds', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  it('the four arrival lines declare, and the inland stall names no cart and no steady price', async () => {
+    const { ARRIVAL_PEOPLE, ARRIVAL_SENSES } = await import('../../src/data/arrivalProse.js');
+    const { INLAND_DESCRIPTIONS } = await import('../../src/data/inlandDescriptions.js');
+    const decl = (/** @type {any} */ row) => ({ needs: row.needs || [], excludes: row.excludes || [] });
+    const said = (/** @type {any[]} */ pool, /** @type {string} */ start) => pool.find((r) => typeof r === 'object' && String(r.text('X')).startsWith(start));
+    expect(decl(said(ARRIVAL_PEOPLE.east_asian, 'Each lane seems'))).toEqual({ needs: ['tier: ≥ town'], excludes: [] });
+    expect(decl(said(ARRIVAL_PEOPLE.east_asian, 'Tea is poured'))).toEqual({ needs: ['market'], excludes: [] });
+    expect(decl(said(ARRIVAL_PEOPLE.arabic, 'A merchant swears'))).toEqual({ needs: ['market'], excludes: [] });
+    const timber = ARRIVAL_SENSES.find((/** @type {any} */ s) => s.key === 'timber');
+    expect(decl(said(timber.dominant, 'Stacks of seasoning planks'))).toEqual({ needs: [], excludes: ['crisis: under_siege'] });
+    expect(INLAND_DESCRIPTIONS['village|Economy|Fish market']).not.toMatch(/brought in by cart|price holds/);
+  });
+  it('rww-hamlet-succession_void-1 (ww-541): a hamlet of 31 is told of no lanes of trades', () => {
+    const s = born('rww-hamlet-succession_void-1');
+    expect(String(s.arrivalScene)).not.toContain('Each lane seems to keep to its own trade');
+    expect(String(s.arrivalScene)).toMatch(/\S/);
+  }, 60_000);
+});

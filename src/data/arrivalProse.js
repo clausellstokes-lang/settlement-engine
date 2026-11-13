@@ -211,7 +211,7 @@ export const ARRIVAL_SENSES = Object.freeze([
     ],
     dominant: [
       (n) => `The smell of sawn timber is everywhere in ${n}, and so is the sawdust.`,
-      () => 'Stacks of seasoning planks line the road in, taller than the carts that wait for them.',
+      { text: () => 'Stacks of seasoning planks line the road in, taller than the carts that wait for them.', excludes: ['crisis: under_siege'], crisis: ['any'] }, // W2-FIX-DATA-HISTORY item F (CENSUS-2 kind b): no cart waits on a road the siege has cut
       () => 'The rasp of the saws carries from yard to yard all through the day.',
     ] },
   { key: 'kilns',
@@ -313,7 +313,7 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     () => 'A broker sits in the shade, matching buyers to goods from routes you have never travelled.',
     { text: () => 'Travellers are offered water before anyone asks their business.', excludes: ['crisis: under_siege'] }, // W2-FIX-DATA: no traveller reaches a besieged gate (c12)
     () => 'Two partners go over their accounts in a courtyard with a mediator sitting between them.',
-    () => 'A merchant swears an oath on his scales, and the buyer watches the scales anyway.',
+    { text: () => 'A merchant swears an oath on his scales, and the buyer watches the scales anyway.', needs: ['market'] }, // W2-FIX-DATA-HISTORY item F (CENSUS-2 kind a): the same
   ],
   norse: [
     { text: () => 'People argue law in the open as freely as they trade.', excludes: ['crisis: occupied', 'crisis: under_siege'], crisis: ['any'] }, // W2-FIX-DATA-5 (ww-473's sibling): no trade moves under a siege
@@ -330,8 +330,8 @@ export const ARRIVAL_PEOPLE = Object.freeze({
   east_asian: [
     () => 'A clerk records every cartload that passes in a careful ledger.',
     () => 'An elder settles a quarrel in a quiet voice before it can grow loud enough to need anyone else.',
-    () => 'Tea is poured for a merchant before the bargaining begins, and the bargaining waits for it.',
-    () => 'Each lane seems to keep to its own trade, and each trade to its own lane.',
+    { text: () => 'Tea is poured for a merchant before the bargaining begins, and the bargaining waits for it.', needs: ['market'] }, // W2-FIX-DATA-HISTORY item F (CENSUS-2 kind a): a merchant bargains where a market stands
+    { text: () => 'Each lane seems to keep to its own trade, and each trade to its own lane.', needs: ['tier: ≥ town'] }, // W2-FIX-DATA-HISTORY item F (ww-541): lanes of trades are a town's (a hamlet of 31 has a handful of houses)
   ],
   mesoamerican: [
     () => 'Porters bent under loaded frames file past, and someone counts them in.',

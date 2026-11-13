@@ -352,9 +352,6 @@
    ["market", "after-release", "Competing guilds struggled for control of the market and a voice in local politics"],
    ["market", "after-release", "What began as a disagreement over trade with a partner town spread until no merchant or buyer in the market was untouche"]
   ],
-  "src/data/inlandDescriptions.js": [
-   ["market", "after-release", "An open stall or small roofed market selling salted and smoked fish brought in by cart. The barrels keep, so the price h"]
-  ],
   "src/data/institutionDescVariants.js": [
    ["bank", "after-release", "A whole quarter given to money: banking across borders, credit by letter, and speculation in coin at scale."],
    ["bank", "after-release", "Foreign coin exchanged. The first stirrings of banking."],
