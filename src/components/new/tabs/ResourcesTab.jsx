@@ -15,6 +15,7 @@ import { institutionDisplayName } from '../../../domain/display/institutionDispl
 // READER-R1 ruling 3: the gap rows the DM reads are the record-read lines, in the house voice.
 import { resourceGapLines, housesStillNeeded, exploitationGroupsShown } from '../../../domain/display/validationOnPage.js';
 import { FLUSH } from '../../../design/flush.js';
+import { tradeStoppedHere } from '../../../domain/display/chainStateShown.js';
 
 /**
  * WHAT A RESOURCE DRAWS ON (`exploitation.*[].dependsOn`). Its only reader was Economics'
@@ -204,7 +205,17 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
           const abundant = allRes.filter(rk => !depleted.includes(rk));
           const customSet = new Set(r?.config?.nearbyResourcesCustom || []);
           const fmtKey = rk => rk.replace(/_/g,' ').replace(/\b./g,c=>c.toUpperCase());
+          // W2-C-LEAVES-SIDE (the cut's #937): under a siege in force the grounds around the walls are not called
+          // "Abundant" (the tab's own food line says the siege has taken the outlying fields): the word of plenty is
+          // left out and the grounds print first, unlabelled, under the section's own title (never under "Depleted").
+          const besieged = tradeStoppedHere(r);
+          const abundantChips = abundant.map((rk,i)=>customSet.has(rk)
+            ? <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'2px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{fmtKey(rk)}<span style={{fontWeight:800}}>✦</span></span>
+            : <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.success,background:swatch['#FAF8F4'],border:'1px solid #88c880',padding:'2px 9px'}}>{fmtKey(rk)}</span>);
           return <>
+            {besieged&&abundant.length>0&&<div data-testid="resources-grounds-besieged" style={{marginBottom:8}}>
+              <div style={{display:'flex',flexWrap:'wrap',gap:5}}>{abundantChips}</div>
+            </div>}
             {depleted.length>0&&<div style={{marginBottom:8}}>
               <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch['#C05000'],letterSpacing:'0.06em',marginBottom:4}}>Depleted</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
@@ -213,12 +224,10 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
                   : <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch['#8B3000'],background:swatch['#FFF3ED'],border:'1px solid #e08040',padding:'2px 9px',fontWeight:600}}>{fmtKey(rk)}</span>)}
               </div>
             </div>}
-            {abundant.length>0&&<div style={{marginBottom:res.availableResources?.length>0?8:0}}>
+            {!besieged&&abundant.length>0&&<div style={{marginBottom:res.availableResources?.length>0?8:0}}>
               <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.success,letterSpacing:'0.06em',marginBottom:4}}>Abundant</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-                {abundant.map((rk,i)=>customSet.has(rk)
-                  ? <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'2px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{fmtKey(rk)}<span style={{fontWeight:800}}>✦</span></span>
-                  : <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.success,background:swatch['#FAF8F4'],border:'1px solid #88c880',padding:'2px 9px'}}>{fmtKey(rk)}</span>)}
+                {abundantChips}
               </div>
             </div>}
             {res.availableResources?.length>0&&<div style={{paddingTop:6,borderTop:'1px solid #e8dcc8'}}>
