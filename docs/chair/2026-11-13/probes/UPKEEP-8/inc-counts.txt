@@ -1,17 +1,21 @@
 # base 995293e81
-births 1490 | false lines 2069 in 1121 births
+births 1490 | false lines 2430 in 1186 births
 FISH      printed 484 false 393
 COALSOLD  printed 132 false 25
 ORE       printed 316 false 140
 QUARRY    printed 284 false 190
 MASON     printed 21 false 21
+TIMBERBUY printed 18 false 2
+TIMBER    printed 287 false 162
 IRONIN    printed 451 false 151
+MARKETDAY printed 334 false 66
 HERB      printed 127 false 113
 ALCH      printed 554 false 386
 COAL      printed 136 false 72
 WOOLBUY   printed 509 false 481
 GRAINBUY  printed 253 false 41
 WOOL      printed 118 false 55
+SIEGETRADE printed 131 false 131
 TITHE     printed 1 false 1
     5 ALCH: impaired
     5 ALCH: no alchemist+impaired
@@ -38,6 +42,7 @@ TITHE     printed 1 false 1
     12 IRONIN: no forge
     29 IRONIN: no iron in
     63 IRONIN: siege
+    66 MARKETDAY: siege
     11 MASON: no masons+no stone in
     2 MASON: no masons+siege
     8 MASON: no masons
@@ -45,6 +50,12 @@ TITHE     printed 1 false 1
     40 QUARRY: no quarry house+siege
     131 QUARRY: no quarry house
     19 QUARRY: siege
+    30 SIEGETRADE: Entrepôt Trade
+    45 SIEGETRADE: Gate Tolls
+    18 SIEGETRADE: Port Duties
+    38 SIEGETRADE: Toll Revenue
+    162 TIMBER: no sawmill
+    2 TIMBERBUY: siege
     1 TITHE: not the largest
     9 WOOL: no weavers and fullers+siege
     33 WOOL: no weavers and fullers
@@ -57,17 +68,21 @@ TITHE     printed 1 false 1
     68 WOOLBUY: siege+no wool in
     2 WOOLBUY: siege
 
-# tip (step 1)
+# tip (step 1 with the census's lines)
 births 1490 | false lines 0 in 0 births
 T_FISHLANDED printed 50 false 0
 COALSOLD  printed 107 false 0
 FISH      printed 91 false 0
+TIMBERBUY printed 16 false 0
+T_TIMBERMANAGED printed 156 false 0
 T_METAL   printed 177 false 0
 IRONIN    printed 298 false 0
 ORE       printed 176 false 0
 QUARRY    printed 94 false 0
+MARKETDAY printed 268 false 0
 T_REMEDIES printed 449 false 0
 T_FISHSOLD printed 216 false 0
+TIMBER    printed 125 false 0
 T_CLOTH   printed 364 false 0
 GRAINBUY  printed 212 false 0
 ALCH      printed 168 false 0
@@ -78,5 +93,6 @@ WOOLBUY   printed 21 false 0
 T_REMSHORT printed 22 false 0
 HERB      printed 14 false 0
 WOOL      printed 63 false 0
+T_TIMBERPLAIN printed 6 false 0
 T_ALCHSIEGE printed 28 false 0
 T_TITHE   printed 1 false 0

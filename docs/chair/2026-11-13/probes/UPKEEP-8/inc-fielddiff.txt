@@ -1,2 +1,2 @@
-births 1490 moved 1126
-  2078 values in  1126 births .economicState.incomeSources[*].desc
+births 1490 moved 1191
+  2439 values in  1191 births .economicState.incomeSources[*].desc

@@ -9,7 +9,9 @@ const T = {
   GRAINBUY: /^Grain purchased from farming regions/, WOOL: /^Local flocks provide raw wool; weavers/, WOOLBUY: /^Wool bought from pastoral/,
   FISH: /salt fish are a major regional export/, QUARRY: /^Local quarry provides dressed stone/, MASON: /^Stone masons work imported/,
   TITHE: /dominating the local economy/,
+  TIMBER: /managed felling and sawmilling/, TIMBERBUY: /^Timber sourced from more distant forests/, MARKETDAY: /^Market day stall fees and toll collection/,
   // the twins (UPKEEP-8), each read against its own conditions
+  T_TIMBERMANAGED: /^Local forest provides sustainable timber revenue; managed felling keeps/, T_TIMBERPLAIN: /^Local forest provides timber revenue\.$/,
   T_ALCHSIEGE: /^Alchemical preparations and curative potions, sold only/, T_REMEDIES: /^Remedies and simple preparations/,
   T_REMSHORT: /^Remedies and preparations are made here, but few/, T_METAL: /^Metal is smelted or worked here/,
   T_WOOLWORKED: /^Local flocks provide raw wool, and cloth/, T_CLOTHSHORT: /^Little cloth is made here/, T_CLOTH: /^Cloth is woven or finished here/,
@@ -21,7 +23,8 @@ export function factsOf(s) {
   const imp = (s.economicState?.primaryImports || []).map(String), exp = (s.economicState?.primaryExports || []).map(String);
   const chain = (re) => (s.economicState?.activeChains || []).filter((c) => re.test(c.label || '')).map((c) => c.status);
   return {
-    siege: (s.config?.stressTypes || []).includes('under_siege'),
+    siege: (s.config?.stressTypes || []).includes('under_siege'), sawmill: has(/sawmill|lumber/),
+    managed: (s.config?.nearbyResources || []).some((r) => /managed_forest|shipbuilding_timber/.test(r)),
     forge: has(/smith|forge|foundr|smelt|metal|armor|armour|weapon/), smithy: has(/smith/), alch: has(/alchemist/), remedyHouse: has(/apothec|herbal|hedge wizard|alchemist/), fishSeller: has(/fish/),
     fishHouse: has(/fisher|fishing/), quarryHouse: has(/quarr/), mason: has(/mason|stonecut/), weaver: has(/weav/), fuller: has(/fuller/),
     ironIn: imp.some((x) => /\biron\b/i.test(x)), grainIn: imp.some((x) => /\bgrain\b/i.test(x)), woolIn: imp.some((x) => /\bwool\b/i.test(x)),
@@ -54,6 +57,10 @@ export function falseOf(cls, f, e, top) {
     case 'T_FISHLANDED': return [!f.fishHouse && 'no fishing house', f.siege && 'siege'].filter(Boolean);
     case 'T_FISHSOLD': return [!f.fishSeller && 'no fish house', f.siege && 'siege'].filter(Boolean);
     case 'T_TITHE': return [];
+    case 'TIMBER': return [!f.sawmill && 'no sawmill'].filter(Boolean);
+    case 'TIMBERBUY': case 'MARKETDAY': return [f.siege && 'siege'].filter(Boolean);
+    case 'T_TIMBERMANAGED': return [!f.managed && 'no managed forest'].filter(Boolean);
+    case 'T_TIMBERPLAIN': return [];
   }
   return [];
 }
@@ -63,6 +70,9 @@ if (process.argv[1] && import.meta.url.endsWith(process.argv[1].split('/').pop()
   for await (const line of rl) {
     const { seed, s } = JSON.parse(line); births++; const f = factsOf(s); const inc = s.economicState?.incomeSources || [];
     inc.forEach((e, i) => {
+      if (f.siege && e.desc && ['Toll Revenue', 'Gate Tolls', 'Port Duties', 'Entrepôt Trade'].includes(e.source)) {
+        const cls = 'SIEGETRADE'; cnt[cls] = cnt[cls] || [0, 0]; cnt[cls][0]++; cnt[cls][1]++; falseBirths.add(seed); const k = cls + ': ' + e.source; why[k] = (why[k] || 0) + 1; list.push({ seed, cls, why: ['siege'], source: e.source, desc: e.desc });
+      }
       for (const [cls, re] of Object.entries(T)) if (re.test(e.desc || '')) {
         const w = falseOf(cls, f, e, i === 0); cnt[cls] = cnt[cls] || [0, 0]; cnt[cls][0]++;
         if (w.length) { cnt[cls][1]++; falseBirths.add(seed); const k = cls + ': ' + w.join('+'); why[k] = (why[k] || 0) + 1; list.push({ seed, cls, why: w, source: e.source, desc: e.desc }); }

@@ -69,6 +69,17 @@ const TITHES_RENTS_SET = Object.freeze([
 ]);
 export const TITHES_RENTS_LINE = TITHES_RENTS_SET[0].text;
 export const TITHES_RENTS_PLAIN_LINE = 'Mandatory tithes, and rents from land the faith owns.';
+// The census's lines in this family (CENSUS-2, the chair's message of 2026-11-13): sawmilling where no sawmill stands;
+// trade by road, by sea or in transit under a siege.
+export const TIMBER_LINE = 'Local forest provides sustainable timber revenue; managed felling and sawmilling keep production consistent.';
+export const TIMBER_MANAGED_LINE = 'Local forest provides sustainable timber revenue; managed felling keeps production consistent.';
+export const TIMBER_PLAIN_LINE = 'Local forest provides timber revenue.';
+export const TIMBER_BOUGHT_LINE = 'Timber sourced from more distant forests and resold or processed locally: trade route dependent.';
+/** The market-day line, declared on its own text (it names the market; economicState.js prints its literal, registered there). */
+const MARKET_DAY_SET = Object.freeze([Object.freeze({ text: 'Market day stall fees and toll collection on goods entering the market.', needs: Object.freeze(['market']), excludes: Object.freeze(['crisis: under_siege']) })]);
+export const MARKET_DAY_LINE = MARKET_DAY_SET[0].text;
+/** The sources whose every line is trade coming in or going out (road tolls, gate tolls, customs, transit): none under a siege. */
+export const SIEGE_CLOSED_SOURCES = Object.freeze(['Toll Revenue', 'Gate Tolls', 'Port Duties', 'Entrepôt Trade']);
 
 const SIEGE = 'crisis: under_siege';
 /** The originals and their twins, keyed by the original's text (the GRAIN pattern above). '' twins are not texts. */
@@ -103,14 +114,22 @@ export const INCOME_STATE_SIBLINGS = Object.freeze({
   [QUARRY_LINE]: Object.freeze([Object.freeze({ text: QUARRY_LINE, needs: Object.freeze(['institution: quarry']), excludes: Object.freeze([SIEGE]) })]),
   [MASONS_LINE]: Object.freeze([Object.freeze({ text: MASONS_LINE, needs: Object.freeze(['imports']), excludes: Object.freeze([SIEGE]) })]),
   [TITHES_RENTS_LINE]: Object.freeze([TITHES_RENTS_SET[0], Object.freeze({ text: TITHES_RENTS_PLAIN_LINE, twinOf: TITHES_RENTS_LINE })]),
+  [TIMBER_LINE]: Object.freeze([
+    Object.freeze({ text: TIMBER_LINE }),
+    Object.freeze({ text: TIMBER_MANAGED_LINE, twinOf: TIMBER_LINE }),
+    Object.freeze({ text: TIMBER_PLAIN_LINE, twinOf: TIMBER_LINE }),
+  ]),
+  [TIMBER_BOUGHT_LINE]: Object.freeze([Object.freeze({ text: TIMBER_BOUGHT_LINE, excludes: Object.freeze([SIEGE]) })]),
+  [MARKET_DAY_LINE]: MARKET_DAY_SET,
 });
 
 /**
  * The income line the finished record makes true: the original, its declared twin, or ''.
  * @param {string} desc the line the branch printed
  * @param {{ roster: ReadonlyArray<string>, siege: boolean, imports: ReadonlyArray<unknown>, exports: ReadonlyArray<unknown>,
- *   chains: ReadonlyArray<{ label?: unknown, status?: unknown }>, top: boolean }} f the roster's names lower-cased; the
- *   siege; the final trade lists; the chains with their states; whether the row is the largest source
+ *   chains: ReadonlyArray<{ label?: unknown, status?: unknown }>, top: boolean, source?: string, managedForest?: boolean }} f the
+ *   roster's names lower-cased; the siege; the final trade lists; the chains with their states; whether the row is the
+ *   largest source; its source label; whether a managed or shipbuilding forest stands
  * @returns {string}
  */
 export function trueIncomeDesc(desc, f) {
@@ -120,6 +139,7 @@ export function trueIncomeDesc(desc, f) {
   const bought = (/** @type {RegExp} */ re) => f.imports.slice(0, 10).some((x) => re.test(String(x)));
   const sold = (/** @type {RegExp} */ re) => f.exports.some((x) => re.test(String(x)));
   const impaired = (/** @type {RegExp} */ re) => f.chains.some((c) => re.test(String(c?.label ?? '')) && c?.status === 'impaired');
+  if (f.siege && SIEGE_CLOSED_SOURCES.includes(String(f.source ?? ''))) return '';
   switch (desc) {
     case ALCHEMY_TRADE_LINE: case ALCHEMIST_SUPPLEMENTS_LINE:
       if (impaired(/^(?:Alchemy|Herbalism)\b/)) return REMEDIES_SHORT_LINE;
@@ -146,6 +166,8 @@ export function trueIncomeDesc(desc, f) {
     case QUARRY_LINE: return has(/quarr/) && !f.siege ? desc : '';
     case MASONS_LINE: return has(/mason|stonecut/) && !f.siege && bought(/stone|masonry|marble/i) ? desc : '';
     case TITHES_RENTS_LINE: return f.top ? desc : TITHES_RENTS_PLAIN_LINE;
+    case TIMBER_LINE: return has(/sawmill|lumber/) ? desc : f.managedForest ? TIMBER_MANAGED_LINE : TIMBER_PLAIN_LINE;
+    case TIMBER_BOUGHT_LINE: case MARKET_DAY_LINE: return f.siege ? '' : desc;
     default: return desc;
   }
 }

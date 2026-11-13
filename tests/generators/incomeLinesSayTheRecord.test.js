@@ -7,7 +7,9 @@
  *
  * THE GUARDS are the reader's own towns, born in the reader's shape (the configuration panel's, every other dial
  * random): in each, the cured line must not print. THE ANCHOR is a town where the original is true and still prints.
- * THE LAW runs over births of every crisis the lines can print under. Red at the lane's base (995293e81).
+ * THE LAW runs over births of every crisis the lines can print under; it carries the measuring seat's census lines in
+ * this family too (CENSUS-2: sawmilling with no sawmill; tolls, customs and transit trade under a siege). Red at the
+ * lane's base (995293e81).
  */
 import { beforeAll, describe, expect, test } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -17,7 +19,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import {
   ALCHEMY_TRADE_LINE, GRAIN_BOUGHT_LINE, IRON_IMPORTED_LINE, LOCAL_COAL_LINE, LOCAL_COAL_SOLD_LINE, QUARRY_LINE, FISH_EXPORT_LINE,
   WOOL_LOCAL_LINE, TITHES_RENTS_LINE, TITHES_RENTS_PLAIN_LINE, REMEDIES_SHORT_LINE, METAL_WORKED_LINE, WOOL_LOCAL_WORKED_LINE,
-  ALCHEMY_UNDER_SIEGE_LINE, INCOME_STATE_SIBLINGS,
+  ALCHEMY_UNDER_SIEGE_LINE, INCOME_STATE_SIBLINGS, SIEGE_CLOSED_SOURCES,
 } from '../../src/generators/economy/incomeLineSiblings.js';
 
 beforeAll(async () => { await loadGenerationLawPayloads(); });
@@ -77,7 +79,10 @@ describe('the law, over births of every crisis the lines print under', () => {
         if (/feeds the smithy/.test(d)) expect(has(/smith/), `${seed}: ${d}`).toBe(true);
         if (/^Local quarry\b/.test(d)) expect(has(/quarr/), `${seed}: ${d}`).toBe(true);
         if (d === FISH_EXPORT_LINE) expect(has(/fisher|fishing/), `${seed}: ${d}`).toBe(true);
+        if (/sawmilling/.test(d)) expect(has(/sawmill|lumber/), `${seed}: ${d}`).toBe(true);
       }
+      // the census's siege lines (CENSUS-2): tolls on the roads, at the gates, customs and transit trade print no sentence
+      for (const e of s.economicState.incomeSources) if (siege && SIEGE_CLOSED_SOURCES.includes(e.source)) expect(e.desc, `${seed}: ${e.source}`).toBe('');
     }));
     expect(alch, 'an alchemist line printed somewhere in the corpus').toBeGreaterThan(0);
     expect(siegeRows, 'sieges were read').toBeGreaterThan(0);
@@ -92,7 +97,7 @@ describe('the declarations', () => {
       expect(set[0].text).toBe(key);
       for (const twin of set.slice(1)) expect(twin.twinOf).toBe(key);
     }
-    for (const name of ['ALCHEMY_TRADE_LINE', 'ALCHEMIST_SUPPLEMENTS_LINE', 'GRAIN_BOUGHT_LINE', 'WOOL_LOCAL_LINE', 'WOOL_BOUGHT_LINE', 'LOCAL_ORE_LINE', 'IRON_IMPORTED_LINE', 'FISH_EXPORT_LINE', 'QUARRY_LINE', 'MASONS_LINE']) {
+    for (const name of ['ALCHEMY_TRADE_LINE', 'ALCHEMIST_SUPPLEMENTS_LINE', 'GRAIN_BOUGHT_LINE', 'WOOL_LOCAL_LINE', 'WOOL_BOUGHT_LINE', 'LOCAL_ORE_LINE', 'IRON_IMPORTED_LINE', 'FISH_EXPORT_LINE', 'QUARRY_LINE', 'MASONS_LINE', 'TIMBER_LINE', 'TIMBER_BOUGHT_LINE']) {
       expect(site, name).toMatch(new RegExp(`\\b${name}\\b,?(?:\\s*//.*)?$`, 'm'));
     }
   });
