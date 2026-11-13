@@ -15,7 +15,7 @@ import { nativeSemanticName } from '../domain/content/customContentSemanticAutho
 import { getUpgradeOpportunities, mandatedRoleCandidate } from './economicGenerator.js';
 import { random as _rng, pick as ctxPick, getActiveRng } from '../kernel/rngContext.js';
 import { drawUnique } from './hookVariety.js';
-import { themeOfText } from '../domain/hookThemes.js';
+import { themeOfText, UNTYPED } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
@@ -41,7 +41,7 @@ import {
   NPC_WANTS,
   NPC_FACTION_LOYALTY,
   dealingLineFor,
-  NPC_PRESENTATION_MODES, NPC_HOOK_SIBLINGS,
+  NPC_PRESENTATION_MODES, NPC_HOOK_SIBLINGS, MILITARY_HOOKS_TRUE_OF_ANY_HOLDER, // R2-CODE-A-2: one line, so no cited line moves
 } from '../data/npcData.js';
 
 // pickFromArray — uses seeded PRNG when available
@@ -523,12 +523,12 @@ const generatePlotHook = (category = 'other', config = {}, hookRegistry, facts =
     const biasedCategories = [...new Set(stresses.map(s => STRESS_TO_CATEGORY[s]).filter(Boolean))];
     if (biasedCategories.length > 0) {
       const biasedCat = pickFromArray(biasedCategories);
-      if (NPC_FACTION_LOYALTY[biasedCat]) return drawLoyalty(NPC_FACTION_LOYALTY[biasedCat], hookRegistry, facts);
+      if (NPC_FACTION_LOYALTY[biasedCat]) { const drawn = drawLoyalty(NPC_FACTION_LOYALTY[biasedCat], hookRegistry, facts); return biasedCat === 'military' && category !== 'military' && !MILITARY_HOOKS_TRUE_OF_ANY_HOLDER.has(drawn) ? ownPoolHook(drawn, category, hookRegistry, facts) : drawn; } // R2-CODE-A-2: a soldier's line is the military's own; one line, so no cited line moves
     }
   }
 
   return drawLoyalty(NPC_FACTION_LOYALTY[category] || NPC_FACTION_LOYALTY.other, hookRegistry, facts);
-};
+}; /** R2-CODE-A-2 (the cold list REVIEW-W2A-3, MEDIUM #676 #678 #968 #969): A SOLDIER'S LINE ON A HOLDER WHO COMMANDS NO FORCE. The crisis bias above pulls a holder outside the military pool into it, and the drawn line presumes their soldiers, their armoury, their patrol route. It is refused for that holder (`npcData.js :: MILITARY_HOOKS_TRUE_OF_ANY_HOLDER` names the two lines that are true of anyone) and resolves DRAW-FREE into the holder's own pool: the row at the drawn row's place, else the declared draw's own resolution, refusing every text the roster holds; then the generic pool; else the drawn line stands. The roll and the drawn text in the registry are unchanged, so no town without the false line moves; the line kept is registered. @param {string} drawn @param {string} category @param {any} reg @param {any} facts @returns {string} */ const ownPoolHook = (drawn, category, reg, facts) => { const at = Math.max(0, NPC_FACTION_LOYALTY.military.findIndex((l) => lineText(l) === drawn)); for (const pool of [NPC_FACTION_LOYALTY[category] || NPC_FACTION_LOYALTY.other, NPC_FACTION_LOYALTY.other]) { const text = drawDeclared(pool, { draw: (p) => p[at % p.length], facts, held: reg?.titles, key: `${getActiveRng()?.seed ?? ''}::npcData:NPC_FACTION_LOYALTY`, poolId: 'npcData:NPC_FACTION_LOYALTY', surface: 'npcs', drawKind: 'T' }).text; if (typeof text === 'string') { reg?.titles?.add(text); const theme = themeOfText(text); if (theme && theme !== UNTYPED && reg?.themes instanceof Set) reg.themes.add(theme); return text; } } return drawn; };
 
 /** THE PERSON HOOK — one line of the NPC hook pool under `hookPool` (people/poolMap.js :: hookPoolFor),
  * refusing a held text, the wet line resolved through its declared sibling set (CENSUS-1c: the F5 inland
