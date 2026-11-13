@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "e1f821db38772bf98d7e3571b25c96f6638b1390",
-  "measuredBy": "COHERENCE-POWERS-5",
+  "measuredAtSha": "2cb3aab29c5abb5750156701f784650041a9fddf",
+  "measuredBy": "STYLE-2-MERGE-10",
   "date": "2026-11-13",
-  "note": "the fifth seat added seatHolderCard (6), seatWordsOnce (8), seatHolderOnThePage (2) and successionClaimants N4 (1) titles",
-  "files": 3224,
-  "parked": 397,
-  "credited": 2827,
-  "titles": 29206,
-  "suiteTitles": 7902
+  "note": "point 47 COHERENCE-AGREE: the lane adds test files (3224 -> 3234); credited/titles re-measured on the merged tree",
+  "files": 3234,
+  "parked": 400,
+  "credited": 2834,
+  "titles": 29300,
+  "suiteTitles": 7942
 }
