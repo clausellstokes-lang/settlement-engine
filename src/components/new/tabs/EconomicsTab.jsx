@@ -757,11 +757,15 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
 const shareWords = (x, bands, top) => (bands.find(([under]) => x < under) || [0, top])[1];
 const GROWN_BANDS = Object.freeze([[0.18, 'less than a fifth'], [0.23, 'about a fifth'], [0.29, 'about a quarter'], [0.42, 'about a third'], [0.58, 'about half'], [0.71, 'about two parts in three'], [0.82, 'about three parts in four']]);
 const BROUGHT_BANDS = Object.freeze([[0.4, 'a little of the rest'], [0.6, 'about half the rest'], [0.9, 'most of the rest']]);
-/** @param {number} pct the record's residual share of the need left unmet; a whole sentence, the season ahead last */
-const shortWords = (pct) => (pct <= 0 ? 'Between them, nobody goes short.'
-  : pct <= 5 ? 'A few households still go short, and a bad season would leave more of them hungry.'
-  : pct <= 15 ? 'Some households still go short, and a bad season would leave more of them hungry.'
-  : pct <= 35 ? 'Many households go short, and a bad season would bring real hunger.'
+/**
+ * @param {number} pct the record's residual share of the need left unmet; a whole sentence, the season ahead last
+ * @param {boolean} [famine] a famine in force (`facts/famine.js :: famineOf`): the bad season is not ahead, it is here
+ * (W2-C-LEAVES item 4(a); the cold list REVIEW-W2A-3 #161: "a bad season would bring real hunger" under a famine)
+ */
+const shortWords = (pct, famine = false) => (pct <= 0 ? 'Between them, nobody goes short.'
+  : pct <= 5 ? (famine ? 'A few households still go short, and hunger is already here.' : 'A few households still go short, and a bad season would leave more of them hungry.')
+  : pct <= 15 ? (famine ? 'Some households still go short, and hunger is already here.' : 'Some households still go short, and a bad season would leave more of them hungry.')
+  : pct <= 35 ? (famine ? 'Many households go short, and hunger is already here.' : 'Many households go short, and a bad season would bring real hunger.')
   : 'Most households go short, and hunger is already here.');
 
 /**
@@ -780,7 +784,7 @@ function foodSentence(s, eco, fb, fbal, foodBar, foodDeficit, foodSurplus) {
     const over = fb.surplus / Math.max(1, fb.dailyNeed);
     return `${name} grows ${over < 0.1 ? 'a little more than it eats' : over < 0.3 ? 'more than it eats' : 'far more than it eats'}, with some to put by against a bad year.`;
   }
-  const short = shortWords(fbal.deficitPct);
+  const short = shortWords(fbal.deficitPct, famineOf(s).famine);
   if (!(fb.importCoverage > 0) || !foodComesByTrade(eco)) return `No food comes into ${name} by trade.${magic} ${short}`;
   const grown = shareWords(fb.dailyProduction / Math.max(1, fb.dailyNeed), GROWN_BANDS, 'nearly all');
   const brought = shareWords(fb.importCoverage / (fb.rawDeficit || fb.importCoverage), BROUGHT_BANDS, 'nearly all the rest');
@@ -792,6 +796,7 @@ export default React.memo(EconomicsTab);
 // COHERENCE-AGREE-4 (item 3′): at the end of the file so no line-keyed register row above it moves.
 import { NORMALLY_YIELDS, chainYieldRefused } from '../../../domain/chainYield.js';
 import { chainPrintName } from '../../../domain/display/chainPrintName.js'; // COHERENCE-AGREE-6 (F1): what a chain prints under
+import { famineOf } from '../../../domain/facts/famine.js'; // W2-C-LEAVES item 4(a): the famine's one home
 
 /**
  * W2-C-LEAVES item 4(a) (2026-11-13; the cold list REVIEW-W2A-3 #995, HIGH: "Lagomagnum grows about a quarter of what it
