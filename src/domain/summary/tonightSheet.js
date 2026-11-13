@@ -36,6 +36,7 @@ import { crisisSummaryForSurface } from '../crisis/crisisSummaryVantage.js';
 import { CRISIS_NOUN, LINE_ROLE_CLAUSE } from '../crisis/crisisHooks.js';
 import { powerNameInProse } from '../display/governanceAccount.js';
 import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
+import { keeperFormOf, seatKeeperOf } from '../people/seatKeeper.js';
 
 /**
  * THE ONE COPY CONSTANT for the sheet, on every surface that prints it.
@@ -479,6 +480,13 @@ function peopleOf(source) {
     .sort((a, b) => (powerOf(b.npc) - powerOf(a.npc)) || (a.index - b.index));
   /** @type {TonightPerson[]} */
   const out = [];
+  // R2-CODE-B round 3 (the increment's #pf-84 #pf-720, the chair's ruling): the keeper of an EMPTY seat is styled as the
+  // Power tab styles it ("Acting First Magnate"), from the one home the powers lane holds (people/seatKeeper.js), never by
+  // the bare title of the office no one holds.
+  const emptySeatKeeper = seatKeeperOf(source);
+  const emptySeatForm = emptySeatKeeper ? keeperFormOf(source) : '';
+  /** @param {TonightNpc} npc @returns {string} */
+  const roleOf = (npc) => (emptySeatKeeper && emptySeatForm && emptySeatKeeper.id && emptySeatKeeper.id === npc.id ? emptySeatForm : clean(npc.role || npc.title));
   /** @param {{ npc: TonightNpc, index: number }} row @param {'seat'|'secret'|'cleric'|'cast'} why @param {string} line @param {string} [castLabel] @param {'want'|'secret'|'temperament'} [says] @param {{ castId: string, castKind: string }} [castOf] */
   const add = (row, why, line, castLabel, says = why === 'secret' ? 'secret' : 'want', castOf = undefined) => {
     const name = clean(row.npc.name);
@@ -491,7 +499,7 @@ function peopleOf(source) {
       return;
     }
     if (out.length >= VOICE_SLOTS.length) return; // three people; the fallbacks only where the cast is short
-    out.push({ name, role: clean(row.npc.role || row.npc.title), why, ...(castLabel ? { castLabel } : {}), ...(castOf || {}), line, says, sourcePath: `npcs[${row.index}]` });
+    out.push({ name, role: roleOf(row.npc), why, ...(castLabel ? { castLabel } : {}), ...(castOf || {}), line, says, sourcePath: `npcs[${row.index}]` });
   };
 
   // THE CAST FIRST (docs/DESIGN_CRISIS_TAB.md): slot by slot, the worst crisis's holder first.
