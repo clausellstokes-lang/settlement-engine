@@ -684,8 +684,7 @@
    ["market", "after-release", "The Market Guild"]
   ],
   "src/data/powerSiblings.js": [
-   ["temple", "after-release", "The church wants approval rights over market day activities. The village reeve disagrees."],
-   ["temple", "after-release", "The church wants approval rights over who may trade and when. The village reeve disagrees."]
+   ["temple", "after-release", "The church wants approval rights over market day activities. The village reeve disagrees."]
   ],
   "src/data/resourceChains.js": [
    ["mill", "after-release", "Access to external mill"]
