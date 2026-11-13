@@ -92,6 +92,25 @@ export function secondHomePieces(v, out = []) {
   return out;
 }
 
+/**
+ * A name in ANOTHER SPELLING (COHERENCE-VEIL-8; REVIEW-VEIL-6's twelfth): lower case, every run of characters
+ * that are not a letter or a digit one '_', none at either end. SQL twin: migration 212 :: _gallery_veil_fold.
+ * @param {unknown} t @returns {string}
+ */
+export const foldName = (t) => String(t ?? '').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+
+/**
+ * The text, folded, holds the name, folded, between '_' boundaries, outside every open name (folded) that holds
+ * it. SQL twin: _gallery_veil_folded_name.
+ * @param {string} t @param {string} f the name, folded @param {ReadonlyArray<string>} opens @returns {boolean}
+ */
+function foldedHolds(t, f, opens) {
+  if (!f) return false;
+  let hay = `_${foldName(t)}_`;
+  for (const o of opens) hay = hay.split(`_${o}_`).join('_#_');
+  return hay.includes(`_${f}_`);
+}
+
 /** @param {unknown} text @param {string[]} pieces @returns {boolean} */
 const embedsAny = (text, pieces) => typeof text === 'string' && pieces.some(p => text.includes(p));
 
@@ -214,13 +233,43 @@ export function withholdSecondHomes(s, src, gone, openNames, houseFields) {
   for (const c of (econ0 && Array.isArray(econ0.activeChains) ? econ0.activeChains : []).filter(isRec)) {
     for (const x of Array.isArray(c.processingInstitutions) ? c.processingInstitutions : []) if (typeof x === 'string' && hiddenName(x)) named.add(x);
   }
+  // the open names, folded: every house still listed and every power shown (a shown power is not reached); each
+  // hidden name with the open names that hold it (blanked before a folded search: an open name is not the hidden one)
+  const ps = recAt(s, 'powerStructure');
+  const powers = (ps && Array.isArray(ps.factions) ? ps.factions : []).filter(f => isRec(f) && f.hidden !== true).map(f => `${str(f.faction)} `);
+  const openFolds = [...openNames, ...powers].map(foldName).filter(Boolean);
+  const forms = [...named].map((g) => {
+    const f = foldName(g);
+    return { g, f, opens: [...new Set(openFolds.filter(o => o !== f && `_${o}_`.includes(`_${f}_`)))] };
+  });
+  /** @param {string} t @returns {boolean} the text names a house removed whole, in its own spelling or folded */
+  const namesText = (t) => forms.some(h => t.includes(h.g) || foldedHolds(t, h.f, h.opens));
   /** @param {unknown} v @returns {boolean} */
   const names = (v) => {
-    if (typeof v === 'string') { for (const g of named) if (v.includes(g)) return true; return false; }
+    if (typeof v === 'string') return namesText(v);
     if (Array.isArray(v)) return v.some(names);
     if (isRec(v)) return Object.values(v).some(names);
     return false;
   };
+  // REVIEW-VEIL-6's twelfth: the engine's two rosters of house names (lower-cased at birth) lose every entry that
+  // is such a name (an entry an open house or a shown power answers to stays)
+  const namedFolds = new Set(forms.map(h => h.f));
+  const openSet = new Set(openFolds);
+  const sp0 = recAt(econ0 || {}, 'safetyProfile');
+  for (const inst of [recAt(recAt(econ0 || {}, 'compound') || {}, 'inst'), recAt(recAt(sp0 || {}, 'compound') || {}, 'inst')]) {
+    if (inst && Array.isArray(inst.names)) inst.names = inst.names.filter(x => !(typeof x === 'string' && namedFolds.has(foldName(x)) && !openSet.has(foldName(x))));
+  }
+  // N4: the name inside the economy's fixed prose: an income source whose label names it is withheld whole, one
+  // whose description names it loses the description, the safety profile's description that names it goes
+  if (econ0 && Array.isArray(econ0.incomeSources)) {
+    econ0.incomeSources = econ0.incomeSources.filter(r => !(isRec(r) && names(r.source))).map((r) => {
+      if (!isRec(r) || !names(r.desc)) return r;
+      const next = { ...r };
+      delete next.desc;
+      return next;
+    });
+  }
+  if (sp0 && names(sp0.safetyDesc)) delete sp0.safetyDesc;
   const econ = recAt(s, 'economicState');
   if (econ && Array.isArray(econ.activeChains)) {
     econ.activeChains = econ.activeChains.flatMap((c) => {
@@ -247,6 +296,32 @@ export function withholdSecondHomes(s, src, gone, openNames, houseFields) {
       }
       return [next];
     });
+  }
+  // the chair's ruling (a): last, every string of the projection that names a house removed whole leaves it (a list
+  // loses the entry, a record the key); the joins and the town's name stay. SQL twin: _gallery_veil_sweep.
+  sweepNames(s, namesText, true);
+}
+
+/** Keys the sweep never takes: the joins of a tie. A card's own `id` beside its `name`, and the town's `name`, stay too. */
+const SWEEP_KEEPS = Object.freeze(['from', 'to', 'npc1Id', 'npc2Id']);
+
+/**
+ * In place: every string leaf that names a hidden house leaves its record or list.
+ * @param {unknown} v @param {(t: string) => boolean} namesText @param {boolean} isRoot
+ */
+function sweepNames(v, namesText, isRoot) {
+  if (Array.isArray(v)) {
+    for (let i = v.length - 1; i >= 0; i -= 1) {
+      if (typeof v[i] === 'string' && namesText(v[i])) v.splice(i, 1);
+      else if (v[i] && typeof v[i] === 'object') sweepNames(v[i], namesText, false);
+    }
+  } else if (isRec(v)) {
+    for (const [k, x] of Object.entries(v)) {
+      if (typeof x === 'string') {
+        const kept = (isRoot && k === 'name') || SWEEP_KEEPS.includes(k) || (k === 'id' && 'name' in v);
+        if (!kept && namesText(x)) delete v[k];
+      } else if (x && typeof x === 'object') sweepNames(x, namesText, false);
+    }
   }
 }
 

@@ -247,11 +247,16 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
     for (const dm of [false, true]) {
       const pub = veil.galleryPayloadFor(record, { shareDm: dm, memberOverrides: {} });
       const eyes = everyEyeShut(pub);
-      for (const mode of ['live', 'snapshot']) {
+      // COHERENCE-VEIL-8, the chair's ruling (a): a third share a reveal, `houses`: the houses hidden whole and EVERY
+      // OTHER EYE OPENED by hand (each default opened), so the name of a hidden house in a home a grouping or an eye
+      // would otherwise remove (a person's goal, the criminal houses' list, the public prose) is seen; only the names,
+      // the booleans and what is taken count on it (the rest is open on it)
+      const houseEyes = new Set(veil.curateModelFor(pub, []).sections.flatMap((sec) => sec.cards.flatMap((c) => (c.whole ? [c.whole.address] : []))));
+      for (const mode of ['live', 'snapshot', 'houses']) {
         n += 1;
         const id = `5ec0de60-0000-0000-0000-${String(n).padStart(12, '0')}`;
-        const ov = veil.writeShareVeil({}, eyes.map((a) => ({ address: a, hidden: true })),
-          mode === 'snapshot' ? { mode, at: '2026-11-01T00:00:00.000Z', snapshot: pub } : { mode, at: '2026-11-01T00:00:00.000Z' });
+        const ov = veil.writeShareVeil({}, eyes.map((a) => ({ address: a, hidden: mode === 'houses' ? houseEyes.has(a) : true })),
+          mode === 'snapshot' ? { mode, at: '2026-11-01T00:00:00.000Z', snapshot: pub } : { mode: 'live', at: '2026-11-01T00:00:00.000Z' });
         await db.query(`insert into public.settlements (id, user_id, name, tier, data, is_public, public_slug, published_at, unlisted_slug, visibility,
             gallery_member_overrides, gallery_share_dm, gallery_importable)
           values ($1, $2, $3, $4, $5, true, $6, now(), $7, 'unlisted', $8, $9, true)`,
@@ -301,13 +306,13 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
             else if (isRec(v)) for (const [k, x] of Object.entries(v)) { walk(k, `${p ? `${p}.` : ''}<key>`); walk(x, p ? `${p}.${k}` : k); }
             else if (typeof v === 'string') {
               const fv = fold(v);
-              for (const t of fv.matchAll(TOKEN_RE)) sent.push(`${label} dm=${dm} ${mode} ${read}: ${ORIGIN.get(t[1]) || '?'} (${v.includes(MARK(t[1])) ? 'its own spelling' : 'folded'}) at ${p}`);
+              if (mode !== 'houses') for (const t of fv.matchAll(TOKEN_RE)) sent.push(`${label} dm=${dm} ${mode} ${read}: ${ORIGIN.get(t[1]) || '?'} (${v.includes(MARK(t[1])) ? 'its own spelling' : 'folded'}) at ${p}`);
               for (const h of names) {
                 let how = v.includes(h.nm) ? 'its own spelling' : null;
                 if (!how) { let fb = fv; for (const o of openFold) if (o !== h.f && o.includes(h.f)) fb = fb.split(o).join('#'); if (h.re.test(fb)) how = 'folded, slugged or an id'; }
                 if (how) sent.push(`${label} dm=${dm} ${mode} ${read}: the house "${h.nm}", hidden whole, or its name in a chain (${how}), at ${p}`);
               }
-              for (const e of effects) if (`_${fv}_`.includes(`_${e}_`)) sent.push(`${label} dm=${dm} ${mode} ${read}: an event's lasting effect, shut, in any case, at ${p}`);
+              if (mode !== 'houses') for (const e of effects) if (`_${fv}_`.includes(`_${e}_`)) sent.push(`${label} dm=${dm} ${mode} ${read}: an event's lasting effect, shut, in any case, at ${p}`);
             }
           };
           walk(body, '');
@@ -323,7 +328,7 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
               if (isRec(at2)) for (const f of FIVE) if (at2[f] === true && !listed[f]) sent.push(`${label} dm=${dm} ${mode} ${read}: the boolean ${f}, raised only by a house the response does not list`);
             }
             for (const r of Array.isArray(t.economicState.incomeSources) ? t.economicState.incomeSources : []) {
-              if (isRec(r) && r.isCriminal === true) sent.push(`${label} dm=${dm} ${mode} ${read}: a criminal income row (${r.source}), its groupings shut`);
+              if (mode !== 'houses' && isRec(r) && r.isCriminal === true) sent.push(`${label} dm=${dm} ${mode} ${read}: a criminal income row (${r.source}), its groupings shut`);
             }
             // and nothing open is taken: every income row that is not criminal stays (the record's, by label)
             const openRows = (isRec(record.economicState) && Array.isArray(record.economicState.incomeSources) ? record.economicState.incomeSources : [])
@@ -338,7 +343,7 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
             const roleless = new Set(t.npcs.filter((x) => isRec(x) && typeof x.id === 'string' && !('role' in x)).map((x) => x.id));
             for (const r of t.relationships.filter(isRec)) {
               for (const [end, key] of [[r.from ?? r.npc1Id, 'npc1Role'], [r.to ?? r.npc2Id, 'npc2Role']]) {
-                if (roleless.has(String(end)) && typeof r[key] === 'string') sent.push(`${label} dm=${dm} ${mode} ${read}: a tie's copy of a role its person's entry withholds, at relationships[].${key}`);
+                if (mode !== 'houses' && roleless.has(String(end)) && typeof r[key] === 'string') sent.push(`${label} dm=${dm} ${mode} ${read}: a tie's copy of a role its person's entry withholds, at relationships[].${key}`);
               }
             }
           }
@@ -378,8 +383,8 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
       }
     }
     expect(markers).toBeGreaterThan(1000);
-    expect(reads).toBe(TOWNS.length * 2 * 4 * 6);
-    expect(pages).toBe(TOWNS.length * 2 * 4);
+    expect(reads).toBe(TOWNS.length * 2 * 6 * 6);
+    expect(pages).toBe(TOWNS.length * 2 * 6);
     expect([...new Set(sent)]).toEqual([]);
   }, TOWN_TIMEOUT_MS);
 

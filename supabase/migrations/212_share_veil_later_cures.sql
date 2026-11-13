@@ -41,6 +41,10 @@
 --       And the criminal income row (economicState.incomeSources[] with isCriminal), whose label is made from the
 --       criminal houses' list and whose sentence carries the capture figure, is withheld whole where the
 --       Criminal-architecture or the Capture-reading grouping is shut (_gallery_veil_apply).
+--   (16) A HIDDEN NAME, ANYWHERE (COHERENCE-VEIL-8; the chair's ruling (a)): last, every string of the projection that
+--       names a house removed whole, in its own spelling or folded, leaves it (_gallery_veil_sweep): a person's goal,
+--       secret, role or title that names it, a tie's role, the criminal houses' list, a summary sentence, the public
+--       prose. The joins and the town's name stay; an open house or a shown power whose name holds it is not it.
 --   (13) A HIDDEN TEXT IN ANOTHER SPELLING (COHERENCE-VEIL-8): a second home's text is matched in any case, and the
 --       legacy annotation (history.legacyAnnotations[].annotation), which embeds its event's first lasting effect
 --       with the first letter lower-cased, goes when it embeds a shut string of an event.
@@ -59,12 +63,12 @@
 --       Reveal-DM projection of the gallery read and the import, beside 211's decrees and dmLayer; before, every
 --       reader and every importer of such a share received both.
 --
--- NEW: thirteen helpers (_gallery_veil_pieces, _embeds, _fold, _folded_name, _names, _hidden_name, _sources,
+-- NEW: fourteen helpers (_gallery_veil_pieces, _embeds, _fold, _folded_name, _names, _sweep, _hidden_name, _sources,
 -- _tie_pieces, _second_homes, _member_revealed, _roster_members, _tie_roles, _roster_splice). RESTATED, each as 211's statement plus the cure:
 -- _gallery_veil_card, _gallery_veil_apply, _gallery_apply_member_overrides, get_gallery_dossier and
 -- import_gallery_dossier (their grants restated as 211 states them). No helper of 211 changes its
 -- signature, so nothing 211 created is left behind. 211's section 7 is restated last: no _gallery_veil*
--- helper is callable by public, anon or authenticated (53 in all). NOT CHANGED: get_unlisted_dossier,
+-- helper is callable by public, anon or authenticated (54 in all). NOT CHANGED: get_unlisted_dossier,
 -- get_gallery_map and every other function. No table, column, constraint, policy or row.
 --
 -- COUPLED CLIENT TWIN: src/domain/display/gallerySecondHomes.js (the second homes, (9)), called by
@@ -185,6 +189,27 @@ returns boolean language sql immutable as $$
                     and (position(g.nm in (x.j #>> '{}')) > 0 or public._gallery_veil_folded_name(x.j #>> '{}', g.nm, g.opens)))
 $$;
 
+-- [212: NEW] public._gallery_veil_sweep
+-- COHERENCE-VEIL-8, the chair's ruling (a): a hidden thing's name in any spelling, ANYWHERE. Every string of the
+-- projection that names a house removed whole (_gallery_veil_names: its own spelling, or folded) leaves it: a list
+-- loses the entry, a record the key (a composed sentence goes whole, never with a hole). The joins stay (`from`,
+-- `to`, `npc1Id`, `npc2Id`, a card's own `id` beside its `name`), and the town's own `name`. `pre` is a quick
+-- filter (the first word of each name, lower-cased), a superset of what _gallery_veil_names finds.
+create or replace function public._gallery_veil_sweep(v jsonb, named jsonb, pre text, is_root boolean)
+returns jsonb language sql immutable as $$
+  select case jsonb_typeof(v)
+    when 'object' then (
+      select coalesce(jsonb_object_agg(k, case when jsonb_typeof(x) in ('object', 'array') then public._gallery_veil_sweep(x, named, pre, false) else x end), '{}')
+        from jsonb_each(v) e(k, x)
+       where not (jsonb_typeof(x) = 'string' and not (is_root and k = 'name') and k not in ('from', 'to', 'npc1Id', 'npc2Id')
+                  and not (k = 'id' and v ? 'name') and lower(x #>> '{}') ~ pre and public._gallery_veil_names(x, named)))
+    when 'array' then (
+      select coalesce(jsonb_agg(case when jsonb_typeof(x) in ('object', 'array') then public._gallery_veil_sweep(x, named, pre, false) else x end order by o), '[]')
+        from jsonb_array_elements(v) with ordinality y(x, o)
+       where not (jsonb_typeof(x) = 'string' and lower(x #>> '{}') ~ pre and public._gallery_veil_names(x, named)))
+    else v end
+$$;
+
 -- [212: NEW] public._gallery_veil_hidden_name
 -- A processing name that a house removed whole answers to, and no house left open does: that house's name. A
 -- house answers to its own name or by the engine's processor match (computeActiveChains.js :: fuzzyProcessorMatch:
@@ -275,6 +300,7 @@ declare
   pth text[];
   named jsonb;
   listed text[];
+  pre text;
   fk text;
   kw jsonb;
 begin
@@ -334,7 +360,10 @@ begin
      where jsonb_typeof(c) = 'object' and jsonb_typeof(x) = 'string' and public._gallery_veil_hidden_name(x, gone, open_names)), '{}');
   -- COHERENCE-VEIL-8: each name, with the folded names of the open houses that hold it (blanked before a folded
   -- search: an open name is not the hidden one)
-  open_folds := array(select f from (select public._gallery_veil_fold(o) as f from unnest(open_names) o) q where f <> '');
+  -- the open names: every house still listed, and every power the projection shows (a shown power is not reached)
+  open_folds := array(select f from (select public._gallery_veil_fold(o) as f from unnest(open_names || array(
+      select coalesce(public._gallery_veil_str(f -> 'faction'), '') || ' ' from jsonb_array_elements(case when jsonb_typeof(s #> '{powerStructure,factions}') = 'array' then s #> '{powerStructure,factions}' else '[]' end) f
+       where jsonb_typeof(f) = 'object' and not coalesce(f -> 'hidden' = 'true'::jsonb, false))) o) q where f <> '');
   named := (select coalesce(jsonb_object_agg(nk, coalesce((select jsonb_agg(distinct o) from unnest(open_folds) o
                                                            where o <> public._gallery_veil_fold(nk)
                                                              and position('_' || public._gallery_veil_fold(nk) || '_' in '_' || o || '_') > 0), '[]')), '{}')
@@ -414,6 +443,13 @@ begin
         from jsonb_array_elements(s -> 'simulationTrace') with ordinality x(e, o)
        where not (jsonb_typeof(e) = 'object'
                   and exists (select 1 from jsonb_each(e) z(kk, vv) where kk not in ('causes', 'downstreamEffects') and public._gallery_veil_names(vv, named)))), '[]'));
+  end if;
+  -- COHERENCE-VEIL-8, the chair's ruling (a): the name of a house removed whole leaves every string that holds it,
+  -- anywhere (a person's goal or secret that names it, a role, the criminal houses' list, a summary sentence, the
+  -- public prose): the sweep, last
+  pre := (select string_agg(distinct w, '|') from (select substring(public._gallery_veil_fold(nk) from '^[a-z0-9]+') as w from jsonb_object_keys(named) q(nk)) z where w is not null);
+  if pre is not null then
+    s := public._gallery_veil_sweep(s, named, '(' || pre || ')', true);
   end if;
   return s;
 end $$;
