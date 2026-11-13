@@ -1165,6 +1165,8 @@ export const HISTORY_TEMPLATE_RECORD_DECLARATIONS = Object.freeze({
   economic_disparity: Object.freeze({ needs: Object.freeze(['market']), timeline: true }), // W2-FIX-DATA-HISTORY item A: merchants against labourers, where a market stands
   trade_dispute: Object.freeze({ needs: Object.freeze(['market']), timeline: false }), // W2-FIX-DATA-HISTORY item A: "every merchant and every purse", where a market stands
   market_crash: Object.freeze({ needs: Object.freeze(['market']), timeline: true }), // W2-FIX-DATA-HISTORY item A: a speculative frenzy in goods and property, where a market stands
+  infiltration_fear: Object.freeze({ excludes: Object.freeze(['crisis: infiltrated']), timeline: false }), // W2-FIX-DATA-HISTORY item G (ww-1261): an open hunt for agents, not while the agents go unseen
+  pilgrimage_surge: Object.freeze({ needs: Object.freeze(['institution: temple']), timeline: false }), // W2-FIX-DATA-HISTORY item G (CENSUS-2): the temple's beneficiaries, where a temple stands
 });
 
 /** The stability bands that say the power is settled: a leadership vacuum is false under them (`labelBands.js`). */

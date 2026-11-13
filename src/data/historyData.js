@@ -1137,8 +1137,8 @@ export const HISTORICAL_EVENTS_DATA = [
     ],
     plotHooks: [
       "A would-be heir approaches outsiders to investigate a rival's past",
-      { text: 'The ailing ruler wants a final errand completed before naming a successor', excludes: ['ruler: council', 'crisis: succession_void'] }, // CENSUS-3d unit 6; W2-FIX-DATA-5 (ww-544): no living ruler while the seat stands empty
-      { text: 'Someone is poisoning the ruler slowly, and someone in the household knows', excludes: ['ruler: council', 'crisis: succession_void'] }, // CENSUS-3d unit 6; W2-FIX-DATA-5 (ww-545's sibling): the same
+      { text: 'The ailing ruler wants a final errand completed before naming a successor', excludes: ['ruler: council', 'ruler: elder', 'crisis: succession_void'] }, // CENSUS-3d unit 6; W2-FIX-DATA-5 (ww-544): no living ruler while the seat stands empty; W2-FIX-DATA-HISTORY item G (pf-160): an elders' council has no one ruler to name a successor
+      { text: 'Someone is poisoning the ruler slowly, and someone in the household knows', excludes: ['ruler: council', 'ruler: elder', 'crisis: succession_void'] }, // CENSUS-3d unit 6; W2-FIX-DATA-5 (ww-545's sibling): the same; W2-FIX-DATA-HISTORY item G: the twin carries its sibling's conditions
     ],
     severity: ['minor', 'major'],
   },
@@ -1211,7 +1211,7 @@ export const HISTORICAL_EVENTS_DATA = [
       'Price ceilings on the affected goods still enforced in lean seasons',
     ],
     plotHooks: [
-      { text: 'A warehouse full of the scarce goods is being kept off the market on purpose', needs: ['market'] }, // CENSUS-3d unit 6
+      { text: 'A store of the scarce goods is being kept off the market on purpose', needs: ['market'] }, // CENSUS-3d unit 6; W2-FIX-DATA-HISTORY item G (ww-1230): the goods, not a warehouse the roster may lack (was "A warehouse full of ...")
       'The scarcity was engineered. Someone destroyed the competing supply route',
       'An alternative source exists but the information is being suppressed',
     ],

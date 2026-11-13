@@ -38,6 +38,10 @@
  * trades in a hamlet, a merchant bargaining where no market stands, planks waiting for carts on a road a siege has cut,
  * and an inland fish stall's fish "brought in by cart" at a steady price under a siege.
  *
+ * ITEM G (ROUND-3-CUT-INCREMENT pf-160, ww-1230, ww-1261; CENSUS-2 historyData.js factions): the ailing ruler naming a
+ * successor under an elders' council; a warehouse the roster lacks; an open hunt for agents while the infiltration goes
+ * unseen; the temple's beneficiaries where no temple stands.
+ *
  * THIS FILE REDS WHEN: a cured line prints again in its guard town, or a declaration is dropped or turned.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
@@ -257,4 +261,27 @@ describe('W2-FIX-DATA-HISTORY item F: the arrival and the inland fish stall say 
     expect(String(s.arrivalScene)).not.toContain('Each lane seems to keep to its own trade');
     expect(String(s.arrivalScene)).toMatch(/\S/);
   }, 60_000);
+});
+
+describe('W2-FIX-DATA-HISTORY item G: the succession, the shortage, the purge and the pilgrimage say what the town holds', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  it('the declarations', () => {
+    const rows = HISTORICAL_EVENTS_DATA.find((e) => e.type === 'succession_crisis')?.plotHooks?.filter((h) => typeof h === 'object') || [];
+    for (const r of rows) expect(r.excludes).toEqual(['ruler: council', 'ruler: elder', 'crisis: succession_void']);
+    expect(HISTORY_TEMPLATE_RECORD_DECLARATIONS.infiltration_fear).toEqual({ excludes: ['crisis: infiltrated'], timeline: false });
+    expect(HISTORY_TEMPLATE_RECORD_DECLARATIONS.pilgrimage_surge).toEqual({ needs: ['institution: temple'], timeline: false });
+    expect(JSON.stringify(HISTORICAL_EVENTS_DATA)).not.toContain('A warehouse full of the scarce goods');
+  });
+  for (const [seed, words] of /** @type {const} */ ([
+    ['rpf-hamlet-occupied-13', /The ailing ruler wants a final errand/], // pf-160: a Household Council
+    ['rww-village-under_siege-1', /A warehouse full of the scarce goods/], // ww-1230: no warehouse
+    ['rww-metropolis-infiltrated-1', /Talk of enemy agents in the settlement|enemy agents within the settlement/], // ww-1261: nobody there knows
+  ])) {
+    it(`${seed}: no such line, and the town keeps a tension`, () => {
+      const s = born(seed);
+      // the current tensions (the infiltration's past Purge may stand on the timeline: a town may have hunted agents before)
+      expect(JSON.stringify(s.history.currentTensions)).not.toMatch(words);
+      expect(s.history.currentTensions.length).toBeGreaterThan(0);
+    }, 60_000);
+  }
 });

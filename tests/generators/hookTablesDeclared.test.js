@@ -34,12 +34,13 @@ describe('the history hooks declare what their event does not guarantee', () => 
   // W2-FIX-DATA-HISTORY item C (2026-11-13, the review of the data lane, L4): the occupation's "former occupier officer"
   // excludes an occupation in force ("former" says it is over; re-keyed by cause: 17 → 18 rows).
   // W2-FIX-DATA-HISTORY item E (2026-11-13, CENSUS-2): the plague's healer declares the healer, and the wild magic's
-  // spreading district a town (re-keyed by cause: 18 → 20 rows).
+  // spreading district a town (re-keyed by cause: 18 → 20 rows). Item G (pf-160): the ailing and the poisoned ruler
+  // exclude an elders' council too (re-keyed by cause; still 20 rows).
   it('the twenty declaring rows carry their atoms, every atom declarable', () => {
     const declaring = HISTORY_ROWS.filter(({ row }) => typeof row === 'object');
     expect(declaring.map(({ type, row }) => `${type}: ${[...(row.needs || []), ...(row.excludes || []).map((x) => `no ${x}`)].join(', ')}`)).toEqual([
-      'succession_crisis: no ruler: council, no crisis: succession_void',
-      'succession_crisis: no ruler: council, no crisis: succession_void',
+      'succession_crisis: no ruler: council, no ruler: elder, no crisis: succession_void',
+      'succession_crisis: no ruler: council, no ruler: elder, no crisis: succession_void',
       'economic_disparity: tier: >= town',
       'guild_conflict: guild',
       'guild_conflict: guild',
@@ -71,7 +72,7 @@ describe('the history hooks declare what their event does not guarantee', () => 
       ['someone is poisoning the ruler slowly', { excludes: ['ruler: council'] }],
       ['a hidden ledger documenting wage theft', { needs: ['tier: >= town'] }],
       ['someone is sabotaging both guilds', { needs: ['market'] }],
-      ['a warehouse full of the scarce goods', { needs: ['market'] }],
+      ['a store of the scarce goods', { needs: ['market'] }], // W2-FIX-DATA-HISTORY item G: the hook's words (was "a warehouse full of")
       ['a guard captain is on the payroll', { needs: ['guardPresence'] }],
       ['a ledger names who was warned', { needs: ['market'] }],
       ['a structure meant to hold back the water', { needs: ['navigable'] }],
