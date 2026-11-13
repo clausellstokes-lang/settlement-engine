@@ -26079,7 +26079,6 @@
       },
       "declares": [],
       "lineDeclares": {
-        "crisis: occupied": 2,
         "no crisis: unrest": 3,
         "no ruler: occupier": 1
       },
@@ -38239,14 +38238,15 @@
         "standing": "SOURCE-UNRESOLVED",
         "twoSource": false
       },
-      "declares": [],
+      "declares": [
+        "crisis: occupied"
+      ],
       "lineDeclares": {
-        "crisis: occupied": 3,
         "garrison": 1,
         "no walls": 1,
         "walls": 1
       },
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -38944,11 +38944,11 @@
         "standing": "SOURCE-UNRESOLVED",
         "twoSource": false
       },
-      "declares": [],
-      "lineDeclares": {
-        "crisis: wartime": 1
-      },
-      "undeclared": 5,
+      "declares": [
+        "crisis: wartime"
+      ],
+      "lineDeclares": {},
+      "undeclared": 0,
       "crisisScoped": false
     },
     {

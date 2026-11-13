@@ -4716,14 +4716,14 @@ draws at most one of each.
 5. `[ledger · institution: granary]` {settlement}'s granary tally now decides who gets grain, whatever they can pay, and people keep testing the rule.
 6. `[visitor · market]` {settlement}'s market is open and thin, and the thinness is not seasonal.
 
-**UNDER OCCUPATION** · `occupied`
+**UNDER OCCUPATION** · `occupied` {crisis: occupied}
 1. `[visitor]` Another power's writ runs here. The offices are the same offices; the authority behind them is not.
-2. `[official · crisis: occupied]` {settlement}'s taxes go to the occupier before the town sees them, and its officials take their orders from outside.
+2. `[official]` {settlement}'s taxes go to the occupier before the town sees them, and its officials take their orders from outside.
 3. `[street · walls · garrison]` The garrison is quartered inside the walls, and the town's business is conducted around it.
 4. `[street]` {settlement} is held by somebody it did not choose, and the town's own hall can now only advise.
 5. `[ledger]` Every licence, levy and permission in {settlement} passes a hand that is not the town's before it takes effect.
-6. `[visitor · crisis: occupied]` {settlement} runs as before, but the occupier's officers sit in on its business and make no secret of it.
-7. `[street · no walls · crisis: occupied]` The occupiers are quartered inside the town, and the town's business is conducted around them.
+6. `[visitor]` {settlement} runs as before, but the occupier's officers sit in on its business and make no secret of it.
+7. `[street · no walls]` The occupiers are quartered inside the town, and the town's business is conducted around them.
 
 **POLITICALLY FRACTURED** · `politically_fractured`
 1. `[ledger]` Nothing is decided. The powers each hold enough to block and none hold enough to rule, so the work of governing sits unattended.
@@ -4807,11 +4807,11 @@ draws at most one of each.
 5. `[ledger]` {settlement}'s rolls are wrong in a way the clerks cannot correct: the names are there and the people are not where the names say.
 6. `[visitor]` {settlement}'s enslaved have stopped obeying, and those who own them are afraid.
 
-**WARTIME** · `wartime`
+**WARTIME** · `wartime` {crisis: wartime}
 1. `[ledger]` The town is on a war footing. Grain, iron and men are counted for the campaign now, not for the season.
 2. `[street]` {settlement} lives at the rhythm of a war it is part of. Everything ordinary is scheduled around the levy.
 3. `[visitor]` The trades that matter here now are the ones that supply an army; the rest have been asked to wait.
-4. `[street · crisis: wartime]` {settlement} is at war, and the war has reached the town as absence: the men, the carts, and the ordinary expectation of next year.
+4. `[street]` {settlement} is at war, and the war has reached the town as absence: the men, the carts, and the ordinary expectation of next year.
 5. `[ledger]` {settlement}'s levies and requisitions have become the largest single line in the year, and they are not negotiable.
 6. `[visitor]` {settlement} is short of young men; the old and the boys are doing their work.
 
@@ -6358,9 +6358,9 @@ unchanged.
 4. `[unfolding · gate]` While the gates hold, {settlement} lives off its savings, and the stores are all that count.
 
 **`power_stress`: occupation against stated stability**
-1. `[ledger · crisis: occupied · no crisis: unrest]` {settlement} is under occupation; the streets are quiet because soldiers hold them, not because the town is at peace.
+1. `[ledger · no crisis: unrest]` {settlement} is under occupation; the streets are quiet because soldiers hold them, not because the town is at peace.
 2. `[street · no crisis: unrest]` {settlement} is orderly under foreign soldiers, and its people go about their business with their eyes down.
-3. `[visitor · crisis: occupied · no crisis: unrest]` {settlement} is quiet under occupation: no unrest, and nobody doing anything they were not told to.
+3. `[visitor · no crisis: unrest]` {settlement} is quiet under occupation: no unrest, and nobody doing anything they were not told to.
 4. `[counterforce · no ruler: occupier]` {settlement} is occupied, but its own hall still governs; the occupier takes its tribute and leaves the running to the townsfolk.
 
 **`power_economic`: temple economy under a secular seat** {crisis-scoped}

@@ -67,8 +67,8 @@
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 294245,
-      "gzip": 37614,
+      "raw": 294181,
+      "gzip": 37611,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -79,8 +79,8 @@
       "ceilingGzip": 79355
     },
     "src/data/dossierStateProse/stressors.generated.js": {
-      "raw": 147799,
-      "gzip": 20827,
+      "raw": 147696,
+      "gzip": 20830,
       "ceilingRaw": 258858,
       "ceilingGzip": 57524
     },
