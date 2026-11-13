@@ -112,7 +112,9 @@ describe('InstitutionsTab cards — the provenance badge', () => {
       ...base,
       institutions: [
         ...(base.institutions || []),
-        { id: 'institution.hedge_chapel', name: 'Hedge Chapel', category: 'religious', status: 'active', source: 'forced', tags: [] },
+        // RE-KEYED (R2-CODE-B item 2): a row the USER forced is stored as the deployed client stores every
+        // toggle (assembleInstitutions.js): `source: 'forced'` with `forcedByToggle: true`; the YOU mark reads that.
+        { id: 'institution.hedge_chapel', name: 'Hedge Chapel', category: 'religious', status: 'active', source: 'forced', forcedByToggle: true, tags: [] },
       ],
     };
     const container = renderInstitutions(forced);
@@ -137,7 +139,7 @@ describe('InstitutionsTab cards — the provenance badge', () => {
     // every mark the key promises is a glyph the badge really draws, each with its title
     const marks = [
       institutionBadge({ name: 'A', source: 'required' }),
-      institutionBadge({ name: 'B', source: 'forced' }),
+      institutionBadge({ name: 'B', source: 'forced', forcedByToggle: true }), // RE-KEYED (R2-CODE-B item 2): the user's toggle
       institutionBadge({ name: 'C', source: 'auto-resolved' }),
     ];
     expect(marks.map(m => m.label)).toEqual(['REQ', 'YOU', '→']);

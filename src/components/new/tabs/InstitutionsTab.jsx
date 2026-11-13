@@ -91,7 +91,16 @@ export function institutionBadge(inst) {
     };
   }
   if (created.sourceTag === 'required') return { label:'REQ', color:PROVENANCE_TONE.required, title:'Historically required' };
-  if (created.sourceTag === 'forced') return { label:'YOU', color:PROVENANCE_TONE.you, title:'Added by you' };
+  // R2-CODE-B item 2 (the cold list REVIEW-W2A-3 #893 #894: "Hedge wizard YOU" with no house added by
+  // the user): `source: 'forced'` is written by every generator that forces a row — the user's toggle
+  // AND the isolation pass (isolationGenerator.js, `forcedByIsolation`). The record's own word for the
+  // user's hand is `forcedByToggle` (assembleInstitutions.js, every toggle path); only that wears YOU.
+  // A row the generator forced makes no claim of who added it, like an unstamped generated row.
+  if (created.sourceTag === 'forced') {
+    return inst?.forcedByToggle === true
+      ? { label:'YOU', color:PROVENANCE_TONE.you, title:'Added by you' }
+      : { label:null, color:PROVENANCE_TONE.none, title:undefined };
+  }
   if (created.sourceTag === 'auto-resolved') return { label:'→', color:PROVENANCE_TONE.auto, title:'Auto-resolved dependency' };
   // Unstamped legacy rows stay unbadged rather than being guessed at. Custom rows are
   // skinned gold by the caller's own ✦ branch.
