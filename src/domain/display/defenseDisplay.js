@@ -644,7 +644,7 @@ export function foodEnduranceLine(settlement) {
 // ─── SW-B5 FRAMES: the criminal ring's note gets vantages ─────────────────────
 // ⚠ AT THE END OF THE FILE so no line above moves (lines of this module are cited elsewhere).
 import { hashKey } from './stateProse/stateProseKernel.js';
-import { officialsInCriminalPayOf } from '../facts/officialsInPay.js';
+import { CRIME_LINE_FACTS, crimeLineFactsOf } from './stateProse/crimeLineDisqualifiers.js';
 
 /**
  * ⭐ THE RING'S NOTE GETS VANTAGES (lane SW-B5 FRAMES, 2026-11-09; STYLE-RULINGS-2 B5, the
@@ -668,10 +668,11 @@ const ORGANIZED_RING_NOTES = Object.freeze([
 /**
  * THE SAME FOUR VANTAGES WITHOUT "BOUGHT OFFICIALS" (W2-A-LEAVES-2, 2026-11-13; REVIEW-W2A F3). Each vantage above
  * says the ring "lives on protection money and bought officials" (or the officials it pays, pays officials, bribed
- * officials). That clause is TRUE where the cast holds an official who answers to a criminal house through their
- * office (`facts/officialsInPay.js`) and FALSE where it holds none — 93 of the 124 organised rings beside a hall
- * "free of the criminals" on the census's 720, and 55 more at the other rungs. So the clause is the fact's: index
- * i here is vantage i with that clause, and nothing else, taken out. No new claim; the pick is unchanged.
+ * officials). That clause is TRUE where an official answers to a criminal house (`facts/officialsInPay.js`: by
+ * office, or a member of the ruling power) or the criminals hold the hall (`corrupted`, `capture`;
+ * `crimeLineDisqualifiers.js :: CRIME_LINE_FACTS`), and FALSE where none of these holds: 87 of the census's 720
+ * organised rings (74 beside a hall "free of the criminals", 8 at `equilibrium`, 5 at `adversarial`). So the
+ * clause is the fact's: index i here is vantage i with that clause, and nothing else, taken out. No new claim; the pick is unchanged.
  * @type {ReadonlyArray<string>}
  */
 const ORGANIZED_RING_NOTES_NONE_BOUGHT = Object.freeze([
@@ -687,7 +688,7 @@ const ORGANIZED_RING_NOTES_NONE_BOUGHT = Object.freeze([
  * official in a criminal's pay, layer 4), so it is composed WHEN IT IS READ (a getter): the key's readers never
  * reach the cast, and every printer of the note (the Defense tab, the PDF) reads it through the fact.
  * @param {{ key: string, label: string, color: string, bg: string, note: string }} row
- * @param {{ _seed?: unknown, npcs?: unknown }} settlement
+ * @param {DefenseDisplaySettlement} settlement
  * @returns {{ key: string, label: string, color: string, bg: string, note: string }}
  */
 function withRingVantage(row, settlement) {
@@ -697,7 +698,7 @@ function withRingVantage(row, settlement) {
   const copy = { ...row };
   Object.defineProperty(copy, 'note', {
     enumerable: true,
-    get: () => (officialsInCriminalPayOf(settlement).length ? ORGANIZED_RING_NOTES[i] : ORGANIZED_RING_NOTES_NONE_BOUGHT[i]),
+    get: () => (CRIME_LINE_FACTS['no official in pay'](crimeLineFactsOf(/** @type {Parameters<typeof crimeLineFactsOf>[0]} */ (/** @type {unknown} */ (settlement)))) ? ORGANIZED_RING_NOTES_NONE_BOUGHT[i] : ORGANIZED_RING_NOTES[i]),
   });
   return Object.freeze(copy);
 }

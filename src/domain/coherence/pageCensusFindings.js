@@ -232,7 +232,7 @@ export function pageCensusFindings(settlement, views) {
     for (const l of lines) {
       const hit = declaredCrimeLines().find((c) => c.re.test(l) && CRIME_LINE_FACTS[c.falseWhere](facts));
       if (hit) return [l, `${hit.falseWhere} (officials in pay ${facts.officialsInPay}, hall ${facts.captureState || 'absent'})`];
-      if (RING_BOUGHT.test(l) && facts.officialsInPay === 0) return [l, 'no official in pay'];
+      if (RING_BOUGHT.test(l) && CRIME_LINE_FACTS['no official in pay'](facts)) return [l, 'no official in pay'];
     }
     return null;
   });

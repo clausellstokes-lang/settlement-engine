@@ -15,7 +15,8 @@
  * vocabulary its two atoms; this table then goes.
  *
  * THE TWO FACTS, each read from its one home:
- *   - AN OFFICIAL IN A CRIMINAL'S PAY: the cast (`facts/officialsInPay.js`). Measured on the census's 720: at the
+ *   - AN OFFICIAL IN A CRIMINAL'S PAY: the cast (`facts/officialsInPay.js`: by office, or a member of the ruling
+ *     power), or the hall's own rung at `corrupted`/`capture`. Measured on the census's 720: at the
  *     hall's stored state `none`, 41 of 585 towns hold one, so the stored state alone cannot decide a line about
  *     bought officials (the chair's example, "bought officials where the hall is free", would have struck the
  *     line in those 41 where the page's own "Who answers to whom" shows the official in partnership).
@@ -27,10 +28,15 @@
  */
 import { officialsInCriminalPayOf } from '../../facts/officialsInPay.js';
 
+/** The hall's rungs at which the criminals hold it. */
+const HALL_HELD = Object.freeze(['corrupted', 'capture']);
+
 /** The facts a declaration may name, and how each strikes a line. */
 export const CRIME_LINE_FACTS = Object.freeze({
-  'no official in pay': (/** @type {CrimeLineFacts} */ f) => f.officialsInPay === 0,
-  'an official in pay': (/** @type {CrimeLineFacts} */ f) => f.officialsInPay > 0,
+  // the criminals holding the hall (`corrupted`, `capture`: an agent at its head, or the second and the third, or a
+  // criminal ruling power) is itself an official in their pay
+  'no official in pay': (/** @type {CrimeLineFacts} */ f) => f.officialsInPay === 0 && !HALL_HELD.includes(f.captureState),
+  'an official in pay': (/** @type {CrimeLineFacts} */ f) => f.officialsInPay > 0 || HALL_HELD.includes(f.captureState),
   'no agent in the hall': (/** @type {CrimeLineFacts} */ f) => f.captureState === 'none' || f.captureState === 'adversarial',
 });
 

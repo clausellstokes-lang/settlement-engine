@@ -83,6 +83,20 @@ describe('each line struck only where its fact makes it false, and no case left 
   });
 });
 
+describe('F3b (the read of thirty): an official of the hall, and a hall the criminals hold, are officials in pay', () => {
+  const MEMBER = { id: 'n3', name: 'Liliya Gusev', memberships: [{ power: 'Merchant Council', rank: 2 }], allegiance: { house: 'Smuggling network', vector: 'greed', via: 'retainer' } };
+  const council = (state, npcs) => ({ _seed: 'a', npcs, institutions: [{ name: "Thieves' guild" }], powerStructure: { criminalCaptureState: state, factions: [{ faction: 'Merchant Council', name: 'Merchant Council', power: 60, isGoverning: true }] } });
+  test('a member of the ruling power who answers to a criminal house is an official in pay', () => {
+    expect(officialsInCriminalPayOf(council('none', [MEMBER]))).toEqual(['Liliya Gusev']);
+    expect(deriveCriminalStructure(council('none', [MEMBER])).note).toMatch(/official/i);
+  });
+  test('at corrupted the criminals hold the hall: the ring\'s note keeps its officials', () => {
+    expect(deriveCriminalStructure(council('corrupted', [])).note).toMatch(/official/i);
+    expect(deriveCriminalStructure(council('none', [])).note).toMatch(/one ring/);
+    expect(deriveCriminalStructure(council('none', [])).note).not.toMatch(/official/i); // anchored: the same note matched 'one ring' on the line above
+  });
+});
+
 describe('the organised ring\'s note says "bought officials" only where the cast holds one', () => {
   const ring = (npcs, seed) => deriveCriminalStructure({ _seed: seed, npcs, institutions: [{ name: "Thieves' guild" }] });
   test('the same vantage, with the clause only where an official is in pay; the key is untouched', () => {
