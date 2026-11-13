@@ -478,10 +478,47 @@ describe('ARM 3 — the strip ban (W2-B-DECLARE item 3; record 288, ruling 1, B 
     for (const shape of shapes) expect(stripSites('src/generators/planted.js', `const a = ${shape};`).map((x) => x.receiver), shape).toEqual(['POOL']);
     expect(stripSites('src/generators/planted.js', 'for (const l of POOL) out.push(l.text);').map((x) => x.receiver)).toEqual(['POOL']);
     expect(stripSites('src/generators/planted.js', 'const d = drawDeclared(POOL, { draw, key }).text; const e = rows.map((l) => l.name);')).toEqual([]);
-    const two = withOrdinals(stripSites('src/domain/prose/grammarWalker.js', 'const a = pool.map((l) => l.text); const b = pool.map((l) => l.text);'));
-    expect(two.map((x) => stripKey(x.file, x.receiver))).toEqual(['src/domain/prose/grammarWalker.js :: pool', 'src/domain/prose/grammarWalker.js :: pool #2']);
-    expect(banked.has('src/domain/prose/grammarWalker.js :: pool')).toBe(true);
-    expect(banked.has('src/domain/prose/grammarWalker.js :: pool #2')).toBe(false);
+    // re-keyed at the fourth seat (F3 of the second read): grammarWalker.js's real `pool #2` … `#5` are banked now (the
+    // widened shapes see them), so the pin plants its two strips on a receiver banked ONCE, standingInstructions.js's `rec`
+    const F = 'src/domain/autonomy/standingInstructions.js';
+    const two = withOrdinals(stripSites(F, 'const a = rec.map((l) => l.text); const b = rec.map((l) => l.text);'));
+    expect(two.map((x) => stripKey(x.file, x.receiver))).toEqual([`${F} :: rec`, `${F} :: rec #2`]);
+    expect(banked.has(`${F} :: rec`)).toBe(true);
+    expect(banked.has(`${F} :: rec #2`)).toBe(false);
+  });
+
+  /**
+   * F3 of the second read (REVIEW-W2B-1fb15980d: "the strip ban still misses most unwrap shapes outside the review's
+   * list"). The ban reads the callback's RETURNED expression for any member access `text` of its line parameter, wrapped
+   * or not, and `Array.from`, `reduce`, `forEach` and the loops over a pool. Part one: the reviewer's eight missed
+   * shapes, red at 0b092c5f1 (none caught). Part two: four shapes this seat invented, as a second proof.
+   */
+  test('planted (F3): the reviewer\'s eight missed unwrap shapes are strips', () => {
+    const shapes = [
+      'const a = POOL.map(({ text: t }) => t);',
+      'const a = POOL.map((l) => `${l.text}`);',
+      'const a = Array.from(POOL, (l) => l.text);',
+      'const a = POOL.reduce((acc, l) => [...acc, l.text], []);',
+      'const out = []; for (let i = 0; i < POOL.length; i += 1) out.push(POOL[i].text);',
+      'const a = POOL.map((l) => l.text.trim());',
+      'const a = POOL.map((l) => l && l.text);',
+      'const getText = (l) => l.text; const a = POOL.map(getText);',
+    ];
+    for (const shape of shapes) expect(stripSites('src/generators/planted.js', shape).map((x) => x.receiver), shape).toEqual(['POOL']);
+  });
+
+  test('planted (F3): four shapes of this seat\'s own invention are strips; a carried line and a sum are not', () => {
+    const shapes = [
+      'const out = []; POOL.forEach((l) => out.push(l.text));',
+      'const out = []; for (const { text } of POOL) out.push(text);',
+      'const a = POOL.map((l) => { const said = l.text; return said; });',
+      'function* lines() { for (const l of POOL) yield l.text; }',
+    ];
+    for (const shape of shapes) expect(stripSites('src/generators/planted.js', shape).map((x) => x.receiver), shape).toEqual(['POOL']);
+    // controls: the line is carried whole (its declarations with it), or no text is taken
+    expect(stripSites('src/generators/planted.js', 'const a = POOL.map((l) => ({ ...l, text: l.text.trim() }));')).toEqual([]);
+    expect(stripSites('src/generators/planted.js', 'const n = POOL.reduce((sum, l) => sum + l.weight, 0);')).toEqual([]);
+    expect(stripSites('src/generators/planted.js', 'const d = drawDeclared(POOL, { draw, key }).text;')).toEqual([]);
   });
 
   test('anti-vacuity: the strip walk finds the twelve sites of the class table', () => {

@@ -29172,8 +29172,178 @@
  },
  "strips": [
   [
+   "src/components/admin/AdminSimTuningPanel.jsx",
+   "data.warnings",
+   "not-a-draw"
+  ],
+  [
+   "src/components/AiAnalystPanel.jsx",
+   "musings",
+   "not-a-draw"
+  ],
+  [
+   "src/components/auth/SecurityQuestionsFields.jsx",
+   "secondOptions",
+   "not-a-draw"
+  ],
+  [
+   "src/components/auth/SecurityQuestionsFields.jsx",
+   "SECURITY_QUESTIONS",
+   "not-a-draw"
+  ],
+  [
+   "src/components/gallery/CurateMode.jsx",
+   "card.eyes",
+   "not-a-draw"
+  ],
+  [
+   "src/components/gallery/ManageGallery.jsx",
+   "veilModel.lines",
+   "not-a-draw"
+  ],
+  [
+   "src/components/home/LandingArtifacts.jsx",
+   "chapter.entries",
+   "not-a-draw"
+  ],
+  [
+   "src/components/home/LandingArtifacts.jsx",
+   "chronicle",
+   "not-a-draw"
+  ],
+  [
+   "src/components/home/LandingArtifacts.jsx",
+   "receipts",
+   "not-a-draw"
+  ],
+  [
+   "src/components/home/LandingArtifacts.jsx",
+   "town.hooks",
+   "not-a-draw"
+  ],
+  [
+   "src/components/InterviewPanel.jsx",
+   "(Array.isArray(segments) ? segments : [])",
+   "not-a-draw"
+  ],
+  [
+   "src/components/map/mapDirtyFingerprint.js",
+   "(s.labels || [])",
+   "not-a-draw"
+  ],
+  [
+   "src/components/map/NpcTrailSection.jsx",
+   "rows",
+   "not-a-draw"
+  ],
+  [
+   "src/components/map/PerspectiveStandings.jsx",
+   "rows",
+   "not-a-draw"
+  ],
+  [
+   "src/components/map/RealmItemShadowDiagnostics.jsx",
+   "REALM_ITEM_SOURCE_CLASSES",
+   "not-a-draw"
+  ],
+  [
+   "src/components/new/SummaryTab.jsx",
+   "allHooks",
+   "not-a-draw"
+  ],
+  [
+   "src/components/new/SummaryTab.jsx",
+   "allHooks #2",
+   "not-a-draw"
+  ],
+  [
+   "src/components/new/tabs/CrisisTab.jsx",
+   "section.seeFirst",
+   "not-a-draw"
+  ],
+  [
+   "src/components/new/tabs/EconomicsTab.jsx",
+   "revenuesOffTheLists(s)",
+   "not-a-draw"
+  ],
+  [
+   "src/components/new/tabs/PlotHooksTab.jsx",
+   "hooks",
+   "not-a-draw"
+  ],
+  [
+   "src/components/new/tabs/ViabilityTab.jsx",
+   "staffRows",
+   "not-a-draw"
+  ],
+  [
+   "src/components/session/SessionMode.jsx",
+   "hooks.slice(0, 12)",
+   "not-a-draw"
+  ],
+  [
+   "src/components/session/SessionMode.jsx",
+   "sheet.hooks",
+   "not-a-draw"
+  ],
+  [
+   "src/components/surveyor/CorpusFactoryPanel.jsx",
+   "list",
+   "not-a-draw"
+  ],
+  [
+   "src/components/surveyor/surveyorPanelKit.jsx",
+   "musings",
+   "not-a-draw"
+  ],
+  [
+   "src/components/surveyor/SurveyorTextIntentShell.jsx",
+   "messages",
+   "not-a-draw"
+  ],
+  [
+   "src/components/TonightSheet.jsx",
+   "sheet.facts",
+   "not-a-draw"
+  ],
+  [
+   "src/components/TonightSheet.jsx",
+   "sheet.hooks",
+   "not-a-draw"
+  ],
+  [
    "src/domain/autonomy/standingInstructions.js",
    "rec",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/causalViews.js",
+   "Object.values(beats)",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/coherence/hookTruthFindings.js",
+   "hooks",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/compendium/corpusStaging.js",
+   "list",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/crisis/crisisPage.js",
+   "facts.filter((f) => f.id === id)",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/display/discourseKernel.js",
+   "clauses",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/display/galleryVeil.js",
+   "v",
    "not-a-draw"
   ],
   [
@@ -29192,8 +29362,113 @@
    "not-a-draw"
   ],
   [
+   "src/domain/display/tradeListDisplay.js",
+   "filterDeclared(wanted, { facts: () => factsOf(settlement), poolId: 'income:revenues-off-the-lists', ",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/display/tradeListDisplay.js",
+   "LUXURY_CLASS",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/dossier/chronicleFeed.js",
+   "arr(manual)",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/dossier/chronicleFeed.js",
+   "arr(recent)",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/dossier/chronicleFeed.js",
+   "arr(worldLog)",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/dossier/chronicleFeed.js",
+   "arr(worldPulse)",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/dossier/plotHooks.js",
+   "collected",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/dossier/plotHooks.js",
+   "sorted",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/explanation.js",
+   "(deriveAllStructuredHooks(settlement))",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/prose/composedWalker.js",
+   "pieces",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/prose/composedWalker.js",
+   "units",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/prose/grammarWalker.js",
+   "corpus",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/prose/grammarWalker.js",
+   "corpus #2",
+   "not-a-draw"
+  ],
+  [
    "src/domain/prose/grammarWalker.js",
    "pool",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/prose/grammarWalker.js",
+   "pool #2",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/prose/grammarWalker.js",
+   "pool #3",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/prose/grammarWalker.js",
+   "pool #4",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/prose/grammarWalker.js",
+   "pool #5",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/prose/plantLedger.js",
+   "plants || []",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/prose/wiringCensus.js",
+   "literals",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/prose/wiringCensus.js",
+   "literals #2",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/prose/wiringCensus.js",
+   "variants",
    "not-a-draw"
   ],
   [
@@ -29212,8 +29487,43 @@
    "not-a-draw"
   ],
   [
+   "src/domain/summary/tonightAtTheTable.js",
+   "rankedHooks.slice(0, 2)",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/summary/tonightSheet.js",
+   "[...collectPlotHooks(/** @type {Parameters<typeof collectPlotHooks>[0]} */ (source))] .sort((a, b) =",
+   "not-a-draw"
+  ],
+  [
+   "src/foundry/journalPages.js",
+   "n.secrets",
+   "not-a-draw"
+  ],
+  [
    "src/foundry/journalPages.js",
    "revenuesOffTheLists(vm.raw)",
+   "not-a-draw"
+  ],
+  [
+   "src/foundry/journalPages.js",
+   "s.seeFirst",
+   "not-a-draw"
+  ],
+  [
+   "src/foundry/journalPages.js",
+   "sheet.facts",
+   "not-a-draw"
+  ],
+  [
+   "src/foundry/journalPages.js",
+   "sheet.hooks",
+   "not-a-draw"
+  ],
+  [
+   "src/generators/aiLayer.js",
+   "[ ...(via.plotHooks || []), ...(hist.historicalEvents || []).flatMap(e => e?.plotHooks || []), ]",
    "not-a-draw"
   ],
   [
@@ -29222,13 +29532,43 @@
    "strip-before-draw"
   ],
   [
+   "src/generators/generationCoherence.js",
+   "generatedStrings",
+   "not-a-draw"
+  ],
+  [
+   "src/generators/generationCoherence.js",
+   "generatedStrings #2",
+   "not-a-draw"
+  ],
+  [
+   "src/generators/generationCoherence.js",
+   "generatedStrings #3",
+   "not-a-draw"
+  ],
+  [
+   "src/generators/generationCoherence.js",
+   "strings.filter(item => !item.authored)",
+   "not-a-draw"
+  ],
+  [
    "src/generators/historyGenerator.js",
    "filterDeclared(tension.plotHooks, { facts: hookFacts, poolId: `historyData:HISTORICAL_EVENTS_DATA.pl",
    "not-a-draw"
   ],
   [
+   "src/generators/people/goals.js",
+   "cell",
+   "not-a-draw"
+  ],
+  [
    "src/generators/people/personHooks.js",
    "npc.plotHooks",
+   "not-a-draw"
+  ],
+  [
+   "src/generators/power/economyReconciliation.js",
+   "(Object.values(FACTION_LABEL_SIBLINGS).flat()) .filter((row) => typeof row.twinOf === 'string')",
    "not-a-draw"
   ],
   [
@@ -29242,8 +29582,118 @@
    "strip-before-draw"
   ],
   [
+   "src/lib/aiAnalyst.js",
+   "(Array.isArray(data?.musings) ? data.musings : [])",
+   "not-a-draw"
+  ],
+  [
+   "src/lib/interview.js",
+   "(Array.isArray(data?.segments) ? data.segments : [])",
+   "not-a-draw"
+  ],
+  [
+   "src/lib/surveyorWrite.js",
+   "(Array.isArray(data?.musings) ? data.musings : [])",
+   "not-a-draw"
+  ],
+  [
+   "src/pdf/lib/viewModel.js",
+   "collectPlotHooks(s)",
+   "not-a-draw"
+  ],
+  [
+   "src/pdf/lib/viewModel.js",
+   "events",
+   "not-a-draw"
+  ],
+  [
+   "src/pdf/primitives/Dense.jsx",
+   "list",
+   "not-a-draw"
+  ],
+  [
+   "src/pdf/primitives/Visuals.jsx",
+   "badges",
+   "not-a-draw"
+  ],
+  [
+   "src/pdf/primitives/Visuals.jsx",
+   "factors",
+   "not-a-draw"
+  ],
+  [
+   "src/pdf/sections/AIAppendix.jsx",
+   "a.dmCompass.hooks",
+   "not-a-draw"
+  ],
+  [
+   "src/pdf/sections/AIAppendix.jsx",
+   "a.dmCompass.redFlags",
+   "not-a-draw"
+  ],
+  [
+   "src/pdf/sections/AIAppendix.jsx",
+   "a.frictionPoints",
+   "not-a-draw"
+  ],
+  [
+   "src/pdf/sections/AIAppendix.jsx",
+   "a.identityMarkers",
+   "not-a-draw"
+  ],
+  [
+   "src/pdf/sections/CrisisSections.jsx",
+   "seeFirst",
+   "not-a-draw"
+  ],
+  [
+   "src/pdf/sections/EconomicsTrade.jsx",
+   "iss.suggestedFixes",
+   "not-a-draw"
+  ],
+  [
+   "src/pdf/sections/EconomicsTrade.jsx",
+   "off",
+   "not-a-draw"
+  ],
+  [
+   "src/pdf/sections/HistoryFounding.jsx",
+   "ev.lastingEffects",
+   "not-a-draw"
+  ],
+  [
+   "src/pdf/sections/IdentityDailyLife.jsx",
+   "d.passages",
+   "not-a-draw"
+  ],
+  [
+   "src/pdf/sections/NotableNPCs.jsx",
+   "npc.secrets",
+   "not-a-draw"
+  ],
+  [
    "src/pdf/sections/PowerStructure.jsx",
    "settlement",
+   "not-a-draw"
+  ],
+  [
+   "src/pdf/sections/ResourcesProduction.jsx",
+   "r.priorityNotes",
+   "not-a-draw"
+  ],
+  [
+   "src/pdf/sections/TonightAtTheTable.jsx",
+   "sheet.facts",
+   "not-a-draw"
+  ],
+  [
+   "src/pdf/sections/TonightAtTheTable.jsx",
+   "sheet.hooks",
+   "not-a-draw"
+  ],
+  [
+   "src/store/corpusFactorySlice.js",
+   "(Array.isArray(items) ? items : []) .filter((it) => it && typeof it.text === 'string' && it.text.tri",
    "not-a-draw"
   ],
   [

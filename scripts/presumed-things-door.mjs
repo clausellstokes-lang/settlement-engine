@@ -40,7 +40,8 @@ const mode = args.find((a) => a.startsWith('--') && a !== '--base');
 const reg = JSON.parse(readFileSync(join(ROOT, WIDENED_REGISTER_REL), 'utf8'));
 const main = JSON.parse(readFileSync(join(ROOT, 'tests/lint/presumedThings.register.json'), 'utf8'));
 
-const hits = scanTree(ROOT);
+// arm 1's walk is the slow half: --bank-strip reads only the strip ban, so it skips it
+const hits = mode === '--bank-strip' ? [] : scanTree(ROOT);
 const banked = new Set([...bankedKeys(main), ...bankedKeys(reg)]);
 const found = new Set(hits.map((h) => hitKey(h.file, h.thing, h.text)));
 const fresh = hits.filter((h) => !banked.has(hitKey(h.file, h.thing, h.text)));

@@ -548,67 +548,161 @@ function bare(e) {
 }
 
 /**
- * Does this expression unwrap the line `p` to its text (W2-B-DECLARE third seat, F5: every shape the review planted)?
- * `p.text`, `p?.text`, `p['text']`, `String(p.text)`, `textOf(p)`, `lineText(p)`, a conditional with an unwrapping
- * branch (`typeof l === 'string' ? l : l.text`), or the destructured `text` itself.
- * @param {any} e @param {string | null} p the parameter's name @param {boolean} destructured `({ text }) => text`
+ * How a callback's parameter binds the line: `l` (its name) or `{ text }` / `{ text: t }` (the names the text is bound
+ * to). @param {any} name @returns {{ p: string | null, aliases: Set<string> } | null}
  */
-function unwraps(e, p, destructured) {
-  e = bare(e);
-  if (destructured && ts.isIdentifier(e) && e.text === 'text') return true;
-  if (p && ts.isPropertyAccessExpression(e) && e.name.text === 'text' && ts.isIdentifier(bare(e.expression)) && bare(e.expression).text === p) return true;
-  if (p && ts.isElementAccessExpression(e) && ts.isStringLiteralLike(e.argumentExpression) && e.argumentExpression.text === 'text'
-    && ts.isIdentifier(bare(e.expression)) && bare(e.expression).text === p) return true;
-  if (p && ts.isCallExpression(e) && ts.isIdentifier(e.expression) && UNWRAP_FNS.has(e.expression.text)
-    && e.arguments.length >= 1 && ts.isIdentifier(e.arguments[0]) && e.arguments[0].text === p) return true;
-  if (ts.isConditionalExpression(e)) return unwraps(e.whenTrue, p, destructured) || unwraps(e.whenFalse, p, destructured);
-  return false;
+function lineBinding(name) {
+  if (!name) return null;
+  if (ts.isIdentifier(name)) return { p: name.text, aliases: new Set() };
+  if (ts.isObjectBindingPattern(name)) {
+    const aliases = new Set(name.elements.filter((el) => (el.propertyName || el.name).getText() === 'text' && ts.isIdentifier(el.name)).map((el) => el.name.text));
+    return aliases.size ? { p: null, aliases } : null;
+  }
+  return null;
 }
 
-/** Is this `.map` / `.flatMap` argument an unwrap to text (an arrow, a function expression, or `textOf` / `lineText`)? @param {any} arg */
-function isUnwrap(arg) {
-  if (ts.isIdentifier(arg)) return UNWRAP_FNS.has(arg.text);
-  if ((ts.isArrowFunction(arg) || ts.isFunctionExpression(arg)) && arg.parameters.length >= 1) {
-    const name = arg.parameters[0].name;
-    const p = ts.isIdentifier(name) ? name.text : null;
-    const destructured = ts.isObjectBindingPattern(name) && name.elements.some((el) => (el.propertyName || el.name).getText() === 'text');
-    if (!p && !destructured) return false;
-    const body = arg.body;
-    if (!ts.isBlock(body)) return unwraps(body, p, destructured);
-    const rets = [];
-    const visit = (n) => { if (ts.isReturnStatement(n) && n.expression) rets.push(n.expression); if (!ts.isFunctionLike(n)) ts.forEachChild(n, visit); };
-    ts.forEachChild(body, visit);
-    return rets.some((r) => unwraps(r, p, destructured));
+/**
+ * Does `e` take the text of the line bound by `b` ANYWHERE in it, wrapped or not (F3 of REVIEW-W2B's second read: a
+ * template, `.trim()`, `l && l.text`, a conditional, `[...acc, l.text]`, `String(…)`)? Read: `p.text`, `p?.text`,
+ * `p['text']`, a name the text is bound to, `textOf(p)` / `lineText(p)` / a local helper of the same shape. Not read: a
+ * nested function, and an object that carries the line whole (`{ ...l, text: … }` keeps its declarations).
+ * @param {any} e @param {{ p: string | null, aliases: Set<string> }} b @param {Set<string>} helpers
+ */
+function takesText(e, b, helpers) {
+  let found = false;
+  const isP = (/** @type {any} */ x) => !!b.p && ts.isIdentifier(bare(x)) && bare(x).text === b.p;
+  const visit = (/** @type {any} */ n) => {
+    if (found || ts.isFunctionLike(n)) return;
+    if (ts.isObjectLiteralExpression(n) && n.properties.some((pr) => ts.isSpreadAssignment(pr) && isP(pr.expression))) return;
+    if (ts.isIdentifier(n) && b.aliases.has(n.text)) {
+      const par = n.parent;
+      const isName = par && ((ts.isPropertyAccessExpression(par) && par.name === n) || (ts.isPropertyAssignment(par) && par.name === n));
+      if (!isName) { found = true; return; }
+    }
+    if ((ts.isPropertyAccessExpression(n) && n.name.text === 'text' && isP(n.expression))
+      || (ts.isElementAccessExpression(n) && ts.isStringLiteralLike(n.argumentExpression) && n.argumentExpression.text === 'text' && isP(n.expression))
+      || (ts.isCallExpression(n) && ts.isIdentifier(n.expression) && (UNWRAP_FNS.has(n.expression.text) || helpers.has(n.expression.text))
+        && n.arguments.length >= 1 && isP(n.arguments[0]))) { found = true; return; }
+    ts.forEachChild(n, visit);
+  };
+  visit(e);
+  return found;
+}
+
+/**
+ * The expressions a body hands on, outside nested functions: `return`s (`mode` 'return'), or what it pushes, adds or
+ * yields (`mode` 'push', a loop's or a `forEach`'s). @param {any} body @param {'return' | 'push'} mode @returns {any[]}
+ */
+function sinksOf(body, mode) {
+  /** @type {any[]} */ const out = [];
+  const visit = (/** @type {any} */ n) => {
+    if (ts.isFunctionLike(n)) return;
+    if (mode === 'return' && ts.isReturnStatement(n) && n.expression) out.push(n.expression);
+    if (mode === 'push' && ts.isCallExpression(n) && ts.isPropertyAccessExpression(n.expression) && ['push', 'unshift', 'add'].includes(n.expression.name.text)) out.push(...n.arguments);
+    if (mode === 'push' && ts.isYieldExpression(n) && n.expression) out.push(n.expression);
+    ts.forEachChild(n, visit);
+  };
+  visit(body);
+  return out;
+}
+
+/**
+ * The names a block binds to the line's text (`const said = l.text;`), added to the binding, so `return said` reads.
+ * @param {any} body @param {{ p: string | null, aliases: Set<string> }} b @param {Set<string>} helpers
+ */
+function withLocalAliases(body, b, helpers) {
+  const out = { p: b.p, aliases: new Set(b.aliases) };
+  for (let pass = 0; pass < 2; pass += 1) {
+    const visit = (/** @type {any} */ n) => {
+      if (ts.isFunctionLike(n)) return;
+      if (ts.isVariableDeclaration(n) && ts.isIdentifier(n.name) && n.initializer && takesText(n.initializer, out, helpers)) out.aliases.add(n.name.text);
+      ts.forEachChild(n, visit);
+    };
+    visit(body);
   }
-  return false;
+  return out;
+}
+
+/**
+ * Does a callback (an arrow or a function expression) take the text of its `idx`-th parameter into what it hands on?
+ * @param {any} fn @param {number} idx @param {Set<string>} helpers @param {'return' | 'push'} mode
+ */
+function callbackTakes(fn, idx, helpers, mode) {
+  if (!fn || !(ts.isArrowFunction(fn) || ts.isFunctionExpression(fn) || ts.isFunctionDeclaration(fn)) || fn.parameters.length <= idx || !fn.body) return false;
+  const b = lineBinding(fn.parameters[idx].name);
+  if (!b) return false;
+  if (!ts.isBlock(fn.body)) return mode === 'return' ? takesText(fn.body, b, helpers) : sinksOf(fn.body, mode).some((x) => takesText(x, b, helpers));
+  const bb = withLocalAliases(fn.body, b, helpers);
+  return sinksOf(fn.body, mode).some((x) => takesText(x, bb, helpers));
+}
+
+/**
+ * Is this `.map` / `.flatMap` / `Array.from` argument an unwrap to text (a callback whose returned expression takes its
+ * line's text, `textOf` / `lineText`, or a local helper that does)? @param {any} arg @param {Set<string>} helpers
+ */
+function isUnwrap(arg, helpers) {
+  if (ts.isIdentifier(arg)) return UNWRAP_FNS.has(arg.text) || helpers.has(arg.text);
+  return callbackTakes(arg, 0, helpers, 'return');
+}
+
+/** The local helpers of a file that unwrap a line (`const getText = (l) => l.text;`, `function getText(l) {…}`). @param {any} sf */
+function unwrapHelpers(sf) {
+  /** @type {Set<string>} */ const helpers = new Set();
+  for (let pass = 0; pass < 2; pass += 1) {
+    const visit = (/** @type {any} */ n) => {
+      if (ts.isFunctionDeclaration(n) && n.name && callbackTakes(n, 0, helpers, 'return')) helpers.add(n.name.text);
+      if (ts.isVariableDeclaration(n) && ts.isIdentifier(n.name) && n.initializer && (ts.isArrowFunction(n.initializer) || ts.isFunctionExpression(n.initializer))
+        && callbackTakes(n.initializer, 0, helpers, 'return')) helpers.add(n.name.text);
+      ts.forEachChild(n, visit);
+    };
+    visit(sf);
+  }
+  return helpers;
 }
 
 /**
  * The strip-shaped calls of one source text: `{ file, receiver }`, the receiver's source text (whitespace
- * folded, its first 100 characters) being the site's identity. The shapes (F5): `R.map(unwrap)` / `R.flatMap(unwrap)`
- * with any extra argument (`map(textOf, ctx)`); `for (const l of R) … push(<unwrap of l>)`; and `pick(R).text`, a
- * `.text` taken off any call but a door's, whose first argument is the receiver.
+ * folded, its first 100 characters) being the site's identity. The shapes (F5; F3 of the second read): `R.map(unwrap)` /
+ * `R.flatMap(unwrap)` with any extra argument (`map(textOf, ctx)`); `Array.from(R, unwrap)`; `R.reduce(fn)` whose
+ * returned expression takes its line's text; `R.forEach(fn)` and `for (const l of R)` that push, add or yield it;
+ * `for (let i …) … push(R[i].text)`; and `pick(R).text`, a `.text` taken off any call but a door's, whose first argument
+ * is the receiver. An unwrap is any member access `text` of the line in the handed-on expression, wrapped or not.
  * @param {string} rel @param {string} src @returns {Array<{ file: string, receiver: string }>}
  */
 export function stripSites(rel, src) {
   const sf = ts.createSourceFile(rel, src, ts.ScriptTarget.Latest, true, ts.ScriptKind.JSX);
+  const helpers = unwrapHelpers(sf);
   /** @type {Array<{ file: string, receiver: string }>} */ const out = [];
   const text = (/** @type {any} */ n) => n.getText(sf).replace(/\s+/g, ' ').slice(0, 100);
-  const visit = (n) => {
-    if (ts.isCallExpression(n) && ts.isPropertyAccessExpression(n.expression) && ['map', 'flatMap'].includes(n.expression.name.text)
-      && n.arguments.length >= 1 && isUnwrap(n.arguments[0])) {
+  const method = (/** @type {any} */ n) => (ts.isCallExpression(n) && ts.isPropertyAccessExpression(n.expression) ? n.expression.name.text : '');
+  const visit = (/** @type {any} */ n) => {
+    const m = method(n);
+    if (['map', 'flatMap'].includes(m) && n.arguments.length >= 1 && isUnwrap(n.arguments[0], helpers)) {
       out.push({ file: rel, receiver: text(n.expression.expression) });
-    } else if (ts.isForOfStatement(n) && ts.isVariableDeclarationList(n.initializer) && n.initializer.declarations.length === 1
+    } else if (m === 'from' && ts.isIdentifier(n.expression.expression) && n.expression.expression.text === 'Array' && n.arguments.length >= 2 && isUnwrap(n.arguments[1], helpers)) {
+      out.push({ file: rel, receiver: text(n.arguments[0]) });
+    } else if (['reduce', 'reduceRight'].includes(m) && n.arguments.length >= 1 && callbackTakes(n.arguments[0], 1, helpers, 'return')) {
+      out.push({ file: rel, receiver: text(n.expression.expression) });
+    } else if (m === 'forEach' && n.arguments.length >= 1 && callbackTakes(n.arguments[0], 0, helpers, 'push')) {
+      out.push({ file: rel, receiver: text(n.expression.expression) });
+    } else if (ts.isForOfStatement(n) && ts.isVariableDeclarationList(n.initializer) && n.initializer.declarations.length === 1) {
+      const b = lineBinding(n.initializer.declarations[0].name);
+      if (b) {
+        const bb = withLocalAliases(n.statement, b, helpers);
+        if (sinksOf(n.statement, 'push').some((x) => takesText(x, bb, helpers))) out.push({ file: rel, receiver: text(n.expression) });
+      }
+    } else if (ts.isForStatement(n) && n.initializer && ts.isVariableDeclarationList(n.initializer) && n.initializer.declarations.length === 1
       && ts.isIdentifier(n.initializer.declarations[0].name)) {
-      const v = n.initializer.declarations[0].name.text;
-      let found = false;
-      const inner = (/** @type {any} */ m) => {
-        if (ts.isCallExpression(m) && ts.isPropertyAccessExpression(m.expression) && m.expression.name.text === 'push'
-          && m.arguments.some((a) => unwraps(a, v, false))) found = true;
-        if (!found && !ts.isFunctionLike(m)) ts.forEachChild(m, inner);
+      const i = n.initializer.declarations[0].name.text;
+      /** @type {any} */ let recv = null;
+      const inner = (/** @type {any} */ x) => {
+        if (recv || ts.isFunctionLike(x)) return;
+        if (ts.isPropertyAccessExpression(x) && x.name.text === 'text' && ts.isElementAccessExpression(bare(x.expression))
+          && ts.isIdentifier(bare(x.expression).argumentExpression) && bare(x.expression).argumentExpression.text === i) { recv = bare(x.expression).expression; return; }
+        ts.forEachChild(x, inner);
       };
-      inner(n.statement);
-      if (found) out.push({ file: rel, receiver: text(n.expression) });
+      for (const sink of sinksOf(n.statement, 'push')) inner(sink);
+      if (recv) out.push({ file: rel, receiver: text(recv) });
     } else if (ts.isPropertyAccessExpression(n) && n.name.text === 'text' && ts.isCallExpression(bare(n.expression))) {
       const call = bare(n.expression);
       const callee = ts.isIdentifier(call.expression) ? call.expression.text : ts.isPropertyAccessExpression(call.expression) ? call.expression.name.text : '';
