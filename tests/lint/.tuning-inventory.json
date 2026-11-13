@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "385d4b6782c9f53473b6459b3d531be105d6416b",
+  "measuredAtSha": "9a9f7c10ea997176ba10cf454c3836eb81ef629c",
   "measuredBy": "COHERENCE-UPKEEP-6",
   "date": "2026-11-13",
-  "note": "COHERENCE-UPKEEP-6 C: DEFENCE_TUNING.crises gains wartime (sup 15, draft): war drains what sustains a town",
+  "note": "COHERENCE-UPKEEP-6 ruling 1(b): threatAssessment.js reads keep.js (KEEP_TUNING, KEEP_SCALE_TUNING gain a dependent); no value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1391,6 +1391,7 @@
         "Wealthy.funded": 1
       },
       "dependents": [
+        "src/domain/display/threatAssessment.js",
         "src/domain/facts/factsOf.js",
         "src/domain/magicProfile.js",
         "src/generators/defenseGenerator.js",
@@ -1404,7 +1405,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 86,
+      "line": 97,
       "spanDigest": "b6308e4c49142fb193f25d310792d9a854b2a1712461b4252a148209ac0df8a6",
       "leaves": {
         "services": 0.7,
@@ -1412,6 +1413,7 @@
         "magicBelow": 0.6
       },
       "dependents": [
+        "src/domain/display/threatAssessment.js",
         "src/domain/facts/factsOf.js",
         "src/domain/magicProfile.js",
         "src/generators/defenseGenerator.js",
