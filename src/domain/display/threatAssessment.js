@@ -36,29 +36,18 @@
 
 import { defenseFactsOf } from '../defense/defenseFacts.js';
 import { SCORE_BAND_CUTS } from './defenseScoreBands.js';
-import { keepOf, keepOfRecord } from '../facts/keep.js';
 
 /**
- * WHAT MONEY THE PLACE HAS TO MEET A CRISIS (COHERENCE-UPKEEP-6, the chair's ruling 1(b): one label speaks
- * for pay). The Economic Survival row's sentence speaks of money, so it reads what the place can keep up
- * in ordinary years, the standing label, through its one home (`keep.js :: keepOfRecord`), on the keep
- * table's own rungs of what it can buy, the rungs the guard's purse lines read: Prosperous and above,
- * Moderate and Comfortable, Poor, and below. A town saved before the standing
- * label existed reads its stored score's rung, as it did. The row's colour stays its score's.
- * @param {{ economicState?: { prosperity?: unknown, prosperityStanding?: unknown } | null } | null | undefined} r
+ * WHAT MONEY THE PLACE HAS TO MEET A CRISIS: the rung of the row's OWN score, the number its badge and colour
+ * read and the screen's Economic Survival row reads (COHERENCE-UPKEEP-6, a cure of 0c0e8f99f found by the
+ * thirty-town read of ruling 1(c)). The score is itself paid at the standing label through its one home
+ * (`keep.js :: keepOfRecord`, the score's pay), so one label speaks for pay through it; keyed to the label
+ * instead, the sentence disagreed with its own badge ("Money enough for a short crisis" under Critical) and
+ * with the screen's row in six towns. The page names the crisis beside the label (ruling 1(a)).
  * @param {number} econScore
  * @returns {'long' | 'short' | 'late' | 'none'}
  */
-function moneyRungOf(r, econScore) {
-  const es = r?.economicState;
-  if (es?.prosperityStanding == null) {
-    return econScore >= 65 ? 'long' : econScore >= 40 ? 'short' : econScore >= 25 ? 'late' : 'none';
-  }
-  const { bought } = keepOfRecord(es);
-  return bought >= keepOf('Prosperous').bought ? 'long'
-    : bought >= keepOf('Moderate').bought ? 'short'
-      : bought >= keepOf('Poor').bought ? 'late' : 'none';
-}
+const moneyRungOf = (econScore) => (econScore >= 65 ? 'long' : econScore >= 40 ? 'short' : econScore >= 25 ? 'late' : 'none');
 
 /** The top of the Weak band: the highest a famine-struck place's disaster readiness may read. */
 export const FAMINE_DISASTER_CEILING = SCORE_BAND_CUTS.adequate - 1;
@@ -263,7 +252,7 @@ export function buildThreatAssessment(r) {
       ? '#7a5010'
       : '#8b1a1a';
   let econA;
-  const money = moneyRungOf(r, econScore);
+  const money = moneyRungOf(econScore);
   if (money === 'long') {
     econA = 'Money enough to ride out a long crisis: emergency measures can be paid for, and '
       + (hasGarrison ? 'the garrison kept paid' : 'the defenders kept paid')

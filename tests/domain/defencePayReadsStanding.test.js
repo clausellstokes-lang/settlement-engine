@@ -3,8 +3,8 @@
  * ONE LABEL SPEAKS FOR PAY. Every sentence about paying for defence reads the standing label (the label
  * with no crisis in force) through its one home, `keep.js :: standingLabelOf` / `keepOfRecord`: the
  * PDF's money line (`threatAssessment.js`, the Economic Survival row) and the guard assessment's purse
- * lines (`safetyProfile.js :: keptGuardLine`, called at `economicState.js`). A town saved before the
- * standing label existed reads as it did (its line is the stored score's, unchanged).
+ * lines (`safetyProfile.js :: keptGuardLine`, called at `economicState.js`). The PDF's money line reads
+ * its row's own score, which is paid at the standing label (the cure of 0c0e8f99f; see the test).
  */
 import { describe, expect, test } from 'vitest';
 import { buildThreatAssessment } from '../../src/domain/display/threatAssessment.js';
@@ -26,21 +26,17 @@ describe('one label speaks for pay (ruling 1(b))', () => {
     expect(keepOfRecord({ prosperity: 'Struggling', prosperityStanding: 'Prosperous' })).toEqual(keepOf('Prosperous'));
   });
 
-  test('RED-FIRST: the money line reads the standing label, not the supply score', () => {
-    // A Prosperous city in a famine, its supply score low: money enough for a long crisis.
-    const rich = moneyLine(record(30, { prosperity: 'Struggling', prosperityStanding: 'Prosperous' }));
-    expect(rich).toBe(moneyLine(record(90, { prosperity: 'Prosperous', prosperityStanding: 'Prosperous' })));
-    expect(rich.startsWith('Money enough to ride out a long crisis')).toBe(true);
-    // A Poor town with a full supply score: the defenders already paid late.
-    const poor = moneyLine(record(90, { prosperity: 'Poor', prosperityStanding: 'Poor' }));
-    expect(poor.startsWith('The defenders are already paid late')).toBe(true);
-    expect(moneyLine(record(90, { prosperity: 'Moderate', prosperityStanding: 'Moderate' })).startsWith('Money enough for a short crisis')).toBe(true);
-    expect(moneyLine(record(90, { prosperity: 'Comfortable', prosperityStanding: 'Comfortable' })).startsWith('Money enough for a short crisis'), 'the rungs the purse lines read').toBe(true);
-    expect(moneyLine(record(90, { prosperity: 'Struggling', prosperityStanding: 'Struggling' })).startsWith('There is no money')).toBe(true);
-  });
-
-  test('a town saved before the standing label existed reads its stored score, as before', () => {
-    expect(moneyLine(record(70, { prosperity: 'Struggling' })).startsWith('Money enough to ride out a long crisis')).toBe(true);
-    expect(moneyLine(record(30, { prosperity: 'Wealthy' })).startsWith('The defenders are already paid late')).toBe(true);
+  // Re-keyed at COHERENCE-UPKEEP-6's cure of 0c0e8f99f (the thirty-town read of ruling 1(c)): keyed to the
+  // standing label, the money line disagreed with its own row's badge and with the screen's row. It reads its
+  // row's OWN score, which is itself paid at the standing label (keepOfRecord): one label speaks through it.
+  test('the money line speaks for the same number as its row\'s badge, in every record shape', () => {
+    const rowOf = (r) => buildThreatAssessment(r).find((row) => row.label === 'Economic Survival');
+    for (const [economic, words] of [[90, 'Money enough to ride out a long crisis'], [50, 'Money enough for a short crisis'], [30, 'The defenders are already paid late'], [10, 'There is no money']]) {
+      for (const es of [{ prosperity: 'Struggling', prosperityStanding: 'Prosperous' }, { prosperity: 'Poor', prosperityStanding: 'Poor' }, { prosperity: 'Wealthy' }]) {
+        const row = rowOf(record(economic, es));
+        expect(row.assess.startsWith(words), `${economic} ${JSON.stringify(es)}`).toBe(true);
+        expect(row.color, 'anchored: one number, one colour').toBe(rowOf(record(economic, { prosperity: 'Moderate' })).color);
+      }
+    }
   });
 });
