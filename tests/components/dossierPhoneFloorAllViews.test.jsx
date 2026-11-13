@@ -615,6 +615,11 @@ const desktopShape = (perView) => Object.fromEntries(
 // -5 chrome, Summary/Overview +1 chrome line, one Plot Hooks prose line now judged chrome, Systems/Institutions +1 prose); the
 // two hats on the seat row, 4509d4add (Systems/Power +1 prose). F3 (c67c8319e) and every other lane commit move nothing.
 // Desktop: Overview 13 -> 14, Institutions 71 -> 72, Power 33 -> 34, NPCs 284 -> 281, Relationships 178 -> 174.
+// ── RE-MEASURED 2026-11-13 (COHERENCE-POWERS-5, bisected by this file's own walk at each of the fifth seat's commits that
+// touch src, 463eb0b04 green): the N1 commit, c0b46646e, alone moves a count — the fixture city's seat-holder now always
+// carries its seat line on the card (World/NPCs +1 prose); no later commit moves a count; no token moved; the floors arm
+// reads zero violations.
+// Desktop: NPCs 281 -> 282.
 const DESKTOP_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 220 -> 284, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -663,7 +668,7 @@ const DESKTOP_BASELINE = Object.freeze({
   // instead of the siege/famine/plague flag, so the fixture's block renders on the public walk: its title
   // (chrome), its static explanation and its chain notes (prose). No token moved.
   "Systems/Magic":       { measured: 4, sub14: 4 },
-  "World/NPCs":          { measured: 281, sub14: 281 },
+  "World/NPCs":          { measured: 282, sub14: 282 },
   // 60 -> 61 / 58 -> 59 and mobile 58 -> 59 (2026-10-31, G3 at the merge, GS-1): the eight-variant tie lines wrap one
   // line longer in the fixture; no token moved.
   "World/Relationships": { measured: 174, sub14: 172 },
@@ -762,6 +767,11 @@ const DESKTOP_BASELINE = Object.freeze({
 // -5 chrome, Summary/Overview +1 chrome line, one Plot Hooks prose line now judged chrome, Systems/Institutions +1 prose); the
 // two hats on the seat row, 4509d4add (Systems/Power +1 prose). F3 (c67c8319e) and every other lane commit move nothing.
 // Mobile: sub12 0 in every view; sub14 moves only with chrome (Overview 0 -> 1, Plot Hooks 0 -> 1, Relationships 39 -> 36).
+// ── RE-MEASURED 2026-11-13 (COHERENCE-POWERS-5, bisected by this file's own walk at each of the fifth seat's commits that
+// touch src, 463eb0b04 green): the N1 commit, c0b46646e, alone moves a count — the fixture city's seat-holder now always
+// carries its seat line on the card (World/NPCs +1 prose); no later commit moves a count; no token moved; the floors arm
+// reads zero violations.
+// Mobile: World/NPCs prose 280 -> 281.
 const MOBILE_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 219 -> 283, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -801,7 +811,7 @@ const MOBILE_BASELINE = Object.freeze({
   // prose 0 -> 3, chrome 0 -> 1 (2026-11-03, lane MAGIC, chair ruling 2): the dependence block reads the one
   // reliance reading; its title is the 12px chrome line, its explanation and chain notes take the prose floor.
   "Systems/Magic":       { prose: 3, chrome: 1, sub14: 1, sub12: 0 },
-  "World/NPCs":          { prose: 280, chrome: 1, sub14: 0, sub12: 0 },
+  "World/NPCs":          { prose: 281, chrome: 1, sub14: 0, sub12: 0 },
   "World/Relationships": { prose: 138, chrome: 36, sub14: 36, sub12: 0 },
   "World/Faith":         { prose: 2, chrome: 0, sub14: 0, sub12: 0 },
   "World/Daily Life":    { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
