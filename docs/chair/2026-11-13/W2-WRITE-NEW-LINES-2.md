@@ -1,10 +1,11 @@
 # W2-WRITE — the second seat's lines for the owner's veto
 
 Base: the first seat's tip 31f57e8eb. Tip: the lane. NEW = a line written by this seat; CHANGED = a line whose declaration or text moved (text shown old -> new). Round 1 (the cold list), stage 2 (the first seat's lines read town by town) and stage 3 (three per case, layer 2); the case each new line is for is its own marks (a siege line carries crisis: under_siege, and so on).
+Since the chair's 07:20 queue: the river brace restored (DS-GEN-5/-6 lines lose `river`, the brace carries it), six key re-declarations undone, DS-GEN-3 Undefended v6 (the walls-word mute), DS-GEN-9 disaster v7 reworded, and four of this seat's lines reworded against the suite's pins (below as CHANGED).
 
 **DS-ECO-1::COMBINATION C4: a low rung on a working approach**
 - CHANGED v1 `[colour]` -> `[no crisis: under_siege]` · text: "Traffic moves along {settlement}'s {access} every day, and little of its money stays. The place earns less than it spends." -> "Traffic moves along {settlement}'s {access} every day, and little of its money stays behind."
-- CHANGED v2 `[]` -> `[no crisis: under_siege]` · text: "Plenty passes through {settlement}, and little of it stops. The town is poor, and its people say so to anyone who asks." -> "{settlement} is poor though the trade routes serve it well, and its people say so to anyone who asks."
+- CHANGED v2 `[]` -> `[no crisis: under_siege]` · text: "Plenty passes through {settlement}, and little of it stops. The town is poor, and its people say so to anyone who asks." -> "Some trade comes past {settlement}, and little of it stops. The town is poor, and its people say so to anyone who asks."
 - CHANGED v3 `[market]` -> `[market · no crisis: under_siege]`
 - NEW v4 `[crisis: under_siege]` With the siege closing every way in, {settlement} has lost even the little that passing trade used to leave behind.
 - NEW v5 `[crisis: under_siege]` {settlement} was poor even while its trade moved freely, and the siege has stopped it moving at all.
@@ -15,7 +16,6 @@ Base: the first seat's tip 31f57e8eb. Tip: the lane. NEW = a line written by thi
 - NEW v7 `[no market]` Much of what changes hands at {settlement} changes hands quietly, between people who would rather nobody counted it.
 
 **DS-ECO-6::TIER: minor shadow activity (≥3)**
-- CHANGED v0 `[colour]` -> `[no organised crime]`
 - CHANGED v1 `[dm-only · colour]` -> `[dm-only · no organised crime]`
 - CHANGED v2 `[dm-only · colour]` -> `[dm-only · no organised crime]`
 - NEW v4 `[organised crime]` Little of {settlement}'s trade goes unrecorded, but what does goes through the same organised hands each time.
@@ -112,7 +112,7 @@ Base: the first seat's tip 31f57e8eb. Tip: the lane. NEW = a line written by thi
 **DS-DEF-2::Invasion & War: walls AND professional garrison**
 - CHANGED v1 `[]` -> `[no crisis: under_siege]`
 - CHANGED v2 `[]` -> `[no crisis: under_siege]`
-- NEW v4 `[walls · garrison · crisis: under_siege]` The siege at {settlement} is being met on the walls by paid soldiers, and the walls are holding.
+- NEW v4 `[garrison · crisis: under_siege]` Paid soldiers are holding {settlement}'s walls against the siege, and so far they have held.
 
 **DS-DEF-2::Invasion & War: walls with NO force**
 - CHANGED v1 `[]` -> `[no watch · no crisis: under_siege]`
@@ -197,27 +197,27 @@ Base: the first seat's tip 31f57e8eb. Tip: the lane. NEW = a line written by thi
 
 **DS-DEF-8::override: INTERNAL PRESSURE (famine)**
 - CHANGED v2 `[colour]` -> `[guardPresence]`
-- NEW v4 `[no guardPresence]` {settlement} has no guards to feed, only households, and every household is guarding its own share of what is left.
+- NEW v4 `[no guardPresence]` {settlement} has nobody paid to defend it, only households, and every household is minding its own share of what is left.
 - NEW v5 `[no guardPresence]` With nobody at {settlement} paid to keep order, the hunger is policed by neighbours watching each other's doors.
 
 **DS-DEF-8::override: COMMAND SPLIT**
-- NEW v4 `[no guardPresence]` {settlement} has no standing guard to command, and the quarrel over who would command one is louder for it.
+- NEW v4 `[no guardPresence]` {settlement} has no standing force to command, and the quarrel over who would command one is louder for it.
 
 **DS-DEF-8::override: UNDER TRIBUTE**
-- NEW v4 `[no guardPresence]` {settlement} keeps no guards to pay, and the debt is one more reason it never will.
+- NEW v4 `[no guardPresence]` {settlement} keeps no defenders to pay, and the debt is one more reason it never will.
 
 **DS-DEF-8::override: SECURITY COMPROMISED**
-- NEW v4 `[no guardPresence]` {settlement} has no guard to reorganize after the betrayal, only households that now bar their doors and keep their own counsel.
+- NEW v4 `[no guardPresence]` {settlement} has no defenders to reorganize after the betrayal, only households that now bar their doors and keep their own counsel.
 
 **DS-DEF-8::override: QUARANTINE ACTIVE**
 - NEW v4 `[no guardPresence]` Nobody at {settlement} is paid to hold the quarantine, so households take turns at the edge of the place, turning travellers away.
 
 **DS-DEF-8::override: BEAST PRESSURE**
-- NEW v4 `[no guardPresence]` With no guards at {settlement}, every household watches its own edge of the place against the beasts, and nobody sleeps well.
+- NEW v4 `[no guardPresence]` With nobody posted at {settlement}, every household watches its own edge of the place against the beasts, and nobody sleeps well.
 - NEW v5 `[no guardPresence]` {settlement} has nobody whose work is to stand against the beasts; what the creatures take is counted afterwards, house by house.
 
 **DS-DEF-8::override: INSURGENCY ACTIVE**
-- NEW v4 `[no guardPresence · crisis: insurgency]` {settlement} has no guards to send against the insurgents, and each household decides for itself what to keep quiet about.
+- NEW v4 `[no guardPresence · crisis: insurgency]` {settlement} has nobody to send against the insurgents, and each household decides for itself what to keep quiet about.
 
 **DS-DEF-8::override: MIGRATION, arrivals**
 - NEW v4 `[guardPresence]` At {settlement} you find the guards posted where the newcomers camp, not at the edges of the place.
@@ -246,6 +246,26 @@ Base: the first seat's tip 31f57e8eb. Tip: the lane. NEW = a line written by thi
 
 **DS-GEN-3::defenseProfile.readiness.label: Undefended**
 - CHANGED v4 `[walls · no garrison]` -> `[walls · no garrison · no militia]`
+- NEW v6 `[no walls]` Nothing at {settlement} would hold back anyone who came in earnest: the place lies open, and what defence it has is thin.
+
+**DS-GEN-5::river** (pool brace: {} -> {"declares":["river"]})
+- CHANGED v1 `[river]` -> `[]`
+- CHANGED v2 `[river]` -> `[]`
+- CHANGED v3 `[river]` -> `[]`
+- CHANGED v4 `[river]` -> `[]`
+
+**DS-GEN-6::river** (pool brace: {} -> {"declares":["river"]})
+- CHANGED v1 `[no deficit · river]` -> `[no deficit]`
+- CHANGED v2 `[no deficit · river]` -> `[no deficit]`
+- CHANGED v3 `[deficit · river]` -> `[deficit]`
+- CHANGED v4 `[deficit · river]` -> `[deficit]`
+
+**DS-GEN-7::power_stress: occupation against stated stability**
+- CHANGED v1 `[crisis: occupied · no crisis: unrest]` -> `[no crisis: unrest]`
+- CHANGED v3 `[crisis: occupied · no crisis: unrest]` -> `[no crisis: unrest]`
+
+**DS-GEN-9::event type: disaster**
+- CHANGED v7 `[]` -> `[]` · text: "The telling of {event} at {settlement} carries the names of those who dealt with it, handed down with care." -> "When {settlement} tells of {event}, it remembers by name those who dealt with it, and hands the telling down with care."
 
 **DS-GEN-13::MARKET-OPEN**
 - CHANGED v1 `[no crisis: under_siege · crisis: any]` -> `[no crisis: under_siege · crisis: any · tier: ≤ town]`
@@ -277,6 +297,14 @@ Base: the first seat's tip 31f57e8eb. Tip: the lane. NEW = a line written by thi
 - CHANGED v2 `[dm-only]` -> `[dm-only · tier: ≥ village]`
 - CHANGED v3 `[dm-only]` -> `[dm-only]` · text: "Officials at {settlement} are spending money their posts never paid them, and nobody in the town asks where it came from." -> "Officials at {settlement} are paid little and watched less, and a purse offered in the right doorway would not be turned away."
 - NEW v4 `[dm-only · tier: ≤ hamlet]` {settlement} is too poor to pay the few people who hold office here, and anyone with money to spare could buy their goodwill cheaply.
+
+**DS-STR-1::UNDER OCCUPATION** (pool brace: {} -> {"declares":["crisis: occupied"]})
+- CHANGED v2 `[crisis: occupied]` -> `[]`
+- CHANGED v6 `[crisis: occupied]` -> `[]`
+- CHANGED v7 `[no walls · crisis: occupied]` -> `[no walls]`
+
+**DS-STR-1::WARTIME** (pool brace: {} -> {"declares":["crisis: wartime"]})
+- CHANGED v4 `[crisis: wartime]` -> `[]`
 
 **DS-CND-1::DIRECTION: worsening · CRISIS: famine**
 - CHANGED v1 `[]` -> `[tier: ≥ village]`
