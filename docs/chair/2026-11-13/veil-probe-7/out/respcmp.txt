@@ -1,0 +1,8 @@
+master-0-at203: rows of r203p212_0 (48 shares, 48 maps, 192 responses), xp_l against xp_f212: 0 lines differ
+master-0-release: rows of r203p212_0 (48 shares, 48 maps, 192 responses), xl211 against xf212: 0 lines differ
+new-0-release: rows of sfull_0 (48 shares, 48 maps, 192 responses), xl211 against xf212: 0 lines differ
+master-1-at203: rows of r203p212_1 (48 shares, 48 maps, 192 responses), xp_l against xp_f212: 0 lines differ
+master-1-release: rows of r203p212_1 (48 shares, 48 maps, 192 responses), xl211 against xf212: 0 lines differ
+new-1-release: rows of sfull_1 (48 shares, 48 maps, 192 responses), xl211 against xf212: 0 lines differ
+control-master-0-frozen211-alone: rows of r203p212_0 (48 shares, 48 maps, 192 responses), xp_l against xp_f: 312 lines differ
+control-new-0-frozen211-alone: rows of sfull_0 (48 shares, 48 maps, 192 responses), xl211 against xf211: 288 lines differ
