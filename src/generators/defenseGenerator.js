@@ -43,7 +43,7 @@ import { partitionDefenseInstitutions, defenseTraditionNamesOf, defenseWallOf } 
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { readinessBandOf } from '../data/bandLadders.js';
 import { deriveMagicReliance } from '../domain/magicReliance.js';
-import { keepOf, fundedGate } from '../domain/facts/keep.js';
+import { keepOf, keepOfRecord, fundedGate } from '../domain/facts/keep.js';
 import { DEFENCE_TUNING as W, DEFENCE_WORDS, WATCH_IN_STEAD } from '../data/defenceWeights.js';
 
 // ─── getDefenseInstitutions ───────────────────────────────────────────────────
@@ -478,12 +478,12 @@ const listOf = (r) => {
  *
  * @param {Object} settlement - Full settlement object
  * @param {{ bought: number, funded: number }} [upkeep] - the standing label's keep (`keepOfRecord`)
- * @returns {{ scores:any, readiness:any, institutions:any, magicDependency:boolean, traditions:Object, chainModifiers:Object, economicGates:Object, parts:any[] }}
+ * @returns {{ scores:any, readiness:any, institutions:any, magicDependency:boolean, traditions:Object, chainModifiers:Object, economicGates:Object }}
  */
 export function generateDefenseProfile(settlement, upkeep = keepOf(undefined)) {
   const s = /** @type {any} */ (settlement);
   const r = computeDefenseScores(s, upkeep);
-  const { list, score } = listOf(r);
+  const { score } = listOf(r);
   // ⛔ THE ONE RELIANCE READING (lane DEFENSE-2): `magicReliance.js :: deriveMagicReliance` at
   // relied-upon or integral, read over the assembled settlement.
   const { reading: magicReading } = deriveMagicReliance(s);
@@ -533,6 +533,23 @@ export function generateDefenseProfile(settlement, upkeep = keepOf(undefined)) {
       economic: Math.round(economicGate * 100) / 100,
       ...(disasterScore !== undefined ? { disaster: Math.round(disasterGate * 100) / 100 } : {}),
     },
-    parts: list,
+    // ⛔ NO `parts` HERE (COHERENCE-UPKEEP-6, the chair's ruling 2 on REVIEW-UPKEEP-2): defence holds no
+    // fact of its own, so the itemised parts are NOT stored — they are computed from the record on demand
+    // by `defencePartsOf`, for the tests, the probes and the owner's eight towns. The stored profile keeps
+    // the shape it had before this lane, so the world export carries no part.
   };
+}
+
+/**
+ * THE ITEMISED PARTS, computed from the record (COHERENCE-UPKEEP-6, the chair's ruling 2): every part, its
+ * group, its label, its source and its points in tenths, summing EXACTLY to `readiness.score`. Nothing
+ * stores this; it is re-derived from the record each time, for the tests, the probes and the eight towns.
+ * Pure in the record. `upkeep` defaults to the record's own standing keep, so the parts match the stored
+ * profile; a caller measuring a counterfactual may pass another.
+ * @param {Object} settlement @param {{ bought: number, funded: number }} [upkeep] the standing keep
+ * @returns {any[]} the parts list
+ */
+export function defencePartsOf(settlement, upkeep) {
+  const s = /** @type {any} */ (settlement);
+  return listOf(computeDefenseScores(s, upkeep ?? keepOfRecord(s.economicState))).list;
 }

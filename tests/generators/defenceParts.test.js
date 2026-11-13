@@ -9,7 +9,8 @@ import { beforeAll, describe, expect, test } from 'vitest';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { generateDefenseProfile } from '../../src/generators/defenseGenerator.js';
+import { generateDefenseProfile, defencePartsOf } from '../../src/generators/defenseGenerator.js';
+import { buildWorldExport } from '../../src/lib/worldExport.js';
 import { neighbourMilitaryFactorOf } from '../../src/generators/priorityHelpers.js';
 import { keepOfRecord } from '../../src/domain/facts/keep.js';
 import { readinessBandOf } from '../../src/data/bandLadders.js';
@@ -52,20 +53,38 @@ beforeAll(async () => {
 const tenthsOf = (v) => Math.round(v * 10);
 
 describe('defence is the sum of its parts', () => {
-  test(`the parts sum EXACTLY to readiness.score on every birth (${rows.length})`, () => {
+  test(`the parts (computed from the record) sum EXACTLY to readiness.score on every birth (${rows.length})`, () => {
     const bad = [];
     for (const [key, s] of Object.entries(births)) {
-      const dp = s.defenseProfile;
-      const sum = dp.parts.reduce((a, p) => a + tenthsOf(p.points), 0);
-      if (sum !== tenthsOf(dp.readiness.score) || Math.abs(dp.readiness.score * 10 - sum) > 1e-9) bad.push([key, sum / 10, dp.readiness.score]);
+      const parts = defencePartsOf(s);
+      const sum = parts.reduce((a, p) => a + tenthsOf(p.points), 0);
+      if (sum !== tenthsOf(s.defenseProfile.readiness.score) || Math.abs(s.defenseProfile.readiness.score * 10 - sum) > 1e-9) bad.push([key, sum / 10, s.defenseProfile.readiness.score]);
     }
     expect(bad).toEqual([]);
+  });
+
+  // COHERENCE-UPKEEP-6, the chair's ruling 2 on REVIEW-UPKEEP-2 (the review's §3): the parts are NOT stored.
+  // Defence holds no fact of its own, so the parts are computed from the record by one exported function
+  // (`defencePartsOf`), for the tests, the probes and the owner's eight towns; the stored profile keeps the
+  // shape it had before this lane, and the world export (player and DM) carries no part.
+  test('the parts are NOT stored, and the world export carries none', () => {
+    const PART_WORDS = ['Martial will', 'held in reserve', 'Walls with no one to man them', 'can carry no more than'];
+    for (const [key, s] of Object.entries(births)) {
+      expect(s.defenseProfile.parts, `${key}: no stored parts`).toBeUndefined();
+      const parts = defencePartsOf(s);
+      expect(parts.length, `${key}: the function computes them`).toBeGreaterThan(0);
+      for (const full of [true, false]) {
+        const text = JSON.stringify(buildWorldExport([s], { full }));
+        for (const w of PART_WORDS) expect(text.includes(w), `${key}: export (full=${full}) carries "${w}"`).toBe(false);
+        expect(/"parts"\s*:\s*\[\s*\{[^]*?"group"/.test(text), `${key}: export (full=${full}) carries a defence parts array`).toBe(false);
+      }
+    }
   });
 
   test('every part names its group, its label and its source, with points in tenths', () => {
     const bad = [];
     for (const [key, s] of Object.entries(births)) {
-      for (const p of s.defenseProfile.parts) {
+      for (const p of defencePartsOf(s)) {
         const ok = GROUPS.has(p.group) && typeof p.id === 'string' && p.id.length > 0
           && typeof p.label === 'string' && p.label.length > 0 && typeof p.source === 'string' && p.source.length > 0
           && Number.isFinite(p.points) && Math.abs(p.points * 10 - Math.round(p.points * 10)) < 1e-9;
@@ -78,7 +97,7 @@ describe('defence is the sum of its parts', () => {
   test('each line is its own measure to the tenth: a part counts no more than its full measure, and size and threat are the table\'s', () => {
     const bad = [];
     for (const [key, s] of Object.entries(births)) {
-      for (const p of s.defenseProfile.parts) {
+      for (const p of defencePartsOf(s)) {
         if (typeof p.full === 'number' && Math.abs(p.points) > Math.abs(p.full) + 0.1 + 1e-9) bad.push([key, p.id, p.points, p.full]);
         if (p.id === 'size' && p.points !== DEFENCE_TUNING.size[s.tier]) bad.push([key, 'size', p.points]);
         if (p.id === 'danger' && p.points !== -DEFENCE_TUNING.threat.penalty[s.config.monsterThreat]) bad.push([key, 'danger', p.points]);
@@ -121,7 +140,7 @@ describe('defence is the sum of its parts', () => {
     for (const [key, s] of Object.entries(births)) {
       const forced = rows.find((r) => r.key === key).stress;
       if (!forced || forced === 'wartime') continue;
-      const took = s.defenseProfile.parts.some((p) => p.crisis && Object.hasOwn(p.crisis, forced));
+      const took = defencePartsOf(s).some((p) => p.crisis && Object.hasOwn(p.crisis, forced));
       expect(took, key).toBe(true);
     }
   });
@@ -134,7 +153,7 @@ describe('defence is the sum of its parts', () => {
     for (const [key, s] of Object.entries(births)) {
       if (rows.find((r) => r.key === key).stress !== 'wartime') continue;
       forced += 1;
-      const took = s.defenseProfile.parts.filter((p) => p.crisis && Object.hasOwn(p.crisis, 'wartime'));
+      const took = defencePartsOf(s).filter((p) => p.crisis && Object.hasOwn(p.crisis, 'wartime'));
       expect(took.length, `${key}: wartime takes from a part`).toBeGreaterThan(0);
       for (const p of took) expect(p.group, `${key}: ${p.id}`).toBe('SUSTAINS');
     }
@@ -166,7 +185,7 @@ describe('the kind of wall counts', () => {
     const bad = [];
     let kinds = new Set();
     for (const [key, s] of Object.entries(births)) {
-      const walls = s.defenseProfile.parts.find((p) => p.id === 'walls');
+      const walls = defencePartsOf(s).find((p) => p.id === 'walls');
       const wall = defenseWallOf(s.institutions);
       expect(Boolean(walls), `${key}: a walls part where the home answers a wall`).toBe(wall.present);
       if (!walls) continue;
@@ -207,10 +226,10 @@ describe('the martial will (R13, R14)', () => {
     for (const [key, s] of Object.entries(births)) {
       const stored = JSON.parse(JSON.stringify(s));
       expect(stored.config.neighborRelationship?.relationshipType ?? null, `${key} is a lone birth`).toBe(null);
-      const will = stored.defenseProfile.parts.find((p) => p.id === 'will');
+      const will = defencePartsOf(stored).find((p) => p.id === 'will');
       if (!will) continue;
       stored.config.neighborRelationship = { relationshipType: 'hostile' };
-      const again = generateDefenseProfile(stored, keepOfRecord(stored.economicState)).parts.find((p) => p.id === 'will');
+      const again = defencePartsOf(stored, keepOfRecord(stored.economicState)).find((p) => p.id === 'will');
       expect(again.full, key).toBeGreaterThanOrEqual(will.full);
       if (again.full > will.full) moved += 1;
     }
@@ -221,7 +240,7 @@ describe('the martial will (R13, R14)', () => {
     const ARMED = new Set(['garrison', 'militia', 'watch', 'company', 'charter', 'households', 'wardens']);
     let held = 0;
     for (const [key, s] of Object.entries(births)) {
-      const parts = s.defenseProfile.parts;
+      const parts = defencePartsOf(s);
       const will = parts.find((p) => p.id === 'will');
       if (!will || will.held === undefined) continue;
       held += 1;

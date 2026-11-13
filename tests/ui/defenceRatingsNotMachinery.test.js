@@ -64,9 +64,9 @@ describe('the Defense tab shows the ratings, not the machinery', () => {
     }
   });
 
-  test('no part, no points, no machinery word on the page — the parts stay in the record', () => {
+  test('no part, no points, no machinery word on the page — and the parts are not stored (ruling 2)', () => {
     for (const { key, v3 } of cases) {
-      expect(v3.defenseProfile.parts.length, `${key}: the record keeps its parts`).toBeGreaterThan(0);
+      expect(v3.defenseProfile.parts, `${key}: the parts are not stored (COHERENCE-UPKEEP-6, ruling 2)`).toBeUndefined();
       const { container } = render(e(DefenseTab, { settlement: v3, narrativeNote: null }));
       const text = container.textContent || '';
       expect(text.length, `${key}: the tab rendered`).toBeGreaterThan(200);

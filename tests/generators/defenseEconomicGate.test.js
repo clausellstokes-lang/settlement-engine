@@ -26,7 +26,7 @@
  */
 
 import { describe, expect, test } from 'vitest';
-import { generateDefenseProfile } from '../../src/generators/defenseGenerator.js';
+import { generateDefenseProfile, defencePartsOf } from '../../src/generators/defenseGenerator.js';
 import { computeEffectiveMagicPresence } from '../../src/generators/priorityHelpers.js';
 import { buildThreatAssessment } from '../../src/domain/display/threatAssessment.js';
 import { deriveDefenseReadiness } from '../../src/domain/display/defenseDisplay.js';
@@ -35,6 +35,9 @@ import { keepOf } from '../../src/domain/facts/keep.js';
 
 /** The profile as the pipeline makes it: what the place can keep up, from its label (`assembleSettlement.js`). @param {any} s */
 const profile = (s) => generateDefenseProfile(s, keepOf(s.economicState?.prosperity));
+// Re-keyed by identity at COHERENCE-UPKEEP-6 (the chair's ruling 2: the parts are NOT stored): the two pins that
+// read the parts read them from the one function that computes them from the record, at the same keep.
+const partsOf = (s) => defencePartsOf(s, keepOf(s.economicState?.prosperity));
 
 function town({
   priorityEconomy = 50,
@@ -116,10 +119,10 @@ describe('economic survival respects the actual economy', () => {
   // number of scores), with the same margins (76 against 60).
   test('a healthy economy with identical buildings scores meaningfully higher', () => {
     /** @param {any} d */
-    const supplyBeforeTheLimit = (d) => Math.round(d.parts.filter((x) => x.group === 'SUSTAINS').reduce((a, x) => a + x.points, 0) * 4);
-    const poor = profile(town({ priorityEconomy: 15, prosperity: 'Struggling' }));
-    const rich = profile(town({ priorityEconomy: 80, prosperity: 'Prosperous' }));
-    expect(poor.parts.some((x) => x.id === 'sustainsHeld'), 'anchored: the limit binds this town').toBe(true);
+    const supplyBeforeTheLimit = (d) => Math.round(d.filter((x) => x.group === 'SUSTAINS').reduce((a, x) => a + x.points, 0) * 4);
+    const poor = partsOf(town({ priorityEconomy: 15, prosperity: 'Struggling' }));
+    const rich = partsOf(town({ priorityEconomy: 80, prosperity: 'Prosperous' }));
+    expect(poor.some((x) => x.id === 'sustainsHeld'), 'anchored: the limit binds this town').toBe(true);
     expect(supplyBeforeTheLimit(rich)).toBeGreaterThan(supplyBeforeTheLimit(poor) + 15);
     expect(supplyBeforeTheLimit(rich)).toBeGreaterThanOrEqual(60);
   });
@@ -321,14 +324,14 @@ describe('magical defense respects degraded magic influence', () => {
     // (presence score is well below the raw slider) shaved ~30% off healthy
     // settlements and double-counted weak presence.
     const cfg = { magicExists: true, priorityMagic: 70, priorityEconomy: 70, priorityCriminal: 10 };
-    const healthy = generateDefenseProfile(town({ ...cfg, institutions: arcaneInstitutions }));
+    const healthyTown = town({ ...cfg, institutions: arcaneInstitutions });
     const presence = computeEffectiveMagicPresence(arcaneInstitutions, {
       magicExists: true, priorityMagic: 70, nearbyResources: [],
     });
     // ⭐ RE-KEYED BY IDENTITY (COHERENCE-UPKEEP-5, V3): the magic PART keeps all of itself at full funding (the
     // identity), and it is the presence alone: the guild stands as its own part, never added again (count
     // once, so no +8). The score is then held by limit 1 (this town fields no force), a separate rule.
-    const magic = healthy.parts.find((x) => x.id === 'magic');
+    const magic = defencePartsOf(healthyTown, keepOf(undefined)).find((x) => x.id === 'magic');
     expect(magic.full).toBe(Math.round((presence.score / 5) * 10) / 10);
     expect(magic.points).toBe(magic.full);
   });

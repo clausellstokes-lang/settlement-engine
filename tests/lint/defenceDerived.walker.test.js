@@ -20,8 +20,9 @@
  * naming a rule is not a use of it.
  *
  * AND THE PAGE SHOWS THE RATINGS, NOT THE MACHINERY (the owner, the chair's record 328). The parts
- * list stays in the RECORD (`defenseProfile.parts`, for the owner, the reviewer and the tests); no
- * reader surface prints it. A fifth arm walks the reader surfaces — `src/components/**`,
+ * list is NOT stored (COHERENCE-UPKEEP-6, ruling 2): `defenceGenerator.js :: defencePartsOf` computes it
+ * from the record for the owner, the reviewer and the tests; no reader surface prints or serialises it.
+ * A fifth arm walks the reader surfaces — `src/components/**`,
  * `src/pdf/**`, `src/foundry/**` and the export writers `src/lib/*Export.js` — with comments
  * stripped and strings KEPT (`commentsOnly`: a rendered word lives inside a literal), and reds on
  *   (v)   a read of `defenseProfile.parts` (or of the words table `src/data/defenceWeights.js`,
@@ -54,9 +55,9 @@ const NUMBERLESS = 'src/generators/defenseGenerator.js';
 const STRUCTURAL = new Set([0, 1, 2, 5, 10, 100]);
 
 const STORED_READ = /\bdefen[cs]eProfile\b|\.readiness\b|\.economicGates\b|\.chainModifiers\b|\.magicDependency\b/g;
-const RANDOM = /\b_?rng\w*\b|\brandom\w*\b|\bRandom\w*\b|rngContext|\bunseeded\w*|\bchance\s*\(|\bpick\s*\(|\brandInt\b|\bshuffle\s*\(|\bweightedPick\b/g;
+const RANDOM = /\b_?rng\w*\b|\brandom\w*\b|\bRandom\w*\b|rngContext|\bunseeded\w*|\bchance\s*\(|\bpick\s*\(|\brandInt\b|\bshuffle\s*\(|\bweightedPick\b|\bgetActiveRng\b|\bcreatePRNG\b|\bgetRng\b/g;
 const NAME_TEST = /\.(?:includes|test|match|matchAll|search|indexOf|startsWith|endsWith)\s*\(|\bnativeSemanticName\b|(?:^|[=(,:[!&|?{};]|\breturn)\s*\/(?![/*\s])(?:\\.|[^/\n\\])+\/[dgimsuy]*/gm;
-const MACHINERY = /\bdefen[cs]eProfile\b[\w$?.\s]*?\.\s*parts\b|defenceWeights|\bDEFENCE_(?:WORDS|TUNING|WEIGHT_REASONS)\b|held in reserve|more than enough|martial will|paid as an? /gi;
+const MACHINERY = /\bdefen[cs]eProfile\b[\w$?.\s]*?\.\s*parts\b|(?:JSON\s*\.\s*stringify|structuredClone)\s*\([^;]*?\bdefen[cs]eProfile\b|defenceWeights|\bDEFENCE_(?:WORDS|TUNING|WEIGHT_REASONS)\b|held in reserve|more than enough|martial will|paid as an? /gi;
 const NUMBER = /(?<![\w.$])(?:\d+(?:\.\d+)?|\.\d+)(?:e[+-]?\d+)?(?![\w.])/g;
 
 /** @param {string} code @param {RegExp} re @returns {string[]} `line: text` of each hit */
@@ -140,13 +141,18 @@ describe('the walker is planted red, five ways, on fixture sources', () => {
     expect(got.stored).toEqual(['1: defenseProfile', '2: .readiness', '3: .economicGates']);
   });
 
-  test('(ii) an rng import or a random call reds', () => {
+  test('(ii) an rng import or a random call reds, the codebase\'s own streams among them', () => {
     const got = convictions(NUMBERLESS, "import { random as _rng } from '../kernel/rngContext.js';\nconst x = Math.random();\nif (chance(p)) y = pick(list);\n");
     expect(got.random.length).toBeGreaterThanOrEqual(5);
     expect(got.random.join(' ')).toMatch(/_rng/);
     expect(got.random.join(' ')).toMatch(/random/);
     expect(got.random.join(' ')).toMatch(/chance/);
     expect(got.random.join(' ')).toMatch(/pick/);
+    // The reviewer's plant ii: the codebase's own active streams are drawing too (REVIEW-UPKEEP-2, C12).
+    const streams = convictions(NUMBERLESS, 'const r = getActiveRng();\nconst p = createPRNG(seed)();\nconst q = getRng();\n');
+    expect(streams.random.join(' ')).toMatch(/getActiveRng/);
+    expect(streams.random.join(' ')).toMatch(/createPRNG/);
+    expect(streams.random.join(' ')).toMatch(/getRng/);
   });
 
   test('(iii) a name test outside the roster home reds; the home itself may', () => {
@@ -165,6 +171,7 @@ describe('the walker is planted red, five ways, on fixture sources', () => {
       "const note = 'Military: more than enough, held in reserve';",
       "<span>Martial will</span>",
       "const pay = `Paid as a ${standing} town`;",
+      "const blob = JSON.stringify(s.defenseProfile);",
       '// a comment may say defenseProfile.parts and Martial will: prose is not a print',
     ].join('\n');
     const got = machineryOn(plant);
@@ -174,7 +181,9 @@ describe('the walker is planted red, five ways, on fixture sources', () => {
     expect(got.filter((h) => h.startsWith('4:')).length).toBe(2);
     expect(got.filter((h) => h.startsWith('5:')).length).toBe(1);
     expect(got.filter((h) => h.startsWith('6:')).length).toBe(1);
-    expect(got.filter((h) => h.startsWith('7:'))).toEqual([]);
+    // The reviewer's plant v-prime: serialising the whole profile reds (REVIEW-UPKEEP-2, §3, C12).
+    expect(got.filter((h) => h.startsWith('7:')).length).toBe(1);
+    expect(got.filter((h) => h.startsWith('8:'))).toEqual([]);
     expect(machineryOn("const dp = settlement.defenseProfile; const band = dp.readiness.label;\n")).toEqual([]);
   });
 

@@ -222,7 +222,6 @@ export const KEYED_COLLECTIONS = Object.freeze({
   'defenseProfile.institutions.militia': 'name',
   'defenseProfile.institutions.walls': 'name',
   'defenseProfile.institutions.watch': 'name',
-  'defenseProfile.parts': 'id', // COHERENCE-UPKEEP-5: readiness as a list of parts, one line per part id
   'economicState.activeChains': 'label',
   'economicState.institutionalServices': 'label',
   'economicState.safetyProfile.crimeTypes': 'type',
