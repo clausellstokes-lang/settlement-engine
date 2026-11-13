@@ -1,0 +1,6 @@
+dossier-prose-manifest             tip acd6adaddf | 9d5d6e091 49a37e4c24 | 1fb15980d acd6adaddf DIFFER
+generator-golden-master            tip 6da1ed8c45 | 9d5d6e091 6da1ed8c45 | 1fb15980d 6da1ed8c45 IDENTICAL
+espionage-dormancy-fence           tip d4f5169f49 | 9d5d6e091 d4f5169f49 | 1fb15980d d4f5169f49 IDENTICAL
+herald-knowledge-desk-golden       tip 52933f4b49 | 9d5d6e091 52933f4b49 | 1fb15980d 52933f4b49 IDENTICAL
+cartography-calibration-corpus     tip 979b28354e | 9d5d6e091 979b28354e | 1fb15980d 979b28354e IDENTICAL
+pdf-golden-view-model-snapshot     tip 523cd22844 | 9d5d6e091 523cd22844 | 1fb15980d 523cd22844 IDENTICAL

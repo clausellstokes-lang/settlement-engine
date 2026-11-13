@@ -1,0 +1,3 @@
+tip red rows 59 {"red at 9d5d6e091 / red at 1fb15980d":58,"green at 9d5d6e091 / red at 1fb15980d":1}
+green at 9d5d6e091 / red at 1fb15980d  tests/lint/tuningRegister.walker.test.js › tuning register — the inventory is frozen and honest › the measured tree matches the committed inventory exactly
+red at 1fb15980d, green at the tip: 0
