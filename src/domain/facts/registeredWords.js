@@ -240,10 +240,16 @@ const countOf = (word) => (/^\d+$/.test(word) ? Number(word) : NUMBER_WORDS[word
  * @param {RegExp} words @param {string | undefined} sentence @returns {number | null}
  */
 function statedCount(words, sentence) {
-  const m = new RegExp(words.source, 'i').exec(String(sentence ?? ''));
+  const text = String(sentence ?? '');
+  const m = new RegExp(words.source, 'i').exec(text);
   if (!m) return null;
   const word = m.slice(1).find((g) => typeof g === 'string' && g) || '';
-  return countOf(word);
+  const n = countOf(word);
+  // finding 4 of REVIEW-W2B's third read: a HEDGE ("two or three powers", "two to four factions") is read by its LOWER count
+  const at = m.index + m[0].toLowerCase().indexOf(word.toLowerCase());
+  const hedge = new RegExp(`\\b(${COUNT})\\s+(?:or|to)\\s+$`, 'i').exec(text.slice(0, at));
+  const low = hedge ? countOf(hedge[1]) : null;
+  return n !== null && low !== null ? Math.min(n, low) : n;
 }
 
 /** @param {WordRecord | null | undefined} record @returns {number} the powers the record holds (`powerStructure.factions`) */

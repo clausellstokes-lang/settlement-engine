@@ -281,6 +281,18 @@ describe('F13 / F6 — the counts', () => {
     expect(words(town([{ name: 'Craft guilds (5-15)' }]), 'The 20 guilds share the market square between them.')).toEqual(['housesCount']);
     expect(words(town([{ name: 'Merchant guilds (50-100+)' }]), 'The 120 guilds share the market square between them.')).toEqual([]);
   });
+  /**
+   * Finding 4 of the third read (REVIEW-W2B-c3913f999: "the powers count reads the 'two or three' hedge as three"; 11 of
+   * the 16 "Two or three powers each run part of …" lines on the 720 stand in towns of two or more powers). A hedge is
+   * read by its LOWER count. Red at 27e37fac0 (the hedge in a town of two powers was a finding).
+   */
+  test('finding 4 (third read): a hedge "two or three powers" is read by its lower count', () => {
+    const line = 'Two or three powers each run part of the town and its trade.';
+    expect(words(town([], 2), line)).toEqual([]);
+    expect(words(town([], 1), line)).toEqual(['powersCount']);
+    expect(words(town([], 2), 'Two to four factions each run part of the town and its trade.')).toEqual([]);
+    expect(words(town([], 2), 'Three powers each run part of the town and its trade.')).toEqual(['powersCount']);
+  });
   test('F6: law enforcement is a watch or a garrison; a headman keeps the law but is not law enforcement', () => {
     const f = (institutions) => factsOf(town(institutions));
     expect(thingsDeniedIn('There is effectively no law enforcement here.')).toEqual(['lawEnforcement']);
