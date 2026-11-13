@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "194c20e51ffa60f1b391e5020773683aa714d1db",
-  "measuredBy": "STYLE-2-MERGE-12",
+  "measuredAtSha": "fc2e15afdb1c2d4fbec8240e9a77aa161cc5cd36",
+  "measuredBy": "R3-TABS",
   "date": "2026-11-13",
-  "note": "point 48: W2-A-LEAVES (817980b33) merged onto the line at aac79b808; its new test files and titles",
-  "files": 3242,
+  "note": "lane/r3-tabs-2026-11-13 adds nine test files (five tab tests, four defence desk tests) on the line at 9e57f5023",
+  "files": 3251,
   "parked": 402,
-  "credited": 2840,
-  "titles": 29345,
-  "suiteTitles": 7960
+  "credited": 2849,
+  "titles": 29369,
+  "suiteTitles": 7969
 }
