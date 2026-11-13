@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "fc2e15afdb1c2d4fbec8240e9a77aa161cc5cd36",
-  "measuredBy": "R3-TABS",
+  "measuredAtSha": "58a7b6484e5f49abfc56895f3d36e348e601f8ad",
+  "measuredBy": "R3-TABS-2",
   "date": "2026-11-13",
-  "note": "lane/r3-tabs-2026-11-13 adds nine test files (five tab tests, four defence desk tests) on the line at 9e57f5023",
-  "files": 3251,
-  "parked": 402,
-  "credited": 2849,
-  "titles": 29369,
-  "suiteTitles": 7969
+  "note": "lane/r3-tabs-2026-11-13 (second seat) adds one test file: tests/components/tensionSeverityOneWord.test.jsx",
+  "files": 3253,
+  "parked": 403,
+  "credited": 2850,
+  "titles": 29371,
+  "suiteTitles": 7970
 }
