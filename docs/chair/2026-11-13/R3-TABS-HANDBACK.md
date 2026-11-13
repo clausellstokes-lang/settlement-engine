@@ -245,3 +245,18 @@ rv2/rv3/rv4 seeds in the app's shape; classes by classes3.py's own patterns) and
   "Gates (if walled)" would print as stored).
 - DefenseTab.jsx's "Active criminal operations" prints `safetyProfile.criminalInstitutions[]` raw.
 - HistoryTab.jsx and SubstrateTab.jsx print no house name.
+
+### 16. CENSUS-2 (2686272b1) in this seat's files, and one hit cured — DONE (317f1e19c)
+- Run at the lane's base aac79b808 and at 87d361dae, `--files` DefenseTab, HistoryTab, SubstrateTab, ServicesTab,
+  defenseStateProse, postureLineDisqualifiers; every stage's exit read (both 0). The census traces corpus lines to the
+  corpus file, so the selector's hits print under `defense.generated.js`; read there:
+  - kind e "no line and no force" beside a force: 2 lines / 14 towns -> 0 (L0).
+  - kind d untraced: "FORCED" (15 lines / 378 towns at base) gone; what remains is the severity chips
+    ("Legitimacy crisismajorcatastrophic", 14 lines / 219 towns): item 5's STOP.
+  - kind b, DS-DEF-1 strong v1 "reads as a defended place from the road in" under a siege: 2 towns at base, 7 at
+    87d361dae (L1's move). CURED: the line carries "under siege"; under a siege every strong line is struck and the
+    posture says nothing. 24 lines leave on the defence reader's 1,440, each that line under a siege.
+  - ServicesTab.jsx: kind d 1 line ("Needs Trade access + grainNo trade access: … · covers …") and kind f 25 lines /
+    716 towns (catalogue ranges in house labels) at base and tip alike: named (item 14; the label leaf is R2-CODE-B's,
+    for the join).
+- Its limits, beside any zero: the dossier's views only; it cannot see two lines of a page disagreeing.
