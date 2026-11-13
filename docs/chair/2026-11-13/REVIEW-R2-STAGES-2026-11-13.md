@@ -4,9 +4,9 @@ The reviewer REVIEW-R2-STAGES, for the chair (session_01FE9mEws7PXYRYdjQPbSX15).
 
 | stage | tip read | base | verdict |
 |---|---|---|---|
-| **A** `lane/r2-code-a-2026-11-13` | 2f114a4c9 | e969a75b7 | **CLEAR** (two LOW findings, two notes) |
-| **B** `lane/r2-code-b-2026-11-13` | 80b960171 | e969a75b7 | **NOT CLEAR** (one MEDIUM, one LOW) |
-| **C** `lane/w2-c-leaves-2026-11-13` | d79ea4c70 | 4534ea5e3 | **NOT CLEAR** (two HIGH, two MEDIUM, one LOW) |
+| **A** `lane/r2-code-a-2026-11-13` | 2f114a4c9 | e969a75b7 | **CLEAR** (LOW findings 6 and 7 only) |
+| **B** `lane/r2-code-b-2026-11-13` | 80b960171 | e969a75b7 | **NOT CLEAR** (MEDIUM finding 3; LOW finding 5) |
+| **C** `lane/w2-c-leaves-2026-11-13` | d79ea4c70 | 4534ea5e3 | **NOT CLEAR** (HIGH findings 1 and 2; MEDIUM finding 4; LOW finding 8) |
 
 The cold list (`REVIEW-R2-STAGES-COLD-LIST.md` and `.json`) was committed and pushed at 1d9f7fd4a before any hand-back or commit message of the three lanes was opened. One exception, stated: the first command of this session printed my checkout's HEAD line, which was stage A's last commit subject ("docs(R2-CODE-A): the hand-back at the chair's pause — …"). It carries no claim, and nothing else of A's was read before the push. The probes are in `probes/REVIEW-R2-STAGES/` and their outputs in `probes/REVIEW-R2-STAGES/out/`.
 
@@ -161,8 +161,33 @@ The cold list (`REVIEW-R2-STAGES-COLD-LIST.md` and `.json`) was committed and pu
   - **Nothing outside the arrival paragraph moves** (A's narrativeData.js alone: 34 towns, the arrival only). Inside it, the later beats move in 31 towns, as A declares.
 - **No new key** in the record: none at A, B or C, by the field diff. **No new word in the vocabulary file:** none of the three changes `src/domain/facts/factVocabulary.js`. A uses the existing `docks` and `coast`.
 
-## 5. Plants (one fault per guard)
-See §5a below once the run ends.
+## 5. Plants (one fault per guard), EXECUTED
+- **How:** in a scratch worktree at each tip (`plant.py`, `plants-*.json`), I made each fault by an exact one-place edit, ran every new guard of that stage, then restored the file. The control run, with no plant, was green for every stage (`out/plants-*.txt`).
+- **A, 10 plants: each reds its own guard, and only that guard.**
+  - The siege slot, a food secret and the siege goal, each reading the export again: `crisisFoodWord`.
+  - The famine line naming the leading power: `famineReservesHolder`.
+  - A harbour row losing its docks need: `arrivalHarbourDocks`.
+  - The church twin restored: `churchLineNoOffice`.
+  - The importer back under a siege: `importerHookNoTrade`.
+  - The guild secret where crime stands but no guild: `informantNoThievesGuild`.
+  - Row needs ignored after the pick, and the gates line losing its gate need: `pressureHonoursNeeds`.
+- **B, 8 plants: each reds its own guard, and only that guard.**
+  - The chain-depth chip, the covers tail and a provenance tag as provider: `servicesRowMachinery`.
+  - The count range kept in the house label: `houseLabelMachinery`.
+  - YOU on every forced row: `institutionBadgeWhoAdded`.
+  - The empty line denying conflicts: `relationshipsEmptyTensions`.
+  - The tile reading the percent: `dailyLifeFoodTileBand`.
+  - "a few weeks" under a month: `storesSpanWords`.
+  - No guard of B's covers the PDF's supply-chain section (finding 3).
+- **C, 8 plants: each reds its own guard.**
+  - The houses read by one name: `gapLineHousesByKind`.
+  - "No one here works" ignoring the leaf, and the half-way grade ignoring the idle model: `gapLineReadsChainLeaf`.
+  - Clerical care reading the church flag: `clericalCareNeedsClergy`.
+  - The famine words ignored: `economicsFoodFamineWords`.
+  - Food by trade under a siege: `economicsFoodTradeUnderSiege`.
+  - Needs printed as imports: `economicsImportsAreArrivals`.
+  - No need met under another name: reds `needMetUnderAnotherName` AND `economicsImportsAreArrivals`. It is the same fault reaching a second guard that renders the same leaf, not a guard red on another fault.
+  - Two of C's faults have no guard at all: a need the town makes itself (finding 2), and a half-way line naming a house of a kind the roster holds under a name the catalogue lacks (finding 1). `gapLineHousesByKind` pins "no leatherworkers' guild finishes it" beside Tanners as correct.
 
 ## 6. The machinery at B's tip, on every surface of my 20 towns
 - **Surfaces rendered:** the page as the owner sees it; the PDF (all three variants, walked to their text leaves); the Foundry journal pages (`buildJournalPages`, all three variants); the Tonight sheet (`composeTonightSheet`).
@@ -194,12 +219,26 @@ See §5a below once the run ends.
   - All three are green at the base. They are the golden surfaces, the merge seat's, and A declares them.
   - `pipelinePinnedMode` (run apart) is red 3 at A's tip, A1 / A2 / A5, which A declares. The fork census is green.
 - **B, governing suites** (116 files): **1 red file**, `proseWiringCensus.walker` (finding 5). It is green at the base and not declared.
-- **C:** see §7a below once the run ends.
+- **C, governing suites** (71 files naming C's modules): **2 red files, 3 titles**, all red at C's merged base 4534ea5e3 with the same titles and the same assertion shapes, so they are the base's, as C declares:
+  - `dossierPhoneFloorAllViews`: "desktop is untouched …" and "every line in every tab clears its floor …";
+  - `chainPrintSites.walker`: "no file reads a chain's name or source outside the three lists".
+- **Not finished:** the base run over all 71 files reached its time limit. I then ran C's reds alone at the base.
 
 ## 8. What I did not measure
-- The census counter (the second-wave census's counts, base against tip) for any stage, and the whole suite at any tip. None of the three stages ran them either: each paused on the chair's word.
+- The census counter (the second-wave census's counts, base against tip) for any stage, and the whole suite at any tip. I queued the 720-dossier renders and then dropped them for time. None of the three stages ran them either: each paused on the chair's word.
 - The page over the 720 for the machinery and the needs line. I measured those on records through each stage's own readers, and the page on my 20 towns only.
 - B's YOU badge and the Daily Life tile on generated towns: none of my 20 towns carries the case.
 - The golden's 525 configurations: the field diff is over the census's 720 only.
 - A render caveat: the "Patron deity" panel prints or not according to load timing. Re-rendered, it printed at both trees, so it was not counted against any stage.
 - The hazard: refs and local config were snapshotted around every suite and push. The only changes are my own: my branch, the push's upstream setting, and the `review-fixes-2026-07-08` remote ref I fetched to read ODQ §934.13. `npm ci` set `core.hookspath=.husky/_` in the shared local config; I unset it the same minute, back to the snapshot.
+
+## 9. Counts of findings, and what the chair must rule
+- **By stage:**
+  - A: 0 high, 0 medium, 2 low (findings 6 and 7).
+  - B: 0 high, 1 medium (finding 3), 1 low (finding 5).
+  - C: 2 high (findings 1 and 2), 1 medium (finding 4), 1 low (finding 8).
+- **Ranks:** finding 2 is ranked HIGH here because the stage is the ORIGIN of the sentence (record 303). By the cold reader's own scale each line is MEDIUM.
+- **What it takes to clear:**
+  - **B:** `SupplyChainFlow.jsx :: ChainRow` and `EconomicsTrade.jsx`'s PROC row read `chainHousesOf` (B's own leaf), and the wiring census is re-taken by its writer. Both are small, and both are in files no lane was found to hold at B's check.
+  - **C:** "by kind" must answer a house that has no catalogue row: a Cobbler's guild or a Furrier's district for the leatherworkers, "Carpenters (5-15)" for the carpenters' guild. A half-way line must not print where one finisher stands. The needs line must leave out a good the town makes itself.
+- **The one ruling:** finding 4 is the chain model's own error, a palisade "working" a stone quarry and a church at the hot springs "working" herbs. It costs 8 true lines that C's cure removed by the ruled home. Whose seat cures the model's rows, and does C's removal wait on it?
