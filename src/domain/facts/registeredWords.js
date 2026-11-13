@@ -89,8 +89,8 @@ export const COURT_HOUSES = Object.freeze(new Set(Object.entries(INSTITUTION_SER
 
 /**
  * THE FAMILIES WITHDRAWN FROM THE PAGE LIST (W2-B-DECLARE third seat, item 1: the precision read of sixty findings on the
- * census's 720). Neither is narrowed surely by its words or its leaf, so each leaves the page list; the walker's source
- * arm still reads them (a line naming them declares).
+ * census's 720; the role words at the third read, finding 1). None is narrowed surely by its words or its leaf, so each
+ * leaves the page list; the walker's source arm still reads them (a line naming them declares).
  */
 const PAGE_WITHDRAWN = Object.freeze({
   thing: 'the precision read, 2 of 8 true after the narrowing by words: a hand-written thing on the page is mostly a '
@@ -104,6 +104,11 @@ const PAGE_WITHDRAWN = Object.freeze({
     + 'naming its neighbours ("between mine and smithy"); no word or leaf narrows it surely',
   resource: 'the precision read, 0 of 6 true: a resource label on the page is a chain\'s input or import, or a depleted '
     + 'resource the line itself marks "(depleted)"; the leaf (the town\'s own country) is not what those lines claim',
+  // REVIEW-W2B's third read, finding 1 (the chair's ruling: withdraw; a narrowing of the leaves waits for after the release)
+  role: 'the third read\'s precision read, 7 of 19 true on two draws: a role word on the page is mostly a standing house\'s '
+    + 'catalogue description naming the smith as its customer ("between forest and forge") or a forge festival\'s name, a '
+    + 'prisoner or an armoury in a town whose watch and court keep them, or a physician in a great town; on the 720 about '
+    + '130 of 418 role lines are not false by structure; no leaf narrows them surely yet',
 });
 
 /**
@@ -579,6 +584,13 @@ for (const w of Object.values(ROLE_FAMILIES)) {
   w.absent = (f, names, record, sentence) => houseAbsent(f, names, record, sentence) && !peopleHold(record, w.words);
   w.leaf = `${w.leaf}; or a person among the town's people who holds the role (npcs[].role, npcs[].title)`;
 }
+/**
+ * THE ROLE WORDS WITHDRAWN FROM THE PAGE LIST (REVIEW-W2B's third read, finding 1; the chair's ruling): the seven the read
+ * measured at 7 of 19. They stay registered (the walker's arms and a line's conditions read them). `clergy` and
+ * `armedForce` were not in that read and stay on the page list.
+ */
+const ROLE_PAGE_WITHDRAWN = Object.freeze(['smith', 'prisoner', 'physician', 'guardCaptain', 'notary', 'mason', 'armoury']);
+for (const id of ROLE_PAGE_WITHDRAWN) ROLE_FAMILIES[id].pageWithdrawn = PAGE_WITHDRAWN.role;
 
 /**
  * THE WORDS OF NORMAL TIMES AND OF SIZE (the review's named families): open trade, which a siege in force makes false;

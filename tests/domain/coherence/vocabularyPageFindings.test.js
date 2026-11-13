@@ -105,7 +105,9 @@ describe('F1 — the generated vocabulary', () => {
     // the house and resource families left the page list at the third seat's precision read (item 1; the walker still reads them)
     // F7 of the second read: DS-DEF-5's "comes from its alchemists" is the kept alchemist phrase, false in a hamlet with
     // no alchemist (the cold list's c26 and c30 lines)
-    expect(words(hamlet)).toEqual(['armedForce', 'clergy', 'house: alchemist', 'openTrade', 'smith', 'streets']);
+    // re-keyed at the sixth seat (REVIEW-W2B-3, finding 1): `smith` left the page list with the seven role words (read 7
+    // of 19), so "Iron ore deposits feed the forges here." is the walker's, no longer a page finding
+    expect(words(hamlet)).toEqual(['armedForce', 'clergy', 'house: alchemist', 'openTrade', 'streets']);
     expect(words(town)).toEqual([]);
   });
 
@@ -341,5 +343,45 @@ describe('F7 (second read) — the market phrase and the alchemist phrase are on
     expect(words(place([{ name: 'Herbalist' }]), 'The local alchemist supplements conventional trade.')).toEqual(['house: alchemist']);
     expect(words(place([{ name: 'Alchemist shop' }]), 'The local alchemist supplements conventional trade.')).toEqual([]);
     expect(words(place([{ name: 'Herbalist' }]), 'Not to be confused with the alchemist.')).toEqual([]);
+  });
+});
+
+/**
+ * Finding 1 of the third read (REVIEW-W2B-c3913f999: "the page list's role words read well below nine in ten", 7 of 19 on
+ * two draws: a smith named as a catalogue house's customer, a prisoner and an armoury in a town with a watch and a court).
+ * The chair's ruling: the seven ROLE words (smith, prisoner, physician, guard captain, notary, mason, armoury) leave the
+ * page list, as the four earlier families did, with the reason on each word; they stay registered, so the walker's source
+ * and printed arms and a line's conditions still read them. `clergy` and `armedForce` are not in the read that withdrew
+ * the seven, and stay. Red at c3913f999 (each of the seven was a page finding).
+ */
+describe('R1 (third read, finding 1) — the role words leave the page list', () => {
+  const ROLES = ['smith', 'prisoner', 'physician', 'guardCaptain', 'notary', 'mason', 'armoury'];
+  const hamlet = { tier: 'hamlet', population: 60, config: {}, stress: [], institutions: [{ name: 'Charcoal burner' }], powerStructure: { factions: [{ faction: 'Elder Council' }] } };
+  const page = { 'Systems/Economics': [
+    'Essential intermediate step between forest and forge.',
+    'A prisoner in their custody knows something valuable.',
+    'Weapons from the armoury have been disappearing for a month.',
+    'The physician is called up from the valley twice a year.',
+    'A guard captain keeps the gate at night with two men.',
+    'A notary writes down what each household owes the lord.',
+    'The masons are paid in grain for the new wall.',
+  ] };
+
+  test('each of the seven is withdrawn with its reason, and none of their lines is a page finding', () => {
+    for (const id of ROLES) expect(NEW_WORDS[id].pageWithdrawn, id).toMatch(/third read/);
+    expect(vocabularyPageFindings(hamlet, page)).toEqual([]);
+  });
+
+  test('the words stay registered: the matcher still names them, so the walker and the conditions read them', () => {
+    const named = page['Systems/Economics'].flatMap((line) => newWordsNamedIn(line));
+    expect([...new Set(named)].sort()).toEqual([...ROLES].sort());
+    for (const id of ROLES) expect(REGISTERED_WORDS[id].absent(factsOf(hamlet), ['Charcoal burner'], hamlet, page['Systems/Economics'][0]), id).toBe(true);
+  });
+
+  test('clergy and armedForce, outside the read that withdrew the seven, stay on the page list', () => {
+    expect(NEW_WORDS.clergy.pageWithdrawn).toBeUndefined();
+    expect(NEW_WORDS.armedForce.pageWithdrawn).toBeUndefined();
+    const words = vocabularyPageFindings(hamlet, { 'World/Faith': ['The priest manages the graveyard and the feast days.'] }).map((f) => f.word);
+    expect(words).toEqual(['clergy']);
   });
 });
