@@ -62,6 +62,11 @@ import {
   TUNING_SHIFT_CAUSE_RE, UNIT_VOCABULARY, DIVERGENCE_REASONS, IDIOMS, REFUSALS,
   INVENTORY_REL, TREES_P1, TREES_P2P3, SCHEMA_VERSION,
 } from '../../scripts/lib/tuning-inventory.mjs';
+import { fixtureEnv, isolateFromHostRepo } from '../helpers/fixtureGit.js';
+
+// git runs in throwaway folders here, and so do the library and CLIs under test: none may inherit the
+// hook's GIT_DIR (tests/helpers/fixtureGit.js).
+isolateFromHostRepo();
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const INVENTORY_PATH = join(ROOT, INVENTORY_REL);
@@ -1597,7 +1602,7 @@ describe('tuning register — the refreeze ritual refuses', () => {
     // whatever state the dock happens to be in when the gate runs.
     const dir = mkdtempSync(join(tmpdir(), 'tunereg-git-'));
     try {
-      execFileSync('git', ['init', '-q'], { cwd: dir });
+      execFileSync('git', ['init', '-q'], { cwd: dir, env: fixtureEnv() });
       writeFileSync(join(dir, 'someone-elses-work.js'), 'export const x = 1;\n', 'utf8');
       const args = {
         root: dir,

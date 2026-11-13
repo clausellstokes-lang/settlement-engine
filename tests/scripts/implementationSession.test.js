@@ -39,6 +39,11 @@ import {
   writeSessionHeartbeat,
   writeSessionState,
 } from '../../scripts/implementation-session.mjs';
+import { fixtureEnv, isolateFromHostRepo } from '../helpers/fixtureGit.js';
+
+// git runs in throwaway folders here, and so do the library and CLIs under test: none may inherit the
+// hook's GIT_DIR (tests/helpers/fixtureGit.js).
+isolateFromHostRepo();
 
 const MANIFEST_PATH = 'docs/implementation/PACKET_MANIFEST.json';
 const INDEX_PATH = 'docs/implementation/INDEX.md';
@@ -50,6 +55,7 @@ function git(root, args) {
     cwd: root,
     encoding: 'utf8',
     stdio: ['ignore', 'pipe', 'pipe'],
+    env: fixtureEnv(),
   }).trim();
 }
 

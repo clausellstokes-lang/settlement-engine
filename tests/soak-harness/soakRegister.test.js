@@ -41,8 +41,13 @@ import { buildRealmScalePlan, soakArgsFor } from '../../scripts/audit/realm-scal
 // here and a shape the observer writes cannot mean two different things.
 import { MOTION_FLOOR_01 } from '../../scripts/audit/soakInvariants.mjs';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { fixtureEnv, isolateFromHostRepo } from '../helpers/fixtureGit.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+
+// git runs in throwaway folders here, and so do the library and CLIs under test: none may inherit the
+// hook's GIT_DIR (tests/helpers/fixtureGit.js).
+isolateFromHostRepo();
 const CLI = join(ROOT, 'scripts/soak/soak-register.mjs');
 const REGISTER = join(ROOT, 'tests/soak-harness/.soak-register.json');
 const WORKFLOW = join(ROOT, '.github/workflows/soak-research.yml');
@@ -193,7 +198,7 @@ const measure = (receipt) => deriveRegisterFigures(annotate(receipt));
 /** A temporary git repository carrying its own register, so the door meets a real tree. */
 function gitFixture(register) {
   const dir = mkdtempSync(join(tmpdir(), 'soak-register-'));
-  const run = (...args) => execFileSync('git', args, { cwd: dir, encoding: 'utf8' });
+  const run = (...args) => execFileSync('git', args, { cwd: dir, encoding: 'utf8', env: fixtureEnv() });
   run('init', '-q');
   run('config', 'user.email', 'fixture@example.invalid');
   run('config', 'user.name', 'Fixture');

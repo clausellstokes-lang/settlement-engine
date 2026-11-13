@@ -37,6 +37,11 @@ import {
   SESSION_SCHEMA_VERSION,
   createImplementationSession,
 } from '../../scripts/implementation-session.mjs';
+import { fixtureEnv, isolateFromHostRepo } from '../helpers/fixtureGit.js';
+
+// git runs in throwaway folders here, and so do the library and CLIs under test: none may inherit the
+// hook's GIT_DIR (tests/helpers/fixtureGit.js).
+isolateFromHostRepo();
 
 const COUPLING_LEAF = 'src/domain/certification/couplingRegistryEspionage.js';
 const COUPLING_HEAD = 'src/domain/certification/couplingRegistry.js';
@@ -1205,7 +1210,7 @@ describe('IA-1 implementation packet manifest and capsule', () => {
     const repo = sealRoot;
     /** @param {string[]} args */
     const git = (args) => execFileSync('git', args, {
-      cwd: repo, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'],
+      cwd: repo, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], env: fixtureEnv(),
     }).trim();
 
     git(['init', '-q', '-b', 'fixture']);
@@ -1437,7 +1442,7 @@ describe('IA-1 implementation packet manifest and capsule', () => {
     const repo = sealRoot;
     /** @param {string[]} args */
     const git = (args) => execFileSync('git', args, {
-      cwd: repo, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'],
+      cwd: repo, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], env: fixtureEnv(),
     }).trim();
 
     git(['init', '-q', '-b', 'fixture']);

@@ -11,6 +11,11 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'nod
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { describe, expect, test } from 'vitest';
+import { isolateFromHostRepo } from '../helpers/fixtureGit.js';
+
+// git runs in throwaway folders here, and so do the library and CLIs under test: none may inherit the
+// hook's GIT_DIR (tests/helpers/fixtureGit.js).
+isolateFromHostRepo();
 
 const SURFACE_READERS = {
   'generator master (525)': /golden-master-stage\.mjs/,
