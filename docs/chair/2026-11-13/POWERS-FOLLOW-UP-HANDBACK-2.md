@@ -330,3 +330,45 @@ lines 0; "Financial Dependence" with a lord first 0 (the reader's claims4305 gov
   "mage-advised" in a thorp with no arcane practitioner is the modifier's writer (rulingStructure.js :: chooseGoverning,
   from the magic priority alone). RECOMMENDATION: the chair rules plain words for the ten ids, or the chip goes; and the
   modifier reads the roster's practitioners (a fact the power step has: defenseFactsOf) before it says "advised".
+
+### 4. Round three's list (ROUND-3-CUT at 892904c1d; the reader's twenty born in the app's shape, probes `rr20.mjs`, `still.mjs`)
+Each row checked at this lane's tip before any build (still.mjs: the sentence's parts against the town's record).
+- **HIGH #337 — DONE, 527198c17** ("A ruling that one power refuses to obey"; 23 -> 0; hooks unmoved).
+- **HIGH #334, #1167 — ALREADY CURED on this lane** by H-a (687c13a62, round two's #460): "Three powers stand almost
+  level" prints in none of the four towns (#334 #1167 and the MED #566 #948 of the same class). Not rebuilt.
+- **MED #723 #725 #1398 (npcStructure.js, lane pw) — DONE, 6127afa05** (290 heads in 191 towns -> 0).
+- **MED #374 #567 #597 — DONE with item 3's 4653685a8** (the claim cure). #251's "International merchant houses …" in
+  a port village: the claim half cured with them where the label is Minor; its PORT presumption (no port, no merchant
+  guild) is a second fault, NOT cured (the line is chosen by the trade route alone: `supportsMaritime`).
+- **MED #565 — DONE, 4053092ec** ("…; each would say it does."; 1 town of the twenty, 0 of 5,025 others).
+- **F31's ceiling (this seat's origin) — CURED, 1900b88fe**: 4653685a8 and 0f8d05428 put rulingStructure.js at 861
+  lines (powerStructure.test.js red); the claim table moved whole to power/claimStanding.js (798 lines; output identical).
+- **MED #835 #836 — ALREADY CURED on this lane** by D (43b32e775: ship lines refused inland).
+- **NOT REACHED (by file, for the next seat), each still printing at this tip (still.mjs):**
+  - rulingStructure.js: #563 (the military family's "Significant military presence" beside Minor: not covered by the
+    claim cure, see item 3), #98 (the modifier chip: PARKED with #912), #251 (port presumption), #262 #993 (the craft
+    guilds "present but outpaced" / "close behind" with no craft-guild power), #639's row of round three (= item 3's,
+    cured).
+  - factionStanding.js: #373 (the watch "not the officers who govern" while its captain heads the ruling council),
+    #391 (the craft guilds "close behind" with none), #1166 ("roughly even with the military" with no military power).
+  - conflictIssues.js: #238 (a baker's hook with no baker), #493 (carters waiting at the post under a siege): hooks
+    are bare strings; a hook's disqualifier needs its line declared (`{ text, needs/excludes }`), with the atoms the
+    vocabulary has (`crisis: threat` exists; a baker has no atom: a stop for #238).
+  - governingStressVignettes.js #1265 #1306 (the crown officer "came last week … signed it" beside the crisis hook's
+    "has arrived … must decide"): two homes of one event.
+  - governanceNarrative.js #638 ("blocked the money for repairs" beside fresh repairs on the walls).
+  - settlementNarrative.js #665 ("its medicinal herbs passes through": a local export said to be transit, singular verb).
+  - data/people: titleSecretsPresentations.js #254 (taverns), #650 (river), #1191 (prison), #1400 (clay), #1402
+    (vineyard); goalFamilies.js #473 (a goal against its own power), #727 #1188 (a dragon the record lacks).
+
+### 5. #312 — PARKED (a stop for this row: the named home is not on this lane)
+"Cut the spending at the stone quarry by a tenth this season, and keep the work going." where the quarry is depleted.
+The chair's ruling names the chain model's leaf (`domain/facts/chainWorking.js :: chainWorksResource`, the agreement
+lane's) as the one home of "worked here". That file is on the integration line but NOT on this lane's tree (cut at
+e969a75b7). Reading `config.nearbyResourcesDepleted` here instead would be a second home of the same fact (record 303
+§2). Measured (keepwork.mjs, the census's 720): 333 cards carry the line; 2 at a depleted resource's house
+(r2r-metropolis-59 the stone quarry; r2r-metropolis-31 the charcoal kilns), plus the reader's rw3-metropolis-under_siege-1.
+RECOMMENDATION: at the join (or once the leaf is picked onto this lane by blob), the draw-site refusal in
+people/goals.js: a goal of the INSTITUTION solvency cell that says "keep the work going" is refused where the house's
+resource key is held and `chainWorksResource(record, key)` is false; the leaf's silence (no chain names the key) leaves
+the goal; the refused pick takes the cell's next admitted line on the card's own goal stream, no new draw.
