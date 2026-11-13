@@ -19,7 +19,7 @@ import { Pill } from '../primitives/Pill.jsx';
 import { type, palette, space, factionColors, pt } from '../theme.js';
 import { cap, label, humanize, hookText, plural } from '../lib/format.js';
 import { anchorTarget } from '../primitives/EntityRef.jsx';
-import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { institutionDisplayName, institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
 import { institutionBackers } from '../../domain/dossier/powerSupport.js';
 import { edged } from '../../design/edgedBox.js';
 
@@ -215,7 +215,8 @@ function InstitutionCard({ inst, idx, entityIndex, services = [], backs = [] }) 
       <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 2 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
           <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'] }}>
-            {institutionDisplayName(inst)}
+            {/* ROUND THREE, ruling (a): the card's title is the house's label, the one display leaf. */}
+            {institutionHouseLabel(inst)}
           </Text>
           {isCustom && (
             <Text style={{ color: palette.gold, fontSize: pt['9'], marginLeft: 3 }}>*</Text>
@@ -270,7 +271,7 @@ function InstitutionCard({ inst, idx, entityIndex, services = [], backs = [] }) 
           <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.muted }}>Services</Text>
           {services.map((svc, i) => (
             <Text key={`sv-${idx}-${i}`} style={{ ...type.caption, fontSize: pt['7.5'], color: palette.second }}>
-              <Text style={{ color: palette.ink }}>{institutionDisplayName(svc.name)}</Text>
+              <Text style={{ color: palette.ink }}>{institutionHouseLabel(svc.name)}</Text>
               {svc.desc ? `: ${svc.desc}` : ''}
             </Text>
           ))}

@@ -34,7 +34,7 @@ import { STAKE_REASONS } from '../../src/domain/crisis/crisisCast.js';
 import { composeTonightSheet } from '../../src/domain/summary/tonightSheet.js';
 import { buildJournalPages } from '../../src/foundry/journalPages.js';
 import { institutionBackers } from '../../src/domain/dossier/powerSupport.js';
-import { institutionDisplayName } from '../../src/domain/display/institutionDisplayName.js';
+import { institutionHouseLabel } from '../../src/domain/display/institutionDisplayName.js';
 
 // Recursively flatten an element tree to its text leaves. Function components are
 // executed (plain functions in src/pdf — no hooks); hosts walked via children.
@@ -252,7 +252,9 @@ describe('X-40 / X-45 — the PDF Institutions chapter prints the Backs line und
     const on = joined(Institutions({ settlement, vm }));
     expect(on).toContain('Backs');
     for (const [raw, powers] of backers) {
-      expect(on, `${raw} prints`).toContain(institutionDisplayName(raw));
+      // RE-KEYED (R2-CODE-B round 3, ruling (a)): the chapter prints each house by its label, the one
+      // display leaf (the display name less the catalogue's count range, gate or condition).
+      expect(on, `${raw} prints`).toContain(institutionHouseLabel(raw));
       for (const p of powers) expect(on, `${raw} backs ${p}`).toContain(p);
     }
   });

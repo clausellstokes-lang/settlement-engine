@@ -24,7 +24,7 @@ import { type, palette, space, pt } from '../theme.js';
 import { humanize, label, plural, stripZwnj } from '../lib/format.js';
 import { tokenCase } from '../../domain/display/labelCase.js';
 import { StateProse } from '../primitives/StateProse.jsx';
-import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
 import { chainHousesOf } from '../../domain/display/chainHouses.js';
 // RS-14: the card titles read the one label map the screen and the absences callout read.
 import { serviceLabel } from '../../domain/display/servicesDisplay.js';
@@ -270,9 +270,11 @@ function svcLabel(svc) {
   // §934.13 — every arm goes through the label seam. `humanize` returns any string
   // containing whitespace unchanged, so it composes with the seam's authored case
   // rather than title-casing 'Access to a house of worship'.
-  if (typeof svc === 'string') return humanize(institutionDisplayName(svc));
-  return humanize(institutionDisplayName(svc)) ||
-         (svc.institution ? humanize(institutionDisplayName(svc.institution)) : '');
+  // ROUND THREE, ruling (a): through the house's label, the one display leaf (no catalogue count
+  // range, household range, gate or condition).
+  if (typeof svc === 'string') return humanize(institutionHouseLabel(svc));
+  return humanize(institutionHouseLabel(svc)) ||
+         (svc.institution ? humanize(institutionHouseLabel(svc.institution)) : '');
 }
 
 export default Services;
