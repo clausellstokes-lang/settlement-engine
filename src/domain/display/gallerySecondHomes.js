@@ -63,6 +63,20 @@ function recAt(s, key) {
 export const SECOND_HOME_LIMITS = Object.freeze({ pieceMin: 12, processorPrefix: 12 });
 
 /**
+ * The engine's five criminal-house booleans and the substrings of a lower-cased house name that raise each
+ * (priorityHelpers.js :: getInstitutionNames, word for word; migration 212's table is the same). The chair's
+ * ruling (b), COHERENCE-VEIL-8: each reads as the houses the projection still lists would raise it. The guard
+ * holds the copy to the engine's own getInstFlags.
+ */
+export const HOUSE_FLAG_NAMES = Object.freeze({
+  hasCriminalInst: Object.freeze(["thieves' guild", 'black market', 'smuggling', 'assassins', 'street gang', 'front business', 'gambling den', 'underground city', 'multiple criminal']),
+  hasThievesGuild: Object.freeze(["thieves' guild chapter", "thieves' guild (powerful)"]),
+  hasBlackMarket: Object.freeze(['black market', 'black market bazaar']),
+  hasSmuggling: Object.freeze(['smuggling network', 'smuggling operation']),
+  hasGangInfra: Object.freeze(['street gang', 'multiple criminal factions', 'front business']),
+});
+
+/**
  * The searchable pieces of a hidden value: each string leaf, trimmed, and each run of it between
  * sentence stops and dashes (U+2014), of SECOND_HOME_LIMITS.pieceMin code points or more.
  * @param {unknown} v @param {string[]} [out] @returns {string[]}
@@ -177,6 +191,15 @@ export function withholdSecondHomes(s, src, gone, openNames, houseFields) {
     }
   }
   if (!gone.size) return;
+  // the chair's ruling (b): a flag only a house removed whole raised reads false (never true where it was false)
+  const listed = openNames.map(n => n.toLowerCase());
+  const econF = recAt(s, 'economicState');
+  for (const inst of [recAt(recAt(econF || {}, 'compound') || {}, 'inst'), recAt(recAt(recAt(econF || {}, 'safetyProfile') || {}, 'compound') || {}, 'inst')]) {
+    if (!inst) continue;
+    for (const [flag, words] of Object.entries(HOUSE_FLAG_NAMES)) {
+      if (inst[flag] === true && !listed.some(l => words.some(w => l.includes(w)))) inst[flag] = false;
+    }
+  }
   // A chain names a house by the ENGINE's processor match, not only by the card's name (computeActiveChains.js ::
   // fuzzyProcessorMatch: the lower-cased name holds the pattern's first processorPrefix characters), so a house
   // hidden whole as 'Black market bazaar' is processing name 'Black market'. A processing name that a house hidden

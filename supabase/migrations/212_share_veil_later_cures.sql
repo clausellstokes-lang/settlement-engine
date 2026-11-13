@@ -34,6 +34,10 @@
 --       (`institution.<snake>`) and each cause that names it, in any case (_gallery_veil_fold, _folded_name, _names).
 --       The same name inside the economy's fixed prose goes too: an income source whose label names it is withheld
 --       whole, a description that names it leaves its source, and the safety profile's description that names it.
+--   (15) WHAT THE ENGINE DERIVES FROM A HOUSE HIDDEN WHOLE (COHERENCE-VEIL-8; the chair's ruling of 2026-11-13 21:40 UTC):
+--       the five criminal-house booleans (hasCriminalInst, hasThievesGuild, hasBlackMarket, hasSmuggling, hasGangInfra,
+--       under economicState.compound.inst and economicState.safetyProfile.compound.inst) read as the houses the
+--       projection still lists would raise them.
 --   (13) A HIDDEN TEXT IN ANOTHER SPELLING (COHERENCE-VEIL-8): a second home's text is matched in any case, and the
 --       legacy annotation (history.legacyAnnotations[].annotation), which embeds its event's first lasting effect
 --       with the first letter lower-cased, goes when it embeds a shut string of an event.
@@ -267,6 +271,9 @@ declare
   named_folds text[];
   pth text[];
   named jsonb;
+  listed text[];
+  fk text;
+  kw jsonb;
 begin
   if jsonb_array_length(ties) > 0 then
     pr := s -> 'prominentRelationship';
@@ -341,6 +348,26 @@ begin
       s := jsonb_set(s, pth, coalesce((select jsonb_agg(x order by xo) from jsonb_array_elements(s #> pth) with ordinality y(x, xo)
         where not (jsonb_typeof(x) = 'string' and public._gallery_veil_fold(x #>> '{}') = any(named_folds)
                    and not public._gallery_veil_fold(x #>> '{}') = any(open_folds))), '[]'));
+    end if;
+  end loop;
+  -- COHERENCE-VEIL-8, the chair's ruling (b): the engine's five criminal-house booleans, raised at birth by a
+  -- substring of a house's lower-cased name (priorityHelpers.js :: getInstitutionNames, these very lists), read as
+  -- the houses this projection still lists would raise them: a flag only a house removed whole raised reads false
+  -- (never true where it was false)
+  listed := array(select lower(o) from unnest(open_names) o);
+  for pth in select p from (values (array['economicState', 'compound', 'inst']), (array['economicState', 'safetyProfile', 'compound', 'inst'])) v(p) loop
+    if jsonb_typeof(s #> pth) = 'object' then
+      for fk, kw in select * from jsonb_each('{
+          "hasCriminalInst": ["thieves'' guild", "black market", "smuggling", "assassins", "street gang", "front business", "gambling den", "underground city", "multiple criminal"],
+          "hasThievesGuild": ["thieves'' guild chapter", "thieves'' guild (powerful)"],
+          "hasBlackMarket": ["black market", "black market bazaar"],
+          "hasSmuggling": ["smuggling network", "smuggling operation"],
+          "hasGangInfra": ["street gang", "multiple criminal factions", "front business"]}'::jsonb) loop
+        if (s #> pth) -> fk = 'true'::jsonb
+           and not exists (select 1 from unnest(listed) l, jsonb_array_elements_text(kw) w where position(w in l) > 0) then
+          s := jsonb_set(s, pth || fk, 'false'::jsonb);
+        end if;
+      end loop;
     end if;
   end loop;
   -- COHERENCE-VEIL-8 (N4): the name of a house removed whole inside the economy's fixed prose, in any spelling. The
