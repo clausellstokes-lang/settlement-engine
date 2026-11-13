@@ -111,8 +111,12 @@ describe('the rendered-dossier arm: one planted fault per row', () => {
     expect(RETIRED_PAGE_CENSUS_ROWS.P2[1]).toMatch(/owner's design/);
     // row 3's retired shapes: a reliance whose source is named, and magic common with no reliance, read nothing
     expect(pageCensusFindings({ tier: 'town' }, {
-      'Systems/Defense': [NO_ARCANE], 'Systems/Magic': ['Reliance on magic: Relied upon · supplied by Parish church and Multiple monasteries', 'Availabilitycommon'],
+      'Systems/Defense': [NO_ARCANE], 'Systems/Magic': ['Reliance on magic: Relied upon · supplied by House of worship and Multiple monasteries', 'Availabilitycommon'],
     })).toEqual([]);
+    // P3source counts a source printed with a catalogue range or condition, or one house named twice (REVIEW-W2A F2)
+    for (const bad of ['Parish churches (10-30) and Cathedral (10,000+ only)', 'Dream parlors (high magic)', "Mages' guild, Cathedral, House of worship and Cathedral"]) {
+      expect(pageCensusFindings({ tier: 'town' }, { 'Systems/Magic': [`Reliance on magic: Integral · supplied by ${bad}`] }).map((f) => f.row)).toEqual(['P3source']);
+    }
     // the retired row's own shape (two durations, outside a siege, in the condition) reads nothing now
     expect(pageCensusFindings({ tier: 'town', economicState: { foodSecurity: { hasSiege: false } } }, {
       'Systems/Economics': ['Stores: a granary of about a year of grain'],

@@ -46,7 +46,7 @@ export const PAGE_CENSUS_ROWS = Object.freeze({
   P1a: ['1a the food verdict "only just" beside "grows more than it eats"', 'SECOND'],
   P1b: ['1b "a small margin" beside a quarter or more bought in', 'SECOND'],
   P2siege: ['2 a siege figure in the indicative outside a siege', 'SECOND'],
-  P3source: ['3 reliance on magic stated with neither a practitioner nor a named source', 'CROSS'],
+  P3source: ['3 reliance on magic stated with neither a practitioner nor a named source, or a source printed with a catalogue range or condition, or one house named twice', 'CROSS'],
   P4: ['4 "three powers stand almost level" beside a leader far ahead', 'SECOND'],
   P5false: ['5a a crime line the town\'s facts make false: bought officials where none is in pay, none bought where one is, a grip on a hall no agent holds', 'SECOND'],
   P5b: ['5b "Diffuse, no gang" beside a criminal power', 'SECOND'],
@@ -209,7 +209,14 @@ export function pageCensusFindings(settlement, views) {
   run('P3source', () => {
     // the Magic tab states a reliance; the Defense tab's rolls hold no practitioner; the reliance line names no source
     const relLine = M.find((l) => /^Reliance on magic: (?:Relied upon|Integral)/.test(l));
-    return relLine && noArcane && !/ · supplied by /.test(relLine) ? [relLine, 'No arcane practitioners on the rolls'] : null;
+    if (!relLine) return null;
+    const at = relLine.indexOf(' · supplied by ');
+    if (at < 0) return noArcane ? [relLine, 'No arcane practitioners on the rolls'] : null;
+    // REVIEW-W2A F2: the source is named through the display seam, once, with no catalogue range or condition
+    const source = relLine.slice(at + 15);
+    if (/\(/.test(source)) return [relLine, 'a catalogue range or condition in the source'];
+    const names = source.replace(/ and /g, ', ').split(', ').map((n) => n.trim().toLowerCase()).filter(Boolean);
+    return new Set(names).size !== names.length ? [relLine, 'a house named twice in the source'] : null;
   });
   run('P4', () => {
     const level = PW.find((l) => /Three powers stand almost level/.test(l));
