@@ -131,8 +131,15 @@ export function cardOfficeOf(card) {
 export function cardHatsOf(card) {
   const c = recordOf(card);
   const office = cardOfficeOf(card);
-  return office ? `${String(c.title || '').trim()} and ${office}` : String(c.role || '').trim();
+  const title = String(c.title || '').trim();
+  // COHERENCE-POWERS-5 (N7; REVIEW-POWERS-2 at e86d069be): where the house title already carries the office's word ("the
+  // boat-headman" beside Headman, "the priest" beside Elder Priest), the office is dropped from the phrase, never doubled
+  if (office && lastWordOf(title) === lastWordOf(office)) return title;
+  return office ? `${title} and ${office}` : String(c.role || '').trim();
 }
+
+/** A title's last word, lower case, a hyphened word's last part ("the boat-headman" → "headman"). @param {string} words */
+const lastWordOf = (words) => String(words).toLowerCase().split(/[\s-]+/).filter(Boolean).pop() || '';
 
 /**
  * The card's FIRST-RANK power's name (its best standing), or null for a card in no power.

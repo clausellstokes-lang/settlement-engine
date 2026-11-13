@@ -10,6 +10,8 @@
  * N6 — the holder's own house's Connection row names the office the holder holds, as the seat row does (the review:
  * "Connection: Headman Cosij Chan" on the Fishing community, "Elder Cosij Chan, the boat-headman" two rows down).
  *
+ * N7 — the seat row never doubles an office word ("the boat-headman and Headman", "the priest and Elder Priest").
+ *
  * Births through birthConfig with the census's dials (DEFAULT_CONFIG and the browser's random dials, the review's own
  * seeds); the Power tab rendered as the DM reads it.
  */
@@ -75,6 +77,23 @@ function n6MissesOf(s, key) {
   return rows.filter((t) => !t.startsWith(`Connection: ${office} ${name}`)).map((t) => `${key}: "${t}" (the seat: ${office})`);
 }
 
+/** N7's doubled word: the house title's last word is the office's last word. @param {string} words "the T and O" */
+const doubled = (words) => {
+  const m = String(words).match(/^(the .+?) and (.+)$/);
+  return !!m && m[1].toLowerCase().split(/[\s-]+/).pop() === m[2].toLowerCase().split(/\s+/).pop();
+};
+/** N7's misses on one rendered Power tab: the seat row the page prints. */
+function n7MissesOf(s, key) {
+  const npc = rulingChainOf(s).npc;
+  if (!npc) return [];
+  const text = powerTab(s).textContent || '';
+  cleanup();
+  const out = [];
+  if (!text.includes(`${npc.name}, ${npc.role}`)) out.push(`${key}: the seat row does not print "${npc.name}, ${npc.role}"`);
+  if (doubled(npc.role)) out.push(`${key}: the seat row doubles an office word: "${npc.name}, ${npc.role}"`);
+  return out;
+}
+
 describe('COHERENCE-POWERS-5 — the seat\'s words on the page (REVIEW-POWERS-2 N5–N7)', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); }, 60_000);
 
@@ -100,6 +119,21 @@ describe('COHERENCE-POWERS-5 — the seat\'s words on the page (REVIEW-POWERS-2 
     for (const t of TIERS) {
       for (let i = 0; i < 4; i++) misses.push(...n6MissesOf(born(`r2r-${t}-${i}`), `r2r-${t}-${i}`));
       for (const x of CRISES) misses.push(...n6MissesOf(born(`r2s-${x}-${t}-0`), `r2s-${x}-${t}-0`));
+    }
+    expect(misses).toEqual([]);
+  }, 900_000);
+
+  it('N7: the review\'s towns — the seat row prints each office word once', () => {
+    const misses = [];
+    for (const seed of ['r2r-hamlet-1', 'r2r-hamlet-13', 'r2r-hamlet-4']) misses.push(...n7MissesOf(born(seed), seed));
+    expect(misses).toEqual([]);
+  }, 120_000);
+
+  it('N7: at every size, random and under every crisis — the seat row never doubles an office word', () => {
+    const misses = [];
+    for (const t of TIERS) {
+      for (let i = 0; i < 8; i++) misses.push(...n7MissesOf(born(`r2r-${t}-${i}`), `r2r-${t}-${i}`));
+      for (const x of CRISES) misses.push(...n7MissesOf(born(`r2s-${x}-${t}-0`), `r2s-${x}-${t}-0`));
     }
     expect(misses).toEqual([]);
   }, 900_000);
