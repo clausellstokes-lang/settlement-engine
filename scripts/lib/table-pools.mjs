@@ -84,6 +84,10 @@ export const DECLARATION_CHANNELS = Object.freeze([
   { module: 'src/data/institutionDescVariants.js', name: 'DESC_VARIANT_DECLARATIONS', kind: 'column' },
   { module: 'src/data/institutionDescColour.js', name: 'DESC_VARIANT_COLOUR_DECLARATIONS', kind: 'column' }, // CENSUS-4h unit 4: R-AO's colour marks
   { module: 'src/data/institutionServices.js', name: 'SERVICE_DESC_SIBLINGS', kind: 'siblings' },
+  // W2-FIX-DATA-6 (the chair's ruling on REVIEW-W2-FIX-DATA-34520a697 H1: a table whose rows print on a page is inside the
+  // census unless its rows are already censused through another declared channel): the culture's small-place twins
+  // (W2-FIX-DATA-2, 4101e30a1) PRINT, in the identity, the arrival and the PDF, and no other channel holds their text.
+  { module: 'src/data/cultureProfiles.js', name: 'CULTURE_LINE_SIBLINGS', kind: 'siblings' },
   { module: 'src/data/npcData.js', name: 'NPC_HOOK_SIBLINGS', kind: 'siblings' },
   { module: 'src/data/powerData.js', name: 'FACTION_NAME_SIBLINGS', kind: 'siblings' },
   { module: 'src/data/powerSiblings.js', name: 'BASELINE_CONFLICT_SIBLINGS', kind: 'siblings' },
@@ -112,5 +116,8 @@ export const NOT_TABLE_CHANNELS = Object.freeze({
   DOSSIER_CONNECTIVE_DECLARATIONS: 'a list PARALLEL to each connective list, read by position (CENSUS-1h unit 7); the connectives are state-corpus joints, not an enrolled table',
   FIELD_DECLARATIONS: 'the edit cards\' field declarations (domain/edit), not prose',
   TENSION_TEMPLATE_DECLARATIONS: 'keyed by the tension template\'s TYPE beside the selection (CENSUS-1g unit 4); the history templates are not an enrolled table',
+  // W2-FIX-DATA-6, by the same ruling's test: no row of it prints (a template's needs / excludes / timeline flag, no text);
+  // keyed by TYPE like TENSION_TEMPLATE_DECLARATIONS, and the templates' printed text is not an enrolled table.
+  HISTORY_TEMPLATE_RECORD_DECLARATIONS: 'keyed by the history template\'s TYPE beside the selection (W2-FIX-DATA-2 dde3b1277, W2-FIX-DATA-5 dabdb6061): declarations only, no row of it prints; the history templates are not an enrolled table',
   HISTORY_DESC_SIBLINGS: 'keyed by a history template\'s raw description text, resolved at the timeline\'s and the tension\'s print (W2-FIX-DATA-5, ROUND-3-CUT #331); the history templates are not an enrolled table',
 });
