@@ -55,7 +55,7 @@ for (const e of drawn.values()) {
   let rt = null; try { rt = dmPowerViewOf(s)?.rulingThree?.map((x) => x?.name || x?.label || x?.faction || x) ?? null; } catch { rt = 'err'; }
   out.push({
     n: ++n, why: e.why, families: [...e.families], words: [...e.words], views: [...e.views], seed: e.seed, source: e.source, file: e.file, quote: e.quote,
-    town: { name: s?.name, tier: s?.tier, population: s?.population, crisis: [...(f?.crisis ?? [])], market: f?.market, faith: f?.faith ? { hasChurch: f.faith.hasChurch, accessOnly: f.faith.accessOnly, seniorCleric: f.faith.seniorCleric ? 'yes' : null } : null,
+    town: { name: s?.name, tier: s?.tier, population: s?.population, crisis: f?.crisis?.kinds ?? [], market: f?.market, faith: f?.faith ? { hasChurch: f.faith.hasChurch, accessOnly: f.faith.accessOnly, seniorCleric: f.faith.seniorCleric ? 'yes' : null } : null,
       sacredHouse: f?.sacredHouse, guard: f?.guardPresence, defence: Object.fromEntries(Object.entries(f?.defence || {}).filter(([, v]) => v === true).map(([k]) => [k, true])),
       powers: (s?.powerStructure?.factions || []).map((x) => `${x.faction ?? x.name} ${x.power ?? ''}`), rulingThree: rt, practitioners: (() => { try { return magicPractitioners(s).length; } catch { return 'err'; } })(),
       food: { growsMoreThanEats: fr.growsMoreThanEats, normalImportPct: fr.normalImportPct }, roster: names },

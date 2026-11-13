@@ -1,0 +1,2 @@
+export const NEW_WORD_IDS = Object.freeze(Object.keys(NEW_WORDS));
+export const PLANTED_W2 = NEW_WORD_IDS.map((l) => `${l.text}`);

@@ -1,0 +1,27 @@
+{
+ "_doc": "REVIEW-W2B-3 item 1: my read of each drawn line (draw.json, by n) against its town's record. false = the line is false on its town; not = not shown false, with the reason. Every n not listed under `not` was read FALSE (the reason is the fact packet in draw.json beside the quote; the size lines read to the chair's ruled standard).",
+ "not": {
+  "7": "prisoner: a city with a professional watch and several courthouses has cells; 'died in the cells' is not shown false",
+  "8": "smith: the Smelter's own catalogue description names the smith as its customer; it puts no smith in the town",
+  "15": "openTrade: the river boatyard's service row ('River traffic takes constant punishment') explains its repairs; not a claim trade is open in the siege",
+  "27": "smith: a tradition's name, 'The Old Forge Offering'; not a claim a forge stands",
+  "36": "smith: the charcoal burner's catalogue description ('between forest and forge') names its customer",
+  "37": "armedForce: 'the guard' names the Military power that stands on the powers roster (an armed patrol of residents); two homes disagree, the line is not false against the powers' record",
+  "50": "prisoner: a town with a watch and a courthouse; a prisoner in an official's custody is not shown false",
+  "51": "guardCaptain: a walled village with a militia; its captain is a guard captain in plain speech",
+  "60": "physician: a metropolis of 22,766 with an apothecary district has physicians; 'the physician' is not shown false",
+  "85": "powersCount: 'Two or three powers' with two powers: the hedge holds",
+  "86": "powersCount: 'Two or three powers' with two powers: the hedge holds"
+ },
+ "roleTopUp": {
+  "_doc": "draw-role.json, by n; FALSE unless listed here",
+  "not": {
+   "R4": "prisoner: a city with a watch commander, a garrison commander and courts; a prisoner released on an order is not shown false",
+   "R5": "notary: a hamlet of 93 with no scribe; a copy lodged with a notary may be lodged in the market town: not shown false",
+   "R7": "prisoner: a city with a garrison, a watch and a chief magistrate; a prisoner in custody is not shown false",
+   "R8": "mason: a town of 1,089 building a great house; masons at work there are not shown false though no quarry or mason row stands",
+   "R9": "armoury: a walled town with gates and a town watch; the watch keeps arms: not shown false"
+  }
+ },
+ "powersExact": "powersCount on the 720: 38 lines; 16 are \"Two or three powers\"; 11 of those stand in towns of two or more powers (true by the hedge), 5 in towns of one (false). So 27 of 38 are false (71%)."
+}

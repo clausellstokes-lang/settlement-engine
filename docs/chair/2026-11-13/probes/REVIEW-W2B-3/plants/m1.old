@@ -1,0 +1,1 @@
+    absent: (f) => f?.tier === 'thorp' || f?.tier === 'hamlet',

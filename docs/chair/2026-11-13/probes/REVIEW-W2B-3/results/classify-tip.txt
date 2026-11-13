@@ -1,0 +1,40 @@
+classified 2430 unclassed 1108
+by class {
+  '?': '1108 lines / 472 towns',
+  F: '1050 lines / 514 towns',
+  heading: '170 lines / 170 towns',
+  past: '76 lines / 61 towns',
+  hedge: '11 lines / 11 towns',
+  service: '15 lines / 15 towns'
+}
+FINDINGS 1050 towns 514
+by pattern {
+  '3': '183 lines / 177 towns',
+  '4': '112 lines / 112 towns',
+  '8': '111 lines / 111 towns',
+  '14': '28 lines / 28 towns',
+  '16a': '173 lines / 173 towns',
+  '1a': '57 lines / 57 towns',
+  '14b': '88 lines / 65 towns',
+  '14c': '184 lines / 107 towns',
+  'NEW-V4': '26 lines / 15 towns',
+  'NEW-V1': '21 lines / 14 towns',
+  'NEW-2': '3 lines / 3 towns',
+  '1b': '64 lines / 64 towns'
+}
+by source {
+  'corpus pool': '350 lines / 303 towns',
+  'written in code': '262 lines / 222 towns',
+  'generator pool': '128 lines / 94 towns',
+  unattributed: '60 lines / 58 towns',
+  'generator code': '250 lines / 194 towns'
+}
+by layer {
+  P: '437 lines / 243 towns',
+  S: '427 lines / 361 towns',
+  T: '186 lines / 177 towns'
+}
+UNCLASSED clergy World/History | "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests.
+UNCLASSED notary World/History | Pro-magicAnti-magicRegulation advocates
+UNCLASSED streets Summary/Overview | Latin-inspired, and it shows: built in masonry around a civic square, and run by patronage and law.
+UNCLASSED streets Summary/Overview | The occupiers in Terrapolis's streets are the same faces as last season, and they no longer bother to look about them.

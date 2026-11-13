@@ -1,0 +1,1 @@
+export const onPageList = (w, sentence) => !w.pageWithdrawn || (!!w.pageKept && w.pageKept.test(sentence));

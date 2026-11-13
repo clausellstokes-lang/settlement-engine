@@ -1,0 +1,33 @@
+dossiers read 720 findings 2495 towns 606
+by source {
+  'written in code': 595,
+  unattributed: 589,
+  'corpus pool': 302,
+  'generator pool': 524,
+  'generator code': 485
+}
+by layer { P: 1861, S: 438, T: 196 }
+by kind { thing: 1162, size: 800, count: 211, value: 227, state: 95 }
+by side { names: 2495 }
+by word {
+  clergy: 102,
+  notary: 67,
+  religiousHouses: 340,
+  streets: 495,
+  guardCaptain: 9,
+  smith: 196,
+  rulingFaces: 173,
+  onlyJust: 57,
+  quarters: 305,
+  armedForce: 106,
+  practitioner: 196,
+  physician: 54,
+  openTrade: 68,
+  powersCount: 38,
+  prisoner: 54,
+  famineToCome: 27,
+  mason: 15,
+  armoury: 23,
+  almostLevel: 106,
+  smallMargin: 64
+}

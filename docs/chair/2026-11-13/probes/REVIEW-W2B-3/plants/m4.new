@@ -1,0 +1,1 @@
+export const onPageList = (w, sentence) => !w.pageWithdrawn;

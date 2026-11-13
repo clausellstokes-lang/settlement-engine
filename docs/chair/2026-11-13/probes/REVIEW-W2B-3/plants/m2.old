@@ -1,0 +1,1 @@
+  return m[3] || m[4] ? Infinity : Number(m[2]);

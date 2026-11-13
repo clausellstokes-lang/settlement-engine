@@ -1,0 +1,1 @@
+  'house: alchemist': /\b(?:the local|its|from its|comes from its|the town's) alchemists?\b/i,
