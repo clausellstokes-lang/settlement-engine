@@ -237,6 +237,10 @@ const DISCOVERY_EXEMPT = Object.freeze([
   // URBAN-FIX C-1 (935c961fd), composed at STYLE-2-MERGE point 25: the food record's composed line, read for the stored foodways.
   { symbol: 'foodwaysLineOf', reason: 'a pure READ of economicState.foodSecurity.foodRecord.foodwaysLine (trimmed, or null); it writes nothing at all.' },
   // COHERENCE-UPKEEP (d7d7f7787, the keep home), named at the lane's whole-suite run 2026-11-12.
+  { symbol: 'economicSurvivalBandOf', reason: 'a pure READ of the defence profile just written (defenseProfile.scores.economic, its Economic Survival band), handed to the guard line; it writes nothing (COHERENCE-UPKEEP-6, the chair\'s ruling A: one home for pay).' },
+  { symbol: 'keptGuardLine', reason: 'a pure function from the guard assessment\'s text, the roster and a purse word to the same text with its purse clause; it writes nothing itself (the assembly\'s withGuardPaidFromDefence puts the text back on the economic state; COHERENCE-UPKEEP-6, ruling A).' },
+  { symbol: 'purseWordOfBand', reason: 'a pure map from the Economic Survival band to the purse word the guard lines are declared on; it writes nothing (COHERENCE-UPKEEP-6, ruling A).' },
+  { symbol: 'standingLabelOf', reason: 'a pure READ of the standing prosperity label (else the printed one), the guard line\'s fallback where a record has no band; it writes nothing (COHERENCE-UPKEEP-6).' },
   { symbol: 'keepOfRecord', reason: 'a pure READ of the standing prosperity label (economicState.prosperityStanding, else the label) into what the place can keep up ({ bought, funded }, domain/facts/keep.js), handed to generateDefenseProfile; it writes nothing at all (COHERENCE-UPKEEP-5, R3).' },
 ]);
 

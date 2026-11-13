@@ -32,6 +32,7 @@ import { deriveMagicProfile, magicAvailabilityBands } from '../../src/domain/mag
 import { generateFoodSecurity } from '../../src/generators/foodGenerator.js';
 import { SAFETY_LINE_SIBLINGS, keptGuardLine, generateSafetyProfile } from '../../src/generators/safetyProfile.js';
 import { atomsOf, declarationOf } from '../../src/domain/facts/factVocabulary.js';
+import { economicSurvivalBandOf } from '../../src/domain/display/defenseScoreBands.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 const SEEDS = ['agree-village-28', 'agree-village-30', 'agree-village-40', 'agree-village-43', 'agree-village-45'];
@@ -271,9 +272,11 @@ describe('under a famine or a siege, the hired lines read the label that speaks 
     const s = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: 'city', selectedStressesRandom: false, selectedStresses: ['famine'] }), null, { seed: 'agree-force-famine-city-0' });
     expect(s.economicState.prosperity).toBe('Struggling');
     const desc = s.economicState.safetyProfile.guardEffectivenessDesc;
+    // Re-keyed by identity at the chair's ruling A on the third read (one home for pay): the purse clause follows the
+    // Economic Survival band (economicSurvivalBandOf), short below Strong, which is itself paid at the standing label.
     const swords = purseLines().find((line) => /garrison/.test(line.text));
-    const standingPoor = ['Struggling', 'Subsistence', 'Poor', 'Moderate', 'Comfortable'].includes(s.economicState.prosperityStanding);
-    expect(desc.includes(swords.text), `the purse line follows the standing label (${s.economicState.prosperityStanding})`).toBe(standingPoor);
+    const short = economicSurvivalBandOf(s) !== 'STRONG';
+    expect(desc.includes(swords.text), `the purse line follows the Economic Survival band (${economicSurvivalBandOf(s)})`).toBe(short);
     expect(desc.includes('Hired swords back the garrison'), 'anchored: the hired line prints').toBe(true);
     // anchored: the line above pins the hired line in the same text, so a drifted text reds there
     expect(/hunger|siege/.test(desc)).toBe(false);

@@ -35,19 +35,19 @@
  */
 
 import { defenseFactsOf } from '../defense/defenseFacts.js';
-import { SCORE_BAND_CUTS } from './defenseScoreBands.js';
+import { SCORE_BAND_CUTS, economicSurvivalBandOf } from './defenseScoreBands.js';
 
 /**
- * WHAT MONEY THE PLACE HAS TO MEET A CRISIS: the rung of the row's OWN score, the number its badge and colour
- * read and the screen's Economic Survival row reads (COHERENCE-UPKEEP-6, a cure of 0c0e8f99f found by the
- * thirty-town read of ruling 1(c)). The score is itself paid at the standing label through its one home
- * (`keep.js :: keepOfRecord`, the score's pay), so one label speaks for pay through it; keyed to the label
- * instead, the sentence disagreed with its own badge ("Money enough for a short crisis" under Critical) and
- * with the screen's row in six towns. The page names the crisis beside the label (ruling 1(a)).
- * @param {number} econScore
+ * WHAT MONEY THE PLACE HAS TO MEET A CRISIS: the Economic Survival row's own band, read from its ONE home
+ * (`defenseScoreBands.js :: economicSurvivalBandOf`, COHERENCE-UPKEEP-6, the chair's ruling A), the band its
+ * badge, its colour, the screen's row and the guard's purse clauses read. Its score is paid at the standing label.
+ * @param {{ defenseProfile?: { scores?: { economic?: unknown } | null } | null } | null | undefined} r
  * @returns {'long' | 'short' | 'late' | 'none'}
  */
-const moneyRungOf = (econScore) => (econScore >= 65 ? 'long' : econScore >= 40 ? 'short' : econScore >= 25 ? 'late' : 'none');
+const moneyRungOf = (r) => {
+  const band = economicSurvivalBandOf(r);
+  return band === 'STRONG' ? 'long' : band === 'ADEQUATE' ? 'short' : band === 'WEAK' ? 'late' : 'none';
+};
 
 /** The top of the Weak band: the highest a famine-struck place's disaster readiness may read. */
 export const FAMINE_DISASTER_CEILING = SCORE_BAND_CUTS.adequate - 1;
@@ -252,7 +252,7 @@ export function buildThreatAssessment(r) {
       ? '#7a5010'
       : '#8b1a1a';
   let econA;
-  const money = moneyRungOf(econScore);
+  const money = moneyRungOf(r);
   if (money === 'long') {
     econA = 'Money enough to ride out a long crisis: emergency measures can be paid for, and '
       + (hasGarrison ? 'the garrison kept paid' : 'the defenders kept paid')

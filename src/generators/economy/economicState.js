@@ -5,7 +5,7 @@
 import { random as _rng } from '../../kernel/rngContext.js';
 import { compareCodepoint } from '../../domain/deterministicSort.js';
 import { getInstFlags, getPriorities, getStressFlags, getTradeRouteFeatures, hasTeleportationInfra, priorityToMultiplier } from '../helpers.js';
-import { generateSafetyProfile, keptGuardLine } from '../safetyProfile.js';
+import { generateSafetyProfile } from '../safetyProfile.js';
 import { TRADE_DEPENDENCY_NEEDS } from '../../data/goods/chains.js';
 import { computeActiveChains, deriveExportsFromChains, deriveImportsFromChains, deriveLocalProductionFromChains, deriveInstitutionalServices, deriveServiceExports } from '../computeActiveChains.js';
 import { generateTradeIncomeStreams } from './tradeGoods.js';
@@ -830,9 +830,9 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     _foodSec,
   );
   const { prosperity, prosperityStanding } = deriveProsperityLabels(baseProsperity, standingBaseProsperity(tier, tradeRoute, institutions, config, instNames, incomeNormalized), config, institutions); // COHERENCE-UPKEEP-5 (R3): beside the printed label, the label with no crisis in force, the one draw replayed
-  // COHERENCE-UPKEEP (ruling 7): the guard assessment says what the place can pay for its hired force.
-  // COHERENCE-UPKEEP-6 (the chair's ruling 1(b)): its purse lines read the STANDING label, the one that speaks for pay.
-  safetyProfile.guardEffectivenessDesc = keptGuardLine(safetyProfile.guardEffectivenessDesc, institutions, standingLabelOf({ prosperity, prosperityStanding }));
+  // COHERENCE-UPKEEP (ruling 7): the guard assessment says what the place can pay for its hired force. Since
+  // COHERENCE-UPKEEP-6 (the chair's ruling A) that is written AFTER the defence profile, which it reads
+  // (steps/assembleSettlement.js, beside generateDefenseProfile): one home for pay on every surface.
   // COHERENCE-UPKEEP (ruling 6): the stores are laid by at the label's share, at the stores' writer,
   // AFTER prosperity (which read the full-granary record above and reads no months). The writer's
   // only draw is a label-keyed fork, so this second call draws the same crop fortune and moves no
@@ -877,5 +877,5 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
 };
 import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js'; import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js'; // at the END on purpose: this file's writes are cited by LINE; the Gate Tolls line speaks the tier noun (lane TIER-NOUN-POOLS, tests/generators/tierNounPoolDraws.test.js)
 import { buildPrimaryTradeLists, sayHowLittleGrain } from './primaryTradeLists.js'; // at the END for the same reason: the pre-chain trade lists, extracted for the cohesion ceiling (LANDING-3)
-import { keepOf, boughtShare, standingLabelOf } from '../../domain/facts/keep.js';
+import { keepOf, boughtShare } from '../../domain/facts/keep.js';
 import { goodsOnlyRefusedChainsMake } from '../../domain/chainYield.js'; // at the END for the same reason: COHERENCE-AGREE-6 (F2), the export bonus asks the one predicate

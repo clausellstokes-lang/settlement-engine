@@ -1013,10 +1013,22 @@ const MERCHANT_ARMY_LEAD = 'Public law enforcement is largely a formality.';
  * beside the label).
  * @param {string} desc the guard assessment as the safety profile wrote it
  * @param {Array<{ name?: string }>} institutions the roster
- * @param {unknown} prosperity the label that speaks for pay: the standing label (`keep.js :: standingLabelOf`,
- *   COHERENCE-UPKEEP-6, the chair's ruling 1(b)); the caller hands it
+ * @param {unknown} prosperity the word that speaks for pay: the Economic Survival band's purse word
+ *   (`purseWordOfBand`, COHERENCE-UPKEEP-6, the chair's ruling A); the assembly hands it after the defence profile
  * @returns {string}
  */
+/**
+ * THE PURSE WORD FOR WHAT THE TOWN CAN PAY (COHERENCE-UPKEEP-6, the chair's ruling A): the purse lines are declared
+ * on the prosperity ladder's words, so the Economic Survival band (their one home,
+ * `defenseScoreBands.js :: economicSurvivalBandOf`) is handed to them as the word whose rung it is: Strong the
+ * rung that keeps a company in full (Prosperous), Adequate the middling purse (Moderate), Weak and Critical
+ * the short one (Poor). A record with no band reads its standing label, as before.
+ * @param {string | null} band @param {unknown} standing @returns {unknown}
+ */
+export function purseWordOfBand(band, standing) {
+  return band ? ({ STRONG: 'Prosperous', ADEQUATE: 'Moderate', WEAK: 'Poor', CRITICAL: 'Poor' })[band] ?? standing : standing;
+}
+
 export function keptGuardLine(desc, institutions, prosperity) {
   const text = String(desc || '');
   /** @type {Omit<import('../domain/facts/drawDeclared.js').DrawDeclaredOptions, 'draw'>} */
