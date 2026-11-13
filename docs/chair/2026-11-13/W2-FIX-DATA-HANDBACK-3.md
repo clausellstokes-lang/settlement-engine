@@ -2,9 +2,11 @@
 
 **Seat.** The third builder on `lane/w2-fix-data-2026-11-13`, continuing from `379186c96`. Brief: the chair's dispatch of 2026-11-13 (session `session_01FE9mEws7PXYRYdjQPbSX15`, a new chair on a new account), copied in section 9 because the chair's messages are not on the branch. Law: the charter's section 0 with records 290, 291, 303 and 306; the SOP for pools and conditions; the chair's handoff section 5; the second seat's hand-back section 8. Every figure is EXECUTED unless marked PLAUSIBLE.
 
-**State: IN PROGRESS.** Items 1, 3, 4, 5 cured and committed; item 2 PARKED (section 5); item 6 next; item 7 parked by ruling; item 8 (the final statement) after item 6.
+**State: STOPPED on the chair's order of 2026-11-13 ~15:5x UTC (the account's allowance is in its warning band).** All cures are committed and pushed; origin read back at `5e0060000`. Items 1, 3, 4, 5, 6, the tension-dedup regression and the round's three high lines are CURED; item 2 and the one-forge sense line are PARKED (section 6); item 7 parked by ruling. **Per the chair's ruling of 15:00 (a lane lands once; its statement is made once, later, by a later seat), this seat makes NO final statement.** Section 8 is the measures this seat took on the way, kept for that seat; it is not the lane's statement.
 
-**Commits so far:** `146ad0eab` (item 1, F1) · `79c35053e` (item 5) · `b7f2b3d69` (item 4, F4) · `84188d317` (the wiring census re-taken after F4) · `b9ca70eb4` (item 3, F3).
+**THE EXACT NEXT STEP for the seat that makes the lane's statement:** at the lane's tip, (1) the whole suite once (`GATE_MUTEX_TIER=shared sh scripts/gate-mutex.sh --run -- npx vitest run --maxWorkers=2 --reporter=json --outputFile=<out>`, `review-fixes-2026-07-08` fetched, refs and local config snapshotted before and after); (2) run the red FILES of that run at 4114cf5a6 and at 31f57e8eb and class each red title (carried at both, carried from 4114 only, or new); (3) map each red file to `tests/fixtures/.golden-freeze-register.json`'s 51 surfaces (its `suite`, or a file reading its `path`) and declare every surface so pinned in the draft record, by measure; (4) the census counter and the six surfaces are in section 8 at 5e0060000 and need re-taking only if the tip moves. A partial reading exists (NOT the statement): a whole-suite run at `1e93f4d11` (before the round's three lines) ended 66 failed of 39,127 tests in 50 files, five of them at load (the observed-shape corpus seed osr-tier-14, twice; the news-headline, news-voice and prose-family contract walkers: both families the chair's handoff lists as carried on the line); unclassed. A second run at `5e0060000` was started before the stop order and could not be stopped from this seat (the permission check refused the kill); its output, if any, is the scratchpad's and is not the statement.
+
+**Commits (the final tip read back from origin before the hand-back message):** `146ad0eab` (item 1, F1) · `79c35053e` (item 5) · `b7f2b3d69` (item 4, F4) · `84188d317` (the wiring census re-taken after F4) · `b9ca70eb4` (item 3, F3) · `cf2e00b19` (item 6, the timeline-hook ledger note) · `ec78d1c19` (the tension-dedup regression) · `1e93f4d11` (the edge bundles) · `5c9a5677f`, `c0f8dd279`, `fb48fb8bc` (the round's three lines) · `5e0060000` (the edge bundles again, the last code commit, alone) · this file. Pushed and read back from origin at `5e0060000` before this file.
 
 ## 0. The corpora every figure below is read on
 
@@ -35,7 +37,7 @@ What prints in their place, read in the towns: "Communal grain storage, meant to
 
 **Red first:** `tests/generators/w2FixData3CrisisDescs.test.js`: arms 1–2 (the app's shape) red at 379186c96, green at the cure; arm 3 (the four towns whose chance crisis is dropped keep their calm line) green at the cure and RED under the reviewer's form (planted, restored).
 
-## 2. Item 2 — F2 (MEDIUM): the cascade's customs houses. PARKED (section 5)
+## 2. Item 2 — F2 (MEDIUM): the cascade's customs houses. PARKED (section 6)
 
 ## 3. Item 3 — F3 (MEDIUM): a shaft Mine called surface digging. CURED, `b9ca70eb4`
 
@@ -49,20 +51,102 @@ The tier noun's home is reachable: every drawn description passes through `state
 
 As the second seat planned: the inland text takes the canonical variant's cure with the ships still out ("… and now and then a whole household's goods …"). Census 720: "now and then persons" in any field of any record 79 → 0 (1 town, 26 cities, 52 metropolises, every one grounded with no house that trades in persons); 79 births move, only `.institutions[].desc`. No register row keyed the old text.
 
+## 5a. Item 6 — the timeline hook noted by its own row (the carried red). CURED, `cf2e00b19`
+
+`historyGenerator.js :: resolveTimelineHook` hands `drawDeclared` a domain that LEADS with the drawn row, and `drawDeclared.js :: lineIdOf` notes a line by its index in the domain it is handed, so every timeline hook was noted as line 0. The note this call makes is now re-keyed to the row's index in its template (`noteByTemplateRow`, at the end of the file, so no line above the prose wiring census's cited writes moves), the id the tension's own hook list (drawKind A) already notes. Red first: `w2FixData3TimelineHookNote.test.js` ("two different hook lines of one template note two line ids") red at `b9ca70eb4`, green here. **Nothing moves but the ledger's note:** census 720, 0 births move (every leaf of every record); the fork census identical (6 of 7, A1's same red and hash); the 53 test files reading the history generator or the ledger, with sizeBaseline and the wiring census walker: no new red. Nothing raised, re-based or tightened.
+
+**THE TABLE FOR THE CHAIR'S RULING: every timeline-hook pool under the corrected key, both corpora** (the guard's banked corpus `quarrel` = q and its second corpus `confirm` = c; "base" is 4114cf5a6 with this key applied, "tip" is this lane's tip with it; the ceiling is the register's row as banked under the OLD key; top5 is 1 in every pool of three lines):
+
+| pool | ceiling top1 / top5 (lines) | base q: draws, top1, top5 | base c: top1, top5 | tip q: draws, top1, top5 | tip c: top1, top5 |
+|---|---|---|---|---|---|
+| corruption_scandal | 0.5512 / 1 (3) | 456, 0.3355, 1 | 0.3388, 1 | 477, 0.3354, 1 | 0.339, 1 |
+| crime_wave | 0.3456 / 1 (3) | 1495, 0.3485, 1 | 0.3454, 1 | 1489, 0.3486, 1 | 0.3454, 1 |
+| demographic_pressure | 0.5 / 1 (2) | 90, 0.5, 1 | 0.5, 1 | 90, 0.5, 1 | 0.5, 1 |
+| disputed_land | 0.5798 / 1 (3) | 266, 0.3534, 1 | 0.346, 1 | 269, 0.3532, 1 | 0.3464, 1 |
+| economic_disparity | 0.7787 / 1 (3) | 717, 0.3849, 1 | 0.4, 1 | 711, 0.3868, 1 | 0.3981, 1 |
+| external_threat | 0.7156 / 1 (3) | 1585, 0.3432, 1 | 0.3381, 1 | 1576, 0.3433, 1 | 0.3381, 1 |
+| generational_divide | 0.5299 / 1 (3) | 259, 0.3552, 1 | 0.3432, 1 | 256, 0.3555, 1 | 0.3431, 1 |
+| great_fire | 0.7279 / 1 (3) | 447, 0.349, 1 | 0.3636, 1 | 465, 0.3484, 1 | 0.3624, 1 |
+| great_flood | 0.6456 / 1 (3) | 315, 0.6762, 1 | 0.6222, 1 | 318, 0.6667, 1 | 0.6313, 1 |
+| guild_conflict | 0.387 / 1 (3) | 1449, 0.3354, 1 | 0.3361, 1 | 1716, 0.3351, 1 | 0.3357, 1 |
+| heresy_trial | 0.6777 / 1 (3) | 390, 0.3615, 1 | 0.3667, 1 | 411, 0.3601, 1 | 0.3666, 1 |
+| infiltration_fear | 0.8691 / 1 (3) | 1496, 0.3422, 1 | 0.3422, 1 | 1496, 0.3422, 1 | 0.3423, 1 |
+| leadership_vacuum | 0.5248 / 1 (3) | 529, 0.3422, 1 | 0.3417, 1 | 367, 0.346, 1 | 0.3443, 1 |
+| legitimacy_crisis | 0.3334 / 1 (3) | 375, 0.3333, 1 | 0.3333, 1 | 396, 0.3333, 1 | 0.3333, 1 |
+| magical_controversy | 0.8007 / 1 (3) | 675, 0.3481, 1 | 0.3343, 1 | 641, 0.3495, 1 | 0.3353, 1 |
+| market_crash | 0.5122 / 1 (3) | 330, 0.3606, 1 | 0.3957, 1 | 250, 0.372, 1 | 0.4174, 1 |
+| occupation_legacy | 0.7776 / 1 (3) | 1887, 0.354, 1 | 0.3356, 1 | 1875, 0.3541, 1 | 0.3356, 1 |
+| outside_debt | 0.5605 / 1 (3) | 445, 0.3438, 1 | 0.3506, 1 | 463, 0.3434, 1 | 0.3505, 1 |
+| pilgrimage_surge | 0.6675 / 1 (3) | 416, 0.3678, 1 | 0.4005, 1 | 411, 0.3698, 1 | 0.4024, 1 |
+| plague_years | 0.7254 / 1 (3) | 417, 0.3381, 1 | 0.336, 1 | 405, 0.3383, 1 | 0.336, 1 |
+| popular_uprising | 0.5888 / 1 (3) | 349, 0.341, 1 | 0.3415, 1 | 349, 0.341, 1 | 0.3412, 1 |
+| population_friction | 0.8947 / 1 (3) | 1082, 0.3484, 1 | 0.3487, 1 | 1073, 0.3486, 1 | 0.3476, 1 |
+| religious_tension | 0.849 / 1 (3) | 837, 0.3405, 1 | 0.3372, 1 | 849, 0.3404, 1 | 0.3372, 1 |
+| resource_scarcity | 0.3359 / 1 (3) | 1342, 0.3689, 1 | 0.3729, 1 | 1397, 0.3751, 1 | 0.3769, 1 |
+| succession_crisis | 0.6402 / 1 (3) | 877, 0.6226, 1 | 0.636, 1 | 885, 0.6192, 1 | 0.6323, 1 |
+| trade_collapse | 0.6533 / 1 (3) | 315, 0.346, 1 | 0.362, 1 | 264, 0.3485, 1 | 0.3668, 1 |
+| trade_dispute | 0.3334 / 1 (3) | 180, 0.3333, 1 | 0.3333, 1 | 180, 0.3333, 1 | 0.3333, 1 |
+| tyranny | 0.66 / 1 (3) | 353, 0.3343, 1 | 0.3394, 1 | 365, 0.3342, 1 | 0.3394, 1 |
+| wild_magic | 0.6946 / 1 (3) | 419, 0.3341, 1 | 0.3521, 1 | 440, 0.3341, 1 | 0.3535, 1 |
+
+Read with it: under the corrected key the leadership-vacuum rise is GONE (tip q 0.3460 against its 0.5248); `resource_scarcity` reads over its 0.3359 at the base (0.3689 / 0.3729) and at the tip (0.3751 / 0.3769), so its rise is the instrument's re-key, not this lane (3.1 SE, repeated on the second corpus); 20 pools' ceilings sit loose above their measure (their old line 0 was inflated by every timeline note); `great_flood` (0.6762 base q, 0.6667 tip q against 0.6456) and `succession_crisis` (0.6226 / 0.6192 against 0.6402) are the two whose real top line is near or over the old ceiling. The rows move at the lane's merge point, by the merge seat, through the door, by name, on the chair's ruling; until then "no pool rises" is carried red and named (now on `resource_scarcity`, not the vacuum).
+
+## 5b. The round's three high lines (the chair's ruling of 2026-11-13 13:5x). CURED, `5c9a5677f`, `c0f8dd279`, `fb48fb8bc`
+
+Each reproduced false at `1e93f4d11` in its own REVIEW-W2A-3 town, in the reviewer's app shape (DEFAULT_CONFIG, the stress panel with Random off, `_randomizePriorities`); red first in `tests/data/w2FixData3Round.test.js`, one arm per commit, each red at its parent.
+
+| line (cold list #, town) | cure | census 720 | what prints in its place, read |
+|---|---|---|---|
+| "A raised ceremonial precinct overlooks a broad and busy open plaza." (#33, rw3-thorp-calm-2, a thorp of 12) | `cultureProfiles.js`: the mesoamerican detail declares `tier: ≥ town`; its twin in `CULTURE_LINE_SIBLINGS` (`tier: ≤ village`): **"plastered house platforms face one another across a swept open yard"** (NEW, for veto) | 5 births move, only `.culturalIdentity.architecturalDetail` (5) and `.arrivalScene` (2, the one sentence); small places printing the precinct 5 → 0; towns 4, cities 4, metropolis 1 keep it | the twin, in the record and the arrival (r2r-hamlet-50, r2r-village-7) |
+| "Craftspeople sit in rows, each row a different trade, each worker deep in their own work." (#2, rw3-thorp-calm-1, a thorp of 12, no craft house) | `arrivalProse.js`: the mesoamerican people beat declares `needs: market` (the south-asian beat beside it already does); three lines left, no twin needed | 5 births move, only `.arrivalScene`, only the people beat; the line 13 → 8 towns, the 8 kept all have a market | another line of the same pool, e.g. "The neighbours turn out together to sweep and mend their own street." |
+| "Caergarth lives by its forges: the clang of iron is in every lane." (#366, rw3-hamlet-plague_onset-1, one part-time smith) | `arrivalProse.js`: all four lines of the smiths' DOMINANT pool speak of many forges and declare `tier: ≥ town` (towns and larger hold Blacksmiths (3-10); the hamlets one part-time smith, the villages one Blacksmith) | 27 births move (15 hamlets, 12 villages), only `.arrivalScene`, each losing exactly the false sentence; nothing added; towns and larger unchanged | nothing: the one-forge place's sense beat is left out (the redraw finds no clean line and draws nothing more) |
+
+**Measured and refused for the third:** a one-forge line of its own in the pool (`tier: ≤ village`, "The ring of the one forge carries across {n}.") lengthens the pool, so every town drawing it re-deals its first pick and, through the redraw, its later beats: 44 of 720 moved, some onto doubtful lines ("A merchant shows off a new cloak" in a hamlet). That case's line therefore waits on the arrival's chooser falling back to the trade's plain `lines` for a one-forge place (`narrative/arrivalScene.js :: chooseSense`, not this lane's file): for the lane's next seat. The line's MED reading under a siege in a town (REVIEW-W2A-3 #853) is a different cause and stays with the round's medium lines.
+
 ## 6. Parked for the chair (sent together, once)
 
 1. **Item 2, F2 — the customs house the cascade adds (24 of 720).** Measured: all 24 are `source: cascade`; 22 on a road, crossroads or isolated (water `none`), 2 on a river. The cascade (`cascadePass.js`) calls this file's `shipFreeDesc` only where the water is `none`, and hands it the row alone, never the roster; the customs line's declaration (`needs: institution: docks`) reads the roster, and docks can stand inland (the cascade's airship override adds them), so no rule inside `shipFreeDesc` is true. A draw-free cure exists but not in my files: in `cascadePass.js`, after the push, resolve each addition's text through `institutionDescDraw.js :: drawInstitutionDesc([add.desc], …)` with the roster's `birthFactsOf`, at every water kind (a hash pick over one text is the text; only a refused line takes its twin; no rng). `cascadePass.js` is changed on no lane in flight (checked). RECOMMEND: rule `cascadePass.js` into this lane for that one call, or into the third leaves seat with the twins already here.
+2. **The one-forge place's sense line** (section 5b): it needs `narrative/arrivalScene.js :: chooseSense` to fall back to the trade's plain `lines` where one forge stands; not this lane's file. RECOMMEND: the lane's next seat, beside the round's medium lines.
 
 ## 7. Calls taken without the chair
 
 1. **F1's form narrowed from the reviewer's** (section 1): the measured ORIGIN of the wider form. VETOABLE.
 2. **F4's catalogue text names no size** (rather than the "town" voice), because the cascade prints it raw. VETOABLE wording.
 3. **The repetition guard, carried and named (the chair's `--tighten` is the only door that moves these):** "every drawn pool has a row, and every row is a drawn pool" now reads 3 rows whose pools no longer note (`ledger:institutionDescVariants:{town,city,metropolis}|Religious|Elder Grove Council`: they declared, so they noted; they now declare nothing — F4); "no ceiling sits loose" now reads a third row, `ledger:institutionServices:Mine (open cast).Raw extraction` (ceiling 1, measure 0.8057: the twin adds a line), beside the first seat's two. Both members are the chair's door; I raised, re-based and tightened nothing.
-4. **The shared repository config gained `core.hooksPath=.husky/_`** when `npm ci` ran in my worktree (husky's prepare): it is what makes the lane hook run at my push. Recorded here; restored at the end of the seat (section 8).
+4. **The shared repository config gained `core.hooksPath=.husky/_`** when `npm ci` ran in my worktree (husky's prepare): it is what makes the lane hook run at my push. It is the real repository's config, not the lane worktree's own; the HAZARD check (refs and local config before and after every push and the whole suite) found nothing else changed, and the refs were unmoved. Recorded for the chair; it is the ordinary effect of `npm ci` in a linked worktree, not restored (restoring it would stop the lane hook running on later pushes).
+5. **The tension-dedup regression cured (ec78d1c19), not parked.** It is ORIGIN (the lane added it) but it is the lane's OWN cure commit's slip, in my own file, a one-line mechanical restore — so it is finished, not sent to the chair; declared in section 8. Had it been another lane's file or a ruled design it would be parked.
 
-## 8. The final statement
+## 8. Measures taken on the way (NOT the lane's statement; base 4114cf5a6 against 5e0060000 unless said otherwise)
 
-(Owed: item 6, then the census counter, the field diff, the six surfaces, the edge bundles, the whole suite.)
+**A regression this seat also cured (ec78d1c19), named here because it is the lane's, not the review's.** The lane's second seat (dde3b1277) dropped the `pool.splice` from `buildHistoricalEvent`'s fill loop when it added the record-truth set-asides, so the same tension template could be selected twice: 28 of the census's 720 towns printed a repeated tension type (guild_conflict+guild_conflict, generational_divide twice). ORIGIN, after the review base. Cured by restoring the splice; red first (`w2FixData3TensionDedup.test.js`). This is why the census counter below reads no repeated-tension rise.
+
+**The census pattern counter** (`SECOND-WAVE-CENSUS/census.sh` at 4114cf5a6 and at the final code tip 5e0060000, rendered through the real container, then `compare.mjs`). NO row rises. One falls: row 14 "size words in small places" 167 → 154; town by town, base → tip, NO town enters row 14 and 13 leave (the Elder Grove Council's "the city" in a town, F4; the precinct in small places). Every other of the 26 patterns is OLD/unchanged; towns 720, GLANCE 716/716; median rows/town [7, 7, 6.576] → [7, 7, 6.558]. (An intermediate reading of 153 at `cf2e00b19` was taken before the dedup restored two towns' base tensions, r2r-thorp-9 and r2r-village-46, whose district words are the base's own and old on the line.) The repeated-tension regression is not one of the 26 patterns (a repeated TYPE, not a size, figure or house), so it never read as a rise; it was cured for the cold reader regardless.
+
+**The field diff of the whole tip, by family** (the census's 720 birth corpora, 31f57e8eb → the final tip). 659 of 720 births move, in these leaves and NO others — all prose the lane's lines print: `.institutions[].desc` 1356 (and its `.defenseProfile.institutions.{mercenary,watch}[].desc` copies 62, 45), `.availableServices.{equipment 95 (the mine service), healing 48, food 15, legal 8, transport 2}[].desc`, `.history.historicalEvents[].{description 292, lastingEffects[] 163, plotHooks[] 66, name 8, templateType 8}`, `.history.currentTensions[].{plotHooks[] 144, lastingEffects[] 128, description 102, factions[] 90, severity[] 42, type 30}`, `.history.{eventsTimeline[].name 8, legacyAnnotations[].annotation 10, siegeNarrative 6}`, `.arrivalScene` 94, `.culturalIdentity.{architecturalDetail 41, builtForm 28}`, `.culturalNotes` 28, `.generationCoherenceReceipt.judgments[].evidence[].evidence` 30 (it cites the tension's type). A few births change a tension-list length (a repeated tension removed; a false refusable tension set aside for a true one). **No person, roster, house, power, band, score or event is re-dealt** (checked by family: nothing outside those leaves moves). 4114cf5a6 → tip is the same families, fewer births (the first seat's 31f→4114 move is the larger part).
+
+**The six golden surfaces by measure** (the draft record `W2-FIX-DATA-shift-record.DRAFT.json`, updated this seat; I signed nothing and ran no golden door — the moved surfaces are the merge seat's):
+
+| surface | by measure, 4114cf5a6 → final tip |
+|---|---|
+| generator golden master | MOVES: 238 of 525 configuration hashes differ (this seat's F1/F3/F4/item 5/dedup and the round's three lines); 525 of 525 differ 31f57e8eb → tip. Red against the frozen golden at every tree. |
+| espionage dormancy fence | MOVES: the driven corpus hash f19acafc… → 59a828ab…. Red against the frozen PRE_COUPLING sha at every tree; the fence's own constants unmoved. |
+| dossier prose manifest | unmoved: the suite's failure payload byte-identical at base and tip (it tallies prose cells; the lane rewords within the same cells). |
+| PDF golden (goldenViewModel) | unmoved: snapshot failure payload byte-identical (its four seeds carry none of the moved lines). |
+| Herald desk golden | unmoved: digest and count failure payload byte-identical (its one reader row carries none of the moved prose). |
+| preset-lighting witness | unmoved: green at base and at the final tip. |
+
+**The edge bundles** (`npm run build:edge-shared`, re-emitted at `1e93f4d11` and again, after the round's three lines, as the last code commit `5e0060000`, alone): only `supabase/functions/_shared/` changes; the stale "now and then persons" and "relationship with the city" are gone from engineBundle.js, the cured texts in.
+
+**The three gates** at every commit touching `src/`: `check-domain-strict` 0 (1113, ceiling 1113), `typecheck:ratchet` 0 (167, ceiling 167), eslint on the touched files 0, each through `scripts/gate-tail.sh`. The lane hook's three fast gates passed at the push.
+
+**The fork census** (`generationForkCensus.test.js`): 6 of 7 green at the F1 and the item-6 tips; the one red (A1's control-row output hash, received `94d65f61…`) is the same red with the same hash at 379186c96 and at 31f57e8eb — no draw moved on any cure.
+
+**The whole suite: NOT RUN to completion by this seat at the final tip** (the chair's stop; see the state block for the exact next step and the partial reading at `1e93f4d11`). The carried reds this seat knows of, each named with its base state:
+- `poolDominance.walker` "no pool rises": carried, the chair's register. Under the corrected timeline-hook key (item 6) the leadership-vacuum rise is gone; `resource_scarcity` reads 0.3751 > its 0.3359 (3.1 SE, repeated on the second corpus; 0.3689 at 4114cf5a6 under the same key — the instrument's re-key, not this lane); and 20 hook pools' ceilings now sit loose above their measure (their old inflated line-0). The table is item 6's, above.
+- `poolDominance.walker` "no ceiling sits loose": the first seat's two service rows, plus the Mine raw-extraction row (F3, 0.8057 < ceiling 1, the twin adds a line); the chair's `--tighten` door.
+- `poolDominance.walker` "every drawn pool has a row": three `institutionDescVariants:*|Religious|Elder Grove Council` rows whose pools no longer note (F4 removed their declaration); the chair's door.
+- `generationForkCensus` A1: the control-row hash, red and identical at 31f57e8eb.
+- the agreement lane's golden/fixture/walker reds the first seat carried from 31f57e8eb (its hand-back §7: 61 base reds), unchanged.
 
 ## 9. The brief's rulings, copied (the brief is not on the branch)
 
@@ -75,5 +159,7 @@ From the chair's dispatch of 2026-11-13 to this seat (W2-FIX-DATA-3), binding a 
 - HOW: the charter's section 0, items 12–14: a scratch worktree on a local branch at the lane's tip, `npm ci` there, one plain push `git push origin <local>:refs/heads/lane/w2-fix-data-2026-11-13`. At every commit touching src/: the strict-domain gate, the type ratchet and eslint on the touched files, each through `sh scripts/gate-tail.sh`, never a pipe. Pins re-keyed by identity with the cause, never loosened; never bank a baseline row or skip a test; a register moves only through its own door, and where the door is the chair's or the merge seat's, name the row and go on. Query big files by script; long runs to a file. HAZARD: tests that run git inside a hook from a linked worktree act on the real repository: snapshot refs and local config before and after every suite and every push, and compare.
 - AUTHORISED: scratch worktrees and `npm ci`; commits on the lane; plain pushes to it. NEVER: `--no-verify`; a force push; an empty push; a push to any other branch; a pull request; anything on master; a golden's door; the pool guard's `--tighten`, `--rebase` or `--level-second`; a deploy; a hosted database or production credentials. A refusal of something authorised: stop and tell the chair in one message.
 - MESSAGES: to the chair only for a stop that blocks everything left, or for the hand-back (150 words at most, the tip read back from origin first, executed told from plausible). Other stops go here with a recommendation: take it where it only declares or names; park it where it would change a ruled design, a bound, a pin or another lane's file, and send the parked items together, once. Hand back by file near 450k tokens of context.
+
+**The chair's ruling of 2026-11-13 13:5x UTC (by message, binding a successor), copied:** the round's first cut is in (REVIEW-W2A-3 on lane/review-w2a-2026-11-12 at f385d487b: `docs/chair/2026-11-13/REVIEW-W2A-3-DEBT-CUT.md`, each line's owner and status in `probes/REVIEW-W2A-3/debt/`): 55 high false sentences in twenty fresh towns; this lane cures 3 of them at 7574ae27e (the auction house's "persons" twice, a thorp's "lower districts"); 33 are touched by no lane. READ THE QUEUED NOTIFICATIONS AFTER EVERY COMMIT (the chair's rulings arrive there). This lane's, from it, to take before the final statement if context allows (else list them for the lane's next seat and say so in one line): (1) `src/data/arrivalProse.js`: "Craftspeople sit in rows, each row a different trade" in a thorp of twelve with no craft house; "{town} lives by its forges: the clang of iron is in every lane" in a hamlet with one part-time smith; (2) `src/data/cultureProfiles.js`: "A raised ceremonial precinct overlooks a broad and busy open plaza" in a thorp of twelve (the second seat's residue 5; its mechanism: a tier declaration and a twin). Each by the brief's laws: reproduced false at the base in the app's shape, red first, one cause per commit, what prints in its place read true. NOT this lane's now: the 70 medium data lines and the catalogue's lines no lane touches (they go to the lane's next seat, on a lane stacked on this final tip, so this tip can be read and merged). For the final statement: declare in the draft record, by measure, EVERY REGISTERED golden surface (`tests/fixtures/.golden-freeze-register.json`, 51) that the whole suite's red titles pin (a draft that named a pin and not its surface stopped a merge point today).
 
 **Files checked for holders before the first cure** (each lane's merge base with origin/lane/integration-2026-11-07, to its tip; merge-10-point-47-wip, coherence-agree, -veil, -upkeep, -powers, -presume, -quarrel, w2-a-leaves, w2-write, w2-b-declare, pool-guard, visible-bugs): `assembleInstitutions.js`, `institutionDescVariants.js`, `institutionServices.js`, `historyGenerator.js`, `inlandDescriptions.js`, `institutionalCatalog.js`, `institutionDescColour.js`, `cascadePass.js`, `drawDeclared.js`, `presumptionLedger.js`: changed on none.
