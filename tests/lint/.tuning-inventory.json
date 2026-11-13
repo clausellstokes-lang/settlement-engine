@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "0bcee1abbf08ed18d31a4337264e1614e9678b22",
-  "measuredBy": "GREEN-TIP",
-  "date": "2026-11-10",
-  "note": "GREEN-TIP b46048140: foodLandOf and its four custom-content constants relocated byte-for-byte from foodGenerator.js to the leaf foodLand.js (the import-cycle cure, the chair STOP-2 ruling); net zero: foodGenerator bare 48->41 and four named out, foodLand bare 7 and four named in",
+  "measuredAtSha": "d946381850b515dcbab03100da0b2104f6c09739",
+  "measuredBy": "R2-CODE-B-3",
+  "date": "2026-11-13",
+  "note": "R2-CODE-B-3 item 2b: DailyLifeTab.jsx imports tonightSheet.js :: foodBandOf (the food label one home), a new direct dependent of the home of WANT_MAX_WORDS; no value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -327,7 +327,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 1,
-      "line": 94,
+      "line": 105,
       "spanDigest": "42cba822df4a8ecb71503a445184626bef2ef7ad321e9814d269397056f9ec97",
       "leaves": {
         "value": 6
@@ -341,7 +341,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 97,
+      "line": 108,
       "spanDigest": "d40adbe17add3b7a21a86063de313b25e7b09f1baca71e01cb51ffebf26a3f22",
       "leaves": {
         "value": 0.5
@@ -355,7 +355,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 5,
-      "line": 157,
+      "line": 158,
       "spanDigest": "ab4bbb15a6220283cf96e3ac4a1e58f4fe4f109b123d949bde65cc949f4c2149",
       "leaves": {
         "spawn.base": 0.1,
@@ -419,7 +419,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 2,
-      "line": 190,
+      "line": 191,
       "spanDigest": "2a49e9c408346df030d11c747be66131ccfe77729e738127e5a7c88fc21db844",
       "leaves": {
         "span": 0.4,
@@ -464,7 +464,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 247,
+      "line": 248,
       "spanDigest": "a3c3e37b7b4a4536d47b43c602db8ea57c4399d9ff2f01beda024a59d5219374",
       "leaves": {
         "axisSign.lawful": 1,
@@ -511,7 +511,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 2,
-      "line": 490,
+      "line": 491,
       "spanDigest": "46dfbf0bcd35ae64408fa01882b20e375d0fbaf356c2772c76dce112f190b3cf",
       "leaves": {
         "advance.base": 0.05,
@@ -561,7 +561,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 6,
-      "line": 519,
+      "line": 520,
       "spanDigest": "8b5da2da126aac3dbd4cc464fa1c170614cc9a73aef82131bf1d8c984c405f6f",
       "leaves": {
         "powerRate": 0.9,
@@ -608,7 +608,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 637,
+      "line": 638,
       "spanDigest": "1eda2a9a19616521403191b4fa770f2d1f9010a2f4e4b978917f9fc9a3aad5d6",
       "leaves": {
         "dragPerInstitution": 0.15,
@@ -653,7 +653,7 @@
       "exported": true,
       "idiom": "mixed",
       "keys": 2,
-      "line": 48,
+      "line": 50,
       "spanDigest": "6b3d0a1b34604e0b09ffa63b1642dffa44a7552fa114d2ca602253156c8db98e",
       "leaves": {
         "rates.exploiter": {
@@ -1062,7 +1062,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 984,
+      "line": 987,
       "spanDigest": "d8ad20f683ec92a4a0b123ebd6748169b8712e96577f567cd56d3cdd08f76113",
       "leaves": {
         "value": 0.05
@@ -1288,7 +1288,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 55,
+      "line": 56,
       "spanDigest": "9acdd8bbb6d33f13f0160b4fb859db40ed62562fc613d4cd950fa2f3358584d1",
       "leaves": {
         "byRank.1": 0.15,
@@ -2303,7 +2303,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 1,
-      "line": 132,
+      "line": 169,
       "spanDigest": "00c0e1f99fc53d650cd628cdac047d1e9e3d7d94218abe8ed2eed18c7a49b8ea",
       "leaves": {
         "value": 18
@@ -2311,6 +2311,7 @@
       "dependents": [
         "src/components/TableView.jsx",
         "src/components/TonightSheet.jsx",
+        "src/components/new/tabs/DailyLifeTab.jsx",
         "src/components/new/tabs/EconomicsTab.jsx",
         "src/components/new/tabs/OverviewTab.jsx",
         "src/components/session/SessionMode.jsx",
@@ -4458,7 +4459,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 455,
+      "line": 457,
       "spanDigest": "bfb9f3afad0fbf5a97b4267b6097e8e11f95abf8950fc1e2b5ff9ad9cc7133ec",
       "leaves": {
         "YEAR_WEEKS": 52,
@@ -4928,7 +4929,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 9,
-      "line": 94,
+      "line": 95,
       "spanDigest": "09e93aab2bbb8b3d83f42fd6bd9c9e05df6f7f4aca5d19765371dd777e54709e",
       "leaves": {
         "maxHousesPerSettlement": 2,
@@ -8259,7 +8260,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 2,
-      "line": 68,
+      "line": 73,
       "spanDigest": "27e8cae7f714b6255ed46d5145a6bb53f4257fda9c347798c877bf6108baa529",
       "leaves": {
         "RANKS": 3,
@@ -8274,7 +8275,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 86,
+      "line": 91,
       "spanDigest": "a163ac8776fc0929e33ec0597e5327711e48c4ce474f669233879f93a30401d7",
       "leaves": {
         "strength": 0.6,
