@@ -307,7 +307,7 @@ export const POLITICAL_FLAVOR = {
     (r) =>
       `A settlement whose identity was built on commerce. The ${pickRandom2(r.filter((s) => s.type === "economic"))?.name || "this event"} didn't create the merchant class here, but it defined what the merchant class could become`,
     (r) =>
-      `Economically dynamic in ways that occasionally tip into instability: the ${pickRandom2(r.filter((s) => s.type === "economic"))?.name || "this event"} is recent enough to remind everyone that prosperity here has always been earned and can always be lost`,
+      ((e) => (e?.yearsAgo > 60 ? `Economically dynamic in ways that occasionally tip into instability: the ${e.name} is long past, but nobody here has forgotten that prosperity has always been earned and can always be lost` : `Economically dynamic in ways that occasionally tip into instability: the ${e?.name || "this event"} is recent enough to remind everyone that prosperity here has always been earned and can always be lost`))(pickRandom2(r.filter((s) => s.type === "economic"))), // R2-CODE-A-2 (cold #181): the one pick, then its age (ruling B: past sixty years an event is not recent)
     (r) =>
       `The ${pickRandom2(r.filter((s) => s.type === "economic"))?.name || "this event"} gave this place its current shape: the physical one as much as the social one`,
     (r) =>
@@ -315,7 +315,7 @@ export const POLITICAL_FLAVOR = {
     (r) =>
       `A family's standing here is its wealth, and no one pretends otherwise. The ${pickRandom2(r.filter((s) => s.type === "economic"))?.name || "this event"} decided who held the money, and those families have held everything else ever since`,
     (r) =>
-      `People here are careful not to show off their money. The ${pickRandom2(r.filter((s) => s.type === "economic"))?.name || "this event"} is recent enough that flaunting wealth looks like having learned nothing from it`,
+      ((e) => (e?.yearsAgo > 60 ? `People here are careful not to show off their money. The ${e.name} is long past, but flaunting wealth still looks like having learned nothing from it` : `People here are careful not to show off their money. The ${e?.name || "this event"} is recent enough that flaunting wealth looks like having learned nothing from it`))(pickRandom2(r.filter((s) => s.type === "economic"))), // R2-CODE-A-2 (cold #181): as above
   ],
   catastrophic: [
     (r) => {
