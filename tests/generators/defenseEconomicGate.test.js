@@ -32,7 +32,6 @@ import { buildThreatAssessment } from '../../src/domain/display/threatAssessment
 import { deriveDefenseReadiness } from '../../src/domain/display/defenseDisplay.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { keepOf } from '../../src/domain/facts/keep.js';
-import { magicPresenceRosterOf } from '../../src/domain/institutions/defenseInstitutionBuckets.js';
 
 /** The profile as the pipeline makes it: what the place can keep up, from its label (`assembleSettlement.js`). @param {any} s */
 const profile = (s) => generateDefenseProfile(s, keepOf(s.economicState?.prosperity));
@@ -326,9 +325,10 @@ describe('magical defense respects degraded magic influence', () => {
     // settlements and double-counted weak presence.
     const cfg = { magicExists: true, priorityMagic: 70, priorityEconomy: 70, priorityCriminal: 10 };
     const healthyTown = town({ ...cfg, institutions: arcaneInstitutions });
-    // ⭐ RE-KEYED BY IDENTITY (COHERENCE-UPKEEP-6, ruling 4 READING A): the presence reads the roster without the
-    // houses that stand as their own named part (the Mages' Guild is one: it feeds arcane), so count once holds.
-    const presence = computeEffectiveMagicPresence(magicPresenceRosterOf(arcaneInstitutions), {
+    // ⭐ RE-KEYED BY IDENTITY, BACK (COHERENCE-UPKEEP-7, the chair's ruling W1: reading A withdrawn): the presence
+    // reads the WHOLE roster again, the Mages' Guild included; the magic presence is the whole of the Magical
+    // Capability score, and the guild feeds that score through no second part.
+    const presence = computeEffectiveMagicPresence(arcaneInstitutions, {
       magicExists: true, priorityMagic: 70, nearbyResources: [],
     });
     // ⭐ RE-KEYED BY IDENTITY (COHERENCE-UPKEEP-5, V3): the magic PART keeps all of itself at full funding (the

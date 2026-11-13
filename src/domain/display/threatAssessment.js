@@ -36,6 +36,7 @@
 
 import { defenseFactsOf } from '../defense/defenseFacts.js';
 import { SCORE_BAND_CUTS, economicSurvivalBandOf } from './defenseScoreBands.js';
+import { laidByBeforeCrisis } from './prosperityInCrisis.js';
 
 /**
  * WHAT MONEY THE PLACE HAS TO MEET A CRISIS: the Economic Survival row's own band, read from its ONE home
@@ -253,12 +254,16 @@ export function buildThreatAssessment(r) {
       : '#8b1a1a';
   let econA;
   const money = moneyRungOf(r);
+  // Where the crisis has lowered the word the page prints, the money that can pay was laid by before it: one clause,
+  // the crisis named by the two-label sentence's own home (COHERENCE-UPKEEP-7, the third read's 1b-M3).
+  const laid = laidByBeforeCrisis(r);
+  const laidClause = laid ? `, ${laid}` : '';
   if (money === 'long') {
-    econA = 'Money enough to ride out a long crisis: emergency measures can be paid for, and '
+    econA = `Money enough to ride out a long crisis${laidClause}: emergency measures can be paid for, and `
       + (hasGarrison ? 'the garrison kept paid' : 'the defenders kept paid')
       + ' while it lasts.';
   } else if (money === 'short') {
-    econA = 'Money enough for a short crisis; a long siege would start eating the reserves within months.';
+    econA = `Money enough for a short crisis${laidClause}; a long siege would start eating the reserves within months.`;
   } else if (money === 'late') {
     econA = 'The defenders are already paid late; a long crisis would empty the reserves and '
       + (hasGarrison ? 'wear out the garrison\'s patience.' : 'wear down the people who defend the place.');

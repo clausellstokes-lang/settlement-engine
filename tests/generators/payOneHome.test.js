@@ -15,6 +15,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { buildThreatAssessment } from '../../src/domain/display/threatAssessment.js';
 import { scoreBand } from '../../src/domain/display/defenseScoreBands.js';
+import { prosperityInCrisisLine } from '../../src/domain/display/prosperityInCrisis.js';
 import { partitionDefenseInstitutions } from '../../src/domain/institutions/defenseInstitutionBuckets.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -85,5 +86,39 @@ describe('hired swords only where hired (ruling B)', () => {
     expect(s.institutions.some((i) => /free company hall/i.test(i.name)), 'anchored: the free company hall stands').toBe(true);
     // anchored: the line above pins the roster this claim is about, so a drifted birth reds there
     expect(s.economicState.safetyProfile.guardEffectivenessDesc.includes(SWORDS)).toBe(false);
+  });
+});
+
+// COHERENCE-UPKEEP-7, the chair's ruling on the third read's 1b-M3 (202 of its 1,200 births printed "every coin goes
+// on food" or "the war takes most of the money" beside "money enough to ride out a long crisis"): where the two
+// prosperity words differ, the sentence that says what the town can pay says the money was laid by before the
+// crisis, in ONE clause, the crisis named through the two-label sentence's own home
+// (`prosperityInCrisis.js :: laidByBeforeCrisis`). A town whose words agree reads as before.
+describe('the money laid by before the crisis (1b-M3)', () => {
+  const LAID = / laid by before the [a-z ,]+[:;]/;
+  test('RED-FIRST: a can-pay money line names the crisis it was laid by before, exactly where the two words differ', () => {
+    const bad = [];
+    let laid = 0;
+    let plain = 0;
+    for (const { seed, s } of births) {
+      const line = buildThreatAssessment(s).find((row) => row.label === 'Economic Survival').assess;
+      const canPay = line.startsWith(MONEY.STRONG) || line.startsWith(MONEY.ADEQUATE);
+      const differ = prosperityInCrisisLine(s) !== null;
+      const says = LAID.test(line);
+      if (canPay && differ) laid += 1;
+      if (canPay && !differ) plain += 1;
+      if (says !== (canPay && differ)) bad.push([seed, s.economicState.prosperity, s.economicState.prosperityStanding, line.slice(0, 90)]);
+    }
+    expect(laid, 'anchored: crisis births whose money line can pay').toBeGreaterThan(10);
+    expect(plain, 'anchored: births whose two words agree keep the plain line').toBeGreaterThan(10);
+    expect(bad).toEqual([]);
+  });
+
+  test('RED-FIRST: the reviewer\'s rv2-famine-city-0 reads the clause beside the hunger line', () => {
+    const cfg = birthConfig({ ...DEFAULT_CONFIG, settType: 'city', selectedStresses: ['famine'], selectedStressesRandom: false });
+    const s = generateSettlementPipeline(cfg, null, { seed: 'rv2-famine-city-0', customContent: {} });
+    expect(prosperityInCrisisLine(s), 'anchored: the two words differ in this famine').not.toBeNull();
+    expect(buildThreatAssessment(s).find((row) => row.label === 'Economic Survival').assess)
+      .toBe('Money enough to ride out a long crisis, laid by before the famine: emergency measures can be paid for, and the garrison kept paid while it lasts.');
   });
 });
