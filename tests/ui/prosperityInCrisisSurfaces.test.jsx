@@ -20,7 +20,7 @@ import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { prosperityInCrisisLine } from '../../src/domain/display/prosperityInCrisis.js';
+import { prosperityInCrisisLine, prosperityInCrisisLed } from '../../src/domain/display/prosperityInCrisis.js';
 import { deriveDossierViewModel } from '../../src/domain/display/dossierViewModel.js';
 import { OverviewTab } from '../../src/components/new/tabs/OverviewTab.jsx';
 import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
@@ -164,7 +164,10 @@ describe('nothing new where there is nothing to say', () => {
     const after = pdfText(capped);
     for (const where of Object.keys(before)) {
       expect(before[where].includes(sentence), where).toBe(false);
-      expect(after[where].replace(`${sentence}\n`, '').replace(`\n${sentence}`, ''), where).toBe(before[where]);
+      // Re-keyed at the chair's ruling D(iii): on the PDF the sentence is led by its word (prosperityInCrisisLed).
+      const led = prosperityInCrisisLed(sentence);
+      expect(after[where].includes(led), `${where}: led by its word`).toBe(true);
+      expect(after[where].replace(`${led}\n`, '').replace(`\n${led}`, ''), where).toBe(before[where]);
     }
     expect(Object.values(journal(old)).join('\n').includes(sentence)).toBe(false);
     expect(registerLine(old)).toBe('A struggling town, at peace.');

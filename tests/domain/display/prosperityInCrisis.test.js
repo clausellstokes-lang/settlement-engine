@@ -7,7 +7,7 @@
  * silences, and that no sentence it can write names a figure or the model's working.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
-import { prosperityInCrisisLine } from '../../../src/domain/display/prosperityInCrisis.js';
+import { prosperityInCrisisLine, prosperityInCrisisLed } from '../../../src/domain/display/prosperityInCrisis.js';
 import { deriveDossierViewModel } from '../../../src/domain/display/dossierViewModel.js';
 import { PROSPERITY_LABELS } from '../../../src/domain/prosperityRank.js';
 import { CRISIS_NOUN } from '../../../src/domain/crisis/crisisHooks.js';
@@ -56,6 +56,27 @@ describe('the sentence, in the owner\'s kept form', () => {
   });
 });
 
+// COHERENCE-UPKEEP-6, the chair's ruling D on the third read (1a-L2, 1a-L4).
+describe('the sentence\'s own home (ruling D)', () => {
+  test('RED-FIRST (i): where every named crisis is an event and not a spell of time, the second clause reads "since"', () => {
+    expect(prosperityInCrisisLine(place('Struggling', 'Poor', [{ type: 'recently_betrayed' }])))
+      .toBe('Poor before the betrayal; Struggling since.');
+    expect(prosperityInCrisisLine(place('Struggling', 'Poor', [{ type: 'religious_conversion' }])))
+      .toBe('Poor before the conversion; Struggling since.');
+    expect(prosperityInCrisisLine(place('Struggling', 'Poor', [{ type: 'recently_betrayed' }, { type: 'religious_conversion' }])))
+      .toBe('Poor before the betrayal and the conversion; Struggling since.');
+    // anchored: a spell of time beside an event still lasts
+    expect(prosperityInCrisisLine(place('Struggling', 'Poor', [{ type: 'recently_betrayed' }, { type: 'famine' }])))
+      .toBe('Poor before the betrayal and the famine; Struggling while they last.');
+  });
+
+  test('RED-FIRST (iii): on the PDF the sentence is led by the word it explains', () => {
+    expect(prosperityInCrisisLed('Comfortable before the famine; Struggling while it lasts.'))
+      .toBe('Prosperity: Comfortable before the famine; Struggling while it lasts.');
+    expect(prosperityInCrisisLed(null)).toBe(null);
+  });
+});
+
 describe('it says nothing where it has nothing honest to say', () => {
   test('the two words agree', () => {
     expect(prosperityInCrisisLine(place('Struggling', 'Struggling', [{ type: 'famine' }]))).toBeNull();
@@ -86,7 +107,8 @@ describe('the ratings, not the machinery: no sentence it can write names a figur
       for (const a of kinds) for (const b of [null, ...kinds]) {
         const stress = b ? [{ type: a }, { type: b }] : [{ type: a }];
         const line = prosperityInCrisisLine(place(PROSPERITY_LABELS[lo], PROSPERITY_LABELS[hi], stress));
-        expect(line, `${lo}/${hi}/${a}/${b}`).toMatch(/^[A-Z][a-z]+ before the [a-z ,]+; [A-Z][a-z]+ while (?:it lasts|they last)\.$/);
+        // Re-keyed by identity at the chair's ruling D(i): an event (the betrayal, the conversion) reads "since".
+        expect(line, `${lo}/${hi}/${a}/${b}`).toMatch(/^[A-Z][a-z]+ before the [a-z ,]+; [A-Z][a-z]+ (?:while (?:it lasts|they last)|since)\.$/);
         expect(MACHINERY.test(String(line)), String(line)).toBe(false);
         written++;
       }

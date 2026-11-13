@@ -39,6 +39,13 @@ import { standingLabelOf } from '../facts/keep.js';
 const PLAIN_NOUN = 'crisis';
 /** The crisis nouns that are plural ("the raids … while they last"). */
 const PLURAL_NOUNS = Object.freeze(new Set(['raids']));
+/**
+ * The crises that are an EVENT and not a spell of time (COHERENCE-UPKEEP-6, the chair's ruling D(i)): a betrayal
+ * or a conversion happened and does not last, so where every crisis named is one, the clause reads "since".
+ */
+const EVENT_KINDS = Object.freeze(new Set(['recently_betrayed', 'religious_conversion']));
+/** The word the sentence explains, which leads it where it sits apart from its word (the PDF; ruling D(iii)). */
+const LEAD_WORD = 'Prosperity';
 
 /** @param {string[]} items @returns {string} "a", "a and b", "a, b and c" */
 const listOf = (items) => (items.length < 2 ? items.join('') : `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}`);
@@ -58,12 +65,24 @@ export function prosperityInCrisisLine(settlement) {
   if (below < 0 || above < 0 || below >= above) return null;
   /** @type {string[]} */
   const nouns = [];
+  let events = true;
   for (const type of activeCrisisTypes(settlement)) {
     const kind = crisisKindOf(type);
     const noun = (kind && CRISIS_NOUN[kind]) || PLAIN_NOUN;
     if (!nouns.includes(noun)) nouns.push(noun);
+    if (!kind || !EVENT_KINDS.has(kind)) events = false;
   }
   if (!nouns.length) return null;
   const plural = nouns.length > 1 || PLURAL_NOUNS.has(nouns[0]);
-  return `${standing} before ${listOf(nouns.map((n) => `the ${n}`))}; ${shown} while ${plural ? 'they last' : 'it lasts'}.`;
+  const after = events ? 'since' : `while ${plural ? 'they last' : 'it lasts'}`;
+  return `${standing} before ${listOf(nouns.map((n) => `the ${n}`))}; ${shown} ${after}.`;
+}
+
+/**
+ * The sentence led by the word it explains, for a page where it sits apart from that word (the PDF's cover,
+ * Overview and Economics strips; the chair's ruling D(iii)). Null where there is no sentence.
+ * @param {string | null | undefined} line @returns {string | null}
+ */
+export function prosperityInCrisisLed(line) {
+  return line ? `${LEAD_WORD}: ${line}` : null;
 }

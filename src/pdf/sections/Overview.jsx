@@ -36,6 +36,7 @@ import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js
 import { proseToPlainText } from '../primitives/ProseText.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
 import { factsOf } from '../../domain/facts/factsOf.js';
+import { prosperityInCrisisLed } from '../../domain/display/prosperityInCrisis.js'; // COHERENCE-UPKEEP-6 (ruling D(iii)): the sentence led by the word it explains
 export function Overview({ settlement, narrativeMode, vm, stateProse, historyPrinted = true }) {
   // ONE HOME PER EXPORT (the chair's B4 ruling (2), 2026-11-09): with History in the variant, the tension
   // descriptions and the historical character live there; without it (campaign_state), here in full.
@@ -103,7 +104,7 @@ export function Overview({ settlement, narrativeMode, vm, stateProse, historyPri
       {/* The Prosperity tile's label, where a crisis in force lowered it, says what the place is in
           ordinary years (the chair's ruling 1(a), REVIEW-UPKEEP-2): the vm's one sentence. */}
       {o.prosperityInCrisis && (
-        <Text style={{ ...type.italic, color: palette.second, fontSize: pt['9'], marginBottom: space.sm }}>{o.prosperityInCrisis}</Text>
+        <Text style={{ ...type.italic, color: palette.second, fontSize: pt['9'], marginBottom: space.sm }}>{prosperityInCrisisLed(o.prosperityInCrisis)}</Text>
       )}
 
       {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}

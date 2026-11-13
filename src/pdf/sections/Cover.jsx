@@ -17,6 +17,7 @@ import { HOUSE_MOTTO } from '../../design/organic/logo.js';
 import { BRAND_SEAL_PNG } from '../assets/brandSeal.js';
 import { humanize, num, stripZwnj, cap, label as toLabel } from '../lib/format.js';
 import { formatCount } from '../../domain/formatNumber.js';
+import { prosperityInCrisisLed } from '../../domain/display/prosperityInCrisis.js'; // COHERENCE-UPKEEP-6 (ruling D(iii)): the sentence led by the word it explains
 
 const TONE_COLOR = (key, fallback = palette.muted) => palette[key] || fallback;
 
@@ -270,7 +271,7 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
             ordinary years (the chair's ruling 1(a), REVIEW-UPKEEP-2): the vm's one sentence. */}
         {prosperity && overview.prosperityInCrisis && (
           <Text style={{ fontFamily: 'Lora', fontSize: pt['10'], color: palette.second, fontStyle: 'italic', marginTop: 6 }}>
-            {overview.prosperityInCrisis}
+            {prosperityInCrisisLed(overview.prosperityInCrisis)}
           </Text>
         )}
 
