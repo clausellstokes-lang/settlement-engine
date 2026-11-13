@@ -968,3 +968,20 @@ on the touched files exit 0. The push at a4fc46b10 ran the hook's three gates, p
 - The old families' body's face: "the lord" (an existing title, F3's claimant mint).
 - The DM block's keeper label and the leader's own house's Connection row reuse the seat row's words ("Acting Elder", "Elder
   Cosij Chan, the boat-headman").
+
+## 8. THE WHOLE SUITE AT THE FINAL TIP
+
+`npx vitest run --maxWorkers=2` in the lane's worktree at 6031540c1 (the last commit before the edge bundles; the bundles
+re-emitted in the tree), the ledger fetched first (review-fixes-2026-07-08 at 235efce1a): 3,224 files, 38,964 tests, **52
+failed plus the two file-level news walkers: 54 titles in 30 files** (147 skipped, the suite's own). **Every one is a row the
+draft record names:** the line's 8 (landingFixtureFreshness 2, newsHeadlineContract and newsVoiceContract file-level,
+proseFamilyContract A1 A3 A5, dossierProseManifest's drift arm); the founding worlds' 1 (foundingWorldBones); the merge seat's
+45 (the goldens and their null-change pins, the re-taken digests, the measured figures: hookThemeDraws 2,116 against 2,157,
+generationForkCensus A1 A6, editCorpusRatchet A3 A5 A7, mergeLadderHeldKeys A3; proseFamilyContract A2; proseComposed A13;
+proseTasteInterested 2; writerReach 9; observedShapeReaders 4; statecraftExposureBand's floor, 27 against 72, as at
+463eb0b04). poolDominance, the merge seat's 46th at 463eb0b04, is green (section 5). **No title is this seat's to cure.**
+The measuring run at 1d11b25e0 had four more files, each cured through its door since (dossierPhoneFloorAllViews e1f821db3,
+the lighting census a4858163b, the size ratchet 6f73bb75b) or not the lane's (edgeSharedBundleReproducibility, 9 titles:
+that run's scratch tree linked another worktree's node_modules, so the bundles recorded inputs outside the repository; green
+here). The six surfaces read as section 5 (golden 393 of 525; drift 998, audience 204 against 203; fence, Herald, pdf.6 red;
+the witness green).
