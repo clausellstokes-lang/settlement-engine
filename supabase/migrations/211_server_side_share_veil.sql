@@ -46,25 +46,9 @@
 --       Before, an unmarked Reveal-DM listing sent both to every reader and every importer, and so
 --       did a marked one once "Pending decrees" was opened. The sanitiser's top-level allowlist
 --       already drops both, so the link and the map never carried them.
---       THE SAME FOR THE AUTHOR'S CUSTOM-CONTENT LIBRARY (COHERENCE-VEIL-6; the fifth review's V5-3, ruled by the
---       chair on 2026-11-13: what no page shows is not sent): customContentRoster and customContentProvenance, which
---       the client's full mode drops (publicSafe.js :: toPublicSafe), leave the Reveal-DM projection of the gallery
---       read and the import too; before, every reader and every importer of such a share received both.
---   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth review's
---       V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy (factions[].members[],
---       powerStructure.factions[].members[]) of a person the share does not reveal to the person's own public card, on
---       every share, marked or not (_gallery_veil_roster_splice). Nothing else an old share serves changes.
 --   (8) A SERVED BODY DROPS A PERSON CARD WITH NEITHER A NAME NOR A ROLE (the third review's V3-2), as
 --       the client's projection does: a served page is not projected again, so a nameless card whose
 --       role the face veil removed was drawn. Hand-edited towns only (the six-size probe counts 0).
---   (9) THE SECOND HOMES GO WITH THEIR SOURCE (COHERENCE-VEIL-6; the fifth review's V5-1): a fact the town keeps
---       a second time, at a path no card list walks, is withheld by the eye that governs its source (section 4b,
---       _gallery_veil_second_homes and the impression arm of _gallery_veil_card): a tie's description and tension
---       under prominentRelationship and inside pressureSentence; a current tension's description inside
---       history.siegeNarrative; a house's description and function in the defence profile's lists, and the whole
---       entry for a house hidden whole; the name of a house hidden whole in the economy's chains (its own, or the
---       name the engine's processor match gives it; and the chain that is its own) and in the simulation trace; a sentence of a person's appearance inside the card's impression.
---       A composed sentence that embeds a hidden string is withheld whole; a list loses the hidden name only.
 --
 -- RESTATED ALSO: _gallery_apply_member_overrides (093), its body plus a typed read of the two
 -- stored member flags (the second review's R9/R11): only JSON true reveals or permits; nothing raises.
@@ -72,8 +56,7 @@
 -- functions, every grant (restated as they stood). No table, column,
 -- constraint, policy or row. Every invisible character is spelled as an escape (low finding 4).
 --
--- COUPLED CLIENT TWIN: src/domain/display/galleryVeil.js (projectServedVeil, VEIL_LIMITS.servedVersion),
--- src/domain/display/gallerySecondHomes.js (the second homes, (9))
+-- COUPLED CLIENT TWIN: src/domain/display/galleryVeil.js (projectServedVeil, VEIL_LIMITS.servedVersion)
 -- and src/lib/gallery.js (sanitizeDossier). PINNED BY EXECUTION: tests/security/galleryServerVeil.pglite.test.js
 -- (the real SQL against the real client page: nothing carried, no page changed, 210 as the red control).
 --
@@ -838,12 +821,6 @@ begin
     own := byid -> id;
   end if;
   drops := drops || array(select jsonb_array_elements_text(coalesce(own, '[]')));
-  -- V5-1 (COHERENCE-VEIL-6, the impression): a sentence of the appearance the eye shuts goes with it from the
-  -- card's face, whole (gallerySecondHomes.js :: withholdImpression)
-  if kind = 'npc' and 'physical' = any(drops) and jsonb_typeof(c -> 'presentation') = 'object'
-     and public._gallery_veil_embeds(c #> '{presentation,impression}', public._gallery_veil_pieces(c -> 'physical')) then
-    c := jsonb_set(c, '{presentation}', (c -> 'presentation') - 'impression');
-  end if;
   -- SERVER ONLY (COHERENCE-VEIL-4, V4-2; the chair's ruling 331): a person stored by master's client
   -- carries `factionGoal` and `linkedFactionIds`, which master's goals and ties eyes governed
   -- (db832c892:galleryVeil.js:155,159). The people car retired both names, so the client's table no
@@ -993,178 +970,6 @@ begin
   return s;
 end $$;
 
--- ── 4b. THE SECOND HOMES (COHERENCE-VEIL-6; the fifth review's V5-1) ───────────────────────────
--- The stored town keeps some facts a second time, at a path no card list walks; each goes WITH THE EYE
--- THAT GOVERNS ITS SOURCE, and nothing else goes (gallerySecondHomes.js :: withholdSecondHomes, whose header
--- lists the homes). A copy loses the hidden key; a composed sentence that embeds a hidden string is
--- withheld whole; a list loses the hidden name and nothing else.
-
--- secondHomePieces: each string leaf of a hidden value, trimmed, and each run of it between sentence
--- stops and dashes (U+2014), of 12 code points or more.
-create or replace function public._gallery_veil_pieces(v jsonb)
-returns text[] language sql immutable as $$
-  select coalesce(array_agg(t), '{}') from (
-    select btrim(p, E' \t\n\r') as t
-      from jsonb_path_query(coalesce(v, 'null'), 'lax $.**') x(j)
-      cross join lateral (select x.j #>> '{}' as str) y
-      cross join lateral (select y.str union all select regexp_split_to_table(y.str, '[.!?' || chr(8212) || ']+')) z(p)
-     where jsonb_typeof(x.j) = 'string') q
-   where char_length(t) >= 12
-$$;
-
--- embedsAny: the text holds one of the pieces.
-create or replace function public._gallery_veil_embeds(txt jsonb, pieces text[])
-returns boolean language sql immutable as $$
-  select jsonb_typeof(txt) = 'string' and exists (select 1 from unnest(pieces) p where position(p in (txt #>> '{}')) > 0)
-$$;
-
--- names: some string anywhere in the value holds the name of a house removed whole.
-create or replace function public._gallery_veil_names(v jsonb, gone jsonb)
-returns boolean language sql immutable as $$
-  select exists (select 1 from jsonb_path_query(coalesce(v, 'null'), 'lax $.**') x(j), jsonb_object_keys(gone) g
-                  where jsonb_typeof(x.j) = 'string' and position(g in (x.j #>> '{}')) > 0)
-$$;
-
--- A processing name that a house removed whole answers to, and no house left open does: that house's name. A
--- house answers to its own name or by the engine's processor match (computeActiveChains.js :: fuzzyProcessorMatch:
--- the lower-cased name holds the pattern's first twelve characters), so 'Black market bazaar' is 'Black market'.
-create or replace function public._gallery_veil_hidden_name(x jsonb, gone jsonb, open_names text[])
-returns boolean language sql immutable as $$
-  select exists (select 1 from jsonb_object_keys(gone) g where g = q.v or position(left(lower(q.v), 12) in lower(g)) > 0)
-     and not exists (select 1 from unnest(open_names) o where o = q.v or position(left(lower(q.v), 12) in lower(o)) > 0)
-    from (select public._gallery_veil_str(x) as v) q
-$$;
-
--- What each second home's source said, read BEFORE the eyes run: the ties with a shut eye
--- [{n1, n2, ty, d, t, ds, ts}], the pieces of every shut tension description, and each house's shut
--- eyes by name {name: {desc, fn}}.
-create or replace function public._gallery_veil_sources(s jsonb, fields jsonb, classes jsonb, excj jsonb)
-returns jsonb language sql immutable as $$
-  with shut(kind, id, eye, card) as (
-    select k.kind, i.id, e.eye, c.card
-      from unnest(array['relationship', 'tension', 'institution']) k(kind),
-           lateral public._gallery_veil_cards(s, k.kind) c,
-           lateral (select public._gallery_veil_card_id(k.kind, c.card) as id) i,
-           lateral (select unnest(case k.kind when 'relationship' then array['description', 'tension']
-                                              when 'tension' then array['description'] else array['description', 'function'] end) as eye) e
-  ),
-  eyes as (
-    select kind, id, eye, card,
-           coalesce(fields #> array[kind, id], '[]') ? eye
-             or (coalesce(classes -> kind, '[]') ? eye and not (excj ? ('field:' || kind || ':' || id || ':' || eye))) as is_shut
-      from shut
-  ),
-  ties as (
-    select card, bool_or(is_shut) filter (where eye = 'description') as ds, bool_or(is_shut) filter (where eye = 'tension') as ts, min(ord) as ord
-      from (select e.*, row_number() over () as ord from eyes e where kind = 'relationship') q
-     group by card, id
-  )
-  select jsonb_build_object(
-    'ties', coalesce((select jsonb_agg(jsonb_build_object('n1', card -> 'npc1Name', 'n2', card -> 'npc2Name', 'ty', card -> 'typeName',
-                                                          'd', card -> 'description', 't', card -> 'tension', 'ds', ds, 'ts', ts) order by ord)
-                        from ties where ds or ts), '[]'),
-    'tension_pieces', coalesce((select to_jsonb(array_agg(p)) from eyes, unnest(public._gallery_veil_pieces(jsonb_build_array(card -> 'description', card -> 'desc'))) p
-                                 where kind = 'tension' and is_shut), '[]'),
-    'houses', coalesce((select jsonb_object_agg(name, jsonb_build_object('desc', d, 'fn', f)) from (
-        select card ->> 'name' as name, bool_or(is_shut) filter (where eye = 'description') as d, bool_or(is_shut) filter (where eye = 'function') as f
-          from eyes where kind = 'institution' and public._gallery_veil_str(card -> 'name') <> '' group by 1) h), '{}'))
-$$;
-
--- The pieces of the shut eyes of some ties.
-create or replace function public._gallery_veil_tie_pieces(ties jsonb)
-returns text[] language sql immutable as $$
-  select coalesce(array_agg(p), '{}') from jsonb_array_elements(coalesce(ties, '[]')) t,
-    lateral unnest(public._gallery_veil_pieces(jsonb_build_array(
-      case when (t ->> 'ds')::boolean then t -> 'd' end, case when (t ->> 'ts')::boolean then t -> 't' end))) p
-$$;
-
--- withholdSecondHomes: every second home whose source an eye shut.
-create or replace function public._gallery_veil_second_homes(s jsonb, src jsonb, gone jsonb)
-returns jsonb language plpgsql immutable as $$
-declare
-  ties jsonb := coalesce(src -> 'ties', '[]');
-  houses jsonb := coalesce(src -> 'houses', '{}');
-  pr jsonb;
-  own jsonb;
-  k text;
-  v jsonb;
-  open_names text[];
-  named jsonb;
-begin
-  if jsonb_array_length(ties) > 0 then
-    pr := s -> 'prominentRelationship';
-    if jsonb_typeof(pr) = 'object' then
-      select coalesce(jsonb_agg(t), '[]') into own from jsonb_array_elements(ties) t
-       where (public._gallery_veil_str(t -> 'n1') = public._gallery_veil_str(pr -> 'npc1') and public._gallery_veil_str(t -> 'n2') = public._gallery_veil_str(pr -> 'npc2')
-              and public._gallery_veil_str(t -> 'ty') = public._gallery_veil_str(pr -> 'type'))
-          or (public._gallery_veil_str(pr -> 'full') <> '' and t -> 'd' = pr -> 'full')
-          or (public._gallery_veil_str(pr -> 'tension') <> '' and t -> 't' = pr -> 'tension');
-      if jsonb_array_length(own) > 0 then
-        if exists (select 1 from jsonb_array_elements(own) t where (t ->> 'ds')::boolean) then pr := pr - 'full'; end if;
-        if exists (select 1 from jsonb_array_elements(own) t where (t ->> 'ts')::boolean) then pr := pr - 'tension'; end if;
-        if public._gallery_veil_embeds(pr -> 'phrasing', public._gallery_veil_tie_pieces(own)) then pr := pr - 'phrasing'; end if;
-        s := jsonb_set(s, '{prominentRelationship}', pr);
-      end if;
-    end if;
-    if public._gallery_veil_embeds(s -> 'pressureSentence', public._gallery_veil_tie_pieces(ties)) then s := s - 'pressureSentence'; end if;
-  end if;
-  if jsonb_typeof(s -> 'history') = 'object'
-     and public._gallery_veil_embeds(s #> '{history,siegeNarrative}', array(select jsonb_array_elements_text(coalesce(src -> 'tension_pieces', '[]')))) then
-    s := s #- '{history,siegeNarrative}';
-  end if;
-
-  if jsonb_typeof(s -> 'defenseProfile') = 'object' and jsonb_typeof(s #> '{defenseProfile,institutions}') = 'object' then
-    for k, v in select * from jsonb_each(s #> '{defenseProfile,institutions}') loop
-      if jsonb_typeof(v) <> 'array' then continue; end if;
-      s := jsonb_set(s, array['defenseProfile', 'institutions', k], coalesce((
-        select jsonb_agg(case when jsonb_typeof(r) <> 'object' then r
-            else r - (case when coalesce((houses -> public._gallery_veil_str(r -> 'name') ->> 'desc')::boolean, false) then array['desc', 'description'] else '{}'::text[] end)
-                   - (case when coalesce((houses -> public._gallery_veil_str(r -> 'name') ->> 'fn')::boolean, false) then array['tags', 'facets', 'serviceKeys'] else '{}'::text[] end) end
-          order by o)
-          from jsonb_array_elements(v) with ordinality x(r, o)
-         where not (jsonb_typeof(r) = 'object' and gone ? public._gallery_veil_str(r -> 'name'))), '[]'));
-    end loop;
-  end if;
-  if gone = '{}' then return s; end if;
-  open_names := array(select public._gallery_veil_str(e -> 'name')
-                        from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) e
-                       where jsonb_typeof(e) = 'object');
-  -- every name of a house removed whole: its own, and each processing name only it answers to
-  named := gone || coalesce((select jsonb_object_agg(x #>> '{}', true)
-      from jsonb_array_elements(case when jsonb_typeof(s #> '{economicState,activeChains}') = 'array' then s #> '{economicState,activeChains}' else '[]' end) c,
-           jsonb_array_elements(case when jsonb_typeof(c -> 'processingInstitutions') = 'array' then c -> 'processingInstitutions' else '[]' end) x
-     where jsonb_typeof(c) = 'object' and jsonb_typeof(x) = 'string' and public._gallery_veil_hidden_name(x, gone, open_names)), '{}');
-
-  if jsonb_typeof(s -> 'economicState') = 'object' and jsonb_typeof(s #> '{economicState,activeChains}') = 'array' then
-    s := jsonb_set(s, '{economicState,activeChains}', coalesce((
-      select jsonb_agg(c2 order by o) from (
-        select o, case when jsonb_typeof(c) <> 'object' then c
-          else (case when jsonb_typeof(c -> 'processingInstitutions') = 'array'
-                     then jsonb_set(c, '{processingInstitutions}', coalesce((select jsonb_agg(x order by xo) from jsonb_array_elements(c -> 'processingInstitutions') with ordinality y(x, xo)
-                                                                             where not public._gallery_veil_hidden_name(x, gone, open_names)), '[]'))
-                     else c end)
-               - (case when jsonb_typeof(c -> 'dependency') = 'object' and public._gallery_veil_hidden_name(c #> '{dependency,institution}', gone, open_names)
-                       then array['dependency'] else '{}'::text[] end) end as c2,
-          c
-          from jsonb_array_elements(s #> '{economicState,activeChains}') with ordinality x(c, o)) q
-       where not (jsonb_typeof(c) = 'object'
-                  and (gone ? public._gallery_veil_str(c -> 'label')
-                       or (jsonb_typeof(c -> 'processingInstitutions') = 'array' and jsonb_array_length(c -> 'processingInstitutions') > 0
-                           and jsonb_array_length(c2 -> 'processingInstitutions') = 0)))), '[]'));
-  end if;
-  if jsonb_typeof(s -> 'simulationTrace') = 'array' then
-    s := jsonb_set(s, '{simulationTrace}', coalesce((
-      select jsonb_agg(case when jsonb_typeof(e) <> 'object' then e
-          else e || (select coalesce(jsonb_object_agg(kk, coalesce((select jsonb_agg(x order by xo) from jsonb_array_elements(e -> kk) with ordinality y(x, xo)
-                                                                    where not public._gallery_veil_names(x, named)), '[]')), '{}')
-                       from unnest(array['causes', 'downstreamEffects']) kk where jsonb_typeof(e -> kk) = 'array') end order by o)
-        from jsonb_array_elements(s -> 'simulationTrace') with ordinality x(e, o)
-       where not (jsonb_typeof(e) = 'object'
-                  and exists (select 1 from jsonb_each(e) z(kk, vv) where kk not in ('causes', 'downstreamEffects') and public._gallery_veil_names(vv, named)))), '[]'));
-  end if;
-  return s;
-end $$;
-
 create or replace function public._gallery_veil_apply(pub jsonb, res jsonb)
 returns jsonb language plpgsql immutable as $$
 declare
@@ -1180,7 +985,6 @@ declare
   people_of jsonb := '{}';
   kind text;
   g text;
-  src jsonb;
 begin
   -- X-21e: a card-hidden house goes whole only when the data puts it in the class.
   -- (set-based, the review's F5: one pass, never a growing object rebuilt per house)
@@ -1219,10 +1023,6 @@ begin
   end if;
   services_of := gone_houses || services_of;
 
-  -- V5-1 (COHERENCE-VEIL-6): the second homes' sources, read before any card is touched
-  src := case when fields ?| array['relationship', 'tension', 'institution'] or classes ?| array['relationship', 'tension', 'institution']
-              then public._gallery_veil_sources(s, fields, classes, excj) else '{}'::jsonb end;
-
   -- cards: class switches, then per-card eyes
   foreach kind in array public._gallery_veil_kind_order() loop
     if classes -> kind is null and fields -> kind is null then continue; end if;
@@ -1249,9 +1049,6 @@ begin
   if people_of <> '{}' or gone_houses <> '{}' or gone_ids <> '{}' then
     s := public._gallery_veil_map(s, 'npc', 'npc', jsonb_build_object('people', people_of, 'gone_houses', gone_houses, 'gone_ids', gone_ids));
   end if;
-
-  -- V5-1: each second home goes with the eye that governs its source
-  s := public._gallery_veil_second_homes(s, src, gone_houses);
 
   -- groupings last
   foreach g in array groupings loop
@@ -1325,49 +1122,6 @@ end $$;
 
 -- ── 6. THE READS (each its previous body plus the veil; grants as they stood) ────────────────
 
--- ── V5-4 (COHERENCE-VEIL-6; the fifth review §1.5, ruled by the chair on 2026-11-13): a person hidden by the per-person
--- switch is never sent, on any share, exported before the veil or after. Master's generator embeds each person's whole
--- card in the power's roster (factions[].members[], powerStructure.factions[].members[]); on a DM-full projection the 093
--- splice reduced the person in npcs[] only, so an UNMARKED share (served as before, no veil) sent the roster copy whole.
--- Now each roster copy of a person the share does not reveal is the same public card as the person's own entry.
--- Nothing else changes: a revealed person's copy stays; a projection that is not DM-full is the sanitiser's already.
--- SERVER ONLY, as V4-2: every page draws a share from what a read serves, which this splice has already reduced; a
--- client twin would read `members` on factions, a key the current generator no longer writes (the observed-shape
--- register refuses it, and the retired-field register does not grow).
-create or replace function public._gallery_veil_member_revealed(m jsonb, overrides jsonb, share_dm boolean, importable boolean, for_import boolean)
-returns boolean language sql immutable as $$
-  select case when for_import then
-      coalesce(case coalesce(overrides -> public._gallery_npc_key(m) -> 'revealDm', 'null') when 'true' then true when 'null' then null else false end, share_dm)
-      and coalesce(case coalesce(overrides -> public._gallery_npc_key(m) -> 'allowImport', 'null') when 'true' then true when 'null' then null else false end, importable)
-    else coalesce(case coalesce(overrides -> public._gallery_npc_key(m) -> 'revealDm', 'null') when 'true' then true when 'null' then null else false end, share_dm) end
-$$;
-
-create or replace function public._gallery_veil_roster_members(factions jsonb, overrides jsonb, share_dm boolean, importable boolean, for_import boolean)
-returns jsonb language sql immutable as $$
-  select coalesce(jsonb_agg(case when jsonb_typeof(f) = 'object' and jsonb_typeof(f -> 'members') = 'array'
-      then jsonb_set(f, '{members}', coalesce((
-        select jsonb_agg(case when jsonb_typeof(m) = 'object' and not coalesce(public._gallery_veil_member_revealed(m, overrides, share_dm, importable, for_import), false)
-                              then coalesce(public._gallery_sanitize_public_json(jsonb_build_object('npcs', jsonb_build_array(m))) -> 'npcs' -> 0, '{}'::jsonb)
-                              else m end order by mo)
-          from jsonb_array_elements(f -> 'members') with ordinality y(m, mo)), '[]'))
-      else f end order by o), '[]')
-    from jsonb_array_elements(factions) with ordinality x(f, o)
-$$;
-
-create or replace function public._gallery_veil_roster_splice(doc jsonb, overrides jsonb, share_dm boolean, importable boolean, for_import boolean)
-returns jsonb language plpgsql immutable as $$
-begin
-  if not coalesce(share_dm, false) or jsonb_typeof(doc) is distinct from 'object' then return doc; end if;
-  if jsonb_typeof(doc -> 'factions') = 'array' then
-    doc := jsonb_set(doc, '{factions}', public._gallery_veil_roster_members(doc -> 'factions', overrides, share_dm, importable, for_import));
-  end if;
-  if jsonb_typeof(doc -> 'powerStructure') = 'object' and jsonb_typeof(doc #> '{powerStructure,factions}') = 'array' then
-    doc := jsonb_set(doc, '{powerStructure,factions}',
-      public._gallery_veil_roster_members(doc #> '{powerStructure,factions}', overrides, share_dm, importable, for_import));
-  end if;
-  return doc;
-end $$;
-
 -- _gallery_apply_member_overrides (093), the FIFTH restatement: 093's body plus one change, a TYPED
 -- read of the two stored member flags (the second review's R9 and R11, ruled into 211). 093 cast
 -- the stored text to boolean: a stored word that is not one ("maybe", an object) made the gallery,
@@ -1386,8 +1140,7 @@ create or replace function public._gallery_apply_member_overrides(
   settlement_importable boolean,
   for_import boolean
 ) returns jsonb language sql immutable as $$
-  -- V5-4: the roster copies follow the person's own entry (_gallery_veil_roster_splice, below)
-  select public._gallery_veil_roster_splice(case
+  select case
     when jsonb_typeof(base -> 'npcs') is distinct from 'array' then base
     else jsonb_set(base, '{npcs}', coalesce((
       select jsonb_agg(
@@ -1413,9 +1166,8 @@ create or replace function public._gallery_apply_member_overrides(
       )
       from jsonb_array_elements(base -> 'npcs') with ordinality as t(npc, ord)
     ), '[]'::jsonb))
-  end, overrides, settlement_share_dm, settlement_importable, for_import);
+  end;
 $$;
-
 
 -- get_gallery_dossier: 147's body plus the veil, and the pg_temp pin a recreated definer takes
 -- (tests/lint/migrationSearchPathPin.test.js; its ledger row comes off)
@@ -1506,12 +1258,10 @@ as $$
               from (select s.gallery_member_overrides -> '$veil' as v offset 0) mv) cp
   ) src
   -- 211: the editor's working state (decrees, dmLayer) never travels, Reveal DM or not (the third
-  -- review's V3-1; the client's full mode strips both), nor the author's custom-content library (the fifth
-  -- review's V5-3, ruled by the chair: customContentRoster, customContentProvenance, which no page shows)
+  -- review's V3-1; the client's full mode strips both)
   cross join lateral (
     select public._gallery_apply_member_overrides(
-      case when s.gallery_share_dm then public._gallery_dm_full_json(src.j) - array['decrees', 'dmLayer', 'customContentRoster', 'customContentProvenance']
-           else public._gallery_sanitize_public_json(src.j) end,
+      case when s.gallery_share_dm then public._gallery_dm_full_json(src.j) - array['decrees', 'dmLayer'] else public._gallery_sanitize_public_json(src.j) end,
       public._gallery_dm_full_json(src.j),
       s.gallery_member_overrides, s.gallery_share_dm, s.gallery_importable, false
     ) as d
@@ -1614,12 +1364,10 @@ as $$
               from (select s.gallery_member_overrides -> '$veil' as v offset 0) mv) cp
   ) src
   -- 211: the editor's working state (decrees, dmLayer) never travels, Reveal DM or not (the third
-  -- review's V3-1; the client's full mode strips both), nor the author's custom-content library (the fifth
-  -- review's V5-3, ruled by the chair: customContentRoster, customContentProvenance, which no page shows)
+  -- review's V3-1; the client's full mode strips both)
   cross join lateral (
     select public._gallery_apply_member_overrides(
-      case when s.gallery_share_dm then public._gallery_dm_full_json(src.j) - array['decrees', 'dmLayer', 'customContentRoster', 'customContentProvenance']
-           else public._gallery_sanitize_public_json(src.j) end,
+      case when s.gallery_share_dm then public._gallery_dm_full_json(src.j) - array['decrees', 'dmLayer'] else public._gallery_sanitize_public_json(src.j) end,
       public._gallery_dm_full_json(src.j),
       s.gallery_member_overrides, s.gallery_share_dm, s.gallery_importable, true
     ) as d
