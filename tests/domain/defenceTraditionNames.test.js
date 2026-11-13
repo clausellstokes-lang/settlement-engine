@@ -56,8 +56,9 @@ describe('the defence traditions are read by the roster\'s defence home', () => 
 
   test('defenseGenerator.js reads no institution name: no nativeSemanticName, no hasInst', () => {
     const src = readFileSync(join(ROOT, 'src/generators/defenseGenerator.js'), 'utf8');
-    expect(src).not.toMatch(/nativeSemanticName/);
-    expect(src).not.toMatch(/\bhasInst\s*\(/);
+    expect(src).toMatch(/defenseTraditionNamesOf\(institutions\)/);
+    expect(src).not.toMatch(/nativeSemanticName/); // anchored: the line above proves this is the generator, asking the home
+    expect(src).not.toMatch(/\bhasInst\s*\(/); // anchored: the same read, proven above to be the generator's source
   });
 
   test('R17: the home also answers the wall\'s kind (stone by default); nothing in defence reads it', () => {
@@ -67,6 +68,8 @@ describe('the defence traditions are read by the roster\'s defence home', () => 
     expect(defenseWallOf([{ name: 'Palisade' }])).toEqual({ present: true, kind: 'palisade' });
     expect(defenseWallOf([{ name: 'Palisade or earthworks' }])).toEqual({ present: true, kind: 'palisade' });
     expect(defenseWallOf([{ name: 'Earthwork ring' }])).toEqual({ present: true, kind: 'earthwork' });
-    expect(readFileSync(join(ROOT, 'src/generators/defenseGenerator.js'), 'utf8')).not.toMatch(/defenseWallOf/);
+    const generator = readFileSync(join(ROOT, 'src/generators/defenseGenerator.js'), 'utf8');
+    expect(generator).toMatch(/defenseTraditionNamesOf/);
+    expect(generator).not.toMatch(/defenseWallOf/); // anchored: the line above proves this is the generator, which asks the home for names
   });
 });

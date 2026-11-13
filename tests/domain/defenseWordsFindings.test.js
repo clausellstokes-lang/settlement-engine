@@ -180,7 +180,6 @@ describe('the Defense tab says only what the place has', () => {
     const thorp20 = born('thorp', 20);
     const row = deriveDefenseReadiness(thorp20).find((r) => r.label === 'Invasion & War');
     expect(defenseFactsOf(thorp20).defenceNames, 'anchored: the palisade is its one defence').toEqual(['Palisade']);
-    expect(row.fundingNote).not.toMatch(/garrison pay/);
     expect(row.fundingNote).toMatch(/^Upkeep underfunded: defence upkeep for the palisade at \d+%$/);
   });
 
