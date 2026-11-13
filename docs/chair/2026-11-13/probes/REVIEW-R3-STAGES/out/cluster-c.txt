@@ -1,0 +1,1650 @@
+2	.npcs[].goal.long ⟶ Be counted one day among those who lead Church Council.
+		ex rr3-town-occupied-rand-0 rr3-town-occupied-port-0
+		from 1× Rise in Church Council far enough that their word carries weight outside it. | 1× Repay Jelme Mangghud in full, and owe nobody anything again.
+1	.npcs[].goal.long ⟶ Be counted one day among those who lead City-State Council.
+		ex rr3-city-occupied-rand-1
+		from 1× Make Boatbuilding & River Transport the thing this place is known for.
+1	.npcs[].goal.long ⟶ Be counted one day among those who lead Merchant oligarchy.
+		ex r2s-occupied-city-1
+		from 1× Build up enough savings at the banking houses to ride out two bad years.
+1	.npcs[].goal.long ⟶ Be counted one day among those who lead Noble Governorship.
+		ex rr3-city-occupied-rand-4
+		from 1× Be given the secrets of Noble Governorship to keep, as well as its errands to run.
+1	.npcs[].goal.long ⟶ Be free of what is owed to Amir al-Libi, completely.
+		ex rr3-metropolis-occupied-rand-3
+		from 1× Be loved by the people here for the good they did.
+1	.npcs[].goal.long ⟶ Be free of what is owed to Jayan Samarkand, completely.
+		ex rr3-city-occupied-rand-1
+		from 1× Become someone City-State Council cannot do without.
+2	.npcs[].goal.long ⟶ Be given the secrets of Church Council to keep, as well as its errands to run.
+		ex rr3-town-occupied-rand-0 rr3-town-occupied-port-0
+		from 1× Reach the top of Church Council by the long road, one earned favour at a time. | 1× Turn the bargain with Selmeg Arulad into real trust over the years.
+1	.npcs[].goal.long ⟶ Be given the secrets of Ducal Governorship to keep, as well as its errands to run.
+		ex rr3-metropolis-occupied-rand-2
+		from 1× Become someone Ducal Governorship cannot do without.
+1	.npcs[].goal.long ⟶ Be given the secrets of Grand Merchant Oligarchy to keep, as well as its errands to run.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Learn to do the work at the bakers with half as much grain.
+2	.npcs[].goal.long ⟶ Be given the secrets of Merchant Guilds to keep, as well as its errands to run.
+		ex r2s-occupied-city-1 rr3-metropolis-occupied-rand-2
+		from 1× Be counted one day among those who lead Merchant oligarchy. | 1× Reach the top of Merchant Guilds by the long road, one earned favour at a time.
+2	.npcs[].goal.long ⟶ Be given the secrets of Merchant oligarchy to keep, as well as its errands to run.
+		ex r2s-occupied-town-1 rr3-town-occupied-rand-1
+		from 1× Never be tied to one thing for long. | 1× Reach the top of Merchant oligarchy by the long road, one earned favour at a time.
+1	.npcs[].goal.long ⟶ Be given the secrets of Noble Governorship to keep, as well as its errands to run.
+		ex rr3-city-occupied-port-1
+		from 1× Rise in Noble Governorship far enough that their word carries weight outside it.
+1	.npcs[].goal.long ⟶ Be known by name in every house here, and further off.
+		ex rr3-city-occupied-rand-1
+		from 1× Rise higher than anyone in the family ever has.
+1	.npcs[].goal.long ⟶ Be loved by the people here for the good they did.
+		ex rr3-city-occupied-port-1
+		from 1× Rise in Arcane Orders far enough that their word carries weight outside it.
+1	.npcs[].goal.long ⟶ Be remembered as the one who kept the bakers out of debt.
+		ex r2s-occupied-city-3
+		from 1× Be remembered alongside Akna Zuyua as one of the best at the work.
+1	.npcs[].goal.long ⟶ Be remembered as the one who kept the city granaries out of debt.
+		ex rr3-city-occupied-rand-1
+		from 1× Rise past Elchidei Merkit in City-State Council on their own merit, owing no one for the climb.
+1	.npcs[].goal.long ⟶ Be remembered as the one who kept the gladiatorial school out of debt.
+		ex rr3-city-occupied-port-0
+		from 1× Be given the secrets of Occupation Authority to keep, as well as its errands to run.
+1	.npcs[].goal.long ⟶ Be remembered as the one who kept the harbour master's office out of debt.
+		ex rr3-town-occupied-rand-0
+		from 1× Make Laoghaire Clifford admit, in public, that they were wrong.
+1	.npcs[].goal.long ⟶ Be remembered as the one who kept the warehouse district out of debt.
+		ex rr3-city-occupied-rand-1
+		from 1× Settle things with Toquchar Mangghud for good, one way or another.
+1	.npcs[].goal.long ⟶ Be remembered for bringing the bakers through the lean years.
+		ex rr3-city-occupied-rand-1
+		from 1× Free the bakers from depending on a single source of grain.
+1	.npcs[].goal.long ⟶ Be remembered for bringing the furrier's district through the lean years.
+		ex rr3-city-occupied-rand-1
+		from 1× Find a lasting replacement for what Furs & Pelts lost in the shortage.
+2	.npcs[].goal.long ⟶ Be the person everyone here defers to.
+		ex r2s-occupied-city-3 rr3-metropolis-occupied-rand-0
+		from 1× Never again be told what to do. | 1× Be obeyed without ever having to raise their voice.
+1	.npcs[].goal.long ⟶ Become someone Arcane Council cannot do without.
+		ex r2s-occupied-city-3
+		from 1× Reach the top of Arcane Council by the long road, one earned favour at a time.
+2	.npcs[].goal.long ⟶ Become someone Church Council cannot do without.
+		ex rr3-town-occupied-rand-0 rr3-town-occupied-port-0
+		from 1× Restore Grain & Bread to full work, and keep it there. | 1× Rise in Church Council far enough that their word carries weight outside it.
+1	.npcs[].goal.long ⟶ Become someone City-State Council cannot do without.
+		ex rr3-city-occupied-rand-1
+		from 1× Earn a place among the leaders of City-State Council without buying it or marrying into it.
+1	.npcs[].goal.long ⟶ Become someone Corrupt City Council cannot do without.
+		ex r2s-occupied-city-2
+		from 1× Earn a place among the leaders of Corrupt City Council without buying it or marrying into it.
+1	.npcs[].goal.long ⟶ Become someone Grand Guild Consortium cannot do without.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Rise in Grand Guild Consortium far enough that their word carries weight outside it.
+1	.npcs[].goal.long ⟶ Become someone Grand Merchant Senate cannot do without.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Rise in Grand Merchant Senate far enough that their word carries weight outside it.
+1	.npcs[].goal.long ⟶ Become someone Hakon Bodvarsson needs as much as they are needed.
+		ex r2s-occupied-town-1
+		from 1× Be the person everyone here defers to.
+4	.npcs[].goal.long ⟶ Become someone Merchant Guilds cannot do without.
+		ex r2s-occupied-city-1 rr3-metropolis-occupied-rand-0 rr3-metropolis-occupied-rand-2 rr3-metropolis-occupied-port-0
+		from 3× Earn a place among the leaders of Merchant Guilds without buying it or marrying into it. | 1× Rise in Merchant Guilds far enough that their word carries weight outside it.
+2	.npcs[].goal.long ⟶ Become someone Merchant oligarchy cannot do without.
+		ex r2s-occupied-city-1 rr3-town-occupied-rand-1
+		from 1× Be remembered as the one who kept the furrier's district out of debt. | 1× Leave Akna Ek with no power left to do them harm.
+1	.npcs[].goal.long ⟶ Become someone Noble Governorship cannot do without.
+		ex rr3-city-occupied-rand-4
+		from 1× Turn the bargain with Garbhán Quinn into real trust over the years.
+1	.npcs[].goal.long ⟶ Become someone Occupation Authority cannot do without.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Earn a place among the leaders of Occupation Authority without buying it or marrying into it.
+1	.npcs[].goal.long ⟶ Bring City-State Council under the sway of Occupation Authority, one member at a time.
+		ex rr3-city-occupied-rand-1
+		from 1× Win the hired blades a voice whenever those who govern decide something that touches the work.
+1	.npcs[].goal.long ⟶ Bring Corrupt City Council under the sway of Occupation Authority, one member at a time.
+		ex r2s-occupied-city-2
+		from 1× Outlast Craft Guilds, and still be standing with Merchant Guilds when they are gone.
+1	.npcs[].goal.long ⟶ Bring every step of Leatherworking & Cordwaining under the roof of the tanners.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Make Alyona Sokolov admit, in public, that they were wrong.
+1	.npcs[].goal.long ⟶ Bring Grand Guild Consortium under the sway of Occupation Authority, one member at a time.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Get so far ahead of Grata Cordus that no one remembers they were ever rivals.
+1	.npcs[].goal.long ⟶ Bring Merchant Guilds under the sway of Craft Guilds, one member at a time.
+		ex rr3-city-occupied-rand-0
+		from 1× End the bad blood between Craft Guilds and Merchant Guilds before the next generation inherits it.
+1	.npcs[].goal.long ⟶ Bring Occupation Authority under the sway of Arcane Council, one member at a time.
+		ex r2s-occupied-city-3
+		from 1× Have the rights of the dungeon delving supply district set down so firmly that the next ruler must keep them t
+2	.npcs[].goal.long ⟶ Bring Occupation Authority under the sway of City-State Council, one member at a time.
+		ex rr3-city-occupied-rand-1 rr3-metropolis-occupied-rand-1
+		from 1× Secure rights for the potter's workshop that will outlast whoever governs now. | 1× Make peace between City-State Council and Thieves' Guild on terms City-State Council can live with.
+1	.npcs[].goal.long ⟶ Bring Occupation Authority under the sway of Corrupt City Council, one member at a time.
+		ex r2s-occupied-city-2
+		from 1× Make peace between Merchant Guilds and Craft Guilds on terms Merchant Guilds can live with.
+2	.npcs[].goal.long ⟶ Bring Occupation Authority under the sway of Ducal Governorship, one member at a time.
+		ex r2s-occupied-metropolis-2 rr3-metropolis-occupied-rand-2
+		from 1× Build Ducal Governorship up until it is beyond the reach of Thieves' Guild. | 1× Make the tanners too sound for any creditor to threaten.
+1	.npcs[].goal.long ⟶ Bring Occupation Authority under the sway of Free Elder Council, one member at a time.
+		ex rr3-hamlet-occupied-rand-2
+		from 1× Grow the work at the fisher's landing until no one nearby can match it.
+2	.npcs[].goal.long ⟶ Bring Occupation Authority under the sway of Grand Guild Consortium, one member at a time.
+		ex rr3-metropolis-occupied-rand-3 rr3-metropolis-occupied-port-0
+		from 1× Make Duha al-Andalusi admit, in public, that they were wrong. | 1× Have the rights of the citadel set down so firmly that the next ruler must keep them too.
+1	.npcs[].goal.long ⟶ Bring Occupation Authority under the sway of Grand Merchant Oligarchy, one member at a time.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Win the dungeon delving supply district a lasting privilege that no other house can claim.
+1	.npcs[].goal.long ⟶ Bring Occupation Authority under the sway of Grand Merchant Senate, one member at a time.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Own every step of the work that the public bathhouse and the inns and taverns now split between them.
+1	.npcs[].goal.long ⟶ Bring Occupation Authority under the sway of Headman's Authority, one member at a time.
+		ex rr3-village-occupied-rand-0
+		from 1× Make the caravanserai too sound for any creditor to threaten.
+1	.npcs[].goal.long ⟶ Bring Occupation Authority under the sway of Merchant City Council, one member at a time.
+		ex rr3-city-occupied-rand-0
+		from 1× Make the coaching inn so needed by those who govern that no one dares touch the rights of the house.
+1	.npcs[].goal.long ⟶ Bring Occupation Authority under the sway of Merchant Guild Council, one member at a time.
+		ex rr3-city-occupied-port-0
+		from 1× Win the teleportation circle a lasting privilege that no other house can claim.
+3	.npcs[].goal.long ⟶ Bring Occupation Authority under the sway of Merchant oligarchy, one member at a time.
+		ex r2s-occupied-town-1 r2s-occupied-city-1 rr3-town-occupied-rand-1
+		from 1× Secure rights for the tanner's yard that will outlast whoever governs now. | 1× Hand on the mills with full stores, honest accounts and nothing owed. | 1× Be given the secrets of Merchant oligarchy to keep, as well as its errands to run.
+2	.npcs[].goal.long ⟶ Bring Occupation Authority under the sway of Noble Governorship, one member at a time.
+		ex rr3-city-occupied-rand-4 rr3-city-occupied-port-1
+		from 1× Rise in Noble Governorship far enough that their word carries weight outside it. | 1× Win the public bathhouse a voice whenever those who govern decide something that touches the work.
+1	.npcs[].goal.long ⟶ Bring Thieves' Guild under the sway of City-State Council, one member at a time.
+		ex rr3-metropolis-occupied-rand-1
+		from 1× End the bad blood between City-State Council and Thieves' Guild before the next generation inherits it.
+1	.npcs[].goal.long ⟶ Bring Thieves' Guild under the sway of Grand Guild Consortium, one member at a time.
+		ex rr3-metropolis-occupied-port-1
+		from 1× Outlast Thieves' Guild, and still be standing with Occupation Authority when they are gone.
+1	.npcs[].goal.long ⟶ Bring Thieves' Guild under the sway of Royal Authority, one member at a time.
+		ex rr3-metropolis-occupied-rand-4
+		from 1× End the bad blood between Royal Authority and Thieves' Guild before the next generation inherits it.
+1	.npcs[].goal.long ⟶ Build Arcane Council up until it is beyond the reach of Occupation Authority.
+		ex r2s-occupied-city-3
+		from 1× Leave the courthouses protected by law, so whoever runs the house next need not fight for the same rights.
+1	.npcs[].goal.long ⟶ Build Church Council up until it is beyond the reach of Occupation Authority.
+		ex rr3-town-occupied-port-0
+		from 1× Make Yüan Jalayir admit, in public, that they were wrong.
+1	.npcs[].goal.long ⟶ Build City-State Council up until it is beyond the reach of Occupation Authority.
+		ex rr3-city-occupied-rand-1
+		from 1× Make the docks too sound for any creditor to threaten.
+1	.npcs[].goal.long ⟶ Build City-State Council up until it is beyond the reach of Thieves' Guild.
+		ex rr3-metropolis-occupied-rand-1
+		from 1× Bring Thieves' Guild under the sway of City-State Council, one member at a time.
+1	.npcs[].goal.long ⟶ Build Corrupt City Council up until it is beyond the reach of Occupation Authority.
+		ex r2s-occupied-city-2
+		from 1× Win the customs house a voice whenever those who govern decide something that touches the work.
+1	.npcs[].goal.long ⟶ Build Corrupt Council up until it is beyond the reach of Occupation Authority.
+		ex r2s-occupied-town-3
+		from 1× Secure rights for the mayor and council that will outlast whoever governs now.
+2	.npcs[].goal.long ⟶ Build Craft Guilds up until it is beyond the reach of Merchant Guilds.
+		ex rr3-city-occupied-rand-0 rr3-metropolis-occupied-port-1
+		from 1× Bring Merchant Guilds under the sway of Craft Guilds, one member at a time. | 1× Outlast Merchant Guilds, and still be standing with Craft Guilds when they are gone.
+1	.npcs[].goal.long ⟶ Build Ducal Governorship up until it is beyond the reach of Occupation Authority.
+		ex rr3-metropolis-occupied-rand-2
+		from 1× Take Olof Gislason's place in Occupation Authority, and keep it longer than Olof Gislason did.
+1	.npcs[].goal.long ⟶ Build Grand Guild Consortium up until it is beyond the reach of Occupation Authority.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Win the salt works a lasting privilege that no other house can claim.
+1	.npcs[].goal.long ⟶ Build Grand Guild Consortium up until it is beyond the reach of Thieves' Guild.
+		ex rr3-metropolis-occupied-port-1
+		from 1× End the bad blood between Grand Guild Consortium and Thieves' Guild before the next generation inherits it.
+1	.npcs[].goal.long ⟶ Build Grand Merchant Oligarchy up until it is beyond the reach of Occupation Authority.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Make the auction house too sound for any creditor to threaten.
+1	.npcs[].goal.long ⟶ Build Grand Merchant Senate up until it is beyond the reach of Occupation Authority.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Make peace between Merchant Guilds and Craft Guilds on terms Merchant Guilds can live with.
+1	.npcs[].goal.long ⟶ Build Headman's Authority up until it is beyond the reach of Occupation Authority.
+		ex rr3-village-occupied-rand-0
+		from 1× Have the rights of the village scribe's desk set down so firmly that the next ruler must keep them too.
+1	.npcs[].goal.long ⟶ Build Merchant Guild Council up until it is beyond the reach of Occupation Authority.
+		ex rr3-city-occupied-port-0
+		from 1× Reach the top of Merchant Guild Council by the long road, one earned favour at a time.
+1	.npcs[].goal.long ⟶ Build Merchant Guilds up until it is beyond the reach of Craft Guilds.
+		ex r2s-occupied-city-2
+		from 1× End the bad blood between Merchant Guilds and Craft Guilds before the next generation inherits it.
+2	.npcs[].goal.long ⟶ Build Merchant oligarchy up until it is beyond the reach of Occupation Authority.
+		ex r2s-occupied-town-1 r2s-occupied-city-1
+		from 1× Have the rights of the brickmaker's brickyard set down so firmly that the next ruler must keep them too. | 1× Be the first person Occupation Authority would turn to, before anyone thinks to ask Jebe Geniges.
+2	.npcs[].goal.long ⟶ Build Noble Governorship up until it is beyond the reach of Occupation Authority.
+		ex rr3-city-occupied-rand-4 rr3-city-occupied-port-1
+		from 1× Make the potter's workshop so needed by those who govern that no one dares touch the rights of the house. | 1× Have the rights of the mills set down so firmly that the next ruler must keep them too.
+1	.npcs[].goal.long ⟶ Build Occupation Authority up until it is beyond the reach of Arcane Council.
+		ex r2s-occupied-city-3
+		from 1× Make the veteran's lodge so needed by those who govern that no one dares touch the rights of the house.
+1	.npcs[].goal.long ⟶ Build Occupation Authority up until it is beyond the reach of Grand Merchant Senate.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Leave more money at the veteran's lodge than there was when they took charge.
+1	.npcs[].goal.long ⟶ Build Occupation Authority up until it is beyond the reach of Thieves' Guild.
+		ex r2s-occupied-metropolis-2
+		from 1× End the bad blood between Occupation Authority and Thieves' Guild before the next generation inherits it.
+1	.npcs[].goal.long ⟶ Build River Toll into a trade that will feed the next generation here.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Carry the name of the toll bridge beyond this place, so people come from far off for the work done there.
+1	.npcs[].goal.long ⟶ Build Royal Authority up until it is beyond the reach of Thieves' Guild.
+		ex rr3-metropolis-occupied-rand-4
+		from 1× Bring Thieves' Guild under the sway of Royal Authority, one member at a time.
+1	.npcs[].goal.long ⟶ Build up a store of grain and water power at the mills large enough to last two bad years.
+		ex rr3-town-occupied-rand-1
+		from 1× Rise in Merchant oligarchy far enough that their word carries weight outside it.
+1	.npcs[].goal.long ⟶ Build up a store of grain at the inns and taverns large enough to last two bad years.
+		ex rr3-city-occupied-rand-1
+		from 1× Be free of what is owed to Alaqai Ba'arin, completely.
+1	.npcs[].goal.long ⟶ Build up a store of timber and iron at the shipyard large enough to last two bad years.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Be given the secrets of Merchant Guilds to keep, as well as its errands to run.
+1	.npcs[].goal.long ⟶ Build up enough savings at the garrison to ride out two bad years.
+		ex rr3-city-occupied-rand-3
+		from 1× Secure a steady supply of iron and grain and fuel for the garrison that no one else can cut off.
+1	.npcs[].goal.long ⟶ Build up enough savings at the governor's office to ride out two bad years.
+		ex rr3-city-occupied-port-1
+		from 1× Pass on to someone new what passed between them and Lofthæna Snorrason.
+1	.npcs[].goal.long ⟶ Build up enough savings at the public bathhouse to ride out two bad years.
+		ex rr3-city-occupied-rand-2
+		from 1× Earn a place among the leaders of Ecclesiastical Council without buying it or marrying into it.
+1	.npcs[].goal.long ⟶ Build up enough savings at the toll bridge to ride out two bad years.
+		ex rr3-city-occupied-rand-2
+		from 1× Outlast Calvus Fronto, and be the one still standing.
+1	.npcs[].goal.long ⟶ Carry the name of the coaching inn beyond this place, so people come from far off for the work done there.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Build River Toll into a trade that will feed the next generation here.
+1	.npcs[].goal.long ⟶ Carry the name of the customs house beyond this place, so people come from far off for the work done there.
+		ex r2s-occupied-city-1
+		from 1× Build Strategic Crossroads Toll into a trade that will feed the next generation here.
+1	.npcs[].goal.long ⟶ Carry the name of the merchant guilds beyond this place, so people come from far off for the work done there.
+		ex rr3-town-occupied-port-0
+		from 1× Turn the bargain with Zulzaga Kiyad into real trust over the years.
+1	.npcs[].goal.long ⟶ Clear the debt to Nada al-Jazari without anyone ever learning there was one.
+		ex rr3-metropolis-occupied-rand-3
+		from 1× See more of the world than this place.
+1	.npcs[].goal.long ⟶ Clear the debt to Thorkel Styrkarsson without anyone ever learning there was one.
+		ex r2s-occupied-town-1
+		from 1× Have a life worth telling stories about.
+1	.npcs[].goal.long ⟶ Double the work at the river ferry, and find the hands to do it.
+		ex rr3-city-occupied-rand-1
+		from 1× Clear the debt to Enkhtuya Önggirad without anyone ever learning there was one.
+1	.npcs[].goal.long ⟶ Double the work at the salt works, and find the hands to do it.
+		ex rr3-hamlet-occupied-rand-2
+		from 1× Turn the bargain with Thyra Bjarnarson into real trust over the years.
+1	.npcs[].goal.long ⟶ Earn a place among the leaders of Arcane Council without buying it or marrying into it.
+		ex r2s-occupied-city-3
+		from 1× Become someone Arcane Council cannot do without.
+1	.npcs[].goal.long ⟶ Earn a place among the leaders of City-State Council without buying it or marrying into it.
+		ex rr3-city-occupied-rand-1
+		from 1× Double the work at the salt works, and find the hands to do it.
+1	.npcs[].goal.long ⟶ Earn a place among the leaders of Corrupt City Council without buying it or marrying into it.
+		ex r2s-occupied-city-2
+		from 1× Be remembered as the one who kept the river ferry out of debt.
+1	.npcs[].goal.long ⟶ Earn a place among the leaders of Corrupt Council without buying it or marrying into it.
+		ex r2s-occupied-town-3
+		from 1× Reach the top of Corrupt Council by the long road, one earned favour at a time.
+1	.npcs[].goal.long ⟶ Earn a place among the leaders of Ecclesiastical Council without buying it or marrying into it.
+		ex rr3-city-occupied-rand-2
+		from 1× Rise in Ecclesiastical Council far enough that their word carries weight outside it.
+1	.npcs[].goal.long ⟶ Earn a place among the leaders of Grand Guild Consortium without buying it or marrying into it.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Be remembered as the one who kept the tailor's guild out of debt.
+1	.npcs[].goal.long ⟶ Earn a place among the leaders of Grand Merchant Oligarchy without buying it or marrying into it.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Keep the alliance with Vasyl Krylov strong for as long as both live.
+1	.npcs[].goal.long ⟶ Earn a place among the leaders of Grand Merchant Senate without buying it or marrying into it.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Become someone Grand Merchant Senate cannot do without.
+1	.npcs[].goal.long ⟶ Earn a place among the leaders of Headman's Authority without buying it or marrying into it.
+		ex rr3-village-occupied-rand-0
+		from 1× Be given the secrets of Headman's Authority to keep, as well as its errands to run.
+1	.npcs[].goal.long ⟶ Earn a place among the leaders of Merchant Guild Council without buying it or marrying into it.
+		ex rr3-city-occupied-port-0
+		from 1× Become someone Merchant Guild Council cannot do without.
+3	.npcs[].goal.long ⟶ Earn a place among the leaders of Merchant Guilds without buying it or marrying into it.
+		ex rr3-village-occupied-rand-0 rr3-metropolis-occupied-rand-0 rr3-metropolis-occupied-rand-2
+		from 3× Become someone Merchant Guilds cannot do without.
+1	.npcs[].goal.long ⟶ Earn a place among the leaders of Merchant oligarchy without buying it or marrying into it.
+		ex r2s-occupied-town-1
+		from 1× Rise in Merchant oligarchy far enough that their word carries weight outside it.
+2	.npcs[].goal.long ⟶ Earn a place among the leaders of Noble Governorship without buying it or marrying into it.
+		ex rr3-city-occupied-rand-4 rr3-city-occupied-port-1
+		from 1× Become someone Noble Governorship cannot do without. | 1× Be given the secrets of Noble Governorship to keep, as well as its errands to run.
+1	.npcs[].goal.long ⟶ End the bad blood between Arcane Council and Occupation Authority before the next generation inherits it.
+		ex r2s-occupied-city-3
+		from 1× Run both the tailor's guild and the weavers, and set the terms for everyone who deals with either.
+1	.npcs[].goal.long ⟶ End the bad blood between Church Council and Occupation Authority before the next generation inherits it.
+		ex rr3-town-occupied-rand-0
+		from 1× Make the tailor's guild so needed by those who govern that no one dares touch the rights of the house.
+2	.npcs[].goal.long ⟶ End the bad blood between City-State Council and Occupation Authority before the next generation inherits it.
+		ex rr3-city-occupied-rand-1 rr3-metropolis-occupied-rand-1
+		from 1× Own every step of the work that the toll bridge and the coaching inn now split between them. | 1× Outlast Thieves' Guild, and still be standing with City-State Council when they are gone.
+1	.npcs[].goal.long ⟶ End the bad blood between City-State Council and Thieves' Guild before the next generation inherits it.
+		ex rr3-metropolis-occupied-rand-1
+		from 1× Build City-State Council up until it is beyond the reach of Thieves' Guild.
+1	.npcs[].goal.long ⟶ End the bad blood between Craft Guilds and Merchant Guilds before the next generation inherits it.
+		ex rr3-city-occupied-rand-0
+		from 1× Build Craft Guilds up until it is beyond the reach of Merchant Guilds.
+1	.npcs[].goal.long ⟶ End the bad blood between Ducal Governorship and Occupation Authority before the next generation inherits it.
+		ex rr3-metropolis-occupied-rand-2
+		from 1× Build up enough savings at the cobbler's guild to ride out two bad years.
+2	.npcs[].goal.long ⟶ End the bad blood between Grand Guild Consortium and Occupation Authority before the next generation inherits it.
+		ex rr3-metropolis-occupied-rand-3 rr3-metropolis-occupied-port-0
+		from 1× Make the adventurers' guilds so needed by those who govern that no one dares touch the rights of the house. | 1× Secure rights for the elder grove council that will outlast whoever governs now.
+1	.npcs[].goal.long ⟶ End the bad blood between Grand Merchant Oligarchy and Occupation Authority before the next generation inherits it.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Secure rights for the potter's workshop that will outlast whoever governs now.
+1	.npcs[].goal.long ⟶ End the bad blood between Grand Merchant Senate and Occupation Authority before the next generation inherits it.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Lead Arcane Orders one day, with Tofa Drengsson's blessing or without it.
+1	.npcs[].goal.long ⟶ End the bad blood between Merchant Guild Council and Occupation Authority before the next generation inherits it.
+		ex rr3-city-occupied-port-0
+		from 1× Own something that earns while they sleep.
+1	.npcs[].goal.long ⟶ End the bad blood between Merchant Guilds and Craft Guilds before the next generation inherits it.
+		ex r2s-occupied-city-2
+		from 1× See Craft Guilds too weak to threaten Merchant Guilds again.
+2	.npcs[].goal.long ⟶ End the bad blood between Merchant oligarchy and Occupation Authority before the next generation inherits it.
+		ex r2s-occupied-city-1 rr3-town-occupied-rand-1
+		from 1× Win the elder grove council a lasting privilege that no other house can claim. | 1× Hand on the merchant guilds with full stores, honest accounts and nothing owed.
+1	.npcs[].goal.long ⟶ End the bad blood between Noble Governorship and Occupation Authority before the next generation inherits it.
+		ex rr3-city-occupied-rand-4
+		from 1× Secure rights for the docks that will outlast whoever governs now.
+1	.npcs[].goal.long ⟶ End the bad blood between Occupation Authority and City-State Council before the next generation inherits it.
+		ex rr3-city-occupied-rand-1
+		from 1× Secure rights for the large prison that will outlast whoever governs now.
+2	.npcs[].goal.long ⟶ End the bad blood between Occupation Authority and Headman's Authority before the next generation inherits it.
+		ex r2s-occupied-hamlet-3 rr3-village-occupied-rand-0
+		from 1× Leave Occupation Authority stronger than they found it, with Eberhard Klein still second and content. | 1× Leave Occupation Authority stronger than they found it, with Zheng Xie still second and content.
+1	.npcs[].goal.long ⟶ End the bad blood between Royal Authority and Occupation Authority before the next generation inherits it.
+		ex rr3-metropolis-occupied-rand-4
+		from 1× Outlast Thieves' Guild, and still be standing with Royal Authority when they are gone.
+1	.npcs[].goal.long ⟶ End the bad blood between Royal Authority and Thieves' Guild before the next generation inherits it.
+		ex rr3-metropolis-occupied-rand-4
+		from 1× Outlast Thieves' Guild, and still be standing with Occupation Authority when they are gone.
+1	.npcs[].goal.long ⟶ Find a lasting replacement for what Fortifications lost in the shortage.
+		ex rr3-metropolis-occupied-rand-3
+		from 1× Settle things with Mustafa ibn Sina for good, one way or another.
+1	.npcs[].goal.long ⟶ Forgive Irene Schäfer the debt in return for one great favour, when the time comes.
+		ex r2s-occupied-hamlet-2
+		from 1× Be remembered as one of the great figures of this place.
+1	.npcs[].goal.long ⟶ Forgive Jovianus Bassus the debt in return for one great favour, when the time comes.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Make sheltering the smuggling network too costly for anyone to risk.
+1	.npcs[].goal.long ⟶ Free the butchers from depending on a single source of livestock and game.
+		ex rr3-town-occupied-port-0
+		from 1× Earn a place among the leaders of Church Council without buying it or marrying into it.
+1	.npcs[].goal.long ⟶ Free the great library from depending on a single source of paper and knowledge sources.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Reach the top of Grand Merchant Senate by the long road, one earned favour at a time.
+1	.npcs[].goal.long ⟶ Free the luxury goods quarter from depending on a single source of luxury materials.
+		ex rr3-city-occupied-port-0
+		from 1× Earn a place among the leaders of Merchant Guild Council without buying it or marrying into it.
+1	.npcs[].goal.long ⟶ Free the mills from depending on a single source of grain and water power.
+		ex rr3-metropolis-occupied-rand-3
+		from 1× Reach the top of Grand Guild Consortium by the long road, one earned favour at a time.
+1	.npcs[].goal.long ⟶ Free the weavers from depending on a single source of wool and flax.
+		ex rr3-city-occupied-rand-2
+		from 1× Make sure the work at the weavers never stops for want of wool and flax.
+5	.npcs[].goal.long ⟶ Gather enough wealth to pass on, and leave the family rich after them.
+		ex r2s-occupied-city-2 rr3-city-occupied-rand-1 rr3-city-occupied-rand-3 rr3-city-occupied-rand-4
+		from 1× Keep the family together, Water Lily Ul included, whatever their work asks of them. | 1× Own something that earns while they sleep. | 1× Never end up in Berke Barlas's shadow.
+1	.npcs[].goal.long ⟶ Get so far ahead of Balbus Merula that no one remembers they were ever rivals.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Put the past behind them where no one can dig it up.
+1	.npcs[].goal.long ⟶ Get so far ahead of Deirdre MacCulloch that no one remembers they were ever rivals.
+		ex rr3-city-occupied-rand-4
+		from 1× Double the work at the bowyers & fletchers, and find the hands to do it.
+1	.npcs[].goal.long ⟶ Get so far ahead of Mei Yamada that no one remembers they were ever rivals.
+		ex rr3-city-occupied-rand-0
+		from 1× Have what others have, and more of it.
+1	.npcs[].goal.long ⟶ Get so far ahead of Ogmund Ljotsson that no one remembers they were ever rivals.
+		ex rr3-city-occupied-port-1
+		from 1× Bring every step of Harbour Dues under the roof of the customs house.
+1	.npcs[].goal.long ⟶ Grow old without ever having to look over their shoulder.
+		ex rr3-village-occupied-rand-0
+		from 1× Put the past behind them where no one can dig it up.
+1	.npcs[].goal.long ⟶ Grow rich enough that no one can ever tell them no.
+		ex rr3-city-occupied-port-0
+		from 1× Gather enough wealth to pass on, and leave the family rich after them.
+1	.npcs[].goal.long ⟶ Grow the work at the blacksmiths until no one nearby can match it.
+		ex rr3-city-occupied-rand-4
+		from 1× Leave Rionach Hennessy with no power left to do them harm.
+1	.npcs[].goal.long ⟶ Hand Church Council on to an heir of their own choosing, and not to Uinseann Brennan.
+		ex rr3-town-occupied-rand-0
+		from 1× Be free of what is owed to Toirdelbach Kavanagh, completely.
+1	.npcs[].goal.long ⟶ Hand on the docks with full stores, honest accounts and nothing owed.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Free the docks from depending on a single source of timber.
+1	.npcs[].goal.long ⟶ Hand on the stable district with full stores, honest accounts and nothing owed.
+		ex r2s-occupied-city-1
+		from 1× Grow the work at the stable district until no one nearby can match it.
+1	.npcs[].goal.long ⟶ Hand on the theaters with full stores, honest accounts and nothing owed.
+		ex rr3-city-occupied-rand-3
+		from 1× Reach the top of Merchant oligarchy by the long road, one earned favour at a time.
+1	.npcs[].goal.long ⟶ Have the final say in everything that touches them.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Be obeyed without ever having to raise their voice.
+1	.npcs[].goal.long ⟶ Have the rights of the adventurers' guilds set down so firmly that the next ruler must keep them too.
+		ex r2s-occupied-city-1
+		from 1× Become someone Vachir Arulad needs as much as they are needed.
+1	.npcs[].goal.long ⟶ Have the rights of the court buildings set down so firmly that the next ruler must keep them too.
+		ex rr3-metropolis-occupied-rand-2
+		from 1× Outlast Gefjon Rognvaldsson, and be the one still standing.
+1	.npcs[].goal.long ⟶ Have the rights of the vintner's cellars set down so firmly that the next ruler must keep them too.
+		ex rr3-city-occupied-rand-0
+		from 1× Rise in Merchant City Council far enough that their word carries weight outside it.
+1	.npcs[].goal.long ⟶ Have what others have, and more of it.
+		ex rr3-city-occupied-rand-4
+		from 1× Settle every score before they die.
+1	.npcs[].goal.long ⟶ Keep Oyun Önggirad in debt for as long as it is useful.
+		ex r2s-occupied-city-1
+		from 1× Never be tied to one thing for long.
+1	.npcs[].goal.long ⟶ Keep the alliance with Skallag Gunnarsson strong for as long as both live.
+		ex rr3-metropolis-occupied-rand-2
+		from 1× Be given the secrets of Ducal Governorship to keep, as well as its errands to run.
+1	.npcs[].goal.long ⟶ Keep the alliance with Thorir Styrkarsson strong for as long as both live.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Rise together with Thorir Styrkarsson, and share what they win.
+1	.npcs[].goal.long ⟶ Keep the bond with Hrolf Ingvarsson as the work and the years change them both.
+		ex rr3-metropolis-occupied-rand-2
+		from 1× Be counted one day among those who lead Ducal Governorship.
+1	.npcs[].goal.long ⟶ Keep the bond with Patli Nauat as the work and the years change them both.
+		ex r2s-occupied-city-2
+		from 1× Be obeyed without ever having to raise their voice.
+1	.npcs[].goal.long ⟶ Keep the bond with Snorri Vargsson as the work and the years change them both.
+		ex r2s-occupied-town-1
+		from 1× Make sure no one wrongs them twice.
+1	.npcs[].goal.long ⟶ Keep the bond with Vortigen Sweetman as the work and the years change them both.
+		ex rr3-city-occupied-rand-4
+		from 1× Have what others have, and more of it.
+1	.npcs[].goal.long ⟶ Learn to do the work at the citizen militia with half as much iron.
+		ex rr3-hamlet-occupied-rand-3
+		from 1× Become someone Argyros Choniates needs as much as they are needed.
+1	.npcs[].goal.long ⟶ Leave a name that no one can say was ever bought.
+		ex rr3-city-occupied-rand-0
+		from 1× Rise past Fenghua Sun in Merchant City Council on their own merit, owing no one for the climb.
+1	.npcs[].goal.long ⟶ Leave Chinggis Qatagin with no power left to do them harm.
+		ex rr3-city-occupied-rand-3
+		from 1× Win the warehouse district a voice whenever those who govern decide something that touches the work.
+1	.npcs[].goal.long ⟶ Leave Cicero Zoilus with no power left to do them harm.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Win the potter's workshop a voice whenever those who govern decide something that touches the work.
+1	.npcs[].goal.long ⟶ Leave Harun al-Suri with no power left to do them harm.
+		ex rr3-metropolis-occupied-rand-3
+		from 1× Make sure no one wrongs them twice.
+1	.npcs[].goal.long ⟶ Leave more money at the airship docking than there was when they took charge.
+		ex rr3-metropolis-occupied-rand-2
+		from 1× Be remembered alongside Mörnir Dagsson as one of the best at the work.
+1	.npcs[].goal.long ⟶ Leave more money at the auction house than there was when they took charge.
+		ex rr3-metropolis-occupied-rand-3
+		from 1× Keep the alliance with Usama ibn Rushd strong for as long as both live.
+1	.npcs[].goal.long ⟶ Leave more money at the mercenary quarter than there was when they took charge.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Learn to do the work at the mercenary quarter with half as much iron and grain.
+1	.npcs[].goal.long ⟶ Leave more money at the town watch than there was when they took charge.
+		ex r2s-occupied-town-1
+		from 1× Never end up in Eindride Ingvarsson's shadow.
+1	.npcs[].goal.long ⟶ Leave Ola al-Dimashqi with no power left to do them harm.
+		ex rr3-metropolis-occupied-rand-3
+		from 1× Settle things with Ola al-Dimashqi for good, one way or another.
+1	.npcs[].goal.long ⟶ Leave Randver Sigvaldsson with no power left to do them harm.
+		ex rr3-metropolis-occupied-rand-2
+		from 1× Be given the secrets of Merchant Guilds to keep, as well as its errands to run.
+1	.npcs[].goal.long ⟶ Leave the bowyers & fletchers protected by law, so whoever runs the house next need not fight for the same rights.
+		ex rr3-city-occupied-rand-2
+		from 1× Get so far ahead of Paullus Pulvillus that no one remembers they were ever rivals.
+1	.npcs[].goal.long ⟶ Leave the butchers protected by law, so whoever runs the house next need not fight for the same rights.
+		ex rr3-town-occupied-rand-1
+		from 1× Change how Food Processing works so it needs less of what keeps running short.
+1	.npcs[].goal.long ⟶ Leave the professional city watch protected by law, so whoever runs the house next need not fight for the same rights.
+		ex rr3-city-occupied-rand-1
+		from 1× Make peace with Checheyigen Tayichi'ud, so the next generation inherits none of it.
+1	.npcs[].goal.long ⟶ Leave the toll bridge protected by law, so whoever runs the house next need not fight for the same rights.
+		ex r2s-occupied-town-3
+		from 1× Bring every step of River Toll under the roof of the toll bridge.
+1	.npcs[].goal.long ⟶ Make Asgaut Halfdarson admit, in public, that they were wrong.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Never again be told what to do.
+1	.npcs[].goal.long ⟶ Make Eva Rakić admit, in public, that they were wrong.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Be the person everyone here defers to.
+1	.npcs[].goal.long ⟶ Make Noh Ek Ku admit, in public, that they were wrong.
+		ex rr3-town-occupied-rand-1
+		from 1× Leave Noh Ek Ku with no power left to do them harm.
+2	.npcs[].goal.long ⟶ Make Occupation Authority so much their own that it could not run a week without them.
+		ex r2s-occupied-town-1 rr3-city-occupied-rand-4
+		from 1× Settle, once and for all, what they and Ulfhéðinn Egilsson owe each other. | 1× Leave Occupation Authority stronger than they found it, with Orlaith Jordan still second and content.
+1	.npcs[].goal.long ⟶ Make Orlaith Jordan admit, in public, that they were wrong.
+		ex rr3-city-occupied-rand-4
+		from 1× Be counted one day among those who lead Noble Governorship.
+1	.npcs[].goal.long ⟶ Make peace between Arcane Council and Occupation Authority on terms Arcane Council can live with.
+		ex r2s-occupied-city-3
+		from 1× Make the cooper's yard so needed by those who govern that no one dares touch the rights of the house.
+1	.npcs[].goal.long ⟶ Make peace between Church Council and Occupation Authority on terms Church Council can live with.
+		ex rr3-town-occupied-rand-0
+		from 1× Take Garbhán O'Neill's place in Church Council, and keep it longer than Garbhán O'Neill did.
+1	.npcs[].goal.long ⟶ Make peace between City-State Council and Occupation Authority on terms City-State Council can live with.
+		ex rr3-city-occupied-rand-1
+		from 1× Be counted one day among those who lead City-State Council.
+1	.npcs[].goal.long ⟶ Make peace between Corrupt City Council and Occupation Authority on terms Corrupt City Council can live with.
+		ex r2s-occupied-city-2
+		from 1× Be remembered as the one who kept the whisper market out of debt.
+2	.npcs[].goal.long ⟶ Make peace between Craft Guilds and Merchant Guilds on terms Craft Guilds can live with.
+		ex rr3-city-occupied-rand-0 rr3-metropolis-occupied-port-1
+		from 1× Win the chandler's shop a voice whenever those who govern decide something that touches the work. | 1× See Merchant Guilds too weak to threaten Craft Guilds again.
+2	.npcs[].goal.long ⟶ Make peace between Ducal Governorship and Occupation Authority on terms Ducal Governorship can live with.
+		ex r2s-occupied-metropolis-2 rr3-metropolis-occupied-rand-2
+		from 1× See Thieves' Guild too weak to threaten Ducal Governorship again. | 1× Outlast Birkir Asgersson in Religious Authorities, and be ready when the place falls empty.
+1	.npcs[].goal.long ⟶ Make peace between Ducal Governorship and Thieves' Guild on terms Ducal Governorship can live with.
+		ex r2s-occupied-metropolis-2
+		from 1× Bring Thieves' Guild under the sway of Ducal Governorship, one member at a time.
+3	.npcs[].goal.long ⟶ Make peace between Grand Guild Consortium and Occupation Authority on terms Grand Guild Consortium can live with.
+		ex rr3-metropolis-occupied-rand-3 rr3-metropolis-occupied-port-0 rr3-metropolis-occupied-port-1
+		from 1× Hand on the sage's quarter with full stores, honest accounts and nothing owed. | 1× Leave the customs house protected by law, so whoever runs the house next need not fight for the same rights. | 1× See Thieves' Guild too weak to threaten Grand Guild Consortium again.
+1	.npcs[].goal.long ⟶ Make peace between Grand Merchant Oligarchy and Occupation Authority on terms Grand Merchant Oligarchy can live with.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× See the international trade center out of debt for good, with money set aside for bad years.
+1	.npcs[].goal.long ⟶ Make peace between Grand Merchant Senate and Occupation Authority on terms Grand Merchant Senate can live with.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Win the luxury goods quarter a voice whenever those who govern decide something that touches the work.
+1	.npcs[].goal.long ⟶ Make peace between Guild Council and Occupation Authority on terms Guild Council can live with.
+		ex r2s-occupied-town-2
+		from 1× Make the taverns too sound for any creditor to threaten.
+1	.npcs[].goal.long ⟶ Make peace between Merchant Guild Council and Occupation Authority on terms Merchant Guild Council can live with.
+		ex rr3-city-occupied-port-0
+		from 1× See the courthouses out of debt for good, with money set aside for bad years.
+1	.npcs[].goal.long ⟶ Make peace between Merchant Guilds and Craft Guilds on terms Merchant Guilds can live with.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× See Craft Guilds too weak to threaten Merchant Guilds again.
+2	.npcs[].goal.long ⟶ Make peace between Merchant oligarchy and Occupation Authority on terms Merchant oligarchy can live with.
+		ex r2s-occupied-town-1 rr3-town-occupied-rand-1
+		from 1× Get so far ahead of Eindride Ingvarsson that no one remembers they were ever rivals. | 1× Secure rights for the tailor's guild that will outlast whoever governs now.
+2	.npcs[].goal.long ⟶ Make peace between Noble Governorship and Occupation Authority on terms Noble Governorship can live with.
+		ex rr3-city-occupied-rand-4 rr3-city-occupied-port-1
+		from 1× Leave more money at the governor's office than there was when they took charge. | 1× Make the city granaries too sound for any creditor to threaten.
+2	.npcs[].goal.long ⟶ Make peace between Occupation Authority and Ducal Governorship on terms Occupation Authority can live with.
+		ex r2s-occupied-metropolis-2 rr3-metropolis-occupied-rand-2
+		from 1× See Thieves' Guild too weak to threaten Occupation Authority again. | 1× Be counted one day among those who lead Occupation Authority.
+1	.npcs[].goal.long ⟶ Make peace between Occupation Authority and Free Elder Council on terms Occupation Authority can live with.
+		ex r2s-occupied-hamlet-2
+		from 1× Own something that earns while they sleep.
+1	.npcs[].goal.long ⟶ Make peace between Occupation Authority and Grand Merchant Senate on terms Occupation Authority can live with.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× See the garrisons out of debt for good, with money set aside for bad years.
+1	.npcs[].goal.long ⟶ Make peace between Occupation Authority and Merchant City Council on terms Occupation Authority can live with.
+		ex rr3-city-occupied-rand-0
+		from 1× See Merchant Guilds too weak to threaten Craft Guilds again.
+2	.npcs[].goal.long ⟶ Make peace between Occupation Authority and Noble Governorship on terms Occupation Authority can live with.
+		ex rr3-city-occupied-rand-4 rr3-city-occupied-port-1
+		from 1× Build up enough savings at the caravan masters' exchange to ride out two bad years. | 1× Become someone Occupation Authority cannot do without.
+1	.npcs[].goal.long ⟶ Make peace between Royal Authority and Occupation Authority on terms Royal Authority can live with.
+		ex rr3-metropolis-occupied-rand-4
+		from 1× See Thieves' Guild too weak to threaten Royal Authority again.
+1	.npcs[].goal.long ⟶ Make River Mill Industry the thing this place is known for.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Be given the secrets of Grand Merchant Oligarchy to keep, as well as its errands to run.
+1	.npcs[].goal.long ⟶ Make sure Gereltsetseg Yorqin never has reason to doubt them.
+		ex r2s-occupied-city-1
+		from 1× Settle things with Torghil Seljuk for good, one way or another.
+1	.npcs[].goal.long ⟶ Make sure Ghulam al-Masri never has reason to doubt them.
+		ex rr3-city-occupied-port-0
+		from 1× Make sure no one wrongs them twice.
+1	.npcs[].goal.long ⟶ Make sure Jayan Arlat never has reason to doubt them.
+		ex rr3-town-occupied-port-0
+		from 1× Have enough friends in high places that no one dares touch them.
+1	.npcs[].goal.long ⟶ Make sure no one wrongs them twice.
+		ex rr3-city-occupied-port-0
+		from 1× Outlast every person who ever crossed them.
+1	.npcs[].goal.long ⟶ Make sure Qutula Qonggirad never has reason to doubt them.
+		ex rr3-town-occupied-port-0
+		from 1× Be the person everyone here defers to.
+1	.npcs[].goal.long ⟶ Make sure the work at the butchers never stops for want of livestock and game.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Outlast every person who ever crossed them.
+1	.npcs[].goal.long ⟶ Make sure the work at the citadel never stops for want of stone and iron and grain.
+		ex rr3-city-occupied-port-0
+		from 1× Never end up in Zahra al-Rahman's shadow.
+1	.npcs[].goal.long ⟶ Make sure the work at the docks never stops for want of timber.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Grow rich enough that no one can ever tell them no.
+2	.npcs[].goal.long ⟶ Make the adventurers' guilds so needed by those who govern that no one dares touch the rights of the house.
+		ex rr3-city-occupied-port-0 rr3-metropolis-occupied-rand-5
+		from 1× Live a quiet life, out of other people's quarrels. | 1× Get so far ahead of Bjorn Helgason that no one remembers they were ever rivals.
+1	.npcs[].goal.long ⟶ Make the brewery a branch of the vintner's cellars in all but name.
+		ex r2s-occupied-city-2
+		from 1× Double the work at the vintner's cellars, and find the hands to do it.
+1	.npcs[].goal.long ⟶ Make the citadel too sound for any creditor to threaten.
+		ex rr3-city-occupied-rand-4
+		from 1× Settle things with Illann O'Gorman for good, one way or another.
+1	.npcs[].goal.long ⟶ Make the colosseum so needed by those who govern that no one dares touch the rights of the house.
+		ex rr3-metropolis-occupied-rand-2
+		from 1× Have the rights of the colosseum set down so firmly that the next ruler must keep them too.
+1	.npcs[].goal.long ⟶ Make the crier's post too sound for any creditor to threaten.
+		ex rr3-city-occupied-rand-0
+		from 1× Settle things with Zhi Zhao for good, one way or another.
+1	.npcs[].goal.long ⟶ Make the elder grove council so needed by those who govern that no one dares touch the rights of the house.
+		ex rr3-city-occupied-port-1
+		from 1× Outlast every person who ever crossed them.
+1	.npcs[].goal.long ⟶ Make the fuller's fulling mill too sound for any creditor to threaten.
+		ex rr3-city-occupied-rand-4
+		from 1× Make Cael Kelly the first of many who owe them.
+1	.npcs[].goal.long ⟶ Make the sawmill a branch of the carpenters in all but name.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Make sure the work at the carpenters never stops for want of timber.
+1	.npcs[].goal.long ⟶ Make the state granary complex too sound for any creditor to threaten.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Secure a steady supply of grain for the state granary complex that no one else can cut off.
+1	.npcs[].goal.long ⟶ Make the tailor's guild a branch of the weavers in all but name.
+		ex r2s-occupied-city-3
+		from 1× Make sure the work at the weavers never stops for want of wool and flax.
+1	.npcs[].goal.long ⟶ Make Xib Yax the first of many who owe them.
+		ex r2s-occupied-city-2
+		from 1× Put the past behind them where no one can dig it up.
+1	.npcs[].goal.long ⟶ Mend things with Sulpicia Laenas before it is too late.
+		ex rr3-city-occupied-rand-2
+		from 1× Reach the top of Ecclesiastical Council by the long road, one earned favour at a time.
+1	.npcs[].goal.long ⟶ Mend things with Todor Semyonov before it is too late.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Take Velko Nikolić's place in Occupation Authority, and keep it longer than Velko Nikolić did.
+1	.npcs[].goal.long ⟶ Never end up in Namsrai Budaad's shadow.
+		ex rr3-town-occupied-port-0
+		from 1× Make the houses of worship too sound for any creditor to threaten.
+1	.npcs[].goal.long ⟶ Never end up in Skadi Gunnarsson's shadow.
+		ex rr3-city-occupied-port-1
+		from 1× See this place live by what they believe is right.
+1	.npcs[].goal.long ⟶ Never have to count coins again.
+		ex r2s-occupied-city-2
+		from 1× Gather enough wealth to pass on, and leave the family rich after them.
+1	.npcs[].goal.long ⟶ Outlast Church Council, and still be standing with Occupation Authority when they are gone.
+		ex rr3-town-occupied-port-0
+		from 1× Make the bowyers & fletchers so needed by those who govern that no one dares touch the rights of the house.
+1	.npcs[].goal.long ⟶ Outlast Craft Guilds, and still be standing with Merchant Guilds when they are gone.
+		ex r2s-occupied-city-2
+		from 1× Build Merchant Guilds up until it is beyond the reach of Craft Guilds.
+3	.npcs[].goal.long ⟶ Outlast every person who ever crossed them.
+		ex rr3-city-occupied-port-0 rr3-city-occupied-port-1 rr3-metropolis-occupied-port-0
+		from 2× Settle every score before they die. | 1× Learn to do the work at the inns and taverns with half as much grain.
+1	.npcs[].goal.long ⟶ Outlast Grigori Kovalev, and be the one still standing.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Double the work at the stable district, and find the hands to do it.
+1	.npcs[].goal.long ⟶ Outlast Merchant Guilds, and still be standing with Craft Guilds when they are gone.
+		ex rr3-metropolis-occupied-port-1
+		from 1× Make peace between Craft Guilds and Merchant Guilds on terms Craft Guilds can live with.
+1	.npcs[].goal.long ⟶ Outlast Occupation Authority, and still be standing with Church Council when they are gone.
+		ex rr3-town-occupied-port-0
+		from 1× Be remembered as the one who kept the bakers out of debt.
+1	.npcs[].goal.long ⟶ Outlast Occupation Authority, and still be standing with City-State Council when they are gone.
+		ex rr3-city-occupied-rand-1
+		from 1× Make the coaching inn so needed by those who govern that no one dares touch the rights of the house.
+1	.npcs[].goal.long ⟶ Outlast Occupation Authority, and still be standing with Corrupt City Council when they are gone.
+		ex r2s-occupied-city-2
+		from 1× Lead Corrupt City Council so long and so well that no one, Acna Ox included, thinks of replacing them.
+2	.npcs[].goal.long ⟶ Outlast Occupation Authority, and still be standing with Ducal Governorship when they are gone.
+		ex r2s-occupied-metropolis-2 rr3-metropolis-occupied-rand-2
+		from 1× Make peace between Ducal Governorship and Thieves' Guild on terms Ducal Governorship can live with. | 1× Be remembered as the one who kept the brickmaker's brickyard out of debt.
+2	.npcs[].goal.long ⟶ Outlast Occupation Authority, and still be standing with Grand Guild Consortium when they are gone.
+		ex rr3-metropolis-occupied-rand-3 rr3-metropolis-occupied-port-0
+		from 1× Win the stable district a lasting privilege that no other house can claim. | 1× Make the carpenters too sound for any creditor to threaten.
+1	.npcs[].goal.long ⟶ Outlast Occupation Authority, and still be standing with Grand Merchant Oligarchy when they are gone.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Be remembered as the one who kept the ropemaker's ropewalk out of debt.
+1	.npcs[].goal.long ⟶ Outlast Occupation Authority, and still be standing with Grand Merchant Senate when they are gone.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Earn a place among the leaders of Grand Merchant Senate without buying it or marrying into it.
+1	.npcs[].goal.long ⟶ Outlast Occupation Authority, and still be standing with Guild Council when they are gone.
+		ex r2s-occupied-town-2
+		from 1× Hand on the mills with full stores, honest accounts and nothing owed.
+2	.npcs[].goal.long ⟶ Outlast Occupation Authority, and still be standing with Merchant oligarchy when they are gone.
+		ex r2s-occupied-city-1 rr3-town-occupied-rand-1
+		from 1× Make the post relay station so needed by those who govern that no one dares touch the rights of the house. | 1× Build Iron & Metalwork into a trade that will feed the next generation here.
+1	.npcs[].goal.long ⟶ Outlast Occupation Authority, and still be standing with Noble Governorship when they are gone.
+		ex rr3-city-occupied-rand-4
+		from 1× Earn a place among the leaders of Noble Governorship without buying it or marrying into it.
+1	.npcs[].goal.long ⟶ Outlast the sawmill, and hire the hands from there when the end comes.
+		ex rr3-village-occupied-rand-0
+		from 1× Bring every step of Timber & Lumber under the roof of the carpenter's workshop.
+1	.npcs[].goal.long ⟶ Outlast the tanners, and hire the hands from there when the end comes.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Bring every step of Leatherworking & Cordwaining under the roof of the cobbler's guild.
+1	.npcs[].goal.long ⟶ Outlast Thieves' Guild, and still be standing with Occupation Authority when they are gone.
+		ex rr3-metropolis-occupied-port-1
+		from 1× Bring Thieves' Guild under the sway of Occupation Authority, one member at a time.
+1	.npcs[].goal.long ⟶ Outlast Vadim Sokolov, and be the one still standing.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Become someone Occupation Authority cannot do without.
+1	.npcs[].goal.long ⟶ Own a share in the supply of grain and water power, so the work at the mills can never be held to ransom.
+		ex r2s-occupied-city-2
+		from 1× Become someone Citlali Balam needs as much as they are needed.
+1	.npcs[].goal.long ⟶ Own a share in the supply of grain, so the work at the city granaries can never be held to ransom.
+		ex rr3-city-occupied-rand-4
+		from 1× Get so far ahead of Credhe MacGillivray that no one remembers they were ever rivals.
+1	.npcs[].goal.long ⟶ Own a share in the supply of stone and iron and grain, so the work at the citadel can never be held to ransom.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Keep what they have safe, and never stake it on a gamble.
+1	.npcs[].goal.long ⟶ Own every step of the work that the public bathhouse and the inns and taverns now split between them.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Win the public bathhouse a voice whenever those who govern decide something that touches the work.
+1	.npcs[].goal.long ⟶ Own something that earns while they sleep.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Gather enough wealth to pass on, and leave the family rich after them.
+1	.npcs[].goal.long ⟶ Protect Mirjana Novikov from the trouble their work might bring on the family.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Make something that will last long after them.
+1	.npcs[].goal.long ⟶ Protect the people in their care for as long as they are able.
+		ex rr3-city-occupied-rand-4
+		from 1× Never end up in Hamish Reilly's shadow.
+1	.npcs[].goal.long ⟶ Protect Thorir Styrkarsson from anyone who would bring them down.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Double the work at the toll bridge, and find the hands to do it.
+1	.npcs[].goal.long ⟶ Protect Zena ibn Khaldun from the trouble their work might bring on the family.
+		ex rr3-metropolis-occupied-rand-3
+		from 1× Make Silk & Luxury Textiles the thing this place is known for.
+2	.npcs[].goal.long ⟶ Put the past behind them where no one can dig it up.
+		ex r2s-occupied-town-3 rr3-town-occupied-rand-1
+		from 1× Become someone Penelope Nikerites needs as much as they are needed. | 1× Grow old without ever having to look over their shoulder.
+1	.npcs[].goal.long ⟶ Reach a place so high that no one keeps them waiting.
+		ex rr3-city-occupied-rand-1
+		from 1× Leave City-State Council stronger than they found it, with Elchidei Merkit still second and content.
+1	.npcs[].goal.long ⟶ Reach the head of Ducal Governorship and run it the way Conan Styrkarsson never would.
+		ex rr3-metropolis-occupied-rand-2
+		from 1× Have the rights of the ropemaker's ropewalk set down so firmly that the next ruler must keep them too.
+1	.npcs[].goal.long ⟶ Reach the top of Arcane Council by the long road, one earned favour at a time.
+		ex r2s-occupied-city-3
+		from 1× Make sure no one wrongs them twice.
+1	.npcs[].goal.long ⟶ Reach the top of City-State Council by the long road, one earned favour at a time.
+		ex rr3-city-occupied-rand-1
+		from 1× Earn a place among the leaders of Arcane Orders without buying it or marrying into it.
+2	.npcs[].goal.long ⟶ Reach the top of Grand Guild Consortium by the long road, one earned favour at a time.
+		ex rr3-metropolis-occupied-rand-3 rr3-metropolis-occupied-port-0
+		from 1× Win the midwife's house a voice whenever those who govern decide something that touches the work. | 1× Rise together with Aemilius Cordus, and share what they win.
+1	.npcs[].goal.long ⟶ Reach the top of Grand Merchant Oligarchy by the long road, one earned favour at a time.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Earn a place among the leaders of Grand Merchant Oligarchy without buying it or marrying into it.
+2	.npcs[].goal.long ⟶ Reach the top of Merchant Guilds by the long road, one earned favour at a time.
+		ex rr3-city-occupied-rand-4 rr3-metropolis-occupied-rand-2
+		from 2× Rise in Merchant Guilds far enough that their word carries weight outside it.
+1	.npcs[].goal.long ⟶ Reach the top of Merchant oligarchy by the long road, one earned favour at a time.
+		ex rr3-city-occupied-rand-3
+		from 1× Make the river ferry too sound for any creditor to threaten.
+1	.npcs[].goal.long ⟶ Repay Berke Barlas in full, and owe nobody anything again.
+		ex rr3-city-occupied-rand-3
+		from 1× Have the final say in everything that touches them.
+1	.npcs[].goal.long ⟶ Rise higher than anyone in the family ever has.
+		ex r2s-occupied-city-1
+		from 1× Leave Namsrai Arlat with no power left to do them harm.
+1	.npcs[].goal.long ⟶ Rise in Church Council far enough that their word carries weight outside it.
+		ex rr3-town-occupied-port-0
+		from 1× Become someone Church Council cannot do without.
+1	.npcs[].goal.long ⟶ Rise in Grand Guild Consortium far enough that their word carries weight outside it.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Reach the top of Grand Guild Consortium by the long road, one earned favour at a time.
+1	.npcs[].goal.long ⟶ Rise in Grand Merchant Senate far enough that their word carries weight outside it.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Build up enough savings at the docks to ride out two bad years.
+1	.npcs[].goal.long ⟶ Rise in Merchant City Council far enough that their word carries weight outside it.
+		ex rr3-city-occupied-rand-0
+		from 1× Be remembered alongside Haruka Wu as one of the best at the work.
+2	.npcs[].goal.long ⟶ Rise in Merchant Guilds far enough that their word carries weight outside it.
+		ex rr3-village-occupied-rand-0 rr3-metropolis-occupied-rand-2
+		from 1× Become someone Headman's Authority cannot do without. | 1× Own a share in the supply of timber, so the work at the docks can never be held to ransom.
+1	.npcs[].goal.long ⟶ Rise in Merchant oligarchy far enough that their word carries weight outside it.
+		ex r2s-occupied-town-1
+		from 1× Be counted one day among those who lead Merchant oligarchy.
+1	.npcs[].goal.long ⟶ Rise in Noble Governorship far enough that their word carries weight outside it.
+		ex rr3-city-occupied-port-1
+		from 1× Become someone Noble Governorship cannot do without.
+1	.npcs[].goal.long ⟶ Rise past Chan Ek in Merchant oligarchy on their own merit, owing no one for the climb.
+		ex rr3-town-occupied-rand-1
+		from 1× Live somewhere no one can reach them uninvited.
+1	.npcs[].goal.long ⟶ Rise past Naomhán O'Meara in Occupation Authority on their own merit, owing no one for the climb.
+		ex rr3-town-occupied-rand-0
+		from 1× Be given the secrets of Church Council to keep, as well as its errands to run.
+1	.npcs[].goal.long ⟶ Rise together with Aemilius Cordus, and share what they win.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Make sure Aemilius Cordus never has reason to doubt them.
+1	.npcs[].goal.long ⟶ Rise together with Brutus Pansa, and share what they win.
+		ex rr3-city-occupied-rand-2
+		from 1× Be given the secrets of Ecclesiastical Council to keep, as well as its errands to run.
+1	.npcs[].goal.long ⟶ Rise together with Paullus Pulvillus, and share what they win.
+		ex rr3-city-occupied-rand-2
+		from 1× Be the person everyone here defers to.
+1	.npcs[].goal.long ⟶ Rise together with Valdis Gunnarsson, and share what they win.
+		ex rr3-hamlet-occupied-rand-2
+		from 1× Gather enough wealth to pass on, and leave the family rich after them.
+1	.npcs[].goal.long ⟶ Rise together with Veronika Semyonov, and share what they win.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Reach the top of Grand Merchant Oligarchy by the long road, one earned favour at a time.
+1	.npcs[].goal.long ⟶ Run both the customs house and the toll bridge, and set the terms for everyone who deals with either.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Bring every step of Strategic Crossroads Toll under the roof of the customs house.
+1	.npcs[].goal.long ⟶ Run both the merchant guilds and the major annual fairs, and set the terms for everyone who deals with either.
+		ex r2s-occupied-city-1
+		from 1× Keep the bond with Purevdulam Taichiud as the work and the years change them both.
+1	.npcs[].goal.long ⟶ Run both the tailor's guild and the dyer's dyehouse, and set the terms for everyone who deals with either.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Build Cloth Finishing & Clothing into a trade that will feed the next generation here.
+1	.npcs[].goal.long ⟶ Secure a steady supply of grain for the city granaries that no one else can cut off.
+		ex r2s-occupied-city-1
+		from 1× Outlast Burmaa Salji'ud, and be the one still standing.
+2	.npcs[].goal.long ⟶ Secure a steady supply of grain for the town granary that no one else can cut off.
+		ex r2s-occupied-town-3 rr3-town-occupied-port-0
+		from 1× Be remembered alongside Eirenaion Kataphloron as one of the best at the work. | 1× Turn the bargain with Vangchug Jirgin into real trust over the years.
+1	.npcs[].goal.long ⟶ Secure rights for the butchers that will outlast whoever governs now.
+		ex rr3-city-occupied-rand-4
+		from 1× Learn to do the work at the butchers with half as much livestock and game.
+1	.npcs[].goal.long ⟶ Secure rights for the city granaries that will outlast whoever governs now.
+		ex r2s-occupied-city-3
+		from 1× Learn to do the work at the city granaries with half as much grain.
+1	.npcs[].goal.long ⟶ Secure rights for the courthouse that will outlast whoever governs now.
+		ex rr3-town-occupied-rand-1
+		from 1× Settle things with Noh Ek Ku for good, one way or another.
+1	.npcs[].goal.long ⟶ Secure rights for the hired blades that will outlast whoever governs now.
+		ex r2s-occupied-city-2
+		from 1× Become the best at their work that anyone here has known.
+1	.npcs[].goal.long ⟶ Secure rights for the inn that will outlast whoever governs now.
+		ex r2s-occupied-town-2
+		from 1× Collect everything Munkhtuya Khwarezm owes, in full.
+1	.npcs[].goal.long ⟶ See Corrupt City Council too weak to threaten Occupation Authority again.
+		ex r2s-occupied-city-2
+		from 1× See the adventurers' guilds out of debt for good, with money set aside for bad years.
+2	.npcs[].goal.long ⟶ See Craft Guilds too weak to threaten Merchant Guilds again.
+		ex r2s-occupied-city-2 rr3-metropolis-occupied-rand-5
+		from 1× Make the stable district too sound for any creditor to threaten. | 1× Build Merchant Guilds up until it is beyond the reach of Craft Guilds.
+1	.npcs[].goal.long ⟶ See Free Elder Council too weak to threaten Occupation Authority again.
+		ex rr3-hamlet-occupied-rand-2
+		from 1× Turn the debt to Thyra Bjarnarson into a friendship between equals.
+1	.npcs[].goal.long ⟶ See Grand Merchant Senate too weak to threaten Occupation Authority again.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Make Occupation Authority so much their own that it could not run a week without them.
+2	.npcs[].goal.long ⟶ See Merchant Guilds too weak to threaten Craft Guilds again.
+		ex rr3-city-occupied-rand-0 rr3-metropolis-occupied-port-1
+		from 1× Make peace between Craft Guilds and Merchant Guilds on terms Craft Guilds can live with. | 1× Build Craft Guilds up until it is beyond the reach of Merchant Guilds.
+1	.npcs[].goal.long ⟶ See Merchant oligarchy too weak to threaten Occupation Authority again.
+		ex rr3-city-occupied-rand-3
+		from 1× Outlast Khutulun Ilkhan, and be the one still standing.
+1	.npcs[].goal.long ⟶ See Noble Governorship too weak to threaten Occupation Authority again.
+		ex rr3-city-occupied-port-1
+		from 1× See the adventurers' guilds out of debt for good, with money set aside for bad years.
+1	.npcs[].goal.long ⟶ See Occupation Authority too weak to threaten Arcane Council again.
+		ex r2s-occupied-city-3
+		from 1× Earn a place among the leaders of Arcane Council without buying it or marrying into it.
+2	.npcs[].goal.long ⟶ See Occupation Authority too weak to threaten Church Council again.
+		ex rr3-town-occupied-rand-0 rr3-town-occupied-port-0
+		from 2× Be counted one day among those who lead Church Council.
+1	.npcs[].goal.long ⟶ See Occupation Authority too weak to threaten City-State Council again.
+		ex rr3-city-occupied-rand-1
+		from 1× Leave more money at the carpenters than there was when they took charge.
+1	.npcs[].goal.long ⟶ See Occupation Authority too weak to threaten Corrupt City Council again.
+		ex r2s-occupied-city-2
+		from 1× Hand on the post relay station with full stores, honest accounts and nothing owed.
+1	.npcs[].goal.long ⟶ See Occupation Authority too weak to threaten Ducal Governorship again.
+		ex rr3-metropolis-occupied-rand-2
+		from 1× Be remembered as the one who kept the state granary complex out of debt.
+1	.npcs[].goal.long ⟶ See Occupation Authority too weak to threaten Free Elder Council again.
+		ex rr3-hamlet-occupied-rand-3
+		from 1× Hand on the mine with full stores, honest accounts and nothing owed.
+2	.npcs[].goal.long ⟶ See Occupation Authority too weak to threaten Grand Guild Consortium again.
+		ex rr3-metropolis-occupied-rand-3 rr3-metropolis-occupied-port-0
+		from 1× Make the public bathhouse too sound for any creditor to threaten. | 1× Make sure Laberia Volso never has reason to doubt them.
+1	.npcs[].goal.long ⟶ See Occupation Authority too weak to threaten Grand Merchant Oligarchy again.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Make Kazimir Babić admit, in public, that they were wrong.
+1	.npcs[].goal.long ⟶ See Occupation Authority too weak to threaten Grand Merchant Senate again.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Bring the sage's quarter under the same roof as the post relay station.
+1	.npcs[].goal.long ⟶ See Occupation Authority too weak to threaten Headman's Authority again.
+		ex rr3-village-occupied-rand-0
+		from 1× Be counted one day among those who lead Headman's Authority.
+1	.npcs[].goal.long ⟶ See Occupation Authority too weak to threaten Merchant City Council again.
+		ex rr3-city-occupied-rand-0
+		from 1× Make Grain & Bread the thing this place is known for.
+1	.npcs[].goal.long ⟶ See Occupation Authority too weak to threaten Merchant Guild Council again.
+		ex rr3-city-occupied-port-0
+		from 1× Take Rashida al-Dimashqi's place in Merchant Guild Council, and keep it longer than Rashida al-Dimashqi did.
+1	.npcs[].goal.long ⟶ See Occupation Authority too weak to threaten Noble Governorship again.
+		ex rr3-city-occupied-rand-4
+		from 1× Reach the top of Merchant Guilds by the long road, one earned favour at a time.
+1	.npcs[].goal.long ⟶ See the chroniclers' exchange out of debt for good, with money set aside for bad years.
+		ex r2s-occupied-city-1
+		from 1× Reach the head of Merchant oligarchy and run it the way Kadan Ghurid never would.
+1	.npcs[].goal.long ⟶ See the city granaries out of debt for good, with money set aside for bad years.
+		ex rr3-city-occupied-rand-2
+		from 1× Own a share in the supply of grain, so the work at the city granaries can never be held to ransom.
+1	.npcs[].goal.long ⟶ See the great library out of debt for good, with money set aside for bad years.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Keep Uglješa Fedorov loyal for life, and make loyalty pay better than ambition.
+1	.npcs[].goal.long ⟶ See the harbour master's office out of debt for good, with money set aside for bad years.
+		ex rr3-city-occupied-rand-4
+		from 1× Make Garbhán Nolan admit, in public, that they were wrong.
+1	.npcs[].goal.long ⟶ See the smuggling network out of debt for good, with money set aside for bad years.
+		ex r2s-occupied-city-2
+		from 1× Turn the debt to Luchtan Cohuoh into a friendship between equals.
+1	.npcs[].goal.long ⟶ See the teleportation circle out of debt for good, with money set aside for bad years.
+		ex r2s-occupied-town-1
+		from 1× Pass on to someone new what passed between them and Eindride Ingvarsson.
+1	.npcs[].goal.long ⟶ See Thieves' Guild too weak to threaten Ducal Governorship again.
+		ex r2s-occupied-metropolis-2
+		from 1× Outlast Thieves' Guild, and still be standing with Ducal Governorship when they are gone.
+1	.npcs[].goal.long ⟶ See Thieves' Guild too weak to threaten Grand Guild Consortium again.
+		ex rr3-metropolis-occupied-port-1
+		from 1× Build Grand Guild Consortium up until it is beyond the reach of Thieves' Guild.
+1	.npcs[].goal.long ⟶ See Thieves' Guild too weak to threaten Occupation Authority again.
+		ex rr3-metropolis-occupied-rand-1
+		from 1× Build Occupation Authority up until it is beyond the reach of Thieves' Guild.
+1	.npcs[].goal.long ⟶ Settle every score before they die.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Reach the top of Merchant Guilds by the long road, one earned favour at a time.
+1	.npcs[].goal.long ⟶ Settle things with Khatan Barlas for good, one way or another.
+		ex rr3-city-occupied-rand-1
+		from 1× Reach the top of Occupation Authority by the long road, one earned favour at a time.
+1	.npcs[].goal.long ⟶ Settle things with Ola al-Dimashqi for good, one way or another.
+		ex rr3-metropolis-occupied-rand-3
+		from 1× Make sure Rashida ibn Khalid never has reason to doubt them.
+1	.npcs[].goal.long ⟶ Settle things with Penelope Nikerites for good, one way or another.
+		ex r2s-occupied-town-3
+		from 1× Hand Occupation Authority on to an heir of their own choosing, and not to Maria Doukas.
+1	.npcs[].goal.long ⟶ Settle things with Purevdulam Oirat for good, one way or another.
+		ex r2s-occupied-city-1
+		from 1× Have the final say in everything that touches them.
+1	.npcs[].goal.long ⟶ Settle things with Samir al-Tabari for good, one way or another.
+		ex rr3-city-occupied-port-0
+		from 1× Be counted one day among those who lead Merchant Guild Council.
+1	.npcs[].goal.long ⟶ Stay in the favour of the front businesses for life, and share in what that brings.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Outlast Decimia Volso in Occupation Authority, and be ready when the place falls empty.
+1	.npcs[].goal.long ⟶ Take Uglješa Fedorov's place in Arcane Orders, and keep it longer than Uglješa Fedorov did.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Make the bardic college too sound for any creditor to threaten.
+1	.npcs[].goal.long ⟶ Turn the bargain with Accia Fronto into real trust over the years.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Leave the public bathhouse protected by law, so whoever runs the house next need not fight for the same rights
+1	.npcs[].goal.long ⟶ Turn the bargain with Chimgee Seljuk into real trust over the years.
+		ex rr3-city-occupied-rand-1
+		from 1× Never have to count coins again.
+1	.npcs[].goal.long ⟶ Turn the bargain with Gantulga Mangghud into real trust over the years.
+		ex rr3-city-occupied-rand-1
+		from 1× Reach the top of City-State Council by the long road, one earned favour at a time.
+1	.npcs[].goal.long ⟶ Turn the bargain with Gefjon Flokason into real trust over the years.
+		ex rr3-city-occupied-port-1
+		from 1× Make something that will last long after them.
+1	.npcs[].goal.long ⟶ Turn the bargain with Idun Bodvarsson into real trust over the years.
+		ex rr3-city-occupied-port-1
+		from 1× Make sure no one wrongs them twice.
+1	.npcs[].goal.long ⟶ Turn the bargain with Marta Filipović into real trust over the years.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Keep the alliance with Marta Filipović strong for as long as both live.
+1	.npcs[].goal.long ⟶ Turn the bargain with Zanabazar Taichiud into real trust over the years.
+		ex rr3-city-occupied-rand-1
+		from 1× Protect Zanabazar Taichiud from anyone who would bring them down.
+1	.npcs[].goal.long ⟶ Use what Dogshin Khwarezm owes to bind them as an ally for life.
+		ex r2s-occupied-town-2
+		from 1× Build up stores large enough that Textiles & Cloth never stops for lack of supply again.
+1	.npcs[].goal.long ⟶ Win the bardic college a voice whenever those who govern decide something that touches the work.
+		ex rr3-city-occupied-rand-4
+		from 1× Bring every step of Performance & Theater under the roof of the bardic college.
+1	.npcs[].goal.long ⟶ Win the carpenters a voice whenever those who govern decide something that touches the work.
+		ex rr3-metropolis-occupied-rand-2
+		from 1× Outlast the sawmill, and hire the hands from there when the end comes.
+1	.npcs[].goal.long ⟶ Win the city granaries a voice whenever those who govern decide something that touches the work.
+		ex rr3-city-occupied-rand-0
+		from 1× Leave Liangjie Cao with no power left to do them harm.
+1	.npcs[].goal.long ⟶ Win the crier's post a lasting privilege that no other house can claim.
+		ex r2s-occupied-town-1
+		from 1× Get so far ahead of Folki Gunnarsson that no one remembers they were ever rivals.
+1	.npcs[].goal.long ⟶ Win the listening post a voice whenever those who govern decide something that touches the work.
+		ex r2s-occupied-city-2
+		from 1× Never have to count coins again.
+1	.npcs[].goal.long ⟶ Win the mills a lasting privilege that no other house can claim.
+		ex rr3-city-occupied-rand-3
+		from 1× Make Vangchug Jalayir admit, in public, that they were wrong.
+1	.npcs[].goal.long ⟶ Win the mint a voice whenever those who govern decide something that touches the work.
+		ex rr3-metropolis-occupied-rand-2
+		from 1× Never again be told what to do.
+1	.npcs[].goal.long ⟶ Win the ropemaker's ropewalk a voice whenever those who govern decide something that touches the work.
+		ex rr3-town-occupied-rand-1
+		from 1× Leave Ahuitzotl May with no power left to do them harm.
+1	.npcs[].goal.long ⟶ Win the scroll scribe's desk a lasting privilege that no other house can claim.
+		ex r2s-occupied-city-3
+		from 1× Have the final say in everything that touches them.
+1	.npcs[].goal.long ⟶ Win the toll bridge a voice whenever those who govern decide something that touches the work.
+		ex r2s-occupied-city-1
+		from 1× Rise in Merchant oligarchy far enough that their word carries weight outside it.
+1	.npcs[].goal.long ⟶ Win the weavers a voice whenever those who govern decide something that touches the work.
+		ex rr3-city-occupied-rand-4
+		from 1× Never end up in Réalt Hennessy's shadow.
+1	.npcs[].goal.short ⟶ Answer the next move by City-State Council against Occupation Authority, quickly and in public.
+		ex rr3-metropolis-occupied-rand-1
+		from 1× Win one ally of Merchant Guilds over to the side of Craft Guilds.
+1	.npcs[].goal.short ⟶ Answer the next move by Corrupt City Council against Occupation Authority, quickly and in public.
+		ex r2s-occupied-city-2
+		from 1× Get the hired blades excused from one tax or levy this season.
+1	.npcs[].goal.short ⟶ Answer the next move by Craft Guilds against Merchant Guilds, quickly and in public.
+		ex rr3-metropolis-occupied-port-1
+		from 1× Find out which members of Merchant Guilds are still friendly with Craft Guilds, and why.
+1	.npcs[].goal.short ⟶ Answer the next move by Grand Merchant Oligarchy against Occupation Authority, quickly and in public.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Get the craft guilds to rely on the bowyers & fletchers for something no one else can supply.
+1	.npcs[].goal.short ⟶ Answer the next move by Merchant oligarchy against Occupation Authority, quickly and in public.
+		ex r2s-occupied-town-1
+		from 1× Make sure every decision of Occupation Authority this season goes out under their own name.
+1	.npcs[].goal.short ⟶ Answer the next move by Occupation Authority against Church Council, quickly and in public.
+		ex rr3-town-occupied-rand-0
+		from 1× Get the rights of the tanners written down and sealed by those who govern, this season.
+1	.npcs[].goal.short ⟶ Answer the next move by Occupation Authority against City-State Council, quickly and in public.
+		ex rr3-city-occupied-rand-1
+		from 1× Find a patron among those who lead City-State Council, and make themselves useful to them.
+1	.npcs[].goal.short ⟶ Answer the next move by Occupation Authority against Ducal Governorship, quickly and in public.
+		ex rr3-metropolis-occupied-rand-2
+		from 1× Get the rights of the docks written down and sealed by those who govern, this season.
+1	.npcs[].goal.short ⟶ Answer the next move by Occupation Authority against Ecclesiastical Council, quickly and in public.
+		ex rr3-city-occupied-rand-2
+		from 1× Win the theaters first call on any help those who govern can give this season.
+2	.npcs[].goal.short ⟶ Answer the next move by Occupation Authority against Grand Guild Consortium, quickly and in public.
+		ex rr3-metropolis-occupied-rand-3 rr3-metropolis-occupied-port-0
+		from 1× Make sure no new rule from those who govern costs the warehouse district anything this season. | 1× Fix a problem Grata Corvinus has left standing in Occupation Authority, and make sure everyone knows who fixed
+1	.npcs[].goal.short ⟶ Answer the next move by Occupation Authority against Grand Merchant Oligarchy, quickly and in public.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Bring Grand Merchant Oligarchy a piece of news before anyone else does.
+1	.npcs[].goal.short ⟶ Answer the next move by Occupation Authority against Grand Merchant Senate, quickly and in public.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Make sure no new rule from those who govern costs the great library anything this season.
+1	.npcs[].goal.short ⟶ Answer the next move by Occupation Authority against Merchant Guild Council, quickly and in public.
+		ex rr3-city-occupied-port-0
+		from 1× Win the luxury goods quarter first call on any help those who govern can give this season.
+2	.npcs[].goal.short ⟶ Answer the next move by Occupation Authority against Merchant oligarchy, quickly and in public.
+		ex r2s-occupied-city-1 rr3-town-occupied-rand-1
+		from 1× Pay every hand at the courthouses in full and on time this season. | 1× Get the rights of the fish market written down and sealed by those who govern, this season.
+1	.npcs[].goal.short ⟶ Answer the next move by Occupation Authority against Noble Governorship, quickly and in public.
+		ex rr3-city-occupied-port-1
+		from 1× Have the old rights of the teleportation circle read out and recognised before anyone challenges them.
+1	.npcs[].goal.short ⟶ Answer the next move by Occupation Authority against Royal Authority, quickly and in public.
+		ex rr3-metropolis-occupied-rand-4
+		from 1× Learn the plans of Thieves' Guild against Royal Authority before they can act on them.
+1	.npcs[].goal.short ⟶ Ask Hamish Reilly for advice on one hard decision this season.
+		ex rr3-city-occupied-rand-4
+		from 1× Stand up for someone who cannot stand up for themselves.
+1	.npcs[].goal.short ⟶ Be asked for an opinion by those who lead Ecclesiastical Council, once, this season.
+		ex rr3-city-occupied-rand-2
+		from 1× Win the coaching inn first call on any help those who govern can give this season.
+1	.npcs[].goal.short ⟶ Be asked for an opinion by those who lead Grand Merchant Senate, once, this season.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Bring Grand Merchant Senate a piece of news before anyone else does.
+1	.npcs[].goal.short ⟶ Be in the room the next time Grand Merchant Oligarchy must decide something that matters.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Do one thing for Grand Merchant Oligarchy this season that the people who lead it cannot ignore.
+1	.npcs[].goal.short ⟶ Be in the room the next time Merchant oligarchy must decide something that matters.
+		ex r2s-occupied-city-1
+		from 1× Bring Merchant oligarchy a piece of news before anyone else does.
+1	.npcs[].goal.short ⟶ Be seen at the right table with the right people this season.
+		ex rr3-city-occupied-rand-1
+		from 1× Get their name mentioned whenever something good is done here.
+1	.npcs[].goal.short ⟶ Beat Babur Oirat at something this season, in front of people who matter.
+		ex rr3-city-occupied-rand-1
+		from 1× Be seen at the right table with the right people this season.
+1	.npcs[].goal.short ⟶ Beat Timur Önggirad at something this season, in front of people who matter.
+		ex r2s-occupied-city-1
+		from 1× Bring one more person round to what they believe this season.
+1	.npcs[].goal.short ⟶ Beat Üljeytü Naiman at something this season, in front of people who matter.
+		ex r2s-occupied-city-1
+		from 1× Put away more coin this season than last.
+1	.npcs[].goal.short ⟶ Bring Grand Merchant Oligarchy a piece of news before anyone else does.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Take on the work in Grand Merchant Oligarchy that no one else wants, and do it without complaint.
+1	.npcs[].goal.short ⟶ Bring Orlaith Larkin together with someone who can help them.
+		ex rr3-city-occupied-rand-4
+		from 1× Keep their own affairs private this season, from friend and rival alike.
+1	.npcs[].goal.short ⟶ Collect what is owed to the banking houses before the season is out.
+		ex r2s-occupied-city-1
+		from 1× Find a second supplier of precious metals, so one lost cart cannot stop the work at the banking houses.
+1	.npcs[].goal.short ⟶ Collect what is owed to the caravaneer's post before the season is out.
+		ex rr3-town-occupied-rand-0
+		from 1× Win new business for the caravaneer's post beyond the people who already come.
+1	.npcs[].goal.short ⟶ Do Cassia Merula a favour big enough to count against what is owed.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Take one thing from a person they resent.
+1	.npcs[].goal.short ⟶ Do one thing for Grand Merchant Oligarchy this season that the people who lead it cannot ignore.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Win the tanners first call on any help those who govern can give this season.
+1	.npcs[].goal.short ⟶ Find a new supply for the work at the furrier's district, and have it coming in before the season is out.
+		ex r2s-occupied-city-1
+		from 1× Keep Furs & Pelts going at the furrier's district through the season, whatever it takes.
+1	.npcs[].goal.short ⟶ Find a patron among those who lead Church Council, and make themselves useful to them.
+		ex rr3-town-occupied-rand-0
+		from 1× Do one thing for Church Council this season that the people who lead it cannot ignore.
+1	.npcs[].goal.short ⟶ Find a patron among those who lead City-State Council, and make themselves useful to them.
+		ex rr3-city-occupied-rand-1
+		from 1× Be in the room the next time City-State Council must decide something that matters.
+1	.npcs[].goal.short ⟶ Find a second supplier of timber, so one lost cart cannot stop the work at the carpenters.
+		ex rr3-metropolis-occupied-rand-2
+		from 1× Do Wiglaf Eriksson one useful favour this season, unasked.
+1	.npcs[].goal.short ⟶ Find a way to make do with less timber at the carpenters.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Bring Velko Filipović together with someone who can help them.
+1	.npcs[].goal.short ⟶ Find out what Toirdelbach Kavanagh really wants in return.
+		ex rr3-town-occupied-rand-0
+		from 1× See someone who wronged them lose face in public this season.
+1	.npcs[].goal.short ⟶ Find out which members of Arcane Council are still friendly with Occupation Authority, and why.
+		ex r2s-occupied-city-3
+		from 1× Get the scroll scribe's desk excused from one tax or levy this season.
+1	.npcs[].goal.short ⟶ Find out which members of Church Council are still friendly with Occupation Authority, and why.
+		ex rr3-town-occupied-port-0
+		from 1× Get the butchers excused from one tax or levy this season.
+1	.npcs[].goal.short ⟶ Find out which members of City-State Council are still friendly with Occupation Authority, and why.
+		ex rr3-city-occupied-rand-1
+		from 1× Have the old rights of the theaters read out and recognised before anyone challenges them.
+1	.npcs[].goal.short ⟶ Find out which members of Ducal Governorship are still friendly with Occupation Authority, and why.
+		ex r2s-occupied-metropolis-2
+		from 1× Win one ally of Thieves' Guild over to the side of Ducal Governorship.
+1	.npcs[].goal.short ⟶ Find out which members of Ecclesiastical Council are still friendly with Occupation Authority, and why.
+		ex rr3-city-occupied-rand-2
+		from 1× Make sure Statius Mamercus is not left behind by the changes in the work.
+2	.npcs[].goal.short ⟶ Find out which members of Grand Guild Consortium are still friendly with Occupation Authority, and why.
+		ex rr3-metropolis-occupied-rand-3 rr3-metropolis-occupied-port-0
+		from 1× Win the court buildings first call on any help those who govern can give this season. | 1× Win the pawnbroker's shop first call on any help those who govern can give this season.
+1	.npcs[].goal.short ⟶ Find out which members of Grand Merchant Oligarchy are still friendly with Occupation Authority, and why.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Make sure no new rule from those who govern costs the docks anything this season.
+1	.npcs[].goal.short ⟶ Find out which members of Grand Merchant Senate are still friendly with Occupation Authority, and why.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Be asked for an opinion by those who lead Grand Merchant Senate, once, this season.
+1	.npcs[].goal.short ⟶ Find out which members of Merchant Guild Council are still friendly with Occupation Authority, and why.
+		ex rr3-city-occupied-port-0
+		from 1× Gain ground for Merchant Guilds at the expense of Craft Guilds before the season is out.
+1	.npcs[].goal.short ⟶ Find out which members of Merchant Guilds are still friendly with Craft Guilds, and why.
+		ex rr3-metropolis-occupied-port-1
+		from 1× Answer the next move by Craft Guilds against Merchant Guilds, quickly and in public.
+1	.npcs[].goal.short ⟶ Find out which members of Merchant oligarchy are still friendly with Occupation Authority, and why.
+		ex r2s-occupied-city-1
+		from 1× Learn the plans of Craft Guilds against Merchant Guilds before they can act on them.
+2	.npcs[].goal.short ⟶ Find out which members of Noble Governorship are still friendly with Occupation Authority, and why.
+		ex rr3-city-occupied-rand-4 rr3-city-occupied-port-1
+		from 1× Get the rights of the cobbler's guild written down and sealed by those who govern, this season. | 1× Have those who govern confirm, in writing, who may give orders at the river ferry.
+1	.npcs[].goal.short ⟶ Find out which members of Occupation Authority are still friendly with Grand Merchant Oligarchy, and why.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Get the mercenary quarter excused from one tax or levy this season.
+1	.npcs[].goal.short ⟶ Find out which members of Royal Authority are still friendly with Occupation Authority, and why.
+		ex rr3-metropolis-occupied-rand-4
+		from 1× Win one ally of Thieves' Guild over to the side of Royal Authority.
+1	.npcs[].goal.short ⟶ Find the bardic college one more source of money.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Take on more hands for Performance & Theater at the bardic college, and keep them busy all season.
+1	.npcs[].goal.short ⟶ Find the carpenters one more source of money.
+		ex rr3-town-occupied-port-0
+		from 1× Find a second supplier of timber, so one lost cart cannot stop the work at the carpenters.
+1	.npcs[].goal.short ⟶ Find the potter's workshop one more source of money.
+		ex rr3-city-occupied-rand-1
+		from 1× Show Rentsendorj Cumans how far they have both come since the lessons ended.
+1	.npcs[].goal.short ⟶ Find the tailor's guild one more source of money.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Find the weak spot in what Zona Fronto is doing, and press on it.
+1	.npcs[].goal.short ⟶ Find the teleportation circle one more source of money.
+		ex r2s-occupied-city-2
+		from 1× Find out what Chac Chel Ixim really wants in return.
+1	.npcs[].goal.short ⟶ Find the weak spot in what Áine Murphy is doing, and press on it.
+		ex rr3-city-occupied-rand-4
+		from 1× Beat Áine Murphy at something this season, in front of people who matter.
+1	.npcs[].goal.short ⟶ Gain ground for Merchant Guilds at the expense of Craft Guilds before the season is out.
+		ex rr3-city-occupied-port-0
+		from 1× Learn why people favour Craft Guilds, and do better for Merchant Guilds.
+1	.npcs[].goal.short ⟶ Get the beast trainers through the season without borrowing.
+		ex rr3-city-occupied-rand-1
+		from 1× Find the weak spot in what Khatan Barlas is doing, and press on it.
+2	.npcs[].goal.short ⟶ Get the better side of every bargain struck this season.
+		ex rr3-city-occupied-port-0 rr3-metropolis-occupied-rand-2
+		from 1× Give every coin from the whisper market an honest-looking reason to be at the merchant guilds. | 1× Move what comes from the black market bazaar through the ropemaker's ropewalk without the regular hands notici
+1	.npcs[].goal.short ⟶ Get the caravanserai excused from one tax or levy this season.
+		ex rr3-village-occupied-rand-0
+		from 1× Grow the work at the caravanserai by one more pair of hands, then another.
+1	.npcs[].goal.short ⟶ Get the elder grove council excused from one tax or levy this season.
+		ex r2s-occupied-city-1
+		from 1× Show Sükhbaatar Naiman how far they have both come since the lessons ended.
+2	.npcs[].goal.short ⟶ Get the mills through the season without borrowing.
+		ex rr3-town-occupied-rand-1 rr3-metropolis-occupied-rand-3
+		from 1× Lay in a season of grain and water power at the mills while it can still be had. | 1× Buy grain and water power at the market in bulk this season, while the price is still fair.
+1	.npcs[].goal.short ⟶ Get the potter's workshop excused from one tax or levy this season.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Learn what Cicero Zoilus has been saying about them, and to whom.
+1	.npcs[].goal.short ⟶ Get the rights of the furrier's district written down and sealed by those who govern, this season.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Get the most out of Leather & Hides while it runs well, and put the gains by.
+1	.npcs[].goal.short ⟶ Get the rights of the shipyard written down and sealed by those who govern, this season.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Find a way to make do with less timber and iron at the shipyard.
+1	.npcs[].goal.short ⟶ Get the river ferry excused from one tax or levy this season.
+		ex r2s-occupied-city-2
+		from 1× Keep Xiuhcoatl Pech from calling in what is owed this season.
+1	.npcs[].goal.short ⟶ Get the stable yard excused from one tax or levy this season.
+		ex r2s-occupied-hamlet-2
+		from 1× Ask Irene Schäfer for a favour that settles a share of the debt.
+1	.npcs[].goal.short ⟶ Grow the work at the bardic college by one more pair of hands, then another.
+		ex rr3-city-occupied-rand-4
+		from 1× Make sure their work and Oengus O'Neill's never clash in public this season.
+1	.npcs[].goal.short ⟶ Grow the work at the carpenter's workshop by one more pair of hands, then another.
+		ex rr3-village-occupied-rand-0
+		from 1× Win over one of Li Zhou's friends.
+1	.npcs[].goal.short ⟶ Grow the work at the merchant guilds by one more pair of hands, then another.
+		ex rr3-metropolis-occupied-rand-3
+		from 1× Keep the old lessons between them and Bashir ibn Jubayr private.
+1	.npcs[].goal.short ⟶ Grow the work at the river ferry by one more pair of hands, then another.
+		ex rr3-city-occupied-rand-4
+		from 1× Keep Laoghaire Walsh from calling in what is owed this season.
+1	.npcs[].goal.short ⟶ Have the old rights of the butchers read out and recognised before anyone challenges them.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Learn who controls the supply of livestock and game, and get on good terms with them.
+1	.npcs[].goal.short ⟶ Have the old rights of the houses of worship read out and recognised before anyone challenges them.
+		ex rr3-town-occupied-port-0
+		from 1× Keep the friendship with Tserenpuntsag Jadaran quiet, where it does the most good.
+1	.npcs[].goal.short ⟶ Have the old rights of the professional city watch read out and recognised before anyone challenges them.
+		ex rr3-city-occupied-port-1
+		from 1× Learn who controls the supply of iron and fuel, and get on good terms with them.
+1	.npcs[].goal.short ⟶ Have the old rights of the teleportation circle read out and recognised before anyone challenges them.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Win over one of Geirþrúðr Egilsson's friends.
+1	.npcs[].goal.short ⟶ Have those who govern confirm, in writing, who may give orders at the merchant guilds.
+		ex rr3-town-occupied-rand-1
+		from 1× Train an apprentice at the merchant guilds to take on part of the work.
+1	.npcs[].goal.short ⟶ Have those who govern confirm, in writing, who may give orders at the professional city watch.
+		ex rr3-metropolis-occupied-rand-2
+		from 1× Keep the professional city watch working through the season even if the supply of iron and fuel should fail.
+1	.npcs[].goal.short ⟶ Have those who govern confirm, in writing, who may give orders at the sheepfold.
+		ex rr3-village-occupied-rand-0
+		from 1× Do Ki Gao one useful favour this season, unasked.
+1	.npcs[].goal.short ⟶ Keep Calvus Fronto from getting the thing they want most this season.
+		ex rr3-city-occupied-rand-2
+		from 1× Finish the work they have been given, properly and on time.
+1	.npcs[].goal.short ⟶ Keep Ek Chuah Zaz from calling in what is owed this season.
+		ex r2s-occupied-city-3
+		from 1× Put someone who slighted them back in their place.
+1	.npcs[].goal.short ⟶ Keep Illann O'Gorman from getting the thing they want most this season.
+		ex rr3-city-occupied-rand-4
+		from 1× Take one thing from a person they resent.
+1	.npcs[].goal.short ⟶ Keep the accounts of the tanner's yard balanced, and show them to anyone who asks.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Learn what Aemilius Cordus has been saying about them, and to whom.
+1	.npcs[].goal.short ⟶ Keep the friendship with Rain Kanil quiet, where it does the most good.
+		ex r2s-occupied-city-3
+		from 1× Look after someone who has no one else to do it.
+1	.npcs[].goal.short ⟶ Keep the friendship with Zhi Zhao quiet, where it does the most good.
+		ex rr3-city-occupied-rand-0
+		from 1× Bring Zhi Zhao together with someone who can help them.
+1	.npcs[].goal.short ⟶ Keep the quarrel between Church Council and Occupation Authority from turning into open trouble this season.
+		ex rr3-town-occupied-rand-0
+		from 1× Get the rights of the mills written down and sealed by those who govern, this season.
+1	.npcs[].goal.short ⟶ Keep the quarrel between City-State Council and Occupation Authority from turning into open trouble this season.
+		ex rr3-city-occupied-rand-1
+		from 1× Get the inns and taverns excused from one tax or levy this season.
+1	.npcs[].goal.short ⟶ Keep the quarrel between City-State Council and Thieves' Guild from turning into open trouble this season.
+		ex rr3-metropolis-occupied-rand-1
+		from 1× Answer the next move by Thieves' Guild against City-State Council, quickly and in public.
+1	.npcs[].goal.short ⟶ Keep the quarrel between Corrupt City Council and Occupation Authority from turning into open trouble this season.
+		ex r2s-occupied-city-2
+		from 1× Get the listening post excused from one tax or levy this season.
+1	.npcs[].goal.short ⟶ Keep the quarrel between Corrupt Council and Occupation Authority from turning into open trouble this season.
+		ex r2s-occupied-town-3
+		from 1× Keep the accounts of the adventurers' charter hall balanced, and show them to anyone who asks.
+2	.npcs[].goal.short ⟶ Keep the quarrel between Ducal Governorship and Occupation Authority from turning into open trouble this season.
+		ex r2s-occupied-metropolis-2 rr3-metropolis-occupied-rand-2
+		from 1× Learn the plans of Thieves' Guild against Ducal Governorship before they can act on them. | 1× Win the weavers first call on any help those who govern can give this season.
+2	.npcs[].goal.short ⟶ Keep the quarrel between Grand Guild Consortium and Occupation Authority from turning into open trouble this season.
+		ex rr3-metropolis-occupied-rand-3 rr3-metropolis-occupied-port-0
+		from 1× Win the theaters first call on any help those who govern can give this season. | 1× Learn who really runs the public bathhouse, and what it would take to replace them.
+1	.npcs[].goal.short ⟶ Keep the quarrel between Grand Merchant Oligarchy and Occupation Authority from turning into open trouble this season.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Make sure no new rule from those who govern costs the harbour master's office anything this season.
+1	.npcs[].goal.short ⟶ Keep the quarrel between Grand Merchant Senate and Occupation Authority from turning into open trouble this season.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Find a patron among those who lead Grand Merchant Senate, and make themselves useful to them.
+1	.npcs[].goal.short ⟶ Keep the quarrel between Merchant Guild Council and Occupation Authority from turning into open trouble this season.
+		ex rr3-city-occupied-port-0
+		from 1× Get the adventurers' guilds excused from one tax or levy this season.
+1	.npcs[].goal.short ⟶ Keep the quarrel between Merchant Guilds and Craft Guilds from turning into open trouble this season.
+		ex rr3-city-occupied-rand-0
+		from 1× Answer the next move by Craft Guilds against Merchant Guilds, quickly and in public.
+2	.npcs[].goal.short ⟶ Keep the quarrel between Merchant oligarchy and Occupation Authority from turning into open trouble this season.
+		ex r2s-occupied-city-1 rr3-city-occupied-rand-3
+		from 1× Find the customs house one more source of money. | 1× Cut the spending at the theaters by a tenth this season, and keep the work going.
+1	.npcs[].goal.short ⟶ Keep the quarrel between Occupation Authority and Arcane Council from turning into open trouble this season.
+		ex r2s-occupied-city-3
+		from 1× Fix a problem Itzam Ixim has left standing in Occupation Authority, and make sure everyone knows who fixed it.
+1	.npcs[].goal.short ⟶ Keep the quarrel between Occupation Authority and Church Council from turning into open trouble this season.
+		ex rr3-town-occupied-rand-0
+		from 1× Take on the work in Church Council that no one else wants, and do it without complaint.
+1	.npcs[].goal.short ⟶ Keep the quarrel between Occupation Authority and City-State Council from turning into open trouble this season.
+		ex rr3-city-occupied-rand-1
+		from 1× Win the mercenary quarter first call on any help those who govern can give this season.
+1	.npcs[].goal.short ⟶ Keep the quarrel between Occupation Authority and Grand Merchant Oligarchy from turning into open trouble this season.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Settle one quarrel inside Occupation Authority before Velko Nikolić can settle it and take the credit.
+1	.npcs[].goal.short ⟶ Keep the quarrel between Occupation Authority and Noble Governorship from turning into open trouble this season.
+		ex rr3-city-occupied-rand-4
+		from 1× Get the craft guilds to rely on the bowyers & fletchers for something no one else can supply.
+1	.npcs[].goal.short ⟶ Lay in a season of precious metals at the banking houses while it can still be had.
+		ex rr3-city-occupied-port-0
+		from 1× Learn what Wijdan al-Jabiri has been saying about them, and to whom.
+2	.npcs[].goal.short ⟶ Learn the plans of Church Council against Occupation Authority before they can act on them.
+		ex rr3-town-occupied-rand-0 rr3-town-occupied-port-0
+		from 1× Beat Garbhán O'Neill at something this season, in front of people who matter. | 1× Warn Jayan Arlat of any trouble before it reaches them.
+1	.npcs[].goal.short ⟶ Learn the plans of Corrupt Council against Occupation Authority before they can act on them.
+		ex r2s-occupied-town-3
+		from 1× Find the weak spot in what Penelope Nikerites is doing, and press on it.
+1	.npcs[].goal.short ⟶ Learn the plans of Craft Guilds against Merchant Guilds before they can act on them.
+		ex r2s-occupied-town-3
+		from 1× Keep the quarrel between Merchant Guilds and Craft Guilds from turning into open trouble this season.
+1	.npcs[].goal.short ⟶ Learn the plans of Grand Merchant Oligarchy against Occupation Authority before they can act on them.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Win the adventurers' guilds first call on any help those who govern can give this season.
+1	.npcs[].goal.short ⟶ Learn the plans of Merchant City Council against Occupation Authority before they can act on them.
+		ex rr3-city-occupied-rand-0
+		from 1× Stop Craft Guilds from taking anything more from Merchant Guilds this season.
+1	.npcs[].goal.short ⟶ Learn the plans of Noble Governorship against Occupation Authority before they can act on them.
+		ex rr3-city-occupied-rand-4
+		from 1× Keep the family trouble with Sorley Kelly from reaching anyone outside the family.
+1	.npcs[].goal.short ⟶ Learn the plans of Occupation Authority against Church Council before they can act on them.
+		ex rr3-town-occupied-port-0
+		from 1× Collect what is owed to the town watch before the season is out.
+1	.npcs[].goal.short ⟶ Learn the plans of Occupation Authority against City-State Council before they can act on them.
+		ex rr3-city-occupied-rand-1
+		from 1× Cut the spending at the bakers by a tenth this season, and keep the work going.
+1	.npcs[].goal.short ⟶ Learn the plans of Occupation Authority against Ducal Governorship before they can act on them.
+		ex rr3-metropolis-occupied-rand-2
+		from 1× Pay every hand at the printing house in full and on time this season.
+1	.npcs[].goal.short ⟶ Learn the plans of Occupation Authority against Ecclesiastical Council before they can act on them.
+		ex rr3-city-occupied-rand-2
+		from 1× Take on the work in Ecclesiastical Council that no one else wants, and do it without complaint.
+1	.npcs[].goal.short ⟶ Learn the plans of Occupation Authority against Grand Merchant Oligarchy before they can act on them.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Win the stable district first call on any help those who govern can give this season.
+1	.npcs[].goal.short ⟶ Learn the plans of Occupation Authority against Guild Council before they can act on them.
+		ex r2s-occupied-town-2
+		from 1× Keep the accounts of the dyer's dyehouse balanced, and show them to anyone who asks.
+1	.npcs[].goal.short ⟶ Learn the plans of Occupation Authority against Headman's Authority before they can act on them.
+		ex rr3-village-occupied-rand-0
+		from 1× Keep the accounts of the potter's workshop balanced, and show them to anyone who asks.
+4	.npcs[].goal.short ⟶ Learn the plans of Occupation Authority against Merchant oligarchy before they can act on them.
+		ex r2s-occupied-town-1 r2s-occupied-city-1 rr3-town-occupied-rand-1 rr3-city-occupied-rand-3
+		from 1× Collect what is owed to the cobbler's guild before the season is out. | 1× Cut the spending at the merchant guilds by a tenth this season, and keep the work going. | 1× Cut the spending at the butchers by a tenth this season, and keep the work going.
+1	.npcs[].goal.short ⟶ Learn the plans of Occupation Authority against Royal Authority before they can act on them.
+		ex rr3-metropolis-occupied-rand-4
+		from 1× Stop Thieves' Guild from taking anything more from Royal Authority this season.
+1	.npcs[].goal.short ⟶ Learn the plans of Thieves' Guild against Grand Guild Consortium before they can act on them.
+		ex rr3-metropolis-occupied-port-1
+		from 1× Answer the next move by Thieves' Guild against Grand Guild Consortium, quickly and in public.
+1	.npcs[].goal.short ⟶ Learn what Ahuitzotl May has been saying about them, and to whom.
+		ex rr3-town-occupied-rand-1
+		from 1× Learn the secret of someone they envy.
+1	.npcs[].goal.short ⟶ Learn what Gefjon Rognvaldsson has been saying about them, and to whom.
+		ex rr3-metropolis-occupied-rand-2
+		from 1× Tell the right story to the right person, and watch it spread.
+1	.npcs[].goal.short ⟶ Learn what Khutulun Ilkhan has been saying about them, and to whom.
+		ex rr3-city-occupied-rand-3
+		from 1× Put their own work in order, down to the last detail.
+1	.npcs[].goal.short ⟶ Learn what Yisugei Mangghud has been saying about them, and to whom.
+		ex rr3-city-occupied-rand-3
+		from 1× Keep every promise they have made this season, even the hard ones.
+1	.npcs[].goal.short ⟶ Look for a way to do more for Strategic Crossroads Toll with the same hands.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Bring Thorir Styrkarsson together with someone who can help them.
+1	.npcs[].goal.short ⟶ Make sure Finn Magnusson keeps paying, even if late.
+		ex rr3-hamlet-occupied-rand-2
+		from 1× Collect every coin they are owed, however small.
+1	.npcs[].goal.short ⟶ Make sure no new rule from those who govern costs the docks anything this season.
+		ex rr3-city-occupied-rand-1
+		from 1× Ask Checheyigen Dörbete for a favour that settles a share of the debt.
+1	.npcs[].goal.short ⟶ Make sure no new rule from those who govern costs the elder grove council anything this season.
+		ex rr3-town-occupied-rand-1
+		from 1× Bring Xochicueitl Tun together with someone who can help them.
+1	.npcs[].goal.short ⟶ Make sure no new rule from those who govern costs the mills anything this season.
+		ex r2s-occupied-city-1
+		from 1× Keep the mills working through the season even if the supply of grain and water power should fail.
+1	.npcs[].goal.short ⟶ Make sure no new rule from those who govern costs the public bathhouse anything this season.
+		ex rr3-city-occupied-port-1
+		from 1× Sit down with Kolbeinn Svensson at the next family gathering and settle one old grievance.
+1	.npcs[].goal.short ⟶ Make sure no one else learns how much is owed to Luchtan Cohuoh.
+		ex r2s-occupied-city-2
+		from 1× Be asked to speak first at the next gathering that matters.
+1	.npcs[].goal.short ⟶ Make sure no one else learns how much is owed to Sigmundr Nidudsson.
+		ex rr3-metropolis-occupied-rand-2
+		from 1× Put their own work in order, down to the last detail.
+1	.npcs[].goal.short ⟶ Pay Alfhild Ketilsson back one part of what is owed before the season ends.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Get their name mentioned whenever something good is done here.
+1	.npcs[].goal.short ⟶ Pay every hand at the brothel in full and on time this season.
+		ex rr3-city-occupied-rand-4
+		from 1× Bring Gareth MacNamara together with someone who can help them.
+1	.npcs[].goal.short ⟶ Pay every hand at the citadel in full and on time this season.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Find a second supplier of stone and iron and grain, so one lost cart cannot stop the work at the citadel.
+1	.npcs[].goal.short ⟶ Pay every hand at the courthouses in full and on time this season.
+		ex rr3-city-occupied-port-1
+		from 1× Keep the friendship with Rind Hrollasson quiet, where it does the most good.
+1	.npcs[].goal.short ⟶ Pay every hand at the public bathhouse in full and on time this season.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Bring Accia Fronto together with someone who can help them.
+1	.npcs[].goal.short ⟶ Pay every hand at the town granary in full and on time this season.
+		ex rr3-town-occupied-port-0
+		from 1× Lay in a season of grain at the town granary while it can still be had.
+1	.npcs[].goal.short ⟶ Put away more coin this season than last.
+		ex r2s-occupied-city-1
+		from 1× Find one more way to be paid for work already being done.
+1	.npcs[].goal.short ⟶ Put their own work in order, down to the last detail.
+		ex rr3-city-occupied-rand-3
+		from 1× Learn a new skill from someone who knows it better.
+1	.npcs[].goal.short ⟶ See someone who wronged them lose face in public this season.
+		ex rr3-town-occupied-rand-0
+		from 1× Learn the secret of someone they envy.
+1	.npcs[].goal.short ⟶ Sit down with Orm Knarrarsson at the next family gathering and settle one old grievance.
+		ex rr3-metropolis-occupied-rand-2
+		from 1× Win the protection of someone stronger before trouble comes.
+1	.npcs[].goal.short ⟶ Stand by Eivor Helgason in their next quarrel, whoever it is with.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Pay someone back for a wrong done to them.
+1	.npcs[].goal.short ⟶ Stop City-State Council from taking anything more from Occupation Authority this season.
+		ex rr3-metropolis-occupied-rand-1
+		from 1× Stop Craft Guilds from taking anything more from Merchant Guilds this season.
+1	.npcs[].goal.short ⟶ Stop Ecclesiastical Council from taking anything more from Occupation Authority this season.
+		ex rr3-city-occupied-rand-2
+		from 1× Stand by Valentinus Publicola in their next quarrel, whoever it is with.
+1	.npcs[].goal.short ⟶ Stop Grand Guild Consortium from taking anything more from Occupation Authority this season.
+		ex rr3-metropolis-occupied-port-0
+		from 1× Pay every hand at the mercenary quarter in full and on time this season.
+1	.npcs[].goal.short ⟶ Stop Grand Merchant Oligarchy from taking anything more from Occupation Authority this season.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Pay every hand at the gladiatorial school in full and on time this season.
+1	.npcs[].goal.short ⟶ Stop Merchant oligarchy from taking anything more from Occupation Authority this season.
+		ex r2s-occupied-town-1
+		from 1× Get the rights of the bowyers & fletchers written down and sealed by those who govern, this season.
+1	.npcs[].goal.short ⟶ Stop Noble Governorship from taking anything more from Occupation Authority this season.
+		ex rr3-city-occupied-rand-4
+		from 1× Have the old rights of the adventurers' guilds read out and recognised before anyone challenges them.
+1	.npcs[].goal.short ⟶ Stop Occupation Authority from taking anything more from Arcane Council this season.
+		ex r2s-occupied-city-3
+		from 1× Collect what is owed to the potter's workshop before the season is out.
+2	.npcs[].goal.short ⟶ Stop Occupation Authority from taking anything more from City-State Council this season.
+		ex rr3-city-occupied-rand-1 rr3-metropolis-occupied-rand-1
+		from 1× Cut the spending at the city granaries by a tenth this season, and keep the work going. | 1× Stop Thieves' Guild from taking anything more from City-State Council this season.
+1	.npcs[].goal.short ⟶ Stop Occupation Authority from taking anything more from Corrupt City Council this season.
+		ex r2s-occupied-city-2
+		from 1× Keep the accounts of the thieves' guild chapter balanced, and show them to anyone who asks.
+1	.npcs[].goal.short ⟶ Stop Occupation Authority from taking anything more from Corrupt Council this season.
+		ex r2s-occupied-town-3
+		from 1× Get the rookery through the season without borrowing.
+1	.npcs[].goal.short ⟶ Stop Occupation Authority from taking anything more from Ecclesiastical Council this season.
+		ex rr3-city-occupied-rand-2
+		from 1× Collect what is owed to the public bathhouse before the season is out.
+1	.npcs[].goal.short ⟶ Stop Occupation Authority from taking anything more from Grand Guild Consortium this season.
+		ex rr3-metropolis-occupied-rand-3
+		from 1× Cut the spending at the crier's post by a tenth this season, and keep the work going.
+1	.npcs[].goal.short ⟶ Stop Occupation Authority from taking anything more from Grand Merchant Oligarchy this season.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Be in the room the next time Grand Merchant Oligarchy must decide something that matters.
+1	.npcs[].goal.short ⟶ Stop Occupation Authority from taking anything more from Headman's Authority this season.
+		ex rr3-village-occupied-rand-0
+		from 1× Collect what is owed to the cobbler's shop before the season is out.
+1	.npcs[].goal.short ⟶ Stop Occupation Authority from taking anything more from Merchant City Council this season.
+		ex rr3-city-occupied-rand-0
+		from 1× Keep the accounts of the adventurers' guilds balanced, and show them to anyone who asks.
+1	.npcs[].goal.short ⟶ Stop Occupation Authority from taking anything more from Merchant Guild Council this season.
+		ex rr3-city-occupied-port-0
+		from 1× Pay every hand at the docks in full and on time this season.
+2	.npcs[].goal.short ⟶ Stop Occupation Authority from taking anything more from Merchant oligarchy this season.
+		ex r2s-occupied-city-1 rr3-city-occupied-rand-3
+		from 1× Stand by Jelme Ongirad in their next quarrel, whoever it is with. | 1× Keep the accounts of the harbour master's office balanced, and show them to anyone who asks.
+2	.npcs[].goal.short ⟶ Stop Occupation Authority from taking anything more from Noble Governorship this season.
+		ex rr3-city-occupied-rand-4 rr3-city-occupied-port-1
+		from 1× Pay every hand at the courthouses in full and on time this season. | 1× Stop Craft Guilds from taking anything more from Merchant Guilds this season.
+1	.npcs[].goal.short ⟶ Stop Thieves' Guild from taking anything more from City-State Council this season.
+		ex rr3-metropolis-occupied-rand-1
+		from 1× Find out which members of City-State Council are still friendly with Thieves' Guild, and why.
+1	.npcs[].goal.short ⟶ Take on the work in Church Council that no one else wants, and do it without complaint.
+		ex rr3-town-occupied-rand-0
+		from 1× Bring Church Council a piece of news before anyone else does.
+1	.npcs[].goal.short ⟶ Take on the work in Ecclesiastical Council that no one else wants, and do it without complaint.
+		ex rr3-city-occupied-rand-2
+		from 1× Be asked for an opinion by those who lead Ecclesiastical Council, once, this season.
+1	.npcs[].goal.short ⟶ Take on the work in Grand Merchant Oligarchy that no one else wants, and do it without complaint.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Get the sawmill to rely on the mills for something no one else can supply.
+1	.npcs[].goal.short ⟶ Take on the work in Occupation Authority that no one else wants, and do it without complaint.
+		ex r2s-occupied-city-1
+		from 1× Bring Occupation Authority a piece of news before anyone else does.
+1	.npcs[].goal.short ⟶ Take one thing from a person they resent.
+		ex rr3-city-occupied-rand-4
+		from 1× Pay someone back for a wrong done to them.
+1	.npcs[].goal.short ⟶ Train an apprentice at the cobbler's guild to take on part of the work.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Look for a way to do more for Leatherworking & Cordwaining with the same hands.
+1	.npcs[].goal.short ⟶ Train an apprentice at the customs house to take on part of the work.
+		ex rr3-city-occupied-port-1
+		from 1× Learn what Ogmund Ljotsson has been saying about them, and to whom.
+1	.npcs[].goal.short ⟶ Warn Zhi Zhao of any trouble before it reaches them.
+		ex rr3-city-occupied-rand-0
+		from 1× Learn a new skill from someone who knows it better.
+1	.npcs[].goal.short ⟶ Win a title, a seat or an honour, however small.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Be asked to speak first at the next gathering that matters.
+1	.npcs[].goal.short ⟶ Win new business for the docks beyond the people who already come.
+		ex rr3-city-occupied-rand-3
+		from 1× Find the weak spot in what Khurelbaatar Kyrgyz is doing, and press on it.
+1	.npcs[].goal.short ⟶ Win one ally of Craft Guilds over to the side of Merchant Guilds.
+		ex r2s-occupied-city-1
+		from 1× Answer the next move by Craft Guilds against Merchant Guilds, quickly and in public.
+1	.npcs[].goal.short ⟶ Win one ally of Occupation Authority over to the side of Church Council.
+		ex rr3-town-occupied-port-0
+		from 1× Get the rights of the toll bridge written down and sealed by those who govern, this season.
+1	.npcs[].goal.short ⟶ Win one ally of Occupation Authority over to the side of City-State Council.
+		ex rr3-city-occupied-rand-1
+		from 1× Make do at the cobbler's guild with what can be had, and waste none of it.
+3	.npcs[].goal.short ⟶ Win one ally of Occupation Authority over to the side of Grand Guild Consortium.
+		ex rr3-metropolis-occupied-rand-3 rr3-metropolis-occupied-port-0 rr3-metropolis-occupied-port-1
+		from 1× Find the elder grove council one more source of money. | 1× Have those who govern confirm, in writing, who may give orders at the assay office. | 1× Learn the plans of Thieves' Guild against Grand Guild Consortium before they can act on them.
+1	.npcs[].goal.short ⟶ Win one ally of Occupation Authority over to the side of Grand Merchant Oligarchy.
+		ex rr3-metropolis-occupied-rand-0
+		from 1× Cut the spending at the great library by a tenth this season, and keep the work going.
+1	.npcs[].goal.short ⟶ Win one ally of Occupation Authority over to the side of Merchant City Council.
+		ex rr3-city-occupied-rand-0
+		from 1× Get the post relay station through the season without borrowing.
+1	.npcs[].goal.short ⟶ Win one ally of Occupation Authority over to the side of Merchant Guild Council.
+		ex rr3-city-occupied-port-0
+		from 1× Pay every hand at the chroniclers' exchange in full and on time this season.
+2	.npcs[].goal.short ⟶ Win one ally of Occupation Authority over to the side of Merchant oligarchy.
+		ex r2s-occupied-city-1 rr3-city-occupied-rand-3
+		from 1× Be in the room the next time Merchant oligarchy must decide something that matters. | 1× Do one thing for Merchant oligarchy this season that the people who lead it cannot ignore.
+2	.npcs[].goal.short ⟶ Win one ally of Occupation Authority over to the side of Noble Governorship.
+		ex rr3-city-occupied-rand-4 rr3-city-occupied-port-1
+		from 1× Find the harbour master's office one more source of money. | 1× Collect what is owed to the elder grove council before the season is out.
+1	.npcs[].goal.short ⟶ Win one ally of Thieves' Guild over to the side of Royal Authority.
+		ex rr3-metropolis-occupied-rand-4
+		from 1× Answer the next move by Thieves' Guild against Royal Authority, quickly and in public.
+1	.npcs[].goal.short ⟶ Win over one of Lofthæna Gislason's friends.
+		ex rr3-metropolis-occupied-rand-2
+		from 1× Get the better side of every bargain struck this season.
+1	.npcs[].goal.short ⟶ Win over one of Mörnir Ubbason's friends.
+		ex rr3-metropolis-occupied-rand-2
+		from 1× Finish the work they have been given, properly and on time.
+1	.npcs[].goal.short ⟶ Win the warehouse district first call on any help those who govern can give this season.
+		ex rr3-city-occupied-rand-3
+		from 1× Learn what Chinggis Qatagin has been saying about them, and to whom.
+1	.powerStructure.factionRelationships[].narrative ⟶ Arcane Council carries out what Occupation Authority decides.
+		ex r2s-occupied-city-3
+		from 1× Arcane Council gives the orders and Occupation Authority carries them out; each needs the other to stay strong
+3	.powerStructure.factionRelationships[].narrative ⟶ Church Council carries out what Occupation Authority decides.
+		ex rr3-town-occupied-rand-0 rr3-town-occupied-port-0 rr3-town-occupied-port-1
+		from 2× Church Council gives the orders and Occupation Authority carries them out; each needs the other to stay strong | 1× Occupation Authority is now about as strong as Church Council. The hall asks for the commander's agreement ins
+2	.powerStructure.factionRelationships[].narrative ⟶ City-State Council carries out what Occupation Authority decides.
+		ex rr3-city-occupied-rand-1 rr3-metropolis-occupied-rand-1
+		from 2× City-State Council gives the orders and Occupation Authority carries them out; each needs the other to stay st
+1	.powerStructure.factionRelationships[].narrative ⟶ Corrupt City Council carries out what Occupation Authority decides.
+		ex r2s-occupied-city-2
+		from 1× Corrupt City Council gives the orders and Occupation Authority carries them out; each needs the other to stay 
+2	.powerStructure.factionRelationships[].narrative ⟶ Corrupt Council carries out what Occupation Authority decides.
+		ex r2s-occupied-town-3 rr3-town-occupied-rand-3
+		from 1× Corrupt Council gives the orders and Occupation Authority carries them out; each needs the other to stay stron | 1× Occupation Authority is now about as strong as Corrupt Council. The hall asks for the commander's agreement in
+2	.powerStructure.factionRelationships[].narrative ⟶ Ducal Governorship carries out what Occupation Authority decides.
+		ex r2s-occupied-metropolis-2 rr3-metropolis-occupied-rand-2
+		from 2× Ducal Governorship gives the orders and Occupation Authority carries them out; each needs the other to stay st
+1	.powerStructure.factionRelationships[].narrative ⟶ Ecclesiastical Council carries out what Occupation Authority decides.
+		ex rr3-city-occupied-rand-2
+		from 1× Ecclesiastical Council gives the orders and Occupation Authority carries them out; each needs the other to sta
+19	.powerStructure.factionRelationships[].narrative ⟶ Elder Council carries out what Occupation Authority decides.
+		ex r2r-thorp-1 r2r-thorp-40 r2s-occupied-thorp-1 r2s-occupied-thorp-2
+		from 10× Occupation Authority is now about as strong as Elder Council. The hall asks for the commander's agreement inst | 9× Occupation Authority no longer takes orders from Elder Council. Elder Council keeps the title; Occupation Auth
+1	.powerStructure.factionRelationships[].narrative ⟶ Elected Reeve carries out what Occupation Authority decides.
+		ex rr3-village-occupied-rand-1
+		from 1× Occupation Authority is now about as strong as Elected Reeve. The hall asks for the commander's agreement inst
+2	.powerStructure.factionRelationships[].narrative ⟶ Feudal Appointee carries out what Occupation Authority decides.
+		ex rr3-town-occupied-rand-4 rr3-town-occupied-rand-5
+		from 2× Occupation Authority is now about as strong as Feudal Appointee. The hall asks for the commander's agreement i
+4	.powerStructure.factionRelationships[].narrative ⟶ Free Elder Council carries out what Occupation Authority decides.
+		ex r2s-occupied-hamlet-2 rr3-hamlet-occupied-rand-2 rr3-hamlet-occupied-rand-3 rr3-hamlet-occupied-rand-5
+		from 3× Free Elder Council gives the orders and Occupation Authority carries them out; each needs the other to stay st | 1× Occupation Authority is now about as strong as Free Elder Council. The hall asks for the commander's agreement
+4	.powerStructure.factionRelationships[].narrative ⟶ Grand Guild Consortium carries out what Occupation Authority decides.
+		ex r2s-occupied-metropolis-0 rr3-metropolis-occupied-rand-3 rr3-metropolis-occupied-port-0 rr3-metropolis-occupied-port-1
+		from 3× Grand Guild Consortium gives the orders and Occupation Authority carries them out; each needs the other to sta | 1× Occupation Authority is now about as strong as Grand Guild Consortium. The hall asks for the commander's agree
+2	.powerStructure.factionRelationships[].narrative ⟶ Grand Merchant Oligarchy carries out what Occupation Authority decides.
+		ex r2s-occupied-metropolis-3 rr3-metropolis-occupied-rand-0
+		from 1× Occupation Authority is now about as strong as Grand Merchant Oligarchy. The hall asks for the commander's agr | 1× Grand Merchant Oligarchy gives the orders and Occupation Authority carries them out; each needs the other to s
+1	.powerStructure.factionRelationships[].narrative ⟶ Grand Merchant Senate carries out what Occupation Authority decides.
+		ex rr3-metropolis-occupied-rand-5
+		from 1× Grand Merchant Senate gives the orders and Occupation Authority carries them out; each needs the other to stay
+1	.powerStructure.factionRelationships[].narrative ⟶ Grand Military Council carries out what Occupation Authority decides.
+		ex r2s-occupied-metropolis-1
+		from 1× Occupation Authority no longer takes orders from Grand Military Council. Grand Military Council keeps the titl
+1	.powerStructure.factionRelationships[].narrative ⟶ Guild Council carries out what Occupation Authority decides.
+		ex r2s-occupied-town-2
+		from 1× Guild Council gives the orders and Occupation Authority carries them out; each needs the other to stay strong.
+4	.powerStructure.factionRelationships[].narrative ⟶ Headman's Authority carries out what Occupation Authority decides.
+		ex r2s-occupied-hamlet-1 r2s-occupied-hamlet-3 rr3-village-occupied-rand-0 rr3-village-occupied-rand-4
+		from 2× Occupation Authority is now about as strong as Headman's Authority. The hall asks for the commander's agreemen | 2× Headman's Authority gives the orders and Occupation Authority carries them out; each needs the other to stay s
+11	.powerStructure.factionRelationships[].narrative ⟶ Household Council carries out what Occupation Authority decides.
+		ex r2r-thorp-24 r2r-thorp-27 r2s-occupied-thorp-0 r2s-occupied-thorp-3
+		from 10× Occupation Authority is now about as strong as Household Council. The hall asks for the commander's agreement  | 1× Occupation Authority no longer takes orders from Household Council. Household Council keeps the title; Occupat
+1	.powerStructure.factionRelationships[].narrative ⟶ Merchant City Council carries out what Occupation Authority decides.
+		ex rr3-city-occupied-rand-0
+		from 1× Merchant City Council gives the orders and Occupation Authority carries them out; each needs the other to stay
+2	.powerStructure.factionRelationships[].narrative ⟶ Merchant Guild Council carries out what Occupation Authority decides.
+		ex rr3-city-occupied-rand-5 rr3-city-occupied-port-0
+		from 1× Occupation Authority is now about as strong as Merchant Guild Council. The hall asks for the commander's agree | 1× Merchant Guild Council gives the orders and Occupation Authority carries them out; each needs the other to sta
+4	.powerStructure.factionRelationships[].narrative ⟶ Merchant oligarchy carries out what Occupation Authority decides.
+		ex r2s-occupied-town-1 r2s-occupied-city-1 rr3-town-occupied-rand-1 rr3-city-occupied-rand-3
+		from 4× Merchant oligarchy gives the orders and Occupation Authority carries them out; each needs the other to stay st
+1	.powerStructure.factionRelationships[].narrative ⟶ Military City Council carries out what Occupation Authority decides.
+		ex r2s-occupied-city-0
+		from 1× Occupation Authority no longer takes orders from Military City Council. Military City Council keeps the title;
+1	.powerStructure.factionRelationships[].narrative ⟶ Military Council carries out what Occupation Authority decides.
+		ex rr3-town-occupied-rand-2
+		from 1× Occupation Authority no longer takes orders from Military Council. Military Council keeps the title; Occupatio
+2	.powerStructure.factionRelationships[].narrative ⟶ Noble Governorship carries out what Occupation Authority decides.
+		ex rr3-city-occupied-rand-4 rr3-city-occupied-port-1
+		from 2× Noble Governorship gives the orders and Occupation Authority carries them out; each needs the other to stay st
+1	.powerStructure.factionRelationships[].narrative ⟶ Priestly Guidance carries out what Occupation Authority decides.
+		ex rr3-village-occupied-port-1
+		from 1× Occupation Authority no longer takes orders from Priestly Guidance. Priestly Guidance keeps the title; Occupat
+1	.powerStructure.factionRelationships[].narrative ⟶ Royal Authority carries out what Occupation Authority decides.
+		ex rr3-metropolis-occupied-rand-4
+		from 1× Royal Authority gives the orders and Occupation Authority carries them out; each needs the other to stay stron
+1	.powerStructure.factionRelationships[].narrative ⟶ Town Council carries out what Occupation Authority decides.
+		ex r2s-occupied-town-0
+		from 1× Occupation Authority no longer takes orders from Town Council. Town Council keeps the title; Occupation Author
+30	.powerStructure.factionRelationships[].type ⟶ tense
+		ex r2s-occupied-hamlet-2 r2s-occupied-hamlet-3 r2s-occupied-town-1 r2s-occupied-town-2
+		from 30× symbiotic
+107	.structuralViolations[].reason ⟶ Embattled region. Fortification and forces are present but chronically underfunded: poor equipment, low morale, and thin reinforcement. A beleaguered outpost su
+		ex r2r-thorp-17 r2r-thorp-25 r2r-thorp-27 r2r-thorp-45
+		from 107× Embattled region: Military priority is #/#. Fortification and forces are present but chronically underfunded: 

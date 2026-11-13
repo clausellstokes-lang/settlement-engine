@@ -1,0 +1,23 @@
+births base 720 tip 720 missing 0; leaf diffs 3026; towns moved 287
+family npcs: 176 towns
+family economicViability: 83 towns
+family history: 68 towns
+family pressureSentence: 37 towns
+  136	.npcs[].plotHooks[]	 e.g. r2r-thorp-16 r2r-thorp-17 r2r-thorp-20
+  71	.npcs[].secret.what	 e.g. r2r-hamlet-10 r2r-hamlet-27 r2r-hamlet-36
+  50	.history.historicalCharacter	 e.g. r2r-thorp-3 r2r-thorp-7 r2r-thorp-16
+  37	.pressureSentence	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-hamlet-16
+  29	.economicViability.issues[].title	 e.g. r2r-thorp-1 r2r-thorp-27 r2r-thorp-40
+  29	.economicViability.issues[].priorityNote	 e.g. r2r-thorp-1 r2r-thorp-27 r2r-thorp-40
+  29	.economicViability.plotHooks[].hook	 e.g. r2r-thorp-54 r2r-hamlet-16 r2r-village-58
+  28	.economicViability.issues[].message	 e.g. r2r-thorp-41 r2r-village-50 r2r-town-37
+  28	.economicViability.issues[].description	 e.g. r2r-thorp-41 r2r-village-50 r2r-town-37
+  20	.history.currentTensions[].description	 e.g. r2r-thorp-41 r2r-village-50 r2r-town-37
+  20	.history.currentTensions[].specificIssue	 e.g. r2r-thorp-41 r2r-village-50 r2r-town-37
+  10	.npcs[].secret.stakes	 e.g. r2r-metropolis-4 r2s-wartime-village-1 r2s-wartime-village-3
+  9	.economicViability.plotHooks[].category	 e.g. r2r-thorp-54 r2s-under_siege-hamlet-2 r2s-under_siege-village-1
+  7	.npcs[].presentation.impression	 e.g. r2r-metropolis-4 r2s-wartime-village-3 r2s-wartime-town-1
+  7	.npcs[].presentation.disposition	 e.g. r2r-metropolis-4 r2s-wartime-village-3 r2s-wartime-town-1
+  7	.npcs[].presentation.behaviour	 e.g. r2r-metropolis-4 r2s-wartime-village-3 r2s-wartime-town-1
+  6	.history.siegeNarrative	 e.g. r2r-village-50 r2s-plague_onset-thorp-0 r2s-plague_onset-thorp-1
+NEW/GONE KEY rows 0 []

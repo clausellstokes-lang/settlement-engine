@@ -1,0 +1,22 @@
+births base 720 tip 720 missing 0; leaf diffs 667; towns moved 78
+family structuralViolations: 54 towns
+family powerStructure: 28 towns
+family npcs: 9 towns
+  54	.structuralViolations[].reason	 e.g. r2r-thorp-17 r2r-thorp-25 r2r-thorp-27
+  28	.powerStructure.factionRelationships[].narrative	 e.g. r2r-thorp-1 r2r-thorp-24 r2r-thorp-27
+  9	.powerStructure.factionRelationships[].type	 e.g. r2s-occupied-hamlet-2 r2s-occupied-hamlet-3 r2s-occupied-town-1
+  9	.npcs[].goal.long	 e.g. r2s-occupied-hamlet-2 r2s-occupied-hamlet-3 r2s-occupied-town-1
+  8	.npcs[].goal.short	 e.g. r2s-occupied-hamlet-2 r2s-occupied-town-1 r2s-occupied-town-2
+  8	.npcs[].goal.intent.short.target.id	 e.g. r2s-occupied-hamlet-2 r2s-occupied-town-1 r2s-occupied-town-2
+  8	.npcs[].goal.intent.long.family	 e.g. r2s-occupied-hamlet-2 r2s-occupied-hamlet-3 r2s-occupied-town-1
+  8	.npcs[].goal.intent.long.kind	 e.g. r2s-occupied-hamlet-2 r2s-occupied-hamlet-3 r2s-occupied-town-1
+  8	.npcs[].goal.intent.long.key	 e.g. r2s-occupied-hamlet-2 r2s-occupied-hamlet-3 r2s-occupied-town-1
+  8	.npcs[].goal.intent.long.target.id	 e.g. r2s-occupied-hamlet-3 r2s-occupied-town-1 r2s-occupied-town-2
+  7	.npcs[].goal.intent.short.family	 e.g. r2s-occupied-hamlet-2 r2s-occupied-town-1 r2s-occupied-town-2
+  7	.npcs[].goal.intent.short.kind	 e.g. r2s-occupied-hamlet-2 r2s-occupied-town-1 r2s-occupied-town-2
+  7	.npcs[].goal.intent.short.key	 e.g. r2s-occupied-hamlet-2 r2s-occupied-town-1 r2s-occupied-town-2
+  7	.npcs[].goal.intent.short.target.kind	 e.g. r2s-occupied-hamlet-2 r2s-occupied-town-1 r2s-occupied-town-2
+  7	.npcs[].goal.intent.long.target.kind	 e.g. r2s-occupied-hamlet-3 r2s-occupied-town-1 r2s-occupied-town-2
+  6	.npcs[].goal.intent.long.target	 e.g. r2s-occupied-hamlet-2 r2s-occupied-town-1 r2s-occupied-town-3
+  3	.npcs[].goal.intent.short.target	 e.g. r2s-occupied-city-1 r2s-occupied-city-2 r2s-occupied-city-3
+NEW/GONE KEY rows 0 []
