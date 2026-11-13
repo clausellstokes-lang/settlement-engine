@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "fe5786c9719915e763851e5e2fe80c929e223523",
+  "measuredAtSha": "5f2a702bc3e652cae091391efecce8f6cb6be2ee",
   "measuredBy": "COHERENCE-UPKEEP-6",
   "date": "2026-11-13",
-  "note": "COHERENCE-UPKEEP-6 ruling 3 (fe5786c97): DEFENCE_TUNING.crises rows gain crime (ten leaves, draft); priorityHelpers criminalPreStress",
+  "note": "COHERENCE-UPKEEP-6 ruling 1(a): prosperityInCrisis.js reads keep.js (KEEP tables gain a dependent); no value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1401,6 +1401,7 @@
         "Wealthy.funded": 1
       },
       "dependents": [
+        "src/domain/display/prosperityInCrisis.js",
         "src/domain/display/threatAssessment.js",
         "src/domain/facts/factsOf.js",
         "src/domain/magicProfile.js",
@@ -1423,6 +1424,7 @@
         "magicBelow": 0.6
       },
       "dependents": [
+        "src/domain/display/prosperityInCrisis.js",
         "src/domain/display/threatAssessment.js",
         "src/domain/facts/factsOf.js",
         "src/domain/magicProfile.js",
