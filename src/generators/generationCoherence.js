@@ -419,7 +419,7 @@ export function projectionAgreementFindings(settlement) {
     }
     for (const [index, strength] of (analysis.economicStrengths || []).entries()) {
       const rule = STRENGTH_SUPPORT[/** @type {keyof typeof STRENGTH_SUPPORT} */ (strength)];
-      if (!rule || !townSupports(available, rule, route)) {
+      if (!rule || !townSupports(available, rule, route, settlement?.economicState)) {
         resource.push(finding(`resourceAnalysis.economicStrengths[${index}]`, rule ? 'A terrain strength has nothing of the town\'s under it.' : 'A terrain strength has no support row.', String(strength)));
       }
     }

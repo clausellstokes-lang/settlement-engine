@@ -475,6 +475,34 @@ describe('the gate tally is not said where no gate stands', () => {
 });
 
 /**
+ * AGRICULTURE, WHERE THE TOWN LIVES BY IT (COHERENCE-AGREE-8, REVIEW-AGREE-3 FINDING 5 / T6). Cure 2 (72481b477, "the
+ * economic strengths and the strategic line are the town's, not the terrain's") keeps a terrain strength only on the
+ * town's own resource or route (`resourceGenerator.js :: STRENGTH_SUPPORT`); Agriculture stood only on grain fields, a
+ * floodplain or grazing land, so 80 of the census's 720 lost it, 38 of them earning Agricultural Rents from tenant
+ * farmers (r2r-village-35: 92% of its income). Agriculture now also stands on the town's own record of farming: an
+ * Agricultural Rents income, or the food record's grain chain. A town that only fishes still does not claim it.
+ */
+describe('Agriculture: what the land offers, where the town farms it', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const born = (/** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: seed.split('-')[1] }), null, { seed, customContent: {} });
+  test('r2r-village-35 and r2r-hamlet-44 live on tenant farming and offer Agriculture; r2r-town-26 farms its grain', () => {
+    expectNoSeedFailures(collectSeedFailures(['r2r-village-35', 'r2r-hamlet-44', 'r2r-town-26'], (seed) => {
+      const s = born(seed);
+      const rents = s.economicState.incomeSources.some((e) => e.source === 'Agricultural Rents');
+      const grain = (s.economicState.foodSecurity.activeChains || []).includes('Grain & agriculture');
+      expect(rents || grain, `${seed}: anchored, the record farms`).toBe(true);
+      expect(s.resourceAnalysis.economicStrengths, seed).toContain('Agriculture');
+    }), 'a farming town\'s land does not offer Agriculture');
+  });
+  test('twin: r2r-town-38 fishes and earns no rents, and its land still does not offer Agriculture', () => {
+    const s = born('r2r-town-38');
+    expect(s.economicState.incomeSources.some((e) => e.source === 'Agricultural Rents')).toBe(false);
+    expect(s.economicState.foodSecurity.activeChains || []).not.toContain('Grain & agriculture');
+    expect(s.resourceAnalysis.economicStrengths).not.toContain('Agriculture');
+  });
+});
+
+/**
  * F8 (ii) (COHERENCE-AGREE-6, the chair's ruling of 2026-11-12): the flag bag's prison and hospital are the defence
  * home's answers (`defenseFactsOf`), off the live roster: the lane's own two private readers in
  * `priorityHelpers.js :: getInstitutionNames`, cured rather than banked when the walker learned the four atoms.
