@@ -596,14 +596,14 @@ export function deriveHeadcounts(settlement) {
 }
 
 /**
- * Prosperity label (§overview/economics) — the prosperity enum BOTH the screen and
- * the PDF render. The COLOR/tone is intentionally per-surface (the web uses an RGB
- * scale, the PDF a print palette), so only the label is a shared scalar.
+ * Prosperity label (§overview/economics) — the prosperity enum BOTH surfaces render; tone is per-surface
+ * (web RGB scale, PDF print palette), so only the label is a shared scalar. `inCrisis`: beside a label a
+ * crisis in force lowered, the one sentence of what the place is in ordinary years (ruling 1(a), REVIEW-UPKEEP-2).
  * @param {any} settlement
- * @returns {{ label: string | null }}
+ * @returns {{ label: string | null, inCrisis: string | null }}
  */
 export function deriveProsperityPosture(settlement) {
-  return { label: settlement?.economicState?.prosperity || null };
+  return { label: settlement?.economicState?.prosperity || null, inCrisis: prosperityInCrisisLine(settlement) };
 }
 
 /**
@@ -751,3 +751,6 @@ export function magicRelianceDeskSettlement(settlement) {
     defenseProfile: { ...defenseProfile, magicDependency: reliance.reliesOnMagic },
   }));
 }
+// The prosperity sentence's one writer (ruling 1(a)); imported here, not at the head, so the line-keyed
+// holder census's citations into this file stay put.
+import { prosperityInCrisisLine } from './prosperityInCrisis.js';

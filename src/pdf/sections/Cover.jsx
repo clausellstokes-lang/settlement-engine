@@ -266,6 +266,13 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
             />
           )}
         </View>
+        {/* The Prosperity cell's label, where a crisis in force lowered it, says what the place is in
+            ordinary years (the chair's ruling 1(a), REVIEW-UPKEEP-2): the vm's one sentence. */}
+        {prosperity && overview.prosperityInCrisis && (
+          <Text style={{ fontFamily: 'Lora', fontSize: pt['10'], color: palette.second, fontStyle: 'italic', marginTop: 6 }}>
+            {overview.prosperityInCrisis}
+          </Text>
+        )}
 
         {/* ── Power line ───────────────────────────────────────── */}
         {(govLabel || govName) && (

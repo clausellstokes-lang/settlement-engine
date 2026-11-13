@@ -83,6 +83,11 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
           { label: 'Trade', value: cap(e.tradeAccess) || '–' },
         ]}
       />
+      {/* The Prosperity tile's label, where a crisis in force lowered it, says what the place is in
+          ordinary years (the chair's ruling 1(a), REVIEW-UPKEEP-2): the vm's one sentence. */}
+      {e.prosperityInCrisis && (
+        <Text style={{ ...type.italic, color: palette.second, fontSize: pt['9'], marginBottom: space.sm }}>{e.prosperityInCrisis}</Text>
+      )}
 
       {/* ── Income sources ─────────────────────────────────────── */}
       {e.incomeSources?.length > 0 && (

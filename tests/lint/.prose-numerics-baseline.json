@@ -337,7 +337,7 @@
   },
   {
     "path": "src/components/new/tabs/EconomicsGlance.jsx",
-    "line": 128,
+    "line": 134,
     "category": "floatInterpolation",
     "snippet": "{ecoScore}"
   },
@@ -1021,37 +1021,37 @@
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 310,
+    "line": 315,
     "category": "floatInterpolation",
     "snippet": "{flow}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 379,
+    "line": 384,
     "category": "floatInterpolation",
     "snippet": "{iss.severity}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 478,
+    "line": 483,
     "category": "floatInterpolation",
     "snippet": "{fb.deficitPct}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 478,
+    "line": 483,
     "category": "percentToken",
     "snippet": "{fb.deficitPct}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 483,
+    "line": 488,
     "category": "floatInterpolation",
     "snippet": "{fb.coveragePct}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 483,
+    "line": 488,
     "category": "percentToken",
     "snippet": "{fb.coveragePct}"
   },
@@ -1117,19 +1117,19 @@
   },
   {
     "path": "src/pdf/sections/Overview.jsx",
-    "line": 542,
+    "line": 547,
     "category": "floatInterpolation",
     "snippet": "` · imports cover ${fb.coveragePct}% of gap`"
   },
   {
     "path": "src/pdf/sections/Overview.jsx",
-    "line": 542,
+    "line": 547,
     "category": "floatInterpolation",
     "snippet": "{fb.coveragePct != null ? ` · imports cover ${fb.coveragePct}% of gap` : ''}"
   },
   {
     "path": "src/pdf/sections/Overview.jsx",
-    "line": 542,
+    "line": 547,
     "category": "percentToken",
     "snippet": "` · imports cover ${fb.coveragePct}% of gap`"
   },

@@ -47,6 +47,7 @@
 import { lifecycleStatusOf } from '../../domain/worldPulse/settlementLifecycleFirstClass.js';
 import { settlementWarStatus } from '../../domain/display/warStatus.js';
 import { popToTier, prosperityRank } from '../../data/constants.js';
+import { prosperityInCrisisLine } from '../../domain/display/prosperityInCrisis.js';
 
 /** Codepoint comparator. Never localeCompare: host ICU tables are not a stable order. */
 function codepoint(a, b) {
@@ -134,7 +135,10 @@ function livingLine(settlement, warStatus) {
   const tier = tierWordOf(settlement);
   const prosperity = prosperityWordOf(settlement);
   const subject = prosperity ? `${prosperity} ${tier}` : tier;
-  return `${article(subject)} ${subject}, ${warClauseOf(warStatus)}.`;
+  // The prosperity word, where a crisis in force lowered it, is followed by the one sentence of
+  // what the place is in ordinary years (the chair's ruling 1(a), REVIEW-UPKEEP-2).
+  const inCrisis = prosperity ? prosperityInCrisisLine(settlement) : null;
+  return `${article(subject)} ${subject}, ${warClauseOf(warStatus)}.${inCrisis ? ` ${inCrisis}` : ''}`;
 }
 
 /**

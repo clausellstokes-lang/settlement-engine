@@ -100,6 +100,11 @@ export function Overview({ settlement, narrativeMode, vm, stateProse, historyPri
           { label: 'Stability',  value: statusCase(o.stability) },
         ]}
       />
+      {/* The Prosperity tile's label, where a crisis in force lowered it, says what the place is in
+          ordinary years (the chair's ruling 1(a), REVIEW-UPKEEP-2): the vm's one sentence. */}
+      {o.prosperityInCrisis && (
+        <Text style={{ ...type.italic, color: palette.second, fontSize: pt['9'], marginBottom: space.sm }}>{o.prosperityInCrisis}</Text>
+      )}
 
       {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
       <StateProse stateProse={stateProse} tab="overview" />

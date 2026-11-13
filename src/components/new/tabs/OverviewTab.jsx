@@ -29,6 +29,7 @@ import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { safetyBandOf } from '../../../domain/display/labelBands.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
 import { deriveMagicRelianceView, magicRowsGated } from '../../../domain/display/dossierViewModel.js';
+import { prosperityInCrisisLine } from '../../../domain/display/prosperityInCrisis.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 import SteadingsSection from './SteadingsSection.jsx';
@@ -112,7 +113,7 @@ function ScoreRow({ label, score }) {
   );
 }
 
-function StatusTag({ label, value, _color, accent, testId }) {
+function StatusTag({ label, value, _color, accent, testId, note = null }) {
   const mobile = useIsMobile();
   return (
     <div data-testid={testId} style={{ flex: '1 1 130px', background: accent ? `${accent}0d` : '#faf8f4', ...edged(`1px solid ${accent ? `${accent}35` : '#e0d0b0'}`, `3px solid ${accent || '#c8b89a'}`), padding: '7px 10px', minWidth: 0 }}>
@@ -124,6 +125,9 @@ function StatusTag({ label, value, _color, accent, testId }) {
         * register than capitals and neither walker could see it. Cased HERE rather than at
         * the four call sites, so the next StatusTag cannot repeat it. */}
       <div style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.inkMag, lineHeight: 1.3 }}>{statusCase(value) || EMPTY_VALUE}</div>
+      {/* The tag's own word, where a crisis in force lowered it, says what the place is in ordinary
+        * years: the one sentence (the chair's ruling 1(a), REVIEW-UPKEEP-2; prosperityInCrisis.js). */}
+      {note && <div data-testid="overview-prosperity-in-crisis" style={{ fontSize: proseFontSize(FS.sm, mobile), color: swatch.inkMag2, fontStyle: 'italic', lineHeight: 1.4, marginTop: 3 }}>{note}</div>}
     </div>
   );
 }
@@ -184,6 +188,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
   const dp = r.defenseProfile || {};
   const scores = dp.scores || {};
   const magicReliance = deriveMagicRelianceView(r);
+  const prosperityInCrisis = prosperityInCrisisLine(r);
   const via = r.economicViability || {};
   const sp = eco.safetyProfile || {};
   const hist = r.history || {};
@@ -385,7 +390,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
 
         {/* Status tags row */}
         <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:14}}>
-          <StatusTag label="Prosperity" value={eco.prosperity} accent={PROSPERITY_COLORS[eco.prosperity]}/>
+          <StatusTag label="Prosperity" value={eco.prosperity} accent={PROSPERITY_COLORS[eco.prosperity]} note={prosperityInCrisis}/>
           <StatusTag label="Safety" value={safetyBandOf(sp.safetyLabel) ?? sp.safetyLabel} accent={safetySeverityOf(sp.safetyLabel).color}/>
           <StatusTag label="Viability" value={via.viable===false?'Not Viable':via.viable===true?'Viable':EMPTY_VALUE} accent={via.viable===false?'#8b1a1a':via.viable===true?'#1a5a28':undefined}/>
           <StatusTag label="Defense" value={dp.readiness?.label} accent={dp.readiness?.color}/>
