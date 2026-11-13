@@ -28,12 +28,13 @@ function allGoals() {
   const out = {};
   for (const category of CATEGORIES) {
     for (const [condition, state] of Object.entries(CONDITIONS)) {
-      // COHERENCE-POWERS-5 (N1): the seat's holder reads the seat's row whatever its category, so the governing power is
-      // a hall no card heads, beside the category's top power at its weight (re-keyed by identity: A still heads the
-      // category's top power, dominant, and B the lesser, subordinate)
+      // COHERENCE-POWERS-5 (N1, N3): the seat's holder reads the seat's row whatever its category, and no one else reads
+      // it, so for every category but government the governing power is a hall no card heads, beside the category's top
+      // power at its weight; for government, A heads the governing power and holds the seat, as before (re-keyed by
+      // identity: A still heads the category's top power, dominant, and B the lesser, subordinate)
       const factions = [
-        { faction: 'Hall', category: 'government', power: 100, isGoverning: true },
-        { faction: 'Top', category, power: 100 },
+        ...(category === 'government' ? [] : [{ faction: 'Hall', category: 'government', power: 100, isGoverning: true }]),
+        { faction: 'Top', category, power: 100, ...(category === 'government' ? { isGoverning: true } : {}) },
         { faction: 'Second', category, power: 10 },
       ];
       const settlement = { ...state, powerStructure: { ...(state.powerStructure || {}), factions } };

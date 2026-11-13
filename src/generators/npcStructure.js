@@ -462,6 +462,8 @@ function seatHolderAmong(npcs, settlement) {
 
 /** The seat row's own fact, for the holder whose condition row the record's facts refuse. */
 const HOLDS_THE_SEAT = 'Holds the seat.';
+/** The seat rows' opening (government × condition × dominant): the holder's words, no one else's (N3). */
+const HOLDS_A_SEAT = /^Holds the seat\b/;
 
 /** The holder's house, second: the dual-hat holder's house title, as the seat row prints it; '' for a one-hat holder. @param {Record<string, any>} npc */
 function holderHouseLineOf(npc) {
@@ -515,6 +517,10 @@ export function enrichNPCsWithStructure(npcs, settlement) {
       return { ...npc, structuralPosition: [HOLDS_THE_SEAT, holderHouseLineOf(npc)].filter(Boolean).join(' '), settlementCondition: condition, structuralRank: standing.standing };
     }
     if (!tmpl) return { ...npc, structuralRank: standing.standing };
+    // COHERENCE-POWERS-5 (N3): "Holds the seat …" is the holder's alone — any other card whose key reaches a seat row (the
+    // occupier's governor, a fractured realm's bloc speaker, the keeper of an empty seat) takes no structural line, the
+    // refusal's rule: it keeps its own goal and claims no position
+    if (!isHolder && HOLDS_A_SEAT.test(String(lineText(tmpl.position) ?? ''))) return { ...npc, structuralRank: standing.standing };
 
     // activeGoal replaces goal.short on enriched NPCs so the DM sees one coherent goal.
     // The settlement-derived goal is more specific than the generic role goal.

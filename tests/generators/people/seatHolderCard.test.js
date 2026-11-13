@@ -78,6 +78,16 @@ function n2MissesOf(s, key) {
   return BAND[c.influence] >= BAND[want] ? [] : [`${key}: ${c.name} (${c.role}) reads ${c.influence} (power ${c.power}) under a ${want} office`];
 }
 
+/**
+ * N3 — "Holds the seat" is printed for the one person the seat's own home names, and for no one else (the review: the
+ * occupier's governor, a fractured realm's bloc speaker, the keeper of an empty seat).
+ */
+function n3MissesOf(s, key) {
+  const c = holderOf(s);
+  return (s.npcs || []).filter((n) => n !== c && HOLDS.test(String(n.structuralPosition || '')))
+    .map((n) => `${key}: ${n.name} (${n.role}) is not the seat's holder (${c?.name ?? 'none'}) and reads "${n.structuralPosition}"`);
+}
+
 describe('COHERENCE-POWERS-5 — the seat-holder\'s card (REVIEW-POWERS-2 N1–N3)', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); }, 60_000);
 
@@ -123,6 +133,21 @@ describe('COHERENCE-POWERS-5 — the seat-holder\'s card (REVIEW-POWERS-2 N1–N
     for (const t of TIERS) {
       for (let i = 0; i < 8; i++) misses.push(...n2MissesOf(born(`r2r-${t}-${i}`), `r2r-${t}-${i}`));
       for (const x of CRISES) misses.push(...n2MissesOf(born(`r2s-${x}-${t}-0`), `r2s-${x}-${t}-0`));
+    }
+    expect(misses).toEqual([]);
+  }, 600_000);
+
+  it('N3: the review\'s three towns — the occupier\'s governor and the bloc\'s speaker do not hold the seat on their cards', () => {
+    const misses = [];
+    for (const seed of ['r2s-occupied-town-0', 'r2s-politically_fractured-village-0', 'r2r-thorp-1']) misses.push(...n3MissesOf(born(seed), seed));
+    expect(misses).toEqual([]);
+  }, 120_000);
+
+  it('N3: at every size, random and under every crisis — no card but the holder\'s says it holds the seat', () => {
+    const misses = [];
+    for (const t of TIERS) {
+      for (let i = 0; i < 8; i++) misses.push(...n3MissesOf(born(`r2r-${t}-${i}`), `r2r-${t}-${i}`));
+      for (const x of CRISES) misses.push(...n3MissesOf(born(`r2s-${x}-${t}-0`), `r2s-${x}-${t}-0`));
     }
     expect(misses).toEqual([]);
   }, 600_000);
