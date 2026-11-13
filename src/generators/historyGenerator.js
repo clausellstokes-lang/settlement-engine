@@ -16,13 +16,13 @@ import { pick, random01, randInt } from './helpers.js';
 import { random as _rng, getActiveRng } from '../kernel/rngContext.js';
 
 import { genArrivalDetail } from './narrativeGenerator.js';
-import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription, historyDescVariantsOf, tensionDescription } from '../data/historyData.js';
+import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription, historyDescVariantsOf, tensionDescription, HISTORY_QUARTER_WORDS } from '../data/historyData.js';
 import { resolveGenerationWorldLaw } from './generationContext.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3b): one line, so no cited line moves
 import {
   STRESS_TO_TENSION,
   TIMELINE_CATEGORY_TYPES,
 } from './history/historyPolicyData.js';
-import { deriveHistoryRouteContext } from './history/historyRouteContext.js';
+import { deriveHistoryRouteContext, smallPlaceWordsOf } from './history/historyRouteContext.js';
 import { drawDeclared, filterDeclared, lineText } from '../domain/facts/drawDeclared.js';
 import { factsOf } from '../domain/facts/factsOf.js';
 import { generateSafetyNarrative2, generateTradeNarrative2 } from './history/historyEventStrands.js';
@@ -208,7 +208,7 @@ const resolveTimelineHook = (drawnRow, eventTemplate, remaining, taken, printed,
 const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}, descSeed = null, hookFacts = null) => {
   // Template variable substitutions (can be overridden by extraTokens)
   const defaultTokens = {
-    '{quarter}': pick(['the merchants\' quarter', 'the residential district', 'the waterfront', 'the temple district']),
+    '{quarter}': drawDeclared(HISTORY_QUARTER_WORDS, { draw: (p) => pick(p), facts: hookFacts, poolId: 'historyData:HISTORY_QUARTER_WORDS', surface: 'history', drawKind: 'R', key: `${getActiveRng()?.seed ?? ''}::historyData:HISTORY_QUARTER_WORDS` }).text, // W2-FIX-DATA-2 item 1: the one pick kept; a refused word resolves through the declared door
     '{building_type}': pick(['wooden buildings', 'warehouses', 'housing', 'commercial buildings']),
     '{percent}': randInt(15, 60),
     '{duration}': randInt(1, 5),
@@ -937,7 +937,7 @@ export const generateHistory = (
     { institutions, config, tier, powerStructure, stress: Array.isArray(config?.stressTypes) ? config.stressTypes.map((type) => ({ type })) : [] },
     worldLaw?.portKind ? { waterKind: worldLaw.portKind } : {},
   ));
-
+  if (context) Object.assign(context, smallPlaceWordsOf(context, hookFacts)); // W2-FIX-DATA-2 item 1: a place of village size or smaller takes its small-place word (draw-free)
   // Historical timeline
   const timeline = age > 0
     ? generateRelationshipEvent(age, tier, config, context, worldLaw, hookFacts) // CENSUS-1f: the timeline hooks resolve against the birth so far

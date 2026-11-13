@@ -1644,3 +1644,37 @@ export const historyDescription = (eventTemplate, seed) => {
     ? pickVariant([eventTemplate.description, ...variants], seed)
     : eventTemplate.description;
 };
+
+// ─── W2-FIX-DATA-2 item 1 (2026-11-13; the REVIEW-W2B cold list, rows 3, 7, 29, 204, 282): THE HISTORY'S PLACE WORDS ───
+// The place a flood, a fire or a surge of magic touched was named by districts and quarters in a thorp of six, and by a
+// waterfront in a town with no water. Each word now declares what makes it false; a place of village size or smaller
+// takes a small-place word in its stead. No roll is added: the timeline's one pick of `{quarter}` is kept, and a
+// refused word resolves through the declared door (its twin, else the hash argmax over the admitted words).
+
+/**
+ * THE TIMELINE'S `{quarter}` (generateEventNarrative's default, printed by wild_magic): the four words in their
+ * drawn order, each declaring the size and the house it presumes; each twin, reached only by resolution, is a
+ * small-place word (VETOABLE wording, the owner's).
+ */
+export const HISTORY_QUARTER_WORDS = Object.freeze([
+  Object.freeze({ text: "the merchants' quarter", needs: Object.freeze(['market', 'tier: ≥ town']) }),
+  Object.freeze({ text: 'the residential district', needs: Object.freeze(['tier: ≥ town']) }),
+  Object.freeze({ text: 'the waterfront', needs: Object.freeze(['navigable', 'tier: ≥ village']) }),
+  Object.freeze({ text: 'the temple district', needs: Object.freeze(['institution: temple', 'tier: ≥ town']) }),
+  Object.freeze({ text: 'the low ground', twinOf: "the merchants' quarter", needs: Object.freeze(['tier: ≤ village']) }),
+  Object.freeze({ text: 'the houses', twinOf: 'the residential district', needs: Object.freeze(['tier: ≤ village']) }),
+  Object.freeze({ text: 'the edge of the fields', twinOf: 'the waterfront', needs: Object.freeze(['tier: ≤ village']) }),
+  Object.freeze({ text: 'the yards behind the houses', twinOf: 'the temple district', needs: Object.freeze(['tier: ≤ village']) }),
+]);
+
+/**
+ * THE ROUTE'S PLACE WORD AT VILLAGE SIZE AND BELOW (`historyRouteContext.js :: smallPlaceWordsOf`): the route
+ * context names the harbour districts, the riverside quarter, the mill and lumber district or the lower districts;
+ * a place of village size or smaller takes the word of its water in their stead (`{location}` and `{quarter}`).
+ * Keyed by the route context's `disasterProfile`; every other profile reads `inland`. VETOABLE wording.
+ */
+export const HISTORY_SMALL_PLACE_WORDS = Object.freeze({
+  coastal: Object.freeze({ text: 'the houses nearest the shore', needs: Object.freeze(['coast', 'tier: ≤ village']) }),
+  river: Object.freeze({ text: 'the houses nearest the river', needs: Object.freeze(['river', 'tier: ≤ village']) }),
+  inland: Object.freeze({ text: 'the low ground', needs: Object.freeze(['tier: ≤ village']) }),
+});

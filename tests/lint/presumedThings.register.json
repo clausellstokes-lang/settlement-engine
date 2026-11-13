@@ -860,7 +860,6 @@
   "src/generators/historyGenerator.js": [
    ["temple", "after-release", "A period of ambitious stone construction transformed the settlement's character. Civic buildings or a cathedral raised f"],
    ["temple", "after-release", "A period of ambitious stone construction transformed the settlement's character. Walls, civic buildings, or a cathedral "],
-   ["temple", "after-release", "the temple district"],
    ["walls", "after-release", "Something was sealed inside the walls during construction, deliberately"]
   ],
   "src/generators/historyTemplate.js": [
