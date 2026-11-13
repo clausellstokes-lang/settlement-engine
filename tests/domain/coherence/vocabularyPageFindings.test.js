@@ -107,7 +107,9 @@ describe('F1 — the generated vocabulary', () => {
     // no alchemist (the cold list's c26 and c30 lines)
     // re-keyed at the sixth seat (REVIEW-W2B-3, finding 1): `smith` left the page list with the seven role words (read 7
     // of 19), so "Iron ore deposits feed the forges here." is the walker's, no longer a page finding
-    expect(words(hamlet)).toEqual(['armedForce', 'clergy', 'house: alchemist', 'openTrade', 'streets']);
+    // re-keyed again by the chair's ruling on the third read (the role family withdrawn WHOLE): `clergy` and `armedForce`
+    // leave the page list too ("The priest manages the graveyard.", "The military command has taken charge …")
+    expect(words(hamlet)).toEqual(['house: alchemist', 'openTrade', 'streets']);
     expect(words(town)).toEqual([]);
   });
 
@@ -241,8 +243,13 @@ describe('item 1 — the precision read: senses that name nothing here, and the 
   test('THE LEAF OF A ROLE: a person among the town\'s people who holds it (role or title) makes it true', () => {
     const base = { tier: 'hamlet', population: 60, config: {}, stress: [], institutions: [{ name: 'Access to parish church' }], powerStructure: { factions: [] } };
     const page = { 'World/Relationships': ['The priest manages the graveyard and the feast days.'] };
-    expect(vocabularyPageFindings({ ...base, npcs: [{ id: 'a', role: 'the elder priest', title: 'the elder priest' }] }, page)).toEqual([]);
-    expect(vocabularyPageFindings({ ...base, npcs: [{ id: 'a', role: 'the militia captain', title: 'the militia captain' }] }, page).map((f) => f.word)).toEqual(['clergy']);
+    // re-keyed by identity (the role family left the page list whole, the chair's ruling on the third read): the leaf
+    // itself is pinned, as the page member read it before
+    const priest = { ...base, npcs: [{ id: 'a', role: 'the elder priest', title: 'the elder priest' }] };
+    const captain = { ...base, npcs: [{ id: 'a', role: 'the militia captain', title: 'the militia captain' }] };
+    const line = page['World/Relationships'][0];
+    expect(NEW_WORDS.clergy.absent(factsOf(priest), ['Access to parish church'], priest, line)).toBe(false);
+    expect(NEW_WORDS.clergy.absent(factsOf(captain), ['Access to parish church'], captain, line)).toBe(true);
   });
 });
 
@@ -402,8 +409,8 @@ describe('F7 (second read) — the market phrase and the alchemist phrase are on
  * two draws: a smith named as a catalogue house's customer, a prisoner and an armoury in a town with a watch and a court).
  * The chair's ruling: the seven ROLE words (smith, prisoner, physician, guard captain, notary, mason, armoury) leave the
  * page list, as the four earlier families did, with the reason on each word; they stay registered, so the walker's source
- * and printed arms and a line's conditions still read them. `clergy` and `armedForce` are not in the read that withdrew
- * the seven, and stay. Red at c3913f999 (each of the seven was a page finding).
+ * and printed arms and a line's conditions still read them. The chair's later ruling withdrew the family WHOLE (`clergy`
+ * and `armedForce` too; the last test). Red at c3913f999 (each of the seven was a page finding).
  */
 describe('R1 (third read, finding 1) — the role words leave the page list', () => {
   const ROLES = ['smith', 'prisoner', 'physician', 'guardCaptain', 'notary', 'mason', 'armoury'];
@@ -429,10 +436,16 @@ describe('R1 (third read, finding 1) — the role words leave the page list', ()
     for (const id of ROLES) expect(REGISTERED_WORDS[id].absent(factsOf(hamlet), ['Charcoal burner'], hamlet, page['Systems/Economics'][0]), id).toBe(true);
   });
 
-  test('clergy and armedForce, outside the read that withdrew the seven, stay on the page list', () => {
-    expect(NEW_WORDS.clergy.pageWithdrawn).toBeUndefined();
-    expect(NEW_WORDS.armedForce.pageWithdrawn).toBeUndefined();
-    const words = vocabularyPageFindings(hamlet, { 'World/Faith': ['The priest manages the graveyard and the feast days.'] }).map((f) => f.word);
-    expect(words).toEqual(['clergy']);
+  /**
+   * The chair's ruling on the third read (2026-11-13, 22:39 UTC): R1 as written, THE ROLE FAMILY WITHDRAWN WHOLE. The
+   * reader's own draw read the two words this seat had kept at 5 TRUE OF 10 (the War tab's instruction "From here you raise
+   * … troops", a power's own description with that power on the roster, "The Military Party takes its orders no longer").
+   * Re-keyed by identity from the pin that held them ON. Red at 5657a229c (both were page findings).
+   */
+  test('the family is withdrawn whole: clergy and armedForce leave the page list too, and stay registered', () => {
+    for (const id of ['clergy', 'armedForce']) expect(NEW_WORDS[id].pageWithdrawn, id).toMatch(/third read/);
+    const lines = ['The priest manages the graveyard and the feast days.', 'The troops hold the bridge every night at dusk.'];
+    expect(vocabularyPageFindings(hamlet, { 'World/Faith': lines })).toEqual([]);
+    expect(lines.flatMap((line) => newWordsNamedIn(line)).sort()).toEqual(['armedForce', 'clergy']);
   });
 });
