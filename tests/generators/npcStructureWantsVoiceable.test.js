@@ -28,8 +28,12 @@ function allGoals() {
   const out = {};
   for (const category of CATEGORIES) {
     for (const [condition, state] of Object.entries(CONDITIONS)) {
+      // COHERENCE-POWERS-5 (N1): the seat's holder reads the seat's row whatever its category, so the governing power is
+      // a hall no card heads, beside the category's top power at its weight (re-keyed by identity: A still heads the
+      // category's top power, dominant, and B the lesser, subordinate)
       const factions = [
-        { faction: 'Top', category, power: 100, isGoverning: true },
+        { faction: 'Hall', category: 'government', power: 100, isGoverning: true },
+        { faction: 'Top', category, power: 100 },
         { faction: 'Second', category, power: 10 },
       ];
       const settlement = { ...state, powerStructure: { ...(state.powerStructure || {}), factions } };

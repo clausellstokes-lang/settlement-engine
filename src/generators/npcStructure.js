@@ -26,6 +26,9 @@ import { factsOf } from '../domain/facts/factsOf.js';
 
 import { heldByOthers } from './hookVariety.js';
 import { powerOrderOf, structuralStandingOf, STANDING } from '../domain/people/membership.js';
+import { seatCandidatesOf } from '../domain/dossier/seatHolder.js';
+import { isSeatVacant } from '../domain/people/seatKeeper.js';
+import { cardOfficeOf } from '../domain/people/cardPowers.js';
 
 // Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
 const GOVERNANCE_FRACTURED = 'governance_fractured';
@@ -439,6 +442,33 @@ function npcRelevanceScore(npc, powerFactions, standing) {
   return score;
 }
 
+// ── THE SEAT-HOLDER (COHERENCE-POWERS-5, N1; REVIEW-POWERS-2 at e86d069be) ─────────────────────
+// The owner: whoever leads the town is "elevated yet still tied to an institution". The person the seat's own home names
+// (domain/dossier/seatHolder.js :: seatCandidatesOf, the first the Power tab's seat row prints; none while the seat stands
+// empty, seatKeeper.js) reads the SEAT's row for the record's condition — the government × condition × dominant entry,
+// "Holds the seat …" — whatever house they come from, and is always enriched (never left to the TOP_N cut). A dual-hat
+// holder's house follows, second, in the words the seat row already prints for it (powerStrata.js's "X, the boat-headman
+// and Elder"): "Still the boat-headman as well." It reads the card's own `title`. Draw-free.
+
+/**
+ * The card the seat's home names, among `npcs` (the cast being enriched); null where the seat stands empty or no one holds it.
+ * @param {Array<Record<string, any>>} npcs @param {Record<string, any>} settlement
+ * @returns {Record<string, any> | null}
+ */
+function seatHolderAmong(npcs, settlement) {
+  if (isSeatVacant(settlement)) return null;
+  return /** @type {Record<string, any> | undefined} */ (seatCandidatesOf({ ...settlement, npcs }).find((c) => !(/** @type {any} */ (c)).ousted)) || null;
+}
+
+/** The seat row's own fact, for the holder whose condition row the record's facts refuse. */
+const HOLDS_THE_SEAT = 'Holds the seat.';
+
+/** The holder's house, second: the dual-hat holder's house title, as the seat row prints it; '' for a one-hat holder. @param {Record<string, any>} npc */
+function holderHouseLineOf(npc) {
+  const title = String(npc?.title || '').trim();
+  return cardOfficeOf(npc) && title ? `Still ${title} as well.` : '';
+}
+
 // ── Main export ────────────────────────────────────────────────────────────────
 export function enrichNPCsWithStructure(npcs, settlement) {
   if (!npcs?.length) return npcs;
@@ -459,12 +489,14 @@ export function enrichNPCsWithStructure(npcs, settlement) {
   // figure already carries is refused and the figure keeps its own goal; its structural position
   // and constraint are still its situation's. Draw-free.
   const goalsNow = scored.map(({ npc }) => npc?.goal?.short);
+  const holder = seatHolderAmong(npcs, settlement); // COHERENCE-POWERS-5 (N1): the seat's row is the holder's, office first
 
   return scored.map(({ npc, standing }, idx) => {
-    if (idx >= TOP_N) return { ...npc, structuralRank: standing.standing };
+    const isHolder = npc === holder;
+    if (idx >= TOP_N && !isHolder) return { ...npc, structuralRank: standing.standing };
 
-    const cat  = npc.category || 'other';
-    const rank = getRank(standing, powerFactions);
+    const cat  = isHolder ? 'government' : npc.category || 'other';
+    const rank = isHolder ? 'dominant' : getRank(standing, powerFactions);
     const key  = `${cat}__${condition}__${rank}`;
     const looked = T[key] ? key : T[`${cat}__stable__${rank}`] ? `${cat}__stable__${rank}` : OTHER_STABLE_DOMINANT;
     // ⭐ CENSUS-1d unit 2 (the chair's R-A ruling of 2026-11-05 02:30; Appendix B item 3, kind T):
@@ -476,6 +508,12 @@ export function enrichNPCsWithStructure(npcs, settlement) {
       ? resolveDeclared(T[looked], { facts: facts ??= factsOf(settlement), tagged: true, poolId: `NPC_STRUCTURE.${looked}`, surface: 'npcs' }).line
       : null;
 
+    // COHERENCE-POWERS-5 (N1): where the record's facts refuse the seat's calm row (a crisis the condition does not name),
+    // the holder still holds the seat on the card — the bare fact the seat row prints, the house second; no constraint
+    // and no goal are claimed for it (the refusal's rule for every other card)
+    if (!tmpl && isHolder) {
+      return { ...npc, structuralPosition: [HOLDS_THE_SEAT, holderHouseLineOf(npc)].filter(Boolean).join(' '), settlementCondition: condition, structuralRank: standing.standing };
+    }
     if (!tmpl) return { ...npc, structuralRank: standing.standing };
 
     // activeGoal replaces goal.short on enriched NPCs so the DM sees one coherent goal.
@@ -491,7 +529,7 @@ export function enrichNPCsWithStructure(npcs, settlement) {
     return {
       ...npc,
       goal:               updatedGoal,
-      structuralPosition: lineText(tmpl.position),
+      structuralPosition: isHolder && holderHouseLineOf(npc) ? `${lineText(tmpl.position)} ${holderHouseLineOf(npc)}` : lineText(tmpl.position),
       activeConstraint:   lineText(tmpl.constraint),
       settlementCondition: condition,
       structuralRank:     standing.standing,
