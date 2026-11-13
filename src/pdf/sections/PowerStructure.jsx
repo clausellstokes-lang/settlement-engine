@@ -2,7 +2,7 @@
  * PowerStructure — chapter 02. Stability + legitimacy + factions.
  *
  * Mirrors PowerTab.jsx in full:
- *   - Public legitimacy banner with breakdown chips
+ *   - Public legitimacy banner: the score and its band (COHERENCE-POWERS-7: no breakdown in points; the owner, 2026-11-13)
  *   - Stability + governing authority (with the governing modifier, STOP-1) + governance fractured warning
  *   - Governance: the screen's one governance paragraph (OWNER-WORDS-DOSSIER item 3)
  *   - Stacked power-distribution bar (all factions in one viz)
@@ -60,7 +60,6 @@ export function PowerStructure({ settlement, narrativeMode, vm, stateProse, prim
           score={p.legitimacy.score ?? null}
           scoreLabel={cap(p.legitimacy.label) || ''}
           tone={legitTone(p.legitimacy.score)}
-          breakdown={p.legitimacyBreakdown}
           footer={p.governanceFractured ? 'Governance fractured.' : null}
         />
       )}

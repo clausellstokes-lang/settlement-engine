@@ -327,14 +327,19 @@ describe('UX consolidation — Power (T2-17..T2-19)', () => {
     expect(text).not.toContain('Governing authority'); // anchored: the chain block is on this render
   });
 
-  it('THE TRIM (2026-11-01): a modifier of 0 is not a chip, and the heading goes when nothing moved', () => {
+  // Re-keyed by identity, COHERENCE-POWERS-7 (the owner, 2026-11-13: show the ratings, never the machinery; cold list
+  // REVIEW-W2A-3 MEDIUM #20 #51 #107 #169 #199 #287): THE TRIM's moved chips are gone too — no modifier prints as a
+  // chip, moved or not, and the heading never prints; the score and its band stay (asserted on this render).
+  it('THE TRIM (2026-11-01), then the owner\'s ratings-not-machinery (2026-11-13): no modifier is a chip and the heading never prints', () => {
     const leg = town.powerStructure.publicLegitimacy;
     const mixed = { ...town, powerStructure: { ...town.powerStructure, publicLegitimacy: { ...leg, breakdown: { prosperity: 8, safety: 0, defense: -3, food: 0 } } } };
     const a = render(<PowerTab powerStructure={mixed.powerStructure} settlement={mixed} narrativeNote={null} publicDossier />).container.textContent;
-    expect(a).toContain('Breakdown');
-    expect(a).toContain('Prosperity +8');
-    expect(a).toContain('Defense -3');
-    expect(a).not.toContain('Safety 0'); // anchored: the two moved chips are asserted on this render
+    expect(a).toContain('Public legitimacy');
+    expect(a).toContain(String(leg.score));
+    expect(a).not.toContain('Breakdown'); // anchored: the score is asserted on this render
+    expect(a).not.toContain('Prosperity +8');
+    expect(a).not.toContain('Defense -3');
+    expect(a).not.toContain('Safety 0');
     expect(a).not.toContain('Food 0');
     cleanup();
     const still = { ...town, powerStructure: { ...town.powerStructure, publicLegitimacy: { ...leg, breakdown: { prosperity: 0, safety: 0, defense: 0, food: 0 }, governanceFractured: true } } };
@@ -343,10 +348,13 @@ describe('UX consolidation — Power (T2-17..T2-19)', () => {
     expect(b).not.toContain('Breakdown'); // anchored: the fracture note on this render
   });
 
-  it('T2-18: the legitimacy breakdown label is "Breakdown" and the fracture note is one sentence', () => {
+  // Re-keyed by identity, COHERENCE-POWERS-7 (the owner, 2026-11-13: ratings, never the machinery): the breakdown and
+  // its label left the page; the score's own label stays.
+  it('T2-18, then 2026-11-13: no "Breakdown" label and no base figure; the fracture note is one sentence', () => {
     const text = view({ publicDossier: true });
-    expect(text).toContain('Breakdown');
-    expect(text).not.toContain('(base 50)'); // anchored: toContain('Breakdown') on this render
+    expect(text).toContain('Public legitimacy');
+    expect(text).not.toContain('Breakdown'); // anchored: toContain('Public legitimacy') on this render
+    expect(text).not.toContain('(base 50)'); // anchored: toContain('Public legitimacy') on this render
     const fractured = { ...town, powerStructure: { ...town.powerStructure, publicLegitimacy: { ...town.powerStructure.publicLegitimacy, governanceFractured: true } } };
     cleanup();
     const f = render(<PowerTab powerStructure={fractured.powerStructure} settlement={fractured} narrativeNote={null} publicDossier />).container.textContent;

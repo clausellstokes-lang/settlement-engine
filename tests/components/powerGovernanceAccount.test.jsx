@@ -55,10 +55,11 @@ describe('the governance block is one paragraph', () => {
     expect(block.textContent).toContain("Thieves' Guild"); // the arrangement is the seed's (condition (e)); the name is the fact
     expect(block.textContent).toContain('Religious Authorities');
     const page = container.textContent || '';
-    // The figure stays as data: the score, the band and the breakdown chips.
+    // The figure stays as data: the score and the band. Re-keyed by identity, COHERENCE-POWERS-7 (the owner, 2026-11-13:
+    // ratings, never the machinery): the breakdown chips left; their causes are the paragraph's words.
     expect(page).toContain('Public legitimacy');
     expect(page).toContain('Legitimacy Crisis');
-    expect(page).toContain('Prosperity -20');
+    expect(page).not.toContain('Prosperity -20'); // anchored: the score's band is asserted on this render
     // The three pieces are gone: the desk's own legitimacy and hall readings, and the vignette.
     const desk = powerStateProse(s, {}, { seed: 'polaovo', audience: 'dm' });
     for (const rung of [desk.legitimacyBanner, desk.legitimacyLens, desk.stabilityHeader]) {

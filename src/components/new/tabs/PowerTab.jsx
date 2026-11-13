@@ -3,7 +3,7 @@ import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 import React, { useEffect, useRef, useState } from 'react';
 import { FS, MUTED, swatch } from '../../theme.js';
 import { Section } from '../Primitives';
-import { LITERARY_TITLE, literaryTitle, tokenCase } from '../labelLadder.js';
+import { LITERARY_TITLE, literaryTitle } from '../labelLadder.js';
 import { NarrativeNote } from '../NarrativeNote';
 import { FACTION_COLORS } from '../tabConstants';
 import { useStore } from '../../../store/index.js';
@@ -212,7 +212,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
   // off one — only dm_notes/ai_notes are — so without this line the corpus would light on a
   // free/anon visitor's view. Since B10(a) (SW-B7b) the shared page prints the desk the owner's
   // player view drew, shipped at the save; an unstamped record is SILENT at every mount. The DATUM is
-  // untouched either way: the score, the label, the breakdown chips and the fracture note
+  // untouched either way: the score, the label and the fracture note
   // never read the desk.
   // ⚠ THE AUDIENCE IS LOAD-BEARING, AND OMITTING IT SILENTLY DARKENS AUTHORED CONTENT.
   // All FOUR of DS-POW-6's capture pools are 100% `dm-only` (measured: 3/3 covert variants
@@ -299,31 +299,11 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
                 <span style={{fontSize: FS['14'],fontWeight:700,color:leg.color}}>{leg.label}</span>
               </div>
             </div>
-            {/* Breakdown chips — THE TRIM (the owner, 2026-11-01, ODQ §934.103; rubric R4): a
-                modifier of 0 says nothing, so only the modifiers that moved the score are
-                shown, and the heading goes with them when none did. The fracture note below
-                keeps its place either way. */}
+            {/* COHERENCE-POWERS-7 (the owner, 2026-11-13: show the ratings, never the machinery): the score's
+                breakdown in points left the page (cold list REVIEW-W2A-3, MEDIUM #20 #51 #107 #169 #199 #287); its
+                causes are said in words in the governance paragraph below (governanceAccount.js). The fracture note
+                keeps its place. */}
             <div style={{flex:1,minWidth:180}}>
-              {(() => {
-                const moved = Object.entries(leg.breakdown || {}).filter(([, v]) => Number(v) !== 0);
-                return moved.length > 0 && (<>
-              <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:5}}>
-                Breakdown
-              </div>
-              <div style={{display:'flex',gap:5,flexWrap:'wrap'}}>
-                {moved.map(([k,v]) => (
-                  <div key={k} style={{
-                    fontSize:chromeFontSize(FS.xxs, mobile), fontWeight:700, padding:'2px 8px',
-                    background: v > 0 ? '#f0faf4' : v < 0 ? '#fdf4f4' : '#f5f0e8',
-                    color:      v > 0 ? '#1a5a28' : v < 0 ? '#8b1a1a' : '#9c8068',
-                    border: `1px solid ${v > 0 ? '#a8d8b0' : v < 0 ? '#e8c0c0' : '#e0d0b0'}`,
-                  }}>
-                    {tokenCase(k)} {v > 0 ? `+${v}` : v}
-                  </div>
-                ))}
-              </div>
-                </>);
-              })()}
               {leg.governanceFractured && (
                 <div style={{marginTop:8,background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'6px 10px',fontSize: proseFontSize(FS['11.5'], mobile),color:swatch['#5A1A1A'],lineHeight:1.4}}>
                   <strong>Governance fractured.</strong>
