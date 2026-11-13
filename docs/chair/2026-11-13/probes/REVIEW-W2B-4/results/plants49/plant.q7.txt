@@ -1,0 +1,2 @@
+     × the pools re-based by name at point 49: each listed pool reads EXACTLY its named rows, and the list never grows past seven
+      Tests  1 failed | 14 passed (15)

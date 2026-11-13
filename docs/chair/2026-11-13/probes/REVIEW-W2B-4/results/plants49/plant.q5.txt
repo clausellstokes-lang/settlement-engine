@@ -1,0 +1,3 @@
+     × SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished
+     × A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live
+      Tests  2 failed | 79 passed (81)

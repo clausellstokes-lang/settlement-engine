@@ -1,0 +1,3 @@
+     × POOLS: the tree reads exactly the register, with no pool unplaced and no atom unlayered
+     × the pools re-based by name at point 49: each listed pool reads EXACTLY its named rows, and the list never grows past seven
+      Tests  2 failed | 13 passed (15)

@@ -1,0 +1,2 @@
+     × ⛔ no stale strip row, and every row names one of the two reasons (or a ruled after-base reason of the register)
+      Tests  1 failed | 42 passed (43)

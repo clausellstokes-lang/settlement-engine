@@ -1,0 +1,7 @@
+FILES EXIT 0
+ Test Files  9 passed (9)
+      Tests  332 passed (332)
+DOOR [node scripts/check-writer-reach.mjs] EXIT 0 :: WRWALKER HOLD — judged 12345 · LIT 674 · LIT-NAME 10258 · DARK 1413 (reviewable 396) · pending-surface debt: none 
+DOOR [node scripts/check-observed-shape-readers.mjs] EXIT 0 :: M8/M9 explained-writer bank (H26 / CR-OSR-FREEZE-6-R2): 16 declared identit(ies) whose writer the GENERATION corpus never runs; banked and enforced 78 read(s) across 15 of them on this scan. Each entr
+DOOR [node scripts/presumed-things-door.mjs --check] EXIT 0 :: fresh 0 · stale 0 · first-register stale 0 · banked 4720 · strips fresh 0 stale 0 banked 107 
+DOOR [node scripts/fact-layers-door.mjs --check] EXIT 0 :: fact-layers door: 0 rise(s), 0 fall(s) 

@@ -1,0 +1,3 @@
+     × ⛔ every source literal that names a thing declares it, or has its row
+     × the admitted instruments: each reads EXACTLY its named counts, and only these two are admitted
+      Tests  2 failed | 41 passed (43)

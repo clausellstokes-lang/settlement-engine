@@ -1,0 +1,2 @@
+export const PLANTED_Q1 = 'The parish church stands at the end of the lane and rings at dusk.';
+export function pageCensusFindings

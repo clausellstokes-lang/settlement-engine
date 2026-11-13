@@ -1,0 +1,2 @@
+     × ⛔ every source literal that names a thing declares it, or has its row
+      Tests  1 failed | 42 passed (43)

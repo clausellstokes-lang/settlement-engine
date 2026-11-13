@@ -1,0 +1,2 @@
+Error: writer-reach dark register row "situationDesc on economicState" is UNVERIFIABLE (clause E): src/generators/narrativeGenerator.js does not READ "situationDesc" in code. A name that appears only in a comment or a string literal is prose, not a use — the citation law.
+      Tests  52 skipped (52)
