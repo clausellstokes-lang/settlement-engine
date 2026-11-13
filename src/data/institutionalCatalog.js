@@ -1008,7 +1008,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     // Its own text says it is found in cities; it was listed at town only, and on the Magic shelf,
     // until 2026-09-30.
     {
-      shared: { name: 'Elder Grove Council', face: 'the grove elder', desc: "A council of senior druids who govern their circle's relationship with the city. They may maintain a hidden grove beneath the streets, mediate between urban expansion and wild places, or serve as ecological advisors to the ruling authority.", tags: ['religious'], magicLicense: 'none', priorityCategory: 'military' },
+      shared: { name: 'Elder Grove Council', face: 'the grove elder', desc: "A council of senior druids who govern their circle's relationship with the settlement around it. They may maintain a hidden grove beneath the streets, mediate between the settlement's growth and wild places, or serve as ecological advisors to the ruling authority.", tags: ['religious'], magicLicense: 'none', priorityCategory: 'military' },
       at: {
         town: { baseChance: 0.15 },
         city: { baseChance: 0.2 },

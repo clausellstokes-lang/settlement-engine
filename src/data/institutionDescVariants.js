@@ -747,8 +747,8 @@ const PAIRS = [
     "Abandoned babies and young children are received here and given plain care until apprenticeship, a family placement, or a childhood spent in the house itself. Generally a church foundation. The wheel in the wall admits a child by night, no name asked.",
   ],
   [
-    "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold the line between the city's spread and the wild, or advise its rulers on the land.",
-    "A council of elder druids charged with their circle's standing in the city: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters.",
+    "Senior druids who govern how their circle deals with the town. They may keep a grove hidden beneath the streets, hold the line between the town's spread and the wild, or advise its rulers on the land.",
+    "A council of elder druids charged with their circle's standing in the town: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters.",
   ],
   [
     "A man of the lord's choosing governs, and noble authority overrides whatever the town was accustomed to.",
@@ -2072,8 +2072,6 @@ export const DESC_VARIANT_DECLARATIONS = Object.freeze({
   "The town's bread. Prices fixed by the guild.": Object.freeze({ needs: Object.freeze(["guild"]) }), // town|Crafts|Bakers (5-15)#0
   "Bread baked for sale, with the guild setting the price.": Object.freeze({ needs: Object.freeze(["guild"]) }), // town|Crafts|Bakers (5-15)#1
   "Each congregation buries its own, and the sexton keeps the roll that inheritance disputes are settled from. Guilds buy plots together so their members lie among their trade.": Object.freeze({ needs: Object.freeze(["guild"]) }), // town|Religious|Parish burial grounds#1
-  "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold the line between the city's spread and the wild, or advise its rulers on the land.": Object.freeze({ needs: Object.freeze(["tier: ≥ city"]) }), // town|Religious|Elder Grove Council#0
-  "A council of elder druids charged with their circle's standing in the city: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters.": Object.freeze({ needs: Object.freeze(["tier: ≥ city"]) }), // town|Religious|Elder Grove Council#1
   "The official voice, reading proclamations, market prices, and news at set hours in the market square. Town or guild pays his wage.": Object.freeze({ needs: Object.freeze(["market"]) }), // town|Government|Town crier#0
   "At fixed times he stands in the market square and calls out the proclamations, the prices, and the news. His employer is the town, or else a guild.": Object.freeze({ needs: Object.freeze(["market"]) }), // town|Government|Town crier#1
   "An innermost stronghold, the city's final hold under siege.": Object.freeze({ needs: Object.freeze(["tier: ≥ city"]) }), // town|Defense|Citadel#1

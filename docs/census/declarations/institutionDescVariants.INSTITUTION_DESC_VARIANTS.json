@@ -3108,20 +3108,16 @@
     },
     {
       "id": "town|Religious|Elder Grove Council#0",
-      "text": "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold the line between the city's spread and the wild, or advise its rulers on the land.",
-      "needs": [
-        "tier: ≥ city"
-      ],
+      "text": "Senior druids who govern how their circle deals with the town. They may keep a grove hidden beneath the streets, hold the line between the town's spread and the wild, or advise its rulers on the land.",
+      "needs": [],
       "excludes": [],
       "crisis": [],
       "colour": false
     },
     {
       "id": "town|Religious|Elder Grove Council#1",
-      "text": "A council of elder druids charged with their circle's standing in the city: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters.",
-      "needs": [
-        "tier: ≥ city"
-      ],
+      "text": "A council of elder druids charged with their circle's standing in the town: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters.",
+      "needs": [],
       "excludes": [],
       "crisis": [],
       "colour": false
