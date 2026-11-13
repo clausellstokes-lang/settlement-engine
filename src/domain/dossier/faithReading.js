@@ -100,8 +100,13 @@ const text = (x) => (typeof x === 'string' ? x.trim() : '');
 /** @param {unknown} x @param {number} fallback @returns {number} */
 const num = (x, fallback) => (typeof x === 'number' && Number.isFinite(x) ? x : fallback);
 
-/** "Access to parish church": the place has no church; its people use a neighbour's. */
-const ACCESS_RE = /^access to\b/i;
+/**
+ * "Access to parish church": the place has no church; its people use a neighbour's. R2-CODE-B item 6
+ * (the cold list REVIEW-W2A-3 #180: "its people walk to the next village's parish church" in a thorp
+ * whose only "Access to" row is "Access to external mill"): the access must be to a house of worship,
+ * by its catalogue key or the seam's label, never any "Access to …" row.
+ */
+const ACCESS_RE = /^access to (?:a |the )?(?:parish church|house of worship)\b/i;
 
 /**
  * The houses of worship, in the order the prose names them (the greatest first). A row
@@ -322,10 +327,15 @@ export function observancePhraseOf(dial) {
 }
 
 /** @param {number} dial @returns {string} the quiet line, banded by the dial */
-function quietOf(dial) {
-  if (dial <= 25) return 'The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and the shrines answer to no named god.';
-  if (dial >= 75) return 'The people keep their own quiet observances, and keep them faithfully. No single creed holds sway, and the shrines answer to no named god.';
-  return QUIET_OBSERVANCES_LINE;
+function quietOf(dial, shrine = true) {
+  const line = dial <= 25
+    ? 'The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and the shrines answer to no named god.'
+    : dial >= 75
+      ? 'The people keep their own quiet observances, and keep them faithfully. No single creed holds sway, and the shrines answer to no named god.'
+      : QUIET_OBSERVANCES_LINE;
+  // R2-CODE-B item 6: "the shrines" presumes a shrine the roster holds (the reading's own `shrine`); where it
+  // holds none, the line keeps its creed and names no shrine.
+  return shrine ? line : line.replace(', and the shrines answer to no named god.', ', and no god is named here.');
 }
 
 /** @param {SeniorCleric} c @returns {string} */
@@ -372,7 +382,7 @@ export function faithLinesOf(reading, { tierNoun = null } = {}) {
     out.push(`No church building stands in ${place}, but the faith is organised here.`);
     if (cleric) out.push(clericLead(cleric));
   } else {
-    return Object.freeze([quietOf(reading.dial)]);
+    return Object.freeze([quietOf(reading.dial, reading.shrine)]);
   }
   if (faction) out.push(factionLine(faction, place));
   if (reading.tithe) out.push('Tithes are collected.');
