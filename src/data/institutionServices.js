@@ -647,7 +647,7 @@ export const INSTITUTION_SERVICES = {
   },
 
   "Mine (open cast)": {
-    "Raw extraction": { on: true,  p: 1.0, desc: "Surface-level ore extraction. Lower yield than shaft mining but cheaper to operate." },
+    "Raw extraction": { on: true,  p: 1.0, desc: "Surface-level ore extraction. Lower yield than shaft mining but cheaper to operate.", excludes: ["tier: ≥ town"] },
     "Labor hire": { on: false, p: 0.6, desc: "Hire out mine workers to other operations during off-season." }
   },
 
@@ -1803,5 +1803,11 @@ export const SERVICE_DESC_SIBLINGS = Object.freeze({
   "Organised road transport for goods between towns. Reliable, guild-backed.": Object.freeze([
     Object.freeze({ text: "Organised road transport for goods between towns. Reliable, guild-backed.", excludes: Object.freeze(['crisis: under_siege']) }),
     Object.freeze({ text: "Road transport for goods between towns, guild-backed. With the roads cut, the wagons stand idle in the yard.", twinOf: "Organised road transport for goods between towns. Reliable, guild-backed.", crisis: Object.freeze(['under_siege']) }),
+  ]),
+  // W2-FIX-DATA-3 (2026-11-13; REVIEW-W2-FIX-DATA F3): every Mine takes the open-cast menu, and at town size
+  // and above every text the Mine prints works a shaft or an adit. VETOABLE wording (the owner's).
+  "Surface-level ore extraction. Lower yield than shaft mining but cheaper to operate.": Object.freeze([
+    Object.freeze({ text: "Surface-level ore extraction. Lower yield than shaft mining but cheaper to operate.", excludes: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: "Ore cut underground by the crews and brought out by cart for sorting.", twinOf: "Surface-level ore extraction. Lower yield than shaft mining but cheaper to operate.", needs: Object.freeze(['tier: ≥ town']) }),
   ]),
 });

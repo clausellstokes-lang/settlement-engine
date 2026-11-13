@@ -3170,7 +3170,9 @@
       "id": "Mine (open cast)|Raw extraction",
       "text": "Surface-level ore extraction. Lower yield than shaft mining but cheaper to operate.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "tier: ≥ town"
+      ],
       "crisis": [],
       "colour": false
     },

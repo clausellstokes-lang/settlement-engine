@@ -54042,7 +54042,7 @@
       "name": "INSTITUTION_SERVICES",
       "drawKind": "R",
       "drawSite": "services/institutionServices.js:69/203 one _rng()<p roll per eligible definition (A-printed at serviceRollMaterializatio",
-      "lines": 995,
+      "lines": 996,
       "declares": [],
       "lineDeclares": {
         "coast": 2,
@@ -54057,16 +54057,18 @@
         "militia": 3,
         "navigable": 3,
         "no crisis: under_siege": 3,
+        "no tier: ≥ town": 1,
         "no walls": 2,
         "organised crime": 1,
         "river": 2,
         "terrain: forest": 1,
         "tier: ≤ village": 2,
         "tier: ≥ city": 3,
+        "tier: ≥ town": 1,
         "walls": 4,
         "watch": 6
       },
-      "undeclared": 936,
+      "undeclared": 935,
       "crisisScoped": false
     },
     {
