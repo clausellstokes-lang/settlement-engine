@@ -2899,7 +2899,7 @@ supplies the ancestry.
 
 **`Invasion & War`: neither walls nor force** {crisis-scoped}
 1. `[ledger · crisis: any · no crisis: threat · no watch]` {settlement} has no line and no force. Organized aggression cannot be resisted here; what preserves the town is distance, diplomacy, or being beneath notice.
-2. `[counterforce · no threat · crisis: any]` Nothing threatens {settlement} now, and nothing about the town would stop it if something did. Its safety rests on nobody wanting it.
+2. `[counterforce · no threat · crisis: any]` Nothing has come for {settlement}, and nothing about the town would stop whatever did. Its safety rests on nobody having wanted it.
 3. `[street · no threat · crisis: any]` The town's plan for an army is to not be interesting to one, and everybody here can state the plan.
 4. `[counterforce · threat · crisis: any · no watch · no crisis: occupied]` {settlement} has no line and no force, and the threat now at hand has noticed both.
 5. `[street · threat · crisis: any · no watch · no crisis: under_siege · no crisis: occupied]` With trouble at hand, {settlement} has no wall to close and nobody trained to send, and each household is deciding for itself whether to stay.

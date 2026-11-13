@@ -1080,7 +1080,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no threat",
             "crisis: any"
           ],
-          "text": "Nothing threatens {settlement} now, and nothing about the town would stop it if something did. Its safety rests on nobody wanting it.",
+          "text": "Nothing has come for {settlement}, and nothing about the town would stop whatever did. Its safety rests on nobody having wanted it.",
           "slots": [
             "settlement"
           ],
