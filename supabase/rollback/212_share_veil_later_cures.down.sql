@@ -2,11 +2,11 @@
 --
 -- DATA-SAFE and WHOLE, per supabase/rollback/README.md: 212 wrote no row, column, constraint or
 -- policy, so its reversal is entirely schema: the five functions it restated go back to 211's
--- statements (the file at 333b33973, sha256 eface6d0...0be01, copied verbatim), then the ten
+-- statements (the file at 333b33973, sha256 eface6d0...0be01, copied verbatim), then the
 -- helpers it created are dropped by signature.
 --
 -- ORDER (last in, first out): run this BEFORE 211's own down file. 211's down file drops only the
--- forty helpers 211 creates, so run after 212 without this one it would leave 212's ten behind.
+-- forty helpers 211 creates, so run after 212 without this one it would leave 212's own behind.
 -- The functions go back FIRST because they call the helpers; dropping a helper first would leave
 -- them raising "function does not exist" for the width of the script. CREATE OR REPLACE keeps each
 -- function's grants, which 212 restated unchanged; the two reads' grants are restated here too.
@@ -349,8 +349,10 @@ $$;
 revoke execute on function public.import_gallery_dossier(text) from public;
 grant execute on function public.import_gallery_dossier(text) to authenticated;
 
--- ── 2. the ten helpers 212 created, by signature ──────────────────────────────────────────────────
+-- ── 2. the helpers 212 created, by signature (twelve; COHERENCE-VEIL-8 added _fold and _folded_name) ──────────────────────────────────────────────────
 drop function if exists public._gallery_veil_embeds(jsonb, text[]);
+drop function if exists public._gallery_veil_fold(text);
+drop function if exists public._gallery_veil_folded_name(text, text, jsonb);
 drop function if exists public._gallery_veil_hidden_name(jsonb, jsonb, text[]);
 drop function if exists public._gallery_veil_member_revealed(jsonb, jsonb, boolean, boolean, boolean);
 drop function if exists public._gallery_veil_names(jsonb, jsonb);
