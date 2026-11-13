@@ -29,7 +29,6 @@
   {"thing": "docks", "path": ".economicState.tradeDependencies[].resource", "text": "harbour", "reason": "hedge", "note": "\"crossroads or harbour\", \"Trade access + harbour\": the alternative stated", "towns": 6},
   {"thing": "docks", "path": ".economicViability.warnings[].description", "text": "Trade access + harbour", "reason": "hedge", "note": "the builder's dependency label: an alternative stated", "towns": 6},
   {"thing": "docks", "path": ".institutions[].desc", "text": "by road or harbour", "reason": "hedge", "note": "\"by road or harbour\": the sentence states the alternative", "towns": 22},
-  {"thing": "garrison", "path": ".economicViability.warnings[].suggestedFixes[]", "text": "Add Town Walls or Garrison", "reason": "hedge", "note": "advice to the builder: what to add", "towns": 4},
   {"thing": "garrison", "path": ".institutions[].desc", "text": "garrison contracts", "reason": "figure", "note": "the hire company's trade, wherever it is hired", "towns": 5},
   {"thing": "garrison", "path": ".institutions[].desc", "text": "garrison work", "reason": "figure", "note": "the hire company's trade, wherever it is hired", "towns": 5},
   {"thing": "market", "path": ".history.founding.reason", "text": "grew as an agricultural market center", "reason": "past", "note": "the founding: a past event", "towns": 1},
@@ -45,7 +44,6 @@
   {"thing": "mercenary", "path": ".institutions[].desc", "text": "retired soldiers and sellswords", "reason": "past", "note": "retired: their service is past", "towns": 12},
   {"thing": "mercenary", "path": ".powerStructure.recentConflict", "text": "whether to raise a levy or hire mercenaries", "reason": "hedge", "note": "\"whether to … hire\": not yet hired", "towns": 5},
   {"thing": "mercenary", "path": ".pressureSentence", "text": "whether to raise a levy or hire mercenaries", "reason": "hedge", "note": "\"whether to … hire\": not yet hired", "towns": 2},
-  {"thing": "walls", "path": ".economicViability.warnings[].suggestedFixes[]", "text": "Add Town Walls or Garrison", "reason": "hedge", "note": "advice to the builder: what to add", "towns": 4},
   {"thing": "walls", "path": ".history.historicalEvents[].plotHooks[]", "text": "sealed inside the walls during construction", "reason": "past", "note": "a past event", "towns": 5},
   {"thing": "walls", "path": ".institutions[].desc", "text": "walls and churches of half the region", "reason": "hedge", "note": "the region's walls, not this town's", "towns": 7},
   {"thing": "walls", "path": ".npcs[].presentation.impression", "text": "The walls are covered with charts", "reason": "ruling-3", "note": "a room's walls, not the perimeter", "towns": 8},
@@ -442,7 +440,6 @@
    ["docks", "after-release", "Harbour Master's Office"],
    ["granary", "after-release", "State granary complex"],
    ["mercenary", "after-release", "Free company hall"],
-   ["mill", "after-release", "Access to external mill"],
    ["temple", "after-release", "Cathedral (10,000+ only)"],
    ["temple", "after-release", "Parish churches (10-30)"],
    ["temple", "after-release", "Parish churches (2-5)"],
@@ -458,7 +455,6 @@
    ["garrison", "after-release", "Garrison facilities used for ongoing training of soldiers and militia."],
    ["garrison", "after-release", "Hire trained soldiers for military campaigns, garrison duty, and escorts."],
    ["garrison", "after-release", "Multiple garrison points allow fast response to threats anywhere in the city."],
-   ["garrison", "after-release", "Signal to neighbouring settlements or the garrison of approaching threats."],
    ["granary", "after-release", "Some granaries include milling capacity."],
    ["guildhall", "after-release", "Specialist adventuring supply shops adjacent to guild halls."],
    ["market", "after-release", "Assess the black-market value of items. Discretion guaranteed."],
@@ -466,7 +462,6 @@
    ["market", "after-release", "Auction of goods, animals, and estates on market days."],
    ["market", "after-release", "Each district has its own market square serving local needs."],
    ["market", "after-release", "Full criminal marketplace for goods and services unavailable above ground."],
-   ["market", "after-release", "Guild membership opens access to restricted markets and contracts."],
    ["market", "after-release", "Guild-certified goods for regional markets"],
    ["market", "after-release", "In good years, small surpluses sold at market. Rare and seasonal."],
    ["market", "after-release", "Large-scale commercial facilitation across regional markets."],
@@ -480,7 +475,6 @@
    ["mercenary", "after-release", "Find workers, mercenaries"],
    ["mercenary", "after-release", "Workers, mercenaries, guides available"],
    ["militia", "after-release", "Professional soldiers available to train militia or household guards."],
-   ["mill", "after-release", "Grain carted to a mill outside the settlement and brought back as flour."],
    ["mill", "after-release", "Some mills repurposed for fulling wool cloth."],
    ["mill", "after-release", "Water-powered sawmill function at some larger mills."],
    ["temple", "after-release", "Every district has a temple. Religious observance accessible to all."],
@@ -539,11 +533,9 @@
    ["militia", "after-release", "the militia captain"],
    ["mill", "after-release", "A water- or ox-powered mill producing planks and beams for the construction trade. A town near timber can supply an enti"],
    ["mill", "after-release", "A water- or ox-powered mill producing planks and beams for the construction trade. Employs a permanent crew."],
-   ["mill", "after-release", "Access to external mill"],
    ["mill", "after-release", "Grain, fulling, and saw mills along every usable watercourse, many under guild or civic licence."],
    ["mill", "after-release", "Manor mill with milling monopoly (banalité)."],
    ["mill", "after-release", "Multiple mills for grain, fulling cloth."],
-   ["mill", "after-release", "Must travel to manor/village mill. Home grinding often illegal."],
    ["mill", "after-release", "Water or windmill with monopoly milling rights. The miller is often the wealthiest and most resented figure in the villa"],
    ["prison", "after-release", "State prison complex: political prisoners, debtors, convicted criminals held separately."],
    ["prison", "after-release", "the prison warden"],
@@ -664,9 +656,6 @@
    ["temple", "after-release", "The church wants approval rights over market day activities. The village reeve disagrees."],
    ["temple", "after-release", "The church wants approval rights over who may trade and when. The village reeve disagrees."]
   ],
-  "src/data/resourceChains.js": [
-   ["mill", "after-release", "Access to external mill"]
-  ],
   "src/data/resourceData.js": [
    ["bank", "after-release", "Silver, gold, or copper deposits; attracts merchants and banking infrastructure"],
    ["docks", "after-release", "A deep harbour requires coastal port access."],
@@ -746,7 +735,6 @@
    ["docks", "after-release", "Harbour master's office"],
    ["market", "after-release", "Magical item market"],
    ["mercenary", "after-release", "Free company hall"],
-   ["mill", "after-release", "Access to external mill"],
    ["mill", "after-release", "River Mill Industry"],
    ["walls", "after-release", "City walls and gates"],
    ["watch", "after-release", "Professional city watch"]
@@ -773,7 +761,6 @@
    ["bank", "after-release", "Banking & Finance"],
    ["docks", "after-release", "Trade access + harbour"],
    ["mercenary", "after-release", "Armed escort & mercenary hire"],
-   ["mill", "after-release", "access to external mill"],
    ["mill", "after-release", "Grain is processed at the lord's mill under feudal monopoly (banalité). "],
    ["mill", "after-release", "the mill toll takes any surplus. Without the lord's mill, there would be no flour at all."],
    ["watch", "after-release", "professional city watch"]
@@ -809,10 +796,7 @@
   ],
   "src/generators/economy/foodBalance.js": [
    ["docks", "other-lane", "Ships sit across the harbour mouth, an enemy's or pirates', and nothing enters or leaves. The town has "],
-   ["granary", "other-lane", "Add granary for long-term storage"],
-   ["granary", "other-lane", "Add granary or grain storage for reserves"],
    ["granary", "other-lane", "Add Town granary, City granaries, or State granary complex"],
-   ["mill", "other-lane", "access to external mill"],
    ["mill", "other-lane", "Add Mill (water-powered or windmill) or Mills (2-5)"],
    ["war", "other-lane", "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Wo"]
   ],
@@ -833,10 +817,7 @@
    ["bank", "other-lane", "Banking institutions exist but the economy priority is very low."],
    ["bank", "other-lane", "Banking Without Economic Focus"],
    ["bank", "other-lane", "Raise Economy priority or remove Banking institutions"],
-   ["garrison", "other-lane", "Add Town Walls or Garrison"],
-   ["market", "other-lane", "Add Market Square, Merchants' Quarter, or Trade Guild"],
    ["temple", "other-lane", "Add a house of worship, a temple or a monastery"],
-   ["walls", "other-lane", "Add Town Walls or Garrison"],
    ["watch", "other-lane", "Add Thieves' Guild, Black Market, or City Watch"]
   ],
   "src/generators/factionDynamics.js": [
@@ -956,8 +937,7 @@
    ["watch", "after-release", " Operationally distinct from the command council: these are the soldiers and watchmen, not the officers who govern."]
   ],
   "src/generators/power/settlementNarrative.js": [
-   ["market", "after-release", " carries the memory of an occupation that officially ended. Collaborators and resisters still share the same streets, th"],
-   ["market", "after-release", " is not about craft standards. It is about who controls access to the market. "]
+   ["market", "after-release", " carries the memory of an occupation that officially ended. Collaborators and resisters still share the same streets, th"]
   ],
   "src/generators/power/stressFactions.js": [
    ["market", "after-release", " The revolt has disrupted labour supply and market operations. The power is divided between those demanding immediate su"],
@@ -1024,11 +1004,7 @@
   ],
   "src/generators/steps/stepMetadata.js": [
    ["granary", "after-release", "Re-weight emergent stressors against the real roster. Walls suppress sieges, granaries suppress famine."],
-   ["market", "after-release", "Choose which institutions exist (inn, mill, temple, market, etc.) for this size + culture."],
-   ["market", "after-release", "Collapse institutions that overlap (a market subsumes a stall, a guild subsumes its workshops)."],
-   ["mill", "after-release", "Choose which institutions exist (inn, mill, temple, market, etc.) for this size + culture."],
-   ["mill", "after-release", "Propagate one institution’s outputs (a mill makes flour; a baker can now exist)."],
-   ["temple", "after-release", "Choose which institutions exist (inn, mill, temple, market, etc.) for this size + culture."]
+   ["mill", "after-release", "Propagate one institution’s outputs (a mill makes flour; a baker can now exist)."]
   ],
   "src/generators/stressNarrative.js": [
    ["war", "after-release", " is in a kingdom at war and doing well out of it: army contracts pay, prices are high, and merchants with the right frie"]

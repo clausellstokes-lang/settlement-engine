@@ -57,16 +57,6 @@
    [
     "famine",
     "word",
-    "(Famine, Plague, Siege, Political Fracture, etc.) to shift the entire output. Stresses are not cosmetic. They modify ins"
-   ],
-   [
-    "plague",
-    "word",
-    "(Famine, Plague, Siege, Political Fracture, etc.) to shift the entire output. Stresses are not cosmetic. They modify ins"
-   ],
-   [
-    "famine",
-    "word",
     ". Famine + Political Fracture means food distribution is contested by powers, not just scarce. The Overview's crisis car"
    ],
    [
@@ -2248,11 +2238,6 @@
     "A visitor to {settlement} would not guess at the trouble from the streets; the town is shaken but standing."
    ],
    [
-    "openTrade",
-    "family",
-    "The town's living at {settlement} passes through a workshop that could not run without the arcane, and everybody in the "
-   ],
-   [
     "armedForce",
     "family",
     "The soldiers at {settlement} command its magic: the arcane houses answer to them, and their work goes first to the town'"
@@ -2296,11 +2281,6 @@
     "famineToCome",
     "family",
     "At {settlement} people go without what the town cannot make for itself, and most families know a bad year would find the"
-   ],
-   [
-    "famineToCome",
-    "family",
-    "Everyone at {settlement} knows the town is too big for what reaches it: what it cannot make is scarce and dear, and a ba"
    ],
    [
     "famineToCome",
@@ -2548,11 +2528,6 @@
     "famineToCome",
     "family",
     "{settlement} lives off its {good} and little else. One bad year for the {good} would be a hungry year for the whole town"
-   ],
-   [
-    "famineToCome",
-    "family",
-    "No one trade earns half of what {settlement} makes, so a bad year in any one of them would hurt without ruining it."
    ]
   ],
   "src/data/dossierStateProse/general.generated.js": [
@@ -2912,11 +2887,6 @@
     "law",
     "implied",
     "There is no law at {settlement} but what the gang bosses enforce. They keep a kind of order and charge for it, and whoev"
-   ],
-   [
-    "famineToCome",
-    "family",
-    "The {seat} keeps {settlement}'s loyalty only where nothing has gone wrong yet. One hard season would cost it most of wha"
    ],
    [
     "streets",
@@ -3523,11 +3493,6 @@
     "It is poor. The rites are kept and the building is not, and the clergy have started asking in ways they would rather not"
    ],
    [
-    "famineToCome",
-    "family",
-    "The faith here has no reserve. A bad year would not close it; a second bad year is a real question."
-   ],
-   [
     "house: shepherd",
     "family",
     "There is a hidden observance in {settlement}. Its shepherd holds an ordinary clerical post under another creed's roof."
@@ -4026,21 +3991,6 @@
    [
     "religiousHouses",
     "word",
-    "Services mean a walk of a few miles to the village house of worship."
-   ],
-   [
-    "religiousHouses",
-    "word",
-    "The nearest house of worship is the village's, a walk of a few miles away for services."
-   ],
-   [
-    "religiousHouses",
-    "word",
-    "The nearest house of worship is the village's, usually a few miles off."
-   ],
-   [
-    "religiousHouses",
-    "word",
     "Several quarters, each with its house of worship."
    ],
    [
@@ -4242,11 +4192,6 @@
     "house: alehouse",
     "family",
     "Malts barley for brewing on a modest scale, supplying the alehouses nearby. It needs grain to spare before it can work a"
-   ],
-   [
-    "clergy",
-    "family",
-    "A walled plot gated against livestock, kept by the households in turn. The rite waits for a priest passing through; the "
    ],
    [
     "house: adventurers' charter",
@@ -5490,11 +5435,6 @@
     "Performers, games, and live music at multiple venues nightly."
    ],
    [
-    "house: library",
-    "family",
-    "Member access to the guild library and research resources."
-   ],
-   [
     "physician",
     "family",
     "Physicians specialised in specific conditions, diseases, and treatments."
@@ -5630,11 +5570,6 @@
     "Rapid evacuation via teleportation in emergencies."
    ],
    [
-    "house: library",
-    "family",
-    "Access to district libraries and research facilities."
-   ],
-   [
     "house: performer",
     "family",
     "Commission or sponsor a production or performer."
@@ -5648,11 +5583,6 @@
     "shrine",
     "word",
     "Small offerings left at the shrine. Accumulated and forwarded to the temple."
-   ],
-   [
-    "shrine",
-    "word",
-    "Access to venerated relics and shrines for pilgrims."
    ]
   ],
   "src/data/institutionalCatalog.js": [
@@ -5810,16 +5740,6 @@
     "quarters",
     "word",
     "the district madam"
-   ],
-   [
-    "religiousHouses",
-    "word",
-    "A walk of a few miles to the village house of worship for services."
-   ],
-   [
-    "religiousHouses",
-    "word",
-    "Services mean the walk to the village house of worship, usually a few miles off."
    ],
    [
     "religiousHouses",
@@ -6212,11 +6132,6 @@
     "Full-scale tannery with multiple vats and a guild-trained workforce. Produces high-quality leather for shoes, armour, an"
    ],
    [
-    "resource: river_clay",
-    "family",
-    "Moulds and fires clay bricks for construction. Enables more permanent buildings. Requires clay deposits and fuel."
-   ],
-   [
     "house: butcher",
     "family",
     "the master butcher"
@@ -6270,11 +6185,6 @@
     "streets",
     "family",
     "Hundreds of houses of worship across all districts. The faith is woven into every neighbourhood."
-   ],
-   [
-    "clergy",
-    "family",
-    "A walled plot at the edge of the settlement, gated against livestock and kept by the households in turn. The rite is hel"
    ],
    [
     "clergy",
@@ -6978,19 +6888,7 @@
     " still works the streets. The two have settled on what each will put up with from the other."
    ]
   ],
-  "src/data/people/goalFamilies.js": [
-   [
-    "openTrade",
-    "family",
-    "Hold a share of every coin that passes through {guild} here."
-   ]
-  ],
   "src/data/people/handlerTieLines.js": [
-   [
-    "openTrade",
-    "family",
-    " pays for it in coin that never passes through a counting-house. In company the two of them speak only of ordinary busin"
-   ],
    [
     "prisoner",
     "family",
@@ -7000,11 +6898,6 @@
     "physician",
     "family",
     " says a physician can be sent in, once "
-   ],
-   [
-    "famineToCome",
-    "family",
-    " to get through a bad year and could not pay it back. Since then "
    ]
   ],
   "src/data/people/titleSecretsPresentations.js": [
@@ -7319,11 +7212,6 @@
     "Short with anyone who comes asking about a prisoner. Has heard it all before."
    ],
    [
-    "openTrade",
-    "family",
-    "Skims a little from the money that passes through the shop before it reaches its real owners"
-   ],
-   [
     "house: citadel",
     "family",
     "Has been selling stores from the citadel's armoury and writing them off as rusted and broken"
@@ -7487,11 +7375,6 @@
     "house: mine",
     "family",
     "the mine captain"
-   ],
-   [
-    "house: smelter",
-    "family",
-    "Has been keeping back ore from the tally and selling it to a smelter elsewhere"
    ],
    [
     "house: mine",
@@ -8519,11 +8402,6 @@
     "occupation",
     "word",
     "The occupiers take the revenue, and local offices work only under their eye."
-   ],
-   [
-    "prisoner",
-    "family",
-    "Something important (a resource, a prisoner, a decision) falls into the contested space between the powers. The players "
    ]
   ],
   "src/data/stressTypesMeta.js": [
@@ -8820,16 +8698,6 @@
     "A connected market is no longer buying at normal volume."
    ],
    [
-    "granary",
-    "root",
-    "A primary food institution (granary, mill, fishery) is gone."
-   ],
-   [
-    "mill",
-    "root",
-    "A primary food institution (granary, mill, fishery) is gone."
-   ],
-   [
     "garrison",
     "root",
     "The settlement's standing army is committed abroad, thinning the home garrison."
@@ -8910,13 +8778,6 @@
     "armedForce",
     "family",
     "WORKED EXEMPLAR\n\nREQUEST: \"Build me a river town of about four thousand, rich from trade but running out of\nfood, with n"
-   ]
-  ],
-  "src/domain/aiGrounding.js": [
-   [
-    "quarters",
-    "word",
-    "Renaming proper nouns (settlement name, faction names, NPC names, district names)."
    ]
   ],
   "src/domain/arcaneInstitutionVocabulary.js": [
@@ -9177,11 +9038,6 @@
     "THE ROW WITH NO CHANNEL, AND THE REASON IS THE SLICE. Wave P1 (docs/DESIGN_DEMOGRAPHIC_ENGINE.md) cures the finding that"
    ],
    [
-    "famine",
-    "word",
-    "The equilibrium is a fixed point of the rate pair, not a ceiling anyone enforces. Far from min(K_food, D_tier) births do"
-   ],
-   [
     "starving",
     "word",
     "NOT expressible from any receipt schema today. Pinned at source with a menu whose two destinations carry the SAME effect"
@@ -9249,16 +9105,6 @@
     "plague",
     "word",
     "The gate is a single seam: candidateEvents.js:442 admits evaluateStressorRules only when rules.stressorsEnabled is true,"
-   ],
-   [
-    "famine",
-    "word",
-    "THE HEADLINE SILENCE OF THIS LANE. MEASURED 2026-07-31: flow_migration appears ZERO times in all seven completed release"
-   ],
-   [
-    "plague",
-    "word",
-    "THE HEADLINE SILENCE OF THIS LANE. MEASURED 2026-07-31: flow_migration appears ZERO times in all seven completed release"
    ],
    [
     "revolt",
@@ -9380,11 +9226,6 @@
     "war",
     "root",
     "The war-contribution ledger (record shapes and their fail-closed normalizer)"
-   ],
-   [
-    "garrison",
-    "root",
-    "THE UNSEATING RECORD. Today a settlement's patron creed changes hands and nothing survives the tick: the fold mints a co"
    ],
    [
     "war",
@@ -9671,24 +9512,9 @@
     "THE CONSERVATION LAW (design section 6). At the top regimes magic may carry a CAP-BANDED share of a settlement's daily n"
    ],
    [
-    "house: rookery",
-    "family",
-    "A CONJUNCTION GATE OVER A LANE THAT WRITES NOTHING. brokerageEffectsActive is informationBrokeragesEnabled AND infoState"
-   ],
-   [
-    "house: chroniclers' exchange",
-    "family",
-    "A CONJUNCTION GATE OVER A LANE THAT WRITES NOTHING. brokerageEffectsActive is informationBrokeragesEnabled AND infoState"
-   ],
-   [
     "house: tavern",
     "family",
     "A CONJUNCTION GATE OVER A LANE THAT WRITES NOTHING. brokerageEffectsActive is informationBrokeragesEnabled AND infoState"
-   ],
-   [
-    "streets",
-    "family",
-    "A PRESENTATION-SIDE SUBSYSTEM, AND THE FIRST ONE THIS CONTRACT HOLDS. THE GATE: townCartographyActive is the virtual tow"
    ]
   ],
   "src/domain/certification/warConvergenceContract.js": [
@@ -10069,11 +9895,6 @@
     "Strain from criminal activity the settlement cannot contain. It is the pressure behind smuggling, extortion, and the ero"
    ],
    [
-    "famineToCome",
-    "family",
-    "Functional but stretched. A bad season would hurt."
-   ],
-   [
     "house: library",
     "family",
     "Captures the correct owner's resolved custom definitions for legacy campaigns so future simulation cannot drift with lat"
@@ -10200,11 +10021,6 @@
     "mercenary",
     "root",
     " appears on the settlement roster. Power is sustained by traveling clergy / mercenary contracts / external sponsorship r"
-   ],
-   [
-    "militia",
-    "root",
-    "improvised responses (volunteers, militia, ad-hoc relief) carry their own risks"
    ],
    [
     "house: smuggling",
@@ -12995,11 +12811,6 @@
     "It is public that the guildmaster provisioned both camps, and each army has learned it fed its enemy through the guildma"
    ],
    [
-    "openTrade",
-    "family",
-    "The rival faith's mission money passes through the guildmaster's house to pay local converts, and the guildmaster keeps "
-   ],
-   [
     "clergy",
     "family",
     "The clergy's shame has a banker: the guildmaster, who launders the temple's hush money and holds the papers as insurance"
@@ -14882,11 +14693,6 @@
     "religiousHouses",
     "word",
     "Houses of worship (50-100+)"
-   ],
-   [
-    "religiousHouses",
-    "word",
-    "Access to a house of worship"
    ]
   ],
   "src/domain/display/institutionVocabulary.js": [
@@ -15409,11 +15215,6 @@
     "prisoner",
     "family",
     "A state prison complex holding political prisoners, debtors, and criminals in separate wards."
-   ],
-   [
-    "openTrade",
-    "family",
-    "A wandering caster of the simplest spells who passes through now and then. Present only in passing."
    ],
    [
     "house: druid",
@@ -17434,11 +17235,6 @@
     "The garrison is besieged in the very town it holds; the occupation is repudiated."
    ],
    [
-    "market",
-    "root",
-    "The named are let be; the lists are not read out, and men who were owed a rope walk to market unremarked."
-   ],
-   [
     "walls",
     "root",
     " and made terms alone, leaving its fellow besiegers at the walls."
@@ -18399,11 +18195,6 @@
     "Tribute duties and forced trade terms bleed the counting-houses."
    ],
    [
-    "temple",
-    "root",
-    "Sanctuary and mediation raise the temple's standing above the fray."
-   ],
-   [
     "garrison",
     "root",
     "Whoever holds the barracks decided which way this went, and everyone knows it."
@@ -18976,11 +18767,6 @@
     "src/data/institutionServices.js (Parish burial grounds, Cemetery network, Parish church)"
    ],
    [
-    "court",
-    "root",
-    "src/data/institutionServices.js (Courthouse, Multiple court buildings)"
-   ],
-   [
     "market",
     "implied",
     "src/data/institutionServices.js (Village headman, City administration, Weekly market, City-state government, Lord's appo"
@@ -19026,24 +18812,9 @@
     "src/data/institutionServices.js (Village headman, City administration, Weekly market, City-state government, Lord's appo"
    ],
    [
-    "house: parish burial",
-    "family",
-    "src/data/institutionServices.js (Parish burial grounds, Cemetery network, Parish church)"
-   ],
-   [
-    "house: household elder",
-    "family",
-    "src/data/institutionServices.js (Household elder, Village elder, Village headman, Town council)"
-   ],
-   [
     "house: headman",
     "family",
     "src/data/institutionServices.js (Household elder, Village elder, Village headman, Town council)"
-   ],
-   [
-    "house: waystation",
-    "family",
-    "src/data/institutionServices.js (Listening post, Waystation)"
    ]
   ],
   "src/domain/region/discoverDependencyCandidates.js": [
@@ -19144,11 +18915,6 @@
    ]
   ],
   "src/domain/resourceSemantics.js": [
-   [
-    "docks",
-    "root",
-    "Access to the deep harbour is obstructed or unsafe."
-   ],
    [
     "docks",
     "root",
@@ -19327,13 +19093,6 @@
     "a harbour with no counterpart across the water"
    ]
   ],
-  "src/domain/state/bands.js": [
-   [
-    "famineToCome",
-    "family",
-    "Functional but stretched. A bad season would hurt."
-   ]
-  ],
   "src/domain/summary/settlementQuickGuide.js": [
    [
     "docks",
@@ -19504,18 +19263,6 @@
     "occupation",
     "word",
     "the occupation ended; the old rite returned"
-   ]
-  ],
-  "src/domain/tuning/proposedSoakBands.js": [
-   [
-    "famine",
-    "word",
-    "A festival window opens once per year, but hard stressors (plague, famine, war, occupation) and a Subsistence economy (S"
-   ],
-   [
-    "plague",
-    "word",
-    "A festival window opens once per year, but hard stressors (plague, famine, war, occupation) and a Subsistence economy (S"
    ]
   ],
   "src/domain/worldPulse/applyWorldPulseOccupationAuthority.js": [
@@ -20852,11 +20599,6 @@
    ]
   ],
   "src/domain/worldPulse/partyImpactKinds.js": [
-   [
-    "mercenary",
-    "root",
-    "The DM identifies the force behind a war-shaped stressor: another settlement, or a force with no settlement at all (a go"
-   ],
    [
     "plague",
     "word",
@@ -22847,16 +22589,6 @@
     "Add Market Square, Merchants' Quarter, or Trade Guild"
    ],
    [
-    "religiousHouses",
-    "word",
-    "Add a house of worship, a temple or a monastery"
-   ],
-   [
-    "practitioner",
-    "word",
-    "Add a tier-plausible hedge practitioner or alchemical workshop"
-   ],
-   [
     "market",
     "implied",
     " without any markets or trade institutions."
@@ -22872,19 +22604,9 @@
     "Add craft guilds: smiths, weavers, tanners, etc."
    ],
    [
-    "house: craft guild",
-    "family",
-    "Add craft guilds: smiths, weavers, tanners, etc."
-   ],
-   [
     "smith",
     "family",
     "Add craft guilds: smiths, weavers, tanners, etc."
-   ],
-   [
-    "house: hedge wizard",
-    "family",
-    "Add Hedge Wizard, Alchemist Shop, or Wizard's Tower"
    ],
    [
     "house: alchemist",
@@ -22895,11 +22617,6 @@
     "house: wizard's tower",
     "family",
     "Add Hedge Wizard, Alchemist Shop, or Wizard's Tower"
-   ],
-   [
-    "house: thieves' guild",
-    "family",
-    "Add Thieves' Guild, Black Market, or City Watch"
    ]
   ],
   "src/generators/factionDynamics.js": [
@@ -23264,11 +22981,6 @@
     "streets",
     "family",
     " was that the disagreement should not be allowed to reach the streets; that agreement is the only thing holding, and it "
-   ],
-   [
-    "house: warehouse",
-    "family",
-    " in things other than coin (a warehouse here, a toll right there), and each transfer is legal, documented, and slightly "
    ],
    [
     "streets",
@@ -23797,11 +23509,6 @@
     " has avoided taking sides so far, which means both powers resent it equally."
    ],
    [
-    "openTrade",
-    "family",
-    " passes through in both directions. Whoever sets the toll controls the settlement's money, and "
-   ],
-   [
     "armedForce",
     "family",
     " and the guard alike."
@@ -23842,11 +23549,6 @@
     "clergy",
     "family",
     "Healers, clerics, and pragmatists with emergency health powers. Unpopular. Probably right."
-   ],
-   [
-    "armedForce",
-    "family",
-    " The pastoral burden of wartime (soldiers praying before departure, families grieving) has made the institution indispen"
    ],
    [
     "armedForce",
@@ -24262,11 +23964,6 @@
     "Readings, visions, and omens from practitioners who know what the client wants to hear."
    ],
    [
-    "practitioner",
-    "word",
-    "Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to "
-   ],
-   [
     "house: tavern",
     "family",
     "Ask around at the right tavern. Someone moves goods without questions."
@@ -24444,11 +24141,6 @@
     "Walled city with sprawling suburbs beyond the gates, outlying wards growing faster than the walls"
    ],
    [
-    "house: caravanserai",
-    "family",
-    "Walled desert city of pale stone, caravanserai outside the east gate, citadel above the wells"
-   ],
-   [
     "house: citadel",
     "family",
     "Walled desert city of pale stone, caravanserai outside the east gate, citadel above the wells"
@@ -24482,11 +24174,6 @@
     "house: warehouse",
     "family",
     "Walled port town climbing from the harbour, warehouses and chandlers at the waterfront"
-   ],
-   [
-    "house: caravanserai",
-    "family",
-    "Walled trading town around a great well, caravanserai outside the south gate"
    ],
    [
     "resource: managed_forest",
@@ -24571,11 +24258,6 @@
    ]
   ],
   "src/generators/steps/stepMetadata.js": [
-   [
-    "plague",
-    "word",
-    "Roll the active stressors (plague, drought, raid pressure, etc.) that shape this run."
-   ],
    [
     "famine",
     "word",

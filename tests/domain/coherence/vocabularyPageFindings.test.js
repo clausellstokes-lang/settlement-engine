@@ -8,9 +8,10 @@
 import { describe, expect, test } from 'vitest';
 
 import { vocabularyPageFindings } from '../../../src/domain/coherence/vocabularyPageFindings.js';
-import { NEW_WORDS, REGISTERED_WORDS, THINGS, VOCABULARY_SIZE, declarationImplies } from '../../../src/domain/facts/registeredWords.js';
+import { NEW_WORDS, REGISTERED_WORDS, THINGS, VOCABULARY_SIZE, declarationImplies, newWordsDeniedIn, newWordsNamedIn, thingsNamedIn } from '../../../src/domain/facts/registeredWords.js';
 import { RESOURCE_DATA } from '../../../src/data/resourceData.js';
 import { parseAtom } from '../../../src/domain/facts/factVocabulary.js';
+import { factsOf } from '../../../src/domain/facts/factsOf.js';
 
 const thorp = { tier: 'thorp', population: 40, config: {}, stress: [], institutions: [{ name: 'Chapel' }], powerStructure: { factions: [{ faction: 'A' }, { faction: 'B' }] } };
 const city = {
@@ -34,9 +35,8 @@ const shape = (fs) => fs.map((f) => `${f.view} :: ${f.word} :: ${f.side}`);
 
 describe('vocabularyPageFindings', () => {
   test('planted: a small calm place — the siege it is not under, the granary it lacks, the three powers and the quarters it has not, the two chapels it does not hold', () => {
+    // the siege (a crisis state) and the granary (a hand-written thing) left the page list at the third seat's precision read
     expect(shape(vocabularyPageFindings(thorp, views))).toEqual([
-      'Systems/Defense :: siege :: names',
-      'Systems/Defense :: granary :: names',
       'Systems/Defense :: rulingFaces :: names', // F2: the heading reads the ruler's faces (none here), not the powers
       'Systems/Defense :: quarters :: names',
       'Systems/Defense :: housesCount :: names',
@@ -44,7 +44,9 @@ describe('vocabularyPageFindings', () => {
   });
 
   test('planted: the same sentences in a besieged, starving city that holds them are not findings; its denied famine is', () => {
-    expect(shape(vocabularyPageFindings(city, views))).toEqual(['Systems/Defense :: famine :: denies']);
+    // the denied famine is a crisis state's finding, withdrawn from the page list at the precision read (the walker reads it)
+    expect(shape(vocabularyPageFindings(city, views))).toEqual([]);
+    expect(newWordsDeniedIn('The harvest came in well, with no famine in sight this year.')).toEqual(['famine']);
   });
 
   test('a style element and a short line are never read; a negated thing is never a finding', () => {
@@ -98,7 +100,8 @@ describe('F1 — the generated vocabulary', () => {
   });
 
   test('planted: each family is a finding where the town makes it false, and none where it is true', () => {
-    expect(words(hamlet)).toEqual(['armedForce', 'clergy', 'house: alchemist', 'openTrade', 'resource: iron_deposits', 'smith', 'streets']);
+    // the house and resource families left the page list at the third seat's precision read (item 1; the walker still reads them)
+    expect(words(hamlet)).toEqual(['armedForce', 'clergy', 'openTrade', 'smith', 'streets']);
     expect(words(town)).toEqual([]);
   });
 
@@ -149,10 +152,14 @@ describe('F4 — one home for whether there is a church', () => {
   const found = (record, lines = page) => vocabularyPageFindings(record, lines).map((f) => `${f.word} :: ${f.quote.slice(0, 24)}`);
 
   test('a wayside shrine is not a church: church words and "religious houses" are findings; the shrine is not', () => {
+    // the church words' finding is the walker's now (the hand-written things left the page list at the precision read):
+    // their ONE home, the faith reading, answers absent in a shrine-only town and present in a parish
+    expect(THINGS.temple.absent(factsOf(shrineOnly), [])).toBe(true);
+    expect(THINGS.temple.absent(factsOf(parish), [])).toBe(false);
+    expect(THINGS.shrine.absent(factsOf(shrineOnly), [])).toBe(false);
     expect(found(shrineOnly)).toEqual([
-      'temple :: The church bell calls th',
       'religiousHouses :: The religious houses tak',
-      'temple :: The people walk to the p',
+      // "walk to the parish church in the next valley" names a church ELSEWHERE by its words (item 1, the precision read)
     ]);
   });
 
@@ -173,5 +180,61 @@ describe('F4 — one home for whether there is a church', () => {
     expect(declarationImplies('shrine', d(['sacredHouse']), 'names')).toBe(true);
     expect(THINGS.temple.atoms).toEqual(expect.arrayContaining(['church']));
     expect(THINGS.temple.sufficient).toEqual(expect.arrayContaining(['church access']));
+  });
+});
+
+/**
+ * W2-B-DECLARE third seat, ITEM 1 — THE PRECISION READ (two samples of the measure's findings on the census's 720, each
+ * read against its town's record: 31 of 60, then 46 of 64 true; house 0/6, resource 0/6, thing 2/6 → 2/8, state 1/6 →
+ * 3/8). A family wrong more than one time in ten is narrowed by its WORDS or its LEAF, or withdrawn; never by quoting a
+ * line. Each sense below is a word family, planted with its control (the same word named here) beside it, at the
+ * walker's own matcher (`thingsNamedIn`, `newWordsNamedIn`), which every arm reads; the withdrawn families are planted at
+ * the page. Red at 3ff343284, whose matcher read every one of these as naming the thing in this town.
+ */
+describe('item 1 — the precision read: senses that name nothing here, and the withdrawn families', () => {
+  test('ELSEWHERE: a mill, a church or a house of worship reached outside the town is not named here', () => {
+    for (const line of ['Grain is carted to a mill outside the settlement and brought back as flour.', 'Access to external mill',
+      'Must travel to manor/village mill.', 'Its people walk to the next village’s parish church for the rite.']) expect(thingsNamedIn(line), line).toEqual([]);
+    for (const line of ['The nearest house of worship is the village’s, a walk of a few miles.', 'A walk of a few miles to the village house of worship for services.']) {
+      expect(newWordsNamedIn(line), line).not.toContain('religiousHouses');
+    }
+    expect(thingsNamedIn('The mill grinds for the whole valley.')).toEqual(['mill']);
+    expect(newWordsNamedIn('The house of worship stands by the green.')).toContain('religiousHouses');
+  });
+  test('NOT A CLAIM: a requirement, a suggestion to add, an instruction to raise, an example in parentheses; a priest who visits', () => {
+    expect(newWordsNamedIn('Needs: a stone quarry, a masons’ guild')).not.toContain('mason');
+    expect(newWordsNamedIn('From here you raise the town’s troops and send them out.')).not.toContain('armedForce');
+    expect(newWordsNamedIn('→Add a tier-plausible hedge practitioner or alchemical workshop')).not.toContain('practitioner');
+    expect(newWordsNamedIn('Something important (a resource, a prisoner, a decision) falls between the powers.')).not.toContain('prisoner');
+    expect(newWordsNamedIn('The rite is held when a priest comes through, and the burial does not wait.')).not.toContain('clergy');
+    expect(thingsNamedIn('Add Town Walls or Garrison')).toEqual([]);
+    expect(newWordsNamedIn('The priest manages the graveyard.')).toContain('clergy');
+    expect(newWordsNamedIn('A prisoner in the cellar knows the way out.')).toContain('prisoner');
+  });
+  test('NORMAL TIMES: coin that passes through a counting-house is no trade route; a trade\'s bad year is no harvest', () => {
+    expect(newWordsNamedIn('He pays in coin that never passes through a counting-house.')).not.toContain('openTrade');
+    expect(newWordsNamedIn('No one trade earns half of what it makes, so a bad year in any one of them would hurt.')).not.toContain('famineToCome');
+    expect(newWordsNamedIn('One bad year for the herds would be a hungry year for the whole thorp.')).toContain('famineToCome');
+    expect(newWordsNamedIn('Carts bring the town what its workshops need.')).toContain('openTrade');
+    expect(newWordsNamedIn('The town lives on what passes through it, and the roads matter more than the fields.')).toContain('openTrade');
+  });
+  test('WITHDRAWN from the page list: the house, resource, thing and crisis-state families; the walker still reads them', () => {
+    const hamlet = {
+      tier: 'hamlet', population: 60, config: { nearbyResources: [], nearbyResourcesDepleted: ['iron_deposits'] }, stress: [],
+      institutions: [{ name: 'Access to parish church' }], powerStructure: { factions: [{ faction: 'Elder Council' }] },
+    };
+    const page = { 'Systems/Economics': ['The master fishmonger sells at dawn by the ford.', 'Iron deposits lie under the hill, worked hard.',
+      'The mill grinds for the whole valley.', 'The town is under siege and every gate is shut.', 'Disasters & Famine is re-judged as the campaign advances.'] };
+    expect(vocabularyPageFindings(hamlet, page)).toEqual([]);
+    for (const id of ['house: fishmonger', 'resource: iron_deposits', 'siege', 'famine']) expect(NEW_WORDS[id].pageWithdrawn, id).toMatch(/precision read/);
+    expect(THINGS.mill.pageWithdrawn).toMatch(/precision read/);
+    expect(NEW_WORDS.openTrade.pageWithdrawn).toBeUndefined();
+    expect(thingsNamedIn('The mill grinds for the whole valley.')).toEqual(['mill']); // the walker reads it
+  });
+  test('THE LEAF OF A ROLE: a person among the town\'s people who holds it (role or title) makes it true', () => {
+    const base = { tier: 'hamlet', population: 60, config: {}, stress: [], institutions: [{ name: 'Access to parish church' }], powerStructure: { factions: [] } };
+    const page = { 'World/Relationships': ['The priest manages the graveyard and the feast days.'] };
+    expect(vocabularyPageFindings({ ...base, npcs: [{ id: 'a', role: 'the elder priest', title: 'the elder priest' }] }, page)).toEqual([]);
+    expect(vocabularyPageFindings({ ...base, npcs: [{ id: 'a', role: 'the militia captain', title: 'the militia captain' }] }, page).map((f) => f.word)).toEqual(['clergy']);
   });
 });

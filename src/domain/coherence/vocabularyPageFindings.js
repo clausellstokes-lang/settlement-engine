@@ -67,12 +67,15 @@ export function vocabularyPageFindings(settlement, views) {
         // The walker's own floor (presumedThings.shared.mjs, the printed-record arm: `text.length < 15`):
         // a heading or a chip names no claim. Not a tuning value: the measure reads what the walker reads.
         if (sentence.length < 15) continue;
-        for (const id of thingsNamedIn(sentence)) if (thingAbsent(id)) push(view, id, 'names', sentence, `the town lacks: ${id}`);
-        for (const id of thingsDeniedIn(sentence)) if (presentForDenial(id, facts, names)) push(view, id, 'denies', sentence, `the town has: ${id}`);
+        // the hand-written things left the page list at the precision read (`THINGS[id].pageWithdrawn`); arm 2 of the walker reads them
+        for (const id of thingsNamedIn(sentence)) if (!THINGS[id].pageWithdrawn && thingAbsent(id)) push(view, id, 'names', sentence, `the town lacks: ${id}`);
+        for (const id of thingsDeniedIn(sentence)) if (!THINGS[id].pageWithdrawn && presentForDenial(id, facts, names)) push(view, id, 'denies', sentence, `the town has: ${id}`);
         for (const id of newWordsNamedIn(sentence)) {
+          if (NEW_WORDS[id].pageWithdrawn) continue; // the precision read withdrew its family from the page list (its reason is on the word)
           if (NEW_WORDS[id].absent(facts, names, record, sentence)) push(view, id, 'names', sentence, `false here: ${id} (${NEW_WORDS[id].leaf})`);
         }
         for (const id of newWordsDeniedIn(sentence)) {
+          if (NEW_WORDS[id].pageWithdrawn) continue;
           if (!NEW_WORDS[id].absent(facts, names, record, sentence)) push(view, id, 'denies', sentence, `in force here: ${id}`);
         }
       }

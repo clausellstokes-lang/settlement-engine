@@ -16,6 +16,8 @@
  *                              bank the fresh hits under <reason> — ONLY hits whose literal already stood in
  *                              its file at <rev> (the widening's base). A fresh hit whose text is not at <rev>
  *                              is a NEW line: nothing is written and the door exits 1, naming it.
+ *   --shrink-arm2              remove every first-register arm-2 row that covers no printed line of the corpus (the
+ *                              360 births the walker's arm 2 reads, born here the same way); never adds
  *   --bank <reason> --base <rev> --thing <id>
  *                              the same, for the fresh hits of ONE registered word only (a re-key by identity
  *                              and a narrowed implication are banked under their two reasons, W2-B-DECLARE F4)
@@ -26,7 +28,7 @@ import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { REGISTER_REL, WIDENED_REGISTER_REL, bankedKeys, hitKey, scanTree, stripKey, stripTree } from '../tests/lint/presumedThings.shared.mjs';
+import { REGISTER_REL, WIDENED_REGISTER_REL, bankedKeys, corpusConfig, corpusSeeds, printedAbsent, rowCovers, hitKey, scanTree, stripKey, stripTree } from '../tests/lint/presumedThings.shared.mjs';
 
 const ROOT = process.cwd();
 const args = process.argv.slice(2);
@@ -81,6 +83,26 @@ if (mode === '--check' || mode === undefined) {
     writeFileSync(join(ROOT, REGISTER_REL), `${text.slice(0, start)}\n "arm1": {\n${body}${text.slice(end)}`);
   }
   console.log(`removed ${stale.length} stale rows, ${mainStale.length} stale rows of the first register and ${stripStale.length} stale strip sites`);
+} else if (mode === '--shrink-arm2') {
+  const { generateSettlementPipeline } = await import('../src/generators/generateSettlementPipeline.js');
+  const { factsOf } = await import('../src/domain/facts/factsOf.js');
+  const { liveInstitutionNames } = await import('../src/domain/facts/institutions.js');
+  /** @type {Array<{ thing: string, path: string, sentence: string }>} */ const listed = [];
+  for (const { tier, seed } of corpusSeeds()) {
+    const record = generateSettlementPipeline({ ...corpusConfig(tier) }, null, { seed, customContent: {} });
+    listed.push(...printedAbsent(record, factsOf(record), liveInstitutionNames(record)));
+  }
+  const stale2 = main.arm2.filter((r) => !listed.some((h) => rowCovers(r, h)));
+  if (stale2.length) {
+    // the first register keeps its layout (one arm-2 row per line): only the stale rows' lines are removed
+    const text = readFileSync(join(ROOT, REGISTER_REL), 'utf8');
+    const drop = new Set(stale2.map((r) => JSON.stringify(r)));
+    const lines = text.split('\n').filter((l) => { const t = l.trim().replace(/,$/, ''); if (!t.startsWith('{"thing"')) return true; try { return !drop.has(JSON.stringify(JSON.parse(t))); } catch { return true; } });
+    const out = lines.join('\n').replace(/,(\n \],?\n)/g, '$1');
+    writeFileSync(join(ROOT, REGISTER_REL), out);
+  }
+  for (const r of stale2) console.log(`removed arm-2\t${r.thing}\t${r.path}\t${r.text}`);
+  console.log(`removed ${stale2.length} stale arm-2 rows`);
 } else if (mode === '--bank') {
   const reason = args[args.indexOf('--bank') + 1];
   const base = args[args.indexOf('--base') + 1];
@@ -128,6 +150,6 @@ if (mode === '--check' || mode === undefined) {
   write();
   console.log(`banked ${mine.length} strip sites of ${file} under '${reason}'`);
 } else {
-  console.error('usage: --check | --shrink | --bank <reason> --base <rev> | --bank-strip <reason> <file> --base <rev>');
+  console.error('usage: --check | --shrink | --shrink-arm2 | --bank <reason> --base <rev> [--thing <id>] | --bank-strip <reason> <file> --base <rev>');
   process.exit(2);
 }

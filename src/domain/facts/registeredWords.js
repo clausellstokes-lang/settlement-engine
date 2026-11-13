@@ -64,6 +64,10 @@ import { CRISIS_FAMILY_KINDS, CRISIS_KIND_ALIASES, CRISIS_KIND_WORDS, FACT_DIMEN
  * @property {'thing'|'state'|'size'|'count'|'value'} [kind]
  * @property {string} [leaf] the home that answers it
  * @property {'P'|'S'|'T'} [layer]
+ * @property {boolean} [person] a person or a body of people: one who visits ("comes through") is not named as standing here
+ * @property {RegExp} [context] the word names only in a sentence of this context (a famine to come: a sentence of food)
+ * @property {string} [pageWithdrawn] WITHDRAWN FROM THE PAGE LIST, with its reason (the third seat's precision read: a
+ *   family wrong more than one time in ten that no word or leaf narrows surely); the walker's source arm still reads it
  */
 
 /**
@@ -80,6 +84,25 @@ const COURT_SERVICE = /^(?:civil disputes|criminal trials|dispute arbitration|di
 export const COURT_HOUSES = Object.freeze(new Set(Object.entries(INSTITUTION_SERVICES)
   .filter(([, rows]) => Object.keys(rows || {}).some((service) => COURT_SERVICE.test(service)))
   .map(([name]) => name.toLowerCase())));
+
+/**
+ * THE FAMILIES WITHDRAWN FROM THE PAGE LIST (W2-B-DECLARE third seat, item 1: the precision read of sixty findings on the
+ * census's 720). Neither is narrowed surely by its words or its leaf, so each leaves the page list; the walker's source
+ * arm still reads them (a line naming them declares).
+ */
+const PAGE_WITHDRAWN = Object.freeze({
+  thing: 'the precision read, 2 of 8 true after the narrowing by words: a hand-written thing on the page is mostly a '
+    + 'standing house\'s catalogue description or service ("Levies … by road or harbour", "garrison duty and escorts"), '
+    + 'an origin in the past, or two homes that disagree; arm 2 of the walker reads the printed record for these words',
+  state: 'the precision read, 1 of 6 and then 3 of 8 true (one of them pattern 20): a crisis word on the page is mostly '
+    + 'the past ("The uprising was funded …", "The pestilence lingered …"), a heading or a purpose; no word family reads '
+    + 'its tense surely',
+  house: 'the precision read, 0 of 6 true: a house word on the page is mostly a person\'s title where the trade stands '
+    + '("the master fishmonger" beside a fish market), a requirement list, or a standing house\'s catalogue description '
+    + 'naming its neighbours ("between mine and smithy"); no word or leaf narrows it surely',
+  resource: 'the precision read, 0 of 6 true: a resource label on the page is a chain\'s input or import, or a depleted '
+    + 'resource the line itself marks "(depleted)"; the leaf (the town\'s own country) is not what those lines claim',
+});
 
 /**
  * THE THINGS (the presumed-things walker's sixteen, moved verbatim). `words`: the words that name it (a
@@ -181,6 +204,7 @@ export const THINGS = Object.freeze({
 });
 
 export const THING_IDS = Object.freeze(Object.keys(THINGS));
+for (const w of Object.values(THINGS)) w.pageWithdrawn = PAGE_WITHDRAWN.thing;
 
 /** @param {WordFacts} f @param {string} kind @returns {boolean} is this crisis kind in force (`factsOf(record).crisis`) */
 const inForce = (f, kind) => f?.crisis?.has?.(kind) === true;
@@ -310,7 +334,7 @@ const NEW_WORDS_OPEN = /** @type {Record<string, RegisteredWord>} */ ({
     absent: (f) => f?.faith?.hasChurch !== true,
   },
   practitioner: {
-    kind: 'thing', layer: 'T', leaf: 'magicReliance.js :: magicPractitioners (NEW-2, 3; its atom waits for a factsOf reader)',
+    kind: 'thing', layer: 'T', person: true, leaf: 'magicReliance.js :: magicPractitioners (NEW-2, 3; its atom waits for a factsOf reader)',
     words: /\bpractitioners?\b|\bpeople who work magic\b/i,
     atoms: [],
     absent: (_f, _names, record) => !!record && magicPractitioners(record).length === 0,
@@ -339,6 +363,8 @@ const NEW_WORDS_OPEN = /** @type {Record<string, RegisteredWord>} */ ({
   },
 });
 export const NEW_WORDS = NEW_WORDS_OPEN;
+// the crisis states (not the words of normal times, which read a crisis's absence: `notKinds`) leave the page list
+for (const w of Object.values(NEW_WORDS_OPEN)) if (w.kind === 'state') w.pageWithdrawn = PAGE_WITHDRAWN.state;
 
 // ── THE GENERATED VOCABULARY (W2-B-DECLARE second seat, F1: "the vocabulary is generated, not listed") ─────────
 
@@ -377,6 +403,7 @@ const phrasePattern = (words) => {
   return { key: [...words.slice(0, -1), last].join(' '), re: new RegExp(`\\b${body}(?:s|es|'s|s')?\\b`, 'i') };
 };
 
+
 /**
  * THE HOUSES, generated from the institution catalogue (`data/institutionalCatalog.js :: institutionalCatalog`, every
  * tier and shelf): each house's HEAD PHRASE is a family — its name less its qualifiers and its container, at most its
@@ -412,6 +439,7 @@ const HOUSE_FAMILIES = (() => {
     out[`house: ${key}`] = {
       kind: 'thing', layer: 'P', leaf: `institutions.js :: liveInstitutionNames, or a power of the name (a house named ${key}); its atom \`house: ${key}\` waits for a factsOf getter`,
       words: re, atoms: [], absent: (_f, rosterNames, record) => !rosterHas(rosterNames, stem) && !powerNames(record).some((n) => stem.test(n)),
+      pageWithdrawn: PAGE_WITHDRAWN.house,
     };
   }
   return out;
@@ -430,7 +458,7 @@ const RESOURCE_FAMILIES = Object.fromEntries(Object.entries(RESOURCE_DATA).map((
   const re = new RegExp(`\\b${words.join('\\s+')}\\b${deposits}`, 'i');
   /** @type {RegisteredWord} */ const w = {
     kind: 'thing', layer: 'P', leaf: `the record :: config.nearbyResources (${key}), less config.nearbyResourcesDepleted; its atom waits`,
-    words: re, atoms: [],
+    words: re, atoms: [], pageWithdrawn: PAGE_WITHDRAWN.resource,
     absent: (_f, _n, record) => {
       const cfg = /** @type {{ config?: { nearbyResources?: unknown, nearbyResourcesDepleted?: unknown } } | null | undefined} */ (record)?.config;
       const near = Array.isArray(cfg?.nearbyResources) ? cfg.nearbyResources : [];
@@ -446,7 +474,7 @@ const RESOURCE_FAMILIES = Object.fromEntries(Object.entries(RESOURCE_DATA).map((
  * command): a person or a body who stands only where a house or a force does, each with the leaf of that house or force.
  * @type {Record<string, RegisteredWord>}
  */
-const ROLE_FAMILIES = {
+const ROLE_FAMILIES = /** @type {Record<string, RegisteredWord>} */ ({
   clergy: {
     kind: 'thing', layer: 'P', leaf: 'faithReading.js :: faithReadingOf (hasChurch; seniorCleric)',
     words: /\bpriests?\b|\bclergy\b|\bclerics?\b|\bvicars?\b|\bchaplains?\b/i,
@@ -501,7 +529,21 @@ const ROLE_FAMILIES = {
     atoms: ['prison'],
     absent: (f) => !f?.defence?.prison,
   },
-};
+});
+/**
+ * A person among the town's people holds the role: some card's `role` or `title` uses the role's words ("the elder
+ * priest"). @param {WordRecord | null | undefined} record @param {RegExp} words
+ */
+const peopleHold = (record, words) => (Array.isArray(/** @type {{ npcs?: unknown }} */ (record)?.npcs) ? /** @type {unknown[]} */ (/** @type {{ npcs: unknown[] }} */ (record).npcs) : [])
+  .some((c) => { const card = /** @type {{ role?: unknown, title?: unknown }} */ (c); return words.test(String(card?.role ?? '')) || words.test(String(card?.title ?? '')); });
+// THE LEAF OF A ROLE (the third seat, item 1: the precision read): the role is false only where its house or force is
+// absent AND no one among the town's people holds it — "the elder priest" on the relationships page is a person who stands
+for (const w of Object.values(ROLE_FAMILIES)) {
+  const houseAbsent = w.absent;
+  w.person = true;
+  w.absent = (f, names, record, sentence) => houseAbsent(f, names, record, sentence) && !peopleHold(record, w.words);
+  w.leaf = `${w.leaf}; or a person among the town's people who holds the role (npcs[].role, npcs[].title)`;
+}
 
 /**
  * THE WORDS OF NORMAL TIMES AND OF SIZE (the review's named families): open trade, which a siege in force makes false;
@@ -511,13 +553,15 @@ const ROLE_FAMILIES = {
 const STATE_FAMILIES = {
   openTrade: {
     kind: 'state', layer: 'P', leaf: 'crisisKind.js :: crisisFactsOf (no under_siege in force)',
-    words: /\b(?:carts?|wagons?|caravans?|coaches|barges|boats|importers?)\s+(?:bring|brings|come|comes|arrive|arrives|carry|carries|feed|feeds|go out|leave|leaves)\b|\bthrough-traffic\b|\btraffic\b|\bpasses through\b|\bbrought in by (?:cart|road|boat|barge)\b/i,
+    words: /\b(?:carts?|wagons?|caravans?|coaches|barges|boats|importers?)\s+(?:bring|brings|come|comes|arrive|arrives|carry|carries|feed|feeds|go out|leave|leaves)\b|\bthrough-traffic\b|\btraffic\b|\b(?:what|everything|goods|trade|caravans?|plenty|more|much|little|travell?ers?|traders?|merchants?)\s+(?:that\s+)?passes through\b|\bpasses through (?:it|here|\{settlement\}|the (?:town|village|hamlet|city|settlement|gates?|square))\b|\bbrought in by (?:cart|road|boat|barge)\b/i,
     atoms: [], notKinds: ['under_siege'],
     absent: (f) => inForce(f, 'under_siege'),
   },
   famineToCome: {
     kind: 'state', layer: 'P', leaf: 'crisisKind.js :: crisisFactsOf (no famine in force)',
     words: /\b(?:a|one|any) (?:bad|poor|hard|lean|failed) (?:year|season|harvest)s?\b[^.;]{0,48}\b(?:would|could|will)\b|\bwould (?:bring|mean) (?:real )?hunger\b|\bif the harvests? (?:fail|fails|failed)\b/i,
+    // the precision read: "a bad year in any one of them would hurt" is a trade's year, not a harvest's
+    context: /\b(?:harvests?|herds?|flocks?|crops?|grain|hunger|hungry|food|fields?|stores|famine)\b/i,
     atoms: [], notKinds: ['famine'],
     absent: (f) => inForce(f, 'famine'),
   },
@@ -664,12 +708,46 @@ export function negates(sentence, words) {
   return true;
 }
 
+// ── THE SENSES THAT NAME NOTHING HERE (W2-B-DECLARE third seat, item 1: the precision read) ──────────────────────
+// Each is a WORD FAMILY around a hit, never a quoted line; a hit in one of these senses names nothing in this town.
+/** ELSEWHERE: a thing reached outside the town ("access to external mill", "walk to the next village's parish church"). */
+const ELSEWHERE_BEFORE = /\b(?:access to|external|travel(?:s|led)? to|walk(?:s|ed)? to|miles to|nearest|neighbouring|next (?:village|town|parish)['’]?s?)\s+(?:[\w'’/-]+\s+){0,4}$/i;
+const ELSEWHERE_AFTER = /^\s+(?:outside|elsewhere|over the hill)\b/i;
+/** NOT A CLAIM: a requirement or input list ("Needs: …", "Requires …", "Draws on: …"), a suggestion to add, an
+ *  instruction to raise; and a PERSON (a role, a practitioner: `person`) who VISITS ("a priest comes through"). */
+const NOT_A_CLAIM_BEFORE = /(?:^|[.:;→]\s*)(?:needs|requires|draws on)\b:?\s*(?:[\w'’,/-]+\s+){0,6}$|\b(?:add|raise)\s+(?:[\w'’-]+\s+){0,3}$/i;
+/** AN EXAMPLE: a hit inside a parenthesised LIST of examples, one with a comma ("(a resource, a prisoner, a decision)"). */
+const EXAMPLE_BEFORE = /\((?:[^()]*,\s*)?(?:an?\s+|the\s+)?$/;
+const VISITING_AFTER = /^\s+(?:comes?|passing|passes|visits?|calls?)\s+(?:through|by)\b/i;
+/**
+ * Does the sentence NAME the word here: some hit that no negation denies (`negates`) and that stands in none of the
+ * senses above (and, for a word with a `context`, a sentence of that context)? @param {string} sentence
+ * @param {RegisteredWord} w
+ */
+export function namedHere(sentence, w) {
+  if (w.context && !w.context.test(sentence)) return false;
+  const thing = (w.kind ?? 'thing') === 'thing'; // the elsewhere senses are a house's, a person's or a thing's, never a size's
+  for (const hit of sentence.matchAll(new RegExp(w.words.source, 'ig'))) {
+    const at = hit.index ?? 0;
+    const before = sentence.slice(0, at); const after = sentence.slice(at + hit[0].length);
+    const near = before.slice(-48);
+    if (/\b(?:no|not|without|nor|lacks?|lacking|beyond any|than any)\s+(?:[\w'-]+,?\s+(?:or\s+|and\s+)?){0,3}$/i.test(near)
+      || /^\s+(?:cannot|could not|can't|couldn't)\b/i.test(after.slice(0, 24))) continue;
+    if (thing && (ELSEWHERE_BEFORE.test(before.slice(-64)) || ELSEWHERE_AFTER.test(after))) continue;
+    if (NOT_A_CLAIM_BEFORE.test(before.slice(-96)) || (w.person && VISITING_AFTER.test(after))) continue;
+    const opened = before.slice(-48).match(EXAMPLE_BEFORE); const closed = after.match(/^([^()]*)\)/);
+    if (opened && closed && (opened[0].includes(',') || closed[1].includes(','))) continue;
+    return true;
+  }
+  return false;
+}
+
 /** The sentences of a printed text (a semicolon closes one, as the scan of the critique read them). @param {unknown} text */
 export const sentencesOf = (text) => String(text).split(/(?<=[.!?;])\s+/).map((s) => s.trim()).filter(Boolean);
 
 /** The things a sentence names and does not negate. @param {string} sentence */
 export function thingsNamedIn(sentence) {
-  return THING_IDS.filter((id) => !THINGS[id].denialOnly && THINGS[id].words.test(sentence) && !negates(sentence, THINGS[id].words));
+  return THING_IDS.filter((id) => !THINGS[id].denialOnly && THINGS[id].words.test(sentence) && namedHere(sentence, THINGS[id]));
 }
 
 /**
@@ -714,7 +792,7 @@ export function presentForDenial(thing, facts, names) {
  * @param {string} sentence
  */
 export function newWordsNamedIn(sentence) {
-  return NEW_WORD_IDS.filter((id) => NEW_WORDS[id].words.test(sentence) && !negates(sentence, NEW_WORDS[id].words));
+  return NEW_WORD_IDS.filter((id) => NEW_WORDS[id].words.test(sentence) && namedHere(sentence, NEW_WORDS[id]));
 }
 
 /** The NEW words a sentence DENIES ("no famine", "without refugees"). @param {string} sentence */
