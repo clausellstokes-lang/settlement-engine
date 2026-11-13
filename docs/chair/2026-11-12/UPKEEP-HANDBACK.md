@@ -1,3 +1,64 @@
+# COHERENCE-UPKEEP: the hand-back (the fifth seat, COHERENCE-UPKEEP-5, 2026-11-13) — HANDED BACK BY FILE AT THE CONTEXT GUARD
+
+**The lane:** `lane/coherence-upkeep-2026-11-12`. **Tip:** read it back from the remote; it is the commit that adds this part. **Base for every measure:** the agreement lane's tip `69b53decd`. The fourth seat's record and every earlier one are kept below, unchanged.
+
+**What the owner reads:** `docs/chair/2026-11-13/UPKEEP-DEFENCE-PARTS.md`. It holds stage one (the formula classed term by term; V1 and V2), the ADDENDUM (R10: V3, SOURCE and KIND, the weight table, one direction, count once, the eight towns) and the SECOND ADDENDUM (R13, R14, R12 measured). It carries one CORRECTION, by name: cold-town-142 and fresh5-town-37 each HAVE a town watch.
+
+## Named commits, in order
+
+| Commit | What |
+|---|---|
+| 37b607270 | Merge AGREE's tip 69b53decd (the generated files on AGREE's side, re-taken after) |
+| 15fa0c569 | Lighting census re-taken after the merge |
+| 70c6ef6c6 | Stage one: defence as the sum of its parts (measured, nothing built) |
+| e1b2f9c1f | Addendum R10: V3 measured |
+| 44cddb372 | **F2**: a house's own service is never scaled (red first; 367 rows restored in 166 of 320 unseen births, 0 removed; the institution table pin 1,834 → 1,837 by its cause) |
+| 2d88c66c4 | **F5**: no "back the garrison" after the merchant-army lead (red first; 10 false sentences removed on 880 unseen births, 0 true lost) |
+| 412dc2129 | Second addendum: R13, R14, R12 measured |
+| 0c950f06c | R3: the STANDING label (`economicState.prosperityStanding`), written by prosperity's writer with its one draw replayed. The stores and defence's pay read it, through `keep.js :: keepOfRecord`. The printed label is unchanged on 3,036 of 3,036. |
+| e90c4f97d | The traditions' and the small place's name tests move to the roster's defence home `domain/institutions/defenseInstitutionBuckets.js` (byte-identical, 960 of 960) |
+| 82c639b44 | **V3 + R13 + R14.** Readiness = the exact sum of `defenseProfile.parts` (tenths); every number in `src/data/defenceWeights.js :: DEFENCE_TUNING`; the parts are in the RECORD, never on the page |
+| 2e9d701e3 | Tuning inventory refrozen through its ritual |
+| 47581b61b | R17's home: the roster's defence home answers the wall's kind (stone / palisade / earthwork); nothing reads it |
+| f3489418c | Limit 1 listed once |
+| 623fdc0c4 | Five pins re-keyed by identity with their causes (defenseEconomicGate ×4, defenseWordsFindings palisade) |
+| 496554ab0 | Negative anchors |
+| **73b1304de** | **R2 in the product: the hired-only rule against the place's REAL V3 military with a watch in its stead. V3'S NAMED COMMIT: the defence code is final here.** |
+| c12593989 | V3's build report: `docs/chair/2026-11-13/UPKEEP-V3-BUILD.md` (receipts, gates, pins moved, reds not cured, incidents) |
+| 4a179bcc9 | Follow-on brief (technical state) and the two read-only censuses |
+| a97e315ac | Lighting census re-taken |
+
+**V3's receipts, measured on the 3,036 unseen births:**
+- the parts sum EXACTLY to the score on 3,036 of 3,036;
+- the score agrees with the probe's reference on 3,023 of 3,036. The 13 that differ are hired-only places, moved by the real R2 counterfactual, with no band moved;
+- the band agrees on 2,929 of 3,036 (see call 1);
+- the proof of "derived" (strip the defence profile, recompute, compare) holds on 432 of 432, and 120 of 120 in `tests/generators/defenceParts.test.js`;
+- the guard is `tests/lint/defenceDerived.walker.test.js`: five arms, each planted red, including the reader-surface arm of record 328;
+- strings V3 adds or changes on a reader's surface: **none** (the Defense tab is unchanged; a render test shows it).
+
+## Calls taken by this seat (each vetoable)
+
+1. **The band reads the tenths score** (`readinessBandOf(score)`), so the badge never disagrees with its number. The probe banded `round(total)`; 107 births sit less than 0.5 below a cut.
+2. **R2's counterfactual is the real V3 place with a watch**, not the probe's shortcut. It keeps the owner's pin green (agree-village-45).
+3. **Services and magic still read the SHOWN label**; only defence and the stores read the standing one. That leaves two readers of "what a place can keep up" in a crisis: a ruling for the chair.
+
+## NOT DONE: the follow-on seat's (said here, not dropped)
+
+- **F7 and F4** (the hired and crisis lines under standing-label pay). **The census's low line** (row 2's entrants, classed).
+- **F3 is built but not measured:** the stores now scale at the standing label, which should restore the held granary in famine towns. Re-measure `foodRecord.storesHeld` on the review's six births (agree-city-58, agree-force-famine-town-4, -city-1, -city-5; cold-famine-town-1, cold-famine-city-1) and on unseen famines.
+- **The census at the final tip.** The base is taken: `probes/UPKEEP-5/census/69b53decd.counts.*`. The tip is not.
+- **The whole suite at the final tip.** The V3 builder's red classes are in `UPKEEP-V3-BUILD.md` §"Reds not cured". generatorGoldenMaster is red; no golden's door was run. The draft record's six golden surfaces by measure are not updated.
+- **The edge bundles, last and alone** (`npm run build:edge-shared`): not re-emitted. They are STALE against `src/` at this tip.
+- The second layer (R12 with record 324, R16, R17's weights) and prosperity (f): briefed by the chair. The technical state is in `docs/chair/2026-11-13/UPKEEP-6-BRIEF.md`.
+
+## Incidents
+
+- In this seat's own scratch worktree, a `git stash` and pop of one file, restored at once.
+- The V3 builder truncated three stale files in the shared scratch `out/` folder.
+- The V3 builder used one `pkill -f "vitest run"`, which could have reached a parallel vitest. Nothing of this seat's was running then, and other seats' were not checked.
+
+---
+
 # COHERENCE-UPKEEP: the hand-back (the fourth seat, COHERENCE-UPKEEP-4, 2026-11-13)
 
 **The lane:** `lane/coherence-upkeep-2026-11-12`. The tip is the commit that adds the edge bundles (the last commit, alone); read it back from the remote. **An independent reviewer reads the whole lane next.** The third seat's record and the first two seats' are kept below this section, unchanged.

@@ -15,69 +15,20 @@
 - never read a gate through a pipe;
 - registers only through their doors; no baseline banked upward; never `--tighten`.
 
-## In this order (the chair's record 323)
+## The technical state (the chair briefs the design: R12 with record 324, R16, R17)
 
-### 1. R17: THE KIND OF WALL COUNTS
-The walls part is scaled by the wall's kind, read from the roster's defence home `src/domain/institutions/defenseInstitutionBuckets.js` (whether V3 already returns the kind there is said in the hand-back).
-- Stone: today's full value (no stone-walled birth moves).
-- Palisade: 0.6 (starting weight).
-- Earthwork (bank and ditch): 0.4.
+**The homes this lane made:**
+- **`economicState.prosperityStanding`** (prosperity's writer, `economy/economicState.js`): the label with no crisis in force, its Subsistence draw replayed. It is read through `domain/facts/keep.js :: keepOfRecord(economicState)`, falling back to the shown label on old saves. Defence's pay and the stores read it; services and magic still read the shown label (call 3 of the hand-back).
+- **`src/data/defenceWeights.js :: DEFENCE_TUNING`**: every defence number, each with its reason. It is registered in the tuning inventory. `WATCH_IN_STEAD` holds R2's counterfactual flags.
+- **`domain/institutions/defenseInstitutionBuckets.js`**: the roster's defence home. It holds the traditions, the small place's tests and the wall's KIND (R17: stone, palisade, earthwork; nothing reads it yet).
+- **`defenseProfile.parts`**: in the record only. The sum is exact; groups BUILT, STANDS, SUSTAINS, GROUND, AGAINST, LIMIT.
 
-**MEASURE FIRST:**
-- every roster name that sets "walls", with counts by size;
-- what a citadel or a keep is on the roster: a kind of wall, or a house of its own that no term reads;
-- the births that change band, by size.
+**The guards:** `tests/lint/defenceDerived.walker.test.js` (five arms) and `tests/generators/defenceParts.test.js` (exact sum, proof of derived).
 
-The weights go in the defence weight table (`src/data/defenceWeights.js` or as V3 named it), through the tuning register's door.
+**The probes:** `docs/chair/2026-11-13/probes/UPKEEP-5/` (README):
+- `births.mjs` births the 3,036. Variant `V4` is V3 as built; variant `V4C` is R12 as first proposed, not the record-324 amendment. On a tree without `prosperityStanding`, apply `measure-lines.patch`.
+- `rederive.mjs` is the proof of derived.
+- `an3.py` / `an5.py` are the tables.
+- `census/` holds the base census counts. The census tool is `lane/second-wave-census-2026-11-12:docs/chair/2026-11-12/probes/SECOND-WAVE-CENSUS/census.sh`.
 
-### 2. R16: WAR DRAINS
-Wartime enters the crisis table as one more row. It takes **15 economic points** from what SUSTAINS (the stores, the purse, the market) and leaves who stands and what is built alone. The 15 is a starting weight, for the owner's veto, in the weight table.
-- **Today** wartime touches no part. Its only reach was the capped label, and V3 removed that (the parts doc, finding 4, R4).
-- **MEASURE:** its mean cost on unseen births, and the wartime births beside today and beside V3.
-
-### 3. R12: THE NAMED CONDITIONS (the owner's word, record 321, ruled by the chair)
-Derivation sets the FLOOR and CEILING of a part. A CONDITION of the body or work decides where it stands between them.
-- **Which parts:** garrison, militia, watch, hired company, adventurers' charter, wardens, the walls, and the armed households of small places.
-- **The condition:** below, ordinary or above. The fifth seat measured odds of 0.2 / 0.6 / 0.2 and a step of a tenth of the part (second addendum: mean move 0.34 points, p95 1.26, 0.2% over three points, 63 band changes in 3,036). The wall's kind (R17) sets the range its condition moves in.
-- **The facts close "above":** walls unmended; a bought body the place cannot pay (bought < 0.6); a paid body below full pay (funded < 0.7); any standing body a crisis in force takes from. A condition never contradicts a line the page already prints about that house, and it names the body or the work, never its leader.
-- **The record:** drawn ONCE at birth on ITS OWN REGISTERED FORK, stored on the house's own record, read through ONE leaf.
-  - It moves no existing draw: the fork census proves it, its figures re-keyed with the cause.
-  - An old save without a condition reads ordinary.
-  - An edit or a regeneration of another section never re-rolls it (name the test).
-  - The veil treats it as part of the house's row. The exports and the PDF carry it, or the writer-reach register is answered through its door.
-- **The proof of "derived"** (strip defence, recompute, equal) still holds: the condition is the house's fact.
-- **Words:** one short line per condition per part, written to the SOP. Ordinary prints nothing. Each line prints on the Defense tab's part line and on the house's card. All are listed for the owner's veto.
-- **Measure, in the addendum's form:** sameness with and without conditions, the spread, and the bands moved by condition alone.
-
-### 4. STAGE TWO, LEFT: F7 and F4 (the hired company's and the crisis lines; `src/generators/safetyProfile.js :: keptGuardLine`)
-Under V3, PAY READS THE STANDING LABEL (`economicState.prosperityStanding`), so a crisis no longer reaches pay through the label.
-- **The caller today:** `keptGuardLine` is called from `src/generators/economy/economicState.js` (after prosperity) with the SHOWN label. Read V3's tip to see whether it now passes the standing one.
-- **F7:** the hired company's line READS THE LABEL. At least two true readings, paid in full (bought ≥ 0.6, Moderate and up) and paid short (≤ Poor), must be reachable and counted.
-  - The mercenary pair ("There is no standing guard; a hired company is paid …" / "… the coin to keep it runs short …") printed on 0 of 660 + 1,288 births (the review's F7): every born mercenary stands beside a watch. Make it reachable by its true condition, or remove it with its reason.
-  - The charter-hall line is one line for every label up to Comfortable: give it a twin keyed ≥ moderate against ≤ poor.
-  - "Hired swords back the garrison when the purse allows" is keyed ≤ comfortable: re-key it on what the place can pay.
-- **F4:** "…paid from what the hunger leaves" prints in sieges with no deficit. Under V3 the crisis lines' premise (the crisis caps the label that sets pay) is gone. Decide:
-  - re-word them against the standing label the R3 rule asks the page to show, e.g. "…paid as it was before the famine" / "…before the siege"; or
-  - retire them with their reason.
-
-  The chair's ruling of 2026-11-12, point 1 ("never call the place poor when the crisis is why") must still hold. Count lines removed, and how many were true.
-- F5 is DONE (2d88c66c4).
-
-### 5. STAGE TWO, LEFT: the census low line
-The review's F8: the 95 towns that entered census row 2 at the fourth seat, CLASSED.
-- The fifth seat re-took the census, base 69b53decd against its final tip. Its class table is in the hand-back.
-- If a row-2 entry class is still unnamed there, name it.
-
-### 6. PROSPERITY (f), with R12(i), LAST
-Stage one (f) for prosperity: measure and show, BUILD NOTHING. The census of its terms is done: `docs/chair/2026-11-13/probes/UPKEEP-5/census-prosperity.md` (35 terms: CONTRIBUTION 6, CAP/FLOOR 12, PENALTY 14, SET 3; DERIVED 32, DRAWN 1, WEIGHT 2). Notable points in it:
-- the famine acts on prosperity four times;
-- the food surplus bonus always adds 0 (`Math.round(0.4)`, `prosperity.js:319`);
-- the one draw is the Subsistence branch (`prosperity.js:185`).
-
-What is left:
-- the itemised form (prosperity as the sum of its named contributions, a crisis acting once);
-- the labels it gives against today's, by size, on the same 3,036 births;
-- the eight towns' sums;
-- R12(i): class the Subsistence draw (what it decides, its range, whether the page gives it a name).
-
-Put it in `UPKEEP-DEFENCE-PARTS.md` as its own part. One message to the chair when pushed.
+**Unfinished:** see the hand-back's "NOT DONE" list (`docs/chair/2026-11-12/UPKEEP-HANDBACK.md`, top part).
