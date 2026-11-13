@@ -249,11 +249,17 @@ const COUNTED_HOUSES = /** @type {Readonly<Record<string, string>>} */ (Object.f
 /** F13: guilds are a counted noun, read off the roster's guild rows (a guild hall's words name a building, not a guild). */
 const GUILD_ROW = /\bguilds?\b/i;
 /**
- * F6 (the third seat; REVIEW-W2B: "read a range row's own count"): a roster row holds at least its own minimum —
- * "Parish churches (2-5)" two, "Merchant guilds (50-100+)" fifty — and a row without a range one.
+ * F6 (the third seat; REVIEW-W2B: "read a range row's own count") and F9 of the second read ("a range row counts at its
+ * minimum, so a number inside the range is called false"): a roster row holds AT MOST its range's maximum — "Parish
+ * churches (2-5)" five, "Craft guilds (5-15)" fifteen; an open range ("50-100+", "5+") has no maximum; a row without a
+ * range one. A count is false only above the sum of these.
  * @param {string} name @returns {number}
  */
-const rowCount = (name) => { const m = /\((\d+)\s*(?:-|–|\+)/.exec(name); return m ? Number(m[1]) : 1; };
+const rowCount = (name) => {
+  const m = /\((\d+)\s*(?:(?:-|–)\s*(\d+)\s*(\+)?|(\+))\s*\)/.exec(name);
+  if (!m) return 1;
+  return m[3] || m[4] ? Infinity : Number(m[2]);
+};
 
 /**
  * THE NEW WORDS: STATES, SIZES AND COUNTS (the chair's record 288, ruling 1, B (ii): "states, sizes and counts

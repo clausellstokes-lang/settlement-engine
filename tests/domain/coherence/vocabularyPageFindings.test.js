@@ -261,7 +261,21 @@ describe('F13 / F6 — the counts', () => {
   test('F6: a range row holds at least its own minimum', () => {
     expect(words(town([{ name: 'Parish churches (2-5)' }]), 'Two churches serve the parish and the market both.')).toEqual([]);
     expect(words(town([{ name: 'Parish church' }]), 'Two churches serve the parish and the market both.')).toEqual(['housesCount']);
-    expect(words(town([{ name: 'Mills (2-5)' }]), 'Three mills grind for the whole valley each autumn.')).toEqual(['housesCount']);
+    // F9 of the second read: a number INSIDE the range is no longer false (it was, at 1fb15980d, read at the minimum)
+    expect(words(town([{ name: 'Mills (2-5)' }]), 'Three mills grind for the whole valley each autumn.')).toEqual([]);
+  });
+  /**
+   * F9 of the second read (REVIEW-W2B-1fb15980d: "a range row counts at its minimum, so a number inside the range is
+   * called false"). A counted house is false only ABOVE the range's maximum; an open range ("50-100+", "5+") has none.
+   * Red at 1fb15980d ("Three temples" over "(2-5)" and "twelve guilds" over "(5-15)" were findings).
+   */
+  test('F9: a count inside a range row is true; above its maximum it is false; an open range has no maximum', () => {
+    expect(words(town([{ name: 'Parish churches (2-5)' }]), 'Three temples serve the parish and the market both.')).toEqual([]);
+    expect(words(town([{ name: 'Craft guilds (5-15)' }]), 'Twelve guilds share the market square between them.')).toEqual([]);
+    expect(words(town([{ name: 'Craft guilds (5-15)' }]), 'A dozen guilds share the market square between them.')).toEqual([]);
+    expect(words(town([{ name: 'Mills (2-5)' }]), 'Six mills grind for the whole valley each autumn.')).toEqual(['housesCount']);
+    expect(words(town([{ name: 'Craft guilds (5-15)' }]), 'The 20 guilds share the market square between them.')).toEqual(['housesCount']);
+    expect(words(town([{ name: 'Merchant guilds (50-100+)' }]), 'The 120 guilds share the market square between them.')).toEqual([]);
   });
   test('F6: law enforcement is a watch or a garrison; a headman keeps the law but is not law enforcement', () => {
     const f = (institutions) => factsOf(town(institutions));
