@@ -97,3 +97,51 @@ Measured at c1efd7f93 on the 740 records (the PDF's canon dossier, by section) a
 - Item 5: "run by patronage and law" standing alone; "built on tribute and the ritual calendar"; "built on tribute, market and waterworks"; "built around kin and an assembly ground"; "kin by kin"; "built around courtyards".
 - Item 6a: "{name} has gone short of food for a second season."
 - Item 6b: "…, and no god is named here." 
+
+---
+
+# PART 2 — R2-CODE-B-2, the second seat (round three's list for this lane)
+
+**Seat:** R2-CODE-B-2 (session_01FE9mEsvRCQQpZm8mEtEsz3). **Tip read back from origin at start:** 62e30c7e7 (as the brief gave it). Scratch worktree on a local branch at that tip; plain pushes to `lane/r2-code-b-2026-11-13`.
+
+## The brief's rulings, copied (the chair's message of 2026-11-13; it is not on the branch)
+- THE HOUSE'S LABEL ON EVERY SURFACE, then the lane's last rows and its ONE final statement. Files: the cut's package "lane rb" (serviceComponents.jsx, tabs/InstitutionsTab.jsx, domain/display/institutionDisplayName.js, npcComponents.jsx, settlementQuickGuide.js, crisis/crisisCast.js, tabs/DailyLifeTab.jsx) AND, so one lane holds a house's label on every surface, tabs/CrisisTab.jsx, tabs/power/PowerStrata.jsx, tabs/WhoRunsThisTownPanel.jsx, tabs/ViabilityTab.jsx with generators/economy/viability.js (stop #939 now this lane's), and the PDF's sections that print a house's name. NOT this lane's: src/pdf/sections/DefenseSecurity.jsx (defence lane); tabs/DefenseTab.jsx, HistoryTab.jsx, SubstrateTab.jsx (another seat); tabs/EconomicsTab.jsx and ResourcesTab.jsx (third leaves lane) except ONE line, the "Via: <house>" label, named as shared.
+- RULED (a) THE HOUSE'S LABEL: one display leaf on every surface, both PDF variants (built on chainHouses and institutionDisplayName); strips count ranges, household ranges and floors, population gates, conditions, magic gates; a count word is a plain plural from the display-name table ("Inn (multiple)" -> "Inns"); in-world qualifiers stay; the table's own ranges in scope; no count line added; catalogue names, record and goldens' keys unchanged, the births' field diff EMPTY for it. ACCEPTANCE: the cut's census at ZERO for ranges and conditions on the page, both PDF variants, the Foundry journal and the Tonight sheet; thirty labels read in their towns; a guard that reds on a raw catalogue range or condition on any rendered surface.
+- RULED (b) "REQ" leaves the roster and every other surface of this lane's; "YOU" stays where true.
+- RULED (c) the crisis cast's "the one with the least say" only in a house of more than one; in a house of one the person is named without it.
+- RULED (d) #804 ("Hunting grounds" as a chain card's "From" where the record says the resource is absent): display only, page and PDF. NOT this lane's: #452 (third leaves lane); #191 #381 #513 #370 #371 #672 (data lane and defence lane; the chair's correction of 19:0x: "#370, #371 and #672", not "#370 to #372"); #312 (powers lane); #215 (round two's first code lane); #257 #437 #329 #858 (round-three seats); #883 and the sovereignty word (the seat after the merges).
+- The page shows the ratings, never the machinery. No new key in the record; no new word in the vocabulary file. A name a user can hide by hand is never written into a stored, composed sentence. A claim of zero is counted on every surface (tabs, Tonight, PDF text, Foundry journal, exports).
+- HIGH first; each writer its own commit, measured first on births in the app's shape and on the reader's own town, red first; the false sentence gone and what prints in its place read true; a `round2` line may already be cured; new wording listed with its town; no commit at or below 62e30c7e7 rewritten. Then THE FINAL STATEMENT once.
+- AUTHORISED: scratch worktrees, `npm ci`, commits on the lane, plain pushes to it. NEVER: another branch, `--no-verify`, force, an empty push, a PR, master, a golden's door, a deploy, a hosted database.
+- Messages to the chair only for a total stop, when the house's label stands at zero on every surface (one line, tip and census before/after), and the hand-back (150 words).
+
+## The chair's rulings received by this seat (notifications)
+- 19:05 UTC: ADDED RULING (e) in a file of this lane's, after the house's label: a chain run only through an "Access to …" row (a hamlet's "Access to external mill", "Access to parish church") is not run here; the card says the work is done elsewhere in the page's own words, or does not print as running. The card's read is `SupplyChainsPanel.jsx :: chainFlowFacts`. Use the page's local-production test's wording (`tradeListDisplay.js :: localProductionAsPrinted`, third leaves lane) restated in this lane's leaf, named here for the seat after the merges. Measure first on births in the app's shape (thorps, hamlets); count the cards on the page and the PDF; read ten.
+- 19:06 UTC: the cut's #13 and #55 are this lane's by their true writer (crisisCast.js :: bruntCandidates, CAST_REASONS.bruntLeast), with #11 #53 under ruling (c). Cure the four together.
+- 19:28 UTC: THE CENSUS INSTRUMENT HAZARD: census.sh (lane/second-wave-census-2026-11-12) exits 0 when its counter fails (piped). After every census run check the counter's own exit and that counts.txt is non-empty with the expected rows; say so in the final statement.
+- (at start) the chair's correction: ruling (d)'s "#370 to #372" reads "#370, #371 and #672".
+
+## Instruments (rebuilt; scratchpad only)
+- The reader's render (`render.rr2s.jsx`, `surfaces.census.jsx`, unchanged) on the reader's 20 seeds, app shape, page + all three PDF variants + all three Foundry variants + the Tonight sheet, records beside them.
+- The cut's census `classes.mjs` (unchanged) AND, because it is BLIND to the Foundry journal (the journal is markdown and escapes a bracket: "Mills \(2-5\)"), a held-house census `mycensus.mjs`: every house the town's own record holds with a machinery bracket, in its raw or display spelling, case-folded, on every surface, the Foundry markdown unescaped. The cut's "Foundry and Tonight: 0" was 78 + 78 at 62e30c7e7.
+- `full.census.jsx`: the same walk for the census's 720 seeds (births.mjs's shapes) and the reader's 20 in one pass; `births.mjs` + `fielddiff.mjs` (the reader's) for the 720 field diff.
+
+## Items (this seat)
+| item | rows | commit | measured (reader's 20, held-house census unless said) |
+|---|---|---|---|
+| (a) the leaf widened: household ranges/floors pinned, "Inn (multiple)" -> "Inns", houseLabelsInText | NPC card "Inn (multiple)" | a2088f22c | 350 -> 346 (cut's classes); records 0 |
+| (a) the roster's label | 22 HIGH + 26 MED (InstitutionCard) | e28ac16fa | Institutions 62 -> 0 |
+| (a) InstitutionLink + profile heading: Services providers, Power lists | 26 HIGH + 27 MED (ServiceItem), PowerStrata | d425c31c1 | Services 62 -> 0, Power 54 -> 1 |
+| (a) EntityLink / EntityRef: a door to a house | Crisis cast + levers (#400 #516 #754 …) | 69b449d97 | Crisis 8 -> 0 |
+| (a) WhoRuns panel, page + PDF | #945 | 963167f4b | Power 1 -> 0 |
+| (a) the Outlook's stored list read with labels, page + PDF (stop #939) | #472 #508 | 4b11e3910 | Outlook 1 -> 0 |
+| (a) PDF Institutions, Services, Notable NPCs, Crisis | the PDF twins | 9b898d5c3 (+3988270a8 baseline addresses) | PDF 78 -> 1 per variant |
+| (a) Foundry journal (SHARED file, five lines) | the journal twins | 2af8bdfa9 | Foundry 78 -> 0 per variant |
+| (a) Economics "Via:" (SHARED line) | the cut's Economics flow | 4909ba684 | Economics 1 -> 0 |
+| (a) crisis hooks' houseInProse ("(50-100+)") | the first seat's list | 668fe2baf | the conversion metropolis: 0 |
+| (b) REQ off the roster; PDF "Source: Required/Generated/…" off | the roster's REQ (224) | c40969214 | REQ 224 -> 0; PDF Source 695 -> 3 per variant |
+| (c) "least say" only in a house of several, never beside the lever | #11 #13 #53 #55 #268 | 24ab15c9b | 720: 71 -> 22 rows; RECORDS MOVE 49 towns, cast reasons only |
+
+**Generated-record moves (this seat):** all of (a) and (b): the 720 births byte-equal to 62e30c7e7 (field diff 0 leaf diffs). (c): 49 of 720, `stress[].cast.roles[].reason` only.
+
+## Left on the reader's 20 after (a), and whose: "Gates (if walled)" on the Defense tab's force cards (src/components/new/tabs/DefenseTab.jsx) and the PDF's forces (src/pdf/sections/DefenseSecurity.jsx), page 1 and 1 per PDF variant: the defence lanes'. REQ/FORCED on the same two surfaces (11/10 page, 25/14 per PDF variant): the same. The Foundry Defense page's "(required)", "(faction_boost)", "(coherence_repair)" after each force: the generator's provenance, in journalPages.js (upkeep lanes' file), not cured here (the defence surfaces are the defence lane's).
