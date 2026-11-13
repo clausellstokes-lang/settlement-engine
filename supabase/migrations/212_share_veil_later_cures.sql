@@ -38,6 +38,9 @@
 --       the five criminal-house booleans (hasCriminalInst, hasThievesGuild, hasBlackMarket, hasSmuggling, hasGangInfra,
 --       under economicState.compound.inst and economicState.safetyProfile.compound.inst) read as the houses the
 --       projection still lists would raise them.
+--       And the criminal income row (economicState.incomeSources[] with isCriminal), whose label is made from the
+--       criminal houses' list and whose sentence carries the capture figure, is withheld whole where the
+--       Criminal-architecture or the Capture-reading grouping is shut (_gallery_veil_apply).
 --   (13) A HIDDEN TEXT IN ANOTHER SPELLING (COHERENCE-VEIL-8): a second home's text is matched in any case, and the
 --       legacy annotation (history.legacyAnnotations[].annotation), which embeds its event's first lasting effect
 --       with the first letter lower-cased, goes when it embeds a shut string of an event.
@@ -508,6 +511,16 @@ begin
   foreach g in array groupings loop
     s := public._gallery_veil_grouping(s, g);
   end loop;
+  -- COHERENCE-VEIL-8, the chair's ruling (c): the criminal income row is built from what those groupings hide (its
+  -- label from the criminal houses' list, safetyProfile.criminalInstitutions; its sentence carries the capture
+  -- figure, safetyProfile.blackMarketCapture): where either grouping is shut it is withheld whole
+  -- (gallerySecondHomes.js :: withholdCriminalIncome)
+  if groupings && array['block:defense.criminalStructure', 'block:power.criminalUnderside']
+     and jsonb_typeof(s -> 'economicState') = 'object' and jsonb_typeof(s #> '{economicState,incomeSources}') = 'array' then
+    s := jsonb_set(s, '{economicState,incomeSources}', coalesce((select jsonb_agg(e order by o)
+      from jsonb_array_elements(s #> '{economicState,incomeSources}') with ordinality x(e, o)
+     where not (jsonb_typeof(e) = 'object' and e -> 'isCriminal' = 'true'::jsonb)), '[]'));
+  end if;
   return s;
 end $$;
 

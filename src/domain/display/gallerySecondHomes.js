@@ -249,3 +249,19 @@ export function withholdSecondHomes(s, src, gone, openNames, houseFields) {
     });
   }
 }
+
+/** The groupings that hide what the criminal income row is built from (its label's list, its sentence's figure). */
+const CRIMINAL_INCOME_SOURCES = Object.freeze(['block:defense.criminalStructure', 'block:power.criminalUnderside']);
+
+/**
+ * The chair's ruling (c), COHERENCE-VEIL-8: the criminal income row (economicState.incomeSources[] with
+ * `isCriminal`) is built from what two groupings hide: its label from safetyProfile.criminalInstitutions, its
+ * sentence from safetyProfile.blackMarketCapture. Where either grouping is shut it is withheld whole (in place, on
+ * applyVeil's own clone). SQL twin: migration 212 :: _gallery_veil_apply.
+ * @param {Rec} s @param {ReadonlyArray<string>} groupings
+ */
+export function withholdCriminalIncome(s, groupings) {
+  const econ = recAt(s, 'economicState');
+  if (!econ || !Array.isArray(econ.incomeSources) || !groupings.some(g => CRIMINAL_INCOME_SOURCES.includes(g))) return;
+  econ.incomeSources = econ.incomeSources.filter(r => !(isRec(r) && r.isCriminal === true));
+}

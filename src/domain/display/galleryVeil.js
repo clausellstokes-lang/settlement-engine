@@ -70,7 +70,7 @@ import { factionIdFromName } from '../../lib/entities.js';
 import { cardHouseOf } from '../people/cardPowers.js';
 import { brokerageLegalityOf } from '../../data/informationBrokerageTuning.js';
 import { isCriminalInstitution, isClandestineInstitution, isHideableHouse } from '../people/cardVeil.js';
-import { secondHomeSources, withholdImpression, withholdSecondHomes } from './gallerySecondHomes.js';
+import { secondHomeSources, withholdCriminalIncome, withholdImpression, withholdSecondHomes } from './gallerySecondHomes.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {{ address: string, hidden: boolean }} VeilDelta */
@@ -750,6 +750,7 @@ export function applyVeil(publicSettlement, veil) {
 
   // Groupings last (a tab remover sees the cards already trimmed).
   for (const g of groupings) GROUPING_REMOVERS[g](s);
+  withholdCriminalIncome(s, groupings);
   // THE VEIL ON STRINGS (STYLE-RULINGS-2 B10(a), SW-B7b item 2): a block hidden here drops the
   // rungs the owner's save shipped for it as TEXT, so the owner's later toggle needs no re-save.
   dropVeiledPublicProse(s, groupings);
