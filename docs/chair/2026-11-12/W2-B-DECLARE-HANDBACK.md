@@ -265,3 +265,30 @@ Recall by class at `28222eea7`: a house, role or force lacked 21/79 · normal ti
 | F12 | see §3a | | |
 | F13 | `7da06c3cc` | count words to "twelve", "a dozen", digits; guilds a counted noun (the roster's guild rows) | "F13 / F6 — the counts" (F13 plants) |
 
+### 3a. F12: STOP, for the chair's ruling (not done)
+F12 says: "write the readers and dimensions now; leave the getter lines for the merge". The vocabulary's own law (`tests/domain/facts/factVocabulary.test.js`, "a homed dimension names a factsOf getter", and "an unhomed one cannot be declared") reds a dimension whose `home` names no getter. No existing getter carries the facts F12 needs (measured on a 720 record): `magic` carries {functions, level, priority} and no practitioners; `famine` carries {band, known, starvingAllowed, famine}; `imports` is a list of names with no share. So the readers for practitioner, the food balance (`growsMoreThanEats`) and the import share (`normalImportPct`), and F1's `house:` / `resource:` atoms, cannot land ahead of their getters without breaking that law. **Recommendation:** the merge seat writes each getter, its dimension and its reader in ONE commit, and adds the atoms to `registeredWords.js` (`practitioner.atoms`, `onlyJust`, `smallMargin`) there. The alternative is for the chair to rule a "pending dimension" shape the law admits. Not this seat's to decide.
+
+## 4. Item 4: more recall (NOT DONE: context)
+Not reached. The recommendation stands as the brief wrote it: normal times under a crisis in force (60 lines; the `normal` family catches 19 now) and size (39; 17 caught). After item 1, a widening must keep each family below one wrong in ten. Each new word family is read for precision on the 720, as §1 did, before it is kept.
+
+## 5. Item 5: the lane made whole (as far as measured; the chained run writes into the scratchpad)
+- **The six surfaces, by measure** (the draft record `W2-B-DECLARE-shift-record.DRAFT.json`, `thirdSeat`): **all six UNMOVED**. Since `83c84a8ed` this seat touched only `src/domain/facts/registeredWords.js` and `src/domain/coherence/vocabularyPageFindings.js` in `src` (the instrument, which no surface reads). The DS-GEN-9 cure prints nothing (§2: a glance mount, on the page and the PDF alike). No golden door was run.
+- **The census counter, base against tip, and the field diff:** the tip's census was rendered at `83c84a8ed`; the page is unchanged since, because only the instrument moved in `src`. The base `1930cec6e` census and the compare were started by this seat in a chained run (`<scratchpad>/tools/item5.sh`: compare.mjs, then fielddiff.mjs, then the whole suite `--maxWorkers=2`). **Their results are reported in the message, if they finish within this seat's context; otherwise they are OWED.** Part one's compare (every row OLD and EQUAL) stands for the generator: no generator file has moved since.
+- **The whole suite: OWED** unless the message reports it (see above).
+
+## 6. Gates at each `src/` commit (third seat)
+| commit | domain-strict | typecheck:ratchet | eslint (touched) | tests run |
+|---|---|---|---|---|
+| `2ca67e00e` F2 | 0 (1113/1113) | 0 (167/167) | 0 | page + walker 45/45 |
+| `3ff343284` F4 | 0 | 0 | 0 | 51 files, 283 |
+| `28222eea7` item 1 | 0 | 0 | 0 | 51 files, 287; page 18/18 |
+| `44e4f14e2` F5 (tests only) | — | — | 0 | walker + page 55/55 |
+| `7da06c3cc` F13+F6 | 0 | 0 | 0 | page 21/21; 50 files, 271 |
+Every push ran its three pre-push gates: `83c84a8ed..3ff343284` exit 0, then to `28222eea7`'s docs exit 0.
+
+## 7. Calls taken without the chair (vetoable)
+1. Item 1: four families WITHDRAWN from the page list (house, resource, thing, state); the walker still reads them. Recall fell from 112 to 73, and the share of findings naming a cold line rose from 15% to 64%. The brief's rule (more than one wrong in ten: narrow or withdraw) decided it.
+2. The narrowings live in the ONE shared matcher (`namedHere`), so the walker's arms read them too. The state narrowings (past, purpose, event names) were removed once state left the page, to keep the walker's source arm at full strength on crisis words.
+3. The door gained `--thing`, a first-register arm-1 shrink and `--shrink-arm2`. All are shrink-only or banking at the base, as before.
+4. F4 adds a seventeenth thing (`shrine`) and F6 an eighteenth (`lawEnforcement`).
+5. DS-GEN-9's "not anchored" variants are mostly false where they would print (§2). Handed to W2-WRITE as a recommendation, not changed.
