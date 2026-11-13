@@ -16,7 +16,7 @@
  * the Foundry journal read it through `dossierViewModel.js :: deriveProsperityPosture` (the parity
  * contract's `prosperity.inCrisis` row), and the realm register reads it for its line.
  *
- * ⭐ THE CRISIS'S PLAIN NAME is the estate's one crisis noun (`crisis/crisisHooks.js :: CRISIS_NOUN`,
+ * ⭐ THE CRISIS'S PLAIN NAME is the estate's one crisis noun (`crisis/crisisNoun.js :: CRISIS_NOUN`, re-exported by crisisHooks.js;
  * "In the siege, …"), never a second vocabulary; a kind it does not know (a DM's own crisis) is
  * "the crisis". SEVERAL CRISES IN FORCE are all named, in the record's order, because the second
  * word is by definition the place with NONE of them; the nouns are listed ("the famine and the
@@ -32,7 +32,7 @@
  */
 import { PROSPERITY_LABELS } from '../prosperityRank.js';
 import { activeCrisisTypes, crisisKindOf } from '../facts/crisisKind.js';
-import { CRISIS_NOUN } from '../crisis/crisisHooks.js';
+import { CRISIS_NOUN } from '../crisis/crisisNoun.js';
 import { standingLabelOf } from '../facts/keep.js';
 
 /** The noun of last resort, the one `crisisHooks.js` falls back to. */
