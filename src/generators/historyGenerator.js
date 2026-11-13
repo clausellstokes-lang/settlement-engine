@@ -16,7 +16,7 @@ import { pick, random01, randInt } from './helpers.js';
 import { random as _rng, getActiveRng } from '../kernel/rngContext.js';
 
 import { genArrivalDetail } from './narrativeGenerator.js';
-import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription, historyDescVariantsOf, tensionDescription, HISTORY_QUARTER_WORDS, HISTORY_DESC_SIBLINGS, tensionHeldByTimeline } from '../data/historyData.js';
+import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription, historyDescVariantsOf, tensionDescription, HISTORY_QUARTER_WORDS, HISTORY_DESC_SIBLINGS, tensionHeldByTimeline, livelihoodLead } from '../data/historyData.js';
 import { resolveGenerationWorldLaw } from './generationContext.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3b): one line, so no cited line moves
 import {
   STRESS_TO_TENSION,
@@ -445,7 +445,7 @@ const buildHistoricalEvent = (
         // W1 ECO second seat (the owner's style law, 2026-11-07): the lead names what the place lives
         // by (its first export) and says that trade is strained; the top issue that follows is the
         // evidence (on a migration it is the ARRIVALS food note; a departures record writes none).
-        const lead = commodity ? `Life here runs mostly on the ${commodity} trade, and that trade is under strain.` : '';
+        const lead = livelihoodLead(commodity, economicState?.incomeSources); // W2-FIX-DATA-HISTORY item L (the first cut's #267): the lead reads the income shares
         selected.push({
           ...tmpl,
           description: [lead, issueText].filter(Boolean).join(' ') || tmpl.description,

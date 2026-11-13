@@ -1722,3 +1722,36 @@ export const TENSIONS_THAT_NEED_THEIR_OWN_EVENT = Object.freeze(['occupation_leg
  */
 export const tensionHeldByTimeline = (tmpl, timeline) => !TENSIONS_THAT_NEED_THEIR_OWN_EVENT.includes(String(tmpl?.type))
   || (Array.isArray(timeline) ? timeline : []).some((e) => e?.templateType === tmpl.type);
+
+/**
+ * W2-FIX-DATA-HISTORY item L (2026-11-13; the first cut's #267, round two's #368; ROUND-3-CUT-INCREMENT ww-1489): THE
+ * SHORTAGE'S LEAD READS THE INCOME SHARES. "Life here runs mostly on the timber trade" printed where timber was 8 per cent
+ * of the town's income, and "mostly on the wool trade" in a thorp that earns nothing from wool: the commodity is the first
+ * export's (`tradeCommodity.js :: deriveTradeCommodity`), and the lead never read what the town lives on. The chair's
+ * ruling: a lead that says what a town lives on reads the record's own income shares (`economicState.incomeSources`,
+ * each a source and its percentage); "mostly" only where that source is the largest and more than half; the largest
+ * named as the largest where it is half or less; "among the trades" where it is a lesser one; where no income source is
+ * the commodity's trade, no lead (the issue that follows stands alone). Draw-free. VETOABLE wording (the owner's).
+ * Each commodity's own income source, by the economy's labels (`economy/economicState.js`).
+ */
+export const LIVELIHOOD_INCOME_SOURCE = Object.freeze({
+  timber: /^Timber Trade$/, grain: /^Grain Sales$/, fish: /^Fish & /, wool: /^Wool & Textile Trade$/, iron: /^Iron & Metalwork$/,
+  stone: /^Stone Quarrying$/, alchemy: /^Apothecary & Alchemy$/, 'medicinal herbs': /^Herbalist & Apothecary$/,
+});
+
+/**
+ * @param {string | null | undefined} commodity the first export's commodity
+ * @param {ReadonlyArray<{ source?: unknown, percentage?: unknown }> | null | undefined} incomeSources
+ * @returns {string} the lead, or '' where the town's income holds no source of that trade
+ */
+export const livelihoodLead = (commodity, incomeSources) => {
+  const own = commodity ? LIVELIHOOD_INCOME_SOURCE[/** @type {keyof typeof LIVELIHOOD_INCOME_SOURCE} */ (commodity)] : null;
+  const rows = (Array.isArray(incomeSources) ? incomeSources : []).filter((r) => typeof r?.source === 'string' && Number.isFinite(Number(r?.percentage)));
+  const mine = own ? rows.filter((r) => own.test(String(r.source))) : [];
+  if (!mine.length) return '';
+  const share = Math.max(...mine.map((r) => Number(r.percentage)));
+  const largest = Math.max(...rows.map((r) => Number(r.percentage)));
+  if (share < largest) return `Among the trades the place lives by, the ${commodity} trade is under strain.`;
+  return share > 50 ? `Life here runs mostly on the ${commodity} trade, and that trade is under strain.` : `The ${commodity} trade is the largest the place lives by, and it is under strain.`;
+};
+

@@ -14,21 +14,26 @@
  * occupation; it is set aside there (`historyData.js :: tensionHeldByTimeline`), and the former officer is not said
  * under an occupation in force.
  *
+ * ITEM L (the first cut's #267, round two's #368; ROUND-3-CUT-INCREMENT ww-1489): the shortage's lead said a town "runs
+ * mostly" on its first export's trade where that trade is a sliver of its income; it reads the income shares now
+ * (`historyData.js :: livelihoodLead`).
+ *
  * THIS FILE REDS WHEN: a cured line prints again in its guard town, or a declaration is dropped or turned.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { HISTORY_TEMPLATE_RECORD_DECLARATIONS, trueToRecordAt } from '../../src/generators/historyGenerator.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
-import { HISTORICAL_EVENTS_DATA, TENSIONS_THAT_NEED_THEIR_OWN_EVENT, tensionHeldByTimeline } from '../../src/data/historyData.js';
+import { HISTORICAL_EVENTS_DATA, TENSIONS_THAT_NEED_THEIR_OWN_EVENT, tensionHeldByTimeline, livelihoodLead } from '../../src/data/historyData.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 
 /** A reader's town re-born in the app's own shape (the seed's tier and ticked crises). */
 const born = (/** @type {string} */ seed) => {
-  const [, settType, crises] = /** @type {RegExpMatchArray} */ (seed.match(/^r[a-z0-9]+-(\w+?)-([a-z_+]+)-\d+$/));
+  const [, settType, crises, route] = /** @type {RegExpMatchArray} */ (seed.match(/^r[a-z0-9]+-(\w+?)-([a-z_+]+)(?:-([a-z_]+))?-\d+$/));
   const selectedStresses = crises === 'calm' ? [] : crises.split('+');
-  return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType, selectedStressesRandom: false, selectedStresses, _randomizePriorities: true }), null, { seed, customContent: {} });
+  const routed = route && route !== 'rand' ? { tradeRouteAccess: route } : {}; // REVIEW-R2-STAGES' rr2s-<size>-<crises>-<rand|route>-1
+  return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...routed, settType, selectedStressesRandom: false, selectedStresses, _randomizePriorities: true }), null, { seed, customContent: {} });
 };
 /** Every history sentence of a record (the timeline's and the tensions'). */
 const historyText = (/** @type {any} */ s) => JSON.stringify([s.history.historicalEvents, s.history.currentTensions]);
@@ -97,5 +102,28 @@ describe('W2-FIX-DATA-HISTORY item C: the occupation\'s legacy only where the ti
     const own = s.history.historicalEvents.find((/** @type {any} */ e) => e.templateType === 'occupation_legacy');
     expect(own, 'the past Occupation on the timeline').toBeTruthy();
     expect(historyText(s)).not.toContain('former occupier officer');
+  }, 60_000);
+});
+
+describe('W2-FIX-DATA-HISTORY item L: the lead says what the town lives on by its income shares', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const inc = (/** @type {[string, number][]} */ rows) => rows.map(([source, percentage]) => ({ source, percentage }));
+
+  it('"mostly" only where the trade is the largest source and more than half; the largest, among the trades, or nothing', () => {
+    expect(livelihoodLead('timber', inc([['Timber Trade', 61], ['Market Taxes', 39]]))).toBe('Life here runs mostly on the timber trade, and that trade is under strain.');
+    expect(livelihoodLead('timber', inc([['Timber Trade', 40], ['Market Taxes', 35], ['Guild Fees', 25]]))).toBe('The timber trade is the largest the place lives by, and it is under strain.');
+    expect(livelihoodLead('timber', inc([['Agricultural Rents', 92], ['Timber Trade', 8]]))).toBe('Among the trades the place lives by, the timber trade is under strain.');
+    expect(livelihoodLead('wool', inc([['Agricultural Rents', 92], ['Timber Trade', 8]])), 'no wool income: no lead').toBe('');
+    expect(livelihoodLead('salt', inc([['Agricultural Rents', 100]])), 'no income source of that trade').toBe('');
+    expect(livelihoodLead(null, inc([['Timber Trade', 100]]))).toBe('');
+  });
+
+  it('rr2s-village-famine-rand-1 (#267): timber is a sliver of the income, so the town does not "run mostly" on it', () => {
+    const s = born('rr2s-village-famine-rand-1');
+    const timber = (s.economicState.incomeSources || []).find((/** @type {any} */ r) => r.source === 'Timber Trade');
+    expect(timber && timber.percentage, 'timber is a lesser source here').toBeLessThan(50);
+    const text = historyText(s);
+    expect(text).not.toContain('runs mostly on the timber trade');
+    expect(text).toContain('Among the trades the place lives by, the timber trade is under strain.');
   }, 60_000);
 });
