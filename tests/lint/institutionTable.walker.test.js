@@ -229,8 +229,11 @@ describe('the column census, measured across the estate', () => {
     // ⭐ RE-MEASURED 2026-11-12 (COHERENCE-UPKEEP, the chair's ruling (A) on the services STOP): 1,849 → 1,834, ONE
     // cause, c19e96e23 — services are kept as far as the place can pay, by a draw-free roll after the seeded one, so the
     // rule only takes rows away (0 added on the lane's 360). The liveness anchor is unchanged in kind.
-    expect(serviceRows, 'the header claims 1,834 instantiated service rows over these thirty')
-      .toBe(1834);
+    // ⭐ RE-MEASURED 2026-11-13 (COHERENCE-UPKEEP-5, the review's F2): 1,834 → 1,837, ONE cause — a house's own
+    // service (its catalogue's guaranteed rows and every rite) is never held back by the upkeep roll, so 3 rows the
+    // roll had taken from standing houses here come back (0 removed). The liveness anchor is unchanged in kind.
+    expect(serviceRows, 'the header claims 1,837 instantiated service rows over these thirty')
+      .toBe(1837);
     expect(
       carriers,
       'a generation step began writing `settlement.services`. The schema declares the field and'

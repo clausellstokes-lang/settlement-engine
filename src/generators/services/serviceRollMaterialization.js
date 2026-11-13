@@ -156,6 +156,17 @@ function availableServiceIdentityKey(service) {
 const BOUGHT_CATEGORIES = new Set(['healing', 'lodging', 'food', 'equipment', 'transport']);
 
 /**
+ * COHERENCE-UPKEEP-5 (the review's F2; the proposal's §c.6 "never scaled: … a vocation"): A HOUSE'S
+ * OWN SERVICE IS NEVER SCALED. A burial ground buries, a market square holds its market, a temple
+ * keeps its rites; only what a house offers beyond its vocation is kept as far as the place can pay.
+ * Its own service is every row its catalogue GUARANTEES (`p >= 1`: offered at every tier, by the
+ * catalogue's own word) and every rite (`serviceDomainOf` 'religion').
+ * @param {any} service @param {string} institutionName @returns {boolean}
+ */
+const isOwnService = (service, institutionName) => Number(service.p) >= 1
+  || serviceDomainOf(service.name, institutionName) === 'religion';
+
+/**
  * The draw-free upkeep roll, 0..1, keyed on the birth seed, the institution and the service (FNV-1a
  * with an avalanche finalizer). It consumes NO PRNG draw, so the step's seeded stream and every
  * roll above it are untouched.
@@ -335,7 +346,7 @@ export function materializeInstitutionServiceRolls(input) {
         if (!row) continue;
         // COHERENCE-UPKEEP (ruling 4): a bought service is kept as far as the place can pay, by a
         // draw-free roll; the seeded rolls above are untouched.
-        const bought = !customService && (BOUGHT_CATEGORIES.has(category)
+        const bought = !customService && !isOwnService(service, String(institution.name || '')) && (BOUGHT_CATEGORIES.has(category)
           || serviceDomainOf(service.name, institution.name) === 'commercial');
         const share = bought ? boughtShare('services', keep) : 1;
         if (share < 1 && upkeepRoll(upkeepSeed, String(institution.name || ''), String(service.name || '')) >= share) {
