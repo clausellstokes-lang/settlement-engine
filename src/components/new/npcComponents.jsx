@@ -188,6 +188,9 @@ export function ConflictCard({conflict:c}) {
     <div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'12px 14px',marginBottom:10}}>
       <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:6}}>
         <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:d.color,background:`${d.color}18`,padding:'1px 6px',letterSpacing:'0.05em'}}>{d.label}</span>
+        {/* ROUND THREE (the cut's #389 "Moderate tensionMilitary Council vs …"): a space the copied text keeps between the
+            pill and the parties; a whitespace text node between flex items does not move the layout. */}
+        {' '}
         <span style={{...serif,fontSize: FS['14'],fontWeight:600,color:swatch.inkMag}}><MentionText text={c.parties?.[0]} structural/> vs <MentionText text={c.parties?.[1]} structural/>{c.issue?` · ${c.issue}`:''}</span>
       </div>
       {!c.issue&&(c.desc||c.description)&&<p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 6px'}}><MentionText text={c.desc||c.description}/></p>}
@@ -343,9 +346,17 @@ export function NPCInlineCard({
   // has an allegiance to the thieves guild" (the owner). The DM's line: "answers to {guild}, through {handler}".
   const allegiance = allegianceOf(npc);
   const allegianceGuild = allegiance ? (allegiance.power || allegiance.house || null) : null;
-  const allegianceHandler = allegiance?.handler
-    ? ((placeSettlement || settlement)?.npcs || []).find((n) => String(n?.id) === allegiance.handler)?.name || null
+  // ROUND THREE (the cut's #967 #968 #1097: "answers to Whisper market, through Achilles Melissenos", the Black market's
+  // black marketeer): the handler is named only where the record puts the handler in the house or power the person answers
+  // to — the handler's own house (`institution.key`) is it, or the handler holds a standing in it. Otherwise the line says
+  // whom the person answers to and names no go-between the record does not give that house (284 of 923 such lines, 105
+  // of the census's 720 + the readers' 80). The record's `handler` is unchanged.
+  const handlerCard = allegiance?.handler
+    ? ((placeSettlement || settlement)?.npcs || []).find((n) => String(n?.id) === allegiance.handler) || null
     : null;
+  const handlerOfHouse = !!handlerCard && !!allegianceGuild && (String(handlerCard.institution?.key || '') === allegianceGuild
+    || (Array.isArray(handlerCard.memberships) && handlerCard.memberships.some((m) => m?.power === allegianceGuild)));
+  const allegianceHandler = handlerOfHouse ? handlerCard?.name || null : null;
 
   // Pin UI is optional. When `onTogglePin` isn't provided (read-only views,
   // unsaved settlements) the icon doesn't render at all. `pinnedIds` is a Set
@@ -451,6 +462,9 @@ export function NPCInlineCard({
                   border:`1px solid ${swatch.inkMag3}`,padding:'1px 6px',
                 }}>Exposed</span>
               )}
+              {/* ROUND THREE: the badge and the line are two things; a space the copied text keeps ("Hidden allegiance answers
+                  to …", never "Hidden allegianceanswers to …"). A whitespace text node between flex items does not move the layout. */}
+              {allegianceGuild && ' '}
               {allegianceGuild && (
                 <span style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,fontStyle:'italic'}}>answers to <MentionText text={allegianceGuild} structural/>{allegianceHandler && <>, through <MentionText text={allegianceHandler} structural/></>}</span>
               )}
