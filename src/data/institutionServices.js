@@ -1804,7 +1804,7 @@ export const SERVICE_DESC_SIBLINGS = Object.freeze({
   // every road. VETOABLE wording (the owner's).
   "Once-a-year market drawing merchants from across the region.": Object.freeze([
     Object.freeze({ text: "Once-a-year market drawing merchants from across the region.", excludes: Object.freeze(['crisis: under_siege']) }),
-    Object.freeze({ text: "The yearly market that draws merchants from across the region. None can reach it while the roads are held.", twinOf: "Once-a-year market drawing merchants from across the region.", crisis: Object.freeze(['under_siege']) }),
+    Object.freeze({ text: "The yearly fair that draws merchants from across the region. None can reach it while the roads are held.", twinOf: "Once-a-year market drawing merchants from across the region.", crisis: Object.freeze(['under_siege']) }),
   ]),
   "Organised road transport for goods between towns. Reliable, guild-backed.": Object.freeze([
     Object.freeze({ text: "Organised road transport for goods between towns. Reliable, guild-backed.", excludes: Object.freeze(['crisis: under_siege']) }),
