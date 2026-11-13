@@ -271,7 +271,7 @@ remembered number.** Migration numbers grow every release, so this guide
 deliberately does NOT pin a "latest" number that would rot and cause an operator
 to under-apply.
 
-**Current migration head: `211_server_side_share_veil.sql`** (this
+**Current migration head: `212_share_veil_later_cures.sql`** (this
 filename is kept current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js`
 derives the head from `supabase/migrations/` and fails the gate if this line drifts).
 <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->
@@ -291,6 +291,13 @@ is never scripted.
 the gallery read, the party link, the map page and import send nothing their page hides, and a
 frozen gallery copy is served sanitised and veiled (no re-export is owed). It restates four reads
 and adds helper functions; no table, column or row. Undo it first if the set is ever rolled back.
+
+`212_share_veil_later_cures.sql` (COHERENCE-VEIL-7) carries the veil's cures written after the 211 the
+security review cleared to be applied alone (211 is frozen at those bytes: sha256 `eface6d0…0be01`). It
+needs 211 applied before it. It withholds a hidden thing's second copies (a tie's sentences, a house's
+description in the defence lists, a hidden house's name in the economy's chains), the author's
+custom-content library on a Reveal-DM share, and a person switched off in a power roster's copy. It
+restates five functions and adds ten helpers; no table, column or row. Undo it before 211.
 
 **Read these preambles before the push, whatever the head number says.** Most
 migrations are additive and need no separate reading; these are the pending ones whose

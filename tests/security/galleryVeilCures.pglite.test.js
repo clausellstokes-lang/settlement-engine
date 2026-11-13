@@ -16,8 +16,10 @@
  *       frozen copy, a narration), then a fuzz to the edges of what the database stores, both chains;
  *   F4  the member keys a read works on are the ones that name a person in the document;
  *   F7  the map serves what the member's own listing serves (its frozen copy, its narration);
- *   and the rollback: supabase/rollback/211_*.down.sql over 001..211 restores the four reads of a
- *       chain stopped at 210, byte for byte.
+ *   and the rollback: supabase/rollback/212_*.down.sql over 001..212 restores a chain stopped at 211, and
+ *       211_*.down.sql after it restores the four reads of a chain stopped at 210, byte for byte.
+ * 212 (COHERENCE-VEIL-7) carries the cures written after 333b33973, the 211 the owner applies alone (V5-1's
+ * second homes, V5-3, V5-4): AT211 is the chain through that frozen 211, the red control of 212's rows.
  * No clock is read here: the costs (F4, F5, F6) are the probes' (docs/chair/2026-11-12/veil-probe-2).
  */
 import { describe, it, expect, beforeAll, vi } from 'vitest';
@@ -112,13 +114,14 @@ const isRec = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
 const has = (v, s) => JSON.stringify(v ?? null).includes(s);
 
 describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
-  /** @type {any} */ let LIVE; /** @type {any} */ let AT210;
+  /** @type {any} */ let LIVE; /** @type {any} */ let AT210; /** @type {any} */ let AT211;
   /** @type {any} */ let veil; /** @type {any} */ let gallery; /** @type {any} */ let gen; /** @type {any} */ let compose;
   let n = 0;
 
   beforeAll(async () => {
     LIVE = await buildDb();
     AT210 = await buildDb(210);
+    AT211 = await buildDb(211);
     veil = await import('../../src/domain/display/galleryVeil.js');
     gallery = await import('../../src/lib/gallery.js');
     ({ generateSettlementPipeline: gen } = await import('../../src/generators/generateSettlementPipeline.js'));
@@ -747,6 +750,7 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
   // The client's full mode (publicSafe.js :: toPublicSafe) drops the author's custom-content library,
   // `customContentRoster` and `customContentProvenance`: no page of any share shows them. A Reveal-DM share's gallery
   // read and import sent both (and an importer saved them), at 203, at 203 + 211 and at 001..211, marked or not.
+  // The cure is migration 212's (COHERENCE-VEIL-7 moved it out of 211, frozen at 333b33973): 001..211 is a red control.
   const V53_DOC = { ...V31_DOC, customContentRoster: [{ id: 'V53_ROSTER', name: 'a private brew' }],
     customContentProvenance: [{ id: 'V53_PROVENANCE' }] };
   const customContent = (v) => has(v, 'V53_ROSTER') || has(v, 'V53_PROVENANCE') || /"customContent(Roster|Provenance)":/.test(JSON.stringify(v ?? null));
@@ -770,6 +774,9 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
     // the red control: 210 sends both on the gallery read and the import of the unmarked share (its page never drew them)
     const red = await v31Reads(AT210.db, V53_DOC, {});
     expect([customContent(red.gallery), customContent(red.import), customContent(red.page)]).toEqual([true, true, false]);
+    // and so does 211 as frozen (333b33973): the cure is 212's
+    const red211 = await v31Reads(AT211.db, V53_DOC, {});
+    expect([customContent(red211.gallery), customContent(red211.import), customContent(red211.page)]).toEqual([true, true, false]);
     expect(out).toEqual(Object.fromEntries(cases.map(([tag]) => [tag, { gallery: false, link: false, import: false, map: false, page: false }])));
   }, ROW_TIMEOUT_MS);
 
@@ -790,13 +797,14 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
     // the marked row opens the secrets the default veil shuts by class, so the person shown is measured there too
     const cases = [['unmarked', { npc_1: { revealDm: false } }],
       ['marked', { npc_1: { revealDm: false }, $veil: { v: 1, deltas: [{ address: 'class:npc:secret', hidden: false }] } }]];
-    const out = {}; const red = {};
+    const out = {}; const red = {}; const red211 = {};
     for (const [tag, ov] of cases) {
       const r = await v31Reads(LIVE.db, V54_DOC, ov);
       out[tag] = { ada: { gallery: ada(r.gallery), link: ada(r.link), import: ada(r.import), map: ada(r.map), page: ada(r.page) },
         bo: { gallery: bo(r.gallery), import: bo(r.import), page: bo(r.page) } };
       const r210 = await v31Reads(AT210.db, V54_DOC, ov);
       red[tag] = ada(r210.gallery);
+      red211[tag] = ada((await v31Reads(AT211.db, V54_DOC, ov)).gallery);
       if (tag === 'unmarked') {
         // nothing else changes: the unmarked share's gallery response is 210's, but for Ada's two roster copies, each
         // now the very public card her own entry is
@@ -811,6 +819,8 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
     // the red control: at 210 (no read veiled on the server) both shares send Ada's secret in the roster copy; at
     // 333b33973's 211 the marked one did not and the unmarked one did (the review's hand/roster.sql table)
     expect(red).toEqual({ unmarked: true, marked: true });
+    // 001..211 is that 211 (frozen at 333b33973; the cure is migration 212's, COHERENCE-VEIL-7)
+    expect(red211).toEqual({ unmarked: true, marked: false });
     const shown = { gallery: true, import: true, page: true };
     expect(out).toEqual(Object.fromEntries(cases.map(([tag]) => [tag, { ada: { gallery: false, link: false, import: false, map: false, page: false }, bo: shown }])));
   }, ROW_TIMEOUT_MS);
@@ -1186,24 +1196,33 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
   }, ROW_TIMEOUT_MS);
 
   // ── THE ROLLBACK ──────────────────────────────────────────────────────────────────────────────
-  it('the rollback: 001..211 then supabase/rollback/211_*.down.sql equals a chain stopped at 210, byte for byte', async () => {
+  // 212 (COHERENCE-VEIL-7) runs after 211 frozen at 333b33973, so its down file runs first: 001..212 then 212's down
+  // file equals a chain stopped at 211, and 211's after it equals a chain stopped at 210.
+  it('the rollback: 001..212 then supabase/rollback/212_*.down.sql equals a chain stopped at 211, and 211_*.down.sql after it a chain stopped at 210, byte for byte', async () => {
+    const down212 = readdirSync(ROLLBACK).filter((f) => /^212_.*\.down\.sql$/.test(f));
+    expect(down212).toEqual(['212_share_veil_later_cures.down.sql']);
     const down = readdirSync(ROLLBACK).filter((f) => /^211_.*\.down\.sql$/.test(f));
     expect(down).toEqual(['211_server_side_share_veil.down.sql']);
     const rolled = await buildDb();
     expect(rolled.failed).toEqual([]);
-    await rolled.db.exec(readFileSync(join(ROLLBACK, down[0]), 'utf-8'));
     const CATALOGUE = `select p.oid::regprocedure::text as sig, md5(p.prosrc) as body, p.provolatile, p.prosecdef, p.proconfig::text as config,
         p.proacl::text as acl, pg_get_userbyid(p.proowner) as owner, pg_get_function_result(p.oid) as result
       from pg_proc p join pg_namespace ns on ns.oid = p.pronamespace where ns.nspname = 'public' order by 1`;
+    const READS = ['get_gallery_dossier(text)', 'get_unlisted_dossier(text)', 'import_gallery_dossier(text)', 'get_gallery_map(text)',
+      '_gallery_apply_member_overrides(jsonb,jsonb,jsonb,boolean,boolean,boolean)'];
+    const def = (f) => `select pg_get_functiondef('public.${f}'::regprocedure) as d`;
+    // 212's down file: back to the frozen 211
+    await rolled.db.exec(readFileSync(join(ROLLBACK, down212[0]), 'utf-8'));
+    expect((await rolled.db.query(CATALOGUE)).rows).toEqual((await AT211.db.query(CATALOGUE)).rows);
+    for (const f of READS) expect((await rolled.db.query(def(f))).rows[0].d, `212 down: ${f}`).toBe((await AT211.db.query(def(f))).rows[0].d);
+    // then 211's: back to 210
+    await rolled.db.exec(readFileSync(join(ROLLBACK, down[0]), 'utf-8'));
     const at210 = (await AT210.db.query(CATALOGUE)).rows;
     const after = (await rolled.db.query(CATALOGUE)).rows;
     expect(after.filter((x) => x.sig.includes('_gallery_veil'))).toEqual([]);
     expect(after).toEqual(at210);
     // and the four reads, as text
-    for (const f of ['get_gallery_dossier(text)', 'get_unlisted_dossier(text)', 'import_gallery_dossier(text)', 'get_gallery_map(text)']) {
-      const def = `select pg_get_functiondef('public.${f}'::regprocedure) as d`;
-      expect((await rolled.db.query(def)).rows[0].d, f).toBe((await AT210.db.query(def)).rows[0].d);
-    }
+    for (const f of READS.slice(0, 4)) expect((await rolled.db.query(def(f))).rows[0].d, f).toBe((await AT210.db.query(def(f))).rows[0].d);
   }, ROW_TIMEOUT_MS);
 
   // V5-7 (COHERENCE-VEIL-6; the fifth review §7.5): the owner applies 211 AS IT STOOD AT 333b33973 (sha256 eface6d0...)
@@ -1211,6 +1230,9 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
   // would be LEFT BEHIND on production (uncallable, never dropped). So every one of its forty is either still created
   // here or dropped here by signature, and the down file drops each, and every helper this file creates. Rehearsed on
   // native chains: docs/chair/2026-11-13/veil-probe-6/native/rehearse.sh (203 + that 211 + this 211 = 203 + this 211).
+  // COHERENCE-VEIL-7: 211 IS that file again (frozen), and the later cures are migration 212's, which creates ten more;
+  // the down files are 212's then 211's, which together drop every helper the chain creates
+  // (docs/chair/2026-11-13/veil-probe-7/native/rehearse7.sh).
   it('V5-7: every helper the early-deployed 211 created is created again here or dropped here by signature; the down file drops all of them', async () => {
     const EARLY = ['_gallery_veil(jsonb,jsonb,boolean,boolean)', '_gallery_veil_apply(jsonb,jsonb)', '_gallery_veil_card(text,jsonb,jsonb,jsonb,jsonb,jsonb)',
       '_gallery_veil_card_id(text,jsonb)', '_gallery_veil_cards(jsonb,text)', '_gallery_veil_clandestine(jsonb)', '_gallery_veil_copy_bound()',
@@ -1227,7 +1249,10 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
       where ns.nspname = 'public' and p.proname like '\\_gallery\\_veil%'`)).rows.map((x) => x.sig.replace(/\s+/g, ''));
     const squash = (t) => t.replace(/\s+/g, '').toLowerCase();
     const up = squash(readFileSync(join(MIGRATIONS, '211_server_side_share_veil.sql'), 'utf-8'));
-    const down = squash(readFileSync(join(ROLLBACK, '211_server_side_share_veil.down.sql'), 'utf-8'));
+    const down = squash(readFileSync(join(ROLLBACK, '212_share_veil_later_cures.down.sql'), 'utf-8'))
+      + squash(readFileSync(join(ROLLBACK, '211_server_side_share_veil.down.sql'), 'utf-8'));
+    // the frozen 211 drops none of its own forty: it is the early-deployed file itself
+    expect(up.includes('dropfunctionifexistspublic._gallery_veil')).toBe(false);
     const leftBehind = EARLY.filter((sig) => !live.includes(sig) && !up.includes(`dropfunctionifexistspublic.${sig}`.toLowerCase()));
     expect(leftBehind).toEqual([]);
     const undropped = [...new Set([...EARLY, ...live])].filter((sig) => !down.includes(`dropfunctionifexistspublic.${sig}`.toLowerCase()));

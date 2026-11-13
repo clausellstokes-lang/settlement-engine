@@ -26,7 +26,7 @@
  *                                                       whole
  *   <a person>.presentation.impression                  a sentence of the appearance (`physical`) embedded
  *
- * SQL TWIN, rule for rule: migration 211 :: _gallery_veil_pieces, _gallery_veil_embeds, _gallery_veil_names,
+ * SQL TWIN, rule for rule: migration 212 :: _gallery_veil_pieces, _gallery_veil_embeds, _gallery_veil_names,
  * _gallery_veil_sources, _gallery_veil_tie_pieces, _gallery_veil_second_homes and the impression arm of
  * _gallery_veil_card. PINNED BY EXECUTION: tests/security/gallerySecondHomes.pglite.test.js (planted markers,
  * every eye shut, the whole payload of the four reads searched as text, both stored shapes), and the twin's

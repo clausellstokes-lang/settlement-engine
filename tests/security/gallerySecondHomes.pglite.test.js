@@ -7,7 +7,7 @@
  * `prominentRelationship` and inside `pressureSentence`; a current tension inside `history.siegeNarrative`; a
  * house's description and function in the defence profile's lists; the name of a house hidden whole in the
  * economy's chains and in the simulation trace; a sentence of a person's appearance inside the card's
- * impression. Each is now withheld by the eye that governs its source, in migration 211 and in the client's
+ * impression. Each is now withheld by the eye that governs its source, in migration 212 and in the client's
  * veil (gallerySecondHomes.js, called by galleryVeil.js :: applyVeil) alike.
  *
  * HOW, BY EXECUTION AND BY TEXT, NOT BY KEY. Every string a user can hide by hand (every eye of every card kind,

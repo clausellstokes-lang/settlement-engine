@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 211;
+export const MIGRATION_TRAIN_REPO_HEAD = 212;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -871,6 +871,40 @@ export const MIGRATION_WAVES = Object.freeze([
       Object.freeze({ kind: 'function', name: '_gallery_veil_served' }),
       Object.freeze({ kind: 'function', name: 'get_gallery_dossier' }),
       Object.freeze({ kind: 'function', name: 'get_unlisted_dossier' }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'share-veil-later-cures',
+    from: 212,
+    to: 212,
+    purpose: '212 — the share veil\'s later cures (COHERENCE-VEIL-6, moved out of 211 by COHERENCE-VEIL-7): 211 is frozen '
+      + 'at the bytes the security review cleared to be applied alone (333b33973, sha256 eface6d0…0be01), and what the '
+      + 'lane wrote into 211 after it is carried here unchanged, statement for statement: the second homes (a tie\'s '
+      + 'sentences under prominentRelationship and in pressureSentence, a tension in history.siegeNarrative, a house in '
+      + 'the defence lists, a hidden house\'s name in the economy\'s chains and the simulation trace, an appearance in '
+      + 'the impression) go with the eye that governs their source; the custom-content library leaves a Reveal-DM '
+      + 'share\'s gallery read and import; a person switched off is reduced in every power roster copy. Ten new '
+      + '_gallery_veil* helpers; _gallery_veil_card, _gallery_veil_apply, _gallery_apply_member_overrides, '
+      + 'get_gallery_dossier and import_gallery_dossier restated as 211\'s statements plus the cure. It needs 211 '
+      + 'before it. No table, column, constraint, policy or row. DEPLOYMENT remains the owner\'s manual act after 204 to '
+      + '211 (`supabase db push` plus the applied-head bump in that same act).',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'Its reversal is executable: supabase/rollback/212_share_veil_later_cures.down.sql, run last in, first out '
+        + '(undo 212 before 211), recreates the five functions at 211\'s statements and drops the ten helpers by '
+        + 'signature; tests/security/galleryVeilCures.pglite.test.js rehearses it against a chain stopped at 211. '
+        + 'Nothing is destroyed on reversal; the second copies, the custom-content library and the roster copies are '
+        + 'sent again as at 211.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'function', name: '_gallery_veil_second_homes' }),
+      Object.freeze({ kind: 'function', name: '_gallery_veil_roster_splice' }),
+      Object.freeze({ kind: 'function', name: '_gallery_apply_member_overrides' }),
+      Object.freeze({ kind: 'function', name: 'get_gallery_dossier' }),
+      Object.freeze({ kind: 'function', name: 'import_gallery_dossier' }),
     ]),
   }),
 ]);

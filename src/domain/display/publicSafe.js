@@ -563,7 +563,7 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
     // above, and for the same reason each of those is.
     //
     // THE SERVER TWIN (COHERENCE-VEIL-6; the fifth review's V5-3, ruled by the chair on
-    // 2026-11-13): migration 211 strips both from the Reveal-DM projection of the gallery
+    // 2026-11-13): migration 212 strips both from the Reveal-DM projection of the gallery
     // read and the import, beside `decrees` and `dmLayer` (`_gallery_dm_full_json` itself,
     // 121/129, is unchanged; the link and the map never carried them: the sanitiser's
     // allowlist). Pinned by tests/security/galleryVeilCures.pglite.test.js, "V5-3".
