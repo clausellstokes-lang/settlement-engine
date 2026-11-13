@@ -11,10 +11,13 @@
  *     presume-<tier>-<i>) names a thing the town lacks by the vocabulary's own readers, and no row
  *     of the register covers it (a new false presumption, or a cured line come back);
  *   • either arm: a register row matches nothing (stale: a cure removes its row in its own commit);
- *   • a row's reason is not one of the register's named reasons.
+ *   • a row's reason is not one of the register's named reasons;
+ *   • ARM 1's one out-of-reach site (`ARM1_NOT_PRINTED`: the `detail` argument of
+ *     `generationCoherence.js :: finding`, the receipt's diagnostic) reaches a reader — a printing file
+ *     reads a finding's detail — or the exemption widens past its file, callee and argument position.
  * Every failure path is EXECUTED against planted source and a planted record in memory.
  */
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { beforeAll, describe, expect, test } from 'vitest';
@@ -24,7 +27,7 @@ import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { liveInstitutionNames } from '../../src/domain/facts/institutions.js';
 import { parseAtom } from '../../src/domain/facts/factVocabulary.js';
 import {
-  COURT_HOUSES, REGISTER_REL, THINGS, THING_IDS, corpusConfig, corpusSeeds, deniesExistence, listFiles, negates, printedAbsent, printedOutOfTime,
+  ARM1_NOT_PRINTED, COURT_HOUSES, REGISTER_REL, THINGS, THING_IDS, corpusConfig, corpusSeeds, deniesExistence, listFiles, negates, printedAbsent, printedOutOfTime,
   rowCovers, scanSource, scanTree, unlicensedServiceRows,
 } from './presumedThings.shared.mjs';
 
@@ -50,6 +53,46 @@ describe('the rule book', () => {
     ].join('\n');
     const hits = scanSource('planted.js', src);
     expect(hits).toEqual([{ file: 'planted.js', thing: 'militia', text: 'The militia drills on the green every week.' }]);
+  });
+
+  test('planted: a finding\'s detail in generationCoherence.js is out of reach; the same words anywhere else are read', () => {
+    const line = 'A planted detail that names a market for this test.';
+    const src = [
+      `push(finding('economicState.situationDesc', '${line}'));`,
+      `push(finding('${line}', 'x'));`,
+      `push(other('economicState.situationDesc', '${line.replace('this test', 'that test')}'));`,
+    ].join('\n');
+    expect(scanSource('src/generators/generationCoherence.js', src).map((h) => h.text)).toEqual([line, line.replace('this test', 'that test')]);
+    expect(scanSource('src/generators/elsewhere.js', `push(finding('p', '${line}'));`).map((h) => h.text)).toEqual([line]);
+    expect(ARM1_NOT_PRINTED.map((s) => `${s.file} :: ${s.callee} :: ${s.argument}`)).toEqual(['src/generators/generationCoherence.js :: finding :: 1']);
+  });
+
+  /**
+   * THE EXEMPTION IS AS TRUE AS THIS PIN (the chair's condition, 2026-11-12): "a component reads its verdict, never its
+   * findings" is checked, not said. A printing file — the components, the display, prose and dossier modules, the PDF,
+   * the Foundry export — that names the coherence receipt never reads a finding's `.detail`. The one reader today is the
+   * PDF view-model's projection (`generationContracts.js :: coherenceFindingView`), which carries the receipt's shape and
+   * which no PDF section reads; the second arm holds that.
+   */
+  test('no reader prints a finding\'s words: no printing file reads a receipt finding\'s detail', () => {
+    const PRINTING = ['src/components', 'src/domain/display', 'src/domain/prose', 'src/domain/dossier', 'src/pdf', 'src/foundry'];
+    const files = [];
+    const walk = (rel) => {
+      for (const e of readdirSync(join(ROOT, rel)).sort()) {
+        const p = `${rel}/${e}`;
+        if (statSync(join(ROOT, p)).isDirectory()) walk(p);
+        else if (/\.(?:js|jsx|mjs)$/.test(e)) files.push(p);
+      }
+    };
+    for (const r of PRINTING) walk(r);
+    expect(files.length).toBeGreaterThan(300);
+    const src = (f) => readFileSync(join(ROOT, f), 'utf8');
+    const namesReceipt = (text) => /generationCoherenceReceipt|\bgenerationCoherence\b|coherenceFindingView/.test(text);
+    const readers = files.filter((f) => namesReceipt(src(f)) && /\.detail\b/.test(src(f)));
+    expect(readers, 'a printing file reads a receipt finding\'s detail').toEqual(['src/pdf/lib/generationContracts.js']);
+    const pdfViewReaders = files.filter((f) => f.startsWith('src/pdf/') && f !== 'src/pdf/lib/generationContracts.js'
+      && /\bgenerationCoherence\s*\??\.\s*(?:checks|judgments|findings)/.test(src(f)));
+    expect(pdfViewReaders, 'a PDF page reads the receipt\'s findings').toEqual([]);
   });
 
   test('planted: the negation reader', () => {

@@ -3,36 +3,36 @@
   "corpus": "[{\"tier\":\"thorp\",\"n\":150},{\"tier\":\"hamlet\",\"n\":200},{\"tier\":\"village\",\"n\":350},{\"tier\":\"town\",\"n\":550},{\"tier\":\"city\",\"n\":350},{\"tier\":\"metropolis\",\"n\":150},{\"tier\":\"village\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"under_siege\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"under_siege\"}]",
   "census": {
     "_note": "Figures for the second wave, never a red: re-written by every door.",
-    "pools": 907,
-    "printOneLine": 677,
-    "measuredUnder30Draws": 144,
+    "pools": 909,
+    "printOneLine": 679,
+    "measuredUnder30Draws": 146,
     "highestSharesOver150Draws": [
       {
         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:population_friction",
-        "top1": 0.8947,
+        "top1": 0.8928,
         "top5": 1,
         "draws": 1082,
         "lines": 3
       },
       {
         "pool": "ledger:safetyProfile:SAFETY_LINE_SIBLINGS",
-        "top1": 0.8919,
+        "top1": 0.8818,
         "top5": 1,
-        "draws": 1646,
+        "draws": 2098,
         "lines": 2
       },
       {
         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:infiltration_fear",
-        "top1": 0.8691,
+        "top1": 0.8692,
         "top5": 1,
-        "draws": 1497,
+        "draws": 1498,
         "lines": 3
       },
       {
         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:religious_tension",
-        "top1": 0.849,
+        "top1": 0.8509,
         "top5": 1,
-        "draws": 834,
+        "draws": 845,
         "lines": 3
       },
       {
@@ -44,51 +44,51 @@
       },
       {
         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:magical_controversy",
-        "top1": 0.8007,
+        "top1": 0.8006,
         "top5": 1,
-        "draws": 662,
+        "draws": 682,
         "lines": 3
       },
       {
         "pool": "ledger:npcGenerator:NPC_GOAL_SIBLINGS",
-        "top1": 0.7957,
+        "top1": 0.787,
         "top5": 1,
         "draws": 230,
         "lines": 2
       },
       {
         "pool": "ledger:crisisCast:CAST_REASON_SIBLINGS",
-        "top1": 0.7917,
+        "top1": 0.7793,
         "top5": 1,
-        "draws": 744,
+        "draws": 743,
         "lines": 2
       },
       {
-        "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:economic_disparity",
-        "top1": 0.7787,
-        "top5": 1,
-        "draws": 723,
-        "lines": 3
-      },
-      {
         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:occupation_legacy",
-        "top1": 0.7776,
+        "top1": 0.7752,
         "top5": 1,
-        "draws": 1888,
+        "draws": 1877,
         "lines": 3
       },
       {
-        "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:great_fire",
-        "top1": 0.7279,
+        "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:economic_disparity",
+        "top1": 0.7703,
         "top5": 1,
-        "draws": 441,
+        "draws": 727,
         "lines": 3
       },
       {
         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:plague_years",
-        "top1": 0.7254,
+        "top1": 0.724,
         "top5": 1,
-        "draws": 415,
+        "draws": 413,
+        "lines": 3
+      },
+      {
+        "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:great_fire",
+        "top1": 0.7219,
+        "top5": 1,
+        "draws": 453,
         "lines": 3
       }
     ],
@@ -5593,6 +5593,18 @@
       ],
       "reason": "the safety record's plot hooks: COHERENCE-QUARREL cure 4 gives the smuggling hook four tellings; the charter's target (no line above a quarter)",
       "lines": 11
+    },
+    "ledger:prosperity:PROSPERITY_LINE_SIBLINGS": {
+      "top1": 0.6833,
+      "top5": 1,
+      "lines": 2,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:NPC_STRUCTURE.magic__contested__dominant": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
     }
   }
 }

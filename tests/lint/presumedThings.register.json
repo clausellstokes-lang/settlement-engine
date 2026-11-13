@@ -31,9 +31,6 @@
   {"thing": "garrison", "path": ".economicViability.warnings[].suggestedFixes[]", "text": "Add Town Walls or Garrison", "reason": "hedge", "note": "advice to the builder: what to add", "towns": 4},
   {"thing": "garrison", "path": ".institutions[].desc", "text": "garrison contracts", "reason": "figure", "note": "the hire company's trade, wherever it is hired", "towns": 5},
   {"thing": "garrison", "path": ".institutions[].desc", "text": "garrison work", "reason": "figure", "note": "the hire company's trade, wherever it is hired", "towns": 5},
-  {"thing": "market", "path": ".economicState.situationDesc", "text": "markets meet infrequently", "reason": "other-lane", "note": "COHERENCE-AGREE: src/generators/economy/prosperity.js", "towns": 7},
-  {"thing": "market", "path": ".economicState.situationDesc", "text": "The market is shut", "reason": "other-lane", "note": "COHERENCE-AGREE: src/generators/economy/prosperity.js", "towns": 1},
-  {"thing": "market", "path": ".economicState.situationDesc", "text": "The market still opens", "reason": "other-lane", "note": "COHERENCE-AGREE: src/generators/economy/prosperity.js", "towns": 1},
   {"thing": "market", "path": ".history.founding.reason", "text": "grew as an agricultural market center", "reason": "past", "note": "the founding: a past event", "towns": 1},
   {"thing": "market", "path": ".history.founding.reason", "text": "on the open market", "reason": "figure", "note": "\"the open market\": trade at large", "towns": 1},
   {"thing": "market", "path": ".institutions[].desc", "text": "game at market", "reason": "figure", "note": "\"at market\": to sell, wherever the selling is", "towns": 1},
@@ -42,20 +39,16 @@
   {"thing": "market", "path": ".npcs[].plotHooks[]", "text": "in a market two settlements away", "reason": "hedge", "note": "the sentence puts the market in another town", "towns": 2},
   {"thing": "market", "path": ".npcs[].secret.stakes", "text": "looking in every market", "reason": "figure", "note": "every market, anywhere", "towns": 2},
   {"thing": "market", "path": ".npcs[].secret.what", "text": "before it goes to market", "reason": "figure", "note": "\"goes to market\": to sale", "towns": 3},
-  {"thing": "mercenary", "path": ".economicState.safetyProfile.guardEffectivenessDesc", "text": "A mercenary company provides enforcement", "reason": "other-lane", "note": "COHERENCE-AGREE: src/generators/safetyProfile.js (its member)", "towns": 27},
-  {"thing": "mercenary", "path": ".economicState.safetyProfile.guardEffectivenessDesc", "text": "maintain their own mercenary companies", "reason": "other-lane", "note": "COHERENCE-AGREE: src/generators/safetyProfile.js", "towns": 4},
   {"thing": "mercenary", "path": ".institutions[].desc", "text": "mercenaries put out to pasture", "reason": "past", "note": "put out to pasture: their service is past", "towns": 6},
   {"thing": "mercenary", "path": ".institutions[].desc", "text": "retired soldiers and mercenaries", "reason": "past", "note": "retired: their service is past", "towns": 18},
   {"thing": "mercenary", "path": ".institutions[].desc", "text": "retired soldiers and sellswords", "reason": "past", "note": "retired: their service is past", "towns": 12},
   {"thing": "mercenary", "path": ".powerStructure.recentConflict", "text": "whether to raise a levy or hire mercenaries", "reason": "hedge", "note": "\"whether to … hire\": not yet hired", "towns": 5},
   {"thing": "mercenary", "path": ".pressureSentence", "text": "whether to raise a levy or hire mercenaries", "reason": "hedge", "note": "\"whether to … hire\": not yet hired", "towns": 2},
-  {"thing": "prison", "path": ".economicState.safetyProfile.guardEffectivenessDesc", "text": "the prison system is limited", "reason": "other-lane", "note": "COHERENCE-AGREE: src/generators/safetyProfile.js (and a hedge: \"limited\")", "towns": 53},
   {"thing": "walls", "path": ".economicViability.warnings[].suggestedFixes[]", "text": "Add Town Walls or Garrison", "reason": "hedge", "note": "advice to the builder: what to add", "towns": 4},
   {"thing": "walls", "path": ".history.historicalEvents[].plotHooks[]", "text": "sealed inside the walls during construction", "reason": "past", "note": "a past event", "towns": 5},
   {"thing": "walls", "path": ".institutions[].desc", "text": "walls and churches of half the region", "reason": "hedge", "note": "the region's walls, not this town's", "towns": 7},
   {"thing": "walls", "path": ".npcs[].presentation.impression", "text": "The walls are covered with charts", "reason": "ruling-3", "note": "a room's walls, not the perimeter", "towns": 8},
   {"thing": "walls", "path": ".npcs[].secret.what", "text": "the walls built with them crumble", "reason": "ruling-3", "note": "the walls of any building, not the perimeter", "towns": 6},
-  {"thing": "war", "path": ".economicViability.plotHooks[].hook", "text": "War has taken the iron", "reason": "other-lane", "note": "COHERENCE-AGREE: src/generators/economy/foodBalance.js (its member)", "towns": 106},
   {"thing": "war", "path": ".history.currentTensions[].lastingEffects[]", "text": "Wartime property seizures remain legally unresolved", "reason": "past", "note": "the seizures were made in a past war", "towns": 11},
   {"thing": "war", "path": ".history.currentTensions[].plotHooks[]", "text": "profits from wartime contracts", "reason": "hedge", "note": "the threat is \"being exaggerated\": the war is wished for, not here", "towns": 21},
   {"thing": "war", "path": ".history.currentTensions[].plotHooks[]", "text": "the war party is suppressing", "reason": "figure", "note": "a war party is a faction that wants war; no war is presumed", "towns": 21},
@@ -846,7 +839,6 @@
    ["war", "other-lane", "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Wo"]
   ],
   "src/generators/economy/outlookHookSiblings.js": [
-   ["war", "other-lane", "War has taken the iron: the metal suppliers sell to the armies first, and the iron for tools and repairs stops arriving."],
    ["war", "other-lane", "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Wo"]
   ],
   "src/generators/economy/prosperity.js": [
@@ -857,8 +849,7 @@
    ["market", "other-lane", "Mixed subsistence and market"],
    ["market", "other-lane", "The church controls most economic activity. Land, markets, and trade flow through religious institutions. Commerce is pr"],
    ["market", "other-lane", "The market is shut and the caravans have stopped coming. What coin there is goes on staying alive, and the only question"],
-   ["market", "other-lane", "Trade is what this settlement lives on. The markets are busy at all hours, and the guilds have a hand in every craft."],
-   ["temple", "other-lane", "The church controls most economic activity. Land, markets, and trade flow through religious institutions. Commerce is pr"]
+   ["market", "other-lane", "Trade is what this settlement lives on. The markets are busy at all hours, and the guilds have a hand in every craft."]
   ],
   "src/generators/economy/viability.js": [
    ["bank", "other-lane", "Banking institutions exist but the economy priority is very low."],
@@ -1026,7 +1017,6 @@
    ["militia", "other-lane", "The citizen militia is well organised and willing: these are people defending their own homes. "],
    ["militia", "other-lane", "The citizen militia musters when needed but cannot maintain consistent patrol. "],
    ["militia", "other-lane", "The militia musters for emergencies only; day-to-day crime is uncontested."],
-   ["prison", "other-lane", " A court exists, though the prison system is limited."],
    ["prison", "other-lane", " A functioning court and prison mean crimes carry real consequences."],
    ["prison", "other-lane", " catches are tried at the court and held in the prison."],
    ["temple", "other-lane", "The church's moral authority provides cover"],

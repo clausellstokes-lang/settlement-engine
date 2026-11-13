@@ -10,6 +10,10 @@
  * printed "Stores: a granary, six months of grain." and `coh:famine-stores` fired. `soak1k-1846`
  * (5.6) and `-2962` (5.8) are the rung's next two seeds; `soak1k-3605` (12.1, held before and
  * after) is the control.
+ * RE-KEYED BY IDENTITY (COHERENCE-AGREE, the chair's food-sources ruling of 2026-11-11): worked land now
+ * counts as a food source, and a preserved source adds its quarter month to the stores, so `-1846` reads
+ * 6.8 and `-3605` 13; the same members are `soak1k-2452` (city, famine, granary, 5.6) and `soak1k-1589`
+ * (12.1, held), found by scanning the soak corpus for the condition.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
@@ -24,7 +28,7 @@ import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailur
 const born = {};
 beforeAll(async () => {
   await ensureLaws();
-  for (const i of [1582, 1846, 2962, 3605]) born[i] = birth(i).settlement;
+  for (const i of [1582, 2452, 2962, 1589]) born[i] = birth(i).settlement;
 }, 240_000);
 
 /** @param {number} storageMonths @param {boolean} stressFamine */
@@ -34,8 +38,8 @@ const recordAt = (storageMonths, stressFamine = true) => deriveFoodRecord({
 
 describe('rung 2D · the held granary and the stores line read one rounding', () => {
   // LANDING-R2 seat E: one parameterless test over the three seeds, every seed run and collected.
-  it('soak1k-1582, -1846, -2962: a famine granary printed as six months is held, and the page says so', () => {
-    const failures = collectSeedFailures([1582, 1846, 2962], (i) => {
+  it('soak1k-1582, -2452, -2962: a famine granary printed as six months is held, and the page says so', () => {
+    const failures = collectSeedFailures([1582, 2452, 2962], (i) => {
       const s = born[i];
       const record = s.economicState.foodSecurity.foodRecord;
       expect(record, `soak1k-${i}`).toMatchObject({ band: 'famine', hasGranary: true });
@@ -50,8 +54,8 @@ describe('rung 2D · the held granary and the stores line read one rounding', ()
     expectNoSeedFailures(failures, 'every six-month famine granary reads as held');
   });
 
-  it('soak1k-3605 (the control): twelve months, held before and after', () => {
-    const record = born[3605].economicState.foodSecurity.foodRecord;
+  it('soak1k-1589 (the control): twelve months, held before and after', () => {
+    const record = born[1589].economicState.foodSecurity.foodRecord;
     expect(record).toMatchObject({ band: 'famine', hasGranary: true, storesHeld: true });
     expect(foodStoresWords(record)).toBe(`Stores: a granary of twelve months that ${HELD_STORES_WORDS}.`);
   });

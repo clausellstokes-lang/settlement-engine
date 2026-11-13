@@ -177,6 +177,10 @@ const CULTURE_READERS = Object.freeze([
   // "culture's" in one comment line beside the superseded foodways path; it reads no culture (the pipeline.js precedent:
   // reported, not filtered). Red on the lane's own tip 9ee7df1ba.
   'src/generators/recordBatteryFindings.js',
+  // 2026-11-11 (COHERENCE-AGREE): resourceGenerator.js JOINED the set through the word "Agriculture", the riverside
+  // terrain's strength as TERRAIN_DATA spells it, now a key of STRENGTH_SUPPORT; it reads no culture (the foodLand.js
+  // precedent: reported, not filtered).
+  'src/generators/resourceGenerator.js',
   'src/generators/steps/assembleSettlement.js',
   'src/generators/steps/buildGenerationContext.js',
   'src/generators/steps/economyReconcilePass.js',
