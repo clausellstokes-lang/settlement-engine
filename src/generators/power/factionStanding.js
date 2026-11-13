@@ -198,7 +198,7 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
                       ? 'They and the steward both claim the same authority, so petitioners go to whichever is likelier to say yes.'
                       : stewardVariant === 1
                         ? 'The steward and the household have worked out who does what, but they bargain it again whenever something important is at stake.'
-                        : 'Which one actually governs depends on the day and the question; both would say themselves.';
+                        : 'Which one actually governs depends on the day and the question; each would say it does.'; // COHERENCE-POWERS-8 (round three #565): the clause read whole
             standing = standing ? standing + ' ' + stewardNote : stewardNote;
           }
         }
