@@ -53,6 +53,37 @@ the release's merge and deploy is the chair's.
   golden's door, a deploy, a hosted database. Notifications read after every commit; the chair written to only for a stop that
   blocks everything left and for the hand-back (150 words); other stops here, parked items sent together once.
 
+## 0b. The chair's rulings of 18:15 UTC (from REVIEW-POWERS-FU at 714381934: NOT CLEAR, no high, 4 medium, 2 low), copied in
+
+Read at `lane/review-powers-fu-2026-11-13` (40f7cc893), `docs/chair/2026-11-13/REVIEW-POWERS-FU-714381934-2026-11-13.md`,
+findings F1 to F6. Do not rewrite a commit at or below 714381934. R1 to R3 come before anything on this seat's own list not
+yet begun; each its own commit, measured first on the reader's own corpora, red first, pushed as made.
+- **R1 (MEDIUM, the lane is its origin): a minted lord reads as a government officer.** Every lord is minted from
+  CLAIMANT_FACE's row, whose category is government, so the card deal gives it an office it does not hold (34 of the 128
+  lords on the 720) and the relationship deal gives it the governor's debts (37 rows in 32 births of the 4,305). RULED: a
+  lord of a noble body is NOT of the government: mint it in the category its own body carries, or in the one the measure
+  shows prints true; a claimant who does not hold the seat is not of the government either (the base's 2 and 2).
+  ACCEPTANCE: office lines and governing-side debt rows on a lord or a claimant at ZERO on the 720 and the 4,305; thirty
+  lords' cards and rows read in their towns AFTER the change; the re-deal declared with counts.
+- **R2 (MEDIUM): a woman lord is "the lord" on the relationship rows** (479 rows on the 4,305, 100 on the 720) beside a card
+  that styles her "Lady". RULED: one home for a person's styled title: the row's role word agrees with the card's own style.
+  ACCEPTANCE: zero rows where the two disagree, the men's rows unchanged, by the reader's count.
+- **R3 (MEDIUM, item 8 not met): "Merchant Guilds's requests"** prints on the Power tab in 35 of 720 towns, from two
+  hand-formed possessives in src/data/people/dmPowerLines.js. RULED: both through the one leaf (powerPossessive).
+  ACCEPTANCE: the reader's possess.mjs at zero over every rendered view of the 720; a guard that reds on a hand-formed
+  possessive of a power's name in that file.
+- **R4 (F4): THE RE-DEAL OF EXISTING CARDS' GOALS AND TIES IS ACCEPTED AS DECLARED.** The fork condition re-worded: no
+  existing card's name, secret or flaw moves (measured unmoved); goals and ties pick from the cast, so a new card re-deals
+  them. Declare it in the final statement with the reader's counts (the 4,305: 6,170 short goals, 9,401 long goals, ties
+  in 875 births; the 720: 1,146, 1,672, importance 338, ties in 124 towns, 28 with no mint). ONE LINE of that re-deal is
+  false in itself and is this seat's: "<a lord> named <the monarch who holds the seat> as successor in front of witnesses"
+  (rpf-metropolis-occupied-13): the succession tie must not name as successor the one who already holds the seat; count
+  the class, cure it by the pool's own condition, read what prints instead.
+- **R5 (LOW, F5):** the widened page guard catches only its phrase list (ten planted clauses pass). If one commit can found
+  it on where a holder's line comes from (the government-dominant pool) rather than on phrases, do it and plant the
+  reader's ten; if not, list it with the reason. F6's two lows: list them here.
+- Then this seat's own list, and the final statement once.
+
 ## 1. Measured before the first cure
 
 - **The file check** (each lane's merge base with `lane/integration-2026-11-07` → its tip): coherence-agree 69b53decd,
@@ -91,6 +122,34 @@ the release's merge and deploy is the chair's.
   or castPowers): 3 red, each red at the base (worldFactRederive A7, x46NpcBand's digest, observedShapeReaders).
 - **New words:** none beyond R2-CODE-A's "the local underworld".
 
+### A — public legitimacy's points (PowerTab.jsx; the PDF's Power chapter) — DONE, a59796dda
+Rows #20 #51 #107 #169 #199 #287. The chips "Prosperity -10 … Food -4" under "Breakdown" printed in 718 of 720 towns; the
+PDF's Power chapter printed the same chips. Both gone; the score, its band and the fracture note stay; the causes are
+said in words by the governance paragraph. PowerStructure.jsx (the PDF chapter) TAKEN: no lane in flight changes it.
+Pins re-keyed by identity (powerTabSupport THE TRIM, T2-18; powerGovernanceAccount). Registers through their doors:
+rawColorLiteral 1225 -> 1216; prose numerics five rows re-addressed. Red first legitimacyPlainWords 7 of 7.
+
+### E — criminal houses "under the ruling power" (powerSupport.js) — DONE, 59f877e58
+Row #636. 197 towns listed 454 criminal houses under the seat by X-45's default -> 0; display only (the default's share is
+0: no record byte moves). Red first criminalHouseNoDefault 3 of 5 at the base.
+
+### C — "Goodwife" on a man (faceHonorifics.js) — DONE, 41ddc01af
+Rows #543 #569 #593 #657. 120 towns -> 0; the form is { male: "Goodman", female: "Goodwife" }; display only.
+
+### H — standing sentences against their own figures (factionStanding.js, rosterText.js) — DONE, three causes
+Rows #460 #638 #881 #1005 (H-a 687c13a62), #291 (H-b 177ebe5a2), #109 #713 (H-c 943e34d6f). The 720, by the line's own
+claim read against the final roster: "no one leads" beside a clear leader 153 -> 0; "narrow" beside a gap past six 37 -> 0;
+"slow war" with no guild 42 -> 0. 314 births, one leaf (factions[].desc). rosterText.js TAKEN (no lane in flight changes
+it). Row #766 (a slow war beside a corrupted arrangement, the guild present: 5 of 720) NOT cured: the relationship is dealt
+after the standing; see Parked.
+
+### D — title lines presuming water or content (titleSecretsPresentations.js, poolMap.js, representatives.js) — DONE, 43b32e775
+Rows #478 #488 #489 #534 #719 #1026 #1071. 223 refused lines in 165 towns -> 0; eight lines declared beside the table and
+resolved draw-free to the title's next admitted line. 159 births, five leaves (secret, presentation).
+
+### I — a crown in a self-governing city (governingStressVignettes.js, stressFactions.js, governanceNarrative.js) — DONE, 7f97b6d59
+Rows #706 #707 #709 #712. One town (rw3-city-wartime-1) of 740; four lines take their words without the crown.
+
 ## 3. Parked (one list, sent once)
 
 1. **Leftover 2 — the church and militia originals (governanceNarrative.js).** The original's text is the KEY of its sibling
@@ -101,6 +160,18 @@ the release's merge and deploy is the chair's.
    seat — and R2-CODE-A's lane changed the adjacent lines (its two twins). STOP for this item. RECOMMENDATION: the merge seat
    (or the seat that holds powerSiblings.js) re-spells both keys, first members and `twinOf`s with R2-CODE-A's words, and this
    lane's governanceNarrative.js lines 449 and 458 at the same commit, the census5b pin re-keyed by identity.
+
+2. **`tests/components/phoneChromeFloor.census.test.js`** (R2-CODE-B changes the same three rows): item A removed two
+   floored `chromeFontSize` sites (the chips' heading and the chip) — `/create` 623 -> 621, `/settlements` 866 -> 864,
+   `/gallery` 668 -> 666 here; with R2-CODE-B's -1 the merged rows read 620, 863, 665. RECOMMENDATION: re-recorded at the
+   merge with both causes. Red at this lane's tip until then (classed).
+3. **Rows #114 #115 #117 #762 (patronage.js, the DM view's houses "Parish churches (50-100+)", "Mills (2-5)")**: the one
+   home of a house's name without the catalogue's count range is R2-CODE-B's `institutionHouseLabel`
+   (institutionDisplayName.js, that lane's file, not on this base); a local strip would be a second home ("no surface
+   strips its own"). RECOMMENDATION: at the merge, `patronage.js :: faceOf` reads `institutionHouseLabel` for `house`
+   (and the guild of a house), one line.
+4. **Row #766 (a slow war beside a corrupted arrangement)**: the standing table runs before the relationships are dealt
+   (rulingStructure.js); a disqualifier needs the order changed. 5 of 720. Left for a later seat with this measure.
 
 ## 4. Hazard log
 - `npm ci` in the scratch worktree set `core.hookspath=.husky/_` on the shared repository's local config (husky), before the
