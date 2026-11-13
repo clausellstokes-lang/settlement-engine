@@ -8,7 +8,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { vocabularyPageFindings } from '../../../src/domain/coherence/vocabularyPageFindings.js';
-import { NEW_WORDS, REGISTERED_WORDS, THINGS, VOCABULARY_SIZE } from '../../../src/domain/facts/registeredWords.js';
+import { NEW_WORDS, REGISTERED_WORDS, THINGS, VOCABULARY_SIZE, declarationImplies } from '../../../src/domain/facts/registeredWords.js';
 import { RESOURCE_DATA } from '../../../src/data/resourceData.js';
 import { parseAtom } from '../../../src/domain/facts/factVocabulary.js';
 
@@ -127,5 +127,51 @@ describe('F2 — the ruling three counts the ruler\'s faces', () => {
 
   test('three powers whose ruler shows two faces: the heading is false; "three powers" is true', () => {
     expect(found(three)).toEqual(['rulingFaces :: The ruling three o']);
+  });
+});
+
+/**
+ * W2-B-DECLARE third seat, F4 (REVIEW-W2B: "two homes answer 'is there a church'"): church words read ONE home, the faith
+ * reading (`faithReading.js :: faithReadingOf`, `hasChurch`: a wayside shrine is not a church); shrine words read the
+ * sacred house; "religious houses" reads the faith reading; "access to the parish church" names a church ELSEWHERE.
+ * Red at 2ca67e00e, whose `temple` read the sacred house (a shrine counted) for every one of those words.
+ */
+describe('F4 — one home for whether there is a church', () => {
+  const shrineOnly = { tier: 'hamlet', population: 60, config: {}, stress: [], institutions: [{ name: 'Wayside shrine' }], powerStructure: { factions: [] } };
+  const parish = { ...shrineOnly, institutions: [{ name: 'Parish church' }] };
+  const access = { ...shrineOnly, institutions: [{ name: 'Access to parish church' }] };
+  const page = { 'World/Faith': [
+    'The church bell calls the hamlet to prayer each morning.',
+    'The religious houses take in a tenth of the harvest.',
+    'Travellers leave a coin at the shrine by the ford.',
+    'The people walk to the parish church in the next valley.',
+  ] };
+  const found = (record, lines = page) => vocabularyPageFindings(record, lines).map((f) => `${f.word} :: ${f.quote.slice(0, 24)}`);
+
+  test('a wayside shrine is not a church: church words and "religious houses" are findings; the shrine is not', () => {
+    expect(found(shrineOnly)).toEqual([
+      'temple :: The church bell calls th',
+      'religiousHouses :: The religious houses tak',
+      'temple :: The people walk to the p',
+    ]);
+  });
+
+  test('a parish church answers the church words; a shrine word stands on any sacred house', () => {
+    expect(found(parish)).toEqual([]);
+  });
+
+  test('access wording names a church elsewhere: "access to the parish church" is no finding', () => {
+    expect(found(access, { 'World/Faith': ['Access to parish church is a long walk for the old.'] })).toEqual([]);
+  });
+
+  test('the walker: a line naming a church is answered by `church` (or `church access`), never by a sacred house alone', () => {
+    const d = (needs) => ({ needs, excludes: [], crisis: [] });
+    expect(declarationImplies('temple', d(['church']), 'names')).toBe(true);
+    expect(declarationImplies('temple', d(['church access']), 'names')).toBe(true);
+    expect(declarationImplies('temple', d(['sacredHouse']), 'names')).toBe(false);
+    expect(declarationImplies('religiousHouses', d(['sacredHouse']), 'names')).toBe(false);
+    expect(declarationImplies('shrine', d(['sacredHouse']), 'names')).toBe(true);
+    expect(THINGS.temple.atoms).toEqual(expect.arrayContaining(['church']));
+    expect(THINGS.temple.sufficient).toEqual(expect.arrayContaining(['church access']));
   });
 });

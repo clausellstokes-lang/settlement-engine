@@ -124,9 +124,22 @@ export const THINGS = Object.freeze({
     atoms: ['market'],
     absent: (f) => !f.market,
   },
+  // F4 (the third seat; REVIEW-W2B: "two homes answer 'is there a church'"): ONE home, the faith reading
+  // (`faithReading.js :: faithReadingOf`, `hasChurch`: a temple, chapel, parish church, cathedral or monastery stands
+  // here; a wayside shrine is NOT a church). "Access to (the) parish church" names a church ELSEWHERE (the roster's
+  // access row; the faith reading's `accessOnly`): excluded by its words; a line declaring `church access` is answered.
   temple: {
-    words: /\btemples?\b|\bchurch(?:es)?\b|\bchapels?\b|\bshrines?\b|\bcathedrals?\b|\babbey\b/i,
-    atoms: ['sacredHouse'], sufficient: ['temple', 'institution: temple', 'institution: monastery'],
+    words: /\btemples?\b|(?<!\baccess to (?:the |a )?(?:parish |nearby |neighbouring )?)\bchurch(?:es)?\b|\bchapels?\b|\bcathedrals?\b|\babbey\b/i,
+    atoms: ['church'], sufficient: ['church access', 'institution: monastery'],
+    leaf: 'faithReading.js :: faithReadingOf (hasChurch: a wayside shrine is not a church)',
+    absent: (f) => f?.faith?.hasChurch !== true,
+  },
+  // F4: a shrine's words read the sacred house (`factsOf.js :: sacredHouse`: any temple or monastery of the roster, a
+  // wayside shrine among them), as `temple` read them all before the split
+  shrine: {
+    words: /\bshrines?\b/i,
+    atoms: ['sacredHouse'], sufficient: ['temple', 'institution: temple', 'institution: monastery', 'church'],
+    leaf: 'factsOf.js :: sacredHouse',
     absent: (f) => !f.sacredHouse,
   },
   prison: {
@@ -191,7 +204,7 @@ const powerCount = (record) => (Array.isArray(record?.powerStructure?.factions) 
 
 /** The houses a count of houses reads, each by the thing whose words name it. */
 const COUNTED_HOUSES = /** @type {Readonly<Record<string, string>>} */ (Object.freeze({
-  temples: 'temple', churches: 'temple', chapels: 'temple', shrines: 'temple', mills: 'mill', markets: 'market', granaries: 'granary', guildhalls: 'guildhall',
+  temples: 'temple', churches: 'temple', chapels: 'temple', shrines: 'shrine', mills: 'mill', markets: 'market', granaries: 'granary', guildhalls: 'guildhall',
 }));
 
 /**
@@ -288,11 +301,13 @@ const NEW_WORDS_OPEN = /** @type {Record<string, RegisteredWord>} */ ({
   },
   // ── THE WORDS OF THE HAND CURES (W2-B-DECLARE item 4; record 288, ruling 2: "EVERY HAND CURE REGISTERS ITS
   // WORDS", with the leaf they must read), so the next line that uses them must declare. ──
+  // F4: one home with `temple` — the faith reading; a wayside shrine is no religious house (pattern 8: DS-ECO-12's lines
+  // in a shrine-only town)
   religiousHouses: {
-    kind: 'thing', layer: 'P', leaf: 'factsOf.js :: sacredHouse (pattern 8)',
+    kind: 'thing', layer: 'P', leaf: 'faithReading.js :: faithReadingOf (hasChurch; pattern 8)',
     words: /\breligious houses?\b|\bhouses? of worship\b/i,
-    atoms: ['sacredHouse'], sufficient: ['temple', 'institution: temple', 'institution: monastery'],
-    absent: (f) => f?.sacredHouse !== true,
+    atoms: ['church'], sufficient: ['institution: monastery'],
+    absent: (f) => f?.faith?.hasChurch !== true,
   },
   practitioner: {
     kind: 'thing', layer: 'T', leaf: 'magicReliance.js :: magicPractitioners (NEW-2, 3; its atom waits for a factsOf reader)',

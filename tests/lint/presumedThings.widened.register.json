@@ -954,16 +954,6 @@
     "A winter of storms has pushed the bar across the harbour mouth; deep-keeled ships now wait for the tide or unload offsho"
    ],
    [
-    "temple",
-    "root",
-    "Keeper of the sea-shrine"
-   ],
-   [
-    "temple",
-    "root",
-    "Mother Vane wants the old sea-shrine on the bar re-consecrated before the dredging disturbs it."
-   ],
-   [
     "docks",
     "root",
     "A Redwater factor is quietly buying up silted-harbour warehouses at a loss, or an investment."
@@ -972,11 +962,6 @@
     "docks",
     "root",
     "The Harbour Guild"
-   ],
-   [
-    "temple",
-    "root",
-    "The Sea-Shrine of the Vane"
    ],
    [
     "docks",
@@ -1017,6 +1002,21 @@
     "house: warehouse",
     "family",
     "Buying Thornwall warehouses"
+   ],
+   [
+    "shrine",
+    "word",
+    "Keeper of the sea-shrine"
+   ],
+   [
+    "shrine",
+    "word",
+    "Mother Vane wants the old sea-shrine on the bar re-consecrated before the dredging disturbs it."
+   ],
+   [
+    "shrine",
+    "word",
+    "The Sea-Shrine of the Vane"
    ]
   ],
   "src/components/organic/samples/registry.jsx": [
@@ -1298,6 +1298,11 @@
     "openTrade",
     "family",
     "People gather at the well, and the news of the whole place passes through it."
+   ],
+   [
+    "shrine",
+    "word",
+    "Someone has left fresh flowers at a small shrine set into a wall."
    ]
   ],
   "src/data/bandLadders.js": [
@@ -1542,6 +1547,46 @@
     "streets",
     "family",
     "workshops, shrines, and meeting halls crowd the approaches to the agora"
+   ],
+   [
+    "shrine",
+    "word",
+    "Daily observance, schools, charitable endowments, pilgrimage traffic, and neighborhood shrines organize sacred life."
+   ],
+   [
+    "shrine",
+    "word",
+    "Temple, shrine, household, ancestor, philosophical, and state observances coexist without a single institutional center."
+   ],
+   [
+    "shrine",
+    "word",
+    "Dense bazaar streets, occupational quarters, courtyard homes, shrines, tanks, and shaded arcades interlock."
+   ],
+   [
+    "shrine",
+    "word",
+    "Household, ancestor, sky, land, shrine, and adopted institutional traditions coexist across mobile and settled life."
+   ],
+   [
+    "shrine",
+    "word",
+    "Stone and plaster courtyard houses rise around an agora, stoas, shrines, and steep connecting lanes."
+   ],
+   [
+    "temple",
+    "implied",
+    "Formal temples or churches coexist with ancestor customs, seasonal festivals, springs, and household rites."
+   ],
+   [
+    "temple",
+    "implied",
+    "Calendar rites, neighborhood temples, household offerings, pilgrimage, and civic ceremony are materially intertwined."
+   ],
+   [
+    "temple",
+    "implied",
+    "Temple, monastery, shrine, household, philosophical, and pilgrimage traditions share a crowded sacred landscape."
    ]
   ],
   "src/data/dossierCausalProse.generated.js": [
@@ -1669,6 +1714,21 @@
     "openTrade",
     "family",
     "People travel this road for family, not wages, and {timeband_since} the traffic between the two towns has not thinned."
+   ],
+   [
+    "shrine",
+    "word",
+    "The shrine road at {settlement} fills for the feast and empties after it: this town earns from the beds, {counterpart} f"
+   ],
+   [
+    "shrine",
+    "word",
+    "{settlement}'s shrine is shut and stands in {counterpart}'s books as full: the report that said so was honest and is {ti"
+   ],
+   [
+    "shrine",
+    "word",
+    "The shrine road out of {settlement} is empty when it should be crowded: the town closed the {route}, believing it fed {c"
    ]
   ],
   "src/data/dossierStateProse/defense.generated.js": [
@@ -2805,6 +2865,41 @@
     "openTrade",
     "family",
     "Carts bring {settlement} what its workshops need, and carry the worked {good} away again."
+   ],
+   [
+    "temple",
+    "implied",
+    "In {settlement} the temples run the trade and collect the tithes while {govFaction} holds the seat, and the temples have"
+   ],
+   [
+    "temple",
+    "implied",
+    "The seat in {settlement} makes the decisions, but nothing passes that the temple opposes."
+   ],
+   [
+    "temple",
+    "implied",
+    "{settlement}'s temple runs the trade and does not reach for the seat, and {govFaction} governs without quarrelling with "
+   ],
+   [
+    "temple",
+    "implied",
+    "The cathedral stands taller than anything else in {settlement}, and travellers see it long before they arrive."
+   ],
+   [
+    "temple",
+    "implied",
+    "{settlement} sets its days by the cathedral bells: the feasts, the burials and the hours of work all follow them."
+   ],
+   [
+    "temple",
+    "implied",
+    "Ask the way anywhere in {settlement} and you will be given it from the cathedral."
+   ],
+   [
+    "temple",
+    "implied",
+    "{settlement} keeps a cathedral, a bishop's church that the clergy of the whole district answer to."
    ]
   ],
   "src/data/dossierStateProse/power.generated.js": [
@@ -2882,6 +2977,11 @@
     "house: gambling",
     "family",
     "The money lost at {settlement}'s gambling tables pays for far more than the tables, and every unpaid debt pulls someone "
+   ],
+   [
+    "temple",
+    "implied",
+    "{settlement} is ruled by force. Soldiers carry out the {seat}'s orders, and no temple or priest stands between the town "
    ]
   ],
   "src/data/dossierStateProse/stressors.generated.js": [
@@ -3471,6 +3571,46 @@
     "clergy",
     "family",
     "In {settlement} the priests and the mages are hard to tell apart: the faith's rites use spellcraft, and the mages keep t"
+   ],
+   [
+    "shrine",
+    "word",
+    "The patron holds most of the town's adherence outright; the other creeds keep shrines rather than congregations."
+   ],
+   [
+    "shrine",
+    "word",
+    "The old creed was put down rather than displaced. Its shrines are closed, its days unmarked, and its adherents keep it i"
+   ],
+   [
+    "temple",
+    "implied",
+    "The church and the garrison in {settlement} act as one: soldiers keep the feast days, priests stand at the musters, and "
+   ],
+   [
+    "temple",
+    "implied",
+    "The church in {settlement} hunts heresy openly. Anyone suspected of working magic against the faith is denounced from th"
+   ],
+   [
+    "temple",
+    "implied",
+    "The church in {settlement} watches for heresy: a charm sold in the street or a spell worked behind a shutter can bring a"
+   ],
+   [
+    "temple",
+    "implied",
+    "The church in {settlement} preaches that magic is heresy against the faith, and a newcomer seen working a spell will be "
+   ],
+   [
+    "temple",
+    "implied",
+    "Folk in {settlement} pay for blessings and relics they half suspect are a fraud. The church and the town's thieves share"
+   ],
+   [
+    "temple",
+    "implied",
+    "Priests and mages in {settlement} share authority: the church blesses the mages' work, and the mages' learning serves th"
    ]
   ],
   "src/data/economicData.js": [
@@ -3726,6 +3866,11 @@
     "guardCaptain",
     "family",
     "A guard captain is on the payroll of the criminal network"
+   ],
+   [
+    "temple",
+    "implied",
+    "A relic seized during the trial never reached the temple vault it was bound for"
    ]
   ],
   "src/data/historyDescVariants.js": [
@@ -4672,6 +4817,16 @@
     "house: library",
     "family",
     "The magic-workers keep to one district. Its towers, workshops, libraries, and reagent merchants mark it out."
+   ],
+   [
+    "shrine",
+    "word",
+    "Plain wayside shrine for prayer. Unstaffed."
+   ],
+   [
+    "shrine",
+    "word",
+    "A small shrine by the road at the edge of the parish. No priest keeps it."
    ]
   ],
   "src/data/institutionLadders.js": [
@@ -5488,6 +5643,16 @@
     "prisoner",
     "family",
     "Assign prisoners to labour contracts for public works."
+   ],
+   [
+    "shrine",
+    "word",
+    "Small offerings left at the shrine. Accumulated and forwarded to the temple."
+   ],
+   [
+    "shrine",
+    "word",
+    "Access to venerated relics and shrines for pilgrims."
    ]
   ],
   "src/data/institutionalCatalog.js": [
@@ -6557,6 +6722,11 @@
     "streets",
     "family",
     "The settlement was laid out for the families that founded it. Its streets and wells were never meant for this many peopl"
+   ],
+   [
+    "temple",
+    "implied",
+    "Two temples face each other across "
    ]
   ],
   "src/data/npcData.js": [
@@ -6583,11 +6753,6 @@
    [
     "temple",
     "implied",
-    "Restore a desecrated shrine before the annual festival (quietly, without scandal)"
-   ],
-   [
-    "temple",
-    "implied",
     "Convince their superior in the faith to fund repairs to the temple roof"
    ],
    [
@@ -6608,37 +6773,7 @@
    [
     "temple",
     "implied",
-    " raises the men. The shrine's coffers pay for the "
-   ],
-   [
-    "temple",
-    "implied",
-    "'s men have started praying at a different shrine. "
-   ],
-   [
-    "temple",
-    "implied",
     " demands a church trial; "
-   ],
-   [
-    "temple",
-    "implied",
-    "'s shrine after evening prayers. "
-   ],
-   [
-    "temple",
-    "implied",
-    "A visiting cleric has asked to audit the shrine's books. "
-   ],
-   [
-    "temple",
-    "implied",
-    "'s men carrying crates out of the shrine at night, and has asked "
-   ],
-   [
-    "temple",
-    "implied",
-    "'s superior is coming to inspect the shrine's accounts. "
    ],
    [
     "granary",
@@ -6799,6 +6934,41 @@
     "notary",
     "family",
     " owes and left a copy with a notary."
+   ],
+   [
+    "shrine",
+    "word",
+    "Restore a desecrated shrine before the annual festival (quietly, without scandal)"
+   ],
+   [
+    "shrine",
+    "word",
+    " raises the men. The shrine's coffers pay for the "
+   ],
+   [
+    "shrine",
+    "word",
+    "'s men have started praying at a different shrine. "
+   ],
+   [
+    "shrine",
+    "word",
+    "'s shrine after evening prayers. "
+   ],
+   [
+    "shrine",
+    "word",
+    "A visiting cleric has asked to audit the shrine's books. "
+   ],
+   [
+    "shrine",
+    "word",
+    "'s men carrying crates out of the shrine at night, and has asked "
+   ],
+   [
+    "shrine",
+    "word",
+    "'s superior is coming to inspect the shrine's accounts. "
    ]
   ],
   "src/data/people/dmPowerLines.js": [
@@ -8622,6 +8792,13 @@
     "house: craft guild",
     "family",
     "Craft guilds (100-150+)"
+   ]
+  ],
+  "src/data/traditionCorpus.js": [
+   [
+    "shrine",
+    "word",
+    "a garland left at the shrine"
    ]
   ],
   "src/data/traditionProse.js": [
@@ -15352,11 +15529,6 @@
     "The temples are crowded past their hours, and the priests cannot say what has brought the people in."
    ],
    [
-    "temple",
-    "root",
-    "Strange dreams are spoken of at the well, and the shrine keeps its lamps burning past the midnight hour."
-   ],
-   [
     "market",
     "root",
     "A wandering preacher has set the market talking, and the tithe-box overflows for the first time in an age."
@@ -15374,11 +15546,6 @@
    [
     "temple",
     "root",
-    "Shrines spring up at every crossroad, and the pilgrims come in such numbers the inns cannot hold them."
-   ],
-   [
-    "temple",
-    "root",
     "Devotion runs through every quarter like floodwater, and the temple coffers have never been so full."
    ],
    [
@@ -15389,17 +15556,7 @@
    [
     "temple",
     "root",
-    "The processions grow shorter, and the crossroad shrines are left to the wind and the sparrows."
-   ],
-   [
-    "temple",
-    "root",
     "The stir at the temples came to little. A season of talk, and the devout no more numerous than before."
-   ],
-   [
-    "temple",
-    "root",
-    "The strange dreams stopped as suddenly as they came, and the shrine lamps are trimmed low once more."
    ],
    [
     "market",
@@ -15955,6 +16112,26 @@
     "clergy",
     "family",
     "The matter of devotion stirs the congregation, and the priests weigh what it means."
+   ],
+   [
+    "shrine",
+    "word",
+    "Strange dreams are spoken of at the well, and the shrine keeps its lamps burning past the midnight hour."
+   ],
+   [
+    "shrine",
+    "word",
+    "Shrines spring up at every crossroad, and the pilgrims come in such numbers the inns cannot hold them."
+   ],
+   [
+    "shrine",
+    "word",
+    "The processions grow shorter, and the crossroad shrines are left to the wind and the sparrows."
+   ],
+   [
+    "shrine",
+    "word",
+    "The strange dreams stopped as suddenly as they came, and the shrine lamps are trimmed low once more."
    ]
   ],
   "src/domain/display/occupationStatus.js": [
@@ -16244,11 +16421,6 @@
    [
     "temple",
     "root",
-    "travellers finding a shrine they had not heard of"
-   ],
-   [
-    "temple",
-    "root",
     "temples that share a town and argue about precedence"
    ],
    [
@@ -16355,6 +16527,11 @@
     "house: reeve",
     "family",
     "arithmetic the reeve has done and does not like"
+   ],
+   [
+    "shrine",
+    "word",
+    "travellers finding a shrine they had not heard of"
    ]
   ],
   "src/domain/display/rumorFallbackPhrasePoolsEvents.js": [
@@ -16722,14 +16899,14 @@
     "Something in the market's arrangement is already spoken for, and waits only on the day."
    ],
    [
-    "temple",
-    "root",
-    "Folk at the shrines will notice it soonest, for the town's observances are due to change when the turn comes round."
-   ],
-   [
     "watch",
     "implied",
     "The watch has a hardship to brace for, and it is due to fall on the town when the turn comes round."
+   ],
+   [
+    "shrine",
+    "word",
+    "Folk at the shrines will notice it soonest, for the town's observances are due to change when the turn comes round."
    ]
   ],
   "src/domain/display/stateProse/defenseStateProse.js": [
@@ -17695,21 +17872,6 @@
    [
     "temple",
     "root",
-    "The people keep their own quiet observances. No single creed holds sway, and the shrines answer to no named god."
-   ],
-   [
-    "temple",
-    "root",
-    "The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and the shrines answer to n"
-   ],
-   [
-    "temple",
-    "root",
-    "The people keep their own quiet observances, and keep them faithfully. No single creed holds sway, and the shrines answe"
-   ],
-   [
-    "temple",
-    "root",
     " has no church of its own; its people walk to the next village’s parish church for the rites."
    ],
    [
@@ -17726,6 +17888,21 @@
     "clergy",
     "family",
     " leads its clergy."
+   ],
+   [
+    "shrine",
+    "word",
+    "The people keep their own quiet observances. No single creed holds sway, and the shrines answer to no named god."
+   ],
+   [
+    "shrine",
+    "word",
+    "The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and the shrines answer to n"
+   ],
+   [
+    "shrine",
+    "word",
+    "The people keep their own quiet observances, and keep them faithfully. No single creed holds sway, and the shrines answe"
    ]
   ],
   "src/domain/dossier/powerSupport.js": [
@@ -18019,11 +18196,6 @@
     " no longer moves through the settlement's markets."
    ],
    [
-    "temple",
-    "root",
-    "A cult fades from the settlement, its shrine left to the dust."
-   ],
-   [
     "refugees",
     "word",
     " refugee wave arrived"
@@ -18032,6 +18204,11 @@
     "house: warehouse",
     "family",
     " now moves through the settlement's warehouses in transit."
+   ],
+   [
+    "shrine",
+    "word",
+    "A cult fades from the settlement, its shrine left to the dust."
    ]
   ],
   "src/domain/events/registryProse.js": [
@@ -18507,11 +18684,6 @@
   ],
   "src/domain/hookThemes.js": [
    [
-    "temple",
-    "root",
-    "Someone has been leaving offerings at the shrine that shouldn't be possible. The site has been sealed."
-   ],
-   [
     "market",
     "root",
     "They have evidence of price-fixing across the whole market. Publishing it helps their competition as much as their custo"
@@ -18570,6 +18742,11 @@
     "guardCaptain",
     "family",
     "The guard captain has a file. They know because someone who works for the guard captain also works for them."
+   ],
+   [
+    "shrine",
+    "word",
+    "Someone has been leaving offerings at the shrine that shouldn't be possible. The site has been sealed."
    ]
   ],
   "src/domain/instantWorld/worldPlan.js": [
@@ -18649,8 +18826,8 @@
   ],
   "src/domain/mapProfile.js": [
    [
-    "temple",
-    "root",
+    "shrine",
+    "word",
     "High religious authority suggests procession / shrine path features."
    ]
   ],
@@ -19080,6 +19257,11 @@
     "house: craft guild",
     "family",
     "The craft guilds govern; charters, standards, and apprenticeships double as civic law."
+   ],
+   [
+    "temple",
+    "implied",
+    "Clergy rule; their faith gives them the right to, and the temple's calendar sets the year."
    ]
   ],
   "src/domain/spatial/dispatchDestination.js": [
@@ -22324,6 +22506,11 @@
     "house: criminal faction",
     "family",
     "{\n  \"thesis\": \"2-3 paragraphs. The defining character of this settlement — what kind of place it is, what its central te"
+   ],
+   [
+    "shrine",
+    "word",
+    "the market, shrine, workshop, and public well"
    ]
   ],
   "src/generators/chainMagicSubstitution.js": [
@@ -22384,6 +22571,16 @@
     "house: mine",
     "family",
     "Tin from western mines"
+   ],
+   [
+    "shrine",
+    "word",
+    "Fine lacquerwork for shrines"
+   ],
+   [
+    "shrine",
+    "word",
+    "Felt for yurt-shrines"
    ]
   ],
   "src/generators/economy/economicState.js": [
@@ -23097,6 +23294,11 @@
     "clergy",
     "family",
     "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements le"
+   ],
+   [
+    "religiousHouses",
+    "implied",
+    " split the faith here; its house of worship survived, but the congregation never came back together"
    ]
   ],
   "src/generators/neighbourGenerator.js": [
@@ -24300,6 +24502,26 @@
     "house: shipyard",
     "family",
     "Coastal port (harbour and shipyards)"
+   ],
+   [
+    "shrine",
+    "word",
+    "A wayside shrine"
+   ],
+   [
+    "shrine",
+    "word",
+    "a wayside shrine"
+   ],
+   [
+    "shrine",
+    "word",
+    " and a wayside shrine"
+   ],
+   [
+    "shrine",
+    "word",
+    "Close-built stone houses below a wayside shrine, a single defended gate"
    ]
   ],
   "src/generators/steps/cascadePass.js": [

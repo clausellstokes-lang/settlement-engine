@@ -62,16 +62,9 @@
   {"thing": "war", "path": ".relationships[].description", "text": "is fought in raids, informants, and paperwork", "reason": "figure", "note": "a rivalry called a war", "towns": 10}
  ],
  "arm1": {
-  "src/data/arrivalProse.js": [
-   ["temple", "after-release", "Someone has left fresh flowers at a small shrine set into a wall."]
-  ],
   "src/data/cultureProfiles.js": [
    ["docks", "after-release", "A fortified high precinct overlooks the market, theater, and workshops; where geography permits, it also overlooks a wor"],
-   ["temple", "after-release", "Daily observance, schools, charitable endowments, pilgrimage traffic, and neighborhood shrines organize sacred life."],
-   ["temple", "after-release", "Dense bazaar streets, occupational quarters, courtyard homes, shrines, tanks, and shaded arcades interlock."],
    ["temple", "after-release", "Farmsteads and craft yards form compact wards around a hall, church, or fortified manor."],
-   ["temple", "after-release", "Household, ancestor, sky, land, shrine, and adopted institutional traditions coexist across mobile and settled life."],
-   ["temple", "after-release", "Stone and plaster courtyard houses rise around an agora, stoas, shrines, and steep connecting lanes."],
    ["temple", "after-release", "Temple tanks and bazaars, with a quarter for each trade and guilds to run them."],
    ["temple", "after-release", "Temple, shrine, household, ancestor, philosophical, and state observances coexist without a single institutional center."],
    ["temple", "after-release", "Written office and examination or appointment coexist with household, temple, and merchant authority."]
@@ -130,7 +123,6 @@
    ["temple", "after-release", "{settlement}'s chronicle notes the {reason} as it happened and, separately, what {temple} said it meant, so anyone who r"],
    ["temple", "after-release", "{settlement}'s hall has set itself against {temple} over {reason}, and every week of the quarrel costs it support it doe"],
    ["temple", "after-release", "{settlement}'s rulers won the tithe from {temple}: their income is up, and the neighbouring halls think less of them for"],
-   ["temple", "after-release", "{settlement}'s shrine is shut and stands in {counterpart}'s books as full: the report that said so was honest and is {ti"],
    ["temple", "after-release", "{temple} at {settlement} carries no endowment from {house} and owes it nothing: the offer went back down the road it cam"],
    ["temple", "after-release", "{temple} at {settlement} reads the hunger as wrath and the town believed the reading through {timeband_span}; the granar"],
    ["temple", "after-release", "{temple} at {settlement} thanks {house} from the altar for the grain of the hungry season, which was rather the point; t"],
@@ -154,8 +146,6 @@
    ["temple", "after-release", "The pews at {settlement} are still as full as the {reason} left them: fear emptied the market and filled {temple}, and w"],
    ["temple", "after-release", "The reading has cost {temple} more respect at {settlement} than the calamity cost the fields, and it is costing still."],
    ["temple", "after-release", "The seat at {settlement} rules with the temple behind it, and it shows in how little argument it needs; instruction that"],
-   ["temple", "after-release", "The shrine road at {settlement} fills for the feast and empties after it: this town earns from the beds, {counterpart} f"],
-   ["temple", "after-release", "The shrine road out of {settlement} is empty when it should be crowded: the town closed the {route}, believing it fed {c"],
    ["temple", "after-release", "The stain the church quarrel left on {settlement}'s seat is fading, slowly and on its own schedule, and the power that l"],
    ["temple", "after-release", "The temple street at {settlement} has not refilled {timeband_since}, and the tax roll is where the town first learned it"],
    ["temple", "after-release", "The temple's backing is not being given at {settlement}, and the seat is finding out what it was worth: {temple} withdre"],
@@ -301,9 +291,7 @@
    ["temple", "after-release", "DS-FTH-4 · Faith/Power › Why the temple holds its ground (standing, tenure, endowment) · `worldState.religionStates[cid]"],
    ["temple", "after-release", "Every household in {settlement}'s temple rolls is already entered under one faith or another, so a new creed would have "],
    ["temple", "after-release", "The faith is entered in the temple rolls of a few towns across the realm, and known among the travellers between them."],
-   ["temple", "after-release", "The old creed was put down rather than displaced. Its shrines are closed, its days unmarked, and its adherents keep it i"],
    ["temple", "after-release", "The old patron lost first place over a question of right, not numbers; the temple rolls show its people leaving with it."],
-   ["temple", "after-release", "The patron holds most of the town's adherence outright; the other creeds keep shrines rather than congregations."],
    ["temple", "after-release", "The temple rolls of other towns hardly name this creed: a small following, kept almost nowhere else, and fiercely held."],
    ["war", "after-release", "{settlement} has given all it will give to the war but has not said so, and the next few seasons will show where the lin"],
    ["war", "after-release", "{settlement} is at war with {counterpart} and has not been touched by it; the distance between the two towns is doing th"],
@@ -428,14 +416,12 @@
    ["prison", "after-release", "A vast state gaol where the political, the indebted, and the convicted are each held separately."],
    ["temple", "after-release", "A charity house sheltering the destitute poor, the aged, and the disabled who cannot work. Church endowment and wealthy "],
    ["temple", "after-release", "A quarry with yards of dressed stone and its own masons. Half the region's walls and churches were cut here."],
-   ["temple", "after-release", "A small shrine by the road at the edge of the parish. No priest keeps it."],
    ["temple", "after-release", "Abandoned babies and young children are received here and given plain care until apprenticeship, a family placement, or "],
    ["temple", "after-release", "Carves both plain and decorative pieces from wood: handles for tools, religious figures, furniture inlay. For the church"],
    ["temple", "after-release", "Consecrated earth ringing the church."],
    ["temple", "after-release", "Hallowed ground about the church."],
    ["temple", "after-release", "Kept for the poor, the old, and the crippled who have no work in them, funded by church endowment and rich patrons. It f"],
    ["temple", "after-release", "Masons dress the stone in yards beside the working face. The quarry supplies walls and churches across half the region."],
-   ["temple", "after-release", "Plain wayside shrine for prayer. Unstaffed."],
    ["temple", "after-release", "Separate courts for trade, for crime, and for the church."],
    ["temple", "after-release", "Takes in abandoned infants and small children and keeps them in basic care until they are apprenticed, placed with famil"],
    ["temple", "after-release", "The great church of the metropolis. The region's chief religious authority sits here, and the faithful travel to it."],
@@ -457,7 +443,6 @@
    ["granary", "after-release", "State granary complex"],
    ["mercenary", "after-release", "Free company hall"],
    ["mill", "after-release", "Access to external mill"],
-   ["temple", "after-release", "Access to parish church"],
    ["temple", "after-release", "Cathedral (10,000+ only)"],
    ["temple", "after-release", "Parish churches (10-30)"],
    ["temple", "after-release", "Parish churches (2-5)"],
@@ -498,7 +483,6 @@
    ["mill", "after-release", "Grain carted to a mill outside the settlement and brought back as flour."],
    ["mill", "after-release", "Some mills repurposed for fulling wool cloth."],
    ["mill", "after-release", "Water-powered sawmill function at some larger mills."],
-   ["temple", "after-release", "Access to venerated relics and shrines for pilgrims."],
    ["temple", "after-release", "Every district has a temple. Religious observance accessible to all."],
    ["temple", "after-release", "Refuge inside the walls of the great temple. Limited but ancient right."],
    ["temple", "after-release", "Small offerings left at the shrine. Accumulated and forwarded to the temple."],
@@ -564,7 +548,6 @@
    ["prison", "after-release", "State prison complex: political prisoners, debtors, convicted criminals held separately."],
    ["prison", "after-release", "the prison warden"],
    ["temple", "after-release", "A working quarry with dressed-stone yards and a crew of masons. Builds the walls and churches of half the region."],
-   ["temple", "after-release", "Access to parish church"],
    ["temple", "after-release", "At town scale the clergy are held inside the parish churches' row."],
    ["temple", "after-release", "Carves functional and decorative items from wood: tool handles, religious figures, furniture inlays. Produces sacred ima"],
    ["temple", "after-release", "Cathedral (10,000+ only)"],
@@ -775,14 +758,12 @@
    ["temple", "after-release", "Cathedral design, fortress planning"]
   ],
   "src/data/traditionCorpus.js": [
-   ["temple", "after-release", "a garland left at the shrine"],
    ["temple", "after-release", "tithes carried up the temple steps"],
    ["walls", "after-release", "a custom older than the walls"]
   ],
   "src/generators/aiLayer.js": [
    ["garrison", "after-release", "{\n  \"thesis\": \"2-3 paragraphs. The defining character of this settlement — what kind of place it is, what its central te"],
-   ["market", "after-release", "the market, shrine, workshop, and public well"],
-   ["temple", "after-release", "the market, shrine, workshop, and public well"]
+   ["market", "after-release", "the market, shrine, workshop, and public well"]
   ],
   "src/generators/chainMagicSubstitution.js": [
    ["temple", "after-release", "Temple fishing rites improve depleted catch"],
@@ -808,10 +789,6 @@
    ["market", "after-release", "quarrel over where one market ends and the other begins"],
    ["mercenary", "after-release", "contest to hire the same sellswords"],
    ["mercenary", "after-release", "mercenary recruitment competition"]
-  ],
-  "src/generators/demandProfile.js": [
-   ["temple", "after-release", "Felt for yurt-shrines"],
-   ["temple", "after-release", "Fine lacquerwork for shrines"]
   ],
   "src/generators/economy/economicState.js": [
    ["bank", "other-lane", "Civic taxes on banking operations, letters of credit, and financial transaction fees."],
@@ -942,9 +919,6 @@
    ["market", "after-release", "Slave Market Master"],
    ["watch", "after-release", "City Watch Chief"]
   ],
-  "src/generators/people/representatives.js": [
-   ["temple", "after-release", "Access to parish church"]
-  ],
   "src/generators/power/conflictIssues.js": [
    ["temple", "other-lane", "Church land claims on guild property"]
   ],
@@ -1040,11 +1014,7 @@
    ["garrison", "after-release", "Fortified pass town, walls cutting across the valley floor, garrison above"],
    ["guildhall", "after-release", "Workshops, guild halls, apprentices learning trades"],
    ["market", "after-release", "Between market and residential"],
-   ["market", "after-release", "Narrow alleys, hidden markets, criminal activity"],
-   ["temple", "after-release", " and a wayside shrine"],
-   ["temple", "after-release", "a wayside shrine"],
-   ["temple", "after-release", "A wayside shrine"],
-   ["temple", "after-release", "Close-built stone houses below a wayside shrine, a single defended gate"]
+   ["market", "after-release", "Narrow alleys, hidden markets, criminal activity"]
   ],
   "src/generators/steps/isolationPass.js": [
    ["granary", "after-release", "Re-weighed against granaries/food institutions like every other emergent stressor before the economy reads it."]
