@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "3eb4dbc947c85cd1a4d3b78442a84a42dc04b798",
-  "measuredBy": "W2-B-DECLARE-5",
+  "measuredAtSha": "5c418e4286f9186f8b2c3e97a41957fc98f36808",
+  "measuredBy": "W2-B-DECLARE-6",
   "date": "2026-11-13",
-  "note": "lane/w2-b-declare-2026-11-12, fourth and fifth seats: +10 titles in this lane test files (fourth seat F4 +2, F3 +2, F2 +2, F9 +1, F8 +1; fifth seat F7 +2) and their describe blocks; no file added, no rule widened or narrowed",
+  "note": "lane/w2-b-declare-2026-11-12, sixth seat (REVIEW-W2B third read): +8 titles in this lane test files (R1 +3, R3 +1, finding 4 +1, finding 7 +1, finding 8 +1, finding 6 +1) and one describe block (R1); two titles renamed by identity (finding 9; R3 the strip-row title); no file added, no rule widened or narrowed",
   "files": 3221,
   "parked": 399,
   "credited": 2822,
-  "titles": 29265,
-  "suiteTitles": 7930
+  "titles": 29273,
+  "suiteTitles": 7931
 }
