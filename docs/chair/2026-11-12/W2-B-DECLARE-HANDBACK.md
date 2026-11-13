@@ -185,5 +185,18 @@ check-domain-strict exit 0 (1113, ceiling 1113) · typecheck:ratchet exit 0 (167
 **Kept current after every item; a stop at any moment loses nothing.** Every count is executed unless marked PLAUSIBLE.
 
 ## 0. Status
-- [ ] 1 precision read · [ ] 2 the ten cases · [ ] 3 F2 F4 F5 F6 F7 F8 F9 F11 F12 F13 · [ ] 4 more recall · [ ] 5 lane whole
+- [ ] 1 precision read · [x] 2 the ten cases · [ ] 3 F2 F4 F5 F6 F7 F8 F9 F11 F12 F13 · [ ] 4 more recall · [ ] 5 lane whole
+
+## 2. Item 2: the second seat's owed proof of the ten cases (DS-GEN-9, `aa41b1f25`)
+
+**On the page: no change. Nothing prints before or after the cure** (CONFIRMED). The 70 towns whose marker event has no `anchored` flag were rendered on `a51634ede` (the tree before the cure) and on `83c84a8ed` with the census's own render. On the 42 towns compared before the tip render finished, no line was added. One town lost two lines ("Patron deity", r2r-thorp-3, Systems/Power), which have nothing to do with DS-GEN-9 (render noise, noted, not chased). Why: the desk's mount `history.identity` is a **glance** rung (`dossierMounts.js :: drawnAtMount`: a glance mount draws no sentence), so `generalDeskLines(...).history.identityLines` is empty in all 70 towns at both trees (`probes/W2-B-DECLARE/anchorPage.mjs`), and the PDF reads the same list (`printProse.js`, `put('history', 'history.identity', …)`). The second seat's probe read `.history.identity`, a key that does not exist, so it read nothing at both trees.
+
+**Beneath the mount** (the desk's own output, `generalStateProse(...).history.identity`, `anchorDesk.mjs`): **207 → 273 sentences; 66 of the 70 towns gain one**, all `event type: *` (political 16, religious 11, economic 10, disaster 9, occupation_infiltration 6, demographic 6, magical 4, exile_return 4).
+
+**Ten of the new sentences read against each town's own event:** **3 true, 4 false, 3 doubtful.**
+- true: r2r-hamlet-33 (the plague 20 years ago: "came through … does not show it"); r2r-village-10 and r2s-succession_void-hamlet-0 (the heresy trials: "a passing upset, not a change of faith").
+- false: r2r-hamlet-0 and r2s-slave_revolt-hamlet-3 ("The Schism … does not come up", but the event's own text is in the present tense: "the two will not meet"; the first is 16 years ago and still called "a generation on"); r2s-insurgency-thorp-2 ("The Trade Collapse should have remade Uaymkin and did not … went on doing what it had been doing", but the river trade the town was built on failed and its wealth drained away); r2s-recently_betrayed-village-3 ("The Economic Divide … the town absorbed it", but the divide is present tense and still widening).
+- doubtful: r2r-thorp-3 and r2r-metropolis-40 ("The Land Dispute … does not come up", but the dispute still contradicts who holds the land now); r2s-politically_fractured-thorp-1 ("almost nobody here thinks about" a migration that left "sustained, low-level conflict").
+
+**The reading, for the chair's ruling.** The generator's `anchored: false` means the anchor pass did not place the event. It does not mean the event left no mark. The "not anchored" variants of the event-type pools read it the second way. The cure is display-only and prints nothing today. If the mount is ever promoted from glance, about half of these lines would print false. **Recommendation:** keep the cure (it makes the dimension answer), and hand the event-type pools' "not anchored" variants to W2-WRITE (§9: wording owed). The variants must not claim the event left no mark, because many of these events are ongoing; or the pools could partition on the event's tense. Not this seat's to write: it is the prose corpus.
 
