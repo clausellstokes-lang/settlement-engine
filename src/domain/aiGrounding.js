@@ -52,6 +52,7 @@ import { deriveMagicProfile } from './magicProfile.js';
 import { deriveAllCapacities } from './capacityModel.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
+import { chainPrintName } from './display/chainPrintName.js';
 import { deriveAllActiveConditions } from './activeConditions.js';
 import { deriveAllThreatProfiles } from './threatProfile.js';
 import { deriveAllNpcProfiles } from './npcProfile.js';
@@ -352,6 +353,20 @@ function topHooksBySeverity(settlement, n) {
 // ── Composer ─────────────────────────────────────────────────────────────
 
 /**
+ * The chain projection the AI narrates from, with each chain's `resource` the source the page gives it
+ * (`chainPrintName`: the toll's by the town's access, COHERENCE-AGREE-8). The AI's words print on the page, so the
+ * grounding never hands it a name the page would not print. The projection's list is the record's own, less what is
+ * not a chain object (`deriveAllSupplyChainStates`), so the two align by position.
+ * @param {any} settlement
+ */
+function groundingChains(settlement) {
+  const record = (settlement?.economicState?.activeChains || settlement?.economy?.activeChains || settlement?.supplyChains || [])
+    .filter((/** @type {unknown} */ c) => c && typeof c === 'object');
+  return deriveAllSupplyChainStates(settlement)
+    .map((projected, i) => ({ ...projected, resource: /** @type {string | undefined} */ (chainPrintName(record[i], settlement).resource) }));
+}
+
+/**
  * Build the structured grounding envelope.
  *
  * @param {AiSettlement | null | undefined} settlement
@@ -426,7 +441,7 @@ export function buildAiGroundingPayload(settlement, options = {}) {
     userEdits: collectUserEditsSummary(settlement),
 
     factions:        deriveAllFactionProfiles(settlement),
-    chains:          deriveAllSupplyChainStates(settlement),
+    chains:          groundingChains(settlement),
     conditions:      deriveAllActiveConditions(settlement),
     threats:         deriveAllThreatProfiles(settlement),
     npcs:            opts.dominantNpcsOnly

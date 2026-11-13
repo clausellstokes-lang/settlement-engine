@@ -90,3 +90,71 @@ describe('FINDING 1: the read-time chain projections name the toll by the town\'
     });
   }
 });
+
+describe('FINDING 1: THE SWEEP — no stored string and no export of the town names a crossroads it is not', () => {
+  // THE INSTRUMENT THAT LOOKS EVERYWHERE THE WORDS CAN PRINT, from the birth's side: (1) every string the record
+  // stores, but the two carriers the chair's ruling keeps on the catalogue's strings (`economicState.activeChains[]
+  // .label / .resource`, read by the logic readers and a saved world's re-derivation); (2) every export and composed
+  // surface the town drives with no browser: the PDF document's text, the Foundry module's journals, the world
+  // export and its importer's journals, the tonight sheet, the AI grounding's prompt, the daily life, the causal
+  // views, and the explanation rail's envelope for every entity of the catalogue. The rendered dossier is counted on
+  // the census's 720 (`census.sh`).
+  /** Flatten a react-pdf element tree to its text leaves (the tests/pdf idiom: the sections are hook-free). */
+  const collectText = (/** @type {any} */ node, /** @type {string[]} */ out = []) => {
+    if (node == null || typeof node === 'boolean') return out;
+    if (typeof node === 'string' || typeof node === 'number') { out.push(String(node)); return out; }
+    if (Array.isArray(node)) { for (const n of node) collectText(n, out); return out; }
+    if (typeof node === 'object') {
+      if (typeof node.type === 'function') return collectText(node.type(node.props), out);
+      return collectText(node.props?.children, out);
+    }
+    return out;
+  };
+  /** Every string under a value, with its path. @param {unknown} o @param {string} p @param {[string, string][]} out */
+  const strings = (o, p = '', out = []) => {
+    if (typeof o === 'string') out.push([p, o]);
+    else if (Array.isArray(o)) o.forEach((v, i) => strings(v, `${p}[${i}]`, out));
+    else if (o && typeof o === 'object') for (const [k, v] of Object.entries(o)) strings(v, `${p}.${k}`, out);
+    return out;
+  };
+  const CARRIER = /^\.economicState\.activeChains\[\d+\]\.(?:label|resource)$/;
+  for (const [seed, [access, printed]] of Object.entries(SEEDS)) {
+    test(`${seed} (${access}): the record's strings, but its two ruled carriers, and every export name "${printed}" and no crossroads`, async () => {
+      const s = births[seed];
+      const all = strings(s);
+      expect(all.filter(([p, v]) => CATALOGUE.test(v) && CARRIER.test(p)).length, 'anchored: the walk reads the ruled carriers').toBe(2);
+      expect(all.filter(([p, v]) => CATALOGUE.test(v) && !CARRIER.test(p)).map(([p]) => p)).toEqual([]);
+
+      const { buildViewModel } = await import('../../src/pdf/lib/viewModel.js');
+      const { SettlementPDF } = await import('../../src/pdf/SettlementPDF.jsx');
+      const { buildFoundryModuleFiles } = await import('../../src/foundry/moduleBuilder.js');
+      const { buildWorldExport } = await import('../../src/lib/worldExport.js');
+      const { buildJournalDocuments } = await import('../../foundry-module/scripts/build-journals.js');
+      const { composeTonightSheet } = await import('../../src/domain/summary/tonightSheet.js');
+      const { buildAiGroundingPayload, assemblePromptSections } = await import('../../src/domain/aiGrounding.js');
+      const { deriveDailyLife } = await import('../../src/domain/dailyLife.js');
+      const { deriveCausalView, supportedCausalViews } = await import('../../src/domain/causalViews.js');
+      const { entityCatalog, explainEntity } = await import('../../src/domain/explanation.js');
+      const React = (await import('react')).default;
+      const vm = buildViewModel({ settlement: s });
+      const surfaces = {
+        pdf: collectText(React.createElement(SettlementPDF, { settlement: s })).join(' '),
+        foundry: JSON.stringify(buildFoundryModuleFiles({ settlement: s, vm })),
+        worldImport: JSON.stringify(buildJournalDocuments(buildWorldExport({ settlements: [{ settlement: s }] }, { variant: 'dm' }))),
+        tonight: JSON.stringify(composeTonightSheet(s)),
+        aiPrompt: JSON.stringify(assemblePromptSections(buildAiGroundingPayload(s))),
+        dailyLife: JSON.stringify(deriveDailyLife(s)),
+        causalViews: JSON.stringify(supportedCausalViews().map((v) => deriveCausalView(s, v).summary)),
+        explanation: JSON.stringify(entityCatalog(s).map((ref) => explainEntity(s, ref))),
+      };
+      // anchored: the surfaces are live (the PDF and the Foundry journals carry the town's name; the toll prints
+      // under its access's name where a surface names chains at all)
+      expect(surfaces.pdf).toContain(s.name);
+      expect(surfaces.foundry).toContain(s.name);
+      expect(surfaces.pdf + surfaces.explanation).toContain(printed);
+      const named = Object.entries(surfaces).filter(([, text]) => CATALOGUE.test(text))
+        .map(([k, text]) => `${k}: ${text.slice(Math.max(0, text.search(CATALOGUE) - 60), text.search(CATALOGUE) + 60)}`);
+      expect(named).toEqual([]);
+    }, 120000);
+  }
+});
