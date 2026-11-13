@@ -920,16 +920,6 @@
    [
     "occupation",
     "word",
-    "{settlement} is under occupation; the streets are quiet because soldiers hold them, not because the town is at peace."
-   ],
-   [
-    "occupation",
-    "word",
-    "{settlement} is quiet under occupation: no unrest, and nobody doing anything they were not told to."
-   ],
-   [
-    "occupation",
-    "word",
     "{settlement} was occupied and gave nothing up that mattered; what the occupier took, the town had already moved."
    ],
    [
@@ -971,21 +961,6 @@
    ]
   ],
   "src/data/dossierStateProse/stressors.generated.js": [
-   [
-    "occupation",
-    "word",
-    "{settlement}'s taxes go to the occupier before the town sees them, and its officials take their orders from outside."
-   ],
-   [
-    "occupation",
-    "word",
-    "{settlement} runs as before, but the occupier's officers sit in on its business and make no secret of it."
-   ],
-   [
-    "occupation",
-    "word",
-    "The occupiers are quartered inside the town, and the town's business is conducted around them."
-   ],
    [
     "famine",
     "word",
@@ -7857,11 +7832,6 @@
     "prison",
     "root",
     "Internal Security: full legal chain (court AND prison)"
-   ],
-   [
-    "granary",
-    "root",
-    "Disasters & Famine: granary AND hospital"
    ],
    [
     "granary",

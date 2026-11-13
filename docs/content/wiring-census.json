@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2838,
+    "variants": 2841,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -2314,7 +2314,9 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "institution: granary": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -2582,7 +2584,9 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "no institution: granary": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -7157,7 +7161,9 @@
       },
       "declares": [],
       "lineDeclares": {
+        "coast": 1,
         "crisis: any": 3,
+        "institution: granary": 1,
         "no crisis: threat": 1
       },
       "undeclared": 0,
@@ -7210,7 +7216,9 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "institution: granary": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -7265,7 +7273,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
+        "colour": 1,
+        "institution: granary": 2,
         "no crisis: hunger": 1
       },
       "undeclared": 0,
@@ -7442,6 +7451,7 @@
       },
       "declares": [],
       "lineDeclares": {
+        "coast": 1,
         "crisis: any": 3,
         "no crisis: threat": 1
       },
@@ -7597,7 +7607,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 3,
+        "coast": 2,
+        "colour": 1,
         "magic": 1
       },
       "undeclared": 0,
@@ -12462,8 +12473,7 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 1,
-        "institution: granary": 2,
+        "institution: granary": 3,
         "no institution: granary": 1
       },
       "undeclared": 0,
@@ -14898,7 +14908,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 6,
       "grammars": 1,
       "predicate": [
         {
@@ -14952,7 +14962,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 3
+        "colour": 3,
+        "institution: granary": 3
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -25988,6 +25999,7 @@
       },
       "declares": [],
       "lineDeclares": {
+        "crisis: occupied": 2,
         "no crisis: unrest": 3,
         "no ruler: occupier": 1
       },
@@ -38138,10 +38150,12 @@
       },
       "declares": [],
       "lineDeclares": {
+        "crisis: occupied": 3,
+        "garrison": 1,
         "no walls": 1,
         "walls": 1
       },
-      "undeclared": 5,
+      "undeclared": 3,
       "crisisScoped": false
     },
     {
@@ -38840,8 +38854,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 6,
+      "lineDeclares": {
+        "crisis: wartime": 1
+      },
+      "undeclared": 5,
       "crisisScoped": false
     },
     {
@@ -54817,7 +54833,7 @@
         "DS-ECO-8 :: FOOD AND PROSPERITY: the cost of food weighs on the town",
         "DS-ECO-8 :: FOOD AND PROSPERITY: full stores lift the town"
       ],
-      "variants": 9,
+      "variants": 12,
       "grammars": 5,
       "blocks": [
         "DS-ECO-8"
@@ -68211,7 +68227,7 @@
         "eco.foodSecurity.prosperityMod.type"
       ],
       "readingFunction": "foodProsperityPoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "6 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

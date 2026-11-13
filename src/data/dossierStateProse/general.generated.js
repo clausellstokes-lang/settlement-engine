@@ -5526,6 +5526,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
+            "crisis: occupied",
             "no crisis: unrest"
           ],
           "text": "{settlement} is under occupation; the streets are quiet because soldiers hold them, not because the town is at peace.",
@@ -5548,6 +5549,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
+            "crisis: occupied",
             "no crisis: unrest"
           ],
           "text": "{settlement} is quiet under occupation: no unrest, and nobody doing anything they were not told to.",

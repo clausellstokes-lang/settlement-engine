@@ -890,7 +890,7 @@ wants a sentence.
 **GRANARY: thin**
 1. `[ledger · institution: granary]` {settlement}'s granary runs thin this {season}. The granary's tally is checked every week now, and it shows weeks of food left, not seasons.
 2. `[street · institution: granary]` People in {settlement} have begun asking when the granary was last this low. Nobody yet asks what happens when it is empty.
-3. `[unfolding · colour]` {settlement} is eating its stores faster than {season} will refill them. If nothing changes, the granary runs out before the next harvest.
+3. `[unfolding · institution: granary]` {settlement} is eating its stores faster than {season} will refill them. If nothing changes, the granary runs out before the next harvest.
 4. `[ledger · no institution: granary]` The stores run thin this {season}. What is left is measured in weeks rather than seasons.
 
 **GRANARY: nearly empty**
@@ -1261,9 +1261,12 @@ contradict** it (R-DST-C).
 3. `[unfolding · colour]` As long as food costs {settlement} this much, the town's fortunes will sit a step lower than its work deserves.
 
 **FOOD AND PROSPERITY: full stores lift the town** *(type bonus)*
-1. `[ledger · colour]` Full stores help {settlement}'s fortunes. With food to spare and a granary to keep it in, the town has more to trade and less to fear from a bad year.
-2. `[street · colour]` Nobody at {settlement} worries much about the next meal, and the spare food in the granary is part of why the town does as well as it does.
-3. `[unfolding · colour]` With its granary full, {settlement} can meet a lean season without selling what it cannot spare.
+1. `[ledger · institution: granary]` Full stores help {settlement}'s fortunes. With food to spare and a granary to keep it in, the town has more to trade and less to fear from a bad year.
+2. `[street · institution: granary]` Nobody at {settlement} worries much about the next meal, and the spare food in the granary is part of why the town does as well as it does.
+3. `[unfolding · institution: granary]` With its granary full, {settlement} can meet a lean season without selling what it cannot spare.
+4. `[trade · colour]` {settlement} grows more food than it eats, and what it sells of the surplus brings coin in every season.
+5. `[local · colour]` A lean month at {settlement} is something people talk about, not something they live through, and the full larders are part of why the place does well.
+6. `[threshold · colour]` {settlement}'s good fortune rests partly on its harvests: so long as they come in full, the place can afford to be generous.
 
 ---
 
@@ -2921,7 +2924,7 @@ in about two towns in five that keep a force.
 
 **`Disasters & Famine`: granary AND hospital** {colour}
 1. `[ledger]` {settlement} holds food against a bad year and has somewhere to put the sick; between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.
-2. `[street]` People at {settlement} are glad of their granary for bad years and their hospital for the sick.
+2. `[street · institution: granary]` People at {settlement} are glad of their granary for bad years and their hospital for the sick.
 3. `[counterforce]` Neither a failed harvest nor an outbreak turns into a catastrophe at {settlement}, and the reason is in the two buildings rather than in the luck.
 
 **`Disasters & Famine`: granary AND parish care only** {colour}
@@ -2942,7 +2945,7 @@ in about two towns in five that keep a force.
 **`Disasters & Famine`: NO reserves, NO medical provision** {colour}
 1. `[ledger]` {settlement} has no granary and nobody to treat the sick; a failed harvest is hardship within the season here and a plague runs until it burns out.
 2. `[street]` The town's answer to a bad season is the same as its answer to a sickness, which is to endure it and count afterwards.
-3. `[visitor]` Ask for the granary or the sick-house at {settlement} and you are pointed to neither, because there is neither.
+3. `[visitor · no institution: granary]` Ask for the granary or the sick-house at {settlement} and you are pointed to neither, because there is neither.
 
 ---
 
@@ -3424,19 +3427,19 @@ magical bypass channels (`teleport` / `airship`) are live-world state.
 3. `[street]` The sick at {settlement} are tended by whoever is related to them, and that is the whole of the arrangement.
 
 **`Logistics & Supply: Granary + port`** {crisis-scoped}
-1. `[ledger · crisis: any]` {settlement}'s granary tally and its open harbour make it the hardest kind of place to starve out: a siege would need a fleet as well as an army.
+1. `[ledger · institution: granary · coast · crisis: any]` {settlement}'s granary tally and its open harbour make it the hardest kind of place to starve out: a siege would need a fleet as well as an army.
 2. `[counterforce · crisis: any]` {settlement} does not close easily. Cutting the roads leaves the water, closing the water leaves the stores, and an attempt on either one alone accomplishes nothing.
 3. `[street · crisis: any · no crisis: threat]` The town has grain in store and water at the door at {settlement}, and is unhurried about threats in a way that irritates its neighbours.
 
 **`Logistics & Supply: Granary in isolation`** {colour}
-1. `[ledger]` {settlement} holds reserves and nothing else; endurance here is exactly the size of what is in the granary and not a day longer.
+1. `[ledger · institution: granary]` {settlement} holds reserves and nothing else; endurance here is exactly the size of what is in the granary and not a day longer.
 2. `[unfolding]` {settlement} can sit out a bad season on its stores, but every day of it empties them a little further.
 3. `[street]` What is in the store at {settlement} is the whole of the town's future in a bad season, and everybody here can estimate it.
 
 **`Logistics & Supply: Granary with road supply`**
-1. `[ledger · colour]` {settlement} keeps stores and is fed by the roads; the roads are the vulnerability, and the granary is what buys time to do something about them.
+1. `[ledger · institution: granary]` {settlement} keeps stores and is fed by the roads; the roads are the vulnerability, and the granary is what buys time to do something about them.
 2. `[street · colour]` The town has grain put by and knows it is put by against the {route} closing rather than against the harvest failing.
-3. `[counterforce · no crisis: hunger]` An interruption on the roads to {settlement} does not reach the table, and the granary is the reason rather than the roads.
+3. `[counterforce · institution: granary · no crisis: hunger]` An interruption on the roads to {settlement} does not reach the table, and the granary is the reason rather than the roads.
 
 **`Logistics & Supply: No reserves, port open`**
 1. `[ledger · colour]` {settlement} keeps no granary and needs none while the port runs; the supply continues as long as the water does.
@@ -3450,7 +3453,7 @@ magical bypass channels (`teleport` / `airship`) are live-world state.
 
 **`Naval Defense: Naval force`** {crisis-scoped}
 1. `[ledger · crisis: any]` {settlement} controls its own sea approaches; anything coming by water would need to beat the fleet before it reached the town.
-2. `[visitor · crisis: any]` Arriving by sea at {settlement}, you are met by the town's own vessels well before the harbour.
+2. `[visitor · coast · crisis: any]` Arriving by sea at {settlement}, you are met by the town's own vessels well before the harbour.
 3. `[counterforce · crisis: any · no crisis: threat]` Nothing hostile stands off {settlement}, and the ships that would have to be beaten first are the reason.
 
 **`Naval Defense: Port only`** {crisis-scoped}
@@ -3459,8 +3462,8 @@ magical bypass channels (`teleport` / `airship`) are live-world state.
 3. `[visitor · crisis: any · no crisis: threat, unrest]` You can sail into {settlement} unchallenged; nobody watches the harbour mouth.
 
 **`Naval Defense: Under blockade`** *(recorded cause — clause licensed)*
-1. `[ledger · colour]` A hostile fleet sits across {settlement}'s sea approaches: the harbour book records no ship in, and the goods the town lives on have stopped.
-2. `[street · colour]` The harbour at {settlement} is full of vessels that cannot leave and empty of the ones that should be coming in.
+1. `[ledger · coast]` A hostile fleet sits across {settlement}'s sea approaches: the harbour book records no ship in, and the goods the town lives on have stopped.
+2. `[street · coast]` The harbour at {settlement} is full of vessels that cannot leave and empty of the ones that should be coming in.
 3. `[unfolding · colour]` The blockade on {settlement} is doing its work quietly. Nothing has been assaulted, and everything the town needs is a little further away each week. *(print-deferred)*
 4. `[counterforce · dm-only · magic]` The fleet has closed the water to {settlement} but not cut the town off: a magical channel still brings goods through, slowly and at great cost. *(print-deferred)*
 
@@ -4656,12 +4659,12 @@ draws at most one of each.
 
 **UNDER OCCUPATION** · `occupied`
 1. `[visitor]` Another power's writ runs here. The offices are the same offices; the authority behind them is not.
-2. `[official]` {settlement}'s taxes go to the occupier before the town sees them, and its officials take their orders from outside.
-3. `[street · walls]` The garrison is quartered inside the walls, and the town's business is conducted around it.
+2. `[official · crisis: occupied]` {settlement}'s taxes go to the occupier before the town sees them, and its officials take their orders from outside.
+3. `[street · walls · garrison]` The garrison is quartered inside the walls, and the town's business is conducted around it.
 4. `[street]` {settlement} is held by somebody it did not choose, and the town's own hall can now only advise.
 5. `[ledger]` Every licence, levy and permission in {settlement} passes a hand that is not the town's before it takes effect.
-6. `[visitor]` {settlement} runs as before, but the occupier's officers sit in on its business and make no secret of it.
-7. `[street · no walls]` The occupiers are quartered inside the town, and the town's business is conducted around them.
+6. `[visitor · crisis: occupied]` {settlement} runs as before, but the occupier's officers sit in on its business and make no secret of it.
+7. `[street · no walls · crisis: occupied]` The occupiers are quartered inside the town, and the town's business is conducted around them.
 
 **POLITICALLY FRACTURED** · `politically_fractured`
 1. `[ledger]` Nothing is decided. The powers each hold enough to block and none hold enough to rule, so the work of governing sits unattended.
@@ -4749,7 +4752,7 @@ draws at most one of each.
 1. `[ledger]` The town is on a war footing. Grain, iron and men are counted for the campaign now, not for the season.
 2. `[street]` {settlement} lives at the rhythm of a war it is part of. Everything ordinary is scheduled around the levy.
 3. `[visitor]` The trades that matter here now are the ones that supply an army; the rest have been asked to wait.
-4. `[street]` {settlement} is at war, and the war has reached the town as absence: the men, the carts, and the ordinary expectation of next year.
+4. `[street · crisis: wartime]` {settlement} is at war, and the war has reached the town as absence: the men, the carts, and the ordinary expectation of next year.
 5. `[ledger]` {settlement}'s levies and requisitions have become the largest single line in the year, and they are not negotiable.
 6. `[visitor]` {settlement} is short of young men; the old and the boys are doing their work.
 
@@ -6296,9 +6299,9 @@ unchanged.
 4. `[unfolding · gate]` While the gates hold, {settlement} lives off its savings, and the stores are all that count.
 
 **`power_stress`: occupation against stated stability**
-1. `[ledger · no crisis: unrest]` {settlement} is under occupation; the streets are quiet because soldiers hold them, not because the town is at peace.
+1. `[ledger · crisis: occupied · no crisis: unrest]` {settlement} is under occupation; the streets are quiet because soldiers hold them, not because the town is at peace.
 2. `[street · no crisis: unrest]` {settlement} is orderly under foreign soldiers, and its people go about their business with their eyes down.
-3. `[visitor · no crisis: unrest]` {settlement} is quiet under occupation: no unrest, and nobody doing anything they were not told to.
+3. `[visitor · crisis: occupied · no crisis: unrest]` {settlement} is quiet under occupation: no unrest, and nobody doing anything they were not told to.
 4. `[counterforce · no ruler: occupier]` {settlement} is occupied, but its own hall still governs; the occupier takes its tribute and leaves the running to the townsfolk.
 
 **`power_economic`: temple economy under a secular seat** {crisis-scoped}

@@ -55,20 +55,20 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 236091,
-      "gzip": 31988,
+      "raw": 236427,
+      "gzip": 32042,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 172502,
-      "gzip": 24320,
+      "raw": 173631,
+      "gzip": 24505,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 292806,
-      "gzip": 37418,
+      "raw": 292870,
+      "gzip": 37424,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -79,8 +79,8 @@
       "ceilingGzip": 79355
     },
     "src/data/dossierStateProse/stressors.generated.js": {
-      "raw": 147483,
-      "gzip": 20773,
+      "raw": 147733,
+      "gzip": 20800,
       "ceilingRaw": 258858,
       "ceilingGzip": 57524
     },
@@ -587,6 +587,38 @@
       "toRaw": 172502,
       "gzipAfter": 24320,
       "reason": "+1155 B raw over the committed 171347 (gzip level 9: 24131 -> 24320): DS-ECO-12 INCOME WEIGHT religious houses: v1 and v2 declare sacredHouse, and three lines for a place with no house of its own, projected through node scripts/generate-dossier-state-prose.mjs (--check exit 0); no pool added"
+    },
+    {
+      "car": "W2-WRITE the key-implied words declared (2026-11-13)",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 236101,
+      "toRaw": 236427,
+      "gzipAfter": 32042,
+      "reason": "+336 B raw over the committed 236091 (gzip level 9: 31988 -> 32042): twenty unreached corpus lines in DS-ECO-2, -8, DS-DEF-2, -6, DS-GEN-7 and DS-STR-1 declare the granary, the coast, the occupation, the garrison or the war they name, and DS-ECO-8's full-stores pool gains three lines that name no granary, projected through node scripts/generate-dossier-state-prose.mjs (--check exit 0); no pool added"
+    },
+    {
+      "car": "W2-WRITE the key-implied words declared (2026-11-13)",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 172502,
+      "toRaw": 173631,
+      "gzipAfter": 24505,
+      "reason": "+1129 B raw over the committed 172502 (gzip level 9: 24320 -> 24505): twenty unreached corpus lines in DS-ECO-2, -8, DS-DEF-2, -6, DS-GEN-7 and DS-STR-1 declare the granary, the coast, the occupation, the garrison or the war they name, and DS-ECO-8's full-stores pool gains three lines that name no granary, projected through node scripts/generate-dossier-state-prose.mjs (--check exit 0); no pool added"
+    },
+    {
+      "car": "W2-WRITE the key-implied words declared (2026-11-13)",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 292806,
+      "toRaw": 292870,
+      "gzipAfter": 37424,
+      "reason": "+64 B raw over the committed 292806 (gzip level 9: 37418 -> 37424): twenty unreached corpus lines in DS-ECO-2, -8, DS-DEF-2, -6, DS-GEN-7 and DS-STR-1 declare the granary, the coast, the occupation, the garrison or the war they name, and DS-ECO-8's full-stores pool gains three lines that name no granary, projected through node scripts/generate-dossier-state-prose.mjs (--check exit 0); no pool added"
+    },
+    {
+      "car": "W2-WRITE the key-implied words declared (2026-11-13)",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 147483,
+      "toRaw": 147733,
+      "gzipAfter": 20800,
+      "reason": "+250 B raw over the committed 147483 (gzip level 9: 20773 -> 20800): twenty unreached corpus lines in DS-ECO-2, -8, DS-DEF-2, -6, DS-GEN-7 and DS-STR-1 declare the granary, the coast, the occupation, the garrison or the war they name, and DS-ECO-8's full-stores pool gains three lines that name no granary, projected through node scripts/generate-dossier-state-prose.mjs (--check exit 0); no pool added"
     }
   ],
   "ceilingTransfersNewLeaves": [

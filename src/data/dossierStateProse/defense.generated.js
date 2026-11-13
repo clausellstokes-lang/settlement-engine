@@ -1252,6 +1252,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "institution: granary"
+          ],
           "text": "People at {settlement} are glad of their granary for bad years and their hospital for the sick.",
           "slots": [
             "settlement"
@@ -1358,6 +1361,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "no institution: granary"
+          ],
           "text": "Ask for the granary or the sick-house at {settlement} and you are pointed to neither, because there is neither.",
           "slots": [
             "settlement"
@@ -4910,6 +4916,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
+            "institution: granary",
+            "coast",
             "crisis: any"
           ],
           "text": "{settlement}'s granary tally and its open harbour make it the hardest kind of place to starve out: a siege would need a fleet as well as an army.",
@@ -4945,6 +4953,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Logistics & Supply: Granary in isolation": [
         {
           "angle": "ledger",
+          "marks": [
+            "institution: granary"
+          ],
           "text": "{settlement} holds reserves and nothing else; endurance here is exactly the size of what is in the granary and not a day longer.",
           "slots": [
             "settlement"
@@ -4972,7 +4983,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "colour"
+            "institution: granary"
           ],
           "text": "{settlement} keeps stores and is fed by the roads; the roads are the vulnerability, and the granary is what buys time to do something about them.",
           "slots": [
@@ -4994,6 +5005,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
+            "institution: granary",
             "no crisis: hunger"
           ],
           "text": "An interruption on the roads to {settlement} does not reach the table, and the granary is the reason rather than the roads.",
@@ -5077,6 +5089,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
+            "coast",
             "crisis: any"
           ],
           "text": "Arriving by sea at {settlement}, you are met by the town's own vessels well before the harbour.",
@@ -5139,7 +5152,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "colour"
+            "coast"
           ],
           "text": "A hostile fleet sits across {settlement}'s sea approaches: the harbour book records no ship in, and the goods the town lives on have stopped.",
           "slots": [
@@ -5150,7 +5163,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "colour"
+            "coast"
           ],
           "text": "The harbour at {settlement} is full of vessels that cannot leave and empty of the ones that should be coming in.",
           "slots": [
