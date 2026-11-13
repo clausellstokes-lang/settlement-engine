@@ -5,7 +5,7 @@ The seat: AGREE-FOLLOW-UP, seated by the chair (session_01FE9mEws7PXYRYdjQPbSX15
 - The line before the point is `f572d12b7`.
 - The agreement lane's own range is `3575cf061..69b53decd`. It merged the line at `3575cf061` (d0f0d022b); its earlier commits sit on the line at point 43.
 
-Rulings worked to: the brief, then the chair's rulings of 2026-11-13 18:02 UTC on the two tables (section 3), and ruling (b) of 18:14 UTC on the HIGH_WATER stop (section 4). The chair's messages are not on the branch, so they are restated there. Nothing in `src/` is changed. One test file is changed as ruled (7e471bb23, d80bbc6dc). No baseline row is banked.
+Rulings worked to: the brief, then the chair's rulings of 2026-11-13 18:02 UTC on the two tables (section 3), ruling (b) of 18:14 UTC on the HIGH_WATER stop (section 4), and ruling (a) of 18:26 UTC on the CALAMITY stop (section 5). The chair's messages are not on the branch, so they are restated there. Nothing in `src/` is changed. One test file is changed as ruled (7e471bb23, d80bbc6dc, e96646c09). No baseline row is banked.
 
 Probes (`docs/chair/2026-11-13/probes/AGREE-FOLLOW-UP/`), each runnable as `node <probe> <tree root> ...`:
 1. `siteScan.mjs`: the site ratchet's 462-town corpus, row by row.
@@ -17,7 +17,7 @@ Probes (`docs/chair/2026-11-13/probes/AGREE-FOLLOW-UP/`), each runnable as `node
 7. `sewerHighWaterPath.mjs`: HIGH_WATER's rung lifts, split by the path they take.
 8. `sewerCalamityCrossTalk.mjs`: which causes the calamity perturbation moves.
 
-Probe 4 also reports the score's rises over the 42 × K.
+Probe 4 also reports the score's rises and each cause's own-term rises over the 42 × K.
 
 ## 1. The site inventory (siteCoherenceRatchet C1)
 
@@ -272,6 +272,58 @@ For the closing acts:
   - (a) the score tooth reads each cause's OWN term instead, `sewerCauses(...)` / `.causes[].contribution` (= weight × value), already exposed and already read by the file. That isolates the weight for all four alike.
   - (b) the calamity extreme's stamps carry exodus 0, so the perturbation touches only its own cause (an input change; the law untouched).
   - (c) accept, with CALAMITY's weight convicted by the rung claim alone.
+
+## 5. The chair's ruling (a) on the CALAMITY stop (received 18:26 UTC), and what was done. THE SEAT'S LAST ACT
+
+**The ruling, as received:**
+- The new assertion reads EACH CAUSE'S OWN TERM, `.causes[].contribution`, for all four raising causes alike: that cause's contribution rises somewhere on the 336.
+- The calamity stamps, the two rung claims and every other expectation stay as they are.
+- One comment line gives the reason.
+- Teeth: each of the four weights at zero reds the assertion in its own slot, with the rung claims left in place, and the earlier plants red as before.
+
+**Done (commit e96646c09, test file only, on top of d80bbc6dc, nothing rewritten).**
+- `termOf(s, cause)` reads `deriveSewerLadder(s).causes.find(c => c.cause === cause).contribution`, already exposed; no export was added.
+- The assertion is at line 252. It replaces d80bbc6dc's score tooth and sits BEFORE the two rung claims, which are unchanged at 253 and 254. The arm stops at its first failing expect, so placing it first is what lets a zero weight red it in its own slot with the rung claims in place.
+- Its comment lines: HIGH_WATER's rung moves by the peak tier's floor (207 of 208), and the tooth reads the term, not the total, because the calamity stamps' exodus also raises the high-water value on 7 of the 42.
+- **Own-term rises over the 336** (probe 4, `sewerProsperityIdentities.mjs <tree> 8`), identical at both trees:
+
+| Cause | Own term rises (of 336) | Its rest |
+|---|---|---|
+| PROSPERITY_BAND | 336 | — |
+| CIVIC_CAPACITY | 336 | — |
+| CALAMITY_REBUILD | 336 | — |
+| HIGH_WATER_POPULATION | 232 | the other 104 are 13 births (6 cities, 7 metropolises) whose high-water value is already 1, saturated, at both extremes, × 8 identities (measured, scratch `hwflat.mjs` at the tip) |
+
+- Green 8 of 8 at aac79b808 (6.80 s, tests 1.11 s) and at f572d12b7 (5.96 s, tests 963 ms), each run through `sh scripts/gate-tail.sh npx vitest run tests/domain/undercitySewerDerivation.test.js`. eslint exits 0.
+
+### TEETH: plant-and-restore at aac79b808 with the committed file; the arm's own failure read from vitest's JSON report
+
+| Plant | The arm reds at | Received |
+|---|---|---|
+| none | passed | — |
+| PROSPERITY_BAND weight 0 | **252, own term** | `[false, true, true, true]` |
+| CIVIC_CAPACITY weight 0 | **252** | `[true, false, true, true]` |
+| CALAMITY_REBUILD weight 0 | **252** | `[true, true, false, true]`: section 4's stop is closed |
+| HIGH_WATER_POPULATION weight 0 | **252** | `[true, true, true, false]` |
+| CALAMITY_REBUILD inverted | 252 (its term now falls) | `[true, true, false, true]` |
+| PROSPERITY_BAND inverted | 252 | `[false, true, true, true]` |
+
+**The earlier plants, as before, against the rung claims.** Read on a scratch variant with line 252 deleted, which shifts the two rung claims to 252 and 253:
+
+| Plant | Reds | Received |
+|---|---|---|
+| PROSPERITY_BAND weight 0 | 253, "right way somewhere" | `[false, true, true, true]` |
+| CIVIC_CAPACITY weight 0 | 253 | `[true, false, true, true]` |
+| CALAMITY_REBUILD weight 0 | 253 | `[true, true, false, true]` |
+| CALAMITY_REBUILD inverted | 252, "never the wrong way" | `[0, 0, 4, 0]` |
+| PROSPERITY_BAND inverted | 253 | `[false, false, false, true]` |
+
+Every result equals sections 3 and 4.
+
+**Every plant reds; nothing is stopped. The seat's work is done.**
+- Lane commits since the line's tip `aac79b808`: 2568cda14 and 12d1eeb2e (the two tables), 7e471bb23 (the re-founded input), 0d4be6f11 (the hand-back), d80bbc6dc (the score tooth), 730dcc86e (the hand-back), e96646c09 (the own-term tooth), and this hand-back.
+- What the merge seat lands as a rider when the chair names it: one test file, `tests/domain/undercitySewerDerivation.test.js`, plus the probes and this file under `docs/chair/2026-11-13/`.
+- C1 stays carried red and named (sections 1 and 3).
 
 ## Found, not mine (reported, not touched)
 - **#135** (town/desert/road@scw0-a1/arabic): its smelting chain on iron_deposits runs (vulnerable) and a Smelter stands, yet no iron good is in its exports after A′'s re-deal at 6b932d3e8. The site's win rests on that absence.

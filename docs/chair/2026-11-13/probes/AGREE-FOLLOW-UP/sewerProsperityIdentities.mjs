@@ -2,7 +2,7 @@
 // roster-free births: (a) the score at Destitute vs Wealthy on every birth; (b) the rung
 // at the two extremes under K re-rolled identities per birth (`id: s_pros_<n>`, the device
 // the file's own determinism and boundary arms use), counting up- and down-moves;
-// (c) the score at the two extremes over the same 42 x K; (d) the same over the arm's other three RAISES causes, for comparison.
+// (c) the score, and the cause's own term (.causes[].contribution), at the two extremes over the same 42 x K; (d) the same over the arm's other three RAISES causes, for comparison.
 // usage: node sewerProsperityIdentities.mjs <tree root> <K>
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -28,7 +28,8 @@ const ri = (s) => SANITATION_LADDER.indexOf(deriveSewerLadder(s).rung);
 for (const [name, [lo, hi]] of Object.entries(causes)) {
   const scoreUp = free.filter((s) => deriveSewerLadder(hi(s)).score > deriveSewerLadder(lo(s)).score).length;
   const asIs = free.map((s) => ri(hi(s)) - ri(lo(s)));
-  let up = 0, down = 0, scoreUpK = 0, birthsUp = new Set();
-  free.forEach((s, b) => { for (let n = 0; n < K; n++) { const x = { ...s, id: `s_pros_${n}` }; if (deriveSewerLadder(hi(x)).score > deriveSewerLadder(lo(x)).score) scoreUpK++; const d = ri(hi(x)) - ri(lo(x)); if (d > 0) { up++; birthsUp.add(b); } if (d < 0) down++; } });
-  console.log(`${name}: score rises on ${scoreUp}/42 | rung, the arm as written: up ${asIs.filter((d) => d > 0).length} down ${asIs.filter((d) => d < 0).length} | over ${K} identities x 42: up ${up} (births ${[...birthsUp].map((b) => free[b].tier + '/' + free[b].config.terrainType).join(',')}) down ${down} | score rises on ${scoreUpK} of ${free.length * K}`);
+  let up = 0, down = 0, scoreUpK = 0, termUpK = 0, birthsUp = new Set();
+  const termOf = (x) => deriveSewerLadder(x).causes.find((c) => c.cause === name).contribution;
+  free.forEach((s, b) => { for (let n = 0; n < K; n++) { const x = { ...s, id: `s_pros_${n}` }; if (deriveSewerLadder(hi(x)).score > deriveSewerLadder(lo(x)).score) scoreUpK++; if (termOf(hi(x)) > termOf(lo(x))) termUpK++; const d = ri(hi(x)) - ri(lo(x)); if (d > 0) { up++; birthsUp.add(b); } if (d < 0) down++; } });
+  console.log(`${name}: score rises on ${scoreUp}/42 | rung, the arm as written: up ${asIs.filter((d) => d > 0).length} down ${asIs.filter((d) => d < 0).length} | over ${K} identities x 42: up ${up} (births ${[...birthsUp].map((b) => free[b].tier + '/' + free[b].config.terrainType).join(',')}) down ${down} | score rises on ${scoreUpK} of ${free.length * K} | own term rises on ${termUpK} of ${free.length * K}`);
 }
