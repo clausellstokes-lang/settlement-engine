@@ -260,7 +260,7 @@ export const POLITICAL_FLAVOR_CRISIS_SCOPED = Object.freeze(['stable']);
  * (historyData's ladder: minor · major · catastrophic); with one on the record those lines name it.
  * @param {{severity?: unknown}} e @returns {boolean}
  */
-const isMajorEvent = (e) => e?.severity === 'major' || e?.severity === 'catastrophic';
+const isMajorEvent = (e) => e?.severity === 'major' || e?.severity === 'catastrophic'; /** R2-CODE-A-2 (the cold list REVIEW-W2A-3, MEDIUM #817): THE THREE LINES THAT NAME A MAJOR EVENT READ HOW MANY THERE ARE. Each named the first and denied the rest ("aside", "Apart from", "the one event"); with two or more on the record they name the first two and deny none. A branch inside the drawn closure, so no draw moves. @param {Array<{severity?: unknown, name?: unknown}>} r @returns {string[]} the major events' names, in the record's order */ const majorNamesOf = (r) => r.filter(isMajorEvent).map((e) => String(e.name));
 
 export const POLITICAL_FLAVOR = {
   political_heavy: [
@@ -393,13 +393,13 @@ export const POLITICAL_FLAVOR = {
   stable: [
     // #9: the denial reads the major events first (see isMajorEvent above).
     (r) =>
-      (r.some(isMajorEvent)
+      (majorNamesOf(r).length > 1 ? `It has come through the ${majorNamesOf(r)[0]} and the ${majorNamesOf(r)[1]} and simply continued, and that took more work than it looks` : r.some(isMajorEvent)
         ? `Apart from the ${r.find(isMajorEvent).name}, its history is steady: it simply continued, and that took more work than it looks`
         : "Unremarkable in its history: no catastrophe, no conquest, no great disruption. It simply continued, and that took more work than it looks"),
     { text: (r) =>
       "An ordinary place that has outlasted grander neighbours by getting the small things right, year after year", crisis: ['any'] },
     { text: (r) =>
-      (r.some(isMajorEvent) ? `The ${r.find(isMajorEvent).name} aside, the history here is long and steady, and travellers remember the place kindly` : "No dramatic history here, only a long steady one, and travellers remember the place kindly"), crisis: ['any'] },
+      (majorNamesOf(r).length > 1 ? `It has come through the ${majorNamesOf(r)[0]} and the ${majorNamesOf(r)[1]}, and travellers still remember the place kindly` : r.some(isMajorEvent) ? `The ${r.find(isMajorEvent).name} aside, the history here is long and steady, and travellers remember the place kindly` : "No dramatic history here, only a long steady one, and travellers remember the place kindly"), crisis: ['any'] },
     (r) =>
       "Stable enough that its tensions are the slow kind: inherited grievances, unresolved inheritances, debts that have been rolled over so many times no one remembers the original amount",
     { text: (r) =>
@@ -410,7 +410,7 @@ export const POLITICAL_FLAVOR = {
             .join(
               ", ",
             )} and ${r[r.length - 1].name}: no single defining moment, but enough of them that the character formed anyway`
-        : r.some(isMajorEvent)
+        : majorNamesOf(r).length > 1 ? `The ${majorNamesOf(r)[0]} and the ${majorNamesOf(r)[1]} are the events people here still date things by` : r.some(isMajorEvent)
           ? `The ${r.find(isMajorEvent).name} is the one event people here still date things by; the rest of its history is quieter`
           : "No great event marks this place; its history shows in people's habits, not in monuments", crisis: ['any'] },
     { text: (r) =>
