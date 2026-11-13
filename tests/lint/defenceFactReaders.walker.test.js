@@ -34,6 +34,14 @@ const COURT_GATE_FIRST_TOTAL = 20;
 const ATOMS_REGISTER = JSON.parse(readFileSync(join(ROOT, 'tests/lint/defenceFactReaders.atoms.register.json'), 'utf8'));
 /** The third member's total at its first commit (COHERENCE-AGREE-7, over 293167b6f): it never rises. */
 const ATOMS_FIRST_TOTAL = 16;
+/**
+ * THE THIRD MEMBER'S NAMED, EXACT EXEMPTION (STYLE-2-MERGE point 48, the chair's ruling on STOP 48b, 2026-11-13): a file
+ * that is not a reader of the defence facts, left out of the atoms register and its total, held at its OWN EXACT count
+ * (a second read in it reds; it can never hide a real reader). One entry; never a directory.
+ */
+const ATOMS_EXEMPT = Object.freeze({
+  'src/domain/coherence/pageCensusFindings.js': [1, 'the page census instrument (W2-A-LEAVES b84d3ab76): it renders nothing; its one counted read tests a founder LINE\'s text for a word (a healer who founded the town, not one the town has). COMPOSED at point 48: green at the lane\'s tip and on the line, red only together'],
+});
 
 /** @param {string} dir @param {string[]} out @returns {string[]} */
 const walk = (dir, out = []) => {
@@ -44,14 +52,15 @@ const walk = (dir, out = []) => {
   return out;
 };
 
-/** @param {(line: string) => boolean} [test] */
-const counted = (test = reads) => {
+/** @param {(line: string) => boolean} [test] @param {Readonly<Record<string, unknown>>} [exempt] */
+const counted = (test = reads, exempt = {}) => {
   /** @type {Record<string, number>} */
   const out = {};
   for (const path of walk(join(ROOT, 'src'))) {
     const rel = relative(ROOT, path).replace(/\\/g, '/');
     if (!/\.(js|jsx)$/.test(rel) || /\.generated\.js$/.test(rel)) continue;
     if (/^src\/(?:domain\/facts|domain\/defense|data)\//.test(rel)) continue;
+    if (rel in exempt) continue;
     const n = linesReading(readFileSync(path, 'utf8'), test);
     if (n) out[rel] = n;
   }
@@ -154,7 +163,13 @@ describe('the palisade, the prison, the hospital and the healer have one reader 
   });
   test('every file reads exactly its banked count, and no file reads outside the register', () => {
     const banked = Object.fromEntries(Object.entries(ATOMS_REGISTER.rows).map(([file, row]) => [file, row.count]));
-    expect(counted(readsAtoms)).toEqual(banked);
+    expect(counted(readsAtoms, ATOMS_EXEMPT)).toEqual(banked);
+  });
+  test('the named exemption: each exempt file reads EXACTLY its named count, with its reason', () => {
+    for (const [file, [n, reason]] of Object.entries(ATOMS_EXEMPT)) {
+      expect(linesReading(readFileSync(join(ROOT, file), 'utf8'), readsAtoms), file).toBe(n);
+      expect(String(reason).length).toBeGreaterThan(20);
+    }
   });
   test('every row carries its reason, and the total never rises', () => {
     for (const row of Object.values(ATOMS_REGISTER.rows)) expect(String(row.reason || '').length).toBeGreaterThan(20);
