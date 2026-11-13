@@ -55,20 +55,20 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 261381,
-      "gzip": 35315,
+      "raw": 262412,
+      "gzip": 35416,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 184888,
-      "gzip": 25907,
+      "raw": 185251,
+      "gzip": 25966,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 294391,
-      "gzip": 37667,
+      "raw": 294797,
+      "gzip": 37711,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -771,6 +771,22 @@
       "toRaw": 129570,
       "gzipAfter": 18255,
       "reason": "+377 B raw over the committed 129193 (gzip level 9: 18211 -> 18255): DS-POW-6 RECOVERING: one line true in the leaves lane's empty case (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE-3 H",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 261385,
+      "toRaw": 262463,
+      "gzipAfter": 35446,
+      "reason": "+1082 B raw over the committed 261381 (gzip level 9: 35315 -> 35446): the round's cut, its three high corpus lines (DS-DEF-3 Moderate, DS-GEN-13 MARKET-OPEN, DS-ECO-12 CRITICAL IMPORT): declared, reworded, four lines (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE-3 H",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 184888,
+      "toRaw": 185251,
+      "gzipAfter": 25966,
+      "reason": "+363 B raw over the committed 184888 (gzip level 9: 25907 -> 25966): the round's cut, its three high corpus lines (DS-DEF-3 Moderate, DS-GEN-13 MARKET-OPEN, DS-ECO-12 CRITICAL IMPORT): declared, reworded, four lines (2026-11-13)"
     }
   ],
   "ceilingTransfersNewLeaves": [

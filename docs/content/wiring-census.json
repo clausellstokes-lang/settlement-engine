@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2943,
+    "variants": 2948,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -2739,8 +2739,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
-      "grammars": 1,
+      "variants": 7,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -2773,7 +2773,9 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 3,
+        "colour": 1,
+        "guardPresence": 3,
+        "no guardPresence": 2,
         "watch": 1
       },
       "undeclared": 0,
@@ -19381,8 +19383,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
-      "grammars": 3,
+      "variants": 4,
+      "grammars": 2,
       "predicate": [
         {
           "field": "criticalRow.institution",
@@ -19439,9 +19441,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 1,
-        "crisis: under_siege": 1,
-        "no crisis: under_siege": 1
+        "crisis: under_siege": 2,
+        "no crisis: under_siege": 2
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -29848,7 +29849,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
+      "variants": 5,
       "grammars": 2,
       "predicate": [],
       "branchReads": [],
@@ -29906,7 +29907,8 @@
       ],
       "lineDeclares": {
         "crisis: any": 4,
-        "no crisis: under_siege": 1,
+        "crisis: under_siege": 1,
+        "no crisis: under_siege": 2,
         "tier: ≤ town": 1
       },
       "undeclared": 0,
@@ -54892,8 +54894,8 @@
       "pools": [
         "DS-ECO-12 :: CRITICAL IMPORT: a house needs what the land lacks"
       ],
-      "variants": 3,
-      "grammars": 3,
+      "variants": 4,
+      "grammars": 2,
       "blocks": [
         "DS-ECO-12"
       ]
@@ -66622,7 +66624,7 @@
       "subject": "Moderate",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "7 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -68888,7 +68890,7 @@
         "criticalRow.institution"
       ],
       "readingFunction": "criticalImportPoolKey",
-      "count": "3 variant(s) · 3 grammar(s) · slots {good, institution, settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {good, institution, settlement}"
     },
     {
       "tier": "THIN",
@@ -70400,7 +70402,7 @@
       "subject": "MARKET-OPEN",
       "fields": [],
       "readingFunction": "marketPoolKey",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

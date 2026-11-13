@@ -1822,9 +1822,10 @@ shape.
 3. `[street]` Half of what goes out of this town came into it the same season, and the town's part of the business is the yard and the road.
 
 **CRITICAL IMPORT: a house needs what the land lacks** *(`resourceAnalysis.imports.critical[]` with its `reasons` entry naming the house; slots from that one import, never the export bag)*
-1. `[ledger · colour]` {settlement}'s {institution} cannot work without {good}, and the country around the town produces none, so the town buys from outside or the work stops.
+1. `[ledger · no crisis: under_siege]` Some of {settlement}'s work cannot go on without {good}, and the country around the town produces none, so the town buys it from outside or that work stops.
 2. `[visitor · no crisis: under_siege]` Every load of {good} that {settlement}'s {institution} uses comes in from elsewhere; a closed road would stop its work within the season.
 3. `[ledger · crisis: under_siege]` {settlement}'s {institution} has had no {good} since the siege closed the roads, and its work has stopped or soon will.
+4. `[visitor · crisis: under_siege]` {settlement} has no {good} of its own, and the siege lets none in, so the work that needs it is stopping.
 
 **CRITICAL IMPORT: the land cannot give it** *(the `reasons` entry names the terrain alone)*
 1. `[ledger · colour]` The country around {settlement} produces no {good}: whatever the town has of it comes from outside.
@@ -3055,10 +3056,13 @@ reading rather than a settled one.
 3. `[visitor · crisis: any · no crisis: threat, unrest]` Visitors feel safe at {settlement}, and it is plain that somebody keeps it that way.
 
 **`Moderate`**
-1. `[street · colour]` {settlement} runs on a working balance: the law is present, crime exists, and neither has the run of the town.
-2. `[ledger · colour]` The town's record of crimes at {settlement} is neither short nor growing: the law and the criminals are close to even, and the next few seasons will decide which way it goes.
+1. `[street · guardPresence]` {settlement} keeps a working balance: the law is present, and nobody has the run of the town.
+2. `[ledger · guardPresence]` The town's record of crimes at {settlement} is neither short nor growing: the law and the criminals are close to even, and the next few seasons will decide which way it goes.
 3. `[visitor · colour]` Visitors to {settlement} are told which few streets to avoid, and the advice turns out to be right.
 4. `[threshold · watch]` Order at {settlement} could tip either way: a few fewer watchmen or one bolder gang would be felt on the streets within the season.
+5. `[street · no guardPresence]` Nobody at {settlement} is paid to keep order, and for now the place keeps order well enough by itself.
+6. `[ledger · no guardPresence]` {settlement} has nobody to keep the peace and no great need of anyone yet; trouble here is settled between neighbours.
+7. `[visitor · guardPresence]` {settlement} has people who keep order, and order holds about as well as anyone here expects.
 
 **`Unsafe`**
 1. `[street · watch]` Crime at {settlement} is outrunning the watch. It is not chaos; it is that the people doing it have stopped expecting to be caught.
@@ -6889,9 +6893,10 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 
 **`MARKET-OPEN`** {crisis-scoped · market}
 1. `[street · no crisis: under_siege · crisis: any · tier: ≤ town]` Market day is when {settlement} fills: the roads bring buyers, and the stalls are there for them.
-2. `[ledger · crisis: any]` {settlement}'s market lives off through-traffic; the town sells to the road as much as to itself.
+2. `[ledger · crisis: any · no crisis: under_siege]` {settlement}'s market lives off through-traffic; the town sells to the road as much as to itself.
 3. `[visitor · crisis: any]` Visitors find {settlement}'s market without asking; the busiest street through town leads straight to it.
 4. `[elder · crisis: any]` The market stands where carts always stopped; stalls followed the carts, and {settlement} grew around them.
+5. `[ledger · crisis: under_siege]` {settlement}'s market grew up on the road's trade, and with the siege closing the road it has almost nobody left to sell to.
 
 **`MARKET-NARROW`** {colour · market}
 1. `[ledger]` {settlement}'s market serves the town itself; little passes through that was not always coming here.
