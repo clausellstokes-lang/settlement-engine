@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "e1f821db38772bf98d7e3571b25c96f6638b1390",
-  "measuredBy": "COHERENCE-POWERS-5",
+  "measuredAtSha": "ffe89ab39485b54a1a08ebbb742573e8c1aa27ef",
+  "measuredBy": "R2-CODE-B",
   "date": "2026-11-13",
-  "note": "the fifth seat added seatHolderCard (6), seatWordsOnce (8), seatHolderOnThePage (2) and successionClaimants N4 (1) titles",
-  "files": 3224,
+  "note": "R2-CODE-B lane/r2-code-b-2026-11-13: twelve new test files (the lane red-firsts) move the estate file count; re-measured at the clean tip",
+  "files": 3236,
   "parked": 397,
-  "credited": 2827,
-  "titles": 29206,
-  "suiteTitles": 7902
+  "credited": 2839,
+  "titles": 29246,
+  "suiteTitles": 7918
 }
