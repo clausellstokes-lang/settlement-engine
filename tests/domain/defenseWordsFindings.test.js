@@ -166,9 +166,15 @@ describe('the Defense tab says only what the place has', () => {
     expect(row.fundingNote).toMatch(/^Upkeep underfunded: defence upkeep for the adventurers' charter hall at \d+%$/);
   });
 
+  // ⭐ RE-KEYED BY IDENTITY TO THE LABEL (COHERENCE-UPKEEP-4, the chair's ruling P1 of 2026-11-12):
+  // the gate reads the prosperity label now (COHERENCE-UPKEEP 07ebe8bdc), and defense-thorp-3 is
+  // Comfortable, so its gate stands at the identity and writes no note. The first place of this
+  // corpus whose one defence is a palisade and whose label is below Comfortable is
+  // defense-hamlet-13 (Struggling; its roster names it "Palisade or earthworks").
   it('a palisade never pays "garrison pay": the note names the palisade', () => {
-    const row = deriveDefenseReadiness(world('defense-thorp-3')).find((r) => r.label === 'Invasion & War');
-    expect(row.fundingNote).toMatch(/^Upkeep underfunded: defence upkeep for the palisade at \d+%$/);
+    const row = deriveDefenseReadiness(world('defense-hamlet-13')).find((r) => r.label === 'Invasion & War');
+    expect(defenseFactsOf(world('defense-hamlet-13')).defenceNames, 'anchored: the palisade is its one defence').toEqual(['Palisade or earthworks']);
+    expect(row.fundingNote).toMatch(/^Upkeep underfunded: defence upkeep for the palisade or earthworks at \d+%$/);
   });
 
   it('"Hospital present" only with a real hospital; a healer is named as a healer', () => {
