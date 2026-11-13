@@ -11470,7 +11470,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "Ask where {settlement}'s {good} comes from and you are pointed at the carts, not at anyone in the town.",
+          "text": "Ask where {settlement} gets its {good} and you are pointed at the carts, not at anyone in the town.",
           "slots": [
             "settlement",
             "good"

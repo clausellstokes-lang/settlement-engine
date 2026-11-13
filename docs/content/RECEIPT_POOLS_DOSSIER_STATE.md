@@ -7002,7 +7002,7 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 **`WALLED-STRAINED`**
 1. `[ledger · watch · no crisis: under_siege]` {settlement}'s accounts keep its {defwork} in repair but fall short on the watch's wages, so the defences are sound and too few people man them.
 2. `[unfolding · guardPresence · no crisis: under_siege]` {settlement}'s defences are sound, but fewer people turn out each season to man the {defwork}, and the town is slow to notice.
-3. `[unfolding · crisis: under_siege]` {settlement}'s {defwork} was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.
+3. `[unfolding · crisis: under_siege]` {settlement} had too few hands for its {defwork} before the siege; now everyone who can hold a weapon has a place there, and most of them are learning as they go.
 4. `[ledger · crisis: under_siege]` The siege has put more people on {settlement}'s {defwork} than the town could ever find for it in quieter seasons.
 5. `[ledger · no guardPresence · no crisis: under_siege]` {settlement} keeps its {defwork} in repair and pays nobody to stand guard there.
 6. `[street · no guardPresence · no crisis: under_siege]` {settlement} has nobody whose work it is to stand on its {defwork}, though the town keeps the {defwork} in repair.
@@ -7324,7 +7324,7 @@ no compass word, no real-world place, no named analogy.*
 1. `[ledger · no crisis: under_siege]` {settlement} brings in {good} from outside.
 2. `[visitor · market · no crisis: under_siege]` {settlement} buys in what it cannot make, and the trading keeps as many people busy as the making would.
 3. `[street]` {institution} at {settlement} eats what the carts bring; the town's crafts begin at the weighbeam, not the field.
-4. `[trade · no crisis: under_siege]` Ask where {settlement}'s {good} comes from and you are pointed at the carts, not at anyone in the town.
+4. `[trade · no crisis: under_siege]` Ask where {settlement} gets its {good} and you are pointed at the carts, not at anyone in the town.
 5. `[local · guild · no crisis: under_siege]` Much of the work in {settlement}'s workshops begins with unloading a cart.
 6. `[newcomer · market · no crisis: under_siege · no crisis: famine]` Anyone looking for work at {settlement} finds it in carrying, weighing and selling as often as in making.
 7. `[ledger · crisis: under_siege]` {settlement} bought its {good} from outside, and since the siege nothing has come in; what is left is being made to last.

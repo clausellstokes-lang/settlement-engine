@@ -9631,7 +9631,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: under_siege"
           ],
-          "text": "{settlement}'s {defwork} was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.",
+          "text": "{settlement} had too few hands for its {defwork} before the siege; now everyone who can hold a weapon has a place there, and most of them are learning as they go.",
           "slots": [
             "settlement",
             "defwork"
