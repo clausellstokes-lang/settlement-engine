@@ -193,7 +193,9 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // taken in the same act as the golden re-record).
 // -> 4c561fca STYLE-2-MERGE record 43, the COHERENCE-PRESUME merge (the culture lines and the re-titled watch role re-deal the
 // control row's text; taken in the same act as the golden re-record).
-const GOLDEN_CONTROL_HASH = '4c561fca47d4958e791283078316da01353ff1db6be653e82ef3d1275849655c';
+// -> de99d519 STYLE-2-MERGE record 46, the COHERENCE-POWERS merge (the dual hat re-deals the control row's cast, ranks and ties;
+// taken in the same act as the golden re-record).
+const GOLDEN_CONTROL_HASH = 'de99d51912d61b643bfd55b73f6bed4e28b360f67a9a3f7c3aaa69e1f451a753';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',

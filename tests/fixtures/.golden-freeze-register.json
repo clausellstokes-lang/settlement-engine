@@ -342,11 +342,11 @@
       "suite": "tests/property/generatorGoldenMaster.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "083542bb94ba54aebab40a6e55a48ba5570553383220095f0424be01048ea613",
+      "sha256": "5ef18089839047b430fc851614b49210ac01988cbf19a1a6cd42f5bcc30b0256",
       "rows": 525,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair); the owner's order of 2026-11-11 on the outside critique (ODQ-934.105 draft: THE OWNER: FIXED BEFORE THE RELEASE — THE COHERENCE WAVE, 2026-11-11 21:41 UTC), the chair's COHERENCE charters of 2026-11-11",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair); the owner's order of 2026-11-11 on the outside critique (ODQ-934.105 draft: THE OWNER: FIXED BEFORE THE RELEASE — THE COHERENCE WAVE, 2026-11-11 21:41 UTC), the chair's COHERENCE-POWERS charter (docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md §0, §5)",
       "note": "RE-RECORDED THROUGH THE SIGNED DOOR at the genesis freeze 2026-09-16 (owner: 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); 525 rows moved since the em-dash wave e3f6029b2 (banked §901); the key set unchanged."
     },
     {
