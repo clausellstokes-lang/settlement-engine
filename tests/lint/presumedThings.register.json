@@ -899,9 +899,6 @@
    ["watch", "after-release", "professional city watch"]
   ],
   "src/generators/narrative/settlementOriginProse.js": [
-   ["docks", "after-release", " and has never had a wharf."],
-   ["docks", "after-release", ", and no one has ever built a wharf here."],
-   ["docks", "after-release", "; ask for the docks and you are told there are none."],
    ["docks", "after-release", "A port settlement whose wharves and navigable water define its trade."],
    ["docks", "after-release", "A port: the wharves are why the place exists, and everything else grew up behind them."],
    ["docks", "after-release", "A river port built around navigable inland water; barges, wharves, and seasonal river traffic shape its economy."],

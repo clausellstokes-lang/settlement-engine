@@ -149,14 +149,20 @@ export const ORIGIN_POOLS = Object.freeze({
   // #10's GATE, FINALLY (STYLE-2-SURFACES A·O16; STYLE-RULINGS-2 B2): a port route whose roster
   // holds no docks or wharf founds on the ground the record names, never on the road ("Founded
   // roadside" printed under a port on a mountain, and under a port on the plains of a metropolis).
-  // `{ground}` is the terrain in the words of GROUND_PHRASE below; each variant states the terrain
-  // and the missing wharf, nothing else. A new arm: no pre-widening sentence, so index 0 is its own.
+  // `{ground}` is the terrain in the words of GROUND_PHRASE below. A new arm: no pre-widening sentence,
+  // so index 0 is its own.
+  // #237 (R2-CODE-A-4; the chair's ruling, vetoable): THE ROUTE IS THE HOME OF "THIS IS A PORT"; THE
+  // ROSTER IS THE HOME OF WHAT STANDS THERE. This arm is reached only on a port route, so no row denies
+  // a wharf or docks from the roster's silence ("ask for the docks and you are told there are none"
+  // beside a page that calls the place a port), and none names one as standing: each row states the
+  // terrain and that the place was founded to trade by water, nothing else (no present traffic, which a
+  // siege would make false; no "port", which the vocabulary reads as the docks house).
   ground: Object.freeze([
-    `Built ${GROUND_TOKEN}. It has no wharf of its own.`,
-    `The first families built ${GROUND_TOKEN}, and no one has ever built a wharf here.`,
-    `It stands ${GROUND_TOKEN}; ask for the docks and you are told there are none.`,
-    `Founded ${GROUND_TOKEN}; the place has no wharf.`,
-    `It was built ${GROUND_TOKEN} and has never had a wharf.`,
+    `Built ${GROUND_TOKEN}, by people who meant to trade by water.`,
+    `The first families built ${GROUND_TOKEN}, to trade by water.`,
+    `It stands ${GROUND_TOKEN}; it was founded to trade by water.`,
+    `Founded ${GROUND_TOKEN}, for trade by water.`,
+    `It was built ${GROUND_TOKEN} by people who lived by trade on the water.`,
   ]),
 
   'isolated.sustained': Object.freeze([

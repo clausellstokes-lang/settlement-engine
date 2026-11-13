@@ -56,7 +56,8 @@ const PRE_RR_BODY = {
   // STYLE-2 FIRST-IMPRESSIONS (A·O16, 2026-11-09): the crossroads aphorism became the plain fact, one
   // cause; the ground arm is new with that cause and opens on its own first sentence.
   crossroads: 'Built at a major crossroads, and trade comes in on every road.',
-  ground: 'Built {ground}. It has no wharf of its own.',
+  // R2-CODE-A-4 (#237, the chair's ruling): the route is the home of "this is a port"; no row denies the docks.
+  ground: 'Built {ground}, by people who meant to trade by water.',
   river: 'Built along the river: water access shapes every economic decision.',
   'port.generic': 'A port settlement whose wharves and navigable water define its trade.',
   'port.riverside': 'A river port built around navigable inland water; barges, wharves, and seasonal river traffic shape its economy.',
