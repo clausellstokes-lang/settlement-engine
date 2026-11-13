@@ -882,3 +882,207 @@ None printed. The validator's warning reuses the wizard's "Only available in mou
 
 The third member's register at its first commit (16, all pre-lane); one repetition-guard row by `--bank-new`. No
 ceiling raised, no test skipped, no pin loosened, no golden door run, never `--tighten`.
+
+---
+
+# PART SEVEN — the eighth seat (COHERENCE-AGREE-8, 2026-11-13), from faa20bc6c
+
+The third review (`REVIEW-AGREE-faa20bc6c-2026-11-13.md` on the chair's lane, NOT CLEAR, FINDINGS 1–5) cured, and
+nothing else. One writer, in a scratch worktree of the lane branch; every push plain, through the hook's three lane
+gates. THE LAW THIS SEAT EXISTS FOR: a claim of zero names the instrument that looked everywhere the words can print.
+
+## The instruments
+
+- **The 4,141** (PART THREE + PART SIX's definition): L2 2,866, the golden's 525 (born as `generatorGoldenMaster`
+  births them, payloads not loaded, in their own process), R2 750. Every birth `{ seed, customContent: {} }`. Born in
+  scratch at every commit that moves a generator (3 l2r2 shards + 1 golden shard; 0 errors at every tree). It
+  reproduces the review: the toll's name in `npcs[].goal.short` 130 births, in `goal.long` 105, in either 219 (248
+  lines); the fifth writer's 14 births; the coal line with no forge house 294.
+- **The field diff**: every leaf flattened, parent against child, birth by birth, moved leaves folded by pattern.
+- **The record sweep**: every stored string of every birth off a crossroads, by path.
+- **The census counter**: `census.sh` (unmodified, the census lane's), the line 3575cf061 and this tip, 720 each.
+- **The export sweep of the 720** (scratch `sweep.census.jsx`, run in each tree through vitest): for every town off a
+  crossroads, the PDF document's text (the SettlementPDF tree walked to its leaves), the Foundry module's journals,
+  the world export and its importer's journals, the tonight sheet, the AI grounding prompt, the daily life, the
+  causal views' summaries and the explanation rail's envelope for every entity.
+
+## FINDING 1 (HIGH) — the toll's name: the census of its readers, the cures, the count on every surface
+
+**THE CENSUS OF THE READERS, taken again (not from the sixth seat's list).** Two halves.
+- *What the birth stores*: every string of the 720's 605 births off a crossroads, by path, at faa20bc6c. The
+  catalogue's toll name stood in `economicState.activeChains[].label / .resource` (the carriers the chair's ruling
+  keeps), `simulationTrace[].causes[].source / .reason` (87 towns: the pipeline rail prints them), and
+  `npcs[].goal.short / .long` (12 / 16 towns). Nowhere else.
+- *What the code reads*: every code file of every top-level directory (2,845), for a read of a chain's `.label |
+  .resource | .name | .chainName` under any binding that holds a chain (named `chain` / `ch`, `c` in a file touching
+  chains, or any name taken from a chain list). 35 readers, all in `src/`. Six already printed through the leaf;
+  FOUR composed words from the record's strings: `goals.js` (the goal), `generateEconomy.js :: emitChainTraces` (the
+  receipt), `supplyChainState.js :: deriveSupplyChainState` (the projection's `name` and dependency line, printed by
+  the explanation rail, the causal views, the capacity and causal-state contributors, the counterfactual, the AI
+  grounding), `institutionLifecycle.js` (a growth gap). The export sweep then found a fifth surface no reader census
+  sees by name: the AI grounding hands the narrator the projection's raw `resource`.
+- The sixth seat's list called the goals' reader "inert" (a logic reader: the target id). The target id is logic;
+  the `{chain}` fill beside it was words.
+
+**THE CURES, one per writer, each red first:**
+
+| Commit | Writer | Before → after (the 4,141) | Pin |
+|---|---|---|---|
+| aed036020 | goals.js: `{chain}` through `chainPrintName(ch, ctx.view)` | goal.short 130 births, goal.long 105, either 219 (248 lines) → 0 | tollNamePrintedEverywhere "an NPC's goal": 3 of 3 red at the parent |
+| fdcf42c07 | emitChainTraces: the cause's source and reason through the leaf | 636 births (every river and port toll town) → 0 | "the pipeline rail's chain receipts": 3 of 3 red |
+| 1faba7a28 | the projection's name and dependency; the growth gap | read-time; field diff 0 leaves | "the read-time chain projections": 3 of 3 red |
+| 88f942e96 | the sweep, and the AI grounding's chains carry the printed source | read-time; field diff 0 | THE SWEEP: 3 of 3 red (the AI prompt) |
+| d27a96a88 | the walker: ROOTS = every root of product code | — | six plants red (below) |
+
+The stored words move: `npcs[].goal.short/long` (River Toll / Harbour Dues for Strategic Crossroads Toll),
+`simulationTrace[].causes[]` of the toll ("resource.River traffic", "River traffic is the input the chain depends
+on."). DECLARED. The record's `activeChains[].label / .resource` keep the catalogue's strings, as ruled.
+
+**THE COUNT ON EVERY PRINTED SURFACE, before (faa20bc6c) → after (this tip):**
+
+| Surface | Instrument | Before | After |
+|---|---|---|---|
+| Stored strings of the 4,141 off a crossroads, but the two ruled carriers | record sweep | goal 219 births, receipts 636 | **0** |
+| The 720's rendered pages (owner's view, every tab and disclosure) | census dumps | 0 at faa20bc6c per the review save 29 "Wants" lines in 12 towns (the line: 311 lines in 142 towns) | **0 lines, 0 towns** |
+| The 720's PDF document text | export sweep | 1 town | **0** |
+| The 720's world export → Foundry importer journals ("*Wants:*") | export sweep | 12 towns | **0** |
+| The 720's Foundry module journals; the tonight sheet; the daily life | export sweep | 0 | 0 |
+| The 720's explanation rail (every entity's envelope); causal views' summaries | export sweep | 87 towns (2,058 / 87 hits) | **0** |
+| The 720's AI grounding prompt | export sweep | 87 towns (261 hits) | **0** |
+| The pipeline rail (simulation drawer: the stored receipts) | record sweep | 636 births of 4,141 | **0** |
+| The JSON export / a saved world | — | carries the record, its two ruled carriers only | unchanged, as ruled |
+
+**THE WALKER (tests/lint/chainPrintSites.walker.test.js)**, widened: ROOTS = src, foundry-module, supabase, mcp-server,
+api, scripts, tools, schema; every other top-level directory with code named in NOT_ROOTS (a new one reds); the
+emitted edge bundles excepted (built from src). Readers: 10 PRINT_SITES (import the leaf), 7 PROJECTION_READERS
+(import the projection), 23 EXEMPT with reasons and line counts (a new read in one reds). PLANTS, each alone,
+reverted, each RED: W6 a goal writer in src/generators/people reading `ch.label` (the review's W6); W7 a domain file
+printing `row.label` from activeChains; W8 an edge function reading `k.resource`; W9 a new top-level code directory;
+W10 a new read in an exempt file; W11 a print site dropping the leaf's import. At faa20bc6c the widened walker is red.
+What no static walker sees (a chain under a parameter named for nothing) the sweep sees, for every surface it drives.
+
+## FINDING 2 (MEDIUM) — the fifth writer, and the census of the writers
+
+- **dfa7f1446**: `deriveServiceExports(institutionalServices, refusedOnly)` reads the leaf's set (the service's good,
+  or its label with its parenthetical read off). Pin "F2's fifth writer": 4 of 4 red. FIELD DIFF: 69 births move
+  `primaryExports` — 77 lines removed: "Financial services (letters of credit)" 14, "Educational services (degrees,
+  training)" 38, "Pilgrimage & religious tourism" 25. READ: every one stands beside a chain that makes its good
+  ("Letters of Credit & Finance", "Scholarship & Publishing", "Faith & Worship" / "Pilgrimage & Holy Sites"), every
+  maker impaired: 77 of 77 true by the rule (the review saw the 14 only: the other two labels are not their good's
+  name). The page now: the export list without them; the impaired card ("Normally yields: …") unchanged. Downstream,
+  the export-reading words re-draw in the same towns: goal.short and secret.what 9, pressureSentence 5,
+  arrivalScene 2. DECLARED.
+- **f9ea68887** (the guard): the receipt's member reads off any parenthetical, and judges a service export by the good
+  the service map names (`serviceGoodOfExportLabel`): it judges every writer's good on the final lists. THE WRITERS'
+  CENSUS (tests/lint/tradeListWriters.walker.test.js): every line in the product's roots that writes
+  `primaryExports` / `localProduction`: 30 files classed — ASKS 2, USER 3, TAKES_AWAY 3, ADDS_UNASKED 1 (the
+  neighbour bias's patron good), COPIES 15, FIXTURE 6 — with line counts. Plants, each red: the fifth writer's
+  parameter changed; a sixth writer file; a new write in a COPIES file; the member's old suffix; the member without
+  the service-good read. FIELD DIFF of the guard: 0 leaves (the member finds nothing at the tip on the 4,141,
+  ADDS_UNASKED included).
+
+## THE THREE LINES (the chair's item 3) and FINDING 3's ORIGIN
+
+| Commit | Line | Removed (the 4,141) | True among them | The page now |
+|---|---|---|---|---|
+| fa7666e36 | the coal line, where no forge house stands (T3) | 294 births, income desc only | 0 (no smith, forge, foundry, smelter, metalworker, armourer or weaponsmith; the catalogue has no iron house under another word) | "Coal is dug here and sold to the forges of other towns; no forge here burns it, so this income stream leans on the trade route." (NEW WORDS, for the owner's veto). 720: 52 pages; the forge line stays in 63, every one with a forge house (census P12coal 0) |
+| 9ec887eb1 | the gate tally beside the no-gate twin (T5) | print-time (the pool's mark); field diff 0 | 0 (walled, no gate of record) | the fortification line is silent there; the "Palisade or earthworks" card and its line name the wall. 720: both on one page 22 → **0** |
+| 5a4908559 | Agriculture restored (T6) | 210 births gain it (41 from an empty list: the heading returns) | — | WHAT REMOVED IT: cure 2 (72481b477). It now stands on Agricultural Rents or the food record's grain chain. 720 against the line: lost 80 → 22, and none of the 22 earns rents or runs a grain chain (each fishes) |
+| 2bce7bfa5 | the felling line, an ORIGIN (T2) | 83 births, income desc only | 0 (each a wild mountain stand only, no wood house) | the line's own "Timber sourced from more distant forests and resold or processed locally: trade route dependent." |
+
+## THE RECORD'S ACCOUNT OF THE CENSUS'S RISES, corrected cure by cure (the chair's item 4)
+
+PART SIX's "every town that enters or leaves any pattern this seat is a holder" is the seventh seat's span, not the
+lane's. Line → tip (720), the entrants that never held a pass (same resources on both trees):
+
+| Row | Enter (non-holders) | Class | Owed by |
+|---|---|---|---|
+| F4 saw ("managed felling", no wood house) | 6 at faa20bc6c → **0** here (3 entrants, all holders) | **ORIGIN**: cure 7's gate printed the felling line on a wild stand nobody works | cured, 2bce7bfa5 |
+| F4 coal | 41 at faa20bc6c → **0** (P12coal 0) | **ORIGIN**: the lane's sentence | cured, fa7666e36 |
+| 2 two store durations | **6**: r2r-thorp-37, r2r-thorp-51, r2r-thorp-52, r2s-famine-city-3, r2s-famine-metropolis-3, r2s-religious_conversion-thorp-1 | **EXPOSURE**: cure 6 makes a herd or a fishery a food source, so `storageMonths` moves, and two older sentences that round the one number differently (Economy "… months in household stores", Defense "… carry the … for about N months") now disagree in six more towns; the mechanism stood on the line (561 pages) | the second wave's Lane 1b, the page battery's `stores-twice` (SECOND-WAVE-CENSUS-2026-11-12.md) |
+| every other rising row (11 +52, 3, 4, 5b, 8, 14, NEW-1, NEW-2, quarry) | 0 non-holders | the refill's re-deal of a replaced pass or crossroads position (PART SIX) | as PART SIX ruled (11's substitute: W2-A's chainCarrier) |
+
+THE CENSUS COUNTER, the line 3575cf061 → this tip (720 each, exit 0, every verdict OLD but one; GLANCE towns 717 →
+717; no new row): 2 561 → 571; 3 188 → 191; 4 103 → 106; 5b 1 → 2; 8 220 → 221; 11 396 → 448; 14 167 → 168; NEW-1
+10 → 11; NEW-2 3 → 6; **F4 274 → 202 (BETTER**; 254 at faa20bc6c); 6 302 → 285; 17 681 → 671; 7a 128 → 125; 16a 332
+→ 330; 5a, 10, 13 −1 each. The tip's rows equal faa20bc6c's (the review's column) but F4.
+
+## The field diff of this seat (faa20bc6c → the tip), the 4,141
+
+1,138 births move (golden 156 of 525; R2 200). Families: simulationTrace causes 636; incomeSources[].desc 374 (coal
+294, felling 83, 3 both); resourceAnalysis.economicStrengths 210 (41 from empty); npcs[].goal.short 139 (130 the
+toll, 9 F2's export-reading draw); goal.long 105; primaryExports 69; npcs[].secret.what 9; pressureSentence 5;
+arrivalScene 2. **No label, score, roster, chain, power or food figure moves**: no move toward danger.
+
+## Calls taken without the chair (declared or named only)
+
+- The receipts' cause token moves with its words (`resource.River traffic`): the trace's source token is printed by
+  the rail; no logic reader parses a `resource.` source (searched).
+- The projection keeps the record's `resource` (the regional propagation and the goods matchers read it); only its
+  `name` and dependency line are words. A legacy `supplyChains` record re-derived (no chainId) keeps its own strings.
+- The coal line's twin is new words (above). The felling cure adds none (the line's own sentence returns).
+- The gate cure re-marks one variant in the pools' source; no variant is added (a walled gateless town's
+  fortification line is silent; its wall is named by the card).
+- Agriculture's support reads the town's record (rents, the grain chain), not a new resource.
+- One fixup folded before any push: the mutation manifest's row for the new test file joined its first commit.
+- THE PDF's flag-off chain path and the Foundry module journal print "Chain" (PART FIVE's found-not-mine): classed
+  EXEMPT in the walker with its line count, not cured here (it would move the PDF golden and the Foundry export).
+
+## Found, not mine
+
+- The census's "metal house" and "wood house" words are names: a ruined smithy still counts (both cures read the
+  roster as the census does).
+
+## The upkeep (registers through their doors; nothing banked upward)
+
+- 25bba0c96: the lighting census re-taken by its ritual (files 3219 -> 3221, parked 399 -> 400, credited 2820 ->
+  2821, titles 29225 -> 29241, suite titles 7922 -> 7928).
+- cac656c95: the seat's own suite reds (below): one type; three `// anchored:` lines; one failure label; the prose
+  byte row LOWERED 234447 -> 234445 (the gate re-mark's 2-byte shrink); the prose-numerics row of generateEconomy.js
+  re-keyed by identity 416 -> 417; proseTasteCorruption's desk set re-keyed by cause (data/entityTags.js).
+- The wiring census re-taken by its door with the gate re-mark (9ec887eb1). The mutation manifest gained two rows (the
+  sweep's file, the writers' walker) and the widened walker's row was rewritten.
+- THE REPETITION GUARD (`node scripts/census/pool-dominance.mjs`) at 2bce7bfa5: 909 pools, 0 over, 0 unregistered, 0
+  stale, 0 loose, 0 notes; exit 0. The coal twin is a one-of-two twin pair (no pool row owed).
+- No test skipped, no pin loosened, no ceiling raised, never `--tighten`, no golden door run.
+
+## The three gates and the laws
+
+At every commit touching `src/`: `check-domain-strict` exit 0 (1113, ceiling 1113), `typecheck:ratchet` exit 0 (167,
+ceiling 167), eslint on the touched files exit 0. At the tip: the same, and `npm run lint` (the hook's three).
+
+## The fifth law: the whole suite, once, every red classed
+
+`sh scripts/gate-tail.sh npx vitest run --maxWorkers=2` at **25bba0c96**, the ledger ref fetched first, 4,081 s,
+exit 1: **73 failing titles in 48 of 3,221 files**; 38,713 passed; 252 skipped.
+
+- **THIS SEAT'S, CURED AT cac656c95** (9 titles, 6 files): domainAnyCastBaseline ×3, negativeAssertionAnchor ×2,
+  proseDrawnAnchors, proseCorpusBytes, proseNumerics, proseTasteCorruption. Re-run green.
+- **THE EDGE BUNDLES, CURED BY THE LAST COMMIT** (13 titles, 7 files): engineBundleReplay ×4,
+  edgeSharedBundleReproducibility ×4 (engine, aiGrounding, aiCharter, aiOutputSchema: the AI bundles carry
+  aiGrounding.js and supplyChainState.js), aiGroundingBundle.freshness, aiCharterBundle.freshness,
+  aiOutputSchemaBundle.freshness, engineServiceStoreParity ×2.
+- **EVERY OTHER TITLE IS THE REVIEW'S SET AT faa20bc6c, TITLE FOR TITLE** (51 titles, 35 files; the review's 50 in
+  36 less powerConfig, plus the line's landing pair and the known set): the line's (landingFixtureFreshness ×2,
+  newsHeadlineContract, newsVoiceContract, proseFamilyContract, the prose manifest's DRIFT arm); the instrument seeds
+  (observedShapeReaders, writerReach at load; proseTasteInterested ×3; proseWaveGate (d) ×2); the merge seat's rows
+  (generatorGoldenMaster; espionageDormancyFence; heraldKnowledgeDeskGolden; the manifest's four-seed and mixed-pool
+  arms; goldenViewModel; generationForkCensus A1, A3e, A4; dmLayerGoldenIsolation A7; nameHeldThroughAssembly A1;
+  pipelinePinnedChoosers A1, A6; pipelinePinnedMode A1, A2, A5; powerEconomyFreshness A4; rosterFinalUnderHeldRoster
+  A1; worldFactRederive A7; x46NpcBand; institutionBudgetPromise; editWorldFactResources A2, A6; editCorpusRatchet A4,
+  A6, A7, A8; mergeLadderHeldKeys A2, A3, A5, A6; hookThemeDraws (2148, unchanged); institutionTable (1843,
+  unchanged); siteCoherenceRatchet C1; townCartographyCalibration; undercitySewerDerivation;
+  intentAtlasSoakDistiller; generationCertificationCorpus (31, unchanged); foodModelSingleWriter (241, unchanged);
+  recordMerge A6; dossierPhoneFloorAllViews ×2). Their figures are PART SIX's except where a surface below says.
+- **YOURS TO CURE: none left.**
+
+## The six golden surfaces (the fourth law), measured at the tip; no door run
+
+| Surface | At this tip | Moved by this seat? |
+|---|---|---|
+| generator golden master | 525 of 525 rows (since the line) | YES: 156 of 525 rows by this seat's field diff (the receipts in the river and port rows, the coal and felling lines, Agriculture, the services) |
+| espionage dormancy fence | driven hash 1062f65c… (expected 38a52b05…; 366d5c20 at faa20bc6c) | YES: the generator's record moved |
+| dossier prose manifest | DRIFT arm (the line's); four-seed arm gm-seed-a 410, gm-seed-b 398, gm-seed-c 390, golden-master-v3 73,443 cells, towns 516/3/3/3; mixed-pool arm 177 (as at faa20bc6c) | the four-seed tally against faa20bc6c's not separately measured; the mixed-pool arm unmoved |
+| PDF golden view model | scoreAvg 41, institutions 43, npcs 35 (as at faa20bc6c) | NO |
+| Herald knowledge desk | contentSha 02d3fa8e… (as at faa20bc6c) | NO |
+| preset-lighting witness | GREEN in the suite | NO |
