@@ -18,6 +18,7 @@ The cut's query returns 40 rows: the 37 MEDIUM and the three HIGH (#55, #964, #9
 | # | commit | rows | prints (720) -> false by the fact | cure | lines read |
 |---|---|---|---|---|---|
 | 1 | 2f2aec623 | #325 DS-GEN-13 NO-MARKET v3 (and v1, v2) | 316 -> 15 under siege | `no crisis: under_siege` on v1-v3; three siege lines v4-v6 | 9 of 9 true (r2r-thorp-45, r2r-hamlet-0, r2r-village-21); two drafts read false and rewritten |
+| 2 | 579c13d7f | #91 DS-ECO-9 SECURE v3 "fed, but only just" | 172 -> 33 with a year of stores or more (the page says the granary lasts a year or more in 33 of 33) | `stores: < 12` (the stores home); two lines `no hunger · stores: >= 12` | 6 of 6 true (r2r-metropolis-0, -1, -2) |
 
 ## Parked (a fact with no home), each with what it needs
 (pending)
