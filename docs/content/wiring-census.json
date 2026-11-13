@@ -54050,11 +54050,11 @@
       "name": "INSTITUTION_SERVICES",
       "drawKind": "R",
       "drawSite": "services/institutionServices.js:69/203 one _rng()<p roll per eligible definition (A-printed at serviceRollMaterializatio",
-      "lines": 1001,
+      "lines": 1003,
       "declares": [],
       "lineDeclares": {
         "coast": 2,
-        "crisis: under_siege": 4,
+        "crisis: under_siege": 6,
         "gate": 6,
         "guardPresence": 1,
         "guild": 3,
@@ -54064,7 +54064,7 @@
         "market": 4,
         "militia": 3,
         "navigable": 3,
-        "no crisis: under_siege": 4,
+        "no crisis: under_siege": 6,
         "no river": 4,
         "no tier: ≥ town": 1,
         "no walls": 2,
@@ -54077,7 +54077,7 @@
         "walls": 4,
         "watch": 6
       },
-      "undeclared": 930,
+      "undeclared": 928,
       "crisisScoped": false
     },
     {
