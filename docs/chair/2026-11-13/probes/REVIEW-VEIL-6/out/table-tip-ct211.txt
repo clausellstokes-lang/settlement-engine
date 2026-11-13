@@ -1,0 +1,97 @@
+chain ct211: 24 towns; shares with every eye shut by hand; 24 rows
+marker | grouping.generationCoherenceReceipt(inner) -> activeConditions[].causes[].detail
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-0 gallery: Settlement generated under stressor "Indebted to Outside Power vq6n137z".
+marker | grouping.generationCoherenceReceipt(inner) -> history.founding.foundedBy
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-1 gallery: a discharged soldier who liked the view and had nowhere better to be vq6n108z
+marker | grouping.generationCoherenceReceipt(inner) -> history.legacyAnnotations[].annotation
+    towns by share: DM reveal on | every eye shut | frozen: 2 ; DM reveal on | every eye shut, narrated: 2 ; DM reveal on | every eye shut: 2 ; no reveal | every eye shut | frozen: 2 ; no reveal | every eye shut, narrated: 2 ; no reveal | every eye shut: 2
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-1 gallery: As of the founding survey, the Economic Divide (16 years ago) left trouble that has never been put right: the present money troubles began then, in what the settlement ca
+marker | grouping.generationCoherenceReceipt(inner) -> simulationTrace[].causes[].reason
+    towns by share: DM reveal on | every eye shut | frozen: 7 ; DM reveal on | every eye shut, narrated: 7 ; DM reveal on | every eye shut: 7
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: plagued pressure requires a defensible perimeter at hamlet scale. vq6n191z
+marker | grouping.generationCoherenceReceipt(inner) -> spatialLayout.layout
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-1 gallery: Stone-walled holdings climbing a south-facing hillside vq6n106z
+marker | grouping.generationCoherenceReceipt(inner) -> stress.label
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-0 gallery: Indebted to Outside Power vq6n137z
+marker | grouping.generationCoherenceReceipt(inner) -> stressors.label
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-0 gallery: Indebted to Outside Power vq6n137z
+marker | grouping.reason -> economicViability.dependencies[].description
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Metropolis closes its isolation-support gap through magical transit (109/88 capacity). vq6n848z
+marker | note.faction.dmNotes -> powerStructure.factions[].dmNotes
+    towns by share: DM reveal on | every eye shut | frozen: 24 ; DM reveal on | every eye shut, narrated: 24 ; DM reveal on | every eye shut: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: power dm note vq6n212z
+marker | note.faction.notes -> powerStructure.factions[].notes
+    towns by share: DM reveal on | every eye shut | frozen: 24 ; DM reveal on | every eye shut, narrated: 24 ; DM reveal on | every eye shut: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: power note vq6n211z
+marker | note.institution.dmNotes -> institutions[].dmNotes
+    towns by share: DM reveal on | every eye shut | frozen: 24 ; DM reveal on | every eye shut, narrated: 24 ; DM reveal on | every eye shut: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: house dm note vq6n206z
+marker | note.institution.notes -> institutions[].notes
+    towns by share: DM reveal on | every eye shut | frozen: 24 ; DM reveal on | every eye shut, narrated: 24 ; DM reveal on | every eye shut: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: house note vq6n205z
+marker | note.tabNotes -> tabNotes.overview
+    towns by share: DM reveal on | every eye shut | frozen: 24 ; DM reveal on | every eye shut, narrated: 24 ; DM reveal on | every eye shut: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Tab note vq6n198z
+marker | note.tabNotes -> tabNotes.power
+    towns by share: DM reveal on | every eye shut | frozen: 24 ; DM reveal on | every eye shut, narrated: 24 ; DM reveal on | every eye shut: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Tab note vq6n197z
+marker | npc.physical(inner) -> npcs[].presentation.impression
+    towns by share: DM reveal on | every eye shut | frozen: 2 ; DM reveal on | every eye shut, narrated: 2 ; DM reveal on | every eye shut: 2 ; no reveal | every eye shut | frozen: 2 ; no reveal | every eye shut, narrated: 2 ; no reveal | every eye shut: 2
+    reads: gallery import importMap link map
+    e.g. rv6-cold-city-null-1 gallery: Unremarkable clothes, a quiet voice and eyes that never stop moving vq6n806z.
+text | text of grouping.generationCoherenceReceipt(inner) -> activeConditions[].causes[].detail
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-0 gallery: Settlement generated under stressor "Indebted to Outside Power vq6n137z".
+text | text of grouping.generationCoherenceReceipt(inner) -> history.founding.foundedBy
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-1 gallery: a discharged soldier who liked the view and had nowhere better to be vq6n108z
+text | text of grouping.generationCoherenceReceipt(inner) -> history.legacyAnnotations[].annotation
+    towns by share: DM reveal on | every eye shut | frozen: 2 ; DM reveal on | every eye shut, narrated: 2 ; DM reveal on | every eye shut: 2 ; no reveal | every eye shut | frozen: 2 ; no reveal | every eye shut, narrated: 2 ; no reveal | every eye shut: 2
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-1 gallery: As of the founding survey, the Economic Divide (16 years ago) left trouble that has never been put right: the present money troubles began then, in what the settlement ca
+text | text of grouping.generationCoherenceReceipt(inner) -> simulationTrace[].causes[].reason
+    towns by share: DM reveal on | every eye shut | frozen: 7 ; DM reveal on | every eye shut, narrated: 7 ; DM reveal on | every eye shut: 7
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: plagued pressure requires a defensible perimeter at hamlet scale. vq6n191z
+text | text of grouping.generationCoherenceReceipt(inner) -> spatialLayout.layout
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-1 gallery: Stone-walled holdings climbing a south-facing hillside vq6n106z
+text | text of grouping.generationCoherenceReceipt(inner) -> stress.label
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-0 gallery: Indebted to Outside Power vq6n137z
+text | text of grouping.generationCoherenceReceipt(inner) -> stressors.label
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-0 gallery: Indebted to Outside Power vq6n137z
+text | text of grouping.reason -> economicViability.dependencies[].description
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Metropolis closes its isolation-support gap through magical transit (109/88 capacity). vq6n848z
+text | text of npc.physical(inner) -> npcs[].presentation.impression
+    towns by share: DM reveal on | every eye shut | frozen: 2 ; DM reveal on | every eye shut, narrated: 2 ; DM reveal on | every eye shut: 2 ; no reveal | every eye shut | frozen: 2 ; no reveal | every eye shut, narrated: 2 ; no reveal | every eye shut: 2
+    reads: gallery import importMap link map
+    e.g. rv6-cold-city-null-1 gallery: Unremarkable clothes, a quiet voice and eyes that never stop moving vq6n806z.

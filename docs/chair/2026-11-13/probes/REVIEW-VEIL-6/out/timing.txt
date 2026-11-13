@@ -1,0 +1,10 @@
+dm=false ctb211_0 | 606867 chars | gallery 523 ms | import 280 ms | link 245 ms | map 2999 ms
+dm=false ct211_0 | 606867 chars | gallery 541 ms | import 306 ms | link 261 ms | map 2905 ms
+dm=false cmb_0 | 447428 chars | gallery 365 ms | import 156 ms | link 131 ms | map 1828 ms
+dm=false cm203p211_0 | 447428 chars | gallery 381 ms | import 192 ms | link 156 ms | map 1765 ms
+dm=false cm211_0 | 447428 chars | gallery 384 ms | import 184 ms | link 156 ms | map 1960 ms
+dm=true ctb211_0 | 606867 chars | gallery 449 ms | import 224 ms | link 238 ms | map 2885 ms
+dm=true ct211_0 | 606867 chars | gallery 481 ms | import 236 ms | link 264 ms | map 2830 ms
+dm=true cmb_0 | 447428 chars | gallery 308 ms | import 127 ms | link 147 ms | map 1829 ms
+dm=true cm203p211_0 | 447428 chars | gallery 380 ms | import 161 ms | link 170 ms | map 1820 ms
+dm=true cm211_0 | 447428 chars | gallery 364 ms | import 161 ms | link 144 ms | map 1860 ms

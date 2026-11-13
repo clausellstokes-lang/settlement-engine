@@ -1,0 +1,341 @@
+chain cm211: 24 towns; shares with only the per-person switch off; 85 rows
+marker | conflict.desc -> conflicts[].desc
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 13 ; DM reveal on | unmarked, every person switched off: 13
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Arcane Senate and Religious Authorities are in high conflict over control of a key trade route checkpoint. The stakes are economic leverage. vq6n488z
+marker | conflict.desc -> powerStructure.conflicts[].desc
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 13 ; DM reveal on | unmarked, every person switched off: 13
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Arcane Senate and Religious Authorities are in high conflict over control of a key trade route checkpoint. The stakes are economic leverage. vq6n488z
+marker | conflict.plotHooks -> conflicts[].plotHooks[]
+    towns by share: DM reveal on | unmarked, every person switched off: 13
+    reads: gallery import
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: vq6n489z
+marker | conflict.plotHooks -> powerStructure.conflicts[].plotHooks[]
+    towns by share: DM reveal on | unmarked, every person switched off: 13
+    reads: gallery import
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: vq6n489z
+marker | conflict.plotHooks(inner) -> conflicts[].plotHooks[]
+    towns by share: DM reveal on | unmarked, every person switched off: 13
+    reads: gallery import
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: A neutral figure is being pressured by both Arcane Senate and Religious Authorities to take a side before the next council session. vq6n832z
+marker | conflict.plotHooks(inner) -> powerStructure.conflicts[].plotHooks[]
+    towns by share: DM reveal on | unmarked, every person switched off: 13
+    reads: gallery import
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: A neutral figure is being pressured by both Arcane Senate and Religious Authorities to take a side before the next council session. vq6n832z
+marker | conflict.stakes -> conflicts[].stakes
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 13 ; DM reveal on | unmarked, every person switched off: 13
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Economic leverage vq6n487z
+marker | conflict.stakes -> powerStructure.conflicts[].stakes
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 13 ; DM reveal on | unmarked, every person switched off: 13
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Economic leverage vq6n487z
+marker | event.description -> history.currentTensions[].description
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 4 ; DM reveal on | unmarked, every person switched off: 4
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-1 gallery: Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations vq6n456z vq6n466z
+marker | event.description -> history.historicalEvents[].description
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 24 ; DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Rights to the local iron deposits became the subject of a prolonged dispute between the settlement and a rival lord. The outcome shaped who controls extraction to this da
+marker | event.lastingEffects -> history.historicalEvents[].lastingEffects[]
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 24 ; DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: vq6n59z
+marker | event.lastingEffects(inner) -> history.currentTensions[].lastingEffects[]
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 7 ; DM reveal on | unmarked, every person switched off: 7
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: A standing security office and informant network persist vq6n812z vq6n822z
+marker | event.lastingEffects(inner) -> history.historicalEvents[].lastingEffects[]
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 24 ; DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Iron production rights still legally contested in some records vq6n112z
+marker | event.plotHooks -> history.historicalEvents[].plotHooks[]
+    towns by share: DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: vq6n60z
+marker | event.plotHooks(inner) -> history.currentTensions[].plotHooks[]
+    towns by share: DM reveal on | unmarked, every person switched off: 1
+    reads: gallery import
+    e.g. rv6-cold-thorp-infiltrated-1 gallery: The agents' handler is someone in a position of trust, and the PCs have already met them vq6n55z vq6n60z
+marker | event.plotHooks(inner) -> history.historicalEvents[].plotHooks[]
+    towns by share: DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Old deed to the iron rights has resurfaced in an estate sale vq6n114z
+marker | faction.captureState -> powerStructure.factions[].captureState
+    towns by share: DM reveal on | unmarked, every person switched off: 3
+    reads: gallery import
+    e.g. rv6-cold-town-infiltrated-1 gallery: equilibrium vq6n132z
+marker | faction.crisisNote -> powerStructure.factions[].crisisNote
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 6 ; DM reveal on | unmarked, every person switched off: 7
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-0 gallery: Governing authority is internally fractured. Real decisions are being made informally. The faction that appears to govern is not the faction that governs. vq6n17z vq6n13z
+marker | faction.desc -> powerStructure.factions[].desc
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 24 ; DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Power is distributed across multiple factions without a clear dominant authority. vq6n22z vq6n16z vq6n71z
+marker | grouping.availableServices.criminal(inner) -> availableServices.criminal[].name
+    towns by share: DM reveal on | unmarked, every person switched off: 9
+    reads: gallery import importMap map
+    e.g. rv6-cold-town-infiltrated-0 gallery: Fence (word of mouth) vq6n210z
+marker | grouping.criminalCaptureState -> powerStructure.criminalCaptureState
+    towns by share: DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: none vq6n73z
+marker | grouping.desc -> availableServices.criminal[].desc
+    towns by share: DM reveal on | unmarked, every person switched off: 14
+    reads: gallery import importMap map
+    e.g. rv6-cold-town-infiltrated-0 gallery: Ask around at the right tavern. Someone moves goods without questions. vq6n28z
+marker | grouping.desc -> economicState.safetyProfile.crimeTypes[].desc
+    towns by share: DM reveal on | unmarked, every person switched off: 12
+    reads: gallery import importMap map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and undetectable forgeries. 
+marker | grouping.economicState.safetyProfile.crimeTypes(inner) -> economicState.safetyProfile.crimeTypes[].type
+    towns by share: DM reveal on | unmarked, every person switched off: 2
+    reads: gallery import importMap map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Arcane black market vq6n844z
+marker | grouping.economicState.safetyProfile.criminalInstitutions(inner) -> economicState.safetyProfile.criminalInstitutions[]
+    towns by share: DM reveal on | unmarked, every person switched off: 6
+    reads: gallery import importMap map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Multiple Criminal Factions vq6n843z
+marker | grouping.generationCoherenceReceipt(inner) -> activeConditions[].causes[].detail
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 1 ; DM reveal on | unmarked, every person switched off: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-0 gallery: Settlement generated under stressor "Indebted to Outside Power vq6n100z".
+marker | grouping.generationCoherenceReceipt(inner) -> availableServices.equipment[].desc
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 2 ; DM reveal on | unmarked, every person switched off: 2
+    reads: gallery import importMap link map
+    e.g. rv6-cold-town-infiltrated-0 gallery: Practical clothing for soldiers and servants. vq6n257z
+marker | grouping.generationCoherenceReceipt(inner) -> history.founding.foundedBy
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 1 ; DM reveal on | unmarked, every person switched off: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-1 gallery: a discharged soldier who liked the view and had nowhere better to be vq6n107z
+marker | grouping.generationCoherenceReceipt(inner) -> history.historicalEvents[].lastingEffects[]
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 2 ; DM reveal on | unmarked, every person switched off: 2
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-1 gallery: The merchant quarter and the labourers' quarter remain walled apart vq6n161z vq6n105z
+marker | grouping.generationCoherenceReceipt(inner) -> history.legacyAnnotations[].annotation
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 2 ; DM reveal on | unmarked, every person switched off: 2
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-1 gallery: The Economic Divide (16 years ago) created pressure that has not been fully resolved: current economic pressure has structural antecedents. The present situation reflects
+marker | grouping.generationCoherenceReceipt(inner) -> institutions[].desc
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 4 ; DM reveal on | unmarked, every person switched off: 4
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-1 gallery: A walled plot gated against livestock, kept by the households in turn. vq6n159z The rite waits for a priest passing through; the burial does not. vq6n8z
+marker | grouping.generationCoherenceReceipt(inner) -> simulationTrace[].causes[].reason
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 7 ; DM reveal on | unmarked, every person switched off: 7
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: plagued pressure requires a defensible perimeter at hamlet scale. vq6n170z
+marker | grouping.generationCoherenceReceipt(inner) -> spatialLayout.layout
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 1 ; DM reveal on | unmarked, every person switched off: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-1 gallery: Stone-walled holdings climbing a south-facing hillside vq6n105z
+marker | grouping.generationCoherenceReceipt(inner) -> stress.label
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 1 ; DM reveal on | unmarked, every person switched off: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-0 gallery: Indebted to Outside Power vq6n100z
+marker | grouping.generationCoherenceReceipt(inner) -> stressors.label
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 1 ; DM reveal on | unmarked, every person switched off: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-0 gallery: Indebted to Outside Power vq6n100z
+marker | grouping.reason -> economicViability.dependencies[].description
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 1 ; DM reveal on | unmarked, every person switched off: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Metropolis closes its isolation-support gap through magical transit (88/88 capacity). vq6n495z
+marker | grouping.reason -> structuralSuggestions[].reason
+    towns by share: DM reveal on | unmarked, every person switched off: 6
+    reads: gallery import importMap map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Metropolis closes its isolation-support gap through magical transit (88/88 capacity). If magic fails, its mundane support paths are insufficient. vq6n495z
+marker | grouping.reason -> structuralViolations[].reason
+    towns by share: DM reveal on | unmarked, every person switched off: 2
+    reads: gallery import importMap map
+    e.g. rv6-cold-thorp-null-1 gallery: This isolated thorp depends on a narrow local support base and irregular outside contact. A bad harvest, harsh winter, or disease outbreak can exhaust that margin quickly
+marker | grouping.structuralSuggestions(inner) -> structuralSuggestions[].institution
+    towns by share: DM reveal on | unmarked, every person switched off: 1
+    reads: gallery import importMap map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Magical Trade Infrastructure vq6n846z
+marker | grouping.structuralSuggestions(inner) -> structuralSuggestions[].suggested[]
+    towns by share: DM reveal on | unmarked, every person switched off: 5
+    reads: gallery import importMap map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Add a road, river, or port trade route as redundancy vq6n845z
+marker | grouping.structuralViolations(inner) -> structuralViolations[].suggestedFixes[]
+    towns by share: DM reveal on | unmarked, every person switched off: 1
+    reads: gallery import importMap map
+    e.g. rv6-cold-thorp-null-1 gallery: Consider a food or medicine cache as a plot element vq6n57z
+marker | institution.desc -> defenseProfile.institutions.charter[].desc
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 5 ; DM reveal on | unmarked, every person switched off: 5
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Competing organizations. vq6n71z
+marker | institution.desc -> defenseProfile.institutions.garrison[].desc
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 8 ; DM reveal on | unmarked, every person switched off: 8
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Full-time keepers of order, numbering about 1% of the city. vq6n64z
+marker | institution.desc -> defenseProfile.institutions.magicDef[].desc
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 8 ; DM reveal on | unmarked, every person switched off: 8
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Quarter inhabited by arcane practitioners: towers, workshops, libraries, reagent merchants. vq6n68z
+marker | institution.desc -> defenseProfile.institutions.mercenary[].desc
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 4 ; DM reveal on | unmarked, every person switched off: 4
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Organized sellsword companies. Major forces (hundreds to thousands). vq6n66z
+marker | institution.desc -> defenseProfile.institutions.militia[].desc
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 3 ; DM reveal on | unmarked, every person switched off: 3
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: The able-bodied drill together and assemble against local danger. Nobody does it full-time. vq6n14z
+marker | institution.desc -> defenseProfile.institutions.walls[].desc
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 16 ; DM reveal on | unmarked, every person switched off: 16
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: A rough timber palisade or an earthen berm. It checks raiders and creatures without stopping them. vq6n13z
+marker | institution.desc -> defenseProfile.institutions.watch[].desc
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 12 ; DM reveal on | unmarked, every person switched off: 12
+    reads: gallery import importMap link map
+    e.g. rv6-cold-town-infiltrated-0 gallery: Part-time guards. Night patrol and gate duty. vq6n17z
+marker | institution.desc -> generationCoherenceReceipt.judgments[].findings[].evidence
+    towns by share: DM reveal on | unmarked, every person switched off: 3
+    reads: gallery import
+    e.g. rv6-cold-metropolis-infiltrated-1 gallery: ty is strictly regulated. vq6n49z Town crier town crier Old town or slums Stone townhouses, private gard
+marker | institution.desc -> institutions[].desc
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 24 ; DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Open-field farming, parcelled into strips. vq6n1z
+marker | note.faction.dmNotes -> powerStructure.factions[].dmNotes
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 24 ; DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: power dm note vq6n191z
+marker | note.faction.notes -> powerStructure.factions[].notes
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 24 ; DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: power note vq6n190z
+marker | note.institution.dmNotes -> institutions[].dmNotes
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 24 ; DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: house dm note vq6n185z
+marker | note.institution.notes -> institutions[].notes
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 24 ; DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: house note vq6n184z
+marker | note.tabNotes -> tabNotes.overview
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 24 ; DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Tab note vq6n177z
+marker | note.tabNotes -> tabNotes.power
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 24 ; DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Tab note vq6n176z
+marker | npc.personality -> factions[].members[].personality.vq6
+    towns by share: DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: vq6n28z
+marker | npc.personality -> npcs[].personality.vq6
+    towns by share: DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import importMap map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: vq6n28z
+marker | npc.personality(inner) -> factions[].members[].personality.speech
+    towns by share: DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Uses the formal royal 'we' (old habit from a previous station) vq6n75z
+marker | npc.personality(inner) -> factions[].members[].personality.tell
+    towns by share: DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: makes deliberate, theatrical eye contact to assert dominance vq6n74z
+marker | npc.personality(inner) -> npcs[].personality.speech
+    towns by share: DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import importMap map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Uses the formal royal 'we' (old habit from a previous station) vq6n75z
+marker | npc.personality(inner) -> npcs[].personality.tell
+    towns by share: DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import importMap map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: makes deliberate, theatrical eye contact to assert dominance vq6n74z
+marker | npc.physical -> factions[].members[].physical.vq6
+    towns by share: DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: vq6n29z
+marker | npc.physical -> npcs[].physical.vq6
+    towns by share: DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import importMap map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: vq6n29z
+marker | npc.physical(inner) -> factions[].members[].physical.build
+    towns by share: DM reveal on | unmarked, every person switched off: 22
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: lean and wiry vq6n76z
+marker | npc.physical(inner) -> factions[].members[].physical.clothes
+    towns by share: DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: work clothes patched by someone who loved them vq6n78z
+marker | npc.physical(inner) -> factions[].members[].physical.feature
+    towns by share: DM reveal on | unmarked, every person switched off: 23
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: a shaved head with old tattoos vq6n77z
+marker | npc.physical(inner) -> npcs[].physical.build
+    towns by share: DM reveal on | unmarked, every person switched off: 22
+    reads: gallery import importMap map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: lean and wiry vq6n76z
+marker | npc.physical(inner) -> npcs[].physical.clothes
+    towns by share: DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import importMap map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: work clothes patched by someone who loved them vq6n78z
+marker | npc.physical(inner) -> npcs[].physical.feature
+    towns by share: DM reveal on | unmarked, every person switched off: 23
+    reads: gallery import importMap map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: a shaved head with old tattoos vq6n77z
+marker | relationship.description -> prominentRelationship.full
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 15 ; DM reveal on | unmarked, every person switched off: 15
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Years ago Zita Wolf did for Katharina Neumann the kind of favour that cannot be repaid, only serviced. Katharina Neumann has been servicing it ever since. vq6n53z
+marker | relationship.description -> relationships[].description
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 20 ; DM reveal on | unmarked, every person switched off: 20
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Sabine Fischer vouched for Katharina Neumann when nobody else would. Katharina Neumann's first post came from that word. vq6n49z
+marker | relationship.tension -> pressureSentence
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 5 ; DM reveal on | unmarked, every person switched off: 5
+    reads: gallery import importMap link map
+    e.g. rv6-cold-city-null-0 gallery: Zakariya al-Masri has fallen on hard times, and the debt Rabab al-Hassan owes is now the only asset Zakariya al-Masri has. vq6n157z
+marker | relationship.tension -> prominentRelationship.phrasing
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 15 ; DM reveal on | unmarked, every person switched off: 15
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Katharina Neumann and Zita Wolf are connected by something neither discusses openly: Katharina Neumann has begun to act like someone who considers the debt paid. Zita Wol
+marker | relationship.tension -> prominentRelationship.tension
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 15 ; DM reveal on | unmarked, every person switched off: 15
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Katharina Neumann has begun to act like someone who considers the debt paid. Zita Wolf does not. vq6n52z
+marker | relationship.tension -> relationships[].tension
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 20 ; DM reveal on | unmarked, every person switched off: 20
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Katharina Neumann corrected Sabine Fischer in public last month, and was right. vq6n48z
+marker | tension.description -> history.currentTensions[].description
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 24 ; DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations vq6n63z
+marker | tension.description -> history.historicalEvents[].description
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 4 ; DM reveal on | unmarked, every person switched off: 4
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-1 gallery: Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations vq6n466z vq6n456z
+marker | tension.description -> history.siegeNarrative
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 5 ; DM reveal on | unmarked, every person switched off: 5
+    reads: gallery import importMap link map
+    e.g. rv6-cold-town-infiltrated-1 gallery: The Migration is still present in living memory: A surge in criminal activity overwhelmed the authorities; vigilantes began to form vq6n118z.
+marker | tension.lastingEffects -> history.currentTensions[].lastingEffects[]
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 22 ; DM reveal on | unmarked, every person switched off: 22
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: vq6n64z
+marker | tension.lastingEffects(inner) -> history.currentTensions[].lastingEffects[]
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 22 ; DM reveal on | unmarked, every person switched off: 22
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: A standing security office and informant network persist vq6n117z
+marker | tension.lastingEffects(inner) -> history.historicalEvents[].lastingEffects[]
+    towns by share: DM reveal on | marked, every person switched off, no other eye: 7 ; DM reveal on | unmarked, every person switched off: 7
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: A standing security office and informant network persist vq6n822z vq6n812z
+marker | tension.plotHooks -> history.currentTensions[].plotHooks[]
+    towns by share: DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: vq6n65z
+marker | tension.plotHooks(inner) -> history.currentTensions[].plotHooks[]
+    towns by share: DM reveal on | unmarked, every person switched off: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: One of the loudest voices warning about infiltration is themselves an agent vq6n119z
+marker | tension.plotHooks(inner) -> history.historicalEvents[].plotHooks[]
+    towns by share: DM reveal on | unmarked, every person switched off: 1
+    reads: gallery import
+    e.g. rv6-cold-thorp-infiltrated-1 gallery: The agents' handler is someone in a position of trust, and the PCs have already met them vq6n60z vq6n55z

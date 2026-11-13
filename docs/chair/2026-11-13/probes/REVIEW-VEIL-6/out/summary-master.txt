@@ -1,0 +1,70 @@
+{"towns":24,"planted":8728,"propagated":2948,"shares":192,"reads":4608,"handHides":32989,"clamped":0,"housesHiddenWhole":36,"frozenSkips":1183}
+births that threw: 0 []
+raised: 0 []
+reads:
+   cm203p211 card row 192
+   cm203p211 gallery row 192
+   cm203p211 import row 192
+   cm203p211 importMap row 192
+   cm203p211 link row 192
+   cm203p211 map row 192
+   cm203p211 mapLink row 192
+   cm203p211 moreByCreator NO ROW 4
+   cm203p211 moreByCreator row 188
+   cm211 card row 192
+   cm211 gallery row 192
+   cm211 import row 192
+   cm211 importMap row 192
+   cm211 link row 192
+   cm211 map row 192
+   cm211 mapLink row 192
+   cm211 moreByCreator NO ROW 4
+   cm211 moreByCreator row 188
+   cmb card row 192
+   cmb gallery row 192
+   cmb import row 192
+   cmb importMap row 192
+   cmb link row 192
+   cmb map row 192
+   cmb mapLink row 192
+   cmb moreByCreator NO ROW 4
+   cmb moreByCreator row 188
+lists:
+   cm203p211 _gallery_public_tile_rows {"rows":192,"markers":0}
+   cm203p211 list_curated_dossiers {"rows":0,"markers":0}
+   cm203p211 list_featured_dossiers {"rows":0,"markers":0}
+   cm203p211 list_featured_maps {"rows":0,"markers":0}
+   cm203p211 list_gallery_dossiers(all) {"rows":192,"markers":0}
+   cm203p211 list_gallery_maps {"rows":192,"markers":0}
+   cm211 _gallery_public_tile_rows {"rows":192,"markers":0}
+   cm211 list_curated_dossiers {"rows":0,"markers":0}
+   cm211 list_featured_dossiers {"rows":0,"markers":0}
+   cm211 list_featured_maps {"rows":0,"markers":0}
+   cm211 list_gallery_dossiers(all) {"rows":192,"markers":0}
+   cm211 list_gallery_maps {"rows":192,"markers":0}
+   cmb _gallery_public_tile_rows {"rows":192,"markers":0}
+   cmb list_curated_dossiers {"rows":0,"markers":0}
+   cmb list_featured_dossiers {"rows":0,"markers":0}
+   cmb list_featured_maps {"rows":0,"markers":0}
+   cmb list_gallery_dossiers(all) {"rows":192,"markers":0}
+   cmb list_gallery_maps {"rows":192,"markers":0}
+planted by origin: {"institution.desc":852,"faction.desc":322,"grouping.criminalCaptureState":72,"npc.personality":221,"npc.physical":221,"npc.goal":241,"npc.secret":324,"npc.plotHooks":221,"relationship.tension":473,"relationship.description":473,"event.description":116,"event.lastingEffects":92,"event.plotHooks":47,"tension.description":42,"tension.lastingEffects":34,"tension.plotHooks":42,"npc.activeConstraint":71,"npc.personality(inner)":442,"npc.physical(inner)":579,"npc.goal(inner)":442,"npc.secret(inner)":442,"npc.plotHooks(inner)":335,"event.lastingEffects(inner)":99,"event.plotHooks(inner)":68,"tension.lastingEffects(inner)":68,"tension.plotHooks(inner)":126,"grouping.generationCoherenceReceipt(inner)":1179,"note.dossierNotes":24,"note.dmNotes":24,"note.notes":24,"note.narrativeNotes":24,"note.tabNotes":48,"note.npc.notes":64,"note.npc.dmNotes":64,"note.institution.notes":72,"no
+propagated to:
+   conflict.desc  =>  powerStructure.conflicts[].desc 2
+   conflict.plotHooks(inner)  =>  powerStructure.conflicts[].plotHooks[] 26
+   event.description  =>  history.currentTensions[].description 4
+   event.lastingEffects(inner)  =>  generationCoherenceReceipt.judgments[].findings[].evidence 2
+   event.lastingEffects(inner)  =>  history.currentTensions[].lastingEffects[] 7
+   event.plotHooks(inner)  =>  history.currentTensions[].plotHooks[] 1
+   faction.crisisNote  =>  powerStructure.factions[].crisisNote 10
+   faction.desc  =>  powerStructure.factions[].desc 200
+   grouping.desc  =>  economicState.safetyProfile.crimeTypes[].desc 3
+   grouping.generationCoherenceReceipt(inner)  =>  activeConditions[].causes[].detail 1
+   grouping.generationCoherenceReceipt(inner)  =>  availableServices.equipment[].desc 2
+   grouping.generationCoherenceReceipt(inner)  =>  culturalIdentity.foodways 4
+   grouping.generationCoherenceReceipt(inner)  =>  generationCoherenceReceipt.checks[].label 408
+   grouping.generationCoherenceReceipt(inner)  =>  generationCoherenceReceipt.judgments[].evidence[].detail 542
+   grouping.generationCoherenceReceipt(inner)  =>  generationCoherenceReceipt.judgments[].evidence[].evidence 49
+   grouping.generationCoherenceReceipt(inner)  =>  generationCoherenceReceipt.judgments[].findings[].detail 36
+   grouping.generationCoherenceReceipt(inner)  =>  generationCoherenceReceipt.judgments[].findings[].evidence 21
+   grouping.generationCoherenceReceipt(inner)  =>  generationCoherenceReceipt.judgments[].label 168

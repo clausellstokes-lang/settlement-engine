@@ -1,0 +1,6 @@
+ctb211_0 | k=5 | stored 1124689 chars, 500 ties, 1874 deltas | gallery 938 ms (567331 chars sent) | link 598 ms (572508 chars sent)
+ct211_0 | k=5 | stored 1124689 chars, 500 ties, 1874 deltas | gallery 1011 ms (543636 chars sent) | link 689 ms (548814 chars sent)
+ctb211_0 | k=20 | stored 3015274 chars, 2000 ties, 4874 deltas | gallery 4094 ms (2296739 chars sent) | link 3819 ms (2301916 chars sent)
+ct211_0 | k=20 | stored 3015274 chars, 2000 ties, 4874 deltas | gallery 4879 ms (2265859 chars sent) | link 4155 ms (2271037 chars sent)
+ctb211_0 | k=60 | stored 8060034 chars, 6000 ties, 12874 deltas | gallery 26307 ms (7313636 chars sent) | link 25400 ms (7318813 chars sent)
+ct211_0 | k=60 | stored 8060034 chars, 6000 ties, 12874 deltas | gallery 27496 ms (7220996 chars sent) | link 28578 ms (7226174 chars sent)

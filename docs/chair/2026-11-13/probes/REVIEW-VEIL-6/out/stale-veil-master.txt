@@ -1,0 +1,46 @@
+== mp0x25 dm=false (211 alone at the lane tip, master's shape)
+00 as stored | gallery 1 | link 1 | import 1
+01 unmarked (no veil record) | gallery 66 | link 36 | import 66
+02 v is the text "1" | gallery 1 | link 1 | import 1
+03 v is 99 | gallery 1 | link 1 | import 1
+04 v is 2 (the served mark) | gallery 1 | link 1 | import 1
+05 v is absent | gallery 1 | link 1 | import 1
+06 hidden is the text "true" | gallery 36 | link 36 | import 36
+07 hidden is 1 | gallery 36 | link 36 | import 36
+08 hidden is null | gallery 36 | link 36 | import 36
+09 deltas is an object | gallery 36 | link 36 | import 36
+10 deltas is absent | gallery 36 | link 36 | import 36
+11 the veil record is null | gallery 66 | link 36 | import 66
+12 the veil record is a list | gallery 66 | link 36 | import 66
+13 the veil record is a text | gallery 66 | link 36 | import 66
+14 one junk delta first | gallery 1 | link 1 | import 1
+15 2,500 deltas (500 junk first) | gallery 1 | link 1 | import 1
+16 every address in capitals | gallery 36 | link 36 | import 36
+17 mode snapshot, no copy | gallery 1 | link 1 | import 1
+18 mode snapshot, the copy a list | gallery 1 | link 1 | import 1
+19 mode snapshot, the copy the OWNER's whole record | gallery 1 | link 1 | import 1
+20 mode is junk | gallery 1 | link 1 | import 1
+21 a groupings list planted (the served shape) | gallery 1 | link 1 | import 1
+== mp0x27 dm=true (211 alone at the lane tip, master's shape)
+00 as stored | gallery 11 | link 1 | import 11
+01 unmarked (no veil record) | gallery 82 | link 36 | import 82
+02 v is the text "1" | gallery 11 | link 1 | import 11
+03 v is 99 | gallery 11 | link 1 | import 11
+04 v is 2 (the served mark) | gallery 11 | link 1 | import 11
+05 v is absent | gallery 11 | link 1 | import 11
+06 hidden is the text "true" | gallery 46 | link 36 | import 46
+07 hidden is 1 | gallery 46 | link 36 | import 46
+08 hidden is null | gallery 46 | link 36 | import 46
+09 deltas is an object | gallery 46 | link 36 | import 46
+10 deltas is absent | gallery 46 | link 36 | import 46
+11 the veil record is null | gallery 82 | link 36 | import 82
+12 the veil record is a list | gallery 82 | link 36 | import 82
+13 the veil record is a text | gallery 82 | link 36 | import 82
+14 one junk delta first | gallery 11 | link 1 | import 11
+15 2,500 deltas (500 junk first) | gallery 11 | link 1 | import 11
+16 every address in capitals | gallery 46 | link 36 | import 46
+17 mode snapshot, no copy | gallery 11 | link 1 | import 11
+18 mode snapshot, the copy a list | gallery 11 | link 1 | import 11
+19 mode snapshot, the copy the OWNER's whole record | gallery 11 | link 1 | import 11
+20 mode is junk | gallery 11 | link 1 | import 11
+21 a groupings list planted (the served shape) | gallery 11 | link 1 | import 11

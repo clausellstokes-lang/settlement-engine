@@ -1,0 +1,8 @@
+ct211_0 | towns 6 | persons with an impression: 223 | persons whose STORED impression embeds a string of their OWN stored appearance (6 chars or more): 0 | … or a word run of it (first 12 chars): 1
+ct211_1 | towns 6 | persons with an impression: 116 | persons whose STORED impression embeds a string of their OWN stored appearance (6 chars or more): 0 | … or a word run of it (first 12 chars): 0
+ct211_2 | towns 6 | persons with an impression: 108 | persons whose STORED impression embeds a string of their OWN stored appearance (6 chars or more): 0 | … or a word run of it (first 12 chars): 0
+ct211_3 | towns 6 | persons with an impression: 182 | persons whose STORED impression embeds a string of their OWN stored appearance (6 chars or more): 0 | … or a word run of it (first 12 chars): 0
+cm211_0 | towns 6 | persons with an impression: 80 | persons whose STORED impression embeds a string of their OWN stored appearance (6 chars or more): 0 | … or a word run of it (first 12 chars): 0
+cm211_1 | towns 6 | persons with an impression: 37 | persons whose STORED impression embeds a string of their OWN stored appearance (6 chars or more): 0 | … or a word run of it (first 12 chars): 0
+cm211_2 | towns 6 | persons with an impression: 37 | persons whose STORED impression embeds a string of their OWN stored appearance (6 chars or more): 0 | … or a word run of it (first 12 chars): 0
+cm211_3 | towns 6 | persons with an impression: 67 | persons whose STORED impression embeds a string of their OWN stored appearance (6 chars or more): 0 | … or a word run of it (first 12 chars): 0

@@ -1,0 +1,237 @@
+chain cmb: 24 towns; shares with every eye shut by hand; 59 rows
+house | a house hidden whole -> economicState.activeChains[].label
+    towns by share: DM reveal on | every eye shut | frozen: 3 ; DM reveal on | every eye shut, narrated: 3 ; DM reveal on | every eye shut: 3 ; no reveal | every eye shut | frozen: 3 ; no reveal | every eye shut, narrated: 3 ; no reveal | every eye shut: 3
+    reads: gallery import importMap link map
+    e.g. rv6-cold-city-null-1 gallery: "Black market" in "Black market"
+house | a house hidden whole -> economicState.activeChains[].processingInstitutions[]
+    towns by share: DM reveal on | every eye shut | frozen: 10 ; DM reveal on | every eye shut, narrated: 10 ; DM reveal on | every eye shut: 10 ; no reveal | every eye shut | frozen: 10 ; no reveal | every eye shut, narrated: 10 ; no reveal | every eye shut: 10
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: "Front businesses" in "Front businesses"
+house | a house hidden whole -> simulationTrace[].causes[].reason
+    towns by share: DM reveal on | every eye shut | frozen: 11 ; DM reveal on | every eye shut, narrated: 11 ; DM reveal on | every eye shut: 11
+    reads: gallery import
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: "Front businesses" in "Front businesses converts raw inputs into chain output."
+house | a house hidden whole -> simulationTrace[].causes[].source
+    towns by share: DM reveal on | every eye shut | frozen: 10 ; DM reveal on | every eye shut, narrated: 10 ; DM reveal on | every eye shut: 10
+    reads: gallery import
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: "Front businesses" in "processor.Front businesses"
+house | a house hidden whole -> simulationTrace[].downstreamEffects[].target
+    towns by share: DM reveal on | every eye shut | frozen: 7 ; DM reveal on | every eye shut, narrated: 7 ; DM reveal on | every eye shut: 7
+    reads: gallery import
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: "Smuggling network" in "Smuggling network"
+marker | custom.customContentProvenance.id -> customContentProvenance[].contentId
+    towns by share: DM reveal on | every eye shut, narrated: 24 ; DM reveal on | every eye shut: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: custom_vq6n199z
+marker | custom.customContentProvenance.name -> customContentProvenance[].name
+    towns by share: DM reveal on | every eye shut, narrated: 24 ; DM reveal on | every eye shut: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Homebrew vq6n201z
+marker | custom.customContentProvenance.ownerKey -> customContentProvenance[].ownerKey
+    towns by share: DM reveal on | every eye shut, narrated: 24 ; DM reveal on | every eye shut: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: acct_vq6n200z
+marker | custom.customContentRoster.description -> customContentRoster[].description
+    towns by share: DM reveal on | every eye shut, narrated: 24 ; DM reveal on | every eye shut: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Homebrew text vq6n198z
+marker | custom.customContentRoster.id -> customContentRoster[].id
+    towns by share: DM reveal on | every eye shut, narrated: 24 ; DM reveal on | every eye shut: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: custom_vq6n196z
+marker | custom.customContentRoster.name -> customContentRoster[].name
+    towns by share: DM reveal on | every eye shut, narrated: 24 ; DM reveal on | every eye shut: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Homebrew house vq6n197z
+marker | grouping.generationCoherenceReceipt(inner) -> activeConditions[].causes[].detail
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-0 gallery: Settlement generated under stressor "Indebted to Outside Power vq6n100z".
+marker | grouping.generationCoherenceReceipt(inner) -> history.founding.foundedBy
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-1 gallery: a discharged soldier who liked the view and had nowhere better to be vq6n107z
+marker | grouping.generationCoherenceReceipt(inner) -> history.legacyAnnotations[].annotation
+    towns by share: DM reveal on | every eye shut | frozen: 2 ; DM reveal on | every eye shut, narrated: 2 ; DM reveal on | every eye shut: 2 ; no reveal | every eye shut | frozen: 2 ; no reveal | every eye shut, narrated: 2 ; no reveal | every eye shut: 2
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-1 gallery: The Economic Divide (16 years ago) created pressure that has not been fully resolved: current economic pressure has structural antecedents. The present situation reflects
+marker | grouping.generationCoherenceReceipt(inner) -> simulationTrace[].causes[].reason
+    towns by share: DM reveal on | every eye shut | frozen: 7 ; DM reveal on | every eye shut, narrated: 7 ; DM reveal on | every eye shut: 7
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: plagued pressure requires a defensible perimeter at hamlet scale. vq6n170z
+marker | grouping.generationCoherenceReceipt(inner) -> spatialLayout.layout
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-1 gallery: Stone-walled holdings climbing a south-facing hillside vq6n105z
+marker | grouping.generationCoherenceReceipt(inner) -> stress.label
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-0 gallery: Indebted to Outside Power vq6n100z
+marker | grouping.generationCoherenceReceipt(inner) -> stressors.label
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-0 gallery: Indebted to Outside Power vq6n100z
+marker | grouping.reason -> economicViability.dependencies[].description
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Metropolis closes its isolation-support gap through magical transit (88/88 capacity). vq6n495z
+marker | institution.desc -> defenseProfile.institutions.charter[].desc
+    towns by share: DM reveal on | every eye shut | frozen: 5 ; DM reveal on | every eye shut, narrated: 5 ; DM reveal on | every eye shut: 5 ; no reveal | every eye shut | frozen: 5 ; no reveal | every eye shut, narrated: 5 ; no reveal | every eye shut: 5
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Competing organizations. vq6n71z
+marker | institution.desc -> defenseProfile.institutions.garrison[].desc
+    towns by share: DM reveal on | every eye shut | frozen: 8 ; DM reveal on | every eye shut, narrated: 8 ; DM reveal on | every eye shut: 8 ; no reveal | every eye shut | frozen: 8 ; no reveal | every eye shut, narrated: 8 ; no reveal | every eye shut: 8
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Full-time keepers of order, numbering about 1% of the city. vq6n64z
+marker | institution.desc -> defenseProfile.institutions.magicDef[].desc
+    towns by share: DM reveal on | every eye shut | frozen: 8 ; DM reveal on | every eye shut, narrated: 8 ; DM reveal on | every eye shut: 8 ; no reveal | every eye shut | frozen: 8 ; no reveal | every eye shut, narrated: 8 ; no reveal | every eye shut: 8
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Quarter inhabited by arcane practitioners: towers, workshops, libraries, reagent merchants. vq6n68z
+marker | institution.desc -> defenseProfile.institutions.mercenary[].desc
+    towns by share: DM reveal on | every eye shut | frozen: 4 ; DM reveal on | every eye shut, narrated: 4 ; DM reveal on | every eye shut: 4 ; no reveal | every eye shut | frozen: 4 ; no reveal | every eye shut, narrated: 4 ; no reveal | every eye shut: 4
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Organized sellsword companies. Major forces (hundreds to thousands). vq6n66z
+marker | institution.desc -> defenseProfile.institutions.militia[].desc
+    towns by share: DM reveal on | every eye shut | frozen: 3 ; DM reveal on | every eye shut, narrated: 3 ; DM reveal on | every eye shut: 3 ; no reveal | every eye shut | frozen: 3 ; no reveal | every eye shut, narrated: 3 ; no reveal | every eye shut: 3
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: The able-bodied drill together and assemble against local danger. Nobody does it full-time. vq6n14z
+marker | institution.desc -> defenseProfile.institutions.walls[].desc
+    towns by share: DM reveal on | every eye shut | frozen: 16 ; DM reveal on | every eye shut, narrated: 16 ; DM reveal on | every eye shut: 16 ; no reveal | every eye shut | frozen: 16 ; no reveal | every eye shut, narrated: 16 ; no reveal | every eye shut: 16
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: A rough timber palisade or an earthen berm. It checks raiders and creatures without stopping them. vq6n13z
+marker | institution.desc -> defenseProfile.institutions.watch[].desc
+    towns by share: DM reveal on | every eye shut | frozen: 12 ; DM reveal on | every eye shut, narrated: 12 ; DM reveal on | every eye shut: 12 ; no reveal | every eye shut | frozen: 12 ; no reveal | every eye shut, narrated: 12 ; no reveal | every eye shut: 12
+    reads: gallery import importMap link map
+    e.g. rv6-cold-town-infiltrated-0 gallery: Part-time guards. Night patrol and gate duty. vq6n17z
+marker | note.faction.dmNotes -> powerStructure.factions[].dmNotes
+    towns by share: DM reveal on | every eye shut | frozen: 24 ; DM reveal on | every eye shut, narrated: 24 ; DM reveal on | every eye shut: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: power dm note vq6n191z
+marker | note.faction.notes -> powerStructure.factions[].notes
+    towns by share: DM reveal on | every eye shut | frozen: 24 ; DM reveal on | every eye shut, narrated: 24 ; DM reveal on | every eye shut: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: power note vq6n190z
+marker | note.institution.dmNotes -> institutions[].dmNotes
+    towns by share: DM reveal on | every eye shut | frozen: 24 ; DM reveal on | every eye shut, narrated: 24 ; DM reveal on | every eye shut: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: house dm note vq6n185z
+marker | note.institution.notes -> institutions[].notes
+    towns by share: DM reveal on | every eye shut | frozen: 24 ; DM reveal on | every eye shut, narrated: 24 ; DM reveal on | every eye shut: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: house note vq6n184z
+marker | note.npc.dmNotes -> factions[].members[].dmNotes
+    towns by share: DM reveal on | every eye shut | frozen: 24 ; DM reveal on | every eye shut, narrated: 24 ; DM reveal on | every eye shut: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: npc dm note vq6n179z
+marker | note.npc.notes -> factions[].members[].notes
+    towns by share: DM reveal on | every eye shut | frozen: 24 ; DM reveal on | every eye shut, narrated: 24 ; DM reveal on | every eye shut: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: npc note vq6n178z
+marker | note.tabNotes -> tabNotes.overview
+    towns by share: DM reveal on | every eye shut | frozen: 24 ; DM reveal on | every eye shut, narrated: 24 ; DM reveal on | every eye shut: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Tab note vq6n177z
+marker | note.tabNotes -> tabNotes.power
+    towns by share: DM reveal on | every eye shut | frozen: 24 ; DM reveal on | every eye shut, narrated: 24 ; DM reveal on | every eye shut: 24
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Tab note vq6n176z
+marker | relationship.description -> prominentRelationship.full
+    towns by share: DM reveal on | every eye shut | frozen: 15 ; DM reveal on | every eye shut, narrated: 15 ; DM reveal on | every eye shut: 15 ; no reveal | every eye shut | frozen: 15 ; no reveal | every eye shut, narrated: 15 ; no reveal | every eye shut: 15
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Years ago Zita Wolf did for Katharina Neumann the kind of favour that cannot be repaid, only serviced. Katharina Neumann has been servicing it ever since. vq6n53z
+marker | relationship.tension -> pressureSentence
+    towns by share: DM reveal on | every eye shut | frozen: 5 ; DM reveal on | every eye shut, narrated: 5 ; DM reveal on | every eye shut: 5 ; no reveal | every eye shut | frozen: 5 ; no reveal | every eye shut, narrated: 5 ; no reveal | every eye shut: 5
+    reads: gallery import importMap link map
+    e.g. rv6-cold-city-null-0 gallery: Zakariya al-Masri has fallen on hard times, and the debt Rabab al-Hassan owes is now the only asset Zakariya al-Masri has. vq6n157z
+marker | relationship.tension -> prominentRelationship.phrasing
+    towns by share: DM reveal on | every eye shut | frozen: 15 ; DM reveal on | every eye shut, narrated: 15 ; DM reveal on | every eye shut: 15 ; no reveal | every eye shut | frozen: 15 ; no reveal | every eye shut, narrated: 15 ; no reveal | every eye shut: 15
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Katharina Neumann and Zita Wolf are connected by something neither discusses openly: Katharina Neumann has begun to act like someone who considers the debt paid. Zita Wol
+marker | relationship.tension -> prominentRelationship.tension
+    towns by share: DM reveal on | every eye shut | frozen: 15 ; DM reveal on | every eye shut, narrated: 15 ; DM reveal on | every eye shut: 15 ; no reveal | every eye shut | frozen: 15 ; no reveal | every eye shut, narrated: 15 ; no reveal | every eye shut: 15
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Katharina Neumann has begun to act like someone who considers the debt paid. Zita Wolf does not. vq6n52z
+marker | tension.description -> history.siegeNarrative
+    towns by share: DM reveal on | every eye shut | frozen: 5 ; DM reveal on | every eye shut, narrated: 5 ; DM reveal on | every eye shut: 5 ; no reveal | every eye shut | frozen: 5 ; no reveal | every eye shut, narrated: 5 ; no reveal | every eye shut: 5
+    reads: gallery import importMap link map
+    e.g. rv6-cold-town-infiltrated-1 gallery: The Migration is still present in living memory: A surge in criminal activity overwhelmed the authorities; vigilantes began to form vq6n118z.
+text | text of grouping.generationCoherenceReceipt(inner) -> activeConditions[].causes[].detail
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-0 gallery: Settlement generated under stressor "Indebted to Outside Power vq6n100z".
+text | text of grouping.generationCoherenceReceipt(inner) -> history.founding.foundedBy
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-1 gallery: a discharged soldier who liked the view and had nowhere better to be vq6n107z
+text | text of grouping.generationCoherenceReceipt(inner) -> history.legacyAnnotations[].annotation
+    towns by share: DM reveal on | every eye shut | frozen: 2 ; DM reveal on | every eye shut, narrated: 2 ; DM reveal on | every eye shut: 2 ; no reveal | every eye shut | frozen: 2 ; no reveal | every eye shut, narrated: 2 ; no reveal | every eye shut: 2
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-1 gallery: The Economic Divide (16 years ago) created pressure that has not been fully resolved: current economic pressure has structural antecedents. The present situation reflects
+text | text of grouping.generationCoherenceReceipt(inner) -> simulationTrace[].causes[].reason
+    towns by share: DM reveal on | every eye shut | frozen: 7 ; DM reveal on | every eye shut, narrated: 7 ; DM reveal on | every eye shut: 7
+    reads: gallery import
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: plagued pressure requires a defensible perimeter at hamlet scale. vq6n170z
+text | text of grouping.generationCoherenceReceipt(inner) -> spatialLayout.layout
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-1 gallery: Stone-walled holdings climbing a south-facing hillside vq6n105z
+text | text of grouping.generationCoherenceReceipt(inner) -> stress.label
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-0 gallery: Indebted to Outside Power vq6n100z
+text | text of grouping.generationCoherenceReceipt(inner) -> stressors.label
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-thorp-null-0 gallery: Indebted to Outside Power vq6n100z
+text | text of grouping.reason -> economicViability.dependencies[].description
+    towns by share: DM reveal on | every eye shut | frozen: 1 ; DM reveal on | every eye shut, narrated: 1 ; DM reveal on | every eye shut: 1 ; no reveal | every eye shut | frozen: 1 ; no reveal | every eye shut, narrated: 1 ; no reveal | every eye shut: 1
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Metropolis closes its isolation-support gap through magical transit (88/88 capacity). vq6n495z
+text | text of institution.desc -> defenseProfile.institutions.charter[].desc
+    towns by share: DM reveal on | every eye shut | frozen: 3 ; DM reveal on | every eye shut, narrated: 3 ; DM reveal on | every eye shut: 3 ; no reveal | every eye shut | frozen: 3 ; no reveal | every eye shut, narrated: 3 ; no reveal | every eye shut: 3
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-1 gallery: Guilds set against one another. vq6n94z
+text | text of institution.desc -> defenseProfile.institutions.garrison[].desc
+    towns by share: DM reveal on | every eye shut | frozen: 8 ; DM reveal on | every eye shut, narrated: 8 ; DM reveal on | every eye shut: 8 ; no reveal | every eye shut | frozen: 8 ; no reveal | every eye shut, narrated: 8 ; no reveal | every eye shut: 8
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Full-time keepers of order, numbering about 1% of the city. vq6n64z
+text | text of institution.desc -> defenseProfile.institutions.magicDef[].desc
+    towns by share: DM reveal on | every eye shut | frozen: 8 ; DM reveal on | every eye shut, narrated: 8 ; DM reveal on | every eye shut: 8 ; no reveal | every eye shut | frozen: 8 ; no reveal | every eye shut, narrated: 8 ; no reveal | every eye shut: 8
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Quarter inhabited by arcane practitioners: towers, workshops, libraries, reagent merchants. vq6n68z
+text | text of institution.desc -> defenseProfile.institutions.mercenary[].desc
+    towns by share: DM reveal on | every eye shut | frozen: 4 ; DM reveal on | every eye shut, narrated: 4 ; DM reveal on | every eye shut: 4 ; no reveal | every eye shut | frozen: 4 ; no reveal | every eye shut, narrated: 4 ; no reveal | every eye shut: 4
+    reads: gallery import importMap link map
+    e.g. rv6-cold-metropolis-infiltrated-0 gallery: Organized sellsword companies. Major forces (hundreds to thousands). vq6n66z
+text | text of institution.desc -> defenseProfile.institutions.militia[].desc
+    towns by share: DM reveal on | every eye shut | frozen: 3 ; DM reveal on | every eye shut, narrated: 3 ; DM reveal on | every eye shut: 3 ; no reveal | every eye shut | frozen: 3 ; no reveal | every eye shut, narrated: 3 ; no reveal | every eye shut: 3
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: The able-bodied drill together and assemble against local danger. Nobody does it full-time. vq6n14z
+text | text of institution.desc -> defenseProfile.institutions.walls[].desc
+    towns by share: DM reveal on | every eye shut | frozen: 16 ; DM reveal on | every eye shut, narrated: 16 ; DM reveal on | every eye shut: 16 ; no reveal | every eye shut | frozen: 16 ; no reveal | every eye shut, narrated: 16 ; no reveal | every eye shut: 16
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: A rough timber palisade or an earthen berm. It checks raiders and creatures without stopping them. vq6n13z
+text | text of institution.desc -> defenseProfile.institutions.watch[].desc
+    towns by share: DM reveal on | every eye shut | frozen: 12 ; DM reveal on | every eye shut, narrated: 12 ; DM reveal on | every eye shut: 12 ; no reveal | every eye shut | frozen: 12 ; no reveal | every eye shut, narrated: 12 ; no reveal | every eye shut: 12
+    reads: gallery import importMap link map
+    e.g. rv6-cold-town-infiltrated-0 gallery: Part-time guards. Night patrol and gate duty. vq6n17z
+text | text of relationship.description -> prominentRelationship.full
+    towns by share: DM reveal on | every eye shut | frozen: 15 ; DM reveal on | every eye shut, narrated: 15 ; DM reveal on | every eye shut: 15 ; no reveal | every eye shut | frozen: 15 ; no reveal | every eye shut, narrated: 15 ; no reveal | every eye shut: 15
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Years ago Zita Wolf did for Katharina Neumann the kind of favour that cannot be repaid, only serviced. Katharina Neumann has been servicing it ever since. vq6n53z
+text | text of relationship.tension -> pressureSentence
+    towns by share: DM reveal on | every eye shut | frozen: 5 ; DM reveal on | every eye shut, narrated: 5 ; DM reveal on | every eye shut: 5 ; no reveal | every eye shut | frozen: 5 ; no reveal | every eye shut, narrated: 5 ; no reveal | every eye shut: 5
+    reads: gallery import importMap link map
+    e.g. rv6-cold-city-null-0 gallery: Zakariya al-Masri has fallen on hard times, and the debt Rabab al-Hassan owes is now the only asset Zakariya al-Masri has. vq6n157z
+text | text of relationship.tension -> prominentRelationship.phrasing
+    towns by share: DM reveal on | every eye shut | frozen: 15 ; DM reveal on | every eye shut, narrated: 15 ; DM reveal on | every eye shut: 15 ; no reveal | every eye shut | frozen: 15 ; no reveal | every eye shut, narrated: 15 ; no reveal | every eye shut: 15
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Katharina Neumann and Zita Wolf are connected by something neither discusses openly: Katharina Neumann has begun to act like someone who considers the debt paid. Zita Wol
+text | text of relationship.tension -> prominentRelationship.tension
+    towns by share: DM reveal on | every eye shut | frozen: 15 ; DM reveal on | every eye shut, narrated: 15 ; DM reveal on | every eye shut: 15 ; no reveal | every eye shut | frozen: 15 ; no reveal | every eye shut, narrated: 15 ; no reveal | every eye shut: 15
+    reads: gallery import importMap link map
+    e.g. rv6-cold-hamlet-infiltrated-0 gallery: Katharina Neumann has begun to act like someone who considers the debt paid. Zita Wolf does not. vq6n52z
+text | text of tension.description -> history.siegeNarrative
+    towns by share: DM reveal on | every eye shut | frozen: 5 ; DM reveal on | every eye shut, narrated: 5 ; DM reveal on | every eye shut: 5 ; no reveal | every eye shut | frozen: 5 ; no reveal | every eye shut, narrated: 5 ; no reveal | every eye shut: 5
+    reads: gallery import importMap link map
+    e.g. rv6-cold-town-infiltrated-1 gallery: The Migration is still present in living memory: A surge in criminal activity overwhelmed the authorities; vigilantes began to form vq6n118z.

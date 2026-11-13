@@ -1,0 +1,60 @@
+{"towns":24,"planted":15422,"propagated":8821,"shares":192,"reads":3072,"handHides":49561,"clamped":0,"housesHiddenWhole":36,"frozenSkips":1182}
+births that threw: 0 []
+raised: 0 []
+reads:
+   ct211 card row 192
+   ct211 gallery row 192
+   ct211 import row 192
+   ct211 importMap row 192
+   ct211 link row 192
+   ct211 map row 192
+   ct211 mapLink row 192
+   ct211 moreByCreator NO ROW 4
+   ct211 moreByCreator row 188
+   ctb211 card row 192
+   ctb211 gallery row 192
+   ctb211 import row 192
+   ctb211 importMap row 192
+   ctb211 link row 192
+   ctb211 map row 192
+   ctb211 mapLink row 192
+   ctb211 moreByCreator NO ROW 4
+   ctb211 moreByCreator row 188
+lists:
+   ct211 _gallery_public_tile_rows {"rows":192,"markers":0}
+   ct211 list_curated_dossiers {"rows":0,"markers":0}
+   ct211 list_featured_dossiers {"rows":0,"markers":0}
+   ct211 list_featured_maps {"rows":0,"markers":0}
+   ct211 list_gallery_dossiers(all) {"rows":192,"markers":0}
+   ct211 list_gallery_maps {"rows":192,"markers":0}
+   ctb211 _gallery_public_tile_rows {"rows":192,"markers":0}
+   ctb211 list_curated_dossiers {"rows":0,"markers":0}
+   ctb211 list_featured_dossiers {"rows":0,"markers":0}
+   ctb211 list_featured_maps {"rows":0,"markers":0}
+   ctb211 list_gallery_dossiers(all) {"rows":192,"markers":0}
+   ctb211 list_gallery_maps {"rows":192,"markers":0}
+planted by origin: {"institution.desc":852,"faction.desc":320,"npc.personality":629,"npc.physical":629,"npc.secret":739,"npc.plotHooks":1253,"event.description":116,"event.lastingEffects":92,"event.plotHooks":47,"tension.description":42,"tension.lastingEffects":35,"tension.plotHooks":42,"npc.goal":629,"conflict.stakes":21,"conflict.desc":21,"conflict.plotHooks":21,"relationship.tension":627,"relationship.description":627,"grouping.criminalCaptureState":24,"npc.personality(inner)":1258,"npc.physical(inner)":1675,"npc.goal(inner)":1258,"npc.secret(inner)":1258,"npc.plotHooks(inner)":629,"event.lastingEffects(inner)":99,"event.plotHooks(inner)":68,"tension.lastingEffects(inner)":70,"tension.plotHooks(inner)":123,"conflict.plotHooks(inner)":21,"grouping.generationCoherenceReceipt(inner)":1181,"note.dossierNotes":24,"note.dmNotes":24,"note.notes":24,"note.narrativeNotes":24,"note.tabNotes":48
+propagated to:
+   event.lastingEffects(inner)  =>  generationCoherenceReceipt.judgments[].findings[].evidence 2
+   event.lastingEffects(inner)  =>  history.currentTensions[].lastingEffects[] 7
+   event.plotHooks(inner)  =>  history.currentTensions[].plotHooks[] 1
+   faction.crisisNote  =>  powerStructure.factions[].crisisNote 10
+   faction.desc  =>  powerStructure.factions[].desc 194
+   grouping.desc  =>  economicState.safetyProfile.crimeTypes[].desc 3
+   grouping.generationCoherenceReceipt(inner)  =>  activeConditions[].causes[].detail 1
+   grouping.generationCoherenceReceipt(inner)  =>  availableServices.equipment[].desc 1
+   grouping.generationCoherenceReceipt(inner)  =>  culturalIdentity.defensePattern 1
+   grouping.generationCoherenceReceipt(inner)  =>  generationCoherenceReceipt.checks[].label 408
+   grouping.generationCoherenceReceipt(inner)  =>  generationCoherenceReceipt.judgments[].evidence[].detail 531
+   grouping.generationCoherenceReceipt(inner)  =>  generationCoherenceReceipt.judgments[].evidence[].evidence 73
+   grouping.generationCoherenceReceipt(inner)  =>  generationCoherenceReceipt.judgments[].findings[].detail 24
+   grouping.generationCoherenceReceipt(inner)  =>  generationCoherenceReceipt.judgments[].findings[].evidence 12
+   grouping.generationCoherenceReceipt(inner)  =>  generationCoherenceReceipt.judgments[].label 168
+   grouping.generationCoherenceReceipt(inner)  =>  generationCoherenceReceipt.judgments[].summary 192
+   grouping.generationCoherenceReceipt(inner)  =>  generationCoherenceReceipt.repairs[].reason 9
+   grouping.generationCoherenceReceipt(inner)  =>  history.founding.foundedBy 1
+   grouping.generationCoherenceReceipt(inner)  =>  history.historicalEvents[].lastingEffects[] 2
+   grouping.generationCoherenceReceipt(inner)  =>  history.legacyAnnotations[].annotation 2
+   grouping.generationCoherenceReceipt(inner)  =>  institutions[].desc 4
+   grouping.generationCoherenceReceipt(inner)  =>  simulationTrace[].causes[].reason 9
+   grouping.generationCoherenceReceipt(inner)  =>  spatialLayout.layout 1
