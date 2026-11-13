@@ -48,7 +48,7 @@ import { clamp, clamp01 } from '../../kernel/math.js';
 /** @typedef {Record<string, any>} Rec */
 /** @typedef {'short' | 'long'} Vantage */
 /** @typedef {{ kind: 'npc' | 'power' | 'house' | 'chain', id: string }} GoalTarget */
-/** @typedef {{ family: string, kind: string, text: string, target: GoalTarget | null, slots: Rec, refs: string[], crisisNote?: string | null, notes?: Rec[] }} Candidate */
+/** @typedef {{ family: string, kind: string, text: string, target: GoalTarget | null, slots: Rec, refs: string[], crisisNote?: string | null, notes?: Rec[], refused?: boolean }} Candidate */
 
 /** The keyed fork family the goals draw under (declared in the fork census). */
 export const GOALS_FORK_LABEL = 'people-goals';
@@ -422,7 +422,12 @@ export function familyCandidates(card, cards, ctx, vantage, held, opts = {}) {
     const target = /** @type {GoalTarget} */ ({ kind: 'house', id: houseKey });
     if (hf) {
       push(cellCandidates('INSTITUTION', 'solvency', vantage, { house: hf }, ctx, held, { target }));
-      push(cellCandidates('INSTITUTION', 'charter', vantage, { house: hf }, ctx, held, { target }));
+      // POWERS-9 (ROUND-3-CUT-INCREMENT pf#51 pf#421): the house's rights FROM those who govern are no goal of a criminal
+      // house (it asks no seal of the seat) nor of the head of the governing power (it IS those who govern). The lines stay
+      // in the draw, marked refused, so no card's draw moves; a refused pick resolves draw-free (drawVantage)
+      const govPower = str(rec(ctx.powers.find((p) => p.isGoverning)).faction);
+      const refuseCharter = ctx.crimHouseNames.has(houseKey) || (!!govPower && memberships.some((m) => str(m.power) === govPower && Number(m.rank) === 1));
+      push(cellCandidates('INSTITUTION', 'charter', vantage, { house: hf }, ctx, held, { target }).map((c) => (refuseCharter ? { ...c, refused: true } : c)));
       if (impaired.length) push(cellCandidates('INSTITUTION', 'rebuilding', vantage, { house: hf }, ctx, held, { target }));
       if (TRADING_SHELVES.includes(shelf)) {
         const others = [...new Set(own.flatMap((ch) => arr(ch.processingInstitutions).map((n) => ctx.rosterByFamily.get(ctx.famKey(n)))).filter((n) => n && n !== houseKey))];
@@ -529,6 +534,19 @@ function fitOf(family, card, ctx, vantage) {
 }
 
 /**
+ * The next admitted candidate after a refused pick: the rest of its family's list in order (wrapping), then the other
+ * drawn families' lists in their order. Draw-free. @param {Record<string, Candidate[]>} by @param {string} family
+ * @param {Candidate} picked @param {string[]} families @returns {Candidate | null}
+ */
+function admittedAfter(by, family, picked, families) {
+  const own = by[family] || [];
+  const at = own.indexOf(picked);
+  for (let k = 1; k < own.length; k += 1) { const c = own[(at + k) % own.length]; if (!c.refused) return c; }
+  for (const f of families) if (f !== family) { const c = (by[f] || []).find((x) => !x.refused); if (c) return c; }
+  return null;
+}
+
+/**
  * ONE WEIGHTED DRAW for one vantage: the family by weight, then the sub-kind evenly, then the line evenly.
  * @param {Rec} card @param {Record<string, Candidate[]>} by @param {GoalContext} ctx @param {Vantage} vantage
  * @param {{ weightedPick: Function, pick: Function }} fork @param {string | null} notFamily
@@ -541,7 +559,10 @@ function drawVantage(card, by, ctx, vantage, fork, notFamily) {
   const kinds = [...new Set(by[family].map((c) => c.kind))];
   const kind = kinds.length === 1 ? kinds[0] : fork.pick(kinds);
   const lines = by[family].filter((c) => c.kind === kind);
-  const chosen = lines.length === 1 ? lines[0] : fork.pick(lines);
+  const picked = lines.length === 1 ? lines[0] : fork.pick(lines);
+  // POWERS-9: a refused pick takes the next admitted candidate after it (its own family's first, then the families in
+  // their drawn order), draw-free; none admitted deals nothing
+  const chosen = picked?.refused ? admittedAfter(by, family, picked, families) : picked;
   return { chosen, weights };
 }
 
