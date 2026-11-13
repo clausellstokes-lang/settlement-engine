@@ -56,17 +56,22 @@ export const DEFENCE_TUNING = Object.freeze({
   floors: Object.freeze({ mil: 0.6, mon: 0.7, int: 0.65, sup: 0.45, mag: 0.45, disaster: 0.55 }),
   chains: Object.freeze({ provisioned: 5, unprovisioned: -5, masons: 6, unmended: -4, foodWorking: 5, foodBroken: -8 }),
   crises: Object.freeze({
-    under_siege: Object.freeze({ sup: 25, int: 15, teleportFrom: 65, teleportEco: 0.4, guildFrom: 50, guildInt: 0.53, strongInt: 0.53, druidFrom: 40, druidEco: 0.72 }),
-    famine: Object.freeze({ sup: 20, mil: 10, int: 20, mon: 8, druidFrom: 30, druidEco: 0.4, druidMil: 0.5, druidMon: 0.5, divineEco: 12, divineMil: 6, arcaneFrom: 50, arcaneEco: 15, alchemyEco: 3 }),
-    occupied: Object.freeze({ mil: 35, int: 20 }),
-    plague_onset: Object.freeze({ mil: 15, sup: 15, divineMil: 0.33, divineEco: 0.53, alchemyMil: 8, alchemyEco: 10, arcaneFrom: 50, arcaneMil: 10 }),
+    under_siege: Object.freeze({ crime: 1.25, sup: 25, int: 15, teleportFrom: 65, teleportEco: 0.4, guildFrom: 50, guildInt: 0.53, strongInt: 0.53, druidFrom: 40, druidEco: 0.72 }),
+    famine: Object.freeze({ crime: 1.35, sup: 20, mil: 10, int: 20, mon: 8, druidFrom: 30, druidEco: 0.4, druidMil: 0.5, druidMon: 0.5, divineEco: 12, divineMil: 6, arcaneFrom: 50, arcaneEco: 15, alchemyEco: 3 }),
+    occupied: Object.freeze({ crime: 0.6, mil: 35, int: 20 }),
+    plague_onset: Object.freeze({ crime: 1.2, mil: 15, sup: 15, divineMil: 0.33, divineEco: 0.53, alchemyMil: 8, alchemyEco: 10, arcaneFrom: 50, arcaneMil: 10 }),
     succession_void: Object.freeze({ mil: 15, int: 20 }),
     politically_fractured: Object.freeze({ int: 20 }),
-    recently_betrayed: Object.freeze({ int: 10, mil: 10 }),
-    indebted: Object.freeze({ sup: 15, mil: 10 }),
+    recently_betrayed: Object.freeze({ crime: 1.15, int: 10, mil: 10 }),
+    indebted: Object.freeze({ crime: 1.2, sup: 15, mil: 10 }),
     infiltrated: Object.freeze({ int: 15, mil: 8 }),
     monster_pressure: Object.freeze({ mon: 20, mil: 5, arcaneFrom: 40, arcaneMon: 0.25, divineMon: 0.4, druidMon: 0.5 }),
-    wartime: Object.freeze({ sup: 15 }), // COHERENCE-UPKEEP-6 (C, R16): war drains what sustains a town; the starting weight, for the owner's veto
+    wartime: Object.freeze({ sup: 15 }), // COHERENCE-UPKEEP-6 (C, R16): war drains what sustains a town; the starting weight, for the owner's veto. No crime row (ruling 3).
+    // COHERENCE-UPKEEP-6 (ruling 3): the crises with no defence row but a crime effect, at the size it had.
+    insurgency: Object.freeze({ crime: 1.25 }),
+    mass_migration: Object.freeze({ crime: 1.18 }),
+    religious_conversion: Object.freeze({ crime: 1.22 }),
+    slave_revolt: Object.freeze({ crime: 1.3 }),
   }),
 });
 
@@ -109,7 +114,7 @@ export const DEFENCE_WEIGHT_REASONS = Object.freeze({
   size: 'a small place is easier to hold',
   floors: 'unpaid soldiers desert slowly, never at once',
   chains: 'what the economy keeps working',
-  crises: 'today\'s points, with today\'s relief by faith, druids, arcana and alchemy; each acts once, on the parts it touches; war drains the stores, the purse and the market (R16)',
+  crises: 'today\'s points, with today\'s relief by faith, druids, arcana and alchemy; each acts once, on the parts it touches; war drains the stores, the purse and the market (R16); a crisis row\'s `crime` is what it does to crime, at the size the crime reading gave it (ruling 3), and war has none',
 });
 
 /**

@@ -160,6 +160,29 @@ describe('defence is the sum of its parts', () => {
     expect(forced, 'anchored: the corpus forces wartime').toBe(TIERS.length * 3);
   });
 
+  // COHERENCE-UPKEEP-6, the chair's ruling 3 on REVIEW-UPKEEP-2 (C6): EVERY EFFECT OF A CRISIS ON A DEFENCE
+  // SCORE IS A ROW OF THE ONE CRISIS TABLE. The Crime part reads crime before the stress multiplier; what a
+  // crisis did to crime through that multiplier is its table row's `crime`, at the size it had (so no
+  // famine or siege rating moves); wartime has no such row (its one row is the supply drain).
+  test('RED-FIRST: the Crime part answers to the crisis table alone, and wartime adds nothing to crime', () => {
+    let attributed = 0;
+    for (const [key, s] of Object.entries(births)) {
+      const forced = rows.find((r) => r.key === key).stress;
+      if (!forced) continue;
+      const keep = keepOfRecord(s.economicState);
+      const crimeOf = (x) => defencePartsOf(x, keep).find((p) => p.id === 'crime');
+      const withoutConfigStress = { ...s, config: { ...s.config, stressTypes: [], stressType: undefined } };
+      expect(crimeOf(withoutConfigStress)?.points ?? 0, `${key}: crime reads no stress multiplier`).toBe(crimeOf(s)?.points ?? 0);
+      const crime = crimeOf(s);
+      if (forced === 'wartime') expect(Boolean(crime?.crisis && Object.hasOwn(crime.crisis, 'wartime')), `${key}: no wartime crime`).toBe(false);
+      if ((forced === 'famine' || forced === 'under_siege') && crime?.crisis && Object.hasOwn(crime.crisis, forced)) attributed += 1;
+    }
+    expect(DEFENCE_TUNING.crises.famine.crime, 'famine\'s crime row').toBeGreaterThan(1);
+    expect(DEFENCE_TUNING.crises.under_siege.crime, 'the siege\'s crime row').toBeGreaterThan(1);
+    expect(Object.hasOwn(DEFENCE_TUNING.crises.wartime, 'crime'), 'wartime has no crime row').toBe(false);
+    expect(attributed, 'anchored: the record shows the crisis\'s share of crime').toBeGreaterThan(0);
+  });
+
   test('THE PROOF OF DERIVED: store, strip the profile, recompute from the record — equal field for field', () => {
     let equal = 0;
     for (const [key, s] of Object.entries(births)) {

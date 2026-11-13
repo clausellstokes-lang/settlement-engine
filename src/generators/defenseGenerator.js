@@ -200,7 +200,14 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
   const magicExists = config.magicExists !== false;
   const magPri = magicOn ? pri.magic : 0;
   const relPri = pri.religion;
-  const crimEff = Math.round(flags.criminalEffective);
+  // Crime: the reading before the stress multiplier, then each crisis in force by its table row's `crime`
+  // (COHERENCE-UPKEEP-6, the chair's ruling 3: every effect of a crisis on a defence score is a row of the one
+  // crisis table; wartime has none). Floor and scale as the reading's own: 2 at least, 100 at most.
+  /** @type {Array<[string, { crime: number }]>} */
+  const crimeRows = /** @type {any} */ (Object.entries(W.crises).filter(([k, row]) => stressSet.has(k) && Object.hasOwn(row, 'crime')));
+  const crimeOf = (/** @type {Array<[string, any]>} */ list) => Math.max(2, Math.min(100, list.reduce((a, [, row]) => a * row.crime, flags.criminalPreStress)));
+  const crimEff = Math.round(crimeOf(crimeRows));
+  const crimBase = Math.round(crimeOf([]));
   const names = defenseTraditionNamesOf(institutions);
   const G = W.traditionGates;
   const t = {
@@ -325,7 +332,13 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
   add('GROUND', 'folk', { mon: Object.hasOwn(W.threat.folk, threat) ? W.threat.folk[threat] : 0 });
   if (threat === 'plagued') add('GROUND', 'plaguedCountry', { mon: W.threat.plaguedCountry });
   // AGAINST: crime works against order.
-  if (crimEff) add('AGAINST', 'crime', { int: -Math.round(crimEff * W.crime.int) });
+  if (crimEff) {
+    add('AGAINST', 'crime', { int: -Math.round(crimEff * W.crime.int) });
+    // The record shows each crisis's share of what it added to crime (its row's `crime` above one).
+    const added = Math.round(crimEff * W.crime.int) - Math.round(crimBase * W.crime.int);
+    const weight = crimeRows.reduce((a, [, row]) => a + Math.abs(row.crime - 1), 0);
+    if (added && weight) parts[parts.length - 1].crisis = Object.fromEntries(crimeRows.map(([k, row]) => [k, added * Math.abs(row.crime - 1) / weight]));
+  }
   // Terrain strengthens what is built and stands (its military points).
   if (terrain !== 1) {
     const base = parts.filter((p) => p.group === 'BUILT' || p.group === 'STANDS').reduce((a, p) => a + Math.max(0, p.dims.mil || 0), 0);

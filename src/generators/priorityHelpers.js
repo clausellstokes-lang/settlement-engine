@@ -289,6 +289,7 @@ export const evaluateWaterDependency = (config = {}, institutions = []) => {
  * @param {Array}  institutions  - Settlement institution objects
  * @returns {{
  *   criminalEffective: number,
+ *   criminalPreStress: number,
  *   militaryEffective: number,
  *   economyOutput:     number,
  *   religionInfluence: number,
@@ -375,14 +376,15 @@ export const getInstFlags = (config = {}, institutions = []) => {
   const religionSuppressCrime = Math.max(0.72, 1 - (pri.religion - 50) / 290);
   const criminalInstMult      = inst.hasCriminalInst ? 1.0 : 0.55;
 
-  const criminalEffective = Math.max(2, clamp(
+  // The crime reading BEFORE the stress multiplier (COHERENCE-UPKEEP-6, the chair's ruling 3 on REVIEW-UPKEEP-2):
+  // defence's Crime part reads this, and each crisis's effect on crime is a row of defence's one crisis table.
+  const criminalPreStress =
     pri.criminal      *
     militarySuppressCrime *
     economyModCrime   *
     religionSuppressCrime *
-    criminalInstMult  *
-    crimeStressMult
-  ));
+    criminalInstMult;
+  const criminalEffective = Math.max(2, clamp(criminalPreStress * crimeStressMult));
 
   // ── Military effective score (0–100) ─────────────────────────────────────
   // Garrison quality scales with economic investment; high crime degrades effectiveness.
@@ -453,6 +455,7 @@ export const getInstFlags = (config = {}, institutions = []) => {
 
   return {
     criminalEffective,
+    criminalPreStress,
     militaryEffective,
     economyOutput,
     religionInfluence,
