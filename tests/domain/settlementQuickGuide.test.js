@@ -108,9 +108,12 @@ describe('composeSettlementQuickGuide', () => {
       institutions: [{ name: 'Market square' }],
     });
 
+    // RE-KEYED (R2-CODE-B item 5, the chair's size ruling of 2026-11-13): a civic square (the civic-ritual
+    // plaza) is a size error in a hamlet, so the hamlet's phrase is said at its size; the identity this
+    // pin holds — the culture's design terms, never the filing word — is unchanged.
     expect(guide.identitySentence).toBe(
-      'Edznaxochitl is a Mesoamerican-inspired hamlet of 130 people, built around '
-      + 'a civic-ritual plaza, tribute, and market-and-waterworks.',
+      'Edznaxochitl is a Mesoamerican-inspired hamlet of 130 people, built on tribute, '
+      + 'market and waterworks.',
     );
   });
 

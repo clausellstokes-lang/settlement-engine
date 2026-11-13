@@ -21,6 +21,7 @@ import { institutionDisplayName } from '../display/institutionDisplayName.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { waterAccessKind } from '../tradeRouteSemantics.js';
 import { resolveTerrain } from '../resolveTerrain.js';
+import { populationBandOf } from '../facts/populationBand.js';
 import { pickVariant } from '../../kernel/proseHash.js';
 import { voicedLineOf } from './tonightSheet.js';
 
@@ -179,7 +180,7 @@ function composeIdentity(settlement) {
   const article = articleFor(descriptors);
 
   // X-43: the seat of government by its real name, here as on the Overview strip.
-  const phrase = seatIntoPhrase(scopePhrase(cultureKey, settlement), settlement);
+  const phrase = scopeAtSize(seatIntoPhrase(scopePhrase(cultureKey, settlement), settlement), settlement);
   if (phrase) {
     return sentence(`${name} is ${article} ${descriptors}${populationPhrase}, ${phrase}`);
   }
@@ -280,7 +281,7 @@ function scopeAgainstRecord(phrase, source) {
   if (roster && out.includes('on pasture and earthwork') && !factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (source)).defence.walls) {
     out = out.replace('on pasture and earthwork', 'on pasture');
   }
-  if (!config || typeof config !== 'object') return out;
+  if (!config || typeof config !== 'object') return scopeAtSize(out, source);
   const terrain = resolveTerrain(config);
   const water = waterAccessKind(terrain, config.tradeRouteAccess);
   const route = cleanText(config.tradeRouteAccess).toLowerCase();
@@ -310,6 +311,55 @@ function scopeAgainstRecord(phrase, source) {
         : route === 'port' || route === 'river'
           ? out.replace('the caravan road', 'the river trade')
           : out;
+  }
+  // pasture: a small place's herding ground, only where the record's resources hold grazing land
+  if (out.includes(', on pasture') && Array.isArray(/** @type {{ nearbyResources?: unknown }} */ (config).nearbyResources)
+    && !(/** @type {{ nearbyResources: unknown[] }} */ (config).nearbyResources).includes('grazing_land')) {
+    out = out.replace(', on pasture and earthwork', '').replace(', on pasture', '');
+  }
+  return scopeAtSize(out, source);
+}
+
+/** The tiers in which plural streets, an agora, a civic square or masonry building are a size error. */
+const TINY_TIERS = new Set(['thorp', 'hamlet']);
+
+/**
+ * THE SCOPE PHRASE AT THE PLACE'S SIZE (R2-CODE-B item 5; the cold list REVIEW-W2A-3 #323 "built in
+ * masonry around a civic square" for a hamlet of 41, #365 "built around kin districts" for a hamlet
+ * of 53, #498 "in quarters by trade and kin" for a village of 105, #816 "built around the agora"
+ * where no market stands). THE CHAIR'S RULING of 2026-11-13 (the instrument lane's standard,
+ * registeredWords.js `streets` and `quarters`): plural streets, an agora, a civic or market square,
+ * building in masonry, neighbourhoods and suburbs are a size error in a thorp or a hamlet (the
+ * record's `tier`); quarters, districts (and wards, the same thing) are a size error below the
+ * middling population band (facts/populationBand.js :: populationBandOf). An agora is a market, so
+ * it also reads the market fact (factsOf(s).market). The clause that is false is struck or said at
+ * the place's size; nothing is added that the record does not hold. A record with no tier or
+ * population is legacy and unread. Display-time only.
+ * @param {string} phrase @param {SettlementQuickGuideSource} source @returns {string}
+ */
+function scopeAtSize(phrase, source) {
+  if (!phrase) return phrase;
+  const tier = cleanText(source?.tier).toLowerCase();
+  const tiny = TINY_TIERS.has(tier);
+  const small = populationBandOf(/** @type {{ population?: unknown, tier?: unknown }} */ (source)) === 'small';
+  const roster = Array.isArray(/** @type {{ institutions?: unknown }} */ (source)?.institutions);
+  const noMarket = roster && factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (source)).market === false;
+  let out = phrase;
+  if (tiny) {
+    out = out.replace('built in masonry around a civic square, and run by', 'run by')
+      .replace('built around a civic-ritual plaza, on tribute and the ritual calendar', 'built on tribute and the ritual calendar')
+      .replace('built around a civic-ritual plaza, tribute, and market-and-waterworks', 'built on tribute, market and waterworks');
+  }
+  if (tiny || noMarket) {
+    out = out.replace('built around the agora and the harbour', 'built around the harbour')
+      .replace('built around the agora, and run by', 'run by')
+      .replace('built around the agora, ', 'built ');
+  }
+  if (small) {
+    out = out.replace('built around kin districts and an assembly ground', 'built around kin and an assembly ground')
+      .replace(', in quarters by trade and kin', ', kin by kin')
+      .replace(', in quarters by trade,', ',')
+      .replace('built in wards and courtyards', 'built around courtyards');
   }
   return out;
 }
