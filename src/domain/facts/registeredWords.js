@@ -28,6 +28,7 @@
  */
 import { INSTITUTION_SERVICES } from '../../data/institutionServices.js';
 import { magicPractitioners } from '../magicReliance.js';
+import { CRISIS_FAMILY_KINDS, CRISIS_KIND_ALIASES, CRISIS_KIND_WORDS, FACT_DIMENSIONS, parseAtom } from './factVocabulary.js';
 
 /**
  * The facts a rule reads: `factsOf(record)`'s own frozen reading.
@@ -46,7 +47,14 @@ import { magicPractitioners } from '../magicReliance.js';
 /**
  * @typedef {object} RegisteredWord
  * @property {RegExp} words the words that name it
- * @property {ReadonlyArray<string>} atoms the atoms whose declaration answers for it (its disqualifier)
+ * @property {ReadonlyArray<string>} atoms THE WORD'S TRUTH, as presence atoms: the word is true where ANY of them holds
+ *   (W2-B-DECLARE second seat, F3: a declaration answers the word only if it IMPLIES it — `declarationImplies`)
+ * @property {ReadonlyArray<string>} [sufficient] presence atoms that each imply the word without being its definition
+ *   (`commander` implies a garrison); read on the naming side only
+ * @property {Readonly<Record<string, ReadonlyArray<string>>>} [bands] a band dimension → the bands in which the word is
+ *   true (`quarters`: population middling or large); a band declaration answers only if every band it admits is here
+ * @property {ReadonlyArray<string>} [kinds] crisis kinds: the word is true where one of them is in force
+ * @property {ReadonlyArray<string>} [notKinds] crisis kinds: the word is true where NONE of them is in force (open trade)
  * @property {(facts: WordFacts, names: string[], record?: WordRecord | null, sentence?: string) => boolean} absent true when the town makes it false
  * @property {(facts: WordFacts, names: string[], record?: WordRecord | null, sentence?: string) => boolean} [presentForDenial] a narrower test for a denial
  * @property {boolean} [denialOnly] read on the denial side only
@@ -81,12 +89,12 @@ export const COURT_HOUSES = Object.freeze(new Set(Object.entries(INSTITUTION_SER
 export const THINGS = Object.freeze({
   walls: {
     words: /\b(?:town|city) walls\b|\bthe walls\b|\bwalls and gates\b|\bramparts?\b|\bbattlements\b/i,
-    atoms: ['walls', 'palisade', 'gate'],
+    atoms: ['walls', 'palisade'],
     absent: (f) => !f.defence.walls && !f.defence.palisade,
   },
   garrison: {
     words: /\bgarrison(?:s|ed)?\b|\bbarracks\b/i,
-    atoms: ['garrison', 'soldiers', 'commander'],
+    atoms: ['garrison'], sufficient: ['commander'],
     absent: (f) => !f.defence.garrison,
   },
   militia: { words: /\bmilitias?\b/i, atoms: ['militia'], absent: (f) => !f.defence.militia },
@@ -97,12 +105,12 @@ export const THINGS = Object.freeze({
   },
   mercenary: {
     words: /\bmercenar(?:y|ies)\b|\bsellswords?\b|\bfree compan(?:y|ies)\b/i,
-    atoms: ['mercenary', 'soldiers'],
+    atoms: ['mercenary'],
     absent: (f) => !f.defence.mercenary,
   },
   docks: {
     words: /\bdocks?\b|\bharbou?rs?\b|\bquays?\b|\bwharf\b|\bwharves\b|\bdockside\b|\bdockworkers?\b|\bdockhands?\b/i,
-    atoms: ['docks', 'navigable', 'coast', 'river', 'port', 'institution: docks', 'route: port', 'route: river'],
+    atoms: ['navigable', 'docks', 'institution: docks'], sufficient: ['coast', 'river', 'port', 'route: port', 'route: river'],
     absent: (f) => !f.water.navigable && !f.hasInstitution('docks'),
     presentForDenial: (f) => f.hasInstitution('docks'),
   },
@@ -115,18 +123,18 @@ export const THINGS = Object.freeze({
   },
   temple: {
     words: /\btemples?\b|\bchurch(?:es)?\b|\bchapels?\b|\bshrines?\b|\bcathedrals?\b|\babbey\b/i,
-    atoms: ['temple', 'sacredHouse', 'clergy', 'priest', 'institution: temple', 'institution: monastery'],
+    atoms: ['sacredHouse'], sufficient: ['temple', 'institution: temple', 'institution: monastery'],
     absent: (f) => !f.sacredHouse,
   },
   prison: {
     words: /\bprisons?\b|\bgaols?\b|\bjails?\b/i,
-    atoms: [],
+    atoms: ['prison'],
     leaf: 'institutions.js :: liveInstitutionNames, by name; defence.js answers its atom: one home owed (W2-A-LEAVES)',
     absent: (_f, names) => !names.some((n) => /prison|gaol|jail|stocks/i.test(n)),
   },
   court: {
     words: /\bcourthouses?\b|\bcourts? of law\b|\blaw ?courts?\b/i,
-    atoms: [],
+    atoms: ['court'],
     leaf: 'institutions.js :: liveInstitutionNames and COURT_HOUSES; defence.js answers its atom: one home owed (W2-A-LEAVES)',
     absent: (_f, names) => !names.some((n) => /court/i.test(n) || COURT_HOUSES.has(n.toLowerCase())),
   },
@@ -138,7 +146,7 @@ export const THINGS = Object.freeze({
   guildhall: { words: /\bguild ?halls?\b/i, atoms: ['guild'], absent: (f) => !f.guild },
   war: {
     words: /\bthe war\b|\bwartime\b|\bat war\b|\bthe armies\b/i,
-    atoms: ['war: front', 'war: aggressor', 'war: at war', 'war: peace', 'crisis: wartime', 'crisis: under_siege', 'crisis: occupied'],
+    atoms: ['war: front', 'war: aggressor', 'war: at war'], kinds: ['wartime', 'under_siege', 'occupied'],
     absent: (f) => f.warState === 'peace' && !f.crisis?.has?.('wartime') && !f.crisis?.has?.('under_siege') && !f.crisis?.has?.('occupied'),
   },
   // THE LAW (the chair's ruling A of 2026-11-11, "denials"): read on the DENIAL side only
@@ -149,7 +157,7 @@ export const THINGS = Object.freeze({
   // law of anywhere, not of this town.
   law: {
     words: /\blaw enforcement\b|\bofficial recourse\b|\blaw\b(?! permits)/i,
-    atoms: ['watch', 'garrison', 'guardPresence'],
+    atoms: ['watch', 'garrison'],
     absent: (f, names) => !f.defence.watch && !f.defence.garrison
       && !names.some((n) => /court|council|\bhall\b|headman|magistrat|reeve|justiciar|sheriff/i.test(n)),
     denialOnly: true,
@@ -194,49 +202,57 @@ export const NEW_WORDS = Object.freeze({
   siege: {
     kind: 'state', layer: 'P', leaf: 'crisisKind.js :: crisisFactsOf (under_siege)',
     words: /\bunder siege\b|\bbesieged\b|\bsiege lines?\b|\bblockaded\b/i,
-    atoms: ['crisis: under_siege', 'crisis: threat', 'crisis: hunger'],
+    atoms: [], kinds: ['under_siege'],
     absent: (f) => !inForce(f, 'under_siege'),
   },
   famine: {
     kind: 'state', layer: 'P', leaf: 'famine.js :: famineOf · crisisKind.js (famine)',
-    words: /\bfamine\b|\bstarv(?:ing|ation)\b/i,
-    atoms: ['crisis: famine', 'crisis: hunger', 'famine', 'starving', 'food:'],
-    absent: (f) => !inForce(f, 'famine') && f?.famine?.famine !== true && !(f?.famine?.known === true && f?.famine?.starvingAllowed === true),
+    words: /\bfamine\b/i,
+    atoms: ['famine'], kinds: ['famine'], bands: { food: ['famine'] },
+    absent: (f) => !inForce(f, 'famine') && f?.famine?.famine !== true,
+  },
+  // F3 (the second seat): "starving" is its own word, read by its own atom (`famine.js :: famineOf`, starvingAllowed:
+  // the food record's band is deficit or famine), so a declaration of it implies it
+  starving: {
+    kind: 'state', layer: 'P', leaf: 'famine.js :: famineOf (starvingAllowed) · crisisKind.js (famine)',
+    words: /\bstarv(?:ing|ation)\b/i,
+    atoms: ['starving'], kinds: ['famine'], bands: { food: ['famine', 'deficit'] },
+    absent: (f) => !inForce(f, 'famine') && !(f?.famine?.known === true && f?.famine?.starvingAllowed === true),
   },
   plague: {
     kind: 'state', layer: 'P', leaf: 'crisisKind.js (plague_onset)',
     words: /\bplague\b|\bpestilence\b|\bepidemic\b/i,
-    atoms: ['crisis: plague_onset'],
+    atoms: [], kinds: ['plague_onset'],
     absent: (f) => !inForce(f, 'plague_onset'),
   },
   occupation: {
     kind: 'state', layer: 'P', leaf: 'crisisKind.js (occupied) · rulerKind.js (occupier)',
     words: /\b(?:the|foreign|under) occupation\b|\boccupiers?\b|\boccupying (?:force|army|power|garrison)s?\b/i,
-    atoms: ['crisis: occupied', 'crisis: threat', 'ruler: occupier'],
+    atoms: ['ruler: occupier'], kinds: ['occupied'],
     absent: (f) => !inForce(f, 'occupied') && f?.rulerKind !== 'occupier',
   },
   revolt: {
     kind: 'state', layer: 'P', leaf: 'crisisKind.js (insurgency, slave_revolt)',
     words: /\binsurgen(?:cy|ts?)\b|\brebellion\b|\buprising\b|\bslave revolt\b/i,
-    atoms: ['crisis: insurgency', 'crisis: slave_revolt', 'crisis: unrest'],
+    atoms: [], kinds: ['insurgency', 'slave_revolt'],
     absent: (f) => !inForce(f, 'insurgency') && !inForce(f, 'slave_revolt'),
   },
   refugees: {
     kind: 'state', layer: 'P', leaf: 'crisisKind.js (mass_migration) · migration.js :: migrationOf',
     words: /\brefugees?\b/i,
-    atoms: ['crisis: mass_migration', 'migration: influx'],
+    atoms: ['migration: influx'], kinds: ['mass_migration'],
     absent: (f) => !inForce(f, 'mass_migration') && !(f?.migration?.active === true && f?.migration?.direction === 'influx'),
   },
   succession: {
     kind: 'state', layer: 'P', leaf: 'crisisKind.js (succession_void, politically_fractured)',
     words: /\bsuccession (?:crisis|struggle|void|dispute)\b|\bthe (?:empty|vacant) (?:seat|throne|chair)\b/i,
-    atoms: ['crisis: succession_void', 'crisis: politically_fractured', 'crisis: succession'],
+    atoms: [], kinds: ['succession_void', 'politically_fractured'],
     absent: (f) => !inForce(f, 'succession_void') && !inForce(f, 'politically_fractured'),
   },
   quarters: {
     kind: 'size', layer: 'P', leaf: 'populationBand.js :: populationBandOf',
     words: /\bdistricts?\b|\b(?:poor|poorer|poorest|rich|richer|wealthy|merchant|merchants'|craft|crafts|artisan|artisans'|foreign|old|new|temple|harbour|dock|river|eastern|western|northern|southern|outer|inner|lower|upper|noble|guild|market|slum|working)\s+quarters?\b|\burban\b|\bmetropolitan\b|\bneighbou?rhoods\b|\bslums?\b|\btenements?\b/i,
-    atoms: ['population:', 'tier:'],
+    atoms: [], bands: { population: ['middling', 'large'] },
     absent: (f) => f?.populationBand === 'small',
   },
   powersCount: {
@@ -261,7 +277,7 @@ export const NEW_WORDS = Object.freeze({
   religiousHouses: {
     kind: 'thing', layer: 'P', leaf: 'factsOf.js :: sacredHouse (pattern 8)',
     words: /\breligious houses?\b|\bhouses? of worship\b/i,
-    atoms: ['sacredHouse', 'temple', 'church', 'clergy', 'institution: temple', 'institution: monastery'],
+    atoms: ['sacredHouse'], sufficient: ['temple', 'institution: temple', 'institution: monastery'],
     absent: (f) => f?.sacredHouse !== true,
   },
   practitioner: {
@@ -298,6 +314,107 @@ export const NEW_WORD_IDS = Object.freeze(Object.keys(NEW_WORDS));
 
 /** Every registered word: the things and the new words. @type {Readonly<Record<string, RegisteredWord>>} */
 export const REGISTERED_WORDS = Object.freeze({ ...THINGS, ...NEW_WORDS });
+
+// ── A DECLARATION THAT IMPLIES THE WORD (W2-B-DECLARE second seat, F3) ─────────────────────────────────────────
+
+/**
+ * A declaration as the walker reads it around a line: the generator door's own shape (`factVocabulary.js ::
+ * Declaration`) — `needs` (presence and band atoms, and crisis atoms written `crisis: …`), `excludes`, `crisis`
+ * (the crisis dimension's values, a disjunction).
+ * @typedef {{ needs: ReadonlyArray<string>, excludes: ReadonlyArray<string>, crisis: ReadonlyArray<string> }} WordDeclaration
+ */
+
+/** Two atoms name the same fact (`temple` and `institution: temple` stay two spellings). @param {string} a @param {string} b */
+const sameAtom = (a, b) => {
+  const x = parseAtom(a); const y = parseAtom(b);
+  return !!x && !!y && x.dimension === y.dimension && x.key === y.key && x.op === null && y.op === null;
+};
+
+/**
+ * The crisis kinds a crisis value can mean, or null when it can mean more than the kinds (`any`; `hunger`, which is
+ * also on under any crisis while the food record reads a deficit). `calm` means none.
+ * @param {string} v @returns {ReadonlyArray<string> | null}
+ */
+function kindsOfValue(v) {
+  const k = CRISIS_KIND_ALIASES[v] || v;
+  if (k === 'calm') return [];
+  if (k === 'any' || k === 'hunger') return null;
+  /** @type {Readonly<Record<string, ReadonlyArray<string>>>} */ const families = CRISIS_FAMILY_KINDS;
+  if (Object.hasOwn(families, k)) return families[k];
+  return CRISIS_KIND_WORDS.includes(k) ? [k] : null;
+}
+
+/** The crisis disjunction a declaration REQUIRES (its `crisis` values and any `crisis: …` atom on its needs). @param {WordDeclaration} d */
+function requiredCrisis(d) {
+  /** @type {string[]} */ const out = [...d.crisis];
+  for (const a of d.needs) { const atom = parseAtom(a); if (atom?.dimension === 'crisis') out.push(...(atom.values || ['any'])); }
+  return out;
+}
+
+/** The crisis kinds a declaration's `excludes` forbids (`crisis` bare: every kind). @param {WordDeclaration} d */
+function forbiddenKinds(d) {
+  const out = new Set();
+  for (const a of d.excludes) {
+    const atom = parseAtom(a);
+    if (atom?.dimension !== 'crisis') continue;
+    for (const v of atom.values || CRISIS_KIND_WORDS) for (const k of kindsOfValue(v) || []) out.add(k);
+  }
+  return out;
+}
+
+/** The bands a band atom admits on its dimension's ladder. @param {string} a @returns {{ dimension: string, admitted: string[] } | null} */
+function bandsAdmitted(a) {
+  const atom = parseAtom(a);
+  const order = atom && FACT_DIMENSIONS[atom.dimension]?.order;
+  if (!atom || !order || atom.op === null) return null;
+  const at = order.indexOf(String(atom.value));
+  const keep = (/** @type {number} */ i) => ({ '≥': i >= at, '>': i > at, '≤': i <= at, '<': i < at }[/** @type {string} */ (atom.op)] ?? i === at);
+  return { dimension: atom.dimension, admitted: order.filter((_, i) => keep(i)) };
+}
+
+/**
+ * THE RULE THE WALKER ASKS (the chair's brief to the second seat, F3: "require the declaration to IMPLY the word: the
+ * positive condition, or its negation where the line denies; for a banded value, only the bands in which the word is
+ * true"). The word's truth is the disjunction of its `atoms`, its `kinds` in force and its `bands`, or — for a word of
+ * normal times — that none of its `notKinds` is in force.
+ *   naming   the declaration admits the line only where the word is TRUE: it needs one of the word's atoms (or a
+ *            `sufficient` one), or a band of a dimension whose every admitted band is a true band, or a crisis whose
+ *            every value means only the word's kinds; a word of normal times is answered by an exclusion of its kinds
+ *            or by `calm`.
+ *   denies   the declaration admits the line only where the word is FALSE: every atom excluded, every kind excluded,
+ *            each band dimension held to bands where it is false; a word of normal times by a crisis that means only
+ *            its kinds.
+ * A word with no truth written (a count, whose atom waits) is implied by nothing. Never `crisis: threat` for a siege,
+ * never a small population for quarters, never a thing's own negation for the thing.
+ * @param {string} id a registered word's id
+ * @param {WordDeclaration} decl
+ * @param {'names'|'denies'} side
+ * @returns {boolean}
+ */
+export function declarationImplies(id, decl, side) {
+  const w = REGISTERED_WORDS[id];
+  if (!w) return false;
+  const atoms = w.atoms || []; const kinds = w.kinds || []; const bands = Object.entries(w.bands || {}); const notKinds = w.notKinds || [];
+  const req = requiredCrisis(decl); const forbidden = forbiddenKinds(decl);
+  const reqKinds = req.length ? req.map(kindsOfValue) : null;
+  const reqWithin = (/** @type {ReadonlyArray<string>} */ set) => !!reqKinds && reqKinds.every((ks) => ks !== null && ks.length > 0 && ks.every((k) => set.includes(k)));
+  const reqCalm = !!reqKinds && reqKinds.every((ks) => ks !== null && ks.length === 0);
+  const bandHeld = (/** @type {(admitted: string[], trueBands: ReadonlyArray<string>) => boolean} */ ok) => bands.some(([dim, trueBands]) =>
+    decl.needs.some((a) => { const b = bandsAdmitted(a); return !!b && b.dimension === dim && ok(b.admitted, trueBands); }));
+  if (side === 'names') {
+    if (decl.needs.some((a) => [...atoms, ...(w.sufficient || [])].some((x) => sameAtom(a, x)))) return true;
+    if (bandHeld((admitted, t) => admitted.length > 0 && admitted.every((b) => t.includes(b)))) return true;
+    if (kinds.length && reqWithin(kinds)) return true;
+    if (notKinds.length && (notKinds.every((k) => forbidden.has(k)) || reqCalm)) return true;
+    return false;
+  }
+  if (notKinds.length) return reqWithin(notKinds);
+  if (!atoms.length && !kinds.length && !bands.length) return false;
+  const atomsOff = atoms.every((x) => decl.excludes.some((a) => sameAtom(a, x)));
+  const kindsOff = kinds.every((k) => forbidden.has(k)) || (kinds.length > 0 && reqCalm);
+  const bandsOff = bands.every(([dim, t]) => decl.needs.some((a) => { const b = bandsAdmitted(a); return !!b && b.dimension === dim && b.admitted.every((x) => !t.includes(x)); }));
+  return atomsOff && kindsOff && bandsOff;
+}
 
 /**
  * A NEGATION the sentence itself states ("no militia could handle", "without courts or prison"):

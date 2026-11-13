@@ -30,14 +30,14 @@
  * Pure apart from the file reads of arm 1; arm 2 reads the records it is handed.
  */
 import { readFileSync, readdirSync, statSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, posix } from 'node:path';
 import { createRequire } from 'node:module';
 
 import { timeBandOf } from '../../src/domain/display/heraldCausalGrammar.js';
 import {
-  REGISTERED_WORDS, THINGS, newWordsNamedIn, sentencesOf, thingsNamedIn, thingsDeniedIn, presentForDenial,
+  THINGS, declarationImplies, newWordsDeniedIn, newWordsNamedIn, sentencesOf, thingsNamedIn, thingsDeniedIn, presentForDenial,
 } from '../../src/domain/facts/registeredWords.js';
-import { CRISIS_KIND_ALIASES, MARK_DIMENSION_ATOM } from '../../src/domain/facts/factVocabulary.js';
+import { CRISIS_KIND_ALIASES, declarationOfMarks, declarationOfTags } from '../../src/domain/facts/factVocabulary.js';
 
 const require = createRequire(import.meta.url);
 const ts = require('typescript');
@@ -80,21 +80,30 @@ export {
 // ── ARM 1: the source ─────────────────────────────────────────────────────────────────────────
 
 /**
- * THE CARRIERS ARM 1 CREDITS ARE THE CARRIERS A DOOR ENFORCES (W2-B-DECLARE item 1; the chair's record 294,
- * ruling 5: "the walker accepts three carriers of a declaration that the draw does not enforce"). A literal
- * counts as declared only where the declaration around it is one a draw door READS:
- *   `needs`, `excludes`  the generator door, `drawDeclared` / `filterDeclared` (`factVocabulary.js :: declarationOf`);
- *   `poolDeclares`       both doors' pool-level atoms (`drawDeclared`'s option; the kernel's `eligibleVariants`);
- *   `marks`              the corpus door, and ONLY on a state variant (an object with a numeric `vid`): the
- *                        kernel reads a variant's marks as atoms there alone (`stateProseKernel.js ::
- *                        variantFactDeclaration`; the causal register's marks are open arm names);
- *   `tags`               ONLY in a file whose table a door draws `{ tagged: true }` (`TAGGED_TABLE_FILES`):
- *                        the vocabulary reads `tags` at no other site (`declarationOf`).
- * `cast` (`conflictIssues.js`) and `requires` (`spatialData.js`, `resourceData.js`) are read by their own
- * tables' code and by no draw door, so they declare nothing here. A literal they alone covered is banked in
- * `presumedThings.widened.register.json` under `carrier`, or cured by a door's declaration.
+ * THE CARRIERS ARM 1 CREDITS ARE THE CARRIERS A DOOR ENFORCES, ON AN OBJECT A DOOR DRAWS (W2-B-DECLARE item 1; the
+ * chair's record 294, ruling 5; the second seat, F3: "credit a carrier only on an object a door draws — an element of a
+ * pool handed to the declared draw, or a kernel pool"). A literal counts as declared only where the declaration around
+ * it is one a draw door READS, on an object a door is HANDED:
+ *   `needs`, `excludes`, `crisis`  the generator door (`factVocabulary.js :: declarationOf`);
+ *   `poolDeclares`       the door's pool-level atoms;
+ *   `marks`              the corpus door, on a state variant (an object with a numeric `vid`) in a kernel pool file;
+ *   `tags`               ONLY in a file whose table a door draws `{ tagged: true }` (`TAGGED_TABLE_FILES`);
+ *   a BUILDER's array    a call to a function of the file whose returned rows put that argument on `needs` or
+ *                        `excludes` (a sibling set's `declaredSet(text, needs, twin)`), inside a drawn table.
+ * WHAT A DOOR DRAWS (`drawnRanges`): the pool and sibling arguments of every door call in the walker's roots, followed
+ * back through local variables, a function's parameters to its callers, a function's returns and imports, to the
+ * top-level tables they read; and every state variant of a kernel pool file. An object outside them declares nothing,
+ * whatever it carries: `{ needs: ['militia'], blurb }` printed by `X.blurb` is undeclared.
  */
-const DECL_PROPS = new Set(['needs', 'excludes', 'poolDeclares']);
+const DECL_PROPS = new Set(['needs', 'excludes', 'poolDeclares', 'crisis']);
+
+/** THE DOORS and the argument positions that hand them lines (`drawDeclared.js`). */
+export const DOOR_ARGS = Object.freeze({
+  drawDeclared: [0], filterDeclared: [0], resolveDeclared: [0], resolveSibling: [1], resolveSiblingSentences: [1], noteDeclared: [1],
+});
+
+/** The kernel's pool files: their state variants are drawn by `stateProseKernel.js :: eligibleVariants`. */
+export const KERNEL_POOL_FILE = /^src\/data\/dossierStateProse\/[^/]+\.generated\.js$/;
 
 /**
  * The files whose tables a door draws `{ tagged: true }`, each with its site: `tags` declares there and
@@ -110,30 +119,216 @@ function isStateVariant(obj) {
     && (ts.isIdentifier(p.name) || ts.isStringLiteral(p.name)) && p.name.text === 'vid' && ts.isNumericLiteral(p.initializer));
 }
 
+/** @param {any} p a property's name node @returns {string|null} */
+const propName = (p) => (p && (ts.isIdentifier(p) || ts.isStringLiteral(p)) ? p.text : null);
+
+/** @param {string} from the importing file @param {string} spec @param {Set<string>} known @returns {string|null} */
+function resolveSpec(from, spec, known) {
+  if (!spec.startsWith('.')) return null;
+  const base = posix.normalize(posix.join(posix.dirname(from), spec));
+  for (const c of [base, `${base}.js`, `${base}/index.js`, `${base}.jsx`]) if (known.has(c)) return c;
+  return null;
+}
+
 /**
- * The declaration properties of one object literal that a door enforces (`DECL_PROPS`, and `marks` / `tags`
- * under their conditions above), their strings collected into `out`. @param {any} obj @param {string} rel @param {string[]} out
+ * THE DRAWN RANGES: per file, the source ranges a door is handed (see the header above). Static and conservative:
+ * a whole top-level table is drawn when any of it is handed to a door.
+ * @param {ReadonlyArray<[string, string]>} files [rel, source] of every file the walker reads
+ * @returns {Map<string, Array<[number, number]>>}
+ */
+export function drawnRanges(files) {
+  const known = new Set(files.map(([rel]) => rel));
+  /** @type {Map<string, any>} */ const mods = new Map();
+  for (const [rel, src] of files) {
+    const sf = ts.createSourceFile(rel, src, ts.ScriptTarget.Latest, true, ts.ScriptKind.JSX);
+    const top = new Map(); const imports = new Map(); const exports = new Map(); const calls = [];
+    for (const st of sf.statements) {
+      if (ts.isVariableStatement(st)) for (const d of st.declarationList.declarations) { if (ts.isIdentifier(d.name)) top.set(d.name.text, d); }
+      else if (ts.isFunctionDeclaration(st) && st.name) top.set(st.name.text, st);
+      if ((ts.isVariableStatement(st) || ts.isFunctionDeclaration(st)) && st.modifiers?.some((m) => m.kind === ts.SyntaxKind.ExportKeyword)) {
+        if (ts.isVariableStatement(st)) for (const d of st.declarationList.declarations) { if (ts.isIdentifier(d.name)) exports.set(d.name.text, { rel, name: d.name.text }); }
+        else if (st.name) exports.set(st.name.text, { rel, name: st.name.text });
+      }
+      if (ts.isImportDeclaration(st) && ts.isStringLiteral(st.moduleSpecifier)) {
+        const from = resolveSpec(rel, st.moduleSpecifier.text, known);
+        const cl = st.importClause;
+        if (from && cl?.namedBindings && ts.isNamedImports(cl.namedBindings)) for (const e of cl.namedBindings.elements) imports.set(e.name.text, { rel: from, name: (e.propertyName || e.name).text });
+        if (from && cl?.namedBindings && ts.isNamespaceImport(cl.namedBindings)) imports.set(cl.namedBindings.name.text, { rel: from, name: '*' });
+      }
+      if (ts.isExportDeclaration(st) && st.exportClause && ts.isNamedExports(st.exportClause)) {
+        const from = st.moduleSpecifier && ts.isStringLiteral(st.moduleSpecifier) ? resolveSpec(rel, st.moduleSpecifier.text, known) : rel;
+        for (const e of st.exportClause.elements) if (from) exports.set(e.name.text, { rel: from, name: (e.propertyName || e.name).text, via: from !== rel });
+      }
+    }
+    const visit = (n) => { if (ts.isCallExpression(n)) calls.push(n); ts.forEachChild(n, visit); };
+    visit(sf);
+    mods.set(rel, { sf, top, imports, exports, calls });
+  }
+  /** @type {Map<string, Array<[number, number]>>} */ const ranges = new Map();
+  const mark = (rel, node) => { (ranges.get(rel) || ranges.set(rel, []).get(rel)).push([node.pos, node.end]); };
+  const seen = new Set();
+  /** the exported name's own file and top-level name, through re-exports */
+  const exported = (rel, name, hops = 0) => {
+    const m = mods.get(rel); const e = m?.exports.get(name);
+    if (!e) return m?.top.has(name) ? { rel, name } : null;
+    return e.via && hops < 4 ? exported(e.rel, e.name, hops + 1) : { rel: e.rel, name: e.name };
+  };
+  const callsTo = (rel, name) => {
+    /** @type {Array<[string, any]>} */ const out = [];
+    for (const [r, m] of mods) for (const c of m.calls) {
+      if (!ts.isIdentifier(c.expression)) continue;
+      const callee = c.expression.text;
+      if (r === rel && callee === name && m.top.has(name)) out.push([r, c]);
+      const imp = m.imports.get(callee);
+      if (imp) { const t = exported(imp.rel, imp.name); if (t && t.rel === rel && t.name === name) out.push([r, c]); }
+    }
+    return out;
+  };
+  const markTop = (rel, name, depth) => {
+    const k = `${rel}::${name}`; if (seen.has(k)) return; seen.add(k);
+    const d = mods.get(rel)?.top.get(name); if (!d) return;
+    mark(rel, d);
+    if (ts.isVariableDeclaration(d) && d.initializer) trace(rel, d.initializer, depth + 1, false);
+    else if (ts.isFunctionDeclaration(d)) traceReturns(rel, d, depth + 1);
+  };
+  const traceReturns = (rel, fn, depth) => {
+    if (fn.body && !ts.isBlock(fn.body)) { trace(rel, fn.body, depth, true); return; }
+    const visit = (n) => { if (ts.isReturnStatement(n) && n.expression) trace(rel, n.expression, depth, true); if (!ts.isFunctionLike(n)) ts.forEachChild(n, visit); };
+    if (fn.body) ts.forEachChild(fn.body, visit);
+  };
+  /** the declaration of an identifier in scope at `at`: a top-level name, a local variable, a parameter, an import */
+  const declOf = (rel, at, name) => {
+    for (let cur = at.parent; cur; cur = cur.parent) {
+      if (ts.isFunctionLike(cur)) {
+        const i = (cur.parameters || []).findIndex((p) => ts.isIdentifier(p.name) && p.name.text === name);
+        if (i >= 0) return { kind: 'param', fn: cur, index: i };
+      }
+      if ((ts.isForOfStatement(cur) || ts.isForInStatement(cur)) && ts.isVariableDeclarationList(cur.initializer)
+        && cur.initializer.declarations.some((d) => ts.isIdentifier(d.name) && d.name.text === name)) return { kind: 'local', init: cur.expression };
+      const stmts = ts.isSourceFile(cur) || ts.isBlock(cur) || ts.isModuleBlock(cur) || ts.isCaseClause(cur) ? cur.statements : null;
+      if (!stmts) continue;
+      for (const st of stmts) {
+        if (ts.isVariableStatement(st)) for (const d of st.declarationList.declarations) {
+          const binds = ts.isIdentifier(d.name) ? [d.name.text] : [];
+          if (!ts.isIdentifier(d.name)) { const v = (b) => { if (ts.isIdentifier(b)) binds.push(b.text); else ts.forEachChild(b, v); }; ts.forEachChild(d.name, v); }
+          if (binds.includes(name)) return ts.isSourceFile(cur) ? { kind: 'top' } : { kind: 'local', init: d.initializer };
+        }
+        if (ts.isFunctionDeclaration(st) && st.name?.text === name) return ts.isSourceFile(cur) ? { kind: 'top' } : { kind: 'localFn', fn: st };
+      }
+    }
+    return mods.get(rel)?.imports.has(name) ? { kind: 'import' } : null;
+  };
+  const fnName = (fn) => {
+    if (ts.isFunctionDeclaration(fn) && fn.name) return fn.name.text;
+    if (fn.parent && ts.isVariableDeclaration(fn.parent) && ts.isIdentifier(fn.parent.name)) return fn.parent.name.text;
+    return null;
+  };
+  /** follow every name an expression reads to the tables behind it */
+  function trace(rel, expr, depth, owned) {
+    if (!expr || depth > 8) return;
+    if (owned) mark(rel, expr);
+    const m = mods.get(rel);
+    const visit = (n) => {
+      if (ts.isIdentifier(n)) {
+        const p = n.parent;
+        if (p && ts.isPropertyAccessExpression(p) && p.name === n) return;
+        if (p && (ts.isPropertyAssignment(p) || ts.isMethodDeclaration(p)) && p.name === n) return;
+        const d = declOf(rel, n, n.text);
+        if (!d) return;
+        if (d.kind === 'top') markTop(rel, n.text, depth);
+        else if (d.kind === 'local') trace(rel, d.init, depth + 1, true);
+        else if (d.kind === 'localFn') traceReturns(rel, d.fn, depth + 1);
+        else if (d.kind === 'import') {
+          const imp = m.imports.get(n.text);
+          if (imp.name === '*') { if (p && ts.isPropertyAccessExpression(p) && p.expression === n) { const t = exported(imp.rel, p.name.text); if (t) markTop(t.rel, t.name, depth); } }
+          else { const t = exported(imp.rel, imp.name); if (t) markTop(t.rel, t.name, depth); }
+        } else if (d.kind === 'param') {
+          const name = fnName(d.fn);
+          const k = `${rel}::param::${d.fn.pos}::${d.index}`;
+          if (!name || seen.has(k)) return; seen.add(k);
+          const owner = mods.get(rel).top.has(name) ? [rel, name] : null;
+          for (const [r, c] of owner ? callsTo(owner[0], owner[1]) : mods.get(rel).calls.filter((c) => ts.isIdentifier(c.expression) && c.expression.text === name).map((c) => [rel, c])) {
+            if (c.arguments[d.index]) trace(r, c.arguments[d.index], depth + 1, true);
+          }
+        }
+        return;
+      }
+      ts.forEachChild(n, visit);
+    };
+    visit(expr);
+  }
+  for (const [rel, m] of mods) {
+    for (const c of m.calls) {
+      const callee = ts.isIdentifier(c.expression) ? c.expression.text : ts.isPropertyAccessExpression(c.expression) ? c.expression.name.text : null;
+      for (const i of (callee && Object.hasOwn(DOOR_ARGS, callee) ? DOOR_ARGS[callee] : [])) if (c.arguments[i]) trace(rel, c.arguments[i], 0, true);
+    }
+    if (KERNEL_POOL_FILE.test(rel)) mark(rel, m.sf);
+  }
+  return ranges;
+}
+
+/** Is this node inside a range a door draws? @param {Map<string, Array<[number, number]>>} drawn @param {string} rel @param {any} node */
+const isDrawn = (drawn, rel, node) => (drawn.get(rel) || []).some(([a, b]) => node.pos >= a && node.end <= b);
+
+/**
+ * THE BUILDERS of one file: a top-level function whose returned rows put a parameter on `text`, `needs` or `excludes`
+ * (a sibling set's `declaredSet(text, needs, twin)`). name → the rows, each `{ text, needs, excludes }` as parameter
+ * positions. @param {any} sf @returns {Map<string, Array<{ text: number, needs: number, excludes: number }>>}
+ */
+function buildersOf(sf) {
+  /** @type {Map<string, Array<{ text: number, needs: number, excludes: number }>>} */ const out = new Map();
+  for (const st of sf.statements) {
+    const decls = ts.isVariableStatement(st) ? st.declarationList.declarations.map((d) => [d.name, d.initializer]) : ts.isFunctionDeclaration(st) ? [[st.name, st]] : [];
+    for (const [name, fn] of decls) {
+      if (!name || !ts.isIdentifier(name) || !fn || !ts.isFunctionLike(fn)) continue;
+      const params = fn.parameters.map((p) => (ts.isIdentifier(p.name) ? p.name.text : null));
+      const rows = [];
+      const visit = (n) => {
+        if (ts.isObjectLiteralExpression(n)) {
+          const at = (prop) => {
+            const p = n.properties.find((x) => propName(x.name) === prop);
+            const v = p && (ts.isShorthandPropertyAssignment(p) ? p.name : ts.isPropertyAssignment(p) && ts.isIdentifier(p.initializer) ? p.initializer : null);
+            return v ? params.indexOf(v.text) : -1;
+          };
+          const row = { text: at('text'), needs: at('needs'), excludes: at('excludes') };
+          if (row.text >= 0 && (row.needs >= 0 || row.excludes >= 0)) rows.push(row);
+        }
+        ts.forEachChild(n, visit);
+      };
+      visit(fn);
+      if (rows.length) out.set(name.text, rows);
+    }
+  }
+  return out;
+}
+
+/** @returns {{ needs: string[], excludes: string[], crisis: string[] }} */
+const emptyDecl = () => ({ needs: [], excludes: [], crisis: [] });
+/** @param {{ needs: string[], excludes: string[], crisis: string[] }} into @param {{ needs: ReadonlyArray<string>, excludes: ReadonlyArray<string>, crisis: ReadonlyArray<string> }} d */
+const addDecl = (into, d) => { into.needs.push(...d.needs); into.excludes.push(...d.excludes); into.crisis.push(...d.crisis); };
+
+/**
+ * The declaration properties of one DRAWN object literal that a door enforces, folded into `out` in the door's own
+ * reading (`needs` / `excludes` as written; `crisis` values; `poolDeclares` and a tagged table's `tags` as the tag slot
+ * reads them; a state variant's `marks` as the kernel reads them).
+ * @param {any} obj @param {string} rel @param {{ needs: string[], excludes: string[], crisis: string[] }} out
  */
 function collectCredited(obj, rel, out) {
   for (const p of obj.properties) {
-    const name = p.name && (ts.isIdentifier(p.name) || ts.isStringLiteral(p.name)) ? p.name.text : null;
+    const name = propName(p.name);
     if (!name || !ts.isPropertyAssignment(p)) continue;
-    const credited = DECL_PROPS.has(name)
-      || (name === 'marks' && isStateVariant(obj))
-      || (name === 'tags' && Object.prototype.hasOwnProperty.call(TAGGED_TABLE_FILES, rel));
-    if (credited) {
-      /** @type {string[]} */ const words = []; collectStrings(p.initializer, words);
-      for (const w of words) {
-        out.push(w);
-        // a kernel family mark (`threat`, `no hunger`) is its crisis atom (`factVocabulary.js :: MARK_DIMENSION_ATOM`)
-        const fam = MARK_DIMENSION_ATOM[w.trim().replace(/^no\s+/i, '')];
-        if (name === 'marks' && fam) out.push(fam);
-      }
-    } else if (name === 'crisis') {
-      // the generator door's crisis carrier (`declarationOf` reads `crisis`): each value is its crisis atom
-      /** @type {string[]} */ const words = []; collectStrings(p.initializer, words);
-      for (const w of words) for (const v of w.replace(/^crisis:\s*/i, '').split(',')) out.push(`crisis: ${CRISIS_KIND_ALIASES[v.trim()] || v.trim()}`);
+    /** @type {string[]} */ const words = [];
+    if (DECL_PROPS.has(name) || name === 'marks' || name === 'tags') collectStrings(p.initializer, words);
+    if (name === 'needs') out.needs.push(...words);
+    else if (name === 'excludes') out.excludes.push(...words);
+    else if (name === 'crisis') for (const w of words) out.crisis.push(...w.replace(/^crisis:\s*/i, '').split(',').map((v) => v.trim()).filter(Boolean).map((v) => CRISIS_KIND_ALIASES[v] || v));
+    else if (name === 'poolDeclares') addDecl(out, declarationOfTags(words));
+    else if (name === 'marks' && isStateVariant(obj) && KERNEL_POOL_FILE.test(rel)) {
+      // as the kernel reads them (`stateProseKernel.js :: variantFactDeclaration` reads the atom marks as the tag slot
+      // does; its law 5 reads the family marks through `declarationOfMarks`)
+      addDecl(out, declarationOfTags(words)); addDecl(out, declarationOfMarks(words));
     }
+    else if (name === 'tags' && Object.prototype.hasOwnProperty.call(TAGGED_TABLE_FILES, rel)) addDecl(out, declarationOfTags(words));
   }
 }
 
@@ -168,37 +363,26 @@ function isNotPrintedSite(rel, node) {
 }
 
 /**
- * Does a declaration answer a registered word? One of the word's atoms is declared (either side); an atom
- * written `dimension:` is answered by any band of that dimension (`population: ≥ middling`).
- * @param {ReadonlyArray<string>} atoms @param {string[]} declared the declaration words around the literal
+ * The declaration around a literal: each DRAWN object literal on the way up (five levels), and, where the literal is
+ * an argument of a BUILDER call inside a drawn table, the arrays the builder puts on its row's `needs` / `excludes`.
+ * @param {any} node @param {string} rel @param {Map<string, Array<[number, number]>>} drawn @param {Map<string, any>} builders
  */
-export function answers(atoms, declared) {
-  const want = atoms.map((a) => a.toLowerCase());
-  return declared.some((w) => want.some((a) => (a.endsWith(':') ? w.startsWith(a) : w === a)));
-}
-
-/** The atom a declaration word answers (`no X` → X), lower-cased. @param {string} w */
-const atomWord = (w) => w.trim().replace(/^no\s+/i, '').toLowerCase();
-
-/**
- * Every string a declaration around `node` carries: the declaration properties of each object
- * literal on the way up (four levels), and the array arguments of each call on the way up (a
- * `declaredSet(text, ['watch'])`).
- * @param {any} node
- */
-function declarationWordsAround(node, rel) {
-  /** @type {string[]} */ const out = [];
-  const strings = (n) => collectStrings(n, out);
-  let cur = node.parent;
-  for (let depth = 0; cur && depth < 5; depth++, cur = cur.parent) {
-    if (ts.isObjectLiteralExpression(cur)) {
-      collectCredited(cur, rel, out);
-    } else if (ts.isCallExpression(cur)) {
-      for (const a of cur.arguments) if (ts.isArrayLiteralExpression(a)) strings(a);
+function declarationAround(node, rel, drawn, builders) {
+  const out = emptyDecl();
+  let cur = node.parent; let child = node;
+  for (let depth = 0; cur && depth < 5; depth++, child = cur, cur = cur.parent) {
+    if (ts.isObjectLiteralExpression(cur) && (isDrawn(drawn, rel, cur) || (isStateVariant(cur) && KERNEL_POOL_FILE.test(rel)))) collectCredited(cur, rel, out);
+    else if (ts.isCallExpression(cur) && ts.isIdentifier(cur.expression) && builders.has(cur.expression.text) && isDrawn(drawn, rel, cur)) {
+      const at = cur.arguments.indexOf(child);
+      for (const row of builders.get(cur.expression.text)) {
+        if (row.text !== at) continue;
+        if (row.needs >= 0 && cur.arguments[row.needs]) collectStrings(cur.arguments[row.needs], out.needs);
+        if (row.excludes >= 0 && cur.arguments[row.excludes]) collectStrings(cur.arguments[row.excludes], out.excludes);
+      }
     }
     if (ts.isVariableStatement(cur) || ts.isFunctionDeclaration(cur) || ts.isSourceFile(cur)) break;
   }
-  return out.map(atomWord);
+  return out;
 }
 
 /** Is this literal a property NAME (a sibling table's key: its line is declared beside it), or a `twinOf`? */
@@ -210,26 +394,40 @@ function isKeyOrTwinOf(node) {
 }
 
 /**
- * The TEXT-KEYED declarations of one source text: a table whose key is a line's own text and whose
- * value declares it (`DESC_VARIANT_DECLARATIONS`, a sibling set `'<text>': declaredSet(…)`). Text →
- * the declaration words. Read over the whole tree first, because a line and its declaration may
- * live in two files (`rulingStructure.js` prints what `powerSiblings.js` declares).
- * @param {string} rel @param {string} src
- * @returns {Map<string, string[]>}
+ * The TEXT-KEYED declarations of one source text: a DRAWN table whose key is a line's own text and whose value
+ * declares it (a sibling set `'<text>': declaredSet(…)` handed to `resolveSibling`). Text → the declaration. Read over
+ * the whole tree first, because a line and its declaration may live in two files (`rulingStructure.js` prints what
+ * `powerSiblings.js` declares).
+ * @param {string} rel @param {string} src @param {Map<string, Array<[number, number]>>} [drawn]
+ * @returns {Map<string, { needs: string[], excludes: string[], crisis: string[] }>}
  */
-export function keyedDeclarations(rel, src) {
+export function keyedDeclarations(rel, src, drawn = drawnRanges([[rel, src]])) {
   const sf = ts.createSourceFile(rel, src, ts.ScriptTarget.Latest, true, ts.ScriptKind.JSX);
-  /** @type {Map<string, string[]>} */ const out = new Map();
+  const builders = buildersOf(sf);
+  /** @type {Map<string, { needs: string[], excludes: string[], crisis: string[] }>} */ const out = new Map();
   const visit = (n) => {
-    if (ts.isPropertyAssignment(n) && (ts.isStringLiteral(n.name) || ts.isNoSubstitutionTemplateLiteral(n.name))) {
-      const words = [];
+    if (ts.isPropertyAssignment(n) && (ts.isStringLiteral(n.name) || ts.isNoSubstitutionTemplateLiteral(n.name)) && isDrawn(drawn, rel, n)) {
+      const d = emptyDecl();
       const read = (m) => {
-        if (ts.isObjectLiteralExpression(m)) collectCredited(m, rel, words);
-        if (ts.isCallExpression(m)) for (const a of m.arguments) if (ts.isArrayLiteralExpression(a)) collectStrings(a, words);
+        if (ts.isObjectLiteralExpression(m)) {
+          // the row that prints the key's own text (an original), not its twin
+          const text = m.properties.find((x) => propName(x.name) === 'text');
+          if (!text || (ts.isPropertyAssignment(text) && (ts.isStringLiteral(text.initializer) || ts.isNoSubstitutionTemplateLiteral(text.initializer)) && text.initializer.text === n.name.text)) collectCredited(m, rel, d);
+        }
+        if (ts.isCallExpression(m) && ts.isIdentifier(m.expression) && builders.has(m.expression.text)) {
+          for (const row of builders.get(m.expression.text)) {
+            const t = m.arguments[row.text];
+            if (!t || !(ts.isStringLiteral(t) || ts.isNoSubstitutionTemplateLiteral(t)) || t.text !== n.name.text) continue;
+            if (row.needs >= 0 && m.arguments[row.needs]) collectStrings(m.arguments[row.needs], d.needs);
+            if (row.excludes >= 0 && m.arguments[row.excludes]) collectStrings(m.arguments[row.excludes], d.excludes);
+          }
+        }
         ts.forEachChild(m, read);
       };
       read(n.initializer);
-      if (words.length) out.set(n.name.text, [...(out.get(n.name.text) || []), ...words.map(atomWord)]);
+      if (d.needs.length || d.excludes.length || d.crisis.length) {
+        const prev = out.get(n.name.text) || emptyDecl(); addDecl(prev, d); out.set(n.name.text, prev);
+      }
     }
     ts.forEachChild(n, visit);
   };
@@ -247,12 +445,15 @@ function collectStrings(n, out) {
  * Arm 1 over one source text: one hit per (literal, thing) that is NOT declared.
  * @param {string} rel the file's path from the repository root
  * @param {string} src
- * @param {Map<string, string[]>} [keyed] the tree's text-keyed declarations (`keyedDeclarations`)
+ * @param {Map<string, { needs: string[], excludes: string[], crisis: string[] }>} [keyed] the tree's text-keyed declarations (`keyedDeclarations`)
+ * @param {Map<string, Array<[number, number]>>} [drawn] the ranges a door draws (`drawnRanges`)
  * @returns {Array<{ file: string, thing: string, text: string }>}
  */
-export function scanSource(rel, src, keyed = keyedDeclarations(rel, src)) {
+export function scanSource(rel, src, keyed, drawn = drawnRanges([[rel, src]])) {
   if (Object.hasOwn(ARM1_RULE_BOOK, rel)) return [];
+  keyed ??= keyedDeclarations(rel, src, drawn);
   const sf = ts.createSourceFile(rel, src, ts.ScriptTarget.Latest, true, ts.ScriptKind.JSX);
+  const builders = buildersOf(sf);
   /** @type {Array<{ file: string, thing: string, text: string }>} */ const hits = [];
   const visit = (n) => {
     // a JSX text node is a line written in a component (W2-B-DECLARE item 3: the components are a root); its
@@ -261,11 +462,13 @@ export function scanSource(rel, src, keyed = keyedDeclarations(rel, src)) {
     const isText = jsx !== null || ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n) || ts.isTemplateHead(n) || ts.isTemplateMiddle(n) || ts.isTemplateTail(n);
     const text = jsx ?? n.text;
     if (isText && text.trim().split(/\s+/).length >= 3 && !isKeyOrTwinOf(n) && !isNotPrintedSite(rel, n)) {
-      let declared = null;
+      /** @type {{ needs: string[], excludes: string[], crisis: string[] } | null} */ let declared = null;
       for (const sentence of sentencesOf(text)) {
-        for (const thing of [...thingsNamedIn(sentence), ...newWordsNamedIn(sentence)]) {
-          declared ??= [...declarationWordsAround(n, rel), ...(keyed.get(text) || [])];
-          if (answers(REGISTERED_WORDS[thing].atoms, declared)) continue;
+        const named = [...thingsNamedIn(sentence), ...newWordsNamedIn(sentence)].map((id) => [id, 'names']);
+        const denied = [...thingsDeniedIn(sentence), ...newWordsDeniedIn(sentence)].map((id) => [id, 'denies']);
+        for (const [thing, side] of [...named, ...denied]) {
+          if (!declared) { declared = declarationAround(n, rel, drawn, builders); const k = keyed.get(text); if (k) addDecl(declared, k); }
+          if (declarationImplies(thing, declared, side)) continue;
           if (!hits.some((h) => h.thing === thing && h.text === text)) hits.push({ file: rel, thing, text });
         }
       }
@@ -292,10 +495,11 @@ export function listFiles(root) {
 
 /** @param {string} root @returns {Array<{ file: string, thing: string, text: string }>} */
 export function scanTree(root) {
-  const files = listFiles(root).map((rel) => [rel, readFileSync(join(root, rel), 'utf8')]);
-  /** @type {Map<string, string[]>} */ const keyed = new Map();
-  for (const [rel, src] of files) for (const [k, v] of keyedDeclarations(rel, src)) keyed.set(k, [...(keyed.get(k) || []), ...v]);
-  return files.flatMap(([rel, src]) => scanSource(rel, src, keyed));
+  const files = /** @type {Array<[string, string]>} */ (listFiles(root).map((rel) => [rel, readFileSync(join(root, rel), 'utf8')]));
+  const drawn = drawnRanges(files);
+  /** @type {Map<string, { needs: string[], excludes: string[], crisis: string[] }>} */ const keyed = new Map();
+  for (const [rel, src] of files) for (const [k, v] of keyedDeclarations(rel, src, drawn)) { const prev = keyed.get(k) || emptyDecl(); addDecl(prev, v); keyed.set(k, prev); }
+  return files.flatMap(([rel, src]) => scanSource(rel, src, keyed, drawn));
 }
 
 // ── ARM 3: the strip ban (W2-B-DECLARE item 3) ────────────────────────────────────────────────────

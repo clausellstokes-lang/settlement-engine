@@ -35,11 +35,19 @@ import { liveInstitutionNames } from '../../src/domain/facts/institutions.js';
 import { FACT_DIMENSIONS, parseAtom } from '../../src/domain/facts/factVocabulary.js';
 import { REGISTERED_WORDS } from '../../src/domain/facts/registeredWords.js';
 import {
-  ARM1_NOT_PRINTED, ARM1_ROOTS, ARM1_RULE_BOOK, COURT_HOUSES, stripKey, stripSites, stripTree, REGISTER_REL, TAGGED_TABLE_FILES, THINGS, THING_IDS, WIDENED_REGISTER_REL, bankedKeys, corpusConfig, corpusSeeds,
+  ARM1_NOT_PRINTED, ARM1_ROOTS, ARM1_RULE_BOOK, DOOR_ARGS, drawnRanges, keyedDeclarations, COURT_HOUSES, stripKey, stripSites, stripTree, REGISTER_REL, TAGGED_TABLE_FILES, THINGS, THING_IDS, WIDENED_REGISTER_REL, bankedKeys, corpusConfig, corpusSeeds,
   deniesExistence, hitKey, listFiles, negates, printedAbsent, printedOutOfTime, rowCovers, scanSource, scanTree, unlicensedServiceRows,
 } from './presumedThings.shared.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+
+/** Arm 1 over a planted tree of files, read together as `scanTree` reads the real one. @param {Array<[string, string]>} files */
+function scanTreeOf(files) {
+  const drawn = drawnRanges(files);
+  const keyed = new Map();
+  for (const [rel, src] of files) for (const [k, v] of keyedDeclarations(rel, src, drawn)) keyed.set(k, v);
+  return files.flatMap(([rel, src]) => scanSource(rel, src, keyed, drawn)).map((h) => `${h.thing} :: ${h.text}`);
+}
 const register = JSON.parse(readFileSync(join(ROOT, REGISTER_REL), 'utf8'));
 const REASONS = Object.keys(register.reasons);
 const widened = JSON.parse(readFileSync(join(ROOT, WIDENED_REGISTER_REL), 'utf8'));
@@ -52,13 +60,15 @@ describe('the rule book', () => {
 
   test('planted: an undeclared literal is a hit; a declared one, a negated one and a table key are not', () => {
     const src = [
+      "const declaredSet = (text, needs, twin) => Object.freeze([{ text, needs }, { text: twin, twinOf: text, excludes: needs }]);",
       "export const A = ['The militia drills on the green every week.'];",
       "export const B = [{ text: 'The militia drills on the green every week.', needs: ['militia'] }];",
-      "export const C = [{ text: 'The quiet town has no militia at all.', crisis: ['any'] }];",
-      "export const D = { 'The militia musters at the gate each spring.': declaredSet('The militia musters at the gate each spring.', ['militia']) };",
-      "export const E = [{ text: 'Grain is sold at the weekly market here.', excludes: ['market'] }];",
+      "export const C = [{ text: 'The quiet town has no militia at all.', excludes: ['militia'] }];",
+      "export const D = { 'The militia musters at the gate each spring.': declaredSet('The militia musters at the gate each spring.', ['militia'], 'The quiet green waits for no one.') };",
+      "export const E = [{ text: 'Grain is sold at the weekly market here.', needs: ['market'] }];",
       "export const F = ['Cheese goes to the weekly market in summer.'];",
       "export const G = { 'Cheese goes to the weekly market in summer.': Object.freeze({ needs: Object.freeze(['market']) }) };",
+      "drawDeclared([...B, ...C, ...E], { facts, draw }); resolveSibling(line, D, {}); resolveSibling(line, G, {});",
     ].join('\n');
     const hits = scanSource('planted.js', src);
     expect(hits).toEqual([{ file: 'planted.js', thing: 'militia', text: 'The militia drills on the green every week.' }]);
@@ -77,13 +87,19 @@ describe('the rule book', () => {
       "export const E = [{ tags: ['militia'], position: 'Leads the militia drill on the green each week.' }];",
       "export const F = [{ text: 'The militia drills on the green when a crisis looms.', excludes: ['militia'] }];",
       "export const G = [{ text: 'The militia drills on the green by a pool rule.', poolDeclares: ['militia'] }];",
+      "drawDeclared([...A, ...C, ...D, ...F, ...G], { facts, draw }); resolveDeclared(B.x, {}); resolveDeclared(E, { tagged: true });",
     ].join('\n');
+    // F's `excludes` now answers nothing on a naming line (F3: an exclusion does not imply the thing), and D's marks
+    // declare only in a kernel pool file
     expect(scanSource('src/data/planted.js', src).map((h) => h.text)).toEqual([
       'The militia drills on the green every week.',
       'A militia needs a muster field near the green.',
       'The militia drills on the green in the causal arm.',
+      'The militia drills on the green in a state pool.',
       'Leads the militia drill on the green each week.',
+      'The militia drills on the green when a crisis looms.',
     ]);
+    expect(scanSource('src/data/dossierStateProse/planted.generated.js', src).map((h) => h.text)).not.toContain('The militia drills on the green in a state pool.');
     // the same source, read as a table drawn `{ tagged: true }`: its `tags` declare, so the line it flagged elsewhere is answered
     expectPresentThenAbsent(
       scanSource('src/data/planted.js', src).map((h) => h.text),
@@ -115,9 +131,12 @@ describe('the rule book', () => {
       "export const D = ['Smoke rises from the poorest quarters at dusk.'];",
       "export const E = [{ text: 'Smoke rises from the poorest quarters at dusk, still.', needs: ['population: ≥ middling'] }];",
       "export const F = ['The ruling three meet each spring at the hall.'];",
+      "drawDeclared([...A, ...B, ...C, ...D, ...E, ...F], { facts, draw });",
     ].join('\n');
-    expect(scanSource('src/data/planted.js', src).map((h) => `${h.thing} :: ${h.text}`)).toEqual([
+    // C: a kernel variant marked `threat` is a siege OR an occupation OR monsters — it does not imply a siege (F3)
+    expect(scanSource('src/data/dossierStateProse/planted.generated.js', src).map((h) => `${h.thing} :: ${h.text}`)).toEqual([
       'siege :: The town has been under siege since the thaw.',
+      'siege :: The town has been under siege since the thaw, again.',
       'quarters :: Smoke rises from the poorest quarters at dusk.',
       'powersCount :: The ruling three meet each spring at the hall.',
     ]);
@@ -222,6 +241,81 @@ describe('the rule book', () => {
     const having = { defence: { militia: true, watch: true } };
     expect(printedAbsent(record, lacking, [])).toEqual([{ thing: 'militia', path: '.powerStructure.factions[].desc', sentence: 'Town watch and militia;' }]);
     expect(printedAbsent(record, having, [])).toEqual([]);
+  });
+});
+
+/**
+ * W2-B-DECLARE second seat, F3 (REVIEW-W2B §4: "the guard accepts declarations no door reads and disqualifiers that do
+ * not disqualify"). Every plant of the review's table is kept here. Red at 9d5d6e091, whose walker credited `needs`,
+ * `excludes`, `poolDeclares` and `crisis` on any object within five parents, any array handed to any call, and any atom
+ * of a word's list on either side.
+ */
+describe('F3 — a declaration counts only on an object a door draws, and only where it implies the word', () => {
+  const hitsOf = (rel, lines) => scanSource(rel, lines.join('\n')).map((h) => `${h.thing} :: ${h.text}`);
+
+  test('planted: a declared object no door reads declares nothing; the same object drawn does', () => {
+    const blurb = "const X = { needs: ['militia'], blurb: 'The militia drills on the green every week.' }; print(X.blurb);";
+    expect(hitsOf('src/data/planted.js', [blurb])).toEqual(['militia :: The militia drills on the green every week.']);
+    expect(hitsOf('src/data/planted.js', [blurb, 'drawDeclared([X], { facts, draw });'])).toEqual([]);
+  });
+
+  test('planted: a door\'s pool followed through a local, a parameter, a function\'s return and an import', () => {
+    const lines = [
+      "const P = [{ text: 'The militia drills on the green every week.', needs: ['militia'] }];",
+      "const Q = [{ text: 'The militia drills on the green every month.', needs: ['militia'] }];",
+      "const R = [{ text: 'The militia drills on the green every year.', needs: ['militia'] }];",
+      'function poolOf() { return R; }',
+      'function pickFrom(pool) { return drawDeclared(pool, { facts, draw }).text; }',
+      'export const one = () => { const local = P.filter(Boolean); return drawDeclared(local, { facts, draw }); };',
+      'export const two = () => pickFrom(Q);',
+      'export const three = () => filterDeclared(poolOf(), { facts });',
+    ];
+    expect(hitsOf('src/data/planted.js', lines)).toEqual([]);
+    const shared = scanTreeOf([
+      ['src/data/a.js', "export const T = [{ text: 'The militia drills on the green every week.', needs: ['militia'] }];"],
+      ['src/generators/b.js', "import { T } from '../data/a.js';\nexport const draw1 = () => drawDeclared(T, { facts, draw });"],
+      ['src/data/c.js', "export const U = [{ text: 'The militia drills on the green every month.', needs: ['militia'] }];"],
+    ]);
+    expect(shared).toEqual(['militia :: The militia drills on the green every month.']);
+  });
+
+  test('planted: a disqualifier that does not imply the word answers nothing', () => {
+    const draw = 'drawDeclared([A, B], { facts, draw });';
+    // a siege is not answered by any crisis
+    expect(hitsOf('src/data/planted.js', ["const A = { text: 'The town is under siege again this spring.', needs: ['crisis: threat'] };", "const B = { text: 'The town is under siege again this summer.', crisis: ['hunger'] };", draw]))
+      .toEqual(['siege :: The town is under siege again this spring.', 'siege :: The town is under siege again this summer.']);
+    expect(hitsOf('src/data/planted.js', ["const A = { text: 'The town is under siege again this spring.', crisis: ['under_siege'] };", "const B = { text: 'The town is under siege again this summer.', needs: ['crisis: siege'] };", draw])).toEqual([]);
+    // quarters are not answered by a small population or a tier
+    expect(hitsOf('src/data/planted.js', ["const A = { text: 'Smoke rises from the poorest quarters at dusk.', needs: ['population: small'] };", "const B = { text: 'Smoke rises from the poorest quarters at dawn.', needs: ['tier: thorp'] };", draw]))
+      .toEqual(['quarters :: Smoke rises from the poorest quarters at dusk.', 'quarters :: Smoke rises from the poorest quarters at dawn.']);
+    expect(hitsOf('src/data/planted.js', ["const A = { text: 'Smoke rises from the poorest quarters at dusk.', needs: ['population: large'] };", "const B = { text: 'Smoke rises from the poorest quarters at dawn.', needs: ['population: ≥ middling'] };", draw])).toEqual([]);
+    // a thing is not answered by its own negation, nor famine by any food band
+    expect(hitsOf('src/data/planted.js', ["const A = { text: 'The town walls are patched with timber.', needs: ['no walls'] };", "const B = { text: 'The famine has reached the outer farms.', needs: ['food: deficit'] };", draw]))
+      .toEqual(['walls :: The town walls are patched with timber.', 'famine :: The famine has reached the outer farms.']);
+    expect(hitsOf('src/data/planted.js', ["const A = { text: 'The town walls are patched with timber.', needs: ['walls'] };", "const B = { text: 'The famine has reached the outer farms.', needs: ['food: famine'] };", draw])).toEqual([]);
+  });
+
+  test('planted: a line that denies needs the negation; the positive atom does not answer it', () => {
+    const lines = (decl) => [`const A = { text: 'The quiet town has no militia at all.', ${decl} };`, 'drawDeclared([A], { facts, draw });'];
+    expect(hitsOf('src/data/planted.js', lines("needs: ['militia']"))).toEqual(['militia :: The quiet town has no militia at all.']);
+    expect(hitsOf('src/data/planted.js', lines("excludes: ['militia']"))).toEqual([]);
+  });
+
+  test('planted: an array handed to any call, a carrier on any object, a tag outside the drawn table, a mark outside a kernel pool — none declares', () => {
+    expect(hitsOf('src/data/planted.js', ["export const A = String(['militia'], 'The militia drills on the green every week.');"])).toEqual(['militia :: The militia drills on the green every week.']);
+    expect(hitsOf('src/data/planted.js', [
+      "export const B = { crisis: ['under_siege'], line: 'The town is under siege again this spring.' };",
+      "export const C = { poolDeclares: ['militia'], line: 'The militia drills on the green every week.' };",
+    ])).toEqual(['siege :: The town is under siege again this spring.', 'militia :: The militia drills on the green every week.']);
+    expect(hitsOf('src/generators/npcStructure.js', ["export const D = { tags: ['militia'], position: 'Leads the militia drill on the green each week.' };"])).toEqual(['militia :: Leads the militia drill on the green each week.']);
+    expect(hitsOf('src/data/planted.js', ["export const E = [{ vid: 4, marks: ['militia'], text: 'The militia drills on the green every week.' }]; drawDeclared(E, {});"]))
+      .toEqual(['militia :: The militia drills on the green every week.']);
+  });
+
+  test('the doors the walker follows are the draw module\'s exported doors', () => {
+    const src = readFileSync(join(ROOT, 'src/domain/facts/drawDeclared.js'), 'utf8');
+    const exported = [...src.matchAll(/^export function (\w+)/gm)].map((m) => m[1]).filter((n) => n !== 'lineText' && n !== 'hasUnheldCandidate');
+    expect(Object.keys(DOOR_ARGS).sort()).toEqual(exported.sort());
   });
 });
 

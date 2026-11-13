@@ -9,7 +9,8 @@
  "reasons": {
   "carrier": "declared only through a carrier no draw door reads (a causal-register mark, a catalogue's `tags`, a structural rule's `requires`): banked until it declares through a door (W2-B-DECLARE item 1)",
   "root": "a literal or a component's JSX text under a root the walker joined at W2-B-DECLARE item 3 (src/domain, src/components) that names a thing and declares no atom answering it: the habitat at the widening (e55ede7d2), banked; a line written in code is cured by its print-site check or its declaration",
-  "word": "a literal naming a word the walker registered at W2-B-DECLARE item 3 (a state, a size or a count: registeredWords.js :: NEW_WORDS) with no declaration answering it: the habitat at the widening, banked; a count has no atom yet, so its lines are cured at the print site"
+  "word": "a literal naming a word the walker registered at W2-B-DECLARE item 3 (a state, a size or a count: registeredWords.js :: NEW_WORDS) with no declaration answering it: the habitat at the widening, banked; a count has no atom yet, so its lines are cured at the print site",
+  "implied": "a literal whose declaration no draw door reads, or does not IMPLY the word it uses (W2-B-DECLARE second seat, F3: a carrier is credited only on an object a door draws, and a naming line's declaration must make the word true, a denying line's make it false): the habitat at the narrowing, banked; cured by declaring through a door the atom that implies the word"
  },
  "arm1": {
   "src/components/CommandPalette.jsx": [
@@ -669,6 +670,16 @@
     "plague",
     "word",
     " marks where the plague dead were buried, and people walk around it."
+   ],
+   [
+    "bank",
+    "implied",
+    "A money changer sits at his table with coins from many mints."
+   ],
+   [
+    "occupation",
+    "implied",
+    "A few old signs still carry the occupiers' words, painted over but showing through."
    ]
   ],
   "src/data/bandLadders.js": [
@@ -877,6 +888,56 @@
     "practitioner",
     "word",
     "Arcane work at {settlement} answers to its military, and the practitioners' own books show it: defence work first, payin"
+   ],
+   [
+    "prison",
+    "implied",
+    "{settlement} keeps no court and no gaol, and no wrong done there is written down; order is kept by whoever is armed and "
+   ],
+   [
+    "granary",
+    "implied",
+    "{settlement} can tend its sick and keeps no granary against a bad harvest; a crop failure here becomes hardship the same"
+   ],
+   [
+    "granary",
+    "implied",
+    "{settlement} has prepared for the sickness it has seen and not for hunger: there is a sick-house and no granary, and not"
+   ],
+   [
+    "granary",
+    "implied",
+    "{settlement} has no granary and nobody to treat the sick; a failed harvest is hardship within the season here and a plag"
+   ],
+   [
+    "prison",
+    "implied",
+    "{settlement} keeps no court and no gaol, so no complaint is ever written down and order holds only where someone armed i"
+   ],
+   [
+    "granary",
+    "implied",
+    "{settlement} keeps no granary and needs none while the port runs; the supply continues as long as the water does."
+   ],
+   [
+    "granary",
+    "implied",
+    "{settlement} keeps no granary and does not miss one, because boats bring food in faster than a store could."
+   ],
+   [
+    "granary",
+    "implied",
+    "{settlement} has no granary, only what its households keep. Any long interruption to supply becomes a survival question "
+   ],
+   [
+    "temple",
+    "implied",
+    "There is no temple at {settlement} and little trade, so people bring their troubles to the mages instead: a sickness, a "
+   ],
+   [
+    "temple",
+    "implied",
+    "With no temple and a weak market, people at {settlement} take their oaths and quarrels to the arcane houses, and no pari"
    ]
   ],
   "src/data/dossierStateProse/economy.generated.js": [
@@ -929,6 +990,11 @@
     "practitioner",
     "word",
     "The people who work magic at {settlement} are among its biggest buyers and employers, and much of the town's trade turns"
+   ],
+   [
+    "granary",
+    "implied",
+    "no institution: granary"
    ]
   ],
   "src/data/dossierStateProse/general.generated.js": [
@@ -938,7 +1004,7 @@
     "Thousands have gone from {settlement}, and more leave every season. Whole districts stand empty."
    ],
    [
-    "famine",
+    "starving",
     "word",
     "{settlement} is starving: the stores are gone, nothing can be bought, and people are dying."
    ],
@@ -991,6 +1057,71 @@
     "practitioner",
     "word",
     "{settlement} supports trained practitioners of the Art, which few towns its size can afford."
+   ],
+   [
+    "quarters",
+    "implied",
+    "The exodus runs to several hundred: a real portion of a district, gone over a stretch of seasons, with the buildings sti"
+   ],
+   [
+    "occupation",
+    "implied",
+    "{settlement} kept its own hall through the occupation and has not entirely got its own manners back; there are still thi"
+   ],
+   [
+    "occupation",
+    "implied",
+    "The occupiers are gone from {settlement} and their arrangements are not: who holds which licence here was decided by som"
+   ],
+   [
+    "occupation",
+    "implied",
+    "{settlement}'s rolls still carry the shape the occupation put on them (the same quarters taxed hardest, the same trades "
+   ],
+   [
+    "occupation",
+    "implied",
+    "{settlement} is settling accounts left from the occupation, and the settling has begun to reach people who were only doi"
+   ],
+   [
+    "occupation",
+    "implied",
+    "{settlement} is occupied, but its own hall still governs; the occupier takes its tribute and leaves the running to the t"
+   ],
+   [
+    "law",
+    "implied",
+    "Nobody from {settlement} goes into {ruin}; no law forbids it, and none is needed."
+   ],
+   [
+    "market",
+    "implied",
+    "No market or fair stands in {settlement}: what trade the town does is done at the gate, at the inn and on the road."
+   ],
+   [
+    "market",
+    "implied",
+    "{settlement} has no market square; trade is done at the gate, at the inn and along the road."
+   ],
+   [
+    "market",
+    "implied",
+    "No market or fair stands in {settlement}: what trade the town does is done house to house and on the road."
+   ],
+   [
+    "occupation",
+    "implied",
+    "no ruler: occupier"
+   ],
+   [
+    "war",
+    "implied",
+    "no crisis: wartime"
+   ],
+   [
+    "famine",
+    "implied",
+    "no crisis: famine"
    ]
   ],
   "src/data/dossierStateProse/power.generated.js": [
@@ -998,6 +1129,11 @@
     "siege",
     "word",
     "The {seat} at {settlement} governs a besieged town, which means it governs rationing, the gates and the watch rota, and "
+   ],
+   [
+    "law",
+    "implied",
+    "There is no law at {settlement} but what the gang bosses enforce. They keep a kind of order and charge for it, and whoev"
    ]
   ],
   "src/data/dossierStateProse/stressors.generated.js": [
@@ -1105,6 +1241,16 @@
     "occupation",
     "word",
     "The occupier takes more from the town than it gives, but its own accounts never show what holding the town costs it in m"
+   ],
+   [
+    "revolt",
+    "implied",
+    "The seat is contested from within its own institution; there is no rebellion here, only two governments wearing the same"
+   ],
+   [
+    "war",
+    "implied",
+    "The war is being fought elsewhere and paid for here. Men, coin and grain leave; nothing comes back on the same schedule."
    ]
   ],
   "src/data/dossierStateProse/warFaith.generated.js": [
@@ -1227,6 +1373,11 @@
     "quarters",
     "word",
     "The rite draws pilgrims from well outside the district, and for weeks each year they fill {settlement}'s beds."
+   ],
+   [
+    "temple",
+    "implied",
+    "You will find nothing military and no temple worth remarking on at {settlement}, and nobody there misses either."
    ]
   ],
   "src/data/economicData.js": [
@@ -1532,6 +1683,131 @@
     "practitioner",
     "word",
     "A whole quarter of arcane practitioners, all towers, workshops, libraries, and reagent sellers."
+   ],
+   [
+    "mill",
+    "implied",
+    "No mill of its own. The manor's or the village's must serve, and milling at home is often forbidden."
+   ],
+   [
+    "garrison",
+    "implied",
+    "A plain hall held under a regional adventurers' charter. It posts bounties, houses monster hunters, and takes up the loc"
+   ],
+   [
+    "garrison",
+    "implied",
+    "Chartered by the region's adventuring order and little more than a rough hall for it. Bounties go up on its board, monst"
+   ],
+   [
+    "market",
+    "implied",
+    "Runs cattle or goats for their milk, butter, and soft cheese. Vital protein and fat when the grain runs thin. What isn't"
+   ],
+   [
+    "market",
+    "implied",
+    "Keeps a herd of cattle or goats, yielding milk, butter, and soft cheese; in the lean grain months these are the settleme"
+   ],
+   [
+    "market",
+    "implied",
+    "Catches wildfowl (using snares, nets, and trained birds) to stock the market with duck, goose, and pigeon."
+   ],
+   [
+    "market",
+    "implied",
+    "The official voice, reading proclamations, market prices, and news at set hours in the market square. Town or guild pays"
+   ],
+   [
+    "market",
+    "implied",
+    "At fixed times he stands in the market square and calls out the proclamations, the prices, and the news. His employer is"
+   ],
+   [
+    "militia",
+    "implied",
+    "A chartered hall that serves as the region's chief adventuring hub. It posts contracts, grades the monster threats, keep"
+   ],
+   [
+    "watch",
+    "implied",
+    "Message birds kept above a city yard by people who declare nothing. The word arrives unsigned and moves faster than the "
+   ],
+   [
+    "garrison",
+    "implied",
+    "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the "
+   ],
+   [
+    "watch",
+    "implied",
+    "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the "
+   ],
+   [
+    "garrison",
+    "implied",
+    "Arrows by the sheaf, specialty broadheads, and commissioned composite bows from the guild's bowyers and fletchers. The w"
+   ],
+   [
+    "watch",
+    "implied",
+    "Arrows by the sheaf, specialty broadheads, and commissioned composite bows from the guild's bowyers and fletchers. The w"
+   ],
+   [
+    "walls",
+    "implied",
+    "The grounds inside the walls filled generations back, so the dead are lifted when their term is up and their bones stack"
+   ],
+   [
+    "walls",
+    "implied",
+    "Carts go out at dusk to ground bought beyond the walls, and the charnel house holds what the old plots gave up. What a f"
+   ],
+   [
+    "market",
+    "implied",
+    "The official announcer, reading proclamations, market prices, and news in the market squares at set hours, paid by the c"
+   ],
+   [
+    "market",
+    "implied",
+    "Employed by the city or a guild to call proclamations, prices, and news in the market squares at fixed times."
+   ],
+   [
+    "market",
+    "implied",
+    "It seizes free persons and slips them into slavery on forged provenance papers. No lawful market stands here to absorb t"
+   ],
+   [
+    "market",
+    "implied",
+    "Free persons are taken and passed into slavery through counterfeit provenance documents. With no lawful market to lean o"
+   ],
+   [
+    "walls",
+    "implied",
+    "Burial has left the walls: grounds beyond every gate, each with its road and its gatekeepers, and a trade in plots the r"
+   ],
+   [
+    "walls",
+    "implied",
+    "Tall, crowded blocks and tenement courts, with suburbs spreading beyond the walls."
+   ],
+   [
+    "walls",
+    "implied",
+    "Multi-story blocks packed around tenement courts, and suburbs that have outgrown the walls."
+   ],
+   [
+    "garrison",
+    "implied",
+    "Walls within walls: an outer line, an inner line, and the citadel ring. Garrison districts and gatehouses at every stage"
+   ],
+   [
+    "garrison",
+    "implied",
+    "A defence built in layers: outer wall, inner wall, and the ring about the citadel, with garrisons and gatehouses through"
    ]
   ],
   "src/data/institutionLadders.js": [
@@ -1571,6 +1847,16 @@
     "quarters",
     "word",
     "Dungeon delving supply district"
+   ],
+   [
+    "market",
+    "implied",
+    "Multiple market squares"
+   ],
+   [
+    "market",
+    "implied",
+    "Slave market district"
    ]
   ],
   "src/data/institutionServices.js": [
@@ -1663,6 +1949,71 @@
     "practitioner",
     "word",
     "The complete range of arcane services from multiple practitioners."
+   ],
+   [
+    "temple",
+    "implied",
+    "Collects the lord's dues and the temple tithe"
+   ],
+   [
+    "market",
+    "implied",
+    "Grants stalls, sets tolls, licenses the market"
+   ],
+   [
+    "market",
+    "implied",
+    "Grants guild, market, and trade privileges"
+   ],
+   [
+    "watch",
+    "implied",
+    "Walls, aqueducts, sanitation, and the watch"
+   ],
+   [
+    "watch",
+    "implied",
+    "Retired soldiers supplementing the village watch. Reliable, cheap, and unwilling to be bribed."
+   ],
+   [
+    "militia",
+    "implied",
+    "Basic weapons training for village militia. They will not be knights, but they will not die in the first volley."
+   ],
+   [
+    "watch",
+    "implied",
+    "House colours, guild uniforms, city watch livery."
+   ],
+   [
+    "mill",
+    "implied",
+    "Water flow diverted to power mills and workshops."
+   ],
+   [
+    "militia",
+    "implied",
+    "Matched arrows with correct spine and fletching. Bulk orders for militia."
+   ],
+   [
+    "market",
+    "implied",
+    "Issue licences for merchants, markets, guilds, and regulated trades."
+   ],
+   [
+    "market",
+    "implied",
+    "Issue permits for market stalls, new businesses, and regulated trades."
+   ],
+   [
+    "militia",
+    "implied",
+    "Garrison facilities used for ongoing training of soldiers and militia."
+   ],
+   [
+    "watch",
+    "implied",
+    "Where the watch is walking this week, and where it is not."
    ]
   ],
   "src/data/institutionalCatalog.js": [
@@ -1855,6 +2206,16 @@
     "practitioner",
     "word",
     "Quarter inhabited by arcane practitioners: towers, workshops, libraries, reagent merchants."
+   ],
+   [
+    "garrison",
+    "implied",
+    "A rough hall operating under a regional adventurers' charter. Posts bounties, shelters monster hunters, and coordinates "
+   ],
+   [
+    "market",
+    "implied",
+    "Targets free persons for fraudulent insertion into slavery through forged provenance documents. Where no lawful market e"
    ]
   ],
   "src/data/narrativeData.js": [
@@ -1924,6 +2285,91 @@
     "practitioner",
     "word",
     "Another practitioner has noticed "
+   ],
+   [
+    "temple",
+    "implied",
+    "Restore a desecrated shrine before the annual festival (quietly, without scandal)"
+   ],
+   [
+    "temple",
+    "implied",
+    "Convince their superior in the faith to fund repairs to the temple roof"
+   ],
+   [
+    "quarters",
+    "implied",
+    "Identify the source of a cluster of unusual illnesses in the western quarter"
+   ],
+   [
+    "watch",
+    "implied",
+    " names. The watch reports show a fine record of arrests."
+   ],
+   [
+    "watch",
+    "implied",
+    "'s company under the watch's command. "
+   ],
+   [
+    "temple",
+    "implied",
+    " raises the men. The shrine's coffers pay for the "
+   ],
+   [
+    "temple",
+    "implied",
+    "'s men have started praying at a different shrine. "
+   ],
+   [
+    "temple",
+    "implied",
+    " demands a church trial; "
+   ],
+   [
+    "temple",
+    "implied",
+    "'s shrine after evening prayers. "
+   ],
+   [
+    "temple",
+    "implied",
+    "A visiting cleric has asked to audit the shrine's books. "
+   ],
+   [
+    "temple",
+    "implied",
+    "'s men carrying crates out of the shrine at night, and has asked "
+   ],
+   [
+    "temple",
+    "implied",
+    "'s superior is coming to inspect the shrine's accounts. "
+   ],
+   [
+    "granary",
+    "implied",
+    " must choose between the creditor and the granary."
+   ],
+   [
+    "watch",
+    "implied",
+    " wants the watch under civil command; "
+   ],
+   [
+    "garrison",
+    "implied",
+    " wants the council out of the barracks. They meet monthly and settle nothing."
+   ],
+   [
+    "market",
+    "implied",
+    "'s pay to fund the market repairs. "
+   ],
+   [
+    "market",
+    "implied",
+    "A riot is expected on the next market day, and "
    ]
   ],
   "src/data/people/titleSecretsPresentations.js": [
@@ -1965,6 +2411,60 @@
     "Two houses in their district are fighting over the same workers, and both have asked them to settle it."
    ]
   ],
+  "src/data/powerData.js": [
+   [
+    "garrison",
+    "implied",
+    "The Garrison Bloc"
+   ],
+   [
+    "watch",
+    "implied",
+    "The Order of the Watch"
+   ],
+   [
+    "garrison",
+    "implied",
+    "The Garrison Order"
+   ],
+   [
+    "watch",
+    "implied",
+    "The Watchmen's Company"
+   ],
+   [
+    "mercenary",
+    "implied",
+    "The Mercenary Compact"
+   ],
+   [
+    "temple",
+    "implied",
+    "The Temple Union"
+   ]
+  ],
+  "src/data/powerSiblings.js": [
+   [
+    "watch",
+    "implied",
+    "Town watch; it enforces ordinances, manages disorder, and reports to the council."
+   ],
+   [
+    "watch",
+    "implied",
+    "Well-funded city watch; it keeps order reliably and is growing more sure of its own authority."
+   ],
+   [
+    "watch",
+    "implied",
+    "City watch; law enforcement and external defence, stretched between multiple responsibilities."
+   ],
+   [
+    "market",
+    "implied",
+    "A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them."
+   ]
+  ],
   "src/data/resourceData.js": [
    [
     "practitioner",
@@ -1982,6 +2482,13 @@
     "quarters",
     "word",
     "The map remembers. A burned quarter stays scarred for years, a boom district visibly rises, and the temple grows two siz"
+   ]
+  ],
+  "src/data/sampleSettlements.js": [
+   [
+    "docks",
+    "implied",
+    "A harbour town with docks and a harbour master, where the merchant guilds and the religious authorities both hold power."
    ]
   ],
   "src/data/spatialData.js": [
@@ -2156,6 +2663,16 @@
     "revolt",
     "word",
     "Has been moving insurgent fighters and sealed messages through the underways (the dug tunnels beneath the settlement), o"
+   ],
+   [
+    "quarters",
+    "implied",
+    "Is the insurgency's contact inside the council, and has been feeding it exactly the information that keeps the fighting "
+   ],
+   [
+    "quarters",
+    "implied",
+    "Three other districts have suffered. Theirs has not. Someone is beginning to notice the pattern"
    ]
   ],
   "src/data/stressTypes.js": [
@@ -2309,6 +2826,11 @@
    [
     "succession",
     "word",
+    "WORKED EXEMPLAR\n\nREQUEST: \"Run the world until Ashford is starving or at war, half a year at most, and lean on\ntheir foo"
+   ],
+   [
+    "starving",
+    "implied",
     "WORKED EXEMPLAR\n\nREQUEST: \"Run the world until Ashford is starving or at war, half a year at most, and lean on\ntheir foo"
    ]
   ],
@@ -2525,7 +3047,7 @@
     "THE ROW WITH NO CHANNEL, AND THE REASON IS THE SLICE. Wave P1 (docs/DESIGN_DEMOGRAPHIC_ENGINE.md) cures the finding that"
    ],
    [
-    "famine",
+    "starving",
     "word",
     "THE ROW WITH NO CHANNEL, AND THE REASON IS THE SLICE. Wave P1 (docs/DESIGN_DEMOGRAPHIC_ENGINE.md) cures the finding that"
    ],
@@ -2535,7 +3057,7 @@
     "The equilibrium is a fixed point of the rate pair, not a ceiling anyone enforces. Far from min(K_food, D_tier) births do"
    ],
    [
-    "famine",
+    "starving",
     "word",
     "NOT expressible from any receipt schema today. Pinned at source with a menu whose two destinations carry the SAME effect"
    ],
@@ -2545,7 +3067,7 @@
     "WAVE P2, the owner where-appropriate clause. Each push driver carries an applicability guard that zeroes it outright rat"
    ],
    [
-    "famine",
+    "starving",
     "word",
     "NOT expressible from any receipt schema today: no envelope records why a settlement did not shed. Pinned at source pairw"
    ],
@@ -2565,12 +3087,12 @@
     "NOT expressible from any receipt schema today. Pinned at source on ONE menu and one home reading, with the destination p"
    ],
    [
-    "famine",
+    "starving",
     "word",
     "NOT expressible from any receipt schema today. Pinned at source on ONE menu and one home reading, with the destination p"
    ],
    [
-    "famine",
+    "starving",
     "word",
     "NOT expressible from any receipt schema today: no envelope pairs a settlement population with its named-cast size. Pinne"
    ]
@@ -2693,7 +3215,7 @@
     "THE COUNTERPART SEAT: the owner directive (ODQ 735.2) that an occupied or vassal settlement's ruling power has \"an equal"
    ],
    [
-    "famine",
+    "starving",
     "word",
     "THE COUNTERPART SEAT: the owner directive (ODQ 735.2) that an occupied or vassal settlement's ruling power has \"an equal"
    ],
@@ -2919,7 +3441,7 @@
     "A CONJUNCTION GATE OVER A LANE THAT WRITES NOTHING. brokerageEffectsActive is informationBrokeragesEnabled AND infoState"
    ],
    [
-    "famine",
+    "starving",
     "word",
     "ONE GATE, AND THE SLICE BEHIND IT STILL EMITS NO EVENT. routeLifecycleActive is the virtual routeLifecycleEnabled alone "
    ],
@@ -2995,6 +3517,23 @@
     "militia",
     "root",
     "a garrison, watch or militia"
+   ],
+   [
+    "garrison",
+    "implied",
+    "a garrison, watch or militia"
+   ],
+   [
+    "garrison",
+    "implied",
+    "a garrison or a hired company"
+   ]
+  ],
+  "src/domain/coherence/hookTruth.js": [
+   [
+    "garrison",
+    "implied",
+    "no garrison, militia or mercenary company on the defence roster"
    ]
   ],
   "src/domain/coherence/readerBattery.js": [
@@ -3245,7 +3784,7 @@
     "An active stress overrides the base label with a compound form (for example Critical under an active siege, Suppressed u"
    ],
    [
-    "famine",
+    "starving",
     "word",
     "A satellite thorp grows into a hamlet and can charter at village scale; a starving satellite returns its people to the p"
    ],
@@ -3418,6 +3957,11 @@
     "occupation",
     "word",
     "the occupier gains by it"
+   ],
+   [
+    "occupation",
+    "implied",
+    "no occupying power on the roster"
    ]
   ],
   "src/domain/crisis/crisisHooks.js": [
@@ -3574,6 +4118,16 @@
     "plague",
     "word",
     "Healing and resistance to pestilence"
+   ],
+   [
+    "garrison",
+    "implied",
+    "Garrison — standing troops"
+   ],
+   [
+    "militia",
+    "implied",
+    "Militia — muster of locals"
    ]
   ],
   "src/domain/dailyLife.js": [
@@ -3630,7 +4184,7 @@
     "a capable militia, enough to defend its own and raid a neighbour"
    ],
    [
-    "famine",
+    "starving",
     "word",
     "starving and demoralized, close to falling apart"
    ]
@@ -3747,7 +4301,7 @@
     "The scandal burned out and the {role} came clean in the quiet after it; the market for silence closed and took the arran"
    ],
    [
-    "famine",
+    "starving",
     "word",
     "Trade is choked off and lawful commerce is starving, so this {role} takes a cut of the commerce that is not lawful."
    ],
@@ -6727,6 +7281,11 @@
     "religiousHouses",
     "word",
     "Hundreds of houses of worship across every district, the faith woven into each neighbourhood."
+   ],
+   [
+    "mill",
+    "implied",
+    "No mill of its own; the grain is carried to a manor or village wheel, often under a lord's monopoly."
    ]
   ],
   "src/domain/display/labelBands.js": [
@@ -7227,7 +7786,7 @@
     "The pestilence passed the town by; the watchful gates ease open and the market fills again."
    ],
    [
-    "famine",
+    "starving",
     "word",
     "The plea from the starving country arrives with the first frost, and the almoners weigh charity against a hard winter of"
    ],
@@ -7237,7 +7796,7 @@
     "Word of famine in the near lands reaches the market, and the fortunate are asked to measure out their surplus."
    ],
    [
-    "famine",
+    "starving",
     "word",
     "The almoners send what the harvest allows to the starving marches, and mark the giving down against a future favour."
    ],
@@ -7262,7 +7821,7 @@
     "The tithe-barn stayed locked while a neighbour starved, and the memory of the closed gate will outlast the famine."
    ],
    [
-    "famine",
+    "starving",
     "word",
     "The messengers of the starving marches go home with empty carts, and a bitterness settles where friendship might have."
    ],
@@ -7860,6 +8419,11 @@
     "temple",
     "root",
     "Folk at the shrines will notice it soonest, for the town's observances are due to change when the turn comes round."
+   ],
+   [
+    "watch",
+    "implied",
+    "The watch has a hardship to brace for, and it is due to fall on the town when the turn comes round."
    ]
   ],
   "src/domain/display/stateProse/defenseStateProse.js": [
@@ -8032,6 +8596,11 @@
     "revolt",
     "word",
     "posture INSURGENCY ACTIVE"
+   ],
+   [
+    "garrison",
+    "implied",
+    "militia PRESENT (no garrison)"
    ]
   ],
   "src/domain/display/stateProse/economyStateProse.js": [
@@ -8071,6 +8640,16 @@
     "famine",
     "word",
     "foodSecurity.label: Deficit × Active Famine"
+   ],
+   [
+    "temple",
+    "implied",
+    "power_economic: temple economy under a secular seat"
+   ],
+   [
+    "temple",
+    "implied",
+    "GREAT HOUSE: cathedral"
    ]
   ],
   "src/domain/display/stateProse/stateProseKernel.js": [
@@ -8147,6 +8726,11 @@
     "occupation",
     "word",
     "occupation.pays false (the occupation is a net drain on the holder)"
+   ],
+   [
+    "temple",
+    "implied",
+    "MANDATE: a dominant church"
    ]
   ],
   "src/domain/display/threatAssessment.js": [
@@ -8239,6 +8823,11 @@
     "famine",
     "word",
     "Disasters & Famine"
+   ],
+   [
+    "prison",
+    "implied",
+    "No court and no gaol; order rests on whoever is armed."
    ]
   ],
   "src/domain/display/tradeFlowEconomics.js": [
@@ -8675,6 +9264,11 @@
     "temple",
     "root",
     " has no church of its own; its people walk to the next village’s parish church for the rites."
+   ],
+   [
+    "temple",
+    "implied",
+    "No church building stands in "
    ]
   ],
   "src/domain/dossier/powerSupport.js": [
@@ -9192,6 +9786,11 @@
     "practitioner",
     "word",
     "Unlicensed practitioners and quacks fill the gap a strained service leaves."
+   ],
+   [
+    "market",
+    "implied",
+    "Guild workshops make goods no market will take."
    ]
   ],
   "src/domain/factionRename.js": [
@@ -9473,6 +10072,31 @@
     "court",
     "root",
     "src/data/institutionServices.js (Courthouse, Multiple court buildings)"
+   ],
+   [
+    "market",
+    "implied",
+    "src/data/institutionServices.js (Village headman, City administration, Weekly market, City-state government, Lord's appo"
+   ],
+   [
+    "militia",
+    "implied",
+    " town with a Garrison and no militia has men under arms and no roll of them, which is"
+   ],
+   [
+    "market",
+    "implied",
+    "Market charter and tolls"
+   ],
+   [
+    "market",
+    "implied",
+    "src/data/institutionServices.js (Market square)"
+   ],
+   [
+    "watch",
+    "implied",
+    "src/data/institutionServices.js (Professional city watch, Town watch)"
    ]
   ],
   "src/domain/region/discoverDependencyCandidates.js": [
@@ -9686,6 +10310,11 @@
     "granary",
     "root",
     "Stores: a granary, "
+   ],
+   [
+    "granary",
+    "implied",
+    "No granary; a few weeks in the larder."
    ]
   ],
   "src/domain/supplyChainState.js": [
@@ -9785,6 +10414,16 @@
     "market",
     "root",
     "The market does not place stories on credit."
+   ],
+   [
+    "market",
+    "implied",
+    "No market in this world sells that."
+   ],
+   [
+    "market",
+    "implied",
+    "There is no market here that will place a story for coin."
    ]
   ],
   "src/domain/worldPulse/brokerageServicesRules.js": [
@@ -10648,6 +11287,11 @@
     "prison",
     "root",
     "The settlement keeps a prison."
+   ],
+   [
+    "prison",
+    "implied",
+    "The settlement keeps no prison."
    ]
   ],
   "src/domain/worldPulse/occupation.js": [
@@ -10809,6 +11453,11 @@
     "walls",
     "root",
     " holds the walls or names its terms."
+   ],
+   [
+    "garrison",
+    "implied",
+    " took no ground, left no garrison, and asked for nothing."
    ]
   ],
   "src/domain/worldPulse/realmEvents.js": [
@@ -10836,6 +11485,11 @@
     "succession",
     "word",
     "The Succession Crisis"
+   ],
+   [
+    "starving",
+    "implied",
+    "The Starving City"
    ]
   ],
   "src/domain/worldPulse/realmVerbExecution.js": [
@@ -11157,7 +11811,7 @@
     "A near-closed economy has little market to shock."
    ],
    [
-    "famine",
+    "starving",
     "word",
     "The blockade is starving the granaries."
    ],
@@ -11983,7 +12637,7 @@
     "The siege ran to the hard limit of what a host can sustain before a town, and the besiegers still out-weighed the defenc"
    ],
    [
-    "famine",
+    "starving",
     "word",
     "'s will broke. Starving, discredited, and out of hope, the defenders capitulated rather than be stormed."
    ]
@@ -12086,7 +12740,7 @@
     "Vulnerable to trade disruption, famine risk."
    ],
    [
-    "famine",
+    "starving",
     "word",
     "Vulnerable to seasonal shortages and siege starvation without grain reserves."
    ],
@@ -12096,16 +12750,36 @@
     "Imports staple food at urban scale"
    ],
    [
-    "famine",
+    "starving",
     "word",
     "The settlement is starving. Its hungriest are turning to banditry, and a merchant has offered to supply food at a price "
+   ],
+   [
+    "granary",
+    "implied",
+    " lacks a granary. Cannot buffer harvests or maintain strategic food reserves."
+   ],
+   [
+    "mill",
+    "implied",
+    " people processes grain without a mill."
    ]
   ],
   "src/generators/economy/outlookHookSiblings.js": [
    [
-    "famine",
+    "starving",
     "word",
     "The settlement is starving. Its hungriest are turning to banditry, and a merchant has offered to supply food at a price "
+   ],
+   [
+    "war",
+    "implied",
+    "war: at war"
+   ],
+   [
+    "war",
+    "implied",
+    "War has taken the iron: the metal suppliers sell to the armies first, and the iron for tools and repairs stops arriving."
    ]
   ],
   "src/generators/economy/prosperity.js": [
@@ -12113,6 +12787,16 @@
     "occupation",
     "word",
     "The occupiers take their share through "
+   ],
+   [
+    "temple",
+    "implied",
+    "The church controls most economic activity. Land, markets, and trade flow through religious institutions. Commerce is pr"
+   ],
+   [
+    "temple",
+    "implied",
+    "The church controls most economic activity. Land and trade flow through religious institutions. Commerce is present but "
    ]
   ],
   "src/generators/economy/viability.js": [
@@ -12130,6 +12814,11 @@
     "practitioner",
     "word",
     "Add a tier-plausible hedge practitioner or alchemical workshop"
+   ],
+   [
+    "market",
+    "implied",
+    " without any markets or trade institutions."
    ]
   ],
   "src/generators/foodGenerator.js": [
@@ -12227,6 +12916,18 @@
     "the old quarter"
    ]
   ],
+  "src/generators/narrative/settlementOriginProse.js": [
+   [
+    "docks",
+    "implied",
+    ". It has no wharf of its own."
+   ],
+   [
+    "docks",
+    "implied",
+    "; the place has no wharf."
+   ]
+  ],
   "src/generators/narrativeGenerator.js": [
    [
     "quarters",
@@ -12251,7 +12952,7 @@
   ],
   "src/generators/narrativeText.js": [
    [
-    "famine",
+    "starving",
     "word",
     " is two bad weeks from genuine starvation; "
    ],
@@ -12419,6 +13120,11 @@
     "practitioner",
     "word",
     "the arcane practitioners"
+   ],
+   [
+    "law",
+    "implied",
+    "Fragile (private security, no public law)"
    ]
   ],
   "src/generators/power/rulingStructure.js": [
@@ -12431,6 +13137,26 @@
     "practitioner",
     "word",
     "Magical practitioners are consulted but not formally empowered. Their influence is advisory, transactional, and quietly "
+   ],
+   [
+    "market",
+    "implied",
+    "A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them."
+   ],
+   [
+    "watch",
+    "implied",
+    "Town watch; it enforces ordinances, manages disorder, and reports to the council."
+   ],
+   [
+    "watch",
+    "implied",
+    "Well-funded city watch; it keeps order reliably and is growing more sure of its own authority."
+   ],
+   [
+    "watch",
+    "implied",
+    "City watch; law enforcement and external defence, stretched between multiple responsibilities."
    ]
   ],
   "src/generators/power/settlementNarrative.js": [
@@ -12552,6 +13278,61 @@
     "practitioner",
     "word",
     "Alchemists and other magical practitioners"
+   ],
+   [
+    "watch",
+    "implied",
+    "Authority is contested. The watch is uncertain whose orders to follow. Opportunistic crime is rising in the gap."
+   ],
+   [
+    "law",
+    "implied",
+    "There is effectively no law enforcement."
+   ],
+   [
+    "prison",
+    "implied",
+    " Without prison or courts, the risk of operating is low. Arrest means a fine at worst."
+   ],
+   [
+    "walls",
+    "implied",
+    " The garrison acknowledges the problem but focuses on the walls and gates. Interior policing is under-resourced."
+   ],
+   [
+    "watch",
+    "implied",
+    "The watch is too thinly spread to maintain order."
+   ],
+   [
+    "watch",
+    "implied",
+    "Street-level confrontations between insurgent supporters and the watch. Officially categorised as riot and disorder."
+   ],
+   [
+    "watch",
+    "implied",
+    "Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding spe"
+   ],
+   [
+    "watch",
+    "implied",
+    "Theft and petty fraud by new arrivals with no local ties and no established credit. The watch struggles to distinguish t"
+   ],
+   [
+    "garrison",
+    "implied",
+    "The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theolo"
+   ],
+   [
+    "watch",
+    "implied",
+    "The merchant guild's private security force just detained someone, with no legal authority to do so. The watch is lookin"
+   ],
+   [
+    "walls",
+    "implied",
+    " The walls leave few ways in, and the guard watches them."
    ]
   ],
   "src/generators/servicesGenerator.js": [
@@ -12706,6 +13487,21 @@
     "practitioner",
     "word",
     "the arcane practitioners"
+   ],
+   [
+    "garrison",
+    "implied",
+    " without a garrison or professional guard is indefensible. City-scale settlements require permanent military infrastruct"
+   ],
+   [
+    "market",
+    "implied",
+    "Subsistence economy. No trade routes means no imports, no exports, and no market participation. The settlement produces "
+   ],
+   [
+    "docks",
+    "implied",
+    "A port settlement without dock facilities cannot service the ships its location implies."
    ]
   ]
  },
