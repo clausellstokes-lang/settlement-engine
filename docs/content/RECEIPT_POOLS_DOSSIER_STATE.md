@@ -2884,12 +2884,16 @@ supplies the ancestry.
 3. `[visitor]` The armed townspeople you meet at {settlement} are capable on their own ground and have never stood in a line with anyone.
 
 **`Invasion & War`: neither walls nor force** {crisis-scoped}
-1. `[ledger · crisis: any · no crisis: threat]` {settlement} has no line and no force. Organized aggression cannot be resisted here; what preserves the town is distance, diplomacy, or being beneath notice.
+1. `[ledger · crisis: any · no crisis: threat · no watch]` {settlement} has no line and no force. Organized aggression cannot be resisted here; what preserves the town is distance, diplomacy, or being beneath notice.
 2. `[counterforce · no threat · crisis: any]` Nothing threatens {settlement} now, and nothing about the town would stop it if something did. Its safety rests on nobody wanting it.
 3. `[street · no threat · crisis: any]` The town's plan for an army is to not be interesting to one, and everybody here can state the plan.
-4. `[counterforce · threat · crisis: any]` {settlement} has no line and no force, and the threat now at hand has noticed both.
-5. `[street · threat · crisis: any]` With trouble at hand, {settlement} has no wall to close and nobody trained to send, and each household is deciding for itself whether to stay.
-6. `[visitor · threat · crisis: any]` You find {settlement} open on every side, with nobody posted anywhere, while the danger everyone talks about is close.
+4. `[counterforce · threat · crisis: any · no watch]` {settlement} has no line and no force, and the threat now at hand has noticed both.
+5. `[street · threat · crisis: any · no watch]` With trouble at hand, {settlement} has no wall to close and nobody trained to send, and each household is deciding for itself whether to stay.
+6. `[visitor · threat · crisis: any · no watch]` You find {settlement} open on every side, with nobody posted anywhere, while the danger everyone talks about is close.
+7. `[ledger · watch · no threat · crisis: any]` {settlement} has no wall and no soldiers; its watch keeps the peace in the streets and would be no answer to an army.
+8. `[counterforce · watch · threat · crisis: any]` {settlement} has no wall and only its watch, and the threat now at hand has noticed both.
+9. `[street · watch · threat · crisis: any]` With trouble at hand, {settlement}'s watch is all the town has to send, and there is no wall to send it to.
+10. `[visitor · watch · threat · crisis: any]` {settlement} lies open on every side; its watch keeps to its rounds while the danger everyone talks about is close.
 
 **`Internal Security`: full legal chain (court AND prison)**
 1. `[ledger · colour]` Offenders at {settlement} are arrested, tried and held, and each case is written into the court's lists, so people expect a hearing, not a beating.

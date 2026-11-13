@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 258095,
-      "gzip": 34972,
+      "raw": 259748,
+      "gzip": 35133,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -739,6 +739,14 @@
       "toRaw": 294885,
       "gzipAfter": 37686,
       "reason": "+338 B raw over the committed 294547 (gzip level 9: 37647 -> 37686): stage 3 item 1: sixteen lines for the crisis cases round 1 thinned (DS-ECO-1 C4, DS-ECO-8 POOR, DS-DEF-2 STRONG, DS-ECO-11 fullyExploited, DS-DEF-5 walls PRESENT and NO organized force, DS-GEN-18 BOUGHT-IN, DS-ECO-10 established) (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE-3 M3",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 258095,
+      "toRaw": 259748,
+      "gzipAfter": 35133,
+      "reason": "+1653 B raw over the committed 258095 (gzip level 9: 34972 -> 35133): DS-DEF-2 neither walls nor force: four lines declared no watch (a watch on the card), four watch twins (the defence review M3, 2026-11-13)"
     }
   ],
   "ceilingTransfersNewLeaves": [
