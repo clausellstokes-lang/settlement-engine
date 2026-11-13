@@ -22,6 +22,7 @@ import { safe } from '../lib/format.js';
 import { tokenCase } from '../../domain/display/labelCase.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { supplyChainNoteInWords } from '../../domain/display/engineKeysInText.js';
+import { chainHousesOf } from '../../domain/display/chainHouses.js';
 
 // chainId -> definition (for upstream import labels + fallback outputs).
 const CHAIN_DEFS = {};
@@ -75,10 +76,10 @@ function ChainRow({ chain, instNames, primaryExports }) {
   const missing = chain.upstreamMissing || [];
   const isExportable = chain.exportable && !chain.entrepot;
 
-  const insts = (chain.processingInstitutions || []).map((name) => ({
-    name,
-    present: instNames.some((n) => n.toLowerCase().includes(String(name).toLowerCase().split(/[\s(]/)[0])),
-  }));
+  // R2-CODE-B item 1b, the chair's ruling R1 (REVIEW-R2-STAGES finding 3): the houses by the seam's house
+  // label, each once (domain/display/chainHouses.js), the screen's chain card's own read — never a rank's
+  // count range the roster does not hold. `present` is the same first-word read this row always made.
+  const insts = chainHousesOf(chain.processingInstitutions, instNames);
 
   // Canonical good id first, substring fallback — the same predicate as the
   // web SupplyChainsPanel, or the PDF badge disagrees with the screen when

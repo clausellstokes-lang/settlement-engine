@@ -292,6 +292,10 @@ export function countRawChainInstitutionPrints(source) {
     if (isComment(line)) continue;
     if (!/processingInstitutions/.test(line)) continue;
     if (line.includes(SEAM_MODULE)) continue;
+    // RE-KEYED (R2-CODE-B item 1b, the chair's ruling R1, 2026-11-13): domain/display/chainHouses.js ::
+    // chainHousesOf is the seam's own reader for a chain's houses (it names each through
+    // institutionDisplayName.js :: institutionHouseLabel), so a list read through it is not raw.
+    if (line.includes('chainHousesOf(')) continue;
     if (!/\.(?:join|map)\s*\(/.test(line)) continue;
     n += 1;
   }
