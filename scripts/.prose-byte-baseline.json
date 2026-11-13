@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 254153,
-      "gzip": 34373,
+      "raw": 255208,
+      "gzip": 34551,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -707,6 +707,14 @@
       "toRaw": 294547,
       "gzipAfter": 37647,
       "reason": "+12 B raw over the committed 294535 (gzip level 9: 37645 -> 37647): GEN-9 disaster v7 reworded off a test literal it aligned with (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE-3 DEF-2 STRONG debt",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 254164,
+      "toRaw": 255208,
+      "gzipAfter": 34551,
+      "reason": "+1055 B raw over the committed 254153 (gzip level 9: 34373 -> 34551): DS-DEF-2 Economic Survival STRONG: three lines for the debt crisis, whose one line (v3) is declared off it (2026-11-13)"
     }
   ],
   "ceilingTransfersNewLeaves": [
