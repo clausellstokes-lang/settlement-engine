@@ -63,6 +63,8 @@ const PRE_RR_BODY = {
   'port.coastal': 'A coastal seaport whose existence is inseparable from the sea.',
   'isolated.sustained': 'Isolated from major trade routes. Self-sufficiency is not an aspiration here; it is a constraint.',
   'isolated.deficit': `Isolated from major trade routes. The settlement cannot fully feed itself; what the land does not give arrives expensively — through ${CHANNELS_TOKEN} — or not at all.`,
+  // R2-CODE-A-4 (round three #7): a new arm, the shortfall the food record brings nothing in for; it opens on its own first sentence.
+  'isolated.unsupplied': 'Isolated from major trade routes. The settlement cannot fully feed itself, and no food comes in from outside: it gets by on {holds}.',
 };
 
 /** A founding state that resolves to each arm. */
@@ -76,6 +78,7 @@ const STATE_FOR_ARM = {
   ground: { route: 'port', terrainType: 'mountain', hasDocks: false },
   'isolated.sustained': { route: 'isolated', hasFoodDeficit: false },
   'isolated.deficit': { route: 'isolated', hasFoodDeficit: true },
+  'isolated.unsupplied': { route: 'isolated', hasFoodDeficit: true, hasFoodImport: false },
 };
 
 describe('RR law 1 — canonical-at-zero: no seedless caller moved', () => {
@@ -88,7 +91,7 @@ describe('RR law 1 — canonical-at-zero: no seedless caller moved', () => {
 
   test('pin:seedless — a state with no seed selects index 0 on every arm', () => {
     for (const arm of ORIGIN_ARMS) {
-      const expected = PRE_RR_BODY[arm].split(CHANNELS_TOKEN).join('CH').split('{ground}').join('on the mountainside');
+      const expected = PRE_RR_BODY[arm].split(CHANNELS_TOKEN).join('CH').split('{ground}').join('on the mountainside').split('{holds}').join('what little it has');
       expect(
         selectOriginBody({ ...STATE_FOR_ARM[arm], supportChannels: 'CH' }),
         `${arm} with no seed`,
@@ -162,8 +165,9 @@ describe('RR law 3 — every variant of every pool is reachable', () => {
     // content that moves the golden, so it must arrive with a re-record and a
     // shift-record row — and reading this red is how an author learns that.
     // NINE since STYLE-2 FIRST-IMPRESSIONS (A·O16): the ground arm (#10's gate, finally).
-    expect(ORIGIN_ARMS.length, 'the arm count left 9').toBe(9);
-    expect(Object.keys(ORIGIN_POOLS).length, 'ORIGIN_ARMS and ORIGIN_POOLS disagree').toBe(9);
+    // TEN since R2-CODE-A-4 (round three #7): the isolated shortfall the food record brings nothing in for.
+    expect(ORIGIN_ARMS.length, 'the arm count left 10').toBe(10);
+    expect(Object.keys(ORIGIN_POOLS).length, 'ORIGIN_ARMS and ORIGIN_POOLS disagree').toBe(10);
     const sizes = Object.fromEntries(ORIGIN_ARMS.map((arm) => [arm, ORIGIN_POOLS[arm].length]));
     const offSize = Object.entries(sizes).filter(([, n]) => n !== 5);
     expect(
@@ -173,10 +177,10 @@ describe('RR law 3 — every variant of every pool is reachable', () => {
     // …and the total is the product, stated so the ledger's arithmetic is
     // checkable at a glance rather than trusted.
     const bodies = Object.values(ORIGIN_POOLS).flat();
-    expect(bodies.length, '9 arms x 5 variants = 45 authored bodies').toBe(45);
+    expect(bodies.length, '10 arms x 5 variants = 50 authored bodies').toBe(50);
     // NON-INFLATION: 40 SLOTS is not 40 BODIES if two arms share a sentence.
     // The recorded corpus size is a claim about distinct authored prose.
-    expect(new Set(bodies).size, 'two arms ship the same authored body').toBe(45);
+    expect(new Set(bodies).size, 'two arms ship the same authored body').toBe(50);
   });
 
   test('pin:variant-reachability — the seed family reaches EVERY member of EVERY pool', () => {
@@ -185,7 +189,7 @@ describe('RR law 3 — every variant of every pool is reachable', () => {
       for (const seed of SEED_FAMILY) {
         seen.add(selectOriginBody({ ...STATE_FOR_ARM[arm], supportChannels: 'CH', seed }));
       }
-      const expected = ORIGIN_POOLS[arm].map((b) => b.split(CHANNELS_TOKEN).join('CH').split('{ground}').join('on the mountainside'));
+      const expected = ORIGIN_POOLS[arm].map((b) => b.split(CHANNELS_TOKEN).join('CH').split('{ground}').join('on the mountainside').split('{holds}').join('what little it has'));
       const missing = expected.filter((b) => !seen.has(b));
       expect(missing, `${arm}: ${missing.length} of ${expected.length} variants unreachable`).toEqual([]);
     }
@@ -301,6 +305,7 @@ describe('RR law 5 — every authored variant obeys the generation world law', (
     ground: { tradeRouteAccess: 'port', terrainType: 'mountain' },
     'isolated.sustained': { tradeRouteAccess: 'isolated', terrainType: 'forest' },
     'isolated.deficit': { tradeRouteAccess: 'isolated', terrainType: 'forest' },
+    'isolated.unsupplied': { tradeRouteAccess: 'isolated', terrainType: 'forest' },
   };
 
   test('pin:world-law-maritime — no variant claims a capability its arm lacks', () => {

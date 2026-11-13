@@ -40,7 +40,7 @@ import { cardInstitutionVeilOf } from '../domain/people/cardPowers.js';
 import { drawTies } from './people/ties.js';
 import { dealGoals } from './people/goals.js';
 import { pickVariant } from '../kernel/proseHash.js';
-import { selectOriginBody } from './narrative/settlementOriginProse.js';
+import { selectOriginBody, supportChannelsOf } from './narrative/settlementOriginProse.js';
 import { resolvePrimaryStress } from './stressPriority.js';
 import { migrationDirectionOfStress, migrationDirectionOfConfig } from '../domain/migrationDirection.js';
 import { pick, pickRandom, pickRandom2, random01 } from './helpers.js';
@@ -785,13 +785,13 @@ export const generateSettlementReason = (tier, route, neighbor, _config = {}, fo
   // DRAW-FREE from the settlement's founding state (see narrative/settlementOriginProse.js).
   // A caller that passes no `_seed` gets the pool's index 0, which is the exact
   // pre-widening sentence: canonical-at-zero, so no seedless caller moved.
-  const supportChannels = (
-    _config.magicExists !== false
-    && Number(_config.priorityMagic ?? 50) > 0
-  )
-    // STYLE-2 FIRST-IMPRESSIONS (A·O16): the support list in plain words, not the channel names.
-    ? 'carriage by magic, the caravans that still come, the roads in a good season, or the favour of a patron'
-    : 'the caravans that still come, the roads in a good season, or the favour of a patron';
+  // STYLE-2 FIRST-IMPRESSIONS (A·O16): the support list in plain words, not the channel names.
+  // R2-CODE-A-4 (round three #7; the increment's ww-3, ww-29): the list is read from the record's own
+  // isolation receipt (config._isolationSupport, set by the coherence pass before this step), one phrase
+  // a path that carries food in from outside, never a fixed list: no magic, caravan or patron the
+  // receipt lacks is named (settlementOriginProse.js :: supportChannelsOf).
+  // The receipt is the record's `isolationSupport` (the same object, measured on 764 births).
+  const supportChannels = supportChannelsOf(_config._isolationSupport) ?? undefined;
   lines.push(selectOriginBody({
     route,
     terrainType: _config.terrainType ?? null,
@@ -801,7 +801,7 @@ export const generateSettlementReason = (tier, route, neighbor, _config = {}, fo
     hasDocks: roster?.hasDocks,
     supportChannels,
     specialResources: _config.specialResources ?? null,
-    seed: _config._seed ?? null, siege: Array.isArray(_config.stressTypes) && _config.stressTypes.includes('under_siege'), tier, hasTravellerHouse: roster?.hasTravellerHouse, // R2-CODE-A-4 (#154, #ww-1227): the rows a siege, the size or the roster refuses; one line so no cited line moves
+    seed: _config._seed ?? null, siege: Array.isArray(_config.stressTypes) && _config.stressTypes.includes('under_siege'), tier, hasTravellerHouse: roster?.hasTravellerHouse, hasFoodImport: foodBalance ? Number(foodBalance.importCoverage) > 0 : undefined, isolationSupport: _config._isolationSupport ?? null, // R2-CODE-A-4 (#154, #ww-1227, #7): the rows a siege, the size or the roster refuses; what a shortfall with nothing brought in holds; one line so no cited line moves
   }));
 
   // Tier-specific context. THE OWNER'S STYLE LAW (W5 HIS 2026-11-07, STYLE-AUDIT §2a #11 and §2b-5):

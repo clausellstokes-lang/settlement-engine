@@ -841,6 +841,10 @@ describe('DS-GEN-6 — the route, the tier overlay, and the demoted deficit dime
           armToPool.set(arm, originRoutePoolKey(route));
           const noDocks = originArmKey({ route, terrainType, hasFoodDeficit, hasDocks: false });
           if (noDocks === 'ground') armToPool.set(noDocks, originRoutePoolKey(route));
+          // R2-CODE-A-4 (round three #7): the food record's imports are a producer input too — an isolated
+          // shortfall the record brings nothing in for founds on the `isolated.unsupplied` arm.
+          const unsupplied = originArmKey({ route, terrainType, hasFoodDeficit, hasFoodImport: false });
+          if (unsupplied === 'isolated.unsupplied') armToPool.set(unsupplied, originRoutePoolKey(route));
         }
       }
     }
