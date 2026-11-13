@@ -391,7 +391,9 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // 2026-11-12, STYLE-2-MERGE point 43 (re-keyed BY IDENTITY, STYLE-2-MERGE-8): 329 -> 330 at the COHERENCE-PRESUME merge
     // f922124d0 (docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json; the re-titled watch role re-deals the
     // E2 role rows); point 42 and the line before it read 329. The arm's other figures measured green after the re-key.
-    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(330);
+    // 2026-11-13, STYLE-2-MERGE point 46 (re-keyed BY IDENTITY, STYLE-2-MERGE-9; a figure the COHERENCE-POWERS drafted record names for the merge seat, editCorpusRatchet A3/A5/A7): 330 -> 329 at the COHERENCE-POWERS merge 6aeaa4154 (docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json;
+    // the dual hat re-deals the cast the E-rows edit); 3575cf061 reads 330. mixedOutside and settledLive measured empty after.
+    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(329);
     expect(census().rows.filter((row) => row.groupsJudged > 0).length, 'declared groups ARE judged').toBe(133);
     // THE POSITIVE CONTROL, CONSTRUCTED: one object holding a leaf taken from R1 beside a leaf kept
     // where the record had settled away from R0 IS a MIXED object, and enclosingGroup classes it.
@@ -474,7 +476,10 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // the plains port town, golden-master-v3). TRACE-ONLY, diffed leaf by leaf: the ONLY differing leaf in either order is
     // the population step's summary trace `simulationTrace[].causes[0].effect` ("78 npcs" | "79 npcs": the cast that
     // step counted; why the order moves it is not traced); every world field, the roster included, is identical in both orders.
-    expect(tally(chains().pairs)).toEqual({ 'E1|E6': 4, 'E2|E6': 4, 'E6|E1': 4, 'E6|E2': 4 });
+    // 2026-11-13, STYLE-2-MERGE point 46 (re-keyed BY IDENTITY, STYLE-2-MERGE-9; a figure the COHERENCE-POWERS drafted record names for the merge seat, editCorpusRatchet A3/A5/A7): each ordered seat pair 4 -> 6 at the COHERENCE-POWERS merge 6aeaa4154 (two more towns' seat pairs stop commuting;
+    // 3575cf061 reads 4). NOT traced leaf by leaf here (PLAUSIBLE: the population step's trace, as at PEOPLE-1); CHARGED to the
+    // powers follow-up seat to diff the two new towns' orders leaf by leaf. Determinism and undo held in the same run.
+    expect(tally(chains().pairs)).toEqual({ 'E1|E6': 6, 'E2|E6': 6, 'E6|E1': 6, 'E6|E2': 6 });
     expect(() => mergeConsequence({}, {}, {}, { edit: [] })).toThrow(TypeError);
   }, ARM_TIMEOUT);
 
@@ -565,7 +570,9 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // COHERENCE-PRESUME merge f922124d0 (docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json: the culture lines,
     // the re-titled watch role and the ties it re-deals, the history and institution texts reach more readings); point 42 reads
     // [670, 281, 2016]. The leaf-by-leaf cause inside the merge is not traced (PLAUSIBLE per component, CONFIRMED per point).
-    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([682, 325, 2062]);
+    // 2026-11-13, STYLE-2-MERGE point 46 (re-keyed BY IDENTITY, STYLE-2-MERGE-9; a figure the COHERENCE-POWERS drafted record names for the merge seat, editCorpusRatchet A3/A5/A7): [682, 325, 2062] -> [684, 257, 2168] at the COHERENCE-POWERS merge 6aeaa4154 (the dual hat re-deals the cast and
+    // the ties the E-edits reach); 3575cf061 reads [682, 325, 2062]. PLAUSIBLE per component, CONFIRMED per point.
+    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([684, 257, 2168]);
     // an npc ROLE reached ZERO readings over the whole corpus until CRISIS, recorded so the figure is not silence.
     // 2026-11-05 (LANDING-6, the same bisection): 0 → 48 CRISIS (d3e072368: the crisis record carries its derived cast,
     // and the cast is chosen by role) → 63 SELF-VOUCH (0be13b5cb) → 32 car 3 (90dc22f18) → 24 PINS (37b1e746d) → 28 F6
@@ -583,7 +590,10 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // 2026-11-12, STYLE-2-MERGE point 43 (re-keyed BY IDENTITY, STYLE-2-MERGE-8; masked behind A7's first figures until they were
     // re-keyed above): 59 -> 71 at the COHERENCE-PRESUME merge f922124d0 (the re-titled watch role reaches the crisis cast on
     // twelve more readings); point 42 reads 59. The two dormant membership edits still reach none.
-    expect([taken.E2, taken.E3, taken.E4], 'a role reaches the crisis cast; a dormant membership edit reaches none').toEqual([71, 0, 0]);
+    // 2026-11-13, STYLE-2-MERGE point 46 (re-keyed BY IDENTITY, STYLE-2-MERGE-9; masked behind A7's first figures until they were
+    // re-keyed above): 71 -> 49 at the COHERENCE-POWERS merge 6aeaa4154 (the dual hat re-deals the cast, so the role edit reaches
+    // the crisis cast on fewer readings); 3575cf061 reads 71. The two dormant membership edits still reach none.
+    expect([taken.E2, taken.E3, taken.E4], 'a role reaches the crisis cast; a dormant membership edit reaches none').toEqual([49, 0, 0]);
     // AND THE MACHINERY'S FIRST POPULATION, in the chain: the restatement at the first merge lets
     // the record settle away from R0 at a leaf, so the second merge's receipts carry a ride-along.
     // 2026-10-31 (chair ruling X-29, cure lane T13; measured at the GS-2 tree WITHOUT it, where this reads [12, 12]):
@@ -608,7 +618,10 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // the chain census (~5 minutes a tree) was not probed on the 76 stage trees the census figures above were measured on,
     // and every stage between 2c7437030 and the tip read A7 red at its first figure, so this pin was never live there.
     // PLAUSIBLE cause: the same eleven lane merges that moved [E1, E5, E6] above. Chains and leaves stay unequal.
-    expect([chains().rideAlongChains, chains().rideAlongLeaves], 'the honesty machinery firing').toEqual([144, 154]);
+    // 2026-11-13, STYLE-2-MERGE point 46 (re-keyed BY IDENTITY, STYLE-2-MERGE-9; masked behind the role reach until it was re-keyed):
+    // [144, 154] -> [135, 151] at the COHERENCE-POWERS merge 6aeaa4154, this file's own chain census at the merged tree (the dual hat
+    // re-deals the cast the chains ride along). PLAUSIBLE cause, not traced by chain. Chains and leaves stay unequal.
+    expect([chains().rideAlongChains, chains().rideAlongLeaves], 'the honesty machinery firing').toEqual([135, 151]);
   }, ARM_TIMEOUT);
 
   it('A8 the family declared instruments hold at this seam', () => {
