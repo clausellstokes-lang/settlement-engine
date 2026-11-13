@@ -4048,7 +4048,9 @@
       "id": "Carriers' guild|Freight haulage",
       "text": "Organised road transport for goods between towns. Reliable, guild-backed.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
       "colour": false
     },
@@ -4439,7 +4441,9 @@
       "id": "Daily markets|Fresh produce",
       "text": "Fruit, vegetables, dairy, and eggs. Available every morning.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
       "colour": false
     },

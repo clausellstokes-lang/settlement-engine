@@ -826,7 +826,7 @@ export const INSTITUTION_SERVICES = {
     [CUSTOM_COMMISSIONS]: { on: false, p: 0.5, desc: "Decorative or specialist work for wealthier clients." }
   },
   "Carriers' guild": {
-    "Freight haulage": { on: true,  p: 1.0, desc: "Organised road transport for goods between towns. Reliable, guild-backed." },
+    "Freight haulage": { on: true,  p: 1.0, desc: "Organised road transport for goods between towns. Reliable, guild-backed.", excludes: ["crisis: under_siege"] },
     "Delivery contracts": { on: true, p: 0.9, desc: "Scheduled delivery runs on established routes." },
     "Porterage": { on: false, p: 0.6, desc: "Short-distance carrying within a town or at a port." },
     "Cargo storage": { on: false, p: 0.5, desc: "Temporary warehousing while goods await onward transport." }
@@ -902,7 +902,7 @@ export const INSTITUTION_SERVICES = {
     "Political power": { on: false, p: 0.6, desc: "Guilds at this scale wield significant civic and political influence." }
   },
   "Daily markets": {
-    "Fresh produce": { on: true,  p: 1.0, desc: "Fruit, vegetables, dairy, and eggs. Available every morning." },
+    "Fresh produce": { on: true,  p: 1.0, desc: "Fruit, vegetables, dairy, and eggs. Available every morning.", excludes: ["crisis: under_siege"] },
     "General trade": { on: true, p: 0.9, desc: "Household goods, small crafts, and everyday items." },
     "Street food": { on: true, p: 0.8, desc: "Hot food sold to working people. Pies, stews, roasted meats." },
     "Wholesale purchasing": { on: false, p: 0.5, desc: "Early morning bulk buying by tavern keepers and institutional buyers." }
@@ -1765,7 +1765,7 @@ export const INSTITUTION_SERVICES = {
     "Pasturage": { on: true, p: 1.0, desc: "Grazing on the common for a traveller's beasts, for a small fee." }
   },
   "Access to external mill": {
-    "Grain milling (a day away)": { on: true, p: 1.0, desc: "Grain carted to a mill outside the settlement and brought back as flour." }
+    "Grain milling (a day away)": { on: true, p: 1.0, desc: "Grain carted to a mill outside the settlement and brought back as flour.", excludes: ["crisis: under_siege"] }
   }
 
 };
@@ -1788,5 +1788,20 @@ export const SERVICE_DESC_SIBLINGS = Object.freeze({
   'Move people beneath the walls unseen.': Object.freeze([
     Object.freeze({ text: 'Move people beneath the walls unseen.', needs: Object.freeze(['walls']) }),
     Object.freeze({ text: 'Move people in and out unseen.', twinOf: 'Move people beneath the walls unseen.', excludes: Object.freeze(['walls']) }),
+  ]),
+  // W2-FIX-DATA (2026-11-13; the REVIEW-W2B cold list): the roads a siege cuts. VETOABLE wording (the owner's).
+  "Grain carted to a mill outside the settlement and brought back as flour.": Object.freeze([
+    Object.freeze({ text: "Grain carted to a mill outside the settlement and brought back as flour.", excludes: Object.freeze(['crisis: under_siege']) }),
+    Object.freeze({ text: "With the roads cut, grain is ground by hand at home until the carts can get through again.", twinOf: "Grain carted to a mill outside the settlement and brought back as flour.", crisis: Object.freeze(['under_siege']) }),
+  ]),
+  // W2-FIX-DATA (2026-11-13; the REVIEW-W2B cold list): the roads a siege cuts. VETOABLE wording (the owner's).
+  "Fruit, vegetables, dairy, and eggs. Available every morning.": Object.freeze([
+    Object.freeze({ text: "Fruit, vegetables, dairy, and eggs. Available every morning.", excludes: Object.freeze(['crisis: under_siege']) }),
+    Object.freeze({ text: "Whatever the kitchen gardens still give, sold early and gone by mid-morning.", twinOf: "Fruit, vegetables, dairy, and eggs. Available every morning.", crisis: Object.freeze(['under_siege']) }),
+  ]),
+  // W2-FIX-DATA (2026-11-13; the REVIEW-W2B cold list): the roads a siege cuts. VETOABLE wording (the owner's).
+  "Organised road transport for goods between towns. Reliable, guild-backed.": Object.freeze([
+    Object.freeze({ text: "Organised road transport for goods between towns. Reliable, guild-backed.", excludes: Object.freeze(['crisis: under_siege']) }),
+    Object.freeze({ text: "Road transport for goods between towns, guild-backed. With the roads cut, the wagons stand idle in the yard.", twinOf: "Organised road transport for goods between towns. Reliable, guild-backed.", crisis: Object.freeze(['under_siege']) }),
   ]),
 });

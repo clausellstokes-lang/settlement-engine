@@ -50,7 +50,8 @@ describe('the institution descriptions declare by text (CENSUS-4c unit 5)', () =
 describe('the services declare in place (CENSUS-4c unit 5)', () => {
   const rows = ledger('institutionServices.INSTITUTION_SERVICES').rows;
   it('each definition carries exactly the ledger\'s declaration (4b\'s two Mill rows included)', () => {
-    expect(rows.filter(declares)).toHaveLength(49);
+    // W2-FIX-DATA (2026-11-13, the REVIEW-W2B cold list): the mill run, the morning produce and the carriers' haulage exclude a siege, each with its twin; the mill run has no ledger row (49 → 51)
+    expect(rows.filter(declares)).toHaveLength(51);
     for (const r of rows) {
       const [inst, svc] = r.id.split('|');
       const def = /** @type {any} */ (INSTITUTION_SERVICES)[inst][svc];
