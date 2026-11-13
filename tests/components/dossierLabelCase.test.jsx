@@ -532,6 +532,9 @@ describe('the three mounts browser pass 3 met, each pinned to the band it must r
     const fixture = {
       ...s,
       institutions: [{ id: 'inst-smug', name: 'Smuggling ring', category: 'Criminal', status: 'healthy' }],
+      // re-keyed (W2-A-LEAVES 5b, 2026-11-12): a criminal POWER now outranks the name ladder (a gang is a gang),
+      // so the forged city's criminal faction leaves the roster too, and the one branch this arm names still answers
+      powerStructure: { ...s.powerStructure, factions: (s.powerStructure?.factions || []).filter((f) => f.category !== 'criminal') },
     };
     const { container } = render(<DefenseTab settlement={fixture} />);
     expandAll(container);

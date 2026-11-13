@@ -1,0 +1,3429 @@
+{
+ "_doc": "W2-A-LEAVES (2026-11-12): THE POOL TABLE. Every pool of the state-prose corpus and its LAYER on the procedure's scale (SOP-POOLS-AND-CONDITIONS §1: a line is one above the highest fact it reads). Rows marked map:<how> took the layer map's placing (lane/layer-map-2026-11-12 at 5f1dd0397, results/layers.json) + 1: the map numbers a pool by the stratum its key reads, so its L1 pool reads the base facts and is a layer-2 line here. Rows marked placed: are this lane's reading of source (the 21 the map could not place). Layer W: the campaign world's desks, outside this release, banked by name. A NEW POOL gets its row here in the commit that adds it, placed by what its key and its lines read; tests/lint/factLayers.walker.test.js reds an unplaced pool and a row whose pool is gone.",
+ "rows": {
+  "DS-CND-1::ARCHETYPE: boom": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::ARCHETYPE: flourishing": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::ARCHETYPE: reconstruction": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: easing": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: famine": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: indebted": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: infiltrated": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: insurgency": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: mass_migration": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: monster_pressure": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: occupied": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: plague_onset": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: politically_fractured": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: recently_betrayed": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: religious_conversion": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: slave_revolt": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: succession_void": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: under_siege": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: wartime": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: famine": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: indebted": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: infiltrated": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: insurgency": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: mass_migration": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: monster_pressure": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: occupied": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: plague_onset": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: politically_fractured": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: recently_betrayed": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: religious_conversion": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: slave_revolt": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: succession_void": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: under_siege": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: wartime": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: stable, and the FLAT case (no valid directional status)": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: worsening": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: famine": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: indebted": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: infiltrated": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: insurgency": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: mass_migration": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: monster_pressure": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: occupied": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: plague_onset": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: politically_fractured": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: recently_betrayed": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: religious_conversion": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: slave_revolt": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: succession_void": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: under_siege": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: wartime": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-CND-1::DURATION: inside the expiry wind-down window": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::FAMILY: acute crisis": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::FAMILY: occupation layer": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::FAMILY: recovery": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::FAMILY: regional transmission": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::FAMILY: war layer, aggressor side": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::PROVENANCE: causes[] or triggeredAt.sourceEventType populated": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::PROVENANCE: no causes[] and no sourceEventType": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-CND-1::SEVERITY: critical": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-CND-1::SEVERITY: high": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-CND-1::SEVERITY: low": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-CND-1::SEVERITY: medium": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-10::badge ADEQUATE (any arm)": {
+   "layer": 4,
+   "src": "map:static"
+  },
+  "DS-DEF-10::badge CRITICAL (any arm)": {
+   "layer": 4,
+   "src": "map:static"
+  },
+  "DS-DEF-10::badge STRONG (any arm)": {
+   "layer": 4,
+   "src": "map:static"
+  },
+  "DS-DEF-10::badge WEAK (any arm)": {
+   "layer": 4,
+   "src": "map:static"
+  },
+  "DS-DEF-10::overall reading undefended": {
+   "layer": 4,
+   "src": "map:static"
+  },
+  "DS-DEF-10::overall reading well defended": {
+   "layer": 4,
+   "src": "map:static"
+  },
+  "DS-DEF-10::posture ACTIVE SIEGE": {
+   "layer": 4,
+   "src": "map:static"
+  },
+  "DS-DEF-10::posture BEAST PRESSURE": {
+   "layer": 4,
+   "src": "map:static"
+  },
+  "DS-DEF-10::posture COMMAND SPLIT (politically fractured)": {
+   "layer": 4,
+   "src": "map:static"
+  },
+  "DS-DEF-10::posture INFILTRATION ACTIVE": {
+   "layer": 4,
+   "src": "map:static"
+  },
+  "DS-DEF-10::posture INSURGENCY ACTIVE": {
+   "layer": 4,
+   "src": "map:static"
+  },
+  "DS-DEF-10::posture INTERNAL PRESSURE (famine)": {
+   "layer": 4,
+   "src": "map:static"
+  },
+  "DS-DEF-10::posture MIGRATION SURGE": {
+   "layer": 4,
+   "src": "map:static"
+  },
+  "DS-DEF-10::posture QUARANTINE ACTIVE (plague onset)": {
+   "layer": 4,
+   "src": "map:static"
+  },
+  "DS-DEF-10::posture RELIGIOUS UPHEAVAL": {
+   "layer": 4,
+   "src": "map:static"
+  },
+  "DS-DEF-10::posture REVOLT ACTIVE": {
+   "layer": 4,
+   "src": "map:static"
+  },
+  "DS-DEF-10::posture SECURITY COMPROMISED (recently betrayed)": {
+   "layer": 4,
+   "src": "map:static"
+  },
+  "DS-DEF-10::posture SUCCESSION CONTESTED": {
+   "layer": 4,
+   "src": "map:static"
+  },
+  "DS-DEF-10::posture UNDER OCCUPATION": {
+   "layer": 4,
+   "src": "map:static"
+  },
+  "DS-DEF-10::posture UNDER TRIBUTE (indebted)": {
+   "layer": 4,
+   "src": "map:static"
+  },
+  "DS-DEF-10::posture WAR FOOTING (wartime)": {
+   "layer": 4,
+   "src": "map:static"
+  },
+  "DS-DEF-11::UNWALLED-LARGE": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-11::UNWALLED-SMALL": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-11::WALLED-QUIET": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-DEF-11::WALLED-STRAINED": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-DEF-11::WALLED-THREATENED": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-DEF-12::CAPACITY: ample": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-12::CAPACITY: enough": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-12::CAPACITY: far short": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-12::CAPACITY: short": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-12::MAGIC-DEPENDENT": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-1::readiness ADEQUATE": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-DEF-1::readiness CRITICAL": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-DEF-1::readiness STRONG": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-DEF-1::readiness WEAK": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-DEF-1::strategic value HIGH": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-DEF-1::strategic value LOW": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-DEF-1::terrain EXPOSED": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-DEF-1::terrain FAVOURABLE to the defender": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-DEF-2::Beasts & Monsters: frontier, credible deterrence": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-2::Beasts & Monsters: frontier, force without a perimeter": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-2::Beasts & Monsters: plagued, NO perimeter and NO force": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-2::Beasts & Monsters: plagued, perimeter but NO force to hold it": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-2::Beasts & Monsters: settled, defenses beyond the need": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-2::Beasts & Monsters: settled, nothing organized": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-2::CHAIN: defence short": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-2::CHAIN: defence supplied": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-2::CHAIN: food trades failing": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-2::CHAIN: food trades working": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-2::Disasters & Famine: NO reserves, NO medical provision": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-2::Disasters & Famine: NO reserves, hospital present": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-2::Disasters & Famine: granary AND hospital": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-2::Disasters & Famine: granary AND parish care only": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-2::Disasters & Famine: granary, NO medical provision": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-2::Economic Survival: ADEQUATE": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-DEF-2::Economic Survival: CRITICAL": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-DEF-2::Economic Survival: STRONG": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-DEF-2::Economic Survival: WEAK": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-DEF-2::Internal Security: court without detention": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-2::Internal Security: detention without process": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-2::Internal Security: full legal chain (court AND prison)": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-2::Internal Security: no legal infrastructure": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-2::Invasion & War: force with NO walls": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-2::Invasion & War: militia only": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-DEF-2::Invasion & War: neither walls nor force": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-2::Invasion & War: walls AND professional garrison": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-DEF-2::Invasion & War: walls with NO force": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-2::Invasion & War: walls with citizen militia": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-DEF-3::COMPOUND override (a crisis stress has rewritten the label)": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-3::COMPOUND: active siege": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-3::COMPOUND: authoritarian rule": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-3::COMPOUND: betrayal": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-3::COMPOUND: criminal governance": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-3::COMPOUND: debt crisis": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-3::COMPOUND: famine": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-3::COMPOUND: insurgency": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-3::COMPOUND: mass migration, arrivals": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-3::COMPOUND: mass migration, departures": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-3::COMPOUND: monster threat": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-3::COMPOUND: occupation curfew": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-3::COMPOUND: plague": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-3::COMPOUND: political fracture": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-3::COMPOUND: religious upheaval": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-3::COMPOUND: slave revolt": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-3::COMPOUND: succession crisis": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-3::COMPOUND: wartime": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-3::Dangerous": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-3::First-Survey qualification (the reading is a first look)": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-3::Moderate": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-3::Safe": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-3::Unsafe": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-3::Very Safe": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-4::FIXTURE: black market": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-4::FIXTURE: gangs": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-4::FIXTURE: smuggling": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-4::FIXTURE: thieves' guild": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-4::capture adversarial": {
+   "layer": 5,
+   "src": "placed: its key reads the capture climate (powerStructure.criminalCaptureState, layer 4); was 4 by map:inferred (W2-A-LEAVES-2, REVIEW-W2A F5)"
+  },
+  "DS-DEF-4::capture capture": {
+   "layer": 5,
+   "src": "placed: its key reads the capture climate (powerStructure.criminalCaptureState, layer 4); was 4 by map:inferred (W2-A-LEAVES-2, REVIEW-W2A F5)"
+  },
+  "DS-DEF-4::capture corrupted": {
+   "layer": 5,
+   "src": "placed: its key reads the capture climate (powerStructure.criminalCaptureState, layer 4); was 4 by map:inferred (W2-A-LEAVES-2, REVIEW-W2A F5)"
+  },
+  "DS-DEF-4::capture equilibrium": {
+   "layer": 5,
+   "src": "placed: its key reads the capture climate (powerStructure.criminalCaptureState, layer 4); was 4 by map:inferred (W2-A-LEAVES-2, REVIEW-W2A F5)"
+  },
+  "DS-DEF-4::capture none": {
+   "layer": 5,
+   "src": "placed: its key reads the capture climate (powerStructure.criminalCaptureState, layer 4); was 4 by map:inferred (W2-A-LEAVES-2, REVIEW-W2A F5)"
+  },
+  "DS-DEF-4::structure diffuse": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-4::structure null (nothing organized recognized)": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-DEF-4::structure organized": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-DEF-4::structure semi-organized": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-5::ARCANE: alchemists": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-5::ARCANE: divine": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-5::ARCANE: druidic": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-5::ARCANE: mages' guild": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-5::ARCANE: practitioners": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-5::ARCANE: wizard's tower": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-5::FIXTURE: charter hall": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-5::FIXTURE: free company": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-5::FIXTURE: gates": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-DEF-5::NO organized force at all": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-5::arcane defense ABSENT": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-5::arcane defense PRESENT": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-DEF-5::charter hall ABSENT where the country warrants one": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-5::charter hall PRESENT (specialist monster response)": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-5::garrison PRESENT": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-5::mercenary / contracted forces PRESENT": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-5::militia PRESENT (no garrison)": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-5::walls ABSENT": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-5::walls PRESENT": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-5::watch PRESENT": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-6::Arcane Support: None": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-6::Arcane Support: Present": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-6::Economic Backing: Adequate": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-6::Economic Backing: Critical": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-6::Economic Backing: Underfunded": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-6::Economic Backing: Well-funded": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-6::Legal Infrastructure: Court + Prison": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-6::Legal Infrastructure: Court only": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-6::Legal Infrastructure: None": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-6::Legal Infrastructure: Prison only": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-6::Logistics & Supply: Granary + port": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-6::Logistics & Supply: Granary in isolation": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-6::Logistics & Supply: Granary with road supply": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-6::Logistics & Supply: No reserves, landlocked": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-6::Logistics & Supply: No reserves, port open": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-6::Medical Readiness: Clergy care": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-6::Medical Readiness: Hospital present": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-6::Medical Readiness: None": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-6::Naval Defense: Naval force": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-6::Naval Defense: Port only": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-6::Naval Defense: Under blockade": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-7::a contributor with a RECORDED reason, adverse": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-DEF-7::a contributor with a RECORDED reason, favourable": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-DEF-7::band adequate": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-DEF-7::band collapsed": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-DEF-7::band critical": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-DEF-7::band strained": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-DEF-7::band surplus": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-DEF-7::besiegedBy present": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-DEF-7::besiegingTargets present (the army is abroad)": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-DEF-7::live band EXCEEDS the built profile": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-DEF-7::live band FALLS SHORT of the built profile": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-DEF-8::multiple stresses, one posture shown": {
+   "layer": 5,
+   "src": "map:inferred"
+  },
+  "DS-DEF-8::override active (generic framing)": {
+   "layer": 5,
+   "src": "map:inferred"
+  },
+  "DS-DEF-8::override active, viability intact": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-DEF-8::override active, viability threatened": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-DEF-8::override: ACTIVE SIEGE": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-8::override: BEAST PRESSURE": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-8::override: COMMAND SPLIT": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-8::override: INFILTRATION ACTIVE": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-8::override: INSURGENCY ACTIVE": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-8::override: INTERNAL PRESSURE (famine)": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-8::override: MIGRATION, arrivals": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-8::override: MIGRATION, departures": {
+   "layer": 5,
+   "src": "map:inferred"
+  },
+  "DS-DEF-8::override: QUARANTINE ACTIVE": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-8::override: RELIGIOUS UPHEAVAL": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-8::override: REVOLT ACTIVE": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-8::override: SECURITY COMPROMISED": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-8::override: SUCCESSION CONTESTED": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-8::override: UNDER OCCUPATION": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-8::override: UNDER TRIBUTE": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-8::override: WAR FOOTING": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-DEF-9::FLAG: magicFillsVoid": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-9::FLAG: magicMilitarized": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-9::magicDependency false": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-9::magicDependency false, availability absent": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-DEF-9::magicDependency true": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-DEF-9::magicDependency true, with a NAMED dependent chain": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-10::POSTURE: entrepot": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-10::POSTURE: established": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-ECO-10::POSTURE: import_dependent": {
+   "layer": 5,
+   "src": "map:inferred"
+  },
+  "DS-ECO-10::POSTURE: limited": {
+   "layer": 5,
+   "src": "map:inferred"
+  },
+  "DS-ECO-10::POSTURE: none": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-10::POSTURE: vulnerable": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-ECO-10::SCARCITY: adequate": {
+   "layer": 5,
+   "src": "map:inferred"
+  },
+  "DS-ECO-10::SCARCITY: shortage": {
+   "layer": 5,
+   "src": "map:inferred"
+  },
+  "DS-ECO-10::SCARCITY: surplus": {
+   "layer": 5,
+   "src": "map:inferred"
+  },
+  "DS-ECO-10::THE FRESHNESS CAVEAT: for any surface printing a derived tally": {
+   "layer": 5,
+   "src": "map:inferred"
+  },
+  "DS-ECO-11::ECONOMIC STRENGTHS: none recorded": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-ECO-11::ECONOMIC STRENGTHS: the roster is populated": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-ECO-11::EXPLOITATION: fullyExploited": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-ECO-11::EXPLOITATION: partiallyExploited": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-ECO-11::EXPLOITATION: unexploited, exportValue: high": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-ECO-11::EXPLOITATION: unexploited, exportValue: medium or low": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-ECO-11::RESOURCE CONDITION: worked out, recovers in time": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-ECO-11::RESOURCE CONDITION: worked out, recovers only with work": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-ECO-11::STRATEGIC VALUE: the generator's assessment, framed": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-ECO-11::TERRAIN: Coastal": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-ECO-11::TERRAIN: Desert": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-ECO-11::TERRAIN: Forest": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-ECO-11::TERRAIN: Hills": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-ECO-11::TERRAIN: Mountains": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-ECO-11::TERRAIN: Plains": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-ECO-11::TERRAIN: River": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-ECO-11::TERRAIN: Swamp": {
+   "layer": 5,
+   "src": "map:inferred"
+  },
+  "DS-ECO-11::TERRAIN: Tundra": {
+   "layer": 5,
+   "src": "map:inferred"
+  },
+  "DS-ECO-11::TERRAIN: anything else (the default accent)": {
+   "layer": 5,
+   "src": "map:inferred"
+  },
+  "DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-ECO-12::CRITICAL IMPORT: the land cannot give it": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-ECO-12::INCOME MIX: a broad spread, no leader": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-12::INCOME MIX: a criminal line is present": {
+   "layer": 5,
+   "src": "map:inferred"
+  },
+  "DS-ECO-12::INCOME MIX: one source carries the town": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-12::INCOME MIX: the criminal line leads": {
+   "layer": 5,
+   "src": "map:inferred"
+  },
+  "DS-ECO-12::INCOME MIX: two or three sources between them": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-12::INCOME WEIGHT: the practice of magic": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-12::INCOME WEIGHT: the religious houses": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-12::TRADE PROFILE: exports and imports both present": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-12::TRADE PROFILE: imports only, nothing outward": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-12::TRADE PROFILE: isEntrepot, transit goods marked among the exports": {
+   "layer": 5,
+   "src": "map:inferred"
+  },
+  "DS-ECO-12::TRADE PROFILE: local production listed": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-12::TRADE PROFILE: no significant exports": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-1::COMBINATION C1: a high rung on a working approach": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-1::COMBINATION C2: a high rung on a narrow approach (isolated / mountain_pass)": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-ECO-1::COMBINATION C3: the middle rungs": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-1::COMBINATION C4: a low rung on a working approach": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-1::COMBINATION C5: a low rung on a narrow approach": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-2::FOOD: balanced": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-ECO-2::FOOD: deficit": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-ECO-2::FOOD: surplus": {
+   "layer": 5,
+   "src": "map:measured"
+  },
+  "DS-ECO-2::GRANARY: nearly empty": {
+   "layer": 5,
+   "src": "map:inferred"
+  },
+  "DS-ECO-2::GRANARY: stocked": {
+   "layer": 5,
+   "src": "map:inferred"
+  },
+  "DS-ECO-2::GRANARY: thin": {
+   "layer": 5,
+   "src": "map:inferred"
+  },
+  "DS-ECO-2::GRANARY: well stocked": {
+   "layer": 5,
+   "src": "map:inferred"
+  },
+  "DS-ECO-3::ADEQUATE": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-ECO-3::SHORTAGE × not trade-dependent": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-ECO-3::SHORTAGE × trade-dependent": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-ECO-3::SURPLUS × not trade-dependent": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-ECO-3::SURPLUS × trade-dependent": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-ECO-4::HIGHLIGHT: cheap": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-ECO-4::HIGHLIGHT: dear": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-ECO-4::MIXED: exports dear, imports cheap": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-ECO-4::NO HIGHLIGHT: everything steady": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-ECO-5::ENTREPÔT": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-ECO-5::IMPAIRED (canonical scarce), with a named dependency": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-ECO-5::MAGICALLY SUSTAINED: a large prop (high magicRecovery)": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-ECO-5::MAGICALLY SUSTAINED: a small prop (low magicRecovery)": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-ECO-5::OPERATIONAL: the service economy (no line of supply behind it)": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-ECO-5::RUNNING (canonical stable): draw only with the note fields empty (R-DST-F)": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-ECO-5::VULNERABLE (canonical strained)": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-ECO-6::FACET: a clandestine house": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-ECO-6::FACET: an underground house": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-ECO-6::FLAG: arcaneBlackMarket": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-ECO-6::FLAG: theocraticEconomy": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-ECO-6::TIER: a large share off the books (≥30)": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-ECO-6::TIER: minor shadow activity (≥3)": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-6::TIER: significant off-book activity (≥15)": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-7::CATALOG": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-ECO-7::TALLIES": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-ECO-8::COMFORTABLE": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-8::FOOD AND PROSPERITY: full stores lift the town": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-ECO-8::FOOD AND PROSPERITY: hunger holds the town down": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-8::FOOD AND PROSPERITY: the cost of food weighs on the town": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-8::MODERATE": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-8::POOR": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-8::PROSPEROUS": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-8::STRUGGLING": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-8::SUBSISTENCE": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-ECO-8::WEALTHY": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-9::ACTIVE FAMINE": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-ECO-9::ACTIVE FAMINE: the failed source, most of the harvest": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-9::ACTIVE FAMINE: the failed source, part of the harvest": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-ECO-9::BLOCKADE BYPASSED": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-ECO-9::BLOCKADED": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-ECO-9::DEFICIT": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-9::FOOD SOURCES: four or more": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-ECO-9::FOOD SOURCES: one source": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-9::FOOD SOURCES: several, the largest named": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-9::HOW THE NEED IS MET: much of it brought in": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-9::HOW THE NEED IS MET: part of it by magic": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-9::IMPORT-DEPENDENT": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-9::PRESSURED": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-9::SECURE": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-ECO-9::SURPLUS": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-FTH-1::ARC: trend: falling": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-1::ARC: trend: rising": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-1::ARC: trend: steady": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-1::CULTS: cults[] present beneath the patron": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-1::DEVOTION: devout": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-1::DEVOTION: faithful": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-1::DEVOTION: lukewarm": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-1::DEVOTION: observant": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-1::DEVOTION: secular": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-1::MANDATE: a dominant church": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-1::MANDATE: a measure of divine mandate": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-1::MANDATE: contested, or patron security below the floor": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-1::PATRON: rankAxis: cult": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-1::PATRON: rankAxis: major": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-1::PATRON: rankAxis: minor": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-1::SINK: unaffiliated present, arc falling": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-1::SINK: unaffiliated present, arc rising": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-1::STANDINGS: a plural field, no majority": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-1::STANDINGS: the patron dominant": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-1::STANDINGS: the patron pressed by a near rival": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-1::live: false": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-2::PRIVATE DOSSIER": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-FTH-2::PUBLIC / SHARED DOSSIER": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-FTH-3::COVERT CONGREGATION: deities[ref].covert present": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::FALL: discredited": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::FALL: displaced": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::FALL: imposed": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::FALL: suppressed": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::LEGITIMACY: contested": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::LEGITIMACY: established": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::LEGITIMACY: secure": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::LEGITIMACY: tenuous": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::NICHE: every niche uncontested": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::NICHE: slots open": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::NICHE: slots saturated at tier capacity": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::NICHE: the patron's niche carries a contestant": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::PANTHEON RANK: Cult": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::PANTHEON RANK: Major": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::PANTHEON RANK: Minor": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::PILGRIM SEASON: heavy": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::PILGRIM SEASON: suppressed by road danger": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::PILGRIM SEASON: thin": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::STANDING: ascendant": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::STANDING: cult": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::STANDING: established": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::TEMPLE WEALTH: drawn down": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::TEMPLE WEALTH: modest": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-3::TEMPLE WEALTH: rich": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-FTH-4::CONTESTED": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-FTH-4::ENDOWED": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-FTH-4::FLAG: crusaderSynthesis": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-FTH-4::FLAG: heresySuppression: hunted": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-FTH-4::FLAG: heresySuppression: preached": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-FTH-4::FLAG: mageTheocracy": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-FTH-4::FLAG: religiousFraud": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-FTH-4::ROOTED": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-FTH-4::THIN": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-GEN-10::PRINT-NATIVE CHAPTER OPENERS: defense": {
+   "layer": 3,
+   "src": "placed: the chapter's own record fields"
+  },
+  "DS-GEN-10::PRINT-NATIVE CHAPTER OPENERS: economics": {
+   "layer": 3,
+   "src": "placed: the chapter's own record fields"
+  },
+  "DS-GEN-10::PRINT-NATIVE CHAPTER OPENERS: overview": {
+   "layer": 2,
+   "src": "placed: the chapter's own record fields"
+  },
+  "DS-GEN-10::PRINT-NATIVE CHAPTER OPENERS: power": {
+   "layer": 4,
+   "src": "placed: the chapter's own record fields"
+  },
+  "DS-GEN-10::PRINT-NATIVE CHAPTER OPENERS: viability": {
+   "layer": 4,
+   "src": "placed: the chapter's own record fields"
+  },
+  "DS-GEN-11::THE FIRST-SURVEY QUALIFICATION": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-11::criticalIssueCount: critical contradictions on the record": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-11::the MARGINAL arm: neither verdict returned": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-11::viable: false: the arithmetic does not close": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-11::viable: true: the arithmetic closes": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-12::DRY-GROUND": {
+   "layer": 2,
+   "src": "map:static"
+  },
+  "DS-GEN-12::HIGH-GROUND": {
+   "layer": 2,
+   "src": "map:static"
+  },
+  "DS-GEN-12::OPEN-GROUND": {
+   "layer": 2,
+   "src": "map:static"
+  },
+  "DS-GEN-12::WATER-EDGE": {
+   "layer": 2,
+   "src": "map:static"
+  },
+  "DS-GEN-12::WOODLAND": {
+   "layer": 2,
+   "src": "map:static"
+  },
+  "DS-GEN-13::COMMERCE: a bank": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-13::COMMERCE: a market, no guild": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-13::COMMERCE: a merchant guild, no bank": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-13::COMMERCE: craft guilds, no merchant guild": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-13::ENTREPOT": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-13::MARKET-NARROW": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-13::MARKET-OPEN": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-13::NO-MARKET": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-13::WAREHOUSES": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-14::FOUNDED-OLD": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-14::FOUNDED-YOUNG": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-14::GROWN-UNRECORDED": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-15::ENCROACHED": {
+   "layer": "W",
+   "src": "placed: urbanFabric is the campaign simulation's fabric, not the town record"
+  },
+  "DS-GEN-15::REBUILT": {
+   "layer": "W",
+   "src": "placed: urbanFabric is the campaign simulation's fabric, not the town record"
+  },
+  "DS-GEN-15::SCARRED-FADING": {
+   "layer": "W",
+   "src": "placed: urbanFabric is the campaign simulation's fabric, not the town record"
+  },
+  "DS-GEN-15::SCARRED-FRESH": {
+   "layer": "W",
+   "src": "placed: urbanFabric is the campaign simulation's fabric, not the town record"
+  },
+  "DS-GEN-15::WORN-PLAIN": {
+   "layer": "W",
+   "src": "placed: urbanFabric is the campaign simulation's fabric, not the town record"
+  },
+  "DS-GEN-16::ANCHORED-OLD": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-16::ANCHORED-RECENT": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-16::LAYERED-ANCHORED": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-16::LEGACY-LINKED": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-16::LEGACY-RECOVERED": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-16::LEGACY-SHIFTED": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-16::LEGACY-UNRESOLVED": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-16::LIVING-MEMORY": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-16::RECORDED-UNANCHORED": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-16::UNMARKED": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-17::ADMINISTERED": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-17::BARE": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-17::GARRISONED": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-17::GREAT HOUSE: cathedral": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-17::GREAT HOUSE: monastery": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-17::LETTERED": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-17::PROVISIONED": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-18::BOUGHT-IN": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-18::HOME-FED": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-18::STALLED": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-18::UNWORKED": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-1::crime_wave": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-1::economic_disparity": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-1::guild_conflict": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-1::infiltration_fear": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-1::leadership_vacuum": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-1::magical_controversy": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-1::occupation_legacy": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-1::outside_debt": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-1::resource_scarcity": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-1::succession_crisis": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-2::intensity: high": {
+   "layer": 6,
+   "src": "map:static"
+  },
+  "DS-GEN-2::intensity: low": {
+   "layer": 6,
+   "src": "map:static"
+  },
+  "DS-GEN-2::intensity: moderate": {
+   "layer": 6,
+   "src": "map:static"
+  },
+  "DS-GEN-3::defenseProfile.readiness.label: Defensible": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::defenseProfile.readiness.label: Fortress": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::defenseProfile.readiness.label: Lightly Defended": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::defenseProfile.readiness.label: Undefended": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::defenseProfile.readiness.label: Vulnerable": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::defenseProfile.readiness.label: Well-Defended": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::economicViability.viable: false": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::economicViability.viable: true": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::foodSecurity.label: Deficit": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::foodSecurity.label: Deficit × Active Famine": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::foodSecurity.label: Import-Dependent": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::foodSecurity.label: Pressured": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::foodSecurity.label: Secure": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::foodSecurity.label: Surplus": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::prosperity: Comfortable / Prosperous": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::prosperity: Moderate / Modest": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::prosperity: Poverty / Impoverished": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::prosperity: Struggling / Poor": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::prosperity: Wealthy / Thriving": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::safetyProfile.safetyLabel: head word in {Dangerous, Desperate}": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::safetyProfile.safetyLabel: head word in {Secure, Controlled, Quarantined}": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::safetyProfile.safetyLabel: head word in {Tense, Strained, Restricted, Unsafe}": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::scores.economic: ADEQUATE": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::scores.economic: CRITICAL": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::scores.economic: STRONG": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::scores.economic: WEAK": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::scores.internal: ADEQUATE": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::scores.internal: CRITICAL": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::scores.internal: STRONG": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::scores.internal: WEAK": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::scores.magical: ADEQUATE": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::scores.magical: CRITICAL": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::scores.magical: STRONG": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::scores.magical: WEAK": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::scores.military: ADEQUATE": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::scores.military: CRITICAL": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::scores.military: STRONG": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::scores.military: WEAK": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::scores.monster: ADEQUATE": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::scores.monster: CRITICAL": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::scores.monster: STRONG": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-3::scores.monster: WEAK": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-5::market (route crossroads)": {
+   "layer": 6,
+   "src": "map:static"
+  },
+  "DS-GEN-5::ordinary (route road and the default)": {
+   "layer": 6,
+   "src": "map:static"
+  },
+  "DS-GEN-5::port": {
+   "layer": 6,
+   "src": "map:static"
+  },
+  "DS-GEN-5::river": {
+   "layer": 6,
+   "src": "map:static"
+  },
+  "DS-GEN-5::smoke (route isolated / mountain_pass)": {
+   "layer": 6,
+   "src": "map:static"
+  },
+  "DS-GEN-6::crossroads": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-6::isolated": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-6::port": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-6::river": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-6::road": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-6::tier overlay: city": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-6::tier overlay: metropolis": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-6::tier overlay: other tiers": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-6::tier overlay: thorp / hamlet": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-7::historical_economic: the recovery narrative": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-7::power_economic: criminal faction in a transit hub": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-7::power_economic: powerful criminal faction in a prosperous settlement": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-7::power_economic: temple economy under a secular seat": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-7::power_stress: occupation against stated stability": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-7::stress_economic: siege against trade income": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-7::structuralSuggestions[]": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-7::structuralViolations[]": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-GEN-8::history.ancientRuin present": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-GEN-8::lifecycleStatus: abandoned_site": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-GEN-8::lifecycleStatus: relic_ruin": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-GEN-8::steading row: charterPending": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-GEN-8::steading row: organic": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-GEN-8::steading row: provenance: 'forced'": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-GEN-9::event type: demographic": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-9::event type: disaster": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-9::event type: economic": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-9::event type: exile_return": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-9::event type: magical": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-9::event type: occupation_infiltration": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-9::event type: political": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-9::event type: religious": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-9::founding": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-9::historicalCharacter": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-9::recency framing: Ancient": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-9::recency framing: Deep history": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-9::recency framing: Last century": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-9::recency framing: Living memory": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-9::recency framing: Recent": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-HK-1::category economics: the books are the opening": {
+   "layer": 5,
+   "src": "placed: the hook list and its clocks are read over the cast (stratum 3, facts 4)"
+  },
+  "DS-HK-1::category faction: the blocs are the opening": {
+   "layer": 5,
+   "src": "placed: the hook list and its clocks are read over the cast (stratum 3, facts 4)"
+  },
+  "DS-HK-1::category history: the past is the opening": {
+   "layer": 5,
+   "src": "placed: the hook list and its clocks are read over the cast (stratum 3, facts 4)"
+  },
+  "DS-HK-1::category npc: the people are the opening": {
+   "layer": 5,
+   "src": "placed: the hook list and its clocks are read over the cast (stratum 3, facts 4)"
+  },
+  "DS-HK-1::category relationship: the ties are the opening": {
+   "layer": 5,
+   "src": "placed: the hook list and its clocks are read over the cast (stratum 3, facts 4)"
+  },
+  "DS-HK-1::category safety: the streets are the opening": {
+   "layer": 5,
+   "src": "placed: the hook list and its clocks are read over the cast (stratum 3, facts 4)"
+  },
+  "DS-HK-1::category tension: the standing quarrels are the opening": {
+   "layer": 5,
+   "src": "placed: the hook list and its clocks are read over the cast (stratum 3, facts 4)"
+  },
+  "DS-HK-1::clock bread_riot": {
+   "layer": 5,
+   "src": "placed: the hook list and its clocks are read over the cast (stratum 3, facts 4)"
+  },
+  "DS-HK-1::clock faction_split": {
+   "layer": 5,
+   "src": "placed: the hook list and its clocks are read over the cast (stratum 3, facts 4)"
+  },
+  "DS-HK-1::clock legitimacy_crisis": {
+   "layer": 5,
+   "src": "placed: the hook list and its clocks are read over the cast (stratum 3, facts 4)"
+  },
+  "DS-HK-1::clock smuggling_rise": {
+   "layer": 5,
+   "src": "placed: the hook list and its clocks are read over the cast (stratum 3, facts 4)"
+  },
+  "DS-POP-1::BELIEVED TREND diverges from the ring": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-1::CANDIDATE KIND: decline": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-1::CANDIDATE KIND: emigration": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-1::CANDIDATE KIND: growth": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-1::HERALD KIND: hungry_gap": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-1::HERALD KIND: migration_flight": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-1::QUANTITY: a dozen or so": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-1::QUANTITY: a few souls": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-1::QUANTITY: a hundred or so": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-1::QUANTITY: dozens": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-1::QUANTITY: many hundreds": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-1::QUANTITY: nobody": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-1::QUANTITY: several hundred": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-1::QUANTITY: thousands": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-1::RECEIPT: births and deaths in balance": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-1::RECEIPT: births exceed deaths": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-1::RECEIPT: deficit01 positive": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-2::BAND +1: has been growing": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-2::BAND +2: has been swelling": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-2::BAND 0: has held level": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-2::BAND −1: has been thinning": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-2::BAND −2: has been emptying": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-2::NET MAGNITUDE, banded": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-2::WINDOW under two readings": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-3::FALLING-NARROW": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-3::FALLING-OPEN": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-3::LEVEL": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-3::RISING-NARROW": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POP-3::RISING-OPEN": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POW-1::Approved": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-1::Contested": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-1::Endorsed": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-1::Legitimacy Crisis": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-1::Tolerated": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-1::breakdown dominated by DEFENSE, adverse": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-1::breakdown dominated by FOOD, adverse": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-POW-1::breakdown dominated by PROSPERITY, adverse": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-1::breakdown dominated by PROSPERITY, favourable": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-1::breakdown dominated by SAFETY, adverse": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-1::governanceFractured true": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-2::Desperate matched": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-2::critical matched": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-POW-2::governing faction holds a DOMINANT share": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-POW-2::governing faction holds a NARROW plurality": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-POW-2::no token matched: unclassified (the plain-description floor)": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-2::recentConflict present": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-2::siege matched": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-2::stable matched": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-2::unstable matched": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-3::clear top rung, low instability": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-POW-3::crowded top rung, low instability": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-POW-3::high instability (churn at the top)": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-POW-3::low instability, long-held order": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-POW-3::shallow ladder (few rungs recorded)": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-POW-4::legitimacyHold: public backing hardens the hold": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-4::legitimacyHold: public opinion neither helps nor hurts": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-4::legitimacyHold: public rejection is breaking the hold": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-4::previousGovernments empty (no recorded lineage)": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-POW-4::previousGovernments present with a recorded cause": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-POW-4::riskLabel: Contested": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-4::riskLabel: Critical. The seat could fall": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-4::riskLabel: Holding": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-4::riskLabel: Stable (no challengers)": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-5::FLAG: crimeIsGovt": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-5::FLAG: merchantArmy": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-5::FLAG: merchantCriminalBlur": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-POW-5::FLAG: secularBrutalism": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-POW-5::FLAG: stateCrime": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-POW-5::FLAG: stateCrime, heavy": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-POW-5::autocrat": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-5::council": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-5::criminal": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-POW-5::economicBase: agrarian": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-POW-5::economicBase: craft": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-POW-5::economicBase: extraction": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-POW-5::economicBase: mixed": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-POW-5::economicBase: trade_hub": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-POW-5::governing body name: a SLOT, never a baked noun": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-5::merchant_league": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-5::mixed": {
+   "layer": 4,
+   "src": "map:inferred"
+  },
+  "DS-POW-5::theocracy": {
+   "layer": 4,
+   "src": "map:measured"
+  },
+  "DS-POW-6::GM ADVISORY: officials with criminal arrangements": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-POW-6::GM ADVISORY: the commander is a political actor": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)": {
+   "layer": 5,
+   "src": "placed: its key reads the capture climate (powerStructure.criminalCaptureState, layer 4); was 3 by map:inferred (W2-A-LEAVES-2, REVIEW-W2A F5)"
+  },
+  "DS-POW-6::capture pressure RECOVERING (strong security, prosperity)": {
+   "layer": 5,
+   "src": "placed: its key reads the capture climate (powerStructure.criminalCaptureState, layer 4); was 3 by map:inferred (W2-A-LEAVES-2, REVIEW-W2A F5)"
+  },
+  "DS-POW-6::capture reached a LEADER": {
+   "layer": 5,
+   "src": "placed: its key reads the capture climate (powerStructure.criminalCaptureState, layer 4); was 3 by map:inferred (W2-A-LEAVES-2, REVIEW-W2A F5)"
+  },
+  "DS-POW-6::capture reached an AGENT of a faction": {
+   "layer": 5,
+   "src": "placed: its key reads the capture climate (powerStructure.criminalCaptureState, layer 4); was 3 by map:inferred (W2-A-LEAVES-2, REVIEW-W2A F5)"
+  },
+  "DS-POW-6::neutral baseline (nothing pulling either way)": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-POW-6::operation role criminal revenue stream (unclassified)": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-POW-6::operation role duty evasion": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-POW-6::operation role money laundering": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-POW-6::operation role parallel marketplace": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-POW-6::operation role protection + extraction": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-POW-6::operation role stolen goods market": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-POW-6::operation role unlicensed revenue": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-POW-6::present: false (no legitimacy reading)": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-POW-7::a RULING bloc, consolidated": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POW-7::an opposition bloc forms COVERT under an autarchy": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POW-7::consolidation 0: a fully divided court (live layer, no ruling bloc)": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POW-7::end commerce": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POW-7::end doctrine": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POW-7::end patron": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POW-7::end seats": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POW-7::end survival": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POW-7::glue compromise (a corruption leash)": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POW-7::glue concession (seats and revenue traded)": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POW-7::glue doctrine (a shared creed)": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POW-7::glue patronage (personal loyalty between leaders)": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POW-7::glue threat (a common danger at the walls)": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POW-7::hostile leader tie HARD-BLOCKS an otherwise natural alignment": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POW-7::layer DORMANT (no ledger materialized)": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POW-7::receipt deferred (the alignment exists and has not happened)": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POW-7::receipt exposed": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POW-7::receipt formed": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POW-7::receipt fractured": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-POW-7::receipt realigned": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-REL-1::allied": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-REL-1::client": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-REL-1::cold_war": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-REL-1::cross-settlement NPC contacts": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-REL-1::cross-settlement engagements": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-REL-1::hostile": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-REL-1::neutral": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-REL-1::patron": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-REL-1::rival": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-REL-1::trade_partner": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-REL-2::flagDriven count > 0": {
+   "layer": 6,
+   "src": "map:static"
+  },
+  "DS-REL-2::flagDriven count zero": {
+   "layer": 6,
+   "src": "map:static"
+  },
+  "DS-REL-2::prominentRelationship present": {
+   "layer": 6,
+   "src": "map:static"
+  },
+  "DS-STR-1::ARITY: several banners standing at once": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-STR-1::BEAST & RAIDER THREAT": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-STR-1::DISEASE OUTBREAK": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-STR-1::FAMINE": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-STR-1::INDEBTED TO AN OUTSIDE POWER": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-STR-1::INFILTRATED": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-STR-1::INSURGENCY": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-STR-1::MASS MIGRATION": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-STR-1::Overview's own section framing": {
+   "layer": 2,
+   "src": "map:measured"
+  },
+  "DS-STR-1::POLITICALLY FRACTURED": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-STR-1::RECENTLY BETRAYED": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-STR-1::RELIGIOUS CRISIS": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-STR-1::SLAVE REVOLT": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-STR-1::SUCCESSION VOID": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-STR-1::UNDER OCCUPATION": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-STR-1::UNDER SIEGE": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-STR-1::WARTIME": {
+   "layer": 2,
+   "src": "map:inferred"
+  },
+  "DS-STR-2::COUNTERFORCE: a named leading source": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::COUNTERFORCE: floorsMet with a strong score": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::COUNTERFORCE: floorsMet: false": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::COUNTERFORCE: weak or absent": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::LIFECYCLE: active": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::LIFECYCLE: easing": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::LIFECYCLE: emerging": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::LIFECYCLE: peaking": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::LIFECYCLE: residual": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::ORIGIN: abandoned_agent": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::ORIGIN: arcane_ascendancy": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::ORIGIN: arcane_burnout": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::ORIGIN: barracks_coup": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::ORIGIN: council_schism": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::ORIGIN: declared_war": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::ORIGIN: foreign_sponsored": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::ORIGIN: internal_conspiracy": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::ORIGIN: leyline_silence": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::ORIGIN: merchant_cabal": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::ORIGIN: palace_coup": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::ORIGIN: popular_revolt": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::ORIGIN: resistance": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::ORIGIN: servile_uprising": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::ORIGIN: tax_revolt": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::ORIGIN: temple_putsch": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::ORIGIN: unattributed": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::SYNERGY: coup_detat × succession_void": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::SYNERGY: famine × disease_outbreak": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::SYNERGY: famine × siege": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::SYNERGY: market_shock × indebtedness": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::SYNERGY: mass_migration × disease_outbreak": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-STR-2::SYNERGY: occupation × insurgency": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-SUP-1::A PROCESSING HOUSE MISSING FROM THE ROSTER": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-SUP-1::BLOCKED: nothing can be got away": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-SUP-1::COMPLETE LINE, output exported": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-SUP-1::ENTREPÔT PASS-THROUGH (no workshop in the line)": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-SUP-1::RESOURCE DEPLETED": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-SUP-1::UPSTREAM LINK COVERED BY AN IMPORT": {
+   "layer": 3,
+   "src": "map:static"
+  },
+  "DS-SUP-2::BLOCKED": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-SUP-2::CAPTURED": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-SUP-2::COLLAPSING": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-SUP-2::SCARCE": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-SUP-2::STABLE": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-SUP-2::STRAINED": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-SUP-2::SUBSTITUTED": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-SUP-2::UPSTREAM WEAK: a chain the town's work draws on is failing": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-SUP-3::A CATEGORY PRESENT BUT ITS CHAIN IMPAIRED": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-SUP-3::A METROPOLIS-TIER CATALOG, COMPLETE": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-SUP-3::COMPLETE FOR ITS TIER": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-SUP-3::ONE EXPECTED CATEGORY MISSING": {
+   "layer": 3,
+   "src": "map:measured"
+  },
+  "DS-SUP-3::SEVERAL EXPECTED CATEGORIES MISSING": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-SUP-3::THE FOOD GAP": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-SUP-3::THE HEALING GAP": {
+   "layer": 3,
+   "src": "map:inferred"
+  },
+  "DS-WAR-1::feasibility auto_fail": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-1::feasibility harassment": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-1::feasibility plausible": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-1::feasibility require_betrayal": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-1::feasibility require_coalition": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-1::feasibility require_magic": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-1::mobilization: COVERT": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-1::mobilization: climbing the ramp, still distant": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-1::mobilization: climbing, close to ready": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-1::mobilization: fully ready": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-1::occupation.pays false (the occupation is a net drain on the holder)": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-1::occupation.pays true": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-1::occupierHoldings.strengthened": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-1::occupierHoldings.stretchedThin": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-1::statusLabel: At war (no front at the walls, no army abroad)": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-1::statusLabel: Occupied": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-1::statusLabel: On campaign": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-1::warExhaustion: exhausted": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-1::warExhaustion: near peace": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-1::warExhaustion: rested": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-1::warExhaustion: war-weary": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::document-level: the town is the LOSER side": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::document-level: the town is the VICTOR side": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::document-level: the treaty runs out within the year": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::economic · defaulted": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::economic · honored": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::economic · strained": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::fraying set on a term with time still to run": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::generic floor · defaulted": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::generic floor · honored": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::generic floor · strained": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::informational · defaulted": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::informational · honored": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::informational · strained": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::political · defaulted": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::political · honored": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::political · strained": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::relational · defaulted": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::relational · honored": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::relational · strained": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::security · defaulted": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::security · honored": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::security · strained": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::sovereignty · defaulted": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::sovereignty · honored": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::sovereignty · strained": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::territorial · defaulted": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::territorial · honored": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-2::territorial · strained": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-3::*": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-4::Assertive": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-4::Belligerent": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-4::Cautious": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-4::Even-handed": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-4::Pacific": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::a HIGH-burden term": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::a stream: true treaty term (the installment shape)": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::aftermath occupation_lifted": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::aftermath relief_burden": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::aftermath siege_lifted": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::aftermath trade_realignment": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::aftermath war_drain": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::aftermath war_exhaustion": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::aftermath war_spoils": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::blockade LIFTED (the impairment is cleared)": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::blockade stamped (recorded cause)": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::live war_front INTO the settlement (a genuine siege)": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::occupation contested": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::occupation extractive": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::occupation stabilized": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::occupation unstable": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::occupation vassalized": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::phantom front (hostility with no army behind it)": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::posture COVERT (any state)": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::posture alert": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::posture demobilizing": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::posture deployed": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::posture mobilized": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::posture peace": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::posture war_exhaustion": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::posture war_preparation": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::resistance in open revolt": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::resistance largely quiescent": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::resistance restive": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::resistance simmering": {
+   "layer": "W",
+   "src": "map:world"
+  },
+  "DS-WAR-5::settlementWarStatus null (peace, not missing data)": {
+   "layer": "W",
+   "src": "map:world"
+  }
+ }
+}
