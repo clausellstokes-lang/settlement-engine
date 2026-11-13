@@ -153,8 +153,10 @@ export function revenuesOffTheLists(settlement) {
  *
  * Layer 4: it reads the economy and the resource analysis (stored at layer 3).
  * @param {{
- *   economicState?: { primaryImports?: ReadonlyArray<unknown> | null, primaryExports?: ReadonlyArray<unknown> | null } | null,
+ *   economicState?: { primaryImports?: ReadonlyArray<unknown> | null, primaryExports?: ReadonlyArray<unknown> | null,
+ *     localProduction?: ReadonlyArray<unknown> | null, activeChains?: ReadonlyArray<unknown> | null } | null,
  *   resourceAnalysis?: { imports?: unknown } | null,
+ *   institutions?: ReadonlyArray<unknown> | null,
  * } | null | undefined} settlement
  * @returns {{ arriving: string[], needed: string[] }} the raw items of each, in the order the record gives them
  */
@@ -169,11 +171,15 @@ export function importsAsPrinted(settlement) {
   const kept = displayTradeList([...primary, ...terrain], /** @type {Parameters<typeof factsOf>[0]} */ (settlement), { side: 'imports', exports: eco.primaryExports });
   const fromTrade = new Set(primary);
   const arriving = kept.filter((x) => fromTrade.has(x));
+  // W2-C-LEAVES R2 (the chair's ruling on REVIEW-R2-STAGES finding 2): a need the town MAKES is not a need — it leaves
+  // the line where the town exports the good, produces it locally (as printed, `localProductionAsPrinted`), or a
+  // working chain of the record makes it (its resource, its outputs, its name), matched as an import is (`needMetBy`).
+  const made = madeHere(/** @type {Parameters<typeof madeHere>[0]} */ (settlement));
   return {
     arriving,
     // W2-C-LEAVES item 4(b): a need an arriving import already meets UNDER ANOTHER NAME is not a need left unmet
     // (`needMetBy`: "luxury goods" beside "Luxury textiles and exotic goods", "iron ore" beside "Iron").
-    needed: kept.filter((x) => !fromTrade.has(x) && !arriving.some((imp) => needMetBy(x, imp))),
+    needed: kept.filter((x) => !fromTrade.has(x) && !arriving.some((imp) => needMetBy(x, imp)) && !made.some((m) => needMetBy(x, m))),
   };
 }
 
@@ -204,7 +210,7 @@ const NEED_FAMILY_WORDS = Object.freeze({
   hide: ['hide', 'leather', 'fur', 'pelt'],
   fish: ['fish'],
   fuel: ['charcoal', 'fuel', 'peat', 'coal'],
-  provision: ['provision', 'foodstuff'],
+  provision: ['provision', 'foodstuff', 'preserved'], // R2: "Preserved foods" made here meets "Preserved provisions for winter" (r2s-plague_onset-city-3)
   glass: ['glass'],
 });
 /** A need's word that asks for several families ("metals": any metal). */
@@ -250,7 +256,8 @@ export function needMetBy(need, imp) {
  */
 export function localProductionAsPrinted(settlement) {
   const eco = settlement?.economicState || {};
-  const list = (Array.isArray(eco.localProduction) ? eco.localProduction : []).filter((x) => typeof x === 'string' && x.trim()).map(String);
+  const local = eco.localProduction; // a read (the trade-list writers' walker counts a name before a ternary's colon)
+  const list = (Array.isArray(local) ? local : []).filter((x) => typeof x === 'string' && x.trim()).map(String);
   const roster = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement)) // a ruined house makes nothing
     .map((i) => String(/** @type {{ name?: unknown }} */ (i)?.name ?? '').toLowerCase()).filter(Boolean);
   const ownHouses = roster.filter((n) => !n.startsWith('access to'));
@@ -297,3 +304,22 @@ const HOUSE_MAKES = Object.freeze(/** @type {Record<string, ReadonlyArray<string
   flour: ['mill', 'baker'], ironwork: ['smith', 'metalwork'], leather: ['tanner', 'leather'], cloth: ['weaver', 'textile'],
   meat: ['butcher'], lumber: ['carpenter', 'sawmill'], salt: ['dock', 'port', 'fishmonger'],
 }));
+
+/**
+ * What the town makes, as the needs line reads it (W2-C-LEAVES R2): its exports, its local production as printed, and
+ * what each working chain of the record names (`facts/chainWorking.js :: WORKING_CHAIN_STATUSES`): its resource, its
+ * outputs and its name.
+ * @param {Parameters<typeof localProductionAsPrinted>[0] & { economicState?: { primaryExports?: ReadonlyArray<unknown> | null } | null }} settlement
+ * @returns {string[]}
+ */
+function madeHere(settlement) {
+  const eco = settlement?.economicState || {};
+  const chains = /** @type {Array<{ status?: unknown, resource?: unknown, outputs?: unknown, label?: unknown }>} */ (
+    (Array.isArray(eco.activeChains) ? eco.activeChains : []).filter((c) => c && typeof c === 'object'));
+  return [
+    ...(Array.isArray(eco.primaryExports) ? [...eco.primaryExports] : []),
+    ...localProductionAsPrinted(settlement),
+    ...chains.filter((c) => WORKING_CHAIN_STATUSES.includes(String(c.status)))
+      .flatMap((c) => [c.resource, ...(Array.isArray(c.outputs) ? c.outputs : []), c.label]),
+  ].filter((x) => typeof x === 'string' && x.trim() !== '').map(String);
+}

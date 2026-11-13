@@ -143,7 +143,7 @@ export const LEAVES = Object.freeze({
   powersList: leaf({ layer: 3, module: 'domain/dossier/powerStrata.js', exported: 'derivePowerStrata', call: 'record', reads: ['powerStructure'],
     note: 'the one derivation of both lists the Power tab prints (the contenders and the roster); the fault of 16b is that both are titled alike, not a second derivation' }),
   // ── layer 4: over the cast ──
-  importsAsPrinted: leaf({ layer: 4, module: 'domain/display/tradeListDisplay.js', exported: 'importsAsPrinted', call: 'record', reads: ['economicState', 'resourceAnalysis', 'tier'] }),
+  importsAsPrinted: leaf({ layer: 4, module: 'domain/display/tradeListDisplay.js', exported: 'importsAsPrinted', call: 'record', reads: ['economicState', 'institutions', 'resourceAnalysis', 'tier'] }), // W2-C-LEAVES R2: a need the town makes (its live roster, through localProductionAsPrinted)
   founder: leaf({ layer: 4, module: 'domain/facts/founder.js', exported: 'founderOf', call: 'record', reads: ['history'] }),
   // W2-A-LEAVES-2 (REVIEW-W2A F3): an official in a criminal's pay, the cast's own fact; the crime desk's lines
   // about bought officials are struck by it (`display/stateProse/crimeLineDisqualifiers.js`)
