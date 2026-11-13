@@ -7,6 +7,51 @@
 > One disclosure: fetching the lane printed `git log --oneline` subjects of its last fifteen commits in
 > my context before §1 was written (one line each, no bodies). Nothing else of the builder's was read.
 
+## VERDICT: NOT CLEAR (written after §1 was pushed at cd963f26b)
+
+**The arithmetic is the design.** On my 1,200 births the parts sum exactly to the score (1,200/1,200),
+a record stripped of its profile recomputes equal (300/300), the band is read from the score as stored
+(0 disagreements), each score is full at 100 in one line, prosperity scales each paid part once from the
+standing label (0 misses), limit 1 bites only where what sustains exceeds the force (23/23) and limit 2
+bites on a plant and only on one (54 of 82 planted records; the 28 others are small places whose armed
+households man the wall). A saved town as master stored it does not move on any defence surface.
+
+**What stops it.**
+- **HIGH — the pages contradict the new ratings about money (H1, H2): 246 of my 960 crisis births**
+  (every one a crisis birth; mostly cities and metropolises) say on one page that the place is Struggling,
+  or that its hired swords are paid "from what the hunger leaves", and that it "can pay its way" or has
+  "money enough to ride out a long crisis". The score pays at a standing label that no page prints, while
+  the guard lines, the magic tab and the services read the printed one. R3's "the page says both labels
+  where they differ" is not built.
+- **MEDIUM — a crisis acts twice on order, and wartime acts at all (§2, C6):** every famine, siege and
+  wartime birth's Crime part grows through the crisis multipliers inside `getInstFlags`'s criminal reading
+  (famine ×1.35, siege ×1.25, wartime ×1.2), outside the crisis table: 120/120 measured, mean −0.6 to −1.2
+  readiness points. R4 says wartime takes from no part in this release.
+- **MEDIUM — count once fails for every magic house (§2, C5):** a wizard's tower, mages' guild, alchemist,
+  grove or divine healer is counted under its own part AND under the magic part (51 of 300 births; an
+  alchemist shop under three).
+- **MEDIUM — the machinery is in the export (§3):** the world export, player and DM, carries
+  `defenseProfile.parts` (labels such as "Martial will", "Walls with no one to man them", and every
+  part's points) on 1,200/1,200 births. The walker's fifth arm cannot see it (a planted whole-profile
+  serialisation stays green); its second arm misses the codebase's own random sources (`getActiveRng()`,
+  `createPRNG(seed)()` planted in the generator stay green).
+- **MEDIUM — M1 to M5 of §1:** an untroubled posture under an active siege (41 made at tip), "nobody on
+  the walls" under a Strong bar (19 made at tip), "no line and no force" under Adequate (8), "hired swords"
+  with none hired (7), "all but undefended" beside kept walls and a watch (8 made at tip).
+
+**Counts by rank (findings, not births):** HIGH 2 · MEDIUM 9 · LOW 7. Executed vs plausible: every finding
+below is EXECUTED on my births or by a plant, except the one marked PLAUSIBLE (§2, C7's reading of the will).
+
+**The one thing the chair must rule:** which label the PAGE speaks for in a crisis. Either the page prints
+the standing label beside the printed one (R3, as ruled, and then the guard lines, the magic tab and the
+services read the one label too), or the defence lines that read the paid score are keyed to the printed
+label. Until one label speaks, every besieged or starving city reads both rich and poor.
+
+**Not measured:** F3 (the held granary; the sixth seat's), the census, the whole suite, the goldens, the
+edge bundles; the kind of wall and wartime (not in this tree); a user's edited town (only births and
+master-stored records); the Foundry module beyond its journal pages; the AI layer's live output (only
+its prompt and grounding payload were read).
+
 ## §1 — COLD: every false or contradictory sentence, on births the builder did not measure on
 
 **The births (mine).** Seeds `rv2-<crisis>-<size>-<i>`, crisis ∈ {calm, famine, under_siege, wartime,
@@ -198,3 +243,71 @@ birth: rating, band, five scores, roster, parts); `render.mjs <seedfile> <outdir
 `vdiff.py <base dir> <tip dir> <seeds>`; `block.py`, `plus.py` (the reading views); `classes.py <dir>
 <scan> <out.json>` (the classes above); `classes.{base,tip}.json` (every seed in every class). Run each as
 `TREE=<checkout> node <probe> …` from the probe directory, with the tree's `node_modules`.
+
+## §2 — THE CLAIMS, each by my own execution (after §1 was pushed)
+
+Probes: `claims.mjs` (300 births, `seeds.claims.txt`: i = 0..9 of every cell), `crime3.mjs`, `crime4.mjs`,
+`limits.mjs`, `plant.sh`, `saved-birth.mjs` + `saved-render.mjs`; receipts `claims.tip.ndjson`.
+
+| # | Claim | Result | How |
+|---|---|---|---|
+| C1 | the parts sum exactly to the rating | **holds** 1,200/1,200 | `scan.mjs`: Σ points in tenths = `readiness.score` |
+| C2 | a record stripped of its profile recomputes equal | **holds** 300/300 | JSON round trip, delete `defenseProfile`, `generateDefenseProfile(s, keepOfRecord(...))`, byte-equal |
+| C3 | one direction: nothing a part reads is written from defence | **holds** (static) | no `defenseProfile` read in the economy, food, stress, institution, priority or helper modules; the late `settleCrimeLinesToSignal` rewrites lines only; legitimacy and faction power read the label AFTER |
+| C4 | the score reads no fact of the powers | **holds** (static) | no `powerStructure`/`factions`/`publicLegitimacy` in the generator, `helpers.js`, `keep.js` or the roster home; the neighbour factor reads `config.neighborRelationship` (R14) |
+| C5 | count once: a house under one part only | **FAILS — MEDIUM** | drop each roster house alone and recompute: in 51 of 300 births one house moves two parts: Apothecary district → alchemists+magic (16), Elder Grove Council → druids+magic (14), Wizard's tower → arcane+magic (12), **Alchemist shop → arcane+alchemists+magic (9)**, Mages' guild, Alchemist quarter, Hedge wizard → arcane+magic, Healer (divine) → hospital+magic. `computeEffectiveMagicPresence` still counts the houses that stand as their own parts. |
+| C6 | a crisis acts once, on the parts it touches | **FAILS — MEDIUM** | the crisis table acts once (the parts' `crisis` lines are exact); but `getInstFlags`'s criminal reading multiplies crime by the stress (`crimeStressMult`), and the Crime part reads it: with the stress removed from that reading only, the Crime part moves in 120/120 famine, siege and wartime births (40 each), readiness −1.20, −0.87, −0.62 on average; famine and siege so act twice on order, and **wartime, which R4 says takes from no part, acts through it** (40/40). Succession void: 0/40. |
+| C7 | prosperity scales each paid part once, from the standing label | **holds** for every paid part (0 misses: points = full × `fundedGate(floor, standing keep)` where no crisis or limit acts) — **PLAUSIBLE, LOW:** the martial will is itself `paid()` and then held to the armed bodies (R13), which are paid; where R13 binds the will carries the pay twice over its own share. Not a finding until the chair says whether the will is a paid part. |
+| C8 | the two limits bite where the design says and nowhere else | **holds** | limit 1 on 23 of 160, each with SUSTAINS listed above STANDS (0 exceptions); limit 2 on 0 natural births (none is walled with no armed body), and on a plant (a walled record with every armed house removed) on 54 of 82 — the 28 that do not bite are small places whose armed households stand (an armed body by the design's list) |
+| C9 | each of the five scores is full at 100, in one place in code | **holds** | `computeDefenseScores`: one `Math.min(100, Math.max(0, v))` per score; readiness held to its scale on its own line (the scale's ends) |
+| C10 | every number lives in `DEFENCE_TUNING` | **holds for the generator file** (walker arm iv green; a planted 0.37 reds) — **LOW:** numbers that reach the score from outside the table: the crime multipliers and the criminal formula (`priorityHelpers.js`), the magic presence's own weights (`computeEffectiveMagicPresence`), the keep table (`keep.js :: KEEP_TUNING`, prosperity's home, acceptable) |
+| C11 | a saved town does not move (as the DEPLOYED client stored it, master's shape, no standing label) | **holds for defence; LOW elsewhere** | 10 births on `origin/master` (db832c892), stored as JSON, rendered unchanged at base and at tip: every defence surface identical; **the Magic tab moves on 9 of 10** ("Availability common" → "moderate", "moderate" → "limited"): `magicProfile.js :: buyable` reads the stored printed label at render time. (Recomputing that record with no standing label falls back to the printed label: 149 of 300 births would read lower, but nothing recomputes a saved profile; one caller, at birth.) |
+| C12 | each of the walker's five arms reds on a plant of my own | **FAILS on two — MEDIUM** | on the REAL tree (scratch worktree, reverted): (i) `s.defenseProfile.readiness` in the generator → red; (iii) `/wizard/i.test(n)` → red; (iv) `x * 0.37` → red; (v) `s.defenseProfile.parts.map(...)` in `DefenseTab.jsx` → red. **(ii) `getActiveRng()` (the codebase's active stream, imported from `kernel/rngContext.js`) → GREEN; `createPRNG(seed)()` → GREEN**; a lower-case `rng()` control → red. **(v′) `JSON.stringify(s.defenseProfile)` in `worldExport.js` → GREEN**, and that is how the export carries the parts today (§3). Logs: `plant.*.log`. |
+
+## §3 — SHOW THE RATINGS, NOT THE MACHINERY
+
+- **Pages, Tonight, PDF, Foundry, AI prompt and grounding: no machinery.** Every line of the 1,200 tip
+  dumps that no base dump prints (masked for names and numbers: 624 distinct lines) was searched for a
+  part's points, a sum, a pay share, a weight, a limit, a slider's name, "martial will", "held in
+  reserve", "more than enough": 0 hits that are machinery (3 benign: "a share of the debt", "a share in the
+  supply", "held to ransom"). The searched phrases appear on 0 of 1,200 pages, PDFs, journals, prompts.
+- **The export: MEDIUM.** `buildWorldExport` passes the whole record through `toPublicSafe`, so the
+  player variant and the DM variant both carry `defenseProfile.parts` on 1,200/1,200: each part's
+  `label` ("Martial will", "Walls with no one to man them", "Stores and supply can carry no more than the
+  force can use", "Military: more than enough, held in reserve"), `source` ("military dial (config) and
+  neighbour", "rule (limit 2)") and `points`. Ruling 328 names "an export". (The gates and chain
+  modifiers rode the export at base too; the parts are new.)
+- **The builder's "no string added or changed"**: true of V3's own code, as far as I can see (the tab's
+  code is unchanged, and no new template appears whose words are V3's). Not true of the lane's form as a
+  page reads it: the Magic tab prints **"Availability limited"** on 568 of 1,200 tip pages, a word no
+  base page prints (the lane's ruling 5, `magicProfile.js :: buyable`, not V3's commit), and the pools
+  now print lines the base never reached (e.g. "What X can field and what X has built are both in good
+  order", in besieged cities).
+
+## §4 — THE BAND AND ITS NUMBER
+
+- **The badge and the stored score never disagree:** `readinessBandOf(score)` on the tenths; 0 of 1,200.
+- **No live surface prints the readiness number.** Its readers: the world export (score and label from
+  the one record: agree); the causal contributor sentence in `EngineSections.jsx :: DefenseWarFrontSection`
+  ("Defense readiness score: N.", whole points), which nothing mounts (dark); the AI prompt prints the
+  MILITARY score ("military score 100/100"), not readiness. 40 of my births sit within half a point
+  below a cut (e.g. `rv2-calm-city-3`, 54.9 Defensible): if the causal section is ever mounted it will
+  print "55" beside "Defensible".
+- **Two ladders read one number — LOW, pre-existing:** the posture line bands `readiness.score` on the
+  aspects' ladder (`SCORE_BAND_CUTS` 65/40/20) while the badge uses the readiness ladder
+  (76/55/38/24/12). So 38.0–39.9 reads **Defensible** beside the WEAK pool ("could not hold off a raid":
+  `rv2-under_siege-town-33`, 7 at tip, 6 at base), and 55–64.9 reads **Well-defended** beside the ADEQUATE
+  pool ("they claim no more than that": 57 at tip, 109 at base).
+- The PDF strip prints "Readiness: <band>" beside "Score avg: <mean of the five>", a different quantity
+  (no size, no threat); unchanged form.
+
+## §5 — THE FIRST REVIEW'S FINDINGS
+
+- **F2 (cured):** on my 1,200, every rite row stands at tip as at base (Religious services 400/400, Life
+  ceremonies 400/400, Weekly rite 379/379, Last rites 104/104); no burial house without a Burial row at
+  either tree; no market loses its Weekly market to the lane. The cure reads clean.
+- **F5 (cured):** the merchant-army lead with "back the garrison": 0 at base, 0 at tip.
+- **F4 (not cured; the sixth seat's):** 75 sieges print "paid from what the hunger leaves" (L1).
+- **F7 (not cured):** H2 is its sharper form under standing pay: the purse lines now sit beside lines
+  that read a full purse.
+- **F3:** not measured by me (the sixth seat's).
