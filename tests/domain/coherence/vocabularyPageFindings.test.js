@@ -271,3 +271,24 @@ describe('F13 / F6 — the counts', () => {
     expect(presentForDenial('lawEnforcement', f([{ name: 'Town watch' }]), ['Town watch'])).toBe(true);
   });
 });
+
+/**
+ * F2 of the second read (REVIEW-W2B-1fb15980d: "the size family reads 7 in 10: `streets` calls a place small up to ~350
+ * people, so 'its streets' in a 331-person village is listed false"). `streets` is false only for a thorp or a hamlet;
+ * `quarters` keeps the population band. Red at 1fb15980d (the 331-person village's streets were a finding).
+ */
+describe('F2 (second read) — streets are false only in a thorp or a hamlet', () => {
+  const place = (tier, population) => ({ tier, population, config: {}, stress: [], institutions: [], powerStructure: { factions: [{ faction: 'Elders' }] } });
+  const words = (record, line) => vocabularyPageFindings(record, { 'Systems/Defense': [line] }).map((f) => f.word);
+  const line = 'Its streets are badly watched after the lamps go out.';
+  test('a village of 331 has streets; a hamlet of 82 and a thorp do not', () => {
+    expect(words(place('village', 331), line)).toEqual([]);
+    expect(words(place('hamlet', 82), line)).toEqual(['streets']);
+    expect(words(place('thorp', 20), line)).toEqual(['streets']);
+  });
+  test('quarters keep the population band: a small village has no merchant quarter, a middling town does', () => {
+    const q = 'The merchant quarter shuts its gates at dusk.';
+    expect(words(place('village', 331), q)).toEqual(['quarters']);
+    expect(words(place('town', 3000), q)).toEqual([]);
+  });
+});

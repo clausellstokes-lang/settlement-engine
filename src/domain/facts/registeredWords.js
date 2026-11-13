@@ -592,10 +592,12 @@ const STATE_FAMILIES = {
     absent: (f) => inForce(f, 'famine'),
   },
   streets: {
-    kind: 'size', layer: 'P', leaf: 'populationBand.js :: populationBandOf',
+    // F2 of REVIEW-W2B's second read: a village (to ~350 people, the `small` band) has streets; a thorp or a hamlet has
+    // none to speak of. False only there, by the tier.
+    kind: 'size', layer: 'P', leaf: 'the record :: tier (factsOf(record).tier)',
     words: /\bstreets\b|\bthe agora\b|\b(?:a|the) (?:civic|town|market) square\b|\bin masonry\b|\bin quarters\b|\bneighbou?rhoods?\b|\bsuburbs\b/i,
-    atoms: [], bands: { population: ['middling', 'large'] },
-    absent: (f) => f?.populationBand === 'small',
+    atoms: [], bands: { tier: ['village', 'town', 'city', 'metropolis'] },
+    absent: (f) => f?.tier === 'thorp' || f?.tier === 'hamlet',
   },
 };
 
