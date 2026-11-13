@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "d585d51f5b50f9f70f1d6c14d53e4df26405bdbd",
+  "measuredAtSha": "d398faebe68eb6a440f939a37108ebf3f5697b43",
   "measuredBy": "COHERENCE-UPKEEP-6",
   "date": "2026-11-13",
-  "note": "COHERENCE-UPKEEP-6 (d585d51f5): DEFENCE_TUNING.wallKind loses earthwork (no birth reached it)",
+  "note": "COHERENCE-UPKEEP-6 (d398faebe): threatAssessment.js no longer reads keep.js; no value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1401,7 +1401,6 @@
       },
       "dependents": [
         "src/domain/display/prosperityInCrisis.js",
-        "src/domain/display/threatAssessment.js",
         "src/domain/facts/factsOf.js",
         "src/domain/magicProfile.js",
         "src/generators/defenseGenerator.js",
@@ -1424,7 +1423,6 @@
       },
       "dependents": [
         "src/domain/display/prosperityInCrisis.js",
-        "src/domain/display/threatAssessment.js",
         "src/domain/facts/factsOf.js",
         "src/domain/magicProfile.js",
         "src/generators/defenseGenerator.js",
