@@ -3,7 +3,15 @@
 **Lane:** `lane/w2-c-leaves-2026-11-13`, created from `817980b33` (the first leaves lane's tip, read back from origin), with
 `origin/lane/coherence-agree-2026-11-11` at `69b53decd` merged in as its first commit (`4534ea5e3`, THE MERGED BASE). Built in
 a scratch worktree on a local branch; pushed plainly to the lane; the main checkout untouched. **Status: STOPPED BY THE
-CHAIR'S RULING after the high items (1 to 4b), all pushed; code tip `48bfc15c0`.**
+CHAIR'S RULING after the high items (1 to 4b), all pushed; code tip `48bfc15c0`. RESUMED on the chair's second ruling
+(17:13 UTC) for 4(c); HANDED BACK BY FILE at the context bound (~400k) after 4(c)'s widest class, code tip `1a5582f4b`.**
+
+## The chair's second ruling, 2026-11-13 ~17:13 UTC (copied in)
+"THE PAUSE IS LIFTED and your list is whole again: carry on with the medium entries of your three files (your item 4c),
+then item 5, then your final statement as your brief gives it. The exploitation grade cards stay parked until the chair
+rules from the measure in your hand-back. Your high items (tip d79ea4c70) are being read by an independent reader from
+now: do not rewrite those commits; a finding comes to you as a ruling. Hand back by file near 400k tokens of context."
+No commit at or before d79ea4c70 was rewritten.
 
 ## The chair's ruling of 2026-11-13 ~15:52 UTC (by message; copied here, it is not on the branch otherwise)
 "THE ACCOUNT'S WEEKLY ALLOWANCE IS IN ITS WARNING BAND … Narrow your list: THE HIGH ITEMS ONLY (your items 1 to 4b),
@@ -67,6 +75,7 @@ beyond what the merged base carries (upkeep's two commits are merges of the agre
 | 4a famine: hunger is here | b35714f2b | 25 reworded | 3 | all 25: false, 0 true | economicsFoodFamineWords.test.jsx (cc1384a66: 1 of 2 red) |
 | 4b precondition: a need met under another name | 17f1af7bd | 598 of 2,247 needs leave the leaf's `needed` (nothing printed yet) | 12 of 60 | 30 matches: 30 true; 30 left: 29 unmet, 1 doubtful | needMetUnderAnotherName.test.js (b35714f2b: 2 of 2 red) |
 | 4b the Imports pill onto the leaf | 48bfc15c0 | 2,247 need pills out of Imports (641 towns); a needs line in 630 towns (1,649 needs) | 60 out; 18 towns | (as 17f1af7bd) | economicsImportsAreArrivals.test.jsx (17f1af7bd: 2 of 2 red) |
+| 4c (widest medium class) the food card's machinery row | 1a5582f4b | 720 machinery rows out (penalty in 158, coverage in up to 449) | 20 | figures true, all machinery by the owner's law; nothing in their place (stat line + sentence) | economicsShowsNoMachinery.test.jsx (4534ea5e3: 1 of 1 red) |
 
 Details live in each commit body (measure, home, lines, read, guard, gates).
 
@@ -104,6 +113,9 @@ Details live in each commit body (measure, home, lines, read, guard, gates).
   domainAnyCastBaseline (an attribution sha this shallow clone cannot resolve).
 
 ## Registers moved, each through its own door
+- 1a5582f4b: `tests/lint/.prose-numerics-baseline.json` five rows out (EconomicsTab.jsx 572 x2, 573, 574 x2), reviewed;
+  the reviewed ceilings to the live count (193 -> 188); `phoneChromeFloor` `floored` -3 on three routes; the malformed-flows
+  pin re-keyed by cause (the share in words).
 - `tests/lint/ruinFilterRoster.walker.test.js`: validationOnPage.js's EXEMPT row removed (it now reads the live roster) — shrink (9129d72dc).
 - `tests/components/phoneChromeFloor.census.test.js` ROUTE_BASELINE: `floored` +1 on /create, /settlements, /gallery (the needs
   line's one `proseFontSize` site), `bare` unmoved, the cause on the row, as the census asks (48bfc15c0).
@@ -114,6 +126,26 @@ resolve); dossierPhoneFloorAllViews x2 (identical body at 4534ea5e3, 283acbca5, 
 dossierProseManifest x3; observedShapeReaders at load; **the page arm's grid walker `pageCensus.walker.test.jsx`** (r2s-indebted-
 village-0 lost F4; r2r-city-0 lost P4 and GAINED P13 — a row that ROSE at the merge, not shrinkable through the door: the merge
 seat's). The stopped base suite's partial red-file list: 34 files, in the scratch log only (not run to the end, by the ruling).
+
+## Measured at the stop (executed)
+- **The field diff over the census's 720, merged base 4534ea5e3 against d79ea4c70 (the high items): 0 of 720 records
+  differ** (the census's own births in each tree, compared record by record as JSON). No file under src/generators or
+  src/data changed on this lane after the merge (`git diff --stat 4534ea5e3 1a5582f4b -- src/generators src/data`: empty);
+  1a5582f4b changes one component. NOT run: the golden's 525 configurations.
+- The census render at d79ea4c70 was started and was past 497 of 720 dumps at the hand-back; its output lives only in my
+  container: re-run it.
+
+## Item 4(c), the rest of the cut's EconomicsTab.jsx entries (not built), widest first, from the cold list by script
+- "✓ Running" chain cards against the record (#165 Grain under a famine whose failedSource is grain; #273, #276 hunting and
+  an entrepôt running under a siege; #195, #196 a Mill and a parish church chain "Running" via a house the hamlet only has
+  access to; #875 a port service Operational under blockade): the card's state should read the chain's carrier and the
+  crisis (facts/chainCarrier.js, the crisis home) — a ruling on what a card says under a siege is wanted first.
+- "Produced locally" pills of goods no house makes (#45, #159, #192, #345, #382, #555): `economicState.localProduction`
+  printed raw; the cure is a reader of that list against the chain leaf (chainWorksResource), as item 2.
+- The flow card's "From Grazing land" where the resource is absent (#617, #904, #1051): item 5's flow-card chips
+  (facts/chainCarrier.js is the home).
+- "Merchant guilds (15-40)" with its count range (#686, #738, #950): the label seam (institutionDisplayName).
+- #608 "26/100" beside "Prosperous" (two homes); #90 the balanced-food line beside 15 months of stores.
 
 ## Not done (the chair's ruling), and the exact next steps for a successor
 1. **The page arm's P6need, lowered through its own door:** render the census's 720 at the tip
@@ -126,8 +158,9 @@ seat's). The stopped base suite's partial red-file list: 34 files, in the scratc
 4. The draft shift record (six surfaces + the registered surfaces the reds pin); the whole suite at the tip, classed against a
    whole run at 4534ea5e3; the edge bundles as the last commit, alone (src/domain/display/* moved: aiGrounding/engine bundles
    may be stale — check `edgeSharedBundleReproducibility`).
-5. Item 4(c) (the cut's medium entries in EconomicsTab.jsx: chain cards "✓ Running" against the record; pills of goods the town
-   does not make) and item 5 (the flow card's chips; the food band; the agreement review's G1–G4; the defence display's mediums).
+5. The rest of item 4(c) (the list above), the medium entries of validationOnPage.js (6) and defenseDisplay.js (7) in the
+   cold list (`debt/final.json`, filter `file`), then item 5 (the flow card's chips; the food band; the agreement review's
+   G1–G4; the defence display's mediums).
 6. P1 below (the grade cards) after a ruling.
 
 ## New words for the owner's veto
