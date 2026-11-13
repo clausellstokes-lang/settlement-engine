@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2962,
+    "variants": 2963,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -1785,7 +1785,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 11,
+      "variants": 12,
       "grammars": 2,
       "predicate": [
         {
@@ -1833,10 +1833,10 @@
       },
       "declares": [],
       "lineDeclares": {
-        "crisis": 2,
+        "crisis": 3,
         "crisis: famine": 3,
         "crisis: indebted": 3,
-        "no crisis": 1,
+        "no crisis": 2,
         "no crisis: debt": 4,
         "no crisis: famine": 3,
         "prosperity: ≥ moderate": 1
@@ -55411,7 +55411,7 @@
         "DS-DEF-2 :: Economic Survival: WEAK",
         "DS-DEF-2 :: Economic Survival: CRITICAL"
       ],
-      "variants": 22,
+      "variants": 23,
       "grammars": 5,
       "blocks": [
         "DS-DEF-2"
@@ -66498,7 +66498,7 @@
         "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "ECONOMIC_ROW_POOL",
-      "count": "11 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "12 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 266121,
-      "gzip": 35801,
+      "raw": 266434,
+      "gzip": 35843,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -843,6 +843,14 @@
       "toRaw": 266121,
       "gzipAfter": 35801,
       "reason": "+813 B raw over the committed 265308 (gzip level 9: 35701 -> 35801): DS-DEF-2 CHAIN food trades working: the siege line declared off a famine (food: > famine); two lines for a siege with hunger already here (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE-4 round 3 Economic Survival STRONG",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 266121,
+      "toRaw": 266434,
+      "gzipAfter": 35843,
+      "reason": "+313 B raw over the committed 266121 (gzip level 9: 35801 -> 35843): DS-DEF-2 Economic Survival STRONG speaks of the purse, never the crisis's outcome (the chair's ruling): v2 off any crisis; v3, v6, v9 said as what the purse holds; one slot-free purse line (2026-11-13)"
     }
   ],
   "ceilingTransfersNewLeaves": [
