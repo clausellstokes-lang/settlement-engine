@@ -234,7 +234,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
               chains={settlement?.economicState?.activeChains}
               instNames={(settlement?.institutions || []).map((inst) => inst.name || '')}
               primaryExports={settlement?.economicState?.primaryExports || []}
-              tier={settlement?.tier}
+              tier={settlement?.tier} town={settlement}
             />
           ) : e.chains.map((c, i) => (
             <StatusCard

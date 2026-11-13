@@ -134,6 +134,16 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     expect(at('crossroads', true)).toEqual([]);
     expect(at('road', false)).toEqual([]);
   });
+  test('F1 (COHERENCE-AGREE-6): an active chain printing a resource whose row refuses the access', () => {
+    const toll = { label: 'Strategic Crossroads Toll', resource: 'Strategic Crossroads', resourceKey: 'crossroads_position', needKey: 'trade_entrepot', chainId: 'crossroads_trade' };
+    const runs = (route, chain) => details(record({ config: { tradeRouteAccess: route }, economicState: { activeChains: [chain] } }));
+    // the printed source reads the access through the leaf: the toll prints its river and port names, so clean
+    expect(runs('river', toll)).toEqual([]);
+    expect(runs('port', toll)).toEqual([]);
+    expect(runs('crossroads', toll)).toEqual([]);
+    // a chain whose printed source has no entry for the access is convicted (a mis-keyed toll prints the crossroads)
+    expect(runs('river', { ...toll, chainId: 'not_the_toll' })).toContain("A chain prints a resource whose row refuses the town's access.");
+  });
   test('the import list against the food record', () => {
     const grown = (pct, imports) => record({ economicState: { primaryImports: imports, foodSecurity: { foodRecord: { grownPct: pct } } } });
     expect(details(grown(95, ['Grain']))).toContain('Grain stands as a primary import, unqualified, where the town grows most of its need.');
@@ -177,6 +187,15 @@ describe('the projection-agreement arm convicts each disagreement and clears its
       economicViability: { plotHooks: [], dependencies: [{ category, title: 'Imports timber' }] } });
     expect(details(note('Resource Import'))).toContain('The viability notes an import a live local resource yields.');
     expect(details(note('Provisioning at Scale'))).toEqual([]);
+  });
+  test('F2 (COHERENCE-AGREE-6): a good only refused chains make, on the export list or produced locally', () => {
+    const chains = [{ status: 'impaired', outputs: ['Quality tools and weapons', 'Charcoal'] }, { status: 'running', resourceInputCondition: 'available', outputs: ['Charcoal'] }];
+    const lists = (primaryExports, localProduction) => details(record({ economicState: { activeChains: chains, primaryExports, localProduction } }));
+    expect(lists(['Quality tools and weapons'], [])).toContain('A trade list carries a good only a refused chain makes.');
+    expect(lists(['Quality tools and weapons (naval route only)'], [])).toContain('A trade list carries a good only a refused chain makes.');
+    expect(lists([], ['quality tools and weapons'])).toContain('A trade list carries a good only a refused chain makes.');
+    // twins: a good a yielding chain also makes, and a good no chain makes
+    expect(lists(['Charcoal (transit)'], ['Salt'])).toEqual([]);
   });
   test('Part B (i): "no established food chains" beside a roster that works its own land', () => {
     const said = (institutions) => details({ ...record({ institutions, economicState: { foodSecurity: { diversityNote: 'no established food chains', foodRecord: { grownPct: 90 } } } }), tier: 'village' });
@@ -249,6 +268,16 @@ const REVIEW_SEEDS = [
   { seed: 'rvw12-village-19', tier: 'village' }, { seed: 'agree-town-1', tier: 'town' },
   // F11: "Commerce is sluggish" beside "Comfortable" or "Prosperous" (rvw-ten-6, above, beside "Prosperous")
   { seed: 'rvw12-town-8', tier: 'town' }, { seed: 'rvw12-town-20', tier: 'town' }, { seed: 'rvw12-town-32', tier: 'town' },
+  // F2 (REVIEW-AGREE-2, COHERENCE-AGREE-6): a good only refused chains make, sold or produced locally
+  { seed: 'r2read-city-4', tier: 'city' }, { seed: 'r2r-city-42', tier: 'city' }, { seed: 'r2r-city-6', tier: 'city' }, { seed: 'agree-village-32', tier: 'village' },
+  // F1 (REVIEW-AGREE-2, COHERENCE-AGREE-6): the crossroads toll on a river and on a port
+  { seed: 'r2read-village-1', tier: 'village' }, { seed: 'r2r-city-14', tier: 'city' }, { seed: 'r2read-metropolis-2', tier: 'metropolis' }, { seed: 'r2r-village-2', tier: 'village' },
+  // F3 (REVIEW-AGREE-2, COHERENCE-AGREE-6): births the review's planted faults reach. G2 (the safety writer's company
+  // read off the garrison) is convicted on these three; G5 (the foodways market filter removed) on the next three.
+  { seed: 'agree-town-146', tier: 'town' }, { seed: 'agree-city-60', tier: 'city' }, { seed: 'rvw12b-metropolis-52', tier: 'metropolis' },
+  { seed: 'agree-thorp-56', tier: 'thorp' }, { seed: 'r2r-hamlet-5', tier: 'hamlet' }, { seed: 'rvw12-village-25', tier: 'village' },
+  // F3 (ii): the surplus member's subject ("Surplus from local harvest" printed), live in no birth above
+  { seed: 'agree-town-56', tier: 'town' }, { seed: 'r2r-town-2', tier: 'town' },
 ];
 describe('the reviewer\'s seeds agree', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
@@ -261,4 +290,50 @@ describe('the reviewer\'s seeds agree', () => {
       .flatMap((c) => c.findings.map((f) => `${f.path}: ${f.detail} ${f.evidence || ''}`));
     expect(findings, seed).toEqual([]);
   }), 'the reviewer\'s seeds agree'));
+});
+
+/**
+ * F3 (COHERENCE-AGREE-6, REVIEW-AGREE-2, the chair's ruling of 2026-11-12): EVERY MEMBER IS REACHED BY ITS FIXED-SEED
+ * ARM. Two of the guard's members caught their planted fault in the receipt and reddened nothing, because no arm-2
+ * birth gave them a subject. For EVERY member, the arm-2 births in which its subject is live (the thing it reads is
+ * printed or held, so the two answers it compares are both there to disagree) number at least one, so a member can
+ * never again be empty in silence. The subjects are restated here from the record's raw fields, never by calling the
+ * member.
+ */
+describe('F3: every member of the guard has a live subject in arm 2', () => {
+  const safety = (s) => { const p = s.economicState?.safetyProfile || {}; return [p.guardEffectivenessDesc, p.safetyDesc, ...(p.crimeTypes || []).map((c) => c?.desc)].map((x) => String(x || '')); };
+  const LIVE = {
+    'a terrain must-import': (s) => (s.resourceAnalysis?.imports?.critical || []).some((l) => /cannot produce this locally/.test(String(s.resourceAnalysis?.imports?.reasons?.[l] || ''))),
+    'a terrain strength': (s) => (s.resourceAnalysis?.economicStrengths || []).length > 0,
+    'a strategic yield clause': (s) => /\bprovides\b|heartland/i.test(String(s.resourceAnalysis?.strategicValue || '')),
+    'a rolled resource with an access law': (s) => s.config?.nearbyResourcesRandom !== false && (s.resourceAnalysis?.availableResources || []).includes('crossroads_position'),
+    'an active chain on a resource with an access law': (s) => (s.economicState?.activeChains || []).some((c) => c.resourceKey === 'crossroads_position'),
+    'a hook naming war': (s) => (s.economicViability?.plotHooks || []).some((h) => /\b(?:war|armies|siege)\b/i.test(String(h?.hook || ''))),
+    'a peacetime iron hook': (s) => (s.economicViability?.plotHooks || []).some((h) => /iron road|metal dear|iron merchants/i.test(String(h?.hook || ''))),
+    'a hook naming a material': (s) => (s.economicViability?.plotHooks || []).some((h) => /\b(?:iron|metal|timber)\b/i.test(String(h?.hook || ''))),
+    'an income line naming a local resource': (s) => (s.economicState?.incomeSources || []).some((e) => /^Local (?:ore|forest|quarry|flocks)\b/.test(String(e?.desc || ''))),
+    'a refused chain beside a trade list': (s) => (s.economicState?.activeChains || []).some((c) => c?.status === 'impaired' || c?.resourceInputCondition === 'depleted') && (s.economicState?.primaryExports || []).length > 0,
+    'an "Imports …" viability note': (s) => ['dependencies', 'warnings'].some((f) => (s.economicViability?.[f] || []).some((e) => e?.category === 'Resource Import' && /^Imports /.test(String(e?.title || '')))),
+    'the safety text naming a mercenary company': (s) => safety(s).slice(0, 2).some((t) => /\bmercenary compan/i.test(t)),
+    'the safety text naming gates': (s) => safety(s).some((t) => /\bgates?\b/i.test(t)),
+    'the safety text naming the watch': (s) => safety(s).some((t) => /\bthe watch\b/i.test(t)),
+    'the safety text naming a court': (s) => safety(s).some((t) => /\bcourts?\b/i.test(t)),
+    'the economic situation naming a market': (s) => /\bmarkets?\b/i.test(String(s.economicState?.situationDesc || '')),
+    'the trade line beside the prosperity label': (s) => /sluggish|brisk|ordinary pace/i.test(String(s.economicState?.situationDesc || '')),
+    'the foodways line naming a market': (s) => /\bmarkets?\b/i.test(String(s.economicState?.foodSecurity?.foodRecord?.foodwaysLine || '')),
+    'a grain import where the town grows nine tenths': (s) => (s.economicState?.primaryImports || []).some((l) => /grain/i.test(l)) && Number(s.economicState?.foodSecurity?.foodRecord?.grownPct) >= 90,
+    'an income line selling a surplus': (s) => (s.economicState?.incomeSources || []).some((e) => /^Surplus from local harvest\b/.test(String(e?.desc || ''))),
+    'a shortage import naming spent land': (s) => (s.economicState?.primaryImports || []).some((l) => /\((?:local|coastal|mountain) /i.test(l)),
+    'the zero-source food note': (s) => /no established food chains|own plots/.test(String(s.economicState?.foodSecurity?.diversityNote || '')),
+    'available worked land': (s) => (s.config?.nearbyResources || []).some((k) => ['grain_fields', 'fertile_floodplain', 'grazing_land'].includes(k)),
+  };
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  test('each member\'s subject is live in at least one arm-2 birth', () => {
+    const arm2 = [...SEEDS.map((seed) => ({ seed, tier: seed.split('-')[1] })), ...REVIEW_SEEDS];
+    const births = arm2.map(({ seed, tier, stress }) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: tier,
+      ...(stress ? { selectedStressesRandom: false, selectedStresses: [stress] } : {}) }), null, { seed }));
+    const reach = Object.fromEntries(Object.entries(LIVE).map(([member, live]) => [member, births.filter(live).length]));
+    expect(Object.keys(reach).length).toBe(23);
+    expect(Object.entries(reach).filter(([, n]) => n < 1).map(([member]) => member), JSON.stringify(reach)).toEqual([]);
+  }, 120000);
 });

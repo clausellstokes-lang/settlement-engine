@@ -276,7 +276,8 @@ describe('item 3′ (i): the exporter\'s refusal is the leaf\'s', () => {
   test('the exporter reads the leaf, and keeps no private refusal of its own', async () => {
     const { readFileSync } = await import('node:fs');
     const site = readFileSync(new URL('../../src/generators/computeActiveChains.js', import.meta.url), 'utf8');
-    expect(site).toMatch(/import \{ chainYieldRefused \} from '\.\.\/domain\/chainYield\.js';/);
+    // re-keyed by identity (COHERENCE-AGREE-6, F2): the one import from the leaf also names the leaf's goods set
+    expect(site).toMatch(/import \{ chainYieldRefused, goodsOnlyRefusedChainsMake \} from '\.\.\/domain\/chainYield\.js';/);
     expect(site).toMatch(/\.filter\(ch => ch\.exportable && !chainYieldRefused\(ch, isDepletedResource\)\)/);
     // anchored: the same source text matched the exporter's filter on the line above
     expect(site).not.toMatch(/chainIsDepleted/);
@@ -335,5 +336,208 @@ describe('item 3′ (ii): every page that prints a chain\'s outputs reads the le
     const unread = readers.filter((f) => !(f in EXEMPT) && !/import \{[^}]*\bchainYieldRefused\b[^}]*\} from '[./]+\/domain\/chainYield\.js';/.test(readFileSync(join(root, f), 'utf8')));
     expect(unread, 'a page prints a chain\'s outputs without the leaf').toEqual([]);
     expect(Object.keys(EXEMPT).filter((f) => !readers.includes(f)), 'a stale exemption').toEqual([]);
+  });
+});
+
+/**
+ * F2 (COHERENCE-AGREE-6, the chair's ruling of 2026-11-12): `domain/chainYield.js` is the one home of "does this chain
+ * yield now". A good only refused chains make (no yielding chain makes it) is not exported and is not produced
+ * locally: the export bonus (`economy/finishedGoodsDemand.js`), the land's raw goods
+ * (`computeActiveChains.js :: deriveExportsFromChains`) and "Produced locally"
+ * (`computeActiveChains.js :: deriveLocalProductionFromChains`) all ask the leaf. Each seed below sold or listed such
+ * a good at 8866a0ddd (REVIEW-AGREE-2's F2: Quality tools and weapons beside two impaired iron cards; Processed
+ * textiles beside an impaired Textiles & Cloth card).
+ */
+describe('F2: a good only refused chains make is neither sold nor produced locally', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  test("the leaf: a refused chain's output that a yielding chain also makes is not refused-only", async () => {
+    const { goodsOnlyRefusedChainsMake } = await import('../../src/domain/chainYield.js');
+    const only = goodsOnlyRefusedChainsMake([
+      { status: 'impaired', outputs: ['Quality tools and weapons', 'Charcoal'] },
+      { status: 'running', resourceInputCondition: 'available', outputs: ['Charcoal'] },
+      { status: 'vulnerable', resourceInputCondition: 'depleted', outputs: ['Processed textiles'] },
+    ]);
+    expect([...only].sort()).toEqual(['processed textiles', 'quality tools and weapons']);
+    expect(goodsOnlyRefusedChainsMake(null).size).toBe(0);
+  });
+  const SUFFIX = / \((?:transit|naval route only|taxed by occupation)\)$/;
+  // agree-village-32: the entrepôt branch sent a depleted salt chain's "Preserved foods (transit)"
+  test('r2read-city-4, r2r-city-42, r2r-city-6 and agree-village-32 sell and list no good only refused chains make', async () => {
+    const { goodsOnlyRefusedChainsMake } = await import('../../src/domain/chainYield.js');
+    expectNoSeedFailures(collectSeedFailures(['r2read-city-4', 'r2r-city-42', 'r2r-city-6', 'agree-village-32'], (seed) => {
+      const eco = birth(seed).economicState;
+      const only = goodsOnlyRefusedChainsMake(eco.activeChains);
+      expect(only.size, `${seed}: anchored — the seed holds a good only a refused chain makes`).toBeGreaterThan(0);
+      const sold = eco.primaryExports.filter((e) => only.has(e.replace(SUFFIX, '').toLowerCase()));
+      const local = eco.localProduction.filter((e) => only.has(e.toLowerCase()));
+      expect({ sold, local }, seed).toEqual({ sold: [], local: [] });
+    }), "a refused chain's good stands on a trade list");
+  });
+});
+
+/**
+ * F8 (ii) (COHERENCE-AGREE-6, the chair's ruling of 2026-11-12): the flag bag's prison and hospital are the defence
+ * home's answers (`defenseFactsOf`), off the live roster: the lane's own two private readers in
+ * `priorityHelpers.js :: getInstitutionNames`, cured rather than banked when the walker learned the four atoms.
+ */
+describe('F8 (ii): the flag bag reads the prison and the hospital from the defence home', () => {
+  test('a ruined prison holds no one; a gaol does', () => {
+    expect(getInstFlags({}, [{ name: 'Large prison', status: 'ruined' }]).inst.hasPrison).toBe(false);
+    expect(getInstFlags({}, [{ name: 'Village gaol' }]).inst.hasPrison).toBe(true);
+    expect(getInstFlags({}, [{ name: 'Large prison' }]).inst.hasPrison).toBe(true);
+  });
+  // COHERENCE-AGREE-7 (P1): the hospital flag is the home's hospital OR healer. The old list read "monastery" as a
+  // substring, so the catalogue's plural rows ("Multiple monasteries", "Major monasteries (5-10)") tended no one
+  // (176 of the lane's 4,141 births), and a ruined hospital still did.
+  test('a house of many monasteries tends the sick; a ruined hospital does not', () => {
+    expect(getInstFlags({}, [{ name: 'Multiple monasteries' }]).inst.hasHospital).toBe(true);
+    expect(getInstFlags({}, [{ name: 'Major monasteries (5-10)' }]).inst.hasHospital).toBe(true);
+    expect(getInstFlags({}, [{ name: 'Hospital', status: 'ruined' }]).inst.hasHospital).toBe(false);
+    expect(getInstFlags({}, [{ name: 'Hospital' }]).inst.hasHospital).toBe(true);
+    expect(getInstFlags({}, [{ name: 'Healer' }]).inst.hasHospital).toBe(true);
+    expect(getInstFlags({}, [{ name: 'Parish church' }]).inst.hasHospital).toBe(false);
+  });
+});
+
+/**
+ * F5 (a) (COHERENCE-AGREE-6, REVIEW-AGREE-2; the chair's ruling of 2026-11-12): ONE HOME FOR WHICH TERRAIN HOLDS A
+ * PASS. "Mountain Pass" (`defended_pass`) named no terrain, so the roll gave it anywhere. Its own row now says the
+ * terrain it requires (`requiresTerrain`, a key the roll's pool filter does not read), and agrees with the geography
+ * table, which lists it under the mountains alone.
+ */
+describe('F5 (a): the mountain pass says the terrain it requires, and the geography table agrees', () => {
+  test('RESOURCE_DATA.defended_pass.requiresTerrain is the terrains whose allowed resources list it', async () => {
+    const { RESOURCE_DATA } = await import('../../src/data/resourceData.js');
+    const { TERRAIN_DATA } = await import('../../src/data/geographyData.js');
+    const listing = Object.entries(TERRAIN_DATA).filter(([, t]) => (t.allowedResources || []).includes('defended_pass')).map(([k]) => k).sort();
+    expect(listing).toEqual(['mountain']);
+    expect([...(RESOURCE_DATA.defended_pass.requiresTerrain || [])].sort()).toEqual(listing);
+    // the pool filter reads `terrain`; the pass keeps none, so the pool is what it was
+    expect(RESOURCE_DATA.defended_pass.terrain).toBeUndefined();
+  });
+});
+
+/**
+ * F5 (d) (COHERENCE-AGREE-6): the wizard reads the pass's own row, as it reads `requires` for the crossroads. Off the
+ * mountains the pass is not OFFERED, says why, and may still be forced; the random roll's pool (`compatible`) is
+ * unchanged.
+ */
+describe('F5 (d): the wizard offers the mountain pass on the mountains only', () => {
+  test('hills: compatible (the pool) but not offered, with the reason; mountain: offered', async () => {
+    const { getCompatibleResources } = await import('../../src/domain/resourceTerrainCompatibility.js');
+    const pass = (terrain) => getCompatibleResources('road', terrain).find((r) => r.key === 'defended_pass');
+    expect(pass('hills')).toMatchObject({ compatible: true, offered: false, incompatibleReason: 'Only available in mountain terrain' });
+    expect(pass('mountain')).toMatchObject({ compatible: true, offered: true, incompatibleReason: null });
+    // a row with no terrain law keeps its offer
+    expect(getCompatibleResources('road', 'hills').find((r) => r.key === 'grain_fields')).toMatchObject({ offered: true });
+  });
+  // P4 (COHERENCE-AGREE-7, the validator's half, after P2 / F5 (c)): the roll keeps no pass off the mountains, so only a
+  // person's forced pass stands there, and the structural validator warns on it as on a forced crossroads, in the
+  // wizard's words.
+  test('the validator warns on a pass forced off the mountains, in the wizard\'s words; on the mountains it does not', async () => {
+    const { checkStructuralValidity } = await import('../../src/generators/structuralValidator.js');
+    const warned = (terrainType) => checkStructuralValidity([], { tier: 'village', tradeRouteAccess: 'road', terrainType,
+      nearbyResources: ['defended_pass', 'grain_fields'] }).violations.filter((v) => v.type === 'resource_access_violation');
+    expect(warned('hills')).toEqual([expect.objectContaining({ institution: 'Mountain Pass', reason: 'Only available in mountain terrain', severity: 'warning' })]);
+    expect(warned('mountain')).toEqual([]);
+    expect(warned(undefined)).toEqual([]); // anchored: no terrain on the record, no claim either way
+  });
+});
+
+/**
+ * P2's RULE (COHERENCE-AGREE-7, the chair's ruling of 2026-11-12): A REFILLED SLOT TAKES ITS DEPLETION DRAW ONLY WHERE
+ * THE REFUSED MEMBER COULD HAVE BEEN DEPLETED. A′'s refill (COHERENCE-AGREE-4) kept the slot's draw, and a crossroads is
+ * never randomly depletable, so its replacement could arrive worked out where the roll's own winner never could (125
+ * of the lane's 4,141 births; REVIEW-AGREE-2 F5's second effect). Each seed below is a crossroads holder off a
+ * crossroads whose replacement arrived depleted at 7cf4f0c2e; it now arrives live. The one food band the rule moved is
+ * r2s-under_siege-village-0's (its replacement grain fields arrived live: deficit -> importDependent; (c) re-deals it
+ * since, below). REVIEW-AGREE-2 F6's besieged city (r2s-under_siege-city-3) frees its replacement forest too, and its band stays deficit: A′'s
+ * re-deal moves it by another path, declared in the draft record.
+ */
+describe('P2\'s rule: a refilled slot arrives as live as the refused winner would have been', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const FREED = { 'agree-town-100': 'ancient_grove', 'agree-city-20': 'ancient_grove', 'r2r-village-50': 'ancient_grove',
+    'r2r-town-47': 'grazing_land', 'r2r-metropolis-27': 'hunting_grounds', 'l2-wartime-metropolis-8': 'grain_fields' };
+  test('each replacement is held and not depleted', () => {
+    expectNoSeedFailures(collectSeedFailures(Object.keys(FREED), (seed) => {
+      const [, stress, tier] = seed.match(/^l2-(\w+)-(\w+)-\d+$/) ?? [];
+      const settlement = stress
+        ? generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: tier, selectedStressesRandom: false, selectedStresses: [stress] }), null, { seed })
+        : birth(seed);
+      expect(settlement.config.tradeRouteAccess, seed).not.toBe('crossroads');
+      expect(settlement.config.nearbyResources, `anchored: ${seed} holds its replacement`).toContain(FREED[seed]);
+      expect(settlement.config.nearbyResourcesDepleted, seed).not.toContain(FREED[seed]); // anchored: the line above holds the key on the roster
+    }), 'a refilled slot took a depletion draw its refused member could never take');
+  });
+  // RE-KEYED BY IDENTITY at P2 / F5 (c) (COHERENCE-AGREE-7): the village also rolled a pass off the mountains. Its pass
+  // slot, earlier in the roll, now takes iron, so its crossroads slot takes marshlands where it took grain fields, and
+  // its band reads deficit again by that re-deal (declared with (c)). The rule's claim is unchanged: both
+  // replacements arrive live.
+  test('the besieged: r2s-under_siege-village-0\'s replacements (iron, marshlands) arrive live', () => {
+    const besieged = (seed, tier) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: tier,
+      selectedStressesRandom: false, selectedStresses: ['under_siege'] }), null, { seed });
+    const village = besieged('r2s-under_siege-village-0', 'village');
+    for (const key of ['iron_deposits', 'marshlands']) {
+      expect(village.config.nearbyResources).toContain(key); // anchored: the replacement is held
+      expect(village.config.nearbyResourcesDepleted).not.toContain(key);
+    }
+    expect(village.economicState.foodSecurity.foodRecord.band).toBe('deficit');
+    const city = besieged('r2s-under_siege-city-3', 'city');
+    expect(city.config.nearbyResources).toContain('managed_forest'); // anchored: the replacement is held
+    expect(city.config.nearbyResourcesDepleted).not.toContain('managed_forest');
+  });
+});
+
+/**
+ * F5 (b) (COHERENCE-AGREE-6, built; committed by COHERENCE-AGREE-7, as the chair ruled P3): THE REFILL never fills a
+ * slot with a member the town's terrain refuses. Each seed below is a crossroads holder off a crossroads whose refused slot the refill gave "Mountain Pass" off the mountains at
+ * 8866a0ddd (REVIEW-AGREE-2 F5: 46 of the reviewer's 54); it now holds a full roll with no pass. Over the lane's 4,141
+ * births the refill placed 269 passes off the mountains; it now places none.
+ */
+describe('F5 (b): a refilled slot never takes a member the terrain refuses', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  test('refilled holders off the mountains hold no mountain pass, and keep their roll\'s size', () => {
+    const seeds = ['r2r-thorp-10', 'r2r-hamlet-22', 'agree-village-40', 'agree-town-0', 'agree-city-28', 'r2r-metropolis-2'];
+    expectNoSeedFailures(collectSeedFailures(seeds, (seed) => {
+      const settlement = birth(seed);
+      const roster = settlement.config.nearbyResources;
+      expect(settlement.config.terrainType, seed).not.toBe('mountain');
+      expect(roster.length, `anchored: ${seed} holds a roll`).toBeGreaterThan(2);
+      // anchored: the roster was just held to carry a full roll, so it is the live roster
+      expect(roster, seed).not.toContain('defended_pass');
+    }), 'a refilled slot takes a pass off the mountains');
+  });
+});
+
+/**
+ * P2 / F5 (c) (COHERENCE-AGREE-7, the chair's ruling of 2026-11-12): THE BASE ROLL'S PASS OFF ITS TERRAIN. "Mountain Pass"
+ * names no `terrain`, so the roll's universal half drew it anywhere (963 of the lane's 4,141 births held one off the
+ * mountains after the refill was confined). A rolled winner the record's terrain refuses is refused as one its access
+ * refuses (A′), at the same point, and its slot refilled by the same rule; P2's rule (e11750d62) makes the replacement
+ * arrive live. Each seed below held a rolled pass off the mountains at df2249ff8; agree-metropolis-33 and
+ * rvw12-town-133 are two of the eleven that, built without the rule, were left with nothing live.
+ */
+describe('P2 / F5 (c): the roll keeps no mountain pass off the mountains', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const CAME = { 'agree-thorp-0': 'ancient_grove', 'r2r-hamlet-14': 'ancient_grove', 'agree-village-25': 'ancient_grove',
+    'agree-town-4': 'iron_deposits', 'agree-city-12': 'precious_metals', 'agree-metropolis-16': 'gemstone_deposits',
+    'agree-metropolis-33': 'coal_deposits', 'rvw12-town-133': 'ancient_grove' };
+  test('each holder holds no pass, and its slot is refilled live', () => {
+    expectNoSeedFailures(collectSeedFailures(Object.keys(CAME), (seed) => {
+      const { config } = birth(seed);
+      expect(config.terrainType, seed).not.toBe('mountain');
+      expect(config.nearbyResources, seed).not.toContain('defended_pass'); // anchored: the next line holds the replacement on this roster
+      expect(config.nearbyResources, `anchored: ${seed} holds its replacement`).toContain(CAME[seed]);
+      expect(config.nearbyResourcesDepleted, seed).not.toContain(CAME[seed]); // anchored: the line above holds the key on the roster
+      expect(config.nearbyResources.filter((key) => !config.nearbyResourcesDepleted.includes(key)).length, `${seed}: something live`).toBeGreaterThan(0);
+    }), 'a rolled pass stands off the mountains');
+  });
+  // The terrain is the record's: on the wizard's "Mountain Pass" route with the terrain left on 'auto' the town stands
+  // on the mountains, and its rolled pass is kept (the step's own terrain override is null there).
+  test('a village on the Mountain Pass route, terrain auto, stands on the mountains and keeps its rolled pass', () => {
+    const settlement = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'village', tradeRouteAccess: 'mountain_pass',
+      terrainOverride: 'auto', nearbyResourcesRandom: true }), null, { seed: 'agree7-mp-village-4' });
+    expect(settlement.config.terrainType).toBe('mountain');
+    expect(settlement.config.nearbyResources).toContain('defended_pass');
   });
 });

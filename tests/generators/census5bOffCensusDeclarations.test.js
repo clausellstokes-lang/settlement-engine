@@ -107,6 +107,37 @@ describe('CENSUS-5b unit 2 · the wired baseline conflicts', () => {
 });
 
 /**
+ * THE COMPLEMENT RULE, NARROWED (COHERENCE-AGREE-6, the chair's ruling of 2026-11-12, on the upkeep lane's four lines
+ * that name the garrison or the hired company): a twin is the complement of its original on the ONE atom the pair is
+ * KEYED on, and on no other. An atom both lines name, both declare, the same way (a denial is declared as a denial).
+ * The old rule (the twin excludes exactly what the original needs) made a twin refuse a second atom it still names.
+ * The key is the one atom whose polarity flips (the original's need the twin refuses, or its refusal the twin needs);
+ * every other atom the twin declares, the original declares the same way.
+ * @param {{ needs: string[], excludes: string[] }} original @param {{ needs: string[], excludes: string[] }} twin
+ */
+function twinAnswersOnItsKey(original, twin) {
+  const flipped = [...original.needs.filter((a) => twin.excludes.includes(a)), ...original.excludes.filter((a) => twin.needs.includes(a))];
+  if (flipped.length !== 1) return false;
+  const [key] = flipped;
+  return twin.needs.every((a) => a === key || original.needs.includes(a))
+    && twin.excludes.every((a) => a === key || original.excludes.includes(a));
+}
+
+describe('CENSUS-5b · the complement rule is keyed on one atom (the chair\'s ruling of 2026-11-12)', () => {
+  it('a pair keyed on the walls, both naming the garrison: the twin refuses the walls and declares the garrison too', () => {
+    const original = { needs: ['walls', 'garrison'], excludes: [] };
+    expect(twinAnswersOnItsKey(original, { needs: ['garrison'], excludes: ['walls'] })).toBe(true);
+    // the old rule's twin, refusing the garrison it still names, is not the complement on its key
+    expect(twinAnswersOnItsKey(original, { needs: [], excludes: ['walls', 'garrison'] })).toBe(false);
+    // a twin that flips nothing, or declares against the original off its key, does not answer it
+    expect(twinAnswersOnItsKey(original, { needs: ['walls', 'garrison'], excludes: [] })).toBe(false);
+    expect(twinAnswersOnItsKey(original, { needs: ['garrison'], excludes: ['walls', 'market'] })).toBe(false);
+    // a denial keyed pair: the original refuses the market, its twin needs it
+    expect(twinAnswersOnItsKey({ needs: ['garrison'], excludes: ['market'] }, { needs: ['garrison', 'market'], excludes: [] })).toBe(true);
+  });
+});
+
+/**
  * The well-formedness rows of one sibling table against the source that prints it (the check
  * below, lifted whole into a function on 2026-11-12 so the planted controls run the SAME code).
  * @param {Record<string, ReadonlyArray<any>>} table @param {string} source @returns {string[]}
@@ -130,13 +161,14 @@ function malformedRows(table, source) {
     expect(original.needs.length + original.excludes.length + original.crisis.length, key).toBeGreaterThan(0);
     // the original is admitted by the calm admit-all record (it is lawful somewhere)
     if (!lawfulSomewhere(original) && !original.crisis.length) bad.push(`never lawful: ${key.slice(0, 60)}`);
-    // a twin excludes exactly what its original needs (and, for an original declared on the
-    // crisis dimension, its crisis disjunction as one atom: `stressNarrative.js`' idiom)
+    // a twin is the complement of its original on the atom the pair is keyed on, and on no other
+    // (COHERENCE-AGREE-6's narrowed rule); an original declared on the crisis dimension carries its
+    // crisis disjunction as ONE atom on the needs side (`stressNarrative.js`' idiom, the upkeep
+    // lane's crisis lines), so a crisis-keyed pair flips on that atom
     const twin = set.find((l) => l.twinOf === key);
     if (twin) {
-      const t = declarationOf(twin);
-      const complement = [...original.needs, ...(original.crisis.length ? [`crisis: ${original.crisis.join(', ')}`] : [])];
-      if (t.excludes.join('|') !== complement.join('|')) bad.push(`twin is not the complement: ${key.slice(0, 60)}`);
+      const keyed = { needs: [...original.needs, ...(original.crisis.length ? [`crisis: ${original.crisis.join(', ')}`] : [])], excludes: [...original.excludes] };
+      if (!twinAnswersOnItsKey(keyed, declarationOf(twin))) bad.push(`twin is not the complement on its key: ${key.slice(0, 60)}`);
     }
   }
   return bad;

@@ -167,7 +167,7 @@ export function capturedRulingStructure(settlement) {
 export const HOLDER_SOURCES = Object.freeze({
   // ── the treasury: the town's coin, its revenue and the arithmetic that closes or does not ──
   // ⭐ CITED BY SYMBOL (rule 32; COHERENCE-AGREE-3, F14b): the economicState.js and safetyProfile.js rows drifted
-  // with the lane's cures and were re-cited to new LINES (economicState.js:828 -> :832, …); a drifted cite is
+  // with the lane's cures and were re-cited to new LINES (economicState.js :: generateEconomicState moved); a drifted cite is
   // re-addressed to the symbol that writes the token, permanently.
   incomeSources: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/economicState.js :: generateEconomicState', read: true }),
   // ⭐ CITED BY SYMBOL (rule 32; REVIEW-INTAKE-3 R8): these two drifted from :588/:608 to :586/:606.

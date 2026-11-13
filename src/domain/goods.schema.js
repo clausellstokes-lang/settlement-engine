@@ -91,6 +91,7 @@
  *   door   — surface (imports the index) | direct (imports the physical module)
  *            | member (reaches only a no-surface namespace member).
  *
+ * R | E | identity        | surface | src/domain/display/chainPrintName.js
  * R | E | identity        | surface | src/domain/events/mutateWorld.js
  * R | E | chains          | direct  | src/domain/region/tradeLinks.js
  * R | E | identity        | surface | src/domain/resourceTerrainCompatibility.js

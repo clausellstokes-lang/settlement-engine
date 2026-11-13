@@ -1,0 +1,185 @@
+diff --git a/src/generators/economy/economicState.js b/src/generators/economy/economicState.js
+index 9903db91a..4db5c616e 100644
+--- a/src/generators/economy/economicState.js
++++ b/src/generators/economy/economicState.js
+@@ -23,8 +23,8 @@ import { isTradeRouteDisconnected } from '../../domain/tradeRouteSemantics.js';
+ import { hasLocalAgriculturalSupply } from './localSupplyEvidence.js';
+ import { generateFoodSecurity } from '../foodGenerator.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, the file sits at its line cap
+ import { goodsHeldByFoodRecord } from './foodBalance.js';
+-import { liveMaterialFor } from './localMaterials.js'; import { hasMarketInstitution } from '../../domain/facts/market.js';
+-import { GRAIN_OWN_FIELDS_LINE, GRAIN_SURPLUS_LINE, LOCAL_COAL_LINE } from './incomeLineSiblings.js'; import { offersFoodSurplus } from '../../domain/foodSurplus.js';
++import { hasMarketInstitution } from '../../domain/facts/market.js';
++import { GRAIN_OWN_FIELDS_LINE, GRAIN_SURPLUS_LINE } from './incomeLineSiblings.js'; import { offersFoodSurplus } from '../../domain/foodSurplus.js';
+ 
+ 
+ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggles = {}, config = {}) => {
+@@ -65,7 +65,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
+     ecoInstFlags = getInstFlags(config, institutions),
+     ecoStressFlags = getStressFlags(config, institutions),
+     safetyProfile = generateSafetyProfile(config, tier, institutions),
+-    incomeBuild = [];
++    incomeBuild = [], chainGatedIncome = new Set(); // COHERENCE-AGREE-6 (F4): the workings' sources held for the chains
+   ['thorp', 'hamlet', 'village'].includes(tier)
+     ? incomeBuild.push({
+         source: 'Agricultural Rents',
+@@ -439,46 +439,27 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
+           : 'Wool bought from pastoral regions and processed locally: value-add trade dependent on consistent supply.',
+       });
+     }
+-    if (
+-      (hasNearbyResource('iron_deposit', 'coal_deposit', 'precious_metal') ||
+-        ((localProdLower.some(function (good) {
+-          return good.includes('iron') || good.includes('ore');
+-        }) ||
+-          exportsLower.some(function (exp) {
+-            return exp.includes('iron') || exp.includes('ore');
+-          })) &&
+-          hasInstNamed('smith'))) &&
+-      !hasIncomeSource('iron') &&
+-      !hasIncomeSource('metal')
+-    ) {
+-      incomeBuild.push({
++    // COHERENCE-AGREE-6 (REVIEW-AGREE-2 F4, the chair's ruling of 2026-11-12): the three workings' sources (Iron &
++    // Metalwork, Timber Trade, Stone Quarrying) read the CHAIN MODEL (economy/chainIncome.js), not the resource or a
++    // word in local production or the exports. Each is held here, in its old place in the list, and resolved once the
++    // chains are derived (Stage 4, below): offered only where a chain of its family runs, its line read from that chain.
++    if (!hasIncomeSource('iron') && !hasIncomeSource('metal')) {
++      chainGatedIncome.add(incomeBuild[incomeBuild.push({
+         source: 'Iron & Metalwork',
+         percentage: Math.max(8, Math.round(ecoInstFlags.economyOutput / 7)),
+-        // COHERENCE-AGREE: "local ore" only where the town has ore; coal fires the forges and is not ore. The smith's
+-        // ore is iron, the material table's one answer (COHERENCE-AGREE-3, F3): gold or silver alone buys its iron in.
+-        desc: liveMaterialFor('metals', nearbyResources)
+-          ? 'Local ore feeds the smithy directly. Metalwork income is not trade-route dependent.'
+-          : hasNearbyResource('coal_deposit')
+-            ? LOCAL_COAL_LINE // declared in incomeLineSiblings.js (F13)
+-            : 'Iron imported from mining regions and worked locally; this income stream is vulnerable to supply disruption.',
+-      });
++        desc: '',
++      }) - 1]);
+     }
+     // Timber income. Old needles 'forest_access'/'timber_rights' matched no
+     // catalog key (hasNearbyResource is a substring test over real resource
+     // keys) → only managed_forest ever fired; 'timber' catches all timber
+     // resources (mountain_timber, shipbuilding_timber, timber).
+-    if (
+-      hasNearbyResource('managed_forest', 'timber') &&
+-      !hasIncomeSource('timber') &&
+-      !hasIncomeSource('lumber')
+-    ) {
+-      incomeBuild.push({
++    if (!hasIncomeSource('timber') && !hasIncomeSource('lumber')) {
++      chainGatedIncome.add(incomeBuild[incomeBuild.push({
+         source: 'Timber Trade',
+         percentage: Math.max(7, Math.round(ecoInstFlags.economyOutput / 8)),
+-        desc: hasNearbyResource('managed_forest', 'timber') // COHERENCE-AGREE: the town's own timber, as the line's gate reads it
+-          ? 'Local forest provides sustainable timber revenue; managed felling and sawmilling keep production consistent.'
+-          : 'Timber sourced from more distant forests and resold or processed locally: trade route dependent.',
+-      });
++        desc: '',
++      }) - 1]);
+     }
+     if (
+       (localProdLower.some(function (good) {
+@@ -499,23 +480,12 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
+         desc: 'Catch landed and sold fresh or preserved; salt fish are a major regional export commodity.',
+       });
+     }
+-    if (
+-      (localProdLower.some(function (good) {
+-        return good.includes('stone') || good.includes('granite') || good.includes('marble') || good.includes('limestone');
+-      }) ||
+-        exportsLower.some(function (exp) {
+-          return exp.includes('stone') || exp.includes('quarry');
+-        })) &&
+-      !hasIncomeSource('stone') &&
+-      !hasIncomeSource('quarry')
+-    ) {
+-      incomeBuild.push({
++    if (!hasIncomeSource('stone') && !hasIncomeSource('quarry')) {
++      chainGatedIncome.add(incomeBuild[incomeBuild.push({
+         source: 'Stone Quarrying',
+         percentage: Math.max(6, Math.round(ecoInstFlags.economyOutput / 10)),
+-        desc: hasNearbyResource('stone_quarry') // COHERENCE-AGREE: a gem deposit is not a quarry of dressed stone
+-          ? 'Local quarry provides dressed stone to regional builders: reliable income with low transport overhead.'
+-          : 'Stone masons work imported material; the quarrying income notation reflects processing margin only.',
+-      });
++        desc: '',
++      }) - 1]);
+     }
+     // Custom goods the caller has force-toggled on — one income line each.
+     if (goodsToggles && Object.keys(goodsToggles).length > 0) {
+@@ -539,24 +509,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
+         }
+       });
+     }
+-  } // ── Stage 3: Income normalization ───────────────────────────────────────────
+-  const incomeMultiplier = priorityToMultiplier(ecoInstFlags.economyOutput);
+-  const incomeWeighted = incomeBuild.map((entry) => ({ ...entry, weight: entry.percentage * incomeMultiplier }));
+-  const incomeTotalWeight = incomeWeighted.reduce((sum, entry) => sum + entry.weight, 0) || 1;
+-  const incomeNormalized = incomeWeighted.map((entry) => ({
+-    ...entry,
+-    percentage: Math.round((entry.weight / incomeTotalWeight) * 100),
+-    priorityNote: null,
+-  }));
+-  // (legacy alias block removed)
+-  const percentageSum = incomeNormalized.reduce((sum, entry) => sum + entry.percentage, 0);
+-  if (incomeNormalized.length > 0 && percentageSum !== 100) {
+-    const largestIdx = incomeNormalized.reduce(
+-      (bestIdx, entry, idx) => (entry.percentage > incomeNormalized[bestIdx].percentage ? idx : bestIdx),
+-      0
+-    );
+-    incomeNormalized[largestIdx].percentage += 100 - percentageSum;
+-  }
++  } // ── Stage 3: Income normalization — after the chains (Stage 4), since three sources read them (F4) ─────
+   const stressTypes = config.stressTypes || [];
+   // The pre-chain trade lists (necessity imports, the stress-shaped exports and imports, the goods toggles):
+   // economy/primaryTradeLists.js, extracted verbatim for the cohesion ceiling (LANDING-3).
+@@ -694,8 +647,6 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
+   // fork (food.cropFortune), so writing it earlier moves no other stream.
+   const _foodSec = generateFoodSecurity(tier, institutions, { ...config, tradeRouteAccess: tradeRoute });
+   const _foodRecord = _foodSec?.foodRecord ?? null;
+-  // COHERENCE-AGREE-3 (F7): "surplus" only where the food record holds one; otherwise the declared twin.
+-  for (const entry of incomeNormalized) if (entry.desc === GRAIN_SURPLUS_LINE && !offersFoodSurplus(_foodRecord)) entry.desc = GRAIN_OWN_FIELDS_LINE;
+   const activeChainsList = computeActiveChains(
+     institutions || [],
+     nativeNearbyResources,
+@@ -713,6 +664,33 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
+       ? chain
+       : { ...chain, outputs };
+   }).filter(chain => generationWorldLaw.allowsGeneratedContent(chain.label));
++  // COHERENCE-AGREE-6 (F4): the held workings resolve from the chains: dropped where none of the family runs, else the
++  // line its chain's state says (economy/chainIncome.js :: chainIncomeLine). Then Stage 3, as it was.
++  for (let index = incomeBuild.length - 1; index >= 0; index -= 1) {
++    const entry = incomeBuild[index];
++    if (!chainGatedIncome.has(entry)) continue;
++    const line = chainIncomeLine(entry.source, activeChainsList, nativeAvailableResources);
++    if (line === null) incomeBuild.splice(index, 1);
++    else entry.desc = line;
++  }
++  const incomeMultiplier = priorityToMultiplier(ecoInstFlags.economyOutput);
++  const incomeWeighted = incomeBuild.map((entry) => ({ ...entry, weight: entry.percentage * incomeMultiplier }));
++  const incomeTotalWeight = incomeWeighted.reduce((sum, entry) => sum + entry.weight, 0) || 1;
++  const incomeNormalized = incomeWeighted.map((entry) => ({
++    ...entry,
++    percentage: Math.round((entry.weight / incomeTotalWeight) * 100),
++    priorityNote: null,
++  }));
++  const percentageSum = incomeNormalized.reduce((sum, entry) => sum + entry.percentage, 0);
++  if (incomeNormalized.length > 0 && percentageSum !== 100) {
++    const largestIdx = incomeNormalized.reduce(
++      (bestIdx, entry, idx) => (entry.percentage > incomeNormalized[bestIdx].percentage ? idx : bestIdx),
++      0
++    );
++    incomeNormalized[largestIdx].percentage += 100 - percentageSum;
++  }
++  // COHERENCE-AGREE-3 (F7): "surplus" only where the food record holds one; otherwise the declared twin.
++  for (const entry of incomeNormalized) if (entry.desc === GRAIN_SURPLUS_LINE && !offersFoodSurplus(_foodRecord)) entry.desc = GRAIN_OWN_FIELDS_LINE;
+   const chainStresses = (config.stressTypes || []).concat(config.intendedStressTypes || []);
+   const chainExports = deriveExportsFromChains(
+     activeChainsList,
+@@ -868,3 +846,4 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
+ import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js'; import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js'; // at the END on purpose: this file's writes are cited by LINE; the Gate Tolls line speaks the tier noun (lane TIER-NOUN-POOLS, tests/generators/tierNounPoolDraws.test.js)
+ import { buildPrimaryTradeLists, sayHowLittleGrain } from './primaryTradeLists.js'; // at the END for the same reason: the pre-chain trade lists, extracted for the cohesion ceiling (LANDING-3)
+ import { goodsOnlyRefusedChainsMake } from '../../domain/chainYield.js'; // at the END for the same reason: COHERENCE-AGREE-6 (F2), the export bonus asks the one predicate
++import { chainIncomeLine } from './chainIncome.js'; // at the END for the same reason: COHERENCE-AGREE-6 (F4), the workings' income reads the chains

@@ -31,3 +31,26 @@ export function chainYieldRefused(chain, isDepletedResource = null) {
   return Boolean(c.resourceDepleted
     || (typeof isDepletedResource === 'function' && typeof c.resource === 'string' && c.resource && isDepletedResource(c.resource)));
 }
+
+/**
+ * The goods a town's chains yield ONLY through chains this leaf refuses: every output of a refused chain that no
+ * yielding chain also makes, lower-cased (COHERENCE-AGREE-6, F2, the chair's ruling of 2026-11-12). Such a good is
+ * neither exported nor produced locally, so the export list and "Produced locally" give the card's one answer:
+ * every writer of either list asks this set before it writes a good (`economy/finishedGoodsDemand.js`'s export
+ * bonus; `computeActiveChains.js :: deriveExportsFromChains` and `:: deriveLocalProductionFromChains`).
+ * @param {unknown} chains `economicState.activeChains`
+ * @param {((resource: string) => boolean) | null} [isDepletedResource]
+ * @returns {Set<string>}
+ */
+export function goodsOnlyRefusedChainsMake(chains, isDepletedResource = null) {
+  /** @type {Set<string>} */
+  const refused = new Set();
+  /** @type {Set<string>} */
+  const yielding = new Set();
+  for (const chain of Array.isArray(chains) ? chains : []) {
+    const outputs = /** @type {{ outputs?: unknown }} */ (chain)?.outputs;
+    const into = chainYieldRefused(chain, isDepletedResource) ? refused : yielding;
+    for (const output of Array.isArray(outputs) ? outputs : []) into.add(String(output).toLowerCase());
+  }
+  return new Set([...refused].filter((good) => !yielding.has(good)));
+}

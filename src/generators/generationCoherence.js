@@ -26,6 +26,8 @@ import {
 import { factsOf } from '../domain/facts/factsOf.js';
 import { RESOURCE_DATA } from '../data/resourceData.js';
 import { offersFoodSurplus } from '../domain/foodSurplus.js';
+import { goodsOnlyRefusedChainsMake } from '../domain/chainYield.js';
+import { chainPrintName } from '../domain/display/chainPrintName.js';
 import { GRAIN_TOP_UP } from './economy/primaryTradeLists.js';
 import { TRADE_LINE_BANDS, tradeBandContradictsLabel } from './economy/prosperity.js';
 import { PEACE_IRON_HOOKS } from './economy/outlookHookSiblings.js';
@@ -368,6 +370,8 @@ const SHORTAGE_LAND_WORDS = Object.freeze([
   [/\(local fishing grounds /i, ['fishing_grounds', 'river_fish']],
 ]);
 
+/** The suffixes the export writer adds to a good (`computeActiveChains.js :: deriveExportsFromChains`). */
+const TRADE_LIST_SUFFIX = / \((?:transit|naval route only|taxed by occupation)\)$/;
 /** Worked land and the food source it is (the chair's food-sources ruling, 2026-11-11; game and fish keep their rules). */
 const CULTIVATED_SOURCE_OF = Object.freeze({ grain_fields: 'grain', fertile_floodplain: 'grain', grazing_land: 'livestock' });
 
@@ -385,6 +389,8 @@ const CULTIVATED_SOURCE_OF = Object.freeze({ grain_fields: 'grain', fertile_floo
  *              one, or makes scarce a material the town has
  *   income     an income line that names a local resource ("Local ore", "Local quarry") the town lacks
  *   viability  an "Imports …" note beside a live resource that yields it (one reader of the must-import list)
+ *   yield      a good only refused chains make, on the export list or in "Produced locally" (domain/chainYield.js)
+ *   access     a rolled resource, or the source an active chain prints (chainPrintName), off the access its row requires
  *   gate       the safety text naming gates the gate home does not hold
  *   watch      the safety text naming the watch where the defence home holds none
  *   safety     the safety text naming a mercenary company the defence home does not list; saying a
@@ -434,6 +440,16 @@ export function projectionAgreementFindings(settlement) {
       if (Array.isArray(requires) && !requires.includes(route)) resource.push(finding('resourceAnalysis.availableResources', 'A rolled resource stands off the access it requires.', `${key}: ${route}`));
     }
   }
+  // F1 (COHERENCE-AGREE-6, the chair's ruling of 2026-11-12): the same law over what an active chain PRINTS. A chain's
+  // printed source (domain/display/chainPrintName.js, the one leaf every page reads) is never a resource whose row
+  // refuses the town's access: the toll on a river prints "River traffic", not "Strategic Crossroads".
+  for (const [index, chain] of (settlement?.economicState?.activeChains || []).entries()) {
+    const key = resourceKeyForLabel(String(chainPrintName(chain, route).resource ?? ''));
+    const requires = key ? /** @type {{ requires?: string[] } | undefined} */ (RESOURCE_DATA[/** @type {keyof typeof RESOURCE_DATA} */ (key)])?.requires : null;
+    if (route && Array.isArray(requires) && !requires.includes(route)) {
+      resource.push(finding(`economicState.activeChains[${index}].resource`, 'A chain prints a resource whose row refuses the town\'s access.', `${key}: ${route}`));
+    }
+  }
   const facts = factsOf(settlement);
   for (const [index, entry] of (settlement?.economicViability?.plotHooks || []).entries()) {
     const hook = String(entry?.hook || '');
@@ -453,6 +469,17 @@ export function projectionAgreementFindings(settlement) {
     const said = LOCAL_INCOME_WORDS.find(([words]) => words.test(String(entry?.desc || '')));
     if (said && !said[1].some((key) => available.includes(key))) {
       resource.push(finding(`economicState.incomeSources[${index}].desc`, 'An income line names a local resource the town does not have.', String(entry?.source || '')));
+    }
+  }
+  // F2 (COHERENCE-AGREE-6): a good only refused chains make (the leaf's one answer, domain/chainYield.js) stands on
+  // neither the export list nor "Produced locally", whose suffixes ("(transit)", "(naval route only)", "(taxed by
+  // occupation)") are the list's own and are read off.
+  const refusedOnly = goodsOnlyRefusedChainsMake(settlement?.economicState?.activeChains);
+  for (const field of ['primaryExports', 'localProduction']) {
+    for (const [index, good] of (settlement?.economicState?.[field] || []).entries()) {
+      if (refusedOnly.has(String(good).replace(TRADE_LIST_SUFFIX, '').toLowerCase())) {
+        resource.push(finding(`economicState.${field}[${index}]`, 'A trade list carries a good only a refused chain makes.', String(good)));
+      }
     }
   }
   for (const field of ['dependencies', 'warnings']) {

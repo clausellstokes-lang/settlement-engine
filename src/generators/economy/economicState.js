@@ -762,7 +762,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   } = applyFinishedGoodsDemandWithOwnership({
     tier, tradeRoute, institutions,
     nearbyResources: nativeAvailableResources,
-    chainExports, chainImports,
+    chainExports, chainImports, refusedOnly: goodsOnlyRefusedChainsMake(activeChainsList), // COHERENCE-AGREE-6 (F2): the export bonus reads the one predicate (domain/chainYield.js)
   });
   // Override heuristic arrays with chain-derived values (clean mutation — before return)
   primaryExports.length = 0;
@@ -877,3 +877,4 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
 import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js'; import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js'; // at the END on purpose: this file's writes are cited by LINE; the Gate Tolls line speaks the tier noun (lane TIER-NOUN-POOLS, tests/generators/tierNounPoolDraws.test.js)
 import { buildPrimaryTradeLists, sayHowLittleGrain } from './primaryTradeLists.js'; // at the END for the same reason: the pre-chain trade lists, extracted for the cohesion ceiling (LANDING-3)
 import { keepOf, boughtShare } from '../../domain/facts/keep.js';
+import { goodsOnlyRefusedChainsMake } from '../../domain/chainYield.js'; // at the END for the same reason: COHERENCE-AGREE-6 (F2), the export bonus asks the one predicate
