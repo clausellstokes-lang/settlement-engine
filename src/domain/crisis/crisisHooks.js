@@ -36,7 +36,7 @@ import { CAST_REASONS, effectiveCastOf, requiredRolesOf } from './crisisCast.js'
 import { resolveDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
-import { institutionDisplayName } from '../display/institutionDisplayName.js';
+import { institutionHouseLabel } from '../display/institutionDisplayName.js';
 import { pluralPowerName } from '../display/governanceAccount.js';
 
 /** @typedef {import('./crisisCast.js').CrisisCast} CrisisCast */
@@ -82,7 +82,10 @@ const PLURAL_NOUNS = Object.freeze(new Set(['raids']));
  * @param {string} name @returns {string}
  */
 export function houseInProse(name) {
-  const label = institutionDisplayName(name).replace(/\s*\((?:\d+(?:\s*[-–]\s*\d+)?|district)\)\s*$/i, '').trim();
+  // ROUND THREE, ruling (a): the house's label first (the one display leaf: no count range, household
+  // range or floor, gate or condition; "(50-100+)" was missed by this function's own pattern), then the
+  // district tag a sentence does not speak.
+  const label = institutionHouseLabel(name).replace(/\s*\(district\)\s*$/i, '').trim();
   return /^[A-Z][^A-Z]*$/.test(label) ? label[0].toLowerCase() + label.slice(1) : label;
 }
 
