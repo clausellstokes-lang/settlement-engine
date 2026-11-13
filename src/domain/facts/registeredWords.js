@@ -195,10 +195,19 @@ export const THINGS = Object.freeze({
   // that judges (a court, a council, a hall, a headman, a magistrate). "No law permits" is the
   // law of anywhere, not of this town.
   law: {
-    words: /\blaw enforcement\b|\bofficial recourse\b|\blaw\b(?! permits)/i,
+    words: /\bofficial recourse\b|\blaw\b(?! permits| enforcement)/i,
     atoms: ['watch', 'garrison'],
     absent: (f, names) => !f.defence.watch && !f.defence.garrison
       && !names.some((n) => /court|council|\bhall\b|headman|magistrat|reeve|justiciar|sheriff/i.test(n)),
+    denialOnly: true,
+  },
+  // F6 (the third seat; REVIEW-W2B: "a headman is not law enforcement"): LAW ENFORCEMENT is a peace-keeping force alone
+  // (the vocabulary's watch or garrison), split from the law, which a house that judges also keeps; denial side only
+  lawEnforcement: {
+    words: /\blaw enforcement\b/i,
+    atoms: ['watch', 'garrison'],
+    leaf: 'defence.js :: defenceOf (watch, garrison)',
+    absent: (f) => !f.defence.watch && !f.defence.garrison,
     denialOnly: true,
   },
 });
@@ -209,8 +218,14 @@ for (const w of Object.values(THINGS)) w.pageWithdrawn = PAGE_WITHDRAWN.thing;
 /** @param {WordFacts} f @param {string} kind @returns {boolean} is this crisis kind in force (`factsOf(record).crisis`) */
 const inForce = (f, kind) => f?.crisis?.has?.(kind) === true;
 
-/** The number words a count reads. @type {Readonly<Record<string, number>>} */
-const NUMBER_WORDS = Object.freeze({ both: 2, two: 2, three: 3, four: 4, five: 5, six: 6 });
+/** The number words a count reads (F13, the third seat: to twelve, "a dozen" and digits). @type {Readonly<Record<string, number>>} */
+const NUMBER_WORDS = Object.freeze({
+  both: 2, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, eleven: 11, twelve: 12, 'a dozen': 12,
+});
+/** The count words as a pattern group's body (a digit run of one or two figures counts too). */
+const COUNT = 'two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|a dozen|\\d{1,2}';
+/** @param {string} word @returns {number | null} */
+const countOf = (word) => (/^\d+$/.test(word) ? Number(word) : NUMBER_WORDS[word.toLowerCase().replace(/\s+/g, ' ')] ?? null);
 
 /**
  * The number a count word states in a sentence, or null.
@@ -220,7 +235,7 @@ function statedCount(words, sentence) {
   const m = new RegExp(words.source, 'i').exec(String(sentence ?? ''));
   if (!m) return null;
   const word = m.slice(1).find((g) => typeof g === 'string' && g) || '';
-  return NUMBER_WORDS[word.toLowerCase()] ?? null;
+  return countOf(word);
 }
 
 /** @param {WordRecord | null | undefined} record @returns {number} the powers the record holds (`powerStructure.factions`) */
@@ -229,7 +244,16 @@ const powerCount = (record) => (Array.isArray(record?.powerStructure?.factions) 
 /** The houses a count of houses reads, each by the thing whose words name it. */
 const COUNTED_HOUSES = /** @type {Readonly<Record<string, string>>} */ (Object.freeze({
   temples: 'temple', churches: 'temple', chapels: 'temple', shrines: 'shrine', mills: 'mill', markets: 'market', granaries: 'granary', guildhalls: 'guildhall',
+  guilds: 'guilds',
 }));
+/** F13: guilds are a counted noun, read off the roster's guild rows (a guild hall's words name a building, not a guild). */
+const GUILD_ROW = /\bguilds?\b/i;
+/**
+ * F6 (the third seat; REVIEW-W2B: "read a range row's own count"): a roster row holds at least its own minimum —
+ * "Parish churches (2-5)" two, "Merchant guilds (50-100+)" fifty — and a row without a range one.
+ * @param {string} name @returns {number}
+ */
+const rowCount = (name) => { const m = /\((\d+)\s*(?:-|–|\+)/.exec(name); return m ? Number(m[1]) : 1; };
 
 /**
  * THE NEW WORDS: STATES, SIZES AND COUNTS (the chair's record 288, ruling 1, B (ii): "states, sizes and counts
@@ -297,7 +321,7 @@ const NEW_WORDS_OPEN = /** @type {Record<string, RegisteredWord>} */ ({
   },
   powersCount: {
     kind: 'count', layer: 'S', leaf: 'the record :: powerStructure.factions (a count dimension waits for factsOf)',
-    words: /\b(two|three|four|five|six)\s+(?:rival\s+|great\s+|competing\s+|ruling\s+|leading\s+|standing\s+)?(?:powers|factions)\b|\b(both) (?:powers|factions)\b/i,
+    words: new RegExp(`\\b(${COUNT})\\s+(?:rival\\s+|great\\s+|competing\\s+|ruling\\s+|leading\\s+|standing\\s+)?(?:powers|factions)\\b|\\b(both) (?:powers|factions)\\b`, 'i'),
     atoms: [],
     absent: (_f, _names, record, sentence) => { const n = statedCount(NEW_WORDS.powersCount.words, sentence); return n !== null && powerCount(record) < n; },
   },
@@ -305,7 +329,7 @@ const NEW_WORDS_OPEN = /** @type {Record<string, RegisteredWord>} */ ({
   // OWN FACES — the panel lists `dmPowerViewOf(...).rulingThree` under it — not the number of powers
   rulingFaces: {
     kind: 'count', layer: 'S', leaf: 'patronage.js :: dmPowerViewOf (rulingThree: the ruler\'s ranked faces)',
-    words: /\bthe ruling (two|three|four|five)\b/i,
+    words: new RegExp(`\\bthe ruling (${COUNT})\\b`, 'i'),
     atoms: [],
     absent: (_f, _names, record, sentence) => {
       const n = statedCount(NEW_WORDS.rulingFaces.words, sentence);
@@ -314,13 +338,15 @@ const NEW_WORDS_OPEN = /** @type {Record<string, RegisteredWord>} */ ({
   },
   housesCount: {
     kind: 'count', layer: 'P', leaf: 'institutions.js :: liveInstitutionNames',
-    words: /\b(two|three|four|five|six)\s+(?:\w+\s+)?(temples|churches|chapels|shrines|mills|markets|granaries|guildhalls)\b/i,
+    words: new RegExp(`\\b(${COUNT})\\s+(?:\\w+\\s+)?(temples|churches|chapels|shrines|mills|markets|granaries|guildhalls|guilds)\\b`, 'i'),
     atoms: [],
     absent: (_f, names, _record, sentence) => {
       const m = new RegExp(NEW_WORDS.housesCount.words.source, 'i').exec(String(sentence ?? ''));
       if (!m) return false;
-      const n = NUMBER_WORDS[m[1].toLowerCase()]; const thing = THINGS[COUNTED_HOUSES[m[2].toLowerCase()]];
-      return !!thing && names.filter((name) => thing.words.test(name)).length < n;
+      const n = countOf(m[1]); const key = COUNTED_HOUSES[m[2].toLowerCase()];
+      const re = key === 'guilds' ? GUILD_ROW : THINGS[key]?.words;
+      if (n === null || !re) return false;
+      return names.filter((name) => re.test(name)).reduce((sum, name) => sum + rowCount(name), 0) < n;
     },
   },
   // ── THE WORDS OF THE HAND CURES (W2-B-DECLARE item 4; record 288, ruling 2: "EVERY HAND CURE REGISTERS ITS

@@ -8,7 +8,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { vocabularyPageFindings } from '../../../src/domain/coherence/vocabularyPageFindings.js';
-import { NEW_WORDS, REGISTERED_WORDS, THINGS, VOCABULARY_SIZE, declarationImplies, newWordsDeniedIn, newWordsNamedIn, thingsNamedIn } from '../../../src/domain/facts/registeredWords.js';
+import { NEW_WORDS, REGISTERED_WORDS, THINGS, VOCABULARY_SIZE, declarationImplies, newWordsDeniedIn, newWordsNamedIn, presentForDenial, thingsDeniedIn, thingsNamedIn } from '../../../src/domain/facts/registeredWords.js';
 import { RESOURCE_DATA } from '../../../src/data/resourceData.js';
 import { parseAtom } from '../../../src/domain/facts/factVocabulary.js';
 import { factsOf } from '../../../src/domain/facts/factsOf.js';
@@ -236,5 +236,35 @@ describe('item 1 — the precision read: senses that name nothing here, and the 
     const page = { 'World/Relationships': ['The priest manages the graveyard and the feast days.'] };
     expect(vocabularyPageFindings({ ...base, npcs: [{ id: 'a', role: 'the elder priest', title: 'the elder priest' }] }, page)).toEqual([]);
     expect(vocabularyPageFindings({ ...base, npcs: [{ id: 'a', role: 'the militia captain', title: 'the militia captain' }] }, page).map((f) => f.word)).toEqual(['clergy']);
+  });
+});
+
+/**
+ * W2-B-DECLARE third seat, F13 and F6 (REVIEW-W2B): count words stopped at "six" and two nouns (F13); a count of houses
+ * counted ROWS, so "Parish churches (2-5)" counted one (F6: a range row holds at least its own minimum). Red at 44e4f14e2.
+ */
+describe('F13 / F6 — the counts', () => {
+  const town = (institutions, factions = 1) => ({ tier: 'town', population: 3000, config: {}, stress: [], institutions,
+    powerStructure: { factions: Array.from({ length: factions }, (_, i) => ({ faction: `P${i}` })) } });
+  const words = (record, line) => vocabularyPageFindings(record, { 'Systems/Power': [line] }).map((f) => f.word);
+  test('F13: seven to twelve, "a dozen", digits; guilds are a counted noun', () => {
+    expect(words(town([], 3), 'Seven powers contend for the town and its trade.')).toEqual(['powersCount']);
+    expect(words(town([], 12), 'A dozen factions contend for the town and its trade.')).toEqual([]);
+    expect(words(town([], 3), 'A dozen factions contend for the town and its trade.')).toEqual(['powersCount']);
+    expect(words(town([], 3), 'The 8 powers of the town meet at the hall each spring.')).toEqual(['powersCount']);
+    expect(words(town([{ name: 'Merchant guild' }]), 'Three guilds share the market square between them.')).toEqual(['housesCount']);
+    expect(words(town([{ name: 'Merchant guilds (3-8)' }]), 'Three guilds share the market square between them.')).toEqual([]);
+  });
+  test('F6: a range row holds at least its own minimum', () => {
+    expect(words(town([{ name: 'Parish churches (2-5)' }]), 'Two churches serve the parish and the market both.')).toEqual([]);
+    expect(words(town([{ name: 'Parish church' }]), 'Two churches serve the parish and the market both.')).toEqual(['housesCount']);
+    expect(words(town([{ name: 'Mills (2-5)' }]), 'Three mills grind for the whole valley each autumn.')).toEqual(['housesCount']);
+  });
+  test('F6: law enforcement is a watch or a garrison; a headman keeps the law but is not law enforcement', () => {
+    const f = (institutions) => factsOf(town(institutions));
+    expect(thingsDeniedIn('There is effectively no law enforcement here.')).toEqual(['lawEnforcement']);
+    expect(presentForDenial('lawEnforcement', f([{ name: 'Village headman' }]), ['Village headman'])).toBe(false);
+    expect(presentForDenial('law', f([{ name: 'Village headman' }]), ['Village headman'])).toBe(true);
+    expect(presentForDenial('lawEnforcement', f([{ name: 'Town watch' }]), ['Town watch'])).toBe(true);
   });
 });

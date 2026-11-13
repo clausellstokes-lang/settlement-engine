@@ -6879,6 +6879,11 @@
     "shrine",
     "word",
     "'s superior is coming to inspect the shrine's accounts. "
+   ],
+   [
+    "housesCount",
+    "word",
+    "Navigate a dispute between two powerful guilds without losing either's support"
    ]
   ],
   "src/data/people/dmPowerLines.js": [
@@ -9515,6 +9520,11 @@
     "house: tavern",
     "family",
     "A CONJUNCTION GATE OVER A LANE THAT WRITES NOTHING. brokerageEffectsActive is informationBrokeragesEnabled AND infoState"
+   ],
+   [
+    "housesCount",
+    "word",
+    "ONE GATE, AND THE SLICE BEHIND IT IS MAGIC-INDEPENDENT. magicEconomyActive is the virtual magicEconomyEnabled alone (ins"
    ]
   ],
   "src/domain/certification/warConvergenceContract.js": [
@@ -23341,6 +23351,11 @@
     "armedForce",
     "family",
     "Two noble houses are contesting the succession. Both have legal arguments. Both have soldiers. The settlement is watchin"
+   ],
+   [
+    "housesCount",
+    "word",
+    "Two rival guilds are contesting control of the main trade route. Neither side will back down and the council is avoiding"
    ]
   ],
   "src/generators/power/governingStressVignettes.js": [
@@ -23710,11 +23725,6 @@
     "Authority is contested. The watch is uncertain whose orders to follow. Opportunistic crime is rising in the gap."
    ],
    [
-    "law",
-    "implied",
-    "There is effectively no law enforcement."
-   ],
-   [
     "prison",
     "implied",
     " Without prison or courts, the risk of operating is low. Arrest means a fine at worst."
@@ -23943,6 +23953,11 @@
     "house: smuggling",
     "family",
     "The smuggling network is moving something unusual this week, not the normal contraband. Someone wants to know what it is"
+   ],
+   [
+    "lawEnforcement",
+    "word",
+    "There is effectively no law enforcement."
    ]
   ],
   "src/generators/services/serviceClassifier.js": [
