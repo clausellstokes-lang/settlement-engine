@@ -2816,7 +2816,9 @@
       "id": "Coaching inn|Lodging",
       "text": "Beds, meals, and stabling for travelers on the road. Priced by quality.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
       "colour": false
     },
@@ -2824,7 +2826,9 @@
       "id": "Coaching inn|Horse change",
       "text": "Fresh relay horses for coaches and dispatch riders. Reduces travel time significantly.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
       "colour": false
     },

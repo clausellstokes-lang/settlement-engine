@@ -3,9 +3,9 @@
   "corpus": "[{\"tier\":\"thorp\",\"n\":150},{\"tier\":\"hamlet\",\"n\":200},{\"tier\":\"village\",\"n\":350},{\"tier\":\"town\",\"n\":550},{\"tier\":\"city\",\"n\":350},{\"tier\":\"metropolis\",\"n\":150},{\"tier\":\"village\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"under_siege\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"under_siege\"}]",
   "census": {
     "_note": "Figures for the second wave, never a red: re-written by every door.",
-    "pools": 925,
-    "printOneLine": 676,
-    "measuredUnder30Draws": 145,
+    "pools": 929,
+    "printOneLine": 672,
+    "measuredUnder30Draws": 144,
     "highestSharesOver150Draws": [
       {
         "pool": "ledger:institutionServices:Access to external mill.Grain milling (a day away)",
@@ -15,18 +15,18 @@
         "lines": 2
       },
       {
+        "pool": "ledger:institutionServices:Annual fair.Seasonal trading",
+        "top1": 0.9496,
+        "top5": 1,
+        "draws": 238,
+        "lines": 2
+      },
+      {
         "pool": "ledger:institutionServices:Carriers' guild.Freight haulage",
         "top1": 0.9464,
         "top5": 1,
         "draws": 205,
         "lines": 2
-      },
-      {
-        "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:population_friction",
-        "top1": 0.8947,
-        "top5": 1,
-        "draws": 1082,
-        "lines": 3
       },
       {
         "pool": "ledger:safetyProfile:SAFETY_LINE_SIBLINGS",
@@ -43,18 +43,11 @@
         "lines": 2
       },
       {
-        "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:infiltration_fear",
-        "top1": 0.8677,
+        "pool": "ledger:institutionServices:River boatyard.Boat repair",
+        "top1": 0.8155,
         "top5": 1,
-        "draws": 1496,
-        "lines": 3
-      },
-      {
-        "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:religious_tension",
-        "top1": 0.8519,
-        "top5": 1,
-        "draws": 837,
-        "lines": 3
+        "draws": 168,
+        "lines": 2
       },
       {
         "pool": "ledger:factionLabelSiblings:FACTION_LABEL_SIBLINGS",
@@ -64,11 +57,18 @@
         "lines": 2
       },
       {
-        "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:magical_controversy",
-        "top1": 0.8015,
+        "pool": "ledger:institutionServices:Mine (open cast).Raw extraction",
+        "top1": 0.8057,
         "top5": 1,
-        "draws": 675,
-        "lines": 3
+        "draws": 283,
+        "lines": 2
+      },
+      {
+        "pool": "ledger:historyData:HISTORY_DESC_SIBLINGS",
+        "top1": 0.7926,
+        "top5": 1,
+        "draws": 458,
+        "lines": 2
       },
       {
         "pool": "ledger:npcGenerator:NPC_GOAL_SIBLINGS",
@@ -85,11 +85,11 @@
         "lines": 2
       },
       {
-        "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:economic_disparity",
-        "top1": 0.7811,
+        "pool": "ledger:institutionServices:River boatyard.Barge construction",
+        "top1": 0.7774,
         "top5": 1,
-        "draws": 717,
-        "lines": 3
+        "draws": 283,
+        "lines": 2
       }
     ],
     "secondWave": [
@@ -5700,6 +5700,48 @@
       "top1": 1,
       "top5": 1,
       "lines": 1,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:historyData:HISTORY_DESC_SIBLINGS": {
+      "top1": 0.7926,
+      "top5": 1,
+      "lines": 2,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:city|Economy|Toll bridge": {
+      "top1": 0.5426,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:metropolis|Economy|Toll bridge": {
+      "top1": 0.4477,
+      "top5": 1,
+      "lines": 3,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:thorp|Religious|Burial ground": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:town|Economy|Annual fair": {
+      "top1": 0.4525,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:town|Economy|Toll bridge": {
+      "top1": 0.4957,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:village|Economy|Toll bridge": {
+      "top1": 0.5,
+      "top5": 1,
+      "lines": 3,
       "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
     }
   }

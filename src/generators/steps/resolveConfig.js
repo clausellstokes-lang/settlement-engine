@@ -12,7 +12,6 @@ import { TIER_ORDER, POPULATION_RANGES, getMagicLevel, TOWN_PLUS_TIERS, popToTie
 import { MONSTER_THREAT_RANDOM_POOL, normalizeMonsterThreat } from '../../data/monsterThreat.js';
 import { getTerrainType } from '../terrainHelpers.js';
 import { recordTrace } from '../../domain/trace.js';
-import { atomHolds, declarationOf } from '../../domain/facts/factVocabulary.js';
 import {
   materializeCulturalIdentity,
   resolveCultureProfileKey,
@@ -174,8 +173,7 @@ registerStep('resolveConfig', {
   const culture = resolveCultureProfileKey(rawCulture);
   const culturalIdentity = materializeCulturalIdentity(
     culture,
-    rng.fork('cultural-identity'),
-    knownAtResolve(tier), // W2-FIX-DATA-2 item 4: the tier, the one fact a culture line declares that is answered here
+    rng.fork('cultural-identity'), knownAtResolve(tier), // W2-FIX-DATA-2 item 4: the tier, the one fact a culture line declares that is answered here
   );
   // Keep the authored boundary object explicit at the deterministic seam. It is
   // generation input in its own right, not merely metadata attached to a named
@@ -393,3 +391,8 @@ function knownAtResolve(tier) {
     },
   };
 }
+
+// W2-FIX-DATA-6 (REVIEW-W2-FIX-DATA-34520a697 H1): written at the end of the file, as the lane's other imports are
+// (historyGenerator.js, assembleInstitutions.js), so the three writes the prose census cites by line above
+// (tradeRouteAccess, monsterThreat, terrainType) stay where it reads them. ES imports are hoisted.
+import { atomHolds, declarationOf } from '../../domain/facts/factVocabulary.js';

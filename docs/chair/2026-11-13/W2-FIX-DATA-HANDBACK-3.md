@@ -59,35 +59,37 @@ As the second seat planned: the inland text takes the canonical variant's cure w
 
 | pool | ceiling top1 / top5 (lines) | base q: draws, top1, top5 | base c: top1, top5 | tip q: draws, top1, top5 | tip c: top1, top5 |
 |---|---|---|---|---|---|
-| corruption_scandal | 0.5512 / 1 (3) | 456, 0.3355, 1 | 0.3388, 1 | 477, 0.3354, 1 | 0.339, 1 |
-| crime_wave | 0.3456 / 1 (3) | 1495, 0.3485, 1 | 0.3454, 1 | 1489, 0.3486, 1 | 0.3454, 1 |
+| corruption_scandal | 0.5512 / 1 (3) | 456, 0.3355, 1 | 0.3388, 1 | 477, 0.3354, 1 | 0.3388, 1 |
+| crime_wave | 0.3456 / 1 (3) | 1495, 0.3485, 1 | 0.3454, 1 | 1495, 0.3485, 1 | 0.3453, 1 |
 | demographic_pressure | 0.5 / 1 (2) | 90, 0.5, 1 | 0.5, 1 | 90, 0.5, 1 | 0.5, 1 |
-| disputed_land | 0.5798 / 1 (3) | 266, 0.3534, 1 | 0.346, 1 | 269, 0.3532, 1 | 0.3464, 1 |
-| economic_disparity | 0.7787 / 1 (3) | 717, 0.3849, 1 | 0.4, 1 | 711, 0.3868, 1 | 0.3981, 1 |
-| external_threat | 0.7156 / 1 (3) | 1585, 0.3432, 1 | 0.3381, 1 | 1576, 0.3433, 1 | 0.3381, 1 |
-| generational_divide | 0.5299 / 1 (3) | 259, 0.3552, 1 | 0.3432, 1 | 256, 0.3555, 1 | 0.3431, 1 |
-| great_fire | 0.7279 / 1 (3) | 447, 0.349, 1 | 0.3636, 1 | 465, 0.3484, 1 | 0.3624, 1 |
-| great_flood | 0.6456 / 1 (3) | 315, 0.6762, 1 | 0.6222, 1 | 318, 0.6667, 1 | 0.6313, 1 |
-| guild_conflict | 0.387 / 1 (3) | 1449, 0.3354, 1 | 0.3361, 1 | 1716, 0.3351, 1 | 0.3357, 1 |
-| heresy_trial | 0.6777 / 1 (3) | 390, 0.3615, 1 | 0.3667, 1 | 411, 0.3601, 1 | 0.3666, 1 |
-| infiltration_fear | 0.8691 / 1 (3) | 1496, 0.3422, 1 | 0.3422, 1 | 1496, 0.3422, 1 | 0.3423, 1 |
-| leadership_vacuum | 0.5248 / 1 (3) | 529, 0.3422, 1 | 0.3417, 1 | 367, 0.346, 1 | 0.3443, 1 |
+| disputed_land | 0.5798 / 1 (3) | 266, 0.3534, 1 | 0.346, 1 | 275, 0.3527, 1 | 0.3455, 1 |
+| economic_disparity | 0.7787 / 1 (3) | 717, 0.3849, 1 | 0.4, 1 | 728, 0.386, 1 | 0.3984, 1 |
+| external_threat | 0.7156 / 1 (3) | 1585, 0.3432, 1 | 0.3381, 1 | 1597, 0.3431, 1 | 0.3381, 1 |
+| generational_divide | 0.5299 / 1 (3) | 259, 0.3552, 1 | 0.3432, 1 | 265, 0.3547, 1 | 0.3428, 1 |
+| great_fire | 0.7279 / 1 (3) | 447, 0.349, 1 | 0.3636, 1 | 459, 0.3486, 1 | 0.363, 1 |
+| great_flood | 0.6456 / 1 (3) | 315, 0.6762, 1 | 0.6222, 1 | 318, 0.673, 1 | 0.624, 1 |
+| guild_conflict | 0.387 / 1 (3) | 1449, 0.3354, 1 | 0.3361, 1 | 1494, 0.3353, 1 | 0.336, 1 |
+| heresy_trial | 0.6777 / 1 (3) | 390, 0.3615, 1 | 0.3667, 1 | 404, 0.3614, 1 | 0.3664, 1 |
+| infiltration_fear | 0.8691 / 1 (3) | 1496, 0.3422, 1 | 0.3422, 1 | 1508, 0.3422, 1 | 0.3422, 1 |
+| leadership_vacuum | 0.5248 / 1 (3) | 529, 0.3422, 1 | 0.3417, 1 | 367, 0.346, 1 | 0.344, 1 |
 | legitimacy_crisis | 0.3334 / 1 (3) | 375, 0.3333, 1 | 0.3333, 1 | 396, 0.3333, 1 | 0.3333, 1 |
-| magical_controversy | 0.8007 / 1 (3) | 675, 0.3481, 1 | 0.3343, 1 | 641, 0.3495, 1 | 0.3353, 1 |
-| market_crash | 0.5122 / 1 (3) | 330, 0.3606, 1 | 0.3957, 1 | 250, 0.372, 1 | 0.4174, 1 |
-| occupation_legacy | 0.7776 / 1 (3) | 1887, 0.354, 1 | 0.3356, 1 | 1875, 0.3541, 1 | 0.3356, 1 |
-| outside_debt | 0.5605 / 1 (3) | 445, 0.3438, 1 | 0.3506, 1 | 463, 0.3434, 1 | 0.3505, 1 |
-| pilgrimage_surge | 0.6675 / 1 (3) | 416, 0.3678, 1 | 0.4005, 1 | 411, 0.3698, 1 | 0.4024, 1 |
-| plague_years | 0.7254 / 1 (3) | 417, 0.3381, 1 | 0.336, 1 | 405, 0.3383, 1 | 0.336, 1 |
-| popular_uprising | 0.5888 / 1 (3) | 349, 0.341, 1 | 0.3415, 1 | 349, 0.341, 1 | 0.3412, 1 |
-| population_friction | 0.8947 / 1 (3) | 1082, 0.3484, 1 | 0.3487, 1 | 1073, 0.3486, 1 | 0.3476, 1 |
-| religious_tension | 0.849 / 1 (3) | 837, 0.3405, 1 | 0.3372, 1 | 849, 0.3404, 1 | 0.3372, 1 |
-| resource_scarcity | 0.3359 / 1 (3) | 1342, 0.3689, 1 | 0.3729, 1 | 1397, 0.3751, 1 | 0.3769, 1 |
-| succession_crisis | 0.6402 / 1 (3) | 877, 0.6226, 1 | 0.636, 1 | 885, 0.6192, 1 | 0.6323, 1 |
-| trade_collapse | 0.6533 / 1 (3) | 315, 0.346, 1 | 0.362, 1 | 264, 0.3485, 1 | 0.3668, 1 |
-| trade_dispute | 0.3334 / 1 (3) | 180, 0.3333, 1 | 0.3333, 1 | 180, 0.3333, 1 | 0.3333, 1 |
-| tyranny | 0.66 / 1 (3) | 353, 0.3343, 1 | 0.3394, 1 | 365, 0.3342, 1 | 0.3394, 1 |
-| wild_magic | 0.6946 / 1 (3) | 419, 0.3341, 1 | 0.3521, 1 | 440, 0.3341, 1 | 0.3535, 1 |
+| magical_controversy | 0.8007 / 1 (3) | 675, 0.3481, 1 | 0.3343, 1 | 689, 0.3483, 1 | 0.3353, 1 |
+| market_crash | 0.5122 / 1 (3) | 330, 0.3606, 1 | 0.3957, 1 | 255, 0.3725, 1 | 0.4131, 1 |
+| occupation_legacy | 0.7776 / 1 (3) | 1887, 0.354, 1 | 0.3356, 1 | 1914, 0.3537, 1 | 0.3356, 1 |
+| outside_debt | 0.5605 / 1 (3) | 445, 0.3438, 1 | 0.3506, 1 | 457, 0.3435, 1 | 0.3507, 1 |
+| pilgrimage_surge | 0.6675 / 1 (3) | 416, 0.3678, 1 | 0.4005, 1 | 425, 0.3671, 1 | 0.3995, 1 |
+| plague_years | 0.7254 / 1 (3) | 417, 0.3381, 1 | 0.336, 1 | 435, 0.3379, 1 | 0.3359, 1 |
+| popular_uprising | 0.5888 / 1 (3) | 349, 0.341, 1 | 0.3415, 1 | 364, 0.3407, 1 | 0.3412, 1 |
+| population_friction | 0.8947 / 1 (3) | 1082, 0.3484, 1 | 0.3487, 1 | 1091, 0.3483, 1 | 0.3477, 1 |
+| religious_tension | 0.849 / 1 (3) | 837, 0.3405, 1 | 0.3372, 1 | 849, 0.3404, 1 | 0.3371, 1 |
+| resource_scarcity | 0.3359 / 1 (3) | 1342, 0.3689, 1 | 0.3729, 1 | 1378, 0.3745, 1 | 0.3756, 1 |
+| succession_crisis | 0.6402 / 1 (3) | 877, 0.6226, 1 | 0.636, 1 | 888, 0.6205, 1 | 0.6327, 1 |
+| trade_collapse | 0.6533 / 1 (3) | 315, 0.346, 1 | 0.362, 1 | 261, 0.3487, 1 | 0.3671, 1 |
+| trade_dispute | 0.3334 / 1 (3) | 180, 0.3333, 1 | 0.3333, 1 | 195, 0.3333, 1 | 0.3333, 1 |
+| tyranny | 0.66 / 1 (3) | 353, 0.3343, 1 | 0.3394, 1 | 371, 0.3342, 1 | 0.3394, 1 |
+| wild_magic | 0.6946 / 1 (3) | 419, 0.3341, 1 | 0.3521, 1 | 431, 0.3341, 1 | 0.3521, 1 |
+
+**The TIP columns above are the independent reviewer's (REVIEW-W2-FIX-DATA-34520a697, `probes/REVIEW-W2-FIX-DATA-2/out/pools-timeline-hooks.md`, the table of record: finding L2), at the final tip 34520a697, copied in by W2-FIX-DATA-6.** The third seat's first TIP columns were read on a tree that still carried the doubled-tension regression (cf2e00b19, before ec78d1c19): e.g. guild_conflict 1,716 draws where the final tip reads 1,494, market_crash 250 where it reads 255. The BASE columns were the reviewer's already, to the draw. The conclusions stand (resource_scarcity tip q 0.3745 / c 0.3756 against its 0.3359; leadership_vacuum 0.3460 / 0.3440 against 0.5248).
 
 Read with it: under the corrected key the leadership-vacuum rise is GONE (tip q 0.3460 against its 0.5248); `resource_scarcity` reads over its 0.3359 at the base (0.3689 / 0.3729) and at the tip (0.3751 / 0.3769), so its rise is the instrument's re-key, not this lane (3.1 SE, repeated on the second corpus); 20 pools' ceilings sit loose above their measure (their old line 0 was inflated by every timeline note); `great_flood` (0.6762 base q, 0.6667 tip q against 0.6456) and `succession_crisis` (0.6226 / 0.6192 against 0.6402) are the two whose real top line is near or over the old ceiling. The rows move at the lane's merge point, by the merge seat, through the door, by name, on the chair's ruling; until then "no pool rises" is carried red and named (now on `resource_scarcity`, not the vacuum).
 

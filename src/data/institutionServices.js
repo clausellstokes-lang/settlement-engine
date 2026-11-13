@@ -566,8 +566,8 @@ export const INSTITUTION_SERVICES = {
   },
 
   "Coaching inn": {
-    "Lodging": { on: true,  p: 1.0, desc: "Beds, meals, and stabling for travelers on the road. Priced by quality." },
-    "Horse change": { on: true, p: 0.9, desc: "Fresh relay horses for coaches and dispatch riders. Reduces travel time significantly." },
+    "Lodging": { on: true,  p: 1.0, desc: "Beds, meals, and stabling for travelers on the road. Priced by quality.", excludes: ["crisis: under_siege"] }, // W2-FIX-DATA-6 (CENSUS-2 b): its twin under a siege, SERVICE_DESC_SIBLINGS
+    "Horse change": { on: true, p: 0.9, desc: "Fresh relay horses for coaches and dispatch riders. Reduces travel time significantly.", excludes: ["crisis: under_siege"] }, // W2-FIX-DATA-6 (CENSUS-2 b): its twin under a siege, SERVICE_DESC_SIBLINGS
     "Parcel forwarding": { on: false, p: 0.6, desc: "Accept and forward parcels and letters along the coaching route." },
     "Route information": { on: false, p: 0.5, desc: "Conditions of the road ahead, bandit reports, river crossings." }
   },
@@ -1804,7 +1804,7 @@ export const SERVICE_DESC_SIBLINGS = Object.freeze({
   // every road. VETOABLE wording (the owner's).
   "Once-a-year market drawing merchants from across the region.": Object.freeze([
     Object.freeze({ text: "Once-a-year market drawing merchants from across the region.", excludes: Object.freeze(['crisis: under_siege']) }),
-    Object.freeze({ text: "The yearly market that draws merchants from across the region. None can reach it while the roads are held.", twinOf: "Once-a-year market drawing merchants from across the region.", crisis: Object.freeze(['under_siege']) }),
+    Object.freeze({ text: "The yearly fair that draws merchants from across the region. None can reach it while the roads are held.", twinOf: "Once-a-year market drawing merchants from across the region.", crisis: Object.freeze(['under_siege']) }),
   ]),
   "Organised road transport for goods between towns. Reliable, guild-backed.": Object.freeze([
     Object.freeze({ text: "Organised road transport for goods between towns. Reliable, guild-backed.", excludes: Object.freeze(['crisis: under_siege']) }),
@@ -1824,6 +1824,16 @@ export const SERVICE_DESC_SIBLINGS = Object.freeze({
   "Hull patching, oar replacement, caulking. River traffic takes constant punishment.": Object.freeze([
     Object.freeze({ text: "Hull patching, oar replacement, caulking. River traffic takes constant punishment.", needs: Object.freeze(["river"]) }),
     Object.freeze({ text: "Hull patching, oar replacement, caulking. Small boats in the shallows take constant punishment.", twinOf: "Hull patching, oar replacement, caulking. River traffic takes constant punishment.", excludes: Object.freeze(["river"]) }),
+  ]),
+  // W2-FIX-DATA-6 (2026-11-13; CENSUS-2 kind b, the coaching inn under a siege: r2r-metropolis-14, r2s-under_siege-*): no
+  // traveller comes down a road the siege holds, and no coach or rider goes out. VETOABLE wording (the owner's).
+  "Beds, meals, and stabling for travelers on the road. Priced by quality.": Object.freeze([
+    Object.freeze({ text: "Beds, meals, and stabling for travelers on the road. Priced by quality.", excludes: Object.freeze(['crisis: under_siege']) }),
+    Object.freeze({ text: "Beds, meals, and stabling, though with the roads held the rooms stand mostly empty.", twinOf: "Beds, meals, and stabling for travelers on the road. Priced by quality.", crisis: Object.freeze(['under_siege']) }),
+  ]),
+  "Fresh relay horses for coaches and dispatch riders. Reduces travel time significantly.": Object.freeze([
+    Object.freeze({ text: "Fresh relay horses for coaches and dispatch riders. Reduces travel time significantly.", excludes: Object.freeze(['crisis: under_siege']) }),
+    Object.freeze({ text: "Relay horses kept for coaches and dispatch riders; while the siege holds the roads, none go out.", twinOf: "Fresh relay horses for coaches and dispatch riders. Reduces travel time significantly.", crisis: Object.freeze(['under_siege']) }),
   ]),
   "Transport foot travelers and small goods across the river.": Object.freeze([
     Object.freeze({ text: "Transport foot travelers and small goods across the river.", needs: Object.freeze(["river"]) }),

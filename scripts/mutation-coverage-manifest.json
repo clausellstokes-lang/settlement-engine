@@ -463,6 +463,50 @@
       "kind": "rationale",
       "rationale": "THE COLD LIST'S LINES (W2-FIX-DATA, 2026-11-13; the REVIEW-W2B cold list). Its catching power is EXECUTED in the test body: every member asserts BOTH cases of a line through the real draw site or door with the real fact readers, the town that makes it false (the line must not print) and the town where it is true (the line must still print), so a declaration dropped or a twin mis-keyed reds the one, and a declaration that refuses everywhere reds the other; every reworded line is asserted present before its old wording is asserted absent. Each member was RED at the commit before its cure and green at it (the commit bodies name them)."
     },
+    "tests/data/w2FixData3Grove.test.js": {
+      "kind": "rationale",
+      "rationale": "THE ELDER GROVE COUNCIL'S SIZE NOUN (W2-FIX-DATA-3 item 4, REVIEW-W2-FIX-DATA F4). Its catching power is EXECUTED in the test body: the council's whole pool (the catalogue text and its variants) is drawn through the real door (institutionDescDraw.js :: drawInstitutionDesc) with the real birth facts over 300 seeds at town, city and metropolis and spoken in each tier's noun, and the test reds when a text names another size than its own, when the catalogue text names any size, or when the pool loses a text; the fixture arm re-births r2r-town-1 and reds when its council says city. The independent reviewer's plant P4 (one clause of the town-voice variant saying \"the city's spread\") REDS it (REVIEW-W2-FIX-DATA-34520a697 section 5). Red at the commit before its cure."
+    },
+    "tests/data/w2FixData3Inland.test.js": {
+      "kind": "rationale",
+      "rationale": "THE INLAND AUCTION HOUSE (W2-FIX-DATA-3 item 5). Its catching power is EXECUTED in the test body: every inland auction text is compared with the cured canonical variant with the ships taken out, and the fixture arm re-births r2r-city-0 (a road city) and reds when its auction house sells persons or prints the ship text. The independent reviewer's plant P5 (the inland key misses, so the ship text prints) REDS it (REVIEW-W2-FIX-DATA-34520a697 section 5). Red at the commit before its cure."
+    },
+    "tests/data/w2FixData3Mine.test.js": {
+      "kind": "rationale",
+      "rationale": "THE SHAFT MINE'S SERVICE LINE (W2-FIX-DATA-3 item 3, REVIEW-W2-FIX-DATA F3). Its catching power is EXECUTED in the test body: census births are re-born and the Mine's raw-extraction line read from the record, and the test reds both ways, when a shaft Mine of town size or more is called surface digging and when the hamlet's open-cast Mine loses its surface line. The independent reviewer's plant P6 (the twin narrowed to tier >= city) REDS it (REVIEW-W2-FIX-DATA-34520a697 section 5). Red at the commit before its cure."
+    },
+    "tests/data/w2FixData3Round.test.js": {
+      "kind": "rationale",
+      "rationale": "THE ROUND'S FIRST CUT, THREE HIGH LINES (W2-FIX-DATA-3, REVIEW-W2A-3 #33, #2, #366). Its catching power is EXECUTED in the test body: each reader's town is re-born in the app's shape and every string of its record searched, and the test reds when a small place prints the precinct, the rows of craftspeople or 'lives by its forges' again, and when the place the line is true in (a town, a market, many forges) loses it, each refusal read by the vocabulary's own tier reader. The independent reviewer's plants P7a (one forge line loses its size) and P7b (the precinct twin narrowed to <= hamlet) RED it (REVIEW-W2-FIX-DATA-34520a697 section 5). Red at the commit before each cure."
+    },
+    "tests/data/w2FixData4Round.test.js": {
+      "kind": "rationale",
+      "rationale": "ROUND TWO ON THE DATA LANE'S FILES (W2-FIX-DATA-4 items 1 to 6, REVIEW-W2A-3 and ROUND-3 rows). Its catching power is EXECUTED in the test body: one arm per cause re-births the reader's own town (REVIEW-W2A-3, the census's r2r, ROUND-3's rr2s) in the app's shape and reds when the false line prints again where its record makes it false (a river boatyard with no river, a quarry worked now that is worked out, a cascade house off the declared draw, a culture detail its declaration refuses, a sense line naming a house the town lacks, the docks described by the catalogue's condition), and when the town it is true in loses it. Each arm was RED at the commit before its cure and green at it (the commit bodies of ce6c467aa..3a8884961 name them)."
+    },
+    "tests/data/w2FixData5Rows.test.js": {
+      "kind": "rationale",
+      "rationale": "ROUND THREE'S ROWS ON THE DATA LANE'S FILES (W2-FIX-DATA-5 items 2a to 4: ROUND-3 #17, #331; the INCREMENT's ww-25, ww-544, ww-473, ww-1157, ww-494; R2 #973, #238). Its catching power is EXECUTED in the test body: one arm per row re-births the reader's own town in the app's shape and reds when the false line prints again where the record makes it false (a thorp's clergy, a village's districts, a thorp's cathedral, an ailing ruler under an empty seat, open politics or a fair's trading under a siege, a war forge with no war) and when what prints in its place is not the line true there. Each arm was RED at the commit before its cure and green at it (the commit bodies of a640fc16f..18fcc08ca name them)."
+    },
+    "tests/generators/w2FixData3CrisisDescs.test.js": {
+      "kind": "rationale",
+      "rationale": "THE CRISIS TWINS IN THE APP'S SHAPE (W2-FIX-DATA-3 item 1, REVIEW-W2-FIX-DATA F1). Its catching power is EXECUTED in the test body: census towns are born in the app's shape (selectedStresses, random off) and the granary's and charnel house's descriptions read from the record, and the test reds when a famine granary says it prevents famine, when a siege charnel sends carts out, and when a crisis the confirm pass drops is read by the description. The independent reviewer's plant P1b (the forced set read from the raw caller configuration, the bug's own shape) REDS it, 2 of 3 (REVIEW-W2-FIX-DATA-34520a697 section 5). Red at the commit before its cure."
+    },
+    "tests/generators/w2FixData3TensionDedup.test.js": {
+      "kind": "rationale",
+      "rationale": "NO TENSION TYPE TWICE (W2-FIX-DATA-3, the regression of dde3b1277). Its catching power is EXECUTED in the test body: the four census towns the regression hit and a fresh grid of six sizes x 25 are born through the real pipeline, and the test reds when any town's current tensions repeat a template type. The independent reviewer's plant P2 (splice the neighbour, not the drawn candidate) REDS it, 2 of 2 (REVIEW-W2-FIX-DATA-34520a697 section 5). Red at the tip before the splice was restored."
+    },
+    "tests/generators/w2FixData3TimelineHookNote.test.js": {
+      "kind": "rationale",
+      "rationale": "THE TIMELINE HOOK NOTED BY ITS OWN ROW (W2-FIX-DATA-3 item 6, the chair's ruling on the carried red). Its catching power is EXECUTED in the test body: births run through the real pipeline and the presumption ledger's notes are read, and the test reds when two different hook lines of one template note one line id and when a note names a row its template does not hold. The independent reviewer's plant P3 (note the mirrored row index) REDS it (REVIEW-W2-FIX-DATA-34520a697 section 5). Red while every timeline note read 0."
+    },
+    "tests/generators/w2FixData5OccupationTension.test.js": {
+      "kind": "rationale",
+      "rationale": "THE OCCUPATION'S LEGACY UNDER AN OCCUPATION IN FORCE (W2-FIX-DATA-5 item 1, ROUND-3 #1003 HIGH, R2 #1036). Its catching power is EXECUTED in the test body: the template's declaration (historyGenerator.js :: HISTORY_TEMPLATE_RECORD_DECLARATIONS) is read through the vocabulary's crisis atom, and the test reds both ways, when occupation_legacy is admitted under an occupation in force (alone or beside another crisis) and when it is refused under any other crisis or in calm, and when the past event loses its account. Red at the commit before its cure (dabdb6061's body names it)."
+    },
+    "tests/data/w2FixData6Rows.test.js": {
+      "kind": "rationale",
+      "rationale": "THE CENSUS WRITERS IN THE DATA LANE'S FILES (W2-FIX-DATA-6, CENSUS-2 at 2686272b1). Its catching power is EXECUTED in the test body: one arm per cause re-births the census town the writer printed false in (the census's own seed and configuration) and reds when the false line prints again where the record makes it false (the coaching inn's travellers and relay horses under a siege), when its twin does not print there, and when the town it is true in loses the line. Each arm was RED at the commit before its cure and green at it (the commit bodies name them)."
+    },
     "tests/data/w2FixDataServices.test.js": {
       "kind": "rationale",
       "rationale": "THE COLD LIST'S LINES (W2-FIX-DATA, 2026-11-13; the REVIEW-W2B cold list). Its catching power is EXECUTED in the test body: every member asserts BOTH cases of a line through the real draw site or door with the real fact readers, the town that makes it false (the line must not print) and the town where it is true (the line must still print), so a declaration dropped or a twin mis-keyed reds the one, and a declaration that refuses everywhere reds the other; every reworded line is asserted present before its old wording is asserted absent. Each member was RED at the commit before its cure and green at it (the commit bodies name them)."

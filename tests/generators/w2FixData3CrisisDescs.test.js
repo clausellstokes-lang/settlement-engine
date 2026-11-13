@@ -8,6 +8,7 @@
  * towns printed "prevents famine" / "hold off famine" in a famine and "carts go out at dusk" under siege.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -31,23 +32,23 @@ describe('W2-FIX-DATA-3: a crisis-declaring description reads the crisis the bir
   beforeAll(async () => { await loadGenerationLawPayloads(); }, 120_000);
 
   test('a granary in a famine says the famine is drawing it down, not that it prevents famine', () => {
-    for (const seed of ['r2s-famine-town-0', 'r2s-famine-town-1', 'r2s-famine-town-2', 'r2s-famine-town-3']) {
+    expectNoSeedFailures(collectSeedFailures(['r2s-famine-town-0', 'r2s-famine-town-1', 'r2s-famine-town-2', 'r2s-famine-town-3'], (seed) => {
       const town = born(seed, 'town', 'famine');
       expect([].concat(town.stress).map((/** @type {any} */ s) => s.type)).toContain('famine');
       const desc = descOf(town, /granary/i);
       expect(desc, seed).toMatch(/has not been enough|drawing them down faster/);
       expect([desc].filter((t) => /prevents famine|hold off famine/.test(t)), seed).toEqual([]);
-    }
+    }), 'every famine granary reads the famine');
   }, 120_000);
 
   test('a charnel house under siege sends no cart out to the new ground', () => {
-    for (const seed of ['r2s-under_siege-city-1', 'r2s-under_siege-city-2']) {
+    expectNoSeedFailures(collectSeedFailures(['r2s-under_siege-city-1', 'r2s-under_siege-city-2'], (seed) => {
       const town = born(seed, 'city', 'under_siege');
       expect([].concat(town.stress).map((/** @type {any} */ s) => s.type)).toContain('under_siege');
       const desc = descOf(town, /charnel/i);
       expect(desc, seed).toMatch(/no cart goes out|with the roads cut it now holds/);
       expect([desc].filter((t) => /carts (?:that )?go out at dusk|Carts go out at dusk/.test(t)), seed).toEqual([]);
-    }
+    }), 'every siege charnel house sends no cart');
   }, 120_000);
 
   // The second arm: a crisis rolled by chance (random crises on) can still be dropped by the

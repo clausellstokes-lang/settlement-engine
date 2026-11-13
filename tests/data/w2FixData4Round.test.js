@@ -8,6 +8,7 @@
  * true in loses it.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -65,14 +66,14 @@ describe('W2-FIX-DATA-4: round two\'s medium lines in this lane\'s files', () =>
     ])];
     expect(texts.length, 'three catalogue texts and the six variants').toBe(9);
     expect(texts.filter((t) => STATE.test(String(t)))).toEqual([]);
-    for (const seed of ['rw3-metropolis-calm-1', 'rw3-metropolis-under_siege-1']) {
+    expectNoSeedFailures(collectSeedFailures(['rw3-metropolis-calm-1', 'rw3-metropolis-under_siege-1'], (seed) => {
       const town = bornRw3(seed);
       expect(town.config.nearbyResourcesDepleted, seed).toContain('stone_quarry');
       const quarry = town.institutions.find((/** @type {any} */ i) => i.name === 'Stone quarry');
       expect(quarry, seed).toBeTruthy();
       expect(String(quarry.desc), seed).not.toMatch(STATE);
       expect(String(quarry.desc), seed).toMatch(/quarry/i);
-    }
+    }), 'every worked-out quarry town names its quarry for what it is');
   }, 60_000);
 
   test('a house the cascade adds meets the declared draw: no customs "via the port" with no docks, no river craft with no river (F2; #502)', () => {

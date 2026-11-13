@@ -8,6 +8,7 @@
  * Red while every timeline note read 0.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -35,7 +36,7 @@ describe('W2-FIX-DATA-3: a timeline hook is noted by its own row in the template
     // For every PRINTED event, each hook row it prints is among its pool's noted ids. (A note of an event the
     // timeline later replaced by its anchor, or dropped as a repeat, stays in the ledger: notes may be more.)
     let pairs = 0;
-    for (const { seed, s, notes } of births) {
+    expectNoSeedFailures(collectSeedFailures(births, ({ seed, s, notes }) => {
       for (const e of s.history?.historicalEvents || []) {
         const rows = HISTORICAL_EVENTS_DATA.find((t) => t.type === e.templateType)?.plotHooks;
         if (!rows || !(e.plotHooks || []).length) continue;
@@ -44,17 +45,17 @@ describe('W2-FIX-DATA-3: a timeline hook is noted by its own row in the template
         for (const i of at) expect(noted.has(i), `${seed} ${e.templateType}: row ${i} printed, noted ${[...noted]}`).toBe(true);
         if (new Set(at).size > 1) pairs += 1;
       }
-    }
+    }), "every printed hook row is among its pool's noted ids");
     expect(pairs, 'some event prints two different rows of its template').toBeGreaterThan(0);
   });
 
   test('every timeline note names a row of its own template', () => {
-    for (const { seed, notes } of births) {
+    expectNoSeedFailures(collectSeedFailures(births, ({ seed, notes }) => {
       for (const e of notes) {
         const rows = HISTORICAL_EVENTS_DATA.find((t) => t.type === String(e.pool).slice(PREFIX.length))?.plotHooks || [];
         expect(typeof e.lineId === 'number' && e.lineId >= 0 && e.lineId < rows.length, `${seed} ${e.pool} #${e.lineId}`).toBe(true);
       }
-    }
+    }), 'every timeline note names a row of its own template');
     expect(births.reduce((n, b) => n + b.notes.length, 0)).toBeGreaterThan(10);
   });
 });

@@ -7,6 +7,7 @@
  * splice was restored (r2r-town-51, r2r-city-8: guild_conflict twice).
  */
 import { beforeAll, describe, expect, test } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -19,11 +20,11 @@ describe('W2-FIX-DATA-3: a town prints no two current tensions of one template t
   beforeAll(async () => { await loadGenerationLawPayloads(); }, 60_000);
 
   test('the four census towns the regression hit carry distinct tension types', () => {
-    for (const [seed, tier] of /** @type {const} */ ([['r2r-town-51', 'town'], ['r2r-city-8', 'city'], ['r2r-town-23', 'town'], ['r2r-city-9', 'city']])) {
+    expectNoSeedFailures(collectSeedFailures(/** @type {const} */ ([['r2r-town-51', 'town'], ['r2r-city-8', 'city'], ['r2r-town-23', 'town'], ['r2r-city-9', 'city']]), ([seed, tier]) => {
       const s = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, settType: tier }), null, { seed, customContent: {} });
       const types = (s.history.currentTensions || []).map((/** @type {any} */ t) => t.type);
       expect(new Set(types).size, `${seed}: ${types}`).toBe(types.length);
-    }
+    }), 'every regression town carries distinct tension types');
   }, 60_000);
 
   test('no repeated tension type across a fresh grid (six sizes x 25)', () => {
