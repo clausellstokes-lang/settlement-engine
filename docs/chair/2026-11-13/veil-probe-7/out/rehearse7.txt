@@ -1,0 +1,20 @@
+frozen 211: eface6d093933170b9541fe630068c26e5bd41477e95e913ae7168e373be0b01
+212: 057e215cd86bfaf8c5302e321dd91ce2eb17d1b7975d8cd1e7d96a4231a0489f 212_share_veil_later_cures.sql
+212 down: e1061909a1f0523dcb20a777d5834e12bcd890078214868afc2f7d7b303ab50c
+lane 211 at 28f52b1e4: abaad61405bc495e648cac52e4458aa1e646c64b6ec53518eed43ec772e7d458
+(1) 001..210 + frozen 211 + 212, against 001..210 + the lane's 211: 0 lines differ
+    control, 001..210 + frozen 211 alone against the lane's 211: 20
+(2) 203 + frozen 211 + 212, against 203 + the lane's 211: 0 lines differ
+    control, 203 + frozen 211 alone against 203 + the lane's 211: 20
+(3) 001..212, then 212's down file, against 001..211 (frozen): 0 lines differ
+    212's down file a second time: 0
+    then 212 again, against 001..212: 0
+(4) 203 + frozen 211 + 212, then 212's down file, against 203 + frozen 211: 0 lines differ
+(5) 001..212, then 212's down file and 211's, against 001..210: 0 lines differ
+(6) 203 + 211 + 212, then both down files and 203's get_unlisted_dossier (the review's 7.6), against 203: 0 lines differ
+(7) 001..212, then 212 again over itself: 0 lines differ
+    203 + 211 + 212, then 212 again: 0
+(8) the release after an early 211 and 212: 203 + 211 + 212 + 204..212 in order, against 001..212: 0 lines differ
+    the release after an early 211 alone: 203 + 211 + 204..212, against 001..212: 0 lines differ
+(9) _gallery_veil helpers | callable by anon or authenticated: 203 + frozen 211: 40 | 0; 203 + 211 + 212: 50 | 0; 001..212: 50 | 0; the lane's 211: 50 | 0
+    function comments (K rows) in 001..212: 162
