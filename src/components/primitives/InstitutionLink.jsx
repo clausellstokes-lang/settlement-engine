@@ -51,7 +51,7 @@ import { GOLD } from '../theme.js';
 import {
   deriveInstitutionProfile, resolveInstitutionByName,
 } from '../../domain/display/institutionProfile.js';
-import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
 
 /**
  * @param {Object} props
@@ -66,7 +66,9 @@ export default function InstitutionLink({ name, institution, settlement, childre
 
   // §934.13 — the seam renders the label; `resolveInstitutionByName` below keeps the RAW
   // name, because it looks the institution up in data that still spells the key the old way.
-  const label = children ?? (institutionDisplayName(institution ?? name) || 'Institution');
+  // ROUND THREE, ruling (a): the trigger names the house by its label, the one display leaf (no
+  // catalogue count range, household range, gate or condition; a count word as a plural).
+  const label = children ?? (institutionHouseLabel(institution ?? name) || 'Institution');
   const inst = useMemo(
     () => institution || resolveInstitutionByName(name ?? institution?.name, settlement),
     [institution, name, settlement],
@@ -95,7 +97,7 @@ export default function InstitutionLink({ name, institution, settlement, childre
         onKeyDown={onKeyDown}
         aria-haspopup="dialog"
         aria-expanded={open}
-        title={`View ${institutionDisplayName(inst) || label} profile`}
+        title={`View ${institutionHouseLabel(inst) || label} profile`}
         style={{
           display: 'inline',
           minHeight: 0,
