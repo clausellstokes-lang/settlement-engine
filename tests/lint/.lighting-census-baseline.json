@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "4a179bcc994edf410c448b7f331360f89b144646",
-  "measuredBy": "COHERENCE-UPKEEP-5",
+  "measuredAtSha": "db13fdb40e633944a14192f9a1a9f1460be63318",
+  "measuredBy": "UPKEEP-8",
   "date": "2026-11-13",
-  "note": "V3 and stage two at 4a179bcc9: defenceParts, defenceDerived walker, upkeepVocation, upkeepGuardLines and the V3 builder's tests added",
-  "files": 3230,
-  "parked": 401,
-  "credited": 2829,
-  "titles": 29286,
-  "suiteTitles": 7944
+  "note": "the eighth seat at db13fdb40: incomeLinesSayTheRecord, threatRowsTrueUnderBand, safetyLinesSayTheRecord, outlookSaysThePages, foodEnduranceSaysTheStores added; the lane base 995293e81 carried the tuple already moved",
+  "files": 3244,
+  "parked": 402,
+  "credited": 2842,
+  "titles": 29343,
+  "suiteTitles": 7973
 }
