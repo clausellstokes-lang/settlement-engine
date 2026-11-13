@@ -83,7 +83,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the brickmaker": ["Brickmaker", "Master Brickmaker"],
   "the cobbler": ["Cobbler", "Master Cobbler"],
   "the tailor": ["Tailor", "Master Tailor"],
-  "the midwife": ["Midwife", "Goodwife"],
+  "the midwife": ["Midwife", { male: "Goodman", female: "Goodwife" }], // COHERENCE-POWERS-7 (cold list #543 #569 #593 #657): a man is no Goodwife
   "the woodcarver": ["Woodcarver", "Master Carver"],
   "the scribe": ["Scribe", "Clerk"],
   "the cartographer": ["Cartographer", "Mapmaker"],
