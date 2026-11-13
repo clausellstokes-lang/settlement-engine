@@ -132,7 +132,17 @@ Each cure's source change reversed at its stage's tip (`plant.sh`). Where a late
 | type ratchet (`typecheck:ratchet`) | exit 0, 167 / 167 | exit 0, 167 / 167 |
 | eslint on every src and test file the range touches | exit 0, clean | exit 0, clean |
 
-**The governing test files** (every test that names a changed module, and the fork census, at base and tip): running when this was pushed; the result is appended in the next commit.
+**The governing test files** (EXECUTED: every test file that names a changed module, and the fork census, run at the stage's base and at its tip; `governing.sh`, `governing-A.txt`, `governing-C.txt`, `out/governing-*.red.txt`):
+
+| | A2 base 2f114a4c9 | A2 tip 0d3972d8f | C1 base aac79b808 | C1 tip fb8b24fbe |
+|---|---|---|---|---|
+| files · tests | 1,062 · 3,222 | 1,090 · 3,279 | 629 · 2,027 | 638 · 2,039 |
+| red | 4 | 4 (the same four titles) | 0 | 0 |
+| fork census (`generationForkCensus.test.js`) | — | green, 7 of 7 | — | green, 7 of 7 |
+
+- **A2 is red only where its seat says.** The same four titles are red at base and tip: the generator golden master, the espionage fence's driven golden, `rosterFinalUnderHeldRoster` A1 (golden-corpus byte reads, the merge seat's door), and `poolDominance.walker` "no ceiling sits loose above its measure". The last is ruling (b)'s row `ledger:ARRIVAL_SCENES.port`, named for the merge seat. No title turns red at the tip that was green at the base.
+- **C1's governing set is green at both ends.** Its files name the changed modules; the espionage fence, whose golden the hand-back declares moved by 476800e1d and cdf84d431, names none of them and was not in this set (not measured here).
+- The hazard checks: refs and local config snapshotted before and after every suite and every push. The only change is this branch's own head and its upstream setting from `push -u`.
 
 ## Lines I would strike (for the owner's veto)
 

@@ -1,0 +1,4 @@
+tests/generators/rosterFinalUnderHeldRoster.test.js :: EM-R2 — the roster is final inside enrichNpcCoherence under a held roster A1 — inert with no pins: the golden corpus and the coherence tail 
+tests/lint/poolDominance.walker.test.js :: no drawn pool prints more of one line than its register allows no ceiling sits loose above its measure
+tests/property/espionageDormancyFence.test.js :: FENCE 1 (REPLACED) — the driven byte-identity golden, and the chain that terminates THE DRIVEN GOLDEN: 360 settlements at this tip hash to t
+tests/property/generatorGoldenMaster.test.js :: generator golden master (cross-build output stability) every config produces byte-identical output to the golden master
