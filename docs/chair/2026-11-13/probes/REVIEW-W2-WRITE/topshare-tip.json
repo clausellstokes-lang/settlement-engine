@@ -1,0 +1,730 @@
+[
+ {
+  "pool": "DS-GEN-18::STALLED",
+  "lines": 2,
+  "prints": 210,
+  "top": 210,
+  "topVid": 2,
+  "share": 1
+ },
+ {
+  "pool": "DS-DEF-8::override: INSURGENCY ACTIVE",
+  "lines": 4,
+  "prints": 37,
+  "top": 20,
+  "topVid": 1,
+  "share": 0.5405405405405406
+ },
+ {
+  "pool": "DS-SUP-2::UPSTREAM WEAK: a chain the town's work draws on is failing",
+  "lines": 2,
+  "prints": 131,
+  "top": 69,
+  "topVid": 1,
+  "share": 0.5267175572519084
+ },
+ {
+  "pool": "DS-ECO-11::EXPLOITATION: partiallyExploited",
+  "lines": 6,
+  "prints": 83,
+  "top": 43,
+  "topVid": 4,
+  "share": 0.5180722891566265
+ },
+ {
+  "pool": "DS-DEF-5::ARCANE: alchemists",
+  "lines": 2,
+  "prints": 85,
+  "top": 43,
+  "topVid": 1,
+  "share": 0.5058823529411764
+ },
+ {
+  "pool": "DS-POW-5::FLAG: crimeIsGovt",
+  "lines": 4,
+  "prints": 4,
+  "top": 2,
+  "topVid": 4,
+  "share": 0.5
+ },
+ {
+  "pool": "DS-DEF-1::readiness WEAK",
+  "lines": 3,
+  "prints": 207,
+  "top": 102,
+  "topVid": 1,
+  "share": 0.4927536231884058
+ },
+ {
+  "pool": "DS-ECO-12::CRITICAL IMPORT: the land cannot give it",
+  "lines": 4,
+  "prints": 277,
+  "top": 135,
+  "topVid": 2,
+  "share": 0.48736462093862815
+ },
+ {
+  "pool": "DS-DEF-2::CHAIN: food trades working",
+  "lines": 4,
+  "prints": 66,
+  "top": 32,
+  "topVid": 3,
+  "share": 0.48484848484848486
+ },
+ {
+  "pool": "DS-ECO-12::INCOME MIX: one source carries the town",
+  "lines": 3,
+  "prints": 349,
+  "top": 169,
+  "topVid": 1,
+  "share": 0.48424068767908307
+ },
+ {
+  "pool": "DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks",
+  "lines": 4,
+  "prints": 346,
+  "top": 167,
+  "topVid": 2,
+  "share": 0.48265895953757226
+ },
+ {
+  "pool": "DS-ECO-9::DEFICIT",
+  "lines": 5,
+  "prints": 25,
+  "top": 12,
+  "topVid": 5,
+  "share": 0.48
+ },
+ {
+  "pool": "DS-DEF-11::WALLED-STRAINED",
+  "lines": 8,
+  "prints": 286,
+  "top": 127,
+  "topVid": 2,
+  "share": 0.44405594405594406
+ },
+ {
+  "pool": "DS-DEF-2::Invasion & War: walls with NO force",
+  "lines": 7,
+  "prints": 74,
+  "top": 32,
+  "topVid": 5,
+  "share": 0.43243243243243246
+ },
+ {
+  "pool": "DS-ECO-11::EXPLOITATION: fullyExploited",
+  "lines": 5,
+  "prints": 160,
+  "top": 69,
+  "topVid": 3,
+  "share": 0.43125
+ },
+ {
+  "pool": "DS-DEF-2::Beasts & Monsters: frontier, credible deterrence",
+  "lines": 4,
+  "prints": 123,
+  "top": 53,
+  "topVid": 1,
+  "share": 0.43089430894308944
+ },
+ {
+  "pool": "DS-DEF-8::override: SECURITY COMPROMISED",
+  "lines": 4,
+  "prints": 33,
+  "top": 14,
+  "topVid": 3,
+  "share": 0.42424242424242425
+ },
+ {
+  "pool": "DS-DEF-5::garrison PRESENT",
+  "lines": 4,
+  "prints": 191,
+  "top": 81,
+  "topVid": 1,
+  "share": 0.42408376963350786
+ },
+ {
+  "pool": "DS-DEF-2::CHAIN: food trades failing",
+  "lines": 5,
+  "prints": 41,
+  "top": 17,
+  "topVid": 1,
+  "share": 0.4146341463414634
+ },
+ {
+  "pool": "DS-ECO-9::FOOD SOURCES: one source",
+  "lines": 4,
+  "prints": 354,
+  "top": 146,
+  "topVid": 2,
+  "share": 0.4124293785310734
+ },
+ {
+  "pool": "DS-ECO-9::FOOD SOURCES: several, the largest named",
+  "lines": 5,
+  "prints": 82,
+  "top": 33,
+  "topVid": 2,
+  "share": 0.4024390243902439
+ },
+ {
+  "pool": "DS-DEF-3::COMPOUND: insurgency",
+  "lines": 5,
+  "prints": 35,
+  "top": 14,
+  "topVid": 2,
+  "share": 0.4
+ },
+ {
+  "pool": "DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)",
+  "lines": 10,
+  "prints": 25,
+  "top": 10,
+  "topVid": 3,
+  "share": 0.4
+ },
+ {
+  "pool": "DS-DEF-9::magicDependency false",
+  "lines": 3,
+  "prints": 431,
+  "top": 172,
+  "topVid": 3,
+  "share": 0.3990719257540603
+ },
+ {
+  "pool": "DS-DEF-2::Invasion & War: walls AND professional garrison",
+  "lines": 4,
+  "prints": 255,
+  "top": 101,
+  "topVid": 3,
+  "share": 0.396078431372549
+ },
+ {
+  "pool": "DS-DEF-11::UNWALLED-LARGE",
+  "lines": 3,
+  "prints": 43,
+  "top": 17,
+  "topVid": 2,
+  "share": 0.3953488372093023
+ },
+ {
+  "pool": "DS-DEF-6::Naval Defense: Port only",
+  "lines": 3,
+  "prints": 104,
+  "top": 41,
+  "topVid": 1,
+  "share": 0.3942307692307692
+ },
+ {
+  "pool": "DS-DEF-8::override: QUARANTINE ACTIVE",
+  "lines": 4,
+  "prints": 28,
+  "top": 11,
+  "topVid": 2,
+  "share": 0.39285714285714285
+ },
+ {
+  "pool": "DS-DEF-11::UNWALLED-SMALL",
+  "lines": 5,
+  "prints": 272,
+  "top": 106,
+  "topVid": 2,
+  "share": 0.3897058823529412
+ },
+ {
+  "pool": "DS-ECO-12::INCOME WEIGHT: the religious houses",
+  "lines": 5,
+  "prints": 293,
+  "top": 114,
+  "topVid": 1,
+  "share": 0.3890784982935154
+ },
+ {
+  "pool": "DS-DEF-8::override: COMMAND SPLIT",
+  "lines": 4,
+  "prints": 37,
+  "top": 14,
+  "topVid": 3,
+  "share": 0.3783783783783784
+ },
+ {
+  "pool": "DS-DEF-8::override: BEAST PRESSURE",
+  "lines": 5,
+  "prints": 32,
+  "top": 12,
+  "topVid": 3,
+  "share": 0.375
+ },
+ {
+  "pool": "DS-FTH-4::FLAG: heresySuppression: preached",
+  "lines": 5,
+  "prints": 8,
+  "top": 3,
+  "topVid": 1,
+  "share": 0.375
+ },
+ {
+  "pool": "DS-GEN-17::GREAT HOUSE: monastery",
+  "lines": 4,
+  "prints": 86,
+  "top": 32,
+  "topVid": 3,
+  "share": 0.37209302325581395
+ },
+ {
+  "pool": "DS-DEF-9::magicDependency true, with a NAMED dependent chain",
+  "lines": 3,
+  "prints": 182,
+  "top": 66,
+  "topVid": 3,
+  "share": 0.3626373626373626
+ },
+ {
+  "pool": "DS-DEF-5::charter hall ABSENT where the country warrants one",
+  "lines": 3,
+  "prints": 270,
+  "top": 97,
+  "topVid": 3,
+  "share": 0.3592592592592593
+ },
+ {
+  "pool": "DS-DEF-8::override: ACTIVE SIEGE",
+  "lines": 4,
+  "prints": 31,
+  "top": 11,
+  "topVid": 3,
+  "share": 0.3548387096774194
+ },
+ {
+  "pool": "DS-DEF-3::COMPOUND: political fracture",
+  "lines": 5,
+  "prints": 37,
+  "top": 13,
+  "topVid": 2,
+  "share": 0.35135135135135137
+ },
+ {
+  "pool": "DS-DEF-8::override: UNDER TRIBUTE",
+  "lines": 4,
+  "prints": 37,
+  "top": 13,
+  "topVid": 3,
+  "share": 0.35135135135135137
+ },
+ {
+  "pool": "DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force",
+  "lines": 4,
+  "prints": 112,
+  "top": 39,
+  "topVid": 3,
+  "share": 0.3482142857142857
+ },
+ {
+  "pool": "DS-DEF-2::Beasts & Monsters: settled, nothing organized",
+  "lines": 6,
+  "prints": 145,
+  "top": 50,
+  "topVid": 3,
+  "share": 0.3448275862068966
+ },
+ {
+  "pool": "DS-DEF-11::WALLED-QUIET",
+  "lines": 5,
+  "prints": 29,
+  "top": 10,
+  "topVid": 3,
+  "share": 0.3448275862068966
+ },
+ {
+  "pool": "DS-ECO-1::COMBINATION C4: a low rung on a working approach",
+  "lines": 7,
+  "prints": 319,
+  "top": 110,
+  "topVid": 2,
+  "share": 0.3448275862068966
+ },
+ {
+  "pool": "DS-ECO-10::POSTURE: entrepot",
+  "lines": 5,
+  "prints": 145,
+  "top": 50,
+  "topVid": 1,
+  "share": 0.3448275862068966
+ },
+ {
+  "pool": "DS-DEF-1::readiness CRITICAL",
+  "lines": 4,
+  "prints": 224,
+  "top": 76,
+  "topVid": 1,
+  "share": 0.3392857142857143
+ },
+ {
+  "pool": "DS-DEF-1::readiness STRONG",
+  "lines": 8,
+  "prints": 128,
+  "top": 43,
+  "topVid": 1,
+  "share": 0.3359375
+ },
+ {
+  "pool": "DS-DEF-8::override: INTERNAL PRESSURE (famine)",
+  "lines": 5,
+  "prints": 33,
+  "top": 11,
+  "topVid": 3,
+  "share": 0.3333333333333333
+ },
+ {
+  "pool": "DS-GEN-13::COMMERCE: a market, no guild",
+  "lines": 4,
+  "prints": 42,
+  "top": 14,
+  "topVid": 2,
+  "share": 0.3333333333333333
+ },
+ {
+  "pool": "DS-CND-1::DIRECTION: worsening · CRISIS: famine",
+  "lines": 4,
+  "prints": 33,
+  "top": 11,
+  "topVid": 3,
+  "share": 0.3333333333333333
+ },
+ {
+  "pool": "DS-ECO-8::POOR",
+  "lines": 4,
+  "prints": 173,
+  "top": 57,
+  "topVid": 4,
+  "share": 0.32947976878612717
+ },
+ {
+  "pool": "DS-DEF-5::NO organized force at all",
+  "lines": 6,
+  "prints": 253,
+  "top": 82,
+  "topVid": 3,
+  "share": 0.3241106719367589
+ },
+ {
+  "pool": "DS-ECO-6::TIER: minor shadow activity (≥3)",
+  "lines": 6,
+  "prints": 314,
+  "top": 101,
+  "topVid": 0,
+  "share": 0.321656050955414
+ },
+ {
+  "pool": "DS-FTH-4::FLAG: heresySuppression: hunted",
+  "lines": 5,
+  "prints": 28,
+  "top": 9,
+  "topVid": 3,
+  "share": 0.32142857142857145
+ },
+ {
+  "pool": "DS-DEF-9::magicDependency true",
+  "lines": 4,
+  "prints": 105,
+  "top": 33,
+  "topVid": 2,
+  "share": 0.3142857142857143
+ },
+ {
+  "pool": "DS-DEF-8::override: MIGRATION, arrivals",
+  "lines": 4,
+  "prints": 32,
+  "top": 10,
+  "topVid": 3,
+  "share": 0.3125
+ },
+ {
+  "pool": "DS-DEF-3::Moderate",
+  "lines": 7,
+  "prints": 188,
+  "top": 55,
+  "topVid": 3,
+  "share": 0.2925531914893617
+ },
+ {
+  "pool": "DS-POW-6::GM ADVISORY: the commander is a political actor",
+  "lines": 5,
+  "prints": 38,
+  "top": 11,
+  "topVid": 5,
+  "share": 0.2894736842105263
+ },
+ {
+  "pool": "DS-GEN-18::BOUGHT-IN",
+  "lines": 10,
+  "prints": 349,
+  "top": 101,
+  "topVid": 9,
+  "share": 0.28939828080229224
+ },
+ {
+  "pool": "DS-DEF-2::Invasion & War: neither walls nor force",
+  "lines": 10,
+  "prints": 295,
+  "top": 85,
+  "topVid": 2,
+  "share": 0.288135593220339
+ },
+ {
+  "pool": "DS-DEF-2::Economic Survival: WEAK",
+  "lines": 5,
+  "prints": 177,
+  "top": 51,
+  "topVid": 3,
+  "share": 0.288135593220339
+ },
+ {
+  "pool": "DS-ECO-9::IMPORT-DEPENDENT",
+  "lines": 6,
+  "prints": 14,
+  "top": 4,
+  "topVid": 1,
+  "share": 0.2857142857142857
+ },
+ {
+  "pool": "DS-DEF-5::FIXTURE: gates",
+  "lines": 5,
+  "prints": 314,
+  "top": 89,
+  "topVid": 4,
+  "share": 0.28343949044585987
+ },
+ {
+  "pool": "DS-DEF-2::Economic Survival: STRONG",
+  "lines": 11,
+  "prints": 215,
+  "top": 59,
+  "topVid": 2,
+  "share": 0.2744186046511628
+ },
+ {
+  "pool": "DS-DEF-5::walls PRESENT",
+  "lines": 9,
+  "prints": 403,
+  "top": 108,
+  "topVid": 3,
+  "share": 0.2679900744416873
+ },
+ {
+  "pool": "DS-DEF-2::CHAIN: defence supplied",
+  "lines": 6,
+  "prints": 124,
+  "top": 31,
+  "topVid": 2,
+  "share": 0.25
+ },
+ {
+  "pool": "DS-ECO-10::POSTURE: established",
+  "lines": 10,
+  "prints": 488,
+  "top": 92,
+  "topVid": 3,
+  "share": 0.1885245901639344
+ },
+ {
+  "pool": "DS-ECO-6::TIER: significant off-book activity (≥15)",
+  "lines": 8,
+  "prints": 125,
+  "top": 23,
+  "topVid": 4,
+  "share": 0.184
+ },
+ {
+  "pool": "DS-DEF-2::Disasters & Famine: granary AND hospital",
+  "lines": 3,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ },
+ {
+  "pool": "DS-DEF-2::Disasters & Famine: NO reserves, NO medical provision",
+  "lines": 3,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ },
+ {
+  "pool": "DS-DEF-6::Logistics & Supply: Granary + port",
+  "lines": 3,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ },
+ {
+  "pool": "DS-DEF-6::Logistics & Supply: Granary in isolation",
+  "lines": 3,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ },
+ {
+  "pool": "DS-DEF-6::Logistics & Supply: Granary with road supply",
+  "lines": 3,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ },
+ {
+  "pool": "DS-DEF-6::Naval Defense: Naval force",
+  "lines": 3,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ },
+ {
+  "pool": "DS-DEF-6::Naval Defense: Under blockade",
+  "lines": 4,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ },
+ {
+  "pool": "DS-ECO-2::GRANARY: thin",
+  "lines": 4,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ },
+ {
+  "pool": "DS-ECO-8::FOOD AND PROSPERITY: full stores lift the town",
+  "lines": 6,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ },
+ {
+  "pool": "DS-GEN-3::scores.military: CRITICAL",
+  "lines": 6,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ },
+ {
+  "pool": "DS-GEN-3::defenseProfile.readiness.label: Undefended",
+  "lines": 6,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ },
+ {
+  "pool": "DS-GEN-5::river",
+  "lines": 7,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ },
+ {
+  "pool": "DS-GEN-6::river",
+  "lines": 10,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ },
+ {
+  "pool": "DS-GEN-9::event type: disaster",
+  "lines": 7,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ },
+ {
+  "pool": "DS-GEN-9::event type: political",
+  "lines": 7,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ },
+ {
+  "pool": "DS-GEN-9::event type: economic",
+  "lines": 7,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ },
+ {
+  "pool": "DS-GEN-9::event type: religious",
+  "lines": 7,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ },
+ {
+  "pool": "DS-GEN-9::event type: magical",
+  "lines": 7,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ },
+ {
+  "pool": "DS-GEN-9::event type: demographic",
+  "lines": 7,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ },
+ {
+  "pool": "DS-GEN-9::event type: exile_return",
+  "lines": 7,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ },
+ {
+  "pool": "DS-GEN-9::event type: occupation_infiltration",
+  "lines": 7,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ },
+ {
+  "pool": "DS-GEN-13::MARKET-OPEN",
+  "lines": 5,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ },
+ {
+  "pool": "DS-POW-6::capture pressure RECOVERING (strong security, prosperity)",
+  "lines": 4,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ },
+ {
+  "pool": "DS-STR-1::UNDER OCCUPATION",
+  "lines": 7,
+  "prints": 0,
+  "top": 0,
+  "topVid": 1,
+  "share": 0
+ }
+]
