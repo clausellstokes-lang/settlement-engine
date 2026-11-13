@@ -221,7 +221,12 @@ const CHOOSER_KEYS = ['npcs', 'relationships'];
 // RE-KEYED at MERGE-TRAIN record 9 (2026-11-09, the ALLEGIANCE-CAR4 merge, 824a8ce2f): 547 -> 512, measured by this arm at the
 // merged tree (547 at the point-8 tip 8b75f466a): car 4's A9 (03ff59084) retires the population step's goal draw — the goals are
 // dealt at the seam by people/goals.js :: dealGoals — so 35 fewer unpinned draws reach the population stream on this row.
-const POPULATION_UNPINNED_DRAWS = 512;
+// RE-KEYED at STYLE-2-MERGE point 46 (2026-11-13, the COHERENCE-POWERS merge 6aeaa4154; a figure its drafted record names for
+// the merge seat, 'generationForkCensus A1'): 512 -> 493, measured by this arm at the merged tree. The pin row's cast loses ONE
+// card, CONFIRMED by generating the row at 358e072ab and at the merge (28 -> 27 cards; the only one gone is npc_town_council,
+// 'the first councillor', the seat's own office face: the dual hat seats the leader from a house, so the office face is not
+// minted). That the 19 draws are all that card's own is PLAUSIBLE (the step is not instrumented per card).
+const POPULATION_UNPINNED_DRAWS = 493;
 /** The row both side channels are censused on (the pre-proof's probe row). */
 const CENSUS_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -379,7 +384,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     ).toEqual([]);
   };
 
-  it('A1 — the instrument reaches the generator graph: mints split 4 direct / 106 via fork, no golden moves, 512 draws unpinned and 0 pinned', () => {
+  it('A1 — the instrument reaches the generator graph: mints split 4 direct / 106 via fork, no golden moves, 493 draws unpinned and 0 pinned', () => {
     // ── C0 — the mocks lose no export. A replacement that dropped a name would break
     // importers silently, and every figure below would be measured on a crippled module.
     expect(mintCensus.actualKeys.length, 'the prng mock factory never ran').toBeGreaterThan(0);
@@ -420,6 +425,9 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     // 'people-faces' and one keyed fork per card (28 on this row); PEOPLE-3 HOOKS (0f930ce95) forks each card's key again
     // for its one hook and adds ['people-hooks']: 58 labels, 30 distinct, unmoved to the tip. Measured at
     // every stage with its own produced manifest; pinned EXACTLY, in order (a new, lost or re-ordered fork reds).
+    // STYLE-2-MERGE point 46 (2026-11-13, the COHERENCE-POWERS merge): 28 -> 27 cards, 58 -> 56 labels, 30 -> 29 distinct; the one
+    // card gone, in both passes, is npc_town_council (the seat's office face, not minted under the dual hat; CONFIRMED with
+    // POPULATION_UNPINNED_DRAWS above).
     expect(unpinnedPopulation.forkLabels, 'the step mints exactly the cast\'s declared streams').toEqual([
       'people-faces',
       'npc_charcoal_burner',
@@ -439,7 +447,6 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
       'npc_bakers_5_15',
       'npc_craft_guilds_5_15',
       'npc_parish_churches_2_5',
-      'npc_town_council',
       'npc_courthouse',
       'npc_small_prison_stocks',
       'npc_town_watch',
@@ -468,7 +475,6 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
       'npc_bakers_5_15',
       'npc_craft_guilds_5_15',
       'npc_parish_churches_2_5',
-      'npc_town_council',
       'npc_courthouse',
       'npc_small_prison_stocks',
       'npc_town_watch',
