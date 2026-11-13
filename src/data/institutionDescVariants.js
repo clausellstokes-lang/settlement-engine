@@ -2047,6 +2047,33 @@ export const DESC_VARIANT_SIBLINGS = Object.freeze({
     Object.freeze({ text: "The river is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.", needs: Object.freeze(["river"]) }),
     Object.freeze({ text: "The water is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.", twinOf: "The river is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.", excludes: Object.freeze(["river"]) }),
   ]),
+  // W2-FIX-DATA-5 (2026-11-13; REVIEW-W2A-3 #973, #238; the cell of ROUND-3-CUT-INCREMENT ww-494): the Annual fair's merchants
+  // and the toll bridge's steady fees under a siege that cuts every road. Each text declares the siege off; its twin says
+  // the roads are held. VETOABLE wording (the owner's).
+  "Regional merchants. Luxury goods available.": Object.freeze([
+    Object.freeze({ text: "Regional merchants. Luxury goods available.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "A yearly fair for regional merchants. None can reach it while the roads are held.", twinOf: "Regional merchants. Luxury goods available.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  "Merchants from across the region, and luxuries to be had.": Object.freeze([
+    Object.freeze({ text: "Merchants from across the region, and luxuries to be had.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "A yearly gathering of the region's merchants, cut off while the siege holds the roads.", twinOf: "Merchants from across the region, and luxuries to be had.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  "A yearly draw for regional traders, with fine goods on offer.": Object.freeze([
+    Object.freeze({ text: "A yearly draw for regional traders, with fine goods on offer.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "A yearly draw for regional traders, though none can come while the roads are held.", twinOf: "A yearly draw for regional traders, with fine goods on offer.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  "A bridge with a toll house. The keeper collects passage fees and performs basic maintenance. Minor but steady revenue.": Object.freeze([
+    Object.freeze({ text: "A bridge with a toll house. The keeper collects passage fees and performs basic maintenance. Minor but steady revenue.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "A bridge with a toll house. The keeper collects passage fees and performs basic maintenance. With the roads held, no one crosses and nothing is taken.", twinOf: "A bridge with a toll house. The keeper collects passage fees and performs basic maintenance. Minor but steady revenue.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  "A bridge with a toll house upon it. The keeper takes the passage fees and sees to simple upkeep. The income is small but never fails.": Object.freeze([
+    Object.freeze({ text: "A bridge with a toll house upon it. The keeper takes the passage fees and sees to simple upkeep. The income is small but never fails.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "A bridge with a toll house upon it. The keeper takes the passage fees and sees to simple upkeep, though no one has crossed since the roads were cut.", twinOf: "A bridge with a toll house upon it. The keeper takes the passage fees and sees to simple upkeep. The income is small but never fails.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  "A toll house guards this bridge; its keeper gathers the crossing fees and handles the basic repairs. Modest revenue, but steady.": Object.freeze([
+    Object.freeze({ text: "A toll house guards this bridge; its keeper gathers the crossing fees and handles the basic repairs. Modest revenue, but steady.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "A toll house guards this bridge; its keeper gathers the crossing fees and handles the basic repairs. Since the siege closed the roads, there are none to gather.", twinOf: "A toll house guards this bridge; its keeper gathers the crossing fees and handles the basic repairs. Modest revenue, but steady.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
   // W2-FIX-DATA-5 (2026-11-13; ROUND-3-CUT #17): the thorp's burial ground says no clergy is near enough to speak, in a thorp
   // whose people go to a neighbour's parish church ("Access to parish church", whose Last rites the parish priest comes to say).
   // Each such text declares the faith reading's access answer (`church access`, faithReading.js :: accessOnly) on its excludes

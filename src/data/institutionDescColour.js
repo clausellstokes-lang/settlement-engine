@@ -205,8 +205,6 @@ export const DESC_VARIANT_COLOUR_DECLARATIONS = Object.freeze({
   "Requires a charter from the crown. A principal source of the town's trade.": COLOUR,
   "The central plaza where the weekly market and the fairs are held.": COLOUR,
   "A broad open square given over to market days and fairs.": COLOUR,
-  "Merchants from across the region, and luxuries to be had.": COLOUR,
-  "A yearly draw for regional traders, with fine goods on offer.": COLOUR,
   "Each holds a grip on the trade in its particular wares.": COLOUR,
   "Trade in certain goods runs through their hands alone.": COLOUR,
   "Beds for merchants on the road.": COLOUR,

@@ -23,6 +23,11 @@ const bornInc = (/** @type {string} */ seed) => {
   const m = /** @type {RegExpMatchArray} */ (seed.match(/^r(?:ww|pf)-(\w+?)-([a-z_+]+)-(\d+)$/));
   return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : m[2].split('+'), _randomizePriorities: true }), null, { seed, customContent: {} });
 };
+/** A REVIEW-W2A-3 town (`rw3-<size>-<calm|crises>-<i>`), the app's shape. */
+const bornRw3 = (/** @type {string} */ seed) => {
+  const m = /** @type {RegExpMatchArray} */ (seed.match(/^rw3-(\w+?)-([a-z_+]+)-(\d+)$/));
+  return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : m[2].split('+'), _randomizePriorities: true }), null, { seed, customContent: {} });
+};
 const historyText = (/** @type {any} */ s) => JSON.stringify(s.history || {});
 const arrivalText = (/** @type {any} */ s) => JSON.stringify(s.arrivalScene || '');
 const servicesOf = (/** @type {any} */ s) => /** @type {any[]} */ (Object.values(s.availableServices || {}).flat());
@@ -77,5 +82,13 @@ describe('W2-FIX-DATA-5: round three\'s rows in the data lane\'s files', () => {
     const town = bornInc('rww-town-under_siege-1');
     const rows = servicesOf(town).filter((v) => v.institution === 'Annual fair' && v.name === 'Seasonal trading').map((v) => String(v.desc));
     expect(rows).toEqual(['The yearly market that draws merchants from across the region. None can reach it while the roads are held.']);
+  }, 60_000);
+  test('R2 #973, #238: under a siege the fair\'s merchants and the toll bridge\'s steady fees are not claimed (rw3-town-under_siege-1, rw3-metropolis-under_siege-1)', () => {
+    const fair = named(bornRw3('rw3-town-under_siege-1'), 'Annual fair');
+    expect(String(fair?.desc)).not.toMatch(/Merchants from across the region, and luxuries|Luxury goods available|fine goods on offer/);
+    expect(String(fair?.desc)).toMatch(/roads are held|siege holds the roads/);
+    const bridge = named(bornRw3('rw3-metropolis-under_siege-1'), 'Toll bridge');
+    expect(String(bridge?.desc)).not.toMatch(/never fails|but steady|steady revenue/);
+    expect(String(bridge?.desc)).toMatch(/roads were cut|roads held|closed the roads/);
   }, 60_000);
 });

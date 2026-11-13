@@ -2183,7 +2183,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false
     },
     {
       "id": "town|Economy|Annual fair#1",
@@ -2191,7 +2191,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false
     },
     {
       "id": "town|Economy|Merchant guilds (3-8)#0",
