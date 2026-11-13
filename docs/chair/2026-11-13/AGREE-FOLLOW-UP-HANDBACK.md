@@ -5,7 +5,7 @@ The seat: AGREE-FOLLOW-UP, seated by the chair (session_01FE9mEws7PXYRYdjQPbSX15
 - The line before the point is `f572d12b7`.
 - The agreement lane's own range is `3575cf061..69b53decd`. It merged the line at `3575cf061` (d0f0d022b); its earlier commits sit on the line at point 43.
 
-Rulings worked to: the brief (this file's only source of rulings so far). Nothing in `src/` is changed, no test is touched, and no baseline row is banked. This seat's commits are probes and this file.
+Rulings worked to: the brief, then the chair's rulings of 2026-11-13 18:02 UTC on the two tables (section 3; the chair's messages are not on the branch, so they are restated there). Nothing in `src/` is changed. One test file is changed as ruled (7e471bb23). No baseline row is banked.
 
 Probes (`docs/chair/2026-11-13/probes/AGREE-FOLLOW-UP/`), each runnable as `node <probe> <tree root> ...`:
 1. `siteScan.mjs`: the site ratchet's 462-town corpus, row by row.
@@ -14,6 +14,7 @@ Probes (`docs/chair/2026-11-13/probes/AGREE-FOLLOW-UP/`), each runnable as `node
 4. `sewerProsperity.mjs`: the arm's 42 births at the two prosperity extremes.
 5. `sewerProsperityIdentities.mjs`: each RAISES cause over the 42 × K identities.
 6. `sewerWitnessCivic.mjs`: the sewer witness's civic houses at one tree.
+7. `sewerHighWaterPath.mjs`: HIGH_WATER's rung lifts, split by the path they take.
 
 ## 1. The site inventory (siteCoherenceRatchet C1)
 
@@ -149,6 +150,73 @@ Re-found the arm's INPUT and leave its LAW untouched.
 - The same measure is green at the line, so the change is not tuned to the tip.
 - The alternative is a re-seeded witness, but the file holds no seed rule to re-seed by.
 - No page sentence needed checking: the cause is not dead.
+
+## 3. The chair's rulings of 2026-11-13 (received 18:02 UTC), and what was done
+
+**The rulings, as received:**
+- **(1) Site, C1.** The verdict is accepted (origin 0, exposure 14, true and right 4). No cure is owed at any token's home.
+  - C1 stays CARRIED RED AND NAMED, as sixteen rows plus the totals line: water-on-dry 112 → 117, marsh-on-dry 24 → 27, flank-on-flat 38 → 40, any contradiction 150 → 157. Nothing is banked or lowered.
+  - The owner is the site plan's Waves 3 and 4, after the release. The inventory is ruled ONCE, on the final merged tree, at the closing acts, with this seat's three site probes as the instrument.
+  - The book's "fourteen" is the merge seat's to correct.
+- **(2) Sewer.** Re-found the arm's INPUT, its law untouched, in the test file only.
+- **(3)** The two found items are taken by the chair.
+
+### The three site probes: the exact commands, on any tree
+Run from any checkout holding `docs/chair/2026-11-13/probes/AGREE-FOLLOW-UP/`. `<tree>` is the root of the checkout under measure; it needs `node_modules` and `tests/helpers/sourceContract.js`.
+
+```sh
+P=docs/chair/2026-11-13/probes/AGREE-FOLLOW-UP
+# 1. the 462 rows at one tree (about 30 s)
+node $P/siteScan.mjs <tree> <tree-name>.json
+# 2. two trees compared: the aggregate movement, and every town whose row changed.
+#    Its first line checks the BEFORE scan against the frozen baseline you name
+#    (pass the before-tree's own .site-coherence-baseline.json).
+node $P/siteDiff.mjs <before>.json <after>.json <before-tree>/tests/lint/.site-coherence-baseline.json <changed>.json
+# 3. each changed town's key and roster at each scanned commit, in the order given
+#    (<dir> holds one <sha>.json from step 1 per sha)
+node $P/siteAttribute.mjs <changed>.json <dir> <sha1> <sha2> ...
+```
+
+For the closing acts:
+- Step 1 at the final merged tree, then step 2 against `f572d12b7`'s scan with `f572d12b7`'s baseline.
+- The aggregate must read the same sixteen rows, unless a later merge moves more towns. Step 2 lists any such town by identity.
+
+### (2) The re-founded arm, commit 7e471bb23
+- **The change:** one named constant, `LIVENESS_IDENTITIES = s_pros_0 … s_pros_7`, whose comment gives the cause. The RAISES block's two claims now run over the 42 roster-free births × those eight identities.
+- **Unchanged:** every expectation's value, every weight, every source file, and the LOWERS arm.
+- **Green at both trees,** through `sh scripts/gate-tail.sh npx vitest run tests/domain/undercitySewerDerivation.test.js`:
+
+| Tree | The old file | The new file |
+|---|---|---|
+| aac79b808 (the tip) | 1 failed, 7 passed; 7.61 s (tests 951 ms) | **8 of 8**; 7.40 s (tests 1.05 s) |
+| f572d12b7 (the line) | 8 of 8; 5.60 s (tests 701 ms) | **8 of 8**; 5.96 s (tests 1.13 s) |
+
+- `sh scripts/gate-tail.sh npx eslint tests/domain/undercitySewerDerivation.test.js` exits 0.
+
+### (2b) TEETH: executed by plant-and-restore
+- **Setup:** a scratch worktree at aac79b808 with the new test file copied in. The plant is applied to `src/domain/undercity/sewerDerivation.js :: sewerCauses`, either at the weight read (`const weight = T.weights[cause]` → 0 for one cause) or at the sign of the contribution (×−1 for one cause). Each run was restored before the next.
+- **What was read:** the HONEST FOUNDING arm's own assertion and line, from vitest's JSON report beside `gate-tail`. In the new file, line 249 is "never the wrong way" and line 250 is "the right way somewhere"; in the old file they are 239 and 240.
+
+| Plant | The arm | What it reds |
+|---|---|---|
+| none (control) | passed | the suite 8 of 8 |
+| PROSPERITY_BAND weight 0 | **red, 250** | `[false, true, true, true]`: its own slot |
+| CIVIC_CAPACITY weight 0 | **red, 250** | `[true, false, true, true]`: its own slot |
+| CALAMITY_REBUILD weight 0 | **red, 250** | `[true, true, false, true]`: its own slot |
+| **HIGH_WATER_POPULATION weight 0** | **PASSED: the plant does not red. STOP.** | — |
+| CALAMITY_REBUILD direction inverted | **red, 249** ("never the wrong way") | `[0, 0, 4, 0]`: four wrong-way moves, its own slot |
+| PROSPERITY_BAND direction inverted | red, 250, not 249 | `[false, false, false, true]`: no wrong-way move appears; it starves the others' witnesses |
+| CIVIC_CAPACITY direction inverted | red, 250, not 249 | `[false, false, false, true]` |
+| HIGH_WATER_POPULATION direction inverted | passed | — |
+
+### STOP: HIGH_WATER_POPULATION's slot of "the right way somewhere" has no teeth against its weight, and never had
+- **Measured** (probe 7, `sewerHighWaterPath.mjs`, over the 42 × 8): of HIGH_WATER's 208 up-moves at the tip, **207 are DERIVED → TIER_FLOOR**. The arm's `peakTier: 'metropolis'` makes the derived high-water tier metropolis, whose ladder FLOOR lifts the rung whatever the weighted score says. Only **1** of the 208 is DERIVED → DERIVED through the weighted score.
+- **Not made by this change.** With the OLD file at the tip, weight 0 for HIGH_WATER also leaves HIGH_WATER's slot TRUE. The arm reds there only through CALAMITY's slot (`[true, true, false, true]`), because the lower scores starve CALAMITY's one witness. The new file's eight identities give CALAMITY more witnesses, so that incidental red goes too.
+- **For the chair to rule; nothing done:**
+  - (a) accept: the slot proves the CAUSE (the high-water peak) live, through the tier floor, not its WEIGHT;
+  - (b) a tooth arm for the weight alone: the same perturbation with the tier floor held, i.e. the score compared, not the rung;
+  - (c) another ruling.
+  The test file is unchanged beyond the ruled input.
 
 ## Found, not mine (reported, not touched)
 - **#135** (town/desert/road@scw0-a1/arabic): its smelting chain on iron_deposits runs (vulnerable) and a Smelter stands, yet no iron good is in its exports after A′'s re-deal at 6b932d3e8. The site's win rests on that absence.
