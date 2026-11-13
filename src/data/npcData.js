@@ -1353,17 +1353,6 @@ export const NPC_FACTION_LOYALTY = {
     'A letter came for a neighbour who has been dead for years, and the seal on it is one nobody here knows.',
   ],
 };
-/**
- * R2-CODE-A-2 (the cold list REVIEW-W2A-3, MEDIUM #676 #678 #968 #969): THE MILITARY LINES TRUE OF ANY HOLDER. Every
- * other line of `NPC_FACTION_LOYALTY.military` presumes the holder commands a force (their soldiers, their armoury,
- * their patrol route, the people under their command, orders from above), so a holder outside the military pool
- * that the crisis bias pulls into it is refused them (`npcGenerator.js :: generatePlotHook`, resolved draw-free into
- * the holder's own pool). These two are kept for every holder: noticing faces and signing for supplies need no
- * command. Read from the pool itself, so no text is spelled twice. A new military line presumes a command until it
- * is named here.
- * @type {ReadonlySet<string>}
- */
-export const MILITARY_HOOKS_TRUE_OF_ANY_HOLDER = Object.freeze(new Set(NPC_FACTION_LOYALTY.military.map((l) => (typeof l === 'string' ? l : l.text)).filter((t) => /^They've noticed the same group of faces |^They signed for supplies that never arrived,/.test(t))));
 
 export const NPC_SECRETS = {
   government: [
@@ -2352,3 +2341,14 @@ export const NPC_HOOK_SIBLINGS = Object.freeze({
     Object.freeze({ text: 'A valuable cargo was reported lost on the road. The manifest has reappeared in a market two settlements away.', twinOf: 'A valuable cargo was reported lost at sea. The manifest has reappeared in a market two settlements away.', excludes: Object.freeze(['navigable']) }),
   ]),
 });
+/**
+ * R2-CODE-A-2 (the cold list REVIEW-W2A-3, MEDIUM #676 #678 #968 #969): THE MILITARY LINES TRUE OF ANY HOLDER. Every
+ * other line of `NPC_FACTION_LOYALTY.military` presumes the holder commands a force (their soldiers, their armoury,
+ * their patrol route, the people under their command, orders from above), so a holder outside the military pool
+ * that the crisis bias pulls into it is refused them (`npcGenerator.js :: generatePlotHook`, resolved draw-free into
+ * the holder's own pool). These two are kept for every holder: noticing faces and signing for supplies need no
+ * command. Read from the pool itself (both are bare lines), so no text is spelled twice; it stands at the file's end so
+ * no cited line moves. A new military line presumes a command until it is named here.
+ * @type {ReadonlySet<string>}
+ */
+export const MILITARY_HOOKS_TRUE_OF_ANY_HOLDER = Object.freeze(new Set(NPC_FACTION_LOYALTY.military.flatMap((l) => (typeof l === 'string' && /^They've noticed the same group of faces |^They signed for supplies that never arrived,/.test(l) ? [l] : []))));
