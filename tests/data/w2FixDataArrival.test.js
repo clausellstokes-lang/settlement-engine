@@ -40,5 +40,7 @@ describe('W2-FIX-DATA: an arrival beat prints only where it is true', () => {
     expect(admits(line('Travellers are offered water'), town({ stress: ['under_siege'] }))).toBe(false);
     expect(admits(line('Travellers are offered water'), town({}))).toBe(true);
   });
-
+  it('the felt tents stand beside no timber houses the town may not have (c04, mud brick)', () => {
+    expect(String(textOf(line('Felt tents'))('N'))).not.toMatch(/timber/);
+  });
 });

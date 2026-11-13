@@ -530,7 +530,7 @@
         },
         {
           "lineId": "ARRIVAL_PEOPLE.steppe[1]",
-          "text": "Felt tents stand beside the timber houses, and their owners seem at home in either.",
+          "text": "Felt tents stand beside the houses, and their owners seem at home in either.",
           "needs": [],
           "excludes": [],
           "crisis": "any",

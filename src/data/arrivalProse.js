@@ -345,7 +345,7 @@ export const ARRIVAL_PEOPLE = Object.freeze({
   ],
   steppe: [
     { text: () => 'Horse traders show their animals at the edge of the settlement, where herders and townsfolk meet.', excludes: ['crisis: under_siege'], crisis: ['any'] },
-    { text: () => 'Felt tents stand beside the timber houses, and their owners seem at home in either.', crisis: ['any'] },
+    { text: () => 'Felt tents stand beside the houses, and their owners seem at home in either.', crisis: ['any'] },
     { text: () => 'A caravan broker shouts terms to a line of laden animals and the people leading them.', crisis: ['any'] },
     { text: () => 'Guests are greeted with a cup before a word of business is spoken.', crisis: ['any'] },
   ],
