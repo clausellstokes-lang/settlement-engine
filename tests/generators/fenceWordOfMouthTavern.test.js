@@ -36,4 +36,20 @@ describe('the fence names a tavern only where one stands', () => {
     const s = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'town', selectedStressesRandom: false, selectedStresses: ['famine'], _randomizePriorities: true }), null, { seed, customContent: {} });
     expect(fenceLines(s)).toEqual([TAVERN]);
   });
+
+  // THE CHAIR'S RULING (2026-11-13 23:40Z): a service never prints under the name of a house the roster does not
+  // hold. 'Fence (word of mouth)' is a catalogue house; the fallback's row takes that name only where it stands, and
+  // is otherwise "Fencing stolen goods" (a catalogue SERVICE name already, registered criminal; names no house).
+  const fenceRows = (s) => (s.availableServices?.criminal || []).filter((row) => row.institution === '(covert)' && /^Fenc/.test(row.name));
+  const born = (seed, settType) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType }), null, { seed, customContent: {} });
+  it('r2r-village-55 (no fence house): the row is "Fencing stolen goods"', () => {
+    const s = born('r2r-village-55', 'village');
+    expect((s.institutions || []).some((i) => i?.name === 'Fence (word of mouth)')).toBe(false);
+    expect(fenceRows(s).map((r) => r.name)).toEqual(['Fencing stolen goods']);
+  });
+  it('r2r-town-15 (the fence house stands): the row keeps the house\'s name', () => {
+    const s = born('r2r-town-15', 'town');
+    expect((s.institutions || []).some((i) => i?.name === 'Fence (word of mouth)')).toBe(true);
+    expect(fenceRows(s).map((r) => r.name)).toEqual(['Fence (word of mouth)']);
+  });
 });

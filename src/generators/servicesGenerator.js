@@ -14,10 +14,11 @@ import {
 import { hasInstitution } from '../domain/facts/institutions.js';
 // Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
 const ASK_AROUND_AT_THE_RIGHT_TAVERN_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS = 'Ask around at the right tavern. Someone moves goods without questions.';
-// R3-CODE-C-3 (CENSUS-2 kind a, e.g. r2r-village-19): "the right tavern" names a house, so it reads the roster (record 386);
-// where no inn, tavern or ale house stands (facts/institutions.js, kind `tavern`) its twin, same branches, no draw.
+// R3-CODE-C-3 (CENSUS-2 a, r2r-village-19): "the right tavern" reads the roster (facts/institutions.js `tavern`); else its twin.
 const ASK_AROUND_QUIETLY_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS = 'Ask around quietly. Someone moves goods without questions.';
 const FENCE_WORD_OF_MOUTH = 'Fence (word of mouth)';
+// R3-CODE-C-3 (the chair, 23:40Z): 'Fence (word of mouth)' is a catalogue house; the fallback names it only where it stands.
+const FENCING_STOLEN_GOODS = 'Fencing stolen goods';
 const INFORMAL_NO_CONTRACT_VIOLENCE_AVAILABLE_FOR_COIN_TO_THOSE_WHO_KNOW_WHERE_TO_ASK = 'Informal, no contract. Violence available for coin to those who know where to ask.';
 // COHERENCE-PRESUME (the chair's ruling A, 2026-11-11): the row DENIED the law ("No law", "There is no
 // official recourse here") in towns with a watch and a hall, court or council (22 of the 360 corpus
@@ -90,6 +91,7 @@ export const generateAvailableServices = (
     config,
     worldLaw,
   });
+  const fenceName = institutions.some((inst) => nativeSemanticName(inst) === FENCE_WORD_OF_MOUTH) ? FENCE_WORD_OF_MOUTH : FENCING_STOLEN_GOODS;
   const fenceAskLine = hasInstitution({ institutions }, 'tavern') // R3-CODE-C-3: the tavern only where one stands
     ? ASK_AROUND_AT_THE_RIGHT_TAVERN_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS : ASK_AROUND_QUIETLY_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS;
   const hasCriminalInst = institutions.some((inst) => {
@@ -131,7 +133,7 @@ export const generateAvailableServices = (
     } else {
       buckets.criminal.push(
         {
-          name: FENCE_WORD_OF_MOUTH,
+          name: fenceName,
           desc: fenceAskLine,
           institution: '(covert)',
         },
@@ -165,7 +167,7 @@ export const generateAvailableServices = (
       } else {
         buckets.criminal.push(
           {
-            name: FENCE_WORD_OF_MOUTH,
+            name: fenceName,
             desc: fenceAskLine,
             institution: '(covert)',
           },
@@ -318,7 +320,7 @@ export const generateAvailableServices = (
     };
   if (crimeTypes.has('Survival crime')) {
     addCrimeService(
-      FENCE_WORD_OF_MOUTH,
+      fenceName,
       'No questions asked. Stolen goods move through back channels for a fraction of value.',
       '(covert)'
     );
@@ -366,7 +368,7 @@ export const generateAvailableServices = (
   }
   if (crimeTypes.has('Background crime')) {
     addCrimeService(
-      FENCE_WORD_OF_MOUTH,
+      fenceName,
       fenceAskLine,
       '(covert)'
     );
