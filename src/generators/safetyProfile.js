@@ -1009,6 +1009,12 @@ export const NO_WATCH_SMALL = Object.freeze([ // exported for the no-watch pin (
  */
 const MERCENARY_LEAD = SAFETY_LINE_SIBLINGS['There is no standing guard; a hired company is paid to keep the peace, and gives what it is paid for.'][1].text;
 const CHARTER_LEAD = "The adventurers' charter hall coordinates emergency response to threats.";
+/**
+ * The merchant-army lead (the safety writer's own branch, above): the guilds' companies serve "only those
+ * with the right associations", so no line after it puts them behind the public garrison (COHERENCE-UPKEEP-5,
+ * the review's F5).
+ */
+const MERCHANT_ARMY_LEAD = 'Public law enforcement is largely a formality.';
 
 /**
  * THE GUARD ASSESSMENT SAYS WHAT THE PLACE CAN PAY (COHERENCE-UPKEEP, the chair's ruling 7 of
@@ -1052,7 +1058,7 @@ export function keptGuardLine(desc, institutions, prosperity, stressTypes = []) 
   if (text.startsWith(CHARTER_LEAD)) {
     return purseOrCrisis("The adventurers' charter hall takes bounty work against threats, paid from what the hunger leaves.") + text.slice(CHARTER_LEAD.length);
   }
-  if (d.mercenary && d.garrison && !text.startsWith(MERCENARY_LEAD)) {
+  if (d.mercenary && d.garrison && !text.startsWith(MERCENARY_LEAD) && !text.startsWith(MERCHANT_ARMY_LEAD)) {
     return `${text} ${purseOrCrisis('Hired swords back the garrison, paid from what the hunger leaves.')}`;
   }
   return text;
