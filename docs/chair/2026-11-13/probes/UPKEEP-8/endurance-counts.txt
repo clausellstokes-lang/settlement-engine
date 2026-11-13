@@ -1,0 +1,13 @@
+{"lines":1490,"underAWeekSaidWeeks":101,"fullBeyondStoresWords":1065,"halfOverTwiceStores":1353}
+## fullBeyondStoresWords
+   rv2-calm-thorp-0: 1.90 mo stored; Economics "No granary; two months in household stores." | No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the thorp for about three months at full rations, more than a y
+   rv2-calm-thorp-2: 1.30 mo stored; Economics "No granary; about a month in household stores." | No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the thorp for about two months at full rations, about eight mon
+   rv2-calm-thorp-6: 1.40 mo stored; Economics "No granary; about a month in household stores." | No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the thorp for about two months at full rations, more than a yea
+## halfOverTwiceStores
+   rv2-calm-thorp-0: 1.90 mo | hat is still harvested, household stores carry the thorp for about three months at full rations, more than a year on half.
+   rv2-calm-thorp-1: 1.50 mo | hat is still harvested, household stores carry the thorp for about two months at full rations, more than a year on half.
+   rv2-calm-thorp-2: 1.30 mo | hat is still harvested, household stores carry the thorp for about two months at full rations, about eight months on half.
+## underAWeekSaidWeeks
+   rv2-calm-thorp-9: 0.10 mo | No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the thorp for a few weeks at full rations, 
+   rv2-calm-thorp-23: 0.10 mo | No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the thorp for a few weeks at full rations, 
+   rv2-calm-hamlet-2: 0.10 mo | No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the hamlet for a few weeks at full rations,
