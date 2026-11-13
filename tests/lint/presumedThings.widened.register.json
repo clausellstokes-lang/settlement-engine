@@ -24431,8 +24431,23 @@
  },
  "strips": [
   [
+   "src/domain/autonomy/standingInstructions.js",
+   "rec",
+   "not-a-draw"
+  ],
+  [
    "src/domain/display/stateProse/decreeProse.js",
    "parts",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/display/stateProse/stateProseKernel.js",
+   "corpus",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/display/tradeListDisplay.js",
+   "filterDeclared(declared, { facts: () => factsOf(settlement), poolId: `trade-list:${options.side || '",
    "not-a-draw"
   ],
   [
@@ -24484,6 +24499,11 @@
    "src/generators/spatialGenerator.js",
    "[{ text: \"The Rat's Nest (tavern)\", needs: ['institution: tavern'] }, 'Blind Alley', 'The Warren (sl",
    "strip-before-draw"
+  ],
+  [
+   "src/pdf/sections/PowerStructure.jsx",
+   "settlement",
+   "not-a-draw"
   ],
   [
    "src/utils/generateWorldBook.js",

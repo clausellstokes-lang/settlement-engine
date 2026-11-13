@@ -35,7 +35,7 @@ import { liveInstitutionNames } from '../../src/domain/facts/institutions.js';
 import { FACT_DIMENSIONS, parseAtom } from '../../src/domain/facts/factVocabulary.js';
 import { REGISTERED_WORDS } from '../../src/domain/facts/registeredWords.js';
 import {
-  ARM1_NOT_PRINTED, ARM1_ROOTS, ARM1_RULE_BOOK, DOOR_ARGS, drawnRanges, keyedDeclarations, COURT_HOUSES, stripKey, stripSites, stripTree, REGISTER_REL, TAGGED_TABLE_FILES, THINGS, THING_IDS, WIDENED_REGISTER_REL, bankedKeys, corpusConfig, corpusSeeds,
+  ARM1_NOT_PRINTED, ARM1_ROOTS, ARM1_RULE_BOOK, DOOR_ARGS, drawnRanges, keyedDeclarations, COURT_HOUSES, stripKey, stripSites, stripTree, withOrdinals, REGISTER_REL, TAGGED_TABLE_FILES, THINGS, THING_IDS, WIDENED_REGISTER_REL, bankedKeys, corpusConfig, corpusSeeds,
   deniesExistence, hitKey, listFiles, negates, printedAbsent, printedOutOfTime, rowCovers, scanSource, scanTree, unlicensedServiceRows,
 } from './presumedThings.shared.mjs';
 
@@ -426,6 +426,28 @@ describe('ARM 3 — the strip ban (W2-B-DECLARE item 3; record 288, ruling 1, B 
       "const e = rows.map((l) => l.name);",
     ].join('\n');
     expect(stripSites('src/generators/planted.js', src).map((x) => x.receiver)).toEqual(['POOL', "[{ text: 'x', needs: ['river'] }]", 'rows']);
+  });
+
+  /**
+   * F5 (the third seat; REVIEW-W2B: "the strip ban catches 3 of 14 unwrap shapes, and its key lets a new strip on an
+   * already-banked receiver pass"). Every shape the review planted is a strip; a door's own draw and a map to another
+   * field are not; and the n-th strip of one receiver in a file is its own key (`R #n`), so it reds where only the first
+   * is banked. Red at 28222eea7 (3 of the 13 shapes caught; one key per receiver).
+   */
+  test('planted (F5): every unwrap shape the review named is a strip, and a second strip of a banked receiver is its own key', () => {
+    const shapes = [
+      'POOL.map(({ text }) => text)', 'POOL.map((l) => { return l.text; })', 'POOL.map(function (l) { return l.text; })',
+      "POOL.map((l) => l['text'])", 'POOL.map((l) => String(l.text))', "POOL.map((l) => (typeof l === 'string' ? l : l.text))",
+      'POOL.flatMap((l) => l.text)', 'pick(POOL).text', 'POOL.map((x) => textOf(x))', 'POOL.map(textOf, ctx)',
+      'POOL.map((l) => l.text)', 'POOL.map((l) => l?.text)', 'POOL.map(textOf)',
+    ];
+    for (const shape of shapes) expect(stripSites('src/generators/planted.js', `const a = ${shape};`).map((x) => x.receiver), shape).toEqual(['POOL']);
+    expect(stripSites('src/generators/planted.js', 'for (const l of POOL) out.push(l.text);').map((x) => x.receiver)).toEqual(['POOL']);
+    expect(stripSites('src/generators/planted.js', 'const d = drawDeclared(POOL, { draw, key }).text; const e = rows.map((l) => l.name);')).toEqual([]);
+    const two = withOrdinals(stripSites('src/domain/prose/grammarWalker.js', 'const a = pool.map((l) => l.text); const b = pool.map((l) => l.text);'));
+    expect(two.map((x) => stripKey(x.file, x.receiver))).toEqual(['src/domain/prose/grammarWalker.js :: pool', 'src/domain/prose/grammarWalker.js :: pool #2']);
+    expect(banked.has('src/domain/prose/grammarWalker.js :: pool')).toBe(true);
+    expect(banked.has('src/domain/prose/grammarWalker.js :: pool #2')).toBe(false);
   });
 
   test('anti-vacuity: the strip walk finds the twelve sites of the class table', () => {

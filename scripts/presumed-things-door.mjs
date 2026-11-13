@@ -143,7 +143,8 @@ if (mode === '--check' || mode === undefined) {
   let atBase = ''; try { atBase = execFileSync('git', ['show', `${base}:${file}`], { encoding: 'utf8', maxBuffer: 1 << 28 }); } catch { /* absent */ }
   const fold = (/** @type {string} */ x) => x.replace(/\s+/g, ' ');
   const mine = stripFresh.filter((x) => x.file === file);
-  const novel = mine.filter((x) => !fold(atBase).includes(x.receiver));
+  // the receiver stood at the base (its ordinal, ` #n`, counts the sites of one receiver: the count must have stood too)
+  const novel = mine.filter((x) => { const r = x.receiver.replace(/ #(\d+)$/, ''); const n = Number(x.receiver.match(/ #(\d+)$/)?.[1] || 1); return fold(atBase).split(r).length - 1 < n; });
   if (novel.length) { for (const x of novel) console.error(`NEW STRIP (not at ${base}): ${stripKey(x.file, x.receiver)}`); process.exit(1); }
   for (const x of mine) reg.strips.push([x.file, x.receiver, reason]);
   reg.strips.sort((p, q) => stripKey(p[0], p[1]).localeCompare(stripKey(q[0], q[1])));

@@ -515,29 +515,88 @@ export function scanTree(root) {
  */
 export const STRIP_ROOTS = Object.freeze(['src']);
 
-/** Is this `.map` argument an unwrap to text? @param {any} arg */
+/** The doors: a `.text` taken off their draw is the door's own, never a strip. */
+const STRIP_DOORS = new Set(['drawDeclared', 'filterDeclared', 'resolveDeclared']);
+const UNWRAP_FNS = new Set(['textOf', 'lineText']);
+
+/** @param {any} e @returns {any} the expression under parentheses, `as`/satisfies, non-null and `String(…)` */
+function bare(e) {
+  for (;;) {
+    if (ts.isParenthesizedExpression(e) || ts.isAsExpression(e) || ts.isNonNullExpression(e) || (ts.isSatisfiesExpression && ts.isSatisfiesExpression(e))) e = e.expression;
+    else if (ts.isCallExpression(e) && ts.isIdentifier(e.expression) && e.expression.text === 'String' && e.arguments.length === 1) e = e.arguments[0];
+    else return e;
+  }
+}
+
+/**
+ * Does this expression unwrap the line `p` to its text (W2-B-DECLARE third seat, F5: every shape the review planted)?
+ * `p.text`, `p?.text`, `p['text']`, `String(p.text)`, `textOf(p)`, `lineText(p)`, a conditional with an unwrapping
+ * branch (`typeof l === 'string' ? l : l.text`), or the destructured `text` itself.
+ * @param {any} e @param {string | null} p the parameter's name @param {boolean} destructured `({ text }) => text`
+ */
+function unwraps(e, p, destructured) {
+  e = bare(e);
+  if (destructured && ts.isIdentifier(e) && e.text === 'text') return true;
+  if (p && ts.isPropertyAccessExpression(e) && e.name.text === 'text' && ts.isIdentifier(bare(e.expression)) && bare(e.expression).text === p) return true;
+  if (p && ts.isElementAccessExpression(e) && ts.isStringLiteralLike(e.argumentExpression) && e.argumentExpression.text === 'text'
+    && ts.isIdentifier(bare(e.expression)) && bare(e.expression).text === p) return true;
+  if (p && ts.isCallExpression(e) && ts.isIdentifier(e.expression) && UNWRAP_FNS.has(e.expression.text)
+    && e.arguments.length >= 1 && ts.isIdentifier(e.arguments[0]) && e.arguments[0].text === p) return true;
+  if (ts.isConditionalExpression(e)) return unwraps(e.whenTrue, p, destructured) || unwraps(e.whenFalse, p, destructured);
+  return false;
+}
+
+/** Is this `.map` / `.flatMap` argument an unwrap to text (an arrow, a function expression, or `textOf` / `lineText`)? @param {any} arg */
 function isUnwrap(arg) {
-  if (ts.isIdentifier(arg)) return arg.text === 'textOf' || arg.text === 'lineText';
-  if (ts.isArrowFunction(arg) && arg.parameters.length === 1 && ts.isIdentifier(arg.parameters[0].name)) {
-    const p = arg.parameters[0].name.text;
-    const body = ts.isParenthesizedExpression(arg.body) ? arg.body.expression : arg.body;
-    return ts.isPropertyAccessExpression(body) && body.name.text === 'text' && ts.isIdentifier(body.expression) && body.expression.text === p;
+  if (ts.isIdentifier(arg)) return UNWRAP_FNS.has(arg.text);
+  if ((ts.isArrowFunction(arg) || ts.isFunctionExpression(arg)) && arg.parameters.length >= 1) {
+    const name = arg.parameters[0].name;
+    const p = ts.isIdentifier(name) ? name.text : null;
+    const destructured = ts.isObjectBindingPattern(name) && name.elements.some((el) => (el.propertyName || el.name).getText() === 'text');
+    if (!p && !destructured) return false;
+    const body = arg.body;
+    if (!ts.isBlock(body)) return unwraps(body, p, destructured);
+    const rets = [];
+    const visit = (n) => { if (ts.isReturnStatement(n) && n.expression) rets.push(n.expression); if (!ts.isFunctionLike(n)) ts.forEachChild(n, visit); };
+    ts.forEachChild(body, visit);
+    return rets.some((r) => unwraps(r, p, destructured));
   }
   return false;
 }
 
 /**
  * The strip-shaped calls of one source text: `{ file, receiver }`, the receiver's source text (whitespace
- * folded, its first 100 characters) being the site's identity. @param {string} rel @param {string} src
- * @returns {Array<{ file: string, receiver: string }>}
+ * folded, its first 100 characters) being the site's identity. The shapes (F5): `R.map(unwrap)` / `R.flatMap(unwrap)`
+ * with any extra argument (`map(textOf, ctx)`); `for (const l of R) … push(<unwrap of l>)`; and `pick(R).text`, a
+ * `.text` taken off any call but a door's, whose first argument is the receiver.
+ * @param {string} rel @param {string} src @returns {Array<{ file: string, receiver: string }>}
  */
 export function stripSites(rel, src) {
   const sf = ts.createSourceFile(rel, src, ts.ScriptTarget.Latest, true, ts.ScriptKind.JSX);
   /** @type {Array<{ file: string, receiver: string }>} */ const out = [];
+  const text = (/** @type {any} */ n) => n.getText(sf).replace(/\s+/g, ' ').slice(0, 100);
   const visit = (n) => {
-    if (ts.isCallExpression(n) && ts.isPropertyAccessExpression(n.expression) && n.expression.name.text === 'map'
-      && n.arguments.length === 1 && isUnwrap(n.arguments[0])) {
-      out.push({ file: rel, receiver: n.expression.expression.getText(sf).replace(/\s+/g, ' ').slice(0, 100) });
+    if (ts.isCallExpression(n) && ts.isPropertyAccessExpression(n.expression) && ['map', 'flatMap'].includes(n.expression.name.text)
+      && n.arguments.length >= 1 && isUnwrap(n.arguments[0])) {
+      out.push({ file: rel, receiver: text(n.expression.expression) });
+    } else if (ts.isForOfStatement(n) && ts.isVariableDeclarationList(n.initializer) && n.initializer.declarations.length === 1
+      && ts.isIdentifier(n.initializer.declarations[0].name)) {
+      const v = n.initializer.declarations[0].name.text;
+      let found = false;
+      const inner = (/** @type {any} */ m) => {
+        if (ts.isCallExpression(m) && ts.isPropertyAccessExpression(m.expression) && m.expression.name.text === 'push'
+          && m.arguments.some((a) => unwraps(a, v, false))) found = true;
+        if (!found && !ts.isFunctionLike(m)) ts.forEachChild(m, inner);
+      };
+      inner(n.statement);
+      if (found) out.push({ file: rel, receiver: text(n.expression) });
+    } else if (ts.isPropertyAccessExpression(n) && n.name.text === 'text' && ts.isCallExpression(bare(n.expression))) {
+      const call = bare(n.expression);
+      const callee = ts.isIdentifier(call.expression) ? call.expression.text : ts.isPropertyAccessExpression(call.expression) ? call.expression.name.text : '';
+      if (call.arguments.length >= 1 && callee && !STRIP_DOORS.has(callee) && !UNWRAP_FNS.has(callee)
+        && (ts.isIdentifier(call.arguments[0]) || ts.isArrayLiteralExpression(call.arguments[0]) || ts.isPropertyAccessExpression(call.arguments[0]))) {
+        out.push({ file: rel, receiver: text(call.arguments[0]) });
+      }
     }
     ts.forEachChild(n, visit);
   };
@@ -545,7 +604,18 @@ export function stripSites(rel, src) {
   return out;
 }
 
-/** @param {string} root @returns {Array<{ file: string, receiver: string }>} every strip-shaped call under STRIP_ROOTS */
+/**
+ * F5 (the third seat; REVIEW-W2B: "its key lets a new strip on an already-banked receiver pass"): a file's sites COUNT
+ * PER RECEIVER — the first site of a receiver keeps its receiver, the n-th is `receiver #n` — so a second strip of a
+ * banked receiver is a fresh key and reds. @param {Array<{ file: string, receiver: string }>} sites
+ * @returns {Array<{ file: string, receiver: string }>}
+ */
+export function withOrdinals(sites) {
+  /** @type {Map<string, number>} */ const seen = new Map();
+  return sites.map((x) => { const k = stripKey(x.file, x.receiver); const n = (seen.get(k) || 0) + 1; seen.set(k, n); return n === 1 ? x : { ...x, receiver: `${x.receiver} #${n}` }; });
+}
+
+/** @param {string} root @returns {Array<{ file: string, receiver: string }>} every strip-shaped call under STRIP_ROOTS, counted per receiver */
 export function stripTree(root) {
   /** @type {string[]} */ const files = [];
   const walk = (rel) => {
@@ -556,7 +626,7 @@ export function stripTree(root) {
     }
   };
   for (const r of STRIP_ROOTS) walk(r);
-  return files.flatMap((rel) => stripSites(rel, readFileSync(join(root, rel), 'utf8')));
+  return withOrdinals(files.flatMap((rel) => stripSites(rel, readFileSync(join(root, rel), 'utf8'))));
 }
 
 // ── ARM 2: the printed record ─────────────────────────────────────────────────────────────────
