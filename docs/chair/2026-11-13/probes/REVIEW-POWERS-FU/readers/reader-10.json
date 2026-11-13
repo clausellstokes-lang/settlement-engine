@@ -1,0 +1,922 @@
+[
+ {
+  "town": "rpf-thorp-under_siege-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+  "kind": "c",
+  "mechanism": "presumes normal times under a crisis in force",
+  "fact": "stress.type \"under_siege\"; economicState.foodSecurity.importCoverage 0, importPct 0; page: \"No cart has reached Kashipura in weeks\", \"nothing comes in by road\", \"No food comes into Kashipura by trade\"",
+  "source": "src/generators/economy/foodBalance.js:796",
+  "severity": "HIGH"
+ },
+ {
+  "town": "rpf-thorp-under_siege-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "Food Import-Dependent. No granary; two months in household stores.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Systems/Defense says \"household stores carry the thorp for about three months at full rations\"; record economicState.foodSecurity.storageMonths 1.5; also \"Import-Dependent\" while importPct 0 and the siege has cut every road",
+  "source": "src/domain/summary/tonightSheet.js:594",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-thorp-under_siege-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "In the siege, Suvarchala Acharya of Household Council is the one who would come to terms: holds the seat.",
+  "kind": "h",
+  "mechanism": "broken text",
+  "fact": "the cast reason string (\"holds the seat\", stress.cast.roles[0].reason) is glued on after a colon; \"of Household Council\" lacks its article",
+  "source": "src/domain/crisis/crisisHooks.js:101",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-thorp-under_siege-13",
+  "tab": "Systems/Power",
+  "sentence": "Dwellings (1-8)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name; institutions[].name \"Dwellings (1-8)\"",
+  "source": "institution name from src/data/institutionalCatalog.js printed raw",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-thorp-under_siege-13",
+  "tab": "Systems/Power",
+  "sentence": "Nobody at Kashipura is in a position to take Household Council's place; it has no rival, and nobody in the thorp is asking who comes next.",
+  "kind": "c",
+  "mechanism": "other: a settled state that is not so",
+  "fact": "powerStructure.factions[0].crisisNote \"Holds the title, but the decisions that matter are made elsewhere.\"; publicLegitimacy.governanceFractured true; seat holder card \"fewer people come when called\"; plot hook \"Someone is poisoning the ruler slowly\"; crisis: \"people argue over whether to hold out or give in\"",
+  "source": "src/data/dossierStateProse/power.generated.js:1517",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-thorp-under_siege-13",
+  "tab": "Systems/Power",
+  "sentence": "Each season it gets easier to buy an official at Kashipura: the thorp stays poor, the streets stay badly guarded, and nobody in the Household Council is mending either.",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "a 24-person thorp with no officials: Defense \"There is no watch\", \"Legal Infrastructure None\"; institutions are all communal (head-of-household consensus)",
+  "source": "src/data/dossierStateProse/power.generated.js:2984",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-thorp-under_siege-13",
+  "tab": "Systems/Power",
+  "sentence": "Prosperity -20",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "the machinery of the legitimacy rating printed as points (publicLegitimacy.breakdown.prosperity -20)",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-thorp-under_siege-13",
+  "tab": "Systems/Power",
+  "sentence": "Safety -20",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "publicLegitimacy.breakdown.safety -20 printed as points",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-thorp-under_siege-13",
+  "tab": "Systems/Power",
+  "sentence": "Defense -1",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "publicLegitimacy.breakdown.defense -1 printed as points",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-thorp-under_siege-13",
+  "tab": "Systems/Power",
+  "sentence": "Food -2",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "publicLegitimacy.breakdown.food -2 printed as points",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-thorp-under_siege-13",
+  "tab": "Systems/Power",
+  "sentence": "7Legitimacy Crisis",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "publicLegitimacy.score 7 printed as a raw score",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-thorp-under_siege-13",
+  "tab": "World/NPCs",
+  "sentence": "1 Key Figures?The people worth knowing and what each one holds.",
+  "kind": "h",
+  "mechanism": "broken text",
+  "fact": "plural over one person (npcs.length 1)",
+  "source": "src/components/new/tabs/NPCsTab.jsx:81",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-thorp-under_siege-13",
+  "tab": "World/NPCs",
+  "sentence": "Secret: Knows of a path over the hills that no one else uses, and guides people across it for a fee",
+  "kind": "a",
+  "mechanism": "names a house, a role, a force, a good or a place the town lacks",
+  "fact": "config.terrainType \"plains\" (Overview/Resources: \"Plains\"); no hills named anywhere in the record",
+  "source": "src/data/people/titleSecretsPresentations.js:1559",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-thorp-under_siege-13",
+  "tab": "World/Relationships",
+  "sentence": "No neighbours, ties between people or conflicts are recorded for this settlement.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "relationships [] and powerStructure.conflicts [] are empty, but history.currentTensions holds 2 (resource_scarcity, occupation_legacy) shown as \"Tensions & Conflicts\" on Overview and \"Current Tensions (2)\" on History",
+  "source": "src/components/new/tabs/RelationshipsTab.jsx:257",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "The Powers (4)▲",
+  "kind": "g",
+  "mechanism": "a count",
+  "fact": "the same view later prints \"The Powers (5)\"; powerStructure.factions has 5 (Religious Authorities left out of the first list)",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx:132",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Contests the seatMilitary14▲",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "powerStructure.factionRelationships Merchant Council/Military/Guard type \"subordinate\" stable: \"Military/Guard carries out what Merchant Council decides. The soldiers enforce the law; they do not make it.\"; its own line \"reports to the council\"",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "The criminals at Kaltenstadt are losing their grip on the hall: the town is doing well again and its streets are guarded.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "powerStructure.criminalCaptureState \"none\", no criminal faction; same view: \"The hall / Free of the criminals. ... no criminal power here is strong enough to push it.\"",
+  "source": "src/data/dossierStateProse/power.generated.js:3010",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "The seatKatharina Schröder, the senior guild master and Burgomaster",
+  "kind": "g",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "npcs[Katharina Schröder].institution.key \"Merchant guilds (3-8)\", and the Power tab lists \"Merchant guilds (3-8)\" as \"A commercial house of this power\" under Merchant Guilds, which \"Contests the seat\": the seat holder heads a house of the contending power",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Housing (75-650 households)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name (population 1553)",
+  "source": "institution name from src/data/institutionalCatalog.js printed raw",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Merchant guilds (3-8)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name",
+  "source": "institution name from src/data/institutionalCatalog.js printed raw",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Taverns (5-20)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name",
+  "source": "institution name from src/data/institutionalCatalog.js printed raw",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Craft guilds (5-15)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name",
+  "source": "institution name from src/data/institutionalCatalog.js printed raw",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Inn (multiple)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count qualifier",
+  "source": "institution name from src/data/institutionalCatalog.js printed raw",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Kaltenstadt is governed by the Merchant Council. Katharina Schröder, the senior guild master and Burgomaster, holds its seat. Kaltenstadt stands behind the Merchant Council. Prosperity and safety won it over. Two rival guilds are contesting control of the main trade route. Neither side will back down and Merchant Council is avoiding the question.",
+  "kind": "h",
+  "mechanism": "broken text",
+  "fact": "\"Merchant Council\" without its article (elsewhere \"the Merchant Council\"); powerStructure.recentConflict",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Prosperity +20",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "publicLegitimacy.breakdown.prosperity 20 printed as points",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Safety +15",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "publicLegitimacy.breakdown.safety 15 printed as points",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Defense +6",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "publicLegitimacy.breakdown.defense 6 printed as points",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "91Endorsed",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "publicLegitimacy.score 91 printed as a raw score",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Merchant guilds (3-8) · Burgomaster, first of Merchant Council",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "catalogue name with count range; and npcs[Katharina Schröder].institution.key \"Merchant guilds (3-8)\" is a house of Merchant Guilds (Power tab: \"A commercial house of this power\"), the power that \"Contests the seat\", while she holds the seat for Merchant Council",
+  "source": "src/components/new/npcComponents.jsx (card house line from npc.institution.key)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Leads a squad in quiet times, where the work is routine and the risks are low.",
+  "kind": "d",
+  "mechanism": "a size",
+  "fact": "npcs[Osterhild Gärtner]: title \"the garrison commander\", Barracks, influence \"high\", power 9, structuralRank \"head\", first of Military/Guard; Tonight sheet hooks her to \"the armoury\"",
+  "source": "src/generators/npcStructure.js:192",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Serves the faith under its leaders in quiet times.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "npcs[Anna Krüger].structuralRank \"head\", memberships Religious Authorities rank 1; same card: \"first of Religious Authorities\"; Tonight: \"Senior cleric\"",
+  "source": "src/generators/npcStructure.js:296",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Belongs to a lesser old family, behind the leading one.",
+  "kind": "c",
+  "mechanism": "other: a tradesperson framed as an old landed family",
+  "fact": "npcs[Udelhild Brauer] is \"the master smith\" (Blacksmiths), category \"other\", first of Craft Guilds; the town has no noble or family power (factions: Merchant Council, Merchant Guilds, Craft Guilds, Military/Guard, Religious Authorities); constraint speaks of \"its old claim\"",
+  "source": "src/generators/npcStructure.js:417",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Blacksmiths (3-10) · first of Craft Guilds",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name; the Power tab prints it \"Blacksmiths\"",
+  "source": "src/components/new/npcComponents.jsx (card house line from npc.institution.key)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Taverns (5-20) · second of Merchant Guilds",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name",
+  "source": "src/components/new/npcComponents.jsx (card house line from npc.institution.key)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Parish churches (2-5) · first of Religious Authorities",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name",
+  "source": "src/components/new/npcComponents.jsx (card house line from npc.institution.key)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Inn (multiple) · member of Merchant Council",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count qualifier",
+  "source": "src/components/new/npcComponents.jsx (card house line from npc.institution.key)",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Mills (2-5) · member of Merchant Council",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name; the Power tab prints it \"Mills\"",
+  "source": "src/components/new/npcComponents.jsx (card house line from npc.institution.key)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Bakers (5-15) · member of Craft Guilds",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name; the Power tab prints it \"Bakers\"",
+  "source": "src/components/new/npcComponents.jsx (card house line from npc.institution.key)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Butchers (3-8) · member of Craft Guilds",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name; the Power tab prints it \"Butchers\"",
+  "source": "src/components/new/npcComponents.jsx (card house line from npc.institution.key)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Craft guilds (5-15) · member of Craft Guilds",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name; also \"the senior craft-guild master\" (Joachim Jung) is an unranked member of low influence while the master smith Udelhild Brauer leads Craft Guilds",
+  "source": "src/components/new/npcComponents.jsx (card house line from npc.institution.key)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Waste nothing in Bowyer & fletcher while the supply is short.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "npcs[Ivo Schubert].goal.short fills {chain} with the chain id bowyer_fletcher rendered as \"Bowyer & fletcher\"; the house is \"Bowyers & fletchers (guild)\"",
+  "source": "src/data/people/goalFamilies.js:414",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "World/Relationships",
+  "sentence": "Every civic project Waltraud Krause announces has first been costed, quietly, in Katharina Schröder's counting-room. The public believes the order is the other way around.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Katharina Schröder holds the seat (Burgomaster); Waltraud Krause is the mint master, second of Merchant Council, influence \"low\": she does not announce civic projects with the seat holder as hidden financier",
+  "source": "src/data/npcData.js:1946",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "World/Relationships",
+  "sentence": "Moderate tensionMerchant Council vs Religious Authorities · A loan called in early",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Power tab Web: \"Merchant Council↓Religious Authorities stable / Religious Authorities answers to Merchant Council ... have no say in the hall\"; Religious Authorities power 4 \"Suppressed\"; record powerStructure.conflicts does list this pair (moderate)",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-calm-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "Weapons from the armoury have been disappearing in small quantities for months. The inventory matches, somehow.",
+  "kind": "a",
+  "mechanism": "names a house, a role, a force, a good or a place the town lacks",
+  "fact": "institutions[] has Barracks, Town watch, Warden's Lodge but no armoury",
+  "source": "src/data/npcData.js:1193",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "Systems/Power",
+  "sentence": "The Powers (4)▲",
+  "kind": "g",
+  "mechanism": "a count",
+  "fact": "the same view later prints \"The Powers (8)\"; powerStructure.factions has 8",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx:132",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "Systems/Power",
+  "sentence": "Grand Guild Consortium gives the orders and War Council carries them out; each needs the other to stay strong.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "powerStructure.conflicts: Grand Guild Consortium vs War Council, intensity \"high\", issue \"A ruling one power refuses to obey\" (World/Relationships \"High tension\"); War Council line on this view: \"Crown-appointed emergency body ... they play Grand Guild Consortium and Religious Authorities against each other\"",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "Systems/Power",
+  "sentence": "Church institutions hold direct temporal power; tithes, land, and courts are all ecclesiastical. The pastoral burden of wartime (soldiers praying before departure, families grieving) has made the institution indispensable in a way it wasn't before. The arcane orders are present but operate in the clergy's shadow. Questions of what is sanctioned magic and what is heresy remain deliberately unresolved.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Religious Authorities does not hold the seat (governingName \"Grand Guild Consortium\"; \"Contests the seat\"); \"Multiple court buildings\" are \"Held under this authority\" of Grand Guild Consortium and the chief magistrate Arslankhan Uighur is a Consortium member",
+  "source": "src/generators/power/rulingStructure.js:593",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "Systems/Power",
+  "sentence": "Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermediaries. Trade disruption and requisition are hurting the bottom line. The power is lobbying for compensation and receiving promises.",
+  "kind": "c",
+  "mechanism": "other: the merchant ruler's wartime line pinned on the criminal network",
+  "fact": "Thieves' Guild (category criminal, power 9) \"lobbying for compensation and receiving promises\" for requisition losses; the same sentence is the Grand Guild Consortium's",
+  "source": "src/generators/power/stressFactions.js:319",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "Systems/Power",
+  "sentence": "A formal consortium of the metropolis's most powerful guild masters holds civic authority; membership in the consortium is itself a prize. Trade disruption and requisition are hurting the bottom line. The power is lobbying for compensation and receiving promises.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Summary/Crisis (stress.summary): \"doing well out of it: army contracts pay, prices are high, and merchants with the right friends are getting rich\"; this line: \"Trade disruption and requisition are hurting the bottom line\"",
+  "source": "src/generators/power/stressFactions.js:319",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "Systems/Power",
+  "sentence": "The powerGrand Guild Consortium (significant)theocratic-aligned",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "factions[Grand Guild Consortium].modifier \"theocratic-aligned\", yet the Web says it is \"Tense\" with Religious Authorities (\"the two keep quarrelling over who decides what\") and Religious Authorities contests its seat",
+  "source": "src/generators/power/rulingStructure.js:163",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "Systems/Power",
+  "sentence": "Dokuz Fergana, the senior abbot (Major monasteries (5-10)) · brings protection and decisions · a silent partnership",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name; World/NPCs titles the same person \"Lady Abbess\"",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "Systems/Power",
+  "sentence": "Houses of worship (50-100+)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name",
+  "source": "institution name from src/data/institutionalCatalog.js printed raw",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "Systems/Power",
+  "sentence": "Major monasteries (5-10)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name",
+  "source": "institution name from src/data/institutionalCatalog.js printed raw",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "Systems/Power",
+  "sentence": "District markets (5-10)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name",
+  "source": "institution name from src/data/institutionalCatalog.js printed raw",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "Systems/Power",
+  "sentence": "Merchant guilds (50-100+)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name",
+  "source": "institution name from src/data/institutionalCatalog.js printed raw",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "Systems/Power",
+  "sentence": "Craft guilds (100-150+)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name",
+  "source": "institution name from src/data/institutionalCatalog.js printed raw",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "Systems/Power",
+  "sentence": "Housing (3500+ households)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name",
+  "source": "institution name from src/data/institutionalCatalog.js printed raw",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "Systems/Power",
+  "sentence": "Multiple garrisons",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "listed \"In the service of this command\" under War Council, but its holder Khurelbaatar Seljuk (stress.cast.levers: \"Multiple garrisons · held by Khurelbaatar Seljuk\") is first of The Garrison Bloc and no War Council member",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "Systems/Power",
+  "sentence": "Safety -12",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "publicLegitimacy.breakdown.safety -12 printed as points",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "Systems/Power",
+  "sentence": "Defense +7",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "publicLegitimacy.breakdown.defense 7 printed as points",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "Systems/Power",
+  "sentence": "Food -3",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "publicLegitimacy.breakdown.food -3 printed as points",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "Systems/Power",
+  "sentence": "42Contested",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "publicLegitimacy.score 42 printed as a raw score",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/NPCs",
+  "sentence": "Leads the faith while rivals fight over the seat, and both sides want its blessing.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Wershi Ilkhan is first of Religious Authorities, which itself \"Contests the seat\" (strongest power, 29) and is \"Tense\" with the ruler; his own want: \"Win one ally of Grand Guild Consortium over to the side of Religious Authorities\"",
+  "source": "src/generators/npcStructure.js:285",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/NPCs",
+  "sentence": "Leads a squad whose members are being pulled toward one side or the other in the fight for the seat.",
+  "kind": "d",
+  "mechanism": "a size",
+  "fact": "npcs[Narantuya Tanghud]: \"the watch commander\" of the Professional city watch of a 69,368-person metropolis, first of War Council; Tonight sheet and Crisis: \"leads the defence\" / \"leads the military\"",
+  "source": "src/generators/npcStructure.js:184",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/NPCs",
+  "sentence": "Holds a place in a crew that is pushing into new ground while the seat is fought over.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "npcs[Otgontuya Yorqin the Elder].structuralRank \"head\", Thieves' Guild rank 1, title \"the network's head\" (Power tab \"Thieves' Guild · led by Otgontuya Yorqin the Elder\")",
+  "source": "src/generators/npcStructure.js:339",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/NPCs",
+  "sentence": "Lady Abbess",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "npcs[Dokuz Fergana].title \"the senior abbot\"; Power tab and Relationships print \"the senior abbot\"",
+  "source": "src/data/faceHonorifics.js:177",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/NPCs",
+  "sentence": "Parish churches (50-100+) · first of Religious Authorities",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name",
+  "source": "src/components/new/npcComponents.jsx (card house line from npc.institution.key)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/NPCs",
+  "sentence": "Merchant guilds (50-100+) · second of Grand Guild Consortium",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name",
+  "source": "src/components/new/npcComponents.jsx (card house line from npc.institution.key)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/NPCs",
+  "sentence": "Major monasteries (5-10) · member of Religious Authorities",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name",
+  "source": "src/components/new/npcComponents.jsx (card house line from npc.institution.key)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/NPCs",
+  "sentence": "Craft guilds (100-150+) · member of Grand Guild Consortium",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name",
+  "source": "src/components/new/npcComponents.jsx (card house line from npc.institution.key)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/NPCs",
+  "sentence": "Butchers (3-8) · member of Grand Guild Consortium",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name; Power tab prints \"Butchers\"",
+  "source": "src/components/new/npcComponents.jsx (card house line from npc.institution.key)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/NPCs",
+  "sentence": "Bakers (5-15) · member of Grand Guild Consortium",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name; Power tab prints \"Bakers\"",
+  "source": "src/components/new/npcComponents.jsx (card house line from npc.institution.key)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/NPCs",
+  "sentence": "Mills (2-5) · member of Grand Guild Consortium",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name; Power tab prints \"Mills\"",
+  "source": "src/components/new/npcComponents.jsx (card house line from npc.institution.key)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/NPCs",
+  "sentence": "Blacksmiths (3-10) · member of Grand Guild Consortium",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name; Power tab prints \"Blacksmiths\"",
+  "source": "src/components/new/npcComponents.jsx (card house line from npc.institution.key)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/NPCs",
+  "sentence": "Carpenters (5-15) · member of Grand Guild Consortium",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "a catalogue name with a count range printed as a place name; Power tab prints \"Carpenters\"",
+  "source": "src/components/new/npcComponents.jsx (card house line from npc.institution.key)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/NPCs",
+  "sentence": "Thieves' guild (powerful) · member of Thieves' Guild",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue qualifier \"(powerful)\"; record title \"the guildmaster of thieves\" for an unranked member while Otgontuya Yorqin the Elder leads Thieves' Guild",
+  "source": "src/components/new/npcComponents.jsx (card house line from npc.institution.key)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/NPCs",
+  "sentence": "Peace Movement · first of Peace Movement",
+  "kind": "h",
+  "mechanism": "broken text",
+  "fact": "doubled office word: house and power are both \"Peace Movement\" (npcs[Zulzaga Arulad].institution.key \"Peace Movement\")",
+  "source": "src/components/new/npcComponents.jsx (card house line from npc.institution.key)",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Take on more hands for Fuel & Heating at the charcoal kilns, and keep them busy all season.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "{chain} slot filled with the economy chain catalogue label \"Fuel & Heating\"",
+  "source": "src/data/people/goalFamilies.js:466",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Take on more hands for Strategic Crossroads Toll at the customs house, and keep them busy all season.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "{chain} slot filled with the chain catalogue label \"Strategic Crossroads Toll\"",
+  "source": "src/data/people/goalFamilies.js:466",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Find whoever can still supply Leatherworking & Cordwaining, and pay them what they ask.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "{chain} slot filled with the chain catalogue label (chain leather_goods, status impaired)",
+  "source": "src/data/people/goalFamilies.js:413",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Ration what is left for Textiles & Cloth so the work lasts until new supply arrives.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "{chain} slot filled with the chain catalogue label (chain textiles, status impaired)",
+  "source": "src/data/people/goalFamilies.js:412",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/NPCs",
+  "sentence": "How they deal Happy to chat and to sell; knows what every ship and household in the area has been buying.",
+  "kind": "a",
+  "mechanism": "names a house, a role, a force, a good or a place the town lacks",
+  "fact": "config.terrainType \"hills\", tradeRouteAccess \"crossroads\"; no port, harbour or river in institutions[]",
+  "source": "src/data/people/titleSecretsPresentations.js:513",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/NPCs",
+  "sentence": "Secret: Has been buying stolen ship's stores at night and selling them in the shop the next morning",
+  "kind": "a",
+  "mechanism": "names a house, a role, a force, a good or a place the town lacks",
+  "fact": "inland hills crossroads; no port, harbour or river in institutions[]",
+  "source": "src/data/people/titleSecretsPresentations.js:507",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/NPCs",
+  "sentence": "Secret: Authorised the seizure of a rival's property as a 'war measure', on evidence they invented",
+  "kind": "c",
+  "mechanism": "other: an authority the person does not hold",
+  "fact": "npcs[Sübetei Shaybanid] is \"the master fishmonger\", unranked, influence \"low\": holds no office to authorise seizures",
+  "source": "src/data/stressInstitutionEffects.js:482",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/NPCs",
+  "sentence": "Secret: Has been under-declaring the settlement's stores to the requisition officers and selling the concealed transit to both armies",
+  "kind": "h",
+  "mechanism": "broken text",
+  "fact": "\"selling the concealed transit\" does not parse; the speaker is a collier (Charcoal burner)",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/Relationships",
+  "sentence": "High tensionGrand Guild Consortium vs War Council · A ruling one power refuses to obey",
+  "kind": "h",
+  "mechanism": "broken text",
+  "fact": "powerStructure.conflicts[0].issue \"A ruling one power refuses to obey\" (ungrammatical); also against the Power tab Web \"Grand Guild Consortium gives the orders and War Council carries them out\" (symbiotic, stable)",
+  "source": "src/generators/power/conflictIssues.js:229",
+  "severity": "HIGH"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/Relationships",
+  "sentence": "Jalayir Uzbek named Toquchar Kereit as successor in front of witnesses. The formal handover has not happened.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Toquchar Kereit holds the seat (Master of the Guilds, influence high, power 9); Jalayir Uzbek is an unranked master smith (influence low, power 1): the seat holder is cast as the smith's heir-in-waiting",
+  "source": "src/data/npcData.js:2059",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "World/Relationships",
+  "sentence": "the senior guild master · serious · the guildmaster of thieves",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Yanzhima Bukhara is an unranked member of Thieves' Guild; Power tab: \"Thieves' Guild · led by Otgontuya Yorqin the Elder, the network's head\"",
+  "source": "src/data/institutionalCatalog.js:1486",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "Wants to hold the line through the war with fewer hands than the line needs.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "npcs[Narantuya Tanghud].goal.short \"Find one person willing to speak against Dogshin Kipchak, and keep them safe until they do.\" (her NPC card); the Tonight line is a crisis-role pool line",
+  "source": "src/domain/summary/tonightSheet.js:93",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "Wartime. In Chinggisshari the crown's officers come for requisitions, and people watch closely what they take. Narantuya Tanghud leads the defence.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "her NPC card: \"Leads a squad\"; influence \"low\", power 3; Khurelbaatar Seljuk, the garrison commander (influence high, power 10), holds Multiple garrisons",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "The war turns on the blacksmiths, run by Jalayir Uzbek: if it gives way, Grand Guild Consortium loses most, because its own people feel the crisis first.",
+  "kind": "h",
+  "mechanism": "broken text",
+  "fact": "plural \"the blacksmiths\" taken up by \"it gives way\"; Jalayir Uzbek is one unranked master smith of low influence (institution \"Blacksmiths (3-10)\")",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-wartime-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "Their apprentice has been talking to a rival, and came back with an offer to buy them out.",
+  "kind": "c",
+  "mechanism": "other: a shop-owner hook on a garrison commander",
+  "fact": "npcs[Khurelbaatar Seljuk]: \"the garrison commander\", first of The Garrison Bloc; a garrison has no apprentice and cannot be bought out",
+  "source": "src/data/npcData.js:1327",
+  "severity": "LOW"
+ }
+]

@@ -1,0 +1,912 @@
+[
+ {
+  "town": "rpf-hamlet-famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Dwellings (5-25)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "institutions[] name 'Dwellings (5-25)': a catalogue name with a count range printed as a house",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-hamlet-famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Prosperity -20",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "powerStructure.publicLegitimacy.breakdown {\"prosperity\": -20, \"safety\": -20, \"defense\": -2, \"food\": -5}: the rating's point sums printed",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Safety -20",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "powerStructure.publicLegitimacy.breakdown {\"prosperity\": -20, \"safety\": -20, \"defense\": -2, \"food\": -5}: the rating's point sums printed",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Defense -2",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "powerStructure.publicLegitimacy.breakdown {\"prosperity\": -20, \"safety\": -20, \"defense\": -2, \"food\": -5}: the rating's point sums printed",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Food -5",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "powerStructure.publicLegitimacy.breakdown {\"prosperity\": -20, \"safety\": -20, \"defense\": -2, \"food\": -5}: the rating's point sums printed",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Tertullian Brutus is third in Free Elder Council and holds a half share in Military/Guard, and carries Military/Guard's requests to the two above.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "npcs[Tertullian Brutus].memberships Military/Guard share 0.5: the rating's share printed",
+  "source": "src/data/people/dmPowerLines.js:64",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Hadrian Severus, second in Free Elder Council, also holds a third share in Military/Guard, and that lends Military/Guard weight it would not have on its own.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "npcs[Hadrian Severus].memberships Military/Guard share 0.3: the rating's share printed",
+  "source": "src/data/people/dmPowerLines.js:65",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Criminal money is reaching the officials of Campoaltum one at a time, because the hamlet is poor and its streets are badly watched, and a bribe goes a long way here.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "powerStructure.criminalCaptureState 'none'; no criminal institution or power in institutions[]/factions[]; same tab: 'Free of the criminals. Nobody at the head of Free Elder Council answers to a criminal house, and no criminal power here is strong enough to push it.'",
+  "source": "src/data/dossierStateProse/power.generated.js:2973",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-famine-13",
+  "tab": "World/NPCs",
+  "sentence": "Heads an old family while the seat fails, and old names count for more when the seat counts for less.",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "Tertullian Brutus: npcs[].title 'the charter master', institution 'Adventurers' charter hall', category 'other' (the noble/other row); no old family or noble house in institutions[] or factions[]",
+  "source": "src/generators/npcStructure.js:406",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-hamlet-famine-13",
+  "tab": "World/NPCs",
+  "sentence": "Constraint: Old claims that would once have been laughed off are now watched by everyone looking for a grab at power.",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "Tertullian Brutus (charter master) has no old family or hereditary claim in the record; the line belongs to the old-family row",
+  "source": "src/generators/npcStructure.js:408",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-famine-13",
+  "tab": "World/Relationships",
+  "sentence": "Tertullian Brutus and Laelia Maximus share a council bloc and a list of enemies. They do not share their plans.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "relationships: same pair also 'Professional Rivalry' (bitter) 'Laelia Maximus and Tertullian Brutus want the same thing and compete hard for it'",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-famine-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "In the famine, Tertullian Brutus of Military/Guard takes the worst of it: the one with the least say in the house the crisis hits.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "stress.cast.stakes: Free Elder Council 'loses' (the house hit), Military/Guard 'gains'; Tertullian is rank 1 (first) of Military/Guard, rank 3 of Free Elder Council; Power tab 'Third · Tertullian Brutus, the charter master · also first in Military/Guard'",
+  "source": "src/domain/crisis/crisisCast.js:161",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-hamlet-famine-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "Wants to get the people of the Military/Guard a fair share of food before it runs out.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "NPC card: 'Wants Get the adventurers' charter hall excused from one tax or levy this season.' (npcs[].goal.short); Military/Guard is the power that gains by the famine (stress.cast.stakes)",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-succession_void+famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Dwellings (15-100)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "institutions[] 'Dwellings (15-100)': catalogue name with a count range",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-village-succession_void+famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Prosperity -20",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "powerStructure.publicLegitimacy.breakdown {prosperity:-20,safety:-20,defense:-6,food:-6}: rating points printed",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-succession_void+famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Safety -20",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "powerStructure.publicLegitimacy.breakdown {prosperity:-20,safety:-20,defense:-6,food:-6}: rating points printed",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-succession_void+famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Defense -6",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "powerStructure.publicLegitimacy.breakdown {prosperity:-20,safety:-20,defense:-6,food:-6}: rating points printed",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-succession_void+famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Food -6",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "powerStructure.publicLegitimacy.breakdown {prosperity:-20,safety:-20,defense:-6,food:-6}: rating points printed",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-succession_void+famine-13",
+  "tab": "Systems/Power",
+  "sentence": "At Lykorema the village's business goes to the whole Headman's Authority, and everybody has learned how long the answer takes.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "factions[Headman's Authority].desc 'A headman settles disputes and gives the orders here.'; Institutions 'Village headman: A single trusted figure runs things'; the line is the council variant",
+  "source": "src/data/dossierStateProse/power.generated.js:2069",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-village-succession_void+famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Criminal money is reaching the officials of Lykorema one at a time, because the village is poor and its streets are badly watched, and a bribe goes a long way here.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "criminalCaptureState 'none'; no criminal institution or power; same tab 'Free of the criminals ... no criminal power here is strong enough to push it.'",
+  "source": "src/data/dossierStateProse/power.generated.js:2973",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-succession_void+famine-13",
+  "tab": "World/NPCs",
+  "sentence": "Heads an old family while the seat fails, and old names count for more when the seat counts for less.",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "Konstantinos Chrysoberges: title 'the smith', institution 'Blacksmith', first of Grain Holders (category economy); no old family or noble house in the record",
+  "source": "src/generators/npcStructure.js:406",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-village-succession_void+famine-13",
+  "tab": "World/NPCs",
+  "sentence": "Constraint: Old claims that would once have been laughed off are now watched by everyone looking for a grab at power.",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "Konstantinos Chrysoberges (blacksmith) holds no old claim in the record",
+  "source": "src/generators/npcStructure.js:408",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-succession_void+famine-13",
+  "tab": "World/NPCs",
+  "sentence": "Goodwife",
+  "kind": "h",
+  "mechanism": "other: a woman's title on a man",
+  "fact": "npcs[Athanasios Iasites].gender 'male' (the midwife); card and Institutions title him 'Goodwife'",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-village-succession_void+famine-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Take on more hands for Brewing & Malting at the brewer's brewhouse, and keep them busy all season.",
+  "kind": "c",
+  "mechanism": "presumes normal times under a crisis in force",
+  "fact": "stress includes famine: 'No one can earn a normal living while the famine lasts' and brewing eats grain; also 'Brewing & Malting' is a catalogue chain name",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-village-succession_void+famine-13",
+  "tab": "World/NPCs",
+  "sentence": "Parish church · first of Religious Authorities",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Institutions and Power tab name the house 'House of worship' (Connection: Vicar Eudoxia Hyaleas); record institutions[] 'Parish church'",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-succession_void+famine-13",
+  "tab": "World/Relationships",
+  "sentence": "Headman · minor · the midwife",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Power tab: 'The seat Stands empty; the succession is unsettled. Acting Headman Achilles Bryennios, the miller, keeps the seat meanwhile.'; factions[Headman's Authority].modifiers ['vacant']",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-village-succession_void+famine-13",
+  "tab": "World/Relationships",
+  "sentence": "Athanasios Iasites took Eudoxia Hyaleas in as an apprentice and taught them the trade, the clients, and the names worth knowing.",
+  "kind": "g",
+  "mechanism": "other: a midwife taught a priest her trade",
+  "fact": "Athanasios is 'the midwife' (Midwife), Eudoxia 'the priest' (Parish church); different trades",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-succession_void+famine-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "Headman · holds the lever",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "seat vacant (factions[Headman's Authority].modifiers ['vacant']); Power tab and card call him 'Acting Headman' who 'keeps the seat meanwhile'",
+  "source": "",
+  "severity": "HIGH"
+ },
+ {
+  "town": "rpf-village-succession_void+famine-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "Succession Void and Famine. In Lykorema the food stores are under guard, and the guards are as hungry as everyone else. In the famine, Achilles Hyaleas takes the worst of it; in the succession crisis, Eudoxia Hyaleas is stirring it.",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "Defense tab: 'There is no watch here.', 'No organized force. Defense relies on individual armed citizens.'; Tonight 'Defence No walls and no standing force.'",
+  "source": "src/domain/crisis/crisisSummaryVantage.js:113",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-village-succession_void+famine-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "Wants to be heard by the seat before the famine takes what the people of the Headman's Authority have left.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "the seat stands empty (Power tab); only an acting keeper",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-succession_void+famine-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "In the succession crisis, Eudoxia Hyaleas of Religious Authorities is stirring it: already carries more weight than whoever holds the seat, and gains as the seat weakens.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "no one holds the seat; the keeper Achilles Bryennios has influence 'high' power 10 vs Eudoxia 'moderate' power 5 (true only power-to-power: 66 vs 13)",
+  "source": "src/domain/crisis/crisisCast.js",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "Royal Authority gives the orders and Occupation Authority carries them out; each needs the other to stay strong.",
+  "kind": "c",
+  "mechanism": "presumes normal times under a crisis in force",
+  "fact": "stress 'occupied': 'The forces of another power hold Glenglen, and its own officials take their orders.'; Occupation desc 'External administrative body; all significant decisions require approval or reversal.'; record narrative from the ordinary gov/military symbiotic rule",
+  "source": "src/generators/factionDynamics.js:398",
+  "severity": "HIGH"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "Religious Authorities answers to Royal Authority. Its priests look after their flocks and have no say in the hall.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "factions[Religious Authorities].desc 'Clergy and church institutions exercise meaningful civic influence ... they play Occupation Authority and Royal Authority against each other'; page marks it 'Contests the seat'",
+  "source": "src/generators/factionDynamics.js:460",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "Noble Families still have their titles, but merchant money and the hall's offices have taken most of their power.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "factions[Noble Families].desc 'Still ahead of merchant interests in real influence, for now.'; Noble Families 10 vs Craft Guilds 7",
+  "source": "src/generators/factionDynamics.js:534",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "Decisions at Glenglen are slow because the whole Royal Authority must agree, and once made they are rarely undone.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "factions[Royal Authority].desc 'The crown rules here directly. How far its word carries depends on the monarch's strength'; council-shape line under a monarchy",
+  "source": "src/data/dossierStateProse/power.generated.js:2060",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "The Powers (4)▲",
+  "kind": "e",
+  "mechanism": "a count",
+  "fact": "powerStructure.factions has 7; the same tab later prints 'The Powers (7)▲'",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "↳6 members · first Orlaith Fitzgerald · second Ian Ryan · third Donnchadh O'Halloran",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "Noble Families rank 2 Ian Ryan 'the miller' (Mills (2-5), category other), rank 3 Donnchadh O'Halloran 'the lanista' (Gladiatorial school, military): tradespeople, not nobles",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "↳3 members · first Baothghalach Flaherty · second Donnchadh O'Halloran · third Blathnaid Brennan",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Resistance desc 'Distributed cells ...; no formal hierarchy'; its three leaders run Garrison, Gladiatorial school and Mercenary quarter, which the same tab lists under Occupation Authority ('In the service of this command'); economicState.safetyProfile 'The garrison, now under occupier command'",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "Visitors to Glenglen are quietly told to stay polite to Occupation Authority as well as to Royal Authority, and nobody says why.",
+  "kind": "c",
+  "mechanism": "presumes normal times under a crisis in force",
+  "fact": "stress 'occupied': the occupation is open (street signs repainted, curfew checkpoints); everyone knows why",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "Aidan Clifford, the dean (Parish churches (10-30)) · brings protection and decisions · a silent partnership",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "npcs[Aidan Clifford].institution.key 'Parish churches (10-30)': catalogue name with count range",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "Merchant guilds (15-40)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "institutions[] catalogue name with a count range",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "Housing (500-4000 households)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "institutions[] catalogue name with a count range",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "Houses of worship (10-30)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "institutions[] catalogue name with a count range",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "Naomhán MacPherson heads Royal Authority and also holds a third share in Noble Families, so what Noble Families wants from Royal Authority goes straight to the top.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "npcs[Naomhán MacPherson].memberships Noble Families share 0.4 (shown as 'a third'): rating share printed",
+  "source": "src/data/people/dmPowerLines.js:65",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "Naomhán MacPherson, the head of Royal Authority, also holds a third share in Noble Families, and that lends Noble Families weight it would not have on its own.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "share 0.4 printed as 'a third share'",
+  "source": "src/data/people/dmPowerLines.js:65",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "Prosperity -10",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "powerStructure.publicLegitimacy.breakdown {prosperity:-10,safety:-5,defense:-2}: rating points printed",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "Safety -5",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "powerStructure.publicLegitimacy.breakdown {prosperity:-10,safety:-5,defense:-2}: rating points printed",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "Defense -2",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "powerStructure.publicLegitimacy.breakdown {prosperity:-10,safety:-5,defense:-2}: rating points printed",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Holds an office whose purse shrinks with everyone else's.",
+  "kind": "c",
+  "mechanism": "presumes normal times under a crisis in force",
+  "fact": "Gráinne MacQuarrie leads the occupier; stress.cast.stakes Occupation Authority 'gains'; viabilityNote 'The occupiers take the revenue'",
+  "source": "src/generators/npcStructure.js:125",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Constraint: Every office is after the same few coins; making this one needed means taking from the others.",
+  "kind": "c",
+  "mechanism": "presumes normal times under a crisis in force",
+  "fact": "the occupying governor takes the revenue (stress.viabilityNote) rather than competing for coin",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Find out whether Dervla MacCulloch has been meeting anyone from Occupation Authority in private.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Dervla MacCulloch is rank 2 of Occupation Authority (memberships) and Gráinne its rank 1: meeting her own power is no secret",
+  "source": "src/data/people/goalFamilies.js:211",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Merchant guilds (15-40) · second of Royal Authority",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "npcs[].institution.key is a catalogue name with a count range",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Parish churches (10-30) · first of Religious Authorities",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "npcs[].institution.key is a catalogue name with a count range",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Craft guilds (30-80) · first of Craft Guilds",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "npcs[].institution.key is a catalogue name with a count range",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Blacksmiths (3-10) · member of Craft Guilds",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "npcs[].institution.key is a catalogue name with a count range",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Bakers (5-15) · member of Craft Guilds",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "npcs[].institution.key is a catalogue name with a count range",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Butchers (3-8) · member of Craft Guilds",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "npcs[].institution.key is a catalogue name with a count range",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Carpenters (5-15) · member of Craft Guilds",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "npcs[].institution.key is a catalogue name with a count range",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Mills (2-5) · second of Noble Families",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "Ian Ryan: title 'the miller', category 'other', Noble Families rank 2; a tradesman, not a noble; also catalogue count range",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Gladiatorial school · second of Resistance Network · third of Noble Families",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "Donnchadh O'Halloran: title 'the lanista', category 'military', Noble Families rank 3: an impresario, not a noble",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Theaters · member of Noble Families · member of Royal Authority",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "Seamus Fitzgerald: 'the theatre manager', category other, in Noble Families (share 0.5)",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Vintner · member of Noble Families",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "Úna MacGregor: 'the vintner', category economy, in Noble Families",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Garrison · first of Resistance Network",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "economicState.safetyProfile.safetyDesc 'The garrison, now under occupier command'; Power tab lists Garrison under Occupation Authority 'In the service of this command'; yet its commander Baothghalach Flaherty heads the Resistance Network",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Mercenary quarter · third of Resistance Network · member of Royal Authority",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Mercenary quarter is listed under Occupation Authority's institutions on the Power tab",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Hidden allegianceanswers to Whisper market, through Fergus O'Flaherty",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Fergus O'Flaherty is 'the guildmaster of thieves' (Thieves' guild chapter); the Whisper market's broker is Fódla Fitzgerald; npcs[Aidan Clifford].allegiance.house 'Whisper market'",
+  "source": "src/components/new/npcComponents.jsx:436",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Hidden allegianceanswers to Whisper market, through Ultan Walsh",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Ultan Walsh is 'the black marketeer' (Black market), not of the Whisper market",
+  "source": "src/components/new/npcComponents.jsx:436",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Runs a smaller house while money is short and the bigger houses take more of the trade.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Tadhg Clifford is the senior craft-guild master, first of Craft Guilds (Craft guilds (30-80)): the largest craft house, not a smaller one",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Find the thing the dragon sent them to find, and tell no one why.",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "no dragon anywhere in the record (grep 'dragon' hits only this goal); Magical Capability 'Critical'",
+  "source": "src/data/people/goalFamilies.js:1027",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Bring the spirit the one gift it asked for, and ask for nothing more.",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "no spirit in the record; the record cannot rule one out",
+  "source": "src/data/people/goalFamilies.js:1068",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Find a new source of supply for Bowyer & fletcher before the stores run out.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "economicState.activeChains label (catalogue chain name) printed mid-sentence",
+  "source": "src/data/people/goalFamilies.js:471",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Look for a way to do more for Grain & Bread with the same hands.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "economicState.activeChains label (catalogue chain name) printed mid-sentence",
+  "source": "src/data/people/goalFamilies.js:471",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Get the most out of Iron & Metalwork while it runs well, and put the gains by.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "economicState.activeChains label (catalogue chain name) printed mid-sentence",
+  "source": "src/data/people/goalFamilies.js:471",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Waste nothing in Leatherworking & Cordwaining while the supply is short.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "economicState.activeChains label (catalogue chain name) printed mid-sentence",
+  "source": "src/data/people/goalFamilies.js:471",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Bring in from outside what Cloth Finishing & Clothing can no longer get close to home.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "economicState.activeChains label (catalogue chain name) printed mid-sentence",
+  "source": "src/data/people/goalFamilies.js:471",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Find a new source of supply for Boatbuilding & River Transport before the stores run out.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "economicState.activeChains label (catalogue chain name) printed mid-sentence",
+  "source": "src/data/people/goalFamilies.js:471",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Take on more hands for Furs & Pelts at the furrier's district, and keep them busy all season.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "economicState.activeChains label (catalogue chain name) printed mid-sentence",
+  "source": "src/data/people/goalFamilies.js:471",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Ration what is left for Textiles & Cloth so the work lasts until new supply arrives.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "economicState.activeChains label (catalogue chain name) printed mid-sentence",
+  "source": "src/data/people/goalFamilies.js:471",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Waste nothing in Textiles & Cloth while the supply is short.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "economicState.activeChains label (catalogue chain name) printed mid-sentence",
+  "source": "src/data/people/goalFamilies.js:471",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Take on more hands for Wine & Spirits at the brewery, and keep them busy all season.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "chain label 'Wine & Spirits' (chainId wine_spirits) printed; a brewery is not a winery",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Madam",
+  "kind": "h",
+  "mechanism": "other: a woman's title on a man",
+  "fact": "npcs[Gawain Gallagher].gender 'male', title 'the district madam'",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Frontman",
+  "kind": "h",
+  "mechanism": "other: a man's title on a woman",
+  "fact": "npcs[Eithne Treacy].gender 'female', title 'the front man'",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/Relationships",
+  "sentence": "the lord · crushing · the monarch",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Orlaith Fitzgerald gender 'female'; her card titles her 'Lady'; record title 'the lord'",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/Relationships",
+  "sentence": "Gráinne MacQuarrie has fallen on hard times, and the debt Seanchán Gallagher owes is now the only asset Gráinne MacQuarrie has.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Gráinne MacQuarrie: the occupying governor, influence 'high' power 8, first of Occupation Authority which 'gains' (stress.cast.stakes); 'The occupiers take the revenue'",
+  "source": "src/data/npcData.js:2204",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/Relationships",
+  "sentence": "Fiachra Sweetman's arrest record looks good because Aidan Farrell chooses which crimes get solved, and Aidan Farrell's silver pays for the favour.",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "Fiachra Sweetman is 'the lodge master' of the Veteran's lodge, no policing office; the watch is Dervla MacCulloch's (Professional city watch)",
+  "source": "src/data/npcData.js:1731",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/Relationships",
+  "sentence": "Gráinne MacQuarrie owes their place to Finn Lynch and has kept others from climbing the same way. The two of them remember it differently.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Gráinne holds her place as the occupier's governor (stress.cast face 'leads the occupying power'); Finn Lynch is a local master carpenter of Craft Guilds",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/Relationships",
+  "sentence": "Dervla MacCulloch has been offered Naomhán MacPherson's post by people who want Naomhán MacPherson gone.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Naomhán MacPherson's post is the throne (the monarch, Royal seat); a watch commander offered it is a stretch",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/Relationships",
+  "sentence": "Niamh MacIntyre made Naomhán MacPherson's career, and Naomhán MacPherson rarely says so.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Naomhán MacPherson is the monarch; Niamh MacIntyre the bath-keeper",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/Relationships",
+  "sentence": "Moderate tensionRoyal Authority vs Resistance Network · Precedence at public gatherings",
+  "kind": "c",
+  "mechanism": "presumes normal times under a crisis in force",
+  "fact": "Resistance desc 'Distributed cells ...; Currently cautious', stress summary 'a few fight back in secret'; a hidden resistance does not contest precedence at public gatherings",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/Relationships",
+  "sentence": "the district madam · close · the guildmaster of thieves",
+  "kind": "h",
+  "mechanism": "other: a woman's title on a man",
+  "fact": "Gawain Gallagher gender 'male'",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "World/Relationships",
+  "sentence": "the front man · crushing · the occupying governor",
+  "kind": "h",
+  "mechanism": "other: a man's title on a woman",
+  "fact": "Eithne Treacy gender 'female'",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-occupied-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "The occupation turns on the Elder Grove Council, run by Cnoc MacCormack: if it gives way, Royal Authority loses most, because its own people feel the crisis first.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "stress.cast.levers lists Elder Grove Council first, but it is a religious grove council run by the second of The Faithful Assembly; the occupation rests on Garrison/Citadel (Occupation Authority); record cannot settle",
+  "source": "",
+  "severity": "LOW"
+ }
+]

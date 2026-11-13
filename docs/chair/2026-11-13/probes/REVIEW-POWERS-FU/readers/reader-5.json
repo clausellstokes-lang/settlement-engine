@@ -1,0 +1,592 @@
+[
+ {
+  "town": "rpf-hamlet-succession_void-13",
+  "tab": "World/NPCs",
+  "sentence": "Heads the leading house in the trade while rivals fight over the seat; whoever wins can make or break it.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Sadeq al-Dimashqi keeps the empty seat (Power tab: 'Acting Headman Sadeq al-Dimashqi, the mine captain, keeps the seat meanwhile'; record npcs[Sadeq].role 'Headman', memberships Headman's Authority rank 1), yet his card's position casts him as a trade house outside the contest whom 'whoever wins can make or break'.",
+  "source": "src/generators/npcStructure.js:233",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-hamlet-succession_void-13",
+  "tab": "World/NPCs",
+  "sentence": "Constraint: Keeping friends on both sides means neither side fully trusts the house.",
+  "kind": "g",
+  "mechanism": "other: the seat keeper's constraint reads as a neutral house between two sides",
+  "fact": "Sadeq is first of Headman's Authority, one of the two sides (Power tab 'The ruling three of Headman's Authority / Acting Headman · Sadeq al-Dimashqi'); record activeConstraint is this line, settlementCondition 'contested'.",
+  "source": "src/generators/npcStructure.js:235",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-succession_void-13",
+  "tab": "World/NPCs",
+  "sentence": "Woodcutter's camp · second of The Highborn Circle · member of Headman's Authority",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "The second of the noble power The Highborn Circle (category 'noble') is a woodcutter's camp foreman: record npcs[Wajiha al-Aziz].title 'the camp foreman', institution 'Woodcutter's camp', category 'other', memberships The Highborn Circle rank 2; no noble title or house.",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-hamlet-succession_void-13",
+  "tab": "Systems/Power",
+  "sentence": "↳2 members · first Omar ibn Khalid · second Wajiha al-Aziz",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "Same as the card: The Highborn Circle (noble, 'Hereditary or institutional claim') has as its second a woodcutter's camp foreman (record npcs[Wajiha al-Aziz].title 'the camp foreman').",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-succession_void-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Keep the quarrel between The Highborn Circle and Headman's Authority from turning into open trouble this season.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Omar ibn Khalid is the crisis instigator (record stress.cast.roles[0] role 'instigator', 'gains as the seat weakens'); Tonight sheet says he 'Wants to keep the pressure on until the seat gives way, and keep their own hand out of sight.' The card says he wants to keep the quarrel from open trouble (record goal.short).",
+  "source": "src/data/people/goalFamilies.js:254",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-hamlet-succession_void-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "Wants to keep the pressure on until the seat gives way, and keep their own hand out of sight.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "World/NPCs card for the same Omar ibn Khalid: 'Wants Keep the quarrel between The Highborn Circle and Headman's Authority from turning into open trouble this season.' (record goal.short).",
+  "source": "src/domain/summary/tonightSheet.js:74",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-succession_void-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "In the succession crisis, Omar ibn Khalid of The Highborn Circle is stirring it: already carries more weight than whoever holds the seat, and gains as the seat weakens.",
+  "kind": "g",
+  "mechanism": "other: the instigator said to outweigh a seat-holder, but no one holds the seat and the instigator is the lesser figure",
+  "fact": "No one holds the seat (Power tab 'Stands empty'). Omar ibn Khalid is ● low influence (record influence 'low', power 3) while the keeper Sadeq al-Dimashqi is ●●● (influence 'high', power 10). Only at power level does The Highborn Circle (51) edge Headman's Authority (49).",
+  "source": "src/domain/crisis/crisisCast.js:165",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-succession_void-13",
+  "tab": "World/Relationships",
+  "sentence": "the lord · devoted · Headman",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Sadeq al-Dimashqi is labelled 'Headman' outright, but the seat is empty (Power tab: 'Stands empty; ... Acting Headman Sadeq al-Dimashqi ... keeps the seat meanwhile'; 'No one holds the seat at Mintarmahal'; record factions[Headman's Authority].modifiers ['vacant']).",
+  "source": "src/data/officeTitles.js:15",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-hamlet-succession_void-13",
+  "tab": "World/Relationships",
+  "sentence": "Headman · lifelong · the alewife",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Same: 'Headman' for Sadeq al-Dimashqi while the seat stands empty and he only keeps it as Acting Headman (record modifiers ['vacant']).",
+  "source": "src/data/officeTitles.js:15",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-hamlet-succession_void-13",
+  "tab": "World/Relationships",
+  "sentence": "the alewife · substantial · Headman",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Same: 'Headman' for Sadeq al-Dimashqi while the seat stands empty (Power tab 'No one holds the seat at Mintarmahal').",
+  "source": "src/data/officeTitles.js:15",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-hamlet-succession_void-13",
+  "tab": "World/Relationships",
+  "sentence": "Fariha al-Jabbar has found a new source for what Wajiha al-Aziz supplies. Wajiha al-Aziz has not been told.",
+  "kind": "g",
+  "mechanism": "other: the pair's terms reversed",
+  "fact": "The line above says 'Wajiha al-Aziz controls a vote Fariha al-Jabbar needs, and Fariha al-Jabbar controls a supply Wajiha al-Aziz needs.' Wajiha supplies a vote, not a good; Fariha is the supplier, so the turn is backwards.",
+  "source": "src/data/npcData.js:2101",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-succession_void-13",
+  "tab": "World/Relationships",
+  "sentence": "All (6)Leverage (1)",
+  "kind": "e",
+  "mechanism": "a count",
+  "fact": "Filter chip 'Leverage (1)' counts only the Outstanding Debt row; the list has two rows titled 'Mutual Leverage' (Wajiha al-Aziz/Fariha al-Jabbar, Ahmed al-Din/Fariha al-Jabbar; record relationships type 'political', typeName 'Mutual Leverage' x2, 'debtor_creditor' x1).",
+  "source": "src/components/new/tabs/RelationshipsTab.jsx:114",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-succession_void-13",
+  "tab": "World/NPCs",
+  "sentence": "6 Key Figures?The people worth knowing and what each one holds.1 high influence ·",
+  "kind": "h",
+  "mechanism": "broken text",
+  "fact": "Dangling separator: the count ends '1 high influence ·' with nothing after it (no moderate figures: record influence high 1, low 5).",
+  "source": "src/components/new/tabs/NPCsTab.jsx:83",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-hamlet-succession_void-13",
+  "tab": "Systems/Power",
+  "sentence": "Dwellings (5-25)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range (record institutions[].name 'Dwellings (5-25)').",
+  "source": "src/domain/dossier/powerSupport.js",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-hamlet-succession_void-13",
+  "tab": "Systems/Power",
+  "sentence": "No one holds the seat at Mintarmahal. The Headman's Authority governs without a head. Crime and weak defences have left the Headman's Authority's right to rule contested in Mintarmahal. The Highborn Circle is at odds with it. Nothing large is settled in the hall without bargaining with them first. The elder who kept the peace is gone. No one has stepped forward to take that role. Small disputes that would have been settled quickly are now sitting open.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "'No one has stepped forward to take that role' while the same view says 'Acting Headman Sadeq al-Dimashqi, the mine captain, keeps the seat meanwhile' (record recentConflict).",
+  "source": "src/generators/power/governanceNarrative.js:600",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-succession_void-13",
+  "tab": "Systems/Power",
+  "sentence": "The Headman's Authority at Mintarmahal worries less about rivals than about the hamlet turning on it.",
+  "kind": "c",
+  "mechanism": "other: says the ruler fears the hamlet more than rivals, during a succession crisis where a stronger rival contests the seat",
+  "fact": "Record stress.type 'succession_void'; The Highborn Circle power 51 > Headman's Authority 49, 'Contests the seat'; relation 'tense'. The record cannot settle the ruler's worries.",
+  "source": "src/data/dossierStateProse/power.generated.js:2078",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Zac Balam, the priest, holds the seat of the Priestly Guidance. The Priestly Guidance governs Chalich. Chalich tolerates the Priestly Guidance and no more. Weak defences is the reason. The church wants approval rights over who may trade and when. The village reeve disagrees.",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "There is no village reeve: record institutions has no reeve (governing institution is 'Priest (resident)'), no npc is a reeve, the only power is 'Priestly Guidance' (category 'religious', isGoverning true). The church IS the seat, so 'the church wants approval rights ... the reeve disagrees' presumes a lay ruler that does not exist. Also 'Weak defences is the reason' (bad agreement; record breakdown defense -1 against prosperity +8).",
+  "source": "src/data/powerSiblings.js:45; src/generators/power/governanceNarrative.js:458",
+  "severity": "HIGH"
+ },
+ {
+  "town": "rpf-village-calm-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "The church wants approval rights over who may trade and when. The village reeve disagrees.",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "No reeve in the record (institutions, npcs); the church governs (powerStructure.government 'Priestly Guidance', seat Zac Balam the priest).",
+  "source": "src/data/powerSiblings.js:45",
+  "severity": "HIGH"
+ },
+ {
+  "town": "rpf-village-calm-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "The ailing ruler wants a final errand completed before naming a successor.",
+  "kind": "c",
+  "mechanism": "other: presumes an ailing ruler and a pending succession in a calm town",
+  "fact": "Record history.historicalEvents[0] 'The Succession Crisis', yearsAgo 15, lastingEffects 'Succession now governed by a charter drafted in the aftermath'; stress null; seat held by Zac Balam (Power tab). Printed on the Tonight sheet as a present hook.",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-village-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Holds the seat, and people accept it; there is room to act, not just to hold on. Still the priest as well.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Power tab: 'Chalich tolerates the Priestly Guidance and no more.' (record publicLegitimacy label 'Tolerated', 57). The card says people accept it.",
+  "source": "src/generators/npcStructure.js:138",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Belongs to a lesser old family, behind the leading one.",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "No noble or old-family power or leading family appears in the record (only faction Priestly Guidance); the thatcher's (and innkeeper's, same line, dropped as a repeat) 'leading' old family is not on the page. 'Old families' exist only as a tension party, so LOW.",
+  "source": "src/generators/npcStructure.js:417",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-calm-13",
+  "tab": "World/Relationships",
+  "sentence": "Ahuitzotl Kab has found a new source for what Uinal Coh supplies. Uinal Coh has not been told.",
+  "kind": "g",
+  "mechanism": "other: the pair's terms reversed",
+  "fact": "Line above: 'Uinal Coh controls a vote Ahuitzotl Kab needs, and Ahuitzotl Kab controls a supply Uinal Coh needs.' Uinal supplies a vote; Ahuitzotl is the supplier.",
+  "source": "src/data/npcData.js:2101",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-calm-13",
+  "tab": "World/Relationships",
+  "sentence": "All (10)Allies (2)Leverage (4)",
+  "kind": "e",
+  "mechanism": "a count",
+  "fact": "'Leverage (4)' counts the four Outstanding Debt rows only; the 'Mutual Leverage' row (Uinal Coh/Ahuitzotl Kab) is left out (record relationships: debtor_creditor 4, political/Mutual Leverage 1).",
+  "source": "src/components/new/tabs/RelationshipsTab.jsx:114",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-calm-13",
+  "tab": "World/Relationships",
+  "sentence": "Zac Balam learned the work at Citlali Caan's side for seven years. Half of Zac Balam's clients first came through Citlali Caan's door.",
+  "kind": "g",
+  "mechanism": "other: the priest said to have learned his work and clients at a carpenter's side",
+  "fact": "Zac Balam is the priest (record title 'the priest', 'Parish church'); Citlali Caan is the carpenter. A priest learning 'the work' and taking 'clients' from a carpenter is a stretch.",
+  "source": "src/data/npcData.js:2055",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "10 Key Figures?The people worth knowing and what each one holds.1 high influence ·",
+  "kind": "h",
+  "mechanism": "broken text",
+  "fact": "Dangling separator: '1 high influence ·' with nothing after it (record influence high 1, low 9).",
+  "source": "src/components/new/tabs/NPCsTab.jsx:83",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-village-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Dwellings (15-100)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range (record institutions[].name 'Dwellings (15-100)').",
+  "source": "src/domain/dossier/powerSupport.js",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-village-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Pawnbroker",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Pawnbroker is listed behind Priestly Guidance ('Under the ruling power'), but its keeper Calli Balam is shown 'In no power (1)' on World/NPCs (record npcs[Calli Balam].memberships []).",
+  "source": "src/domain/dossier/powerSupport.js",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "Systems/Power",
+  "sentence": "The Powers (4)▲",
+  "kind": "e",
+  "mechanism": "a count",
+  "fact": "The same tab then heads 'The Powers (8)▲' over all eight factions (record powerStructure.factions length 8); '(4)' counts only the ruler and its three contenders.",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx:132",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "Systems/Power",
+  "sentence": "ContenderMerchant GuildsMerchantMinor▼",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Merchant Guilds is shown as a contender ('Contests the seat'), but the crisis puts it on neither side: record stress.cast.stakes Merchant Guilds 'split' / 'it could side with either camp' and its first, Akemi Im, is the 'waverer'; the Web on this tab has it 'Dependent' on the ruling council, 'Neither can afford to ruin the other'.",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "Systems/Power",
+  "sentence": "↳5 members · first Guangwei Yoon · second Bolin Yamaguchi · third Bao Sun",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "Noble Families' second and third are tradespeople: Bolin Yamaguchi 'the college master' (Bardic college, category 'other') and Bao Sun 'the vintner' (Vintner, category 'economy'); neither carries a noble title or house.",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "World/NPCs",
+  "sentence": "Bardic college · second of Noble Families · member of Arcane Orders",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "Second of the noble power is a bardic college master (record npcs[Bolin Yamaguchi].title 'the college master', institution 'Bardic college', memberships Noble Families rank 2); no noble title or house.",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "World/NPCs",
+  "sentence": "Vintner · third of Noble Families · member of Merchant Guilds",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "Third of the noble power is a vintner (record npcs[Bao Sun].title 'the vintner', institution 'Vintner', category 'economy', Noble Families rank 3); no noble title or house.",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "World/NPCs",
+  "sentence": "Mills (2-5) · member of Noble Families",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range (record institution 'Mills (2-5)'); also a miller counted as a member of Noble Families.",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "World/NPCs",
+  "sentence": "Theaters · member of Merchant Guilds · member of Noble Families",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "A theatre manager (impresario) as a member of Noble Families (record npcs[Ukon Zhao].title 'the theatre manager', no noble title or house). Member only, so LOW.",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "World/NPCs",
+  "sentence": "Merchant guilds (15-40) · Acting Master of the Guilds, first of Merchant Guild Council",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range (record institutions 'Merchant guilds (15-40)'). Also the seat keeper's house is listed on the Power tab as 'A commercial house of this power' under Merchant Guilds, which the Power tab shows as a contender ('Contests the seat').",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "World/NPCs",
+  "sentence": "Parish churches (10-30) · first of Religious Authorities",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range (record institution 'Parish churches (10-30)').",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "World/NPCs",
+  "sentence": "Craft guilds (30-80) · first of Craft Guilds",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range (record institution 'Craft guilds (30-80)').",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "World/NPCs",
+  "sentence": "Carpenters (5-15) · third of Craft Guilds",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range (record institution 'Carpenters (5-15)').",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "World/NPCs",
+  "sentence": "Blacksmiths (3-10) · second of Craft Guilds",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range (record institution 'Blacksmiths (3-10)').",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "World/NPCs",
+  "sentence": "Bakers (5-15) · member of Craft Guilds",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range (record institution 'Bakers (5-15)').",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "World/NPCs",
+  "sentence": "Butchers (3-8) · member of Craft Guilds",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range (record institution 'Butchers (3-8)').",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "World/NPCs",
+  "sentence": "Multiple criminal factions",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "The gang boss's house prints its raw catalogue name ('Multiple criminal factions', record institutions category 'Criminal'), while the Power tab lists the same house as 'Rival gangs' under the ruling power; the boss himself is 'In no power'.",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "Systems/Power",
+  "sentence": "Housing (500-4000 households)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range (record institution 'Housing (500-4000 households)').",
+  "source": "src/domain/dossier/powerSupport.js",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "Systems/Power",
+  "sentence": "Merchant guilds (15-40)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range (record institution 'Merchant guilds (15-40)').",
+  "source": "src/domain/dossier/powerSupport.js",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "Systems/Power",
+  "sentence": "A consortium of guild masters holds power; policy is shaped by trade interests and inter-guild bargaining. Three powers stand almost level here, and no one leads; every council vote has to be bargained for. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through council.",
+  "kind": "f",
+  "mechanism": "a figure against the record's",
+  "fact": "Says 'no one leads' and 'the craft guilds are close behind', but record factions: Noble Families 20 leads (its own line: 'Still ahead of merchant interests in real influence'), Merchant Guild Council 14, Craft Guilds 8 ('Suppressed').",
+  "source": "src/generators/power/factionStanding.js:68,94",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "Systems/Power",
+  "sentence": "The ruling class and the merchant class are the same people; commercial decisions are political decisions and civic access is purchased. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through council.",
+  "kind": "f",
+  "mechanism": "a figure against the record's",
+  "fact": "'The craft guilds are close behind' Merchant Guilds: record Merchant Guilds power 14, Craft Guilds 8 (powerLabel 'Suppressed'); factionRelationships ratio 1.86.",
+  "source": "src/generators/power/factionStanding.js:94",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "Systems/Power",
+  "sentence": "Well-organised craft guilds with established trade monopolies; a persistent civic voice that merchant houses must negotiate with, not ignore. Running close behind the merchant guilds in a sustained dispute over who sets the terms for finished goods.",
+  "kind": "f",
+  "mechanism": "a figure against the record's",
+  "fact": "'Running close behind the merchant guilds': record Craft Guilds 8 ('Suppressed') against Merchant Guilds 14; factionRelationships ratio 1.86.",
+  "source": "src/generators/power/factionStanding.js:108",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "World/Relationships",
+  "sentence": "the lord · minor · Master of the Guilds",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Yang Deng is labelled 'Master of the Guilds' outright, but the seat stands empty (Power tab: 'Acting Master of the Guilds Yang Deng ... keeps the seat meanwhile'; 'No one holds the seat at Xibu'; record Merchant Guild Council modifiers ['vacant']).",
+  "source": "src/data/officeTitles.js:25",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "World/Relationships",
+  "sentence": "Master of the Guilds · crushing · the master smith",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Same: 'Master of the Guilds' for Yang Deng while the seat stands empty (Power tab 'Stands empty').",
+  "source": "src/data/officeTitles.js:25",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "World/Relationships",
+  "sentence": "Yang Deng kept Guangwei Yoon's name out of a scandal that ruined two others. Guangwei Yoon has voted with Yang Deng ever since.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Guangwei Yoon, head of Noble Families, is the crisis instigator working against the governing house (record stress.cast instigator; Power tab 'The Noble Families are at odds with it'; Web 'Tense ... declining'), yet is said to have voted with the council's keeper Yang Deng ever since.",
+  "source": "src/data/npcData.js:2190",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "World/Relationships",
+  "sentence": "Haruto Zhao has fallen on hard times, and the debt Chang Guo owes is now the only asset Haruto Zhao has.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Haruto Zhao is ●●● high influence (record influence 'high', power 9, the company captain of the Mercenary quarter); 'hard times' with the debt as his 'only asset' does not fit.",
+  "source": "src/data/npcData.js:2204",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "World/Relationships",
+  "sentence": "Haruki Kimura has found a new source for what Sujin Chen supplies. Sujin Chen has not been told.",
+  "kind": "g",
+  "mechanism": "other: the pair's terms reversed",
+  "fact": "Line above: 'Sujin Chen controls a vote Haruki Kimura needs, and Haruki Kimura controls a supply Sujin Chen needs.' Sujin Chen supplies a vote; Haruki Kimura is the supplier.",
+  "source": "src/data/npcData.js:2101",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "World/Relationships",
+  "sentence": "Bixia Im has found a new source for what Jiangli Yoshida supplies. Jiangli Yoshida has not been told.",
+  "kind": "g",
+  "mechanism": "other: the pair's terms reversed",
+  "fact": "Line above: 'Jiangli Yoshida controls a vote Bixia Im needs, and Bixia Im controls a supply Jiangli Yoshida needs.' Jiangli supplies a vote; Bixia Im is the supplier.",
+  "source": "src/data/npcData.js:2101",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "World/Relationships",
+  "sentence": "Mei Guo learned the work at Li Matsumoto's side for seven years. Half of Mei Guo's clients first came through Li Matsumoto's door.",
+  "kind": "g",
+  "mechanism": "other: a butcher said to have learned the work and clients at a blade captain's side",
+  "fact": "Mei Guo is the master butcher (Butchers); Li Matsumoto is the blade captain (Hired blades). Different trades.",
+  "source": "src/data/npcData.js:2055",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "World/Relationships",
+  "sentence": "Sujin Hu took Zong Ryu in as an apprentice and taught them the trade, the clients, and the names worth knowing.",
+  "kind": "g",
+  "mechanism": "other: a prison warden said to have been apprenticed in a sage's trade",
+  "fact": "Zong Ryu is the prison warden (Large prison); Sujin Hu is the sage (Sage's quarter). Different trades.",
+  "source": "src/data/npcData.js:2053",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "World/Relationships",
+  "sentence": "All (74)Allies (16)Rivals (12)Enemies (3)Leverage (9)",
+  "kind": "e",
+  "mechanism": "a count",
+  "fact": "'Leverage (9)' counts only the nine Outstanding Debt rows; the 13 rows titled 'Mutual Leverage' are left out (record relationships: debtor_creditor 9, political/Mutual Leverage 13).",
+  "source": "src/components/new/tabs/RelationshipsTab.jsx:114",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "The succession crisis turns on the Elder Grove Council, run by Mei Yoon: if it gives way, Military/Guard loses most, because its own people feel the crisis first.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "The Elder Grove Council is listed on the Power tab under Merchant Guild Council ('Held under this authority'), and its holder Mei Yoon is in Religious Authorities and Merchant Guild Council, not Military/Guard. Military/Guard is a contender that 'no longer takes its orders'; 'its own people feel the crisis first' is the governing house's reason (record stress.cast.stakes).",
+  "source": "src/domain/crisis/crisisHooks.js:187",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "In the succession crisis, Guangwei Yoon of Noble Families is stirring it: already carries more weight than whoever holds the seat, and gains as the seat weakens.",
+  "kind": "g",
+  "mechanism": "other: the instigator said to outweigh a seat-holder, but no one holds the seat and the keeper outranks him",
+  "fact": "No one holds the seat (Power tab 'Stands empty'). Guangwei Yoon is ●● (record influence 'moderate', power 4); the keeper Yang Deng is ●●● (influence 'high', power 8). True only at power level (Noble Families 20 vs Merchant Guild Council 14).",
+  "source": "src/domain/crisis/crisisCast.js:165",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "Wants to keep the pressure on until the seat gives way, and keep their own hand out of sight.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "World/NPCs card for Guangwei Yoon: 'Wants Find out which members of Noble Families are still friendly with Merchant Guild Council, and why.' Record goal.long: 'Clear the debt to Yang Deng without anyone ever learning there was one.'",
+  "source": "src/domain/summary/tonightSheet.js:74",
+  "severity": "LOW"
+ }
+]

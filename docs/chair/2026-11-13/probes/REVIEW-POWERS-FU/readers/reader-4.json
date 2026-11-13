@@ -1,0 +1,892 @@
+[
+ {
+  "town": "rpf-hamlet-politically_fractured-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "In the famine, Maxim Morozov of Headman's Authority takes the worst of it: the one with the least say in the house the crisis hits.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "npcs Maxim Morozov influence \"high\", power 10 vs Kazimir Sokolov influence \"low\", power 1; NPC card shows 'Maxim Morozov●●●' (the only high-influence figure) and 'Kazimir Sokolov●'. The 'least say' is picked by rank order (second of two), not by weight.",
+  "source": "src/domain/crisis/crisisCast.js:551 (membersOf(...).reverse() + CAST_REASONS.bruntLeast)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-hamlet-politically_fractured-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "Wants to be heard by the seat before the famine takes what the people of the Headman's Authority have left.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Maxim Morozov's card: 'Wants Catch Panayot Petrov with something from the fence's people on them, in front of witnesses.' (npcs goal.short); he is second of the ruling two and in alliance/leverage with the seat-holder, so 'to be heard by the seat' is a stretch",
+  "source": "src/domain/summary/tonightSheet.js:80",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "The Headman's Authority at Kalitsy worries less about rivals than about the hamlet turning on it.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "stress politically_fractured in force; powerStructure.factions The Independent Bloc power 64 vs Headman's Authority 36; same tab: 'The challenger at Kalitsy is now the stronger side' and 'Holds the title; the decisions that matter are made by The Independent Bloc.'",
+  "source": "src/data/dossierStateProse/power.generated.js:2078 ('council' shape applied to a headman)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-hamlet-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Dwellings (5-25)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range (institutions[].name \"Dwellings (5-25)\")",
+  "source": "catalogue name from src/data (institution catalogue)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-hamlet-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Fence (word of mouth)",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "listed under the ruling power ('Under the ruling power, with no power of its own kind here') while the DM block says 'Free of the criminals... no criminal power here is strong enough to push it' and the fence Panayot Petrov is 'In no power' (npcs memberships none; institution veiled)",
+  "source": "src/domain/dossier/powerSupport.js:106",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Criminal money is reaching the officials of Kalitsy one at a time, because the hamlet is poor and its streets are badly watched, and a bribe goes a long way here.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "powerStructure.criminalCaptureState \"none\"; same tab DM block: 'Free of the criminals. Nobody at the head of Headman's Authority answers to a criminal house'. (Prose is the 'capture pressure ADVANCING' variant, so may be read as pressure only.)",
+  "source": "src/data/dossierStateProse/power.generated.js:2973",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Prosperity -20",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "the machinery of a rating (points/shares): powerStructure.publicLegitimacy.breakdown / factions[].power printed raw",
+  "source": "src/components/new/tabs/power/",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Safety -20",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "the machinery of a rating (points/shares): powerStructure.publicLegitimacy.breakdown / factions[].power printed raw",
+  "source": "src/components/new/tabs/power/",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Defense -2",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "the machinery of a rating (points/shares): powerStructure.publicLegitimacy.breakdown / factions[].power printed raw",
+  "source": "src/components/new/tabs/power/",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Food -5",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "the machinery of a rating (points/shares): powerStructure.publicLegitimacy.breakdown / factions[].power printed raw",
+  "source": "src/components/new/tabs/power/",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "3Legitimacy Crisis",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "the machinery of a rating (points/shares): powerStructure.publicLegitimacy.breakdown / factions[].power printed raw",
+  "source": "src/components/new/tabs/power/",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "64",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "the machinery of a rating (points/shares): powerStructure.publicLegitimacy.breakdown / factions[].power printed raw",
+  "source": "src/components/new/tabs/power/",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "36",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "the machinery of a rating (points/shares): powerStructure.publicLegitimacy.breakdown / factions[].power printed raw",
+  "source": "src/components/new/tabs/power/",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Contests the seatOther64▲",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "category identifier 'Other' (factions[0].category \"other\") and a raw share printed",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-hamlet-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "The Independent Bloc · first of The Independent Bloc",
+  "kind": "h",
+  "mechanism": "other: doubled office words",
+  "fact": "the power name stands in the house slot and repeats in the rank line (npcs Bozhidar Volkov institution.kind \"power\", key \"The Independent Bloc\")",
+  "source": "src/domain/people/cardPowers.js",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "Headman's Authority gives the orders and Occupation Authority carries them out; each needs the other to stay strong.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "stress[0].type \"occupied\": summary 'The forces of another power hold Glenham, and its own officials take their orders'; Tonight sheet: 'The occupier's orders come through Moira Brennan.'; Defense: 'Glenham's defence answers to its occupiers now'. The Web inverts who commands.",
+  "source": "src/generators/factionDynamics.js:398 (gov/military ratio 0.83 -> symbiotic, occupation ignored)",
+  "severity": "HIGH"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "External administrative body; all significant decisions require approval or reversal. Locally hated. Their actual power depends on how much force they can bring here, which varies. They operate in the shadow of Headman's Authority but not comfortably: they are waiting for a chance to push back.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "the occupier is said to operate in the shadow of the local headman; stress occupied: 'its own officials take their orders'; stress cast face Moira Brennan 'leads the occupying power'",
+  "source": "src/generators/power/factionStanding.js:56",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "ContenderOccupation AuthorityMilitarySignificant▼",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "the occupying power is filed as a Contender that 'Contests the seat' (and Headman's Authority '↑ Holds power' 55 vs 45) while stress occupied says the occupier holds Glenham and the local officials take its orders",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "At Glenham the village's business goes to the whole Headman's Authority, and everybody has learned how long the answer takes.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "same tab: 'A headman settles disputes and gives the orders here.' (factions Headman's Authority desc); and under occupation business goes to the occupier",
+  "source": "src/data/dossierStateProse/power.generated.js:2069 ('council' shape)",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "Glenham is governed by the Headman's Authority. Brian Murphy, the beekeeper and Headman, holds its seat. In Glenham, the Headman's Authority's right to rule is contested. Poverty and crime are the reason. An occupying officer arrested a local elder for \"seditious speech\". Headman's Authority filed a formal protest. The protest was returned unread.",
+  "kind": "c",
+  "mechanism": "presumes normal times under a crisis in force",
+  "fact": "legitimacy contested is put down to 'Poverty and crime' alone while stress occupied is in force (stability \"Suppressed (under occupation: resistance simmers)\"; 'its own officials take their orders')",
+  "source": "src/domain/display/governanceAccount.js",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "Dwellings (15-100)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range (institutions[].name \"Dwellings (15-100)\")",
+  "source": "institution catalogue",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "Prosperity -10",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "the machinery of a rating (points/shares): powerStructure.publicLegitimacy.breakdown / factions[].power printed raw",
+  "source": "src/components/new/tabs/power/",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "Safety -5",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "the machinery of a rating (points/shares): powerStructure.publicLegitimacy.breakdown / factions[].power printed raw",
+  "source": "src/components/new/tabs/power/",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "Defense -3",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "the machinery of a rating (points/shares): powerStructure.publicLegitimacy.breakdown / factions[].power printed raw",
+  "source": "src/components/new/tabs/power/",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "Food -2",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "the machinery of a rating (points/shares): powerStructure.publicLegitimacy.breakdown / factions[].power printed raw",
+  "source": "src/components/new/tabs/power/",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "30Contested",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "the machinery of a rating (points/shares): powerStructure.publicLegitimacy.breakdown / factions[].power printed raw",
+  "source": "src/components/new/tabs/power/",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "55",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "the machinery of a rating (points/shares): powerStructure.publicLegitimacy.breakdown / factions[].power printed raw",
+  "source": "src/components/new/tabs/power/",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "Systems/Power",
+  "sentence": "45",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "the machinery of a rating (points/shares): powerStructure.publicLegitimacy.breakdown / factions[].power printed raw",
+  "source": "src/components/new/tabs/power/",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Holds an office whose purse shrinks with everyone else's.",
+  "kind": "c",
+  "mechanism": "presumes normal times under a crisis in force",
+  "fact": "Moira Brennan is the occupying governor (npcs title \"the occupying governor\"); stress occupied viabilityNote: 'The occupiers take the revenue, and local offices work only under their eye.' Record structuralPosition was dealt from settlementCondition \"economic_stress\" as if she were a local officer",
+  "source": "src/generators/npcStructure.js:125",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Constraint: Every office is after the same few coins; making this one needed means taking from the others.",
+  "kind": "c",
+  "mechanism": "presumes normal times under a crisis in force",
+  "fact": "same: the occupier takes the revenue (stress occupied viabilityNote); her office is not one of the town's competing offices",
+  "source": "src/generators/npcStructure.js:127",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Occupation Authority · first of Occupation Authority",
+  "kind": "h",
+  "mechanism": "other: doubled office words",
+  "fact": "the power name stands in the house slot and repeats in the rank line (npcs Moira Brennan institution.kind \"power\")",
+  "source": "src/domain/people/cardPowers.js",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Bowyer & fletcher · second of Occupation Authority · member of Headman's Authority",
+  "kind": "c",
+  "mechanism": "other: a local tradesperson ranked second in the foreign occupying power",
+  "fact": "record agrees (Emmet Brennan memberships Occupation Authority rank 2 share 0.4, Headman's Authority share 0.6), but a village bowyer as second officer of an 'External administrative body' reads false; the record cannot settle intent",
+  "source": "src/domain/people/cardPowers.js",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Alewife",
+  "kind": "h",
+  "mechanism": "other: a female title on a male person",
+  "fact": "npcs Lorcan Hayes gender \"male\", title \"the alewife\"",
+  "source": "src/data/faceHonorifics.js:49",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "Druid",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Niamhan Ward's card title 'Druid' over 'Parish church'; record title \"the priest\", institution \"Parish church\"; Relationships 'the priest · moderate · the miller'; Tonight 'the priest · Senior cleric'",
+  "source": "src/data/faceHonorifics.js",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "World/NPCs",
+  "sentence": "How they deal Asks why you are in the marsh.",
+  "kind": "a",
+  "mechanism": "names a resource, a good or a chain state that is not so",
+  "fact": "config.terrainType \"forest\"; nearbyResources [grain_fields, ancient_grove, precious_metals, managed_forest, defended_pass] — no marsh/wetland on the record (a 'Wildfowler' institution exists, so LOW)",
+  "source": "src/data/people/titleSecretsPresentations.js:2238",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "World/Relationships",
+  "sentence": "Moira Brennan brings the votes and Brian Murphy brings the money. The alliance is three years old and has won every vote it needed.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Brian Murphy's card: 'Holds the seat while money is short...' / 'Cannot pay for the repairs and relief people want without coin the place does not have.'; the occupying governor 'bringing votes' to a headman's village under occupation",
+  "source": "src/data/npcData.js (pragmatic alliance lines)",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "World/Relationships",
+  "sentence": "Clíodhna Fitzgerald and Lorcan Hayes will both present proposals at the next council session. Only one will be accepted.",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "government \"Headman's Authority\" ('A headman settles disputes and gives the orders here'); no council institution (institutions[] has none); town under occupation",
+  "source": "src/data/npcData.js:2040 (excludes 'ruler: occupier' but this town's ruler is the headman)",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "World/Relationships",
+  "sentence": "the carpenter · bitter · the alewife",
+  "kind": "h",
+  "mechanism": "other: a female title on a male person",
+  "fact": "npcs Lorcan Hayes gender \"male\", title \"the alewife\"",
+  "source": "src/data/faceHonorifics.js:49",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "World/Relationships",
+  "sentence": "the alewife · personal · the carpenter",
+  "kind": "h",
+  "mechanism": "other: a female title on a male person",
+  "fact": "npcs Lorcan Hayes gender \"male\", title \"the alewife\"",
+  "source": "src/data/faceHonorifics.js:49",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-village-occupied-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "Defence No walls and no standing force.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "under occupation: Defense tab 'Glenham's defence answers to its occupiers now: the arms in the village are theirs'; 'Occupation authorities enforce the curfew at the checkpoints'. Record defence has no local force, so LOW",
+  "source": "src/domain/summary/tonightSheet.js",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "The seatStands empty; the succession is unsettled. Acting Governor Iulia Laenas keeps the seat meanwhile.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "the keeper of the empty seat is also ranked second in Noble Families (npcs Iulia Laenas memberships Noble Families rank 2), a power that 'Contests the seat' (same tab) and the instigator's own house",
+  "source": "src/domain/people/seatKeeper.js:91",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Acting Governor · Iulia Laenas, the governor · also second in Noble Families · answers to Front businesses through Vibia Strabo",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "seat empty ('Stands empty; the succession is unsettled') yet she is styled 'the governor'; she is second in Noble Families, which 'Contests the seat'; and 'Front businesses' is fronted by Nerva Serranus (npcs institution.key \"Front businesses\", Merchant Guilds member), not by Vibia Strabo (institution \"Thieves' guild chapter\")",
+  "source": "src/components/new/tabs/WhoRunsThisTownPanel.jsx:57-58",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "No one holds the seat at Portacastra. The Noble Governorship governs without a head. Prosperity and strong defences have earned the Noble Governorship the approval of Portacastra. The Merchant Guilds no longer take its orders. The Religious Authorities and the Noble Families are at odds with it. The hall still gives its orders, but it can no longer make them hold alone. The Independent Bloc claims the right to rule by other means, and no longer comes to the hall's meetings. Each side now makes its own decisions, and within days the others overturn them.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "'governs without a head' vs same tab 'Acting Governor Iulia Laenas keeps the seat meanwhile', 'Acting Governor · Iulia Laenas' at the head of the ruling three, and 'The head of Noble Governorship answers to Front businesses.' (npcs Iulia Laenas structuralRank \"head\", Noble Governorship rank 1)",
+  "source": "src/domain/display/governanceAccount.js:290",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Partly in criminal hands. The head of Noble Governorship answers to Front businesses.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "same tab: 'The Noble Governorship governs without a head.'; and the handler is Vibia Strabo of the Thieves' guild chapter, not the Front businesses' own face Nerva Serranus",
+  "source": "src/data/people/dmPowerLines.js:201",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "The Powers (4)▲",
+  "kind": "e",
+  "mechanism": "a count",
+  "fact": "eight powers on the record (powerStructure.factions length 8) and the same tab's second heading reads 'The Powers (8)▲'",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx:132 vs :265",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "International merchant houses controlling port licences and import flows; their political leverage is structural, not merely financial. Three powers stand almost level here, and no one leads; every council vote has to be bargained for. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through council.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "factions power: Noble Families 29, Religious Authorities 16, Merchant Guilds 15, Arcane 10 — Noble Families clearly leads (same page: 'Still ahead of merchant interests in real influence'); government is a Noble Governorship, not a council; this text is The Guild Alliance's (power 9, led by an innkeeper) copied from Merchant Guilds",
+  "source": "src/generators/power/factionStanding.js:68",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "International merchant houses controlling port licences and import flows; their political leverage is structural, not merely financial. Three powers stand almost level here, and no one leads; every council vote has to be bargained for.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "factions power: Noble Families 29 leads Religious 16 / Merchant 15 / Arcane 10; no council governs (government \"Noble Governorship\", 'A noble governor rules by hereditary or royal appointment')",
+  "source": "src/generators/power/factionStanding.js:68",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Hereditary landowners whose land rights and military obligations are structurally embedded in governance here; the council works alongside them, not over them. The succession crisis has transformed latent noble power into active leverage. Every claimant needs their backing. Still ahead of merchant interests in real influence, for now. They know the gap is narrowing and are arranging marriages accordingly.",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "no council governs (government \"Noble Governorship\"); the six Noble Families members are a lord, the acting governor, a theatre manager, a miller, a lanista and a vintner (npcs memberships) — only one landed noble",
+  "source": "src/generators/power/rulingStructure.js:506",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "↳6 members · first Publicola Maximus · second Iulia Laenas · third Drusilla Pacuvius",
+  "kind": "c",
+  "mechanism": "other: a tradesperson ranked in a noble power; the seat's keeper ranked in a contender",
+  "fact": "Drusilla Pacuvius is 'the theatre manager' (npcs title, institution \"Theaters\", also member of The Guild Alliance) — an impresario as third of the noble houses; Iulia Laenas is the acting keeper of the empty seat yet second of a power that 'Contests the seat'",
+  "source": "src/domain/people/cardPowers.js",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "handled by Vibia Strabo, the guildmaster of thieves (Thieves' guild chapter)",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "printed under 'Front businesses', but Front businesses' own face is Nerva Serranus 'the front man' (npcs institution.key \"Front businesses\", a Merchant Guilds member); Vibia Strabo's house is the Thieves' guild chapter (npcs[].allegiance handler drawn from another house)",
+  "source": "src/components/new/tabs/WhoRunsThisTownPanel.jsx:71; src/domain/people/allegiance.js:448",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "handled by Walpurga Calvus, the network's spider (Underground network)",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "printed under 'Thieves' guild chapter', whose own face is Vibia Strabo 'the guildmaster of thieves'; Walpurga Calvus's house is the Underground network",
+  "source": "src/components/new/tabs/WhoRunsThisTownPanel.jsx:71; src/domain/people/allegiance.js:448",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Iulia Laenas, the governor (Noble governor) · brings protection and decisions · a silent partnership",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "seat 'Stands empty'; she is the Acting Governor keeping it, not 'the governor'",
+  "source": "src/components/new/tabs/WhoRunsThisTownPanel.jsx",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "The Noble Governorship at Portacastra has left obvious decisions untaken because its members cannot agree on them.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "same tab: 'A noble governor rules by hereditary or royal appointment; the settlement has little self-governance.' (council shape on a one-ruler government); the decisions wait on the empty seat ('Big decisions wait for a new leader')",
+  "source": "src/data/dossierStateProse/power.generated.js:2087",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Houses of worship (10-30)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range (institutions[].name)",
+  "source": "institution catalogue",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Housing (500-4000 households)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range (institutions[].name)",
+  "source": "institution catalogue",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Merchant guilds (15-40)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range (institutions[].name)",
+  "source": "institution catalogue",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Craft guilds (30-80)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range (institutions[].name)",
+  "source": "institution catalogue",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Prosperity +15",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "the machinery of a rating (points/shares): powerStructure.publicLegitimacy.breakdown / factions[].power printed raw",
+  "source": "src/components/new/tabs/power/",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Safety -12",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "the machinery of a rating (points/shares): powerStructure.publicLegitimacy.breakdown / factions[].power printed raw",
+  "source": "src/components/new/tabs/power/",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Defense +10",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "the machinery of a rating (points/shares): powerStructure.publicLegitimacy.breakdown / factions[].power printed raw",
+  "source": "src/components/new/tabs/power/",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "63Approved",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "the machinery of a rating (points/shares): powerStructure.publicLegitimacy.breakdown / factions[].power printed raw",
+  "source": "src/components/new/tabs/power/",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "29",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "the machinery of a rating (points/shares): powerStructure.publicLegitimacy.breakdown / factions[].power printed raw",
+  "source": "src/components/new/tabs/power/",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "16",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "the machinery of a rating (points/shares): powerStructure.publicLegitimacy.breakdown / factions[].power printed raw",
+  "source": "src/components/new/tabs/power/",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "15",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "the machinery of a rating (points/shares): powerStructure.publicLegitimacy.breakdown / factions[].power printed raw",
+  "source": "src/components/new/tabs/power/",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "10",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "the machinery of a rating (points/shares): powerStructure.publicLegitimacy.breakdown / factions[].power printed raw",
+  "source": "src/components/new/tabs/power/",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Other7▼",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "category identifier 'Other' (factions The Independent Bloc category \"other\") and a raw share",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Learn the plans of Noble Families against Noble Governorship before they can act on them.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Iulia Laenas's own card: 'first of Noble Governorship · second of Noble Families' (npcs memberships Noble Families rank 2) — she is in the ruling three of the power she would spy on",
+  "source": "src/data/people/goalFamilies.js:252",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Hidden allegianceanswers to Front businesses, through Vibia Strabo",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Front businesses' face is Nerva Serranus (npcs institution.key \"Front businesses\"); Vibia Strabo is 'Thieves' guild chapter' (her card, 'In no power')",
+  "source": "src/domain/people/allegiance.js:448",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Hidden allegianceanswers to Thieves' guild chapter, through Walpurga Calvus",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "the Thieves' guild chapter's face is Vibia Strabo; Walpurga Calvus is 'Underground network'",
+  "source": "src/domain/people/allegiance.js:448",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Theaters · third of Noble Families · member of The Guild Alliance",
+  "kind": "c",
+  "mechanism": "other: a tradesperson ranked in a noble power",
+  "fact": "Drusilla Pacuvius is 'the theatre manager' (npcs title; card 'Manager'), not a noble by title or house, yet third of Noble Families ('Hereditary landowners...')",
+  "source": "src/domain/people/cardPowers.js",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Goodwife",
+  "kind": "h",
+  "mechanism": "other: a female title on a male person",
+  "fact": "npcs Valerianus Laevinus gender \"male\", title \"the midwife\"",
+  "source": "src/data/faceHonorifics.js:86",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Noble Families · first of Noble Families",
+  "kind": "h",
+  "mechanism": "other: doubled office words",
+  "fact": "the power name stands in the house slot and repeats in the rank line (npcs Publicola Maximus institution.key \"Noble Families\")",
+  "source": "src/domain/people/cardPowers.js",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "The Independent Bloc · first of The Independent Bloc",
+  "kind": "h",
+  "mechanism": "other: doubled office words",
+  "fact": "the power name stands in the house slot and repeats in the rank line",
+  "source": "src/domain/people/cardPowers.js",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Secret: Has been paying a health official to suppress a finding about their product",
+  "kind": "h",
+  "mechanism": "other: a secret that does not fit the person",
+  "fact": "Hostidia Piso is 'the chief magistrate' (Multiple courthouses); she has no product",
+  "source": "src/data/npcData.js:1037",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Secret: Was responsible for the incident that triggered the fracture: an act of deliberate sabotage they've successfully blamed on the other power",
+  "kind": "e",
+  "mechanism": "a count",
+  "fact": "'the other power' presumes two; powerStructure.factions has 8 powers",
+  "source": "src/data/stressInstitutionEffects.js:165",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "World/Relationships",
+  "sentence": "the governor · nominal · the guildmaster of thieves",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Iulia Laenas is styled 'the governor' while the seat 'Stands empty' and she is only 'Acting Governor' keeping it (Power tab)",
+  "source": "src/domain/people (relationship role labels from npcs title \"the governor\")",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "World/Relationships",
+  "sentence": "the lord · minor · the governor",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Iulia Laenas is styled 'the governor' while the seat 'Stands empty' and she is only 'Acting Governor' keeping it (Power tab)",
+  "source": "src/domain/people (relationship role labels from npcs title \"the governor\")",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "World/Relationships",
+  "sentence": "the innkeeper · crushing · the governor",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Iulia Laenas is styled 'the governor' while the seat 'Stands empty' and she is only 'Acting Governor' keeping it (Power tab)",
+  "source": "src/domain/people (relationship role labels from npcs title \"the governor\")",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "World/Relationships",
+  "sentence": "the bloc's speaker · crushing · the governor",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Iulia Laenas is styled 'the governor' while the seat 'Stands empty' and she is only 'Acting Governor' keeping it (Power tab)",
+  "source": "src/domain/people (relationship role labels from npcs title \"the governor\")",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "World/Relationships",
+  "sentence": "the golem-master · formal · the governor",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Iulia Laenas is styled 'the governor' while the seat 'Stands empty' and she is only 'Acting Governor' keeping it (Power tab)",
+  "source": "src/domain/people (relationship role labels from npcs title \"the governor\")",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "World/Relationships",
+  "sentence": "Antonia Hostus governs on Cicero Salinator's credit. Every loan renewed adds one more condition to the next.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Antonia Hostus is 'the customs collector' (npcs title), an unranked member of Noble Governorship; she does not govern",
+  "source": "src/data/npcData.js:1955",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "World/Relationships",
+  "sentence": "Cicero Salinator has refused credit for the winter grain stores. Antonia Hostus must choose between the creditor and the granary.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "the granaries are kept by Aelius Tacitus 'the master of granaries' (npcs institution \"City granaries\"), not the customs collector",
+  "source": "src/data/npcData.js (financial dependence lines)",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "World/Relationships",
+  "sentence": "Iulia Laenas kept Gnaeus Serranus's name out of a scandal that ruined two others. Gnaeus Serranus has voted with Iulia Laenas ever since.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Power tab: 'The Independent Bloc claims the right to rule by other means, and no longer comes to the hall's meetings.' — its speaker cannot be voting with the governor's side",
+  "source": "src/data/npcData.js:2190",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "World/Relationships",
+  "sentence": "Vibia Mamercus owes Blanda Falco more than the settlement collects in two years of taxes. Blanda Falco is paid first, every quarter.",
+  "kind": "f",
+  "mechanism": "a figure against the record's",
+  "fact": "a prison warden owing a vintner more than two years of a prosperous 10,008-person city's taxes; the record cannot settle the figure",
+  "source": "src/data/npcData.js:1952",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "Succession Void and Politically Fractured. Two or three powers each hold part of Portacastra, and none will give way, so nothing that needs them all gets done. Publicola Maximus is stirring it.",
+  "kind": "e",
+  "mechanism": "a count",
+  "fact": "powerStructure.factions has 8 powers; Power tab 'The Powers (8)▲'",
+  "source": "src/domain/crisis/crisisSummaryVantage.js:164",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "Wants to keep the pressure on until the seat gives way, and keep their own hand out of sight.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "stress succession_void in force; Power tab: 'The seat Stands empty; the succession is unsettled.' — the seat has already given way, and its acting keeper Iulia Laenas is Publicola's own second in Noble Families",
+  "source": "src/domain/summary/tonightSheet.js:74",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "In the succession crisis, Publicola Maximus of Noble Families is stirring it: already carries more weight than whoever holds the seat, and gains as the seat weakens.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "no one holds the seat ('Stands empty'); the acting keeper Iulia Laenas has influence \"high\", power 10 vs Publicola Maximus \"moderate\", power 5 (npcs), and she is second in his own Noble Families",
+  "source": "src/domain/crisis/crisisCast.js:165",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "In the split between the powers, Publicola Maximus of Noble Families is stirring it: already carries more weight than whoever holds the seat, and gains as the seat weakens.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "no one holds the seat ('Stands empty'); the acting keeper Iulia Laenas has influence \"high\", power 10 vs Publicola Maximus \"moderate\", power 5 (npcs), and she is second in his own Noble Families",
+  "source": "src/domain/crisis/crisisCast.js:165",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-city-succession_void+politically_fractured-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "Was responsible for the incident that triggered the fracture: an act of deliberate sabotage they've successfully blamed on the other power.",
+  "kind": "e",
+  "mechanism": "a count",
+  "fact": "'the other power' presumes two; powerStructure.factions has 8 powers",
+  "source": "src/data/stressInstitutionEffects.js:165",
+  "severity": "LOW"
+ }
+]

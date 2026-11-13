@@ -1,0 +1,952 @@
+[
+ {
+  "town": "rpf-thorp-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "The Household Council governs Mingan. Its seat is held by Uto Wang, the head shepherd and Household Elder. Weak defences keeps Mingan from more than tolerating the Household Council. A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.",
+  "kind": "h",
+  "mechanism": "broken text",
+  "fact": "Plural cause 'Weak defences' takes singular verb 'keeps' (one cause => 'keeps' regardless of the noun's number).",
+  "source": "src/domain/display/governanceAccount.js:137",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-thorp-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Defense -1",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Rating machinery: powerStructure.publicLegitimacy.breakdown {defense:-1}; score 49 printed as points.",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-thorp-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Dwellings (1-8)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range printed as an institution name.",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-thorp-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Have those who govern confirm, in writing, who may give orders at the shepherd collective.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Uto Wang holds the seat and is the only member of the governing Household Council (memberships [{power:'Household Council',rank:1}], structuralPosition 'Holds the seat'); a petition to 'those who govern' is a subordinate line on the seat-holder's card.",
+  "source": "src/data/people/goalFamilies.js:368",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-thorp-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Disposition plain-dealing, marginal",
+  "kind": "g",
+  "mechanism": "other: the seat-holder is called 'marginal'",
+  "fact": "npcs[Uto Wang].influence 'low' -> 'marginal' (npcInteriorityRead INFLUENCE_WORD), while the Power tab says he holds the seat of the dominant power and Foundations reads 'Ruling authority Surplus'. Record presentation.disposition is 'welcoming'.",
+  "source": "src/domain/display/npcInteriorityRead.js:45",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-thorp-calm-13",
+  "tab": "World/Relationships",
+  "sentence": "No neighbours, ties between people or conflicts are recorded for this settlement.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "relationships [] and powerStructure.conflicts [] , but the same page lists conflicts: Power/Summary 'A dispute over grazing rights and water access has run for two seasons...' (powerStructure.recentConflict) and History 'Current Tensions (1) Disputed land ...'.",
+  "source": "src/components/new/tabs/RelationshipsTab.jsx:257",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-thorp-calm-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "Food Secure. No granary; two months in household stores.",
+  "kind": "f",
+  "mechanism": "a figure against the record's",
+  "fact": "economicState.foodSecurity.storageMonths 1.5 ('minimal storage'); Math.round(1.5) prints 'two months'.",
+  "source": "src/domain/summary/tonightSheet.js:587-594 (foodStoresWords)",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Prosperity -20",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Rating machinery: powerStructure.publicLegitimacy.breakdown {prosperity:-20,safety:-20,defense:-2,food:-8} printed as points.",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Safety -20",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Rating machinery: powerStructure.publicLegitimacy.breakdown {prosperity:-20,safety:-20,defense:-2,food:-8} printed as points.",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Defense -2",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Rating machinery: powerStructure.publicLegitimacy.breakdown {prosperity:-20,safety:-20,defense:-2,food:-8} printed as points.",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Food -8",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Rating machinery: powerStructure.publicLegitimacy.breakdown {prosperity:-20,safety:-20,defense:-2,food:-8} printed as points.",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Houses of worship (2-5)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range printed as an institution name.",
+  "source": "src/domain/display/institutionDisplayName.js:85 (INSTITUTION_DISPLAY_NAMES keeps the count range)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Taverns (5-20)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range printed as an institution name.",
+  "source": "src/domain/display/institutionDisplayName.js:85 (INSTITUTION_DISPLAY_NAMES keeps the count range)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Housing (75-650 households)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range printed as an institution name.",
+  "source": "src/domain/display/institutionDisplayName.js:85 (INSTITUTION_DISPLAY_NAMES keeps the count range)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Merchant guilds (3-8)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range printed as an institution name.",
+  "source": "src/domain/display/institutionDisplayName.js:85 (INSTITUTION_DISPLAY_NAMES keeps the count range)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Craft guilds (5-15)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range printed as an institution name.",
+  "source": "src/domain/display/institutionDisplayName.js:85 (INSTITUTION_DISPLAY_NAMES keeps the count range)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Inn (multiple)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range printed as an institution name.",
+  "source": "src/domain/display/institutionDisplayName.js:85 (INSTITUTION_DISPLAY_NAMES keeps the count range)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "Systems/Power",
+  "sentence": "Contests the seatMilitary26▼",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Military/Guard is labelled a contender for the seat, but the Web on the same tab says 'Arcane Council gives the orders and Military/Guard carries them out' (factionRelationships symbiotic), its desc says it 'reports to the council', and both its members are also members of Arcane Council (Calli Kin, Chac Moo memberships 'Arcane Council:null').",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx:327",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "World/NPCs",
+  "sentence": "Parish churches (2-5) · first of Religious Authorities",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Raw catalogue key with count range; the Power tab prints the same institution as 'Houses of worship (2-5)' (institutionDisplayName maps it, and its comment says no 'parish' key may reach a reader).",
+  "source": "src/domain/display/institutionDisplayName.js:87",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "World/NPCs",
+  "sentence": "Mills (2-5) · member of Arcane Council",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Raw catalogue key with count range; the Power tab lists the same institution as 'Mills' (INSTITUTION_DISPLAY_NAMES 'Mills (2-5)' -> 'Mills').",
+  "source": "src/domain/display/institutionDisplayName.js:96",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "World/NPCs",
+  "sentence": "Blacksmiths (3-10)",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Raw catalogue key with count range; the Power tab lists 'Blacksmiths' (INSTITUTION_DISPLAY_NAMES 'Blacksmiths (3-10)' -> 'Blacksmiths').",
+  "source": "src/domain/display/institutionDisplayName.js:95",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "World/NPCs",
+  "sentence": "Taverns (5-20) · member of Arcane Council",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range as the person's house.",
+  "source": "src/domain/display/institutionDisplayName.js:85 (INSTITUTION_DISPLAY_NAMES keeps the count range)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "World/NPCs",
+  "sentence": "Merchant guilds (3-8) · member of Arcane Council",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range as the person's house.",
+  "source": "src/domain/display/institutionDisplayName.js:85 (INSTITUTION_DISPLAY_NAMES keeps the count range)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "World/NPCs",
+  "sentence": "Craft guilds (5-15)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range as the person's house.",
+  "source": "src/domain/display/institutionDisplayName.js:85 (INSTITUTION_DISPLAY_NAMES keeps the count range)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "World/NPCs",
+  "sentence": "Inn (multiple) · member of Arcane Council",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range as the person's house.",
+  "source": "src/domain/display/institutionDisplayName.js:85 (INSTITUTION_DISPLAY_NAMES keeps the count range)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Secure enough legal reserves to outlast the blockade",
+  "kind": "h",
+  "mechanism": "broken text",
+  "fact": "{commodity} filled from economicState.primaryExports 'Legal services (contracts, notarial)' -> 'legal'; 'legal reserves' is nonsense for food reserves in a famine.",
+  "source": "src/generators/npcGenerator.js:364 (SIEGE_GOALS)",
+  "severity": "HIGH"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "World/NPCs",
+  "sentence": "Secret: Controls a hidden cache of legal reserves that could feed the settlement for two more weeks",
+  "kind": "h",
+  "mechanism": "broken text",
+  "fact": "{commodity} = 'legal' (from 'Legal services'); legal reserves cannot feed anyone.",
+  "source": "src/data/stressInstitutionEffects.js:72",
+  "severity": "HIGH"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "World/NPCs",
+  "sentence": "Secret: Has been skimming from the legal reserves to pay a personal debt that predates the siege",
+  "kind": "h",
+  "mechanism": "broken text",
+  "fact": "{commodity} = 'legal' (from 'Legal services').",
+  "source": "src/data/stressInstitutionEffects.js:65",
+  "severity": "HIGH"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "World/NPCs",
+  "sentence": "Secret: Is receiving legal shipments through a covert route and selling them at triple the official price after dark",
+  "kind": "h",
+  "mechanism": "broken text",
+  "fact": "{commodity} = 'legal' (from 'Legal services'); 'legal shipments' smuggled and sold after dark reads as nonsense.",
+  "source": "src/data/stressInstitutionEffects.js:102",
+  "severity": "HIGH"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "World/NPCs",
+  "sentence": "Town watch · first of Military/Guard · member of Arcane Council",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Calli Kin leads Military/Guard, which the Power tab labels 'Contests the seat', yet the card makes him a member of the ruling Arcane Council (memberships Military/Guard:1, Arcane Council:null).",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "World/NPCs",
+  "sentence": "Adventurers' charter hall · second of Military/Guard · member of Arcane Council",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Chac Moo is second of a power the Power tab says contests the seat, and also a member of the ruling Arcane Council.",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Decide whether to negotiate terms or hold out for relief",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Chac Moo is the charter master, second of Military/Guard; the record's siege cast gives the treating decision to Hunahpu Nah ('treater ... holds the seat'), and the Crisis hook says 'Hunahpu Nah is considering terms'.",
+  "source": "src/generators/npcGenerator.js:368",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Have those who govern confirm, in writing, who may give orders at the merchant guilds.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Oc Kab is himself a member of the governing Arcane Council (memberships 'Arcane Council:null').",
+  "source": "src/data/people/goalFamilies.js:368",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "World/NPCs",
+  "sentence": "Underworld Queen Batab●",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "Given name 'Underworld Queen' (namingData) reads as a royal title on a magistrate (npcs title 'the magistrate'); the town has no queen. Record cannot settle whether this reads as a name.",
+  "source": "src/data/namingData.js:2891",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "World/Relationships",
+  "sentence": "Chac Itza and Ome Ucan are cousins on opposite sides of the settlement's politics. Their grandmother still seats them together.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Both are in the same power: Ome Ucan 'second of Arcane Council', Chac Itza 'member of Arcane Council' (memberships Arcane Council:2 / Arcane Council:null).",
+  "source": "src/data/npcData.js:2220",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "World/Relationships",
+  "sentence": "Calli Kin took Dzuna Cohuoh in as an apprentice and taught them the trade, the clients, and the names worth knowing.",
+  "kind": "c",
+  "mechanism": "other: a mentor of a different trade",
+  "fact": "Calli Kin is the watch captain, Dzuna Cohuoh the dean of the parish churches; no shared trade or clients.",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "World/Relationships",
+  "sentence": "Ixchel Coh learned the work at Hunahpu Nah's side for seven years. Half of Ixchel Coh's clients first came through Hunahpu Nah's door.",
+  "kind": "c",
+  "mechanism": "other: a mentor of a different trade",
+  "fact": "Ixchel Coh is the master potter; Hunahpu Nah is the archmage/circle-keeper. A potter did not learn the work at an archmage's side.",
+  "source": "src/data/npcData.js:2055",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "In the famine, Ahulane Nauat of Arcane Council takes the worst of it: the blame falls on the house, and its good name pays for the crisis.",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "Ahulane Nauat is the granary reeve (npcs title 'the granary reeve', institution 'Town granary'); 'the house ... its good name' reads as a noble/family house, which the town lacks. Reason is the fixed public_legitimacy brunt sentence.",
+  "source": "src/domain/crisis/crisisCast.js:151",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "Wants to be heard by the seat before the famine takes what the people of the Arcane Council have left.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Ahulane Nauat's card says 'Wants Keep the family trouble with Ome Ucan from reaching anyone outside the family.' (npcs goal.short); the Tonight sheet gives a different want.",
+  "source": "src/domain/summary/tonightSheet.js:80",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-under_siege+famine-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "Wants to keep the Military/Guard standing long enough for someone else to end the siege.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "The same sheet and the Crisis tab say 'In the siege, Calli Kin leads the defence'; his card's want is 'Settle one quarrel inside Military/Guard before Chac Moo...'.",
+  "source": "src/domain/summary/tonightSheet.js",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "The Powers (4)▲",
+  "kind": "e",
+  "mechanism": "a count",
+  "fact": "powerStructure.factions has 6 entries; the same tab's second roster is titled 'The Powers (6)▲' (The Arcane Circle and The Merchant Bloc omitted from the first).",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx:132 vs :265",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Prosperity +20",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Rating machinery: powerStructure.publicLegitimacy.breakdown {prosperity:20,defense:10}, score 80 printed as points.",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Defense +10",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Rating machinery: powerStructure.publicLegitimacy.breakdown {prosperity:20,defense:10}, score 80 printed as points.",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "The Ducal Governorship at Miromir holds because Ducal Governorship is still the heavier of the two, and the weighing is done again every season.",
+  "kind": "e",
+  "mechanism": "a count",
+  "fact": "'the heavier of the two' though powerStructure.factions has 6 powers (the tab shows 'The Powers (6)'); also the article is dropped before the second 'Ducal Governorship'.",
+  "source": "src/data/dossierStateProse/power.generated.js:1608",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "A duke or duchess governs the metropolis by royal appointment; the city is the administrative capital of a large territory.",
+  "kind": "g",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "The seat is held by 'Predrag Lazarev, the governor' (npcs title 'the governor', institution 'Noble governor'); no duke or duchess is named anywhere on the page. Record cannot settle whether the governor is a duke.",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Housing (3500+ households)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range printed as an institution name.",
+  "source": "src/domain/display/institutionDisplayName.js:85 (INSTITUTION_DISPLAY_NAMES keeps the count range)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Houses of worship (50-100+)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range printed as an institution name.",
+  "source": "src/domain/display/institutionDisplayName.js:85 (INSTITUTION_DISPLAY_NAMES keeps the count range)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Major monasteries (5-10)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range printed as an institution name.",
+  "source": "src/domain/display/institutionDisplayName.js:85 (INSTITUTION_DISPLAY_NAMES keeps the count range)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "District markets (5-10)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range printed as an institution name.",
+  "source": "src/domain/display/institutionDisplayName.js:85 (INSTITUTION_DISPLAY_NAMES keeps the count range)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Merchant guilds (50-100+)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range printed as an institution name.",
+  "source": "src/domain/display/institutionDisplayName.js:85 (INSTITUTION_DISPLAY_NAMES keeps the count range)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Craft guilds (100-150+)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range printed as an institution name.",
+  "source": "src/domain/display/institutionDisplayName.js:85 (INSTITUTION_DISPLAY_NAMES keeps the count range)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Airship docking (high magic)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue tag '(high magic)' printed in the institution name.",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Dream parlors (high magic)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue tag '(high magic)' printed in the institution name.",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Message network (high magic)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue tag '(high magic)' printed in the institution name.",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "Systems/Power",
+  "sentence": "Ducal Governorship needs the taxes and loans of Merchant Guilds, and Merchant Guilds needs Ducal Governorship to enforce its contracts and keep the law. Neither can afford to ruin the other.",
+  "kind": "h",
+  "mechanism": "broken text",
+  "fact": "Plural 'Merchant Guilds' with singular 'needs' / 'its'; no article before the power names.",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Win the governor's office first call on any help those who govern can give this season.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Predrag Lazarev IS the governor and holds the seat (structuralRank 'head', Ducal Governorship:1); asking 'those who govern' for help is a subordinate line on the seat-holder's card.",
+  "source": "src/data/people/goalFamilies.js:371",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Holds the seat, and people accept it; there is room to act, not just to hold on.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "powerStructure.stability 'Fragile (private security above the public law)'; Power tab: 'Where the guards and the Ducal Governorship disagree, the guards usually win.'",
+  "source": "src/generators/npcStructure.js:138",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Runs a smaller house behind the leading one in quiet times.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Printed on Zhanna Frolov, 'first of Merchant Guilds' (structuralRank 'head'), and Merchant Guilds is the strongest power after the ruler (power 22 vs Merchant Bloc 13, Craft Guilds 13); she leads the leading merchant house. (Same line on Stoycho Jovanović and Nataliya Loginov is defensible.)",
+  "source": "src/generators/npcStructure.js:244",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Constraint: Growing into the leading house's trade invites a reply; staying out of it means staying small.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "On Zhanna Frolov, head of Merchant Guilds (power 22, Significant), the leading merchant power.",
+  "source": "src/generators/npcStructure.js:244",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Works spells under the senior casters in quiet times.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Sonya Pavlov is 'first of Arcane Orders' (structuralRank 'head', Arcane Orders:1) and chancellor of the Academy of magic; she is the senior caster, not under them.",
+  "source": "src/generators/npcStructure.js:398",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Constraint: Skill without a senior post leaves the caster at the mercy of whoever decides who may cast.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Sonya Pavlov holds the senior post: head of Arcane Orders, 'the chancellor' of the Academy of magic.",
+  "source": "src/generators/npcStructure.js:398",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Lord Chancellor",
+  "kind": "a",
+  "mechanism": "other: a lord's title on a woman of no noble rank",
+  "fact": "npcs[Sonya Pavlov] gender 'female', title 'the chancellor' (Academy of magic); honorific drawn from faceHonorifics 'the chancellor': ['Chancellor','Lord Chancellor'] with no gender split.",
+  "source": "src/data/faceHonorifics.js:205",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Carry the dragon's message to the person it named, and come back alive.",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "No dragon anywhere in the record (the goal line is the only 'dragon' string); drawn on needs:['magic'] only.",
+  "source": "src/data/people/goalFamilies.js:1025",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Spymaster",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Galina Todorović's record title is 'the network's head' (Smuggling network); Relationships calls her 'the network's head'.",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Keep Zorya Komarov from calling in what is owed this season.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Olena's goal makes her Zorya's debtor (goal.intent kind 'debtor', target npc_mint_official), but Relationships says 'Zorya Komarov governs on Olena Kovačević's credit' (Olena is the creditor).",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Pay Vesna Grbić back one part of what is owed before the season ends.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Boris Grbić's goal makes him Vesna's debtor, but Relationships says 'Vesna Grbić owes Boris Grbić more than the settlement collects in two years of taxes. Boris Grbić is paid first'.",
+  "source": "",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Parish churches (50-100+)",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Raw catalogue key; the Power tab lists the same institution as 'Houses of worship (50-100+)' (institutionDisplayName: no 'parish' key may reach a reader).",
+  "source": "src/domain/display/institutionDisplayName.js:89",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Blacksmiths (3-10) · member of Craft Guilds",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Raw catalogue key with count range; the Power tab lists the same institution as 'Blacksmiths' (INSTITUTION_DISPLAY_NAMES strips the count: 'the key's count was only ever true of a town').",
+  "source": "src/domain/display/institutionDisplayName.js:90-96",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Carpenters (5-15) · member of Craft Guilds",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Raw catalogue key with count range; the Power tab lists the same institution as 'Carpenters' (INSTITUTION_DISPLAY_NAMES strips the count: 'the key's count was only ever true of a town').",
+  "source": "src/domain/display/institutionDisplayName.js:90-96",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Bakers (5-15) · member of Craft Guilds",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Raw catalogue key with count range; the Power tab lists the same institution as 'Bakers' (INSTITUTION_DISPLAY_NAMES strips the count: 'the key's count was only ever true of a town').",
+  "source": "src/domain/display/institutionDisplayName.js:90-96",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Butchers (3-8) · member of Craft Guilds",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Raw catalogue key with count range; the Power tab lists the same institution as 'Butchers' (INSTITUTION_DISPLAY_NAMES strips the count: 'the key's count was only ever true of a town').",
+  "source": "src/domain/display/institutionDisplayName.js:90-96",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Mills (2-5) · member of Ducal Governorship",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Raw catalogue key with count range; the Power tab lists the same institution as 'Mills' (INSTITUTION_DISPLAY_NAMES strips the count: 'the key's count was only ever true of a town').",
+  "source": "src/domain/display/institutionDisplayName.js:90-96",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Merchant guilds (50-100+) · first of Merchant Guilds",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range as the person's house.",
+  "source": "src/domain/display/institutionDisplayName.js:85 (INSTITUTION_DISPLAY_NAMES keeps the count range)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Craft guilds (100-150+) · first of Craft Guilds",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range as the person's house.",
+  "source": "src/domain/display/institutionDisplayName.js:85 (INSTITUTION_DISPLAY_NAMES keeps the count range)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Major monasteries (5-10)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue name with a count range as the person's house.",
+  "source": "src/domain/display/institutionDisplayName.js:85 (INSTITUTION_DISPLAY_NAMES keeps the count range)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Airship docking (high magic) · member of Merchant Guilds · member of Ducal Governorship",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue tag '(high magic)' in the house name.",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Dream parlors (high magic) · member of The Arcane Circle",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue tag '(high magic)' in the house name.",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Message network (high magic) · member of Ducal Governorship · member of Arcane Orders",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "Catalogue tag '(high magic)' in the house name.",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Get the most out of Furs & Pelts while it runs well, and put the gains by.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "{chain} filled with the chain catalogue label 'Furs & Pelts' (economicState.activeChains furs_north, status 'entrepot', resource 'absent').",
+  "source": "src/data/people/goalFamilies.js:468",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Take on more hands for Beekeeping & Wax at the chandler's shop, and keep them busy all season.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "{chain} filled with the chain catalogue label 'Beekeeping & Wax' (activeChains beekeeping_wax).",
+  "source": "src/data/people/goalFamilies.js:466",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/Relationships",
+  "sentence": "Zorya Komarov named Predrag Lazarev as successor in front of witnesses. The formal handover has not happened.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Predrag Lazarev is the governor who holds the seat; the mint master (Zorya Komarov, unranked member) naming him successor is a subordinate line on the seat-holder. Also 'Predrag Lazarev has begun teaching Zorya Komarov's methods as Predrag Lazarev's own.'",
+  "source": "src/data/npcData.js:2059",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/Relationships",
+  "sentence": "Zorya Komarov governs on Olena Kovačević's credit. Every loan renewed adds one more condition to the next.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Olena's card wants 'Keep Zorya Komarov from calling in what is owed this season.' (goal.intent 'debtor' -> npc_mint_official): the debt runs the other way. Zorya (the mint master) does not govern.",
+  "source": "src/data/npcData.js:1955",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/Relationships",
+  "sentence": "Olena Kovačević has refused credit for the winter grain stores. Zorya Komarov must choose between the creditor and the granary.",
+  "kind": "c",
+  "mechanism": "other: presumes a role not so",
+  "fact": "Olena is herself the master of granaries; the mint master has no granary to choose for.",
+  "source": "src/data/npcData.js:1970",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/Relationships",
+  "sentence": "Vesna Grbić owes Boris Grbić more than the settlement collects in two years of taxes. Boris Grbić is paid first, every quarter.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Boris Grbić's card: 'Wants Pay Vesna Grbić back one part of what is owed before the season ends.' (goal.intent 'debtor' -> Vesna): the debt runs the other way. A message-master owing two years of a metropolis's taxes to a vintner is also a stretch.",
+  "source": "src/data/npcData.js:1952",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/Relationships",
+  "sentence": "Dalibor Janković governs on Olena Kovačević's credit. Every loan renewed adds one more condition to the next.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Dalibor Janković is the toll-keeper, an unranked member; the seat is Predrag Lazarev's.",
+  "source": "src/data/npcData.js:1955",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/Relationships",
+  "sentence": "Viktoriya Vasić governs on Inna Đurić's credit. Every loan renewed adds one more condition to the next.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Viktoriya Vasić is the customs collector, an unranked member; the seat is Predrag Lazarev's.",
+  "source": "src/data/npcData.js:1955",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/Relationships",
+  "sentence": "Vesna Grbić governs on Lyuben Gusev's credit. Every loan renewed adds one more condition to the next.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Vesna Grbić is the message-master, an unranked member; the seat is Predrag Lazarev's.",
+  "source": "src/data/npcData.js:1955",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/Relationships",
+  "sentence": "Olena Kovačević has refused credit for the winter grain stores. Dalibor Janković must choose between the creditor and the granary.",
+  "kind": "c",
+  "mechanism": "other: presumes a role not so",
+  "fact": "Dalibor Janković does not run the granary (State granary complex is Olena Kovačević's).",
+  "source": "src/data/npcData.js:1970",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/Relationships",
+  "sentence": "Inna Đurić has refused credit for the winter grain stores. Viktoriya Vasić must choose between the creditor and the granary.",
+  "kind": "c",
+  "mechanism": "other: presumes a role not so",
+  "fact": "Viktoriya Vasić does not run the granary (State granary complex is Olena Kovačević's).",
+  "source": "src/data/npcData.js:1970",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/Relationships",
+  "sentence": "Lyuben Gusev has refused credit for the winter grain stores. Vesna Grbić must choose between the creditor and the granary.",
+  "kind": "c",
+  "mechanism": "other: presumes a role not so",
+  "fact": "Vesna Grbić does not run the granary (State granary complex is Olena Kovačević's).",
+  "source": "src/data/npcData.js:1970",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/Relationships",
+  "sentence": "The interest falls due at midsummer and the treasury will not cover it. Uljana Aleksandrov has already drafted the terms of the extension.",
+  "kind": "c",
+  "mechanism": "other: presumes a role not so",
+  "fact": "The debtor is Viktoriya Bykov, the prison warden; she keeps no treasury.",
+  "source": "src/data/npcData.js:1959",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/Relationships",
+  "sentence": "Yuri Davydov learned the work at Predrag Lazarev's side for seven years. Half of Yuri Davydov's clients first came through Predrag Lazarev's door.",
+  "kind": "c",
+  "mechanism": "other: a mentor of a different trade",
+  "fact": "Yuri Davydov is the chief magistrate; Predrag Lazarev is the governor holding the seat. Neither keeps clients or a trade to learn at his side.",
+  "source": "src/data/npcData.js:2055",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/Relationships",
+  "sentence": "Dobroslav Dmitriev took Branko Medvedev in as an apprentice and taught them the trade, the clients, and the names worth knowing.",
+  "kind": "c",
+  "mechanism": "other: a mentor of a different trade",
+  "fact": "Dobroslav is the ropemaker, Branko the mine captain; Branko also has two other 'Mentor and Successor' ties (Slavica Kostić, Svetlana Popov) on the same tab.",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "World/Relationships",
+  "sentence": "Timur Erić learned the work at Lev Pavlov's side for seven years. Half of Timur Erić's clients first came through Lev Pavlov's door.",
+  "kind": "c",
+  "mechanism": "other: a mentor of a different trade",
+  "fact": "Timur Erić is the master brewer; Lev Pavlov is the pawnbroker.",
+  "source": "src/data/npcData.js:2055",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-calm-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "Wants to win the governor's office first call on any help those who govern can give this season.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Predrag Lazarev is the governor and holds the seat (the line above reads 'the governor · Holds the seat').",
+  "source": "src/data/people/goalFamilies.js:371",
+  "severity": "MED"
+ }
+]

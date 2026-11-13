@@ -1,0 +1,872 @@
+[
+ {
+  "town": "rpf-thorp-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Dwellings (1-8)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range; population 11 (record population: 11)",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx:198 (InstitutionLink prints the catalogue name)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-thorp-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "The Household Council at Lundland worries less about rivals than about the thorp turning on it.",
+  "kind": "c",
+  "mechanism": "other: denies the rival threat under a contested seat",
+  "fact": "stress politically_fractured in force; powerStructure.factions: The Independent Bloc power 59 'Dominant' vs Household Council 41, publicLegitimacy.isContested true; same tab: 'The Independent Bloc claims the right to rule by other means... Each side makes its own decisions now, and the others overturn them within days.'",
+  "source": "src/data/dossierStateProse/power.generated.js:2078",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-thorp-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "The powerHousehold Council (strong)",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "factions: Household Council powerLabel 'Strong' (41) while the same tab shows the contender 'The Independent Bloc ... Dominant' at 59 vs 41 and 'Fractured — no stable governing authority'; record label, but the ruler reads strong beside a dominant rival",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-thorp-politically_fractured-13",
+  "tab": "World/Relationships",
+  "sentence": "Eindride Olafsson has hired away Asa Ragnarsson's best assistant. Asa Ragnarsson has said nothing about it, to anyone.",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "population 11; Asa Ragnarsson is 'the bloc's speaker' (institution.kind power), no trade or staff; overview: 'No market or fair stands in Lundland'",
+  "source": "src/data/npcData.js:2035",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-thorp-politically_fractured-13",
+  "tab": "World/Relationships",
+  "sentence": "Eindride Olafsson and Asa Ragnarsson bid for the same contracts and sit at the same tables. Each counts the other's wins more carefully than their own.",
+  "kind": "a",
+  "mechanism": "other: a contract trade the thorp lacks",
+  "fact": "population 11, no market ('No market or fair stands in Lundland: what trade the thorp does is done house to house'); Asa is a political speaker, not a trader",
+  "source": "src/data/npcData.js (peer_rivalry prose)",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-thorp-politically_fractured-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "The departed leader left a sealed document designating a successor, and someone wants it destroyed before it's read.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "history.currentTensions[0].type 'leadership_vacuum' (no departed leader on the record's seat): powerStructure seat held — Power tab 'The seatEindride Olafsson, the boat-headman and Household Elder'; Tonight sheet same view 'Eindride Olafsson / Household Elder · Holds the seat'",
+  "source": "src/data/historyData.js:1397",
+  "severity": "HIGH"
+ },
+ {
+  "town": "rpf-thorp-politically_fractured-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "The vote on the empty seat is in four days, and two of the voters have not been seen since the last meeting.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "powerStructure.conflicts[0].issue 'Succession to a council seat'; the seat is held (Eindride Olafsson) and Household Council has 1 member ('↳1 member · first Eindride Olafsson'), so no voters to vanish; record cannot settle whether a lesser council seat is empty",
+  "source": "src/generators/power/conflictIssues.js:78",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-thorp-politically_fractured-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "Wants to use this crisis to take the seat for themselves.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Asa Ragnarsson goal.short 'Learn the secret of someone they envy.' (NPC card: 'Wants Learn the secret of someone they envy.')",
+  "source": "src/domain/summary/tonightSheet.js:75",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Houses of worship (2-5)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range in a town of 1,295 (record population 1295); also renamed: record institution is 'Parish churches (2-5)' (NPC card prints 'Parish churches (2-5)')",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx:198 (InstitutionLink prints the catalogue name)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Taverns (5-20)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range in a town of 1,295 (record population 1295)",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx:198 (InstitutionLink prints the catalogue name)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Housing (75-650 households)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range in a town of 1,295 (record population 1295)",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx:198 (InstitutionLink prints the catalogue name)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Merchant guilds (3-8)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range in a town of 1,295 (record population 1295)",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx:198 (InstitutionLink prints the catalogue name)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Craft guilds (5-15)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range in a town of 1,295 (record population 1295)",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx:198 (InstitutionLink prints the catalogue name)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Parish churches (2-5) · Warden of the Council, first of Church Council",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range printed as the person's house (npcs[].institution.key)",
+  "source": "npc card house line, src/components/new/npcComponents.jsx (institution.key printed verbatim)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Mills (2-5) · third of Church Council",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range printed as the person's house (npcs[].institution.key)",
+  "source": "npc card house line, src/components/new/npcComponents.jsx (institution.key printed verbatim)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Merchant guilds (3-8) · member of Church Council",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range printed as the person's house (npcs[].institution.key)",
+  "source": "npc card house line, src/components/new/npcComponents.jsx (institution.key printed verbatim)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Butchers (3-8) · member of Church Council",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range printed as the person's house (npcs[].institution.key)",
+  "source": "npc card house line, src/components/new/npcComponents.jsx (institution.key printed verbatim)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Taverns (5-20) · member of Church Council",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range printed as the person's house (npcs[].institution.key)",
+  "source": "npc card house line, src/components/new/npcComponents.jsx (institution.key printed verbatim)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Bakers (5-15) · member of Church Council",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range printed as the person's house (npcs[].institution.key)",
+  "source": "npc card house line, src/components/new/npcComponents.jsx (institution.key printed verbatim)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Craft guilds (5-15)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range printed as the person's house (npcs[].institution.key)",
+  "source": "npc card house line, src/components/new/npcComponents.jsx (institution.key printed verbatim)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Town watch; it enforces ordinances, manages disorder, and reports to the council. Three powers stand almost level here, and no one leads; every council vote has to be bargained for.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "factions power: Religious Authorities 47, The Independent Bloc 22, Military/Guard 19, Church Council 12 — Religious Authorities leads by 25; and factionRelationships: 'Military/Guard no longer takes orders from Church Council' (same tab) vs 'reports to the council'",
+  "source": "src/generators/power/factionStanding.js:68",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "What threatens the Church Council at Doirefield is heresy more than any rival: a rival creed challenges its right to govern, and everybody involved knows it.",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "no rival creed in the record: the only other religious power, Religious Authorities, is 'symbiotic' ('the same people in practice; the hall rules because the faith says it may'); the rivals that threaten it are Military/Guard (escalating, 'no longer takes orders') and Religious Authorities 47 vs 12 contesting the seat",
+  "source": "src/data/dossierStateProse/power.generated.js:2113",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Religious Authorities and Church Council are the same people in practice; the hall rules because the faith says it may.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "no shared members: Religious Authorities has 1 member (Cesair O'Sullivan), Church Council 16 others; same tab marks Religious Authorities 'Contests the seat' and 'Holds the title; the decisions that matter are made by Religious Authorities'; crisis instigator is Cesair O'Sullivan of Religious Authorities",
+  "source": "src/generators/factionDynamics.js:451",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Military/Guard no longer takes orders from Church Council. Church Council keeps the title; Military/Guard makes the decisions that matter.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "same tab: 'Holds the title; the decisions that matter are made by Religious Authorities.'; Military/Guard is 'Minor' 19 vs Religious Authorities 'Strong' 47",
+  "source": "src/generators/factionDynamics.js:404",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Holds the title; the decisions that matter are made by Religious Authorities.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "same tab: 'Church Council keeps the title; Military/Guard makes the decisions that matter.' (record crisisNote only says 'made elsewhere')",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Claims legitimate authority through different means; controls a distinct district or institution. Behind Religious Authorities by too much to challenge openly, so they get their way through petitions and procedure instead.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "same tab: 'The Independent Bloc claims the right to rule by other means, and no longer comes to the hall's meetings' (record recentConflict: 'Two powers have stopped coming to Church Council meetings') — petitions and procedure vs boycott",
+  "source": "src/generators/power/factionStanding.js:63",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Town walls",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "deriveFactionSupport: Town walls, Town watch, Adventurers' charter hall, Bowyers & fletchers listed 'Held under this authority' (Church Council) AND 'In the service of this command' (Military/Guard, 6), while the tab says 'Military/Guard no longer takes orders from Church Council'",
+  "source": "src/domain/dossier/powerSupport.js",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Belongs to a lesser family behind the leading one while the seat fails.",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "Úna Hennessy: npcs[].category 'other', institution 'Adventurers' charter hall', third of Military/Guard; the town has no noble houses or families among its powers (factions: Religious Authorities, The Independent Bloc, Military/Guard, Church Council)",
+  "source": "src/generators/npcStructure.js:409",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Constraint: Getting ahead of the greater family now will look like seizing a chance, not earning a place.",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "Úna Hennessy is the charter master of Adventurers' charter hall; no family/house power in powerStructure.factions",
+  "source": "src/generators/npcStructure.js:409",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Mother Abbess",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Cesair O'Sullivan record title/role 'the abbot'; Relationships and Tonight sheet print 'the abbot'",
+  "source": "src/components/new/npcComponents.jsx",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Secret: Has been playing both powers simultaneously, feeding each the other's plans",
+  "kind": "e",
+  "mechanism": "a count",
+  "fact": "powerStructure.factions has 4 powers (Power tab 'The Powers (4)')",
+  "source": "src/data/stressInstitutionEffects.js:150",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Secret: The vote that split the council was not actually close. They falsified the count",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Dáirine Farrell is in no power (memberships []), so has no council count to falsify; Eoghan Daly's card claims the cause instead: 'Was responsible for the incident that triggered the fracture'",
+  "source": "src/data/stressInstitutionEffects.js:154",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Constraint: Cannot step in to keep order without taking a side in the fight over the seat.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Caoilfhinn O'Neill heads Military/Guard, which the Power tab already marks 'Contests the seat' and 'no longer takes orders from Church Council'; powerStructure.conflicts: Military/Guard vs Church Council, intensity high",
+  "source": "src/generators/npcStructure.js",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "28 Key Figures?The people worth knowing and what each one holds.3 high influence ·",
+  "kind": "h",
+  "mechanism": "broken text",
+  "fact": "dangling separator: modCount 0 leaves '3 high influence · ' with nothing after it",
+  "source": "src/components/new/tabs/NPCsTab.jsx:83",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "World/Relationships",
+  "sentence": "Órlaith Ryan has fallen on hard times, and the debt Tadhg Tobin owes is now the only asset Órlaith Ryan has.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Órlaith Ryan influence 'high', power 10, holds the seat and is the dean (NPC card ●●●, Power: 'The seatÓrlaith Ryan, the dean and Warden of the Council')",
+  "source": "src/data/npcData.js:2204",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "World/Relationships",
+  "sentence": "the abbot · deep · the bowyer",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "NPC card titles Cesair O'Sullivan 'Mother Abbess'",
+  "source": "",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "In the split between the powers, Cesair O'Sullivan of Religious Authorities is stirring it: already carries more weight than whoever holds the seat, and gains as the seat weakens.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "npcs: Cesair O'Sullivan influence 'low', power 3 (card ●) vs seat-holder Órlaith Ryan influence 'high', power 10 (card ●●●); Power tab also says Religious Authorities and Church Council 'are the same people in practice'",
+  "source": "src/domain/crisis/crisisCast.js:165",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "Wants to be the one people turn to when the seat fails.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Cesair O'Sullivan NPC card: 'Wants Have some fun this season, whatever it costs.'",
+  "source": "src/domain/summary/tonightSheet.js",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "the abbot · instigator",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "NPC card titles Cesair O'Sullivan 'Mother Abbess'",
+  "source": "src/domain/summary/tonightSheet.js",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-town-politically_fractured-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "The vote that split the council was not actually close. They falsified the count.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Dáirine Farrell holds no membership (memberships []); Eoghan Daly's secret names a different cause of the fracture (sabotage)",
+  "source": "src/data/stressInstitutionEffects.js:154",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "District markets (5-10)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx:198 (InstitutionLink prints the catalogue name)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Merchant guilds (50-100+)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx:198 (InstitutionLink prints the catalogue name)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Housing (3500+ households)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx:198 (InstitutionLink prints the catalogue name)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Craft guilds (100-150+)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx:198 (InstitutionLink prints the catalogue name)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Houses of worship (50-100+)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range; record institution is 'Parish churches (50-100+)' (NPC card prints that name)",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx:198 (InstitutionLink prints the catalogue name)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Major monasteries (5-10)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx:198 (InstitutionLink prints the catalogue name)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Parish churches (50-100+) · first of Religious Authorities",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range printed as the person's house (npcs[].institution.key)",
+  "source": "npc card house line, src/components/new/npcComponents.jsx (institution.key printed verbatim)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Major monasteries (5-10) · third of Religious Authorities",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range printed as the person's house (npcs[].institution.key)",
+  "source": "npc card house line, src/components/new/npcComponents.jsx (institution.key printed verbatim)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Merchant guilds (50-100+) · First Councillor, first of City-State Council",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range printed as the person's house (npcs[].institution.key)",
+  "source": "npc card house line, src/components/new/npcComponents.jsx (institution.key printed verbatim)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Bakers (5-15) · member of City-State Council",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range printed as the person's house (npcs[].institution.key)",
+  "source": "npc card house line, src/components/new/npcComponents.jsx (institution.key printed verbatim)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Carpenters (5-15) · member of City-State Council",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range printed as the person's house (npcs[].institution.key)",
+  "source": "npc card house line, src/components/new/npcComponents.jsx (institution.key printed verbatim)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Mills (2-5) · member of Noble Houses",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range printed as the person's house (npcs[].institution.key)",
+  "source": "npc card house line, src/components/new/npcComponents.jsx (institution.key printed verbatim)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Butchers (3-8) · member of City-State Council",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range printed as the person's house (npcs[].institution.key)",
+  "source": "npc card house line, src/components/new/npcComponents.jsx (institution.key printed verbatim)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Craft guilds (100-150+)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range printed as the person's house (npcs[].institution.key)",
+  "source": "npc card house line, src/components/new/npcComponents.jsx (institution.key printed verbatim)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Blacksmiths (3-10)",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "catalogue name with a count range printed as the person's house (npcs[].institution.key)",
+  "source": "npc card house line, src/components/new/npcComponents.jsx (institution.key printed verbatim)",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "↳8 members · first Ioannikios Gabalas · second Hierotheos Kurtikios · third Palaiologissa Philanthropenos",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Noble Houses' second and third are tradespeople: Hierotheos Kurtikios role 'the impresario' (Opera house), Palaiologissa Philanthropenos 'the theatre manager' (Multiple theaters); only Ioannikios Gabalas is 'the lord'; other members a lanista, a miller, a vintner, a college master",
+  "source": "src/data/people/dmPowerLines.js",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Opera house · second of Noble Houses · member of City-State Council",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Hierotheos Kurtikios title 'the impresario', category 'other', no noble title or house, yet ranked second of Noble Houses ('Hereditary great families with land grants...')",
+  "source": "src/components/new/npcComponents.jsx",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Multiple theaters · third of Noble Houses · member of City-State Council",
+  "kind": "c",
+  "mechanism": "a ruler, a power, a holder or a claimant that is not so",
+  "fact": "Palaiologissa Philanthropenos title 'the theatre manager', category 'other', no noble title, yet third of Noble Houses",
+  "source": "src/components/new/npcComponents.jsx",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Claims legitimate authority through different means; controls a distinct district or institution. Three powers stand almost level here, and no one leads; every council vote has to be bargained for.",
+  "kind": "f",
+  "mechanism": "a figure against the record's",
+  "fact": "factions power: Religious Authorities 26 leads Military/Guard 15, The Independent Bloc 15, City-State Council 14 by 11 points (Power tab 'Contests the seatReligious26'); same tab: 'Everyone at Filopnea can see City-State Council could lose the hall, and Religious Authorities has not yet moved to take it.'",
+  "source": "src/generators/power/factionStanding.js:68",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Church institutions hold direct temporal power; tithes, land, and courts are all ecclesiastical. They denounce the guild from the pulpit; the guild funds two charitable institutions and makes the denunciations look selective.",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "no thieves' guild among powerStructure.factions (Religious Authorities, Military/Guard, The Independent Bloc, City-State Council, Noble Houses, The Garrison Bloc, The Grey Council) — line is the religious-vs-thieves note; and the courts are not ecclesiastical: 'Multiple court buildings' is held under City-State Council and run by the chief magistrate Basilissa Voulgaropoulos of The Grey Council",
+  "source": "src/generators/power/factionStanding.js:238",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Well-funded city watch; it keeps order reliably and is growing more sure of its own authority. They operate in the shadow of Religious Authorities but not comfortably: they are waiting for a chance to push back. A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken.",
+  "kind": "a",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "fact": "no thieves' guild power in powerStructure.factions; this desc is printed under The Garrison Bloc (record copies Military/Guard's desc onto it), but the Professional city watch is Military/Guard's institution and Tornikes Gregoraios its commander — The Garrison Bloc holds no institution",
+  "source": "src/generators/power/factionStanding.js:139",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "The Powers (4)▲",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "same tab, second roster: 'The Powers (7)▲'; powerStructure.factions length 7",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx:132",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "handled by Basilissa Strategopoulos, the network's head (Smuggling network)",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "printed under 'Underground network', but Basilissa Strategopoulos's institution is 'Smuggling network'; the Underground network's head is Stylianos Angelos ('the network's spider', institution 'Underground network'); record allegiance house 'Underground network' with handler npc_veiled_11465e5a03e4138d (Smuggling network)",
+  "source": "src/components/new/tabs/WhoRunsThisTownPanel.jsx",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "handled by Eirenika Phakrases, the gang boss (Multiple criminal factions)",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "printed under 'Underground city', whose boss is Andronikos I Xiphilinos (institution 'Underground city'); Eirenika Phakrases runs 'Multiple criminal factions'",
+  "source": "src/components/new/tabs/WhoRunsThisTownPanel.jsx",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Fish market · Georgia Vryennios · fronts for Underground city · handled by Eirenika Phakrases",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Eirenika Phakrases institution 'Multiple criminal factions'; the Underground city is Andronikos I Xiphilinos's",
+  "source": "src/components/new/tabs/WhoRunsThisTownPanel.jsx:88",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "Systems/Power",
+  "sentence": "Palace/government complex",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "deriveFactionSupport lists Palace/government complex, Multiple theaters, Opera house, Bardic college, Colosseum/arena 'Held under this authority' (City-State Council) and 'Beholden to this line' (Noble Houses, 8); Great library and Sage's quarter under both City-State Council and Religious Authorities",
+  "source": "src/domain/dossier/powerSupport.js",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Leads the faith while rivals fight over the seat, and both sides want its blessing.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Eleni Chrysoberges heads Religious Authorities, which Power tab marks 'Contests the seat' (26, the strongest); stress.cast instigator is Eleni Chrysoberges; seven powers, not 'both sides'",
+  "source": "src/generators/npcStructure.js:285",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Constraint: Keeping those under arms out of the fight takes quiet work that cannot be owned in public.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Tornikes Gregoraios heads Military/Guard, which Power tab marks 'Contests the seat'; powerStructure.conflicts: Military/Guard vs City-State Council intensity 'high' (Relationships: 'High tensionMilitary/Guard vs City-State Council')",
+  "source": "src/generators/npcStructure.js:181",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Leads a squad whose members are being pulled toward one side or the other in the fight for the seat.",
+  "kind": "d",
+  "mechanism": "a size",
+  "fact": "Trifena Palaiologos is 'the garrison commander' of 'Multiple garrisons' in a metropolis of 45,539, influence high (power 9), head of The Garrison Bloc — not a squad",
+  "source": "src/generators/npcStructure.js:184",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Hidden allegianceanswers to Underground network, through Basilissa Strategopoulos",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Basilissa Strategopoulos is the head of the Smuggling network (her card: 'Smuggling network'); the Underground network's head is Stylianos Angelos",
+  "source": "src/components/new/npcComponents.jsx:436",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Hidden allegianceanswers to Underground city, through Eirenika Phakrases",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Eirenika Phakrases runs 'Multiple criminal factions'; Underground city's boss is Andronikos I Xiphilinos",
+  "source": "src/components/new/npcComponents.jsx:436",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Bring in from outside what Stone & Construction can no longer get close to home.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "supply-chain catalogue label 'Stone & Construction' printed as a thing: economicState.activeChains chainId 'stone' label 'Stone & Construction'",
+  "source": "src/data/people/goalFamilies.js:411-466",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Bring in from outside what Iron & Metalwork can no longer get close to home.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "supply-chain catalogue label 'Iron & Metalwork' printed as a thing: activeChains 'iron' label 'Iron & Metalwork'",
+  "source": "src/data/people/goalFamilies.js:411-466",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Find whoever can still supply Smelting & Refining, and pay them what they ask.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "supply-chain catalogue label 'Smelting & Refining' printed as a thing: activeChains 'smelting' label 'Smelting & Refining'",
+  "source": "src/data/people/goalFamilies.js:411-466",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Take on more hands for Gambling & Arena at the gambling district, and keep them busy all season.",
+  "kind": "h",
+  "mechanism": "internal text",
+  "fact": "supply-chain catalogue label 'Gambling & Arena' printed as a thing: a supply-chain/category label used as a noun",
+  "source": "src/data/people/goalFamilies.js:411-466",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Wants Hire someone brave enough to sit up a night with them and see the thing for themselves.",
+  "kind": "h",
+  "mechanism": "other: refers to a haunting the page never introduces",
+  "fact": "Eleni Voulgaropoulos goal.intent.short UNCANNY/haunting with target null; nothing on her card or elsewhere names 'the thing'",
+  "source": "src/data/people/goalFamilies.js",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Constable",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Sofokles Palaiolagos record title 'the castellan' (Citadel); Relationships print 'the castellan'",
+  "source": "src/components/new/npcComponents.jsx",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Chief Justice",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Basilissa Voulgaropoulos record title 'the chief magistrate'; Power tab and Relationships print 'the chief magistrate'",
+  "source": "src/components/new/npcComponents.jsx",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Spymaster",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Basilissa Strategopoulos record title 'the network's head' (Smuggling network); Power tab and Relationships print 'the network's head'",
+  "source": "src/components/new/npcComponents.jsx",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Secret: Has been playing both powers simultaneously, feeding each the other's plans",
+  "kind": "e",
+  "mechanism": "a count",
+  "fact": "powerStructure.factions has 7 powers",
+  "source": "src/data/stressInstitutionEffects.js:150",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/NPCs",
+  "sentence": "Secret: The vote that split the council was not actually close. They falsified the count",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Niketas Skleros's card gives a different cause: 'Was responsible for the incident that triggered the fracture: an act of deliberate sabotage'",
+  "source": "src/data/stressInstitutionEffects.js:154",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/Relationships",
+  "sentence": "Kalliope Mosele has fallen on hard times, and the debt Emmanuel Palaiolagos owes is now the only asset Kalliope Mosele has.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Kalliope Mosele influence 'high', power 10, First Councillor holding the seat and senior guild master of Merchant guilds (NPC card ●●●)",
+  "source": "src/data/npcData.js:2204",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/Relationships",
+  "sentence": "Kalliope Mosele kept Ioannikios Gabalas's name out of a scandal that ruined two others. Ioannikios Gabalas has voted with Kalliope Mosele ever since.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Ioannikios Gabalas heads Noble Houses, which Power tab marks 'Contests the seat' and 'at odds with' the City-State Council (web: 'Noble Houses~City-State Councildeclining')",
+  "source": "src/data/npcData.js",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "World/Relationships",
+  "sentence": "Elias Kurtikios has asked Kassandra Vatatzes for a vote against Kassandra Vatatzes's own interests. It is the first payment Elias Kurtikios has asked for.",
+  "kind": "c",
+  "mechanism": "other: a vote the person does not have",
+  "fact": "Kassandra Vatatzes is 'the killer' (Contract killer), memberships [] — in no power, no council seat",
+  "source": "src/data/npcData.js",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "In the split between the powers, Eleni Chrysoberges of Religious Authorities is stirring it: already carries more weight than whoever holds the seat, and gains as the seat weakens.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Eleni Chrysoberges influence 'moderate', power 6 (card ●●) vs seat-holder Kalliope Mosele influence 'high', power 10 (card ●●●); her card says she 'Leads the faith while rivals fight over the seat'",
+  "source": "src/domain/crisis/crisisCast.js:165",
+  "severity": "MED"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "Wants to be the one people turn to when the seat fails.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Eleni Chrysoberges NPC card: 'Wants Keep the accounts of the houses of worship balanced, and show them to anyone who asks.'",
+  "source": "src/domain/summary/tonightSheet.js",
+  "severity": "LOW"
+ },
+ {
+  "town": "rpf-metropolis-politically_fractured-13",
+  "tab": "Table/Tonight sheet",
+  "sentence": "The split between the powers turns on the multiple court buildings, run by Basilissa Voulgaropoulos: if it gives way, City-State Council loses most, because its own people feel the crisis first.",
+  "kind": "g",
+  "mechanism": "two homes that disagree",
+  "fact": "Power tab files 'Multiple court buildings' under City-State Council ('Held under this authority'), but Basilissa Voulgaropoulos heads The Grey Council, which 'no longer come[s] to the hall's meetings'; catalogue name lower-cased into prose",
+  "source": "src/domain/crisis/crisisHooks.js:188",
+  "severity": "LOW"
+ }
+]
