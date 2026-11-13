@@ -1260,11 +1260,6 @@
     "Newcomer and old-family districts remain socially distinct"
    ],
    [
-    "quarters",
-    "word",
-    "A fire that began in {location} consumed {building_type} across whole districts before it could be checked"
-   ],
-   [
     "plague",
     "word",
     "A healer who profited enormously during the plague is being asked how they stayed untouched"
@@ -1300,11 +1295,6 @@
     "occupation",
     "word",
     "When the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever settled"
-   ],
-   [
-    "quarters",
-    "word",
-    "A fire out of {location} spread through {building_type} across entire districts before anyone could bring it under contr"
    ],
    [
     "plague",
