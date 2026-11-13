@@ -483,7 +483,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
           </div>
           {/* Imports */}
           <div>
-            <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.danger,marginBottom:6}}>Imports</div>
+            {!tradeStoppedHere(s)&&<div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.danger,marginBottom:6}}>Imports</div>}
             {shownImports.length>0&&!tradeStoppedHere(s)
               ?<div style={{display:'flex',flexWrap:'wrap',gap:4}}>
                 {[...shownImports].sort().map((imp,i)=>{
@@ -513,7 +513,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                   {eco.necessityImports?.length>0&&<span style={{color:swatch.danger}}>Settlement necessity</span>}
                 </div>}
               </div>
-              :<p style={{fontSize:proseFontSize(FS.sm, mobile),color:MUTED,fontStyle:'italic',margin:0}}>{noImportsWords(s)}</p>
+              :tradeStoppedHere(s)?null:<p style={{fontSize:proseFontSize(FS.sm, mobile),color:MUTED,fontStyle:'italic',margin:0}}>No recorded imports.</p>
             }{unmetNeeds.length>0&&<NeedsNotMet needs={unmetNeeds} mobile={mobile} />}
           </div>
         </div>
@@ -853,11 +853,8 @@ function impairedHousesOf(town) {
  * "Grain · Incense and votive candles · Iron (weapons) · …" under Imports beside "The siege has cut every road in" and
  * "No food comes into Uaxacmul by trade"). WHETHER TRADE COMES IN AT ALL under a crisis is the crisis home's
  * (`chainStateShown.js :: tradeStoppedHere`, the siege's own record line "Field work and trade have stopped", the same
- * reading the chain cards make): under it the Imports list prints no good as brought in by trade, and says so. The
- * record's imports are untouched; the needs line beside it stands. At the end of the file, so no line-keyed row moves.
+ * reading the chain cards make). RULED (the chair, 20:34 UTC): under a siege the row does not speak of goods coming in
+ * in the present; it is LEFT OUT beside the page's own siege note (the Imports header, its goods and its empty-state
+ * line). The record's imports are untouched; the needs line stands. At the end of the file, so no line-keyed row moves.
  */
 import { tradeStoppedHere } from '../../../domain/display/chainStateShown.js';
-/** @param {{ name?: unknown } | null | undefined} s @returns {string} the Imports column's words where it lists no good */
-function noImportsWords(s) {
-  return tradeStoppedHere(s) ? `Nothing comes into ${String(s?.name || 'this place')} by trade.` : 'No recorded imports.';
-}

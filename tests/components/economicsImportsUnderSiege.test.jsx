@@ -7,7 +7,7 @@
  *
  * The row reads the crisis home (`chainStateShown.js :: tradeStoppedHere`: the siege's own record line, "Field work and
  * trade have stopped", the reading the chain cards already make): under it no good prints as an import, and the
- * column says "Nothing comes into <town> by trade." The needs line beside it stands; a calm town keeps its imports.
+ * Imports row is LEFT OUT beside the page's own siege note (the chair, 20:34 UTC). The needs line stands; a calm town keeps its imports.
  */
 import React from 'react';
 import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest';
@@ -41,7 +41,8 @@ const importsColumn = (town) => {
   const { container, unmount } = render(<EconomicsTab settlement={town} narrativeNote={null} />);
   const head = [...container.querySelectorAll('div')].find((d) => d.textContent === 'Imports');
   const body = /** @type {HTMLElement | null} */ (head?.nextElementSibling || null);
-  const out = { pills: body ? [...body.querySelectorAll('span')].map((x) => x.textContent || '') : [], text: body?.textContent || '' };
+  const exportsHead = [...container.querySelectorAll('div')].some((d) => d.textContent === 'Exports');
+  const out = { header: !!head, exportsHead, pills: body ? [...body.querySelectorAll('span')].map((x) => x.textContent || '') : [], text: body?.textContent || '' };
   unmount();
   return out;
 };
@@ -51,25 +52,27 @@ afterEach(cleanup);
 describe('under a siege that stops trade, nothing is listed as brought in by trade (#169)', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
-  test('the reader\'s hamlet under siege: no import pill; "Nothing comes into <town> by trade." (rr2s-hamlet-under_siege-rand-1)', () => {
+  test('the reader\'s hamlet under siege: the Imports row is left out (rr2s-hamlet-under_siege-rand-1)', () => {
     const town = birthApp('rr2s-hamlet-under_siege-rand-1');
     expect(importsAsPrinted(town).arriving, 'anchored: the record lists imports').toEqual(expect.arrayContaining(['Grain', 'Salt']));
     const col = importsColumn(town);
-    expect(col.pills.filter((p) => /Grain|Salt|Iron|Incense/.test(p))).toEqual([]);
-    expect(col.text).toBe(`Nothing comes into ${town.name} by trade.`);
+    expect(col.exportsHead, 'anchored: the Trade Profile prints').toBe(true);
+    expect(col.header, 'the Imports row is left out under the siege (the chair, 20:34 UTC)').toBe(false);
   }, 60000);
 
   test('the reader\'s city under siege and famine: the same (rr2s-city-under_siege+famine-rand-1)', () => {
     const town = birthApp('rr2s-city-under_siege+famine-rand-1');
     const col = importsColumn(town);
-    expect(col.pills).toEqual([]);
-    expect(col.text).toBe(`Nothing comes into ${town.name} by trade.`);
+    expect(col.exportsHead, 'anchored: the Trade Profile prints').toBe(true);
+    expect(col.header).toBe(false);
   }, 60000);
 
   test('a calm town keeps its imports (rr2s-town-calm-rand-1)', () => {
     const town = birthApp('rr2s-town-calm-rand-1');
     const arriving = importsAsPrinted(town).arriving;
     expect(arriving.length, 'anchored').toBeGreaterThan(0);
-    expect(importsColumn(town).pills.length).toBeGreaterThanOrEqual(arriving.length);
+    const col = importsColumn(town);
+    expect(col.header).toBe(true);
+    expect(col.pills.length).toBeGreaterThanOrEqual(arriving.length);
   }, 60000);
 });
