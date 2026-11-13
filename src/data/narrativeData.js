@@ -459,14 +459,14 @@ export const STRESS_NOTES = {
       'The rules the founders set have outlived the reasons for them, and people have stopped obeying.',
     ],
     mass_migration: [
-      'The founders built for a few families who knew each other. Now newcomers crowd the streets, and half the faces are strangers.',
-      'The settlement was laid out for the families that founded it. Its streets and wells were never meant for this many people.',
+      'The founders built for a few families who knew each other. Now newcomers crowd in, and half the faces are strangers.', // R2-CODE-A-4 (CENSUS-2 c/streets): no streets said of a thorp or a hamlet; true at every size
+      'The settlement was laid out for the families that founded it. Its houses and its water were never meant for this many people.', // R2-CODE-A-4 (CENSUS-2 c/streets): as above
       'The founders knew every name inside the walls. Now no one does: too many have arrived too fast.',
     ],
     wartime: [
       'The settlement was founded for trade and quiet growth. Now it feeds and arms a war.',
       'Everything here was chosen for peace: the site, the trades, the debts. Now there is a war, and the settlement is paying for it.',
-      'The founders built a place to trade. Now the army takes what the market used to sell.',
+      'The founders built a place to trade. Now the army takes what the settlement used to sell.', // R2-CODE-A-4 (CENSUS-2 a/market): no market said where the roster holds none; true at every size
     ],
     religious_conversion: [
       'The founding was blessed under a faith that is no longer ascendant here. The oaths and endowments made in its name are now contested ground.',
