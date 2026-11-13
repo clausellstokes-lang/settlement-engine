@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-13T08:57:40.391Z",
+  "generatedAt": "2026-11-13T13:36:49.925Z",
   "entry": "src/engine/serviceEntry.js",
-  "sourceHash": "0de13e2ee0502530",
-  "engineVersion": "587698c93b9b21ea",
-  "builtFromCommit": "e43a4b545d3f5060c87cc1c7b0cfb24246ff4236",
+  "sourceHash": "b88334e497bcbbb1",
+  "engineVersion": "4dcecfade824cbff",
+  "builtFromCommit": "ec78d1c1972f4dc1828b614ef2e908be0545724f",
   "inputs": [
     "node_modules/seedrandom/seedrandom.js",
     "src/data/arrivalProse.js",
@@ -121,6 +121,7 @@
     "src/domain/display/governanceAccount.js",
     "src/domain/display/institutionBackingFaction.js",
     "src/domain/display/institutionDisplayName.js",
+    "src/domain/display/labelBands.js",
     "src/domain/display/numberWords.js",
     "src/domain/display/stateProse/stateProseKernel.js",
     "src/domain/display/stateProse/tierVoice.js",
