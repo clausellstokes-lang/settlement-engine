@@ -25,7 +25,7 @@ import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.j
 import { generalDeskLines } from '../generalDeskRead.js'; // DS-GEN-18 · the general desk's ONE caller
 import Button from '../../primitives/Button.jsx';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
-import { displayTradeList, tradeMarksOnPage, revenuesOffTheLists } from '../../../domain/display/tradeListDisplay.js'; // CENSUS-3b unit 3 — the trade lists' one display reader (kind A, filterDeclared)
+import { displayTradeList, tradeMarksOnPage, revenuesOffTheLists, importsAsPrinted } from '../../../domain/display/tradeListDisplay.js'; // CENSUS-3b unit 3 — the trade lists' one display reader (kind A, filterDeclared)
 import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js'; // §934.22 item 2 — the native-resource label seam (the Imports pills)
 import { edged } from '../../../design/edgedBox.js';
 import { foodStoresWords } from '../../../domain/summary/tonightSheet.js'; // the stores sentence's ONE writer (TRIM-2 request 3)
@@ -352,9 +352,9 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // import, every item filtered by its declaration (the luxury class: `tier: ≥ village`). The
   // record's lists are untouched; the legend reads the marks actually on the page.
   const shownExports = displayTradeList(eco.primaryExports, s, { side: 'exports' });
-  const shownImports = displayTradeList(
-    [...(eco.primaryImports || []), ...terrainCriticals.filter(tc => !(eco.primaryImports || []).some(imp => imp.toLowerCase().includes(tc.toLowerCase())))],
-    s, { side: 'imports', exports: eco.primaryExports });
+  // W2-C-LEAVES item 4(b): the Imports are what trade brings (`importsAsPrinted`, the leaf the gap reader reads); a
+  // need no import meets, under any name, prints apart as a need not met (`NeedsNotMet`, at the end of the file).
+  const { arriving: shownImports, needed: unmetNeeds } = importsAsPrinted({ ...s, economicState: eco });
   const exportMarks = tradeMarksOnPage(shownExports);
   const shownCriticals = terrainCriticals.filter(tc => shownImports.some(imp => imp.toLowerCase().includes(tc.toLowerCase()) || tc.toLowerCase().includes(imp.toLowerCase())));
 
@@ -458,7 +458,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       <DeskLines mount="economics.commercialProfile" settlementName={s?.name} tier={s?.tier} rungs={[deskProse.incomeMix, deskProse.criminalLine, deskProse.incomeWeight, deskProse.criticalImport]} />
 
       {/* ── TRADE PROFILE (exports + imports unified) ───────────────────── */}
-      {(shownExports.length>0||shownImports.length>0||eco.localProduction?.length>0)&&<Section title="Trade Profile" collapsible defaultOpen>
+      {(shownExports.length>0||shownImports.length>0||unmetNeeds.length>0||eco.localProduction?.length>0)&&<Section title="Trade Profile" collapsible defaultOpen>
         <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'1fr 1fr',gap:12,marginBottom:eco.localProduction?.length>0?12:0}}>
           {/* Exports */}
           <div>
@@ -514,7 +514,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                 </div>}
               </div>
               :<p style={{fontSize:proseFontSize(FS.sm, mobile),color:MUTED,fontStyle:'italic',margin:0}}>No recorded imports.</p>
-            }
+            }{unmetNeeds.length>0&&<NeedsNotMet needs={unmetNeeds} mobile={mobile} />}
           </div>
         </div>
         {/* DS-ECO-10 at economics.exportPosture — the export POSTURE as a sentence, UNDER the
@@ -811,4 +811,19 @@ import { famineOf } from '../../../domain/facts/famine.js'; // W2-C-LEAVES item 
 function foodComesByTrade(eco) {
   const record = eco?.foodSecurity?.foodRecord;
   return record ? Number(record.normalImportPct) > 0 : true;
+}
+
+/**
+ * W2-C-LEAVES item 4(b) (2026-11-13; REVIEW-W2A-3 R2; the census's row P6need, 642 of 720): A NEED IS NOT AN IMPORT.
+ * The Imports line printed the terrain's need list (`resourceAnalysis.imports.critical`, "Required by Potter but not
+ * available") as if trade brought it, beside a gap line that said it never arrives. The leaf
+ * (`tradeListDisplay.js :: importsAsPrinted`) keeps the two apart, and a need an import meets under another name is
+ * already met (`needMetBy`); what is left is said as what it is.
+ * @param {{ needs: ReadonlyArray<string>, mobile: boolean }} props
+ */
+function NeedsNotMet({ needs, mobile }) {
+  const names = needs.map((n) => resourceDisplayName(n) || n).map((n) => n.charAt(0).toLowerCase() + n.slice(1));
+  return <p data-testid="economics-needs-not-met" style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,margin:'6px 0 0',lineHeight:1.45}}>
+    Needed, and not brought in: {names.join(', ')}.
+  </p>;
 }
