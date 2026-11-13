@@ -38,7 +38,10 @@ function value(r, d = 0) {
   if (p < 0.93) return '{"toString":1}';
   return d < 2 ? `{${r() < 0.5 ? '' : `"a":${value(r, d + 1)}`}}` : '{}';
 }
-const KEYS = ['id', 'refId', 'name', 'label', 'title', 'type', 'faction', 'parties', 'issue', 'from', 'to', 'npc1Name', 'npc2Name'];
+// KEYS_EXTRA (COHERENCE-VEIL-5): more id-forming keys, comma-separated; `KEYS_EXTRA=npc1Id,npc2Id` draws a tie's
+// ends in the deployed client's stored shape too (master's npc1Id/npc2Id; V4-1)
+const KEYS = ['id', 'refId', 'name', 'label', 'title', 'type', 'faction', 'parties', 'issue', 'from', 'to', 'npc1Name', 'npc2Name',
+  ...(process.env.KEYS_EXTRA ? process.env.KEYS_EXTRA.split(',') : [])];
 const card = (r) => `{${KEYS.filter(() => r() < 0.4).map((k) => `${JSON.stringify(k)}:${value(r)}`).join(',')}}`;
 
 it('the id differential: server card ids against the client\'s idOf', async () => {
