@@ -135,3 +135,13 @@ describe('G3 (C4a): the walk to another\'s church opens no clergy part; the pari
     expect(churches.full / church.full).toBeCloseTo((least + (greatest - least) / 3) / least, 1);
   });
 });
+
+describe('G3s (C4b): the wayside shrine has no clergy of its own, so it opens no clergy part; its parish row stays', () => {
+  test('RED-FIRST: a thorp whose only house of faith is a wayside shrine has no clergy part and no divine tradition, and keeps the parish row', () => {
+    const s = births['cold-thorp-20'];
+    expect(s.institutions.some((i) => i.name === 'Wayside shrine')).toBe(true);
+    expect(partOf(s, 'clergy')).toBeNull();
+    expect(partOf(s, 'parish')).not.toBeNull();
+    expect(s.defenseProfile.traditions.hasDivine).toBe(false);
+  });
+});

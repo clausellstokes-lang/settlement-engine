@@ -205,7 +205,7 @@ export const DEFENSE_TRADITION_KEYWORDS = Object.freeze({
   arcane: Object.freeze(['wizard', 'mages', 'arcane', 'enchant', 'spellcasting', 'academy of magic', "mages' district"]),
   arcaneGuild: Object.freeze(["mages' guild", "wizard's tower", 'arcane academy', "mages' district", 'academy of magic']),
   divine: Object.freeze(['cathedral', 'monastery', 'great cathedral', 'parish church']),
-  divineShrine: Object.freeze(['shrine', 'temple', 'friary']),
+  divineShrine: Object.freeze(['temple', 'friary']), // UPKEEP-CAPACITY C4b (the chair's G3s): a wayside shrine has no clergy
   divineStrong: Object.freeze(['cathedral', 'monastery', 'great cathedral']),
   druid: Object.freeze(['druid circle', 'grove shrine', 'elder grove', 'sacred grove']),
   wardens: Object.freeze(["warden's lodge"]), // a ranger post, defence in every world (J31)

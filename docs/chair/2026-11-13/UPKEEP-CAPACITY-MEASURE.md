@@ -621,3 +621,38 @@ The hand-back's order: the defence lane's seventh seat edits `defenseInstitution
 - Two things named for the holder of the Beasts rows (`dossierStateProse/defense.generated.js`, DS-DEF-2), not touched:
   - **9 of the 20 tabs print no sentence under the Beasts row** at all, before and after (the row goes straight to "Invasion & War"); the PDF prints one.
   - The tab's sentence is drawn from a pool keyed on the threat and the force, not on the band: 5 of the 20 now print "… holding against the creatures, but each season wears them down" or "… has answered it properly: there is a wall to hold and there are people to hold it" beside a Critical band.
+
+## STOP AT C4, RULED: the wayside shrine (the chair's G3s)
+
+**Found:** the one count test's static arm (`once.mjs` on the 3,756 at C3, `once-C3.txt`) read, after G1 and G3, the two named houses AND a third: the **Wayside shrine**, clergy and parish on order, in 143 small places. The first seat's count missed it. The catalogue says of it "No resident clergy" at every tier, yet with religion at 65 or more it opened the clergy part (`DEFENSE_TRADITION_KEYWORDS.divineShrine`: 'shrine').
+
+**Sent to the chair; RULED (the chair's, vetoable by the owner): G3s, as recommended.** The wayside shrine opens no clergy part and keeps its parish row. The reason, the chair's: the law of the count lets a house open two parts only where it does two jobs, each named; the clergy's powers are a job the shrine does not do, whatever the religion dial reads; the building as the place's rallying point is the one job it does. Built as its own commit, C4b, on top of G3.
+
+## C4b. G3s: the wayside shrine opens no clergy part; its parish row stays. THE ONE COUNT TEST
+
+**Built:** 'shrine' out of `DEFENSE_TRADITION_KEYWORDS.divineShrine` (its line kept, the note on it). Of the catalogue's names, 'shrine' answered the Wayside shrine alone; 'temple' answers none and 'friary' the Monastery or friary, which the divine list reads anyway. The parish row (`hasChurch`) is untouched.
+
+**THE ONE COUNT TEST** (`tests/generators/magicCountOnce.test.js`, one file with the magic houses' law):
+- **The static arm** (new): for each house, the parts it opens ALONE in its own place (config, tier and economy kept), minus what an empty roster opens there; of those standing in the birth, the pairs that share a score. It must read EXACTLY the named two-job houses (`TWO_JOBS`: the village's Parish church, its clergy's powers and the building as the rallying point; the Monastery or friary, its clergy's powers and its infirmary), and each is anchored as present.
+- **The wayside shrine by name** (`ONE_JOB`): wherever it stands, it opens one part, the parish row.
+- **The drop arm** ("no house feeds one score through two parts") now exempts only the named two-job houses, and classes R2's shared cap against beasts apart: a tradition part that stays open and moves only because another tradition opened or closed (anchored: the cap is at work in the corpus).
+- The two-role list (the magic houses) stands as it was, and accepts the named two-job houses.
+- **The corpus:** the seventh seat's once8 births, plus 108 births in the app's own shape with the dials drawn at every tier (thorps and hamlets among them, since the walk and the shrine are their rows and a clergy part opens only where religion is high), plus five of each class the static arm reads on the 3,756 (every fifth of each list).
+- **Red first:** at C4a the static arm and the shrine test are red on exactly the wayside shrine (12 places of the test's corpus: "internal: parish+clergy"), and the two-role test on one shrine (clergy and magic); all five green at C4b. `upkeepCapacityGaps.test.js` adds the shrine thorp (cold-thorp-20), red at C4a and green after.
+- **What the static arm reads on the 3,756** (`once.mjs`): at C3, the walk 387, the Parish church 227, the shrine 143, the Monastery 110 (the city watch already 0 after C2). After C4b the walk and the shrine are 0, and the two named houses remain.
+
+**The move against C4a** (`move-C4b.txt`): **117 places, all down** (60 thorps, 57 hamlets): the 117 of the 262 shrine holders where the shrine alone opened the clergy part. Mean over them −4.8, at most −9. 46 bands: Lightly Defended → Vulnerable 30, Vulnerable → Undefended 13, Defensible → Lightly Defended 3.
+- Beasts −0.52 over all births, at most −18; 76 band changes (Weak → Critical 72). Order 106 moved, 26 bands; military 20, 5 bands; supply 19, 8 bands; magic 0.
+- **The defence profile's divine tradition** (`traditions.hasDivine`) turns false in all 117; the parish row stands in all 117.
+- **27 power structures re-drawn, each with a band move; no power appears or vanishes; no legitimacy label changes.** AI threats: 1 gains "Economic fragility". Magic against the page: 0. The rest of the record: 28 differ outside defence and powers (the power trace's legitimacy figure).
+- **Golden corpus: 0 of 525 rows move.**
+- The real C4b tree reproduces the measured G3s variant on all 3,756 records (0 differ).
+
+**The pages: twenty of the 117, after** (`pages/c4b-faith.txt`, `pages/C4b-lines.txt`):
+- **The Beasts line**, tab and PDF: every one is about walls, fighters or no defence; none speaks of clergy. True of a place with a shrine and no cleric. 19 of 20 read Critical after.
+- **No changed line on any surface speaks of clergy, a priest or divine help**, and no "Divine Support" row exists on these pages.
+- **Lines that are NOT true of a place with a shrine and no cleric** (present before C4b and after; not this step's, listed for the lane that holds each writer):
+  - **"Medical Readiness: Clergy care" / "Clerical care. Basic wound and disease management."**, in all 20 (the PDF's capability rows): `src/domain/display/defenseDisplay.js :: deriveSupportingCapabilities`, which reads `economicState.compound.inst.hasChurch` (any 'shrine' or 'church' in a name). Held by another lane; not touched.
+  - **"Clergy provide basic wound care: better than nothing, worse than a hospital."** (and its famine form), in all 20 (the PDF): `src/domain/display/threatAssessment.js`.
+  - **A chain's divine provision**, in 5 of the 20 ("Divine provision makes up a little more", "divine provision covers 45"): the food balance's `src/generators/economy/foodBalance.js :: hasDivineFood` reads 'parish church' as a substring, so it counts the WALK to another's church (all five hold "Access to parish church"). It is G3's class on another home, the food record's, which this step does not touch: named for its holder.
+  - In 8 of the 20 a "Priestly Guidance" power governs, with a priest as its head: there the lines above have a person to stand on, though no house of clergy. In the other 12 nobody on the page is a priest.
