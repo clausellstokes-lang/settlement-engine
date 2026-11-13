@@ -81,8 +81,7 @@ const VIABILITY_LABEL = Object.freeze({
 /**
  * Structural view of the economicState fields the display model reads.
  * @typedef {Object} EconStateView
- * @property {unknown} [primaryExports]
- * @property {unknown} [primaryImports]
+ * @property {unknown} [primaryExports] @property {unknown} [primaryImports]
  * @property {unknown} [exports]
  * @property {unknown} [isEntrepot]
  * @property {unknown} [prosperity]
@@ -239,8 +238,7 @@ export function deriveViability(settlement) {
 
   const food = deriveFoodBalance(settlement);
   const dependencyCount = Array.isArray(v.dependencies) ? v.dependencies.length : 0;
-  const town = name || 'The settlement';
-  const seen = outlookFactsOf(settlement); // UPKEEP-8 (#228 #253 #326 #379): the Outlook says only what the town's own pages say
+  const town = name || 'The settlement'; const seen = outlookFactsOf(settlement); // UPKEEP-8 (#228 #253 #326 #379): the Outlook says only what the town's own pages say
 
   if (food.deficit > 0) {
     // "Depends on imports" must match what the import channel actually is:
@@ -288,8 +286,7 @@ export function deriveViability(settlement) {
     };
   }
   if (dependencyCount > 0) {
-    const goods = dependencyGoods(v.dependencies, settlement?.economicState?.primaryImports); // UPKEEP-8 (#253): a good the import list holds
-    const many = goods !== null && (/ and /.test(goods) || /s$/.test(goods));
+    const goods = dependencyGoods(v.dependencies, settlement?.economicState?.primaryImports), many = goods !== null && (/ and /.test(goods) || /s$/.test(goods)); // UPKEEP-8 (#253): a good the import list holds, and its number
     return {
       viable: true, verdict: 'dependent', label: VIABILITY_LABEL.dependent,
       summary: `VIABLE WITH CRITICAL DEPENDENCIES: ${pick(goods
@@ -311,8 +308,7 @@ export function deriveViability(settlement) {
       `${town} feeds itself and pays its own way.`,
       `${town} grows what it eats and makes what it needs, and owes no one for either.`,
       `Nothing ${town} needs to get through the year has to come from outside.`,
-    ], [!seen.buysFood && seen.paysItsWay, !seen.buysFood && !seen.needsImports, !seen.buysFood && !seen.needsImports],
-    `${town} gets through the year, buying in what its own land and trades do not provide.`)}`,
+    ], [!seen.buysFood && seen.paysItsWay, !seen.buysFood && !seen.needsImports, !seen.buysFood && !seen.needsImports], `${town} gets through the year, buying in what its own land and trades do not provide.`)}`,
     rawSummary,
   };
 }
@@ -341,13 +337,11 @@ function importRoutePhrase(channel) {
 
 /**
  * The goods a dependent town buys in, from its own dependency rows ("Imports grain"), the first
- * two by name; null where no row names a good (the variants then speak of "the goods it buys in"). UPKEEP-8 (#253): with
- * the import list handed, a good is named only where the list holds it.
+ * two by name; null where no row names a good (the variants then speak of "the goods it buys in"); UPKEEP-8: only a good the list holds.
  * @param {unknown} dependencies @param {unknown} [imports] the town's printed import list @returns {string|null}
  */
 function dependencyGoods(dependencies, imports = null) {
-  if (!Array.isArray(dependencies)) return null;
-  const listed = Array.isArray(imports) ? imports.map((x) => String(x).toLowerCase()) : null;
+  if (!Array.isArray(dependencies)) return null; const listed = Array.isArray(imports) ? imports.map((x) => String(x).toLowerCase()) : null;
   const goods = /** @type {string[]} */ ([...new Set(dependencies
     .map((d) => /^Imports (.+)$/.exec(String(d?.title || ''))?.[1]?.replace(/\s*\(.*\)\s*$/, '').trim().toLowerCase())
     .filter((g) => g && !/[0-9]/.test(g) && (!listed || listed.some((x) => x.includes(g)))))]);
@@ -779,27 +773,35 @@ function pickTrue(pick, pool, ok, twin) {
 }
 
 /**
+ * The fields the Outlook's facts read.
+ * @typedef {{ economicState?: { prosperity?: unknown, primaryImports?: unknown, primaryExports?: unknown, necessityImports?: unknown,
+ *   foodSecurity?: { foodRecord?: { normalImportPct?: unknown } | null } | null } | null,
+ *   resourceAnalysis?: { imports?: { critical?: unknown } | unknown[] } | null }} OutlookSettlement
+ */
+
+/**
  * What the town's own pages say, for the Outlook: its Law & order band (the Foundations' causal reading), its
  * printed prosperity rung (the low rungs are the Economics header's "earns less than it spends"), the food it buys
  * (the food record's import share), and the imports its printed trade list marks as a necessity or as what the terrain
  * cannot produce (the Economics tab's own list and marks: `EconomicsTab.jsx :: shownImports`).
- * @param {any} settlement
+ * @param {DossierSettlementView | null | undefined} settlement
  * @returns {{ keepsOrder: boolean, paysItsWay: boolean, buysFood: boolean, needsImports: boolean }}
  */
 function outlookFactsOf(settlement) {
-  const eco = settlement?.economicState || {};
-  const law = bandForVariable(settlement, 'law_order');
+  const town = /** @type {OutlookSettlement | null | undefined} */ (/** @type {unknown} */ (settlement));
+  const eco = town?.economicState || {};
+  const law = bandForVariable(/** @type {Parameters<typeof bandForVariable>[0]} */ (/** @type {unknown} */ (settlement)), 'law_order');
   const record = eco.foodSecurity?.foodRecord;
   /** @param {unknown} list @returns {string[]} */
   const lower = (list) => (Array.isArray(list) ? list : []).map((x) => String(x).toLowerCase());
   const necessity = lower(eco.necessityImports);
-  const res = settlement?.resourceAnalysis;
-  const terrain = res && !Array.isArray(res.imports) ? lower(res.imports?.critical) : [];
+  const imp = town?.resourceAnalysis?.imports;
+  const terrain = imp && !Array.isArray(imp) ? lower(imp.critical) : [];
   // the import list AS THE ECONOMICS TAB PRINTS IT: the record's imports and the terrain's criticals, through the list's one filter
   /** @type {string[]} */
   const recorded = Array.isArray(eco.primaryImports) ? eco.primaryImports.map(String) : [];
   const imports = lower(displayTradeList([...recorded, ...terrain.filter((t) => !recorded.some((imp) => imp.toLowerCase().includes(t)))],
-    settlement, { side: 'imports', exports: eco.primaryExports }));
+    settlement, { side: 'imports', exports: Array.isArray(eco.primaryExports) ? eco.primaryExports : [] }));
   return {
     keepsOrder: law !== 'critical' && law !== 'collapsed',
     paysItsWay: !['Subsistence', ...PROSPERITY_LABELS.slice(0, PROSPERITY_LABELS.indexOf('Poor') + 1)].includes(String(eco.prosperity ?? '')),
@@ -817,7 +819,7 @@ function outlookFactsOf(settlement) {
  */
 export function outputChipBesideWord(score, label) {
   if (!(score > 0)) return false;
-  const rung = ['Subsistence', ...PROSPERITY_LABELS].indexOf(/** @type {any} */ (String(label ?? '')));
+  const rung = ['Subsistence', ...PROSPERITY_LABELS].map(String).indexOf(String(label ?? ''));
   if (rung < 0) return true;
   const high = rung >= 1 + PROSPERITY_LABELS.indexOf('Prosperous'), low = rung <= 1 + PROSPERITY_LABELS.indexOf('Poor');
   return !((score < 35 && high) || (score >= 60 && low));

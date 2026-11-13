@@ -9,12 +9,16 @@
  * (`safetyProfile.js :: settleCrimeLinesToSignal`): the pool's desperation-theft line beside a
  * network, printed once, never twice; the clause where none exists; the entry's type kept.
  */
+import { hungerIn } from '../../src/generators/safetyLineTruth.js';
 import { beforeAll, describe, expect, it } from 'vitest';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { settleCrimeLinesToSignal } from '../../src/generators/safetyProfile.js';
 
 const CLAUSE = /No criminal infrastructure/;
 const DESPERATION = 'Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organised theft.';
+// UPKEEP-8 (#1173): beside a network the line is "Hunger-driven" only where the record holds hunger; else the same theft, not called hunger.
+const THEFT_NETWORK = 'Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.';
+const networkLineOf = (s) => (hungerIn(s.economicState) ? DESPERATION : THEFT_NETWORK);
 const NO_NETWORK = 'Theft driven by economic desperation rather than organization. No criminal infrastructure: just too many people with too little, doing what they must to survive.';
 const GUILD = { factions: [{ faction: "Thieves' Guild", category: 'criminal' }] };
 
@@ -26,9 +30,10 @@ describe('the survival line reads the final crime signal', () => {
       const { settlement } = birth(i);
       expect(settlement.powerStructure.factions.some((f) => f.category === 'criminal')).toBe(true);
       const crimes = settlement.economicState.safetyProfile.crimeTypes;
-      expect(crimes.find((c) => c.type === 'Survival crime')?.desc).toBe(DESPERATION);
+      // RE-KEYED BY IDENTITY (UPKEEP-8, #1173): the network's line, read by the record's hunger; printed once, no absence named.
+      expect(crimes.find((c) => c.type === 'Survival crime')?.desc).toBe(networkLineOf(settlement));
       expect(crimes.map((c) => c.desc).join(' ')).not.toMatch(CLAUSE); // anchored: the line above pins the survival desc in this same list
-      expect(crimes.filter((c) => c.desc === DESPERATION)).toHaveLength(1);
+      expect(crimes.filter((c) => c.desc === networkLineOf(settlement))).toHaveLength(1);
     });
   }
 

@@ -35,7 +35,7 @@ const birth = (seed) => generateSettlementPipeline(cfgFor(seed), null, { seed, c
 const lines = (s) => (s.economicState?.incomeSources || []).map((e) => e.desc);
 
 describe('the reader\'s towns: the cured line does not print', () => {
-  test.each([
+  const ROWS = [
     ['rr2s-town-under_siege-rand-1', ALCHEMY_TRADE_LINE, REMEDIES_SHORT_LINE], // #439: an apothecary, the herbs short, a siege
     ['rr2s-town-under_siege-rand-1', LOCAL_COAL_SOLD_LINE, null], // #501: nothing sold out by road under a siege
     ['rr2s-town-under_siege-rand-1', GRAIN_BOUGHT_LINE, null], // #438: nothing bought in under a siege
@@ -47,11 +47,14 @@ describe('the reader\'s towns: the cured line does not print', () => {
     ['rr2s-city-under_siege+famine-rand-1', ALCHEMY_TRADE_LINE, ALCHEMY_UNDER_SIEGE_LINE], // an alchemist, under a siege
     ['rr2s-metropolis-wartime-rand-1', LOCAL_COAL_LINE, METAL_WORKED_LINE], // #1301: no iron among the imports
     ['rww-metropolis-wartime-1', TITHES_RENTS_LINE, TITHES_RENTS_PLAIN_LINE], // #ww-414: the third source does not dominate
-  ])('%s: "%s"', (seed, cured, twin) => {
-    const printed = lines(birth(seed));
-    if (twin) expect(printed).toContain(twin);
-    else expect(printed).toContain(''); // the row prints its source and share alone
-    expect(printed).not.toContain(cured); // anchored: the twin, or the silent row, was asserted present on the line above
+  ];
+  test("each reader's town: the cured line does not print, and its twin or the silent row does", () => {
+    for (const [seed, cured, twin] of ROWS) {
+      const printed = lines(birth(seed));
+      if (twin) expect(printed).toContain(twin);
+      else expect(printed).toContain(''); // the row prints its source and share alone
+      expect(printed).not.toContain(cured); // anchored: the twin, or the silent row, was asserted present on the line above
+    }
   });
   test('the anchor: where an alchemist house stands and no siege, the original prints', () => {
     const s = birth('rr2s-metropolis-wartime-rand-1'); // #1248's town: at this tip its roster holds an Alchemist quarter

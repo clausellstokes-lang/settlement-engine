@@ -45,10 +45,10 @@ describe('step 5: the Outlook says what the pages say', () => {
     let read = 0;
     expectNoSeedFailures(collectSeedFailures(seeds, (seed) => {
       const s = birth(seed); const t = String(deriveViability(s).summary); const eco = s.economicState; read++;
-      if (/keeps order/.test(t)) expect(['critical', 'collapsed'], `${seed}: ${t}`).not.toContain(bandForVariable(s, 'law_order'));
-      if (/pays its (?:own )?way/.test(t)) expect(LOW, `${seed}: ${t}`).not.toContain(eco.prosperity);
+      if (/keeps order/.test(t)) expect(['critical', 'collapsed'], `${seed}: ${t}`).not.toContain(bandForVariable(s, 'law_order')); // anchored: the guard on this line holds the phrase present in `t`
+      if (/pays its (?:own )?way/.test(t)) expect(LOW, `${seed}: ${t}`).not.toContain(eco.prosperity); // anchored: the guard on this line holds the phrase present in `t`
       if (/feeds itself|grows what it eats|has to come from outside/.test(t)) expect(Number(eco.foodSecurity.foodRecord.normalImportPct), `${seed}: ${t}`).toBe(0);
-      expect(t, seed).not.toMatch(/only while [a-z]+ keep arriving/); // a mass noun keeps arriving; anchored: `read` counts the verdicts, asserted below
+      expect(t, seed).not.toMatch(/only while [a-z]+ keep arriving/); // anchored: (a mass noun keeps arriving) `read` counts the verdicts, asserted below
     }));
     expect(read).toBe(seeds.length);
   });

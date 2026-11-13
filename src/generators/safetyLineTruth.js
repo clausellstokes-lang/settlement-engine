@@ -14,14 +14,14 @@ export const SMALL_PLACES = Object.freeze(['thorp', 'hamlet', 'village']);
 export const TINY_PLACES = Object.freeze(['thorp', 'hamlet']);
 
 /**
- * How many gang houses the roster holds ("multiple criminal factions" is several).
+ * How many gang houses the roster holds (the catalogue's several-gangs row counts two).
  * @param {ReadonlyArray<unknown>} institutions @returns {number}
  */
 export function GANG_HOUSES_OF(institutions) {
   let n = 0;
   for (const i of institutions || []) {
     const name = String(typeof i === 'string' ? i : /** @type {{ name?: unknown }} */ (i)?.name || '').toLowerCase();
-    n += name.includes('multiple criminal factions') ? 2 : name.includes('street gang') ? 1 : 0;
+    n += name.includes('multiple criminal') ? 2 : name.includes('street gang') ? 1 : 0;
   }
   return n;
 }
@@ -46,13 +46,13 @@ export const MERCHANT_ARMY_BESIDE = /^(?:The merchant guilds|Wealthy interests) 
 const PAPER_RE = /^The (.+?) exists on paper\. Chronically underpaid and poorly equipped(: these are volunteers with day jobs, not soldiers)?\. Susceptible to bribery; enforcers who can be bought by whoever has coin\./;
 
 /**
- * @param {string} text @param {unknown} prosperity the purse word (Prosperous, Moderate, Poor) @param {{ military?: unknown }} read
+ * @param {string} text @param {unknown} prosperity the purse word (Prosperous, Moderate, Poor) @param {{ forceScore?: unknown }} read the military score
  * @returns {string}
  */
 export function paperTruth(text, prosperity, read) {
   const m = PAPER_RE.exec(text);
-  if (!m || typeof read.military !== 'number') return text;
-  const held = ['STRONG', 'ADEQUATE'].includes(scoreBand(read.military));
+  if (!m || typeof read.forceScore !== 'number') return text;
+  const held = ['STRONG', 'ADEQUATE'].includes(scoreBand(read.forceScore));
   const paid = ['Prosperous', 'Wealthy', 'Comfortable', 'Moderate'].includes(String(prosperity));
   if (!held && !paid) return text;
   const lead = held && paid ? `Some of the ${m[1]} take bribes from whoever has coin.`

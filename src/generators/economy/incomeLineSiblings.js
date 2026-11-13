@@ -126,8 +126,8 @@ export const INCOME_STATE_SIBLINGS = Object.freeze({
 /**
  * The income line the finished record makes true: the original, its declared twin, or ''.
  * @param {string} desc the line the branch printed
- * @param {{ roster: ReadonlyArray<string>, siege: boolean, imports: ReadonlyArray<unknown>, exports: ReadonlyArray<unknown>,
- *   chains: ReadonlyArray<{ label?: unknown, status?: unknown }>, top: boolean, source?: string, managedForest?: boolean }} f the
+ * @param {{ roster: ReadonlyArray<string>, besieged: boolean, imports: ReadonlyArray<unknown>, exports: ReadonlyArray<unknown>,
+ *   chains: ReadonlyArray<{ chainId?: unknown, status?: unknown }>, top: boolean, source?: string, managedForest?: boolean }} f the
  *   roster's names lower-cased; the siege; the final trade lists; the chains with their states; whether the row is the
  *   largest source; its source label; whether a managed or shipbuilding forest stands
  * @returns {string}
@@ -138,36 +138,36 @@ export function trueIncomeDesc(desc, f) {
   // the first ten only: the economy's reconcile pass caps the import list at ten after this (steps/economyReconcilePass.js)
   const bought = (/** @type {RegExp} */ re) => f.imports.slice(0, 10).some((x) => re.test(String(x)));
   const sold = (/** @type {RegExp} */ re) => f.exports.some((x) => re.test(String(x)));
-  const impaired = (/** @type {RegExp} */ re) => f.chains.some((c) => re.test(String(c?.label ?? '')) && c?.status === 'impaired');
-  if (f.siege && SIEGE_CLOSED_SOURCES.includes(String(f.source ?? ''))) return '';
+  const impaired = (/** @type {ReadonlyArray<string>} */ ids) => f.chains.some((c) => ids.includes(String(c?.chainId ?? '')) && c?.status === 'impaired'); // by the chain's id, not its printed name
+  if (f.besieged && SIEGE_CLOSED_SOURCES.includes(String(f.source ?? ''))) return '';
   switch (desc) {
     case ALCHEMY_TRADE_LINE: case ALCHEMIST_SUPPLEMENTS_LINE:
-      if (impaired(/^(?:Alchemy|Herbalism)\b/)) return REMEDIES_SHORT_LINE;
+      if (impaired(['alchemy', 'herbalism'])) return REMEDIES_SHORT_LINE;
       if (!has(/alchemist/)) return REMEDIES_LINE; // an apothecary, a herbalist or a hedge wizard is not an alchemist
-      return desc === ALCHEMY_TRADE_LINE && f.siege ? ALCHEMY_UNDER_SIEGE_LINE : desc;
+      return desc === ALCHEMY_TRADE_LINE && f.besieged ? ALCHEMY_UNDER_SIEGE_LINE : desc;
     case LOCAL_ORE_LINE: return has(/smith/) ? desc : forge ? METAL_WORKED_LINE : '';
     case IRON_IMPORTED_LINE: case LOCAL_COAL_LINE:
       if (!forge) return '';
-      return f.siege || !bought(/\biron\b/i) ? METAL_WORKED_LINE : desc;
-    case LOCAL_COAL_SOLD_LINE: return f.siege || !sold(/^coal\b/i) ? '' : desc;
-    case GRAIN_BOUGHT_LINE: return f.siege || !bought(/\bgrain\b/i) ? '' : desc;
+      return f.besieged || !bought(/\biron\b/i) ? METAL_WORKED_LINE : desc;
+    case LOCAL_COAL_SOLD_LINE: return f.besieged || !sold(/^coal\b/i) ? '' : desc;
+    case GRAIN_BOUGHT_LINE: return f.besieged || !bought(/\bgrain\b/i) ? '' : desc;
     case WOOL_LOCAL_LINE:
-      if (impaired(/^Textiles\b/)) return CLOTH_SHORT_LINE;
-      if (has(/weav/) && has(/fuller/) && !f.siege) return desc;
+      if (impaired(['textiles'])) return CLOTH_SHORT_LINE;
+      if (has(/weav/) && has(/fuller/) && !f.besieged) return desc;
       return has(/weav|fuller/) ? WOOL_LOCAL_WORKED_LINE : '';
     case WOOL_BOUGHT_LINE:
-      if (impaired(/^Textiles\b/)) return CLOTH_SHORT_LINE;
-      if (!f.siege && bought(/\bwool\b/i)) return desc;
+      if (impaired(['textiles'])) return CLOTH_SHORT_LINE;
+      if (!f.besieged && bought(/\bwool\b/i)) return desc;
       return has(/weav|fuller/) ? CLOTH_WORKED_LINE : '';
     case FISH_EXPORT_LINE:
-      if (f.siege) return '';
+      if (f.besieged) return '';
       if (has(/fisher|fishing/)) return sold(/\bsalt(?:ed)? fish\b/i) ? desc : FISH_LANDED_LINE;
       return has(/\bfish/) ? FISH_SOLD_LINE : '';
-    case QUARRY_LINE: return has(/quarr/) && !f.siege ? desc : '';
-    case MASONS_LINE: return has(/mason|stonecut/) && !f.siege && bought(/stone|masonry|marble/i) ? desc : '';
+    case QUARRY_LINE: return has(/quarr/) && !f.besieged ? desc : '';
+    case MASONS_LINE: return has(/mason|stonecut/) && !f.besieged && bought(/stone|masonry|marble/i) ? desc : '';
     case TITHES_RENTS_LINE: return f.top ? desc : TITHES_RENTS_PLAIN_LINE;
     case TIMBER_LINE: return has(/sawmill|lumber/) ? desc : f.managedForest ? TIMBER_MANAGED_LINE : TIMBER_PLAIN_LINE;
-    case TIMBER_BOUGHT_LINE: case MARKET_DAY_LINE: return f.siege ? '' : desc;
+    case TIMBER_BOUGHT_LINE: case MARKET_DAY_LINE: return f.besieged ? '' : desc;
     default: return desc;
   }
 }

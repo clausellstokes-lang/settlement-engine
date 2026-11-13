@@ -476,5 +476,5 @@ function withGuardPaidFromDefence(settlement) {
   const safety = es?.safetyProfile;
   if (!safety || typeof safety.guardEffectivenessDesc !== 'string') return es;
   const pay = purseWordOfBand(economicSurvivalBandOf(settlement), standingLabelOf(es));
-  return { ...es, safetyProfile: { ...safety, guardEffectivenessDesc: keptGuardLine(safety.guardEffectivenessDesc, settlement.institutions || [], pay, { military: settlement.defenseProfile?.scores?.military, tradeDependencies: es.tradeDependencies }) } }; // UPKEEP-8: the guard line's two readings of the record
+  return { ...es, safetyProfile: { ...safety, guardEffectivenessDesc: keptGuardLine(safety.guardEffectivenessDesc, settlement.institutions || [], pay, { forceScore: settlement.defenseProfile?.scores?.military, tradeDependencies: es.tradeDependencies }) } }; // UPKEEP-8: the guard line's two readings of the record
 }

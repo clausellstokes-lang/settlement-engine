@@ -29,7 +29,7 @@ const linesOf = (s) => { const sp = s.economicState.safetyProfile; return [sp.sa
 const SMALL = ['thorp', 'hamlet', 'village'];
 
 describe('the readers\' towns: the cured line does not print, its twin does', () => {
-  test.each([
+  const ROWS = [
     ['rv2-under_siege-town-0', /maintains standard patrol|walks the usual rounds|patrols on a regular round|on the rounds most hours/, /keeps what rounds it can while the supplies it needs are cut off/], // #459
     ['rr2s-city-calm-rand-1', /exists on paper\. Chronically underpaid/, /^Some of the garrison and city watch take bribes from whoever has coin\./], // #713
     ['rr2s-metropolis-calm-rand-1', /exists on paper\. Chronically underpaid/, /^Some of the garrison and city watch take bribes from whoever has coin\./], // #1201
@@ -38,10 +38,13 @@ describe('the readers\' towns: the cured line does not print, its twin does', ()
     ['rr2s-metropolis-plague_onset-port-1', /does little harm/, /^Some goods change hands here without a licence or a duty paid\.$/], // #1377
     ['rww-town-under_siege-1', /^Territorial gangs control specific districts/, /^A street gang controls part of the place/], // #ww-516
     ['rww-thorp-under_siege-1', /military command has taken charge/, /^Those holding the place keep order/], // #ww-275
-  ])('%s', (seed, cured, twin) => {
-    const lines = linesOf(birth(seed));
-    expect(lines.some((t) => twin.test(t)), lines.join(' | ')).toBe(true);
-    expect(lines.some((t) => cured.test(t))).toBe(false); // anchored: the twin was asserted present on the line above
+  ];
+  test("each reader's town: its twin prints and the cured line does not", () => {
+    for (const [seed, cured, twin] of ROWS) {
+      const lines = linesOf(birth(seed));
+      expect(lines.some((t) => twin.test(t)), lines.join(' | ')).toBe(true);
+      expect(lines.some((t) => cured.test(t))).toBe(false); // anchored: the twin was asserted present on the line above
+    }
   });
 });
 

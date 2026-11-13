@@ -39,16 +39,19 @@ const FALSE_UNDER = [
 ];
 
 describe('the seventh seat\'s cells: the contradicted sentence does not print, and what prints is true', () => {
-  test.each([
+  const ROWS = [
     ['rv2-calm-thorp-3', 'Beasts & Monsters', 'Quiet country and no organised defence', 'Quiet country, and nothing organised is kept against it.'], // 233 rows: Critical
     ['rv2-calm-thorp-1', 'Beasts & Monsters', 'citizen militia provide a viable but demanding', 'An embattled region, and only a palisade and a citizen militia to hold it.'], // 96: Critical
     ['rv2-calm-town-0', 'Invasion & War', 'no organized military force', 'Walls, and a watch to keep them.'], // 86 + 54: a watch stands
     ['rv2-calm-town-7', 'Beasts & Monsters', 'nobody organised to meet it', 'Active frontier, with walls and a watch to meet what comes.'], // 44 + 16: a watch stands
     ['rv2-calm-hamlet-1', 'Invasion & War', 'not enough against an army', 'A palisade and armed townsfolk who know how to hold it.'], // 28: Strong
-  ])('%s %s', (seed, label, cured, twin) => {
-    const row = rows(birth(seed))[label];
-    expect(row.assess).toBe(twin);
-    expect(row.assess).not.toContain(cured); // anchored: the twin was asserted on the line above
+  ];
+  test("each cell's town: its twin prints and the contradicted sentence does not", () => {
+    for (const [seed, label, cured, twin] of ROWS) {
+      const row = rows(birth(seed))[label];
+      expect(row.assess).toBe(twin);
+      expect(row.assess).not.toContain(cured); // anchored: the twin was asserted on the line above
+    }
   });
 });
 

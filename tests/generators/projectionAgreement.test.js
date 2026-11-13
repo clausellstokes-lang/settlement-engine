@@ -96,7 +96,9 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     expect(heard.length).toBeGreaterThan(0); // anchored: the grid reaches the crime lines
   });
   test('RED-FIRST: the court-without-prison line names no prison (PRESUME\'s register, banked as this lane\'s: 53 towns)', () => {
-    const profile = generateSafetyProfile({}, 'town', [{ name: 'Town watch', category: 'Defense' }, { name: 'Town hall', category: 'Government' }]);
+    // RE-KEYED BY IDENTITY (UPKEEP-8, the census's court lines): the line names a court only where a courthouse stands (the
+    // defence home's `hasCourthouse`), so the court-without-prison town holds a Courthouse, not a Town hall; same line, same law.
+    const profile = generateSafetyProfile({}, 'town', [{ name: 'Town watch', category: 'Defense' }, { name: 'Courthouse', category: 'Government' }]);
     expect(profile.guardEffectivenessDesc).toMatch(/court/); // anchored: the branch prints its court line
     expect(profile.guardEffectivenessDesc).not.toMatch(/prison/i);
   });
