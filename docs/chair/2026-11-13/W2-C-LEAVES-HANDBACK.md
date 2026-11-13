@@ -347,3 +347,81 @@ final statement comes AFTER this list, once.
   `finisherHere`-style test (validationOnPage.js :: houseOfKindHere + FINISHING_TRADES; note FINISHING_TRADES has no
   tannery entry by design — a "Tanner (established)" answers "Tannery" by family or needs a tannery trade entry for
   this reader); if the true cure is a data row, name it for the data lane and go on. NEXT STEP 0, before P1.
+
+---
+
+# PART 3 — the third seat (W2-C-LEAVES-3, 2026-11-13, from d6e355a9d)
+
+**Seat:** session_01FE9mEwfLhtfWudLqnUrFHx. Scratch worktree on a local branch at the lane's tip (read back from origin:
+d6e355a9d, as the assignment said); `npm ci` there; plain pushes. A second clean worktree at d6e355a9d (`tip0`) holds the
+seat's "before": the census at d6e355a9d (720 rendered, the counter's own rows checked: 47 rows, `{ dumps: 720 }`, per the
+chair's hazard note of 19:28 UTC) and the reader's 20 towns born there (`probes/births20.mjs`, render.rr2s.jsx's cfgFor
+verbatim). Red-firsts run in `tip0` (the clean tree), never by reverting the lane.
+
+## The chair's assignment to this seat (copied in; the chair's messages are not on the branch)
+In order, each its own commit, measured first on the 720 in the app's shape and on the reader's own town, red first:
+(1) #452 with R1's reader (a finisher is any live-roster house that does that finishing; a need the roster's own house
+meets is not listed; cure at the reader, FINISHING_TRADES; a data row named for the data lane); (2) P1 by the ruling
+copied in Part 2 (re-take the first seat's counts at the tip); (3) round three's list, HIGH first, #169 first
+(EconomicsTab.jsx 36 lines, ResourcesTab.jsx 6, defenseDisplay.js 6, computeActiveChains.js 6, MagicTab.jsx 2; the
+"Produced locally" pills checked against d5d156deb; RULED (b): "Needs X · affects: a, b, c" becomes ONE plain sentence
+of consequence naming only services the town's roster holds, nothing where nothing depends on it, its data rows other
+lanes', the form new wording listed with five towns); (4) the lane's older list (the validation lines; the defence
+display's mediums; item 5); (5) the final statement once, with the second seat's notes on the census and clean
+worktrees. RULED on the second seat: its four calls accepted; the "Via: <house>" line is the house-label lane's;
+#608 is the defence lane's; #195/#196 ("Access to …" chains) are round two's second code lane's; defenseStateProse.js
+is not to be changed; the defence display's pay lines are the defence lane's. The page shows the ratings, never the
+machinery; no new key in the record; no new word in the vocabulary file; a name a user can hide is never written into
+a stored composed sentence; a claim of zero counted on every surface; a count falling is not a cure. No commit at or
+below d6e355a9d rewritten.
+
+## The chair's rulings on P1 as pushed (19:37 UTC; copied in)
+- **P1-a.** The nine stopped (modelled chain idle, filed Partial/Full; all hot-spring herbs, eight beside an
+  Apothecary): the eight stand as filed and THE LEAF LEARNS THE HOUSE: an apothecary's house works the medicinal herbs,
+  one named entry of the leaf's own closed list with its cause (the counterpart of R3's). Measure what else it changes
+  on the 720 (gap line, grade, half-way line) and read each change. The ninth (no such house): read its town; if no
+  house works the herbs it reads Unexploited.
+- **P1-b.** A resource whose own raw good the town exports is not "Unexploited": the grade's reader takes that record
+  fact as worked (the Partial group), and "No one here works the …" does not print beside an export of that resource's
+  raw good; a second fact beside the leaf, named in the reader with its cause; the leaf not widened. Acceptance: the 47
+  at zero; card and sentence never disagree; twelve read.
+- **P1-c.** DS-ECO-11's exploitation line reads the filing in 161 towns: change THE ONE READ (its selector reads the
+  grade reader), nothing else in that file, named as shared; if the variants cannot say a true thing of a worked
+  resource, park the row with the cell and three towns for the corpus lane. Acceptance: the 161 at zero; line and card
+  read together in twenty towns.
+- Then round three's list as briefed.
+- Earlier the same hour (19:28 UTC): census.sh exits 0 when its counter fails (a pipe): after every census, check the
+  counter's own rows and say so in the final statement.
+
+## Items (this seat)
+| item | commit | on the 720 (before → after) | the reader's 20 | read | guard (red at → green) |
+|---|---|---|---|---|---|
+| #452 "Needs:" by kind and trade | 3866cc6c7 | 102 Unexploited cards in 92 towns lose 158 house names (53 lines whole); gap lines 0 changed | 3 cards (#1065's town: no hides need) | all 102 by roster listing: 158 false names out, 0 true | resourceCardNeedsHousesHere.test.jsx (d6e355a9d: 4 of 4 red) |
+| P1 the grade cards | 9bcf0127a | Unexploited beside a working chain 196 cards / 171 towns → 0 (Partial, body the resource alone); silent-model 79 stand; modelled-idle Partial/Full 9 STOPPED as filed; card vs sentence 0; PDF = tab 720/720 | 4 cards (#558, #1065) | 12 of the moved: 12 borne out, 1 doubtful (r2s-monster_pressure-town-1) | resourceGradeReadsChainLeaf.test.jsx (3866cc6c7: 4 of 4 red) |
+| #169 Imports under a siege | 7bbe8c119 | 29 of 31 siege towns, 186 import pills → 0; "Nothing comes into <town> by trade." in place | 3 towns, 25 pills | 31 of 31: pills false, sentence true | economicsImportsUnderSiege.test.jsx (d6e355a9d: 2 of 3 red) |
+
+## Calls taken without the chair (this seat)
+1. **#452's "by kind" reads the catalogue's SCALE groups** (an exclusiveGroup named "…Scale": tanneryScale holds Tanners
+   and Tanner (established), one trade at two sizes). Only tanneryScale touches a chain's house today; the gap lines
+   did not change on the 720.
+2. **P1's moved body:** the resource alone (no flow chips; the PDF row no processing or output). The working chains'
+   house lists name houses that do not work the resource (alpine pasture → Merchant guilds (3-8), r2r-town-11; timber
+   → River boatyard, River ferry, r2s-religious_conversion-village-1; 5 of 196 name no roster house), and the filed
+   goods are the chain table's promise: a body from either is not true, so none is printed (ruling 4's "no false body
+   line"; no new words).
+3. **P1-c's file:** the DS-ECO-11 exploitation selector is `economyStateProse.js :: leadingExploitation` (its call in
+   economyStateProse), not generalStateProse.js (which holds no exploitation selector; grep). The one read is taken
+   there; no lane in flight changes economyStateProse.js beyond this lane's base.
+
+## Stops (this seat)
+- (none blocking)
+
+## Found, not mine (this seat)
+- **#169 on the other surfaces:** the PDF's Economics chapter (`pdf/sections/EconomicsTrade.jsx`, primaryImports raw) and
+  the Foundry journal (`foundry/journalPages.js`, displayTradeList) still list imports under a siege in the same 29 towns.
+- **The PDF's Unexploited rows** print the chain's house list raw in the processing column (`viewModelBodySlices.js ::
+  resourcesSlice`), the same list #452 cured on the tab's "Needs:" line.
+
+## THE EXACT NEXT STEPS (kept current)
+P1-a, P1-b, P1-c (each its own commit, measured first); then round three's list HIGH first (#506 is the label lane's
+"Via" seam: leave), then its mediums by file; then the older list; then the final statement.
