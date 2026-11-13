@@ -678,7 +678,7 @@ function bandsAdmitted(a) {
  * true"). The word's truth is the disjunction of its `atoms`, its `kinds` in force and its `bands`, or — for a word of
  * normal times — that none of its `notKinds` is in force.
  *   naming   the declaration admits the line only where the word is TRUE: it needs one of the word's atoms (or a
- *            `sufficient` one), or a band of a dimension whose every admitted band is a true band, or a crisis whose
+ *            sufficient one, by its .sufficient field), or a band of a dimension whose every admitted band is a true band, or a crisis whose
  *            every value means only the word's kinds; a word of normal times is answered by an exclusion of its kinds
  *            or by `calm`.
  *   denies   the declaration admits the line only where the word is FALSE: every atom excluded, every kind excluded,
