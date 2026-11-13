@@ -150,3 +150,31 @@ their other surfaces with `surfaces.sh` (PDF canon/draft/timeline, Foundry journ
 - NAMED, not touched: the note under the rows says "This reading includes the current condition: wartime pressure."
   under a siege (`domain/display/conditionWords.js`, the condition's name for the siege).
 - Red first: tests/components/substrateTradeUnderSiege.test.jsx (red at the base tree). The eleven SubstrateTab files green.
+
+## The census's 720 (SECOND-WAVE-CENSUS's own instrument, base aac79b808 against tip 46e5c1002) — EXECUTED
+The census renders all 720 dossiers through each tree's own OutputContainer. The counter was re-run outside the
+script's pipe on both trees (the chair's hazard notice of 19:28 UTC): exit 0 both, counts.txt 50 lines both, equal to
+the script's own output. compare.mjs: 26 rows, all OLD, base = tip on every row (no rise, no fall).
+This seat's patterns on the same dumps (`mycount.mjs`, one per view line):
+
+| pattern | base lines / towns | tip lines / towns |
+|---|---|---|
+| Defense: "REQ" badge | 360 / 360 | 0 / 0 |
+| Defense: "FORCED" badge | 246 / 246 | 0 / 0 |
+| Defense: "Underworld: X · band" | 118 / 118 | 0 / 0 |
+| History: "Exile & Return" | 622 / 311 | 0 / 0 |
+| Foundations Food word ≠ the Overview's food word | 720 / 720 | 0 / 0 |
+| Foundations trade band word in a forced-siege seed | 24 / 24 | 0 / 0 |
+| History: two severity chips run together (b2, STOPPED) | 1,089 / 653 | 1,089 / 653 |
+| History: "Origin:" row (named to ra, kept) | 720 / 720 | 720 / 720 |
+
+Field diff: the births at tip are BYTE-IDENTICAL to base (sha256 of the decoded ndjson): census 720 a65d30b2…,
+reader 20 2997a853…, fresh 144 666d7793…, so no field of any family moves (every change is a .jsx display read).
+
+## The reader's twenty, base against tip (the reader's own render.sh, whole owner view) — EXECUTED
+Every changed line of the twenty pages is one of this seat's: the 20 badges gone; "Exile & Return" → "Occupation
+Legacy" (11) and "Occupation" → "Infiltration Fear" (9) on the event cards, the dots and the legend; Foundations Food
+→ the Overview's word in all 20 (Adequate → Secure 10, Collapsed/Critical → "Deficit — active famine" 5, Strained →
+Pressured or Deficit, Surplus → Secure in rr2s-village-monster_pressure-rand-1, whose Overview reads Secure);
+Trade connectivity → "Under siege" in the three siege towns; the three Underworld lines lose their band. No other line
+of any page moved.
