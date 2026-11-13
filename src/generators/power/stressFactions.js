@@ -149,9 +149,12 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
     // the record is. It takes a real name like every stress faction, from the `other` pool: the
     // stress is political and "strategic, not extractive", so neither the merchant nor the noble
     // pool's framing fits, and `other` is the category the old placeholder inferred.
-    // `hidden: true` carries the fiction's fact; the description is unchanged.
+    // `hidden: true` carries the fiction's fact. COHERENCE-POWERS-8 (the lane's row #640, rw3-city-infiltrated-1): the
+    // description claimed "embedded assets in at least two powers", and no birth gives the infiltrator a card in another
+    // power or an agent anywhere (12 of 12 on the census's 720: its one face holds no other membership, and no card's
+    // hidden allegiance names it); it claims only the people it has.
     ke('infiltrated') &&
-      pushPoolNamed(factions, 'other', 15, 'An external interest with embedded assets in at least two powers. Its presence is not known to the settlement.', { hidden: true }),
+      pushPoolNamed(factions, 'other', 15, 'An external interest with its own people placed inside the settlement. Its presence is not known to the settlement.', { hidden: true }),
     ke('succession_void') &&
       (factions.forEach((N) => {
         (N.isGoverning && ((N.power = Math.round(N.power * 0.5)), (N.modifiers = [...(N.modifiers || []), 'vacant'])),
