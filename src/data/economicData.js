@@ -660,10 +660,11 @@ export const TRADE_DEPENDENCY_NEEDS = {
         ],
         label: "Magical ley lines",
         detail: "arcane energy for guild operations",
+        // W2-FIX-DATA-6 (REVIEW-W2A-3 #919): the guild offers no licensing (institutionServices.js :: "Mages' guild"), so
+        // the row no longer names it among what the shortage affects.
         svcs: [
           "spellcasting",
-          "arcane training",
-          "magical licensing"
+          "arcane training"
         ]
       },
       "Mages' district": {

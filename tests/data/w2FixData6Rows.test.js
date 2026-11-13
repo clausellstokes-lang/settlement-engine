@@ -8,6 +8,7 @@
  * in loses it.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -36,5 +37,12 @@ describe('W2-FIX-DATA-6: the census writers in the data lane\'s files', () => {
     expect(besieged).toContain('Relay horses kept for coaches and dispatch riders; while the siege holds the roads, none go out.');
     const calm = servicesOf(bornCensus('r2r-town-2'), 'Coaching inn').map((v) => String(v.desc));
     expect(calm).toContain('Beds, meals, and stabling for travelers on the road. Priced by quality.');
+  }, 120_000);
+
+  test('#919: the mages\' guild\'s ley-line shortage names no licensing the guild does not offer (r2r-city-1, r2s-under_siege-city-0)', () => {
+    expectNoSeedFailures(collectSeedFailures(['r2r-city-1', 'r2s-under_siege-city-0'], (seed) => {
+      const deps = bornCensus(seed).economicState.tradeDependencies.filter((/** @type {any} */ d) => d.institution === "Mages' guild");
+      expect(deps.map((/** @type {any} */ d) => d.affectedServices.join(', ')), seed).toEqual(['spellcasting, arcane training']);
+    }), 'every guild town names only what the guild offers');
   }, 120_000);
 });
