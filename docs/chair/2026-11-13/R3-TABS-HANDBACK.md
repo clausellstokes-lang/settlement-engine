@@ -69,3 +69,31 @@ their other surfaces with `surfaces.sh` (PDF canon/draft/timeline, Foundry journ
   tab prints; the tab does not print a connectivity word the town's own crisis contradicts: under such a siege the row
   says so in the crisis's own words from the record, or does not print; if that cannot be done at the tab without a new
   reading, PARK with the measure and three towns.
+
+### 3. HistoryTab :: ALL_EC — the event card's category word (c) — DONE
+- Line: #1104 (MED), rr2s-city-occupied-rand-1: "The Occupation · Exile & Return".
+- Trace: each of the two categories draws ONE template (historyPolicyData.js): `exile_return` → occupation_legacy
+  ("The Occupation"), `occupation_infiltration` → infiltration_fear ("The Purge"). Measured on 884 births at base:
+  385 and 443 events, every one so; the tab printed "Exile & Return" and "Occupation" on them (page, the timeline's
+  dot titles and its legend).
+- Cure: the words the same tab already gives those templates as tensions (TENSION_META): "Occupation Legacy",
+  "Infiltration Fear". No new words. Read in rr2s-city-occupied-rand-1: "The Occupation / Occupation Legacy",
+  "The Purge / Infiltration Fear", true by each event's own description.
+- NAMED, not touched: `src/domain/dossier/plotHooks.js` carries the same two labels (the Plot Hooks tab); the PDF
+  prints "Exile & Return" 6 times per variant on the twenty and the Foundry journal 4 (their category tables, not
+  this tab's); the corpus row DS-GEN-9 "event type: exile_return" ("People {settlement} sent away came back") is the
+  corpus lane's and sits under the same category.
+- Red first: tests/components/historyEventCategoryLabel.test.jsx. The fifteen files that import HistoryTab: 752 green.
+
+### 4. HistoryTab — the founding row "Origin:" (#488 #594 #845) — STOP for this seat (named)
+- Trace: the row prints `history.founding.reason`, drawn by `narrativeGenerator.js :: genArrivalDetail` from
+  `src/data/narrativeData.js :: TERRAIN_NARRATIVE_HOOKS` (and its commodity hooks) with no disqualifier read from the
+  record. The cut's own `wordsHolders` gives narrativeData.js to lane **ra**. The fault is the pool's, not the tab's.
+- Measure: at my base #845's town (rr2s-city-famine-rand-1) holds `ancient_grove`, so "developed around a sacred grove"
+  is TRUE there; #488 ("the local soil produces something…", plains, no crop exported) and #594 (salt, none near)
+  stand. A read of 29 fresh towns (one in five of the 144): 19 true, 10 false (coastal trading port / maritime hub /
+  natural harbour / shipwright / naval base in places whose Overview says there is no wharf; a logging operation on
+  plains with no timber; an agricultural market centre in a hamlet).
+- Why not cured at the tab: the row is true in about two towns of three, so removing it is a count falling, not a cure,
+  and "never delete a line that is true somewhere". Recommendation: the pool gains disqualifiers read from the record
+  (the wharf/docks fact, the resource list, the tier) on lane ra or the data lane.

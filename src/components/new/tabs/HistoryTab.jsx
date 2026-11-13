@@ -25,11 +25,16 @@ import { MentionText } from '../../ProseParagraph.jsx';
 import { FLUSH } from '../../../design/flush.js';
 
 // Extended event type colors (EVENT_COLORS only covers 5 types)
+// ⛔ A CATEGORY WORD NAMES THE EVENT'S OWN TEMPLATE (R3-TABS, round three's cut #1104). Each of these
+// two categories draws ONE template (historyPolicyData.js): `exile_return` → occupation_legacy ("The
+// Occupation", a previous occupation ended), `occupation_infiltration` → infiltration_fear ("The Purge",
+// enemy agents and denunciations). They printed "Exile & Return" and "Occupation" (385 and 443 events of
+// 884 births at aac79b808, every one); they now read the words TENSION_META below gives those templates.
 const ALL_EC = {
   ...EVENT_COLORS,
   demographic: {color:'#1a5a28',bg:'#f0faf2',border:'#a8d8b0',label:'Demographic'},
-  exile_return: {color:'#7a4010',bg:'#faf4ec',border:'#d8c090',label:'Exile & Return'},
-  occupation_infiltration: {color:'#3a1a6a',bg:'#f4f0fd',border:'#c0b0e0',label:'Occupation'},
+  exile_return: {color:'#7a4010',bg:'#faf4ec',border:'#d8c090',label:'Occupation Legacy'},
+  occupation_infiltration: {color:'#3a1a6a',bg:'#f4f0fd',border:'#c0b0e0',label:'Infiltration Fear'},
 };
 
 // Tension type colors + labels
