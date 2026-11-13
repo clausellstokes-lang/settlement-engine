@@ -530,7 +530,10 @@ export function scanTree(root) {
  * `.map((l) => l.text)`) throws the declarations away, and the bare pick after it is refused nowhere.
  * Every strip-shaped call in `src` is listed by its identity — file and receiver text — and stands in the
  * widened register's `strips` under a named reason (`strip-before-draw`, to cure; `not-a-draw`, a dedupe, a
- * join, a check or a list printed whole), or the walker reds. Written only through the register's door. A new strip is red in the lane that writes it.
+ * join, a check or a list printed whole), or the walker reds. Written only through the register's door. A new strip IN A
+ * SHAPE THE BAN NAMES is red in the lane that writes it. THE BAN CATCHES THE SHAPES IT NAMES AND NO OTHERS (REVIEW-W2B's
+ * third read, finding 2: 3 of the reader's 15 new shapes caught); the twelve it misses are KNOWN GAPS, each named in
+ * `tests/lint/presumedThings.stripShapes.json` and pinned by the walker, so a seat that widens the ban moves a named row.
  */
 export const STRIP_ROOTS = Object.freeze(['src']);
 
@@ -562,10 +565,11 @@ function lineBinding(name) {
 }
 
 /**
- * Does `e` take the text of the line bound by `b` ANYWHERE in it, wrapped or not (F3 of REVIEW-W2B's second read: a
+ * Does `e` take the text of the line bound by `b` anywhere in that one expression, wrapped or not (F3 of REVIEW-W2B's second read: a
  * template, `.trim()`, `l && l.text`, a conditional, `[...acc, l.text]`, `String(…)`)? Read: `p.text`, `p?.text`,
  * `p['text']`, a name the text is bound to, `textOf(p)` / `lineText(p)` / a local helper of the same shape. Not read: a
- * nested function, and an object that carries the line whole (`{ ...l, text: … }` keeps its declarations).
+ * nested function, and an object that carries the line whole (`{ ...l, text: … }` keeps its declarations). Nor any other
+ * path to the text (`Reflect.get`, a destructure in a block body, …): the KNOWN GAPS (`presumedThings.stripShapes.json`).
  * @param {any} e @param {{ p: string | null, aliases: Set<string> }} b @param {Set<string>} helpers
  */
 function takesText(e, b, helpers) {
@@ -666,7 +670,9 @@ function unwrapHelpers(sf) {
  * `R.flatMap(unwrap)` with any extra argument (`map(textOf, ctx)`); `Array.from(R, unwrap)`; `R.reduce(fn)` whose
  * returned expression takes its line's text; `R.forEach(fn)` and `for (const l of R)` that push, add or yield it;
  * `for (let i …) … push(R[i].text)`; and `pick(R).text`, a `.text` taken off any call but a door's, whose first argument
- * is the receiver. An unwrap is any member access `text` of the line in the handed-on expression, wrapped or not.
+ * is the receiver. An unwrap is a member access `text` of the line in the handed-on expression, wrapped or not. These are
+ * the shapes the ban names, and it catches no others: the twelve KNOWN GAPS of the third read are pinned by shape in
+ * `tests/lint/presumedThings.stripShapes.json`.
  * @param {string} rel @param {string} src @returns {Array<{ file: string, receiver: string }>}
  */
 export function stripSites(rel, src) {

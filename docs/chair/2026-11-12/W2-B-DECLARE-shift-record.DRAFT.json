@@ -70,5 +70,6 @@
    "presetLightingWitness": "UNMOVED. Relabelled: the third seat's ground was the file set; the MEASURE is the reader's (REVIEW-W2B-3 B2: green at the tip)"
   },
   "note": "no golden door was run by this seat (the brief); each surface is read by the diff file set and, for DS-GEN-9, by the rendered census of the 70 towns; RELABELLED by the sixth seat (REVIEW-W2B third read, finding 3): a file set is an inference, not a measure; each surface now names the measure that was executed and by whom"
- }
+ },
+ "stripBan": "THE STRIP BAN CATCHES THE SHAPES IT NAMES AND NO OTHERS (REVIEW-W2B's third read, finding 2; the sixth seat, R3). Of the reader's fifteen new unwrap shapes it catches three (spread into a Set, reduce into a string, join after map of a getter); the twelve it misses are KNOWN GAPS, each named by its shape in tests/lint/presumedThings.stripShapes.json and pinned exactly by presumedThings.walker.test.js (\"the strip ban's known gaps\"). It is not a data-flow read and was not rebuilt as one before the release (the chair's ruling). No golden surface reads it."
 }

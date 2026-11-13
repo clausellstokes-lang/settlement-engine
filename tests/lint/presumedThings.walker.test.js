@@ -10,9 +10,10 @@
  *     answers it through a carrier a draw door enforces (W2-B-DECLARE item 1), and has no row in the
  *     register or the widened register (`presumedThings.widened.register.json`) (a new undeclared line);
  *   • the tagged tables the walker credits differ from the `tagged: true` sites in src;
- *   • THE STRIP BAN (W2-B-DECLARE item 3): a call that unwraps lines to their text (`.map(textOf)`,
- *     `.map(lineText)`, `.map((l) => l.text)`) stands nowhere in src without its row in the widened
- *     register's `strips` (`strip-before-draw`, to cure; `not-a-draw`), and no strip row is stale;
+ *   • THE STRIP BAN (W2-B-DECLARE item 3): a call that unwraps lines to their text IN A SHAPE THE BAN NAMES
+ *     (`.map(textOf)`, `.map(lineText)`, `.map((l) => l.text)` …) stands nowhere in src without its row in the widened
+ *     register's `strips` (`strip-before-draw`, to cure; `not-a-draw`), and no strip row is stale. The ban catches the
+ *     shapes it names and no others: its KNOWN GAPS are pinned by shape (`presumedThings.stripShapes.json`);
  *   • ARM 2: a sentence of the corpus (360 births, the browser's configuration, seeds
  *     presume-<tier>-<i>) names a thing the town lacks by the vocabulary's own readers, and no row
  *     of the register covers it (a new false presumption, or a cured line come back);
@@ -521,11 +522,30 @@ describe('ARM 3 — the strip ban (W2-B-DECLARE item 3; record 288, ruling 1, B 
     expect(stripSites('src/generators/planted.js', 'const d = drawDeclared(POOL, { draw, key }).text;')).toEqual([]);
   });
 
+  /**
+   * Finding 2 of the third read (REVIEW-W2B-c3913f999: "3 of 15 new shapes caught; a destructure in a block body is green
+   * end to end"). The chair's ruling: the ban is NOT rebuilt as a data-flow read before the release; its limit is SAID and
+   * TRACKED. The reader's fifteen shapes are a fixture (`presumedThings.stripShapes.json`), each with today's truth: three
+   * caught, twelve KNOWN GAPS named by their shape. The ban catches the shapes it names and no others. A seat that widens it
+   * moves a named row of the fixture in the same commit, or this test reds.
+   */
+  test('the strip ban\'s known gaps: the third read\'s fifteen shapes, three caught and twelve named as gaps, exactly', () => {
+    const fixture = JSON.parse(readFileSync(join(ROOT, 'tests/lint/presumedThings.stripShapes.json'), 'utf8'));
+    const today = fixture.rows.map((r) => ({ shape: r.shape, today: stripSites(fixture.file, r.source).length ? 'caught' : 'known-gap', receivers: stripSites(fixture.file, r.source).map((x) => x.receiver) }));
+    expect(today).toEqual(fixture.rows.map((r) => ({ shape: r.shape, today: r.today, receivers: r.receivers })));
+    expect(fixture.rows.filter((r) => r.today === 'caught').map((r) => r.shape)).toEqual(['spread into a Set', 'reduce into a string', 'join after map of a getter']);
+    expect(fixture.rows.filter((r) => r.today === 'known-gap').map((r) => r.shape)).toEqual([
+      'destructure in a block body', 'destructure, renamed, in a block body', 'Reflect.get', 'the third callback argument',
+      'for-in over the pool', 'while loop, index', 'concat in a for-of', 'index assignment in a for-of', 'destructure off a pick',
+      'array destructure, then .text', 'a property helper (pluck)', 'Object.assign target',
+    ]);
+  });
+
   test('anti-vacuity: the strip walk finds the twelve sites of the class table', () => {
     expect(sites.length).toBeGreaterThanOrEqual(12);
   });
 
-  test('⛔ no strip without its row: a new unwrap of a pool is red (draw it through a door)', () => {
+  test('⛔ no strip without its row: a new unwrap of a pool, in a shape the ban names, is red (draw it through a door)', () => {
     const fresh = sites.filter((x) => !banked.has(stripKey(x.file, x.receiver)));
     expect(fresh.map((x) => stripKey(x.file, x.receiver)), 'draw a declared pool through drawDeclared / filterDeclared; never unwrap it first').toEqual([]);
   });
