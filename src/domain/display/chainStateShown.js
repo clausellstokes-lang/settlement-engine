@@ -52,12 +52,23 @@ export function chainStateShown(chain, record) {
     const ground = typeof failed === 'string' ? FOOD_SOURCE_GROUND[/** @type {keyof typeof FOOD_SOURCE_GROUND} */ (failed)] : undefined;
     if (carrier === 'own' && ground && ground.includes(String(c.resourceInputKey))) return 'impaired';
   }
-  if (crisis.has('under_siege') && c.needKey !== 'criminal_economy') {
+  if (tradeStoppedHere(record) && c.needKey !== 'criminal_economy') {
     const fieldWork = carrier === 'own' && typeof c.resourceInputKey === 'string' && c.resourceInputKey !== '';
     const trade = c.entrepot === true || c.needKey === 'trade_entrepot' || carrier === 'transit' || carrier === 'bought';
     if (fieldWork || trade) return 'impaired';
   }
   return status;
+}
+
+/**
+ * WHETHER TRADE COMES IN AT ALL (W2-C-LEAVES-3, #169): a siege in force stops field work and trade (the siege's own
+ * record line, `data/stressTypes.js :: STRESS_TYPE_MAP.under_siege.viabilityNote`, printed on the page). The one home
+ * the chain cards and the Economics tab's Imports list read.
+ * @param {unknown} record the settlement record
+ * @returns {boolean}
+ */
+export function tradeStoppedHere(record) {
+  return !!record && typeof record === 'object' && crisisOf(/** @type {object} */ (record)).has('under_siege');
 }
 
 /**
