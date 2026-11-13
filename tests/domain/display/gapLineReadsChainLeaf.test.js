@@ -8,6 +8,12 @@
  * `src/domain/facts/chainWorking.js :: chainWorksResource`. The sentence now prints only where the leaf says no; a
  * half-way grade (the work done in part) never prints where the model holds a chain on the resource and none of them
  * works it (`chainModelsResource`: where it holds none, the model is silent and the grade stands).
+ *
+ * RE-KEYED BY IDENTITY (R3, 2026-11-13, the chair's ruling on REVIEW-R2-STAGES finding 4): a chain works a resource
+ * only through a house of that trade (`chainWorking.js :: NOT_WORKED_THROUGH`). Five stone pins of item 2 were
+ * anchored on walls, a palisade or a Brickmaker "working" the quarry — rw3-town-calm-1, rw3-town-under_siege-1,
+ * rw3-village-insurgency-1, r2r-town-16, r2r-city-14: none holds a house that quarries or dresses stone, so the leaf
+ * now says no and the true line "No one here works the stone" prints there; the pins say so.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
@@ -58,12 +64,13 @@ describe('a gap line\'s "worked here" is the chain leaf\'s (item 2)', () => {
     expect(gapText(unit('partial', []))).toEqual(["Work on the stone here stops half-way: no stonemasons' guild finishes it."]);
   });
 
-  test('the cold list\'s towns: a quarry a chain works is not "worked by no one" (rw3-town-calm-1, rw3-town-under_siege-1, rw3-village-insurgency-1)', () => {
+  test('RE-KEYED (R3): the cold list\'s towns whose quarry only walls or a brickmaker "work" print the true line (rw3-town-calm-1, rw3-town-under_siege-1, rw3-village-insurgency-1)', () => {
     expectNoSeedFailures(collectSeedFailures(['rw3-town-calm-1', 'rw3-town-under_siege-1', 'rw3-village-insurgency-1'], (seed) => {
       const town = birthApp(seed);
-      expect(chainWorksResource(town, 'stone_quarry'), `anchored: ${seed}'s quarry is worked by a chain`).toBe(true);
-      expect(gapText(town).filter((t) => t.startsWith('No one here works the stone'))).toEqual([]);
-    }), 'a quarry a chain works is said to be worked by no one');
+      expect(town.institutions.filter((/** @type {{ name: string }} */ i) => /quarr|mason/i.test(i.name)), `anchored: ${seed} holds no quarry or mason`).toEqual([]);
+      expect(chainWorksResource(town, 'stone_quarry'), `${seed}: walls and a brickmaker do not quarry`).toBe(false);
+      expect(gapText(town).filter((t) => t.startsWith('No one here works the stone')).length).toBe(1);
+    }), 'a quarry no house works is said to be worked');
   }, 120000);
 
   test('a true line still prints: rw3-village-calm-1, a quarry no chain works', () => {
@@ -75,8 +82,8 @@ describe('a gap line\'s "worked here" is the chain leaf\'s (item 2)', () => {
   test('the census\'s towns the base printed it in: the leaf says yes, and the line is gone', () => {
     const cases = /** @type {Array<[string, string, string[]]>} */ ([
       ['r2r-village-2', 'timber', ['managed_forest', 'mountain_timber', 'shipbuilding_timber']],
-      ['r2r-town-16', 'stone', ['stone_quarry']],
-      ['r2r-city-14', 'stone', ['stone_quarry']],
+      // RE-KEYED (R3): r2r-town-16 and r2r-city-14 left this list — their stone was "worked" by walls and a Brickmaker
+      // only, and the true line prints there now (chainWorksThroughItsTrade.test.js holds the class)
       ['r2r-city-26', 'animal hides', ['grazing_land', 'hunting_grounds']],
       ['r2r-metropolis-43', 'timber', ['managed_forest', 'mountain_timber', 'shipbuilding_timber']],
       ['r2s-religious_conversion-city-2', 'timber', ['managed_forest', 'mountain_timber', 'shipbuilding_timber']],

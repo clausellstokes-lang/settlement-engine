@@ -304,7 +304,7 @@ export function resourceGapLines(s) {
     // prints only where the leaf says no; a half-way grade, which says the work is done in part, never where the model
     // holds a chain on the resource and none of its chains works it (where it holds none, the model is silent).
     const keys = gapResourceKeys(s, entry ? entry[0] : null);
-    const worked = chainWorksResource(s, keys);
+    const worked = chainWorksResource(s, keys, spec?.noun); // R3: asked of the good the line names
     const modelledIdle = !worked && chainModelsResource(s, keys);
     if (/not being processed/.test(str(g.impact))) {
       if (worked) continue;

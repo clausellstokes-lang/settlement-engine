@@ -279,7 +279,7 @@ export function localProductionAsPrinted(settlement) {
     const keys = RESOURCES_YIELDING.get(item);
     const makers = HOUSE_MAKES[item];
     if (!keys && !makers) return true;
-    return (!!keys && chainWorksResource(settlement, keys)) || (!!makers && ownHouses.some((n) => makers.some((w) => n.includes(w))));
+    return (!!keys && chainWorksResource(settlement, keys, item)) || (!!makers && ownHouses.some((n) => makers.some((w) => n.includes(w))));
   });
   return displayTradeList(kept, /** @type {Parameters<typeof factsOf>[0]} */ (settlement), { side: 'exports' });
 }

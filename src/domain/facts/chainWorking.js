@@ -24,12 +24,50 @@
 export const WORKING_CHAIN_STATUSES = Object.freeze(['running', 'operational', 'entrepot', 'vulnerable', 'magically_sustained']);
 
 /**
+ * A CHAIN WORKS A RESOURCE ONLY THROUGH A HOUSE WHOSE TRADE IS TO EXTRACT OR PROCESS IT (W2-C-LEAVES R3, the chair's
+ * ruling on REVIEW-R2-STAGES finding 4, 2026-11-13). The chain data names an input for chains whose houses only USE
+ * it, so the leaf read them as working it and true "No one here works the …" lines were lost. ONE closed list, each
+ * entry with its cause; a chain is left out for an entry's resource (or good) when its id is the entry's, or when
+ * EVERY house it runs through is of the entry's houses. Households that forage DO work what they gather: no entry.
+ * The deeper home is the chain data's own rows (`data/supplyChainData.js`: `fortification` and the clergy chains
+ * name an input they do not work), named in the lane's hand-back; this list is the leaf's reading of them.
+ * @type {ReadonlyArray<Readonly<{ chains?: ReadonlyArray<string>, houses?: ReadonlyArray<string>, resources?: ReadonlyArray<string>, goods?: ReadonlyArray<string>, cause: string }>>}
+ */
+export const NOT_WORKED_THROUGH = Object.freeze([
+  Object.freeze({ chains: ['fortification'], resources: ['stone_quarry'],
+    cause: 'a palisade, walls, gates or a citadel use dressed stone; they do not quarry or dress it (r2r-village-56, r2s-succession_void-hamlet-1)' }),
+  Object.freeze({ houses: ['brickmaker'], resources: ['stone_quarry'],
+    cause: 'a brickmaker fires clay; it does not quarry stone (the Stone & Construction chain held by a Brickmaker alone)' }),
+  Object.freeze({ chains: ['divine_healing', 'pilgrimage'], goods: ['medicinal herbs'],
+    cause: 'clergy at the hot springs heal and receive pilgrims; they do not gather the herbs (r2r-village-38, r2r-town-43)' }),
+]);
+
+/**
+ * Whether the closed list leaves this chain out for its input (and, where asked, for one good of it).
+ * @param {{ chainId?: unknown, resourceInputKey?: unknown, processingInstitutions?: unknown }} chain
+ * @param {string | undefined} good the good asked about ("medicinal herbs"), when the caller asks of one
+ * @returns {boolean}
+ */
+function notWorkedThrough(chain, good) {
+  const houses = (Array.isArray(chain.processingInstitutions) ? chain.processingInstitutions : []).map((h) => String(h).toLowerCase());
+  return NOT_WORKED_THROUGH.some((e) => {
+    const onInput = (e.resources && e.resources.includes(String(chain.resourceInputKey)))
+      || (good !== undefined && e.goods !== undefined && e.goods.includes(good.toLowerCase()));
+    if (!onInput) return false;
+    if (e.chains && e.chains.includes(String(chain.chainId))) return true;
+    return !!e.houses && houses.length > 0 && houses.every((h) => (e.houses || []).some((w) => h.includes(w)));
+  });
+}
+
+/**
  * The record's chains that work any of these resources here.
  * @param {unknown} record the settlement record (its `economicState.activeChains`)
  * @param {string | ReadonlyArray<string>} resourceKeys one catalogue resource key, or several (a family: any of them)
+ * @param {string} [good] the good asked about, where the caller asks of one (R3: the clergy at the springs do not work
+ *   the herbs the springs also yield)
  * @returns {ReadonlyArray<object>} the working chains, in the record's order (empty where none works them)
  */
-export function chainsWorking(record, resourceKeys) {
+export function chainsWorking(record, resourceKeys, good) {
   const keys = new Set((Array.isArray(resourceKeys) ? resourceKeys : [resourceKeys]).map(String));
   const economicState = record && typeof record === 'object'
     ? /** @type {{ economicState?: { activeChains?: unknown } }} */ (record).economicState
@@ -37,12 +75,13 @@ export function chainsWorking(record, resourceKeys) {
   const chains = Array.isArray(economicState?.activeChains) ? economicState.activeChains : [];
   return Object.freeze(chains.filter((chain) => {
     const c = chain && typeof chain === 'object'
-      ? /** @type {{ resourceInputKey?: unknown, resourceInputAvailable?: unknown, status?: unknown }} */ (chain)
+      ? /** @type {{ resourceInputKey?: unknown, resourceInputAvailable?: unknown, status?: unknown, chainId?: unknown, processingInstitutions?: unknown }} */ (chain)
       : null;
     return c !== null
       && typeof c.resourceInputKey === 'string' && keys.has(c.resourceInputKey)
       && c.resourceInputAvailable === true
-      && WORKING_CHAIN_STATUSES.includes(String(c.status));
+      && WORKING_CHAIN_STATUSES.includes(String(c.status))
+      && !notWorkedThrough(c, good);
   }));
 }
 
@@ -50,10 +89,11 @@ export function chainsWorking(record, resourceKeys) {
  * THE ONE ANSWER to "does a chain work this resource here?".
  * @param {unknown} record the settlement record
  * @param {string | ReadonlyArray<string>} resourceKeys one catalogue resource key, or a family of them (any)
+ * @param {string} [good] the good asked about, where the caller asks of one (`NOT_WORKED_THROUGH`)
  * @returns {boolean}
  */
-export function chainWorksResource(record, resourceKeys) {
-  return chainsWorking(record, resourceKeys).length > 0;
+export function chainWorksResource(record, resourceKeys, good) {
+  return chainsWorking(record, resourceKeys, good).length > 0;
 }
 
 /**
