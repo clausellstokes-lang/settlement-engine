@@ -180,6 +180,9 @@ describe('gallery maps member_count — net-current execution (pglite)', () => {
       create or replace function auth.uid()
         returns uuid language sql stable as $$ select '${OWNER}'::uuid $$;
     `);
+    // Since 212 (the fifth review's V5-4) a veil helper keys a person as the member overrides do: the loader takes
+    // what the bodies need, before them
+    await db.exec(netCurrentFn('_gallery_npc_key'));
     for (const fn of VEIL_HELPER_FNS) await db.exec(fn);
     await db.exec(BACKDROP_FN);
     await db.exec(SAFE_FN);
