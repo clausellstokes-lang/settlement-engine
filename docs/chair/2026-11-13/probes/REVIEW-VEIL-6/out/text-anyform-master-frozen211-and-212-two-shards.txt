@@ -1,0 +1,6 @@
+chain pk: 6 towns, 12 shares with every eye shut (live), 4118 hidden pieces looked for
+chain pk3: 6 towns, 12 shares with every eye shut (live), 3622 hidden pieces looked for
+pk | event.lastingEffects -> history.legacyAnnotations[].annotation | towns: no reveal 6, DM 6 | reads: gallery import link map
+      e.g. Hartdorf gallery: hidden "iron production rights still legally contested in some records" in "The Iron Dispute (26 years ago) established conditions that have since shifted: commercial interests have held structural relevance since. The present"
+pk3 | event.lastingEffects -> history.legacyAnnotations[].annotation | towns: no reveal 6, DM 6 | reads: gallery import link map
+      e.g. Staroburg gallery: hidden "a standing levy roster kept ready in the hamlet archive" in "The Siege (38 years ago) created pressure that has not been fully resolved: the settlement has not fully insulated itself from the pressures that cala"

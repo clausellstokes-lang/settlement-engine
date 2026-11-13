@@ -72,3 +72,8 @@ per-person switch), `summary-*.txt`, the attack's outputs. The runs' raw JSON (7
   (the md5 of every read's response, share by share), `concurrent.sh` and `concurrent2.sh` (readers running while
   212 is applied and rolled back). Chains for it: `sh native/chain.sh s212 212 <split>/supabase/migrations`,
   `s203p211p212 203+211+212`, `s203p211 203+211`, `s211 211`, `s_release 203+211+212+204-210+211+212`.
+- `text-anyform.mjs <pg module dir> <db>…`: hidden TEXT in any letter case (every governed string of every card, cut
+  into pieces and folded), in every string of every read. It finds the thirteenth second home (an event's lasting
+  effect inside `history.legacyAnnotations`), which the cold pass's case-sensitive search missed.
+- `derived-census.mjs <pg module dir> <db>…`: flags, numbers, labels and paths that occur only in towns with a house
+  hidden whole (an association; the review says which causes it read).

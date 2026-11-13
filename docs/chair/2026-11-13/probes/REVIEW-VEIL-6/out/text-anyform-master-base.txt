@@ -1,0 +1,27 @@
+chain cmb: 24 towns, 48 shares with every eye shut (live), 12334 hidden pieces looked for
+cmb | event.lastingEffects -> history.legacyAnnotations[].annotation | towns: no reveal 23, DM 23 | reads: gallery import link map
+      e.g. Hartdorf gallery: hidden "iron production rights still legally contested in some records" in "The Iron Dispute (26 years ago) established conditions that have since shifted: commercial interests have held structural relevance since. The present"
+cmb | institution.desc -> defenseProfile.institutions.charter[].desc | towns: no reveal 3, DM 3 | reads: gallery import link map
+      e.g. Nektarambelos gallery: hidden "guilds set against one another" in "Guilds set against one another."
+cmb | institution.desc -> defenseProfile.institutions.garrison[].desc | towns: no reveal 8, DM 8 | reads: gallery import link
+      e.g. Khutulunkum gallery: hidden "full time keepers of order numbering about 1 of the city" in "Full-time keepers of order, numbering about 1% of the city."
+cmb | institution.desc -> defenseProfile.institutions.magicDef[].desc | towns: no reveal 8, DM 8 | reads: gallery import link
+      e.g. Khutulunkum gallery: hidden "quarter inhabited by arcane practitioners" in "Quarter inhabited by arcane practitioners: towers, workshops, libraries, reagent merchants."
+cmb | institution.desc -> defenseProfile.institutions.mercenary[].desc | towns: no reveal 2, DM 2 | reads: gallery import link
+      e.g. Nektarambelos gallery: hidden "sellsword companies under proper organisation mustering hundreds to th" in "Sellsword companies under proper organisation, mustering hundreds to thousands."
+cmb | institution.desc -> defenseProfile.institutions.militia[].desc | towns: no reveal 3, DM 3 | reads: gallery import link map
+      e.g. Hartdorf gallery: hidden "the able bodied drill together and assemble against local danger" in "The able-bodied drill together and assemble against local danger. Nobody does it full-time."
+cmb | institution.desc -> defenseProfile.institutions.walls[].desc | towns: no reveal 16, DM 16 | reads: gallery import link map
+      e.g. Hartdorf gallery: hidden "a rough timber palisade or an earthen berm" in "A rough timber palisade or an earthen berm. It checks raiders and creatures without stopping them."
+cmb | institution.desc -> defenseProfile.institutions.watch[].desc | towns: no reveal 12, DM 12 | reads: gallery import link map
+      e.g. Palaiotion gallery: hidden "night patrol and gate duty" in "Part-time guards. Night patrol and gate duty."
+cmb | relationship.description -> prominentRelationship.full | towns: no reveal 15, DM 15 | reads: gallery import link map
+      e.g. Hartdorf gallery: hidden "years ago zita wolf did for katharina neumann the kind of favour that " in "Years ago Zita Wolf did for Katharina Neumann the kind of favour that cannot be repaid, only serviced. Katharina Neumann has been servicing it ever si"
+cmb | relationship.tension -> pressureSentence | towns: no reveal 5, DM 5 | reads: gallery import link map
+      e.g. Al-tappa gallery: hidden "zakariya al masri has fallen on hard times and the debt rabab al hassa" in "Zakariya al-Masri has fallen on hard times, and the debt Rabab al-Hassan owes is now the only asset Zakariya al-Masri has."
+cmb | relationship.tension -> prominentRelationship.phrasing | towns: no reveal 15, DM 15 | reads: gallery import link map
+      e.g. Hartdorf gallery: hidden "katharina neumann has begun to act like someone who considers the debt" in "Katharina Neumann and Zita Wolf are connected by something neither discusses openly: Katharina Neumann has begun to act like someone who considers the"
+cmb | relationship.tension -> prominentRelationship.tension | towns: no reveal 15, DM 15 | reads: gallery import link map
+      e.g. Hartdorf gallery: hidden "katharina neumann has begun to act like someone who considers the debt" in "Katharina Neumann has begun to act like someone who considers the debt paid. Zita Wolf does not."
+cmb | tension.description -> history.siegeNarrative | towns: no reveal 5, DM 5 | reads: gallery import link map
+      e.g. Mayanek gallery: hidden "a surge in criminal activity overwhelmed the authorities" in "The Migration is still present in living memory: A surge in criminal activity overwhelmed the authorities; vigilantes began to form."

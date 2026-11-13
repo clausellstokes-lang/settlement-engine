@@ -1,0 +1,35 @@
+chain ct211: 24 towns, 48 shares with every eye shut (live), 18192 hidden pieces looked for
+ct211 | event.lastingEffects -> history.legacyAnnotations[].annotation | towns: no reveal 23, DM 23 | reads: gallery import link map
+      e.g. Hartdorf gallery: hidden "iron production rights still legally contested in some records" in "As of the founding survey, the Iron Dispute (26 years ago) set up ways of doing things that have since changed: the merchants have mattered here ever "
+ct211 | npc.allegiance -> npcs[].id | towns: no reveal 1, DM 1 | reads: gallery import link
+      e.g. Khutulunkum gallery: hidden "npc brothel red light district" in "npc_brothel_red_light_district"
+ct211 | npc.allegiance -> relationships[].from | towns: no reveal 1, DM 1 | reads: gallery import link
+      e.g. Khutulunkum gallery: hidden "npc brothel red light district" in "npc_brothel_red_light_district"
+ct211 | npc.allegiance -> relationships[].id | towns: no reveal 1, DM 1 | reads: gallery import link
+      e.g. Khutulunkum gallery: hidden "npc brothel red light district" in "tie_npc_brothel_red_light_district"
+ct211 | npc.allegiance -> relationships[].to | towns: no reveal 0, DM 1 | reads: gallery import
+      e.g. Khutulunkum gallery: hidden "npc brothel red light district" in "npc_brothel_red_light_district"
+ct211 | npc.allegiance -> simulationTrace[].downstreamEffects[].target | towns: no reveal 0, DM 1 | reads: gallery import
+      e.g. Khutulunkum gallery: hidden "npc brothel red light district" in "npc_brothel_red_light_district"
+ct211 | npc.goal -> npcs[].id | towns: no reveal 16, DM 16 | reads: gallery import link map
+      e.g. Hartdorf gallery: hidden "npc fisher s landing" in "npc_fisher_s_landing"
+ct211 | npc.goal -> relationships[].from | towns: no reveal 16, DM 16 | reads: gallery import link map
+      e.g. Hartdorf gallery: hidden "npc fisher s landing" in "npc_fisher_s_landing"
+ct211 | npc.goal -> relationships[].id | towns: no reveal 16, DM 16 | reads: gallery import link map
+      e.g. Hartdorf gallery: hidden "npc fisher s landing" in "tie_npc_fisher_s_landing"
+ct211 | npc.goal -> relationships[].to | towns: no reveal 16, DM 16 | reads: gallery import link map
+      e.g. Hartdorf gallery: hidden "npc fisher s landing" in "npc_fisher_s_landing"
+ct211 | npc.goal -> simulationTrace[].downstreamEffects[].target | towns: no reveal 0, DM 1 | reads: gallery import
+      e.g. Vatannuur gallery: hidden "npc red light district" in "npc_red_light_district"
+ct211 | npc.goal -> simulationTrace[].targetId | towns: no reveal 0, DM 1 | reads: gallery import
+      e.g. Vatannuur gallery: hidden "npc cartographer s guild" in "npc_cartographer_s_guild"
+ct211 | npc.goal -> stress.cast.levers[].holderId | towns: no reveal 4, DM 4 | reads: gallery import link map
+      e.g. Mayanek gallery: hidden "npc merchant guilds 3 8" in "npc_merchant_guilds_3_8"
+ct211 | npc.goal -> stress.cast.roles[].id | towns: no reveal 3, DM 3 | reads: gallery import link
+      e.g. Nektarambelos gallery: hidden "npc international trade center" in "npc_international_trade_center"
+ct211 | npc.goal -> stressors.cast.levers[].holderId | towns: no reveal 4, DM 4 | reads: gallery import link map
+      e.g. Mayanek gallery: hidden "npc merchant guilds 3 8" in "npc_merchant_guilds_3_8"
+ct211 | npc.goal -> stressors.cast.roles[].id | towns: no reveal 3, DM 3 | reads: gallery import link
+      e.g. Nektarambelos gallery: hidden "npc international trade center" in "npc_international_trade_center"
+ct211 | npc.physical -> npcs[].presentation.impression | towns: no reveal 2, DM 2 | reads: gallery import link
+      e.g. Vatannuur gallery: hidden "eyes that never stop moving" in "Unremarkable clothes, a quiet voice and eyes that never stop moving."

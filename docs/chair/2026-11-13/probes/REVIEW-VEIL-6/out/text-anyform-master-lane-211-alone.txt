@@ -1,0 +1,3 @@
+chain cm203p211: 24 towns, 48 shares with every eye shut (live), 12334 hidden pieces looked for
+cm203p211 | event.lastingEffects -> history.legacyAnnotations[].annotation | towns: no reveal 23, DM 23 | reads: gallery import link map
+      e.g. Hartdorf gallery: hidden "iron production rights still legally contested in some records" in "The Iron Dispute (26 years ago) established conditions that have since shifted: commercial interests have held structural relevance since. The present"
