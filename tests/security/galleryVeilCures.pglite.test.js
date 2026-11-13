@@ -743,6 +743,36 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
     expect(out).toEqual(Object.fromEntries(cases.map(([tag]) => [tag, { gallery: false, link: false, import: false, map: false, page: false }])));
   }, ROW_TIMEOUT_MS);
 
+  // ── V5-3 (the FIFTH review §1.4; the chair's ruling of 2026-11-13: what no page shows is not sent) ──
+  // The client's full mode (publicSafe.js :: toPublicSafe) drops the author's custom-content library,
+  // `customContentRoster` and `customContentProvenance`: no page of any share shows them. A Reveal-DM share's gallery
+  // read and import sent both (and an importer saved them), at 203, at 203 + 211 and at 001..211, marked or not.
+  const V53_DOC = { ...V31_DOC, customContentRoster: [{ id: 'V53_ROSTER', name: 'a private brew' }],
+    customContentProvenance: [{ id: 'V53_PROVENANCE' }] };
+  const customContent = (v) => has(v, 'V53_ROSTER') || has(v, 'V53_PROVENANCE') || /"customContent(Roster|Provenance)":/.test(JSON.stringify(v ?? null));
+  it('V5-3 (the review rows): a Reveal-DM share sends no reader and no importer the custom-content records, marked or not, frozen or narrated, any grouping opened', async () => {
+    const at = '2026-11-12T00:00:00.000Z';
+    const opened = veil.writeShareVeil({}, veil.defaultVeilFor(veil.galleryPayloadFor(V53_DOC, { shareDm: true })).map((d) => ({ address: d.address, hidden: false })));
+    const cases = [
+      ['unmarked', V53_DOC, {}],
+      ['marked, default veil', V53_DOC, veil.writeShareVeil({}, [])],
+      ['marked, every grouping opened', V53_DOC, opened],
+      ['frozen copy holding both', { name: 'T' }, { $veil: { ...veil.writeShareVeil({}, []).$veil, mode: 'snapshot', at, snapshot: V53_DOC } }],
+      ['narration holding both', { name: 'T' }, veil.writeShareVeil({}, []), { narrated: V53_DOC }],
+    ];
+    const out = {};
+    for (const [tag, data, ov, opts] of cases) {
+      const r = await v31Reads(LIVE.db, data, ov, opts);
+      expect(r.dmFull, `${tag}: the Reveal-DM read`).toBe(true);
+      expect(Array.isArray(r.import) && r.import.length, `${tag}: an import row`).toBe(1);
+      out[tag] = { gallery: customContent(r.gallery), link: customContent(r.link), import: customContent(r.import), map: customContent(r.map), page: customContent(r.page) };
+    }
+    // the red control: 210 sends both on the gallery read and the import of the unmarked share (its page never drew them)
+    const red = await v31Reads(AT210.db, V53_DOC, {});
+    expect([customContent(red.gallery), customContent(red.import), customContent(red.page)]).toEqual([true, true, false]);
+    expect(out).toEqual(Object.fromEntries(cases.map(([tag]) => [tag, { gallery: false, link: false, import: false, map: false, page: false }])));
+  }, ROW_TIMEOUT_MS);
+
   // ── V3-2 (the THIRD review) ────────────────────────────────────────────────────────────────────
   // The client drops a person card with neither a name nor a role (publicSafe.js :: toPublicSafe,
   // `filter(npc => npc.name || npc.role)`); a served page is not projected again, so at f07db8760 the

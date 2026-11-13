@@ -1,0 +1,12 @@
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+AssertionError: expected { …(5) } to deeply equal { …(5) }
++     "gallery": true,
++     "import": true,
++     "page": true,
++     "gallery": true,
++     "import": true,
++     "page": true,
++     "gallery": true,
++     "import": true,
++     "page": true,
++     "gallery": true,

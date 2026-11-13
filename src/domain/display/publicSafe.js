@@ -562,13 +562,11 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
     // exactly as `dmNotes`, the seed carriers and `latentPantheon` are stripped
     // above, and for the same reason each of those is.
     //
-    // ⚠ THE SERVER TWIN IS NOT LANDED AND IS OWNER-GATED. `_gallery_dm_full_json`
-    // (migrations 121/129) still re-issues both keys server-side, so this is the
-    // CLIENT half only. A new `supabase/migrations/NNN_*.sql` adding them to that
-    // function's delete chain is a migration and belongs on the owner's desk with
-    // the mapEdits precedent (`townMapEditsPublicDrop.test.js` declines the same
-    // half). Landing the client half first costs nothing and reds nothing; it is
-    // strictly better than the gap it replaces.
+    // THE SERVER TWIN (COHERENCE-VEIL-6; the fifth review's V5-3, ruled by the chair on
+    // 2026-11-13): migration 211 strips both from the Reveal-DM projection of the gallery
+    // read and the import, beside `decrees` and `dmLayer` (`_gallery_dm_full_json` itself,
+    // 121/129, is unchanged; the link and the map never carried them: the sanitiser's
+    // allowlist). Pinned by tests/security/galleryVeilCures.pglite.test.js, "V5-3".
     delete clone.customContentRoster;
     delete clone.customContentProvenance;
     // LATENT PANTHEON (Phase 4 W-F7, THE PREMIUM GATE): the unrevealed starting

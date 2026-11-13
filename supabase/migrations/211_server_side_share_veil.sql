@@ -46,6 +46,10 @@
 --       Before, an unmarked Reveal-DM listing sent both to every reader and every importer, and so
 --       did a marked one once "Pending decrees" was opened. The sanitiser's top-level allowlist
 --       already drops both, so the link and the map never carried them.
+--       THE SAME FOR THE AUTHOR'S CUSTOM-CONTENT LIBRARY (COHERENCE-VEIL-6; the fifth review's V5-3, ruled by the
+--       chair on 2026-11-13: what no page shows is not sent): customContentRoster and customContentProvenance, which
+--       the client's full mode drops (publicSafe.js :: toPublicSafe), leave the Reveal-DM projection of the gallery
+--       read and the import too; before, every reader and every importer of such a share received both.
 --   (8) A SERVED BODY DROPS A PERSON CARD WITH NEITHER A NAME NOR A ROLE (the third review's V3-2), as
 --       the client's projection does: a served page is not projected again, so a nameless card whose
 --       role the face veil removed was drawn. Hand-edited towns only (the six-size probe counts 0).
@@ -1364,6 +1368,7 @@ create or replace function public._gallery_apply_member_overrides(
   end;
 $$;
 
+
 -- get_gallery_dossier: 147's body plus the veil, and the pg_temp pin a recreated definer takes
 -- (tests/lint/migrationSearchPathPin.test.js; its ledger row comes off)
 create or replace function public.get_gallery_dossier(dossier_slug text)
@@ -1453,10 +1458,12 @@ as $$
               from (select s.gallery_member_overrides -> '$veil' as v offset 0) mv) cp
   ) src
   -- 211: the editor's working state (decrees, dmLayer) never travels, Reveal DM or not (the third
-  -- review's V3-1; the client's full mode strips both)
+  -- review's V3-1; the client's full mode strips both), nor the author's custom-content library (the fifth
+  -- review's V5-3, ruled by the chair: customContentRoster, customContentProvenance, which no page shows)
   cross join lateral (
     select public._gallery_apply_member_overrides(
-      case when s.gallery_share_dm then public._gallery_dm_full_json(src.j) - array['decrees', 'dmLayer'] else public._gallery_sanitize_public_json(src.j) end,
+      case when s.gallery_share_dm then public._gallery_dm_full_json(src.j) - array['decrees', 'dmLayer', 'customContentRoster', 'customContentProvenance']
+           else public._gallery_sanitize_public_json(src.j) end,
       public._gallery_dm_full_json(src.j),
       s.gallery_member_overrides, s.gallery_share_dm, s.gallery_importable, false
     ) as d
@@ -1559,10 +1566,12 @@ as $$
               from (select s.gallery_member_overrides -> '$veil' as v offset 0) mv) cp
   ) src
   -- 211: the editor's working state (decrees, dmLayer) never travels, Reveal DM or not (the third
-  -- review's V3-1; the client's full mode strips both)
+  -- review's V3-1; the client's full mode strips both), nor the author's custom-content library (the fifth
+  -- review's V5-3, ruled by the chair: customContentRoster, customContentProvenance, which no page shows)
   cross join lateral (
     select public._gallery_apply_member_overrides(
-      case when s.gallery_share_dm then public._gallery_dm_full_json(src.j) - array['decrees', 'dmLayer'] else public._gallery_sanitize_public_json(src.j) end,
+      case when s.gallery_share_dm then public._gallery_dm_full_json(src.j) - array['decrees', 'dmLayer', 'customContentRoster', 'customContentProvenance']
+           else public._gallery_sanitize_public_json(src.j) end,
       public._gallery_dm_full_json(src.j),
       s.gallery_member_overrides, s.gallery_share_dm, s.gallery_importable, true
     ) as d

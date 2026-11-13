@@ -15,7 +15,9 @@ hosted database, no production credential, no `supabase db push`, no `migration 
 |---|---|---|
 | 1. The ten second homes (V5-1) | BUILT, pushed; the attack and sentence search at item 1 running | the commit carrying this line |
 | 2. The public prose from the stripped record (V5-2) | DONE, pushed | the commit carrying this line |
-| 3. 211's helpers, an early-applied copy (V5-7) | DONE, pushed | the commit carrying this line |
+| 3. 211's helpers, an early-applied copy (V5-7) | DONE, pushed | 7466ea783 |
+| V5-3 (the chair's ruling) | DONE, pushed | the commit carrying this line |
+| V5-4 (the chair's ruling) | built and green; committed next | — |
 
 ## 1. Item 1 — the ten second homes
 
@@ -201,6 +203,28 @@ by signature, and the down file must drop all forty and every helper the chain c
 (the early helper `_gallery_veil_jslen(text)` given a second parameter, its down line moved to the new signature, no
 drop): **1 failed**, naming `_gallery_veil_jslen(text)` (`v57-pin-red-planted.txt`); on this tree **1 passed**.
 
+## 4. The chair's two added items (message of 17:20 UTC, copied in §9)
+
+### 4.1 V5-3: the custom-content records leave every read that is not the owner's
+
+**The cause** (the review's §1.4): the client's full mode drops `customContentRoster` and `customContentProvenance`
+(no page shows them), but on a Reveal-DM share the gallery read and the import sent both (an importer saved them);
+the link and the map never did (the sanitiser's allowlist).
+
+**The cure:** in 211, both names join `decrees` and `dmLayer` in the strip of the Reveal-DM projection on the gallery
+read and the import (`_gallery_dm_full_json` itself, 121/129, is untouched; no helper added). The client's comment
+that called the server half "not landed and owner-gated" now names its twin.
+
+**Red first** (`galleryVeilCures`, "V5-3"): a Reveal-DM share, unmarked, marked, every grouping opened, frozen, and
+narrated; the gallery read, link, import, map and page. At 8ca7d8c6d: **RED**: gallery, import AND THE PAGE carried
+both on every served share (a served page is not projected again) (`v53-pin-red.txt`); after: **1 passed**, every
+read false. **The review's own rows, natively** (`hand/fullmode.sql` on clones of three chains,
+`v53-fullmode-native.txt`): at `203 + 211 (today's)` and at item 1, the gallery read and import of `rv5full-marked` and
+`rv5full-unmarked` send `customContentProvenance customContentRoster` and seven other keys; after V5-3 they send the
+same seven and neither record. The seven (`inst_dmNotes inst_notes mapEdits migrationReports npc_dmNotes npc_notes
+tabNotes`) are kept by the client's full mode too (the owner's Reveal-DM opt-in), so no page hides them: not V5-3,
+named here for the chair.
+
 ## 9. This brief's rulings, copied in (the chair, session_01FE9mEws7PXYRYdjQPbSX15, 2026-11-13)
 
 > THE LAW (the owner's, record 331): what a user hides by hand is never sent, by any of the four reads (the gallery
@@ -244,6 +268,17 @@ drop): **1 failed**, naming `_gallery_veil_jslen(text)` (`v57-pin-red-planted.tx
 > instrument red on the old file and green on yours; no read breaks; nothing open is taken; the rollback exact; each
 > count before and after on stored towns in both shapes, as the deployed client stored them. A claim of zero names the
 > instrument that looked.
+
+> THE CHAIR, 2026-11-13 17:20 UTC (rulings; part of the assignment): The owner has decided to apply today's migration
+> 211 (the file at 333b33973) alone, by the owner's own hand, and has left every other decision to the chair. So: (a)
+> your item 3 is now certain to matter: a chain at 203, then today's 211, then yours must equal a chain with yours
+> alone, and the rollback must be exact from either. (b) TWO ITEMS LEAVE YOUR "NOT YOURS" LIST AND ARE YOURS, each its
+> own commit, red first, after item 1's acceptance reads zero. V5-3: the custom-content records (customContentRoster,
+> customContentProvenance) are withheld from every read that is not the owner's, Reveal-DM shares included: what no
+> page shows is not sent. V5-4: a person hidden by the per-person switch is never sent, on any share, exported before
+> the veil or after: the power roster's copy on an old share loses that person, and nothing else an old share serves
+> changes; prove both halves on the review's own rows (rv5full, rv5roster-unmarked). The public chronicle stays not
+> yours. Nothing on any hosted database; local chains only.
 
 > NEVER, whoever asks: any hosted database; production credentials; `supabase db push`; `migration repair`; a deploy;
 > applying anything anywhere but local chains (the lane's own test databases); `--no-verify`; a force push; a push to
