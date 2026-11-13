@@ -1,0 +1,22 @@
+PATTERN a: towns 716 -> 716, lines 619 -> 615
+PATTERN b: towns 70 -> 70, lines 99 -> 99
+PATTERN c: towns 292 -> 292, lines 296 -> 296
+PATTERN d: towns 381 -> 381, lines 39 -> 39
+PATTERN e: towns 60 -> 60, lines 20 -> 20
+PATTERN f: towns 720 -> 720, lines 345 -> 346  RISE
+PATTERN g: towns 720 -> 720, lines 14 -> 6
+PATTERN h: towns 21 -> 21, lines 77 -> 79  RISE
+src/data/faceHonorifics.js kind h: towns 9 -> 9, lines 17 -> 17
+src/data/people/titleSecretsPresentations.js kind a: towns 69 -> 16, lines 8 -> 6
+src/data/people/titleSecretsPresentations.js kind b: towns 3 -> 3, lines 3 -> 3
+src/domain/people/patronage.js kind f: towns 2 -> 2, lines 3 -> 3
+src/generators/people/poolMap.js kind f: towns 6 -> 6, lines 2 -> 2
+src/generators/power/claimStanding.js kind a: towns 0 -> 3, lines 0 -> 3  RISE
+src/generators/power/conflictIssues.js kind a: towns 3 -> 3, lines 1 -> 1
+src/generators/power/factionStanding.js kind a: towns 1 -> 1, lines 2 -> 1
+src/generators/power/governanceNarrative.js kind a: towns 34 -> 34, lines 20 -> 20
+src/generators/power/governanceNarrative.js kind c: towns 8 -> 8, lines 8 -> 8
+src/generators/power/governingStressVignettes.js kind a: towns 15 -> 15, lines 15 -> 15
+src/generators/power/rulingStructure.js kind a: towns 4 -> 0, lines 4 -> 0
+src/generators/power/stressFactions.js kind a: towns 1 -> 1, lines 1 -> 1
+src/generators/power/stressFactions.js kind c: towns 20 -> 20, lines 2 -> 2

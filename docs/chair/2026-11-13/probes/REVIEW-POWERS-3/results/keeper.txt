@@ -1,0 +1,102 @@
+7 Acting Elder | keeper title the boat-headman | seat Elder Council 
+   e.g. r2r-village-56: "Acting Elder Muirenn Flaherty" | seat row: "Acting Elder Muirenn Flaherty, the boat-headman, keeps the seat meanwhile."
+4 Acting Master of the Guilds | keeper title the senior guild master | seat Merchant Guild Council 
+   e.g. r2r-city-10: "Acting Master of the Guilds Pavithra Shastri" | seat row: "Acting Master of the Guilds Pavithra Shastri, the senior guild master, keeps the seat meanwhile."
+4 Regent | keeper title the monarch | seat Royal Authority 
+   e.g. r2r-metropolis-8: "Regent Oda Kauf" | seat row: "Regent Oda Kauf keeps the seat meanwhile."
+3 Acting Elder | keeper title the eldest | seat Elder Council 
+   e.g. r2s-succession_void-thorp-1: "Acting Elder Dominik Wagner" | seat row: "Acting Elder Dominik Wagner keeps the seat meanwhile."
+3 Acting Steward | keeper title the steward | seat Feudal Stewardship 
+   e.g. r2s-succession_void-hamlet-2: "Acting Steward Berta Braun" | seat row: "Acting Steward Berta Braun keeps the seat meanwhile."
+3 Acting Elder Priest | keeper title the priest | seat Priestly Guidance 
+   e.g. r2s-succession_void-village-0: "Acting Elder Priest Sharif al-Hakim" | seat row: "Acting Elder Priest Sharif al-Hakim, the priest, keeps the seat meanwhile."
+3 Acting Fixer | keeper title the council's fixer | seat Corrupt Council 
+   e.g. r2s-succession_void-town-1: "Acting Fixer Tlazolteotl Dzul" | seat row: "Acting Fixer Tlazolteotl Dzul keeps the seat meanwhile."
+3 Acting Lord Warden | keeper title the dean | seat Ecclesiastical Council 
+   e.g. r2s-succession_void-city-0: "Acting Lord Warden Klaus Schneider" | seat row: "Acting Lord Warden Klaus Schneider, the dean, keeps the seat meanwhile."
+3 Acting Household Elder | keeper title the boat-headman | seat Household Council 
+   e.g. rww-thorp-succession_void-305: "Acting Household Elder Antonia Maximus" | seat row: "Acting Household Elder Antonia Maximus, the boat-headman, keeps the seat meanwhile."
+3 Acting Captain-Mayor | keeper title the watch captain | seat Military Council 
+   e.g. rww-town-succession_void-300: "Acting Captain-Mayor Shyam Banerjee" | seat row: "Acting Captain-Mayor Shyam Banerjee, the watch captain, keeps the seat meanwhile."
+2 Acting Archmage of the Council | keeper title the guild archmage | seat Arcane Council 
+   e.g. r2r-city-2: "Acting Archmage of the Council Enlai Kwon" | seat row: "Acting Archmage of the Council Enlai Kwon, the guild archmage, keeps the seat meanwhile."
+2 Acting Household Elder | keeper title the camp foreman | seat Household Council 
+   e.g. r2s-succession_void-thorp-3: "Acting Household Elder Nabila ibn Ahmed" | seat row: "Acting Household Elder Nabila ibn Ahmed, the camp foreman, keeps the seat meanwhile."
+2 Acting Elder | keeper title the mine captain | seat Free Elder Council 
+   e.g. r2s-succession_void-hamlet-0: "Acting Elder Titia Caesar" | seat row: "Acting Elder Titia Caesar, the mine captain, keeps the seat meanwhile."
+2 Acting Elder | keeper title the camp foreman | seat Elder Council 
+   e.g. r2s-succession_void-village-3: "Acting Elder Lasair Brennan" | seat row: "Acting Elder Lasair Brennan, the camp foreman, keeps the seat meanwhile."
+2 Acting Warden of the Council | keeper title the dean | seat Church Council 
+   e.g. r2s-succession_void-town-2: "Acting Warden of the Council Xib Uoc" | seat row: "Acting Warden of the Council Xib Uoc, the dean, keeps the seat meanwhile."
+2 Acting Lord Mayor | keeper title the senior guild master | seat City Council 
+   e.g. r2s-succession_void-city-2: "Acting Lord Mayor Viktor Kozlov" | seat row: "Acting Lord Mayor Viktor Kozlov, the senior guild master, keeps the seat meanwhile."
+2 Acting Master of the Guilds | keeper title the exchange master | seat Grand Guild Consortium 
+   e.g. r2s-succession_void-metropolis-1: "Acting Master of the Guilds Aikaterine Iasites" | seat row: "Acting Master of the Guilds Aikaterine Iasites, the exchange master, keeps the seat meanwhile."
+2 Acting Elder | keeper title the eldest householder | seat Household Council 
+   e.g. rww-thorp-succession_void-301: "Acting Elder Tryphon Chomatenos" | seat row: "Acting Elder Tryphon Chomatenos keeps the seat meanwhile."
+2 Acting Headman | keeper title the boat-headman | seat Headman's Authority 
+   e.g. rww-hamlet-succession_void-300: "Acting Headman Hanako Li" | seat row: "Acting Headman Hanako Li, the boat-headman, keeps the seat meanwhile."
+2 Acting Headman | keeper title the dairy farmer | seat Headman's Authority 
+   e.g. rww-hamlet-succession_void-307: "Acting Headman Zuhuy Chuc" | seat row: "Acting Headman Zuhuy Chuc, the dairy farmer, keeps the seat meanwhile."
+2 Acting Headman | keeper title the miller | seat Headman's Authority 
+   e.g. rww-village-succession_void-301: "Acting Headman Dalila ibn Rashid" | seat row: "Acting Headman Dalila ibn Rashid, the miller, keeps the seat meanwhile."
+2 Acting First Magnate | keeper title the senior guild master | seat Merchant oligarchy 
+   e.g. rww-city-succession_void-301: "Acting First Magnate Drifa Þorkellsson" | seat row: "Acting First Magnate Drifa Þorkellsson, the senior guild master, keeps the seat meanwhile."
+2 Acting Lord Marshal | keeper title the watch commander | seat Grand Military Council 
+   e.g. rww-metropolis-succession_void-303: "Acting Lord Marshal Ériu Walsh" | seat row: "Acting Lord Marshal Ériu Walsh, the watch commander, keeps the seat meanwhile."
+2 Acting Archmage of the Senate | keeper title the librarian | seat Arcane Senate 
+   e.g. rww-metropolis-succession_void-305: "Acting Archmage of the Senate Guelagetza Tamalte" | seat row: "Acting Archmage of the Senate Guelagetza Tamalte, the librarian, keeps the seat meanwhile."
+1 Acting Elder | keeper title the miller | seat Elder Council 
+   e.g. r2r-village-9: "Acting Elder Komnenissa Chortasmenos" | seat row: "Acting Elder Komnenissa Chortasmenos, the miller, keeps the seat meanwhile."
+1 Acting Reeve | keeper title the fishmonger | seat Elected Reeve 
+   e.g. r2r-village-57: "Acting Reeve Xipe Chel" | seat row: "Acting Reeve Xipe Chel, the fishmonger, keeps the seat meanwhile."
+1 Acting Lord Mayor | keeper title the exchange master | seat Grand Council 
+   e.g. r2r-metropolis-6: "Acting Lord Mayor Muluc Holpop" | seat row: "Acting Lord Mayor Muluc Holpop, the exchange master, keeps the seat meanwhile."
+1 Acting Household Elder | keeper title the head shepherd | seat Household Council 
+   e.g. r2s-succession_void-thorp-0: "Acting Household Elder Asuka Yang" | seat row: "Acting Household Elder Asuka Yang, the head shepherd, keeps the seat meanwhile."
+1 Acting Elder | keeper title the household elder | seat Household Council 
+   e.g. r2s-succession_void-thorp-2: "Acting Elder Huitzilxochitl Chel" | seat row: "Acting Elder Huitzilxochitl Chel keeps the seat meanwhile."
+1 Acting Headman | keeper title the maltster | seat Headman's Authority 
+   e.g. r2s-succession_void-hamlet-1: "Acting Headman Dagny Magnusson" | seat row: "Acting Headman Dagny Magnusson, the maltster, keeps the seat meanwhile."
+1 Acting Bailiff | keeper title the lord's appointee | seat Feudal Appointee 
+   e.g. r2s-succession_void-town-0: "Acting Bailiff Renuka Ahuja" | seat row: "Acting Bailiff Renuka Ahuja keeps the seat meanwhile."
+1 Acting Governor | keeper title the governor | seat Ducal Governorship 
+   e.g. r2s-succession_void-metropolis-0: "Acting Governor Tepeu Zo" | seat row: "Acting Governor Tepeu Zo keeps the seat meanwhile."
+1 Acting First Magnate | keeper title the exchange master | seat Grand Merchant Oligarchy 
+   e.g. r2s-succession_void-metropolis-2: "Acting First Magnate Kausar al-Nuri" | seat row: "Acting First Magnate Kausar al-Nuri, the exchange master, keeps the seat meanwhile."
+1 Acting Doge | keeper title the exchange master | seat Grand Merchant Senate 
+   e.g. r2s-succession_void-metropolis-3: "Acting Doge Luvsandorj Budaad" | seat row: "Acting Doge Luvsandorj Budaad, the exchange master, keeps the seat meanwhile."
+1 Acting Headman | keeper title the head shepherd | seat Headman's Authority 
+   e.g. rww-thorp-succession_void-300: "Acting Headman Egil Gunnarsson" | seat row: "Acting Headman Egil Gunnarsson, the head shepherd, keeps the seat meanwhile."
+1 Acting Elder | keeper title the household elder | seat Elder Council 
+   e.g. rww-thorp-succession_void-303: "Acting Elder Yue Zhao" | seat row: "Acting Elder Yue Zhao keeps the seat meanwhile."
+1 Acting Elder | keeper title the pawnbroker | seat Elder Council 
+   e.g. rww-hamlet-succession_void-302: "Acting Elder Liutgar Fischer" | seat row: "Acting Elder Liutgar Fischer, the pawnbroker, keeps the seat meanwhile."
+1 Acting Household Elder | keeper title the mine captain | seat Household Council 
+   e.g. rww-hamlet-succession_void-303: "Acting Household Elder Þrúðr Asgersson" | seat row: "Acting Household Elder Þrúðr Asgersson, the mine captain, keeps the seat meanwhile."
+1 Acting Household Elder | keeper title the stable keeper | seat Household Council 
+   e.g. rww-hamlet-succession_void-304: "Acting Household Elder Drengr Ragnarsson" | seat row: "Acting Household Elder Drengr Ragnarsson, the stable keeper, keeps the seat meanwhile."
+1 Acting Elder | keeper title the master of the hunt | seat Elder Council 
+   e.g. rww-village-succession_void-307: "Acting Elder Dagny Gormsson" | seat row: "Acting Elder Dagny Gormsson, the master of the hunt, keeps the seat meanwhile."
+1 Acting Elder | keeper title the caravanserai keeper | seat Elder Council 
+   e.g. rww-village-succession_void+famine-301: "Acting Elder Frantisek Volkov" | seat row: "Acting Elder Frantisek Volkov, the caravanserai keeper, keeps the seat meanwhile."
+1 Acting Mayor | keeper title the barge master | seat Town Council 
+   e.g. rww-town-succession_void-301: "Acting Mayor Vasileia Comnenus" | seat row: "Acting Mayor Vasileia Comnenus, the barge master, keeps the seat meanwhile."
+1 Acting Alderman | keeper title the wharfinger | seat Guild Council 
+   e.g. rww-town-succession_void-303: "Acting Alderman Leupold Schröder" | seat row: "Acting Alderman Leupold Schröder, the wharfinger, keeps the seat meanwhile."
+1 Acting Mayor | keeper title the senior guild master | seat Town Mayor 
+   e.g. rww-town-succession_void-304: "Acting Mayor Walun Qonggirad" | seat row: "Acting Mayor Walun Qonggirad, the senior guild master, keeps the seat meanwhile."
+1 Acting Alderman | keeper title the senior guild master | seat Guild Council 
+   e.g. rww-town-succession_void+famine-300: "Acting Alderman Diogenes Chrysoberges" | seat row: "Acting Alderman Diogenes Chrysoberges, the senior guild master, keeps the seat meanwhile."
+1 Acting Archmage of the Council | keeper title the wizard | seat Arcane Council 
+   e.g. rww-town-succession_void+famine-301: "Acting Archmage of the Council Oisín O'Mahony" | seat row: "Acting Archmage of the Council Oisín O'Mahony, the wizard, keeps the seat meanwhile."
+1 Acting Lord Mayor | keeper title the senior craft-guild master | seat City Council 
+   e.g. rww-city-succession_void-307: "Acting Lord Mayor Brynjar Raudsson" | seat row: "Acting Lord Mayor Brynjar Raudsson, the senior craft-guild master, keeps the seat meanwhile."
+1 Acting Wali | keeper title the governor | seat Ducal Governorship 
+   e.g. rww-metropolis-succession_void-300: "Acting Wali Akram al-Dawla" | seat row: "Acting Wali Akram al-Dawla keeps the seat meanwhile."
+1 Acting Lord Protector of the Faith | keeper title the dean | seat High Theocratic Council 
+   e.g. rww-metropolis-succession_void-301: "Acting Lord Protector of the Faith Samir al-Hakim" | seat row: "Acting Lord Protector of the Faith Samir al-Hakim, the dean, keeps the seat meanwhile."
+1 Acting First Councillor | keeper title the exchange master | seat City-State Council 
+   e.g. rww-metropolis-succession_void-304: "Acting First Councillor Alexandros Argyros" | seat row: "Acting First Councillor Alexandros Argyros, the exchange master, keeps the seat meanwhile."
+1 Acting First Councillor | keeper title the senior guild master | seat City-State Council 
+   e.g. rww-metropolis-succession_void-306: "Acting First Councillor Ogmund Kolbeinsson" | seat row: "Acting First Councillor Ogmund Kolbeinsson, the senior guild master, keeps the seat meanwhile."

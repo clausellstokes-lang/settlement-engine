@@ -42,6 +42,7 @@ PLANTS = {
  'claims': [('src/generators/power/rulingStructure.js', "  settleClaimsToLabel(factions, tier);", "  void settleClaimsToLabel;")],
  'claims-minor-only': [('src/generators/power/claimStanding.js', "if (label !== 'Minor' && label !== 'Suppressed') continue;", "if (label !== 'Minor') continue;")],
  'steward-note': [('src/generators/power/factionStanding.js', "each would say it does.'", "both would say themselves.'")],
+ 'sovereign-plumbing': [('src/generators/power/governanceNarrative.js', "      institutionNames, // COHERENCE-POWERS-7: the roster's names, for the independent polity's crown\n", "")],
  'infiltrator': [('src/generators/power/stressFactions.js', "'An external interest with its own people placed inside the settlement. Its presence", "'An external interest with embedded assets in at least two powers. Its presence")],
 }
 names = sys.argv[1:] or list(PLANTS)

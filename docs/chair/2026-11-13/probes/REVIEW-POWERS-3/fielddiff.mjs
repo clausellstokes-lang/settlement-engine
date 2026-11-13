@@ -39,6 +39,6 @@ for (const [seed, t] of T) { const b = B.get(seed); if (!b) { hit('_missing_in_b
   // top-level conflicts
   if (J(b.conflicts) !== J(t.conflicts)) (t.conflicts || []).forEach((c, i) => { const o = (b.conflicts || [])[i] || {}; for (const f of new Set([...Object.keys(c || {}), ...Object.keys(o)])) if (J(c?.[f]) !== J(o[f])) hit(`conflicts.${f}`, seed, `${J(o[f]).slice(0, 140)} -> ${J(c?.[f]).slice(0, 140)}`); });
 }
-const out = Object.fromEntries(Object.entries(C).sort().map(([k, c]) => [k, { towns: c.towns.size, n: c.n, ex: c.ex }]));
+const out = Object.fromEntries(Object.entries(C).sort().map(([k, c]) => [k, { towns: c.towns.size, n: c.n, ex: c.ex, list: [...c.towns] }]));
 fs.writeFileSync(process.env.OUT, JSON.stringify(out, null, 1));
 for (const [k, c] of Object.entries(out)) console.log(`${k} :: ${c.towns} towns, ${c.n}`);

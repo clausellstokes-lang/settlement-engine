@@ -1,0 +1,44 @@
+(volatile) generationCoherenceReceipt :: 8 towns, 8
+conflicts :: 17 towns, 17
+conflicts.desc :: 12 towns, 16
+conflicts.intensity :: 4 towns, 4
+conflicts.issue :: 11 towns, 12
+conflicts.parties :: 12 towns, 16
+conflicts.plotHooks :: 11 towns, 13
+conflicts.stakes :: 11 towns, 12
+factions.desc :: 314 towns, 594
+npcs.activeConstraint :: 100 towns, 122
+npcs.category :: 110 towns, 151
+npcs.goal.intent :: 31 towns, 46
+npcs.goal.long :: 20 towns, 29
+npcs.goal.short :: 21 towns, 24
+npcs.physical :: 110 towns, 151
+npcs.plotHooks :: 98 towns, 127
+npcs.presentation.behaviour :: 143 towns, 169
+npcs.presentation.disposition :: 143 towns, 168
+npcs.presentation.impression :: 193 towns, 286
+npcs.secret.stakes :: 85 towns, 90
+npcs.secret.what :: 89 towns, 94
+npcs.settlementCondition :: 10 towns, 11
+npcs.structuralPosition :: 100 towns, 122
+npcs: +field activeConstraint :: 6 towns, 6
+npcs: +field settlementCondition :: 6 towns, 6
+npcs: +field structuralPosition :: 6 towns, 6
+npcs: -field activeConstraint :: 4 towns, 5
+npcs: -field settlementCondition :: 4 towns, 5
+npcs: -field structuralPosition :: 4 towns, 5
+powerStructure.conflicts.desc :: 12 towns, 16
+powerStructure.conflicts.intensity :: 4 towns, 4
+powerStructure.conflicts.issue :: 11 towns, 12
+powerStructure.conflicts.parties :: 12 towns, 16
+powerStructure.conflicts.plotHooks :: 11 towns, 13
+powerStructure.conflicts.stakes :: 11 towns, 12
+pressureSentence :: 4 towns, 4
+prominentRelationship :: 15 towns, 15
+relationships.archetypeKey :: 53 towns, 79
+relationships.description :: 53 towns, 903
+relationships.proseVariant :: 53 towns, 895
+relationships.strength :: 54 towns, 84
+relationships.tension :: 53 towns, 903
+relationships.type :: 52 towns, 77
+relationships.typeName :: 53 towns, 79

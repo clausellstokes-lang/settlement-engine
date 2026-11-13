@@ -1,0 +1,30 @@
+breakdown-tab {'legitimacyPlainWords.test.jsx': 5, 'powerGovernanceAccount.test.jsx': 1, 'powerTabSupport.test.jsx': 2}
+breakdown-pdf {'legitimacyPlainWords.test.jsx': 2}
+possessive-rank3 {'dmPowerLinesPossessive.test.js': 2}
+possessive-captured {'dmPowerLinesPossessive.test.js': 1}
+midwife {'midwifeHonorific.test.js': 1}
+criminal-house-default {'criminalHouseNoDefault.test.js': 3}
+patronage-styled {'patronageStyledTitle.test.js': 1}
+keeper-styled-bare {'seatKeeperStyledName.test.js': 1}
+keeper-styled-doubled {'seatKeeperStyledName.test.js': 1}
+ruling-issue-text {'conflictRulingIssue.test.js': 2}
+ruling-issue-hookkey {'conflictRulingIssue.test.js': 1}
+under-row {'headOfItsPowerRow.test.js': 2}
+under-kinds-dominant {'headOfItsPowerRow.test.js': 2}
+house-kinds {'npcStructureHouseKind.test.js': 1}
+noble-council {'nobleLineNamesTheSeat.test.js': 1}
+lord-government {'lordNotGovernment.test.js': 6}
+minted-underworld {'mintedFaceUnderworld.test.js': 4}
+underworld-names-power {'mintedFaceUnderworld.test.js': 1}
+ties-role {'regenPreservesUserCanon.test.js': 1, 'styledTitleOnRows.test.js': 3}
+refresh-role {}
+title-lines {'titleLineDisqualifiers.test.js': 5}
+sovereign-vignette {'sovereignNoCrown.test.js': 2}
+sovereign-factions {'sovereignNoCrown.test.js': 1}
+standing-level {'standingAgainstFigure.test.js': 5}
+standing-host {'standingAgainstFigure.test.js': 1}
+standing-figures {'standingAgainstFigure.test.js': 2}
+claims {'powerDescClaimLabel.test.js': 2}
+claims-minor-only {'powerDescClaimLabel.test.js': 1}
+steward-note {'stewardNoteReadsWhole.test.js': 1}
+infiltrator {'stressFactionNames.test.js': 1}

@@ -1,0 +1,14 @@
+conflicts :: 21 towns, 21
+conflicts.desc :: 21 towns, 21
+conflicts.issue :: 21 towns, 21
+factions.desc :: 177 towns, 358
+npcs.activeConstraint :: 191 towns, 290
+npcs.settlementCondition :: 72 towns, 84
+npcs.structuralPosition :: 191 towns, 290
+npcs: -field activeConstraint :: 72 towns, 84
+npcs: -field settlementCondition :: 72 towns, 84
+npcs: -field structuralPosition :: 72 towns, 84
+powerStructure.conflicts.desc :: 21 towns, 21
+powerStructure.conflicts.issue :: 21 towns, 21
+relationships.npc1Role :: 142 towns, 178
+relationships.npc2Role :: 95 towns, 169
