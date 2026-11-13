@@ -749,7 +749,43 @@ The forecast (PART FIVE §9, against the line at e969a75b7: 2 fresh, 1 removed; 
 - **ORDER:** do not disturb a suite in flight. Phase two still waits for the chair's word naming the lane's final tip and its review CLEAR. Then: merge that tip; the four cures each its own commit; PUSH THE SAVE BRANCH and tell the chair its tip BEFORE the whole suite (the lane's reader reads the cure commits as a small diff while the suite runs); then the doors, the signing, the gate, the suite, the push.
 - **ALSO, for the END of point 49, once it is on the line (the chair, ~21:51 UTC):** run the CENSUS-2 counter ONCE on the landed tip, as a count, never a gate — `git fetch origin lane/census-2-2026-11-13` (2686272b1); `git archive origin/lane/census-2-2026-11-13 docs/chair/2026-11-13/probes/CENSUS-2 | tar -x -C <scratch>/c2`; `sh <scratch>/c2/docs/chair/2026-11-13/probes/CENSUS-2/census2.sh <the landed tree's root> <an out-dir outside the repository> 4` (~12 min, to a file, never a pipe; it exits non-zero on its own failure); counts.txt's row for each of the eight kinds beside the figures of `docs/chair/2026-11-13/CENSUS-2-2026-11-13.md` (at the line's tip 9e57f5023) in row 49; a kind that RISES is a line for the landing message, with its writer file. If context is thin, skip and say so: the chair runs it.
 
-### 2k.4–2k.5 (the whole suite, the gate, what phase two does: written as each completes)
+### 2k.4 The rehearsal's whole suite (at 91f581649, before phase two), classed
+`/home/user/wt-s49`, detached, `--maxWorkers=2`, 6,135 s, the ledger ref fetched: **39,002 passed, 22 failed + 3 files at load, 197 skipped** (3,245 files). Every red classed (`failset.py`):
+- **the line's carried set after point 48, unchanged in kind:** landingFixtureFreshness ×2; foundingWorldBones (Mossgate); the prose manifest's DRIFT arm (1,036 → 1,038 rows: the draft's two newly moved, 2k.2), tally and MIXED-POOL AUDIENCE arm; newsHeadlineContract + newsVoiceContract at load; proseFamilyContract A1/A2/A3/A5/A6; siteCoherenceRatchet C1 (the sixteen rows: owner the site plan's Waves 3 and 4).
+- **STOPS 49a–49d (2k.3), each cured at the point by the chair's ruling (2k.5):** presumedThings ×3; observedShapeReaders ×2; writerReach at load; factLayers ×2.
+- **the lane's own, this seat's door:** tuningRegister ×1 (the one row; refrozen, 2k.5).
+- **the lane's own at its own tip, cured on the lane:** voiceMechanics ×1 (b861d1b22, in the final tip).
+- **NEW AT THE MERGE, re-keyed at the point by 2f's standing law 5 (a golden-corpus null-change pin):** institutionBudgetPromise "every one of sixty seeds is byte-identical …" — seed 41 moves by the lane's declared item-5 coherence note only (2k.5, 7e0776804). Red at the lane's tip and base for the agreement lane's cause, so the lane could not see it.
+- Refs and local config: compared at the end (2k.5).
+
+### 2k.5 PHASE TWO, PREPARED ON THE SAVE BRANCH (the chair's word of ~22:36 UTC: prepare; the lane's final tip a1a8ec794, reviewed CLEAR at f2f3e3292; the line NOT pushed until the chair's word)
+The commits on `lane/merge-13-point-49-wip-2026-11-13` after the rehearsal, in order (each its own commit; every message carries its BEFORE/AFTER and plants):
+| commit | act |
+|---|---|
+| 0e8c69359 | merge of 5657a229c (the lane's tip then; two commits past 9f83ffbb2; no conflict). The chair's "22:41 UTC" quoted in its message was the chair's label and wrong: sent about 22:36 by the clock (the chair's note). |
+| 7f2f84239 | **STOP 49b** — `?? x?.name` (and `name?: unknown`) struck from registeredWords.js :: powerNames; the door 1 NEW → exit 0; the walker green |
+| 5f78010f5, dbcdd5a96 | **STOP 49c** — the dark row's consumer re-pointed BY IDENTITY to generationCoherence.js (35 rows, the pins unmoved); then the door's `--write` on that committed tree ("cohort 1378 → 1378; 0 stale folded out; 0 registered rows now lit"; the surface-reach readings re-taken); writerReach 52/52 |
+| 7e0776804 | institutionBudgetPromise seed 41 re-keyed by identity (6fce6e3d180fc1be → 0b896078cabcb3c9: `.coherenceNotes.0` only) |
+| 55148a2f4 | **STOP 49a (i)** — `ARM1_INSTRUMENTS`: pageCensusFindings.js {hits 11, strips 2}, factLayers.js {hits 3, strips 0}, exact; plants A–C red |
+| 3628f37cc | **STOP 49a (ii)/(iii)** — the six literals and one strip site BANKED BY HAND BY NAME, AGAINST THE LETTER OF THE DOOR'S BASE RULE, under four `after-base: <holder>` reasons (dmPowerLines.js ×2 and rulerKin.js's strip site — the powers lane; defenseDisplay.js ×2 — the third leaves lane; incomeLineSiblings.js — the defence lane; magicTraditionHouses.js — the seat after the merges); the strip-reason arm admits a ruled after-base reason |
+| bfab7bdd8 | STOP 49a — the three stale rows leave by `--shrink`; the door exit 0 (fresh 0, stale 0, strips 0) |
+| b4c3640bf | **STOP 49d** — the seven faith pools RE-BASED BY NAME at the merged measure, by hand (`_notes` said; the door "7 rise(s) REFUSED" before) |
+| 19dd60303 | STOP 49d — the one fall leaves by `--shrink`; the door "0 rise(s), 0 fall(s)" |
+| d02c3a058 | **the tuning inventory refrozen** by its ritual: RULING_PATRONAGE_TUNING + the dependent registeredWords.js; no value moved; 76/76 |
+| a7bf9aa0e | **STOP 49d's BLOCK** (ruled in 48b BLOCK 1's form): the layer walker's named exact `REBASED_49D` list (seven, shrink-only); FIRST stays 6; plants 1–4 red ("7 ≤ 6", the exact arm, "13 ≤ 6", "8 ≤ 7"). A walker change at a merge point, AGAINST THE LETTER OF THE SHRINK-ONLY RULE, authorised for this one purpose |
+| b4ebf8177 | merge of the FINAL tip a1a8ec794 (f2f3e3292: the role family withdrawn from the page list whole; a1a8ec794 documents); registeredWords.js auto-merged = the lane's file but 49b's line |
+| 9b6b9962d | the lighting census re-taken: titles 29405 → 29407 (the two cure arms) |
+
+**Re-measured after b4ebf8177 (the page list counts):** the presumed-things door exit 0 (banked 4,720; strips 107) and the walker green — 49a's named counts (11/2, 3/0) hold after f2f3e3292; observed-shape exit 0; writer reach exit 0; the layer door 0/0; tuning 76/76; the six bundles and the edge tests green (registeredWords.js is bundled nowhere); vocabularyPageFindings green; strict 1113, ratchet 167, `npm run lint` 0 errors; wiring `--check` 0; state prose `--check` 0.
+
+**NO SHIFT RECORD IS SIGNED AT THIS POINT (point 45/48's form):** gm 0/525, fence 0/360, herald 0/446, witness 0/8, PDF 0/18 at the merge (2k.2); the one moved surface, the prose manifest (the draft's 30 rows, per cell 30 cells added, all DS-GEN-9), is signed ONCE at the final tip by closing act 2, its per-cell table kept for it. Every other registered surface: green in the rehearsal suite but the manifest's carried titles. The lane's draft stays in the tree as its history.
+
+**WHAT IS LEFT, EXACTLY (for this seat on the chair's word, or a FOURTEENTH SEAT landing from this save branch):**
+1. The whole check at the save tip (started by this seat at the tip named in its message, `/home/user/wt-s49b`, to `/home/user/rec13/suite2.json` / `suite2.log`; ~105 min). If the container is gone: a detached worktree at the save tip, `node_modules` from `npm ci`, the ledger ref fetched, `npx vitest run --maxWorkers=2 --reporter=dot --reporter=json --outputFile=<f>`. Class every red against 2k.4: the line's carried set must be the ONLY reds (no presumedThings, observedShapeReaders, writerReach, factLayers, tuningRegister, voiceMechanics or institutionBudgetPromise row). Anything else is a stop.
+2. `npm run verify:dist` (after the suite: the mutex gives up while a vitest runs) — red only on the carried byte ceilings and landingFixtureFreshness ×2.
+3. Row 49 in section 1 and this section finished (the suite's count, verify:dist's bytes).
+4. On the chair's word ONLY: `git fetch origin`; `git merge-base --is-ancestor origin/lane/integration-2026-11-07 HEAD` (exit 0); ONE plain `git push origin HEAD:lane/integration-2026-11-07` from the worktree (the lane hook's three gates); read back from origin. Snapshot refs + config (`snap.sh`) before and after.
+5. Then the CENSUS-2 count once on the landed tip (2k.3a's last item), into row 49.
 
 ## 3. The running tables
 
