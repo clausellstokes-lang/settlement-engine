@@ -11,6 +11,14 @@
  * scale). A house of the kind on the roster is not named as missing; where every named house is there, no line.
  *
  * The towns: the cold list's two (the app's own configuration shape), and the census's.
+ *
+ * R1 (2026-11-13, the chair's ruling on REVIEW-R2-STAGES finding 1): "by kind" answers a house with no catalogue row
+ * too. A house of the roster whose TRADE does a missing house's finishing (`validationOnPage.js :: FINISHING_TRADES`:
+ * a Cobbler's guild or a Furrier's district for the leatherworkers, Carpenters for the carpenters' guild, an
+ * Apothecary for the alchemist) finishes the work, and where ONE finisher stands no half-way line prints. Two pins of
+ * item 1 held a false line as correct and are re-keyed by identity with that cause: the unit's Apothecary district
+ * ("no alchemist shop finishes it" beside the apothecary that finishes the herbs) and the cold list's
+ * rw3-city-infiltrated-1, whose Cobbler's guild and Furrier's district finish the leather its Tanners tan.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
@@ -48,8 +56,8 @@ describe('the half-way line names only the houses the roster lacks by kind (item
     expect(familyOfInstitution({ name: 'Tannery' })?.key, 'anchored: the catalogue places the tannery').toBe(familyOfInstitution({ name: 'Tanners' })?.key);
     expect(resourceGapLines(town(['Tanners'], 'animal hides', ['Tannery', "Leatherworkers' guild"])).map((g) => g.impact))
       .toEqual(["Work on the animal hides here stops half-way: no leatherworkers' guild finishes it."]);
-    expect(resourceGapLines(town(['Apothecary district'], 'medicinal herbs', ['Apothecary', 'Alchemist shop'])).map((g) => g.impact))
-      .toEqual(['Work on the medicinal herbs here stops half-way: no alchemist shop finishes it.']);
+    // RE-KEYED (R1): the apothecary finishes the herbs, so the work does not stop half-way (was: "no alchemist shop finishes it")
+    expect(resourceGapLines(town(['Apothecary district'], 'medicinal herbs', ['Apothecary', 'Alchemist shop'])).map((g) => g.impact)).toEqual([]);
     expect(resourceGapLines(town(['Apothecary district', 'Alchemist quarter'], 'medicinal herbs', ['Apothecary', 'Alchemist shop']))).toEqual([]);
     // a house of another kind answers nothing
     expect(resourceGapLines(town(['Cobbler'], 'animal hides', ['Tannery'])).map((g) => g.impact))
@@ -63,10 +71,12 @@ describe('the half-way line names only the houses the roster lacks by kind (item
   test('the cold list\'s towns: rw3-city-infiltrated-1 (Tanners) and rw3-city-famine-1 (an Apothecary district)', () => {
     const infiltrated = birthApp('rw3-city-infiltrated-1');
     expect(infiltrated.institutions.map((/** @type {{ name: string }} */ i) => i.name), 'anchored: the roster holds Tanners').toContain('Tanners');
-    expect(halfWay(infiltrated).filter((t) => /tannery/i.test(t))).toEqual([]);
+    // RE-KEYED (R1): its Cobbler's guild and Furrier's district finish the leather, so no hides line at all (was: no "tannery")
+    expect(infiltrated.institutions.map((/** @type {{ name: string }} */ i) => i.name), 'anchored: the roster holds a Cobbler\'s guild').toContain("Cobbler's guild");
+    expect(halfWay(infiltrated).filter((t) => /animal hides/i.test(t))).toEqual([]);
     const famine = birthApp('rw3-city-famine-1');
     expect(famine.institutions.map((/** @type {{ name: string }} */ i) => i.name), 'anchored: the roster holds an Apothecary district').toContain('Apothecary district');
-    expect(halfWay(famine).filter((t) => /apothecary/i.test(t))).toEqual([]);
+    expect(halfWay(famine).filter((t) => /medicinal herbs/i.test(t)), 'R1: the apothecary finishes the herbs').toEqual([]);
   }, 120000);
 
   test('a true half-way line still prints: r2r-hamlet-16, a stone quarry and no masons', () => {
@@ -85,4 +95,38 @@ describe('the half-way line names only the houses the roster lacks by kind (item
       expect(heldByKind.filter((n) => lines.includes(n.toLowerCase())), seed).toEqual([]);
     }), 'a half-way line names a house the roster holds by kind');
   }, 240000);
+});
+
+describe('R1: a house of the missing house\'s trade finishes the work, and one finisher silences the line', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const town = (/** @type {string[]} */ names, /** @type {string} */ chain, /** @type {string[]} */ missing) => ({
+    name: 'Testford', config: {}, economicState: { primaryExports: [] }, institutions: names.map((name) => ({ name })),
+    resourceAnalysis: { gaps: [{ chain, missing, impact: 'Cannot produce final goods, limited to intermediate products', severity: 'medium' }] },
+  });
+
+  test('the unit: a cobbler or a furrier finishes the leather; carpenters the timber; a tanner alone does not', () => {
+    expect(resourceGapLines(town(['Tanners', "Cobbler's guild"], 'animal hides', ['Tannery', "Leatherworkers' guild"]))).toEqual([]);
+    expect(resourceGapLines(town(['Tanners', "Furrier's district"], 'animal hides', ['Tannery', "Leatherworkers' guild"]))).toEqual([]);
+    expect(resourceGapLines(town(['Sawmill (commercial)', 'Carpenters (5-15)'], 'timber', ['Sawmill', "Carpenters' guild"]))).toEqual([]);
+    expect(resourceGapLines(town(['Potter'], 'clay', ['Potter', 'Brickmaker']))).toEqual([]);
+    // a tannery tans; it does not finish the leather: the true line stays
+    expect(resourceGapLines(town(['Tanners'], 'animal hides', ['Tannery', "Leatherworkers' guild"])).map((g) => g.impact))
+      .toEqual(["Work on the animal hides here stops half-way: no leatherworkers' guild finishes it."]);
+    // a road to a neighbour's house finishes nothing here
+    expect(resourceGapLines(town(['Access to cobbler'], 'animal hides', ["Leatherworkers' guild"])).map((g) => g.impact))
+      .toEqual(["Work on the animal hides here stops half-way: no leatherworkers' guild finishes it."]);
+  });
+
+  test('the reader\'s towns: no half-way line beside the house that finishes the work (REVIEW-R2-STAGES finding 1)', () => {
+    const seeds = ['r2r-town-39', 'r2r-city-20', 'r2r-metropolis-43', 'r2r-city-27', 'r2s-under_siege-city-1', 'r2s-insurgency-city-2'];
+    expectNoSeedFailures(collectSeedFailures(seeds, (seed) => {
+      expect(halfWay(birthCensus(seed)), seed).toEqual([]);
+    }), 'a half-way line prints beside its finisher');
+  }, 240000);
+
+  test('the four true lines still print (Tanners alone): r2r-town-49, r2s-mass_migration-town-0', () => {
+    for (const seed of ['r2r-town-49', 'r2s-mass_migration-town-0']) {
+      expect(halfWay(birthCensus(seed)), seed).toEqual(["Work on the animal hides here stops half-way: no leatherworkers' guild finishes it."]);
+    }
+  }, 120000);
 });

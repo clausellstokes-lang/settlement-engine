@@ -213,6 +213,46 @@ function houseOfKindHere(s, name) {
   });
 }
 
+/**
+ * THE TRADES THAT FINISH WHAT A CHAIN'S HOUSE FINISHES (W2-C-LEAVES R1, the chair's ruling on REVIEW-R2-STAGES finding
+ * 1: "by kind" answers a house with no catalogue row too). One closed list, keyed by the house a chain's list names;
+ * each entry gives the words of a house's name that do the same finishing, with the cause. Matched on the live
+ * roster's own houses (a road to a neighbour's house, "Access to …", finishes nothing here).
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+const FINISHING_TRADES = Object.freeze({
+  "leatherworkers' guild": ['leatherwork', 'cobbler', 'furrier', 'saddler', 'cordwainer', 'shoemaker'], // the review's 17: a Cobbler's guild or a Furrier's district finishes the leather
+  "carpenters' guild": ['carpenter', 'joiner', 'cooper', 'wheelwright'], // the review's 3: Carpenters (5-15) beside "no carpenters' guild"
+  'sawmill': ['sawmill', 'sawyer', 'lumber'],
+  'apothecary': ['apothecar', 'herbalist', 'alchemist'], // the review's 4: an Apothecary or Alchemist house finishes the herbs
+  'alchemist shop': ['alchemist', 'apothecar'],
+  "blacksmiths' guild": ['blacksmith', 'smithy', 'smith', 'armourer', 'armorer', 'weaponsmith', 'metalworker'],
+  'smelter': ['smelter', 'foundry', 'ironworks'],
+  "goldsmiths' guild": ['goldsmith', 'silversmith', 'jeweler', 'jeweller'],
+  "jewelers' guild": ['jeweler', 'jeweller', 'gem cutter', 'lapidar', 'goldsmith'],
+  "coppersmiths' guild": ['coppersmith'],
+  "stonemasons' guild": ['stonemason', 'mason', 'stonecutter'],
+  "weavers' guild": ['weaver', 'textile', 'cloth'],
+  "dyers' guild": ['dyer'],
+  'fulling mill': ['fuller', 'fulling'],
+  'glassblower': ['glassblow', 'glassmaker', 'glassworks'],
+  'potter': ['potter', 'pottery'],
+  'brickmaker': ['brickmaker', 'brickworks', 'potter'], // a Potter finishes the clay (the cold list REVIEW-W2A-3 #990; r2s-insurgency-town-0)
+});
+
+/**
+ * Whether a live house of the named house's trade (`FINISHING_TRADES`) stands here, finishing what it finishes.
+ * @param {PageRecord} s @param {string} name a house the chain's list names, missing by kind
+ */
+function tradeFinisherHere(s, name) {
+  const trades = FINISHING_TRADES[name.toLowerCase()];
+  if (!trades) return false;
+  return liveInstitutions(s).some((inst) => {
+    const have = str(inst?.name).toLowerCase();
+    return !!have && !have.startsWith('access to') && trades.some((w) => have.includes(w));
+  });
+}
+
 /** @typedef {(typeof RESOURCE_CHAINS)[keyof typeof RESOURCE_CHAINS]} ResourceChain */
 
 /** @param {string} rawResource @returns {[string, ResourceChain]|null} the chain entry for a gap's raw resource */
@@ -253,8 +293,12 @@ export function resourceGapLines(s) {
     const raw = (spec?.raw || str(resourceDisplayName(str(g.chain)))).toLowerCase();
     if (spec && spec.words.some((w) => holds(exportsText, w))) continue; // the economy sells it: someone works it
     // The houses the line names as missing are read by kind: a house of the roster that is the named one's own
-    // family or ladder rung is not missing (W2-C-LEAVES, item 1).
-    const missing = arr(g.missing).map(str).filter((n) => n && !houseOfKindHere(s, n))
+    // family or ladder rung is not missing (W2-C-LEAVES, item 1). R1 (the chair, from REVIEW-R2-STAGES finding 1):
+    // a house that does a missing one's trade finishes the work too (`tradeFinisherHere`), and where ONE finisher of
+    // the missing houses stands, the work does not stop half-way: no line.
+    const named = arr(g.missing).map(str).filter((n) => n && !houseOfKindHere(s, n));
+    const finisherStands = named.some((n) => tradeFinisherHere(s, n));
+    const missing = finisherStands ? [] : named
       .map((n) => str(institutionDisplayName(n) || n)).filter(Boolean).map((n) => n.charAt(0).toLowerCase() + n.slice(1));
     // WORKED HERE is the chain model's (facts/chainWorking.js :: chainWorksResource, record 303): "No one here works"
     // prints only where the leaf says no; a half-way grade, which says the work is done in part, never where the model
