@@ -2330,7 +2330,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "angle": "visitor",
           "marks": [
             "walls",
-            "crisis: any"
+            "crisis: any",
+            "no crisis: under_siege"
           ],
           "text": "{settlement} has walls and too few people to stand on them; anyone determined would find a stretch that nobody watches.",
           "slots": [
@@ -3360,7 +3361,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "angle": "ledger",
           "marks": [
             "walls",
-            "no garrison"
+            "no garrison",
+            "no militia"
           ],
           "text": "The walls at {settlement} stand with no paid force behind them, and walls nobody holds are only a fence.",
           "slots": [

@@ -61,14 +61,14 @@
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 182031,
-      "gzip": 25545,
+      "raw": 182381,
+      "gzip": 25602,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 294379,
-      "gzip": 37631,
+      "raw": 294443,
+      "gzip": 37639,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -659,6 +659,22 @@
       "toRaw": 147799,
       "gzipAfter": 20827,
       "reason": "+66 B raw over the committed 147733 (gzip level 9: 20800 -> 20827): the cold list's corpus variants: disqualifiers declared, false claims reworded, lines for the cases left empty (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE stage 2",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 182031,
+      "toRaw": 182381,
+      "gzipAfter": 25602,
+      "reason": "+350 B raw over the committed 182031 (gzip level 9: 25545 -> 25602): the first seat's lines read town by town: three cured by a declaration, one line for the case a declaration left thin (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE stage 2",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 294379,
+      "toRaw": 294443,
+      "gzipAfter": 37639,
+      "reason": "+64 B raw over the committed 294379 (gzip level 9: 37631 -> 37639): the first seat's lines read town by town: three cured by a declaration, one line for the case a declaration left thin (2026-11-13)"
     }
   ],
   "ceilingTransfersNewLeaves": [
