@@ -78,9 +78,36 @@ const HOUSE_KINDS = Object.freeze({ economy: Object.freeze(['economy']), other: 
  * senior casters"), and the power categories that are that body. Such a row is false of the card that HEADS its power: the
  * head of the strongest power of its kind reads its kind's head row; the head of a lesser one reads neither (the refusal's
  * rule: it keeps its own goal and claims no position), since it leads its own body and is not the kind's leader.
+ * POWERS-9 (pf#636 #797 #831): the armed rows join them: "Leads a squad ..." is false of the garrison commander who heads
+ * the force; the head of the strongest armed power reads "Commands those under arms ...", the head of a lesser one no row.
  * @type {Readonly<Record<string, readonly string[]>>}
  */
-const UNDER_KINDS = Object.freeze({ religious: Object.freeze(['religious']), criminal: Object.freeze(['criminal']), magic: Object.freeze(['magic']) });
+const UNDER_KINDS = Object.freeze({ religious: Object.freeze(['religious']), criminal: Object.freeze(['criminal']), magic: Object.freeze(['magic']), military: Object.freeze(['military']) });
+
+/**
+ * POWERS-9 (ROUND-3-CUT-INCREMENT pf#65 #77 #105 #246 #491 #530 #595 #596 #662 #663 #799): the card categories whose rows,
+ * at either rank, speak of the card's OWN BODY ("Heads an old family", "Belongs to a lesser old family", "Holds an office
+ * whose purse shrinks", "Works spells under the senior casters", "Holds a place under the crew's boss", "Serves the faith
+ * under its leaders"), and the power categories that are that body. Such a row is true only of a card whose first-rank
+ * power IS that body: a smith heading the Grain Holders is no old family's head, the occupier's governor (a military
+ * power) holds no office of the seat, a lone outlaw in no power has no boss. A card whose first-rank power is another
+ * kind, or none, reads no row (the refusal's rule: it keeps its own goal and claims no position). The government's body
+ * is the governing power or a power of its category. (The trade's rows speak of the card's own house, and the armed
+ * rows of the card's own squad: both stand where the card's power is another's.)
+ * @type {Readonly<Record<string, readonly string[]>>}
+ */
+const BODY_KINDS = Object.freeze({ government: Object.freeze(['government']), other: Object.freeze(['noble']), religious: UNDER_KINDS.religious, criminal: UNDER_KINDS.criminal, magic: UNDER_KINDS.magic });
+
+/**
+ * Whether the card's first-rank power is of its category's own body (BODY_KINDS); true for a category with no body.
+ * @param {string} cat @param {{ power?: string | null }} standing @param {Array<Record<string, any>>} factions @returns {boolean}
+ */
+function inItsBody(cat, standing, factions) {
+  const kinds = BODY_KINDS[cat];
+  if (!kinds) return true;
+  const mine = standing.power ? factions.find((f) => f.faction === standing.power) : null;
+  return !!mine && (kinds.includes(mine.category) || (cat === 'government' && !!mine.isGoverning));
+}
 
 /**
  * Whether the card heads the strongest power of its own kind (so no house of its kind stands ahead of it).
@@ -541,6 +568,8 @@ export function enrichNPCsWithStructure(npcs, settlement) {
     if (!within && !isHolder) return { ...npc, structuralRank: standing.standing };
 
     const cat  = isHolder ? 'government' : npc.category || 'other';
+    // POWERS-9: a row that speaks of the card's own body is not the card's where its first-rank power is another kind
+    if (!isHolder && !inItsBody(cat, standing, powerFactions)) return { ...npc, structuralRank: standing.standing };
     // COHERENCE-POWERS-7 (the chair's R1): the trade's and the old families' subordinate rows say the card stands "behind the
     // leading one" of its kind; the head of the strongest power of its own kind is that leading one, whatever its weight
     // beside the ruler, and reads its kind's head row ("Heads the leading house in the trade", "Heads an old family")

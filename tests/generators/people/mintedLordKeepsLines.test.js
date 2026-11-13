@@ -31,7 +31,9 @@ const SIX = Object.freeze([
   // heads it since point 46, so the line in its place is the one their rank behind the lord reads
   ['r2r-village-56', 'village', null, 'npc_mill', 'Belongs to a lesser family behind the leading one while the seat fails.'],
   ['r2s-succession_void-hamlet-0', 'hamlet', 'succession_void', 'npc_shepherd', 'Belongs to a lesser family behind the leading one while the seat fails.'],
-  ['r2s-succession_void-village-3', 'village', 'succession_void', 'npc_tailor', 'Belongs to a lesser family behind the leading one while the seat fails.'],
+  // POWERS-9 (re-keyed by identity, the cause): this tailor is third of the Elder Council (a government power), in no old
+  // family's body, so "Belongs to a lesser family behind the leading one" was false of him; he reads no row (BODY_KINDS)
+  ['r2s-succession_void-village-3', 'village', 'succession_void', 'npc_tailor', null],
   ['r2s-succession_void-town-0', 'town', 'succession_void', 'npc_town_watch', 'Leads a squad whose members are being pulled toward one side or the other in the fight for the seat.'],
   ['r2s-succession_void-town-2', 'town', 'succession_void', 'npc_mills_2_5', 'Belongs to a lesser family behind the leading one while the seat fails.'],
   ['r2s-succession_void-town-2', 'town', 'succession_void', 'npc_vintner', 'Runs a smaller house behind the leading one in the trade while the seat fails.'],
@@ -48,7 +50,7 @@ describe('COHERENCE-POWERS-6 item 3: a minted lord pushes no true line off a car
   it('the review\'s six true house lines are on their cards again', () => {
     const misses = SIX.flatMap(([seed, t, st, id, line]) => {
       const card = (born(t, seed, st).npcs || []).find((c) => c.id === id);
-      return card?.structuralPosition === line ? [] : [`${seed} ${id}: "${card?.structuralPosition ?? '(none)'}"`];
+      return (card?.structuralPosition ?? null) === line ? [] : [`${seed} ${id}: "${card?.structuralPosition ?? '(none)'}"`];
     });
     expect(misses).toEqual([]);
   });
