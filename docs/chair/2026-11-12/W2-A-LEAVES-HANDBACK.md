@@ -188,7 +188,7 @@ titles compared one by one:
 # PART 2 — the second seat (W2-A-LEAVES-2, 2026-11-13): the review's findings cured
 
 **Seat:** W2-A-LEAVES-2, from 96d698de7 (REVIEW-W2A NOT CLEAR). Scratch worktree; the main checkout untouched.
-**Tip:** `6a3bb189d (code); the measures below are being completed at it`. **The law of this seat:** a count falling is not a cure. Each cure below says how many lines it
+**Tip:** `the remote tip read back at the foot of this part (code 8f96276a9; bundles 395cb592f)`. **The law of this seat:** a count falling is not a cure. Each cure below says how many lines it
 removed, how many of those were true by a read sample of thirty, and what the page says in their place.
 
 ## Commits
@@ -201,6 +201,11 @@ removed, how many of those were true by a read sample of thirty, and what the pa
 | 0297bac21 | F6: the reader arm reads the facts folder but its homes; banks lines by content, each with a reason |
 | df008526a | F5: a key-read arm; the nine capture-keyed pools placed at layer 5 by their key's reads |
 | 6a3bb189d | F3b: the read of thirty widened the fact (a member of the ruling power; the hall held at `corrupted`/`capture`) |
+| 13ba62cdd | the hand-back, current (this file, first written) |
+| ef3f04d89 | the page arm's P5false lowered through its door on the 720 (306 → 0) |
+| c32f0d099 | the edge-shared bundles rebuilt (engine and aiGrounding sources moved) |
+| 8f96276a9 | F3c: the veil — the crime desk reads the veiled cast and rung for the DM only; the ring's note reads nothing hidden |
+| 395cb592f | the edge-shared bundles rebuilt again (defenseDisplay.js moved) |
 
 
 ## F1 (HIGH) — the gap lines restored; the false half named and handed on
@@ -247,11 +252,42 @@ removed, how many of those were true by a read sample of thirty, and what the pa
   | DS-DEF-4 capture equilibrium #1 "… nothing is bought here" | an official in pay |
   | DS-DEF-4 capture none #2 "… the means to reach into the hall and it has not" | an official in pay |
   | DS-DEF-4 capture none #3 "… business with the hall is straight" | an official in pay |
-  | the organised ring's note, its clause "bought officials" (each of four vantages) | no official in pay: the vantage without the clause |
-- **The counts on the 720 (base → tip):** re-taken at 6a3bb189d (running). At df008526a, before F3b, base against tip in 319 towns: 330 lines out, 343 in (the first seat's 5b moves included). The capture-pressure lines beside a free hall: 288 at the base, 0 at 96d698de7, 285 here (the census's own row 5a, its retired test): restored, as ruled; the 3 short are the case left with no line (requests, item 2).
-- **Read sample of 30:** the read of thirty removed lines at df008526a found TRUE lines removed (a ring at `corrupted`; a member of the ruling power in a criminal's pay), which F3b cures; the read is re-taken at 6a3bb189d (running).
+  | the organised ring's note, "bought officials" (each of four vantages) | **F3c: reworded, not struck** — see below |
+- **F3c, THE VEIL (found by the whole suite at c32f0d099, the one red title not red at the base, this seat's own):**
+  both facts are VEILED — the cast's allegiances and the hall's rung are stripped from the public record — and the
+  public page's criminal lens and ring note were decided by them (publicProseVeilInvariance, soak1k-39). Cured: the
+  desks read them for the DM's audience only (for any other audience nothing is struck: as at the base); and the
+  ring's note, ONE value printed on both pages, may read neither, so its four vantages were reworded to say what is
+  true in every town: the ring lives on protection money "and on any official it can buy" (it presumes no buyer; the
+  DM's "Who answers to whom" names those it has). All 255 organised rings' notes change by that clause: 87 lose a
+  false claim, 168 a true one stated plainly (where an official is in pay, or the hall is held), now said as a
+  possibility. **The cast-aware note waits for the public composer (`components/new/publicProseCompose.js`, not this
+  lane's) to draw it from the stripped record** (request).
+- **The counts on the 720 (base → tip):** base deb1544eb against the tip's pages (census renders, the crime desk's lines on Power and
+  Defense), **269 lines out and 282 in, in 265 towns** (the first seat's 5b structure moves included). OUT: 64 + 93
+  "officials are taking criminal money" (ADVANCING #1, #3) and 15 "still own a few officials" (RECOVERING #3), all
+  where no official answers to a criminal house; 16 "losing their grip on the hall" at a free hall; 81 ring notes
+  naming bought officials where none is. IN, in the same places: 157 "Each season it gets easier to buy an
+  official" (it presumes no buyer), 26 "The approach was made … and did not take", 2 "still own a few officials"
+  (where one is), 97 ring notes without the clause. **At the final tip (395cb592f), after F3c:** the crime desk's lines
+  as above (188 out, 185 in, 3 towns silent), and the organised ring's note reworded in all 235 rings the census's
+  Defense pages print (the 255 counted on the records, less those the page veils or does not show). **Against the first seat's tip (96d698de7): 285 capture-pressure
+  lines restored** beside a free hall (the census's own retired row 5a: 288 base, 0 there, 285 here); the 3 short are
+  the case left with no line (requests, item 2). The organised rings that lose the clause: 87 of the 720 (F3b; 148
+  before it).
+- **Read sample of 30:** **thirty of the 269 removed lines**, each against its town's page and record
+  (`out/f3sample2.txt` method, every ninth): **23 false** by the record (an official taking criminal money, or a grip
+  on the hall, where the cast holds no official in a criminal's pay and the hall card reads "Free of the criminals");
+  **7 doubtful**: a plot hook on the same page says "A guard captain is on the payroll of the criminal network",
+  which the cast does not hold; **0 true**. The first read, at df008526a before F3b, found true lines removed (a ring
+  at `corrupted`; a ruling-power member in a criminal's pay): F3b cured that. **A finding against this cure, by
+  name:** that hook prints in 160 of the 720 towns, 68 of them with no official in pay, and now stands beside a "no one
+  was bought" line ("the approach … did not take", "business with the hall is straight") in **12 towns (1 at the
+  base)**. The hook is the line the cast does not support; it is generator data, not this lane's: its disqualifier
+  ("needs an official in pay") is a request (item 5). Recommendation: the chair rules whether this seat's draw waits
+  for the hook's cure.
 - **The census row re-read:** row 5a RETIRED BY NAME (it counted the true with the false; 288 at the base) and replaced
-  by **P5false, "a crime line the town's facts make false"**: 306 at the base; 0 at df008526a by the arm over the census dumps; re-taken at 6a3bb189d.
+  by **P5false, "a crime line the town's facts make false"**: 306 at the base; **0 at the tip**, lowered through the door (ef3f04d89).
 - **Not cured here, parked:** at `corrupted` the AGENT pool says "a minor member … not decisions" while the hall card
   says the head answers to the guild (`rvw-town-1`, review §1 C3) — the desk's corrupted → AGENT mapping is a recorded
   design ("Say veto to move it"); 36 + 32 towns' other lines naming a payroll or bribes (plot hooks, the safety
@@ -259,14 +295,14 @@ removed, how many of those were true by a read sample of thirty, and what the pa
 
 ## F2 (MEDIUM, origin) — the supplied-by line through the display seam, once
 - **Count:** of 289 reliance lines on the 720, **before: 114 with a bracket** (the reviewer's 73 catalogue ranges or
-  conditions plus 30 "(high magic)", "(resident)", "(divine, 1st level)"), 10 naming a house twice (by my fold, 1 under
-  the strict reading), 8 over 280 characters; **after: 0 with a bracket, 0 naming a house twice, 2 over 280** (two
+  conditions plus "(high magic)", "(resident)", "(divine, 1st level)"), 10 naming a house twice (the review's
+  count), 8 over 280 characters; **after: 0 with a bracket, 0 naming a house twice, 2 over 280** (two
   metropolises naming fifteen houses). 289 lines both; **0 lost**; 180 changed.
 - **Read sample of 30 changed lines:** 30 true; each change is a catalogue form replaced by the roster's through
   `institutionDisplayName` with its bracket struck ("Parish churches (50-100+)" → "Houses of worship"; "Dream parlors
   (high magic)" → "Dream parlors"; "Priest (resident)" → "Priest"), or a doubled house dropped. No line removed.
-- **P3source** now counts a source with a bracket or a house named twice: base 74, 96d698de7 (by the new test) 114,
-  tip 0 (the arm over the census dumps at df008526a).
+- (F2) **P3source** now counts a source with a bracket or a house named twice: base 74 (no source then), tip 0 (the door
+  over the 720); at 96d698de7 the leaf printed a bracket in 114 of its 289 lines.
 - One fixture pin named a house its roster lacked ("Multiple monasteries", a chain pattern): re-keyed with the cause.
 - Not bounded ("the first few, then and n more"): a cap would be a new dial; 2 lines over 280 characters remain.
 
@@ -281,22 +317,54 @@ Plants executed against the tree and reverted: a `market` name test in `facts/le
 the register's shape migrates with its instrument (480 rows: −1 through the home, +1 the market home's guild test).
 
 ## The census counter, base deb1544eb against this tip (the census's own instrument)
-At df008526a (census.sh both trees, compare.mjs; 720 renders each, every worker exit 0): **no count rises**; 5a 288 → 285 and 6 296 → 296 by their old tests (the true lines are back, as ruled; both retired in the arm with their replacements); 5b 2 → 0; 20 689 → 0; every other row equal; median rows per town 9 → 8. Re-taken at 6a3bb189d: running.
+At 6a3bb189d and again at the final tip 395cb592f, identical rows (census.sh both trees, 720 renders each, every worker exit 0; compare.mjs): **no count rises,
+no new row.** 5a 288 → 285 and 6 296 → 296 by their OLD tests (the true lines print again, as ruled; both rows are
+retired in the arm with their replacements); 5b 2 → 0; 20 689 → 0 (BETTER); every other row equal; median rows per
+town 9 → 8. GLANCE towns 717 → 717.
 
 ## The page arm, through its door
-running (the door's --shrink over the 720 at the final tip).
+`page-census.mjs --shrink` over the banked 720 at 6a3bb189d (before F3c): **P5false 306 → 0 (lowered)**; P2siege,
+P3source, P5b, P20 0; **P6need 642** (banked at its base; its cure is the tab, W2-C-LEAVES's); no row rose; the four
+retired rows (P2, P3any, P6, P5a) printed by name with their reasons. The grid's twelve births: unchanged through
+every commit (P6need on all twelve). **At the final tip** the arm over the census's own 720 renders (equal to the
+door per seed): P5false 0, P3source 0, P2siege 0, P5b 0, P20 0, P6need 642; every other row as banked.
 
 ## The six surfaces (the draft record, Part 2)
-running.
+| surface | base deb1544eb | tip 6a3bb189d+ | this seat |
+|---|---|---|---|
+| generator golden master (at 6a3bb189d and again at 395cb592f) | red | red, identical output | **UNMOVED** (0 of 720 records move) |
+| espionage fence | red | red, identical output | **UNMOVED** |
+| dossier prose manifest | red: the 2 drift titles | red: the same 2 titles; 74,801 cells and DM-only positions 203 as at the base (the first seat's 74,765 / 167 undone; its "MIXED-POOL AUDIENCE" title green again) | **MOVED, PLAUSIBLE**: one diagnostic count moves (seedless cells drawing above index 0 after anchoring, 241 → 242), and the crime desk's struck lines change which line some DM cells draw; the drift arm's object is printed truncated and identical, so its per-cell diff is the merge seat's to re-record |
+| PDF golden | red (canon values) | red, identical output | **UNMOVED** |
+| Herald desk golden | red | red, identical output | **UNMOVED** |
+| preset-lighting witness | green | green | **UNMOVED** |
 
 ## The gates
 Every commit touching `src/` (04bab40c6, 08c9f15bd, 433147d3e): check-domain-strict 0; typecheck:ratchet 0 (167,
 ceiling 167); eslint on the touched files 0. tests/lint at each: the base's 11 red files only, after each commit's own
 walker repairs (the wiring census re-stamped by its writer; the tuning inventory refrozen by its ritual; my tests'
-negatives anchored and seed loops collected). Pushes: two so far (dce6a1d6c, df008526a), each through the hook's three gates.
+negatives anchored and seed loops collected). Pushes: four (dce6a1d6c, df008526a, 13ba62cdd, c32f0d099) and the last with this file, each through the hook's three gates.
 
 ## The whole suite
-running at the final tip.
+**At c32f0d099** (`npx vitest run --maxWorkers=2`, the ledger branch fetched): **exit 1; 36 files, 44 tests red**
+(38,745 pass, 254 skipped; 49 red titles, the list in `docs/chair/2026-11-13/probes/W2-A-LEAVES-2/suite-red-titles-at-c32f0d099.txt`).
+Classed by file against the lane's reviewed base deb1544eb (the review's §10 list at 96d698de7 and the first part's list):
+- **red here and not at the base: ONE, this seat's:** publicProseVeilInvariance › "composePublicProse(owner)
+  deep-equals composePublicProse(stripped owner)" (run at the base: 4/4 green; at the tip 1 red). **Cured by F3c
+  (8f96276a9): 4/4 green**, with the crime, defence, public-prose and veil suites (the base's 3 reds only).
+- **red at the base and green here: the first part's dossierProseManifest "MIXED-POOL AUDIENCE" title** (its pin 203
+  reads 203 again: F3 restored the lens); the six bundles' freshness pins stay green (rebuilt).
+- **every other red title is the base's own**: the golden master and its byte-identity pins (pipelinePinnedMode ×3,
+  pipelinePinnedChoosers, nameHeldThroughAssembly, rosterFinalUnderHeldRoster, powerEconomyFreshness,
+  institutionBudgetPromise, x46NpcBand, hookThemeDraws, generationForkCensus, dmLayerGoldenIsolation,
+  worldFactRederive, editWorldFactResources ×2, mergeLadderHeldKeys ×3, editCorpusRatchet ×3), the espionage fence,
+  the PDF golden, the Herald desk, the manifest's two drift titles, landingFixtureFreshness ×2, townCartographyCalibration,
+  undercitySewerDerivation, intentAtlasSoakDistiller, statecraftExposureBand, and the eleven tests/lint files.
+**At the final tip 395cb592f the whole suite was NOT finished**: it was started, cut by a container restart, restarted,
+and stopped by the chair's stop-and-save (8 tests had run). What was run at 395cb592f: the census (720 renders,
+every worker exit 0), the page arm over its dumps, the six surfaces (identical to the base), and after F3c its own
+gates: tests/lint (the base's 11 red files only), the defence/criminal/veil/public-prose/phone-floor suites (376
+files: the base's 3 reds only: mergeLadderHeldKeys, undercitySewerDerivation, worldFactRederive), the grid walker.
 
 ## Requests to the writing lane (W2-WRITE) and the instrument lane (W2-B-DECLARE)
 1. **Carry each declaration in `crimeLineDisqualifiers.js` onto its corpus variant** (the table above), then this
@@ -308,19 +376,56 @@ running at the final tip.
    an official"), drawn in 237 of the 720 (it was 81 by the draw); DS-DEF-4 `capture none` with an official in pay has
    one (41 towns at most). The repetition guard has not seen the corpus pools yet (W2-POOLS).
 4. W2-WRITE's branch carries the first seat's tip: it should take this tip when it merges.
+5. **The plot hook "A guard captain is on the payroll of the criminal network"** (generator data, the data seat's):
+   it needs an official in a criminal's pay (`facts/officialsInPay.js`) and prints in 68 towns that hold none.
+
+6. **The veil lane (publicProseCompose.js):** draw the public ring note from the stripped record, so the DM's note can
+   name bought officials by the cast again.
 
 ## For W2-C-LEAVES
 `EconomicsTab.jsx` onto `importsAsPrinted`: `arriving` as Imports, `needed` as "needed, not met" — only after a
 need an import meets under another name is matched (8 of 30 read), or that print is the next false line.
 
 ## New words for the owner's veto
-The organised ring's four vantages WITHOUT their officials clause (no new claim; each is its vantage with the clause
-taken out), e.g. "Shopkeepers here pay one ring for protection. It stamps out random violence, which would bring the
-law, and its terms are known and can be negotiated."
+The organised ring's four vantages, their officials clause reworded (F3c): "… and it lives on protection money and on
+any official it can buy." · "… lives on protection money and on whatever official it can pay, …" · "Shopkeepers here
+pay one ring for protection, and the ring pays any official who will take its money. …" · "… it lives on protection
+money and on any official it can bribe."
 
 ## Calls taken without the chair
 1. F3's disqualifier for a line about officials is the cast's fact, not the stored state (measured: 41 towns).
 2. F3 includes DS-DEF-4's three capture lines that deny a bought official (same fact, the opposite claim).
 3. F6's home-call rule, and the register's shape migrated with its instrument.
 4. F2's bracket struck in the view, after the display seam (the seam itself keeps counts by its own design, C's file).
+6. F3c: the ring's note reworded to a claim true in every town rather than decided by a veiled fact (the alternative,
+   a clause decided by the cast, leaks it; the other, the clause kept, keeps 87 false lines and would raise the banked
+   P5false).
 5. P6need is banked at its base (642): its cure is W2-C-LEAVES's file.
+
+
+## STOP AND SAVE (the chair, on the owner's word, 2026-11-13 ~10:45Z): the state for a successor who has only this branch
+- **DONE:** F1, F2, F3 (+ F3b, F3c), F5, F6 with their commits above; the page arm's register lowered (P5false 0);
+  the bundles rebuilt at the last code tip; the census, the arm and the six surfaces at the final tip; this file.
+- **IN PROGRESS: the whole suite at the final tip.** Next command, in a worktree of the lane's tip with `npm ci` and
+  `git fetch origin review-fixes-2026-07-08:review-fixes-2026-07-08` done:
+  `npx vitest run --maxWorkers=2 > suite.log 2>&1` (about 100 minutes); class each red title against
+  `probes/W2-A-LEAVES-2/suite-red-titles-at-c32f0d099.txt` (the c32f0d099 run, classed above): expected the same 48 base
+  titles, publicProseVeilInvariance now green.
+- **NOT STARTED:** the shift record's part 2 is in `W2-A-LEAVES-SHIFT-RECORD-DRAFT.md` (written with this file); the
+  hand-back MESSAGE to the chair (sent, if this session could, with the save).
+- **The rulings this seat worked to** (the chair's brief, not on the branch): cure the review's findings and nothing
+  else; one cause per commit, red first; every count on six sizes and forced crises; F1: the gap lines restored, the
+  Imports list to print what trade brings and a need as a need not met, the leaf keeping the two apart, the tab's move
+  W2-C-LEAVES's, row 6 re-read as "an import printed beside its own unmet need" beside the old row by name; F3: the
+  blanket silence withdrawn, each crime line carrying the disqualifier that makes it false, no corpus line written
+  (requests to W2-WRITE); F2: a house through its display leaf, once, no range, no condition, the row counting them;
+  F5: the nine pools red or banked by the walker's rule; F6: plant a facts-folder name test and a swapped line; THE
+  LAW: a count falling is not a cure — each cure states the lines it removed, how many were true by a read of thirty,
+  and what the page now says; the lane's only writer; push only `lane/w2-a-leaves-2026-11-12`; no PR; never
+  --no-verify; registers only through their doors; no pin loosened, no test skipped, no baseline banked up.
+- **The probes:** `docs/chair/2026-11-13/probes/W2-A-LEAVES-2/` — `gaps.mjs` (the gap reader per seed over a corpus),
+  `arm.mjs` (a tree's page arm over census dumps: `node arm.mjs <tree> <dumps> <corpus.ndjson.gz> <out.json>`),
+  `f1sample.mjs`, `officials.mjs`, `magic.mjs`/`magic2.mjs` (the reliance line, two trees), `crimeread.mjs` (the crime
+  desk's lines base against tip, with the facts), `six.sh <tree> <out-prefix>` (the six golden suites); the two reads
+  of thirty; the census comparison at the final tip. Their scratch paths name `out/base`, `out/tip3`: the census's
+  `census.sh <tree> <out>` makes those (on lane/second-wave-census-2026-11-12).
