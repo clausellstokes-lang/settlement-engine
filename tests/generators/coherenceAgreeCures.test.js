@@ -403,6 +403,33 @@ describe('F2\'s fifth writer: a service only a refused chain yields is not expor
 });
 
 /**
+ * THE COAL LINE (COHERENCE-AGREE-8, REVIEW-AGREE-3 FINDING 3 / T3): "Local coal fires the forges, but the iron is
+ * bought in" is the lane's own sentence (cure 7, `incomeLineSiblings.js :: LOCAL_COAL_LINE`), and it printed in towns
+ * whose roster holds no smith, forge, foundry, smelter, metalworker, armourer or weaponsmith. Where a forge house
+ * stands it is true; where none does, its declared sibling says what is: the coal is sold to other towns' forges.
+ * Each seed below printed it with no forge house at faa20bc6c (census 720).
+ */
+describe('the coal line: coal fires the forges only where a forge house stands', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const FORGE = /smith|forge|foundr|smelt|metal|armou?r|weapon/i;
+  const born = (/** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: seed.split('-')[1] }), null, { seed, customContent: {} });
+  test('r2r-thorp-2, r2r-village-6 and r2r-thorp-16 hold coal and no forge house, and no line says coal fires the forges', async () => {
+    const { LOCAL_COAL_LINE, LOCAL_COAL_SOLD_LINE } = await import('../../src/generators/economy/incomeLineSiblings.js');
+    expectNoSeedFailures(collectSeedFailures(['r2r-thorp-2', 'r2r-village-6', 'r2r-thorp-16'], (seed) => {
+      const s = born(seed);
+      expect(s.institutions.filter((i) => FORGE.test(String(i.name))), `${seed}: anchored, no forge house`).toEqual([]);
+      const metal = s.economicState.incomeSources.find((e) => e.source === 'Iron & Metalwork');
+      expect(metal?.desc, seed).toBe(LOCAL_COAL_SOLD_LINE);
+      expect(metal?.desc).not.toBe(LOCAL_COAL_LINE);
+    }), 'coal fires a forge the town does not have');
+  });
+  test('the sibling is declared beside the line, keyed by its text', async () => {
+    const { INCOME_LINE_SIBLINGS, LOCAL_COAL_LINE, LOCAL_COAL_SOLD_LINE } = await import('../../src/generators/economy/incomeLineSiblings.js');
+    expect(INCOME_LINE_SIBLINGS[LOCAL_COAL_LINE].map((v) => v.text)).toEqual([LOCAL_COAL_LINE, LOCAL_COAL_SOLD_LINE]);
+  });
+});
+
+/**
  * F8 (ii) (COHERENCE-AGREE-6, the chair's ruling of 2026-11-12): the flag bag's prison and hospital are the defence
  * home's answers (`defenseFactsOf`), off the live roster: the lane's own two private readers in
  * `priorityHelpers.js :: getInstitutionNames`, cured rather than banked when the walker learned the four atoms.
