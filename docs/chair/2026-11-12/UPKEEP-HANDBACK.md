@@ -51,6 +51,104 @@
 - **The edge bundles, last and alone** (`npm run build:edge-shared`): not re-emitted. They are STALE against `src/` at this tip.
 - The second layer (R12 with record 324, R16, R17's weights) and prosperity (f): briefed by the chair. The technical state is in `docs/chair/2026-11-13/UPKEEP-6-BRIEF.md`.
 
+## IN PROGRESS: nothing
+The tree is clean at the tip, and no work is half-done. Every measure taken is written in `UPKEEP-DEFENCE-PARTS.md` or `UPKEEP-V3-BUILD.md`, except the BASE census counts, which are saved but not compared (`probes/UPKEEP-5/census/69b53decd.*`). The next commands, in order:
+1. Re-measure F3 (`foodRecord.storesHeld`) at the tip.
+2. `sh <census.sh from lane/second-wave-census-2026-11-12> <tip tree> <out> 2`, then `node compare.mjs` against the base counts.
+3. `git fetch origin review-fixes-2026-07-08:review-fixes-2026-07-08`, then `npx vitest run --maxWorkers=2 --reporter=json` once, and class every red.
+4. The draft record's six golden surfaces, by measure.
+5. LAST and alone: `npm run build:edge-shared`.
+
+## EVERY RULING THIS SEAT BUILT TO (copied in; the chair's messages are not on the branch)
+
+**The owner's words, verbatim:**
+- "prosperity should also scale the rest inlcuding healing, magic, etc. everything is based on what can be stockpiled, refilled, rebuilt, etc."
+- "if a village or town doesn't have an active guard but can hire mercenaries or adventurers if they have the cash, then that means something rather than not having a guard at all"
+- (2026-11-13) "I want defensibility to be derived from all of the supporting contributions that prosperity sets teh scale too in some. all of those add up to a score that shows how defensible a place is, rather than we set a place as defensible and then make everything match to that rating"
+- "prosperity yes"
+- "just do the additions with the limits you have set. i agree with them"
+- "each of the defense contributions themselves also must be derived appropriately from institutions, power, economy, etc. essentially all of defense is a derived."
+- (randomness, R12) "with the derivisions, i would still like some element of randomness … the set teh floor and cieling rather than a final number. so the same configurations or base elements can still have subtle differences"
+- (the page) "no don't show the ratings. don't show the machinery. didn't we have that rule?", then "sorry show the ratings but not the machinery"; and on record, "I agree keep the machinery's out of the prose."
+
+**Withdrawn:** the chair's one-band law, and any cap, floor or clamp on the total set first to fit a rating.
+
+**Record 317: V2 is the form.** Readiness is the exact sum of named contributions, with two limits:
+- what sustains a force counts for no more than the force;
+- walls with no one to man them count in part.
+
+Prosperity scales once each part that must be paid, fed, refilled or rebuilt. A crisis acts once on the parts it touches. There is no multiplier on the whole.
+
+**Record 318: DEFENCE HOLDS NO FACT OF ITS OWN.**
+- Every part is a function of facts homed outside defence (the roster, the powers, the economy's leaves, terrain, history, the crisis), read through its home, never by a name test or a second derivation. Defence owns only WEIGHTS, in one table through the tuning register's door, each with a reason.
+- Every term gets a SOURCE and a KIND (DERIVED / DRAWN / STORED-ONLY / WEIGHT; record 320 adds CONFIG).
+- A draw describing a house belongs to that house's record; a draw that only varies the score is removed. A STORED-ONLY value gets its source, or goes.
+- ONE DIRECTION: nothing a part reads may read defence. A loop is a STOP.
+- COUNT ONCE.
+- THE PROOF: strip defence, recompute, equal.
+- THE GUARD: a walker that reds on a stored defence value, a die, a name test, or a number outside the table.
+- The words: each band change explained by a named part and its fact. This last point was AMENDED by record 328.
+
+**Record 320.**
+- R1: each of the five scores is the sum of its parts, held to 0..100 (more than enough is reserve). Readiness is their mean plus size minus threat, 0..100. The limits act first, fullness last.
+- R2: the traditions count at most 35 against monsters; a hired-only place never reads above the same place with a watch.
+- R3: pay reads the STANDING label (before the crisis), stored once by prosperity's writer. Old saves read the label they have. A crisis acts through its own points; the famine's stores are eaten once, at their writer.
+- R4: wartime takes from no part in V3. Superseded for the follow-on by R16.
+- R5: magic is paid from the one label, at 0.45 + 0.55 × funded.
+- R6: the purse is 4 points × bought; the economy dial's term goes.
+- R7: only an armed body (garrison, militia, watch, hired company, chartered adventurers, armed households, wardens) mans walls.
+- R8: limit 1 stands. Count the walled or wealthy births with no armed body (measured: 0).
+- R9: the military dial is CONFIG, the slider, gated by what is built or standing ("Martial will" in code, never on the page).
+- R10: the addendum before any build.
+- R11: prosperity (f) last.
+
+**Record 321, R12: CONDITIONS.** Derivation sets a part's FLOOR and CEILING; a CONDITION of the body or work (below, ordinary or above) sets where it stands.
+- It is drawn once at birth on its own registered fork, stored on the house's record, read through one leaf, and shown by name.
+- It is never a roll on a total.
+- The parts are the armed bodies, the walls, and the armed households of small places.
+- The facts close a condition: unmended walls, unpaid bodies, a crisis in force.
+- Ordinary prints nothing. An old save reads ordinary. It is never re-rolled by an edit or regeneration.
+- It is built AFTER V3's named commit.
+- AMENDED by record 324: the facts LOAD the condition's odds. The chair holds the detail.
+
+**Record 322.**
+- R13: Martial will counts for no more than the armed bodies that carry it, after pay and crises. The 0.06 rules stay.
+- R14: the neighbour factor stays inside the will, read from its home (`priorityHelpers.js :: neighbourMilitaryFactorOf`).
+- R15: the score and the words read no powerStructure field.
+
+**Record 323.**
+- R16: WAR DRAINS. Wartime takes 15 economic points from what SUSTAINS (the stores, purse and market), as a crisis row. Not built.
+- R17: THE KIND OF WALL COUNTS. Stone 1, palisade 0.6, earthwork 0.4 as starting weights, read from the roster's defence home. Measure first. Only the home is built.
+- R18: who rules adds no number in calm times.
+
+**Record 328: THE PAGE SHOWS THE RATINGS AND NEVER THE MACHINERY.** Never on a page, the PDF or an export:
+- points, sums, shares of pay, weights, floors;
+- limit, reserve or full(ness) in the model's sense;
+- a slider or dial by any name;
+- any sentence explaining how the rating was worked out.
+
+Only plain facts of the town may print, and later a condition in plain words. There is NO per-part line on the Defense tab: the parts live in the record, the probes and the tests.
+- KEPT wordings (none built yet): "Comfortable before the famine; Struggling while it lasts." · "Walls with no one to man them."
+- STRUCK: "paid as a Comfortable town" · "{aspect}: more than enough, and the rest held in reserve." · "Its stores and its magic can carry no more than its watch can use." · "Martial will" as a page label.
+
+The guard has a reader-surface arm (built, planted red).
+
+**Stage two (this seat's brief):**
+- F2: a house's own service is never scaled. DONE.
+- F3: the stores have ONE measure, the leaf; the scaling, the hall's line and every count of crossings read it. Built via R3; NOT measured.
+- F7: the hired line reads the label, with two true readings reachable and counted, or the line removed with its reason. NOT done.
+- The low lines:
+  - F4, the hunger line in a siege: NOT done;
+  - F5, after the merchant army: DONE;
+  - the 95 row-2 entrants, classed: NOT done.
+
+## WHERE THE PROBES ARE
+`docs/chair/2026-11-13/probes/UPKEEP-5/README.md`:
+- `births.mjs <tree> <out> <shard> <shards> parts` births the 3,036. Variant V4 is V3 as built; V4C is R12 as first proposed. On a tree without `prosperityStanding`, `git apply measure-lines.patch` first.
+- `rederive.mjs` is the proof of derived.
+- `an3.py <scratch> V4` and `an5.py <scratch>` read `<scratch>/out/{meas,base}.<shard>.ndjson`.
+- The census tool is on `lane/second-wave-census-2026-11-12` (`docs/chair/2026-11-12/probes/SECOND-WAVE-CENSUS/`).
+
 ## Incidents
 
 - In this seat's own scratch worktree, a `git stash` and pop of one file, restored at once.
