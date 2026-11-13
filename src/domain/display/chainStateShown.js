@@ -18,7 +18,8 @@
  *   · under that siege, a chain whose only house is a neighbour's, reached through an "Access to ..." row
  *     (`facts/institutions.js :: ACCESS_ONLY`; "Faith & Worship" in a thorp whose roster holds "Access to parish
  *     church" and no church), prints NO state (`NO_STATE_SHOWN`): the roads to that house are cut, and the siege's
- *     own note stands on the tab (W2-C-LEAVES-4 item 1, the chair's ruling of 2026-11-13; no new state word).
+ *     own note stands on the tab (W2-C-LEAVES-4 item 1, the chair's ruling of 2026-11-13; no new state word);
+ *   · a port's sea grounds are not field work a land siege takes (`seaOpenTo`): its fishing keeps its state.
  *
  * Pure: no randomness, no clock, no write.
  */
@@ -61,13 +62,27 @@ export function chainStateShown(chain, record) {
     if (carrier === 'own' && ground && ground.includes(String(c.resourceInputKey))) return 'impaired';
   }
   if (tradeStoppedHere(record) && c.needKey !== 'criminal_economy') {
-    const fieldWork = carrier === 'own' && typeof c.resourceInputKey === 'string' && c.resourceInputKey !== '';
+    const fieldWork = carrier === 'own' && typeof c.resourceInputKey === 'string' && c.resourceInputKey !== '' && !seaOpenTo(c.resourceInputKey, record);
     const trade = c.entrepot === true || c.needKey === 'trade_entrepot' || carrier === 'transit' || carrier === 'bought';
     if (fieldWork || trade) return 'impaired';
     if (runsOnlyThroughAccess(chain, record)) return NO_STATE_SHOWN;
   }
   return status;
 }
+
+/**
+ * THE SEA A LAND SIEGE DOES NOT TAKE (W2-C-LEAVES-4 item 1): a port's sea grounds (`SEA_GROUNDS`, the catalogue's
+ * "water" grounds off the coast) lie outside no wall the siege holds; the record's own exports go out "by the naval
+ * route only" (`computeActiveChains.js :: deriveExportsFromChains`). A river's fish is the land's.
+ * @param {string} ground @param {unknown} record
+ * @returns {boolean}
+ */
+function seaOpenTo(ground, record) {
+  const access = /** @type {{ economicState?: { tradeAccess?: unknown } | null }} */ (record).economicState?.tradeAccess;
+  return SEA_GROUNDS.has(ground) && access === 'port';
+}
+/** The sea grounds (`data/goods/identity.js :: RESOURCE_DATA`, kind "water", off the coast). */
+const SEA_GROUNDS = new Set(['fishing_grounds', 'deep_harbour']);
 
 /**
  * WHETHER A CHAIN'S ONLY HOUSE IS A NEIGHBOUR'S (W2-C-LEAVES-4 item 1): each of its houses is met on the live roster

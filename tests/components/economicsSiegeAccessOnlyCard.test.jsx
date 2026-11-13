@@ -8,7 +8,8 @@
  * only house is a neighbour's, reached through an "Access to ..." row ("Faith & Worship · ○ Operational" in a thorp
  * whose roster holds "Access to parish church" and no church, rww-thorp-under_siege-1). Its card prints NO state chip
  * (the siege's own note stands on the tab); no new state word. Guard: a siege town whose own church stands keeps its
- * chip (rww-village-under_siege-1).
+ * chip (rww-village-under_siege-1). A port's sea grounds lie outside no wall a land siege holds (rw3-hamlet-under_siege-1:
+ * "Fishing & Seafood · Impaired" beside its own "Salted fish (naval route only)" exports).
  */
 import React from 'react';
 import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest';
@@ -60,6 +61,17 @@ describe('under a siege, a chain that runs only through an "Access to ..." row p
     const rows = cardHeaders(town, 'Faith & Worship');
     expect(rows.length).toBeGreaterThan(0);
     expect(rows.map((r) => CHIPS.filter((w) => r.includes(w)))).toEqual(rows.map(() => []));
+  }, 60000);
+
+  test('a port\'s sea fishing is not taken by a land siege: its card keeps its state beside the naval-route exports (rw3-hamlet-under_siege-1)', () => {
+    const m = 'rw3-hamlet-under_siege-1'.match(/^rw3-(\w+)-([a-z_+]+)-\d+$/) || [];
+    const town = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: [m[2]],
+      _randomizePriorities: true }), null, { seed: 'rw3-hamlet-under_siege-1', customContent: {} });
+    expect(town.economicState.tradeAccess, 'anchored: a port').toBe('port');
+    expect(town.economicState.primaryExports, 'anchored: the sea route open').toContain('Salted fish (naval route only)');
+    const rows = cardHeaders(town, 'Fishing & Seafood');
+    expect(rows.length).toBeGreaterThan(0);
+    expect(rows.map((r) => [r.includes('✓ Running'), r.includes('Impaired')])).toEqual(rows.map(() => [true, false]));
   }, 60000);
 
   test('guard: a siege town whose own church stands keeps its chip (rww-village-under_siege-1)', () => {
