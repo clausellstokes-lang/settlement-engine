@@ -1,4 +1,4 @@
-# COHERENCE-UPKEEP: the hand-back (the seventh seat, COHERENCE-UPKEEP-7, 2026-11-13) — IN PROGRESS, kept current after every item
+# COHERENCE-UPKEEP: the hand-back (the seventh seat, COHERENCE-UPKEEP-7, 2026-11-13) — HANDED BACK BY FILE AT THE CONTEXT GUARD, WITHOUT THE FINAL STATEMENT (held by the chair's order)
 
 **The lane:** `lane/coherence-upkeep-2026-11-12`. **Base of this seat:** 0a07f98c7 (the sixth seat's hand-back), read back from origin before any work. **The lane's reviewed base:** 69b53decd. **The probes:** `docs/chair/2026-11-13/probes/UPKEEP-7/`. The sixth seat's record and every earlier one are kept below, unchanged.
 
@@ -98,6 +98,74 @@ The build was made and measured before the ruling arrived and was never committe
 - Defense tab: "No one can earn a normal living while the famine lasts, and every coin goes on food." (`src/data/stressTypes.js`, the famine's `viabilityNote`) · "The longer the hunger lasts at Inverford, … The city may not come through this crisis, and what it spends on defence now only buys time." (the corpus, `src/data/dossierStateProse/defense.generated.js` / `RECEIPT_POOLS_DOSSIER_STATE.md`) · "Trouble at Inverford has not turned into a collapse, because the city can pay its way through it." (the corpus, DS-DEF-2 Economic Survival STRONG).
 - PDF: "Money enough to ride out a long crisis, laid by before the famine: …" (this lane's, `threatAssessment.js`): it now says where the money comes from; it still stands beside the corpus's "may not come through this crisis".
 - **The class, counted** on the reader's 1,200 rv2 renders at 0ab206f77: the Defense tab's can-pay corpus row beside a doom line 112, beside a crisis spending line 181, either **238**. Every writer but the PDF line is the corpus's or the crisis data table's; for the chair to rule for the corpus.
+
+
+## 2b — the register's war clause (3ac6abd4c)
+
+- `heraldRegister.js :: warClauseOf` reads the town's own crisis where the map is silent (through `facts/crisisKind.js`); the table prints `EMPTY_VALUE` for no clause and sorts it last; the realm charts gain "at war". **Measured** (`probes/UPKEEP-7/reg7.mjs`, `regcls.py`; 15 crises × 4 sizes × 5, a campaign with no war and one whose map besieges the town, 600 rows): **120 -> 0**; the besieged campaign "under siege" throughout, before and after. Red first: `tests/ui/heraldWarClause.test.js`.
+- One row of each class read: "A struggling village, under siege." · "A struggling village, at war." · "A poor village." (occupation) · "A struggling village, at peace." (famine). A Herald desk golden was not run (the merge seat's door); the final statement measures the surfaces.
+
+## Item 3 — the round-three cut's lines in this lane's files, LINE BY LINE (the list: `lane/round-3-cut-2026-11-13` at 892904c1d, ROUND-3-CUT.json, filtered by writer file; the reader's twenty towns re-born in its own shape at this tip by `probes/UPKEEP-7/rr2s.mjs`)
+
+| # | rank | town | writer | STATE |
+|---|---|---|---|---|
+| 640 | MED | rr2s-town-indebted-port-1 | safetyProfile.js, the hired-company branch | **CURED** (18aeee4b5): the branch needs no watch; the town now reads "You will see the town watch on the rounds most hours of the day; …" beside its Town watch |
+| 104 | MED | rr2s-thorp-calm-port-1 | safetyProfile.js, the Safe line | **CURED** (18aeee4b5): "Neighbours notice trouble and deal with it themselves." beside the tab's "Nobody here is paid to keep order." (NEW WORDS, for the owner's veto) |
+| 911, 357 | HIGH, MED | rr2s-city-under_siege+famine-rand-1, rr2s-town-calm-rand-1 | economicState.js, the grain-surplus income line | **DOES NOT PRINT AT THIS LANE'S TIP** (the towns re-born here carry no "Surplus from local harvest" line: COHERENCE-AGREE-3's F7 twin is on this lane) |
+| 1274, 1389, 718, 817, 1174 | HIGH ×2, MED ×3 | metropolis-wartime, metropolis-plague-port, city-calm, city-famine, metropolis-calm | **STOP**: the "…" is made by `src/components/new/tabs/DefenseTab.jsx` (`truncateAtWord(desc, 200)` on the crime-type rows), the chair's "a new seat's" file; safetyProfile's Smuggling sentence is whole. Recommendation: the tab cuts at a sentence's end, or not at all |
+| 1082 | MED | rr2s-city-occupied-rand-1 | the same truncation; and "Territorial gangs" from `getInstFlags`'s `hasGangInfra` (priorityHelpers.js) beside no gang house | **STOP** (the tab's truncation; the flag's home is priorityHelpers.js, left to the capacity build by the chair's order) |
+| 163, 427, 497, 891 | HIGH ×4 | hamlet-under_siege, town-under_siege ×2, city-under_siege+famine | the Services tab's row: "Needs X" run into "Supply route severed…" and "· covers A, B" | **STOP, the row's shape** (`src/components/new/tabs/ServicesTab.jsx` composes it; the chair: this lane changes only what a row says falsely, never its shape). economicState.js's own sentence ("Supply route severed. Operating at minimal capacity or shut down.") is true under a siege |
+| 919, 1043 | MED | city-under_siege+famine, city-occupied | the Economics "Needs X · affects: …" row | **STOP, the row's shape** (EconomicsTab.jsx, the third leaves lane's for round three). #919's "magical licensing" names a service with no house: the dependency table's `svcs` (left, not reached) |
+| 1152 | MED | metropolis-calm | the dependency row names the luxury chain's needs for the bowyer | **LEFT, not reached** (`TRADE_DEPENDENCY_NEEDS` keyed by the house's name; read the table's bowyer row) |
+| 439, 1248 | HIGH, MED | town-under_siege, metropolis-wartime | economicState.js :: the magic income ("A thriving alchemical trade … draws customers from surrounding settlements.") | **LEFT, not reached**: `hasAlch` reads an apothecary as an alchemist, and the siege is not read. Recommendation: twins in `incomeLineSiblings.js` (the GRAIN pattern) by the roster's own alchemist house and by the crisis that closes the roads |
+| 145, 277, 438, 621, 910 | MED | hamlet-calm, village-famine, town-under_siege, town-indebted-port, city-under_siege+famine | economicState.js :: income lines (Iron & Metalwork with no smith and no iron import; Stone Quarrying with no quarry house; grain bought in under a siege; Fish & Maritime with no fishing house) | **LEFT, not reached** (the same twin pattern, each read from the roster's house and the crisis) |
+| 43, 86, 114, 146, 233, 296 | MED | the small places | the Food endurance line's months against `storageMonths` (the cut names defenseFacts.js) | **LEFT, not reached** |
+| 228, 253, 326, 379 | MED | hamlet-plague, village-calm-port, village-monster, town-calm | dossierViewModel.js :: deriveViability (the Outlook's "keeps order and pays its way", "grows what it eats", "feeds itself") | **STOP for each row**: the file is changed beyond its base by lane/w2-a-leaves, lane/w2-c-leaves, lane/w2-fix-data, lane/w2-write and lane/merge-12 |
+| 598 | MED | town-plague | "A court exists" from `inst.hasCourtSystem` (priorityHelpers.js) with no courthouse | **STOP** (the flag opens the court part: the capacity build's file by the chair's order) |
+| 375, 459, 713, 1201, 1080, 1173, 1377 | MED | town-calm, town-under_siege, city-calm, metropolis-calm, city-occupied, metropolis-calm, metropolis-plague-port | safetyProfile.js: a court "with limited prison"; standard patrol beside an impaired watch; "exists on paper" read off `militaryEffective` beside a Defensible city; "largely a formality" (the merchant-army flag) beside a professional watch; "Hunger-driven theft" in a secure calm metropolis (`settleCrimeLinesToSignal`); "does little harm" beside a ruling syndicate | **LEFT, not reached** |
+| the PDF's "REQ"/"FORCED" | — | every PDF with a required or forced force | DefenseSecurity.jsx | **CURED** (827b217d2): the badges leave the PDF; red first in `tests/pdf/defenseReadinessWord.test.jsx` |
+
+- #439/#1248 and the income lines, #1152, the food endurance lines and seven safety lines are **LEFT, not reached** at the context guard: the next seat starts there (the HIGH #439 first). `economicState.js` must be read whole first (881 lines).
+- The reds this item's suites met, classed against 0a07f98c7: tests/generators 19 red at both (the base's carried set); one new red, `projectionAgreement.test.js` F3's company member, re-keyed by identity in 18aeee4b5 with its cause.
+
+## #608 and item 4 — NOT STARTED (the next seat's)
+
+- **#608** (the Economics prosperity glance "26/100" beside "Prosperous"): not measured.
+- **Item 4:** the one-ladder measure brought current; services and the Magic tab listed (L3, C11, kept by ruling 7); the first read's corpus lines (M1, M2, M3, M5, L2) and the fourth read's C-M1 six births declared as exposure, town by town, at the final tip.
+
+## THE LOWS (the fourth read's), with their writers
+
+| Low | Writer | State |
+|---|---|---|
+| C-L1 an event beside a lasting crisis reads "while they last" | `prosperityInCrisis.js :: prosperityInCrisisLine` (this lane) | left: the D(ii) family, ruled for after the release |
+| C-L2 a crisis that lowers nothing is named | the same | left, ruled (D(ii)) |
+| C-L3 the journal's raw category keys | `pdf/lib/viewModel.js` | **cured, F2** |
+| C-L4 the AI grounding's grammar ("Religious Authorities's mark", "Recent changes: Recent changes:", a repeated clause, "wandering off: bread is short") | `src/domain/aiGrounding.js` and its rumour lines | not this lane's |
+| C-L5 the Economic Survival row with no sentence | the corpus's DS-DEF-2 economic pool through `defenseStateProse.js :: economicRowPoolKey` (wr; wa) | not this lane's |
+| C-L6 a band beside another band's sentence | `threatAssessment.js :: buildThreatAssessment` | **F3, stopped by its rule** (above) |
+| C-L7 the PDF's Economic Survival colour on 60/35 against the band's 65/40 (PLAUSIBLE, the reader's) | `threatAssessment.js`, `econColor` (this lane) | left, not reached |
+| E-L1 the Druid Circle not on the eight-house list | — | moot: reading A withdrawn (W1); the Druid Circle's two roles are listed in the count test |
+| W-L1 a crisis's severity band moves with the will | the crisis condition's severity reads the defence rating | explained; named |
+
+## EVERY NEW OR CHANGED READER SENTENCE OF THIS SEAT, with the town it was read in (the owner vetoes by exception)
+
+1. ", laid by before the <crisis>" inside the two can-pay money lines (the PDF's Economic Survival row; the tab's expanded row): "Money enough to ride out a long crisis, laid by before the famine: emergency measures can be paid for, and the garrison kept paid while it lasts." (rv2-famine-city-0); "Money enough for a short crisis, laid by before the siege; a long siege would start eating the reserves within months." (the rv2 sieges).
+2. The register's "at war" (reg7-wartime-village-0: "A struggling village, at war."), the register line with no clause (reg7-occupied-village-0: "A poor village."), and the realm chart's "at war" segment.
+3. "Neighbours notice trouble and deal with it themselves." (rr2s-thorp-calm-port-1, the Safe line).
+4. Changed in WHERE it prints: the watch's own guard line in place of "A mercenary company provides enforcement…" where a watch stands (rr2s-town-indebted-port-1).
+5. Removed: the PDF's "Score avg" stat; the PDF forces' "REQ" and "FORCED" badges; the journal's "Member of: <category key>" rows and table cells.
+
+## LEFT, AND THE FINAL STATEMENT
+
+- **The final statement is HELD** (the chair's order) until the capacity branch is merged into the lane; it is not begun. When made: the census with the hazard checked (the counter's own exit and a non-empty `counts.txt`); the rating moves of this seat declared: W1 (1,440 records back to c72917251's), W3 (22 records, 18 up, 2 up a band); the 51 golden surfaces; the whole suite classed (the reds met so far are above); the eight towns; the sentences above; the edge bundles last.
+- **Parked for the chair, together:** F1's line (the selector, `defenseStateProse.js`); F3's 25 cells; W5's class (238); the count law off the default dials (60 of 240, the parish/clergy and monastery/hospital pairs, now ruled as two jobs to be named by the capacity seat's test); the item 3 stops above.
+- Files this seat changed that the capacity seat also takes: `src/generators/defenseGenerator.js` (W1, W3; before the chair's order of 19:10) — nothing since. `defenseInstitutionBuckets.js`: W1 only (byte-identical to its state before 13782cf82).
+
+## Incidents
+
+- A shell `cd … && (…) &` put a `cd` in the background, so three gate commands once ran in the main checkout (`/home/user/settlement-engine`) instead of the scratch tree: they read only (typecheck, eslint) and failed there; the refs and local config were compared after: unchanged. Re-run in the scratch tree, green.
+- This seat's own `npm run build` left `dist/` in the scratch tree, which `chainPrintSites.walker` walks: deleted; green.
+- Refs and local config compared after every push and suite: only `refs/heads/up7` moves.
 
 
 ---
