@@ -408,11 +408,11 @@ export function deriveSupportingCapabilities(settlement) {
       label: 'Medical Readiness',
       status: facts.hasHospital ? 'Hospital present'
         : facts.hasHealer ? (healerSubject(facts.healerName) === 'A healer' ? 'Healer' : 'Infirmary')
-          : f.hasChurch ? 'Clergy care' : 'None',
-      color: facts.hasHospital ? '#1a5a28' : (facts.hasHealer || f.hasChurch) ? '#7a5010' : '#8b1a1a', score: null,
+          : clergyHere(r) ? 'Clergy care' : 'None', // W2-C-LEAVES item 3: clergy who live here, by the faith's home
+      color: facts.hasHospital ? '#1a5a28' : (facts.hasHealer || clergyHere(r)) ? '#7a5010' : '#8b1a1a', score: null,
       note: facts.hasHospital ? 'Casualty treatment, outbreak containment, recovery capacity.'
         : facts.hasHealer ? `${facts.healerName}. Wounds and fevers treated one at a time; no beds to contain an outbreak.`
-          : f.hasChurch ? 'Clerical care. Basic wound and disease management.' : 'No healer is kept here; the sick are tended by their own families.',
+          : clergyHere(r) ? 'Clerical care. Basic wound and disease management.' : 'No healer is kept here; the sick are tended by their own families.',
     },
     // ⛔ THE LOGISTICS & SUPPLY ROW IS GONE FROM THE DEFENSE SURFACES (the owner's word,
     // 2026-11-03: "Do add storehouse months the economy tab."). It was the granary read; stored
@@ -682,4 +682,25 @@ function withRingVantage(row, settlement) {
   if (row.key !== 'organized' || typeof seed !== 'string' || !seed) return row;
   const note = ORGANIZED_RING_NOTES[hashKey(`${seed}::defenseDisplay:organizedRing`) % ORGANIZED_RING_NOTES.length];
   return note === row.note ? row : Object.freeze({ ...row, note });
+}
+
+// ─── W2-C-LEAVES item 3: CLERICAL CARE NEEDS CLERGY (at the end of the file, so no line above moves) ───
+import { faithReadingOf } from '../dossier/faithReading.js';
+import { rulerKindOf } from '../facts/rulerKind.js';
+
+/**
+ * WHETHER CLERGY LIVE HERE (W2-C-LEAVES, 2026-11-13; the cold list REVIEW-W2A-3 #56, HIGH: "Clerical care. Basic wound
+ * and disease management." in a thorp whose Burial ground says "No clergy lives near enough" and whose Faith reads "no
+ * church of its own"). The Medical Readiness row read `compound.inst.hasChurch`, a name test that a Wayside shrine and
+ * an "Access to parish church" row both pass. The faith's one home (`dossier/faithReading.js :: faithReadingOf`)
+ * answers it: a church of the place's own (never a shrine, never access to a neighbour's), or a cleric on its roster;
+ * and the ruler's home (`facts/rulerKind.js :: rulerKindOf`) where a priest rules (a Priestly Guidance thorp's "elder
+ * priest", whose role the faith home's cleric ranks do not read: 12 of the census's 720).
+ * @param {DefenseDisplaySettlement} settlement
+ * @returns {boolean}
+ */
+function clergyHere(settlement) {
+  const reading = faithReadingOf(/** @type {import('../dossier/faithReading.js').FaithReadingSettlement} */ (/** @type {unknown} */ (settlement)));
+  return reading.hasChurch || reading.seniorCleric !== null
+    || rulerKindOf(/** @type {Parameters<typeof rulerKindOf>[0]} */ (/** @type {unknown} */ (settlement))) === 'priest';
 }
