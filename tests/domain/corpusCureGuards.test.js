@@ -1,0 +1,80 @@
+// THE CORPUS LANE'S CURE GUARDS (W2-WRITE, the read of 2026-11-13, finding M5: "no guard reds when a
+// cure's crisis disqualifier is undone or mis-written").
+//
+// Every disqualifier cure on the dossier's state prose (docs/content/RECEIPT_POOLS_DOSSIER_STATE.md and the
+// files generated from it) has a row here: a FIXED TOWN, born as the app births it, in which the cured line
+// must not be eligible. Each row also proves the town still reaches the pool, so a guard can never pass
+// because its town drifted away from the case it guards: a town that no longer reads the pool reds by name,
+// and the row is re-keyed to a new town (by identity, with the cause), never dropped.
+//
+// The town is born in the app's own configuration shape: DEFAULT_CONFIG as the store ships it, the stress
+// panel with Random off (`selectedStressesRandom: false`, the ticked crises), and the priorities randomised.
+// Every public prose site is then drawn as the owner's page draws it, and the kernel's draw records which
+// lines of each pool were eligible.
+import { beforeAll, describe, expect, it, vi } from 'vitest';
+
+const seen = vi.hoisted(() => ({ cur: /** @type {Record<string, Set<number>>|null} */ (null) }));
+
+vi.mock('../../src/domain/display/stateProse/stateProseKernel.js', async (importOriginal) => {
+  const kernel = /** @type {Record<string, any>} */ (await importOriginal());
+  return {
+    ...kernel,
+    drawVariant: (/** @type {any[]} */ eligible, /** @type {string} */ blockId, /** @type {string} */ poolKey, /** @type {string} */ seed) => {
+      if (seen.cur) {
+        const row = (seen.cur[`${blockId}::${poolKey}`] ||= new Set());
+        for (const variant of eligible || []) row.add(variant.vid);
+      }
+      return kernel.drawVariant(eligible, blockId, poolKey, seed);
+    },
+  };
+});
+
+/**
+ * One row per cure: the town (its seed names its size and its ticked crises), the pool, the cured line's
+ * vid, and what makes the line false there.
+ * @type {ReadonlyArray<{seed: string, pool: string, vid: number, why: string}>}
+ */
+const GUARDS = [
+  { seed: 'w5-village-under_siege-1', pool: 'DS-ECO-9::DEFICIT', vid: 1, why: 'a siege: "not enough comes in" presumes a road that is open (the second seat\'s `no crisis: under_siege`)' },
+];
+
+/** @param {string} seed */
+function configOf(seed) {
+  const m = seed.match(/^[a-z0-9]+-(thorp|hamlet|village|town|city|metropolis)-([a-z_+]+)-(\d+)$/);
+  if (!m) throw new Error(`a guard seed names its size and crises: ${seed}`);
+  return { settType: m[1], selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : m[2].split('+'), _randomizePriorities: true };
+}
+
+/** @type {Map<string, Record<string, Set<number>>>} */
+const READ = new Map();
+
+beforeAll(async () => {
+  const boundary = await import('../../src/domain/density/densityCreateBoundary.js');
+  const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
+  const { DEFAULT_CONFIG } = await import('../../src/store/configSlice.js');
+  const { withPublicProse } = await import('../../src/domain/display/publicProse.js');
+  const { composePublicProse, PUBLIC_PROSE_SITES } = await import('../../src/components/new/publicProseCompose.js');
+  const { publicVeiledRecordOf } = await import('../../src/domain/display/publicSafe.js');
+  await boundary.loadGenerationLawPayloads();
+  for (const seed of new Set(GUARDS.map((g) => g.seed))) {
+    let town = generateSettlementPipeline(boundary.birthConfig({ ...DEFAULT_CONFIG, ...configOf(seed) }), null, { seed, customContent: {} });
+    town = withPublicProse(town, composePublicProse(town));
+    seen.cur = {};
+    const ctx = { veiledRecord: publicVeiledRecordOf(town) };
+    for (const [, draw] of PUBLIC_PROSE_SITES) {
+      try { draw(town, false, ctx); } catch { /* a site that throws prints nothing; the row's own control says so */ }
+    }
+    READ.set(seed, seen.cur);
+    seen.cur = null;
+  }
+}, 300000);
+
+describe('a cured line is not eligible in the fixed town that made it false', () => {
+  for (const g of GUARDS) {
+    it(`${g.pool} v${g.vid} at ${g.seed}: ${g.why}`, () => {
+      const pools = READ.get(g.seed) || {};
+      expect(Object.keys(pools), `${g.seed} no longer reads ${g.pool}: re-key the row to a town of the case`).toContain(g.pool);
+      expect([...pools[g.pool]], `${g.pool} v${g.vid} is eligible at ${g.seed}`).not.toContain(g.vid);
+    });
+  }
+});
