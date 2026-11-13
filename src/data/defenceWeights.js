@@ -66,6 +66,7 @@ export const DEFENCE_TUNING = Object.freeze({
     indebted: Object.freeze({ sup: 15, mil: 10 }),
     infiltrated: Object.freeze({ int: 15, mil: 8 }),
     monster_pressure: Object.freeze({ mon: 20, mil: 5, arcaneFrom: 40, arcaneMon: 0.25, divineMon: 0.4, druidMon: 0.5 }),
+    wartime: Object.freeze({ sup: 15 }), // COHERENCE-UPKEEP-6 (C, R16): war drains what sustains a town; the starting weight, for the owner's veto
   }),
 });
 
@@ -108,7 +109,7 @@ export const DEFENCE_WEIGHT_REASONS = Object.freeze({
   size: 'a small place is easier to hold',
   floors: 'unpaid soldiers desert slowly, never at once',
   chains: 'what the economy keeps working',
-  crises: 'today\'s points, with today\'s relief by faith, druids, arcana and alchemy; each acts once, on the parts it touches',
+  crises: 'today\'s points, with today\'s relief by faith, druids, arcana and alchemy; each acts once, on the parts it touches; war drains the stores, the purse and the market (R16)',
 });
 
 /**

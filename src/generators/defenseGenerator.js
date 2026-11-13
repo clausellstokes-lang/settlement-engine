@@ -125,6 +125,10 @@ const crisisPointsOf = (has, t, magPri) => {
     if (t.hasDruid) mo = Math.round(mo * c.druidMon);
     out.push(['monster_pressure', { mon: mo, mil: c.mil }]);
   }
+  // War drains (COHERENCE-UPKEEP-6, C: the chair's R16): men, grain and coin go to the army, so wartime takes
+  // supply from what sustains the town; who stands and what is built it leaves alone (a supply point
+  // touches SUSTAINS only). Last, so every crisis before it takes what it took before.
+  if (has('wartime')) out.push(['wartime', { sup: C.wartime.sup }]);
   return out;
 };
 

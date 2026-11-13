@@ -3026,6 +3026,7 @@
         "crises.under_siege.sup": "points",
         "crises.under_siege.teleportEco": "multiplier",
         "crises.under_siege.teleportFrom": "score100",
+        "crises.wartime.sup": "points",
         "crossroads.sup": "points",
         "dial.hiredExtra": "multiplier",
         "dial.int": "multiplier",

@@ -126,6 +126,21 @@ describe('defence is the sum of its parts', () => {
     }
   });
 
+  // COHERENCE-UPKEEP-6, C (the chair's decision on the owner's deferral, record 323's R16): WAR DRAINS. Wartime
+  // is one more row of the crisis table: it takes supply from what sustains a town and leaves who stands and
+  // what is built alone.
+  test('RED-FIRST: wartime drains what sustains a town and leaves who stands and what is built alone', () => {
+    let forced = 0;
+    for (const [key, s] of Object.entries(births)) {
+      if (rows.find((r) => r.key === key).stress !== 'wartime') continue;
+      forced += 1;
+      const took = s.defenseProfile.parts.filter((p) => p.crisis && Object.hasOwn(p.crisis, 'wartime'));
+      expect(took.length, `${key}: wartime takes from a part`).toBeGreaterThan(0);
+      for (const p of took) expect(p.group, `${key}: ${p.id}`).toBe('SUSTAINS');
+    }
+    expect(forced, 'anchored: the corpus forces wartime').toBe(TIERS.length * 3);
+  });
+
   test('THE PROOF OF DERIVED: store, strip the profile, recompute from the record — equal field for field', () => {
     let equal = 0;
     for (const [key, s] of Object.entries(births)) {
