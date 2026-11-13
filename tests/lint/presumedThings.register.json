@@ -45,7 +45,6 @@
   {"thing": "mercenary", "path": ".powerStructure.recentConflict", "text": "whether to raise a levy or hire mercenaries", "reason": "hedge", "note": "\"whether to … hire\": not yet hired", "towns": 5},
   {"thing": "mercenary", "path": ".pressureSentence", "text": "whether to raise a levy or hire mercenaries", "reason": "hedge", "note": "\"whether to … hire\": not yet hired", "towns": 2},
   {"thing": "walls", "path": ".economicViability.warnings[].suggestedFixes[]", "text": "Add Town Walls or Garrison", "reason": "hedge", "note": "advice to the builder: what to add", "towns": 4},
-  {"thing": "walls", "path": ".history.historicalEvents[].plotHooks[]", "text": "sealed inside the walls during construction", "reason": "past", "note": "a past event", "towns": 5},
   {"thing": "walls", "path": ".institutions[].desc", "text": "walls and churches of half the region", "reason": "hedge", "note": "the region's walls, not this town's", "towns": 7},
   {"thing": "walls", "path": ".npcs[].presentation.impression", "text": "The walls are covered with charts", "reason": "ruling-3", "note": "a room's walls, not the perimeter", "towns": 8},
   {"thing": "walls", "path": ".npcs[].secret.what", "text": "the walls built with them crumble", "reason": "ruling-3", "note": "the walls of any building, not the perimeter", "towns": 6},
