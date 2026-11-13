@@ -466,9 +466,9 @@ const genPressureDetail = settlement => {
   const stresses = (stress ? (Array.isArray(stress) ? stress : [stress]) : []).map(s => s.type);
   const primaryStress = resolvePrimaryStress(stresses);
 
-  // Unified scan (tradeCommodity.js); the pressure templates carry their own
-  // per-sentence defaults, so a plausible first word beats null here.
-  const commodity = deriveTradeCommodity(economicState, { firstWordFallback: true });
+  // Unified scan (tradeCommodity.js); the pressure templates carry their own per-sentence defaults ("trade", "harvest", "export", the town's food).
+  // R2-CODE-A-3 (round three HIGH #601): no first-word fallback: an export the scan does not name gave its first word, no commodity ("what the recovered can bring in", "levies of men, of milled").
+  const commodity = deriveTradeCommodity(economicState);
 
   const factions = powerStructure?.factions || [];
   const govFaction =
