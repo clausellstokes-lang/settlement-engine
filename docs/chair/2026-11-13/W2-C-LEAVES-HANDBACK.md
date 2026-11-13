@@ -399,6 +399,11 @@ below d6e355a9d rewritten.
 | #452 "Needs:" by kind and trade | 3866cc6c7 | 102 Unexploited cards in 92 towns lose 158 house names (53 lines whole); gap lines 0 changed | 3 cards (#1065's town: no hides need) | all 102 by roster listing: 158 false names out, 0 true | resourceCardNeedsHousesHere.test.jsx (d6e355a9d: 4 of 4 red) |
 | P1 the grade cards | 9bcf0127a | Unexploited beside a working chain 196 cards / 171 towns → 0 (Partial, body the resource alone); silent-model 79 stand; modelled-idle Partial/Full 9 STOPPED as filed; card vs sentence 0; PDF = tab 720/720 | 4 cards (#558, #1065) | 12 of the moved: 12 borne out, 1 doubtful (r2s-monster_pressure-town-1) | resourceGradeReadsChainLeaf.test.jsx (3866cc6c7: 4 of 4 red) |
 | #169 Imports under a siege | 7bbe8c119 | 29 of 31 siege towns, 186 import pills → 0; "Nothing comes into <town> by trade." in place | 3 towns, 25 pills | 31 of 31: pills false, sentence true | economicsImportsUnderSiege.test.jsx (d6e355a9d: 2 of 3 red) |
+| P1-a the leaf learns the apothecary | 4c6a692f6 | "Produced locally: medicinal herbs" +17 (all true: an apothecary, the town's own live herb ground, no herb import); r2r-village-8's herbs Partial → Unexploited; gap lines 0 | 0 | all 17 + the 9 | apothecaryWorksTheHerbs.test.js (3f990ce64: 2 of 2 red) |
+| P1-a, the chair's second word | c32787d80 | the 5 whose herbs come in by trade → Unexploited, body the resource alone; nothing else | 1 (#1160's town) | all 9 read in their towns | the same two tests (4c6a692f6: 2 of 7 red) |
+| P1-b an export of the own raw good is worked | 8e0be75e4 | Unexploited beside an export of its own raw good 36 → 0 (Partial); gap lines +18 (14 true, 2 true half-way, 2 doubtful: a Charcoal burner, declared exposure) | 1 | 12 of the moves true; all 18 lines read | exportedRawGoodIsWorked.test.js (c32787d80: 2 of 2 red) |
+| (registers) goods roster, negative anchors | 3bd484cd0 | none | — | — | vendorPdfLazy, negativeAssertionAnchor green |
+| P1-c DS-ECO-11 reads the cards | f57b61629 | the line beside a card at another grade 187 → 0; the line speaks 560 → 476; Partial lines 75 → 99 | 20 of 20 agree | 12 old Partial: 4 true (kept), 4 false (out), 4 doubtful; 12 now: 9 true, 3 doubtful | economyDeskReadsTheCards.test.js (8e0be75e4: 3 of 3 red) |
 
 ## Calls taken without the chair (this seat)
 1. **#452's "by kind" reads the catalogue's SCALE groups** (an exclusiveGroup named "…Scale": tanneryScale holds Tanners
@@ -413,6 +418,29 @@ below d6e355a9d rewritten.
    economyStateProse), not generalStateProse.js (which holds no exploitation selector; grep). The one read is taken
    there; no lane in flight changes economyStateProse.js beyond this lane's base.
 
+4. **P1-b's count re-taken by the rule:** ruling 7's 47 matched any commodity of the card's ground; by "the resource's
+   own raw good" (the chain's input words) the class is 36; the other 11 ("Livestock" beside hides or camels, "Peat"
+   beside herbs) are another good of the same ground and stay Unexploited. A closed list `OTHER_GROUNDS_GOODS` ("Sacred
+   wood": the grove's ritual good answered the timber's word "wood"; 22 false moves avoided).
+5. **P1-c's Partial cell narrowed, not parked whole:** parking it whole would drop 4 true lines of 12 read; it is offered
+   only where the town sells the raw good and still lacks a finisher; each desk row carries the houses still needed.
+6. **A CORRECTION, said to the chair (19:4x UTC):** P1's message said the record bore the analysis out in all eight herb
+   cards; in five it imports the herbs. The chair ruled again on it (copied above).
+
+## Parked for the corpus lane (P1-c), with three towns each
+- `DS-ECO-11 › EXPLOITATION: unexploited, …` for a card the cards moved to Unexploited whose house stands ("what it lacks
+  is {institution}" would name the apothecary it keeps): r2r-town-17, r2r-city-41, rr2s-metropolis-calm-rand-1. Not offered.
+- `DS-ECO-11 › EXPLOITATION: partiallyExploited` where the town does not sell the raw good or every finisher stands ("takes
+  the easy half … sells the rest" beside a Fuller, a Dyer and Weavers): r2r-city-27, r2s-politically_fractured-metropolis-2,
+  r2r-town-48. Not offered.
+- The Full pool reads doubtful under a crisis ("Every stage of the livestock trade … is done here" under a siege,
+  rr2s-town-under_siege-rand-1) and of a city's herbs ("the trade the city is actually built on", rr2s-city-famine-rand-1).
+
+## Golden surfaces moved (declared by measure; the merge seat's)
+- **The dossier prose manifest** (`tests/property/dossierProseManifest.test.js`): its drift arm counts 1,040 rows moved at
+  f57b61629 against 990 at d6e355a9d (+50), from P1-c (bodies byte-identical through 8e0be75e4). Attributed to DS-ECO-11's
+  exploitation line by the change: PLAUSIBLE, not verified row by row.
+
 ## Stops (this seat)
 - (none blocking)
 
@@ -422,6 +450,12 @@ below d6e355a9d rewritten.
 - **The PDF's Unexploited rows** print the chain's house list raw in the processing column (`viewModelBodySlices.js ::
   resourcesSlice`), the same list #452 cured on the tab's "Needs:" line.
 
+- **P1-b's two doubtful lines** ("No one here works the timber" beside a Charcoal burner, r2s-plague_onset-hamlet-2,
+  r2s-wartime-hamlet-0; the same pairing at the base in r2s-under_siege-village-0): the chain data's charcoal row (the data
+  lane's), or a `WORKED_BY_HOUSE` entry the chair rules.
+
 ## THE EXACT NEXT STEPS (kept current)
-P1-a, P1-b, P1-c (each its own commit, measured first); then round three's list HIGH first (#506 is the label lane's
-"Via" seam: leave), then its mediums by file; then the older list; then the final statement.
+Round three's list HIGH first: #1172 and #1202 (defenseDisplay.js :: CRIM_STRUCTURE_DATA, "one criminal ring" beside two
+criminal powers), #1375 (computeActiveChains.js: a generator write; a display cure only, or a stop: no record byte may
+move); #506 is the flow card's house list through SupplyChainsPanel.jsx :: chainFlowFacts (r2-code-b's: leave). Then the
+mediums by file; then the older list; then the final statement.
