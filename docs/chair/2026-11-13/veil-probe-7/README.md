@@ -15,3 +15,16 @@ socket (`/var/tmp/cv7`, trust auth, no TCP). Nothing here touches a hosted datab
   `docs/chair/2026-11-13/review-veil-5-probes/native/`) plus every comment (`native/comments.sql`):
   `sh native/rehearse7.sh <review native dir with comments.sql beside it> <the lane's migrations at 28f52b1e4> <supabase/migrations> <supabase/rollback> <out dir>`.
   Its output: `out/rehearse7.txt`.
+- `native/planted-run.sh` runs the review's planted-marker probe (`review-veil-5-probes/planted.probe.jsx` and
+  `planted-summary.mjs`, unchanged, at 4700d33eb) in two shards: two seeds × six sizes × calm and infiltrated, every
+  eye shut by hand, the DM reveal off and on, live and frozen (96 shares a side), the whole payload of each of the
+  four reads searched as text. Template chains built by the review's `chain.sh` from this lane's migrations:
+  `t203p211` (203 + the frozen 211), `t211f` (001..211), `t203p212` (203 + 211 + 212), `t212` (001..212).
+  `out/planted/`:
+  - `A-master-frozen211.txt`: master's shape (db832c892's generator and writer) on `203 + 211` and `001..211`:
+    **byte-identical** to the review's `out/planted-master.txt` (its seventeen rows a chain).
+  - `B-tip333-frozen211.txt`: the new shape (333b33973's code, the review's own tip) on `001..211`: identical to
+    the review's `out/planted-tip.txt` but the chain's label (`qfull` here, `qtip` there).
+  - `C-master-211and212.txt`: master's shape on `203 + 211 + 212` and `001..212`: **0 markers, 0 house names**.
+  - `D-tip-211and212.txt`: the new shape (this tip's code) on `001..212`: **0, 0**; identical to the sixth seat's
+    `veil-probe-6/out/planted-tip-final.txt` but the label.
