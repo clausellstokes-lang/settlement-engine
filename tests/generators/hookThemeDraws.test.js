@@ -47,6 +47,7 @@ import { afterEach, describe, expect, test } from 'vitest';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { drawUnique } from '../../src/generators/hookVariety.js';
+import { lineText } from '../../src/domain/facts/drawDeclared.js';
 import { themeOfText, UNTYPED } from '../../src/domain/hookThemes.js';
 import { NPC_FACTION_LOYALTY, MANNERISMS, SPEECH_PATTERNS } from '../../src/data/npcData.js';
 import { generateReligionType } from '../../src/generators/npcGenerator.js';
@@ -211,10 +212,13 @@ describe('HK-3 draws — the source cure over the REAL authored pools', () => {
         const used = new Set();
         const themes = new Set();
         const drawn = [];
+        // R2-CODE-A-2 (re-keyed with its cause): a declared row is `{ text, needs }` (the size declarations of the
+        // government pool, cold #6), so the pin reads a row's TEXT as the generator's own draw does
+        // (npcGenerator.js :: drawLoyalty keys and themes by `lineText`); a bare row is its own text, as before.
         for (let i = 0; i < draws; i += 1) {
-          drawn.push(themed ? drawUnique(pool, used, undefined, themes, themeOfText) : drawUnique(pool, used));
+          drawn.push(themed ? drawUnique(pool, used, (x) => lineText(x), themes, (x) => themeOfText(lineText(x))) : drawUnique(pool, used, (x) => lineText(x)));
         }
-        return new Set(drawn.map(themeOfText)).size;
+        return new Set(drawn.map((x) => themeOfText(lineText(x)))).size;
       };
       const bare = beatsUnder(false);
       const themed = beatsUnder(true);

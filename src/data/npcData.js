@@ -1164,28 +1164,28 @@ export const FACTION_CONFLICT_TYPES = {
 export const NPC_FACTION_LOYALTY = {
   government: [
     "A sealed letter arrived for them three weeks ago. They haven't opened it. They won't say why.",
-    "They've been quietly buying up property in a district that hasn't been announced as a development site. Yet.",
-    "One of their staff has started asking questions about records from seven years ago. They've been reassigned twice already.",
+    { text: "They've been quietly buying up property in a district that hasn't been announced as a development site. Yet.", needs: ['population: ≥ middling'] }, // R2-CODE-A-2 (cold #6; the chair's ruling (f)): a district is a size error below the middling band
+    { text: "One of their staff has started asking questions about records from seven years ago. They've been reassigned twice already.", needs: ['tier: ≥ village'] }, // R2-CODE-A-2 (cold #6): an office with staff, which no thorp or hamlet keeps
     'A merchant they spoke against has started praising them in public, and will not say why.',
-    "Their most trusted advisor hasn't been seen in four days. The official story changes each time it's told.",
+    { text: "Their most trusted advisor hasn't been seen in four days. The official story changes each time it's told.", needs: ['tier: ≥ village'] }, // R2-CODE-A-2 (cold #6): an advisor and an official story, which no thorp or hamlet keeps
     { text: "They know who committed a crime the guard is currently investigating. They're not telling the guard.", needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
-    "Someone has been leaving anonymous notes in their office pointing to a colleague's corruption. The notes are accurate.",
+    { text: "Someone has been leaving anonymous notes in their office pointing to a colleague's corruption. The notes are accurate.", needs: ['tier: ≥ village'] }, // R2-CODE-A-2 (cold #6): an office with staff, which no thorp or hamlet keeps
     "They've been meeting privately with someone from outside the settlement whose identity they won't disclose.",
     'A routine appointment they made three weeks ago has been rescheduled four times. Each time they initiated the change.',
     'Someone who publicly supports them is being paid by someone who opposes them. They know this.',
     'They received a deposition in a civil case that, if acted on, would be correct, and would ruin someone they need.',
-    "A clerk in their office has been copying letters at night, and the copies have turned up in a rival's hands.",
+    { text: "A clerk in their office has been copying letters at night, and the copies have turned up in a rival's hands.", needs: ['tier: ≥ village'] }, // R2-CODE-A-2 (cold #6): an office with staff, which no thorp or hamlet keeps
     'They signed an order last month on bad information, and the family it ruined has learned whose seal is on it.',
     'A petition they set aside has gathered names from half their street, and the people who signed it want an answer this week.',
     'Someone is collecting fees in their name, and the people paying think the receipts are honest.',
-    'Their deputy has started answering questions meant for them, and people have begun going to the deputy first.',
+    { text: 'Their deputy has started answering questions meant for them, and people have begun going to the deputy first.', needs: ['tier: ≥ village'] }, // R2-CODE-A-2 (cold #6): an office with staff, which no thorp or hamlet keeps
     "An old ruling of theirs is being used to take a widow's house, and they cannot undo it without admitting the mistake.",
     'They promised the same post to two people, and both have already told their families.',
     'A ledger they swore was complete is missing the pages for one season, and an auditor is coming to read it.',
     'Their sister has been taking gifts from people who need their signature, and they found out from the person who paid most.',
     'They were seen leaving a house they had no business in, on the night its owner disappeared.',
     'A rule they wrote to stop one abuse has opened the door to another, and the people using it are their friends.',
-    'Someone has forged their seal well enough to fool their own staff, and three orders went out under it before anyone noticed.',
+    { text: 'Someone has forged their seal well enough to fool their own staff, and three orders went out under it before anyone noticed.', needs: ['tier: ≥ village'] }, // R2-CODE-A-2 (cold #6): an office with staff, which no thorp or hamlet keeps
     'They owe their post to a patron who has started asking for repayment in favours they cannot grant openly.',
   ],
   military: [

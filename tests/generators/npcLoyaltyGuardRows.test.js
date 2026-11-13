@@ -19,6 +19,12 @@ import { lineText } from '../../src/domain/facts/drawDeclared.js';
 const GUARD = /\b(?:guard captain|guards?|soldiers?|armoury|patrol|prisoner|weapons cache)\b/i;
 
 const DECLARED = {
+  // R2-CODE-A-2 (the cold list REVIEW-W2A-3, MEDIUM #6; re-keyed by identity with its cause): the government lines that
+  // presume an office with staff, an advisor and an official story need a village or larger; the district line needs
+  // the middling population band (the chair's ruling (f)).
+  'government#1': ['population: ≥ middling'], 'government#2': ['tier: ≥ village'], 'government#4': ['tier: ≥ village'],
+  'government#6': ['tier: ≥ village'], 'government#11': ['tier: ≥ village'], 'government#15': ['tier: ≥ village'],
+  'government#22': ['tier: ≥ village'],
   'government#5': ['guardPresence'],
   'military#0': ['guardPresence'], 'military#1': ['guardPresence'], 'military#3': ['guardPresence'],
   'military#5': ['guardPresence'], 'military#7': ['guardPresence'], 'military#10': ['guardPresence'],
@@ -29,7 +35,7 @@ const DECLARED = {
 };
 
 describe('NPC_FACTION_LOYALTY declarations (CENSUS-3e)', () => {
-  it('declares exactly the ledger\'s fourteen rows, each by its atom', () => {
+  it('declares exactly the ledger\'s fourteen rows and R2-CODE-A-2\'s seven size rows, each by its atom', () => {
     /** @type {Record<string, string[]>} */ const got = {};
     for (const [cat, rows] of Object.entries(NPC_FACTION_LOYALTY)) {
       rows.forEach((row, i) => { const a = atomsOf(declarationOf(row)); if (a.length) got[`${cat}#${i}`] = a; });
