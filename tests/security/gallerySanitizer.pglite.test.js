@@ -193,6 +193,10 @@ describe('gallery per-member overrides — net-current execution (pglite)', () =
   let mdb;
   const KEY = netCurrentFn('_gallery_npc_key');
   const APPLY = netCurrentFn('_gallery_apply_member_overrides');
+  // Since 212 (the fifth review's V5-4; COHERENCE-VEIL-8's tie roles) the net-current apply ends in the roster
+  // splice, which calls these helpers: the loader takes what the body needs, in the order each calls the next
+  const SPLICE = ['_gallery_veil_member_revealed', '_gallery_veil_roster_members', '_gallery_veil_tie_roles', '_gallery_veil_roster_splice']
+    .map((name) => netCurrentFn(name));
 
   it('locates the net-current override helpers (6-arg apply: base + dm_full)', () => {
     expect(KEY.sql, 'no _gallery_npc_key in any migration').toBeTruthy();
@@ -207,6 +211,7 @@ describe('gallery per-member overrides — net-current execution (pglite)', () =
     // The apply helper depends on the sanitizer (single-NPC re-strip) + the key fn.
     await mdb.exec(SANITIZER.sql);
     await mdb.exec(KEY.sql);
+    for (const fn of SPLICE) if (fn.sql) await mdb.exec(fn.sql);
     await mdb.exec(APPLY.sql);
   }, PGLITE_BOOT_TIMEOUT_MS);
 
