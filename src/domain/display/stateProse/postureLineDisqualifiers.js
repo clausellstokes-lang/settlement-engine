@@ -17,13 +17,16 @@
  * THE TWO FACTS, each read from its one home:
  *   - AT WAR: a siege or a war in force, `stress[].type` `under_siege` / `wartime` (the Defense header's
  *     military-status banner names it).
+ *   - UNDER SIEGE: `stress[].type` `under_siege` alone, whose summary says nothing comes in by road: the strong
+ *     pool's first line reads the town "from the road in" (CENSUS-2 kind b, 7 of its 720 at R3-TABS L3's tip).
+ *     Under a siege every strong line is struck and the posture says nothing; the banner names the siege.
  *   - A FORCE STANDS: any standing garrison, militia, watch or contracted company (`standingDefenseForces`,
  *     L0's reading).
  * Pure: no randomness, no clock, no write. One view per struck set.
  */
 import { standingDefenseForces } from '../../institutions/defenseInstitutionBuckets.js';
 
-/** @typedef {{ opens: string, falseWhere: 'at war' | 'a force stands' }} PostureLineDeclaration */
+/** @typedef {{ opens: string, falseWhere: 'at war' | 'under siege' | 'a force stands' }} PostureLineDeclaration */
 
 /**
  * `<pool>` → `vid` → what the line opens with and the fact that makes it false.
@@ -31,6 +34,7 @@ import { standingDefenseForces } from '../../institutions/defenseInstitutionBuck
  */
 export const POSTURE_LINE_DISQUALIFIERS = Object.freeze({
   'readiness STRONG': Object.freeze({
+    1: Object.freeze({ opens: '{settlement} reads as a defended place from the road in', falseWhere: 'under siege' }),
     2: Object.freeze({ opens: 'What {settlement} can field and what {settlement} has built', falseWhere: 'at war' }),
     3: Object.freeze({ opens: 'The town does not spend much time thinking about being attacked', falseWhere: 'at war' }),
     4: Object.freeze({ opens: 'Nothing presses {settlement} at present', falseWhere: 'at war' }),
@@ -58,14 +62,13 @@ export function corpusAdmittingPostureLines(corpus, settlement) {
   const c = /** @type {Record<string, { pools?: Record<string, ReadonlyArray<{ vid?: unknown }>> } & Record<string, unknown>>} */ (/** @type {unknown} */ (corpus));
   const block = c?.['DS-DEF-1'];
   if (!block?.pools) return corpus;
-  const atWar = stressList(settlement?.stress).some((entry) => {
-    const type = /** @type {{ type?: unknown } | null} */ (entry)?.type;
-    return type === 'under_siege' || type === 'wartime';
-  });
+  const types = stressList(settlement?.stress).map((entry) => /** @type {{ type?: unknown } | null} */ (entry)?.type);
+  const underSiege = types.includes('under_siege');
+  const atWar = underSiege || types.includes('wartime');
   const forces = standingDefenseForces(settlement);
   const force = forces.garrison.present || forces.militia.present || forces.watch.present || forces.mercenary.present;
   /** @type {Record<PostureLineDeclaration['falseWhere'], boolean>} */
-  const holds = { 'at war': atWar, 'a force stands': force };
+  const holds = { 'at war': atWar, 'under siege': underSiege, 'a force stands': force };
   /** @type {Record<string, ReadonlyArray<{ vid?: unknown }>>} */ const pools = {};
   /** @type {string[]} */ const struck = [];
   for (const [pool, declared] of Object.entries(POSTURE_LINE_DISQUALIFIERS)) {

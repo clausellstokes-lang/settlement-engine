@@ -71,16 +71,17 @@ describe('the posture line reads the readiness badge (L1)', () => {
       }
     }
   });
-  test('under a siege the strong posture draws only its line that presumes no peace; in peace it keeps the pool', () => {
+  test('under a siege the strong posture says nothing; at war it draws only its line that presumes no peace', () => {
     const failures = collectSeedFailures(SIEGED, (seed) => {
       const s = TOWNS[seed];
-      const rung = defensePostureProse(s, { seed }).posture?.rung;
-      if (rung?.provenance?.poolKey !== 'readiness STRONG') throw new Error(`pool ${rung?.provenance?.poolKey}`);
-      const struck = Object.values(POSTURE_LINE_DISQUALIFIERS['readiness STRONG']).map((d) => d.opens.replace(/\{settlement\}/g, s.name));
-      if (struck.some((o) => rung.sentence.startsWith(o))) throw new Error(`a peace line: ${rung.sentence}`);
-      if (!/reads as a defended place from the road in/.test(rung.sentence)) throw new Error(`not the strong pool's first line: ${rung.sentence}`);
+      if (posturePoolKey(s.defenseProfile.readiness.score) !== 'readiness STRONG') throw new Error(`premise: ${s.defenseProfile.readiness.label}`);
+      const rung = defensePostureProse(s, { seed }).posture;
+      if (rung?.beside) throw new Error(`a strong line under a siege: ${rung.beside}`);
     });
-    expectNoSeedFailures(failures, 'no peace presumed under a siege');
+    expectNoSeedFailures(failures, 'no open road or peace presumed under a siege');
+    const war = rvBirth('rv2-wartime-city-0');
+    expect(war.defenseProfile.readiness.label).toBe('Well-Defended');
+    expect(defensePostureProse(war, { seed: 'rv2-wartime-city-0' }).posture?.beside).toMatch(/reads as a defended place from the road in/);
     const calm = TOWNS['r2r-town-6'];
     expect(calm.defenseProfile.readiness.label).toBe('Well-Defended');
     expect(defensePostureProse(calm, { seed: 'r2r-town-6' }).posture?.rung?.provenance?.poolKey).toBe('readiness STRONG');
