@@ -67,8 +67,8 @@
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 296627,
-      "gzip": 37897,
+      "raw": 297347,
+      "gzip": 37953,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -891,6 +891,14 @@
       "toRaw": 129770,
       "gzipAfter": 18282,
       "reason": "+152 B raw over the committed 129618 (gzip level 9: 18257 -> 18282): off a revolt"
+    },
+    {
+      "car": "W2-WRITE-5 A M6",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 296662,
+      "toRaw": 297347,
+      "gzipAfter": 37953,
+      "reason": "+720 B raw over the committed 296627 (gzip level 9: 37897 -> 37953): STALLED v2 reworded, v3 v4 new"
     }
   ],
   "ceilingTransfersNewLeaves": [

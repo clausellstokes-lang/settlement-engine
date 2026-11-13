@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2959,
+    "variants": 2961,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -37,8 +37,8 @@
     "syntheticTableFields": 174,
     "tiers": {
       "MISSING": 33,
-      "THIN": 613,
-      "COVERED": 243,
+      "THIN": 612,
+      "COVERED": 244,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -32386,8 +32386,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 2,
-      "grammars": 1,
+      "variants": 4,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -32445,7 +32445,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "crisis: under_siege": 1,
+        "no crisis: under_siege": 2
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -70739,12 +70742,12 @@
       "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-GEN-18",
       "subject": "STALLED",
       "fields": [],
       "readingFunction": "craftReasonPoolKey",
-      "count": "2 variant(s) · 1 grammar(s) · slots {institution, resource, settlement}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {institution, resource, settlement}"
     },
     {
       "tier": "COVERED",
