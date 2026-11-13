@@ -25,6 +25,12 @@ const bornCensus = (/** @type {string} */ seed) => {
   const m = /** @type {RegExpMatchArray} */ (seed.match(/^r2r-(\w+)-(\d+)$/));
   return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: m[1] }), null, { seed, customContent: {} });
 };
+/** A ROUND-3 town (REVIEW-R2-STAGES, `rr2s-<size>-<calm|crises>-<rand|route>-<i>`), as its renderer births it. */
+const bornRr2s = (/** @type {string} */ seed) => {
+  const m = /** @type {RegExpMatchArray} */ (seed.match(/^rr2s-(\w+?)-([a-z_+]+)-([a-z_]+)-(\d+)$/));
+  const route = m[3] === 'rand' ? {} : { tradeRouteAccess: m[3] };
+  return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...route, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : m[2].split('+'), _randomizePriorities: true }), null, { seed, customContent: {} });
+};
 const servicesOf = (/** @type {any} */ s) => /** @type {any[]} */ (Object.values(s.availableServices || {}).flat());
 
 describe('W2-FIX-DATA-4: round two\'s medium lines in this lane\'s files', () => {
@@ -81,5 +87,18 @@ describe('W2-FIX-DATA-4: round two\'s medium lines in this lane\'s files', () =>
     expect(yard?.source, 'the cascade added it').toBe('cascade');
     expect([coastTown.config.terrainType, coastTown.config.tradeRouteAccess]).toEqual(['coastal', 'port']);
     expect(String(yard.desc)).not.toMatch(/\briver\b/i);
+  }, 60_000);
+
+  test('the arrival holds the culture\'s materialized detail to its own declaration (#183; ROUND-3 HIGH #87 #112 #117)', () => {
+    for (const [seed, gone] of [
+      ['rr2s-thorp-calm-port-1', 'Palisade lines and river stairs'],
+      ['rr2s-hamlet-calm-rand-1', 'Palisade lines and river stairs'],
+      ['rw3-hamlet-calm-1', 'A communal green, bathhouse, and well'],
+    ]) {
+      const town = seed.startsWith('rr2s-') ? bornRr2s(seed) : bornRw3(seed);
+      expect(String(town.culturalIdentity?.architecturalDetail).toLowerCase(), `${seed}: the materialized detail`).toContain(gone.toLowerCase());
+      expect(String(town.arrivalScene), seed).not.toContain(gone);
+      expect(String(town.arrivalScene), seed).toMatch(/\S/);
+    }
   }, 60_000);
 });

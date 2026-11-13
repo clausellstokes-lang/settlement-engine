@@ -307,10 +307,18 @@ export function composeArrivalScene(settlement) {
       const profileKey = resolveCultureProfileKey(config.culture || 'germanic');
       const profile = CULTURE_PROFILES[profileKey];
       const details = profile?.architecturalDetails || [];
+      // W2-FIX-DATA-4 (REVIEW-W2A-3 #183; ROUND-3 #87 #112 #117): the materialized detail was chosen in resolveConfig, which
+      // answers only the tier; here the record is whole, so the row it came from is held to its own declaration too (a
+      // palisade, a river, a bathhouse). Refused there (and not already redrawn for a market it lacks), the sight beat is
+      // left out: no redraw, so no draw is added and no later beat moves (a redraw would land small places on a line their
+      // size makes false).
+      const materializedRow = materialized ? details.find((d) => typeof d === 'object' && d !== null && String(textOf(d)).trim() === materialized) : undefined;
+      const materializedRefused = materializedRow !== undefined
+        && !declarationAdmits(declarationOf(materializedRow), /** @type {any} */ (facts()), { crisisScoped: false }).admitted;
       const drawnDetail = (!materialized || !speaks(materialized)) && details.length
         ? drawAdmitted(details, { poolId: `CULTURE_PROFILES.${profileKey}.architecturalDetails`, scoped: false, facts, speaks: (d) => speaks(textOf(d)), cleanOnly: Boolean(materialized) })
         : null;
-      const detail = materialized && speaks(materialized) ? materialized : (drawnDetail == null ? '' : textOf(drawnDetail)); // R-C (CENSUS-2d); CENSUS-1f: the redraw-once, declared
+      const detail = materialized && speaks(materialized) ? (materializedRefused ? '' : materialized) : (drawnDetail == null ? '' : textOf(drawnDetail)); // R-C (CENSUS-2d); CENSUS-1f: the redraw-once, declared
       if (detail) sight = `${sentenceCase(detail)}.`;
     }
   }
