@@ -36,7 +36,7 @@ import { FACT_DIMENSIONS, parseAtom } from '../../src/domain/facts/factVocabular
 import { REGISTERED_WORDS } from '../../src/domain/facts/registeredWords.js';
 import {
   ARM1_NOT_PRINTED, ARM1_ROOTS, ARM1_RULE_BOOK, DOOR_ARGS, drawnRanges, keyedDeclarations, COURT_HOUSES, stripKey, stripSites, stripTree, withOrdinals, REGISTER_REL, TAGGED_TABLE_FILES, THINGS, THING_IDS, WIDENED_REGISTER_REL, bankedKeys, corpusConfig, corpusSeeds,
-  deniesExistence, hitKey, listFiles, negates, printedAbsent, printedOutOfTime, rowCovers, scanSource, scanTree, unlicensedServiceRows,
+  bankRow, deniesExistence, hitKey, listFiles, rowKeys, negates, printedAbsent, printedOutOfTime, rowCovers, scanSource, scanTree, unlicensedServiceRows,
 } from './presumedThings.shared.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -390,10 +390,38 @@ describe('the register', () => {
     expect(bad).toEqual([]);
   });
 
+  /**
+   * F4 of the second read (REVIEW-W2B-1fb15980d: "a new false sentence appended past character 120 of a literal already
+   * banked for the same word passes the walker"). A banked row is keyed by its WHOLE literal (the sha-256 of its text), so
+   * any edit to a banked line, before or after character 120, is a fresh hit. Red at 1fb15980d (the key read the first
+   * 120 characters).
+   */
+  test('planted (F4): a sentence appended past character 120 of a banked literal is a fresh hit', () => {
+    const line = 'Fishermen land the catch at dawn along the quay, and the buyers bargain over it in the market by the water before the gulls come down.';
+    const edited = `${line} On feast days the wardens shut the market at noon.`;
+    const shift = `${line.slice(0, 40)}${line.slice(41)}`; // one character dropped before character 120
+    const scan = (text) => scanSource('src/data/planted.js', `export const A = [${JSON.stringify(text)}];`);
+    const rows = scan(line).map((h) => bankRow(h, 'family'));
+    expect(rows.map((r) => r[0]).sort()).toEqual(['docks', 'market']);
+    const banked = bankedKeys({ arm1: { 'src/data/planted.js': rows } });
+    const keysOf = (text) => scan(text).map((h) => hitKey(h.file, h.thing, h.text));
+    expectPresentThenAbsent(keysOf(line).filter((k) => banked.has(k)), keysOf(edited).filter((k) => banked.has(k)),
+      keysOf(line)[0], 'an appended sentence is a fresh hit');
+    expectPresentThenAbsent(keysOf(line).filter((k) => banked.has(k)), keysOf(shift).filter((k) => banked.has(k)),
+      keysOf(line)[0], 'an edit before character 120 is a fresh hit');
+  });
+
+  test('every banked row carries the hash of its whole literal', () => {
+    const bare = [register, widened].flatMap((reg) => Object.entries(reg.arm1).flatMap(([f, rows]) => rows
+      .filter((r) => !(typeof r[3] === 'string' || (Array.isArray(r[3]) && r[3].length > 1)) || ![r[3]].flat().every((x) => /^[0-9a-f]{16}$/.test(x)))
+      .map((r) => `${f} ${r[0]} ${r[2]}`)));
+    expect(bare).toEqual([]);
+  });
+
   test('no row is banked twice: the widened register holds nothing the first one holds, nor any key twice', () => {
     const first = bankedKeys(register);
     expect([...bankedKeys(widened)].filter((k) => first.has(k))).toEqual([]);
-    const rows = Object.entries(widened.arm1).flatMap(([f, rs]) => rs.map((r) => hitKey(f, r[0], r[2])));
+    const rows = Object.entries(widened.arm1).flatMap(([f, rs]) => rs.flatMap((r) => rowKeys(f, r)));
     expect(rows.length).toBe(new Set(rows).size);
   });
 });

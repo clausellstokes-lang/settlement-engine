@@ -29,6 +29,7 @@
  *
  * Pure apart from the file reads of arm 1; arm 2 reads the records it is handed.
  */
+import { createHash } from 'node:crypto';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, posix } from 'node:path';
 import { createRequire } from 'node:module';
@@ -55,11 +56,29 @@ export const WIDENED_REGISTER_REL = 'tests/lint/presumedThings.widened.register.
 /** A strip site's key in the widened register: file and receiver. @param {string} file @param {string} receiver */
 export const stripKey = (file, receiver) => `${file} :: ${receiver}`;
 
-/** An arm-1 hit's key in either register: file, thing, the literal's first 120 characters. */
-export const hitKey = (file, thing, text) => `${file}\t${thing}\t${String(text).slice(0, 120)}`;
+/**
+ * A literal's identity: the sha-256 of its WHOLE text, 16 hex characters (F4 of REVIEW-W2B's second read: a key of the
+ * first 120 characters let a false sentence appended to a banked line pass). Any edit to a banked line is a fresh hit.
+ * @param {string} text
+ */
+export const literalHash = (text) => createHash('sha256').update(String(text)).digest('hex').slice(0, 16);
 
-/** The arm-1 keys a register banks. @param {{ arm1: Record<string, Array<[string, string, string]>> }} register */
-export const bankedKeys = (register) => new Set(Object.entries(register.arm1).flatMap(([f, rows]) => rows.map((r) => hitKey(f, r[0], r[2]))));
+/** An arm-1 hit's key in either register: file, thing, the hash of the whole literal. */
+export const hitKey = (file, thing, text) => `${file}\t${thing}\t${literalHash(text)}`;
+
+/**
+ * A banked row is `[thing, reason, the literal's first 120 characters (a label, read by no key), hash]`. The hash is one
+ * string, or a list for a row banked before F4 over several literals that share their first 120 characters (5 such
+ * rows at the re-key: the row still covers exactly the literals it covered, no more). A row with no hash covers nothing.
+ * @param {string} file @param {Array<any>} row @returns {string[]}
+ */
+export const rowKeys = (file, row) => (Array.isArray(row[3]) ? row[3] : row[3] ? [row[3]] : []).map((h) => `${file}\t${row[0]}\t${h}`);
+
+/** The arm-1 keys a register banks. @param {{ arm1: Record<string, Array<Array<any>>> }} register */
+export const bankedKeys = (register) => new Set(Object.entries(register.arm1).flatMap(([f, rows]) => rows.flatMap((r) => rowKeys(f, r))));
+
+/** The row the door banks for a hit. @param {{ thing: string, text: string }} hit @param {string} reason */
+export const bankRow = (hit, reason) => [hit.thing, reason, String(hit.text).slice(0, 120), literalHash(hit.text)];
 
 /**
  * The trees arm 1 reads. W2-B-DECLARE item 3 (record 288, ruling 1, B (i)): the display and the components joined
