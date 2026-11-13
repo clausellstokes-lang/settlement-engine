@@ -59,6 +59,20 @@ select rv.mk('pd-v31-marked', '{"name":"T","dmLayer":{"npcs":{}}}', '{"$veil":{"
 select rv.mk('pd-v31-opened', '{"name":"T","decrees":[]}', '{"$veil":{"v":1,"deltas":[{"address":"block:housekeeping.decrees","hidden":false}]}}', true);
 select rv.mk('pd-v31-narration', '{"name":"T"}', '{"$veil":{"v":1,"deltas":[{"address":"block:housekeeping.decrees","hidden":false}]}}', true, '{"name":"T","dmLayer":{}}');
 select rv.mk('pd-v31-nodm', '{"name":"T","decrees":[{"id":"d2"}]}', '{}', false);
+-- (10) towns stored by the deployed client (COHERENCE-VEIL-5): two shares hiding master-shape ties by hand
+--     (two hides and one), a new-shape tie hidden (not counted); three DM-revealed shares shutting a
+--     master person's goals and ties (the card's eyes under Reveal DM, the class switches under Reveal DM,
+--     one person revealed), and the same eyes with no reveal (not counted).
+--     expected: old_shape_shares_hiding_a_relationship_by_hand 2, old_shape_relationship_hand_hides 3,
+--     reveal_shares_shutting_goals_over_factionGoal 3, reveal_shares_shutting_ties_over_linkedFactionIds 3
+select rv.mk('pd-old-rel-a', '{"name":"T","npcs":[{"id":"npc-1","name":"Peiyun Huang"},{"id":"npc-3","name":"Jiahao Luo"}],"relationships":[{"npc1Id":"npc-1","npc2Id":"npc-3","type":"rival","description":"x"},{"npc1Id":"npc-3","npc2Id":"npc-1","type":"debtor","description":"y"}]}',
+  '{"$veil":{"v":1,"deltas":[{"address":"field:relationship:relationship.npc-1-npc-3-rival:description","hidden":true},{"address":"card:relationship:relationship.npc-3-npc-1-debtor","hidden":true}]}}');
+select rv.mk('pd-old-rel-b', '{"name":"T","relationships":[{"npc1Id":"a","npc2Id":"b","type":"ally"}]}', '{"$veil":{"v":1,"deltas":[{"address":"card:relationship:relationship.a-b-ally","hidden":true}]}}');
+select rv.mk('pd-new-rel', '{"name":"T","relationships":[{"from":"a","to":"b","type":"ally"}]}', '{"$veil":{"v":1,"deltas":[{"address":"card:relationship:relationship.a-b-ally","hidden":true}]}}');
+select rv.mk('pd-v42-cards', '{"name":"T","npcs":[{"id":"a","name":"Ada","factionGoal":"g","linkedFactionIds":["faction.x"]}]}', '{"$veil":{"v":1,"deltas":[{"address":"field:npc:a:goals","hidden":true},{"address":"field:npc:a:ties","hidden":true}]}}', true);
+select rv.mk('pd-v42-classes', '{"name":"T","npcs":[{"id":"a","name":"Ada","factionGoal":"g","linkedFactionIds":["faction.x"]}]}', '{"$veil":{"v":1,"deltas":[{"address":"class:npc:goals","hidden":true},{"address":"class:npc:ties","hidden":true}]}}', true);
+select rv.mk('pd-v42-member', '{"name":"T","npcs":[{"id":"a","name":"Ada","factionGoal":"g","linkedFactionIds":["faction.x"]}]}', '{"a":{"revealDm":true},"$veil":{"v":1,"deltas":[{"address":"field:npc:a:goals","hidden":true},{"address":"field:npc:a:ties","hidden":true}]}}');
+select rv.mk('pd-v42-noreveal', '{"name":"T","npcs":[{"id":"a","name":"Ada","factionGoal":"g","linkedFactionIds":["faction.x"]}]}', '{"$veil":{"v":1,"deltas":[{"address":"field:npc:a:goals","hidden":true},{"address":"field:npc:a:ties","hidden":true}]}}');
 -- (1) time limits: one per role, one per role in this database, one for every role in this database.
 --     expected: authenticated 8s (role_settings); anon 3s (role_in_db_settings); every_role_in_this_db
 --     60s; never the block's own 120s.

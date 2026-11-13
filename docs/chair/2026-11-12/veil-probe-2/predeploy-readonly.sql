@@ -198,4 +198,51 @@ select count(*) as reveal_dm_shares_sending_editor_state_today
    and (data ?| array['decrees','dmLayer'] or coalesce(ai_data -> 'aiSettlement', '{}') ?| array['decrees','dmLayer']
         or coalesce(gallery_member_overrides #> '{$veil,snapshot}', '{}') ?| array['decrees','dmLayer']);
 
+-- (10) TOWNS STORED BY THE DEPLOYED CLIENT, THE OLD SHAPE (the fourth review; COHERENCE-VEIL-4's cures,
+--      re-proved by COHERENCE-VEIL-5). Every town saved before the release was saved by master's client
+--      (db832c892), whose relationships name their two people `npc1Id`/`npc2Id` and whose people keep
+--      `factionGoal` and `linkedFactionIds`. At 203 the DM's hand-shut eyes are applied in the reader's
+--      browser only; 211 as cured applies them on the server in either shape.
+--      old_shape_shares_hiding_a_relationship_by_hand / old_shape_relationship_hand_hides — the fourth
+--        review's count (native/relcount.sql on its branch), kept to shares whose ties are in master's
+--        shape: 211 as first written dropped these eyes (V4-1); as cured it keeps them.
+--      reveal_shares_shutting_goals_over_factionGoal / reveal_shares_shutting_ties_over_linkedFactionIds —
+--        shares with a DM reveal (Reveal DM, or one person revealed) whose DM shut a person's goals (or
+--        ties) by hand, card or class, where a stored person carries the retired name: 211 as first
+--        written sent the name under the reveal (V4-2); as cured it withholds it with the eye.
+--      WORRIES: nothing to hold for at the push (211 as cured withholds every one); these are the shares
+--        the two cures protect, for the owner's information.
+select count(distinct s.id) as old_shape_shares_hiding_a_relationship_by_hand, count(*) as old_shape_relationship_hand_hides
+  from public.settlements s,
+       jsonb_array_elements(case when jsonb_typeof(s.gallery_member_overrides #> '{$veil,deltas}') = 'array'
+                                 then s.gallery_member_overrides #> '{$veil,deltas}' else '[]' end) e
+ where (s.is_public or s.unlisted_slug is not null)
+   and e -> 'hidden' = 'true'::jsonb
+   and (e ->> 'address' like 'field:relationship:%' or e ->> 'address' like 'card:relationship:%')
+   and jsonb_path_exists(coalesce(s.data, '{}') || jsonb_build_object('_c', coalesce(s.gallery_member_overrides #> '{$veil,snapshot}', '{}'))
+                         || jsonb_build_object('_n', coalesce(s.ai_data -> 'aiSettlement', '{}')),
+                         '$.**.relationships[*] ? (exists (@.npc1Id) || exists (@.npc2Id))');
+with shared as (
+  select s.id, s.gallery_share_dm, s.gallery_member_overrides ov,
+         coalesce(s.data, '{}') || jsonb_build_object('_c', coalesce(s.gallery_member_overrides #> '{$veil,snapshot}', '{}'))
+           || jsonb_build_object('_n', coalesce(s.ai_data -> 'aiSettlement', '{}')) src
+    from public.settlements s
+   where (s.is_public or s.unlisted_slug is not null)
+), revealed as (
+  select * from shared
+   where gallery_share_dm
+      or exists (select 1 from jsonb_each(case when jsonb_typeof(ov) = 'object' then ov else '{}' end) m
+                  where m.key <> '$veil' and m.value -> 'revealDm' = 'true'::jsonb)
+), shut as (
+  select r.*, e ->> 'address' a
+    from revealed r,
+         jsonb_array_elements(case when jsonb_typeof(r.ov #> '{$veil,deltas}') = 'array' then r.ov #> '{$veil,deltas}' else '[]' end) e
+   where e -> 'hidden' = 'true'::jsonb
+)
+select count(distinct id) filter (where (a = 'class:npc:goals' or (a like 'field:npc:%' and a like '%:goals'))
+                                    and jsonb_path_exists(src, '$.**.npcs[*] ? (exists (@.factionGoal))')) as reveal_shares_shutting_goals_over_factionGoal,
+       count(distinct id) filter (where (a = 'class:npc:ties' or (a like 'field:npc:%' and a like '%:ties'))
+                                    and jsonb_path_exists(src, '$.**.npcs[*] ? (exists (@.linkedFactionIds))')) as reveal_shares_shutting_ties_over_linkedFactionIds
+  from shut;
+
 rollback;
