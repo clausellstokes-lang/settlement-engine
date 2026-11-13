@@ -1,0 +1,3 @@
+tests/copy/voiceMechanics.test.js › E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) › per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)
+tests/lint/ledgerCitationIntegrity.test.js › [FILE-LEVEL] Command failed: git -C <TREE> ls
+tests/scripts/provenanceMap.test.js › [FILE-LEVEL] Command failed: git show refs/heads/review-fixes-2026-07-08:docs/PROVENANCE_MAP.tsv

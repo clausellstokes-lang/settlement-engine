@@ -1,0 +1,4 @@
+      Tests  54 failed | 38719 passed | 252 skipped (39025)
+   Start at  21:29:26
+   Duration  3786.85s (transform 118.43s, setup 64.60s, import 2414.48s, tests 7994.60s, environment 408.21s)
+

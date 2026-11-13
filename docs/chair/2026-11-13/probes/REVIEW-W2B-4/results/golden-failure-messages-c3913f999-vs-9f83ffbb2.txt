@@ -1,0 +1,6 @@
+cartography-calibration-corpus     c3913f999 979b28354e | 9f83ffbb2 979b28354e IDENTICAL
+espionage-dormancy-fence           c3913f999 d4f5169f49 | 9f83ffbb2 d4f5169f49 IDENTICAL
+generator-golden-master            c3913f999 6da1ed8c45 | 9f83ffbb2 6da1ed8c45 IDENTICAL
+pdf-golden-view-model-snapshot     c3913f999 523cd22844 | 9f83ffbb2 523cd22844 IDENTICAL
+dossier-prose-manifest             c3913f999 acd6adaddf | 9f83ffbb2 acd6adaddf IDENTICAL
+herald-knowledge-desk-golden       c3913f999 52933f4b49 | 9f83ffbb2 52933f4b49 IDENTICAL
