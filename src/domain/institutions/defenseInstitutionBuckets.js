@@ -87,7 +87,7 @@ export const DEFENSE_BUCKET_KEYWORDS = Object.freeze({
   ]),
   garrison: Object.freeze([
     'garrison', 'barracks', 'professional guard',
-    'professional city watch', 'multiple garrison',
+    'multiple garrison', // UPKEEP-CAPACITY C2 (the chair's G1): the professional city watch is the watch only
   ]),
   militia: Object.freeze([
     'citizen militia', 'militia', 'household levy', // 'household levy': the thorp's militia row (lane DEFENSE-2)

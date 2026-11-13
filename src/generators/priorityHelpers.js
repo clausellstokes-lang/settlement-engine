@@ -62,7 +62,9 @@ const getInstitutionNames = (institutions = []) => {
   const home = defenseFactsOf({ institutions });
   return {
     hasMilitaryInst:  hasAny(names, ['garrison','barracks','guard','watch','citadel','walls','militia','mercenary','navy','charter hall']),
-    hasGarrison:      hasAny(names, ['garrison','barracks','professional guard',PROFESSIONAL_CITY_WATCH,'multiple garrison']),
+    // UPKEEP-CAPACITY C2 (the chair's G1): the professional city watch is the watch, the top of the watch's ladder,
+    // and not a garrison: it opens the watch alone (`hasWatch`), on every home (the defence buckets read the same).
+    hasGarrison:      hasAny(names, ['garrison','barracks','professional guard','multiple garrison']),
     hasMilitia:       hasAny(names, ['citizen militia','militia']),
     hasWatch:         hasAny(names, ['town watch','city watch',PROFESSIONAL_CITY_WATCH,'village watch']), // F1: the village rung
     // COHERENCE-AGREE: a hired company and a gate are the defence home's answers (defenseFactsOf):

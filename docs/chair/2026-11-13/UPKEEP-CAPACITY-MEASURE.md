@@ -508,3 +508,57 @@ All five were measured APART on the corrected tree, with no factor (section 5, `
 - every expectation above for C2 to C6 on top of C1;
 - the page-line lists the two read-only search seats gave in sections 4 and 5 (three entries of each spot-checked by grep);
 - the C5 normalizer effect of the successor key (0 births hold both rows, so none is expected).
+
+---
+
+# SEAT 2 (UPKEEP-CAPACITY-2): C2 to C6, the cumulative move, the eight towns
+
+**Seat:** UPKEEP-CAPACITY-2, the branch's second seat, building to the chair's rulings of 2026-11-13 (copied here, since the chair's messages are not on the branch):
+- THE ANCHOR B, built at C1. ONE LAW FOR EVERY LADDER: a house's factor is read from the rungs that do the job, whatever step opened them; where a step makes a ladder (G2's levy under the militia), its rises are DECLARED with their counts, not special-cased.
+- THE HIRED-ONLY RULE STAYS MILITARY, as coded at C0 (the seven band words stand).
+- THE LAW OF THE COUNT: one job is counted once; a house opens two parts only where they are two jobs, each named in the test: the magic houses (force and craft), the village's Parish church (its clergy's powers; the building as the rallying point), the Monastery or friary (its clergy's powers; its infirmary).
+- G1 the professional city watch is the watch only, on every home. G2 the household levy opens the militia at its ladder's least rung. G3 the walk to another's church opens no clergy part; the parish row stays (G3p not built). G4 the ONE key `successor: 'Elder Grove Council'` on the Druid Circle family. G5 the alchemist's shop and quarter are a trade: out of the arcane opener, the arcane reliefs and the page's "Arcane defense" list; the alchemists part, its reliefs and the magic presence stay; the apothecary's houses are not opened.
+- G5's Defense display line ("Arcane Support … Detection, wards, counterspell", `defenseDisplay.js`, reading the Magic tab's census `magicReliance.js :: magicPractitioners`): neither file is touched; the chair has sent the line to the lane that holds the display. This seat lists the births where that line would still print against the stored profile.
+- A band that moves re-draws a town's politics (the engine's design): every such move declared with its counts. The page shows the ratings, never the machinery. No new record key beyond what a step names; no new vocabulary word.
+
+**How each step was measured** (helpers in `probes/UPKEEP-CAPACITY/seat2/`, the first seat's in the directory above):
+- each commit's tree archived from git (`tree.sh`, integrity-counted), the 3,756 births born at it by `corpus2.mjs` (`CAP_CANDS=base`, drops off; `runc.sh`), and `compare.py` against the step before (`move-<step>.txt`);
+- the golden corpus by `goldens.mjs` and `goldcmp.py` (`gold.sh`), measured only: no golden's door is opened;
+- the pages by `pages.mjs` at both trees (`pages.sh`), every changed line classed by `pdiff.py` (`<step>-lines.txt`);
+- the pin census by `suites.sh` in a detached census worktree (`census.sh`: local refs and config compared before and after every run), its `FAIL` lines against `reds-base-8ef42a051.txt`;
+- the gates on the touched files, each through `sh scripts/gate-tail.sh`.
+
+## M. The defence lane's tip merged before C2 (f6e1ad283)
+
+The hand-back's order: the defence lane's seventh seat edits `defenseInstitutionBuckets.js`, so its tip (3ac6abd4c, four commits past 7a5f76dc2: the realm register's war clause, the journal's power names, the PDF's readiness strip, the money line's crisis noun) was merged before C2 touched that file. **No conflict.** It did not touch the buckets file after all. **Its move on the corpus: 0 of 3,756 records differ** (`move-M1.txt`).
+
+**The wiring census, re-taken after the merge** (c6cace837, its own commit): the merge brought the new leaf `crisisNoun.js`, so the committed census was one producer file short and `proseWiringCensus.walker` read it stale (two reds at the merge, measured there). Re-taken by its door; `--check` passes; only `producerIndexFiles` moves, 1,330 → 1,331.
+
+## C2. G1: the professional city watch is the watch only, on every home
+
+**Built:** 'professional city watch' out of `priorityHelpers.js :: getInstitutionNames.hasGarrison` and out of `defenseInstitutionBuckets.js :: DEFENSE_BUCKET_KEYWORDS.garrison`. The facts home (`defenseFactsOf`: `hasGarrison`, `hasCommander`, `forceName`) follows the bucket with no edit. Red first: `tests/generators/upkeepCapacityGaps.test.js`, three tests red at the merge on exactly their assertions (the bucket held the watch; a city with the watch alone had a garrison part; a born city's garrison list held the watch), green after.
+
+**Not a defence home, so not touched (named):** `structuralValidator.js` still counts the city watch as a city's "professional military" (a generation rule, which repairs nothing on these births: every city holds a garrison house), and `threatDefensePolicy.js` lists it among a city's forces.
+
+**The move against the merge** (`move-C2.txt`):
+- **1,304 records differ: exactly the 1,304 holders of the city watch.** In each, only the stored `defenseProfile.institutions.garrison` loses the watch.
+- Readiness, the five scores, every part, the power structures, the AI threats and magic against the page: **0 moved.** The rest of the record: 0 differ.
+- **Golden corpus:** 168 of 525 records move, all in the defence profile; readiness, band and powers 0. Measured only.
+
+**The pages, twenty cities and metropolises** (`pages/C2-lines.txt`, every changed line classed):
+- **The force card** reads "3 forces" before and "2 forces" after, in all twenty: the city watch had been counted twice, once as a garrison and once as the watch. True after: a Garrison (or Multiple garrisons) and the watch.
+- **The order of the force cards and the Defence list** (tab, PDF, journal): the garrison house now comes before the watch. No name appears or vanishes.
+- **The headline** (PDF and journal): "held by the professional city watch" becomes "held by the garrison" in the twelve cities and **"held by the multiple garrisons"** in the eight metropolises. Each is true of the town. The metropolis's article reads badly: the writer is `src/pdf/lib/headlines.js :: defenseHeadline` (`the ${name}`), which already printed it for any metropolis without a city watch. Named for that file's holder; not touched.
+- No line on any other tab changes.
+
+**Pins and registers:**
+- `defenseInstitutionBucketsWork.test.js` "answers what it answered" re-keyed by identity with the cause: the garrison bucket holds the Garrison Barracks alone, and the watch holds the city watch.
+- **The record register** (`recordRegister.js :: KEY_UNPROVEN_AT_LENGTH_ONE`, through its own door with a dated note): `defenseProfile.institutions.garrison` JOINS (10 → 11). With the watch out, no city of the golden corpus lists more than one garrison house, and `recordRegisterTotality.walker` A4 says such a row "must JOIN".
+- **The holder table cites the buckets file BY LINE** (`src/domain/prose/holderTable.js`, five rows): the cure keeps every line of that file where it was (the note rides on the edited line), so no citation moves.
+- My own red, cured before the push: the first cut of the new test had a bare `not.toContain` (`negativeAssertionAnchor.walker`); it now uses `expectAbsentWithAnchor` with the garrison house as the anchor.
+
+**The pin census** (`census-C2.log`, the generators, lint, pdf and display suites, 563 files, run at the first cut 2b1cd8c5e): 47 `FAIL` lines against the base's 41 (`reds-base-8ef42a051.txt`); none gone. **Six new, each attributed by running its file at the merge and at the step:** two are the merge's (the wiring census, cured by c6cace837), four this step's (the anchor walker's two, the holder table's line citations, the register's A4), each cured as above. At the pushed C2 those four files and the defence suites read 128 of 128. Local refs and config compared before and after: the only change was this seat's own branch head.
+
+**The tree measured:** the corpus, the goldens and the pages were run at the first cut 2b1cd8c5e; the pushed C2 differs from it only in a comment's place, the test's anchor and the register row (no generator byte), and its golden corpus reads the same 525 hashes.
+
+**Gates** (each through `gate-tail.sh`): eslint 0 on the touched files; typecheck:domain:strict 0 (1,113 at its ceiling); typecheck:ratchet 0 (167 at its ceiling).
