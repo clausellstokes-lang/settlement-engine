@@ -54,15 +54,15 @@ for (let r = shard; r < rows.length; r += shards) {
     if (!line.todayCheck) line.todayGot = t;
     const keepPre = keepOf(m?.pre);
     line.todayAtPre = P.today(s, keepPre).score; // today's formula, read at the label before any crisis
-    for (const v of ['V1', 'V2']) {
+    for (const v of ['V1', 'V2', 'V3']) {
       const it = P.itemise(s, keepPre, v, m?.monthsPre);
-      line[v] = { score: it.score, total: r2(it.total), band: it.band, ceilinged: r2(it.ceilinged), overflow: it.overflow, groups: Object.fromEntries(Object.entries(it.groups).map(([k, x]) => [k, r2(x)])), size: it.size, danger: it.danger, n: it.n,
+      line[v] = { score: it.score, total: r2(it.total), band: it.band, ceilinged: it.ceilinged === undefined ? null : r2(it.ceilinged), overflow: it.overflow, dims: it.dims, reserve: it.reserve, scaleEnd: it.scaleEnd, altScore: it.altScore, altBand: it.altBand, hiredCapped: it.hiredCapped, groups: Object.fromEntries(Object.entries(it.groups).map(([k, x]) => [k, r2(x)])), size: it.size, danger: it.danger, n: it.n,
         sustainsLimited: it.sustainsLimited && { from: r2(it.sustainsLimited.from), to: r2(it.sustainsLimited.to) },
         crises: it.crises.map((c) => ({ name: c.name, took: Object.fromEntries(Object.entries(c.took).map(([d, x]) => [d, r2(x)])) })),
         parts: it.parts.map((p) => ({ g: p.group, n: p.name, pts: r2(p.points), raw: p.raw, scale: p.scale, share: p.share === null ? null : r2(p.share), crisis: p.crisis && Object.fromEntries(Object.entries(p.crisis).map(([k, x]) => [k, r2(x)])), note: p.note || undefined })) };
     }
     line.inst = (s.institutions || []).map((i) => i.name);
-    line.route = s.config?.tradeRouteAccess; line.terrain = s.config?.terrainType; line.threat = s.config?.monsterThreat;
+    line.milPri = s.config?.priorityMilitary; line.route = s.config?.tradeRouteAccess; line.terrain = s.config?.terrainType; line.threat = s.config?.monsterThreat;
   }
   o.write(`${JSON.stringify(line)}\n`);
 }
