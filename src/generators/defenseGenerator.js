@@ -39,7 +39,7 @@
 import { getInstFlags, getPriorities } from './helpers.js';
 import { computeEffectiveMagicPresence, neighbourMilitaryFactorOf } from './priorityHelpers.js';
 import { hasTradeRouteConnection } from '../domain/tradeRouteSemantics.js';
-import { partitionDefenseInstitutions, defenseTraditionNamesOf, defenseWallOf, magicPresenceRosterOf } from '../domain/institutions/defenseInstitutionBuckets.js';
+import { partitionDefenseInstitutions, defenseTraditionNamesOf, defenseWallOf } from '../domain/institutions/defenseInstitutionBuckets.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { readinessBandOf } from '../data/bandLadders.js';
 import { deriveMagicReliance } from '../domain/magicReliance.js';
@@ -231,11 +231,14 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
     if (inst.hasChurch) { c.churchInt = K.parishInt; c.churchMil = K.parishMil; }
     if (names.elders) { c.elderInt = K.eldersInt; c.elderMil = K.eldersMil; }
   }
-  // A small place has magical defence only where a magic house actually stands. A house that is its own named part
-  // (alchemists, druids, arcane, the hospital) leaves the presence: count once (ruling 4, reading A).
+  // A small place has magical defence only where a magic house actually stands. The presence reads the WHOLE roster
+  // (COHERENCE-UPKEEP-7, the chair's ruling W1: reading A withdrawn). The magic presence is the whole of the Magical
+  // Capability score, and no named house feeds that score through a second part: a magic house stands in two roles,
+  // force or craft (its named part) and magic (this one), each feeding scores of its own (count once, the design's
+  // law: no house feeds ONE score through two parts; tests/generators/magicCountOnce.test.js).
   const hasActualMagic = inst.hasMagicInst || t.hasDruid || t.hasArcane || names.actualMagic;
   const presence = magicOn && !(isSmall && !hasActualMagic)
-    ? computeEffectiveMagicPresence(magicPresenceRosterOf(institutions), { ...config, nearbyResources: config.nearbyResources || [] }).score
+    ? computeEffectiveMagicPresence(institutions, { ...config, nearbyResources: config.nearbyResources || [] }).score
     : null;
   const chains = chainsOf(settlement, config);
   const terrainType = config.terrainType || 'plains';
@@ -460,6 +463,8 @@ const listOf = (r) => {
     if (p.id === 'stores') line.label = `${line.label} (${p.months} months)`;
     if (p.id === 'terrain') line.label = `${line.label} (${p.terrain})`;
     line.full = tenths(pointsOf(p.raw));
+    // The scores this part feeds, by name (count once is a law per score: COHERENCE-UPKEEP-7, ruling W1). Computed, never stored.
+    line.feeds = Object.keys(p.raw).map((d) => /** @type {Record<string, string>} */ (SCORE_NAMES)[d]);
     if (p.crisis) line.crisis = Object.fromEntries(Object.entries(p.crisis).map(([k, v]) => [k, -tenths(v / n)]));
     if (p.id === 'will' && r.willHeld) line.held = -tenths(r.willHeld);
     rows.push({ exact: p === r.wallsPart && r.wallsFull ? pointsOf(r.wallsFull) : p.listed, line });
