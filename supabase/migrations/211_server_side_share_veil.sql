@@ -116,7 +116,7 @@ returns jsonb language sql immutable as $$
     },
     "relationship": {
       "lists": [["relationships"]],
-      "floor": ["id", "type", "typeName", "strength", "from", "to", "npc1Name", "npc2Name", "npc1Role", "npc2Role"],
+      "floor": ["id", "type", "typeName", "strength", "from", "to", "npc1Id", "npc2Id", "npc1Name", "npc2Name", "npc1Role", "npc2Role"],
       "fields": { "tension": ["tension"], "description": ["description"], "hooks": ["plotHooks"] }
     }
   }'::jsonb
@@ -424,8 +424,11 @@ begin
   end if;
   if kind = 'tension' then return public._gallery_veil_own_id(c, 'tension', jsonb_build_array(public._gallery_veil_or(c -> 'name', c -> 'title', c -> 'type'))); end if;
   if kind = 'conflict' then return public._gallery_veil_own_id(c, 'conflict', jsonb_build_array(c -> 'parties', c -> 'issue')); end if;
+  -- a tie's end is `from`, else master's stored `npc1Id`, else the name (and `to`, `npc2Id`): both
+  -- shapes are the same two ends (the client's v1 -> v2 step maps npc1Id -> from; the veil reads rows
+  -- as stored, and every row saved before the new client is in master's shape)
   if kind = 'relationship' then return public._gallery_veil_own_id(c, 'relationship', jsonb_build_array(
-      public._gallery_veil_or(c -> 'from', c -> 'npc1Name'), public._gallery_veil_or(c -> 'to', c -> 'npc2Name'), c -> 'type')); end if;
+      public._gallery_veil_or(c -> 'from', c -> 'npc1Id', c -> 'npc1Name'), public._gallery_veil_or(c -> 'to', c -> 'npc2Id', c -> 'npc2Name'), c -> 'type')); end if;
   return null;
 end $$;
 

@@ -233,8 +233,12 @@ export const CARD_KINDS = Object.freeze({
   relationship: {
     lists: [['relationships']],
     // PEOPLE-4 TIES (R-P7): the tie's ends are `from`/`to` (directed); the names keep their fields.
-    idOf: (card) => ownIdOr(card, 'relationship', card.from || card.npc1Name, card.to || card.npc2Name, card.type),
-    floor: ['id', 'type', 'typeName', 'strength', 'from', 'to', 'npc1Name', 'npc2Name', 'npc1Role', 'npc2Role'],
+    // A tie stored by master's client spells the same two ends `npc1Id`/`npc2Id` (the v1 -> v2 step,
+    // settlementMigrations.js, maps npc1Id -> from and npc2Id -> to, and the veil reads rows as stored):
+    // each end reads `from`, else `npc1Id`, else the name, so an eye master's panel shut on a stored
+    // tie keeps its address (COHERENCE-VEIL-4, V4-1; master's rule db832c892:galleryVeil.js:221).
+    idOf: (card) => ownIdOr(card, 'relationship', card.from || card.npc1Id || card.npc1Name, card.to || card.npc2Id || card.npc2Name, card.type),
+    floor: ['id', 'type', 'typeName', 'strength', 'from', 'to', 'npc1Id', 'npc2Id', 'npc1Name', 'npc2Name', 'npc1Role', 'npc2Role'],
     fields: {
       tension: ['tension'],
       description: ['description'],

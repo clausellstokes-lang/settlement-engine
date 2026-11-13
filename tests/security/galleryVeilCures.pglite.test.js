@@ -772,6 +772,106 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
       .toEqual(Object.fromEntries(Object.keys(out).filter((k) => k.startsWith('211')).map((k) => [k, { page: false, response: false }])));
   }, ROW_TIMEOUT_MS);
 
+  // ── V4 (the FOURTH review, REVIEW-VEIL-211-master-client-2026-11-13) ──────────────────────────
+  // Every town already saved was saved by master's client, in master's shape, and the veil reads
+  // those rows as stored (211 never runs the client's v1 -> v2 migration). Master's panel addressed
+  // a relationship by its `npc1Id`/`npc2Id` ends (galleryVeil.js:221 at db832c892); the new rule
+  // reads `from`/`to` (141383cd4), so an eye master's DM shut on a relationship fell away. And the
+  // CENSUS of every key master's veil read that the new one no longer reads: master removed an
+  // npc's `factionGoal` under its `goals` eye and its `linkedFactionIds` under its `ties` eye
+  // (db832c892:galleryVeil.js:155,159; master's generator writes both, npcGenerator.js:1285 and
+  // factionRoles.js:262), which the people car retired from the record, so the new tables dropped
+  // them: under Reveal DM (the full record, which keeps both) a shut eye left them served.
+  // Red at 5a2399cf9.
+  /** Master's relationship id, its own rule (db832c892:galleryVeil.js:221), for the addresses its panel wrote. */
+  const masterRelId = (c) => {
+    const own = typeof c.id === 'string' ? c.id : '';
+    if (own) return own;
+    const s = (v) => (typeof v === 'string' ? v : '');
+    const parts = [c.npc1Id || c.npc1Name, c.npc2Id || c.npc2Name, c.type];
+    return `relationship.${slugify(parts.map((p) => (Array.isArray(p) ? p.join('-') : s(p))).filter(Boolean).join('-'))}`;
+  };
+  let slugify;
+  /** The ends of a tie in master's stored shape (the inverse of settlementMigrations.js's tie step). */
+  const toOldShape = ({ from, to, ...rest }) => ({ ...rest, npc1Id: from, npc2Id: to });
+  const V41_NEW = {
+    name: 'T',
+    npcs: [{ id: 'npc-1', name: 'Peiyun Huang', role: 'smith' }, { id: 'npc-3', name: 'Jiahao Luo', role: 'guard' }],
+    relationships: [
+      { from: 'npc-1', to: 'npc-3', type: 'rival', typeName: 'Rival', npc1Name: 'Peiyun Huang', npc2Name: 'Jiahao Luo', description: 'V41_DESC_FIELD' },
+      { from: 'npc-3', to: 'npc-1', type: 'debtor', typeName: 'Debtor', npc1Name: 'Jiahao Luo', npc2Name: 'Peiyun Huang', description: 'V41_DESC_CARD', tension: 'V41_TENSION_CARD' },
+      { from: 'npc-1', to: 'npc-3', type: 'ally', typeName: 'Ally', npc1Name: 'Peiyun Huang', npc2Name: 'Jiahao Luo', description: 'V41_KEEP' },
+    ],
+  };
+  const V41_OLD = { ...V41_NEW, relationships: V41_NEW.relationships.map(toOldShape) };
+  // the addresses master's panel wrote: one description eye, one whole card
+  const V41_DELTAS = () => [
+    { address: `field:relationship:${masterRelId(V41_OLD.relationships[0])}:description`, hidden: true },
+    { address: `card:relationship:${masterRelId(V41_OLD.relationships[1])}`, hidden: true },
+  ];
+  const v41Secret = (v) => has(v, 'V41_DESC_FIELD') || has(v, 'V41_DESC_CARD') || has(v, 'V41_TENSION_CARD');
+
+  it('V4-1 (the review row): a relationship eye master\'s DM shut on a town stored in master\'s shape holds in every read', async () => {
+    slugify = (await import('../../src/domain/dossier/entityLinks.js')).slugifyEntity;
+    expect(masterRelId(V41_OLD.relationships[0])).toBe('relationship.npc-1-npc-3-rival');
+    const out = {};
+    for (const [shape, doc] of [['old', V41_OLD], ['new', V41_NEW]]) {
+      for (const dm of [false, true]) {
+        const r = await v31Reads(LIVE.db, doc, veil.writeShareVeil({}, V41_DELTAS()), { dm });
+        // anchored: the open tie's description is drawn and served, so the reads are the town's ties
+        expect(has(r.page, 'V41_KEEP') && has(r.gallery, 'V41_KEEP') && has(r.import, 'V41_KEEP'), `${shape} dm=${dm}: anchor`).toBe(true);
+        out[`${shape} dm=${dm}`] = { gallery: v41Secret(r.gallery), link: v41Secret(r.link), import: v41Secret(r.import), map: v41Secret(r.map), page: v41Secret(r.page) };
+      }
+    }
+    const clean = { gallery: false, link: false, import: false, map: false, page: false };
+    // the control: the same ties in the new shape (the same ends, as the migration maps them) hold already
+    expect(out['new dm=false']).toEqual(clean);
+    expect(out['new dm=true']).toEqual(clean);
+    expect(out).toEqual(Object.fromEntries(Object.keys(out).map((k) => [k, clean])));
+  }, ROW_TIMEOUT_MS);
+
+  it('V4-1 (the client): both shapes are the same two ends — the client\'s id on a stored tie is master\'s, and its migrated twin\'s', async () => {
+    slugify = (await import('../../src/domain/dossier/entityLinks.js')).slugifyEntity;
+    const { migrateV1toV2 } = await import('../../src/domain/settlementMigrations.js');
+    const migrated = migrateV1toV2(structuredClone(V41_OLD)).settlement.relationships;
+    for (const [i, old] of V41_OLD.relationships.entries()) {
+      expect(veil.CARD_KINDS.relationship.idOf(old), `tie ${i}: master's address`).toBe(masterRelId(old));
+      expect(veil.CARD_KINDS.relationship.idOf(migrated[i]), `tie ${i}: the migrated twin`).toBe(masterRelId(old));
+    }
+    // and the client's own projection of an unmarked-era delta list over the stored town hides them
+    const projected = veil.projectShareVeil(veil.galleryPayloadFor(V41_OLD, {}), veil.writeShareVeil({}, V41_DELTAS()));
+    expect(has(projected, 'V41_KEEP')).toBe(true);
+    expect(v41Secret(projected)).toBe(false);
+  }, ROW_TIMEOUT_MS);
+
+  it('V4-1 (the class): 3,000 fuzzed ties in master\'s shape: server id = client id = master\'s id = the migrated twin\'s id', async () => {
+    slugify = (await import('../../src/domain/dossier/entityLinks.js')).slugifyEntity;
+    const { migrateV1toV2 } = await import('../../src/domain/settlementMigrations.js');
+    const r = rngOf(4101);
+    const OLD_KEYS = ['id', 'npc1Id', 'npc2Id', 'npc1Name', 'npc2Name', 'type'];
+    const texts = Array.from({ length: 3000 }, () => {
+      // both ends present most of the time (what master wrote), sometimes one or neither (a hand edit)
+      const keys = OLD_KEYS.filter((k) => (k === 'npc1Id' || k === 'npc2Id' ? r() < 0.9 : k === 'id' ? r() < 0.15 : r() < 0.6));
+      return `{${keys.map((k) => `${JSON.stringify(k)}:${valueToken(r)}`).join(',')}}`;
+    });
+    const rows = (await LIVE.db.query(`select e::text as t, public._gallery_veil_card_id('relationship', e) as id
+        from jsonb_array_elements($1::jsonb) with ordinality x(e, o) order by o`, [`[${texts.join(',')}]`])).rows;
+    expect(rows).toHaveLength(3000);
+    const bad = []; let moved = 0;
+    for (const { t, id } of rows) {
+      const card = JSON.parse(t);
+      const master = masterRelId(card);
+      const client = veil.CARD_KINDS.relationship.idOf(card);
+      const twin = migrateV1toV2({ relationships: [card] }).settlement.relationships[0];
+      if ('from' in twin) moved += 1;
+      const twinId = veil.CARD_KINDS.relationship.idOf(twin);
+      if (id !== master || client !== master || twinId !== master) bad.push(`${t.slice(0, 120)} -> server ${id}, client ${client}, twin ${twinId}, master ${master}`);
+    }
+    // anchored: most ties were moved by the migration, so the twin is the new shape
+    expect(moved).toBeGreaterThan(2000);
+    expect(bad.slice(0, 20)).toEqual([]);
+  }, ROW_TIMEOUT_MS);
+
   // ── THE ROLLBACK ──────────────────────────────────────────────────────────────────────────────
   it('the rollback: 001..211 then supabase/rollback/211_*.down.sql equals a chain stopped at 210, byte for byte', async () => {
     const down = readdirSync(ROLLBACK).filter((f) => /^211_.*\.down\.sql$/.test(f));
