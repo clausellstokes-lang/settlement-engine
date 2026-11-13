@@ -63,3 +63,30 @@ describe('FINDING 1: the pipeline rail\'s chain receipts name the toll\'s source
     });
   }
 });
+
+describe('FINDING 1: the read-time chain projections name the toll by the town\'s access', () => {
+  // `deriveSupplyChainState` is the canonical chain projection: its `name` and `dependencies` are printed by the
+  // explanation rail ("… requires resource: …", "… is the supply chain for …"), the causal views, the capacity and
+  // causal-state contributors and the counterfactual's labels
+  const PRINTED_SOURCE = { river: 'River traffic', port: 'Harbour traffic' };
+  for (const [seed, [access, printed]] of Object.entries(SEEDS)) {
+    test(`${seed} (${access}): the projection, the explanation and the causal view name "${printed}", never a crossroads`, async () => {
+      const { deriveAllSupplyChainStates } = await import('../../src/domain/supplyChainState.js');
+      const { explainSupplyChain, entityCatalog } = await import('../../src/domain/explanation.js');
+      const { deriveCausalView, supportedCausalViews } = await import('../../src/domain/causalViews.js');
+      const s = births[seed];
+      const toll = deriveAllSupplyChainStates(s).find((c) => c.resourceKey === 'crossroads_position');
+      expect(toll, 'anchored: the toll is projected').toBeTruthy();
+      expect([toll.name, toll.dependencies.find((d) => d.startsWith('resource: '))]).toEqual([printed, `resource: ${PRINTED_SOURCE[access]}`]);
+      expect(toll.resource, 'the projection keeps the record\'s resource (a logic key)').toBe('Strategic Crossroads');
+      const words = JSON.stringify([
+        explainSupplyChain(s, toll.id),
+        entityCatalog(s),
+        // a view's words are its summary; its entries are the projection's data (the record's `resource` key)
+        supportedCausalViews().map((v) => deriveCausalView(s, v).summary),
+      ]);
+      expect(words).toContain(printed);
+      expect(words.match(/Strategic Crossroads[^"]*/g) || []).toEqual([]);
+    });
+  }
+});
