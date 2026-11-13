@@ -167,3 +167,84 @@ seat's). The stopped base suite's partial red-file list: 34 files, in the scratc
 - "A few households still go short, and hunger is already here." · "Some households still go short, and hunger is already
   here." · "Many households go short, and hunger is already here." (b35714f2b)
 - "Needed, and not brought in:" (48bfc15c0)
+
+---
+
+# PART 2 — the second seat (W2-C-LEAVES-2, 2026-11-13, from a43dd1400)
+
+**Seat:** session_01FE9mEuJNaJji3WRWgzwxAX. Scratch worktree on a local branch at the lane's tip (read back from origin:
+a43dd1400, as the brief said); `npm ci` there; plain pushes. The census at a43dd1400 (the 720, app shape) was run once
+as this seat's "before" (its dumps rendered from module copies loaded before the first edit; checked).
+
+## The chair's assignment to this seat, 2026-11-13 (copied in; the chair's messages are not on the branch)
+The rest of the lane's list, then the lane's one final statement; each row measured again on this tree in the app's
+shape (`selectedStresses`, `selectedStressesRandom:false`), red first, one cause per commit: the rest of item 4c (the
+chain cards that read as running under a crisis; the raw local-production pills; the guild ranges); the medium entries
+of validationOnPage.js (6) and defenseDisplay.js (7); item 5 as the brief lists it; the final statement with the field
+diff empty. No adjacent repair. Never rewrite a commit at or below d79ea4c70. Ruled: (a) the exploitation grade cards
+stay parked [SUPERSEDED by the ruling on P1 below]; (b) plural streets, an agora, a civic or market square, masonry,
+neighbourhoods and suburbs are a size error in a thorp or a hamlet; quarters and districts in any place below the
+middling band, a village of up to about 350 included; (c) every sentence of what a town can pay reads one home, the
+economic survival row's band (the upkeep lane builds it): no pay line here reads another, and the defence display's
+pay lines are that lane's; (d) the page states facts in plain words and never the machinery: a row that only says how
+the model worked leaves the page; (e) new words are listed with the town each was read in; (f) a register or pin moves
+only through its own door, shrink only, with its cause.
+
+## The chair's ruling on P1, the exploitation grade cards (18:04 UTC; copied in, abridged only in layout)
+1. The chain model's silence is "not known", never "not worked": where no chain takes a resource
+   (`chainModelsResource` false), the analysis's grade stands (the 79 Partial/Full cards stay).
+2. Where the model takes the resource, the leaf governs the yes or no on the Resources tab's cards and the PDF's alike,
+   through ONE display reader both read: leaf worked + analysis Unexploited → shown in the PARTIAL group (no new word or
+   grade); leaf worked + Partial/Full → the analysis's grade stands; leaf not worked (a modelled chain idle here) +
+   Partial/Full → COUNT FIRST and read twelve: where the record bears the leaf out the card goes to Unexploited; if any
+   of the twelve bears the ANALYSIS out, stop on that class alone, with the towns.
+3. The card never disagrees with the page's "No one here works the …" sentence: both read the one reader.
+4. A card's body says only what the record holds; a moved card keeps no false body line; if a body cannot be filled
+   truly from the chain model and the roster, stop with three examples; no invented wording.
+5. Files: ResourcesTab.jsx and pdf/sections/ResourcesProduction.jsx join the manifest; pdf/lib/viewModelBodySlices.js
+   (also changed on the defence lane): only the grade's own lines, named as shared. The desk lens
+   (generalStateProse.js) is not mine: count and list any disagreement for its holder.
+6. Each class before and after on the 720; twelve of each read; a guard on "Unexploited" beside a working chain and on a
+   card that disagrees with the sentence; the view-model snapshot and the PDF golden may move: declared by measure.
+7. Count and list, not cure: towns whose page prints an export of a raw good beside a not-worked line or card for the
+   same resource (count + three examples).
+Placed after the item in hand, its own commit, measured first, red first.
+
+## The chair's rulings from the independent read REVIEW-R2-STAGES at d79ea4c70 (18:07 UTC; copied in) — BEFORE P1
+- **R1 (HIGH):** the half-way line still prints false in 24 of the 28 reworded (#628, #911 among them). (a) "by kind"
+  answers a house with no catalogue row too: a finisher is any live-roster house that does that finishing (family and
+  ladder where the catalogue has a row, the trade where it has none); (b) no half-way line where ONE finisher stands;
+  (c) re-key gapLineHousesByKind's pin of a false line, by identity, with the cause. Acceptance: the reader's 24 at
+  zero by its probe, the 4 true still printing, every half-way line left on the 720 read in its town.
+- **R2 (HIGH, origin this lane):** "Needed, and not brought in" names goods the town makes (174 of 1,649 needs, 149
+  towns). A need leaves that line where the town exports the good, produces it locally, or a working chain makes it.
+  Acceptance: needs-local.mjs at zero on the 720; thirty lines left read; a guard on a need the town makes; an empty
+  line does not print.
+- **R3 (MEDIUM):** a chain works a resource only through a house whose trade is to extract or process it (no
+  fortification through walls on a quarry, no pilgrimage or healing through a church on herbs, no brickmaker on a
+  quarry; foraging households do work what they gather). One named, closed list in the leaf's file with each entry's
+  cause; if the true home is a chain-data row another lane holds, name it and stop on that row. Measure: the 116
+  removed lines classed again by gap-why.mjs: the 8 back, the 22 stone lines read and returned where no house quarries
+  or dresses stone, the 52 false still out.
+- Finding 8 (low, the imports list under a siege) is not this lane's origin: listed for the seat that holds it.
+
+## Items (this seat)
+| item | commit | on the 720 (tip before → after) | on the reader's 20 | read of 30 | guard (red at → green) |
+|---|---|---|---|---|---|
+| 4c chain cards under a crisis | 832d140fe | 134 pills in 40 towns now "Impaired" (98 chain: famine's failed source 23, siege field work 58, siege trade 17; 36 service cards whose every house the Institutions tab marks impaired) | 15 in 5 towns | 29 false, 1 doubtful (divine healing at hot springs in a siege), 0 true | economicsChainStateUnderCrisis.test.jsx (a43dd1400: 3 of 4 red) |
+| 4c "Produced locally" | d5d156deb | 1,864 of 8,928 pills out in 593 towns (46 towns lose the row) | 50 in 16 towns | 28 false, 2 doubtful (game meat, fish in a thorp: the food record names the source), 0 true | economicsProducedLocally.test.jsx (832d140fe: 3 of 3 red) |
+
+## Stops and calls of this seat
+- **The guild ranges (4c) — STOP for that item:** lane/r2-code-b-2026-11-13 (231798731, "a house named as a label carries
+  no catalogue count or gate") changed the label seam (institutionDisplayName.js :: institutionHouseLabel) and
+  SupplyChainsPanel.jsx :: chainFlowFacts, which the Economics flow cards' "Via" read: that lane cures the cards' ranges.
+  What it leaves in my file: the service cards' "Via:" line (EconomicsTab.jsx, `svc.institutions.map(institutionDisplayName)`:
+  "Taverns (5-20)", "major monasteries (5-10)") should read institutionHouseLabel once the lanes compose — one line, for
+  whichever lane merges second. The Institutions/Power/Services/NPC rows (#686, #738, #950) are not in my files.
+- **#608 "26/100" beside "Prosperous":** the prosperity glance is changed by lane/coherence-upkeep-2026-11-12 (d8986c04c,
+  EconomicsGlance's call in EconomicsTab.jsx): that lane's.
+- **#195, #196 (a Mill and a parish chain "Running" via a house the hamlet only walks to):** the card's "present" read is
+  SupplyChainsPanel.jsx :: chainFlowFacts, changed by r2-code-b: parked; recommendation: the card reads a chain run only
+  through an "Access to …" row as not run here (the same test localProductionAsPrinted uses).
+- **Config:** `npm ci` (husky) set `core.hooksPath=.husky/_` in the shared local config; the main checkout had no active
+  hooks before and has none now (no `.husky/_` there). Kept for the lane hook; unset after the last push.
