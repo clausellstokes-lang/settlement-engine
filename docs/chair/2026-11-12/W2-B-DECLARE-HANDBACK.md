@@ -123,3 +123,59 @@ Run twice. **First at `5b1fad1e9`** (`npx vitest run --maxWorkers=2`, ledger bra
 - **48 titles in 36 files: inherited** — red at the base `1930cec6e` with the same titles (the base re-run), none this lane's: the build and landing fixtures, the engine replay and aiGrounding bundle (stale at base), the generator pin and golden-corpus arms, the four goldens of the six surfaces (red at the base, byte-identical output, §8), the prose walkers, the domain re-derivation arms, the site-coherence and institution-table ratchets; and five files that fail to load at both (`newsHeadlineContract`, `newsVoiceContract`, `observedShapeReaders`, `proseFamilyContract`, `writerReach`: the observed-shape seed `osr-tier-14`).
 - **4 titles in 3 files: this lane's, parked** (§10.6): `aiCharterBundle.freshness`, `aiOutputSchemaBundle.freshness`, and their two rows of `edgeSharedBundleReproducibility` — the two bundles carry `factVocabulary.js` (item 4a); one whole `npm run build:edge-shared` at the merge seat cures them with the two bundles already stale at base.
 - **No other new red.** No test skipped, no ceiling raised, no pin loosened.
+
+---
+
+# PART TWO — the second seat (2026-11-13), on REVIEW-W2B (NOT CLEAR)
+
+**Cut from** `9d5d6e091`. **Stopped at its context limit** with F3, F1, F10 and the chair's added item done; F2, F4–F9, F11–F13 NOT done (§6). Every count below was executed unless marked PLAUSIBLE.
+
+## 1. The commits
+
+| commit | item | what |
+|---|---|---|
+| `45de9365a` | 0 | the score: `probes/W2-B-DECLARE/fixture.sh` renders the cold list's 30 towns through the census render, `recall.mjs` scores the page check by the list's classes |
+| `3b8b6d7ad` | F10 | the rule book exempt by its site (`ARM1_RULE_BOOK`); its 4 banked rows dropped (2410 → 2406) |
+| `97daac24b` | F3 | a carrier counts only on an object a door draws; a declaration must IMPLY the word (names) or its negation (denies) |
+| `a51634ede` | F1 | the vocabulary generated from the catalogues; the list named registered-word findings |
+| `aa41b1f25` | chair's item | DS-GEN-9: an absent anchor flag reads "not anchored" (page count OWED, §5) |
+
+F10 went before F3 (a call taken): the door rightly refused to bank a leaf string the lane wrote in `registeredWords.js`, so the exemption had to exist first. The chair's item arrived after F1 had landed; it was done next.
+
+## 2. The score (the fixture: 361 cold lines, 30 towns; no birth moved, so the dumps of 45de9365a are re-read)
+
+| | recall | HIGH | MED | LOW | findings (naming a cold line) |
+|---|---|---|---|---|---|
+| before (9d5d6e091 = 97daac24b) | 29/361 (8%) | 12/67 | 10/180 | 7/114 | 302 (30) |
+| after F1 (a51634ede) | **109/361 (30%)** | **45/67 (67%)** | 40/180 | 24/114 | 796 (118) |
+| without pattern 20, before → after | 24/351 → 104/351 | | | | 278 (25) → 772 (113) |
+
+By class after (before): a house, role or force lacked 36/79 (5) · normal times under a crisis 22/60 (1) · a size 21/39 (5) · a count 9/14 (8) · a figure 9/45 (8) · two homes 5/22 (1) · internal text 4/19 (0) · a resource or chain state 2/42 (1) · the four "other" 1/41 (0). Per family step (on the record in the F1 commit): the first generated cut reached 126/361 for 1,127 findings; six words read mostly in another sense (stable, salt, fence, fair, mint, printing) were dropped on measure → 109 for 796.
+
+**PRECISION: NOT READ.** The floor is mechanical — findings naming a cold line: 30/302 (10%) before, 118/796 (15%) after — and an unmatched finding is not thereby true. The brief's read sample of sixty was not done (§6). The largest unmatched words after: famine 60 (headings and service purposes: "hold off famine"), house: fishmonger 54 (an NPC title "Master Fishmonger" where no fishmonger house stands), mill 48, siege 36, religiousHouses 32, occupation 29 (past events), house: fishing 26, house: reeve 26 ("the granary reeve"), streets 23 (18 match). Recall is raw instrument output: no "another sense" classing is applied (classify.mjs is the census probe's, sentence-fitted, and was not re-run).
+
+## 3. The vocabulary: 234 words, where generated
+
+`registeredWords.js :: VOCABULARY_SIZE` = written 32 · houses 157 (the institution catalogue's head phrases, leaf: the live roster by stem, or a power of the name) · resources 33 (`RESOURCE_DATA` labels, leaf: `config.nearbyResources` less depleted) · roles/staff/forces 9 (clergy, armedForce, guardCaptain, notary, smith, mason, physician, armoury, prisoner) · states and size 3 (openTrade ⟂ a siege in force, famineToCome ⟂ a famine in force, streets: population middling+). Each family is a word family and a leaf; none quotes a line. Most families' atoms wait for a `factsOf` getter (F12, not done), so their arm-1 lines are banked, cured at the print site or when the atom lands.
+
+## 4. The stricter guard (F3): rows turned red
+
+157 literals red under the narrowed crediting and the implication rule, every one at the lane's base `1930cec6e`, banked by the door under `implied` (none the lane wrote): institutionDescVariants 25, npcData 17, the kernel pools 28, institutionServices 13, safetyProfile 11, powerData 6, holderTable 5, 52 in 32 other files. Plus 20 rows re-keyed famine → starving by identity (the word was split so its declaration implies it). F1's families: 2,169 rows under `family`, all at the base. The widened register: 2406 → 4732. The review's seven F3 plants are kept as tests; each was green at the old rule book and is red now.
+
+## 5. The chair's added item (DS-GEN-9)
+
+Source supports the ruling (the generator's timeline: `anchored: e.anchored || false`). 70 of 720 births have a marker event with no flag (thorp 17, hamlet 26, village 19, town 5, city 2, metropolis 1; calm 29, crisis 41); every event-type pool has "not anchored" variants. **The ten cases' page count before and after is OWED**: my probe's read of `generalDeskLines(...).history.identity` returned nothing at either tree (the probe's shape, not the page). PLAUSIBLE, not CONFIRMED. It moves DS-GEN-9's print in up to 70 births (display only).
+
+## 6. NOT DONE — each with its recommendation (the next seat, in this order)
+
+1. **F2** (HIGH): `NEW_WORDS.powersCount` — split "the ruling N" off to read the ruler's faces (`dmPowerViewOf(...).rulingThree.length`); keep `factions` for "N powers".
+2. **F4**: church words read the faith reading (`hasChurch`; atoms `church`, `church access`), shrine words `sacredHouse`; `religiousHouses` the same; the procedure §11's fourth case (shrine only). The `clergy` family of F1 already reads the faith reading.
+3. **F5**: the strip ban's `isUnwrap` and `stripKey` (count per receiver); the review's 13 shapes as plants.
+4. **F13 / F6**: number words past six, "a dozen", digits, guilds as a counted noun; `housesCount` reading a range row's own minimum; `law` split from law enforcement; classify.mjs: VHOUSE and VLAW withdrawn, VWAR and VOCC filed as two-home disagreements.
+5. **F9, F11**: classify.mjs `eventhook` by tense; pagemeasure.mjs attribution through the pattern's owner.
+6. **F12**: the readers and dimensions now (practitioner, food balance, import share, and F1's `house:` / `resource:` atoms), the getter lines at the upkeep merge.
+7. **Precision** by a read sample of sixty, before and after; the 720 totals with and without pattern 20; the census counter base against tip; the field diff on the 720 (no generator file is touched by F3/F1/F10; the chair's item is display); the draft record of the six surfaces (the chair's item may move the prose manifest and the PDF golden); the whole suite at the final tip — **none run by this seat**.
+
+## 7. Gates at each `src/` commit
+
+check-domain-strict exit 0 (1113, ceiling 1113) · typecheck:ratchet exit 0 (167, ceiling 167) · eslint on the touched files exit 0 · the walker 36/36 and tests/domain/facts (269 with the walker) · the page check 7/7 · the desk test 71/71 · door --check fresh 0, stale 0. Every push passed its three pre-push gates.
