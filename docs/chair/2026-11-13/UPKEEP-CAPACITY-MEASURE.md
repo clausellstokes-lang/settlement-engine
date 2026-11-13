@@ -562,3 +562,34 @@ The hand-back's order: the defence lane's seventh seat edits `defenseInstitution
 **The tree measured:** the corpus, the goldens and the pages were run at the first cut 2b1cd8c5e; the pushed C2 differs from it only in a comment's place, the test's anchor and the register row (no generator byte), and its golden corpus reads the same 525 hashes.
 
 **Gates** (each through `gate-tail.sh`): eslint 0 on the touched files; typecheck:domain:strict 0 (1,113 at its ceiling); typecheck:ratchet 0 (167 at its ceiling).
+
+## C3. G2: the household levy is the militia, at its ladder's least rung
+
+**Built:** 'household levy' into `priorityHelpers.js :: getInstitutionNames.hasMilitia`; the defence bucket and the facts home already read it so. By the one law for every ladder (no special case), the militia's ladder is now the catalogue's two rungs, Household levy → Citizen militia: **the levy reads 0.8 and the hamlets' and villages' Citizen militia reads 1.2.** Red first: `upkeepCapacityGaps.test.js`, three tests red at C2 (the roster flag; the levy thorps' militia part, at the least rung; the citizen militia at 1.5 times the levy in the same place), green after.
+
+**Correction of the hand-back, by name:** it said that 108 of the 143 levy thorps hold a palisade "which today counts as unmanned". **That is false at this tree:** the small place's armed households are an armed body (`ARMED` holds `households`), so those palisades were already manned and counted whole (cold-thorp-191: walls 6.0 of 6.0 at C2, no unmanned line). The levy's rise is its own militia part, the will it now carries (R13) and what that force lets sustain (limit 1).
+
+**The move against C2** (`move-C3.txt`): **388 places rise, none falls**; mean over all +0.31; 95 bands, all up one (Vulnerable → Lightly Defended 50, Undefended → Vulnerable 37, Lightly Defended → Defensible 8). Towns and larger: 0.
+
+| | Holders | Rise | Mean over holders / most | Bands | Power structures re-drawn |
+|---|---|---|---|---|---|
+| Levy thorps | 143 | 143 | +6.26 / +10 | 74 | 34 |
+| Citizen militia (hamlets and villages; the 1.2 rung) | 256 | 245 | +1.07 / +2 | 21 | 21 |
+
+- Military: 396 rise (levy thorps +19.0 on average among movers, at most +33; the militia hamlets and villages +2.0); 136 band changes, all up (Weak → Adequate 75, Adequate → Strong 31, Critical → Weak 19, Critical → Adequate 8, Weak → Strong 3).
+- Beasts: 384 rise; 63 bands up (Critical → Weak 59). Order: 347 rise; 40 bands up. Supply 9 and magic 3 rise (through limit 1); no band.
+- **55 power structures re-drawn, each with a band move; no power appears or vanishes; no legitimacy label changes.** No AI threat changes; magic against the page 0.
+- The rest of the record: 168 differ outside defence and powers: in the 143 levy thorps, the stored copy of the roster flags `economicState.compound.inst.hasMilitia` (and the safety profile's copy) turns true; in 25 militia places, the power trace's legitimacy figure follows the readiness.
+- **Golden corpus:** 0 of 525 rows move.
+
+**The pages: twenty levy thorps and ten militia hamlets and villages** (`pages/c3-force.txt`, `pages/C3-lines.txt`):
+- The force card names the levy or the militia before and after: unchanged, and agrees.
+- **The Invasion & War row** rises with the military score in 18 of the 30 (for example cold-famine-thorp-10 Critical → Adequate, cold-thorp-195 Critical → Adequate); its sentence already spoke of armed townsfolk ("Every household … would send someone to the walls"), and now its band agrees with it.
+- **The posture band word** rises in 15 (as the move above), and the guard assessment's band line follows it (for example "You can walk into the centre of Ononkotan without being stopped" → "Ononkotan has not been attacked lately, and if it were, it would struggle to hold").
+- **The selector's known fault, counted:** 3 of the 30 still print a "nobody" line beside a levy or a militia after the move: cold-thorp-191 and fresh6-famine-thorp-18 ("Much of …'s perimeter has nobody on it"), fresh6-famine-hamlet-7 ("You can walk into the centre … without being stopped, challenged or counted by anybody at all"). Both lines are their band's pool lines; cured on another lane.
+
+**Pins:** none re-keyed (the C2 test file gains this step's describe). **Pin census** (`census-C3.log`): 41 `FAIL` lines, exactly the base's list; none new, none gone. Local refs and config compared: the only change was this seat's own fetch of the defence lane.
+
+**Gates:** eslint 0 on the touched files; typecheck:domain:strict 0 (1,113 at its ceiling); typecheck:ratchet 0 (167 at its ceiling).
+
+**The tree measured:** the corpus, goldens and pages ran on a measuring commit of the same generator bytes (ed9ec6702, on the first cut of C2); this commit's generator differs from it in no byte.

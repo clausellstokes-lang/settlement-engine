@@ -11,6 +11,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { defencePartsOf } from '../../src/generators/defenseGenerator.js';
 import { getInstFlags } from '../../src/generators/helpers.js';
 import { keepOfRecord } from '../../src/domain/facts/keep.js';
+import { DEFENCE_TUNING } from '../../src/data/defenceWeights.js';
 import { partitionDefenseInstitutions } from '../../src/domain/institutions/defenseInstitutionBuckets.js';
 import { defenseFactsOf } from '../../src/domain/defense/defenseFacts.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -18,7 +19,8 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** @type {Record<string, any>} */
 const births = {};
-const KEYS = ['cold-city-227', 'fresh6-metropolis-30'];
+const KEYS = ['cold-city-227', 'fresh6-metropolis-30', 'cold-thorp-191', 'fresh6-thorp-52'];
+const CITIES = ['cold-city-227', 'fresh6-metropolis-30'];
 
 /** @param {string} key */
 const bear = (key) => {
@@ -59,7 +61,7 @@ describe('G1 (C2): the professional city watch is the watch only, on every home'
   });
 
   test('RED-FIRST: a city holding the watch alone (its garrison houses taken out) has a watch part and no garrison part', () => {
-    for (const key of KEYS) {
+    for (const key of CITIES) {
       const s = births[key];
       expect(s.institutions.some((i) => i.name === 'Professional city watch'), key).toBe(true);
       const alone = without(s, (n) => /garrison|barracks|professional guard/i.test(n));
@@ -69,11 +71,40 @@ describe('G1 (C2): the professional city watch is the watch only, on every home'
   });
 
   test('the stored force cards: the garrison bucket of a born city holds its garrison houses and not its watch', () => {
-    for (const key of KEYS) {
+    for (const key of CITIES) {
       const g = births[key].defenseProfile.institutions;
       const anchor = key.includes('metropolis') ? 'Multiple garrisons' : 'Garrison';
       expectAbsentWithAnchor(g.garrison.map((i) => i.name), 'Professional city watch', anchor, key);
       expect(g.watch.map((i) => i.name), key).toContain('Professional city watch');
     }
+  });
+});
+
+describe('G2 (C3): the household levy is the militia, at its ladder\'s least rung', () => {
+  test('RED-FIRST: the roster flags read the levy as a militia, as the defence bucket and the facts home already do', () => {
+    const LEVY = { name: 'Household levy' };
+    expect(getInstFlags({}, [LEVY]).inst.hasMilitia).toBe(true);
+    expect(partitionDefenseInstitutions([LEVY]).militia).toEqual([LEVY]);
+    expect(defenseFactsOf({ institutions: [LEVY] }).hasMilitia).toBe(true);
+  });
+
+  test('RED-FIRST: a levy thorp counts its levy as a militia part, at the least rung of the militia\'s ladder', () => {
+    const { least } = DEFENCE_TUNING.houseScale;
+    const whole = Object.values(DEFENCE_TUNING.militia).reduce((a, v) => a + v, 0);
+    for (const key of ['cold-thorp-191', 'fresh6-thorp-52']) {
+      const s = births[key];
+      expect(s.institutions.some((i) => i.name === 'Household levy'), key).toBe(true);
+      const part = partOf(s, 'militia');
+      expect(part, key).not.toBeNull();
+      // `full` is the part's points before pay, the rules and the crises: the weights × the least rung, over the scores.
+      expect(part.full, key).toBeCloseTo(Math.round(((whole * least) / 5) * 10) / 10, 1);
+    }
+  });
+
+  test('the militia\'s ladder is the catalogue\'s two rungs: a citizen militia counts 1.5 times a levy in the same place', () => {
+    const { least, greatest } = DEFENCE_TUNING.houseScale;
+    const s = births['cold-thorp-191'];
+    const asMilitia = { ...s, institutions: s.institutions.map((i) => (i.name === 'Household levy' ? { ...i, name: 'Citizen militia' } : i)) };
+    expect(partOf(asMilitia, 'militia').full / partOf(s, 'militia').full).toBeCloseTo(greatest / least, 1);
   });
 });
