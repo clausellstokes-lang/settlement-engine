@@ -2904,6 +2904,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "DIRECTION: worsening · CRISIS: famine": [
         {
           "angle": "local",
+          "marks": [
+            "tier: ≥ village"
+          ],
           "text": "The famine in {settlement} is getting worse: the rations shrink each week, and the queues for them grow longer.",
           "slots": [
             "settlement"

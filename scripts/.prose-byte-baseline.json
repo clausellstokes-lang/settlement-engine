@@ -55,32 +55,32 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 236427,
-      "gzip": 32042,
+      "raw": 246853,
+      "gzip": 33480,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 173631,
-      "gzip": 24505,
+      "raw": 182031,
+      "gzip": 25545,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 292870,
-      "gzip": 37424,
+      "raw": 294379,
+      "gzip": 37631,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 125953,
-      "gzip": 17744,
+      "raw": 126405,
+      "gzip": 17844,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
     "src/data/dossierStateProse/stressors.generated.js": {
-      "raw": 147733,
-      "gzip": 20800,
+      "raw": 147799,
+      "gzip": 20827,
       "ceilingRaw": 258858,
       "ceilingGzip": 57524
     },
@@ -619,6 +619,46 @@
       "toRaw": 147733,
       "gzipAfter": 20800,
       "reason": "+250 B raw over the committed 147483 (gzip level 9: 20773 -> 20800): twenty unreached corpus lines in DS-ECO-2, -8, DS-DEF-2, -6, DS-GEN-7 and DS-STR-1 declare the granary, the coast, the occupation, the garrison or the war they name, and DS-ECO-8's full-stores pool gains three lines that name no granary, projected through node scripts/generate-dossier-state-prose.mjs (--check exit 0); no pool added"
+    },
+    {
+      "car": "W2-WRITE round 1",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 236427,
+      "toRaw": 246853,
+      "gzipAfter": 33480,
+      "reason": "+10426 B raw over the committed 236427 (gzip level 9: 32042 -> 33480): the cold list's corpus variants: disqualifiers declared, false claims reworded, lines for the cases left empty (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE round 1",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 173631,
+      "toRaw": 182031,
+      "gzipAfter": 25545,
+      "reason": "+8400 B raw over the committed 173631 (gzip level 9: 24505 -> 25545): the cold list's corpus variants: disqualifiers declared, false claims reworded, lines for the cases left empty (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE round 1",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 292870,
+      "toRaw": 294379,
+      "gzipAfter": 37631,
+      "reason": "+1509 B raw over the committed 292870 (gzip level 9: 37424 -> 37631): the cold list's corpus variants: disqualifiers declared, false claims reworded, lines for the cases left empty (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE round 1",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 125953,
+      "toRaw": 126405,
+      "gzipAfter": 17844,
+      "reason": "+452 B raw over the committed 125953 (gzip level 9: 17744 -> 17844): the cold list's corpus variants: disqualifiers declared, false claims reworded, lines for the cases left empty (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE round 1",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 147733,
+      "toRaw": 147799,
+      "gzipAfter": 20827,
+      "reason": "+66 B raw over the committed 147733 (gzip level 9: 20800 -> 20827): the cold list's corpus variants: disqualifiers declared, false claims reworded, lines for the cases left empty (2026-11-13)"
     }
   ],
   "ceilingTransfersNewLeaves": [

@@ -199,7 +199,6 @@
   "src/data/dossierStateProse/defense.generated.js": [
    ["court", "after-release", "You can see the courthouse and the gaol at {settlement} from the street, and the town means you to."],
    ["docks", "after-release", "{settlement} has a harbour and nothing to hold it with; any vessel that wants the sea approaches has them."],
-   ["docks", "after-release", "You can sail into {settlement} unchallenged; nobody watches the harbour mouth."],
    ["garrison", "after-release", "{settlement}'s garrison roll puts paid soldiers on every stretch of its walls, so raiders stay away and an army would pa"],
    ["garrison", "after-release", "DS-DEF-2: `Defense › Threat assessment (the five readiness rows)` · `defenseProfile.scores{monster,military,internal,eco"],
    ["garrison", "after-release", "DS-DEF-5: `Defense › Armed forces & fortifications` · `defenseProfile.institutions{walls,garrison,militia,watch,mercenar"],

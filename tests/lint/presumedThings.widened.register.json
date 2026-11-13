@@ -841,11 +841,6 @@
    [
     "practitioner",
     "word",
-    "{settlement} does better than its ground and roads would explain, and the reason is its few practitioners."
-   ],
-   [
-    "practitioner",
-    "word",
     "{settlement}'s trade in {good} rests on a few practitioners, not on the land."
    ],
    [
@@ -7803,11 +7798,6 @@
    ]
   ],
   "src/domain/display/stateProse/defenseStateProse.js": [
-   [
-    "garrison",
-    "root",
-    "Invasion & War: walls AND professional garrison"
-   ],
    [
     "militia",
     "root",
