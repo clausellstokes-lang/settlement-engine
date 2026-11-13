@@ -20,7 +20,7 @@
 import { random as _rng } from "../kernel/rngContext.js";
 import { pickRandom2 } from "./helpers.js";
 import { speakTierNoun } from "../domain/display/stateProse/stateProseKernel.js";
-import { tierNounFor } from "../domain/display/stateProse/weaveBlock.js"; import { foodStoreWord } from "./economy/foodBalance.js"; // R2-CODE-A item 1: one line, so no cited line moves
+import { tierNounFor } from "../domain/display/stateProse/weaveBlock.js"; import { foodStoreWord, FAILED_SOURCE_WORDS } from "./economy/foodBalance.js"; // R2-CODE-A item 1: one line, so no cited line moves
 
 // AMENDMENT B — THE CASING PASS. The ${govFaction}/${topFaction} interpolations
 // carry a value that is usually lowercased ("the town council"), while their
@@ -70,6 +70,25 @@ const speakTierLines = (r, lines) => {
 // came`), or make the commodity a modifier of a noun that carries the number itself
 // (`the ${r.commodity} reserves`, `every ${r.commodity} cache`), as the pools around
 // these three already do.
+/**
+ * R2-CODE-A-3 (round three #48): "Since the harvest failed … at least three powers are fighting over
+ * the stores" printed in a one-power thorp whose famine failed its fishing and that keeps no granary.
+ * The line now names the source the food record says failed (`foodBalance.js :: FAILED_SOURCE_WORDS`;
+ * a grain failure, or a famine that names no source, keeps "the harvest", as that file's own famine note does), counts only the powers the record holds (`r.powerCount`, from
+ * `powerStructure.factions`), and calls the food "the stores" only where a granary keeps them. A branch
+ * inside the drawn row, so no draw moves.
+ * @param {{ name?: unknown, powerCount?: unknown, foodRecord?: { failedSource?: unknown, hasGranary?: unknown } | null }} r @returns {string}
+ */
+const famineFoodIsPower = (r) => {
+  const failed = r.foodRecord?.failedSource;
+  const what = failed !== 'grain' && typeof failed === 'string' && failed in FAILED_SOURCE_WORDS ? `the ${FAILED_SOURCE_WORDS[/** @type {keyof typeof FAILED_SOURCE_WORDS} */ (failed)]} failed` : 'the harvest failed';
+  const stores = r.foodRecord?.hasGranary === true ? 'the stores' : 'what food is left';
+  const n = typeof r.powerCount === 'number' ? r.powerCount : 0;
+  if (n >= 3) return `Since ${what}, whoever holds the food in ${r.name} holds the power, and at least three powers are fighting over ${stores}.`;
+  if (n === 2) return `Since ${what}, whoever holds the food in ${r.name} holds the power, and its two powers are fighting over ${stores}.`;
+  return `Since ${what}, food is power in ${r.name}, and everyone is watching who eats well.`;
+};
+
 export const PRESSURE_SENTENCES = {
   under_siege: (r) => [
     `${r.name} is surrounded. Supply lines are cut, morale is fracturing, and ${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "the leadership"} is deciding whether to negotiate terms or hold out for relief that may not be coming.`,
@@ -80,11 +99,11 @@ export const PRESSURE_SENTENCES = {
     `Word came into ${r.name} three days ago that the relief column had turned back; ${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "the leadership"} has not made it public, and the effort of not making it public is beginning to show.`,
   ],
   famine: (r) => [
-    `${r.name} is two bad weeks from genuine starvation; the remaining ${foodStoreWord(r.foodRecord)} reserves are in few hands, and whoever holds them is not discussing it openly.`, // R2-CODE-A P1 (c): it named the leading power as the holder; the record names the holder only in the crisis cast (the granary lever), derived AFTER this line is drawn (steps/resolveCrisisCast.js), so the line names none
-    `Since the harvest failed, whoever holds the food in ${r.name} holds the power, and at least three powers are fighting over the stores.`,
+    { text: `${r.name} is two bad weeks from genuine starvation; the remaining ${foodStoreWord(r.foodRecord)} reserves are in few hands, and whoever holds them is not discussing it openly.`, needs: ['institution: granary'] }, // R2-CODE-A-3 (round three #40, #4): reserves are a common store, so the line needs a granary; R2-CODE-A P1 (c): it named the leading power as the holder; the record names the holder only in the crisis cast (the granary lever), derived AFTER this line is drawn (steps/resolveCrisisCast.js), so the line names none
+    famineFoodIsPower(r), // R2-CODE-A-3 (round three #48): the source the famine failed, and the powers the record holds
     `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "Someone"} knows where the hoarded ${foodStoreWord(r.foodRecord)} can be found and is not saying; someone close to them is among the hoarders.`,
     `The bakers of ${r.name} have started cutting the bread with things that are not flour; everyone can taste it, and the fact that nobody complains is the most alarming part.`,
-    `${capFirst(r.govFaction) || "The council"} of ${r.name} promised a fair share of the ${foodStoreWord(r.foodRecord)} reserves last week, and little of it has reached the poor.`,
+    { text: `${capFirst(r.govFaction) || "The council"} of ${r.name} promised a fair share of the ${foodStoreWord(r.foodRecord)} reserves last week, and little of it has reached the poor.`, needs: ['institution: granary'] }, // R2-CODE-A-3 (#40, #4): as row 0
     { text: `Hunger has made ${r.name} quiet. The market still opens, the queues still form, but the haggling has gone out of people. They take what they are given and calculate, silently, how long it will last.`, needs: ['market'] },
   ],
   occupied: (r) => [

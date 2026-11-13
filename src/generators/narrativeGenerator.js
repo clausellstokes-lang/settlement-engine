@@ -526,7 +526,7 @@ const genPressureDetail = settlement => {
     // WIRING-W0 (R-W7 e): the migration direction the record declares; the mass_migration pressure
     // lines read it (narrativeText.js), never a score of their own.
     migrationDirection: migrationDirectionOfStress(stress),
-    commodity, foodRecord: economicState?.foodSecurity?.foodRecord ?? null, // R2-CODE-A P1: the food record, for the lines that mean food (narrativeText.js :: PRESSURE_SENTENCES, through foodBalance.js :: foodStoreWord)
+    commodity, foodRecord: economicState?.foodSecurity?.foodRecord ?? null, powerCount: factions.length, // R2-CODE-A P1: the food record, for the lines that mean food (narrativeText.js :: PRESSURE_SENTENCES, through foodBalance.js :: foodStoreWord)
     // compound: the economic/military/criminal effectiveness triplet the
     // wartime/mass_migration/insurgency PRESSURE_SENTENCES closures branch on
     // (r.compound?.economyOutput / militaryEffective / criminalEffective). Without
