@@ -148,6 +148,8 @@ export const LEAVES = Object.freeze({
   hasOtherNpc: home('hasOtherNpc', 4, ['npcs'], { call: 'factsCall' }),
   magicPractitioners: leaf({ layer: 4, module: 'domain/magicReliance.js', exported: 'magicPractitioners', call: 'record', reads: ['institutions', 'npcs'] }),
   magicReliance: leaf({ layer: 4, module: 'domain/magicReliance.js', exported: 'deriveMagicReliance', call: 'record', reads: ['config', 'economicState', 'institutions', 'npcs'] }),
+  magicSource: leaf({ layer: 4, module: 'domain/facts/magicSource.js', exported: 'magicSourceOf', call: 'record', reads: ['config', 'economicState', 'institutions', 'npcs'],
+    note: 'where the magic the place relies on comes from (census row 3): the practitioners, then the houses that supply a dependent chain' }),
   captureClimate: leaf({ layer: 4, module: 'domain/facts/factLayers.js', exported: 'powerStructure.criminalCaptureState', call: 'record', reads: ['powerStructure.criminalCaptureState'], stored: true,
     note: 'the stored capture climate, written at assembly from the cast (a back-write)' }),
   // ── layer 5 ──

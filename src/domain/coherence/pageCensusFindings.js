@@ -7,7 +7,8 @@
  * each the census counter's own test (`probes/SECOND-WAVE-CENSUS/count.mjs` on lane/second-wave-census-2026-11-12),
  * read over ONE rendered dossier: the owner's view, every group and sub-tab, every disclosure opened, one line
  * per block element per view (`views`: `'Systems/Economics'` → its lines). Two patterns are not rows: 15 (the
- * owner's recorded design: burials under Healing) and 21 (a style rule's text a browser never shows).
+ * owner's recorded design: burials under Healing) and 21 (a style rule's text a browser never shows). A row the
+ * chair re-defines is RETIRED BY NAME with its reason (`RETIRED_PAGE_CENSUS_ROWS`) beside the row that replaces it.
  *
  * The counter's regex vocabulary was the union of two trees' pools; this arm reads the counted tree's own
  * pools, so it counts the lines this tree can print. Every row's bar is ZERO; the register
@@ -41,8 +42,8 @@ const s = (v) => (typeof v === 'string' ? v : v == null ? '' : String(v));
 export const PAGE_CENSUS_ROWS = Object.freeze({
   P1a: ['1a the food verdict "only just" beside "grows more than it eats"', 'SECOND'],
   P1b: ['1b "a small margin" beside a quarter or more bought in', 'SECOND'],
-  P2: ['2 the stores stated as two durations', 'CROSS'],
-  P3any: ['3 magic relied upon or common, and no practitioner on the rolls', 'CROSS'],
+  P2siege: ['2 a siege figure in the indicative outside a siege', 'SECOND'],
+  P3source: ['3 reliance on magic stated with neither a practitioner nor a named source', 'CROSS'],
   P4: ['4 "three powers stand almost level" beside a leader far ahead', 'SECOND'],
   P5a: ['5a the hall "free of the criminals" beside criminal money reaching the officials', 'SECOND'],
   P5b: ['5b "Diffuse, no gang" beside a criminal power', 'SECOND'],
@@ -64,6 +65,20 @@ export const PAGE_CENSUS_ROWS = Object.freeze({
   P20: ['20 siege words outside a siege', 'SECOND'],
   NEW1: ['NEW-1 the governance label against the Defense verdict', 'SECOND'],
   NEW2: ['NEW-2 magic income, and no practitioner on the rolls', 'CROSS'],
+});
+
+/**
+ * THE RETIRED ROWS, each BY NAME with its reason (never a silent zero: the register keeps its counts beside the
+ * row that replaced it). id → [the pattern, the reason, the row that replaced it].
+ * @type {Readonly<Record<string, readonly [string, string, string]>>}
+ */
+export const RETIRED_PAGE_CENSUS_ROWS = Object.freeze({
+  P2: ['2 the stores stated as two durations',
+    'two true quantities, by the owner\'s design: the Economy tab states what the stores hold at peace; the Defense line states what a siege would leave, and links to the stores row rather than restating its figure (lane DEFENSE-3; the chair\'s ruling of 2026-11-12)',
+    'P2siege'],
+  P3any: ['3 magic relied upon or common, and no practitioner on the rolls',
+    'it counted the words, not the explanation: a town whose temples or alchemists supply the magic it relies on has no arcane practitioner on its rolls and is no fault, and an envelope that reads magic common states no reliance (the chair\'s ruling of 2026-11-12)',
+    'P3source'],
 });
 
 // ── the tree's own pools, as the counter reads them ──────────────────────────────────────────
@@ -95,21 +110,6 @@ const pools = () => {
 };
 
 // ── the counter's readings ───────────────────────────────────────────────────────────────────
-/** @type {Readonly<Record<string, number>>} */
-const WORD = Object.freeze({ a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, eleven: 11, twelve: 12 });
-/** A stated duration in months, as the counter reads it. @param {string|undefined} phrase @returns {number|null} */
-function months(phrase) {
-  if (!phrase) return null;
-  const ph = phrase.toLowerCase();
-  if (/few weeks/.test(ph)) return 1 / 2; // half a month: the counter's reading of "a few weeks", not a dial
-  if (/about a month|^a month/.test(ph)) return 1;
-  if (/more than two years/.test(ph)) return 24;
-  if (/more than a year/.test(ph)) return 13;
-  if (/about a year/.test(ph)) return 12;
-  const m = ph.match(/(\w+) months/);
-  if (!m) return null;
-  return WORD[m[1]] ?? (Number.isFinite(Number(m[1])) ? Number(m[1]) : null);
-}
 /**
  * The census's page phrases that name a defence thing, held in one table: they match PRINTED sentences, never the
  * roster, so they are no reader of the defence facts (the defence-reader walker counts a name test written on its
@@ -171,17 +171,18 @@ export function pageCensusFindings(settlement, views) {
     const margin = E.find((l) => /feeds itself with a small margin/.test(l));
     return margin && Number(fr.normalImportPct) >= 25 ? [margin, `record normalImportPct ${s(fr.normalImportPct)}`] : null;
   });
-  run('P2', () => {
-    const st = E.find((l) => /^No granary;|^Stores: a granary/.test(l)); const fe = D.find((l) => /^Food endurance:/.test(l));
-    if (!st || !fe) return null;
-    const m1 = st.match(/^No granary; (.+?) in household stores|^No granary; (a few weeks) in the larder|^Stores: a granary,? (?:of )?(.+?)(?: of grain| that)/);
-    const a = months(m1 ? m1[1] || m1[2] || m1[3] : undefined); const m2 = fe.match(/for (.+?) at full rations/); const b = m2 ? months(m2[1]) : null;
-    return a != null && b != null && a !== b ? [st, fe] : null;
+  run('P2siege', () => {
+    // the Food endurance line states what a siege does to the stores: outside a siege that is a condition, so a
+    // verb of the siege figure in the indicative (are lost, carries, feeds, stands) is the fault
+    const fe = D.find((l) => /^Food endurance:/.test(l));
+    if (!fe || obj(econ.foodSecurity).hasSiege) return null;
+    const verb = fe.match(/(?<!would )\b(?:are lost|carries|carry|feeds|stands|stand)\b/);
+    return verb ? [fe.slice(0, 160), `"${verb[0]}", not besieged`] : null;
   });
-  run('P3any', () => {
-    const relLine = M.find((l) => /^Reliance on magic: /.test(l)) || ''; const relied = /Relied upon|Integral/i.test(relLine);
-    const avail = (M.find((l) => /^Availability/.test(l)) || '').replace('Availability', '');
-    return noArcane && (relied || /common|broad|pervasive/.test(avail)) ? [relLine || avail, 'No arcane practitioners on the rolls'] : null;
+  run('P3source', () => {
+    // the Magic tab states a reliance; the Defense tab's rolls hold no practitioner; the reliance line names no source
+    const relLine = M.find((l) => /^Reliance on magic: (?:Relied upon|Integral)/.test(l));
+    return relLine && noArcane && !/ · supplied by /.test(relLine) ? [relLine, 'No arcane practitioners on the rolls'] : null;
   });
   run('P4', () => {
     const level = PW.find((l) => /Three powers stand almost level/.test(l));

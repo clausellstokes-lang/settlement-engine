@@ -1,5 +1,5 @@
 {
- "_law": "W2-A-LEAVES (2026-11-12): THE RENDERED-DOSSIER ARM'S REGISTER. One row per pattern of the second wave's census, read by src/domain/coherence/pageCensusFindings.js over the census's own corpus (720 births, prefix r2: tests/components/pageCensusWalk.shared.mjs :: censusPlan) rendered as the owner sees it. master and integration are the census's two columns (db832c892, master before the integration; 8866a0ddd, the integration's tip), counted by the census's counter and mapped to these rows (row 14 joins the counter's P14 and P14district; 18 joins P18npc and P18rec; F4 joins P12ore/coal/quarry/saw; NEW1 joins NEW1 and NEW1b; 8 joins P8any and P8houses). master is NOT a measurement for 5a, 8 and 16a: their page did not exist there. banked is this arm's count on the corpus at the lane's base deb1544eb (per seed equal to the census counter's own run there, all 25 rows); it ONLY FALLS, through scripts/census/page-census.mjs --shrink. EVERY ROW'S BAR IS ZERO. grid: the suite walker's twelve births (tests/components/pageCensus.walker.test.jsx), each seed's rows exactly; a cure lowers them in the same commit.",
+ "_law": "W2-A-LEAVES (2026-11-12): THE RENDERED-DOSSIER ARM'S REGISTER. One row per pattern of the second wave's census, read by src/domain/coherence/pageCensusFindings.js over the census's own corpus (720 births, prefix r2: tests/components/pageCensusWalk.shared.mjs :: censusPlan) rendered as the owner sees it. master and integration are the census's two columns (db832c892, master before the integration; 8866a0ddd, the integration's tip), counted by the census's counter and mapped to these rows (row 14 joins the counter's P14 and P14district; 18 joins P18npc and P18rec; F4 joins P12ore/coal/quarry/saw; NEW1 joins NEW1 and NEW1b; 8 joins P8any and P8houses). master is NOT a measurement for 5a, 8 and 16a: their page did not exist there. banked is this arm's count on the corpus at the lane's base deb1544eb (per seed equal to the census counter's own run there, all 25 rows); it ONLY FALLS, through scripts/census/page-census.mjs --shrink. EVERY ROW'S BAR IS ZERO. grid: the suite walker's twelve births (tests/components/pageCensus.walker.test.jsx), each seed's rows exactly; a cure lowers them in the same commit. A row the chair re-defines is RETIRED BY NAME under `retired`, with its two columns, its count when retired and its reason, beside the row that replaced it; a new row carries no census column (master and integration null: the census did not count it) and states `base`, its count at deb1544eb, beside `banked`.",
  "corpus": {
   "prefix": "r2",
   "scale": 1,
@@ -20,19 +20,21 @@
    "integration": 64,
    "banked": 64
   },
-  "P2": {
-   "label": "2 the stores stated as two durations",
-   "reader": "CROSS",
-   "master": 568,
-   "integration": 569,
-   "banked": 569
+  "P2siege": {
+   "label": "2 a siege figure in the indicative outside a siege",
+   "reader": "SECOND",
+   "master": null,
+   "integration": null,
+   "base": 689,
+   "banked": 0
   },
-  "P3any": {
-   "label": "3 magic relied upon or common, and no practitioner on the rolls",
+  "P3source": {
+   "label": "3 reliance on magic stated with neither a practitioner nor a named source",
    "reader": "CROSS",
-   "master": 172,
-   "integration": 190,
-   "banked": 190
+   "master": null,
+   "integration": null,
+   "base": 74,
+   "banked": 0
   },
   "P4": {
    "label": "4 \"three powers stand almost level\" beside a leader far ahead",
@@ -187,7 +189,6 @@
    "F4",
    "P13",
    "P14",
-   "P2",
    "P8any",
    "P9"
   ],
@@ -196,7 +197,6 @@
    "P13",
    "P16three",
    "P17",
-   "P2",
    "P8any"
   ],
   "r2r-hamlet-0": [
@@ -213,8 +213,6 @@
   ],
   "r2r-village-0": [
    "P17",
-   "P2",
-   "P3any",
    "P9"
   ],
   "r2s-indebted-village-0": [
@@ -222,20 +220,16 @@
    "NEW2",
    "P11",
    "P14",
-   "P17",
-   "P2",
-   "P3any"
+   "P17"
   ],
   "r2r-town-0": [
    "P16powers",
    "P17",
-   "P18",
-   "P2"
+   "P18"
   ],
   "r2s-infiltrated-town-0": [
    "P17",
    "P18",
-   "P2",
    "P4"
   ],
   "r2r-city-0": [
@@ -244,7 +238,6 @@
    "P17",
    "P18",
    "P1b",
-   "P2",
    "P4",
    "P7a"
   ],
@@ -254,24 +247,40 @@
    "P16three",
    "P17",
    "P18",
-   "P1b",
-   "P2",
-   "P3any"
+   "P1b"
   ],
   "r2r-metropolis-0": [
    "P16powers",
    "P17",
    "P18",
-   "P1b",
-   "P2"
+   "P1b"
   ],
   "r2s-insurgency-metropolis-0": [
    "P16powers",
    "P17",
    "P18",
    "P1b",
-   "P2",
    "P7a"
   ]
+ },
+ "retired": {
+  "P2": {
+   "label": "2 the stores stated as two durations",
+   "reader": "CROSS",
+   "master": 568,
+   "integration": 569,
+   "atRetirement": 569,
+   "reason": "two true quantities, by the owner's design: the Economy tab states what the stores hold at peace; the Defense line states what a siege would leave and links to the stores row rather than restating its figure (lane DEFENSE-3). Retired by the chair's ruling of 2026-11-12; replaced by P2siege.",
+   "replacedBy": "P2siege"
+  },
+  "P3any": {
+   "label": "3 magic relied upon or common, and no practitioner on the rolls",
+   "reader": "CROSS",
+   "master": 172,
+   "integration": 190,
+   "atRetirement": 190,
+   "reason": "it counted the words, not the explanation: a town whose temples or alchemists supply the magic it relies on has no arcane practitioner on its rolls and is no fault, and an envelope that reads magic common states no reliance. Retired by the chair's ruling of 2026-11-12; replaced by P3source.",
+   "replacedBy": "P3source"
+  }
  }
 }

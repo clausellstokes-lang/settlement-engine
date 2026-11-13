@@ -4,7 +4,7 @@
  * census's own shapes: two lines of one rendered dossier, or a line and the record field it contradicts.
  */
 import { describe, expect, test } from 'vitest';
-import { PAGE_CENSUS_ROWS, pageCensusFindings, viewsOfSurfaces } from '../../../src/domain/coherence/pageCensusFindings.js';
+import { PAGE_CENSUS_ROWS, RETIRED_PAGE_CENSUS_ROWS, pageCensusFindings, viewsOfSurfaces } from '../../../src/domain/coherence/pageCensusFindings.js';
 import { coherenceBattery } from '../../../src/domain/coherence/coherenceBattery.js';
 import { poolMemberTexts } from '../../helpers/drawnProse.js';
 
@@ -20,12 +20,14 @@ const SMALL_MARGIN = SECURE.find((t) => pageCensusFindings({ economicState: { fo
 const SETTLED = corpusLine('defense', 'DS-DEF-2', 'Beasts & Monsters: settled, defenses beyond the need');
 
 const NO_ARCANE = 'Arcane Support None · No arcane practitioners on the rolls';
+/** A Food endurance line as the Defense tab prints it (its label, then the leaf's sentence). @param {string} sentence */
+const ENDURANCE = (sentence) => `Food endurance: ${sentence}`;
 /** @type {Record<string, { views: Record<string, string[]>, record?: Record<string, unknown> }>} */
 const PLANTS = {
   P1a: { views: { 'Systems/Economics': [ONLY_JUST, 'It grows more than it eats.'] } },
   P1b: { views: { 'Systems/Economics': [SMALL_MARGIN] }, record: { economicState: { foodSecurity: { foodRecord: { normalImportPct: 40 } } } } },
-  P2: { views: { 'Systems/Economics': ['Stores: a granary of about a year of grain'], 'Systems/Defense': ['Food endurance: the town could hold for three months at full rations'] } },
-  P3any: { views: { 'Systems/Defense': [NO_ARCANE], 'Systems/Magic': ['Reliance on magic: Relied upon'] } },
+  P2siege: { views: { 'Systems/Defense': [ENDURANCE('the granary carries the town for about three months at full rations.')] }, record: { economicState: { foodSecurity: { hasSiege: false } } } },
+  P3source: { views: { 'Systems/Defense': [NO_ARCANE], 'Systems/Magic': ['Reliance on magic: Relied upon'] } },
   P4: { views: { 'Systems/Power': ['Three powers stand almost level in Brindle.'] }, record: { powerStructure: { factions: [{ power: 80 }, { power: 30 }, { power: 25 }] } } },
   P5a: { views: { 'Systems/Power': ['Free of the criminals', CAPTURE] } },
   P5b: { views: { 'Systems/Defense': ['Criminal structure: Diffuse', 'Underworld: the Night Hands'] } },
@@ -68,6 +70,30 @@ describe('the rendered-dossier arm: one planted fault per row', () => {
     for (const [row, views] of Object.entries(halves)) expect({ row, found: pageCensusFindings({ tier: 'town' }, views) }).toEqual({ row, found: [] });
     expect(pageCensusFindings({ tier: 'town' }, PLANTS.P14.views)).toEqual([]);
     expect(pageCensusFindings({ tier: 'town', economicState: { foodSecurity: { hasSiege: true } } }, PLANTS.P20.views)).toEqual([]);
+    // row 2: besieged, the indicative is true; outside a siege, the condition reads nothing
+    expect(pageCensusFindings({ tier: 'town', economicState: { foodSecurity: { hasSiege: true } } }, PLANTS.P2siege.views)).toEqual([]);
+    expect(pageCensusFindings({ tier: 'town', economicState: { foodSecurity: { hasSiege: false } } }, {
+      'Systems/Defense': [ENDURANCE('No granary: under siege the outlying fields would be lost; household stores would carry the town for about three months at full rations.')],
+    })).toEqual([]);
+  });
+  test('a re-defined row is RETIRED BY NAME with its reason, never reported, and its replacement is a row (the chair, 2026-11-12)', () => {
+    expect(Object.keys(RETIRED_PAGE_CENSUS_ROWS)).toEqual(['P2', 'P3any']);
+    for (const [id, [pattern, reason, replacedBy]] of Object.entries(RETIRED_PAGE_CENSUS_ROWS)) {
+      expect(PAGE_CENSUS_ROWS[id]).toBeUndefined();
+      expect(PAGE_CENSUS_ROWS[replacedBy]).toBeTruthy();
+      expect(pattern.length).toBeGreaterThan(0);
+      expect(reason).toMatch(/the chair's ruling of 2026-11-12/);
+    }
+    expect(RETIRED_PAGE_CENSUS_ROWS.P2[1]).toMatch(/owner's design/);
+    // row 3's retired shapes: a reliance whose source is named, and magic common with no reliance, read nothing
+    expect(pageCensusFindings({ tier: 'town' }, {
+      'Systems/Defense': [NO_ARCANE], 'Systems/Magic': ['Reliance on magic: Relied upon · supplied by Parish church and Multiple monasteries', 'Availabilitycommon'],
+    })).toEqual([]);
+    // the retired row's own shape (two durations, outside a siege, in the condition) reads nothing now
+    expect(pageCensusFindings({ tier: 'town', economicState: { foodSecurity: { hasSiege: false } } }, {
+      'Systems/Economics': ['Stores: a granary of about a year of grain'],
+      'Systems/Defense': [ENDURANCE('the granary would carry the town for about three months at full rations.')],
+    })).toEqual([]);
   });
   test('registered in the page battery: a rendered view reds `page-census`; surfaces that are not views read nothing', () => {
     const surfaces = { 'Systems/Defense': PLANTS.P13.views['Systems/Defense'].join('\n'), economics: 'They eat more slowly and less comfortably and go on.' };
