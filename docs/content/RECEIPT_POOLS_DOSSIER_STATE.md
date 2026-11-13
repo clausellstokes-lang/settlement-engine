@@ -1802,8 +1802,11 @@ shape.
 2. `[street · colour]` Every load of {good} used at {settlement} comes from elsewhere, because the country here produces none.
 
 **INCOME WEIGHT: the religious houses** *(`compound.religionInfluence` high)*
-1. `[ledger · colour]` Faith carries real weight in {settlement}'s money. What the religious houses take in and spend is a large part of the town's business.
-2. `[street · colour]` The religious houses at {settlement} are among its biggest buyers and employers, and a bad year for them is a bad year for the town.
+1. `[ledger · sacredHouse]` Faith carries real weight in {settlement}'s money. What the religious houses take in and spend is a large part of the town's business.
+2. `[street · sacredHouse]` The religious houses at {settlement} are among its biggest buyers and employers, and a bad year for them is a bad year for the town.
+3. `[ledger · no sacredHouse]` Faith carries real weight in {settlement}'s money, though the place keeps no house for it: what its people give for their faith leaves with them on the feast days.
+4. `[street · no sacredHouse]` At {settlement} the feast days set the calendar of buying and selling, and the offerings leave the place with the people who carry them.
+5. `[threshold · no sacredHouse]` {settlement} spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.
 
 **INCOME WEIGHT: the practice of magic** *(`compound.magicInfluence` high)*
 1. `[ledger · colour]` Magic carries real weight in {settlement}'s money. What the town's practitioners charge for, and what they buy, is a large part of its business.

@@ -891,16 +891,6 @@
     "{settlement} is fed, but only just. A poor harvest is felt at every table; a good one means a little put by."
    ],
    [
-    "religiousHouses",
-    "word",
-    "Faith carries real weight in {settlement}'s money. What the religious houses take in and spend is a large part of the to"
-   ],
-   [
-    "religiousHouses",
-    "word",
-    "The religious houses at {settlement} are among its biggest buyers and employers, and a bad year for them is a bad year f"
-   ],
-   [
     "practitioner",
     "word",
     "Magic carries real weight in {settlement}'s money. What the town's practitioners charge for, and what they buy, is a lar"
@@ -8024,11 +8014,6 @@
     "famine",
     "word",
     "ACTIVE FAMINE: the failed source, part of the harvest"
-   ],
-   [
-    "religiousHouses",
-    "word",
-    "INCOME WEIGHT: the religious houses"
    ]
   ],
   "src/domain/display/stateProse/generalStateProse.js": [

@@ -61,8 +61,8 @@
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 171347,
-      "gzip": 24131,
+      "raw": 172502,
+      "gzip": 24320,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
@@ -579,6 +579,14 @@
       "toRaw": 125953,
       "gzipAfter": 17744,
       "reason": "+381 B raw over the committed 125572 (gzip level 9: 17677 -> 17744): DS-POW-5 crimeIsGovt v1 declares no guardPresence, and one line for a guard the gang bosses run, projected through node scripts/generate-dossier-state-prose.mjs (--check exit 0); no pool added"
+    },
+    {
+      "car": "W2-WRITE ECO-12 faith's weight without a house (2026-11-13)",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 171347,
+      "toRaw": 172502,
+      "gzipAfter": 24320,
+      "reason": "+1155 B raw over the committed 171347 (gzip level 9: 24131 -> 24320): DS-ECO-12 INCOME WEIGHT religious houses: v1 and v2 declare sacredHouse, and three lines for a place with no house of its own, projected through node scripts/generate-dossier-state-prose.mjs (--check exit 0); no pool added"
     }
   ],
   "ceilingTransfersNewLeaves": [

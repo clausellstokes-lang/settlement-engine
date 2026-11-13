@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2835,
+    "variants": 2838,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -19443,8 +19443,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 2,
-      "grammars": 1,
+      "variants": 5,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [
         "eco.safetyProfile.compound",
@@ -19496,7 +19496,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2
+        "no sacredHouse": 3,
+        "sacredHouse": 2
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -68778,7 +68779,7 @@
       "subject": "INCOME WEIGHT: the religious houses",
       "fields": [],
       "readingFunction": "incomeWeightPoolKey",
-      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
