@@ -108,7 +108,9 @@ const PAGE_WITHDRAWN = Object.freeze({
   role: 'the third read\'s precision read, 7 of 19 true on two draws: a role word on the page is mostly a standing house\'s '
     + 'catalogue description naming the smith as its customer ("between forest and forge") or a forge festival\'s name, a '
     + 'prisoner or an armoury in a town whose watch and court keep them, or a physician in a great town; on the 720 about '
-    + '130 of 418 role lines are not false by structure; no leaf narrows them surely yet',
+    + '130 of 418 role lines are not false by structure; and the clergy and armed-force words, 5 true of 10 on the reader\'s '
+    + 'own draw (an instruction "From here you raise … troops", a power\'s own description with that power on the roster); '
+    + 'no leaf narrows them surely yet',
 });
 
 /**
@@ -600,12 +602,11 @@ for (const w of Object.values(ROLE_FAMILIES)) {
   w.leaf = `${w.leaf}; or a person among the town's people who holds the role (npcs[].role, npcs[].title)`;
 }
 /**
- * THE ROLE WORDS WITHDRAWN FROM THE PAGE LIST (REVIEW-W2B's third read, finding 1; the chair's ruling): the seven the read
- * measured at 7 of 19. They stay registered (the walker's arms and a line's conditions read them). `clergy` and
- * `armedForce` were not in that read and stay on the page list.
+ * THE ROLE FAMILY WITHDRAWN FROM THE PAGE LIST, WHOLE (REVIEW-W2B's third read, finding 1, and the chair's ruling on it):
+ * as the four earlier families were. Every role word stays registered (the walker's arms and a line's conditions read
+ * them); only the page list loses them.
  */
-const ROLE_PAGE_WITHDRAWN = Object.freeze(['smith', 'prisoner', 'physician', 'guardCaptain', 'notary', 'mason', 'armoury']);
-for (const id of ROLE_PAGE_WITHDRAWN) ROLE_FAMILIES[id].pageWithdrawn = PAGE_WITHDRAWN.role;
+for (const w of Object.values(ROLE_FAMILIES)) w.pageWithdrawn = PAGE_WITHDRAWN.role;
 
 /**
  * THE WORDS OF NORMAL TIMES AND OF SIZE (the review's named families): open trade, which a siege in force makes false;

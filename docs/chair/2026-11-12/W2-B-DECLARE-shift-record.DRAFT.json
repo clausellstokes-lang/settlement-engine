@@ -73,7 +73,7 @@
  },
  "stripBan": "THE STRIP BAN CATCHES THE SHAPES IT NAMES AND NO OTHERS (REVIEW-W2B's third read, finding 2; the sixth seat, R3). Of the reader's fifteen new unwrap shapes it catches three (spread into a Set, reduce into a string, join after map of a getter); the twelve it misses are KNOWN GAPS, each named by its shape in tests/lint/presumedThings.stripShapes.json and pinned exactly by presumedThings.walker.test.js (\"the strip ban's known gaps\"). It is not a data-flow read and was not rebuilt as one before the release (the chair's ruling). No golden surface reads it.",
  "fourthToSixthSeats": {
-  "window": "1fb15980d..b861d1b22 (the fourth and fifth seats' 1fb15980d..c3913f999, read by REVIEW-W2B-3; the sixth seat's c3913f999..b861d1b22)",
+  "window": "1fb15980d..f2f3e3292 (the fourth and fifth seats' 1fb15980d..c3913f999, read by REVIEW-W2B-3; the sixth seat's c3913f999..f2f3e3292)",
   "srcFilesChangedBySixthSeat": [
    "src/domain/facts/registeredWords.js"
   ],
@@ -86,7 +86,7 @@
    "presetLightingWitness": "UNMOVED by measure: green at c3913f999 and at the tip, 7 of 7",
    "cartographyCalibration": "not one of the six; red on the line: its failure output identical at c3913f999 and at the tip (the sixth seat; the reader's hash equal)"
   },
-  "births": "the census's 720 births, c3913f999 against 9f83ffbb2 (fielddiff.mjs): 0 moved; the 720 rendered dossiers: 720 of 720 byte-identical; the census counter byte-identical (every row OLD and equal). b861d1b22 changes one source line of the instrument whose compiled pattern is byte-identical (housesCount.words.source compared equal)",
+  "births": "the census's 720 births, c3913f999 against 9f83ffbb2 (fielddiff.mjs): 0 moved; the 720 rendered dossiers: 720 of 720 byte-identical; the census counter byte-identical (every row OLD and equal). b861d1b22 changes one source line of the instrument whose compiled pattern is byte-identical (housesCount.words.source compared equal); f2f3e3292 (the role family withdrawn from the page list whole, the chair's ruling): the census re-run alone at that tip, 720 births 0 moved against c3913f999, 720 of 720 dumps identical, the counter byte-identical",
   "evidence": "docs/chair/2026-11-13/probes/W2-B-DECLARE-6/ (surfaces.c3913f999-tip.txt, page-unmoved.c3913f999-9f83ffbb2.txt, census-compare.c3913f999-9f83ffbb2.txt, manifest-moved.json)",
   "note": "no golden door was run by any seat of the lane; the merge seat signs. Every entry here names the measure executed and by whom"
  }
