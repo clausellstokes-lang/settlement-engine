@@ -376,6 +376,162 @@ describe('F2: a good only refused chains make is neither sold nor produced local
 });
 
 /**
+ * F2'S FIFTH WRITER (COHERENCE-AGREE-8, REVIEW-AGREE-3 FINDING 2): the institutional services
+ * (`computeActiveChains.js :: deriveServiceExports`, from `INSTITUTIONAL_SERVICE_MAP`) exported "Financial services
+ * (letters of credit)" from a banking house whatever its chain's state, beside an impaired "Letters of Credit &
+ * Finance" card that reads "Normally yields: Financial services". It now reads the refusal as the other four writers
+ * do (the leaf's goods set): a service whose good only a refused chain makes is not exported. Each seed below listed
+ * it at faa20bc6c (14 of the lane's 4,141, 9 of them besieged).
+ */
+describe('F2\'s fifth writer: a service only a refused chain yields is not exported', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const born = (/** @type {string} */ seed) => {
+    const m = /^(?:l2|r2s)-(under_siege|famine|wartime)-(\w+)-\d+$/.exec(seed);
+    const settType = m ? m[2] : seed.split('-')[1];
+    const forced = m ? { selectedStresses: [m[1]], selectedStressesRandom: false } : {};
+    return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType, ...forced }), null, { seed, customContent: {} });
+  };
+  test('r2r-metropolis-14, r2s-under_siege-metropolis-1, l2-under_siege-city-7 and rvw12-city-97 export no letters of credit beside an impaired bank', async () => {
+    const { goodsOnlyRefusedChainsMake } = await import('../../src/domain/chainYield.js');
+    expectNoSeedFailures(collectSeedFailures(['r2r-metropolis-14', 'r2s-under_siege-metropolis-1', 'l2-under_siege-city-7', 'rvw12-city-97'], (seed) => {
+      const eco = born(seed).economicState;
+      // anchored: the bank's chain is refused here and its good is one only a refused chain makes
+      expect(goodsOnlyRefusedChainsMake(eco.activeChains).has('financial services'), `${seed}: anchored`).toBe(true);
+      expect(eco.primaryExports.filter((e) => /^Financial services/.test(e)), seed).toEqual([]);
+    }), 'a refused chain\'s service stands on the export list');
+  });
+});
+
+/**
+ * THE COAL LINE (COHERENCE-AGREE-8, REVIEW-AGREE-3 FINDING 3 / T3): "Local coal fires the forges, but the iron is
+ * bought in" is the lane's own sentence (cure 7, `incomeLineSiblings.js :: LOCAL_COAL_LINE`), and it printed in towns
+ * whose roster holds no smith, forge, foundry, smelter, metalworker, armourer or weaponsmith. Where a forge house
+ * stands it is true; where none does, its declared sibling says what is: the coal is sold to other towns' forges.
+ * Each seed below printed it with no forge house at faa20bc6c (census 720).
+ */
+describe('the coal line: coal fires the forges only where a forge house stands', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const FORGE = /smith|forge|foundr|smelt|metal|armou?r|weapon/i;
+  const born = (/** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: seed.split('-')[1] }), null, { seed, customContent: {} });
+  test('r2r-thorp-2, r2r-village-6 and r2r-thorp-16 hold coal and no forge house, and no line says coal fires the forges', async () => {
+    const { LOCAL_COAL_LINE, LOCAL_COAL_SOLD_LINE } = await import('../../src/generators/economy/incomeLineSiblings.js');
+    expectNoSeedFailures(collectSeedFailures(['r2r-thorp-2', 'r2r-village-6', 'r2r-thorp-16'], (seed) => {
+      const s = born(seed);
+      expect(s.institutions.filter((i) => FORGE.test(String(i.name))), `${seed}: anchored, no forge house`).toEqual([]);
+      const metal = s.economicState.incomeSources.find((e) => e.source === 'Iron & Metalwork');
+      expect(metal?.desc, seed).toBe(LOCAL_COAL_SOLD_LINE);
+      expect(metal?.desc).not.toBe(LOCAL_COAL_LINE);
+    }), 'COAL-LINE-NO-FORGE-HOUSE');
+  });
+  test('the sibling is declared beside the line, keyed by its text', async () => {
+    const { INCOME_LINE_SIBLINGS, LOCAL_COAL_LINE, LOCAL_COAL_SOLD_LINE } = await import('../../src/generators/economy/incomeLineSiblings.js');
+    expect(INCOME_LINE_SIBLINGS[LOCAL_COAL_LINE].map((v) => v.text)).toEqual([LOCAL_COAL_LINE, LOCAL_COAL_SOLD_LINE]);
+  });
+});
+
+/**
+ * THE GATE TALLY (COHERENCE-AGREE-8, REVIEW-AGREE-3 FINDING 4 / T5): in a walled town with no gate of record the
+ * lane's Services twin says "The walls leave few ways in", and Defense still said "{settlement} is walled, and every
+ * arrival goes through a gate and into the gate tally" (`walls PRESENT` vid 2, marked `colour`, so the gate atom did
+ * not gate it; census 720: both on one page in 22 towns, 0 on the line). The variant names a gate, so it carries the
+ * `gate` mark (the pools' source, `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md`, regenerated); the palisade's card and
+ * its line still say the town is walled.
+ */
+describe('the gate tally is not said where no gate stands', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const born = (/** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: seed.split('-')[1] }), null, { seed, customContent: {} });
+  test('r2r-village-6 and r2r-hamlet-18 are walled with no gate: the fortification line names no gate beside the twin', async () => {
+    const { defenseForcesProse } = await import('../../src/domain/display/stateProse/defenseStateProse.js');
+    const { factsOf } = await import('../../src/domain/facts/factsOf.js');
+    expectNoSeedFailures(collectSeedFailures(['r2r-village-6', 'r2r-hamlet-18'], (seed) => {
+      const s = born(seed);
+      const d = factsOf(s).defence;
+      expect([d?.walls, d?.gate], `${seed}: anchored, walled with no gate`).toEqual([true, false]);
+      expect(String(s.economicState.safetyProfile.safetyDesc || '') + String(s.economicState.safetyProfile.guardEffectivenessDesc || ''), `${seed}: anchored, the twin speaks`).toMatch(/The walls leave few ways in/);
+      // anchored: the same town is walled and its twin speaks (both held just above), so the line is read where it can speak
+      expect(String(defenseForcesProse(s).fortification?.sentence || ''), seed).not.toMatch(/\bgates?\b/i);
+    }), 'a gate is named where none stands');
+  });
+  test('every dossier prose variant that names a gate carries the gate mark (the gates fixture is keyed on the roster\'s gates)', async () => {
+    const { readdirSync } = await import('node:fs');
+    const dir = new URL('../../src/data/dossierStateProse/', import.meta.url);
+    const unmarked = [];
+    let seen = 0;
+    for (const f of readdirSync(dir).filter((x) => x.endsWith('.generated.js'))) {
+      for (const corpus of Object.values(await import(new URL(f, dir).href))) {
+        for (const [block, b] of Object.entries(corpus && typeof corpus === 'object' ? corpus : {})) {
+          for (const [pool, variants] of Object.entries(b?.pools || {})) {
+            for (const v of Array.isArray(variants) ? variants : []) {
+              if (!/\bgates?\b/i.test(String(v?.text || ''))) continue;
+              seen++;
+              if (pool !== 'FIXTURE: gates' && !(v.marks || []).includes('gate')) unmarked.push(`${block} ${pool} vid ${v.vid}`);
+            }
+          }
+        }
+      }
+    }
+    expect(seen, 'anti-vacuity: the corpus names gates').toBeGreaterThanOrEqual(8);
+    expect(unmarked).toEqual([]);
+  });
+});
+
+/**
+ * AGRICULTURE, WHERE THE TOWN LIVES BY IT (COHERENCE-AGREE-8, REVIEW-AGREE-3 FINDING 5 / T6). Cure 2 (72481b477, "the
+ * economic strengths and the strategic line are the town's, not the terrain's") keeps a terrain strength only on the
+ * town's own resource or route (`resourceGenerator.js :: STRENGTH_SUPPORT`); Agriculture stood only on grain fields, a
+ * floodplain or grazing land, so 80 of the census's 720 lost it, 38 of them earning Agricultural Rents from tenant
+ * farmers (r2r-village-35: 92% of its income). Agriculture now also stands on the town's own record of farming: an
+ * Agricultural Rents income, or the food record's grain chain. A town that only fishes still does not claim it.
+ */
+describe('Agriculture: what the land offers, where the town farms it', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const born = (/** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: seed.split('-')[1] }), null, { seed, customContent: {} });
+  test('r2r-village-35 and r2r-hamlet-44 live on tenant farming and offer Agriculture; r2r-town-26 farms its grain', () => {
+    expectNoSeedFailures(collectSeedFailures(['r2r-village-35', 'r2r-hamlet-44', 'r2r-town-26'], (seed) => {
+      const s = born(seed);
+      const rents = s.economicState.incomeSources.some((e) => e.source === 'Agricultural Rents');
+      const grain = (s.economicState.foodSecurity.activeChains || []).includes('Grain & agriculture');
+      expect(rents || grain, `${seed}: anchored, the record farms`).toBe(true);
+      expect(s.resourceAnalysis.economicStrengths, seed).toContain('Agriculture');
+    }), 'a farming town\'s land does not offer Agriculture');
+  });
+  test('twin: r2r-town-38 fishes and earns no rents, and its land still does not offer Agriculture', () => {
+    const s = born('r2r-town-38');
+    expect(s.economicState.incomeSources.some((e) => e.source === 'Agricultural Rents')).toBe(false);
+    // anchored: the food record's chains are read for the grain chain the positive arm above finds in r2r-town-26
+    expect(s.economicState.foodSecurity.activeChains || []).not.toContain('Grain & agriculture');
+    // anchored: the same strengths list carries Agriculture in the farming towns of the arm above
+    expect(s.resourceAnalysis.economicStrengths).not.toContain('Agriculture');
+  });
+});
+
+/**
+ * THE FELLING LINE, AN ORIGIN (COHERENCE-AGREE-8, REVIEW-AGREE-3 FINDING 3 / T2): cure 7 widened the Timber Trade
+ * line's gate from a managed or shipbuilding forest to any timber (`hasNearbyResource('managed_forest', 'timber')`,
+ * whose substring takes `mountain_timber`), so a town whose wild mountain stand nobody works, and whose resources the
+ * lane did not change, turned from "Timber sourced from more distant forests" (the line's) to "managed felling and
+ * sawmilling keep production consistent" beside "No one here works the timber". The felling line now stands on a
+ * managed or shipbuilding forest, as before the lane, or on a wild stand a wood house works; otherwise the line's own.
+ * The six towns below never held a pass and entered the census row at faa20bc6c.
+ */
+describe('the felling line: a wild stand is felled and sawn only where a wood house works it', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const born = (/** @type {string} */ seed) => {
+    const m = /^r2s-(\w+)-(thorp|hamlet|village|town|city|metropolis)-\d+$/.exec(seed);
+    return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: m ? m[2] : seed.split('-')[1], ...(m ? { selectedStresses: [m[1]], selectedStressesRandom: false } : {}) }), null, { seed, customContent: {} });
+  };
+  test('r2r-thorp-32, -47, r2r-town-12, -30, r2r-city-46 and r2s-religious_conversion-thorp-1: mountain timber, no wood house, no felling line', () => {
+    expectNoSeedFailures(collectSeedFailures(['r2r-thorp-32', 'r2r-thorp-47', 'r2r-town-12', 'r2r-town-30', 'r2r-city-46', 'r2s-religious_conversion-thorp-1'], (seed) => {
+      const s = born(seed);
+      expect(s.config.nearbyResources.filter((r) => /timber|forest/.test(r)), `${seed}: anchored, a wild stand only`).toEqual(['mountain_timber']);
+      expect(s.institutions.filter((i) => /sawmill|lumber|timber|carpent|wood|forest/i.test(String(i.name))), `${seed}: anchored, no wood house`).toEqual([]);
+      const timber = s.economicState.incomeSources.find((e) => e.source === 'Timber Trade');
+      expect(timber?.desc, seed).toBe('Timber sourced from more distant forests and resold or processed locally: trade route dependent.');
+    }), 'a stand nobody works is felled and sawn');
+  });
+});
+
+/**
  * F8 (ii) (COHERENCE-AGREE-6, the chair's ruling of 2026-11-12): the flag bag's prison and hospital are the defence
  * home's answers (`defenseFactsOf`), off the live roster: the lane's own two private readers in
  * `priorityHelpers.js :: getInstitutionNames`, cured rather than banked when the walker learned the four atoms.

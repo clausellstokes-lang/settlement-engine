@@ -370,8 +370,8 @@ const SHORTAGE_LAND_WORDS = Object.freeze([
   [/\(local fishing grounds /i, ['fishing_grounds', 'river_fish']],
 ]);
 
-/** The suffixes the export writer adds to a good (`computeActiveChains.js :: deriveExportsFromChains`). */
-const TRADE_LIST_SUFFIX = / \((?:transit|naval route only|taxed by occupation)\)$/;
+/** A good's own parenthetical, read off: the export writer's suffixes ("(transit)") and the service map's ("(letters of credit)"). */
+const TRADE_LIST_SUFFIX = /\s*\([^)]*\)$/; // COHERENCE-AGREE-8 (F2's fifth writer): the member judges every writer's good
 /** Worked land and the food source it is (the chair's food-sources ruling, 2026-11-11; game and fish keep their rules). */
 const CULTIVATED_SOURCE_OF = Object.freeze({ grain_fields: 'grain', fertile_floodplain: 'grain', grazing_land: 'livestock' });
 
@@ -419,7 +419,7 @@ export function projectionAgreementFindings(settlement) {
     }
     for (const [index, strength] of (analysis.economicStrengths || []).entries()) {
       const rule = STRENGTH_SUPPORT[/** @type {keyof typeof STRENGTH_SUPPORT} */ (strength)];
-      if (!rule || !townSupports(available, rule, route)) {
+      if (!rule || !townSupports(available, rule, route, settlement?.economicState)) {
         resource.push(finding(`resourceAnalysis.economicStrengths[${index}]`, rule ? 'A terrain strength has nothing of the town\'s under it.' : 'A terrain strength has no support row.', String(strength)));
       }
     }
@@ -477,7 +477,7 @@ export function projectionAgreementFindings(settlement) {
   const refusedOnly = goodsOnlyRefusedChainsMake(settlement?.economicState?.activeChains);
   for (const field of ['primaryExports', 'localProduction']) {
     for (const [index, good] of (settlement?.economicState?.[field] || []).entries()) {
-      if (refusedOnly.has(String(good).replace(TRADE_LIST_SUFFIX, '').toLowerCase())) {
+      if (refusedOnly.has(String(good).replace(TRADE_LIST_SUFFIX, '').toLowerCase()) || refusedOnly.has(String(serviceGoodOfExportLabel(good)).toLowerCase())) {
         resource.push(finding(`economicState.${field}[${index}]`, 'A trade list carries a good only a refused chain makes.', String(good)));
       }
     }
@@ -816,3 +816,6 @@ export function buildGenerationCoherenceReceipt(settlement, context = {}) {
     authoredTensions: Object.freeze(authoredTensions),
   });
 }
+
+// COHERENCE-AGREE-8 (F2's fifth writer): at the end of the file so no line cited above it moves.
+import { serviceGoodOfExportLabel } from './computeActiveChains.js';

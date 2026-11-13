@@ -919,7 +919,7 @@
   },
   {
     "path": "src/generators/steps/generateEconomy.js",
-    "line": 416,
+    "line": 417,
     "category": "floatInterpolation",
     "snippet": "`Chain depends on ${state.dependency.institution} (${state.dependency.severity || 'unspecified'}).`"
   },

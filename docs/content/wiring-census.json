@@ -4888,8 +4888,7 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 1,
-        "gate": 2
+        "gate": 3
       },
       "undeclared": 0,
       "crisisScoped": false
