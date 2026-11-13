@@ -492,3 +492,77 @@ A higher dial bears a few more armed houses, by about 0.4 a town from low to hig
 - **Limit 1:** "Its stores and its magic can carry no more than its watch can use."
 - **Limit 2:** "Walls with no one to man them."
 - **The dial:** "Martial will".
+
+---
+
+# SECOND ADDENDUM (records 321 and 322): R13, R14 and R12 measured; V3 is built with R13 and R14
+
+The probe's variant `V4` is V3 + R13 + R14, and the build is V4. `V4C` is V4 with R12's conditions as proposed below. It is **measured only, not built**.
+
+## R13: Martial will held to the armed bodies that carry it
+
+| Size | Births it bites | Mean change where it bites | The will's part, mean: today's reading (V1) | V2 | V3 | V3 + R13/R14 |
+|---|---|---|---|---|---|---|
+| thorp | 123 | −2.4 | 0.5 | 0.5 | 1.5 | 0.8 |
+| hamlet | 13 | −2.5 | 1.0 | 1.0 | 1.5 | 1.4 |
+| village | 30 | −1.3 | 1.2 | 1.2 | 1.8 | 1.7 |
+| town | 165 | −4.0 | 3.9 | 3.9 | 5.0 | 4.4 |
+| city | 0 | 0 | 5.2 | 5.2 | 5.6 | 5.6 |
+| metropolis | 0 | 0 | 5.1 | 5.1 | 5.6 | 5.6 |
+
+- **The bands it moves against V3: 63, all one band down.**
+- **cold-town-139:** V3 46 → 41. Its will is now 7.8, held to its watch and company.
+- **R14, the neighbour factor:** it is 1 on all 3,036 births, because a lone birth has no neighbour (`config.neighborRelationship` is absent on every one). The build proves the rule on a planted hostile neighbour (×1.2), exposed from its home `priorityHelpers.js`.
+
+**V3 as built (V4) against today, V2 and the base** (it replaces the first addendum's table):
+
+| births | n | base | today | V2 | V3 | V3 vs today: down 2+ / down 1 / up 1 / up 2+ | V3 vs base: down 2+ / down 1 / up 1 / up 2+ |
+|---|---|---|---|---|---|---|---|
+| calm thorp | 300 | 21.1 | 20.5 | 21.9 | 22.6 | 0 / 3 / 57 / 0 | 0 / 6 / 44 / 0 |
+| calm hamlet | 300 | 18.7 | 17.5 | 18.6 | 19.4 | 0 / 2 / 59 / 0 | 0 / 12 / 35 / 0 |
+| calm village | 300 | 18.4 | 16.9 | 18.1 | 18.4 | 0 / 9 / 41 / 0 | 0 / 27 / 27 / 0 |
+| calm town | 300 | 41.8 | 41.9 | 42.1 | 43.2 | 2 / 28 / 56 / 0 | 2 / 34 / 67 / 0 |
+| calm city | 300 | 66.1 | 70.5 | 79.9 | 74.8 | 0 / 2 / 63 / 4 | 0 / 2 / 117 / 7 |
+| calm metropolis | 100 | 67.7 | 75.9 | 86.8 | 79.7 | 0 / 0 / 15 / 0 | 0 / 0 / 50 / 5 |
+| famine | 412 | 31.9 | 26.9 | 42.5 | 42.3 | 0 / 3 / 186 / 96 | 0 / 10 / 161 / 47 |
+| under_siege | 412 | 34.0 | 30.8 | 46.5 | 45.9 | 0 / 1 / 201 / 69 | 0 / 3 / 193 / 41 |
+| wartime | 372 | 46.5 | 46.8 | 55.7 | 51.9 | 0 / 9 / 118 / 1 | 0 / 19 / 105 / 10 |
+| other crises | 240 | 43.0 | 42.7 | 50.1 | 49.4 | 1 / 12 / 97 / 0 | 1 / 19 / 80 / 12 |
+
+## R12: conditions, measured as proposed (nothing built)
+
+**The proposal.**
+- Each body or work has a condition: walls, garrison, militia, watch, hired company, adventurers' charter, wardens, and the armed households of small places.
+- The condition is below, ordinary or above, with odds **0.2 / 0.6 / 0.2**, and moves its part by **a tenth** of itself.
+- **Above is closed** where the facts forbid it:
+  - walls unmended (the fortification chain impaired);
+  - a bought body the place cannot pay (bought < 0.6);
+  - a paid body below full pay (funded < 0.7);
+  - any standing body a crisis in force takes from.
+- The probe stands in a hash per house for the registered fork the build would add.
+- **8,509 conditions are drawn on 3,036 births. Above is closed by a fact 812 times,** so the conditions lean down slightly.
+
+**Sameness** (calm births; the integer score):
+
+| size (calm births) | n | today: distinct readiness / share at the commonest | V3 (+R13/R14), no conditions | V3 with the proposed conditions |
+|---|---|---|---|---|
+| thorp | 300 | 37 / 7.7% | 34 / 7.0% | 34 / 7.7% |
+| hamlet | 300 | 36 / 7.0% | 36 / 6.7% | 36 / 6.3% |
+| village | 300 | 40 / 6.0% | 38 / 6.0% | 40 / 6.0% |
+| town | 300 | 65 / 4.0% | 65 / 4.3% | 65 / 4.3% |
+| city | 300 | 60 / 4.3% | 54 / 5.7% | 56 / 5.7% |
+| metropolis | 100 | 40 / 6.0% | 33 / 7.0% | 36 / 7.0% |
+
+**The spread.**
+- spread by conditions: mean |move| 0.34 p95 |move| 1.26 max 4.52 share over 3 points 0.2 %
+band changes by condition alone {0: 2973, 1: 20, -1: 43} of 3036
+conditions drawn 8509 above closed by a fact 812
+[(("Adventurers' charter", -1), 271), (("Adventurers' charter", 0), 972), (("Adventurers' charter", 1), 123), (('Armed households', -1), 260), (('Armed households', 0), 929), (('Armed households', 1), 151), (('Garrison', -1), 242), (('Garrison', 0), 852), (('Garrison', 1), 122), (('Hired company', -1), 149), (('Hired company', 0), 561), (('Hired company', 1), 76), (('Militia', -1), 41), (('Militia', 0), 153), (('Militia', 1), 9), (('Walls', -1), 349), (('Walls', 0), 1127), (('Walls', 1), 320), (('Wardens', -1), 17), (('Wardens', 0), 49), (('Wardens', 1), 11), (('Watch', -1), 346), (('Watch', 0), 1232), (('Watch', 1), 147)]
+- The score carries tenths in V3. Counted to the tenth, the calm births take 83 to 229 distinct values by size, before conditions and after.
+- No two of the 3,036 births share every part to the tenth. On these corpora, sameness between towns is already low; the conditions matter for the owner's case of one town born again from the same configuration.
+
+**The chair's guide was "a step about a tenth; a town's conditions seldom more than about three points".** Measured:
+- the mean move is 0.34 points;
+- 95% of births move 1.26 points or less;
+- 0.2% move more than 3 points (the largest 4.5, a city);
+- 63 births change band by condition alone (20 up, 43 down) of 3,036.

@@ -34,6 +34,8 @@ export async function loadParts(root) {
     const fl = getInstFlags(config, institutions);
     const inst = fl.inst;
     const milPri = getPriorities(config).military ?? 50;
+    const nType = String(config.neighborRelationship?.relationshipType || '').toLowerCase();
+    const nbr = (nType.includes('hostile') || nType.includes('rival')) ? 1.2 : nType.includes('cold_war') ? 1.18 : nType.includes('tense') ? 1.1 : nType.includes('allied') ? 0.92 : nType.includes('trade_partner') ? 0.96 : 1;
     const milEff = Math.round(fl.militaryEffective), crimEff = Math.round(fl.criminalEffective);
     const econOut = Math.round(fl.economyOutput), magInf = Math.round(fl.magicInfluence);
     const tier = s.tier || 'town';
@@ -89,7 +91,7 @@ export async function loadParts(root) {
       food: fp ? (fp.status === 'impaired' ? -8 : 5) : 0,
     };
     const fs = s.economicState?.foodSecurity;
-    return { config, institutions, stressTypes, inst, milPri, milEff, crimEff, econOut, magInf, tier, threat, route, worldLaw, magicOn, magPri, relPri, t, isSmall, community, comMil, comInt, presence, chains, fs, terrain: TERRAIN[config.terrainType || 'plains'] || 1, magicExists: config.magicExists !== false };
+    return { config, institutions, stressTypes, inst, milPri, nbr, milEff, crimEff, econOut, magInf, tier, threat, route, worldLaw, magicOn, magPri, relPri, t, isSmall, community, comMil, comInt, presence, chains, fs, terrain: TERRAIN[config.terrainType || 'plains'] || 1, magicExists: config.magicExists !== false };
   }
 
   const storageScoreOf = (mo) => Math.min(70, Math.round(mo <= 1 ? mo * 10 : mo <= 6 ? 10 + (mo - 1) * 7 : 45 + (mo - 6) * 4));
@@ -221,7 +223,9 @@ export async function loadParts(root) {
       parts.push({ group, name, raw: clean, scale, share, dims: Object.fromEntries(Object.entries(clean).map(([d, v]) => [d, v * share])), note });
     };
     const F = (floor) => fundedGate(floor, keep);
-    const V3 = variant === 'V3';
+    const COND = variant === 'V4C'; // V4 with R12's conditions (a probe proposal: odds and step below)
+    const R13 = variant === 'V4' || COND; // V4 = V3 with the chair's R13 (the will held to the armed bodies) and R14 (the neighbour factor)
+    const V3 = variant === 'V3' || R13;
     // V3 (R2): the three traditions together count at most 35 against monsters (one job, once).
     const arcMon = t.hasArcane ? Math.round(15 + Math.min(10, (magPri - 35) * 0.2)) : 0;
     const tradF = V3 ? Math.min(1, 35 / Math.max(1, arcMon + (t.hasDivine ? 18 : 0) + (t.hasDruid ? 12 : 0))) : 1; // a paid part keeps floor + (1-floor) x funded of itself
@@ -241,7 +245,7 @@ export async function loadParts(root) {
     const bos = inst.hasWalls || hasStanding;
     // V3 (R9): the dial is the base configuration's own (the slider), not the effective reading, which
     // folds in the garrison's presence, crime and the crisis multipliers (each counted elsewhere).
-    const dial = V3 ? x.milPri : x.milEff;
+    const dial = R13 ? x.milPri * x.nbr : V3 ? x.milPri : x.milEff;
     if (bos) {
       parts.push(paid('STANDS', 'Martial strength (the military dial)', { mil: Math.round(dial * 0.35), int: Math.round(dial * (law ? 0.25 : 0.04)) }));
     } else {
@@ -305,6 +309,25 @@ export async function loadParts(root) {
       const w = parts.find((p) => p.name === 'Walls'); w.share = 0.5; w.dims = { mil: 15, mon: 10 }; w.note = 'no one stands to man them: counts half';
     }
 
+    // R12 (PROPOSAL, measured only): a condition of each body or work, below / ordinary / above, odds 0.2 / 0.6 / 0.2,
+    // a step of a tenth of the part; drawn once per house from its own key (here a hash, standing in for a
+    // registered fork). Above is closed where the facts forbid it: walls unmended; a bought body the place
+    // cannot pay (bought < 0.6); a paid body below full pay (funded < 0.7); any body a crisis in force takes from.
+    const conditions = [];
+    if (COND) {
+      const BODY = /^(Walls|Garrison|Militia|Watch|Hired company|Adventurers' charter|Wardens|Armed households)$/;
+      const hash = (str) => { let h = 2166136261; for (const ch of str) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } h ^= h >>> 13; h = Math.imul(h, 0x5bd1e995); h ^= h >>> 15; return (h >>> 0) / 4294967296; };
+      const inCrisis = crisisPoints(x).length > 0;
+      for (const q of parts) {
+        if (!BODY.test(q.name)) continue;
+        const u = hash(`${s.id || s.name || ''}|${q.name}|condition`);
+        let c = u < 0.2 ? -1 : u >= 0.8 ? 1 : 0;
+        const closed = c === 1 && ((q.name === 'Walls' && x.chains.fortification < 0) || (q.scale === 'bought' && keep.bought < 0.6) || (q.scale === 'funded' && keep.funded < 0.7) || (q.group === 'STANDS' && inCrisis));
+        if (closed) c = 0;
+        if (c) { for (const d of Object.keys(q.dims)) q.dims[d] *= 1 + 0.1 * c; }
+        conditions.push({ part: q.name, c, closed });
+      }
+    }
     // V3 (R2): a hired-only place never reads above the same place with a watch in its hired force's stead.
     let hiredCapped = 0;
     if (V3 && hired && !hasStanding) {
@@ -334,6 +357,15 @@ export async function loadParts(root) {
     }
 
     const n = x.magicExists ? 5 : 4;
+    // R13: the will counts for no more than the armed bodies that carry it (after pay and crises); the 0.06 rules stay.
+    let willHeld = 0;
+    if (R13 && bos) {
+      const ARMED = /^(Garrison|Militia|Watch|Hired company|Adventurers' charter|Armed households|Wardens)$/;
+      const pts = (q) => Object.entries(q.dims).reduce((a, [d, v]) => a + (d === 'mag' && !x.magicExists ? 0 : v), 0);
+      const armed = parts.filter((q) => ARMED.test(q.name)).reduce((a, q) => a + pts(q), 0);
+      const will = parts.find((q) => q.name.startsWith('Martial strength'));
+      if (will && pts(will) > armed) { const k = armed > 0 ? armed / pts(will) : 0; willHeld = (pts(will) - armed) / n; for (const d of Object.keys(will.dims)) will.dims[d] *= k; will.note = 'held to the armed bodies that carry it (R13)'; }
+    }
     const val = (p) => Object.entries(p.dims).reduce((a, [d, v]) => a + (d === 'mag' && !x.magicExists ? 0 : v), 0) / n;
     for (const p of parts) p.points = val(p);
     const sum = (g) => parts.filter((p) => g.includes(p.group)).reduce((a, p) => a + p.points, 0);
@@ -363,7 +395,7 @@ export async function loadParts(root) {
       const raw = Object.values(full).reduce((a, v) => a + v, 0) / n + size0 - danger0;
       const t3 = Math.min(100, Math.max(0, raw));
       const sc = Math.round(t3);
-      return { parts, crises, n, size: size0, danger: danger0, sustainsLimited, hiredCapped, dims: Object.fromEntries(Object.entries(full).map(([d, v]) => [d, Math.round(v * 10) / 10])), reserve, scaleEnd: raw > 100 ? Math.round(raw - 100) : raw < 0 ? Math.round(raw) : 0,
+      return { parts, crises, n, size: size0, danger: danger0, sustainsLimited, hiredCapped, willHeld, conditions, dims: Object.fromEntries(Object.entries(full).map(([d, v]) => [d, Math.round(v * 10) / 10])), reserve, scaleEnd: raw > 100 ? Math.round(raw - 100) : raw < 0 ? Math.round(raw) : 0,
         groups: { BUILT: sum(['BUILT']), STANDS: force, SUSTAINS: sustains, GROUND: sum(['GROUND']), AGAINST: sum(['AGAINST']) }, total: t3, score: sc, band: readinessBandOf(sc).label, altScore, altBand: readinessBandOf(altScore).label };
     }
     const size = TIER_BONUS[x.tier] || 0, danger = THREAT_PEN[x.threat] || 0;
