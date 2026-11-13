@@ -1,0 +1,67 @@
+{
+ "distinctNames": 282,
+ "withParen": 43,
+ "forms": {
+  "count range \"(a-b)\"": [
+   "District markets (5-10)",
+   "Merchant guilds (3-8)",
+   "Merchant guilds (15-40)",
+   "Merchant guilds (50-100+)",
+   "Taverns (5-20)",
+   "Mills (2-5)",
+   "Blacksmiths (3-10)",
+   "Carpenters (5-15)",
+   "Butchers (3-8)",
+   "Bakers (5-15)",
+   "Craft guilds (5-15)",
+   "Craft guilds (30-80)",
+   "Craft guilds (100-150+)",
+   "Parish churches (2-5)",
+   "Parish churches (10-30)",
+   "Parish churches (50-100+)",
+   "Major monasteries (5-10)",
+   "Dwellings (1-8)",
+   "Dwellings (5-25)",
+   "Dwellings (15-100)"
+  ],
+  "other qualifier": [
+   "Mine (open cast)",
+   "Mint (official)",
+   "Resident smith (part-time)",
+   "Carpenter (part-time)",
+   "Apothecary (established)",
+   "Bowyers & fletchers (guild)",
+   "Sawmill (commercial)",
+   "Tanner (established)",
+   "Priest (resident)",
+   "Healer (divine, 1st level)",
+   "Fence (word of mouth)",
+   "Thieves' guild (powerful)"
+  ],
+  "magic gate": [
+   "Dream parlors (high magic)",
+   "Airship docking (high magic)",
+   "Message network (high magic)"
+  ],
+  "district tag": [
+   "Inns and taverns (district)",
+   "Brothel (red light district)"
+  ],
+  "household range \"(a-b households)\"": [
+   "Housing (75-650 households)",
+   "Housing (500-4000 households)"
+  ],
+  "count word": [
+   "Inn (multiple)"
+  ],
+  "population gate \"(n+ only)\"": [
+   "Cathedral (10,000+ only)"
+  ],
+  "household floor \"(n+ households)\"": [
+   "Housing (3500+ households)"
+  ],
+  "condition \"(if …)\"": [
+   "Gates (if walled)"
+  ]
+ }
+}

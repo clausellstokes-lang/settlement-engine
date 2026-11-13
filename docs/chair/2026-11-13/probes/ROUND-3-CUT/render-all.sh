@@ -1,0 +1,5 @@
+#!/bin/sh
+for t in base line wa wc ra rb up pw wr fd bd vl; do
+  echo "== $t $(date -u +%T)"; sh /tmp/claude-0/-home-user-settlement-engine/6c6c6e69-60a7-52f0-855a-5c3f87189806/scratchpad/probes/render.sh /tmp/claude-0/-home-user-settlement-engine/6c6c6e69-60a7-52f0-855a-5c3f87189806/scratchpad/wt/$t /tmp/claude-0/-home-user-settlement-engine/6c6c6e69-60a7-52f0-855a-5c3f87189806/scratchpad/r20/$t /tmp/claude-0/-home-user-settlement-engine/6c6c6e69-60a7-52f0-855a-5c3f87189806/scratchpad/probes/seeds20.txt 4
+done
+echo RENDER-DONE $(date -u +%T)
