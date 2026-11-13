@@ -270,6 +270,10 @@ function EventRow({ ev, idx }) {
 
 function TensionRow({ tension, idx }) {
   const sevTone = severityTone(tension.severity);
+  // ⛔ A RANGE IS NOT A RATING (the chair's ruling, R3-TABS second seat): the record holds the template's list of
+  // severities for a tension, unresolved; where it holds more than one, no severity word prints (the Pill printed
+  // the list run together). One severity prints as before; the border's tone above is untouched.
+  const sevRange = Array.isArray(tension.severity) && new Set(tension.severity.filter(Boolean)).size > 1;
   return (
     <View
       style={{
@@ -286,7 +290,7 @@ function TensionRow({ tension, idx }) {
         <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'], flex: 1 }}>
           {humanize(tension.label || 'Tension')}
         </Text>
-        {tension.severity && <Pill tone={sevTone}>{cap(tension.severity)}</Pill>}
+        {tension.severity && !sevRange && <Pill tone={sevTone}>{cap(tension.severity)}</Pill>}
       </View>
       {tension.parties?.length > 0 && (
         <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginBottom: 2 }}>

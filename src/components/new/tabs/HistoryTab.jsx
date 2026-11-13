@@ -79,14 +79,20 @@ export function TensionRow({t}) {
   const sevArr = Array.isArray(t.severity)?t.severity:[t.severity].filter(Boolean);
   const maxSev = sevArr.includes('catastrophic')?'catastrophic':sevArr.includes('major')?'major':'minor';
   const border = maxSev==='catastrophic'?'#8b1a1a':maxSev==='major'?'#b8860b':'#a0762a';
+  // ⛔ A RANGE IS NOT A RATING (the chair's ruling, R3-TABS second seat, round three's cut #486 #487 #592 #593
+  // #743 #744 #1422 #1423, the increment's #ww-466/467/468/530/531/569). A tension's record holds the template's
+  // list of severities copied whole (historyGenerator.js never resolves it for a tension), and the row printed
+  // one chip per member, run together ("minormajor"). Where the record holds more than one severity, NO word
+  // prints: nothing is chosen for the reader, neither the worst nor the least. One severity prints its word as
+  // before. The border colour above and the search's sort (dossierSearch.js :: severityRank) are untouched.
+  const sevWords = [...new Set(sevArr.filter(Boolean))];
+  const sevOne = sevWords.length===1&&SEV_COLORS[sevWords[0]] ? sevWords[0] : null;
   return (
     <div style={{border:`1px solid ${border}40`,borderLeft:`3px solid ${border}`,background:swatch['#FDF8E8'],padding:'12px 14px'}}>
       {/* Header */}
       <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
         <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:tm.color}}>{tm.label}</span>
-        {sevArr.filter(s=>s&&SEV_COLORS[s]).map((s,j)=>(
-          <span key={j} style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:SEV_COLORS[s]||'#6b5340',background:`${SEV_COLORS[s]||'#6b5340'}18`,padding:'0 5px',letterSpacing:'0.04em'}}>{s}</span>
-        ))}
+        {sevOne&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:SEV_COLORS[sevOne]||'#6b5340',background:`${SEV_COLORS[sevOne]||'#6b5340'}18`,padding:'0 5px',letterSpacing:'0.04em'}}>{sevOne}</span>}
       </div>
       {/* Description. The tension's plot hooks live on the Plot Hooks tab (X-2). */}
       <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}><MentionText text={typeof t==='object'?t.description||t.issue||t.type:String(t)}/></p>
