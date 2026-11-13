@@ -69,9 +69,9 @@ function foldedInto(gone, finalRoster) {
 
 /**
  * The descriptions' standing sentences settled to the final roster. `annotated` is the roster the power step's
- * standing sentences were written on (standingRosterOf, taken before the resize). A power whose sentence names a
- * power that left, or was written for a rank it no longer holds, takes the sentence the final roster gives it, in
- * place of the old one at its description's end. A power whose description does not end in the old sentence (a
+ * standing sentences were written on (standingRosterOf, taken before the resize). A power whose sentence the final
+ * roster no longer gives it (it names a power that left, or was written for a rank or figures it no longer holds;
+ * COHERENCE-POWERS-7) takes the sentence the final roster gives it, in place of the old one at its description's end. A power whose description does not end in the old sentence (a
  * description another step rewrote) is left as it is. Returns the same object where nothing moves.
  * @template {{ factions?: Array<Record<string, any>> }} P
  * @param {P} powerStructure the final roster @param {RosterSeat[]} annotated @param {{ body: string }} force
@@ -81,11 +81,8 @@ export function settleStandingToRoster(powerStructure, annotated, force) {
   const factions = Array.isArray(powerStructure?.factions) ? powerStructure.factions : null;
   if (!factions || !annotated.length) return powerStructure;
   const finalRoster = standingRosterOf(factions);
-  const onPage = new Set(finalRoster.map((f) => f.faction));
-  const gone = annotated.map((f) => f.faction).filter((name) => !onPage.has(name));
   const before = standingsOf(annotated, force);
   const after = standingsOf(finalRoster, force);
-  const namesGone = (/** @type {string} */ line) => gone.some((name) => line.toLowerCase().includes(name.toLowerCase()));
   let moved = false;
   const next = factions.map((f) => {
     const name = String(f?.faction || '');
@@ -95,7 +92,8 @@ export function settleStandingToRoster(powerStructure, annotated, force) {
     const old = before.get(name) || (host ? before.get(host) : undefined);
     const now = after.get(name);
     if (!old || !now || !old.standing || old.standing === now.standing) return f;
-    if (!namesGone(old.standing) && old.rank === now.rank) return f;
+    // COHERENCE-POWERS-7 (cold list REVIEW-W2A-3 #109 #713): a sentence the final roster no longer gives is settled
+    // whether or not the rank moved — the figures moved under it ("a slow war with the guild" after the guild left)
     const desc = String(f.desc || '');
     const base = desc === old.standing ? '' : desc.endsWith(` ${old.standing}`) ? desc.slice(0, -old.standing.length - 1) : null;
     if (base === null) return f;

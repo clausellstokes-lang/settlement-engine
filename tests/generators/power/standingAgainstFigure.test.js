@@ -61,3 +61,12 @@ describe('(b) a rival of the density law carries its own standing, never its hos
     expect(String(bloc.desc)).not.toContain('is narrow');
   }, 60_000);
 });
+
+describe('(c) a standing settled to the final roster wherever its sentence changes, not only its rank', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  it.each(['rw3-metropolis-politically_fractured-1', 'rw3-city-wartime-1'])('%s: no "slow war with the guild" where no thieves\' guild stands', (seed) => {
+    const s = born(seed);
+    expect(s.powerStructure.factions.some((f) => /thieves/i.test(f.faction)), 'premise: no thieves\' guild on the roster').toBe(false);
+    expect(s.powerStructure.factions.filter((f) => String(f.desc || '').includes('A slow war with the guild')).map((f) => f.faction)).toEqual([]);
+  }, 60_000);
+});
