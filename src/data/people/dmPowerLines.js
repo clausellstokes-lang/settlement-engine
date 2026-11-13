@@ -73,6 +73,21 @@ export function pointWords(n) {
   return Number.isInteger(x) ? String(x) : x.toFixed(1);
 }
 
+/**
+ * THE RULING THREE'S TITLE, READ AT ITS PRINT SITE (COHERENCE-POWERS-5, N5; REVIEW-POWERS-2 at e86d069be): the title
+ * names as many as it heads — "The ruling three of X" over three names, "The ruling two of X" over two, "Who leads X"
+ * over one, "No one stands at the head of X" over none. It reads the number of names the block prints (the view's
+ * ranked faces) and the ruling power's name. The Power tab's DM panel and the PDF's DM chapter print it.
+ * @param {number} count the names the block heads @param {string} ruler the ruling power's name
+ * @returns {string}
+ */
+export function rulingHeadOf(count, ruler) {
+  if (count >= 3) return `The ruling three of ${ruler}`;
+  if (count === 2) return `The ruling two of ${ruler}`;
+  if (count === 1) return `Who leads ${ruler}`;
+  return `No one stands at the head of ${ruler}`;
+}
+
 /** The ruling three's places in rank words. @param {1 | 2 | 3} rank */
 const RANK_WORDS = Object.freeze({ 1: 'the head', 2: 'the second', 3: 'the third' });
 

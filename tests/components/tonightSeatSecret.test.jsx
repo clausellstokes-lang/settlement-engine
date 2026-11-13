@@ -34,7 +34,14 @@ import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailur
 // tip whose seat's own line is a voiceable want overridden by the crisis secret (80, 90, 97, 114, 127, 134) join them.
 // Measured over soak1k-0..239: 25 seats voiced with the secret and no separate keeper row (19 of them with a want overridden).
 // Was [2, 16, 31, 36, 38, 39, 42, 43, 45, 62, 69, 74].
-const SEAM_SEEDS = [2, 31, 38, 42, 43, 62, 80, 90, 97, 114, 127, 134];
+// COHERENCE-POWERS-4 (2026-11-12, re-keyed BY IDENTITY, the same idiom): the COHERENCE-POWERS lane's dual hat (the leader is a
+// house head who holds the office) re-deals who holds the seat, so 5 of the twelve are no longer seams, measured: 31 and 80
+// (the new seat-holder keeps no crisis secret: the seat voices its want, and no keeper row), 62 (the crisis secret is kept by
+// someone else: a separate `secret` row), 43 and 127 (the seat-holder is voiced from the crisis cast, so no seat row). The seven
+// that still hold (2, 38, 42, 90, 97, 114, 134) are kept; the next five seam settlements at the tip whose seat's own line is a
+// voiceable want overridden by the crisis secret (18, 27, 34, 36, 37) join them. Measured over soak1k-0..239: 30 seats voiced
+// with the secret and no separate keeper row (23 of them with a want overridden). Was [2, 31, 38, 42, 43, 62, 80, 90, 97, 114, 127, 134].
+const SEAM_SEEDS = [2, 18, 27, 34, 36, 37, 38, 42, 90, 97, 114, 134];
 const FOUNDRY_SEED = 2;
 /** @type {Record<number, any>} */
 const born = {};

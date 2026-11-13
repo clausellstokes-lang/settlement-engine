@@ -159,6 +159,10 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // SW-9 (2026-11-09, ruling A11's one writer): worldSnapshotPublic.js's realm-arc sentences move
 // to realmArcSentences.js, shortening the file above its one row: worldSnapshotPublic 628 -> 615,
 // path, category and snippet byte-identical; the whole baseline diff is one -/+ pair. ADDRESS ROT.
+// COHERENCE-POWERS-4 (2026-11-12) — TWO PURE LINE MOVES: npcComponents.jsx gained the dual-hat and empty-seat
+// lines above its two banked relationship rows (the COHERENCE-POWERS lane, 04334d6ef and 859c11ff8), so
+// `{rel.strength}` 155 -> 157 and `{rel.tension}` 161 -> 163; path, category and snippet byte-identical; the whole
+// baseline diff is two -/+ pairs. ADDRESS ROT; no ceiling moved.
 // The census ends at 227 against a 227 ceiling — the seven additions net out against nothing,
 // because they were cured rather than counted. No ceiling moved in either direction.
 // TAIL-F · W-FAITH LANDING (the F5c->F6c->F7c consist) — ONE ROW THAT WAS NEVER DEBT, CURED

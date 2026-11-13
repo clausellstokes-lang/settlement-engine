@@ -128,7 +128,13 @@ export function drawTies(cards, place, rng, only = {}) {
   // the seat house's face, else the minted seat, else the first card — and draws only its KIND here.
   const seat = seatHouseOf(/** @type {any} */ (institutions));
   const seatKey = seat ? String(seat.house.name || '') : null;
-  const seatCard = cast.find((c) => (seatKey ? c?.institution?.kind === 'house' && c?.institution?.key === seatKey : c?.id === SEAT_CARD_ID)) || cast[0];
+  // COHERENCE-POWERS: the seat is the governing power's FIRST (the dual-hat leader, a house's face, where a house
+  // leads); a cast with no ranks (a pre-car save) reads the seat house's face, else the minted seat, as before
+  const governingName = typeof government === 'string' ? government : null;
+  const ledBy = governingName
+    ? cast.find((c) => Array.isArray(c?.memberships) && c.memberships.some((m) => m?.power === governingName && m?.rank === 1))
+    : null;
+  const seatCard = ledBy || cast.find((c) => (seatKey ? c?.institution?.kind === 'house' && c?.institution?.key === seatKey : c?.id === SEAT_CARD_ID)) || cast[0];
   // a minted face that is not the seat (FIX-PUBLIC-VEIL: a veiled mint's id is opaque, so it is told by
   // its kind, not by the `npc_power_` prefix)
   const isOtherMint = (/** @type {Record<string, any>} */ c) => c?.institution?.kind === 'power' && c?.id !== SEAT_CARD_ID;
