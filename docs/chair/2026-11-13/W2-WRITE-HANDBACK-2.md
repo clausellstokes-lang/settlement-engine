@@ -8,6 +8,8 @@
 |---|---|
 | 91592cbf1 | Round 1: the cold list's 69 corpus variants (124 cold lines) — 36 cured by a declaration, 22 by rewording out a claim no condition can check, 1 judged true by reading, 10 waiting (each below with the condition it needs). 46 new lines for the cases the disqualifiers emptied or thinned. |
 | 27bc147e0 | Stage 2: the first seat's 62 lines read against one town per case: 3 found false and cured by a declaration (4 lines), 1 line for the case one cure thinned. |
+| c16d7292a | merge of the first seat's last docs commit (c5c52739e); pushed |
+| f84cd4436 | Stage 3, the layer-2 list: 20 lines, 1 guard declared (DS-DEF-8's famine override v2 presumed a guard). |
 
 ## Measure first (the base, 31f57e8eb)
 - The 30 fixture towns re-born at the base with the cold list's own recipe (`birthConfig({...DEFAULT_CONFIG, ...town.config})`, `generateSettlementPipeline(cfg, null, {seed})`) and rendered through the soak harness (`scripts/audit/soak-review/renderHarness.mjs`, 20 tabs + Tonight): **the same 30 towns** (name and population 30/30). **113 of the 124 cold corpus lines still printed at the base**; the eleven that did not: the first seat's cure of DS-ECO-12 v1 (c02), DS-GEN-13 MARKET-OPEN v1 (a reworded sibling), and DS-POW-6 ADVANCING v1/v3 (another variant drawn; the falsity stood in the pool).
@@ -122,10 +124,20 @@ Read against one town of each case in the first seat's table, the facts of that 
 - **Read true and kept:** DS-ECO-6 v6; DS-ECO-8 v4-v6 (not reached); DS-ECO-12 v3-v5 (every houseless town reached has a neighbour's church; the access atom is above the pool's layer); DS-DEF-3 insurgency v4, v5 and political fracture v4, v5; DS-GEN-3 CRITICAL v5, v6 and Undefended v3, v5; DS-GEN-5 v5-v7 and DS-GEN-6 v5-v10 (a river route on a coast where the water leaf says no river: two homes, listed for the leaf's owner, the lines follow the route); the 24 DS-GEN-9 event lines; DS-POW-5 crimeIsGovt v4; DS-POW-6 advisory v3-v5; DS-FTH-4 v3-v5 ×2.
 
 ## Stage 3
-NOT STARTED at this writing (see the last section for what is left and in what order).
+**Waiting rows, as their conditions arrive:** none arrived (no atom was added to the vocabulary in this lane's window); the first seat's nineteen and round 1's ten stand, each with its condition (tables above and in the first seat's file).
+**Cases with no line:** unchanged and ruled: the ten DS-GEN-9 law-5 cases (the code request), DS-CND-1 provenance (the standing ruling), the covert player-only cases (§0e). The one player case new at the tip is DS-POW-6 ADVANCING split by the size gate: covert, dm-only by §0e; the owner's view holds 3 and 2 lines.
+**Three for every case, layer 2 first (f84cd4436):** DS-DEF-8's guardless overrides (siege, famine, command split, tribute, security compromised, quarantine, insurgency, beast pressure ×2) and MIGRATION arrivals {guard}; DS-DEF-2 neither walls nor force {threat} ×2, frontier deterrence {threat}, settled-nothing-organized {threat}, plagued perimeter-and-force; DS-DEF-11 UNWALLED-SMALL ×2, UNWALLED-LARGE; DS-DEF-5 garrison PRESENT. Found on the way and cured: DS-DEF-8 INTERNAL PRESSURE (famine) v2 "the people who keep order spend their days at the food stores" printed in guardless towns: + guardPresence.
+**What is left of stage 3, for the next seat, in this order:** (1) the round-1 crisis cases a disqualifier thinned to one or two lines (the gap list at the tip: DS-ECO-10 established, DS-DEF-2 STRONG, DS-GEN-18 BOUGHT-IN, DS-DEF-5 walls PRESENT and NO organized force, DS-ECO-1 C4, DS-ECO-8 POOR, DS-ECO-11 fullyExploited: each a siege, famine or no-market case with 1-2 lines; `gaps-tip/gaps.json` re-created by `probes/W2-WRITE/gaps.sh`); (2) the S list (53 cases, 65 lines) and the T list (158, 213) of the first seat's file, re-taken at the tip.
 
 ## The veto list
-`docs/chair/2026-11-13/W2-WRITE-NEW-LINES-2.md`: 47 new lines, 27 rewordings, every declaration moved, by pool.
+`docs/chair/2026-11-13/W2-WRITE-NEW-LINES-2.md`: 67 new lines (round 1: 46, stage 2: 1, stage 3: 20), 27 rewordings, every declaration moved, by pool.
 
-## Measures (to be brought current)
-PENDING.
+## Measures (base 31f57e8eb, the first seat's tip, against this seat's tip)
+- **The fixture, before and after:** the round-1 table above (30 towns re-born and rendered at both trees). Of the 124 cold corpus lines: 113 printed at the base; 34 of the 69 variants print in none of their false towns now; every other row is a reworded line read true in its town, or a WAITING row with its condition.
+- **The gap list, re-taken with the mapping seat's script** (`depth.mjs` + the first seat's case probe, the census's 720, at c16d7292a, before stage 3): cases 597 -> 650 (the new declarations split cases: a case is the values of every fact a pool's lines read), **none for the owner 11 -> 11**, none for a player 24 -> 25 (the one new is DS-POW-6 ADVANCING, covert by §0e, split in two by the size gate; the owner's view holds 3 and 2), under three 221 -> 262 (owner 221 -> 263): the crisis cases a disqualifier thinned (stage 3's first item for the next seat). Every pool of a false variant: towns where it speaks to nobody, base -> tip, unchanged in all 47.
+- **The census counter, base against tip** (`census.sh` + `compare.mjs`, at c16d7292a): **every row equal: no count rises, no new row**; GLANCE towns 716 -> 716, median rows per town [7, 7, 6.6] both. (The census's patterns do not count the cold list's mechanisms; the fixture is the measure.)
+- **The false variants on the census's 720** (each variant's longest fixed run found in the rendered dossiers; a reworded line counted by its new text): 4,894 town-prints -> 4,357. Not a cure measure (a count falling is not a cure); the read is the table above.
+- **The top line's share** (the mapping seat's `top1Actual`, the 720) for every pool this seat touched (58; 47 reached): **none above three draws in four** (highest DS-ECO-6 minor 0.608, from 1.000: its player face had one line; DS-DEF-11 WALLED-STRAINED 0.647 -> 0.605); corpus pools drawn 30 times or more at ≥ 0.75: 5 -> 4.
+- **The six golden surfaces:** SURFACES_PENDING
+- **Gates at every commit:** check-domain-strict exit 0, typecheck:ratchet exit 0 (each through `scripts/gate-tail.sh`); the push through the lane hook exit 0.
+- **The whole suite at the final tip:** SUITE_PENDING

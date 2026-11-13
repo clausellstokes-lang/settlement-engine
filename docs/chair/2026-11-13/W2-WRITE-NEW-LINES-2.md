@@ -1,6 +1,6 @@
 # W2-WRITE — the second seat's lines for the owner's veto
 
-Base: the first seat's tip 31f57e8eb. Tip: the lane. NEW = a line written by this seat; CHANGED = a line whose declaration or text moved (text shown old -> new). Round 1 (the cold list) and stage 2 (the first seat's lines read town by town); the case each new line is for is its own marks (a siege line carries crisis: under_siege, and so on).
+Base: the first seat's tip 31f57e8eb. Tip: the lane. NEW = a line written by this seat; CHANGED = a line whose declaration or text moved (text shown old -> new). Round 1 (the cold list), stage 2 (the first seat's lines read town by town) and stage 3 (three per case, layer 2); the case each new line is for is its own marks (a siege line carries crisis: under_siege, and so on).
 
 **DS-ECO-1::COMBINATION C4: a low rung on a working approach**
 - CHANGED v1 `[colour]` -> `[no crisis: under_siege]` · text: "Traffic moves along {settlement}'s {access} every day, and little of its money stays. The place earns less than it spends." -> "Traffic moves along {settlement}'s {access} every day, and little of its money stays behind."
@@ -101,6 +101,13 @@ Base: the first seat's tip 31f57e8eb. Tip: the lane. NEW = a line written by thi
 
 **DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force**
 - CHANGED v1 `[colour]` -> `[colour]` · text: "The country around {settlement} is thick with creatures and the town has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly." -> "The country around {settlement} is thick with creatures, and the town keeps both a wall and people to hold it, and both are in use constantly."
+- NEW v4 `[colour]` The wall at {settlement} is manned day and night against the creatures, and nobody walks out past it unarmed.
+
+**DS-DEF-2::Beasts & Monsters: frontier, credible deterrence**
+- NEW v4 `[threat · crisis: any]` The arrangements that kept {settlement} safe on the frontier are being tested in earnest now, and so far they are holding.
+
+**DS-DEF-2::Beasts & Monsters: settled, nothing organized**
+- NEW v6 `[threat · crisis: any]` You find {settlement} with nothing organised against what has come out of the country, and people arming themselves with whatever is at hand.
 
 **DS-DEF-2::Invasion & War: walls AND professional garrison**
 - CHANGED v1 `[]` -> `[no crisis: under_siege]`
@@ -118,6 +125,8 @@ Base: the first seat's tip 31f57e8eb. Tip: the lane. NEW = a line written by thi
 
 **DS-DEF-2::Invasion & War: neither walls nor force**
 - CHANGED v2 `[no threat · crisis: any]` -> `[no threat · crisis: any]` · text: "Nothing has come for {settlement} and nothing about the town would stop it. The safety here is entirely a matter of nobody having wanted to." -> "Nothing threatens {settlement} now, and nothing about the town would stop it if something did. Its safety rests on nobody wanting it."
+- NEW v5 `[threat · crisis: any]` With trouble at hand, {settlement} has no wall to close and nobody trained to send, and each household is deciding for itself whether to stay.
+- NEW v6 `[threat · crisis: any]` You find {settlement} open on every side, with nobody posted anywhere, while the danger everyone talks about is close.
 
 **DS-DEF-2::Economic Survival: STRONG**
 - CHANGED v1 `[no crisis: debt]` -> `[no crisis: debt · no crisis: famine · prosperity: ≥ moderate]`
@@ -157,6 +166,9 @@ Base: the first seat's tip 31f57e8eb. Tip: the lane. NEW = a line written by thi
 - NEW v5 `[no gate · no crisis: under_siege]` The wall around {settlement} turns back a wandering beast and slows a raid; nobody counts who comes in, because there is no gate to count them at.
 - NEW v6 `[crisis: under_siege]` {settlement}'s wall is all that stands between the town and the siege, and every stretch of it is watched now.
 
+**DS-DEF-5::garrison PRESENT**
+- NEW v4 `[colour]` {settlement}'s soldiers are paid by the season and drilled by the week, whether or not anything comes.
+
 **DS-DEF-5::NO organized force at all**
 - CHANGED v1 `[]` -> `[no crisis: under_siege · no crisis: wartime]`
 - CHANGED v2 `[]` -> `[no crisis: under_siege · no crisis: wartime]`
@@ -180,6 +192,36 @@ Base: the first seat's tip 31f57e8eb. Tip: the lane. NEW = a line written by thi
 **DS-DEF-6::Naval Defense: Port only**
 - CHANGED v3 `[crisis: any · no crisis: threat, unrest]` -> `[crisis: any · no crisis: threat, unrest]` · text: "You can sail into {settlement} unchallenged; nobody watches the harbour mouth." -> "Nothing armed meets a ship coming into {settlement}; the waterfront is kept for trade, not for defence."
 
+**DS-DEF-8::override: ACTIVE SIEGE**
+- NEW v4 `[no guardPresence]` {settlement} had nobody whose work was its defence before the army came, so the siege is being held by householders taking turns.
+
+**DS-DEF-8::override: INTERNAL PRESSURE (famine)**
+- CHANGED v2 `[colour]` -> `[guardPresence]`
+- NEW v4 `[no guardPresence]` {settlement} has no guards to feed, only households, and every household is guarding its own share of what is left.
+- NEW v5 `[no guardPresence]` With nobody at {settlement} paid to keep order, the hunger is policed by neighbours watching each other's doors.
+
+**DS-DEF-8::override: COMMAND SPLIT**
+- NEW v4 `[no guardPresence]` {settlement} has no standing guard to command, and the quarrel over who would command one is louder for it.
+
+**DS-DEF-8::override: UNDER TRIBUTE**
+- NEW v4 `[no guardPresence]` {settlement} keeps no guards to pay, and the debt is one more reason it never will.
+
+**DS-DEF-8::override: SECURITY COMPROMISED**
+- NEW v4 `[no guardPresence]` {settlement} has no guard to reorganize after the betrayal, only households that now bar their doors and keep their own counsel.
+
+**DS-DEF-8::override: QUARANTINE ACTIVE**
+- NEW v4 `[no guardPresence]` Nobody at {settlement} is paid to hold the quarantine, so households take turns at the edge of the place, turning travellers away.
+
+**DS-DEF-8::override: BEAST PRESSURE**
+- NEW v4 `[no guardPresence]` With no guards at {settlement}, every household watches its own edge of the place against the beasts, and nobody sleeps well.
+- NEW v5 `[no guardPresence]` {settlement} has nobody whose work is to stand against the beasts; what the creatures take is counted afterwards, house by house.
+
+**DS-DEF-8::override: INSURGENCY ACTIVE**
+- NEW v4 `[no guardPresence · crisis: insurgency]` {settlement} has no guards to send against the insurgents, and each household decides for itself what to keep quiet about.
+
+**DS-DEF-8::override: MIGRATION, arrivals**
+- NEW v4 `[guardPresence]` At {settlement} you find the guards posted where the newcomers camp, not at the edges of the place.
+
 **DS-DEF-9::magicDependency true**
 - CHANGED v4 `[]` -> `[]` · text: "{settlement} does better than its ground and roads would explain, and the reason is its few practitioners." -> "{settlement} does better than its ground and roads would explain, and the reason is the arcane work done here."
 
@@ -191,6 +233,13 @@ Base: the first seat's tip 31f57e8eb. Tip: the lane. NEW = a line written by thi
 - CHANGED v2 `[colour]` -> `[no crisis: under_siege]`
 - NEW v3 `[crisis: under_siege]` {settlement}'s {defwork} was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.
 - NEW v4 `[crisis: under_siege]` The siege has put more people on {settlement}'s {defwork} than the town could ever find for it in quieter seasons.
+
+**DS-DEF-11::UNWALLED-SMALL**
+- NEW v4 `[no threat · crisis: any]` Nobody ever thought {settlement} worth a wall, and nothing has yet given it cause to want one.
+- NEW v5 `[threat · crisis: any]` {settlement} has no wall to fall back behind, so the threat now at hand is being met in the open, house by house.
+
+**DS-DEF-11::UNWALLED-LARGE**
+- NEW v3 `[no crisis: under_siege]` {settlement} is large enough that anyone arriving expects a wall around it, and is surprised to walk straight in from open country.
 
 **DS-GEN-3::scores.military: CRITICAL**
 - CHANGED v4 `[walls · crisis: any]` -> `[walls · crisis: any · no crisis: under_siege]`
