@@ -16,6 +16,7 @@
  */
 
 import { LEGITIMACY_CUTS, legitimacyBandOf } from '../data/bandLadders.js';
+import { STRESS_POWER_FACES } from '../data/stressPowerFaces.js';
 // ── Public legitimacy contributions ──────────────────────────────────────────
 // Prosperity → ±20
 const PROSPERITY_CONTRIB = {
@@ -387,7 +388,18 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
     const ratio = mil.power / Math.max(1, gov.power);
     let type, direction, narrative;
 
-    if (ratio <= 0.5) {
+    // R3-CODE-C (ROUND-3-CUT #1074, HIGH: "Merchant Guild Council gives the orders and Occupation Authority carries
+    // them out" beside the crisis's "its own officials take their orders"): a power an occupation sends in (the
+    // table's appointed row, data/stressPowerFaces.js) is filed under the military category, so `mil` can be the
+    // occupier. Its row says what the crisis is at every band: the hall carries out what the occupier decides (the
+    // subordinate frame, its parties the other way round). Its kind never says the hall commands (subordinate) or
+    // that each needs the other (symbiotic); the bands above those (tense, competitive) stand.
+    const occupier = STRESS_POWER_FACES.some((row) => row.appointed && row.power === mil.faction && stressed(row.stress));
+
+    if (occupier) {
+      type = ratio > 1.2 ? 'competitive' : 'tense';
+      narrative = `${gov.faction} carries out what ${mil.faction} decides.`;
+    } else if (ratio <= 0.5) {
       type = 'subordinate';
       // R6 (soak 1000 rung 1, kind 4): the soldiers sentence needs soldiers on the record, a
       // garrison or a hired company (the defence-words check's own reading of the word).
