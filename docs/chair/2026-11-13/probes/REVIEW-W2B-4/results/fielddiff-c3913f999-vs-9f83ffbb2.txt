@@ -1,0 +1,11 @@
+births: base 720 tip 720 differ 0
+DUMP DIFFERS r2r-thorp-0.txt lines only at base 2 only at tip 0
+   -  Patron deity
+   -  Assign a patron god to awaken the settlement’s religion layer. Upgrade to premiumAvailable at launch to author and assign deities.
+DUMP DIFFERS r2r-thorp-1.txt lines only at base 2 only at tip 0
+   -  Patron deity
+   -  Assign a patron god to awaken the settlement’s religion layer. Upgrade to premiumAvailable at launch to author and assign deities.
+DUMP DIFFERS r2r-thorp-3.txt lines only at base 2 only at tip 0
+   -  Patron deity
+   -  Assign a patron god to awaken the settlement’s religion layer. Upgrade to premiumAvailable at launch to author and assign deities.
+dumps: base 720 tip 720 differ 3
