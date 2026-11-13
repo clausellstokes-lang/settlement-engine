@@ -100,6 +100,7 @@ import { magicWorksAt } from '../../worldPulse/magicWorksAt.js';
 import { deriveMagicReliance, magicDialAbsent } from '../../magicReliance.js';
 import { SMALL_TIERS, TOWN_PLUS_TIERS } from '../../../data/constants.js';
 import { scoreBand } from '../defenseScoreBands.js';
+import { readinessBandOf } from '../../../data/bandLadders.js';
 import { DEFENSE_STRESS_STATUS } from '../defenseDisplay.js';
 import { migrationDirectionOfEntry, migrationDirectionOfStress } from '../../migrationDirection.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../../data/dossierStateProse/defense.generated.js';
@@ -114,6 +115,7 @@ import { wallsAnswered } from '../../defense/defenseFacts.js';
 import { crisisAnswered } from '../../crisis/crisisFacts.js';
 import { factsAnswered } from '../../facts/factsAnswered.js';
 import { corpusAdmittingCrimeLines, crimeLineFactsOf } from './crimeLineDisqualifiers.js';
+import { corpusAdmittingPostureLines } from './postureLineDisqualifiers.js';
 
 /**
  * The desk's corpus, typed at the import boundary — the generated leaves stay PURE DATA.
@@ -835,6 +837,26 @@ export const TERRAIN_DEFENCE_NAMES = Object.freeze(Object.keys(TERRAIN_DEFENCE_O
 export const TERRAIN_PRIZE_NAMES = Object.freeze(Object.keys(TERRAIN_PRIZE_OF));
 
 /**
+ * ⭐ L1, ONE LADDER FOR ONE NUMBER (R3-TABS; the chair's ruling of 2026-11-13). The posture line
+ * banded `readiness.score` on the aspects' ladder (`scoreBand`: 65/40/20) while the badge beside it
+ * bands the same score on the readiness ladder (`bandLadders.js :: readinessBandOf`: 76/55/38/24/12),
+ * so "Defensible" stood over "could not hold off a raid" and "Vulnerable" over "all but undefended"
+ * (the defence lane's fourth read, classes E and K). The line now reads the BADGE through its one
+ * home, `readinessBandOf` — the very label `readiness.label` holds (884 of 884 births at 9e57f5023):
+ * Fortress and Well-Defended read the strong pool, Defensible the adequate, Lightly Defended and
+ * Vulnerable the weak, Undefended the critical. No new words; all four pools kept.
+ * @type {Readonly<Record<string, string>>}
+ */
+const POSTURE_POOL_OF_BADGE = Object.freeze({
+  Fortress: 'readiness STRONG',
+  'Well-Defended': 'readiness STRONG',
+  Defensible: 'readiness ADEQUATE',
+  'Lightly Defended': 'readiness WEAK',
+  Vulnerable: 'readiness WEAK',
+  Undefended: 'readiness CRITICAL',
+});
+
+/**
  * DS-DEF-1 lens 1 — THE READINESS BAND.
  *
  * ⭐ Reads `defenseProfile.readiness.score`, NOT `avgScore(scores)`. See the header: the
@@ -846,8 +868,8 @@ export const TERRAIN_PRIZE_NAMES = Object.freeze(Object.keys(TERRAIN_PRIZE_OF));
  */
 export function posturePoolKey(readinessScore) {
   if (typeof readinessScore !== 'number' || !Number.isFinite(readinessScore)) return null;
-  const key = `readiness ${scoreBand(readinessScore)}`;
-  return CORPUS['DS-DEF-1'].pools[key] ? key : null;
+  const key = POSTURE_POOL_OF_BADGE[readinessBandOf(readinessScore).label];
+  return key && CORPUS['DS-DEF-1'].pools[key] ? key : null;
 }
 
 /**
@@ -892,7 +914,8 @@ export function strategicPrizePoolKey(terrain) {
  *
  * @param {{name?: string, defenseProfile?: {readiness?: {score?: unknown}|null}|null,
  *   resourceAnalysis?: {terrain?: unknown}|null,
- *   economicState?: {safetyProfile?: {guardEffectivenessDesc?: unknown}|null}|null
+ *   economicState?: {safetyProfile?: {guardEffectivenessDesc?: unknown}|null}|null,
+ *   stress?: unknown, institutions?: unknown
  *   }|null|undefined} settlement
  * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{posture: object|null, terrain: object|null, prize: object|null}>}
@@ -906,10 +929,10 @@ export function defensePostureProse(settlement, options = {}) {
   // reader so this desk cannot spell the path differently from the registry that declares it.
   const dmField = readProsePath(settlement, DM_FIELD_FRAMED_BY_BLOCK['DS-DEF-1']);
 
-  /** @param {string|null} poolKey */
-  const projected = (poolKey) => {
+  /** @param {string|null} poolKey @param {typeof CORPUS} [corpus] */
+  const projected = (poolKey, corpus = CORPUS) => {
     if (!poolKey) return null;
-    const line = composeStateProse(CORPUS, 'DS-DEF-1', {
+    const line = composeStateProse(corpus, 'DS-DEF-1', {
       ...options,
       slots,
       spineKey: poolKey,
@@ -922,7 +945,7 @@ export function defensePostureProse(settlement, options = {}) {
   };
 
   return Object.freeze({
-    posture: projected(posturePoolKey(settlement?.defenseProfile?.readiness?.score)),
+    posture: projected(posturePoolKey(settlement?.defenseProfile?.readiness?.score), corpusAdmittingPostureLines(CORPUS, settlement)),
     terrain: projected(terrainDefencePoolKey(terrain)),
     prize: projected(strategicPrizePoolKey(terrain)),
   });
