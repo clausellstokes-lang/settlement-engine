@@ -1,0 +1,31 @@
+pk: 96 pages (each share by its gallery slug and by its party link) | no page model 0 | tabs rendered 1056 (22369310 characters of HTML) | tabs that threw {} | pages whose tab printed one of my markers {"Overview":24,"Services":10,"Defense":20,"History":24,"Summary":21,"Relationships":8} | pages whose tab printed the name of a house hidden whole {"Economics":15}
+      marker Overview: Palaiotion (DM): …enemy agents within the settlement caused suspicion and denunciations vq6n108z
+      marker Services: Palaiotion (DM): …             Criminal services  ( 2 )  ▲        Fence (word of mouth) vq6n210z
+      marker Defense: Palaiotion (DM): …lls  Gated stone defences. Costly to raise and no cheaper to keep up. vq6n19z
+      marker History: Palaiotion (DM): …enemy agents within the settlement caused suspicion and denunciations vq6n108z
+      marker Summary: Palaiotion (DM): …openly: A third party is actively working to change that calculation. vq6n78z
+      hidden name Economics: Khutulunkum: "smuggling network" in "…nd residential plots within the walls 13 criminal smuggling network revenue an estimated 17 of ec…"
+      marker Relationships: Khutulunkum (DM): …trol of a key trade route checkpoint    At stake:   Economic leverage vq6n487z
+cmb_0: 96 pages (each share by its gallery slug and by its party link) | no page model 0 | tabs rendered 1056 (22586996 characters of HTML) | tabs that threw {} | pages whose tab printed one of my markers {"Overview":84,"Defense":80,"Summary":81,"Services":10,"History":24,"Relationships":8} | pages whose tab printed the name of a house hidden whole {"Economics":30}
+      marker Overview: Hartdorf: … to act like someone who considers the debt paid. Zita Wolf does not. vq6n52z
+      marker Defense: Hartdorf: … earthen berm. It checks raiders and creatures without stopping them. vq6n13z
+      marker Summary: Hartdorf: … to act like someone who considers the debt paid. Zita Wolf does not. vq6n52z
+      marker Services: Palaiotion (DM): …             Criminal services  ( 2 )  ▲        Fence (word of mouth) vq6n210z
+      marker History: Palaiotion (DM): …enemy agents within the settlement caused suspicion and denunciations vq6n108z
+      hidden name Economics: Khutulunkum: "smuggling network" in "…nd residential plots within the walls 13 criminal smuggling network revenue an estimated 17 of ec…"
+      marker Relationships: Khutulunkum (DM): …trol of a key trade route checkpoint    At stake:   Economic leverage vq6n487z
+pk3: 96 pages (each share by its gallery slug and by its party link) | no page model 0 | tabs rendered 1056 (20042981 characters of HTML) | tabs that threw {} | pages whose tab printed one of my markers {"Overview":24,"Services":3,"Defense":21,"History":24,"Relationships":20,"Summary":18} | pages whose tab printed the name of a house hidden whole {}
+      marker Overview: Weichwiese (DM): …   ▸   Rival guilds competed for market share and political influence vq6n97z
+      marker Services: Weichwiese (DM): …                Criminal services  ( 2 )  ▲        No law, bring coin vq6n197z
+      marker Defense: Weichwiese (DM): …lls  Gated stone defences. Costly to raise and no cheaper to keep up. vq6n21z
+      marker History: Weichwiese (DM): …ajor   Rival guilds competed for market share and political influence vq6n97z
+      marker Relationships: Weichwiese (DM): …trol of a key trade route checkpoint    At stake:   Economic leverage vq6n108z
+      marker Summary: Weichwiese (DM): …y, whether Berchta Herrmann can be trusted. The answer took too long. vq6n79z
+cmb_3: 96 pages (each share by its gallery slug and by its party link) | no page model 0 | tabs rendered 1056 (20263607 characters of HTML) | tabs that threw {} | pages whose tab printed one of my markers {"Overview":96,"Defense":81,"Summary":66,"Services":3,"History":24,"Relationships":20} | pages whose tab printed the name of a house hidden whole {"Economics":30}
+      marker Overview: Staroburg: …a Pavlov comes up next week, and Alyona Pavlov has named a new price. vq6n40z
+      marker Defense: Staroburg: …no garrison is here to keep. You find them along dangerous frontiers. vq6n9z
+      marker Summary: Staroburg: …e direction and expected in the other, and they disagree about which. vq6n44z
+      marker Services: Weichwiese (DM): …                Criminal services  ( 2 )  ▲        No law, bring coin vq6n197z
+      marker History: Weichwiese (DM): …ajor   Rival guilds competed for market share and political influence vq6n97z
+      marker Relationships: Weichwiese (DM): …trol of a key trade route checkpoint    At stake:   Economic leverage vq6n108z
+      hidden name Economics: Fonteporta: "front businesses" in "…ade black market criminal economy operational via front businesses missing thieves guild powerfu…"

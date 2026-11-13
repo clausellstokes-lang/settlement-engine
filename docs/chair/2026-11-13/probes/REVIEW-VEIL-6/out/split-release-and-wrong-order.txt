@@ -1,0 +1,28 @@
+built s_release spec 203+211+212+204-210+211+212
+the release after the early step: 203 + 211 + 212, then 204..210, 211, 212 in order, against 001..212 built in order | s_release (2852 lines) against s212 (2852 lines) | lines that differ: 0
+… against 001..211 with the lane's 211 at 28f52b1e4 | s_release (2852 lines) against l211 (2852 lines) | lines that differ: 0
+built s_rel_nopush212 spec 203+211+212+204-210+211
+   < F|public._gallery_apply_member_overrides(jsonb,jsonb,jsonb,boolean,boolean,boolean)
+   < F|public._gallery_veil_apply(jsonb,jsonb)
+   < F|public._gallery_veil_card(text,jsonb,jsonb,jsonb,jsonb,jsonb)
+   < F|public.get_gallery_dossier(text)
+   < F|public.import_gallery_dossier(text)
+   > F|public._gallery_apply_member_overrides(jsonb,jsonb,jsonb,boolean,boolean,boolean)
+   > F|public._gallery_veil_apply(jsonb,jsonb)
+   > F|public._gallery_veil_card(text,jsonb,jsonb,jsonb,jsonb,jsonb)
+   > F|public.get_gallery_dossier(text)
+   > F|public.import_gallery_dossier(text)
+a release push that stops after 211 (no 212 yet), against 001..212 | s_rel_nopush212 (2852 lines) against s212 (2852 lines) | lines that differ: 10
+== 211's down file while 212 is still applied, on a database WITH shares (a clone of cm203p211_0: the same catalogue as 203 + frozen 211 + 212)
+NOTICE:  database "r_h" does not exist, skipping
+  211 down applied: exit 0
+
+NOTICE:    reads after it: 96 answered, 0 RAISED ()
+DO
+== the recovery from the wrong order (211's down file run while 212 was applied; r_i is in that state, 212's down having then failed)
+  211_server_side_share_veil.sql: exit 0  
+  212_share_veil_later_cures.sql: exit 0  
+211 then 212 applied again, against 203 + frozen 211 + 212 | r_i (2849 lines) against s203p211p212 (2849 lines) | lines that differ: 0
+  212_share_veil_later_cures.down.sql: exit 0  
+  211_server_side_share_veil.down.sql: exit 0  
+then 212's down, 211's down and 203's party-link read, against 203 | r_i (2799 lines) against t203 (2799 lines) | lines that differ: 0

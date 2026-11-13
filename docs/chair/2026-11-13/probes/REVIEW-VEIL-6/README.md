@@ -53,3 +53,22 @@ Each on a CLONE of a database a cold run left behind (`create database x templat
 
 The tables behind the review: `table-<side>-<chain>.txt` (every eye shut), `table-<side>-persons-<chain>.txt` (the
 per-person switch), `summary-*.txt`, the attack's outputs. The runs' raw JSON (7 MB) is not committed.
+
+## After the cold pass
+
+- `names-anyform.mjs <pg module dir> <db>…`: the name of a house hidden whole in ANY letter case or key form, in
+  every string and key of every read (the search that found the twelfth second home).
+- `attack/twelfth-booleans.sql`: the booleans and income labels a hidden criminal house still raises, on the link.
+- `attack/eleventh-alias.sql`, `attack/eleventh-hand.sql`, `attack/impression-hand.sql`: the eleventh and the tenth
+  second homes, by query and on rows written by hand (the hand rows show the twelfth on the same row).
+- `client.probe.jsx` (`RV6_PROBE=client.probe.jsx RV6_SRC=<tree> RV6_DBS=…`): that tree's CLIENT veil over the stored
+  rows, no server veil in between.
+- `v54frozen.probe.jsx`: the frozen copy a client builds for a share with a person switched off, stored and read
+  back; and what the player's world export carries.
+- `oldclient.probe.jsx` (run in a worktree of origin/master): the deployed client's own page model and its eleven
+  tab components rendered over a chain.
+- `faults/plant.py <worktree> F1…F7`: one fault each for the lane's new guards, planted in a throwaway worktree.
+- `split/`: `catalog2.sql` + `cmp.sh` (two chains' catalogues, line by line), `rollback212.sh`, `responses.sql`
+  (the md5 of every read's response, share by share), `concurrent.sh` and `concurrent2.sh` (readers running while
+  212 is applied and rolled back). Chains for it: `sh native/chain.sh s212 212 <split>/supabase/migrations`,
+  `s203p211p212 203+211+212`, `s203p211 203+211`, `s211 211`, `s_release 203+211+212+204-210+211+212`.

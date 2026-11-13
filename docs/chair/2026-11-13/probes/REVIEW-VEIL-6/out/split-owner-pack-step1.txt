@@ -1,0 +1,35 @@
+== the pack's files at 45317ee3f
+1dfbfa2fd8f51e07a46984902939edf000ef4b45dd2f51181d335a43e6facc16  1-read-first.sql
+ccccb0251dbbf31d36de55cccca2a91a3a9f461698f0a29c6e94d5bec427f09e  2-apply-212.sql
+2c80395b33d54b337ab4b516c4a3adcf99d2617e186009fb91272fa4dea09b4b  3-check-after.sql
+e465abd827a5e7ad1135d7052d30897a5bbf9152459e57d51263f3d0cad67580  4-rollback-ONLY-IF-NEEDE
+2-apply-212.sql IS begin; + the migration + commit; byte for byte
+4-rollback IS begin; + the down file + commit; byte for byte
+== step 1 on 203 + frozen 211 with 48 stored shares (a clone of the cold run's base database)
+exit 0
+rows md5 and write counters before: 6d4bff94ea020b950fcc244624512f1d 0  | after: 6d4bff94ea020b950fcc244624512f1d 0 
+BEGIN
+SET
+    rolname    | role_settings | role_in_db_settings 
+---------------+---------------+---------------------
+ anon          |               | 
+ authenticated |               | 
+ service_role  |               | 
+(3 rows)
+ every_role_in_this_db | server_default_at_session_start 
+-----------------------+---------------------------------
+                       | 0 ms
+(1 row)
+ functions_expected | matching | different | missing | not_expected 
+--------------------+----------+-----------+---------+--------------
+                 45 |       45 |           |         | 
+(1 row)
+ helpers | callable_by_readers 
+---------+---------------------
+      40 |                   0
+(1 row)
+ d1_unmarked_reveal_shares_with_a_person_hidden | d2_reveal_shares_sending_custom_content | d3_shares_hiding_a_tie_with_a_second_home | d4_veiled_shares_with_economy_chains 
+------------------------------------------------+-----------------------------------------+-------------------------------------------+--------------------------------------
+                                              6 |                                      30 |                                        36 |                                   42
+(1 row)
+ROLLBACK

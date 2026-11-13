@@ -1,0 +1,30 @@
+== green-secondhomes: EXIT 0 | Tests 3 passed (3)
+== F1-secondhomes: EXIT 1 |⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+ Tests 2 failed | 1 passed (3)
+     × every string hidden by hand, marked at birth: nothing of it, and no name of a house hidden whole, in any of the four reads, both shapes, DM off and on, live and frozen 220965ms
+     × THE SAME-STEP CLASS (the limit the marker cannot reach): the composed homes of a tie and a person's impression, written from marked sources, are not sent 65252ms
+AssertionError: expected [ …(1344) ] to deeply equal []
+AssertionError: expected [ …(768) ] to deeply equal []
+== F2-secondhomes: EXIT 0 | Tests 3 passed (3)
+== F3-secondhomes: EXIT 1 |⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+ Tests 2 failed | 1 passed (3)
+     × every string hidden by hand, marked at birth: nothing of it, and no name of a house hidden whole, in any of the four reads, both shapes, DM off and on, live and frozen 226210ms
+     × THE SAME-STEP CLASS (the limit the marker cannot reach): the composed homes of a tie and a person's impression, written from marked sources, are not sent 69728ms
+AssertionError: expected [ …(160) ] to deeply equal []
+AssertionError: expected [ …(48) ] to deeply equal []
+== F4-cures: EXIT 1 |⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+ Tests 1 failed | 31 skipped (32)
+     × V5-3 (the review rows): a Reveal-DM share sends no reader and no importer the custom-content records, marked or not, frozen or narrated, any grouping opened 913ms
+== F5-cures: EXIT 1 |⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+ Tests 1 failed | 31 skipped (32)
+     × V5-4 (the review rows): a person hidden by the per-person switch is sent by no read in a roster copy, unmarked or marked; the person shown is sent as before; nothing else an old share serves changes 1089ms
+== F6-invariance: EXIT 1 |⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+ Tests 1 failed | 4 passed (5)
+     × the review's class (V5-2): composePublicProse(owner) deep-equals composePublicProse(stripped owner) on 50 infiltrated villages and towns, rv5-r3-village-infiltrated-3 by text 25793ms
+AssertionError: expected [ …(8) ] to deeply equal []
+== F7-cures: EXIT 1 |⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+ Tests 2 failed | 30 skipped (32)
+     × the rollback: 001..212 then supabase/rollback/212_*.down.sql equals a chain stopped at 211, and 211_*.down.sql after it a chain stopped at 210, byte for byte 11513ms
+     × V5-7: every helper the early-deployed 211 created is created again here or dropped here by signature; the down file drops all of them 40ms
+AssertionError: expected [ Array(482) ] to deeply equal [ Array(481) ]
+AssertionError: expected [ Array(1) ] to deeply equal []

@@ -1,0 +1,46 @@
+== step 1's check (2) on other chains: is it live?
+-- on t203:
+ functions_expected | matching |                                                                                                                                                    different           
+                 45 |        0 | _gallery_apply_member_overrides(base jsonb, dm_full jsonb, overrides jsonb, settlement_share_dm boolean, settlement_importable boolean, for_import boolean), get_galler
+(1 row)
+-- on s203p211p212:
+ functions_expected | matching |                                                                                                                                                                        
+                 45 |       40 | _gallery_apply_member_overrides(base jsonb, dm_full jsonb, overrides jsonb, settlement_share_dm boolean, settlement_importable boolean, for_import boolean), _gallery_v
+(1 row)
+-- on s211:
+ functions_expected | matching | different | missing | not_expected 
+                 45 |       45 |           |         | 
+(1 row)
+-- on s212:
+ functions_expected | matching |                                                                                                                                                                        
+                 45 |       40 | _gallery_apply_member_overrides(base jsonb, dm_full jsonb, overrides jsonb, settlement_share_dm boolean, settlement_importable boolean, for_import boolean), _gallery_v
+(1 row)
+== step 2 on the clone with shares
+exit 0 in 54 ms
+after step 2, against 203 + frozen 211 + 212 built file by file | pk (2849 lines) against s203p211p212 (2849 lines) | lines that differ: 0
+== step 3
+BEGIN
+ helpers | callable_by_readers 
+---------+---------------------
+      50 |                   0
+(1 row)
+ functions_expected | matching | different | missing | not_expected 
+--------------------+----------+-----------+---------+--------------
+                 55 |       55 |           |         | 
+(1 row)
+        proname         |            proconfig            
+------------------------+---------------------------------
+ get_gallery_map        | {"search_path=public, pg_temp"}
+ get_gallery_dossier    | {"search_path=public, pg_temp"}
+ get_unlisted_dossier   | {"search_path=public, pg_temp"}
+ import_gallery_dossier | {"search_path=public, pg_temp"}
+(4 rows)
+ROLLBACK
+== step 2 a second time (a double click)
+exit 0
+after it | pk (2849 lines) against s203p211p212 (2849 lines) | lines that differ: 0
+== step 5 (the rollback file)
+exit 0
+after the rollback, against 203 + frozen 211 | pk (2839 lines) against s203p211 (2839 lines) | lines that differ: 0
+                 45 |       45 |           |         | 
+212 applied again for the reads below: exit 0

@@ -1,0 +1,8 @@
+b203p211 | rv6imp-open | gallery: Ada's appearance sent true, her impression sent true, Bo's impression sent true | link: Ada's impression sent true, Bo's true
+b203p211 | rv6imp-shut | gallery: Ada's appearance sent false, her impression sent true, Bo's impression sent true | link: Ada's impression sent true, Bo's true
+l203p211 | rv6imp-open | gallery: Ada's appearance sent true, her impression sent true, Bo's impression sent true | link: Ada's impression sent true, Bo's true
+l203p211 | rv6imp-shut | gallery: Ada's appearance sent false, her impression sent false, Bo's impression sent true | link: Ada's impression sent false, Bo's true
+s203p211p212 | rv6imp-open | gallery: Ada's appearance sent true, her impression sent true, Bo's impression sent true | link: Ada's impression sent true, Bo's true
+s203p211p212 | rv6imp-shut | gallery: Ada's appearance sent false, her impression sent false, Bo's impression sent true | link: Ada's impression sent false, Bo's true
+l211 | rv6imp-open | gallery: Ada's appearance sent true, her impression sent true, Bo's impression sent true | link: Ada's impression sent true, Bo's true
+l211 | rv6imp-shut | gallery: Ada's appearance sent false, her impression sent false, Bo's impression sent true | link: Ada's impression sent false, Bo's true

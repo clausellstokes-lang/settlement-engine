@@ -1,0 +1,62 @@
+
+== A. the tables, under row security
+ok   anon: rows of settlements visible: 0
+ok   anon: rows of saved_maps visible: 0
+22222222-2222-2222-2222-222222222222
+ok   reader: rows of settlements visible: 0
+ok   reader: rows of saved_maps visible: 0
+ok   reader: update of every settlement's overrides: see the row count above (UPDATE 0 expected)
+
+psql:attack/attack.sql:48: NOTICE:  ok   table scan done (a LEAK line above is a finding)
+== B. the helper functions, called directly
+ok   50 _gallery_veil helpers; callable by a reader role: (none)
+psql:attack/attack.sql:56: ERROR:  permission denied for function _gallery_veil_apply
+psql:attack/attack.sql:57: ERROR:  permission denied for function _gallery_veil_second_homes
+psql:attack/attack.sql:58: ERROR:  permission denied for function _gallery_veil_sources
+psql:attack/attack.sql:59: ERROR:  permission denied for function _gallery_veil_roster_splice
+psql:attack/attack.sql:60: ERROR:  permission denied for function _gallery_veil_member_revealed
+psql:attack/attack.sql:61: ERROR:  permission denied for function _gallery_veil_pieces
+psql:attack/attack.sql:62: ERROR:  permission denied for function _gallery_veil_embeds
+psql:attack/attack.sql:65: ERROR:  permission denied for function _gallery_veil_roster_splice
+CONTEXT:  SQL function "_gallery_apply_member_overrides" statement 1
+note anon may call _gallery_sanitize_public_json on its own arguments: {}
+== C. arguments out of range
+ok   get_gallery_dossier(null): 0
+ok   get_gallery_dossier(''): 0
+ok   get_gallery_dossier('%'): 0
+ok   get_gallery_dossier('_____'): 0
+ok   get_gallery_dossier(1 MB of text): 0
+ok   get_unlisted_dossier(null)
+ok   get_unlisted_dossier('')
+ok   get_unlisted_dossier('%')
+ok   the two map reads on null and %
+ok   a party link's slug given to the gallery read answers: 0
+ok   a gallery slug given to the party link read answers: 0
+ok   a town's slug given to a map read answers: 0
+ok   list_gallery_dossiers searched for a marker finds: 0
+ok   list_gallery_dossiers searched for "note" finds: 0
+ok   list_gallery_maps searched for a marker finds: 0
+note list_gallery_dossiers(page -5, size 2000000000) rows: 48
+note list_gallery_dossiers(a sort key of 100,000 characters) rows: 48
+psql:attack/attack.sql:96: ERROR:  cannot get array length of a non-array
+CONTEXT:  SQL function "list_gallery_dossiers" statement 1
+note list_gallery_more_by_creator(limit 2000000000) rows: 12
+== D. ids that belong to another
+note get_gallery_vote_state / reaction_state / comments on a known id answer without data of the town: 0 rows visible to anon (0 expected)
+22222222-2222-2222-2222-222222222222
+ok   a reader's own map naming the owner's towns: members sent by get_gallery_map: 0
+ok   … by get_unlisted_map: 0
+ok   … by import_gallery_map: rows 1, with a marker 0
+
+22222222-2222-2222-2222-222222222222
+ok   import of a share that is not importable sends rows: 0
+
+== E. a stale share
+{"deleted": true}
+ok   an unpublished share's old gallery slug answers: 0
+ok   a revoked link answers: 0
+ok   a share removed by an admin: its gallery slug answers: 0
+note a share removed by an admin: its party link answers: 1
+22222222-2222-2222-2222-222222222222
+ok   import of an unpublished share sends rows: 0
+

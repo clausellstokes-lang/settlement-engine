@@ -1,0 +1,11 @@
+{
+ "towns": 200,
+ "withHiddenPower": 47,
+ "divergentTowns": 7,
+ "bySite": {
+  "power:desk.successionRisk.glance": 5,
+  "power:desk.successionRisk.sentence": 5,
+  "general:overview.conflictLines.length": 3,
+  "general:overview.conflictLines[]": 3
+ }
+}

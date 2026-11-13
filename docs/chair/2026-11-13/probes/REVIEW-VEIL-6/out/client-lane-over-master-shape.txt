@@ -1,0 +1,187 @@
+client of lane over cm211_0,cm211_1,cm211_2,cm211_3: 24 towns, 192 shares, threw 0
+house hidden whole (another form) | economicState.compound.inst.names[] | every eye shut: no reveal 12, DM 12 | persons only (DM): unmarked 0, marked 12
+      e.g. Khutulunkum: "Smuggling network" in "smuggling network"
+house hidden whole (another form) | economicState.incomeSources[].source | every eye shut: no reveal 2, DM 2 | persons only (DM): unmarked 0, marked 2
+      e.g. Khutulunkum: "Smuggling network" in "Smuggling Network Revenue"
+house hidden whole (another form) | economicState.safetyProfile.compound.inst.names[] | every eye shut: no reveal 12, DM 12 | persons only (DM): unmarked 0, marked 12
+      e.g. Khutulunkum: "Smuggling network" in "smuggling network"
+house hidden whole (another form) | simulationTrace[].causes[].reason | every eye shut: no reveal 0, DM 3 | persons only (DM): unmarked 0, marked 3
+      e.g. Nektarambelos: "Assassins' guild" in ""Contract killer" was absorbed into "assassins' guild". The larger institution provides eq"
+house hidden whole (another form) | simulationTrace[].causes[].source | every eye shut: no reveal 0, DM 3 | persons only (DM): unmarked 0, marked 3
+      e.g. Nektarambelos: "Assassins' guild" in "institution.assassins_guild"
+house hidden whole (another form) | simulationTrace[].targetId | every eye shut: no reveal 0, DM 12 | persons only (DM): unmarked 0, marked 12
+      e.g. Khutulunkum: "Smuggling network" in "institution.smuggling_network"
+marker | activeConditions[].causes[].detail | every eye shut: no reveal 1, DM 1 | persons only (DM): unmarked 1, marked 1
+      e.g. Megaanthi: Settlement generated under stressor "Indebted to Outside Power vq6n100z".
+marker | availableServices.criminal[].desc | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 14, marked 0
+      e.g. Palaiotion: Ask around at the right tavern. Someone moves goods without questions. vq6n28z
+marker | availableServices.criminal[].name | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 9, marked 0
+      e.g. Palaiotion: Fence (word of mouth) vq6n210z
+marker | availableServices.equipment[].desc | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 2, marked 2
+      e.g. Palaiotion: Practical clothing for soldiers and servants. vq6n257z
+marker | conflicts[].desc | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 13, marked 13
+      e.g. Khutulunkum: Arcane Senate and Religious Authorities are in high conflict over control of a key trade route checkpoint. The stakes ar
+marker | conflicts[].plotHooks[] | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 13, marked 0
+      e.g. Khutulunkum: A neutral figure is being pressured by both Arcane Senate and Religious Authorities to take a side before the next counc
+marker | conflicts[].stakes | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 13, marked 13
+      e.g. Khutulunkum: Economic leverage vq6n487z
+marker | defenseProfile.institutions.charter[].desc | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 5, marked 5
+      e.g. Khutulunkum: Competing organizations. vq6n71z
+marker | defenseProfile.institutions.garrison[].desc | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 8, marked 8
+      e.g. Khutulunkum: Full-time keepers of order, numbering about 1% of the city. vq6n64z
+marker | defenseProfile.institutions.magicDef[].desc | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 8, marked 8
+      e.g. Khutulunkum: Quarter inhabited by arcane practitioners: towers, workshops, libraries, reagent merchants. vq6n68z
+marker | defenseProfile.institutions.mercenary[].desc | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 4, marked 4
+      e.g. Khutulunkum: Organized sellsword companies. Major forces (hundreds to thousands). vq6n66z
+marker | defenseProfile.institutions.militia[].desc | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 3, marked 3
+      e.g. Hartdorf: The able-bodied drill together and assemble against local danger. Nobody does it full-time. vq6n14z
+marker | defenseProfile.institutions.walls[].desc | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 16, marked 16
+      e.g. Palaiotion: Gated stone defences. Costly to raise and no cheaper to keep up. vq6n19z
+marker | defenseProfile.institutions.watch[].desc | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 12, marked 12
+      e.g. Palaiotion: Part-time guards. Night patrol and gate duty. vq6n17z
+marker | economicState.safetyProfile.crimeTypes[].desc | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 12, marked 0
+      e.g. Khutulunkum: Magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden compone
+marker | economicState.safetyProfile.crimeTypes[].type | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 2, marked 0
+      e.g. Khutulunkum: Arcane black market vq6n844z
+marker | economicState.safetyProfile.criminalInstitutions[] | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 6, marked 0
+      e.g. Khutulunkum: Multiple Criminal Factions vq6n843z
+marker | economicViability.dependencies[].description | every eye shut: no reveal 1, DM 1 | persons only (DM): unmarked 1, marked 1
+      e.g. Khutulunkum: Metropolis closes its isolation-support gap through magical transit (88/88 capacity). vq6n495z
+marker | factions[].members[].activeConstraint | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 0
+      e.g. Palaiotion: Stability reduces the sense of urgency that would justify the resources and disruption required to address those vulnera
+marker | factions[].members[].corruptTies.vq6 | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 7, marked 0
+      e.g. Khutulunkum: vq6n424z
+marker | factions[].members[].corruptionVector | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 7, marked 0
+      e.g. Khutulunkum: greed vq6n423z
+marker | factions[].members[].dmNotes | every eye shut: no reveal 0, DM 24 | persons only (DM): unmarked 24, marked 24
+      e.g. Palaiotion: npc dm note vq6n269z
+marker | factions[].members[].factionGoal | every eye shut: no reveal 0, DM 3 | persons only (DM): unmarked 3, marked 3
+      e.g. Mayanek: Maintain Merchant Council's position against current pressure vq6n124z
+marker | factions[].members[].goal.long | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 0
+      e.g. Palaiotion: Keep the search for real infiltrators from curdling into a purge vq6n173z vq6n151z vq6n130z
+marker | factions[].members[].goal.short | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 0
+      e.g. Palaiotion: Use current stability to address structural vulnerabilities before conditions change. vq6n129z
+marker | factions[].members[].goal.vq6 | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 0
+      e.g. Palaiotion: vq6n39z
+marker | factions[].members[].notes | every eye shut: no reveal 0, DM 24 | persons only (DM): unmarked 24, marked 24
+      e.g. Palaiotion: npc note vq6n268z
+marker | factions[].members[].personality.speech | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 0
+      e.g. Palaiotion: Tells anecdotes that never quite reach the point vq6n125z
+marker | factions[].members[].personality.tell | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 0
+      e.g. Palaiotion: cleans or fidgets with their hands constantly vq6n124z
+marker | factions[].members[].personality.vq6 | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 0
+      e.g. Palaiotion: vq6n37z
+marker | factions[].members[].physical.build | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 22, marked 0
+      e.g. Palaiotion: tall with a slight stoop vq6n179z vq6n126z
+marker | factions[].members[].physical.clothes | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 0
+      e.g. Palaiotion: formal robes of office vq6n128z
+marker | factions[].members[].physical.feature | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 23, marked 0
+      e.g. Palaiotion: a ring on every finger vq6n127z
+marker | factions[].members[].physical.vq6 | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 0
+      e.g. Palaiotion: vq6n38z
+marker | factions[].members[].plotHooks[] | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 0
+      e.g. Palaiotion: Someone tried to rob one of their fronts. The attempt was professional. That's more worrying than amateur. vq6n133z
+marker | factions[].members[].secret.stakes | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 0
+      e.g. Palaiotion: Treason charges; execution or exile in most jurisdictions vq6n132z
+marker | factions[].members[].secret.vq6 | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 0
+      e.g. Palaiotion: vq6n40z
+marker | factions[].members[].secret.what | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 0
+      e.g. Palaiotion: Has been feeding strategic intelligence to a rival settlement vq6n131z
+marker | generationCoherenceReceipt.judgments[].findings[].evidence | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 3, marked 0
+      e.g. Nektarambelos: ty is strictly regulated. vq6n49z Town crier town crier Old town or slums Stone townhouses, private gard
+marker | history.currentTensions[].description | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 24
+      e.g. Palaiotion: Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations vq6n108z
+marker | history.currentTensions[].lastingEffects[] | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 22, marked 22
+      e.g. Palaiotion: A standing security office and informant network persist vq6n205z
+marker | history.currentTensions[].plotHooks[] | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 0
+      e.g. Palaiotion: One of the loudest voices warning about infiltration is themselves an agent vq6n207z
+marker | history.founding.foundedBy | every eye shut: no reveal 1, DM 1 | persons only (DM): unmarked 1, marked 1
+      e.g. Tarkhanbulag: a discharged soldier who liked the view and had nowhere better to be vq6n107z
+marker | history.historicalEvents[].description | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 24
+      e.g. Palaiotion: As the ailing ruler declined, several would-be heirs positioned themselves to inherit vq6n102z
+marker | history.historicalEvents[].lastingEffects[] | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 24
+      e.g. Palaiotion: Succession now governed by a charter drafted in the aftermath vq6n199z
+marker | history.historicalEvents[].plotHooks[] | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 0
+      e.g. Palaiotion: Old records suggest someone is poisoning the ruler slowly, and the physician knows vq6n200z
+marker | history.legacyAnnotations[].annotation | every eye shut: no reveal 2, DM 2 | persons only (DM): unmarked 2, marked 2
+      e.g. Kitaji: The Economic Divide (16 years ago) created pressure that has not been fully resolved: current economic pressure has stru
+marker | history.siegeNarrative | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 5, marked 5
+      e.g. Mayanek: The Migration is still present in living memory: A surge in criminal activity overwhelmed the authorities; vigilantes be
+marker | institutions[].desc | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 24
+      e.g. Palaiotion: Held by royal charter. The town's chief economic engine. vq6n1z
+marker | institutions[].dmNotes | every eye shut: no reveal 0, DM 24 | persons only (DM): unmarked 24, marked 24
+      e.g. Palaiotion: house dm note vq6n275z
+marker | institutions[].notes | every eye shut: no reveal 0, DM 24 | persons only (DM): unmarked 24, marked 24
+      e.g. Palaiotion: house note vq6n274z
+marker | npcs[].dmNotes | every eye shut: no reveal 0, DM 24 | persons only (DM): unmarked 0, marked 0
+      e.g. Palaiotion: npc dm note vq6n269z
+marker | npcs[].factionGoal | every eye shut: no reveal 0, DM 3 | persons only (DM): unmarked 0, marked 0
+      e.g. Mayanek: Maintain Merchant Council's position against current pressure vq6n124z
+marker | npcs[].notes | every eye shut: no reveal 0, DM 24 | persons only (DM): unmarked 0, marked 0
+      e.g. Palaiotion: npc note vq6n268z
+marker | npcs[].personality.speech | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 0
+      e.g. Palaiotion: Tells anecdotes that never quite reach the point vq6n125z
+marker | npcs[].personality.tell | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 0
+      e.g. Palaiotion: cleans or fidgets with their hands constantly vq6n124z
+marker | npcs[].personality.vq6 | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 0
+      e.g. Palaiotion: vq6n37z
+marker | npcs[].physical.build | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 22, marked 0
+      e.g. Palaiotion: tall with a slight stoop vq6n179z vq6n126z
+marker | npcs[].physical.clothes | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 0
+      e.g. Palaiotion: formal robes of office vq6n128z
+marker | npcs[].physical.feature | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 23, marked 0
+      e.g. Palaiotion: a ring on every finger vq6n127z
+marker | npcs[].physical.vq6 | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 0
+      e.g. Palaiotion: vq6n38z
+marker | powerStructure.conflicts[].desc | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 13, marked 13
+      e.g. Khutulunkum: Arcane Senate and Religious Authorities are in high conflict over control of a key trade route checkpoint. The stakes ar
+marker | powerStructure.conflicts[].plotHooks[] | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 13, marked 0
+      e.g. Khutulunkum: A neutral figure is being pressured by both Arcane Senate and Religious Authorities to take a side before the next counc
+marker | powerStructure.conflicts[].stakes | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 13, marked 13
+      e.g. Khutulunkum: Economic leverage vq6n487z
+marker | powerStructure.criminalCaptureState | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 0
+      e.g. Palaiotion: none vq6n123z
+marker | powerStructure.factions[].captureState | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 3, marked 0
+      e.g. Mayanek: equilibrium vq6n132z
+marker | powerStructure.factions[].crisisNote | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 7, marked 6
+      e.g. Tiangou: Governing authority is internally fractured. Real decisions are being made informally. The faction that appears to gover
+marker | powerStructure.factions[].desc | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 24, marked 24
+      e.g. Palaiotion: Clergy hold substantial political authority alongside civic governance. vq6n30z vq6n21z vq6n120z
+marker | powerStructure.factions[].dmNotes | every eye shut: no reveal 0, DM 24 | persons only (DM): unmarked 24, marked 24
+      e.g. Palaiotion: power dm note vq6n281z
+marker | powerStructure.factions[].notes | every eye shut: no reveal 0, DM 24 | persons only (DM): unmarked 24, marked 24
+      e.g. Palaiotion: power note vq6n280z
+marker | pressureSentence | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 5, marked 5
+      e.g. Al-tappa: Zakariya al-Masri has fallen on hard times, and the debt Rabab al-Hassan owes is now the only asset Zakariya al-Masri ha
+marker | prominentRelationship.full | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 15, marked 15
+      e.g. Palaiotion: Tyche Niketas and Xristos Comnenus work together because the alternative (working against each other) is worse for both.
+marker | prominentRelationship.phrasing | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 15, marked 15
+      e.g. Palaiotion: Tyche Niketas and Xristos Comnenus are connected by something neither discusses openly: A third party is actively workin
+marker | prominentRelationship.tension | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 15, marked 15
+      e.g. Palaiotion: A third party is actively working to change that calculation. vq6n78z
+marker | relationships[].description | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 20, marked 20
+      e.g. Palaiotion: Stylianos Nikerites issues orders Tyche Niketas regards as suggestions, and Tyche Niketas takes actions Stylianos Nikeri
+marker | relationships[].tension | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 20, marked 20
+      e.g. Palaiotion: A prisoner is currently held by both jurisdictions at once. Neither will release the paperwork first. vq6n72z
+marker | simulationTrace[].causes[].reason | every eye shut: no reveal 0, DM 7 | persons only (DM): unmarked 7, marked 7
+      e.g. Palaiotion: frontier pressure requires a defensible perimeter at town scale. vq6n261z
+marker | spatialLayout.layout | every eye shut: no reveal 1, DM 1 | persons only (DM): unmarked 1, marked 1
+      e.g. Tarkhanbulag: Stone-walled holdings climbing a south-facing hillside vq6n105z
+marker | stress.label | every eye shut: no reveal 1, DM 1 | persons only (DM): unmarked 1, marked 1
+      e.g. Megaanthi: Indebted to Outside Power vq6n100z
+marker | stressors.label | every eye shut: no reveal 1, DM 1 | persons only (DM): unmarked 1, marked 1
+      e.g. Megaanthi: Indebted to Outside Power vq6n100z
+marker | structuralSuggestions[].institution | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 1, marked 0
+      e.g. Khutulunkum: Magical Trade Infrastructure vq6n846z
+marker | structuralSuggestions[].reason | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 6, marked 0
+      e.g. Khutulunkum: Metropolis closes its isolation-support gap through magical transit (88/88 capacity). If magic fails, its mundane suppor
+marker | structuralSuggestions[].suggested[] | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 5, marked 0
+      e.g. Khutulunkum: Add a road, river, or port trade route as redundancy vq6n845z
+marker | structuralViolations[].reason | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 2, marked 0
+      e.g. Tarkhanbulag: This isolated thorp depends on a narrow local support base and irregular outside contact. A bad harvest, harsh winter, o
+marker | structuralViolations[].suggestedFixes[] | every eye shut: no reveal 0, DM 0 | persons only (DM): unmarked 1, marked 0
+      e.g. Tarkhanbulag: Consider a food or medicine cache as a plot element vq6n57z
+marker | tabNotes.overview | every eye shut: no reveal 0, DM 24 | persons only (DM): unmarked 24, marked 24
+      e.g. Palaiotion: Tab note vq6n267z
+marker | tabNotes.power | every eye shut: no reveal 0, DM 24 | persons only (DM): unmarked 24, marked 24
+      e.g. Palaiotion: Tab note vq6n266z

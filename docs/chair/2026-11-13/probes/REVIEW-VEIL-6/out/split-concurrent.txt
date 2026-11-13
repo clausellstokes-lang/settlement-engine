@@ -1,0 +1,17 @@
+reader 1: 5 rounds
+reader 3: 5 rounds
+reader 2: 4 rounds
+applied and rolled back 10 times with three readers running; the longest single apply or rollback: 103 ms
+reader statements that raised: 6 of about 22 answered lines
+      2 ERROR:  function public._gallery_veil_second_homes(jsonb, jsonb, jsonb) does not exist
+      1 ERROR:  function public._gallery_veil_sources(jsonb, jsonb, jsonb, jsonb) does not exist
+      1 ERROR:  function public._gallery_veil_pieces(jsonb) does not exist
+      1 ERROR:  cache lookup failed for function 55957
+      1 ERROR:  cache lookup failed for function 55934
+locks 212 holds at its end, inside its transaction (other than on the catalogue's own rows):
+object::AccessShareLock ; relation:pg_toast_1255:RowExclusiveLock ; relation:pg_toast_1255_index:RowExclusiveLock ; relation:profiles:AccessShareLock ; relation:settlements:AccessShareLock
+reads answered: 505
+reads that raised in the eight seconds after an APPLY of 212 (six applies): 0
+reads that raised in the eight seconds after a ROLLBACK of 212 (six rollbacks): 4
+      3 ERROR:  cache lookup failed for function <oid>
+      1 ERROR:  function <oid>public._gallery_veil_second_homes(jsonb, jsonb, jsonb) does not exist

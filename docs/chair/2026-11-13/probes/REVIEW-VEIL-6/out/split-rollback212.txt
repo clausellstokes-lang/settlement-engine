@@ -1,0 +1,26 @@
+== the full chain (001..210, frozen 211, 212)
+212's down file, against the frozen 211's chain | r_a (2842 lines) against s211 (2842 lines) | lines that differ: 0
+the down file a second time | r_a (2842 lines) against s211 (2842 lines) | lines that differ: 0
+then 212 again, against the chain with 212 | r_a (2852 lines) against s212 (2852 lines) | lines that differ: 0
+212 a second time over itself | r_a (2852 lines) against s212 (2852 lines) | lines that differ: 0
+== 203 + frozen 211 + 212 (the owner's early step)
+212's down file, against 203 + frozen 211 | r_b (2839 lines) against s203p211 (2839 lines) | lines that differ: 0
+the down file a second time | r_b (2839 lines) against s203p211 (2839 lines) | lines that differ: 0
+then 212 again | r_b (2849 lines) against s203p211p212 (2849 lines) | lines that differ: 0
+212 a second time over itself | r_b (2849 lines) against s203p211p212 (2849 lines) | lines that differ: 0
+== applied by hand as one transaction on 203 + frozen 211, against the chain built file by file
+begin; 212; commit; on 203 + frozen 211 | r_c (2849 lines) against s203p211p212 (2849 lines) | lines that differ: 0
+== the wrong orders
+  212 on a chain at 203 WITHOUT 211:
+    212_share_veil_later_cures.sql on r_d: exit 3: ERROR:  function public._gallery_veil_str(jsonb) does not exist
+    after it, against 203 untouched | r_d (2799 lines) against t203 (2799 lines) | lines that differ: 0
+  211's down file while 212 is still applied:
+    applied without error
+    after it, against 203 + frozen 211 + 212 | r_e (2809 lines) against s203p211p212 (2849 lines) | lines that differ: 50
+  the frozen 211 applied again OVER 211 + 212 (a release push that stops after 211):
+    applied without error
+    after it, against 203 + frozen 211 + 212 | r_f (2849 lines) against s203p211p212 (2849 lines) | lines that differ: 10
+    after it, against 203 + frozen 211 | r_f (2849 lines) against s203p211 (2839 lines) | lines that differ: 10
+    then 212 again | r_f (2849 lines) against s203p211p212 (2849 lines) | lines that differ: 0
+== both rollbacks in order from 203 + 211 + 212: 212's, then 211's, then 203's party-link read
+against a chain at 203 | r_g (2799 lines) against t203 (2799 lines) | lines that differ: 0
