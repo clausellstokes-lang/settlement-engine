@@ -36195,7 +36195,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 10,
-      "grammars": 5,
+      "grammars": 4,
       "predicate": [
         {
           "field": "breakdown.safety",
@@ -54796,7 +54796,7 @@
         "DS-POW-6 :: capture pressure RECOVERING (strong security, prosperity)"
       ],
       "variants": 14,
-      "grammars": 8,
+      "grammars": 7,
       "blocks": [
         "DS-POW-6"
       ]
@@ -54808,7 +54808,7 @@
         "DS-POW-6 :: capture pressure RECOVERING (strong security, prosperity)"
       ],
       "variants": 14,
-      "grammars": 8,
+      "grammars": 7,
       "blocks": [
         "DS-POW-6"
       ]
@@ -71248,7 +71248,7 @@
         "breakdown.prosperity"
       ],
       "readingFunction": "capturePoolKey",
-      "count": "10 variant(s) · 5 grammar(s) · slots {seat, settlement}"
+      "count": "10 variant(s) · 4 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "THIN",

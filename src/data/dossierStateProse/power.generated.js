@@ -3052,7 +3052,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "tier: ≥ village",
             "crisis: wartime"
           ],
-          "text": "With the war taking everyone's attention, {settlement}'s officials are left to themselves, and an underpaid official left alone is easily bought.",
+          "text": "With the war taking everyone's attention, {settlement}'s officials are left to themselves, and on what they are paid a purse is hard to refuse.",
           "slots": [
             "settlement"
           ],
@@ -3069,7 +3069,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "no crisis: insurgency",
             "no crisis: slave_revolt"
           ],
-          "text": "{settlement}'s watch keeps the streets, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse.",
+          "text": "{settlement} has a watch, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse.",
           "slots": [
             "settlement"
           ],
