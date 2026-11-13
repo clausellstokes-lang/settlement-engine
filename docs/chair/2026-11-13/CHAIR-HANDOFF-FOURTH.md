@@ -33,6 +33,7 @@ Every session id below is a child of the chair's session. A `priority: "next"` m
 | round three tabs `lane/r3-tabs-2026-11-13` | 38f49e420 | R3-TABS `session_01FE9mEvvxXu4UiSevxtNLaR` | merges the line at 9e57f5023, then L0 to L3 in the posture selector; the increment's 1 and 2 |
 | round three code `lane/r3-code-c-2026-11-13` | 74366192c | R3-CODE-C-2 `session_01FE9mEtaa8NvaX3ho5zd1nH` (seated 20:43 UTC; the first seat `session_01FE9mEtmUDK5KYBYty6oGoM` handed back at its limit and may push one docs-only commit) | the increment's 5 high and 18 medium; #457 and #1163 as ruled; then it merges the line and makes the lane's final statement |
 | measuring `lane/census-2-2026-11-13` | not yet pushed | CENSUS-2 `session_01FE9mEw2Rw4v8SD9q2wrkdt` | measure only (record 388). Not the old `lane/census-2-2026-11-04`, an unrelated lane of 5 November |
+| a stage read `lane/review-r3-stages-2026-11-13` | not yet pushed | REVIEW-R3-STAGES `session_01FE9mEvSZz7dUMuwz9mxc3t` (seated 20:48 UTC) | two stages read apart: round two A from 2f114a4c9 to 0d3972d8f, round three's code lane from aac79b808 to fb8b24fbe; every new or reworded line read where it prints; its findings go to those lanes' seats as rulings |
 | the cut `lane/round-3-cut-2026-11-13` | fe6d5b741 | done | the cut, the increment, both JSON lists, the readers' probes |
 
 Scheduled task `trig_01XAPp2Tvsunxp5QGqaqPgHx` fires into the chair's session at minute 52 of every fourth hour.
