@@ -36,6 +36,8 @@ vi.mock('../../src/domain/display/stateProse/stateProseKernel.js', async (import
  */
 const GUARDS = [
   { seed: 'w5-village-under_siege-1', pool: 'DS-ECO-9::DEFICIT', vid: 1, why: 'a siege: "not enough comes in" presumes a road that is open (the second seat\'s `no crisis: under_siege`)' },
+  { seed: 'w5-village-under_siege-1', pool: 'DS-DEF-2::Invasion & War: neither walls nor force', vid: 5, why: 'a siege: "each household is deciding for itself whether to stay" where nobody can leave (LINES-READ, village-under_siege-1)' },
+  { seed: 'w5-hamlet-occupied-2', pool: 'DS-DEF-2::Invasion & War: neither walls nor force', vid: 4, why: 'an occupation: "the threat now at hand has noticed both" of a town the threat already holds' },
 ];
 
 /** @param {string} seed */
