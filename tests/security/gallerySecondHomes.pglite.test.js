@@ -306,6 +306,17 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
             }
           };
           walk(body, '');
+          // COHERENCE-VEIL-8 (N3): a tie's copy of an end's role, where that person's own entry in the same response
+          // carries no role (a person the share does not reveal, sent as a veiled public card: 206)
+          const towns = (v) => (Array.isArray(v) ? v.flatMap(towns) : isRec(v) ? [...(Array.isArray(v.npcs) && Array.isArray(v.relationships) ? [v] : []), ...Object.values(v).flatMap(towns)] : []);
+          for (const t of towns(body)) {
+            const roleless = new Set(t.npcs.filter((x) => isRec(x) && typeof x.id === 'string' && !('role' in x)).map((x) => x.id));
+            for (const r of t.relationships.filter(isRec)) {
+              for (const [end, key] of [[r.from ?? r.npc1Id, 'npc1Role'], [r.to ?? r.npc2Id, 'npc2Role']]) {
+                if (roleless.has(String(end)) && typeof r[key] === 'string') sent.push(`${label} dm=${dm} ${mode} ${read}: a tie's copy of a role its person's entry withholds, at relationships[].${key}`);
+              }
+            }
+          }
         }
         // the page still draws, plainly, without what was withheld
         H.uid = '';

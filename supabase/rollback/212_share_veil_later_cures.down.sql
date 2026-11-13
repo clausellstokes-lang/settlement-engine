@@ -349,7 +349,7 @@ $$;
 revoke execute on function public.import_gallery_dossier(text) from public;
 grant execute on function public.import_gallery_dossier(text) to authenticated;
 
--- ── 2. the helpers 212 created, by signature (twelve; COHERENCE-VEIL-8 added _fold and _folded_name) ──────────────────────────────────────────────────
+-- ── 2. the helpers 212 created, by signature (thirteen; COHERENCE-VEIL-8 added _fold, _folded_name, _tie_roles) ──────────────────────────────────────────────────
 drop function if exists public._gallery_veil_embeds(jsonb, text[]);
 drop function if exists public._gallery_veil_fold(text);
 drop function if exists public._gallery_veil_folded_name(text, text, jsonb);
@@ -362,3 +362,4 @@ drop function if exists public._gallery_veil_roster_splice(jsonb, jsonb, boolean
 drop function if exists public._gallery_veil_second_homes(jsonb, jsonb, jsonb);
 drop function if exists public._gallery_veil_sources(jsonb, jsonb, jsonb, jsonb);
 drop function if exists public._gallery_veil_tie_pieces(jsonb);
+drop function if exists public._gallery_veil_tie_roles(jsonb, jsonb, jsonb, boolean, boolean, boolean);

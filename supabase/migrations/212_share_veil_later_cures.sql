@@ -37,6 +37,10 @@
 --   (13) A HIDDEN TEXT IN ANOTHER SPELLING (COHERENCE-VEIL-8): a second home's text is matched in any case, and the
 --       legacy annotation (history.legacyAnnotations[].annotation), which embeds its event's first lasting effect
 --       with the first letter lower-cased, goes when it embeds a shut string of an event.
+--   (14) A TIE'S COPY OF A ROLE THE PERSON'S PUBLIC CARD WITHHOLDS (COHERENCE-VEIL-8): on a Reveal-DM share, a person
+--       the share does not reveal is sent as the public card, which carries no role where the face is veiled (206);
+--       the ties' copies of that role (relationships[].npc1Role, .npc2Role) now go with it (_gallery_veil_tie_roles,
+--       called by _gallery_veil_roster_splice), as 206's root pass does on a public projection.
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -48,12 +52,12 @@
 --       Reveal-DM projection of the gallery read and the import, beside 211's decrees and dmLayer; before, every
 --       reader and every importer of such a share received both.
 --
--- NEW: twelve helpers (_gallery_veil_pieces, _embeds, _fold, _folded_name, _names, _hidden_name, _sources,
--- _tie_pieces, _second_homes, _member_revealed, _roster_members, _roster_splice). RESTATED, each as 211's statement plus the cure:
+-- NEW: thirteen helpers (_gallery_veil_pieces, _embeds, _fold, _folded_name, _names, _hidden_name, _sources,
+-- _tie_pieces, _second_homes, _member_revealed, _roster_members, _tie_roles, _roster_splice). RESTATED, each as 211's statement plus the cure:
 -- _gallery_veil_card, _gallery_veil_apply, _gallery_apply_member_overrides, get_gallery_dossier and
 -- import_gallery_dossier (their grants restated as 211 states them). No helper of 211 changes its
 -- signature, so nothing 211 created is left behind. 211's section 7 is restated last: no _gallery_veil*
--- helper is callable by public, anon or authenticated (52 in all). NOT CHANGED: get_unlisted_dossier,
+-- helper is callable by public, anon or authenticated (53 in all). NOT CHANGED: get_unlisted_dossier,
 -- get_gallery_map and every other function. No table, column, constraint, policy or row.
 --
 -- COUPLED CLIENT TWIN: src/domain/display/gallerySecondHomes.js (the second homes, (9)), called by
@@ -511,11 +515,33 @@ returns jsonb language sql immutable as $$
     from jsonb_array_elements(factions) with ordinality x(f, o)
 $$;
 
+-- [212: NEW] public._gallery_veil_tie_roles
+-- COHERENCE-VEIL-8 (N3): a tie carries a copy of each end's role (`npc1Role` for the `from` end, `npc2Role` for the
+-- `to` end; master's ties name the ends `npc1Id`, `npc2Id`). On a DM-full projection a person the share does not
+-- reveal is the person's public card, which carries no role where the face is veiled (206); the tie's copy follows
+-- the person's own entry, as the 206 root pass does on a public projection. A revealed person's copy stays.
+create or replace function public._gallery_veil_tie_roles(rels jsonb, npcs jsonb, overrides jsonb, share_dm boolean, importable boolean, for_import boolean)
+returns jsonb language sql immutable as $$
+  with hidden as (
+    select n ->> 'id' as id from jsonb_array_elements(npcs) n
+     where jsonb_typeof(n) = 'object' and (n ->> 'id') is not null and not (n ? 'role')
+       and not coalesce(public._gallery_veil_member_revealed(n, overrides, share_dm, importable, for_import), false))
+  select coalesce(jsonb_agg(case when jsonb_typeof(r) = 'object' then
+      (case when coalesce(r ->> 'from', r ->> 'npc1Id') in (select id from hidden) then r - 'npc1Role' else r end)
+      - (case when coalesce(r ->> 'to', r ->> 'npc2Id') in (select id from hidden) then 'npc2Role' else '' end)
+    else r end order by o), '[]')
+    from jsonb_array_elements(rels) with ordinality x(r, o)
+$$;
+
 -- [212: NEW] public._gallery_veil_roster_splice
 create or replace function public._gallery_veil_roster_splice(doc jsonb, overrides jsonb, share_dm boolean, importable boolean, for_import boolean)
 returns jsonb language plpgsql immutable as $$
 begin
   if not coalesce(share_dm, false) or jsonb_typeof(doc) is distinct from 'object' then return doc; end if;
+  -- COHERENCE-VEIL-8 (N3): the ties' copies of a role the person's own entry no longer carries
+  if jsonb_typeof(doc -> 'relationships') = 'array' and jsonb_typeof(doc -> 'npcs') = 'array' then
+    doc := jsonb_set(doc, '{relationships}', public._gallery_veil_tie_roles(doc -> 'relationships', doc -> 'npcs', overrides, share_dm, importable, for_import));
+  end if;
   if jsonb_typeof(doc -> 'factions') = 'array' then
     doc := jsonb_set(doc, '{factions}', public._gallery_veil_roster_members(doc -> 'factions', overrides, share_dm, importable, for_import));
   end if;
