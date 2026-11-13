@@ -187,9 +187,8 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
                     <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.ink, flex: 1, marginRight: 6 }}>
                       {force.name}
                     </Text>
-                    {force.source && force.source !== 'generated' && (
-                      <Tag tone="gold">{force.source === 'required' ? 'REQ' : 'FORCED'}</Tag>
-                    )}
+                    {/* ⛔ NO "REQ" / "FORCED" BADGE (COHERENCE-UPKEEP-7, item 3; the round-three cut's class (b)): the
+                        generator's provenance is not a fact of the town. */}
                   </View>
                   {force.desc && (
                     <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, lineHeight: 1.35, marginTop: 1 }}>

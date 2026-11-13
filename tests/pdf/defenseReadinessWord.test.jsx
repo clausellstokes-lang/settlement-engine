@@ -46,3 +46,17 @@ describe('the PDF readiness strip prints the rating, not its working (W4)', () =
     }
   });
 });
+
+// COHERENCE-UPKEEP-7, item 3 (the round-three cut's class (b)): the forces' "REQ" and "FORCED" badges are the
+// generator's provenance (a required or a forced house), not a fact of the town. RULED: they leave the PDF.
+describe('the PDF forces carry no provenance badge (item 3)', () => {
+  test('RED-FIRST: no "REQ" or "FORCED" on the forces, while a required house is on the roster', () => {
+    let required = 0;
+    for (const { seed, s, leaves } of rows) {
+      const sources = Object.values(buildViewModel({ settlement: s }).defense.armedForces || {}).flat().map((f) => f?.source);
+      if (sources.some((x) => x && x !== 'generated')) required += 1;
+      expect(leaves.includes('REQ') || leaves.includes('FORCED'), `${seed}: a provenance badge`).toBe(false);
+    }
+    expect(required, 'anchored: a force with a provenance stands').toBeGreaterThan(0);
+  });
+});
