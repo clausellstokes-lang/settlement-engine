@@ -54,22 +54,24 @@ function recAt(s, key) {
   return isRec(v) ? v : null;
 }
 
-/** The engine's processor match reads this many characters of a pattern (computeActiveChains.js :: fuzzyProcessorMatch). */
-const PROCESSOR_PREFIX = 12;
-
-/** A piece shorter than this is never searched for (a word or a name is no sentence). */
-const SECOND_HOME_PIECE_MIN = 12;
+/**
+ * Two lengths, one frozen record (not tuning: a twin's exact copy of the SQL's `char_length(t) >= 12` and
+ * `left(lower(v), 12)`). `pieceMin`: a piece shorter than this is never searched for (a word or a name is no
+ * sentence). `processorPrefix`: the engine's processor match reads this many characters of a pattern
+ * (computeActiveChains.js :: fuzzyProcessorMatch).
+ */
+export const SECOND_HOME_LIMITS = Object.freeze({ pieceMin: 12, processorPrefix: 12 });
 
 /**
  * The searchable pieces of a hidden value: each string leaf, trimmed, and each run of it between
- * sentence stops and dashes (U+2014), of SECOND_HOME_PIECE_MIN code points or more.
+ * sentence stops and dashes (U+2014), of SECOND_HOME_LIMITS.pieceMin code points or more.
  * @param {unknown} v @param {string[]} [out] @returns {string[]}
  */
 export function secondHomePieces(v, out = []) {
   if (typeof v === 'string') {
     for (const p of [v, ...v.split(/[.!?—]+/)]) {
       const t = p.replace(/^[ \t\n\r]+|[ \t\n\r]+$/g, '');
-      if (Array.from(t).length >= SECOND_HOME_PIECE_MIN) out.push(t);
+      if (Array.from(t).length >= SECOND_HOME_LIMITS.pieceMin) out.push(t);
     }
   } else if (Array.isArray(v)) v.forEach(x => secondHomePieces(x, out));
   else if (isRec(v)) Object.values(v).forEach(x => secondHomePieces(x, out));
@@ -97,26 +99,26 @@ export function withholdImpression(card) {
  * @param {Rec} s
  * @param {(kind: string, id: string, eye: string) => boolean} eyeShut
  * @param {(s: Rec, kind: string) => Rec[]} cardsOf
- * @param {Readonly<Record<string, { idOf: (card: Rec) => string }>>} kinds
+ * @param {(kind: string, card: Rec) => string} idOf the veil's address of a card of a kind
  */
-export function secondHomeSources(s, eyeShut, cardsOf, kinds) {
+export function secondHomeSources(s, eyeShut, cardsOf, idOf) {
   /** @type {TieSource[]} */
   const ties = cardsOf(s, 'relationship').map((card) => {
-    const id = kinds.relationship.idOf(card);
+    const id = idOf('relationship', card);
     return { card: { npc1Name: card.npc1Name, npc2Name: card.npc2Name, typeName: card.typeName, description: card.description, tension: card.tension },
       desc: eyeShut('relationship', id, 'description'), tension: eyeShut('relationship', id, 'tension') };
   });
   /** @type {string[]} */
   const tensionPieces = [];
   for (const card of cardsOf(s, 'tension')) {
-    if (eyeShut('tension', kinds.tension.idOf(card), 'description')) secondHomePieces([card.description, card.desc], tensionPieces);
+    if (eyeShut('tension', idOf('tension', card), 'description')) secondHomePieces([card.description, card.desc], tensionPieces);
   }
   /** @type {Map<string, { desc: boolean, fn: boolean }>} house name -> its shut eyes */
   const houses = new Map();
   for (const card of cardsOf(s, 'institution')) {
     const name = str(card.name);
     if (!name) continue;
-    const id = kinds.institution.idOf(card);
+    const id = idOf('institution', card);
     const h = houses.get(name) || { desc: false, fn: false };
     if (eyeShut('institution', id, 'description')) h.desc = true;
     if (eyeShut('institution', id, 'function')) h.fn = true;
@@ -137,9 +139,10 @@ function tiePieces(t, out) {
  * @param {Rec} s
  * @param {ReturnType<typeof secondHomeSources>} src
  * @param {Set<string>} gone names of houses removed whole
+ * @param {ReadonlyArray<string>} openNames the names of the houses the projection still lists
  * @param {Readonly<Record<string, ReadonlyArray<string>>>} houseFields the house's eyes and the keys each removes
  */
-export function withholdSecondHomes(s, src, gone, houseFields) {
+export function withholdSecondHomes(s, src, gone, openNames, houseFields) {
   const shutTies = src.ties.filter(t => t.desc || t.tension);
   if (shutTies.length) {
     const pr = s.prominentRelationship;
@@ -175,12 +178,11 @@ export function withholdSecondHomes(s, src, gone, houseFields) {
   }
   if (!gone.size) return;
   // A chain names a house by the ENGINE's processor match, not only by the card's name (computeActiveChains.js ::
-  // fuzzyProcessorMatch: the lower-cased name holds the pattern's first PROCESSOR_PREFIX characters), so a house
+  // fuzzyProcessorMatch: the lower-cased name holds the pattern's first processorPrefix characters), so a house
   // hidden whole as 'Black market bazaar' is processing name 'Black market'. A processing name that a house hidden
   // whole answers to, and no house left open does, is that house's name.
-  const openNames = (Array.isArray(s.institutions) ? s.institutions : []).filter(isRec).map(i => str(i.name));
   /** @param {string} name @param {string} x @returns {boolean} */
-  const answers = (name, x) => name === x || name.toLowerCase().includes(x.toLowerCase().slice(0, PROCESSOR_PREFIX));
+  const answers = (name, x) => name === x || name.toLowerCase().includes(x.toLowerCase().slice(0, SECOND_HOME_LIMITS.processorPrefix));
   /** @param {unknown} x @returns {boolean} */
   const hiddenName = (x) => [...gone].some(g => answers(g, str(x))) && !openNames.some(o => answers(o, str(x)));
   /** every name of a house removed whole: its own, and each processing name only it answers to */

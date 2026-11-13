@@ -656,26 +656,6 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
       })
       .filter(npc => npc.name || npc.role);
   }
-  // V5-4 (COHERENCE-VEIL-6; the fifth review §1.5, ruled by the chair on 2026-11-13): a person the share does not
-  // reveal is not drawn whole in a power's roster copy either (factions[].members[], powerStructure.factions[].members[],
-  // where master's generator embeds the whole card): on a DM-full projection each such copy is the same public card as
-  // the person's own entry. A revealed person's copy stays; a default projection's copies are the sanitiser's already.
-  // Mirrors 211 :: _gallery_veil_roster_splice.
-  if (full) {
-    /** @param {unknown} v @returns {v is Record<string, unknown>} */
-    const isObj = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
-    /** @param {Record<string, unknown>} m @returns {boolean} */
-    const revealed = (m) => {
-      const ov = overrides[galleryMemberKey(m)];
-      return ov && typeof ov.revealDm === 'boolean' ? ov.revealDm : full;
-    };
-    /** @param {unknown[]} factions @returns {unknown[]} */
-    const splice = (factions) => factions.map(f => (isObj(f) && Array.isArray(f.members)
-      ? { ...f, members: f.members.map(m => (isObj(m) && !revealed(m) ? publicCard(m) : m)) } : f));
-    if (Array.isArray(result.factions)) result.factions = splice(result.factions);
-    const ps = result.powerStructure;
-    if (isObj(ps) && Array.isArray(ps.factions)) result.powerStructure = { ...ps, factions: splice(ps.factions) };
-  }
 
   // ── THE CIVILITY VEIL (DESIGN_PROFILE_IMAGE.md §9, the VEIL mode) ───────────
   // The LAST thing that happens to a public projection, and the right place for

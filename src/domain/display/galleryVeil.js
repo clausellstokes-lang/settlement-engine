@@ -652,6 +652,7 @@ export function applyVeil(publicSettlement, veil) {
   // X-21e: a card-hidden house goes whole only when the data puts it in the class; any
   // other house named by a card address falls back to its depth eyes.
   const instKind = CARD_KINDS.institution;
+  const houseEyes = instKind.fields;
   /** @type {Set<string>} names of houses removed whole */
   const goneHouses = new Set();
   /** @type {Set<string>} ids of houses removed whole */
@@ -668,7 +669,7 @@ export function applyVeil(publicSettlement, veil) {
       if (!fields.has('institution')) fields.set('institution', new Map());
       const byId = /** @type {Map<string, Set<string>>} */ (fields.get('institution'));
       if (!byId.has(id)) byId.set(id, new Set());
-      for (const f of Object.keys(instKind.fields)) /** @type {Set<string>} */ (byId.get(id)).add(f);
+      for (const f of Object.keys(houseEyes)) /** @type {Set<string>} */ (byId.get(id)).add(f);
     }
   }
 
@@ -693,7 +694,7 @@ export function applyVeil(publicSettlement, veil) {
   /** @param {string} kind @param {string} id @param {string} eye @returns {boolean} */
   const eyeShut = (kind, id, eye) => !!(fields.get(kind)?.get(id)?.has(eye)
     || (classes.get(kind)?.has(eye) && !exceptions.has(`field:${kind}:${id}:${eye}`)));
-  const sources = secondHomeSources(s, eyeShut, cardsOf, CARD_KINDS);
+  const sources = secondHomeSources(s, eyeShut, cardsOf, (kind, card) => CARD_KINDS[kind].idOf(card));
 
   // Cards: class switches, then per-card eyes.
   for (const kindName of Object.keys(CARD_KINDS)) {
@@ -745,7 +746,7 @@ export function applyVeil(publicSettlement, veil) {
   }
 
   // V5-1: each second home goes with the eye that governs its source.
-  withholdSecondHomes(s, sources, goneHouses, CARD_KINDS.institution.fields);
+  withholdSecondHomes(s, sources, goneHouses, cardsOf(s, 'institution').map(i => str(i.name)), houseEyes);
 
   // Groupings last (a tab remover sees the cards already trimmed).
   for (const g of groupings) GROUPING_REMOVERS[g](s);

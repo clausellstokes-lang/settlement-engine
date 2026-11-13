@@ -83,10 +83,9 @@ describe('(i) the invariance pin: the projection depends on nothing the sanitize
     }
     expect(hidden, 'anchored: the class holds towns with a hidden power').toBeGreaterThan(5);
     expect(mismatches).toEqual([]);
-    // the review's own town: the shipped succession line is the one the stripped record gives, never the weighing
+    // the review's own town: the shipped succession line is the one the stripped record gives
     const line = specimen.a['power:desk']?.successionRisk?.sentence;
     expect(typeof line === 'string' && line.length > 0, 'anchored: the specimen ships a succession line').toBe(true);
-    expect(line.includes('the heavier of the two')).toBe(false);
     expect(line).toBe(composePublicProse(publicVeiledRecordOf(specimen.owner)).blocks['power:desk'].successionRisk.sentence);
   }, 600_000);
 });

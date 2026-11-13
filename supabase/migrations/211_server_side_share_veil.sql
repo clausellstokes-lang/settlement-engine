@@ -1331,7 +1331,9 @@ end $$;
 -- splice reduced the person in npcs[] only, so an UNMARKED share (served as before, no veil) sent the roster copy whole.
 -- Now each roster copy of a person the share does not reveal is the same public card as the person's own entry.
 -- Nothing else changes: a revealed person's copy stays; a projection that is not DM-full is the sanitiser's already.
--- Client twin: publicSafe.js :: toPublicSafe (the roster splice after the member splice).
+-- SERVER ONLY, as V4-2: every page draws a share from what a read serves, which this splice has already reduced; a
+-- client twin would read `members` on factions, a key the current generator no longer writes (the observed-shape
+-- register refuses it, and the retired-field register does not grow).
 create or replace function public._gallery_veil_member_revealed(m jsonb, overrides jsonb, share_dm boolean, importable boolean, for_import boolean)
 returns boolean language sql immutable as $$
   select case when for_import then

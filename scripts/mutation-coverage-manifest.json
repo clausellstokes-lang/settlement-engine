@@ -1764,6 +1764,10 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/security/gallerySecondHomes.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/galleryVeilCures.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"
