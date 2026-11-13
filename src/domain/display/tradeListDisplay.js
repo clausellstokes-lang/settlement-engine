@@ -245,13 +245,13 @@ export function needMetBy(need, imp) {
  *   · a chain's output: a working chain makes it none of whose houses is held only as a road to elsewhere ("Access to …");
  *   · the model's identifiers, and the category errors the trade lists already leave (`displayTradeList`), never.
  * @param {{ economicState?: { localProduction?: ReadonlyArray<unknown> | null, activeChains?: ReadonlyArray<unknown> | null } | null,
- *   institutions?: ReadonlyArray<unknown> | null } | null | undefined} settlement
+ *   institutions?: ReadonlyArray<unknown> | null } | null | undefined} settlement the record (its live roster, `liveInstitutions`)
  * @returns {string[]} the raw items kept, in the record's order
  */
 export function localProductionAsPrinted(settlement) {
   const eco = settlement?.economicState || {};
   const list = (Array.isArray(eco.localProduction) ? eco.localProduction : []).filter((x) => typeof x === 'string' && x.trim()).map(String);
-  const roster = (Array.isArray(settlement?.institutions) ? settlement.institutions : [])
+  const roster = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement)) // a ruined house makes nothing
     .map((i) => String(/** @type {{ name?: unknown }} */ (i)?.name ?? '').toLowerCase()).filter(Boolean);
   const ownHouses = roster.filter((n) => !n.startsWith('access to'));
   const chains = /** @type {Array<{ outputs?: unknown, processingInstitutions?: unknown, status?: unknown }>} */ (
@@ -278,6 +278,7 @@ export function localProductionAsPrinted(settlement) {
 }
 import { RESOURCE_DATA } from '../../data/goods/identity.js';
 import { chainWorksResource, WORKING_CHAIN_STATUSES } from '../facts/chainWorking.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
 /** The model's own identifiers in the local list (a position and the commodity categories): never a good. */
 const LOCAL_IDENTIFIERS = new Set(['trade access', 'maritime access', 'luxury', 'craft', 'textile', 'herbs', 'fuel', 'precious metal']);
 /** Each resource commodity (spaced, lower case) → the resource keys that yield it (`RESOURCE_DATA[k].commodities`). */

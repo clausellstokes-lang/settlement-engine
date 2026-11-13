@@ -267,7 +267,7 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
                   <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{svc.label}</span>
                   <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:svc.color,background:`${svc.color}15`,padding:'0 5px'}}>Service</span>
                   {svc.exportable && <span style={{fontSize:chromeFontSize(FS.micro, mobile),color:swatch.success,background:swatch['#E8F5EC'],padding:'0 5px'}}>Export</span>}
-                  {((svcImpaired) => <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:svcImpaired?FLOW_STATUS.impaired.color:swatch.inkMag3,background:svcImpaired?`${FLOW_STATUS.impaired.color}15`:swatch['#EDE3CC'],padding:'0 5px',marginLeft:'auto'}}>{svcImpaired?FLOW_STATUS.impaired.label:'○ Operational'}</span>)(serviceStateShown(svc, impairedHouses) === 'impaired')}
+                  {((svcImpaired) => <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:svcImpaired?FLOW_STATUS.impaired.color:swatch.inkMag3,background:svcImpaired?`${FLOW_STATUS.impaired.color}15`:swatch['#EDE3CC'],padding:'0 5px',marginLeft:'auto'}}>{svcImpaired?FLOW_STATUS.impaired.label:'○ Operational'}</span>)(serviceStateShown(svc.institutions, impairedHouses) === 'impaired')}
                 </div>
                 <div style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag2}}>
                   <span style={{color:MUTED,marginRight:4}}>Via:</span>{svc.institutions.map(institutionDisplayName).join(' · ')}

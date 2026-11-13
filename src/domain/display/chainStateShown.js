@@ -63,11 +63,12 @@ export function chainStateShown(chain, record) {
 /**
  * A service card's state: `impaired` where every house it runs through is one the Institutions tab marks impaired
  * (`components/new/tabHelpers.js :: computeChainSets`, passed in by the caller), else the card's own `operational`.
- * @param {{ institutions?: ReadonlyArray<unknown> } | null | undefined} service one of `economicState.institutionalServices`
+ * @param {ReadonlyArray<unknown> | null | undefined} serviceHouses the house names a service of
+ *   `economicState.institutionalServices` runs through (the caller reads them off the service)
  * @param {ReadonlySet<string>} impairedHouses the impaired house names, lower case
  * @returns {'impaired' | 'operational'}
  */
-export function serviceStateShown(service, impairedHouses) {
-  const houses = (service?.institutions || []).map((h) => String(h).toLowerCase());
+export function serviceStateShown(serviceHouses, impairedHouses) {
+  const houses = (serviceHouses || []).map((h) => String(h).toLowerCase());
   return houses.length > 0 && houses.every((h) => impairedHouses.has(h)) ? 'impaired' : 'operational';
 }
