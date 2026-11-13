@@ -11,6 +11,11 @@ import { poolMemberTexts } from '../../helpers/drawnProse.js';
 /** A corpus line, computed (never typed): the pool's first member with the town's name in its slots. */
 const corpusLine = (leaf, blockId, poolKey) => poolMemberTexts({ leaf, blockId, poolKey, slots: { settlement: 'Brindle', seat: 'hall' } })[0];
 const CAPTURE = corpusLine('power', 'DS-POW-6', 'capture pressure ADVANCING (weak security, poor prosperity)');
+/** ADVANCING's line that presumes no buyer ("each season it gets easier to buy an official"), found, not typed. */
+const CAPTURE_TRUE = poolMemberTexts({ leaf: 'power', blockId: 'DS-POW-6', poolKey: 'capture pressure ADVANCING (weak security, poor prosperity)', slots: { settlement: 'Brindle', seat: 'hall' } })
+  .find((t) => !/one at a time|never paid/.test(t));
+/** A card who answers to a criminal house through their office (REVIEW-W2A F3). */
+const OFFICIAL = { name: 'Panayot Pavlov', allegiance: { house: 'Smuggling network', vector: 'greed', via: 'office' } };
 const HOUSES = corpusLine('economy', 'DS-ECO-12', 'INCOME WEIGHT: the religious houses');
 const MAGIC = corpusLine('economy', 'DS-ECO-12', 'INCOME WEIGHT: the practice of magic');
 const SECURE = poolMemberTexts({ leaf: 'economy', blockId: 'DS-ECO-9', poolKey: 'SECURE', slots: { settlement: 'Brindle' } });
@@ -31,7 +36,7 @@ const PLANTS = {
   P2siege: { views: { 'Systems/Defense': [ENDURANCE('the granary carries the town for about three months at full rations.')] }, record: { economicState: { foodSecurity: { hasSiege: false } } } },
   P3source: { views: { 'Systems/Defense': [NO_ARCANE], 'Systems/Magic': ['Reliance on magic: Relied upon'] } },
   P4: { views: { 'Systems/Power': ['Three powers stand almost level in Brindle.'] }, record: { powerStructure: { factions: [{ power: 80 }, { power: 30 }, { power: 25 }] } } },
-  P5a: { views: { 'Systems/Power': ['Free of the criminals', CAPTURE] } },
+  P5false: { views: { 'Systems/Power': ['Free of the criminals', CAPTURE] }, record: { powerStructure: { criminalCaptureState: 'none' } } },
   P5b: { views: { 'Systems/Defense': ['Criminal structure: Diffuse', 'Underworld: the Night Hands'] } },
   P6need: { views: { 'Systems/Economics': ['Imports', 'ClayIron'] }, record: NEEDS_CLAY },
   P7a: { views: { 'World/History': ['Origin:was founded by a band of veteran soldiers', 'Founded by:a merchant consortium'] } },
@@ -55,7 +60,7 @@ const PLANTS = {
 
 describe('the rendered-dossier arm: one planted fault per row', () => {
   test('every row has a plant, and every plant reds its own row and no other', () => {
-    for (const line of [CAPTURE, HOUSES, MAGIC, SETTLED, ONLY_JUST, SMALL_MARGIN]) expect(typeof line).toBe('string');
+    for (const line of [CAPTURE, CAPTURE_TRUE, HOUSES, MAGIC, SETTLED, ONLY_JUST, SMALL_MARGIN]) expect(typeof line).toBe('string');
     expect(Object.keys(PLANTS).sort()).toEqual(Object.keys(PAGE_CENSUS_ROWS).sort());
     for (const [row, plant] of Object.entries(PLANTS)) {
       const rows = pageCensusFindings({ tier: 'town', ...(plant.record || {}) }, plant.views).map((f) => f.row);
@@ -65,10 +70,17 @@ describe('the rendered-dossier arm: one planted fault per row', () => {
   test('the controls: each plant with its contradicting half removed reads nothing', () => {
     const halves = {
       P1a: { 'Systems/Economics': [ONLY_JUST] },
-      P5a: { 'Systems/Power': ['Free of the criminals'] },
+      P5false: { 'Systems/Power': ['Free of the criminals'] },
       P10: { 'World/Institutions': ['The watch hold the gates at night.'] },
       NEW2: { 'Systems/Economics': PLANTS.NEW2.views['Systems/Economics'] },
     };
+    // row 5a re-read: the same line is true where an official is in pay; the line that presumes no buyer is true at none
+    expect(pageCensusFindings({ tier: 'town', npcs: [OFFICIAL], powerStructure: { criminalCaptureState: 'none' } }, PLANTS.P5false.views)).toEqual([]);
+    expect(pageCensusFindings({ tier: 'town', powerStructure: { criminalCaptureState: 'none' } }, { 'Systems/Power': ['Free of the criminals', CAPTURE_TRUE] })).toEqual([]);
+    // the ring's note: "bought officials" with no official in pay reds; with one it reads nothing
+    const RING = ['Criminal structure: Organized syndicate', 'Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money and the officials it pays, and anyone who needs something from it can bargain.'];
+    expect(pageCensusFindings({ tier: 'town' }, { 'Systems/Defense': RING }).map((f) => f.row)).toEqual(['P5false']);
+    expect(pageCensusFindings({ tier: 'town', npcs: [OFFICIAL] }, { 'Systems/Defense': RING })).toEqual([]);
     // row 6 re-read: the Imports line printing only what trade brings reads nothing beside the same need
     expect(pageCensusFindings({ tier: 'town', ...NEEDS_CLAY }, { 'Systems/Economics': ['Imports', 'Iron'] })).toEqual([]);
     for (const [row, views] of Object.entries(halves)) expect({ row, found: pageCensusFindings({ tier: 'town' }, views) }).toEqual({ row, found: [] });
@@ -81,7 +93,7 @@ describe('the rendered-dossier arm: one planted fault per row', () => {
     })).toEqual([]);
   });
   test('a re-defined row is RETIRED BY NAME with its reason, never reported, and its replacement is a row (the chair, 2026-11-12)', () => {
-    expect(Object.keys(RETIRED_PAGE_CENSUS_ROWS)).toEqual(['P2', 'P3any', 'P6']);
+    expect(Object.keys(RETIRED_PAGE_CENSUS_ROWS)).toEqual(['P2', 'P3any', 'P6', 'P5a']);
     for (const [id, [pattern, reason, replacedBy]] of Object.entries(RETIRED_PAGE_CENSUS_ROWS)) {
       expect(PAGE_CENSUS_ROWS[id]).toBeUndefined();
       expect(PAGE_CENSUS_ROWS[replacedBy]).toBeTruthy();

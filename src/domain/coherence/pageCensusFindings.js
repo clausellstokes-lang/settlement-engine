@@ -25,6 +25,7 @@ import { institutionDisplayName } from '../display/institutionDisplayName.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { importsAsPrinted } from '../display/tradeListDisplay.js';
 import { resourceDisplayName } from '../display/resourceDisplayName.js';
+import { CRIME_LINE_DISQUALIFIERS, CRIME_LINE_FACTS, crimeLineFactsOf } from '../display/stateProse/crimeLineDisqualifiers.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {Readonly<Record<string, ReadonlyArray<string>>>} Views */
@@ -47,7 +48,7 @@ export const PAGE_CENSUS_ROWS = Object.freeze({
   P2siege: ['2 a siege figure in the indicative outside a siege', 'SECOND'],
   P3source: ['3 reliance on magic stated with neither a practitioner nor a named source', 'CROSS'],
   P4: ['4 "three powers stand almost level" beside a leader far ahead', 'SECOND'],
-  P5a: ['5a the hall "free of the criminals" beside criminal money reaching the officials', 'SECOND'],
+  P5false: ['5a a crime line the town\'s facts make false: bought officials where none is in pay, none bought where one is, a grip on a hall no agent holds', 'SECOND'],
   P5b: ['5b "Diffuse, no gang" beside a criminal power', 'SECOND'],
   P6need: ['6 an import printed beside its own unmet need', 'CROSS'],
   P7a: ['7a two founders', 'GLANCE'],
@@ -84,6 +85,9 @@ export const RETIRED_PAGE_CENSUS_ROWS = Object.freeze({
   P6: ['6 a gap naming what the imports bring',
     'it read the true half as the fault: every gap it counted carries the record\'s own gap kind `missing`, and the good the Imports line printed beside it came from the terrain\'s list of needs, not from trade (REVIEW-W2A F1, 29 of 30 read true; the chair\'s ruling of 2026-11-13)',
     'P6need'],
+  P5a: ['5a the hall "free of the criminals" beside criminal money reaching the officials',
+    'it counted every capture-pressure line beside a free hall, the true with the false: "each season it gets easier to buy an official" presumes no buyer, and at the stored state none 41 of the census\'s 585 towns hold an official who answers to a criminal house through their office, so the hall\'s rung cannot decide a line about officials (REVIEW-W2A F3; the chair\'s ruling of 2026-11-13)',
+    'P5false'],
 });
 
 // ── the tree's own pools, as the counter reads them ──────────────────────────────────────────
@@ -102,6 +106,24 @@ function poolsOf(corpus, want) {
   }
   return out;
 }
+/** @type {Array<{ re: RegExp, falseWhere: keyof typeof CRIME_LINE_FACTS }> | null} */ let crimeLines = null;
+/** Each declared crime line's printed form, and the fact that makes it false. */
+const declaredCrimeLines = () => {
+  if (crimeLines) return crimeLines;
+  /** @type {Record<string, unknown>} */ const corpora = { 'DS-POW-6': DOSSIER_STATE_PROSE_POWER, 'DS-DEF-4': DOSSIER_STATE_PROSE_DEFENSE };
+  crimeLines = [];
+  for (const [key, byVid] of Object.entries(CRIME_LINE_DISQUALIFIERS)) {
+    const blockId = key.slice(0, key.indexOf('::')); const pool = key.slice(key.indexOf('::') + 2);
+    const variants = arr(obj(obj(obj(corpora[blockId])[blockId]).pools)[pool]);
+    for (const [vid, d] of Object.entries(byVid)) {
+      const v = variants.find((x) => obj(x).vid === Number(vid));
+      if (v) crimeLines.push({ re: toRe(s(obj(v).text)), falseWhere: d.falseWhere });
+    }
+  }
+  return crimeLines;
+};
+/** The organised ring's note naming the officials it pays (`defenseDisplay.js :: ORGANIZED_RING_NOTES`). */
+const RING_BOUGHT = /bought officials|the officials it pays|pays officials in turn|bribed officials/;
 /** @type {Array<{ key: string, re: RegExp }> | null} */ let capturePools = null;
 /** @type {Array<{ key: string, re: RegExp }> | null} */ let beastPools = null;
 /** @type {Array<{ key: string, re: RegExp }> | null} */ let magicIncomePools = null;
@@ -195,9 +217,17 @@ export function pageCensusFindings(settlement, views) {
     const f = arr(obj(rec.powerStructure).factions).map((x) => Number(obj(x).power)).sort((a, b) => b - a);
     return f.length >= 3 && f[0] - f[2] > 10 ? [level.slice(level.indexOf('Three')).slice(0, 90), `powers ${f.join('/')}`] : null;
   });
-  run('P5a', () => {
-    const free = PW.find((l) => /^Free of the criminals/.test(l)); const pressure = PW.find((l) => cap.some((p) => p.re.test(l)));
-    return free && pressure ? [free.slice(0, 60), pressure] : null;
+  run('P5false', () => {
+    // a line of the crime desk (Power, Defense) whose declared fact this town makes false (crimeLineDisqualifiers.js),
+    // or the organised ring's note naming bought officials where the cast holds none
+    const facts = crimeLineFactsOf(/** @type {Parameters<typeof crimeLineFactsOf>[0]} */ (rec));
+    const lines = [...PW, ...D];
+    for (const l of lines) {
+      const hit = declaredCrimeLines().find((c) => c.re.test(l) && CRIME_LINE_FACTS[c.falseWhere](facts));
+      if (hit) return [l, `${hit.falseWhere} (officials in pay ${facts.officialsInPay}, hall ${facts.captureState || 'absent'})`];
+      if (RING_BOUGHT.test(l) && facts.officialsInPay === 0) return [l, 'no official in pay'];
+    }
+    return null;
   });
   run('P5b', () => {
     const diffuse = D.find((l) => /Criminal structure: Diffuse/i.test(l) || /books record no gang, guild or racket/.test(l));

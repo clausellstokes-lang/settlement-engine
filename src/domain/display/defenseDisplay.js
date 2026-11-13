@@ -644,6 +644,7 @@ export function foodEnduranceLine(settlement) {
 // ─── SW-B5 FRAMES: the criminal ring's note gets vantages ─────────────────────
 // ⚠ AT THE END OF THE FILE so no line above moves (lines of this module are cited elsewhere).
 import { hashKey } from './stateProse/stateProseKernel.js';
+import { officialsInCriminalPayOf } from '../facts/officialsInPay.js';
 
 /**
  * ⭐ THE RING'S NOTE GETS VANTAGES (lane SW-B5 FRAMES, 2026-11-09; STYLE-RULINGS-2 B5, the
@@ -665,13 +666,38 @@ const ORGANIZED_RING_NOTES = Object.freeze([
 ]);
 
 /**
+ * THE SAME FOUR VANTAGES WITHOUT "BOUGHT OFFICIALS" (W2-A-LEAVES-2, 2026-11-13; REVIEW-W2A F3). Each vantage above
+ * says the ring "lives on protection money and bought officials" (or the officials it pays, pays officials, bribed
+ * officials). That clause is TRUE where the cast holds an official who answers to a criminal house through their
+ * office (`facts/officialsInPay.js`) and FALSE where it holds none — 93 of the 124 organised rings beside a hall
+ * "free of the criminals" on the census's 720, and 55 more at the other rungs. So the clause is the fact's: index
+ * i here is vantage i with that clause, and nothing else, taken out. No new claim; the pick is unchanged.
+ * @type {ReadonlyArray<string>}
+ */
+const ORGANIZED_RING_NOTES_NONE_BOUGHT = Object.freeze([
+  'One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it puts down random violence because that brings the law, and it lives on protection money.',
+  'Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money, and anyone who needs something from it can bargain.',
+  'Shopkeepers here pay one ring for protection. It stamps out random violence, which would bring the law, and its terms are known and can be negotiated.',
+  'Ask who runs crime here and the answer is one ring. It sets the rules and keeps to them, it can be bargained with, and it puts down any violence that would bring the law; it lives on protection money.',
+]);
+
+/**
+ * The organised ring's note. ⚠ THE NOTE IS A LINE, NOT THE LEAF'S FACT: the structure's KEY is the crime leaf
+ * (layer 3, `factLayers.js :: crime`, read by `factsOf(record).crime`), while the note reads the cast (an
+ * official in a criminal's pay, layer 4), so it is composed WHEN IT IS READ (a getter): the key's readers never
+ * reach the cast, and every printer of the note (the Defense tab, the PDF) reads it through the fact.
  * @param {{ key: string, label: string, color: string, bg: string, note: string }} row
- * @param {{ _seed?: unknown }} settlement
+ * @param {{ _seed?: unknown, npcs?: unknown }} settlement
  * @returns {{ key: string, label: string, color: string, bg: string, note: string }}
  */
 function withRingVantage(row, settlement) {
+  if (row.key !== 'organized') return row;
   const seed = settlement?._seed;
-  if (row.key !== 'organized' || typeof seed !== 'string' || !seed) return row;
-  const note = ORGANIZED_RING_NOTES[hashKey(`${seed}::defenseDisplay:organizedRing`) % ORGANIZED_RING_NOTES.length];
-  return note === row.note ? row : Object.freeze({ ...row, note });
+  const i = typeof seed === 'string' && seed ? hashKey(`${seed}::defenseDisplay:organizedRing`) % ORGANIZED_RING_NOTES.length : 0;
+  const copy = { ...row };
+  Object.defineProperty(copy, 'note', {
+    enumerable: true,
+    get: () => (officialsInCriminalPayOf(settlement).length ? ORGANIZED_RING_NOTES[i] : ORGANIZED_RING_NOTES_NONE_BOUGHT[i]),
+  });
+  return Object.freeze(copy);
 }

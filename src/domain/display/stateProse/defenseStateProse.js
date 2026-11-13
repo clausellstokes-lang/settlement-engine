@@ -113,6 +113,7 @@ import { waterAccessKind } from '../../tradeRouteSemantics.js';
 import { wallsAnswered } from '../../defense/defenseFacts.js';
 import { crisisAnswered } from '../../crisis/crisisFacts.js';
 import { factsAnswered } from '../../facts/factsAnswered.js';
+import { corpusAdmittingCrimeLines, crimeLineFactsOf } from './crimeLineDisqualifiers.js';
 
 /**
  * The desk's corpus, typed at the import boundary — the generated leaves stay PURE DATA.
@@ -1007,9 +1008,12 @@ export function defenseCriminalProse(settlement, structureKey, options = {}) {
     seat: properFill(text(power.government)),
   };
 
+  // W2-A-LEAVES-2 (REVIEW-W2A F3): the capture lens's lines that deny a bought official are struck where the cast
+  // holds one (`crimeLineDisqualifiers.js`, enforced at the draw).
+  const corpus4 = corpusAdmittingCrimeLines(CORPUS, 'DS-DEF-4', crimeLineFactsOf(settlement));
   /** @param {string|null} poolKey */
   const line = (poolKey) => (poolKey
-    ? composeStateProse(CORPUS, 'DS-DEF-4', {
+    ? composeStateProse(corpus4, 'DS-DEF-4', {
       ...options,
       slots,
       spineKey: poolKey,

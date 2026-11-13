@@ -43,12 +43,13 @@
    "integration": 106,
    "banked": 106
   },
-  "P5a": {
-   "label": "5a the hall \"free of the criminals\" beside criminal money reaching the officials",
+  "P5false": {
+   "label": "5a a crime line the town's facts make false: bought officials where none is in pay, none bought where one is, a grip on a hall no agent holds",
    "reader": "SECOND",
-   "master": 0,
-   "integration": 288,
-   "banked": 0
+   "master": null,
+   "integration": null,
+   "base": 306,
+   "banked": 306
   },
   "P5b": {
    "label": "5b \"Diffuse, no gang\" beside a criminal power",
@@ -303,6 +304,15 @@
    "atRetirement": 296,
    "reason": "it read the true half as the fault: every gap it counted carries the record's own gap kind `missing`, and the good the Imports line printed beside it came from the terrain's list of needs, not from trade (REVIEW-W2A F1: 29 of 30 read true). 296 at the base and 296 again here, where the gaps print once more; 0 at 96d698de7 only because that tip silenced them. Retired by the chair's ruling of 2026-11-13; replaced by P6need.",
    "replacedBy": "P6need"
+  },
+  "P5a": {
+   "label": "5a the hall \"free of the criminals\" beside criminal money reaching the officials",
+   "reader": "SECOND",
+   "master": 0,
+   "integration": 288,
+   "atRetirement": 288,
+   "reason": "it counted every capture-pressure line beside a free hall, the true with the false: \"each season it gets easier to buy an official\" presumes no buyer, and at the stored state none 41 of the census's 585 towns hold an official who answers to a criminal house through their office, so the hall's rung cannot decide a line about officials (REVIEW-W2A F3: 92 plainly true lines and 164 not refuted were silenced with it). 288 at the base; 0 at 96d698de7 only because that tip silenced the lens. Retired by the chair's ruling of 2026-11-13; replaced by P5false.",
+   "replacedBy": "P5false"
   }
  }
 }
