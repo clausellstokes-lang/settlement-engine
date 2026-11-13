@@ -1,10 +1,12 @@
+NOT CLEAR
+
 # REVIEW-AGREE-3 — the agreement lane at faa20bc6c, a third independent review (2026-11-13)
 
 Lane read: `lane/coherence-agree-2026-11-11` at `faa20bc6c` ("the tip"). Its base: `lane/integration-2026-11-07`
-at `3575cf061` ("the line"; the merge base, 129 commits behind the tip). The reviewer changed nothing on either.
+at `3575cf061` ("the line"; the merge base; the tip is 129 commits ahead of it). The reviewer changed nothing on either.
 
-(The verdict is at the end, under STEP 9. Step 1 below was written and committed before any review, hand-back or
-record of this lane was read.)
+(The verdict is the first line and the findings are under STEP 9. Step 1 below was written and committed, in
+1fcbaf1c6, before any review, hand-back or record of this lane was read.)
 
 ---
 
@@ -176,7 +178,7 @@ defence scores 1,816; the flag bag 1,766; incomeSources 1,763; foodSecurity 1,65
 primaryExports 1,419; activeChains 1,391; strategicValue 1,140; foodways 1,110; readiness 1,080. Every figure but
 plotHooks equals PART SIX's.
 
-**In the 2,683 births whose resources did not change**, the families are the declared text and flag families
+**In the 1,872 births that held no pass and no crossroads position on the line** (so no refill could touch them), the families are the declared text and flag families
 (strengths 1,743, imports 821, hooks 790, safety 654, food 540, income 539, strategic line 473, defence scores 472,
 foodways 383, the flag bag 355, viability 332, situation 329, readiness 211, exports 56, legitimacy 32, history's
 current tension 29 (cure 6's failed-source line in famine towns), the golden's conditions 22, local production 17,
@@ -195,7 +197,7 @@ powers; P1's three towns move toward safety; the rest are F2's export-reading te
 
 **Every move toward danger, by cause.** 137 in all. 115 are in holders (the refill's re-deal: a pass or crossroads
 position the town could not have is replaced, and what follows is re-drawn), the golden's 17 prosperity and 5 food
-among them. The other 22 (18 readiness, 4 legitimacy, in 18 towns) are every one the defence home's mercenary atom
+among them. The other 22, in the 2,683 births whose resources did not change (18 readiness, 4 legitimacy, in 18 towns), are every one the defence home's mercenary atom
 (cure 9): `compound.inst.hasMercenary` true → false where the roster's only "company" is a Veteran's lodge (a
 drinking hall of old soldiers) or a Hireling hall ("torchbearers and porters … by the session"); military falls 1–20
 points (e.g. `agree-village-34` 36 → 18, Vulnerable → Undefended). A reader can give each reason. **No move toward
@@ -217,7 +219,8 @@ company, on the line or the tip.
 | NEW-2 magic income, no practitioner | 3 | 6 | +3 |
 | 5b, 8, 14, NEW-1 | — | — | +1 each |
 | F4 income line, no working | 274 | 254 | −20 |
-| 6 gap vs imports | 302 | 285 | −17; 17 −10; 7a −3; 13, 10, 16a, 5a −1/−2 |
+| 6 gap vs imports | 302 | 285 | −17 |
+| 17, 7a, 5a, 10, 13, 16a | | | −10, −3, −1, −1, −1, −2 |
 
 No new row; every verdict OLD; GLANCE towns 717 → 717. (The seat's table counts its own seat, 525d064f1 → tip, so
 its "+38" and "+9" are a part of my line → tip rises.)
@@ -294,7 +297,36 @@ the merge d0f0d022b). **No pin loosened; no test skipped.**
 **The three gates at the tip** (`sh scripts/gate-tail.sh npm run …`): `typecheck:ratchet` exit 0;
 `typecheck:domain:strict` exit 0; `lint` exit 0.
 
-SUITE_PLACEHOLDER
+**The whole suite, once, at the tip** (`git fetch origin review-fixes-2026-07-08:review-fixes-2026-07-08` first;
+`sh scripts/gate-tail.sh npx vitest run --maxWorkers=2`, 5,387 s, exit 1): **36 failed files of 3,219; 50 failed
+tests; 38,705 passed; 254 skipped**, and 5 of the 36 files fail at load with no test counted. PART SIX's 57 titles
+in 40 files at 107fd0a2d, less the six bundle rows the last commit cures (three files) and powerConfig (cured,
+622ed1d51), is 50 in 36: **the failing set equals it, title by title**:
+
+- the line's known set: landingFixtureFreshness ×2; newsHeadlineContract, newsVoiceContract, proseFamilyContract (at
+  load); the prose manifest's DRIFT arm;
+- the instrument seeds the lane's generation moved (PART FOUR, the merge's to re-search): observedShapeReaders and
+  writerReach (at load, `osr-tier-14`); proseTasteInterested ×3; proseWaveGate (d) ×2;
+- the merge seat's rows of PART FIVE: generatorGoldenMaster; espionageDormancyFence; heraldKnowledgeDeskGolden; the
+  prose manifest's four-seed arm; goldenViewModel; generationForkCensus A1; dmLayerGoldenIsolation A7;
+  nameHeldThroughAssembly A1; pipelinePinnedChoosers A1; pipelinePinnedMode A1, A2, A5; powerEconomyFreshness A4;
+  rosterFinalUnderHeldRoster A1; worldFactRederive A7; x46NpcBand; institutionBudgetPromise; editWorldFactResources
+  A2, A6; editCorpusRatchet A4, A7, A8; mergeLadderHeldKeys A2, A5, A6; hookThemeDraws; institutionTable;
+  siteCoherenceRatchet C1; townCartographyCalibration; undercitySewerDerivation; intentAtlasSoakDistiller;
+- PART SIX's new rows, named in the draft: generationCertificationCorpus; foodModelSingleWriter;
+  dossierPhoneFloorAllViews ×2; generationForkCensus A3e, A4; mergeLadderHeldKeys A3; recordMerge A6;
+  pipelinePinnedChoosers A6; editCorpusRatchet A6; the prose manifest's mixed-pool arm.
+
+No title is new. Under the hand-back's classes none is the lane's to cure (byte identities and corpus figures for
+the merge's signed doors, the line's own reds, and two instrument seeds whose re-search moves a closing act's
+register). The preset-lighting witness is green (7/7).
+
+**The six golden surfaces, by my run, against the record:** generator golden master 525 of 525 rows moved (my field
+diff; the record: 525 of 525); the espionage fence's driven hash `366d5c20…` against `38a52b05…` (PART SIX: 366d5c20);
+the herald desk `02d3fa8e…` against `0fa1f3ca…` (PART SIX: 02d3fa8e); the PDF golden `defense.scoreAvg` 43 → 41,
+`headcounts.institutions` 44 → 43, `npcs` 36 → 35 (record: the same three); the prose manifest's DRIFT arm, its
+four-seed arm (gm-seed-a 408 → 410, as recorded) and its mixed-pool arm 203 → 177 (as recorded); the
+preset-lighting witness green (record: unmoved). **All six hold.**
 
 ## STEP 8 — THE TWO ANSWERS THE SEAT PARKED
 
