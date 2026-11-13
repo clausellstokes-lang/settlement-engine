@@ -1,0 +1,3 @@
+     × planted: each family is a finding where the town makes it false, and none where it is true
+     × each of the seven is withdrawn with its reason, and none of their lines is a page finding
+      Tests  2 failed | 28 passed (30)

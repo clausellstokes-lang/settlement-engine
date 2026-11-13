@@ -1,0 +1,2 @@
+     × finding 6 (third read): only the invitation is spared; a claim about the church's name names a church
+      Tests  1 failed | 33 passed (34)

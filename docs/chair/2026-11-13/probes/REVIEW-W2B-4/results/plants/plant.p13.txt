@@ -1,0 +1,2 @@
+     × the strip ban's known gaps: the third read's fifteen shapes, three caught and twelve named as gaps, exactly
+      Tests  1 failed | 41 passed (42)

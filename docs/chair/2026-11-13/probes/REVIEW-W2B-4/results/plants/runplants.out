@@ -1,0 +1,58 @@
+CONTROL exit 0 (      Tests  76 passed (76))
+PLANT p1 exit 1  (Tests  2 failed | 74 passed (76))
+   FAIL  tests/domain/coherence/vocabularyPageFindings.test.js > F1 — the generated vocabulary > planted: each family is a finding where the town makes it false, and none where it is true
+   FAIL  tests/domain/coherence/vocabularyPageFindings.test.js > R1 (third read, finding 1) — the role words leave the page list > each of the seven is withdrawn with its reason, and none of their lines is a page finding
+   × each of the seven is withdrawn with its reason, and none of their lines is a page finding 1ms
+   × planted: each family is a finding where the town makes it false, and none where it is true 20ms
+PLANT p2 exit 1  (Tests  1 failed | 75 passed (76))
+   FAIL  tests/domain/coherence/vocabularyPageFindings.test.js > R1 (third read, finding 1) — the role words leave the page list > each of the seven is withdrawn with its reason, and none of their lines is a page finding
+   × each of the seven is withdrawn with its reason, and none of their lines is a page finding 12ms
+PLANT p3 exit 1  (Tests  3 failed | 73 passed (76))
+   FAIL  tests/domain/coherence/vocabularyPageFindings.test.js > F1 — the generated vocabulary > planted: each family is a finding where the town makes it false, and none where it is true
+   FAIL  tests/domain/coherence/vocabularyPageFindings.test.js > R1 (third read, finding 1) — the role words leave the page list > clergy and armedForce, outside the read that withdrew the seven, stay on the page list
+   FAIL  tests/domain/coherence/vocabularyPageFindings.test.js > item 1 — the precision read: senses that name nothing here, and the withdrawn families > THE LEAF OF A ROLE: a person among the town's people who holds it (role or title) makes it true
+   × THE LEAF OF A ROLE: a person among the town's people who holds it (role or title) makes it true 4ms
+   × clergy and armedForce, outside the read that withdrew the seven, stay on the page list 1ms
+   × planted: each family is a finding where the town makes it false, and none where it is true 22ms
+PLANT p4 exit 1  (Tests  1 failed | 75 passed (76))
+   FAIL  tests/domain/coherence/vocabularyPageFindings.test.js > F13 / F6 — the counts > finding 4 (third read): a hedge "two or three powers" is read by its lower count
+   × finding 4 (third read): a hedge "two or three powers" is read by its lower count 18ms
+PLANT p5 exit 1  (Tests  1 failed | 75 passed (76))
+   FAIL  tests/domain/coherence/vocabularyPageFindings.test.js > F13 / F6 — the counts > finding 4 (third read): a hedge "two or three powers" is read by its lower count
+   × finding 4 (third read): a hedge "two or three powers" is read by its lower count 13ms
+PLANT p6 exit 1  (Tests  2 failed | 74 passed (76))
+   FAIL  tests/domain/coherence/vocabularyPageFindings.test.js > F13 / F6 — the counts > finding 7 (third read): "both" counts as two, and an access row is no house here
+   FAIL  tests/lint/presumedThings.walker.test.js > ARM 1 — the source > ⛔ no stale row: a cured line leaves the register in its own commit
+   × finding 7 (third read): "both" counts as two, and an access row is no house here 16ms
+   × ⛔ no stale row: a cured line leaves the register in its own commit 17ms
+PLANT p7 exit 1  (Tests  1 failed | 75 passed (76))
+   FAIL  tests/domain/coherence/vocabularyPageFindings.test.js > F13 / F6 — the counts > finding 7 (third read): "both" counts as two, and an access row is no house here
+   × finding 7 (third read): "both" counts as two, and an access row is no house here 15ms
+PLANT p8 exit 1  (Tests  1 failed | 75 passed (76))
+   FAIL  tests/domain/coherence/vocabularyPageFindings.test.js > F13 / F6 — the counts > finding 7 (third read): "both" counts as two, and an access row is no house here
+   × finding 7 (third read): "both" counts as two, and an access row is no house here 19ms
+PLANT p9 exit 1  (Tests  2 failed | 74 passed (76))
+   FAIL  tests/domain/coherence/vocabularyPageFindings.test.js > F2 (second read) — streets are false only in a thorp or a hamlet > finding 8 (third read): neighbourhoods are a size error only in a thorp or a hamlet
+   FAIL  tests/lint/presumedThings.walker.test.js > ARM 1 — the source > ⛔ every source literal that names a thing declares it, or has its row
+   × finding 8 (third read): neighbourhoods are a size error only in a thorp or a hamlet 17ms
+   × ⛔ every source literal that names a thing declares it, or has its row 39ms
+PLANT p10 exit 1  (Tests  1 failed | 75 passed (76))
+   FAIL  tests/domain/coherence/vocabularyPageFindings.test.js > F8 (second read) — "the church's name" names no church here > finding 6 (third read): only the invitation is spared; a claim about the church's name names a church
+   × finding 6 (third read): only the invitation is spared; a claim about the church's name names a church 11ms
+PLANT p11 exit 1  (Tests  3 failed | 73 passed (76))
+   FAIL  tests/domain/coherence/vocabularyPageFindings.test.js > F8 (second read) — "the church's name" names no church here > finding 6 (third read): only the invitation is spared; a claim about the church's name names a church
+   FAIL  tests/domain/coherence/vocabularyPageFindings.test.js > F8 (second read) — "the church's name" names no church here > the invitation to name the church is spared; a church's bell is not
+   FAIL  tests/lint/presumedThings.walker.test.js > ARM 1 — the source > ⛔ every source literal that names a thing declares it, or has its row
+   × finding 6 (third read): only the invitation is spared; a claim about the church's name names a church 6ms
+   × the invitation to name the church is spared; a church's bell is not 17ms
+   × ⛔ every source literal that names a thing declares it, or has its row 26ms
+PLANT p12 exit 1  (Tests  2 failed | 74 passed (76))
+   FAIL  tests/domain/coherence/vocabularyPageFindings.test.js > F13 / F6 — the counts > F6, as F9 re-read it: a range row holds up to its own maximum; a single row holds one
+   FAIL  tests/domain/coherence/vocabularyPageFindings.test.js > F13 / F6 — the counts > F9: a count inside a range row is true; above its maximum it is false; an open range has no maximum
+   × F6, as F9 re-read it: a range row holds up to its own maximum; a single row holds one 15ms
+   × F9: a count inside a range row is true; above its maximum it is false; an open range has no maximum 10ms
+PLANT p13 exit 1  (Tests  1 failed | 41 passed (42))
+   FAIL  tests/lint/presumedThings.walker.test.js > ARM 3 — the strip ban (W2-B-DECLARE item 3; record 288, ruling 1, B (iii)) > the strip ban's known gaps: the third read's fifteen shapes, three caught and twelve named as gaps, exactly
+   × the strip ban's known gaps: the third read's fifteen shapes, three caught and twelve named as gaps, exactly 15ms
+?? node_modules
+done

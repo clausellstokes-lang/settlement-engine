@@ -1,0 +1,3 @@
+     × finding 8 (third read): neighbourhoods are a size error only in a thorp or a hamlet
+     × ⛔ every source literal that names a thing declares it, or has its row
+      Tests  2 failed | 74 passed (76)

@@ -1,0 +1,3 @@
+"shape": "Reflect.get",
+   "source": "export const a = POOL.map((l) => Reflect.get(l, 'text'));",
+   "today": "known-gap",

@@ -1,0 +1,4 @@
+     × the invitation to name the church is spared; a church's bell is not
+     × finding 6 (third read): only the invitation is spared; a claim about the church's name names a church
+     × ⛔ every source literal that names a thing declares it, or has its row
+      Tests  3 failed | 73 passed (76)

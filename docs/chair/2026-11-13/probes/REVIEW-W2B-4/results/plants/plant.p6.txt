@@ -1,0 +1,3 @@
+     × finding 7 (third read): "both" counts as two, and an access row is no house here
+     × ⛔ no stale row: a cured line leaves the register in its own commit
+      Tests  2 failed | 74 passed (76)

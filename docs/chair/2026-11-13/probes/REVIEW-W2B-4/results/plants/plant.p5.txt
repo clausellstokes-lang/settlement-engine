@@ -1,0 +1,2 @@
+     × finding 4 (third read): a hedge "two or three powers" is read by its lower count
+      Tests  1 failed | 75 passed (76)
