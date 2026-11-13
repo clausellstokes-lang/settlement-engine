@@ -45,7 +45,8 @@ import { keepOf, keepOfRecord } from '../facts/keep.js';
  * table's own rungs of what it can buy, the rungs the guard's purse lines read: Prosperous and above,
  * Moderate and Comfortable, Poor, and below. A town saved before the standing
  * label existed reads its stored score's rung, as it did. The row's colour stays its score's.
- * @param {any} r @param {number} econScore
+ * @param {{ economicState?: { prosperity?: unknown, prosperityStanding?: unknown } | null } | null | undefined} r
+ * @param {number} econScore
  * @returns {'long' | 'short' | 'late' | 'none'}
  */
 function moneyRungOf(r, econScore) {
