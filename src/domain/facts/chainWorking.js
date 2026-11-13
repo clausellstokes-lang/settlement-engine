@@ -17,8 +17,13 @@
  * The income source itself is unchanged (the chair: "the income source stays as it is"). The lines that read this
  * leaf are the second wave's (lane/w2-a-leaves-2026-11-12, lane/w2-b-declare-2026-11-12).
  *
+ * P1-a (W2-C-LEAVES-3): a house of `WORKED_BY_HOUSE` (an apothecary on the medicinal herbs) works its good too.
+ *
  * Layer 2 (the economy over the base). Pure: no randomness, no clock, no write; it reads the record and nothing else.
  */
+import { availableNativeResourceKeys } from '../resourceSemantics.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { RESOURCE_DATA } from '../../data/goods/identity.js';
 
 /** The chain states in which a chain is working its input (computeActiveChains.js :: the status ladder). */
 export const WORKING_CHAIN_STATUSES = Object.freeze(['running', 'operational', 'entrepot', 'vulnerable', 'magically_sustained']);
@@ -41,6 +46,50 @@ export const NOT_WORKED_THROUGH = Object.freeze([
   Object.freeze({ chains: ['divine_healing', 'pilgrimage'], goods: ['medicinal herbs'],
     cause: 'clergy at the hot springs heal and receive pilgrims; they do not gather the herbs (r2r-village-38, r2r-town-43)' }),
 ]);
+
+/**
+ * A HOUSE WHOSE TRADE WORKS A GOOD THAT NO CHAIN OF THE MODEL TAKES THROUGH IT (W2-C-LEAVES-3, the chair's ruling P1-a,
+ * 2026-11-13): the counterpart of `NOT_WORKED_THROUGH`. ONE closed list, each entry with its cause: where the asked good
+ * is an entry's, a resource of the town's own (live) yields it, a house of the entry's trade stands on the live roster
+ * (not a road to elsewhere), and no import of the record brings the good in (`brought`: then the house works what is
+ * bought, and the town's own source is not what reaches it), the good is worked here.
+ * @type {ReadonlyArray<Readonly<{ houses: ReadonlyArray<string>, goods: ReadonlyArray<string>, brought: RegExp, cause: string }>>}
+ */
+export const WORKED_BY_HOUSE = Object.freeze([
+  Object.freeze({ houses: ['apothecar'], goods: ['medicinal herbs'], brought: /\bherbs?\b/i,
+    cause: "an apothecary's house works the medicinal herbs of the town's own ground into its remedies; the chain model takes the herbs only from foraging areas (P1-a: r2r-village-47, r2r-metropolis-31, r2r-metropolis-54). Where the record imports herbs (\"Medicinal herbs\", \"Herbs and forage (local gathering areas exhausted)\": r2r-town-17, r2r-city-41, the cold list's #1146) the apothecary's herbs are bought" }),
+]);
+
+/**
+ * The entries of `WORKED_BY_HOUSE` for a good whose house stands on the live roster (whatever reaches it).
+ * @param {unknown} record @param {string | undefined} good
+ * @returns {ReadonlyArray<(typeof WORKED_BY_HOUSE)[number]>}
+ */
+export function housesOfTradeFor(record, good) {
+  if (good === undefined || !record || typeof record !== 'object') return [];
+  const g = good.toLowerCase();
+  const houses = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (record))
+    .map((i) => String(/** @type {{ name?: unknown }} */ (i)?.name ?? '').toLowerCase()).filter((n) => n && !n.startsWith('access to'));
+  return WORKED_BY_HOUSE.filter((e) => e.goods.includes(g) && houses.some((n) => e.houses.some((w) => n.includes(w))));
+}
+
+/**
+ * Whether a house of `WORKED_BY_HOUSE` works the asked good from one of these resources here.
+ * @param {unknown} record @param {ReadonlySet<string>} keys @param {string | undefined} good
+ * @returns {boolean}
+ */
+function houseWorksGood(record, keys, good) {
+  const entries = housesOfTradeFor(record, good);
+  if (!entries.length || good === undefined) return false;
+  const g = good.toLowerCase();
+  const r = /** @type {{ config?: Parameters<typeof availableNativeResourceKeys>[0], economicState?: { primaryImports?: unknown } }} */ (record);
+  const own = availableNativeResourceKeys(r.config || {}).filter((k) => keys.has(k)
+    && (/** @type {Readonly<Record<string, { commodities?: ReadonlyArray<string> } | undefined>>} */ (RESOURCE_DATA)[k]?.commodities || [])
+      .some((c) => String(c).toLowerCase().replace(/_/g, ' ') === g));
+  if (!own.length) return false;
+  const imports = (Array.isArray(r.economicState?.primaryImports) ? r.economicState.primaryImports : []).map(String);
+  return entries.some((e) => !imports.some((x) => e.brought.test(x)));
+}
 
 /**
  * Whether the closed list leaves this chain out for its input (and, where asked, for one good of it).
@@ -93,7 +142,8 @@ export function chainsWorking(record, resourceKeys, good) {
  * @returns {boolean}
  */
 export function chainWorksResource(record, resourceKeys, good) {
-  return chainsWorking(record, resourceKeys, good).length > 0;
+  return chainsWorking(record, resourceKeys, good).length > 0
+    || houseWorksGood(record, new Set((Array.isArray(resourceKeys) ? resourceKeys : [resourceKeys]).map(String)), good);
 }
 
 /**

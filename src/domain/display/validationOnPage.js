@@ -37,7 +37,7 @@ import { institutionDisplayName } from './institutionDisplayName.js';
 import { resourceDisplayName } from './resourceDisplayName.js';
 import { compareCodepoint } from '../deterministicSort.js';
 import { importsAsPrinted } from './tradeListDisplay.js';
-import { chainModelsResource, chainsWorking } from '../facts/chainWorking.js';
+import { chainModelsResource, chainWorksResource, housesOfTradeFor } from '../facts/chainWorking.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { familyOfInstitution, institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { institutionLadderEvicts } from '../../data/institutionLadders.js';
@@ -310,15 +310,14 @@ const chainFor = (rawResource) => /** @type {[string, ResourceChain]|undefined} 
  * asked of the chain leaf with the good the line names (`chainWorksResource`, R3's list); `modelled` is false where
  * no chain of the record takes the resource at all (the model is silent: "not known", never "not worked").
  * @param {PageRecord} s the settlement record @param {unknown} rawResource the card's or gap's raw resource ("timber")
- * @returns {{ modelled: boolean, worked: boolean, keys: string[], chains: ReadonlyArray<object> }} `chains`: the working chains
+ * @returns {{ modelled: boolean, worked: boolean, keys: string[], good: string | undefined }} `good`: the noun the leaf is asked of
  */
 export function resourceWorkReading(s, rawResource) {
   const entry = chainFor(str(rawResource));
   const spec = entry ? CHAIN_INPUTS[entry[0]] : null;
   const keys = gapResourceKeys(s, entry ? entry[0] : null);
-  const chains = chainsWorking(s, keys, spec?.noun);
-  const worked = chains.length > 0;
-  return { modelled: worked || chainModelsResource(s, keys), worked, keys, chains };
+  const worked = chainWorksResource(s, keys, spec?.noun);
+  return { modelled: worked || chainModelsResource(s, keys), worked, keys, good: spec?.noun };
 }
 
 /** @typedef {'unexploited'|'partial'|'full'} ExploitationStage */
@@ -338,15 +337,23 @@ export function resourceWorkReading(s, rawResource) {
  *    (a merchant guild on an alpine pasture, a river ferry on timber; MEASURED: 5 of 196 name no house of the roster
  *    at all), so no flow is printed for it;
  *  - a chain works it, filed Partial or Full: the filed grade stands;
- *  - a modelled chain idle here, filed Partial or Full: the filed grade stands. MEASURED and read (all 9 on the
- *    census's 720, d6e355a9d): every one is the medicinal herbs of a hot spring beside an Apothecary on the roster in
- *    8 of 9: the record bears the ANALYSIS out, so this class stops as filed (the ruling's stop), listed in the hand-back.
+ *  - a modelled chain idle here, filed Partial or Full: shown UNEXPLOITED (P1-a). MEASURED and read (all 9 on the
+ *    census's 720, d6e355a9d): every one was the medicinal herbs of a hot spring, 8 of them beside an Apothecary; the
+ *    leaf now knows that house (`facts/chainWorking.js :: WORKED_BY_HOUSE`, where no herb is imported), so
+ *    the 8 stand as filed (3 worked by their apothecary, 5 whose apothecary works herbs the town imports), and the one
+ *    with no such house (r2r-village-8: clergy and a divine healer at the springs) reads Unexploited, as its record says.
  * @param {PageRecord} s the settlement record @param {ExploitationCard} card @param {ExploitationStage} filed
  * @returns {ExploitationShown}
  */
 export function exploitationCardShown(s, card, filed) {
-  if (filed !== 'unexploited' || !resourceWorkReading(s, card?.rawResource).worked) return { card, stage: filed, filed, moved: false };
-  return { card, stage: 'partial', filed, moved: true };
+  const reading = resourceWorkReading(s, card?.rawResource);
+  if (filed === 'unexploited' && reading.worked) return { card, stage: 'partial', filed, moved: true };
+  // P1-a: a modelled chain idle here and no house of the leaf's list at the good (`housesOfTradeFor`): the record bears
+  // the leaf out. Where such a house stands (an apothecary working herbs the town buys) the filing stands, as ruled.
+  if (filed !== 'unexploited' && reading.modelled && !reading.worked && !housesOfTradeFor(s, reading.good).length) {
+    return { card, stage: 'unexploited', filed, moved: true };
+  }
+  return { card, stage: filed, filed, moved: false };
 }
 
 /**

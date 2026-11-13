@@ -89,7 +89,7 @@ afterEach(cleanup);
 describe('the grade cards read the chain leaf through the sentence\'s own reading (P1)', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
-  test('the unit: silent model stands; a working chain moves Unexploited to Partial; an idle modelled chain leaves Partial/Full as filed', () => {
+  test('the unit: silent model stands; a working chain moves Unexploited to Partial; an idle modelled chain with no house of the trade reads Unexploited', () => {
     const chain = (/** @type {string} */ status, available = true) => ({ chainId: 'timber', resourceInputKey: 'managed_forest',
       resourceInputAvailable: available, status, processingInstitutions: ['Carpenter'] });
     const town = (/** @type {object[]} */ chains, /** @type {Record<string, object[]>} */ exploitation) => ({ name: 'Testford',
@@ -100,8 +100,10 @@ describe('the grade cards read the chain leaf through the sentence\'s own readin
     expect(stages(town([chain('running')], { unexploited: [TIMBER] }))).toEqual({ unexploited: [], partial: ['timber'], full: [] });
     expect(stages(town([chain('impaired')], { unexploited: [TIMBER] })), 'an idle chain: unexploited as filed').toEqual({ unexploited: ['timber'], partial: [], full: [] });
     expect(stages(town([], { fullyExploited: [TIMBER] })), 'the model silent: the filing stands').toEqual({ unexploited: [], partial: [], full: ['timber'] });
-    expect(stages(town([chain('running', false)], { partiallyExploited: [TIMBER] })), 'modelled, idle, filed Partial: stands (the stop)')
-      .toEqual({ unexploited: [], partial: ['timber'], full: [] });
+    // RE-KEYED BY IDENTITY (P1-a, the chair's ruling after P1): modelled, idle, filed Partial, and no house of the leaf's
+    // WORKED_BY_HOUSE list at the good: the record bears the leaf out, so the card reads Unexploited (was: stands).
+    expect(stages(town([chain('running', false)], { partiallyExploited: [TIMBER] })), 'modelled, idle, filed Partial, no such house: Unexploited')
+      .toEqual({ unexploited: ['timber'], partial: [], full: [] });
     const { container, unmount } = render(<ResourcesTab settlement={town([chain('running')], { unexploited: [TIMBER] })} narrativeNote={null} />);
     expect(container.textContent).not.toMatch(/Unexploited/);
     expect(container.textContent, 'the moved card names no promised goods').not.toMatch(/planks/);
