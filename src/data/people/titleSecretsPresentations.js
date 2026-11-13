@@ -2269,3 +2269,27 @@ export const TITLE_SECRETS = Object.freeze(Object.fromEntries(ROWS.map(([title, 
 
 /** title → its three presentations (`{ impression, disposition, behaviour }`, the record `pickTitle` builds). */
 export const TITLE_PRESENTATIONS = Object.freeze(Object.fromEntries(ROWS.map(([title, , , presentations]) => [title, Object.freeze([...presentations])])));
+
+/**
+ * THE DISQUALIFIERS (COHERENCE-POWERS-7; the cold list REVIEW-W2A-3, MEDIUM #478 #488 #489 #534 #719 #1026 #1071): a line
+ * that presumes a water or a content its title's house does not guarantee says so here, keyed by its own text (a secret by
+ * its `secret`, a presentation by its `impression`), so the rows keep the shape the draw copies onto the card. `needs`
+ * holds atoms of the fact vocabulary (the water home: `navigable`, `coast`, `river`); `topic` a governed content topic
+ * (domain/generationContentProfile.js) the town's content settings must admit. A fishmonger or a chandler stands inland,
+ * a boatwright on a coast with no river, a foundling home under settings that forbid trading in people.
+ * @type {Readonly<{ secret: Readonly<Record<string, Readonly<{ needs?: readonly string[], topic?: string }>>>, presentation: Readonly<Record<string, Readonly<{ needs?: readonly string[], topic?: string }>>> }>}
+ */
+export const TITLE_LINE_DECLARATIONS = Object.freeze({
+  secret: Object.freeze({
+    'Buys fish from boats that fished where they are forbidden to, and never asks where the catch came from': Object.freeze({ needs: Object.freeze(['navigable']) }),
+    "Has been buying stolen ship's stores at night and selling them in the shop the next morning": Object.freeze({ needs: Object.freeze(['coast']) }),
+    "Has been taking timber from the river's driftwood that belongs to the mill upstream": Object.freeze({ needs: Object.freeze(['river']) }),
+    'Has been selling some of the foundlings to families who pay, without any record': Object.freeze({ topic: 'human_trafficking' }),
+  }),
+  presentation: Object.freeze({
+    'Cheerful in the cold and the stink of the market. Knows every regular by name and by order.': Object.freeze({ needs: Object.freeze(['navigable']) }),
+    'Smells of wax and soap, friendly and talkative, with a little of everything on the shelves.': Object.freeze({ needs: Object.freeze(['coast']) }),
+    'Easy and talkative, proud of every boat on the river that came from the yard.': Object.freeze({ needs: Object.freeze(['river']) }),
+    'Watches visitors near the slipway. Keeps the half-built hulls under cover.': Object.freeze({ needs: Object.freeze(['river']) }),
+  }),
+});
