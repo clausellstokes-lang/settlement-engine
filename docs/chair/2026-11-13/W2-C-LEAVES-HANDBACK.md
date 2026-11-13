@@ -248,3 +248,89 @@ Placed after the item in hand, its own commit, measured first, red first.
   through an "Access to …" row as not run here (the same test localProductionAsPrinted uses).
 - **Config:** `npm ci` (husky) set `core.hooksPath=.husky/_` in the shared local config; the main checkout had no active
   hooks before and has none now (no `.husky/_` there). Kept for the lane hook; unset after the last push.
+
+## The chair's ruling of 18:45 UTC: ROUND THREE'S LIST (copied in; after R1, R2, R3 and P1)
+The cut: `lane/round-3-cut-2026-11-13` (3bae61499), docs/chair/2026-11-13/ROUND-3-CUT-2026-11-13.md (sections 2, 6, 6b,
+7) and ROUND-3-CUT.json (key `lines`: number, severity, town, sentence, fact, `writer` file+function, `holders`,
+`package`, `status`, `replaced`, `round2`); the reader's towns, births and dumps on lane/review-r2-stages-2026-11-13
+(be53f933b), probes/REVIEW-R2-STAGES/. This lane's lines: EconomicsTab.jsx (package "several lanes: wc, up"), 2 high +
+34 medium — THE FILE IS THIS LANE'S FOR ROUND THREE (the defence lane is told not to touch it); ResourcesTab.jsx, 6
+lines of "no lane: the tabs"; package "several lanes: wa, wc, wr, fd": defenseDisplay.js (6), computeActiveChains.js
+(6), MagicTab.jsx (2): 3 high + 11 medium — a file another lane in flight changes beyond the first leaves lane's
+commits is named and left. FIRST: #169, the Imports row of rr2s-hamlet-under_siege-rand-1: under a siege in force that
+cuts the roads, nothing is listed as brought in by trade. RULED (c): the "Produced locally" pills read the chain leaf;
+where the model is silent the existing fact stands (DONE in d5d156deb for resource commodities: check the cold list's
+case against the tip). RULED (b): the row "Needs X · affects: a, b, c" is machinery in its form (57 on the twenty
+towns): ONE plain sentence of consequence, naming only services the town's own roster holds; where nothing the town
+has depends on the need, nothing prints; the data rows (economicData.js, economicState.js) are other lanes'; the
+sentence's form is new wording, listed with five towns it was read in. NOT YOURS: the "Via: <house>" label on
+Economics (the house-label leaf's lane). HOW: high first; each writer its own commit, measured first on the 720 and on
+the reader's town, red first; what prints in place read true; a claim of zero counted on every surface (tabs, the
+Tonight sheet, the PDF text, the Foundry journal, the exports); a `round2` line may already be held: cure it once. The
+final statement comes AFTER this list, once.
+
+## Items (this seat, continued)
+| item | commit | on the 720 (before → after) | read | guard (red at → green) |
+|---|---|---|---|---|
+| R1 half-way finisher by trade | d2bcf0e3d | the 28 reworded at item 1: 24 gone, the 4 true (Tanners alone) still print; all half-way lines 53 → 16 | every line left read: 15 true, 1 doubtful (r2r-village-29, a bowyer beside "no sawmill or carpenters' guild") | gapLineHousesByKind.test.js, 2 pins re-keyed by identity (the cause in the file) + an R1 describe (d5d156deb's leaf: 4 of 7 red) |
+| (fix) ruin-filter law for this seat's readers | 370001e0d | none (counts unchanged) | — | ruinFilterRoster.walker (red at 832d140fe/d5d156deb: 109 → 111; green, 109) |
+| R2 a need the town makes | 5d9bf2a5e | needs 1,649 → 1,481 (168 out; 11 lines empty, not printed); needs-local.mjs 174/149 → 19/19 | 30 lines left: 27 true, 1 false (cured by "preserved"), 2 doubtful (charcoal beside mountain timber; luxury goods beside furs) | needMadeHere.test.js (d2bcf0e3d: 2 of 2 red) |
+| (fix) wiring census re-taken | be93098b8 | producerIndexFiles 1337 → 1338 (this seat's chainStateShown.js) | — | proseWiringCensus.walker green |
+| R3 a chain works only through its trade | 695425a33 | of the reviewer's 116: the 8 true back, the 22 stone back, 83 still out; gap lines 788 → 817 (+26 stone, +4 herbs); Produced locally −106 pills (62 herbs, 44 stone) | the 26 stone towns by script: none quarries, dresses, exports or has a depleted quarry | chainWorksThroughItsTrade.test.js (be93098b8: 2 of 2 red); gapLineReadsChainLeaf.test.js 5 stone pins re-keyed by identity |
+
+## Calls taken without the chair (this seat)
+1. **R2's acceptance "needs-local.mjs at zero":** it stands at 19, all "luxury goods" matched by the raw model identifier
+   "luxury" in the unprinted local list; in each of the 19 it comes from gold or gem deposits no chain works (checked by
+   script): the town does not make luxury goods, so the 19 needs are true and stay. The probe reads the raw list.
+2. **R1's finisher list** (validationOnPage.js :: FINISHING_TRADES, closed, causes beside): leatherworkers ← cobbler,
+   furrier, saddler, cordwainer, shoemaker; carpenters ← carpenter, joiner, cooper, wheelwright; apothecary ↔ alchemist,
+   herbalist; brickmaker ← potter (the cold list's #990); smiths, smelter, goldsmiths, jewelers, coppersmiths, masons,
+   weavers, dyers, fulling, glassblower, potter by their own trade words. A tannery tans and does not finish.
+3. **Chain cards (832d140fe):** a siege "stops field work and trade" read from the siege's own record line; smuggling is
+   not trade the siege names; a service reads the Institutions tab's impaired set (computeChainSets).
+4. **R3's list keys the clergy entry by the GOOD** (medicinal herbs), not the resource: the clergy at the springs do use
+   the springs (the reviewer's 2 "hot springs are used" removals stay removed).
+
+## Red at this seat's tip, classed
+- tests/lint whole folder, run at R2's tip (5d9bf2a5e, two workers) and at the merged base 4534ea5e3: the ONLY titles red
+  at the tip and not at the base were factLayers' declaration arm, proseWiringCensus (two titles) and tradeListWriters —
+  all four this seat's, all cured (5d9bf2a5e, be93098b8). Every other lint red (factLayers READERS, chainPrintSites,
+  defenceFactReaders, domainAnyCastBaseline, institutionTable, ledgerCitationIntegrity, the news/prose contract and
+  taste walkers, proseWaveGate, siteCoherenceRatchet, sovereigntyLightingContract, writerReach and observedShapeReaders
+  at load) has the same title at the base; bodies compared only for dossierPhoneFloorAllViews and dossierProseManifest
+  (byte-identical at 4534ea5e3 and d5d156deb).
+- Not run at this seat's final tip: tests/lint after R3 (only the four walkers this seat moved + ruinFilterRoster were
+  re-run); the whole suite.
+
+## Found, not mine (this seat)
+- **The chain data's rows** (`data/supplyChainData.js` :: fortification, divine_healing, pilgrimage) name an input they do
+  not work: the true home of R3; the leaf's list reads them until a data seat cures the rows.
+- **The PDF and the Compendium's chain cards** print the chain's state raw (`pdf/sections/Services.jsx :: ChainCard`,
+  `SupplyChainsPanel.jsx :: ChainRow`): they could read `domain/display/chainStateShown.js`.
+- **The PDF prints `localProduction`?** Not checked: the reader `tradeListDisplay.js :: localProductionAsPrinted` is the
+  one to read if it does.
+- **The "Via:" line of the service cards** still prints count ranges ("Taverns (5-20)"): the house-label leaf's lane.
+
+## THE EXACT NEXT STEPS for the successor (in the chair's order)
+1. **P1, the grade cards**, by the ruling above (copied in): one display reader of the grade (the chain leaf's yes/no,
+   now with R3's list; the analysis's level among the yeses), read by ResourcesTab.jsx and pdf/sections/
+   ResourcesProduction.jsx (viewModelBodySlices.js only for the grade's own lines, named as shared). Measure first:
+   the first seat's counts (226 Unexploited beside a working chain in 196 towns; 79 Partial/Full where no chain takes
+   the resource) are at d79ea4c70 and BEFORE R3 — re-take them at 695425a33. Count the class "leaf not worked + Partial/
+   Full" first and read twelve. Ruling 7's count (a raw-good export beside a not-worked line or card) for the hand-back.
+2. **Round three's list** (above), high first, #169 first.
+3. **Then this file's older list:** validationOnPage.js mediums (#106, #453, #630 "No grapes reach the vintner" beside
+   "Every load of grapes … comes in from elsewhere" and Grapes imported; #388, #629 "No timber reaches the charcoal
+   burner" beside a Woodcutter's camp or a Sawmill — the idle-house line, `inputAnswered`); defenseDisplay.js mediums
+   (#122, #299 "one ring" beside rival gangs; #304 a port's sea approaches in an inland forest town; #357 the food
+   endurance months against the record's 1.8; #1013 coordinated crime against capture 'none'); item 5 (the flow card's
+   "From Grazing land" where the chain's resource is absent — read `facts/chainCarrier.js :: chainCarrierOf`, print the
+   resource only when its kind is `own`; the food band; the agreement review's G1–G4). Ruling (c): leave the defence
+   display's pay lines to the upkeep lane.
+4. **The final statement** as the brief gives it. The census at a43dd1400 (this seat's "before") lives only in this
+   container; the merged base's census was never run by this seat: run both in CLEAN worktrees (never the live
+   worktree: the render loads modules once per worker, but a clean tree removes the doubt). Field diff (expected
+   empty: no file under src/generators or src/data changed on this lane; `git diff --stat 4534ea5e3 HEAD --
+   src/generators src/data` is empty at 695425a33), the draft shift record, the whole suite, the edge bundles last.
+- Reminder: the `core.hooksPath=.husky/_` line `npm ci` writes to the shared config; this seat unset it after its last
+  push.
