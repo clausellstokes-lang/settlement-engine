@@ -1147,7 +1147,7 @@
   },
   {
     "path": "src/pdf/sections/Services.jsx",
-    "line": 243,
+    "line": 244,
     "category": "floatInterpolation",
     "snippet": "{flow}"
   },

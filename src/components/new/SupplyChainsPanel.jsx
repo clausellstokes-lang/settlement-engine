@@ -6,7 +6,7 @@ import { SUPPLY_CHAIN_NEEDS } from '../../data/goods/chains.js';
 import { exactGoodId, goodText } from '../../domain/region/goodsCatalog.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { supplyChainNoteInWords } from '../../domain/display/engineKeysInText.js';
-import { chainHousesOf } from '../../domain/display/chainHouses.js';
+import { chainHousesOf, chainSourceOf } from '../../domain/display/chainHouses.js';
 
 // ── Build a lookup: chainId → full chain definition ──────────────────────────
 const CHAIN_DEFS = {};
@@ -130,7 +130,8 @@ const OutputNode = ({ label, isExport }) => {
  */
 export function chainFlowFacts(chain, instNames = []) {
   return {
-    resource: chain?.resource || null,
+    // R2-CODE-B round 3, ruling (d) (#804): no ground the record says is absent (domain/display/chainHouses.js).
+    resource: chainSourceOf(chain),
     resourceDepleted: !!chain?.resourceDepleted,
     // Which processing institutions are actually present? R2-CODE-B item 1: each named once, by the
     // seam's house label (domain/display/chainHouses.js), never a rank's count range the roster lacks.

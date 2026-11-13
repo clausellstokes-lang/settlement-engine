@@ -35,3 +35,24 @@ export function chainHousesOf(patterns, instNames) {
   }
   return out;
 }
+
+/**
+ * THE GROUND A CHAIN DRAWS ON, as a reader is told it (R2-CODE-B round 3, ruling (d); the first seat's #804:
+ * "Hunting grounds" printed as an entrepôt fur chain's "From" in a town the record says has none). A chain
+ * carries its resource's own condition (`resourceCondition`, written by the chain model): "absent" says the
+ * ground is not here, the goods come in by trade. The card then names no ground for it; the trade it runs on
+ * stays where the card already says it (its imports, its entrepôt line). A depleted ground is still the
+ * town's and keeps its "(depleted)" (the card's own read). A record older than the condition field reads the
+ * input's own flag the same way: no input here, and not depleted. Pure: no draw, no write.
+ * @param {unknown} chain an active chain
+ * @returns {string | null} the resource to print as the chain's source, or null
+ */
+export function chainSourceOf(chain) {
+  if (!chain || typeof chain !== 'object') return null;
+  const c = /** @type {{ resource?: unknown, resourceCondition?: unknown, resourceInputAvailable?: unknown, resourceDepleted?: unknown }} */ (chain);
+  const resource = typeof c.resource === 'string' && c.resource ? c.resource : null;
+  if (!resource) return null;
+  if (c.resourceCondition === 'absent') return null;
+  if (c.resourceCondition == null && c.resourceInputAvailable === false && !c.resourceDepleted) return null;
+  return resource;
+}

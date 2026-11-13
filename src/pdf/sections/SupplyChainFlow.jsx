@@ -22,7 +22,7 @@ import { safe } from '../lib/format.js';
 import { tokenCase } from '../../domain/display/labelCase.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { supplyChainNoteInWords } from '../../domain/display/engineKeysInText.js';
-import { chainHousesOf } from '../../domain/display/chainHouses.js';
+import { chainHousesOf, chainSourceOf } from '../../domain/display/chainHouses.js';
 
 // chainId -> definition (for upstream import labels + fallback outputs).
 const CHAIN_DEFS = {};
@@ -118,10 +118,11 @@ function ChainRow({ chain, instNames, primaryExports }) {
       }}
     >
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
-        {chain.resource ? (
+        {/* R2-CODE-B round 3, ruling (d) (#804): no ground the record says is absent (chainHouses.js). */}
+        {chainSourceOf(chain) ? (
           <>
             <Node color={st.color} bg={st.bg} border={st.border}>
-              {safe(chain.resource)}{chain.resourceDepleted ? ' (depleted)' : ''}
+              {safe(chainSourceOf(chain))}{chain.resourceDepleted ? ' (depleted)' : ''}
             </Node>
             <Connector />
           </>
