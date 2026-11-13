@@ -107,7 +107,7 @@ const PAIRS = [
     "Open-field farming, parcelled into strips.",
   ],
   [
-    "Open pasture the village grazes in common.",
+    "Open pasture the hamlet grazes in common.",
     "Common ground where the settlement's beasts are pastured together.",
   ],
   [
@@ -295,8 +295,8 @@ const PAIRS = [
     "The methodical winning of building stone. Set on the right ground, a village can meet half a region's need for it. Something the quarry master never forgets.",
   ],
   [
-    "Evaporation pans and brine-works turn the local saline source into salt. By weight, it is the settlement's most traded product, and no household does without it.",
-    "Salt is won from local brine in broad evaporation pans. It is the settlement's most-traded good by weight and a necessity in every home.",
+    "Evaporation pans and brine-works turn the local saline source into salt, and no household does without it.",
+    "Salt is won from local brine in broad evaporation pans. It is a necessity in every home.",
   ],
   [
     "Musters hunting parties across the lands about the settlement, selling venison, pelts, and game at market. It is also where the wilderness is known best: which trails are safe and which are not.",
@@ -331,8 +331,8 @@ const PAIRS = [
     "Maintains stabling and trains horses for the saddle and the traces. Indispensable wherever a road runs through.",
   ],
   [
-    "A flat-bottomed ferry over the river, the crossing rights held in one family for generations. Anyone unwilling to walk the distance to the nearest bridge depends on it.",
-    "The river is crossed by a flat-bottomed ferry, worked by a family that has held the right to it for generations. Without it, the nearest bridge is a long walk off.",
+    "A flat-bottomed ferry over the river, the crossing rights held in one family for generations. Carts, beasts and walkers wait their turn on the bank.",
+    "The river is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.",
   ],
   [
     "Builds and mends flat-bottomed river craft: barges, punts, ferries, fishing boats. The work turns on river-boat knowledge: shallow draft, a hull that flexes, parts made to be replaced.",
@@ -567,8 +567,8 @@ const PAIRS = [
     "A district given to stables, horse-trade, and the farrier's craft, for any merchant, soldier, or traveller needing a new mount.",
   ],
   [
-    "Ordinary beasts only: horses, dogs, falcons.",
-    "Horses, dogs, and falcons. Nothing more exotic.",
+    "Horses, dogs and falcons, broken and trained to order.",
+    "Horses, dogs, and falcons, each trained for its work.",
   ],
   [
     "Keeps relay horses at the coaching inn for fast message riders. Letters and small parcels move far faster than anyone on foot.",
@@ -611,8 +611,8 @@ const PAIRS = [
     "A public sale of the enslaved: war captives, debtors, convicts, and the trafficked. In places where slavery is lawful, it stands as ordinary commercial infrastructure.",
   ],
   [
-    "A formal house for the sale of costly goods: estates, ships, livestock, art, and now and then persons. It takes a premium from buyer and seller both.",
-    "The recognised venue for high-value lots, be they estates, ships, livestock, art, or on occasion persons. Both buyer and seller pay its premium.",
+    "A formal house for the sale of costly goods: estates, ships, livestock, art, and now and then a whole household's goods. It takes a premium from buyer and seller both.",
+    "The recognised venue for high-value lots, be they estates, ships, livestock, art, or on occasion a debtor's whole house. Both buyer and seller pay its premium.",
   ],
   [
     "Tests the purity of precious metals brought in. Infrastructure without which banking and minting cannot work. It charges by the assay.",
@@ -747,8 +747,8 @@ const PAIRS = [
     "Abandoned babies and young children are received here and given plain care until apprenticeship, a family placement, or a childhood spent in the house itself. Generally a church foundation. The wheel in the wall admits a child by night, no name asked.",
   ],
   [
-    "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold the line between the city's spread and the wild, or advise its rulers on the land. Found where a city has come to terms with the wild.",
-    "A council of elder druids charged with their circle's standing in the city: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters. It arises only in cities at peace with the wild.",
+    "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold the line between the city's spread and the wild, or advise its rulers on the land.",
+    "A council of elder druids charged with their circle's standing in the city: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters.",
   ],
   [
     "A man of the lord's choosing governs, and noble authority overrides whatever the town was accustomed to.",
@@ -1079,8 +1079,8 @@ const PAIRS = [
     "A citizens' assembly wields the formal authority, its eligible voters debating and settling the larger ordinances and the appointments to office.",
   ],
   [
-    "A royal governor or viceroy administers the city directly for the crown. The standing is high, and so is the scrutiny.",
-    "The crown governs here at first hand, through a royal governor or viceroy. Great prestige, and no less watchfulness.",
+    "The crown governs the city from here, in person or through a royal governor. The standing is high, and so is the scrutiny.",
+    "The crown governs here at first hand, whether the monarch sits in it or a viceroy does. Great prestige, and no less watchfulness.",
   ],
   [
     "The official announcer, reading proclamations, market prices, and news in the market squares at set hours, paid by the city or a guild.",
@@ -1179,8 +1179,8 @@ const PAIRS = [
     "Illicit wares, bought and sold in hidden places.",
   ],
   [
-    "A lone hand or small cell, in a place too small to keep an assassins guild. Work comes through criminal go-betweens: less dependable, but deniable.",
-    "One killer, or a handful, in a place too small to keep an assassins guild. Contracts arrive by way of criminal intermediaries, less reliable and for that reason harder to trace back.",
+    "A lone hand or small cell with no assassins guild behind it. Work comes through criminal go-betweens: less dependable, but deniable.",
+    "One killer, or a handful, answering to no assassins guild. Contracts arrive by way of criminal intermediaries, less reliable and for that reason harder to trace back.",
   ],
   [
     "It seizes free persons and slips them into slavery on forged provenance papers. No lawful market stands here to absorb them, so it keeps its own holding and its own routes.",
@@ -1240,7 +1240,7 @@ const PAIRS = [
   ],
   [
     "Houses of worship in the hundreds, across every district. No neighbourhood is without the faith.",
-    "Hundreds of quarters, one house of worship to each, so that faith runs through every part of the city.",
+    "Every quarter keeps its own parish, so that faith runs through every part of the city.",
   ],
   [
     "Burial has left the walls: grounds beyond every gate, each with its road and its gatekeepers, and a trade in plots the revenue office keeps an eye on.",
@@ -1927,8 +1927,8 @@ export const DESC_VARIANT_DECLARATIONS = Object.freeze({
   "Catches wildfowl (using snares, nets, and trained birds) to stock the market with duck, goose, and pigeon.": Object.freeze({ needs: Object.freeze(["market"]) }), // village|Economy|Wildfowler#1
   "Works kilns out in the surrounding woods, producing the fuel for smiths, bakers, and hearths. Where timber runs plentiful, no fuel source is steadier.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // village|Economy|Charcoal burner#0
   "Tends charcoal kilns in the nearby woodland to feed the forge, the oven, and the fire. When timber is abundant, it is the settlement's surest supply of fuel.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // village|Economy|Charcoal burner#1
-  "A flat-bottomed ferry over the river, the crossing rights held in one family for generations. Anyone unwilling to walk the distance to the nearest bridge depends on it.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Economy|River ferry#0
-  "The river is crossed by a flat-bottomed ferry, worked by a family that has held the right to it for generations. Without it, the nearest bridge is a long walk off.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Economy|River ferry#1
+  "A flat-bottomed ferry over the river, the crossing rights held in one family for generations. Carts, beasts and walkers wait their turn on the bank.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Economy|River ferry#0
+  "The river is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Economy|River ferry#1
   "Builds and mends flat-bottomed river craft: barges, punts, ferries, fishing boats. The work turns on river-boat knowledge: shallow draft, a hull that flexes, parts made to be replaced.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Economy|River boatyard#0
   "River boats, all flat-bottomed, made and repaired here: barges, punts, ferries, and fishing craft. It takes a specialist's hand. Shallow in the draft, supple in the hull, and built so parts can be swapped out.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Economy|River boatyard#1
   "Turns hides to leather with oak bark. The stink of it keeps it downstream. Without it there are no shoes, no harness, no straps.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Crafts|Tannery#0
@@ -1946,8 +1946,8 @@ export const DESC_VARIANT_DECLARATIONS = Object.freeze({
   "The town's bread. Prices fixed by the guild.": Object.freeze({ needs: Object.freeze(["guild"]) }), // town|Crafts|Bakers (5-15)#0
   "Bread baked for sale, with the guild setting the price.": Object.freeze({ needs: Object.freeze(["guild"]) }), // town|Crafts|Bakers (5-15)#1
   "Each congregation buries its own, and the sexton keeps the roll that inheritance disputes are settled from. Guilds buy plots together so their members lie among their trade.": Object.freeze({ needs: Object.freeze(["guild"]) }), // town|Religious|Parish burial grounds#1
-  "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold the line between the city's spread and the wild, or advise its rulers on the land. Found where a city has come to terms with the wild.": Object.freeze({ needs: Object.freeze(["tier: ≥ city"]) }), // town|Religious|Elder Grove Council#0
-  "A council of elder druids charged with their circle's standing in the city: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters. It arises only in cities at peace with the wild.": Object.freeze({ needs: Object.freeze(["tier: ≥ city"]) }), // town|Religious|Elder Grove Council#1
+  "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold the line between the city's spread and the wild, or advise its rulers on the land.": Object.freeze({ needs: Object.freeze(["tier: ≥ city"]) }), // town|Religious|Elder Grove Council#0
+  "A council of elder druids charged with their circle's standing in the city: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters.": Object.freeze({ needs: Object.freeze(["tier: ≥ city"]) }), // town|Religious|Elder Grove Council#1
   "The official voice, reading proclamations, market prices, and news at set hours in the market square. Town or guild pays his wage.": Object.freeze({ needs: Object.freeze(["market"]) }), // town|Government|Town crier#0
   "At fixed times he stands in the market square and calls out the proclamations, the prices, and the news. His employer is the town, or else a guild.": Object.freeze({ needs: Object.freeze(["market"]) }), // town|Government|Town crier#1
   "An innermost stronghold, the city's final hold under siege.": Object.freeze({ needs: Object.freeze(["tier: ≥ city"]) }), // town|Defense|Citadel#1

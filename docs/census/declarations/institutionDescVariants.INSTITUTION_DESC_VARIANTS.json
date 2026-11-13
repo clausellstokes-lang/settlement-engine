@@ -407,7 +407,7 @@
     },
     {
       "id": "hamlet|Economy|Common grazing land#0",
-      "text": "Open pasture the village grazes in common.",
+      "text": "Open pasture the hamlet grazes in common.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1206,7 +1206,7 @@
     },
     {
       "id": "village|Economy|Salt works#0",
-      "text": "Evaporation pans and brine-works turn the local saline source into salt. By weight, it is the settlement's most traded product, and no household does without it.",
+      "text": "Evaporation pans and brine-works turn the local saline source into salt, and no household does without it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1214,7 +1214,7 @@
     },
     {
       "id": "village|Economy|Salt works#1",
-      "text": "Salt is won from local brine in broad evaporation pans. It is the settlement's most-traded good by weight and a necessity in every home.",
+      "text": "Salt is won from local brine in broad evaporation pans. It is a necessity in every home.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1353,7 +1353,7 @@
     },
     {
       "id": "village|Economy|River ferry#0",
-      "text": "A flat-bottomed ferry over the river, the crossing rights held in one family for generations. Anyone unwilling to walk the distance to the nearest bridge depends on it.",
+      "text": "A flat-bottomed ferry over the river, the crossing rights held in one family for generations. Carts, beasts and walkers wait their turn on the bank.",
       "needs": [
         "river"
       ],
@@ -1363,7 +1363,7 @@
     },
     {
       "id": "village|Economy|River ferry#1",
-      "text": "The river is crossed by a flat-bottomed ferry, worked by a family that has held the right to it for generations. Without it, the nearest bridge is a long walk off.",
+      "text": "The river is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.",
       "needs": [
         "river"
       ],
@@ -2331,7 +2331,7 @@
     },
     {
       "id": "town|Economy|Beast trainers#0",
-      "text": "Ordinary beasts only: horses, dogs, falcons.",
+      "text": "Horses, dogs and falcons, broken and trained to order.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2339,7 +2339,7 @@
     },
     {
       "id": "town|Economy|Beast trainers#1",
-      "text": "Horses, dogs, and falcons. Nothing more exotic.",
+      "text": "Horses, dogs, and falcons, each trained for its work.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2518,7 +2518,7 @@
     },
     {
       "id": "town|Economy|Auction house#0",
-      "text": "A formal house for the sale of costly goods: estates, ships, livestock, art, and now and then persons. It takes a premium from buyer and seller both.",
+      "text": "A formal house for the sale of costly goods: estates, ships, livestock, art, and now and then a whole household's goods. It takes a premium from buyer and seller both.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2526,7 +2526,7 @@
     },
     {
       "id": "town|Economy|Auction house#1",
-      "text": "The recognised venue for high-value lots, be they estates, ships, livestock, art, or on occasion persons. Both buyer and seller pay its premium.",
+      "text": "The recognised venue for high-value lots, be they estates, ships, livestock, art, or on occasion a debtor's whole house. Both buyer and seller pay its premium.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -3083,7 +3083,7 @@
     },
     {
       "id": "town|Religious|Elder Grove Council#0",
-      "text": "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold the line between the city's spread and the wild, or advise its rulers on the land. Found where a city has come to terms with the wild.",
+      "text": "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold the line between the city's spread and the wild, or advise its rulers on the land.",
       "needs": [
         "tier: ≥ city"
       ],
@@ -3093,7 +3093,7 @@
     },
     {
       "id": "town|Religious|Elder Grove Council#1",
-      "text": "A council of elder druids charged with their circle's standing in the city: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters. It arises only in cities at peace with the wild.",
+      "text": "A council of elder druids charged with their circle's standing in the city: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters.",
       "needs": [
         "tier: ≥ city"
       ],
@@ -4479,7 +4479,7 @@
     },
     {
       "id": "city|Government|Royal seat#0",
-      "text": "A royal governor or viceroy administers the city directly for the crown. The standing is high, and so is the scrutiny.",
+      "text": "The crown governs the city from here, in person or through a royal governor. The standing is high, and so is the scrutiny.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4487,7 +4487,7 @@
     },
     {
       "id": "city|Government|Royal seat#1",
-      "text": "The crown governs here at first hand, through a royal governor or viceroy. Great prestige, and no less watchfulness.",
+      "text": "The crown governs here at first hand, whether the monarch sits in it or a viceroy does. Great prestige, and no less watchfulness.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4889,7 +4889,7 @@
     },
     {
       "id": "city|Criminal|Contract killer#0",
-      "text": "A lone hand or small cell, in a place too small to keep an assassins guild. Work comes through criminal go-betweens: less dependable, but deniable.",
+      "text": "A lone hand or small cell with no assassins guild behind it. Work comes through criminal go-betweens: less dependable, but deniable.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4898,7 +4898,7 @@
     },
     {
       "id": "city|Criminal|Contract killer#1",
-      "text": "One killer, or a handful, in a place too small to keep an assassins guild. Contracts arrive by way of criminal intermediaries, less reliable and for that reason harder to trace back.",
+      "text": "One killer, or a handful, answering to no assassins guild. Contracts arrive by way of criminal intermediaries, less reliable and for that reason harder to trace back.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -5147,7 +5147,7 @@
     },
     {
       "id": "metropolis|Religious|Parish churches (50-100+)#1",
-      "text": "Hundreds of quarters, one house of worship to each, so that faith runs through every part of the city.",
+      "text": "Every quarter keeps its own parish, so that faith runs through every part of the city.",
       "needs": [],
       "excludes": [],
       "crisis": [],
