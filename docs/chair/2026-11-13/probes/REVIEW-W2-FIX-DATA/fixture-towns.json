@@ -1,0 +1,308 @@
+[
+ {
+  "id": "c01-thorp-none",
+  "seed": "review-w2b-1",
+  "config": {
+   "settType": "thorp",
+   "selectedStressesRandom": false,
+   "selectedStresses": [],
+   "stressType": null,
+   "stressTypes": []
+  }
+ },
+ {
+  "id": "c06-hamlet-none",
+  "seed": "review-w2b-6",
+  "config": {
+   "settType": "hamlet",
+   "selectedStressesRandom": false,
+   "selectedStresses": [],
+   "stressType": null,
+   "stressTypes": []
+  }
+ },
+ {
+  "id": "c11-village-none",
+  "seed": "review-w2b-11",
+  "config": {
+   "settType": "village",
+   "selectedStressesRandom": false,
+   "selectedStresses": [],
+   "stressType": null,
+   "stressTypes": []
+  }
+ },
+ {
+  "id": "c16-town-none",
+  "seed": "review-w2b-16",
+  "config": {
+   "settType": "town",
+   "selectedStressesRandom": false,
+   "selectedStresses": [],
+   "stressType": null,
+   "stressTypes": []
+  }
+ },
+ {
+  "id": "c21-city-none",
+  "seed": "review-w2b-21",
+  "config": {
+   "settType": "city",
+   "selectedStressesRandom": false,
+   "selectedStresses": [],
+   "stressType": null,
+   "stressTypes": []
+  }
+ },
+ {
+  "id": "c26-metropolis-none",
+  "seed": "review-w2b-26",
+  "config": {
+   "settType": "metropolis",
+   "selectedStressesRandom": false,
+   "selectedStresses": [],
+   "stressType": null,
+   "stressTypes": []
+  }
+ },
+ {
+  "id": "c02-thorp-under_siege",
+  "seed": "review-w2b-2",
+  "config": {
+   "settType": "thorp",
+   "stressType": "under_siege",
+   "stressTypes": [
+    "under_siege"
+   ]
+  }
+ },
+ {
+  "id": "c07-hamlet-under_siege",
+  "seed": "review-w2b-7",
+  "config": {
+   "settType": "hamlet",
+   "stressType": "under_siege",
+   "stressTypes": [
+    "under_siege"
+   ]
+  }
+ },
+ {
+  "id": "c12-village-under_siege",
+  "seed": "review-w2b-12",
+  "config": {
+   "settType": "village",
+   "stressType": "under_siege",
+   "stressTypes": [
+    "under_siege"
+   ]
+  }
+ },
+ {
+  "id": "c17-town-under_siege",
+  "seed": "review-w2b-17",
+  "config": {
+   "settType": "town",
+   "stressType": "under_siege",
+   "stressTypes": [
+    "under_siege"
+   ]
+  }
+ },
+ {
+  "id": "c22-city-under_siege",
+  "seed": "review-w2b-22",
+  "config": {
+   "settType": "city",
+   "stressType": "under_siege",
+   "stressTypes": [
+    "under_siege"
+   ]
+  }
+ },
+ {
+  "id": "c27-metropolis-under_siege",
+  "seed": "review-w2b-27",
+  "config": {
+   "settType": "metropolis",
+   "stressType": "under_siege",
+   "stressTypes": [
+    "under_siege"
+   ]
+  }
+ },
+ {
+  "id": "c03-thorp-famine",
+  "seed": "review-w2b-3",
+  "config": {
+   "settType": "thorp",
+   "stressType": "famine",
+   "stressTypes": [
+    "famine"
+   ]
+  }
+ },
+ {
+  "id": "c08-hamlet-famine",
+  "seed": "review-w2b-8",
+  "config": {
+   "settType": "hamlet",
+   "stressType": "famine",
+   "stressTypes": [
+    "famine"
+   ]
+  }
+ },
+ {
+  "id": "c13-village-famine",
+  "seed": "review-w2b-13",
+  "config": {
+   "settType": "village",
+   "stressType": "famine",
+   "stressTypes": [
+    "famine"
+   ]
+  }
+ },
+ {
+  "id": "c18-town-famine",
+  "seed": "review-w2b-18",
+  "config": {
+   "settType": "town",
+   "stressType": "famine",
+   "stressTypes": [
+    "famine"
+   ]
+  }
+ },
+ {
+  "id": "c23-city-famine",
+  "seed": "review-w2b-23",
+  "config": {
+   "settType": "city",
+   "stressType": "famine",
+   "stressTypes": [
+    "famine"
+   ]
+  }
+ },
+ {
+  "id": "c28-metropolis-famine",
+  "seed": "review-w2b-28",
+  "config": {
+   "settType": "metropolis",
+   "stressType": "famine",
+   "stressTypes": [
+    "famine"
+   ]
+  }
+ },
+ {
+  "id": "c04-thorp-none",
+  "seed": "review-w2b-4",
+  "config": {
+   "settType": "thorp",
+   "selectedStressesRandom": false,
+   "selectedStresses": [],
+   "stressType": null,
+   "stressTypes": []
+  }
+ },
+ {
+  "id": "c09-hamlet-none",
+  "seed": "review-w2b-9",
+  "config": {
+   "settType": "hamlet",
+   "selectedStressesRandom": false,
+   "selectedStresses": [],
+   "stressType": null,
+   "stressTypes": []
+  }
+ },
+ {
+  "id": "c14-village-none",
+  "seed": "review-w2b-14",
+  "config": {
+   "settType": "village",
+   "selectedStressesRandom": false,
+   "selectedStresses": [],
+   "stressType": null,
+   "stressTypes": []
+  }
+ },
+ {
+  "id": "c19-town-none",
+  "seed": "review-w2b-19",
+  "config": {
+   "settType": "town",
+   "selectedStressesRandom": false,
+   "selectedStresses": [],
+   "stressType": null,
+   "stressTypes": []
+  }
+ },
+ {
+  "id": "c24-city-none",
+  "seed": "review-w2b-24",
+  "config": {
+   "settType": "city",
+   "selectedStressesRandom": false,
+   "selectedStresses": [],
+   "stressType": null,
+   "stressTypes": []
+  }
+ },
+ {
+  "id": "c29-metropolis-none",
+  "seed": "review-w2b-29",
+  "config": {
+   "settType": "metropolis",
+   "selectedStressesRandom": false,
+   "selectedStresses": [],
+   "stressType": null,
+   "stressTypes": []
+  }
+ },
+ {
+  "id": "c05-thorp-random",
+  "seed": "review-w2b-5",
+  "config": {
+   "settType": "thorp"
+  }
+ },
+ {
+  "id": "c10-hamlet-random",
+  "seed": "review-w2b-10",
+  "config": {
+   "settType": "hamlet"
+  }
+ },
+ {
+  "id": "c15-village-random",
+  "seed": "review-w2b-15",
+  "config": {
+   "settType": "village"
+  }
+ },
+ {
+  "id": "c20-town-random",
+  "seed": "review-w2b-20",
+  "config": {
+   "settType": "town"
+  }
+ },
+ {
+  "id": "c25-city-random",
+  "seed": "review-w2b-25",
+  "config": {
+   "settType": "city"
+  }
+ },
+ {
+  "id": "c30-metropolis-random",
+  "seed": "review-w2b-30",
+  "config": {
+   "settType": "metropolis"
+  }
+ }
+]

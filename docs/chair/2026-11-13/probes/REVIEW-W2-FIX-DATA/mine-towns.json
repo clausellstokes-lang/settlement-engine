@@ -1,0 +1,386 @@
+[
+ {
+  "id": "rvfd-thorp-0",
+  "seed": "rvfd-thorp-0",
+  "config": {
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "monsterThreat": "random_threat",
+   "nearbyResourcesRandom": true,
+   "selectedStressesRandom": true,
+   "_randomizePriorities": true,
+   "magicExists": true,
+   "contentProfile": "grounded",
+   "settType": "thorp"
+  },
+  "opts": {
+   "customContent": {}
+  }
+ },
+ {
+  "id": "rvfd-thorp-1",
+  "seed": "rvfd-thorp-1",
+  "config": {
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "monsterThreat": "random_threat",
+   "nearbyResourcesRandom": true,
+   "selectedStressesRandom": true,
+   "_randomizePriorities": true,
+   "magicExists": true,
+   "contentProfile": "grounded",
+   "settType": "thorp"
+  },
+  "opts": {
+   "customContent": {}
+  }
+ },
+ {
+  "id": "rvfd-hamlet-0",
+  "seed": "rvfd-hamlet-0",
+  "config": {
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "monsterThreat": "random_threat",
+   "nearbyResourcesRandom": true,
+   "selectedStressesRandom": true,
+   "_randomizePriorities": true,
+   "magicExists": true,
+   "contentProfile": "grounded",
+   "settType": "hamlet"
+  },
+  "opts": {
+   "customContent": {}
+  }
+ },
+ {
+  "id": "rvfd-hamlet-1",
+  "seed": "rvfd-hamlet-1",
+  "config": {
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "monsterThreat": "random_threat",
+   "nearbyResourcesRandom": true,
+   "selectedStressesRandom": true,
+   "_randomizePriorities": true,
+   "magicExists": true,
+   "contentProfile": "grounded",
+   "settType": "hamlet"
+  },
+  "opts": {
+   "customContent": {}
+  }
+ },
+ {
+  "id": "rvfd-village-0",
+  "seed": "rvfd-village-0",
+  "config": {
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "monsterThreat": "random_threat",
+   "nearbyResourcesRandom": true,
+   "selectedStressesRandom": true,
+   "_randomizePriorities": true,
+   "magicExists": true,
+   "contentProfile": "grounded",
+   "settType": "village"
+  },
+  "opts": {
+   "customContent": {}
+  }
+ },
+ {
+  "id": "rvfd-village-1",
+  "seed": "rvfd-village-1",
+  "config": {
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "monsterThreat": "random_threat",
+   "nearbyResourcesRandom": true,
+   "selectedStressesRandom": true,
+   "_randomizePriorities": true,
+   "magicExists": true,
+   "contentProfile": "grounded",
+   "settType": "village"
+  },
+  "opts": {
+   "customContent": {}
+  }
+ },
+ {
+  "id": "rvfd-town-0",
+  "seed": "rvfd-town-0",
+  "config": {
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "monsterThreat": "random_threat",
+   "nearbyResourcesRandom": true,
+   "selectedStressesRandom": true,
+   "_randomizePriorities": true,
+   "magicExists": true,
+   "contentProfile": "grounded",
+   "settType": "town"
+  },
+  "opts": {
+   "customContent": {}
+  }
+ },
+ {
+  "id": "rvfd-town-1",
+  "seed": "rvfd-town-1",
+  "config": {
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "monsterThreat": "random_threat",
+   "nearbyResourcesRandom": true,
+   "selectedStressesRandom": true,
+   "_randomizePriorities": true,
+   "magicExists": true,
+   "contentProfile": "grounded",
+   "settType": "town"
+  },
+  "opts": {
+   "customContent": {}
+  }
+ },
+ {
+  "id": "rvfd-city-0",
+  "seed": "rvfd-city-0",
+  "config": {
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "monsterThreat": "random_threat",
+   "nearbyResourcesRandom": true,
+   "selectedStressesRandom": true,
+   "_randomizePriorities": true,
+   "magicExists": true,
+   "contentProfile": "grounded",
+   "settType": "city"
+  },
+  "opts": {
+   "customContent": {}
+  }
+ },
+ {
+  "id": "rvfd-city-1",
+  "seed": "rvfd-city-1",
+  "config": {
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "monsterThreat": "random_threat",
+   "nearbyResourcesRandom": true,
+   "selectedStressesRandom": true,
+   "_randomizePriorities": true,
+   "magicExists": true,
+   "contentProfile": "grounded",
+   "settType": "city"
+  },
+  "opts": {
+   "customContent": {}
+  }
+ },
+ {
+  "id": "rvfd-metropolis-0",
+  "seed": "rvfd-metropolis-0",
+  "config": {
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "monsterThreat": "random_threat",
+   "nearbyResourcesRandom": true,
+   "selectedStressesRandom": true,
+   "_randomizePriorities": true,
+   "magicExists": true,
+   "contentProfile": "grounded",
+   "settType": "metropolis"
+  },
+  "opts": {
+   "customContent": {}
+  }
+ },
+ {
+  "id": "rvfd-metropolis-1",
+  "seed": "rvfd-metropolis-1",
+  "config": {
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "monsterThreat": "random_threat",
+   "nearbyResourcesRandom": true,
+   "selectedStressesRandom": true,
+   "_randomizePriorities": true,
+   "magicExists": true,
+   "contentProfile": "grounded",
+   "settType": "metropolis"
+  },
+  "opts": {
+   "customContent": {}
+  }
+ },
+ {
+  "id": "rvfd-under_siege-hamlet",
+  "seed": "rvfd-under_siege-hamlet",
+  "config": {
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "monsterThreat": "random_threat",
+   "nearbyResourcesRandom": true,
+   "selectedStressesRandom": false,
+   "_randomizePriorities": true,
+   "magicExists": true,
+   "contentProfile": "grounded",
+   "settType": "hamlet",
+   "selectedStresses": [
+    "under_siege"
+   ]
+  },
+  "opts": {
+   "customContent": {}
+  }
+ },
+ {
+  "id": "rvfd-under_siege-city",
+  "seed": "rvfd-under_siege-city",
+  "config": {
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "monsterThreat": "random_threat",
+   "nearbyResourcesRandom": true,
+   "selectedStressesRandom": false,
+   "_randomizePriorities": true,
+   "magicExists": true,
+   "contentProfile": "grounded",
+   "settType": "city",
+   "selectedStresses": [
+    "under_siege"
+   ]
+  },
+  "opts": {
+   "customContent": {}
+  }
+ },
+ {
+  "id": "rvfd-famine-village",
+  "seed": "rvfd-famine-village",
+  "config": {
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "monsterThreat": "random_threat",
+   "nearbyResourcesRandom": true,
+   "selectedStressesRandom": false,
+   "_randomizePriorities": true,
+   "magicExists": true,
+   "contentProfile": "grounded",
+   "settType": "village",
+   "selectedStresses": [
+    "famine"
+   ]
+  },
+  "opts": {
+   "customContent": {}
+  }
+ },
+ {
+  "id": "rvfd-famine-metropolis",
+  "seed": "rvfd-famine-metropolis",
+  "config": {
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "monsterThreat": "random_threat",
+   "nearbyResourcesRandom": true,
+   "selectedStressesRandom": false,
+   "_randomizePriorities": true,
+   "magicExists": true,
+   "contentProfile": "grounded",
+   "settType": "metropolis",
+   "selectedStresses": [
+    "famine"
+   ]
+  },
+  "opts": {
+   "customContent": {}
+  }
+ },
+ {
+  "id": "rvfd-occupied-town",
+  "seed": "rvfd-occupied-town",
+  "config": {
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "monsterThreat": "random_threat",
+   "nearbyResourcesRandom": true,
+   "selectedStressesRandom": false,
+   "_randomizePriorities": true,
+   "magicExists": true,
+   "contentProfile": "grounded",
+   "settType": "town",
+   "selectedStresses": [
+    "occupied"
+   ]
+  },
+  "opts": {
+   "customContent": {}
+  }
+ },
+ {
+  "id": "rvfd-plague_onset-thorp",
+  "seed": "rvfd-plague_onset-thorp",
+  "config": {
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "monsterThreat": "random_threat",
+   "nearbyResourcesRandom": true,
+   "selectedStressesRandom": false,
+   "_randomizePriorities": true,
+   "magicExists": true,
+   "contentProfile": "grounded",
+   "settType": "thorp",
+   "selectedStresses": [
+    "plague_onset"
+   ]
+  },
+  "opts": {
+   "customContent": {}
+  }
+ },
+ {
+  "id": "rvfd-wartime-town",
+  "seed": "rvfd-wartime-town",
+  "config": {
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "monsterThreat": "random_threat",
+   "nearbyResourcesRandom": true,
+   "selectedStressesRandom": false,
+   "_randomizePriorities": true,
+   "magicExists": true,
+   "contentProfile": "grounded",
+   "settType": "town",
+   "selectedStresses": [
+    "wartime"
+   ]
+  },
+  "opts": {
+   "customContent": {}
+  }
+ },
+ {
+  "id": "rvfd-mass_migration-city",
+  "seed": "rvfd-mass_migration-city",
+  "config": {
+   "tradeRouteAccess": "random_trade",
+   "culture": "random_culture",
+   "monsterThreat": "random_threat",
+   "nearbyResourcesRandom": true,
+   "selectedStressesRandom": false,
+   "_randomizePriorities": true,
+   "magicExists": true,
+   "contentProfile": "grounded",
+   "settType": "city",
+   "selectedStresses": [
+    "mass_migration"
+   ]
+  },
+  "opts": {
+   "customContent": {}
+  }
+ }
+]
