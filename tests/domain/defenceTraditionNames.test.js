@@ -69,7 +69,10 @@ describe('the defence traditions are read by the roster\'s defence home', () => 
     expect(defenseWallOf([{ name: 'Massive Walls' }, { name: 'Inner Citadel' }])).toEqual({ present: true, kind: 'stone' });
     expect(defenseWallOf([{ name: 'Palisade' }])).toEqual({ present: true, kind: 'palisade' });
     expect(defenseWallOf([{ name: 'Palisade or earthworks' }])).toEqual({ present: true, kind: 'palisade' });
-    expect(defenseWallOf([{ name: 'Earthwork ring' }])).toEqual({ present: true, kind: 'earthwork' });
+    // Re-keyed by identity at the chair's ruling of 2026-11-13 13:1x (COHERENCE-UPKEEP-6): the earthwork's row left
+    // DEFENCE_TUNING (no roster row names an earthwork of its own), so an earthwork reads as a palisade, as the
+    // facts home (`defenseFacts.js :: defenseFactsOf`, its timber-enclosure test) already read it.
+    expect(defenseWallOf([{ name: 'Earthwork ring' }])).toEqual({ present: true, kind: 'palisade' });
     const generator = readFileSync(join(ROOT, 'src/generators/defenseGenerator.js'), 'utf8');
     expect(generator).toMatch(/defenseTraditionNamesOf/);
     expect(generator).toMatch(/defenseWallOf\(institutions\)/);

@@ -13,7 +13,7 @@
 
 export const DEFENCE_TUNING = Object.freeze({
   walls: Object.freeze({ mil: 30, mon: 20 }),
-  wallKind: Object.freeze({ stone: 1, palisade: 0.6, earthwork: 0.4 }),
+  wallKind: Object.freeze({ stone: 1, palisade: 0.6 }),
   garrison: Object.freeze({ mil: 28, mon: 20, int: 15 }),
   militia: Object.freeze({ mil: 10, mon: 12, int: 8 }),
   watch: Object.freeze({ mil: 7, int: 18 }),
@@ -84,7 +84,7 @@ export const WATCH_IN_STEAD = Object.freeze({ hasMercenary: false, hasCharterHal
 /** Each weight row's one-line reason (the addendum's weight table), keyed as DEFENCE_TUNING. */
 export const DEFENCE_WEIGHT_REASONS = Object.freeze({
   walls: 'the largest built defence; holds against raiders and beasts alike',
-  wallKind: 'a stone wall at its full value; a palisade counts for less, an earthwork for less still (the starting weights, for the owner\'s veto)',
+  wallKind: 'a stone wall at its full value; a palisade counts for less (the roster\'s "Palisade or earthworks", and any earthwork, reads as a palisade; the starting weight, for the owner\'s veto)',
   garrison: 'a standing professional force; it also keeps order',
   militia: 'citizens under arms: less than soldiers, good against beasts',
   watch: 'a police force first',

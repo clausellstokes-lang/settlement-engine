@@ -221,11 +221,13 @@ describe('the kind of wall counts', () => {
     expect(bad).toEqual([]);
   });
 
-  test('stone keeps today\'s full value; a palisade and an earthwork count for less, an earthwork least', () => {
+  // Re-keyed by identity at the chair's ruling of 2026-11-13 13:1x: the earthwork's 0.4 was reached by no birth (the
+  // roster's "Palisade or earthworks" reads as a palisade), so its row leaves the table until the roster names one.
+  test('stone keeps today\'s full value; a palisade counts for less; the table holds no row no birth can reach', () => {
     const K = DEFENCE_TUNING.wallKind;
     expect(K.stone).toBe(1);
     expect(K.palisade).toBeLessThan(K.stone);
-    expect(K.earthwork).toBeLessThan(K.palisade);
+    expect(Object.keys(K).sort()).toEqual(['palisade', 'stone']);
   });
 });
 

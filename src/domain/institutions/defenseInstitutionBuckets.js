@@ -243,20 +243,21 @@ export function defenseTraditionNamesOf(institutions) {
  * @type {Readonly<Record<string, ReadonlyArray<string>>>}
  */
 export const WALL_KIND_KEYWORDS = Object.freeze({
-  palisade: Object.freeze(['palisade']),
-  earthwork: Object.freeze(['earthwork']),
+  // An earthwork reads as a palisade (the chair's ruling of 2026-11-13 13:1x, COHERENCE-UPKEEP-6): no roster row
+  // names an earthwork of its own, so defence weighs no kind it cannot reach; the facts home reads it the same way.
+  palisade: Object.freeze(['palisade', 'earthwork']),
 });
 
 /**
- * Whether the roster holds a wall, and of which kind ('stone', 'palisade' or 'earthwork'), read
- * from the first walls row. RUIN-BLIND, as the partition.
+ * Whether the roster holds a wall, and of which kind ('stone' or 'palisade'; an earthwork reads as a palisade),
+ * read from the first walls row. RUIN-BLIND, as the partition.
  * @param {unknown} institutions
- * @returns {Readonly<{ present: boolean, kind: 'stone' | 'palisade' | 'earthwork' | null }>}
+ * @returns {Readonly<{ present: boolean, kind: 'stone' | 'palisade' | null }>}
  */
 export function defenseWallOf(institutions) {
   const walls = partitionDefenseInstitutions(institutions).walls;
   if (!walls.length) return Object.freeze({ present: false, kind: null });
   const name = nativeSemanticName(walls[0]).toLowerCase();
   const hit = Object.entries(WALL_KIND_KEYWORDS).find(([, keywords]) => keywords.some((kw) => name.includes(kw)));
-  return Object.freeze({ present: true, kind: /** @type {'palisade' | 'earthwork' | 'stone'} */ (hit ? hit[0] : 'stone') });
+  return Object.freeze({ present: true, kind: /** @type {'palisade' | 'stone'} */ (hit ? hit[0] : 'stone') });
 }
