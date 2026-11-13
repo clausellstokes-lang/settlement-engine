@@ -2,8 +2,15 @@
 
 **Lane:** `lane/w2-c-leaves-2026-11-13`, created from `817980b33` (the first leaves lane's tip, read back from origin), with
 `origin/lane/coherence-agree-2026-11-11` at `69b53decd` merged in as its first commit (`4534ea5e3`, THE MERGED BASE). Built in
-a scratch worktree on a local branch; pushed plainly to the lane; the main checkout untouched. **Status: IN PROGRESS** (this
-file is kept current after every item).
+a scratch worktree on a local branch; pushed plainly to the lane; the main checkout untouched. **Status: STOPPED BY THE
+CHAIR'S RULING after the high items (1 to 4b), all pushed; code tip `48bfc15c0`.**
+
+## The chair's ruling of 2026-11-13 ~15:52 UTC (by message; copied here, it is not on the branch otherwise)
+"THE ACCOUNT'S WEEKLY ALLOWANCE IS IN ITS WARNING BAND … Narrow your list: THE HIGH ITEMS ONLY (your items 1 to 4b),
+each pushed as it is made. Then STOP: no medium entries, no item 5, no final statement, no further whole suite. Keep the
+hand-back current with the exact next step after every item. One message to the chair when the high items are pushed."
+Done so: the base's whole suite (started at 4534ea5e3 before the ruling) was stopped part-way, unread beyond 34 red
+files; nothing below "Not done" was started.
 
 ## The brief's rulings this seat works to (the chair's messages are not on the branch)
 Copied from the chair's brief (session_01FE9mEws7PXYRYdjQPbSX15, 2026-11-13):
@@ -56,6 +63,10 @@ beyond what the merged base carries (upkeep's two commits are merges of the agre
 | 1 half-way line by kind | 9129d72dc | 28 reworded in 28 towns; 0 removed, 0 added | 3 reworded | all 28: 28 false clauses out, 0 true | gapLineHousesByKind.test.js (4534ea5e3: 3 of 4 red) |
 | 2 "No one here works" by the chain leaf | 283acbca5 | 116 removed (113 towns); 0 added | 3 removed | 30: 15 false, 14 doubtful, 1 true | gapLineReadsChainLeaf.test.js (9129d72dc: 3 of 4 red) |
 | 3 clerical care needs clergy | 87aa0a302 | 201 changed to "None" / "No healer is kept here…" | 3 | 30: 30 false, 0 true | clericalCareNeedsClergy.test.js (283acbca5: 3 of 3 red) |
+| 4a siege: food trade from the food record | cc1384a66 | 3 figures + the carts clause in 1 town → "No food comes into X by trade." | 2 | all: 1 false (+2 on the 20), 0 true | economicsFoodTradeUnderSiege.test.jsx (b8c7a33d5: 1 of 2 red) |
+| 4a famine: hunger is here | b35714f2b | 25 reworded | 3 | all 25: false, 0 true | economicsFoodFamineWords.test.jsx (cc1384a66: 1 of 2 red) |
+| 4b precondition: a need met under another name | 17f1af7bd | 598 of 2,247 needs leave the leaf's `needed` (nothing printed yet) | 12 of 60 | 30 matches: 30 true; 30 left: 29 unmet, 1 doubtful | needMetUnderAnotherName.test.js (b35714f2b: 2 of 2 red) |
+| 4b the Imports pill onto the leaf | 48bfc15c0 | 2,247 need pills out of Imports (641 towns); a needs line in 630 towns (1,649 needs) | 60 out; 18 towns | (as 17f1af7bd) | economicsImportsAreArrivals.test.jsx (17f1af7bd: 2 of 2 red) |
 
 Details live in each commit body (measure, home, lines, read, guard, gates).
 
@@ -80,6 +91,9 @@ Details live in each commit body (measure, home, lines, read, guard, gates).
   first on the model's silence (a resource no chain takes: is it "not worked", or "not known"?).
 
 ## Found, not mine
+- The PDF prints the terrain's full need list under its own heading (`pdf/sections/ResourcesProduction.jsx`, `EconomicsTrade.jsx`
+  via `viewModelBodySlices.js :: criticalImports`), including the 598 needs an import meets under another name; it could read
+  the leaf's `needed`.
 - The faith home's cleric ranks (`faithReading.js :: CLERIC_RANKS`) do not read "the elder priest" (the Priestly Guidance face,
   `mintTitles.js`): its Faith lines say no clergy lives in such a thorp while a priest rules it (12 of the 720).
 - The chain list's processing houses with no catalogue row (`resourceChains.js :: processingInstitutions`: Leatherworkers'
@@ -89,5 +103,34 @@ Details live in each commit body (measure, home, lines, read, guard, gates).
 - At the merged base (not this lane's): factLayers READERS (merge-made lines), chainPrintSites (pageCensusFindings.js), and
   domainAnyCastBaseline (an attribution sha this shallow clone cannot resolve).
 
+## Registers moved, each through its own door
+- `tests/lint/ruinFilterRoster.walker.test.js`: validationOnPage.js's EXEMPT row removed (it now reads the live roster) — shrink (9129d72dc).
+- `tests/components/phoneChromeFloor.census.test.js` ROUTE_BASELINE: `floored` +1 on /create, /settlements, /gallery (the needs
+  line's one `proseFontSize` site), `bare` unmoved, the cause on the row, as the census asks (48bfc15c0).
+
+## Red at the merged base 4534ea5e3, not this lane's (the same titles and bodies at every tip I ran them)
+factLayers READERS; chainPrintSites (pageCensusFindings.js); domainAnyCastBaseline (an attribution sha this shallow clone cannot
+resolve); dossierPhoneFloorAllViews x2 (identical body at 4534ea5e3, 283acbca5, b8c7a33d5, cc1384a66, 48bfc15c0);
+dossierProseManifest x3; observedShapeReaders at load; **the page arm's grid walker `pageCensus.walker.test.jsx`** (r2s-indebted-
+village-0 lost F4; r2r-city-0 lost P4 and GAINED P13 — a row that ROSE at the merge, not shrinkable through the door: the merge
+seat's). The stopped base suite's partial red-file list: 34 files, in the scratch log only (not run to the end, by the ruling).
+
+## Not done (the chair's ruling), and the exact next steps for a successor
+1. **The page arm's P6need, lowered through its own door:** render the census's 720 at the tip
+   (`sh <census lane>/docs/chair/2026-11-12/probes/SECOND-WAVE-CENSUS/census.sh <tip tree> <out>`), then
+   `node scripts/census/page-census.mjs --shrink` (expected P6need 642 → 0: the Imports line no longer carries a need).
+2. The census counter, merged base 4534ea5e3 against the tip (`compare.mjs <base>/counts.perseed.json <tip>/counts.perseed.json`;
+   the base's run exists only in my container, re-run it). Expected moves: F4/row 6-style gap rows and the Imports rows fall.
+3. The field diff over the census's 720 and the golden's 525, base against tip: expected EMPTY (every commit is render-time
+   only; no file under src/generators or src/data changed on this lane after the merge).
+4. The draft shift record (six surfaces + the registered surfaces the reds pin); the whole suite at the tip, classed against a
+   whole run at 4534ea5e3; the edge bundles as the last commit, alone (src/domain/display/* moved: aiGrounding/engine bundles
+   may be stale — check `edgeSharedBundleReproducibility`).
+5. Item 4(c) (the cut's medium entries in EconomicsTab.jsx: chain cards "✓ Running" against the record; pills of goods the town
+   does not make) and item 5 (the flow card's chips; the food band; the agreement review's G1–G4; the defence display's mediums).
+6. P1 below (the grade cards) after a ruling.
+
 ## New words for the owner's veto
-None so far (every replacement is a line already in the house's words).
+- "A few households still go short, and hunger is already here." · "Some households still go short, and hunger is already
+  here." · "Many households go short, and hunger is already here." (b35714f2b)
+- "Needed, and not brought in:" (48bfc15c0)
