@@ -60,7 +60,7 @@ export function grownShareOf(effectiveAgri) {
 }
 
 /** The words a famine note uses for the source it failed (FOOD-3). */
-/** R2-CODE-A item 6: the shortage hook where no food comes in by trade: the siege this file reads (`config.stressTypes`, the one that sets the route to isolated below) has cut every road, and the balance names no channel (`importChannel`: a route's, or a magic channel's past the siege) carrying food in. @param {any} config @param {any} foodBalance @returns {boolean} */ const siegeCutsImports = (config, foodBalance) => (config?.stressTypes || []).includes('under_siege') && !foodBalance?.importChannel; const NO_FOOD_BY_TRADE_HOOK = 'No food comes in by trade now, and what is left here is in a few hands; those who hold it have quadrupled the price, and the locals are arguing over whether to pay, wait it out, or take it.'; const FAILED_SOURCE_WORDS = Object.freeze({ grain: 'grain harvest', livestock: 'herds', fish: 'fishing', mill: 'mill', game: 'hunt' }); /** R2-CODE-A item 1: WHAT A PLACE EATS AND STORES, in one plain word, from its one food record (below): "grain" where the record keeps grain (a granary, whose stores line reads "months of grain", or a grain or mill source), else "food"; no record reads "food". Every crisis line that means the town's food reads this, never the export slot (`tradeCommodity.js`). Draw-free; one line, so no cited line moves. @param {{ hasGranary?: unknown, foodSources?: unknown } | null | undefined} foodRecord @returns {'grain' | 'food'} */ export const foodStoreWord = (foodRecord) => (foodRecord && (foodRecord.hasGranary === true || (Array.isArray(foodRecord.foodSources) && foodRecord.foodSources.some((s) => s === 'grain' || s === 'mill'))) ? 'grain' : 'food');
+/** R2-CODE-A item 6: the shortage hook where no food comes in by trade: the siege this file reads (`config.stressTypes`, the one that sets the route to isolated below) has cut every road, and the balance names no channel (`importChannel`: a route's, or a magic channel's past the siege) carrying food in. @param {any} config @param {any} foodBalance @returns {boolean} */ const siegeCutsImports = (config, foodBalance) => (config?.stressTypes || []).includes('under_siege') && !foodBalance?.importChannel; const NO_FOOD_BY_TRADE_HOOK = 'No food comes in by trade now, and what is left here is in a few hands; those who hold it have quadrupled the price, and the locals are arguing over whether to pay, wait it out, or take it.'; const FAILED_SOURCE_WORDS = Object.freeze({ grain: 'grain harvest', livestock: 'herds', fish: 'fishing', mill: 'mill', game: 'hunt' }); /** R2-CODE-A item 1: WHAT A PLACE EATS AND STORES, in one plain word, from its one food record (below): "grain" where the record keeps grain (a granary, whose stores line reads "months of grain", or a grain or mill source), else "food"; no record reads "food". Every crisis line that means the town's food reads this, never the export slot (`tradeCommodity.js`). Draw-free; one line, so no cited line moves. @param {{ hasGranary?: unknown, foodSources?: unknown } | null | undefined} foodRecord @returns {'grain' | 'food'} */ export const foodStoreWord = (foodRecord) => (foodRecord && (foodRecord.hasGranary === true || (Array.isArray(foodRecord.foodSources) && foodRecord.foodSources.some((s) => s === 'grain' || s === 'mill'))) ? 'grain' : 'food'); /** R2-CODE-A-2 (cold #1068): the two crisis notes that add MOUTHS rather than take from the fields, so their heading never says the harvest thinned. */ const OCCUPIERS_EAT_NOTE = 'The occupiers are fed from local stores, so the food has to stretch about a fifth further than before.'; const NEWCOMERS_EAT_NOTE = 'Newcomers keep arriving, and every one of them has to be fed from the same fields and stores.'; const MOUTH_NOTES = new Set([OCCUPIERS_EAT_NOTE, NEWCOMERS_EAT_NOTE]);
 
 // ── THE FOOD RECORD (FOOD-1, chair ruling 1, 2026-11-03) ─────────────────────────────
 /**
@@ -232,7 +232,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
   }
   if (stresses.includes('occupied')) {
     consumptionMult *= 1.2;
-    stressNotes.push('The occupiers are fed from local stores, so the food has to stretch about a fifth further than before.');
+    stressNotes.push(OCCUPIERS_EAT_NOTE);
   }
   // [generators-domain-1] second-wave stress types with a food-relevant viabilityNote.
   // (Defense stays coupled via the priorityHelpers effective-score multipliers — no inline
@@ -251,7 +251,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
     consumptionMult *= 1.15;
     // The ARRIVALS set. A departures record adds no mouths here (the writer's multiplier above), so
     // its set is silent: a note would state a food effect the record does not hold (the census law).
-    stressNotes.push('Newcomers keep arriving, and every one of them has to be fed from the same fields and stores.');
+    stressNotes.push(NEWCOMERS_EAT_NOTE);
   }
 
   // The legacy view (no canonical record) grows by the same base numbers as the writer
@@ -606,12 +606,12 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
         // SW-B1 (STYLE-RULINGS-2 B1(b), the SURFACES audit's P73): the label read no surplus, so a town that
         // still grows more than it eats (Lundey, soak1k-1, +17) printed "Cutting the Food Supply" beside
         // "it feeds itself". The label and its note now read the surplus beside the cut.
-        title: surplus >= 0 ? 'Crisis Thinning the Harvest' : 'Crisis Cutting the Food Supply',
+        title: Math.round(deficit) > 0 ? 'Crisis Cutting the Food Supply' : MOUTH_NOTES.has(note) ? 'Crisis Adding Mouths to Feed' : 'Crisis Thinning the Harvest', // R2-CODE-A-2 (cold #1068): the heading reads the gap this balance publishes (it read the local surplus, a second home), and a crisis that adds mouths thins no harvest
         message: note,
         description: note,
-        priorityNote: surplus >= 0
-          ? 'The crisis has cut the harvest, but what is grown still covers what is eaten.'
-          : 'The crisis is cutting into the food supply now.',
+        priorityNote: Math.round(deficit) > 0
+          ? 'The crisis is cutting into the food supply now.'
+          : `${MOUTH_NOTES.has(note) ? 'There are more mouths to feed' : 'The crisis has cut the harvest'}, but ${Math.round(dailyProductionFinal) >= Math.round(dailyNeedFinal) ? 'what is grown still covers what is eaten' : 'the shortfall is still made up'}.`,
       });
     });
   }
