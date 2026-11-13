@@ -298,7 +298,10 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
           }) || {}
         ).faction;
         const N = typeof getInstFlags == 'function' ? getInstFlags(config || {}, institutions || []) : {},
-          ye = (N.militaryEffective || 50) >= 55 && (N.economyOutput || 50) >= 45;
+          ye = (N.militaryEffective || 50) >= 55 && (N.economyOutput || 50) >= 45,
+          // COHERENCE-POWERS-7 (cold list REVIEW-W2A-3 #709 #712): a town that governs itself as an independent polity
+          // ("No higher lord, no external charter": the roster's City-state government) has no crown to appoint or command
+          sovereign = (institutions || []).some((i) => /^city-state government$/i.test(String(i?.name || '')));
         (factions.forEach(function (he) {
           ((he.faction.toLowerCase().includes('military') ||
             he.faction.toLowerCase().includes('guard') ||
@@ -306,7 +309,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
             ((he.power = Math.round(he.power * 1.5)),
             (he.desc =
               (he.desc || '') +
-              ' Wartime has transformed this power from a civic institution into a primary power centre. Crown authority flows through military channels now.')),
+              (sovereign ? ' Wartime has transformed this power from a civic institution into a primary power centre. Authority flows through military channels now.' : ' Wartime has transformed this power from a civic institution into a primary power centre. Crown authority flows through military channels now.'))),
             (he.faction.toLowerCase().includes('merchant') || he.faction.toLowerCase().includes('guild')) &&
               (ye
                 ? ((he.power = Math.round(he.power * 1.2)),
@@ -329,9 +332,9 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
           factions.push({
             faction: 'War Council',
             power: ye ? 20 : 25,
-            desc: ye
+            desc: (sovereign ? (/** @type {string} */ d) => d.replace(/^Crown-appointed emergency body/, 'Emergency body') : (/** @type {string} */ d) => d)(ye
               ? "Crown-appointed emergency body coordinating supply, conscription, and military contracting. Currently functioning smoothly: the war is going well enough that its authority isn't contested."
-              : 'Crown-appointed emergency body with powers over requisition, conscription, and price controls. Unpopular. Accused of favouritism in contract awards. Probably correct on the military decisions.',
+              : 'Crown-appointed emergency body with powers over requisition, conscription, and price controls. Unpopular. Accused of favouritism in contract awards. Probably correct on the military decisions.'),
           }),
           ye ||
             factions.push({
