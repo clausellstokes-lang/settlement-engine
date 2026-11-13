@@ -565,10 +565,14 @@ describe('ARM 3 — the strip ban (W2-B-DECLARE item 3; record 288, ruling 1, B 
     expect(fresh.map((x) => stripKey(x.file, x.receiver)), 'draw a declared pool through drawDeclared / filterDeclared; never unwrap it first').toEqual([]);
   });
 
-  test('⛔ no stale strip row, and every row names one of the two reasons', () => {
+  // STYLE-2-MERGE-13, point 49 (the chair's ruling on STOP 49a (iii), record 405): a strip site another lane wrote after
+  // the instrument's base is banked BY HAND under an `after-base: <holder>` reason the register itself names (one such row:
+  // rulerKin.js, the powers lane's); any other reason still reds.
+  test('⛔ no stale strip row, and every row names one of the two reasons (or a ruled after-base reason of the register)', () => {
     const found = new Set(sites.map((x) => stripKey(x.file, x.receiver)));
     expect([...banked.keys()].filter((k) => !found.has(k))).toEqual([]);
-    expect([...banked.values()].filter((r) => r !== 'strip-before-draw' && r !== 'not-a-draw')).toEqual([]);
+    const ruled = (r) => r.startsWith('after-base: ') && Object.hasOwn(widened.reasons, r);
+    expect([...banked.values()].filter((r) => r !== 'strip-before-draw' && r !== 'not-a-draw' && !ruled(r))).toEqual([]);
   });
 });
 

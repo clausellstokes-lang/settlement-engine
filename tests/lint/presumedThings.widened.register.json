@@ -11,7 +11,11 @@
   "root": "a literal or a component's JSX text under a root the walker joined at W2-B-DECLARE item 3 (src/domain, src/components) that names a thing and declares no atom answering it: the habitat at the widening (e55ede7d2), banked; a line written in code is cured by its print-site check or its declaration",
   "word": "a literal naming a word the walker registered at W2-B-DECLARE item 3 (a state, a size or a count: registeredWords.js :: NEW_WORDS) with no declaration answering it: the habitat at the widening, banked; a count has no atom yet, so its lines are cured at the print site",
   "implied": "a literal whose declaration no draw door reads, or does not IMPLY the word it uses (W2-B-DECLARE second seat, F3: a carrier is credited only on an object a door draws, and a naming line's declaration must make the word true, a denying line's make it false): the habitat at the narrowing, banked; cured by declaring through a door the atom that implies the word",
-  "family": "a literal naming a word of the GENERATED vocabulary (W2-B-DECLARE second seat, F1: the houses of the institution catalogue, the resources of the resource catalogue, the roles, staff and forces, open trade, a famine to come, the size nouns) with no declaration implying it: the habitat at the widening, banked; most families' atoms wait for their factsOf getter, so these lines are cured at the print site or by the atom when it lands"
+  "family": "a literal naming a word of the GENERATED vocabulary (W2-B-DECLARE second seat, F1: the houses of the institution catalogue, the resources of the resource catalogue, the roles, staff and forces, open trade, a famine to come, the size nouns) with no declaration implying it: the habitat at the widening, banked; most families' atoms wait for their factsOf getter, so these lines are cured at the print site or by the atom when it lands",
+  "after-base: powers": "another lane's line, written after the instrument's base: its holder declares it when its lane joins the line (banked BY HAND at STYLE-2-MERGE point 49 under the chair's ruling on STOP 49a (ii)/(iii), record 405, against the letter of the door's base rule; holder: the powers lane)",
+  "after-base: leaves-3": "another lane's line, written after the instrument's base: its holder declares it when its lane joins the line (banked BY HAND at STYLE-2-MERGE point 49 under the chair's ruling on STOP 49a (ii)/(iii), record 405, against the letter of the door's base rule; holder: the third leaves lane)",
+  "after-base: defence": "another lane's line, written after the instrument's base: its holder declares it when its lane joins the line (banked BY HAND at STYLE-2-MERGE point 49 under the chair's ruling on STOP 49a (ii)/(iii), record 405, against the letter of the door's base rule; holder: the defence lane)",
+  "after-base: after-merges": "another lane's line, written after the instrument's base: its holder declares it when its lane joins the line (banked BY HAND at STYLE-2-MERGE point 49 under the chair's ruling on STOP 49a (ii)/(iii), record 405, against the letter of the door's base rule; holder: the seat after the merges (its lane, W2-A-LEAVES, landed already))"
  },
  "arm1": {
   "src/components/AccountPage.jsx": [
@@ -7699,6 +7703,14 @@
     "ec5f8594fb62c39f"
    ]
   ],
+  "src/data/magicTraditionHouses.js": [
+   [
+    "house: academy",
+    "after-base: after-merges",
+    "academy of magic",
+    "8f8aa8b21d5ed32c"
+   ]
+  ],
   "src/data/narrativeData.js": [
    [
     "quarters",
@@ -8219,6 +8231,18 @@
     "family",
     " still works the streets. The two have settled on what each will put up with from the other.",
     "253dd66335c903d3"
+   ],
+   [
+    "rulingFaces",
+    "after-base: powers",
+    "The ruling three of ",
+    "5d3d4f46f4986262"
+   ],
+   [
+    "rulingFaces",
+    "after-base: powers",
+    "The ruling two of ",
+    "740bef928f3dd6b3"
    ]
   ],
   "src/data/people/handlerTieLines.js": [
@@ -17403,6 +17427,18 @@
     "family",
     "Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money and",
     "f5ed28662dc5fdd3"
+   ],
+   [
+    "siege",
+    "after-base: leaves-3",
+    "under siege the outlying fields would be lost",
+    "dbd691c1c6f9171f"
+   ],
+   [
+    "streets",
+    "after-base: leaves-3",
+    "Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money and",
+    "2ad05ec341eede64"
    ]
   ],
   "src/domain/display/demographicReading.js": [
@@ -26859,6 +26895,12 @@
     "family",
     "Local coal fires the forges, but the iron is bought in; this income stream leans on the trade route.",
     "782b0b74db43359b"
+   ],
+   [
+    "smith",
+    "after-base: defence",
+    "Coal is dug here and sold to the forges of other towns; no forge here burns it, so this income stream leans on the trade",
+    "8577339c884f8447"
    ]
   ],
   "src/generators/economy/outlookHookSiblings.js": [
@@ -29552,6 +29594,11 @@
    "src/generators/power/economyReconciliation.js",
    "(Object.values(FACTION_LABEL_SIBLINGS).flat()) .filter((row) => typeof row.twinOf === 'string')",
    "not-a-draw"
+  ],
+  [
+   "src/generators/power/rulerKin.js",
+   "FACTION_LABEL_SIBLINGS['Military/Guard']",
+   "after-base: powers"
   ],
   [
    "src/generators/spatialGenerator.js",
