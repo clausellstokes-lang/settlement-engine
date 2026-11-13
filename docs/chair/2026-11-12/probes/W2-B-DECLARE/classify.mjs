@@ -59,6 +59,9 @@ const ROOT = process.env.TREE || process.cwd();
 const SRC_FILES = [];
 const walk = (rel) => { try { for (const e of fs.readdirSync(`${ROOT}/${rel}`).sort()) { const q = `${rel}/${e}`; if (fs.statSync(`${ROOT}/${q}`).isDirectory()) walk(q); else if (/\.(?:js|jsx|mjs)$/.test(e)) SRC_FILES.push(q); } } catch { /* no tree */ } };
 walk('src');
+const CORPUS_FILES = SRC_FILES.filter((x) => /^src\/data\/dossier(?:State|Causal)Prose/.test(x));
+const CORPUS_TEXT = new Map(CORPUS_FILES.map((x) => [x, fs.readFileSync(`${ROOT}/${x}`, 'utf8')]));
+const WORDS = await (async () => { try { return (await import(`${ROOT}/src/domain/facts/registeredWords.js`)).REGISTERED_WORDS; } catch { return {}; } })();
 const out = [];
 const unclassed = [];
 for (const f of findings) {
@@ -79,6 +82,14 @@ for (const f of findings) {
     const owner = named && (named.startsWith('src/') ? named : SRC_FILES.find((x) => x.endsWith(`/${named}`)));
     if (owner) Object.assign(row, { file: owner, attributedBy: 'owner',
       source: /dossierStateProse\/|dossierCausalProse\.generated/.test(owner) ? 'corpus pool' : /^src\/(data|generators)\//.test(owner) ? 'generator code' : 'written in code' });
+  }
+  // F6 of REVIEW-W2B's second read: a row still unattributed, whose rule's reason or whose WORD's own leaf names a corpus
+  // block (`DS-ECO-9`), is attributed to the generated leaf that holds that block. A leaf that names only a truth home
+  // (`foodBalance.js`, `the record :: tier`) names no writer, so it attributes nothing.
+  if (row.source === 'unattributed') {
+    const block = /\bDS-[A-Z]+-\d+\b/.exec(`${hit?.why || ''} ${WORDS[f.word]?.leaf || ''}`)?.[0];
+    const leafFile = block && CORPUS_FILES.find((x) => new RegExp(`\\b${block}\\b`).test(CORPUS_TEXT.get(x)));
+    if (leafFile) Object.assign(row, { file: leafFile, attributedBy: 'block', source: 'corpus pool' });
   }
   out.push(row);
 }
