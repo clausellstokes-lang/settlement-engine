@@ -139,8 +139,8 @@ const PAIRS = [
     "Iron ore, coal, or stone dug from a shallow pit or shaft. The labour falls to the poorest, and it is perilous, grimy, and needed all the same.",
   ],
   [
-    "Cuts and dresses building stone into blocks. A gang of quarrymen work it with picks and wedges. Slow going, but the only source of proper building material there is.",
-    "Quarrymen with picks and wedges cut and dress the stone for building. It is slow, and it is the sole way to come by real building material.",
+    "A stone quarry, its blocks cut and dressed by a gang of quarrymen with picks and wedges. Slow going, and the only proper building material the place has had.",
+    "A quarry opened with picks and wedges, its stone cut and dressed for building by hand. Slow work, and the only real building stone the place has known.",
   ],
   [
     "Boils or dries naturally saline brine, yielding the raw salt that preserves food. It works only where salt flats, springs, or other workable deposits provide a local supply.",
@@ -291,8 +291,8 @@ const PAIRS = [
     "Ore, coal, or stone is won from a shaft or open cut here. The capital and organisation are more than a thorp could carry, but a village near the seams manages it, working its poorest hands.",
   ],
   [
-    "Building stone cut in an ordered working. A village sitting on good quarry ground can furnish half a region's building, and the quarry master is well aware of the fact.",
-    "The methodical winning of building stone. Set on the right ground, a village can meet half a region's need for it. Something the quarry master never forgets.",
+    "A building-stone quarry laid out in an ordered working. A village sitting on good quarry ground can furnish half a region's building, and the quarry master is well aware of the fact.",
+    "A quarry for building stone, opened with method. Set on the right ground, a village can meet half a region's need for it. Something the quarry master never forgets.",
   ],
   [
     "Evaporation pans and brine-works turn the local saline source into salt, and no household does without it.",
@@ -515,8 +515,8 @@ const PAIRS = [
     "Hired crews, winding gear, and ore carts work a shaft into the deposits. Where they run deep, the settlement grew around the mine.",
   ],
   [
-    "A quarry with yards of dressed stone and its own masons. Half the region's walls and churches were cut here.",
-    "Masons dress the stone in yards beside the working face. The quarry supplies walls and churches across half the region.",
+    "A stone quarry, with yards beside it for dressing the stone. Half the region's building stone was cut here.",
+    "Yards for dressing stone stand beside the quarry face. Building stone from here has gone to every part of the region.",
   ],
   [
     "Held by royal charter. The heart of the town's trade.",

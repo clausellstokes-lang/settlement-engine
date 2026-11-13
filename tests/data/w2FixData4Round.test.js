@@ -46,4 +46,26 @@ describe('W2-FIX-DATA-4: round two\'s medium lines in this lane\'s files', () =>
     expect(riverRows).toContain('Transport foot travelers and small goods across the river.');
     expect(riverRows).toContain('Flat-bottomed cargo barges for river transport. Simpler than sea vessels.');
   }, 60_000);
+
+  test('a stone quarry is named for what it is, never as worked now: true where the quarry is worked out (#236, #421, HIGH)', async () => {
+    const { INSTITUTION_DESC_VARIANTS } = await import('../../src/data/institutionDescVariants.js');
+    const { readFileSync } = await import('node:fs');
+    const catalogue = readFileSync(new URL('../../src/data/institutionalCatalog.js', import.meta.url), 'utf8');
+    const entry = catalogue.slice(catalogue.indexOf("name: 'Stone quarry'"), catalogue.indexOf('    {', catalogue.indexOf("name: 'Stone quarry'")));
+    const STATE = /\bworking face\b|\bA working quarry\b|\bwork it\b|\bcrew of masons\b|\bsupplies walls\b|\bBuilds the walls\b|\bCuts and dresses\b|\bcut and dress the stone\b|\bmethodical winning\b|\bstone cut in an ordered working\b|\bSystematic extraction\b/;
+    const texts = [...new Set([
+      ...Object.entries(INSTITUTION_DESC_VARIANTS).filter(([k]) => k.endsWith('|Stone quarry')).flatMap(([, v]) => v),
+      ...(entry.match(/desc: (['"])(?:\\.|(?!\1).)*\1/g) ?? []),
+    ])];
+    expect(texts.length, 'three catalogue texts and the six variants').toBe(9);
+    expect(texts.filter((t) => STATE.test(String(t)))).toEqual([]);
+    for (const seed of ['rw3-metropolis-calm-1', 'rw3-metropolis-under_siege-1']) {
+      const town = bornRw3(seed);
+      expect(town.config.nearbyResourcesDepleted, seed).toContain('stone_quarry');
+      const quarry = town.institutions.find((/** @type {any} */ i) => i.name === 'Stone quarry');
+      expect(quarry, seed).toBeTruthy();
+      expect(String(quarry.desc), seed).not.toMatch(STATE);
+      expect(String(quarry.desc), seed).toMatch(/quarry/i);
+    }
+  }, 60_000);
 });

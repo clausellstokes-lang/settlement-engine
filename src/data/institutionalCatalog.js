@@ -250,10 +250,10 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: 'Stone quarry', face: 'the quarry master', desc: 'A working quarry with dressed-stone yards and a crew of masons. Builds the walls and churches of half the region.', tags: ['trade'], priorityCategory: 'economy' },
+      shared: { name: 'Stone quarry', face: 'the quarry master', desc: 'A stone quarry with yards for dressing the stone. Much of the region\'s building stone was cut here.', tags: ['trade'], priorityCategory: 'economy' },
       at: {
-        hamlet: { baseChance: 0.18, desc: 'Cuts and dresses stone blocks for construction. A crew of quarrymen with picks and wedges. Slow but the only way to get proper building material.' },
-        village: { baseChance: 0.15, desc: "Systematic extraction of building stone. A village on good quarry land can supply half a region's construction needs, and the quarry master knows it." },
+        hamlet: { baseChance: 0.18, desc: 'A stone quarry, opened by quarrymen with picks and wedges. Slow work, and the only source of proper building stone the place has had.' },
+        village: { baseChance: 0.15, desc: "A quarry of building stone, laid out in ordered workings. A village on good quarry land can supply half a region's construction needs, and the quarry master knows it." },
         town: { baseChance: 0.15 },
         city: { baseChance: 0.1 },
         metropolis: { baseChance: 0.1 },

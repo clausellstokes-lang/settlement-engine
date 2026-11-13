@@ -547,7 +547,7 @@
     },
     {
       "id": "hamlet|Economy|Stone quarry#0",
-      "text": "Cuts and dresses building stone into blocks. A gang of quarrymen work it with picks and wedges. Slow going, but the only source of proper building material there is.",
+      "text": "A stone quarry, its blocks cut and dressed by a gang of quarrymen with picks and wedges. Slow going, and the only proper building material the place has had.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -555,7 +555,7 @@
     },
     {
       "id": "hamlet|Economy|Stone quarry#1",
-      "text": "Quarrymen with picks and wedges cut and dress the stone for building. It is slow, and it is the sole way to come by real building material.",
+      "text": "A quarry opened with picks and wedges, its stone cut and dressed for building by hand. Slow work, and the only real building stone the place has known.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1194,7 +1194,7 @@
     },
     {
       "id": "village|Economy|Stone quarry#0",
-      "text": "Building stone cut in an ordered working. A village sitting on good quarry ground can furnish half a region's building, and the quarry master is well aware of the fact.",
+      "text": "A building-stone quarry laid out in an ordered working. A village sitting on good quarry ground can furnish half a region's building, and the quarry master is well aware of the fact.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1202,7 +1202,7 @@
     },
     {
       "id": "village|Economy|Stone quarry#1",
-      "text": "The methodical winning of building stone. Set on the right ground, a village can meet half a region's need for it. Something the quarry master never forgets.",
+      "text": "A quarry for building stone, opened with method. Set on the right ground, a village can meet half a region's need for it. Something the quarry master never forgets.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2131,7 +2131,7 @@
     },
     {
       "id": "town|Economy|Stone quarry#0",
-      "text": "A quarry with yards of dressed stone and its own masons. Half the region's walls and churches were cut here.",
+      "text": "A stone quarry, with yards beside it for dressing the stone. Half the region's building stone was cut here.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2139,7 +2139,7 @@
     },
     {
       "id": "town|Economy|Stone quarry#1",
-      "text": "Masons dress the stone in yards beside the working face. The quarry supplies walls and churches across half the region.",
+      "text": "Yards for dressing stone stand beside the quarry face. Building stone from here has gone to every part of the region.",
       "needs": [],
       "excludes": [],
       "crisis": [],
