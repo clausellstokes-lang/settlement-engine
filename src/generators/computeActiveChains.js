@@ -1021,11 +1021,11 @@ export function deriveInstitutionalServices(institutions = []) {
 
 /**
  * Derive service-economy exports from institutional services.
- * Only exports from institutions that can actually attract external demand.
+ * Only exports from institutions that can actually attract external demand, and no service only a refused chain yields (`refusedOnly`, the leaf's goods set: COHERENCE-AGREE-8, F2's fifth writer).
  */
-export function deriveServiceExports(institutionalServices) {
+export function deriveServiceExports(institutionalServices, refusedOnly = new Set()) {
   return institutionalServices
-    .filter(s => s.exportable && s.exportLabel)
+    .filter(s => s.exportable && s.exportLabel && !refusedOnly.has(String(s.output).toLowerCase()) && !refusedOnly.has(String(s.exportLabel).replace(/\s*\([^)]*\)$/, '').toLowerCase()))
     .map(s => s.exportLabel);
 }
 

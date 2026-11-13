@@ -741,7 +741,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     depletedResources,
   );
   const instServices = deriveInstitutionalServices(institutions || []);
-  const serviceExports = deriveServiceExports(instServices);
+  const serviceExports = deriveServiceExports(instServices, goodsOnlyRefusedChainsMake(activeChainsList)); // COHERENCE-AGREE-8 (F2's fifth writer): the services ask the leaf too
 
   // Depleted resources at town+ scale: settlement needs to import what it can no longer
   // produce in sufficient quantity — local exhaustion triggers trade dependency

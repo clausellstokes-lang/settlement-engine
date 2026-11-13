@@ -376,6 +376,33 @@ describe('F2: a good only refused chains make is neither sold nor produced local
 });
 
 /**
+ * F2'S FIFTH WRITER (COHERENCE-AGREE-8, REVIEW-AGREE-3 FINDING 2): the institutional services
+ * (`computeActiveChains.js :: deriveServiceExports`, from `INSTITUTIONAL_SERVICE_MAP`) exported "Financial services
+ * (letters of credit)" from a banking house whatever its chain's state, beside an impaired "Letters of Credit &
+ * Finance" card that reads "Normally yields: Financial services". It now reads the refusal as the other four writers
+ * do (the leaf's goods set): a service whose good only a refused chain makes is not exported. Each seed below listed
+ * it at faa20bc6c (14 of the lane's 4,141, 9 of them besieged).
+ */
+describe('F2\'s fifth writer: a service only a refused chain yields is not exported', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const born = (/** @type {string} */ seed) => {
+    const m = /^(?:l2|r2s)-(under_siege|famine|wartime)-(\w+)-\d+$/.exec(seed);
+    const settType = m ? m[2] : seed.split('-')[1];
+    const forced = m ? { selectedStresses: [m[1]], selectedStressesRandom: false } : {};
+    return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType, ...forced }), null, { seed, customContent: {} });
+  };
+  test('r2r-metropolis-14, r2s-under_siege-metropolis-1, l2-under_siege-city-7 and rvw12-city-97 export no letters of credit beside an impaired bank', async () => {
+    const { goodsOnlyRefusedChainsMake } = await import('../../src/domain/chainYield.js');
+    expectNoSeedFailures(collectSeedFailures(['r2r-metropolis-14', 'r2s-under_siege-metropolis-1', 'l2-under_siege-city-7', 'rvw12-city-97'], (seed) => {
+      const eco = born(seed).economicState;
+      // anchored: the bank's chain is refused here and its good is one only a refused chain makes
+      expect(goodsOnlyRefusedChainsMake(eco.activeChains).has('financial services'), `${seed}: anchored`).toBe(true);
+      expect(eco.primaryExports.filter((e) => /^Financial services/.test(e)), seed).toEqual([]);
+    }), 'a refused chain\'s service stands on the export list');
+  });
+});
+
+/**
  * F8 (ii) (COHERENCE-AGREE-6, the chair's ruling of 2026-11-12): the flag bag's prison and hospital are the defence
  * home's answers (`defenseFactsOf`), off the live roster: the lane's own two private readers in
  * `priorityHelpers.js :: getInstitutionNames`, cured rather than banked when the walker learned the four atoms.
