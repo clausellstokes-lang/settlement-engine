@@ -139,4 +139,29 @@ export function institutionDisplayName(instOrName) {
   return DISPLAY_BY_LOWER.get(raw.toLowerCase()) ?? raw;
 }
 
+/**
+ * THE CATALOGUE'S MACHINERY IN A NAME (R2-CODE-B item 1, the cold list REVIEW-W2A-3: "Merchant guilds
+ * (15-40) · member of Merchant Guilds", "Dream parlors (high magic) · member of Arcane Orders", "Craft
+ * guilds (5-15) · Bowyers & fletchers (guild)"). A trailing bracket that holds a COUNT RANGE (a
+ * digit-led "(15-40)", "(100-150+)", "(10,000+ only)") or the CONDITION the registry gates the row on
+ * ("(high magic)", "(if walled)") is how the catalogue sorts its rows, not a fact a reader is told.
+ * A bracket that describes the house ("(part-time)", "(guild)", "(district)") stays.
+ */
+const CATALOGUE_MACHINERY_BRACKET = /\s*\((?:\d[^)]*|high magic|if walled)\)\s*$/i;
+
+/**
+ * The house as a LABEL names it where a reader is told which house a thing belongs to (a person's
+ * house on the NPC card, the houses that work a chain): the seam's display label, without the
+ * catalogue's count range or gating condition. The roster keeps the catalogue name it has always
+ * printed (ODQ §934.13); this is the one home of the shorter form, so no surface strips its own.
+ * A custom house ('Stormwatch Keep') carries no such bracket and passes through unchanged.
+ * @param {unknown} instOrName an institution object, or its raw name
+ * @returns {string}
+ */
+export function institutionHouseLabel(instOrName) {
+  const label = institutionDisplayName(instOrName);
+  const bare = label.replace(CATALOGUE_MACHINERY_BRACKET, '').trim();
+  return bare || label;
+}
+
 export default institutionDisplayName;

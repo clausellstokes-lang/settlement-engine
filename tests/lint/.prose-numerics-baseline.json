@@ -319,13 +319,13 @@
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 157,
+    "line": 158,
     "category": "floatInterpolation",
     "snippet": "{rel.strength}"
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 163,
+    "line": 164,
     "category": "floatInterpolation",
     "snippet": "{rel.tension}"
   },
@@ -1147,7 +1147,7 @@
   },
   {
     "path": "src/pdf/sections/Services.jsx",
-    "line": 240,
+    "line": 243,
     "category": "floatInterpolation",
     "snippet": "{flow}"
   },

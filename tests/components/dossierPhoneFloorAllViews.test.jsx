@@ -668,7 +668,9 @@ const DESKTOP_BASELINE = Object.freeze({
   // instead of the siege/famine/plague flag, so the fixture's block renders on the public walk: its title
   // (chrome), its static explanation and its chain notes (prose). No token moved.
   "Systems/Magic":       { measured: 4, sub14: 4 },
-  "World/NPCs":          { measured: 282, sub14: 282 },
+  // 282 -> 280 (2026-11-13, R2-CODE-B item 1): two NPC card lines name their house by the seam's house label
+  // ("Merchant guilds", not "Merchant guilds (15-40)"), and the shorter line falls under the walk's MIN_CHARS. No token moved.
+  "World/NPCs":          { measured: 280, sub14: 280 },
   // 60 -> 61 / 58 -> 59 and mobile 58 -> 59 (2026-10-31, G3 at the merge, GS-1): the eight-variant tie lines wrap one
   // line longer in the fixture; no token moved.
   "World/Relationships": { measured: 174, sub14: 172 },
@@ -811,7 +813,9 @@ const MOBILE_BASELINE = Object.freeze({
   // prose 0 -> 3, chrome 0 -> 1 (2026-11-03, lane MAGIC, chair ruling 2): the dependence block reads the one
   // reliance reading; its title is the 12px chrome line, its explanation and chain notes take the prose floor.
   "Systems/Magic":       { prose: 3, chrome: 1, sub14: 1, sub12: 0 },
-  "World/NPCs":          { prose: 281, chrome: 1, sub14: 0, sub12: 0 },
+  // prose 281 -> 279 (2026-11-13, R2-CODE-B item 1): the same two NPC card lines, shorter by the count range,
+  // fall under MIN_CHARS; sub12 stays 0 and the floors arm reads 0 violations.
+  "World/NPCs":          { prose: 279, chrome: 1, sub14: 0, sub12: 0 },
   "World/Relationships": { prose: 138, chrome: 36, sub14: 36, sub12: 0 },
   "World/Faith":         { prose: 2, chrome: 0, sub14: 0, sub12: 0 },
   "World/Daily Life":    { prose: 1, chrome: 0, sub14: 0, sub12: 0 },

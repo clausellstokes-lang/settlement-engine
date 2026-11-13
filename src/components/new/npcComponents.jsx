@@ -17,6 +17,7 @@ import { entityAnchor, entityIdFor, normalizeNpcTraits } from '../../domain/doss
 import { useEntityFocus } from '../dossier/useEntityFocus.js';
 import { describeCompromiseConjunction } from '../../domain/display/causeConjunctionContent.js';
 import { npcInteriority } from '../../domain/display/npcInteriorityRead.js';
+import { institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
 import { whereaboutsLine, whereaboutsBadge } from '../../domain/roads/whereaboutsDisplay.js';
 import { cardTieLines } from '../../domain/relationships/cardTies.js';
 import { cardPowerLine, cardPowerNames, cardHouseOf, governingNameOf } from '../../domain/people/cardPowers.js';
@@ -398,7 +399,10 @@ export function NPCInlineCard({
         {/* THE POWER LINE (PEOPLE-5A, M-1b): the card's house, then its standing in
             each power by rank — "first of X · second of Y" — read from its memberships. */}
         {cardLineTail && (nativeRole || showRoleArchetype) ? ' · ' : ''}
-        {cardDoor && <span data-testid="npc-institution-door"><EntityLink id={cardDoor.id} type={cardDoor.type} fallback={cardDoor.name} style={{ color: swatch.inkMag3, fontWeight: 600 }} /></span>}
+        {/* R2-CODE-B item 1: the house by the seam's label, without the catalogue's count range or
+            gate ("Merchant guilds (15-40)", "Dream parlors (high magic)"); `verbatim` so a resolved
+            link prints this label, not the index's raw catalogue key. */}
+        {cardDoor && <span data-testid="npc-institution-door"><EntityLink id={cardDoor.id} type={cardDoor.type} fallback={institutionHouseLabel(cardDoor.name)} verbatim style={{ color: swatch.inkMag3, fontWeight: 600 }} /></span>}
         {cardDoor && cardPowerTail ? ' · ' : ''}
         {cardPowerTail}
       </div>

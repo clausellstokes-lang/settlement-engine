@@ -6,6 +6,7 @@ import { SUPPLY_CHAIN_NEEDS } from '../../data/goods/chains.js';
 import { exactGoodId, goodText } from '../../domain/region/goodsCatalog.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { supplyChainNoteInWords } from '../../domain/display/engineKeysInText.js';
+import { chainHousesOf } from '../../domain/display/chainHouses.js';
 
 // ── Build a lookup: chainId → full chain definition ──────────────────────────
 const CHAIN_DEFS = {};
@@ -128,15 +129,12 @@ const OutputNode = ({ label, isExport }) => {
  *   upstreamNote: string|null}}
  */
 export function chainFlowFacts(chain, instNames = []) {
-  const names = (instNames || []).map(n => String(n || '').toLowerCase());
   return {
     resource: chain?.resource || null,
     resourceDepleted: !!chain?.resourceDepleted,
-    // Which processing institutions are actually present?
-    institutions: (chain?.processingInstitutions || []).map(name => ({
-      name,
-      present: names.some(n => n.includes(String(name).toLowerCase().split(/[\s(]/)[0])),
-    })),
+    // Which processing institutions are actually present? R2-CODE-B item 1: each named once, by the
+    // seam's house label (domain/display/chainHouses.js), never a rank's count range the roster lacks.
+    institutions: chainHousesOf(chain?.processingInstitutions, instNames),
     // Upstream imports needed — the generator stores chain IDS; the reader gets labels.
     importedUpstream: (chain?.upstreamMissing || []).map(uid => CHAIN_DEFS[uid]?.label || uid),
     // The generator joins CHAIN IDS into this sentence, so the seam resolves them against

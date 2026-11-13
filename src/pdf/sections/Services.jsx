@@ -25,6 +25,7 @@ import { humanize, label, plural, stripZwnj } from '../lib/format.js';
 import { tokenCase } from '../../domain/display/labelCase.js';
 import { StateProse } from '../primitives/StateProse.jsx';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { chainHousesOf } from '../../domain/display/chainHouses.js';
 // RS-14: the card titles read the one label map the screen and the absences callout read.
 import { serviceLabel } from '../../domain/display/servicesDisplay.js';
 
@@ -217,7 +218,9 @@ function ChainCard({ chain }) {
   // seam goes BEFORE humanize so an unmapped institution still gets its casing.
   const flow = [
     chain.resource ? humanize(label(chain.resource)) : null,
-    (chain.processingInstitutions || []).map((n) => humanize(institutionDisplayName(n) || n)).join(' + ') || null,
+    // R2-CODE-B item 1: the houses by the seam's house label, each once (domain/display/chainHouses.js),
+    // the screen's chain card's own read: no rank's count range the roster does not hold.
+    chainHousesOf(chain.processingInstitutions, []).map((h) => humanize(h.name)).join(' + ') || null,
     (chain.outputs || []).map(humanize).slice(0, 4).join(', ') || null,
   ].filter(Boolean).join(' \u00bb ');
 
