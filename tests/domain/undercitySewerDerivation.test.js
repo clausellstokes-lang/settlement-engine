@@ -246,10 +246,12 @@ describe('MF-UC1 — the undercity sanitation ladder and its wells', () => {
     // Both claims run over every roster-free birth under each of the LIVENESS_IDENTITIES.
     const freeIdentified = free.flatMap((s) => LIVENESS_IDENTITIES.map((id) => ({ ...s, id })));
     const raiseDeltas = raise.map(([, lo, hi]) => freeIdentified.map((s) => rungIndex(hi(s)) - rungIndex(lo(s))));
+    // For HIGH_WATER the rung moves by the peak tier's floor (207 of 208 up-moves), so each weight's liveness is proved on its term.
+    // The tooth reads each cause's OWN term, not the total score: the calamity stamps' exodus also raises the high-water value on 7 of the 42.
+    const termOf = (s, cause) => deriveSewerLadder(s).causes.find((c) => c.cause === cause).contribution;
+    expect(raise.map(([cause, lo, hi]) => freeIdentified.some((s) => termOf(hi(s), cause) > termOf(lo(s), cause)))).toEqual([true, true, true, true]);
     expect(raiseDeltas.map((ds) => ds.filter((d) => d < 0).length)).toEqual([0, 0, 0, 0]);
     expect(raiseDeltas.map((ds) => ds.filter((d) => d > 0).length > 0)).toEqual([true, true, true, true]);
-    // For HIGH_WATER the rung moves by the peak tier's floor (207 of 208 up-moves), so the weight's liveness is proved on the score.
-    expect(raise.map(([, lo, hi]) => freeIdentified.some((s) => deriveSewerLadder(hi(s)).score > deriveSewerLadder(lo(s)).score))).toEqual([true, true, true, true]);
     // ⚠ THE TWO ROSTER READS TAKE DIFFERENT RUIN DISPOSITIONS, and both are pinned rather than
     // left to the walker's file-granular compliance. A burnt-out hall is NOT civic capacity this
     // year (the crediting class, ruin-FILTERED); a flattened sewage works still means the drains
