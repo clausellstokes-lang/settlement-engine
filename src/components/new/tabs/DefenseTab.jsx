@@ -15,7 +15,6 @@ import { statusCase } from '../labelLadder.js';
 import { defenseDeskRead, criminalRingNoteRead } from '../defenseDeskRead.js';
 import { criminalStructureOf } from '../deskHostArgs.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
-import { truncateAtWord } from '../../../lib/text.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { edged } from '../../../design/edgedBox.js';
@@ -159,6 +158,23 @@ export function sentencesNotIn(text, printed) {
   const sentences = t.split(/(?<=[.!?])\s+/);
   const kept = sentences.filter((x) => !(x.trim().split(/\s+/).length >= 8 && p.includes(x.trim())));
   return kept.length === sentences.length ? t : kept.join(' ');
+}
+
+/**
+ * ⛔ THE PAGE NEVER CUTS A SENTENCE IN THE MIDDLE (R3-TABS, the chair's ruling of 2026-11-13; round three's cut
+ * #1274 #1389 #718 #817 #1174 #1082). The crime-pattern rows were cut with `truncateAtWord(desc, 200)` and printed
+ * "The settlement's gates and walls are…" (339 of 1,657 rows on 884 births at 9e57f5023). `text` up to its last
+ * whole sentence within `maxChars`; the whole text where no sentence ends within it.
+ * @param {unknown} text @param {number} maxChars
+ * @returns {string}
+ */
+export function wholeSentencesWithin(text, maxChars) {
+  const t = typeof text === 'string' ? text.trim() : '';
+  if (t.length <= maxChars) return t;
+  const head = t.slice(0, maxChars + 1);
+  const ends = [...head.matchAll(/[.!?]["')\]]?(?=\s|$)/g)];
+  const last = ends[ends.length - 1];
+  return last ? t.slice(0, last.index + last[0].length) : t;
 }
 
 export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false, playerView = false}) {
@@ -522,7 +538,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
                 return (
                 <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',padding:'7px 10px'}}>
                   <div style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:swatch.inkMag2,marginBottom:desc?2:0}}>{ct.type}</div>
-                  {desc&&<div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{truncateAtWord(desc, 200)}</div>}
+                  {desc&&<div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{wholeSentencesWithin(desc, 200)}</div>}
                 </div>
                 );
               })}
