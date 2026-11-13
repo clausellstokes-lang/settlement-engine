@@ -90,13 +90,17 @@ describe('W2-FIX-DATA-4: round two\'s medium lines in this lane\'s files', () =>
   }, 60_000);
 
   test('the arrival holds the culture\'s materialized detail to its own declaration (#183; ROUND-3 HIGH #87 #112 #117)', () => {
-    for (const [seed, gone] of [
-      ['rr2s-thorp-calm-port-1', 'Palisade lines and river stairs'],
-      ['rr2s-hamlet-calm-rand-1', 'Palisade lines and river stairs'],
-      ['rw3-hamlet-calm-1', 'A communal green, bathhouse, and well'],
+    // RE-KEYED BY CAUSE (W2-FIX-DATA-HISTORY item D): the slavic "palisade lines ... successive stages of expansion" now
+    // declares its size (tier: ≥ town), so the two small rr2s towns MATERIALIZE its small-place twin instead (the
+    // materializer's own door): the false line is held out one step earlier, and the arrival still prints neither it nor
+    // nothing. The bathhouse row (rw3-hamlet-calm-1) still proves the arrival's own hold on a materialized detail.
+    for (const [seed, gone, materialized] of [
+      ['rr2s-thorp-calm-port-1', 'Palisade lines and river stairs', 'painted gables and fenced garden plots face the lane'],
+      ['rr2s-hamlet-calm-rand-1', 'Palisade lines and river stairs', 'painted gables and fenced garden plots face the lane'],
+      ['rw3-hamlet-calm-1', 'A communal green, bathhouse, and well', 'A communal green, bathhouse, and well'],
     ]) {
       const town = seed.startsWith('rr2s-') ? bornRr2s(seed) : bornRw3(seed);
-      expect(String(town.culturalIdentity?.architecturalDetail).toLowerCase(), `${seed}: the materialized detail`).toContain(gone.toLowerCase());
+      expect(String(town.culturalIdentity?.architecturalDetail).toLowerCase(), `${seed}: the materialized detail`).toContain(materialized.toLowerCase());
       expect(String(town.arrivalScene), seed).not.toContain(gone);
       expect(String(town.arrivalScene), seed).toMatch(/\S/);
     }

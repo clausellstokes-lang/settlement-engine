@@ -18,11 +18,17 @@
  * mostly" on its first export's trade where that trade is a sliver of its income; it reads the income shares now
  * (`historyData.js :: livelihoodLead`).
  *
+ * ITEM D (the review of the data lane, L4: "... successive stages of expansion", "The main street ends at the administrative
+ * precinct", "... organized neighborhoods"; CENSUS-2 kind c): thirteen architectural details that name a larger place's
+ * wards, quarters, squares, market streets, civic centre or agora declare their size, each with a small-place twin
+ * (`cultureProfiles.js :: CULTURE_LINE_SIBLINGS`), resolved at the materializer (which answers the tier).
+ *
  * THIS FILE REDS WHEN: a cured line prints again in its guard town, or a declaration is dropped or turned.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { HISTORY_TEMPLATE_RECORD_DECLARATIONS, trueToRecordAt } from '../../src/generators/historyGenerator.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
+import { CULTURE_LINE_SIBLINGS } from '../../src/data/cultureProfiles.js';
 import { HISTORICAL_EVENTS_DATA, TENSIONS_THAT_NEED_THEIR_OWN_EVENT, tensionHeldByTimeline, livelihoodLead } from '../../src/data/historyData.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -126,4 +132,31 @@ describe('W2-FIX-DATA-HISTORY item L: the lead says what the town lives on by it
     expect(text).not.toContain('runs mostly on the timber trade');
     expect(text).toContain('Among the trades the place lives by, the timber trade is under strain.');
   }, 60_000);
+});
+
+describe('W2-FIX-DATA-HISTORY item D: a culture detail of a larger place does not print in a small one', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const LARGE = /older wards|principal square|civic center|market streets|merchant quarter|successive stages of expansion|ward gates, shop fronts|administrative precinct|organized neighborhoods|workshop lanes layer|occupational quarters|busiest civic ground|approaches to the agora/;
+
+  it('each of the thirteen declares its size and has a twin for the smaller places', () => {
+    const mine = Object.entries(CULTURE_LINE_SIBLINGS).filter(([k]) => LARGE.test(k));
+    expect(mine.length).toBe(13);
+    for (const [, [own, twin]] of mine) {
+      expect(own.needs.some((a) => /^tier: ≥ (village|town)$/.test(a)), own.text).toBe(true);
+      expect(twin.twinOf).toBe(own.text);
+      expect(twin.needs.length === 1 && /^tier: ≤ (hamlet|village)$/.test(twin.needs[0]), twin.text).toBe(true);
+      expect(LARGE.test(twin.text), twin.text).toBe(false);
+    }
+  });
+
+  // GUARDS: the readers' small towns that printed a larger place's detail at the base
+  for (const seed of ['rww-thorp-under_siege-1', 'rww-hamlet-succession_void-1', 'rpf-thorp-occupied-13', 'rw3-thorp-famine-1', 'rr2s-village-calm-port-1']) {
+    it(`${seed}: its detail (record, PDF, arrival) names no larger place's ground, and it keeps one`, () => {
+      const s = born(seed);
+      expect(['thorp', 'hamlet', 'village']).toContain(s.tier);
+      expect(String(s.culturalIdentity.architecturalDetail)).not.toMatch(LARGE);
+      expect(String(s.arrivalScene)).not.toMatch(LARGE);
+      expect(String(s.culturalIdentity.architecturalDetail).length).toBeGreaterThan(0);
+    }, 60_000);
+  }
 });
