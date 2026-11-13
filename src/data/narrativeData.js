@@ -28,7 +28,7 @@ export const ARRIVAL_SCENES = {
     (r) =>
       `${r} runs along the water the way settlements do when water is the reason they exist: practical, a little chaotic at the waterfront, tidier as you move inland.`,
     { text: (r) =>
-      `The river carries the sounds of ${r} to you around the bend before the buildings appear: a mill wheel, the knock of boats against a jetty, someone calling a tally across the water.`, needs: ['institution: mill'] },
+      `The river carries the sounds of ${r} to you around the bend before the buildings appear: a mill wheel, the knock of boats against a jetty, someone calling a tally across the water.`, needs: ['institution: mill', 'institution: docks'] }, // R2-CODE-A-4 (CENSUS-2 a/docks): a jetty only where the roster holds a landing (the docks atom)
     (r) =>
       `${r} has its back to the land and its face to the river; the approach by road brings you in the rear way, past the yards and the drying nets, into a settlement that plainly considers the water its front door.`,
   ],
@@ -76,7 +76,7 @@ export const ARRIVAL_SCENES = {
     { text: (r) =>
       `A child runs past you on the road into ${r}, chasing something or being chased by something (unclear which). Nobody in the street pays attention.`, crisis: ['any'] },
     { text: (r) =>
-      `A merchant argues with a carter on the road into ${r} about the size of a load. Nobody else pays them any attention. This is clearly a daily occurrence.`, crisis: ['any'] },
+      `A merchant argues with a carter on the road into ${r} about the size of a load. Nobody else pays them any attention. This is clearly a daily occurrence.`, crisis: ['any'], needs: ['market'] }, // R2-CODE-A-4 (CENSUS-2 a/merchants): a daily merchant only where the roster holds a market
     { text: (r) =>
       `The first person you meet on the road into ${r} wants to know your business, and the second already knows it.`, crisis: ['any'] },
   ],

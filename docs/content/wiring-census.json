@@ -53715,8 +53715,10 @@
         "coast": 2,
         "crisis: any": 7,
         "docks": 4,
+        "institution: docks": 1,
         "institution: mill": 1,
         "institution: smith": 1,
+        "market": 1,
         "population: ≥ middling": 1,
         "walls": 1
       },
