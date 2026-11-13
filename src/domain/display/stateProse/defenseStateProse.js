@@ -162,7 +162,9 @@ function properFill(value) {
   if (/[.!?]\s|[.!?]$/.test(value)) return undefined;
   if (/[0-9]/.test(value)) return undefined;
   if (/[a-z]+_[a-z]+/.test(value)) return undefined;
-  return /^[A-Z]/.test(value) ? value : undefined;
+  // L3 (R3-TABS): a capital in any script opens a proper name. `/^[A-Z]/` refused Ásey, Ögedeinuur and Ástun,
+  // and every line of this desk names `{settlement}`, so the whole desk fell silent in those towns.
+  return /^\p{Lu}/u.test(value) ? value : undefined;
 }
 
 /**
