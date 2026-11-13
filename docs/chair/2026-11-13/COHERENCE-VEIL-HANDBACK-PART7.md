@@ -16,8 +16,8 @@ hosted database, no production credential, no `supabase db push`, no `migration 
 | 1. The ten second homes (V5-1) | BUILT, pushed; the attack and sentence search at item 1 running | the commit carrying this line |
 | 2. The public prose from the stripped record (V5-2) | DONE, pushed | the commit carrying this line |
 | 3. 211's helpers, an early-applied copy (V5-7) | DONE, pushed | 7466ea783 |
-| V5-3 (the chair's ruling) | DONE, pushed | the commit carrying this line |
-| V5-4 (the chair's ruling) | built and green; committed next | — |
+| V5-3 (the chair's ruling) | DONE, pushed | da844761a |
+| V5-4 (the chair's ruling) | DONE, pushed | the commit carrying this line |
 
 ## 1. Item 1 — the ten second homes
 
@@ -224,6 +224,46 @@ read false. **The review's own rows, natively** (`hand/fullmode.sql` on clones o
 same seven and neither record. The seven (`inst_dmNotes inst_notes mapEdits migrationReports npc_dmNotes npc_notes
 tabNotes`) are kept by the client's full mode too (the owner's Reveal-DM opt-in), so no page hides them: not V5-3,
 named here for the chair.
+
+### 4.2 V5-4: a person hidden by the per-person switch is never sent in a roster copy, old share or new
+
+**The cause** (the review's §1.5): master's generator embeds each person's whole card in the power's roster
+(`factions[].members[]`, `powerStructure.factions[].members[]`). On a DM-full projection the 093 splice reduced a
+person with `revealDm: false` in `npcs[]` only; a MARKED share's veil then reached the copies, but an UNMARKED one
+(exported before 2026-10-30, served as before) sent the copy whole, and both clients' pages drew it.
+
+**The cure, both twins:** after the member splice, each roster copy of a person the share does not reveal (the very
+predicate of the splice: `revealDm`, and on the import `allowImport` too) becomes the same public card as the
+person's own `npcs[]` entry; only where the projection is DM-full (`gallery_share_dm` / the client's `full`). 211:
+`_gallery_veil_member_revealed`, `_gallery_veil_roster_members`, `_gallery_veil_roster_splice`, called by
+`_gallery_apply_member_overrides` (its signature unchanged; the down file drops the three, 50 helpers in all); the
+client: `publicSafe.js :: toPublicSafe`. A revealed person's copy stays; a default projection's copies are the
+sanitiser's already; nothing else moves.
+
+**Red first** (`galleryVeilCures`, "V5-4"): the review's own document (Ada switched off, Bo shown, each in both
+rosters), unmarked and marked, Reveal DM on: at da844761a **RED**: Ada's roster copy was her whole card, secret and
+goal (`v54-pin-red.txt`); after: Ada's secret and goal in no read (gallery, link, import, map, page), Bo's secret in
+the gallery read, the import and the page as before, Ada's two roster copies deep-equal to her own entry, and the
+unmarked gallery response otherwise deep-equal to 210's. **The review's own rows natively** (`hand/roster.sql`,
+`v54-roster-native.txt`):
+
+| `rv5roster-unmarked` | 203 + today's 211 | item 1 | V5-4 |
+|---|---|---|---|
+| gallery read: Ada's secret / goal / Bo's secret | sent / sent / sent | sent / sent / sent | **not / not** / sent |
+| import: Ada's secret / goal | sent / sent | sent / sent | **not / not** |
+| `rv5roster-marked`, every read | not sent | not sent | not sent |
+
+**Nothing else an old share serves changes, on born towns in the DEPLOYED client's shape** (`v54corpus.probe.jsx`,
+master's own generator, `v54-corpus-master-shape.json`): 12 towns (village to metropolis), unmarked Reveal-DM shares
+with every third person switched off (59 people), the gallery read, link and import at item 1 against V5-4: **0
+differences** but the 236 roster copies of switched-off people, each equal to the person's own public card; the link
+unchanged. (A switched-off person's secret sentence still appears 40 times in those responses: each is the same pool
+sentence as the OPEN secret of another, revealed person, at that person's own card: a coincidence of the pool.)
+
+The lane's pins after V5-4 (`pins-after-v54.txt`): **12 files, 235 of 235** (galleryVeilCures 32 with the V5-3, V5-4
+and V5-7 arms; galleryServerVeil 16; gallerySecondHomes 3; publicPayloadVeilTotality 28; allegianceVeil 8;
+playerRecordVeiledFace 4; livingContentRosterPublicDrop 7; lib/gallery 50; importScrub 19; partyLinkClient 7;
+display/publicSafe 56; publicProseVeilInvariance 5). Gates: strict 0 (1,113), ratchet 0 (167), eslint 0.
 
 ## 9. This brief's rulings, copied in (the chair, session_01FE9mEws7PXYRYdjQPbSX15, 2026-11-13)
 

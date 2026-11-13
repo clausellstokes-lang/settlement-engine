@@ -1,0 +1,6 @@
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+AssertionError: expected { id: 'npc_1', …(4) } to deeply equal { id: 'npc_1', …(2) }
++   "goal": {
++   "secret": "V54SECRET_ADA",
+      Tests  1 failed | 31 skipped (32)
+exit 1

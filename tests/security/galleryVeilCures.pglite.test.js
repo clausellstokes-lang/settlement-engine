@@ -773,6 +773,48 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
     expect(out).toEqual(Object.fromEntries(cases.map(([tag]) => [tag, { gallery: false, link: false, import: false, map: false, page: false }])));
   }, ROW_TIMEOUT_MS);
 
+  // ── V5-4 (the FIFTH review §1.5; the chair's ruling of 2026-11-13: a person hidden by the per-person switch is
+  // never sent, on any share, exported before the veil or after) ─────────────────────────────────────────────
+  // Master's generator embeds each person's whole card in the power's roster (factions[].members[],
+  // powerStructure.factions[].members[]). On a Reveal-DM share with one person set revealDm:false, the 093 splice
+  // reduced the person in npcs[] only; an UNMARKED share (exported before 2026-10-30) served the roster copy whole,
+  // and both clients' pages drew it. The review's own rows (hand/roster.sql: rv5roster-unmarked, rv5roster-marked).
+  const V54_ADA = { id: 'npc_1', name: 'Ada Hidden', role: 'reeve', secret: 'V54SECRET_ADA', goal: { short: 'V54GOAL_ADA' } };
+  const V54_BO = { id: 'npc_2', name: 'Bo Shown', role: 'smith', secret: 'V54SECRET_BO' };
+  const V54_DOC = { name: 'Rostertown', tier: 'town', npcs: [{ ...V54_ADA, factionAffiliation: 'Town Council' }, V54_BO],
+    factions: [{ name: 'Town Council', members: [V54_ADA, V54_BO] }],
+    powerStructure: { factions: [{ faction: 'Town Council', category: 'government', members: [V54_ADA, V54_BO] }] } };
+  it('V5-4 (the review rows): a person hidden by the per-person switch is sent by no read in a roster copy, unmarked or marked; the person shown is sent as before; nothing else an old share serves changes', async () => {
+    const ada = (v) => has(v, 'V54SECRET_ADA') || has(v, 'V54GOAL_ADA');
+    const bo = (v) => has(v, 'V54SECRET_BO');
+    // the marked row opens the secrets the default veil shuts by class, so the person shown is measured there too
+    const cases = [['unmarked', { npc_1: { revealDm: false } }],
+      ['marked', { npc_1: { revealDm: false }, $veil: { v: 1, deltas: [{ address: 'class:npc:secret', hidden: false }] } }]];
+    const out = {}; const red = {};
+    for (const [tag, ov] of cases) {
+      const r = await v31Reads(LIVE.db, V54_DOC, ov);
+      out[tag] = { ada: { gallery: ada(r.gallery), link: ada(r.link), import: ada(r.import), map: ada(r.map), page: ada(r.page) },
+        bo: { gallery: bo(r.gallery), import: bo(r.import), page: bo(r.page) } };
+      const r210 = await v31Reads(AT210.db, V54_DOC, ov);
+      red[tag] = ada(r210.gallery);
+      if (tag === 'unmarked') {
+        // nothing else changes: the unmarked share's gallery response is 210's, but for Ada's two roster copies, each
+        // now the very public card her own entry is
+        const now = structuredClone(r.gallery[0].data); const then = structuredClone(r210.gallery[0].data);
+        const card = now.npcs.find((n) => n.id === 'npc_1');
+        expect(now.factions[0].members[0]).toEqual(card);
+        expect(now.powerStructure.factions[0].members[0]).toEqual(card);
+        for (const d of [now, then]) { d.factions[0].members.splice(0, 1); d.powerStructure.factions[0].members.splice(0, 1); }
+        expect(now).toEqual(then);
+      }
+    }
+    // the red control: at 210 (no read veiled on the server) both shares send Ada's secret in the roster copy; at
+    // 333b33973's 211 the marked one did not and the unmarked one did (the review's hand/roster.sql table)
+    expect(red).toEqual({ unmarked: true, marked: true });
+    const shown = { gallery: true, import: true, page: true };
+    expect(out).toEqual(Object.fromEntries(cases.map(([tag]) => [tag, { ada: { gallery: false, link: false, import: false, map: false, page: false }, bo: shown }])));
+  }, ROW_TIMEOUT_MS);
+
   // ── V3-2 (the THIRD review) ────────────────────────────────────────────────────────────────────
   // The client drops a person card with neither a name nor a role (publicSafe.js :: toPublicSafe,
   // `filter(npc => npc.name || npc.role)`); a served page is not projected again, so at f07db8760 the

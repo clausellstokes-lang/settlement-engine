@@ -50,6 +50,10 @@
 --       chair on 2026-11-13: what no page shows is not sent): customContentRoster and customContentProvenance, which
 --       the client's full mode drops (publicSafe.js :: toPublicSafe), leave the Reveal-DM projection of the gallery
 --       read and the import too; before, every reader and every importer of such a share received both.
+--   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth review's
+--       V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy (factions[].members[],
+--       powerStructure.factions[].members[]) of a person the share does not reveal to the person's own public card, on
+--       every share, marked or not (_gallery_veil_roster_splice). Nothing else an old share serves changes.
 --   (8) A SERVED BODY DROPS A PERSON CARD WITH NEITHER A NAME NOR A ROLE (the third review's V3-2), as
 --       the client's projection does: a served page is not projected again, so a nameless card whose
 --       role the face veil removed was drawn. Hand-edited towns only (the six-size probe counts 0).
@@ -1321,6 +1325,47 @@ end $$;
 
 -- ── 6. THE READS (each its previous body plus the veil; grants as they stood) ────────────────
 
+-- ── V5-4 (COHERENCE-VEIL-6; the fifth review §1.5, ruled by the chair on 2026-11-13): a person hidden by the per-person
+-- switch is never sent, on any share, exported before the veil or after. Master's generator embeds each person's whole
+-- card in the power's roster (factions[].members[], powerStructure.factions[].members[]); on a DM-full projection the 093
+-- splice reduced the person in npcs[] only, so an UNMARKED share (served as before, no veil) sent the roster copy whole.
+-- Now each roster copy of a person the share does not reveal is the same public card as the person's own entry.
+-- Nothing else changes: a revealed person's copy stays; a projection that is not DM-full is the sanitiser's already.
+-- Client twin: publicSafe.js :: toPublicSafe (the roster splice after the member splice).
+create or replace function public._gallery_veil_member_revealed(m jsonb, overrides jsonb, share_dm boolean, importable boolean, for_import boolean)
+returns boolean language sql immutable as $$
+  select case when for_import then
+      coalesce(case coalesce(overrides -> public._gallery_npc_key(m) -> 'revealDm', 'null') when 'true' then true when 'null' then null else false end, share_dm)
+      and coalesce(case coalesce(overrides -> public._gallery_npc_key(m) -> 'allowImport', 'null') when 'true' then true when 'null' then null else false end, importable)
+    else coalesce(case coalesce(overrides -> public._gallery_npc_key(m) -> 'revealDm', 'null') when 'true' then true when 'null' then null else false end, share_dm) end
+$$;
+
+create or replace function public._gallery_veil_roster_members(factions jsonb, overrides jsonb, share_dm boolean, importable boolean, for_import boolean)
+returns jsonb language sql immutable as $$
+  select coalesce(jsonb_agg(case when jsonb_typeof(f) = 'object' and jsonb_typeof(f -> 'members') = 'array'
+      then jsonb_set(f, '{members}', coalesce((
+        select jsonb_agg(case when jsonb_typeof(m) = 'object' and not coalesce(public._gallery_veil_member_revealed(m, overrides, share_dm, importable, for_import), false)
+                              then coalesce(public._gallery_sanitize_public_json(jsonb_build_object('npcs', jsonb_build_array(m))) -> 'npcs' -> 0, '{}'::jsonb)
+                              else m end order by mo)
+          from jsonb_array_elements(f -> 'members') with ordinality y(m, mo)), '[]'))
+      else f end order by o), '[]')
+    from jsonb_array_elements(factions) with ordinality x(f, o)
+$$;
+
+create or replace function public._gallery_veil_roster_splice(doc jsonb, overrides jsonb, share_dm boolean, importable boolean, for_import boolean)
+returns jsonb language plpgsql immutable as $$
+begin
+  if not coalesce(share_dm, false) or jsonb_typeof(doc) is distinct from 'object' then return doc; end if;
+  if jsonb_typeof(doc -> 'factions') = 'array' then
+    doc := jsonb_set(doc, '{factions}', public._gallery_veil_roster_members(doc -> 'factions', overrides, share_dm, importable, for_import));
+  end if;
+  if jsonb_typeof(doc -> 'powerStructure') = 'object' and jsonb_typeof(doc #> '{powerStructure,factions}') = 'array' then
+    doc := jsonb_set(doc, '{powerStructure,factions}',
+      public._gallery_veil_roster_members(doc #> '{powerStructure,factions}', overrides, share_dm, importable, for_import));
+  end if;
+  return doc;
+end $$;
+
 -- _gallery_apply_member_overrides (093), the FIFTH restatement: 093's body plus one change, a TYPED
 -- read of the two stored member flags (the second review's R9 and R11, ruled into 211). 093 cast
 -- the stored text to boolean: a stored word that is not one ("maybe", an object) made the gallery,
@@ -1339,7 +1384,8 @@ create or replace function public._gallery_apply_member_overrides(
   settlement_importable boolean,
   for_import boolean
 ) returns jsonb language sql immutable as $$
-  select case
+  -- V5-4: the roster copies follow the person's own entry (_gallery_veil_roster_splice, below)
+  select public._gallery_veil_roster_splice(case
     when jsonb_typeof(base -> 'npcs') is distinct from 'array' then base
     else jsonb_set(base, '{npcs}', coalesce((
       select jsonb_agg(
@@ -1365,7 +1411,7 @@ create or replace function public._gallery_apply_member_overrides(
       )
       from jsonb_array_elements(base -> 'npcs') with ordinality as t(npc, ord)
     ), '[]'::jsonb))
-  end;
+  end, overrides, settlement_share_dm, settlement_importable, for_import);
 $$;
 
 
