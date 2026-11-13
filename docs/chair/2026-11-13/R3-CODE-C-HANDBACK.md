@@ -252,3 +252,85 @@ Note: resourceGenerator.js is also changed by w2-c-leaves (STRENGTH_SUPPORT, tow
   around at the right tavern", 10). Not the data tables. And for every writer this lane holds, its CENSUS-2 hits.
   ORDER: #457/#1163, the "outpost" ruling, then the medium rows and these together, the widest writer first. The
   measuring seat's command, when sent, is run on this tree before the final statement.
+- 21:51Z: CENSUS-2's command is ready (lane/census-2-2026-11-13 at 2686272b1). Eight kinds: (a) a house, role or force
+  the town lacks; (b) normal times under a crisis; (c) a size word in a small place; (d) broken text; (e) a denial of
+  what the town has; (f) a house's name with a count range, gate or condition; (g) machinery on the page; (h) an empty
+  seat's keeper named by the bare title. RUN: `git fetch origin lane/census-2-2026-11-13`; `mkdir -p <scratch>/c2 &&
+  git archive origin/lane/census-2-2026-11-13 docs/chair/2026-11-13/probes/CENSUS-2 | tar -x -C <scratch>/c2`; `sh
+  <scratch>/c2/docs/chair/2026-11-13/probes/CENSUS-2/census2.sh <tree root> <out-dir outside the repo> 4 --files
+  <this lane's files, comma-separated>` (about 12 minutes; writes hits.by-file.json and counts.txt; to a file or
+  through gate-tail.sh, never a pipe; if it will not start, send the chair the error in one line). THE RULE: before
+  the final statement, run it at the tip; read every hit in this lane's files against its town's record; cure it or
+  name it here with the reason; the statement gives each kind's count in this lane's files at the lane's base and
+  tip, with its limits beside any zero (the dossier's views only; it cannot see two lines of a page disagreeing).
+  ONE MORE FILE IS THIS LANE'S: src/domain/facts/officialsInPay.js: a (d) hit (one town), cure it; an (f) hit (20
+  towns): the display leaf that strips a house's range is on round two B's lane, so write the call site under a
+  heading "FOR THE JOIN" here (file, function, the expression, the one-line change).
+- 21:57Z: the independent reader's verdict on stage C1 (lane/review-r3-stages-2026-11-13, 34c0d13f9,
+  REVIEW-R3-STAGES-2026-11-13.md): one medium, the outpost (cured at 0804874b0). RULED: A SEAT THAT REWORDS A SENTENCE
+  OWNS THE WHOLE SENTENCE AS IT PRINTS; the stage stays not clear on that line until the cure is read. FOUR LOW
+  findings for the stage are listed there: take each with the medium rows, cure it or name it here with the reason.
+
+### Items since #457 (EXECUTED unless marked)
+
+| item | writer | outcome | commit |
+|---|---|---|---|
+| C11 the "outpost" (the ruling of 21:14Z) | structuralValidator.js :: checkStructuralValidity | CURED: left out at city size and above; 19 of 720 and 6 of 240 towns, structuralViolations only; read in r2r-thorp-17 (kept), r2r-city-47 and r2s-politically_fractured-metropolis-2 (without it) | 0804874b0 |
+| presumedThings stale rows | the first seat's #325/#468 arm-1 row; this seat's #ww-4 arm-2 row | removed through the register's door; the walker 19 of 19 | 19d4a8506, 6fc505ea6 |
+| CENSUS-2 a27 / STARVING_HOOK, MODERATE_GAP_TWIN (45 towns) | outlookHookSiblings.js | READ all 45: false in 36 (an isolated route or a siege: no merchant can come), true in 9 road towns that import food. CURED by the set's declarations: famine there reads "The settlement is starving, and its hungriest are turning to banditry." (new wording); a moderate gap there drops its hook. 36 + 14 towns, economicViability only | 0b3ce25a3 |
+| CENSUS-2 PEACE_IRON_HOOKS (2 towns) | outlookHookSiblings.js | READ TRUE (a crossroads hamlet and a river village buy iron from merchants on the route); not changed | — |
+| #pf-591, #pf-90 (+ CENSUS-2 r2r-village-27), #pf-590; the first seat's OWED tuning-register row | factionDynamics.js :: computeFactionRelationships | CURED: "makes the decisions" only as the strongest power; "merchant money" only beside a stronger merchant power; a separate religious power is not "the same people"; the occupier's kind from the band chain (the tuning walker green). 59 + 15 towns, powerStructure and the goals that read the row | f51767e11 |
+| #ww-371, #pf-813 | factionDynamics.js (the symbiotic row) vs src/generators/power/conflicts.js (a high-tension conflict between the same pair, written after this function runs) | NAMED to the powers lane: the row cannot read the conflict at its step; the cure is where both are known (the settling pass, power/rosterText.js, or the conflict writer) | — |
+| #pf-89 | factionDynamics.js (subordinate church, "no say in the hall") vs the ruling few ("Contests the seat", read on the page from the people lane's roles) | NAMED to the powers lane, for the same reason | — |
+| #ww-1432 | a "Merchant Guilds" power with no guild on the roster | NAMED to the powers lane (src/generators/power/**: the power's existence); the row only names it | — |
+| CENSUS-2 r2s-plague_onset-town-0 ("Landed Gentry … keep enough rights of their own (land, courts, levies)", kind a, court) | factionDynamics.js, the dependent noble row | NOT READ (left for the successor) | — |
+
+### Found on the way (EXECUTED)
+
+- **A non-fast-forward push runs the WHOLE check.** git refuses a rejected ref before the pre-push hook, so the hook
+  reads no lane ref and falls to `npm run check` (the full suite). Fetch and merge BEFORE every push, never after.
+  It happened once here (the first seat's 765a94dd8 had landed); the run was stopped, the push merged and redone.
+- **The goldens.** Green at 74366192c: the generator golden master, worldFactRederive A7, pipelinePinnedChoosers A1.
+  Moved by this seat's causes: the golden master 91 configs at #457 (9a3239ae7), 139 after the merchant hook
+  (0b3ce25a3), still 139 after f51767e11; A7 and A1 since #457. Red before this seat's work and still red:
+  espionageDormancyFence's driven golden, generationForkCensus A1's control row, powerEconomyFreshness A4 (11).
+  All are the merge seat's door; no door run here.
+- **The first seat's runs at fb8b24fbe, owed items:** the mutation-coverage manifest entries for
+  tests/generators/embattledReasonNoSlider.test.js and occupierRelationLine.test.js are STILL OWED (manifest's door);
+  the tuning-register row is paid (f51767e11); the presumedThings row is paid (19d4a8506). The first seat's
+  townCartographyCalibration W2/W8, institutionBudgetPromise and x46NpcBand reds: not re-read here.
+
+### STOP AT THE CONTEXT LIMIT — what the successor takes (not started; nothing changed for them)
+
+The code tip is f51767e11 (read back from origin); this file's own commit is the one after it. In the chair's ORDER (the medium rows and the new writers together, the
+widest writer first), still to do:
+1. **plotHooks.js** (now this lane's whole file): #ww-868 (rww-thorp-plague_onset-1, "An old story from that time:
+   someone is poisoning the ruler slowly, and the physician knows" in an Elder Council of 2, no ruler, no physician;
+   the pool line carries excludes ['ruler: council'] and still printed); CENSUS-2 ECHO_PREFIXES (19 towns: the
+   echo-framed history hooks, whose texts are historyGenerator.js's, the data lane's) and TENSION_LABELS (2).
+2. **hookThemes.js** :: AUTHORED_HOOK_THEMES (7 towns kind a, 7 kind c); **facts/magicSource.js** ::
+   MAGIC_NOTE_TRADITION (11); **servicesGenerator.js** ("ask around at the right tavern", 10);
+   **facts/officialsInPay.js** ((d) 1 town; (f) 20 towns: FOR THE JOIN, as the 21:51Z ruling says).
+3. **crisisSummaryVantage.js** :: CRISIS_SUMMARY_POOLS (#ww-15 "Those who keep order … guarding the stores" with nobody
+   paid to keep order; #pf-85 "the food stores are under guard" with no watch; #pf-667 "the merchants are losing
+   patience" in a thorp with no market or merchant; CENSUS-2: 2 more); **crisisPage.js** :: CRISIS_PAGE_COPY (#ww-702
+   "Nobody here controls what this crisis turns on" beside a named lever holder; #ww-1263 "Who it touches: nobody"
+   beside the infiltrator's NPCs).
+4. **incomeLineSiblings.js** (#ww-339, #ww-1357, GRAIN_OWN_FIELDS_LINE: "none is left to sell" beside a failed grain
+   harvest and beside milled-flour exports; check, as the first seat did for its two coal rows, whether the true writer
+   is economicState.js, the defence lane's); CENSUS-2 LOCAL_COAL_LINE / LOCAL_COAL_SOLD_LINE (4 towns: the first seat
+   traced them to economicState.js).
+5. **foodways.js** :: FRAMES (#ww-707: "Public ovens, neighborhood vendors, and shared dining customs" in a thorp of 28
+   with no market); **chainYield.js** (#ww-1362: "Upstream Food Processing chain is impaired" where the chain is
+   vulnerable); **governanceAccount.js** (#pf-260: "governs without a head" beside an acting governor).
+6. The four LOW findings of REVIEW-R3-STAGES (34c0d13f9) for stage C1; the reader's note that five of the stage's
+   lines never reach the page (the daily-life slots go only to the AI grounding): say so, no cure asked.
+7. Then: the CENSUS-2 command on the tip (base aac79b808 against tip, every kind, this lane's files, the hazard read);
+   the mutation-manifest entries owed; the merge of the line (lane/integration-2026-11-07, 9e57f5023 or later, a plain
+   merge commit); THE FINAL STATEMENT for the whole lane at its final tip (the whole suite, the census counter of
+   lane/second-wave-census-2026-11-12 with its own exit checked, the 720 field diff by family base aac79b808 against
+   tip, the draft shift record naming every moved golden surface above, the new words, the edge bundles last and
+   alone: this seat changed no bundled file it knows of; re-emit and diff to be sure).
+
+**New wording for the owner's veto, this seat:** "older than anyone living" (a322b602f); "The settlement is starving,
+and its hungriest are turning to banditry." (0b3ce25a3).
