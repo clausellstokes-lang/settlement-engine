@@ -233,3 +233,66 @@ export function needMetBy(need, imp) {
   const have = familiesOf(wordsOf(imp));
   return [...asked].some((f) => have.has(f));
 }
+
+/**
+ * W2-C-LEAVES item 4(c) (2026-11-13; the cold list REVIEW-W2A-3 #45, #159, #192, #345, #382, #555): "PRODUCED LOCALLY"
+ * PRINTS WHAT IS MADE HERE. The row printed `economicState.localProduction` raw: the commodities of every resource the
+ * country holds, worked or not ("timber" beside "No one here works the timber"), the model's own identifiers ("trade
+ * access", "luxury"), and the outputs of chains whose only house is a road to a neighbour's ("Religious services" in a
+ * hamlet with "Access to parish church"). The record is untouched; the page keeps an item only where its home says yes:
+ *   · a resource's commodity: a chain works that resource here (`facts/chainWorking.js :: chainWorksResource`, the one
+ *     home of "worked here", record 303), or a house of the roster makes it (the generator's own maker words);
+ *   · a chain's output: a working chain makes it none of whose houses is held only as a road to elsewhere ("Access to …");
+ *   · the model's identifiers, and the category errors the trade lists already leave (`displayTradeList`), never.
+ * @param {{ economicState?: { localProduction?: ReadonlyArray<unknown> | null, activeChains?: ReadonlyArray<unknown> | null } | null,
+ *   institutions?: ReadonlyArray<unknown> | null } | null | undefined} settlement
+ * @returns {string[]} the raw items kept, in the record's order
+ */
+export function localProductionAsPrinted(settlement) {
+  const eco = settlement?.economicState || {};
+  const list = (Array.isArray(eco.localProduction) ? eco.localProduction : []).filter((x) => typeof x === 'string' && x.trim()).map(String);
+  const roster = (Array.isArray(settlement?.institutions) ? settlement.institutions : [])
+    .map((i) => String(/** @type {{ name?: unknown }} */ (i)?.name ?? '').toLowerCase()).filter(Boolean);
+  const ownHouses = roster.filter((n) => !n.startsWith('access to'));
+  const chains = /** @type {Array<{ outputs?: unknown, processingInstitutions?: unknown, status?: unknown }>} */ (
+    (Array.isArray(eco.activeChains) ? eco.activeChains : []).filter((c) => c && typeof c === 'object'));
+  /** @param {{ processingInstitutions?: unknown }} c a chain one of whose houses the roster holds only as a road to elsewhere */
+  const accessOnly = (c) => {
+    const houses = (Array.isArray(c.processingInstitutions) ? c.processingInstitutions : []).map((h) => String(h).toLowerCase().split(/[\s(]/)[0]).filter(Boolean);
+    return houses.some((h) => { const m = roster.filter((r) => r.includes(h)); return m.length > 0 && m.every((r) => r.startsWith('access to')); });
+  };
+  const made = new Set(chains
+    .filter((c) => WORKING_CHAIN_STATUSES.includes(String(c.status)) && !accessOnly(c))
+    .flatMap((c) => (Array.isArray(c.outputs) ? c.outputs : []).map((o) => String(o).toLowerCase())));
+  const outputs = new Set(chains.flatMap((c) => (Array.isArray(c.outputs) ? c.outputs : []).map((o) => String(o).toLowerCase())));
+  const kept = list.filter((raw) => {
+    const item = raw.toLowerCase().replace(/_/g, ' ').trim();
+    if (LOCAL_IDENTIFIERS.has(item)) return false;
+    if (outputs.has(raw.toLowerCase())) return made.has(raw.toLowerCase());
+    const keys = RESOURCES_YIELDING.get(item);
+    const makers = HOUSE_MAKES[item];
+    if (!keys && !makers) return true;
+    return (!!keys && chainWorksResource(settlement, keys)) || (!!makers && ownHouses.some((n) => makers.some((w) => n.includes(w))));
+  });
+  return displayTradeList(kept, /** @type {Parameters<typeof factsOf>[0]} */ (settlement), { side: 'exports' });
+}
+import { RESOURCE_DATA } from '../../data/goods/identity.js';
+import { chainWorksResource, WORKING_CHAIN_STATUSES } from '../facts/chainWorking.js';
+/** The model's own identifiers in the local list (a position and the commodity categories): never a good. */
+const LOCAL_IDENTIFIERS = new Set(['trade access', 'maritime access', 'luxury', 'craft', 'textile', 'herbs', 'fuel', 'precious metal']);
+/** Each resource commodity (spaced, lower case) → the resource keys that yield it (`RESOURCE_DATA[k].commodities`). */
+const RESOURCES_YIELDING = (() => {
+  /** @type {Map<string, string[]>} */ const m = new Map();
+  for (const [key, row] of Object.entries(RESOURCE_DATA)) {
+    for (const c of /** @type {{ commodities?: ReadonlyArray<string> }} */ (row).commodities || []) {
+      const k = String(c).toLowerCase().replace(/_/g, ' ');
+      m.set(k, [...(m.get(k) || []), key]);
+    }
+  }
+  return m;
+})();
+/** The maker words of the generator's house-made commodities (`generators/economy/tradeGoods.js :: deriveLocalCommodities`). */
+const HOUSE_MAKES = Object.freeze(/** @type {Record<string, ReadonlyArray<string>>} */ ({
+  flour: ['mill', 'baker'], ironwork: ['smith', 'metalwork'], leather: ['tanner', 'leather'], cloth: ['weaver', 'textile'],
+  meat: ['butcher'], lumber: ['carpenter', 'sawmill'], salt: ['dock', 'port', 'fishmonger'],
+}));

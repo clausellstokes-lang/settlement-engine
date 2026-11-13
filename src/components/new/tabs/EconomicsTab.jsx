@@ -25,7 +25,7 @@ import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.j
 import { generalDeskLines } from '../generalDeskRead.js'; // DS-GEN-18 · the general desk's ONE caller
 import Button from '../../primitives/Button.jsx';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
-import { displayTradeList, tradeMarksOnPage, revenuesOffTheLists, importsAsPrinted } from '../../../domain/display/tradeListDisplay.js'; // CENSUS-3b unit 3 — the trade lists' one display reader (kind A, filterDeclared)
+import { displayTradeList, tradeMarksOnPage, revenuesOffTheLists, importsAsPrinted, localProductionAsPrinted } from '../../../domain/display/tradeListDisplay.js'; // CENSUS-3b unit 3 — the trade lists' one display reader (kind A, filterDeclared)
 import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js'; // §934.22 item 2 — the native-resource label seam (the Imports pills)
 import { edged } from '../../../design/edgedBox.js';
 import { foodStoresWords } from '../../../domain/summary/tonightSheet.js'; // the stores sentence's ONE writer (TRIM-2 request 3)
@@ -354,7 +354,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   const shownExports = displayTradeList(eco.primaryExports, s, { side: 'exports' });
   // W2-C-LEAVES item 4(b): the Imports are what trade brings (`importsAsPrinted`, the leaf the gap reader reads); a
   // need no import meets, under any name, prints apart as a need not met (`NeedsNotMet`, at the end of the file).
-  const { arriving: shownImports, needed: unmetNeeds } = importsAsPrinted({ ...s, economicState: eco });
+  const { arriving: shownImports, needed: unmetNeeds } = importsAsPrinted({ ...s, economicState: eco }); const shownLocal = localProductionAsPrinted({ ...s, economicState: eco }); // W2-C-LEAVES 4(c): what is made here
   const exportMarks = tradeMarksOnPage(shownExports);
   const shownCriticals = terrainCriticals.filter(tc => shownImports.some(imp => imp.toLowerCase().includes(tc.toLowerCase()) || tc.toLowerCase().includes(imp.toLowerCase())));
 
@@ -458,8 +458,8 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       <DeskLines mount="economics.commercialProfile" settlementName={s?.name} tier={s?.tier} rungs={[deskProse.incomeMix, deskProse.criminalLine, deskProse.incomeWeight, deskProse.criticalImport]} />
 
       {/* ── TRADE PROFILE (exports + imports unified) ───────────────────── */}
-      {(shownExports.length>0||shownImports.length>0||unmetNeeds.length>0||eco.localProduction?.length>0)&&<Section title="Trade Profile" collapsible defaultOpen>
-        <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'1fr 1fr',gap:12,marginBottom:eco.localProduction?.length>0?12:0}}>
+      {(shownExports.length>0||shownImports.length>0||unmetNeeds.length>0||shownLocal.length>0)&&<Section title="Trade Profile" collapsible defaultOpen>
+        <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'1fr 1fr',gap:12,marginBottom:shownLocal.length>0?12:0}}>
           {/* Exports */}
           <div>
             <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.success,marginBottom:6}}>Exports</div>
@@ -527,7 +527,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
         {eco.tradeLinks?.length>0&&(()=>{
           const byPartner={};
           for(const l of eco.tradeLinks){const b=byPartner[l.partner]=byPartner[l.partner]||{imports:[],exports:[]};(l.direction==='import'?b.imports:b.exports).push(l.good);}
-          return <div style={{borderTop:'1px solid #e8d8b0',paddingTop:10,marginBottom:eco.localProduction?.length>0?12:0}}>
+          return <div style={{borderTop:'1px solid #e8d8b0',paddingTop:10,marginBottom:shownLocal.length>0?12:0}}>
             <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.info,marginBottom:6}}>↔ Trade with neighbours</div>
             {Object.entries(byPartner).map(([partner,g],i)=>(
               <div key={i} style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag2,marginBottom:3,lineHeight:1.5}}>
@@ -540,10 +540,10 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
           </div>;
         })()}
         {/* Local production */}
-        {eco.localProduction?.length>0&&<div style={{borderTop:'1px solid #e8d8b0',paddingTop:10}}>
+        {shownLocal.length>0&&<div style={{borderTop:'1px solid #e8d8b0',paddingTop:10}}>
           <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>Produced locally</div>
           <div style={{display:'flex',flexWrap:'wrap',gap:3}}>
-            {eco.localProduction.map((p,i)=><span key={i} style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d8c890',padding:'1px 7px',textTransform:'capitalize'}}>{p.replace(/_/g,' ')}</span>)}
+            {shownLocal.map((p,i)=><span key={i} style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d8c890',padding:'1px 7px',textTransform:'capitalize'}}>{p.replace(/_/g,' ')}</span>)}
           </div>
         </div>}
       </Section>}
