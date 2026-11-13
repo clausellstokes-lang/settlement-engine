@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2952,
+    "variants": 2955,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -30073,8 +30073,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
-      "grammars": 1,
+      "variants": 6,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -30130,8 +30130,10 @@
         "no market"
       ],
       "lineDeclares": {
+        "crisis: under_siege": 3,
         "gate": 2,
-        "institution: tavern": 2
+        "institution: tavern": 2,
+        "no crisis: under_siege": 3
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -70428,7 +70430,7 @@
       "subject": "NO-MARKET",
       "fields": [],
       "readingFunction": "marketPoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "6 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

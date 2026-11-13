@@ -67,8 +67,8 @@
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 294797,
-      "gzip": 37711,
+      "raw": 296009,
+      "gzip": 37833,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -795,6 +795,14 @@
       "toRaw": 264150,
       "gzipAfter": 35592,
       "reason": "+1738 B raw over the committed 262412 (gzip level 9: 35416 -> 35592): the round's cut, item 2: three corpus lines touched and still false, cured by a declaration or a rewording; four lines (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE-4 item 1",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 294885,
+      "toRaw": 296009,
+      "gzipAfter": 37833,
+      "reason": "+1212 B raw over the committed 294797 (gzip level 9: 37711 -> 37833): the NO-MARKET pool declared off a siege (no crisis: under_siege on its three lines) and three siege lines for the case it empties (2026-11-13)"
     }
   ],
   "ceilingTransfersNewLeaves": [

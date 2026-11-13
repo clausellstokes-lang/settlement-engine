@@ -6909,9 +6909,12 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 3. `[street · no crisis: under_siege · crisis: any]` In {settlement} the {good} on the stalls has usually seen more of the world than the people selling it.
 
 **`NO-MARKET`** {no market}
-1. `[counterforce · gate · institution: tavern]` No market or fair stands in {settlement}: what trade the town does is done at the gate, at the inn and on the road.
-2. `[visitor · gate · institution: tavern]` {settlement} has no market square; trade is done at the gate, at the inn and along the road.
-3. `[street]` No market or fair stands in {settlement}: what trade the town does is done house to house and on the road.
+1. `[counterforce · gate · institution: tavern · no crisis: under_siege]` No market or fair stands in {settlement}: what trade the town does is done at the gate, at the inn and on the road.
+2. `[visitor · gate · institution: tavern · no crisis: under_siege]` {settlement} has no market square; trade is done at the gate, at the inn and along the road.
+3. `[street · no crisis: under_siege]` No market or fair stands in {settlement}: what trade the town does is done house to house and on the road.
+4. `[street · crisis: under_siege]` No market or fair stands in {settlement}, and since the siege closed the road, almost nothing changes hands at all.
+5. `[ledger · crisis: under_siege]` {settlement} keeps no market, and with the road shut by the siege, the trade it once did on the road has stopped.
+6. `[visitor · crisis: under_siege]` There is no market at {settlement} to find, and with the siege across the road, nobody comes in to sell.
 
 **`COMMERCE: a bank`** *(the commercial houses on the live roster, `compound.inst`: `hasBank`)*
 1. `[visitor · colour]` A traveller passing through {settlement} can change coin, borrow or settle a debt at the town's bank without carrying the silver home.
