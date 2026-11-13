@@ -7165,20 +7165,20 @@ compass word, no real-world place, no named analogy.*
 2. `[visitor]` Ask about the town's present quarrels in {settlement} and the {calamity} comes up before long.
 
 **`LEGACY-UNRESOLVED`** {colour}
-1. `[ledger]` The {calamity}, {timeband_age}, left a legacy of trouble in {settlement} that has never been fully put right.
-2. `[street]` Nobody in {settlement} has finished putting right the legacy of the {calamity}, {timeband_age}.
+1. `[ledger]` The {calamity} is {timeband_age}, and it left a legacy of trouble in {settlement} that has never been fully put right.
+2. `[street]` The {calamity} is {timeband_age}, and nobody in {settlement} has finished putting right the legacy it left.
 
 **`LEGACY-RECOVERED`** {colour}
-1. `[ledger]` {settlement} came through the {calamity}, {timeband_age}; its legacy is what the town built in answer to it, and that still stands.
-2. `[street]` The legacy of the {calamity}, {timeband_age}, is much of what stands in {settlement} now: it was built in the years after.
+1. `[ledger]` {settlement} came through the {calamity}, which is {timeband_age} now; its legacy is what the town built in answer to it, and that still stands.
+2. `[street]` The {calamity} is {timeband_age}, and its legacy is much of what stands in {settlement} now: it was built in the years after.
 
 **`LEGACY-SHIFTED`** {colour}
-1. `[ledger]` What {settlement} settled in the wake of the {calamity}, {timeband_age}, is a legacy that still shapes the town, though much has changed since.
-2. `[street]` {settlement} still carries the shape it took after the {calamity}, {timeband_age}; that legacy holds, though the times have moved on.
+1. `[ledger]` The {calamity} is {timeband_age}; what {settlement} settled in its wake is a legacy that still shapes the town, though much has changed since.
+2. `[street]` The {calamity} is {timeband_age}, and {settlement} still carries the shape it took after it; that legacy holds, though the times have moved on.
 
 **`LEGACY-LINKED`** {colour}
-1. `[ledger]` The legacy of the {calamity}, {timeband_age}, still bears on how {settlement} lives.
-2. `[street]` {settlement} still lives with the legacy of the {calamity}, {timeband_age}.
+1. `[ledger]` The {calamity} is {timeband_age}, and its legacy still bears on how {settlement} lives.
+2. `[street]` {settlement} still lives with the legacy of the {calamity}, which is {timeband_age}.
 
 ---
 

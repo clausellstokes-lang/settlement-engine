@@ -67,8 +67,8 @@
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 296009,
-      "gzip": 37833,
+      "raw": 296067,
+      "gzip": 37843,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -811,6 +811,14 @@
       "toRaw": 185880,
       "gzipAfter": 26025,
       "reason": "+737 B raw over the committed 185143 (gzip level 9: 25938 -> 26025): DS-ECO-9 SECURE v3 (fed, but only just) declared off a year of stores (stores: < 12); two lines for the case (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE-4 item 3",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 296009,
+      "toRaw": 296067,
+      "gzipAfter": 37843,
+      "reason": "+58 B raw over the committed 296009 (gzip level 9: 37833 -> 37843): DS-GEN-16's eight legacy lines say the time band as a predicate ('The flood is years old'), not as a broken appositive ('the flood, years old,') (2026-11-13)"
     }
   ],
   "ceilingTransfersNewLeaves": [

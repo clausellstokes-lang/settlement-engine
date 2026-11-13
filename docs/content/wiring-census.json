@@ -37,8 +37,8 @@
     "syntheticTableFields": 174,
     "tiers": {
       "MISSING": 33,
-      "THIN": 613,
-      "COVERED": 243,
+      "THIN": 612,
+      "COVERED": 244,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -31850,7 +31850,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 2,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [
         "hist.legacyAnnotations"
@@ -70660,12 +70660,12 @@
       "count": "2 variant(s) · 1 grammar(s) · slots {calamity, settlement, timeband_age}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-GEN-16",
       "subject": "LEGACY-LINKED",
       "fields": [],
       "readingFunction": "legacyPoolKey",
-      "count": "2 variant(s) · 1 grammar(s) · slots {calamity, settlement, timeband_age}"
+      "count": "2 variant(s) · 2 grammar(s) · slots {calamity, settlement, timeband_age}"
     },
     {
       "tier": "THIN",
