@@ -2740,9 +2740,13 @@ margin *arm*. They are different fields on different rows and both are kept;
 
 **readiness `STRONG`** {crisis-scoped}
 1. `[visitor · crisis: any · guardPresence]` {settlement} reads as a defended place from the road in: the approaches are watched, the works are kept up, and none of it looks like it was thrown together.
-2. `[ledger · crisis: any]` What {settlement} can field and what {settlement} has built are both in good order; the town would take real effort to threaten and knows it.
+2. `[ledger · crisis: any · no threat · no crisis: wartime]` What {settlement} can field and what {settlement} has built are both in good order; the town would take real effort to threaten and knows it.
 3. `[street · no threat · crisis: any · no crisis: unrest]` The town does not spend much time thinking about being attacked: its defences are in good order, and its people know it.
 4. `[counterforce · no threat]` Nothing presses {settlement} at present: its defences would make any attack costly, so raiders and rivals look elsewhere.
+5. `[ledger · threat · crisis: any · no crisis: occupied · guardPresence]` The danger at {settlement} is real, and so is what the town has to meet it: its people under arms and its works are both in good order.
+6. `[street · threat · crisis: any · no crisis: occupied]` {settlement} is being tested now, and so far its defences are holding.
+7. `[street · crisis: wartime]` The war has made {settlement} think about being attacked, and what it sees when it looks is a town that would be hard to take.
+8. `[ledger · crisis: wartime · guardPresence]` With the war on, {settlement}'s people under arms and its works are both in good order, and the town means to keep them so.
 
 **readiness `ADEQUATE`** {colour}
 1. `[ledger]` {settlement} is covered against what it is likely to face, with little left over; two troubles at once would be too many.

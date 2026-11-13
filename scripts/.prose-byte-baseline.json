@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 259748,
-      "gzip": 35133,
+      "raw": 261385,
+      "gzip": 35314,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -747,6 +747,14 @@
       "toRaw": 259748,
       "gzipAfter": 35133,
       "reason": "+1653 B raw over the committed 258095 (gzip level 9: 34972 -> 35133): DS-DEF-2 neither walls nor force: four lines declared no watch (a watch on the card), four watch twins (the defence review M3, 2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE-3 M1",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 259748,
+      "toRaw": 261385,
+      "gzipAfter": 35314,
+      "reason": "+1637 B raw over the committed 259748 (gzip level 9: 35133 -> 35314): DS-DEF-1 readiness STRONG v2 declared off a threat and a war; two threat twins, two wartime twins (the defence review M1, 2026-11-13)"
     }
   ],
   "ceilingTransfersNewLeaves": [

@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2932,
+    "variants": 2936,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -138,7 +138,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
+      "variants": 8,
       "grammars": 2,
       "predicate": [],
       "branchReads": [],
@@ -172,10 +172,14 @@
       },
       "declares": [],
       "lineDeclares": {
-        "crisis: any": 3,
-        "guardPresence": 1,
+        "crisis: any": 5,
+        "crisis: wartime": 2,
+        "guardPresence": 3,
+        "no crisis: occupied": 2,
         "no crisis: unrest": 1,
-        "no threat": 2
+        "no crisis: wartime": 1,
+        "no threat": 3,
+        "threat": 2
       },
       "undeclared": 0,
       "crisisScoped": true
@@ -66235,7 +66239,7 @@
       "subject": "readiness STRONG",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "8 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
