@@ -721,3 +721,61 @@ The hand-back's order (C6 edits the buckets file again). The tip had moved by fi
 - **ONE IS THIS STEP'S AND OPEN, put to the chair (a stop):** `recordRegisterTotality.walker` A7's paired negative, "a REJECTED cross-entry candidate has become a total", on `defenseProfile.institutions.magicDef`. With the alchemist out of the list, the golden corpus's 68 multi-entry lists are all one pair (Mages' district and Academy of magic, baseChance sum 0.9), so the arm's evidence of two distinct sums is gone: the candidate is untested, not a total. **Recommend:** the arm counts distinct sums over distinct member sets and reports a candidate with one set as untested, as A4 does for keys. Not cured here (another lane's walker logic); not banked; declared.
 
 **Gates:** eslint 0 on the touched files; typecheck:domain:strict 0 (1,113 at its ceiling); typecheck:ratchet 0 (167 at its ceiling).
+
+## Seat 2: the pin census and the gates, step by step
+
+Each census is `suites.sh` (the generators, lint, pdf and display suites, 563 files) at the step's commit in a detached census worktree, its `FAIL` lines against `reds-base-8ef42a051.txt` (41 lines); local refs and config compared before and after each run (the only changes were this seat's own branch head and its own fetches). Each gate through `gate-tail.sh` at the step's commit.
+
+| Step | Census | eslint (touched files) | typecheck:domain:strict | typecheck:ratchet |
+|---|---|---|---|---|
+| C2 | 47 at the first cut: six new, each attributed and cured (two the merge's, four the step's); the cured files 128 of 128 at the pushed C2 | 0 | 0 (1,113 = ceiling) | 0 (167 = ceiling) |
+| C3 | 41, exactly the base's | 0 | 0 | 0 |
+| C4a | 41, exactly the base's | 0 | 0 | 0 |
+| C4b | 41, exactly the base's | 0 | 0 | 0 |
+| C5 | 41, exactly the base's | 0 | 0 | 0 |
+| C6 | 48: six inherited with the merge (red at the defence lane's tip fbc4a0080 itself), one this step's cured in the step (the defence walker), one this step's ruled and cured by its own commit (A7, 1dac1ca25) | 0 | 0 | 0 |
+
+**C6's stop, RULED (the chair's, vetoable by the owner), and cured in its own commit 1dac1ca25: A CHANGE TO ANOTHER LANE'S WALKER, authorised by the chair for this one purpose.** A7's paired negative counts distinct sums over distinct member sets; a candidate the corpus shows with fewer than two member sets is UNTESTED and named in `REJECTED_UNTESTED`, an exact, shrink-only list pinned at one (magicDef, with its cause); a named row with evidence again reds (it does at the merge below C6: 4 member sets). Plants, each run: equal sums over two sets red; distinct sums pass; one set named passes and unnamed reds; a second name reds; the list removed reds. **Owed, honestly:** the chair asked that C6 not be pushed red; C6 (83883baaa) had been pushed, with the red declared, before the ruling arrived, and a pushed commit is not rewritten, so the cure follows it as the next commit. **To give the candidate evidence again:** a second member set of multi-entry magicDef lists in the golden corpus's stride (a city or metropolis whose arcane houses differ from Mages' district and Academy of magic); the row then leaves the list.
+
+## 7. THE CUMULATIVE MOVE after C6, against 8ef42a051 (`move-CUMULATIVE.txt`)
+
+The branch's tip before C0 (c2eb027d5) holds the same `src/` as 8ef42a051, so there is one cumulative move. It includes C0 to C6 and the two merges of the defence lane (which moved no rating: M1 nothing, M2 the income and safety lines only).
+
+- **Readiness moves in 2,939 of 3,756** (1,512 up, 1,427 down), mean +0.03, from −25 to +10; **542 bands change.**
+
+| Tier | Births | Mean readiness before → after | Bands changed | Power structures re-drawn |
+|---|---|---|---|---|
+| thorp | 540 | 19.3 → 19.1 | 100 | 39 |
+| hamlet | 540 | 17.0 → 15.1 | 89 | 89 |
+| village | 620 | 15.5 → 15.0 | 32 | 32 |
+| town | 752 | 40.5 → 37.1 | 151 | 151 |
+| city | 752 | 71.3 → 73.8 | 89 | 89 |
+| metropolis | 552 | 77.7 → 81.7 | 81 | 81 |
+
+- Bands: Well-Defended → Fortress 135; Lightly Defended → Vulnerable 132; Vulnerable → Undefended 65; Defensible → Lightly Defended 63; Well-Defended → Defensible 44; Defensible → Well-Defended 34; Undefended → Vulnerable 24; and smaller rows (`move-CUMULATIVE.txt`).
+- **The five scores:** military 1,161 moved, 237 bands; beasts 2,096 (1,366 down), 524 bands (Weak → Critical 369); order 2,711 (1,547 up), 690 bands (Adequate → Strong 252); supply 1,342, 112 bands; magic 360 (338 down, through limit 1), 46 bands.
+- **481 power structures re-drawn, every one with a band move; 7 births gain or lose a power** (19 entries: The Independent Bloc out 2; Religious Authorities, The Devout Circle, The Martial Alliance, Noble Families, Noble Houses, The Landed Bloc, Arcane Orders, The Free Alliance, The Tower Alliance and The Shadow Compact in; The Shadow Compact, Thieves' Guild, The Enlightened, The Order of the Watch, The Holy Compact, Merchant Guilds, The Hidden Hand and The Commercial Circle out, one each). 44 legitimacy labels change.
+- **The AI prompt's threats** change in 308: "Civic stability at risk" lost 203 (cities' order rises over 50) and gained 52; "Economic fragility" gained 37; "Magical instability" gained 22.
+- **Magic against the page:** 7 made (cold-famine-town-77, cold-town-2, fresh5-infiltrated-town-0, fresh5-town-27 at C1; cold-town-25, cold-wartime-town-53, fresh5-town-48 at C6), none cured.
+- **Golden corpus:** 477 of 525 records move (the defence lane's income family among them); the defence profile in 273, readiness in 273, the band in 20, the powers in 20. Measured only; no door opened.
+- **The real C6 commit reproduces the measured C6 tree on all 3,756 records** (`FINAL` against `C6b`: 0 differ).
+
+**THE HIRED-ONLY RULE, re-counted at C6 (`r2scan2.mjs`):** of the 36 hired-only places, military above the same place with its tier's watch: **0**. A higher readiness band word than with a watch: **3** (7 at C1). And a correction of the first seat's probe, by name: `r2scan.mjs` read the place's keep from its current prosperity label (`keepOf`), which a crisis caps, while the stored profile reads the standing label (`keepOfRecord`). Counted both ways at C6, the count is 3 either way, though the towns differ by one: by the record's own keep cold-hamlet-56 (24 against 22), cold-hamlet-120 (40 against 37) and fresh6-hamlet-22 (24 against 23); by the capped keep cold-village-65 in fresh6-hamlet-22's place. cold-village-65 reads 17 Vulnerable as stored, 13 Vulnerable with a watch instead (the hand-back's 14 against 11 was the capped keep).
+
+## 8. THE EIGHT TOWNS for the owner
+
+In their own file, in plain words: `docs/chair/2026-11-13/UPKEEP-CAPACITY-EIGHT-TOWNS.md` (born by `eight.mjs` at 8ef42a051 and at the tip; the figures agree with the corpus runs at every step, `history.py`). Six of the eight keep their politics; **two are re-dealt** (Chalmal, cold-hamlet-123, when its band fell at C1; Ioannoakra, cold-wartime-town-75, the alchemist's town, when its band fell at C6). **No two comparable alchemist towns exist**: a shop is only ever a town's and a quarter a city's (0 of 3,756 otherwise), so the file shows the shop's town beside the same town with a quarter in its stead (the same reading: its sustaining is held to its small force) and a city with a quarter.
+
+## Seat 2: named for the chair (none built; each with its writer)
+
+1. **"held by the multiple garrisons"** (PDF and journal headline, 8 of 8 sampled metropolises after C2): true, but the article reads badly. `src/pdf/lib/headlines.js :: defenseHeadline` (`the ${name}`); it already printed it for any metropolis without a city watch. Recommend: the writer drops the article before a plural name.
+2. **The city watch as "professional military"** in `structuralValidator.js` (a generation rule) and among a city's forces in `threatDefensePolicy.js`: not defence homes; they repair nothing on these births. Left.
+3. **The posture selector's "nobody" lines beside a levy or a militia**: 3 of 30 after C3 (the known fault, cured on another lane).
+4. **The Beasts rows (DS-DEF-2, `dossierStateProse/defense.generated.js`)**: 9 of 20 walking places print no sentence under the row on the tab; the pool is keyed on the threat and the force, not the band, so 5 of 20 print "holding against the creatures" or "has answered it properly" beside a Critical band.
+5. **Clergy lines in places with no cleric** (20 of 20 shrine places, before C4b and after): "Medical Readiness: Clergy care / Clerical care" (`defenseDisplay.js :: deriveSupportingCapabilities`, reading `compound.inst.hasChurch`; held by another lane) and "Clergy provide basic wound care" (`threatAssessment.js`). Recommend: both read the house of clergy (or a priest in the roster), not any 'shrine' or 'church' in a name.
+6. **The food record's divine provision counts the walk to church**: `src/generators/economy/foodBalance.js :: hasDivineFood` reads 'parish church' as a substring ("divine provision covers 45", 5 of 20 shrine places, all with the walk). G3's class on another home. Recommend: the same fabric reading (`isFabricInstitution`) there, as its own declared move.
+7. **The Defense display's Arcane Support line against the stored profile** (G5's listing for the display's lane): 4 of the 223 alchemist-only births print "Present: Teleportation circle. Detection, wards, counterspell." with no arcane tradition in the profile: cold-town-221, cold-under_siege-city-16, cold-under_siege-town-56, fresh6-wartime-town-0. The alchemist itself prints the line in none.
+8. **The Magic tab's "Military role" against the Defense tab**: 14 of 20 alchemist-only places read "common" or "occasional" beside a Defense tab with no arcane defence. The role reads the magic envelope (the dial), not a house. For the Magic tab's holder.
+9. **"Magical instability" from a weaker magical defence** (+9 at C6, +22 cumulative): the threat reader's defect (the review's C-H1 class), as the first seat named.
+10. **The Scroll scribe** joins the count test's two-role list at C6 (a magic house, arcane force and magic presence, the two roles the law allows the magic houses): seen once the alchemist no longer opened the arcane part beside it. Declared, not a new double feed (its two parts feed different scores).
+11. **Corrections of the hand-back, by name:** the levy thorps' palisades were already manned (C3); the hired-only probe read the crisis-capped keep (section 7). And one of my own: in a scratch worktree I made and popped one `git stash` (refs/stash), against the checkout's rule; no ref remains, and the branch's refs and the local config were compared after every run.
