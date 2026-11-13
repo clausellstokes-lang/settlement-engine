@@ -647,14 +647,30 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
     /** @type {Map<string, Record<string, unknown>>} */
     const fullByKey = new Map();
     for (const npc of fullSource) fullByKey.set(galleryMemberKey(npc), npc);
+    /** @type {Set<string>} ids of the people this projection does not reveal and whose card carries no role */
+    const roleless = new Set();
     result.npcs = result.npcs
       .map(npc => {
         const key = galleryMemberKey(npc);
         const ov = overrides[key];
         const effReveal = ov && typeof ov.revealDm === 'boolean' ? ov.revealDm : full;
-        return effReveal ? (fullByKey.get(key) || npc) : publicCard(npc);
+        const out = effReveal ? (fullByKey.get(key) || npc) : publicCard(npc);
+        if (!effReveal && typeof out.id === 'string' && !('role' in out)) roleless.add(out.id);
+        return out;
       })
       .filter(npc => npc.name || npc.role);
+    // COHERENCE-VEIL-8 (N3): on a DM-full projection a tie's copy of an end's role follows that person's own card,
+    // as publicVeilPass does on the default one (the `from` end's npc1Role, the `to` end's npc2Role; master's ties
+    // name the ends npc1Id, npc2Id). SQL twin: migration 212 :: _gallery_veil_tie_roles.
+    if (full && roleless.size && Array.isArray(result.relationships)) {
+      result.relationships = result.relationships.map((tie) => {
+        if (!tie || typeof tie !== 'object' || Array.isArray(tie)) return tie;
+        const t = /** @type {Record<string, unknown>} */ ({ ...tie });
+        if (roleless.has(String(t.from ?? t.npc1Id))) delete t.npc1Role;
+        if (roleless.has(String(t.to ?? t.npc2Id))) delete t.npc2Role;
+        return t;
+      });
+    }
   }
 
   // ── THE CIVILITY VEIL (DESIGN_PROFILE_IMAGE.md §9, the VEIL mode) ───────────

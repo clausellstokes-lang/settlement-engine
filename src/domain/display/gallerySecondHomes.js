@@ -111,8 +111,12 @@ function foldedHolds(t, f, opens) {
   return hay.includes(`_${f}_`);
 }
 
-/** @param {unknown} text @param {string[]} pieces @returns {boolean} */
-const embedsAny = (text, pieces) => typeof text === 'string' && pieces.some(p => text.includes(p));
+/**
+ * The text holds one of the pieces, in any case (COHERENCE-VEIL-8: a composer that lower-cases the first letter of
+ * what it embeds, legacyGenerator.js :: annotationBody, still embeds it). SQL twin: _gallery_veil_embeds.
+ * @param {unknown} text @param {string[]} pieces @returns {boolean}
+ */
+const embedsAny = (text, pieces) => typeof text === 'string' && pieces.some(p => text.toLowerCase().includes(p.toLowerCase()));
 
 /**
  * The impression on a person's face loses a sentence of the appearance its eye shuts (whole). Called on a
@@ -157,7 +161,16 @@ export function secondHomeSources(s, eyeShut, cardsOf, idOf) {
     if (eyeShut('institution', id, 'function')) h.fn = true;
     houses.set(name, h);
   }
-  return { ties, tensionPieces, houses };
+  // COHERENCE-VEIL-8 (T1): the pieces of every shut string of an event (its description, lasting effects, hooks)
+  /** @type {string[]} */
+  const eventPieces = [];
+  for (const card of cardsOf(s, 'event')) {
+    const id = idOf('event', card);
+    if (eyeShut('event', id, 'description')) secondHomePieces([card.description, card.desc], eventPieces);
+    if (eyeShut('event', id, 'lastingEffects')) secondHomePieces(card.lastingEffects, eventPieces);
+    if (eyeShut('event', id, 'hooks')) secondHomePieces(card.plotHooks, eventPieces);
+  }
+  return { ties, tensionPieces, houses, eventPieces };
 }
 
 /** @param {TieSource} t @param {string[]} out @returns {string[]} */
@@ -194,6 +207,16 @@ export function withholdSecondHomes(s, src, gone, openNames, houseFields) {
   }
   const hist = recAt(s, 'history');
   if (hist && embedsAny(hist.siegeNarrative, src.tensionPieces)) delete hist.siegeNarrative;
+  // T1: the legacy annotation embeds its event's first lasting effect, first letter lower-cased; a shut string of an
+  // event inside it takes the annotation (the entry's event name, type and years stay)
+  if (hist && Array.isArray(hist.legacyAnnotations) && src.eventPieces.length) {
+    hist.legacyAnnotations = hist.legacyAnnotations.map((a) => {
+      if (!isRec(a) || !embedsAny(a.annotation, src.eventPieces)) return a;
+      const next = { ...a };
+      delete next.annotation;
+      return next;
+    });
+  }
 
   const def = recAt(recAt(s, 'defenseProfile') || {}, 'institutions');
   if (def) {
