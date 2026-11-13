@@ -53,7 +53,8 @@ describe('the services declare in place (CENSUS-4c unit 5)', () => {
   it('each definition carries exactly the ledger\'s declaration (4b\'s two Mill rows included)', () => {
     // W2-FIX-DATA (2026-11-13, the REVIEW-W2B cold list): the mill run, the morning produce and the carriers' haulage exclude a siege, each with its twin; the mill run has no ledger row (49 → 51)
     // W2-FIX-DATA-3 (2026-11-13, REVIEW-W2-FIX-DATA F3): the open-cast menu's raw extraction excludes town size and above, where every Mine works a shaft, with its twin (51 → 52)
-    expect(rows.filter(declares)).toHaveLength(52);
+    // W2-FIX-DATA-4 (2026-11-13, REVIEW-W2A-3 #507 #508): the river boatyard's and the river ferry's four services that name the river need it, each with its twin, where a coastal port with no river holds the houses (52 → 56)
+    expect(rows.filter(declares)).toHaveLength(56);
     for (const r of rows) {
       const [inst, svc] = r.id.split('|');
       const def = /** @type {any} */ (INSTITUTION_SERVICES)[inst][svc];

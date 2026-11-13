@@ -54001,7 +54001,7 @@
       "name": "INSTITUTION_DESC_VARIANTS",
       "drawKind": "H",
       "drawSite": "assembleInstitutions.js:65 shipFreeDesc + :1004 kernel/proseHash.js pickVariant over [catalogDesc, ...variants]",
-      "lines": 1079,
+      "lines": 1095,
       "declares": [],
       "lineDeclares": {
         "coast": 5,
@@ -54024,6 +54024,7 @@
         "no institution: docks": 6,
         "no institution: tavern": 4,
         "no navigable": 6,
+        "no river": 16,
         "no terrain: forest": 10,
         "no walls": 1,
         "river": 24,
@@ -54043,7 +54044,7 @@
       "name": "INSTITUTION_SERVICES",
       "drawKind": "R",
       "drawSite": "services/institutionServices.js:69/203 one _rng()<p roll per eligible definition (A-printed at serviceRollMaterializatio",
-      "lines": 996,
+      "lines": 1000,
       "declares": [],
       "lineDeclares": {
         "coast": 2,
@@ -54058,10 +54059,11 @@
         "militia": 3,
         "navigable": 3,
         "no crisis: under_siege": 3,
+        "no river": 4,
         "no tier: ≥ town": 1,
         "no walls": 2,
         "organised crime": 1,
-        "river": 2,
+        "river": 6,
         "terrain: forest": 1,
         "tier: ≤ village": 2,
         "tier: ≥ city": 3,
@@ -54069,7 +54071,7 @@
         "walls": 4,
         "watch": 6
       },
-      "undeclared": 935,
+      "undeclared": 931,
       "crisisScoped": false
     },
     {

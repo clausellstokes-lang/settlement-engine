@@ -2022,6 +2022,31 @@ export const DESC_VARIANT_SIBLINGS = Object.freeze({
     Object.freeze({ text: "The market wardens keep a roofed fish market where fresh catch and salted barrels are weighed out and inspected before sale.", needs: Object.freeze(["navigable","market"]) }),
     Object.freeze({ text: "The market wardens keep a roofed fish market where carted barrels of salt fish are weighed out and inspected before sale.", twinOf: "The market wardens keep a roofed fish market where fresh catch and salted barrels are weighed out and inspected before sale.", needs: Object.freeze(["market"]), excludes: Object.freeze(["navigable"]) }),
   ]),
+  // W2-FIX-DATA-4 (2026-11-13; REVIEW-W2A-3 #502, #508): the river's boatyard and ferry stand in coastal ports with no river (the catalogue admits them by a port route); each text that names the river declares it, and its twin speaks of the water. VETOABLE wording (the owner's).
+  "Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats. Specialist knowledge of river construction: shallow draft, flexible hull, replaceable parts.": Object.freeze([
+    Object.freeze({ text: "Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats. Specialist knowledge of river construction: shallow draft, flexible hull, replaceable parts.", needs: Object.freeze(["river"]) }),
+    Object.freeze({ text: "Builds and repairs flat-bottomed craft for shallow water: punts, ferries, fishing boats. Specialist knowledge: shallow draft, flexible hull, replaceable parts.", twinOf: "Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats. Specialist knowledge of river construction: shallow draft, flexible hull, replaceable parts.", excludes: Object.freeze(["river"]) }),
+  ]),
+  "Builds and mends flat-bottomed river craft: barges, punts, ferries, fishing boats. The work turns on river-boat knowledge: shallow draft, a hull that flexes, parts made to be replaced.": Object.freeze([
+    Object.freeze({ text: "Builds and mends flat-bottomed river craft: barges, punts, ferries, fishing boats. The work turns on river-boat knowledge: shallow draft, a hull that flexes, parts made to be replaced.", needs: Object.freeze(["river"]) }),
+    Object.freeze({ text: "Builds and mends flat-bottomed boats for shallow water: punts, ferries, fishing craft. The work turns on a shallow draft, a hull that flexes, and parts made to be replaced.", twinOf: "Builds and mends flat-bottomed river craft: barges, punts, ferries, fishing boats. The work turns on river-boat knowledge: shallow draft, a hull that flexes, parts made to be replaced.", excludes: Object.freeze(["river"]) }),
+  ]),
+  "River boats, all flat-bottomed, made and repaired here: barges, punts, ferries, and fishing craft. It takes a specialist's hand. Shallow in the draft, supple in the hull, and built so parts can be swapped out.": Object.freeze([
+    Object.freeze({ text: "River boats, all flat-bottomed, made and repaired here: barges, punts, ferries, and fishing craft. It takes a specialist's hand. Shallow in the draft, supple in the hull, and built so parts can be swapped out.", needs: Object.freeze(["river"]) }),
+    Object.freeze({ text: "Shallow-water boats, all flat-bottomed, made and repaired here: punts, ferries, and fishing craft. It takes a specialist's hand. Shallow in the draft, supple in the hull, and built so parts can be swapped out.", twinOf: "River boats, all flat-bottomed, made and repaired here: barges, punts, ferries, and fishing craft. It takes a specialist's hand. Shallow in the draft, supple in the hull, and built so parts can be swapped out.", excludes: Object.freeze(["river"]) }),
+  ]),
+  "A flat-bottomed ferry crossing the river. The ferryman's family has held the crossing rights for generations, and every crossing pays the family its fare.": Object.freeze([
+    Object.freeze({ text: "A flat-bottomed ferry crossing the river. The ferryman's family has held the crossing rights for generations, and every crossing pays the family its fare.", needs: Object.freeze(["river"]) }),
+    Object.freeze({ text: "A flat-bottomed ferry across the water. The ferryman's family has held the crossing rights for generations, and every crossing pays the family its fare.", twinOf: "A flat-bottomed ferry crossing the river. The ferryman's family has held the crossing rights for generations, and every crossing pays the family its fare.", excludes: Object.freeze(["river"]) }),
+  ]),
+  "A flat-bottomed ferry over the river, the crossing rights held in one family for generations. Carts, beasts and walkers wait their turn on the bank.": Object.freeze([
+    Object.freeze({ text: "A flat-bottomed ferry over the river, the crossing rights held in one family for generations. Carts, beasts and walkers wait their turn on the bank.", needs: Object.freeze(["river"]) }),
+    Object.freeze({ text: "A flat-bottomed ferry over the water, the crossing rights held in one family for generations. Carts, beasts and walkers wait their turn at the landing.", twinOf: "A flat-bottomed ferry over the river, the crossing rights held in one family for generations. Carts, beasts and walkers wait their turn on the bank.", excludes: Object.freeze(["river"]) }),
+  ]),
+  "The river is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.": Object.freeze([
+    Object.freeze({ text: "The river is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.", needs: Object.freeze(["river"]) }),
+    Object.freeze({ text: "The water is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.", twinOf: "The river is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.", excludes: Object.freeze(["river"]) }),
+  ]),
 });
 
 /**

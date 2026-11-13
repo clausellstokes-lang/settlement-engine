@@ -616,8 +616,8 @@ export const INSTITUTION_SERVICES = {
   },
 
   "River boatyard": {
-    "Barge construction": { on: true, p: 1.0, desc: "Flat-bottomed cargo barges for river transport. Simpler than sea vessels." },
-    "Boat repair": { on: true, p: 0.9, desc: "Hull patching, oar replacement, caulking. River traffic takes constant punishment." },
+    "Barge construction": { on: true, p: 1.0, desc: "Flat-bottomed cargo barges for river transport. Simpler than sea vessels.", needs: ["river"] },
+    "Boat repair": { on: true, p: 0.9, desc: "Hull patching, oar replacement, caulking. River traffic takes constant punishment.", needs: ["river"] },
     "Ferry service": { on: false, p: 0.6, desc: "Regular crossing service for foot traffic and small goods." }
   },
 
@@ -1256,8 +1256,8 @@ export const INSTITUTION_SERVICES = {
     "Horseshoeing": { on: true, p: 0.8, desc: "Essential service for working horses." }
   },
   "River ferry": {
-    "River crossing": { on: true,  p: 1.0, desc: "Transport foot travelers and small goods across the river." },
-    "Small cargo": { on: false, p: 0.6, desc: "Move small amounts of cargo across the river." }
+    "River crossing": { on: true,  p: 1.0, desc: "Transport foot travelers and small goods across the river.", needs: ["river"] },
+    "Small cargo": { on: false, p: 0.6, desc: "Move small amounts of cargo across the river.", needs: ["river"] }
   },
   "Royal seat": {
     "State governance": { on: true,  p: 1.0, desc: "Centre of royal administration and decision-making." },
@@ -1809,5 +1809,22 @@ export const SERVICE_DESC_SIBLINGS = Object.freeze({
   "Surface-level ore extraction. Lower yield than shaft mining but cheaper to operate.": Object.freeze([
     Object.freeze({ text: "Surface-level ore extraction. Lower yield than shaft mining but cheaper to operate.", excludes: Object.freeze(['tier: ≥ town']) }),
     Object.freeze({ text: "Ore cut underground by the crews and brought out by cart for sorting.", twinOf: "Surface-level ore extraction. Lower yield than shaft mining but cheaper to operate.", needs: Object.freeze(['tier: ≥ town']) }),
+  ]),
+  // W2-FIX-DATA-4 (2026-11-13; REVIEW-W2A-3 #507, #508): the same houses' services that name the river. VETOABLE wording (the owner's).
+  "Flat-bottomed cargo barges for river transport. Simpler than sea vessels.": Object.freeze([
+    Object.freeze({ text: "Flat-bottomed cargo barges for river transport. Simpler than sea vessels.", needs: Object.freeze(["river"]) }),
+    Object.freeze({ text: "Flat-bottomed cargo boats for shallow water. Simpler than sea vessels.", twinOf: "Flat-bottomed cargo barges for river transport. Simpler than sea vessels.", excludes: Object.freeze(["river"]) }),
+  ]),
+  "Hull patching, oar replacement, caulking. River traffic takes constant punishment.": Object.freeze([
+    Object.freeze({ text: "Hull patching, oar replacement, caulking. River traffic takes constant punishment.", needs: Object.freeze(["river"]) }),
+    Object.freeze({ text: "Hull patching, oar replacement, caulking. Small boats in the shallows take constant punishment.", twinOf: "Hull patching, oar replacement, caulking. River traffic takes constant punishment.", excludes: Object.freeze(["river"]) }),
+  ]),
+  "Transport foot travelers and small goods across the river.": Object.freeze([
+    Object.freeze({ text: "Transport foot travelers and small goods across the river.", needs: Object.freeze(["river"]) }),
+    Object.freeze({ text: "Transport foot travelers and small goods across the water.", twinOf: "Transport foot travelers and small goods across the river.", excludes: Object.freeze(["river"]) }),
+  ]),
+  "Move small amounts of cargo across the river.": Object.freeze([
+    Object.freeze({ text: "Move small amounts of cargo across the river.", needs: Object.freeze(["river"]) }),
+    Object.freeze({ text: "Move small amounts of cargo across the water.", twinOf: "Move small amounts of cargo across the river.", excludes: Object.freeze(["river"]) }),
   ]),
 });
