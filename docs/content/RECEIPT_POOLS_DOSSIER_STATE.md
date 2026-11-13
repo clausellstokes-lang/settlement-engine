@@ -3719,7 +3719,7 @@ relied on by nothing.
 **`magicDependency` false**
 1. `[ledger · colour]` Nothing structural at {settlement} depends on arcane work. What the town makes it makes with hands and ground, and would go on making without a practitioner in it.
 2. `[counterforce · magic]` There is magic at {settlement} and the town does not rest on it. Losing every practitioner here would be a loss and not a collapse.
-3. `[street · colour]` The town would go on if the arcane went away, more slowly and less comfortably and go on.
+3. `[street · colour]` The town would go on if the arcane went away, more slowly and less comfortably.
 
 **`magicDependency` false, availability absent** {colour}
 1. `[ledger]` No one works magic at {settlement}, and nothing in the town depends on it.

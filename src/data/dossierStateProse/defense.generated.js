@@ -7140,7 +7140,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The town would go on if the arcane went away, more slowly and less comfortably and go on.",
+          "text": "The town would go on if the arcane went away, more slowly and less comfortably.",
           "slots": [],
           "vid": 3
         }
