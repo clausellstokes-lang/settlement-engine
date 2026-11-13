@@ -115,7 +115,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     foodways: [
       'Bread grains, pulses, garden produce, oil or rendered fats, wine, and preserved fish form the staple pattern.',
-      'Public ovens, neighborhood vendors, and shared dining customs make food distribution visibly civic.',
+      { text: 'Public ovens, market vendors, and shared dining customs make food distribution visibly civic.', needs: ['market'] }, // W2-FIX-DATA-HISTORY item B (CENSUS-2 kind c): the vendors are the market's (domain/foodways.js :: MARKET_WORDS), so a place with none, and the neighbourhoods a thorp lacks, never read it; was "neighborhood vendors"
     ],
     sacredLife: [
       { text: 'Shrines, processions, confraternities, and formal priesthoods share the public religious calendar.', needs: ['institution: temple'] },
@@ -158,7 +158,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     foodways: [
       'Oats or barley, dairy, cattle products, woodland foods, fish, and seasonal preserves shape the table.',
-      'Herding and mixed farming produce a strongly seasonal food calendar.',
+      'Herds and field grain set a strongly seasonal food calendar.', // W2-FIX-DATA-HISTORY item B (ww-10, ww-345): the herds and the grain in the foodways reader's own source words (domain/foodways.js :: SOURCE_WORDS), so it stands only where both feed the place; was "Herding and mixed farming produce ..."
     ],
     sacredLife: [
       'Sacred enclosures, wells, groves, learned keepers, and household observances form a layered ritual landscape.',
@@ -330,7 +330,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     foodways: [
       'Rice or millet, wheat foods, soy or pulse products, vegetables, tea, fish, and preserved condiments vary by ecology.',
-      'Shared waterworks, fermentation, and intensive garden production structure urban food supply.',
+      'Fermentation, careful use of water, and intensive garden plots shape the food supply.', // W2-FIX-DATA-HISTORY item B (CENSUS-2 kinds a and c): no waterworks and no town presumed; was "Shared waterworks, fermentation, and intensive garden production structure urban food supply."
     ],
     sacredLife: [
       'Temple, shrine, household, ancestor, philosophical, and state observances coexist without a single institutional center.',

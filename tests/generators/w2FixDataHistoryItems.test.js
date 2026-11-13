@@ -23,6 +23,11 @@
  * wards, quarters, squares, market streets, civic centre or agora declare their size, each with a small-place twin
  * (`cultureProfiles.js :: CULTURE_LINE_SIBLINGS`), resolved at the materializer (which answers the tier).
  *
+ * ITEM B (ROUND-3-CUT-INCREMENT ww-10, ww-345; CENSUS-2 kinds a and c on `cultureProfiles.js :: foodways`): the foodways
+ * reader (`domain/foodways.js :: composeFoodwaysLine`) keeps a culture sentence only where it names no food source the
+ * place lacks and no market where none stands; three sentences said what it could not see (herding and farming, the
+ * neighbourhood vendors, an urban supply from shared waterworks). They now speak in its own words, or name nothing false.
+ *
  * THIS FILE REDS WHEN: a cured line prints again in its guard town, or a declaration is dropped or turned.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
@@ -160,3 +165,24 @@ describe('W2-FIX-DATA-HISTORY item D: a culture detail of a larger place does no
     }, 60_000);
   }
 });
+
+describe('W2-FIX-DATA-HISTORY item B: the culture\'s foodways sentence only where the place\'s own table makes it true', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const foodways = (/** @type {any} */ s) => String(s.economicState?.foodSecurity?.foodRecord?.foodwaysLine || '');
+  for (const [seed, words, why] of /** @type {const} */ ([
+    ['rww-thorp-calm-1', /Herding and mixed farming|Herds and field grain/, 'a thorp that eats game (ww-10)'],
+    ['rww-thorp-monster_pressure-1', /neighborhood vendors|Public ovens/, 'a thorp with no market and no neighbourhoods'],
+    ['rww-hamlet-succession_void-1', /urban food supply|waterworks/, 'a hamlet of 31'],
+  ])) {
+    it(`${seed}: ${why} reads no such sentence, and keeps a foodways line`, () => {
+      const s = born(seed);
+      expect(foodways(s)).not.toMatch(words);
+      expect(foodways(s).length).toBeGreaterThan(0);
+    }, 60_000);
+  }
+  it('the herds and the grain are named in the reader\'s own source words', async () => {
+    const { sourcesNamedIn } = await import('../../src/domain/foodways.js');
+    expect(sourcesNamedIn('Herds and field grain set a strongly seasonal food calendar.').sort()).toEqual(['grain', 'livestock']);
+  });
+});
+
