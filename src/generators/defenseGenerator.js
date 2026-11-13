@@ -45,6 +45,7 @@ import { readinessBandOf } from '../data/bandLadders.js';
 import { deriveMagicReliance } from '../domain/magicReliance.js';
 import { keepOf, keepOfRecord, fundedGate } from '../domain/facts/keep.js';
 import { DEFENCE_TUNING as W, DEFENCE_WORDS, WATCH_IN_STEAD } from '../data/defenceWeights.js';
+import { houseRungsOf, jobRungAtTier } from '../domain/institutions/houseScale.js';
 
 // ─── getDefenseInstitutions ───────────────────────────────────────────────────
 /**
@@ -67,6 +68,26 @@ const TOUCHES = Object.freeze({ sup: 'SUSTAINS', mil: 'STANDS', int: 'STANDS', m
 const ARMED = new Set(['garrison', 'militia', 'watch', 'company', 'charter', 'households', 'wardens']);
 /** The small places (thorp, hamlet, village): the tiers the community's own defence is written for. */
 const SMALL = W.community.arms;
+
+/**
+ * THE PARTS A HOUSE'S SCALE REACHES (UPKEEP-CAPACITY C1, the chair's ruling B), each with the opener it is read by
+ * below, asked of one house alone: its flags and its tradition names. Walls keep their kind, arcane its own tower
+ * and guild rows; the community rows, the crisis reliefs, the stores, the purse, the will and the ground take none.
+ * @type {Readonly<Record<string, (inst: any, names: Readonly<Record<string, boolean>>) => boolean>>}
+ */
+const SCALED_PARTS = Object.freeze({
+  garrison: (i) => i.hasGarrison, militia: (i) => i.hasMilitia, watch: (i) => i.hasWatch, court: (i) => i.hasCourtSystem,
+  prison: (i) => i.hasPrison, wardens: (_, n) => n.wardens, company: (i) => i.hasMercenary, charter: (i) => i.hasCharterHall,
+  clergy: (_, n) => n.divine, druids: (_, n) => n.druid, market: (i) => i.hasMarket, hospital: (i) => i.hasHospital,
+  alchemists: (_, n) => n.alchemy,
+});
+/** The scaled parts one house opens, alone (the one `jobsOf` the house-scale reader is handed). @param {unknown} house */
+const scaledPartsOfHouse = (house) => {
+  const one = [house];
+  const { inst } = getInstFlags({}, one);
+  const names = defenseTraditionNamesOf(one);
+  return Object.keys(SCALED_PARTS).filter((id) => SCALED_PARTS[id](inst, names));
+};
 
 /** The months laid by → supply points, on diminishing returns (0..max). @param {number} months */
 const storesPointsOf = (months) => {
@@ -247,11 +268,29 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
 
   /** @type {any[]} */
   const parts = [];
-  /** @param {Record<string, number>} dims */
-  const clean = (dims) => Object.fromEntries(Object.entries(dims).filter(([, v]) => v));
+  // A HOUSE'S SCALE (UPKEEP-CAPACITY C1, the chair's ruling B): a scaled part's weights × its greatest house's factor,
+  // `least + (greatest - least) × (rung - 1) / (of - 1)` on that house's own ladder (a one-rung ladder 1), read from
+  // the catalogue's ladder by `houseScale.js :: houseRungsOf`. Read once, when a scaled part is first added.
+  /** @type {Record<string, Array<{ rung: number, of: number }>> | null} */
+  let rungs = null;
+  /** @param {string} id @returns {number} */
+  const scaleOf = (id) => {
+    if (!Object.hasOwn(SCALED_PARTS, id)) return 1;
+    rungs = rungs || houseRungsOf(institutions, scaledPartsOfHouse);
+    const S = W.houseScale;
+    // R2's counterfactual watch (a hired-only place with a watch in its stead) is the watch its own tier's ladder
+    // writes: a village's Village watch, a town's Town watch, a city's Professional city watch (the chair's ruling).
+    const on = instead && id === 'watch' ? [jobRungAtTier(id, tier, scaledPartsOfHouse)] : (rungs[id] || []);
+    return on.length ? Math.max(...on.map(({ rung, of }) => (of > 1 ? S.least + (S.greatest - S.least) * (rung - 1) / (of - 1) : 1))) : 1;
+  };
+  /** @param {Record<string, number>} dims @param {string} [id] the part, for its house's scale */
+  const clean = (dims, id) => {
+    const f = id ? scaleOf(id) : 1;
+    return Object.fromEntries(Object.entries(dims).filter(([, v]) => v).map(([d, v]) => [d, v * f]));
+  };
   /** A part kept at a share of its full points. @param {string} group @param {string} id @param {any} dims */
   const add = (group, id, dims, share = 1, extra = {}) => {
-    const raw = clean(dims);
+    const raw = clean(dims, id);
     if (!Object.keys(raw).length) return;
     parts.push({ group, id, raw, dims: Object.fromEntries(Object.entries(raw).map(([d, v]) => [d, v * share])), ...extra });
   };
@@ -259,7 +298,7 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
   const F = (floor) => fundedGate(floor, keep);
   /** A paid part: each score kept at its funded floor. @param {string} group @param {string} id @param {any} dims */
   const paid = (group, id, dims) => {
-    const raw = clean(dims);
+    const raw = clean(dims, id);
     parts.push({ group, id, raw, dims: Object.fromEntries(Object.entries(raw).map(([d, v]) => [d, v * F(W.floors[d])])) });
   };
   const A = W.arcane;

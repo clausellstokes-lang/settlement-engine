@@ -3053,6 +3053,8 @@
         "garrison.int": "points",
         "garrison.mil": "points",
         "garrison.mon": "points",
+        "houseScale.greatest": "multiplier",
+        "houseScale.least": "multiplier",
         "hospital.mon": "points",
         "hospital.sup": "points",
         "market.sup": "points",

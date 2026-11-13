@@ -102,6 +102,26 @@ describe('a hired force stands in for a standing one, to a lesser degree', () =>
       expect(hired, `${seed}: hired-only ${hired} against a watch's ${watch}`).toBeLessThanOrEqual(watch);
     }), 'every hired-only birth of the capacity corpus is at or under its watch');
   }, 240000);
+
+  // THE COUNTERFACTUAL WATCH IS THE PLACE'S OWN TIER'S (UPKEEP-CAPACITY C1, the chair's ruling): a watch counts by its
+  // rung (Village watch 0.8, Town watch 1, Professional city watch 1.2), so "the same place with a watch in its stead"
+  // is the watch the catalogue writes at its tier; a thorp and a hamlet, where none is written, the least. Pinned at
+  // every tier on an edited place (its standing forces out, a hired hall in), where it held only by accident before.
+  const TIER_WATCH = { thorp: 'Village watch', hamlet: 'Village watch', village: 'Village watch', town: 'Town watch', city: 'Professional city watch', metropolis: 'Professional city watch' };
+  for (const tier of ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']) {
+    test(`at every tier: an edited hired-only ${tier} reads no higher than the same place with its tier's watch instead`, () => {
+      const s = born(`cold-${tier}-0`);
+      const standing = (/** @type {any} */ i) => { const f = forcesOf({ config: s.config, institutions: [i] }); return f.hasGarrison || f.hasWatch || f.hasMilitia; };
+      const kept = s.institutions.filter((/** @type {any} */ i) => !standing(i));
+      const hiredPlace = { ...s, institutions: kept.some((/** @type {any} */ i) => HIRED.test(i.name)) ? kept : [...kept, { name: "Adventurers' charter hall", category: 'Adventuring' }] };
+      const home = forcesOf(hiredPlace);
+      expect(home.hasCharterHall || home.hasMercenary, 'anchored: a hired force').toBe(true);
+      expect(home.hasGarrison || home.hasWatch || home.hasMilitia, 'anchored: no standing force').toBe(false);
+      const watchPlace = { ...hiredPlace, institutions: [...hiredPlace.institutions.filter((/** @type {any} */ i) => !HIRED.test(i.name)), { name: TIER_WATCH[tier], category: 'Defense' }] };
+      const k = keepOf(s.economicState.prosperity);
+      expect(generateDefenseProfile(hiredPlace, k).scores.military).toBeLessThanOrEqual(generateDefenseProfile(watchPlace, k).scores.military);
+    });
+  }
 });
 
 /**
