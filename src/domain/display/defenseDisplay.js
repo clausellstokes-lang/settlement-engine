@@ -325,6 +325,7 @@ export function deriveSupportingCapabilities(settlement) {
   // The one set of defence facts (lane DEFENSE): a hospital only where one stands, and a
   // healer named as a healer.
   const facts = defenseFactsOf(r);
+  const court = courtOnRoster(r);
 
   const caps = [
     {
@@ -399,10 +400,11 @@ export function deriveSupportingCapabilities(settlement) {
         : 'No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.',
     },
     {
+      // W2-C-LEAVES-SIDE (the chair's #575): the court is read off the live roster (`courtOnRoster`, below), not the flag.
       label: 'Legal Infrastructure',
-      status: f.hasCourtSystem && f.hasPrison ? 'Court + Prison' : f.hasCourtSystem ? 'Court only' : f.hasPrison ? 'Prison only' : 'None',
-      color: f.hasCourtSystem && f.hasPrison ? '#1a3a5a' : f.hasCourtSystem ? '#3a5a7a' : f.hasPrison ? '#7a5a3a' : '#9c8068', score: null,
-      note: f.hasCourtSystem && f.hasPrison ? 'Full enforcement chain. Arrest, prosecute, detain.' : f.hasCourtSystem ? 'Courts without detention. Fines and exile only.' : f.hasPrison ? 'Detention without process. Arbitrary enforcement.' : 'No deterrence beyond force.',
+      status: court && f.hasPrison ? 'Court + Prison' : court ? 'Court only' : f.hasPrison ? 'Prison only' : 'None',
+      color: court && f.hasPrison ? '#1a3a5a' : court ? '#3a5a7a' : f.hasPrison ? '#7a5a3a' : '#9c8068', score: null,
+      note: court && f.hasPrison ? 'Full enforcement chain. Arrest, prosecute, detain.' : court ? 'Courts without detention. Fines and exile only.' : f.hasPrison ? 'Detention without process. Arbitrary enforcement.' : 'No deterrence beyond force.',
     },
     {
       label: 'Medical Readiness',
@@ -795,3 +797,39 @@ function navalRowStandsOn(settlement) {
 // holds a governing arcane power or a named mage, read in the magic fact's home (`facts/magic.js :: recordNamesAMage`).
 // Record 394 stands for "Present". Measured on the census's 720 at 408c2e30c: 13 rows out.
 import { recordNamesAMage as arcaneNamedHere } from '../facts/magic.js';
+
+// ─── W2-C-LEAVES-SIDE (the chair's #575): THE LEGAL ROW NAMES A COURT ONLY WHERE A HOUSE HOLDS ONE (at the end of the file) ───
+import { liveInstitutions } from '../institutions/institutionRoster.js';
+
+/** A house that is a court by its name: the courthouse, the court buildings. */
+const COURT_HOUSE = /courthouse|court buildings/i;
+/**
+ * The catalogue's court services (`data/institutionServices.js`): a hall, a council or an administration holds a court
+ * only where the town drew one of these for it ("Dispute adjudication: hears civil pleas in the town court", "Dispute
+ * arbitration … before a magistrate", "Appeals court", "Courts and adjudication", the courthouse's own rows).
+ */
+const COURT_SERVICES = new Set(['Civil disputes', 'Criminal trials', 'Civil litigation', 'Criminal proceedings', 'Appeals',
+  'Dispute arbitration', 'Appeals court', 'Dispute adjudication', 'Courts and adjudication', 'Legal appeals', 'Civic law enforcement']);
+
+/**
+ * WHETHER A HOUSE ON THE LIVE ROSTER HOLDS A COURT (W2-C-LEAVES-SIDE, 2026-11-13; the chair's ruling on the cut's #575:
+ * "Legal Infrastructure · Court only" in a town with no courthouse and no prison on its roster). The row read the flag
+ * `compound.inst.hasCourtSystem` (`defenseFacts.js :: hasCourt`, a NAME test that takes every "Town hall" for a court);
+ * the roster governs the page: a courthouse or court buildings stand, or a live house drew a court service
+ * (`availableServices`, the services the Services tab prints for that house). Where the flag and the roster disagree
+ * the record's disagreement is NAMED: on the census's 720 at 408c2e30c, 37 towns (29 "Court only" → "None", 8 "Court +
+ * Prison" → "Prison only"), each a Town hall whose drawn services are permits and taxes; no town the other way.
+ * @param {DefenseDisplaySettlement} settlement
+ * @returns {boolean}
+ */
+function courtOnRoster(settlement) {
+  const live = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (/** @type {unknown} */ (settlement)))
+    .map((i) => String(/** @type {{ name?: unknown } | null} */ (i)?.name ?? '')).filter(Boolean);
+  if (live.some((n) => COURT_HOUSE.test(n))) return true;
+  const drawn = /** @type {{ availableServices?: unknown }} */ (settlement)?.availableServices;
+  const rows = drawn && typeof drawn === 'object' ? Object.values(drawn).flat() : [];
+  return rows.some((row) => {
+    const sv = /** @type {{ name?: unknown, institution?: unknown } | null} */ (row);
+    return typeof sv?.name === 'string' && COURT_SERVICES.has(sv.name) && live.includes(String(sv?.institution ?? ''));
+  });
+}
