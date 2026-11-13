@@ -716,7 +716,7 @@ export const INSTITUTION_SERVICES = {
     "Dice games": { on: false, p: 0.5, desc: "Informal gambling. Stakes are low, disputes are loud." }
   },
   "Annual fair": {
-    "Seasonal trading": { on: true,  p: 1.0, desc: "Once-a-year market drawing merchants from across the region." },
+    "Seasonal trading": { on: true,  p: 1.0, desc: "Once-a-year market drawing merchants from across the region.", excludes: ["crisis: under_siege"] }, // W2-FIX-DATA-5 (ww-494): its twin under a siege, SERVICE_DESC_SIBLINGS
     "Livestock auction": { on: true, p: 0.9, desc: "Major livestock sales. Breeding stock, draft animals, slaughter cattle." },
     "Entertainment": { on: true, p: 0.8, desc: "Performers, contests, games, and spectacle. The social event of the year." },
     "Exotic goods": { on: false, p: 0.6, desc: "Merchants bring unusual imports unavailable at regular markets." },
@@ -1800,6 +1800,12 @@ export const SERVICE_DESC_SIBLINGS = Object.freeze({
     Object.freeze({ text: "Whatever the kitchen gardens still give, sold early and gone by mid-morning.", twinOf: "Fruit, vegetables, dairy, and eggs. Available every morning.", crisis: Object.freeze(['under_siege']) }),
   ]),
   // W2-FIX-DATA (2026-11-13; the REVIEW-W2B cold list): the roads a siege cuts. VETOABLE wording (the owner's).
+  // W2-FIX-DATA-5 (2026-11-13; ROUND-3-CUT-INCREMENT ww-494 HIGH, REVIEW-W2A-3 #982): the fair's trading under a siege that cuts
+  // every road. VETOABLE wording (the owner's).
+  "Once-a-year market drawing merchants from across the region.": Object.freeze([
+    Object.freeze({ text: "Once-a-year market drawing merchants from across the region.", excludes: Object.freeze(['crisis: under_siege']) }),
+    Object.freeze({ text: "The yearly market that draws merchants from across the region. None can reach it while the roads are held.", twinOf: "Once-a-year market drawing merchants from across the region.", crisis: Object.freeze(['under_siege']) }),
+  ]),
   "Organised road transport for goods between towns. Reliable, guild-backed.": Object.freeze([
     Object.freeze({ text: "Organised road transport for goods between towns. Reliable, guild-backed.", excludes: Object.freeze(['crisis: under_siege']) }),
     Object.freeze({ text: "Road transport for goods between towns, guild-backed. With the roads cut, the wagons stand idle in the yard.", twinOf: "Organised road transport for goods between towns. Reliable, guild-backed.", crisis: Object.freeze(['under_siege']) }),

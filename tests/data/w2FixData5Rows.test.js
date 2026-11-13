@@ -73,4 +73,9 @@ describe('W2-FIX-DATA-5: round three\'s rows in the data lane\'s files', () => {
     expect(arrivalText(town)).toContain('blades being made');
   }, 60_000);
 
+  test('ww-494 (HIGH): the fair\'s trading under a siege says no merchant can reach it (rww-town-under_siege-1)', () => {
+    const town = bornInc('rww-town-under_siege-1');
+    const rows = servicesOf(town).filter((v) => v.institution === 'Annual fair' && v.name === 'Seasonal trading').map((v) => String(v.desc));
+    expect(rows).toEqual(['The yearly market that draws merchants from across the region. None can reach it while the roads are held.']);
+  }, 60_000);
 });

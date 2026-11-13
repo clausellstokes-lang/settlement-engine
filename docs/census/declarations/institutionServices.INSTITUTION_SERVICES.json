@@ -3472,7 +3472,9 @@
       "id": "Annual fair|Seasonal trading",
       "text": "Once-a-year market drawing merchants from across the region.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
       "colour": false
     },
