@@ -1,4 +1,4 @@
-import { FS, swatch, GOLD_TINT, GOLD_DEEP } from '../theme.js';
+import { FS, GOLD_TINT, GOLD_DEEP } from '../theme.js';
 import { truncateAtWord } from '../../lib/text.js';
 import InstitutionLink from '../primitives/InstitutionLink.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
@@ -6,6 +6,8 @@ import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js';
+// R2-CODE-B item 1: a row whose `institution` is a provenance word ("(smuggling)") names no house.
+import { SERVICE_PROVENANCE_SENTINELS } from '../../domain/institutionRename.js';
 // X-35 (the owner, 2026-11-01): the row is the SINK of the Institutions card's service door. It
 // declares the index's own anchor and follows THE ONE FOCUS CONVENTION (X-20 (c)), so a click on a
 // house's service lands with this row at the top of the Services tab.
@@ -31,9 +33,13 @@ export function serviceImpactReason(svc, { impaired, degraded, depReasons }) {
 }
 
 // X-50 (BOILERPLATE ONCE): `impactShown` — an earlier row already printed this row's impact
-// sentence, so the row keeps its own need and prints no impact; `impactCovers` — the row that
-// prints the impact names the chains it covers after it. Both default to the old row.
-export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDeps, impaired, degraded, vulnerable, depReasons, chainDepth=null, settlement=null, impactShown=false, impactCovers=null }) {
+// sentence, so the row keeps its own need and prints no impact. Defaults to the old row.
+// R2-CODE-B item 1 (THE PAGE STATES FACTS AND NEVER THE MACHINERY; the cold list REVIEW-W2A-3):
+// the chain-depth chip ("2-order chain") and the "· covers Timber, Trade access + grain, …" tail
+// said how the model linked a row, not a fact of the place, so neither prints. What they stood
+// for stays in plain words: the status pill (Impaired / Reduced / Vulnerable) and each row's own
+// "Needs {resource}". The two props are still accepted from the callers and read by nothing.
+export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDeps, impaired, degraded, vulnerable, depReasons, chainDepth: _chainDepth=null, settlement=null, impactShown=false, impactCovers: _impactCovers=null }) {
   // THE PHONE PROSE FLOOR — the description sentence and the impairment reason.
   // The service name, the ✦ custom mark, the status pill, the chain-depth chip
   // and the institution attribution keep their own steps: they are the row's
@@ -51,6 +57,9 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
   // The row's provider, attributed as the record has it: RS-19 is kept in the RECORD (lane
   // REVIEW-INTAKE unit 2), so a row's institution is always the house that really offers it.
   const inst  = typeof svc === 'object' ? (svc.institution || '') : '';
+  // A provenance word in the provider slot ("(smuggling)", "(arcane underground)") is a stress or
+  // crime tag, not a house (institutionRename.js :: SERVICE_PROVENANCE_SENTINELS): no line names it.
+  const provider = SERVICE_PROVENANCE_SENTINELS.includes(inst) ? '' : inst;
   // §14 — services the user authored (or produced by a custom institution) carry
   // a `custom`/`source` flag; the dossier tints their row gold with a ✦ marker.
   const isCustom = typeof svc === 'object' && (svc.custom === true || svc.source === 'custom');
@@ -62,9 +71,6 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
   // case does not have to. The print twin already speaks these words (`Services.jsx`
   // renders 'Impaired'), so the screen was the half that was shouting.
   const statusLabel = isImp ? ' Impaired' : isDeg ? ' Reduced' : isVul ? ' Vulnerable' : null;
-  const depthLabel  = chainDepth && chainDepth > 1
-    ? (chainDepth === 2 ? '2-order chain' : chainDepth === 3 ? '3-order chain' : chainDepth + '-order chain')
-    : null;
 
   return (
     <div ref={focusRef} id={entityAnchor('service', entity)} data-testid="service-row" style={{
@@ -81,7 +87,6 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
           <span style={{fontSize: FS['12.5'],fontWeight:600,color:isCriminal?'#c06060':'#1c1409'}}>{displayName}</span>
           {isCustom&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:GOLD_DEEP,letterSpacing:'0.04em',flexShrink:0}}>✦</span>}
           {statusLabel&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:statusColor,background:`${statusColor}18`,padding:'0 5px',letterSpacing:'0.04em',flexShrink:0}}>{statusLabel}</span>}
-          {(isImp||isDeg||isVul)&&depthLabel&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:600,color:swatch.inkMag3,background:swatch['#F0E8D8'],border:'1px solid #c8b89a',padding:'0 5px',flexShrink:0}}>{depthLabel}</span>}
         </div>
         {desc&&<p style={{fontSize:proseFontSize(FS.xs,mobile),color:isCriminal?'#8a5050':'#9c8068',lineHeight:1.3,margin:'1px 0 0'}}>{desc}</p>}
         {/* ⛔ THE ATTRIBUTION LINE IS A `<div>`, AND IT IS NOT A STYLE CHOICE. Its child
@@ -96,7 +101,7 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
             honest element for a line whose child may open a dialog. The two paragraphs above
             keep their `<p>`: their children are inline-only.
             @enforced-by tests/components/servicesInstitutionCardNesting.test.jsx */}
-        {inst&&<div style={{fontSize:chromeFontSize(FS.xxs, mobile),color:isCriminal?'#7a4040':'#9c8068',margin:'1px 0 0',fontStyle:'italic'}}><InstitutionLink name={inst} settlement={settlement} /></div>}
+        {provider&&<div style={{fontSize:chromeFontSize(FS.xxs, mobile),color:isCriminal?'#7a4040':'#9c8068',margin:'1px 0 0',fontStyle:'italic'}}><InstitutionLink name={provider} settlement={settlement} /></div>}
         {(()=>{
           const r=serviceImpactReason(svc, { impaired, degraded, depReasons });
           if (!r) return null;
@@ -106,7 +111,6 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
                 name above and stays that way — only the printed word goes through the seam. */}
              Needs <strong>{resourceDisplayName(r.resource)}</strong>
             {r.impact&&!impactShown&&<span style={{fontStyle:'italic',marginLeft:4}}>{truncateAtWord(r.impact, 70)}</span>}
-            {r.impact&&!impactShown&&impactCovers?.length>0&&<span style={{marginLeft:4}}>· covers {impactCovers.join(', ')}</span>}
           </p>;
         })()}
       </div>
