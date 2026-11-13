@@ -430,6 +430,51 @@ describe('the coal line: coal fires the forges only where a forge house stands',
 });
 
 /**
+ * THE GATE TALLY (COHERENCE-AGREE-8, REVIEW-AGREE-3 FINDING 4 / T5): in a walled town with no gate of record the
+ * lane's Services twin says "The walls leave few ways in", and Defense still said "{settlement} is walled, and every
+ * arrival goes through a gate and into the gate tally" (`walls PRESENT` vid 2, marked `colour`, so the gate atom did
+ * not gate it; census 720: both on one page in 22 towns, 0 on the line). The variant names a gate, so it carries the
+ * `gate` mark (the pools' source, `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md`, regenerated); the palisade's card and
+ * its line still say the town is walled.
+ */
+describe('the gate tally is not said where no gate stands', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const born = (/** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: seed.split('-')[1] }), null, { seed, customContent: {} });
+  test('r2r-village-6 and r2r-hamlet-18 are walled with no gate: the fortification line names no gate beside the twin', async () => {
+    const { defenseForcesProse } = await import('../../src/domain/display/stateProse/defenseStateProse.js');
+    const { factsOf } = await import('../../src/domain/facts/factsOf.js');
+    expectNoSeedFailures(collectSeedFailures(['r2r-village-6', 'r2r-hamlet-18'], (seed) => {
+      const s = born(seed);
+      const d = factsOf(s).defence;
+      expect([d?.walls, d?.gate], `${seed}: anchored, walled with no gate`).toEqual([true, false]);
+      expect(String(s.economicState.safetyProfile.safetyDesc || '') + String(s.economicState.safetyProfile.guardEffectivenessDesc || ''), `${seed}: anchored, the twin speaks`).toMatch(/The walls leave few ways in/);
+      expect(String(defenseForcesProse(s).fortification?.sentence || ''), seed).not.toMatch(/\bgates?\b/i);
+    }), 'a gate is named where none stands');
+  });
+  test('every dossier prose variant that names a gate carries the gate mark (the gates fixture is keyed on the roster\'s gates)', async () => {
+    const { readdirSync } = await import('node:fs');
+    const dir = new URL('../../src/data/dossierStateProse/', import.meta.url);
+    const unmarked = [];
+    let seen = 0;
+    for (const f of readdirSync(dir).filter((x) => x.endsWith('.generated.js'))) {
+      for (const corpus of Object.values(await import(new URL(f, dir).href))) {
+        for (const [block, b] of Object.entries(corpus && typeof corpus === 'object' ? corpus : {})) {
+          for (const [pool, variants] of Object.entries(b?.pools || {})) {
+            for (const v of Array.isArray(variants) ? variants : []) {
+              if (!/\bgates?\b/i.test(String(v?.text || ''))) continue;
+              seen++;
+              if (pool !== 'FIXTURE: gates' && !(v.marks || []).includes('gate')) unmarked.push(`${block} ${pool} vid ${v.vid}`);
+            }
+          }
+        }
+      }
+    }
+    expect(seen, 'anti-vacuity: the corpus names gates').toBeGreaterThanOrEqual(8);
+    expect(unmarked).toEqual([]);
+  });
+});
+
+/**
  * F8 (ii) (COHERENCE-AGREE-6, the chair's ruling of 2026-11-12): the flag bag's prison and hospital are the defence
  * home's answers (`defenseFactsOf`), off the live roster: the lane's own two private readers in
  * `priorityHelpers.js :: getInstitutionNames`, cured rather than banked when the walker learned the four atoms.
