@@ -1,0 +1,380 @@
+[
+ {
+  "case": "5-1",
+  "n": 31,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-2",
+  "n": 70,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-3",
+  "n": 99,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-4",
+  "n": 135,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-5",
+  "n": 179,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-6",
+  "n": 223,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-7",
+  "n": 248,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-8",
+  "n": 249,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-9",
+  "n": 286,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-10",
+  "n": 287,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-11",
+  "n": 288,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-12",
+  "n": 289,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-13",
+  "n": 315,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-14",
+  "n": 316,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-15",
+  "n": 317,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-16",
+  "n": 371,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-17",
+  "n": 466,
+  "verdict": "STILL FALSE",
+  "inPlace": "Nahrhaven's accounts pay for the upkeep of its town walls as surely as for grain, because the country around the town is dangerous.",
+  "why": "Same wall-rationale slot. The record's structuralViolations[0].reason (printed in the same tab's Vulnerabilities warning) says fortification and forces are 'chronically underfunded' at military priority 29/100, and the Economic Survival line says the pay book is always behind; walls paid for 'as surely as for grain' contradicts both.",
+  "kind": "g",
+  "severity": "MED"
+ },
+ {
+  "case": "5-18",
+  "n": 573,
+  "verdict": "TRUE",
+  "inPlace": "Food endurance: Under siege the outlying fields would be lost; with what is still harvested, the granary would carry the town for about seven months at full rations, more than a year on half.",
+  "why": "Same Food endurance slot, now conditional; stress.type plague_onset and foodSecurity.hasSiege false, so a hypothetical siege is right, and hasGranary true with storageMonths 6.3 fits about seven months.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-19",
+  "n": 634,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-20",
+  "n": 635,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-21",
+  "n": 636,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-22",
+  "n": 810,
+  "verdict": "TRUE",
+  "inPlace": "People at Kaantun expect to hold against the usual trouble, and they claim no more than that.",
+  "why": "Same posture-summary slot; defenseProfile.readiness Well-Defended (58), scores.military 100, and the posture now reads 'Well-defended'. A modest claim that agrees with 'a long siege would be another matter' on the same tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-23",
+  "n": 852,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "Route planning is gone from the up record and its row is gone; Transportation(2) matches the two rows listed. The '2-order chain' chip still prints on a sibling row that was not added ('Caravan organization Vulnerable2-order chain').",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-24",
+  "n": 895,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "'Exotic animal sales' is gone from the up record and its card is gone; the added group counts (Goods & crafts(24) 6 impaired, Food & drink(6)) match the rows listed.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-25",
+  "n": 938,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-26",
+  "n": 939,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-27",
+  "n": 940,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The Defense row is gone because publicLegitimacy.breakdown.defense is now 0. The Breakdown block itself still prints at up (Prosperity -20, Safety -20, Food -10), so the machinery stays on the page, but those rows are not added lines.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-28",
+  "n": 940,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-29",
+  "n": 941,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-30",
+  "n": 955,
+  "verdict": "TRUE",
+  "inPlace": "Nobody in Evangeeia thinks of the city walls and gates as ornament; the city knows what it is for and checks it.",
+  "why": "Same wall-rationale slot under 'City walls and gates'; the town is under an active siege (stress under_siege+famine) with walls, garrison and watch present. Nothing on the page or in the record contradicts it.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-31",
+  "n": 1069,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-32",
+  "n": 1070,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-33",
+  "n": 1164,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The Breakdown block is gone. The added score line '50Tolerated' matches publicLegitimacy {score 50, label Tolerated} at up, and the other added lines agree with the record.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-34",
+  "n": 1164,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The Breakdown block is gone. The added member line (second Barra Gallagher, third Niamh Quinn) matches pw npcs[].memberships Noble Houses ranks 2 and 3.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-35",
+  "n": 1180,
+  "verdict": "STILL FALSE",
+  "inPlace": "Mills (2-5) · third of Noble Houses",
+  "why": "Same NPC line; the rank is now correct (pw Niamh Quinn, Noble Houses rank 3), but the catalogue count range '(2-5)' still prints in the house name (institution.key 'Mills (2-5)').",
+  "kind": "h",
+  "severity": "MED"
+ },
+ {
+  "case": "5-36",
+  "n": 1266,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-37",
+  "n": 1267,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-38",
+  "n": 1268,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-39",
+  "n": 1351,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "Custom commissions is gone from the up record and its row is gone; its house (Luxury goods quarter) now sits under High-end retail. The '2-order chain' chip still prints on 8 other rows in the tab, but none of them is an added line.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-40",
+  "n": 1380,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-41",
+  "n": 1381,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "5-42",
+  "n": 1382,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole legitimacy 'Breakdown' block (heading and point rows) is gone at pw; only the score and label line stays. No line is added in the tab.",
+  "kind": "",
+  "severity": ""
+ }
+]

@@ -1,0 +1,299 @@
+[
+ {
+  "case": "4-1",
+  "n": 22,
+  "verdict": "TRUE",
+  "inPlace": "Needed, and not brought in: charcoal and fuel.",
+  "why": "economicState.primaryImports [] (the tab now prints 'No recorded imports.') and resourceAnalysis.imports.critical includes 'Charcoal and fuel'; the 'Terrain cannot produce' chip is gone.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-2",
+  "n": 23,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The 'Produced locally' row is gone from the tab at wc; the two added lines ('No recorded imports.' = primaryImports []; 'Needed, and not brought in: charcoal and fuel.' = resourceAnalysis.imports.critical) are true.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-3",
+  "n": 35,
+  "verdict": "TRUE",
+  "inPlace": "No healer is kept here; the sick are tended by their own families.",
+  "why": "Same Medical Readiness slot (now 'Medical ReadinessNone'); institutions[] has no healer, herbalist or clergy house (Wayside shrine, Access to parish church, Burial ground) and npcs[] is only 'the eldest'.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-4",
+  "n": 63,
+  "verdict": "TRUE",
+  "inPlace": "GrainSalt",
+  "why": "Imports row now equals economicState.primaryImports ['Grain','Salt']; stone and metals moved to 'Needed, and not brought in', matching resourceAnalysis.imports.critical.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-5",
+  "n": 64,
+  "verdict": "TRUE",
+  "inPlace": "honeymedicinal herbsHoney and beeswaxForaged goods",
+  "why": "Flour and processed textiles are stripped; what remains is backed by config.nearbyResources foraging_areas, the 'forage' chain running, and exports Wild honey / Medicinal herbs.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-6",
+  "n": 76,
+  "verdict": "TRUE",
+  "inPlace": "No healer is kept here; the sick are tended by their own families.",
+  "why": "Same Medical Readiness slot (now 'None'); institutions[] has no healer or clergy house and npcs[] are the household elder and boat-headman; no page line names a healer here.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-7",
+  "n": 94,
+  "verdict": "STILL FALSE",
+  "inPlace": "Needed, and not brought in: timber (for large vessels).",
+  "why": "No longer printed as an import (primaryImports [] now 'No recorded imports.'), but it still says a 7-person thorp needs timber for large vessels: institutions[] has no shipyard or docks and History says 'has never had a wharf'; only the generic resourceAnalysis.imports.critical terrain list carries it.",
+  "kind": "c",
+  "severity": "LOW"
+ },
+ {
+  "case": "4-8",
+  "n": 130,
+  "verdict": "TRUE",
+  "inPlace": "woollivestockdairyanimal hidesPreserved foodsLeather goodsAged cheese",
+  "why": "Gems, trade access and Fine wool cloth are stripped; the rest is backed by the livestock chain (running: Preserved foods, Leather goods), Dairy farmer, grazing_land/alpine_pasture and exports Raw wool, Livestock.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-9",
+  "n": 140,
+  "verdict": "TRUE",
+  "inPlace": "No healer is kept here; the sick are tended by their own families.",
+  "why": "Same Medical Readiness slot (now 'None'); institutions[] has no healer or clergy house (Access to parish church only) and npcs[] are headman, alewife, dairy farmer, collier.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-10",
+  "n": 169,
+  "verdict": "STILL FALSE",
+  "inPlace": "GrainIncense and votive candlesIron (weapons)Replacement arms and basic equipmentSalt",
+  "why": "Livestock and timber moved out (now 'Needed, and not brought in'), but the Imports row still lists Grain etc. as brought in under stress under_siege (foodSecurity.importCoverage 0) while the same tab says 'No food comes into Uaxacmul by trade' and Outlook 'The siege has cut every road in'.",
+  "kind": "c,g",
+  "severity": "HIGH"
+ },
+ {
+  "case": "4-11",
+  "n": 175,
+  "verdict": "TRUE",
+  "inPlace": "Date Palms and OrchardsRaw materials & fuelImpaired",
+  "why": "Same chain card, now Impaired with 'Normally yields' before its outputs: stress under_siege, Outlook 'the outlying farms are abandoned or burned' (the record's chain status still reads 'running', the pre-siege value).",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-12",
+  "n": 188,
+  "verdict": "TRUE",
+  "inPlace": "No healer is kept here; the sick are tended by their own families.",
+  "why": "Same Medical Readiness slot (now 'None'); institutions[] has no healer or clergy house and npcs[] are headman, caravanserai keeper, carpenter, militia captain, horse-coper.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-13",
+  "n": 196,
+  "verdict": "STILL FALSE",
+  "inPlace": "graindateshoneymedicinal herbsHoney and beeswaxForaged goodsDate exportPalm sugar",
+  "why": "Glass, peat, luxury, Religious services and Education are stripped, but 'Date export' still prints as a good produced locally while the same tab's Exports reads 'No significant exports.' (primaryExports []).",
+  "kind": "g",
+  "severity": "MED"
+ },
+ {
+  "case": "4-14",
+  "n": 216,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The 'Produced locally' row is gone from the tab and nothing was added to it at wc.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-15",
+  "n": 227,
+  "verdict": "TRUE",
+  "inPlace": "No healer is kept here; the sick are tended by their own families.",
+  "why": "Same Medical Readiness slot (now 'None'); institutions[] has no healer or clergy house and npcs[] are household elder, boat-headman, stable keeper (the plague texts on Overview/Crisis still speak of 'the healers', which is those lines' fault, not this one's).",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-16",
+  "n": 280,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The machinery row is gone; the added lines are true: imports = primaryImports, 'Needed, and not brought in: metals.' = resourceAnalysis.imports.critical, 'Religious servicesEducation (basic)' backed by Parish church and Priest (resident).",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-17",
+  "n": 442,
+  "verdict": "STILL FALSE",
+  "inPlace": "Production: 413 lbs/dayNeed: 1,294 lbs/dayShort: 880 lbs/day",
+  "why": "The '+ 1 imported' is stripped, but the figures no longer add up: 1,294 - 413 = 881, and foodSecurity.deficit / rawDeficit is 881 (only economicViability.metrics.foodBalance.deficit says 880).",
+  "kind": "f",
+  "severity": "LOW"
+ },
+ {
+  "case": "4-18",
+  "n": 443,
+  "verdict": "NOTHING, BUT A NEW FALSE LINE",
+  "inPlace": "",
+  "why": "The machinery row is gone (no slot); but the added Imports row 'Gemstones ...GrainHerbs and forage ...Iron (weapons)...SaltTin and copper ingots' lists goods brought in under stress under_siege (foodSecurity.importCoverage 0) beside 'No food comes into Nahrhaven by trade' and the Overview note that effective trade is likely zero.",
+  "kind": "c,g",
+  "severity": "HIGH"
+ },
+ {
+  "case": "4-19",
+  "n": 444,
+  "verdict": "TRUE",
+  "inPlace": "No food comes into Nahrhaven by trade. Most households go short, and hunger is already here.",
+  "why": "foodSecurity.importCoverage 0, importPct 0, hasSiege true, deficitPct 68; the crisis line says rations are being cut.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-20",
+  "n": 503,
+  "verdict": "NOTHING, BUT A NEW FALSE LINE",
+  "inPlace": "",
+  "why": "The machinery row is gone (no slot); but the added Imports row 'Gemstones ...GrainHerbs and forage ...Iron (weapons)...SaltTin and copper ingots' lists goods brought in under stress under_siege (foodSecurity.importCoverage 0) beside 'No food comes into Nahrhaven by trade' on the same tab.",
+  "kind": "c,g",
+  "severity": "HIGH"
+ },
+ {
+  "case": "4-21",
+  "n": 548,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The machinery row is gone; the added lines are true: Imports = primaryImports, 'Needed, and not brought in' = resourceAnalysis.imports.critical items not imported, Produced locally backed by the timber, fuel, hospital, bowyer_fletcher and parish chains.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-22",
+  "n": 561,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The gap line is gone from Gaps & Opportunities and nothing was added in the Resources tab.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-23",
+  "n": 573,
+  "verdict": "TRUE",
+  "inPlace": "Food endurance: Under siege the outlying fields would be lost; with what is still harvested, the granary would carry the town for about seven months at full rations, more than a year on half.",
+  "why": "Now a conditional; stress is plague_onset only (foodSecurity.hasSiege false), and the town has a Town granary with storageMonths 6.3 plus inner harvest.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-24",
+  "n": 624,
+  "verdict": "TRUE",
+  "inPlace": "Spellcasting (minor)Magical identificationBooks and manuscriptsHigher education",
+  "why": "'trade access' is stripped; the rest is backed by institutions Wizard's tower, the spellcasting and scholarship chains, and the same goods in exports.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-25",
+  "n": 691,
+  "verdict": "STILL FALSE",
+  "inPlace": "honeymedicinal herbscoalgame meatanimal hidesfurslivestockwooldairyPreserved foodsLeather goodsCavalry mountsDraft horsesHerbal remediesPotions and elixirsProcessed textilesGuild-manufactured goodsFinished clothingDyed clothRare spices and exotic dyes",
+  "why": "'trade access', Toll income and Market taxes are stripped, but 'Rare spices and exotic dyes' still prints as produced locally while the same tab's Spices & Dyes card says 'Produced in distant lands' and the Imports block says 'Needed, and not brought in: spices'.",
+  "kind": "g",
+  "severity": "MED"
+ },
+ {
+  "case": "4-26",
+  "n": 786,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The machinery row is gone; the added lines are true: Imports = primaryImports (road open, famine only), 'Needed, and not brought in: stone, copper ore.' = resourceAnalysis.imports.critical, and the food line matches foodRecord grownPct 21 / normalImportPct 36 / band famine.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-27",
+  "n": 787,
+  "verdict": "TRUE",
+  "inPlace": "Kaantun grows about a fifth of what it eats, and carts bring in about half the rest. Druidic provision makes up a little more. Some households still go short, and hunger is already here.",
+  "why": "The clause now reads 'hunger is already here': stress famine, foodSecurity.label 'Deficit — Active Famine', foodRecord.band 'famine', gapPct 15. (The carried-over 'a little more' undersells druidic provision, magicPct 28, but that clause is not the gone one.)",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-28",
+  "n": 916,
+  "verdict": "NOTHING, BUT A NEW FALSE LINE",
+  "inPlace": "",
+  "why": "The machinery row is gone (no slot); but the added Imports row 'Coal and fuel ...GrainIncense and votive candlesIron (weapons)...Salt' lists goods brought in under under_siege+famine (foodSecurity.importCoverage 0) beside 'No food comes into Evangeeia by trade' and Outlook 'The siege has cut every road in'.",
+  "kind": "c,g",
+  "severity": "HIGH"
+ },
+ {
+  "case": "4-29",
+  "n": 924,
+  "verdict": "TRUE",
+  "inPlace": "Grain & BreadFood securityImpaired",
+  "why": "Same chain card, now Impaired: stress ['under_siege','famine'], Outlook 'the outlying farms are abandoned or burned'.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-30",
+  "n": 926,
+  "verdict": "TRUE",
+  "inPlace": "Hunting & TrappingFood securityImpaired",
+  "why": "Same chain card, now Impaired: stress ['under_siege','famine'], foodSecurity.chains 'Hunting & foraging': false.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-31",
+  "n": 1041,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The machinery row is gone; the added lines are true: Imports = primaryImports, 'Needed, and not brought in' = resourceAnalysis.imports.critical items not imported, Produced locally backed by hunting_grounds and exports.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-32",
+  "n": 1249,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The machinery row is gone; the added lines are true: Imports = primaryImports, 'Needed, and not brought in: spices, gold/silver ore, clay.' = resourceAnalysis.imports.critical (precious_metals depleted), Produced locally matches localProduction less coal.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "4-33",
+  "n": 1367,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The machinery row (with the 87% figure) is gone; the added lines are true: Imports = primaryImports, 'Needed, and not brought in' = resourceAnalysis.imports.critical items not imported (a port with Maritime services).",
+  "kind": "",
+  "severity": ""
+ }
+]

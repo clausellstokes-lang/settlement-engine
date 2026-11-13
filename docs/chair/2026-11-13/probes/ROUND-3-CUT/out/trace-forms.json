@@ -1,0 +1,1861 @@
+[
+ {
+  "id": "S1",
+  "signature": "World/NPCs :: <HOUSE> · member of <F>",
+  "count": 45,
+  "lines": [
+   382,
+   383,
+   392,
+   475,
+   476,
+   477,
+   478,
+   509,
+   582,
+   584,
+   586,
+   647,
+   648,
+   649,
+   662,
+   730,
+   731,
+   732,
+   733,
+   829,
+   830,
+   831,
+   832,
+   972,
+   973,
+   975,
+   977,
+   997,
+   1092,
+   1093,
+   1094,
+   1095,
+   1114,
+   1182,
+   1183,
+   1184,
+   1287,
+   1288,
+   1289,
+   1290,
+   1291,
+   1407,
+   1408,
+   1409,
+   1410
+  ],
+  "example": {
+   "n": 382,
+   "town": "rr2s-town-calm-rand-1",
+   "tab": "World/NPCs",
+   "sentence": "Inn (multiple) · member of Merchant Guilds"
+  }
+ },
+ {
+  "id": "S2",
+  "signature": "Systems/Services :: <HOUSE>",
+  "count": 31,
+  "lines": [
+   18,
+   58,
+   92,
+   127,
+   165,
+   211,
+   422,
+   426,
+   432,
+   500,
+   537,
+   540,
+   543,
+   615,
+   616,
+   617,
+   619,
+   683,
+   684,
+   685,
+   905,
+   906,
+   907,
+   1022,
+   1035,
+   1036,
+   1141,
+   1142,
+   1349,
+   1360,
+   1361
+  ],
+  "example": {
+   "n": 18,
+   "town": "rr2s-thorp-calm-rand-1",
+   "tab": "Systems/Services",
+   "sentence": "Dwellings (1-8)"
+  }
+ },
+ {
+  "id": "S3",
+  "signature": "World/NPCs :: <HOUSE> · first of <F>",
+  "count": 16,
+  "lines": [
+   381,
+   577,
+   579,
+   645,
+   646,
+   661,
+   969,
+   995,
+   1090,
+   1113,
+   1181,
+   1283,
+   1286,
+   1404,
+   1405,
+   1406
+  ],
+  "example": {
+   "n": 381,
+   "town": "rr2s-town-calm-rand-1",
+   "tab": "World/NPCs",
+   "sentence": "Craft guilds (5-15) · first of Merchant Guilds"
+  }
+ },
+ {
+  "id": "S4",
+  "signature": "Systems/Institutions :: <HOUSE>REQInfrastructure",
+  "count": 12,
+  "lines": [
+   16,
+   57,
+   91,
+   126,
+   161,
+   209,
+   420,
+   534,
+   608,
+   670,
+   880,
+   1020
+  ],
+  "example": {
+   "n": 16,
+   "town": "rr2s-thorp-calm-rand-1",
+   "tab": "Systems/Institutions",
+   "sentence": "Dwellings (1-8)REQInfrastructure"
+  }
+ },
+ {
+  "id": "S5",
+  "signature": "World/NPCs :: <HOUSE>",
+  "count": 9,
+  "lines": [
+   384,
+   481,
+   734,
+   735,
+   833,
+   834,
+   978,
+   1096,
+   1185
+  ],
+  "example": {
+   "n": 384,
+   "town": "rr2s-town-calm-rand-1",
+   "tab": "World/NPCs",
+   "sentence": "Parish churches (2-5)"
+  }
+ },
+ {
+  "id": "S6",
+  "signature": "Systems/Power :: Prosperity #",
+  "count": 7,
+  "lines": [
+   248,
+   286,
+   315,
+   634,
+   938,
+   1069,
+   1266
+  ],
+  "example": {
+   "n": 248,
+   "town": "rr2s-village-calm-port-1",
+   "tab": "Systems/Power",
+   "sentence": "Prosperity +20"
+  }
+ },
+ {
+  "id": "S7",
+  "signature": "Systems/Power :: Defense #",
+  "count": 7,
+  "lines": [
+   249,
+   288,
+   317,
+   636,
+   940,
+   1164,
+   1268
+  ],
+  "example": {
+   "n": 249,
+   "town": "rr2s-village-calm-port-1",
+   "tab": "Systems/Power",
+   "sentence": "Defense -1"
+  }
+ },
+ {
+  "id": "S8",
+  "signature": "Systems/Power :: Safety #",
+  "count": 7,
+  "lines": [
+   287,
+   316,
+   371,
+   635,
+   939,
+   1070,
+   1267
+  ],
+  "example": {
+   "n": 287,
+   "town": "rr2s-village-famine-rand-1",
+   "tab": "Systems/Power",
+   "sentence": "Safety -20"
+  }
+ },
+ {
+  "id": "S9",
+  "signature": "Systems/Power :: Breakdown",
+  "count": 6,
+  "lines": [
+   31,
+   70,
+   99,
+   135,
+   179,
+   223
+  ],
+  "example": {
+   "n": 31,
+   "town": "rr2s-thorp-calm-rand-1",
+   "tab": "Systems/Power",
+   "sentence": "Breakdown"
+  }
+ },
+ {
+  "id": "S10",
+  "signature": "World/NPCs :: <HOUSE> · third of <F>",
+  "count": 6,
+  "lines": [
+   380,
+   581,
+   996,
+   1112,
+   1284,
+   1285
+  ],
+  "example": {
+   "n": 380,
+   "town": "rr2s-town-calm-rand-1",
+   "tab": "World/NPCs",
+   "sentence": "Mills (2-5) · third of Military Council"
+  }
+ },
+ {
+  "id": "S11",
+  "signature": "World/NPCs :: <HOUSE> · second of <F>",
+  "count": 6,
+  "lines": [
+   578,
+   599,
+   828,
+   970,
+   1091,
+   1180
+  ],
+  "example": {
+   "n": 578,
+   "town": "rr2s-town-plague_onset-rand-1",
+   "tab": "World/NPCs",
+   "sentence": "Mills (2-5) · second of Feudal Appointee"
+  }
+ },
+ {
+  "id": "S12",
+  "signature": "Systems/Defense :: Food endurance: No granary: under siege the outlying fields are lost; ",
+  "count": 5,
+  "lines": [
+   34,
+   75,
+   103,
+   137,
+   226
+  ],
+  "example": {
+   "n": 34,
+   "town": "rr2s-thorp-calm-rand-1",
+   "tab": "Systems/Defense",
+   "sentence": "Food endurance: No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the thorp for a few weeks at full rations, a few weeks on half."
+  }
+ },
+ {
+  "id": "S13",
+  "signature": "Systems/Institutions :: <HOUSE>REQCrafts",
+  "count": 5,
+  "lines": [
+   408,
+   527,
+   604,
+   667,
+   877
+  ],
+  "example": {
+   "n": 408,
+   "town": "rr2s-town-under_siege-rand-1",
+   "tab": "Systems/Institutions",
+   "sentence": "Craft guilds (5-15)REQCrafts"
+  }
+ },
+ {
+  "id": "S14",
+  "signature": "Systems/Institutions :: <HOUSE>Economy",
+  "count": 5,
+  "lines": [
+   496,
+   605,
+   668,
+   878,
+   1220
+  ],
+  "example": {
+   "n": 496,
+   "town": "rr2s-town-under_siege-rand-1",
+   "tab": "Systems/Institutions",
+   "sentence": "Merchant guilds (3-8)Economy"
+  }
+ },
+ {
+  "id": "S15",
+  "signature": "Systems/Services :: (smuggling)",
+  "count": 5,
+  "lines": [
+   679,
+   768,
+   1132,
+   1232,
+   1348
+  ],
+  "example": {
+   "n": 679,
+   "town": "rr2s-city-calm-rand-1",
+   "tab": "Systems/Services",
+   "sentence": "(smuggling)"
+  }
+ },
+ {
+  "id": "S16",
+  "signature": "Systems/Services :: (covert)",
+  "count": 4,
+  "lines": [
+   421,
+   680,
+   769,
+   1133
+  ],
+  "example": {
+   "n": 421,
+   "town": "rr2s-town-under_siege-rand-1",
+   "tab": "Systems/Services",
+   "sentence": "(covert)"
+  }
+ },
+ {
+  "id": "S17",
+  "signature": "Systems/Power :: The Powers (#)▲",
+  "count": 4,
+  "lines": [
+   562,
+   712,
+   942,
+   1264
+  ],
+  "example": {
+   "n": 562,
+   "town": "rr2s-town-plague_onset-rand-1",
+   "tab": "Systems/Power",
+   "sentence": "The Powers (4)▲"
+  }
+ },
+ {
+  "id": "S18",
+  "signature": "World/History :: Resource Scarcityminormajor",
+  "count": 3,
+  "lines": [
+   486,
+   593,
+   1422
+  ],
+  "example": {
+   "n": 486,
+   "town": "rr2s-town-under_siege-rand-1",
+   "tab": "World/History",
+   "sentence": "Resource Scarcityminormajor"
+  }
+ },
+ {
+  "id": "S19",
+  "signature": "Systems/Economics :: Grazing land",
+  "count": 3,
+  "lines": [
+   790,
+   1055,
+   1254
+  ],
+  "example": {
+   "n": 790,
+   "town": "rr2s-city-famine-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "Grazing land"
+  }
+ },
+ {
+  "id": "S20",
+  "signature": "Summary/Crisis :: <HOUSE> · held by <P>",
+  "count": 3,
+  "lines": [
+   865,
+   866,
+   1208
+  ],
+  "example": {
+   "n": 865,
+   "town": "rr2s-city-under_siege+famine-rand-1",
+   "tab": "Summary/Crisis",
+   "sentence": "Mills (2-5) · held by Theofanis Melas"
+  }
+ },
+ {
+  "id": "S21",
+  "signature": "Systems/Economics :: House of worship · Wayside shrine",
+  "count": 2,
+  "lines": [
+   28,
+   68
+  ],
+  "example": {
+   "n": 28,
+   "town": "rr2s-thorp-calm-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "House of worship · Wayside shrine"
+  }
+ },
+ {
+  "id": "S22",
+  "signature": "Systems/Power :: Food #",
+  "count": 2,
+  "lines": [
+   289,
+   941
+  ],
+  "example": {
+   "n": 289,
+   "town": "rr2s-village-famine-rand-1",
+   "tab": "Systems/Power",
+   "sentence": "Food -6"
+  }
+ },
+ {
+  "id": "S23",
+  "signature": "Systems/Defense :: FORCED",
+  "count": 2,
+  "lines": [
+   465,
+   1276
+  ],
+  "example": {
+   "n": 465,
+   "town": "rr2s-town-under_siege-rand-1",
+   "tab": "Systems/Defense",
+   "sentence": "FORCED"
+  }
+ },
+ {
+  "id": "S24",
+  "signature": "Systems/Economics :: <HOUSE> · <HOUSE>",
+  "count": 2,
+  "lines": [
+   506,
+   698
+  ],
+  "example": {
+   "n": 506,
+   "town": "rr2s-town-under_siege-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "Merchant guilds (3-8) · Merchant guilds (15-40)"
+  }
+ },
+ {
+  "id": "S25",
+  "signature": "Systems/Institutions :: <HOUSE>REQEconomyVulnerable",
+  "count": 2,
+  "lines": [
+   531,
+   606
+  ],
+  "example": {
+   "n": 531,
+   "town": "rr2s-town-plague_onset-rand-1",
+   "tab": "Systems/Institutions",
+   "sentence": "Taverns (5-20)REQEconomyVulnerable"
+  }
+ },
+ {
+  "id": "S26",
+  "signature": "Systems/Economics :: <HOUSE> · <HOUSE> · Annual fair",
+  "count": 2,
+  "lines": [
+   627,
+   929
+  ],
+  "example": {
+   "n": 627,
+   "town": "rr2s-town-indebted-port-1",
+   "tab": "Systems/Economics",
+   "sentence": "Merchant guilds (3-8) · Merchant guilds (15-40) · Annual fair"
+  }
+ },
+ {
+  "id": "S27",
+  "signature": "World/History :: Wild magicminormajor",
+  "count": 2,
+  "lines": [
+   743,
+   1423
+  ],
+  "example": {
+   "n": 743,
+   "town": "rr2s-city-calm-rand-1",
+   "tab": "World/History",
+   "sentence": "Wild magicminormajor"
+  }
+ },
+ {
+  "id": "S28",
+  "signature": "Systems/Economics :: Chandler · Ropemaker · <HOUSE>",
+  "count": 2,
+  "lines": [
+   794,
+   918
+  ],
+  "example": {
+   "n": 794,
+   "town": "rr2s-city-famine-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "Chandler · Ropemaker · Merchant guilds (3-8)"
+  }
+ },
+ {
+  "id": "S29",
+  "signature": "World/NPCs :: <HOUSE> · Master of the Guilds, first of <F>",
+  "count": 2,
+  "lines": [
+   964,
+   1089
+  ],
+  "example": {
+   "n": 964,
+   "town": "rr2s-city-under_siege+famine-rand-1",
+   "tab": "World/NPCs",
+   "sentence": "Merchant guilds (15-40) · Master of the Guilds, first of Merchant Guild Council"
+  }
+ },
+ {
+  "id": "S30",
+  "signature": "Systems/Services :: Housing (#+ households)",
+  "count": 2,
+  "lines": [
+   1143,
+   1362
+  ],
+  "example": {
+   "n": 1143,
+   "town": "rr2s-metropolis-calm-rand-1",
+   "tab": "Systems/Services",
+   "sentence": "Housing (3500+ households)"
+  }
+ },
+ {
+  "id": "S31",
+  "signature": "Systems/Economics :: medicinal herbstimbergame meatanimal hidesfurstrade accessgems",
+  "count": 1,
+  "lines": [
+   23
+  ],
+  "example": {
+   "n": 23,
+   "town": "rr2s-thorp-calm-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "medicinal herbstimbergame meatanimal hidesfurstrade accessgems"
+  }
+ },
+ {
+  "id": "S32",
+  "signature": "Systems/Economics :: GrainSaltMetalsStone (for major construction)",
+  "count": 1,
+  "lines": [
+   63
+  ],
+  "example": {
+   "n": 63,
+   "town": "rr2s-thorp-famine-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "GrainSaltMetalsStone (for major construction)"
+  }
+ },
+ {
+  "id": "S33",
+  "signature": "Systems/Economics :: flourprocessed textileshoneymedicinal herbscoalHoney and beeswaxForage",
+  "count": 1,
+  "lines": [
+   64
+  ],
+  "example": {
+   "n": 64,
+   "town": "rr2s-thorp-famine-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "flourprocessed textileshoneymedicinal herbscoalHoney and beeswaxForaged goods"
+  }
+ },
+ {
+  "id": "S34",
+  "signature": "Systems/Power :: RulerElder CouncilGovernmentStrong▼",
+  "count": 1,
+  "lines": [
+   85
+  ],
+  "example": {
+   "n": 85,
+   "town": "rr2s-thorp-famine-rand-1",
+   "tab": "Systems/Power",
+   "sentence": "RulerElder CouncilGovernmentStrong▼"
+  }
+ },
+ {
+  "id": "S35",
+  "signature": "Systems/Economics :: Agricultural Rents Payments in kind or coin from tenant farmers; the p",
+  "count": 1,
+  "lines": [
+   93
+  ],
+  "example": {
+   "n": 93,
+   "town": "rr2s-thorp-calm-port-1",
+   "tab": "Systems/Economics",
+   "sentence": "Agricultural Rents Payments in kind or coin from tenant farmers; the primary revenue at this scale."
+  }
+ },
+ {
+  "id": "S36",
+  "signature": "Systems/Economics :: Raw woolLive sheepMineral saltsAlumSulfurLivestock",
+  "count": 1,
+  "lines": [
+   129
+  ],
+  "example": {
+   "n": 129,
+   "town": "rr2s-hamlet-calm-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "Raw woolLive sheepMineral saltsAlumSulfurLivestock"
+  }
+ },
+ {
+  "id": "S37",
+  "signature": "Systems/Economics :: woollivestockdairyanimal hidesmedicinal herbstrade accessgemsPreserved",
+  "count": 1,
+  "lines": [
+   130
+  ],
+  "example": {
+   "n": 130,
+   "town": "rr2s-hamlet-calm-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "woollivestockdairyanimal hidesmedicinal herbstrade accessgemsPreserved foodsLeather goodsFine wool clothAged cheese"
+  }
+ },
+ {
+  "id": "S38",
+  "signature": "Systems/Economics :: GrainIncense and votive candlesIron (weapons)Livestock for meat and dr",
+  "count": 1,
+  "lines": [
+   169
+  ],
+  "example": {
+   "n": 169,
+   "town": "rr2s-hamlet-under_siege-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "GrainIncense and votive candlesIron (weapons)Livestock for meat and draftReplacement arms and basic equipmentSaltTimber and building wood"
+  }
+ },
+ {
+  "id": "S39",
+  "signature": "Systems/Economics :: graindatesglasspeathoneymedicinal herbstrade accessluxuryHoney and bee",
+  "count": 1,
+  "lines": [
+   170
+  ],
+  "example": {
+   "n": 170,
+   "town": "rr2s-hamlet-under_siege-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "graindatesglasspeathoneymedicinal herbstrade accessluxuryHoney and beeswaxForaged goodsDate exportPalm sugar"
+  }
+ },
+ {
+  "id": "S40",
+  "signature": "Systems/Defense :: Food endurance: No granary: the siege has taken the outlying fields; w",
+  "count": 1,
+  "lines": [
+   184
+  ],
+  "example": {
+   "n": 184,
+   "town": "rr2s-hamlet-under_siege-rand-1",
+   "tab": "Systems/Defense",
+   "sentence": "Food endurance: No granary: the siege has taken the outlying fields; with what is still harvested, household stores carry the hamlet for about two months at full rations, about seven months on half."
+  }
+ },
+ {
+  "id": "S41",
+  "signature": "Systems/Economics :: GrainIncense and votive candlesIron (weapons)Replacement arms and basi",
+  "count": 1,
+  "lines": [
+   195
+  ],
+  "example": {
+   "n": 195,
+   "town": "rr2s-hamlet-under_siege-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "GrainIncense and votive candlesIron (weapons)Replacement arms and basic equipmentSalt"
+  }
+ },
+ {
+  "id": "S42",
+  "signature": "Systems/Economics :: graindatesglasspeathoneymedicinal herbsluxuryHoney and beeswaxForaged ",
+  "count": 1,
+  "lines": [
+   196
+  ],
+  "example": {
+   "n": 196,
+   "town": "rr2s-hamlet-under_siege-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "graindatesglasspeathoneymedicinal herbsluxuryHoney and beeswaxForaged goodsDate exportPalm sugarReligious servicesEducation (basic)"
+  }
+ },
+ {
+  "id": "S43",
+  "signature": "Systems/Economics :: maritime accesstimbermedicinal herbs",
+  "count": 1,
+  "lines": [
+   216
+  ],
+  "example": {
+   "n": 216,
+   "town": "rr2s-hamlet-plague_onset-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "maritime accesstimbermedicinal herbs"
+  }
+ },
+ {
+  "id": "S44",
+  "signature": "Summary/Crisis :: bears the brunt: Olivera Novikov · the one with the least say in the h",
+  "count": 1,
+  "lines": [
+   268
+  ],
+  "example": {
+   "n": 268,
+   "town": "rr2s-village-famine-rand-1",
+   "tab": "Summary/Crisis",
+   "sentence": "bears the brunt: Olivera Novikov · the one with the least say in the house the crisis hits"
+  }
+ },
+ {
+  "id": "S45",
+  "signature": "Systems/Institutions :: Town wallsDefenseVulnerable",
+  "count": 1,
+  "lines": [
+   345
+  ],
+  "example": {
+   "n": 345,
+   "town": "rr2s-town-calm-rand-1",
+   "tab": "Systems/Institutions",
+   "sentence": "Town wallsDefenseVulnerable"
+  }
+ },
+ {
+  "id": "S46",
+  "signature": "Systems/Economics :: Adventurers' charter hall · Adventurers' guild",
+  "count": 1,
+  "lines": [
+   368
+  ],
+  "example": {
+   "n": 368,
+   "town": "rr2s-town-calm-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "Adventurers' charter hall · Adventurers' guild"
+  }
+ },
+ {
+  "id": "S47",
+  "signature": "Systems/Institutions :: <HOUSE>REQEconomyImpaired",
+  "count": 1,
+  "lines": [
+   416
+  ],
+  "example": {
+   "n": 416,
+   "town": "rr2s-town-under_siege-rand-1",
+   "tab": "Systems/Institutions",
+   "sentence": "Taverns (5-20)REQEconomyImpaired"
+  }
+ },
+ {
+  "id": "S48",
+  "signature": "Systems/Economics :: Gemstones (local deposits exhausted)GrainHerbs and forage (local gathe",
+  "count": 1,
+  "lines": [
+   440
+  ],
+  "example": {
+   "n": 440,
+   "town": "rr2s-town-under_siege-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "Gemstones (local deposits exhausted)GrainHerbs and forage (local gathering areas exhausted)Incense and votive candlesIron (weapons)Laminar armour componentsRaw hides and animal productsReplacement arms and basic equipmentSaltTin and copper ingotsGrapesLuxury goodsMetalsMountain timberTimber"
+  }
+ },
+ {
+  "id": "S49",
+  "signature": "Systems/Economics :: Production: # lbs/day+ # importedNeed: #,# lbs/dayShort: # lbs/day",
+  "count": 1,
+  "lines": [
+   442
+  ],
+  "example": {
+   "n": 442,
+   "town": "rr2s-town-under_siege-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "Production: 413 lbs/day+ 1 importedNeed: 1,294 lbs/dayShort: 880 lbs/day"
+  }
+ },
+ {
+  "id": "S50",
+  "signature": "Systems/Economics :: Needs imported livestock: no local source",
+  "count": 1,
+  "lines": [
+   448
+  ],
+  "example": {
+   "n": 448,
+   "town": "rr2s-town-under_siege-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "Needs imported livestock: no local source"
+  }
+ },
+ {
+  "id": "S51",
+  "signature": "Systems/Resources :: Work on the wool here stops half-way: no weavers' guild, dyers' guild ",
+  "count": 1,
+  "lines": [
+   455
+  ],
+  "example": {
+   "n": 455,
+   "town": "rr2s-town-under_siege-rand-1",
+   "tab": "Systems/Resources",
+   "sentence": "Work on the wool here stops half-way: no weavers' guild, dyers' guild or fulling mill finishes it."
+  }
+ },
+ {
+  "id": "S52",
+  "signature": "Systems/Outlook :: # institutions critically impaired by siege: <HOUSE>, Town granary, Mi",
+  "count": 1,
+  "lines": [
+   472
+  ],
+  "example": {
+   "n": 472,
+   "town": "rr2s-town-under_siege-rand-1",
+   "tab": "Systems/Outlook",
+   "sentence": "5 institutions critically impaired by siege: Taverns (5-20), Town granary, Mills, Town watch, Town walls."
+  }
+ },
+ {
+  "id": "S53",
+  "signature": "World/NPCs :: Wants Secure enough legal reserves to outlast the blockade",
+  "count": 1,
+  "lines": [
+   491
+  ],
+  "example": {
+   "n": 491,
+   "town": "rr2s-town-under_siege-rand-1",
+   "tab": "World/NPCs",
+   "sentence": "Wants Secure enough legal reserves to outlast the blockade"
+  }
+ },
+ {
+  "id": "S54",
+  "signature": "Summary/Foundations :: FoodStrained",
+  "count": 1,
+  "lines": [
+   494
+  ],
+  "example": {
+   "n": 494,
+   "town": "rr2s-town-under_siege-rand-1",
+   "tab": "Summary/Foundations",
+   "sentence": "FoodStrained"
+  }
+ },
+ {
+  "id": "S55",
+  "signature": "Systems/Outlook :: # institutions critically impaired by siege: Weekly market, Market squ",
+  "count": 1,
+  "lines": [
+   508
+  ],
+  "example": {
+   "n": 508,
+   "town": "rr2s-town-under_siege-rand-1",
+   "tab": "Systems/Outlook",
+   "sentence": "7 institutions critically impaired by siege: Weekly market, Market square, Taverns (5-20), Town granary, Mills, Town watch, Town walls."
+  }
+ },
+ {
+  "id": "S56",
+  "signature": "World/NPCs :: Secret: Has been skimming from the legal reserves to pay a personal de",
+  "count": 1,
+  "lines": [
+   510
+  ],
+  "example": {
+   "n": 510,
+   "town": "rr2s-town-under_siege-rand-1",
+   "tab": "World/NPCs",
+   "sentence": "Secret: Has been skimming from the legal reserves to pay a personal debt that predates the siege"
+  }
+ },
+ {
+  "id": "S57",
+  "signature": "Systems/Economics :: Timber Trade Local forest provides sustainable timber revenue; managed",
+  "count": 1,
+  "lines": [
+   546
+  ],
+  "example": {
+   "n": 546,
+   "town": "rr2s-town-plague_onset-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "Timber Trade Local forest provides sustainable timber revenue; managed felling and sawmilling keep production consistent."
+  }
+ },
+ {
+  "id": "S58",
+  "signature": "Systems/Economics :: <HOUSE> · Public bathhouse",
+  "count": 1,
+  "lines": [
+   551
+  ],
+  "example": {
+   "n": 551,
+   "town": "rr2s-town-plague_onset-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "Taverns (5-20) · Public bathhouse"
+  }
+ },
+ {
+  "id": "S59",
+  "signature": "Systems/Economics :: Civil disputesCriminal trialsNotary services",
+  "count": 1,
+  "lines": [
+   555
+  ],
+  "example": {
+   "n": 555,
+   "town": "rr2s-town-plague_onset-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "Civil disputesCriminal trialsNotary services"
+  }
+ },
+ {
+  "id": "S60",
+  "signature": "Systems/Resources :: UnexploitedTimbermedium value",
+  "count": 1,
+  "lines": [
+   558
+  ],
+  "example": {
+   "n": 558,
+   "town": "rr2s-town-plague_onset-rand-1",
+   "tab": "Systems/Resources",
+   "sentence": "UnexploitedTimbermedium value"
+  }
+ },
+ {
+  "id": "S61",
+  "signature": "Systems/Resources :: Work on the timber here stops half-way: no sawmill or carpenters' guil",
+  "count": 1,
+  "lines": [
+   560
+  ],
+  "example": {
+   "n": 560,
+   "town": "rr2s-town-plague_onset-rand-1",
+   "tab": "Systems/Resources",
+   "sentence": "Work on the timber here stops half-way: no sawmill or carpenters' guild finishes it."
+  }
+ },
+ {
+  "id": "S62",
+  "signature": "Systems/Defense :: Legal InfrastructureCourt only",
+  "count": 1,
+  "lines": [
+   575
+  ],
+  "example": {
+   "n": 575,
+   "town": "rr2s-town-plague_onset-rand-1",
+   "tab": "Systems/Defense",
+   "sentence": "Legal InfrastructureCourt only"
+  }
+ },
+ {
+  "id": "S63",
+  "signature": "World/History :: Crime Waveminormajor",
+  "count": 1,
+  "lines": [
+   592
+  ],
+  "example": {
+   "n": 592,
+   "town": "rr2s-town-plague_onset-rand-1",
+   "tab": "World/History",
+   "sentence": "Crime Waveminormajor"
+  }
+ },
+ {
+  "id": "S64",
+  "signature": "World/NPCs :: Secret: On the payroll of the thieves' guild as a silent informant",
+  "count": 1,
+  "lines": [
+   596
+  ],
+  "example": {
+   "n": 596,
+   "town": "rr2s-town-plague_onset-rand-1",
+   "tab": "World/NPCs",
+   "sentence": "Secret: On the payroll of the thieves' guild as a silent informant"
+  }
+ },
+ {
+  "id": "S65",
+  "signature": "Systems/Economics :: trade accessSpellcasting (minor)Magical identificationBooks and manusc",
+  "count": 1,
+  "lines": [
+   624
+  ],
+  "example": {
+   "n": 624,
+   "town": "rr2s-town-indebted-port-1",
+   "tab": "Systems/Economics",
+   "sentence": "trade accessSpellcasting (minor)Magical identificationBooks and manuscriptsHigher education"
+  }
+ },
+ {
+  "id": "S66",
+  "signature": "World/NPCs :: <HOUSE> · Alderman, first of <F>",
+  "count": 1,
+  "lines": [
+   644
+  ],
+  "example": {
+   "n": 644,
+   "town": "rr2s-town-indebted-port-1",
+   "tab": "World/NPCs",
+   "sentence": "Merchant guilds (3-8) · Alderman, first of Guild Council"
+  }
+ },
+ {
+  "id": "S67",
+  "signature": "Systems/Economics :: honeymedicinal herbstrade accesscoalgame meatanimal hidesfurslivestock",
+  "count": 1,
+  "lines": [
+   691
+  ],
+  "example": {
+   "n": 691,
+   "town": "rr2s-city-calm-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "honeymedicinal herbstrade accesscoalgame meatanimal hidesfurslivestockwooldairyPreserved foodsLeather goodsCavalry mountsDraft horsesHerbal remediesPotions and elixirsProcessed textilesGuild-manufactured goodsFinished clothingDyed clothRare spices and exotic dyesToll incomeMarket taxes"
+  }
+ },
+ {
+  "id": "S68",
+  "signature": "Systems/Economics :: Precious metal veins · Import: Mining & Coinage",
+  "count": 1,
+  "lines": [
+   699
+  ],
+  "example": {
+   "n": 699,
+   "town": "rr2s-city-calm-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "Precious metal veins · Import: Mining & Coinage"
+  }
+ },
+ {
+  "id": "S69",
+  "signature": "Systems/Economics :: <HOUSE> · <HOUSE> · Luxury goods quarter",
+  "count": 1,
+  "lines": [
+   700
+  ],
+  "example": {
+   "n": 700,
+   "town": "rr2s-city-calm-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "Merchant guilds (3-8) · Merchant guilds (15-40) · Luxury goods quarter"
+  }
+ },
+ {
+  "id": "S70",
+  "signature": "Systems/Economics :: Luxury goods quarter · <HOUSE>",
+  "count": 1,
+  "lines": [
+   702
+  ],
+  "example": {
+   "n": 702,
+   "town": "rr2s-city-calm-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "Luxury goods quarter · Merchant guilds (15-40)"
+  }
+ },
+ {
+  "id": "S71",
+  "signature": "World/History :: Heresy trialminormajor",
+  "count": 1,
+  "lines": [
+   744
+  ],
+  "example": {
+   "n": 744,
+   "town": "rr2s-city-calm-rand-1",
+   "tab": "World/History",
+   "sentence": "Heresy trialminormajor"
+  }
+ },
+ {
+  "id": "S72",
+  "signature": "Systems/Economics :: Import: Food Processing",
+  "count": 1,
+  "lines": [
+   799
+  ],
+  "example": {
+   "n": 799,
+   "town": "rr2s-city-famine-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "Import: Food Processing"
+  }
+ },
+ {
+  "id": "S73",
+  "signature": "World/Daily Life :: Strained",
+  "count": 1,
+  "lines": [
+   843
+  ],
+  "example": {
+   "n": 843,
+   "town": "rr2s-city-famine-rand-1",
+   "tab": "World/Daily Life",
+   "sentence": "Strained"
+  }
+ },
+ {
+  "id": "S74",
+  "signature": "Systems/Economics :: Needs Iron + fuel · affects: law enforcement, patrol, investigation",
+  "count": 1,
+  "lines": [
+   920
+  ],
+  "example": {
+   "n": 920,
+   "town": "rr2s-city-under_siege+famine-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "Needs Iron + fuel · affects: law enforcement, patrol, investigation"
+  }
+ },
+ {
+  "id": "S75",
+  "signature": "Systems/Economics :: Grain & BreadFood security✓ Running",
+  "count": 1,
+  "lines": [
+   924
+  ],
+  "example": {
+   "n": 924,
+   "town": "rr2s-city-under_siege+famine-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "Grain & BreadFood security✓ Running"
+  }
+ },
+ {
+  "id": "S76",
+  "signature": "Systems/Economics :: Hunting & TrappingFood security✓ Running",
+  "count": 1,
+  "lines": [
+   926
+  ],
+  "example": {
+   "n": 926,
+   "town": "rr2s-city-under_siege+famine-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "Hunting & TrappingFood security✓ Running"
+  }
+ },
+ {
+  "id": "S77",
+  "signature": "Systems/Resources :: Foraging AreasGrain FieldsHunting GroundsStone Quarry",
+  "count": 1,
+  "lines": [
+   937
+  ],
+  "example": {
+   "n": 937,
+   "town": "rr2s-city-under_siege+famine-rand-1",
+   "tab": "Systems/Resources",
+   "sentence": "Foraging AreasGrain FieldsHunting GroundsStone Quarry"
+  }
+ },
+ {
+  "id": "S78",
+  "signature": "Systems/Power :: Third · Katakalon Palaiologos, the potter · answers to Black market th",
+  "count": 1,
+  "lines": [
+   944
+  ],
+  "example": {
+   "n": 944,
+   "town": "rr2s-city-under_siege+famine-rand-1",
+   "tab": "Systems/Power",
+   "sentence": "Third · Katakalon Palaiologos, the potter · answers to Black market through Pulcheria Kamytzes"
+  }
+ },
+ {
+  "id": "S79",
+  "signature": "Systems/Power :: Zosime Phakrases, the dean (<HOUSE>) · brings protection and decisions",
+  "count": 1,
+  "lines": [
+   945
+  ],
+  "example": {
+   "n": 945,
+   "town": "rr2s-city-under_siege+famine-rand-1",
+   "tab": "Systems/Power",
+   "sentence": "Zosime Phakrases, the dean (Parish churches (10-30)) · brings protection and decisions · a patron no one names"
+  }
+ },
+ {
+  "id": "S80",
+  "signature": "Systems/Power :: Potter · Katakalon Palaiologos · fronts for Black market · handled by ",
+  "count": 1,
+  "lines": [
+   946
+  ],
+  "example": {
+   "n": 946,
+   "town": "rr2s-city-under_siege+famine-rand-1",
+   "tab": "Systems/Power",
+   "sentence": "Potter · Katakalon Palaiologos · fronts for Black market · handled by Pulcheria Kamytzes"
+  }
+ },
+ {
+  "id": "S81",
+  "signature": "World/NPCs :: Hidden allegianceanswers to Whisper market, through Achilles Melisseno",
+  "count": 1,
+  "lines": [
+   967
+  ],
+  "example": {
+   "n": 967,
+   "town": "rr2s-city-under_siege+famine-rand-1",
+   "tab": "World/NPCs",
+   "sentence": "Hidden allegianceanswers to Whisper market, through Achilles Melissenos"
+  }
+ },
+ {
+  "id": "S82",
+  "signature": "World/NPCs :: Hidden allegianceanswers to Black market, through Pulcheria Kamytzes",
+  "count": 1,
+  "lines": [
+   968
+  ],
+  "example": {
+   "n": 968,
+   "town": "rr2s-city-under_siege+famine-rand-1",
+   "tab": "World/NPCs",
+   "sentence": "Hidden allegianceanswers to Black market, through Pulcheria Kamytzes"
+  }
+ },
+ {
+  "id": "S83",
+  "signature": "World/NPCs :: Disposition established",
+  "count": 1,
+  "lines": [
+   979
+  ],
+  "example": {
+   "n": 979,
+   "town": "rr2s-city-under_siege+famine-rand-1",
+   "tab": "World/NPCs",
+   "sentence": "Disposition established"
+  }
+ },
+ {
+  "id": "S84",
+  "signature": "World/NPCs :: Secret: Is receiving crafts shipments through a covert route and selli",
+  "count": 1,
+  "lines": [
+   987
+  ],
+  "example": {
+   "n": 987,
+   "town": "rr2s-city-under_siege+famine-rand-1",
+   "tab": "World/NPCs",
+   "sentence": "Secret: Is receiving crafts shipments through a covert route and selling them at triple the official price after dark"
+  }
+ },
+ {
+  "id": "S85",
+  "signature": "Systems/Outlook :: The grain harvest failed this year and took most of the food produced ",
+  "count": 1,
+  "lines": [
+   994
+  ],
+  "example": {
+   "n": 994,
+   "town": "rr2s-city-under_siege+famine-rand-1",
+   "tab": "Systems/Outlook",
+   "sentence": "The grain harvest failed this year and took most of the food produced here with it."
+  }
+ },
+ {
+  "id": "S86",
+  "signature": "Systems/Economics :: Sacred wood (taxed by occupation)Ritual components (taxed by occupatio",
+  "count": 1,
+  "lines": [
+   1038
+  ],
+  "example": {
+   "n": 1038,
+   "town": "rr2s-city-occupied-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "Sacred wood (taxed by occupation)Ritual components (taxed by occupation)Raw gemstones (taxed by occupation)Furs and pelts (taxed by occupation)Game meat (taxed by occupation)Quality tools and weaponsFinancial services (letters of credit)Legal services (contracts, notarial)Military contract servicesAlchemical trade (potions, reagents)"
+  }
+ },
+ {
+  "id": "S87",
+  "signature": "Systems/Economics :: <HOUSE> · Bowyers & fletchers (guild)",
+  "count": 1,
+  "lines": [
+   1052
+  ],
+  "example": {
+   "n": 1052,
+   "town": "rr2s-city-occupied-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "Craft guilds (5-15) · Bowyers & fletchers (guild)"
+  }
+ },
+ {
+  "id": "S88",
+  "signature": "Systems/Resources :: ✓ Central trade hub✓ Grain production✓ Livestock✓ Wool and textiles",
+  "count": 1,
+  "lines": [
+   1064
+  ],
+  "example": {
+   "n": 1064,
+   "town": "rr2s-city-occupied-rand-1",
+   "tab": "Systems/Resources",
+   "sentence": "✓ Central trade hub✓ Grain production✓ Livestock✓ Wool and textiles"
+  }
+ },
+ {
+  "id": "S89",
+  "signature": "Systems/Resources :: No grapes reach the vintner.",
+  "count": 1,
+  "lines": [
+   1068
+  ],
+  "example": {
+   "n": 1068,
+   "town": "rr2s-city-occupied-rand-1",
+   "tab": "Systems/Resources",
+   "sentence": "No grapes reach the vintner."
+  }
+ },
+ {
+  "id": "S90",
+  "signature": "Systems/Power :: ContenderOccupation AuthorityMilitarySignificant▲",
+  "count": 1,
+  "lines": [
+   1072
+  ],
+  "example": {
+   "n": 1072,
+   "town": "rr2s-city-occupied-rand-1",
+   "tab": "Systems/Power",
+   "sentence": "ContenderOccupation AuthorityMilitarySignificant▲"
+  }
+ },
+ {
+  "id": "S91",
+  "signature": "Systems/Power :: ContenderThe Trade CompactMerchantStrong",
+  "count": 1,
+  "lines": [
+   1073
+  ],
+  "example": {
+   "n": 1073,
+   "town": "rr2s-city-occupied-rand-1",
+   "tab": "Systems/Power",
+   "sentence": "ContenderThe Trade CompactMerchantStrong"
+  }
+ },
+ {
+  "id": "S92",
+  "signature": "Systems/Power :: Cobbler's guild · Quetzal Hau · fronts for Rookery · handled by Luchta",
+  "count": 1,
+  "lines": [
+   1077
+  ],
+  "example": {
+   "n": 1077,
+   "town": "rr2s-city-occupied-rand-1",
+   "tab": "Systems/Power",
+   "sentence": "Cobbler's guild · Quetzal Hau · fronts for Rookery · handled by Luchtan Balam"
+  }
+ },
+ {
+  "id": "S93",
+  "signature": "Systems/Magic :: Economic role: absent",
+  "count": 1,
+  "lines": [
+   1086
+  ],
+  "example": {
+   "n": 1086,
+   "town": "rr2s-city-occupied-rand-1",
+   "tab": "Systems/Magic",
+   "sentence": "Economic role: absent"
+  }
+ },
+ {
+  "id": "S94",
+  "signature": "World/NPCs :: Hidden allegianceanswers to Rookery, through Luchtan Balam",
+  "count": 1,
+  "lines": [
+   1097
+  ],
+  "example": {
+   "n": 1097,
+   "town": "rr2s-city-occupied-rand-1",
+   "tab": "World/NPCs",
+   "sentence": "Hidden allegianceanswers to Rookery, through Luchtan Balam"
+  }
+ },
+ {
+  "id": "S95",
+  "signature": "Systems/Economics :: medicinal herbslivestockwooldairyanimal hidesMedical care (basic)Spell",
+  "count": 1,
+  "lines": [
+   1146
+  ],
+  "example": {
+   "n": 1146,
+   "town": "rr2s-metropolis-calm-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "medicinal herbslivestockwooldairyanimal hidesMedical care (basic)Spellcasting (minor)Religious servicesHospitality for travellersPreserved foodsLeather goodsProcessed textilesGuild-manufactured goodsFinished clothingDyed cloth"
+  }
+ },
+ {
+  "id": "S96",
+  "signature": "Systems/Resources :: ✓ Fur trade✓ Hunting✓ Timber trade✓ Woodcraft",
+  "count": 1,
+  "lines": [
+   1159
+  ],
+  "example": {
+   "n": 1159,
+   "town": "rr2s-metropolis-calm-rand-1",
+   "tab": "Systems/Resources",
+   "sentence": "✓ Fur trade✓ Hunting✓ Timber trade✓ Woodcraft"
+  }
+ },
+ {
+  "id": "S97",
+  "signature": "Systems/Resources :: ✓ Fully exploitedMedicinal herbsvery high value",
+  "count": 1,
+  "lines": [
+   1160
+  ],
+  "example": {
+   "n": 1160,
+   "town": "rr2s-metropolis-calm-rand-1",
+   "tab": "Systems/Resources",
+   "sentence": "✓ Fully exploitedMedicinal herbsvery high value"
+  }
+ },
+ {
+  "id": "S98",
+  "signature": "Systems/Institutions :: <HOUSE>REQCraftsVulnerable",
+  "count": 1,
+  "lines": [
+   1218
+  ],
+  "example": {
+   "n": 1218,
+   "town": "rr2s-metropolis-wartime-rand-1",
+   "tab": "Systems/Institutions",
+   "sentence": "Craft guilds (100-150+)REQCraftsVulnerable"
+  }
+ },
+ {
+  "id": "S99",
+  "signature": "Systems/Institutions :: <HOUSE>REQEconomy",
+  "count": 1,
+  "lines": [
+   1219
+  ],
+  "example": {
+   "n": 1219,
+   "town": "rr2s-metropolis-wartime-rand-1",
+   "tab": "Systems/Institutions",
+   "sentence": "District markets (5-10)REQEconomy"
+  }
+ },
+ {
+  "id": "S100",
+  "signature": "Systems/Institutions :: <HOUSE>Religious",
+  "count": 1,
+  "lines": [
+   1222
+  ],
+  "example": {
+   "n": 1222,
+   "town": "rr2s-metropolis-wartime-rand-1",
+   "tab": "Systems/Institutions",
+   "sentence": "Major monasteries (5-10)Religious"
+  }
+ },
+ {
+  "id": "S101",
+  "signature": "Systems/Institutions :: Housing (#+ households)REQInfrastructure",
+  "count": 1,
+  "lines": [
+   1223
+  ],
+  "example": {
+   "n": 1223,
+   "town": "rr2s-metropolis-wartime-rand-1",
+   "tab": "Systems/Institutions",
+   "sentence": "Housing (3500+ households)REQInfrastructure"
+  }
+ },
+ {
+  "id": "S102",
+  "signature": "Systems/Services :: Alloy production Vulnerable#-order chain",
+  "count": 1,
+  "lines": [
+   1233
+  ],
+  "example": {
+   "n": 1233,
+   "town": "rr2s-metropolis-wartime-rand-1",
+   "tab": "Systems/Services",
+   "sentence": "Alloy production Vulnerable3-order chain"
+  }
+ },
+ {
+  "id": "S103",
+  "signature": "Systems/Services :: Custom commissions Vulnerable#-order chain",
+  "count": 1,
+  "lines": [
+   1234
+  ],
+  "example": {
+   "n": 1234,
+   "town": "rr2s-metropolis-wartime-rand-1",
+   "tab": "Systems/Services",
+   "sentence": "Custom commissions Vulnerable2-order chain"
+  }
+ },
+ {
+  "id": "S104",
+  "signature": "Systems/Services :: High-end retail Vulnerable#-order chain",
+  "count": 1,
+  "lines": [
+   1235
+  ],
+  "example": {
+   "n": 1235,
+   "town": "rr2s-metropolis-wartime-rand-1",
+   "tab": "Systems/Services",
+   "sentence": "High-end retail Vulnerable2-order chain"
+  }
+ },
+ {
+  "id": "S105",
+  "signature": "Systems/Services :: Horseshoeing Vulnerable#-order chain",
+  "count": 1,
+  "lines": [
+   1236
+  ],
+  "example": {
+   "n": 1236,
+   "town": "rr2s-metropolis-wartime-rand-1",
+   "tab": "Systems/Services",
+   "sentence": "Horseshoeing Vulnerable3-order chain"
+  }
+ },
+ {
+  "id": "S106",
+  "signature": "Systems/Services :: Precision metalwork Vulnerable#-order chain",
+  "count": 1,
+  "lines": [
+   1237
+  ],
+  "example": {
+   "n": 1237,
+   "town": "rr2s-metropolis-wartime-rand-1",
+   "tab": "Systems/Services",
+   "sentence": "Precision metalwork Vulnerable3-order chain"
+  }
+ },
+ {
+  "id": "S107",
+  "signature": "Systems/Services :: Repairs Vulnerable#-order chain",
+  "count": 1,
+  "lines": [
+   1238
+  ],
+  "example": {
+   "n": 1238,
+   "town": "rr2s-metropolis-wartime-rand-1",
+   "tab": "Systems/Services",
+   "sentence": "Repairs Vulnerable3-order chain"
+  }
+ },
+ {
+  "id": "S108",
+  "signature": "Systems/Services :: Tool manufacture Vulnerable#-order chain",
+  "count": 1,
+  "lines": [
+   1239
+  ],
+  "example": {
+   "n": 1239,
+   "town": "rr2s-metropolis-wartime-rand-1",
+   "tab": "Systems/Services",
+   "sentence": "Tool manufacture Vulnerable3-order chain"
+  }
+ },
+ {
+  "id": "S109",
+  "signature": "Systems/Services :: Weapon smithing Vulnerable#-order chain",
+  "count": 1,
+  "lines": [
+   1240
+  ],
+  "example": {
+   "n": 1240,
+   "town": "rr2s-metropolis-wartime-rand-1",
+   "tab": "Systems/Services",
+   "sentence": "Weapon smithing Vulnerable3-order chain"
+  }
+ },
+ {
+  "id": "S110",
+  "signature": "Systems/Services :: Fresh bread Vulnerable#-order chain",
+  "count": 1,
+  "lines": [
+   1241
+  ],
+  "example": {
+   "n": 1241,
+   "town": "rr2s-metropolis-wartime-rand-1",
+   "tab": "Systems/Services",
+   "sentence": "Fresh bread Vulnerable2-order chain"
+  }
+ },
+ {
+  "id": "S111",
+  "signature": "Systems/Services :: Historical research Vulnerable#-order chain",
+  "count": 1,
+  "lines": [
+   1242
+  ],
+  "example": {
+   "n": 1242,
+   "town": "rr2s-metropolis-wartime-rand-1",
+   "tab": "Systems/Services",
+   "sentence": "Historical research Vulnerable2-order chain"
+  }
+ },
+ {
+  "id": "S112",
+  "signature": "Systems/Services :: Monster lore Vulnerable#-order chain",
+  "count": 1,
+  "lines": [
+   1243
+  ],
+  "example": {
+   "n": 1243,
+   "town": "rr2s-metropolis-wartime-rand-1",
+   "tab": "Systems/Services",
+   "sentence": "Monster lore Vulnerable2-order chain"
+  }
+ },
+ {
+  "id": "S113",
+  "signature": "Systems/Services :: Crime reporting Vulnerable#-order chain",
+  "count": 1,
+  "lines": [
+   1244
+  ],
+  "example": {
+   "n": 1244,
+   "town": "rr2s-metropolis-wartime-rand-1",
+   "tab": "Systems/Services",
+   "sentence": "Crime reporting Vulnerable3-order chain"
+  }
+ },
+ {
+  "id": "S114",
+  "signature": "Systems/Services :: Law enforcement Vulnerable#-order chain",
+  "count": 1,
+  "lines": [
+   1245
+  ],
+  "example": {
+   "n": 1245,
+   "town": "rr2s-metropolis-wartime-rand-1",
+   "tab": "Systems/Services",
+   "sentence": "Law enforcement Vulnerable3-order chain"
+  }
+ },
+ {
+  "id": "S115",
+  "signature": "Systems/Economics :: Becancoatl grows about a third of what it eats, and carts bring in mos",
+  "count": 1,
+  "lines": [
+   1251
+  ],
+  "example": {
+   "n": 1251,
+   "town": "rr2s-metropolis-wartime-rand-1",
+   "tab": "Systems/Economics",
+   "sentence": "Becancoatl grows about a third of what it eats, and carts bring in most of the rest."
+  }
+ },
+ {
+  "id": "S116",
+  "signature": "World/Daily Life :: Tightening",
+  "count": 1,
+  "lines": [
+   1297
+  ],
+  "example": {
+   "n": 1297,
+   "town": "rr2s-metropolis-wartime-rand-1",
+   "tab": "World/Daily Life",
+   "sentence": "Tightening"
+  }
+ },
+ {
+  "id": "S117",
+  "signature": "Summary/Foundations :: FoodAdequate",
+  "count": 1,
+  "lines": [
+   1317
+  ],
+  "example": {
+   "n": 1317,
+   "town": "rr2s-metropolis-plague_onset-port-1",
+   "tab": "Summary/Foundations",
+   "sentence": "FoodAdequate"
+  }
+ },
+ {
+  "id": "S118",
+  "signature": "Systems/Economics :: medicinal herbsSpellcasting (minor)Magical identificationMagical item ",
+  "count": 1,
+  "lines": [
+   1365
+  ],
+  "example": {
+   "n": 1365,
+   "town": "rr2s-metropolis-plague_onset-port-1",
+   "tab": "Systems/Economics",
+   "sentence": "medicinal herbsSpellcasting (minor)Magical identificationMagical item marketWeapon enchantment"
+  }
+ },
+ {
+  "id": "S119",
+  "signature": "Systems/Magic :: Military role: absent",
+  "count": 1,
+  "lines": [
+   1394
+  ],
+  "example": {
+   "n": 1394,
+   "town": "rr2s-metropolis-plague_onset-port-1",
+   "tab": "Systems/Magic",
+   "sentence": "Military role: absent"
+  }
+ },
+ {
+  "id": "S120",
+  "signature": "World/NPCs :: <HOUSE> · member of <F>-State Council",
+  "count": 1,
+  "lines": [
+   1411
+  ],
+  "example": {
+   "n": 1411,
+   "town": "rr2s-metropolis-plague_onset-port-1",
+   "tab": "World/NPCs",
+   "sentence": "Mills (2-5) · member of City-State Council"
+  }
+ }
+]

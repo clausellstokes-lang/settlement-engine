@@ -1,0 +1,659 @@
+[
+ {
+  "case": "1-1",
+  "n": 380,
+  "verdict": "TRUE",
+  "inPlace": "Mills · third of Military Council",
+  "why": "npcs[name=\"Teodora Alexeyev\"].institution.key = \"Mills (2-5)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Military Council\",rank:3}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-2",
+  "n": 381,
+  "verdict": "TRUE",
+  "inPlace": "Craft guilds · first of Merchant Guilds",
+  "why": "npcs[name=\"Sergei Kuznetsov\"].institution.key = \"Craft guilds (5-15)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Merchant Guilds\",rank:1}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-3",
+  "n": 383,
+  "verdict": "TRUE",
+  "inPlace": "Taverns · member of Merchant Guilds",
+  "why": "npcs[name=\"Snežana Denisov\"].institution.key = \"Taverns (5-20)\", present in institutions[] (Economy); the house name now prints without the catalogue range; memberships = [{power:\"Merchant Guilds\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-4",
+  "n": 384,
+  "verdict": "TRUE",
+  "inPlace": "Houses of worship",
+  "why": "npcs[name=\"Jelena Nikolayev\"].institution.key = \"Parish churches (2-5)\", present in institutions[] (Religious); \"Houses of worship\" is a plain generic name for it; no memberships, and the line claims none.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-5",
+  "n": 475,
+  "verdict": "TRUE",
+  "inPlace": "Mills · member of Guild Council",
+  "why": "npcs[name=\"Badr al-Yamani\"].institution.key = \"Mills (2-5)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Guild Council\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-6",
+  "n": 476,
+  "verdict": "TRUE",
+  "inPlace": "Craft guilds · member of Guild Council",
+  "why": "npcs[name=\"Duha al-Ghazali\"].institution.key = \"Craft guilds (5-15)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Guild Council\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-7",
+  "n": 477,
+  "verdict": "TRUE",
+  "inPlace": "Butchers · member of Guild Council",
+  "why": "npcs[name=\"Jamilah ibn Ahmed\"].institution.key = \"Butchers (3-8)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Guild Council\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-8",
+  "n": 478,
+  "verdict": "TRUE",
+  "inPlace": "Taverns · member of Guild Council",
+  "why": "npcs[name=\"Uqba al-Tusi\"].institution.key = \"Taverns (5-20)\", present in institutions[] (Economy); the house name now prints without the catalogue range; memberships = [{power:\"Guild Council\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-9",
+  "n": 481,
+  "verdict": "TRUE",
+  "inPlace": "Houses of worship",
+  "why": "npcs[name=\"Zainab ibn Battuta\"].institution.key = \"Parish churches (2-5)\", present in institutions[] (Religious); \"Houses of worship\" is a plain generic name for it; no memberships, and the line claims none.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-10",
+  "n": 577,
+  "verdict": "TRUE",
+  "inPlace": "Houses of worship · first of Religious Authorities",
+  "why": "npcs[name=\"Zosime Hyaleas\"].institution.key = \"Parish churches (2-5)\", present in institutions[] (Religious); \"Houses of worship\" is a plain generic name for it; memberships = [{power:\"Religious Authorities\",rank:1}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-11",
+  "n": 578,
+  "verdict": "TRUE",
+  "inPlace": "Mills · second of Feudal Appointee",
+  "why": "npcs[name=\"Nikomedissa Choniates\"].institution.key = \"Mills (2-5)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Feudal Appointee\",rank:2}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-12",
+  "n": 579,
+  "verdict": "TRUE",
+  "inPlace": "Blacksmiths · first of Merchant Guilds",
+  "why": "npcs[name=\"Gregorios Kyriadotes\"].institution.key = \"Blacksmiths (3-10)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Merchant Guilds\",rank:1}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-13",
+  "n": 581,
+  "verdict": "TRUE",
+  "inPlace": "Craft guilds · third of Merchant Guilds",
+  "why": "npcs[name=\"Aristoteles Chrysoberges\"].institution.key = \"Craft guilds (5-15)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Merchant Guilds\",rank:3}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-14",
+  "n": 582,
+  "verdict": "TRUE",
+  "inPlace": "Carpenters · member of Feudal Appointee",
+  "why": "npcs[name=\"Komnenissa Muzalon\"].institution.key = \"Carpenters (5-15)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Feudal Appointee\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-15",
+  "n": 584,
+  "verdict": "TRUE",
+  "inPlace": "Taverns · member of Merchant Guilds",
+  "why": "npcs[name=\"Basileios Gregoraios\"].institution.key = \"Taverns (5-20)\", present in institutions[] (Economy); the house name now prints without the catalogue range; memberships = [{power:\"Merchant Guilds\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-16",
+  "n": 586,
+  "verdict": "TRUE",
+  "inPlace": "Merchant guilds · member of Merchant Guilds",
+  "why": "npcs[name=\"Poulcheria Doukas\"].institution.key = \"Merchant guilds (3-8)\", present in institutions[] (Economy); the house name now prints without the catalogue range; memberships = [{power:\"Merchant Guilds\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-17",
+  "n": 644,
+  "verdict": "TRUE",
+  "inPlace": "Merchant guilds · Alderman, first of Guild Council",
+  "why": "npcs[name=\"Musa al-Kindi\"].institution.key = \"Merchant guilds (3-8)\", present in institutions[] (Economy); the house name now prints without the catalogue range; memberships = [{power:\"Guild Council\",rank:1}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-18",
+  "n": 645,
+  "verdict": "TRUE",
+  "inPlace": "Houses of worship · first of Religious Authorities",
+  "why": "npcs[name=\"Karim al-Basri\"].institution.key = \"Parish churches (2-5)\", present in institutions[] (Religious); \"Houses of worship\" is a plain generic name for it; memberships = [{power:\"Religious Authorities\",rank:1}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-19",
+  "n": 646,
+  "verdict": "TRUE",
+  "inPlace": "Craft guilds · first of Craft Guilds",
+  "why": "npcs[name=\"Umayma al-Amin\"].institution.key = \"Craft guilds (5-15)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Craft Guilds\",rank:1}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-20",
+  "n": 647,
+  "verdict": "TRUE",
+  "inPlace": "Taverns · member of Merchant Guilds",
+  "why": "npcs[name=\"Dina ibn Khalid\"].institution.key = \"Taverns (5-20)\", present in institutions[] (Economy); the house name now prints without the catalogue range; memberships = [{power:\"Merchant Guilds\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-21",
+  "n": 648,
+  "verdict": "TRUE",
+  "inPlace": "Mills · member of Guild Council",
+  "why": "npcs[name=\"Ghalia al-Jazari\"].institution.key = \"Mills (2-5)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Guild Council\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-22",
+  "n": 649,
+  "verdict": "TRUE",
+  "inPlace": "Butchers · member of Craft Guilds",
+  "why": "npcs[name=\"Halima ibn Ali\"].institution.key = \"Butchers (3-8)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Craft Guilds\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-23",
+  "n": 730,
+  "verdict": "TRUE",
+  "inPlace": "Carpenters · member of Corrupt City Council",
+  "why": "npcs[name=\"Patli Xiu\"].institution.key = \"Carpenters (5-15)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Corrupt City Council\",rank:null,veiled:true}] in powerStructure.factions, matching the clause (the membership is veiled in the record, but the clause is true).",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-24",
+  "n": 731,
+  "verdict": "TRUE",
+  "inPlace": "Butchers · member of Corrupt City Council",
+  "why": "npcs[name=\"Tezozomoc Cauac\"].institution.key = \"Butchers (3-8)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Corrupt City Council\",rank:null,veiled:true}] in powerStructure.factions, matching the clause (the membership is veiled in the record, but the clause is true).",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-25",
+  "n": 732,
+  "verdict": "TRUE",
+  "inPlace": "Merchant guilds · member of Corrupt City Council",
+  "why": "npcs[name=\"Yum Uoc\"].institution.key = \"Merchant guilds (15-40)\", present in institutions[] (Economy); the house name now prints without the catalogue range; memberships = [{power:\"Corrupt City Council\",rank:null,veiled:true}] in powerStructure.factions, matching the clause (the membership is veiled in the record, but the clause is true).",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-26",
+  "n": 733,
+  "verdict": "TRUE",
+  "inPlace": "Mills · member of Corrupt City Council",
+  "why": "npcs[name=\"Ixchel Zaz\"].institution.key = \"Mills (2-5)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Corrupt City Council\",rank:null,veiled:true}] in powerStructure.factions, matching the clause (the membership is veiled in the record, but the clause is true).",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-27",
+  "n": 734,
+  "verdict": "TRUE",
+  "inPlace": "Houses of worship",
+  "why": "npcs[name=\"Dzuna Caan\"].institution.key = \"Parish churches (10-30)\", present in institutions[] (Religious); \"Houses of worship\" is a plain generic name for it; no memberships, and the line claims none.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-28",
+  "n": 735,
+  "verdict": "TRUE",
+  "inPlace": "Blacksmiths",
+  "why": "npcs[name=\"Rain May\"].institution.key = \"Blacksmiths (3-10)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; no memberships, and the line claims none.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-29",
+  "n": 828,
+  "verdict": "TRUE",
+  "inPlace": "Merchant guilds · second of Arcane Council",
+  "why": "npcs[name=\"Xolotl Xul\"].institution.key = \"Merchant guilds (15-40)\", present in institutions[] (Economy); the house name now prints without the catalogue range; memberships = [{power:\"Arcane Council\",rank:2}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-30",
+  "n": 829,
+  "verdict": "TRUE",
+  "inPlace": "Butchers · member of Arcane Council",
+  "why": "npcs[name=\"Nicte May\"].institution.key = \"Butchers (3-8)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Arcane Council\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-31",
+  "n": 830,
+  "verdict": "TRUE",
+  "inPlace": "Carpenters · member of Arcane Council",
+  "why": "npcs[name=\"Nicte Uoc\"].institution.key = \"Carpenters (5-15)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Arcane Council\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-32",
+  "n": 831,
+  "verdict": "TRUE",
+  "inPlace": "Mills · member of Arcane Council",
+  "why": "npcs[name=\"Sak Xul\"].institution.key = \"Mills (2-5)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Arcane Council\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-33",
+  "n": 832,
+  "verdict": "TRUE",
+  "inPlace": "Bakers · member of Arcane Council",
+  "why": "npcs[name=\"Tao Xoc\"].institution.key = \"Bakers (5-15)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Arcane Council\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-34",
+  "n": 833,
+  "verdict": "TRUE",
+  "inPlace": "Houses of worship",
+  "why": "npcs[name=\"Xaman Puc\"].institution.key = \"Parish churches (10-30)\", present in institutions[] (Religious); \"Houses of worship\" is a plain generic name for it; no memberships, and the line claims none.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-35",
+  "n": 834,
+  "verdict": "TRUE",
+  "inPlace": "Blacksmiths",
+  "why": "npcs[name=\"Reed Xul\"].institution.key = \"Blacksmiths (3-10)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; no memberships, and the line claims none.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-36",
+  "n": 964,
+  "verdict": "TRUE",
+  "inPlace": "Merchant guilds · Master of the Guilds, first of Merchant Guild Council",
+  "why": "npcs[name=\"Eirenaion Kataphloron\"].institution.key = \"Merchant guilds (15-40)\", present in institutions[] (Economy); the house name now prints without the catalogue range; memberships = [{power:\"Merchant Guild Council\",rank:1}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-37",
+  "n": 969,
+  "verdict": "TRUE",
+  "inPlace": "Craft guilds · first of Grain Holders",
+  "why": "npcs[name=\"Photios Palaiologos\"].institution.key = \"Craft guilds (30-80)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Grain Holders\",rank:1}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-38",
+  "n": 970,
+  "verdict": "TRUE",
+  "inPlace": "Blacksmiths · second of Grain Holders",
+  "why": "npcs[name=\"Thomais Rhangabe\"].institution.key = \"Blacksmiths (3-10)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Grain Holders\",rank:2}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-39",
+  "n": 972,
+  "verdict": "TRUE",
+  "inPlace": "Butchers · member of Merchant Guild Council",
+  "why": "npcs[name=\"Vranas Drimys\"].institution.key = \"Butchers (3-8)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Merchant Guild Council\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-40",
+  "n": 973,
+  "verdict": "TRUE",
+  "inPlace": "Bakers · member of Merchant Guild Council",
+  "why": "npcs[name=\"Kyr Mosele\"].institution.key = \"Bakers (5-15)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Merchant Guild Council\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-41",
+  "n": 975,
+  "verdict": "TRUE",
+  "inPlace": "Carpenters · member of Merchant Guild Council",
+  "why": "npcs[name=\"Michael Alexios\"].institution.key = \"Carpenters (5-15)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Merchant Guild Council\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-42",
+  "n": 977,
+  "verdict": "TRUE",
+  "inPlace": "Mills · member of Merchant Guild Council",
+  "why": "npcs[name=\"Theofanis Melas\"].institution.key = \"Mills (2-5)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Merchant Guild Council\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-43",
+  "n": 1089,
+  "verdict": "TRUE",
+  "inPlace": "Merchant guilds · Master of the Guilds, first of Merchant Guild Council",
+  "why": "npcs[name=\"Xaman Tec\"].institution.key = \"Merchant guilds (15-40)\", present in institutions[] (Economy); the house name now prints without the catalogue range; memberships = [{power:\"Merchant Guild Council\",rank:1}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-44",
+  "n": 1090,
+  "verdict": "TRUE",
+  "inPlace": "Craft guilds · first of Craft Guilds",
+  "why": "npcs[name=\"Axayacatl Xoc (the senior craft-guild master)\"].institution.key = \"Craft guilds (30-80)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Craft Guilds\",rank:1}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-45",
+  "n": 1091,
+  "verdict": "TRUE",
+  "inPlace": "Bakers · second of Craft Guilds",
+  "why": "npcs[name=\"Ixquil Holpop\"].institution.key = \"Bakers (5-15)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Craft Guilds\",rank:2}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-46",
+  "n": 1092,
+  "verdict": "TRUE",
+  "inPlace": "Blacksmiths · member of Craft Guilds",
+  "why": "npcs[name=\"Morning Star Chan\"].institution.key = \"Blacksmiths (3-10)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Craft Guilds\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-47",
+  "n": 1093,
+  "verdict": "TRUE",
+  "inPlace": "Carpenters · member of Craft Guilds",
+  "why": "npcs[name=\"Calli Chuc\"].institution.key = \"Carpenters (5-15)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Craft Guilds\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-48",
+  "n": 1094,
+  "verdict": "TRUE",
+  "inPlace": "Butchers · member of Craft Guilds",
+  "why": "npcs[name=\"Kisin Balam\"].institution.key = \"Butchers (3-8)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Craft Guilds\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-49",
+  "n": 1095,
+  "verdict": "TRUE",
+  "inPlace": "Mills · member of Merchant Guild Council",
+  "why": "npcs[name=\"Rain Goddess Hau\"].institution.key = \"Mills (2-5)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Merchant Guild Council\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-50",
+  "n": 1096,
+  "verdict": "TRUE",
+  "inPlace": "Houses of worship",
+  "why": "npcs[name=\"Tezozomoc Uc\"].institution.key = \"Parish churches (10-30)\", present in institutions[] (Religious); \"Houses of worship\" is a plain generic name for it; no memberships, and the line claims none.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-51",
+  "n": 1180,
+  "verdict": "TRUE",
+  "inPlace": "Mills · second of Noble Houses",
+  "why": "npcs[name=\"Niamh Quinn\"].institution.key = \"Mills (2-5)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Noble Houses\",rank:2}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-52",
+  "n": 1181,
+  "verdict": "TRUE",
+  "inPlace": "Houses of worship · first of Religious Authorities",
+  "why": "npcs[name=\"Brennan Kennedy\"].institution.key = \"Parish churches (50-100+)\", present in institutions[] (Religious); \"Houses of worship\" is a plain generic name for it; memberships = [{power:\"Religious Authorities\",rank:1}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-53",
+  "n": 1182,
+  "verdict": "TRUE",
+  "inPlace": "Carpenters · member of Ducal Governorship",
+  "why": "npcs[name=\"Eoghan MacTaggart\"].institution.key = \"Carpenters (5-15)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Ducal Governorship\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-54",
+  "n": 1183,
+  "verdict": "TRUE",
+  "inPlace": "Butchers · member of Ducal Governorship",
+  "why": "npcs[name=\"Killian Ward\"].institution.key = \"Butchers (3-8)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Ducal Governorship\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-55",
+  "n": 1184,
+  "verdict": "TRUE",
+  "inPlace": "Bakers · member of Ducal Governorship",
+  "why": "npcs[name=\"Fuamnach MacWhirter\"].institution.key = \"Bakers (5-15)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Ducal Governorship\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-56",
+  "n": 1185,
+  "verdict": "TRUE",
+  "inPlace": "Blacksmiths",
+  "why": "npcs[name=\"Fiachra Roche\"].institution.key = \"Blacksmiths (3-10)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; no memberships, and the line claims none.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-57",
+  "n": 1283,
+  "verdict": "TRUE",
+  "inPlace": "Houses of worship · first of Religious Authorities",
+  "why": "npcs[name=\"Jaguar Pech\"].institution.key = \"Parish churches (50-100+)\", present in institutions[] (Religious); \"Houses of worship\" is a plain generic name for it; memberships = [{power:\"Religious Authorities\",rank:1}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-58",
+  "n": 1284,
+  "verdict": "TRUE",
+  "inPlace": "Major monasteries · third of Religious Authorities",
+  "why": "npcs[name=\"Noh Ek Ul\"].institution.key = \"Major monasteries (5-10)\", present in institutions[] (Religious); the house name now prints without the catalogue range; memberships = [{power:\"Religious Authorities\",rank:3}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-59",
+  "n": 1285,
+  "verdict": "TRUE",
+  "inPlace": "Blacksmiths · third of Merchant Guilds",
+  "why": "npcs[name=\"Coatl Yaxche\"].institution.key = \"Blacksmiths (3-10)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Merchant Guilds\",rank:3}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-60",
+  "n": 1286,
+  "verdict": "TRUE",
+  "inPlace": "Merchant guilds · first of Merchant Guilds",
+  "why": "npcs[name=\"Kaban Zam\"].institution.key = \"Merchant guilds (50-100+)\", present in institutions[] (Economy); the house name now prints without the catalogue range; memberships = [{power:\"Merchant Guilds\",rank:1}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-61",
+  "n": 1287,
+  "verdict": "TRUE",
+  "inPlace": "Butchers · member of Grand Council",
+  "why": "npcs[name=\"Quetzalxochitl Ul\"].institution.key = \"Butchers (3-8)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Grand Council\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-62",
+  "n": 1288,
+  "verdict": "TRUE",
+  "inPlace": "Carpenters · member of Grand Council",
+  "why": "npcs[name=\"Bolontiku Dzul\"].institution.key = \"Carpenters (5-15)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Grand Council\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-63",
+  "n": 1289,
+  "verdict": "TRUE",
+  "inPlace": "Craft guilds · member of Merchant Guilds",
+  "why": "npcs[name=\"Uijah Kin\"].institution.key = \"Craft guilds (100-150+)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Merchant Guilds\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-64",
+  "n": 1290,
+  "verdict": "TRUE",
+  "inPlace": "Mills · member of Grand Council",
+  "why": "npcs[name=\"Xib Pech\"].institution.key = \"Mills (2-5)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Grand Council\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-65",
+  "n": 1291,
+  "verdict": "TRUE",
+  "inPlace": "Bakers · member of Grand Council",
+  "why": "npcs[name=\"Yellow Corn May\"].institution.key = \"Bakers (5-15)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Grand Council\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-66",
+  "n": 1404,
+  "verdict": "TRUE",
+  "inPlace": "Houses of worship · first of Religious Authorities",
+  "why": "npcs[name=\"Maeve Kavanagh\"].institution.key = \"Parish churches (50-100+)\", present in institutions[] (Religious); \"Houses of worship\" is a plain generic name for it; memberships = [{power:\"Religious Authorities\",rank:1}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-67",
+  "n": 1405,
+  "verdict": "TRUE",
+  "inPlace": "Merchant guilds · first of Merchant Guilds",
+  "why": "npcs[name=\"Banbh MacQuarrie\"].institution.key = \"Merchant guilds (50-100+)\", present in institutions[] (Economy); the house name now prints without the catalogue range; memberships = [{power:\"Merchant Guilds\",rank:1}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-68",
+  "n": 1406,
+  "verdict": "TRUE",
+  "inPlace": "Craft guilds · first of Craft Guilds",
+  "why": "npcs[name=\"Giolla MacQuarrie\"].institution.key = \"Craft guilds (100-150+)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Craft Guilds\",rank:1}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-69",
+  "n": 1407,
+  "verdict": "TRUE",
+  "inPlace": "Bakers · member of Craft Guilds",
+  "why": "npcs[name=\"Nessa Lynch\"].institution.key = \"Bakers (5-15)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Craft Guilds\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-70",
+  "n": 1408,
+  "verdict": "TRUE",
+  "inPlace": "Blacksmiths · member of Craft Guilds",
+  "why": "npcs[name=\"Diarmuid Byrne\"].institution.key = \"Blacksmiths (3-10)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Craft Guilds\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-71",
+  "n": 1409,
+  "verdict": "TRUE",
+  "inPlace": "Carpenters · member of Craft Guilds",
+  "why": "npcs[name=\"Órlaith Menzies (the master carpenter)\"].institution.key = \"Carpenters (5-15)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Craft Guilds\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-72",
+  "n": 1410,
+  "verdict": "TRUE",
+  "inPlace": "Butchers · member of Craft Guilds",
+  "why": "npcs[name=\"Padraig Dunbar\"].institution.key = \"Butchers (3-8)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"Craft Guilds\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "1-73",
+  "n": 1411,
+  "verdict": "TRUE",
+  "inPlace": "Mills · member of City-State Council",
+  "why": "npcs[name=\"Seosamh Thornton\"].institution.key = \"Mills (2-5)\", present in institutions[] (Crafts); the house name now prints without the catalogue range; memberships = [{power:\"City-State Council\",rank:null}] in powerStructure.factions, matching the clause.",
+  "kind": "",
+  "severity": ""
+ }
+]

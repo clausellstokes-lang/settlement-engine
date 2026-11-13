@@ -1,0 +1,668 @@
+[
+ {
+  "case": "2-1",
+  "n": 12,
+  "verdict": "TRUE",
+  "inPlace": "Food: Deficit — Active Famine. No granary; about three days in the larder.",
+  "why": "economicState.foodSecurity.storageMonths 0.1 (about three days) and foodRecord.hasGranary false / storesHeld false at rb; foodSecurity.label \"Deficit — Active Famine\" (stress famine).",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-2",
+  "n": 25,
+  "verdict": "TRUE",
+  "inPlace": "No granary; about three days in the larder.",
+  "why": "economicState.foodSecurity.storageMonths 0.1 (about three days) and foodRecord.hasGranary false / storesHeld false at rb.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-3",
+  "n": 44,
+  "verdict": "TRUE",
+  "inPlace": "Greek-inspired: built on riverside ground, and run by civic association. Governed by Elder Council · Desperate — hunger is eroding order",
+  "why": "The agora clause is dropped; config.terrainType \"riverside\", powerStructure.government \"Elder Council\", powerStructure.stability \"Desperate — hunger is eroding order\", culture greek.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-4",
+  "n": 54,
+  "verdict": "TRUE",
+  "inPlace": "Food: Deficit — Active Famine. No granary; about three days in the larder.",
+  "why": "economicState.foodSecurity.storageMonths 0.1 (about three days) and foodRecord.hasGranary false / storesHeld false at rb; label \"Deficit — Active Famine\".",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-5",
+  "n": 67,
+  "verdict": "TRUE",
+  "inPlace": "No granary; about three days in the larder.",
+  "why": "economicState.foodSecurity.storageMonths 0.1 (about three days) and foodRecord.hasGranary false / storesHeld false at rb.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-6",
+  "n": 269,
+  "verdict": "TRUE",
+  "inPlace": "Food: Deficit — Active Famine. No granary; about three days in the larder.",
+  "why": "economicState.foodSecurity.storageMonths 0.1 (about three days) and foodRecord.hasGranary false / storesHeld false at rb; label \"Deficit — Active Famine\".",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-7",
+  "n": 281,
+  "verdict": "TRUE",
+  "inPlace": "No granary; about three days in the larder.",
+  "why": "economicState.foodSecurity.storageMonths 0.1 (about three days) and foodRecord.hasGranary false / storesHeld false at rb.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-8",
+  "n": 421,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The tag line under the row is simply gone (provider slot now empty for a provenance word); the added lines are the chip-stripped rows \"Gate duty Impaired\" / \"Night patrol Impaired\" (tradeDependencies Town watch, Iron, critical, under siege) and the Grain row without its \"covers\" tail (Taverns, Grain, critical; no grain_fields nearby), all true.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-9",
+  "n": 431,
+  "verdict": "TRUE",
+  "inPlace": "Night patrol Impaired",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Town watch, resource Iron, severity critical, affects patrol; stress under_siege so computeChainSets marks it impaired.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-10",
+  "n": 535,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The tag line under the row is simply gone (provider slot now empty for a provenance word); the only added line is \"Night patrol Vulnerable\" (Town watch, Iron, severity vulnerable), true.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-11",
+  "n": 536,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The tag line under the row is simply gone (provider slot now empty for a provenance word); the only added line is \"Night patrol Vulnerable\" (Town watch, Iron, severity vulnerable), true.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-12",
+  "n": 542,
+  "verdict": "TRUE",
+  "inPlace": "Night patrol Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Town watch, Iron, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-13",
+  "n": 551,
+  "verdict": "TRUE",
+  "inPlace": "Taverns · Public bathhouse",
+  "why": "Range stripped; institutions[] holds \"Taverns (5-20)\" and \"Public bathhouse\".",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-14",
+  "n": 613,
+  "verdict": "TRUE",
+  "inPlace": "Gate duty Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Town watch, Iron, severity vulnerable, affects gate control.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-15",
+  "n": 614,
+  "verdict": "TRUE",
+  "inPlace": "Night patrol Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Town watch, Iron, severity vulnerable, affects patrol.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-16",
+  "n": 627,
+  "verdict": "TRUE",
+  "inPlace": "Merchant guilds · Annual fair",
+  "why": "Ranges and the duplicate guild gone; institutions[] holds \"Merchant guilds (3-8)\" and \"Annual fair\".",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-17",
+  "n": 678,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The tag line under the row is simply gone (provider slot now empty for a provenance word); the only added line is \"Monster lore Vulnerable\" (Sage's quarter, Paper materials, severity vulnerable), true.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-18",
+  "n": 679,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The tag line under the row is simply gone (provider slot now empty for a provenance word); the only added line is \"Monster lore Vulnerable\" (Sage's quarter, Paper materials, severity vulnerable), true.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-19",
+  "n": 680,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The tag line under the row is simply gone (provider slot now empty for a provenance word); the only added line is \"Monster lore Vulnerable\" (Sage's quarter, Paper materials, severity vulnerable), true.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-20",
+  "n": 681,
+  "verdict": "TRUE",
+  "inPlace": "Monster lore Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Sage's quarter, Paper materials, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-21",
+  "n": 698,
+  "verdict": "TRUE",
+  "inPlace": "Merchant guilds",
+  "why": "Range and duplicate gone; institutions[] holds \"Merchant guilds (15-40)\".",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-22",
+  "n": 700,
+  "verdict": "TRUE",
+  "inPlace": "Merchant guilds · Luxury goods quarter",
+  "why": "institutions[] holds \"Merchant guilds (15-40)\" and \"Luxury goods quarter\".",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-23",
+  "n": 702,
+  "verdict": "TRUE",
+  "inPlace": "Luxury goods quarter · Merchant guilds",
+  "why": "institutions[] holds \"Luxury goods quarter\" and \"Merchant guilds (15-40)\".",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-24",
+  "n": 767,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The tag line under the row is simply gone (provider slot now empty for a provenance word); added lines are the chip-stripped rows High-end retail / Historical research / Monster lore Vulnerable (tradeDependencies Luxury goods quarter and Sage's quarter, severity vulnerable), true.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-25",
+  "n": 768,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The tag line under the row is simply gone (provider slot now empty for a provenance word); added lines are the chip-stripped rows High-end retail / Historical research / Monster lore Vulnerable (tradeDependencies Luxury goods quarter and Sage's quarter, severity vulnerable), true.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-26",
+  "n": 769,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The tag line under the row is simply gone (provider slot now empty for a provenance word); added lines are the chip-stripped rows High-end retail / Historical research / Monster lore Vulnerable (tradeDependencies Luxury goods quarter and Sage's quarter, severity vulnerable), true.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-27",
+  "n": 771,
+  "verdict": "TRUE",
+  "inPlace": "High-end retail Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Luxury goods quarter, Luxury materials, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-28",
+  "n": 772,
+  "verdict": "TRUE",
+  "inPlace": "Historical research Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Sage's quarter, Paper materials, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-29",
+  "n": 773,
+  "verdict": "TRUE",
+  "inPlace": "Monster lore Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Sage's quarter, Paper materials, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-30",
+  "n": 794,
+  "verdict": "TRUE",
+  "inPlace": "Chandler · Ropemaker · Merchant guilds",
+  "why": "institutions[] holds \"Chandler\", \"Ropemaker\" and \"Merchant guilds (15-40)\"; the wrong (3-8) range is gone.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-31",
+  "n": 889,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The tag line under the row is simply gone (provider slot now empty for a provenance word); added lines are the chip-stripped Impaired rows (Specialized metalworkers, Metal ore + fuel, critical; Professional city watch, Iron + fuel, critical; under siege) and the \"Needs Metal ore + fuel\" row without its \"covers\" tail, all true by the record.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-32",
+  "n": 890,
+  "verdict": "TRUE",
+  "inPlace": "Alloy production Impaired",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Specialized metalworkers, Metal ore + fuel, critical; under_siege in force so computeChainSets marks it impaired.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-33",
+  "n": 892,
+  "verdict": "TRUE",
+  "inPlace": "Precision metalwork Impaired",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Specialized metalworkers, Metal ore + fuel, critical; under_siege in force so computeChainSets marks it impaired.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-34",
+  "n": 893,
+  "verdict": "TRUE",
+  "inPlace": "Crime reporting Impaired",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Professional city watch, Iron + fuel, critical; under_siege in force so computeChainSets marks it impaired.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-35",
+  "n": 894,
+  "verdict": "TRUE",
+  "inPlace": "Law enforcement Impaired",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Professional city watch, Iron + fuel, critical, affects law enforcement; under_siege in force so computeChainSets marks it impaired.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-36",
+  "n": 918,
+  "verdict": "TRUE",
+  "inPlace": "Chandler · Ropemaker · Merchant guilds",
+  "why": "institutions[] holds \"Chandler\", \"Ropemaker\" and \"Merchant guilds (15-40)\".",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-37",
+  "n": 929,
+  "verdict": "TRUE",
+  "inPlace": "Merchant guilds · Annual fair",
+  "why": "institutions[] holds \"Merchant guilds (15-40)\" and \"Major annual fairs\": the town has both; \"Annual fair\" is the shorter family name of its \"Major annual fairs\" (a naming nuance only).",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-38",
+  "n": 1021,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The tag line under the row is simply gone (provider slot now empty for a provenance word); added lines are the nine chip-stripped Vulnerable rows, each matching a tradeDependencies entry of severity vulnerable, true.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-39",
+  "n": 1023,
+  "verdict": "TRUE",
+  "inPlace": "Defence services Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Garrison, Iron + grain + fuel, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-40",
+  "n": 1024,
+  "verdict": "TRUE",
+  "inPlace": "Alloy production Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Specialized metalworkers, Metal ore + fuel, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-41",
+  "n": 1025,
+  "verdict": "TRUE",
+  "inPlace": "Horseshoeing Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Blacksmiths (3-10), Iron + fuel, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-42",
+  "n": 1026,
+  "verdict": "TRUE",
+  "inPlace": "Precision metalwork Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Specialized metalworkers, Metal ore + fuel, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-43",
+  "n": 1027,
+  "verdict": "TRUE",
+  "inPlace": "Repairs Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Blacksmiths (3-10), Iron + fuel, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-44",
+  "n": 1028,
+  "verdict": "TRUE",
+  "inPlace": "Tool manufacture Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Blacksmiths (3-10), Iron + fuel, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-45",
+  "n": 1029,
+  "verdict": "TRUE",
+  "inPlace": "Crime reporting Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Professional city watch, Iron + fuel, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-46",
+  "n": 1030,
+  "verdict": "TRUE",
+  "inPlace": "Law enforcement Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Professional city watch, Iron + fuel, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-47",
+  "n": 1031,
+  "verdict": "TRUE",
+  "inPlace": "Caravan organization Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Caravan masters' exchange, Capital + trade access, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-48",
+  "n": 1052,
+  "verdict": "TRUE",
+  "inPlace": "Craft guilds · Bowyers & fletchers (guild)",
+  "why": "Wrong (5-15) range gone; institutions[] holds \"Craft guilds (30-80)\" and \"Bowyers & fletchers (guild)\".",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-49",
+  "n": 1132,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The tag line under the row is simply gone (provider slot now empty for a provenance word); added lines are the six chip-stripped Vulnerable rows, each matching a tradeDependencies entry of severity vulnerable, true.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-50",
+  "n": 1133,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The tag line under the row is simply gone (provider slot now empty for a provenance word); added lines are the six chip-stripped Vulnerable rows, each matching a tradeDependencies entry of severity vulnerable, true.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-51",
+  "n": 1134,
+  "verdict": "TRUE",
+  "inPlace": "Alloy production Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Specialized metalworkers, Metal ore + fuel, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-52",
+  "n": 1135,
+  "verdict": "TRUE",
+  "inPlace": "Precision metalwork Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Specialized metalworkers, Metal ore + fuel, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-53",
+  "n": 1136,
+  "verdict": "TRUE",
+  "inPlace": "Historical research Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Sage's quarter, Paper materials, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-54",
+  "n": 1137,
+  "verdict": "TRUE",
+  "inPlace": "Monster lore Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Sage's quarter, Paper materials, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-55",
+  "n": 1138,
+  "verdict": "TRUE",
+  "inPlace": "Crime reporting Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Professional city watch, Iron + fuel, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-56",
+  "n": 1139,
+  "verdict": "TRUE",
+  "inPlace": "Law enforcement Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Professional city watch, Iron + fuel, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-57",
+  "n": 1151,
+  "verdict": "TRUE",
+  "inPlace": "Craft guilds",
+  "why": "Wrong (5-15) range gone; institutions[] holds \"Craft guilds (100-150+)\".",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-58",
+  "n": 1232,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The tag line under the row is simply gone (provider slot now empty for a provenance word); added lines are the thirteen chip-stripped Vulnerable rows, each matching a tradeDependencies entry of severity vulnerable (wartime, no siege), true.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-59",
+  "n": 1234,
+  "verdict": "TRUE",
+  "inPlace": "Custom commissions Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Luxury goods quarter, Luxury materials, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-60",
+  "n": 1235,
+  "verdict": "TRUE",
+  "inPlace": "High-end retail Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Luxury goods quarter, Luxury materials, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-61",
+  "n": 1241,
+  "verdict": "TRUE",
+  "inPlace": "Fresh bread Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Bakers (5-15), Grain, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-62",
+  "n": 1242,
+  "verdict": "TRUE",
+  "inPlace": "Historical research Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Sage's quarter, Paper materials, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-63",
+  "n": 1348,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The tag line under the row is simply gone (provider slot now empty for a provenance word); added lines are the nine chip-stripped Vulnerable rows, each matching a tradeDependencies entry of severity vulnerable, true.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-64",
+  "n": 1350,
+  "verdict": "TRUE",
+  "inPlace": "Alloy production Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Specialized metalworkers, Metal ore + fuel, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-65",
+  "n": 1351,
+  "verdict": "TRUE",
+  "inPlace": "Custom commissions Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Luxury goods quarter, Luxury materials, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-66",
+  "n": 1352,
+  "verdict": "TRUE",
+  "inPlace": "High-end retail Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Luxury goods quarter, Luxury materials, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-67",
+  "n": 1353,
+  "verdict": "TRUE",
+  "inPlace": "Precision metalwork Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Specialized metalworkers, Metal ore + fuel, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-68",
+  "n": 1354,
+  "verdict": "TRUE",
+  "inPlace": "Historical research Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Sage's quarter, Paper materials, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-69",
+  "n": 1355,
+  "verdict": "TRUE",
+  "inPlace": "Monster lore Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Sage's quarter, Paper materials, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-70",
+  "n": 1356,
+  "verdict": "TRUE",
+  "inPlace": "Currency exchange Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Banking district, Precious metals, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-71",
+  "n": 1357,
+  "verdict": "TRUE",
+  "inPlace": "Large loans Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Banking district, Precious metals, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-72",
+  "n": 1358,
+  "verdict": "TRUE",
+  "inPlace": "Law enforcement Vulnerable",
+  "why": "Same row with the chain-depth chip stripped; status matches economicState.tradeDependencies: Professional city watch, Iron + fuel, severity vulnerable.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-73",
+  "n": 1370,
+  "verdict": "TRUE",
+  "inPlace": "Merchant guilds · Luxury goods quarter · Annual fair",
+  "why": "Ranges and the duplicate guild gone; institutions[] holds \"Merchant guilds (50-100+)\", \"Luxury goods quarter\" and \"Major annual fairs\" (\"Annual fair\" is the shorter name of the town's major fairs, a naming nuance only).",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "2-74",
+  "n": 1371,
+  "verdict": "TRUE",
+  "inPlace": "Luxury goods quarter · Merchant guilds · International trade center",
+  "why": "institutions[] holds \"Luxury goods quarter\", \"Merchant guilds (50-100+)\" and \"International trade center\".",
+  "kind": "",
+  "severity": ""
+ }
+]

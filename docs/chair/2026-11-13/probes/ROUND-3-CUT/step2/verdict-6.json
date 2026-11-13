@@ -1,0 +1,443 @@
+[
+ {
+  "case": "6-1",
+  "n": 2,
+  "verdict": "TRUE",
+  "inPlace": "\"It has come through the Occupation and the Shortage, and travellers still remember the place kindly\"",
+  "why": "history.historicalEvents holds exactly The Occupation (112y) and The Shortage (46y), both shown on the History tab; the line now names both instead of setting the Occupation aside.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-2",
+  "n": 17,
+  "verdict": "STILL FALSE",
+  "inPlace": "Funeral rites, said by the parish priest, who comes or is sent for.",
+  "why": "The priest is now the next village's (institutions has 'Access to parish church'), but the Burial ground card on the same page says 'No clergy is near enough to speak, so the words fall to whoever knew the dead best': the two places disagree on who says the rites.",
+  "kind": "g",
+  "severity": "MED"
+ },
+ {
+  "case": "6-3",
+  "n": 40,
+  "verdict": "TRUE",
+  "inPlace": "Elder Council of Sahlfort promised a fair share of the food reserves last week, and little of it has reached the poor.",
+  "why": "'grain' became 'food': foodRecord.foodSources is ['game'], storageMonths 0.1 and the page says 'a few weeks in the larder' and 'rationed by whoever holds the stores'; the Elder Council governs and only promises a share, it is not named as holder.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-4",
+  "n": 111,
+  "verdict": "TRUE",
+  "inPlace": "Lyssosk sits with its back to the land and its face to the open water, and the wind off the sea carries salt and weed a long way inland. Palisade lines and river stairs reveal successive stages of expansion. A fishmonger shouts a price over the slap of wet baskets. Smoke rises from a shared oven, and neighbours queue to bake together.",
+  "why": "The replacing sentence claims only the sea (config.terrainType 'coastal', tradeRouteAccess 'port'), no masts or working port; the remaining sentences were on the page before and are not the gone line.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-5",
+  "n": 118,
+  "verdict": "TRUE",
+  "inPlace": "An accusation of heresy against a prominent figure split the faithful and drew in the secular authorities on both sides",
+  "why": "The tension row now prints history.currentTensions[0] (type heresy_trial) verbatim, which the History tab also shows; nothing in it claims a leadership vacuum against the Dominant, Stable Headman's Authority.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-6",
+  "n": 119,
+  "verdict": "TRUE",
+  "inPlace": "The accusersThe accused and their sympathizersAuthorities exploiting the rift",
+  "why": "The faction pills now read history.currentTensions[0].factions of the heresy_trial tension; no claimants or vacuum are claimed.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-7",
+  "n": 124,
+  "verdict": "TRUE",
+  "inPlace": "The evidence that convicted the heretic was fabricated, and a witness is finally willing to say so",
+  "why": "The Leadership Vacuum hook group is gone; the Heresy Trial group prints history.currentTensions[0].plotHooks, a tension the record holds.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-8",
+  "n": 125,
+  "verdict": "TRUE",
+  "inPlace": "A collier's kilns, smoking under their turf, turning whatever wood can be had into charcoal for forge and oven.",
+  "why": "No nearby woodland is claimed any more ('whatever wood can be had' fits resourceAnalysis.gaps 'lacks access to mountain_timber' and Resources 'No timber reaches the charcoal burner'); 'for forge and oven' says what charcoal is for and does not claim a smithy here.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-9",
+  "n": 153,
+  "verdict": "TRUE",
+  "inPlace": "Collaborator and resistance families still keep apart, and old property seizures remain legally unresolved",
+  "why": "The 'separate quarters' size claim is gone; the line is history.currentTensions[1] (occupation_legacy, lastingEffects 'still keep apart'), which the record holds and the History tab shows.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-10",
+  "n": 164,
+  "verdict": "TRUE",
+  "inPlace": "With the roads cut, grain is ground by hand at home until the carts can get through again.",
+  "why": "stress under_siege with 'The siege has cut every road in'; the hamlet has Subsistence farming and grain in its local goods, so hand-grinding at home fits.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-11",
+  "n": 231,
+  "verdict": "TRUE",
+  "inPlace": "The disease is not a plague yet, but every day the quarantine is ignored or bargained around brings it closer.",
+  "why": "stress plague_onset summary 'It is not yet a plague ... Quarantine measures are being resisted'; Defense 'Quarantine active ... ordered a quarantine they cannot make people keep'; no healers are named any more.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-12",
+  "n": 232,
+  "verdict": "TRUE",
+  "inPlace": "The disease is not a plague yet, but every day the quarantine is ignored or bargained around brings it closer.",
+  "why": "Same slot as 6-11: the line names no healers; it matches stress.summary ('not yet a plague', 'Quarantine measures are being resisted') and the Defense tab's unenforced quarantine.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-13",
+  "n": 243,
+  "verdict": "TRUE",
+  "inPlace": "A flat-bottomed ferry over the water, the crossing rights held in one family for generations. Carts, beasts and walkers wait their turn at the landing.",
+  "why": "The line no longer claims a river or a bridge; the record holds the 'River ferry' house and the town is coastal/port (config.terrainType 'coastal'), so a ferry over 'the water' stands. The card's catalogue title 'River ferry' and service 'River crossing' still print around it.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-14",
+  "n": 260,
+  "verdict": "TRUE",
+  "inPlace": "The road into Bhagagarh comes down to the sea, and the salt reaches you a mile before the first roof does. Occupational quarters cluster around shared wells and water channels. Sheep call to one another from the grazing beyond the houses. Each lane of stalls has someone who speaks for it, and they are all speaking at once. Even the outbuildings have new roofs, and nobody looks hungry.",
+  "why": "No harbour, docks or walls now: config.terrainType 'coastal'; the added sentences fit institutions 'Common grazing land' and 'Fish market', the page's market day and prosperity 'Wealthy'.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-15",
+  "n": 295,
+  "verdict": "TRUE",
+  "inPlace": "Sonya Ilyin, the priest, knows where the hoarded food can be found and is not saying; someone close to them is among the hoarders.",
+  "why": "stress famine: the hoard is food; npcs Sonya Ilyin role 'the priest'.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-16",
+  "n": 331,
+  "verdict": "STILL FALSE",
+  "inPlace": "A fire out of the houses nearest the river spread through barges, warehouses, and wharf infrastructure across entire districts before anyone could bring it under control",
+  "why": "Only 'riverside quarter' was reworded; the line still burns 'across entire districts' and through warehouses and wharf infrastructure in a village of 172 (spatialLayout.quarters only 'Religious Quarter'; no warehouse among institutions).",
+  "kind": "d",
+  "severity": "MED"
+ },
+ {
+  "case": "6-17",
+  "n": 403,
+  "verdict": "TRUE",
+  "inPlace": "Someone who publicly supports them is being paid by someone who opposes them. They know this.",
+  "why": "Maha al-Jazari (npcs role 'the magistrate') now has a hook that needs no recruits or outfit; it fits any public figure.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-18",
+  "n": 411,
+  "verdict": "TRUE",
+  "inPlace": "A collier's kilns, smoking under their turf, turning whatever wood can be had into charcoal for forge and oven.",
+  "why": "No surrounding woodland or smelters are claimed; 'whatever wood can be had' fits the missing timber, and the same page says 'Local coal fires the forges'.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-19",
+  "n": 490,
+  "verdict": "TRUE",
+  "inPlace": "Nahrhaven counts its mouths and its days of grain every morning, and the people on the walls watch each other as closely as they watch the enemy.",
+  "why": "foodRecord.hasGranary true, storageMonths 6.3; page 'Stores: a granary, six months of grain', so 'days of grain' is the right word.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-20",
+  "n": 491,
+  "verdict": "TRUE",
+  "inPlace": "Wants Secure enough food reserves to outlast the blockade",
+  "why": "stress under_siege, and the town holds a granary (hasGranary true): 'food reserves' is the right kind of word.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-21",
+  "n": 530,
+  "verdict": "TRUE",
+  "inPlace": "A covered fish market under the market wardens. Salted, smoked and dried fish come in by cart, sold by weight and inspected for rot.",
+  "why": "No morning catch is claimed for a mountain town with no fishing (config.terrainType 'mountain'); preserved fish carted in by road (tradeRouteAccess 'road') fits the same page's 'Preserved fish ... for storage and inland trade'.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-22",
+  "n": 573,
+  "verdict": "TRUE",
+  "inPlace": "Food endurance: Under siege the outlying fields would be lost; with what is still harvested, the granary would carry the town for about seven months at full rations, more than a year on half.",
+  "why": "Now a conditional: foodSecurity.hasSiege false, stress plague_onset only; storageMonths 6.3 with a granary fits about seven months.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-23",
+  "n": 596,
+  "verdict": "TRUE",
+  "inPlace": "Secret: On the payroll of the local underworld as a silent informant",
+  "why": "No thieves' guild is named; the record has a 'Smuggling operation' and the page speaks of 'the criminal network', so a local underworld exists.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-24",
+  "n": 610,
+  "verdict": "TRUE",
+  "inPlace": "The water is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.",
+  "why": "The line no longer names a river or bridge; the record holds the River ferry house and the town is coastal (config.terrainType 'coastal'). The card's catalogue title 'River ferry' still prints above it.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-25",
+  "n": 612,
+  "verdict": "TRUE",
+  "inPlace": "Transport foot travelers and small goods across the water.",
+  "why": "'river' became 'water', which a coastal town (config.terrainType 'coastal') has; the service's catalogue label 'River crossing' still heads it.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-26",
+  "n": 672,
+  "verdict": "TRUE",
+  "inPlace": "Turf-covered kilns burn wood slowly down to charcoal, the fuel that forge and oven need to run hot.",
+  "why": "No surrounding woodland, smelters or a forest burned are claimed; the line only says what the kilns do, which survives resourceAnalysis.gaps 'lacks access to mountain_timber'.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-27",
+  "n": 883,
+  "verdict": "TRUE",
+  "inPlace": "Horses, dogs, falcons, trained for the saddle, the hunt and the glove.",
+  "why": "'Common animals only' is gone; listing horses, dogs and falcons no longer denies the card's 'Exotic animal sales' service.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-28",
+  "n": 898,
+  "verdict": "TRUE",
+  "inPlace": "Whatever the kitchen gardens still give, sold early and gone by mid-morning.",
+  "why": "Fits famine + siege (foodRatio 0.35, 'Most households go short'); no plenty of dairy and eggs is claimed.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-29",
+  "n": 985,
+  "verdict": "TRUE",
+  "inPlace": "No food comes in by trade now, and what is left here is in a few hands; those who hold it have quadrupled the price, and the locals are arguing over whether to pay, wait it out, or take it.",
+  "why": "Matches importCoverage 0 / 'No food comes into Evangeeia by trade' and the famine summary 'the wealthy are hoarding'; the granary holder Loudovika Choniates 'has food ... will sell it'.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-30",
+  "n": 986,
+  "verdict": "TRUE",
+  "inPlace": "Wants Secure enough food reserves to outlast the blockade",
+  "why": "Right kind of word for a siege + famine city holding City granaries ('Stores: a granary, two months of grain').",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-31",
+  "n": 987,
+  "verdict": "TRUE",
+  "inPlace": "Secret: Is receiving grain shipments through a covert route and selling them at triple the official price after dark",
+  "why": "'crafts' became 'grain', the right kind of word in a siege + famine city with City granaries; a covert route is a secret's own claim, not open trade against 'No food comes into Evangeeia by trade'.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-32",
+  "n": 988,
+  "verdict": "TRUE",
+  "inPlace": "Secret: Controls a hidden cache of grain reserves that could feed the settlement for two more weeks",
+  "why": "'grain reserves ... could feed' now reads right; the city's stores are grain ('Stores: a granary, two months of grain').",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-33",
+  "n": 989,
+  "verdict": "TRUE",
+  "inPlace": "Secret: Has been skimming from the grain reserves to pay a personal debt that predates the siege",
+  "why": "Right kind of word: the city holds grain reserves in City granaries under siege + famine; skimming does not claim the NPC holds them.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-34",
+  "n": 1011,
+  "verdict": "TRUE",
+  "inPlace": "Organised bands of hired blades, a few score to a few hundred strong.",
+  "why": "'thousands' is gone; a few score to a few hundred hired blades is not beyond a city of population 7373.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-35",
+  "n": 1012,
+  "verdict": "TRUE",
+  "inPlace": "Horses, dogs, falcons, trained for the saddle, the hunt and the glove.",
+  "why": "'Common animals only' is gone, so the line no longer denies the same card's 'Exotic animal sales' service.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-36",
+  "n": 1068,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The Resources tab's whole 'Gaps & Opportunities' block (header and line) is gone and the tab adds no lines; nothing about grapes or the vintner now contradicts the Economics tab's imported grapes.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-37",
+  "n": 1125,
+  "verdict": "TRUE",
+  "inPlace": "A lone hand or small cell with no assassins guild behind it. Work comes through criminal go-betweens: less dependable, but deniable.",
+  "why": "'a place too small' is gone; institutions has 'Contract killer' and no assassins guild, so 'no assassins guild behind it' is so in a metropolis of 17438.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-38",
+  "n": 1126,
+  "verdict": "TRUE",
+  "inPlace": "Charcoal kilns, tended day and night while a burn lasts. What they make feeds the hottest fires in the settlement.",
+  "why": "No surrounding woodland or burned forest is claimed, which fits managed_forest in nearbyResourcesDepleted and gaps 'Charcoal burner runs on imported mountain_timber'.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-39",
+  "n": 1127,
+  "verdict": "TRUE",
+  "inPlace": "Evaporation pans or brine processing along the coast or riverbank. Every household needs what it makes.",
+  "why": "The stripped line no longer says salt is the most traded commodity (salt is not in primaryExports); what is left describes the house without claiming output. The gap 'lacks access to desert_salt' makes 'what it makes' a stretch at most.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-40",
+  "n": 1211,
+  "verdict": "TRUE",
+  "inPlace": "Their oldest friend has started paying for drinks with new silver and will not say where it came from.",
+  "why": "Quetzalxochitl Pech (npcs role 'the bath-keeper') now has a hook that needs no guards or patrols.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-41",
+  "n": 1212,
+  "verdict": "TRUE",
+  "inPlace": "An inheritance they did not expect has arrived from a relative they never met, along with that relative's debts.",
+  "why": "Tlacochcalco Kab (npcs role 'the bowyer') now has a personal hook that presumes no command or duty rosters.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-42",
+  "n": 1213,
+  "verdict": "TRUE",
+  "inPlace": "Someone left an item in their care and hasn't returned. The item is valuable. The absence is now suspicious.",
+  "why": "Puma Puc (npcs role 'the librarian' of Great library) no longer gets an armoury; the hook fits anyone.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-43",
+  "n": 1214,
+  "verdict": "TRUE",
+  "inPlace": "They have been asked to perform a ceremony they have theological objections to. The person asking has leverage.",
+  "why": "Yum Zapote is 'the hospital's master' of 'Hospital network', whose category is Religious, and the page lists Yum Zapote among the religious house's members; no patrols are claimed.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-44",
+  "n": 1215,
+  "verdict": "TRUE",
+  "inPlace": "Their landlord has doubled the rent and will lower it only if they report on the family next door.",
+  "why": "Atl May (npcs role 'the tailor') no longer keeps a weapons cache; the hook fits a tradesman.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-45",
+  "n": 1216,
+  "verdict": "TRUE",
+  "inPlace": "Their son has been seen at night with people who do not work, and comes home with coin.",
+  "why": "Muluc Zam (npcs role 'the dyer') no longer commands anyone under arms; the hook is personal.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-46",
+  "n": 1224,
+  "verdict": "TRUE",
+  "inPlace": "Every quarter keeps its own parish, so that faith runs through every part of the city.",
+  "why": "'Hundreds of quarters' is gone; spatialLayout.quarters lists 6 quarters against 50-100+ houses of worship, so a parish in every quarter holds.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-47",
+  "n": 1228,
+  "verdict": "TRUE",
+  "inPlace": "Horses, dogs, falcons, trained for the saddle, the hunt and the glove.",
+  "why": "'Common animals only' is gone; the line no longer denies the same entry's 'Exotic animal sales'.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "6-48",
+  "n": 1246,
+  "verdict": "STILL FALSE",
+  "inPlace": "Ore cut underground by the crews and brought out by cart for sorting.",
+  "why": "Now matches the shaft mine, but it still shows ore being worked while config.nearbyResourcesDepleted holds iron_deposits and precious_metals, primaryImports has 'Iron ore (local iron mines exhausted)' and the weapons and luxury chains are 'impaired' with resourceDepleted true.",
+  "kind": "c",
+  "severity": "MED"
+ },
+ {
+  "case": "6-49",
+  "n": 1341,
+  "verdict": "TRUE",
+  "inPlace": "A collier's kilns, smoking under their turf, turning whatever wood can be had into charcoal for forge and oven.",
+  "why": "No surrounding woodland is claimed ('whatever wood can be had' fits gaps 'lacks access to mountain_timber' on a coast with only magical_node); the forge and oven it names exist (Blacksmiths (3-10), Smelter).",
+  "kind": "",
+  "severity": ""
+ }
+]

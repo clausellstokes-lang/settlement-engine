@@ -1,0 +1,44 @@
+## (a) the house label total 471
+   78 page World/NPCs :: count range "(a-b)"    e.g. Carpenters (5-15) · member of Corrupt City Council
+   37 page Systems/Institutions :: count range "(a-b)"    e.g. Craft guilds (30-80)REQCrafts
+   37 page Systems/Services :: count range "(a-b)"    e.g. Craft guilds (30-80)
+   30 page Systems/Power :: count range "(a-b)"    e.g. Merchant guilds (15-40)
+   27 page Systems/Institutions :: other qualifier    e.g. Bowyers & fletchers (guild)Crafts
+   27 page Systems/Services :: other qualifier    e.g. Fence (word of mouth)
+   27 page Systems/Power :: other qualifier    e.g. Bowyers & fletchers (guild)
+   25 page Systems/Economics :: count range "(a-b)"    e.g. Merchant guilds (3-8) · Merchant guilds (15-40)
+   24 page World/NPCs :: other qualifier    e.g. Bowyers & fletchers (guild) · member of Corrupt City Council · member of Military/Guard
+   15 page Systems/Economics :: other qualifier    e.g. Tanner (established) · Cobbler's guild
+   11 page Systems/Institutions :: district tag    e.g. Inns and taverns (district)REQEconomyVulnerable
+   11 page Systems/Institutions :: count range, a name the catalogue lacks    e.g. Houses of worship (10-30)REQReligious
+   11 page Systems/Services :: count range, a name the catalogue lacks    e.g. Houses of worship (10-30)
+   11 page Systems/Services :: district tag    e.g. Inns and taverns (district)
+   11 page Systems/Power :: district tag    e.g. Inns and taverns (district)
+   11 page Systems/Power :: count range, a name the catalogue lacks    e.g. Houses of worship (10-30)
+   11 page World/NPCs :: district tag    e.g. Inns and taverns (district) · member of Corrupt City Council
+    8 page Systems/Institutions :: household range "(a-b households)"    e.g. Housing (500-4000 households)REQInfrastructure
+    8 page Systems/Services :: household range "(a-b households)"    e.g. Housing (500-4000 households)
+    8 page Systems/Power :: household range "(a-b households)"    e.g. Housing (500-4000 households)
+    7 page Systems/Economics :: district tag    e.g. Inns and taverns (district)
+    7 page Summary/Crisis :: count range "(a-b)"    e.g. Mills (2-5) · held by Sak Xul
+    4 page Systems/Institutions :: count word    e.g. Inn (multiple)REQEconomy
+    4 page Systems/Services :: count word    e.g. Inn (multiple)
+    4 page World/NPCs :: count word    e.g. Inn (multiple) · member of Merchant Guilds
+    3 page Systems/Institutions :: household floor "(n+ households)"    e.g. Housing (3500+ households)REQInfrastructure
+    3 page Systems/Services :: household floor "(n+ households)"    e.g. Housing (3500+ households)
+    3 page Systems/Power :: household floor "(n+ households)"    e.g. Housing (3500+ households)
+    3 page Systems/Power :: count word    e.g. Inn (multiple)
+    1 page Summary/Crisis :: other qualifier    e.g. Sawmill (commercial) · held by Kinich Koh
+    1 page Systems/Outlook :: other qualifier    e.g. 2 institutions critically impaired by siege: Carpenter (part-time), Citizen militia.
+    1 page Summary/Crisis :: condition "(if …)"    e.g. Gates (if walled)
+    1 page Systems/Defense :: condition "(if …)"    e.g. Gates (if walled)
+    1 page Systems/Outlook :: count range "(a-b)"    e.g. 7 institutions critically impaired by siege: Weekly market, Market square, Taverns (5-20), Town gran
+## (b) the machinery total 459
+  224 page Systems/Institutions :: badgeREQ    e.g. Craft guilds (30-80)REQCrafts
+   75 page Systems/Power :: breakdown    e.g. Breakdown
+   61 page Systems/Economics :: affects    e.g. Needs Grain + water power - Dependent on trade routes. Siege, road closure, or blockade would impair
+   51 page Systems/Services :: chainDepth    e.g. Monster lore Vulnerable2-order chain
+   25 page World/History :: sliderEnds    e.g. Wild magicminormajor
+   11 page Systems/Defense :: badgeREQ    e.g. REQ
+    9 page Systems/Defense :: badgeFORCED    e.g. FORCED
+    3 page Systems/Services :: covers    e.g. Needs Metal ore + fuelSupply route severed. Operating at minimal capacity or shut down.· covers Meta

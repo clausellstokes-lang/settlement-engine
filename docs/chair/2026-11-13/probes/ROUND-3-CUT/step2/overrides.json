@@ -1,0 +1,7 @@
+{
+ "5-27": {"verdict":"REMOVED BY CHANCE","why":"the Defense row of the legitimacy Breakdown is gone only because its value is now 0; the Breakdown block (Prosperity -20, Safety -20, Food -10) still prints at up in this town (reader 5)."},
+ "6-3": {"verdict":"STILL FALSE","why":"ROUND-3-CUT override of reader 6's TRUE: this very reworded sentence ('...a fair share of the food reserves...') is itself cold-list line #4, judged false (MED) by the first cold reader on ra's page, and REVIEW-R2-STAGES finding 7 holds the frame false in a thorp with no granary and about three days of household stores (storesHeld false, storageMonths 0.1, holderId null).","severity":"MED"},
+ "4-18": {"verdict":"NOTHING","why":"reader 4 judged NEW FALSE only because of a carried-over false Imports row that was already false at the base (its own cold-list line); the gone machinery row's slot is empty."},
+ "4-20": {"verdict":"NOTHING","why":"as 4-18: the false Imports row is a carry-over, its own cold-list line."},
+ "4-28": {"verdict":"NOTHING","why":"as 4-18: the false Imports row is a carry-over, its own cold-list line."}
+}

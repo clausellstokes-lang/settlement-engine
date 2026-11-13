@@ -1,0 +1,1202 @@
+[
+ {
+  "id": "S1",
+  "writerFile": "src/components/new/npcComponents.jsx",
+  "writerFn": "NPCInlineCard",
+  "writerLine": 401,
+  "wordsFile": "src/generators/people/representatives.js; src/domain/people/cardPowers.js; src/data/institutionalCatalog.js",
+  "wordsFn": "generateRepresentatives (card.institution.key = house.name, a catalogue name from institutionalCatalog) + cardPowerLine/cardPowerParts (RANK_WORD 'first|second|third' / UNRANKED_WORD 'member' + ' of ' + power name)",
+  "how": "card subline prints the house door (EntityLink fallback = card.institution.key, the raw catalogue name with its count range), ' · ', then cardPowerLine's '<rank> of <power>' tail",
+  "confidence": "traced"
+ },
+ {
+  "id": "S2",
+  "writerFile": "src/components/new/serviceComponents.jsx",
+  "writerFn": "ServiceItem",
+  "writerLine": 120,
+  "wordsFile": "src/generators/services/serviceRollMaterialization.js; src/data/institutionalCatalog.js",
+  "wordsFn": "materializeInstitutionServiceRolls/projectAvailableService (service.institution = providing institution's catalogue name)",
+  "how": "prints the service row's provider attribution line: InstitutionLink label = institutionDisplayName(svc.institution), i.e. the raw catalogue name with its count range",
+  "confidence": "traced"
+ },
+ {
+  "id": "S3",
+  "writerFile": "src/components/new/npcComponents.jsx",
+  "writerFn": "NPCInlineCard",
+  "writerLine": 401,
+  "wordsFile": "src/generators/people/representatives.js; src/domain/people/cardPowers.js; src/data/institutionalCatalog.js",
+  "wordsFn": "generateRepresentatives (card.institution.key = house.name, a catalogue name from institutionalCatalog) + cardPowerLine/cardPowerParts (RANK_WORD 'first|second|third' / UNRANKED_WORD 'member' + ' of ' + power name)",
+  "how": "card subline prints the house door (EntityLink fallback = card.institution.key, the raw catalogue name with its count range), ' · ', then cardPowerLine's '<rank> of <power>' tail",
+  "confidence": "traced"
+ },
+ {
+  "id": "S4",
+  "writerFile": "src/components/new/tabs/InstitutionsTab.jsx",
+  "writerFn": "InstitutionCard",
+  "writerLine": 264,
+  "wordsFile": "src/data/institutionalCatalog.js; src/generators/steps/assembleInstitutions.js",
+  "wordsFn": "institutionalCatalog[tier][category] name; source 'required' (assembleInstitutions) -> institutionBadge 'REQ'; status from houseStatus/statusOf",
+  "how": "card header prints label (institutionDisplayName = raw catalogue name), the provenance badge ('REQ' when required), tokenCase(category), and the worst service status tag (Vulnerable/Impaired) as adjacent spans",
+  "confidence": "traced"
+ },
+ {
+  "id": "S5",
+  "writerFile": "src/components/new/npcComponents.jsx",
+  "writerFn": "NPCInlineCard",
+  "writerLine": 401,
+  "wordsFile": "src/generators/people/representatives.js; src/data/institutionalCatalog.js",
+  "wordsFn": "generateRepresentatives (card.institution.key = house.name from institutionalCatalog)",
+  "how": "card subline prints only the house door (raw catalogue institution name) when the card holds no power membership, so cardPowerLine returns ''",
+  "confidence": "traced"
+ },
+ {
+  "id": "S6",
+  "writerFile": "src/components/new/tabs/PowerTab.jsx",
+  "writerFn": "PowerTab",
+  "writerLine": 321,
+  "wordsFile": "src/generators/factionDynamics.js",
+  "wordsFn": "computePublicLegitimacy breakdown {prosperity, safety, defense, food}",
+  "how": "prints one chip per non-zero legitimacy breakdown entry: tokenCase(key) + signed value",
+  "confidence": "traced"
+ },
+ {
+  "id": "S7",
+  "writerFile": "src/components/new/tabs/PowerTab.jsx",
+  "writerFn": "PowerTab",
+  "writerLine": 321,
+  "wordsFile": "src/generators/factionDynamics.js",
+  "wordsFn": "computePublicLegitimacy breakdown {prosperity, safety, defense, food}",
+  "how": "prints one chip per non-zero legitimacy breakdown entry: tokenCase(key) + signed value",
+  "confidence": "traced"
+ },
+ {
+  "id": "S8",
+  "writerFile": "src/components/new/tabs/PowerTab.jsx",
+  "writerFn": "PowerTab",
+  "writerLine": 321,
+  "wordsFile": "src/generators/factionDynamics.js",
+  "wordsFn": "computePublicLegitimacy breakdown {prosperity, safety, defense, food}",
+  "how": "prints one chip per non-zero legitimacy breakdown entry: tokenCase(key) + signed value",
+  "confidence": "traced"
+ },
+ {
+  "id": "S9",
+  "writerFile": "src/components/new/tabs/PowerTab.jsx",
+  "writerFn": "PowerTab",
+  "writerLine": 311,
+  "wordsFile": "",
+  "wordsFn": "",
+  "how": "literal 'Breakdown' heading above the legitimacy modifier chips, shown when any modifier is non-zero",
+  "confidence": "traced"
+ },
+ {
+  "id": "S10",
+  "writerFile": "src/components/new/npcComponents.jsx",
+  "writerFn": "NPCInlineCard",
+  "writerLine": 401,
+  "wordsFile": "src/generators/people/representatives.js; src/domain/people/cardPowers.js; src/data/institutionalCatalog.js",
+  "wordsFn": "generateRepresentatives (card.institution.key = house.name, a catalogue name from institutionalCatalog) + cardPowerLine/cardPowerParts (RANK_WORD 'first|second|third' / UNRANKED_WORD 'member' + ' of ' + power name)",
+  "how": "card subline prints the house door (EntityLink fallback = card.institution.key, the raw catalogue name with its count range), ' · ', then cardPowerLine's '<rank> of <power>' tail",
+  "confidence": "traced"
+ },
+ {
+  "id": "S11",
+  "writerFile": "src/components/new/npcComponents.jsx",
+  "writerFn": "NPCInlineCard",
+  "writerLine": 401,
+  "wordsFile": "src/generators/people/representatives.js; src/domain/people/cardPowers.js; src/data/institutionalCatalog.js",
+  "wordsFn": "generateRepresentatives (card.institution.key = house.name, a catalogue name from institutionalCatalog) + cardPowerLine/cardPowerParts (RANK_WORD 'first|second|third' / UNRANKED_WORD 'member' + ' of ' + power name)",
+  "how": "card subline prints the house door (EntityLink fallback = card.institution.key, the raw catalogue name with its count range), ' · ', then cardPowerLine's '<rank> of <power>' tail",
+  "confidence": "traced"
+ },
+ {
+  "id": "S12",
+  "writerFile": "src/components/new/tabs/DefenseTab.jsx",
+  "writerFn": "DefenseTab",
+  "writerLine": 447,
+  "wordsFile": "src/domain/display/defenseDisplay.js",
+  "wordsFn": "foodEnduranceLine (label FOOD_ENDURANCE_LABEL, lead 'No granary: ' + opening, monthsInWords) over defenseFacts.js foodEnduranceOf",
+  "how": "prints '<label>:' then before + the stores door (EntityLink) + after, composed by foodEnduranceLine",
+  "confidence": "traced"
+ },
+ {
+  "id": "S13",
+  "writerFile": "src/components/new/tabs/InstitutionsTab.jsx",
+  "writerFn": "InstitutionCard",
+  "writerLine": 264,
+  "wordsFile": "src/data/institutionalCatalog.js; src/generators/steps/assembleInstitutions.js",
+  "wordsFn": "institutionalCatalog[tier][category] name; source 'required' (assembleInstitutions) -> institutionBadge 'REQ'; status from houseStatus/statusOf",
+  "how": "card header prints label (institutionDisplayName = raw catalogue name), the provenance badge ('REQ' when required), tokenCase(category), and the worst service status tag (Vulnerable/Impaired) as adjacent spans",
+  "confidence": "traced"
+ },
+ {
+  "id": "S14",
+  "writerFile": "src/components/new/tabs/InstitutionsTab.jsx",
+  "writerFn": "InstitutionCard",
+  "writerLine": 264,
+  "wordsFile": "src/data/institutionalCatalog.js; src/generators/steps/assembleInstitutions.js",
+  "wordsFn": "institutionalCatalog[tier][category] name; source 'required' (assembleInstitutions) -> institutionBadge 'REQ'; status from houseStatus/statusOf",
+  "how": "card header prints label (institutionDisplayName = raw catalogue name), the provenance badge ('REQ' when required), tokenCase(category), and the worst service status tag (Vulnerable/Impaired) as adjacent spans",
+  "confidence": "traced"
+ },
+ {
+  "id": "S15",
+  "writerFile": "src/components/new/serviceComponents.jsx",
+  "writerFn": "ServiceItem",
+  "writerLine": 120,
+  "wordsFile": "src/generators/servicesGenerator.js",
+  "wordsFn": "generateAvailableServices (synthetic criminal services with institution '(covert)' / addCrimeService(..., '(smuggling)'))",
+  "how": "prints the provider attribution line raw: the synthetic parenthesised pseudo-institution placeholder",
+  "confidence": "traced"
+ },
+ {
+  "id": "S16",
+  "writerFile": "src/components/new/serviceComponents.jsx",
+  "writerFn": "ServiceItem",
+  "writerLine": 120,
+  "wordsFile": "src/generators/servicesGenerator.js",
+  "wordsFn": "generateAvailableServices (synthetic criminal services with institution '(covert)' / addCrimeService(..., '(smuggling)'))",
+  "how": "prints the provider attribution line raw: the synthetic parenthesised pseudo-institution placeholder",
+  "confidence": "traced"
+ },
+ {
+  "id": "S17",
+  "writerFile": "src/components/new/tabs/power/PowerStrata.jsx",
+  "writerFn": "ThePowers",
+  "writerLine": 132,
+  "wordsFile": "src/components/new/Primitives.jsx",
+  "wordsFn": "Section (collapsible title + ▲/▼ caret)",
+  "how": "composes the Section title 'The Powers (${powers.length})'; Section appends the open caret",
+  "confidence": "traced"
+ },
+ {
+  "id": "S18",
+  "writerFile": "src/components/new/tabs/HistoryTab.jsx",
+  "writerFn": "TensionRow",
+  "writerLine": 81,
+  "wordsFile": "src/components/new/tabs/HistoryTab.jsx; src/data/historyData.js; src/generators/historyGenerator.js",
+  "wordsFn": "TENSION_META[t.type].label (else tokenCase(t.type), e.g. 'Wild magic', 'Heresy trial') + t.severity array from HISTORICAL_EVENTS_DATA (via generateHistory/buildHistoricalEvent)",
+  "how": "tension header prints the type label then one chip per severity word ('minor','major') as adjacent spans",
+  "confidence": "traced"
+ },
+ {
+  "id": "S19",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicFlowsSection",
+  "writerLine": 197,
+  "wordsFile": "src/generators/computeActiveChains.js; src/data/supplyChainData.js",
+  "wordsFn": "computeActiveChains chain.resource (chain def's resource label)",
+  "how": "chain card's 'From' line prints the chain's resource label (here alone, no upstream imports)",
+  "confidence": "traced"
+ },
+ {
+  "id": "S20",
+  "writerFile": "src/components/new/tabs/CrisisTab.jsx",
+  "writerFn": "CrisisSection",
+  "writerLine": 163,
+  "wordsFile": "src/domain/crisis/crisisCast.js; src/domain/crisis/crisisPage.js",
+  "wordsFn": "deriveLevers ({institution: house name, holderName}) via composeCrisisPage levers",
+  "how": "lever row prints the institution link (raw catalogue name) then ' · held by ' + holder name",
+  "confidence": "traced"
+ },
+ {
+  "id": "S21",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicFlowsSection",
+  "writerLine": 202,
+  "wordsFile": "src/generators/computeActiveChains.js; src/data/supplyChainData.js",
+  "wordsFn": "computeActiveChains (chain.processingInstitutions = matchedInsts, the town's institution names matched against the chain def's processing patterns); via SupplyChainsPanel.jsx chainFlowFacts",
+  "how": "chain card's 'Via' line prints facts.institutions mapped through institutionDisplayName (raw catalogue names with count ranges) joined ' · '",
+  "confidence": "traced"
+ },
+ {
+  "id": "S22",
+  "writerFile": "src/components/new/tabs/PowerTab.jsx",
+  "writerFn": "PowerTab",
+  "writerLine": 321,
+  "wordsFile": "src/generators/factionDynamics.js",
+  "wordsFn": "computePublicLegitimacy breakdown {prosperity, safety, defense, food}",
+  "how": "prints one chip per non-zero legitimacy breakdown entry: tokenCase(key) + signed value",
+  "confidence": "traced"
+ },
+ {
+  "id": "S23",
+  "writerFile": "src/components/new/tabs/DefenseTab.jsx",
+  "writerFn": "ForceCard (inside DefenseTab)",
+  "writerLine": 345,
+  "wordsFile": "src/generators/steps/coherenceRepairPass.js; src/generators/factionCorrelation.js",
+  "wordsFn": "institution.source 'coherence_repair' / 'faction_boost' (any non-'generated', non-'required' source)",
+  "how": "force card badge prints 'REQ' for source 'required' and 'FORCED' for every other non-generated source (here coherence_repair / faction_boost)",
+  "confidence": "traced"
+ },
+ {
+  "id": "S24",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicFlowsSection",
+  "writerLine": 202,
+  "wordsFile": "src/generators/computeActiveChains.js; src/data/supplyChainData.js",
+  "wordsFn": "computeActiveChains (chain.processingInstitutions = matchedInsts, the town's institution names matched against the chain def's processing patterns); via SupplyChainsPanel.jsx chainFlowFacts",
+  "how": "chain card's 'Via' line prints facts.institutions mapped through institutionDisplayName (raw catalogue names with count ranges) joined ' · '",
+  "confidence": "traced"
+ },
+ {
+  "id": "S25",
+  "writerFile": "src/components/new/tabs/InstitutionsTab.jsx",
+  "writerFn": "InstitutionCard",
+  "writerLine": 264,
+  "wordsFile": "src/data/institutionalCatalog.js; src/generators/steps/assembleInstitutions.js",
+  "wordsFn": "institutionalCatalog[tier][category] name; source 'required' (assembleInstitutions) -> institutionBadge 'REQ'; status from houseStatus/statusOf",
+  "how": "card header prints label (institutionDisplayName = raw catalogue name), the provenance badge ('REQ' when required), tokenCase(category), and the worst service status tag (Vulnerable/Impaired) as adjacent spans",
+  "confidence": "traced"
+ },
+ {
+  "id": "S26",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicFlowsSection",
+  "writerLine": 202,
+  "wordsFile": "src/generators/computeActiveChains.js; src/data/supplyChainData.js",
+  "wordsFn": "computeActiveChains (chain.processingInstitutions = matchedInsts, the town's institution names matched against the chain def's processing patterns); via SupplyChainsPanel.jsx chainFlowFacts",
+  "how": "chain card's 'Via' line prints facts.institutions mapped through institutionDisplayName (raw catalogue names with count ranges) joined ' · '",
+  "confidence": "traced"
+ },
+ {
+  "id": "S27",
+  "writerFile": "src/components/new/tabs/HistoryTab.jsx",
+  "writerFn": "TensionRow",
+  "writerLine": 81,
+  "wordsFile": "src/components/new/tabs/HistoryTab.jsx; src/data/historyData.js; src/generators/historyGenerator.js",
+  "wordsFn": "TENSION_META[t.type].label (else tokenCase(t.type), e.g. 'Wild magic', 'Heresy trial') + t.severity array from HISTORICAL_EVENTS_DATA (via generateHistory/buildHistoricalEvent)",
+  "how": "tension header prints the type label then one chip per severity word ('minor','major') as adjacent spans",
+  "confidence": "traced"
+ },
+ {
+  "id": "S28",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicFlowsSection",
+  "writerLine": 202,
+  "wordsFile": "src/generators/computeActiveChains.js; src/data/supplyChainData.js",
+  "wordsFn": "computeActiveChains (chain.processingInstitutions = matchedInsts, the town's institution names matched against the chain def's processing patterns); via SupplyChainsPanel.jsx chainFlowFacts",
+  "how": "chain card's 'Via' line prints facts.institutions mapped through institutionDisplayName (raw catalogue names with count ranges) joined ' · '",
+  "confidence": "traced"
+ },
+ {
+  "id": "S29",
+  "writerFile": "src/components/new/npcComponents.jsx",
+  "writerFn": "NPCInlineCard",
+  "writerLine": 403,
+  "wordsFile": "src/domain/people/cardPowers.js; src/generators/people/representatives.js",
+  "wordsFn": "cardPowerLine (office from cardOfficeOf = card.role, prefixed to the governing power's 'first of X'); house name from generateRepresentatives",
+  "how": "house door, ' · ', then cardPowerLine's '<office>, first of <governing power>' for the dual-hat leader",
+  "confidence": "traced"
+ },
+ {
+  "id": "S30",
+  "writerFile": "src/components/new/serviceComponents.jsx",
+  "writerFn": "ServiceItem",
+  "writerLine": 120,
+  "wordsFile": "src/generators/services/serviceRollMaterialization.js; src/data/institutionalCatalog.js",
+  "wordsFn": "materializeInstitutionServiceRolls/projectAvailableService (service.institution = providing institution's catalogue name)",
+  "how": "prints the service row's provider attribution line: InstitutionLink label = institutionDisplayName(svc.institution), i.e. the raw catalogue name with its count range",
+  "confidence": "traced"
+ },
+ {
+  "id": "S31",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicsTab",
+  "writerLine": 546,
+  "wordsFile": "src/generators/computeActiveChains.js",
+  "wordsFn": "deriveLocalProductionFromChains (economicState.localProduction: resource commodity keys + chain outputs + services)",
+  "how": "'Produced locally' pills: each eco.localProduction entry with '_' -> ' ' (CSS capitalize only), flattened adjacent",
+  "confidence": "traced"
+ },
+ {
+  "id": "S32",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicsTab",
+  "writerLine": 508,
+  "wordsFile": "src/generators/computeActiveChains.js; src/domain/resourceSemantics.js",
+  "wordsFn": "deriveImportsFromChains (economicState.primaryImports); shortageImport labels e.g. 'Gemstones (local gem deposits exhausted)'",
+  "how": "Imports pills: sorted shown imports, each through resourceDisplayName, adjacent",
+  "confidence": "traced"
+ },
+ {
+  "id": "S33",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicsTab",
+  "writerLine": 546,
+  "wordsFile": "src/generators/computeActiveChains.js",
+  "wordsFn": "deriveLocalProductionFromChains (economicState.localProduction: resource commodity keys + chain outputs + services)",
+  "how": "'Produced locally' pills: each eco.localProduction entry with '_' -> ' ' (CSS capitalize only), flattened adjacent",
+  "confidence": "traced"
+ },
+ {
+  "id": "S34",
+  "writerFile": "src/components/new/tabs/power/PowerStrata.jsx",
+  "writerFn": "ThePowers",
+  "writerLine": 159,
+  "wordsFile": "src/components/new/tabs/power/PowerStrata.jsx",
+  "wordsFn": "ARCHETYPE_LABEL[p.archetype], p.powerLabel, p.name (powerStructure strata)",
+  "how": "power row prints the 'Ruler'/'Contender' pill, the power name link, the archetype label, the powerLabel chip and the ▲/▼ expand caret as adjacent spans",
+  "confidence": "traced"
+ },
+ {
+  "id": "S35",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicsTab",
+  "writerLine": 442,
+  "wordsFile": "src/generators/economy/economicState.js",
+  "wordsFn": "generateEconomicState incomeSources {source, desc}",
+  "how": "income row prints the source in bold then ' ' + desc",
+  "confidence": "traced"
+ },
+ {
+  "id": "S36",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicsTab",
+  "writerLine": 477,
+  "wordsFile": "src/generators/computeActiveChains.js; src/domain/display/tradeListDisplay.js",
+  "wordsFn": "deriveExportsFromChains (economicState.primaryExports) filtered by displayTradeList",
+  "how": "Exports pills: each shown export printed raw, adjacent",
+  "confidence": "traced"
+ },
+ {
+  "id": "S37",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicsTab",
+  "writerLine": 546,
+  "wordsFile": "src/generators/computeActiveChains.js",
+  "wordsFn": "deriveLocalProductionFromChains (economicState.localProduction: resource commodity keys + chain outputs + services)",
+  "how": "'Produced locally' pills: each eco.localProduction entry with '_' -> ' ' (CSS capitalize only), flattened adjacent",
+  "confidence": "traced"
+ },
+ {
+  "id": "S38",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicsTab",
+  "writerLine": 508,
+  "wordsFile": "src/generators/computeActiveChains.js; src/domain/resourceSemantics.js",
+  "wordsFn": "deriveImportsFromChains (economicState.primaryImports); shortageImport labels e.g. 'Gemstones (local gem deposits exhausted)'",
+  "how": "Imports pills: sorted shown imports, each through resourceDisplayName, adjacent",
+  "confidence": "traced"
+ },
+ {
+  "id": "S39",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicsTab",
+  "writerLine": 546,
+  "wordsFile": "src/generators/computeActiveChains.js",
+  "wordsFn": "deriveLocalProductionFromChains (economicState.localProduction: resource commodity keys + chain outputs + services)",
+  "how": "'Produced locally' pills: each eco.localProduction entry with '_' -> ' ' (CSS capitalize only), flattened adjacent",
+  "confidence": "traced"
+ },
+ {
+  "id": "S40",
+  "writerFile": "src/components/new/tabs/DefenseTab.jsx",
+  "writerFn": "DefenseTab",
+  "writerLine": 447,
+  "wordsFile": "src/domain/display/defenseDisplay.js",
+  "wordsFn": "foodEnduranceLine (label FOOD_ENDURANCE_LABEL, lead 'No granary: ' + opening, monthsInWords) over defenseFacts.js foodEnduranceOf",
+  "how": "prints '<label>:' then before + the stores door (EntityLink) + after, composed by foodEnduranceLine",
+  "confidence": "traced"
+ },
+ {
+  "id": "S41",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicsTab",
+  "writerLine": 508,
+  "wordsFile": "src/generators/computeActiveChains.js; src/domain/resourceSemantics.js",
+  "wordsFn": "deriveImportsFromChains (economicState.primaryImports); shortageImport labels e.g. 'Gemstones (local gem deposits exhausted)'",
+  "how": "Imports pills: sorted shown imports, each through resourceDisplayName, adjacent",
+  "confidence": "traced"
+ },
+ {
+  "id": "S42",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicsTab",
+  "writerLine": 546,
+  "wordsFile": "src/generators/computeActiveChains.js",
+  "wordsFn": "deriveLocalProductionFromChains (economicState.localProduction: resource commodity keys + chain outputs + services)",
+  "how": "'Produced locally' pills: each eco.localProduction entry with '_' -> ' ' (CSS capitalize only), flattened adjacent",
+  "confidence": "traced"
+ },
+ {
+  "id": "S43",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicsTab",
+  "writerLine": 546,
+  "wordsFile": "src/generators/computeActiveChains.js",
+  "wordsFn": "deriveLocalProductionFromChains (economicState.localProduction: resource commodity keys + chain outputs + services)",
+  "how": "'Produced locally' pills: each eco.localProduction entry with '_' -> ' ' (CSS capitalize only), flattened adjacent",
+  "confidence": "traced"
+ },
+ {
+  "id": "S44",
+  "writerFile": "src/components/new/tabs/CrisisTab.jsx",
+  "writerFn": "CrisisSection",
+  "writerLine": 125,
+  "wordsFile": "src/domain/crisis/crisisCast.js",
+  "wordsFn": "CRISIS_ROLE_LABEL.brunt 'bears the brunt' + CAST_REASONS.bruntLeast (via composeCrisisPage cast)",
+  "how": "cast row prints '<roleLabel>: ', the person link, then ' · <reason>'",
+  "confidence": "traced"
+ },
+ {
+  "id": "S45",
+  "writerFile": "src/components/new/tabs/InstitutionsTab.jsx",
+  "writerFn": "InstitutionCard",
+  "writerLine": 264,
+  "wordsFile": "src/data/institutionalCatalog.js; src/generators/steps/assembleInstitutions.js",
+  "wordsFn": "institutionalCatalog[tier][category] name; source 'required' (assembleInstitutions) -> institutionBadge 'REQ'; status from houseStatus/statusOf",
+  "how": "card header prints label (institutionDisplayName = raw catalogue name), the provenance badge ('REQ' when required), tokenCase(category), and the worst service status tag (Vulnerable/Impaired) as adjacent spans",
+  "confidence": "traced"
+ },
+ {
+  "id": "S46",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicFlowsSection",
+  "writerLine": 202,
+  "wordsFile": "src/generators/computeActiveChains.js; src/data/supplyChainData.js",
+  "wordsFn": "computeActiveChains (chain.processingInstitutions = matchedInsts, the town's institution names matched against the chain def's processing patterns); via SupplyChainsPanel.jsx chainFlowFacts",
+  "how": "chain card's 'Via' line prints facts.institutions mapped through institutionDisplayName (raw catalogue names with count ranges) joined ' · '",
+  "confidence": "traced"
+ },
+ {
+  "id": "S47",
+  "writerFile": "src/components/new/tabs/InstitutionsTab.jsx",
+  "writerFn": "InstitutionCard",
+  "writerLine": 264,
+  "wordsFile": "src/data/institutionalCatalog.js; src/generators/steps/assembleInstitutions.js",
+  "wordsFn": "institutionalCatalog[tier][category] name; source 'required' (assembleInstitutions) -> institutionBadge 'REQ'; status from houseStatus/statusOf",
+  "how": "card header prints label (institutionDisplayName = raw catalogue name), the provenance badge ('REQ' when required), tokenCase(category), and the worst service status tag (Vulnerable/Impaired) as adjacent spans",
+  "confidence": "traced"
+ },
+ {
+  "id": "S48",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicsTab",
+  "writerLine": 508,
+  "wordsFile": "src/generators/computeActiveChains.js; src/domain/resourceSemantics.js",
+  "wordsFn": "deriveImportsFromChains (economicState.primaryImports); shortageImport labels e.g. 'Gemstones (local gem deposits exhausted)'",
+  "how": "Imports pills: sorted shown imports, each through resourceDisplayName, adjacent",
+  "confidence": "traced"
+ },
+ {
+  "id": "S49",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicsTab",
+  "writerLine": 561,
+  "wordsFile": "src/generators/economy/foodBalance.js",
+  "wordsFn": "deriveFoodBalanceAnalysis (dailyProduction, importCoverage, dailyNeed, deficit)",
+  "how": "Food Security stat row prints 'Production: N lbs/day', '+ N imported', 'Need: N lbs/day', 'Short: N lbs/day' as adjacent spans",
+  "confidence": "traced"
+ },
+ {
+  "id": "S50",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicFlowsSection",
+  "writerLine": 216,
+  "wordsFile": "src/generators/computeActiveChains.js",
+  "wordsFn": "computeActiveChains chain.upstreamNote = `Needs imported ${missingUpstream.join(', ')}: no local source` (resolved by supplyChainNoteInWords)",
+  "how": "prints the generator's upstream note, chain ids resolved to words",
+  "confidence": "traced"
+ },
+ {
+  "id": "S51",
+  "writerFile": "src/components/new/tabs/ResourcesTab.jsx",
+  "writerFn": "ResourcesTab",
+  "writerLine": 234,
+  "wordsFile": "src/domain/display/validationOnPage.js",
+  "wordsFn": "resourceGapLines: `Work on the ${raw} here stops half-way: no ${orList(missing)} finishes it.` (line 214) over resourceAnalysis.gaps",
+  "how": "Gaps & Opportunities prints each gap line's impact sentence",
+  "confidence": "traced"
+ },
+ {
+  "id": "S52",
+  "writerFile": "src/components/new/tabs/ViabilityTab.jsx",
+  "writerFn": "ViabilityTab",
+  "writerLine": 254,
+  "wordsFile": "src/generators/economy/viability.js",
+  "wordsFn": "generateEconomicViability: `${n} institutions critically impaired by siege: ` + institutionDisplayName list (line 526)",
+  "how": "Active Stress Effects card prints the stress-consequence issue description raw",
+  "confidence": "traced"
+ },
+ {
+  "id": "S53",
+  "writerFile": "src/components/new/npcComponents.jsx",
+  "writerFn": "NPCInlineCard",
+  "writerLine": 493,
+  "wordsFile": "src/generators/npcGenerator.js; src/generators/people/goals.js",
+  "wordsFn": "SIEGE_GOALS (under_siege row 'Secure enough ${commodity} reserves to outlast the blockade') drawn by goals.js dealGoals; read via npcInteriority wants",
+  "how": "prints a 'Wants ' label then each want (npc.goal.short) through ProseParagraph; commodity slot filled with 'legal'",
+  "confidence": "traced"
+ },
+ {
+  "id": "S54",
+  "writerFile": "src/components/new/tabs/SubstrateTab.jsx",
+  "writerFn": "SubstrateTab",
+  "writerLine": 180,
+  "wordsFile": "src/components/new/tabs/SubstrateTab.jsx; src/domain/causalState.js",
+  "wordsFn": "VAR_LABEL.food_security 'Food' + BandPill tokenCase(causalBandWord(variable, band)) from deriveCausalState",
+  "how": "system-variable row prints the label and the band pill word adjacent",
+  "confidence": "traced"
+ },
+ {
+  "id": "S55",
+  "writerFile": "src/components/new/tabs/ViabilityTab.jsx",
+  "writerFn": "ViabilityTab",
+  "writerLine": 254,
+  "wordsFile": "src/generators/economy/viability.js",
+  "wordsFn": "generateEconomicViability: `${n} institutions critically impaired by siege: ` + institutionDisplayName list (line 526)",
+  "how": "Active Stress Effects card prints the stress-consequence issue description raw",
+  "confidence": "traced"
+ },
+ {
+  "id": "S56",
+  "writerFile": "src/components/new/npcComponents.jsx",
+  "writerFn": "NPCInlineCard",
+  "writerLine": 515,
+  "wordsFile": "src/data/stressInstitutionEffects.js",
+  "wordsFn": "STRESS_INSTITUTION_EFFECTS (under_siege / famine secret rows with {commodity}), drawn by npcGenerator.js generateCrimeLevel",
+  "how": "prints 'Secret: ' label then npc.secret.what raw; the template's {commodity} slot is filled with a commodity word (legal / crafts)",
+  "confidence": "traced"
+ },
+ {
+  "id": "S57",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicsTab",
+  "writerLine": 442,
+  "wordsFile": "src/generators/economy/economicState.js",
+  "wordsFn": "generateEconomicState incomeSources {source, desc}",
+  "how": "income row prints the source in bold then ' ' + desc",
+  "confidence": "traced"
+ },
+ {
+  "id": "S58",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicFlowsSection",
+  "writerLine": 202,
+  "wordsFile": "src/generators/computeActiveChains.js; src/data/supplyChainData.js",
+  "wordsFn": "computeActiveChains (chain.processingInstitutions = matchedInsts, the town's institution names matched against the chain def's processing patterns); via SupplyChainsPanel.jsx chainFlowFacts",
+  "how": "chain card's 'Via' line prints facts.institutions mapped through institutionDisplayName (raw catalogue names with count ranges) joined ' · '",
+  "confidence": "traced"
+ },
+ {
+  "id": "S59",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicFlowsSection",
+  "writerLine": 207,
+  "wordsFile": "src/generators/computeActiveChains.js; src/data/supplyChainData.js",
+  "wordsFn": "computeActiveChains chain.outputs (slice 0..4)",
+  "how": "prints the first three chain outputs as adjacent pills under 'Outputs'",
+  "confidence": "traced"
+ },
+ {
+  "id": "S60",
+  "writerFile": "src/components/new/tabs/ResourcesTab.jsx",
+  "writerFn": "ResourceChainCard",
+  "writerLine": 45,
+  "wordsFile": "src/generators/resourceGenerator.js; src/data/resourceChains.js",
+  "wordsFn": "evaluateInstitutions (exploitation.unexploited) over RESOURCE_CHAINS {rawResource, exportValue}",
+  "how": "unexploited card header prints 'Unexploited' badge, resourceDisplayName(rawResource) and '<exportValue> value' adjacent",
+  "confidence": "traced"
+ },
+ {
+  "id": "S61",
+  "writerFile": "src/components/new/tabs/ResourcesTab.jsx",
+  "writerFn": "ResourcesTab",
+  "writerLine": 234,
+  "wordsFile": "src/domain/display/validationOnPage.js",
+  "wordsFn": "resourceGapLines: `Work on the ${raw} here stops half-way: no ${orList(missing)} finishes it.` (line 214) over resourceAnalysis.gaps",
+  "how": "Gaps & Opportunities prints each gap line's impact sentence",
+  "confidence": "traced"
+ },
+ {
+  "id": "S62",
+  "writerFile": "src/components/new/tabs/DefenseTab.jsx",
+  "writerFn": "DefenseTab",
+  "writerLine": 655,
+  "wordsFile": "src/domain/display/defenseDisplay.js",
+  "wordsFn": "deriveSupportingCapabilities: {label:'Legal Infrastructure', status:'Court only'} (line 399-400)",
+  "how": "supporting-capability card prints cap.label then cap.status as adjacent spans",
+  "confidence": "traced"
+ },
+ {
+  "id": "S63",
+  "writerFile": "src/components/new/tabs/HistoryTab.jsx",
+  "writerFn": "TensionRow",
+  "writerLine": 81,
+  "wordsFile": "src/components/new/tabs/HistoryTab.jsx; src/data/historyData.js; src/generators/historyGenerator.js",
+  "wordsFn": "TENSION_META[t.type].label (else tokenCase(t.type), e.g. 'Wild magic', 'Heresy trial') + t.severity array from HISTORICAL_EVENTS_DATA (via generateHistory/buildHistoricalEvent)",
+  "how": "tension header prints the type label then one chip per severity word ('minor','major') as adjacent spans",
+  "confidence": "traced"
+ },
+ {
+  "id": "S64",
+  "writerFile": "src/components/new/npcComponents.jsx",
+  "writerFn": "NPCInlineCard",
+  "writerLine": 515,
+  "wordsFile": "src/data/npcData.js",
+  "wordsFn": "NPC_CRIMINAL_SECRETS_BY_HOLDER (via criminalSecretsForHolder; drawn by generators/npc/factionLeaderSecret.js generateFactionLeaderSecret)",
+  "how": "prints 'Secret: ' label then npc.secret.what raw from the criminal-secret table",
+  "confidence": "traced"
+ },
+ {
+  "id": "S65",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicsTab",
+  "writerLine": 546,
+  "wordsFile": "src/generators/computeActiveChains.js",
+  "wordsFn": "deriveLocalProductionFromChains (economicState.localProduction: resource commodity keys + chain outputs + services)",
+  "how": "'Produced locally' pills: each eco.localProduction entry with '_' -> ' ' (CSS capitalize only), flattened adjacent",
+  "confidence": "traced"
+ },
+ {
+  "id": "S66",
+  "writerFile": "src/components/new/npcComponents.jsx",
+  "writerFn": "NPCInlineCard",
+  "writerLine": 403,
+  "wordsFile": "src/domain/people/cardPowers.js; src/generators/people/representatives.js",
+  "wordsFn": "cardPowerLine (office from cardOfficeOf = card.role, prefixed to the governing power's 'first of X'); house name from generateRepresentatives",
+  "how": "house door, ' · ', then cardPowerLine's '<office>, first of <governing power>' for the dual-hat leader",
+  "confidence": "traced"
+ },
+ {
+  "id": "S67",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicsTab",
+  "writerLine": 546,
+  "wordsFile": "src/generators/computeActiveChains.js",
+  "wordsFn": "deriveLocalProductionFromChains (economicState.localProduction: resource commodity keys + chain outputs + services)",
+  "how": "'Produced locally' pills: each eco.localProduction entry with '_' -> ' ' (CSS capitalize only), flattened adjacent",
+  "confidence": "traced"
+ },
+ {
+  "id": "S68",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicFlowsSection",
+  "writerLine": 197,
+  "wordsFile": "src/components/new/SupplyChainsPanel.jsx; src/generators/computeActiveChains.js",
+  "wordsFn": "chainFlowFacts (importedUpstream = CHAIN_DEFS[uid].label for chain.upstreamMissing)",
+  "how": "chain card's 'From' line joins the resource and 'Import: <upstream chain label>' with ' · '",
+  "confidence": "traced"
+ },
+ {
+  "id": "S69",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicFlowsSection",
+  "writerLine": 202,
+  "wordsFile": "src/generators/computeActiveChains.js; src/data/supplyChainData.js",
+  "wordsFn": "computeActiveChains (chain.processingInstitutions = matchedInsts, the town's institution names matched against the chain def's processing patterns); via SupplyChainsPanel.jsx chainFlowFacts",
+  "how": "chain card's 'Via' line prints facts.institutions mapped through institutionDisplayName (raw catalogue names with count ranges) joined ' · '",
+  "confidence": "traced"
+ },
+ {
+  "id": "S70",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicFlowsSection",
+  "writerLine": 202,
+  "wordsFile": "src/generators/computeActiveChains.js; src/data/supplyChainData.js",
+  "wordsFn": "computeActiveChains (chain.processingInstitutions = matchedInsts, the town's institution names matched against the chain def's processing patterns); via SupplyChainsPanel.jsx chainFlowFacts",
+  "how": "chain card's 'Via' line prints facts.institutions mapped through institutionDisplayName (raw catalogue names with count ranges) joined ' · '",
+  "confidence": "traced"
+ },
+ {
+  "id": "S71",
+  "writerFile": "src/components/new/tabs/HistoryTab.jsx",
+  "writerFn": "TensionRow",
+  "writerLine": 81,
+  "wordsFile": "src/components/new/tabs/HistoryTab.jsx; src/data/historyData.js; src/generators/historyGenerator.js",
+  "wordsFn": "TENSION_META[t.type].label (else tokenCase(t.type), e.g. 'Wild magic', 'Heresy trial') + t.severity array from HISTORICAL_EVENTS_DATA (via generateHistory/buildHistoricalEvent)",
+  "how": "tension header prints the type label then one chip per severity word ('minor','major') as adjacent spans",
+  "confidence": "traced"
+ },
+ {
+  "id": "S72",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicFlowsSection",
+  "writerLine": 197,
+  "wordsFile": "src/components/new/SupplyChainsPanel.jsx; src/generators/computeActiveChains.js",
+  "wordsFn": "chainFlowFacts (importedUpstream = CHAIN_DEFS[uid].label for chain.upstreamMissing)",
+  "how": "chain card's 'From' line joins the resource and 'Import: <upstream chain label>' with ' · '",
+  "confidence": "traced"
+ },
+ {
+  "id": "S73",
+  "writerFile": "src/components/new/tabs/DailyLifeTab.jsx",
+  "writerFn": "DailyLifeTab",
+  "writerLine": 162,
+  "wordsFile": "src/components/new/tabs/DailyLifeTab.jsx; src/components/new/dailyLifeLogic.js",
+  "wordsFn": "foodLabel ladder (Severe/Serious/Strained/Tightening/Surplus/Adequate, lines 124-129) over ctx.foodDeficit (dailyLifeLogic deficitPercent)",
+  "how": "AnchorFact 'Food' prints the food band word as its value",
+  "confidence": "traced"
+ },
+ {
+  "id": "S74",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicFlowsSection",
+  "writerLine": 222,
+  "wordsFile": "src/generators/computeActiveChains.js",
+  "wordsFn": "computeActiveChains chain.dependency {resource, impact, affectedServices}",
+  "how": "impairment box prints 'Needs <dependency.resource>', the impact only on its first card (X-50), then ' · affects: ' + first 3 affected services",
+  "confidence": "traced"
+ },
+ {
+  "id": "S75",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicFlowsSection",
+  "writerLine": 184,
+  "wordsFile": "src/generators/computeActiveChains.js; src/components/new/tabs/EconomicsTab.jsx",
+  "wordsFn": "chain label (chainPrintName) + chain.needLabel (computeActiveChains) + FLOW_STATUS.running.label '✓ Running'",
+  "how": "chain card header prints the chain label, tokenCase(needLabel) and the status label as adjacent spans",
+  "confidence": "traced"
+ },
+ {
+  "id": "S76",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicFlowsSection",
+  "writerLine": 184,
+  "wordsFile": "src/generators/computeActiveChains.js; src/components/new/tabs/EconomicsTab.jsx",
+  "wordsFn": "chain label (chainPrintName) + chain.needLabel (computeActiveChains) + FLOW_STATUS.running.label '✓ Running'",
+  "how": "chain card header prints the chain label, tokenCase(needLabel) and the status label as adjacent spans",
+  "confidence": "traced"
+ },
+ {
+  "id": "S77",
+  "writerFile": "src/components/new/tabs/ResourcesTab.jsx",
+  "writerFn": "ResourcesTab",
+  "writerLine": 212,
+  "wordsFile": "src/generators/resourceGenerator.js",
+  "wordsFn": "config.nearbyResources keys (not depleted) formatted by fmtKey",
+  "how": "'Abundant' pills: each nearby resource key with '_'->' ' and words title-cased, adjacent",
+  "confidence": "traced"
+ },
+ {
+  "id": "S78",
+  "writerFile": "src/components/new/tabs/WhoRunsThisTownPanel.jsx",
+  "writerFn": "WhoRunsThisTownPanel",
+  "writerLine": 56,
+  "wordsFile": "src/domain/people/patronage.js",
+  "wordsFn": "dmPowerViewOf rulingThree (place/PLACE[rank], face, title, answersTo {guild, handler})",
+  "how": "ruling-three row prints place word, ' · ', face name, ', title', then ' · answers to <guild> through <handler>' (line 58)",
+  "confidence": "traced"
+ },
+ {
+  "id": "S79",
+  "writerFile": "src/components/new/tabs/WhoRunsThisTownPanel.jsx",
+  "writerFn": "WhoRunsThisTownPanel",
+  "writerLine": 75,
+  "wordsFile": "src/domain/people/patronage.js",
+  "wordsFn": "dmPowerViewOf answers[].handlers[].agents (faceOf title/house; brings = VIA_WORDS[a.via]; tie = tieWords)",
+  "how": "agent row prints face, ', title', ' (house)' (raw catalogue name) then ' · brings <VIA_WORDS> · <tie>'",
+  "confidence": "traced"
+ },
+ {
+  "id": "S80",
+  "writerFile": "src/components/new/tabs/WhoRunsThisTownPanel.jsx",
+  "writerFn": "WhoRunsThisTownPanel",
+  "writerLine": 88,
+  "wordsFile": "src/domain/people/patronage.js",
+  "wordsFn": "dmPowerViewOf fronts (faceOf house, guild = allegiance power/house, handler name)",
+  "how": "fronts row prints '<house> · <face> · fronts for <guild> · handled by <handler>'",
+  "confidence": "traced"
+ },
+ {
+  "id": "S81",
+  "writerFile": "src/components/new/npcComponents.jsx",
+  "writerFn": "NPCInlineCard",
+  "writerLine": 436,
+  "wordsFile": "src/domain/people/allegiance.js",
+  "wordsFn": "dealAllegiances (card.allegiance {power, house, handler}); read by allegianceOf",
+  "how": "prints the 'Hidden allegiance' badge, then 'answers to <power>, through <handler name>' (line 444)",
+  "confidence": "traced"
+ },
+ {
+  "id": "S82",
+  "writerFile": "src/components/new/npcComponents.jsx",
+  "writerFn": "NPCInlineCard",
+  "writerLine": 436,
+  "wordsFile": "src/domain/people/allegiance.js",
+  "wordsFn": "dealAllegiances (card.allegiance {power, house, handler}); read by allegianceOf",
+  "how": "prints the 'Hidden allegiance' badge, then 'answers to <power>, through <handler name>' (line 444)",
+  "confidence": "traced"
+ },
+ {
+  "id": "S83",
+  "writerFile": "src/components/new/npcComponents.jsx",
+  "writerFn": "NPCInlineCard",
+  "writerLine": 503,
+  "wordsFile": "src/domain/display/npcInteriorityRead.js",
+  "wordsFn": "npcInteriority disposition list; INFLUENCE_WORD {moderate:'established'} from npc.influence",
+  "how": "prints 'Disposition ' label then disposition.join(', '); here only the influence word 'established' survived",
+  "confidence": "traced"
+ },
+ {
+  "id": "S84",
+  "writerFile": "src/components/new/npcComponents.jsx",
+  "writerFn": "NPCInlineCard",
+  "writerLine": 515,
+  "wordsFile": "src/data/stressInstitutionEffects.js",
+  "wordsFn": "STRESS_INSTITUTION_EFFECTS (under_siege / famine secret rows with {commodity}), drawn by npcGenerator.js generateCrimeLevel",
+  "how": "prints 'Secret: ' label then npc.secret.what raw; the template's {commodity} slot is filled with a commodity word (legal / crafts)",
+  "confidence": "traced"
+ },
+ {
+  "id": "S85",
+  "writerFile": "src/components/new/tabs/ViabilityTab.jsx",
+  "writerFn": "ViabilityTab",
+  "writerLine": 211,
+  "wordsFile": "src/generators/economy/foodBalance.js",
+  "wordsFn": "deriveFoodBalanceAnalysis stressNotes: `The ${FAILED_SOURCE_WORDS[failed]} failed this year and took ${cutWord} of the food produced here with it.` (line 221), pushed as a stress_consequence issue (line 601)",
+  "how": "Critical Issues card prints viabilityIssueText(issue), the food-balance stress note",
+  "confidence": "traced"
+ },
+ {
+  "id": "S86",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicsTab",
+  "writerLine": 477,
+  "wordsFile": "src/generators/economy/primaryTradeLists.js; src/generators/computeActiveChains.js",
+  "wordsFn": "primaryTradeLists / deriveExportsFromChains: occupied towns map exports to `${e} (taxed by occupation)`",
+  "how": "Exports pills printed raw with the stored '(taxed by occupation)' suffix",
+  "confidence": "traced"
+ },
+ {
+  "id": "S87",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicFlowsSection",
+  "writerLine": 202,
+  "wordsFile": "src/generators/computeActiveChains.js; src/data/supplyChainData.js",
+  "wordsFn": "computeActiveChains (chain.processingInstitutions = matchedInsts, the town's institution names matched against the chain def's processing patterns); via SupplyChainsPanel.jsx chainFlowFacts",
+  "how": "chain card's 'Via' line prints facts.institutions mapped through institutionDisplayName (raw catalogue names with count ranges) joined ' · '",
+  "confidence": "traced"
+ },
+ {
+  "id": "S88",
+  "writerFile": "src/components/new/tabs/ResourcesTab.jsx",
+  "writerFn": "ResourcesTab",
+  "writerLine": 159,
+  "wordsFile": "src/generators/resourceGenerator.js; src/data/geographyData.js",
+  "wordsFn": "generateResourceAnalysis economicStrengths (TERRAIN_DATA[terrain].economicStrengths filtered)",
+  "how": "'What the land offers' pills: sorted strengths each prefixed '✓ ', adjacent",
+  "confidence": "traced"
+ },
+ {
+  "id": "S89",
+  "writerFile": "src/components/new/tabs/ResourcesTab.jsx",
+  "writerFn": "ResourcesTab",
+  "writerLine": 234,
+  "wordsFile": "src/domain/display/validationOnPage.js",
+  "wordsFn": "resourceGapLines: `No ${orList(nouns)} ${reach|reaches} ${houseWords(inst)}.` (line 230)",
+  "how": "Gaps & Opportunities prints the idle-house gap sentence",
+  "confidence": "traced"
+ },
+ {
+  "id": "S90",
+  "writerFile": "src/components/new/tabs/power/PowerStrata.jsx",
+  "writerFn": "ThePowers",
+  "writerLine": 159,
+  "wordsFile": "src/components/new/tabs/power/PowerStrata.jsx",
+  "wordsFn": "ARCHETYPE_LABEL[p.archetype], p.powerLabel, p.name (powerStructure strata)",
+  "how": "power row prints the 'Ruler'/'Contender' pill, the power name link, the archetype label, the powerLabel chip and the ▲/▼ expand caret as adjacent spans",
+  "confidence": "traced"
+ },
+ {
+  "id": "S91",
+  "writerFile": "src/components/new/tabs/power/PowerStrata.jsx",
+  "writerFn": "ThePowers",
+  "writerLine": 159,
+  "wordsFile": "src/components/new/tabs/power/PowerStrata.jsx",
+  "wordsFn": "ARCHETYPE_LABEL[p.archetype], p.powerLabel, p.name (powerStructure strata)",
+  "how": "power row prints the 'Ruler'/'Contender' pill, the power name link, the archetype label, the powerLabel chip and the ▲/▼ expand caret as adjacent spans",
+  "confidence": "traced"
+ },
+ {
+  "id": "S92",
+  "writerFile": "src/components/new/tabs/WhoRunsThisTownPanel.jsx",
+  "writerFn": "WhoRunsThisTownPanel",
+  "writerLine": 88,
+  "wordsFile": "src/domain/people/patronage.js",
+  "wordsFn": "dmPowerViewOf fronts (faceOf house, guild = allegiance power/house, handler name)",
+  "how": "fronts row prints '<house> · <face> · fronts for <guild> · handled by <handler>'",
+  "confidence": "traced"
+ },
+ {
+  "id": "S93",
+  "writerFile": "src/components/new/tabs/MagicTab.jsx",
+  "writerFn": "MagicTab",
+  "writerLine": 145,
+  "wordsFile": "src/domain/display/dossierViewModel.js; src/domain/magicProfile.js",
+  "wordsFn": "deriveMagicPosture roleLines `${MAGIC_ROLE_LABEL[role]} role: ${band}` (line 570) over deriveMagicProfile roles",
+  "how": "Roles card prints each composed role line",
+  "confidence": "traced"
+ },
+ {
+  "id": "S94",
+  "writerFile": "src/components/new/npcComponents.jsx",
+  "writerFn": "NPCInlineCard",
+  "writerLine": 436,
+  "wordsFile": "src/domain/people/allegiance.js",
+  "wordsFn": "dealAllegiances (card.allegiance {power, house, handler}); read by allegianceOf",
+  "how": "prints the 'Hidden allegiance' badge, then 'answers to <power>, through <handler name>' (line 444)",
+  "confidence": "traced"
+ },
+ {
+  "id": "S95",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicsTab",
+  "writerLine": 546,
+  "wordsFile": "src/generators/computeActiveChains.js",
+  "wordsFn": "deriveLocalProductionFromChains (economicState.localProduction: resource commodity keys + chain outputs + services)",
+  "how": "'Produced locally' pills: each eco.localProduction entry with '_' -> ' ' (CSS capitalize only), flattened adjacent",
+  "confidence": "traced"
+ },
+ {
+  "id": "S96",
+  "writerFile": "src/components/new/tabs/ResourcesTab.jsx",
+  "writerFn": "ResourcesTab",
+  "writerLine": 159,
+  "wordsFile": "src/generators/resourceGenerator.js; src/data/geographyData.js",
+  "wordsFn": "generateResourceAnalysis economicStrengths (TERRAIN_DATA[terrain].economicStrengths filtered)",
+  "how": "'What the land offers' pills: sorted strengths each prefixed '✓ ', adjacent",
+  "confidence": "traced"
+ },
+ {
+  "id": "S97",
+  "writerFile": "src/components/new/tabs/ResourcesTab.jsx",
+  "writerFn": "ResourceChainCard",
+  "writerLine": 90,
+  "wordsFile": "src/generators/resourceGenerator.js; src/data/resourceChains.js",
+  "wordsFn": "evaluateInstitutions (exploitation.fullyExploited) over RESOURCE_CHAINS",
+  "how": "fully-exploited card header prints '✓ Fully exploited', resource name and '<exportValue> value' adjacent",
+  "confidence": "traced"
+ },
+ {
+  "id": "S98",
+  "writerFile": "src/components/new/tabs/InstitutionsTab.jsx",
+  "writerFn": "InstitutionCard",
+  "writerLine": 264,
+  "wordsFile": "src/data/institutionalCatalog.js; src/generators/steps/assembleInstitutions.js",
+  "wordsFn": "institutionalCatalog[tier][category] name; source 'required' (assembleInstitutions) -> institutionBadge 'REQ'; status from houseStatus/statusOf",
+  "how": "card header prints label (institutionDisplayName = raw catalogue name), the provenance badge ('REQ' when required), tokenCase(category), and the worst service status tag (Vulnerable/Impaired) as adjacent spans",
+  "confidence": "traced"
+ },
+ {
+  "id": "S99",
+  "writerFile": "src/components/new/tabs/InstitutionsTab.jsx",
+  "writerFn": "InstitutionCard",
+  "writerLine": 264,
+  "wordsFile": "src/data/institutionalCatalog.js; src/generators/steps/assembleInstitutions.js",
+  "wordsFn": "institutionalCatalog[tier][category] name; source 'required' (assembleInstitutions) -> institutionBadge 'REQ'; status from houseStatus/statusOf",
+  "how": "card header prints label (institutionDisplayName = raw catalogue name), the provenance badge ('REQ' when required), tokenCase(category), and the worst service status tag (Vulnerable/Impaired) as adjacent spans",
+  "confidence": "traced"
+ },
+ {
+  "id": "S100",
+  "writerFile": "src/components/new/tabs/InstitutionsTab.jsx",
+  "writerFn": "InstitutionCard",
+  "writerLine": 264,
+  "wordsFile": "src/data/institutionalCatalog.js; src/generators/steps/assembleInstitutions.js",
+  "wordsFn": "institutionalCatalog[tier][category] name; source 'required' (assembleInstitutions) -> institutionBadge 'REQ'; status from houseStatus/statusOf",
+  "how": "card header prints label (institutionDisplayName = raw catalogue name), the provenance badge ('REQ' when required), tokenCase(category), and the worst service status tag (Vulnerable/Impaired) as adjacent spans",
+  "confidence": "traced"
+ },
+ {
+  "id": "S101",
+  "writerFile": "src/components/new/tabs/InstitutionsTab.jsx",
+  "writerFn": "InstitutionCard",
+  "writerLine": 264,
+  "wordsFile": "src/data/institutionalCatalog.js; src/generators/steps/assembleInstitutions.js",
+  "wordsFn": "institutionalCatalog[tier][category] name; source 'required' (assembleInstitutions) -> institutionBadge 'REQ'; status from houseStatus/statusOf",
+  "how": "card header prints label (institutionDisplayName = raw catalogue name), the provenance badge ('REQ' when required), tokenCase(category), and the worst service status tag (Vulnerable/Impaired) as adjacent spans",
+  "confidence": "traced"
+ },
+ {
+  "id": "S102",
+  "writerFile": "src/components/new/serviceComponents.jsx",
+  "writerFn": "ServiceItem",
+  "writerLine": 81,
+  "wordsFile": "src/data/institutionServices.js; src/components/new/tabs/ServicesTab.jsx",
+  "wordsFn": "service name from institutionServices catalogue; vulnerable set and serviceChainDepth (computeChainDepthMap) from ServicesTab",
+  "how": "service header prints displayName, the ' Vulnerable' status pill and the 'N-order chain' depth chip as adjacent spans (rendered from ServicesTab line 356)",
+  "confidence": "traced"
+ },
+ {
+  "id": "S103",
+  "writerFile": "src/components/new/serviceComponents.jsx",
+  "writerFn": "ServiceItem",
+  "writerLine": 81,
+  "wordsFile": "src/data/institutionServices.js; src/components/new/tabs/ServicesTab.jsx",
+  "wordsFn": "service name from institutionServices catalogue; vulnerable set and serviceChainDepth (computeChainDepthMap) from ServicesTab",
+  "how": "service header prints displayName, the ' Vulnerable' status pill and the 'N-order chain' depth chip as adjacent spans (rendered from ServicesTab line 356)",
+  "confidence": "traced"
+ },
+ {
+  "id": "S104",
+  "writerFile": "src/components/new/serviceComponents.jsx",
+  "writerFn": "ServiceItem",
+  "writerLine": 81,
+  "wordsFile": "src/data/institutionServices.js; src/components/new/tabs/ServicesTab.jsx",
+  "wordsFn": "service name from institutionServices catalogue; vulnerable set and serviceChainDepth (computeChainDepthMap) from ServicesTab",
+  "how": "service header prints displayName, the ' Vulnerable' status pill and the 'N-order chain' depth chip as adjacent spans (rendered from ServicesTab line 356)",
+  "confidence": "traced"
+ },
+ {
+  "id": "S105",
+  "writerFile": "src/components/new/serviceComponents.jsx",
+  "writerFn": "ServiceItem",
+  "writerLine": 81,
+  "wordsFile": "src/data/institutionServices.js; src/components/new/tabs/ServicesTab.jsx",
+  "wordsFn": "service name from institutionServices catalogue; vulnerable set and serviceChainDepth (computeChainDepthMap) from ServicesTab",
+  "how": "service header prints displayName, the ' Vulnerable' status pill and the 'N-order chain' depth chip as adjacent spans (rendered from ServicesTab line 356)",
+  "confidence": "traced"
+ },
+ {
+  "id": "S106",
+  "writerFile": "src/components/new/serviceComponents.jsx",
+  "writerFn": "ServiceItem",
+  "writerLine": 81,
+  "wordsFile": "src/data/institutionServices.js; src/components/new/tabs/ServicesTab.jsx",
+  "wordsFn": "service name from institutionServices catalogue; vulnerable set and serviceChainDepth (computeChainDepthMap) from ServicesTab",
+  "how": "service header prints displayName, the ' Vulnerable' status pill and the 'N-order chain' depth chip as adjacent spans (rendered from ServicesTab line 356)",
+  "confidence": "traced"
+ },
+ {
+  "id": "S107",
+  "writerFile": "src/components/new/serviceComponents.jsx",
+  "writerFn": "ServiceItem",
+  "writerLine": 81,
+  "wordsFile": "src/data/institutionServices.js; src/components/new/tabs/ServicesTab.jsx",
+  "wordsFn": "service name from institutionServices catalogue; vulnerable set and serviceChainDepth (computeChainDepthMap) from ServicesTab",
+  "how": "service header prints displayName, the ' Vulnerable' status pill and the 'N-order chain' depth chip as adjacent spans (rendered from ServicesTab line 356)",
+  "confidence": "traced"
+ },
+ {
+  "id": "S108",
+  "writerFile": "src/components/new/serviceComponents.jsx",
+  "writerFn": "ServiceItem",
+  "writerLine": 81,
+  "wordsFile": "src/data/institutionServices.js; src/components/new/tabs/ServicesTab.jsx",
+  "wordsFn": "service name from institutionServices catalogue; vulnerable set and serviceChainDepth (computeChainDepthMap) from ServicesTab",
+  "how": "service header prints displayName, the ' Vulnerable' status pill and the 'N-order chain' depth chip as adjacent spans (rendered from ServicesTab line 356)",
+  "confidence": "traced"
+ },
+ {
+  "id": "S109",
+  "writerFile": "src/components/new/serviceComponents.jsx",
+  "writerFn": "ServiceItem",
+  "writerLine": 81,
+  "wordsFile": "src/data/institutionServices.js; src/components/new/tabs/ServicesTab.jsx",
+  "wordsFn": "service name from institutionServices catalogue; vulnerable set and serviceChainDepth (computeChainDepthMap) from ServicesTab",
+  "how": "service header prints displayName, the ' Vulnerable' status pill and the 'N-order chain' depth chip as adjacent spans (rendered from ServicesTab line 356)",
+  "confidence": "traced"
+ },
+ {
+  "id": "S110",
+  "writerFile": "src/components/new/serviceComponents.jsx",
+  "writerFn": "ServiceItem",
+  "writerLine": 81,
+  "wordsFile": "src/data/institutionServices.js; src/components/new/tabs/ServicesTab.jsx",
+  "wordsFn": "service name from institutionServices catalogue; vulnerable set and serviceChainDepth (computeChainDepthMap) from ServicesTab",
+  "how": "service header prints displayName, the ' Vulnerable' status pill and the 'N-order chain' depth chip as adjacent spans (rendered from ServicesTab line 356)",
+  "confidence": "traced"
+ },
+ {
+  "id": "S111",
+  "writerFile": "src/components/new/serviceComponents.jsx",
+  "writerFn": "ServiceItem",
+  "writerLine": 81,
+  "wordsFile": "src/data/institutionServices.js; src/components/new/tabs/ServicesTab.jsx",
+  "wordsFn": "service name from institutionServices catalogue; vulnerable set and serviceChainDepth (computeChainDepthMap) from ServicesTab",
+  "how": "service header prints displayName, the ' Vulnerable' status pill and the 'N-order chain' depth chip as adjacent spans (rendered from ServicesTab line 356)",
+  "confidence": "traced"
+ },
+ {
+  "id": "S112",
+  "writerFile": "src/components/new/serviceComponents.jsx",
+  "writerFn": "ServiceItem",
+  "writerLine": 81,
+  "wordsFile": "src/data/institutionServices.js; src/components/new/tabs/ServicesTab.jsx",
+  "wordsFn": "service name from institutionServices catalogue; vulnerable set and serviceChainDepth (computeChainDepthMap) from ServicesTab",
+  "how": "service header prints displayName, the ' Vulnerable' status pill and the 'N-order chain' depth chip as adjacent spans (rendered from ServicesTab line 356)",
+  "confidence": "traced"
+ },
+ {
+  "id": "S113",
+  "writerFile": "src/components/new/serviceComponents.jsx",
+  "writerFn": "ServiceItem",
+  "writerLine": 81,
+  "wordsFile": "src/data/institutionServices.js; src/components/new/tabs/ServicesTab.jsx",
+  "wordsFn": "service name from institutionServices catalogue; vulnerable set and serviceChainDepth (computeChainDepthMap) from ServicesTab",
+  "how": "service header prints displayName, the ' Vulnerable' status pill and the 'N-order chain' depth chip as adjacent spans (rendered from ServicesTab line 356)",
+  "confidence": "traced"
+ },
+ {
+  "id": "S114",
+  "writerFile": "src/components/new/serviceComponents.jsx",
+  "writerFn": "ServiceItem",
+  "writerLine": 81,
+  "wordsFile": "src/data/institutionServices.js; src/components/new/tabs/ServicesTab.jsx",
+  "wordsFn": "service name from institutionServices catalogue; vulnerable set and serviceChainDepth (computeChainDepthMap) from ServicesTab",
+  "how": "service header prints displayName, the ' Vulnerable' status pill and the 'N-order chain' depth chip as adjacent spans (rendered from ServicesTab line 356)",
+  "confidence": "traced"
+ },
+ {
+  "id": "S115",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "foodSentence",
+  "writerLine": 787,
+  "wordsFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "wordsFn": "foodSentence (shareWords over GROWN_BANDS / BROUGHT_BANDS)",
+  "how": "composes '<name> grows <share> of what it eats, and <carriers> bring in <share>.' rendered in the Food Security narrative box (line 579)",
+  "confidence": "traced"
+ },
+ {
+  "id": "S116",
+  "writerFile": "src/components/new/tabs/DailyLifeTab.jsx",
+  "writerFn": "DailyLifeTab",
+  "writerLine": 162,
+  "wordsFile": "src/components/new/tabs/DailyLifeTab.jsx; src/components/new/dailyLifeLogic.js",
+  "wordsFn": "foodLabel ladder (Severe/Serious/Strained/Tightening/Surplus/Adequate, lines 124-129) over ctx.foodDeficit (dailyLifeLogic deficitPercent)",
+  "how": "AnchorFact 'Food' prints the food band word as its value",
+  "confidence": "traced"
+ },
+ {
+  "id": "S117",
+  "writerFile": "src/components/new/tabs/SubstrateTab.jsx",
+  "writerFn": "SubstrateTab",
+  "writerLine": 180,
+  "wordsFile": "src/components/new/tabs/SubstrateTab.jsx; src/domain/causalState.js",
+  "wordsFn": "VAR_LABEL.food_security 'Food' + BandPill tokenCase(causalBandWord(variable, band)) from deriveCausalState",
+  "how": "system-variable row prints the label and the band pill word adjacent",
+  "confidence": "traced"
+ },
+ {
+  "id": "S118",
+  "writerFile": "src/components/new/tabs/EconomicsTab.jsx",
+  "writerFn": "EconomicsTab",
+  "writerLine": 546,
+  "wordsFile": "src/generators/computeActiveChains.js",
+  "wordsFn": "deriveLocalProductionFromChains (economicState.localProduction: resource commodity keys + chain outputs + services)",
+  "how": "'Produced locally' pills: each eco.localProduction entry with '_' -> ' ' (CSS capitalize only), flattened adjacent",
+  "confidence": "traced"
+ },
+ {
+  "id": "S119",
+  "writerFile": "src/components/new/tabs/MagicTab.jsx",
+  "writerFn": "MagicTab",
+  "writerLine": 145,
+  "wordsFile": "src/domain/display/dossierViewModel.js; src/domain/magicProfile.js",
+  "wordsFn": "deriveMagicPosture roleLines `${MAGIC_ROLE_LABEL[role]} role: ${band}` (line 570) over deriveMagicProfile roles",
+  "how": "Roles card prints each composed role line",
+  "confidence": "traced"
+ },
+ {
+  "id": "S120",
+  "writerFile": "src/components/new/npcComponents.jsx",
+  "writerFn": "NPCInlineCard",
+  "writerLine": 401,
+  "wordsFile": "src/generators/people/representatives.js; src/domain/people/cardPowers.js; src/data/institutionalCatalog.js",
+  "wordsFn": "generateRepresentatives (card.institution.key = house.name, a catalogue name from institutionalCatalog) + cardPowerLine/cardPowerParts (RANK_WORD 'first|second|third' / UNRANKED_WORD 'member' + ' of ' + power name)",
+  "how": "card subline prints the house door (EntityLink fallback = card.institution.key, the raw catalogue name with its count range), ' · ', then cardPowerLine's '<rank> of <power>' tail",
+  "confidence": "traced"
+ }
+]

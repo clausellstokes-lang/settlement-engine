@@ -1,0 +1,434 @@
+[
+ {
+  "case": "3-1",
+  "n": 74,
+  "verdict": "TRUE",
+  "inPlace": "With nobody at Archodion paid to keep order, the hunger is policed by neighbours watching each other's doors.",
+  "why": "defenseProfile.institutions.watch/militia/garrison all [] and the tab says 'There is no watch. When someone does wrong, the neighbours deal with it themselves'; famine in force (stress.type famine), so neighbour-policed hunger is the record's state.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-2",
+  "n": 134,
+  "verdict": "STILL FALSE",
+  "inPlace": "What Polapol's trades use comes in from elsewhere more often than from its own ground.",
+  "why": "Both running chains draw on the town's own ground (activeChains Livestock & Dairy resource 'Grazing land', Alpine Wool resource 'Alpine Pastures', both resourceCondition 'available'); primaryImports are only Salt and Incense/votive candles, and the same tab lists 'From Grazing land' and a long 'Produced locally' row.",
+  "kind": "c",
+  "severity": "MED"
+ },
+ {
+  "case": "3-3",
+  "n": 136,
+  "verdict": "TRUE",
+  "inPlace": "If Polapol ever had to hire people to defend it, it would have to borrow the money first.",
+  "why": "No paid force (defenseProfile.institutions all []; 'Nobody here is paid to keep order') and defenseProfile.scores.economic 27 in a hamlet of 71 at 'subsistence' with only a little left over; a hypothetical that fits the record.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-4",
+  "n": 151,
+  "verdict": "TRUE",
+  "inPlace": "No market or fair stands in Uaxacmul. The hamlet keeps few institutions and needs few.",
+  "why": "The trade-on-the-road clause is stripped; institutions[] holds no market or fair (Caravanserai, Pack animal trader only), so the remaining line is true; the 'Paid hands' sentence prints nowhere at wr.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-5",
+  "n": 167,
+  "verdict": "TRUE",
+  "inPlace": "Uaxacmul was poor even while its trade moved freely, and the siege has stopped it moving at all.",
+  "why": "economicState.prosperity 'Struggling' and stress.type 'under_siege'; the tab's own Food Security line says 'with the roads cut by the siege nothing comes in'.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-6",
+  "n": 177,
+  "verdict": "TRUE",
+  "inPlace": "Uaxacmul is running short of salt, and the siege lets none in.",
+  "why": "economicState.primaryImports includes 'Salt' and stress.type 'under_siege' cuts the road; the tab shows 'No food comes into Uaxacmul by trade'.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-7",
+  "n": 182,
+  "verdict": "TRUE",
+  "inPlace": "Uaxacmul has people under arms, but too few and too badly placed to hold off a serious attack for long.",
+  "why": "defenseProfile militia [Citizen militia] and readiness 'Vulnerable'; matches the same tab's 'credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear'.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-8",
+  "n": 183,
+  "verdict": "TRUE",
+  "inPlace": "The wall at Uaxacmul is manned day and night against the creatures, and nobody walks out past it unarmed.",
+  "why": "config.monsterThreat 'plagued', walls [Palisade or earthworks] with Citizen militia and the siege putting people on the palisade; it no longer claims the threat is answered 'properly', so it no longer clashes with the 'Weak' bar.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-9",
+  "n": 186,
+  "verdict": "TRUE",
+  "inPlace": "The siege has put more people on Uaxacmul's palisade or earthworks than the hamlet could ever find for it in quieter seasons.",
+  "why": "stress.type 'under_siege' with walls [Palisade or earthworks] and militia; matches 'Its stores and every able pair of hands now go to the defence'.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-10",
+  "n": 212,
+  "verdict": "TRUE",
+  "inPlace": "Some trade comes past Breitenheim, and little of it stops. The hamlet is poor, and its people say so to anyone who asks.",
+  "why": "config.tradeRouteAccess 'port' and prosperity 'Struggling'; the quarantine is one 'they cannot make people keep' and the tab says 'ships bring in most of the rest', so 'some trade comes past' fits where 'Plenty passes through' did not.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-11",
+  "n": 220,
+  "verdict": "STILL FALSE",
+  "inPlace": "What Breitenheim's trades use comes in from elsewhere more often than from its own ground.",
+  "why": "The hamlet's trades are farming, grazing, a Fisher's landing and local timber (income 'Local forest provides sustainable timber revenue'); primaryImports are only Medicinal herbs and Incense/votive candles, and the page's 'Produced locally' shows timber and herbs, so its trades run on its own ground, not imports.",
+  "kind": "c",
+  "severity": "MED"
+ },
+ {
+  "case": "3-12",
+  "n": 225,
+  "verdict": "TRUE",
+  "inPlace": "Nobody at Breitenheim is paid to hold the quarantine, so households take turns at the edge of the place, turning travellers away. Life in the hamlet goes on through the crisis: people work, eat and sleep, and the defence makes do with what is left over.",
+  "why": "defenseProfile.institutions all [] (no paid force; 'There is no watch here') and stress.type 'plague_onset'; it no longer claims a sealed quarantine, so it sits with 'a quarantine they cannot make people keep'.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-13",
+  "n": 278,
+  "verdict": "TRUE",
+  "inPlace": "Almost everyone's living at Goraki depends on one trade, whether or not they work in it. None of the metals used at Goraki comes from the country here; it is brought in or done without.",
+  "why": "resourceAnalysis.imports.critical ['metals','salt'] ('Forest terrain cannot produce this locally') and no metal resource in config.nearbyResources; 'brought in or done without' no longer asserts every load is imported.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-14",
+  "n": 359,
+  "verdict": "TRUE",
+  "inPlace": "Svetoki sells on goods it never made: some of what leaves the town entered it as imports the same season.",
+  "why": "economicState.activeChains 'Wine & Spirits' has entrepot true / status 'entrepot' with output 'Meals and drink', which is on the export list, and Entrepôt Trade is 16% of income ('re-export premiums'); 'some of' no longer claims the whole export column.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-15",
+  "n": 369,
+  "verdict": "TRUE",
+  "inPlace": "Svetoki's Town watch is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+  "why": "activeChains 'Standing Watch' status 'vulnerable', upstreamMissing ['food_processing'] ('Needs imported food_processing: no local source'); it no longer says the watch 'stands idle', so it sits with the Defense tab's working, well-paid watch.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-16",
+  "n": 396,
+  "verdict": "TRUE",
+  "inPlace": "Nahrhaven's market grew up on the road's trade.",
+  "why": "Now a history clause, not a present one: institutions[] has Weekly market, Market square, Toll bridge, Customs house on config.tradeRouteAccess 'road'; it no longer says the market lives off traffic that stress.type 'under_siege' has stopped.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-17",
+  "n": 433,
+  "verdict": "TRUE",
+  "inPlace": "With the siege closing every way in, Nahrhaven has lost even the little that passing trade used to leave behind.",
+  "why": "stress.type 'under_siege' and prosperity 'Struggling'; matches the Defense tab's 'Field work and trade have stopped'.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-18",
+  "n": 451,
+  "verdict": "TRUE",
+  "inPlace": "Nahrhaven's Cobbler's guild is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+  "why": "activeChains 'Leatherworking & Cordwaining' status 'vulnerable' with upstreamMissing ['livestock'], under a siege that cuts imports; it no longer says the guild 'stands idle'.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-19",
+  "n": 461,
+  "verdict": "TRUE",
+  "inPlace": "Since the siege began, Nahrhaven's walls are manned by whoever can be spared from everything else.",
+  "why": "walls [Town walls, Gates] with Town watch and stress.type 'under_siege'; it no longer says nobody stands on the walls. 'Whoever can be spared' sits a little loosely beside 'Everyone ... who can hold a weapon has a place in the defence', but they do not contradict each other.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-20",
+  "n": 466,
+  "verdict": "TRUE",
+  "inPlace": "The siege has put more people on Nahrhaven's town walls than the town could ever find for it in quieter seasons.",
+  "why": "stress.type 'under_siege' with Town walls and every able hand in the defence ('Everyone at Nahrhaven who can hold a weapon has a place in the defence'); the claim that fewer people turn out each season is gone.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-21",
+  "n": 492,
+  "verdict": "STILL FALSE",
+  "inPlace": "Nahrhaven's market grew up on the road's trade. Its merchant guild sets the terms of trade and its members carry the town's dealings outward. The town keeps its own court and its own gaol.",
+  "why": "Only the first clause was reworded: 'its members carry the town's dealings outward' still states trade going out as normal, under stress.type 'under_siege' where the Defense tab says 'Field work and trade have stopped' and the Economics tab says the siege is 'closing every way in'.",
+  "kind": "c",
+  "severity": "MED"
+ },
+ {
+  "case": "3-22",
+  "n": 556,
+  "verdict": "TRUE",
+  "inPlace": "Megalnea's Carriers' guild is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+  "why": "activeChains caravan_trade status 'vulnerable', upstreamMissing ['warehouse_logistics']; it no longer says the guild 'stands idle', so it agrees with the guild still offering Delivery contracts and Freight haulage.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-23",
+  "n": 571,
+  "verdict": "TRUE",
+  "inPlace": "Megalnea has no wall and no soldiers; its watch keeps the peace in the streets and would be no answer to an army.",
+  "why": "defenseProfile.institutions walls [] and garrison [], watch [Town watch]; it drops the 'Nothing has come for Megalnea' claim that clashed with the town's history of 'The Occupation'.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-24",
+  "n": 573,
+  "verdict": "TRUE",
+  "inPlace": "Food endurance: Under siege the outlying fields would be lost; with what is still harvested, the granary would carry the town for about seven months at full rations, more than a year on half.",
+  "why": "Now worded as a conditional, which fits stress.type 'plague_onset' (no siege); foodRecord.hasGranary true and storageMonths 6.3 support the figures.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-25",
+  "n": 622,
+  "verdict": "TRUE",
+  "inPlace": "Ask what Qal'atqala lives on and you will hear two or three trades named, not one. Faith carries real weight in Qal'atqala's money. What the religious houses take in and spend is a large part of the town's business. None of the grain used at Qal'atqala comes from the country here; it is brought in or done without.",
+  "why": "resourceAnalysis.imports.critical includes 'grain' ('Coastal terrain cannot produce this locally'), foodSecurity.chains 'Grain & agriculture' false, and 'Grain' is in primaryImports. The 81% foodRecord.grownPct does not say it is grain, and the town earns from Fish & Maritime Produce.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-26",
+  "n": 631,
+  "verdict": "TRUE",
+  "inPlace": "Qal'atqala's Carriers' guild is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+  "why": "activeChains 'Caravan & Overland Trade' status 'vulnerable', upstreamMissing ['warehouse_logistics']; it no longer says the guild 'stands idle', which matches the 'Vulnerable' flow row. Merchant warehouses stand among institutions[], but the record still counts that input as missing.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-27",
+  "n": 642,
+  "verdict": "STILL FALSE",
+  "inPlace": "Qal'atqala's walls are kept by its watch and nobody else, which is enough to see who comes and goes and nothing like enough to hold them.",
+  "why": "defenseProfile.scores.military 85 and readiness 'Fortress'. The same tab says 'What Qal'atqala can field and what Qal'atqala has built are both in good order; the town would take real effort to threaten', that walls are kept 'in working order against a real threat', and that 'A mercenary company provides enforcement' / 'A free company keeps a hall'. So 'nobody else' and 'nothing like enough to hold them' are false.",
+  "kind": "cg",
+  "severity": "MED"
+ },
+ {
+  "case": "3-28",
+  "n": 706,
+  "verdict": "TRUE",
+  "inPlace": "Muulhuitz's Luxury goods quarter is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+  "why": "activeChains 'Luxury Goods' status 'vulnerable', upstreamMissing ['precious_metals_mining'] ('Needs imported precious_metals_mining: no local source'); it no longer says the quarter 'stands idle', so it agrees with the quarter's other running work.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-29",
+  "n": 784,
+  "verdict": "TRUE",
+  "inPlace": "Some of Kaantun's work cannot go on without grain, and the country around the city produces none, so the city buys it from outside or that work stops.",
+  "why": "resourceAnalysis.imports.critical 'grain' ('Required by Mill but not available in Forest terrain'), Grain in primaryImports, and the page's Grain Sales row reads 'Grain purchased from farming regions'. The 21% grownPct is not grain (no grain in 'Produced locally'), and it no longer says 'Its Mill' (the roster has Mills (2-5)).",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-30",
+  "n": 802,
+  "verdict": "TRUE",
+  "inPlace": "Work is slowing at Kaantun for a fault that is not all its own: its smelting is short of what it needs from upstream.",
+  "why": "activeChains smelting status 'vulnerable', upstreamMissing ['fuel'] ('Needs imported fuel: no local source'), with Charcoal and fuel in primaryImports; it now owns the smelting as the city's ('its smelting', 'not all its own').",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-31",
+  "n": 810,
+  "verdict": "STILL FALSE",
+  "inPlace": "Kaantun would struggle to hold against anything more than a handful of raiders, and the people who live there know it.",
+  "why": "defenseProfile.scores.military 70, with Garrison, Citadel, City walls and gates and Mercenary quarter in institutions[]; the same tab's Invasion & War is 'Strong': 'paid soldiers on every stretch of its walls, so raiders stay away and an army would pay dearly'.",
+  "kind": "g",
+  "severity": "MED"
+ },
+ {
+  "case": "3-32",
+  "n": 812,
+  "verdict": "STILL FALSE",
+  "inPlace": "Food is short at Kaantun, but the trades that arm its defenders are still working, so the defence is not short of gear.",
+  "why": "activeChains weapons_armor 'vulnerable' and smelting 'vulnerable' (upstreamMissing ['fuel']), and the same tab's Guard assessment says the garrison is 'motivated with inadequate equipment and irregular pay'. So 'not short of gear' is false, though the famine is now named.",
+  "kind": "cg",
+  "severity": "MED"
+ },
+ {
+  "case": "3-33",
+  "n": 908,
+  "verdict": "TRUE",
+  "inPlace": "Evangeeia had little to begin with, and the siege has stopped the passing traffic that brought in the rest.",
+  "why": "prosperity 'Struggling', stress includes 'under_siege', and the same tab says 'No food comes into Evangeeia by trade'.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-34",
+  "n": 933,
+  "verdict": "TRUE",
+  "inPlace": "Evangeeia's Tanner (established) is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+  "why": "activeChains leather (Tanner (established)) status 'vulnerable', upstreamMissing ['livestock'], and leather_goods 'vulnerable' on absent grazing land; it no longer says the tanner 'stands idle'.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-35",
+  "n": 951,
+  "verdict": "TRUE",
+  "inPlace": "Paid soldiers are holding Evangeeia's walls against the siege, and so far they have held.",
+  "why": "defenseProfile garrison [Professional city watch, Garrison] and mercenary [Mercenary quarter], military 67, and stress 'under_siege' with the city still standing. It is a present report, not a boast that the city 'could be held'; the 'could not hold off a raid' line on the same tab is the odd one out against the record.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-36",
+  "n": 953,
+  "verdict": "STILL FALSE",
+  "inPlace": "Food is short at Evangeeia, but the trades that arm its defenders are still working, so the defence is not short of gear.",
+  "why": "The page's Institutions show Blacksmiths 'Impaired' and Specialized metalworkers (armorers, swordsmiths) 'Impaired', and Services show 'Weapon smithing Impaired'. Another line says 'War has taken the iron ... the smiths have nothing to mend tools with', and activeChains garrison is 'impaired'.",
+  "kind": "cg",
+  "severity": "HIGH"
+ },
+ {
+  "case": "3-37",
+  "n": 954,
+  "verdict": "STILL FALSE",
+  "inPlace": "Evangeeia is cut off now, and what its food trades salted and dried before the siege is what stands between the city and hunger.",
+  "why": "The siege is now named, but famine is in force: foodRecord band 'famine', gapPct 65, and the Economics tab says 'hunger is already here'. The stores are a granary of grain (storesHeld false, storageMonths 1.6), not salted goods; Salt & Preservation is 'entrepot' on absent salt flats. So nothing 'stands between the city and hunger'.",
+  "kind": "cg",
+  "severity": "MED"
+ },
+ {
+  "case": "3-38",
+  "n": 955,
+  "verdict": "STILL FALSE",
+  "inPlace": "Evangeeia's city walls and gates was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.",
+  "why": "defenseProfile garrison [Garrison, Professional city watch] and mercenary [Mercenary quarter, 'Major forces (hundreds to thousands)']. The same tab says 'Paid soldiers are holding Evangeeia's walls' and 'Its soldiers serve all year', and the Power tab says 'Well-funded city watch; it keeps order reliably'. So 'short of hands' and 'most of them are learning as they go' are false. The grammar is also broken ('walls and gates was ... on it').",
+  "kind": "gh",
+  "severity": "MED"
+ },
+ {
+  "case": "3-39",
+  "n": 1060,
+  "verdict": "TRUE",
+  "inPlace": "Dzibtzin's Tanner (established) is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+  "why": "activeChains leather (Tanner (established)) status 'vulnerable', upstreamMissing ['livestock'], and leather_goods 'vulnerable' on absent grazing land; it no longer says the tanner 'stands idle', so it sits with hunting 'running'.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-40",
+  "n": 1068,
+  "verdict": "NOTHING",
+  "inPlace": "",
+  "why": "The whole 'Gaps & Opportunities' block (heading and line) is gone from Systems/Resources at wr, and the tab adds no lines; nothing takes its place.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-41",
+  "n": 1144,
+  "verdict": "TRUE",
+  "inPlace": "Some of Ringfield's work cannot go on without grain, and the country around the metropolis produces none, so the metropolis buys it from outside or that work stops.",
+  "why": "foodSecurity.chains 'Grain & agriculture' false and foodRecord.foodSources ['livestock'] (the 48% grown is herds' milk and mutton); resourceAnalysis.imports.critical 'grain' ('Required by Mill but not available in Forest terrain'), and Grain is in primaryImports. It no longer says 'Its Mill' beside Mills (2-5).",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-42",
+  "n": 1161,
+  "verdict": "STILL FALSE",
+  "inPlace": "The metropolis has taken this trade as far as it goes, from the ground to the finished thing.",
+  "why": "The 'built on' claim is gone, but 'from the ground' still presumes the herb ground is worked. config.nearbyResourcesDepleted includes 'foraging_areas', activeChains herbalism is 'vulnerable' on 'Wild foraging areas' 'depleted', herbs are imported ('Herbs and forage (local gathering areas exhausted)'), and the very next sentence says nobody works the foraging areas this year.",
+  "kind": "cg",
+  "severity": "LOW"
+ },
+ {
+  "case": "3-43",
+  "n": 1257,
+  "verdict": "TRUE",
+  "inPlace": "Work is slowing at Becancoatl for a fault that is not all its own: its cartography is short of what it needs from upstream.",
+  "why": "activeChains cartography 'vulnerable' with dependency 'Paper + knowledge sources' ('Dependent on trade routes'); Paper is imported, stress 'wartime' says 'trade suffers', and the tab's News row says 'Upstream cartography chain is impaired'. It now calls the cartography the city's own ('its cartography', 'not all its own').",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-44",
+  "n": 1258,
+  "verdict": "TRUE",
+  "inPlace": "Becancoatl's Cobbler's guild is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+  "why": "activeChains leather_goods (Cobbler's guild) 'vulnerable' on absent grazing land with upstreamChains ['livestock'], and leather upstreamMissing ['livestock']; it no longer says the guild 'stands idle', so it sits with the guild's boots still sold.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-45",
+  "n": 1275,
+  "verdict": "TRUE",
+  "inPlace": "Becancoatl buys alchemical preparations for its defence by the batch, and the metropolis's accounts carry them as a purchase, not a defence.",
+  "why": "At wr institutions[] has 'Alchemist quarter', defenseProfile.institutions.magicDef ['Alchemist quarter','Academy of magic'], traditions.hasAlchemy true, and the same tab lists Alchemist quarter under Arcane defense. It no longer calls alchemists the source of its magical support (that is the Academy, per Supporting Capabilities).",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-46",
+  "n": 1376,
+  "verdict": "TRUE",
+  "inPlace": "Some of Knockford's cartography depends on supplies from elsewhere, and those supplies are failing: what should come down the line arrives short.",
+  "why": "activeChains cartography 'vulnerable' with dependency 'Paper + knowledge sources' ('Dependent on trade routes'), Paper imported, and stress 'plague_onset' viabilityNote 'some goods stop arriving'. It now places the cartography at home and the supplies outside, which matches the Cartographer's guild in institutions[].",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-47",
+  "n": 1378,
+  "verdict": "TRUE",
+  "inPlace": "The shadow trade at Knockford is small, but it is not casual: somebody organises it.",
+  "why": "institutions[] has Thieves' guild (powerful), Smuggling network and Front businesses (compound.inst.hasThievesGuild true), so 'somebody organises it' is true; 'small' matches the tab's 'Shadow Economy: 8% capture'. The 'nuisance, nothing more' claim is gone.",
+  "kind": "",
+  "severity": ""
+ },
+ {
+  "case": "3-48",
+  "n": 1392,
+  "verdict": "TRUE",
+  "inPlace": "Part of the magical help at Knockford is brewed: alchemy is practised here, and some of what it makes goes to the defenders.",
+  "why": "defenseProfile.traditions.hasAlchemy true, set by the Apothecary district in institutions[], and the Economics income row 'Apothecary & Alchemy: A thriving alchemical trade in reagents, preparations, and curative potions'. It no longer says the magical help comes from alchemists (that is the Mages' district and the Academy, per Supporting Capabilities).",
+  "kind": "",
+  "severity": ""
+ }
+]
