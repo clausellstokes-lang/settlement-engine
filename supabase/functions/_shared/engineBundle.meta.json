@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-13T02:11:17.025Z",
+  "generatedAt": "2026-11-13T04:56:44.443Z",
   "entry": "src/engine/serviceEntry.js",
-  "sourceHash": "543cc21a7a9b61bd",
-  "engineVersion": "35b5488271f82af2",
-  "builtFromCommit": "108de86c707e50777b43af9b7474a67637ead4a2",
+  "sourceHash": "a4dcaadde42926d3",
+  "engineVersion": "696acbcbc4ad27d7",
+  "builtFromCommit": "c26e7996bcd9c3d0aff63c55fe02c11714f522ab",
   "inputs": [
     "node_modules/seedrandom/seedrandom.js",
     "src/data/arrivalProse.js",
@@ -143,6 +143,7 @@
     "src/domain/facts/famine.js",
     "src/domain/facts/guild.js",
     "src/domain/facts/institutions.js",
+    "src/domain/facts/keep.js",
     "src/domain/facts/magic.js",
     "src/domain/facts/market.js",
     "src/domain/facts/migration.js",
