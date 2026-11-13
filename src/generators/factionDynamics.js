@@ -395,10 +395,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
     // that each needs the other (symbiotic); the bands above those (tense, competitive) stand.
     const occupier = STRESS_POWER_FACES.some((row) => row.appointed && row.power === mil.faction && stressed(row.stress));
 
-    if (occupier) {
-      type = ratio > 1.2 ? 'competitive' : 'tense';
-      narrative = `${gov.faction} carries out what ${mil.faction} decides.`;
-    } else if (ratio <= 0.5) {
+    if (ratio <= 0.5) {
       type = 'subordinate';
       // R6 (soak 1000 rung 1, kind 4): the soldiers sentence needs soldiers on the record, a
       // garrison or a hired company (the defence-words check's own reading of the word).
@@ -412,7 +409,15 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
       narrative = `${mil.faction} is now about as strong as ${gov.faction}. The hall asks for the commander's agreement instead of giving orders, and less and less is decided without it.`;
     } else {
       type = 'competitive';
-      narrative = `${mil.faction} no longer takes orders from ${gov.faction}. ${gov.faction} keeps the title; ${mil.faction} makes the decisions that matter.`;
+      // R3-CODE-C-2 (ROUND-3-CUT-INCREMENT #pf-591): "makes the decisions that matter" only where the force is the
+      // strongest power; beside a stronger one (Religious Authorities 47 to the Guard's 19) the first sentence stands alone.
+      const strongest = factions.every((f) => f === mil || (f.power || 0) <= (mil.power || 0));
+      narrative = `${mil.faction} no longer takes orders from ${gov.faction}.${strongest ? ` ${gov.faction} keeps the title; ${mil.faction} makes the decisions that matter.` : ''}`;
+    }
+    // The occupier's row (#1074): its kind from the same bands, never subordinate or symbiotic; its words the crisis's.
+    if (occupier) {
+      type = type === 'competitive' ? 'competitive' : 'tense';
+      narrative = `${gov.faction} carries out what ${mil.faction} decides.`;
     }
 
     direction = stressed('under_siege') ? 'escalating'  // military power rising in crisis
@@ -457,7 +462,9 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
                             (gov.faction || '').toLowerCase().includes('theocrat') ||
                             (gov.faction || '').toLowerCase().includes('ecclesiast');
 
-    if (govIsTheocratic) {
+    // R3-CODE-C-2 (#pf-590): a religious power that is not the governing one is another body; "the same people in
+    // practice" is said of none (their members are not shared), so a church government reads the same bands.
+    if (govIsTheocratic && rel === gov) {
       type = 'symbiotic';
       narrative = `${rel.faction} and ${gov.faction} are the same people in practice; the hall rules because the faith says it may.`;
     } else if (ratio >= 1.1) {
@@ -542,7 +549,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
       ? `${noble.faction} hold old rights ${gov.faction} cannot take away; nothing about land, inheritance or levies gets done without their agreement.`
       : ratio >= 0.5
       ? `${noble.faction} live under the rule of ${gov.faction} but keep enough rights of their own (land, courts, levies) to bargain, not simply obey.`
-      : `${noble.faction} still have their titles, but merchant money and the hall's offices have taken most of their power.`;
+      : `${noble.faction} still have their titles, but ${merc && (merc.power || 0) > (noble.power || 0) ? 'merchant money and ' : ''}the hall's offices have taken most of their power.`; // R3-CODE-C-2 (#pf-90): merchant money only where a merchant power outranks them
 
     addRel({ pair: [noble.faction, gov.faction], type, direction: 'declining', ratio: Math.round(ratio*100)/100, narrative });
   }

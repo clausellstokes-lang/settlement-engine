@@ -40,3 +40,27 @@ describe('the occupier is never written as the hall\'s soldiers (ROUND-3-CUT #10
     expect(row.narrative).toBe('Merchant Guild Council gives the orders and Military Council carries them out; each needs the other to stay strong.');
   });
 });
+
+// R3-CODE-C-2 (ROUND-3-CUT-INCREMENT #pf-591, #pf-90, #pf-590, and CENSUS-2's r2r-village-27): three relation rows
+// that said more than the powers' own strengths hold.
+describe('a relation row says only what the powers\' strengths hold', () => {
+  const row = (factions, a, b) => computeFactionRelationships(factions, 'town', {}, null, [], null)
+    .find((r) => r.pair.includes(a) && r.pair.includes(b))?.narrative;
+  it('the force "makes the decisions" only as the strongest; merchant money only beside a stronger merchant power; a separate church is not the same people', () => {
+    const church = { faction: 'Church Council', category: 'government', isGoverning: true, power: 12 };
+    const guard = { faction: 'Military/Guard', category: 'military', power: 19 };
+    const religious = { faction: 'Religious Authorities', category: 'religious', power: 47 };
+    expect(row([church, guard, religious], 'Church Council', 'Military/Guard')).toBe('Military/Guard no longer takes orders from Church Council.');
+    expect(row([church, guard], 'Church Council', 'Military/Guard'))
+      .toBe('Military/Guard no longer takes orders from Church Council. Church Council keeps the title; Military/Guard makes the decisions that matter.');
+    const royal = { faction: 'Royal Authority', category: 'government', isGoverning: true, power: 40 };
+    const nobles = { faction: 'Noble Families', category: 'noble', power: 10 };
+    const craft = { faction: 'Craft Guilds', category: 'economy', power: 7 };
+    expect(row([royal, nobles, craft], 'Noble Families', 'Royal Authority')).toBe('Noble Families still have their titles, but the hall\'s offices have taken most of their power.');
+    const merchants = { faction: 'Merchant Guilds', category: 'economy', power: 20 };
+    expect(row([royal, nobles, merchants], 'Noble Families', 'Royal Authority')).toBe('Noble Families still have their titles, but merchant money and the hall\'s offices have taken most of their power.');
+    const same = row([religious, church], 'Church Council', 'Religious Authorities'); // the record orders its powers by strength
+    expect([same].filter((n) => /same people/.test(String(n)))).toEqual([]);
+    expect(typeof same).toBe('string');
+  });
+});
