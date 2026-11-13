@@ -182,3 +182,145 @@ titles compared one by one:
 ## New words for the owner's veto
 "would be lost", "would carry", "would feed", "would stand in reserve" (the Food endurance line outside a siege);
 "· supplied by …" and "N practitioners" (the Magic tab's reliance line).
+
+---
+
+# PART 2 — the second seat (W2-A-LEAVES-2, 2026-11-13): the review's findings cured
+
+**Seat:** W2-A-LEAVES-2, from 96d698de7 (REVIEW-W2A NOT CLEAR). Scratch worktree; the main checkout untouched.
+**Tip:** `6a3bb189d (code); the measures below are being completed at it`. **The law of this seat:** a count falling is not a cure. Each cure below says how many lines it
+removed, how many of those were true by a read sample of thirty, and what the page says in their place.
+
+## Commits
+| sha | what |
+|---|---|
+| 04bab40c6 | F1: the gap lines print again; `importsAsPrinted` → `{ arriving, needed }`; row 6 RETIRED BY NAME → P6need |
+| 08c9f15bd | F3: the blanket silence withdrawn; each crime line struck only where the town makes it false; leaf `facts/officialsInPay.js`; row 5a RETIRED BY NAME → P5false |
+| dce6a1d6c | F3: the tuning inventory refrozen through its ritual (ALLEGIANCE_TUNING gains a dependent; no value) |
+| 433147d3e | F2: the Magic tab's supplying houses once, as the roster's, through the display seam; P3source counts a bracket or a doubled house |
+| 0297bac21 | F6: the reader arm reads the facts folder but its homes; banks lines by content, each with a reason |
+| df008526a | F5: a key-read arm; the nine capture-keyed pools placed at layer 5 by their key's reads |
+| 6a3bb189d | F3b: the read of thirty widened the fact (a member of the ruling power; the hall held at `corrupted`/`capture`) |
+
+
+## F1 (HIGH) — the gap lines restored; the false half named and handed on
+- **Restored: 445 lines in 296 towns** (every one the first seat removed); **0 added**. Field diff of the gap reader,
+  base deb1544eb against this tree, over the 720 records: 945 lines both, **0 towns differ**.
+- **Read sample of 30 restored lines** (every 14th, against each town's record; `out/f1sample.txt` method): 30 carry
+  the record's gap kind `missing`; none is in the trade imports or produced locally. **27 plainly true; 3 doubtful in a
+  reader's sense** (a salt works beside a salt entrepôt chain: r2s-indebted-village-0, r2s-religious_conversion-village-3,
+  r2s-slave_revolt-town-0 — salt passes through, the salt works still lacks its desert salt).
+- **What the page says now:** "No clay reaches the potter." again — true by the record — and the Imports line still
+  prints "Clay" beside it, because `EconomicsTab.jsx` composes its own list (held by the powers lane; its move onto the
+  leaf is W2-C-LEAVES's, the chair's ruling). The leaf keeps the two apart: `arriving` (trade) and `needed` (a good the
+  town needs and no import names). The gap reader reads `arriving` only.
+- **F4 corrected in the record:** the leaf's JSDoc no longer claims to be the one home; it says the tab still composes
+  inline and that the move is W2-C-LEAVES's.
+- **The census row re-read:** row 6 RETIRED BY NAME (`RETIRED_PAGE_CENSUS_ROWS.P6`, the register's `retired`: master 463,
+  integration 296, 296 at retirement, its reason) and replaced by **P6need, "an import printed beside its own unmet
+  need": 642 at the base, 642 here** — the Imports line, not the gap, is the fault, and it stays until the tab moves.
+  **P6need's precision by a read of 30:** 22 a need printed as an import with nothing bringing it; **8 a need an import
+  already meets under another name** ("Luxury goods" beside "Luxury textiles and exotic goods"; "Metals" beside "Iron";
+  "Timber (for large vessels)" beside "Shipbuilding timber"). So the row is an upper bound, and **`needed` must not be
+  printed as "not met" until that match is made** — a condition on W2-C-LEAVES's move, written in the leaf's JSDoc.
+
+## F3 (MEDIUM) — the blanket silence withdrawn, line by line
+- **MEASURED FIRST, and it moved the disqualifier.** At the hall's stored state `none`, **41 of the 585 towns hold an
+  official who answers to a criminal house through their office** (65 counting a member of the ruling power who
+  answers to one: F3b) (the cast; the DM panel's own "Who answers to whom …
+  brings protection and decisions", e.g. r2r-city-0's chief magistrate and castellan), 31 of them beside the organised
+  ring. There "bought officials" is TRUE beside "Free of the criminals" (the hall card speaks of the ruling three, and
+  its own third line says a criminal house "has to ask, pay or wait like anyone else"). So the chair's example
+  disqualifier, the stored state, would have struck true lines; a line about officials is struck by the CAST's fact
+  (`facts/officialsInPay.js`, layer 4: by office, or a member of the ruling power; and the hall's rung at `corrupted`/
+  `capture`, where the criminals hold the hall — F3b, found by this seat's own read of thirty, below) and a line about
+  a grip on the hall by the hall's stored rung. **Call taken; the
+  chair may re-rule it** (the stored state alone would remove the 41 towns' true lines).
+- **The declarations** (`display/stateProse/crimeLineDisqualifiers.js`, enforced at the draw; the corpus untouched):
+  | line | struck where |
+  |---|---|
+  | DS-POW-6 ADVANCING #1 "Criminal money is reaching the officials … one at a time" | no official in pay |
+  | DS-POW-6 ADVANCING #3 "Officials … spending money their posts never paid them" | no official in pay |
+  | DS-POW-6 RECOVERING #1 "… losing their grip on the hall" | no agent in the hall (`none`, `adversarial`) |
+  | DS-POW-6 RECOVERING #2 "The approach was made … and did not take" | an official in pay |
+  | DS-POW-6 RECOVERING #3 "… still own a few officials" | no official in pay |
+  | DS-DEF-4 capture equilibrium #1 "… nothing is bought here" | an official in pay |
+  | DS-DEF-4 capture none #2 "… the means to reach into the hall and it has not" | an official in pay |
+  | DS-DEF-4 capture none #3 "… business with the hall is straight" | an official in pay |
+  | the organised ring's note, its clause "bought officials" (each of four vantages) | no official in pay: the vantage without the clause |
+- **The counts on the 720 (base → tip):** re-taken at 6a3bb189d (running). At df008526a, before F3b, base against tip in 319 towns: 330 lines out, 343 in (the first seat's 5b moves included). The capture-pressure lines beside a free hall: 288 at the base, 0 at 96d698de7, 285 here (the census's own row 5a, its retired test): restored, as ruled; the 3 short are the case left with no line (requests, item 2).
+- **Read sample of 30:** the read of thirty removed lines at df008526a found TRUE lines removed (a ring at `corrupted`; a member of the ruling power in a criminal's pay), which F3b cures; the read is re-taken at 6a3bb189d (running).
+- **The census row re-read:** row 5a RETIRED BY NAME (it counted the true with the false; 288 at the base) and replaced
+  by **P5false, "a crime line the town's facts make false"**: 306 at the base; 0 at df008526a by the arm over the census dumps; re-taken at 6a3bb189d.
+- **Not cured here, parked:** at `corrupted` the AGENT pool says "a minor member … not decisions" while the hall card
+  says the head answers to the guild (`rvw-town-1`, review §1 C3) — the desk's corrupted → AGENT mapping is a recorded
+  design ("Say veto to move it"); 36 + 32 towns' other lines naming a payroll or bribes (plot hooks, the safety
+  profile's operation notes) are generated record text, not the crime desk.
+
+## F2 (MEDIUM, origin) — the supplied-by line through the display seam, once
+- **Count:** of 289 reliance lines on the 720, **before: 114 with a bracket** (the reviewer's 73 catalogue ranges or
+  conditions plus 30 "(high magic)", "(resident)", "(divine, 1st level)"), 10 naming a house twice (by my fold, 1 under
+  the strict reading), 8 over 280 characters; **after: 0 with a bracket, 0 naming a house twice, 2 over 280** (two
+  metropolises naming fifteen houses). 289 lines both; **0 lost**; 180 changed.
+- **Read sample of 30 changed lines:** 30 true; each change is a catalogue form replaced by the roster's through
+  `institutionDisplayName` with its bracket struck ("Parish churches (50-100+)" → "Houses of worship"; "Dream parlors
+  (high magic)" → "Dream parlors"; "Priest (resident)" → "Priest"), or a doubled house dropped. No line removed.
+- **P3source** now counts a source with a bracket or a house named twice: base 74, 96d698de7 (by the new test) 114,
+  tip 0 (the arm over the census dumps at df008526a).
+- One fixture pin named a house its roster lacked ("Multiple monasteries", a chain pattern): re-keyed with the cause.
+- Not bounded ("the first few, then and n more"): a cap would be a new dial; 2 lines over 280 characters remain.
+
+## F5 — the key-read arm (pools)
+Red first on exactly the nine; then placed at layer 5 by their key's reads (each row's `src` names its old place).
+Nothing then violates; the register is unchanged. Plants: a pool put back at 3 reds; a key site that is gone reds.
+
+## F6 — the reader arm
+Plants executed against the tree and reverted: a `market` name test in `facts/leaderLead.js` → **red**; the
+`DefenseTab.jsx` swap (2 lines before and after) → **red**. Calls taken: a call of the home's own reader
+(`hasInstitution(record, 'temple')`) is the home's reading (a private helper over a list of words still counts);
+the register's shape migrates with its instrument (480 rows: −1 through the home, +1 the market home's guild test).
+
+## The census counter, base deb1544eb against this tip (the census's own instrument)
+At df008526a (census.sh both trees, compare.mjs; 720 renders each, every worker exit 0): **no count rises**; 5a 288 → 285 and 6 296 → 296 by their old tests (the true lines are back, as ruled; both retired in the arm with their replacements); 5b 2 → 0; 20 689 → 0; every other row equal; median rows per town 9 → 8. Re-taken at 6a3bb189d: running.
+
+## The page arm, through its door
+running (the door's --shrink over the 720 at the final tip).
+
+## The six surfaces (the draft record, Part 2)
+running.
+
+## The gates
+Every commit touching `src/` (04bab40c6, 08c9f15bd, 433147d3e): check-domain-strict 0; typecheck:ratchet 0 (167,
+ceiling 167); eslint on the touched files 0. tests/lint at each: the base's 11 red files only, after each commit's own
+walker repairs (the wiring census re-stamped by its writer; the tuning inventory refrozen by its ritual; my tests'
+negatives anchored and seed loops collected). Pushes: two so far (dce6a1d6c, df008526a), each through the hook's three gates.
+
+## The whole suite
+running at the final tip.
+
+## Requests to the writing lane (W2-WRITE) and the instrument lane (W2-B-DECLARE)
+1. **Carry each declaration in `crimeLineDisqualifiers.js` onto its corpus variant** (the table above), then this
+   lane's table goes. The two facts need vocabulary atoms (W2-B-DECLARE): "an official in a criminal's pay"
+   (`facts/officialsInPay.js`) and "an agent in the hall" (the capture climate).
+2. **A case left with no line:** DS-POW-6 RECOVERING where the hall is `none` or `adversarial`, no official is in pay
+   and the town has no watch (its one line true there declares a watch): **3 of the 720** towns (the desk is silent).
+3. **Cases under three:** DS-POW-6 ADVANCING with no official in pay has ONE line ("Each season it gets easier to buy
+   an official"), drawn in 237 of the 720 (it was 81 by the draw); DS-DEF-4 `capture none` with an official in pay has
+   one (41 towns at most). The repetition guard has not seen the corpus pools yet (W2-POOLS).
+4. W2-WRITE's branch carries the first seat's tip: it should take this tip when it merges.
+
+## For W2-C-LEAVES
+`EconomicsTab.jsx` onto `importsAsPrinted`: `arriving` as Imports, `needed` as "needed, not met" — only after a
+need an import meets under another name is matched (8 of 30 read), or that print is the next false line.
+
+## New words for the owner's veto
+The organised ring's four vantages WITHOUT their officials clause (no new claim; each is its vantage with the clause
+taken out), e.g. "Shopkeepers here pay one ring for protection. It stamps out random violence, which would bring the
+law, and its terms are known and can be negotiated."
+
+## Calls taken without the chair
+1. F3's disqualifier for a line about officials is the cast's fact, not the stored state (measured: 41 towns).
+2. F3 includes DS-DEF-4's three capture lines that deny a bought official (same fact, the opposite claim).
+3. F6's home-call rule, and the register's shape migrated with its instrument.
+4. F2's bracket struck in the view, after the display seam (the seam itself keeps counts by its own design, C's file).
+5. P6need is banked at its base (642): its cure is W2-C-LEAVES's file.
