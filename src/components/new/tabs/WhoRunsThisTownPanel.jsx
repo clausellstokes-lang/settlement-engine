@@ -21,7 +21,7 @@ import { FLUSH } from '../../../design/flush.js';
 import EntityLink from '../../primitives/EntityLink.jsx';
 import { entityIdFor } from '../../../domain/dossier/entityLinks.js';
 import { dmPowerViewOf } from '../../../domain/people/patronage.js';
-import { boostWords } from '../../../data/people/dmPowerLines.js';
+import { boostWords, rulingHeadOf } from '../../../data/people/dmPowerLines.js';
 
 const PLACE = Object.freeze({ 1: 'Head', 2: 'Second', 3: 'Third', steward: 'Steward' });
 const RANK_WORD = Object.freeze({ 1: 'first', 2: 'second', 3: 'third' });
@@ -48,7 +48,8 @@ export default function WhoRunsThisTownPanel({ settlement }) {
       <div style={{ ...LITERARY_TITLE, color: swatch.inkMag, marginBottom: 2 }}>{`Who really runs this ${view.tierNoun}`}</div>
       <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, marginBottom: 4 }}>For the DM only. Nothing here appears on a player view or a shared page.</div>
 
-      <div style={headStyle}>The ruling three of {view.ruler}</div>
+      {/* COHERENCE-POWERS-5 (N5): the title names as many as it heads (dmPowerLines.js :: rulingHeadOf) */}
+      <div data-testid="dm-ruling-head" style={headStyle}>{rulingHeadOf(view.rulingThree.length, view.ruler)}</div>
       {view.rulingThree.map((f) => (
         <div key={f.id} data-testid="dm-ruling-face">
           <div style={row}>

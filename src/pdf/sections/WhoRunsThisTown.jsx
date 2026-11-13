@@ -9,7 +9,7 @@
 import { View, Text } from '@react-pdf/renderer';
 import { Callout } from '../primitives/Callout.jsx';
 import { type, palette, pt, space } from '../theme.js';
-import { boostWords } from '../../data/people/dmPowerLines.js';
+import { boostWords, rulingHeadOf } from '../../data/people/dmPowerLines.js';
 
 const PLACE = Object.freeze({ 1: 'Head', 2: 'Second', 3: 'Third', steward: 'Steward' });
 const RANK_WORD = Object.freeze({ 1: 'first', 2: 'second', 3: 'third' });
@@ -24,7 +24,7 @@ export function WhoRunsThisTown({ dm }) {
   return (
     <View style={{ marginTop: space.sm }}>
       <Callout tone="bad" kicker="FOR THE DM ONLY" title={`Who really runs this ${dm.tierNoun}`}>
-        <Text style={headStyle}>{`THE RULING THREE OF ${dm.ruler.toUpperCase()}`}</Text>
+        <Text style={headStyle}>{rulingHeadOf(dm.rulingThree.length, dm.ruler).toUpperCase()}</Text>
         {dm.rulingThree.map((f) => (
           <View key={f.id} wrap={false}>
             <Text style={rowStyle}>
