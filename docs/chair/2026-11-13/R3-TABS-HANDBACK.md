@@ -97,3 +97,44 @@ their other surfaces with `surfaces.sh` (PDF canon/draft/timeline, Foundry journ
 - Why not cured at the tab: the row is true in about two towns of three, so removing it is a count falling, not a cure,
   and "never delete a line that is true somewhere". Recommendation: the pool gains disqualifiers read from the record
   (the wharf/docks fact, the resource list, the tier) on lane ra or the data lane.
+
+### 5. HistoryTab :: TensionRow — the severity chips "minormajor" (b2) — STOP (the measure, as ruled)
+- Lines: #486 #487 #592 #593 #743 #744 #1422 #1423 (MED); 25 on the twenty towns' pages (33 chip lines by my dump).
+- What the "bar" encodes: there is no bar. The row prints one chip per member of `history.currentTensions[].severity`,
+  and that field is the TEMPLATE's severity list copied verbatim (`historyData.js :: HISTORICAL_EVENTS_DATA[].severity`;
+  `historyGenerator.js :: buildHistoricalEvent` never resolves it for a tension, while an event's is resolved by
+  `pick(eventTemplate.severity)`). On 164 towns (reader + fresh) at base: 290 tensions, all arrays: minor/major 176,
+  major/catastrophic 100, major 10, minor 4. So 276 of 290 carry a RANGE, not a rating.
+- Named bands exist (minor / major / catastrophic: `tabConstants.js :: SEV_COLORS`, `dossierSearch.js :: SEVERITY_RANK`),
+  but the record holds no single value for a tension to read through them; the display leaves only re-shape the
+  range (`dossierSearch.js :: severityRank` takes the worst for sorting; `pdf/lib/viewModel.js :: normSeverity` joins
+  "minor / major", which the PDF prints 33 times per variant on the twenty). Printing the worst, or the least, would be
+  this seat choosing the rating: invented. Nothing changed.
+- Three towns (base aac79b808): rr2s-town-under_siege-rand-1 ("Resource Scarcity" [minor, major]; "Occupation Legacy"
+  [major, catastrophic]); rr2s-city-calm-rand-1 ("Wild magic", "Heresy trial", both [minor, major]);
+  rr2s-metropolis-plague_onset-port-1 ("Resource Scarcity", "Wild magic", both [minor, major]).
+- Recommendation: the tension's severity is resolved at birth as an event's is (one draw in historyGenerator.js, the
+  data lane's file; it moves births and needs its signed shift), and the tab then prints that one word. The 14
+  single-word tensions already print one true word.
+
+### 6. DefenseTab lines whose writer is the defence display leaf (wc's) — NAMED, not touched
+- Food endurance (#34 #75 #103 #137 #184 #226 #290): the whole sentence is `defenseDisplay.js :: foodEnduranceLine`
+  (the tab prints label/before/door/after). "A few weeks" at 0.1 months (`weeks <= 3`), "under siege … are lost" with
+  no siege in force, half rations stretching 1.8 months to eight or nine.
+- "Legal Infrastructure · Court only" with no courthouse and no prison (#575): `defenseDisplay.js ::
+  deriveSupportingCapabilities` (status from `hasCourtSystem` / `hasPrison`).
+
+### 7. SubstrateTab — the Foundations Food row (c) — DONE
+- Lines: #494 ("FoodStrained" beside the Overview's "Food Security · Deficit", a siege at a 68% deficit), #1317
+  ("FoodAdequate" beside "Pressured").
+- Measure at base: on the reader's twenty the Foundations Food word equalled the Overview's food word in NONE (the
+  causal score on the causal ladder: Secure/Adequate, Deficit/Strained, Deficit — Active Famine/Critical or Collapsed,
+  Pressured/Adequate). The food record's band is the page's one food reading (Overview, Crisis, Economics).
+- Cure: the row prints `economicState.foodSecurity.label`, cased as the Overview cases it (statusCase), in the
+  record's colour; the causal band stays on `data-band` and orders the rows; a record without a label keeps the band
+  word. Read: rr2s-town-under_siege-rand-1 "Food · Deficit" (deficit 68%, siege), rr2s-metropolis-plague_onset-port-1
+  "Food · Pressured" (deficit 8%): true, and the same word as the Overview. No new words.
+- Pin re-keyed by identity: tests/generators/foodSurplusResidue.test.jsx (soak1k-5 now reads its record's "Secure"
+  where the capped "Adequate" stood; the pin's point, not Surplus, stands).
+- Other surfaces: the PDF prints no Foundations Food band on the twenty (0); Foundry, Tonight 0.
+- Red first: tests/components/substrateFoodOneHome.test.jsx (red at the base tree: eight of eight towns disagree).
