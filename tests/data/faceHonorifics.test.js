@@ -61,10 +61,14 @@ describe('the honorific registry', () => {
       'the mint master': 'Mintmaster', 'the senior guild master': 'Guildmaster', 'the master smith': 'Master Smith',
       'the master weaver': 'Master Weaver', 'the master baker': 'Master Baker', 'the steward': 'Steward',
       'the reeve': 'Reeve', 'the headman': 'Headman', 'the eldest': 'Elder', 'the innkeeper': 'Innkeeper',
-      'the ferryman': 'Ferryman', 'the alewife': 'Alewife', 'the guildmaster of thieves': 'Guildmaster',
+      'the ferryman': 'Ferryman', 'the guildmaster of thieves': 'Guildmaster',
       'the fence': 'Fence', 'the smuggler': 'Smuggler', "the revolt's leader": 'Leader of the revolt',
     };
     for (const [title, form] of Object.entries(want)) expect(honorificOfTitle(title), title).toBe(form);
+    // POWERS-9 (re-keyed by identity, the cause: a gendered trade word follows the person, pf#250): the alewife's named
+    // form is the woman's; a man (and the seedless masculine default) reads "Brewer"
+    expect(honorificOfTitle('the alewife', 'female')).toBe('Alewife');
+    expect(honorificOfTitle('the alewife', 'male')).toBe('Brewer');
   });
 
   it('resolves the gendered forms by the card gender, the masculine by default', () => {

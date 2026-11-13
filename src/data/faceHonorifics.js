@@ -46,7 +46,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the master of the hunt": ["Huntmaster", "Master of the Hunt"],
   "the pawnbroker": ["Pawnbroker", "Pawnmaster"],
   "the innkeeper": ["Innkeeper", "Landlord", "Host"],
-  "the alewife": ["Alewife", "Brewster"],
+  "the alewife": [{ male: "Brewer", female: "Alewife" }, "Brewster"], // POWERS-9 (ROUND-3-CUT-INCREMENT pf#250): no Alewife of a man
   "the caravanserai keeper": ["Caravanserai Keeper", "Host"],
   "the horse-coper": ["Horse-Coper", "Horse-Dealer"],
   "the stable keeper": ["Stablekeeper", "Ostler"],
@@ -83,7 +83,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the brickmaker": ["Brickmaker", "Master Brickmaker"],
   "the cobbler": ["Cobbler", "Master Cobbler"],
   "the tailor": ["Tailor", "Master Tailor"],
-  "the midwife": ["Midwife", { male: "Goodman", female: "Goodwife" }], // COHERENCE-POWERS-7 (cold list #543 #569 #593 #657): a man is no Goodwife
+  "the midwife": [{ male: "Goodman", female: "Midwife" }, { male: "Goodman", female: "Goodwife" }], // COHERENCE-POWERS-7 (cold list #543 #569 #593 #657): a man is no Goodwife; POWERS-9 (pf#288, the chair's ruling): nor a Midwife
   "the woodcarver": ["Woodcarver", "Master Carver"],
   "the scribe": ["Scribe", "Clerk"],
   "the cartographer": ["Cartographer", "Mapmaker"],
@@ -163,7 +163,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the troupe leader": ["Troupe Leader", "Troupe Master"],
   "the theatre manager": ["Theatre Manager", "Manager"],
   "the house boss": ["Boss"],
-  "the madam": ["Madam"],
+  "the madam": [{ male: "Master", female: "Madam" }], // POWERS-9 (the chair's row: "Madam" on a man): the style follows the person
   "the pit boss": ["Pit Boss"],
   "the lanista": ["Lanista"],
   "the fortune teller": ["Fortune-Teller", "Seer"],
@@ -197,7 +197,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the ringleader": ["Ringleader"],
   "the trafficker": ["Trafficker"],
   "the college master": ["Master", "Master of the College"],
-  "the district madam": ["Madam"],
+  "the district madam": [{ male: "Master", female: "Madam" }], // POWERS-9: as "the madam"
   "the golem-master": ["Golem-Master"],
   "the necromancer-overseer": ["Overseer"],
   "the exchange master": ["Exchange Master", "Master of the Exchange"],

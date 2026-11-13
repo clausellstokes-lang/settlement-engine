@@ -13,9 +13,11 @@ import { describe, expect, it } from 'vitest';
 import { FACE_HONORIFICS, honorificOfTitle } from '../../src/data/faceHonorifics.js';
 
 describe('COHERENCE-POWERS-7 · the midwife\'s honorific reads the card\'s gender', () => {
-  it('the pool keeps two places: "Midwife", then the gendered good-wife/good-man form', () => {
+  // POWERS-9 (re-keyed by identity, the cause: the chair's ruling, no "midwife" of a man, pf#288): the first place is
+  // gendered too, a woman's "Midwife" and a man's "Goodman"
+  it('the pool keeps two places: "Midwife" (a man: "Goodman"), then the gendered good-wife/good-man form', () => {
     expect(FACE_HONORIFICS['the midwife']).toHaveLength(2);
-    expect(FACE_HONORIFICS['the midwife'][0]).toBe('Midwife');
+    expect(FACE_HONORIFICS['the midwife'][0]).toEqual({ male: 'Goodman', female: 'Midwife' });
   });
   it('every seed that picks the second form gives a man "Goodman" and a woman "Goodwife"', () => {
     let second = 0;
@@ -23,10 +25,9 @@ describe('COHERENCE-POWERS-7 · the midwife\'s honorific reads the card\'s gende
       const seed = `npc_midwife_${i}::Midwife`;
       const man = honorificOfTitle('the midwife', 'male', seed);
       const woman = honorificOfTitle('the midwife', 'female', seed);
-      expect(man).not.toBe('Goodwife');
-      if (man === 'Midwife') { expect(woman).toBe('Midwife'); continue; }
+      expect(man).toBe('Goodman'); // POWERS-9: neither "Goodwife" nor "Midwife" for a man, at either place
+      if (woman === 'Midwife') continue;
       second += 1;
-      expect(man).toBe('Goodman');
       expect(woman).toBe('Goodwife');
     }
     expect(second, 'non-vacuity: the second form is picked').toBeGreaterThan(20);
