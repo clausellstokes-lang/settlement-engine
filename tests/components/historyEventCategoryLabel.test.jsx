@@ -52,6 +52,7 @@ describe("an event card's category word names the event's own template", () => {
     const after = (name) => nodes[nodes.indexOf(name) + 1];
     expect(after('The Occupation')).toBe('Occupation Legacy');
     expect(after('The Purge')).toBe('Infiltration Fear');
+    // anchored: the same text nodes hold 'Occupation Legacy' and 'Infiltration Fear', asserted on the two lines above
     expect(nodes).not.toContain('Exile & Return');
   });
 });

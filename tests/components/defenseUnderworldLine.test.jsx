@@ -17,6 +17,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 function appBirth(seed) {
   const m = seed.match(/^[a-z0-9]+-(thorp|hamlet|village|town|city|metropolis)-([a-z_+]+)-([a-z_]+)-(\d+)$/);
@@ -48,9 +49,10 @@ describe('the Underworld line names the faction and leaves its strength to the P
     expect(famine.crim?.powerLabel).toBe('Minor');
   });
   test('each line is the faction by name, with no band', () => {
-    for (const { seed, crim, lines } of TABS) {
+    const failures = collectSeedFailures(TABS, ({ crim, lines }) => {
       const line = lines.find((l) => l.length < 120);
-      expect(line, seed).toBe(`Underworld: ${crim.faction}`);
-    }
+      if (line !== `Underworld: ${crim.faction}`) throw new Error(`${line}`);
+    });
+    expectNoSeedFailures(failures, 'the Underworld line names the faction alone');
   });
 });

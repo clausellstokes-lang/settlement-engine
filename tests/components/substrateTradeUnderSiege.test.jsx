@@ -16,6 +16,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { statusCase } from '../../src/domain/display/labelCase.js';
 import SubstrateTab from '../../src/components/new/tabs/SubstrateTab.jsx';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 function appBirth(seed) {
   const m = seed.match(/^[a-z0-9]+-(thorp|hamlet|village|town|city|metropolis)-([a-z_+]+)-([a-z_]+)-(\d+)$/);
@@ -49,14 +50,16 @@ afterEach(cleanup);
 
 describe('the Foundations Trade connectivity row under a siege', () => {
   test('every siege town prints the crisis\'s own word on the row', () => {
-    for (const { seed, siege, word } of ROWS.filter((r) => SIEGE.includes(r.seed))) {
-      expect(siege?.summary, seed).toMatch(/nothing comes in by road/);
-      expect(word, seed).toBe(statusCase(siege.label));
-    }
+    const failures = collectSeedFailures(ROWS.filter((r) => SIEGE.includes(r.seed)), ({ siege, word }) => {
+      if (!/nothing comes in by road/.test(siege?.summary || '')) throw new Error(`summary ${siege?.summary}`);
+      if (word !== statusCase(siege.label)) throw new Error(`word ${word}`);
+    });
+    expectNoSeedFailures(failures, 'the siege speaks on the trade row');
   });
   test('a town with no siege keeps its band word', () => {
-    for (const { seed, word } of ROWS.filter((r) => CALM.includes(r.seed))) {
-      expect(['Surplus', 'Adequate', 'Strained', 'Critical', 'Collapsed'], seed).toContain(word);
-    }
+    const failures = collectSeedFailures(ROWS.filter((r) => CALM.includes(r.seed)), ({ word }) => {
+      if (!['Surplus', 'Adequate', 'Strained', 'Critical', 'Collapsed'].includes(word)) throw new Error(`word ${word}`);
+    });
+    expectNoSeedFailures(failures, 'a calm town keeps its band word');
   });
 });
