@@ -654,7 +654,9 @@ const DESKTOP_BASELINE = Object.freeze({
   // 0 -> 4 (2026-11-03, lane MAGIC, chair ruling 2): the dependence block reads the one reliance reading
   // instead of the siege/famine/plague flag, so the fixture's block renders on the public walk: its title
   // (chrome), its static explanation and its chain notes (prose). No token moved.
-  "Systems/Magic":       { measured: 4, sub14: 4 },
+  // 4 -> 5 (2026-11-12, W2-A-LEAVES, census row 3): the reliance line names its source (" · supplied by …"), so it
+  // crosses the walk's forty-five characters and is measured; its 700 weight judges it chrome. No token moved.
+  "Systems/Magic":       { measured: 5, sub14: 5 },
   "World/NPCs":          { measured: 284, sub14: 284 },
   // 60 -> 61 / 58 -> 59 and mobile 58 -> 59 (2026-10-31, G3 at the merge, GS-1): the eight-variant tie lines wrap one
   // line longer in the fixture; no token moved.
@@ -784,7 +786,9 @@ const MOBILE_BASELINE = Object.freeze({
   // prose 1, chrome 0 -> 1 (2026-10-30, UX consolidation): the dependence block's line and its title.
   // prose 0 -> 3, chrome 0 -> 1 (2026-11-03, lane MAGIC, chair ruling 2): the dependence block reads the one
   // reliance reading; its title is the 12px chrome line, its explanation and chain notes take the prose floor.
-  "Systems/Magic":       { prose: 3, chrome: 1, sub14: 1, sub12: 0 },
+  // chrome 1 -> 2 (2026-11-12, W2-A-LEAVES, census row 3): the reliance line names its source, crosses the walk's
+  // forty-five characters and is measured, chrome by its 700 weight at the prose size (sub14 and sub12 hold).
+  "Systems/Magic":       { prose: 3, chrome: 2, sub14: 1, sub12: 0 },
   "World/NPCs":          { prose: 283, chrome: 1, sub14: 0, sub12: 0 },
   "World/Relationships": { prose: 139, chrome: 39, sub14: 39, sub12: 0 },
   "World/Faith":         { prose: 2, chrome: 0, sub14: 0, sub12: 0 },
