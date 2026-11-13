@@ -3,7 +3,7 @@
  * chair's row of 2026-11-13: "Madam" and "Goodwife" printed for MALE cards on the NPC card): A TITLE THAT IS A GENDERED
  * TRADE WORD FOLLOWS THE PERSON. data/faceHonorifics.js :: FACE_HONORIFICS held "Alewife" and "Madam" as plain words, read
  * for every card whatever its gender (honorificOfTitle, through domain/people/cardDoor.js and seatKeeper.js). They are
- * gendered forms now ({ male, female }); a man reads "Brewer", "Goodman", "Master".
+ * gendered forms now ({ male, female }); a man reads "Brewster", "Goodman", "Master".
  */
 import { describe, expect, it } from 'vitest';
 import { FACE_HONORIFICS, honorificOfTitle } from '../../src/data/faceHonorifics.js';

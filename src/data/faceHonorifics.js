@@ -46,7 +46,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the master of the hunt": ["Huntmaster", "Master of the Hunt"],
   "the pawnbroker": ["Pawnbroker", "Pawnmaster"],
   "the innkeeper": ["Innkeeper", "Landlord", "Host"],
-  "the alewife": [{ male: "Brewer", female: "Alewife" }, "Brewster"], // POWERS-9 (ROUND-3-CUT-INCREMENT pf#250): no Alewife of a man
+  "the alewife": [{ male: "Brewster", female: "Alewife" }, "Brewster"], // POWERS-9 (ROUND-3-CUT-INCREMENT pf#250): no Alewife of a man; the pool's own "Brewster" (a man's "Brewer" named a brewery the town lacks: the census's kind a, 10 villages)
   "the caravanserai keeper": ["Caravanserai Keeper", "Host"],
   "the horse-coper": ["Horse-Coper", "Horse-Dealer"],
   "the stable keeper": ["Stablekeeper", "Ostler"],

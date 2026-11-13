@@ -66,9 +66,9 @@ describe('the honorific registry', () => {
     };
     for (const [title, form] of Object.entries(want)) expect(honorificOfTitle(title), title).toBe(form);
     // POWERS-9 (re-keyed by identity, the cause: a gendered trade word follows the person, pf#250): the alewife's named
-    // form is the woman's; a man (and the seedless masculine default) reads "Brewer"
+    // form is the woman's; a man (and the seedless masculine default) reads the pool's own "Brewster"
     expect(honorificOfTitle('the alewife', 'female')).toBe('Alewife');
-    expect(honorificOfTitle('the alewife', 'male')).toBe('Brewer');
+    expect(honorificOfTitle('the alewife', 'male')).toBe('Brewster');
   });
 
   it('resolves the gendered forms by the card gender, the masculine by default', () => {
