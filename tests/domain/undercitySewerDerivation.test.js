@@ -248,6 +248,8 @@ describe('MF-UC1 — the undercity sanitation ladder and its wells', () => {
     const raiseDeltas = raise.map(([, lo, hi]) => freeIdentified.map((s) => rungIndex(hi(s)) - rungIndex(lo(s))));
     expect(raiseDeltas.map((ds) => ds.filter((d) => d < 0).length)).toEqual([0, 0, 0, 0]);
     expect(raiseDeltas.map((ds) => ds.filter((d) => d > 0).length > 0)).toEqual([true, true, true, true]);
+    // For HIGH_WATER the rung moves by the peak tier's floor (207 of 208 up-moves), so the weight's liveness is proved on the score.
+    expect(raise.map(([, lo, hi]) => freeIdentified.some((s) => deriveSewerLadder(hi(s)).score > deriveSewerLadder(lo(s)).score))).toEqual([true, true, true, true]);
     // ⚠ THE TWO ROSTER READS TAKE DIFFERENT RUIN DISPOSITIONS, and both are pinned rather than
     // left to the walker's file-granular compliance. A burnt-out hall is NOT civic capacity this
     // year (the crediting class, ruin-FILTERED); a flattened sewage works still means the drains
