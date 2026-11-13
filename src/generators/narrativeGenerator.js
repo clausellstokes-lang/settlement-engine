@@ -791,7 +791,7 @@ export const generateSettlementReason = (tier, route, neighbor, _config = {}, fo
   // a path that carries food in from outside, never a fixed list: no magic, caravan or patron the
   // receipt lacks is named (settlementOriginProse.js :: supportChannelsOf).
   // The receipt is the record's `isolationSupport` (the same object, measured on 764 births).
-  const supportChannels = supportChannelsOf(_config._isolationSupport) ?? undefined;
+  const supportChannels = supportChannelsOf(_config._isolationSupport) ?? undefined; const siegeInForce = Array.isArray(_config.stressTypes) && _config.stressTypes.includes('under_siege'); // #215: the siege, read once
   lines.push(selectOriginBody({
     route,
     terrainType: _config.terrainType ?? null,
@@ -801,20 +801,20 @@ export const generateSettlementReason = (tier, route, neighbor, _config = {}, fo
     hasDocks: roster?.hasDocks,
     supportChannels,
     specialResources: _config.specialResources ?? null,
-    seed: _config._seed ?? null, siege: Array.isArray(_config.stressTypes) && _config.stressTypes.includes('under_siege'), tier, hasTravellerHouse: roster?.hasTravellerHouse, hasFoodImport: foodBalance ? Number(foodBalance.importCoverage) > 0 : undefined, isolationSupport: _config._isolationSupport ?? null, // R2-CODE-A-4 (#154, #ww-1227, #7): the rows a siege, the size or the roster refuses; what a shortfall with nothing brought in holds; one line so no cited line moves
+    seed: _config._seed ?? null, siege: siegeInForce, tier, hasTravellerHouse: roster?.hasTravellerHouse, hasFoodImport: foodBalance ? Number(foodBalance.importCoverage) > 0 : undefined, isolationSupport: _config._isolationSupport ?? null, // R2-CODE-A-4 (#154, #ww-1227, #7): the rows a siege, the size or the roster refuses; what a shortfall with nothing brought in holds; one line so no cited line moves
   }));
 
   // Tier-specific context. THE OWNER'S STYLE LAW (W5 HIS 2026-11-07, STYLE-AUDIT §2a #11 and §2b-5):
   // plain statement, no mechanism. The small-place line was the second most-repeated frame on the
   // 1,000 (334 towns), so it is a pool of five vantages chosen DRAW-FREE by the settlement's seed
   // (the same town keeps its line; a sibling prints another); a seedless caller gets index 0.
-  if (tier === 'metropolis') {
-    lines.push('Everything in the region is bought, sold or decided here.');
+  if (tier === 'metropolis') { // #215 (R2-CODE-A-4): under a siege no trade is named as open; the line says it of ordinary times
+    lines.push(siegeInForce ? 'In ordinary times everything in the region is bought, sold or decided here.' : 'Everything in the region is bought, sold or decided here.');
   } else if (tier === 'city') {
     lines.push(
       hasFoodDeficit
         ? 'Large enough that its appetites outrun its fields. What the city consumes, it cannot fully produce.'
-        : 'Large enough to feed itself; its trade brings extras, not the essentials.',
+        : (siegeInForce ? 'Large enough to feed itself; in ordinary times its trade brings extras, not the essentials.' : 'Large enough to feed itself; its trade brings extras, not the essentials.'),
     );
   } else if (['thorp', 'hamlet'].includes(tier)) {
     const seed = typeof _config._seed === 'string' ? _config._seed.trim() : '';

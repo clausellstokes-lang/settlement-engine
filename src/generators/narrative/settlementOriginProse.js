@@ -178,6 +178,16 @@ export const ORIGIN_POOLS = Object.freeze({
     `Off the trade routes and under-fed by its own land. Nothing is brought in, and every season it gets by on ${HOLDS_TOKEN}.`,
   ]),
 
+  // #215 (round two; the chair's ruling): an isolated shortfall UNDER A SIEGE in force names no channel of
+  // trade as open; it says what the record holds (`holdingsOf`). A new arm: index 0 is its own.
+  'isolated.besieged': Object.freeze([
+    `Isolated from major trade routes, and now under siege. The settlement cannot fully feed itself, and nothing comes in by road: it gets by on ${HOLDS_TOKEN}.`,
+    `Isolated from major trade routes, and short of what it eats. With the siege closing the roads, it gets by on ${HOLDS_TOKEN}.`,
+    `Set apart from the trade roads, on ground that does not quite feed it, and now cut off by a siege. It gets by on ${HOLDS_TOKEN}.`,
+    `Isolated, and running a shortfall it cannot farm its way out of. The siege has closed the roads; it gets by on ${HOLDS_TOKEN}.`,
+    `Off the trade routes and under-fed by its own land, and now besieged: nothing comes in by road, and it gets by on ${HOLDS_TOKEN}.`,
+  ]),
+
   'isolated.deficit': Object.freeze([
     `Isolated from major trade routes. The settlement cannot fully feed itself; what the land does not give arrives expensively — through ${CHANNELS_TOKEN} — or not at all.`,
     // ⚠️ THE SPLICE POINT NEEDS A VISIBLE CLOSE. `{channels}` is a LIST, and a
@@ -232,7 +242,7 @@ export const supportChannelsOf = (support) => {
 };
 
 /** The arms that splice what the record holds (`{holds}`). */
-const HOLDS_ARMS = new Set(['isolated.unsupplied']);
+const HOLDS_ARMS = new Set(['isolated.unsupplied', 'isolated.besieged']);
 
 /**
  * What an isolated place with no outside supply holds (#7): its stores where the receipt counts a reserves
@@ -307,10 +317,10 @@ const admittedIndex = (arm, pool, at, state) => {
 /**
  * Resolve the ARM for a founding state. This is the pre-RR branch structure
  * exactly: route, with the port terrain sub-arms and the isolated deficit split.
- * @param {{ route?: string, terrainType?: string|null, hasFoodDeficit?: boolean, hasDocks?: boolean, hasFoodImport?: boolean }} state
+ * @param {{ route?: string, terrainType?: string|null, hasFoodDeficit?: boolean, hasDocks?: boolean, hasFoodImport?: boolean, siege?: boolean }} state
  * @returns {string} an ORIGIN_POOLS key
  */
-export const originArmKey = ({ route, terrainType = null, hasFoodDeficit = false, hasDocks, hasFoodImport }) => {
+export const originArmKey = ({ route, terrainType = null, hasFoodDeficit = false, hasDocks, hasFoodImport, siege }) => {
   if (route === 'crossroads') return 'crossroads';
   if (route === 'river') return 'river';
   // #10 (STYLE-RULINGS §1, W5 HIS 2026-11-07) — A RECORD DEFECT, NOT A WORDING: a port reason
@@ -332,6 +342,8 @@ export const originArmKey = ({ route, terrainType = null, hasFoodDeficit = false
   }
   // #7: a shortfall the food record brings nothing in for (an explicit false; absent keeps the deficit arm)
   // names no channel.
+  // #215: a shortfall under a siege in force names no channel as open, whatever the food record brings in.
+  if (route === 'isolated' && hasFoodDeficit && siege === true) return 'isolated.besieged';
   if (route === 'isolated' && hasFoodDeficit && hasFoodImport === false) return 'isolated.unsupplied';
   if (route === 'isolated') return hasFoodDeficit ? 'isolated.deficit' : 'isolated.sustained';
   // Every other route (road, mountain_pass, none, unset…) founds on the road arm,
