@@ -350,10 +350,10 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
       // the run on governanceFractured worlds less often. DS-DEF-8 and DS-ECO-6 are reached with 0 cells apart.
       'DS-POW-1 :: governanceFractured true': { cells: 60, coordinates: ['vid 4 / index 3'] },
       // W2-WRITE round 1, the cold list's corpus variants (2026-11-13), declared BY IDENTITY: the pool's player face, which
-      // was one canonical line, now reads the town's organised crime (v0 `no organised crime`; v4, v5 `organised crime`,
-      // appended after the three dm-only lines), so the cells where the run reaches a town with organised crime draw
-      // vid 4 at player index 1. MEASURED by this arm's own measuredApart at the lane's tip: 172 cells, one coordinate.
-      'DS-ECO-6 :: TIER: minor shadow activity (≥3)': { cells: 172, coordinates: ['vid 4 / index 1'] },
+      // was one canonical line, gains two lines for a town with organised crime (v4, v5 `organised crime`, appended
+      // after the three dm-only lines), so the cells where the run reaches such a town and draws v4 read vid 4 at
+      // player index 1. MEASURED by this arm's own measuredApart at the lane's tip: 171 cells, one coordinate.
+      'DS-ECO-6 :: TIER: minor shadow activity (≥3)': { cells: 171, coordinates: ['vid 4 / index 1'] },
     };
     /** @type {Record<string, { cells: number, coordinates: string[] }>} */
     const measuredApart = {};

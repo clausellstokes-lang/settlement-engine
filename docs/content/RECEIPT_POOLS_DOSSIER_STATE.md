@@ -826,7 +826,7 @@ the access.
 
 **COMBINATION C4: a low rung on a working approach**
 1. `[ledger · no crisis: under_siege]` Traffic moves along {settlement}'s {access} every day, and little of its money stays behind.
-2. `[street · no crisis: under_siege]` {settlement} is poor though the trade routes serve it well, and its people say so to anyone who asks.
+2. `[street · no crisis: under_siege]` Some trade comes past {settlement}, and little of it stops. The town is poor, and its people say so to anyone who asks.
 3. `[visitor · market · no crisis: under_siege]` {settlement}'s market sells little, though the {access} is busy; most of the traffic does not stop, and the traders here are poor.
 4. `[ledger · crisis: under_siege]` With the siege closing every way in, {settlement} has lost even the little that passing trade used to leave behind.
 5. `[street · crisis: under_siege]` {settlement} was poor even while its trade moved freely, and the siege has stopped it moving at all.
@@ -1135,7 +1135,7 @@ register and stand as canonical-at-zero for the two lower tiers (R-DST-C).
 7. `[street · no market]` Much of what changes hands at {settlement} changes hands quietly, between people who would rather nobody counted it.
 
 **TIER: minor shadow activity (≥3)**
-0. *(canonical)* `[no organised crime]` Some petty theft goes on here, and some trading without a licence. It is a nuisance, nothing more.
+0. *(canonical)* `[colour]` Some petty theft goes on here, and some trading without a licence. It is a nuisance, nothing more.
 1. `[ledger · dm-only · no organised crime]` A little of {settlement}'s trade goes unrecorded, small enough to annoy the clerks and too small to change what the town is.
 2. `[street · dm-only · no organised crime]` There is some thieving and some selling without a licence. Every town this size has both.
 3. `[counterforce · dm-only · no organised crime]` What passes for a shadow economy here has never grown into one. There is unlicensed trade and nothing organised behind it.
@@ -2850,7 +2850,7 @@ supplies the ancestry.
 1. `[ledger · no crisis: under_siege]` {settlement}'s garrison roll puts paid soldiers on every stretch of its walls, so raiders stay away and an army would pay dearly; a long siege would be another matter.
 2. `[visitor · no crisis: under_siege]` Approaching {settlement}, you see the walls and the soldiers who belong on them, and any attacker would think again about the cost.
 3. `[street]` People at {settlement} believe the town could be held, and the soldiers on the walls give them good reason to.
-4. `[unfolding · walls · garrison · crisis: under_siege]` The siege at {settlement} is being met on the walls by paid soldiers, and the walls are holding.
+4. `[unfolding · garrison · crisis: under_siege]` Paid soldiers are holding {settlement}'s walls against the siege, and so far they have held.
 
 **`Invasion & War`: walls with citizen militia** {colour}
 1. `[ledger]` Walls at {settlement} with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear.
@@ -3643,7 +3643,7 @@ street, the unfolding).
 1. `[ledger · guardPresence]` The guards' rations at {settlement} are cut like everyone else's, and a hungry guard cannot be asked for much for long.
 2. `[street · guardPresence]` At {settlement} the people who keep order spend their days at the food stores, not watching the roads.
 3. `[unfolding · colour]` The longer the hunger lasts at {settlement}, the less its defenders can do, and nothing is filling the stores again yet.
-4. `[ledger · no guardPresence]` {settlement} has no guards to feed, only households, and every household is guarding its own share of what is left.
+4. `[ledger · no guardPresence]` {settlement} has nobody paid to defend it, only households, and every household is minding its own share of what is left.
 5. `[street · no guardPresence]` With nobody at {settlement} paid to keep order, the hunger is policed by neighbours watching each other's doors.
 
 **override: UNDER OCCUPATION** {colour}
@@ -3655,19 +3655,19 @@ street, the unfolding).
 1. `[ledger · colour]` More than one power at {settlement} claims to command its defence, and orders are given twice and obeyed once.
 2. `[street · guardPresence]` Those standing guard at {settlement} get orders from two sides and have quietly chosen which to follow.
 3. `[unfolding · colour]` Every order at {settlement} now takes longer to carry out, and in an attack that delay would cost lives.
-4. `[street · no guardPresence]` {settlement} has no standing guard to command, and the quarrel over who would command one is louder for it.
+4. `[street · no guardPresence]` {settlement} has no standing force to command, and the quarrel over who would command one is louder for it.
 
 **override: UNDER TRIBUTE**
 1. `[ledger · colour]` {settlement} pays its creditors first and its defence with what is left, and what is left shrinks each year.
 2. `[street · guardPresence]` At {settlement} the debt is paid before the guards are, and every guard knows it.
 3. `[unfolding · colour]` Every year the debt stands, less of {settlement}'s money reaches its defence.
-4. `[street · no guardPresence]` {settlement} keeps no guards to pay, and the debt is one more reason it never will.
+4. `[street · no guardPresence]` {settlement} keeps no defenders to pay, and the debt is one more reason it never will.
 
 **override: SECURITY COMPROMISED**
 1. `[ledger · colour]` {settlement} was betrayed recently, and its defence is being rearranged on the assumption that the enemy knows the old arrangements.
 2. `[street · guardPresence]` The guards at {settlement} have changed their rounds and will not say why, and everyone can guess.
 3. `[unfolding · colour]` Until {settlement} has changed everything the traitor knew, its defence is weaker than it looks.
-4. `[street · no guardPresence]` {settlement} has no guard to reorganize after the betrayal, only households that now bar their doors and keep their own counsel.
+4. `[street · no guardPresence]` {settlement} has no defenders to reorganize after the betrayal, only households that now bar their doors and keep their own counsel.
 
 **override: INFILTRATION ACTIVE**
 1. `[visitor · colour]` Something has changed at {settlement}: people watch each other as closely as they watch the roads, and nobody will say why.
@@ -3690,14 +3690,14 @@ street, the unfolding).
 1. `[ledger · guardPresence]` Beasts come out of the country at {settlement} steadily, and the town loses guards and gear to them faster than it replaces them.
 2. `[street · guardPresence]` The guards at {settlement} watch the country, not the town, and they do not stand down.
 3. `[unfolding · colour]` The beasts give {settlement} no rest between attacks, and each one costs the town something it cannot quickly replace.
-4. `[street · no guardPresence]` With no guards at {settlement}, every household watches its own edge of the place against the beasts, and nobody sleeps well.
+4. `[street · no guardPresence]` With nobody posted at {settlement}, every household watches its own edge of the place against the beasts, and nobody sleeps well.
 5. `[ledger · no guardPresence]` {settlement} has nobody whose work is to stand against the beasts; what the creatures take is counted afterwards, house by house.
 
 **override: INSURGENCY ACTIVE**
 1. `[ledger · colour]` {settlement} is defending itself against its own people, and its defence was never built for that.
 2. `[street · guardPresence]` The guards at {settlement} walk streets where they are not welcome, and that is more dangerous to them than any ambush outside.
 3. `[unfolding · colour]` Each crackdown on the insurgents at {settlement} turns more of its people to their side.
-4. `[street · no guardPresence · crisis: insurgency]` {settlement} has no guards to send against the insurgents, and each household decides for itself what to keep quiet about.
+4. `[street · no guardPresence · crisis: insurgency]` {settlement} has nobody to send against the insurgents, and each household decides for itself what to keep quiet about.
 
 **override: RELIGIOUS UPHEAVAL** {colour}
 1. `[ledger]` Who may command {settlement}'s defence has become a question of faith, and until it is settled every order is questioned.

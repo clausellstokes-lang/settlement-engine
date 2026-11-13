@@ -55,14 +55,14 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 254164,
-      "gzip": 34385,
+      "raw": 254153,
+      "gzip": 34373,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 182381,
-      "gzip": 25602,
+      "raw": 182387,
+      "gzip": 25593,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
@@ -683,6 +683,14 @@
       "toRaw": 254164,
       "gzipAfter": 34385,
       "reason": "+7311 B raw over the committed 246853 (gzip level 9: 33480 -> 34385): three for every case, the layer-2 list first: DS-DEF-8's guardless overrides, DS-DEF-2's threat cases, DS-DEF-11 unwalled, DS-DEF-5 garrison (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE four pins",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 182381,
+      "toRaw": 182387,
+      "gzipAfter": 25593,
+      "reason": "+6 B raw over the committed 182381 (gzip level 9: 25602 -> 25593): round 1 and stage 3 lines read against four pins of the whole suite (2026-11-13)"
     }
   ],
   "ceilingTransfersNewLeaves": [

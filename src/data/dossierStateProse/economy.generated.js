@@ -140,7 +140,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "{settlement} is poor though the trade routes serve it well, and its people say so to anyone who asks.",
+          "text": "Some trade comes past {settlement}, and little of it stops. The town is poor, and its people say so to anyone who asks.",
           "slots": [
             "settlement"
           ],
@@ -2067,7 +2067,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "canonical",
           "marks": [
-            "no organised crime"
+            "colour"
           ],
           "text": "Some petty theft goes on here, and some trading without a licence. It is a nuisance, nothing more.",
           "slots": [],

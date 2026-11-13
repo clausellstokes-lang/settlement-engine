@@ -1141,8 +1141,7 @@
       "lineDeclares": {
         "crisis: under_siege": 1,
         "garrison": 1,
-        "no crisis: under_siege": 2,
-        "walls": 1
+        "no crisis: under_siege": 2
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -14007,7 +14006,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "no organised crime": 4,
+        "colour": 1,
+        "no organised crime": 3,
         "organised crime": 2
       },
       "undeclared": 0,

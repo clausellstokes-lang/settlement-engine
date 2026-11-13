@@ -809,11 +809,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "unfolding",
           "marks": [
-            "walls",
             "garrison",
             "crisis: under_siege"
           ],
-          "text": "The siege at {settlement} is being met on the walls by paid soldiers, and the walls are holding.",
+          "text": "Paid soldiers are holding {settlement}'s walls against the siege, and so far they have held.",
           "slots": [
             "settlement"
           ],
@@ -6626,7 +6625,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no guardPresence"
           ],
-          "text": "{settlement} has no guards to feed, only households, and every household is guarding its own share of what is left.",
+          "text": "{settlement} has nobody paid to defend it, only households, and every household is minding its own share of what is left.",
           "slots": [
             "settlement"
           ],
@@ -6709,7 +6708,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no guardPresence"
           ],
-          "text": "{settlement} has no standing guard to command, and the quarrel over who would command one is louder for it.",
+          "text": "{settlement} has no standing force to command, and the quarrel over who would command one is louder for it.",
           "slots": [
             "settlement"
           ],
@@ -6755,7 +6754,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no guardPresence"
           ],
-          "text": "{settlement} keeps no guards to pay, and the debt is one more reason it never will.",
+          "text": "{settlement} keeps no defenders to pay, and the debt is one more reason it never will.",
           "slots": [
             "settlement"
           ],
@@ -6801,7 +6800,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no guardPresence"
           ],
-          "text": "{settlement} has no guard to reorganize after the betrayal, only households that now bar their doors and keep their own counsel.",
+          "text": "{settlement} has no defenders to reorganize after the betrayal, only households that now bar their doors and keep their own counsel.",
           "slots": [
             "settlement"
           ],
@@ -6968,7 +6967,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no guardPresence"
           ],
-          "text": "With no guards at {settlement}, every household watches its own edge of the place against the beasts, and nobody sleeps well.",
+          "text": "With nobody posted at {settlement}, every household watches its own edge of the place against the beasts, and nobody sleeps well.",
           "slots": [
             "settlement"
           ],
@@ -7026,7 +7025,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no guardPresence",
             "crisis: insurgency"
           ],
-          "text": "{settlement} has no guards to send against the insurgents, and each household decides for itself what to keep quiet about.",
+          "text": "{settlement} has nobody to send against the insurgents, and each household decides for itself what to keep quiet about.",
           "slots": [
             "settlement"
           ],
