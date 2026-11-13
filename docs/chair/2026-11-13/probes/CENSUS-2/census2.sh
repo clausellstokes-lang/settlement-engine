@@ -53,7 +53,11 @@ TREE=$TREE OUT=$OUT DUMPS="$OUT/dumps" CORPUS="$OUT/corpus.ndjson.gz" node "$P/c
 echo "census2: tracing writers"
 TREE=$TREE OUT=$OUT node "$P/writers2.mjs"; rc=$?
 [ "$rc" -eq 0 ] || { echo "census2: writer trace FAILED (exit $rc)"; exit 1; }
-FILES=$FILES OUT=$OUT node "$P/report2.mjs"; rc=$?
+# the cold lists, for known-or-NEW: COLD_CUT / COLD_INC from the environment, else read from origin's round-3-cut lane
+for pair in "COLD_CUT:ROUND-3-CUT.json" "COLD_INC:ROUND-3-CUT-INCREMENT.json"; do v=${pair%%:*}; f=${pair#*:}; eval cur=\${$v:-}
+  if [ -z "$cur" ] && git -C "$TREE" show "origin/lane/round-3-cut-2026-11-13:docs/chair/2026-11-13/$f" > "$OUT/$f" 2>/dev/null; then eval "$v=\$OUT/\$f"; fi; done
+[ -n "${COLD_CUT:-}" ] || echo "census2: no cold lists (git fetch origin lane/round-3-cut-2026-11-13 in the tree, or set COLD_CUT/COLD_INC): every line is 'unjoined'"
+COLD_CUT=${COLD_CUT:-} COLD_INC=${COLD_INC:-} FILES=$FILES OUT=$OUT node "$P/report2.mjs"; rc=$?
 [ "$rc" -eq 0 ] || { echo "census2: report FAILED (exit $rc)"; exit 1; }
 T2=$(date +%s)
 echo "census2: done; births+render $((T1-T0))s, count+trace $((T2-T1))s"

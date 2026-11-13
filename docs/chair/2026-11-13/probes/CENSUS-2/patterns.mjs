@@ -8,7 +8,7 @@
 // Text before the trigger in the same clause that makes the line NOT assert the house is here.
 const NEG_BEFORE = /\b(no|not|without|nor|never|none|lacks?|lacking|absent|isn't|aren't|wasn't|nobody|nothing|neither|instead of|in place of|short of|want of|missing)\b[^.;:!?]{0,45}$/i;
 const ELSEWHERE = /\b(foreign|nearest|next|neighbou?ring|nearby|another|other|outside|external|elsewhere|beyond|away|abroad|distant|walk to|walks? to|passing through|comes? through|travell?ing|visiting|itinerant|on circuit|travel(?:s|led)? to|ride to|carted to|sent to|go(?:es)? to|from the (?:city|town|village|capital)|in the (?:city|capital)|regional|a day's)\b/i;
-const HYPOTHETICAL_BEFORE = /\b(if|would|could|should|might|may|wants? to|hopes? to|plans? to|dreams? of|needs?|seeks?|seeking|to build|to found|to establish|to open|to raise|once (?:had|was)|used to|former|old|ruined|abandoned)\b[^.;:!?]{0,40}$/i;
+const HYPOTHETICAL_BEFORE = /\b(if|would|could|should|might|may|add|adding|recruit|attract|wants? to|hopes? to|plans? to|dreams? of|needs?|seeks?|seeking|to build|to found|to establish|to open|to raise|once (?:had|was)|used to|former|old|ruined|abandoned)\b[^.;:!?]{0,40}$/i;
 function guarded(line, idx, len, opts = {}) {
   const before = line.slice(Math.max(0, idx - 60), idx); const after = line.slice(idx + len, idx + len + 45);
   if (NEG_BEFORE.test(before)) return 'negated';
@@ -36,7 +36,7 @@ export const A_VOCAB = [
     pre: /(?:thieves|mages|adventurers|assassins|merchants?)'?\s*$/i },
   { id: 'market', t: /\b(?<!black |whisper )(?:market(?:s|place|places| days?| squares?| halls?| stalls?)?)\b(?!\s*(?:value|price|rate|town))/i, r: /(?<!black )(?<!whisper )market|fair\b|bazaar/i, x: /black market|whisper market|\b(?:to|out to|at|for) market\b|market (?:value|price)/i },
   { id: 'fair', t: /\b(?:annual|yearly|seasonal|great|trade|horse|hiring|cattle|summer|autumn|spring) fairs?\b|\bthe fairs?\b|\bfairs\b|\bfair-?days?\b|\bfairground/i, r: /fair\b|market/i },
-  { id: 'church', t: /\b(?:churche?s?|chapels?|temples?|houses? of worship|parish(?:es)?|minster|abbey|priory|religious houses?|bells|bell-?towers?|bell-?house)\b/i, r: /church|house of worship|houses of worship|cathedral|monaster|priest|friary|temple|abbey|chapel/i },
+  { id: 'church', t: /\b(?:churche?s?|chapels?|temples?|houses? of worship|parish(?:es)?|minster|abbey|priory|religious houses?|bells|bell-?towers?|bell-?house)\b/i, r: /church|house of worship|houses of worship|cathedral|monaster|priest|friary|temple|abbey|chapel/i , x: /church['’]s name|god and the church/i },
   { id: 'cathedral', t: /\bcathedrals?\b/i, r: /cathedral/i },
   { id: 'clergy', t: /\b(?:priests?|priesthood|priestly|clergy|clergyman|clerical|clerics?|vicars?|parsons?|curates?|chaplains?|abbots?|abbess|monks?|nuns?|friars?|deacons?|bishops?)\b/i, r: /church|house of worship|houses of worship|cathedral|monaster|priest|friary|temple|abbey|chapel|healer \(divine/i },
   { id: 'inn', t: /\b(?:inns?|taverns?|alehouses?|ale-houses?|innkeepers?|taprooms?|hostelr(?:y|ies)|caravanserai)\b/i, r: /\binns?\b|tavern|ale ?house|caravanserai|waystation|travelers' inn/i },
@@ -54,7 +54,7 @@ export const A_VOCAB = [
   { id: 'smithy', t: /\b(?:smith(?:y|ies)|blacksmiths?|farriers?|smiths)\b|\b(?:the|a|its|their|every|each) forges?\b|\bforges\b/i, r: /smith|forge|metalworker|smelter/i },
   { id: 'court', t: /\bcourt-?houses?\b|\bcourts? of law\b|\bmagistrates?\b|\blaw-?courts?\b/i, r: /court|magistrat/i },
   { id: 'quarry', t: /\bquarr(?:y|ies|ying|ymen|ymen's)\b|\bdressed stone\b/i, r: /quarry|mine\b/i },
-  { id: 'mine', t: /\b(?:the|a|its|their|open-?cast|deep) mines?\b|\bmines\b|\bminers?\b|\bmine-?shafts?\b|\bmining\b/i, r: /\bmine\b|smelter/i },
+  { id: 'mine', t: /\b(?:the|a|its|their|open-?cast|deep) mines?\b|\bmines\b|\bminers?\b|\bmine-?shafts?\b|\bmining\b/i, r: /\bmine\b|smelter/i, x: /\bor mining\b|mining to produce/i },
   { id: 'reeve', t: /\breeves?\b/i, r: /reeve/i },
   { id: 'fishing', t: /\bfisher(?:men|folk|s)\b|\bfishing (?:boats?|fleet|families|house)\b|\bmorning catch\b|\bfishmongers?\b/i, r: /fish/i },
   { id: 'alchemy-mage', t: /\bwizards?'? towers?\b|\bmages?'? (?:towers?|district)\b|\bacademy of magic\b/i, r: /wizard|mage|academy of magic/i },
@@ -116,7 +116,7 @@ export function testA(line0, view, ctx) {
     for (const c of ctx.catalog.values()) { if (!c.multi && !list) continue; if (!line.includes(c.display)) continue; if (own.has(c.name) || own.has(c.display)) continue;
       const cf = c.fam; if (ownFam.some((o) => o.includes(cf) || cf.includes(o))) continue;   // another rung of a house the town has
       masked ??= maskIt(); const i = masked.indexOf(c.display); if (i < 0) continue; const pre = masked[i - 1], post = masked[i + c.display.length];
-      if ((pre && /[\w(~'’]/.test(pre)) || (post && /[\w~'’]/.test(post)) || (post === ' ' && /^ [a-z]/.test(masked.slice(i + c.display.length, i + c.display.length + 2)) && !c.multi)) continue;
+      if ((pre && /[\w(~'’]/.test(pre)) || (post && /[\w~'’]/.test(post)) || (post === ' ' && /^ [a-z]/.test(masked.slice(i + c.display.length, i + c.display.length + 2)))) continue;   // a name glued into a longer phrase ("Street gang activity") is not the house
       if (guarded(line, i, c.display.length, { allowElsewhere: false })) continue;
       if (res.some((r) => r.sub === 'house')) break; res.push({ pattern: 'a', sub: 'house', why: `"${c.display}" printed, not on the roster` }); }
   }
