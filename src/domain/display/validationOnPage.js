@@ -37,7 +37,7 @@ import { institutionDisplayName } from './institutionDisplayName.js';
 import { resourceDisplayName } from './resourceDisplayName.js';
 import { compareCodepoint } from '../deterministicSort.js';
 import { importsAsPrinted } from './tradeListDisplay.js';
-import { chainModelsResource, chainWorksResource } from '../facts/chainWorking.js';
+import { chainModelsResource, chainsWorking } from '../facts/chainWorking.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { familyOfInstitution, institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { institutionLadderEvicts } from '../../data/institutionLadders.js';
@@ -304,6 +304,73 @@ const chainFor = (rawResource) => /** @type {[string, ResourceChain]|undefined} 
   Object.entries(RESOURCE_CHAINS).find(([, c]) => c.rawResource === rawResource)) || null;
 
 /**
+ * WHETHER THE RESOURCE A CARD OR A GAP LINE NAMES IS WORKED HERE, AS THE PAGE SAYS IT (W2-C-LEAVES-3, P1; record 303:
+ * the chain model homes "worked here"). ONE reading for the "No one here works the …" sentence and the grade cards,
+ * so the two never disagree: the record's live resource keys the chain's input words answer (`gapResourceKeys`),
+ * asked of the chain leaf with the good the line names (`chainWorksResource`, R3's list); `modelled` is false where
+ * no chain of the record takes the resource at all (the model is silent: "not known", never "not worked").
+ * @param {PageRecord} s the settlement record @param {unknown} rawResource the card's or gap's raw resource ("timber")
+ * @returns {{ modelled: boolean, worked: boolean, keys: string[], chains: ReadonlyArray<object> }} `chains`: the working chains
+ */
+export function resourceWorkReading(s, rawResource) {
+  const entry = chainFor(str(rawResource));
+  const spec = entry ? CHAIN_INPUTS[entry[0]] : null;
+  const keys = gapResourceKeys(s, entry ? entry[0] : null);
+  const chains = chainsWorking(s, keys, spec?.noun);
+  const worked = chains.length > 0;
+  return { modelled: worked || chainModelsResource(s, keys), worked, keys, chains };
+}
+
+/** @typedef {'unexploited'|'partial'|'full'} ExploitationStage */
+/** @typedef {{ rawResource?: unknown, [key: string]: unknown }} ExploitationCard */
+/** @typedef {{ card: ExploitationCard, stage: ExploitationStage, filed: ExploitationStage, moved: boolean }} ExploitationShown */
+
+/**
+ * THE GRADE A RESOURCE CARD PRINTS (W2-C-LEAVES-3, P1; the chair's ruling of 2026-11-13 18:04 on the exploitation
+ * grade cards). The resource analysis files each card Unexploited, Partial or Full; the chain model homes "worked
+ * here" (record 303). ONE reader, read by the Resources tab's cards, the dossier search's and the PDF's (and so the
+ * Foundry journal's) chain rows, through the same reading as the "No one here works the …" sentence
+ * (`resourceWorkReading`):
+ *  - the model silent on the resource (no chain takes it): "not known", never "not worked": the filed grade stands;
+ *  - a chain works it and the card is filed Unexploited: shown in the PARTIAL group (no new grade), `moved`: its body
+ *    is the resource alone. The filed card's goods are the chain table's promise, not the record ("wool → cloth"
+ *    where only herds graze), and the working chains' own house lists name houses that do not work the resource
+ *    (a merchant guild on an alpine pasture, a river ferry on timber; MEASURED: 5 of 196 name no house of the roster
+ *    at all), so no flow is printed for it;
+ *  - a chain works it, filed Partial or Full: the filed grade stands;
+ *  - a modelled chain idle here, filed Partial or Full: the filed grade stands. MEASURED and read (all 9 on the
+ *    census's 720, d6e355a9d): every one is the medicinal herbs of a hot spring beside an Apothecary on the roster in
+ *    8 of 9: the record bears the ANALYSIS out, so this class stops as filed (the ruling's stop), listed in the hand-back.
+ * @param {PageRecord} s the settlement record @param {ExploitationCard} card @param {ExploitationStage} filed
+ * @returns {ExploitationShown}
+ */
+export function exploitationCardShown(s, card, filed) {
+  if (filed !== 'unexploited' || !resourceWorkReading(s, card?.rawResource).worked) return { card, stage: filed, filed, moved: false };
+  return { card, stage: 'partial', filed, moved: true };
+}
+
+/**
+ * The record's exploitation cards, grouped by the grade they print (`exploitationCardShown`), each group in the
+ * record's order (a surface sorts as it always has).
+ * @param {PageRecord} s @returns {Record<ExploitationStage, ExploitationShown[]>}
+ */
+export function exploitationGroupsShown(s) {
+  const ex = /** @type {{ exploitation?: Record<string, unknown> } | null | undefined} */ (s?.resourceAnalysis)?.exploitation || {};
+  /** @type {Record<ExploitationStage, ExploitationShown[]>} */
+  const out = { unexploited: [], partial: [], full: [] };
+  /** @type {ReadonlyArray<[ExploitationStage, string, string]>} */
+  const FILED = [['unexploited', 'unexploited', 'unexploited'], ['partial', 'partiallyExploited', 'partial'], ['full', 'fullyExploited', 'full']];
+  for (const [stage, key, legacy] of FILED) {
+    for (const card of arr(ex[key] ?? ex[legacy])) {
+      if (!card || typeof card !== 'object') continue;
+      const shown = exploitationCardShown(s, /** @type {ExploitationCard} */ (card), stage);
+      out[shown.stage].push(shown);
+    }
+  }
+  return out;
+}
+
+/**
  * THE RESOURCE GAPS THE DM READS: only the gaps the record does not answer, in the house
  * voice, each once.
  *  - a house that works none of its inputs: "No clay reaches the potter." — only when the
@@ -347,9 +414,8 @@ export function resourceGapLines(s) {
     // WORKED HERE is the chain model's (facts/chainWorking.js :: chainWorksResource, record 303): "No one here works"
     // prints only where the leaf says no; a half-way grade, which says the work is done in part, never where the model
     // holds a chain on the resource and none of its chains works it (where it holds none, the model is silent).
-    const keys = gapResourceKeys(s, entry ? entry[0] : null);
-    const worked = chainWorksResource(s, keys, spec?.noun); // R3: asked of the good the line names
-    const modelledIdle = !worked && chainModelsResource(s, keys);
+    const { worked, modelled } = resourceWorkReading(s, g.chain); // R3: asked of the good the line names
+    const modelledIdle = !worked && modelled;
     if (/not being processed/.test(str(g.impact))) {
       if (worked) continue;
       push({ chain: null, impact: `No one here works the ${raw} near ${str(s?.name) || 'the place'}.`, severity: str(g.severity) || 'low' });

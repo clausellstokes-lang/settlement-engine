@@ -84,10 +84,13 @@ describe('"Needs:" names only the houses the live roster does not hold (#452, ru
     unmount();
   }, 60000);
 
-  test('a town with a Cobbler\'s guild and no tannery still needs the tannery (rr2s-town-under_siege-rand-1)', () => {
+  // RE-KEYED BY IDENTITY (P1, the next commit's cause): this town's hides were filed Unexploited, so the card printed
+  // "Needs: Tannery" (its Cobbler's guild finishes the leather); a chain of the record works the hides here, so P1
+  // shows the card in the Partial group, which prints no "Needs:" line at all. The pin now holds that no false need
+  // prints for the hides; "Needs: Tannery" beside a finisher and no tannery is held by the unit above (the furriers).
+  test('a town with a Cobbler\'s guild and no tannery prints no leatherworkers\' need (rr2s-town-under_siege-rand-1)', () => {
     const town = birthApp('rr2s-town-under_siege-rand-1');
     const { container, unmount } = render(<ResourcesTab settlement={town} narrativeNote={null} />);
-    expect(needsLines(container)).toEqual(expect.arrayContaining(['Needs: Tannery']));
     expect(needsLines(container).filter((t) => /Leatherworkers/.test(t))).toEqual([]);
     unmount();
   }, 60000);

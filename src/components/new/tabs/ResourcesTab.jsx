@@ -13,7 +13,7 @@ import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 // READER-R1 ruling 3: the gap rows the DM reads are the record-read lines, in the house voice.
-import { resourceGapLines, housesStillNeeded } from '../../../domain/display/validationOnPage.js';
+import { resourceGapLines, housesStillNeeded, exploitationGroupsShown } from '../../../domain/display/validationOnPage.js';
 import { FLUSH } from '../../../design/flush.js';
 
 /**
@@ -37,7 +37,7 @@ const valBg    = v => v==='high'?'#e8f5ec':v==='medium'?'#faf4e8':'#f0ead8';
  * (BUILD-W2-SEARCH U2, no behaviour change): `stage` is 'unexploited', 'partial' or 'full',
  * the section's three variants, so the dossier search mounts a chain through its own card.
  */
-export function ResourceChainCard({ chain, stage, settlement = null }) {
+export function ResourceChainCard({ chain, stage, settlement = null, moved = false }) {
   const mobile = useIsMobile();
   // #452 (W2-C-LEAVES-3, ruled with R1): "Needs:" names only the houses the live roster does not hold by kind or trade.
   const needs = stage === 'unexploited' ? housesStillNeeded(settlement, chain?.processingInstitutions) : [];
@@ -79,7 +79,9 @@ export function ResourceChainCard({ chain, stage, settlement = null }) {
       </div>
       <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap'}}>
         <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600}}>{resourceDisplayName(chain.rawResource)}</span>
-        {(chain.intermediateGoods||[]).map((g,j)=>(
+        {/* P1: a card the analysis filed Unexploited that a chain works here (exploitationCardShown :: moved) prints
+            the resource alone: the filed goods are the chain table's promise, not the record. */}
+        {(moved ? [] : (chain.intermediateGoods||[])).map((g,j)=>(
           <React.Fragment key={j}><span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span><span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{g}</span></React.Fragment>
         ))}
       </div>
@@ -131,10 +133,13 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
 
   // Imports: object {critical:[], recommended:[], reasons:{}}
 
-  // Exploitation buckets
-  const unexploited    = [...(res.exploitation?.unexploited || [])].sort((a,b)=>(a.rawResource||'').localeCompare(b.rawResource||''));
-  const partExploited  = [...(res.exploitation?.partiallyExploited || [])].sort((a,b)=>(a.rawResource||'').localeCompare(b.rawResource||''));
-  const fullExploited  = [...(res.exploitation?.fullyExploited || [])].sort((a,b)=>(a.rawResource||'').localeCompare(b.rawResource||''));
+  // Exploitation buckets: the grade each card PRINTS (P1, W2-C-LEAVES-3): the chain model governs the yes or no where it
+  // takes the resource, through the one reader the "No one here works" sentence and the PDF read.
+  const shown = exploitationGroupsShown(r);
+  const byRes = (a,b)=>(a.card.rawResource||'').localeCompare(b.card.rawResource||'');
+  const unexploited    = [...shown.unexploited].sort(byRes);
+  const partExploited  = [...shown.partial].sort(byRes);
+  const fullExploited  = [...shown.full].sort(byRes);
 
   // Terrain accent color
   const terrainColor = {
@@ -170,13 +175,13 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
 
           {/* Unexploited — most interesting for DMs */}
-          {unexploited.map((chain,i)=><ResourceChainCard key={i} chain={chain} stage="unexploited" settlement={r}/>)}
+          {unexploited.map((x,i)=><ResourceChainCard key={i} chain={x.card} stage="unexploited" settlement={r}/>)}
 
           {/* Partially exploited */}
-          {partExploited.map((chain,i)=><ResourceChainCard key={i} chain={chain} stage="partial"/>)}
+          {partExploited.map((x,i)=><ResourceChainCard key={i} chain={x.card} stage="partial" moved={x.moved}/>)}
 
           {/* Fully exploited */}
-          {fullExploited.map((chain,i)=><ResourceChainCard key={i} chain={chain} stage="full"/>)}
+          {fullExploited.map((x,i)=><ResourceChainCard key={i} chain={x.card} stage="full"/>)}
         </div>
       </Section>}
 

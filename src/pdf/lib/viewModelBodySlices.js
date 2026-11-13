@@ -23,7 +23,7 @@ import { entityIdFor } from '../../domain/dossier/entityLinks.js';
 import { customSupplyChainViewModel } from './customSupplyChains.js';
 import { stressArray, foodCore, avgScore } from './viewModelPrimitives.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
-import { resourceGapLines } from '../../domain/display/validationOnPage.js';
+import { resourceGapLines, exploitationGroupsShown } from '../../domain/display/validationOnPage.js';
 import { crisisSummaryForSurface } from '../../domain/crisis/crisisSummaryVantage.js';
 
 // Pull the human resource name off an exploitation chain entry (engine stores
@@ -286,10 +286,29 @@ export function resourcesSlice(active) {
   const exp = ra?.exploitation || {};
   const EXP_KEYS = { full: 'fullyExploited', partial: 'partiallyExploited', unexploited: 'unexploited' };
   const chainRows = [];
+  // P1 (W2-C-LEAVES-3; SHARED LINES of this file, the grade's own): the grade a row prints is the Resources tab's,
+  // read through ONE reader (validationOnPage.js :: exploitationCardShown): a card filed Unexploited that a chain
+  // works here is printed Partial, with no processing or output: the filed ones are the chain table's promise, not
+  // the record. The Foundry journal reads these rows too.
+  const shownOf = new Map();
+  for (const group of Object.values(exploitationGroupsShown(s))) for (const x of group) shownOf.set(x.card, x);
   for (const [which, engineKey] of Object.entries(EXP_KEYS)) {
     for (const item of (exp?.[engineKey] || exp?.[which] || [])) {
+      const shown = item && typeof item === 'object' ? shownOf.get(item) : null;
       if (typeof item === 'string') {
         if (item) chainRows.push({ resource: item, status: which, processing: null, output: null });
+      } else if (shown && shown.stage !== which) {
+        const resource = item?.rawResource || item?.resource || item?.chainKey || item?.name || '';
+        if (!resource) continue;
+        chainRows.push({
+          resource,
+          status: shown.stage,
+          processing: null,
+          output: null,
+          chainStatus: null,
+          quality: item?.quality || null,
+          accessibility: item?.accessibility || null,
+        });
       } else if (item) {
         const resource = item?.rawResource || item?.resource || item?.chainKey || item?.name || '';
         if (!resource) continue;

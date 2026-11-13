@@ -39,6 +39,7 @@ import { HistoryEventCard, TensionRow } from '../new/tabs/HistoryTab.jsx';
 import { TraditionRow } from '../new/tabs/TraditionsTab.jsx';
 import { PlotHookCard } from '../new/tabs/PlotHooksTab.jsx';
 import { ResourceChainCard } from '../new/tabs/ResourcesTab.jsx';
+import { exploitationCardShown } from '../../domain/display/validationOnPage.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { proseFontSize } from '../../design/proseScale.js';
 
@@ -123,7 +124,14 @@ const RENDERERS = Object.freeze({
   tension: { Component: TensionRow, props: (o) => ({ t: o.raw }) },
   tradition: { Component: TraditionRow, props: (o) => ({ rec: o.raw, preview: !!o.meta.preview }) },
   hook: { Component: PlotHookCard, props: (o) => ({ hook: o.raw }) },
-  resource: { Component: ResourceChainCard, props: (o, ctx) => ({ chain: o.raw, stage: o.meta.stage, settlement: ctx.settlement }) },
+  resource: {
+    Component: ResourceChainCard,
+    // P1: the grade the card prints is the Resources tab's (validationOnPage.js :: exploitationCardShown), not the filing.
+    props: (o, ctx) => {
+      const shown = exploitationCardShown(ctx.settlement, o.raw, o.meta.stage);
+      return { chain: o.raw, stage: shown.stage, settlement: ctx.settlement, moved: shown.moved };
+    },
+  },
   // SW-B7b item 3: one shipped site's carried text, verbatim — no new words; the group's header
   // above is the jump to the tab that prints it.
   prose: { Component: ShippedProse, props: (o) => ({ lines: Array.isArray(o.raw) ? o.raw.map(String) : [] }) },
