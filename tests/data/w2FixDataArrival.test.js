@@ -41,6 +41,8 @@ describe('W2-FIX-DATA: an arrival beat prints only where it is true', () => {
     expect(admits(line('Travellers are offered water'), town({}))).toBe(true);
   });
   it('the felt tents stand beside no timber houses the town may not have (c04, mud brick)', () => {
+    expect(String(textOf(line('Felt tents'))('N'))).toMatch(/^Felt tents stand beside the houses/);
+    // anchored: the line is found and asserted present on the line above
     expect(String(textOf(line('Felt tents'))('N'))).not.toMatch(/timber/);
   });
 });

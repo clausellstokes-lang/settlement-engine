@@ -32,9 +32,29 @@ describe('W2-FIX-DATA: a history hook prints only where it is true', () => {
 });
 
 describe('W2-FIX-DATA: history lines reworded to presume nothing false', () => {
-  it('no physician the town may lack knows of the poisoning (c15)', () => expect(texts).not.toMatch(/and the physician knows/));
-  it('the seized relic was bound for a vault, not a temple\'s the town may lack (c20)', () => expect(texts).not.toMatch(/temple vault/));
-  it('collaborators and resisters keep apart, not to quarters a hamlet has none of (c02, c07)', () => expect(texts).not.toMatch(/separate quarters/));
-  it('a succession crisis names no throne an elder council lacks (c03)', () => expect(texts).not.toMatch(/maneuvered quietly for the throne/));
-  it('the economic divide names no merchants a hamlet lacks (c08)', () => expect(texts).not.toMatch(/between wealthy merchants and working poor/));
+  it('no physician the town may lack knows of the poisoning (c15)', () => {
+    expect(texts).toMatch(/and someone in the household knows/);
+    // anchored: the reworded line is asserted present on the line above, so the table cannot have drifted away
+    expect(texts).not.toMatch(/and the physician knows/);
+  });
+  it('the seized relic was bound for a vault, not a temple\'s the town may lack (c20)', () => {
+    expect(texts).toMatch(/never reached the vault it was bound for/);
+    // anchored: the reworded line is asserted present on the line above, so the table cannot have drifted away
+    expect(texts).not.toMatch(/temple vault/);
+  });
+  it('collaborators and resisters keep apart, not to quarters a hamlet has none of (c02, c07)', () => {
+    expect(texts).toMatch(/families still keep apart/);
+    // anchored: the reworded line is asserted present on the line above, so the table cannot have drifted away
+    expect(texts).not.toMatch(/separate quarters/);
+  });
+  it('a succession crisis names no throne an elder council lacks (c03)', () => {
+    expect(texts).toMatch(/rivals maneuvered quietly to take that place/);
+    // anchored: the reworded line is asserted present on the line above, so the table cannot have drifted away
+    expect(texts).not.toMatch(/maneuvered quietly for the throne/);
+  });
+  it('the economic divide names no merchants a hamlet lacks (c08)', () => {
+    expect(texts).toMatch(/between the well-off and the working poor/);
+    // anchored: the reworded line is asserted present on the line above, so the table cannot have drifted away
+    expect(texts).not.toMatch(/between wealthy merchants and working poor/);
+  });
 });

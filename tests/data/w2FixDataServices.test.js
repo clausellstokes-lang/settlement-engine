@@ -21,14 +21,19 @@ describe('W2-FIX-DATA: a service line prints only where it is true', () => {
     it(`${inst} / ${svc}: under siege it says the roads are cut, and calm it is as written (c02, c22, c17)`, () => {
       const besieged = resolveServiceRow(row(inst, svc), facts(['under_siege']));
       expect(besieged).not.toBeNull();
-      expect(String(besieged?.desc)).not.toMatch(falseUnderSiege);
       expect(String(resolveServiceRow(row(inst, svc), facts([]))?.desc)).toMatch(falseUnderSiege);
+      // anchored: the same row, calm, is asserted to print the line on the line above; only the siege takes it away
+      expect(String(besieged?.desc)).not.toMatch(falseUnderSiege);
     });
   }
   it('the last rites name no priest keeping a graveyard the hamlet has none of (c09, c10)', () => {
+    expect(row('Access to parish church', 'Last rites').desc).toMatch(/parish priest/);
+    // anchored: the same definition's desc is asserted present on the line above
     expect(row('Access to parish church', 'Last rites').desc).not.toMatch(/manages the graveyard/i);
   });
   it('the village reeve answers to no lord the village lacks (c12)', () => {
+    expect(row('Village reeve', 'Administrative oversight').desc).toMatch(/Allocate strips and common access/);
+    // anchored: the same definition's desc is asserted present on the line above
     expect(row('Village reeve', 'Administrative oversight').desc).not.toMatch(/on behalf of the lord/i);
   });
 });
