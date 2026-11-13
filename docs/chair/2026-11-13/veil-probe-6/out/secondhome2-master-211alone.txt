@@ -1,0 +1,3 @@
+towns 12; governed strings off the floor 2516; houses hidden whole 24
+(a) institution.function(tags) sent at economicState.activeChains[].chainId  {"gallery":3,"link":3,"map":3,"import":3}  towns 3
+      e.g. Olympvrysi [a203p211_1] gallery: fortification

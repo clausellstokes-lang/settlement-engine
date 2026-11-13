@@ -7,17 +7,19 @@ hosted database, no production credential, no `supabase db push`, no `migration 
 
 **TIP:** the commit carrying the latest copy of this file, read back from origin.
 
-**THE NEXT STEP, IF THIS SEAT IS CUT OFF:** items 1-3 are pushed; the final attack (both shapes), planted run and sentence search on the final 211; then the chair's two added items, V5-3 and V5-4 (§4), each its own commit, red first.
+**THE NEXT STEP, IF THIS SEAT IS CUT OFF:** nothing of the brief is left; the next seat takes §7 (stopped at readers) and the review of this lane.
 
 ## 0. Status
 
 | Item | State | Commit |
 |---|---|---|
-| 1. The ten second homes (V5-1) | BUILT, pushed; the attack and sentence search at item 1 running | the commit carrying this line |
-| 2. The public prose from the stripped record (V5-2) | DONE, pushed | the commit carrying this line |
+| 1. The ten second homes (V5-1) | DONE, acceptance read ZERO (§5) | 7270c3dad, 8ca7d8c6d |
+| 2. The public prose from the stripped record (V5-2) | DONE | c3c4796dc |
 | 3. 211's helpers, an early-applied copy (V5-7) | DONE, pushed | 7466ea783 |
 | V5-3 (the chair's ruling) | DONE, pushed | da844761a |
-| V5-4 (the chair's ruling) | DONE, pushed | the commit carrying this line |
+| V5-4 (the chair's ruling) | DONE, pushed (server only since 778cad231) | 3c826f2a8, 778cad231 |
+| the registers (my debt) | CURED, pushed | 778cad231, 38cc496f6, 276538d57 |
+| the ratings' machinery (the chair's third item) | STOPPED at readers (§7); left for the next seat | — |
 
 ## 1. Item 1 — the ten second homes
 
@@ -195,7 +197,7 @@ as the owner's `begin; … commit;`) (`out/rehearse-item3.txt`):
 | (c) the same from 203 + this 211 alone | **0** |
 | (d) 001..211, then this down file, against a chain at 210 | **0**; the down file again: 0; this 211 again, against 001..211: 0 (control 210 against 211: 56) |
 | (e) the release after the early deploy: 203 + today's 211 + 204..210 + this 211, against 001..211 in order | **0** |
-| (f) after the early deploy and this 211: helpers / callable by `anon` or `authenticated` | **47 / 0** (the owner's check of §7.4 now expects `47 | 0`, not `40 | 0`; re-run after §1.6's cure, controls 11 and 57) |
+| (f) after the early deploy and this 211: helpers / callable by `anon` or `authenticated` | **47 / 0** (re-run after §1.6's cure: 47; on the final file 50, see §7's end) |
 
 **A pin so a later seat cannot leave one behind** (`galleryVeilCures.pglite.test.js`, "V5-7: …"): the forty
 signatures today's 211 creates are frozen in the test; each must be created again by the chain's 211 or dropped by it
@@ -265,6 +267,89 @@ and V5-7 arms; galleryServerVeil 16; gallerySecondHomes 3; publicPayloadVeilTota
 playerRecordVeiledFace 4; livingContentRosterPublicDrop 7; lib/gallery 50; importScrub 19; partyLinkClient 7;
 display/publicSafe 56; publicProseVeilInvariance 5). Gates: strict 0 (1,113), ratchet 0 (167), eslint 0.
 
+## 5. Item 1's acceptance, on the final file (the instruments as the review runs them)
+
+Chains rebuilt from 8ca7d8c6d's migrations (the second-home rules final; V5-3 and V5-4 touch other paths):
+
+| Instrument | master's shape | the new shape |
+|---|---|---|
+| `planted.probe.jsx`, `203 + 211` and `001..211`, DM off and on, live and frozen | **0 markers, 0 house names** (24 towns, 4,447 markers, 96 shares, 768 reads, 0 raised; at the base the review's rows) | **0, 0** (24 towns, 7,537 markers, 384 reads, 0 raised) |
+| `attack.probe.jsx` | 720 shares, 5,760 reads, 49,254 hand hides: **0 token leaks**, 0 raised, `pageShowMore` 0. Against MASTER's client as the reference (which keeps every second home), `MISSING` is exactly the rules' output and nothing else: the defence copies' `desc`, `description`, `tags`, `facets`, `serviceKeys`; withheld chains and trace items; `prominentRelationship.full/.tension/.phrasing`; `pressureSentence`; `history.siegeNarrative`; and V3-1's `decrees`/`dmLayer`. The chains' `CHANGED`/`EXTRA` rows are the diff's positional alignment after a withheld chain (chains carry no `id`), not anything sent: the token count is 0 | 912 shares, 3,648 reads: 0 leaks, 0 `EXTRA`, 0 raised, `MISSING` the base's four known rows only (the reference is my client, which withholds alike: the twins agree) |
+| `secondhome2.mjs` SENTENCES=1 | **the review's 17 lines -> 1**: `institution.function(tags)` "fortification" equal to an open chain's `chainId` (a token of two vocabularies), on `203 + 211` and on `001..211` alike | **the review's 21 lines -> 8**, every one traced in §1.6 as open at its source or a coincidence |
+| `secondhome3.mjs` (mine: every DM / live-frozen pair, governed strings from the live row AND the frozen copy) | 96 towns' shares: the same 1 line | 48: the same 8 classes, plus the trace naming the OPEN "Merchant guilds (3-8)" on Reveal-DM reads |
+
+(`planted-*-final.txt`, `attack-*-final-summary.txt`, `secondhome2-*-final.txt`, `secondhome2-master-*.txt`,
+`secondhome3-*-final.txt`, `secondhome3-master.txt`.) **A claim of zero, and its instrument:** zero hidden markers and
+zero names of houses hidden whole, by the review's planted run, whole payloads as text; zero hidden tokens, by its
+attack, whole rows of every column. The sentence search cannot read zero without taking what is open; its residue is
+classed line by line, and no withholding was added for it.
+
+## 6. The registers (my debt, cured), and what the lint folder reads now
+
+The lint folder at 8ca7d8c6d named this seat's code in seven registers, each green at the base 333b33973 (run there):
+`tuningRegister` (2 named constants in a new file), `ruinFilterRoster` (a new raw `.institutions` reader),
+`observedShapeReaders` (2 rows), `writerReach` (4: a banked dark identity now lit), `mutationCoverageManifest` (the
+guard had no row), `proseDrawnAnchors` (a literal succession wording in the V5-2 arm), `proseWiringCensus` (the
+composer's stamp). **These were red on the lane from 7270c3dad / c3c4796dc / 8ca7d8c6d until 38cc496f6: my fault, for
+not running the lint folder before the first push.** Cured at the code where the code was the cause (778cad231: a
+frozen limits record; the open house names and the eye table handed in by the exempt `galleryVeil.js`; `idOf(kind,
+card)`; the literal gone; the manifest row, kind rationale, as its siblings), through the doors where a register had
+to move (38cc496f6: `check-writer-reach.mjs --write`, shrink-only, cohort 1363 -> 1362; `wiring-census.mjs`, stamp
+only); the lighting census by its ritual after each title (50c27b421, 1a017fb51, 276538d57). Nothing banked, no
+ceiling raised, no row added to a dark or debt ledger.
+
+**V5-4 became server only** in 778cad231: its client half read `members` on factions, a key the current generator no
+longer writes (the observed-shape register refuses a new one, and the retired-field register must not grow). Every
+page draws a share from what a read serves, which 211's splice already reduces: the V5-4 arm (page included) is
+green without it. The V4-2 precedent.
+
+**The whole lint folder at 276538d57** (`lint-folder-at-276538d57.txt`): 212 files, 3,118 tests, 3,098 passed. Red:
+`proseFamilyContract` A1, A2, A3, A5 and the two news contracts at load (the line's carried set, PART 6 §7), and
+`ledgerCitationIntegrity` at load (it needs a local `refs/heads/review-fixes-2026-07-08`; I created no branch).
+`domainAnyCastBaseline` was red at the base and at 8ca7d8c6d in my runs and green here: not mine; noted. NO statement
+of the whole suite is made (the brief).
+
+## 7. The chair's third added item (18:51 UTC): the ratings' machinery in the player's export — STOPPED AT A READER
+
+**Traced first** (`machinery.probe.jsx`, 20 births, the player export `buildWorldExport(world, {})` and
+`toPublicSafe` default, `machinery-trace-20-births.json`): every town's player export and public-safe object carries
+`powerStructure.publicLegitimacy.breakdown`, `.govMultiplier` and `.crimMultiplier` (20 of 20 each). **No power
+carries a `weight`** in any of the 20 births, record or export; the only `weight` is
+`economicState.incomeSources[].weight` (114), which is not a power's.
+
+**Readers on a non-owner path exist, so the ruling's stop applies** (nothing was changed):
+- `src/components/new/tabs/PowerTab.jsx:308-322`: the legitimacy banner draws `leg.breakdown`'s non-zero parts as
+  chips with their points ("Safety +5"), under a "Breakdown" heading, on every page that draws the Power tab, the
+  shared page included. It is itself the machinery on the page; removing the key would silently change that page.
+- `src/domain/display/governanceAccount.js:299`: the governance account's standing sentence takes its causes from
+  `breakdown` (the account ships as public prose, composed from the stripped record, and is drawn live on old pages).
+- `src/domain/display/stateProse/powerStateProse.js:256, 425, 1074`: the power state prose reads `breakdown`.
+- `govMultiplier`: `src/domain/rulingPowerCoup.js:85` reads it, and `src/components/dossier/EngineSections.jsx:264`
+  prints a hold word from it (`legitimacyHold`).
+**Left for the next seat, with the owner's rule as its frame:** the banner's chips (a page change, the owner's "show
+the ratings, not the machinery") and the prose readers decide first whether the parts may leave; then the keys leave
+`toPublicSafe`'s default and the server sanitiser alike, with a test that reds on any of them in a public-safe object.
+
+**Item 3 re-run on the FINAL file** (`rehearse-final.txt`; 211 sha256 `abaad614…d458`, its down file `39258ae3…494c`):
+(a) 0 (control 20); (b) 0 and 0; (c) 0 and 0; (d) 0, 0, 0 (control 60); (e) 0; (f) **50 helpers, none callable**.
+The owner's check of the review's §7.4 expects `50 | 0` for this file (40 for today's). Unchanged: no helper of
+today's 211 changed its signature, and the V5-7 pin holds every later change to that.
+
+## 8. Not mine, built none of
+
+The public chronicle (the gallery read and the map send the event log live); anything in migration 208 or earlier
+files; the seven Reveal-DM keys §4.1 names (`inst_dmNotes inst_notes mapEdits migrationReports npc_dmNotes npc_notes
+tabNotes`), which the client's full mode keeps too; the ratings' machinery (§7).
+
+## 8b. Leaving
+
+Refs and local config snapshotted before the work and before every push; after: only this seat's branches moved
+(`veil6`, `veil6b`, the second a worktree branch from `veil6`'s tip, both local; the lane pushed plainly from each),
+and `core.hooksPath=.husky/_` written by `npm ci`'s husky install, as PART 6 found. The repository's local exclude
+file took one line for one census run and was restored byte for byte. Scratch worktrees under the session's scratch
+directory; no stash left (lint-staged's backups dropped by itself). Databases: a local cluster at `/var/tmp/cv6`
+only.
+
 ## 9. This brief's rulings, copied in (the chair, session_01FE9mEws7PXYRYdjQPbSX15, 2026-11-13)
 
 > THE LAW (the owner's, record 331): what a user hides by hand is never sent, by any of the four reads (the gallery
@@ -319,6 +404,16 @@ display/publicSafe 56; publicProseVeilInvariance 5). Gates: strict 0 (1,113), ra
 > the veil or after: the power roster's copy on an old share loses that person, and nothing else an old share serves
 > changes; prove both halves on the review's own rows (rv5full, rv5roster-unmarked). The public chronicle stays not
 > yours. Nothing on any hosted database; local chains only.
+
+> THE CHAIR, 2026-11-13 18:51 UTC: ONE ADDED ITEM FOR THE VEIL LANE [...] THE PLAYER'S WORLD EXPORT CARRIES THE
+> MACHINERY OF RATINGS: `publicLegitimacy.breakdown` (prosperity, safety, defense, food), `govMultiplier`,
+> `crimMultiplier`, and each power's `weight` (a long decimal). [...] TRACE IT FIRST on a real export of a generated
+> town, as a non-owner receives it. RULED: a player is sent a rating's word, and its own figure where the page shows
+> one; never the parts, points, multipliers or weights that make it [...]. Those fields leave what a non-owner
+> receives, on every public-safe path [...]; the owner's own export keeps the record whole. [...] ACCEPTANCE: a test
+> that reds if any of those keys reaches a public-safe object; the fields counted before and after on twenty
+> generated towns; nothing a player's page reads goes missing (name every reader of those keys on a non-owner path
+> first: if one exists, stop on that reader with its file).
 
 > NEVER, whoever asks: any hosted database; production credentials; `supabase db push`; `migration repair`; a deploy;
 > applying anything anywhere but local chains (the lane's own test databases); `--no-verify`; a force push; a push to
