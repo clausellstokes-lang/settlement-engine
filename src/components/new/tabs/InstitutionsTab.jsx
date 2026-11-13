@@ -49,7 +49,7 @@ import { computeChainSets } from '../tabHelpers';
 // The rows can shift with an economy event exactly as the Services tab's do, so the page carries
 // the same freshness note (economyReadModelCoverage: COVERED; chair ruling 5, 2026-10-30).
 import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx';
-import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
+import { institutionHouseLabel } from '../../../domain/display/institutionDisplayName.js';
 import { identityForInstitution } from '../../../domain/display/institutionVocabulary.js';
 import { institutionProvenanceOf } from '../../../domain/provenance/rosterProvenance.js';
 import { isFabricInstitution } from '../../../data/institutionalCatalog.js';
@@ -153,7 +153,11 @@ export function institutionsWithServices(settlement) {
       return {
         inst,
         category: String(inst.category || ''),
-        label: institutionDisplayName(inst),
+        // ROUND THREE, ruling (a) (ROUND-3-CUT §7 (a)): the card names the house by its label, the one
+        // display leaf every surface reads: no catalogue count range, household range, gate or
+        // condition ("Dwellings (1-8)" reads "Dwellings"; "Inn (multiple)" reads "Inns"), the in-world
+        // qualifiers kept. The raw name stays the join key (`key` above) and the React key.
+        label: institutionHouseLabel(inst),
         services: byInstitution.get(key) || [],
         backs: backers.get(key) || [],
         // PEOPLE-6 LINKS: the house's representative (null for a house with no face)
@@ -336,7 +340,7 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
             const entity = serviceEntityOf(svc);
             return (
               <span key={`${entity.id}-${j}`} data-testid="institution-service" style={{ fontSize: FS['12.5'] }}>
-                <EntityLink id={entityIdFor('service', entity)} type="service" fallback={institutionDisplayName(svc.name)} style={{ color: swatch.inkMag, fontWeight: 600 }} />
+                <EntityLink id={entityIdFor('service', entity)} type="service" fallback={institutionHouseLabel(svc.name)} style={{ color: swatch.inkMag, fontWeight: 600 }} />
               </span>
             );
           })}

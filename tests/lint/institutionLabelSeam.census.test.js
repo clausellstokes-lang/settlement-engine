@@ -178,7 +178,11 @@ describe('the institution label seam — the roster holds', () => {
       // and leave the line. Counted OUTSIDE the import, and deliberately NOT as `name(` —
       // EconomicsTab and DailyLifeTab pass the seam BY REFERENCE to `.map()`, which is a
       // perfectly good installation that a paren-shaped check would have called missing.
-      const uses = lines.filter((l) => !/^import\b/.test(l.trim()) && l.includes(SEAM_MODULE));
+      // RE-KEYED (R2-CODE-B round 3, ruling (a), the chair 2026-11-13): `institutionHouseLabel` is the
+      // seam's own leaf for a printed house (the display label, less the catalogue's count range,
+      // gate or condition), defined in the seam module and reading `institutionDisplayName` first, so
+      // a call to it is an installation of the seam.
+      const uses = lines.filter((l) => !/^import\b/.test(l.trim()) && (l.includes(SEAM_MODULE) || l.includes('institutionHouseLabel')));
       expect(uses.length, `${file} uses the seam`).toBeGreaterThan(0);
     });
   }

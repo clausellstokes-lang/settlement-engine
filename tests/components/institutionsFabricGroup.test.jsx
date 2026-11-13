@@ -14,7 +14,7 @@ vi.mock('../../src/lib/supabase.js', () => ({ supabase: {}, isConfigured: false 
 
 import InstitutionsTab from '../../src/components/new/tabs/InstitutionsTab.jsx';
 import { isFabricInstitution } from '../../src/data/institutionalCatalog.js';
-import { institutionDisplayName } from '../../src/domain/display/institutionDisplayName.js';
+import { institutionHouseLabel } from '../../src/domain/display/institutionDisplayName.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -49,8 +49,10 @@ describe('X-46 car 3 — the fabric of the place, its own group at the foot of t
     expect(fabric).toBeTruthy();
     expect(fabric.querySelector('[data-testid="institutions-fabric-heading"]').textContent).toBe('The fabric of the place');
 
-    const houseLabels = village.institutions.filter((i) => !isFabricInstitution(i)).map(institutionDisplayName).sort();
-    const fabricLabels = village.institutions.filter(isFabricInstitution).map(institutionDisplayName).sort();
+    // RE-KEYED (R2-CODE-B round 3, ruling (a)): the card names its house by the house label, the one
+    // display leaf ("Dwellings (15-100)" reads "Dwellings"); same cards, same order of groups.
+    const houseLabels = village.institutions.filter((i) => !isFabricInstitution(i)).map(institutionHouseLabel).sort();
+    const fabricLabels = village.institutions.filter(isFabricInstitution).map(institutionHouseLabel).sort();
     expect(labelsIn(stack).sort()).toEqual(houseLabels);
     expect(labelsIn(fabric).sort()).toEqual(fabricLabels);
 
