@@ -49,6 +49,9 @@ const GUARDS = [
   { seed: 'w5-metropolis-under_siege-2', pool: 'DS-DEF-5::garrison PRESENT', vid: 3, why: 'a siege: "everyone entering is counted at the gate" of a town nobody enters' },
   { seed: 'w5-thorp-under_siege-3', pool: 'DS-ECO-12::INCOME WEIGHT: the religious houses', vid: 4, why: 'a siege: "the feast days set the calendar of buying and selling" where nothing is bought or sold (the read\'s H5)' },
   { seed: 'w5-thorp-under_siege-3', pool: 'DS-ECO-12::INCOME WEIGHT: the religious houses', vid: 3, why: 'a siege: "what its people give for their faith leaves with them on the feast days" out of a town nobody leaves' },
+  { seed: 'rww-city-under_siege-1', pool: 'DS-GEN-13::MARKET-OPEN', vid: 3, why: 'a siege: "Visitors find X\'s market without asking" beside a market critically impaired by the siege (the read\'s M2)' },
+  { seed: 'rww-metropolis-under_siege-1', pool: 'DS-GEN-13::MARKET-OPEN', vid: 3, why: 'a siege: the same (the read\'s M2, its second town)' },
+  { seed: 'rw3-town-under_siege-1', pool: 'DS-GEN-13::MARKET-OPEN', vid: 4, why: 'a siege: "The market stands where carts always stopped" beside "the caravans have stopped coming" (the read\'s M4, #964)' },
 ];
 
 /** @param {string} seed */

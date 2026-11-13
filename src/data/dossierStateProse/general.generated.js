@@ -9424,7 +9424,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "crisis: any"
+            "crisis: any",
+            "no crisis: under_siege"
           ],
           "text": "Visitors find {settlement}'s market without asking; the busiest street through town leads straight to it.",
           "slots": [
@@ -9435,7 +9436,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "elder",
           "marks": [
-            "crisis: any"
+            "crisis: any",
+            "no crisis: under_siege"
           ],
           "text": "The market stands where carts always stopped; stalls followed the carts, and {settlement} grew around them.",
           "slots": [

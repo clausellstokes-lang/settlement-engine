@@ -67,8 +67,8 @@
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 296586,
-      "gzip": 37912,
+      "raw": 296662,
+      "gzip": 37915,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -867,6 +867,14 @@
       "toRaw": 296586,
       "gzipAfter": 37912,
       "reason": "+76 B raw over the committed 296510 (gzip level 9: 37906 -> 37912): road lines off a siege"
+    },
+    {
+      "car": "W2-WRITE-5 A M2 market",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 296586,
+      "toRaw": 296662,
+      "gzipAfter": 37915,
+      "reason": "+76 B raw over the committed 296586 (gzip level 9: 37912 -> 37915): MARKET-OPEN v3 v4 off a siege"
     }
   ],
   "ceilingTransfersNewLeaves": [

@@ -29924,7 +29924,7 @@
         "crisis: plague_onset": 1,
         "crisis: under_siege": 1,
         "no crisis: plague_onset": 2,
-        "no crisis: under_siege": 2,
+        "no crisis: under_siege": 4,
         "tier: ≤ town": 1
       },
       "undeclared": 0,
