@@ -27,8 +27,15 @@
 | 3 stores span, one home | #149 #856 #872 | aaf314475 | cured, pushed; #883 (Defence line) named, not made |
 | 4a Relationships empty line | #29 #60 | 49a6ad244 | cured, pushed |
 | 4b Daily Life food tile | #848 | 9cee7f470 | cured, pushed |
-| 4c crisis cast (defender, treater) | #328 #855 | — | NOT STARTED in code (paused); exact next step below |
-| 4d "The Market Contest" | #536 | — | NOT STARTED in code (paused); exact next step below |
+| 4c crisis cast (defender, treater) | #328 #855 | 90bafc4d1 | cured, pushed; RECORDS MOVE: stress[].cast in 17 of 740 |
+| 4d "The Market Contest" | #536 | 742ff4e43 | cured, pushed (display filter; 0 records move) |
+| 5 culture scope line at size | #323 #365 #498 #816 | 922fe5141 | cured, pushed ("an assembly ground" has no home: named) |
+| 5 "A road settlement" | #63 #369 | — | STOP: needs `narrativeGenerator.js :: generateSettlementReason` (R2-CODE-A's) |
+| 6a famine harvest, wartime profit | #857 #670 | 111e8b152 | cured, pushed; RECORDS MOVE: stress[].summary in 46 of 740; "in a kingdom" parked (no sovereignty atom) |
+| ruling R1: the PDF's chain rows | (finding 3 of REVIEW-R2-STAGES) | c1efd7f93 | cured, pushed |
+| ruling R2: the wiring census | (finding 5) | 938a6b1d4 | re-made by `node scripts/wiring-census.mjs`, its own commit |
+| fix-forward, tests | anchors; loops for test.each | 60f9383a9, 9bbde2599 | pushed (no assertion changed) |
+| writer-reach strike | item 2's lit row | e7fd7c7d8 | pushed (shrink-only `--write`) |
 
 ## Stops and parked items (with recommendation)
 - **#939** — "11 institutions critically impaired by siege: …, Taverns (5-20), …": written by `viability.js :: issues` (`critical.map(d => institutionDisplayName(d.institution))`). The switch: read `institutionHouseLabel` (or `houseInProse` in a sentence). Recommend: the lane that next holds viability.js takes it.
@@ -42,7 +49,23 @@ Tip at the stop: see the last commit of the branch (this file's commit). Scratch
 3. **4d, #536** ("The Market Contest" where no market stands). The name is born in generation: `src/domain/traditions/genesis.js` composes a domain ("Market") with a noun from `src/data/traditionCorpus.js` (`contest`). Cure: the market domain is disqualified where the market fact (`facts/market.js`, `factsOf(s).market`) is false, and a refused pick resolves draw-free to the next admitted domain (no draw added or moved: prove with the fork census `habitForkRegistry`). genesis.js is not on any lane in flight (checked 14:55 UTC). Records move: field diff, declared.
 4. Then mechanisms 5 (size: settlementQuickGuide.js's `scopeAgainstRecord`, read `tier` and `populationBand`, ruled words above), 6, 7, and the final statement, as the brief orders.
 
+## Count ranges and catalogue gates still printing (the chair's ruling: list, do not cure; the class is ruled whole)
+Measured at c1efd7f93 on the 740 records (the PDF's canon dossier, by section) and from REVIEW-R2-STAGES §6 (the page, its 20 towns). Each writer, and whether a lane in flight holds it (merge base → tip, 14:55 UTC / 18:20 UTC):
+- the Outlook's list "N institutions critically impaired by siege: …, Taverns (5-20)" — `src/generators/economy/viability.js` — HELD (six lanes);
+- the Crisis tab's cast rows ("Mills (2-5) · held by …") — `src/domain/crisis/crisisCast.js` row `name` (str(i.name)) and its page reader `src/domain/crisis/crisisPage.js` — not held;
+- the crisis hook "The conversion turns on the houses of worship (50-100+)" (page, PDF Plot Hooks and Tonight chapters) — `src/domain/crisis/crisisHooks.js :: houseInProse` (its pattern misses a trailing "+") — not held;
+- the Power tab's house lists — `src/components/new/tabs/PowerTab.jsx` and children — HELD (the powers follow-up);
+- the PDF's "Who Runs This Town" (184) — `src/pdf/sections/WhoRunsThisTown.jsx` — not checked against lanes here;
+- the Services tab's provider headings (the roster's own names) — `src/components/new/tabs/ServicesTab.jsx` — not held;
+- the Institutions roster (page and PDF, 1,766 in the PDF) — `src/components/new/tabs/InstitutionsTab.jsx`, `src/pdf/sections/Institutions.jsx` — the catalogue name the roster prints by ruling ODQ §934.13;
+- the PDF's Notable NPCs (236: the house with its range, the PDF twin of item 1b's NPC card) — `src/pdf/sections/NotableNPCs.jsx` — not held;
+- "Gates (if walled)" — mapped to "Town gates" by the seam for its exact key; where it still prints, a reader bypasses the seam (REVIEW-R2-STAGES §6 counts 2);
+- "Via: major monasteries (5-10)" on Economics — `src/components/new/tabs/EconomicsTab.jsx` (the services-with-institutions row, `svc.institutions.map(institutionDisplayName)`) — HELD (the third leaves seat);
+- the PDF's Crisis sections (73), Defense (4), Viability (2), History (1) — roster names in their rows.
+
 ## The chair's rulings received
+- 18:08 UTC (read 18:22): REVIEW-R2-STAGES at be53f933b (NOT CLEAR, 1 medium, 1 low). R1 (MEDIUM): the PDF's chain rows read the leaf chainHousesOf; acceptance counted on the PDF's text; "a claim of zero is counted on every surface: the tabs, the Tonight sheet, the PDF's text, the Foundry journal and the exports". R2 (LOW): re-take the wiring census by its own writer in its own commit. List the writers of the count-range and gate class, do not cure them. Do not rewrite a commit at or below 80b960171.
+- 17:13 UTC: the pause lifted ("Oh we have plenty of usage", the owner). Carry on from the next step, the generated-record rows measured first and draw-free, then the final statement. Hand back near 400k tokens.
 - 15:52 UTC (read 16:01): THE ACCOUNT'S WEEKLY ALLOWANCE IS IN ITS WARNING BAND. PAUSE: finish only the mechanism already under way (mechanism 4), push it, keep this file current with the exact next step, then STOP and wait for the chair's word. No new mechanism, no whole suite, no final statement. One line to the chair with the tip when stopped.
 
 ## Calls taken without the chair
