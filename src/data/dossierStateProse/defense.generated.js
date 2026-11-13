@@ -1551,7 +1551,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: hunger"
           ],
-          "text": "The supply book for {settlement}'s defenders balances: the town's own trades feed and equip them, so a call to arms does not begin with a shortage.",
+          "text": "What {settlement}'s trades supply counts in its defence's favour: the town is better able to defend itself for them.",
           "slots": [
             "settlement"
           ],
@@ -1562,7 +1562,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: hunger"
           ],
-          "text": "The trades that feed and equip {settlement}'s defenders are busy and well stocked, and the defenders know it.",
+          "text": "{settlement}'s defenders are better off for the trades behind them, and they know it.",
           "slots": [
             "settlement"
           ],
@@ -1573,7 +1573,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: hunger"
           ],
-          "text": "You can see the defence at {settlement} is kept supplied: food and gear come from the town's own workshops.",
+          "text": "You can see that the trades behind {settlement}'s defence do it more good than harm.",
           "slots": [
             "settlement"
           ],
@@ -1595,7 +1595,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: hunger"
           ],
-          "text": "Food is short at {settlement}, but the trades that arm its defenders are still working, so the defence is not short of gear.",
+          "text": "Food is short at {settlement}, but the trades behind its defence still do it more good than harm.",
           "slots": [
             "settlement"
           ],
@@ -1606,7 +1606,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: hunger"
           ],
-          "text": "You can see that {settlement}'s defenders are armed and equipped from the town's own trades; you can also see that they eat no better than anyone else.",
+          "text": "You can see that {settlement}'s defence still gains from the trades behind it; you can also see that its defenders eat no better than anyone else.",
           "slots": [
             "settlement"
           ],

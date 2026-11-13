@@ -2972,12 +2972,12 @@ position: plain lines, one vantage each; the military pools carry four because t
 in about two towns in five that keep a force.
 
 **CHAIN: defence supplied** {colour}
-1. `[ledger · no crisis: hunger]` The supply book for {settlement}'s defenders balances: the town's own trades feed and equip them, so a call to arms does not begin with a shortage.
-2. `[street · no crisis: hunger]` The trades that feed and equip {settlement}'s defenders are busy and well stocked, and the defenders know it.
-3. `[visitor · no crisis: hunger]` You can see the defence at {settlement} is kept supplied: food and gear come from the town's own workshops.
+1. `[ledger · no crisis: hunger]` What {settlement}'s trades supply counts in its defence's favour: the town is better able to defend itself for them.
+2. `[street · no crisis: hunger]` {settlement}'s defenders are better off for the trades behind them, and they know it.
+3. `[visitor · no crisis: hunger]` You can see that the trades behind {settlement}'s defence do it more good than harm.
 4. `[unfolding · no crisis: hunger]` While the trades behind {settlement}'s defence keep working, its defenders will not go short.
-5. `[street · crisis: hunger]` Food is short at {settlement}, but the trades that arm its defenders are still working, so the defence is not short of gear.
-6. `[visitor · crisis: hunger]` You can see that {settlement}'s defenders are armed and equipped from the town's own trades; you can also see that they eat no better than anyone else.
+5. `[street · crisis: hunger]` Food is short at {settlement}, but the trades behind its defence still do it more good than harm.
+6. `[visitor · crisis: hunger]` You can see that {settlement}'s defence still gains from the trades behind it; you can also see that its defenders eat no better than anyone else.
 
 **CHAIN: defence short** {colour}
 1. `[ledger]` The supply book for {settlement}'s defenders runs short: the trades that should feed and equip them are failing, so the defence is weaker than its numbers suggest.
