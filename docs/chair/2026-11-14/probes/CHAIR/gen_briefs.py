@@ -4069,6 +4069,154 @@ SEATS2['VEIL-14'] = dict(
 )
 
 
+SEATS2['R2-CODE-B-11'] = dict(
+    title="R2-CODE-B-11 · round two's second code lane: the collaborator who is the occupier, the brunt against the stakes, the minted person's words",
+    branch='lane/r2-code-b-2026-11-13', tip='045d19ac', statement=False,
+    intro=("You are R2-CODE-B-11, the eleventh seat on round two's second code lane of the settlement-engine integration program "
+           "(lane/r2-code-b-2026-11-13). The lane holds the crisis cast (who leads, who collaborates, who bears the brunt), the Tonight sheet, the "
+           "temporary person minted for a crisis, the chain cards' house labels and the faith lines. The tenth seat made THE LANE'S ONE FINAL "
+           "STATEMENT; A FRESH READER IS READING THAT STAGE NOW (the code tip ac8168c8c) and its first step, 140 lines read in 1,536 towns, found NO "
+           "HIGH of the stage's own and TEN MEDIUM. The tenth seat also read the release bar's five rows for this lane and left one with its cure "
+           "designed. Yours: A NEW STAGE on top of the statement: that row, then the reader's medium rows in this lane's files. THE ORDER (the "
+           "chair, 2026-11-14 07:11 UTC): the true join has begun on lane/join-2026-11-14 and this lane is merged there; A LANE GOES ON CURING and "
+           "lands again later as a point of its own. NO whole suite, NO new statement: an ADDENDUM to the statement, which is not rewritten."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/R2-CODE-B-HANDBACK.md: ONLY from the line \"# PART 10, STEP 6\" to the end (by script; long lines): "
+          "the bar's rows as read; row 179's cure AS DESIGNED; what is left; the instruments. And of PART 10's statement only S2, S3, S4, S5 and S8 "
+          "(the rows your addendum brings current), by heading, by script.\n"
+          "3. THE READER'S FILE (`git fetch origin lane/review-r2-code-b-2026-11-14`; `git show "
+          "origin/lane/review-r2-code-b-2026-11-14:docs/chair/2026-11-14/REVIEW-R2-CODE-B-LINES-READ.md`): the section \"Counts\" (twenty lines) "
+          "and ONLY the table rows named below, each by its id (grep `| H2-1 |` and so on: the file is 310 lines of very long rows: never open "
+          "it whole); the section \"Outside the family\" (three lines). Its probes (docs/chair/2026-11-14/probes/REVIEW-R2-CODE-B/) are yours to "
+          "copy out with git archive and run from outside every repository tree.\n"
+          "4. src/domain/crisis/crisisCast.js WHOLE before the first cast cure.\n"
+          "5. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (the section headed \"## 2m.\"; by script), before the first "
+          "register you touch."),
+    work=("THE CHAIR'S RULINGS (2026-11-14; each vetoable by the owner; copy them into the hand-back). Row ids are the reader's.\n"
+          "(a) THE BAR'S ROW 179: THE COLLABORATOR IS NEVER THE OCCUPIER. As the tenth seat designed it: in the occupation kinds no member of "
+          "the power the crisis brings (the face's own faction) is cast as collaborator, and never the face's own id; where no local remains the "
+          "role is ABSENT by its own reason, never a false line. The linked row (the famine's exploiter) is read the same way.\n"
+          "(b) H2-1, H2-2, H2-3: THE BRUNT AND THE STAKES READ ONE FACT. \"bears the brunt: {person} · the only one in the house the crisis hits\" "
+          "(and its least-say and member twins) prints in 45, 20 and 1 towns beside a Stakes row on the same tab that says that house has \"no "
+          "stake yet\" or GAINS. RULED: the brunt is drawn only from a house whose stake the record holds as a loss; where the town's one power "
+          "has no stake or gains, nobody of it bears the brunt: the role is ABSENT by its own reason (the one-power fallback goes).\n"
+          "(c) H2-14, H2-16, H1-3: A MINTED STAND-IN IS A WHOLE PERSON, AND ITS WORDS CLAIM NO OFFICE, HOUSE OR FORCE THE PAGE DENIES. The minted "
+          "\"Healer\" beside \"No healer is kept here; the sick are tended by their own families\" and a hook calling them \"the healer\" (10 "
+          "towns); the \"Grain Steward\" beside \"No granary\" (62 towns, LOW, the same cure); the Warden who \"Wants to decide who gets the "
+          "guards\" beside \"Defence: No walls and no standing force\" (34 towns). RULED: the stand-in's role names what they DO in the crisis, in "
+          "lay words (who tends the sick; who keeps the count of the stores; who calls out the able hands), wherever the record holds no such "
+          "office; and the lever's want names a scarce thing the town HAS (guards only where a force stands). New words are read where they "
+          "print on the NPCs tab, the Crisis tab, the hooks, the Tonight sheet, the PDF and the journal, and listed for the owner's veto.\n"
+          "(d) H2-15: the Foundry journal prints the minted person's card CATEGORY in the power slot (\"Member of: civic\", 141 towns) where the "
+          "NPCs tab files them \"In no power\": the slot prints a power or says none, for every card with no power (the exporter's fallback "
+          "prints \"other\" and \"criminal\" the same way). src/foundry/journalPages.js is held by three lanes BY CONTENT: change ONLY lines inside "
+          "hunks this lane already changed (`git diff $(git merge-base origin/lane/integration-2026-11-07 HEAD) HEAD -- "
+          "src/foundry/journalPages.js`); if the line lies outside them: STOP and tell the chair with the line.\n"
+          "(e) H4-7: \"…the siege keeps its people from the next village's parish church. Most folk attend the rites through the year.\" (38 of 39 "
+          "towns): where the siege clause prints, the observance sentence after it does not say folk attend: a twin true under the siege (the "
+          "rites kept at home, without a priest) or silence.\n"
+          "(f) H1-1: THE CAST AND THE GOAL AGREE. An instigator whose own voiced goal is to contain the crisis they are said to stir (3 of 1,065: "
+          "a militia captain \"stirring\" a slave revolt who \"wants to contain the revolt\"): a person whose own goal answers the crisis is not "
+          "cast as its instigator or exploiter: the role goes to the next candidate, else ABSENT by its reason.\n"
+          "(g) H2-4: \"defends: Adventurers' charter hall · the defence of the place, with no one named to lead it\" where the roster holds that "
+          "house's chartermaster (2 towns): \"no one named to lead it\" only where no roster person faces the house; else that person defends. "
+          "The hook's \"the palisade leads the defence\" (5 towns, LOW): a wall does not lead: reworded in the same commit if it is one line.\n"
+          "(h) HIGH, carried, noted by the reader outside the family: \"…built around the Palace/government complex and the water…\" (27 "
+          "metropolises; `seatIntoPhrase` puts a catalogue name into the sentence): if the writer is this lane's or no lane's BY CONTENT, the seat "
+          "is named through the house-label leaf (no slash name, no catalogue name); else NAMED for its lane with the count.\n"
+          "NOT YOURS (each already sent by the chair to the seat of the lane that holds the file): the food word on the Overview and the "
+          "Foundations (H1-12, H1-13, H1-15: your line is TRUE by its one home), the Tonight twin of the famine line (H2-22), the raw house "
+          "names and badges on the Defense tab and the PDF (H3-T1 to T4).\n"
+          "THE WORK, in this order, each cause its own commit, measured first on the reader's 1,536 births (count before and after), red first "
+          "(a collected arm over births; a guard town for every role a condition takes off a town; each arm shown able to red by a plant you do "
+          "not commit, made in a tree no suite is running in), pushed as made:\n"
+          "1. (a), then (b). ONE MESSAGE TO THE CHAIR (the tip; each row's count before and after; how many roles went ABSENT), then THE COUNT.\n"
+          "2. (c), (d), (e), (f), (g), (h).\n"
+          "3. ONCE, AFTER THE LAST CAST CURE (not after each): THE DECLARED MOVE measured whole: the census's 720 field diff, the line 976db5b19 "
+          "against your tip, confined to `stress`, `stressors`, the minted person and what reads them, with counts by family (a leaf moved "
+          "outside them is a STOP); the draft shift record's rows re-measured as the tenth seat's step 1 did; the edge bundles re-built LAST "
+          "and committed alone; THE ADDENDUM to the statement (S2, S3, S4, S5 and S8 brought current; the statement itself not rewritten).\n"
+          "FOR EVERY CURE: every line it now prints in a new town, or newly leaves ABSENT or silent, READ WHERE IT PRINTS on every surface that "
+          "prints it: three towns of its cells, a siege, a famine or an occupation among them, the smallest and the largest size it reaches; "
+          "the towns and what printed in the commit body.\n"
+          "AFTER EVERY CURE: the presumed-things walker; the strict-domain gate, the type ratchet and eslint on the touched files; the "
+          "twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop); the test files that name the files you touched.\n"
+          "THE HAND-BACK, kept current after every item: a \"# PART 11\" at the end of docs/chair/2026-11-13/R2-CODE-B-HANDBACK.md: the rulings "
+          "copied; each row: its cause, its cure and commit, its counts, its guard and plant, the towns read; EVERY NEW OR CHANGED LINE with the "
+          "towns it was read in; the declared move's table; FOR THE JOIN; what is left, line by line; `git diff --stat 045d19ac1..HEAD -- src/` "
+          "file by file, each change tied to a row."),
+    merges='',
+    when="for a stop that blocks everything you have left, at step 1 (the tip; the counts; the roles gone absent), for a leaf moved outside the declared families, and with your hand-back",
+    turns='',
+)
+
+
+SEATS2['R3-TABS-5'] = dict(
+    title="R3-TABS-5 · round three's tabs lane: its second reader's two findings, two raw catalogue names, the badges",
+    branch='lane/r3-tabs-2026-11-13', tip='30157258', statement=False,
+    intro=("You are R3-TABS-5, the fifth seat on round three's tabs lane of the settlement-engine integration program (lane/r3-tabs-2026-11-13). The "
+           "lane holds what the Defense, History and Foundations tabs say and the keys that choose the defence posture's prose. A second "
+           "independent reader read the fourth seat's cure NOT CLEAR at 301572583 on TWO MEDIUM findings of the stage's own and no HIGH, and "
+           "another lane's reader found two HIGH lines in files this lane holds. Yours: those, in order. THE ORDER (the chair, 2026-11-14 07:11 "
+           "UTC): the true join has begun on lane/join-2026-11-14 and this lane is merged there; A LANE GOES ON CURING and lands again later as "
+           "a point of its own. NO whole suite, NO new statement: an ADDENDUM to the statement."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. THE SECOND READER'S FILE (`git fetch origin lane/review-r3-tabs-2-2026-11-14`; `git show "
+          "origin/lane/review-r3-tabs-2-2026-11-14:docs/chair/2026-11-14/REVIEW-R3-TABS-2-2026-11-14.md`) WHOLE (93 lines: the ranked findings R1 "
+          "to R4 and C1 to C5; its plants; what it would strike and restore). Its probes (docs/chair/2026-11-14/probes/REVIEW-R3-TABS-2/) are "
+          "yours to copy out with git archive and run from outside every repository tree.\n"
+          "3. On your lane, docs/chair/2026-11-13/R3-TABS-HANDBACK.md: ONLY the part headed \"# THE FOURTH SEAT\" (from that line to the end, by "
+          "script): the rulings in force and the instruments.\n"
+          "4. THE OTHER READER'S ROWS (`git fetch origin lane/review-r2-code-b-2026-11-14`; `git show "
+          "origin/lane/review-r2-code-b-2026-11-14:docs/chair/2026-11-14/REVIEW-R2-CODE-B-LINES-READ.md`): ONLY the rows `| H3-T1 |`, `| H3-T2 |` "
+          "and `| H3-T4 |` (grep them: never open the file whole).\n"
+          "5. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (the section headed \"## 2m.\"; by script), before the first "
+          "register you touch."),
+    work=("THE CHAIR'S RULINGS (2026-11-14; each vetoable by the owner; copy them into the hand-back):\n"
+          "(a) HIGH, carried (H3-T2): src/components/new/tabs/DefenseTab.jsx prints a force's catalogue name raw: \"Gates (if walled) / "
+          "Controlled entry points with gatekeepers.\" (14 towns). NO SURFACE PRINTS A CATALOGUE NAME'S BRACKET (a count range, an \"(if …)\"): "
+          "the name goes through the house-label leaf the roster uses. Grep your births for every bracketed catalogue name the tabs' files "
+          "print: each is the same cure.\n"
+          "(b) HIGH, carried (H3-T4): src/components/new/tabs/HistoryTab.jsx prints the stored tensions without the house-label pass the PDF's "
+          "History uses: \"…Weekly market, Market square, Taverns (5-20), Town granary…\": through it.\n"
+          "(c) R1 (and the carried C3), MEDIUM, the stage's own: the ADEQUATE posture line \"People at {S} expect to hold against the usual "
+          "trouble, and they claim no more than that.\" two rows above \"Keeping order in {S} is the occupiers' business now\" (2 towns by the "
+          "fallback; 12 by the class). RULED: UNDER AN OCCUPATION THE POSTURE ROW IS SILENT, beside any bar: the occupation strike runs before "
+          "the fallback. The guard that pins the false line is re-keyed by identity to the ruling (a plant of the old order reds it).\n"
+          "(d) R2, MEDIUM, the stage's own: registers not taken through their doors: the wiring census is rebuilt through its door at your "
+          "tip (and after every later cure that moves it); the writer-reach walker's surface-reach title is NAMED, not written: by the chair's "
+          "ruling of 2026-11-14 (record 440) that door is banked once, at the close, for every lane together.\n"
+          "(e) R3, LOW: the guard's 'no walls' arm cannot red: it gains a guard town (or a made record) in which only the walls condition "
+          "keeps the line off, the plant shown red.\n"
+          "(f) MEDIUM, carried (H3-T1): the REQ / FORCED badge on a force on the Defense tab (768 and 482 prints): the provenance chip was "
+          "ruled off the roster: off the Defense tab too.\n"
+          "(g) MEASURE ONLY, on the joined branch (a detached worktree at origin/lane/join-2026-11-14's tip; cure nothing there): the "
+          "Foundations tab's food word in the release bar's two towns (bar0-town-occupied-rand-1, bar0-hamlet-calm-rand-1; born by the probes "
+          "on origin/lane/review-bar-0-2026-11-14) against the Tonight sheet's food word on the same page: the two words side by side, in one "
+          "line to the chair.\n"
+          "NOT YOURS: C1 and C2 (the deterrence lines under a siege and an occupation are the corpus's pools: that lane has declared them off "
+          "both and they land with it); R4's true lines lost (the corpus owes pools for the watch-only rows: NAMED in your hand-back with the "
+          "reader's counts).\n"
+          "THE WORK, in this order, each cause its own commit, measured first on the second reader's 1,536 births (count before and after), red "
+          "first (a collected arm; each arm shown able to red by a plant you do not commit, made in a tree no suite is running in), pushed as "
+          "made: (a), (b), ONE MESSAGE TO THE CHAIR (the tip; the two counts), THE COUNT; then (c), (f), (e), (d), (g).\n"
+          "FOR EVERY CURE: every line it now prints in a new town, or newly leaves silent, READ WHERE IT PRINTS: three towns of its cells, a "
+          "siege, a famine or an occupation among them, the smallest and the largest size it reaches; the towns and what printed in the commit "
+          "body.\n"
+          "AFTER EVERY CURE: the presumed-things walker; the strict-domain gate, the type ratchet and eslint on the touched files; the "
+          "twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop); the test files that name the files you touched; "
+          "the two walkers the reader found red (tests/lint/proseWiringCensus.walker.test.js; tests/lint/writerReach.walker.test.js: its one "
+          "named title only).\n"
+          "THE HAND-BACK, kept current after every item: a part \"# THE FIFTH SEAT\" at the end of docs/chair/2026-11-13/R3-TABS-HANDBACK.md: the "
+          "rulings copied; each row: its cause, its cure and commit, its counts, its guard and plant, the towns read; every new or changed line "
+          "with the towns it was read in; the ADDENDUM to the statement (what the fifth seat changed under src/, file by file: `git diff --stat "
+          "301572583..HEAD -- src/`); FOR THE JOIN; what is left."),
+    merges='',
+    when="for a stop that blocks everything you have left, after (a) and (b) (the tip; the two counts), with (g)'s two words, and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
