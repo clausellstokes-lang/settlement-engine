@@ -40,18 +40,23 @@ describe('the reader\'s towns: the cured line does not print', () => {
     ['rr2s-town-under_siege-rand-1', LOCAL_COAL_SOLD_LINE, null], // #501: nothing sold out by road under a siege
     ['rr2s-town-under_siege-rand-1', GRAIN_BOUGHT_LINE, null], // #438: nothing bought in under a siege
     ['rr2s-town-under_siege-rand-1', WOOL_LOCAL_LINE, WOOL_LOCAL_WORKED_LINE], // #437: no fullers, and no cloth sold across the region
-    ['rr2s-hamlet-calm-rand-1', IRON_IMPORTED_LINE, null], // #145: no smithy, no iron brought in
-    ['rr2s-village-famine-rand-1', QUARRY_LINE, null], // #277: a stone resource, no quarry house
-    ['rr2s-town-indebted-port-1', FISH_EXPORT_LINE, null], // #621: no fishing house
-    ['rr2s-city-under_siege+famine-rand-1', FISH_EXPORT_LINE, null], // #910: no fishing house, and a siege
+    ['rr2s-hamlet-calm-rand-1', IRON_IMPORTED_LINE, null, 'Iron & Metalwork'], // #145: no smithy, no iron brought in
+    ['rr2s-village-famine-rand-1', QUARRY_LINE, null, 'Stone Quarrying'], // #277: a stone resource, no quarry house
+    ['rr2s-town-indebted-port-1', FISH_EXPORT_LINE, null, /^Fish & /], // #621: no fishing house
+    ['rr2s-city-under_siege+famine-rand-1', FISH_EXPORT_LINE, null, /^Fish & /], // #910: no fishing house, and a siege
     ['rr2s-city-under_siege+famine-rand-1', ALCHEMY_TRADE_LINE, ALCHEMY_UNDER_SIEGE_LINE], // an alchemist, under a siege
     ['rr2s-metropolis-wartime-rand-1', LOCAL_COAL_LINE, METAL_WORKED_LINE], // #1301: no iron among the imports
     ['rww-metropolis-wartime-1', TITHES_RENTS_LINE, TITHES_RENTS_PLAIN_LINE], // #ww-414: the third source does not dominate
   ];
   test("each reader's town: the cured line does not print, and its twin or the silent row does", () => {
-    for (const [seed, cured, twin] of ROWS) {
-      const printed = lines(birth(seed));
+    for (const [seed, cured, twin, gone] of ROWS) {
+      const s = birth(seed);
+      const printed = lines(s);
       if (twin) expect(printed).toContain(twin);
+      // UPKEEP-16 (the chair's ruling (o) re-ruled, candidate D), re-keyed BY IDENTITY, the same towns and lines: where no
+      // house of the trade stands and the good is not sold from the town's ground, the page does not bear the row out and it
+      // is taken off (`gone`, its title); elsewhere the row prints its source and share alone, as before.
+      else if (gone) expect(s.economicState.incomeSources.map((e) => e.source).filter((t) => (typeof gone === 'string' ? t === gone : gone.test(t))), seed).toEqual([]);
       else expect(printed).toContain(''); // the row prints its source and share alone
       expect(printed).not.toContain(cured); // anchored: the twin, or the silent row, was asserted present on the line above
     }
