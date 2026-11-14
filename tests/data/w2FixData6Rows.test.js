@@ -140,4 +140,15 @@ describe('W2-FIX-DATA-9: the census writers in the data lane\'s files (the ninth
     }), 'fifty to a hundred and more: never hundreds');
     expect(parish('r2r-metropolis-0')).toBe('Every quarter keeps its own parish, so that faith runs through every part of the city.');
   }, 240_000);
+
+  test('HANDBACK-6 row 4 (ww-103, R3 #1229): the Mine of town size or more says no crews work it now, for its deposits may be spent (r2r-town-11 every deposit depleted, r2r-town-12 and r2r-town-45 iron depleted); the village mine keeps its own text (r2r-village-3)', () => {
+    /** @param {string} seed @param {string} tier */
+    const mine = (seed, tier) => String(generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, settType: tier }), null, { seed, customContent: {} }).institutions.find((/** @type {any} */ i) => i.name === 'Mine').desc);
+    expectNoSeedFailures(collectSeedFailures(['r2r-town-11', 'r2r-town-12', 'r2r-town-45'], (seed) => {
+      const desc = mine(seed, 'town');
+      expect(desc, seed).not.toMatch(/hired crews|worked|go deep|run deep/i);
+      expect(desc, seed).toMatch(/shaft/);
+    }), 'no present work claimed of a mine whose deposits may be spent');
+    expect(mine('r2r-village-3', 'village')).toMatch(/^Ore, coal, or stone is won from a shaft/);
+  }, 240_000);
 });

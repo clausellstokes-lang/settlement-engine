@@ -240,7 +240,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       ceiling: { tier: 'village', reason: 'Peat is cut for the household hearth; towns buy fuel through the charcoal and coal trade.' },
     },
     {
-      shared: { name: 'Mine', face: 'the mine captain', desc: 'A worked shaft or adit with hired crews, winding gear, and ore carts. Where the deposits run deep, the mine is the reason the settlement grew.', tags: ['trade'], priorityCategory: 'economy' },
+      shared: { name: 'Mine', face: 'the mine captain', desc: 'A mine of shafts and adits, with its winding gear and ore carts. Where the deposits ran deep, the mine is the reason the settlement grew.', tags: ['trade'], priorityCategory: 'economy' },
       at: {
         hamlet: { name: 'Mine (open cast)', baseChance: 0.2, desc: 'A shallow excavation or shaft dug to extract iron ore, coal, or stone. Employs the poorest labourers. Dangerous, dirty, and essential.' },
         village: { baseChance: 0.12, desc: 'A shaft or excavation to extract iron ore, coal, or stone. Requires capital and organisation a thorp cannot sustain, but a village near deposits can. Employs the poorest labourers.' },

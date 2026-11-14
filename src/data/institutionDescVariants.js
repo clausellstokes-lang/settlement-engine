@@ -511,8 +511,8 @@ const PAIRS = [
     "Charcoal from woodland kilns feeds the smelters, the smithies, and the bake ovens. At this pace of metalwork, a forest lasts a generation.",
   ],
   [
-    "A shaft or adit worked by hired crews with winding gear and ore carts. Where the deposits go deep, the mine is why the place grew at all.",
-    "Hired crews, winding gear, and ore carts work a shaft into the deposits. Where they run deep, the settlement grew around the mine.",
+    "A mine of shafts and adits, with winding gear and ore carts at the head. Where the deposits ran deep, the mine is why the place grew at all.",
+    "A shaft driven into the deposits, with winding gear and ore carts at the pithead. Where they ran deep, the settlement grew around the mine.",
   ],
   [
     "A stone quarry, with yards beside it for dressing the stone. Half the region's building stone was cut here.",

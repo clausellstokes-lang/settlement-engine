@@ -2119,7 +2119,7 @@
     },
     {
       "id": "town|Economy|Mine#0",
-      "text": "A shaft or adit worked by hired crews with winding gear and ore carts. Where the deposits go deep, the mine is why the place grew at all.",
+      "text": "A mine of shafts and adits, with winding gear and ore carts at the head. Where the deposits ran deep, the mine is why the place grew at all.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2127,7 +2127,7 @@
     },
     {
       "id": "town|Economy|Mine#1",
-      "text": "Hired crews, winding gear, and ore carts work a shaft into the deposits. Where they run deep, the settlement grew around the mine.",
+      "text": "A shaft driven into the deposits, with winding gear and ore carts at the pithead. Where they ran deep, the settlement grew around the mine.",
       "needs": [],
       "excludes": [],
       "crisis": [],
