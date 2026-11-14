@@ -561,7 +561,12 @@ export function bruntCandidates(s, kind, stakes) {
   const factions = factionsOf(s);
   const governing = governingFactionOf(/** @type {never} */ (s));
   const govName = governing ? factionName(/** @type {CastFaction} */ (governing)) : '';
-  const losers = new Set(stakes.filter((k) => k.stake !== 'gains').map((k) => k.factionId));
+  // R2-CODE-B-11, the chair's ruling (b) (the reader's H2-1, H2-2, H2-3: "the only one in the house the crisis hits" beside
+  // that house's "no stake yet" or "gains" on the same tab): THE BRUNT AND THE STAKES READ ONE FACT. The brunt is drawn only
+  // from a house whose stake the record holds as a LOSS ('loses', or 'split' because it gains and loses at once; never the
+  // untouched 'split', "no stake yet", and never 'gains'), and the one-power fallback is gone: where the town's one power has
+  // no stake or gains, nobody of it bears the brunt, and the role is absent by its own reason (noBase). No draw.
+  const losers = new Set(stakes.filter((k) => k.stake === 'loses' || (k.stake === 'split' && k.reason === STAKE_REASONS.split)).map((k) => k.factionId));
   /** @type {CastRow[]} */
   const out = [];
   // F10 unit 4, CENSUS-1c: a reason that names walls the place lacks resolves to its declared sibling (CAST_REASON_SIBLINGS).
@@ -579,12 +584,6 @@ export function bruntCandidates(s, kind, stakes) {
       out.push(factionRow(f, 'brunt', resolveSibling(CAST_REASONS.bruntBase[sys] || CAST_REASONS.bruntLeast, BRUNT_SIBLINGS, defence)));
     }
     if (out.length) break;
-  }
-  if (!out.length && factions.length === 1) {
-    const f = factions[0];
-    const members = membersOf(s, factionName(f)).reverse();
-    for (const n of members) out.push(npcRow(n, 'brunt', leastSayOf(members)));
-    out.push(factionRow(f, 'brunt', CAST_REASONS.bruntLeast));
   }
   return { candidates: out, absent: CAST_ABSENCES.noBase };
 }
