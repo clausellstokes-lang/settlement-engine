@@ -682,7 +682,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { name: 'Apothecary district', face: 'the apothecary', desc: 'Multiple apothecary shops clustered together. Competition drives specialization. Some focus on chirurgery, others on herbal preparations, others on imported medicines. Herbalism kits, medicinal herbs, surgical supplies, and basic antidotes all available.', tags: ['healing', 'trade'], priorityCategory: 'crafts' },
       at: {
-        village: { name: 'Apothecary', baseChance: 0.45, desc: 'Sells herbal medicines, poultices, and common remedies. Distinct from the alchemist. No magical compounds, no acid flasks. Knows which roots treat fever and which mushrooms kill. Stocked with herbalism supplies.' },
+        village: { name: 'Apothecary', baseChance: 0.45, desc: 'Sells herbal medicines, poultices, and common remedies. No magical compounds, no acid flasks. Knows which roots treat fever and which mushrooms kill. Stocked with herbalism supplies.' },
         town: { name: 'Apothecary (established)', baseChance: 0.8, desc: 'A proper shop with a trained herbalist, stocked inventory, and a back room for consultations. Sells herbalism kit supplies, common antidotes, medicinal herbs, and basic surgical dressings. Some double as chirurgeons.' },
         city: { baseChance: 0.7, priorityCategory: 'economy' },
         metropolis: { baseChance: 0.75, priorityCategory: 'economy' },

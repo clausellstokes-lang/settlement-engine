@@ -363,8 +363,8 @@ const PAIRS = [
     "Casks for storage and carriage, all his making.",
   ],
   [
-    "Herbal medicines, poultices, and everyday remedies for sale. Not to be confused with the alchemist. Nothing magical here, no acid flasks. The proprietor knows the roots that break a fever and the mushrooms that end a life. Herbalism supplies on hand.",
-    "Sells poultices, common cures, and medicines drawn from herbs. Where the alchemist deals in magical compounds and acid, this trade does not. Its keeper can name which root treats fever and which mushroom kills, and keeps herbalism supplies in stock.",
+    "Herbal medicines, poultices, and everyday remedies for sale. Nothing magical here, no acid flasks. The proprietor knows the roots that break a fever and the mushrooms that end a life. Herbalism supplies on hand.",
+    "Sells poultices, common cures, and medicines drawn from herbs. Magical compounds and acid are no part of this trade. Its keeper can name which root treats fever and which mushroom kills, and keeps herbalism supplies in stock.",
   ],
   [
     "Bows, crossbows, and arrows all made here. Finished ammunition sells off the shelf, and custom bows are made to order. Any adventurer with an empty quiver comes here first.",

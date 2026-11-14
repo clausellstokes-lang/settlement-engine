@@ -105,4 +105,14 @@ describe('W2-FIX-DATA-8: the census writers in the data lane\'s files (the eight
     }), 'no tavern, inn or alehouse: no barrels go to one');
     expect(servicesOf(bornCensus('r2r-village-15'), 'Brewer').find((/** @type {any} */ v) => v.name === 'Ale (barrel)').desc).toBe('Bulk supply to alehouses. Priced by barrel.');
   }, 240_000);
+
+  test('HANDBACK-6 row 4 (CENSUS-2 a/alchemist): the village apothecary names no alchemist, for no village holds one (r2r-village-0, r2r-village-2, r2r-village-37, r2s-indebted-village-0)', () => {
+    expectNoSeedFailures(collectSeedFailures(['r2r-village-0', 'r2r-village-2', 'r2r-village-37', 'r2s-indebted-village-0'], (seed) => {
+      const town = bornCensus(seed);
+      expect((town.institutions || []).some((/** @type {any} */ i) => /alchem/i.test(i.name)), seed).toBe(false);
+      const desc = String((town.institutions || []).find((/** @type {any} */ i) => i.name === 'Apothecary').desc);
+      expect(desc, seed).not.toMatch(/alchemist/i);
+      expect(desc, seed).toMatch(/fever/);
+    }), 'no alchemist: none is named');
+  }, 240_000);
 });
