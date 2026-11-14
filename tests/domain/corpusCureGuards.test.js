@@ -59,6 +59,8 @@ const GUARDS = [
   { seed: 'w5-city-slave_revolt-102', pool: 'DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)', vid: 8, by: 'record', why: 'a slave revolt: "A watch walks X\'s streets" (v7\'s twin)' },
   { seed: 'rww-metropolis-under_siege-1', pool: 'DS-GEN-18::STALLED', vid: 2, why: 'a siege: "depends on goods brought in from outside" as if they still came (the read\'s M6; the siege twin is v4)' },
   { seed: 'w5-town-occupied-101', pool: 'DS-POW-6::GM ADVISORY: the commander is a political actor', vid: 3, by: 'record', why: 'an occupation: "Occupation Authority answers to the Military Council in name only" of an occupier that answers to nobody here (W2-WRITE-SIDE-REST; the read\'s LOW at r2s-occupied-city-0)' },
+  { seed: 'w5-metropolis-occupied-101', pool: 'DS-GEN-17::GARRISONED', vid: 1, why: 'an occupation: "The metropolis keeps people under arms for its defence" of a town its occupiers hold (W2-WRITE-SIDE-REST C, the fourth seat\'s #1033 re-read)' },
+  { seed: 'w5-city-occupied-101', pool: 'DS-GEN-17::GARRISONED', vid: 2, why: 'an occupation: "the money is found every season" beside "The occupiers take the revenue" (W2-WRITE-SIDE-REST C)' },
 ];
 
 /** @param {string} seed */

@@ -7265,8 +7265,8 @@ no compass word, no real-world place, no named analogy.*
 3. `[street]` In {settlement} the law keeps a building of its own, and people take their quarrels there.
 
 **`GARRISONED`**
-1. `[visitor]` {settlement} keeps people under arms for its defence; the town does not trust to luck and neighbours.
-2. `[ledger · walls]` {settlement} pays wages for its defense as well as keeping its walls, and the money is found every season.
+1. `[visitor · no crisis: occupied]` {settlement} keeps people under arms for its defence; the town does not trust to luck and neighbours.
+2. `[ledger · walls · no crisis: occupied]` {settlement} pays wages for its defense as well as keeping its walls, and the money is found every season.
 
 **`LETTERED`** {colour}
 1. `[visitor]` {settlement} supports trained practitioners of the Art, which few towns its size can afford.

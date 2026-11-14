@@ -11042,6 +11042,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "GARRISONED": [
         {
           "angle": "visitor",
+          "marks": [
+            "no crisis: occupied"
+          ],
           "text": "{settlement} keeps people under arms for its defence; the town does not trust to luck and neighbours.",
           "slots": [
             "settlement"
@@ -11051,7 +11054,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "walls"
+            "walls",
+            "no crisis: occupied"
           ],
           "text": "{settlement} pays wages for its defense as well as keeping its walls, and the money is found every season.",
           "slots": [

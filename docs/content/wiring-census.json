@@ -32040,9 +32040,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "no crisis: occupied": 2,
         "walls": 1
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
