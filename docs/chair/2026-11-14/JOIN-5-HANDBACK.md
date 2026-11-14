@@ -35,6 +35,7 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF: none so far.
 | 5 | w2-c-leaves-2026-11-13 | 5f95bf473 (16:04) | 9ac076d5e (JOIN-4 merge 7) | 770e20190 | none | — ((g) `--check` re-run after it: exit 0) |
 | 6 | r2-code-b-2026-11-13 | 2d418c67f (16:07) | a86646b84 (JOIN-4 point 1) | f7288399f | none | — (5 files staged: M10 the journal force tag, M12 the faith contender; law (h): the lane lands first) |
 | 7 | join-surfaces-2026-11-14 | f9d40e3de (16:12) | e6cb445db (JOIN-4 point 4) | f0ce831b5 | none | clean-both code: `src/foundry/journalPages.js`, `EconomicsTab.jsx` (§3) |
+| 8 | exports-b1-2026-11-14 | b6f3266f8 (16:15) | — (base c66333f0c) | 06a1ea994 | none | — |
 
 ## 3. Every code resolution
 
