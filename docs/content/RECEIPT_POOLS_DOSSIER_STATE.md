@@ -7330,7 +7330,6 @@ no compass word, no real-world place, no named analogy.*
 7. `[ledger · crisis: under_siege]` {settlement} bought its {good} from outside, and since the siege nothing has come in; what is left is being made to last.
 8. `[street · crisis: under_siege]` The carts that kept {settlement}'s trades supplied have not come since the siege began.
 9. `[trade · no crisis: under_siege]` Much of what changes hands at {settlement} came from somewhere else first.
-10. `[unfolding · crisis: under_siege]` {settlement} is running short of {good}, and the siege lets none in.
 
 **`UNWORKED`** {colour}
 1. `[counterforce]` The {resource} around {settlement} goes unworked; no house takes it up.

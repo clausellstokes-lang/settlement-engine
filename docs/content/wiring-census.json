@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2961,
+    "variants": 2960,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -32547,8 +32547,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 10,
-      "grammars": 6,
+      "variants": 9,
+      "grammars": 5,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -32607,7 +32607,7 @@
       },
       "declares": [],
       "lineDeclares": {
-        "crisis: under_siege": 3,
+        "crisis: under_siege": 2,
         "guild": 1,
         "market": 2,
         "no crisis: famine": 1,
@@ -70764,7 +70764,7 @@
       "subject": "BOUGHT-IN",
       "fields": [],
       "readingFunction": "craftReasonPoolKey",
-      "count": "10 variant(s) · 6 grammar(s) · slots {good, institution, settlement}"
+      "count": "9 variant(s) · 5 grammar(s) · slots {good, institution, settlement}"
     },
     {
       "tier": "COVERED",
