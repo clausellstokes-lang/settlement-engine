@@ -7,6 +7,7 @@
  * resolves a refused pick draw-free to an admitted row.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../../src/data/stressInstitutionEffects.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -34,11 +35,11 @@ describe('the war-contracts secret needs a town the war made rich', () => {
   });
   beforeAll(async () => { await loadGenerationLawPayloads(); });
   it('a town below comfortable carries no such secret (every row)', () => {
-    for (const [seed] of [['rw3-city-wartime-1'], ['r2s-wartime-town-0'], ['r2s-wartime-village-1'], ['r2s-wartime-city-1']]) {
+    expectNoSeedFailures(collectSeedFailures([['rw3-city-wartime-1'], ['r2s-wartime-town-0'], ['r2s-wartime-village-1'], ['r2s-wartime-city-1']], ([seed]) => {
       const s = born(seed);
       expect(['Comfortable', 'Prosperous', 'Wealthy'], `${seed}: below comfortable`).not.toContain(s.economicState.prosperity);
       expect(holders(s), `${seed}: carries no such secret`).toEqual([]);
-    }
+    }), 'a town below comfortable carries no such secret');
   });
   it('r2s-wartime-city-0: a comfortable town keeps it', () => {
     const s = born('r2s-wartime-city-0');

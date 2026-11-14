@@ -8,6 +8,7 @@
  * `drawDeclared` with the birth's facts) resolves a refused pick draw-free to a fresh admitted line.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { NPC_FACTION_LOYALTY } from '../../src/data/npcData.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -41,20 +42,20 @@ describe('the clerk line needs a place large enough to keep an office', () => {
   });
   beforeAll(async () => { await loadGenerationLawPayloads(); });
   it('no one in a thorp or a hamlet has an office with staff, and each keeps one hook (every row)', () => {
-    for (const [seed] of [['rw3-thorp-calm-1'], ['r2r-hamlet-34'], ['r2s-recently_betrayed-hamlet-2'], ['r2s-slave_revolt-thorp-0'], ['r2r-hamlet-45'], ['r2r-thorp-17'], ['r2s-insurgency-thorp-3']]) {
+    expectNoSeedFailures(collectSeedFailures([['rw3-thorp-calm-1'], ['r2r-hamlet-34'], ['r2s-recently_betrayed-hamlet-2'], ['r2s-slave_revolt-thorp-0'], ['r2r-hamlet-45'], ['r2r-thorp-17'], ['r2s-insurgency-thorp-3']], ([seed]) => {
       const s = born(seed);
       expect(['thorp', 'hamlet'], `${seed}: a thorp or a hamlet`).toContain(s.tier);
       for (const n of s.npcs) {
         expect((n.plotHooks || []).some((/** @type {string} */ h) => CLERK.test(h) || ADVISOR.test(h) || DISTRICT.test(h)), `${seed}: ${n.role}`).toBe(false);
         expect((n.plotHooks || []).length, `${seed}: ${n.role} keeps one hook`).toBe(1);
       }
-    }
+    }), 'no one in a thorp or a hamlet has an office with staff, and each keeps one hook');
   });
   it('a village below the middling band buys up no property in a district (every row)', () => {
-    for (const [seed] of [['r2r-village-53'], ['r2r-village-59']]) {
+    expectNoSeedFailures(collectSeedFailures([['r2r-village-53'], ['r2r-village-59']], ([seed]) => {
       const s = born(seed);
       expect(s.tier, `${seed}: a village`).toBe('village');
       for (const n of s.npcs) expect((n.plotHooks || []).some((/** @type {string} */ h) => DISTRICT.test(h)), `${seed}: ${n.role}`).toBe(false);
-    }
+    }), 'a village below the middling band buys up no property in a district');
   });
 });

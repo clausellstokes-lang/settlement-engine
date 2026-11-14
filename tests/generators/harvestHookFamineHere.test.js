@@ -8,6 +8,7 @@
  * the food record, as the famine's own note names it); else, as before. A T branch: no draw.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -32,24 +33,24 @@ const stresses = (s) => (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stre
 describe('the import-dependent hook reads the famine and the channel, born as the corpus births them', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
   it('a famine with food still coming in tells the failure here, and the import (every row)', () => {
-    for (const [seed] of [['rw3-city-famine-1'], ['r2s-famine-town-0'], ['r2r-hamlet-16']]) {
+    expectNoSeedFailures(collectSeedFailures([['rw3-city-famine-1'], ['r2s-famine-town-0'], ['r2r-hamlet-16']], ([seed]) => {
       const s = born(seed);
       expect(stresses(s), `${seed}: a famine`).toContain('famine');
       expect(s.economicState.foodSecurity.importCoverage || 0, `${seed}: food still coming in`).toBeGreaterThan(0);
       const h = hooks(s);
       expect(h.join('\n'), `${seed}: no elsewhere line`).not.toMatch(ELSEWHERE);
       expect(h.some((t) => /failed here this year/.test(t) && /afford to import/.test(t)), `${seed}: tells the failure here, and the import`).toBe(true);
-    }
+    }), 'a famine with food still coming in tells the failure here, and the import');
   });
   it('nothing coming in, so the food already here is told, and no import (every row)', () => {
-    for (const [seed] of [['r2s-under_siege-hamlet-2'], ['r2r-thorp-54'], ['r2s-wartime-thorp-3']]) {
+    expectNoSeedFailures(collectSeedFailures([['r2s-under_siege-hamlet-2'], ['r2r-thorp-54'], ['r2s-wartime-thorp-3']], ([seed]) => {
       const s = born(seed);
       expect(s.economicState.foodSecurity.importCoverage || 0, `${seed}: nothing coming in`).toBe(0);
       const h = hooks(s);
       expect(h.join('\n'), `${seed}: no elsewhere line`).not.toMatch(ELSEWHERE);
       expect(h.join('\n'), `${seed}: no import`).not.toMatch(/afford to import/);
       expect(h.some((t) => /^No food can be bought in from outside now/.test(t)), `${seed}: the food already here is told`).toBe(true);
-    }
+    }), 'nothing coming in, so the food already here is told, and no import');
   });
   it('r2r-village-50: an import-dependent town with food coming in and no famine keeps the line', () => {
     const s = born('r2r-village-50');

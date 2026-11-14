@@ -9,6 +9,7 @@
  * no house the roster cannot hold (record 386 (3)/(4)).
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { STRESS_DESCS } from '../../src/data/narrativeData.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -27,10 +28,10 @@ describe('the crisis vignettes carry their size', () => {
   });
   beforeAll(async () => { await loadGenerationLawPayloads(); });
   it('no quarters, streets or districts in a small place (every row)', () => {
-    for (const [seed, crisis, settType] of [['r2s-religious_conversion-thorp-1', 'religious_conversion', 'thorp'], ['r2s-slave_revolt-hamlet-3', 'slave_revolt', 'hamlet']]) {
+    expectNoSeedFailures(collectSeedFailures([['r2s-religious_conversion-thorp-1', 'religious_conversion', 'thorp'], ['r2s-slave_revolt-hamlet-3', 'slave_revolt', 'hamlet']], ([seed, crisis, settType]) => {
       const s = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, selectedStresses: [crisis], settType }), null, { seed, customContent: {} }));
       expect(typeof s.arrivalScene, `${seed}: an arrival scene`).toBe('string');
       expect(/\bquarters?\b|\bdistricts?\b|\bstreets\b/.test(s.arrivalScene), `${seed}: ${s.arrivalScene}`).toBe(false);
-    }
+    }), 'no quarters, streets or districts in a small place');
   });
 });

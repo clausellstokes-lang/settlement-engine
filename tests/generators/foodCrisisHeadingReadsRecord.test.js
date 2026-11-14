@@ -10,6 +10,7 @@
  * covers what is eaten or the shortfall is made up. No draw: the heading is a T branch.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -51,8 +52,8 @@ describe('the food-supply crisis heading reads the balance beside it', () => {
     expect(n.priorityNote).toBe('There are more mouths to feed, but the shortfall is still made up.');
   });
   it('the heading and its line agree with the gap and the harvest (every row)', () => {
-    for (const [seed] of [['r2s-occupied-village-2'], ['r2r-village-28'], ['r2s-wartime-village-2'], ['r2s-plague_onset-thorp-2'], ['r2r-thorp-27'], ['r2s-occupied-thorp-3'], ['r2s-wartime-hamlet-0'], ['r2s-slave_revolt-village-3']]) {
+    expectNoSeedFailures(collectSeedFailures([['r2s-occupied-village-2'], ['r2r-village-28'], ['r2s-wartime-village-2'], ['r2s-plague_onset-thorp-2'], ['r2r-thorp-27'], ['r2s-occupied-thorp-3'], ['r2s-wartime-hamlet-0'], ['r2s-slave_revolt-village-3']], ([seed]) => {
       expect(check(born(seed)).length, `${seed}: the heading and its line agree with the gap and the harvest`).toBeGreaterThan(0);
-    }
+    }), 'the heading and its line agree with the gap and the harvest');
   });
 });

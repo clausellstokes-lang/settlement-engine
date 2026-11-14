@@ -9,6 +9,7 @@
  * decided here."): under a siege they say it of ordinary times.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -34,14 +35,14 @@ describe("the readers' towns, born as the app births them", () => {
     return /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : m[2].split('+'), _randomizePriorities: true }), null, { seed, customContent: {} }));
   };
   it('no channel is named open; what the record holds is (every row)', () => {
-    for (const seed of ['rww-town-under_siege-1', 'rpf-town-under_siege+famine-13']) {
+    expectNoSeedFailures(collectSeedFailures(['rww-town-under_siege-1', 'rpf-town-under_siege+famine-13'], (seed) => {
       const s = born(seed);
       expect(s.config.tradeRouteAccess, `${seed}: isolated`).toBe('isolated');
       expect(s.config.stressTypes, `${seed}: under siege`).toContain('under_siege');
       expect(s.settlementReason[0], `${seed}: the siege is named`).toMatch(/siege|besieged/);
       expect(s.settlementReason[0], `${seed}: what the record holds is named`).toContain('what it has in store and what it produces itself');
       expect(CHANNEL_WORDS.test(s.settlementReason[0]), `${seed}: ${s.settlementReason[0]}`).toBe(false);
-    }
+    }), 'no channel is named open; what the record holds is');
   });
   it('rww-metropolis-under_siege-1: the metropolis line says it of ordinary times', () => {
     expect(born('rww-metropolis-under_siege-1').settlementReason[1]).toBe('In ordinary times everything in the region is bought, sold or decided here.');

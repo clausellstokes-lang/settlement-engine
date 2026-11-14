@@ -9,6 +9,7 @@
  * A declared hook refused resolves draw-free in the holder's own pool (npcGenerator.js :: generatePlotHook).
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { NPC_FACTION_LOYALTY } from '../../src/data/npcData.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -38,13 +39,13 @@ describe('A2 the towns, born in the census shape', () => {
   /** @param {any} s */
   const hooks = (s) => (s.npcs || []).flatMap((/** @type {any} */ n) => n.plotHooks || []).map((/** @type {any} */ h) => (typeof h === 'string' ? h : h.text));
   it('guard town: the hook does not print (every row)', () => {
-    for (const [seed, text] of [
+    expectNoSeedFailures(collectSeedFailures([
       ['r2r-thorp-17', MERCHANT], ['r2r-thorp-1', MERCHANT],
       ['r2s-succession_void-thorp-1', CRAFTSMAN],
       ['r2r-thorp-20', FEES], ['r2s-infiltrated-thorp-3', POST], ['r2r-thorp-28', AUDITOR],
-    ]) {
+    ], ([seed, text]) => {
       expect(hooks(born(seed)).some((h) => text.test(h)), `${seed}: the hook does not print`).toBe(false);
-    }
+    }), 'guard town: the hook does not print');
   });
   it('a town with a market keeps the merchant hook (r2r-town-1)', () => {
     expect(hooks(born('r2r-town-1')).some((h) => MERCHANT.test(h))).toBe(true);

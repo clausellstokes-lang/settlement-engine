@@ -12,6 +12,7 @@
  * households instead. "before it goes to market" is the presumed-things register's ruled figure (to sale). No draw.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { crimeSignalOf } from '../../src/domain/crimeSignal.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -25,7 +26,7 @@ describe('the cold list\'s towns with crime and no thieves\' guild, born as the 
   // At e969a75b7 the informant prints in the siege metropolis; the other two (#128, #720 on the reviewer's tree) are dealt
   // other secrets here, and stay guarded against the guild.
   it('no secret names a thieves\' guild the town lacks (every row)', () => {
-    for (const [seed, informant] of [['rw3-metropolis-politically_fractured-1', false], ['rw3-metropolis-under_siege-1', true], ['rw3-city-wartime-1', false]]) {
+    expectNoSeedFailures(collectSeedFailures([['rw3-metropolis-politically_fractured-1', false], ['rw3-metropolis-under_siege-1', true], ['rw3-city-wartime-1', false]], ([seed, informant]) => {
       const m = /** @type {RegExpMatchArray} */ (seed.match(/^rw3-(\w+)-([a-z_+]+)-\d+$/));
       const s = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2].split('+'), _randomizePriorities: true }), null, { seed, customContent: {} }));
       const signal = crimeSignalOf({ seats: s.powerStructure?.factions, estate: s.institutions });
@@ -34,7 +35,7 @@ describe('the cold list\'s towns with crime and no thieves\' guild, born as the 
       const secrets = (s.npcs || []).map((/** @type {any} */ n) => String(n?.secret?.what || ''));
       expect(secrets.filter((t) => /thieves['’]? guild/i.test(t)), `${seed}: no secret names a thieves' guild the town lacks`).toEqual([]);
       if (informant) expect(secrets.some((t) => /^On the payroll of (?:the local underworld|a powerful outside interest) as a silent informant$/.test(t)), `${seed}: the informant secret prints`).toBe(true);
-    }
+    }), 'no secret names a thieves\' guild the town lacks');
   });
 });
 
@@ -66,10 +67,10 @@ describe('a secret names merchants only where the roster holds a market (R2-CODE
   };
   beforeAll(async () => { await loadGenerationLawPayloads(); });
   it('guard town (no market): no secret names merchants (every row)', () => {
-    for (const seed of ['r2r-village-12']) {
+    expectNoSeedFailures(collectSeedFailures(['r2r-village-12'], (seed) => {
       const s = born(seed);
       expect((s.npcs || []).map((/** @type {any} */ n) => `${n?.secret?.what || ''} | ${n?.secret?.stakes || ''}`).filter((t) => /merchant/i.test(t)), `${seed} (no market): no secret names merchants`).toEqual([]);
-    }
+    }), 'guard town (no market): no secret names merchants');
   });
   it('the plague quarantine secret\'s merchant (`market`, R2-CODE-A-7 item 5): guard town r2s-plague_onset-village-0 (no market); r2s-plague_onset-town-0 keeps it', () => {
     /** @param {string} seed */ const quarantine = (seed) => (born(seed).npcs || []).some((/** @type {any} */ n) => /shipments from a specific merchant/.test(n?.secret?.what || ''));

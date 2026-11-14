@@ -16,6 +16,7 @@
  * A declared row refused resolves draw-free to the next admitted one (generatePressureSentence).
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { PRESSURE_SENTENCES, POLITICAL_FLAVOR } from '../../src/generators/narrativeText.js';
 import { declarationOf } from '../../src/domain/facts/factVocabulary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -60,26 +61,26 @@ describe('A2 the census towns, born in the census shape', () => {
   /** @param {string} seed */
   const born = (seed) => { const m = /** @type {RegExpMatchArray} */ (seed.match(/^r2s-(\w+)-(thorp|hamlet|village|town|city|metropolis)-\d+$/)); return /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, selectedStresses: [m[1]], selectedStressesRandom: false, settType: m[2] }), null, { seed, customContent: {} })); };
   it('guard town: the line does not say what the town lacks (every row)', () => {
-    for (const [seed, words] of [
+    expectNoSeedFailures(collectSeedFailures([
       ['r2s-wartime-thorp-3', /a workshop/],
       ['r2s-succession_void-thorp-2', /merchants/],
       ['r2s-insurgency-thorp-0', /streets/],
       ['r2s-slave_revolt-hamlet-3', /districts/],
       ['r2s-religious_conversion-town-2', /courts/],
-    ]) {
+    ], ([seed, words]) => {
       expect(born(seed).pressureSentence, `${seed}: the line does not say what the town lacks`).not.toMatch(words);
-    }
+    }), 'guard town: the line does not say what the town lacks');
   });
   it('keeps its row where the record bears it out (every row)', () => {
-    for (const [seed, words] of [
+    expectNoSeedFailures(collectSeedFailures([
       ['r2s-wartime-city-3', /a workshop closed/],
       ['r2s-succession_void-metropolis-3', /the merchants and the creditors/],
       ['r2s-insurgency-city-3', /^The streets of/],
       ['r2s-slave_revolt-metropolis-0', /whole districts/],
       ['r2s-religious_conversion-city-0', /the courts are not equipped/],
-    ]) {
+    ], ([seed, words]) => {
       expect(born(seed).pressureSentence, `${seed} keeps its row where the record bears it out`).toMatch(words);
-    }
+    }), 'keeps its row where the record bears it out');
   });
 });
 

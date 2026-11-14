@@ -10,6 +10,7 @@
  * names no channel and says what the record holds.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { supportChannelsOf, holdingsOf } from '../../src/generators/narrative/settlementOriginProse.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -41,13 +42,13 @@ describe("the readers' towns, born as the app births them", () => {
     return /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : m[2].split('+'), _randomizePriorities: true }), null, { seed, customContent: {} }));
   };
   it('nothing comes in, and no channel is named (every row)', () => {
-    for (const seed of ['rr2s-thorp-calm-rand-1', 'rww-thorp-calm-1', 'rww-hamlet-famine-1']) {
+    expectNoSeedFailures(collectSeedFailures(['rr2s-thorp-calm-rand-1', 'rww-thorp-calm-1', 'rww-hamlet-famine-1'], (seed) => {
       const s = born(seed);
       expect(s.config.tradeRouteAccess, `${seed}: isolated`).toBe('isolated');
       expect(s.economicState.foodSecurity.importCoverage, `${seed}: nothing comes in`).toBe(0);
       expect(s.settlementReason[0], `${seed}: gets by on what it has`).toMatch(/gets by on what/);
       expect(CHANNEL_WORDS.test(s.settlementReason[0]), `${seed}: ${s.settlementReason[0]}`).toBe(false);
-    }
+    }), 'nothing comes in, and no channel is named');
   });
   it('rww-village-famine-1: food comes in, and the receipt\'s own channels are named', () => {
     const s = born('rww-village-famine-1');
