@@ -1,3 +1,47 @@
+# COHERENCE-UPKEEP: the hand-back (the eleventh seat, UPKEEP-11, 2026-11-14) — IN PROGRESS: step 1 CLASSED (no cure: nothing measured false; the 21 named below)
+
+**The lane:** `lane/coherence-upkeep-2026-11-12`. **Base of this seat:** 878fce4a8 (read back from origin before any work). **The brief:** `origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-UPKEEP-11.md` (self-contained: the laws, the four classes of the chair's 04:57 ruling, the final statement's form). **The probes:** `docs/chair/2026-11-14/probes/UPKEEP-11/` (README there). **The births:** the lane's 1,490 born at 878fce4a8 (UPKEEP-9's `birthgz.mjs`).
+
+## The brief and the rulings this seat works to
+
+- **Who asks:** the chair, `session_01ACmDYZrFEVXyZEUg1NDxxC`; the owner in its chat, 2026-11-14: "Continue with the pending work! ... I defer all decisions to you and give you all permissions you may require." Merging the pull request and the deploy stay the owner's; no commit at or below 878fce4a8 is rewritten; no pull request.
+- **The work:** (1) what is left of the presumed-things door (the 20 fresh hits not yet classed; the strip); (2) the rest of section 2m's checks (page census, fact layers, observed shapes, writer reach); (3) the packet validator's exit at the final tip; (4) the lane's declarations (the one ladder FOR THE JOIN; the Services and Magic labels LISTED; M1 M2 M3 M5 L2 and C-M1's six births as exposure); (5) the ONE final statement. NO NEW CURE OF A PAGE LINE beyond what the checks ask.
+- **The four classes (the chair, 04:57):** (1) a stale row leaves by `--shrink`; (2) the SHAPE CURE where a set ALREADY DECLARES the atom; (3) a line GATED IN CODE, not declared through a draw door: RED AND NAMED for the declaration pass after the join; (4) a line FALSE somewhere: cured now.
+
+## What this seat did, in commit order
+
+| Commit | Step | Measure | Moved |
+|---|---|---|---|
+| (this commit) | 1, the presumed-things door CLASSED, by measure on the 1,490 at 878fce4a8 | `--check` exit 1: **fresh 28 · stale 0 · strips fresh 1**; the walker exit 1 (2 failed, 41 passed: arm 1's fresh hits; arm 3's strip) | nothing (no line measured false; nothing cured, declared or banked) |
+
+### STEP 1: THE TWENTY-ONE, CLASSED (the brief counted `safetyProfile.js` 9; the door lists 10: defenceWeights 9, safetyProfile 10, threatAssessment 1, viability 1) (each measured with `m11hits.mjs` / `m11ta.mjs` / `m11dw*.mjs`)
+
+**Nothing is false where it prints** (class 4: none). **No shape cure applies** (class 2: none; see the builder gap). The door's counts stand: fresh 28 (the tenth seat's seven plus these twenty-one; none new), stale 0, strips fresh 1; the walker red on its two arms. Each red below is THIS LANE'S, NAMED.
+
+**FOR THE DECLARATION PASS (class 3: gated in code, true wherever printed):**
+
+| file | text | the code gate | atom | printed / false on the 1,490 |
+|---|---|---|---|---|
+| `src/generators/safetyProfile.js` | "The garrison is present and responsive." | `inst.hasGarrison` (the Safe branch's `lawLine`) | `garrison` | 1 / 0 |
+| same | "The watch is present and responsive." | `!inst.hasGarrison && inst.hasWatch` | `watch` | 1 / 0 |
+| same | "The militia is present and responsive." | `!garrison && !watch && inst.hasMilitia` | `militia` | 0 / 0 |
+| same | "A street gang controls part of the place, extorting local businesses and residents. …" | `inst.hasGangInfra && crimeTypes.length === 0`, and `GANG_HOUSES_OF(…) < 2 \|\| small` | `house: street gang` | 45 / 0 |
+| same (`SAFETY_LINE_SIBLINGS`) | "A mercenary company provides enforcement: … not the community." (the twin of both hired-company lines) | `keptGuardLine`: `d.mercenary && !standing`; the twin already carries `['mercenary']` through `declaredSet`'s `shared` | `mercenary` | 0 / 0 |
+| same (`SAFETY_LINE_SIBLINGS`) | "Hired swords back the garrison when the purse allows." and its twin "Hired swords back the garrison." | `keptGuardLine`: `contracted && d.garrison`; both members already carry `['garrison']` through `shared` | `garrison` | 3 / 0 and 385 / 0 |
+| same (`SAFETY_LINE_SIBLINGS`) | the charter hall's three: "… takes bounty work against threats, as far as the purse runs.", "… coordinates emergency response to threats.", "… takes bounty work against threats, but the coin for bounties runs short." | `keptGuardLine`: `text.startsWith(CHARTER_LEAD)`, the lead written only on the branch `inst.hasCharterHall && !garrison && !watch` | `house: adventurers' charter` | 6 / 0, 0 / 0, 29 / 0 |
+| `src/domain/display/threatAssessment.js` | " and a citizen militia to hold it." (`An embattled region, and only ${wallWord} and a citizen militia to hold it.`) | `threat === 'plagued' && hasWalls && hasMilitia` (`defenseFactsOf`), bands WEAK/CRITICAL | `militia` | 98 / 0 (display, through `buildThreatAssessment`) |
+| `src/generators/economy/viability.js` | "Traveling hedge wizard" (`SMALL_HEDGE_HOUSES`) | a catalogue name filtered against the tier's catalogue; printed only as the suggestion "Add …" where magic is very high and NO magic house stands | the house is ABSENT by design (a suggestion to add it): the declaration would be `excludes: ['house: hedge wizard']` | 0 / 0 (no 1,490 birth reaches it) |
+
+**THE BUILDER GAP (the rule book's, for the declaration pass; told to the chair with step 1's list):** `presumedThings.shared.mjs :: buildersOf` credits a builder only where its row reads `needs: <a parameter>` or `excludes: <a parameter>` directly; `safetyProfile.js :: declaredSet` writes `needs: Object.freeze([...needs, ...shared])` and `excludes: Object.freeze(needs)`, so it is NO builder to the walker and no member of `SAFETY_LINE_SIBLINGS` is credited, though `keptGuardLine` resolves every one of them through `resolveSibling` (a draw door). The hired-company and hired-swords members already DECLARE their atom (`shared`); they red only because the walker cannot read it. Not re-routed, not re-shaped to suit the matcher: named.
+
+**PRINTED NOWHERE, READ BY NO CODE (said, not kept as printing lines):** `src/data/defenceWeights.js :: DEFENCE_WEIGHT_REASONS`, four strings, six hits: `houseScale` (quarters; house: alchemist), `militia` ("citizens under arms: …", armedForce), `floors` ("unpaid soldiers desert slowly, never at once", armedForce), `crises` ("today's points, with today's relief by faith, druids, …", house: druid; market). No file under `src` reads the table; its one reader is `tests/generators/defenceParts.test.js` ("every row of the table carries a one-line reason, and every reason a row", which pins each as a string of more than eight characters): the table's documentation. They stay (a pin is never loosened; the walker's instrument list is not widened by a lane): red and named; the declaration pass may move the reasons to comments with that pin's owner, or admit the table as an instrument by the chair's ruling.
+
+**PRINTED ON NO SURFACE, READ BY CODE:** `defenceWeights.js :: DEFENCE_WORDS` labels "Masons at work on the defences", "Elders and reeve", "Alchemists preserving the grain". The parts are not stored (`defenseGenerator.js`: "NO `parts` HERE"); `defencePartsOf` has no reader under `src` (the tests, the probes, the eight towns); no component, PDF section or export reads `DEFENCE_WORDS`. WHERE LISTED, measured against the walker's absence reader: elders 271 listed, no reeve in **228** (the part opens on "Household elder" 63, "Informal elder consensus" 97, "Lord's steward" 36, "Village elder" 32); alchemists 535, the walker's alchemist absent in **319** (an "Apothecary district" opens the alchemy tradition); masons 180, the mason absent in **56** (the part opens on the fortification chain's health, not a house). Not a page line, so no cure now; were a page ever to print the list, each would be false there: LEFT FOR AFTER THE JOIN (recommendation: each label names its opener, "Elders" / "Alchemy preserving the grain" / "Fortification work on the defences", as a reworded part label read where it prints). The file's header line "as the record stores them and the Defense tab prints them" is stale for the same reason.
+
+**THE STRIP (a gap of the rule; one message to the chair, sent):** `foodGenerator.js :: cultureFoodwaysOf` = `filterDeclared([...rows], { … }).map((row) => String(lineText(row)))`: the text is taken AFTER the door has read the declarations. `stripSites` exempts a door only in the `pick(R).text` arm (`STRIP_DOORS`); the `.map(unwrap)` arm names the door's own result as a fresh receiver. Not banked, not reworded: red and named.
+
+---
+
 # COHERENCE-UPKEEP: the hand-back (the tenth seat, UPKEEP-10, 2026-11-14) — HANDED BACK at 05:2x UTC (the count read 324,521 one turn stale at 05:10; the chair's outer limit 05:35): items 1-4 DONE; the banked smith row CURED and shrunk (07e35278d); the packet row DONE (b2ce1adcb); BRIEF-UPKEEP-11 step 1 begun (the 28 fresh hits: seven classed by measure); its steps 1 (rest), 2, 4 and 5 LEFT
 
 **The lane:** `lane/coherence-upkeep-2026-11-12`. **Base of this seat:** 1bdf565ec (read back from origin before any work). **The brief:** `origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-UPKEEP-10.md` (self-contained; it carries the laws and the final statement's form). **The probes:** `docs/chair/2026-11-14/probes/UPKEEP-10/` (README there) beside UPKEEP-9's. **The births:** the lane's 1,490 (UPKEEP-9's `birthgz.mjs`) and CENSUS-2's 720.
