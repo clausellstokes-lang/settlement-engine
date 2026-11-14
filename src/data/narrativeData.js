@@ -164,7 +164,7 @@ export const STRESS_DESCS = {
     { text: r =>
       `${r}'s gates are shut and barred. The guards on them are professional about it, which makes it worse: nobody comes near without being challenged, and nothing is let through. Professional means they expect this to last.`, needs: ['gate', 'guardPresence'] }, // R2-CODE-A-10 (the bar's HIGH #35): a siege's gates are shut; it said them open, every cart searched
     { text: r =>
-      `From outside, ${r} still seems itself: smoke from cookfires, a murmur from the square. It is the gate that gives it away: shut fast, the guards' faces set, their talk stopping dead when strangers come in sight.`, needs: ['gate', 'market', 'guardPresence'] }, // R2-CODE-A-10 (#35): not ordinary from a road its besiegers hold; R2-CODE-A-12 (L46): under a siege no line hears a market trading
+      `From outside, ${r} still seems itself: smoke from cookfires, a murmur from the square. It is the gate that gives it away: shut fast, the guards' faces set, their talk stopping dead when strangers come in sight.`, needs: ['gate', 'market', 'tier: ≥ town', 'guardPresence'] }, // R2-CODE-A-10 (#35): not ordinary from a road its besiegers hold; R2-CODE-A-12 (L46): under a siege no line hears a market trading; the square is a town's (every market town holds one; no village does)
     { text: r =>
       `The approach to ${r} is quieter than it should be for a settlement this size. The outlying farms are empty. The road has not been maintained recently. The settlement itself is intact, but everything around it has been abandoned to the walls.`, needs: ['walls'] },
     // CONTENT-GT-FINAL (Charge 4): every pool below grew +2. Selection is a single
