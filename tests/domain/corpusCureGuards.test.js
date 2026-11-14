@@ -142,6 +142,9 @@ const GUARDS = [
   { seed: 'w5-city-under_siege+famine-1', pool: 'DS-DEF-5::walls PRESENT', vid: 1, why: 'a siege: "a stranger enters where the town intends him to" (v2 v4 v5 v7\'s condition) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
   { seed: 'rww-metropolis-under_siege-1', pool: 'DS-DEF-5::walls PRESENT', vid: 3, why: 'a siege: "arranges its day around the gates without noticing that it does" beside "gates are shut and barred" (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
   { seed: 'w5-city-under_siege+famine-1', pool: 'DS-DEF-5::FIXTURE: gates', vid: 4, why: 'a siege: "Whatever reaches X by road reaches it at a gate" (v1-v3\'s `no crisis: under_siege`) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
+  { seed: 'w5-city-monster_pressure-104', pool: 'DS-DEF-2::Beasts & Monsters: frontier, credible deterrence', vid: 1, why: 'a threat at hand: "The tally of raids ... is short" (v3\'s `no crisis: threat`) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
+  { seed: 'rww-metropolis-under_siege-1', pool: 'DS-DEF-2::Beasts & Monsters: frontier, credible deterrence', vid: 2, why: 'a siege: "ordinary rather than anxious" (v3\'s `no crisis: threat`) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
+  { seed: 'w5-city-occupied-1', pool: 'DS-DEF-2::Beasts & Monsters: frontier, credible deterrence', vid: 4, why: 'an occupation: "so far they are holding" of a town already taken (the inheritor of v1 v2, read before the push) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
 ];
 
 /** @param {string} seed */

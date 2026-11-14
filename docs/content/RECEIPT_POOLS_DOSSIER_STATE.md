@@ -2837,10 +2837,10 @@ supplies the ancestry.
 3. `[visitor]` Visitors to {settlement} sense the danger before anyone mentions it: there is no wall, no organised defence, and nothing arranged to meet what comes out of the country.
 
 **`Beasts & Monsters`: `frontier`, credible deterrence** {crisis-scoped}
-1. `[ledger · crisis: any]` The tally of raids at {settlement} is short for a frontier town: with a wall and armed people behind it, most of what comes out of the wild country turns back before it reaches the houses.
-2. `[street · crisis: any]` The town takes the frontier seriously and has taken it seriously long enough that the arrangements are ordinary rather than anxious.
+1. `[ledger · crisis: any · no crisis: threat]` The tally of raids at {settlement} is short for a frontier town: with a wall and armed people behind it, most of what comes out of the wild country turns back before it reaches the houses.
+2. `[street · crisis: any · no crisis: threat]` The town takes the frontier seriously and has taken it seriously long enough that the arrangements are ordinary rather than anxious.
 3. `[counterforce · crisis: any · no crisis: threat]` Very little reaches {settlement} out of the wild country, and the reason is that the arrangements are visible from a long way off.
-4. `[ledger · threat · crisis: any]` The arrangements that kept {settlement} safe on the frontier are being tested in earnest now, and so far they are holding.
+4. `[ledger · threat · crisis: any · no crisis: occupied]` The arrangements that kept {settlement} safe on the frontier are being tested in earnest now, and so far they are holding.
 
 **`Beasts & Monsters`: `frontier`, force without a perimeter** {colour}
 1. `[ledger]` {settlement} keeps armed people on an open frontier, which means the defense is reactive: whatever comes chooses where the fighting happens, and the town arrives afterwards.
