@@ -1,0 +1,52 @@
+=== root
+   27  occupation: invasion line of the town holding ("could be held"/"raiders stay away")   e.g. r2s-occupied-town-1 r2s-occupied-city-0 r2s-occupied-city-1 r2s-occupied-city-2
+   14  posture under occupation: ADEQUATE   e.g. r2s-occupied-town-1 r2s-occupied-town-3 r2s-occupied-city-1 r2s-occupied-city-3
+   39  posture under occupation: CRITICAL   e.g. r2r-thorp-1 r2r-thorp-24 r2r-thorp-27 r2r-thorp-40
+   10  posture under occupation: STRONG   e.g. r2s-occupied-city-2 r2s-occupied-metropolis-0 r2s-occupied-metropolis-3 rr3-city-occupied-rand-0
+   13  posture under occupation: WEAK   e.g. r2s-occupied-thorp-2 r2s-occupied-city-0 r2s-occupied-metropolis-1 rr3-thorp-occupied-rand-2
+   48  siege: invasion line of deterrence ("raiders stay away"/"think again"/"could be held")   e.g. r2r-metropolis-14 r2s-under_siege-thorp-2 r2s-under_siege-thorp-3 r2s-under_siege-city-0
+  263  strong posture (all)   e.g. r2r-town-9 r2r-town-10 r2r-town-13 r2r-town-51
+    1  strong posture beside "people rather than works"   e.g. r2r-town-10
+    9  strong posture beside guard on paper   e.g. r2r-city-36 r2r-metropolis-1 r2r-metropolis-9 r2r-metropolis-11
+  141  strong posture beside supply-short sentence   e.g. r2r-town-9 r2r-town-51 r2r-town-52 r2r-city-9
+    8  strong posture under famine   e.g. r2s-famine-city-2 r2s-famine-metropolis-1 rr3-city-famine-rand-2 rr3-city-famine-rand-3
+   10  strong posture under occupation   e.g. r2s-occupied-city-2 r2s-occupied-metropolis-0 r2s-occupied-metropolis-3 rr3-city-occupied-rand-0
+    5  strong posture under siege   e.g. r2s-under_siege-city-0 r2s-under_siege-metropolis-2 r2s-under_siege-metropolis-3 rr3-metropolis-under_siege-rand-2
+    2  strong v1 no walls   e.g. r2r-town-52 rr3-town-religious_conversion-rand-1
+    8  strong v2-4 under war   e.g. r2s-wartime-city-0 r2s-wartime-city-1 r2s-wartime-metropolis-0 r2s-wartime-metropolis-3
+   17  supplied clause under occupation   e.g. r2s-occupied-town-1 r2s-occupied-city-0 r2s-occupied-city-1 r2s-occupied-city-2
+   27  supplied clause under siege/famine   e.g. r2r-hamlet-16 r2r-city-44 r2s-under_siege-city-2 r2s-under_siege-city-3
+  217  watch-only town with an invasion sentence   e.g. r2r-village-25 r2r-village-40 r2r-village-45 r2r-town-0
+  114  watch-only town, beasts row silent   e.g. r2r-village-25 r2r-village-40 r2r-village-45 r2r-town-3
+=== base
+   48  held-perimeter beasts line in watch-only town   e.g. r2r-town-0 r2r-town-7 r2r-town-11 r2r-town-12
+   27  occupation: invasion line of the town holding ("could be held"/"raiders stay away")   e.g. r2s-occupied-town-1 r2s-occupied-city-0 r2s-occupied-city-1 r2s-occupied-city-2
+   10  posture under occupation: ADEQUATE   e.g. r2s-occupied-town-1 r2s-occupied-town-3 r2s-occupied-city-1 r2s-occupied-city-3
+   20  posture under occupation: CRITICAL   e.g. r2r-thorp-1 r2r-thorp-27 r2s-occupied-thorp-0 r2s-occupied-hamlet-0
+   14  posture under occupation: STRONG   e.g. r2s-occupied-city-2 r2s-occupied-metropolis-0 r2s-occupied-metropolis-3 rr3-town-occupied-rand-1
+   32  posture under occupation: WEAK   e.g. r2r-thorp-24 r2r-thorp-40 r2s-occupied-thorp-1 r2s-occupied-thorp-2
+   52  siege: invasion line of deterrence ("raiders stay away"/"think again"/"could be held")   e.g. r2r-metropolis-14 r2s-under_siege-thorp-2 r2s-under_siege-thorp-3 r2s-under_siege-town-3
+  369  strong posture (all)   e.g. r2r-town-6 r2r-town-9 r2r-town-10 r2r-town-13
+    2  strong posture beside "people rather than works"   e.g. r2r-town-10 rr3-town-occupied-rand-1
+    2  strong posture beside Weak/Critical bar   e.g. rr3-town-occupied-rand-1 rr3-metropolis-occupied-rand-2
+   32  strong posture beside guard on paper   e.g. r2r-city-2 r2r-city-15 r2r-city-36 r2r-city-48
+  203  strong posture beside supply-short sentence   e.g. r2r-town-6 r2r-town-9 r2r-town-36 r2r-town-51
+   14  strong posture under famine   e.g. r2s-famine-town-1 r2s-famine-city-2 r2s-famine-metropolis-1 rr3-town-famine-port-0
+   14  strong posture under occupation   e.g. r2s-occupied-city-2 r2s-occupied-metropolis-0 r2s-occupied-metropolis-3 rr3-town-occupied-rand-1
+    3  strong v1 no walls   e.g. r2r-town-52 rr3-town-occupied-rand-1 rr3-town-religious_conversion-rand-1
+   18  supplied clause under occupation   e.g. r2s-occupied-town-1 r2s-occupied-town-2 r2s-occupied-city-0 r2s-occupied-city-1
+   33  supplied clause under siege/famine   e.g. r2r-hamlet-16 r2r-city-44 r2s-under_siege-town-3 r2s-under_siege-city-2
+  139  townsfolk/household invasion line without militia/levy   e.g. r2r-village-40 r2r-town-0 r2r-town-1 r2r-town-3
+  139  watch-only town with an invasion sentence   e.g. r2r-village-40 r2r-town-0 r2r-town-1 r2r-town-3
+   72  watch-only town, beasts row silent   e.g. r2r-town-2 r2r-town-4 r2r-town-5 r2r-town-21
+=== tip
+   27  occupation: invasion line of the town holding ("could be held"/"raiders stay away")   e.g. r2s-occupied-town-1 r2s-occupied-city-0 r2s-occupied-city-1 r2s-occupied-city-2
+   12  posture under occupation: ADEQUATE   e.g. r2s-occupied-town-1 r2s-occupied-town-3 r2s-occupied-city-1 r2s-occupied-city-3
+   20  posture under occupation: CRITICAL   e.g. r2r-thorp-1 r2r-thorp-27 r2s-occupied-thorp-0 r2s-occupied-hamlet-0
+   32  posture under occupation: WEAK   e.g. r2r-thorp-24 r2r-thorp-40 r2s-occupied-thorp-1 r2s-occupied-thorp-2
+   48  siege: invasion line of deterrence ("raiders stay away"/"think again"/"could be held")   e.g. r2r-metropolis-14 r2s-under_siege-thorp-2 r2s-under_siege-thorp-3 r2s-under_siege-city-0
+  151  strong posture (all)   e.g. r2r-town-6 r2r-town-10 r2r-town-13 r2r-town-34
+    1  strong posture beside "people rather than works"   e.g. r2r-town-10
+    5  strong posture under famine   e.g. r2s-famine-town-1 rr3-town-famine-port-0 rr3-city-famine-rand-2 rr3-city-famine-rand-3
+   17  supplied clause under occupation   e.g. r2s-occupied-town-1 r2s-occupied-city-0 r2s-occupied-city-1 r2s-occupied-city-2
+  207  watch-only town, beasts row silent   e.g. r2r-village-40 r2r-town-0 r2r-town-1 r2r-town-2

@@ -1,0 +1,5 @@
+2	posture.posture CHANGED
+216	posture.posture GONE
+135	threat.beasts GONE
+27	threat.invasion CHANGED
+139	threat.invasion GONE

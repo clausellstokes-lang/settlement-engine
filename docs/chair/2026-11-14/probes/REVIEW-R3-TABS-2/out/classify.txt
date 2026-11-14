@@ -1,0 +1,5 @@
+threat.invasion CHANGED 27 {"noWatchOrGarrison+famine":1,"famine":8,"guardOnPaper+siege":3,"siege":7,"guardOnPaper+famine":2,"noWalls+siege+famine":1,"guardOnPaper+siege+famine":1,"siege+famine":4}
+threat.beasts GONE 135 {"watchOnlyWalled":109,"guardOnPaper+watchOnlyWalled":20,"occupied+guardOnPaper+watchOnlyWalled":3,"occupied+watchOnlyWalled":3}
+threat.invasion GONE 139 {"watchOnlyWalled":83,"watchOnlyWalled+barWeak":19,"guardOnPaper+watchOnlyWalled":9,"guardOnPaper+watchOnlyWalled+barWeak":7,"watchOnlyWalled+siege":2,"watchOnlyWalled+famine":5,"occupied+guardOnPaper+watchOnlyWalled+barWeak":4,"occupied+watchOnlyWalled+barWeak":3,"guardOnPaper+watchOnlyWalled+siege":1,"guardOnPaper+watchOnlyWalled+famine+barWeak":2,"watchOnlyWalled+siege+famine+barWeak":3,"guardOnPaper+watchOnlyWalled+siege+famine+barWeak":1}
+posture.posture GONE 216 {"supplyShort":173,"guardOnPaper+supplyShort":16,"guardOnPaper":14,"occupied":8,"occupied+supplyShort":4,"guardOnPaper+watchOnlyWalled":1}
+posture.posture CHANGED 2 {"occupied":1,"occupied+guardOnPaper+supplyShort":1}

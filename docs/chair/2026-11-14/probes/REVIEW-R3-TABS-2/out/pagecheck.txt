@@ -1,0 +1,8 @@
+{
+  'threat.invasion CHANGED': { tipOnPage: 27, tipMissing: 0, baseGone: 27, baseStill: 0 },
+  'threat.beasts GONE': { tipOnPage: 0, tipMissing: 0, baseGone: 135, baseStill: 0 },
+  'threat.invasion GONE': { tipOnPage: 0, tipMissing: 0, baseGone: 139, baseStill: 0 },
+  'posture.posture GONE': { tipOnPage: 0, tipMissing: 0, baseGone: 216, baseStill: 0 },
+  'posture.posture CHANGED': { tipOnPage: 2, tipMissing: 0, baseGone: 2, baseStill: 0 }
+}
+pages 1536 strong posture on a page whose military status reads Under occupation: 0
