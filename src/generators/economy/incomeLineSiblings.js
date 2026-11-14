@@ -127,9 +127,10 @@ export const INCOME_STATE_SIBLINGS = Object.freeze({
  * The income line the finished record makes true: the original, its declared twin, or ''.
  * @param {string} desc the line the branch printed
  * @param {{ roster: ReadonlyArray<string>, besieged: boolean, imports: ReadonlyArray<unknown>, exports: ReadonlyArray<unknown>,
- *   chains: ReadonlyArray<{ chainId?: unknown, status?: unknown }>, top: boolean, source?: string, managedForest?: boolean }} f the
- *   roster's names lower-cased; the siege; the final trade lists; the chains with their states; whether the row is the
- *   largest source; its source label; whether a managed or shipbuilding forest stands
+ *   chains: ReadonlyArray<{ chainId?: unknown, status?: unknown }>, top: boolean, source?: string, managedForest?: boolean,
+ *   grainFailed?: boolean }} f the roster's names lower-cased; the siege; the final trade lists; the chains with their
+ *   states; whether the row is the largest source; its source label; whether a managed or shipbuilding forest stands;
+ *   whether the food record names grain as the source a famine failed
  * @returns {string}
  */
 export function trueIncomeDesc(desc, f) {
@@ -151,6 +152,9 @@ export function trueIncomeDesc(desc, f) {
       return f.besieged || !bought(/\biron\b/i) ? METAL_WORKED_LINE : desc;
     case LOCAL_COAL_SOLD_LINE: return f.besieged || !sold(/^coal\b/i) ? '' : desc;
     case GRAIN_BOUGHT_LINE: return f.besieged || !bought(/\bgrain\b/i) ? '' : desc;
+    // UPKEEP-10 (the eighth seat's LEFT 1 (a); #ww-339, #ww-1357): "none is left to sell to other settlements" is false
+    // where grain or flour is sold out, and the own fields' grain is not sold where its harvest failed: no sentence.
+    case GRAIN_OWN_FIELDS_LINE: return f.grainFailed || sold(/\b(?:grain|flour)\b/i) ? '' : desc;
     case WOOL_LOCAL_LINE:
       if (impaired(['textiles'])) return CLOTH_SHORT_LINE;
       if (has(/weav/) && has(/fuller/) && !f.besieged) return desc;

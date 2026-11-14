@@ -19,7 +19,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import {
   ALCHEMY_TRADE_LINE, GRAIN_BOUGHT_LINE, IRON_IMPORTED_LINE, LOCAL_COAL_LINE, LOCAL_COAL_SOLD_LINE, QUARRY_LINE, FISH_EXPORT_LINE,
   WOOL_LOCAL_LINE, TITHES_RENTS_LINE, TITHES_RENTS_PLAIN_LINE, REMEDIES_SHORT_LINE, METAL_WORKED_LINE, WOOL_LOCAL_WORKED_LINE,
-  ALCHEMY_UNDER_SIEGE_LINE, INCOME_STATE_SIBLINGS, SIEGE_CLOSED_SOURCES,
+  ALCHEMY_UNDER_SIEGE_LINE, INCOME_STATE_SIBLINGS, SIEGE_CLOSED_SOURCES, GRAIN_OWN_FIELDS_LINE,
 } from '../../src/generators/economy/incomeLineSiblings.js';
 
 beforeAll(async () => { await loadGenerationLawPayloads(); });
@@ -103,5 +103,46 @@ describe('the declarations', () => {
     for (const name of ['ALCHEMY_TRADE_LINE', 'ALCHEMIST_SUPPLEMENTS_LINE', 'GRAIN_BOUGHT_LINE', 'WOOL_LOCAL_LINE', 'WOOL_BOUGHT_LINE', 'LOCAL_ORE_LINE', 'IRON_IMPORTED_LINE', 'FISH_EXPORT_LINE', 'QUARRY_LINE', 'MASONS_LINE', 'TIMBER_LINE', 'TIMBER_BOUGHT_LINE']) {
       expect(site, name).toMatch(new RegExp(`\\b${name}\\b,?(?:\\s*//.*)?$`, 'm'));
     }
+  });
+});
+
+/**
+ * UPKEEP-10, THE GRAIN LINE (the eighth seat's LEFT 1 (a); the chair, 2026-11-14 00:20; #ww-339, #ww-1357). The
+ * own-fields twin says the town's grain is "sold within the settlement ... none is left to sell to other
+ * settlements". It was chosen wherever the grain line stood and the food record held no surplus, and read neither a
+ * failed grain harvest nor a grain or flour export. `trueIncomeDesc` now gives it no sentence where the food record
+ * names grain as the failed source or the final export list sells grain or flour: the row prints its source and share
+ * alone (silence, not a false sentence). Red at the lane's tip 1bdf565ec.
+ */
+describe('the grain line: none left to sell, only where none is sold and the harvest stands', () => {
+  const GRAIN_SOLD_OUT = /\b(?:grain|flour)\b/i;
+  const grainRow = (s) => (s.economicState?.incomeSources || []).find((e) => e.source === 'Grain Sales');
+  test("the reader's towns (#ww-339: the grain harvest failed, flour sold out; #ww-1357: flour sold out) and a calm town selling flour: the line does not print", () => {
+    for (const seed of ['rww-metropolis-famine-1', 'rww-city-recently_betrayed-1', 'rr2s-town-calm-rand-1']) {
+      const s = birth(seed);
+      expect(grainRow(s)?.desc, seed).toBe(''); // the Grain Sales row stands, with no sentence
+      expect(lines(s), seed).not.toContain(GRAIN_OWN_FIELDS_LINE); // anchored: the row was asserted present above
+    }
+  });
+  test('the anchor: a city under a siege, no flour sold and the harvest standing, keeps the line', () => {
+    const seed = 'rv2-under_siege-city-0'; // the lane's 1,490 (UPKEEP-8's shape: no randomized priorities)
+    const s = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'city', selectedStresses: ['under_siege'], selectedStressesRandom: false }), null, { seed, customContent: {} });
+    expect(s.economicState.foodSecurity.foodRecord.failedSource).not.toBe('grain');
+    expect(s.economicState.primaryExports.some((x) => GRAIN_SOLD_OUT.test(String(x)))).toBe(false);
+    expect(grainRow(s)?.desc).toBe(GRAIN_OWN_FIELDS_LINE);
+  });
+  test('the law, over births of every crisis: the line never stands beside a failed grain harvest or grain or flour sold out', () => {
+    const CRISES = ['calm', 'famine', 'wartime', 'under_siege', 'recently_betrayed', 'indebted'];
+    const seeds = ['town', 'city', 'metropolis'].flatMap((t) => CRISES.flatMap((c) => [40, 41, 42, 43].map((i) => `rr2s-${t}-${c}-rand-${i}`)));
+    let silenced = 0;
+    expectNoSeedFailures(collectSeedFailures(seeds, (seed) => {
+      const s = birth(seed);
+      const row = grainRow(s);
+      if (!row) return;
+      const failed = s.economicState.foodSecurity?.foodRecord?.failedSource === 'grain';
+      const soldOut = (s.economicState.primaryExports || []).some((x) => GRAIN_SOLD_OUT.test(String(x)));
+      if (failed || soldOut) { silenced++; expect(row.desc, `${seed}: failed=${failed} soldOut=${soldOut}`).not.toBe(GRAIN_OWN_FIELDS_LINE); }
+    }));
+    expect(silenced, 'a failed grain harvest or a flour export was read beside a grain row').toBeGreaterThan(0);
   });
 });
