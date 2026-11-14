@@ -138,7 +138,21 @@ function holderWords(s, row) {
     const house = str(firstRankMembershipOf(npc, powerOrderOf(s))?.power);
     return house ? `${row.name} of ${house}` : row.name;
   }
-  return row.kind === 'institution' ? `the ${row.name}` : row.name;
+  // ROUND THREE item 4 (the chair's ruling): a hook names a house through houseInProse, never raw.
+  return row.kind === 'institution' ? `the ${houseInProse(row.name)}` : row.name;
+}
+
+/**
+ * ROUND THREE item 4, ruling (c) (the third seat's named twin: "the houses of worship is stirring it"): every
+ * LINE_ROLE_CLAUSE verb is singular, so a house whose label is a plural ("Houses of worship", "Inns and taverns") holds
+ * no clause: the cast hook is not written for it (the lever hook is unchanged). The head is the label before " of ", and a
+ * pair joined by "and" is plural; the head word's plural is the powers' own reader (`pluralPowerName`). No draw.
+ * @param {CastRow} row @returns {boolean}
+ */
+function pluralHouseHolder(row) {
+  if (row.kind !== 'institution') return false;
+  const head = houseInProse(row.name).split(/\s+of\s+/i)[0];
+  return /\sand\s/i.test(head) || pluralPowerName(head);
 }
 
 /** @param {CastRow} row */
@@ -243,7 +257,7 @@ export function crisisHooksOf(settlement, entry, facts = settlementHookFacts(set
       facts: () => factsOf(settlement), poolId: `LINE_ROLE_CLAUSE.${holder.role}`, surface: 'crisis',
     }).line)
     : null;
-  if (holder && clauseOf && str(holder.reason)) {
+  if (holder && clauseOf && str(holder.reason) && !pluralHouseHolder(holder)) {
     const text = speakTrue((n) => castSentence(n, clauseOf(holderWords(s, holder)), holder.reason), noun, facts);
     if (text) out.push({ text, bound: 'cast', link: linkOf(holder) });
   }

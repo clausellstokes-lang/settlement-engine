@@ -167,7 +167,7 @@ const BEFORE = Object.freeze([
   'da1b4d690f6aa55f', // 48
   '2e73d1fbd65b1ec9', // 49
   '34905d324cd39c8b', // 50
-  '39d44e28765b82f8', // 51
+  'bdc2ad8594575c67', // 51 — re-keyed by identity (R2-CODE-B-4, ROUND THREE item 4): the crisis cast's reasons only (stress/stressors .cast.roles[].reason, .cast.stakes[].reason: the empty seat), measured by this file's own loop at the lane tip db61f66fc against item 4; not the budget
   '7d97c4b3e2476f6f', // 52
   '0cbade26d7f28efe', // 53
   'f14efc2d652b5229', // 54

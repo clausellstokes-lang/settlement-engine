@@ -40,6 +40,7 @@ import { CAST_EDIT_PATH, CAST_EDIT_SEPARATOR } from '../userEditLines.js';
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
 import { firstRankMembershipOf, membersByRank, membershipsOf, powerOrderOf } from '../people/membership.js';
 import { allegianceOf } from '../people/allegiance.js'; // ALLEGIANCE-CAR1: the hidden allegiance's one reader (J-1)
+import { isSeatVacant } from '../people/seatKeeper.js'; // ROUND THREE item 4: the empty seat's one home
 
 // ── The tuning (the owner's dials; docs/DESIGN_CRISIS_TAB.md "Open for the owner's veto") ──
 
@@ -492,6 +493,15 @@ export function deriveStakes(s, kind) {
   const systems = catalogFor(kind).affectedSystems;
   const nature = natureOf(kind);
   const scarce = kind === 'famine' ? /grain|food|granar|harvest/i : kind === 'plague_onset' ? /heal|apothec|physic/i : null;
+  // ROUND THREE item 4 (the cut's #864 "Grain Holders gains · holds what the crisis makes scarce" where the city granaries'
+  // face sits in another power): a power HOLDS what the crisis makes scarce only where one of its members faces a house of
+  // that kind (the record's `institution.key`), never by its name alone. A refused reason falls to the next rule; no draw.
+  /** @param {string} fname */
+  const holdsScarce = (fname) => !!scarce && membersOf(s, fname).some((n) => n.institution?.kind === 'house' && scarce.test(str(n.institution?.key)));
+  // ROUND THREE item 4 (the increment's rows on rpf-town-succession_void-13, rpf-village-succession_void-13): where the
+  // seat stands empty (people/seatKeeper.js :: isSeatVacant) no one holds it, so the rival is not said to outweigh its
+  // holder: its stake is the rival claim to govern (`gainsClaim`).
+  const seatEmpty = isSeatVacant(s);
   return factions.map((f) => {
     const name = factionName(f);
     const arch = factionArchetype(f);
@@ -499,8 +509,8 @@ export function deriveStakes(s, kind) {
     /** @type {string | null} */
     let gains = null;
     if (isOccupier(f) && kind === 'occupied') gains = STAKE_REASONS.gainsOccupier;
-    else if (scarce && scarce.test(name)) gains = STAKE_REASONS.gainsHolds;
-    else if ((nature === 'social' || nature === 'engineered') && name === rival) gains = STAKE_REASONS.gainsRival;
+    else if (scarce && scarce.test(name) && holdsScarce(name)) gains = STAKE_REASONS.gainsHolds;
+    else if ((nature === 'social' || nature === 'engineered') && name === rival) gains = seatEmpty ? STAKE_REASONS.gainsClaim : STAKE_REASONS.gainsRival;
     else if (nature === 'social' && !isGov && arch === A.GOVERNMENT) gains = STAKE_REASONS.gainsClaim;
     else if (arch === A.CRIMINAL && (systems.includes('criminal_opportunity') || numOf(/** @type {{ crimMultiplier?: unknown }} */ (pl).crimMultiplier) > 1)) gains = STAKE_REASONS.gainsCrime;
     else if (arch === A.MILITARY && pl.isLegitimacyCrisis) gains = STAKE_REASONS.gainsVacuum;
@@ -608,8 +618,10 @@ export function deriveLevers(s, kind) {
   // (domain/content/customContentSemanticAuthority.js), so it is read through
   // `nativeSemanticName` exactly as the services generator reads it: a bespoke hall called
   // "State Granary" grants no famine lever.
+  // ROUND THREE item 4 (record 375, the chair's ruling): an "Access to …" row ("Access to parish church", "Access to external
+  // mill") is the town's road to another place's house, not a house here: it is never a lever.
   const houses = liveInstitutions(s)
-    .filter((i) => !!i && lever.house.test(nativeSemanticName(i)));
+    .filter((i) => !!i && !/^access to\b/i.test(str(i.name)) && lever.house.test(nativeSemanticName(i)));
   const seen = new Set();
   /** @type {CastLever[]} */
   const out = [];
@@ -664,16 +676,23 @@ export function instigatorCandidates(s, kind, stakes) {
     .map((k) => factions.find((f) => factionName(f) === k.factionId))
     .filter((f) => !!f)
     .sort((a, b) => numOf(/** @type {CastFaction} */ (b).power) - numOf(/** @type {CastFaction} */ (a).power));
+  // ROUND THREE item 4: "already carries more weight than whoever holds the seat" only where someone holds it; under an
+  // empty seat the rival is named by what it gains (`instigatorGains`), and so ONLY where its stake IS gains (the rival
+  // claim, deriveStakes): a rival that gains and loses at once ('split') is no instigator by this rule there, and the
+  // gainers follow in their own order (castDerived's "a power-drawn person holds a membership of that relation"). No draw.
+  const seatEmpty = isSeatVacant(s);
+  const rivalReason = seatEmpty ? CAST_REASONS.instigatorGains : CAST_REASONS.instigatorRival;
+  const rivalGains = stakes.some((k) => k.factionId === rival && k.stake === 'gains');
   /** @type {Array<{ f: CastFaction, reason: string }>} */
   const picks = [];
   if (nature === 'engineered') {
     const g = /** @type {CastFaction[]} */ (gainers);
     const r = g.find((f) => factionName(f) === rival);
-    if (r) picks.push({ f: r, reason: CAST_REASONS.instigatorRival });
+    if (r) picks.push({ f: r, reason: rivalReason });
     for (const f of g) if (f !== r) picks.push({ f, reason: CAST_REASONS.instigatorGains });
   } else {
-    const r = rival ? factions.find((f) => factionName(f) === rival) : null;
-    if (r) picks.push({ f: r, reason: CAST_REASONS.instigatorRival });
+    const r = rival && (!seatEmpty || rivalGains) ? factions.find((f) => factionName(f) === rival) : null;
+    if (r) picks.push({ f: r, reason: rivalReason });
     for (const f of /** @type {CastFaction[]} */ (gainers)) if (f !== r) picks.push({ f, reason: CAST_REASONS.instigatorGains });
   }
   /** @type {CastRow[]} */
