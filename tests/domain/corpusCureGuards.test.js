@@ -118,6 +118,8 @@ const GUARDS = [
   { seed: 'w5-hamlet-occupied-1', pool: 'DS-DEF-5::NO organized force at all', vid: 1, why: 'an occupation: "Defense here is individual armed citizens" where the occupiers\' troops stand (HANDBACK-6, Ulfas)' },
   { seed: 'w5-thorp-occupied-102', pool: 'DS-DEF-5::NO organized force at all', vid: 2, why: 'an occupation: "If X were attacked, its people would fight with no leaders" of a place already taken (v1\'s sibling)' },
   { seed: 'w5-hamlet-occupied-104', pool: 'DS-DEF-5::NO organized force at all', vid: 3, why: 'an occupation: "Nobody ... is responsible for defending the town" beside the occupiers\' troops (HANDBACK-6, Ulfas, w5-hamlet-occupied-104)' },
+  { seed: 'w5-town-occupied-3', pool: 'DS-DEF-2::Beasts & Monsters: settled, defenses beyond the need', vid: 4, why: 'an occupation: "the threat now at hand is testing them in earnest" of works the occupiers already hold (W2-WRITE-11, Hochsteig)' },
+  { seed: 'w5-city-occupied-104', pool: 'DS-DEF-2::Beasts & Monsters: settled, defenses beyond the need', vid: 5, why: 'an occupation: "works manned in earnest ... being held against something real" of a city an army holds (W2-WRITE-11)' },
 ];
 
 /** @param {string} seed */

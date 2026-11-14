@@ -1003,6 +1003,7 @@
       "declares": [],
       "lineDeclares": {
         "crisis: any": 5,
+        "no crisis: occupied": 2,
         "no crisis: unrest": 1,
         "no threat": 3,
         "threat": 2

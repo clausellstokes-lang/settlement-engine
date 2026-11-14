@@ -744,7 +744,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "angle": "ledger",
           "marks": [
             "threat",
-            "crisis: any"
+            "crisis: any",
+            "no crisis: occupied"
           ],
           "text": "{settlement}'s works were seldom tested by the settled country around it, and the threat now at hand is testing them in earnest.",
           "slots": [
@@ -756,7 +757,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "angle": "visitor",
           "marks": [
             "threat",
-            "crisis: any"
+            "crisis: any",
+            "no crisis: occupied"
           ],
           "text": "You find {settlement}'s works manned in earnest now; what was built against nothing in particular is being held against something real.",
           "slots": [
