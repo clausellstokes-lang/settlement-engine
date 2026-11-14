@@ -145,3 +145,100 @@ docs/chair/2026-11-14/probes/REVIEW-W2-C-LEAVES`); seeds = `seeds-all.txt`'s r2r
 famine, occupied, under_siege, under_siege+famine + `seeds-extra.txt` (772); `render.sh <tree> <out> <seeds> 3` (~18
 min), `surfaces.sh`, then my `measure.sh <tree> <records> <out> <seeds>` + `RECS=<records> node agg.mjs <facts> <dumps> <surfaces> <seeds>` (they are in this file's sibling directory
 `docs/chair/2026-11-14/probes/SURFACES-1/`).
+
+# SURFACES-2
+
+Seat SURFACES-2, session session_01ACmDYWwpmJS8jPaa4wcw8v; chair session_01ACmDYZrFEVXyZEUg1NDxxC. Branch
+`lane/join-surfaces-2026-11-14`, read back at 24251bd88 at the start (as the brief said). Merges of the joined line
+into the lane: c2c12792e (9e47f912a, the first act), fe6386f83 (a2df276b0, once w2-fix-data's IdentityDailyLife.jsx
+change had landed), 333f91edc (c63241707, before the food word's push). Every merge clean but one import line in
+`src/pdf/sections/IdentityDailyLife.jsx` (re-applying my cure over w2-fix-data's Architecture row): both kept.
+
+## The rulings this seat works to (the chair's brief of 2026-11-14; each vetoable by the owner)
+
+- (r1) REGISTERS ARE RE-DERIVED ONCE, AT THE CLOSE, ON THE FINAL TREE: no census, no baseline re-taken after a cure, no
+  bundle rebuilt; a register a cure makes stale is NAMED (file; the title that reds; the commit); never banked, never
+  raised, never hand-edited. After every cure: the three fast gates, the presumed-things walker (fresh hits against the
+  base's), the test files that name the touched files. THE LIGHTING CENSUS IS NOT RE-TAKEN (item 0 changed): a NAMED RED.
+- (r2) THE FOOD WORD HAS ONE HOME, MEASURED BEFORE TRUSTED: ten of the 159 read first; if the band is the false side in
+  more than two of ten, STOP with the table; else one leaf, one call line at the Overview's Food Security row, the
+  Foundations row and the PDF's Identity block; the Identity block's Deficit/Surplus/Balanced goes; the colour follows
+  the word; a guard rendering the Overview, the Foundations row, the PDF's Identity and Tonight page and the journal in
+  a siege, a famine and an occupied town, each arm red alone; one message to the chair when pushed.
+- (r3) THE OTHER SPELLING (165 towns, "River fisheries" / "River fish"): THE TAB'S WORD GOVERNS; the PDF and the
+  journal print the pill through the leaf the tab prints it with.
+- (r4) "Abundant" under a siege: THE PDF PRINTS THE GROUPS THE TAB PRINTS, through the tab's reader.
+- (r5) The Defence chapter's twins: `DefenseSecurity.jsx` prints a force's name raw and a provenance chip (REQ,
+  FORCED) the Defense tab no longer prints: the same two cures through the tab's leaves; the PDF's medical line
+  ("Major monasteries (5-10).") through the house-label leaf.
+- (r6) The History tab's and the Overview's tension rows print a catalogue bracket ("Taverns (5-20)"): through
+  `houseLabelsInText`, as the PDF's History does.
+- One row more (the chair's first message): Systems Health prints "Safety" WITH NO VALUE in 28 thorps
+  (`OverviewTab.jsx`, the Safety StatusTag): the tag prints the record's band or the row is left out; its own commit,
+  after the food word.
+
+## Item 1: THE FOOD WORD — DONE, 8251e0165 (pushed in c63241707)
+
+- MEASURED FIRST, the ten of the 159 (stored label / band; the page's own words): r2r-thorp-4 calm (Secure/Pressured;
+  Short 1 lbs/day, "A few households still go short"), r2r-hamlet-53 wartime (its own Crisis page "Food: Pressured"),
+  r2r-village-23 (Short 22/542), r2r-town-17 (Short 31/3,116, six months of grain), r2r-city-16 (Short 269/28,064, nine
+  months), r2r-thorp-24 occupied ("the food has to stretch about a fifth further"), r2s-occupied-metropolis-3 (the same,
+  fifteen months), r2s-under_siege-hamlet-2 and r2s-under_siege-metropolis-1 (Import-Dependent/Deficit: "No food comes
+  in by trade ... Many households go short"), r2s-wartime-thorp-3 (Import-Dependent/Deficit, "No food comes in by
+  trade", Short 2/12). THE BAND IS TRUE IN 10 OF 10 (two thin: town-17 and city-16). The 159 are 152 Secure/Pressured
+  (a gap > 0 under a secure band) and 7 Import-Dependent/Deficit (no import under a siege or a war). NO FAMINE TOWN IS
+  AMONG THE 159: a famine's band is its stored label (0 of 49).
+- CURE: `src/domain/display/foodWordShown.js` (the band's word and colour; a record with no band keeps its stored label
+  and colour; null where neither); one call line in `OverviewTab.jsx` (word and the bar's colour; the bar keeps
+  `resilienceScore`), `SubstrateTab.jsx :: foodRecordWord`, `IdentityDailyLife.jsx` (the band's word or no Food row).
+- COUNTS (772 births, records born at 9e47f912a; `probes/SURFACES-2/food.census.jsx`, every surface rendered): Overview
+  159 -> 0; Foundations 159 -> 0; PDF Identity 729 -> 0; PDF Tonight 0; journal Tonight 0; colours off the word 0.
+- GUARD: `tests/pdf/foodWordEverySurface.test.jsx`. Red first 3 of 3 at the base; each of the three sites uncured
+  alone reds its own arm (plants in a detached tree, not committed).
+- RE-KEYED BY IDENTITY (the home moved by (r2)): `tests/components/dossierLabelCase.test.jsx` (the case pin's fixture
+  carries the band it re-cases), `tests/generators/foodSurplusResidue.test.jsx` soak1k-5 (Pressured where Secure
+  stood; "not Surplus" kept), `tests/pdf/sections.smoke.test.js` IdentityDailyLife (the struck vocabulary asserted
+  absent; the callout's verdicts kept; a new title: the row prints the band), `tests/lint/chartProportionCensus.walker.
+  test.js` row `overview-food-security-bar` (its figure `eco.foodSecurity.label` -> `foodWord.label`; the same pair, the
+  same verdict; the bar's drawn expression kept verbatim).
+- GATES: domain-strict 1113/1113; type ratchet 167/167; eslint clean; the presumed-things door prints the base's 155
+  lines; the grid 0 rises, 0 falls; the 64 test files naming the touched files: the same 9 reds as the merged base
+  a2df276b0, byte-identical (proseNumerics, rawColorLiteral 1209/1206, sourceCitationIntegrity ARM 2, writerReach x6).
+
+## Every new or changed word on a surface (the owner's veto list)
+
+| surface | before | after | towns read |
+|---|---|---|---|
+| Overview "Food Security", Foundations "Food" | the stored label: "Secure", "Import-dependent" | the band: "Pressured", "Deficit" (152 + 7 towns) | r2r-thorp-24, r2s-under_siege-metropolis-1, r2s-under_siege-hamlet-2, r2r-thorp-4 |
+| PDF Identity "Food" | "Deficit" / "Surplus" / "Balanced" | the band's word ("Secure", "Pressured", "Deficit — Active Famine" ...) | r2r-thorp-24 (Deficit -> Pressured), r2r-hamlet-16 (Deficit -> Deficit — Active Famine), r2r-thorp-0 (Surplus -> Secure) |
+
+## Registers named stale (r1)
+
+- `tests/lint/sovereigntyLightingContract.walker.test.js` "THE CENSUS IS AN ASSERTION": red at the joined tip before me
+  (the first seat's finding); my new test file `tests/pdf/foodWordEverySurface.test.jsx` adds to what a re-take will
+  count. Not re-taken (r1).
+
+## Found, not cured
+
+- The journal's Economics "Food:" row (`journalPages.js :: economicsPage`, `fb.display`) prints the second vocabulary
+  ("Surplus \+1", "Balanced", "Deficit −N (N% of need)") in 729 of 772: the journal twin of the PDF's food block. Taken
+  with item 2 (the PDF's deficit against the tab's Short), where both read the tab's leaf.
+- The PDF's Daily Life FOOD BALANCE callout (printed where no AI passage is) keeps its own tri-state verdict off the
+  view's figures ("More is grown ... The local food supply is reliable"): a sentence, not the food word; item 2's.
+- r2s-wartime-thorp-3: the economy prose "A substantial part of what Madinatsaray eats is bought rather than grown"
+  beside the food block's "No food comes into Madinatsaray by trade". Not this lane's word.
+- (r5) is partly on the joined line now: the merge of 333f91edc brought `tests/pdf/defenseForceNamesLabelled.test.jsx`
+  (UPKEEP-14's cure of the raw force name); to be measured at (r5) before any change.
+
+## What is left, line by line
+
+1. The Safety row (28 thorps, no value): its own commit. NEXT.
+2. Item 2: the PDF's deficit against the tab's Short (253) and the journal's Economics "Food:" row (729).
+3. (r3) the other spelling (165); (r4) "Abundant" under a siege (56); (r5); (r6); item 6 the stores' unit (6); item 7
+   the connectivity row (with a system state).
+4. THE SWEEP, once, at the end, at the tip after the last merge of the joined line.
+
+HOW THE INSTRUMENTS ARE RE-MADE: `probes/SURFACES-2/` (seeds772.txt: the first seat's 772, rebuilt as its hand-back
+says, rr3 crisis lines taken as NR%4==1); records by the first seat's `render.sh <tree> <out> seeds772.txt 3` (~35
+min at 3 workers); then `sh food.sh <tree> <records> <out> seeds772.txt` (~8 min) and `node foodagg.mjs
+<out>/food.jsonl`; `node foodlist.mjs <tree> <records>` lists the stored-label/band towns.
