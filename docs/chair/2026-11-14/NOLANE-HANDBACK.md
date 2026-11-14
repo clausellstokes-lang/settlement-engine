@@ -4,7 +4,12 @@ Seat NOLANE-1, brief `origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/
 
 ## The laws worked to
 
-The brief's, as written: a line that names a house, role, practice or force reads the roster; a line that presumes normal times reads the crisis in force; a line written for a town's size is not printed in a thorp; two lines on one page read one fact; two things a page says are set apart; no surface prints a catalogue name's bracket, a stored key or the machinery; a tie has one direction; a note on a chain names the ground the chain works and a tradition the town holds. Where no true line exists, the line is silent. A cure in generator or data code is a declared move; the defence rating is fenced (`src/domain/magicReliance.js` is measured and named, never changed). No chair ruling has arrived since the brief.
+The brief's, as written: a line that names a house, role, practice or force reads the roster; a line that presumes normal times reads the crisis in force; a line written for a town's size is not printed in a thorp; two lines on one page read one fact; two things a page says are set apart; no surface prints a catalogue name's bracket, a stored key or the machinery; a tie has one direction; a note on a chain names the ground the chain works and a tradition the town holds. Where no true line exists, the line is silent. A cure in generator or data code is a declared move; the defence rating is fenced (`src/domain/magicReliance.js` is measured and named, never changed). THE CHAIR'S RULINGS (12:19, 2026-11-14; each vetoable by the owner):
+
+1. **R2B-979.** A WORD IS PRINTED UNDER THE NAME OF WHAT IT MEASURES. The standing word (established, marginal, commanding) leaves the disposition list. It prints as the person's STANDING, under its own label, on every surface that prints the disposition. The pinned test is re-keyed BY IDENTITY: the disposition list holds temperament, loyalty and fear, and the standing is asserted under its own label. Display only. The new label goes on the veto list. Check the holders by content first. It takes its place by its width, after the first three cures.
+2. **LV-PALISADEQUARRY** STAYS PARKED by the earlier ruling (those supply-chain rows do not move before the release). It is listed under WHAT IS LEFT with its count.
+3. **R2A-LEFT-GOVECON** is not judged by script. Read THIRTY of the 205 prints by eye against each tie's two people, and report the false share. Cure only if it is one condition in a file no lane holds.
+4. **BAR-182.** The page prints ONE home: the record's stored label. The Foundations tab reads it.
 
 ## Item 0: the table
 
@@ -96,16 +101,56 @@ The brief's, as written: a line that names a house, role, practice or force read
 
 ## The cures (item 1)
 
-(none yet)
+**THE FILE RULE.** Before the first edit of a file, the seat ran `git diff --stat origin/lane/integration-2026-11-07 origin/<lane> -- <file>` against each of the nine lanes, as the brief requires. Seven MINE rows have their true writer in a file another lane has changed. Under the rule they move to FOR THE JOIN (below): named with the one-line change, never cured here.
+
+1. **LV-CAPITAL: CURED.**
+   - **Change:** `src/data/tradeListDeclarations.js :: NOT_A_GOOD` takes `'Capital'`. That is money, the caravan masters' "Capital + trade access" need cut to its first part, not a good shipped. It has no revenue home, so it prints nowhere.
+   - **Display only:** the record's lists are untouched; no declared move.
+   - **Red first:** the arm `tests/domain/display/tradeListDisplay.test.js` › "Capital" is not a good shipped, a collected arm over the census births r2r-city-0/1/3. It was red on r2r-city-0 ("expected [ 'Capital', 'Salt', … ] to not include 'Capital'") and is green after the change (10/10).
+   - **Measured:** 41 of the 720 records carry it (35 cities, 6 metropolises); 40 printed it.
+   - **Gates:** the presumed-things door's fresh count is 153, as at the base. The twelve-birth grid shows no rise (exit 0). eslint is clean on both files. The walkers' reds are the base's at 1e33be746, the same counts: the lighting census's file count (3448 vs 3251), and the presumed-things walker's 3 of 43.
 
 ## Every new or changed line, with the towns it was read in
 
-(none yet)
+**LV-CAPITAL: newly silent.** The Imports pill "Capital" leaves the Economics tab. It was read on the rendered tab at the seat's tree in five towns:
+- **r2r-city-0, r2s-famine-city-0, r2s-occupied-city-2 (cities):** the pill is gone and every other import stays.
+- **r2s-famine-metropolis-3 (metropolis, the largest size it reaches):** the pill is gone and every other import stays.
+- **r2s-under_siege-city-3 (siege):** under the siege it printed no Imports pill, before or after.
+
+The smallest size it reaches is the city.
+
+**Found there, not mine:**
+- **The raw chip "Needs Capital + trade access"** still prints on that siege city's chain card. The writer is the EconomicsTab chain card (w2-c-leaves).
+- **The Faith tab's "Patron deity" block** printed in the census render but not in this re-render of the siege city. Nothing in the change reaches the Faith tab. This is PLAUSIBLE render noise and is not counted.
 
 ## Declared moves by family
 
-(none yet)
+None: LV-CAPITAL is display only.
 
-## What is left
+## FOR THE JOIN: MINE rows whose writer file another lane has changed (the file rule), each with its one-line change
 
-Every MINE row above, in the order given.
+| row | figures | the file, and the lane that changed it | the one-line change |
+|---|---|---|---|
+| LV-CATHEDRAL | 100 | `src/data/economicData.js` (w2-fix-data) | the two cathedral rows' `svcs` name what the stone keeps up: e.g. `["building repairs"]`, not religious services, pilgrimage and teaching. A declared move on `dependency.affectedServices` and the Services tab's at-risk marks for those services. |
+| BAR-182 | 48 | `src/components/new/tabs/SubstrateTab.jsx` (r3-tabs), `src/domain/causalState.js` (coherence-upkeep) | by the chair's ruling: the Foundations legitimacy row prints the record's stored `powerStructure.publicLegitimacy.label` |
+| BAR-293 | 28 thorps | `src/components/new/tabs/OverviewTab.jsx` (coherence-upkeep) | the Safety StatusTag prints the record's band or is left out. Not traced further. |
+| defworkFill ("palisade or earthworks") | 25 | `src/domain/display/stateProse/defenseStateProse.js` (r3-tabs) | `defworkFill` returns "palisade" for the catalogue house "Palisade or earthworks" |
+| R3C-REVOLTNOTE | 11 | `src/data/stressTypes.js` (w2-fix-data); twin `stressTypesMeta.js` | the viabilityNote names no keepers of order where the town holds no force (both twins) |
+| R2A-LEFT-GAME | 4 | `src/data/people/titleSecretsPresentations.js` (powers-follow-up) | the row takes the roster's no-market rule, or a twin "sold on the quiet" |
+| R2A-LEFT-LANISTA, R2A-CUSTOMS, R2A-LEFT-GOVECON | 1, 2, (to be read) | `src/data/npcData.js` (r2-code-a) | mil_crim_corruption takes a holder that commands; CUSTOMS is parked with its words |
+
+## What is left (mine, in clean files, widest first)
+
+1. **R2B-979:** 461 towns, by the chair's ruling (1). It comes after the first three cures. `npcInteriorityRead.js` and `npcComponents.jsx`: the holders are to be checked by content; npcComponents is r2-code-b's.
+2. **BAR-169/170:** 65 towns, a fair tradition where no market or fair stands. `src/domain/traditions/genesis.js` / `TraditionsTab.jsx :: filterDeclared` (traditionCorpus.js is r2-code-b's).
+3. **LV-CANNOTPRODUCE:** 33 towns, and **BAR-274:** 19. `src/generators/economy/tradeGoods.js` (declared moves).
+4. **LV-MAGICNOTES:** ~28 towns. `src/generators/chainMagicSubstitution.js` (a declared move on `magicNote` only; `facts/magicSource.js :: MAGIC_NOTE_TRADITION` must carry any new note).
+5. **LV-PROCHOUSES:** 5, and **LV-OTHERNEED:** 5. `resourceChains.js` and `computeActiveChains.js`.
+6. **R2A-LEFT-GOVECON:** 30 to be read by eye (ruling 3). Its file, npcData.js, is r2-code-a's, so any cure is named.
+7. **LV-PALISADEQUARRY:** 57 of 720. PARKED for the owner (ruling 2).
+8. **LV-ARCANENONE:** 9 of 720, FENCED (magicReliance.js feeds the defence rating). It is measured and named. Counting a magic power of any standing as a practitioner would move `deriveMagicReliance`, and with it the score.
+
+**How the instruments are re-made:**
+- `census.sh <tree> <out>` from the SECOND-WAVE-CENSUS probe (git archive of origin/lane/second-wave-census-2026-11-12).
+- The BAR-0 probe's `render2.sh` for its four seed files.
+- Then `node docs/chair/2026-11-14/probes/NOLANE-1/table.mjs <tree> <census-out> <r90-dir> <out.json>`.
