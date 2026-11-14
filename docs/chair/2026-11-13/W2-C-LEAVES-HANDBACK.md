@@ -1796,6 +1796,16 @@ cure makes stale is NAMED here, never re-taken; the grid's falls are not lowered
 |---|---|---|---|---|
 | (3) HIGH pills + (2b) | `chainMakesHere`'s default passed any good with no maker row by a chain house's first word (52,603 card outputs, 2,624 exports, 5,478 local pills in 1,660 towns, MEASURED FIRST against an uncommitted plant) | no row, no maker; MADE_GOOD_ROWS grown per good; LAND_GOOD_ROWS for the land's own goods (their ground path and raw export kept); `houseMakesGoodNamed` + `fullRowAsHeld` (b9b4033e3) | mine-only "Master-crafted weapons" 21 -> 0; milled lumber with no sawyer 27 -> 3 (ground path); card outputs -5,192, exports -440 / +117 ("Preserved foods" transit -> made, read TRUE), local -645 / +7; ruling (2) re-measured: full row 92 -> 9 towns, all 83 silenced named a house that does not make the good | economicsChainOutputsBorneOut (unit + 5 silent, 2 guards), economyDeskReadsTheCards (2b unit, 6 towns moved silent), economicsGoodsPillsBorneOut anchor re-keyed: RED at f9db28270, GREEN |
 | (3) HIGH famine exports | `pillAsPrinted` returned a raw good with no maker unread | `rawCardStoppedByCrisis` (1ea5d0420) | 21 pills in exactly 12 towns (Raw wool 10, Livestock 9, two sieges), nothing else moved | economicsGoodsPillsBorneOut famine test (unit + 4 towns + guard): RED at b9b4033e3, GREEN |
+| (H) HIGH count range | `deriveSupportingCapabilities` printed `facts.healerName` raw | `healerLabel` (label seam, count band struck; "Healer (divine, 1st level)" kept, pinned) (ea7d451c2) | every "(n-m)" the file prints (ranges.jsx): 18 -> 0 towns, all this line | clericalCareNeedsClergy (unit + 4 metropolises, a siege-and-famine and an occupied one): RED 4 of 4, GREEN |
+THE ONE RENDER OF STEP 1 (the reader's render.sh at ea7d451c2, all 1,824, 4 workers, every one exit 0; count12.mjs over the dumps
+and records): Iron cards printing "Master-crafted weapons" with no smith 0 of 8; "worked all the way through" 3 (the seat
+before: 20); "Mill … beer" 0; "Fish market … fish oil" 0; a count band on the Defense tab 0 of 1,824 Medical lines; ship
+outputs with no shipyard 0; "Milled lumber" with no sawyer 3 (the ground path, shipbuilding timber). STILL FALSE, NAMED:
+famine towns exporting Raw wool / Livestock beside the failed herds, 4 of 23 such towns (r2s-famine-thorp-1): the failed
+grazing land has NO chain card there, so the card rule does not reach it; the cure is one more clause in
+`tradeListDisplay.js :: pillAsPrinted`: `|| landFailed(settlement, grounds)` beside `rawCardStoppedByCrisis` (measure first).
+STEP 1's MESSAGE sent to the chair (the tip ea7d451c2; the counts above; the default branch's 52,603 / 2,624 / 5,478).
+FOR THE CHAIR, not cured: the Medical row's other clause "no beds to contain an outbreak" beside Major monasteries.
 THE RECORD DOES NOT MOVE (EXECUTED, `pills.jsx` carries rec.jsx's leaves and blocks; `recdiff.mjs`): 1,824 of 1,824 records
 identical after each cure. STORED PUBLIC PROSE (declared): b9b4033e3 moves economy:economics, :services, :resources,
 :daily_life in exactly the 83 towns whose full row is no longer offered; 1ea5d0420 moves none.
@@ -1811,7 +1821,7 @@ a bardic college (585: the detector does not call it arcane), "Divination and sc
   Carried: the presumed-things walker's two named SERVICE_OUTPUTS hits (unchanged hashes); the tuning walker's six tables.
 
 ## WHAT IS LEFT, line by line (the brief's order)
-1. (H) the Medical Readiness count range, then THE ONE MESSAGE of step 1 (with the 1,824 render once).
+1. DONE: (H) (ea7d451c2); the one render; the message. FIRST NEXT: the 4 famine towns above (landFailed clause).
 2. By width: (15), (4) with #206, (7), (5), (16), (17), (10), (8), (6), (9), (3)'s medium pills (mostly cured by b9b4033e3:
    re-count), (14), (11); then PART 11's carried medium rows.
 
