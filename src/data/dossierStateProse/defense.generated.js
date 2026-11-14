@@ -4861,7 +4861,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "ARCANE: alchemists": [
         {
           "angle": "street",
-          "text": "Part of the magical help at {settlement} is brewed: alchemy is practised here, and some of what it makes goes to the defenders.",
+          "text": "Alchemy is practised at {settlement}, and some of what it makes goes to the town's defenders.",
           "slots": [
             "settlement"
           ],
@@ -4869,7 +4869,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement} buys alchemical preparations for its defence by the batch, and the town's accounts carry them as a purchase, not a defence.",
+          "text": "Alchemical preparations made at {settlement} are among what its defenders can call on.",
           "slots": [
             "settlement"
           ],

@@ -54,7 +54,7 @@ seat itself; long runs never cross a turn's end, the suite in six shards; no pul
 | 20 | DS-DEF-2 Invasion & War: neither walls nor force | v5 | declared off siege, occupation | 2d1832b7b (fifth) | |
 | 21 | DS-DEF-11 WALLED-STRAINED | v8 | struck (last row) | this seat | v7 or v2 |
 | 22 | DS-DEF-11 WALLED-STRAINED | v6 | reworded, `no crisis: occupied` | this seat | under occupation v5 |
-| 23 | DS-DEF-5 ARCANE: alchemists | v2 | LEFT (last row) | | |
+| 23 | DS-DEF-5 ARCANE: alchemists | v2 | reworded (a two-row pool keeps its floor), with v1 | this seat | v1, v2 |
 | 24 | DS-DEF-11 UNWALLED-LARGE | v3 | struck (last row) | a17d14618 (sixth) | v1, v2 print, true |
 | 25 | DS-DEF-1 readiness STRONG | v6 | reworded | 47f8bdd8e (sixth) | read at Al-mandi, a siege city, a 574-person town |
 | 26 | DS-DEF-11 WALLED-STRAINED | v4 | reworded (the slot out, "for them") | this seat | |
@@ -69,13 +69,15 @@ Settled 17 (fifth seat 9, sixth seat 8); LEFT 10, and one style point (#27).
 | B #15, #26 | fe171885e | WALLED-STRAINED siege rows: v3 `no soldiers` (guard Tihono), v3 and v4 without `{defwork}` (the slot printed "palisade or earthworks" and broke agreement) | 62 STRAINED siege towns rendered: v3 at Prabhanagar (thorp 12), Hongguan, Zuuköl (siege+famine); v4 at Tihono, Hákonås (222,797), Belovich (thorp 5), Spitzplatz |
 | B #16, #21, #22 | 8c63fd2ed | WALLED-STRAINED v8 struck (last row); v6, v7 reworded without `{defwork}` (v6 printed it twice; v7 "pays anyone" and "stretched thin" beside volunteer militias), both `no crisis: occupied` (guards Ulfås, Shangou) | 50 STRAINED calm towns rendered: v7 at Tyrvik (thorp), Muulek (wartime), Loughbury (village 386, famine), 22 in all; v6 at Altgasse (plague), Beiguan (wartime), true in all 11 eligible |
 | B #11 | 07f53f717 | walls PRESENT v7 reworded: "Nothing closes the few ways through {settlement}'s wall, because it has no gate." (was contradicted by the guard line "The walls leave few ways in") | 64 towns rendered, drawn in 27: Tyrvik, Qaryatnagar (the reader's case, beside its guard line), Ulfås (occupied), Taipu (village 332) |
-| B #17 | (this commit) | NO organized force at all v4, and v5 for the same fault, off a war with no front at the town (the `crisis: wartime` mark dropped; guards at Nishidao) | 53 towns rendered: v4 at Qaryatsaray (village 330), Goraino (siege+famine); v5 at Rundholz (thorp 7), Cnocton (village 185); wartime towns now print v6 (Nishidao, Nishitang, Varatala) |
+| B #17 | 217693af2 | NO organized force at all v4, and v5 for the same fault, off a war with no front at the town (the `crisis: wartime` mark dropped; guards at Nishidao) | 53 towns rendered: v4 at Qaryatsaray (village 330), Goraino (siege+famine); v5 at Rundholz (thorp 7), Cnocton (village 185); wartime towns now print v6 (Nishidao, Nishitang, Varatala) |
+| B #23 | (this commit) | ARCANE: alchemists v2 reworded (not struck: the pool has two rows), v1 reworded off "Part of the magical help" where alchemy is the only arcane defence (the read's r2r-city-16) | 55 towns rendered: v1 at Saltocolonia (town 505), Prabhavalli (siege), Tikalmul (158,207, famine); v2 at Muultzal (town 615), Capovetum (siege), Markaztappa (occupied) |
 
 ## Named, not the corpus's (with the file)
 
 ## Parked (with the word it needs)
 
 ## Found while reading, for later steps
+- Arcane Support "None ... No arcane practitioners on the rolls" prints beside a local alchemist and the alchemists line (Saltocolonia, w5-town-calm-109; Prabhavalli): the Arcane Support row is not the corpus's (DS-DEF-6 Arcane Support pools are dark); the row's reader, record 422's "Arcane None" owners.
 - DS-DEF-5 NO organized force at all v1-v3 print under an occupation (Ulfås, w5-hamlet-occupied-104: "Nobody at Ulfås is responsible for defending the hamlet" while the occupier holds it): step D/E/F, in this block.
 - DS-DEF-11 WALLED-STRAINED v2 prints under an occupation ("fewer people turn out each season to man the {defwork}"; and its {defwork} prints the catalogue label): step D/E.
 

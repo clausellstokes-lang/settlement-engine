@@ -3406,8 +3406,8 @@ print nowhere). Description position: plain lines.
 2. `[ledger]` {settlement}'s magical defence sits in the mages' own books, not the town's: the mages can withdraw it, and the town cannot hold it.
 
 **ARCANE: alchemists** {colour}
-1. `[street]` Part of the magical help at {settlement} is brewed: alchemy is practised here, and some of what it makes goes to the defenders.
-2. `[ledger]` {settlement} buys alchemical preparations for its defence by the batch, and the town's accounts carry them as a purchase, not a defence.
+1. `[street]` Alchemy is practised at {settlement}, and some of what it makes goes to the town's defenders.
+2. `[ledger]` Alchemical preparations made at {settlement} are among what its defenders can call on.
 
 **ARCANE: divine** {colour}
 1. `[street]` The clergy at {settlement} heal and ward by prayer, and the town counts them among its defences.
