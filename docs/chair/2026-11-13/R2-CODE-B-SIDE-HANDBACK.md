@@ -18,6 +18,7 @@
 
 ## The chair's rulings received
 - 22:38 UTC (read 22:49): the base is 0570b3441, not 4d546386d (docs only); not a stop. Item 1's commit, built at 4d546386d and not yet pushed, was rebased onto 0570b3441 before its first push.
+- 23:15 UTC (read 23:18): ADDED ITEM (7b) in faithReading.js: housesOf takes a house by its NATIVE identity (the catalogue's semantic name or id), never by a name a user can type or change; a renamed native church is still a church; a custom house is a church only by its own declared kind (if custom content carries one), never by its name. MEASURE FIRST: the 720's pages unmoved; a test of my own, red first. Say what the data lane's three titles of customContentPresentationClaims do on my tree; FOR THE JOIN they go green there, or it is a finding.
 
 ## Items
 | item | rows | commit | measured |
@@ -25,6 +26,11 @@
 | 1 the upstream note leaves the card, page and PDF | #1375 HIGH, #791, #1256, #448, #630, #793, #800, #1255, #367, #703, rww-metropolis-under_siege-1 | 2ed36a430 | records of the 720: "Needs imported X: no local source" 432 print, 337 false; "Upstream X chain is impaired" 175, 149 false; "... disrupted" 55, 47 false; "Dependent on stressed upstream" 24, 5 false. Page (720 dumps at base): 647 note lines in 332 towns -> 0 |
 | 2 no "Import: <a chain's label>" on the From line, page and PDF | #366 #799 #699, CENSUS-2 (d) "Import: Food Processing" | a245e05fb | page at base: 438 in 298 towns -> 0; the ground stays |
 | 3 the card names the roster's houses that do the work | #506 HIGH, #1370 HIGH, #368, #931, #1157, the increment's "Cartographer's guild" | 43da43921 | 720: 2,465 of 9,497 cards named a house the roster lacks (409 towns) -> 0; no card left empty; readers' 80: 273 of 1,069 -> 0 |
+| 4 the seat's list headed by what it lists | #562 #712 #806 #942 #1264 #1383, increment ww985 ww1049 ww1119 ww1192 pf92 pf262 pf334 pf406 pf782 pf812 | 305210087 | 720 page dumps at base: 282 towns printed "The Powers (N)" twice with two counts -> the seat's list reads "The Seat" / "The Seat and Its Contenders (N)" / "Contenders for the Seat (N)"; "The Powers (N)" heads the roster alone. #85 does NOT reproduce here (rr2s-thorp-famine-rand-1 has one power, Elder Council 100) |
+| 5 the scope line reads the roster and the size in every frame | #1 #234 #513, increment ww539 ww1 ww863, CENSUS-2 a 57 / c 7 | 66a4f587c | 161 of 800 scope lines change, 25 shapes read; after: waterworks / guild / bureau / quarters / wards / districts / civic association where false: 0 |
+| 6 a forge tradition only where a forge stands | increment rww-hamlet-calm-1 | 82e0018b3 | 31 of 129 Forge traditions in towns with no smith -> not printed on the tab. FAIRS: STOP (below) |
+| 7 no walk to the next village's church under a siege | increment rww-thorp-under_siege-1; rww-thorp-famine-1 (6b reaches it) | 8b27458cd | 14 of 800 faith lines change, every one under a siege |
+| 7b the faith reading by native identity (the chair's added ruling) | data lane's customContentPresentationClaims | 3b7a826e5 | 0 of 800 readings or lines move; the three titles green on this tree before and after |
 
 ## Item 1: why the note leaves (the ruling's test, measured)
 The card is handed one chain and the roster's names (EconomicsTab.jsx :: EconomicFlowsSection calls `chainFlowFacts(chain, instNames)`; the PDF row is handed the same). The three STATE forms ("Upstream X chain is impaired", "... disrupted", "Dependent on stressed upstream") are true only by the OTHER chains' states; the "needs" form has no one reader even on the whole record (a town's fuel can be a running marsh chain's peat, its storage a merchant's warehouse; the chain-plus-roster read still prints 19 false of 432). So the note leaves both surfaces. FOR THE JOIN (recommendation, not built): once EconomicsTab hands the card the town's chains, the form "Upstream X chain is impaired" is true under "every chain in `upstreamWeak` has status impaired or broken" (26 of 26 at base); it would print in plain words (e.g. "Its <X label, lower case> work here is failing."), read in three towns first. engineKeysInText.js :: supplyChainNoteInWords is kept unchanged and now has no reader on these two surfaces.
@@ -36,6 +42,7 @@ The goods the town buys in are `economicState.primaryImports` ("Clay and raw mat
 The third leaves lane holds a reader of "which roster houses finish a good" (its finisher rule, on its branch, not on this tree). chainHouses.js :: chainHousesOf answers the chain card's narrower question (which roster houses do this chain's work) from the roster's names, reading the trade as the generator does (the pattern's first twelve letters, held to a word's start). The seat that joins the lanes makes them one. A house the user renamed to a name with no word of its trade is not matched by name (the generator matches it by catalogue id): such a card can name fewer houses; none at the 720.
 
 ## Register doors (each its own commit, cause named)
+- 023ef77eb tests/lint/.lighting-census-baseline.json, 3239 -> 3245 (this seat's six new test files), through LIGHTING_CENSUS_REFREEZE='R2-CODE-B-SIDE'; verified 34/34. The main seat re-makes it after the merge.
 - e6f006eff tests/lint/rawColorLiteral.test.js BUDGET 1224 -> 1221 (item 2: the PDF import node's tone).
 - 4b80f7cea tests/components/phoneChromeFloor.census.test.js ROUTE_BASELINE floored -2 on /create /settlements /compendium /gallery (items 1 and 2, -1 each, item 1 measured at its commit).
 - ecf6bb722 tests/components/dossierPhoneFloorAllViews.test.jsx Systems/Economics: mobile 39/8/8 -> 38/7/7, desktop 47 -> 45 (items 1 and 2).
@@ -44,3 +51,24 @@ The third leaves lane holds a reader of "which roster houses finish a good" (its
 
 ## Hazard log
 - `npm ci` in the scratch worktree wrote `core.hookspath=.husky/_` into the shared local config (the brief's hazard); left in place so the lane hook's three gates run on this seat's pushes; refs unchanged otherwise. Compared after every push.
+
+## Stops and parked items (with recommendation)
+- **Item 6, the FAIR (131 fair traditions in towns with no market on the 800: "The Fair of the First Landing", rww-thorp-under_siege-1's "The Lesser Landfall Fair").** The fair is an ACT, and the Traditions tab reads only the ELEMENT's declaration (src/components/new/tabs/TraditionsTab.jsx :: ELEMENT_NEEDS, not this seat's file). The switch (one line): give the act its own `needs` in traditionCorpus.js (`fair: needs ['market']`) and have the tab's filterDeclared take `[...elementNeeds, ...actNeeds]`. Recommend: the seat after the merges, or whoever holds TraditionsTab.jsx.
+- **The PDF's Traditions chapter (src/pdf/sections/Traditions.jsx) reads no declaration at all**: the market, the water and now the forge rows the tab withholds still print in the PDF. Not this seat's file; the same filter belongs there.
+- **Item 1 / 2 at the join**: the page's card is handed one chain and the roster (EconomicsTab.jsx :: EconomicFlowsSection, the third leaves lane's). If it is handed the town's chains and `economicState.primaryImports`, two true lines can return: "Upstream X chain is impaired" under "every chain in upstreamWeak is impaired or broken" (26 of 26 true at base), in plain words; and the bought-in good by its own name on the From line. Not built.
+- **Item 7**: a siege the world pulse adds lives in `stressors`; the faith read takes the generator's `stress` (importing canonicalAccessors.js moved the observed-shape ratchet's graph: dossierSearch.js's `publicProse` became a new row). At the join, read the one crisis container.
+- **Item 5**: the Celtic "and an assembly ground" has no roster home anywhere; struck in small places only (where it was measured false); a large town keeps it.
+
+## FOR THE JOIN
+- The data lane's three titles of tests/domain/customContentPresentationClaims.test.js ("keeps adversarial custom names mechanically inert at" thorp/plains/road, thorp/mountain/isolated, thorp/coastal/port) are green on this tree before and after 3b7a826e5 (this tree lacks that lane's burial-ground lines). Once the lanes are joined they should go green on the data lane's lines; if they do not, that is a finding.
+- The main seat re-makes the registers this branch moved: the raw-colour budget, the phone chrome floor routes, the dossier phone floors (Economics), the lighting census.
+
+## New words (for the owner's veto)
+- Item 4: "The Seat", "The Seat and Its Contenders (N)", "Contenders for the Seat (N)" (read on the 720: 282 towns).
+- Item 5: "under the temple", "ordered by lineage", "built around kin", "tribute and market", "built on tribute and market", "run by its estates" (the existing phrase, now on a roster read).
+- Item 7: "{The thorp} has no church of its own, and the siege keeps its people from the next village's parish church." (r2s-under_siege-thorp-0..3, r2s-under_siege-hamlet-0/1, r2r-thorp-58, r2r-hamlet-0).
+- Items 1, 2, 3, 6, 7b: words removed only.
+
+## Item 8 (in hand when this file was last written, 2026-11-14 ~00:30 UTC)
+- The 720 field diff, base (births at 4d546386d's tree, code-identical to 0570b3441) against the tip's births at 023ef77eb: **0 towns, 0 leaf diffs** (every item is display).
+- CENSUS-2 at the tip over this seat's files: running (base counts: PowerStrata.jsx f 296 towns / 4 lines, the ruled-kept "(guild)"-style qualifiers; settlementQuickGuide.js a 59 towns / 57 lines, c 7 / 7; traditionCorpus.js a 3 / 1). Tip counts, tests/lint once, and the page counts on the tip dumps are the next step.
