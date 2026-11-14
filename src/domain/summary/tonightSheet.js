@@ -33,6 +33,7 @@ import { FOOD_SECURITY_BANDS } from '../../data/bandLadders.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.js';
 import { CRISIS_ROLE_LABEL, castHash, effectiveCastOf } from '../crisis/crisisCast.js';
 import { crisisSummaryForSurface } from '../crisis/crisisSummaryVantage.js';
+import { factsOf } from '../facts/factsOf.js';
 import { CRISIS_NOUN, LINE_ROLE_CLAUSE } from '../crisis/crisisHooks.js';
 import { powerNameInProse } from '../display/governanceAccount.js';
 import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
@@ -398,7 +399,7 @@ function crisisOf(source) {
   // the label and the people; the crisis page keeps the full text. The place is named in that sentence, so
   // the head is the label alone. A crisis with no vantage line (an authored custom kind) keeps the old head.
   const lead = leadStressOf(source);
-  const official = lead && place ? crisisSummaryForSurface(lead, place, 'tonight') : null;
+  const official = lead && place ? crisisSummaryForSurface(lead, place, 'tonight', /** @type {Parameters<typeof crisisSummaryForSurface>[3]} */ (factsOf(source))) : null;
   const said = official && official !== clean(lead?.summary) ? official : null;
   const head = said ? `${type}. ${said}` : place ? `${place}: ${type}` : type;
   const tail = castTail(persons);
