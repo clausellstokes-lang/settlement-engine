@@ -1589,8 +1589,56 @@ against the brief's "NEVER --no-verify on any command". Corrected the same minut
 - NOT RUN (the brief's 7): the whole suite; the tuning inventory and the lighting census (the merge seat's, by their
   rituals: this seat added no test file and no title, so the lighting census's file count is unmoved by it); any golden.
 
+## THE CHAIR'S TWO RULINGS RECEIVED AFTER THE STATEMENT (copied in whole; NOT STARTED: the count, below)
+1. (09:55 UTC) "A HIGH OF THIS LANE'S OWN, FOUND BY ITS READER (executed at da7a567f4): IT GOES FIRST, after the item in
+   hand. THE RIVAL-RINGS RULE (src/domain/display/defenseDisplay.js :: deriveCriminalStructure and rivalRingsHere;
+   src/domain/corruption.js :: rivalRingsOf: both this lane's files, checked by content) prints "Criminal structure:
+   Semi-organized networks … lacks a single controlling authority. Several gangs may be competing", and the crime prose
+   "Rival crews at {S} are fighting over who runs the streets", in 18 towns where ONE criminal power GOVERNS the town
+   (r2r-metropolis-0: "Underworld: Shadow Senate · Dominant", one criminal faction, governing; the base printed
+   "Organized syndicate", true). It also reaches the PDF and the stored publicProse. RULED: rival rings are said only
+   where the record holds two or more criminal powers and none governs or dominates; a governing or dominant criminal
+   power is the single authority. Red first (a collected arm), 18 -> 0 on the reader's births, a guard town each way,
+   three towns read on every surface; if publicProse is STORED, say what moves in the record (a declared move)."
+2. (09:57 UTC) "A SECOND HIGH OF THIS LANE'S OWN FROM ITS READER (executed at da7a567f4): IT GOES SECOND, after the rival
+   rings. THE STAGE'S RE-FILING OF THE RESOURCE CARDS (validationOnPage.js :: exploitationGroupsShown,
+   exploitationForDesk) hands the Resources tab's economy prose to the record's fullyExploited row, whose sentence names
+   a house and an export the town lacks: r2r-village-5: "The fish in Karakabad's country is worked all the way through:
+   the ground gives it, Fishmonger finishes it, and it leaves as preserved fish": no fishmonger, no fishing house, other
+   exports. New and FALSE in 34 of 41 towns; also in the stored publicProse (economy:resources.exploitation). RULED: THE
+   "WORKED ALL THE WAY THROUGH" SENTENCE PRINTS ONLY WHERE THE ROSTER HOLDS THE HOUSE IT NAMES AND THE RECORD'S EXPORTS
+   HOLD THE GOOD IT NAMES; a slot is filled from the record, never from a chain's default; else the card says what the
+   record holds, or the sentence is not written. Red first (a collected arm), 34 -> 0, the 7 true towns kept as guards,
+   three towns read on every surface; say what moves in the stored prose. If the cure must be in a file this lane does
+   not hold: STOP with the file."
+
+## HAND BACK AT THE COUNT (374,070 at the check of 10:09 UTC; the mark is 400,000)
+Neither ruling can be carried red-first to its push in the ~26,000 left (each file changed is read WHOLE first:
+defenseDisplay.js is ~800 lines). Nothing of either is begun; nothing is uncommitted; nothing is running.
+WHAT IS LEFT, line by line, for the next seat:
+1. RULING 1 (first). Holders by content first (`probes/W2-C-LEAVES-10/holders.sh src/domain/display/defenseDisplay.js
+   src/domain/corruption.js`: note defenseDisplay.js :: foodEnduranceLine and monthsInWords are lane/coherence-upkeep's
+   by the 11-13 22:42 ruling, PART 9 item 1b; the rest of the file is this lane's). Read deriveCriminalStructure,
+   rivalRingsHere, rivalRingsOf whole; find the crime-prose pool of "Rival crews at {S} are fighting over who runs the
+   streets" (its draw door and declaration). The reader's 18 towns: ask the chair for the reader's birth list (its
+   corpus, at da7a567f4); r2r-metropolis-0 is one, a census birth (probes: arc720.jsx's census birth shape). Red first
+   as a collected arm (tests/helpers/seedFailures.js), then the cure, then the guard each way (one ruling criminal power;
+   two rivals, none governing). Stored publicProse: a DECLARED MOVE (field diff on the 720 confined to publicProse's crime
+   keys and the criminal-structure display, counts).
+2. RULING 2 (second). validationOnPage.js :: exploitationGroupsShown, exploitationForDesk: holders by content first
+   (STOP with the file if another lane holds it). The sentence's slots (house, export) from the record (live roster,
+   exportsAsPrinted), else the record's own statement or no sentence; 34 -> 0 on the reader's 41, its 7 true towns kept as
+   guards; the stored prose key economy:resources.exploitation declared.
+3. Then the gates and 2m's five doors once more (as above: the page census to a file outside the tree, ~20 min), the
+   diff stat against da7a567f4, and one message to the chair.
+INSTRUMENTS: the worktree is re-made by `git worktree add -b <local> <dir> origin/lane/w2-c-leaves-2026-11-13` and
+`npm ci` (it writes core.hooksPath=.husky/_; snapshot the local config and refs around every push); frozen trees by
+`git archive <sha> | tar -x` with node_modules linked; the probes above (`run.sh <tree> <probe> <out>`); the observed-shape
+door must run in a git worktree, never an archive.
+
 ## STATUS (this seat, final)
-- Items 1-6 DONE (1, 5, 6 without code); nothing running; the one message to the chair sent with the tip.
+- Items 1-6 DONE (1, 5, 6 without code); the chair's two later HIGHs NOT STARTED (hand back at the count); nothing
+  running; the one message to the chair sent with the tip.
 - FOR THE DECLARATION PASS (unchanged): the two SERVICE_OUTPUTS matchers (item 5's row); row dbd691c1c6f9171f.
 - LEFT FOR AFTER THE JOIN (new from this seat): item 6's neighbour, 58 lines / 35 towns ("depend on X brought in"
   where X is also worked here; the record imports it too).
