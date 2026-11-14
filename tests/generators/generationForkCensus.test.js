@@ -319,7 +319,15 @@ const PICK_VARIANT_CALLS = 31;
 // the lane's tip f943c9772, bisected on its first parent: 42 -> 24 at 44cddb372 (UPKEEP-5 F2: a house's own service is
 // never scaled, so 18 bought rows no longer roll: upkeep 24 -> 6), 24 -> 25 at 0c950f06c (UPKEEP-5 R3: one more
 // composeFoodwaysLine, foodways 2 -> 3). The merge: 25 - 1 = 24, no third cause. The register moves with it.
-const FNV_EXTERNAL_CALLS = 24;
+// RE-KEYED 2026-11-14 (JOIN-3, THE TRUE JOIN on lane/join-2026-11-14 at 7d12b40cb; the book's 2h.7 (c): a FALL with its caller
+// named): 24 -> 23, MEASURED by A6 at the joined tree and attributed BY IDENTITY (a probe dumping each external fnv1a32 string
+// with its first src frame, at the joined tree, the line 976db5b19 and every lane's merged tip): foodways 3 and the upkeep rolls
+// 6 are the defence lane's strings exactly (its tip 26474cda9: 24); the tie prose's per-archetype offset
+// (power/relationshipArchetypes.js, via people/ties.js :: drawTies) 6 is the powers lane's strings exactly (its tip 77d7bcace:
+// 15; its cast re-deals the probe row's ties: 'Adela Hoffmann>Wolfger Dietrich::peer_rivalry' and 'Wolfger Dietrich>Volker
+// Becker::mutual_leverage' gone, 'Adela Hoffmann>Gunter Schwarz::peer_rivalry' new); fingerprintPowerEconomyInput 6 and the
+// faction conflicts 2 the line's. No other lane moves a string. The register moves with it.
+const FNV_EXTERNAL_CALLS = 23;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
