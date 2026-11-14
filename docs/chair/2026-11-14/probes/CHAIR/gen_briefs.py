@@ -2123,7 +2123,7 @@ READERS['REVIEW-W2-WRITE-2'] = dict(
 # Filled when the lane is final: set 'tip' to the lane's final tip as read from origin, then generate.
 READERS['REVIEW-R3-TABS-2'] = dict(
     title="REVIEW-R3-TABS-2 · round three's tabs lane: the cure of its first read's findings, and the steps that read left",
-    lane='lane/r3-tabs-2026-11-13', own='lane/review-r3-tabs-2-2026-11-14', base='bb2bf91c', tip=None,
+    lane='lane/r3-tabs-2026-11-13', own='lane/review-r3-tabs-2-2026-11-14', base='bb2bf91c', tip='30157258',
     what="round three's tabs lane: cures at display on the Defense, History, Substrate and Magic tabs; the lane moves no record",
     before=("the tip the first reader read: NOT CLEAR there on one high and two medium findings of the stage's own (F1 to F3), with F6 to F8 beside "
             "them: a cure seat answered each under the chair's rulings: check each cured AND what prints in its place true"),
@@ -2139,7 +2139,7 @@ READERS['REVIEW-R3-TABS-2'] = dict(
            "register it touched re-derived by its own door; the gates; the measuring seat's command at aac79b808 and at your tip. 9. THE CURE SEAT "
            "WORKED TO THESE RULINGS OF THE CHAIR (judge the cure against them; say where you would rule differently): the strong posture pool is "
            "struck under an occupation and never drawn beside a Weak or Critical Invasion & War bar, nor beside a guard assessment that \"exists on "
-           "paper\"; a variant naming works reads the walls; A WATCH IS NOT THE TOWNSPEOPLE IN ARMS: the citizen-militia pools and the beasts row's "
+           "paper\"; nor beside the supply sentence's \"defenders go short\" (the cure seat's own count: 173 towns to 0; it did NOT re-run the page census's 720 door after that last commit: run it); a variant naming works reads the walls; A WATCH IS NOT THE TOWNSPEOPLE IN ARMS: the citizen-militia pools and the beasts row's "
            "held-perimeter lines no longer take a watch-only town, whose row is SILENT unless a true line exists (read the rendered row: no "
            "dangling label; and say how many towns are silent: the corpus owes that cell a pool); the supply line is not drawn under a siege or a "
            "famine; the Plot Hooks tab's twin of the History rename. A CURE BY SILENCE IS READ TOO: thirty of the towns a line left: was it false "
