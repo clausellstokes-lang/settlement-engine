@@ -67,6 +67,8 @@ const SCORE_NAMES = Object.freeze({ mil: 'military', mon: 'monster', int: 'inter
 const TOUCHES = Object.freeze({ sup: 'SUSTAINS', mil: 'STANDS', int: 'STANDS', mon: 'STANDS' });
 /** The armed bodies: who mans a wall (R7) and who carries the martial will (R13). */
 const ARMED = new Set(['garrison', 'militia', 'watch', 'company', 'charter', 'households', 'wardens']);
+/** The three traditions' parts, held together by their shared cap against beasts (R2). Part ids, not house names. */
+const TRADITION_PARTS = new Set(['arcane', 'clergy', 'druids']);
 /** The small places (thorp, hamlet, village): the tiers the community's own defence is written for. */
 const SMALL = W.community.arms;
 
@@ -380,7 +382,7 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
   }
   if (t.hasDruid) add('STANDS', 'druids', { mon: W.druids.mon * tradF });
   {
-    const trad = parts.filter((q) => q.id === 'arcane' || q.id === 'clergy' || q.id === 'druids');
+    const trad = parts.filter((q) => TRADITION_PARTS.has(q.id));
     const mon = trad.reduce((a, q) => a + (q.dims.mon || 0), 0);
     if (mon > W.traditionsMonsterMax) {
       const k = W.traditionsMonsterMax / mon;
