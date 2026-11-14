@@ -1484,6 +1484,75 @@ SEATS2['VEIL-11'] = dict(
 )
 
 
+VEIL_BYTES_12 = (
+    "supabase/migrations/211_server_side_share_veil.sql eface6d093933170b9541fe630068c26e5bd41477e95e913ae7168e373be0b01 and "
+    "supabase/rollback/211_server_side_share_veil.down.sql ce8474ffc251b4c4bd6005d5a409d4a15bd20fef6b507534ef6338d3bd49712f: FROZEN, never changed by "
+    "anyone; 212 (supabase/migrations/212_share_veil_later_cures.sql) a4ed4c0876b2dc51c865565e3390925112e55c7129f0432113acbc2167df5e4f, its rollback "
+    "9968741f0fa90ba986d9a850a58ebad482c079d3ea704bc8361b96a22e9a192d: NOT final"
+)
+
+SEATS2['VEIL-12'] = dict(
+    title="VEIL-12 · the share veil: the security reader's findings and the design's rest, item by item, to one checksum",
+    branch='lane/coherence-veil-2026-11-11', tip='ac0bb20a', statement=False, mark='300,000',
+    intro=("You are VEIL-12, the twelfth seat on the share-veil lane of the settlement-engine integration program (lane/coherence-veil-2026-11-11). THE VEIL: "
+           "when an owner shares a town, whatever the owner hid (a house, a person, an event, a power, a single field) must not reach the reader, in the page "
+           "OR in the data the server sends. The cure lives in two migrations and in the client's twin. MIGRATION 211 IS FROZEN and is the owner's to "
+           "apply. MIGRATION 212 holds every later cure, is NOT final, and is applied by nobody until a fresh security reader has cleared its final bytes. "
+           "The eleventh seat READ 212's two unread sections and the twin whole, line by line, cured what the read found first (the words' fold made one in "
+           "both engines) and handed back at its count with every later item designed or ruled. A security reader read the lane cold meanwhile: one HIGH, "
+           "two MEDIUM and three LOW findings, each ruled below. Yours: the items, in order, one at a time, to a green acceptance run at ONE checksum."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane: docs/chair/2026-11-14/COHERENCE-VEIL-HANDBACK-PART12.md WHOLE (189 lines: the rulings in force, 0 and 0b; the bytes; THE READ and "
+          "what it found, R1 to R4; A1 as built; ruling (5) by run; section 6, RULED below; SECTION 7, THE DESIGNS READY; SECTION 8, WHAT IS LEFT IN ORDER: "
+          "THAT IS YOUR LIST; how the instruments are re-made).\n"
+          "3. YOU DO NOT REPEAT THE WHOLE READ: PART 12's section 3 is its record. For each item you read ONLY the helpers of 212 and the functions of the "
+          "twin that the item touches (section 8 and section 7 name them), whole, before you change them.\n"
+          "4. THE SECURITY READER'S FILE, for the findings you answer: on origin/lane/review-veil-3-2026-11-12 (72a3bb24f): "
+          "docs/chair/2026-11-14/REVIEW-VEIL-212-8-2026-11-14.md, the sections of V8-1, V8-3, V8-9, V8-2, V8-4 and V8-5 only, and its plants beside it "
+          "(town-f, veil-f, the covert row); the library docs/chair/2026-11-13/probes/REVIEW-VEIL-7/ on the same branch (run-all.sh; born/run-born.sh): "
+          "copy them out with git archive; never commit them to your lane."),
+    first=("FIRST ACT. Read the lane's tip back from origin: it was ac0bb20a when this was written; any difference is a stop: tell the chair. Prove the four "
+           "checksums: " + VEIL_BYTES_12 + "."),
+    work=("RULED BY THE CHAIR ON PART 12's SECTION 6 (vetoable by the owner; into the pack in plain words): THE IMPRESSION'S WORDS ARE COMPARED CLAUSE BY "
+          "CLAUSE: the pieces of the appearance and of the impression are cut also at the comma, the semicolon and the colon (still twelve code points or "
+          "more), in both directions, by the one fold, the same in both engines; every other words-rule keeps its sentence pieces. The guard's arm is "
+          "re-keyed to this ruling, never loosened. Counted on born towns when built. EVERY OTHER RULING STANDS AS PART 12's SECTIONS 0 AND 0b COPY IT "
+          "(the five rulings; V8-1's inverted boundary; V8-3's one pass; V8-9's bounded batches; ruling (5) on all four strings).\n"
+          "THE WORK, in PART 12's own order (its section 8), ONE ITEM AT A TIME, each its own commit, red first, pushed, with the new checksums of 212 "
+          "and its rollback in the commit message:\n"
+          "1. V8-1 (HIGH): the boundary inverted, in 212 and the twin, as section 8's item 1 says where it bites.\n"
+          "2. Ruling (2), clause by clause (above); ruling (5) on all four strings and R2 (the processor match lowered as the engine lowers), as "
+          "section 7 designs them.\n"
+          "3. V8-3 (one pass; the reader's row within twice the frozen 211); V8-9 (no unbounded pattern; the closed answer at any bound, never an "
+          "error); then V8-2, V8-4, V8-5 (each one commit by identity, else written in the pack under WHAT 212 DOES NOT CLOSE with its reason).\n"
+          "4. B (V7-5: the trace by positive account, the acceptance run's a07; count what it also drops), C (V7-8: every existence flag by the engine's "
+          "own getInstFlags, d06; the booleans agreed between server and twin; R3 goes with it; if it cannot be done in SQL, say exactly why, show by a "
+          "plant what the difference lets a reader infer, and STOP for the chair on that row), D (the income row by its house).\n"
+          "5. E: THE ACCEPTANCE RUN: run-all.sh exits 0 AND born/run-born.sh green at ONE named checksum of 212, the cost law met (no more than twice "
+          "the frozen 211 on the reader's 300 KB row, on its V8-3 row and on the largest born town; a read never fails where 211 serves). WHEN E IS "
+          "GREEN: ONE message to the chair (the tip, both checksums, what the reader must read) and 212 is not changed again until the chair answers.\n"
+          "6. F, at the final bytes: (a) the red pin tests/security/galleryServerVeil.pglite.test.js re-keyed BY IDENTITY (the ruled cut named as the ONE "
+          "expected difference, every other path still asserted equal; the one printed path that moved in town-2 classed first); (b) the planted run on "
+          "chains built from these bytes, both stored shapes, every read: zero but the classed rows; on the frozen 211 alone the exact half still equals "
+          "its review; (c) the lane's other pins; (d) THE REHEARSAL: 212 applied twice without error or change, its rollback returning the catalogue to "
+          "the frozen 211's exactly (diff the catalogues), then 212 again; THE ROLLBACK ORDER IS 212's FIRST; (e) the whole suite once, in six shards, "
+          "classed against the ten reds PART 8 names. G, LAST: THE OWNER'S PACK docs/chair/2026-11-13/veil-212/ rebuilt for the FINAL bytes (the security "
+          "review's section 7 whole; the two read-first blocks; the four checksums; WHAT 212 DOES NOT CLOSE, row by row, in plain words: the rows outside "
+          "the law and every ruling; and, plainly: TODAY'S LIVE SERVER TELLS A COVERT TIE THROUGH THE PROMINENT RELATIONSHIP, THE FROZEN 211 NEITHER "
+          "CLOSES NOR WORSENS IT, 212 CLOSES IT). It is handed to NOBODY by you.\n"
+          "HOW TO KEEP YOUR COUNT (the last two seats each spent theirs in one stretch): YOUR CONTEXT HOLDS THE LIST, THE RULINGS AND THE DIFFS, NOT THE "
+          "FILES. Give each item to A BUILDER INSIDE YOUR SESSION (a helper agent with a fresh context and a WRITTEN sub-brief in the form of "
+          "veil-probe-10/briefs/: the item, its ruling whole, the helpers it touches, the laws of the lane, red first, no push); then YOU READ ITS DIFF "
+          "LINE BY LINE (the SQL and the twin), run the guards and run-all.sh yourself, and push. Read your count BEFORE you start a builder and WHEN IT "
+          "RETURNS (end your turn THE COUNT's way after every pushed item). At 300,000: PART 13 current (a new file, "
+          "docs/chair/2026-11-14/COHERENCE-VEIL-HANDBACK-PART13.md, begun with the rulings, kept current after every item), and hand back. An item half "
+          "built is not pushed: its builder's work is described in PART 13 and left.\n" + VEIL_LAWS),
+    merges="; a local database cluster in your container",
+    when="for a stop that blocks everything you have left, for the cost law if it cannot be met (the numbers), when V8-1 is pushed (one line: the checksums), when the acceptance run is green at a named checksum, and for a hand-back",
+    turns='',
+)
+
+
 SEATS2['W2-C-LEAVES-8'] = dict(
     title="W2-C-LEAVES-8 · the third leaves lane's close: its own rising row, the court rows, the added rows, the line's merge, the final statement",
     branch='lane/w2-c-leaves-2026-11-13', tip='4576cfc6', statement=True,
