@@ -2283,7 +2283,11 @@ export const TITLE_PRESENTATIONS = Object.freeze(Object.fromEntries(ROWS.map(([t
  * settings exclude slavery or trafficking; it declares both topics, and the title's next admitted line (a twin true of
  * the town) prints in its place. The fighters "taken against their will" and kept "in chains" or "locked up", the lanista
  * "who buys and sells people", the apprentice kept past the indenture by holding back the papers that would free them.
- * @type {Readonly<{ secret: Readonly<Record<string, Readonly<{ needs?: readonly string[], topic?: string | readonly string[] }>>>, presentation: Readonly<Record<string, Readonly<{ needs?: readonly string[], topic?: string | readonly string[] }>>> }>}
+ * A CRISIS THAT MAKES THE LINE FALSE (POWERS-14; the bar's MEDIUM #101, read on the page): `excludes` holds a crisis atom
+ * of the fact vocabulary (`crisis: <kinds>`), refused while any of those kinds is in force. The coaching inn's welcoming
+ * line (coaches in and out; food, a bed, a fresh team, news of the road) is not dealt under a siege, which cuts every
+ * road, or a famine, under rationing; its transactional line (departures; places on the coach) not under a siege.
+ * @type {Readonly<{ secret: Readonly<Record<string, Readonly<{ needs?: readonly string[], excludes?: readonly string[], topic?: string | readonly string[] }>>>, presentation: Readonly<Record<string, Readonly<{ needs?: readonly string[], excludes?: readonly string[], topic?: string | readonly string[] }>>> }>}
  */
 /** The two governed topics a line of persons bought, sold or held needs admitted (slavery AND trafficking). */
 const PERSONS_HELD = Object.freeze(['slavery', 'human_trafficking']);
@@ -2304,5 +2308,7 @@ export const TITLE_LINE_DECLARATIONS = Object.freeze({
     'Easy and talkative, proud of every boat on the river that came from the yard.': Object.freeze({ needs: Object.freeze(['river']) }),
     'Watches visitors near the slipway. Keeps the half-built hulls under cover.': Object.freeze({ needs: Object.freeze(['river']) }),
     'Thick-necked and scarred, with the eye of someone who buys and sells people.': Object.freeze({ topic: PERSONS_HELD }),
+    'Brisk and cheerful, always half on the way to the yard, where coaches rattle in and out.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege', 'crisis: famine']) }),
+    'Efficient and loud. Calls out departures and prices in the same breath.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
   }),
 });

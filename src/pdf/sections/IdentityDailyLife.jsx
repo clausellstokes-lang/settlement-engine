@@ -23,6 +23,8 @@ import { type, palette, space, pt } from '../theme.js';
 import { humanize } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
 import { foodwaysLineOf } from '../../domain/foodways.js';
+import { factsOf } from '../../domain/facts/factsOf.js';
+import { architecturalDetailRefused, resolveCultureProfileKey } from '../../data/cultureProfiles.js';
 
 export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse }) {
   const id = vm.identity;
@@ -213,7 +215,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
               {culture.scope}
             </Text>
           )}
-          <CultureRows culture={culture} foodwaysLine={foodwaysLineOf(settlement)} />
+          <CultureRows culture={culture} foodwaysLine={foodwaysLineOf(settlement)} architectureLine={architectureLineOf(settlement, culture)} />
         </View>
       )}
 
@@ -291,7 +293,17 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
 // (domain/foodways.js :: foodwaysLineOf, FOOD-4). The culture's authored line is printed only
 // for a save older than that record (lane WIRING-2, FOOD R-print).
 
-function CultureRows({ culture, foodwaysLine }) {
+// W2-FIX-DATA-12 item 2: the Architecture row prints the materialized detail through the one reading the arrival's
+// sight beat uses (data/cultureProfiles.js :: architecturalDetailRefused): held to its row's declaration against the
+// whole record, a detail naming a market, a palisade or a river the town lacks prints nothing, never raw.
+function architectureLineOf(settlement, culture) {
+  const detail = culture.architecturalDetail;
+  if (!detail) return null;
+  const profileKey = resolveCultureProfileKey(culture.key || settlement?.config?.culture || 'germanic');
+  return architecturalDetailRefused(detail, profileKey, () => factsOf(settlement)) ? null : detail;
+}
+
+function CultureRows({ culture, foodwaysLine, architectureLine }) {
   const rows = [
     ['Built form', culture.builtForm],
     ['Civic pattern', culture.civicPattern],
@@ -300,7 +312,7 @@ function CultureRows({ culture, foodwaysLine }) {
     ['Sacred life', culture.sacredLife],
     ['Defense', culture.defensePattern],
     ['Social texture', culture.socialTexture],
-    ['Architecture', culture.architecturalDetail],
+    ['Architecture', architectureLine],
   ].filter(([, value]) => value);
 
   return (

@@ -742,8 +742,29 @@ function clergyHere(settlement) {
  * @returns {boolean}
  */
 function rivalRingsHere(settlement) {
-  return rivalRingsOf(settlement?.powerStructure?.factions, settlement?.institutions);
+  return rivalRingsOf(settlement?.powerStructure?.factions, settlement?.institutions) && !oneOrganisationRules(settlement);
 }
+
+/**
+ * ONE ORGANISATION RULES THE TRADE (W2-C-LEAVES-11, the chair's ruling (1) of 2026-11-14 on REVIEW-W2-C-LEAVES's HIGH [1]:
+ * "Semi-organized networks … lacks a single controlling authority. Several gangs may be competing" and the crime prose drawn
+ * with that key, "Rival crews at {N} are fighting over who runs the streets", were false in 36 of the 289 towns of the
+ * reader's 1,824 where they printed). Rival rings are said only where none of them governs or dominates and no guild is
+ * named as running the trade: a criminal seat that GOVERNS (`isGoverning`) or is Dominant (`powerLabel`, the band the
+ * section's own "Underworld: Shadow Senate · Dominant" prints) is the single authority (18 of the 36), and so is a thieves'
+ * guild house on the roster (the operations list's "Thieves' Guild Chapter" / "Thieves' Guild (Powerful)", 18 of the 36).
+ * The key is then the one organisation's, read from the same roster. Read as stored; no fact is added.
+ * @param {DefenseDisplaySettlement} settlement
+ * @returns {boolean}
+ */
+function oneOrganisationRules(settlement) {
+  const seats = /** @type {ReadonlyArray<{ category?: unknown, isGoverning?: unknown, powerLabel?: unknown } | null | undefined>} */ (
+    settlement?.powerStructure?.factions || []);
+  return seats.some((f) => f?.category === 'criminal' && (f?.isGoverning === true || f?.powerLabel === 'Dominant'))
+    || (settlement?.institutions || []).some((i) => THIEVES_GUILD_HOUSE.test(String(i?.name ?? '')));
+}
+/** A thieves' guild house by its roster name ("Thieves' guild chapter", "Thieves' guild (powerful)"). */
+const THIEVES_GUILD_HOUSE = /thieves'? guild/i;
 import { rivalRingsOf } from '../corruption.js';
 
 // ─── W2-C-LEAVES-3: THE ARCANE SUPPORT ROW IS A CLAIM ABOUT THE DEFENCE (at the end of the file, so no line above moves) ───

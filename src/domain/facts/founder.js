@@ -25,7 +25,7 @@ export const FOUNDER_KIND = Object.freeze({
   'a discharged soldier who liked the view and had nowhere better to be': 'military',
   'a healer who stopped to treat a traveller and found the location too useful to leave': 'healer',
   'three or four families who agreed to try wintering together and never stopped': 'family',
-  'a miller who built a mill and found customers before they found customers': 'trade',
+  'a household that settled first and found others following it in': 'family', // R2-CODE-A-10: the lane's hamlet line (R2-CODE-A-3, ww-53) in the miller's place, by the table's own rule
   'a retired tradesperson whose skills attracted dependents': 'trade',
   'a small religious community whose members drifted into secular life over two generations': 'religious',
   'a group of settlers seeking new opportunities': 'community',

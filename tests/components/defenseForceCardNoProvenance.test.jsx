@@ -18,6 +18,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
 import { arcaneDefenseOf } from '../../src/domain/display/defenseDisplay.js';
+import { institutionDisplayName } from '../../src/domain/display/institutionDisplayName.js';
 
 /** The app's own configuration shape (the stress panel with Random off), as the reader's towns were born. */
 function appBirth(seed) {
@@ -79,8 +80,10 @@ describe('the Defense tab force cards carry no provenance badge (ruling b1)', ()
     expect(offenders).toEqual([]);
   });
 
+  // R3-TABS-5, ruling (a): RE-KEYED BY IDENTITY to the name as the card prints it, through the roster's label seam
+  // ("Gates (if walled)" prints "Town gates": rr2s-town-under_siege-rand-1 here). Every card is still asserted.
   test('every force card still prints its force by name', () => {
-    const missing = TABS.flatMap(({ seed, forces, nodes }) => forces.filter((f) => !nodes.includes(f.name)).map((f) => `${seed}: ${f.name}`));
+    const missing = TABS.flatMap(({ seed, forces, nodes }) => forces.filter((f) => !nodes.includes(institutionDisplayName(f))).map((f) => `${seed}: ${f.name}`));
     expect(missing).toEqual([]);
   });
 });

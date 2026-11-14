@@ -86,7 +86,7 @@ const famineFoodIsPower = (r) => {
   const n = typeof r.powerCount === 'number' ? r.powerCount : 0;
   if (n >= 3) return `Since ${what}, whoever holds the food in ${r.name} holds the power, and at least three powers are fighting over ${stores}.`;
   if (n === 2) return `Since ${what}, whoever holds the food in ${r.name} holds the power, and its two powers are fighting over ${stores}.`;
-  return `Since ${what}, food is power in ${r.name}, and everyone is watching who eats well.`;
+  return `Since ${what}, food is power in ${r.name}, and every household is watching what the others eat.`; // R2-CODE-A-10 (CENSUS-2 b/famine:plenty): "who eats well" in a thorp at a third of its need, where nobody does
 };
 
 export const PRESSURE_SENTENCES = {

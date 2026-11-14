@@ -19,6 +19,7 @@ import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { SettlementPDF } from '../../src/pdf/SettlementPDF.jsx';
 import { SystemStateSnapshot } from '../../src/pdf/sections/SystemStateSnapshot.jsx';
 import { PowerStructure } from '../../src/pdf/sections/PowerStructure.jsx';
+import { governingModifierWordsOf } from '../../src/domain/display/governingModifierWords.js';
 import { ViabilityAssessment } from '../../src/pdf/sections/ViabilityAssessment.jsx';
 import { Relationships } from '../../src/pdf/sections/Relationships.jsx';
 import { Institutions } from '../../src/pdf/sections/Institutions.jsx';
@@ -204,11 +205,15 @@ describe('#18 PowerStructure — RULE & SUCCESSION subsection (regime lineage / 
     g.modifier = 'military-dominated';
     const on = joined(PowerStructure({ settlement: modded, vm: buildViewModel({ settlement: modded }) }));
     expect(on).toContain('GOVERNING');
-    expect(on, 'the modifier prints beside the governing name').toContain('military-dominated');
+    // RE-KEYED BY IDENTITY (POWERS-15, REVIEW-POWERS-5 A7; one reader for one fact on every surface): the modifier prints
+    // beside the governing name in the Power tab's own words (display/governingModifierWords.js), never the stored key
+    expect(governingModifierWordsOf(modded), 'anchored: the fixture bears the force family out').toBe('armed sway');
+    expect(on, 'the modifier prints beside the governing name').toContain('armed sway');
+    expect(on, 'the stored key is never printed').not.toContain('military-dominated');
     delete g.modifier;
     const off = joined(PowerStructure({ settlement: modded, vm: buildViewModel({ settlement: modded }) }));
     expect(off).toContain('GOVERNING');
-    expect(off).not.toContain('military-dominated'); // anchored: the GOVERNING box is on this render
+    expect(off).not.toContain('armed sway'); // anchored: the GOVERNING box is on this render
   });
 
   it('self-gates to nothing with no lineage and no occupation (byte-identical off-state)', () => {

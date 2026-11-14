@@ -20,6 +20,7 @@
  * Pure and headless. No generator, store, or React dependency.
  */
 import { textOf } from '../domain/facts/textOf.js';
+import { declarationAdmits, declarationOf } from '../domain/facts/factVocabulary.js';
 
 const freezeList = (values) => Object.freeze([...values]);
 
@@ -696,6 +697,26 @@ function materializeOne(key, rng, known = null) {
     socialTexture: choose(source.socialTexture, rng, known),
     architecturalDetail: choose(source.architecturalDetails, rng, known),
   });
+}
+
+/**
+ * W2-FIX-DATA-12 item 2 (the lane reader's C02 C05 C08 C15, HIGH): THE ONE READING of the materialized architectural
+ * detail. It was chosen in resolveConfig, where only the tier is known (`KnownFacts`: "the print side reads it"); a
+ * printing surface holds the row it came from to its own declaration against the whole record (a market, a palisade, a
+ * river, a bathhouse). The arrival's sight beat and the PDF's Architecture row both ask here; a refused detail prints
+ * nowhere (silence, never a redraw). A detail with no declared row (a plain row, a small-place twin, a mixed blend) is
+ * not refused.
+ * @param {unknown} detail the record's `culturalIdentity.architecturalDetail`
+ * @param {string} profileKey the culture profile it was drawn from
+ * @param {() => unknown} facts the record's facts, read only when the detail's row declares
+ * @returns {boolean}
+ */
+export function architecturalDetailRefused(detail, profileKey, facts) {
+  const materialized = typeof detail === 'string' ? detail.trim() : '';
+  const details = CULTURE_PROFILES[profileKey]?.architecturalDetails || [];
+  const row = materialized ? details.find((d) => typeof d === 'object' && d !== null && String(textOf(d)).trim() === materialized) : undefined;
+  return row !== undefined
+    && !declarationAdmits(declarationOf(row), /** @type {any} */ (facts()), { crisisScoped: false }).admitted;
 }
 
 /**
