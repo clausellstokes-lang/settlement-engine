@@ -979,3 +979,67 @@ EXECUTED = run and read; PLAUSIBLE = read from code.
   read7.mjs (`WANT=chainId:Output,... TREE=<tree> node read7.mjs <corpus...>`), dep1-4.mjs (the dependency joins).
 - Config: npm ci wrote core.hooksPath=.husky/_ into the shared local config (kept for the lane hook); refs: only the
   local branch w6-local added.
+
+# PART 7 — the seventh seat (W2-C-LEAVES-7, 2026-11-14, from c22530310)
+
+**Seat:** a Claude Code session; the chair is session_01ACmDYZrFEVXyZEUg1NDxxC. Assignment
+(docs/chair/2026-11-14/briefs/BRIEF-W2-C-LEAVES-7.md on lane/chair-2026-11-08): PART 6's "NOT STARTED" rows 1 to 6.
+Origin read back at the start: c22530310, not the brief's 2ae97291a (the sixth seat's documents-only commit after its
+hand-back); the stop was sent and the chair ruled: start from c22530310.
+Scratch worktree /home/user/wt7 (local branch w7-local); before-tree /home/user/wt7b at c22530310. Corpora born at
+c22530310 into /home/user/c7: the 720 (SECOND-WAVE-CENSUS/births.mjs, from lane/second-wave-census-2026-11-12), the
+fresh 180 and the readers' 50 (probes/W2-C-LEAVES-4/birthsR.mjs). EXECUTED = run and read; PLAUSIBLE = read from code.
+
+## The chair's rulings to this seat by message (copied in; the messages are not on the branch)
+- 02:27 UTC: the lane's tip is c22530310, not 2ae97291a; not a stop; start from c22530310 and never rewrite a commit at
+  or below it. Everything else in the brief stands.
+- 03:08 UTC: POINT 49 IS ON THE LINE: lane/integration-2026-11-07 = 976db5b19 (read back by the chair at 03:08 UTC). THE
+  WORD THE BRIEF'S STEP 6 WAITS FOR IS GIVEN NOW: when the list reaches it, do not wait and do not ask: merge the line's
+  tip as read back then (a plain merge; say which commit and what conflicted), cure the two rows banked against
+  defenseDisplay.js and shrink them out, read the instrument's page census on this lane's lines, then the lane's ONE
+  final statement. FOR THE INSTRUMENT: the merge seat is writing one short section of the merge book for every lane, 2m,
+  "FOR EVERY LANE THAT MERGES THE LINE AFTER POINT 49" (the instrument's walkers and registers, each door's checking and
+  writing command, how a banked row is cured and shrunk), on its save branch lane/merge-15-point-49-wip-2026-11-14
+  (docs/INTEGRATION_STYLE_2_2026-11-09.md; find the section by script): read it before touching a register after the
+  merge.
+
+## Items (this seat)
+| item | commits | measured (before c22530310 → after) | guard |
+|---|---|---|---|
+| 8 the PDF's and the journal's trade lists read the tab's one reader | f8ae10519 (the goods-list licence reads the page's trade marks), 3bbcacae8 | the 720: PDF exports / imports / local 6,680 / 4,082 / 8,928 → 6,033 / 3,801 / 6,531 = the tab's (unchanged) = the journal's; towns disagreeing 363 / 115 / 640 → 0; fresh 180 88 / 84 / 165 → 0; readers' 50 21 / 13 / 44 → 0 | tradeListsThreeSurfaces.test.jsx (5 of 6 red at c22530310; guard r2r-city-0); foodWordsGoodsListMarks.test.js (2 of 4 red) |
+
+Item 8's changed lines in the shared files (every one, in 3bbcacae8's message): src/pdf/sections/EconomicsTrade.jsx 35,
+124, 134, 143, 145, 147, 156, 165 (none added or removed); src/foundry/journalPages.js 40, 313, 322, 323;
+src/domain/coherence/foodWordsFindings.js 82 and a constant after the function (f8ae10519). The record is untouched: the
+720 born at 3bbcacae8 are byte-identical to c22530310's (cmp).
+
+## Calls taken without the chair (this seat)
+1. **Item 8, one composition.** The three surfaces read tradeListDisplay.js :: tradeListsAsPrinted (new, at the file's
+   end), the tab included (its lines 28, 354, 357 replaced in place), so the siege test and the four readers are
+   composed once. Under a siege in force the PDF prints no IMPORTS heading and no "None significant" (the tab prints no
+   Imports heading); the journal's empty row prints nothing. The PDF prints no "needs not met" (it never did: no row added).
+2. **Item 8, the licence.** With the journal reading the tab's reader, the transit mark the reader adds was left over
+   after F3's goods-list licence stripped the goods, and soak1k-9764 / -6525's rows read as sentences
+   (foundryExportsFishTrade, red with item 8 alone). The licence strips the three marks the lists print; any other
+   bracket is still read. Its own commit, first.
+
+## Found, not mine (this seat)
+- The words of an export pill differ by surface: the tab prints the record's spelling, the PDF and the journal
+  resourceDisplayName's (82 export pills on the 720, 13 fresh, 5 readers': "River fish" beside "River fisheries"). The
+  label seam's (§934.22 item 2), not item 8's.
+- "Capital" prints as an import on the tab and both twins (r2s-famine-city-0): the trade lists' NOT_A_GOOD
+  (data/tradeListDeclarations.js) does not hold it. Counted on one town; for the data lane.
+
+## Red met (classed against c22530310)
+- tests/lint: the same 26 failing titles at c22530310 and at 3bbcacae8; bodies equal but the estate file count
+  (3265 → 3267: this seat's two new test files; a carried red).
+- Item 8's governing files (93 test files naming the four touched files): dossierPhoneFloorAllViews 2,
+  phoneChromeFloor.census 1, chainPrintSites.walker 1, observedShapeReaders.walker (suite), dossierProseManifest 3: red
+  with the same titles at c22530310.
+
+## STATUS (kept current)
+- Item 8 DONE, pushed 3bbcacae8. Next: item 9 (the chain-state reader into chainStateShown.js), then 10, the four added
+  rows, row 5, then on the chair's word already given: the merge of 976db5b19 (read back again then) and the statement.
+- Probes: /home/user/c7/probe/tri8.census.jsx + tri8.sh (`sh tri8.sh <tree> <corpus.ndjson.gz> <out.ndjson>`: the
+  three surfaces' pills per town) and agree8.mjs (`TREE=<tree> node agree8.mjs <out.ndjson>`); copied to
+  docs/chair/2026-11-14/probes/W2-C-LEAVES-7/ at the hand-back.
