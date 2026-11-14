@@ -846,6 +846,19 @@ town in that column so that the war line planted in the famine pool REDS; prove 
    row says what is missing in the partial sibling's words) would keep more rows; I took "not listed" because no product
    to house map may be built (the 2026-11-13 ruling) and a partial row's intermediates ("meat, hides, dairy") would newly
    print where their houses do not stand.
+3. **L14, 77f0e6792.** Cause: the noble subordinate line was drawn of the indebted crisis's own creditor face ("Crown
+   Creditors (Noble Coalition)", data/stressPowerFaces.js) beside the stability "Strained — the creditors have a say in
+   every decision". Cure (factionDynamics.js): under the indebted crisis, where the noble power is that face, the
+   subordinate relationship is not added. DECLARED MOVE: powerStructure.factionRelationships, 1 town of 1,722
+   (r2r-metropolis-33), no draw moved. Count: subordinate lines 128 -> 127; of the creditor face 1 -> 0. Guard: the L14
+   arm; red with the gate removed.
+4. **(d) "street kitchens": FOR THE JOIN** (below). src/data/cultureProfiles.js is HELD by lane/w2-fix-data-2026-11-13
+   (and w2-fix-data-history), which changes this file against the line (and gates its siblings with `needs: ['market']`).
+   Count on the 1,722: the line prints in 164 towns, 63 of them with no market or fair house (e.g. r2r-thorp-2, r2r-thorp-33,
+   r2r-thorp-57), the reader's 63.
+5. **(e), 1654b0ad3.** The war arm of tests/generators/r3cRekeyedLinesTrue.test.js now draws a famine town in each column
+   (36 more births) with an anchor that the famine defence official line prints; the plant (the war line as
+   famine.defence.official) REDS the war arm. The lighting census re-taken for the new guard file: its own commit after.
 
 ### EVERY NEW OR CHANGED LINE, with the towns it was read in (the owner's veto list, and the next reader's)
 - **"older than all but the oldest alive"** (NEW WORDS; heraldCausalGrammar.js :: LIVING_FLOOR, the History tab's
@@ -858,6 +871,9 @@ town in that column so that the war line planted in the famine pool REDS; prove 
   r2s-infiltrated-thorp-3 (thorp of 6); now silent: r2r-thorp-36 (thorp of 5), r2s-famine-thorp-1, r2s-famine-city-3,
   rr3p-thorp-under_siege-rand-2, rr3-metropolis-religious_conversion-rand-3. The rows are in 1b3e0fdfd's body.
 
+- **The noble subordinate line** (factionDynamics.js): no new words; not drawn in r2r-metropolis-33 (metropolis, indebted);
+  kept, true, in r2r-village-27, r2r-town-13, r2r-city-21.
+
 ### FOR THE JOIN (this seat)
 1. The lighting census re-take for the new test file (this seat's own commit, at the end of its items).
 2. The dossier prose manifest's re-record (red at the lane tip already; seventh seat's item 4) now carries the L01 words.
@@ -866,3 +882,8 @@ town in that column so that the war line planted in the famine pool REDS; prove 
 4. The golden re-derive manifest (tests/domain/worldFactRederive.test.js A7): red at the lane tip (3 misses); L05's
    declared move makes it 4: the signed regen, the merge seat's act.
 5. NOT CURED, named: "beer" in the kept grain claims (71) where no brewery stands; the grain chain names no brewer.
+6. (d) src/data/cultureProfiles.js :: CULTURE_PROFILES, the foodways line at 419 ("Irrigation, tanks, street kitchens,
+   preservation, and ritual food rules shape supply and consumption."): the one-line change is
+   `{ text: '...', needs: ['market'] }`, as the holder lane already gates "market vendors". 63 no-market towns of 1,722.
+7. The golden-master pin census (tests/generators/powerEconomyFreshness.test.js A4): 18 rows at the lane tip, 31 after
+   L05's declared move (L01, L14 and (e) add none): the signed regen.
