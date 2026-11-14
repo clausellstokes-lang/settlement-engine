@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "db13fdb40e633944a14192f9a1a9f1460be63318",
+  "measuredAtSha": "591d45f37a90d146fe96562bfe3e3c88b8d7c015",
   "measuredBy": "UPKEEP-8",
-  "date": "2026-11-13",
-  "note": "the eighth seat at db13fdb40: incomeLinesSayTheRecord, threatRowsTrueUnderBand, safetyLinesSayTheRecord, outlookSaysThePages, foodEnduranceSaysTheStores added; the lane base 995293e81 carried the tuple already moved",
-  "files": 3244,
+  "date": "2026-11-14",
+  "note": "18457a827 adds tests/generators/houseOfWorkEarns.test.js (#93), one test file: files 3244 -> 3245",
+  "files": 3245,
   "parked": 402,
-  "credited": 2842,
-  "titles": 29343,
-  "suiteTitles": 7973
+  "credited": 2843,
+  "titles": 29346,
+  "suiteTitles": 7974
 }
