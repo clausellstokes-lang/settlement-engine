@@ -11,6 +11,7 @@ THE CHAIR'S RULINGS FOR YOUR GROUP (2026-11-14; each vetoable by the owner; copy
 (K1) "Stores: a granary, about five months of grain" beside a famine or a besieged deficit (350 towns print the line: measure where): the stores line reads the food record's own months and says what the crisis has done to them: ONE HOME with the Economics tab's stores sentence.
 (K2) The faith reading's observance lines under a siege, a quarantine or a plague, or where the only church is a neighbour's the siege has cut off: a twin true in that state.
 (K3) A summary or a hook that names "a strong power", "iron carts", "the smiths", "caravans" needs them in the town: a twin or a condition. (The crisis texts in src/data/stressTypes.js are the HISTORY seat's: NAME rows there for it.)
+(K4) src/domain/summary/tonightSheet.js IS YOURS WHOLE (ruled 23:08 UTC): the Tonight sheet's own lines are crisis facts and no other seat holds the file.
 
 WHO IS ASKING. The chair is the Claude Code session session_01ACmDYZrFEVXyZEUg1NDxxC (your parent). In the chair's chat on 2026-11-14 the owner wrote: "Continue with the pending work! ... I defer all decisions to you and give you all permissions you may require." The owner's bar: thirty fresh towns read thoroughly with no high and no medium false sentence.
 

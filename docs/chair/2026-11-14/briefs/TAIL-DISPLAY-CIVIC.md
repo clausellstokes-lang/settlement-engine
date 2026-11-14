@@ -13,6 +13,7 @@ THE CHAIR'S RULINGS FOR YOUR GROUP (2026-11-14; each vetoable by the owner; copy
 (X3) "Economic Resilience Strong" in a besieged, struggling town (314 towns print the row): VERIFY BY THE SCORE'S OWN LAW (the defence profile's economic score and its band): if the band is right by its law, STRIKE the row with the law's line; if it is not, STOP and tell the chair: no band is changed by this seat.
 (X4) A HEADING'S COUNT IS COMPUTED FROM THE LIST IT HEADS ("Institutions behind this power (32)" over 29 items; "The Powers (5)" over four; "Critical Issues (3)" over two; "Lodging(2)" over one); a label that always carries a value never prints without one (the Systems Health "Safety" row).
 (X5) A tradition that keeps an event the town's past does not hold, or a festival "kept as usual" under a plague: MEASURE; the display withholds nothing true; the generator's side is NAMED as a declared move, not made.
+(X6) src/domain/summary/tonightSheet.js IS THE CRISIS SEAT'S (ruled 23:08 UTC): a Tonight-sheet row whose writer is that file is NAMED for it in your hand-back, with the town and the fact; the Tonight sheet's components under src/components/ are yours.
 
 WHO IS ASKING. The chair is the Claude Code session session_01ACmDYZrFEVXyZEUg1NDxxC (your parent). In the chair's chat on 2026-11-14 the owner wrote: "Continue with the pending work! ... I defer all decisions to you and give you all permissions you may require." The owner's bar: thirty fresh towns read thoroughly with no high and no medium false sentence.
 
