@@ -1642,3 +1642,119 @@ door must run in a git worktree, never an archive.
 - FOR THE DECLARATION PASS (unchanged): the two SERVICE_OUTPUTS matchers (item 5's row); row dbd691c1c6f9171f.
 - LEFT FOR AFTER THE JOIN (new from this seat): item 6's neighbour, 58 lines / 35 towns ("depend on X brought in"
   where X is also worked here; the record imports it too).
+
+# PART 11 — the eleventh seat (W2-C-LEAVES-11, 2026-11-14, from 92d36e5f9)
+
+**Seat:** the Claude Code session session_01ACmDYa4KmJL5obH2XYLKdb; the chair is session_01ACmDYZrFEVXyZEUg1NDxxC.
+Assignment: docs/chair/2026-11-14/briefs/BRIEF-W2-C-LEAVES-11.md on lane/chair-2026-11-08. Origin read back at the start:
+92d36e5f9 (the brief's). Scratch worktree <scratchpad>/wt (local branch w11). EXECUTED = run and read; PLAUSIBLE = read
+from code. HANDED BACK AT THE COUNT (327,566 at the 12:14 UTC check, the mark 400,000: the two HIGH pills of ruling (3)
+each need tradeListDisplay.js read whole and a 1,824-birth measure, which do not fit in what is left).
+
+## THE CHAIR'S RULINGS (copied from the brief, 2026-11-14; each vetoable by the owner)
+(1) [1] HIGH, THE STAGE'S OWN: THE RIVAL RINGS. RULED: RIVAL RINGS ONLY WHERE THE RECORD HOLDS TWO OR MORE CRIMINAL POWERS AND
+NONE GOVERNS OR DOMINATES, AND NO GUILD IS NAMED AS RUNNING THE TRADE; otherwise the one organisation, read from the record.
+The key reaches the PDF and the stored public prose: all three move together.
+(2) [2] HIGH, THE STAGE'S OWN: THE FULLY-WORKED SENTENCE. RULED: THE SENTENCE PRINTS ONLY WHERE THE ROSTER HOLDS THE HOUSE IT
+NAMES AND THE EXPORTS HOLD THE GOOD; A SLOT IS FILLED FROM THE RECORD, NEVER FROM A CHAIN'S DEFAULT; a house is named by its
+display name, not a bare catalogue name. Count it too in the towns where it printed at the base.
+(3) [11, 13, the carried pills] A PILL NAMES A GOOD ONLY WHERE A HOUSE THAT MAKES IT STANDS. HIGH: "Outputs: Master-crafted
+weapons" on an Iron & Metalwork card whose only house is a mine (21 of 21): A GOOD WITH NO MAKER ROW IS NOT PRINTED BY
+DEFAULT. HIGH: exports under a famine listing the food that failed (12-13 towns): a raw good whose own card the page marks
+Impaired by the crisis in force is not listed as an export. MEDIUM, the same rule: "Milled lumber" with only a thatcher
+(9 of 26), "Dyed cloth" with only a fuller (4 of 7), "Ship construction"/"Ocean-going vessels" with no shipyard (7).
+(4) [3, #206] THE LEGAL INFRASTRUCTURE ROW (`defenseDisplay.js :: courtOnRoster`): ONE FACT FOR THE COURT: the row and the
+Guard assessment's court sentences read one predicate; MEASURE FIRST which houses set `hasCourtSystem`; a town where the
+flag is set and no house that hears cases stands goes to the chair as a list.
+(5) [7] A RE-FILED CARD DRAWS NO SENTENCE FROM A POOL WRITTEN FOR ANOTHER BUCKET ("built on" only where that resource's line
+is the town's largest income; "sells the rest" only where the raw good is exported; "half-finished" only where no house
+works the next step); the pools are the corpus lane's: change the KEY, never the pool.
+(6) [6] ONE READER FOR A RESOURCE'S STATE: `generalStateProse.js :: craftReasonPoolKey` reads the re-filed state the card reads.
+(7) [4] A COUNT ON A PAGE COUNTS WHAT THE PAGE PRINTS (Economic Flows header, "Issues (#)"): EconomicsTab.jsx only inside this
+lane's own hunks, else STOP with the lines.
+(8) [5] UNDER A SIEGE NOTHING COMES IN OR GOES OUT ON ANY SURFACE (the besieged port's "ships bring in about a third").
+REFINED (the chair, 11:26 UTC): BY ROAD, GATE OR WATER; A MAGIC CHANNEL THE RECORD HOLDS IS SAID: under a siege the food
+sentence and its stat row name no import by ship, road or cart; where the food record names a magic channel (a
+teleportation circle, an airship run), the sentence may name that channel and its share, and nothing else. Counted by
+channel: besieged ports whose sentence names ships (to 0); besieged towns whose record holds a magic channel (read in three).
+(9) [8] THE PDF's "LOCAL PRODUCTION: None recorded" beside its own raw EXPORTS: the two lists read ONE rule (rule 3 decides).
+(10) [defence lane] THE ARCANE SUPPORT ROW reads `standingDefenseForces(r).magicDef.present`. REFINED (the chair, 11:42 UTC):
+THREE ARCANE FACTS STAND (the practitioners' census, the defence bucket's houses, `defenseProfile.traditions.hasArcane`):
+MEASURE THEM SIDE BY SIDE first. RULED: THE PAGE'S ARCANE WORDS READ THE DEFENCE PROFILE'S OWN TRADITION: "Arcane Support:
+Present" and the "Arcane defense" force group (tab, PDF forces, journal: 52 of 720 as named, row UPK-ARCANE52) print only
+where the profile holds it; houses standing without it are houses on the roster, not a defence.
+(11) [9] Military Contracts "Impaired" where its Mercenary quarter is not: a service card's state reads its house's state.
+(12) [12] THE PDF's CHAIN STATE: MEASURE ONLY, at origin/lane/join-2026-11-14's tip, on the census's 720; cure nothing.
+(13) [10] NOT YOURS: the journal's chain name "Chain" (the defence lane's `economicsSlice`).
+(H, the chair 10:58 UTC) THE MEDICAL READINESS LINE PRINTS A CATALOGUE COUNT RANGE ("Major monasteries (5-10). Wounds and
+fevers treated one at a time …", 12 metropolises, tab and PDF; REVIEW-R2-CODE-B row H3-T3): NO SURFACE PRINTS A CATALOGUE
+COUNT RANGE: the healer's name goes through the house-label leaf (display name, no range); grep the births for any other
+"(n-m)" this file prints: the same cure in the same commit. Placed with the HIGH rows, after (1)-(3).
+(14, the chair 11:42 UTC; row UC-INTSEC) "Internal Security Strong" beside "Desperate / Dangerous / Critical" in one row (12
+towns): TWO WORDS IN ONE ROW SAY WHAT EACH MEASURES, or the row prints one; cure only inside defenseDisplay.js; new words
+on the veto list. ALSO: a new lane (SURFACES-1) will make the PDF and the journal print through this lane's readers.
+
+## Items (this seat)
+| row | cause | cure, commit | counts (the reader's 1,824 births, 92d36e5f9 -> after) | guard, plant |
+|---|---|---|---|---|
+| (1) rival rings | `rivalRingsOf` excluded a GOVERNING seat from the rings but not from the verdict; never read Dominant or a guild house | `defenseDisplay.js :: rivalRingsHere` + `oneOrganisationRules` (0044e4f84; arm anchored 9b5833232) | key semi->organized in exactly 36 (18 governed/Dominant, 18 a thieves' guild house); false 36 -> 0; 253 true rival rings unchanged; 0 other key moves | noOneRingWhereRingsRival.test.js: unit + collected arm (36 + rr2s-city-calm-rand-1; guards r2r-city-3, r2r-city-29, r2r-city-5): RED 39 of 42 before, GREEN after |
+| (2) worked through | the full row's slots were the chain table's defaults | `validationOnPage.js :: exploitationForDesk` + `fullRowAsHeld`, `proseHouseName`; `houseOfKindOn` / `tradeFinisherOn` (ea37b0a67) | 463 towns lead with a full row: "worked all the way through" 153 -> 20; "built on" 245 -> 54; "Every stage" 65 -> 18; all 10 base fills the record bore out still print | economyDeskReadsTheCards.test.js: unit + arm (5 silenced, 5 kept): RED at 0044e4f84 (unit + 10 of 10), GREEN after |
+THE RECORD DOES NOT MOVE (EXECUTED, `rec.jsx` + `recdiff.mjs`: per-leaf sha1 of every birth, and of every composePublicProse
+block): 1,824 of 1,824 records identical after each cure. STORED PUBLIC PROSE (a declared move): (1) `defense:criminal` in
+exactly the 36; (2) `economy:resources`, `economy:services`, `economy:daily_life` in exactly the 371 towns whose full row is
+no longer offered, `economy:economics` in those + 24 kept towns.
+
+## EVERY NEW OR CHANGED LINE, with the towns it was read in (the owner's veto list)
+- (1) "Criminal structure: Organized syndicate" + the ring's vantage note, now in the 36: read on the tab and the PDF (the
+  journal prints no structure line) in r2r-city-50 (city; "Underworld: Corrupt City Council · Dominant"), rr3-city-under_siege-
+  port-0 (SIEGE), rr3-metropolis-famine-port-0 (FAMINE, metropolis; its prose "The thieves at Longshan answer to a guild" now
+  agrees), r2r-metropolis-25 (guild): TRUE. Guard r2r-city-3: Semi-organized + "Rival crews at Androntopia …" kept: TRUE.
+  Sizes reached: city, metropolis only.
+- (2) the 20 "worked all the way through" lines now filled from the record (Resources tab only; the PDF and the journal print
+  no exploitation sentence): r2r-village-52 "… livestock … Tannery finishes it, and it leaves as leather goods." TRUE;
+  r2r-town-15 "… clay … Potter finishes it, and it leaves as roof tiles." TRUE; rr3-metropolis-infiltrated-rand-5 "… fish …
+  Fish market finishes it, and it leaves as fish oil." FOR VETO: 12 of the 20 name a Fish market or Fishmonger beside the
+  export "Fish oil" (the catalogue's ladder makes the Fish market the fishmonger's house); 3 read "Mill finishes it, and it
+  leaves as beer" (r2r-village-32, r2s-infiltrated-village-2, rr3-village-infiltrated-rand-0): the mill mills, the export is
+  beer: FOR VETO. Silenced, read: r2r-village-5 and r2s-under_siege-hamlet-0 (SIEGE, hamlet): no line (TRUE silence).
+- (2) the draw: one town moved "Every stage …" -> "This is the trade the {T} is actually built on …" (the variant's liveness
+  changed); "built on" is ruling (5)'s row.
+THE TRUE LINES THE SILENCES TOOK: (1) none (the 36 were false by the ruling). (2) none of the 10 base fills the record bore
+out; "Every stage …" (46) and "built on …" (192) left with rows whose house or good the record lacks (PLAUSIBLE that some
+"built on" were true by income share: not measured; ruling (5) measures it).
+
+## FOR THE JOIN
+- defenseDisplay.js is held also by lane/coherence-upkeep-2026-11-12 (foodEnduranceLine, monthsInWords: not touched here).
+- tradeListDisplay.js, validationOnPage.js, economyStateProse.js, corruption.js: no other lane's copy differs (holders.sh).
+- CARRIED REDS (not this seat's, classed at 92d36e5f9 in a detached worktree): tests/lint/tuningRegister.walker.test.js
+  "dependents moved" for corruption.js's six tables (CAPTURE, CORRUPTION, DEITY_CORRUPTION, DEITY_LAW, GUILD, PATRONAGE):
+  red at 92d36e5f9 and 0044e4f84 alike: the refreeze ritual is the merge seat's. The presumed-things walker: the two named
+  SERVICE_OUTPUTS words only. The grid: 17 falls, identical at 92d36e5f9 (P6need / P17 / P8any), no rise: its `--shrink` is
+  the door's, not done here.
+
+## WHAT IS LEFT, line by line (in the brief's order; nothing begun of any)
+1. (3) HIGH pills: "Master-crafted weapons" (tradeListDisplay.js :: chainMakesHere's default branch `heads.some(...)`
+   passes a good with no MADE_GOOD_HOUSES row whenever a chain house's first word stands: the Mine). MEASURE FIRST how many
+   pills (chain Outputs and exports) pass by that default on the 1,824: ruling "no maker row, not printed by default" may
+   silence many export pills, and exportsAsPrinted feeds ruling (2)'s good slot (ea37b0a67): re-measure (2) after.
+   Then the famine exports (pillAsPrinted keeps a raw good whose card is Impaired by the famine; `chainCrisisStateShown`).
+   Then THE ONE MESSAGE to the chair of step 1 (the 1,824-birth counts for (1)-(3)).
+2. (H) the Medical Readiness count range (`defenseDisplay.js :: deriveSupportingCapabilities`, `facts.healerName` raw):
+   strike the bracket through the display label (the same shape as validationOnPage.js :: proseHouseName); grep the
+   births for every "(n-m)" the file prints.
+3. (4), (5), (7), (8 refined), (10 refined: measure the three arcane facts side by side first), (6), (9), (3) medium, (11),
+   (14), (12)'s measure; then the brief's step 3 medium rows.
+## INSTRUMENTS (docs/chair/2026-11-14/probes/W2-C-LEAVES-11/; replace <scratchpad>)
+- `run.sh <tree> <probe.jsx> <out>` (SEEDS=<file>, PART=k/n) births through a tree's own modules; `head.jsx` is the reader's
+  cfgFor (every seed shape of seeds-all.txt); `crime.jsx` (structure key, criminal seats, guild houses), `full.jsx` (the
+  exploitation desk's row and slots), `desk.jsx` (the economy desk's drawn exploitation sentence), `rec.jsx` + `recdiff.mjs
+  <a> <b> [all]` (record leaves and publicProse blocks moved), `readat.sh <name> <seeds>` (freezes wt, renders the tab dumps,
+  the records, the PDF and journal text through the reader's render.sh / surfaces.sh; seeds by ABSOLUTE path).
+- The reader's 1,824 tab dumps and records at 92d36e5f9 were rendered to <scratchpad>/r-base (3 workers, ~75 min); a
+  scratchpad does not survive the session: re-make with the reader's `render.sh <tree> <out> seeds-all.txt 3`.
+- Detached worktrees <scratchpad>/wt-92d36e5f9 and wt-0044e4f84 (git worktree list) classed the tuning red; remove at will.
+## STATUS (this seat, final)
+Rulings (1) and (2) DONE, pushed (0044e4f84, 9b5833232, ea37b0a67); the rest NOT STARTED (the count). Nothing running.
+`git diff --stat 92d36e5f9..HEAD -- src/`: src/domain/display/defenseDisplay.js +22 -1 (ruling 1); src/domain/display/
+validationOnPage.js +51 -5 (ruling 2). Two test files changed (no title added): noOneRingWhereRingsRival.test.js (ruling 1),
+economyDeskReadsTheCards.test.js (ruling 2).
