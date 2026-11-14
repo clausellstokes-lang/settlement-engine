@@ -16,6 +16,17 @@
  *   r2r-metropolis-6 (216,641, its river fishery depleted): "Most meals start from the day's catch." (98 of 1,722).
  *   Whether such a water still feeds the town is the food home's arithmetic (generators/foodLand.js), not moved here.
  *
+ * (c) THE FAMINE LINE'S HALF · crisisSummaryForSurface (domain/crisis/crisisSummaryVantage.js) takes an OPTIONAL fourth
+ *   argument, the record's facts; for a famine, where the facts hold no grain (the vocabulary's `grain` atom, read by
+ *   `atomHolds`), the Tonight official line and the Overview official line print the no-grain twin in the Crisis tab's
+ *   own words (generators/stressNarrative.js :: RENDERERS.famine, the r2-code-b lane's): "{name} has gone short of food
+ *   for a second season. ..." in place of "{name} has lost a second harvest. ...", and "{name} has gone short of food,
+ *   and its leaders are rationing ..." in place of "The harvest in {name} has failed, and its leaders are rationing
+ *   ...". With no facts handed it prints as before (every caller on this lane: the pages do not move). The callers'
+ *   half (tonightSheet.js, viewModel.js pass the facts) is the r2-code-b lane's; the two meet at the join.
+ *   rr3-metropolis-under_siege+famine-rand-1 (88,895, fed by its fish): "... has lost a second harvest." (55 of the 58
+ *   Tonight lines on the 1,722; the Overview's 52 of 54).
+ *
  * The towns are born as the reader's probes bear them (REVIEW-R3-CODE-C births.mjs :: cfgFor), as the ninth seat's guard
  * (tests/domain/r3c9ReaderLinesTrue.test.js) bears them. Each arm collects first and asserts on the collection, and
  * asserts that it saw the culture whose line it watches (a guard that never meets its line proves nothing).
@@ -26,6 +37,9 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { CULTURE_PROFILES } from '../../src/data/cultureProfiles.js';
 import { foodwaysLineOf, sourcesNamedIn } from '../../src/domain/foodways.js';
+import { crisisSummaryForSurface } from '../../src/domain/crisis/crisisSummaryVantage.js';
+import { factsOf } from '../../src/domain/facts/factsOf.js';
+import { atomHolds } from '../../src/domain/facts/factVocabulary.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 const SIZES = '(thorp|hamlet|village|town|city|metropolis)';
@@ -80,6 +94,19 @@ const FISHED_OUT_TOWNS = ['rr3-village-under_siege+famine-rand-3', 'rr3-city-und
 /** Towns whose fish water stands: the catch is still named, and the line is the record's own. */
 const LIVE_WATER_TOWNS = ['r2r-thorp-12', 'r2r-town-15', 'r2r-metropolis-10'];
 
+/**
+ * (c)'s towns, each under a famine. Tonight's official line, no grain grown: the smallest (a thorp of 8 on its game, under
+ * siege), a thorp of 9 on its catch, a town of 737 with no source of its own, the largest (a metropolis of 88,895 on
+ * its fish, under siege). The Overview's: a thorp of 5 under siege, a village of 193 on herds, catch and a mill, the
+ * largest (a metropolis of 97,340 on its fish).
+ */
+const TONIGHT_NO_GRAIN = ['rr3-thorp-under_siege-rand-3', 'rr3-thorp-famine-port-1', 'r2s-famine-town-3', 'rr3-metropolis-under_siege+famine-rand-1'];
+const OVERVIEW_NO_GRAIN = ['rr3-thorp-under_siege+famine-rand-2', 'rr3-village-famine-rand-3', 'rr3-metropolis-famine-port-1'];
+/** Famines in towns that grow grain: the harvest line stands. */
+const TONIGHT_GRAIN = ['rr3-hamlet-under_siege+famine-rand-2', 'rr3-town-famine-rand-0'];
+const OVERVIEW_GRAIN = ['r2s-famine-town-1', 'rr3-metropolis-famine-rand-4'];
+
+/** @type {Array<any>} */ let famineTowns = [];
 /** @type {Array<any>} */ let fishedOutTowns = [];
 /** @type {Array<any>} */ let liveWaterTowns = [];
 /** @type {Array<any>} */ let noHerdTowns = [];
@@ -90,6 +117,7 @@ beforeAll(async () => {
   herdTowns = HERD_TOWNS.map(bear);
   fishedOutTowns = FISHED_OUT_TOWNS.map(bear);
   liveWaterTowns = LIVE_WATER_TOWNS.map(bear);
+  famineTowns = [...TONIGHT_NO_GRAIN, ...OVERVIEW_NO_GRAIN, ...TONIGHT_GRAIN, ...OVERVIEW_GRAIN].map((seed) => ({ seed, s: bear(seed) }));
 }, 180000);
 
 describe('(a) the herding line: a culture sentence that claims herding is drawn only where the food record holds a herd', () => {
@@ -129,5 +157,34 @@ describe('(b) the fished-out water: a foodways line names no catch from a water 
     const seen = liveWaterTowns.map((s) => ({ town: s.name, live: fishWatersOf(s).some((/** @type {any} */ c) => c.condition !== 'depleted'),
       catch: namesCatch(foodwaysLineOf(s) || ''), same: foodwaysLineOf(s) === s.economicState.foodSecurity.foodRecord.foodwaysLine.trim() }));
     expect(seen.map((t) => [t.live, t.catch, t.same])).toEqual(LIVE_WATER_TOWNS.map(() => [true, true, true]));
+  });
+});
+
+/** @param {string} seed @param {'tonight'|'overview'} surface @param {boolean} withFacts */
+const famineLine = (seed, surface, withFacts) => {
+  const { s } = /** @type {{ s: any }} */ (famineTowns.find((t) => t.seed === seed));
+  const entry = [].concat(s.stress || []).find((/** @type {any} */ e) => e?.type === 'famine');
+  return { town: s.name, grain: atomHolds('grain', factsOf(s)), line: String(withFacts ? crisisSummaryForSurface(entry, s.name, surface, factsOf(s)) : crisisSummaryForSurface(entry, s.name, surface)) };
+};
+const HARVEST = { tonight: /has lost a second harvest\./, overview: /^The harvest in .+ has failed, and its leaders are rationing/ };
+const SHORT = { tonight: /^.+ has gone short of food for a second season\. Its leaders have begun rationing, while the families who can afford it hoard what they have\.$/,
+  overview: /^.+ has gone short of food, and its leaders are rationing what is left while they decide whom to feed first\.$/ };
+
+describe("(c) the famine line's half: handed the record's facts, the official line presumes no harvest the town does not grow", () => {
+  it('handed the facts, a town that grows no grain is told it has gone short of food, on Tonight and on the Overview', () => {
+    const seen = [...TONIGHT_NO_GRAIN.map((seed) => ({ surface: /** @type {'tonight'} */ ('tonight'), ...famineLine(seed, 'tonight', true), before: famineLine(seed, 'tonight', false).line })),
+      ...OVERVIEW_NO_GRAIN.map((seed) => ({ surface: /** @type {'overview'} */ ('overview'), ...famineLine(seed, 'overview', true), before: famineLine(seed, 'overview', false).line }))];
+    // The arm met the harvest line it watches, in towns whose record grows no grain.
+    expect(seen.map((t) => [t.grain, HARVEST[t.surface].test(t.before)])).toEqual(seen.map(() => [false, true]));
+    expect(seen.filter((t) => !SHORT[t.surface].test(t.line) || !t.line.startsWith(t.surface === 'tonight' ? t.town : `${t.town} `))).toEqual([]);
+  });
+
+  it('handed the facts, a town that grows grain keeps the harvest line; handed none, every town prints as before', () => {
+    const grain = [...TONIGHT_GRAIN.map((seed) => ({ surface: /** @type {'tonight'} */ ('tonight'), ...famineLine(seed, 'tonight', true) })),
+      ...OVERVIEW_GRAIN.map((seed) => ({ surface: /** @type {'overview'} */ ('overview'), ...famineLine(seed, 'overview', true) }))];
+    expect(grain.map((t) => [t.grain, HARVEST[t.surface].test(t.line)])).toEqual(grain.map(() => [true, true]));
+    const bare = [...TONIGHT_NO_GRAIN.map((seed) => ({ surface: /** @type {'tonight'} */ ('tonight'), ...famineLine(seed, 'tonight', false) })),
+      ...OVERVIEW_NO_GRAIN.map((seed) => ({ surface: /** @type {'overview'} */ ('overview'), ...famineLine(seed, 'overview', false) }))];
+    expect(bare.filter((t) => !HARVEST[t.surface].test(t.line))).toEqual([]);
   });
 });

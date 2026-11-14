@@ -39,6 +39,7 @@
  */
 import { migrationDirectionOf } from './migrationDirection.js';
 import { fnv1a32 } from '../../kernel/proseHash.js';
+import { atomHolds } from '../facts/factVocabulary.js';
 
 /**
  * The Latin square: surface → the vantage it prints in column k (k = 0..3). Every column holds
@@ -515,22 +516,43 @@ export function crisisSummaryPoolsOf(entry) {
 }
 
 /**
+ * R3-CODE-C-10 (c) (the chair's ruling of 2026-11-14, vetoable by the owner; the ninth seat's H2-22): A LINE THAT NAMES
+ * WHERE THE FOOD COMES FROM READS THE FOOD RECORD. Two famine lines presume a harvest ("{name} has lost a second
+ * harvest.", "The harvest in {name} has failed"); where the record's facts hold no grain (the vocabulary's `grain`
+ * atom, read by `atomHolds`) each prints its twin, in the Crisis tab's own words for the same famine
+ * (generators/stressNarrative.js :: RENDERERS.famine: "{name} has gone short of food for a second season."), the
+ * rest of the line its own. Read only where a caller hands the facts; an unanswered atom keeps the line.
+ * rr3-metropolis-under_siege+famine-rand-1 (88,895, fed by its fish): "... has lost a second harvest."
+ */
+const NO_GRAIN_TWINS = Object.freeze({
+  famine: Object.freeze({
+    tonight: Object.freeze({ official: '{name} has gone short of food for a second season. Its leaders have begun rationing, while the families who can afford it hoard what they have.' }),
+    overview: Object.freeze({ official: '{name} has gone short of food, and its leaders are rationing what is left while they decide whom to feed first.' }),
+  }),
+});
+
+/**
  * The summary a named SURFACE prints: the line of the town's column in that surface's pool, the
  * settlement's name in its slot; the stored summary where the table has no line for the crisis
  * (an authored custom crisis) or no name is known. The crisis section is not a key here on
- * purpose: it keeps `entry.summary` itself.
+ * purpose: it keeps `entry.summary` itself. `facts` (optional, the record's facts: `factsOf`) lets a
+ * line that presumes a harvest read the record (NO_GRAIN_TWINS); with none handed, it prints as before.
  * @param {{ type?: unknown, summary?: unknown, direction?: unknown }|null|undefined} entry one `stress[]` entry
  * @param {unknown} name the settlement's name
  * @param {'cover'|'overview'|'defence'|'tonight'} surface
+ * @param {Parameters<typeof atomHolds>[1]} [facts] the record's facts
  * @returns {string|null}
  */
-export function crisisSummaryForSurface(entry, name, surface) {
+export function crisisSummaryForSurface(entry, name, surface, facts) {
   const stored = clean(entry?.summary) || null;
   const place = clean(name);
   const columns = SURFACE_VANTAGE_COLUMNS[/** @type {keyof typeof SURFACE_VANTAGE_COLUMNS} */ (surface)];
   const set = crisisSummaryPoolsOf(entry);
   if (!columns || !set || !place) return stored;
-  const vantage = columns[summaryColumnOf(place, clean(entry?.type))];
-  const line = clean(set[/** @type {keyof SurfacePools} */ (surface)]?.[vantage]);
+  const kind = clean(entry?.type);
+  const vantage = columns[summaryColumnOf(place, kind)];
+  const twins = /** @type {Record<string, Record<string, Record<string, string>>>} */ (NO_GRAIN_TWINS)[kind]?.[surface];
+  const twin = twins?.[vantage] && facts && atomHolds('grain', facts) === false ? twins[vantage] : '';
+  const line = clean(twin || set[/** @type {keyof SurfacePools} */ (surface)]?.[vantage]);
   return line ? line.replace(/\{name\}/g, place) : stored;
 }
