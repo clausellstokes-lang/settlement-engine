@@ -1280,3 +1280,27 @@ worktree /home/user/wt/p12m (branch p12m, from a5402c006), and detached /home/us
   bundles only in a checkout with its own node_modules.
 - A main-checkout fast-forward (`git merge --ff-only` in /home/user/settlement-engine) was refused by this session's permission check.
   The seat worked in its scratch worktrees only, and the main checkout stays at ec72918d4.
+
+## P6.8 The chair's rulings of 05:21 and 07:17 UTC (read after the hand-back message; copied in), and the writer-reach list
+- THE CHAIR, 05:21 UTC: the merge and registers ACCEPTED at d0bc03e08. RULED (vetoable):
+  - (1) The writer-reach door's growth form is NOT run. A signed re-bank is the merge seat's act at the join, made once on the joined
+    tree under the chair's signature.
+  - (2) The three banked rows stay as point 49 left them, named FOR THE DECLARATION PASS. rulingFaces has no atom: PARKED with its
+    word. The strip site, which lists labels without printing them, is a question for the rule book.
+  - (3) #312 and ww#656: LEFT FOR AFTER THE JOIN, accepted.
+  - (4) The raw modifier and L4: LEFT (P6.6).
+- THE CHAIR, 07:17 UTC: the whole suite is run once, on the joined tree (lane/join-2026-11-14). This lane's six shards had already run,
+  so they are classed as briefed (P6.3).
+- THE WRITER-REACH WALKER: RED AND NAMED, THE LANE'S. The door's output at the merge is kept in probes/POWERS-12/writer-reach-check-at-merge.txt.
+  - The sixteen new dark identities (thing on its key), every one on `npcs`:
+    - weakness on osr001, osr002, osr003, osr013, osr014 and osr015:npc_power_landed_gentry;
+    - weakness on osr004, osr005, osr006 and osr007:npc_power_noble_families;
+    - proud on osr003:npc_power_landed_gentry;
+    - proud on osr004, osr005 and osr007:npc_power_noble_families;
+    - weakness on osr008:npc_mill, and the identity osr008:npc_mill itself.
+  - The writer of each is an EXISTING writer: the NPC trait fields (src/data/npcTraitWeights.js, npcData.js), which this lane's diff
+    does not change. The lane's declared re-deal of the lords' cards and the ties (R1, and the mint) moved which NPC holds the trait in
+    the corpus.
+  - NO NEW unread write by new code of this lane: no `weakness` or `proud` write is added in e969a75b7..a5402c006.
+  - The 8 stale bank members (lastTargetedBy, lastTargetedTick, proud and weakness on osr004 to osr013) are the same move seen from the
+    other side.
