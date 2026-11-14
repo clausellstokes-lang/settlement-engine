@@ -516,3 +516,67 @@ naval line is record 422. So no first message was sent.
 - **The births at the tip byte-identical to the base** (sha256 of the decoded ndjson, `probes/R3-TABS/births.mjs` at
   aac79b808 and a19a0ee1b): census 720 a65d30b2…, reader 20 2997a853…, fresh 144 666d7793…, each equal at both and
   equal to the first seat's own figures. Every change of the lane is a read-time display or desk line.
+
+## Item 1 — the final statement's parts that need no suite, at the tip e43bacae8 (the code of 6ed610479) — DONE
+Every tree an integrity-counted `git archive` of its sha (aac79b808 9124 files, 9e57f5023 9175, e43bacae8 9200: tree
+and files equal), `node_modules` linked from the worktree's `npm ci` (package.json and the lock are byte-identical
+from the base to the tip). Helpers and outputs in `probes/R3-TABS/reader/`.
+- **The first census's counter, base aac79b808 against the tip** (SECOND-WAVE-CENSUS `census.sh` from
+  origin/lane/second-wave-census-2026-11-12, unchanged, 4 workers; then `count.mjs` RE-RUN OUTSIDE THE SCRIPT'S PIPE,
+  its own exit read): census exit 0 and counter exit 0 at both; stderr empty at both; the direct output equal to the
+  piped `counts.txt` at both (50 rows at the base, 47 at the tip: the three absent are rows at zero); every render
+  shard 180 of 180, 720 of 720 dumps. `compare.mjs`: 26 rows, **no WORSE, no NEW**; BETTER row 9 "Critical over
+  reassuring text" 148 → 114 (this lane's) and row 20 "siege text, no siege" 689 → 0 (the line's, point 48); every other
+  row OLD (5a 288 → 285, 5b 2 → 0, 13 172 → 170 within OLD). Equal to the second seat's reading.
+  Its limits beside the zeros: the dossier's views only; it cannot see two lines disagreeing; a hit is a candidate.
+- **The naval line on the page, by the same dumps** (the 57 towns of item 0 and the sea ports, the desk's sentence
+  looked up in each town's rendered page): the 57 off-sea lines print on the base page and on no tip page; 47 sea
+  ports print theirs at both; one sea port, r2s-politically_fractured-town-1 ("Ásstrand"), prints its line at the tip
+  and not at the base: L3's cure (e40e164ad, a name opening on Á), true of a sea port.
+- **The births byte-identical to the base:** sha256 of the decoded ndjson (`probes/R3-TABS/births.mjs`, the census's
+  720, the reader's 20, the 144 fresh, the app's shape) at aac79b808, a19a0ee1b and e43bacae8: census a65d30b2…,
+  reader 2997a853…, fresh 666d7793… at all three; 884 of 884 births, 0 errors at each.
+- **The reader's own instrument** (`render4.mjs` + `scan4.mjs` of REVIEW-UPKEEP-3 and `classes3.py` of
+  REVIEW-UPKEEP-2, from origin/lane/review-upkeep-2026-11-13, unchanged; the 1,440 rv2/rv3/rv4 seeds, `seeds.all.txt` +
+  `fresh.seeds` + `own.seeds`, the app's shape; render 4 shards, each exit 0; 1,440 of 1,440 dumps and scan rows):
+
+| class | the line 9e57f5023 | the tip e43bacae8 |
+|---|---|---|
+| A nobody on the walls beside a force | 151 | **0** |
+| A1 nobody on the walls beside a Strong invasion bar | 45 | **0** |
+| B no line and no force beside a force | 36 | **0** |
+| D an untroubled posture under a siege or war | 35 | **0** |
+| E all but undefended beside walls and a force | 56 | **22** |
+| F could not hold off a raid beside a Strong invasion bar | 50 | **0** |
+| K Defensible beside a cannot-hold posture line | 10 | **0** |
+| (B1, not an acceptance class) no line and no force beside Adequate/Strong | 3 | 1 |
+| (C, C0, not this lane's: the pay lines) | 65, 65 | 65, 65 |
+
+  (scan4's `parts` field reads `defencePartsOf is not a function` on every row at both trees: that export is not on
+  the line; classes3 does not read the field.)
+  **The 22 left in class E**, every one with the readiness badge "Undefended": the posture line now reads the badge (L1),
+  and the BADGE itself reads Undefended beside walls and a force: rv2-famine-hamlet-34, rv2-famine-hamlet-36,
+  rv2-famine-town-25, rv2-famine-village-30, rv2-succession_void-thorp-19, rv2-under_siege-hamlet-33,
+  rv2-under_siege-thorp-13, -thorp-2, -thorp-32, -thorp-36, -thorp-38, rv2-under_siege-village-26, -village-34,
+  -village-36, rv3-famine+wartime-town-1, rv3-occupied-village-0, rv3-under_siege+plague_onset-town-2,
+  rv3-under_siege-village-0, -village-2, rv4-famine-hamlet-0, rv4-under_siege+famine-town-0, rv4-under_siege-thorp-0.
+  **Their holder:** `src/generators/defenseGenerator.js :: computeDefenseReadiness` (the readiness score is the sum of
+  the defence parts, COHERENCE-UPKEEP-5's 82c639b44), held by **lane/coherence-upkeep-2026-11-12** (the defence lane;
+  21 of its own commits on the file, not on the line; lane/upkeep-capacity-2026-11-13 carries the same 21; no other
+  lane read here has a commit on it). NAMED for the join (FOR THE JOIN: the badge's 22 "Undefended").
+- **ONE draft shift record:** `docs/chair/2026-11-13/R3-TABS-SHIFT-RECORD-DRAFT.md`. The six surfaces, each suite run at
+  the base, the line and the tip with no update flag: generator golden master, espionage fence, PDF golden, Herald
+  desk golden and preset-lighting witness **UNMOVED** (green at all three); the **dossier prose manifest MOVED by this
+  lane**: red with the same three titles at all three, the line's output equal to the base's, and at the tip the drift
+  tally and list move (golden-master-v3 −250 cells: L0 −174, L2 −2, the naval cure −74; the gm seeds −8/−6/−6; the drift
+  arm's moved rows 1,036 → 1,050, at L0), attributed by running the suite in an archive of each desk commit. This
+  CORRECTS the first seat's expectation ("expected unmoved"): by measure it moves. The re-record is the merge seat's,
+  through the manifest's door.
+
+## STATUS (the third seat, after item 1)
+| part | status | where |
+|---|---|---|
+| the first act (where the second seat stopped; no open question) | DONE | this section |
+| item 0 the naval line written up, its measure, its guard, the governing suites, the births | DONE | 6ed610479 (the lane's mount-walker red cured), e43bacae8 |
+| item 1 the census counter, the births, the reader's classes, the draft shift record | DONE | this commit |
+| item 2 the merge of point 49, the page census, the whole suite in six shards, the lighting census, the edge bundles, THE FINAL STATEMENT | WAITS ON POINT 49 (the chair's word names the tip) | — |
