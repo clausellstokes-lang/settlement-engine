@@ -15,7 +15,29 @@
 // and its own ladder's lower rung takes its place: the line that ladder already prints for a power of that weight,
 // for this tier. No new words; no draw (the rungs are fixed lines).
 const SMALL_TIERS = Object.freeze(['thorp', 'hamlet', 'village']);
-/** @typedef {{ claim: string | RegExp, minor: (tier: string) => string, suppressed: (tier: string) => string }} ClaimRung */
+// POWERS-11 (REVIEW-POWERS-3 L2): a rung names no council, no merchant capital and no leading merchant its own roster
+// makes false. The context it reads: the power itself, the roster as the multipliers left it, the seat's name.
+/** @typedef {{ self: Record<string, any>, factions: Array<Record<string, any>>, governing: string, names: string[] }} RungContext */
+/** @typedef {{ claim: string | RegExp, minor: (tier: string, ctx: RungContext) => string | null, suppressed: (tier: string, ctx: RungContext) => string | null }} ClaimRung */
+const MERCHANT_POWER = /merchant|trade|commerc|consortium|mercantile/i;
+const COUNCIL_SEAT = /council|assembly|senate|parliament|moot/i;
+/** The roster's merchant powers other than this one. @param {RungContext} ctx */
+const merchantsBeside = (ctx) => ctx.factions.filter((x) => x !== ctx.self && MERCHANT_POWER.test(String(x?.faction || '')));
+const LESSER_LANDED = 'Minor landed families with limited political reach; present in civic life but rarely decisive.';
+const LOCAL_MERCHANTS = 'Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.';
+// the town's leading merchant power, where no merchant power governs, is not "not yet the dominant commercial voice"
+const LEADING_LOCAL_MERCHANTS = 'Merchants with local reach; a consistent civic presence, though other powers set the course here.';
+/** A merchant claim's rung. @param {string} _tier @param {RungContext} ctx */
+const merchantRung = (_tier, ctx) => !MERCHANT_POWER.test(ctx.governing)
+  && merchantsBeside(ctx).every((m) => Number(m.power || 0) <= Number(ctx.self.power || 0)) ? LEADING_LOCAL_MERCHANTS : LOCAL_MERCHANTS;
+/** A noble claim's Minor rung: "merchant capital" only where a merchant power stands (ahead of a town's gentry). @param {string} tier @param {RungContext} ctx */
+const nobleMinorRung = (tier, ctx) => tier === 'town'
+  ? (merchantsBeside(ctx).some((m) => Number(m.power || 0) > Number(ctx.self.power || 0))
+    ? 'Gentry families with local landholdings; active in civic politics but outpaced by merchant capital in raw financial leverage'
+    : LESSER_LANDED)
+  : (merchantsBeside(ctx).length
+    ? 'Noble families with hereditary land rights and traditional privileges; active in civic politics and competitive with merchant capital.'
+    : LESSER_LANDED);
 /** @type {ReadonlyArray<ClaimRung>} */
 const CLAIM_RUNGS = Object.freeze([
   // the port claim is matched by its opening and replaced to its sentence's end (its tail is a phrase the style law strikes,
@@ -23,9 +45,7 @@ const CLAIM_RUNGS = Object.freeze([
   ...['International merchant houses controlling port licences and import flows;',
     'Dominant commercial class at a trade nexus; they set prices, control warehousing, and fund the council.',
     'Dominant commercial class; their capital and networks give them leverage even formal institutions must respect.',
-  ].map((claim) => ({ claim,
-    minor: () => 'Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.',
-    suppressed: () => 'Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.' })),
+  ].map((claim) => ({ claim, minor: merchantRung, suppressed: merchantRung })),
   // the two church claims are matched by pattern (the house's word is the rulingStructure.js line's own, declared there)
   ...[/^\w+ institutions hold direct temporal power; tithes, land, and courts are all ecclesiastical\./,
     /^\w+ holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight\./,
@@ -44,7 +64,11 @@ const CLAIM_RUNGS = Object.freeze([
   ...['Underworld effectively controls vice, smuggling, and key officials; the nominal government tolerates this because it cannot currently change it.',
     'Criminal organisations have captured significant influence; corruption is systemic, not exceptional.',
   ].map((claim) => ({ claim,
-    minor: () => 'Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermediaries.',
+    minor: (/** @type {string} */ tier, /** @type {RungContext} */ ctx) => COUNCIL_SEAT.test(ctx.governing)
+      ? 'Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermediaries.'
+      : SMALL_TIERS.includes(tier)
+        ? 'A local protection operation tolerated because the alternative is open conflict with people who know the terrain better.'
+        : 'Criminal network operating in shadows; controls illicit trade and profits from the gap between law and enforcement.',
     suppressed: (/** @type {string} */ tier) => SMALL_TIERS.includes(tier)
       ? 'A local protection operation tolerated because the alternative is open conflict with people who know the terrain better.'
       : 'Criminal network operating in shadows; controls illicit trade and profits from the gap between law and enforcement.' })),
@@ -53,20 +77,18 @@ const CLAIM_RUNGS = Object.freeze([
     suppressed: () => 'Noble families with residual feudal claims; the formal obligations are real, but other powers set the practical agenda day to day.' },
   ...['Landed noble families whose hereditary rights, land rents, and marriage networks give them structural influence the elected council cannot easily override.',
     'Landed noble families whose hereditary rights, land rents, and marriage networks give them structural influence the seat cannot easily override.',
-  ].map((claim) => ({ claim,
-    minor: (/** @type {string} */ tier) => tier === 'town'
-      ? 'Gentry families with local landholdings; active in civic politics but outpaced by merchant capital in raw financial leverage'
-      : 'Noble families with hereditary land rights and traditional privileges; active in civic politics and competitive with merchant capital.',
-    suppressed: () => 'Minor landed families with limited political reach; present in civic life but rarely decisive.' })),
+  ].map((claim) => ({ claim, minor: nobleMinorRung, suppressed: () => LESSER_LANDED })),
 ]);
 
 /**
  * Each power whose description opens with a commanding claim its final label (Minor, Suppressed) denies takes its
  * ladder's rung for that label in place of the claim; the rest of the description (a coda another writer added) is
- * kept. Mutates the roster in place, as the multipliers do. Pure of draws.
- * @param {Array<Record<string, any>>} factions @param {string} tier
+ * kept. A rung reads the roster and the seat (RungContext); one that has no line true of the town (null) leaves the
+ * description as it is. Mutates the roster in place, as the multipliers do. Pure of draws.
+ * @param {Array<Record<string, any>>} factions @param {string} tier @param {string[]} [instNames] the roster's house names, lower-cased
  */
-export function settleClaimsToLabel(factions, tier) {
+export function settleClaimsToLabel(factions, tier, instNames = []) {
+  const governing = String(factions.find((x) => x?.isGoverning)?.faction || '');
   for (const f of factions) {
     const label = f?.powerLabel;
     if (label !== 'Minor' && label !== 'Suppressed') continue;
@@ -78,7 +100,10 @@ export function settleClaimsToLabel(factions, tier) {
     const rung = CLAIM_RUNGS.find((r) => spanOf(r.claim) > 0);
     if (!rung) continue;
     const end = spanOf(rung.claim);
-    f.desc = (label === 'Minor' ? rung.minor(tier) : rung.suppressed(tier)) + desc.slice(end);
+    /** @type {RungContext} */ const ctx = { self: f, factions, governing, names: instNames };
+    const line = label === 'Minor' ? rung.minor(tier, ctx) : rung.suppressed(tier, ctx);
+    if (line === null) continue;
+    f.desc = line + desc.slice(end);
   }
 }
 
