@@ -2064,6 +2064,24 @@
 }
 },
 {
+"id": "B19173",
+"sev": "MED",
+"n": 5,
+"town": "r2s-succession_void-city-0",
+"section": "World/Faith",
+"fold": "The church and the garrison in <N> act as #: soldiers keep the feast days, priests stand at the musters, and an offence against the faith is answered by armed men who call themselves crusaders.",
+"text": "The church and the garrison in Niedermoor act as one: soldiers keep the feast days, priests stand at the musters, and an offence against the faith is answered by armed men who call themselves crusaders.",
+"why": "church and garrison 'act as one'; QUARRELS has Ecclesiastical Council ~ Military/Guard tense, escalating",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/warFaith.generated.js",
+"line": 6422,
+"fn": "DS-FTH-4 › FLAG: crusaderSynthesis · v1"
+}
+},
+{
 "id": "B14310",
 "sev": "MED",
 "n": 5,
@@ -2820,6 +2838,42 @@
 }
 },
 {
+"id": "B03975",
+"sev": "MED",
+"n": 2,
+"town": "r2r-city-56",
+"section": "Systems/Magic",
+"fold": "At <N> the usual work no longer yields enough coal, and part of the shortfall is made up by means beyond it.",
+"text": "At Spitzgate the usual work no longer yields enough coal, and part of the shortfall is made up by means beyond it.",
+"why": "says coal shortfall made up by magic; LAND gives Fuel & Heating vulnerable, not magically sustained; TRADE imports coal",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 8037,
+"fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v1"
+}
+},
+{
+"id": "B03982",
+"sev": "MED",
+"n": 2,
+"town": "r2r-city-35",
+"section": "Systems/Magic",
+"fold": "At <N> the usual work no longer yields enough river fish, and part of the shortfall is made up by means beyond it.",
+"text": "At Ventofossae the usual work no longer yields enough river fish, and part of the shortfall is made up by means beyond it.",
+"why": "says river fish shortfall made up by magic; FOOD by magic 0%, River Fishing vulnerable not magically sustained, salted fish imported",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 8037,
+"fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v1"
+}
+},
+{
 "id": "13579",
 "sev": "MED",
 "n": 1,
@@ -3430,6 +3484,24 @@
 "file": "src/data/dossierStateProse/defense.generated.js",
 "line": 9296,
 "fn": "DS-DEF-12 › MAGIC-DEPENDENT · v2"
+}
+},
+{
+"id": "B10910",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-54",
+"section": "Systems/Magic",
+"fold": "If the help beyond ordinary work failed at <N>, its reeds and thatch would fall further short than it already does.",
+"text": "If the help beyond ordinary work failed at Terralitus, its reeds and thatch would fall further short than it already does.",
+"why": "implies magic props up the reed harvest; LAND gives Reed & Marsh Harvest vulnerable on depleted marsh, not magically sustained",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 8046,
+"fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v2"
 }
 },
 {

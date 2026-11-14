@@ -742,24 +742,6 @@
 }
 },
 {
-"id": "14612",
-"sev": "MED",
-"n": 36,
-"town": "r2s-occupied-hamlet-3",
-"section": "Systems/Resources",
-"fold": "No livestock reaches the dairy farmer.",
-"text": "No livestock reaches the dairy farmer.",
-"why": "'no livestock reaches the dairy farmer', yet the farmer keeps cattle or goats and the hamlet has common grazing",
-"kinds": [
-"PAIR"
-],
-"writer": {
-"file": "src/data/faceHonorifics.js",
-"line": 40,
-"fn": "FACE_HONORIFICS.the dairy farmer"
-}
-},
-{
 "id": "10338",
 "sev": "MED",
 "n": 29,
@@ -1300,6 +1282,42 @@
 }
 },
 {
+"id": "B01217",
+"sev": "MED",
+"n": 6,
+"town": "r2r-city-49",
+"section": "World/Relationships",
+"fold": "<N> records <N>'s payments as gifts from a pious donor.",
+"text": "Vergilius Ravilla records Galeria Tacitus's payments as gifts from a pious donor.",
+"why": "casts Vergilius Ravilla as keeper of a church; PEOPLE gives him as hospital's master (the dean is Gratus Aquila)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1878,
+"fn": "STRESS_ECONOMIC_EFFECTS.rel_crim_fraud"
+}
+},
+{
+"id": "B01376",
+"sev": "MED",
+"n": 6,
+"town": "r2r-city-49",
+"section": "World/Relationships",
+"fold": "<N> wants to store weapons beneath <N>'s altar.",
+"text": "Galeria Tacitus wants to store weapons beneath Vergilius Ravilla's altar.",
+"why": "gives Vergilius Ravilla an altar; PEOPLE gives him as hospital's master, not a cleric",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1893,
+"fn": "STRESS_ECONOMIC_EFFECTS.rel_crim_fraud"
+}
+},
+{
 "id": "B26373",
 "sev": "MED",
 "n": 5,
@@ -1441,6 +1459,24 @@
 "file": "src/domain/dossier/plotHooks.js",
 "line": 199,
 "fn": "ECHO_PREFIXES"
+}
+},
+{
+"id": "B01441",
+"sev": "MED",
+"n": 3,
+"town": "r2r-city-13",
+"section": "Summary/Overview",
+"fold": "<N>'s company has taken on a second client, and <N> has learned the client's name.",
+"text": "Rajesh Sharma's company has taken on a second client, and Girija Joshi has learned the client's name.",
+"why": "gives Rajesh Sharma a company taking private clients; PEOPLE has him as garrison commander, not a mercenary captain",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1821,
+"fn": "STRESS_ECONOMIC_EFFECTS.econ_mil_contract"
 }
 },
 {
@@ -1624,21 +1660,75 @@
 }
 },
 {
-"id": "B11591",
+"id": "B24233",
 "sev": "MED",
 "n": 1,
-"town": "r2r-city-17",
-"section": "Systems/Power",
-"fold": "Its seat is held by <N>, the senior guild master and Speaker of the Assembly.",
-"text": "Its seat is held by Samarkand Besud, the senior guild master and Speaker of the Assembly.",
-"why": "names Samarkand Besud 'Speaker' holding the Assembly seat; PEOPLE gives him only senior guild master, and Merchant Guilds are in HIGH quarrel with the Assembly",
+"town": "r2r-city-39",
+"section": "World/NPCs",
+"fold": "Wants Get the most out of the work at the caravanserai while it runs well, and put the gains by.",
+"text": "Wants Get the most out of the work at the caravanserai while it runs well, and put the gains by.",
+"why": "says the caravanserai runs well; gaps say it lacks camel herds and Caravan & Overland Trade is vulnerable",
 "kinds": [
 "STATE"
 ],
 "writer": {
-"file": "src/data/faceHonorifics.js",
-"line": 98,
-"fn": "FACE_HONORIFICS.the senior guild master"
+"file": "src/data/people/goalFamilies.js",
+"line": 473,
+"fn": "GOAL_FAMILY_LINES"
+}
+},
+{
+"id": "B26078",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-55",
+"section": "World/NPCs",
+"fold": "Wants Speak for Merchant oligarchy in # dispute this season where <N> would usually speak.",
+"text": "Wants Speak for Merchant oligarchy in one dispute this season where Heracles Komnenos would usually speak.",
+"why": "has Heracles Komnenos speaking for the Merchant oligarchy; PEOPLE puts him in Merchant Guilds, in high quarrel with it",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/goalFamilies.js",
+"line": 200,
+"fn": "GOAL_FAMILY_LINES"
+}
+},
+{
+"id": "B01440",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-13",
+"section": "World/Relationships",
+"fold": "<N>'s company guards <N>'s warehouses and wagons for a fixed fee each season.",
+"text": "Lopamudra Pillai's company guards Bhavana Ahuja's warehouses and wagons for a fixed fee each season.",
+"why": "gives Lopamudra Pillai a hired guard company; PEOPLE has her as watch commander, the company captain being Hemavati Pillai",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1804,
+"fn": "STRESS_ECONOMIC_EFFECTS.econ_mil_contract"
+}
+},
+{
+"id": "B01442",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-13",
+"section": "Summary/Overview",
+"fold": "<N>'s company still guards the wagons, but more slowly.",
+"text": "Lopamudra Pillai's company still guards the wagons, but more slowly.",
+"why": "gives Lopamudra Pillai a company guarding wagons; PEOPLE has her as watch commander, the company captain being Hemavati Pillai",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1820,
+"fn": "STRESS_ECONOMIC_EFFECTS.econ_mil_contract"
 }
 }
 ]

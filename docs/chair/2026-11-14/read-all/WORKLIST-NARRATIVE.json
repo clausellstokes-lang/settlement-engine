@@ -1549,6 +1549,24 @@
 }
 },
 {
+"id": "B04487",
+"sev": "MED",
+"n": 2,
+"town": "r2s-mass_migration-city-3",
+"section": "Summary/Overview",
+"fold": "By Democratic assembly, which can neither turn people away nor keep them fed, and by the old residents, who are keeping a private account of who arrived.",
+"text": "By Democratic assembly, which can neither turn people away nor keep them fed, and by the old residents, who are keeping a private account of who arrived.",
+"why": "says the assembly cannot keep people fed; FOOD word Secure, gap 1%, 9 months stored",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 220,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
 "id": "17174",
 "sev": "MED",
 "n": 1,

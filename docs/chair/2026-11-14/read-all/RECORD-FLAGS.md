@@ -1,4 +1,4 @@
-# READ-ALL · the record itself cannot be so: every flag a reader put on a town's header (614)
+# READ-ALL · the record itself cannot be so: every flag a reader put on a town's header (642)
 
 Each line: the town, the severity, what the reader said. These are faults of the generated RECORD (the page prints them faithfully): a cure moves the record and is a declared move: MEASURE FIRST.
 
@@ -17,6 +17,7 @@ Each line: the town, the severity, what the reader said. These are faults of the
 - bar0-village-famine-rand-1 · LOW · plains village of 187 exports coal with no mine and keeps a Fish market with no fishery; founding noble absent from GOVERNMENT
 - r2r-city-0 · MED · founded by a military command building fortifications, yet reason says it grew because a healer settled and people followed
 - r2r-city-13 · LOW · founded by a noble house wanting a commercial base, yet reason says it grew from a fishing village
+- r2r-city-14 · LOW · FOUNDING reason is 'None'; a Coastal town whose trade access is river
 - r2r-city-14 · LOW · founding reason prints 'None': an unfilled stored value
 - r2r-city-16 · LOW · founded by a noble house wanting a commercial base, yet reason says it grew because a retired navigator settled and others followed
 - r2r-city-17 · LOW · FOUNDING: founded by a powerful noble house for a commercial base, yet reason is a disbanded military unit that stayed; founder and reason conflict
@@ -26,33 +27,54 @@ Each line: the town, the severity, what the reader said. These are faults of the
 - r2r-city-19 · MED · made-here lists ship construction, ocean-going vessels and river barges; HOUSES has no shipyard or boatyard
 - r2r-city-19 · MED · makes ocean-going vessels, ship construction and river barges with no shipyard or boatyard in HOUSES; a coastal port has no river
 - r2r-city-20 · MED · founded by a military command building fortifications, yet reason says it began with a merchant's discovery of fine local wool
+- r2r-city-20 · MED · trade access isolated, yet exports pass transit trade and toll revenue; makes fine wool cloth and aged cheese while pasture chains vulnerable
 - r2r-city-23 · LOW · founded by a military command building fortifications, yet reason says it grew as an agricultural market center
 - r2r-city-24 · LOW · founded by a military command building fortifications, yet reason says it grew around a ferry crossing
+- r2r-city-24 · MED · makes salt with no salt resource or salt works; makes ale and beer with no Brewery in HOUSES
 - r2r-city-25 · LOW · fish market in a forest road town; merchant coalition founder vs foresters under charter; exports precious metals with no mine
 - r2r-city-26 · MED · founded by a noble house wanting a commercial base, yet reason says it began with a merchant's discovery of fine local wool
+- r2r-city-27 · LOW · HOUSES has a Mine with a mine captain, but LAND lists no ore, metal, gem or coal resource
+- r2r-city-28 · MED · founded both 'by a noble house' and 'by a disbanded military unit'; Democratic assembly vs Military/Guard high quarrel yet 'symbiotic'
 - r2r-city-28 · MED · founded by a noble house wanting a commercial base, yet reason says a disbanded military unit founded it
+- r2r-city-29 · MED · exports wild honey, candles, wax while Beekeeping's resource is absent; makes ale and beer with no Brewery; a Mine with no ore resource
 - r2r-city-29 · LOW · founded by royal decree and forced investment, yet reason says it grew along a trade route
 - r2r-city-30 · LOW · FOUNDING: founded by a merchant coalition, yet reason is veterans granted land after a forgotten war; founder and reason conflict
 - r2r-city-30 · MED · founded by a merchant coalition outgrowing its town, yet reason says veterans granted land after a war settled it
+- r2r-city-31 · LOW · exports glassware with no Glassmakers in HOUSES; exports enchanting with no enchanter
 - r2r-city-31 · MED · founded by a noble house wanting a commercial base, yet reason says herders gathered seasonally until it became permanent
 - r2r-city-32 · MED · founded by royal decree and forced investment, yet reason says it grew where herders gathered until it became permanent
 - r2r-city-34 · LOW · founded by a merchant coalition outgrowing its town, yet reason says it began as a naval base protecting the coast
+- r2r-city-35 · MED · FOOD says 79% grown, yet floodplain, fisheries, hunting and foraging are all depleted and no grain or grazing land is listed
 - r2r-city-35 · LOW · founded by a military command building fortifications, yet reason says it grew around a ferry crossing
 - r2r-city-36 · LOW · founded by a merchant coalition outgrowing its town, yet reason says it began as a noble's hunting lodge settlement
+- r2r-city-38 · MED · exports shipbuilding timber with Shipbuilding running, yet gaps say timber is not being processed; a 'city' of 2,853
+- r2r-city-39 · MED · exports and makes dates while Date Palms depleted and dates imported (orchards unproductive); fish market in a desert with no fishery
 - r2r-city-40 · MED · founder is a military command building fortifications; reason says it was founded by foresters under charter; two founders
 - r2r-city-42 · MED · founded by a military command building fortifications, yet reason says a family granted mill rights by a distant lord founded it
+- r2r-city-42 · MED · makes salt with no salt resource; makes honey, wax and medicinal herbs while Wild Foraging depleted and herbs imported
+- r2r-city-43 · MED · makes and exports grain with no grain fields (Brewing, Food Processing: grain absent); makes honey and herbs with no foraging and grove depleted
 - r2r-city-44 · MED · founded by royal decree and forced investment, yet began as a fishers' seasonal camp that grew on its own
+- r2r-city-46 · MED · exports mineral salts, alum, sulfur while gaps say mineral hot springs are not being processed; 'city' of 2,578
 - r2r-city-48 · MED · founded by a noble house wanting a commercial base, yet reason says it grew from one household others joined over decades
 - r2r-city-49 · MED · founded by a noble house wanting a commercial base, yet reason says families fleeing something settled it
 - r2r-city-5 · LOW · founded by a military command building fortifications, yet reason says it grew along a trade route
+- r2r-city-5 · LOW · makes foraged goods and exports wild honey, candles, wax while Foraging and Beekeeping chains have their resource absent
 - r2r-city-50 · LOW · founded by a military command building fortifications, yet reason says it grew along a trade route
 - r2r-city-51 · MED · royal decree and forced investment vs grew from a single household; makes gems while local gem deposits exhausted
+- r2r-city-52 · MED · City-State Council vs Military/Guard high quarrel yet 'symbiotic, stable'; makes salt while Salt Flats depleted and salt imported
 - r2r-city-52 · LOW · founded by a noble house wanting a commercial base, yet reason says it grew because a retired navigator settled and others followed
+- r2r-city-54 · MED · TRADE both exports and imports sulfur and alum; stone 'not being processed' while Stone & Construction runs; fish market with no fishery
 - r2r-city-54 · MED · founded by a military command building fortifications, yet reason says two rival mining operations built it to share infrastructure
+- r2r-city-55 · LOW · exports glassware with no Glassmakers in HOUSES; Religious Authorities Suppressed yet pilgrimage exported
 - r2r-city-55 · MED · founded by a noble house wanting a commercial base, yet reason says veterans granted land after a war settled it
+- r2r-city-56 · MED · exports wild honey, candles and wax, makes foraged goods; LAND has Beekeeping and Foraging vulnerable, their resource absent
 - r2r-city-56 · MED · founded by royal decree and forced investment, yet reason says it grew where herders gathered until it became permanent
+- r2r-city-57 · LOW · exports glassware with no Glassmakers in HOUSES; makes foraged goods while Foraging & Smallholding's resource is absent
 - r2r-city-58 · LOW · founded by a merchant coalition outgrowing its town, yet reason says it was built around one family's shipwright operation
+- r2r-city-6 · MED · Livestock & Dairy magically sustained yet FOOD by magic 0%; makes salt with no salt resource
 - r2r-city-6 · MED · founded by a merchant coalition outgrowing its town, yet reason says a family granted mill rights by a distant lord founded it
+- r2r-city-8 · MED · 'made here' lists salt; LAND has no salt resource and HOUSES no salt works
+- r2r-city-9 · LOW · exports shipbuilding timber with Shipbuilding running, yet gaps say timber is not being processed
 - r2r-hamlet-0 · MED · made here lists 'trade access' and 'luxury' as goods, and flour though the only mill is a neighbour's (Access to external mill)
 - r2r-hamlet-1 · MED · founded to control a salt deposit and exports Sea salt, yet HOUSES has no salt works; exports Recovered artefacts
 - r2r-hamlet-11 · MED · founded to control a salt deposit, exports Sea salt, yet no salt works; religious-community founder vs lord's salt reason
@@ -359,6 +381,8 @@ Each line: the town, the severity, what the reader said. These are faults of the
 - r2s-infiltrated-village-2 · LOW · PEOPLE titles Möngke Qatagin (m) 'the alewife': a gendered title that does not fit his sex
 - r2s-infiltrated-village-2 · LOW · exports Barrels and containers but HOUSES has no cooper
 - r2s-infiltrated-village-3 · MED · founded by escaped serfs, but the reason says farmland granted to a favoured noble; also Military/Guard power with no garrison or watch
+- r2s-insurgency-city-1 · LOW · PEOPLE gives Tserenpuntsag Nogai (f) the title 'lord'; Timetei Kyrgyz (m) 'district madam'
+- r2s-insurgency-city-1 · MED · QUARRELS has Ecclesiastical Council vs Military/Guard high conflict, yet the same pair is 'symbiotic, stable'
 - r2s-insurgency-hamlet-0 · LOW · isolated access yet grew at a strategic pass and makes 'trade access'; makes gems with no mine
 - r2s-insurgency-hamlet-0 · LOW · made here lists 'trade access' and gems; strategic pass founding yet isolated
 - r2s-insurgency-hamlet-1 · MED · religious-community founder vs logging-camp reason; Education (basic) made with no school
@@ -383,6 +407,7 @@ Each line: the town, the severity, what the reader said. These are faults of the
 - r2s-mass_migration-town-0 · MED · FOUNDING says founded by religious authorities for regional operations, reason says settled by veterans granted land; founders differ
 - r2s-mass_migration-village-1 · LOW · exports coal but HOUSES has no mine
 - r2s-mass_migration-village-2 · LOW · exports coal but HOUSES has no mine
+- r2s-monster_pressure-city-3 · MED · 'made here' lists medicinal herbs while Wild Foraging Areas depleted and herbs imported; Fish market while River Fisheries depleted
 - r2s-monster_pressure-hamlet-1 · MED · founded by a religious community, yet reason is farmland granted to a favoured noble; both cannot be the founding
 - r2s-monster_pressure-hamlet-1 · MED · hamlet of 64 with one part-time smith exports Quality tools and weapons and Advanced weapons and armor
 - r2s-monster_pressure-metropolis-0 · LOW · vintner on HOUSES but grapes neither made nor imported (14222 lists grapes as not brought in)
@@ -486,6 +511,7 @@ Each line: the town, the severity, what the reader said. These are faults of the
 - r2s-plague_onset-village-2 · LOW · made here lists Hospitality for travellers; HOUSES has no inn and trade access is isolated
 - r2s-plague_onset-village-3 · MED · Makes iron and metalwork with no smith; Thieves' Guild a Significant power with no thieves' house on HOUSES
 - r2s-plague_onset-village-3 · LOW · made here lists iron and metalwork but HOUSES has no smith
+- r2s-politically_fractured-city-1 · MED · LAND has Livestock & Dairy magically sustained on depleted grazing, yet FOOD gives by magic 0%
 - r2s-politically_fractured-hamlet-0 · LOW · made here stone with no quarry; Transit trade and Toll revenue with no toll house
 - r2s-politically_fractured-hamlet-1 · MED · founded by religious community yet reason a noble's hunting lodge; makes Religious services, Education with no church, shrine or school
 - r2s-politically_fractured-hamlet-3 · LOW · exports Pilgrim hospitality and makes Hospitality, iron and metalwork with no inn, shrine or smith
@@ -529,6 +555,7 @@ Each line: the town, the severity, what the reader said. These are faults of the
 - r2s-religious_conversion-village-0 · LOW · exports baked goods and pilgrim hospitality; HOUSES has no baker and no inn
 - r2s-religious_conversion-village-1 · LOW · grew around salt workings and exports Sea salt, but HOUSES has no salt works
 - r2s-religious_conversion-village-2 · LOW · founded by deep-water fishers and exports salted fish, but HOUSES has no fisher's landing; exports barrels and coal with no cooper or mine
+- r2s-slave_revolt-city-1 · MED · HOUSES has a Stone quarry with a quarry master, but LAND has no stone resource and TRADE imports stone
 - r2s-slave_revolt-city-2 · LOW · fish market in a hills road town; royal decree and forced investment vs a disbanded unit that simply stayed
 - r2s-slave_revolt-metropolis-0 · MED · plains road town with a harbour master's office; exports iron ore with no mine; sawmill and vintner with timber, grapes not brought in (14375)
 - r2s-slave_revolt-thorp-0 · MED · defence word Lightly Defended while every DEFENCE line is none; thorp of 28 makes gems, Religious services, Education with no house for them
@@ -602,6 +629,7 @@ Each line: the town, the severity, what the reader said. These are faults of the
 - r2s-under_siege-village-2 · MED · timber made here yet 22267 says it goes unworked; founded by refugees yet by two mining operations, no mine on HOUSES
 - r2s-under_siege-village-3 · MED · Salt works on HOUSES yet salt imported, not made; coal made with no mine; Military/Guard Strong with garrison none
 - r2s-under_siege-village-3 · LOW · escaped-serf founders vs grain-depot-for-a-city reason; makes coal with no mine
+- r2s-wartime-city-0 · MED · 'made here' lists medicinal herbs while LAND gives Wild Foraging Areas depleted and TRADE imports herbs (gathering exhausted)
 - r2s-wartime-city-0 · MED · founded by royal decree and forced investment, yet reason says it began with a merchant's discovery of fine local wool
 - r2s-wartime-city-1 · LOW · exports Higher education with no college; River ferry, river craft and barges in a coastal port with no river
 - r2s-wartime-city-2 · MED · founded by royal decree and forced investment, yet reason says it grew where herders gathered until it became permanent

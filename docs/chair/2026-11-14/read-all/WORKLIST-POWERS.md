@@ -1,9 +1,10 @@
 # READ-ALL worklist · POWERS · the powers: standing, claims, governance, the people's power lines
 
-218 flagged sentences (HIGH 0), read at the joined line e5b421802 on 2026-11-14. EACH IS A CANDIDATE: a reader judged it against ONE town's facts (`town read in`): verify it by the record before you cure it. `towns` = how many of the 720 census towns print the sentence (names and figures aside): the measure of its width, not of its falsity. The machine form is `WORKLIST-POWERS.json` beside this file (each row's `fold` is its key in an inventory).
+241 flagged sentences (HIGH 0), read at the joined line e5b421802 on 2026-11-14. EACH IS A CANDIDATE: a reader judged it against ONE town's facts (`town read in`): verify it by the record before you cure it. `towns` = how many of the 720 census towns print the sentence (names and figures aside): the measure of its width, not of its falsity. The machine form is `WORKLIST-POWERS.json` beside this file (each row's `fold` is its key in an inventory).
 
 ## YOUR FILES (no other seat holds them)
 
+- `src/data/faceHonorifics.js`
 - `src/data/people/handlerTieLines.js`
 - `src/data/stressPowerFaces.js`
 - `src/domain/factionProfile.js`
@@ -21,13 +22,14 @@
 - `src/generators/power/factionStanding.js` · 11 · 414
 - `src/generators/power/governanceNarrative.js` · 28 · 297
 - `src/generators/power/claimStanding.js` · 8 · 268
-- `src/generators/factionDynamics.js` · 43 · 171
-- `src/data/people/dmPowerLines.js` · 30 · 157
+- `src/data/people/dmPowerLines.js` · 47 · 177
+- `src/generators/factionDynamics.js` · 44 · 174
 - `src/generators/power/governingStressVignettes.js` · 7 · 100
-- `src/domain/display/governanceAccount.js` · 21 · 62
+- `src/domain/display/governanceAccount.js` · 23 · 69
 - `src/data/people/handlerTieLines.js` · 2 · 54
 - `src/generators/power/stressFactions.js` · 4 · 45
 - `src/domain/factionProfile.js` · 2 · 40
+- `src/data/faceHonorifics.js` · 3 · 38
 - `src/generators/power/settlementNarrative.js` · 2 · 33
 - `src/generators/power/conflictIssues.js` · 1 · 9
 - `src/data/stressPowerFaces.js` · 1 · 5
@@ -40,17 +42,18 @@
 - src/generators/power/factionStanding.js :: annotateFactionStanding · 11 · 414
 - src/generators/power/governanceNarrative.js :: deriveBaselineConflict · 22 · 160
 - src/generators/power/claimStanding.js :: CLAIM_RUNGS · 5 · 152
-- src/generators/factionDynamics.js :: computeFactionRelationships · 33 · 130
+- src/generators/factionDynamics.js :: computeFactionRelationships · 34 · 133
 - src/data/people/dmPowerLines.js ::  · 4 · 107
 - src/generators/power/governanceNarrative.js :: EXPOSED_READINESS_LABELS · 1 · 80
 - src/generators/power/claimStanding.js :: LOCAL_MERCHANTS · 1 · 73
-- src/domain/display/governanceAccount.js :: governanceAccountOf · 14 · 55
+- src/domain/display/governanceAccount.js :: governanceAccountOf · 16 · 62
 - src/data/people/handlerTieLines.js :: HANDLER_TIE_LINES · 2 · 54
-- src/data/people/dmPowerLines.js :: CAPTURE_LINES · 26 · 50
+- src/data/people/dmPowerLines.js :: CAPTURE_LINES · 27 · 51
 - src/generators/power/governingStressVignettes.js :: buildInsurgencyNarrative · 3 · 47
 - src/generators/power/stressFactions.js :: applyStressEventFactions · 4 · 45
 - src/generators/power/claimStanding.js :: LESSER_LANDED · 1 · 42
 - src/domain/factionProfile.js :: ARCHETYPE_TEMPLATES · 2 · 40
+- src/data/faceHonorifics.js :: FACE_HONORIFICS.the dairy farmer · 1 · 36
 - src/generators/power/settlementNarrative.js :: TIE_GLOSS · 2 · 33
 - src/generators/power/governingStressVignettes.js :: buildWartimeNarrative · 2 · 31
 - src/generators/factionDynamics.js :: criminalMilitaryRelation · 2 · 25
@@ -59,11 +62,15 @@
 - src/generators/power/governanceNarrative.js :: deriveBaselineStability · 3 · 20
 - src/generators/factionDynamics.js :: govCriminalRelation · 8 · 16
 - src/generators/power/governanceNarrative.js :: buildStressNarratives · 1 · 13
+- src/data/people/dmPowerLines.js :: cap · 10 · 12
 - src/generators/power/conflictIssues.js :: BASE_ISSUES · 1 · 9
+- src/data/people/dmPowerLines.js :: PATRONAGE_LINES · 6 · 7
 - src/domain/display/governanceAccount.js :: standingSentence · 7 · 7
 - src/data/stressPowerFaces.js :: STRESS_POWER_FACES · 1 · 5
 - src/domain/dossier/powerStrata.js :: crisisNoteFor · 2 · 5
 - src/generators/power/claimStanding.js :: nobleMinorRung · 1 · 1
+- src/data/faceHonorifics.js :: FACE_HONORIFICS.the senior craft-guild master · 1 · 1
+- src/data/faceHonorifics.js :: FACE_HONORIFICS.the senior guild master · 1 · 1
 
 ## The sentences, HIGH first, then widest first
 
@@ -109,6 +116,7 @@
 | MED | 37 | 05049 | Systems/Power | r2s-politically_fractured-thorp-1 | Claims legitimate authority through different means; controls a distinct district or institution. | 'controls a distinct district or institution'; tag reaches th, here a thorp of 10 with Dwellings (1-8) | src/generators/power/stressFactions.js (line 110 at e5b421802) applyStressEventFactions |
 | MED | 37 | B19695 | Systems/Power | r2r-hamlet-5 | The hall asks for the commander's agreement instead of giving orders, and less and less is decided without it. | names a commander whose agreement the hall seeks; 29842 says the War Council has no one captain and PEOPLE lists no commander | src/generators/factionDynamics.js (line 409 at e5b421802) computeFactionRelationships |
 | MED | 36 | 11289 | World/NPCs | r2s-famine-thorp-0 | How they deal Talks about the catch, the weather and the boats; quick to offer a meal of fish. | quick to offer a meal of fish; CRISIS famine, food deficit 26% | src/data/people/titleSecretsPresentations.js (line 873 at e5b421802) ROWS |
+| MED | 36 | 14612 | Systems/Resources | r2s-occupied-hamlet-3 | No livestock reaches the dairy farmer. | 'no livestock reaches the dairy farmer', yet the farmer keeps cattle or goats and the hamlet has common grazing | src/data/faceHonorifics.js (line 40 at e5b421802) FACE_HONORIFICS.the dairy farmer |
 | MED | 36 | B10741 | World/NPCs | r2s-under_siege-metropolis-2 | How they deal Takes letters at the posted rate; urgent ones cost more and leave sooner. | takes letters at the posted rate that 'leave sooner'; tag has S: under siege no post leaves by road | src/data/people/titleSecretsPresentations.js (line 1128 at e5b421802) ROWS |
 | MED | 35 | 10996 | World/NPCs | r2s-occupied-metropolis-0 | How they deal Assigns berths for the posted fee; urgent berths cost more. | Assigns berths to vessels; trade access is road only | src/data/people/titleSecretsPresentations.js (line 1220 at e5b421802) ROWS |
 | MED | 34 | 23333 | Systems/Power | r2s-under_siege-metropolis-3 | Undermanned and underfunded; unable to enforce law consistently and aware of it. | force undermanned, unable to enforce law; DEFENCE is Fortress, multiple garrisons, professional watch | src/generators/power/rulingStructure.js (line 556 at e5b421802) generatePowerStructure |
@@ -192,6 +200,7 @@
 | MED | 4 | B11564 | Systems/Power | r2s-politically_fractured-thorp-1 | Its seat is held by Citlali Caan, the head shepherd and Household Elder. | gives Citlali Caan the title Household Elder; roster gives head shepherd only and HOUSES has no Household elder | src/domain/display/governanceAccount.js (line 288 at e5b421802) governanceAccountOf |
 | MED | 4 | B00215 | Systems/Power | r2s-religious_conversion-village-3 | One of two rival sides claiming the legitimate succession: legal standing of their records is contested. | 'two rival sides claiming the legitimate succession' in present tense; crisis is Religious Conversion; the only Succession Crisis is 30 years past, minor | src/generators/power/stressFactions.js (line 370 at e5b421802) applyStressEventFactions |
 | MED | 4 | B09621 | Systems/Power | r2s-recently_betrayed-town-0 | Guild Council and Thieves' Guild leave each other alone. | 'leave each other alone' while QUARRELS has Guild Council vs Thieves' Guild an open moderate quarrel and relation tense | src/data/people/dmPowerLines.js (line 227 at e5b421802) CAPTURE_LINES |
+| MED | 4 | B11589 | Systems/Power | r2s-slave_revolt-city-1 | Its seat is held by Paullus Moderatus, the senior guild master and Lord Mayor. | City Council's seat given to the Merchant Guilds' master; GOVERNMENT has Merchant Guilds Suppressed, in quarrel with City Council; 'Lord Mayor' unrostered | src/domain/display/governanceAccount.js (line 288 at e5b421802) governanceAccountOf |
 | MED | 3 | 20593 | Systems/Power | r2s-famine-city-2 | The gap between them and Merchant oligarchy is narrow. | gap to Merchant oligarchy 'narrow'; oligarchy is the only Significant power, every other power Minor | src/generators/power/claimStanding.js (line 88 at e5b421802) CLAIM_RUNGS |
 | MED | 3 | 20600 | Systems/Power | r2s-famine-metropolis-0 | The gap between them and Royal Authority is narrow. | gap to Royal Authority 'narrow'; Royal Authority is the only Significant power, all others Minor or Suppressed | src/generators/power/factionStanding.js (line 54 at e5b421802) annotateFactionStanding |
 | MED | 3 | 07631 | Systems/Power | r2r-town-37 | Feudal Appointee keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained. | Appointee 'keeps order'; Plague Unrest, Legitimacy Crisis, Thieves' Guild equally Significant; 'Religious Authorities tells' disagrees in number | src/generators/factionDynamics.js (line 475 at e5b421802) computeFactionRelationships |
@@ -203,12 +212,14 @@
 | MED | 3 | 13195 | Systems/Power | r2r-city-56 | Merchant Guild Council keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained. | says the council keeps order and collects taxes; stability Fractured, no stable governing authority | src/generators/factionDynamics.js (line 475 at e5b421802) computeFactionRelationships |
 | MED | 3 | 16697 | Systems/Power | r2s-famine-metropolis-3 | Royal Authority and Thieves' Guild leave each other alone. | leave each other alone; same page marks the relation escalating and seeks to keep the quarrel from open trouble | src/data/people/dmPowerLines.js (line 227 at e5b421802) CAPTURE_LINES |
 | MED | 3 | 06241 | Systems/Power | r2s-wartime-metropolis-1 | Currently functioning smoothly: the war is going well enough that its authority isn't contested. | says War Council functions smoothly, authority uncontested; GOVERNMENT lists War Council Suppressed | src/generators/power/stressFactions.js (line 339 at e5b421802) applyStressEventFactions |
+| MED | 3 | 04979 | Systems/Power | r2r-city-52 | City-State Council gives the orders and Military/Guard carries them out; each needs the other to stay strong. | slash-joined label 'Military/Guard' used as a name in prose | src/generators/factionDynamics.js (line 406 at e5b421802) computeFactionRelationships |
 | MED | 3 | B12634 | Systems/Power | r2s-famine-city-2 | Merchant oligarchy leaves Thieves' Guild alone because stamping it out would cost more than it saves. | says Merchant oligarchy tolerates Thieves' Guild; QUARRELS relation is tense, escalating | src/generators/factionDynamics.js (line 259 at e5b421802) govCriminalRelation |
 | MED | 3 | B04763 | Systems/Power | r2s-famine-metropolis-2 | City-State Council leaves Thieves' Guild alone because stamping it out would cost more than it saves. | says City-State Council leaves Thieves' Guild alone; QUARRELS relation is tense, escalating | src/generators/factionDynamics.js (line 259 at e5b421802) govCriminalRelation |
 | MED | 3 | B01914 | Systems/Power | r2s-insurgency-thorp-1 | Asgaut Olafsson, the head shepherd and Household Elder, holds its seat. | title Household Elder for Asgaut Olafsson; roster gives head shepherd only and HOUSES has no Household elder | src/domain/display/governanceAccount.js (line 286 at e5b421802) governanceAccountOf |
 | MED | 3 | B13899 | Systems/Power | r2s-insurgency-city-2 | Noble Governorship leaves Thieves' Guild alone because stamping it out would cost more than it saves. | says governorship leaves Thieves' Guild alone; QUARRELS has a high open conflict with it over legitimacy, relation tense and escalating | src/generators/factionDynamics.js (line 259 at e5b421802) govCriminalRelation |
 | MED | 3 | B14087 | Systems/Power | r2s-insurgency-city-2 | Nobody at the head of Noble Governorship answers to Thieves' Guild, and neither side pushes the other. | says neither side pushes the other; QUARRELS has Thieves' Guild vs Noble Governorship high and escalating, insurgency contesting authority | src/data/people/dmPowerLines.js (line 227 at e5b421802) CAPTURE_LINES |
 | MED | 3 | B14050 | Systems/Power | r2s-infiltrated-city-1 | Nobody at the head of City Council answers to a criminal house, and no criminal power here is strong enough to push it. | says no criminal power is strong enough to push the council; stability line says decisions are shaped from outside, crisis Infiltrated by regional criminal pressure | src/data/people/dmPowerLines.js (line 210 at e5b421802) CAPTURE_LINES |
+| MED | 3 | B02095 | Systems/Power | r2r-city-26 | Uroš Andreyev, the senior guild master and First Councillor, holds its seat. | City-State Council's seat given to the Merchant Guilds' master; QUARRELS has City-State Council vs Merchant Guilds in high conflict | src/domain/display/governanceAccount.js (line 286 at e5b421802) governanceAccountOf |
 | MED | 2 | 03254 | Systems/Power | r2s-succession_void-thorp-1 | Acting Elder Dominik Wagner keeps the seat meanwhile. | Acting Elder keeps the seat; other lines say the seat stands empty, no one holds it | src/domain/display/governanceAccount.js (line 296 at e5b421802) governanceAccountOf |
 | MED | 2 | 21564 | Summary/Overview | r2r-hamlet-55 | The priest has summoned someone before the church court. | priest and 'church court'; HOUSES has only Access to parish church, no church or court | src/generators/power/governanceNarrative.js (line 437 at e5b421802) deriveBaselineConflict |
 | MED | 2 | 04348 | Systems/Power | r2r-hamlet-15 | Behind Feudal Stewardship by too much to challenge openly, so they get their way through petitions and procedure instead. | Merchant Guilds 'behind Feudal Stewardship by too much'; GOVERNMENT has both Dominant | src/generators/power/factionStanding.js (line 67 at e5b421802) annotateFactionStanding |
@@ -226,6 +237,9 @@
 | MED | 2 | B14061 | Systems/Power | r2r-town-37 | Nobody at the head of Feudal Appointee answers to Thieves' Guild, and neither side pushes the other. | says neither side pushes the other; relation is tense, escalating | src/data/people/dmPowerLines.js (line 227 at e5b421802) CAPTURE_LINES |
 | MED | 2 | B13657 | Summary/Overview | r2r-town-46 | Neither side will back down and Merchant Council is avoiding the question. | 'Neither side will back down'; QUARRELS: none and stability Stable, legitimacy Approved | src/generators/power/governanceNarrative.js (line 487 at e5b421802) deriveBaselineConflict |
 | MED | 2 | B12464 | Systems/Power | r2s-famine-city-1 | Merchant Guild Council leaves Thieves' Guild alone because stamping it out would cost more than it saves. | says council leaves Thieves' Guild alone; QUARRELS has them in a high open conflict over prices | src/generators/factionDynamics.js (line 259 at e5b421802) govCriminalRelation |
+| MED | 2 | B00895 | Systems/Power | r2r-city-38 | Metztli Uc is third in Ecclesiastical Council and holds a third share in Merchant Guilds, and carries Merchant Guilds' requests to the two above. | PEOPLE gives Metztli Uc only as master weaver, not third of Ecclesiastical Council or a Merchant Guilds shareholder | src/data/people/dmPowerLines.js (line 163 at e5b421802) cap |
+| MED | 2 | B01606 | Systems/Power | r2r-city-38 | Metztli Uc, third in Ecclesiastical Council, also holds a third share in Merchant Guilds, and that lends Merchant Guilds weight it would not have on its own. | PEOPLE gives Metztli Uc only as master weaver, not third of Ecclesiastical Council or a Merchant Guilds shareholder | src/data/people/dmPowerLines.js (line 187 at e5b421802) PATRONAGE_LINES |
+| MED | 2 | B00888 | Systems/Power | r2r-city-28 | Ekaterini Chomatenos is third in Democratic assembly and holds a third share in The Guard, and carries The Guard's requests to the two above. | PEOPLE gives Ekaterini Chomatenos only as prison warden; 'The Guard' is no listed power | src/data/people/dmPowerLines.js (line 163 at e5b421802) cap |
 | MED | 2 | B06497 | Systems/Power | r2s-occupied-metropolis-2 | Ducal Governorship and Thieves' Guild leave each other alone. | leave each other alone, but QUARRELS has an open moderate quarrel, relation tense; 00374 and 17354 have the guild at odds and holding proof | src/data/people/dmPowerLines.js (line 227 at e5b421802) CAPTURE_LINES |
 | MED | 1 | 07095 | Systems/Power | r2s-plague_onset-village-3 | Elder Council and Thieves' Guild leave each other alone. | says Elder Council and Thieves' Guild leave each other alone; 07132 marks them escalating and 20729 says at odds | src/data/people/dmPowerLines.js (line 227 at e5b421802) CAPTURE_LINES |
 | MED | 1 | 10837 | Systems/Power | r2r-village-39 | Household Council keeps order and collects the taxes; Conversion Enforcement Office tells people that both are right and ordained. | has the Conversion Enforcement Office blessing the council's rule as ordained; 10862 marks them escalating, and 07476 says it is an external verifying body | src/generators/factionDynamics.js (line 475 at e5b421802) computeFactionRelationships |
@@ -282,6 +296,22 @@
 | MED | 1 | B05801 | Systems/Power | r2s-wartime-town-1 | Crime and weak defences have left the Arcane Council's right to rule contested in Stredpol. | blames crime for contested rule; header has no criminal power, house or chain; the strain is wartime requisition (stability) and legitimacy score 36 | src/domain/display/governanceAccount.js (line 133 at e5b421802) standingSentence |
 | MED | 1 | B05821 | Systems/Power | r2s-insurgency-town-3 | Crime has left the Merchant Council's right to rule contested in Langdorf. | 'Crime has left the Merchant Council's right to rule contested'; GOVERNMENT lists no criminal power, LAND has no organised-crime chain; cause here is the insurgency | src/domain/display/governanceAccount.js (line 133 at e5b421802) standingSentence |
 | MED | 1 | B04756 | Systems/Power | r2s-plague_onset-city-1 | City-State Council and Thieves' Guild leave each other alone. | says council and Thieves' Guild leave each other alone; QUARRELS has an open moderate conflict over stolen goods sold openly, relation tense | src/data/people/dmPowerLines.js (line 227 at e5b421802) CAPTURE_LINES |
+| MED | 1 | B00896 | Systems/Power | r2s-insurgency-city-1 | Otgontuya Besud is third in Ecclesiastical Council and holds a large share in The Guard, and carries The Guard's requests to the two above. | PEOPLE gives Otgontuya Besud only as watch commander; 'The Guard' is no listed power; a 'share' in a guard | src/data/people/dmPowerLines.js (line 163 at e5b421802) cap |
+| MED | 1 | B00873 | Systems/Power | r2s-succession_void-city-0 | Oda Gruber is third in Ecclesiastical Council and holds a large share in Noble Families, and carries Noble Families' requests to the two above. | PEOPLE gives Oda Gruber only as Bardic college master, not third of Ecclesiastical Council or a Noble Families shareholder | src/data/people/dmPowerLines.js (line 163 at e5b421802) cap |
+| MED | 1 | B01581 | Systems/Power | r2s-succession_void-city-0 | Oda Gruber, third in Ecclesiastical Council, also holds a large share in Noble Families, and that lends Noble Families weight it would not have on its own. | PEOPLE gives Oda Gruber only as Bardic college master, not third of Ecclesiastical Council or a Noble Families shareholder | src/data/people/dmPowerLines.js (line 187 at e5b421802) PATRONAGE_LINES |
+| MED | 1 | B14081 | Systems/Power | r2r-city-56 | Nobody at the head of Merchant Guild Council answers to Thieves' Guild, and neither side pushes the other. | 'neither side pushes the other'; QUARRELS has Thieves' Guild vs Merchant Guild Council in moderate conflict | src/data/people/dmPowerLines.js (line 227 at e5b421802) CAPTURE_LINES |
+| MED | 1 | B02087 | Systems/Power | r2r-city-31 | Vifil Eindriðason, the senior craft-guild master and Lord Mayor, holds its seat. | City Council's seat given to the Craft Guilds' master; QUARRELS has City Council vs Craft Guilds in moderate conflict | src/data/faceHonorifics.js (line 132 at e5b421802) FACE_HONORIFICS.the senior craft-guild master |
+| MED | 1 | B00816 | Systems/Power | r2r-city-31 | Vifil Eindriðason heads City Council and also holds a full share in Craft Guilds, so what Craft Guilds wants from City Council goes straight to the top. | Craft Guilds' wishes 'go straight to the top'; QUARRELS has City Council vs Craft Guilds in moderate conflict | src/data/people/dmPowerLines.js (line 161 at e5b421802) cap |
+| MED | 1 | B01855 | Systems/Power | r2r-city-31 | Vifil Eindriðason, the head of City Council, also holds a full share in Craft Guilds, and that lends Craft Guilds weight it would not have on its own. | City Council's head lends Craft Guilds weight; QUARRELS has City Council vs Craft Guilds in moderate conflict | src/data/people/dmPowerLines.js (line 187 at e5b421802) PATRONAGE_LINES |
+| MED | 1 | B00875 | Systems/Power | r2r-city-45 | Yesüi Naiman is third in Arcane Council and holds a third share in Arcane Orders, and carries Arcane Orders' requests to the two above. | PEOPLE gives Yesüi Naiman only as Bardic college master; Arcane Orders are Suppressed and in quarrel with Arcane Council | src/data/people/dmPowerLines.js (line 163 at e5b421802) cap |
+| MED | 1 | B01584 | Systems/Power | r2r-city-45 | Yesüi Naiman, third in Arcane Council, also holds a third share in Arcane Orders, and that lends Arcane Orders weight it would not have on its own. | PEOPLE gives Yesüi Naiman only as Bardic college master, not third of Arcane Council or an Arcane Orders shareholder | src/data/people/dmPowerLines.js (line 187 at e5b421802) PATRONAGE_LINES |
+| MED | 1 | B00881 | Systems/Power | r2r-city-8 | Khutulun Merkit is third in City Council and holds a large share in The Guard, and carries The Guard's requests to the two above. | PEOPLE gives Khutulun Merkit only as castellan of the Citadel, not third of City Council; 'The Guard' is no listed power | src/data/people/dmPowerLines.js (line 163 at e5b421802) cap |
+| MED | 1 | B00876 | Systems/Power | r2r-city-54 | Valentinus Gratus is third in Arcane Council and holds a half share in The Guard, and carries The Guard's requests to the two above. | PEOPLE gives Valentinus Gratus only as mercenary company captain, not third of Arcane Council; 'The Guard' is no listed power | src/data/people/dmPowerLines.js (line 163 at e5b421802) cap |
+| MED | 1 | B00919 | Systems/Power | r2r-city-13 | Rakesh Prasad is third in Merchant Guild Council and holds a third share in Religious Authorities, and carries Religious Authorities' requests to the two above. | PEOPLE gives Rakesh Prasad only as sage, not third of Merchant Guild Council or a Religious Authorities shareholder | src/data/people/dmPowerLines.js (line 163 at e5b421802) cap |
+| MED | 1 | B01629 | Systems/Power | r2r-city-13 | Rakesh Prasad, third in Merchant Guild Council, also holds a third share in Religious Authorities, and that lends Religious Authorities weight it would not have on its own. | PEOPLE gives Rakesh Prasad only as sage, not third of Merchant Guild Council or a Religious Authorities shareholder | src/data/people/dmPowerLines.js (line 187 at e5b421802) PATRONAGE_LINES |
+| MED | 1 | B00886 | Systems/Power | r2r-city-50 | Caecilia Macer is third in Corrupt City Council and holds a large share in Arcane Orders, and carries Arcane Orders' requests to the two above. | PEOPLE gives Caecilia Macer only as circle-keeper of the Teleportation circle, not third of Corrupt City Council | src/data/people/dmPowerLines.js (line 163 at e5b421802) cap |
+| MED | 1 | B01596 | Systems/Power | r2r-city-50 | Caecilia Macer, third in Corrupt City Council, also holds a large share in Arcane Orders, and that lends Arcane Orders weight it would not have on its own. | PEOPLE gives Caecilia Macer only as circle-keeper of the Teleportation circle, not third of Corrupt City Council | src/data/people/dmPowerLines.js (line 187 at e5b421802) PATRONAGE_LINES |
+| MED | 1 | B11591 | Systems/Power | r2r-city-17 | Its seat is held by Samarkand Besud, the senior guild master and Speaker of the Assembly. | names Samarkand Besud 'Speaker' holding the Assembly seat; PEOPLE gives him only senior guild master, and Merchant Guilds are in HIGH quarrel with the Assembly | src/data/faceHonorifics.js (line 98 at e5b421802) FACE_HONORIFICS.the senior guild master |
 | MED | 1 | B11556 | Systems/Power | r2s-insurgency-metropolis-0 | Its seat is held by Nada al-Dawla, the exchange master and Lord Mayor. | Nada al-Dawla (f) is only the exchange master on PEOPLE; 'Lord Mayor' is no roster office and the title does not fit her sex | src/domain/display/governanceAccount.js (line 288 at e5b421802) governanceAccountOf |
 | MED | 1 | B17765 | Systems/Power | r2s-recently_betrayed-metropolis-1 | Strong defences and prosperity have earned the City-State Council the approval of Vatanserai. | Council said to have earned the town's approval; stability line says 'Shaken — nobody trusts those in charge' after a betrayal | src/domain/display/governanceAccount.js (line 143 at e5b421802) standingSentence |
 | MED | 1 | B09963 | Systems/Power | r2r-metropolis-2 | High Theocratic Council needs the taxes and loans of Merchant Guilds, and Merchant Guilds needs High Theocratic Council to enforce its contracts and keep the law. | presents High Theocratic Council and Merchant Guilds as mutually needed partners; QUARRELS has them in high conflict over an unpaid debt | src/generators/factionDynamics.js (line 442 at e5b421802) computeFactionRelationships |

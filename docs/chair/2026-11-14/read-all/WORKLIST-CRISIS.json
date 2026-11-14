@@ -1614,6 +1614,24 @@
 }
 },
 {
+"id": "B11049",
+"sev": "MED",
+"n": 1,
+"town": "r2s-indebted-city-2",
+"section": "Summary/Plot Hooks",
+"fold": "In the debt crisis, <N> of City Council is the # who would come to terms: holds the seat.",
+"text": "In the debt crisis, Wiglaf Asgersson of City Council is the one who would come to terms: holds the seat.",
+"why": "PEOPLE puts Wiglaf Asgersson in Merchant Guilds, in high quarrel with City Council, not 'of City Council'; ends in fragment 'holds the seat'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisHooks.js",
+"line": 89,
+"fn": "LINE_ROLE_CLAUSE"
+}
+},
+{
 "id": "B11151",
 "sev": "MED",
 "n": 1,

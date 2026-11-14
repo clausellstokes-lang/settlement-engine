@@ -1,6 +1,6 @@
 # READ-ALL worklist · NARRATIVE · the told history: origin prose and the narrative tables
 
-120 flagged sentences (HIGH 4), read at the joined line e5b421802 on 2026-11-14. EACH IS A CANDIDATE: a reader judged it against ONE town's facts (`town read in`): verify it by the record before you cure it. `towns` = how many of the 720 census towns print the sentence (names and figures aside): the measure of its width, not of its falsity. The machine form is `WORKLIST-NARRATIVE.json` beside this file (each row's `fold` is its key in an inventory).
+121 flagged sentences (HIGH 4), read at the joined line e5b421802 on 2026-11-14. EACH IS A CANDIDATE: a reader judged it against ONE town's facts (`town read in`): verify it by the record before you cure it. `towns` = how many of the 720 census towns print the sentence (names and figures aside): the measure of its width, not of its falsity. The machine form is `WORKLIST-NARRATIVE.json` beside this file (each row's `fold` is its key in an inventory).
 
 ## YOUR FILES (no other seat holds them)
 
@@ -17,7 +17,7 @@
 - `src/generators/narrative/settlementOriginProse.js` · 21 · 351
 - `src/data/narrativeData.js` · 33 · 209
 - `src/data/stressInstitutionEffects.js` · 18 · 190
-- `src/generators/narrativeText.js` · 43 · 174
+- `src/generators/narrativeText.js` · 44 · 176
 - `src/domain/facts/founder.js` · 3 · 79
 - `src/generators/narrativeGenerator.js` · 1 · 43
 - `src/generators/narrative/foundingRowAdmits.js` · 1 · 3
@@ -26,8 +26,8 @@
 
 - src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS · 20 · 350
 - src/generators/narrativeText.js :: POLITICAL_FLAVOR · 9 · 94
+- src/generators/narrativeText.js :: PRESSURE_SENTENCES · 32 · 79
 - src/domain/facts/founder.js :: FOUNDER_KIND · 3 · 79
-- src/generators/narrativeText.js :: PRESSURE_SENTENCES · 31 · 77
 - src/data/stressInstitutionEffects.js :: STRESS_INSTITUTION_EFFECTS.needs · 8 · 69
 - src/generators/narrativeGenerator.js :: SMALL_PLACE_TIER_LINES · 1 · 43
 - src/data/narrativeData.js :: STRESS_NOTES.politically_fractured · 2 · 27
@@ -150,6 +150,7 @@
 | MED | 2 | 15280 | Table/Tonight sheet | r2s-insurgency-hamlet-1 | Ordered a crackdown that killed people who had nothing to do with the insurgency, then falsified the reports to record them as insurgents. | ordered a crackdown that killed people; DEFENCE has no garrison, militia or watch to do it | src/data/stressInstitutionEffects.js (line 389 at e5b421802) STRESS_INSTITUTION_EFFECTS.needs |
 | MED | 2 | 28485 | Summary/Overview | r2r-town-4 | Warehouses and chandlers crowd the waterfront, with the older streets climbing behind them. | chandlers crowd the waterfront; HOUSES has no chandler | src/data/narrativeData.js (line 41 at e5b421802) ARRIVAL_SCENES.port |
 | MED | 2 | B01036 | Summary/Overview | r2s-famine-town-2 | Vatanserai is orderly in the way that a settlement is orderly when order is being enforced. | calls the town orderly; stability reads Desperate, hunger eroding order, legitimacy crisis, safety Dangerous | src/data/narrativeData.js (line 191 at e5b421802) STRESS_DESCS.famine |
+| MED | 2 | B04487 | Summary/Overview | r2s-mass_migration-city-3 | By Democratic assembly, which can neither turn people away nor keep them fed, and by the old residents, who are keeping a private account of who arrived. | says the assembly cannot keep people fed; FOOD word Secure, gap 1%, 9 months stored | src/generators/narrativeText.js (line 220 at e5b421802) PRESSURE_SENTENCES |
 | MED | 1 | 17174 | World/NPCs | r2s-succession_void-thorp-0 | Secret: Has documentation proving the famine was caused by export decisions made by Household Council, and has been paid to lose it | famine caused by the council's export decisions: exports none, isolated | src/data/stressInstitutionEffects.js (line 107 at e5b421802) STRESS_INSTITUTION_EFFECTS.needs |
 | MED | 1 | 20149 | Summary/Overview | r2s-insurgency-thorp-3 | The challenge to Household Council in Hochkirche comes from its own officials: taxes held back, decisions left unsigned, a coalition forming. | challenge 'comes from its own officials: taxes held back, decisions left unsigned'; thorp of 16 by head-of-household consensus has no officials or taxes | src/generators/narrativeText.js (line 191 at e5b421802) PRESSURE_SENTENCES |
 | MED | 1 | 11478 | Summary/Overview | r2s-slave_revolt-thorp-1 | In Erdeniin the two sides have discovered they cannot simply win: the enslaved cannot hold the whole settlement, and Household Council cannot retake it without destroying the timber that made it worth holding. | 'without destroying the timber that made it worth holding'; TRADE makes no timber here | src/generators/narrativeText.js (line 256 at e5b421802) PRESSURE_SENTENCES |

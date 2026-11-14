@@ -830,6 +830,24 @@
 }
 },
 {
+"id": "B17694",
+"sev": "MED",
+"n": 17,
+"town": "r2r-city-49",
+"section": "Systems/Magic",
+"fold": "Stone & Construction: Arcane fabrication and stone-shaping partially offset depleted extraction",
+"text": "Stone & Construction: Arcane fabrication and stone-shaping partially offset depleted extraction",
+"why": "says arcane stone-shaping offsets depleted extraction; LAND gives Stone & Construction vulnerable, not magically sustained; dressed stone imported",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/facts/magicSource.js",
+"line": 47,
+"fn": "MAGIC_NOTE_TRADITION"
+}
+},
+{
 "id": "23037",
 "sev": "MED",
 "n": 16,
@@ -1164,6 +1182,25 @@
 "why": "bowyer & fletcher supplied by arcane fabrication; HOUSES has no bowyer or fletcher",
 "kinds": [
 "LACKS"
+],
+"writer": {
+"file": "src/domain/facts/magicSource.js",
+"line": 46,
+"fn": "MAGIC_NOTE_TRADITION"
+}
+},
+{
+"id": "16353",
+"sev": "MED",
+"n": 10,
+"town": "r2r-city-54",
+"section": "Systems/Magic",
+"fold": "Reed & Marsh Harvest: Arcane fabrication provides processed goods from alternative sources",
+"text": "Reed & Marsh Harvest: Arcane fabrication provides processed goods from alternative sources",
+"why": "a reed and marsh harvest in a mountain metropolis whose TRADE makes and imports no reeds",
+"kinds": [
+"LACKS",
+"STATE"
 ],
 "writer": {
 "file": "src/domain/facts/magicSource.js",
@@ -1910,6 +1947,24 @@
 }
 },
 {
+"id": "B15684",
+"sev": "MED",
+"n": 2,
+"town": "r2s-monster_pressure-city-3",
+"section": "Systems/Magic",
+"fold": "River Fishing: Conjured game produces fish; minor supplement",
+"text": "River Fishing: Conjured game produces fish; minor supplement",
+"why": "says conjured fish supplement River Fishing; FOOD shows by magic 0% and the chain is vulnerable on a depleted fishery, not magically sustained",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/facts/magicSource.js",
+"line": 44,
+"fn": "MAGIC_NOTE_TRADITION"
+}
+},
+{
 "id": "B28997",
 "sev": "MED",
 "n": 2,
@@ -2314,6 +2369,276 @@
 "fold": "managed foresttimberancient grovemedicinal herbshoneycoal depositscoalprecious metalsluxurygemsstone quarrystoneforaging areas",
 "text": "managed foresttimberancient grovemedicinal herbshoneycoal depositscoalprecious metalsluxurygemsstone quarrystoneforaging areas",
 "why": "resource chips credit gems to the land; LAND gives Gemstone Deposits depleted, TRADE imports gemstones (local gem deposits exhausted)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28918",
+"sev": "MED",
+"n": 1,
+"town": "r2s-wartime-city-0",
+"section": "Systems/Economics",
+"fold": "livestockwooldairyanimal hidespeathoneymedicinal herbstimber",
+"text": "livestockwooldairyanimal hidespeathoneymedicinal herbstimber",
+"why": "lists medicinal herbs as made here; LAND gives Wild Foraging Areas depleted, Herbalism vulnerable, herbs imported",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29119",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-39",
+"section": "Systems/Resources",
+"fold": "oasis waterwaterdatesancient grovemedicinal herbshoneystone quarrystone",
+"text": "oasis waterwaterdatesancient grovemedicinal herbshoneystone quarrystone",
+"why": "lists dates as yielded by the land; LAND gives Date Palms and Orchards depleted, chain impaired",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28447",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-24",
+"section": "Systems/Economics",
+"fold": "fishsaltgrainflourstonegame meatanimal hides",
+"text": "fishsaltgrainflourstonegame meatanimal hides",
+"why": "lists salt as made here; LAND has no salt resource and HOUSES no salt works",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29184",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-24",
+"section": "Systems/Resources",
+"fold": "river fishfishsaltgrain fieldsgrainflourcrossroads positiontrade accessstone quarrystonehunting groundsgame meatanimal hidesfurs",
+"text": "river fishfishsaltgrain fieldsgrainflourcrossroads positiontrade accessstone quarrystonehunting groundsgame meatanimal hidesfurs",
+"why": "lists salt among the land's yield; LAND has no salt resource",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28570",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-28",
+"section": "Systems/Economics",
+"fold": "gemspeathoneymedicinal herbslivestockwooldairyanimal hides",
+"text": "gemspeathoneymedicinal herbslivestockwooldairyanimal hides",
+"why": "lists medicinal herbs as made here; LAND gives Wild Foraging Areas depleted and herbs are imported (gathering exhausted)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28439",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-8",
+"section": "Systems/Economics",
+"fold": "fishsaltclaypotterygame meatanimal hides",
+"text": "fishsaltclaypotterygame meatanimal hides",
+"why": "lists salt as made here; LAND has no salt resource and HOUSES no salt works",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29205",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-8",
+"section": "Systems/Resources",
+"fold": "river fishfishsaltriver clayclaypotteryhunting groundsgame meatanimal hidesfurs",
+"text": "river fishfishsaltriver clayclaypotteryhunting groundsgame meatanimal hidesfurs",
+"why": "lists salt among the land's yield; LAND has no salt resource",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28448",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-42",
+"section": "Systems/Economics",
+"fold": "fishsaltgrainlivestockmedicinal herbshoney",
+"text": "fishsaltgrainlivestockmedicinal herbshoney",
+"why": "lists salt and medicinal herbs as made here; LAND has no salt resource, Wild Foraging depleted, herbs imported",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29175",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-42",
+"section": "Systems/Resources",
+"fold": "river fishfishsaltfertile floodplaingrainlivestockancient grovemedicinal herbshoneyancient ruinstrade access",
+"text": "river fishfishsaltfertile floodplaingrainlivestockancient grovemedicinal herbshoneyancient ruinstrade access",
+"why": "lists salt among the land's yield; LAND has no salt resource",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28459",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-6",
+"section": "Systems/Economics",
+"fold": "fishsaltmedicinal herbshoneyironmetalworkflour",
+"text": "fishsaltmedicinal herbshoneyironmetalworkflour",
+"why": "lists salt as made here; LAND has no salt resource and HOUSES no salt works",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29167",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-6",
+"section": "Systems/Resources",
+"fold": "river fishfishsaltancient grovemedicinal herbshoneyiron depositsironmetalworkriver millsflourprocessed textiles",
+"text": "river fishfishsaltancient grovemedicinal herbshoneyiron depositsironmetalworkriver millsflourprocessed textiles",
+"why": "lists salt among the land's yield; LAND has no salt resource",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29020",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-52",
+"section": "Systems/Economics",
+"fold": "medicinal herbstimberfishsalt",
+"text": "medicinal herbstimberfishsalt",
+"why": "lists salt as made here; LAND gives Salt Flats depleted, Salt & Preservation impaired, salt imported",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28285",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-52",
+"section": "Systems/Resources",
+"fold": "deep harbourmaritime accessmagical nodemedicinal herbsshipbuilding timbertimberfishing groundsfishsalt",
+"text": "deep harbourmaritime accessmagical nodemedicinal herbsshipbuilding timbertimberfishing groundsfishsalt",
+"why": "lists salt among the land's yield; LAND gives Salt Flats depleted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28633",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-43",
+"section": "Systems/Economics",
+"fold": "graindatespeathoneymedicinal herbs",
+"text": "graindatespeathoneymedicinal herbs",
+"why": "lists grain, honey, medicinal herbs as made here; LAND has no grain fields or foraging, Ancient Grove depleted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28274",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-43",
+"section": "Systems/Resources",
+"fold": "date palmsgraindatesmarshlandspeathoneymedicinal herbs",
+"text": "date palmsgraindatesmarshlandspeathoneymedicinal herbs",
+"why": "lists grain among the land's yield; LAND has no grain fields (grain chains: resource absent)",
 "kinds": [
 "STATE"
 ],

@@ -1,6 +1,6 @@
 # READ-ALL worklist · DISPLAY-ECON · rows the display composes on the Economics, Resources, Magic and Outlook tabs (no fixed run to trace: find the writer first), and those tabs' own leaves
 
-156 flagged sentences (HIGH 0), read at the joined line e5b421802 on 2026-11-14. EACH IS A CANDIDATE: a reader judged it against ONE town's facts (`town read in`): verify it by the record before you cure it. `towns` = how many of the 720 census towns print the sentence (names and figures aside): the measure of its width, not of its falsity. The machine form is `WORKLIST-DISPLAY-ECON.json` beside this file (each row's `fold` is its key in an inventory).
+174 flagged sentences (HIGH 0), read at the joined line e5b421802 on 2026-11-14. EACH IS A CANDIDATE: a reader judged it against ONE town's facts (`town read in`): verify it by the record before you cure it. `towns` = how many of the 720 census towns print the sentence (names and figures aside): the measure of its width, not of its falsity. The machine form is `WORKLIST-DISPLAY-ECON.json` beside this file (each row's `fold` is its key in an inventory).
 
 ## YOUR FILES (no other seat holds them)
 
@@ -17,9 +17,9 @@
 
 ## By file (flagged sentences · towns printing, summed)
 
-- `(untraced)` · 125 · 2191
+- `(untraced)` · 140 · 2206
 - `src/components/new/tabs/EconomicsTab.jsx` · 2 · 309
-- `src/domain/facts/magicSource.js` · 16 · 234
+- `src/domain/facts/magicSource.js` · 19 · 263
 - `src/components/new/tabs/MagicTab.jsx` · 1 · 135
 - `src/domain/display/magicProvisionShown.js` · 6 · 130
 - `src/domain/display/foodBalanceBar.js` · 2 · 62
@@ -29,9 +29,9 @@
 
 ## By writer (file :: function, table or pool; flagged sentences · towns printing, summed)
 
-- (untraced) ::  · 125 · 2191
+- (untraced) ::  · 140 · 2206
 - src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection · 1 · 297
-- src/domain/facts/magicSource.js :: MAGIC_NOTE_TRADITION · 16 · 234
+- src/domain/facts/magicSource.js :: MAGIC_NOTE_TRADITION · 19 · 263
 - src/components/new/tabs/MagicTab.jsx :: MagicTab · 1 · 135
 - src/domain/display/magicProvisionShown.js ::  · 6 · 130
 - src/domain/display/chainNeedShown.js :: chainNeedLine · 2 · 59
@@ -91,6 +91,7 @@
 | MED | 17 | 14404 | Systems/Economics | r2r-hamlet-0 | Needed, and not brought in: timber, stone, metals. | says metals are not brought in; TRADE imports Iron (weapons) | (untraced) (line  at e5b421802)  |
 | MED | 17 | 30977 | Systems/Resources | r2s-plague_onset-hamlet-3 | ✓ Mining✓ Sheep herding✓ Wool production | Ticks Mining; HOUSES has no mine or quarry | (untraced) (line  at e5b421802)  |
 | MED | 17 | 04478 | Systems/Economics | r2s-plague_onset-city-1 | Bowyer & fletcherManufacturing & crafts✦ Magically Sustained | a bowyer & fletcher, magically sustained; HOUSES has no bowyers or fletchers | (untraced) (line  at e5b421802)  |
+| MED | 17 | B17694 | Systems/Magic | r2r-city-49 | Stone & Construction: Arcane fabrication and stone-shaping partially offset depleted extraction | says arcane stone-shaping offsets depleted extraction; LAND gives Stone & Construction vulnerable, not magically sustained; dressed stone imported | src/domain/facts/magicSource.js (line 47 at e5b421802) MAGIC_NOTE_TRADITION |
 | MED | 16 | 23037 | Systems/Magic | r2s-under_siege-metropolis-2 | Timber & Lumber: Druidic forest management accelerates regrowth and sustainable yield | druidic forest management sustains timber yield; TRADE imports Timber because local managed woodland is cleared (also 23039 'Magically Sustained') | src/domain/facts/magicSource.js (line 39 at e5b421802) MAGIC_NOTE_TRADITION |
 | MED | 16 | 14550 | Systems/Resources | r2r-village-24 | No one here works the medicinal herbs near Shandao. | no one works the medicinal herbs; TRADE made here lists medicinal herbs | (untraced) (line  at e5b421802)  |
 | MED | 16 | 23039 | Systems/Economics | r2s-plague_onset-city-1 | Timber & LumberRaw materials & fuel✦ Magically Sustained | timber 'magically sustained' by druidic regrowth, yet TRADE imports timber because local managed woodland is cleared | (untraced) (line  at e5b421802)  |
@@ -110,6 +111,7 @@
 | MED | 10 | 30928 | Systems/Resources | r2s-plague_onset-thorp-2 | ✓ Agriculture✓ Brewing | Brewing marked exploited: no brewery in HOUSES | (untraced) (line  at e5b421802)  |
 | MED | 10 | 30929 | Systems/Resources | r2s-monster_pressure-thorp-1 | ✓ Agriculture✓ Brewing✓ Milling✓ River trade | ticks Milling and Brewing; HOUSES has only Access to external mill, and brewing is not made here | (untraced) (line  at e5b421802)  |
 | MED | 10 | 04474 | Systems/Magic | r2r-city-51 | Bowyer & fletcher: Arcane fabrication provides processed goods from alternative sources | bowyer & fletcher supplied by arcane fabrication; HOUSES has no bowyer or fletcher | src/domain/facts/magicSource.js (line 46 at e5b421802) MAGIC_NOTE_TRADITION |
+| MED | 10 | 16353 | Systems/Magic | r2r-city-54 | Reed & Marsh Harvest: Arcane fabrication provides processed goods from alternative sources | a reed and marsh harvest in a mountain metropolis whose TRADE makes and imports no reeds | src/domain/facts/magicSource.js (line 46 at e5b421802) MAGIC_NOTE_TRADITION |
 | MED | 9 | 12888 | Systems/Economics | r2r-thorp-54 | Magical provision makes up about a quarter of what it eats. | magic a quarter of what it eats; 9 of 21 lbs eaten (12 grown + 9) is over two fifths | (untraced) (line  at e5b421802)  |
 | MED | 9 | 14549 | Systems/Resources | r2s-plague_onset-village-3 | No one here works the iron ore near Loughmere. | No one works the iron ore; TRADE 'made here' lists iron and metalwork | (untraced) (line  at e5b421802)  |
 | MED | 9 | 14072 | Systems/Outlook | r2s-slave_revolt-thorp-1 | Much of what Erdeniin eats is brought in by river; its own land does not produce enough. | 'Much of what Erdeniin eats is brought in by river'; deficit 3%, imports none | (untraced) (line  at e5b421802)  |
@@ -151,6 +153,7 @@
 | MED | 2 | B29878 | Systems/Resources | r2s-slave_revolt-hamlet-3 | ✓ Exotic goods✓ Glass and gems✓ Salt trade | checks Glass and gems and Salt trade; LAND gaps say gemstones and desert salt are raw, not processed | (untraced) (line  at e5b421802)  |
 | MED | 2 | B28789 | Systems/Resources | r2r-hamlet-42 | hot springs mineralmedicinal herbsmanaged foresttimberdefended passtrade accessiron depositsironmetalwork | names a 'defended pass'; DEFENCE is none throughout (no walls, force or watch); LAND lists only Mountain Pass (available) | (untraced) (line  at e5b421802)  |
 | MED | 2 | B15904 | Systems/Economics | r2s-famine-town-2 | Salted fishSmoked seafood | salted and smoked seafood as a product; Fishing Grounds depleted, Fishing & Seafood impaired, TRADE makes none | (untraced) (line  at e5b421802)  |
+| MED | 2 | B15684 | Systems/Magic | r2s-monster_pressure-city-3 | River Fishing: Conjured game produces fish; minor supplement | says conjured fish supplement River Fishing; FOOD shows by magic 0% and the chain is vulnerable on a depleted fishery, not magically sustained | src/domain/facts/magicSource.js (line 44 at e5b421802) MAGIC_NOTE_TRADITION |
 | MED | 2 | B28997 | Systems/Economics | r2r-metropolis-2 | medicinal herbshoneygems | lists gems as made; LAND has no Gemstone Deposits at all; honey/herbs with Wild foraging areas absent and Beekeeping vulnerable | (untraced) (line  at e5b421802)  |
 | MED | 1 | 22240 | Systems/Resources | r2r-thorp-27 | The thorp leaves its clay unworked. | leaves its clay unworked; TRADE makes clay and pottery | (untraced) (line  at e5b421802)  |
 | MED | 1 | 12110 | Systems/Economics | r2s-indebted-thorp-2 | Its own food comes from its hunting and little else, so one bad year for the hunting would cost the whole thorp dear. | 'food comes from its hunting and little else'; TRADE made here lists livestock and dairy and it exports live sheep | (untraced) (line  at e5b421802)  |
@@ -174,6 +177,21 @@
 | MED | 1 | B28788 | Systems/Resources | r2r-village-57 | hot springs mineralmedicinal herbsmanaged foresttimberdefended passtrade accesscoal depositscoal | 'defended pass'; DEFENCE is none on every line and STATE says Undefended | (untraced) (line  at e5b421802)  |
 | MED | 1 | B29905 | Systems/Resources | r2s-wartime-village-1 | ✓ Glass and gems✓ Salt trade | ticks 'Glass and gems' and 'Salt trade' as working; LAND gaps: glass sand and desert salt 'available but not being processed'; no glass or salt chain; no gem resource | (untraced) (line  at e5b421802)  |
 | MED | 1 | B28930 | Systems/Resources | r2s-under_siege-city-2 | managed foresttimberancient grovemedicinal herbshoneycoal depositscoalprecious metalsluxurygemsstone quarrystoneforaging areas | resource chips credit gems to the land; LAND gives Gemstone Deposits depleted, TRADE imports gemstones (local gem deposits exhausted) | (untraced) (line  at e5b421802)  |
+| MED | 1 | B28918 | Systems/Economics | r2s-wartime-city-0 | livestockwooldairyanimal hidespeathoneymedicinal herbstimber | lists medicinal herbs as made here; LAND gives Wild Foraging Areas depleted, Herbalism vulnerable, herbs imported | (untraced) (line  at e5b421802)  |
+| MED | 1 | B29119 | Systems/Resources | r2r-city-39 | oasis waterwaterdatesancient grovemedicinal herbshoneystone quarrystone | lists dates as yielded by the land; LAND gives Date Palms and Orchards depleted, chain impaired | (untraced) (line  at e5b421802)  |
+| MED | 1 | B28447 | Systems/Economics | r2r-city-24 | fishsaltgrainflourstonegame meatanimal hides | lists salt as made here; LAND has no salt resource and HOUSES no salt works | (untraced) (line  at e5b421802)  |
+| MED | 1 | B29184 | Systems/Resources | r2r-city-24 | river fishfishsaltgrain fieldsgrainflourcrossroads positiontrade accessstone quarrystonehunting groundsgame meatanimal hidesfurs | lists salt among the land's yield; LAND has no salt resource | (untraced) (line  at e5b421802)  |
+| MED | 1 | B28570 | Systems/Economics | r2r-city-28 | gemspeathoneymedicinal herbslivestockwooldairyanimal hides | lists medicinal herbs as made here; LAND gives Wild Foraging Areas depleted and herbs are imported (gathering exhausted) | (untraced) (line  at e5b421802)  |
+| MED | 1 | B28439 | Systems/Economics | r2r-city-8 | fishsaltclaypotterygame meatanimal hides | lists salt as made here; LAND has no salt resource and HOUSES no salt works | (untraced) (line  at e5b421802)  |
+| MED | 1 | B29205 | Systems/Resources | r2r-city-8 | river fishfishsaltriver clayclaypotteryhunting groundsgame meatanimal hidesfurs | lists salt among the land's yield; LAND has no salt resource | (untraced) (line  at e5b421802)  |
+| MED | 1 | B28448 | Systems/Economics | r2r-city-42 | fishsaltgrainlivestockmedicinal herbshoney | lists salt and medicinal herbs as made here; LAND has no salt resource, Wild Foraging depleted, herbs imported | (untraced) (line  at e5b421802)  |
+| MED | 1 | B29175 | Systems/Resources | r2r-city-42 | river fishfishsaltfertile floodplaingrainlivestockancient grovemedicinal herbshoneyancient ruinstrade access | lists salt among the land's yield; LAND has no salt resource | (untraced) (line  at e5b421802)  |
+| MED | 1 | B28459 | Systems/Economics | r2r-city-6 | fishsaltmedicinal herbshoneyironmetalworkflour | lists salt as made here; LAND has no salt resource and HOUSES no salt works | (untraced) (line  at e5b421802)  |
+| MED | 1 | B29167 | Systems/Resources | r2r-city-6 | river fishfishsaltancient grovemedicinal herbshoneyiron depositsironmetalworkriver millsflourprocessed textiles | lists salt among the land's yield; LAND has no salt resource | (untraced) (line  at e5b421802)  |
+| MED | 1 | B29020 | Systems/Economics | r2r-city-52 | medicinal herbstimberfishsalt | lists salt as made here; LAND gives Salt Flats depleted, Salt & Preservation impaired, salt imported | (untraced) (line  at e5b421802)  |
+| MED | 1 | B28285 | Systems/Resources | r2r-city-52 | deep harbourmaritime accessmagical nodemedicinal herbsshipbuilding timbertimberfishing groundsfishsalt | lists salt among the land's yield; LAND gives Salt Flats depleted | (untraced) (line  at e5b421802)  |
+| MED | 1 | B28633 | Systems/Economics | r2r-city-43 | graindatespeathoneymedicinal herbs | lists grain, honey, medicinal herbs as made here; LAND has no grain fields or foraging, Ancient Grove depleted | (untraced) (line  at e5b421802)  |
+| MED | 1 | B28274 | Systems/Resources | r2r-city-43 | date palmsgraindatesmarshlandspeathoneymedicinal herbs | lists grain among the land's yield; LAND has no grain fields (grain chains: resource absent) | (untraced) (line  at e5b421802)  |
 | MED | 1 | B28405 | Systems/Resources | r2s-slave_revolt-metropolis-3 | fishing groundsfishsaltdeep harbourmaritime access | lists salt as a product; LAND gives Salt Flats depleted and TRADE notes local salt flats exhausted | (untraced) (line  at e5b421802)  |
 | MED | 1 | B28639 | Systems/Economics | r2s-monster_pressure-metropolis-2 | grainflourgems | lists gems as produced; LAND gives Gemstone Deposits depleted | (untraced) (line  at e5b421802)  |
 | MED | 1 | B28606 | Systems/Resources | r2s-monster_pressure-metropolis-2 | grain fieldsgrainflourcoal depositscoalprecious metalsluxurygems | lists gems as produced; LAND gives Gemstone Deposits depleted | (untraced) (line  at e5b421802)  |

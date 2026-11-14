@@ -1,6 +1,6 @@
 # READ-ALL worklist · DISPLAY-CIVIC · rows the display composes on the Power tab, the Summary, and the World tabs (no fixed run to trace: find the writer first), and their own leaves
 
-142 flagged sentences (HIGH 0), read at the joined line e5b421802 on 2026-11-14. EACH IS A CANDIDATE: a reader judged it against ONE town's facts (`town read in`): verify it by the record before you cure it. `towns` = how many of the 720 census towns print the sentence (names and figures aside): the measure of its width, not of its falsity. The machine form is `WORKLIST-DISPLAY-CIVIC.json` beside this file (each row's `fold` is its key in an inventory).
+150 flagged sentences (HIGH 0), read at the joined line e5b421802 on 2026-11-14. EACH IS A CANDIDATE: a reader judged it against ONE town's facts (`town read in`): verify it by the record before you cure it. `towns` = how many of the 720 census towns print the sentence (names and figures aside): the measure of its width, not of its falsity. The machine form is `WORKLIST-DISPLAY-CIVIC.json` beside this file (each row's `fold` is its key in an inventory).
 
 ## YOUR FILES (no other seat holds them)
 
@@ -11,14 +11,14 @@
 
 ## By file (flagged sentences · towns printing, summed)
 
-- `(untraced)` · 135 · 2990
+- `(untraced)` · 143 · 3002
 - `src/domain/display/validationOnPage.js` · 1 · 55
 - `src/domain/display/heraldCausalGrammar.js` · 4 · 10
 - `src/components/organic/samples/fixtures.js` · 2 · 9
 
 ## By writer (file :: function, table or pool; flagged sentences · towns printing, summed)
 
-- (untraced) ::  · 135 · 2990
+- (untraced) ::  · 143 · 3002
 - src/domain/display/validationOnPage.js :: exploitationGroupsShown · 1 · 55
 - src/components/organic/samples/fixtures.js :: dossierFixture · 2 · 9
 - src/domain/display/heraldCausalGrammar.js :: LIVING_FLOOR · 3 · 7
@@ -126,6 +126,7 @@
 | MED | 3 | B21022 | World/History | r2r-town-57 | The siege is older than all but the oldest alive, and its legacy is much of what stands in Pianoium now: it was built in the years after. | says the town 'was built in the years after' the Siege (64 years ago); the town is 196 years old, older than the Siege | src/domain/display/heraldCausalGrammar.js (line 360 at e5b421802) LIVING_FLOOR |
 | MED | 3 | B21327 | World/History | r2s-infiltrated-city-1 | The trade collapse is older than anyone living, and its legacy is much of what stands in Olympagio now: it was built in the years after. | says the town was built in the years after the trade collapse; it is 223 years old and the collapse was 181 years ago | src/domain/display/heraldCausalGrammar.js (line 327 at e5b421802) CHAIN_END_BANNED |
 | MED | 3 | B05840 | Systems/Power | r2s-mass_migration-city-1 | Crime keeps Benheath from more than tolerating the Merchant Guild Council. | crime blamed for weak legitimacy; HOUSES has no smuggling/criminal house, GOVERNMENT lists no criminal power; legitimacy is Tolerated | (untraced) (line  at e5b421802)  |
+| MED | 3 | B04805 | Systems/Power | r2r-city-52 | City-State Council⇌Military/Guardstable | shows City-State Council and Military/Guard as stable partners; QUARRELS has them in high conflict over an unpaid debt | (untraced) (line  at e5b421802)  |
 | MED | 2 | 13395 | Systems/Power | r2s-famine-town-1 | Merchant oligarchy~Religious Authoritiesstable | marks oligarchy~Religious Authorities stable; 15622 and 26193 say the two keep quarrelling | (untraced) (line  at e5b421802)  |
 | MED | 2 | 07646 | Systems/Power | r2r-town-37 | Feudal Appointee~Thieves' Guildescalating | marks Feudal Appointee~Thieves' Guild escalating; 07626 and 14888 say they leave each other alone | (untraced) (line  at e5b421802)  |
 | MED | 2 | 23195 | Summary/Foundations | r2s-indebted-city-1 | Trade connectivityCollapsed | 'Trade connectivity Collapsed'; prosperity Prosperous, river docks, caravan exchange and exports all running | (untraced) (line  at e5b421802)  |
@@ -143,6 +144,8 @@
 | MED | 2 | B12623 | Systems/Power | r2s-famine-city-2 | Merchant oligarchy and Thieves' Guild leave each other alone. | says Merchant oligarchy and Thieves' Guild leave each other alone; QUARRELS has them tense, escalating | (untraced) (line  at e5b421802)  |
 | MED | 2 | B14083 | Systems/Power | r2s-famine-city-2 | Nobody at the head of Merchant oligarchy answers to Thieves' Guild, and neither side pushes the other. | says neither side pushes the other; QUARRELS has Merchant oligarchy and Thieves' Guild tense, escalating | (untraced) (line  at e5b421802)  |
 | MED | 2 | B05843 | Systems/Power | r2s-monster_pressure-town-1 | Crime keeps Al-mandi from more than tolerating the Military Council. | blames crime for weak legitimacy; header has no criminal power, house or chain; legitimacy is Tolerated and the crisis is beast raids | (untraced) (line  at e5b421802)  |
+| MED | 2 | B28195 | Systems/Power | r2r-city-45 | answers to Front businesses through Otgontuya Qatagin | PEOPLE gives Otgontuya Qatagin to the Smuggling network; Front businesses' head is Rashid Cumans | (untraced) (line  at e5b421802)  |
+| MED | 2 | B01598 | Systems/Power | r2r-city-28 | Ekaterini Chomatenos, third in Democratic assembly, also holds a third share in The Guard, and that lends The Guard weight it would not have on its own. | PEOPLE gives Ekaterini Chomatenos only as prison warden, not third of Democratic assembly; 'The Guard' is no listed power | (untraced) (line  at e5b421802)  |
 | MED | 2 | B11121 | Summary/Plot Hooks | r2s-monster_pressure-metropolis-3 | In the raids, Anusaya Mishra of Merchant Guilds takes the worst of it: its people stand on the walls. | Anusaya Mishra is the blade captain @ Hired blades, not of Merchant Guilds; PEOPLE gives her no Merchant Guilds office | (untraced) (line  at e5b421802)  |
 | MED | 1 | 21466 | Systems/Power | r2s-slave_revolt-hamlet-0 | The powerHeadman's Authority (significant)church sway | names church sway as a power; GOVERNMENT lists only the Headman's Authority and the hamlet has only a wayside shrine | (untraced) (line  at e5b421802)  |
 | MED | 1 | 07168 | Systems/Power | r2s-slave_revolt-village-0 | Elected Reeve~Religious Authoritiesstable | Reeve and Religious Authorities 'stable'; 19894 says the Religious Authorities are at odds with it | (untraced) (line  at e5b421802)  |
@@ -169,4 +172,9 @@
 | MED | 1 | B01667 | Systems/Power | r2r-hamlet-30 | Sameer ibn Rashid, the alewife and Elder, holds the seat of the Free Elder Council. | calls Sameer ibn Rashid 'the alewife' (female-coded title) but PEOPLE gives him sex m | (untraced) (line  at e5b421802)  |
 | MED | 1 | B20135 | World/History | r2s-insurgency-village-2 | The occupation is older than all but the oldest alive, and it left a legacy of trouble in Xiji that has never been fully put right. | 'older than all but the oldest alive'; PAST has the Occupation only 62 years ago, within living memory of many | src/domain/display/heraldCausalGrammar.js (line 360 at e5b421802) LIVING_FLOOR |
 | MED | 1 | B14249 | Systems/Power | r2s-famine-town-1 | Nothing at Hongcheng protects the Merchant oligarchy now. | says nothing protects the oligarchy; Military/Guard is symbiotic with it, DEFENCE has walls, Citadel, watch, defence Well-Defended | (untraced) (line  at e5b421802)  |
+| MED | 1 | B06676 | Systems/Power | r2s-insurgency-city-1 | Ecclesiastical Council⇌Military/Guardstable | shows Ecclesiastical Council and Military/Guard as stable partners; QUARRELS has them in high conflict | (untraced) (line  at e5b421802)  |
+| MED | 1 | B01607 | Systems/Power | r2s-insurgency-city-1 | Otgontuya Besud, third in Ecclesiastical Council, also holds a large share in The Guard, and that lends The Guard weight it would not have on its own. | PEOPLE gives Otgontuya Besud only as watch commander, not third of Ecclesiastical Council; 'The Guard' is no listed power | (untraced) (line  at e5b421802)  |
+| MED | 1 | B01589 | Systems/Power | r2r-city-8 | Khutulun Merkit, third in City Council, also holds a large share in The Guard, and that lends The Guard weight it would not have on its own. | PEOPLE gives Khutulun Merkit only as castellan of the Citadel, not third of City Council; 'The Guard' is no listed power | (untraced) (line  at e5b421802)  |
+| MED | 1 | B01585 | Systems/Power | r2r-city-54 | Valentinus Gratus, third in Arcane Council, also holds a half share in The Guard, and that lends The Guard weight it would not have on its own. | PEOPLE gives Valentinus Gratus only as mercenary company captain, not third of Arcane Council; 'The Guard' is no listed power | (untraced) (line  at e5b421802)  |
+| MED | 1 | B02102 | Systems/Power | r2r-city-35 | Cassius Mamercus, the senior guild master and Lord Burgomaster, holds the seat of the Merchant City Council. | Merchant City Council's seat given to the Merchant Guilds' master; QUARRELS has the two in high conflict | (untraced) (line  at e5b421802)  |
 | MED | 1 | B28204 | Systems/Power | r2s-infiltrated-metropolis-1 | answers to Underground city through Yellow Corn Xiu | Yellow Corn Xiu is the guildmaster of thieves @ Thieves' guild; Underground city's head is Kan Chan, so 'through Yellow Corn Xiu' is wrong | (untraced) (line  at e5b421802)  |

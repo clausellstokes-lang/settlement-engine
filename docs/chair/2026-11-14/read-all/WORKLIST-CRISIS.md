@@ -1,9 +1,10 @@
 # READ-ALL worklist · CRISIS · the crisis summary, the quick guide, the faith reading, the outlook hooks
 
-90 flagged sentences (HIGH 1), read at the joined line e5b421802 on 2026-11-14. EACH IS A CANDIDATE: a reader judged it against ONE town's facts (`town read in`): verify it by the record before you cure it. `towns` = how many of the 720 census towns print the sentence (names and figures aside): the measure of its width, not of its falsity. The machine form is `WORKLIST-CRISIS.json` beside this file (each row's `fold` is its key in an inventory).
+91 flagged sentences (HIGH 1), read at the joined line e5b421802 on 2026-11-14. EACH IS A CANDIDATE: a reader judged it against ONE town's facts (`town read in`): verify it by the record before you cure it. `towns` = how many of the 720 census towns print the sentence (names and figures aside): the measure of its width, not of its falsity. The machine form is `WORKLIST-CRISIS.json` beside this file (each row's `fold` is its key in an inventory).
 
 ## YOUR FILES (no other seat holds them)
 
+- `src/domain/summary/tonightSheet.js`
 - `src/domain/coherence/hookTruth.js`
 - `src/domain/crisis/crisisHooks.js`
 - `src/domain/activeConditions.js`
@@ -26,7 +27,7 @@
 - `src/domain/activeConditions.js` · 2 · 30
 - `src/domain/crisis/crisisCast.js` · 14 · 27
 - `src/domain/coherence/hookTruth.js` · 4 · 13
-- `src/domain/crisis/crisisHooks.js` · 3 · 11
+- `src/domain/crisis/crisisHooks.js` · 4 · 12
 
 ## By writer (file :: function, table or pool; flagged sentences · towns printing, summed)
 
@@ -45,7 +46,7 @@
 - src/domain/crisis/crisisCast.js :: CAST_REASONS · 10 · 23
 - src/domain/summary/settlementQuickGuide.js :: INLAND_SCOPE_PHRASE · 2 · 16
 - src/domain/coherence/hookTruth.js :: VILLAGER_TIERS · 4 · 13
-- src/domain/crisis/crisisHooks.js :: LINE_ROLE_CLAUSE · 2 · 8
+- src/domain/crisis/crisisHooks.js :: LINE_ROLE_CLAUSE · 3 · 9
 - src/domain/summary/settlementQuickGuide.js :: SCOPE_GROUND · 4 · 5
 - src/domain/crisis/crisisCast.js :: STAKE_REASONS · 4 · 4
 - src/domain/crisis/crisisHooks.js :: leverSentence · 1 · 3
@@ -144,4 +145,5 @@
 | MED | 1 | B11041 | Summary/Plot Hooks | r2s-famine-town-0 | In the crisis, Christoph Fischbach of Guild Council takes the worst of it: the blame falls on the house, and its good name pays for the crisis. | puts Christoph Fischbach 'of Guild Council'; PEOPLE has him as magistrate of the Courthouse | src/domain/crisis/crisisCast.js (line 154 at e5b421802) CAST_REASONS |
 | MED | 1 | B19857 | Summary/Plot Hooks | r2r-town-11 | The insurgency turns on the town hall, run by Orla Nolan: if it gives way, Arcane Council loses most, because its own people feel the crisis first. | Town hall 'run by Orla Nolan'; PEOPLE gives Orla as circle-keeper of the Teleportation circle and lists nobody at Town hall | src/domain/crisis/crisisCast.js (line 237 at e5b421802) STAKE_REASONS |
 | MED | 1 | B21139 | Summary/Plot Hooks | r2r-city-2 | The succession crisis turns on the city hall, run by Enlai Kwon: if it gives way, Arcane Council loses most, because its own people feel the crisis first. | says city hall is run by Enlai Kwon; PEOPLE places Enlai Kwon at Mages' guild and gives city hall nobody | src/domain/crisis/crisisCast.js (line 237 at e5b421802) STAKE_REASONS |
+| MED | 1 | B11049 | Summary/Plot Hooks | r2s-indebted-city-2 | In the debt crisis, Wiglaf Asgersson of City Council is the one who would come to terms: holds the seat. | PEOPLE puts Wiglaf Asgersson in Merchant Guilds, in high quarrel with City Council, not 'of City Council'; ends in fragment 'holds the seat' | src/domain/crisis/crisisHooks.js (line 89 at e5b421802) LINE_ROLE_CLAUSE |
 | MED | 1 | B11151 | Summary/Plot Hooks | r2s-politically_fractured-metropolis-2 | In the split between the powers, Yan Kimura of Noble Houses is stirring it: speaks for the power that gains from the crisis, from a house that power backs. | Yan Kimura is the impresario @ Opera house, not of Noble Houses; PEOPLE lists no one belonging to Noble Houses | src/domain/crisis/crisisCast.js (line 177 at e5b421802) CAST_REASONS |

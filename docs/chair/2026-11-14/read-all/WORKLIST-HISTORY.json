@@ -3774,6 +3774,24 @@
 }
 },
 {
+"id": "B14930",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-41",
+"section": "Systems/Economics",
+"fold": "Porridge and bread of the local grain and meat and milk from the herds anchor the table; the day's catch fills the winter.",
+"text": "Porridge and bread of the local grain and meat and milk from the herds anchor the table; the day's catch fills the winter.",
+"why": "says the day's catch fills the winter; LAND lists no fisheries and no fishing chain",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/foodways.js",
+"line": 24,
+"fn": "SOURCE_PHRASES"
+}
+},
+{
 "id": "B11109",
 "sev": "MED",
 "n": 1,

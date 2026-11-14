@@ -13,6 +13,7 @@ THE CHAIR'S RULINGS FOR YOUR GROUP (2026-11-14; each vetoable by the owner; copy
 (P3) A power named in a sentence takes its prose form from the leaf src/domain/display/powerSentenceName.js ("The Guard", not "Military/Guard"): every writer in your files calls it.
 (P4) "People follow the elders out of respect" beside a legitimacy crisis; "governs <town>" under an occupation: the governance line reads the record's legitimacy and the occupation: a twin true in that state.
 (P5) THE TITLE WORD ON A PERSON (a female word on a man, a male word on a woman: the readers flagged "Mother" on a man, "Lord Chancellor" on a woman): the powers lane's last seat DESIGNED this cure and did not build it: read ONLY "PART 10" of docs/chair/2026-11-13/POWERS-FOLLOW-UP-HANDBACK-2.md at your base (its L3: 163 towns hold such people, 49 print the word) and build it as designed, measured its way.
+(P6) src/data/faceHonorifics.js IS YOURS WHOLE (ruled 23:13 UTC; moved from the TIES group): the cure of (P5) lives in its `styledTitleOf`; its readers (people/ties.js, domain/people/patronage.js, the pipeline's role fields) are not yours: build the cure in the leaf.
 
 WHO IS ASKING. The chair is the Claude Code session session_01ACmDYZrFEVXyZEUg1NDxxC (your parent). In the chair's chat on 2026-11-14 the owner wrote: "Continue with the pending work! ... I defer all decisions to you and give you all permissions you may require." The owner's bar: thirty fresh towns read thoroughly with no high and no medium false sentence.
 

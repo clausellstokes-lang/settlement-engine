@@ -1,6 +1,6 @@
 # READ-ALL worklist · TIES · people's ties, goals and the plot hooks
 
-91 flagged sentences (HIGH 2), read at the joined line e5b421802 on 2026-11-14. EACH IS A CANDIDATE: a reader judged it against ONE town's facts (`town read in`): verify it by the record before you cure it. `towns` = how many of the 720 census towns print the sentence (names and figures aside): the measure of its width, not of its falsity. The machine form is `WORKLIST-TIES.json` beside this file (each row's `fold` is its key in an inventory).
+96 flagged sentences (HIGH 2), read at the joined line e5b421802 on 2026-11-14. EACH IS A CANDIDATE: a reader judged it against ONE town's facts (`town read in`): verify it by the record before you cure it. `towns` = how many of the 720 census towns print the sentence (names and figures aside): the measure of its width, not of its falsity. The machine form is `WORKLIST-TIES.json` beside this file (each row's `fold` is its key in an inventory).
 
 ## YOUR FILES (no other seat holds them)
 
@@ -9,19 +9,17 @@
 - `src/data/powerSiblings.js`
 - `src/generators/npcStructure.js`
 - `src/data/personHooksByTitle.js`
-- `src/data/faceHonorifics.js`
 - `src/data/people/goalFamilies.js`
 - `src/domain/dossier/plotHooks.js`
 
 ## By file (flagged sentences · towns printing, summed)
 
-- `src/data/npcData.js` · 36 · 4478
+- `src/data/npcData.js` · 41 · 4495
 - `src/domain/hookThemes.js` · 18 · 2299
 - `src/generators/npcStructure.js` · 8 · 270
 - `src/data/powerSiblings.js` · 7 · 244
 - `src/domain/dossier/plotHooks.js` · 9 · 107
-- `src/data/people/goalFamilies.js` · 10 · 62
-- `src/data/faceHonorifics.js` · 2 · 37
+- `src/data/people/goalFamilies.js` · 12 · 64
 - `src/data/personHooksByTitle.js` · 1 · 20
 
 ## By writer (file :: function, table or pool; flagged sentences · towns printing, summed)
@@ -40,16 +38,15 @@
 - src/data/powerSiblings.js :: GOV_DESC_OF_UNNAMED_SEAT · 2 · 98
 - src/data/npcData.js :: STRESS_ECONOMIC_EFFECTS.mil_crim_suppression · 4 · 76
 - src/domain/dossier/plotHooks.js :: TENSION_LABELS · 2 · 71
-- src/data/people/goalFamilies.js :: GOAL_FAMILY_LINES · 10 · 62
+- src/data/people/goalFamilies.js :: GOAL_FAMILY_LINES · 12 · 64
 - src/data/npcData.js :: NPC_CRIMINAL_SECRETS_BY_HOLDER.economic_betrayal · 1 · 51
-- src/data/faceHonorifics.js :: FACE_HONORIFICS.the dairy farmer · 1 · 36
 - src/domain/dossier/plotHooks.js :: ECHO_PREFIXES · 7 · 36
 - src/data/npcData.js :: NPC_CRIMINAL_SECRETS_BY_HOLDER.historical · 1 · 28
 - src/data/npcData.js :: STRESS_ECONOMIC_EFFECTS.econ_crim_blur · 4 · 24
 - src/data/personHooksByTitle.js :: PERSON_HOOKS_BY_TITLE.the theatre manager · 1 · 20
-- src/data/npcData.js :: STRESS_ECONOMIC_EFFECTS.econ_mil_contract · 4 · 12
+- src/data/npcData.js :: STRESS_ECONOMIC_EFFECTS.econ_mil_contract · 7 · 17
+- src/data/npcData.js :: STRESS_ECONOMIC_EFFECTS.rel_crim_fraud · 2 · 12
 - src/data/powerSiblings.js :: BASELINE_CONFLICT_SIBLINGS · 2 · 4
-- src/data/faceHonorifics.js :: FACE_HONORIFICS.the senior guild master · 1 · 1
 
 ## The sentences, HIGH first, then widest first
 
@@ -96,7 +93,6 @@
 | MED | 44 | B15824 | World/NPCs | r2r-hamlet-9 | Runs a smaller house behind the leading one in the trade while the seat fails. | says the seat fails; Elder Council is Dominant and the threat is monsters, no seat failing or QUARRELS | src/generators/npcStructure.js (line 260 at e5b421802) reg |
 | MED | 42 | B10211 | World/NPCs | r2s-plague_onset-thorp-3 | Holds the seat, but a rival claims it, and the matter is not settled. | 'a rival claims' the seat; GOVERNMENT lists one power, QUARRELS and relations are none, PEOPLE name no rival | src/generators/npcStructure.js (line 186 at e5b421802) reg |
 | MED | 37 | 23160 | Systems/Power | r2s-under_siege-town-2 | Town watch; it enforces ordinances, manages disorder, and reports to the council. | watch reports to the council; GOVERNMENT is a Feudal Appointee and lists no council | src/data/powerSiblings.js (line 85 at e5b421802) FACTION_DESC_SIBLINGS |
-| MED | 36 | 14612 | Systems/Resources | r2s-occupied-hamlet-3 | No livestock reaches the dairy farmer. | 'no livestock reaches the dairy farmer', yet the farmer keeps cattle or goats and the hamlet has common grazing | src/data/faceHonorifics.js (line 40 at e5b421802) FACE_HONORIFICS.the dairy farmer |
 | MED | 29 | 10338 | World/NPCs | r2r-city-31 | Heads the casters in quiet times; their place is secure and their spells are in demand. | says the casters' place is secure and spells in demand; GOVERNMENT lists Arcane Orders as Suppressed | src/generators/npcStructure.js (line 451 at e5b421802) reg |
 | MED | 28 | B16645 | World/NPCs | r2s-mass_migration-hamlet-3 | Secret: Was the informant whose report triggered a purge that destroyed innocent lives | informant whose report triggered a purge; PAST records only an Occupation 5 years ago, no purge | src/data/npcData.js (line 1005 at e5b421802) NPC_CRIMINAL_SECRETS_BY_HOLDER.historical |
 | MED | 24 | B01427 | World/Relationships | r2s-famine-metropolis-2 | Fódla O'Brien's arrest record looks good because Quinn Nolan chooses which crimes get solved, and Quinn Nolan's silver pays for the favour. | gives Fódla O'Brien an arrest record; PEOPLE has her as blade captain of Hired blades; watch commander and garrison commander are others | src/data/npcData.js (line 1731 at e5b421802) STRESS_ECONOMIC_EFFECTS.mil_crim_corruption |
@@ -127,6 +123,8 @@
 | MED | 6 | 02528 | Summary/Overview | r2r-city-3 | A customs officer has asked Photios Glabas for the names of every supplier. | a customs officer demands supplier names; HOUSES has no customs house | src/data/npcData.js (line 1678 at e5b421802) STRESS_ECONOMIC_EFFECTS.econ_crim_blur |
 | MED | 6 | B01249 | World/Relationships | r2r-city-3 | Constantinos Kontostephanos signs the import papers and Nikomedissa Akropolites decides what is actually in the crates. | gives Constantinos Kontostephanos import papers; PEOPLE has him as quarry master (warehouse factor is Xristos Kurtikios) and HOUSES has no Customs house | src/data/npcData.js (line 1661 at e5b421802) STRESS_ECONOMIC_EFFECTS.econ_crim_blur |
 | MED | 6 | B01375 | World/Relationships | r2r-city-3 | Nikomedissa Akropolites wants to move a larger cargo through Constantinos Kontostephanos's warehouse next month. | calls it Constantinos Kontostephanos's warehouse; PEOPLE has him as quarry master @ Stone quarry, warehouse factor is Xristos Kurtikios | src/data/npcData.js (line 1676 at e5b421802) STRESS_ECONOMIC_EFFECTS.econ_crim_blur |
+| MED | 6 | B01217 | World/Relationships | r2r-city-49 | Vergilius Ravilla records Galeria Tacitus's payments as gifts from a pious donor. | casts Vergilius Ravilla as keeper of a church; PEOPLE gives him as hospital's master (the dean is Gratus Aquila) | src/data/npcData.js (line 1878 at e5b421802) STRESS_ECONOMIC_EFFECTS.rel_crim_fraud |
+| MED | 6 | B01376 | World/Relationships | r2r-city-49 | Galeria Tacitus wants to store weapons beneath Vergilius Ravilla's altar. | gives Vergilius Ravilla an altar; PEOPLE gives him as hospital's master, not a cleric | src/data/npcData.js (line 1893 at e5b421802) STRESS_ECONOMIC_EFFECTS.rel_crim_fraud |
 | MED | 5 | B26373 | World/NPCs | r2s-under_siege-city-2 | Wants Take over one of Kallinikos Bryennios's duties in Noble Governorship this season, and be seen to do it well. | Kallinikos Bryennios is the senior guild master @ Merchant guilds in PEOPLE, not an officer of Noble Governorship | src/data/people/goalFamilies.js (line 196 at e5b421802) GOAL_FAMILY_LINES |
 | MED | 4 | 03038 | Systems/Power | r2s-occupied-town-0 | A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them. | calls Merchant Guilds a few traders who come on market days; HOUSES has resident Merchant guilds (3-8) and 02819 has merchants report to it | src/data/powerSiblings.js (line 91 at e5b421802) FACTION_DESC_SIBLINGS |
 | MED | 4 | B24263 | World/NPCs | r2r-hamlet-18 | Wants Get the most out of the work at the salt works while it runs well, and put the gains by. | salt works 'runs well'; LAND gaps say the salt works exists but lacks access to desert_salt | src/data/people/goalFamilies.js (line 473 at e5b421802) GOAL_FAMILY_LINES |
@@ -135,6 +133,7 @@
 | MED | 3 | 01624 | World/Relationships | r2s-famine-city-1 | Asger Yngvarsson's soldiers wear Mord Torvaldsson's colours on the road and take Mord Torvaldsson's orders without question. | a hired company of soldiers under contract; DEFENCE hired: none and HOUSES has no mercenaries or hired blades | src/data/npcData.js (line 1808 at e5b421802) STRESS_ECONOMIC_EFFECTS.econ_mil_contract |
 | MED | 3 | 02650 | Summary/Overview | r2s-famine-city-1 | A guard from Asger Yngvarsson's company was killed protecting Mord Torvaldsson's cargo. | a guard from a hired company; DEFENCE hired: none, no mercenary house | src/data/npcData.js (line 1823 at e5b421802) STRESS_ECONOMIC_EFFECTS.econ_mil_contract |
 | MED | 3 | B20642 | Table/Tonight sheet | r2r-thorp-11 | The records of that time say: the reformist leader is being blackmailed into silence. | presumes a reformist leader; only Household Council listed, roster is one head shepherd | src/domain/dossier/plotHooks.js (line 199 at e5b421802) ECHO_PREFIXES |
+| MED | 3 | B01441 | Summary/Overview | r2r-city-13 | Rajesh Sharma's company has taken on a second client, and Girija Joshi has learned the client's name. | gives Rajesh Sharma a company taking private clients; PEOPLE has him as garrison commander, not a mercenary captain | src/data/npcData.js (line 1821 at e5b421802) STRESS_ECONOMIC_EFFECTS.econ_mil_contract |
 | MED | 2 | 22409 | Systems/Power | r2r-hamlet-59 | The village reeve disagrees. | 'The village reeve'; a hamlet ruled by Household Council has no reeve | src/data/powerSiblings.js (line 43 at e5b421802) BASELINE_CONFLICT_SIBLINGS |
 | MED | 2 | B26610 | World/NPCs | r2s-slave_revolt-thorp-0 | Wants Win two more people in Feudal Stewardship over to their side before Samarkand Kiyad notices. | 'two more people in Feudal Stewardship' to win over; the roster has one person of it, the reeve, and one power only | src/data/people/goalFamilies.js (line 197 at e5b421802) GOAL_FAMILY_LINES |
 | MED | 2 | B02678 | Table/Tonight sheet | r2r-thorp-23 | A letter found this year tells it this way: the reformist leader is being blackmailed into silence. | popular uprising/rebels; PAST lists Migration, Succession Crisis, Religious Conflict, no uprising | src/domain/dossier/plotHooks.js (line 197 at e5b421802) ECHO_PREFIXES |
@@ -145,4 +144,7 @@
 | MED | 1 | B25166 | World/NPCs | r2s-famine-town-1 | Wants Keep the quarrel between Merchant oligarchy and Religious Authorities from turning into open trouble this season. | names a quarrel between Merchant oligarchy and Religious Authorities; QUARRELS' only open quarrel is oligarchy vs Merchant Guilds | src/data/people/goalFamilies.js (line 259 at e5b421802) GOAL_FAMILY_LINES |
 | MED | 1 | B02646 | Summary/Plot Hooks | r2s-indebted-town-0 | A letter found this year tells it this way: a merchant is funding both the reform movement and the suppression of it | names 'the reform movement'; GOVERNMENT lists no Reform Movement power | src/domain/dossier/plotHooks.js (line 197 at e5b421802) ECHO_PREFIXES |
 | MED | 1 | B26398 | World/NPCs | r2r-town-39 | Wants Take over one of Penelope Komnenos's duties in Town Mayor this season, and be seen to do it well. | Penelope Komnenos is the mine captain @ Mine in PEOPLE, not an officer of Town Mayor; no Town Mayor holder is on the roster | src/data/people/goalFamilies.js (line 196 at e5b421802) GOAL_FAMILY_LINES |
-| MED | 1 | B11591 | Systems/Power | r2r-city-17 | Its seat is held by Samarkand Besud, the senior guild master and Speaker of the Assembly. | names Samarkand Besud 'Speaker' holding the Assembly seat; PEOPLE gives him only senior guild master, and Merchant Guilds are in HIGH quarrel with the Assembly | src/data/faceHonorifics.js (line 98 at e5b421802) FACE_HONORIFICS.the senior guild master |
+| MED | 1 | B24233 | World/NPCs | r2r-city-39 | Wants Get the most out of the work at the caravanserai while it runs well, and put the gains by. | says the caravanserai runs well; gaps say it lacks camel herds and Caravan & Overland Trade is vulnerable | src/data/people/goalFamilies.js (line 473 at e5b421802) GOAL_FAMILY_LINES |
+| MED | 1 | B26078 | World/NPCs | r2r-city-55 | Wants Speak for Merchant oligarchy in one dispute this season where Heracles Komnenos would usually speak. | has Heracles Komnenos speaking for the Merchant oligarchy; PEOPLE puts him in Merchant Guilds, in high quarrel with it | src/data/people/goalFamilies.js (line 200 at e5b421802) GOAL_FAMILY_LINES |
+| MED | 1 | B01440 | World/Relationships | r2r-city-13 | Lopamudra Pillai's company guards Bhavana Ahuja's warehouses and wagons for a fixed fee each season. | gives Lopamudra Pillai a hired guard company; PEOPLE has her as watch commander, the company captain being Hemavati Pillai | src/data/npcData.js (line 1804 at e5b421802) STRESS_ECONOMIC_EFFECTS.econ_mil_contract |
+| MED | 1 | B01442 | Summary/Overview | r2r-city-13 | Lopamudra Pillai's company still guards the wagons, but more slowly. | gives Lopamudra Pillai a company guarding wagons; PEOPLE has her as watch commander, the company captain being Hemavati Pillai | src/data/npcData.js (line 1820 at e5b421802) STRESS_ECONOMIC_EFFECTS.econ_mil_contract |

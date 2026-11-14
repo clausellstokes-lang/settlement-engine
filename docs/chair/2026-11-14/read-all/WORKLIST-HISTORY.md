@@ -1,6 +1,6 @@
 # READ-ALL worklist · HISTORY · history, arrival and culture rows
 
-211 flagged sentences (HIGH 3), read at the joined line e5b421802 on 2026-11-14. EACH IS A CANDIDATE: a reader judged it against ONE town's facts (`town read in`): verify it by the record before you cure it. `towns` = how many of the 720 census towns print the sentence (names and figures aside): the measure of its width, not of its falsity. The machine form is `WORKLIST-HISTORY.json` beside this file (each row's `fold` is its key in an inventory).
+212 flagged sentences (HIGH 3), read at the joined line e5b421802 on 2026-11-14. EACH IS A CANDIDATE: a reader judged it against ONE town's facts (`town read in`): verify it by the record before you cure it. `towns` = how many of the 720 census towns print the sentence (names and figures aside): the measure of its width, not of its falsity. The machine form is `WORKLIST-HISTORY.json` beside this file (each row's `fold` is its key in an inventory).
 
 ## YOUR FILES (no other seat holds them)
 
@@ -20,7 +20,7 @@
 - `src/data/cultureProfiles.js` · 11 · 191
 - `src/data/stressTypes.js` · 6 · 185
 - `src/data/historyDescVariants.js` · 9 · 88
-- `src/domain/foodways.js` · 6 · 69
+- `src/domain/foodways.js` · 7 · 70
 - `src/generators/historyGenerator.js` · 4 · 27
 - `src/generators/history/historyRouteContext.js` · 1 · 8
 
@@ -38,7 +38,7 @@
 - src/data/arrivalProse.js :: ARRIVAL_PEOPLE.east_asian · 2 · 43
 - src/data/arrivalProse.js :: ARRIVAL_PEOPLE.mesoamerican · 3 · 41
 - src/data/arrivalProse.js :: ARRIVAL_PEOPLE.slavic · 2 · 39
-- src/domain/foodways.js :: SOURCE_PHRASES · 4 · 38
+- src/domain/foodways.js :: SOURCE_PHRASES · 5 · 39
 - src/data/stressTypes.js :: STRESS_TYPE_MAP.insurgency · 1 · 37
 - src/data/arrivalProse.js :: ARRIVAL_PEOPLE.steppe · 2 · 37
 - src/data/historyDescVariants.js :: HISTORY_DESC_VARIANTS.occupation_legacy · 2 · 35
@@ -280,5 +280,6 @@
 | MED | 1 | B02415 | Table/Tonight sheet | r2r-thorp-50 | A concession won in the revolt is being quietly rolled back, and the old anger is stirring again. | 'concession won in the revolt': PAST lists Occupation, Religious Conflict, Wild Magic; no revolt or uprising | src/data/historyData.js (line 1494 at e5b421802) HISTORICAL_EVENTS_DATA.plotHooks |
 | MED | 1 | B02314 | Table/Tonight sheet | r2r-hamlet-2 | A bloodline touched by the surge is now manifesting something the family cannot conceal. | 'a bloodline touched by the surge'; PAST records only a Succession Crisis, no magical surge or wild-magic event | src/data/historyData.js (line 1516 at e5b421802) HISTORICAL_EVENTS_DATA.plotHooks |
 | MED | 1 | B02525 | Table/Tonight sheet | r2r-hamlet-21 | A forged document is about to be introduced as evidence; someone knows it's fake. | forged document introduced 'as evidence' presumes a court or tribunal; HOUSES has none and PAST/QUARRELS record no land dispute | src/data/historyData.js (line 1359 at e5b421802) HISTORICAL_EVENTS_DATA.plotHooks |
+| MED | 1 | B14930 | Systems/Economics | r2r-city-41 | Porridge and bread of the local grain and meat and milk from the herds anchor the table; the day's catch fills the winter. | says the day's catch fills the winter; LAND lists no fisheries and no fishing chain | src/domain/foodways.js (line 24 at e5b421802) SOURCE_PHRASES |
 | MED | 1 | B11109 | Summary/Plot Hooks | r2r-metropolis-31 | In the migration, Khishigbayar Zunghar of Royal Authority holds the key to it: runs the office that decides how the crisis goes. | Khishigbayar Zunghar is the innkeeper @ Inns and taverns, not of Royal Authority and runs no office deciding the migration | src/data/historyData.js (line 1621 at e5b421802) EVENT_TYPE_NAMES |
 | MED | 1 | B11103 | Summary/Plot Hooks | r2s-mass_migration-metropolis-1 | In the migration, Tangmar Herrmann of Grand Guild Consortium holds the key to it: runs the office that decides how the crisis goes. | Tangmar Herrmann is the innkeeper @ Inns and taverns, not of Grand Guild Consortium; an innkeeper runs no office deciding the migration | src/data/historyData.js (line 1621 at e5b421802) EVENT_TYPE_NAMES |

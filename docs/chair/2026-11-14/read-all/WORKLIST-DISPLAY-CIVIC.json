@@ -1764,6 +1764,24 @@
 }
 },
 {
+"id": "B04805",
+"sev": "MED",
+"n": 3,
+"town": "r2r-city-52",
+"section": "Systems/Power",
+"fold": "City-State Council⇌Military/Guardstable",
+"text": "City-State Council⇌Military/Guardstable",
+"why": "shows City-State Council and Military/Guard as stable partners; QUARRELS has them in high conflict over an unpaid debt",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
 "id": "13395",
 "sev": "MED",
 "n": 2,
@@ -2060,6 +2078,42 @@
 "fold": "Crime keeps <N> from more than tolerating the Military Council.",
 "text": "Crime keeps Al-mandi from more than tolerating the Military Council.",
 "why": "blames crime for weak legitimacy; header has no criminal power, house or chain; legitimacy is Tolerated and the crisis is beast raids",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28195",
+"sev": "MED",
+"n": 2,
+"town": "r2r-city-45",
+"section": "Systems/Power",
+"fold": "answers to Front businesses through <N>",
+"text": "answers to Front businesses through Otgontuya Qatagin",
+"why": "PEOPLE gives Otgontuya Qatagin to the Smuggling network; Front businesses' head is Rashid Cumans",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B01598",
+"sev": "MED",
+"n": 2,
+"town": "r2r-city-28",
+"section": "Systems/Power",
+"fold": "<N>, # in Democratic assembly, also holds a # share in The Guard, and that lends The Guard weight it would not have on its own.",
+"text": "Ekaterini Chomatenos, third in Democratic assembly, also holds a third share in The Guard, and that lends The Guard weight it would not have on its own.",
+"why": "PEOPLE gives Ekaterini Chomatenos only as prison warden, not third of Democratic assembly; 'The Guard' is no listed power",
 "kinds": [
 "STATE"
 ],
@@ -2528,6 +2582,96 @@
 "fold": "Nothing at <N> protects the Merchant oligarchy now.",
 "text": "Nothing at Hongcheng protects the Merchant oligarchy now.",
 "why": "says nothing protects the oligarchy; Military/Guard is symbiotic with it, DEFENCE has walls, Citadel, watch, defence Well-Defended",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B06676",
+"sev": "MED",
+"n": 1,
+"town": "r2s-insurgency-city-1",
+"section": "Systems/Power",
+"fold": "Ecclesiastical Council⇌Military/Guardstable",
+"text": "Ecclesiastical Council⇌Military/Guardstable",
+"why": "shows Ecclesiastical Council and Military/Guard as stable partners; QUARRELS has them in high conflict",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B01607",
+"sev": "MED",
+"n": 1,
+"town": "r2s-insurgency-city-1",
+"section": "Systems/Power",
+"fold": "<N>, # in Ecclesiastical Council, also holds a large share in The Guard, and that lends The Guard weight it would not have on its own.",
+"text": "Otgontuya Besud, third in Ecclesiastical Council, also holds a large share in The Guard, and that lends The Guard weight it would not have on its own.",
+"why": "PEOPLE gives Otgontuya Besud only as watch commander, not third of Ecclesiastical Council; 'The Guard' is no listed power",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B01589",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-8",
+"section": "Systems/Power",
+"fold": "<N>, # in City Council, also holds a large share in The Guard, and that lends The Guard weight it would not have on its own.",
+"text": "Khutulun Merkit, third in City Council, also holds a large share in The Guard, and that lends The Guard weight it would not have on its own.",
+"why": "PEOPLE gives Khutulun Merkit only as castellan of the Citadel, not third of City Council; 'The Guard' is no listed power",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B01585",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-54",
+"section": "Systems/Power",
+"fold": "<N>, # in Arcane Council, also holds a # share in The Guard, and that lends The Guard weight it would not have on its own.",
+"text": "Valentinus Gratus, third in Arcane Council, also holds a half share in The Guard, and that lends The Guard weight it would not have on its own.",
+"why": "PEOPLE gives Valentinus Gratus only as mercenary company captain, not third of Arcane Council; 'The Guard' is no listed power",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B02102",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-35",
+"section": "Systems/Power",
+"fold": "<N>, the senior guild master and Lord Burgomaster, holds the seat of the Merchant City Council.",
+"text": "Cassius Mamercus, the senior guild master and Lord Burgomaster, holds the seat of the Merchant City Council.",
+"why": "Merchant City Council's seat given to the Merchant Guilds' master; QUARRELS has the two in high conflict",
 "kinds": [
 "STATE"
 ],
