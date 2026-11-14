@@ -1,0 +1,48 @@
+{"id":"21285","town":"r2r-village-1","sev":"MED","kind":"LACKS","why":"names a 'Popular candidate' party; GOVERNMENT powers list only Merchant Guilds and Headman's Authority, and the Guild War was guilds against guilds","other":""}
+{"id":"12100","town":"r2r-village-1","sev":"MED","kind":"LACKS","why":"'Popular candidate' is not a power in GOVERNMENT (Merchant Guilds, Headman's Authority); crisis is debt, no seat contest","other":""}
+{"id":"04302","town":"r2r-village-1","sev":"MED","kind":"STATE","why":"'Agricultural surplus' marked EXPORT; TRADE exports lists Grain surplus, Milled flour, Baked goods only (Journal 09401 agrees)","other":"09401"}
+{"id":"13903","town":"r2r-village-1","sev":"MED","kind":"PAIR","why":"Rajani Iyer is 'of Headman's Authority' yet 'a member of the merchants' power'; Merchant Guilds is the Strong rival power; PEOPLE gives no brackets; no seat dispute in debt crisis","other":"34331"}
+{"id":"01243","town":"r2r-village-9","sev":"MED","kind":"STATE","why":"Elder Council is Minor and the seat is empty; Religious Authorities are Dominant, not 'close behind'","other":"05195"}
+{"id":"HEADER","town":"r2s-infiltrated-village-3","sev":"LOW","kind":"RECORD","why":"safety 'Very Safe' while defence Vulnerable, monsters on the roads, a plagued monster setting and an infiltration crisis","other":""}
+{"id":"10492","town":"r2s-monster_pressure-village-3","sev":"MED","kind":"TAG","why":"'The table rests on the mill's flour' prints in famine towns (tag F) where the grain failed; true here, false where flour is the food that failed","other":""}
+{"id":"35005","town":"r2s-slave_revolt-village-2","sev":"LOW","kind":"BROKEN","why":"quick-reference row for Üljeytü Suldus prints an empty power cell, a column that always carries a value","other":""}
+{"id":"08236","town":"r2r-village-29","sev":"MED","kind":"LACKS","why":"arbitrates 'before they reach the lord's court'; HOUSES lists no court and GOVERNMENT no lord, only Elder Council and Religious Authorities","other":""}
+{"id":"08708","town":"r2r-village-30","sev":"MED","kind":"STATE","why":"The Independent Bloc is Dominant and Elected Reeve only Significant, with no stable authority; the Bloc is not 'close behind' the Reeve","other":""}
+{"id":"03275","town":"r2r-village-35","sev":"MED","kind":"TAG","why":"'an auditor is coming' prints in siege, occupation and plague towns (tag S O P) where nobody arrives by road or gate","other":""}
+{"id":"10246","town":"r2r-village-41","sev":"MED","kind":"STATE","why":"'Fishing boats EXPORT'; TRADE exports lists River craft and Cargo barges but not Fishing boats (Journal 09448 omits it too)","other":"09448"}
+{"id":"12102","town":"r2s-infiltrated-village-2","sev":"MED","kind":"LACKS","why":"lists a 'Popular candidate' power; GOVERNMENT has Headman's Authority, Religious Authorities, Independent Bloc; crisis is infiltration, no seat contest","other":""}
+{"id":"21287","town":"r2s-infiltrated-village-2","sev":"MED","kind":"LACKS","why":"'Popular candidate' party is not among GOVERNMENT powers; it also omits The Independent Bloc, a listed power","other":""}
+{"id":"33127","town":"r2s-insurgency-village-0","sev":"LOW","kind":"BROKEN","why":"quick-reference row for Ivana Ivanov prints an empty power cell, a column that always carries a value","other":""}
+{"id":"29428","town":"r2s-insurgency-village-0","sev":"MED","kind":"STATE","why":"describes a Trade Collapse; PAST records only The Migration (20 years ago), and founding was a mining camp","other":""}
+{"id":"14131","town":"r2s-wartime-village-2","sev":"MED","kind":"STATE","why":"says no one is named to lead the charter-hall defence; PEOPLE names Tornikes Chortasmenos, the charter master @ Adventurers' charter hall","other":""}
+{"id":"25384","town":"r2s-wartime-village-2","sev":"MED","kind":"STATE","why":"'Hides become leather here' but LAND gaps say the Tannery lacks access to livestock and animal hides","other":""}
+{"id":"17048","town":"r2r-village-42","sev":"MED","kind":"STATE","why":"shows Mill + Sawmill yielding Milled lumber; LAND gaps say the Sawmill exists but lacks access to timber","other":""}
+{"id":"21874","town":"r2r-village-42","sev":"MED","kind":"STATE","why":"Priestly Guidance is Minor and The Independent Bloc Significant, with no stable authority; the Bloc is ahead, not 'close behind'","other":""}
+{"id":"29767","town":"r2s-mass_migration-village-1","sev":"MED","kind":"LACKS","why":"'two trade routes it depends on'; trade access is river only, food 106% grown with 0% brought in, imports only incense","other":""}
+{"id":"24992","town":"r2s-mass_migration-village-2","sev":"MED","kind":"STATE","why":"shows a Brickmaker turning out building materials; LAND gaps say the Brickmaker exists but lacks access to clay","other":""}
+{"id":"10204","town":"r2s-mass_migration-village-2","sev":"MED","kind":"STATE","why":"fired brick 'by the cartload'; LAND gaps say the Brickmaker lacks access to clay, so it makes none","other":""}
+{"id":"11991","town":"r2s-mass_migration-village-2","sev":"MED","kind":"STATE","why":"children treading clay for the brickmaker; LAND gaps give the Brickmaker no access to clay","other":""}
+{"id":"09841","town":"r2s-mass_migration-village-2","sev":"MED","kind":"STATE","why":"Religious Authorities are Dominant, Feudal Stewardship only Strong; the church is ahead, not 'close behind'","other":""}
+{"id":"07554","town":"r2s-politically_fractured-village-1","sev":"MED","kind":"STATE","why":"'Crossbow bolts EXPORT'; TRADE exports lists Bows and crossbows but no bolts (Journal 09209 omits it)","other":"09209"}
+{"id":"10202","town":"r2s-slave_revolt-village-3","sev":"MED","kind":"STATE","why":"'Fired brick EXPORT'; TRADE exports has no brick (Journal 09175 omits it)","other":"09175"}
+{"id":"22983","town":"r2s-slave_revolt-village-3","sev":"MED","kind":"STATE","why":"'Roof tiles EXPORT'; TRADE exports has no tiles (Journal 09175 omits it)","other":"09175"}
+{"id":"14049","town":"r2s-slave_revolt-village-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in the sentence; the page elsewhere says 'The Guard'","other":""}
+{"id":"00693","town":"r2r-village-56","sev":"MED","kind":"LACKS","why":"says walls raised from quarry stone; DEFENCE walls are only a palisade or earthworks, and stone is imported as cut stone","other":""}
+{"id":"22797","town":"r2r-village-56","sev":"MED","kind":"STATE","why":"ferry 'held the right to it for generations'; the village is only 42 years old","other":""}
+{"id":"13999","town":"r2s-mass_migration-village-0","sev":"MED","kind":"BROKEN","why":"garbled clause: 'one of the house the crisis hits; next in line, the first choice already holding a role that contradicts this one'","other":""}
+{"id":"09847","town":"r2s-politically_fractured-village-2","sev":"MED","kind":"STATE","why":"Feudal Stewardship is Minor, The Independent Bloc Strong, with no stable authority; the Bloc is ahead, not 'close behind'","other":""}
+{"id":"23292","town":"r2s-wartime-village-3","sev":"LOW","kind":"STATE","why":"says the sawmill widens output of building timber; LAND gaps say the Sawmill exists but lacks access to timber","other":""}
+{"id":"12953","town":"r2r-village-18","sev":"MED","kind":"STATE","why":"Military Party is Strong and Household Council only Significant; the Military Party is ahead, not 'close behind'","other":""}
+{"id":"19879","town":"r2r-village-18","sev":"LOW","kind":"STATE","why":"'Defended Pass'; LAND names a Mountain Pass and DEFENCE has no wall, garrison, militia or watch to defend it","other":""}
+{"id":"15278","town":"r2r-village-38","sev":"MED","kind":"STATE","why":"calls Kathleen Quinn a notary who helped draft the debt; PEOPLE has her as the camp foreman, and HOUSES lists no notary or court","other":""}
+{"id":"22500","town":"r2r-village-44","sev":"MED","kind":"LACKS","why":"names 'Reformists' and 'Secular camp'; GOVERNMENT powers are only Religious Authorities and Headman's Authority","other":""}
+{"id":"21322","town":"r2r-village-44","sev":"MED","kind":"LACKS","why":"parties 'Reformists' and 'Secular camp' are not in GOVERNMENT, and Headman's Authority is left out","other":""}
+{"id":"05888","town":"r2r-village-52","sev":"MED","kind":"STATE","why":"'Boots and shoes EXPORT'; TRADE exports lists Leather goods only, no boots","other":""}
+{"id":"23156","town":"r2r-village-52","sev":"MED","kind":"STATE","why":"'Saddles and harness EXPORT'; TRADE exports lists Leather goods only","other":""}
+{"id":"15575","town":"r2r-village-52","sev":"MED","kind":"STATE","why":"'Leather armour EXPORT'; TRADE exports lists Leather goods only, and imports plate armour","other":""}
+{"id":"22393","town":"r2s-recently_betrayed-village-2","sev":"MED","kind":"STATE","why":"'Reason settled: Off the trade routes entirely'; FOUNDING reason is 'grew around a valuable resource deposit'","other":""}
+{"id":"23273","town":"r2s-succession_void-village-0","sev":"LOW","kind":"STATE","why":"describes the Fishmonger's salt-cured fish as running; LAND gaps say the Fishmonger exists but lacks access to fish","other":""}
+{"id":"08661","town":"r2s-recently_betrayed-village-3","sev":"MED","kind":"STATE","why":"Merchant Guilds are Strong and Elder Council only Significant; the guilds are ahead of the governing council, not 'close behind'","other":""}
+{"id":"31963","town":"r2s-wartime-village-0","sev":"MED","kind":"STATE","why":"'druidic provision covers 28'; FOOD ledger shows only 5% of food made by magic","other":""}
+{"id":"32871","town":"r2s-wartime-village-0","sev":"LOW","kind":"BROKEN","why":"quick-reference row for Padraig Carey prints an empty power cell, a column that always carries a value","other":""}
+{"id":"DONE","lines":2259,"blocks":46,"flags":47}
