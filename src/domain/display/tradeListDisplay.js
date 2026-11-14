@@ -387,22 +387,22 @@ function pillAsPrinted(raw, side, settlement) {
   const own = roster.filter((n) => !n.startsWith('access to'));
   /** @param {{ status?: unknown }} c */
   const works = (c) => WORKING_CHAIN_STATUSES.includes(String(chainStateShown(c, settlement)));
-  /** @param {{ processingInstitutions?: unknown }} c @returns {string[]} the chain's houses' first words */
-  const heads = (c) => (Array.isArray(c.processingInstitutions) ? c.processingInstitutions : []).map((h) => String(h).toLowerCase().split(/[\s(]/)[0]).filter(Boolean);
   const houseRe = MADE_GOOD_HOUSES.get(good);
   const makerStands = !!houseRe && own.some((n) => houseRe.test(n));
-  /** @param {{ processingInstitutions?: unknown }} c */
-  const houseStands = (c) => (houseRe ? makerStands : heads(c).some((h) => own.some((n) => n.includes(h))));
-  /** @param {{ processingInstitutions?: unknown }} c */
-  const roadOnly = (c) => heads(c).some((h) => { const m = roster.filter((r) => r.includes(h)); return m.length > 0 && m.every((r) => r.startsWith('access to')); });
   const grounds = TRADE_GOOD_GROUNDS.get(good) || [];
   const makers = chains.filter((c) => (Array.isArray(c.outputs) ? c.outputs : []).some((o) => fold(o) === good));
   if (makers.length > 0) {
     /** @param {{ entrepot?: unknown }} c an entrepôt that works no ground of the town's carries the good; it makes it only by a house here */
     const carries = (c) => c.entrepot === true && !SERVICE_OUTPUTS.has(good) && !makerStands && ['transit', 'none'].includes(chainCarrierOf(c, settlement).kind);
-    /** @param {{ resourceInputKey?: unknown }} c the good is the land's own on the ground the chain works: no house makes it */
-    const ofGround = (c) => !houseRe && grounds.includes(String(c.resourceInputKey)) && ['own', 'substitute'].includes(chainCarrierOf(c, settlement).kind);
-    if (makers.some((c) => !carries(c) && works(c) && (ofGround(c) || (!roadOnly(c) && houseStands(c))))) return raw;
+    // W2-C-LEAVES-6 item 7: whether the chain makes the good here, by its houses or its ground, is read by ONE helper
+    // (`chainMakesHere`, at the end of the file), shared with a chain card's own Outputs (`chainOutputsShown`), so the
+    // pills and the card read the same rule (iii). The helper is the reading that stood here, moved whole: the good is
+    // the land's own on the ground the chain works (no house makes it), or none of the chain's houses is held only as a
+    // road to elsewhere and the house its making needs stands (`MADE_GOOD_HOUSES`, else any house of the chain by its
+    // first word). The chain's state (`works`) and an entrepôt's carriage (`carries`) stay read here. Eight lines, as
+    // the four closures took: a census row below keys this file by line (`tests/lint/arcaneClassifierCensus`).
+    // (The record is not touched.)
+    if (makers.some((c) => !carries(c) && works(c) && chainMakesHere(c, good, settlement, roster))) return raw;
     if (side !== 'exports' || !makers.some((c) => carries(c) && works(c))) return null;
     return mark.kinds.includes('transit') ? raw : [mark.label, 'transit', ...mark.kinds].map((k, i) => (i === 0 ? k : `(${k === 'naval' ? 'naval route only' : k === 'occupation' ? 'taxed by occupation' : k})`)).join(' ');
   }
@@ -466,6 +466,9 @@ const MADE_GOOD_ROWS = Object.freeze([
   [['fine metalwork and jewelry', 'jewellery', 'cut gemstones'], /\bmetalwork|\bjewel|goldsmith|silversmith|\bgem/],
   // the luxury goods chains' manufacture: a metalworker, a luxury goods quarter or a silk house makes it here
   [['luxury manufactured goods'], /\bmetalwork|\bjewel|\bluxury goods|\bsilk|\bweav|\btailor/],
+  // a court's work needs a courthouse (W2-C-LEAVES-6 item 7, the cut's #555; record 422: the page names a court only where
+  // a courthouse stands on the roster; the catalogue gives these three to the Courthouse alone, a Town hall arbitrates)
+  [['civil disputes', 'criminal trials', 'notary services'], /\bcourthouse|\bcourt buildings?\b/],
   // leather needs a tannery or a leatherworker (a hamlet's grazing alone tans nothing, rr2s-hamlet-calm-rand-1)
   [['leather goods', 'boots and shoes', 'tanned leather', 'leather'], /\btann|\bleather|\bcobbler|\bcordwain|\bsaddler|\bfurrier/],
   // cloth needs a weaver, a fuller, a dyer or a tailor (a Shepherd spins no cloth, rww-village-famine-1)
@@ -529,4 +532,47 @@ export function houseDoesChainsWork(chain, house) {
   const heads = (Array.isArray(chain?.processingInstitutions) ? chain.processingInstitutions : [])
     .map((h) => String(h).toLowerCase().split(/[\s(]/)[0]).filter(Boolean);
   return heads.some((h) => name.includes(h));
+}
+
+/**
+ * WHETHER A CHAIN MAKES A GOOD HERE BY ITS HOUSES OR ITS GROUND (the goods pills' reading, rules (ii) and (iii); one
+ * reading for the trade lists' pills and, since W2-C-LEAVES-6 item 7, a chain card's own Outputs): the good is the land's
+ * own on the ground the chain works (no house makes it), or none of the chain's houses is held only as a road to
+ * elsewhere and the house its making needs stands on the live roster (`MADE_GOOD_HOUSES`, else any house of the chain,
+ * by the house's first word). The chain's state is not read here: the caller reads it.
+ * @param {{ processingInstitutions?: unknown, resourceInputKey?: unknown }} c the chain
+ * @param {string} good the good, folded (lower case, spaced)
+ * @param {Parameters<typeof localProductionAsPrinted>[0]} settlement the record
+ * @param {ReadonlyArray<string>} roster the live roster's names, lower case
+ * @returns {boolean}
+ */
+function chainMakesHere(c, good, settlement, roster) {
+  const own = roster.filter((n) => !n.startsWith('access to'));
+  const heads = (Array.isArray(c.processingInstitutions) ? c.processingInstitutions : []).map((h) => String(h).toLowerCase().split(/[\s(]/)[0]).filter(Boolean);
+  const houseRe = MADE_GOOD_HOUSES.get(good);
+  const ofGround = !houseRe && (TRADE_GOOD_GROUNDS.get(good) || []).includes(String(c.resourceInputKey)) && ['own', 'substitute'].includes(chainCarrierOf(c, settlement).kind);
+  if (ofGround) return true;
+  const roadOnly = heads.some((h) => { const m = roster.filter((r) => r.includes(h)); return m.length > 0 && m.every((r) => r.startsWith('access to')); });
+  return !roadOnly && (houseRe ? own.some((n) => houseRe.test(n)) : heads.some((h) => own.some((n) => n.includes(h))));
+}
+
+/**
+ * THE OUTPUTS A CHAIN CARD PRINTS (W2-C-LEAVES-6 item 7; the round-three cut's #555: "Civil disputes · Criminal trials ·
+ * Notary services" on a Law & Governance card in a town whose roster holds a Town hall and no courthouse). The card
+ * printed the chain's outputs raw (`chain.outputs`, the first three); it prints each by the goods pills' rule (iii), the
+ * same reading (`chainMakesHere`): a key that is not a good never, and an output only where the chain's own house that
+ * makes or offers it stands. The card's state chip says whether the chain works now; its "Normally yields" header stands.
+ * @param {{ outputs?: unknown, processingInstitutions?: unknown, resourceInputKey?: unknown } | null | undefined} chain
+ * @param {Parameters<typeof localProductionAsPrinted>[0]} settlement the record
+ * @returns {string[]} the outputs kept, in the record's order
+ */
+export function chainOutputsShown(chain, settlement) {
+  const outputs = (Array.isArray(chain?.outputs) ? chain.outputs : []).filter((o) => typeof o === 'string' && o.trim()).map(String);
+  if (!chain) return outputs;
+  const roster = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))
+    .map((i) => String(/** @type {{ name?: unknown }} */ (i)?.name ?? '').toLowerCase()).filter(Boolean);
+  return outputs.filter((o) => {
+    const good = fold(tradeMarkOf(o).label).replace(/_/g, ' ');
+    return !NOT_A_GOOD_HERE.has(good) && chainMakesHere(chain, good, settlement, roster);
+  });
 }

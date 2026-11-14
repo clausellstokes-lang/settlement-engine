@@ -25,7 +25,7 @@ import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.j
 import { generalDeskLines } from '../generalDeskRead.js'; // DS-GEN-18 · the general desk's ONE caller
 import Button from '../../primitives/Button.jsx';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
-import { exportsAsPrinted, tradeMarksOnPage, revenuesOffTheLists, importsAsPrinted, localProductionAsPrinted } from '../../../domain/display/tradeListDisplay.js'; // CENSUS-3b unit 3 — the trade lists' one display reader (kind A, filterDeclared)
+import { exportsAsPrinted, tradeMarksOnPage, revenuesOffTheLists, importsAsPrinted, localProductionAsPrinted, chainOutputsShown } from '../../../domain/display/tradeListDisplay.js'; // CENSUS-3b unit 3 — the trade lists' one display reader (kind A, filterDeclared)
 import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js'; // §934.22 item 2 — the native-resource label seam (the Imports pills)
 import { edged } from '../../../design/edgedBox.js';
 import { foodStoresWords } from '../../../domain/summary/tonightSheet.js'; // the stores sentence's ONE writer (TRIM-2 request 3)
@@ -166,7 +166,7 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
           // T2-6: the facts the retired Supply Chains diagram alone carried (resource node,
           // missing houses, upstream imports, the upstream note) — one derivation, shared
           // with the Compendium's ChainRow.
-          const shown = chainPrintName(chain, town), facts = chainFlowFacts({ ...chain, ...shown }, instNames); // COHERENCE-AGREE-6 (F1): what a chain prints reads the town's access; the income keyword above stays on the record's label (logic)
+          const shown = chainPrintName(chain, town), facts = chainFlowFacts({ ...chain, ...shown }, instNames), outs = chainOutputsShown(chain, town); // COHERENCE-AGREE-6 (F1): what a chain prints reads the town's access; the income keyword above stays on the record's label (logic)
           // X-50 (BOILERPLATE ONCE): generation gives every chain of a settlement the same impact
           // sentence, so it prints on the first card that carries it; each card keeps its need.
           const needFirst = !filtered.slice(0, i).some(prev => chainNeedLine(prev, town)); // the shared clause on the first card only
@@ -201,10 +201,10 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
                   <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:MUTED,marginBottom:2}}>Via</div>
                   <div data-sf-chrome="" style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,lineHeight:1.3}}>{facts.institutions.map(inst=>`${institutionDisplayName(inst.name)}${inst.present?'':' (missing)'}`).join(' · ')}</div>
                 </div>
-                {chain.outputs.length > 0 && <div style={{flex:'1 1 140px'}}>
+                {outs.length > 0 && <div style={{flex:'1 1 140px'}}>
                   <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:MUTED,marginBottom:2}}>{chainYieldRefused(chain) ? NORMALLY_YIELDS : 'Outputs'}</div>
                   <div style={{display:'flex',flexWrap:'wrap',gap:2}}>
-                    {chain.outputs.slice(0, 3).map((o, j) => (
+                    {outs.slice(0, 3).map((o, j) => ( /* W2-C-LEAVES-6 item 7 (#555): each output borne out by its house (tradeListDisplay.js :: chainOutputsShown) */
                       <span key={j} style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.inkMag2,background:`${st.color}10`,padding:'1px 5px'}}>{o}</span>
                     ))}
                   </div>
