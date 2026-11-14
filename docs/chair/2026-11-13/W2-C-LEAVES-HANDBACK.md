@@ -1821,7 +1821,17 @@ a bardic college (585: the detector does not call it arcane), "Divination and sc
   Carried: the presumed-things walker's two named SERVICE_OUTPUTS hits (unchanged hashes); the tuning walker's six tables.
 
 ## WHAT IS LEFT, line by line (the brief's order)
-1. DONE: (H) (ea7d451c2); the one render; the message. FIRST NEXT: the 4 famine towns above (landFailed clause).
+1. DONE: (H) (ea7d451c2); the one render; the message; the famine towns' landFailed clause (37c884859: 8 pills in 3 towns;
+   r2s-famine-thorp-1 cured; the render's other three keep an export a second ground of the good still yields).
+0. FIRST NEXT, THE CHAIR'S RULING OF 14:10 UTC (vetoable), before (15): the two wide silences of b9b4033e3 are NOT accepted
+   as silences where a house that makes them stands: A LINE IS IN ITS POOL UNLESS THE TOWN MAKES IT FALSE; THE HOUSE THAT
+   FINISHES A GOOD MAKES THAT GOOD. Give "Rare spices and exotic dyes" (507 Spices & Dyes cards) and "Magical entertainment"
+   (585, the bardic college) each a MAKER ROW, read first which houses truly make each (three towns each, the smallest and
+   the largest): the output prints where its maker stands, silent where none does; counts before and after. CAUTION: a
+   MADE_GOOD_ROWS row also makes the good "made" on the Exports and "Produced locally" (b9b4033e3's first cut gave spices to
+   the merchants: 219 exports and 123 local pills turned from transit to made, FALSE): a row for a CARRIED good must reach
+   the card (`chainOutputsShown`) without reaching `pillAsPrinted`'s makerStands (e.g. a third table read only by
+   chainMakesHere for entrepot chains). The two other silences (caravan goods 122, divination 492) by the same reading.
 2. By width: (15), (4) with #206, (7), (5), (16), (17), (10), (8), (6), (9), (3)'s medium pills (mostly cured by b9b4033e3:
    re-count), (14), (11); then PART 11's carried medium rows.
 
@@ -1831,3 +1841,12 @@ a bardic college (585: the detector does not call it arcane), "Divination and sc
   `pilldiff.mjs <a> <b>` and `bygood.mjs <a> <b>` the pills gone and new; `pick.mjs` towns of a good; `ranges.jsx` every
   "(n-m)" defenseDisplay prints; `one.jsx` one rww/rr2s town's chains of a good; `holders.sh <file>` the other holders.
 - Frozen trees <scratchpad>/fz-* (tar of wt without .git, node_modules linked) carry each measure; a plant is made only there.
+
+## STATUS (this seat, final)
+HANDED BACK at the chair's word (14:10 UTC: the count field read 335,524 twice although work went between; this seat's own
+estimate is near the mark). Pushed: b9b4033e3 (rulings 3 + 2b), 1ea5d0420 (famine exports), ea7d451c2 (H), 37c884859 (the
+landFailed clause), with the docs commits 9ac076d5e and a5905a935. Nothing running. The one full render was taken at
+ea7d451c2 (before the hand-back's 37c884859, whose 8 pills in 3 towns were measured by pills.jsx, not rendered again: the
+brief's second render before the hand-back is NOT done, said plainly). `git diff --stat f9db28270..37c884859 -- src/`:
+tradeListDisplay.js, validationOnPage.js, defenseDisplay.js; five test files changed, no title added (no lighting-census
+row moved by title). Records unmoved 1,824 of 1,824 at every cure; publicProse moved only by b9b4033e3 (the 83 towns).
