@@ -4877,18 +4877,6 @@
     "da4a4733fa1eede8"
    ],
    [
-    "house: baker",
-    "family",
-    "Turns malted grain into ale by the barrel. After the bakers, no trade eats more grain. It supplies both alehouses and ho",
-    "3315baf4a1f09949"
-   ],
-   [
-    "house: alehouse",
-    "family",
-    "Turns malted grain into ale by the barrel. After the bakers, no trade eats more grain. It supplies both alehouses and ho",
-    "3315baf4a1f09949"
-   ],
-   [
     "house: alehouse",
     "family",
     "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. Alehouses and households ",
