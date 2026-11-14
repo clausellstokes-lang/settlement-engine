@@ -61,8 +61,8 @@
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 184022,
-      "gzip": 25652,
+      "raw": 184088,
+      "gzip": 25665,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
@@ -595,6 +595,14 @@
       "toRaw": 262444,
       "gzipAfter": 35290,
       "reason": "+11 B raw over the committed 262433 (gzip level 9: 35276 -> 35290): DS-DEF-3 Moderate v3: colour -> tier: ≥ village"
+    },
+    {
+      "car": "W2-WRITE-10 #246",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 184022,
+      "toRaw": 184088,
+      "gzipAfter": 25665,
+      "reason": "+66 B raw over the committed 184022 (gzip level 9: 25652 -> 25665): DS-ECO-12 religious houses v1 v2: + tier: ≥ village"
     }
   ],
   "ceilingTransfersNewLeaves": [

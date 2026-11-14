@@ -108,6 +108,8 @@ const GUARDS = [
   { seed: 'w5-city-under_siege-3', pool: 'DS-ECO-10::POSTURE: vulnerable', vid: 1, why: 'a siege: "no dependable way to move them ... the road they leave by is not" beside "nothing comes in by road" (v3\'s twin, the same mark)' },
   { seed: 'w5-hamlet-calm-2', pool: 'DS-DEF-3::Moderate', vid: 3, why: 'the size ruling: "told which few streets to avoid" in a hamlet with no streets to choose among (BAR-0 HIGH #217, Saltosinum, a hamlet of 87)' },
   { seed: 'w5-thorp-calm-9', pool: 'DS-DEF-3::Moderate', vid: 3, why: 'the size ruling: the same line in a thorp (BAR-0 HIGH #217)' },
+  { seed: 'w5-hamlet-indebted-101', pool: 'DS-ECO-12::INCOME WEIGHT: the religious houses', vid: 1, why: 'no church of its own: "What the religious houses take in and spend is a large part of the business" beside a wayside shrine, the walk to another parish\'s church and no faith income (BAR-0 HIGH #246, Torriplenum)' },
+  { seed: 'w5-hamlet-calm-10', pool: 'DS-ECO-12::INCOME WEIGHT: the religious houses', vid: 2, why: 'no church of its own: "The religious houses ... are among its biggest buyers and employers" beside a wayside shrine and the walk to another parish\'s church (v1\'s twin, BAR-0 HIGH #246)' },
 ];
 
 /** @param {string} seed */

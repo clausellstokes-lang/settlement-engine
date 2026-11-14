@@ -19616,7 +19616,8 @@
       "lineDeclares": {
         "no crisis: under_siege": 2,
         "no sacredHouse": 2,
-        "sacredHouse": 2
+        "sacredHouse": 2,
+        "tier: ≥ village": 2
       },
       "undeclared": 0,
       "crisisScoped": false
