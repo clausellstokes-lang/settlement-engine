@@ -25,7 +25,7 @@ import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.j
 import { generalDeskLines } from '../generalDeskRead.js'; // DS-GEN-18 · the general desk's ONE caller
 import Button from '../../primitives/Button.jsx';
 import { institutionDisplayName, institutionHouseLabel } from '../../../domain/display/institutionDisplayName.js';
-import { tradeListsAsPrinted, tradeMarksOnPage, revenuesOffTheLists, chainOutputsShown } from '../../../domain/display/tradeListDisplay.js'; // CENSUS-3b unit 3 — the trade lists' one display reader (kind A, filterDeclared)
+import { tradeListsAsPrinted, tradeMarksOnPage, revenuesOffTheLists, chainOutputsShown, plainGoodName } from '../../../domain/display/tradeListDisplay.js'; // CENSUS-3b unit 3 — the trade lists' one display reader (kind A, filterDeclared)
 import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js'; // §934.22 item 2 — the native-resource label seam (the Imports pills)
 import { edged } from '../../../design/edgedBox.js';
 import { foodStoresWords } from '../../../domain/summary/tonightSheet.js'; // the stores sentence's ONE writer (TRIM-2 request 3)
@@ -832,7 +832,7 @@ import { foodRowShown } from '../../../domain/display/foodRowShown.js';
  * @param {{ needs: ReadonlyArray<string>, mobile: boolean }} props
  */
 function NeedsNotMet({ needs, mobile }) {
-  const names = needs.map((n) => resourceDisplayName(n) || n).map((n) => n.charAt(0).toLowerCase() + n.slice(1));
+  const names = needs.map((n) => plainGoodName(resourceDisplayName(n) || n)).map((n) => n.charAt(0).toLowerCase() + n.slice(1)); // W2-C-LEAVES-13 (15): no slash label
   return <p data-testid="economics-needs-not-met" style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,margin:'6px 0 0',lineHeight:1.45}}>
     Needed, and not brought in: {names.join(', ')}.
   </p>;

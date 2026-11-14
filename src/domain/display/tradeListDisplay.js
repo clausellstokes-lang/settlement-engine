@@ -849,3 +849,18 @@ function chainCarriesHere(c, good, roster) {
   const roadOnly = heads.some((h) => { const m = roster.filter((r) => r.includes(h)); return m.length > 0 && m.every((r) => r.startsWith('access to')); });
   return !roadOnly && roster.some((n) => !n.startsWith('access to') && re.test(n));
 }
+
+// ─── W2-C-LEAVES-13, the chair's ruling (15): NO SURFACE PRINTS A CATALOGUE LABEL WITH A SLASH (at the end of the file) ───
+/**
+ * A GOOD'S PLAIN NAME (W2-C-LEAVES-13; the no-lane seat's row, "Needed, and not brought in: … gold/silver ore", 93 towns of
+ * the joined tree's 720): the resource chain table spells two goods with a slash (`data/resourceChains.js :: preciousMetals`,
+ * "gold/silver ore", "gold/silver bars"). A page prints the plain name, the two metals joined by "and" ("gold and silver
+ * ore"); every other name is returned as given. Called on what the native-resource seam already printed
+ * (`resourceDisplayName.js`, the pills' leaf), so case and words stay that leaf's. Display only; a MATCH never reads it.
+ * @param {unknown} text a good's name as a page would print it
+ * @returns {string}
+ */
+export function plainGoodName(text) {
+  return String(text ?? '').replace(/(\p{L})\s*\/\s*(\p{L})/gu, '$1 and $2');
+}
+
