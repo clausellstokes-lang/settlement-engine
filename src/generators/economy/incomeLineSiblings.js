@@ -131,7 +131,8 @@ export const INCOME_STATE_SIBLINGS = Object.freeze({
  * @param {{ roster: ReadonlyArray<string>, besieged: boolean, imports: ReadonlyArray<unknown>, exports: ReadonlyArray<unknown>,
  *   chains: ReadonlyArray<{ chainId?: unknown, status?: unknown }>, top: boolean, source?: string, managedForest?: boolean,
  *   grainFailed?: boolean }} f the roster's names lower-cased; the siege; the final trade lists; the chains with their
- *   states; whether the row is the largest source; its source label; whether a managed or shipbuilding forest stands;
+ *   states; whether the row is the largest source; its source label; whether the felling is managed (a managed forest,
+ *   or a shipbuilding stand a woodcutter works: UPKEEP-16, the chair's ruling (b));
  *   whether the food record names grain as the source a famine failed
  * @returns {string}
  */
@@ -204,4 +205,69 @@ export function houseOfWorkLine(tier, incomeBuild, roster, besieged) {
   const house = roster.find((n) => HOUSE_OF_WORK_LINES.some((h) => h.re.test(n))); // the first such house on the roster
   const work = house && HOUSE_OF_WORK_LINES.find((h) => h.re.test(house));
   return work ? { source: HOUSE_OF_WORK_LABEL, percentage: 10, desc: besieged ? '' : work.text } : null;
+}
+
+// ── UPKEEP-16 (the chair's ruling (o) RE-RULED, 2026-11-14, 13:08: candidate D of INCOME-MEASURE-1) ──────────────────
+// AN INCOME ROW IS BORNE OUT BY THE PAGE: a resource row (the four trades below) stands where a house of its trade stands
+// on the roster, OR where the raw good is on the town's own final export list from ground it holds (not depleted). A row
+// the page does not bear out is taken off and the rows that remain are re-shared from their stored weights; a row kept
+// with no house of its trade is TITLED BY THE GOOD IT SELLS ("Coal Sales" for coal sold under "Iron & Metalwork"), its
+// line silent. Measured on the capacity reader's 972 at f4e9cd37b (docs/chair/2026-11-14/INCOME-ROWS-MEASURE.md on
+// lane/income-measure-2026-11-14): 476 false rows in 402 towns -> 0, on the record and on every rendered surface.
+
+/**
+ * @typedef {{ keys: ReadonlyArray<string>, source: string | null, sold: RegExp }} GoodSold a good a row may sell: the ground
+ *   it comes from (resource-key prefixes), the title a kept row with no house takes (null: the row keeps its own), how the
+ *   export list names it
+ * @typedef {{ house: RegExp, goods: ReadonlyArray<GoodSold> }} ResourceTrade
+ */
+/** Each resource trade: the roster's houses of the trade, and the goods its row may sell from the town's own ground.
+ *  A good's `source` is the row's title where it is kept with no house (`source:` so the treasury's totality scan reads it).
+ * @type {Readonly<Record<string, ResourceTrade>>} */
+export const RESOURCE_ROW_TRADES = Object.freeze({
+  'Iron & Metalwork': Object.freeze({ house: /\bmines?\b|mining|smith|smelt|forge|foundr|metal|armou?r|weapon/, goods: Object.freeze([
+    Object.freeze({ keys: Object.freeze(['iron_deposit']), source: 'Iron Ore Sales', sold: /\biron\b|\bore\b/i }),
+    Object.freeze({ keys: Object.freeze(['coal_deposit']), source: 'Coal Sales', sold: /^coal\b/i }),
+    Object.freeze({ keys: Object.freeze(['precious_metal']), source: 'Precious Metal Sales', sold: /silver|gold|precious/i })]) }),
+  'Stone Quarrying': Object.freeze({ house: /quarr|mason|stonecut/, goods: Object.freeze([
+    Object.freeze({ keys: Object.freeze(['stone_quarry']), source: 'Building Stone Sales', sold: /stone|marble|granite/i }),
+    Object.freeze({ keys: Object.freeze(['river_clay', 'clay']), source: 'Clay Sales', sold: /\bclay\b|potter/i })]) }),
+  'Timber Trade': Object.freeze({ house: /woodcut|lumber|sawmill|logging|forester/, goods: Object.freeze([
+    Object.freeze({ keys: Object.freeze(['managed_forest', 'mountain_timber', 'shipbuilding_timber', 'timber']), source: 'Timber Trade', sold: /timber|lumber|plank/i })]) }),
+  'Fish & Preserved Produce': Object.freeze({ house: /fish/, goods: Object.freeze([
+    Object.freeze({ keys: Object.freeze(['river_fish', 'fishing_grounds']), source: null, sold: /fish|herring|seafood/i }),
+    Object.freeze({ keys: Object.freeze(['salt_flat', 'desert_salt']), source: 'Salt Sales', sold: /salt/i })]) }),
+});
+/** The maritime fish row is the same trade under the sea's title. @type {Readonly<Record<string, ResourceTrade>>} */
+const ROW_TRADES = Object.freeze({ ...RESOURCE_ROW_TRADES, 'Fish & Maritime Produce': RESOURCE_ROW_TRADES['Fish & Preserved Produce'] });
+/** Every title a kept row may be given (`treasury.js :: INCOME_SOURCE_FORMS` maps each; the census of titles). */
+export const GOOD_SOLD_TITLES = Object.freeze([...new Set(Object.values(RESOURCE_ROW_TRADES).flatMap((t) => t.goods.map((g) => g.source)).filter((t) => t !== null))]);
+
+/**
+ * The income rows the page bears out, re-shared, IN PLACE (the economy's normalised list; before its sort). Pure; no draw.
+ * @param {Array<{ source: string, percentage: number, weight: number, desc?: string }>} rows the normalised income rows
+ * @param {{ roster: ReadonlyArray<string>, ground: ReadonlyArray<string>, exports: ReadonlyArray<unknown> }} f the roster's
+ *   names lower-cased; the town's live (not depleted) resources; the final export list
+ * @returns {void}
+ */
+export function keepRowsThePageBearsOut(rows, f) {
+  const rosterHas = (/** @type {RegExp} */ re) => f.roster.some((n) => re.test(n));
+  const ground = (/** @type {ReadonlyArray<string>} */ keys) => f.ground.some((r) => keys.some((k) => r.startsWith(k)));
+  const sold = (/** @type {RegExp} */ re) => f.exports.some((x) => re.test(String(x)));
+  /** The good the town sells from its own ground under this row, or null. @param {{ source: string }} e */
+  const goodSold = (e) => ROW_TRADES[e.source]?.goods.find((x) => ground(x.keys) && sold(x.sold)) ?? null;
+  const unhoused = (/** @type {{ source: string }} */ e) => { const t = ROW_TRADES[e.source]; return !!t && !rosterHas(t.house); };
+  const kept = rows.filter((e) => !unhoused(e) || goodSold(e) !== null);
+  if (kept.length !== rows.length) {
+    const total = kept.reduce((sum, e) => sum + e.weight, 0) || 1;
+    for (const e of kept) e.percentage = Math.round((e.weight / total) * 100);
+    const sum = kept.reduce((s, e) => s + e.percentage, 0);
+    if (kept.length && sum !== 100) { let bi = 0; kept.forEach((e, i) => { if (e.percentage > kept[bi].percentage) bi = i; }); kept[bi].percentage += 100 - sum; }
+    rows.length = 0; rows.push(...kept);
+  }
+  for (const e of rows) {
+    if (!unhoused(e)) continue;
+    const g = goodSold(e);
+    if (g && g.source && g.source !== e.source) { e.source = g.source; e.desc = ''; }
+  }
 }
