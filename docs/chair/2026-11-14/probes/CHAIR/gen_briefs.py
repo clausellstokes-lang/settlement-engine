@@ -6107,6 +6107,72 @@ SEATS2['W2-FIX-DATA-14'] = dict(
 )
 
 
+SEATS2['SURFACES-3'] = dict(
+    title="SURFACES-3 · one reader for one fact on every surface: the food figures on the PDF and the journal (729 towns), then the written list in order",
+    branch='lane/join-surfaces-2026-11-14', tip='e6cb445d', statement=False,
+    intro=("You are SURFACES-3, the third seat of the surfaces lane of the settlement-engine integration program "
+           "(lane/join-surfaces-2026-11-14, cut from the joined line and holding it as merged at fe225f12a). THE LAW OF THE LANE: ONE READER "
+           "FOR ONE FACT ON EVERY SURFACE: what a tab says of a fact, the PDF and the Foundry journal say through the same function the tab "
+           "calls; a surface with no room prints less, never something else. The first seat cured a chain's state and outputs on three "
+           "surfaces; the second cured THE FOOD WORD (the Overview 159 towns to 0, the Foundations row 159 to 0, the PDF's Identity block 729 "
+           "to 0) and handed back before the next item, with that item READ AND ITS CURE WRITTEN. Yours: its list, in order. A measuring "
+           "seat is sizing the exports' three widest chapters (the Defence chapter's threat lines, Identity & Daily Life's culture lines, "
+           "the Resources tables): THOSE ARE NOT YOURS. The lane lands as points on the joined line: NO whole suite."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-14/SURFACES-HANDBACK.md (by script): the law; the first seat's item 0 table (every fact, "
+          "its surface, its towns); and the part \"# SURFACES-2\" WHOLE: the rulings copied (r1 to r6: THEY STAND), the food word as cured "
+          "(THE FORM OF A CURE HERE: one leaf, one call line a surface, a guard that renders every surface, each arm red alone), the "
+          "Safety row measured with no fault, and WHAT IS LEFT, line by line, with item 2's cure as written: YOUR LIST. The instruments: "
+          "docs/chair/2026-11-14/probes/SURFACES-1/ and probes/SURFACES-2/.\n"
+          "3. THE READERS THEMSELVES, whole, before you call one from a new place (the hand-back names each).\n"
+          "4. Nothing else: not the older briefs, not the chair's handoffs, not another lane's hand-back."),
+    first=("FIRST ACT. FULL HISTORY (`git fetch --depth=2147483647 origin lane/join-surfaces-2026-11-14 lane/join-2026-11-14 "
+           "lane/integration-2026-11-07`; `git rev-parse --is-shallow-repository` prints false). Read your lane's tip back from origin: it "
+           "was e6cb445db when this was written; any difference is a stop: tell the chair. THEN MERGE THE JOINED LINE'S TIP INTO YOUR LANE "
+           "if it has moved past fe225f12a (`git merge --no-ff origin/lane/join-2026-11-14`: say which tip; and AGAIN before your "
+           "hand-back): a code conflict in a file of yours keeps BOTH sides' cures (read the file whole); a register, a baseline, a "
+           "generated file or a bundle that conflicts takes THE JOINED LINE'S side. No census is re-taken."),
+    work=("THE CHAIR'S RULINGS SINCE THE SECOND SEAT'S COPY (2026-11-14; each vetoable by the owner; copy them into the hand-back):\n"
+          "(r7) THREE CHAPTERS OF THE EXPORTS ARE BEING MEASURED AND ARE NOT YOURS: in src/pdf/sections/DefenseSecurity.jsx every line "
+          "written by the threat assessment; in src/pdf/sections/IdentityDailyLife.jsx the culture profile's lines; in "
+          "src/pdf/sections/ResourcesProduction.jsx and the journal's Resources & Production page the tables of processing houses, tags "
+          "and final products. In those files you change ONLY what your list names (the force's name and chip in the Defence chapter; "
+          "the \"Abundant\" group in Resources), in the smallest hunk, so that a later seat's cure of the chapter merges clean.\n"
+          "(r8) The second seat's finding on the Safety row stands: no fault (the tab prints the band; the dump dropped a repeated word): "
+          "nothing to cure.\n"
+          "THE WORK, in this order, each cause its own commit, measured first on the first seat's 772 births (count before and after), "
+          "red first (a guard that renders the surfaces; each arm shown able to red by a plant you do not commit, made in a tree no "
+          "suite or render is running in), pushed as made:\n"
+          "1. ITEM 2, AS WRITTEN BY THE SECOND SEAT: the PDF's food block prints the view's deficit where the tab prints its Short (253 "
+          "towns): the tab's reader moved to a leaf first, then one call line; AND THE JOURNAL'S ECONOMICS \"Food:\" ROW, which prints "
+          "Surplus, Balanced or Deficit in 729 of 772: the food word's leaf, or nothing. ONE MESSAGE TO THE CHAIR when both are pushed "
+          "(the tip; each count before and after), then THE COUNT.\n"
+          "2. (r3) the other spelling (165 towns: the tab's word governs on the PDF and the journal); (r4) \"Abundant\" under a siege (56 "
+          "of 56: the PDF prints the groups the tab prints); (r5) the Defence chapter's force name and provenance chip (MEASURE FIRST: the "
+          "defence lane's cure of the force name is on the joined line now); (r6) the tension rows' bracket; the stores' unit (6 towns); "
+          "the trade connectivity row (measured with a system state first).\n"
+          "3. THE SWEEP, once, at the end: the first seat's measure script, every fact of its table re-taken at your tip after the last "
+          "merge of the joined line: does every surface still agree? The table in the hand-back; a new disagreement is cured if it is "
+          "one call line, else NAMED with its count.\n"
+          "EVERY SURFACE A CURE CHANGES IS READ before it is pushed: the PDF's text, the journal and the tab of three towns of the "
+          "cure's cells, a siege, a famine or an occupation among them, the smallest and the largest size it reaches; the towns and "
+          "what printed in the commit body. REGISTERS ARE RE-DERIVED ONCE, AT THE CLOSE: a register your cure or your merge leaves stale "
+          "is NAMED; nothing is banked, raised or hand-edited; a pin your cure moves is re-keyed BY IDENTITY in the same commit.\n"
+          "AFTER EVERY CURE: the strict-domain gate, the type ratchet and eslint on the touched files; the presumed-things walker "
+          "against your merged base; the twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop; a fall is "
+          "NAMED); the test files that name the files you touched.\n"
+          "THE SECOND SEAT SPENT ITS WHOLE COUNT ON ONE CURE AND ONE MEASURE. SPEND LESS: render only the towns a cure can move (the "
+          "second seat's instruments say how); count by script; never a render's output in your context; hand back by file BEFORE a "
+          "cure you cannot finish.\n"
+          "THE HAND-BACK, kept current after every item: a part \"# SURFACES-3\" at the end of the lane's hand-back file, in the second "
+          "seat's form: the rulings copied; each fact as cured; EVERY NEW OR CHANGED WORD ON A SURFACE with the towns it was read in; "
+          "THE REGISTERS NAMED STALE; what is left, line by line."),
+    merges='; the merges of the joined line into YOUR lane that the first act names',
+    when="for a stop that blocks everything you have left, when item 2 and the journal's food row are pushed (the tip; the counts), and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
