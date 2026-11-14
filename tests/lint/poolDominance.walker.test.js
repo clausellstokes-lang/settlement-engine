@@ -33,7 +33,7 @@
  */
 import { describe, expect, test } from 'vitest';
 
-import { COLLAPSE_CHANCE, DOMINATED, NOISE_SE, confirmRises, corpusIdentity, judge, judgeCorpus, readRegister, shareError } from '../../scripts/census/pool-dominance.mjs';
+import { COLLAPSE_CHANCE, DOMINATED, NOISE_SE, bankNew, confirmRises, corpusIdentity, judge, judgeCorpus, readRegister, shareError } from '../../scripts/census/pool-dominance.mjs';
 
 /**
  * A pool of `towns` settlements with `perTown` draws each, its top line taking `share` in every
@@ -45,6 +45,37 @@ function evenPool(share, towns, perTown = 1) {
   const all = { xx: towns * n * n, xn: towns * n * n, nn: towns * n * n };
   return { draws: towns * n, towns, top1: share, top5: 1, spread: { top1: { xx: towns * x * x, xn: towns * x * n, nn: towns * n * n }, top5: all } };
 }
+
+/**
+ * THE NARROW DOOR, PINNED BOTH WAYS (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): `--bank-new` gives a drawn
+ * pool with no row exactly one row, at the higher of the two corpora's readings, and leaves every other row byte for
+ * byte as it was — never a lowered ceiling, never a dropped row (that is `--tighten`, the chair's door).
+ */
+describe('--bank-new: a pool with no row gains exactly that row, and nothing else moves', () => {
+  const kept = { top1: 0.9, top5: 1, lines: 4, reason: 'a kept row', targets: ['top5'] };
+  const loose = { top1: 0.8, top5: 1, lines: 3, reason: 'a row a tightening would lower' };
+  const register = { _law: 'x', corpus: corpusIdentity(), census: { secondWave: ['w'] }, pools: { kept, loose, gone: { top1: 0.5, top5: 1, lines: 2, reason: 'no longer drawn' } } };
+  const table = new Map([['kept', { ...evenPool(0.2, 100), lines: 6 }], ['loose', { ...evenPool(0.3, 100), lines: 3 }], ['fresh', { ...evenPool(0.61234, 100), lines: 2 }]]);
+  const second = new Map([['fresh', { ...evenPool(0.65001, 100), lines: 2 }]]);
+
+  test('the missing pool is banked at the higher reading, rounded up; every other row is as it was', () => {
+    const { next, banked } = bankNew(table, second, register);
+    expect(banked).toEqual(['fresh']);
+    expect(next.pools.fresh).toMatchObject({ top1: 0.6501, top5: 1, lines: 2 });
+    expect(JSON.stringify({ kept: next.pools.kept, loose: next.pools.loose, gone: next.pools.gone })).toBe(JSON.stringify({ kept, loose, gone: register.pools.gone }));
+    expect(Object.keys(next.pools)).toEqual(['kept', 'loose', 'gone', 'fresh']);
+    expect(next.corpus).toBe(register.corpus);
+    expect(next.census.secondWave).toEqual(['w']);
+  });
+
+  test('a register with no pool missing is left with its rows untouched; another corpus is refused', () => {
+    const full = { ...register, pools: { ...register.pools, fresh: { top1: 0.7, top5: 1, lines: 2, reason: 'r' } } };
+    const { next, banked } = bankNew(table, second, full);
+    expect(banked).toEqual([]);
+    expect(JSON.stringify(next.pools)).toBe(JSON.stringify(full.pools));
+    expect(() => bankNew(table, second, { ...register, corpus: 'another' })).toThrow(/another/);
+  });
+});
 
 describe('the rule: a rise reds beyond the pool\'s own noise, or across the dominated line', () => {
   const row = { top1: 0.4, top5: 1, reason: 'a test row' };

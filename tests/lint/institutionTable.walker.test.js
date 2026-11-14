@@ -226,8 +226,10 @@ describe('the column census, measured across the estate', () => {
     // census-1f unit 1c: -5) from the shared 1,925; the merged tip reads 1,849 = 1,925 - 72 - 5 + 1, the two causes
     // composed and one row of INTERACTION (the census's declared service roll over the review-intake's regenerated
     // service keys; PLAUSIBLE as attributed, not bisected per settlement). The liveness anchor is unchanged in kind.
-    expect(serviceRows, 'the header claims 1,849 instantiated service rows over these thirty')
-      .toBe(1849);
+    // ⭐ RE-MEASURED 2026-11-13 (STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; a figure its drafted record names for the merge seat)): 1,849 -> 1,843, the draft's own
+    // figure exactly (the lane's tip reads 1843 from the same 1849); the liveness anchor is unchanged in kind.
+    expect(serviceRows, 'the header claims 1,843 instantiated service rows over these thirty')
+      .toBe(1843);
     expect(
       carriers,
       'a generation step began writing `settlement.services`. The schema declares the field and'

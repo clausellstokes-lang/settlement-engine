@@ -620,8 +620,10 @@ const genCoherence = settlement => {
     });
   }
 
-  // Church controls economy but formal governance is secular
-  const churchControlsEcon = economicState.situationDesc?.toLowerCase().includes('church controls');
+  // Church controls economy but formal governance is secular. W2-B-DECLARE item 5 (the layer map's measure 9:
+  // no line reads wording): the generator's own flag, stored on the record (`safetyProfile.flags`), not the
+  // situation sentence it once wrote — that sentence is suppressed for an isolated place, the flag is not.
+  const churchControlsEcon = economicState.safetyProfile?.flags?.theocraticEconomy === true;
   const govIsSecular =
     govFaction &&
     !govFaction.faction.toLowerCase().includes('church') &&

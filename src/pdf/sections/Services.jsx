@@ -102,7 +102,7 @@ export function Services({ settlement, narrativeMode, vm, stateProse }) {
             ACTIVE SUPPLY CHAINS · {s.activeChains.length}
           </Text>
           {s.activeChains.map((chain, i) => (
-            <ChainCard key={`chain-${i}`} chain={chain} />
+            <ChainCard key={`chain-${i}`} chain={chain} town={settlement} />
           ))}
         </View>
       )}
@@ -188,7 +188,7 @@ function CategoryCard({ cat }) {
   );
 }
 
-function ChainCard({ chain }) {
+function ChainCard({ chain, town }) { const shown = chainPrintName(chain, town); // COHERENCE-AGREE-6 (F1): the name and the source printed read the town's access
   // Honor the chain's own disruption status first — the card used to label
   // trade-impaired/vulnerable chains 'Active', contradicting the web panel.
   const status = String(chain.status || '').toLowerCase();
@@ -216,9 +216,9 @@ function ChainCard({ chain }) {
   // — which already routes the same field through the seam — said 'House of worship'. The
   // seam goes BEFORE humanize so an unmapped institution still gets its casing.
   const flow = [
-    chain.resource ? humanize(label(chain.resource)) : null,
+    shown.resource ? humanize(label(shown.resource)) : null,
     (chain.processingInstitutions || []).map((n) => humanize(institutionDisplayName(n) || n)).join(' + ') || null,
-    (chain.outputs || []).map(humanize).slice(0, 4).join(', ') || null,
+    ((outputs) => (outputs && chainYieldRefused(chain) ? `${NORMALLY_YIELDS}: ${outputs}` : outputs))((chain.outputs || []).map(humanize).slice(0, 4).join(', ') || null),
   ].filter(Boolean).join(' \u00bb ');
 
   const meta = [
@@ -232,7 +232,7 @@ function ChainCard({ chain }) {
   return (
     <StatusCard
       compact
-      name={chain.label || chain.chainId || 'Chain'}
+      name={shown.label || chain.chainId || 'Chain'}
       status={statusLabel}
       statusLabel={statusLabel}
       tone={tone}
@@ -273,3 +273,7 @@ function svcLabel(svc) {
 }
 
 export default Services;
+
+// COHERENCE-AGREE-4 (item 3′): at the end of the file so no line-keyed register row above it moves.
+import { NORMALLY_YIELDS, chainYieldRefused } from '../../domain/chainYield.js';
+import { chainPrintName } from '../../domain/display/chainPrintName.js';

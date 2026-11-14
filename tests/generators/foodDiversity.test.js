@@ -30,8 +30,9 @@ function pairingsOf(s) {
   const has = (...k) => res.some((r) => k.some((x) => r.includes(x)));
   const mill = names.some((n) => n.includes('mill') && !n.includes('sawmill') && !n.includes('access to external mill'));
   return {
-    grain: (inst('subsistence', 'common field', 'household farm', 'farming community') || inst('farmland', 'grain field', 'managed farmland')) && has('grain_fields', 'fertile_floodplain'),
-    livestock: inst('pastoral', 'grazing', 'livestock', 'shepherd', 'common graz') && has('grazing_land'),
+    // COHERENCE-AGREE (the chair's food-sources ruling, 2026-11-11): worked land is a source by its own name.
+    grain: has('grain_fields', 'fertile_floodplain'),
+    livestock: has('grazing_land'),
     fish: (inst('fish', 'fishing') || has('fishing_grounds', 'river_fish')) && has('fishing_grounds', 'river_fish'),
     mill: mill && has('river_mills'),
     game: has('hunting_grounds') && (inst('hunting', 'managed forest', 'woodcutter') || ['thorp', 'hamlet', 'village'].includes(s.tier)),

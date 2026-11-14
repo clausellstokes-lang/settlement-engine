@@ -107,7 +107,7 @@ export function extractSettlementContext(s) {
   // Economy — use compound.economyOutput (same source as EconomicsTab)
   const econScore    = Math.round(eco.compound?.economyOutput ?? scores.economic ?? 50);
   const chains       = eco.activeChains || [];
-  const chainNames   = chains.map(c => c.label || c.chainId).filter(Boolean).slice(0, 8);
+  const chainNames   = chains.map(c => chainPrintName(c, s).label || c.chainId).filter(Boolean).slice(0, 8); // COHERENCE-AGREE-6 (F1)
   const incomeCount  = via.incomeSources?.length || eco.incomeSources?.length || 0;
   const tradeRoute   = cfg.tradeRouteAccess || 'road';
   const terrain      = cfg.terrainOverride  || null;
@@ -238,3 +238,4 @@ const DEFENSE_CONTEXT = {
   'Vulnerable':     { text: 'The settlement has minimal defenses. A determined raiding party could take it. People are aware of this and it shapes how they live. They know where to run, they keep their valuables hidden, they have arrangements with neighbours for emergencies. The watch exists mainly to deal with drunks.', needs: ['watch'], crisis: ['any'] },
   'Undefended':     { text: 'There are no walls, no garrison, no meaningful watch. The settlement is completely open. People have learned to live with this: some by forming informal neighbourhood watch arrangements, some by simply accepting that danger is a fact of life here. Strangers are watched carefully because there is no gate to watch them at.', excludes: ['walls', 'garrison', 'watch', 'gate'], crisis: ['any'] },
 };
+import { chainPrintName } from '../../domain/display/chainPrintName.js'; // COHERENCE-AGREE-6 (F1): what a chain prints under

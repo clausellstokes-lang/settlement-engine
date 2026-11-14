@@ -830,7 +830,9 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
     )
     || hasTeleportationInfra(institutions, config);
   if (mustImport) {
+    const pick = Math.round(Number(population) || 0) + (institutions?.length || 0); // COHERENCE-AGREE: the event a place draws, by its size, no roll
     mustImport.forEach((resource) => {
+      if (liveMaterialFor(resource, availableNativeResourceKeys(config || {}))) return; // COHERENCE-AGREE: a live material is no import and no hook
       if (hasImportProcessor(institutions, resource, config)) {
         if (!hasExternalSupply) return;
         warnings.push({
@@ -841,18 +843,17 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
           impact: 'Creates trade dependency and vulnerability.',
           suggestedFixes: [`Establish stable trade relationship with ${resource} supplier`],
         });
-        if (resource.toLowerCase().includes('timber') && timberStandHeld(config) && !siegeCutsImports(config, foodBalance)) // R2-CODE-A-8 item 7b (ROUND-3-CUT #1004, #1336): the forest only where the roster's resources hold a stand still standing; not under a siege that cuts every road
-          hooks.push({
-            category: 'Resource Conflict',
-            hook: "Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?",
-            severity: 'medium',
+        if (resource.toLowerCase().includes('timber') && (pick % 2 !== 0 || (timberStandHeld(config) && !siegeCutsImports(config, foodBalance)))) // R2-CODE-A-8 item 7b (ROUND-3-CUT #1004, #1336), composed at the merge of the line: the FOREST sentence only where the roster's resources hold a stand still standing, and not under a siege that cuts every road; the line's rafts sentence and its draw (`pick`, no roll) unchanged
+          hooks.push({ category: 'Resource Conflict', severity: 'medium',
+            hook: ["Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?",
+              'The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other for what is left in the yards.'][pick % 2],
           });
         if (resource.toLowerCase().includes('metal') || resource.toLowerCase().includes('iron'))
-          hooks.push({
-            category: 'Strategic Resource',
-            hook: 'War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Work slows, and people are starting to complain.',
-            severity: 'medium',
-          });
+          hooks.push({ category: 'Strategic Resource', severity: 'medium', hook: (typeof facts === 'function' ? facts() : facts)?.warState !== 'peace' // the war line only where the record holds a war
+            ? 'War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Work slows, and people are starting to complain.'
+            : ['The iron merchants have doubled their price this season, and the smiths are mending tools with scrap. Work slows, and people are starting to complain.',
+              'The iron carts are three weeks late and the carters will not say why. The smiths are rationing what they have, and work waits on mended tools.',
+              'A new toll on the iron road has made metal dear. The smiths blame whoever set it, and the tools still need mending.'][pick % 3] });
       }
     });
   }
@@ -894,4 +895,4 @@ function moderateGapGrade(facts) {
   if (severity === undefined) return {};
   return { category: FOOD_SECURITY_BANDS[/** @type {keyof typeof FOOD_SECURITY_BANDS} */ (band)].label, severity };
 }
-/** R2-CODE-A-8 item 7 (the chair's ruling: a line names an import or a source only where the record holds it): does the record's import list (`factsOf(…).imports`, the economic state's `primaryImports`) hold a good this pattern names? No facts (a direct caller): held, as resolveSibling keeps a line it cannot read. @param {object | (() => object) | null} facts @param {RegExp} pattern @returns {boolean} */ function importHeld(facts, pattern) { const f = /** @type {any} */ (typeof facts === 'function' ? facts() : facts); if (!f) return true; const list = Array.isArray(f.imports) ? f.imports : []; return list.some((/** @type {any} */ x) => pattern.test(typeof x === 'string' ? x : String(x?.name ?? ''))); } const GRAIN_IMPORT = /grain/i; /** R2-CODE-A-8 item 7b: does the roster's resource list (`availableNativeResourceKeys`: present and not depleted) hold a stand of timber, the forest the timber line names? A config with no resource list (a direct caller): held. @param {any} config @returns {boolean} */ function timberStandHeld(config) { return !Array.isArray(config?.nearbyResources) || availableNativeResourceKeys(config).some((k) => TIMBER_STAND.test(k)); } const TIMBER_STAND = /^(managed_forest|shipbuilding_timber|mountain_timber)$/; import { MODERATE_GAP_TWIN, OUTLOOK_HOOK_SIBLINGS } from './outlookHookSiblings.js'; export { OUTLOOK_HOOK_SIBLINGS }; // LANDING-R2 (ODQ §934.105): the outlook hooks' declared siblings moved verbatim to economy/outlookHookSiblings.js, re-exported; below every cited line, so none moves
+/** R2-CODE-A-8 item 7 (the chair's ruling: a line names an import or a source only where the record holds it): does the record's import list (`factsOf(…).imports`, the economic state's `primaryImports`) hold a good this pattern names? No facts (a direct caller): held, as resolveSibling keeps a line it cannot read. @param {object | (() => object) | null} facts @param {RegExp} pattern @returns {boolean} */ function importHeld(facts, pattern) { const f = /** @type {any} */ (typeof facts === 'function' ? facts() : facts); if (!f) return true; const list = Array.isArray(f.imports) ? f.imports : []; return list.some((/** @type {any} */ x) => pattern.test(typeof x === 'string' ? x : String(x?.name ?? ''))); } const GRAIN_IMPORT = /grain/i; /** R2-CODE-A-8 item 7b: does the roster's resource list (`availableNativeResourceKeys`: present and not depleted) hold a stand of timber, the forest the timber line names? A config with no resource list (a direct caller): held. @param {any} config @returns {boolean} */ function timberStandHeld(config) { return !Array.isArray(config?.nearbyResources) || availableNativeResourceKeys(config).some((k) => TIMBER_STAND.test(k)); } const TIMBER_STAND = /^(managed_forest|shipbuilding_timber|mountain_timber)$/; import { MODERATE_GAP_TWIN, OUTLOOK_HOOK_SIBLINGS } from './outlookHookSiblings.js'; import { liveMaterialFor } from './localMaterials.js'; export { OUTLOOK_HOOK_SIBLINGS }; // LANDING-R2 (ODQ §934.105): the outlook hooks' declared siblings moved verbatim to economy/outlookHookSiblings.js, re-exported; below every cited line, so none moves

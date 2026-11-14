@@ -85,6 +85,10 @@ const ADVISORY_STATUS = new Map();
  * tree. FOUR SPECIMENS STOPPED FAILING, nothing started: subsistence-thorp-alder, population-14999, -15000, -2249. Their
  * finding was the culture's raw foodways sentence naming a staple the place does not hold, a line no page prints;
  * the record now stores the food record's own line (URBAN-AUDIT §3). */
+/* RE-KEYED 2026-11-13 (STYLE-2-MERGE point 47, the COHERENCE-AGREE merge 22cc9ef7d; a figure its drafted record names for the merge
+ * seat): 30 -> 31 of 65, MEASURED at the signed tree. ONE SPECIMEN STARTED FAILING, nothing stopped: plagued-martial-city-bracken,
+ * the seventh seat's P3 re-dealt role-only person (the draft: "generationCertificationCorpus's battery pin gains
+ * certification-v1-plagued-martial-city-bracken"). Re-keyed by identity; the advisory direction (toward empty) is the ladder's. */
 const ADVISORY_FAILING = Object.freeze([
   'certification-v1-criminal-crossroads-town-bracken',
   'certification-v1-criminal-crossroads-town-ember',
@@ -101,6 +105,7 @@ const ADVISORY_FAILING = Object.freeze([
   'certification-v1-magical-desert-village-ember',
   'certification-v1-mercantile-seaport-town-alder',
   'certification-v1-mercantile-seaport-town-ember',
+  'certification-v1-plagued-martial-city-bracken',
   'certification-v1-religious-river-village-alder',
   'certification-v1-religious-river-village-bracken',
   'certification-v1-religious-river-village-dun',

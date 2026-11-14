@@ -5,32 +5,53 @@
  * `tests/lint/presumedThings.register.json`, shrink-only.
  *
  * THIS FILE REDS WHEN:
- *   • ARM 1: a source literal under src/data or src/generators names a thing, declares no atom that
- *     answers it, and has no row in the register (a new undeclared line);
+ *   • ARM 1: a source literal (or a component's JSX text) under src/data, src/generators, src/domain or
+ *     src/components (the last two since W2-B-DECLARE item 3) names a thing, declares no atom that
+ *     answers it through a carrier a draw door enforces (W2-B-DECLARE item 1), and has no row in the
+ *     register or the widened register (`presumedThings.widened.register.json`) (a new undeclared line);
+ *   • the tagged tables the walker credits differ from the `tagged: true` sites in src;
+ *   • THE STRIP BAN (W2-B-DECLARE item 3): a call that unwraps lines to their text IN A SHAPE THE BAN NAMES
+ *     (`.map(textOf)`, `.map(lineText)`, `.map((l) => l.text)` …) stands nowhere in src without its row in the widened
+ *     register's `strips` (`strip-before-draw`, to cure; `not-a-draw`), and no strip row is stale. The ban catches the
+ *     shapes it names and no others: its KNOWN GAPS are pinned by shape (`presumedThings.stripShapes.json`);
  *   • ARM 2: a sentence of the corpus (360 births, the browser's configuration, seeds
  *     presume-<tier>-<i>) names a thing the town lacks by the vocabulary's own readers, and no row
  *     of the register covers it (a new false presumption, or a cured line come back);
  *   • either arm: a register row matches nothing (stale: a cure removes its row in its own commit);
- *   • a row's reason is not one of the register's named reasons.
+ *   • a row's reason is not one of the register's named reasons;
+ *   • ARM 1's one out-of-reach site (`ARM1_NOT_PRINTED`: the `detail` argument of
+ *     `generationCoherence.js :: finding`, the receipt's diagnostic) reaches a reader — a printing file
+ *     reads a finding's detail — or the exemption widens past its file, callee and argument position.
  * Every failure path is EXECUTED against planted source and a planted record in memory.
  */
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { beforeAll, describe, expect, test } from 'vitest';
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { liveInstitutionNames } from '../../src/domain/facts/institutions.js';
-import { parseAtom } from '../../src/domain/facts/factVocabulary.js';
+import { FACT_DIMENSIONS, parseAtom } from '../../src/domain/facts/factVocabulary.js';
+import { REGISTERED_WORDS } from '../../src/domain/facts/registeredWords.js';
 import {
-  COURT_HOUSES, REGISTER_REL, THINGS, THING_IDS, corpusConfig, corpusSeeds, deniesExistence, listFiles, negates, printedAbsent, printedOutOfTime,
-  rowCovers, scanSource, scanTree, unlicensedServiceRows,
+  ARM1_INSTRUMENTS, ARM1_NOT_PRINTED, ARM1_ROOTS, ARM1_RULE_BOOK, DOOR_ARGS, drawnRanges, keyedDeclarations, COURT_HOUSES, stripKey, stripSites, stripTree, withOrdinals, REGISTER_REL, TAGGED_TABLE_FILES, THINGS, THING_IDS, WIDENED_REGISTER_REL, bankedKeys, corpusConfig, corpusSeeds,
+  bankRow, deniesExistence, hitKey, listFiles, rowKeys, negates, printedAbsent, printedOutOfTime, rowCovers, scanSource, scanTree, unlicensedServiceRows,
 } from './presumedThings.shared.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+
+/** Arm 1 over a planted tree of files, read together as `scanTree` reads the real one. @param {Array<[string, string]>} files */
+function scanTreeOf(files) {
+  const drawn = drawnRanges(files);
+  const keyed = new Map();
+  for (const [rel, src] of files) for (const [k, v] of keyedDeclarations(rel, src, drawn)) keyed.set(k, v);
+  return files.flatMap(([rel, src]) => scanSource(rel, src, keyed, drawn)).map((h) => `${h.thing} :: ${h.text}`);
+}
 const register = JSON.parse(readFileSync(join(ROOT, REGISTER_REL), 'utf8'));
 const REASONS = Object.keys(register.reasons);
+const widened = JSON.parse(readFileSync(join(ROOT, WIDENED_REGISTER_REL), 'utf8'));
 
 describe('the rule book', () => {
   test('every thing\'s atoms are atoms of the vocabulary', () => {
@@ -40,16 +61,178 @@ describe('the rule book', () => {
 
   test('planted: an undeclared literal is a hit; a declared one, a negated one and a table key are not', () => {
     const src = [
+      "const declaredSet = (text, needs, twin) => Object.freeze([{ text, needs }, { text: twin, twinOf: text, excludes: needs }]);",
       "export const A = ['The militia drills on the green every week.'];",
       "export const B = [{ text: 'The militia drills on the green every week.', needs: ['militia'] }];",
-      "export const C = [{ text: 'The quiet town has no militia at all.', crisis: ['any'] }];",
-      "export const D = { 'The militia musters at the gate each spring.': declaredSet('The militia musters at the gate each spring.', ['militia']) };",
-      "export const E = [{ text: 'Grain is sold at the weekly market here.', excludes: ['market'] }];",
+      "export const C = [{ text: 'The quiet town has no militia at all.', excludes: ['militia'] }];",
+      "export const D = { 'The militia musters at the gate each spring.': declaredSet('The militia musters at the gate each spring.', ['militia'], 'The quiet green waits for no one.') };",
+      "export const E = [{ text: 'Grain is sold at the weekly market here.', needs: ['market'] }];",
       "export const F = ['Cheese goes to the weekly market in summer.'];",
       "export const G = { 'Cheese goes to the weekly market in summer.': Object.freeze({ needs: Object.freeze(['market']) }) };",
+      "drawDeclared([...B, ...C, ...E], { facts, draw }); resolveSibling(line, D, {}); resolveSibling(line, G, {});",
     ].join('\n');
     const hits = scanSource('planted.js', src);
     expect(hits).toEqual([{ file: 'planted.js', thing: 'militia', text: 'The militia drills on the green every week.' }]);
+  });
+
+  /**
+   * W2-B-DECLARE item 1 (record 294, ruling 5): a carrier counts only where a draw door reads it. Red at the
+   * base rule book (1930cec6e), whose DECL_PROPS credited `cast`, `requires`, every `marks` and every `tags`.
+   */
+  test('planted: a carrier no door enforces declares nothing; the doors\' carriers still do', () => {
+    const src = [
+      "export const A = [{ text: 'The militia drills on the green every week.', cast: ['militia'] }];",
+      "export const B = { x: { requires: ['militia'], reason: 'A militia needs a muster field near the green.' } };",
+      "export const C = [{ marks: ['militia'], text: 'The militia drills on the green in the causal arm.' }];",
+      "export const D = [{ vid: 3, marks: ['militia'], text: 'The militia drills on the green in a state pool.' }];",
+      "export const E = [{ tags: ['militia'], position: 'Leads the militia drill on the green each week.' }];",
+      "export const F = [{ text: 'The militia drills on the green when a crisis looms.', excludes: ['militia'] }];",
+      "export const G = [{ text: 'The militia drills on the green by a pool rule.', poolDeclares: ['militia'] }];",
+      "drawDeclared([...A, ...C, ...D, ...F, ...G], { facts, draw }); resolveDeclared(B.x, {}); resolveDeclared(E, { tagged: true });",
+    ].join('\n');
+    // F's `excludes` now answers nothing on a naming line (F3: an exclusion does not imply the thing), and D's marks
+    // declare only in a kernel pool file
+    expect(scanSource('src/data/planted.js', src).map((h) => h.text)).toEqual([
+      'The militia drills on the green every week.',
+      'A militia needs a muster field near the green.',
+      'The militia drills on the green in the causal arm.',
+      'The militia drills on the green in a state pool.',
+      'Leads the militia drill on the green each week.',
+      'The militia drills on the green when a crisis looms.',
+    ]);
+    // anchored: the same line is a hit in an ordinary data file and answered in a kernel pool file
+    expectPresentThenAbsent(
+      scanSource('src/data/planted.js', src).map((h) => h.text),
+      scanSource('src/data/dossierStateProse/planted.generated.js', src).map((h) => h.text),
+      'The militia drills on the green in a state pool.',
+      'marks declare only in a kernel pool file',
+    );
+    // the same source, read as a table drawn `{ tagged: true }`: its `tags` declare, so the line it flagged elsewhere is answered
+    expectPresentThenAbsent(
+      scanSource('src/data/planted.js', src).map((h) => h.text),
+      scanSource('src/generators/npcStructure.js', src).map((h) => h.text),
+      'Leads the militia drill on the green each week.',
+      'tags credited only in a tagged table',
+    );
+  });
+
+  /**
+   * W2-B-DECLARE item 3 (record 288, ruling 1, B (i)): the display and the components are roots, and a component's
+   * JSX text is read as a line. Red at e55ede7d2's rule book (two roots, no JSX text): every `root` row stale.
+   */
+  test('the roots are the four trees that hold lines, and a component\'s JSX text is read', () => {
+    expect([...ARM1_ROOTS]).toEqual(['src/data', 'src/generators', 'src/domain', 'src/components']);
+    const jsx = 'export const P = () => <p>The militia drills on the green every week.</p>;';
+    expect(scanSource('src/components/planted.jsx', jsx).map((h) => `${h.thing} :: ${h.text}`)).toEqual(['militia :: The militia drills on the green every week.']);
+  });
+
+  /**
+   * W2-B-DECLARE item 3 (record 288, ruling 1, B (ii); record 290, ruling 3: "a line that uses a registered word must
+   * carry that word's disqualifier"). Red at 21a27e035's rule book, which read the sixteen things alone.
+   */
+  test('planted: a state, a size or a count with no declaration is a hit; the door\'s carriers answer it', () => {
+    const src = [
+      "export const A = ['The town has been under siege since the thaw.'];",
+      "export const B = [{ text: 'The town has been under siege since the thaw, still.', crisis: ['siege'] }];",
+      "export const C = [{ vid: 1, marks: ['threat'], text: 'The town has been under siege since the thaw, again.' }];",
+      "export const D = ['Smoke rises from the poorest quarters at dusk.'];",
+      "export const E = [{ text: 'Smoke rises from the poorest quarters at dusk, still.', needs: ['population: ≥ middling'] }];",
+      "export const F = ['The ruling three meet each spring at the hall.'];",
+      "drawDeclared([...A, ...B, ...C, ...D, ...E, ...F], { facts, draw });",
+    ].join('\n');
+    // C: a kernel variant marked `threat` is a siege OR an occupation OR monsters — it does not imply a siege (F3)
+    expect(scanSource('src/data/dossierStateProse/planted.generated.js', src).map((h) => `${h.thing} :: ${h.text}`)).toEqual([
+      'siege :: The town has been under siege since the thaw.',
+      'siege :: The town has been under siege since the thaw, again.',
+      'quarters :: Smoke rises from the poorest quarters at dusk.',
+      'rulingFaces :: The ruling three meet each spring at the hall.', // F2: the ruler's faces, its own word
+    ]);
+  });
+
+  test('every registered word carries its disqualifier: atoms of the vocabulary, or the leaf its atom waits for', () => {
+    const bad = [];
+    for (const [id, w] of Object.entries(REGISTERED_WORDS)) {
+      if (w.atoms.length === 0 && !w.leaf) bad.push(`${id}: no atom and no leaf`);
+      for (const a of w.atoms) if (!(a.endsWith(':') ? FACT_DIMENSIONS[a.slice(0, -1)] : parseAtom(a))) bad.push(`${id}: ${a}`);
+    }
+    expect(bad).toEqual([]);
+  });
+
+  test('the tagged tables are exactly the files a door draws `{ tagged: true }`', () => {
+    const files = [];
+    const walk = (rel) => {
+      for (const e of readdirSync(join(ROOT, rel)).sort()) {
+        const p = `${rel}/${e}`;
+        if (statSync(join(ROOT, p)).isDirectory()) walk(p);
+        else if (/\.(?:js|jsx|mjs)$/.test(e) && p !== 'src/domain/facts/drawDeclared.js' && p !== 'src/domain/facts/factVocabulary.js') files.push(p);
+      }
+    };
+    walk('src');
+    const tagged = files.filter((f) => /\btagged:\s*true\b/.test(readFileSync(join(ROOT, f), 'utf8')));
+    expect(tagged).toEqual(Object.keys(TAGGED_TABLE_FILES).sort());
+  });
+
+  test('planted: a finding\'s detail in generationCoherence.js is out of reach; the same words anywhere else are read', () => {
+    const line = 'A planted detail that names a market for this test.';
+    const src = [
+      `push(finding('economicState.situationDesc', '${line}'));`,
+      `push(finding('${line}', 'x'));`,
+      `push(other('economicState.situationDesc', '${line.replace('this test', 'that test')}'));`,
+    ].join('\n');
+    expect(scanSource('src/generators/generationCoherence.js', src).map((h) => h.text)).toEqual([line, line.replace('this test', 'that test')]);
+    expect(scanSource('src/generators/elsewhere.js', `push(finding('p', '${line}'));`).map((h) => h.text)).toEqual([line]);
+    expect(ARM1_NOT_PRINTED.map((s) => `${s.file} :: ${s.callee} :: ${s.argument}`)).toEqual(['src/generators/generationCoherence.js :: finding :: 1']);
+  });
+
+  /**
+   * W2-B-DECLARE second seat, F10: the rule book's own data is exempt by its SITE, not banked row by row (the four rows
+   * the first seat banked against its own commit e55ede7d2 are gone). Its pin: only the checks read the rule book — no
+   * file under src imports it but the page check, so no string of it reaches a page. Red at 9d5d6e091, whose walker read
+   * `registeredWords.js` as lines and banked four of them.
+   */
+  test('planted: the rule book\'s own strings are not lines; the same words in any other file are read', () => {
+    const src = "export const W = { leaf: 'crisisKind.js (occupied) · rulerKind.js (occupier) under occupation' };";
+    expect(scanSource('src/domain/facts/registeredWords.js', src)).toEqual([]);
+    expect(scanSource('src/domain/facts/elsewhere.js', src).map((h) => h.thing)).toEqual(['occupation']);
+    expect(Object.keys(ARM1_RULE_BOOK)).toEqual(['src/domain/facts/registeredWords.js']);
+    const importers = [];
+    const walk = (rel) => {
+      for (const e of readdirSync(join(ROOT, rel)).sort()) {
+        const p = `${rel}/${e}`;
+        if (statSync(join(ROOT, p)).isDirectory()) walk(p);
+        else if (/\.(?:js|jsx|mjs)$/.test(e) && /from '[^']*facts\/registeredWords\.js'/.test(readFileSync(join(ROOT, p), 'utf8'))) importers.push(p);
+      }
+    };
+    walk('src');
+    expect(importers, 'a printing file imports the rule book').toEqual(['src/domain/coherence/vocabularyPageFindings.js']);
+  });
+
+  /**
+   * THE EXEMPTION IS AS TRUE AS THIS PIN (the chair's condition, 2026-11-12): "a component reads its verdict, never its
+   * findings" is checked, not said. A printing file — the components, the display, prose and dossier modules, the PDF,
+   * the Foundry export — that names the coherence receipt never reads a finding's `.detail`. The one reader today is the
+   * PDF view-model's projection (`generationContracts.js :: coherenceFindingView`), which carries the receipt's shape and
+   * which no PDF section reads; the second arm holds that.
+   */
+  test('no reader prints a finding\'s words: no printing file reads a receipt finding\'s detail', () => {
+    const PRINTING = ['src/components', 'src/domain/display', 'src/domain/prose', 'src/domain/dossier', 'src/pdf', 'src/foundry'];
+    const files = [];
+    const walk = (rel) => {
+      for (const e of readdirSync(join(ROOT, rel)).sort()) {
+        const p = `${rel}/${e}`;
+        if (statSync(join(ROOT, p)).isDirectory()) walk(p);
+        else if (/\.(?:js|jsx|mjs)$/.test(e)) files.push(p);
+      }
+    };
+    for (const r of PRINTING) walk(r);
+    expect(files.length).toBeGreaterThan(300);
+    const src = (f) => readFileSync(join(ROOT, f), 'utf8');
+    const namesReceipt = (text) => /generationCoherenceReceipt|\bgenerationCoherence\b|coherenceFindingView/.test(text);
+    const readers = files.filter((f) => namesReceipt(src(f)) && /\.detail\b/.test(src(f)));
+    expect(readers, 'a printing file reads a receipt finding\'s detail').toEqual(['src/pdf/lib/generationContracts.js']);
+    const pdfViewReaders = files.filter((f) => f.startsWith('src/pdf/') && f !== 'src/pdf/lib/generationContracts.js'
+      && /\bgenerationCoherence\s*\??\.\s*(?:checks|judgments|findings)/.test(src(f)));
+    expect(pdfViewReaders, 'a PDF page reads the receipt\'s findings').toEqual([]);
   });
 
   test('planted: the negation reader', () => {
@@ -65,6 +248,81 @@ describe('the rule book', () => {
     const having = { defence: { militia: true, watch: true } };
     expect(printedAbsent(record, lacking, [])).toEqual([{ thing: 'militia', path: '.powerStructure.factions[].desc', sentence: 'Town watch and militia;' }]);
     expect(printedAbsent(record, having, [])).toEqual([]);
+  });
+});
+
+/**
+ * W2-B-DECLARE second seat, F3 (REVIEW-W2B §4: "the guard accepts declarations no door reads and disqualifiers that do
+ * not disqualify"). Every plant of the review's table is kept here. Red at 9d5d6e091, whose walker credited `needs`,
+ * `excludes`, `poolDeclares` and `crisis` on any object within five parents, any array handed to any call, and any atom
+ * of a word's list on either side.
+ */
+describe('F3 — a declaration counts only on an object a door draws, and only where it implies the word', () => {
+  const hitsOf = (rel, lines) => scanSource(rel, lines.join('\n')).map((h) => `${h.thing} :: ${h.text}`);
+
+  test('planted: a declared object no door reads declares nothing; the same object drawn does', () => {
+    const blurb = "const X = { needs: ['militia'], blurb: 'The militia drills on the green every week.' }; print(X.blurb);";
+    expect(hitsOf('src/data/planted.js', [blurb])).toEqual(['militia :: The militia drills on the green every week.']);
+    expect(hitsOf('src/data/planted.js', [blurb, 'drawDeclared([X], { facts, draw });'])).toEqual([]);
+  });
+
+  test('planted: a door\'s pool followed through a local, a parameter, a function\'s return and an import', () => {
+    const lines = [
+      "const P = [{ text: 'The militia drills on the green every week.', needs: ['militia'] }];",
+      "const Q = [{ text: 'The militia drills on the green every month.', needs: ['militia'] }];",
+      "const R = [{ text: 'The militia drills on the green every year.', needs: ['militia'] }];",
+      'function poolOf() { return R; }',
+      'function pickFrom(pool) { return drawDeclared(pool, { facts, draw }).text; }',
+      'export const one = () => { const local = P.filter(Boolean); return drawDeclared(local, { facts, draw }); };',
+      'export const two = () => pickFrom(Q);',
+      'export const three = () => filterDeclared(poolOf(), { facts });',
+    ];
+    expect(hitsOf('src/data/planted.js', lines)).toEqual([]);
+    const shared = scanTreeOf([
+      ['src/data/a.js', "export const T = [{ text: 'The militia drills on the green every week.', needs: ['militia'] }];"],
+      ['src/generators/b.js', "import { T } from '../data/a.js';\nexport const draw1 = () => drawDeclared(T, { facts, draw });"],
+      ['src/data/c.js', "export const U = [{ text: 'The militia drills on the green every month.', needs: ['militia'] }];"],
+    ]);
+    expect(shared).toEqual(['militia :: The militia drills on the green every month.']);
+  });
+
+  test('planted: a disqualifier that does not imply the word answers nothing', () => {
+    const draw = 'drawDeclared([A, B], { facts, draw });';
+    // a siege is not answered by any crisis
+    expect(hitsOf('src/data/planted.js', ["const A = { text: 'The town is under siege again this spring.', needs: ['crisis: threat'] };", "const B = { text: 'The town is under siege again this summer.', crisis: ['hunger'] };", draw]))
+      .toEqual(['siege :: The town is under siege again this spring.', 'siege :: The town is under siege again this summer.']);
+    expect(hitsOf('src/data/planted.js', ["const A = { text: 'The town is under siege again this spring.', crisis: ['under_siege'] };", "const B = { text: 'The town is under siege again this summer.', needs: ['crisis: siege'] };", draw])).toEqual([]);
+    // quarters are not answered by a small population or a tier
+    expect(hitsOf('src/data/planted.js', ["const A = { text: 'Smoke rises from the poorest quarters at dusk.', needs: ['population: small'] };", "const B = { text: 'Smoke rises from the poorest quarters at dawn.', needs: ['tier: thorp'] };", draw]))
+      .toEqual(['quarters :: Smoke rises from the poorest quarters at dusk.', 'quarters :: Smoke rises from the poorest quarters at dawn.']);
+    expect(hitsOf('src/data/planted.js', ["const A = { text: 'Smoke rises from the poorest quarters at dusk.', needs: ['population: large'] };", "const B = { text: 'Smoke rises from the poorest quarters at dawn.', needs: ['population: ≥ middling'] };", draw])).toEqual([]);
+    // a thing is not answered by its own negation, nor famine by any food band
+    expect(hitsOf('src/data/planted.js', ["const A = { text: 'The town walls are patched with timber.', needs: ['no walls'] };", "const B = { text: 'The famine has reached the outer farms.', needs: ['food: deficit'] };", draw]))
+      .toEqual(['walls :: The town walls are patched with timber.', 'famine :: The famine has reached the outer farms.']);
+    expect(hitsOf('src/data/planted.js', ["const A = { text: 'The town walls are patched with timber.', needs: ['walls'] };", "const B = { text: 'The famine has reached the outer farms.', needs: ['food: famine'] };", draw])).toEqual([]);
+  });
+
+  test('planted: a line that denies needs the negation; the positive atom does not answer it', () => {
+    const lines = (decl) => [`const A = { text: 'The quiet town has no militia at all.', ${decl} };`, 'drawDeclared([A], { facts, draw });'];
+    expect(hitsOf('src/data/planted.js', lines("needs: ['militia']"))).toEqual(['militia :: The quiet town has no militia at all.']);
+    expect(hitsOf('src/data/planted.js', lines("excludes: ['militia']"))).toEqual([]);
+  });
+
+  test('planted: an array handed to any call, a carrier on any object, a tag outside the drawn table, a mark outside a kernel pool — none declares', () => {
+    expect(hitsOf('src/data/planted.js', ["export const A = String(['militia'], 'The militia drills on the green every week.');"])).toEqual(['militia :: The militia drills on the green every week.']);
+    expect(hitsOf('src/data/planted.js', [
+      "export const B = { crisis: ['under_siege'], line: 'The town is under siege again this spring.' };",
+      "export const C = { poolDeclares: ['militia'], line: 'The militia drills on the green every week.' };",
+    ])).toEqual(['siege :: The town is under siege again this spring.', 'militia :: The militia drills on the green every week.']);
+    expect(hitsOf('src/generators/npcStructure.js', ["export const D = { tags: ['militia'], position: 'Leads the militia drill on the green each week.' };"])).toEqual(['militia :: Leads the militia drill on the green each week.']);
+    expect(hitsOf('src/data/planted.js', ["export const E = [{ vid: 4, marks: ['militia'], text: 'The militia drills on the green every week.' }]; drawDeclared(E, {});"]))
+      .toEqual(['militia :: The militia drills on the green every week.']);
+  });
+
+  test('the doors the walker follows are the draw module\'s exported doors', () => {
+    const src = readFileSync(join(ROOT, 'src/domain/facts/drawDeclared.js'), 'utf8');
+    const exported = [...src.matchAll(/^export function (\w+)/gm)].map((m) => m[1]).filter((n) => n !== 'lineText' && n !== 'hasUnheldCandidate');
+    expect(Object.keys(DOOR_ARGS).sort()).toEqual(exported.sort());
   });
 });
 
@@ -128,15 +386,52 @@ describe('the register', () => {
     const bad = [
       ...register.arm2.filter((r) => !REASONS.includes(r.reason)).map((r) => `arm2 ${r.thing} ${r.text}`),
       ...Object.entries(register.arm1).flatMap(([f, rows]) => rows.filter((r) => !REASONS.includes(r[1])).map((r) => `arm1 ${f} ${r[2]}`)),
+      ...Object.entries(widened.arm1).flatMap(([f, rows]) => rows.filter((r) => !Object.keys(widened.reasons).includes(r[1])).map((r) => `widened ${f} ${r[2]}`)),
     ];
     expect(bad).toEqual([]);
+  });
+
+  /**
+   * F4 of the second read (REVIEW-W2B-1fb15980d: "a new false sentence appended past character 120 of a literal already
+   * banked for the same word passes the walker"). A banked row is keyed by its WHOLE literal (the sha-256 of its text), so
+   * any edit to a banked line, before or after character 120, is a fresh hit. Red at 1fb15980d (the key read the first
+   * 120 characters).
+   */
+  test('planted (F4): a sentence appended past character 120 of a banked literal is a fresh hit', () => {
+    const line = 'Fishermen land the catch at dawn along the quay, and the buyers bargain over it in the market by the water before the gulls come down.';
+    const edited = `${line} On feast days the wardens shut the market at noon.`;
+    const shift = `${line.slice(0, 40)}${line.slice(41)}`; // one character dropped before character 120
+    const scan = (text) => scanSource('src/data/planted.js', `export const A = [${JSON.stringify(text)}];`);
+    const rows = scan(line).map((h) => bankRow(h, 'family'));
+    expect(rows.map((r) => r[0]).sort()).toEqual(['docks', 'market']);
+    const banked = bankedKeys({ arm1: { 'src/data/planted.js': rows } });
+    const keysOf = (text) => scan(text).map((h) => hitKey(h.file, h.thing, h.text));
+    expectPresentThenAbsent(keysOf(line).filter((k) => banked.has(k)), keysOf(edited).filter((k) => banked.has(k)),
+      keysOf(line)[0], 'an appended sentence is a fresh hit');
+    expectPresentThenAbsent(keysOf(line).filter((k) => banked.has(k)), keysOf(shift).filter((k) => banked.has(k)),
+      keysOf(line)[0], 'an edit before character 120 is a fresh hit');
+  });
+
+  test('every banked row carries the hash of its whole literal', () => {
+    const bare = [register, widened].flatMap((reg) => Object.entries(reg.arm1).flatMap(([f, rows]) => rows
+      .filter((r) => !(typeof r[3] === 'string' || (Array.isArray(r[3]) && r[3].length > 1)) || ![r[3]].flat().every((x) => /^[0-9a-f]{16}$/.test(x)))
+      .map((r) => `${f} ${r[0]} ${r[2]}`)));
+    expect(bare).toEqual([]);
+  });
+
+  test('no row is banked twice: the widened register holds nothing the first one holds, nor any key twice', () => {
+    const first = bankedKeys(register);
+    expect([...bankedKeys(widened)].filter((k) => first.has(k))).toEqual([]);
+    const rows = Object.entries(widened.arm1).flatMap(([f, rs]) => rs.flatMap((r) => rowKeys(f, r)));
+    expect(rows.length).toBe(new Set(rows).size);
   });
 });
 
 describe('ARM 1 — the source', () => {
-  const hits = scanTree(ROOT);
-  const key = (file, thing, text) => `${file}\t${thing}\t${text.slice(0, 120)}`;
-  const banked = new Set(Object.entries(register.arm1).flatMap(([f, rows]) => rows.map((r) => key(f, r[0], r[2]))));
+  const all = scanTree(ROOT, { keepAdmitted: true });
+  const hits = all.filter((h) => !Object.hasOwn(ARM1_INSTRUMENTS, h.file));
+  const key = hitKey;
+  const banked = new Set([...bankedKeys(register), ...bankedKeys(widened)]);
   const found = new Set(hits.map((h) => key(h.file, h.thing, h.text)));
 
   test('anti-vacuity: the walk reads its roots', () => {
@@ -151,6 +446,133 @@ describe('ARM 1 — the source', () => {
 
   test('⛔ no stale row: a cured line leaves the register in its own commit', () => {
     expect([...banked].filter((k) => !found.has(k))).toEqual([]);
+  });
+
+  /**
+   * STYLE-2-MERGE-13, point 49 (the chair's ruling on STOP 49a (i), record 405): the line's two instruments are admitted
+   * BY NAME, each with its exact counts (ARM1_INSTRUMENTS) — the rule book's form and chainPrintSites' EXEMPT form. A new
+   * literal in either file, or one gone, moves its count and reds here; a third file is never admitted by this arm.
+   */
+  test('the admitted instruments: each reads EXACTLY its named counts, and only these two are admitted', () => {
+    expect(Object.keys(ARM1_INSTRUMENTS)).toEqual(['src/domain/coherence/pageCensusFindings.js', 'src/domain/facts/factLayers.js']);
+    const strips = stripTree(ROOT, { keepAdmitted: true });
+    for (const [file, named] of Object.entries(ARM1_INSTRUMENTS)) {
+      expect(all.filter((h) => h.file === file).length, `${file}: arm-1 hits`).toBe(named.hits);
+      expect(strips.filter((x) => x.file === file).length, `${file}: strip sites`).toBe(named.strips);
+    }
+  });
+});
+
+describe('ARM 3 — the strip ban (W2-B-DECLARE item 3; record 288, ruling 1, B (iii))', () => {
+  const sites = stripTree(ROOT);
+  const banked = new Map((widened.strips || []).map((r) => [stripKey(r[0], r[1]), r[2]]));
+
+  test('planted: each unwrap shape is a strip; a door\'s own draw and a map to another field are not', () => {
+    const src = [
+      "const a = POOL.map(textOf);",
+      "const b = [{ text: 'x', needs: ['river'] }].map(lineText);",
+      "const c = rows.map((l) => l.text);",
+      "const d = drawDeclared(POOL, { draw, key }).text;",
+      "const e = rows.map((l) => l.name);",
+    ].join('\n');
+    expect(stripSites('src/generators/planted.js', src).map((x) => x.receiver)).toEqual(['POOL', "[{ text: 'x', needs: ['river'] }]", 'rows']);
+  });
+
+  /**
+   * F5 (the third seat; REVIEW-W2B: "the strip ban catches 3 of 14 unwrap shapes, and its key lets a new strip on an
+   * already-banked receiver pass"). Every shape the review planted is a strip; a door's own draw and a map to another
+   * field are not; and the n-th strip of one receiver in a file is its own key (`R #n`), so it reds where only the first
+   * is banked. Red at 28222eea7 (3 of the 13 shapes caught; one key per receiver).
+   */
+  test('planted (F5): every unwrap shape the review named is a strip, and a second strip of a banked receiver is its own key', () => {
+    const shapes = [
+      'POOL.map(({ text }) => text)', 'POOL.map((l) => { return l.text; })', 'POOL.map(function (l) { return l.text; })',
+      "POOL.map((l) => l['text'])", 'POOL.map((l) => String(l.text))', "POOL.map((l) => (typeof l === 'string' ? l : l.text))",
+      'POOL.flatMap((l) => l.text)', 'pick(POOL).text', 'POOL.map((x) => textOf(x))', 'POOL.map(textOf, ctx)',
+      'POOL.map((l) => l.text)', 'POOL.map((l) => l?.text)', 'POOL.map(textOf)',
+    ];
+    for (const shape of shapes) expect(stripSites('src/generators/planted.js', `const a = ${shape};`).map((x) => x.receiver), shape).toEqual(['POOL']);
+    expect(stripSites('src/generators/planted.js', 'for (const l of POOL) out.push(l.text);').map((x) => x.receiver)).toEqual(['POOL']);
+    expect(stripSites('src/generators/planted.js', 'const d = drawDeclared(POOL, { draw, key }).text; const e = rows.map((l) => l.name);')).toEqual([]);
+    // re-keyed at the fourth seat (F3 of the second read): grammarWalker.js's real `pool #2` … `#5` are banked now (the
+    // widened shapes see them), so the pin plants its two strips on a receiver banked ONCE, standingInstructions.js's `rec`
+    const F = 'src/domain/autonomy/standingInstructions.js';
+    const two = withOrdinals(stripSites(F, 'const a = rec.map((l) => l.text); const b = rec.map((l) => l.text);'));
+    expect(two.map((x) => stripKey(x.file, x.receiver))).toEqual([`${F} :: rec`, `${F} :: rec #2`]);
+    expect(banked.has(`${F} :: rec`)).toBe(true);
+    expect(banked.has(`${F} :: rec #2`)).toBe(false);
+  });
+
+  /**
+   * F3 of the second read (REVIEW-W2B-1fb15980d: "the strip ban still misses most unwrap shapes outside the review's
+   * list"). The ban reads the callback's RETURNED expression for any member access `text` of its line parameter, wrapped
+   * or not, and `Array.from`, `reduce`, `forEach` and the loops over a pool. Part one: the reviewer's eight missed
+   * shapes, red at 0b092c5f1 (none caught). Part two: four shapes this seat invented, as a second proof.
+   */
+  test('planted (F3): the reviewer\'s eight missed unwrap shapes are strips', () => {
+    const shapes = [
+      'const a = POOL.map(({ text: t }) => t);',
+      'const a = POOL.map((l) => `${l.text}`);',
+      'const a = Array.from(POOL, (l) => l.text);',
+      'const a = POOL.reduce((acc, l) => [...acc, l.text], []);',
+      'const out = []; for (let i = 0; i < POOL.length; i += 1) out.push(POOL[i].text);',
+      'const a = POOL.map((l) => l.text.trim());',
+      'const a = POOL.map((l) => l && l.text);',
+      'const getText = (l) => l.text; const a = POOL.map(getText);',
+    ];
+    for (const shape of shapes) expect(stripSites('src/generators/planted.js', shape).map((x) => x.receiver), shape).toEqual(['POOL']);
+  });
+
+  test('planted (F3): four shapes of this seat\'s own invention are strips; a carried line and a sum are not', () => {
+    const shapes = [
+      'const out = []; POOL.forEach((l) => out.push(l.text));',
+      'const out = []; for (const { text } of POOL) out.push(text);',
+      'const a = POOL.map((l) => { const said = l.text; return said; });',
+      'function* lines() { for (const l of POOL) yield l.text; }',
+    ];
+    for (const shape of shapes) expect(stripSites('src/generators/planted.js', shape).map((x) => x.receiver), shape).toEqual(['POOL']);
+    // controls: the line is carried whole (its declarations with it), or no text is taken
+    expect(stripSites('src/generators/planted.js', 'const a = POOL.map((l) => ({ ...l, text: l.text.trim() }));')).toEqual([]);
+    expect(stripSites('src/generators/planted.js', 'const n = POOL.reduce((sum, l) => sum + l.weight, 0);')).toEqual([]);
+    expect(stripSites('src/generators/planted.js', 'const d = drawDeclared(POOL, { draw, key }).text;')).toEqual([]);
+  });
+
+  /**
+   * Finding 2 of the third read (REVIEW-W2B-c3913f999: "3 of 15 new shapes caught; a destructure in a block body is green
+   * end to end"). The chair's ruling: the ban is NOT rebuilt as a data-flow read before the release; its limit is SAID and
+   * TRACKED. The reader's fifteen shapes are a fixture (`presumedThings.stripShapes.json`), each with today's truth: three
+   * caught, twelve KNOWN GAPS named by their shape. The ban catches the shapes it names and no others. A seat that widens it
+   * moves a named row of the fixture in the same commit, or this test reds.
+   */
+  test('the strip ban\'s known gaps: the third read\'s fifteen shapes, three caught and twelve named as gaps, exactly', () => {
+    const fixture = JSON.parse(readFileSync(join(ROOT, 'tests/lint/presumedThings.stripShapes.json'), 'utf8'));
+    const today = fixture.rows.map((r) => ({ shape: r.shape, today: stripSites(fixture.file, r.source).length ? 'caught' : 'known-gap', receivers: stripSites(fixture.file, r.source).map((x) => x.receiver) }));
+    expect(today).toEqual(fixture.rows.map((r) => ({ shape: r.shape, today: r.today, receivers: r.receivers })));
+    expect(fixture.rows.filter((r) => r.today === 'caught').map((r) => r.shape)).toEqual(['spread into a Set', 'reduce into a string', 'join after map of a getter']);
+    expect(fixture.rows.filter((r) => r.today === 'known-gap').map((r) => r.shape)).toEqual([
+      'destructure in a block body', 'destructure, renamed, in a block body', 'Reflect.get', 'the third callback argument',
+      'for-in over the pool', 'while loop, index', 'concat in a for-of', 'index assignment in a for-of', 'destructure off a pick',
+      'array destructure, then .text', 'a property helper (pluck)', 'Object.assign target',
+    ]);
+  });
+
+  test('anti-vacuity: the strip walk finds the twelve sites of the class table', () => {
+    expect(sites.length).toBeGreaterThanOrEqual(12);
+  });
+
+  test('⛔ no strip without its row: a new unwrap of a pool, in a shape the ban names, is red (draw it through a door)', () => {
+    const fresh = sites.filter((x) => !banked.has(stripKey(x.file, x.receiver)));
+    expect(fresh.map((x) => stripKey(x.file, x.receiver)), 'draw a declared pool through drawDeclared / filterDeclared; never unwrap it first').toEqual([]);
+  });
+
+  // STYLE-2-MERGE-13, point 49 (the chair's ruling on STOP 49a (iii), record 405): a strip site another lane wrote after
+  // the instrument's base is banked BY HAND under an `after-base: <holder>` reason the register itself names (one such row:
+  // rulerKin.js, the powers lane's); any other reason still reds.
+  test('⛔ no stale strip row, and every row names one of the two reasons (or a ruled after-base reason of the register)', () => {
+    const found = new Set(sites.map((x) => stripKey(x.file, x.receiver)));
+    expect([...banked.keys()].filter((k) => !found.has(k))).toEqual([]);
+    const ruled = (r) => r.startsWith('after-base: ') && Object.hasOwn(widened.reasons, r);
+    expect([...banked.values()].filter((r) => r !== 'strip-before-draw' && r !== 'not-a-draw' && !ruled(r))).toEqual([]);
   });
 });
 

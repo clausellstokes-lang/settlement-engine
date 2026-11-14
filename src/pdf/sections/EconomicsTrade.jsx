@@ -234,7 +234,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
               chains={settlement?.economicState?.activeChains}
               instNames={(settlement?.institutions || []).map((inst) => inst.name || '')}
               primaryExports={settlement?.economicState?.primaryExports || []}
-              tier={settlement?.tier}
+              tier={settlement?.tier} town={settlement}
             />
           ) : e.chains.map((c, i) => (
             <StatusCard
@@ -245,7 +245,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
               statusLabel={cap(c.status)}
               meta={[
                 c.processingInstitutions?.length ? { label: 'PROC', value: c.processingInstitutions.map((n) => label(institutionDisplayName(n))).filter(Boolean).join(', ') } : null,
-                c.outputs?.length ? { label: 'OUT', value: c.outputs.map(label).filter(Boolean).join(', ') } : null,
+                c.outputs?.length ? { label: chainYieldRefused(settlement?.economicState?.activeChains?.[i]) ? NORMALLY_YIELDS.toUpperCase() : 'OUT', value: c.outputs.map(label).filter(Boolean).join(', ') } : null,
                 c.dependency ? { label: 'DEP', value: depText(c.dependency) } : null,
                 c.incomeContribution != null ? { label: 'INC', value: smart(c.incomeContribution) } : null,
               ].filter(b => b && b.value)}
@@ -584,3 +584,6 @@ function crisisYieldWords(mod) {
   if (mod >= 0.25) return 'The crisis has left about a third of the usual local food production.';
   return 'The crisis has left little of the usual local food production.';
 }
+
+// COHERENCE-AGREE-4 (item 3′): at the end of the file so no line-keyed register row above it moves.
+import { NORMALLY_YIELDS, chainYieldRefused } from '../../domain/chainYield.js';

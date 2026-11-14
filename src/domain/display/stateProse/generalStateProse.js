@@ -570,15 +570,18 @@ function nearestEvent(list) {
 }
 
 /**
- * DS-GEN-9's demoted `anchor` dimension (kernel law 5). STRICTLY BOOLEAN, and `undefined` is
- * NOT "not anchored": measured over 202 generated events the field is a real boolean on most
- * rows and simply absent on others, and an absent flag is a record that has not answered the
- * question rather than one that answered no. An unanswered dimension reads as silence.
+ * DS-GEN-9's demoted `anchor` dimension (kernel law 5). An ABSENT flag is "not anchored" (the chair's ruling of
+ * 2026-11-13 to W2-B-DECLARE's second seat, on the writing lane's request): the generator sets `anchored: true` only
+ * on an event its anchor pass put in (`historyGenerator.js`, the anchor replacement), and its own timeline reads every
+ * other event as `anchored: e.anchored || false` — so an event with no flag is one the anchor pass did not place, not
+ * one whose answer is unknown. Measured on the census's 720 births: 70 towns' marker events carry no flag, and the
+ * pool fell silent in every one (law 5 silences a pool partitioned by a dimension the desk did not answer). A value
+ * that is neither a boolean nor absent answers nothing.
  * @param {unknown} anchored @returns {string|null} a value of STATE_MARK_DIMENSIONS.anchor
  */
 export function eventAnchorDimension(anchored) {
   if (anchored === true) return 'anchored';
-  if (anchored === false) return 'not anchored';
+  if (anchored === false || anchored === undefined) return 'not anchored';
   return null;
 }
 
@@ -1288,8 +1291,15 @@ export function institutionsPoolKey(inst, record = undefined) {
   const hasHospital = record && typeof record === 'object'
     ? defenceOf(/** @type {{ institutions?: unknown }} */ (record)).hospital
     : inst.hasHospital === true;
+  // COHERENCE-AGREE (the chair's note of 2026-11-11): GARRISONED says "paid hands keep the town
+  // safe", so given the record it reads the defence home's paid forces — a garrison, a watch or a
+  // hired company — never the flag bag's military row, which counts walls and a militia too.
+  const defence = record && typeof record === 'object' ? defenceOf(/** @type {{ institutions?: unknown }} */ (record)) : null;
+  const paidHands = defence
+    ? defence.garrison || defence.watch || defence.mercenary || inst.hasNavy === true
+    : inst.hasMilitaryInst === true || inst.hasNavy === true || inst.hasWatch === true;
   const key = (inst.hasCourtSystem === true && inst.hasPrison === true) ? 'ADMINISTERED'
-    : (inst.hasMilitaryInst === true || inst.hasNavy === true || inst.hasWatch === true) ? 'GARRISONED'
+    : paidHands ? 'GARRISONED'
       : inst.hasMagicInst === true ? 'LETTERED'
         : (inst.hasGranary === true || hasHospital) ? 'PROVISIONED'
           : 'BARE';
