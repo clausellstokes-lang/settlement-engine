@@ -95,7 +95,7 @@
    "reader": "GLANCE",
    "master": 148,
    "integration": 149,
-   "banked": 148
+   "banked": 114
   },
   "P10": {
    "label": "10 \"hold the gates\" with no walls",
@@ -123,7 +123,7 @@
    "reader": "GLANCE",
    "master": 173,
    "integration": 172,
-   "banked": 172
+   "banked": 170
   },
   "P14": {
    "label": "14 size words in small places",

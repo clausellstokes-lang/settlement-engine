@@ -13,6 +13,7 @@
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { readinessBandOf } from '../../src/data/bandLadders.js';
 import {
   RECOGNISED_MONSTER_TIERS, SLOT_FILL_SHAPES, SLOT_FILL_TABLES, arcaneDefensePoolKey,
   beastsRowPoolKey, charterPoolKey, contractedForcePoolKey, countryWarrantsCharter,
@@ -666,8 +667,13 @@ describe('DS-DEF-1 — the posture header, and a BLOCKER that had decayed', () =
     // derives from `readiness.score` — the mean PLUS a tier bonus MINUS a threat penalty.
     // Banding any other quantity would let the page print "Fortress" beside a sentence
     // calling the town effectively undefended.
+    // RE-KEYED BY IDENTITY (R3-TABS L1, the chair's ruling of 2026-11-13: one ladder for one number): the
+    // lens reads the BADGE's word for the score (`readinessBandOf`, the readiness ladder), no longer the
+    // aspects' ladder; 64 (Well-Defended) reads STRONG and 19 (Vulnerable) WEAK, where `scoreBand` said
+    // ADEQUATE and CRITICAL. tests/domain/defensePostureReadsBadge.test.js holds every score.
+    const POOL_OF_BADGE = { Fortress: 'STRONG', 'Well-Defended': 'STRONG', Defensible: 'ADEQUATE', 'Lightly Defended': 'WEAK', Vulnerable: 'WEAK', Undefended: 'CRITICAL' };
     for (const n of [90, 65, 64, 30, 19, 0]) {
-      expect(posturePoolKey(n)).toBe(`readiness ${scoreBand(n)}`);
+      expect(posturePoolKey(n)).toBe(`readiness ${POOL_OF_BADGE[readinessBandOf(n).label]}`);
     }
     expect(posturePoolKey(80)).toBe('readiness STRONG');
     expect(posturePoolKey(45)).toBe('readiness ADEQUATE');
@@ -676,7 +682,7 @@ describe('DS-DEF-1 — the posture header, and a BLOCKER that had decayed', () =
     // …and the generator really does write that field, on a real profile.
     const built = generateDefenseProfile(fort({ walls: true, garrison: true }));
     expect(typeof built.readiness.score).toBe('number');
-    expect(posturePoolKey(built.readiness.score)).toBe(`readiness ${scoreBand(built.readiness.score)}`);
+    expect(posturePoolKey(built.readiness.score)).toBe(`readiness ${POOL_OF_BADGE[built.readiness.label]}`);
   });
 
   it('an absent readiness score is SILENCE, not CRITICAL', () => {

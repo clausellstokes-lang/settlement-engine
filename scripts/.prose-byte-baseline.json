@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 234445,
-      "gzip": 31731,
+      "raw": 234545,
+      "gzip": 31738,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -539,6 +539,14 @@
       "toRaw": 147483,
       "gzipAfter": 20773,
       "reason": "+7 B raw (gzip level 9: 20,772 -> 20,773): C8's word-only swaps in the stressors annex lines ('faction' -> 'power' and the map's hand wordings, Appendix X) projected through node scripts/generate-dossier-state-prose.mjs; no pool, variant, mark or slot added. The same commit SHRANK five leaves (defense -6, general -2, power -13, warFaith -7, the causal leaf -10), lowered in the same register commit. Measured per commit over bd07005b9..e63c6aae6: every leaf unmoved until e63c6aae6."
+    },
+    {
+      "car": "R3-TABS (the first seat, eaca79fcd, 2026-11-13; the chair ruling L1 \"one ladder for one number\"): the four DS-DEF-1 posture pools the badge now reads take readsCount",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 234453,
+      "toRaw": 234545,
+      "gzipAfter": 31738,
+      "reason": "+92 B over the chain (+100 over the committed 234445; the leaf had shrunk 8 B undeclared since its last row) (gzip level 9: 31731 -> 31738): eaca79fcd re-took the wiring census over the moved defence composer (L1: POSTURE_POOL_OF_BADGE resolves four DS-DEF-1 posture pools) and projected the leaves through node scripts/generate-dossier-state-prose.mjs, which writes `\"readsCount\": 1,` (25 B) into the poolMeta of those four pools; nothing else in the leaf moves (no pool, variant or word). The lane left the row undeclared; declared by its third seat at the lane tip after the merge of point 49 (--check exit 0)."
     }
   ],
   "ceilingTransfersNewLeaves": [

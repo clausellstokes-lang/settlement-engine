@@ -286,7 +286,7 @@ function TensionRow({ tension, idx }) {
         <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'], flex: 1 }}>
           {humanize(tension.label || 'Tension')}
         </Text>
-        {tension.severity && <Pill tone={sevTone}>{cap(tension.severity)}</Pill>}
+        {tension.severity && !isSeverityRange(tension.severity) && <Pill tone={sevTone}>{cap(tension.severity)}</Pill>}
       </View>
       {tension.parties?.length > 0 && (
         <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginBottom: 2 }}>
@@ -388,3 +388,11 @@ function Timeline({ events, age }) {
 }
 
 export default HistoryFounding;
+
+// ⛔ A RANGE IS NOT A RATING (the chair's ruling, R3-TABS second seat): a tension's record holds the template's list
+// of severities, unresolved; where it holds more than one, the live-tension row prints no severity word (its Pill
+// printed the list run together). One severity prints as before; the row's tone is untouched. (Kept at the file's
+// end so no line above moves: the prose-numerics register keys this file by line.)
+function isSeverityRange(s) {
+  return Array.isArray(s) && new Set(s.filter(Boolean)).size > 1;
+}
