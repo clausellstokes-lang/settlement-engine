@@ -1,0 +1,78 @@
+{"id":"HEADER","town":"r2s-indebted-metropolis-1","sev":"MED","kind":"RECORD","why":"LAND has Grain & Bread, Foraging, Hunting, Brewing magically_sustained, yet FOOD gives by magic 0%","other":""}
+{"id":"18669","town":"r2s-indebted-metropolis-1","sev":"MED","kind":"STATE","why":"cathedral's head would be 'best at the work' alongside Sisinnios Oinaios, whom PEOPLE puts at the Thieves' guild: not the same work","other":""}
+{"id":"13236","town":"r2s-indebted-metropolis-1","sev":"LOW","kind":"BROKEN","why":"imports 'Precious metal veins', a LAND resource name; TRADE header imports 'Precious metals'","other":""}
+{"id":"08643","town":"r2s-mass_migration-metropolis-2","sev":"LOW","kind":"BROKEN","why":"'Either answer requires moving faster than the uncertainty' answers no question and ends with no stop: a fragment cut from elsewhere","other":""}
+{"id":"13362","town":"r2s-mass_migration-metropolis-2","sev":"LOW","kind":"BROKEN","why":"imports 'Precious metal veins', a LAND resource name; TRADE header imports 'Precious metals'","other":""}
+{"id":"09231","town":"r2r-metropolis-38","sev":"MED","kind":"LACKS","why":"exports Charcoal; HOUSES has no Charcoal burner","other":""}
+{"id":"HEADER","town":"r2r-metropolis-23","sev":"MED","kind":"RECORD","why":"DEFENCE gives hired: none, yet HOUSES lists Hired blades and PEOPLE has Aifric Walsh, the blade captain","other":""}
+{"id":"13581","town":"r2r-metropolis-23","sev":"LOW","kind":"BROKEN","why":"imports 'Precious metal veins', a LAND resource name; TRADE header imports 'Precious metals'","other":""}
+{"id":"28960","town":"r2r-metropolis-23","sev":"MED","kind":"STATE","why":"calls Thieves' Guild Powerful and in control; GOVERNMENT lists Thieves' Guild (Suppressed)","other":""}
+{"id":"HEADER","town":"r2r-metropolis-9","sev":"MED","kind":"RECORD","why":"trade access isolated, terrain Hills, yet HOUSES has Docks/port facilities and Harbour master's office and TRADE exports waterborne freight services","other":""}
+{"id":"09234","town":"r2r-metropolis-9","sev":"MED","kind":"LACKS","why":"exports 'Waterborne freight services (cargo, pilotage)'; TOWN gives trade access isolated in the Hills, no river or coast","other":""}
+{"id":"HEADER","town":"r2s-mass_migration-metropolis-2","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Pudens Imperiosus (m) the title 'the madam': a woman's title on a man","other":""}
+{"id":"HEADER","town":"r2r-metropolis-38","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Bodvar Ormsson (m) the title 'the madam': a woman's title on a man","other":""}
+{"id":"HEADER","town":"r2r-metropolis-27","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Jelme Khwarezm (m) the title 'the district madam';: a woman's title on a man","other":""}
+{"id":"HEADER","town":"r2r-metropolis-9","sev":"MED","kind":"RECORD","why":"DEFENCE gives hired: none, yet HOUSES lists Hired blades and PEOPLE has Dhara Upadhyay, the blade captain","other":""}
+{"id":"HEADER","town":"r2r-metropolis-9","sev":"LOW","kind":"RECORD","why":"LAND has Foraging & Smallholding and Beekeeping magically_sustained, yet FOOD gives by magic 0%","other":""}
+{"id":"HEADER","town":"r2r-metropolis-1","sev":"MED","kind":"RECORD","why":"DEFENCE gives hired: none, yet HOUSES lists Hired blades and PEOPLE has Shashi Ghosh, the blade captain","other":""}
+{"id":"HEADER","town":"r2r-metropolis-1","sev":"MED","kind":"RECORD","why":"LAND has Grain & Bread, Livestock & Dairy, Brewing magically_sustained, yet FOOD gives by magic 0%","other":""}
+{"id":"HEADER","town":"r2r-metropolis-1","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Siddharth Srinivasan (m) the title 'the madam': a woman's title on a man","other":""}
+{"id":"HEADER","town":"r2r-metropolis-34","sev":"MED","kind":"RECORD","why":"DEFENCE gives hired: none, yet HOUSES lists Hired blades and PEOPLE has Notburga Wirth, the blade captain","other":""}
+{"id":"HEADER","town":"r2r-metropolis-34","sev":"LOW","kind":"RECORD","why":"HOUSES has a Harbour master's office in a Forest town on road access with no docks or port","other":""}
+{"id":"HEADER","town":"r2r-metropolis-18","sev":"MED","kind":"RECORD","why":"DEFENCE gives hired: none, yet HOUSES lists Hired blades and PEOPLE has Hildr Gislason, the blade captain","other":""}
+{"id":"HEADER","town":"r2r-metropolis-18","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Ivar Knarrarsson (m) the title 'the district madam': a woman's title on a man","other":""}
+{"id":"33736","town":"r2r-metropolis-22","sev":"MED","kind":"STATE","why":"titles Abu Said Bukhara 'the foundling-mother'; PEOPLE gives him as male (m)","other":""}
+{"id":"HEADER","town":"r2r-metropolis-22","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Zagdaakhüü Fergana (m) 'the madam' and Abu Said Bukhara (m) 'the foundling-mother': women's titles on men","other":""}
+{"id":"13242","town":"r2r-metropolis-35","sev":"LOW","kind":"BROKEN","why":"imports 'Precious metal veins', a LAND resource name; TRADE header imports 'Precious metals'","other":""}
+{"id":"HEADER","town":"r2r-metropolis-48","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Jarl Grettisson (m) 'the district madam' and Jora Ketilsson (f) 'the ferryman': titles that do not fit their sex","other":""}
+{"id":"13574","town":"r2r-metropolis-48","sev":"LOW","kind":"BROKEN","why":"imports 'Precious metal veins', a LAND resource name; TRADE header imports 'Precious metals'","other":""}
+{"id":"HEADER","town":"r2r-metropolis-3","sev":"MED","kind":"RECORD","why":"QUARRELS has Ducal Governorship vs Military/Guard at high intensity, yet relations give the pair as symbiotic, stable","other":""}
+{"id":"08609","town":"r2r-metropolis-3","sev":"LOW","kind":"STATE","why":"says economic activity flows through religious institutions; GOVERNMENT has Religious Authorities and The Holy Compact only Minor, and a banking district and merchant guilds trade","other":""}
+{"id":"13356","town":"r2r-metropolis-3","sev":"LOW","kind":"BROKEN","why":"imports 'Precious metal veins', a LAND resource name; TRADE header imports 'Precious metals'","other":""}
+{"id":"HEADER","town":"r2r-metropolis-40","sev":"MED","kind":"RECORD","why":"DEFENCE gives hired: none, yet HOUSES lists Hired blades and PEOPLE has Xian Guo, the blade captain","other":""}
+{"id":"HEADER","town":"r2r-metropolis-40","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Chang Kato (m) the title 'the madam': a woman's title on a man","other":""}
+{"id":"HEADER","town":"r2r-metropolis-53","sev":"MED","kind":"RECORD","why":"LAND has Grain & Bread, Brewing, Timber, Reed & Marsh magically_sustained, yet FOOD gives by magic 0%","other":""}
+{"id":"HEADER","town":"r2r-metropolis-53","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Otgonbayar Urgench (m) the title 'the madam': a woman's title on a man","other":""}
+{"id":"11516","town":"r2r-metropolis-53","sev":"MED","kind":"STATE","why":"describes Grand Military Council as officials, guild masters and magnates; it is a military council and Merchant Guilds are Suppressed","other":""}
+{"id":"HEADER","town":"r2r-metropolis-16","sev":"MED","kind":"RECORD","why":"GOVERNMENT is a Democratic assembly, yet stability reads 'Rigid (militant theocracy)' with Religious Authorities only Minor","other":""}
+{"id":"24578","town":"r2r-metropolis-16","sev":"MED","kind":"STATE","why":"prints 'militant theocracy' for a town GOVERNMENT gives as a Democratic assembly, Religious Authorities Minor","other":""}
+{"id":"13228","town":"r2r-metropolis-16","sev":"LOW","kind":"BROKEN","why":"imports 'Precious metal veins', a LAND resource name; TRADE header imports 'Precious metals'","other":""}
+{"id":"HEADER","town":"r2r-metropolis-52","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Dominik Schröder (m) 'the madam' and Mathildis Schröder (f) 'the ferryman': titles that do not fit their sex","other":""}
+{"id":"02793","town":"r2r-metropolis-52","sev":"MED","kind":"LACKS","why":"Institutions names 'Pilgrimage services'; HOUSES has no such house","other":""}
+{"id":"HEADER","town":"r2r-metropolis-42","sev":"MED","kind":"RECORD","why":"GOVERNMENT is a City-State Council, yet stability reads 'Rigid (militant theocracy)' with Religious Authorities only Minor","other":""}
+{"id":"13503","town":"r2r-metropolis-42","sev":"LOW","kind":"BROKEN","why":"imports 'Precious metal veins', a LAND resource name; TRADE header imports 'Precious metals'","other":""}
+{"id":"HEADER","town":"r2r-metropolis-36","sev":"MED","kind":"RECORD","why":"GOVERNMENT is a City-State Council, yet stability reads 'Rigid (militant theocracy)' with Religious Authorities only Minor","other":""}
+{"id":"HEADER","town":"r2r-metropolis-36","sev":"LOW","kind":"RECORD","why":"LAND has Livestock & Dairy magically_sustained, yet FOOD gives by magic 0%; PEOPLE gives Pradeep Shastri (m) 'the madam'","other":""}
+{"id":"HEADER","town":"r2r-metropolis-5","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Eustathios Exazenos (m) 'the district madam' and Irene Kantakouzenos (f) 'the front man': titles that do not fit their sex","other":""}
+{"id":"HEADER","town":"r2r-metropolis-32","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Caepio Albinus (m) 'the district madam' and Pompeius Zoilus (m) 'the foundling-mother': women's titles on men","other":""}
+{"id":"19441","town":"r2r-metropolis-32","sev":"LOW","kind":"BROKEN","why":"'Hot Springs Mineral' is LAND's 'Mineral Hot Springs' with its words reversed","other":""}
+{"id":"HEADER","town":"r2r-metropolis-56","sev":"MED","kind":"RECORD","why":"trade access isolated, terrain Mountain, yet HOUSES has Docks/port facilities with a wharfinger and TRADE exports waterborne freight","other":""}
+{"id":"09214","town":"r2r-metropolis-56","sev":"MED","kind":"LACKS","why":"exports 'Waterborne freight services (cargo, pilotage)'; TOWN gives trade access isolated in the Mountains, no river or coast","other":""}
+{"id":"19736","town":"r2r-metropolis-56","sev":"LOW","kind":"BROKEN","why":"'Hot Springs Mineral' is LAND's 'Mineral Hot Springs' with its words reversed, printed beside 'Hot Springs'","other":""}
+{"id":"HEADER","town":"r2r-metropolis-20","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Yun Sato (m) the title 'the district madam': a woman's title on a man","other":""}
+{"id":"13606","town":"r2r-metropolis-20","sev":"LOW","kind":"BROKEN","why":"imports 'Precious metal veins', a LAND resource name; TRADE header imports 'Precious metals'","other":""}
+{"id":"HEADER","town":"r2r-metropolis-10","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Harald Ljotsson (m) the title 'the district madam': a woman's title on a man","other":""}
+{"id":"13489","town":"r2r-metropolis-10","sev":"LOW","kind":"BROKEN","why":"imports 'Precious metal veins', a LAND resource name; TRADE header imports 'Precious metals'","other":""}
+{"id":"13584","town":"r2r-metropolis-21","sev":"LOW","kind":"BROKEN","why":"imports 'Precious metal veins', a LAND resource name; TRADE header imports 'Precious metals'","other":""}
+{"id":"HEADER","town":"r2r-metropolis-24","sev":"MED","kind":"RECORD","why":"GOVERNMENT is a Grand Guild Consortium, yet stability reads 'Stable (theocratic governance)'","other":""}
+{"id":"HEADER","town":"r2r-metropolis-24","sev":"MED","kind":"RECORD","why":"LAND has Grain & Bread, Foraging, Hunting, Brewing magically_sustained, yet FOOD gives by magic 0%","other":""}
+{"id":"13215","town":"r2r-metropolis-24","sev":"LOW","kind":"BROKEN","why":"imports 'Precious metal veins' (a LAND resource name) and 'Precious metals and bullion' in one list: the same good twice","other":""}
+{"id":"HEADER","town":"r2r-metropolis-30","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Dag Drengsson (m) the title 'the district madam': a woman's title on a man","other":""}
+{"id":"HEADER","town":"r2r-metropolis-49","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Fiachra Murray (m) the title 'the district madam': a woman's title on a man","other":""}
+{"id":"13490","town":"r2r-metropolis-49","sev":"LOW","kind":"BROKEN","why":"imports 'Precious metal veins', a LAND resource name; TRADE header imports 'Precious metals'","other":""}
+{"id":"HEADER","town":"r2r-metropolis-54","sev":"LOW","kind":"RECORD","why":"HOUSES has a Harbour master's office (Itzpapalotl Kin) in an isolated Forest town with no docks; PEOPLE gives Itzcoatl Sacapul (m) 'the madam'","other":""}
+{"id":"HEADER","town":"r2r-metropolis-13","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Thomas Kamytzes (m) the title 'the district madam': a woman's title on a man","other":""}
+{"id":"13573","town":"r2r-metropolis-13","sev":"LOW","kind":"BROKEN","why":"imports 'Precious metal veins', a LAND resource name; TRADE header imports 'Precious metals'","other":""}
+{"id":"HEADER","town":"r2r-metropolis-17","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Dionysios Komnenos (m) the title 'the district madam': a woman's title on a man","other":""}
+{"id":"HEADER","town":"r2r-metropolis-43","sev":"MED","kind":"RECORD","why":"terrain Mountain, trade access road, no river or coast, yet HOUSES has Docks/port facilities and TRADE exports waterborne freight services","other":""}
+{"id":"HEADER","town":"r2r-metropolis-43","sev":"LOW","kind":"RECORD","why":"LAND has Livestock & Dairy and Hunting magically_sustained, yet FOOD gives by magic 0%; PEOPLE gives Aldric Kauf (m) 'the district madam'","other":""}
+{"id":"09212","town":"r2r-metropolis-43","sev":"MED","kind":"LACKS","why":"exports 'Waterborne freight services (cargo, pilotage)'; TOWN gives a Mountain town on road access, no river or coast","other":""}
+{"id":"19740","town":"r2r-metropolis-43","sev":"LOW","kind":"BROKEN","why":"'Hot Springs Mineral' is LAND's 'Mineral Hot Springs' with its words reversed","other":""}
+{"id":"HEADER","town":"r2r-metropolis-15","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Yogesh Nair (m) the title 'the district madam': a woman's title on a man","other":""}
+{"id":"13307","town":"r2r-metropolis-15","sev":"LOW","kind":"BROKEN","why":"imports 'Precious metal veins', a LAND resource name; TRADE header imports 'Precious metals'","other":""}
+{"id":"HEADER","town":"r2r-metropolis-28","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Bayasgalan Ongirad (m) the title 'the district madam': a woman's title on a man","other":""}
+{"id":"13209","town":"r2r-metropolis-28","sev":"LOW","kind":"BROKEN","why":"imports 'Precious metal veins', a LAND resource name; TRADE header imports 'Precious metals'","other":""}
+{"id":"HEADER","town":"r2r-metropolis-37","sev":"MED","kind":"RECORD","why":"GOVERNMENT is a City-State Council, yet stability reads 'Rigid (militant theocracy)' with Religious Authorities only Minor; PEOPLE gives Vsevolod Zaytsev (m) 'the district madam'","other":""}
+{"id":"HEADER","town":"r2r-metropolis-46","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Yi Pan (m) 'the district madam' and Asuka Liang (f) 'the ferryman': titles that do not fit their sex","other":""}
+{"id":"13370","town":"r2r-metropolis-46","sev":"LOW","kind":"BROKEN","why":"imports 'Precious metal veins', a LAND resource name; TRADE header imports 'Precious metals'","other":""}
+{"id":"DONE","lines":2357,"blocks":39,"flags":77}
