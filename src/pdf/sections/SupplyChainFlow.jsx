@@ -38,7 +38,10 @@ const STATUS = {
   impaired:            { color: '#8b1a1a', bg: '#fdf4f4', border: '#e8b0b0', label: 'Impaired' },
   broken:              { color: '#8b1a1a', bg: '#fdf4f4', border: '#e8b0b0', label: 'Broken' },
 };
-const getStatus = (s) => STATUS[s] || STATUS.vulnerable;
+// SURFACES-1 item 1: a chain the tab's card gives no state (chainStateShown.js :: NO_STATE_SHOWN) takes the tab's neutral
+// colour (EconomicsTab.jsx :: FLOW_STATUS.operational's), never Vulnerable's.
+const NO_STATE = { color: '#6b5340', bg: '#faf8f4', border: '#e0d0b0' };
+const getStatus = (s) => (s === '' ? NO_STATE : STATUS[s] || STATUS.vulnerable);
 
 const MISSING = { color: '#9c8068', bg: '#f8f5f0', border: '#c8b898' };
 const EXPORT = { color: '#1a5a28', bg: '#f0faf2', border: '#88c880' };
@@ -82,7 +85,7 @@ function ChainRow({ chain, instNames, primaryExports, town }) { const shown = ch
   // web SupplyChainsPanel, or the PDF badge disagrees with the screen when
   // subsumption keeps a different alias spelling as the surviving export.
   const exportIds = new Set((primaryExports || []).map(exactGoodId).filter(Boolean));
-  const outputs = (chain.outputs || def.outputs || []).slice(0, 3).map((o) => {
+  const outputs = (town ? chainOutputsShown(chain, town) : (chain.outputs || def.outputs || [])).slice(0, 3).map((o) => { // SURFACES-1 item 2: the tab card's outputs (tradeListDisplay.js :: chainOutputsShown)
     const oid = exactGoodId(o);
     return {
       label: o,
@@ -232,7 +235,7 @@ function CategoryGroup({ needLabel, needKey, chains, instNames, primaryExports, 
 }
 
 export function SupplyChainFlow({ chains, instNames = [], primaryExports = [], tier = 'village', town = null }) {
-  const list = (chains || []).filter((c) => c && c.status !== 'unexploited');
+  const list = (chains || []).filter((c) => c && c.status !== 'unexploited').map((c) => chainStateOnPage(c, town).chain); // SURFACES-1 item 1: the tab's shown state (colour, group count, order)
   if (!list.length) return null;
 
   const isTownPlus = tier === 'town' || tier === 'city' || tier === 'metropolis';
@@ -279,3 +282,5 @@ export default SupplyChainFlow;
 // COHERENCE-AGREE-4 (item 3′): at the end of the file so no line-keyed register row above it moves.
 import { NORMALLY_YIELDS, chainYieldRefused } from '../../domain/chainYield.js';
 import { chainPrintName } from '../../domain/display/chainPrintName.js';
+import { chainStateOnPage } from '../lib/chainStateOnPage.js';
+import { chainOutputsShown } from '../../domain/display/tradeListDisplay.js';

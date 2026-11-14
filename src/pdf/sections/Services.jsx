@@ -190,27 +190,18 @@ function CategoryCard({ cat }) {
 }
 
 function ChainCard({ chain, town, instNames = [] }) { const shown = chainPrintName(chain, town); // COHERENCE-AGREE-6 (F1): the name and the source printed read the town's access
-  // Honor the chain's own disruption status first — the card used to label
-  // trade-impaired/vulnerable chains 'Active', contradicting the web panel.
-  const status = String(chain.status || '').toLowerCase();
-  const tone = status === 'impaired' || status === 'blocked' || status === 'collapsing' || chain.resourceDepleted
+  // SURFACES-1 item 1 (LV-CHAINSTATE-PDF): the state the tab's card prints, in its chip's words
+  // (pdf/lib/chainStateOnPage.js): a siege or a famine in force leaves Impaired, a chain run only through a
+  // neighbour's house prints no state. The card printed the record's stored state ("Active" beside "Field work
+  // and trade have stopped"). A depleted ground is said on the source, as the tab's card says it.
+  const { key: status, word: statusLabel } = chainStateOnPage(chain, town);
+  const tone = status === 'impaired' || chain.resourceDepleted
     ? 'bad'
-    : status === 'vulnerable' || status === 'strained' || status === 'scarce' || chain.substituteActive
+    : status === 'vulnerable' || chain.substituteActive
       ? 'warn'
-      : chain.entrepot
+      : status === '' ? 'muted' : chain.entrepot
         ? 'cool'
         : 'good';
-  const statusLabel = status === 'impaired' || status === 'blocked' || status === 'collapsing'
-    ? 'Impaired'
-    : status === 'vulnerable' || status === 'strained' || status === 'scarce'
-      ? 'Vulnerable'
-      : chain.resourceDepleted
-        ? 'Resource Depleted'
-        : chain.substituteActive
-          ? 'On Substitute'
-          : chain.entrepot
-            ? 'Entrepôt'
-            : 'Active';
   // ⛔ THE PROCESSING NAMES ARE CATALOGUE KEYS AND THIS IS A PRINT (§934.13, browser pass 3).
   // `humanize` returns any string carrying whitespace unchanged, so this row printed the
   // catalogue's own 'Parish church' into the paid document while the screen's Economics tab
@@ -219,12 +210,13 @@ function ChainCard({ chain, town, instNames = [] }) { const shown = chainPrintNa
   const flow = [
     // R2-CODE-B round 3, ruling (d) (#804): no ground the record says is absent (chainHouses.js); with the town, a toll
     // renamed by its access names that access (COHERENCE-AGREE-6 F1), as the screen's card reads it (R2-CODE-B-7).
-    chainSourceOf(chain, shown) ? humanize(label(chainSourceOf(chain, shown))) : null,
+    chainSourceOf(chain, shown) ? `${humanize(label(chainSourceOf(chain, shown)))}${chain.resourceDepleted ? ' (depleted)' : ''}` : null,
     // R2-CODE-B item 1: the houses by the seam's house label, each once (domain/display/chainHouses.js),
     // the screen's chain card's own read: no rank's count range the roster does not hold.
     // Ruling (e): the roster is read, so a house held only as a road to elsewhere is named as the page names it.
     chainHousesOf(chain.processingInstitutions, instNames).map((h) => humanize(h.name)).join(' + ') || null,
-    ((outputs) => (outputs && chainYieldRefused(chain) ? `${NORMALLY_YIELDS}: ${outputs}` : outputs))((chain.outputs || []).map(humanize).slice(0, 4).join(', ') || null),
+    // SURFACES-1 item 2: the outputs the tab's card prints (tradeListDisplay.js :: chainOutputsShown), as many as it prints
+    ((outputs) => (outputs && chainYieldRefused(chain) ? `${NORMALLY_YIELDS}: ${outputs}` : outputs))(chainOutputsShown(chain, town).map(humanize).slice(0, 3).join(', ') || null),
   ].filter(Boolean).join(' \u00bb ');
 
   const meta = [
@@ -285,3 +277,5 @@ export default Services;
 // COHERENCE-AGREE-4 (item 3′): at the end of the file so no line-keyed register row above it moves.
 import { NORMALLY_YIELDS, chainYieldRefused } from '../../domain/chainYield.js';
 import { chainPrintName } from '../../domain/display/chainPrintName.js';
+import { chainStateOnPage } from '../lib/chainStateOnPage.js';
+import { chainOutputsShown } from '../../domain/display/tradeListDisplay.js';
