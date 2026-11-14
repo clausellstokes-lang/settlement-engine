@@ -24,6 +24,7 @@ import { cap, smart, label } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
 import { scoreBand } from '../../domain/display/defenseScoreBands.js';
 import { foodEnduranceLine } from '../../domain/display/defenseDisplay.js';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 // ⛔ A SECOND `statusCase` import (from `components/new/labelLadder.js`) sat on THIS line: a duplicate of line 23, and `src/pdf` may not reach into `src/components`. Removed; the line is kept so the prose-numerics ratchet's frozen path:line identities below do not shift.
 
 // Armed-forces groups in render order, mirroring the web Defense tab.
@@ -185,7 +186,8 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
                 >
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.ink, flex: 1, marginRight: 6 }}>
-                      {force.name}
+                      {/* UPKEEP-14 (the chair's row (1)): the label the roster prints ("Town gates"), never the catalogue key */}
+                      {institutionDisplayName(force.name) || force.name}
                     </Text>
                     {/* ⛔ NO "REQ" / "FORCED" BADGE (COHERENCE-UPKEEP-7, item 3; the round-three cut's class (b)): the
                         generator's provenance is not a fact of the town. */}

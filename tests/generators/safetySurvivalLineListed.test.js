@@ -16,6 +16,9 @@ import { hungerIn } from '../../src/generators/safetyLineTruth.js';
 import { beforeAll, describe, expect, it } from 'vitest';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { settleCrimeLinesToSignal } from '../../src/generators/safetyProfile.js';
+/** UPKEEP-14 (ruling (h)): the estate holds a watch, so the enforcement sentence these lines end on is the roster's (the
+ *  cut where no enforcer stands is guarded in safetyEnforcementReadsRoster.test.js); the survival-line choice is unchanged. */
+const WATCHED = [{ name: 'Town watch', category: 'Defense' }];
 
 const CLAUSE = /No criminal infrastructure/;
 const DESPERATION = 'Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organised theft.';
@@ -42,7 +45,7 @@ describe('the survival line reads the block\'s own operations list', () => {
     const economicState = { safetyProfile: { criminalInstitutions: ['Gambling Den'], crimeTypes: [
       { type: 'Survival crime', desc: NO_NETWORK }, { type: 'desperation theft', desc: DESPERATION },
     ] } };
-    const settled = settleCrimeLinesToSignal(economicState, { seats: [], estate: [] });
+    const settled = settleCrimeLinesToSignal(economicState, { seats: [], estate: WATCHED });
     expect(settled.safetyProfile.crimeTypes).toEqual([{ type: 'Survival crime', desc: DESPERATION }]);
   });
 
@@ -51,13 +54,13 @@ describe('the survival line reads the block\'s own operations list', () => {
       activeChains: [{ needKey: 'criminal_economy', status: 'operational' }],
       safetyProfile: { criminalInstitutions: [], crimeTypes: [{ type: 'Survival crime', desc: NO_NETWORK }] },
     };
-    const settled = settleCrimeLinesToSignal(economicState, { seats: [], estate: [] });
+    const settled = settleCrimeLinesToSignal(economicState, { seats: [], estate: WATCHED });
     expect(settled.safetyProfile.crimeTypes[0].desc).toBe(THEFT_NETWORK); // RE-KEYED BY IDENTITY (UPKEEP-8, #1173): no hunger on this record, so not "Hunger-driven"
   });
 
   it('a listed operation alone does not name a network on the debt-evasion line', () => {
     const economicState = { safetyProfile: { criminalInstitutions: ['Gambling Den'], crimeTypes: [{ type: 'debt evasion', desc: DEBT_FULL }] } };
-    const settled = settleCrimeLinesToSignal(economicState, { seats: [], estate: [] });
+    const settled = settleCrimeLinesToSignal(economicState, { seats: [], estate: WATCHED });
     expect(settled.safetyProfile.crimeTypes[0].desc).toBe(DEBT_PLAIN);
   });
 });
