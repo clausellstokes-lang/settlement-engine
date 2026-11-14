@@ -1,0 +1,110 @@
+{"id":"22394","town":"r2s-under_siege-town-2","sev":"MED","kind":"STATE","why":"Reason settled says set apart from trade roads; FOUNDING reason is two rival mining operations sharing infrastructure","other":""}
+{"id":"19207","town":"r2s-under_siege-town-2","sev":"MED","kind":"TAG","why":"Customs house yields trade access fees from the pass; under siege nothing comes in or goes out by road","other":""}
+{"id":"23335","town":"r2s-under_siege-town-2","sev":"MED","kind":"TAG","why":"yearly fair draws merchants from across the region; CRISIS siege cuts roads, no merchants arrive","other":""}
+{"id":"30711","town":"r2s-under_siege-town-2","sev":"MED","kind":"TAG","why":"regular market days with produce and livestock; tag has S/F/O/P, CRISIS siege stops ordinary trade","other":""}
+{"id":"10652","town":"r2s-under_siege-town-2","sev":"MED","kind":"TAG","why":"daily bread offered; tag has S and F, grain imports cut and FOOD deficit 40%, bakers run on imported grain","other":""}
+{"id":"16354","town":"r2s-under_siege-town-2","sev":"LOW","kind":"TAG","why":"hot meals at multiple venues; tag has S/F, food deficit 40% under siege","other":""}
+{"id":"12772","town":"r2s-under_siege-town-2","sev":"LOW","kind":"TAG","why":"horses for extended travel; under siege nobody travels out by road","other":""}
+{"id":"08468","town":"r2s-under_siege-town-2","sev":"LOW","kind":"TAG","why":"collects import and export duties on all goods; under siege nothing comes in or goes out","other":""}
+{"id":"11756","town":"r2s-under_siege-town-2","sev":"LOW","kind":"LACKS","why":"soldiers available for hire on contract; DEFENCE says hired: none","other":""}
+{"id":"09820","town":"r2s-under_siege-town-2","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in a sentence","other":""}
+{"id":"30724","town":"r2s-under_siege-town-2","sev":"MED","kind":"STATE","why":"says the barracks is all that stands guard; DEFENCE also lists a Town watch","other":"29410"}
+{"id":"27635","town":"r2s-under_siege-town-2","sev":"MED","kind":"STATE","why":"primary threats are internal; CRISIS is Under Siege, an external threat","other":"13731"}
+{"id":"19204","town":"r2s-under_siege-town-2","sev":"MED","kind":"STATE","why":"Mountain Pass Control printed impaired; LAND gives that chain as running","other":"19207"}
+{"id":"06139","town":"r2s-under_siege-town-2","sev":"MED","kind":"LACKS","why":"burial beyond the gate; DEFENCE walls none so no gate, and under siege nobody leaves","other":""}
+{"id":"03824","town":"r2s-under_siege-town-2","sev":"LOW","kind":"TAG","why":"guard relies on rapid reinforcement from a mounted population beyond; tag has S, under siege no help arrives","other":""}
+{"id":"14233","town":"r2s-under_siege-town-2","sev":"LOW","kind":"TAG","why":"inns give beds to merchants on the road; under siege no merchants travel the road","other":""}
+{"id":"07619","town":"r2s-under_siege-town-2","sev":"LOW","kind":"TAG","why":"customs levies on all trade in and out by road; under siege nothing moves by road","other":""}
+{"id":"15699","town":"r2s-under_siege-town-3","sev":"LOW","kind":"TAG","why":"says city watch livery; town of 2192 and tag reaches thorps","other":""}
+{"id":"10661","town":"r2s-under_siege-town-3","sev":"MED","kind":"STATE","why":"fresh beef, pork, mutton on offer; LAND grazing depleted, imports None, siege and 76% food deficit","other":"17709"}
+{"id":"05600","town":"r2s-under_siege-town-3","sev":"MED","kind":"STATE","why":"bakers supply the town's bread; LAND gap says bakers run on imported grain, FOOD imports None, siege","other":""}
+{"id":"16720","town":"r2s-under_siege-town-3","sev":"MED","kind":"STATE","why":"each merchant guild holds a grip on trade; GOVERNMENT lists Merchant Guilds as Suppressed","other":""}
+{"id":"29028","town":"r2s-under_siege-town-3","sev":"MED","kind":"STATE","why":"underworld controls key officials, government merely nominal; Thieves' Guild is only Significant and Guild Council is a Strong governing power","other":""}
+{"id":"25015","town":"r2s-under_siege-town-3","sev":"LOW","kind":"LACKS","why":"names a keep above the market quarter; HOUSES has no keep, castle or barracks","other":"15443"}
+{"id":"15443","town":"r2s-under_siege-town-3","sev":"LOW","kind":"LACKS","why":"names a keep above the market quarter; HOUSES has no keep, castle or barracks","other":"25015"}
+{"id":"10229","town":"r2s-under_siege-town-3","sev":"LOW","kind":"TAG","why":"carted barrels of salt fish weighed out and inspected; under siege nothing is carted in, imports None","other":""}
+{"id":"14235","town":"r2s-under_siege-town-3","sev":"LOW","kind":"TAG","why":"inns lodge traveling merchants; tag has S and F, under siege no merchants travel","other":""}
+{"id":"06138","town":"r2s-under_siege-town-3","sev":"LOW","kind":"TAG","why":"burial beyond the gate; under siege no one passes the gate","other":""}
+{"id":"10847","town":"r2s-under_siege-town-3","sev":"LOW","kind":"TAG","why":"Gate Tolls 8% of income; under siege nothing comes in by road and no customs house stands","other":""}
+{"id":"HEADER","town":"r2s-under_siege-town-0","sev":"MED","kind":"RECORD","why":"QUARRELS has Town Council vs War Council in high conflict (unpaid debt) while relations say symbiotic; the header contradicts itself","other":""}
+{"id":"15710","town":"r2s-under_siege-town-0","sev":"MED","kind":"LACKS","why":"livestock auction with major sales; HOUSES has no auction or livestock market, and the town is under siege","other":""}
+{"id":"06280","town":"r2s-under_siege-town-0","sev":"MED","kind":"TAG","why":"register to join an outgoing caravan; tag has S and F, under siege no caravan leaves by road","other":""}
+{"id":"12801","town":"r2s-under_siege-town-0","sev":"LOW","kind":"TAG","why":"food and shelter for travelers and pilgrims; under siege and 44% food deficit no travelers arrive","other":""}
+{"id":"16356","town":"r2s-under_siege-town-0","sev":"LOW","kind":"TAG","why":"hot meals in most establishments; tag has S and F, food deficit 44% under siege","other":""}
+{"id":"10649","town":"r2s-under_siege-town-0","sev":"MED","kind":"TAG","why":"road haulage of goods between towns; tag has S, under siege nothing goes out by road","other":""}
+{"id":"28629","town":"r2s-under_siege-town-0","sev":"MED","kind":"LACKS","why":"says there is a court; HOUSES has no court and no prison or stocks, only Town hall and Mayor and council","other":""}
+{"id":"07370","town":"r2s-under_siege-town-0","sev":"MED","kind":"LACKS","why":"Court only label for justice; HOUSES lists no court, prison or stocks","other":"28629"}
+{"id":"08234","town":"r2s-under_siege-town-0","sev":"LOW","kind":"LACKS","why":"disputes before a magistrate; HOUSES has no court or magistrate","other":""}
+{"id":"27231","town":"r2s-under_siege-town-0","sev":"LOW","kind":"LACKS","why":"monastic infirmary treats the sick; HOUSES has a Monastery but no infirmary or hospital","other":""}
+{"id":"29387","town":"r2s-under_siege-town-0","sev":"LOW","kind":"LACKS","why":"a bridge at the town's heart; HOUSES has a River ferry and no bridge","other":"15447"}
+{"id":"15447","town":"r2s-under_siege-town-0","sev":"LOW","kind":"LACKS","why":"a bridge at the town's heart; HOUSES has a River ferry and no bridge","other":"29387"}
+{"id":"04023","town":"r2s-under_siege-town-0","sev":"LOW","kind":"LACKS","why":"a warrior following is the permanent core of defence; DEFENCE has no garrison or militia, only a watch","other":""}
+{"id":"27132","town":"r2s-under_siege-town-0","sev":"MED","kind":"LACKS","why":"quarters remain walled apart; DEFENCE says walls none","other":""}
+{"id":"22578","town":"r2s-under_siege-town-0","sev":"MED","kind":"STATE","why":"church holds direct temporal power, all courts ecclesiastical; Town Council governs and no court is listed","other":""}
+{"id":"29025","town":"r2s-under_siege-town-0","sev":"MED","kind":"STATE","why":"Thieves' Guild controls illicit trade; GOVERNMENT lists it as Suppressed","other":""}
+{"id":"14234","town":"r2s-under_siege-town-0","sev":"LOW","kind":"TAG","why":"inns lodge the travelling trade; tag has S, under siege no trade travels","other":""}
+{"id":"06909","town":"r2s-under_siege-town-0","sev":"MED","kind":"TAG","why":"coaching inn runs coaches on a schedule; tag has S, under siege no coach arrives or leaves","other":""}
+{"id":"24555","town":"r2s-under_siege-town-0","sev":"MED","kind":"STATE","why":"Spices & Dyes printed impaired; LAND gives this chain as running","other":""}
+{"id":"25032","town":"r2s-under_siege-town-0","sev":"MED","kind":"STATE","why":"Storage & Logistics printed impaired; LAND gives this chain as running","other":""}
+{"id":"06275","town":"r2s-under_siege-town-0","sev":"MED","kind":"STATE","why":"Caravan & Overland Trade printed impaired; LAND gives it as running","other":""}
+{"id":"25069","town":"r2s-under_siege-town-0","sev":"MED","kind":"STATE","why":"Strategic Crossroads Toll printed impaired; LAND gives it as running","other":""}
+{"id":"06251","town":"r2s-under_siege-town-0","sev":"MED","kind":"STATE","why":"Camel Caravan Trade printed impaired; LAND gives it as entrepot","other":""}
+{"id":"06309","town":"r2s-under_siege-town-1","sev":"MED","kind":"STATE","why":"caravanserai and carriers move cargo, escort caravans; under siege nothing goes by road and LAND says caravanserai lacks camels","other":""}
+{"id":"06324","town":"r2s-under_siege-town-1","sev":"LOW","kind":"TAG","why":"customs checks manifests against actual goods; under siege and imports None nothing arrives","other":""}
+{"id":"14371","town":"r2s-under_siege-town-1","sev":"MED","kind":"STATE","why":"smelts raw ore into iron ingots; LAND iron ore depleted, smelter runs on imported ore, FOOD/TRADE imports None under siege","other":""}
+{"id":"22599","town":"r2s-under_siege-town-1","sev":"MED","kind":"TAG","why":"crucifixes, reliquaries, saints' images; culture is East-Asian-inspired","other":""}
+{"id":"11772","town":"r2s-under_siege-town-1","sev":"MED","kind":"STATE","why":"Religious Authorities pressing close behind; GOVERNMENT has them Dominant, above Guild Council which is only Significant","other":""}
+{"id":"29897","town":"r2s-under_siege-town-1","sev":"LOW","kind":"PAIR","why":"town watch is all that stands guard; DEFENCE also lists a Wizard's tower as magic defence","other":""}
+{"id":"06910","town":"r2s-under_siege-town-1","sev":"MED","kind":"TAG","why":"coaching inn runs scheduled coach departures; tag has S, under siege no coach arrives or leaves by road","other":"12770"}
+{"id":"06384","town":"r2s-under_siege-town-1","sev":"LOW","kind":"TAG","why":"cartographer sells coastal charts; terrain is Desert/Arid with no coast","other":""}
+{"id":"25393","town":"r2s-famine-town-2","sev":"MED","kind":"TAG","why":"taverns offer meals and stabling; tag has F, town queues for rationed food (FOOD famine band); HOUSES has no stable","other":""}
+{"id":"06331","town":"r2s-famine-town-2","sev":"LOW","kind":"LACKS","why":"goods await customs clearance on a dockside; HOUSES has no customs house or warehouse, only Docks/port facilities","other":""}
+{"id":"13189","town":"r2s-famine-town-2","sev":"LOW","kind":"LACKS","why":"customs inspection on all cargo; HOUSES has no customs house, only Harbour master's office","other":""}
+{"id":"03146","town":"r2s-famine-town-2","sev":"LOW","kind":"LACKS","why":"fortified trade station; DEFENCE walls none, garrison none","other":""}
+{"id":"21700","town":"r2s-famine-town-2","sev":"MED","kind":"LACKS","why":"warehouses and chandlers at the waterfront; HOUSES has no warehouse or chandler","other":"15436"}
+{"id":"15436","town":"r2s-famine-town-2","sev":"MED","kind":"LACKS","why":"warehouses and chandlers at the waterfront; HOUSES has no warehouse or chandler","other":"21700"}
+{"id":"08232","town":"r2s-famine-town-3","sev":"MED","kind":"LACKS","why":"hears civil pleas in the town court; HOUSES has no court or courthouse","other":""}
+{"id":"17167","town":"r2s-famine-town-3","sev":"MED","kind":"TAG","why":"laid by before the famine, yet says a long siege would eat the reserves; the crisis is Famine, no siege","other":""}
+{"id":"29352","town":"r2s-famine-town-3","sev":"MED","kind":"STATE","why":"council manages affairs in the absence of formal authority; GOVERNMENT has Arcane Council as the governing power","other":""}
+{"id":"03932","town":"r2s-famine-town-3","sev":"LOW","kind":"TAG","why":"a thriving alchemical trade draws customers; prosperity Struggling under famine, legitimacy crisis","other":""}
+{"id":"19232","town":"r2s-famine-town-3","sev":"LOW","kind":"LACKS","why":"mounted patrols and household troops reinforce watches; DEFENCE has no garrison, militia or hired force","other":""}
+{"id":"03876","town":"r2s-famine-town-3","sev":"LOW","kind":"LACKS","why":"a standing levy roster kept ready; DEFENCE militia none","other":""}
+{"id":"11357","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"grain fields mill baked goods; FOOD failed source is grain under famine, no line should offer the failed food","other":""}
+{"id":"11346","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"grain fields feed the brewery for ale, beer, malt; FOOD failed source is grain under famine","other":"11357"}
+{"id":"05982","town":"r2s-famine-town-1","sev":"LOW","kind":"TAG","why":"brewery turns out meals and preserved foods; tag has F, famine with grain failed","other":""}
+{"id":"04356","town":"r2s-famine-town-1","sev":"LOW","kind":"STATE","why":"bulk ale for taverns and households; FOOD failed source is grain, famine pressure","other":"11346"}
+{"id":"11208","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"glassblower makes bottles, flasks, cups; LAND gap says Glassblower lacks access to glass sand","other":""}
+{"id":"16735","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"Religious Authorities pressing close behind; GOVERNMENT has them Strong, above the Significant governing Merchant oligarchy","other":""}
+{"id":"21681","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"a popular uprising the settlement never closed; PAST records no uprising, only Succession Crisis, Great Harvest Compact, Arcane Incident","other":""}
+{"id":"11319","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"Grain Sales 4% of income; FOOD failed source is grain under Active Famine","other":""}
+{"id":"HEADER","town":"r2s-famine-town-1","sev":"MED","kind":"RECORD","why":"TRADE exports Milled flour, Meals and drink, Preserved foods while FOOD failed source is grain under Active Famine, grown 28%","other":""}
+{"id":"29320","town":"r2s-occupied-town-0","sev":"MED","kind":"STATE","why":"Town Council governs with Occupation Authority close behind; GOVERNMENT gives Occupation Authority Strong, above the Significant Town Council, under occupation","other":""}
+{"id":"09797","town":"r2s-occupied-town-1","sev":"MED","kind":"STATE","why":"offers grain export and surplus food; FOOD surplus 0%, gap 1% (a deficit), and TRADE exports milled flour and livestock, not grain","other":""}
+{"id":"31374","town":"r2s-occupied-town-1","sev":"MED","kind":"STATE","why":"glassblower makes window glass; LAND gap says Glassblower lacks access to glass sand","other":""}
+{"id":"16785","town":"r2s-occupied-town-1","sev":"MED","kind":"STATE","why":"civic power belongs solely to merchant families; under occupation Occupation Authority is Significant and gives orders","other":"16734"}
+{"id":"29940","town":"r2s-occupied-town-1","sev":"LOW","kind":"LACKS","why":"a fortified bridge at the commercial heart; HOUSES has no bridge or toll bridge","other":"15455"}
+{"id":"15455","town":"r2s-occupied-town-1","sev":"LOW","kind":"LACKS","why":"a fortified bridge at the commercial heart; HOUSES has no bridge or toll bridge","other":"29940"}
+{"id":"17171","town":"r2s-plague_onset-town-3","sev":"MED","kind":"TAG","why":"laid by before the outbreak yet says a long siege would eat the reserves; the crisis is a plague, no siege","other":""}
+{"id":"15754","town":"r2s-plague_onset-town-3","sev":"MED","kind":"TAG","why":"beds, meals and stabling for travelers on the road; tag has P, under plague people do not travel; HOUSES has no stable","other":"29143"}
+{"id":"06383","town":"r2s-plague_onset-town-3","sev":"LOW","kind":"TAG","why":"cartographer sells coastal charts; terrain is Riverside with road access, no coast","other":""}
+{"id":"11602","town":"r2s-plague_onset-town-1","sev":"MED","kind":"STATE","why":"tanner yields boots, saddles, leather armour from grazing land; LAND gives grazing land as depleted and Leatherworking vulnerable","other":""}
+{"id":"07328","town":"r2s-plague_onset-town-1","sev":"MED","kind":"STATE","why":"Religious Authorities pressing close behind; GOVERNMENT gives them Dominant, above the Significant governing Corrupt Council","other":""}
+{"id":"22263","town":"r2s-plague_onset-town-1","sev":"MED","kind":"PAIR","why":"Quarantine Council has no stake yet; QUARRELS has Corrupt Council vs Quarantine Council in high conflict over a levy","other":"07348"}
+{"id":"05997","town":"r2s-plague_onset-town-1","sev":"MED","kind":"STATE","why":"brickmaker moulds and fires clay into brick; LAND gap says Brickmaker lacks access to clay","other":""}
+{"id":"29353","town":"r2s-plague_onset-town-1","sev":"MED","kind":"STATE","why":"council governs where nothing official exists; GOVERNMENT has Corrupt Council as the governing power, with Quarantine Council","other":""}
+{"id":"03144","town":"r2s-plague_onset-town-1","sev":"LOW","kind":"LACKS","why":"fortified high precinct overlooking market, theater and harbor; HOUSES has no citadel or theater and the river trade has no harbor","other":""}
+{"id":"12769","town":"r2s-plague_onset-town-1","sev":"LOW","kind":"TAG","why":"fresh relay horses for coaches and dispatch riders; tag has P, under plague people do not travel as usual","other":""}
+{"id":"06908","town":"r2s-plague_onset-town-1","sev":"LOW","kind":"TAG","why":"coaches depart on time, passengers wait; tag has P, under plague people do not travel as usual","other":""}
+{"id":"29939","town":"r2r-town-37","sev":"MED","kind":"LACKS","why":"warehouses and chandlers at the waterfront; HOUSES has no warehouse or chandler","other":""}
+{"id":"15454","town":"r2r-town-37","sev":"MED","kind":"LACKS","why":"warehouses and chandlers at the waterfront; HOUSES has no warehouse or chandler","other":"29939"}
+{"id":"16891","town":"r2s-plague_onset-town-0","sev":"MED","kind":"STATE","why":"Military Council governs with Military/Guard close behind; GOVERNMENT gives Military/Guard Strong, above the Significant Military Council; slash-joined label used as a name","other":""}
+{"id":"04705","town":"r2s-plague_onset-town-0","sev":"MED","kind":"TAG","why":"annual fair brings merchants from across the region; tag has P, under plague people do not gather or travel as usual","other":""}
+{"id":"07042","town":"r2s-plague_onset-town-0","sev":"LOW","kind":"TAG","why":"fights staged for crowd entertainment; tag has P, under plague people do not gather as usual","other":""}
+{"id":"09822","town":"r2s-plague_onset-town-2","sev":"MED","kind":"STATE","why":"Religious Authorities pressing close behind; GOVERNMENT gives them Strong, above the Minor governing Feudal Appointee","other":""}
+{"id":"31196","town":"r2s-plague_onset-town-2","sev":"MED","kind":"STATE","why":"a Wild Magic surge marked the lumber yards and sawmill district; PAST records no magical event and HOUSES has no sawmill","other":"26113"}
+{"id":"26113","town":"r2s-plague_onset-town-2","sev":"MED","kind":"STATE","why":"an affected district slowly spreading strangeness from Wild Magic; PAST records no magical event for this town","other":"31196"}
+{"id":"22876","town":"r2s-plague_onset-town-2","sev":"LOW","kind":"TAG","why":"register of the day's arrivals; tag has P, under plague people do not travel or arrive as usual","other":""}
+{"id":"HEADER","town":"r2s-plague_onset-town-2","sev":"LOW","kind":"RECORD","why":"FOUNDING reason is None: founder given but no reason, an unfilled slot","other":""}
+{"id":"HEADER","town":"r2s-recently_betrayed-town-3","sev":"LOW","kind":"RECORD","why":"LAND has grain fields depleted and Grain & Bread impaired, yet FOOD says grown 100% with imports None","other":""}
+{"id":"11337","town":"r2s-recently_betrayed-town-3","sev":"LOW","kind":"STATE","why":"yields grain surplus and agricultural surplus; FOOD surplus 0% and grain fields are depleted","other":""}
+{"id":"DONE","lines":2406,"blocks":18,"flags":109}
