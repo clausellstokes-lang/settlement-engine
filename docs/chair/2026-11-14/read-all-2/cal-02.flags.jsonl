@@ -1,0 +1,94 @@
+{"id":"HEADER","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"RECORD","why":"QUARRELS has Merchant oligarchy vs War Council at high conflict yet relations call the same pair symbiotic, stable","other":""}
+{"id":"HEADER","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"RECORD","why":"LAND: Strategic Crossroads Toll chain marked entrepot while its resource Strategic Crossroads is absent","other":""}
+{"id":"C2436","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"says the settlement is loyal; legitimacy is Tolerated (score 56) and the page's own Public legitimacy reads Strained","other":"C2519"}
+{"id":"C2434","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"PAIR","why":"conscription has hollowed out the workforce, but the same page rates Labor capacity Adequate","other":"C2520"}
+{"id":"C2455","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"Food Security Pressured; FOOD word is Secure","other":""}
+{"id":"C2457","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"LACKS","why":"names a merchant guild; HOUSES has craft guilds and a tailor's guild but no merchant guild","other":""}
+{"id":"C2456","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"entrepot claim (half the goods only passing through); LAND gives the Strategic Crossroads resource as absent","other":""}
+{"id":"C2466","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"STATE","why":"a single figure seized power and ruled unchecked; PAST records no tyranny or usurpation, only Interregnum, Succession Crisis, Scandal","other":""}
+{"id":"C2490","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"Zuhuy Tun is the watch commander; PEOPLE gives the garrison commander as Malinalxochitl Kab, so Zuhuy Tun does not lead the military","other":""}
+{"id":"C2502","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"BROKEN","why":"Garrison lever printed with no holder; the other lever names one and PEOPLE has Malinalxochitl Kab as garrison commander","other":"C2501"}
+{"id":"C2504","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"Food: Pressured; FOOD word is Secure","other":""}
+{"id":"C2530","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"Food Pressured; FOOD word is Secure","other":""}
+{"id":"C2586","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"Zuhuy Tun is of War Council; PEOPLE places Zuhuy Tun at the Professional city watch, and no roster member belongs to War Council","other":""}
+{"id":"C2600","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"STATE","why":"tyrant's records and regime; PAST records no tyranny or usurpation in this town's history","other":"C2466"}
+{"id":"C2703","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"gives Acna Lahun the title First Magnate; PEOPLE gives Acna Lahun only as the innkeeper","other":""}
+{"id":"HEADER","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Lamat Batab (f) the title senior abbot; the page prints Lady Abbess","other":"C2777"}
+{"id":"C2754","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"BROKEN","why":"power name printed with no Backs label, unlike every other house's backing line","other":""}
+{"id":"C2964","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"PAIR","why":"lives on two or three trades; the same tab calls the economy highly diversified with multiple major revenue streams","other":"C2945"}
+{"id":"C2963","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"managed local forest felling keeps production consistent; LAND gives Managed woodland absent, Timber chain vulnerable, timber limited to intermediates","other":""}
+{"id":"C2966","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"PAIR","why":"country around produces no grain; FOOD has 55% grown locally and the crisis text says the fields are short of hands","other":"C2486"}
+{"id":"C2992","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"very little of what leaves began here; TRADE exports lumber, salted fish, seafood, fish oil, sea salt, potions all made here","other":""}
+{"id":"C2991","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"trade is in moving things (entrepot); LAND gives Strategic Crossroads absent and most exports are local make","other":""}
+{"id":"C3017","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"BROKEN","why":"filter reads Entrepot (2) but only one entrepot flow (Harbour Dues) is listed; the other's resource, Strategic Crossroads, is absent","other":""}
+{"id":"C3090","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"LACKS","why":"offers mercenary hire via the city watch; DEFENCE gives hired: none","other":""}
+{"id":"C3126","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"seat held by Acna Lahun as First Magnate; PEOPLE gives Acna Lahun only as the innkeeper at the inns","other":"C2703"}
+{"id":"C3132","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"Acna Lahun as First Magnate holding the seat; PEOPLE gives Acna Lahun only as the innkeeper","other":"C3126"}
+{"id":"C3134","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"PAIR","why":"farms and workshops short-handed from conscription; the page rates Labor capacity Adequate","other":"C2520"}
+{"id":"C3159","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"BROKEN","why":"The Powers (5) lists four powers; The Shield Compact, a fifth GOVERNMENT power, is missing from the list","other":""}
+{"id":"C3171","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"LACKS","why":"names mage guilds; HOUSES has a wizard's tower and scroll scribe but no mage guild","other":""}
+{"id":"C3176","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"War Council carries out the oligarchy's orders as partner; QUARRELS has a high conflict: a ruling one power refuses to obey","other":"C2471"}
+{"id":"C3227","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"PAIR","why":"Teleportation circle listed as held under the Merchant oligarchy; the Institutions tab gives it to Arcane Orders","other":"C2754"}
+{"id":"C3270","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"PAIR","why":"fines cannot be enforced, despite a professional city watch and garrison; the page rates Law & order Adequate","other":"C2529"}
+{"id":"C3321","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"PAIR","why":"every arrival goes through a gate; this is a port with docks, and the page says any vessel has the sea approaches","other":"C3342"}
+{"id":"C3322","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"PAIR","why":"you come in by a gate; a port with docks and open sea approaches admits arrivals by water","other":"C3341"}
+{"id":"C3383","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"PAIR","why":"war contracts made the settlement rich; the page says it was Prosperous before the war and only Comfortable while it lasts","other":"C2443"}
+{"id":"C3416","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"PAIR","why":"a prisoner died in the cells; the page says the court has nowhere to hold the guilty, courts without detention","other":"C3334"}
+{"id":"C2537","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"PAIR","why":"a prisoner in their custody; the page says courts without detention and nowhere to hold the guilty","other":"C3253"}
+{"id":"C3584","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"STATE","why":"a decisive victory everyone celebrates; PAST records no victory, only a siege (disaster) and an occupation","other":""}
+{"id":"C3614","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"STATE","why":"the wizard taught the sawyer the trade and clients as apprentice; PEOPLE has Coatlicue Zam as the sawyer, not a mage","other":""}
+{"id":"C3662","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"PAIR","why":"the chief magistrate learned the work at the granary master's side; the page says Acna Lahun taught Acamapichtli Moo everything","other":"C3596"}
+{"id":"C3699","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"PAIR","why":"bail paid for the baker; the page says courts without detention, nowhere to hold the guilty","other":"C3334"}
+{"id":"C3745","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"Daily Life Food Pressured; FOOD word is Secure","other":""}
+{"id":"C3792","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"PAIR","why":"founded for trade and quiet growth; FOUNDING gives a military command that built fortifications, early trial piracy and raids","other":"C3789"}
+{"id":"C3830","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"BROKEN","why":"event text printed with no event name or kind (The Scandal); the next line likewise lacks The Flood; heading counts 12","other":"C3831"}
+{"id":"C3848","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"Zuhuy Tun leads the defence; Zuhuy Tun is the watch commander, PEOPLE gives the garrison commander as Malinalxochitl Kab","other":"C2490"}
+{"id":"C3856","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"PAIR","why":"war contracts made the settlement rich; the page says Prosperous before the war, Comfortable while it lasts","other":"C2443"}
+{"id":"C3861","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"Food Pressured; FOOD word is Secure","other":""}
+{"id":"C3866","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"Zuhuy Tun of War Council; PEOPLE places Zuhuy Tun at the Professional city watch","other":"C2586"}
+{"id":"HEADER","town":"bar0-hamlet-calm-rand-1","sev":"MED","kind":"RECORD","why":"isolated hamlet of 87 with no mine, inn or church makes gems, coal, religious services and hospitality for travellers","other":""}
+{"id":"C3898","town":"bar0-hamlet-calm-rand-1","sev":"MED","kind":"STATE","why":"Food Security Pressured; FOOD word is Secure","other":""}
+{"id":"C3929","town":"bar0-hamlet-calm-rand-1","sev":"MED","kind":"STATE","why":"Food Pressured; FOOD word is Secure","other":""}
+{"id":"C3939","town":"bar0-hamlet-calm-rand-1","sev":"LOW","kind":"STATE","why":"history hook Corruption Scandal; PAST records only The Purge","other":""}
+{"id":"HEADER","town":"bar0-hamlet-calm-rand-1","sev":"LOW","kind":"RECORD","why":"LAND has Pilgrimage & Holy Sites running in an isolated hamlet with no house of worship of its own","other":""}
+{"id":"C4070","town":"bar0-hamlet-calm-rand-1","sev":"LOW","kind":"PAIR","why":"governance fractured; GOVERNMENT stability is Stable and the page prints Stable beside it","other":"C4072"}
+{"id":"C4128","town":"bar0-hamlet-calm-rand-1","sev":"MED","kind":"STATE","why":"nothing has come for Saltosinum; PAST records The Purge, an occupation/infiltration event of major gravity 19 years ago","other":""}
+{"id":"C4131","town":"bar0-hamlet-calm-rand-1","sev":"LOW","kind":"PAIR","why":"order kept by whoever is armed; the page says quarrels go to the oldest families and the place keeps order by itself","other":"C4119"}
+{"id":"C4184","town":"bar0-hamlet-calm-rand-1","sev":"LOW","kind":"PAIR","why":"what it raises covers an ordinary year; the food ledger shows a 3% gap, short 6 lbs a day","other":"C4023"}
+{"id":"C4203","town":"bar0-hamlet-calm-rand-1","sev":"MED","kind":"STATE","why":"Daily Life Food Pressured; FOOD word is Secure","other":""}
+{"id":"C4260","town":"bar0-hamlet-calm-rand-1","sev":"MED","kind":"STATE","why":"Food Pressured; FOOD word is Secure","other":""}
+{"id":"HEADER","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"RECORD","why":"hamlet of 65 with no exports makes glass (gap: glass sand unprocessed), Date export and basic education; school and glassworks absent","other":""}
+{"id":"HEADER","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"RECORD","why":"LAND gaps list glass sand twice, once as stored key glass_sand; caravanserai gap names camel_herds","other":""}
+{"id":"HEADER","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"RECORD","why":"Elder Council governs but PEOPLE has no elder: only the caravanserai keeper and the stable keeper","other":""}
+{"id":"C4300","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"Reliance on magic None; FOOD shows 29% of food made by magic","other":""}
+{"id":"C4309","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"STATE","why":"a three-season sickness as live tension; PAST records only a succession crisis and a siege, no plague","other":""}
+{"id":"C4321","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"Egnatius Brutus holds the seat; PEOPLE gives Egnatius Brutus as the caravanserai keeper, not of the Elder Council","other":"C4320"}
+{"id":"C4359","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"Ruling authority Adequate; GOVERNMENT stability Critical, legitimacy score 1, and the page rates law and legitimacy Collapsed","other":"C4344"}
+{"id":"C4360","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"Reliance on magic None; FOOD shows 29% of food made by magic","other":""}
+{"id":"C4365","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"LACKS","why":"buying a controlling interest in a competitor; hamlet of 65 has one caravanserai and no rival house","other":""}
+{"id":"C4369","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"Egnatius Brutus of Elder Council holds the seat; PEOPLE gives Egnatius Brutus as the caravanserai keeper only","other":"C4321"}
+{"id":"C4373","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"LACKS","why":"names a war party suppressing diplomacy; GOVERNMENT lists only the Elder Council","other":""}
+{"id":"C4376","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"STATE","why":"a plague pit and quarantine; PAST records no plague, only a succession crisis and a siege","other":"C4309"}
+{"id":"C4385","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"hinge of the desert trade that caravans cross by; under siege nothing comes by road, and LAND gap: caravanserai lacks camel herds","other":""}
+{"id":"C4386","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"titles Egnatius Brutus Elder; PEOPLE gives him only as the caravanserai keeper at the Caravanserai","other":""}
+{"id":"C4412","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"PAIR","why":"timber-frame dwellings in a desert; the page says timber and building wood are needed and not brought in","other":"C4466"}
+{"id":"C4435","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"weekly rite with all attending at a church a few miles off; under siege nobody leaves by road","other":"C4417"}
+{"id":"C4439","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"STATE","why":"a bed for a traveller who asks; under siege no traveller arrives by road","other":""}
+{"id":"C4496","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"Date Palms and Orchards Impaired; LAND gives that chain as running on an available resource","other":""}
+{"id":"C4507","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"LACKS","why":"clerks annoyed by unrecorded trade; hamlet of 65 has no office or clerk, and under siege no trade moves","other":""}
+{"id":"C4521","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"BROKEN","why":"fine glass sand chain listed twice with different steps, echoing the header's doubled glass sand gap","other":"C4517"}
+{"id":"HEADER","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"RECORD","why":"FOOD has 29% made by magic, yet DEFENCE magic none, no magic house, and the page says no arcane practitioners on the rolls","other":"C4648"}
+{"id":"C4540","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"seat held by Egnatius Brutus as caravanserai keeper and Elder; PEOPLE gives him only as the caravanserai keeper","other":""}
+{"id":"C4547","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"Egnatius Brutus, caravanserai keeper and Elder, holds the seat; PEOPLE gives no elder and him only as caravanserai keeper","other":"C4540"}
+{"id":"C4583","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"Elder Council is safe in the hall; GOVERNMENT stability is Critical, legitimacy score 1, and the page says governance fractured","other":"C4543"}
+{"id":"C4609","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"PAIR","why":"everyone with a weapon has a place in an arranged defence; the page says no organized force, no command, no coordinated response","other":"C4642"}
+{"id":"C4620","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"PAIR","why":"order kept by whoever is armed, nothing keeps it after; the page says the oldest families have the last word","other":"C4601"}
+{"id":"C4624","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"PAIR","why":"household stores carry about a month at full rations; elsewhere the page says about a month and a half","other":"C4480"}
+{"id":"C4357","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"PAIR","why":"Healing capacity Adequate; the page says Medical Readiness None, no healer kept here","other":"C4653"}
+{"id":"C4664","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"Reliance on magic None; FOOD shows 29% of food made by magic","other":""}
+{"id":"C4670","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"PAIR","why":"nothing it lives by would stop without magic; FOOD has 29% by magic and the page says it would go shorter without it","other":"C4483"}
+{"id":"C4706","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"LACKS","why":"hides goods from the customs men; HOUSES has no customs house and the hamlet of 65 has no office","other":""}
+{"id":"C4765","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"STATE","why":"a three-season sickness as live tension; PAST records only a succession crisis and a siege","other":"C4309"}
+{"id":"C4774","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"PAIR","why":"founders chose it for trade, water and good ground; FOUNDING gives a defensible position on the road, early trial poor harvests, desert","other":"C4770"}
+{"id":"C4817","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"Egnatius Brutus of Elder Council holds the seat; PEOPLE gives him only as the caravanserai keeper","other":"C4369"}
+{"id":"DONE","lines":2508,"blocks":3,"flags":93}
