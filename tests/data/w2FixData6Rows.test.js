@@ -46,3 +46,33 @@ describe('W2-FIX-DATA-6: the census writers in the data lane\'s files', () => {
     }), 'every guild town names only what the guild offers');
   }, 120_000);
 });
+
+/** @param {any} town @param {string} type */
+const crisisOf = (town, type) => (Array.isArray(town.stress) ? town.stress : [town.stress]).find((/** @type {any} */ e) => e && e.type === type);
+
+describe('W2-FIX-DATA-7: the census writers in the data lane\'s files (the seventh seat)', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); }, 120_000);
+
+  test('CENSUS-2 a (stressTypes.js through rerenderStressSummary): the famine\'s grain merchant only where a mill gives the slot a holder, the plague\'s healer only where one stands, market and fair only where a market does', async () => {
+    const { crisisHookFor } = await import('../../src/domain/crisis/crisisHooks.js');
+    expectNoSeedFailures(collectSeedFailures(['r2r-thorp-17', 'r2s-famine-hamlet-0', 'r2s-plague_onset-thorp-0', 'r2s-plague_onset-village-2', 'r2s-religious_conversion-thorp-0', 'r2r-village-5'], (seed) => {
+      const town = bornCensus(seed);
+      for (const type of ['famine', 'plague_onset', 'religious_conversion']) {
+        const e = crisisOf(town, type); if (!e) continue;
+        const hook = crisisHookFor(town, e);
+        expect(hook, `${seed} ${type}`).not.toMatch(/\bA grain merchant\b|\bThe healer who identified\b/);
+        expect(String(e.viabilityNote ?? ''), `${seed} ${type}`).not.toMatch(/\bmarket\b|\bfairs\b/);
+      }
+    }), 'no mill, no healer, no market: none is named');
+    // what prints in their place, and the guard towns that keep the original (a mill's miller named; a healer; a market)
+    expect(crisisOf(bornCensus('r2r-thorp-17'), 'famine').crisisHook).toMatch(/^Someone here still has food put by, enough to matter\./);
+    expect(crisisOf(bornCensus('r2s-plague_onset-thorp-0'), 'plague_onset').viabilityNote).toBe('Travel is discouraged, and some goods stop arriving.');
+    expect(crisisOf(bornCensus('r2r-village-5'), 'religious_conversion').viabilityNote).toBe("The tithe is split, and the old house's property has no clear owner.");
+    expect('viabilityNote' in crisisOf(bornCensus('r2s-religious_conversion-thorp-0'), 'religious_conversion'), 'no house of the faith, no market: no note').toBe(false);
+    const miller = bornCensus('r2r-village-24'); const famine = crisisOf(miller, 'famine');
+    const lever = famine.cast.roles.find((/** @type {any} */ r) => r.role === 'lever');
+    expect(crisisHookFor(miller, famine)).toMatch(new RegExp(`^${lever.name} has food, enough to matter\\.`));
+    expect(crisisHookFor(bornCensus('r2r-city-19'), crisisOf(bornCensus('r2r-city-19'), 'plague_onset'))).toMatch(/, the healer who identified the outbreak first, has gone quiet\./);
+    expect(crisisOf(bornCensus('r2s-religious_conversion-town-0'), 'religious_conversion').viabilityNote).toMatch(/feast days and fairs are held twice over/);
+  }, 240_000);
+});

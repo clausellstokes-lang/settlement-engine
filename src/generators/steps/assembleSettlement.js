@@ -15,7 +15,7 @@ import { generateConflicts } from '../powerGenerator.js'; import { resolveFactio
 // (step 3) rolled them 16 steps ago with an empty name and stashed the
 // rng-derived choice in each entry's `summaryRoll`; we re-render here now that
 // the name exists.
-import { renderStressSummary } from '../stressNarrative.js'; import { factsOf } from '../../domain/facts/factsOf.js'; // CENSUS-2c: one line, so no cited line moves
+import { renderStressSummary } from '../stressNarrative.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { STRESS_TYPE_SIBLINGS } from '../../data/stressTypes.js'; // CENSUS-2c: one line, so no cited line moves (W2-FIX-DATA-7: the catalogue cells' declared sets join it)
 import { generatePressureSentence, generateArrivalScene, generateCoherence } from '../narrativeGenerator.js';
 import { generateDefenseProfile } from '../defenseGenerator.js';
 import { settleCrimeLinesToSignal } from '../safetyProfile.js';
@@ -215,6 +215,13 @@ registerStep('assembleSettlement', {
       if (e && typeof e === 'object'
           && Object.prototype.hasOwnProperty.call(e, 'summaryRoll')) {
         e.summary = renderStressSummary(e.type, settlement.name, e.summaryRoll, e.direction, factsOf(settlement)); // WIRING-W0: the entry's own direction; CENSUS-2c: declared sentences resolve (stressNarrative.js :: STRESS_SUMMARY_SIBLINGS) — MERGE-R2: both
+        // W2-FIX-DATA-7 (CENSUS-2 kind a; brief 5's ruling: this function only): the catalogue's own hook and note, stored
+        // on the entry, resolve through their declared sets (stressTypes.js :: STRESS_TYPE_SIBLINGS), draw-free. A hook
+        // with no admitted twin is kept and noted (the template the cast fills); a note with none is left off (nothing
+        // false is printed in its place). The hook stays the template: a twin carries no holder's name.
+        const cellOpts = { facts: factsOf(settlement), poolId: 'stressTypes:STRESS_TYPE_SIBLINGS', surface: 'crisis', drawKind: /** @type {'T'} */ ('T') };
+        if (typeof e.crisisHook === 'string') e.crisisHook = resolveSibling(e.crisisHook, STRESS_TYPE_SIBLINGS, cellOpts);
+        if (typeof e.viabilityNote === 'string') { const note = resolveSibling(e.viabilityNote, STRESS_TYPE_SIBLINGS, { ...cellOpts, dropRefused: true }); if (note == null) delete e.viabilityNote; else e.viabilityNote = note; }
         delete e.summaryRoll;
       }
     }

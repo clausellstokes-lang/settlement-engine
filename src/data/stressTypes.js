@@ -209,6 +209,16 @@ export const STRESS_TYPE_MAP = {
  * @type {Readonly<Record<string, ReadonlyArray<Readonly<{ text: string, needs?: string[], excludes?: string[], twinOf?: string }>>>>}
  */
 export const STRESS_TYPE_SIBLINGS = Object.freeze({
+  // W2-FIX-DATA-7 (2026-11-13; CENSUS-2 kind a, the famine's grain merchant in 25 census towns, every one a thorp or a
+  // hamlet): the hook's "A grain merchant" is the slot `crisisHooks.js :: CRISIS_HOOK_SLOTS` fills with the lever's holder,
+  // and the lever is a person only where a mill stands (the miller, or a market's trader); where none stands it is the
+  // external mill, the slot stays empty and the line names a merchant the place lacks. Measured at bfadaa767 over 1,440
+  // births: the slot is empty in exactly the famine towns with no mill (25 census, 28 fresh) and filled in every one
+  // with a mill. VETOABLE wording (the owner's).
+  [STRESS_TYPE_MAP.famine.crisisHook]: Object.freeze([
+    Object.freeze({ text: STRESS_TYPE_MAP.famine.crisisHook, needs: ['institution: mill'] }),
+    Object.freeze({ text: 'Someone here still has food put by, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.', twinOf: STRESS_TYPE_MAP.famine.crisisHook, excludes: ['institution: mill'] }),
+  ]),
   [STRESS_TYPE_MAP.plague_onset.crisisHook]: Object.freeze([
     Object.freeze({ text: STRESS_TYPE_MAP.plague_onset.crisisHook, needs: ['healer'] }),
     Object.freeze({ text: 'The first person to name the outbreak has gone quiet. Their last message suggested the disease is not natural. Reaching them means crossing a quarantine that is not being enforced consistently.', twinOf: STRESS_TYPE_MAP.plague_onset.crisisHook, excludes: ['healer'] }),
