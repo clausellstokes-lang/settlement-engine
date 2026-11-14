@@ -1,0 +1,161 @@
+{"id":"15738","town":"r2r-hamlet-0","sev":"HIGH","kind":"STATE","why":"claims local food security maintained; FOOD word Deficit, 61% gap, grown 39%, stores 1.4 months, siege","other":""}
+{"id":"22724","town":"r2r-hamlet-0","sev":"MED","kind":"STATE","why":"fields yield well over usual; FOOD grown only 39% of need, 61% deficit under siege","other":""}
+{"id":"07361","town":"r2r-hamlet-0","sev":"MED","kind":"LACKS","why":"council seats split; GOVERNMENT lists only Feudal Stewardship, roster of one (the steward), pop 22","other":""}
+{"id":"21900","town":"r2s-under_siege-hamlet-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Pro Magic / Anti Magic / Regulation advocates' used as a name; one power only, QUARRELS none","other":""}
+{"id":"21318","town":"r2s-under_siege-hamlet-0","sev":"MED","kind":"STATE","why":"lists live parties vs one another; QUARRELS none, GOVERNMENT one power; magic event was 69 years ago","other":""}
+{"id":"07927","town":"r2s-under_siege-hamlet-0","sev":"MED","kind":"LACKS","why":"records sealed in 'the archive'; HOUSES (10, whole list) has no archive or record house; hamlet of 48","other":""}
+{"id":"03662","town":"r2s-under_siege-hamlet-0","sev":"MED","kind":"STATE","why":"'recent' magical accident; PAST gives Arcane Incident 69 years ago","other":""}
+{"id":"24781","town":"r2s-under_siege-hamlet-0","sev":"MED","kind":"STATE","why":"gives a person title Headman and first of Headman's Authority; PEOPLE titles are boat-headman and innkeeper, no power seats in brackets","other":"33075"}
+{"id":"33075","town":"r2s-under_siege-hamlet-0","sev":"MED","kind":"STATE","why":"boat-headman placed under Headman's Authority; PEOPLE shows only Fisher's landing, no power brackets","other":"24781"}
+{"id":"10563","town":"r2s-under_siege-hamlet-1","sev":"MED","kind":"STATE","why":"one tension still unresolved; QUARRELS none, relations between powers none, one power only","other":""}
+{"id":"22397","town":"r2s-under_siege-hamlet-2","sev":"MED","kind":"STATE","why":"settlement reason is the river road; FOUNDING reason is a grain storage depot for a larger city","other":""}
+{"id":"31882","town":"r2s-under_siege-hamlet-2","sev":"MED","kind":"LACKS","why":"markers where roads meet the assembly ground; trade access river, no assembly ground in HOUSES; siege shuts roads","other":""}
+{"id":"33947","town":"r2s-under_siege-hamlet-2","sev":"MED","kind":"STATE","why":"head shepherd placed under Headman's Authority; PEOPLE shows only Shepherd house, no power brackets","other":""}
+{"id":"25228","town":"r2s-under_siege-hamlet-3","sev":"MED","kind":"STATE","why":"names a ruling three of Elder Council; PEOPLE brackets show no person sitting on Elder Council","other":""}
+{"id":"33943","town":"r2s-under_siege-hamlet-3","sev":"MED","kind":"STATE","why":"head shepherd given an Elder Council seat; PEOPLE shows him only at Shepherd, no council brackets","other":"25228"}
+{"id":"00615","town":"r2s-under_siege-hamlet-3","sev":"LOW","kind":"LACKS","why":"'busier lanes' in a hamlet of 80; tag reaches thorps; no lanes or districts for a place this size","other":""}
+{"id":"29696","town":"r2r-village-43","sev":"MED","kind":"LACKS","why":"criminals running untaxed trade; GOVERNMENT lists no criminal power, trade access isolated, exports none, no market house; under siege","other":""}
+{"id":"10566","town":"r2r-village-43","sev":"MED","kind":"STATE","why":"two tensions still unresolved; QUARRELS none, one power relation only","other":""}
+{"id":"24892","town":"r2r-village-43","sev":"MED","kind":"STATE","why":"gives the priest second of Elder Council; PEOPLE brackets show no council seat for anyone","other":""}
+{"id":"22373","town":"r2r-village-21","sev":"MED","kind":"STATE","why":"settled for river water access; FOUNDING reason is a seasonal camp of deep-water fishers, terrain Coastal","other":""}
+{"id":"05243","town":"r2r-village-21","sev":"MED","kind":"STATE","why":"boat-headman called Headman, first of Headman's Authority; PEOPLE brackets show no power seat and Village headman office has nobody","other":""}
+{"id":"22688","town":"r2r-village-21","sev":"LOW","kind":"STATE","why":"fish trade under strain / resource scarcity; LAND gives Fishing Grounds available and Fishing & Seafood running","other":""}
+{"id":"14590","town":"r2s-under_siege-village-1","sev":"MED","kind":"STATE","why":"defence leans on magic; DEFENCE magic none, defence word Undefended","other":""}
+{"id":"30563","town":"r2s-under_siege-village-1","sev":"HIGH","kind":"LACKS","why":"watch towers and muster drills maintained; DEFENCE watch none, militia none, walls none, Undefended","other":""}
+{"id":"12612","town":"r2s-under_siege-village-1","sev":"LOW","kind":"BROKEN","why":"stray closing bracket in 'Holds the seat):'; unmatched parenthesis","other":""}
+{"id":"28033","town":"r2s-under_siege-village-2","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'The sitting authority / Those who deny its mandate / Pragmatists...' printed as a name","other":"21335"}
+{"id":"HEADER","town":"r2s-under_siege-village-2","sev":"LOW","kind":"RECORD","why":"founded by war refugees who found it defensible, yet reason is two rival mining operations sharing infrastructure; both cannot be the origin","other":"32804"}
+{"id":"32848","town":"r2s-under_siege-village-2","sev":"MED","kind":"STATE","why":"alewife given a Headman's Authority seat; PEOPLE shows her only at Ale house, no power brackets","other":"24868"}
+{"id":"24868","town":"r2s-under_siege-village-2","sev":"MED","kind":"STATE","why":"member of Headman's Authority; PEOPLE brackets show no one sitting on any power","other":"32848"}
+{"id":"28943","town":"r2s-under_siege-village-2","sev":"MED","kind":"STATE","why":"meets someone from outside the settlement; Active Siege, isolated, imports and exports none; no one comes in under siege","other":""}
+{"id":"08662","town":"r2s-under_siege-village-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"00406","town":"r2s-under_siege-village-3","sev":"MED","kind":"STATE","why":"boat-headman called Elder, first of Elder Council; PEOPLE brackets show no council seat, only Fisher's landing","other":""}
+{"id":"22746","town":"r2s-under_siege-village-3","sev":"MED","kind":"LACKS","why":"charters lodged with 'the court'; HOUSES (16, whole list) has no court; village of 123","other":""}
+{"id":"00993","town":"r2s-under_siege-village-3","sev":"LOW","kind":"BROKEN","why":"opening bracket '(the militia captain' never closed; sentence cut mid-clause","other":"12631"}
+{"id":"12631","town":"r2s-under_siege-village-3","sev":"LOW","kind":"BROKEN","why":"stray closing bracket 'Holds the seat):' with no opening bracket","other":"00993"}
+{"id":"16991","town":"r2s-under_siege-village-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"22265","town":"r2s-under_siege-village-0","sev":"MED","kind":"STATE","why":"quarantine hardliners and the bereaved; PAST records no plague, crisis is siege; also slash-joined label as a name","other":"21602"}
+{"id":"21319","town":"r2s-under_siege-village-0","sev":"MED","kind":"STATE","why":"parties over quarantine; PAST records no plague, QUARRELS none","other":"21602"}
+{"id":"27566","town":"r2s-under_siege-village-0","sev":"MED","kind":"STATE","why":"plague pit and list of the dead; PAST has no plague, only a flood and wild magic","other":"21602"}
+{"id":"27659","town":"r2s-under_siege-village-0","sev":"MED","kind":"STATE","why":"a quarantine used to settle scores; PAST records no plague or quarantine","other":"21602"}
+{"id":"21602","town":"r2s-under_siege-village-0","sev":"MED","kind":"STATE","why":"a sickness moved through for three seasons; PAST lists no plague","other":""}
+{"id":"15462","town":"r2s-under_siege-village-0","sev":"MED","kind":"STATE","why":"last strong leader gone, no one consolidated; GOVERNMENT has Household Council Strong governing; PAST has only a succession crisis 104 years ago","other":""}
+{"id":"26599","town":"r2s-under_siege-village-0","sev":"MED","kind":"STATE","why":"departed leader's sealed successor document; no leader's death in PAST, Household Council governs","other":"15462"}
+{"id":"00019","town":"r2s-under_siege-village-0","sev":"MED","kind":"STATE","why":"claimant fakes a mandate in a leadership vacuum; GOVERNMENT shows Household Council governing, PAST no vacuum","other":"15462"}
+{"id":"28364","town":"r2s-under_siege-village-0","sev":"MED","kind":"STATE","why":"vacuum kept by an outside power; GOVERNMENT shows standing Household Council, Active Siege; no vacuum in PAST","other":"15462"}
+{"id":"19353","town":"r2s-under_siege-village-0","sev":"LOW","kind":"BROKEN","why":"slash-joined party label 'Multiple weak claimants / Pragmatists / Those who prefer the vacuum' as a name; no vacuum in PAST","other":"15462"}
+{"id":"21313","town":"r2s-under_siege-village-0","sev":"LOW","kind":"STATE","why":"parties over a vacuum; QUARRELS none, GOVERNMENT shows a governing Household Council","other":"15462"}
+{"id":"14638","town":"r2s-under_siege-village-0","sev":"MED","kind":"STATE","why":"sends out pig iron and bars; TRADE exports none, Active Siege shuts roads, no ironworks house","other":""}
+{"id":"21809","town":"r2s-under_siege-village-0","sev":"MED","kind":"STATE","why":"joined against a threat that has since passed; CRISIS is an Active Siege","other":""}
+{"id":"33563","town":"r2s-under_siege-village-0","sev":"MED","kind":"STATE","why":"dairy farmer given a Household Council seat; PEOPLE shows her only at Dairy farmer, no brackets","other":"24870"}
+{"id":"24870","town":"r2s-under_siege-village-0","sev":"MED","kind":"STATE","why":"member of Household Council; no person in PEOPLE has a council bracket","other":"33563"}
+{"id":"12548","town":"r2s-under_siege-village-0","sev":"LOW","kind":"BROKEN","why":"stray closing bracket 'Holds the seat):' with no opening bracket","other":""}
+{"id":"32248","town":"r2s-under_siege-town-2","sev":"MED","kind":"STATE","why":"imports cover 15% of gap; header imports cover 587 of need 4906 (12% of need, 30% of gap), isolated, under siege","other":""}
+{"id":"16960","town":"r2s-under_siege-town-2","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard / Vigilantes / the criminal network' as a name; Vigilantes is no power in GOVERNMENT","other":"21312"}
+{"id":"08875","town":"r2s-under_siege-town-2","sev":"HIGH","kind":"STATE","why":"says nobody expects the Siege again; CRISIS is an Active Siege now, Critical (under siege)","other":""}
+{"id":"29930","town":"r2s-under_siege-town-2","sev":"MED","kind":"LACKS","why":"standing arbitration council; HOUSES (29, whole list) and GOVERNMENT list no arbitration council","other":""}
+{"id":"21312","town":"r2s-under_siege-town-2","sev":"LOW","kind":"BROKEN","why":"slash-joined label as a name; Vigilantes not a power in GOVERNMENT, QUARRELS none","other":"16960"}
+{"id":"07439","town":"r2s-under_siege-town-2","sev":"MED","kind":"STATE","why":"crime wave overwhelmed authorities, vigilantes formed; PAST records no crime wave, no vigilantes in GOVERNMENT, Military/Guard Strong","other":""}
+{"id":"24318","town":"r2s-under_siege-town-2","sev":"MED","kind":"STATE","why":"hook rests on a Crime Wave; PAST records no crime wave here","other":"07439"}
+{"id":"28368","town":"r2s-under_siege-town-2","sev":"MED","kind":"STATE","why":"vigilantes targeting innocents; no vigilantes in GOVERNMENT, no crime wave in PAST","other":"07439"}
+{"id":"34057","town":"r2s-under_siege-town-3","sev":"MED","kind":"STATE","why":"innkeeper placed in Merchant Guilds; PEOPLE shows him only at Inn (multiple), no power brackets","other":""}
+{"id":"34540","town":"r2s-under_siege-town-3","sev":"MED","kind":"STATE","why":"midwife placed in Religious Authorities; PEOPLE shows her only at Midwife, no power brackets","other":""}
+{"id":"22442","town":"r2s-under_siege-town-3","sev":"MED","kind":"STATE","why":"Reed & Marsh Harvest (impaired); LAND gives the chain running, Marshlands available","other":""}
+{"id":"22278","town":"r2s-under_siege-town-0","sev":"MED","kind":"STATE","why":"quiet country, little kept against it; CRISIS is an Active Siege, safety Desperate","other":""}
+{"id":"13072","town":"r2s-under_siege-town-0","sev":"MED","kind":"STATE","why":"hunting parties sell venison, pelts, game; LAND Hunting Grounds depleted, TRADE imports game, Active Siege","other":""}
+{"id":"03950","town":"r2s-under_siege-town-1","sev":"MED","kind":"STATE","why":"a traveller passed through and left by morning; Active Siege, nothing comes in or goes out","other":""}
+{"id":"03004","town":"r2s-under_siege-town-1","sev":"MED","kind":"STATE","why":"a cousin has arrived to stay unannounced; Active Siege, no one comes in","other":""}
+{"id":"13074","town":"r2s-under_siege-town-1","sev":"MED","kind":"STATE","why":"hunting parties sent out over the country and game brought to sell; Active Siege, LAND lists no hunting grounds","other":""}
+{"id":"26274","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"'the changed and their descendants', 'the residue'; PAST has no magical event, magic low; also slash-joined party label as a name","other":""}
+{"id":"23542","town":"r2s-under_siege-city-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Security hardliners / Civil libertarians / Actual agents...' as a name; PAST has no purge or infiltration","other":""}
+{"id":"14639","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"sends out potions and tinctures; TRADE exports are finance, legal and military contracts only, and Active Siege","other":""}
+{"id":"21330","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"parties of the changed and those who fear them; PAST has no magical event, magic low, QUARRELS gives one other pair","other":"26274"}
+{"id":"21325","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"parties over infiltration; PAST has no purge or infiltration event, QUARRELS gives one unrelated pair","other":"14168"}
+{"id":"31197","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"Wild Magic surge left its mark; PAST records no magical event (magic low); no merchants' quarter in HOUSES","other":""}
+{"id":"04472","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"hook rests on a Wild Magic event; PAST records none here","other":"31197"}
+{"id":"02848","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"bloodline touched by the surge; PAST records no wild magic surge","other":"31197"}
+{"id":"26113","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"affected district spreading strangeness; PAST records no wild magic","other":"31197"}
+{"id":"14168","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"rumours of enemy agents caused denunciations; PAST records no purge or infiltration event","other":"21325"}
+{"id":"00364","town":"r2s-under_siege-city-1","sev":"LOW","kind":"STATE","why":"infiltration-fear hook; PAST records no purge or infiltration event","other":"14168"}
+{"id":"04492","town":"r2s-under_siege-city-1","sev":"LOW","kind":"STATE","why":"spy executed hook from an infiltration-fear event; PAST records none","other":"14168"}
+{"id":"00942","town":"r2s-under_siege-city-1","sev":"LOW","kind":"BROKEN","why":"'Fronto Dentatus (the company captain' bracket never closed; sentence cut","other":""}
+{"id":"08229","town":"r2s-under_siege-city-3","sev":"LOW","kind":"BROKEN","why":"slash-joined party label 'Displaced families / Landowners... / Those who profited...' printed as a name","other":""}
+{"id":"02882","town":"r2s-under_siege-city-3","sev":"MED","kind":"STATE","why":"a busy market for spell services; LAND gives Spellcasting Services impaired, and Active Siege","other":""}
+{"id":"25218","town":"r2s-under_siege-city-3","sev":"MED","kind":"STATE","why":"ruling three of Arcane Council; PEOPLE brackets show no person sitting on Arcane Council","other":""}
+{"id":"11833","town":"r2s-under_siege-city-3","sev":"MED","kind":"LACKS","why":"overland fairs organize exchange; HOUSES has no fair, Caravan & Overland Trade impaired, Active Siege","other":""}
+{"id":"00865","town":"r2s-under_siege-city-3","sev":"LOW","kind":"BROKEN","why":"'Richar Meyer (Archmage of the Council' bracket never closed; sentence cut","other":""}
+{"id":"00995","town":"r2s-under_siege-city-3","sev":"LOW","kind":"BROKEN","why":"'Aldric Jäger (the mine captain' bracket never closed; sentence cut","other":""}
+{"id":"04911","town":"r2s-under_siege-city-3","sev":"LOW","kind":"BROKEN","why":"'Arcane Orders no stake yet' has no verb","other":""}
+{"id":"34601","town":"r2s-under_siege-city-3","sev":"MED","kind":"STATE","why":"mine captain given an Arcane Council seat; PEOPLE shows him only at Mine, no power brackets","other":""}
+{"id":"35067","town":"r2s-under_siege-city-3","sev":"MED","kind":"STATE","why":"senior guild master of Merchant guilds given an Arcane Council seat; PEOPLE has no power brackets","other":""}
+{"id":"34033","town":"r2s-under_siege-city-3","sev":"MED","kind":"STATE","why":"innkeeper given an Arcane Council seat; PEOPLE shows him only at Inns and taverns, no power brackets","other":""}
+{"id":"33129","town":"r2s-under_siege-city-3","sev":"MED","kind":"STATE","why":"brickmaker given an Arcane Council seat; PEOPLE shows her only at Brickmaker, no power brackets","other":""}
+{"id":"34224","town":"r2s-under_siege-city-3","sev":"MED","kind":"BROKEN","why":"name printed as 'Luitgard Uhl (the master baker)' with title repeated; baker given Arcane Council seat PEOPLE does not show","other":""}
+{"id":"34314","town":"r2s-under_siege-city-3","sev":"MED","kind":"STATE","why":"fishmonger given an Arcane Council seat; PEOPLE shows him only at Fish market, no power brackets","other":""}
+{"id":"35353","town":"r2s-under_siege-city-3","sev":"MED","kind":"STATE","why":"warehouse factor given an Arcane Council seat; PEOPLE shows her only at Warehouse district","other":""}
+{"id": "34284", "town": "r2s-under_siege-city-3", "sev": "MED", "kind": "STATE", "why": "given an Arcane Council seat; PEOPLE shows master carpenter at Carpenters only, no power brackets", "other": ""}
+{"id": "34254", "town": "r2s-under_siege-city-3", "sev": "MED", "kind": "STATE", "why": "given an Arcane Council seat; PEOPLE shows master butcher at Butchers only, no power brackets", "other": ""}
+{"id": "33527", "town": "r2s-under_siege-city-3", "sev": "MED", "kind": "STATE", "why": "given an Arcane Council seat; PEOPLE shows customs collector at Customs house only, no power brackets", "other": ""}
+{"id": "33755", "town": "r2s-under_siege-city-3", "sev": "MED", "kind": "STATE", "why": "given an Arcane Council seat; PEOPLE shows fuller at Fuller only, no power brackets", "other": ""}
+{"id": "35168", "town": "r2s-under_siege-city-3", "sev": "MED", "kind": "STATE", "why": "given an Arcane Council seat; PEOPLE shows tailor at Tailor's guild only, no power brackets", "other": ""}
+{"id": "34558", "town": "r2s-under_siege-city-3", "sev": "MED", "kind": "STATE", "why": "given an Arcane Council seat; PEOPLE shows miller at Mills only, no power brackets", "other": ""}
+{"id": "33084", "town": "r2s-under_siege-city-3", "sev": "MED", "kind": "STATE", "why": "given an Arcane Council seat; PEOPLE shows bowyer at Bowyers & fletchers only, no power brackets", "other": ""}
+{"id": "34468", "town": "r2s-under_siege-city-3", "sev": "MED", "kind": "STATE", "why": "given an Arcane Council seat; PEOPLE shows master weaver at Weavers only, no power brackets", "other": ""}
+{"id": "34786", "town": "r2s-under_siege-city-3", "sev": "MED", "kind": "STATE", "why": "given an Arcane Council seat; PEOPLE shows potter at Potter only, no power brackets", "other": ""}
+{"id": "24770", "town": "r2s-under_siege-city-3", "sev": "MED", "kind": "STATE", "why": "'Archmage of the Council, first of Arcane Council'; PEOPLE title is guild archmage at Mages' guild, no council bracket", "other": ""}
+{"id": "24847", "town": "r2s-under_siege-city-3", "sev": "MED", "kind": "STATE", "why": "member of Arcane Council; PEOPLE brackets show no person on Arcane Council", "other": "24770"}
+{"id": "25433", "town": "r2s-under_siege-city-2", "sev": "LOW", "kind": "BROKEN", "why": "slash-joined party label 'Temple beneficiaries / Overwhelmed old residents / Sceptics...' printed as a name", "other": ""}
+{"id": "25280", "town": "r2s-under_siege-city-2", "sev": "MED", "kind": "STATE", "why": "house wine by the jug; LAND gaps say Vintner exists but lacks access to grapes; no wine in made-here", "other": ""}
+{"id": "24979", "town": "r2s-under_siege-city-2", "sev": "LOW", "kind": "STATE", "why": "'steep connecting lanes'; terrain is Plains", "other": ""}
+{"id": "06578", "town": "r2s-under_siege-city-2", "sev": "MED", "kind": "STATE", "why": "levies provide defense, stone enclosures follow as a place grows; DEFENCE has city walls, Garrison, city watch, militia none", "other": ""}
+{"id": "29065", "town": "r2s-under_siege-city-2", "sev": "MED", "kind": "STATE", "why": "made its name in trade, not war; PAST records an Occupation and a catastrophic Siege, now under Active Siege", "other": ""}
+{"id":"06493","town":"r2s-under_siege-city-0","sev":"MED","kind":"TAG","why":"names a Charter hall; true here (charter: adventurers' guilds) but tag reaches towns whose DEFENCE charter is none and HOUSES has no charter hall","other":""}
+{"id":"07251","town":"r2s-under_siege-city-0","sev":"LOW","kind":"STATE","why":"'all his making'; the cooper is Livia Capito (f) per PEOPLE","other":""}
+{"id":"31383","town":"r2s-under_siege-metropolis-2","sev":"MED","kind":"STATE","why":"wine supplied to taverns; LAND gaps say Vintner exists but lacks access to grapes, siege, imports cover none","other":"29823"}
+{"id":"29823","town":"r2s-under_siege-metropolis-2","sev":"MED","kind":"STATE","why":"wine pressed and sold in bulk from local fruit or imported must; Vintner lacks grapes (LAND gaps), imports cover none under siege","other":"31383"}
+{"id":"05292","town":"r2s-under_siege-metropolis-2","sev":"MED","kind":"STATE","why":"guild archmage called first of Arcane Orders; PEOPLE gives her only Mages' district, no power bracket; Arcane Orders only Minor","other":""}
+{"id":"00882","town":"r2s-under_siege-metropolis-2","sev":"MED","kind":"BROKEN","why":"bracket '(Master of the Guilds' never closed; title differs from PEOPLE's exchange master, no power bracket","other":"12678"}
+{"id":"12678","town":"r2s-under_siege-metropolis-2","sev":"LOW","kind":"BROKEN","why":"stray closing bracket 'Holds the seat):' with no opening bracket","other":"00882"}
+{"id":"25819","town":"r2s-under_siege-metropolis-2","sev":"LOW","kind":"BROKEN","why":"'The Highborn Circle no stake yet' has no verb","other":""}
+{"id":"34594","town":"r2s-under_siege-metropolis-2","sev":"MED","kind":"STATE","why":"miller placed in The Highborn Circle; PEOPLE shows him only at Mills; Circle's lord is Halima ibn Ali","other":""}
+{"id":"11672","town":"r2s-under_siege-metropolis-2","sev":"MED","kind":"STATE","why":"Great Flood reshaped the lower districts; PAST records no flood","other":""}
+{"id":"14635","town":"r2s-under_siege-metropolis-0","sev":"MED","kind":"STATE","why":"sends out medicines, mineral salts and lumber; TRADE exports are finance, legal, military, tourism, scholarly, alchemical only; Active Siege","other":""}
+{"id":"03675","town":"r2s-under_siege-metropolis-0","sev":"MED","kind":"LACKS","why":"a regency council never fully dissolved; GOVERNMENT powers list no regency council, High Theocratic Council governs","other":""}
+{"id":"00990","town":"r2s-under_siege-metropolis-0","sev":"LOW","kind":"BROKEN","why":"'Tassilo Forster (the master weaver' bracket never closed; sentence cut","other":""}
+{"id":"16007","town":"r2s-under_siege-metropolis-0","sev":"MED","kind":"STATE","why":"annual fairs draw merchants from abroad; CRISIS is Active Siege, nothing comes in by road or gate","other":""}
+{"id":"23725","town":"r2s-under_siege-metropolis-1","sev":"LOW","kind":"BROKEN","why":"stray closing bracket 'Senior cleric):' with no opening bracket; sentence cut from its line","other":""}
+{"id":"23918","town":"r2s-under_siege-metropolis-1","sev":"LOW","kind":"LACKS","why":"shipyard with sail loft and dedicated ironworks; HOUSES has neither, and shipbuilding timber is depleted and imports cover none under siege","other":""}
+{"id":"22388","town":"r2r-metropolis-14","sev":"MED","kind":"STATE","why":"settled because travellers had to stop; FOUNDING reason is an agricultural market centre","other":""}
+{"id":"25077","town":"r2r-metropolis-14","sev":"MED","kind":"STATE","why":"transit trade profit from toll bridge, coaching inn, customs; CRISIS is Active Siege, imports cover none, nothing passes by road","other":""}
+{"id":"01007","town":"r2r-metropolis-14","sev":"LOW","kind":"BROKEN","why":"'Jayanti Pandya (the quarry master' bracket never closed; sentence cut","other":""}
+{"id":"34546","town":"r2r-metropolis-14","sev":"MED","kind":"STATE","why":"midwife placed in The Holy Compact; PEOPLE shows her only at Midwife, no power brackets","other":""}
+{"id":"24915","town":"r2r-metropolis-14","sev":"MED","kind":"STATE","why":"second of War Council; PEOPLE brackets show no one sitting on War Council (War Council only Minor)","other":""}
+{"id":"06712","town":"r2s-under_siege-metropolis-3","sev":"MED","kind":"STATE","why":"civic musters come first, paid guards only added later; DEFENCE has Multiple garrisons, Professional city watch, massive walls, militia none","other":""}
+{"id":"03597","town":"r2s-under_siege-metropolis-3","sev":"MED","kind":"LACKS","why":"a part from 'the wizard's tower'; HOUSES (107, whole list) has Mages' district and Academy of magic but no wizard's tower","other":""}
+{"id":"05868","town":"r2s-under_siege-metropolis-3","sev":"MED","kind":"STATE","why":"Boatbuilding & River Transport (impaired); LAND gives the chain running, Managed woodland available","other":""}
+{"id":"12337","town":"r2s-succession_void-thorp-1","sev":"LOW","kind":"BROKEN","why":"slash-joined party label 'Hoarders / Desperate poor / Price regulators' printed as a name; QUARRELS none, pop 11","other":"21292"}
+{"id":"21292","town":"r2s-succession_void-thorp-1","sev":"MED","kind":"LACKS","why":"three opposed parties incl. price regulators in a thorp of 11; QUARRELS none, one power, no market or house for regulators","other":""}
+{"id":"12800","town":"r2s-succession_void-thorp-1","sev":"MED","kind":"STATE","why":"offers a bed and a place at a shared table to travellers; Active Famine, stores 0.1 months, isolated, imports none, no inn","other":""}
+{"id":"21442","town":"r2s-succession_void-thorp-1","sev":"MED","kind":"LACKS","why":"revenue from tenant farmers; no manor or landlord in HOUSES, GOVERNMENT is Elder Council, pop 11, founded by one family","other":""}
+{"id":"05842","town":"r2s-succession_void-thorp-1","sev":"MED","kind":"LACKS","why":"black market captures 2% of economy; HOUSES (6) has no black market, thorp of 11, isolated","other":""}
+{"id":"07849","town":"r2s-succession_void-thorp-1","sev":"MED","kind":"PAIR","why":"defense relies on armed citizens; DEFENCE militia none, watch none, and the block says no one under arms","other":"29893"}
+{"id":"00011","town":"r2s-succession_void-thorp-1","sev":"MED","kind":"LACKS","why":"one broad street leading up to the hall; thorp of 11 with no hall or street in HOUSES (6)","other":""}
+{"id":"10565","town":"r2s-succession_void-thorp-1","sev":"MED","kind":"STATE","why":"one tension still unresolved; QUARRELS none, relations between powers none","other":""}
+{"id":"24253","town":"r2s-succession_void-thorp-1","sev":"MED","kind":"LACKS","why":"someone destroyed the competing supply route; TRADE imports and exports none, isolated, no supply route exists","other":""}
+{"id":"35607","town":"r2s-famine-thorp-1","sev":"LOW","kind":"BROKEN","why":"'Jambavati Chatterjee - called by' label printed with no value","other":""}
+{"id":"00950","town":"r2s-famine-thorp-3","sev":"LOW","kind":"BROKEN","why":"'Pacuvius Severus (the eldest householder' bracket never closed; sentence cut","other":""}
+{"id":"24776","town":"r2r-thorp-54","sev":"MED","kind":"STATE","why":"'Elder, first of Elder Council'; PEOPLE gives head shepherd at Shepherd collective, no title Elder, no council bracket","other":""}
+{"id":"10656","town":"r2s-famine-thorp-0","sev":"HIGH","kind":"STATE","why":"fresh fish sold daily from the morning catch; FOOD failed source is fish, Active Famine, stores 0.1 months; no fish market in HOUSES","other":"25356"}
+{"id":"11233","town":"r2s-famine-thorp-0","sev":"MED","kind":"STATE","why":"fields yield more than the usual; FOOD grown 45% of need, Active Famine, famine cut 65%","other":""}
+{"id":"00409","town":"r2s-famine-thorp-0","sev":"MED","kind":"STATE","why":"boat-headman called Household Elder, first of Household Council; PEOPLE gives only Fishing community, no council bracket; no Household elder house","other":""}
+{"id":"25356","town":"r2s-famine-thorp-0","sev":"HIGH","kind":"STATE","why":"quick to offer a meal of fish; Active Famine, failed source is fish, stores 0.1 months","other":"10656"}
+{"id":"24782","town":"r2s-famine-thorp-0","sev":"MED","kind":"STATE","why":"'Household Elder, first of Household Council'; PEOPLE gives boat-headman at Fishing community, no council bracket, no Household elder house","other":"00409"}
+{"id":"24255","town":"r2r-thorp-38","sev":"MED","kind":"LACKS","why":"someone destroyed the competing supply route; TRADE imports and exports none, isolated, no supply route exists","other":""}
+{"id":"29175","town":"r2s-succession_void-thorp-0","sev":"MED","kind":"LACKS","why":"those who keep order roughly match the criminals; no criminals, black market or watch in HOUSES (9), pop 8","other":""}
+{"id":"03878","town":"r2s-succession_void-thorp-0","sev":"MED","kind":"LACKS","why":"a standing security office and informant network persist; thorp of 8, watch none, HOUSES has no such office","other":""}
+{"id":"02789","town":"r2r-thorp-17","sev":"LOW","kind":"BROKEN","why":"'Venus Woman Batab: called by' label printed with no value","other":"35607"}
+{"id":"22398","town":"r2s-famine-hamlet-3","sev":"MED","kind":"STATE","why":"settled on a century-old route; FOUNDING reason is herders gathering seasonally until permanent","other":""}
+{"id":"32478","town":"r2s-famine-hamlet-3","sev":"LOW","kind":"LACKS","why":"timber fronts line 'the older lanes'; hamlet of 22 with scattered farmsteads, no lanes or street fronts","other":""}
+{"id":"32565","town":"r2s-occupied-hamlet-0","sev":"MED","kind":"LACKS","why":"storehouses and caravan yards mark the settlement edge; hamlet of 20, isolated, no storehouse or caravan house in HOUSES (7)","other":""}
+{"id":"03614","town":"r2s-occupied-hamlet-0","sev":"LOW","kind":"LACKS","why":"petition gathered names from half their street; hamlet of 20 has no street","other":""}
+{"id":"DONE","lines":2576,"blocks":40,"flags":160}
