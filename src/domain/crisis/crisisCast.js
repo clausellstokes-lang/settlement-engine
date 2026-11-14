@@ -211,7 +211,7 @@ export const CAST_ABSENCES = Object.freeze({
   noBase: "no house's base is hit",
   noLever: 'no house the crisis turns on stands here',
   noGains: 'no power gains',
-  occupierOnly: "no local is named: none of the town's own powers gains", // R2-CODE-B-11, row 179: the collaborator is a local
+  occupierOnly: 'no one is named: no local power gains', // R2-CODE-B-11, row 179: the collaborator is a local
   outsideHand: 'an outside hand, unnamed',
   noSeat: 'no seat or governing house stands',
   noMilitary: 'no military, garrison or watch stands',
