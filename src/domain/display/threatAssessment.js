@@ -183,7 +183,8 @@ export function buildThreatAssessment(r) {
           ? 'Charter hall provides specialist backup.'
           : 'No specialist monster hunters.'), ['ADEQUATE', 'WEAK']],
       [`An embattled region, and only ${wallWord} and a citizen militia to hold it.`, ['WEAK', 'CRITICAL']]];
-    } else if (hasCharter) {
+    } else if (hasCharter && !hasWalls) {
+      // UPKEEP-12 (H2, the chair's ruling (b)): NO PERIMETER reads the walls fact the page's own walls line reads.
       monLines = [['No perimeter, but the charter hall provides specialist response for coordinated threats. Creatures that get past initial response reach homes directly.', ['ADEQUATE', 'WEAK']]];
     } else if (hasWalls && !force) {
       monLines = [[(palisade ? 'A palisade stands' : 'Walls exist')
