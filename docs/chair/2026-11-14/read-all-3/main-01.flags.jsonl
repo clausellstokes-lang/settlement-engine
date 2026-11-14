@@ -1,0 +1,191 @@
+{"id":"HEADER","town":"r2r-thorp-58","sev":"MED","kind":"RECORD","why":"thorp of 7 makes gems and gives basic education (TRADE made here) with only access to a neighbour's church and mill","other":""}
+{"id":"32399","town":"r2r-thorp-58","sev":"MED","kind":"LACKS","why":"luxury goods as critical dependency; TRADE imports are only Grain, Salt, Iron; thorp of 7 under siege","other":""}
+{"id":"32564","town":"r2r-thorp-58","sev":"MED","kind":"LACKS","why":"stone for major construction as critical dependency; TRADE imports list no stone; thorp of 7","other":""}
+{"id":"04297","town":"r2r-thorp-58","sev":"MED","kind":"LACKS","why":"tenant farmers paying rents as primary revenue; thorp of 7, subsistence farming, no landlord power, only an Elder Council","other":""}
+{"id":"04687","town":"r2r-thorp-58","sev":"MED","kind":"STATE","why":"chain run from Ancient grove; LAND says chain Foraging & Smallholding draws on Foraging areas, absent, and is vulnerable, not active","other":""}
+{"id":"22730","town":"r2r-thorp-58","sev":"MED","kind":"STATE","why":"rite of entry offered as town service; HOUSES has only Access to parish church, roads cut by the siege","other":""}
+{"id":"30715","town":"r2r-thorp-58","sev":"MED","kind":"STATE","why":"weekly service as town service; HOUSES has only Access to parish church (neighbour's), roads cut by the siege","other":""}
+{"id":"11233","town":"r2r-thorp-58","sev":"MED","kind":"STATE","why":"good farmland with above-usual yields; LAND lists no farmland, Foraging areas absent, grown only 36% of need","other":""}
+{"id":"26504","town":"r2r-thorp-58","sev":"MED","kind":"STATE","why":"crisis cut production to a third; FOOD famine cut 0%, the crisis is siege not famine","other":""}
+{"id":"16378","town":"r2r-thorp-58","sev":"LOW","kind":"STATE","why":"controls inland trade; thorp of 7 exports none and is besieged, roads cut","other":""}
+{"id":"22279","town":"r2r-thorp-58","sev":"MED","kind":"STATE","why":"'Quiet country' while CRISIS is Under Siege and safety Desperate — Active Siege","other":""}
+{"id":"25180","town":"r2r-thorp-58","sev":"LOW","kind":"STATE","why":"survival 'depends on distance' from the attacker; the besiegers are already at the gate (Active Siege)","other":""}
+{"id":"00565","town":"r2r-thorp-58","sev":"HIGH","kind":"STATE","why":"'first of Elder Council'; PEOPLE gives Sulayman only Fishing community with no council brackets, so he does not sit on it","other":""}
+{"id":"00870","town":"r2r-thorp-58","sev":"MED","kind":"STATE","why":"'Elder, holds the seat' of Elder Council; PEOPLE brackets show no council seat for the only person","other":""}
+{"id":"22423","town":"r2r-thorp-58","sev":"MED","kind":"PAIR","why":"records kept carefully, disputes settled by precedent; thorp of 7 has no court and nothing written down","other":"28214"}
+{"id":"21292","town":"r2r-thorp-58","sev":"MED","kind":"LACKS","why":"three factions incl. price regulators in a thorp of 7 with one named person and no market; QUARRELS none","other":""}
+{"id":"12337","town":"r2r-thorp-58","sev":"LOW","kind":"LACKS","why":"three tension parties incl. price regulators; thorp of 7, no market, QUARRELS none; slash-joined label","other":""}
+{"id":"05842","town":"r2r-thorp-58","sev":"LOW","kind":"LACKS","why":"black market capture 6% of economy in a thorp of 7 with no criminal power and a subsistence economy","other":""}
+{"id":"14069","town":"r2r-thorp-58","sev":"MED","kind":"STATE","why":"'of Elder Council ... holds the seat'; PEOPLE brackets give Sulayman no council seat (house Fishing community only)","other":""}
+{"id":"33071","town":"r2r-thorp-58","sev":"MED","kind":"STATE","why":"table puts Sulayman as member of Elder Council; PEOPLE shows only Fishing community, no council brackets","other":"00565"}
+{"id":"16399","town":"r2r-thorp-58","sev":"MED","kind":"STATE","why":"'Member of: Elder Council'; PEOPLE brackets show no council seat for Sulayman","other":"00565"}
+{"id":"24776","town":"r2r-thorp-58","sev":"MED","kind":"STATE","why":"'first of Elder Council'; PEOPLE brackets show no council seat","other":"00565"}
+{"id":"27937","town":"r2r-thorp-58","sev":"MED","kind":"STATE","why":"'starving', hungriest turning to banditry; stores 1.9 months, thorp of 7 with one named person; header crisis is siege only","other":""}
+{"id":"26390","town":"r2r-thorp-58","sev":"LOW","kind":"LACKS","why":"'the thorp's leaders' plural; PEOPLE has one person, thorp of 7, no seated council member","other":""}
+{"id":"28558","town":"r2r-thorp-58","sev":"MED","kind":"LACKS","why":"best customer and 'their street'; thorp of 7 with dwellings along the bank, no market, under siege","other":""}
+{"id":"04153","town":"r2r-thorp-58","sev":"MED","kind":"STATE","why":"a walk of miles to a village church for services; roads cut by the besiegers, Active Siege","other":""}
+{"id":"04298","town":"r2r-thorp-58","sev":"MED","kind":"LACKS","why":"89% of income from agricultural rents; thorp of 7 subsistence farming, no landlord power, each household farms for itself","other":"25134"}
+{"id":"25095","town":"r2r-thorp-58","sev":"LOW","kind":"STATE","why":"controls inland trade; exports none, thorp of 7 under siege","other":""}
+{"id":"05249","town":"r2r-thorp-45","sev":"MED","kind":"STATE","why":"'second of Household Council'; PEOPLE brackets give Isidor no council seat (Woodcutter's camp only)","other":""}
+{"id":"33165","town":"r2r-thorp-45","sev":"MED","kind":"STATE","why":"table lists Isidor as member of Household Council; PEOPLE brackets show no council seat","other":"05249"}
+{"id":"33076","town":"r2r-thorp-45","sev":"MED","kind":"STATE","why":"table lists Beatrix as member of Household Council; PEOPLE brackets show no council seat","other":"05249"}
+{"id":"14077","town":"r2r-thorp-45","sev":"MED","kind":"STATE","why":"'of Household Council ... holds the seat'; PEOPLE brackets show no council seat for Beatrix","other":""}
+{"id":"15808","town":"r2r-thorp-45","sev":"MED","kind":"STATE","why":"'difficult to besiege' while Active Siege, defence Vulnerable, palisade and levy only","other":""}
+{"id":"23595","town":"r2r-thorp-45","sev":"LOW","kind":"STATE","why":"sells timber by the load, cash only; under siege nothing goes in or out, exports none","other":""}
+{"id":"00011","town":"r2r-thorp-45","sev":"MED","kind":"LACKS","why":"broad street up to the hall; HOUSES has no hall, thorp of 20","other":""}
+{"id":"20952","town":"r2r-thorp-45","sev":"LOW","kind":"STATE","why":"older residents still distinguish before and after the Great Fire; PAST puts it 154 years ago, beyond living memory","other":""}
+{"id":"01683","town":"r2r-thorp-45","sev":"LOW","kind":"STATE","why":"the Great Fire 154 years ago presented as a line residents still feel; no one alive remembers it","other":"20952"}
+{"id":"24898","town":"r2r-thorp-45","sev":"MED","kind":"STATE","why":"'second of Household Council'; PEOPLE brackets give Isidor no council seat","other":"05249"}
+{"id":"24782","town":"r2r-thorp-45","sev":"MED","kind":"STATE","why":"'first of Household Council'; PEOPLE brackets give Beatrix no council seat (Fishing community only)","other":"05249"}
+{"id":"25089","town":"r2r-thorp-45","sev":"MED","kind":"STATE","why":"'difficult to besiege' while Active Siege, defence Vulnerable, palisade and levy only","other":"15808"}
+{"id":"21091","town":"r2r-under_siege-thorp-1","sev":"MED","kind":"STATE","why":"a debt to an external power preparing to collect; CRISIS lists only the siege, no debt stress, QUARRELS none","other":""}
+{"id":"21089","town":"r2r-under_siege-thorp-1","sev":"MED","kind":"STATE","why":"'Outside Debt' tension of three factions; CRISIS lists only the siege; thorp of 16 with one named person","other":"21091"}
+{"id":"03015","town":"r2r-under_siege-thorp-1","sev":"MED","kind":"STATE","why":"a creditor's agent is in town; under siege nothing comes in by road or water; no debt in CRISIS","other":""}
+{"id":"07761","town":"r2r-under_siege-thorp-1","sev":"LOW","kind":"LACKS","why":"three debt factions (debtors, payers, escapees) in a thorp of 16; QUARRELS none; no debt in CRISIS","other":""}
+{"id":"21257","town":"r2r-under_siege-thorp-1","sev":"LOW","kind":"LACKS","why":"three debt parties in a thorp of 16; QUARRELS none; no debt in CRISIS","other":"07761"}
+{"id":"27506","town":"r2r-under_siege-thorp-1","sev":"LOW","kind":"STATE","why":"loan documents hook; CRISIS lists no debt","other":"21091"}
+{"id":"26544","town":"r2r-under_siege-thorp-1","sev":"LOW","kind":"STATE","why":"debt voidable hook; CRISIS lists no debt","other":"21091"}
+{"id":"15380","town":"r2r-under_siege-thorp-1","sev":"LOW","kind":"STATE","why":"parish priest 'comes or is sent for'; house is only Access to parish church, roads cut by siege","other":""}
+{"id":"04155","town":"r2r-under_siege-thorp-1","sev":"MED","kind":"STATE","why":"services a walk of miles to a village church; HOUSES only access, siege cuts the road","other":""}
+{"id":"12239","town":"r2r-under_siege-thorp-1","sev":"MED","kind":"STATE","why":"controls sea routes and naval access; thorp of 16, defence Vulnerable, no navy, exports none, besieged","other":""}
+{"id":"25084","town":"r2r-under_siege-thorp-1","sev":"MED","kind":"STATE","why":"controls sea routes and naval access; thorp of 16, Vulnerable, no navy, besieged","other":"12239"}
+{"id":"00572","town":"r2r-under_siege-thorp-1","sev":"MED","kind":"STATE","why":"'first of Household Council'; PEOPLE gives Marek only Head-of-household consensus, no council bracket","other":""}
+{"id":"24811","town":"r2r-under_siege-thorp-1","sev":"MED","kind":"STATE","why":"'first of Household Council'; PEOPLE brackets show no council seat","other":"00572"}
+{"id":"20918","town":"r2r-under_siege-thorp-1","sev":"LOW","kind":"STATE","why":"wants to know your news; under siege nothing arrives by road or water","other":""}
+{"id":"03211","town":"r2r-under_siege-thorp-1","sev":"LOW","kind":"LACKS","why":"nets drying on poles; HOUSES has no fishing community, only subsistence farming","other":""}
+{"id":"HEADER","town":"r2r-under_siege-thorp-2","sev":"MED","kind":"RECORD","why":"thorp of 6 makes luxury goods and gives basic education; isolated, no church or school of its own","other":""}
+{"id":"22387","town":"r2r-under_siege-thorp-2","sev":"LOW","kind":"PAIR","why":"'Reason settled' given as isolation and shortfall; FOUNDING reason is growth around a valuable resource deposit","other":""}
+{"id":"24552","town":"r2r-under_siege-thorp-2","sev":"MED","kind":"LACKS","why":"spices named as a trade good; imports none, trade access isolated, thorp of 6","other":""}
+{"id":"31993","town":"r2r-under_siege-thorp-2","sev":"MED","kind":"LACKS","why":"fine textiles named as a trade good; imports none, isolated, thorp of 6, no textile house","other":""}
+{"id":"20915","town":"r2r-under_siege-thorp-2","sev":"LOW","kind":"STATE","why":"offers a seat and wants to know where you come from; Active Siege, isolated, no arrivals","other":""}
+{"id":"03878","town":"r2r-under_siege-thorp-2","sev":"MED","kind":"LACKS","why":"standing security office and informant network; DEFENCE garrison none, watch none, thorp of 6","other":""}
+{"id":"29492","town":"r2r-under_siege-thorp-0","sev":"LOW","kind":"LACKS","why":"three factions (traditionalists, progressives, middle) in a thorp of 9 with one named person; QUARRELS none","other":""}
+{"id":"21340","town":"r2r-under_siege-thorp-0","sev":"LOW","kind":"LACKS","why":"three factions in a thorp of 9 with one named person; QUARRELS none","other":"29492"}
+{"id":"08499","town":"r2r-under_siege-thorp-0","sev":"MED","kind":"LACKS","why":"ENTREPÔT role; thorp of 9, exports none, imports only three staples, under siege","other":""}
+{"id":"32565","town":"r2r-under_siege-thorp-0","sev":"MED","kind":"LACKS","why":"storehouses and caravan yards; HOUSES has none, thorp of 9, exports none, under siege","other":""}
+{"id":"00590","town":"r2r-under_siege-thorp-0","sev":"MED","kind":"LACKS","why":"two rival congregations in a thorp of 9; HOUSES has only Access to parish church, no own congregation","other":""}
+{"id":"29234","town":"r2r-under_siege-thorp-0","sev":"MED","kind":"STATE","why":"22% of income from tolls; Active Siege, roads cut, nothing comes in or goes out, exports none","other":""}
+{"id":"10509","town":"r2r-under_siege-thorp-0","sev":"MED","kind":"STATE","why":"chain printed impaired; LAND gives Foraging & Smallholding running, its resource Foraging areas available","other":""}
+{"id":"04157","town":"r2r-under_siege-thorp-0","sev":"MED","kind":"STATE","why":"church a walk of miles away for services; HOUSES only access, roads cut by the siege","other":""}
+{"id":"HEADER","town":"r2r-under_siege-thorp-3","sev":"MED","kind":"RECORD","why":"thorp of 7 makes iron and metalwork; HOUSES has no smith or forge, only farming, fishing, woodcutting","other":""}
+{"id":"00409","town":"r2r-under_siege-thorp-3","sev":"MED","kind":"STATE","why":"'first of Household Council'; PEOPLE gives Huilan only Fishing community, no council bracket","other":""}
+{"id":"28582","town":"r2r-under_siege-thorp-3","sev":"MED","kind":"STATE","why":"family left last week by cart; under siege nothing goes in or out by road","other":""}
+{"id":"16297","town":"r2s-succession_void-thorp-1","sev":"MED","kind":"STATE","why":"Marshlands feeding a chain to honey and foraged goods; LAND: Foraging & Smallholding vulnerable, Foraging areas absent; famine cut 65%","other":""}
+{"id":"29824","town":"r2s-succession_void-thorp-1","sev":"MED","kind":"LACKS","why":"organised crime named as main danger; thorp of 11, GOVERNMENT lists only Elder Council, no criminal power","other":""}
+{"id":"12740","town":"r2s-succession_void-thorp-1","sev":"MED","kind":"LACKS","why":"three different powers approach the players for support; GOVERNMENT lists only Elder Council; thorp of 11","other":""}
+{"id":"HEADER","town":"r2s-famine-thorp-1","sev":"MED","kind":"RECORD","why":"thorp of 20 with only a wayside shrine makes religious services and basic education; no school or church of its own","other":""}
+{"id":"22383","town":"r2s-famine-thorp-1","sev":"LOW","kind":"PAIR","why":"'Reason settled' says founded roadside for traffic; FOUNDING reason is herders gathering seasonally until permanent","other":""}
+{"id":"22724","town":"r2s-famine-thorp-1","sev":"MED","kind":"STATE","why":"rich farmland, fields yield well over usual; Famine, harvest cut 65%, LAND lists no farmland, grown 45% of need","other":""}
+{"id":"16376","town":"r2s-famine-thorp-1","sev":"MED","kind":"STATE","why":"'agricultural heartland'; Famine, grown 45% of need, LAND lists only grazing, grove and coal, no farmland","other":""}
+{"id":"25093","town":"r2s-famine-thorp-1","sev":"MED","kind":"STATE","why":"'agricultural heartland'; Famine, grown 45% of need, no farmland in LAND","other":"16376"}
+{"id":"30563","town":"r2s-famine-thorp-1","sev":"MED","kind":"LACKS","why":"watch towers and muster drills maintained; DEFENCE watch none, militia none, walls none, Undefended","other":""}
+{"id":"10426","town":"r2s-famine-thorp-1","sev":"LOW","kind":"LACKS","why":"street kitchens, irrigation and tanks in a thorp of 20 with no such houses; plains, famine","other":""}
+{"id":"35555","town":"r2s-famine-thorp-1","sev":"MED","kind":"PAIR","why":"livestock listed full; FOOD failed source is livestock and herds failed, famine cut 65%","other":"22698"}
+{"id":"00473","town":"r2s-famine-thorp-2","sev":"MED","kind":"STATE","why":"'first of Elder Council'; PEOPLE gives Diarmuid Fitzgerald only the Household elder house, no council bracket","other":""}
+{"id":"34015","town":"r2s-famine-thorp-2","sev":"MED","kind":"STATE","why":"table lists Fitzgerald as member of Elder Council; PEOPLE brackets show no council seat","other":"00473"}
+{"id":"HEADER","town":"r2s-famine-thorp-2","sev":"MED","kind":"RECORD","why":"TRADE says iron and metalwork made here; LAND says iron ore is raw and not processed; HOUSES has no smith","other":""}
+{"id":"15728","town":"r2s-famine-thorp-2","sev":"LOW","kind":"LACKS","why":"'local enforcement' faction; DEFENCE watch none, garrison none, militia none; thorp of 28","other":""}
+{"id":"21296","town":"r2s-famine-thorp-2","sev":"LOW","kind":"LACKS","why":"'local enforcement' party; DEFENCE has no watch, garrison or militia; QUARRELS none","other":"15728"}
+{"id":"HEADER","town":"r2s-famine-thorp-3","sev":"MED","kind":"RECORD","why":"thorp of 16 with only access to a church makes luxury goods and gives basic education; HOUSES has no school","other":""}
+{"id":"00435","town":"r2s-famine-thorp-3","sev":"MED","kind":"STATE","why":"'first of Household Council'; PEOPLE gives Pacuvius only Head-of-household consensus, no council bracket","other":""}
+{"id":"03875","town":"r2s-famine-thorp-3","sev":"MED","kind":"LACKS","why":"standing levy roster kept ready in the thorp archive; DEFENCE militia none, no archive in HOUSES","other":""}
+{"id":"01620","town":"r2s-wartime-thorp-2","sev":"MED","kind":"STATE","why":"army carts pass through; trade access isolated, exports and imports none, thorp of 9","other":""}
+{"id":"28443","town":"r2s-wartime-thorp-2","sev":"MED","kind":"STATE","why":"carts going by touch every household; trade access isolated, no imports or exports","other":"01620"}
+{"id":"30535","town":"r2s-wartime-thorp-2","sev":"MED","kind":"STATE","why":"carts going by; trade access isolated, no imports or exports","other":"01620"}
+{"id":"13667","town":"r2s-wartime-thorp-2","sev":"MED","kind":"LACKS","why":"food stores guarded day and night; granary False, stores 0.1 months, DEFENCE watch, garrison and militia none, thorp of 9","other":""}
+{"id":"00474","town":"r2s-wartime-thorp-2","sev":"MED","kind":"STATE","why":"'first of Headman's Authority'; PEOPLE gives Lujain only the Household elder house, no power bracket","other":""}
+{"id":"34016","town":"r2s-wartime-thorp-2","sev":"MED","kind":"STATE","why":"table lists Lujain under Headman's Authority; PEOPLE brackets show no such seat","other":"00474"}
+{"id":"10493","town":"r2s-wartime-thorp-2","sev":"MED","kind":"STATE","why":"balance with caravan-borne staples; imports none, trade access isolated","other":""}
+{"id":"07543","town":"r2s-wartime-thorp-2","sev":"LOW","kind":"LACKS","why":"the levy has taken workers from the fields; DEFENCE militia none, thorp of 9","other":""}
+{"id":"HEADER","town":"r2r-thorp-46","sev":"MED","kind":"RECORD","why":"thorp of 26 with no glassworks or smith makes glass, iron, metalwork and basic education; LAND says glass sand not processed","other":""}
+{"id":"22250","town":"r2r-thorp-46","sev":"MED","kind":"LACKS","why":"quality textiles and cloth; TRADE made here lists none, HOUSES has no weaver, imports none, isolated","other":""}
+{"id":"15713","town":"r2r-thorp-46","sev":"MED","kind":"LACKS","why":"livestock for meat and draft; LAND has no grazing, TRADE made here lists no livestock, desert thorp","other":""}
+{"id":"16377","town":"r2r-thorp-46","sev":"MED","kind":"STATE","why":"controls caravan routes; trade access isolated, exports and imports none","other":""}
+{"id":"29068","town":"r2r-thorp-46","sev":"MED","kind":"STATE","why":"made its name in trade; trade access isolated, exports and imports none, founded around a resource deposit","other":""}
+{"id":"00475","town":"r2r-thorp-46","sev":"MED","kind":"STATE","why":"'first of Household Council'; PEOPLE gives Nomun only the Household elder house, no council bracket","other":""}
+{"id":"08967","town":"r2r-thorp-46","sev":"LOW","kind":"LACKS","why":"exotic goods; imports none, isolated thorp","other":""}
+{"id":"31900","town":"r2r-thorp-46","sev":"LOW","kind":"LACKS","why":"permanent halls (plural); HOUSES has no hall, thorp of 26","other":""}
+{"id":"25094","town":"r2r-thorp-46","sev":"MED","kind":"STATE","why":"controls caravan routes; trade access isolated, exports and imports none","other":"16377"}
+{"id":"29696","town":"r2r-thorp-54","sev":"MED","kind":"LACKS","why":"money goes to the criminals who run fencing and theft, treasury sees none; GOVERNMENT lists no criminal power, thorp of 17, isolated","other":""}
+{"id":"23842","town":"r2r-thorp-54","sev":"LOW","kind":"LACKS","why":"shadow economy line; no criminal power in GOVERNMENT, QUARRELS none, thorp of 17 isolated, exports and imports none","other":"29696"}
+{"id":"23843","town":"r2r-thorp-54","sev":"LOW","kind":"LACKS","why":"shadow economy at 24%; no criminal power listed, isolated thorp of 17 with no trade","other":"29696"}
+{"id":"07927","town":"r2r-thorp-54","sev":"LOW","kind":"LACKS","why":"records remain sealed in the archive; HOUSES has no archive, thorp of 17","other":""}
+{"id":"00467","town":"r2r-thorp-54","sev":"MED","kind":"STATE","why":"'first of Elder Council'; PEOPLE gives Paetina only Shepherd collective, no council bracket","other":""}
+{"id":"33943","town":"r2r-thorp-54","sev":"MED","kind":"STATE","why":"table lists Paetina as member of Elder Council; PEOPLE brackets show no council seat","other":"00467"}
+{"id":"HEADER","town":"r2s-famine-thorp-0","sev":"MED","kind":"RECORD","why":"thorp of 19 makes flour, textiles, iron and metalwork; HOUSES has only Access to external mill, no weaver or smith","other":""}
+{"id":"10343","town":"r2s-famine-thorp-0","sev":"MED","kind":"LACKS","why":"flour milled here; HOUSES has only Access to external mill (no mill of its own)","other":""}
+{"id":"17068","town":"r2s-famine-thorp-0","sev":"MED","kind":"LACKS","why":"milling as local production; HOUSES has only Access to external mill, no mill","other":"10343"}
+{"id":"15253","town":"r2s-famine-thorp-0","sev":"MED","kind":"STATE","why":"one family's nets come back full; FOOD failed source is fish, fishing failed, famine cut 65%","other":"22695"}
+{"id":"HEADER","town":"r2s-occupied-thorp-1","sev":"MED","kind":"RECORD","why":"thorp of 17 makes iron and metalwork; HOUSES has no smith or forge; LAND says its raw resources are not processed","other":""}
+{"id":"22386","town":"r2s-occupied-thorp-1","sev":"LOW","kind":"PAIR","why":"'Reason settled' says isolated from trade routes; FOUNDING reason is a strategic mountain pass","other":""}
+{"id":"22249","town":"r2s-occupied-thorp-1","sev":"LOW","kind":"LACKS","why":"quality textiles; no weaver in HOUSES, imports none, isolated thorp of 17","other":""}
+{"id":"20882","town":"r2s-occupied-thorp-1","sev":"MED","kind":"STATE","why":"occupier gains in a vacuum of governance; Elder Council is governing, CRISIS is occupation and famine, no leadership void","other":""}
+{"id":"HEADER","town":"r2r-thorp-38","sev":"MED","kind":"RECORD","why":"thorp of 26 makes gems and basic education; LAND says gold/silver ore not processed; no school or lapidary in HOUSES","other":""}
+{"id":"29792","town":"r2r-thorp-38","sev":"LOW","kind":"LACKS","why":"'vigilantes' as a party; GOVERNMENT lists only Household Council; QUARRELS none","other":""}
+{"id":"21343","town":"r2r-thorp-38","sev":"LOW","kind":"LACKS","why":"vigilantes vs the criminal network; GOVERNMENT lists no vigilantes, QUARRELS none","other":"29792"}
+{"id":"22395","town":"r2r-thorp-38","sev":"LOW","kind":"PAIR","why":"'Reason settled' says set apart from trade roads; FOUNDING reason is a strategic mountain pass","other":""}
+{"id":"HEADER","town":"r2s-succession_void-thorp-0","sev":"MED","kind":"RECORD","why":"thorp of 8 makes gems and gives basic education; no school or lapidary in HOUSES","other":""}
+{"id":"05293","town":"r2s-succession_void-thorp-0","sev":"MED","kind":"STATE","why":"'first of Household Council'; PEOPLE gives Asuka only Shepherd collective, no council bracket","other":""}
+{"id":"11999","town":"r2s-succession_void-thorp-0","sev":"MED","kind":"STATE","why":"famine caused by export decisions; TRADE exports none, trade access isolated, FOOD failed source None","other":""}
+{"id":"08729","town":"r2s-succession_void-thorp-0","sev":"MED","kind":"STATE","why":"emergency grain reserves mandated; FOOD granary False, stores 0.1 months","other":""}
+{"id":"24763","town":"r2s-succession_void-thorp-0","sev":"MED","kind":"STATE","why":"'first of Household Council'; PEOPLE gives Asuka only Shepherd collective, no council bracket","other":"05293"}
+{"id":"33942","town":"r2s-succession_void-thorp-0","sev":"MED","kind":"STATE","why":"table lists Asuka as member of Household Council; PEOPLE brackets show no council seat","other":"05293"}
+{"id":"HEADER","town":"r2r-thorp-17","sev":"MED","kind":"RECORD","why":"thorp of 11 gives basic education and makes stone; LAND says stone is raw and not processed; no school in HOUSES","other":""}
+{"id":"27214","town":"r2r-thorp-17","sev":"LOW","kind":"LACKS","why":"'vigilantes' as a party; GOVERNMENT lists only Household Council; QUARRELS none","other":""}
+{"id":"21334","town":"r2r-thorp-17","sev":"LOW","kind":"LACKS","why":"militia vs vigilantes vs criminal network; GOVERNMENT lists no vigilantes, QUARRELS none","other":"27214"}
+{"id":"32789","town":"r2r-thorp-24","sev":"MED","kind":"LACKS","why":"timber for large vessels as critical dependency; TRADE imports none, no shipyard in HOUSES, thorp of 20","other":""}
+{"id":"HEADER","town":"r2r-thorp-27","sev":"MED","kind":"RECORD","why":"TRADE says flour, textiles, clay and pottery made here; HOUSES has only Access to external mill, LAND says clay and stone are not processed","other":""}
+{"id":"01727","town":"r2r-thorp-27","sev":"LOW","kind":"PAIR","why":"'leaves its clay unworked'; TRADE made here lists clay and pottery, and the same page prints Pottery as production","other":"21728"}
+{"id":"21728","town":"r2r-thorp-27","sev":"MED","kind":"STATE","why":"pottery as local production; LAND gives clay raw and not processed, HOUSES has no potter","other":"01727"}
+{"id":"26593","town":"r2r-thorp-27","sev":"LOW","kind":"STATE","why":"defenders already paid late; DEFENCE hired none, garrison none, only an unpaid Household levy","other":""}
+{"id":"25363","town":"r2r-thorp-40","sev":"LOW","kind":"STATE","why":"talks about the hills; terrain is Plains","other":""}
+{"id":"HEADER","town":"r2r-thorp-40","sev":"MED","kind":"RECORD","why":"thorp of 20 makes iron and metalwork; HOUSES has no smith or forge, LAND lists iron ore deposits only","other":""}
+{"id":"26389","town":"r2s-occupied-thorp-2","sev":"MED","kind":"STATE","why":"Heresy Trial hook; PAST records only the Pilgrimage and the Purge, no heresy trial","other":""}
+{"id":"26624","town":"r2s-occupied-thorp-2","sev":"MED","kind":"STATE","why":"evidence that convicted the heretic; PAST records no heresy trial (Pilgrimage, Purge only)","other":"26389"}
+{"id":"03685","town":"r2s-occupied-thorp-2","sev":"MED","kind":"STATE","why":"relic seized during the trial; PAST records no heresy trial","other":"26389"}
+{"id":"12223","town":"r2s-occupied-thorp-2","sev":"MED","kind":"STATE","why":"Heresy Trial named as a tension; PAST records no heresy trial","other":"26389"}
+{"id":"HEADER","town":"r2s-occupied-thorp-3","sev":"MED","kind":"RECORD","why":"thorp of 18 makes gems and gives basic education; no school or lapidary in HOUSES","other":""}
+{"id":"33948","town":"r2s-occupied-thorp-3","sev":"MED","kind":"STATE","why":"table lists Asmund as member of Household Council; PEOPLE gives only Shepherd collective, no council bracket","other":""}
+{"id":"19354","town":"r2s-occupied-thorp-3","sev":"LOW","kind":"LACKS","why":"municipal borrowing capped by a charter clause; thorp of 18, no municipality or charter (charter none)","other":""}
+{"id":"31194","town":"r2s-occupied-thorp-0","sev":"MED","kind":"STATE","why":"Wild Magic surge named as a tension; PAST records only The Shortage and The Migration","other":""}
+{"id":"26274","town":"r2s-occupied-thorp-0","sev":"MED","kind":"STATE","why":"'the changed and scholars studying the residue'; PAST records no magical event; thorp of 13","other":"31194"}
+{"id":"21330","town":"r2s-occupied-thorp-0","sev":"MED","kind":"STATE","why":"parties tied to a magical surge; PAST records no such event; thorp of 13","other":"31194"}
+{"id":"04472","town":"r2s-occupied-thorp-0","sev":"MED","kind":"STATE","why":"Wild Magic experiment hook; PAST records no wild-magic event","other":"31194"}
+{"id":"02848","town":"r2s-occupied-thorp-0","sev":"MED","kind":"STATE","why":"bloodline touched by the surge; PAST records no wild-magic event","other":"31194"}
+{"id":"28230","town":"r2s-occupied-thorp-0","sev":"LOW","kind":"STATE","why":"defenders paid late or not at all; DEFENCE hired none, garrison none, only an unpaid Household levy","other":""}
+{"id":"HEADER","town":"r2s-occupied-thorp-0","sev":"MED","kind":"RECORD","why":"TRADE says clay and pottery made here; LAND says clay is not processed; HOUSES has no potter","other":""}
+{"id":"HEADER","town":"r2r-thorp-1","sev":"MED","kind":"RECORD","why":"thorp makes flour, textiles, iron and metalwork; HOUSES has only Access to external mill, no weaver or smith","other":""}
+{"id":"09896","town":"r2s-plague_onset-thorp-0","sev":"MED","kind":"LACKS","why":"fewer people come to market; HOUSES has no market, thorp of 14","other":""}
+{"id":"05245","town":"r2s-plague_onset-thorp-0","sev":"MED","kind":"STATE","why":"'first of Elder Council'; PEOPLE gives Kenji only Woodcutter's camp, no council bracket","other":""}
+{"id":"33161","town":"r2s-plague_onset-thorp-0","sev":"MED","kind":"STATE","why":"table lists Kenji as member of Elder Council; PEOPLE brackets show no council seat","other":"05245"}
+{"id":"05297","town":"r2s-plague_onset-thorp-3","sev":"MED","kind":"STATE","why":"'first of Household Council'; PEOPLE gives Chandra only Shepherd collective, no council bracket","other":""}
+{"id":"04726","town":"r2s-plague_onset-thorp-3","sev":"LOW","kind":"STATE","why":"answers about the hills; terrain is Plains","other":""}
+{"id":"29529","town":"r2s-plague_onset-thorp-2","sev":"MED","kind":"LACKS","why":"fewer come to market; HOUSES has no market, thorp of 9","other":""}
+{"id":"08228","town":"r2s-plague_onset-thorp-2","sev":"MED","kind":"LACKS","why":"fewer come to market; HOUSES has no market, thorp of 9","other":"29529"}
+{"id":"11365","town":"r2s-plague_onset-thorp-2","sev":"MED","kind":"LACKS","why":"grain milled at the lord's mill under feudal monopoly; GOVERNMENT lists no lord, only Elder Council; thorp of 9","other":""}
+{"id":"15738","town":"r2s-plague_onset-thorp-2","sev":"MED","kind":"LACKS","why":"mill toll takes any surplus flour; no lord or mill power in GOVERNMENT; TRADE says flour is made here","other":"11365"}
+{"id":"31448","town":"r2s-plague_onset-thorp-2","sev":"MED","kind":"PAIR","why":"'without the lord's mill, no flour at all'; TRADE made here lists flour and baked goods, HOUSES only Access to external mill","other":"11365"}
+{"id":"HEADER","town":"r2s-plague_onset-thorp-2","sev":"MED","kind":"RECORD","why":"thorp of 9 makes flour and baked goods; HOUSES has only Access to external mill, no mill or bakery","other":""}
+{"id":"05829","town":"r2s-plague_onset-thorp-2","sev":"LOW","kind":"LACKS","why":"black market revenue 15%; thorp of 9, 21 years old, no criminal power in GOVERNMENT","other":""}
+{"id":"05828","town":"r2s-plague_onset-thorp-2","sev":"LOW","kind":"LACKS","why":"black market revenue line; thorp of 9, no criminal power in GOVERNMENT","other":"05829"}
+{"id":"05241","town":"r2s-plague_onset-thorp-2","sev":"MED","kind":"STATE","why":"'first of Elder Council'; PEOPLE gives Dobroslav only Fishing community, no council bracket","other":""}
+{"id":"10467","town":"r2s-plague_onset-thorp-2","sev":"LOW","kind":"STATE","why":"fish from the local waters beside the table; LAND gives River Fisheries depleted","other":""}
+{"id":"HEADER","town":"r2r-thorp-41","sev":"MED","kind":"RECORD","why":"thorp of 22 makes iron and metalwork; HOUSES has no smith or forge, LAND lists only iron ore","other":""}
+{"id":"15809","town":"r2r-thorp-41","sev":"MED","kind":"STATE","why":"'difficult to besiege'; defence Vulnerable, palisade and levy only, and PAST records a catastrophic siege 61 years ago","other":""}
+{"id":"25090","town":"r2r-thorp-41","sev":"MED","kind":"STATE","why":"'difficult to besiege'; defence Vulnerable, and PAST records a catastrophic siege 61 years ago","other":"15809"}
+{"id":"24892","town":"r2r-thorp-41","sev":"MED","kind":"STATE","why":"'second of Elder Council'; PEOPLE gives no council bracket to either person","other":""}
+{"id":"31370","town":"r2r-thorp-41","sev":"MED","kind":"STATE","why":"'outlast Xiaoling Yang in Elder Council'; PEOPLE brackets give neither person a council seat","other":"24892"}
+{"id":"HEADER","town":"r2r-thorp-22","sev":"MED","kind":"RECORD","why":"thorp of 11 makes iron, metalwork and timber; HOUSES has no smith or woodcutter, LAND gives timber as not processed","other":""}
+{"id":"13965","town":"r2r-thorp-22","sev":"MED","kind":"STATE","why":"'Akna Balam of Elder Council: holds the seat'; PEOPLE gives Akna only Fishing community, no council bracket","other":""}
+{"id":"32723","town":"r2s-infiltrated-thorp-3","sev":"MED","kind":"LACKS","why":"orthodox clergy, reformists, secular camp; HOUSES has no church or clergy, PAST records no religious event, thorp of 6","other":""}
+{"id":"21345","town":"r2s-infiltrated-thorp-3","sev":"MED","kind":"LACKS","why":"orthodox clergy vs reformists vs secular camp; no clergy in HOUSES, PAST has no religious event, thorp of 6","other":"32723"}
+{"id":"22595","town":"r2s-infiltrated-thorp-3","sev":"MED","kind":"STATE","why":"Religious Tension named; PAST records only the Purge, Debt Crisis and Succession Crisis, CRISIS is Infiltrated","other":"32723"}
+{"id":"03680","town":"r2s-infiltrated-thorp-3","sev":"MED","kind":"STATE","why":"relic claimed by both sides (Religious Tension); no religious event in PAST, no church in HOUSES","other":"22595"}
+{"id":"27808","town":"r2s-infiltrated-thorp-3","sev":"MED","kind":"STATE","why":"reformist leader blackmailed (Religious Tension); no religious event in PAST, thorp of 6 with one named person","other":"22595"}
+{"id":"24350","town":"r2s-infiltrated-thorp-3","sev":"MED","kind":"STATE","why":"staged miracles for one side (Religious Tension); no religious event in PAST, no church in HOUSES","other":"22595"}
+{"id":"14622","town":"r2s-infiltrated-thorp-3","sev":"LOW","kind":"LACKS","why":"sends out date wine; TRADE exports list no wine and HOUSES has no vintner or brewer","other":""}
+{"id":"HEADER","town":"r2s-monster_pressure-thorp-1","sev":"MED","kind":"RECORD","why":"thorp of 18 makes flour, textiles and baked goods; HOUSES has only Access to external mill, no weaver or baker","other":""}
+{"id":"21835","town":"r2s-monster_pressure-thorp-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Flee/hide' used as a party name; three factions in a thorp of 18","other":""}
+{"id":"HEADER","town":"r2r-thorp-10","sev":"MED","kind":"RECORD","why":"thorp of 10 makes glass and gives basic education; LAND says glass sand is raw and not processed; no glassworks or school in HOUSES","other":""}
+{"id":"29206","town":"r2r-thorp-10","sev":"MED","kind":"LACKS","why":"timber and building wood as a trade good; desert thorp, LAND has no woodland, TRADE made here and imports list no timber","other":""}
+{"id":"DONE","lines":2948,"blocks":34,"flags":190}
