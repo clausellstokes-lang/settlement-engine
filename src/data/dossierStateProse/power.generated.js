@@ -3283,7 +3283,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "colour"
+            "no crisis: under_siege"
           ],
           "text": "Goods reach {settlement} unrecorded: the cargo lists are false, and the dues owed on them are never paid.",
           "slots": [
@@ -3294,7 +3294,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "gate"
+            "gate",
+            "no crisis: under_siege"
           ],
           "text": "A share of what arrives at {settlement} never appears at the gate, and the share is not small.",
           "slots": [
@@ -3305,7 +3306,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "colour"
+            "no crisis: under_siege"
           ],
           "text": "A good share of the goods that reach {settlement} pays none of the dues owed on it.",
           "slots": [

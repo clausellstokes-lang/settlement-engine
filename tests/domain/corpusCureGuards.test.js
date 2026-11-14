@@ -73,6 +73,9 @@ const GUARDS = [
   { seed: 'w5-city-under_siege+famine-102', pool: 'DS-GEN-13::WAREHOUSES', vid: 3, why: 'a siege: "fill after the harvest and empty ... as the town trades out of them" (the increment\'s ww#1071, HIGH)' },
   { seed: 'rww-city-under_siege-1', pool: 'DS-GEN-13::WAREHOUSES', vid: 4, why: 'a siege: "leave goods there between journeys" where nobody journeys (the fifth seat\'s found line)' },
   { seed: 'w5-hamlet-politically_fractured-2', pool: 'DS-GEN-18::BOUGHT-IN', vid: 5, why: 'a hamlet: "Much of the work in X\'s workshops begins with unloading a cart" where a part-time smith is the only craft (round three #134, #220)' },
+  { seed: 'rww-city-under_siege-1', pool: 'DS-POW-6::operation role duty evasion', vid: 1, why: 'a siege: "Goods reach X unrecorded" where nothing comes in by road (W2-WRITE-SIDE-REST-2 D)' },
+  { seed: 'rww-metropolis-under_siege-1', pool: 'DS-POW-6::operation role duty evasion', vid: 2, why: 'a siege: "A share of what arrives at X never appears at the gate" where nothing arrives' },
+  { seed: 'w5-metropolis-under_siege-1', pool: 'DS-POW-6::operation role duty evasion', vid: 3, why: 'a siege: "the goods that reach X" where none reach it' },
 ];
 
 /** @param {string} seed */

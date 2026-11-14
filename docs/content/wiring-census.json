@@ -36615,8 +36615,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
-        "gate": 1
+        "gate": 1,
+        "no crisis: under_siege": 3
       },
       "undeclared": 0,
       "crisisScoped": false
