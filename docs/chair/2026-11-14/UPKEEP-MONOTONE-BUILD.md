@@ -67,14 +67,48 @@ comment attribution (the chair's ruling, not "the chair's candidate").
   difference. Source: my four files equal call.patch to the line, plus H1, the magicDef row and the attributions.
 - Undefended on the 3,756: 464 at the base, 534 under the measure's ALL; with H1 382 at the merged tip, 389 here.
 
+## HANDED BACK at the chair's 11:03 ruling (count 327,400 read by the chair; the next item is larger than 50,000)
+The build is complete through P4 and the magicDef row (7509b3794); the guard is at 0 there. What is left, in order:
+
 ## Left (line by line), as of 7509b3794
-- Step 3: the pins the build moves (defenceParts.test.js and kin; tests/lint/defenceDerived.walker.test.js), re-keyed by
-  identity. NOT YET RUN on the build.
+- Step 3, THE PINS. The build's kin (27 files: every test naming the generator, the weights or the profile; the
+  list is `grep -rln "defenseGenerator\|defencePartsOf\|generateDefenseProfile\|defenceWeights" tests`) run at
+  7509b3794: 7 failed, 591 passed, 5 skipped. Classed against the merged tip b42be5de9 (the four failing files
+  run there: 2 failed):
+  - BASE REDS, moved further, NOT this seat's door: tests/property/generatorGoldenMaster.test.js ("every config
+    produces byte-identical output") and tests/property/espionageDormancyFence.test.js ("THE DRIVEN GOLDEN: 360
+    settlements"): red at b42be5de9 already. The build is a declared move; the golden door's writing mode is not run.
+  - NEW, THE BUILD'S (5), each to be traced to its cause before any re-key:
+    1-3. tests/generators/magicCountOnce.test.js: the static arm, the drop arm and the two-role listing. Received:
+       `count6-calm-city-2`, "Multiple monasteries", "monster: clergy+hospital". CAUSE (EXECUTED by the received
+       row; the chain PLAUSIBLE): X5 makes "Multiple monasteries" open the clergy, and the house already opens the
+       hospital, so it feeds the monster score through two parts. My recommendation: name the monastery's ladder
+       (Multiple monasteries, Major monasteries (5-10)) beside the monastery among the named two-job houses, re-keyed
+       by identity with X5 as the cause, if the single "Monastery or friary" is already named there; else a ruling.
+    4. tests/generators/defenseEconomicGate.test.js, "a healthy economy with identical buildings scores meaningfully
+       higher": 74 is not above 74. PLAUSIBLE cause: P4 (both economies' military full at the same people's measure).
+       Not traced.
+    5. tests/generators/defenseEconomicGate.test.js, "divine + druid famine mitigation is at least as good as druid
+       alone": 27, expected 28. A MONOTONE FALL on a hand fixture outside the reader's set (adding the divine to the
+       druid lowers a score by one). A FINDING for the fresh reader: trace it (dims.mjs / why3.mjs of the probes)
+       before anything; never loosened.
+  - tests/lint/defenceDerived.walker.test.js and defenceParts.test.js: GREEN at 7509b3794 (in the 23 passing files).
 - Step 4: merge the defence lane's tip (9c32016c9: UPKEEP-12's H2, #115, #216, docs; none of the four files), then the
   guard and the final measure on the 3,756 and the 720.
 - Step 5: the message to the chair. Step 6: the declaration (field diff by family on the 720), the tuning inventory by
   its ritual (one row added), section 2m's five doors, the golden surfaces as files for one draft shift record.
   Step 7: the eight towns for the owner. Step 8: this file finished.
+
+## The births that move a band (the whole build against the merged tip b42be5de9)
+Readiness bands: **153 of 3,756** and **31 of 720** (the measure's 214 and 44 less H1's holds, classed above). The
+five scores' bands: 889 of the 3,756's score readings, 166 on the 720. Powers re-drawn 94 and 21; AI threats 176 and 39.
+
+## What a fresh reader needs
+- Re-make the instruments: copy the measure's probes out (`git archive origin/lane/upkeep-measure-2-2026-11-14
+  docs/chair/2026-11-14/probes/UPKEEP-MEASURE-2`), the reader's all.seeds from
+  lane/review-upkeep-capacity-2026-11-14 (probes/REVIEW-UPKEEP-CAPACITY/all.seeds); a detached worktree per tree with
+  node_modules symlinked; `born.mjs` over corpus.seeds (3,756) and all.seeds (972); the census = all.seeds less rv5.
+- The guard runs in about two minutes on one worker; it is the fastest check that the law still holds.
 
 ## Named, not built
 - P3's cross-ladder order (ruling 2). P4's precise word for "held to its people" (would be new: PARKED; P4 rides the
