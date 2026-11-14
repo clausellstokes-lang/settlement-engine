@@ -88,4 +88,17 @@ describe('W2-FIX-DATA-12: the measured rows in the data lane\'s files', () => {
     }), 'no tavern: no wine shop in the arrival');
     expect(String(bornCensus('r2r-town-2').arrivalScene || '')).toMatch(WINE);
   }, 180_000);
+
+  test('item 3 and the reader\'s A04: the smiths\' dominant pool claims no living by the forges (r2s-infiltrated-metropolis-3, r2r-town-47) and speaks only where a smith stands (r2r-town-26, r2s-mass_migration-town-0: a Smelter alone)', () => {
+    const LIVES = /lives by its forges/;
+    const POOL = /hammering|Forge smoke|ring of the anvils|new ironwork|clang of iron/;
+    expectNoSeedFailures(collectSeedFailures(['r2s-infiltrated-metropolis-3', 'r2r-town-47'], (seed) => {
+      const a = String(bornCensus(seed).arrivalScene || '');
+      expect(a, seed).not.toMatch(LIVES);
+      expect(a, seed).toMatch(/The hammering of the forges echoes through all of|The clang of iron from the smithies carries down the lanes of/);
+    }), 'the forge line names the sound, not the living');
+    expectNoSeedFailures(collectSeedFailures(['r2r-town-26', 'r2s-mass_migration-town-0'], (seed) => {
+      expect(String(bornCensus(seed).arrivalScene || ''), seed).not.toMatch(POOL);
+    }), 'no smith: no forge in the arrival');
+  }, 180_000);
 });

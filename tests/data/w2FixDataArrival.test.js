@@ -23,8 +23,9 @@ const admits = (/** @type {any} */ l, /** @type {any} */ f) => declarationAdmits
 
 describe('W2-FIX-DATA: an arrival beat prints only where it is true', () => {
   it('the ironwork waits for no carts under siege (c22)', () => {
-    expect(admits(line('Racks of new ironwork'), town({ stress: ['under_siege'] }))).toBe(false);
-    expect(admits(line('Racks of new ironwork'), town({}))).toBe(true);
+    // W2-FIX-DATA-12 item 3: the line also needs a smith now; both sides stand one, so the siege alone decides.
+    expect(admits(line('Racks of new ironwork'), town({ houses: ['Blacksmiths (3-10)'], stress: ['under_siege'] }))).toBe(false);
+    expect(admits(line('Racks of new ironwork'), town({ houses: ['Blacksmiths (3-10)'] }))).toBe(true);
   });
   it('no fishmonger shouts a price where no market stands (c05)', () => {
     expect(admits(line('A fishmonger shouts'), town({ tier: 'thorp' }))).toBe(false);

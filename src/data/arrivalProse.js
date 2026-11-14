@@ -62,10 +62,10 @@ export const ARRIVAL_SENSES = Object.freeze([
       () => 'A smith quenches a blade in a hiss of steam, and the sound follows you down the lane.',
     ],
     dominant: [ // W2-FIX-DATA-3 (REVIEW-W2A-3 #366): these four lines speak of many forges; a village or smaller has one (a hamlet's part-time smith, a village's blacksmith), so they declare tier: ≥ town. A one-forge place then draws none and its sense beat is left out (the redraw finds no clean line and draws nothing more); a line of its own would lengthen the pool and re-deal the arrival in every town that draws it (measured: 44 of 720)
-      { text: (n) => `The hammering echoes through all of ${n}, and the place plainly lives by its forges.`, needs: ['tier: ≥ town'] },
-      { text: () => 'Forge smoke hangs over everything here, and the ring of the anvils never quite stops.', needs: ['tier: ≥ town'] },
-      { text: () => 'Racks of new ironwork stand outside the workshops, waiting for the carts.', needs: ['tier: ≥ town'], excludes: ['crisis: under_siege'] }, // W2-FIX-DATA: the carts a siege stops (c22)
-      { text: (n) => `${n} lives by its forges: the clang of iron is in every lane.`, needs: ['tier: ≥ town'] },
+      { text: (n) => `The hammering of the forges echoes through all of ${n}.`, needs: ['institution: smith', 'tier: ≥ town'] }, // W2-FIX-DATA-12 item 3: no claim the place lives by them (false in 16 of 16: metalwork 3 to 12% of the income, never first)
+      { text: () => 'Forge smoke hangs over everything here, and the ring of the anvils never quite stops.', needs: ['institution: smith', 'tier: ≥ town'] }, // W2-FIX-DATA-12 item 3: the anvils stand on the roster (a town with only a Smelter printed it)
+      { text: () => 'Racks of new ironwork stand outside the workshops, waiting for the carts.', needs: ['institution: smith', 'tier: ≥ town'], excludes: ['crisis: under_siege'] }, // W2-FIX-DATA: the carts a siege stops (c22)
+      { text: (n) => `The clang of iron from the smithies carries down the lanes of ${n}.`, needs: ['institution: smith', 'tier: ≥ town'] }, // W2-FIX-DATA-12 item 3 (the reader's A04): no claim the place lives by them, and a smith stands
     ] },
   // ARMS speaks only where the settlement EXPORTS weapons or armour (no `lines`, so it is never a candidate on a
   // smithy alone): the owner's own example, "if a big part of their output is in making military weapons".
