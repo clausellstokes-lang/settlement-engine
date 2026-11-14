@@ -16,6 +16,7 @@ import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { edged } from '../../design/edgedBox.js';
+import { governingModifierWordsOf } from '../../domain/display/governingModifierWords.js';
 
 // Tier 7.19 — `second` was the per-file body-copy alias for '#6b5340'.
 // Routing it through `BODY` from tabConstants centralises future contrast
@@ -45,7 +46,7 @@ function characterSentence(r) {
 }
 
 // ── Stacked faction power bar ─────────────────────────────────────────────────
-function FactionBar({ factions }) {
+function FactionBar({ factions, governingWords = '' }) {
   // THE PHONE CHROME FLOOR — the modifier chips and the share figure, above the
   // empty-roster early return so the hook order is stable.
   const mobile = useIsMobile();
@@ -79,7 +80,9 @@ function FactionBar({ factions }) {
       <div style={{display:'flex',flexDirection:'column',gap:5}}>
         {factions.map((f,i)=>{
           const c=FACTION_COLORS[i%FACTION_COLORS.length];
-          const mods=(f.modifiers||[]).concat(f.modifier?[f.modifier]:[]);
+          // POWERS-15 (REVIEW-POWERS-5 A7; one reader for one fact on every surface): the ruling power's stored modifier
+          // key is never printed; its chip is the Power tab's own words (display/governingModifierWords.js), or none
+          const mods=(f.modifiers||[]).concat(f.modifier&&f.isGoverning&&governingWords?[governingWords]:[]);
           return <div id={entityAnchor('faction', { id:f.id || f.faction, name:f.faction })} key={i} style={{display:'flex',alignItems:'center',gap:7,scrollMarginTop:ANCHOR_OFFSET}}>
             <div style={{width:10,height:10,background:c,flexShrink:0}}/>
             {/* ODQ §934.23 — no clamp on dossier text: a faction name is generated and has no provable width, so the legend row wraps it rather than truncating the body it names. */}
@@ -245,7 +248,7 @@ function SummaryTab({ settlement:r }) {
       {/* ── POWER + CONFLICTS ────────────────────────────────────────────── */}
       <div style={{background:swatch['#F4F6FD'],border:'1px solid #b8c8e8',borderLeft:'3px solid #2a3a7a',padding:'12px 14px',marginBottom:12}}>
         <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:800,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:10}}>Power & Conflict</div>
-        <FactionBar factions={allFactions.slice(0,5)}/>
+        <FactionBar factions={allFactions.slice(0,5)} governingWords={governingModifierWordsOf(r)}/>
         {ps?.recentConflict&&<p style={{fontSize:proseFontSize(FS.xs, isMobile),color:swatch.danger,marginTop:8,lineHeight:1.4}}>{ps.recentConflict}</p>}
         {allConflicts.length>0&&<>
           <div style={{height:1,background:swatch['#C0CCE8'],margin:'10px 0'}}/>
