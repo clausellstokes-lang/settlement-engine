@@ -394,7 +394,7 @@ export function generateFoodSecurity(tier, institutions, config, storesShare = 1
     failedSource,
     famineCutPct: stressFamine ? Math.round((1 - famineKeeps) * 100) : 0,
     foodwaysLine: composeFoodwaysLine({
-      sources: foodSources,
+      sources: sourcesAFamineLeaves(foodSources, failedSource), // UPKEEP-16 (n): the table does not rest on the source the famine failed
       cultureLines: cultureFoodwaysOf(config.cultureProfileKey, { tier, population, institutions, config }), // UPKEEP-9: a declared row is kept only where it holds
       identity: `${tier}|${population}|${terrain}|${route}|${config.cultureProfileKey || ''}`,
       market: hasMarket, // COHERENCE-AGREE-3 (F6): the market home (facts/market.js), read by foodLandOf
@@ -540,4 +540,19 @@ function cultureFoodwaysOf(key, record) {
 function tierDefaultPop(tier) {
   const range = POPULATION_RANGES[/** @type {keyof typeof POPULATION_RANGES} */ (tier)];
   return range ? Math.round((range.min + range.max) / 2) : POPULATION_RANGES.village.min;
+}
+
+/**
+ * THE SOURCES A FAMINE LEAVES THE TABLE (UPKEEP-16; the chair's ruling (n) of 2026-11-14): the stored foodways line is
+ * composed from the place's own sources, and under a famine it was handed the very source the famine failed, so a
+ * famine town's table "rested on" the harvest that had failed (66 of the capacity reader's 972). The composer is
+ * handed the sources less the failed one; grain and the mill fail together (the mill grinds the grain). A famine that
+ * fails a place's only source leaves none, and the composer's own no-source sentence speaks. Pure; no draw.
+ * @param {ReadonlyArray<string>} sources the food record's sources @param {string | null} failed its `failedSource`
+ * @returns {string[]}
+ */
+function sourcesAFamineLeaves(sources, failed) {
+  if (!failed) return [...sources];
+  const lost = failed === 'grain' || failed === 'mill' ? ['grain', 'mill'] : [failed];
+  return sources.filter((s) => !lost.includes(s));
 }
