@@ -1415,6 +1415,7 @@ the table is kept in probes/POWERS-13/rows13-at-609ff6472.txt). A town PRINTING 
 count: each row is false only where its fact is against it, still to be read per row.
 | towns | row (writer) |
 |---|---|
+| (chair) | NEW1 the governance label against the Defense verdict | CURED 2768c53c7: 11 -> 0 by the door |
 | 587 | ww#375 "Free of the criminals. Nobody at the head of ..." (dmPowerLines.js) |
 | 120 | ww#850 "Holds the title; the decisions that matter are made by ..." (powerStrata.js) |
 | 104 | ww#440 "Merchants with local reach; a consistent civic presence ..." (rulingStructure.js) |
@@ -1493,6 +1494,9 @@ Pushes by docs/chair/2026-11-14/probes/POWERS-14/push.sh (POWERS-11's, pointed a
 - NO whole suite, NO final statement. Never rewrite a commit at or below 48839038f. Change only files this lane holds (by content).
 - NAMED, NOT MINE: the 189 stored modifier keys; #312 and ww#656, the PDF's and the Summary tab's chips (FOR THE JOIN); the card's
   title on a man (PARKED); the writer-reach re-bank and the declaration pass's rows.
+- THE CHAIR, 2026-11-14 09:49 UTC: one row added at the top of the list after the row in hand, the page census's NEW1 (copied
+  whole under its item in P8.1): ONE LADDER FOR ONE WORD; count it by the census's door before and after; a declared move in
+  those towns only; red first, three towns read; STOP if the record's label is not in reach.
 
 ## P8.1 Item by item
 - **#101 THE COACHING INN UNDER A CRISIS: CURED, de125480f** (the lighting census re-taken by its ritual, 67169e8b4: files 3274 ->
@@ -1545,23 +1549,64 @@ Pushes by docs/chair/2026-11-14/probes/POWERS-14/push.sh (POWERS-11's, pointed a
   - Gates: as for #101 (eslint 0; both type gates exit 0; presumed things fresh 10 / stale 0; fact layers the 2 named rises;
     observed shapes 0; the grid 0); the 12 test files naming patronage.js, the hall lines or the DM view: 171 passed.
 
+- **NEW1 THE GOVERNANCE LABEL AGAINST THE DEFENSE VERDICT (the chair's row, 09:49 UTC): CURED, 2768c53c7 (the lighting census re-taken, 535b798c5: files 3276 -> 3277).**
+  - THE CHAIR'S RULING, copied: "THE PAGE CENSUS'S ROW NEW1 ('the governance label against the Defense verdict') fires in 12 of
+    the 720 on the joined tree (11 banked; the defence lane's rating move exposed three more: r2r-city-9, r2r-town-59,
+    r2r-village-8). THE WRITER IS THIS LANE'S FILE: src/generators/power/governanceNarrative.js takes its defence word off A
+    SECOND LADDER of its own ... RULED: ONE LADDER FOR ONE WORD: the governance text reads the record's own readiness label (the
+    fact the Defense tab prints), never a ladder of its own. Count it ... before and after: -> 0; a declared move of the
+    governance text in those towns only (say the families); red first, three towns read. If the record's label is not in reach
+    where that function runs: STOP with what is in reach."
+  - IN REACH: the power step runs before the defence profile (its own comment), but steps/assembleSettlement.js replays it after
+    with `defenseLabel: defenseProfile.readiness.label` (economyReconciliation.js :: projectPower -> rulingStructure.js
+    `projection.defenseLabel`). The replay's stability was thrown away: reconcilePowerStructure copied factions, government,
+    legitimacy and relationships back, not stability. The cure: deriveBaselineStability reads the label (no "underdefended" over
+    Defensible / Well-Defended / Fortress; no "strong military presence" over Undefended / Lightly Defended / Vulnerable;
+    absent, neither refused), buildGovernanceLabels and rulingStructure.js hand it in, and reconcilePowerStructure keeps the
+    replay's stability. militaryEffective still decides the word where the label does not contradict it (the move is "those
+    towns only", as ruled).
+  - COUNT, the door on the 720 (`page-census.mjs --workers=2`): NEW1 at a5560a938 11 (the register banked 11); at 2768c53c7 (the lighting census re-taken, 535b798c5: files 3276 -> 3277) 0, exit 0; the register lowered by the door (`--from=<the run> --shrink`, 11 -> 0); the grid 0 falls.
+  - DECLARED MOVE (fd14, the 720 against #101's births): 11 births, ONLY powerStructure.stability: 6 "Vulnerable (prosperous but
+    underdefended)" -> "Stable" (r2r-city-32, r2r-city-41 Fortress; r2r-town-29, -30, -46, -47 Defensible); 4 "Ordered (strong
+    military presence); monsters on the roads" -> "Tense — regional monster threat" (r2r-hamlet-18, -3, -11, r2r-village-6, Lightly
+    Defended); r2s-infiltrated-hamlet-0 (Vulnerable) -> "Vulnerable (decisions shaped from outside); monsters on the roads". The
+    joined tree's three (r2r-city-9, r2r-town-59, r2r-village-8) are the defence lane's move and do not fire here: the cure reads
+    the label, so they fall at the join with it.
+  - READ ON THE PAGE (census2 render at the cure): r2r-city-32 "Governed by Arcane Council · Stable" beside Defense Fortress (a
+    city, the largest size the row reaches); r2r-town-29 "· Stable" beside Defensible; r2r-hamlet-18 "· Tense — regional monster
+    threat" beside Lightly defended (a hamlet, the smallest); r2s-infiltrated-hamlet-0 "· Vulnerable (decisions shaped from
+    outside); monsters on the roads" beside Vulnerable (the word is the ruler's, not the walls'). No siege, famine or occupation
+    cell carries the row (those crises' rungs override the baseline). No line new or reworded.
+  - Guard: tests/generators/power/stabilityReadsReadiness.test.js (five contradicted towns; guard towns r2r-city-21 Fortress
+    "strong military presence", r2r-village-0 Vulnerable "underdefended", kept). Red at a5560a938 on the five; the plant (the
+    replay's stability not kept) reds the same five. Holders: none for the three files (economyReconciliation.js equals the line's).
+  - Gates: eslint 0; both type gates exit 0; presumed things fresh 10 / stale 0; fact layers the 2 named rises; observed shapes
+    0; the grid 0. The 45 files naming the three: 7 red in 5 files, each red at a5560a938 too (classed in the detached /home/user/wtbefore): espionageDormancyFence's driven golden; pipelinePinnedChoosers A1; powerEconomyFreshness A4; proseWiringCensus (the dry read, the committed census); editCorpusRatchet A3, A7. Carried, for the merge seat.
+
 ## P8.2 EVERY NEW OR CHANGED LINE, with the towns it was read in (the owner's veto list)
 - No line new or reworded. RE-ROUTED (#101), each read on its page at de125480f: under a siege the keeper now prints "Pleasant, but
   asks where you are going and when, and writes it down." (r2s-under_siege-town-1, r2s-under_siege-metropolis-0,
   r2s-under_siege-metropolis-3, r2r-metropolis-14, bar0-city-under_siege+famine-rand-1, a siege + famine); under a famine "Sells
   places on the coach and beds by the night; asks for payment first." (r2s-famine-city-1, r2s-famine-metropolis-3). The coaching inn
   stands from the town up: the smallest town, the largest metropolis.
+- RE-ROUTED (NEW1), read at 2768c53c7: the Overview's head "Governed by <ruler> · Stable" (six towns beside Fortress or
+  Defensible), "· Tense — regional monster threat" (four hamlets and a village beside Lightly defended), "· Vulnerable (decisions
+  shaped from outside); monsters on the roads" (r2s-infiltrated-hamlet-0): existing rungs of the same ladder, each read on its
+  page (r2r-city-32, r2r-town-29, r2r-hamlet-18, r2s-infiltrated-hamlet-0).
 - RE-ROUTED (ww#375), read at d9bb4085d: "Free of the criminals. The head, the second and the third of <ruler> make their own
   decisions; none of them takes orders from the criminals." now prints beside "Criminal structure: Organized syndicate" in 128 towns,
   under the heading "The hall": r2r-town-44 (a town, the smallest size it reaches), r2r-city-0, r2s-occupied-town-1 (an occupation),
   r2s-famine-metropolis-1 (a famine), r2s-under_siege-metropolis-0 (a siege, a metropolis, the largest).
 
 ## P8.3 FOR THE JOIN (this seat's)
-- (none yet)
+- NEW1's three joined-tree towns (r2r-city-9, r2r-town-59, r2r-village-8, exposed by the defence lane's rating move) do not
+  fire on this lane; the cure reads the readiness label, so they fall with it at the join: re-count NEW1 there by the door.
+- The page-census register's NEW1 row lowered to 0 here (2768c53c7); the register is shared: re-taken by its door at the join.
 
 ## P8.4 THE TABLE, brought current (P7.4's rows; each read true, cured, or left)
 | towns at 609ff6472 | row | state |
 |---|---|---|
+| (chair) | NEW1 the governance label against the Defense verdict | CURED 2768c53c7: 11 -> 0 by the door |
 | 587 | ww#375 "Free of the criminals. Nobody at the head of ..." | CURED d9bb4085d: 128 false (beside a syndicate) -> 0; 459 true, kept |
 | 120 | ww#850 "Holds the title; the decisions that matter are made by ..." | left |
 | 104 | ww#440 "Merchants with local reach; ..." | left |
@@ -1583,14 +1628,25 @@ Pushes by docs/chair/2026-11-14/probes/POWERS-14/push.sh (POWERS-11's, pointed a
 ## P8.5 WHAT IS LEFT, line by line
 - ww#375's label "Free of the criminals" stays beside the hall-only line in the syndicate towns: it labels the hall (its heading),
   true; for the owner's veto if it reads as the town.
-- P8.4's rows marked left, widest first by FALSE count (each read on its page first); L4; P4.8's other lines; P4.7's and P5.10's rows.
+- P8.4's rows marked left, widest first by FALSE count, each read on its page first. Next by width: ww#850 (120, powerStrata.js
+  "Holds the title; the decisions that matter are made by <rival>": read whether the rival out-ranks the holder on the page);
+  ww#440 (104, claimStanding.js / rulingStructure.js "Merchants with local reach"); #17 (100, "Well-funded city watch" beside the
+  Defense tab's resource-constrained guard, and printed for a body that is not the watch: the bar's town is
+  bar0-metropolis-calm-rand-1); pf#520 (52); #26 (49, the mine captain's "Sells ore by the cart" where every deposit is
+  depleted: the same declaration table as #101, titleSecretsPresentations.js, a `needs` atom of the resource home if the
+  vocabulary has one, else PARKED with its word); then the rest.
+- L4 (refreshRelationshipProjections styles the role words with no guard; its plant `refresh-role`); the census candidate
+  (courts: P7.7 found 0 by the record's court fact; read one of its three named towns); P4.8's other lines; P4.7's and P5.10's.
 - The two #101 candidates of P8.1 (the keeper's present-tense travel secret under a siege; the innkeeper's road gossip).
 
 ## P8.6 THIS SEAT'S INSTRUMENTS (docs/chair/2026-11-14/probes/POWERS-14/)
 - b14.sh <tree> <out> [seeds] [n]: the 720 (or a list) born in the census shape, the whole record per birth (about 30 s at n=4);
   q.mjs <births> <expr over (s,key)>: rows of a births run; fd14.mjs <a> <b>: the field diff by path, births and leaves;
   atom.mjs: the declaration rule under each crisis; hall375.mjs <tree> <births>: the hall's line by rung and crime structure;
-  three375.mjs / three375b.mjs: the hall's ranked three under each line; crime375.mjs: the crime structure of the none-rung towns; holders.sh <file>...: the lanes holding a file by content (fetch
+  three375.mjs / three375b.mjs: the hall's ranked three under each line; crime375.mjs: the crime structure of the none-rung towns;
+  the census door: `node scripts/census/page-census.mjs --workers=2` in a detached worktree of the base (node_modules linked) and
+  in p14, each through gate-tail to a file (about 25 minutes with a suite beside it); its run dir is the newest /tmp/page-census-*,
+  which `--from=<dir> --shrink` lowers from; holders.sh <file>...: the lanes holding a file by content (fetch
   `+refs/heads/lane/*:refs/remotes/origin/lane/*` first); gates.sh <tree> <logdir> <files>: eslint, presumed things, both type
   gates, the grid, fact layers, observed shapes, each through gate-tail; push.sh. Pages: CENSUS-2's census2.sh with --seeds
   (inn.seeds, inn6.seeds) and REVIEW-BAR-0's render2.sh for bar0- seeds, both archived from their lanes to /home/user/probes/.
