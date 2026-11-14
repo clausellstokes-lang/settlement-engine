@@ -670,3 +670,64 @@ merges); the rows leave by --shrink then. Your statement says the register fell 
 **CORRECTED OUT LOUD.** 6d4627205's body says "10 rows fell … the first register's included". Exactly: 11 rows fell at
 acee99f3a: 9 arm-1 rows of the widened register, 1 arm-1 row of the first register (both by `--shrink`) and 1 arm-2 row
 of the first register (by `--shrink-arm2`); 10 of them arm-1 rows, the count the chair's ruling names. 3 rose here.
+
+### THE LANE'S FINAL STATEMENT (R3-CODE-C-6; code tip 6eb0dcbda, bundles b87aaa4ea; EXECUTED unless marked)
+
+**Census (CENSUS-2, `--files` the 29 lane files).** At dbe379c13 (the lane before the merge) and at the merged tip
+ff824bc36 (src = 6eb0dcbda), each from scratch, EXIT 0, 720 of 720: IDENTICAL hit for hit (0 only at tip, 0 only at
+base): a 63 (61), b 7, c 11, d 1, e 0, f 26, g 0, h 0. So the merge changed nothing the lane's files print as the
+census sees them (step 3 not re-run further), and the fifth seat's base -> tip stands: a 102 -> 63; b 7 -> 7; c 13 -> 11;
+d 0 -> 1; e 0 -> 0; f 6 -> 26; g 54 -> 0; h 0 -> 0 (d and f rises: officialsInPay.js via the earlier merge, exposure).
+Every hit read: the fifth seat's 108, above, unchanged. Limits: the dossier's views only (not the PDF, the journal,
+the Tonight sheet); it cannot see two lines disagreeing. The fresh-seed counts (the 960) are the fifth seat's, above.
+
+**Field diff, the 720 births, the line's tip 976db5b19 -> the lane's tip** (what the lane moves on top of the line):
+347 towns; every family declared by a lane commit: availableServices.criminal (name 107: 06fe8a86b 102 + 6eb0dcbda 5;
+desc 16, institution 5: 33b473879 and the sort shifts it declared); powerStructure.factionRelationships (narrative 87,
+type 24: f51767e11 59 + 476800e1d 28) and npcs.goal.* (24, the same towns' goal re-deal; one npcs[].stressNote follows
+its NPC's goal in r2s-insurgency-city-1); history plot hooks (historicalEvents 73, currentTensions 21: 6e658915a,
+a4897beb6); structuralViolations[].reason 54 (cdf84d431, 0804874b0); resourceAnalysis.exports (product 40, reason 14:
+9a3239ae7); foodways line and its copy 29 (c61b61434); economicViability (plotHooks 23 + 14, summary 4, a category 1:
+0b3ce25a3); generationCoherenceReceipt 6 (a4897beb6). Display-only commits: 0 records moved.
+
+**Instruments of point 49 at the tip:** presumed things `--check` exit 0, walker 43/43 (3 rows re-keyed by the ruling;
+the widened and first registers fell by 11 rows, 10 of them arm 1, and rose by 3); fact layers 0 rises 0 falls;
+observed shapes, writer-reach door exit 0; page census (720) at or under its register, grid 0 falls; lighting census
+re-taken twice by ritual, green; tuning inventory green.
+
+**The whole suite, six vitest shards at ff824bc36** (refs and local config unchanged across it): 39,271 tests, 41 red,
+145 skipped. Classed (each red file re-run at 976db5b19 and at dbe379c13):
+- 7 the bundles (engineBundleReplay 2, engineServiceCore, engineServiceStoreParity, aiGroundingBundle freshness,
+  edgeSharedBundleReproducibility 2): CURED by b87aaa4ea, 59 of 59 bundle tests green at the committed tree.
+- 14 red at the line's own tip too (the line's carried set): dossierProseManifest 3, proseFamilyContract.walker 5,
+  landingFixtureFreshness 2, siteCoherenceRatchet C1, foundingWorldBones, newsHeadlineContract.walker and
+  newsVoiceContract.walker (each fails to run).
+- 16 golden pins moved by the lane's declared families (red at dbe379c13 as here, green at the line's tip):
+  generatorGoldenMaster, espionageDormancyFence's driven golden, townCartographyCalibration W2/W8, and twelve
+  "the golden corpus is byte-identical" pins (the shift record names them). The golden door is the merge seat's.
+- 4 WALKERS red at dbe379c13 and here, green at the line's tip: THE LANE'S, NOT CURED (below).
+
+**Draft shift record:** docs/chair/2026-11-13/R3-CODE-C-shift-record.DRAFT.json (MOVED by measure:
+generator-golden-master, espionage-dormancy-fence, cartography-calibration-corpus; UNMOVED: pdf golden, herald desk,
+preset lighting witness; dossier-prose-manifest red at both trees, its movement UNMEASURED).
+
+**New words of the whole lane** (for the owner's veto): the third seat's (above, "New wording"), the fifth seat's
+(bbeb95b73 and b0be6de8d bodies), and this seat's: none (6eb0dcbda uses "Fencing stolen goods", already the row's name).
+
+**FOR THE JOIN:** (1) the third seat's house label in "Who answers to whom" (above); (2) crisisHooks.js houseInProse
+reads rb's institutionHouseLabel (the fifth seat's); (3) the chair's 04:05Z ruling, condition 4: the vantage table and
+the validator's reasons go through a draw door; the three `after-base: r3-code-c` rows leave by --shrink then.
+
+### HAND BACK AT THE COUNT — WHAT IS LEFT (not started; nothing changed for the successor)
+
+1. **Four walkers red at the lane's tip AND at dbe379c13, green at the line's tip 976db5b19 — the lane's to cure
+   through their doors or to name** (read none of them; the chair's books give each door): tests/lint/
+   negativeAssertionAnchor.walker.test.js ("no NEW un-anchored negative assertion": a lane test file, likely one of
+   the five new ones or r3cRekeyedLinesTrue's? the latter came after dbe379c13, so at least one predates it);
+   tests/lint/poolDominance.walker.test.js ("no ceiling sits loose above its measure": a lane cure lowered a pool's
+   count; its door lowers the ceiling); tests/lint/writerReach.walker.test.js 2 (the frozen shapesDigest; the lit
+   arm): the lane's declared families change the walker corpus's shapes.
+2. dossier-prose-manifest: compare its failure output at 976db5b19 and at the tip, for the shift record.
+3. Then the one message to the chair with the statement.
+Instruments, re-made in a minute: probe scripts in this seat's scratchpad are gone with it; the census command is in
+the brief; field diff = births.mjs at two trees + a recursive JSON compare; reds = each shard's `--reporter=json`.
