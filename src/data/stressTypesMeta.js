@@ -86,7 +86,7 @@ export const STRESS_TYPE_META = {
   slave_revolt: {
     label: 'Slave Revolt',
     historyColour: 'political',
-    viabilityNote: 'Owners keep their gangs only on work they can watch, less gets made, and everyone who keeps order is busy containing the revolt.',
+    viabilityNote: 'Owners keep their gangs only on work they can watch, and less gets made while the revolt lasts.',
   },
   wartime: {
     label: 'Wartime',

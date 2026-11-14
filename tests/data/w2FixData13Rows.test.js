@@ -54,9 +54,21 @@ describe('W2-FIX-DATA-13: the measured rows in the data lane\'s files', () => {
       const town = bornCensus(seed);
       const effects = ['historicalEvents', 'currentTensions'].flatMap((k) => (town.history?.[k] || []).flatMap((/** @type {any} */ e) => e.lastingEffects || []));
       expect(effects.filter((line) => SMALL.test(String(line))), `${seed} (${town.tier})`).toEqual([]);
+      expect(effects.some((line) => /^(Newcomers and the old families|The merchant families and the labouring families) still keep apart$/.test(String(line))), `${seed} keeps the event's effect in its own words`).toBe(true);
     }), 'no lasting effect below a town names a district, a quarter or a ward');
     const guard = JSON.stringify(bornCensus('r2r-town-1').history);
     expect(guard).toContain('Newcomer and old-family districts remain socially distinct');
     expect(guard).toContain("The merchant quarter and the labourers' quarter remain walled apart");
+  }, 120_000);
+
+  // R3C-REVOLTNOTE (the chair's 13:01): the slave revolt's viability note named "everyone who keeps order" in 11 of the
+  // 24 revolt towns, every one of the 11 holding no force (r2s-slave_revolt-thorp-0, -thorp-1, -hamlet-0).
+  test('R3C-REVOLTNOTE: the slave revolt\'s viability note names no keepers of order', () => {
+    expectNoSeedFailures(collectSeedFailures(['r2s-slave_revolt-thorp-0', 'r2s-slave_revolt-thorp-1', 'r2s-slave_revolt-hamlet-0'], (seed) => {
+      const town = bornCensus(seed);
+      const notes = [town.stress, town.stressors].flat().filter(Boolean).map((/** @type {any} */ c) => String(c.viabilityNote || ''));
+      expect(notes.some((n) => /^Owners keep their gangs/.test(n)), `${seed} prints the revolt's note`).toBe(true);
+      expect(notes.filter((n) => /keeps? order/i.test(n)), seed).toEqual([]);
+    }), 'no revolt note names keepers of order');
   }, 120_000);
 });

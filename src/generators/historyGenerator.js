@@ -330,7 +330,7 @@ const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}, descS
     name: eventTemplate.name || EVENT_TYPE_NAMES[eventTemplate.type] || 'The Event',
     description,
     severity,
-    lastingEffects: sizedLastingEffects(selectedEffects, availableEffects, hookFacts), // W2-FIX-DATA-13: an effect that names a district or a quarter is a town's (draw-free)
+    lastingEffects: sizedLastingEffects(selectedEffects, hookFacts), // W2-FIX-DATA-13: an effect that names a district or a quarter is a town's (draw-free)
     plotHooks: selectedHooks,
   };
 };
@@ -585,7 +585,7 @@ const buildHistoricalEvent = (
       // CENSUS-3d unit 6: a tension prints its template's whole hook list (kind A), so the list is
       // filtered by the record (a refused row leaves it) and stored as text; a list that declares
       // nothing is copied unchanged.
-      ...(Array.isArray(tension.plotHooks) ? { plotHooks: filterDeclared(tension.plotHooks, { facts: hookFacts, poolId: `historyData:HISTORICAL_EVENTS_DATA.plotHooks:${tension.type}`, surface: 'history', drawKind: 'A' }).map(lineText) } : {}), ...(Array.isArray(tension.lastingEffects) ? { lastingEffects: sizedTensionEffects(tension.lastingEffects, hookFacts) } : {}), // W2-FIX-DATA-13: the whole list, a district's or a quarter's effect left out below a town
+      ...(Array.isArray(tension.plotHooks) ? { plotHooks: filterDeclared(tension.plotHooks, { facts: hookFacts, poolId: `historyData:HISTORICAL_EVENTS_DATA.plotHooks:${tension.type}`, surface: 'history', drawKind: 'A' }).map(lineText) } : {}), ...(Array.isArray(tension.lastingEffects) ? { lastingEffects: sizedLastingEffects(tension.lastingEffects, hookFacts) } : {}), // W2-FIX-DATA-13: the whole list, a district's or a quarter's effect left out below a town
     }))
     .filter(worldLaw.allowsHistoryEvent);
 };
@@ -1284,4 +1284,4 @@ function sizedHistoryText(text, facts) {
 import { admittedResourceEvent, resourceEventAdmitted } from './history/resourceEventAdmission.js';
 
 // W2-FIX-DATA-13 (the chair's 12:11 ruling): a lasting effect that names a district or a quarter is a town's (draw-free).
-import { sizedLastingEffects, sizedTensionEffects } from './history/sizedLastingEffects.js';
+import { sizedLastingEffects } from './history/sizedLastingEffects.js';

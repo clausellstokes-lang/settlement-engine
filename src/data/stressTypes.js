@@ -156,9 +156,11 @@ export const STRESS_TYPE_MAP = {
       "The revolt's leadership has demands. Some of them are negotiable. The governing power has not admitted this publicly, and one of them is attempting to open a back channel.",
     // R-U (CENSUS-2d; the chair's answer 2 to CENSUS-2c): presumes only the enslaved and their revolt.
     // "The slave market's commercial operations are suspended." presumed a slave market, which has
-    // no fact home (`institution: slave market` is listed under "needs a home").
+    // no fact home (`institution: slave market` is listed under "needs a home"). W2-FIX-DATA-13 (the chair's 13:01, R3C-REVOLTNOTE):
+    // "everyone who keeps order is busy containing the revolt" named keepers of order in 11 of 24 revolt towns with no
+    // force; the note now names none (its twin, stressTypesMeta.js, the same words). VETOABLE wording.
     viabilityNote:
-      "Owners keep their gangs only on work they can watch, less gets made, and everyone who keeps order is busy containing the revolt.",
+      "Owners keep their gangs only on work they can watch, and less gets made while the revolt lasts.",
     historyColour: "political",
   },
   wartime: {
