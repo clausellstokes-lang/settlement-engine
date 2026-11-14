@@ -1,0 +1,7 @@
+rw3-hamlet-under_siege-1
+rw3-town-under_siege+famine-1
+rw3-village-famine-1
+rw3-city-wartime-1
+rr2s-thorp-calm-rand-1
+rr2s-thorp-famine-rand-1
+rr2s-village-famine-rand-1

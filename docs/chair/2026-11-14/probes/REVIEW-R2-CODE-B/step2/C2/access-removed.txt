@@ -1,0 +1,337 @@
+r2r-thorp-17|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2r-thorp-17|thorp|famine|lever|Access to external mill
+r2r-thorp-17|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Household Council loses most, because its own people feel the crisis first.
+r2r-thorp-38|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2r-thorp-38|thorp|famine|lever|Access to external mill
+r2r-thorp-38|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Household Council loses most, because its own people feel the crisis first.
+r2r-thorp-41|thorp|plague_onset|lever|Access to parish church
+r2r-thorp-46|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2r-thorp-46|thorp|famine|lever|Access to external mill
+r2r-thorp-46|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Household Council loses most, because its own people feel the crisis first.
+r2r-thorp-54|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2r-thorp-54|thorp|famine|lever|Access to external mill
+r2r-thorp-54|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+r2r-hamlet-16|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2r-hamlet-16|hamlet|famine|lever|Access to external mill
+r2r-hamlet-16|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+r2r-hamlet-24|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2r-hamlet-24|hamlet|famine|lever|Access to external mill
+r2r-hamlet-24|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Headman's Authority loses most, because its own people feel the crisis first.
+r2r-hamlet-28|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2r-hamlet-28|hamlet|famine|lever|Access to external mill
+r2r-hamlet-28|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+r2s-famine-thorp-0|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-famine-thorp-0|thorp|famine|lever|Access to external mill
+r2s-famine-thorp-0|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Household Council loses most, because its own people feel the crisis first.
+r2s-famine-thorp-1|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-famine-thorp-1|thorp|famine|lever|Access to external mill
+r2s-famine-thorp-1|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Headman's Authority loses most, because its own people feel the crisis first.
+r2s-famine-thorp-2|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-famine-thorp-2|thorp|famine|lever|Access to external mill
+r2s-famine-thorp-2|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+r2s-famine-thorp-3|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-famine-thorp-3|thorp|famine|lever|Access to external mill
+r2s-famine-thorp-3|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Household Council loses most, because its own people feel the crisis first.
+r2s-famine-hamlet-0|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-famine-hamlet-0|hamlet|famine|lever|Access to external mill
+r2s-famine-hamlet-0|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+r2s-famine-hamlet-1|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-famine-hamlet-1|hamlet|famine|lever|Access to external mill
+r2s-famine-hamlet-1|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Free Elder Council loses most, because its own people feel the crisis first.
+r2s-famine-hamlet-2|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-famine-hamlet-2|hamlet|famine|lever|Access to external mill
+r2s-famine-hamlet-2|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Feudal Stewardship loses most, because its own people feel the crisis first.
+r2s-famine-hamlet-3|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-famine-hamlet-3|hamlet|famine|lever|Access to external mill
+r2s-famine-hamlet-3|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Household Council loses most, because its own people feel the crisis first.
+r2s-occupied-thorp-1|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-occupied-thorp-1|thorp|famine|lever|Access to external mill
+r2s-occupied-thorp-1|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+r2s-occupied-hamlet-0|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-occupied-hamlet-0|hamlet|famine|lever|Access to external mill
+r2s-occupied-hamlet-0|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+r2s-occupied-hamlet-1|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-occupied-hamlet-1|hamlet|famine|lever|Access to external mill
+r2s-occupied-hamlet-1|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Headman's Authority loses most, because its own people feel the crisis first.
+r2s-recently_betrayed-hamlet-2|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-recently_betrayed-hamlet-2|hamlet|famine|lever|Access to external mill
+r2s-recently_betrayed-hamlet-2|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Headman's Authority loses most, because its own people feel the crisis first.
+r2s-plague_onset-thorp-2|thorp|plague_onset|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-plague_onset-thorp-2|thorp|plague_onset|lever|Access to parish church
+r2s-plague_onset-thorp-2|thorp|plague_onset|chook|The outbreak turns on the access to a house of worship: whoever wins it over decides how the outbreak goes.
+r2s-plague_onset-hamlet-0|hamlet|plague_onset|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-plague_onset-hamlet-0|hamlet|plague_onset|lever|Access to parish church
+r2s-plague_onset-hamlet-0|hamlet|plague_onset|chook|The outbreak turns on the access to a house of worship: whoever wins it over decides how the outbreak goes.
+r2s-plague_onset-hamlet-1|hamlet|plague_onset|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-plague_onset-hamlet-1|hamlet|plague_onset|lever|Access to parish church
+r2s-plague_onset-hamlet-1|hamlet|plague_onset|chook|The outbreak turns on the access to a house of worship: whoever wins it over decides how the outbreak goes.
+r2s-plague_onset-hamlet-2|hamlet|plague_onset|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-plague_onset-hamlet-2|hamlet|plague_onset|lever|Access to parish church
+r2s-plague_onset-hamlet-2|hamlet|plague_onset|chook|The outbreak turns on the access to a house of worship: whoever wins it over decides how the outbreak goes.
+r2s-plague_onset-hamlet-3|hamlet|plague_onset|lever|Access to parish church
+r2s-succession_void-thorp-0|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-succession_void-thorp-0|thorp|famine|lever|Access to external mill
+r2s-succession_void-thorp-0|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Household Council loses most, because its own people feel the crisis first.
+r2s-succession_void-thorp-1|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-succession_void-thorp-1|thorp|famine|lever|Access to external mill
+r2s-succession_void-thorp-1|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+r2s-insurgency-hamlet-0|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-insurgency-hamlet-0|hamlet|famine|lever|Access to external mill
+r2s-insurgency-hamlet-0|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Headman's Authority loses most, because its own people feel the crisis first.
+r2s-insurgency-hamlet-2|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-insurgency-hamlet-2|hamlet|famine|lever|Access to external mill
+r2s-insurgency-hamlet-2|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Feudal Stewardship loses most, because its own people feel the crisis first.
+r2s-religious_conversion-thorp-0|thorp|religious_conversion|lever|Access to parish church
+r2s-religious_conversion-thorp-0|thorp|religious_conversion|chook|The conversion turns on the access to a house of worship: if it gives way, Feudal Stewardship loses most, because its own people feel the crisis first.
+r2s-religious_conversion-thorp-1|thorp|religious_conversion|lever|Access to parish church
+r2s-religious_conversion-thorp-1|thorp|religious_conversion|chook|The conversion turns on the access to a house of worship: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+r2s-religious_conversion-thorp-2|thorp|religious_conversion|lever|Access to parish church
+r2s-religious_conversion-thorp-2|thorp|religious_conversion|chook|The conversion turns on the access to a house of worship: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+r2s-religious_conversion-hamlet-0|hamlet|religious_conversion|lever|Access to parish church
+r2s-religious_conversion-hamlet-0|hamlet|religious_conversion|chook|The conversion turns on the access to a house of worship: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+r2s-religious_conversion-hamlet-1|hamlet|religious_conversion|lever|Access to parish church
+r2s-religious_conversion-hamlet-2|hamlet|religious_conversion|lever|Access to parish church
+r2s-religious_conversion-hamlet-2|hamlet|religious_conversion|chook|The conversion turns on the access to a house of worship: if it gives way, Feudal Stewardship loses most, because its own people feel the crisis first.
+r2s-religious_conversion-hamlet-3|hamlet|religious_conversion|lever|Access to parish church
+r2s-religious_conversion-hamlet-3|hamlet|religious_conversion|chook|The conversion turns on the access to a house of worship: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+r2s-wartime-thorp-2|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-wartime-thorp-2|thorp|famine|lever|Access to external mill
+r2s-wartime-thorp-2|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Headman's Authority loses most, because its own people feel the crisis first.
+r2s-wartime-hamlet-3|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-wartime-hamlet-3|hamlet|famine|lever|Access to external mill
+r2s-wartime-hamlet-3|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+r2s-mass_migration-thorp-0|thorp|mass_migration|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-mass_migration-thorp-0|thorp|mass_migration|lever|Access to parish church
+r2s-mass_migration-thorp-0|thorp|mass_migration|chook|The migration turns on the access to a house of worship: whoever wins it over decides how the migration goes.
+r2s-mass_migration-thorp-1|thorp|mass_migration|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-mass_migration-thorp-1|thorp|mass_migration|lever|Access to parish church
+r2s-mass_migration-thorp-1|thorp|mass_migration|chook|The migration turns on the access to a house of worship: whoever wins it over decides how the migration goes.
+r2s-mass_migration-thorp-2|thorp|mass_migration|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-mass_migration-thorp-2|thorp|mass_migration|lever|Access to parish church
+r2s-mass_migration-thorp-2|thorp|mass_migration|chook|The migration turns on the access to a house of worship: whoever wins it over decides how the migration goes.
+r2s-mass_migration-thorp-3|thorp|mass_migration|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-mass_migration-thorp-3|thorp|mass_migration|lever|Access to parish church
+r2s-mass_migration-thorp-3|thorp|mass_migration|chook|The migration turns on the access to a house of worship: whoever wins it over decides how the migration goes.
+r2s-mass_migration-hamlet-0|hamlet|mass_migration|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-mass_migration-hamlet-0|hamlet|mass_migration|lever|Access to parish church
+r2s-mass_migration-hamlet-0|hamlet|mass_migration|chook|In the migration, the Access to parish church holds the key to it: whoever runs it decides how the crisis goes, and nobody named here runs it.
+r2s-mass_migration-hamlet-0|hamlet|mass_migration|chook|The migration turns on the access to a house of worship: whoever wins it over decides how the migration goes.
+r2s-mass_migration-hamlet-1|hamlet|mass_migration|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-mass_migration-hamlet-1|hamlet|mass_migration|lever|Access to parish church
+r2s-mass_migration-hamlet-1|hamlet|mass_migration|chook|The migration turns on the access to a house of worship: whoever wins it over decides how the migration goes.
+r2s-mass_migration-hamlet-2|hamlet|mass_migration|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-mass_migration-hamlet-2|hamlet|mass_migration|lever|Access to parish church
+r2s-mass_migration-hamlet-2|hamlet|mass_migration|chook|In the migration, the Access to parish church holds the key to it: whoever runs it decides how the crisis goes, and nobody named here runs it.
+r2s-mass_migration-hamlet-2|hamlet|mass_migration|chook|The migration turns on the access to a house of worship: whoever wins it over decides how the migration goes.
+r2s-mass_migration-hamlet-3|hamlet|mass_migration|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+r2s-mass_migration-hamlet-3|hamlet|mass_migration|lever|Access to parish church
+r2s-mass_migration-hamlet-3|hamlet|mass_migration|chook|In the migration, the Access to parish church holds the key to it: whoever runs it decides how the crisis goes, and nobody named here runs it.
+r2s-mass_migration-hamlet-3|hamlet|mass_migration|chook|The migration turns on the access to a house of worship: whoever wins it over decides how the migration goes.
+rr3-thorp-calm-rand-0|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-calm-rand-0|thorp|famine|lever|Access to external mill
+rr3-thorp-calm-rand-0|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+rr3-thorp-under_siege-rand-3|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-under_siege-rand-3|thorp|famine|lever|Access to external mill
+rr3-thorp-under_siege-rand-3|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Household Council loses most, because its own people feel the crisis first.
+rr3-thorp-famine-rand-0|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-famine-rand-0|thorp|famine|lever|Access to external mill
+rr3-thorp-famine-rand-0|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Household Council loses most, because its own people feel the crisis first.
+rr3-thorp-famine-rand-1|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-famine-rand-1|thorp|famine|lever|Access to external mill
+rr3-thorp-famine-rand-1|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Household Council loses most, because its own people feel the crisis first.
+rr3-thorp-famine-rand-2|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-famine-rand-2|thorp|famine|lever|Access to external mill
+rr3-thorp-famine-rand-2|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+rr3-thorp-famine-rand-3|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-famine-rand-3|thorp|famine|lever|Access to external mill
+rr3-thorp-famine-rand-3|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+rr3-thorp-famine-rand-4|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-famine-rand-4|thorp|famine|lever|Access to external mill
+rr3-thorp-famine-rand-4|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Feudal Stewardship loses most, because its own people feel the crisis first.
+rr3-thorp-famine-rand-5|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-famine-rand-5|thorp|famine|lever|Access to external mill
+rr3-thorp-famine-rand-5|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+rr3-thorp-famine-port-0|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-famine-port-0|thorp|famine|lever|Access to external mill
+rr3-thorp-famine-port-0|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+rr3-thorp-famine-port-1|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-famine-port-1|thorp|famine|lever|Access to external mill
+rr3-thorp-famine-port-1|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Household Council loses most, because its own people feel the crisis first.
+rr3-thorp-indebted-rand-0|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-indebted-rand-0|thorp|famine|lever|Access to external mill
+rr3-thorp-indebted-rand-0|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Household Council loses most, because its own people feel the crisis first.
+rr3-thorp-plague_onset-rand-0|thorp|plague_onset|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-plague_onset-rand-0|thorp|plague_onset|lever|Access to parish church
+rr3-thorp-plague_onset-rand-0|thorp|plague_onset|chook|The outbreak turns on the access to a house of worship: whoever wins it over decides how the outbreak goes.
+rr3-thorp-plague_onset-rand-2|thorp|plague_onset|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-plague_onset-rand-2|thorp|plague_onset|lever|Access to parish church
+rr3-thorp-plague_onset-rand-2|thorp|plague_onset|chook|The outbreak turns on the access to a house of worship: whoever wins it over decides how the outbreak goes.
+rr3-thorp-plague_onset-rand-3|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-plague_onset-rand-3|thorp|famine|lever|Access to external mill
+rr3-thorp-plague_onset-rand-3|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Household Council loses most, because its own people feel the crisis first.
+rr3-thorp-plague_onset-rand-4|thorp|plague_onset|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-plague_onset-rand-4|thorp|plague_onset|lever|Access to parish church
+rr3-thorp-plague_onset-rand-4|thorp|plague_onset|chook|The outbreak turns on the access to a house of worship: whoever wins it over decides how the outbreak goes.
+rr3-thorp-religious_conversion-rand-1|thorp|religious_conversion|lever|Access to parish church
+rr3-thorp-religious_conversion-rand-1|thorp|religious_conversion|chook|The conversion turns on the access to a house of worship: if it gives way, Household Council loses most, because its own people feel the crisis first.
+rr3-thorp-religious_conversion-rand-2|thorp|religious_conversion|lever|Access to parish church
+rr3-thorp-religious_conversion-rand-3|thorp|religious_conversion|lever|Access to parish church
+rr3-thorp-religious_conversion-rand-3|thorp|religious_conversion|chook|The conversion turns on the access to a house of worship: if it gives way, Headman's Authority loses most, because its own people feel the crisis first.
+rr3-thorp-religious_conversion-rand-4|thorp|religious_conversion|lever|Access to parish church
+rr3-thorp-religious_conversion-rand-5|thorp|religious_conversion|lever|Access to parish church
+rr3-thorp-religious_conversion-port-1|thorp|religious_conversion|lever|Access to parish church
+rr3-thorp-religious_conversion-port-1|thorp|religious_conversion|chook|The conversion turns on the access to a house of worship: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+rr3-thorp-wartime-rand-0|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-wartime-rand-0|thorp|famine|lever|Access to external mill
+rr3-thorp-wartime-rand-0|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+rr3-thorp-mass_migration-rand-0|thorp|mass_migration|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-mass_migration-rand-0|thorp|mass_migration|lever|Access to parish church
+rr3-thorp-mass_migration-rand-0|thorp|mass_migration|chook|The migration turns on the access to a house of worship: whoever wins it over decides how the migration goes.
+rr3-thorp-mass_migration-rand-1|thorp|mass_migration|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-mass_migration-rand-1|thorp|mass_migration|lever|Access to parish church
+rr3-thorp-mass_migration-rand-1|thorp|mass_migration|chook|The migration turns on the access to a house of worship: whoever wins it over decides how the migration goes.
+rr3-thorp-mass_migration-rand-2|thorp|mass_migration|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-mass_migration-rand-2|thorp|mass_migration|lever|Access to parish church
+rr3-thorp-mass_migration-rand-2|thorp|mass_migration|chook|The migration turns on the access to a house of worship: whoever wins it over decides how the migration goes.
+rr3-thorp-mass_migration-rand-3|thorp|mass_migration|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-mass_migration-rand-3|thorp|mass_migration|lever|Access to parish church
+rr3-thorp-mass_migration-rand-3|thorp|mass_migration|chook|The migration turns on the access to a house of worship: whoever wins it over decides how the migration goes.
+rr3-thorp-mass_migration-rand-4|thorp|mass_migration|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-mass_migration-rand-4|thorp|mass_migration|lever|Access to parish church
+rr3-thorp-mass_migration-rand-4|thorp|mass_migration|chook|The migration turns on the access to a house of worship: whoever wins it over decides how the migration goes.
+rr3-thorp-under_siege+famine-rand-0|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-under_siege+famine-rand-0|thorp|famine|lever|Access to external mill
+rr3-thorp-under_siege+famine-rand-0|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+rr3-thorp-under_siege+famine-rand-1|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-under_siege+famine-rand-1|thorp|famine|lever|Access to external mill
+rr3-thorp-under_siege+famine-rand-1|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+rr3-thorp-under_siege+famine-rand-2|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-under_siege+famine-rand-2|thorp|famine|lever|Access to external mill
+rr3-thorp-under_siege+famine-rand-2|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+rr3-thorp-under_siege+famine-rand-3|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-under_siege+famine-rand-3|thorp|famine|lever|Access to external mill
+rr3-thorp-under_siege+famine-rand-3|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+rr3-thorp-under_siege+famine-rand-4|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-under_siege+famine-rand-4|thorp|famine|lever|Access to external mill
+rr3-thorp-under_siege+famine-rand-4|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Household Council loses most, because its own people feel the crisis first.
+rr3-thorp-under_siege+famine-rand-5|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-under_siege+famine-rand-5|thorp|famine|lever|Access to external mill
+rr3-thorp-under_siege+famine-rand-5|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Household Council loses most, because its own people feel the crisis first.
+rr3-thorp-under_siege+famine-port-0|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-under_siege+famine-port-0|thorp|famine|lever|Access to external mill
+rr3-thorp-under_siege+famine-port-0|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Household Council loses most, because its own people feel the crisis first.
+rr3-thorp-under_siege+famine-port-1|thorp|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-thorp-under_siege+famine-port-1|thorp|famine|lever|Access to external mill
+rr3-thorp-under_siege+famine-port-1|thorp|famine|chook|The famine turns on the access to external mill: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+rr3-hamlet-famine-rand-0|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-famine-rand-0|hamlet|famine|lever|Access to external mill
+rr3-hamlet-famine-rand-0|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Feudal Stewardship loses most, because its own people feel the crisis first.
+rr3-hamlet-famine-rand-1|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-famine-rand-1|hamlet|famine|lever|Access to external mill
+rr3-hamlet-famine-rand-1|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Free Elder Council loses most, because its own people feel the crisis first.
+rr3-hamlet-famine-rand-2|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-famine-rand-2|hamlet|famine|lever|Access to external mill
+rr3-hamlet-famine-rand-2|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Headman's Authority loses most, because its own people feel the crisis first.
+rr3-hamlet-famine-rand-3|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-famine-rand-3|hamlet|famine|lever|Access to external mill
+rr3-hamlet-famine-rand-3|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Headman's Authority loses most, because its own people feel the crisis first.
+rr3-hamlet-famine-rand-4|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-famine-rand-4|hamlet|famine|lever|Access to external mill
+rr3-hamlet-famine-rand-4|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Feudal Stewardship loses most, because its own people feel the crisis first.
+rr3-hamlet-famine-rand-5|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-famine-rand-5|hamlet|famine|lever|Access to external mill
+rr3-hamlet-famine-rand-5|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Headman's Authority loses most, because its own people feel the crisis first.
+rr3-hamlet-famine-port-0|hamlet|famine|lever|Access to external mill
+rr3-hamlet-famine-port-1|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-famine-port-1|hamlet|famine|lever|Access to external mill
+rr3-hamlet-famine-port-1|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Feudal Stewardship loses most, because its own people feel the crisis first.
+rr3-hamlet-infiltrated-rand-5|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-infiltrated-rand-5|hamlet|famine|lever|Access to external mill
+rr3-hamlet-infiltrated-rand-5|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Headman's Authority loses most, because its own people feel the crisis first.
+rr3-hamlet-plague_onset-rand-0|hamlet|plague_onset|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-plague_onset-rand-0|hamlet|plague_onset|lever|Access to parish church
+rr3-hamlet-plague_onset-rand-0|hamlet|plague_onset|chook|The outbreak turns on the access to a house of worship: whoever wins it over decides how the outbreak goes.
+rr3-hamlet-plague_onset-rand-1|hamlet|plague_onset|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-plague_onset-rand-1|hamlet|plague_onset|lever|Access to parish church
+rr3-hamlet-plague_onset-rand-1|hamlet|plague_onset|chook|The outbreak turns on the access to a house of worship: whoever wins it over decides how the outbreak goes.
+rr3-hamlet-plague_onset-rand-2|hamlet|plague_onset|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-plague_onset-rand-2|hamlet|plague_onset|lever|Access to parish church
+rr3-hamlet-plague_onset-rand-2|hamlet|plague_onset|chook|In the outbreak, the Access to parish church holds the key to it: whoever runs it decides how the crisis goes, and nobody named here runs it.
+rr3-hamlet-plague_onset-rand-2|hamlet|plague_onset|chook|The outbreak turns on the access to a house of worship: whoever wins it over decides how the outbreak goes.
+rr3-hamlet-plague_onset-rand-3|hamlet|plague_onset|lever|Access to parish church
+rr3-hamlet-plague_onset-rand-4|hamlet|plague_onset|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-plague_onset-rand-4|hamlet|plague_onset|lever|Access to parish church
+rr3-hamlet-plague_onset-rand-4|hamlet|plague_onset|chook|In the outbreak, the Access to parish church holds the key to it: whoever runs it decides how the crisis goes, and nobody named here runs it.
+rr3-hamlet-plague_onset-rand-4|hamlet|plague_onset|chook|The outbreak turns on the access to a house of worship: whoever wins it over decides how the outbreak goes.
+rr3-hamlet-plague_onset-rand-5|hamlet|plague_onset|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-plague_onset-rand-5|hamlet|plague_onset|lever|Access to parish church
+rr3-hamlet-plague_onset-rand-5|hamlet|plague_onset|chook|In the outbreak, the Access to parish church holds the key to it: whoever runs it decides how the crisis goes, and nobody named here runs it.
+rr3-hamlet-plague_onset-rand-5|hamlet|plague_onset|chook|The outbreak turns on the access to a house of worship: whoever wins it over decides how the outbreak goes.
+rr3-hamlet-plague_onset-port-0|hamlet|plague_onset|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-plague_onset-port-0|hamlet|plague_onset|lever|Access to parish church
+rr3-hamlet-plague_onset-port-0|hamlet|plague_onset|chook|The outbreak turns on the access to a house of worship: whoever wins it over decides how the outbreak goes.
+rr3-hamlet-plague_onset-port-1|hamlet|plague_onset|lever|Access to parish church
+rr3-hamlet-religious_conversion-rand-0|hamlet|religious_conversion|lever|Access to parish church
+rr3-hamlet-religious_conversion-rand-0|hamlet|religious_conversion|chook|The conversion turns on the access to a house of worship: if it gives way, Headman's Authority loses most, because its own people feel the crisis first.
+rr3-hamlet-religious_conversion-rand-1|hamlet|religious_conversion|lever|Access to parish church
+rr3-hamlet-religious_conversion-rand-1|hamlet|religious_conversion|chook|The conversion turns on the access to a house of worship: if it gives way, Feudal Stewardship loses most, because its own people feel the crisis first.
+rr3-hamlet-religious_conversion-rand-2|hamlet|religious_conversion|lever|Access to parish church
+rr3-hamlet-religious_conversion-rand-3|hamlet|religious_conversion|lever|Access to parish church
+rr3-hamlet-religious_conversion-rand-3|hamlet|religious_conversion|chook|The conversion turns on the access to a house of worship: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+rr3-hamlet-religious_conversion-rand-4|hamlet|religious_conversion|lever|Access to parish church
+rr3-hamlet-religious_conversion-rand-4|hamlet|religious_conversion|chook|The conversion turns on the access to a house of worship: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+rr3-hamlet-religious_conversion-rand-5|hamlet|religious_conversion|lever|Access to parish church
+rr3-hamlet-religious_conversion-port-0|hamlet|religious_conversion|lever|Access to parish church
+rr3-hamlet-religious_conversion-port-0|hamlet|religious_conversion|chook|The conversion turns on the access to a house of worship: if it gives way, Headman's Authority loses most, because its own people feel the crisis first.
+rr3-hamlet-religious_conversion-port-1|hamlet|religious_conversion|lever|Access to parish church
+rr3-hamlet-religious_conversion-port-1|hamlet|religious_conversion|chook|The conversion turns on the access to a house of worship: if it gives way, Household Council loses most, because its own people feel the crisis first.
+rr3-hamlet-mass_migration-rand-0|hamlet|mass_migration|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-mass_migration-rand-0|hamlet|mass_migration|lever|Access to parish church
+rr3-hamlet-mass_migration-rand-0|hamlet|mass_migration|chook|In the migration, the Access to parish church holds the key to it: whoever runs it decides how the crisis goes, and nobody named here runs it.
+rr3-hamlet-mass_migration-rand-0|hamlet|mass_migration|chook|The migration turns on the access to a house of worship: whoever wins it over decides how the migration goes.
+rr3-hamlet-mass_migration-rand-1|hamlet|mass_migration|lever|Access to parish church
+rr3-hamlet-mass_migration-rand-2|hamlet|mass_migration|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-mass_migration-rand-2|hamlet|mass_migration|lever|Access to parish church
+rr3-hamlet-mass_migration-rand-2|hamlet|mass_migration|chook|In the migration, the Access to parish church holds the key to it: whoever runs it decides how the crisis goes, and nobody named here runs it.
+rr3-hamlet-mass_migration-rand-2|hamlet|mass_migration|chook|The migration turns on the access to a house of worship: whoever wins it over decides how the migration goes.
+rr3-hamlet-mass_migration-rand-3|hamlet|mass_migration|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-mass_migration-rand-3|hamlet|mass_migration|lever|Access to parish church
+rr3-hamlet-mass_migration-rand-3|hamlet|mass_migration|chook|In the migration, the Access to parish church holds the key to it: whoever runs it decides how the crisis goes, and nobody named here runs it.
+rr3-hamlet-mass_migration-rand-3|hamlet|mass_migration|chook|The migration turns on the access to a house of worship: whoever wins it over decides how the migration goes.
+rr3-hamlet-mass_migration-rand-4|hamlet|mass_migration|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-mass_migration-rand-4|hamlet|mass_migration|lever|Access to parish church
+rr3-hamlet-mass_migration-rand-4|hamlet|mass_migration|chook|The migration turns on the access to a house of worship: whoever wins it over decides how the migration goes.
+rr3-hamlet-mass_migration-rand-5|hamlet|mass_migration|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-mass_migration-rand-5|hamlet|mass_migration|lever|Access to parish church
+rr3-hamlet-mass_migration-rand-5|hamlet|mass_migration|chook|The migration turns on the access to a house of worship: whoever wins it over decides how the migration goes.
+rr3-hamlet-mass_migration-port-0|hamlet|mass_migration|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-mass_migration-port-0|hamlet|mass_migration|lever|Access to parish church
+rr3-hamlet-mass_migration-port-0|hamlet|mass_migration|chook|The migration turns on the access to a house of worship: whoever wins it over decides how the migration goes.
+rr3-hamlet-mass_migration-port-1|hamlet|mass_migration|cast|holds the lever: Access to parish church · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-mass_migration-port-1|hamlet|mass_migration|lever|Access to parish church
+rr3-hamlet-mass_migration-port-1|hamlet|mass_migration|chook|In the migration, the Access to parish church holds the key to it: whoever runs it decides how the crisis goes, and nobody named here runs it.
+rr3-hamlet-mass_migration-port-1|hamlet|mass_migration|chook|The migration turns on the access to a house of worship: whoever wins it over decides how the migration goes.
+rr3-hamlet-under_siege+famine-rand-0|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-under_siege+famine-rand-0|hamlet|famine|lever|Access to external mill
+rr3-hamlet-under_siege+famine-rand-0|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Household Council loses most, because its own people feel the crisis first.
+rr3-hamlet-under_siege+famine-rand-1|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-under_siege+famine-rand-1|hamlet|famine|lever|Access to external mill
+rr3-hamlet-under_siege+famine-rand-1|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+rr3-hamlet-under_siege+famine-rand-2|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-under_siege+famine-rand-2|hamlet|famine|lever|Access to external mill
+rr3-hamlet-under_siege+famine-rand-2|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Headman's Authority loses most, because its own people feel the crisis first.
+rr3-hamlet-under_siege+famine-rand-3|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-under_siege+famine-rand-3|hamlet|famine|lever|Access to external mill
+rr3-hamlet-under_siege+famine-rand-3|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+rr3-hamlet-under_siege+famine-rand-4|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-under_siege+famine-rand-4|hamlet|famine|lever|Access to external mill
+rr3-hamlet-under_siege+famine-rand-4|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Feudal Stewardship loses most, because its own people feel the crisis first.
+rr3-hamlet-under_siege+famine-rand-5|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-under_siege+famine-rand-5|hamlet|famine|lever|Access to external mill
+rr3-hamlet-under_siege+famine-rand-5|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Headman's Authority loses most, because its own people feel the crisis first.
+rr3-hamlet-under_siege+famine-port-0|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-under_siege+famine-port-0|hamlet|famine|lever|Access to external mill
+rr3-hamlet-under_siege+famine-port-0|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Headman's Authority loses most, because its own people feel the crisis first.
+rr3-hamlet-under_siege+famine-port-1|hamlet|famine|cast|holds the lever: Access to external mill · whoever runs it decides how the crisis goes, and nobody named here runs it
+rr3-hamlet-under_siege+famine-port-1|hamlet|famine|lever|Access to external mill
+rr3-hamlet-under_siege+famine-port-1|hamlet|famine|chook|The famine turns on the access to external mill: if it gives way, Elder Council loses most, because its own people feel the crisis first.

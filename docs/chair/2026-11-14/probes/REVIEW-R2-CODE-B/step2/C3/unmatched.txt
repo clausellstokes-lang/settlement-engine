@@ -1,0 +1,400 @@
+r2r-city-0.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-0.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-0.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-1.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-1.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-1.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-10.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-10.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-10.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-10.txt Systems/Power :: Pooja Bakshi, the dean (Parish churches (10-30)) · brings protection and decisions · a patron no one names
+r2r-city-11.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-11.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-11.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-12.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-12.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-12.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-12.txt Systems/Power :: Tamara ibn Jubayr, the dean (Parish churches (10-30)) · brings protection and decisions · a silent partnership
+r2r-city-13.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-13.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-13.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-14.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-14.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-14.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-15.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-15.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-15.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-16.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-16.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-16.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-17.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-17.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-17.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-18.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-18.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-18.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-19.txt Summary/Crisis :: Parish churches (10-30) · held by Seanchán Ward
+r2r-city-19.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-19.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-19.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-2.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-2.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-2.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-20.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-20.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-20.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-21.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-21.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-21.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-22.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-22.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-22.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-23.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-23.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-23.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-24.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-24.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-24.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-25.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-25.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-25.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-26.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-26.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-26.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-27.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-27.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-27.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-28.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-28.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-28.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-29.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-29.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-29.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-3.txt Summary/Crisis :: Parish churches (10-30) · held by Eirenika Muzalon
+r2r-city-3.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-3.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-3.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-30.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-30.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-30.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-31.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-31.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-31.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-32.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-32.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-32.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-33.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-33.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-33.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-34.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-34.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-34.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-35.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-35.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-35.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-36.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-36.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-36.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-37.txt Summary/Crisis :: Parish churches (10-30) · held by Ahuitzotl Caan
+r2r-city-37.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-37.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-37.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-38.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-38.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-38.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-39.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-39.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-39.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-4.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-4.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-4.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-40.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-40.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-40.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-41.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-41.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-41.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-42.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-42.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-42.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-42.txt Systems/Power :: Eun Hu, the dean (Parish churches (10-30)) · brings protection and decisions · a patron no one names
+r2r-city-43.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-43.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-43.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-44.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-44.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-44.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-45.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-45.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-45.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-46.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-46.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-46.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-47.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-47.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-47.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-48.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-48.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-48.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-49.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-49.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-49.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-5.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-5.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-5.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-5.txt Systems/Power :: Arwa ibn Khalid, the dean (Parish churches (10-30)) · brings protection and decisions · a patron no one names
+r2r-city-50.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-50.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-50.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-50.txt Systems/Power :: Vibius Publicola, the dean (Parish churches (10-30)) · brings protection and decisions · a silent partnership
+r2r-city-51.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-51.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-51.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-52.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-52.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-52.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-53.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-53.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-53.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-54.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-54.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-54.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-55.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-55.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-55.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-56.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-56.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-56.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-56.txt Systems/Power :: Waltraud Pfaff, the dean (Parish churches (10-30)) · brings protection and decisions · held over them: someone they love
+r2r-city-57.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-57.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-57.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-58.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-58.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-58.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-6.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-6.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-6.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-7.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-7.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-7.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-8.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-8.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-8.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-city-9.txt Systems/Institutions :: Craft guilds (30-80)REQCrafts
+r2r-city-9.txt Systems/Institutions :: Houses of worship (10-30)REQReligious
+r2r-city-9.txt Systems/Institutions :: Housing (500-4000 households)REQInfrastructure
+r2r-hamlet-0.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-1.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-10.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-11.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-12.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-13.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-14.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-15.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-16.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-17.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-18.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-19.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-2.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-20.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-21.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-22.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-23.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-24.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-25.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-26.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-27.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-28.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-29.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-3.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-30.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-31.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-32.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-33.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-34.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-35.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-36.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-37.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-38.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-39.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-4.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-40.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-41.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-42.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-43.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-44.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-45.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-46.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-47.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-48.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-49.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-5.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-50.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-51.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-52.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-53.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-54.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-55.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-56.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-57.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-58.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-59.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-6.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-7.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-8.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-hamlet-9.txt Systems/Institutions :: Dwellings (5-25)REQInfrastructure
+r2r-metropolis-0.txt Systems/Institutions :: Craft guilds (100-150+)REQCrafts
+r2r-metropolis-0.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-0.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-0.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-0.txt Systems/Power :: Yong Bai, the dean (Parish churches (50-100+)) · brings protection and decisions · held over them: a secret
+r2r-metropolis-1.txt Systems/Institutions :: Craft guilds (100-150+)REQCraftsVulnerable
+r2r-metropolis-1.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-1.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-1.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-10.txt Systems/Institutions :: Craft guilds (100-150+)REQCraftsVulnerable
+r2r-metropolis-10.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-10.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-10.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-12.txt Systems/Institutions :: Craft guilds (100-150+)REQCrafts
+r2r-metropolis-12.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-12.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-12.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-13.txt Systems/Institutions :: Craft guilds (100-150+)REQCraftsVulnerable
+r2r-metropolis-13.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-13.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-13.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-15.txt Systems/Institutions :: Craft guilds (100-150+)REQCrafts
+r2r-metropolis-15.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-15.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-15.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-16.txt Systems/Institutions :: Craft guilds (100-150+)REQCrafts
+r2r-metropolis-16.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-16.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-16.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-18.txt Systems/Institutions :: Craft guilds (100-150+)REQCrafts
+r2r-metropolis-18.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-18.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-18.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-19.txt Systems/Institutions :: Craft guilds (100-150+)REQCrafts
+r2r-metropolis-19.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-19.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-19.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-21.txt Systems/Institutions :: Craft guilds (100-150+)REQCraftsVulnerable
+r2r-metropolis-21.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-21.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-21.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-22.txt Systems/Institutions :: Craft guilds (100-150+)REQCrafts
+r2r-metropolis-22.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-22.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-22.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-24.txt Systems/Institutions :: Craft guilds (100-150+)REQCrafts
+r2r-metropolis-24.txt Systems/Institutions :: District markets (5-10)REQEconomy
+r2r-metropolis-24.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-24.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-25.txt Summary/Crisis :: Parish churches (50-100+) · held by Ögedei Tatar
+r2r-metropolis-25.txt Systems/Institutions :: Craft guilds (100-150+)REQCraftsVulnerable
+r2r-metropolis-25.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-25.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-25.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-27.txt Systems/Institutions :: Craft guilds (100-150+)REQCraftsVulnerable
+r2r-metropolis-27.txt Systems/Institutions :: District markets (5-10)REQEconomy
+r2r-metropolis-27.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-27.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-28.txt Systems/Institutions :: Craft guilds (100-150+)REQCrafts
+r2r-metropolis-28.txt Systems/Institutions :: District markets (5-10)REQEconomy
+r2r-metropolis-28.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-28.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-3.txt Systems/Institutions :: Craft guilds (100-150+)REQCraftsVulnerable
+r2r-metropolis-3.txt Systems/Institutions :: District markets (5-10)REQEconomy
+r2r-metropolis-3.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-3.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-30.txt Systems/Institutions :: Craft guilds (100-150+)REQCraftsVulnerable
+r2r-metropolis-30.txt Systems/Institutions :: District markets (5-10)REQEconomy
+r2r-metropolis-30.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-30.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-31.txt Summary/Crisis :: Parish churches (50-100+) · held by Bayasgalan Ongirad
+r2r-metropolis-31.txt Systems/Institutions :: Craft guilds (100-150+)REQCraftsVulnerable
+r2r-metropolis-31.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-31.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-31.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-33.txt Systems/Institutions :: Craft guilds (100-150+)REQCrafts
+r2r-metropolis-33.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-33.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-33.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-34.txt Systems/Institutions :: Craft guilds (100-150+)REQCraftsVulnerable
+r2r-metropolis-34.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-34.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-34.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-36.txt Systems/Institutions :: Craft guilds (100-150+)REQCrafts
+r2r-metropolis-36.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-36.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-36.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-37.txt Systems/Institutions :: Craft guilds (100-150+)REQCrafts
+r2r-metropolis-37.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-37.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-37.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-39.txt Systems/Institutions :: Craft guilds (100-150+)REQCrafts
+r2r-metropolis-39.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-39.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-39.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-4.txt Systems/Institutions :: Craft guilds (100-150+)REQCraftsVulnerable
+r2r-metropolis-4.txt Systems/Institutions :: District markets (5-10)REQEconomy
+r2r-metropolis-4.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-4.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-40.txt Systems/Institutions :: Craft guilds (100-150+)REQCrafts
+r2r-metropolis-40.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-40.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-40.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-42.txt Systems/Institutions :: Craft guilds (100-150+)REQCraftsVulnerable
+r2r-metropolis-42.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-42.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-42.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-43.txt Systems/Institutions :: Craft guilds (100-150+)REQCraftsVulnerable
+r2r-metropolis-43.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-43.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-43.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-45.txt Systems/Institutions :: Craft guilds (100-150+)REQCraftsVulnerable
+r2r-metropolis-45.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-45.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-45.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-46.txt Systems/Institutions :: Craft guilds (100-150+)REQCraftsVulnerable
+r2r-metropolis-46.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-46.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-46.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-48.txt Systems/Institutions :: Craft guilds (100-150+)REQCraftsVulnerable
+r2r-metropolis-48.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-48.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-48.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-49.txt Systems/Institutions :: Craft guilds (100-150+)REQCraftsVulnerable
+r2r-metropolis-49.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-49.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-49.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-51.txt Systems/Institutions :: Craft guilds (100-150+)REQCraftsVulnerable
+r2r-metropolis-51.txt Systems/Institutions :: District markets (5-10)REQEconomy
+r2r-metropolis-51.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-51.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-52.txt Systems/Institutions :: Craft guilds (100-150+)REQCraftsVulnerable
+r2r-metropolis-52.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-52.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-52.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-54.txt Systems/Institutions :: Craft guilds (100-150+)REQCrafts
+r2r-metropolis-54.txt Systems/Institutions :: District markets (5-10)REQEconomy
+r2r-metropolis-54.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-54.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-55.txt Systems/Institutions :: Craft guilds (100-150+)REQCraftsVulnerable
+r2r-metropolis-55.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-55.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-55.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-57.txt Systems/Institutions :: Craft guilds (100-150+)REQCrafts
+r2r-metropolis-57.txt Systems/Institutions :: District markets (5-10)REQEconomy
+r2r-metropolis-57.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-57.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-58.txt Systems/Institutions :: Craft guilds (100-150+)REQCraftsVulnerable
+r2r-metropolis-58.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-58.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious
+r2r-metropolis-58.txt Systems/Institutions :: Housing (3500+ households)REQInfrastructure
+r2r-metropolis-6.txt Systems/Institutions :: Craft guilds (100-150+)REQCraftsVulnerable
+r2r-metropolis-6.txt Systems/Institutions :: District markets (5-10)REQEconomyVulnerable
+r2r-metropolis-6.txt Systems/Institutions :: Houses of worship (50-100+)REQReligious

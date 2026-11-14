@@ -1,0 +1,12 @@
+rw3-thorp-famine-1
+rw3-town-under_siege+famine-1
+rw3-hamlet-under_siege-1
+rw3-hamlet-plague_onset-1
+rw3-village-famine-1
+rw3-village-insurgency-1
+rr2s-hamlet-under_siege-rand-1
+rr2s-town-under_siege-rand-1
+rr2s-city-under_siege+famine-rand-1
+rr2s-city-famine-rand-1
+rr2s-city-occupied-rand-1
+rr2s-metropolis-wartime-rand-1

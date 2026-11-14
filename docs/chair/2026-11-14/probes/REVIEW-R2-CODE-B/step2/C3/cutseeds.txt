@@ -1,0 +1,5 @@
+rr2s-town-under_siege-rand-1
+rr2s-town-plague_onset-rand-1
+rr2s-city-famine-rand-1
+rr2s-city-under_siege+famine-rand-1
+rr2s-metropolis-calm-rand-1

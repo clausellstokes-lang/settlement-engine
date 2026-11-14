@@ -1,0 +1,950 @@
+{
+  n: 1536,
+  walkQ: 512,
+  falseQ: 62,
+  walkT: 411,
+  falseT: 0,
+  changed: 314
+}
+r2r-thorp-4 thorp  | acc Access to external mill | shrine true 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances. No single creed holds sway, and the shrines answer to no named god.
+r2r-thorp-7 thorp  | acc Access to external mill | shrine true 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and the shrines answer to no named god.
+r2r-thorp-14 thorp  | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+r2r-thorp-22 thorp insurgency | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+r2r-thorp-24 thorp occupied | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+r2r-thorp-25 thorp insurgency | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+r2r-thorp-39 thorp recently_betrayed | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+r2r-thorp-40 thorp occupied | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+r2r-thorp-44 thorp  | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+r2r-thorp-45 thorp under_siege | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+r2r-thorp-51 thorp recently_betrayed | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+r2r-thorp-58 thorp under_siege | acc Access to external mill,Access to parish church | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Most folk attend the rites through the year. 
+  T: The thorp has no church of its own, and the siege keeps its people from the next village’s parish church. Most folk attend the rites through the year.
+r2r-thorp-59 thorp  | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+r2r-hamlet-0 hamlet under_siege | acc Access to external mill,Access to parish church | shrine false 
+  Q: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The hamlet has no church of its own, and the siege keeps its people from the next village’s parish church. Folk attend on the great feast days and keep the lesser rites at home.
+r2r-village-9 village succession_void | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+r2r-village-10 village  | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+r2r-village-13 village  | acc  | shrine true 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2r-village-16 village  | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+r2r-village-19 village  | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2r-village-20 village  | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+r2r-village-21 village under_siege | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2r-village-22 village  | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+r2r-village-23 village  | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2r-village-28 village mass_migration | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2r-village-29 village insurgency | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+r2r-village-32 village  | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+r2r-village-33 village  | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home.
+r2r-village-34 village insurgency | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2r-village-37 village recently_betrayed | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+r2r-village-39 village religious_conversion | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Conversion Enforcement Office. Few folk keep the rites beyond weddings and burials. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Conversion Enforcement Office. Few folk keep the rites beyond weddings and burials.
+r2r-village-41 village monster_pressure | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2r-village-44 village infiltrated | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2r-village-48 village infiltrated | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+r2r-village-50 village plague_onset | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home.
+r2r-village-59 village  | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+r2r-town-8 town mass_migration | acc  | shrine false 
+  Q: Parish churches and a monastery keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: Parish churches and a monastery keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+r2r-town-18 town  | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2r-town-19 town  | acc  | shrine false 
+  Q: Parish churches and a monastery keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: Parish churches and a monastery keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+r2r-town-24 town recently_betrayed | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+r2r-town-36 town mass_migration | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2r-town-44 town  | acc  | shrine false 
+  Q: Parish churches and a monastery keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches and a monastery keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2r-town-57 town recently_betrayed | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2r-city-4 city  | acc  | shrine false 
+  Q: Parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2r-city-19 city plague_onset | acc  | shrine false 
+  Q: A cathedral, parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A cathedral, parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2r-city-44 city famine | acc  | shrine false 
+  Q: Parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: Parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+r2s-under_siege-thorp-0 thorp under_siege | acc Access to external mill,Access to parish church | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: The thorp has no church of its own, and the siege keeps its people from the next village’s parish church. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-under_siege-thorp-1 thorp under_siege | acc Access to external mill,Access to parish church | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: The thorp has no church of its own, and the siege keeps its people from the next village’s parish church. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-under_siege-thorp-2 thorp under_siege | acc Access to external mill,Access to parish church | shrine true 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Devotion runs through every part of life here, and few miss a rite. 
+  T: The thorp has no church of its own, and the siege keeps its people from the next village’s parish church. Devotion runs through every part of life here, and few miss a rite.
+r2s-under_siege-thorp-3 thorp under_siege | acc Access to external mill,Access to parish church | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The thorp has no church of its own, and the siege keeps its people from the next village’s parish church. Folk attend on the great feast days and keep the lesser rites at home.
+r2s-under_siege-hamlet-0 hamlet under_siege | acc Access to external mill,Access to parish church | shrine true 
+  Q: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: The hamlet has no church of its own, and the siege keeps its people from the next village’s parish church. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-under_siege-hamlet-1 hamlet under_siege | acc Access to external mill,Access to parish church | shrine false 
+  Q: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: The hamlet has no church of its own, and the siege keeps its people from the next village’s parish church. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-under_siege-hamlet-2 hamlet under_siege | acc Access to external mill,Access to parish church | shrine true 
+  Q: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: The hamlet has no church of its own, and the siege keeps its people from the next village’s parish church. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-under_siege-hamlet-3 hamlet under_siege | acc Access to external mill,Access to parish church | shrine false 
+  Q: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The hamlet has no church of its own, and the siege keeps its people from the next village’s parish church. Folk attend on the great feast days and keep the lesser rites at home.
+r2s-under_siege-village-0 village under_siege | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-under_siege-village-1 village under_siege | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-under_siege-village-2 village under_siege | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-under_siege-town-0 town under_siege | acc  | shrine false 
+  Q: Parish churches and a monastery keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches and a monastery keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-under_siege-town-1 town under_siege | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-famine-thorp-1 thorp famine | acc Access to external mill | shrine true 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and the shrines answer to no named god.
+r2s-famine-thorp-2 thorp famine | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+r2s-famine-village-0 village famine | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+r2s-famine-village-3 village famine | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+r2s-famine-town-0 town famine | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home.
+r2s-famine-town-1 town famine | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-famine-town-3 town famine | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+r2s-famine-metropolis-3 metropolis famine | acc  | shrine false 
+  Q: A great cathedral, parish churches and monasteries keep the faith in the metropolis. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A great cathedral, parish churches and monasteries keep the faith in the metropolis. A voice in the metropolis’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-occupied-town-2 town occupied | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+r2s-politically_fractured-village-1 village politically_fractured | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home.
+r2s-politically_fractured-village-2 village politically_fractured | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+r2s-politically_fractured-town-1 town politically_fractured | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+r2s-politically_fractured-town-3 town politically_fractured | acc  | shrine false 
+  Q: Parish churches and a monastery keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches and a monastery keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-politically_fractured-city-3 city politically_fractured | acc  | shrine false 
+  Q: Parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-indebted-village-0 village indebted | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+r2s-recently_betrayed-thorp-3 thorp recently_betrayed | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+r2s-recently_betrayed-village-0 village recently_betrayed | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+r2s-recently_betrayed-village-1 village recently_betrayed | acc  | shrine true 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-recently_betrayed-village-2 village recently_betrayed | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+r2s-recently_betrayed-town-0 town recently_betrayed | acc  | shrine false 
+  Q: Parish churches and a monastery keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches and a monastery keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-recently_betrayed-town-1 town recently_betrayed | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-recently_betrayed-city-0 city recently_betrayed | acc  | shrine false 
+  Q: Parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: Parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+r2s-infiltrated-thorp-0 thorp infiltrated | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+r2s-infiltrated-thorp-3 thorp infiltrated | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+r2s-infiltrated-village-1 village infiltrated | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-infiltrated-village-2 village infiltrated | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-infiltrated-village-3 village infiltrated | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-plague_onset-thorp-0 thorp plague_onset | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+r2s-plague_onset-thorp-1 thorp plague_onset | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+r2s-plague_onset-thorp-3 thorp plague_onset | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+r2s-plague_onset-village-0 village plague_onset | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-plague_onset-village-1 village plague_onset | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-plague_onset-village-2 village plague_onset | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+r2s-plague_onset-town-1 town plague_onset | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-plague_onset-town-2 town plague_onset | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home.
+r2s-plague_onset-town-3 town plague_onset | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home.
+r2s-plague_onset-city-0 city plague_onset | acc  | shrine false 
+  Q: Parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: Parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+r2s-plague_onset-city-1 city plague_onset | acc  | shrine false 
+  Q: A cathedral, parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: A cathedral, parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+r2s-plague_onset-city-2 city plague_onset | acc  | shrine false 
+  Q: A cathedral, parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A cathedral, parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-plague_onset-city-3 city plague_onset | acc  | shrine false 
+  Q: Parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: Parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+r2s-plague_onset-metropolis-3 metropolis plague_onset | acc  | shrine false 
+  Q: A great cathedral, parish churches and monasteries keep the faith in the metropolis. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A great cathedral, parish churches and monasteries keep the faith in the metropolis. A voice in the metropolis’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-succession_void-village-0 village succession_void | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+r2s-succession_void-village-1 village succession_void | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+r2s-succession_void-village-2 village succession_void | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+r2s-succession_void-village-3 village succession_void | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-monster_pressure-thorp-1 thorp monster_pressure | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+r2s-monster_pressure-village-0 village monster_pressure | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+r2s-monster_pressure-village-1 village monster_pressure | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+r2s-monster_pressure-town-0 town monster_pressure | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-insurgency-village-0 village insurgency | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-insurgency-village-2 village insurgency | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+r2s-insurgency-village-3 village insurgency | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home.
+r2s-insurgency-town-0 town insurgency | acc  | shrine false 
+  Q: Parish churches and a monastery keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: Parish churches and a monastery keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+r2s-religious_conversion-thorp-3 thorp religious_conversion | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+r2s-religious_conversion-village-0 village religious_conversion | acc  | shrine true 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Reform Congregation. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Reform Congregation. Folk attend on the great feast days and keep the lesser rites at home.
+r2s-religious_conversion-village-1 village religious_conversion | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Reform Congregation. Few folk keep the rites beyond weddings and burials. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Reform Congregation. Few folk keep the rites beyond weddings and burials.
+r2s-religious_conversion-village-2 village religious_conversion | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Reform Congregation. Few folk keep the rites beyond weddings and burials. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Reform Congregation. Few folk keep the rites beyond weddings and burials.
+r2s-religious_conversion-town-0 town religious_conversion | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+r2s-religious_conversion-town-3 town religious_conversion | acc  | shrine false 
+  Q: Parish churches and a monastery keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches and a monastery keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-slave_revolt-village-0 village slave_revolt | acc  | shrine true 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-slave_revolt-village-1 village slave_revolt | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home.
+r2s-slave_revolt-town-0 town slave_revolt | acc  | shrine false 
+  Q: Parish churches and a monastery keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches and a monastery keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-slave_revolt-town-1 town slave_revolt | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-slave_revolt-city-2 city slave_revolt | acc  | shrine false 
+  Q: Parish churches keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-slave_revolt-city-3 city slave_revolt | acc  | shrine false 
+  Q: Parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-slave_revolt-metropolis-0 metropolis slave_revolt | acc  | shrine false 
+  Q: A great cathedral, parish churches and monasteries keep the faith in the metropolis. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: A great cathedral, parish churches and monasteries keep the faith in the metropolis. A voice in the metropolis’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+r2s-wartime-village-1 village wartime | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-wartime-village-2 village wartime | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-wartime-village-3 village wartime | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home.
+r2s-wartime-town-1 town wartime | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-mass_migration-village-0 village mass_migration | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-mass_migration-village-1 village mass_migration | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+r2s-mass_migration-village-2 village mass_migration | acc  | shrine true 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+r2s-mass_migration-village-3 village mass_migration | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+r2s-mass_migration-town-3 town mass_migration | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-thorp-calm-port-0 thorp  | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+rr3-thorp-under_siege-rand-0 thorp under_siege | acc Access to external mill,Access to parish church | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: The thorp has no church of its own, and the siege keeps its people from the next village’s parish church. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-thorp-under_siege-rand-1 thorp under_siege | acc Access to external mill,Access to parish church | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Most folk attend the rites through the year. 
+  T: The thorp has no church of its own, and the siege keeps its people from the next village’s parish church. Most folk attend the rites through the year.
+rr3-thorp-under_siege-rand-2 thorp under_siege | acc Access to external mill,Access to parish church | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: The thorp has no church of its own, and the siege keeps its people from the next village’s parish church. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-thorp-under_siege-rand-3 thorp under_siege+famine | acc Access to external mill,Access to parish church | shrine true 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: The thorp has no church of its own, and the siege keeps its people from the next village’s parish church. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-thorp-under_siege-rand-4 thorp under_siege | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+rr3-thorp-under_siege-rand-5 thorp under_siege | acc Access to external mill,Access to parish church | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Devotion runs through every part of life here, and few miss a rite. 
+  T: The thorp has no church of its own, and the siege keeps its people from the next village’s parish church. Devotion runs through every part of life here, and few miss a rite.
+rr3-thorp-under_siege-port-0 thorp under_siege | acc Access to external mill,Access to parish church | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The thorp has no church of its own, and the siege keeps its people from the next village’s parish church. Folk attend on the great feast days and keep the lesser rites at home.
+rr3-thorp-under_siege-port-1 thorp under_siege | acc Access to external mill,Access to parish church | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The thorp has no church of its own, and the siege keeps its people from the next village’s parish church. Folk attend on the great feast days and keep the lesser rites at home.
+rr3-thorp-famine-rand-0 thorp famine | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+rr3-thorp-famine-rand-3 thorp famine | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+rr3-thorp-famine-rand-4 thorp famine | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+rr3-thorp-famine-rand-5 thorp famine | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+rr3-thorp-occupied-rand-4 thorp occupied | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+rr3-thorp-politically_fractured-port-1 thorp politically_fractured | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+rr3-thorp-indebted-rand-1 thorp indebted | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+rr3-thorp-indebted-rand-2 thorp indebted | acc Access to external mill | shrine true 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and the shrines answer to no named god.
+rr3-thorp-indebted-rand-4 thorp indebted | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+rr3-thorp-indebted-rand-5 thorp indebted | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+rr3-thorp-recently_betrayed-rand-2 thorp recently_betrayed | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+rr3-thorp-recently_betrayed-port-0 thorp recently_betrayed | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+rr3-thorp-recently_betrayed-port-1 thorp recently_betrayed | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+rr3-thorp-infiltrated-rand-3 thorp infiltrated | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+rr3-thorp-infiltrated-port-0 thorp infiltrated | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+rr3-thorp-plague_onset-rand-1 thorp plague_onset | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Most folk attend the rites through the year. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+rr3-thorp-plague_onset-rand-3 thorp plague_onset+famine | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+rr3-thorp-plague_onset-rand-5 thorp plague_onset | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+rr3-thorp-plague_onset-port-0 thorp plague_onset | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+rr3-thorp-plague_onset-port-1 thorp plague_onset | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+rr3-thorp-succession_void-rand-0 thorp succession_void | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+rr3-thorp-succession_void-rand-5 thorp succession_void | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+rr3-thorp-succession_void-port-1 thorp succession_void | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+rr3-thorp-monster_pressure-rand-0 thorp monster_pressure | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Most folk attend the rites through the year. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+rr3-thorp-monster_pressure-rand-1 thorp monster_pressure | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+rr3-thorp-monster_pressure-port-1 thorp monster_pressure | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+rr3-thorp-insurgency-rand-3 thorp insurgency | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+rr3-thorp-religious_conversion-rand-0 thorp religious_conversion | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+rr3-thorp-religious_conversion-port-0 thorp religious_conversion | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+rr3-thorp-slave_revolt-rand-2 thorp slave_revolt | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+rr3-thorp-wartime-rand-1 thorp wartime | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+rr3-thorp-wartime-rand-3 thorp wartime | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+rr3-thorp-wartime-rand-4 thorp wartime | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+rr3-thorp-mass_migration-rand-5 thorp mass_migration | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Most folk attend the rites through the year. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+rr3-thorp-mass_migration-port-0 thorp mass_migration | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+rr3-thorp-mass_migration-port-1 thorp mass_migration | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and no god is named here.
+rr3-thorp-under_siege+famine-rand-0 thorp under_siege+famine | acc Access to external mill,Access to parish church | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Most folk attend the rites through the year. 
+  T: The thorp has no church of its own, and the siege keeps its people from the next village’s parish church. Most folk attend the rites through the year.
+rr3-thorp-under_siege+famine-rand-1 thorp under_siege+famine | acc Access to external mill,Access to parish church | shrine true 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Most folk attend the rites through the year. 
+  T: The thorp has no church of its own, and the siege keeps its people from the next village’s parish church. Most folk attend the rites through the year.
+rr3-thorp-under_siege+famine-rand-2 thorp under_siege+famine | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+rr3-thorp-under_siege+famine-rand-3 thorp under_siege+famine | acc Access to external mill,Access to parish church | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: The thorp has no church of its own, and the siege keeps its people from the next village’s parish church. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-thorp-under_siege+famine-rand-4 thorp under_siege+famine | acc Access to external mill,Access to parish church | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The thorp has no church of its own, and the siege keeps its people from the next village’s parish church. Folk attend on the great feast days and keep the lesser rites at home.
+rr3-thorp-under_siege+famine-rand-5 thorp under_siege+famine | acc Access to external mill | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Most folk attend the rites through the year. 
+  T: The people keep their own quiet observances. No single creed holds sway, and no god is named here.
+rr3-thorp-under_siege+famine-port-0 thorp under_siege+famine | acc Access to external mill,Access to parish church | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Devotion runs through every part of life here, and few miss a rite. 
+  T: The thorp has no church of its own, and the siege keeps its people from the next village’s parish church. Devotion runs through every part of life here, and few miss a rite.
+rr3-thorp-under_siege+famine-port-1 thorp under_siege+famine | acc Access to external mill,Access to parish church | shrine false 
+  Q: The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: The thorp has no church of its own, and the siege keeps its people from the next village’s parish church. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-hamlet-under_siege-rand-0 hamlet under_siege | acc Access to external mill,Access to parish church | shrine false 
+  Q: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: The hamlet has no church of its own, and the siege keeps its people from the next village’s parish church. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-hamlet-under_siege-rand-1 hamlet under_siege | acc Access to external mill,Access to parish church | shrine true 
+  Q: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Most folk attend the rites through the year. 
+  T: The hamlet has no church of its own, and the siege keeps its people from the next village’s parish church. Most folk attend the rites through the year.
+rr3-hamlet-under_siege-rand-2 hamlet under_siege | acc Access to external mill,Access to parish church | shrine false 
+  Q: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Most folk attend the rites through the year. 
+  T: The hamlet has no church of its own, and the siege keeps its people from the next village’s parish church. Most folk attend the rites through the year.
+rr3-hamlet-under_siege-rand-3 hamlet under_siege | acc Access to external mill,Access to parish church | shrine false 
+  Q: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The hamlet has no church of its own, and the siege keeps its people from the next village’s parish church. Folk attend on the great feast days and keep the lesser rites at home.
+rr3-hamlet-under_siege-rand-4 hamlet under_siege | acc Access to external mill,Access to parish church | shrine false 
+  Q: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The hamlet has no church of its own, and the siege keeps its people from the next village’s parish church. Folk attend on the great feast days and keep the lesser rites at home.
+rr3-hamlet-under_siege-rand-5 hamlet under_siege | acc Access to external mill,Access to parish church | shrine false 
+  Q: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Most folk attend the rites through the year. 
+  T: The hamlet has no church of its own, and the siege keeps its people from the next village’s parish church. Most folk attend the rites through the year.
+rr3-hamlet-under_siege-port-0 hamlet under_siege | acc Access to external mill,Access to parish church | shrine false 
+  Q: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: The hamlet has no church of its own, and the siege keeps its people from the next village’s parish church. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-hamlet-under_siege-port-1 hamlet under_siege | acc Access to external mill,Access to parish church | shrine false 
+  Q: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The hamlet has no church of its own, and the siege keeps its people from the next village’s parish church. Folk attend on the great feast days and keep the lesser rites at home.
+rr3-hamlet-religious_conversion-port-0 hamlet religious_conversion | acc Access to external mill,Access to parish church | shrine false 
+  Q: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Real political weight rests with the Reform Congregation. Most folk attend the rites through the year. 
+  T: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. A voice in the hamlet’s affairs belongs to the Reform Congregation. Most folk attend the rites through the year.
+rr3-hamlet-religious_conversion-port-1 hamlet religious_conversion | acc Access to external mill,Access to parish church | shrine false 
+  Q: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Real political weight rests with the Conversion Enforcement Office. Few folk keep the rites beyond weddings and burials. 
+  T: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. A voice in the hamlet’s affairs belongs to the Conversion Enforcement Office. Few folk keep the rites beyond weddings and burials.
+rr3-hamlet-under_siege+famine-rand-0 hamlet under_siege+famine | acc Access to external mill,Access to parish church | shrine false 
+  Q: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Most folk attend the rites through the year. 
+  T: The hamlet has no church of its own, and the siege keeps its people from the next village’s parish church. Most folk attend the rites through the year.
+rr3-hamlet-under_siege+famine-rand-1 hamlet under_siege+famine | acc Access to external mill,Access to parish church | shrine false 
+  Q: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Most folk attend the rites through the year. 
+  T: The hamlet has no church of its own, and the siege keeps its people from the next village’s parish church. Most folk attend the rites through the year.
+rr3-hamlet-under_siege+famine-rand-2 hamlet under_siege+famine | acc Access to external mill,Access to parish church | shrine false 
+  Q: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The hamlet has no church of its own, and the siege keeps its people from the next village’s parish church. Folk attend on the great feast days and keep the lesser rites at home.
+rr3-hamlet-under_siege+famine-rand-3 hamlet under_siege+famine | acc Access to external mill,Access to parish church | shrine true 
+  Q: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Devotion runs through every part of life here, and few miss a rite. 
+  T: The hamlet has no church of its own, and the siege keeps its people from the next village’s parish church. Devotion runs through every part of life here, and few miss a rite.
+rr3-hamlet-under_siege+famine-rand-4 hamlet under_siege+famine | acc Access to external mill,Access to parish church | shrine false 
+  Q: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Few folk keep the rites beyond weddings and burials. 
+  T: The hamlet has no church of its own, and the siege keeps its people from the next village’s parish church. Few folk keep the rites beyond weddings and burials.
+rr3-hamlet-under_siege+famine-rand-5 hamlet under_siege+famine | acc Access to external mill,Access to parish church | shrine false 
+  Q: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: The hamlet has no church of its own, and the siege keeps its people from the next village’s parish church. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-hamlet-under_siege+famine-port-0 hamlet under_siege+famine | acc Access to external mill,Access to parish church | shrine false 
+  Q: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Devotion runs through every part of life here, and few miss a rite. 
+  T: The hamlet has no church of its own, and the siege keeps its people from the next village’s parish church. Devotion runs through every part of life here, and few miss a rite.
+rr3-hamlet-under_siege+famine-port-1 hamlet under_siege+famine | acc Access to external mill,Access to parish church | shrine false 
+  Q: The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: The hamlet has no church of its own, and the siege keeps its people from the next village’s parish church. Folk attend on the great feast days and keep the lesser rites at home.
+rr3-village-calm-rand-0 village  | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-village-calm-rand-4 village  | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+rr3-village-under_siege-rand-1 village under_siege | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+rr3-village-under_siege-port-1 village under_siege | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+rr3-village-famine-rand-0 village famine | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+rr3-village-famine-rand-1 village famine | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+rr3-village-famine-rand-2 village famine | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home.
+rr3-village-famine-rand-4 village famine | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+rr3-village-famine-rand-5 village famine | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home.
+rr3-village-famine-port-0 village famine | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+rr3-village-famine-port-1 village famine | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home.
+rr3-village-occupied-port-1 village occupied | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-village-politically_fractured-rand-1 village politically_fractured | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+rr3-village-politically_fractured-rand-4 village politically_fractured | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+rr3-village-politically_fractured-port-0 village politically_fractured | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+rr3-village-recently_betrayed-rand-0 village recently_betrayed | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-village-recently_betrayed-rand-1 village recently_betrayed | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-village-recently_betrayed-rand-2 village recently_betrayed | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home.
+rr3-village-recently_betrayed-rand-4 village recently_betrayed | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home.
+rr3-village-recently_betrayed-port-0 village recently_betrayed | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home.
+rr3-village-infiltrated-rand-1 village infiltrated | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-village-infiltrated-rand-2 village infiltrated | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-village-infiltrated-rand-4 village infiltrated | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-village-infiltrated-rand-5 village infiltrated | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+rr3-village-infiltrated-port-0 village infiltrated | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+rr3-village-plague_onset-rand-1 village plague_onset | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+rr3-village-plague_onset-rand-4 village plague_onset | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-village-plague_onset-rand-5 village plague_onset | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+rr3-village-plague_onset-port-1 village plague_onset | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+rr3-village-succession_void-rand-2 village succession_void | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+rr3-village-succession_void-rand-5 village succession_void | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+rr3-village-succession_void-port-0 village succession_void | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home.
+rr3-village-succession_void-port-1 village succession_void | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+rr3-village-monster_pressure-rand-0 village monster_pressure | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+rr3-village-monster_pressure-rand-1 village monster_pressure | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+rr3-village-monster_pressure-rand-2 village monster_pressure | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home.
+rr3-village-monster_pressure-rand-5 village monster_pressure | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+rr3-village-monster_pressure-port-0 village monster_pressure | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+rr3-village-insurgency-rand-3 village insurgency | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-village-religious_conversion-rand-1 village religious_conversion | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Reform Congregation. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Reform Congregation. Folk attend on the great feast days and keep the lesser rites at home.
+rr3-village-religious_conversion-rand-2 village religious_conversion | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-village-religious_conversion-rand-3 village religious_conversion | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Conversion Enforcement Office. Few folk keep the rites beyond weddings and burials. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Conversion Enforcement Office. Few folk keep the rites beyond weddings and burials.
+rr3-village-religious_conversion-rand-4 village religious_conversion | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Reform Congregation. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Reform Congregation. Folk attend on the great feast days and keep the lesser rites at home.
+rr3-village-religious_conversion-rand-5 village religious_conversion | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+rr3-village-slave_revolt-rand-2 village slave_revolt | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home.
+rr3-village-slave_revolt-rand-5 village slave_revolt | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-village-slave_revolt-port-0 village slave_revolt | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-village-wartime-rand-0 village wartime | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+rr3-village-wartime-rand-3 village wartime | acc  | shrine true 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-village-wartime-rand-4 village wartime | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+rr3-village-wartime-rand-5 village wartime | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-village-mass_migration-rand-0 village mass_migration | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-village-mass_migration-rand-3 village mass_migration | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home.
+rr3-village-mass_migration-rand-4 village mass_migration | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home.
+rr3-village-mass_migration-port-1 village mass_migration | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-village-under_siege+famine-rand-1 village under_siege+famine | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+rr3-village-under_siege+famine-rand-3 village under_siege+famine | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-village-under_siege+famine-rand-4 village under_siege+famine | acc  | shrine true 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+rr3-village-under_siege+famine-port-1 village under_siege+famine | acc  | shrine false 
+  Q: A parish church keeps the faith in the village. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+rr3-town-under_siege-rand-1 town under_siege | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-town-under_siege-rand-2 town under_siege | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-town-under_siege-port-0 town under_siege | acc  | shrine false 
+  Q: Parish churches and a monastery keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches and a monastery keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-town-famine-rand-0 town famine | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+rr3-town-famine-rand-2 town famine | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-town-famine-rand-5 town famine | acc  | shrine false 
+  Q: Parish churches and a monastery keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches and a monastery keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-town-famine-port-1 town famine | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+rr3-town-politically_fractured-rand-1 town politically_fractured | acc  | shrine false 
+  Q: Parish churches and a monastery keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches and a monastery keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-town-politically_fractured-rand-2 town politically_fractured | acc  | shrine false 
+  Q: Parish churches and a monastery keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches and a monastery keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-town-recently_betrayed-rand-3 town recently_betrayed | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-town-recently_betrayed-rand-4 town recently_betrayed | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-town-recently_betrayed-port-1 town recently_betrayed | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-town-plague_onset-rand-1 town plague_onset | acc  | shrine false 
+  Q: Parish churches and a monastery keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: Parish churches and a monastery keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+rr3-town-plague_onset-rand-3 town plague_onset | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+rr3-town-plague_onset-rand-4 town plague_onset | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-town-plague_onset-port-0 town plague_onset | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+rr3-town-plague_onset-port-1 town plague_onset | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+rr3-town-monster_pressure-rand-4 town monster_pressure | acc  | shrine false 
+  Q: Parish churches and a monastery keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: Parish churches and a monastery keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+rr3-town-insurgency-rand-1 town insurgency | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+rr3-town-insurgency-port-1 town insurgency | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+rr3-town-religious_conversion-rand-3 town religious_conversion | acc  | shrine false 
+  Q: Parish churches and a monastery keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches and a monastery keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-town-slave_revolt-rand-3 town slave_revolt | acc  | shrine false 
+  Q: Parish churches and a monastery keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches and a monastery keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-town-wartime-rand-1 town wartime | acc  | shrine false 
+  Q: Parish churches and a monastery keep the faith in the town. Real political weight rests with the Religious Authorities. Most folk attend the rites through the year. 
+  T: Parish churches and a monastery keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+rr3-town-mass_migration-rand-2 town mass_migration | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-town-mass_migration-rand-3 town mass_migration | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-town-mass_migration-rand-5 town mass_migration | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-town-under_siege+famine-rand-3 town under_siege+famine | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-town-under_siege+famine-rand-4 town under_siege+famine | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-town-under_siege+famine-port-1 town under_siege+famine | acc  | shrine false 
+  Q: Parish churches keep the faith in the town. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-city-famine-rand-1 city famine | acc  | shrine false 
+  Q: Parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: Parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+rr3-city-famine-rand-2 city famine | acc  | shrine false 
+  Q: Parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-city-plague_onset-rand-0 city plague_onset | acc  | shrine false 
+  Q: Parish churches keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-city-plague_onset-rand-1 city plague_onset | acc  | shrine false 
+  Q: Parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-city-plague_onset-rand-2 city plague_onset | acc  | shrine false 
+  Q: Parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-city-plague_onset-rand-4 city plague_onset | acc  | shrine false 
+  Q: Parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: Parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+rr3-city-plague_onset-rand-5 city plague_onset | acc  | shrine false 
+  Q: Parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: Parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+rr3-city-plague_onset-port-1 city plague_onset | acc  | shrine false 
+  Q: Parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-city-insurgency-port-1 city insurgency | acc  | shrine false 
+  Q: Parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-city-slave_revolt-port-0 city slave_revolt | acc  | shrine false 
+  Q: Parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: Parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+rr3-city-slave_revolt-port-1 city slave_revolt | acc  | shrine false 
+  Q: Parish churches keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-city-wartime-rand-5 city wartime | acc  | shrine false 
+  Q: Parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-city-mass_migration-rand-0 city mass_migration | acc  | shrine false 
+  Q: Parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: Parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+rr3-city-under_siege+famine-rand-0 city under_siege+famine | acc  | shrine false 
+  Q: Parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: Parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+rr3-city-under_siege+famine-rand-1 city under_siege+famine | acc  | shrine false 
+  Q: Parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-city-under_siege+famine-rand-4 city under_siege+famine | acc  | shrine false 
+  Q: Parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: Parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-city-under_siege+famine-port-0 city under_siege+famine | acc  | shrine false 
+  Q: A cathedral, parish churches and monasteries keep the faith in the city. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: A cathedral, parish churches and monasteries keep the faith in the city. A voice in the city’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+rr3-metropolis-plague_onset-rand-2 metropolis plague_onset | acc  | shrine false 
+  Q: A great cathedral, parish churches and monasteries keep the faith in the metropolis. Real political weight rests with the Religious Authorities. Tithes are collected. Most folk attend the rites through the year. 
+  T: A great cathedral, parish churches and monasteries keep the faith in the metropolis. A voice in the metropolis’s affairs belongs to the Religious Authorities. Tithes are collected. Most folk attend the rites through the year.
+rr3-metropolis-plague_onset-rand-3 metropolis plague_onset | acc  | shrine false 
+  Q: A great cathedral, parish churches and monasteries keep the faith in the metropolis. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A great cathedral, parish churches and monasteries keep the faith in the metropolis. A voice in the metropolis’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+rr3-metropolis-under_siege+famine-rand-3 metropolis under_siege+famine | acc  | shrine false 
+  Q: A great cathedral, parish churches and monasteries keep the faith in the metropolis. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: A great cathedral, parish churches and monasteries keep the faith in the metropolis. A voice in the metropolis’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+rr3-metropolis-under_siege+famine-rand-5 metropolis under_siege+famine | acc  | shrine false 
+  Q: A great cathedral, parish churches and monasteries keep the faith in the metropolis. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite. 
+  T: A great cathedral, parish churches and monasteries keep the faith in the metropolis. A voice in the metropolis’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs through every part of life here, and few miss a rite.
+rr3-metropolis-under_siege+famine-port-1 metropolis under_siege+famine | acc  | shrine false 
+  Q: A great cathedral, parish churches and monasteries keep the faith in the metropolis. Real political weight rests with the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week. 
+  T: A great cathedral, parish churches and monasteries keep the faith in the metropolis. A voice in the metropolis’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
