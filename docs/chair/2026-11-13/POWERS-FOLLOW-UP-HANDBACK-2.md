@@ -945,6 +945,15 @@ executed). Scratch worktree `/home/user/wt/p11` on a local branch `p11` at the l
   a file this lane holds by its own commits, it is not touched: the call site goes under FOR THE JOIN (file, function,
   the one-line change, a test that reds until it is made). After M4 and M1, in its turn.
 
+- THE CHAIR, 03:08 UTC: POINT 49 IS ON THE LINE: lane/integration-2026-11-07 = 976db5b19 (read back by the chair at
+  03:08 UTC). Step 4's word is GIVEN: when the list reaches it, no wait and no ask: merge the line's tip as read back
+  then (a plain merge; say which commit and what conflicted), then #312 and ww#656 (the chain leaf arrives with the
+  merge), the three rows banked against this lane cured and shrunk out, the instrument's findings on this lane's lines,
+  and the stage's statement. FOR THE INSTRUMENT: the merge seat writes the merge book's section 2m, "FOR EVERY LANE THAT
+  MERGES THE LINE AFTER POINT 49" (the instrument's walkers and registers, each door's checking and writing command, how
+  a banked row is cured and shrunk), on lane/merge-15-point-49-wip-2026-11-14 (docs/INTEGRATION_STYLE_2_2026-11-09.md):
+  read it before touching a register after the merge.
+
 ## P5.1 M4 at ec72918d4, the nine files run at both trees (executed, `--maxWorkers=3`, through the mutex)
 - At 714381934: 2 red titles (observedShapeReaders "the producers ran and the corpus is not empty";
   sovereigntyLightingContract "THE CENSUS IS AN ASSERTION, NOT A SENTENCE"): red at both trees, CARRIED.
@@ -988,3 +997,16 @@ executed). Scratch worktree `/home/user/wt/p11` on a local branch `p11` at the l
   the two observedShapeReaders titles GREEN, tuningRegister NAMED for the merge seat.
 - Every governing run of the commits above: no red that is not red at 714381934 but pipelinePinnedChoosers A1 (red at
   714381934 and the tip alike: the golden corpus).
+
+## P5.9 Hazard log (this seat)
+- `npm ci` wrote `core.hookspath=.husky/_` into the shared local config (kept, as for every seat before).
+- 2026-11-14 03:09-03:20 UTC, THE LINKED-WORKTREE HAZARD, BITTEN AND UNDONE. A push with nothing to send (a chained
+  command whose edit step had failed) entered the pre-push hook's WHOLE suite. A test in it that runs git acted on
+  the shared repository from the linked worktree: four fixture commits ("fixture base", "packet authority", author
+  Fixture) on the local branch p11, the worktree rewritten to the fixture's tree, and the shared local config changed
+  (core.bare=true; user.email, user.name, commit.gpgsign added). Found from the reflog before anything was sent; the
+  push and the hook's suite were killed; origin read back unmoved at 18d249003. Undone: the config restored to the
+  snapshot taken before the push (compared equal); p11 reset to 18d249003, its own pushed tip (the worktree clean);
+  the main checkout and the base worktree untouched. The push script now refuses a push with nothing to send and a
+  push carrying any commit not of this seat. RECOMMENDATION for every seat: never let the pre-push hook run the whole
+  suite from a linked worktree; read the reflog and the config after any suite.
