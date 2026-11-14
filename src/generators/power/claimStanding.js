@@ -14,6 +14,8 @@
 // label. Read against the label (set by applyLegitimacyMultipliers just before the call), a claim the label denies is refused
 // and its own ladder's lower rung takes its place: the line that ladder already prints for a power of that weight,
 // for this tier. No new words; no draw (the rungs are fixed lines).
+import { DEFENSE_BUCKET_KEYWORDS } from '../../domain/institutions/defenseInstitutionBuckets.js';
+
 const SMALL_TIERS = Object.freeze(['thorp', 'hamlet', 'village']);
 // POWERS-11 (REVIEW-POWERS-3 L2): a rung names no council, no merchant capital and no leading merchant its own roster
 // makes false. The context it reads: the power itself, the roster as the multipliers left it, the seat's name.
@@ -23,6 +25,10 @@ const MERCHANT_POWER = /merchant|trade|commerc|consortium|mercantile/i;
 const COUNCIL_SEAT = /council|assembly|senate|parliament|moot/i;
 /** The roster's merchant powers other than this one. @param {RungContext} ctx */
 const merchantsBeside = (ctx) => ctx.factions.filter((x) => x !== ctx.self && MERCHANT_POWER.test(String(x?.faction || '')));
+// POWERS-12 (REVIEW-POWERS-3 M1): a watch stands, read by the defence bucket's own words (the fact the ladder's watch
+// lines are declared against), never by /watch/ (a watchtower is no watch). @param {RungContext} ctx
+const watchStands = (ctx) => ctx.names.some((n) => DEFENSE_BUCKET_KEYWORDS.watch.some((kw) => String(n).includes(kw)));
+const CLERGY_AT_MARGINS = 'Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited.';
 const LESSER_LANDED = 'Minor landed families with limited political reach; present in civic life but rarely decisive.';
 const LOCAL_MERCHANTS = 'Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.';
 // the town's leading merchant power, where no merchant power governs, is not "not yet the dominant commercial voice"
@@ -54,8 +60,19 @@ const CLAIM_RUNGS = Object.freeze([
       ? 'The local clergy serve a real pastoral role; their moral authority has limited political reach but is genuinely respected.'
       // read beside its standing sentence ("Its priests look after their flocks and have no say in the hall"), a Minor church
       // above a village is at the margins: "meaningful civic influence" would claim a say the next sentence denies
-      : 'Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited.',
-    suppressed: () => 'Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited.' })),
+      : CLERGY_AT_MARGINS,
+    suppressed: () => CLERGY_AT_MARGINS })),
+  // POWERS-12 (REVIEW-POWERS-3 M1): the five commanding claims the table did not cover (122 towns of the census's 720).
+  // The Major church (city and metropolis only, the hospital and the charity variant): the margins rung, as above.
+  { claim: /^Major church institutions hold structural influence\. Land grants, [^.]*\./, minor: () => CLERGY_AT_MARGINS, suppressed: () => CLERGY_AT_MARGINS },
+  // printed only where a merchant power governs: the merchants' rung
+  { claim: 'The ruling class and the merchant class are the same people; commercial decisions are political decisions and civic access is purchased.',
+    minor: merchantRung, suppressed: merchantRung },
+  // the standing army (city and metropolis): the city watch's rungs, which name a watch, so only where one stands; with
+  // none, no rung is true and the claim is left
+  { claim: 'Standing army with genuine political weight; command appointments are patronage, and the council knows it.',
+    minor: (_tier, ctx) => watchStands(ctx) ? 'Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.' : null,
+    suppressed: (_tier, ctx) => watchStands(ctx) ? 'City watch; law enforcement and external defence, stretched between multiple responsibilities.' : null },
   ...['Arcane institutions hold substantial political leverage here. Contracts, security, and infrastructure all depend on magical services only they provide.',
     'Wizard towers and mage guilds hold genuine political weight; their services are structurally irreplaceable and they know it.',
   ].map((claim) => ({ claim,
@@ -78,6 +95,13 @@ const CLAIM_RUNGS = Object.freeze([
   ...['Landed noble families whose hereditary rights, land rents, and marriage networks give them structural influence the elected council cannot easily override.',
     'Landed noble families whose hereditary rights, land rents, and marriage networks give them structural influence the seat cannot easily override.',
   ].map((claim) => ({ claim, minor: nobleMinorRung, suppressed: () => LESSER_LANDED })),
+  // POWERS-12 (REVIEW-POWERS-3 M1): the great families (metropolis) and the militarised nobles take the ladder's lowest
+  // rung at both labels. The noble Minor rung reads the roster at this call, and the density law's fold drops a merchant
+  // power no house stands behind after it (r2s-occupied-metropolis-1: a Suppressed Merchant Guilds), which would leave
+  // "competitive with merchant capital" naming a power the page does not show; the lowest rung reads nothing the fold moves.
+  ...['Hereditary great families with land grants, court appointments, and dynastic marriage networks; structurally embedded in governance even when not formally in power.',
+    "Militarised noble families whose landholdings double as fortified estates; they provide the settlement's heavy cavalry and expect political weight in return.",
+  ].map((claim) => ({ claim, minor: () => LESSER_LANDED, suppressed: () => LESSER_LANDED })),
 ]);
 
 /**
