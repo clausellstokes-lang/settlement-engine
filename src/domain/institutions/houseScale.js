@@ -90,10 +90,47 @@ export function houseRungsOf(institutions, jobsOf) {
   for (const house of Array.isArray(institutions) ? institutions : []) {
     const name = keyOf(house);
     for (const job of jobsOf(house)) {
-      (out[job] ||= []).push(ladders.get(job)?.get(name) ?? Object.freeze({ rung: 1, of: 1 }));
+      (out[job] ||= []).push(ladders.get(job)?.get(name) ?? placedRungOf(ladders.get(job), name));
     }
   }
   return out;
+}
+
+/** The catalogue's tiers, least first (the order of the catalogue's own shelves by size). */
+const TIER_ORDER = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
+/** @type {Map<string, number[]> | null} */
+let TIERS_OF = null;
+/** The tiers the catalogue offers a house at (indices in TIER_ORDER, least first), by identity. @param {string} lowered */
+const tiersOf = (lowered) => {
+  if (!TIERS_OF) {
+    const m = new Map();
+    TIER_ORDER.forEach((t, i) => {
+      /** @type {Record<string, Record<string, unknown>>} */
+      const shelves = Object.hasOwn(institutionalCatalog, t) ? institutionalCatalog[t] : {};
+      for (const rows of Object.values(shelves)) for (const n of Object.keys(rows || {})) m.set(n.toLowerCase(), [...(m.get(n.toLowerCase()) || []), i]);
+    });
+    TIERS_OF = m;
+  }
+  return TIERS_OF.get(lowered) || [];
+};
+
+/**
+ * A HOUSE ON NO LADDER OF A LADDERED JOB, PLACED BY ITS SIZE (UPKEEP-13: the chair's ruling (2) on UPKEEP-MEASURE-2's P3): it counts as
+ * the LEAST rung of the job's ladders that the catalogue offers at the least tier it offers the house at, or at any greater tier, so it never
+ * counts for more than a house the catalogue makes at least its size; where the ladders offer nothing at or above its
+ * tier, as their greatest rung. A job with no ladder, and a house the catalogue does not hold (a custom house), keep
+ * the one-rung reading (1).
+ * @param {Map<string, HouseRung> | undefined} ladder @param {string} name @returns {HouseRung}
+ */
+function placedRungOf(ladder, name) {
+  const one = Object.freeze({ rung: 1, of: 1 });
+  const t0 = Math.min(...tiersOf(name));
+  if (!ladder || !ladder.size || !Number.isFinite(t0)) return one;
+  const pos = (/** @type {HouseRung} */ r) => (r.rung - 1) / (r.of - 1);
+  const rungs = [...ladder.entries()].map(([n, r]) => ({ t: Math.max(...tiersOf(n)), r }));
+  const atOrAbove = rungs.filter(({ t }) => Number.isFinite(t) && t >= t0).map(({ r }) => r);
+  if (atOrAbove.length) return atOrAbove.reduce((a, r) => (pos(r) < pos(a) ? r : a));
+  return rungs.map(({ r }) => r).reduce((a, r) => (pos(r) > pos(a) ? r : a));
 }
 
 /**

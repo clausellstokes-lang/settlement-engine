@@ -178,19 +178,22 @@ describe('IdentityDailyLife — the food balance reads as a tri-state, not a bin
     const text = chapterText(DEFICIT);
     // re-keyed (STYLE-RULINGS-2 B4, 2026-11-09): the anchor row prints the state in a word, not the
     // engine's daily units; the Economics chapter carries the figures.
-    expect(text).toContain('Food  Deficit');
-    expect(text).not.toContain('200 units'); // anchored: the anchor row is asserted present one line above
-    // re-keyed with the line's rewrite (W1 ECO second seat, the owner's style law of 2026-11-07): the deficit verdict kept.
+    // RE-KEYED (SURFACES-2 item 1, the chair's ruling (r2) of 2026-11-14): the anchor's Food row prints the food
+    // band's one home (domain/display/foodWordShown.js) or nothing; its own Deficit / Surplus / Balanced is gone. This
+    // save holds no food record, so no Food row; the Daily Life callout keeps the figures' verdict.
     expect(text).toContain('falls short of what people eat each day');
+    expect(text).not.toContain('Food  Deficit'); // anchored: the callout is asserted present one line above
+    expect(text).not.toContain('200 units'); // anchored: same
   });
 
   test('a SURPLUS still reads as a surplus (control, unchanged)', () => {
     const text = chapterText(SURPLUS);
     // re-keyed (STYLE-RULINGS-2 B4, 2026-11-09): the state in a word, and the callout's surplus in
     // words, not the engine's units.
-    expect(text).toContain('Food  Surplus');
-    expect(text).not.toContain('200 units'); // anchored: the anchor row is asserted present one line above
+    // RE-KEYED (SURFACES-2 item 1, (r2)): no second vocabulary on the anchor row; the callout keeps its words.
     expect(text).toContain('More is grown and brought in than people eat each day');
+    expect(text).not.toContain('Food  Surplus'); // anchored: the callout is asserted present one line above
+    expect(text).not.toContain('200 units'); // anchored: same
     expect(text).toContain('The local food supply is reliable');
   });
 
@@ -200,9 +203,21 @@ describe('IdentityDailyLife — the food balance reads as a tri-state, not a bin
     expect(text).not.toContain('+0 units'); // anchored: 'Balanced' + 'in balance' are asserted PRESENT below — the chapter rendered and chose the third word
     expect(text).not.toContain('Surplus of 0 units'); // anchored: same — the callout rendered ('in balance' below)
     expect(text).not.toContain('The local food supply is reliable'); // anchored: same — the verdict sentence rendered as 'in balance' below
-    // ...and both say the estate's own third word instead.
-    expect(text).toContain('Balanced');
+    // ...and the callout says the estate's own third state instead. RE-KEYED (SURFACES-2 item 1, (r2)): the anchor
+    // row no longer prints "Balanced", a word of its own: it prints the food band or nothing.
     expect(text).toContain('in balance');
+    expect(text).not.toContain('Food  Balanced'); // anchored: 'in balance' asserted present one line above
+  });
+
+  test('the anchor\'s Food row prints the food band\'s word, the one the Tonight page prints (SURFACES-2 item 1)', () => {
+    const settlement = {
+      name: 'Balanceford', tier: 'town', population: 900,
+      economicViability: { metrics: { foodBalance: SURPLUS } },
+      economicState: { foodSecurity: { label: 'Secure', foodRecord: { band: 'secure', gapPct: 3, normalImportPct: 10 } } },
+    };
+    const text = collectText(IdentityDailyLife({ settlement, vm: buildViewModel({ settlement }) })).join(' ');
+    expect(text).toContain('Food  Pressured');
+    expect(text).not.toContain('Food  Surplus'); // anchored: the row is asserted present one line above
   });
 
   test('a settlement whose food was never calculated asserts nothing about food', () => {

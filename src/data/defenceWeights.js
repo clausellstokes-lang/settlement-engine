@@ -15,6 +15,7 @@ export const DEFENCE_TUNING = Object.freeze({
   walls: Object.freeze({ mil: 30, mon: 20 }),
   wallKind: Object.freeze({ stone: 1, palisade: 0.6 }),
   houseScale: Object.freeze({ least: 0.8, greatest: 1.2 }), // UPKEEP-CAPACITY C1 (the chair's ruling B): a house counts by its rung on its own ladder
+  people: Object.freeze({ milPerHead: 1 }), // UPKEEP-MEASURE-2 P4: the military score is full at the people times this (a force is no greater than its people); the starting value, for the owner's veto
   garrison: Object.freeze({ mil: 28, mon: 20, int: 15 }),
   militia: Object.freeze({ mil: 10, mon: 12, int: 8 }),
   watch: Object.freeze({ mil: 7, int: 18 }),
@@ -86,6 +87,7 @@ export const WATCH_IN_STEAD = Object.freeze({ hasMercenary: false, hasCharterHal
 export const DEFENCE_WEIGHT_REASONS = Object.freeze({
   walls: 'the largest built defence; holds against raiders and beasts alike',
   wallKind: 'a stone wall at its full value; a palisade counts for less (the roster\'s "Palisade or earthworks", and any earthwork, reads as a palisade; the starting weight, for the owner\'s veto)',
+  people: 'a force is no greater than its people: a place\'s military score is full at its people times `milPerHead` (never above 100), the rest held in reserve (UPKEEP-MEASURE-2 P4; the starting value, for the owner\'s veto)',
   houseScale: 'a house counts by its rung on its own ladder (the catalogue\'s scale tiers of the same function): the least rung at `least`, the greatest at `greatest`, evenly between, the middle at today\'s points; a one-rung ladder at 1; a part reads its greatest house (the owner: "a single alchemist should not have the same influence as an alchemist district"; the chair\'s ruling B)',
   garrison: 'a standing professional force; it also keeps order',
   militia: 'citizens under arms: less than soldiers, good against beasts',

@@ -5,12 +5,15 @@
  * spoken only where the record does not contradict them; and the catalog crisis hook's `{holder}`
  * slot, filled by name only where the sentence names a role the cast holds.
  */
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeAll } from 'vitest';
 import {
-  CRISIS_HOOK_SLOTS, CRISIS_NOUN, crisisHooksOf, lineRoleHolderOf, slotCrisisHook,
+  CRISIS_HOOK_SLOTS, CRISIS_NOUN, crisisHookFor, crisisHooksOf, lineRoleHolderOf, slotCrisisHook,
 } from '../../src/domain/crisis/crisisHooks.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { CAST_REASONS, CRISIS_NATURE, STAKE_REASONS } from '../../src/domain/crisis/crisisCast.js';
-import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
+import { STRESS_TYPE_MAP, STRESS_TYPE_SIBLINGS } from '../../src/data/stressTypes.js';
 import { hookTruthViolations, settlementHookFacts } from '../../src/domain/coherence/hookTruth.js';
 
 const npcRow = (role, id, name, reason) => ({ role, kind: 'npc', id, name, reason, temporary: false });
@@ -103,16 +106,45 @@ describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', ()
 describe('slotCrisisHook: the catalog sentence gains a {holder} slot only where it names a role the cast holds', () => {
   it('every slot\'s phrase occurs exactly once in its catalog sentence (a slot in the sentence, never a second sentence)', () => {
     for (const [kind, slots] of Object.entries(CRISIS_HOOK_SLOTS)) {
-      const text = STRESS_TYPE_MAP[kind].crisisHook;
-      for (const slot of slots) expect(text.split(slot.phrase).length - 1, `${kind}: ${slot.phrase}`).toBe(1);
+      // re-keyed at the landing (the chair, 13:38): a phrase stands once in the catalog sentence OR in one of its
+      // declared twins (STRESS_TYPE_SIBLINGS: the plague's slot-less twin where no healer stands), never twice in one.
+      const texts = [STRESS_TYPE_MAP[kind].crisisHook, ...(STRESS_TYPE_SIBLINGS[STRESS_TYPE_MAP[kind].crisisHook] || []).map((t) => t.text)];
+      for (const slot of slots) {
+        const counts = [...new Set(texts)].map((t) => t.split(slot.phrase).length - 1);
+        expect(counts.filter((c) => c === 1).length, `${kind}: ${slot.phrase}`).toBe(1);
+        expect(Math.max(...counts), `${kind}: ${slot.phrase}`).toBe(1);
+      }
     }
   });
 
   it('the plague\'s healer is named when the cast holds the lever in a person', () => {
     const c = cast([npcRow('lever', 'h1', 'Hesk Marrow', CAST_REASONS.leverRuns)]);
-    expect(slotCrisisHook('plague_onset', STRESS_TYPE_MAP.plague_onset.crisisHook, c)).toBe(
+    expect(slotCrisisHook('plague_onset', STRESS_TYPE_MAP.plague_onset.crisisHook, c, [{ id: 'h1', name: 'Hesk Marrow', role: 'Healer' }])).toBe(
       'Hesk Marrow, the healer who identified the outbreak first, has gone quiet. Their last message suggested the disease is not natural. Accessing them means navigating a quarantine that is not being enforced consistently.',
     );
+  });
+
+  // R2-CODE-B-9 (CENSUS-2 at the lane's tip, r2r-town-37): "Maisa ibn Battuta, the healer who identified the outbreak
+  // first, has gone quiet." of the dean of the parish churches. A line that names a role reads the roster: the slot
+  // fills only a holder whose own role is a healer's; any other holder leaves the sentence's own words.
+  it('the plague\'s slot reads its holder\'s role: a dean or a priest holding the lever leaves the sentence as written', () => {
+    const plague = STRESS_TYPE_MAP.plague_onset.crisisHook;
+    const c = cast([npcRow('lever', 'p1', 'Maisa ibn Battuta', CAST_REASONS.leverRuns)]);
+    for (const role of ['the dean', 'the priest', "the hospital's master"]) {
+      expect(slotCrisisHook('plague_onset', plague, c, [{ id: 'p1', name: 'Maisa ibn Battuta', role }]), role).toBe(plague);
+    }
+    expect(slotCrisisHook('plague_onset', plague, c), 'no roster card read: no healer is known').toBe(plague);
+    for (const role of ['the apothecary', 'the midwife', 'the hospitaller', 'the healer']) {
+      expect(slotCrisisHook('plague_onset', plague, c, [{ id: 'p1', name: 'Maisa ibn Battuta', role }]), role)
+        .toBe(plague.replace('The healer who identified the outbreak first', 'Maisa ibn Battuta, the healer who identified the outbreak first,'));
+    }
+  });
+
+  it('a slot that names a role passes over a holder of another role to the one whose role it names', () => {
+    const plague = STRESS_TYPE_MAP.plague_onset.crisisHook;
+    const c = cast([npcRow('lever', 'p1', 'Maisa ibn Battuta', CAST_REASONS.leverRuns), npcRow('lever', 'h1', 'Hesk Marrow', CAST_REASONS.leverRuns)]);
+    const roster = [{ id: 'p1', name: 'Maisa ibn Battuta', role: 'the dean' }, { id: 'h1', name: 'Hesk Marrow', role: 'the apothecary' }];
+    expect(slotCrisisHook('plague_onset', plague, c, roster)).toMatch(/^Hesk Marrow, the healer who identified the outbreak first, has gone quiet\./);
   });
 
   it('the siege names both the one who would treat and the defender, and one person never fills both slots', () => {
@@ -213,5 +245,37 @@ describe('crisisHooksOf: a plural power agrees', () => {
     const hookFor = (factionId) => crisisHooksOf(town(), { type: 'plague_onset', cast: cast([], [lever], [{ factionId, stake: 'loses', reason: STAKE_REASONS.loses }]) })[0].text;
     expect(hookFor('Religious Authorities')).toMatch(/Religious Authorities lose most, because their own people feel the crisis first\.$/);
     expect(hookFor('Town Council')).toMatch(/Town Council loses most, because its own people feel the crisis first\.$/);
+  });
+});
+
+// R2-CODE-B-9: the plague slot on the census's own births (CENSUS-2 seeds and dials): r2r-town-37's lever is the dean
+// of the parish churches (the red); r2s-plague_onset-thorp-0's is the temporary Healer and r2r-city-19's the
+// apothecary (the guards, whose levers ARE healers and keep their names).
+describe('the plague slot on born towns: the dean is not named the healer, the healers still are', () => {
+  const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+  const born = (seed) => {
+    const m = seed.match(/^r2r-(\w+)-(\d+)$/); const f = seed.match(/^r2s-(\w+)-(thorp|hamlet|village|town|city|metropolis)-(\d+)$/);
+    const config = m ? birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: m[1] })
+      : birthConfig({ ...DEFAULT_CONFIG, ...DIALS, selectedStresses: [f[1]], selectedStressesRandom: false, settType: f[2] });
+    return generateSettlementPipeline(config, null, { seed, customContent: {} });
+  };
+  const plagueHookOf = (s) => {
+    const entries = Array.isArray(s.stress) ? s.stress : [s.stress];
+    return crisisHookFor(s, entries.find((e) => e?.type === 'plague_onset'));
+  };
+  beforeAll(async () => { await loadGenerationLawPayloads(); }, 60_000);
+
+  it('r2r-town-37: the dean holds the lever and the sentence keeps its own words', () => {
+    const s = born('r2r-town-37');
+    const hook = plagueHookOf(s);
+    // re-keyed at the landing: town-37 keeps no healer, so it stores the data lane's twin (745c05a1f), its own words kept
+    expect(hook).toBe('The first person to name the outbreak has gone quiet. Their last message suggested the disease is not natural. Reaching them means crossing a quarantine that is not being enforced consistently.');
+  });
+
+  it('r2s-plague_onset-thorp-0 and r2r-city-19: a lever who is a healer is still named', () => {
+    // R2-CODE-B-12, ruling (c): thorp-0's lever is the minted stand-in ("Tends the sick"; no healer is kept there), named
+    // without the word (tests/domain/crisisStandInWords.test.js); the apothecary is a healer and keeps it.
+    expect(plagueHookOf(born('r2s-plague_onset-thorp-0'))).toMatch(/^Jiahao Wu, the first to name the outbreak, has gone quiet\./); // the twin, the stand-in named (the landing)
+    expect(plagueHookOf(born('r2r-city-19'))).toMatch(/^Una Murray, the healer who identified the outbreak first, has gone quiet\./);
   });
 });

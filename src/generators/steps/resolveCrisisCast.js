@@ -16,6 +16,21 @@
  * appended (EM-R2's producer gate, the same key assembleSettlement's appender honours); a
  * temporary person already on the held roster is reused by kind.
  *
+ * ⛔ A WHOLE PERSON, AND A TRUE RECEIPT (R2-CODE-B-9; the chair's ruling of 2026-11-14 07:32). The
+ * temporary person carries every field the record's contract asks of a born card: `memberships`
+ * and `importance` (the record class register's `card-standing` group), by the roster's own rules
+ * for a face of no power: `importance` 'minor' (people/castPowers.js, "a member ranked nowhere, or
+ * a face of no power, is `minor`") and `structuralRank` from `structuralStandingOf` ('unaffiliated',
+ * the field npcStructure.js writes on every card). The coherence receipt is written by
+ * `assembleSettlement` BEFORE this step appends the person, so where a person is minted the
+ * receipt is written again by its own writer over the final roster: its graph evidence counts the
+ * person it now carries (V-EVIDENCE-ROSTER). No count is edited; a town that mints nobody keeps
+ * the receipt assembleSettlement wrote, byte for byte. Draw-free.
+ *
+ * ⛔ ITS ROLE CLAIMS NO OFFICE (R2-CODE-B-12, the chair's ruling (c)): the person stands in where the record holds no
+ * house and no office-holder for the lever, so its `role` is what it DOES in the crisis it was minted for, in lay words
+ * (`STAND_IN_ROLE`, domain/crisis/crisisCast.js: "Tends the sick", never "Healer" beside "No healer is kept here").
+ *
  * `crisisResolve` (src/domain/crisisLifecycle.js) removes a resolved crisis's temporary person.
  *
  * THE CRISIS HOOKS ARE NOT WRITTEN HERE (the HOOKS-UNDER-STRESS lane; the chair's ruling 4): the
@@ -26,14 +41,9 @@
 import { chooseOrPin, registerStep } from '../pipeline.js';
 import { STRESS_SEVERITY_WEIGHT } from '../stressGenerator.js';
 import { pickFirst } from '../npcGenerator.js';
-import { deriveCrisisCast, castHash } from '../../domain/crisis/crisisCast.js';
-
-/** The role a temporary person carries on the roster, by the kind of lever it holds. */
-const TEMPORARY_ROLE = Object.freeze(/** @type {Record<string, string>} */ ({
-  healer: 'Healer',
-  grain: 'Grain Steward',
-  warden: 'Warden',
-}));
+import { deriveCrisisCast, castHash, STAND_IN_ROLE, STAND_IN_ROLE_FALLBACK } from '../../domain/crisis/crisisCast.js';
+import { structuralStandingOf } from '../../domain/people/membership.js';
+import { buildGenerationCoherenceReceipt } from '../generationCoherence.js';
 
 const UNPINNED = Symbol('unpinned');
 
@@ -49,10 +59,10 @@ function entriesOf(stress) {
 
 registerStep('resolveCrisisCast', {
   deps: ['assembleSettlement'],
-  reads: ['settlement'],
+  reads: ['generationContext', 'generationRepairs', 'settlement'],
   provides: ['crisisCast'],
   // writes `cast` onto each stress entry of the assembled record, and may append ONE temporary
-  // person to its roster
+  // person to its roster (and then re-writes the coherence receipt over that roster)
   mutates: ['settlement'],
   phase: 'assembly',
 }, (ctx, rng) => {
@@ -78,9 +88,11 @@ registerStep('resolveCrisisCast', {
       const name = pickFirst(String(config.culture || 'germanic'), gender, true, String(settlement.tier || 'town'));
       if (!name) return null;
       const id = `npc_temp_${kind}`;
+      const memberships = /** @type {never[]} */ ([]);
       minted.push({
-        id, name, gender, role: TEMPORARY_ROLE[kind] || 'Steward', category: 'civic',
-        power: 1, influence: 'low', memberships: [],
+        id, name, gender, role: STAND_IN_ROLE[crisisId] || STAND_IN_ROLE_FALLBACK, category: 'civic',
+        power: 1, influence: 'low', memberships,
+        importance: 'minor', structuralRank: structuralStandingOf({ memberships }).standing,
         temporary: true, temporaryKind: kind, crisisIds: [crisisId],
       });
       return { id, name };
@@ -121,6 +133,14 @@ registerStep('resolveCrisisCast', {
     npcs.push(person);
   }
   if (minted.length && !Array.isArray(settlement.npcs)) settlement.npcs = npcs;
+  // The receipt counts after the mint (see the header): its own writer, the same context.
+  if (minted.length) {
+    settlement.generationCoherenceReceipt = buildGenerationCoherenceReceipt(settlement, {
+      seed: ctx._seed,
+      generationContext: ctx.generationContext,
+      generationRepairs: ctx.generationRepairs,
+    });
+  }
   void rng;
   return { crisisCast };
 });

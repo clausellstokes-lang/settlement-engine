@@ -418,9 +418,13 @@ describe('the coal line: coal fires the forges only where a forge house stands',
     expectNoSeedFailures(collectSeedFailures(['r2r-thorp-2', 'r2r-village-6', 'r2r-thorp-16'], (seed) => {
       const s = born(seed);
       expect(s.institutions.filter((i) => FORGE.test(String(i.name))), `${seed}: anchored, no forge house`).toEqual([]);
-      const metal = s.economicState.incomeSources.find((e) => e.source === 'Iron & Metalwork');
-      expect(metal?.desc, seed).toBe(LOCAL_COAL_SOLD_LINE);
-      expect(metal?.desc).not.toBe(LOCAL_COAL_LINE);
+      // UPKEEP-16 (the chair's ruling (o) re-ruled, candidate D): re-keyed BY IDENTITY, the same three towns, the cured row:
+      // coal sold with no house of the metal trade is titled by the good it sells, "Coal Sales", its line silent.
+      expect(s.economicState.incomeSources.filter((e) => e.source === 'Iron & Metalwork'), `${seed}: no metal row with no house of the trade`).toEqual([]);
+      const coal = s.economicState.incomeSources.find((e) => e.source === 'Coal Sales');
+      expect(coal, `${seed}: the coal sale is kept`).toBeTruthy();
+      expect(coal?.desc, seed).toBe('');
+      expect(s.economicState.incomeSources.filter((e) => e.desc === LOCAL_COAL_LINE || e.desc === LOCAL_COAL_SOLD_LINE), seed).toEqual([]);
     }), 'COAL-LINE-NO-FORGE-HOUSE');
   });
   test('the sibling is declared beside the line, keyed by its text', async () => {
@@ -525,8 +529,11 @@ describe('the felling line: a wild stand is felled and sawn only where a wood ho
       const s = born(seed);
       expect(s.config.nearbyResources.filter((r) => /timber|forest/.test(r)), `${seed}: anchored, a wild stand only`).toEqual(['mountain_timber']);
       expect(s.institutions.filter((i) => /sawmill|lumber|timber|carpent|wood|forest/i.test(String(i.name))), `${seed}: anchored, no wood house`).toEqual([]);
-      const timber = s.economicState.incomeSources.find((e) => e.source === 'Timber Trade');
-      expect(timber?.desc, seed).toBe('Timber sourced from more distant forests and resold or processed locally: trade route dependent.');
+      // UPKEEP-16 (the chair's ruling (o) re-ruled, candidate D): re-keyed BY IDENTITY, the same six towns, the cured row:
+      // no wood house works the stand and no timber is sold from it, so the page does not bear a timber row out.
+      expect(s.economicState.primaryExports.filter((x) => /timber|lumber|plank/i.test(String(x))), `${seed}: anchored, no timber sold`).toEqual([]);
+      expect(s.economicState.incomeSources.filter((e) => e.source === 'Timber Trade'), seed).toEqual([]);
+      expect(s.economicState.incomeSources.filter((e) => /felling|sawmilling/.test(String(e.desc))), seed).toEqual([]);
     }), 'a stand nobody works is felled and sawn');
   });
 });
