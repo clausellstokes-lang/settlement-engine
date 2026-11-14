@@ -211,6 +211,7 @@ export const CAST_ABSENCES = Object.freeze({
   noBase: "no house's base is hit",
   noLever: 'no house the crisis turns on stands here',
   noGains: 'no power gains',
+  occupierOnly: "no local is named: none of the town's own powers gains", // R2-CODE-B-11, row 179: the collaborator is a local
   outsideHand: 'an outside hand, unnamed',
   noSeat: 'no seat or governing house stands',
   noMilitary: 'no military, garrison or watch stands',
@@ -859,7 +860,12 @@ export function treaterCandidates(s) {
  * @returns {Candidates}
  */
 export function collaboratorCandidates(s, stakes) {
-  const roster = rosterOf(s);
+  // R2-CODE-B-11, the bar's row 179 (the chair's ruling (a), 2026-11-14): THE COLLABORATOR IS NEVER THE OCCUPIER. The role
+  // is cast only in the occupation kinds (occasionalRolesOf), and a collaborator is a LOCAL who deals with the power the
+  // crisis brings: no member of an occupying power (the face's own house, faceCandidates) is cast, in either arm. Where no
+  // local remains the role is absent by its own reason (occupierOnly where the occupier alone gains). No draw.
+  const occupiers = new Set(factionsOf(s).filter(isOccupier).map(factionName));
+  const roster = rosterOf(s).filter((n) => !memberOfAny(n, occupiers));
   /** @type {CastRow[]} */
   const out = roster.filter((n) => !!allegianceOf(n)).map((n) => npcRow(n, 'collaborator', CAST_REASONS.collaboratorCorrupt));
   const gainers = new Set(stakes.filter((k) => k.stake === 'gains').map((k) => k.factionId));
@@ -870,7 +876,8 @@ export function collaboratorCandidates(s, stakes) {
       return (am(a.n) - am(b.n)) || (numOf(b.n.power) - numOf(a.n.power)) || (a.at - b.at);
     });
   for (const { n } of ambitious) out.push(npcRow(n, 'collaborator', CAST_REASONS.collaboratorAmbition));
-  return { candidates: out, absent: CAST_ABSENCES.noGains };
+  const onlyTheOccupier = [...gainers].every((g) => occupiers.has(g)) && [...gainers].some((g) => occupiers.has(g));
+  return { candidates: out, absent: onlyTheOccupier ? CAST_ABSENCES.occupierOnly : CAST_ABSENCES.noGains };
 }
 
 /**
@@ -1013,7 +1020,11 @@ export function deriveCrisisCast(settlement, entries, seed, options = {}) {
           if (p) { links.push(link.from); return { ...p, role: 'exploiter', reason: CAST_REASONS.exploiterLinked }; }
         } else {
           const e = prev.get('exploiter');
-          if (e) { links.push(link.from); return { ...e, role: 'collaborator', reason: CAST_REASONS.collaboratorLinked }; }
+          // Row 179, read the same way: the famine's exploiter is the occupation's collaborator only as a LOCAL (never the
+          // face, never a member of an occupying power); else the link is not read and the role falls to Rule 9.
+          const occupiers = new Set(factionsOf(settlement).filter(isOccupier).map(factionName));
+          const own = !!e && (e.kind === 'faction' ? occupiers.has(e.id) : memberOfAny(rosterOf(settlement).find((n) => (str(n.id) || str(n.name)) === e.id) || {}, occupiers));
+          if (e && !own && !roles.some((r) => r.role === 'face' && keyOf(r) === keyOf(e))) { links.push(link.from); return { ...e, role: 'collaborator', reason: CAST_REASONS.collaboratorLinked }; }
         }
       }
       return null;
