@@ -819,7 +819,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { front: 'front', name: 'Smelter', face: 'the smelt master', baseChance: 0.35, desc: 'Converts raw ore to refined metal using charcoal-fueled furnaces. The industrial intermediate between mine and smithy.', tags: ['trade'], priorityCategory: 'crafts' },
+      shared: { front: 'front', name: 'Smelter', face: 'the smelt master', baseChance: 0.35, desc: 'Converts raw ore to refined metal using charcoal-fueled furnaces.', tags: ['trade'], priorityCategory: 'crafts' }, // W2-FIX-DATA-13 (the chair's 11:31 ruling, DATA-SMELTER): the default names neither the mine nor the smithy the roster may lack; the two variants keep them where both stand
       at: {
         town: {},
         city: {},

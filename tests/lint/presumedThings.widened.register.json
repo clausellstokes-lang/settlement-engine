@@ -6985,18 +6985,6 @@
     "3c27cb53dcc50109"
    ],
    [
-    "house: mine",
-    "family",
-    "Converts raw ore to refined metal using charcoal-fueled furnaces. The industrial intermediate between mine and smithy.",
-    "d3537bad8b5539cb"
-   ],
-   [
-    "smith",
-    "family",
-    "Converts raw ore to refined metal using charcoal-fueled furnaces. The industrial intermediate between mine and smithy.",
-    "d3537bad8b5539cb"
-   ],
-   [
     "clergy",
     "family",
     "Can read and write. Copies letters, draws up simple contracts, reads documents for the illiterate. Often the priest's as",
