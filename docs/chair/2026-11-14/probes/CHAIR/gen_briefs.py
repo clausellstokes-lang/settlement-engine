@@ -1177,6 +1177,75 @@ SEATS2['POWERS-12'] = dict(
 )
 
 
+SEATS2['W2-WRITE-9'] = dict(
+    title="W2-WRITE-9 · the corpus lane's main seat: the HIGH rows left, then THE MERGE of the three, the line's merge and the final statement",
+    branch='lane/w2-write-2026-11-13', tip='f737c96e', statement=True,
+    intro=("You are W2-WRITE-9, the ninth seat on the corpus lane of the settlement-engine integration program (lane/w2-write-2026-11-13). The lane cures the "
+           "false lines an independent reader found in the dossier's written corpus (59 of 151 new lines were false where they print). It is SPLIT BY BLOCK "
+           "among three seats: YOU, the main seat, hold the DS-DEF block; two side seats hold DS-ECO and every other block, each on its own branch cut from "
+           "dcd4759b0. The eighth seat finished parts B and C, cured two of part D's HIGH rows and handed back at its context mark with its list written "
+           "out. Yours: the few HIGH rows left, and THE LANE'S CLOSE: THE MERGE of the three, the merge of the integration line, the lane's ONE final "
+           "statement."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/W2-WRITE-HANDBACK-8.md, BY LINE RANGE, BY SCRIPT: from its top down to the heading \"## LEFT FOR AFTER THE "
+          "JOIN\" (the eighth seat's items; the new lines; WHAT IS LEFT FOR THIS LANE; D's and E's HIGH rows, each with its state: THAT IS YOUR LIST), and "
+          "from \"## How the instruments are re-made\" to the end (the instruments; found while reading; parked; named; the rulings). The list under LEFT "
+          "FOR AFTER THE JOIN is NOT yours: do not read it. And docs/chair/2026-11-13/probes/W2-WRITE-5/README.md (the instruments).\n"
+          "3. AT THE CLOSE: docs/chair/2026-11-13/W2-WRITE-HANDBACK-5.md, the sections THE SPLIT and THE MERGE only (the merge in eight exact steps); on each "
+          "side branch, the section of its hand-back written for your merge (origin/lane/w2-write-side-eco-2026-11-13: "
+          "docs/chair/2026-11-13/W2-WRITE-SIDE-ECO-HANDBACK.md, \"For the main seat's merge\"; origin/lane/w2-write-side-rest-2026-11-13: "
+          "docs/chair/2026-11-13/W2-WRITE-SIDE-REST-HANDBACK.md, \"For the main seat before it merges\" and what its SEAT 2 and SEAT 3 parts say they "
+          "moved); and the merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (docs/INTEGRATION_STYLE_2_2026-11-09.md, the section "
+          "headed \"## 2m.\": about forty lines; by script).\n"
+          "4. THE LISTS the row numbers refer to: `git fetch origin lane/round-3-cut-2026-11-13`: docs/chair/2026-11-13/ROUND-3-CUT.json and "
+          "ROUND-3-CUT-INCREMENT.json (key `lines`; query by script, never print)."),
+    work=(CLOSE_NOW % '120,000' + "\n"
+          "YOUR BLOCK: the `### DS-DEF-…` sections of the source document and the generated twin defense.generated.js. You change NO other block's text.\n"
+          "THE LIST, in this order, each cause its own commit, red first, pushed as made:\n"
+          "1. THE HIGH ROWS LEFT, by pool: #1170 (DS-DEF-2 walls AND professional garrison v1: \"paid soldiers on every stretch of its walls\" beside the "
+          "page's own \"too few people man them\"); #642 (walls with NO force v2 in a town that holds a watch and a free company: re-read at the tip); the "
+          "increment's #645 (the week's work under a siege), #1509 (\"comfortably over-provided against beasts\" beside a Critical bar), #1206 (\"runs on "
+          "arcane work\" where every magic role reads absent); the two the seventh seat found (DS-DEF-5 NO organized force at all v1 to v3 under an "
+          "occupation; DS-DEF-11 WALLED-STRAINED v2 under an occupation, its slot printing a catalogue label). For every pool you touch, ALL its firing "
+          "variants are read.\n"
+          "2. THE FIVE HIGH ROWS EARLIER SEATS CURED (#812 #953 #1305 #954 #1392): RE-READ AT THE TIP in their own towns: cured and true, or said so.\n"
+          "3. The measuring seat's command over defense.generated.js at dcd4759b0 and at your tip (the form below gives the command): every hit read "
+          "against its town; a HIGH one cured, the rest named for after the join.\n"
+          "4. ONE MESSAGE TO THE CHAIR (the tip; the rows' states). THE CHAIR THEN NAMES THE TWO SIDE TIPS (both side seats are closing now). If they are "
+          "not named yet: THE COUNT's way (wake yourself, end your turn): the chair's word wakes you.\n"
+          "THE CLOSE, each step its own commit or commits:\n"
+          "5. THE MERGE of both side branches at the tips the chair names, EXACTLY as HANDBACK-5's section THE MERGE gives it (eight steps: the proof that "
+          "every pool's ids and draws equal the side that holds its block; the check that each side moved no block but its own; every shared register "
+          "re-derived through its door).\n"
+          "6. THE MERGE OF THE LINE (the word is given): full history first (`git fetch --depth=2147483647 origin lane/integration-2026-11-07 "
+          "lane/w2-write-2026-11-13 lane/w2-write-side-eco-2026-11-13 lane/w2-write-side-rest-2026-11-13`; `git rev-parse --is-shallow-repository` prints "
+          "false; `git merge-base --all origin/lane/integration-2026-11-07 HEAD` prints TWO bases, 96d698de7 and 9d5d6e091); the line's tip as you read it "
+          "back (976db5b19 when this was written; a plain merge; say which commit and what conflicted). BY THE CHAIR'S TRIAL MERGE OF THE MAIN BRANCH "
+          "ALONE (f737c96e): 7 conflicted files; the side branches will add their generated files and registers. THE SOURCE DOCUMENT "
+          "(docs/content/RECEIPT_POOLS_DOSSIER_STATE.md) is resolved BY HAND, section by section, both sides' cures and declarations standing (the line's "
+          "came with the instrument lane: its declarations are not dropped); a hunk that needs a choice between two wordings of one line is a STOP with "
+          "both. EVERY GENERATED FILE (src/data/dossierStateProse/*.generated.js) is taken from either side and then REGENERATED by the doors, never "
+          "resolved by hand. The registers (docs/content/wiring-census.json, scripts/.prose-byte-baseline.json, "
+          "scripts/census/page-census.register.json, tests/lint/presumedThings.register.json, tests/lint/presumedThings.widened.register.json) each taken "
+          "from THE LINE's side and re-derived through its own door, its own commit. THEN every check section 2m lists: a red on this lane's lines is "
+          "cured or declared through its door; nothing is banked by hand: a door's refusal you cannot cure is a STOP to the chair with the door's output.\n"
+          "7. THE SEVEN FAITH POOLS the merge seat re-based by name at point 49 (DS-GEN-7 power_economic temple economy, DS-GEN-17 cathedral, DS-FTH-4 "
+          "crusaderSynthesis, heresySuppression hunted and preached, religiousFraud, mageTheocracy: 2m's part (3), last sentence): each must read the faith "
+          "reading; a cure lowers its row through `node scripts/fact-layers-door.mjs --shrink` and takes its name off the walker's REBASED_49D list in the "
+          "same commit (the list may only shrink). MEASURE FIRST what the faith reading answers on your births: another lane's seat measured its "
+          "`seniorCleric` NULL IN EVERY TOWN on its tree (the ranks' patterns miss a title that carries its article): a pool declared on a reading that is "
+          "null everywhere is silenced, and a count falling is not a cure: such a pool reads the reading's fields that do answer (the church, the faction, "
+          "the tithe), or it STAYS on the list with this cause named, LEFT FOR AFTER THE JOIN.\n"
+          "8. THE LANE'S ONE FINAL STATEMENT in the form below, for the three branches as one lane (the base is dcd4759b0 for the split; the lane's "
+          "reviewed base is b5206acd3): the lane's list of new and changed lines gathered from every seat's hand-back with their towns, for the owner's "
+          "veto and for the reader, who reads the lane's new lines WHOLE; FOR THE JOIN; LEFT FOR AFTER THE JOIN gathered from the three hand-backs (the "
+          "medium rows, the notes, the parked words).\n" + CORPUS2),
+    merges="; on the chair's word, the merges of lane/w2-write-side-eco-2026-11-13 and lane/w2-write-side-rest-2026-11-13; the merge of the integration line's tip named in step 6",
+    when="for a stop that blocks everything you have left, at step 4 (the tip; the rows' states), when THE MERGE is pushed (the tip; the proof's figures), when the line's merge and its registers are pushed, and with your final statement or hand-back",
+    turns='',
+)
+
+
 VEIL_BYTES = (
     "supabase/migrations/211_server_side_share_veil.sql eface6d093933170b9541fe630068c26e5bd41477e95e913ae7168e373be0b01 and "
     "supabase/rollback/211_server_side_share_veil.down.sql ce8474ffc251b4c4bd6005d5a409d4a15bd20fef6b507534ef6338d3bd49712f: FROZEN, never changed by "
