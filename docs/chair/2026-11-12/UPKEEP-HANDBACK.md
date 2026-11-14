@@ -1,3 +1,53 @@
+# COHERENCE-UPKEEP: the hand-back (the tenth seat, UPKEEP-10, 2026-11-14) — IN PROGRESS: items 1 and 2 done (#869 measured: FOR THE JOIN; the grain line cured; the coal lines measured at zero); step 3 sent; the merge next
+
+**The lane:** `lane/coherence-upkeep-2026-11-12`. **Base of this seat:** 1bdf565ec (read back from origin before any work). **The brief:** `origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-UPKEEP-10.md` (self-contained; it carries the laws and the final statement's form). **The probes:** `docs/chair/2026-11-14/probes/UPKEEP-10/` (README there) beside UPKEEP-9's. **The births:** the lane's 1,490 (UPKEEP-9's `birthgz.mjs`) and CENSUS-2's 720.
+
+## The brief and the rulings this seat works to
+
+- **Who asks:** the chair, `session_01ACmDYZrFEVXyZEUg1NDxxC`; the owner in its chat, 2026-11-14: "Continue with the pending work! ... I defer all decisions to you and give you all permissions you may require." Merging the pull request and the deploy stay the owner's; no commit at or below 1bdf565ec is rewritten; no pull request.
+- **The work, in order:** (1) #869 AT DISPLAY (the band is not moved; the page tells the siege's truth; the Substrate tab's row was cured on round three's tabs lane: not rebuilt); (2) the grain line and the coal lines under a siege (the eighth seat's LEFT 1 (a) (b)); (3) one message to the chair, the count; (4) full history, then the plain merge of `lane/integration-2026-11-07` (976db5b19 when written): 12 conflicted files expected, code by hand, two measured pins measured at the merge, four registers each from ONE side then re-derived through its door; (5) every check of the merge book's section 2m; THE ONE ROW BANKED against this lane (`incomeLineSiblings.js`, "smith", the coal line, `after-base: defence`, 3628f37cc) cured and shrunk through its door; (6) the lane's item 4 (declarations: one ladder for one number; the Services and Magic tabs' labels LISTED; the corpus lines M1 M2 M3 M5 L2 and C-M1's six births declared as exposure); (7) the lane's ONE final statement.
+- **The count:** after every item, never more than 45 minutes apart: send_later one minute, read `external_metadata.context_usage.used_tokens`; hand back at 400,000. At 04:10 UTC the field read **0** (the brief: say so in one line to the chair; the chair reads the count).
+
+## What this seat did, in commit order
+
+| Commit | Item | Measure | Moved |
+|---|---|---|---|
+| 3bd14d0b5 | 2(a), THE GRAIN LINE (#ww-339, #ww-1357): `incomeLineSiblings.js :: trueIncomeDesc` gives GRAIN_OWN_FIELDS_LINE no sentence where the food record names grain as the failed source (`grainFailed`, from `economicState.js`) or the final export list sells grain or flour | on the 1,490 at 1bdf565ec the line prints in 182 births, beside a flour/grain export or a failed grain harvest in **144** (Milled flour 139, Grain export 1, failed grain 37, overlapping) -> **0**; the 720: 72 print it, 69 beside a flour export | DECLARED MOVE, the income lines only: 144 values in 144 births, all `.economicState.incomeSources[*].desc` (the line -> ''); the Grain Sales row keeps its label and share |
+| 376dfa04a | the lighting census through its door (three new titles) | 34/34 | titles 29,364 -> 29,367; suiteTitles 7,977 -> 7,978 |
+
+### Item 1, #869 AT DISPLAY: MEASURED; no printing leaf is this lane's: FOR THE JOIN
+
+- **On the records** (`m869.mjs`, at 1bdf565ec): the 1,490's 273 besieged births band trade connectivity adequate **70**, surplus **5** (strained 177, critical 18, collapsed 3); CENSUS-2's 720: 31 besieged, adequate **7** (r2r-hamlet-0, r2r-village-55, r2s-under_siege-thorp-0, -thorp-1, -town-0, -city-0, -metropolis-3), strained 21, critical 3.
+- **On the page** (CENSUS-2 at 1bdf565ec, every rendered view of the 31 besieged towns grepped for "connectiv"): the band prints on ONE view only, **Summary/Foundations** (31 rows, 7 "Adequate"). Its cure is round three's tabs lane's (`lane/r3-tabs-2026-11-13`, `SubstrateTab.jsx :: siegeCrisisWord`, not on the line at 976db5b19): not rebuilt; it arrives at the join.
+- **THE OTHER SURFACE, NOT SEEN BY THE CENSUS** (it renders the dossier's views only): the PDF's Campaign State export prints the same grid, `src/pdf/sections/SystemStateSnapshot.jsx :: CausalSubstrate` (only where `causalDetail` is passed), from `deriveCausalState(vm?.active || settlement)`: the same 75 of 273 and 7 of 31. **FOR THE JOIN:** in `CausalSubstrate`'s `rows.map`, the trade row's word reads the siege's own label where a siege is in force, as the screen's cure does (`const word = row.name === 'trade_connectivity' && siegeLabel ? siegeLabel : tokenCase(causalBandWord(row.name, row.band))`, `siegeLabel` the `under_siege` stress's `label`, the tabs lane's `siegeCrisisWord`); **the test that reds until it is made:** render `CausalSubstrate` with `causalDetail` for `r2s-under_siege-thorp-0` (CENSUS-2's shape; "Adequate" at 1bdf565ec) and assert the Trade connectivity row prints the siege's label, not "Adequate". The Tonight sheet, the Foundry journal (`journalPages.js` reads no causal state) and the exports print no causal band (`git grep` of every `deriveCausalState`/`VARIABLE_LABEL`/`causalBandWord` reader outside the engine).
+
+### Item 2(b), THE COAL LINES UNDER A SIEGE: MEASURED AT ZERO; nothing built
+
+- LOCAL_COAL_LINE and LOCAL_COAL_SOLD_LINE under a siege in force: **0** of the 1,490's 273 besieged births and **0** of the 720's 31 (records, `m10income.mjs`); and on the page, the 31 besieged towns' views hold **0** lines matching "leans on the trade route", "fires the forges", "iron is bought in", "sold to the forges" (85 towns print them, none besieged). The chair's two towns at 1bdf565ec: r2s-under_siege-city-2 prints "Iron & Metalwork: Metal is smelted or worked here."; r2r-thorp-45 "Iron & Metalwork" with no sentence (`trueIncomeDesc`, b11a4d72e). Limits: records and the dossier's views; the PDF prints the same income rows.
+
+### New or changed reader sentences (this seat)
+
+- None written. Removed where false: the grain line in 144 births of the 1,490 (read in rww-metropolis-famine-1, rww-city-recently_betrayed-1, rr2s-town-calm-rand-1, rr2s-metropolis-indebted-rand-43: "Grain Sales" prints with its share alone).
+
+### FOR THE JOIN (this seat's rows)
+
+- #869's PDF row (above).
+
+## Incidents
+
+- The first commit carried the chair's session in its Claude-Session trailer; amended before any push (3bd14d0b5).
+- CENSUS-2 at the tip re-births in the tree it renders: the grain edit landed in that tree while it rendered; the render workers had loaded their modules before the edit (dumps written after it still print the old line), so the tip census is 1bdf565ec's. Later runs use a separate worktree.
+
+## LEFT (in order)
+
+1. Step 3's message (sent with this part), then THE COUNT.
+2. Step 4: the merge of the line (full history fetched at 04:0x: not shallow, merge base 69b53decd, the line at 976db5b19).
+3. Step 5: section 2m's checks; the banked row cured and shrunk.
+4. Step 6: the lane's item 4 (declarations).
+5. Step 7: the final statement.
+
+---
+
 # COHERENCE-UPKEEP: the hand-back (the ninth seat, UPKEEP-9, 2026-11-14) — HANDED BACK AT THE COUNT (587,716 tokens at 03:41 UTC): STEP 7 DONE (the capacity merge, its rows, its three reds); C-L7's other two bars; step 2 (a) (b) (c) done; the chair accepted step 7 at 496f5e4a5
 
 **The lane:** `lane/coherence-upkeep-2026-11-12`. **Base of this seat:** 6b5a1c5a9 (the eighth seat's lighting census), read back from origin before any work; the capacity branch read back at 9354d792a FINAL. **The probes:** `docs/chair/2026-11-14/probes/UPKEEP-9/` (README there). **The births:** the eighth seat's 1,490 (`docs/chair/2026-11-13/probes/UPKEEP-8/seeds.all.txt`, its `cfgFor`), born whole by `birthgz.mjs`; and CENSUS-2's 720 (`lane/census-2-2026-11-13`'s `census2.sh`, run from a scratch copy). The eighth seat's part and every earlier one are kept below, unchanged.
