@@ -1,0 +1,90 @@
+{"id":"HEADER","town":"r2r-hamlet-0","sev":"MED","kind":"RECORD","why":"made here lists 'trade access' and 'luxury' as goods, and flour though the only mill is a neighbour's (Access to external mill)","other":""}
+{"id":"03498","town":"r2r-hamlet-0","sev":"MED","kind":"LACKS","why":"an apprentice with a master's mark; HOUSES of 22-person hamlet has no craft workshop or master of any trade","other":""}
+{"id":"14404","town":"r2r-hamlet-0","sev":"MED","kind":"PAIR","why":"says metals are not brought in; TRADE imports Iron (weapons)","other":"HEADER"}
+{"id":"29118","town":"r2r-hamlet-0","sev":"MED","kind":"STATE","why":"CRISIS Under Siege: one cannot walk in from any direction unchallenged past a besieging force","other":""}
+{"id":"HEADER","town":"r2s-under_siege-hamlet-0","sev":"MED","kind":"RECORD","why":"salt both imported and made here; 'Education (basic)' made with no school or teacher on HOUSES","other":""}
+{"id":"14325","town":"r2s-under_siege-hamlet-0","sev":"MED","kind":"PAIR","why":"says metals are not brought in; TRADE imports Iron (weapons)","other":"HEADER"}
+{"id":"20322","town":"r2s-under_siege-hamlet-0","sev":"MED","kind":"LACKS","why":"'the council has asked'; GOVERNMENT is a Headman's Authority alone, no council","other":""}
+{"id":"HEADER","town":"r2s-under_siege-hamlet-1","sev":"MED","kind":"RECORD","why":"'Hospitality for travellers' made with no inn; founded by a lone household yet on farmland granted to a noble, ruled by a headman","other":""}
+{"id":"00220","town":"r2s-under_siege-hamlet-1","sev":"MED","kind":"STATE","why":"half the hamlet selling fish: no market on HOUSES, and Under Siege no trade goes out","other":""}
+{"id":"06324","town":"r2s-under_siege-hamlet-1","sev":"MED","kind":"LACKS","why":"'the whole Headman's Authority must agree' presumes a body; the power is a single headman","other":""}
+{"id":"00438","town":"r2s-under_siege-hamlet-1","sev":"MED","kind":"LACKS","why":"'next council session'; GOVERNMENT is a Headman's Authority with no council","other":""}
+{"id":"01204","town":"r2s-under_siege-hamlet-1","sev":"MED","kind":"LACKS","why":"contract lost 'by a single vote'; a Headman's Authority has no voting body","other":""}
+{"id":"HEADER","town":"r2s-under_siege-hamlet-2","sev":"MED","kind":"RECORD","why":"iron and metalwork made with no smith or mine; flour with only an external mill; hospitality with no inn","other":""}
+{"id":"12961","town":"r2s-under_siege-hamlet-2","sev":"MED","kind":"STATE","why":"'a bad season would bring real hunger'; Under Siege with 35% deficit and imports None, hunger is already here","other":""}
+{"id":"20660","town":"r2s-under_siege-hamlet-2","sev":"MED","kind":"STATE","why":"'the others carry it'; food deficit 35% with imports cover None under siege: nothing carries the shortfall","other":""}
+{"id":"19461","town":"r2s-under_siege-hamlet-2","sev":"MED","kind":"LACKS","why":"'its members cannot agree'; Headman's Authority is one headman, not a membership","other":""}
+{"id":"22264","town":"r2s-under_siege-hamlet-2","sev":"LOW","kind":"STATE","why":"'the threat ... is gone' printed in a town Under Siege, an active threat","other":""}
+{"id":"HEADER","town":"r2s-under_siege-hamlet-3","sev":"MED","kind":"RECORD","why":"hamlet of 80 with a part-time smith makes 'Advanced weapons and armor'; 'Education (basic)' with no school","other":""}
+{"id":"09633","town":"r2s-under_siege-hamlet-3","sev":"MED","kind":"LACKS","why":"'run by its estates'; GOVERNMENT is an Elder Council with a War Council, no estates","other":""}
+{"id":"00743","town":"r2s-under_siege-hamlet-3","sev":"MED","kind":"STATE","why":"'little food of its own but its hunting'; HOUSES has subsistence farming, dairy, grazing; under siege hunters cannot range","other":""}
+{"id":"22206","town":"r2s-under_siege-hamlet-3","sev":"MED","kind":"STATE","why":"the table rests on hunters' game; Under Siege the hunters cannot leave the hamlet","other":""}
+{"id":"HEADER","town":"r2r-village-43","sev":"MED","kind":"RECORD","why":"gems and stone made with no mine or quarry; 'Education (basic)' with no school","other":""}
+{"id":"15806","town":"r2r-village-43","sev":"MED","kind":"STATE","why":"loaded porters filing in; Under Siege and trade access isolated, nothing arrives","other":""}
+{"id":"01191","town":"r2r-village-43","sev":"MED","kind":"STATE","why":"'feeds it and no more'; food deficit 71%, imports None: the land does not feed it","other":""}
+{"id":"09714","town":"r2r-village-43","sev":"MED","kind":"LACKS","why":"'stalls that pay their fees'; HOUSES has no market or stalls; trade access isolated and Under Siege","other":""}
+{"id":"02935","town":"r2r-village-43","sev":"MED","kind":"STATE","why":"a real portion of its trade outside the rolls; isolated, Under Siege, no exports: there is no trade","other":""}
+{"id":"HEADER","town":"r2r-village-21","sev":"MED","kind":"RECORD","why":"exports fish by naval route Under Siege; coal made with no mine; salt both made and imported; Education with no school","other":""}
+{"id":"03978","town":"r2r-village-21","sev":"MED","kind":"LACKS","why":"'run by its estates'; GOVERNMENT is a Headman's Authority and Religious Authorities, no estates","other":""}
+{"id":"05233","town":"r2r-village-21","sev":"MED","kind":"LACKS","why":"'the lord's dues and the temple tithe'; no lord in GOVERNMENT (headman), no temple on HOUSES","other":""}
+{"id":"22432","town":"r2r-village-21","sev":"MED","kind":"LACKS","why":"'the vote ... comes up next week'; a Headman's Authority has no voting body","other":""}
+{"id":"00669","town":"r2r-village-21","sev":"MED","kind":"LACKS","why":"asks the headman for 'a vote'; Headman's Authority holds no votes","other":""}
+{"id":"00828","town":"r2r-village-21","sev":"MED","kind":"PAIR","why":"'has started repaying the debt in coin'; the other says it has been repaid in small amounts ever since","other":"01231"}
+{"id":"HEADER","town":"r2r-village-55","sev":"MED","kind":"RECORD","why":"made here lists 'trade access' as a good and 'Guild-manufactured goods' with no guild; leather with no tannery","other":""}
+{"id":"HEADER","town":"r2s-under_siege-village-1","sev":"MED","kind":"RECORD","why":"iron and metalwork with no smith; medical care, minor spellcasting and hospitality with no healer, mage or inn","other":""}
+{"id":"14849","town":"r2s-under_siege-village-1","sev":"MED","kind":"PAIR","why":"nobody bothers with the river fisheries; HOUSES has a working Fisher's landing on the river","other":"HEADER"}
+{"id":"HEADER","town":"r2s-under_siege-village-2","sev":"MED","kind":"RECORD","why":"timber made here yet 22267 says it goes unworked; founded by refugees yet by two mining operations, no mine on HOUSES","other":""}
+{"id":"10044","town":"r2s-under_siege-village-2","sev":"MED","kind":"LACKS","why":"'run by civic association'; GOVERNMENT is a Headman's Authority with Religious Authorities","other":""}
+{"id":"06832","town":"r2s-under_siege-village-2","sev":"MED","kind":"PAIR","why":"draws on mountain forest and logging routes; the other says the timber goes unworked, no house takes it up","other":"22267"}
+{"id":"HEADER","town":"r2s-under_siege-village-3","sev":"MED","kind":"RECORD","why":"Salt works on HOUSES yet salt imported, not made; coal made with no mine; Military/Guard Strong with garrison none","other":""}
+{"id":"HEADER","town":"r2s-under_siege-village-0","sev":"MED","kind":"RECORD","why":"founded both by refugees and by a disbanded military unit; gems with no mine; a village smith makes Advanced weapons and armor; Education no school","other":""}
+{"id":"15458","town":"r2s-under_siege-village-0","sev":"MED","kind":"STATE","why":"'exports semi-finished goods'; TRADE exports none, and Under Siege nothing goes out","other":""}
+{"id":"00426","town":"r2s-under_siege-village-0","sev":"LOW","kind":"STATE","why":"'a threat that has since passed' printed in a town Under Siege, an active threat","other":""}
+{"id":"HEADER","town":"r2s-under_siege-town-2","sev":"MED","kind":"RECORD","why":"Hireling hall on HOUSES yet DEFENCE hired none; made here lists 'trade access', 'Toll income', 'Strategic control' as goods","other":""}
+{"id":"00053","town":"r2s-under_siege-town-2","sev":"HIGH","kind":"STATE","why":"says the Siege is past and nobody expects another; CRISIS is an active Under Siege","other":""}
+{"id":"00473","town":"r2s-under_siege-town-2","sev":"MED","kind":"STATE","why":"'buys mostly what it makes itself'; grows 1027 of 4906 food and imports grain, wool, dairy, provisions","other":""}
+{"id":"03018","town":"r2s-under_siege-town-2","sev":"MED","kind":"STATE","why":"an unexpected shipment arrived; Under Siege and trade access isolated, no shipment comes in","other":""}
+{"id":"14551","town":"r2s-under_siege-town-2","sev":"MED","kind":"PAIR","why":"nobody works the hot springs; the other says the town draws on the hot spring source and its properties","other":"06830"}
+{"id":"13421","town":"r2s-under_siege-town-3","sev":"MED","kind":"STATE","why":"'a consistent civic presence'; GOVERNMENT lists Merchant Guilds as Suppressed","other":""}
+{"id":"11315","town":"r2s-under_siege-town-3","sev":"MED","kind":"PAIR","why":"talks of the best places to hunt; the other says hunting grounds are worked out, TRADE imports game; no hunter on HOUSES","other":"11958"}
+{"id":"HEADER","town":"r2s-under_siege-town-0","sev":"MED","kind":"RECORD","why":"made here lists 'trade access', 'Toll income', 'Market taxes'; salt made and imported; Mine on HOUSES yet seams exhausted; exports tourism under siege","other":""}
+{"id":"20646","town":"r2s-under_siege-town-0","sev":"MED","kind":"STATE","why":"'the goods are still arriving'; Under Siege, imports cover None, nothing comes in","other":""}
+{"id":"14145","town":"r2s-under_siege-town-0","sev":"MED","kind":"STATE","why":"hunting parties range the lands and sell at market; Under Siege, and imports say local hunting grounds exhausted","other":""}
+{"id":"04405","town":"r2s-under_siege-town-0","sev":"MED","kind":"STATE","why":"'divine provision fills the gap'; food deficit 44% with imports cover None, the gap is unfilled","other":""}
+{"id":"05779","town":"r2s-under_siege-town-0","sev":"MED","kind":"STATE","why":"entrepot trade brings 11% of income; Under Siege nothing comes in or goes out to redistribute","other":""}
+{"id":"HEADER","town":"r2s-under_siege-town-1","sev":"MED","kind":"RECORD","why":"Desert/Arid town makes peat and reeds and thatch, keeps a Fish market with no water trade","other":""}
+{"id":"03130","town":"r2s-under_siege-town-1","sev":"MED","kind":"STATE","why":"a traveller passed through and left by morning; Under Siege no one passes through","other":""}
+{"id":"02506","town":"r2s-under_siege-town-1","sev":"MED","kind":"STATE","why":"a cousin has just arrived to stay; Under Siege no one arrives by road","other":""}
+{"id":"17650","town":"r2s-under_siege-town-1","sev":"MED","kind":"STATE","why":"hunting parties sent over the surrounding country; Under Siege they cannot leave","other":""}
+{"id":"22038","town":"r2s-under_siege-village-1","sev":"LOW","kind":"STATE","why":"'The siege is a generation old ... left a legacy' reads as past, in a village Under an active Siege","other":""}
+{"id":"22041","town":"r2r-village-55","sev":"LOW","kind":"STATE","why":"'The siege is older than all but the oldest alive ... left a legacy' reads as past, under an active Siege","other":""}
+{"id":"HEADER","town":"r2s-under_siege-city-1","sev":"MED","kind":"RECORD","why":"2679 people cannot hold 500-4000 households, 30-80 craft guilds, 15-40 merchant guilds, 10-30 churches; founded by a military command and by charcoal-burners","other":""}
+{"id":"22045","town":"r2s-under_siege-city-1","sev":"LOW","kind":"STATE","why":"'The siege is years old, and it left a legacy' reads as past, under an active Siege","other":""}
+{"id":"HEADER","town":"r2s-under_siege-city-3","sev":"MED","kind":"RECORD","why":"Hired blades on HOUSES yet DEFENCE hired none; imports list 'Capital' as a good","other":""}
+{"id":"09632","town":"r2s-under_siege-city-3","sev":"MED","kind":"LACKS","why":"'run by guild and estate'; GOVERNMENT is an Arcane Council with Religious Authorities, no estates","other":""}
+{"id":"00386","town":"r2s-under_siege-city-3","sev":"MED","kind":"STATE","why":"income from visiting pilgrims; Under Siege no pilgrims arrive, and no pilgrimage site on HOUSES","other":""}
+{"id":"20053","town":"r2s-under_siege-city-3","sev":"MED","kind":"PAIR","why":"arcane orders have more say than the clergy; GOVERNMENT has Arcane Orders Minor, Religious Authorities Significant, and the other says the clergy have more say","other":"20266"}
+{"id":"HEADER","town":"r2s-under_siege-city-2","sev":"MED","kind":"RECORD","why":"Hireling hall and Hired blades on HOUSES yet DEFENCE hired none; gems made here though deposits exhausted and gemstones imported; coal with no mine","other":""}
+{"id":"05368","town":"r2s-under_siege-city-2","sev":"LOW","kind":"BROKEN","why":"a regnal numeral in a commoner's name ('Andronikos I Chrysoberges'; also 05613 'Andronikos I Photeinopoulos')","other":"05613"}
+{"id":"05563","town":"r2s-under_siege-city-2","sev":"LOW","kind":"BROKEN","why":"doubled name 'Raoul Raoul'","other":""}
+{"id":"06002","town":"r2s-under_siege-city-2","sev":"MED","kind":"STATE","why":"fish 'carted in by the barrel' to the stalls; Under Siege nothing comes in by road","other":""}
+{"id":"21997","town":"r2s-under_siege-city-2","sev":"MED","kind":"STATE","why":"shortage 'shows in small things'; food deficit 76% Under Siege, imports cover 95 of 23490: hunger, not small things","other":""}
+{"id":"HEADER","town":"r2s-under_siege-city-0","sev":"MED","kind":"RECORD","why":"made here lists 'maritime access' as a good; salt made at Salt works yet also imported","other":""}
+{"id":"16004","town":"r2s-under_siege-city-0","sev":"MED","kind":"STATE","why":"'6,439 imported'; STATE gives imports cover 6422","other":""}
+{"id":"02414","town":"r2s-under_siege-metropolis-2","sev":"MED","kind":"STATE","why":"a broker matching buyers to goods from far routes; Under Siege, imports cover None, no goods arrive by road","other":""}
+{"id":"04579","town":"r2s-under_siege-metropolis-2","sev":"MED","kind":"PAIR","why":"its stone 'has gone to every part of the region'; TRADE imports Stone and exports none, Under Siege nothing goes out","other":"HEADER"}
+{"id":"02494","town":"r2s-under_siege-metropolis-2","sev":"MED","kind":"STATE","why":"guild masters 'hold effective civic power'; GOVERNMENT has Grand Guild Consortium Minor, Military/Guard and Order of the Watch Dominant","other":""}
+{"id":"23037","town":"r2s-under_siege-metropolis-2","sev":"MED","kind":"PAIR","why":"druidic forest management sustains timber yield; TRADE imports Timber because local managed woodland is cleared (also 23039 'Magically Sustained')","other":"HEADER"}
+{"id":"13756","town":"r2s-under_siege-metropolis-2","sev":"MED","kind":"STATE","why":"landed families 'present in civic life'; GOVERNMENT has Noble Houses and The Highborn Circle Suppressed","other":""}
+{"id":"HEADER","town":"r2s-under_siege-metropolis-0","sev":"MED","kind":"RECORD","why":"'trade access' made as a good; founded for mineral deposits with no mine; a crossroads anchor with access road; imports stone beside its own quarry","other":""}
+{"id":"09630","town":"r2s-under_siege-metropolis-0","sev":"MED","kind":"STATE","why":"'run by guild and estate'; GOVERNMENT is a High Theocratic Council, Craft Guilds and Noble Houses Suppressed","other":""}
+{"id":"HEADER","town":"r2s-under_siege-metropolis-1","sev":"MED","kind":"RECORD","why":"made here lists 'maritime access' as a good; salt made at Salt works yet also imported","other":""}
+{"id":"00038","town":"r2s-under_siege-metropolis-1","sev":"LOW","kind":"STATE","why":"dating things 'before or after the Siege' presumes it is over; CRISIS is an active Under Siege","other":""}
+{"id":"20983","town":"r2s-under_siege-metropolis-1","sev":"MED","kind":"PAIR","why":"fresh catch weighed at the fish market; the other says nobody fishes this year, TRADE imports salted fish (fisheries exhausted)","other":"14843"}
+{"id":"HEADER","town":"r2r-metropolis-14","sev":"MED","kind":"RECORD","why":"made here lists 'trade access', 'Toll income', 'Market taxes' as goods; Mine and Stone quarry on HOUSES yet both listed exhausted","other":""}
+{"id":"03971","town":"r2r-metropolis-14","sev":"MED","kind":"STATE","why":"'under temple and guild'; GOVERNMENT lists Craft Guilds as Suppressed","other":""}
+{"id":"09279","town":"r2r-metropolis-14","sev":"MED","kind":"STATE","why":"food handed to anyone who asks, the line patient; deficit 83% Under Siege with imports None (tag also reaches F)","other":""}
+{"id":"11941","town":"r2r-metropolis-14","sev":"MED","kind":"PAIR","why":"exists because travellers had to stop here; FOUNDING says it began as a grain depot for a larger city, by imperial decree","other":"HEADER"}
+{"id":"12736","town":"r2r-metropolis-14","sev":"MED","kind":"STATE","why":"'divine provision fills the gap'; food deficit 83% with imports None, the gap is not filled (also 10776)","other":""}
+{"id":"04329","town":"r2r-metropolis-14","sev":"MED","kind":"STATE","why":"'divine provision fills the gap'; food deficit 83% with imports None, the gap is not filled","other":""}
+{"id":"DONE","lines":2397,"blocks":24,"flags":89}
