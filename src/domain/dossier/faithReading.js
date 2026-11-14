@@ -57,7 +57,8 @@ import { isMaterializedCustomContent } from '../content/customContentSemanticAut
  * @property {string} name
  * @property {number} power
  * @property {boolean} governs the faction holds the seat
- * @property {boolean} [anotherGoverns] another power governs (R2-CODE-B round 3, #ww-536)
+ * @property {boolean} [anotherGoverns] another power governs, and this one does not outweigh every other power (R2-CODE-B
+ *   round 3, #ww-536; R2-CODE-B-13, the reader's M12: a contender that outweighs the governor and every other power is not flagged)
  */
 
 /**
@@ -272,9 +273,16 @@ function religiousFactionOf(s) {
   }
   // R2-CODE-B round 3 (the increment's #ww-536, the chair's ruling): where ANOTHER power governs, the religious power is
   // a contender, and the line says only what the powers' record holds: never "the real political weight".
+  // R2-CODE-B-13 (the reader's M12; A LINE IS IN ITS POOL UNLESS THE TOWN MAKES IT FALSE): read from the two powers'
+  // standing. A contender that OUTWEIGHS the governor and every other power does hold the real political weight
+  // (r2s-succession_void-village-3: 58 against the Elder Council's 18), and keeps the line; where the governor or any
+  // other power matches or outweighs it (rr3-town-religious_conversion-rand-3: the Merchant Guilds' 36 over its 33), it
+  // keeps "A voice …". @enforced-by tests/domain/faithContenderWeight.test.js
   if (best && !best.governs) {
     const factions = Array.isArray(s.powerStructure?.factions) ? s.powerStructure.factions : [];
-    best.anotherGoverns = factions.some((f) => f !== bestRow && f?.isGoverning === true);
+    const weight = best.power;
+    best.anotherGoverns = factions.some((f) => f !== bestRow && f?.isGoverning === true)
+      && factions.some((f) => f !== bestRow && num(f?.power, 0) >= weight);
   }
   return best;
 }
