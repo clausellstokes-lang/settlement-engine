@@ -236,11 +236,18 @@ export const STRESS_DESCS = {
     { text: r =>
       `${r} gets by. The market is busy enough, the streets clean enough and the civic buildings kept up just enough, and nothing more is being spent.`, needs: ['market'] },
     { text: r =>
-      `The merchant district of ${r} looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years.`, needs: ['population: ≥ middling'] }, // R2-CODE-A-3 (the increment's ww-920): a district is a size error below the middling band (ruling (f))
+      `The merchant district of ${r} looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years.`, needs: ['market', 'population: ≥ middling'] }, // R2-CODE-A-3 (the increment's ww-920): a district is a size error below the middling band (ruling (f))
     { text: r =>
       `The finest building in ${r} is new, stone-built, and belongs to nobody local: a counting house, its brass plate polished daily by a clerk who arrived with the ledgers. It is what everything else in town is working to pay for.`, needs: ['institution: bank'] }, // COHERENCE-PRESUME: it printed in towns with no counting house
     { text: r =>
       `${r} holds a market day that has quietly become a collection day: the stalls pay their pitch fees to a factor before they sell a thing, and the factor's book has more names in it than the market has stalls.`, needs: ['market'] },
+    // R2-CODE-A-14, the chair's ruling (s2) on L05 (HIGH, carried): a merchant district needs a market (as its famine
+    // twin's merchant quarter does); THE SLOT IS KEPT AND TAKES A TWIN TRUE WITHOUT ONE (no district, no quarter, no
+    // market), reached only by resolution where [3] is drawn and refused, so no draw moves (arrivalScene.js :: drawAdmitted).
+    { text: r =>
+      `The best-kept street of ${r} looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for that street's prosperity to reach it for some years.`,
+    twinOf: "The merchant district of {name} looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years.",
+    needs: ['population: ≥ middling'], excludes: ['market'] },
   ],
   recently_betrayed: [
     { text: r =>
