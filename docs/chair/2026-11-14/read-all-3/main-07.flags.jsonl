@@ -1,0 +1,44 @@
+{"id":"01239","town":"r2r-village-57","sev":"MED","kind":"STATE","why":"Elected Reeve is only Minor and Merchant Guilds Strong; leadership void. Reeve cannot 'govern' with the stronger power 'close behind'","other":""}
+{"id":"19741","town":"r2r-village-57","sev":"LOW","kind":"STATE","why":"'Defended Pass' but defence is Undefended, all forces none; LAND names it Mountain Pass","other":""}
+{"id":"33954","town":"r2s-monster_pressure-village-2","sev":"LOW","kind":"BROKEN","why":"NPC quick-reference row prints the power cell empty for Swati Choudhry; every other row carries a power","other":""}
+{"id":"25129","town":"r2s-insurgency-village-2","sev":"MED","kind":"STATE","why":"'Structural timber EXPORT' but TRADE exports list has no structural timber (hewn timber, pine planks, charcoal...); tag reaches towns","other":""}
+{"id":"10709","town":"r2s-insurgency-village-2","sev":"MED","kind":"STATE","why":"'Fuel wood EXPORT' but TRADE exports list names no fuel wood","other":""}
+{"id":"33189","town":"r2s-insurgency-village-1","sev":"LOW","kind":"BROKEN","why":"NPC quick-reference row prints the power cell empty for Torquatus Flaccus; other rows carry a power","other":""}
+{"id":"11352","town":"r2s-religious_conversion-village-0","sev":"MED","kind":"STATE","why":"Dairy farmer made to yield baked goods and preserved foods from grain fields; gaps say the dairy farmer lacks livestock; no bakery in HOUSES","other":""}
+{"id":"09845","town":"r2s-wartime-village-1","sev":"MED","kind":"STATE","why":"Feudal Stewardship is only Minor; Religious Authorities is Strong, so cannot be 'close behind' the governing power","other":""}
+{"id":"14345","town":"r2s-indebted-village-0","sev":"MED","kind":"STATE","why":"Charcoal burner shown drawing on iron ore (depleted) to yield coal; gaps say it lacks mountain timber, its real input","other":""}
+{"id":"13827","town":"r2s-religious_conversion-village-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a power's name in a sentence","other":""}
+{"id":"21286","town":"r2s-religious_conversion-village-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a party name","other":""}
+{"id":"12101","town":"r2s-religious_conversion-village-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a party name in a slash-separated list","other":""}
+{"id":"17282","town":"r2r-village-33","sev":"MED","kind":"STATE","why":"says most of what it sells is mineral salts; LAND gaps say hot_springs_mineral is available but not being processed, and no house makes salts","other":""}
+{"id":"19459","town":"r2r-village-17","sev":"LOW","kind":"STATE","why":"'Defended Pass' but DEFENCE has no garrison/militia/watch; own PDF says no one is trained to hold the palisade; LAND names it Mountain Pass","other":"15678"}
+{"id":"11568","town":"r2r-village-15","sev":"LOW","kind":"STATE","why":"depleted grazing land shown feeding a Cooper, who builds barrels from timber (own Journal line 07250); Sawmill gaps show no timber source","other":"07250"}
+{"id":"04300","town":"r2r-village-27","sev":"MED","kind":"STATE","why":"'Agricultural produce EXPORT' but TRADE exports list names no agricultural produce (flour, grain export, livestock, baked goods...)","other":""}
+{"id":"25173","town":"r2r-village-27","sev":"MED","kind":"STATE","why":"'Surplus food EXPORT' but TRADE exports list names no surplus food","other":""}
+{"id":"16960","town":"r2r-village-7","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a party name in the overview line","other":""}
+{"id":"21312","town":"r2r-village-7","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a party name","other":""}
+{"id":"14624","town":"r2r-village-0","sev":"MED","kind":"STATE","why":"says it sends out gold/silver bars; TRADE exports none and LAND gap says gold/silver ore cannot produce final goods","other":""}
+{"id":"29786","town":"r2r-village-0","sev":"MED","kind":"STATE","why":"food 'comes in by minor routes and sanctioned caravans'; trade access isolated and TRADE imports none","other":""}
+{"id":"34684","town":"r2r-village-0","sev":"LOW","kind":"BROKEN","why":"NPC quick-reference row prints the power cell empty for Mord Bjarnarson; other rows carry a power","other":""}
+{"id":"10879","town":"r2r-village-16","sev":"MED","kind":"LACKS","why":"'hears everything the taverns say'; HOUSES has no ale house, tavern or inn","other":""}
+{"id":"29047","town":"r2r-village-16","sev":"LOW","kind":"LACKS","why":"'Every tavern that bought those barrels' in a village whose HOUSES list no tavern or ale house","other":""}
+{"id":"22272","town":"r2r-village-31","sev":"MED","kind":"LACKS","why":"'Quarrymen's guild retains civic influence'; GOVERNMENT powers are Elder Council and Merchant Guilds only; HOUSES has no quarry or guild","other":""}
+{"id":"29432","town":"r2r-village-11","sev":"MED","kind":"STATE","why":"describes a Trade Dispute with a partner settlement; CRISIS none, QUARRELS names only a broken promise between two powers, PAST has no trade dispute","other":""}
+{"id":"21304","town":"r2r-village-11","sev":"MED","kind":"STATE","why":"parties of a dispute with an 'old partner' and 'new partners'; CRISIS none, QUARRELS lists only Headman's Authority vs Merchant Guilds over a broken promise","other":"29432"}
+{"id":"16801","town":"r2r-village-11","sev":"LOW","kind":"STATE","why":"overview line names merchants tied to an old partner; header records no partner dispute (CRISIS none)","other":"29432"}
+{"id":"26610","town":"r2r-village-11","sev":"LOW","kind":"STATE","why":"hook says a trade dispute is kept alive by profiteers; header has CRISIS none and no trade dispute in QUARRELS or PAST","other":"29432"}
+{"id":"02995","town":"r2r-village-11","sev":"LOW","kind":"STATE","why":"hook about a misfiled contract clause that could end 'the dispute'; no trade dispute in CRISIS, QUARRELS or PAST","other":"29432"}
+{"id":"27535","town":"r2r-village-11","sev":"LOW","kind":"STATE","why":"hook says a partner settlement presses a debt; header records no partner dispute or debt (CRISIS none)","other":"29432"}
+{"id":"14631","town":"r2r-village-8","sev":"MED","kind":"STATE","why":"says it sends out lumber, planks, potions and tinctures; TRADE exports none and trade access isolated","other":""}
+{"id":"04785","town":"r2r-village-54","sev":"LOW","kind":"STATE","why":"'Apart from the Purge, its history is steady'; PAST also records The Arcane Incident, 39 years ago","other":""}
+{"id":"24575","town":"r2r-village-49","sev":"MED","kind":"STATE","why":"'Ordered (strong military presence)'; DEFENCE has no garrison, militia, watch or hired force, only an adventurers' charter hall","other":"07860"}
+{"id":"11670","town":"r2r-village-14","sev":"MED","kind":"STATE","why":"describes a Great Flood that reshaped the houses; PAST records only The Succession Crisis, 18 years ago","other":""}
+{"id":"03899","town":"r2r-village-14","sev":"MED","kind":"STATE","why":"hook about a flood barrier left to rot (Great Flood); PAST records no flood, only the Succession Crisis","other":"11670"}
+{"id":"26687","town":"r2r-village-14","sev":"MED","kind":"STATE","why":"hook says the flood uncovered a foundation (Great Flood); PAST records no flood, only the Succession Crisis","other":"11670"}
+{"id":"09839","town":"r2r-village-46","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a party name in the overview line","other":""}
+{"id":"21274","town":"r2r-village-46","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a party name","other":""}
+{"id":"26140","town":"r2r-village-46","sev":"MED","kind":"STATE","why":"present-tense hook: ailing ruler to name a successor (Succession Crisis); CRISIS none, stability Ordered, PAST succession crisis was 163 years ago","other":""}
+{"id":"24332","town":"r2r-village-46","sev":"MED","kind":"STATE","why":"hook says someone is poisoning the ruler now (Succession Crisis); CRISIS none, stability Ordered; the PAST succession crisis was 163 years ago","other":"26140"}
+{"id":"26142","town":"r2r-village-40","sev":"LOW","kind":"STATE","why":"present-tense 'ailing ruler' hook; CRISIS none, stability Stable, the PAST succession crisis was 48 years ago","other":""}
+{"id":"16293","town":"r2r-village-51","sev":"MED","kind":"STATE","why":"marshlands feed a Fishmonger yielding reeds, peat fuel and waterfowl; HOUSES has no peat cutter, reed-cutter or wildfowler","other":""}
+{"id":"DONE","lines":2236,"blocks":46,"flags":43}
