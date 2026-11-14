@@ -234,3 +234,10 @@ line of `src/foundry/journalPages.js`; side by side with B2 (same file, another 
 can start at once; B2 and B4 merge one file. **Everything here is display only (FIELD DIFF of trees X and Y: 0 towns,
 0 families).** The push hook did not run on this branch's worktree (it has no `node_modules`, so `.husky/_` is absent):
 docs only, no gate skipped by flag.
+
+## THE CHAIR'S RULING on this report (its message of 2026-11-14 14:52Z, recorded here: the chair's messages are not on the branch)
+
+B1: candidate C. B3: candidate A with "Needs:". B4: the bracket out. **B2: NOT A+B**: the scope through the tab's reader
+(`cultureScopeLine`); the six rows and the generated notes only in a town or larger, and held there to their own
+declarations ((C')'s check); what the user wrote in the notes box always printed. The seat is COMPLETE; three builders
+take the patch (`probes/EXPORTS-MEASURE-1/candX…patch`, `candY…patch`) block by block.
