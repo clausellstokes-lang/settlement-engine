@@ -14,7 +14,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { scoreBand } from '../../src/domain/display/defenseScoreBands.js';
-import { defensePostureProse } from '../../src/domain/display/stateProse/defenseStateProse.js';
+import { defensePostureProse, defenseThreatProse } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { standingDefenseForces } from '../../src/domain/institutions/defenseInstitutionBuckets.js';
 
@@ -90,23 +90,24 @@ describe('the posture line against the facts beside it (F1, both directions of L
  * too; a walled town keeps the line.
  */
 const UNWALLED = ['r2r-town-52', 'rr3-town-religious_conversion-rand-1', 'rr3-town-occupied-rand-1'];
-const WALLED_KEEPS = 'rr3-town-slave_revolt-rand-5';
+const WALLED_KEEPS = 'rr3-town-monster_pressure-rand-4';
 const NAMES_WORKS = /the works are kept up|the approaches are watched/;
 /** The watch half alone: the walled town's own record with its watch and garrison taken off the roster. */
+const UNWATCHED_FROM = 'rr3-town-slave_revolt-rand-5';
 const UNWATCHED = 'rr3-town-slave_revolt-rand-5 with no watch or garrison';
 const offTheRoster = (s) => ({ ...s, institutions: (s.institutions || []).filter((inst) => {
   const f = standingDefenseForces({ ...s, institutions: [inst] }); return !f.watch.present && !f.garrison.present;
 }) });
 describe('a posture line that names works or a watch reads the roster (F3)', () => {
   beforeAll(() => {
-    for (const seed of [...UNWALLED, WALLED_KEEPS]) TOWNS[seed] = TOWNS[seed] || birth(seed);
-    TOWNS[UNWATCHED] = offTheRoster(TOWNS[WALLED_KEEPS]);
+    for (const seed of [...UNWALLED, WALLED_KEEPS, UNWATCHED_FROM]) TOWNS[seed] = TOWNS[seed] || birth(seed);
+    TOWNS[UNWATCHED] = offTheRoster(TOWNS[UNWATCHED_FROM]);
   }, 300000);
   test('no unwalled town, and none without a watch or a garrison, is told its works are kept up', () => {
     const failures = collectSeedFailures([...UNWALLED, UNWATCHED], (seed) => {
       const s = TOWNS[seed]; const f = standingDefenseForces(s);
       if (seed === UNWATCHED ? (!f.walls.present || f.watch.present || f.garrison.present) : f.walls.present) throw new Error('premise');
-      const line = defensePostureProse(s, { seed: seed === UNWATCHED ? WALLED_KEEPS : seed }).posture?.beside || '';
+      const line = defensePostureProse(s, { seed: seed === UNWATCHED ? UNWATCHED_FROM : seed }).posture?.beside || '';
       if (NAMES_WORKS.test(line)) throw new Error(`${seed === UNWATCHED ? 'no watch or garrison' : 'no walls'}: ${line}`);
     });
     expectNoSeedFailures(failures, 'the works read from the roster');
@@ -137,5 +138,27 @@ describe('no strong posture beside a guard that exists on paper', () => {
       if (posture?.rung?.provenance?.poolKey === 'readiness STRONG') throw new Error(`strong beside the guard on paper: ${posture.beside}`);
     });
     expectNoSeedFailures(failures, 'the posture beside its guard');
+  });
+});
+
+/**
+ * The chair's ruling of 2026-11-14 08:53 UTC (on this seat's own measure): NO STRONG POSTURE BESIDE A DEFENCE SHORT OF
+ * SUPPLY. "What … can field … are both in good order" stood over the Invasion row's "The defenders at … make do: the
+ * town's workshops cannot keep them properly fed and equipped" in 173 of the reader's 1,536 at 6b74eb2aa (141 at the
+ * line's tip 976db5b19, 203 at bb2bf91c5 by L1). The strong pool is not drawn where the supply key reads short, read
+ * from the same fact. RED-FIRST at 08acc23d4: the three towns below.
+ */
+const SHORT = ['rr3-town-religious_conversion-rand-1', 'rr3-city-famine-rand-5', 'rr3-city-wartime-rand-1'];
+const GOES_SHORT = /make do|the defenders go short|worse off|runs short/;
+describe('no strong posture beside a defence short of supply', () => {
+  beforeAll(() => { for (const seed of SHORT) TOWNS[seed] = TOWNS[seed] || birth(seed); }, 300000);
+  test('the strong pool is not drawn where the Invasion row says the defenders go short', () => {
+    const failures = collectSeedFailures(SHORT, (seed) => {
+      const s = TOWNS[seed];
+      if (!GOES_SHORT.test(defenseThreatProse(s, { seed }).invasion?.sentence || '')) throw new Error('premise: no short supply sentence');
+      const posture = postureOf(seed);
+      if (posture?.rung?.provenance?.poolKey === 'readiness STRONG') throw new Error(`strong beside a short supply: ${posture.beside}`);
+    });
+    expectNoSeedFailures(failures, 'the posture beside its supply');
   });
 });
