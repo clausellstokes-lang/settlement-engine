@@ -234,9 +234,9 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
                 <div style={{fontSize:proseFontSize(FS.xxs, mobile),color:swatch.magic,background:swatch['#F8F0FF'],
                   padding:'4px 8px',marginTop:4,borderLeft:'3px solid #c0a0e0',lineHeight:1.4}}>
                   <em>{chain.magicNote}</em>
-                  {chain.magicRecovery && <span style={{marginLeft:6,fontSize:chromeFontSize(FS.micro, mobile),color:swatch['#7A4AAA'],fontWeight:700}}>
-                    {Math.round(chain.magicRecovery * 100)}% recovery
-                  </span>}
+                  {/* W2-C-LEAVES-5 item 5 (#1153): the "N% recovery" chip is gone everywhere: it printed the model's fraction
+                      (chain.magicRecovery), machinery; the note says in words what magic does here. Three lines, as the
+                      chip had (the prose-numerics register keys this file by line). */}
                 </div>
               )}
 
@@ -847,11 +847,12 @@ function NeedsNotMet({ needs, mobile }) {
  * record is not touched. At the end of the file, so no line-keyed row above moves.
  */
 import { chainStateShown, serviceStateShown } from '../../../domain/display/chainStateShown.js';
+import { magicNoteShown } from '../../../domain/display/magicProvisionShown.js'; // W2-C-LEAVES-5 item 5
 import { computeChainSets } from '../tabHelpers.js';
 /** @param {any} chain @param {unknown} town @returns {any} the chain with the state its card prints */
 function shownStateOf(chain, town) {
-  const status = chainStateShown(chain, town);
-  return status === chain?.status ? chain : { ...chain, status };
+  const status = chainStateShown(chain, town), magicNote = magicNoteShown(chain, town); // W2-C-LEAVES-5 item 5: the note's tradition held
+  return status === chain?.status && magicNote === chain?.magicNote ? chain : { ...chain, status, magicNote };
 }
 /** @param {unknown} town @returns {Set<string>} the houses the Institutions tab marks impaired, lower case */
 function impairedHousesOf(town) {

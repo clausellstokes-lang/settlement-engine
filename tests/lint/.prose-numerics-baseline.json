@@ -343,18 +343,6 @@
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 238,
-    "category": "floatInterpolation",
-    "snippet": "{Math.round(chain.magicRecovery * 100)}"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 238,
-    "category": "percentToken",
-    "snippet": "{Math.round(chain.magicRecovery * 100)}"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
     "line": 246,
     "category": "floatInterpolation",
     "snippet": "{incomeEntry.percentage}"

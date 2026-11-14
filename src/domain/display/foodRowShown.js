@@ -24,6 +24,17 @@
  * A town with no food record keeps the view (an older save; the caller falls back). Pure: no randomness, no write.
  */
 
+import { magicFoodChannelWord } from './foodBalanceBar.js';
+import { magicTraditionHolds } from './magicProvisionShown.js';
+
+/** The tradition each kind word of the view's provision note is of. */
+const KIND_TRADITION = Object.freeze({ druidic: 'druid', divine: 'divine', arcane: 'arcane' });
+/** @param {unknown} town @param {unknown} note @returns {boolean} whether the note's kind of provision is the town's */
+const kindHeld = (town, note) => {
+  const kind = /** @type {keyof typeof KIND_TRADITION | 'magical'} */ (magicFoodChannelWord(note));
+  return kind === 'magical' || magicTraditionHolds(town, KIND_TRADITION[kind]);
+};
+
 /** @param {unknown} v @returns {number} a finite number, or 0 */
 const num = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : 0);
 
@@ -63,8 +74,10 @@ export function foodRowShown(town, tradeOpen) {
       dailyNeed: need,
       importCoverage: imported,
       magicFoodOffset: magic,
-      // the provision's kind (druidic, divine, arcane) is not a figure: the view names it (item 5 reads its home)
-      magicFoodNote: t?.economicViability?.metrics?.foodBalance?.magicFoodNote ?? null,
+      // the provision's kind (druidic, divine, arcane) is the view's note, named only where the town holds that tradition
+      // (W2-C-LEAVES-5 item 5: `magicProvisionShown.js :: magicTraditionHolds`, the defence's tradition facts); else no kind
+      // is named and the figure stands ("magical", the bar's own word for a provision of no named kind)
+      magicFoodNote: kindHeld(town, t?.economicViability?.metrics?.foodBalance?.magicFoodNote) ? t?.economicViability?.metrics?.foodBalance?.magicFoodNote ?? null : null,
       deficit,
       surplus: Math.max(0, production - need),
       rawDeficit: Math.max(0, need - production),
