@@ -10,7 +10,7 @@
       "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
     },
     "src/domain/crisis/crisisCast.js": {
-      "count": 3,
+      "count": 2,
       "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
     },
     "src/domain/events/factionResponses.js": {
