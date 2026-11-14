@@ -1408,3 +1408,58 @@ Pushes by /home/user/runs/push.sh (POWERS-11's, pointed at p13).
 - SummaryTab.jsx:82 (the faction legend's chips: `f.modifiers` + `f.modifier`, the key uppercased): held by the upkeep
   lane. The one-line change: the ruling power's chip through `governingModifierWordsOf`.
 - The page-census register and the lighting census are shared files: re-taken by their doors at the join.
+
+## P7.4 Item 5: THE MEDIUM ROWS AND P6.6's, BY HOW MANY TOWNS PRINT THEM AT THE TIP (609ff6472)
+One count (probe rows13.mjs over CENSUS-2's render of the 720 at 609ff6472, every tab, every disclosure, the Tonight sheet;
+the table is kept in probes/POWERS-13/rows13-at-609ff6472.txt). A town PRINTING the sentence is the exposure, NOT the false
+count: each row is false only where its fact is against it, still to be read per row.
+| towns | row (writer) |
+|---|---|
+| 587 | ww#375 "Free of the criminals. Nobody at the head of ..." (dmPowerLines.js) |
+| 120 | ww#850 "Holds the title; the decisions that matter are made by ..." (powerStrata.js) |
+| 104 | ww#440 "Merchants with local reach; a consistent civic presence ..." (rulingStructure.js) |
+| 100 | bar #17 "Well-funded city watch; it keeps order reliably ..." (claimStanding.js / rulingStructure.js) |
+| 54 | bar #101 "Offers food, a bed and a fresh team; full of news of the road." (titleSecretsPresentations.js) |
+| 52 | pf#520 "holds a third share in" (dmPowerLines.js) |
+| 49 | bar #26 "Sells ore by the cart; hires workers by the week." (titleSecretsPresentations.js) |
+| 41 | bar #62/#98 "Mother <name>" on the cards (faceHonorifics.js): the card's title on a man, PARKED (the owner's words) |
+| 37 | pf#164 "controls a distinct district or institution." (stressFactions.js) |
+| 34 | bar #18 "They are roughly even with the military ..." (factionStanding.js) |
+| 34 | ww#377 "Undermanned and underfunded; ..." (rulingStructure.js) |
+| 33 | the census's candidate "... and courts are all ecclesiastical" (rulingStructure.js) |
+| 29 | #291/#292 the levies line, now only where a market stands (CURED, 8dad2e567) |
+| 28 | pf#234 "External administrative body; ..." (stressFactions.js) |
+| 21 | pf#524 "The crown rules here directly." (rulingStructure.js) |
+| 14 | pf#486 "Hereditary or institutional claim; ..." (stressFactions.js) |
+| 13 | ww#1048 "The trouble is inside the government, not in the streets." (governingStressVignettes.js) |
+| 2 | pf#481/#474/#488 "Acting Fixer" (seatKeeper.js, cardPowers.js) |
+| 0 | ANY RAW MODIFIER KEY on any rendered tab (#272, CURED; the PDF is not in this render: FOR THE JOIN) |
+
+## P7.5 WHAT IS LEFT, line by line (for the next seat)
+- Item 5, the cures, widest first by FALSE count (not yet read): for each row above, read its towns against its fact and
+  count the false ones, then cure the widest cause. Candidates by kind: #17 (the watch line printed for a force that is
+  not the watch, and beside a resource-constrained guard: two homes disagree); #101 and #26 (the presentation's normal-
+  times line under a siege or famine; ore sold where the deposits are depleted); #18 (the figure against the record);
+  the census candidate (courts with no court: the same court fact #291 used, instFlags.inst.hasCourtSystem).
+- L4 (refreshRelationshipProjections styles the role words with no guard; its plant `refresh-role` in the reader's
+  section): NOT STARTED.
+- P4.8's other lines by file as they stand there; P4.7's rows; P5.10's rows not reached: NOT STARTED.
+- PARKED: the card's title on a man (#62, #98, and P4.7's "the alewife", "the midwife", "the madam"): needs the owner's words.
+- FOR THE JOIN: #312 and ww#656 (another lane's leaf); P7.3's PDF chip and SummaryTab chip; P6.5 as it stands.
+- The 189 stored modifier keys the record does not bear out (#272's second finding): named; a writer cure would be a
+  declared move on powerStructure.factions[].modifier, the owner's or the chair's call.
+- Carried red at the tip and after: espionageDormancyFence's driven golden (P6.3's list, the merge seat's re-record).
+
+## P7.6 THIS SEAT'S INSTRUMENTS, and how a successor re-makes them (copied to docs/chair/2026-11-14/probes/POWERS-13/)
+- Worktrees: /home/user/p13 (branch p13, `npm ci` once), /home/user/p13dev (a scratch branch for edits while a run reads
+  p13; node_modules linked), /home/user/wttip (detached, for a clean-tree door run), /home/user/wtbase (a5402c006).
+- CENSUS-2 extracted to /home/user/c2 (`git archive origin/lane/census-2-2026-11-13 docs/chair/2026-11-13/probes/CENSUS-2`),
+  REVIEW-BAR-0's probes to /home/user/bar0 (`git archive origin/lane/review-bar-0-2026-11-14 docs/chair/2026-11-14/probes/
+  REVIEW-BAR-0`); POWERS-9's births.mjs/births.sh/fdiff.mjs in /home/user/p9probes with births.mjs as POWERS-11 pointed it.
+- The 720 rendered to text: `sh /home/user/c2/.../census2.sh <tree> <out> 4` (about 25 minutes); a seed list with
+  `--seeds <file>`; the bar's towns: `sh /home/user/bar0/.../render2.sh <tree> <out> <bar0 seeds> 3 <render.bar0.jsx>`.
+- one13.mjs <tree> <seed> <js view>: one birth in the census shape; gov.sh <tree> <out> 720: the power facts per birth;
+  ladder.mjs <gov dir>: the conflict ladder's lines against the roster; modcount.mjs / modwords.mjs / chainpower.mjs
+  <tree>: the modifier keys by family, borne out or not, and the chip's printing; rows13.mjs <census2 out>: the row
+  table above; gend.mjs, mintscan.mjs: the two re-keyed guards' exposure scans; holders.sh <file>...: the lanes that hold
+  a file by content; scan.mjs <births dir> <predicate>: rows of a births run; push.sh: POWERS-11's, pointed at p13.

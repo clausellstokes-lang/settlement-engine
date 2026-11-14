@@ -1,0 +1,20 @@
+towns 720
+ 587 ww#375 Free of the criminals | r2r-city-0 r2r-city-1 r2r-city-10 r2r-city-11 r2r-city-17
+ 120 ww#850 Holds the title; the decisions that matter | r2r-city-19 r2r-city-33 r2r-city-44 r2r-hamlet-27 r2r-hamlet-35
+ 104 ww#440 Merchants with local reach | r2r-city-0 r2r-city-10 r2r-city-11 r2r-city-16 r2r-city-17
+ 100 #17 Well-funded city watch | r2r-city-0 r2r-city-1 r2r-city-14 r2r-city-16 r2r-city-17
+  54 #101 Offers food, a bed and a fresh team | r2r-city-0 r2r-city-10 r2r-city-11 r2r-city-18 r2r-city-30
+  52 pf#520 a third share | r2r-city-13 r2r-city-18 r2r-city-19 r2r-city-27 r2r-city-28
+  49 #26 Sells ore by the cart | r2r-city-30 r2r-city-56 r2r-city-59 r2r-hamlet-26 r2r-hamlet-3
+  41 #62/#98 Mother on a man (PARKED: the owner's words) | r2r-city-19 r2r-city-23 r2r-city-3 r2r-city-36 r2r-city-39
+  37 pf#164 controls a distinct district or institution | r2r-city-51 r2r-city-7 r2r-hamlet-35 r2r-hamlet-4 r2r-hamlet-45
+  34 #18 roughly even with the military | r2r-city-14 r2r-city-16 r2r-city-19 r2r-city-22 r2r-city-23
+  34 ww#377 Undermanned and underfunded | r2r-city-11 r2r-city-32 r2r-city-47 r2r-city-57 r2r-metropolis-1
+  33 census candidate: courts are all ecclesiastical | r2r-city-15 r2r-city-19 r2r-city-36 r2r-city-48 r2r-metropolis-15
+  29 #291/#292 market levies (cured) | r2r-city-1 r2r-city-22 r2r-city-23 r2r-city-31 r2r-city-48
+  28 pf#234 External administrative body | r2r-thorp-1 r2r-thorp-24 r2r-thorp-27 r2r-thorp-40 r2s-occupied-city-0
+  21 pf#524 The crown rules here directly | r2r-city-18 r2r-city-19 r2r-city-27 r2r-metropolis-10 r2r-metropolis-22
+  14 pf#486 Hereditary or institutional claim | r2r-city-10 r2r-city-2 r2r-metropolis-6 r2r-village-56 r2s-succession_void-city-2
+  13 ww#1048 trouble is inside the government | r2r-metropolis-51 r2r-town-11 r2s-insurgency-city-0 r2s-insurgency-city-1 r2s-insurgency-metropolis-1
+   2 pf#481/#474/#488 Acting Fixer | r2s-succession_void-town-1 r2s-succession_void-town-3
+   0 raw modifier key on any tab | 
