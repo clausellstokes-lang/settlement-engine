@@ -1,0 +1,14 @@
+state.publicOrder	ON PAGE	Order at Ögedeitash could tip either way: a few fewer watchmen or one bolder gang would be felt on the streets within the season.
+state.firstSurvey	not on page	This account of Ögedeitash's safety comes from a first survey, so trouble the town keeps from newcomers may be missing from it.
+threat.beasts	ON PAGE	Very little reaches Ögedeitash out of the wild country, and the reason is that the arrangements are visible from a long way off.
+threat.invasion	ON PAGE	People at Ögedeitash believe the town could be held, and the soldiers on the walls give them good reason to. You can see the defence at Ögedeitash is kept supplied: food and gear come from the town's own workshops.
+threat.internal	ON PAGE	Ögedeitash's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.
+threat.economic	ON PAGE	The town could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it. The people who salt, dry and preserve food at Ögedeitash are working steadily, which matters a great deal if the town is ever cut off.
+forces.fortification	ON PAGE	The town has a wall and arranges its day around the gates without noticing that it does. The wall at Ögedeitash is entered by its gates, and the gate tolls are counted there; a gate left unwatched is a toll lost.
+forces.force	not on page	Ögedeitash's soldiers serve all year, not for a season; the town relies on them and grumbles about them in equal measure. A free company keeps a hall at Ögedeitash and hires out its swords to whoever pays.
+forces.charter	not on page	Ögedeitash retains no specialists. Whatever comes out of the country is met by whoever the town has, whether or not they are the right answer to it.
+forces.arcane	not on page	Ögedeitash keeps no defence against anything it cannot see.
+posture.posture	ON PAGE	To anyone arriving, Ögedeitash looks defended in the ordinary way: enough for the usual trouble, and nothing to spare.
+wall.rationale	ON PAGE	Ögedeitash's accounts keep its town walls in repair but fall short on the watch's wages, so the defences are sound and too few people man them.
+criminal.structure	not on page	What goes wrong at Ögedeitash goes wrong one thing at a time and belongs to whoever did it.
+criminal.capture	not on page	Whatever is run at Ögedeitash is run outside the hall, and business with the hall is straight.

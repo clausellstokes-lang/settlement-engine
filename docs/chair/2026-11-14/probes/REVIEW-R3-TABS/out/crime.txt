@@ -1,0 +1,22 @@
+{
+  rows: 3160,
+  cutLine: 576,
+  changed: 576,
+  overLong: 0,
+  noEnd: 0,
+  distinctChanged: 7
+}
+190	r2r-town-5	TIP: An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol schedules.
+		FULL(351): An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol schedules. The lack of controlled entry points makes movement relatively easy; no gates to bribe and no checkpoints to avoid. Arrests do happen. Prosecution is real, which is why the network is careful.
+165	r2r-town-18	TIP: An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol schedules.
+		FULL(409): An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol schedules. The settlement's gates and walls are checkpoints that smugglers work around. Bribing officials, using hidden routes, or moving shipments at shift changes. With nowhere to hold the guilty, the risk of operating is low. Arrest means a fine 
+118	r2r-town-0	TIP: Territorial gangs control specific districts, extorting local businesses and residents. Violence is episodic rather than constant: mostly enforcing territorial boundaries.
+		FULL(320): Territorial gangs control specific districts, extorting local businesses and residents. Violence is episodic rather than constant: mostly enforcing territorial boundaries. The watch responds to the worst incidents but cannot contest territorial control. District boundaries often follow the old wall lines and alleyways.
+74	r2r-village-11	TIP: Petty theft, minor fraud, and opportunistic violence are persistent. No single dominant organisation: just the steady pressure of too many people with too little, and too few consequences for taking.
+		FULL(295): Petty theft, minor fraud, and opportunistic violence are persistent. No single dominant organisation: just the steady pressure of too many people with too little, and too few consequences for taking. The lack of reliable courts and detention means most offenders face no meaningful consequences.
+15	r2r-thorp-30	TIP: There is no meaningful law enforcement. Disputes are settled by whoever is stronger. Property is kept only by those who can defend it.
+		FULL(215): There is no meaningful law enforcement. Disputes are settled by whoever is stronger. Property is kept only by those who can defend it. Without a court, there is no formal mechanism for resolving disputes peacefully.
+12	r2r-city-17	TIP: The thieves' guild is rich and well run: protection rackets, smuggling, and jobs done for whoever pays. Guild operations are careful and layered.
+		FULL(221): The thieves' guild is rich and well run: protection rackets, smuggling, and jobs done for whoever pays. Guild operations are careful and layered. They keep enough distance from violent crime that prosecution is difficult.
+2	r2r-city-31	TIP: The watch is too thinly spread to maintain order. Disputes are settled by whoever is stronger. Property is kept only by those who can defend it.
+		FULL(229): The watch is too thinly spread to maintain order. Disputes are settled by whoever is stronger. Property is kept only by those who can defend it. The charter hall handles external threats but is not equipped for civil enforcement.

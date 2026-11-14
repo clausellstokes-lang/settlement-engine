@@ -1,0 +1,15 @@
+state.publicOrder	ON PAGE	With nobody clearly in charge at Ásaker, those who keep order are unsure whose orders to follow, and petty crime has risen in the gap.
+state.firstSurvey	not on page	This is how Ásaker looks on a first visit; a season there might show it differently.
+threat.beasts	ON PAGE	The village has never needed to think about what is outside it, and does not.
+threat.invasion	ON PAGE	The village's plan for an army is to not be interesting to one, and everybody here can state the plan.
+threat.internal	ON PAGE	Ásaker keeps no court and no gaol, and no wrong done there is written down; order is kept by whoever is armed and standing there, and when they leave, nothing keeps it.
+threat.economic	ON PAGE	Ásaker's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes.
+forces.fortification	ON PAGE	You can walk into Ásaker from any direction and pass nobody on the way in.
+forces.force	not on page	Ásaker has no organized force. Defense here is individual armed citizens, with no command, no training and no way to coordinate a response.
+forces.arcane	not on page	Ásaker keeps no defence against anything it cannot see.
+posture.posture	ON PAGE	Ásaker has not been attacked lately, and if it were, it would struggle to hold.
+status.override	ON PAGE	Several people at Ásaker could order the defence and none can do it alone, so they watch each other instead of the roads.
+status.viability	not on page	Ásaker should come through this crisis if nothing else goes wrong, though its defence has had to change to meet it.
+wall.rationale	ON PAGE	Ásaker is too small to wall and knows it; the village's safety is its neighbours, its distance, and its unimportance.
+criminal.structure	ON PAGE	What goes wrong at Ásaker goes wrong one thing at a time and belongs to whoever did it.
+criminal.capture	not on page	No criminal's money appears in the Priestly Guidance's accounts at Ásaker, so what the hall spends is spent on the village.

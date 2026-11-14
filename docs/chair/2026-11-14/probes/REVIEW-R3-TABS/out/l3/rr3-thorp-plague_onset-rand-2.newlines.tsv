@@ -1,0 +1,15 @@
+state.publicOrder	ON PAGE	The burial register at Ásfjord grows every day, and medicine and graves cost whatever the sellers ask, so the poorest go without both.
+state.firstSurvey	not on page	This account of Ásfjord's safety comes from a first survey, so trouble the thorp keeps from newcomers may be missing from it.
+threat.beasts	ON PAGE	Whoever walks out of Ásfjord, in any direction and at any hour, meets nothing that would justify a watch.
+threat.invasion	ON PAGE	The thorp's plan for an army is to not be interesting to one, and everybody here can state the plan.
+threat.internal	ON PAGE	Ásfjord keeps no court and no gaol, and no wrong done there is written down; order is kept by whoever is armed and standing there, and when they leave, nothing keeps it.
+threat.economic	ON PAGE	Ásfjord cannot fund a response to anything. Any sustained pressure exhausts the thorp's capacity almost immediately and then continues.
+forces.fortification	ON PAGE	Ásfjord is unfortified. There is no perimeter, which means the thorp cannot control entry and cannot make a chokepoint of anything.
+forces.force	ON PAGE	Nobody at Ásfjord is responsible for defending the thorp; ask who is, and nobody can name anyone.
+forces.arcane	not on page	Ásfjord's defense is conventional throughout. What arrives unseen here goes undetected and therefore unanswered.
+posture.posture	ON PAGE	Ásfjord has not been attacked lately, and if it were, it would struggle to hold.
+status.override	ON PAGE	Nobody comes into Ásfjord and nobody leaves. The point now is to keep the sickness in, not an enemy out.
+status.viability	ON PAGE	Life in the thorp goes on through the crisis: people work, eat and sleep, and the defence makes do with what is left over.
+wall.rationale	ON PAGE	No wall marks where Ásfjord ends; the last houses simply give way to open country.
+criminal.structure	not on page	Ásfjord's books record no gang, guild or racket: what wrongdoing the thorp has, people do on their own account.
+criminal.capture	not on page	No criminal's money appears in the Elder Council's accounts at Ásfjord, so what the hall spends is spent on the thorp.

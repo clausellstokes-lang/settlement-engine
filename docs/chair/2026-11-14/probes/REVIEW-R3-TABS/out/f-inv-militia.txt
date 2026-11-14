@@ -1,0 +1,423 @@
+r2r-thorp-8 [NEW] thorp 10 | calm | badge Vulnerable 18 | mil 46 ADEQUATE | walls(Palisade) militia(Household levy) | threat plagued | route road plains
+    TIP: The walls and townsfolk of Ögedeikul would see off a raid but not a proper army, and nothing now under way will change that.
+    WAS: (silent)
+r2r-village-40 [CHANGED] village 350 | calm | badge Lightly Defended 37 | mil 87 STRONG | walls(Palisade or earthworks) watch(Village watch) | threat frontier | route isolated hills
+    TIP: The walls and townsfolk of Kripapeta would see off a raid but not a proper army, and nothing now under way will change that.
+    WAS: You can walk the length of Kripapeta's walls and meet nobody on them.
+r2r-town-0 [CHANGED] town 708 | calm | badge Vulnerable 17 | mil 47 ADEQUATE | walls(Town walls) watch(Town watch) | threat plagued | route road hills
+    TIP: The walls and townsfolk of Farosaltus would see off a raid but not a proper army, and nothing now under way will change that. The defenders at Farosaltus make do: the town's workshops cannot keep them properly fed and equipped.
+    WAS: You can walk the length of Farosaltus's walls and meet nobody on them.
+r2r-town-1 [CHANGED] town 1590 | indebted | badge Lightly Defended 36 | mil 50 ADEQUATE | walls(Citadel,Town walls) watch(Town watch) magicDef(Alchemist shop) | threat plagued | route road forest
+    TIP: Every household at Karakabad would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. Karakabad's defenders are a little worse off every month the trades behind them keep failing.
+    WAS: Karakabad has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+r2r-town-3 [CHANGED] town 1168 | insurgency | badge Vulnerable 19 | mil 28 WEAK | walls(Town walls) watch(Town watch) | threat frontier | route river coastal
+    TIP: Every household at Llanthwaite would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. Llanthwaite's defenders are a little worse off every month the trades behind them keep failing.
+    WAS: People at Llanthwaite admit it when asked: the town has walls and nobody to stand on them.
+r2r-town-6 [CHANGED] town 1614 | calm | badge Well-Defended 61 | mil 79 STRONG | walls(Town walls) watch(Town watch) magicDef(Wizard's tower) | threat frontier | route port coastal
+    TIP: Walls at Neuheim with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The defenders at Neuheim make do: the town's workshops cannot keep them properly fed 
+    WAS: People at Neuheim admit it when asked: the town has walls and nobody to stand on them.
+r2r-town-7 [CHANGED] town 723 | indebted | badge Undefended 0 | mil 19 CRITICAL | walls(Town walls) watch(Town watch) | threat plagued | route road desert
+    TIP: The walls and townsfolk of Rajinagar would see off a raid but not a proper army, and nothing now under way will change that. Rajinagar's defenders are a little worse off every month the trades behind them keep failing.
+    WAS: Rajinagar has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+r2r-town-8 [CHANGED] town 1177 | mass_migration | badge Lightly Defended 32 | mil 51 ADEQUATE | walls(Town walls) watch(Town watch) | threat frontier | route road hills
+    TIP: The walls and townsfolk of Hagiokastro would see off a raid but not a proper army, and nothing now under way will change that. While the trades behind Hagiokastro's defence keep working, its defenders will not go short.
+    WAS: People at Hagiokastro admit it when asked: the town has walls and nobody to stand on them.
+r2r-town-11 [CHANGED] town 1790 | insurgency | badge Defensible 45 | mil 77 STRONG | walls(Town walls,Gates (if walled)) watch(Town watch) charter(Adventurers' charter hall) magicDef(Alchemist shop) | threat plagued | route road mountain
+    TIP: The walls and townsfolk of Ardbridge would see off a raid but not a proper army, and nothing now under way will change that. The trades that should supply Ardbridge's defenders are struggling, and the defenders go short of food or gear.
+    WAS: People at Ardbridge admit it when asked: the town has walls and nobody to stand on them.
+r2r-town-12 [CHANGED] town 1099 | recently_betrayed | badge Defensible 45 | mil 66 STRONG | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) magicDef(Hedge wizard) | threat frontier | route isolated mountain
+    TIP: Walls at Qasrtappa with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. Qasrtappa's defenders are a little worse off every month the trades behind them kee
+    WAS: Qasrtappa has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+r2r-town-14 [CHANGED] town 1359 | calm | badge Defensible 43 | mil 44 ADEQUATE | walls(Town walls,Citadel) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route crossroads plains
+    TIP: Walls at Nahrkhel with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The supply book for Nahrkhel's defenders runs short: the trades that should feed and
+    WAS: Nahrkhel has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+r2r-town-17 [CHANGED] town 1558 | calm | badge Defensible 54 | mil 63 ADEQUATE | walls(Town walls,Citadel) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route river forest
+    TIP: Walls at Weichstift with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The supply book for Weichstift's defenders runs short: the trades that should feed
+    WAS: People at Weichstift admit it when asked: the town has walls and nobody to stand on them.
+r2r-town-20 [CHANGED] town 2443 | calm | badge Lightly Defended 28 | mil 36 WEAK | walls(Town walls,Citadel) watch(Town watch) | threat frontier | route river riverside
+    TIP: Every household at Sübeteikhurel would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. You can see the defence at Sübeteikhurel is kept supplied: food and gear come from the town's own workshops
+    WAS: Sübeteikhurel has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+r2r-town-22 [CHANGED] town 540 | calm | badge Vulnerable 17 | mil 28 WEAK | walls(Town walls) watch(Town watch) | threat frontier | route river riverside
+    TIP: Walls at Altaiköl with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The supply book for Altaiköl's defenders runs short: the trades that should feed and
+    WAS: Altaiköl has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+r2r-town-23 [CHANGED] town 1317 | calm | badge Defensible 43 | mil 66 STRONG | walls(Town walls,Citadel) watch(Town watch) | threat frontier | route crossroads riverside
+    TIP: The walls and townsfolk of Qaryatfort would see off a raid but not a proper army, and nothing now under way will change that. The supply book for Qaryatfort's defenders runs short: the trades that should feed and equip them are failing, so 
+    WAS: You can walk the length of Qaryatfort's walls and meet nobody on them.
+r2r-town-26 [CHANGED] town 968 | calm | badge Defensible 52 | mil 47 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route river riverside
+    TIP: Every household at Katodion would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The defenders at Katodion make do: the town's workshops cannot keep them properly fed and equipped.
+    WAS: Katodion has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+r2r-town-27 [CHANGED] town 1310 | wartime | badge Defensible 47 | mil 73 STRONG | walls(Town walls,Gates (if walled)) watch(Town watch) charter(Adventurers' charter hall) | threat plagued | route road forest
+    TIP: The walls and townsfolk of Markazzamin would see off a raid but not a proper army, and nothing now under way will change that. Markazzamin's defenders are a little worse off every month the trades behind them keep failing.
+    WAS: People at Markazzamin admit it when asked: the town has walls and nobody to stand on them.
+r2r-town-32 [CHANGED] town 2057 | calm | badge Defensible 42 | mil 54 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route crossroads hills
+    TIP: The walls and townsfolk of Vedabari would see off a raid but not a proper army, and nothing now under way will change that. Vedabari's defenders are a little worse off every month the trades behind them keep failing.
+    WAS: Vedabari has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+r2r-town-34 [CHANGED] town 2074 | calm | badge Well-Defended 63 | mil 97 STRONG | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat plagued | route crossroads plains
+    TIP: The walls and townsfolk of Rundholz would see off a raid but not a proper army, and nothing now under way will change that. The trades that feed and equip Rundholz's defenders are busy and well stocked, and the defenders know it.
+    WAS: You can walk the length of Rundholz's walls and meet nobody on them.
+r2r-town-36 [CHANGED] town 440 | mass_migration | badge Well-Defended 57 | mil 62 ADEQUATE | walls(Town walls) watch(Town watch) magicDef(Alchemist shop) | threat frontier | route road plains
+    TIP: Walls at Naranjobalam with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The defenders at Naranjobalam make do: the town's workshops cannot keep them pro
+    WAS: People at Naranjobalam admit it when asked: the town has walls and nobody to stand on them.
+r2r-town-37 [CHANGED] town 1272 | plague_onset | badge Vulnerable 21 | mil 20 WEAK | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route port coastal
+    TIP: Every household at Hadithaserai would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The supply book for Hadithaserai's defenders runs short: the trades that should feed and equip them are fail
+    WAS: People at Hadithaserai admit it when asked: the town has walls and nobody to stand on them.
+r2r-town-43 [CHANGED] town 366 | calm | badge Defensible 38 | mil 63 ADEQUATE | walls(Town walls) watch(Town watch) | threat frontier | route river forest
+    TIP: The walls and townsfolk of Svetoka would see off a raid but not a proper army, and nothing now under way will change that. You can see the defence at Svetoka is kept supplied: food and gear come from the town's own workshops.
+    WAS: You can walk the length of Svetoka's walls and meet nobody on them.
+r2r-town-45 [CHANGED] town 2341 | calm | badge Defensible 54 | mil 81 STRONG | walls(Town walls,Gates (if walled),Citadel) watch(Town watch) magicDef(Mages' guild) | threat frontier | route crossroads plains
+    TIP: Walls at Varanand with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The supply book for Varanand's defenders runs short: the trades that should feed and
+    WAS: People at Varanand admit it when asked: the town has walls and nobody to stand on them.
+r2r-town-46 [CHANGED] town 384 | calm | badge Defensible 48 | mil 56 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route crossroads plains
+    TIP: Every household at Farosaltus would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. You can see the defence at Farosaltus is kept supplied: food and gear come from the town's own workshops.
+    WAS: People at Farosaltus admit it when asked: the town has walls and nobody to stand on them.
+r2r-town-47 [CHANGED] town 1410 | calm | badge Defensible 41 | mil 43 ADEQUATE | walls(Town walls) watch(Town watch) | threat frontier | route road hills
+    TIP: Every household at Mahapeth would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The supply book for Mahapeth's defenders runs short: the trades that should feed and equip them are failing, so 
+    WAS: People at Mahapeth admit it when asked: the town has walls and nobody to stand on them.
+r2r-town-49 [CHANGED] town 1724 | calm | badge Defensible 54 | mil 66 STRONG | walls(Town walls,Gates (if walled)) watch(Town watch) charter(Adventurers' charter hall) magicDef(Alchemist shop) | threat frontier | route crossroads plains
+    TIP: Walls at Kashithal with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The trades that should supply Kashithal's defenders are struggling, and the defende
+    WAS: You can walk the length of Kashithal's walls and meet nobody on them.
+r2r-town-53 [CHANGED] town 2055 | calm | badge Defensible 44 | mil 58 ADEQUATE | walls(Town walls) watch(Town watch) | threat frontier | route crossroads plains
+    TIP: Every household at Khanhan would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. While the trades behind Khanhan's defence keep working, its defenders will not go short.
+    WAS: People at Khanhan admit it when asked: the town has walls and nobody to stand on them.
+r2r-town-55 [CHANGED] town 511 | calm | badge Lightly Defended 25 | mil 37 WEAK | walls(Town walls) watch(Town watch) | threat frontier | route road plains
+    TIP: Every household at Skálaker would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. Skálaker's defenders are a little worse off every month the trades behind them keep failing.
+    WAS: Skálaker has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+r2r-town-57 [CHANGED] town 1144 | recently_betrayed | badge Defensible 38 | mil 83 STRONG | walls(Town walls,Gates (if walled),Citadel) watch(Town watch) magicDef(Alchemist shop) | threat plagued | route road hills
+    TIP: The walls and townsfolk of Pianoium would see off a raid but not a proper army, and nothing now under way will change that. The supply book for Pianoium's defenders balances: the town's own trades feed and equip them, so a call to arms does
+    WAS: People at Pianoium admit it when asked: the town has walls and nobody to stand on them.
+r2r-town-59 [CHANGED] town 1283 | calm | badge Defensible 44 | mil 78 STRONG | walls(Town walls) watch(Town watch) | threat frontier | route river forest
+    TIP: The walls and townsfolk of Gortcross would see off a raid but not a proper army, and nothing now under way will change that. The supply book for Gortcross's defenders balances: the town's own trades feed and equip them, so a call to arms do
+    WAS: You can walk the length of Gortcross's walls and meet nobody on them.
+r2s-under_siege-town-3 [CHANGED] town 2192 | under_siege | badge Vulnerable 22 | mil 44 ADEQUATE | walls(Town walls) watch(Town watch) | threat frontier | route road hills
+    TIP: The walls and townsfolk of Rathwell would see off a raid but not a proper army, and nothing now under way will change that. You can see the defence at Rathwell is kept supplied: food and gear come from the town's own workshops.
+    WAS: Rathwell has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+r2s-famine-town-1 [CHANGED] town 1336 | famine | badge Well-Defended 61 | mil 90 STRONG | walls(Town walls,Citadel) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route crossroads hills
+    TIP: The walls and townsfolk of Hongcheng would see off a raid but not a proper army, and nothing now under way will change that. Hongcheng's defenders are a little worse off every month the trades behind them keep failing.
+    WAS: Hongcheng has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+r2s-famine-town-3 [CHANGED] town 737 | famine | badge Defensible 38 | mil 63 ADEQUATE | walls(Town walls,Gates (if walled)) watch(Town watch) magicDef(Alchemist shop) | threat heartland | route road hills
+    TIP: Every household at Shattkarez would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The supply book for Shattkarez's defenders runs short: the trades that should feed and equip them are failing,
+    WAS: You can walk the length of Shattkarez's walls and meet nobody on them.
+r2s-occupied-town-0 [CHANGED] town 1580 | occupied | badge Vulnerable 18 | mil 1 CRITICAL | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route road hills
+    TIP: Every household at Cerrocastra would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. Cerrocastra's defenders are a little worse off every month the trades behind them keep failing.
+    WAS: Cerrocastra has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+r2s-occupied-town-2 [CHANGED] town 310 | occupied | badge Vulnerable 18 | mil 8 CRITICAL | walls(Town walls) watch(Town watch) | threat plagued | route road plains
+    TIP: The walls and townsfolk of Khutulunbash would see off a raid but not a proper army, and nothing now under way will change that. While the trades behind Khutulunbash's defence keep working, its defenders will not go short.
+    WAS: Khutulunbash has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+r2s-occupied-town-3 [CHANGED] town 2018 | occupied | badge Defensible 41 | mil 18 CRITICAL | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route river riverside
+    TIP: Walls at Lykopetra with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. Lykopetra's defenders are a little worse off every month the trades behind them kee
+    WAS: Lykopetra has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+r2s-politically_fractured-town-0 [CHANGED] town 843 | politically_fractured | badge Lightly Defended 28 | mil 45 ADEQUATE | walls(Town walls) watch(Town watch) | threat frontier | route road riverside
+    TIP: Every household at Jinling would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The defenders at Jinling make do: the town's workshops cannot keep them properly fed and equipped.
+    WAS: Jinling has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+r2s-politically_fractured-town-1 [NEW] town 1023 | politically_fractured | badge Defensible 53 | mil 65 STRONG | walls(Town walls) watch(Town watch) magicDef(Wizard's tower) | threat frontier | route port coastal
+    TIP: Walls at Ásstrand with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The supply book for Ásstrand's defenders runs short: the trades that should feed and
+    WAS: (silent)
+r2s-indebted-town-0 [CHANGED] town 1919 | indebted | badge Lightly Defended 35 | mil 45 ADEQUATE | walls(Town walls) watch(Town watch) | threat frontier | route port coastal
+    TIP: Every household at Knockdale would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The defenders at Knockdale make do: the town's workshops cannot keep them properly fed and equipped.
+    WAS: You can walk the length of Knockdale's walls and meet nobody on them.
+r2s-indebted-town-1 [CHANGED] town 357 | indebted | badge Lightly Defended 25 | mil 61 ADEQUATE | walls(Town walls) watch(Town watch) | threat plagued | route road hills
+    TIP: Walls at Xiaba with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The supply book for Xiaba's defenders balances: the town's own trades feed and equip th
+    WAS: Xiaba has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+r2s-recently_betrayed-town-0 [CHANGED] town 2124 | recently_betrayed | badge Lightly Defended 34 | mil 46 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) magicDef(Wizard's tower) | threat plagued | route road hills
+    TIP: Every household at Grünburg would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The defenders at Grünburg make do: the town's workshops cannot keep them properly fed and equipped.
+    WAS: People at Grünburg admit it when asked: the town has walls and nobody to stand on them.
+r2s-recently_betrayed-town-1 [CHANGED] town 2359 | recently_betrayed | badge Defensible 51 | mil 46 ADEQUATE | walls(Town walls,Gates (if walled)) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route river riverside
+    TIP: The walls and townsfolk of Kashithal would see off a raid but not a proper army, and nothing now under way will change that. While the trades behind Kashithal's defence keep working, its defenders will not go short.
+    WAS: Kashithal has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+r2s-recently_betrayed-town-3 [CHANGED] town 322 | recently_betrayed | badge Vulnerable 17 | mil 19 CRITICAL | walls(Town walls) watch(Town watch) | threat frontier | route road plains
+    TIP: Every household at Milopol would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. Milopol's defenders are a little worse off every month the trades behind them keep failing.
+    WAS: People at Milopol admit it when asked: the town has walls and nobody to stand on them.
+r2s-infiltrated-town-0 [CHANGED] town 1716 | infiltrated | badge Well-Defended 60 | mil 87 STRONG | walls(Town walls) watch(Town watch) magicDef(Alchemist shop,Wizard's tower) | threat frontier | route road mountain
+    TIP: The walls and townsfolk of Tighwood would see off a raid but not a proper army, and nothing now under way will change that. The trades that should supply Tighwood's defenders are struggling, and the defenders go short of food or gear.
+    WAS: People at Tighwood admit it when asked: the town has walls and nobody to stand on them.
+r2s-infiltrated-town-1 [CHANGED] town 319 | infiltrated | badge Lightly Defended 30 | mil 52 ADEQUATE | walls(Town walls) watch(Town watch) | threat plagued | route crossroads riverside
+    TIP: Every household at Waldstadt would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. While the trades behind Waldstadt's defence keep working, its defenders will not go short.
+    WAS: You can walk the length of Waldstadt's walls and meet nobody on them.
+r2s-plague_onset-town-0 [CHANGED] town 830 | plague_onset | badge Lightly Defended 34 | mil 80 STRONG | walls(Town walls,Gates (if walled)) watch(Town watch) charter(Adventurers' charter hall) | threat plagued | route river riverside
+    TIP: Every household at Ainkarez would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. You can see the defence at Ainkarez is kept supplied: food and gear come from the town's own workshops.
+    WAS: People at Ainkarez admit it when asked: the town has walls and nobody to stand on them.
+r2s-plague_onset-town-1 [CHANGED] town 1696 | plague_onset | badge Lightly Defended 37 | mil 32 WEAK | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route river plains
+    TIP: Every household at Olymparion would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. While the trades behind Olymparion's defence keep working, its defenders will not go short.
+    WAS: You can walk the length of Olymparion's walls and meet nobody on them.
+r2s-plague_onset-town-2 [CHANGED] town 1264 | plague_onset | badge Vulnerable 21 | mil 49 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat plagued | route river coastal
+    TIP: Every household at Tarkhankul would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. You can see the defence at Tarkhankul is kept supplied: food and gear come from the town's own workshops.
+    WAS: You can walk the length of Tarkhankul's walls and meet nobody on them.
+r2s-plague_onset-town-3 [CHANGED] town 475 | plague_onset | badge Vulnerable 14 | mil 24 WEAK | walls(Town walls) watch(Town watch) | threat plagued | route road riverside
+    TIP: Every household at Ringford would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The supply book for Ringford's defenders runs short: the trades that should feed and equip them are failing, so 
+    WAS: Ringford has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+r2s-succession_void-town-2 [CHANGED] town 2154 | succession_void | badge Lightly Defended 25 | mil 27 WEAK | walls(Town walls) watch(Town watch) | threat frontier | route road desert
+    TIP: Every household at Kulubpeten would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The trades that feed and equip Kulubpeten's defenders are busy and well stocked, and the defenders know it.
+    WAS: Kulubpeten has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+r2s-succession_void-town-3 [CHANGED] town 321 | succession_void | badge Vulnerable 22 | mil 35 WEAK | walls(Town walls) watch(Town watch) | threat frontier | route road forest
+    TIP: Every household at Skaldtun would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. While the trades behind Skaldtun's defence keep working, its defenders will not go short.
+    WAS: You can walk the length of Skaldtun's walls and meet nobody on them.
+r2s-monster_pressure-town-0 [NEW] town 753 | monster_pressure | badge Lightly Defended 25 | mil 40 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat plagued | route road forest
+    TIP: Every household at Ástun would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The trades that should supply Ástun's defenders are struggling, and the defenders go short of food or gear.
+    WAS: (silent)
+r2s-monster_pressure-town-3 [CHANGED] town 1890 | monster_pressure | badge Lightly Defended 32 | mil 53 ADEQUATE | walls(Town walls,Gates (if walled)) watch(Town watch) charter(Adventurers' charter hall) | threat plagued | route road plains
+    TIP: Every household at Rundfeld would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The supply book for Rundfeld's defenders runs short: the trades that should feed and equip them are failing, so 
+    WAS: You can walk the length of Rundfeld's walls and meet nobody on them.
+r2s-insurgency-town-2 [CHANGED] town 2081 | insurgency | badge Lightly Defended 31 | mil 46 ADEQUATE | walls(Town walls) watch(Town watch) magicDef(Alchemist shop) | threat frontier | route crossroads hills
+    TIP: The walls and townsfolk of Cathham would see off a raid but not a proper army, and nothing now under way will change that. The trades that should supply Cathham's defenders are struggling, and the defenders go short of food or gear.
+    WAS: People at Cathham admit it when asked: the town has walls and nobody to stand on them.
+r2s-religious_conversion-town-1 [CHANGED] town 909 | religious_conversion | badge Vulnerable 20 | mil 45 ADEQUATE | walls(Citadel,Town walls) watch(Town watch) | threat plagued | route river plains
+    TIP: Walls at Pantelimani with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The supply book for Pantelimani's defenders balances: the town's own trades feed 
+    WAS: People at Pantelimani admit it when asked: the town has walls and nobody to stand on them.
+r2s-religious_conversion-town-2 [CHANGED] town 1575 | religious_conversion | badge Vulnerable 23 | mil 58 ADEQUATE | walls(Town walls,Gates (if walled)) watch(Town watch) charter(Adventurers' charter hall) magicDef(Alchemist shop) | threat plagued | route road mountain
+    TIP: Every household at Warmthal would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The supply book for Warmthal's defenders runs short: the trades that should feed and equip them are failing, so 
+    WAS: People at Warmthal admit it when asked: the town has walls and nobody to stand on them.
+r2s-religious_conversion-town-3 [CHANGED] town 1419 | religious_conversion | badge Defensible 50 | mil 53 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route road forest
+    TIP: Walls at Ainmahal with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The defenders at Ainmahal make do: the town's workshops cannot keep them properly fe
+    WAS: You can walk the length of Ainmahal's walls and meet nobody on them.
+r2s-slave_revolt-town-0 [CHANGED] town 1243 | slave_revolt | badge Defensible 45 | mil 64 ADEQUATE | walls(Town walls) watch(Town watch) | threat frontier | route river riverside
+    TIP: The walls and townsfolk of Novafossae would see off a raid but not a proper army, and nothing now under way will change that. The supply book for Novafossae's defenders runs short: the trades that should feed and equip them are failing, so 
+    WAS: People at Novafossae admit it when asked: the town has walls and nobody to stand on them.
+r2s-slave_revolt-town-1 [CHANGED] town 343 | slave_revolt | badge Lightly Defended 34 | mil 49 ADEQUATE | walls(Town walls) watch(Town watch) | threat frontier | route river riverside
+    TIP: The walls and townsfolk of Sübeteikotan would see off a raid but not a proper army, and nothing now under way will change that. You can see the defence at Sübeteikotan is kept supplied: food and gear come from the town's own workshops.
+    WAS: People at Sübeteikotan admit it when asked: the town has walls and nobody to stand on them.
+r2s-mass_migration-town-0 [CHANGED] town 649 | mass_migration | badge Defensible 49 | mil 63 ADEQUATE | walls(Town walls) watch(Town watch) | threat frontier | route crossroads plains
+    TIP: Every household at Zelenotsy would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The supply book for Zelenotsy's defenders balances: the town's own trades feed and equip them, so a call to arm
+    WAS: People at Zelenotsy admit it when asked: the town has walls and nobody to stand on them.
+r2s-mass_migration-town-1 [CHANGED] town 2357 | mass_migration | badge Defensible 48 | mil 58 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat plagued | route road riverside
+    TIP: Every household at Archopolis would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The supply book for Archopolis's defenders runs short: the trades that should feed and equip them are failing,
+    WAS: You can walk the length of Archopolis's walls and meet nobody on them.
+r2s-mass_migration-town-3 [CHANGED] town 1159 | mass_migration | badge Lightly Defended 36 | mil 44 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route port coastal
+    TIP: Walls at Breitenbrunn with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The supply book for Breitenbrunn's defenders runs short: the trades that should 
+    WAS: People at Breitenbrunn admit it when asked: the town has walls and nobody to stand on them.
+rr3-hamlet-indebted-rand-0 [NEW] hamlet 94 | indebted | badge Vulnerable 18 | mil 34 WEAK | militia(Citizen militia) | threat frontier | route crossroads plains
+    TIP: The armed townspeople you meet at Ásfjord are capable on their own ground and have never stood in a line with anyone.
+    WAS: (silent)
+rr3-town-calm-rand-3 [CHANGED] town 2192 | calm | badge Defensible 54 | mil 59 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route port coastal
+    TIP: Every household at Ormborg would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The defenders at Ormborg make do: the town's workshops cannot keep them properly fed and equipped.
+    WAS: Ormborg has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+rr3-town-calm-rand-4 [CHANGED] town 2176 | calm | badge Defensible 42 | mil 54 ADEQUATE | walls(Town walls) watch(Town watch) | threat frontier | route road hills
+    TIP: Every household at Beloets would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. Beloets's defenders are a little worse off every month the trades behind them keep failing.
+    WAS: You can walk the length of Beloets's walls and meet nobody on them.
+rr3-town-calm-rand-5 [CHANGED] town 1588 | calm | badge Defensible 39 | mil 51 ADEQUATE | walls(Town walls,Citadel) watch(Town watch) | threat frontier | route port coastal
+    TIP: Every household at Kabahitza would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The trades that should supply Kabahitza's defenders are struggling, and the defenders go short of food or gear.
+    WAS: You can walk the length of Kabahitza's walls and meet nobody on them.
+rr3-town-calm-port-0 [CHANGED] town 1195 | calm | badge Well-Defended 56 | mil 45 ADEQUATE | walls(Town walls) watch(Town watch) | threat frontier | route port coastal
+    TIP: Every household at Shivahalli would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The trades that should supply Shivahalli's defenders are struggling, and the defenders go short of food or gea
+    WAS: Shivahalli has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+rr3-town-calm-port-1 [CHANGED] town 1606 | calm | badge Lightly Defended 25 | mil 35 WEAK | walls(Town walls,Citadel) watch(Town watch) | threat frontier | route port coastal
+    TIP: The walls and townsfolk of Inverdale would see off a raid but not a proper army, and nothing now under way will change that. The trades that should supply Inverdale's defenders are struggling, and the defenders go short of food or gear.
+    WAS: People at Inverdale admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-under_siege-rand-3 [CHANGED] town 2293 | under_siege | badge Defensible 46 | mil 66 STRONG | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) magicDef(Alchemist shop,Wizard's tower) | threat frontier | route road forest
+    TIP: Walls at Radhapat with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. You can see the defence at Radhapat is kept supplied: food and gear come from the to
+    WAS: People at Radhapat admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-under_siege-rand-5 [CHANGED] town 639 | under_siege | badge Vulnerable 16 | mil 57 ADEQUATE | walls(Town walls) watch(Town watch) | threat frontier | route road forest
+    TIP: Every household at Kabahtlan would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. While the trades behind Kabahtlan's defence keep working, its defenders will not go short.
+    WAS: Kabahtlan has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+rr3-town-famine-rand-1 [CHANGED] town 1122 | famine | badge Defensible 45 | mil 73 STRONG | walls(Town walls) watch(Town watch) | threat frontier | route road hills
+    TIP: Walls at Chrissokastro with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The defenders at Chrissokastro make do: the town's workshops cannot keep them p
+    WAS: Chrissokastro has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+rr3-town-famine-rand-2 [CHANGED] town 613 | famine | badge Defensible 43 | mil 41 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route port coastal
+    TIP: The walls and townsfolk of Muultun would see off a raid but not a proper army, and nothing now under way will change that. The supply book for Muultun's defenders runs short: the trades that should feed and equip them are failing, so the de
+    WAS: People at Muultun admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-famine-rand-4 [CHANGED] town 309 | famine | badge Vulnerable 21 | mil 33 WEAK | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route road hills
+    TIP: The walls and townsfolk of Beitian would see off a raid but not a proper army, and nothing now under way will change that. The supply book for Beitian's defenders balances: the town's own trades feed and equip them, so a call to arms does n
+    WAS: Beitian has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+rr3-town-famine-rand-5 [CHANGED] town 1368 | famine | badge Vulnerable 16 | mil 23 WEAK | walls(Town walls,Citadel) watch(Town watch) | threat frontier | route road hills
+    TIP: Walls at Khanmandi with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The supply book for Khanmandi's defenders runs short: the trades that should feed a
+    WAS: You can walk the length of Khanmandi's walls and meet nobody on them.
+rr3-town-famine-port-0 [CHANGED] town 2413 | famine | badge Well-Defended 61 | mil 79 STRONG | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) magicDef(Alchemist shop) | threat frontier | route port coastal
+    TIP: The walls and townsfolk of Khirbetkhel would see off a raid but not a proper army, and nothing now under way will change that. Khirbetkhel's defenders are a little worse off every month the trades behind them keep failing.
+    WAS: People at Khirbetkhel admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-occupied-rand-0 [CHANGED] town 678 | occupied | badge Lightly Defended 25 | mil 2 CRITICAL | walls(Town walls) watch(Town watch) | threat frontier | route river coastal
+    TIP: The walls and townsfolk of Rathsike would see off a raid but not a proper army, and nothing now under way will change that. The supply book for Rathsike's defenders runs short: the trades that should feed and equip them are failing, so the 
+    WAS: You can walk the length of Rathsike's walls and meet nobody on them.
+rr3-town-occupied-rand-5 [CHANGED] town 1776 | occupied | badge Lightly Defended 37 | mil 11 CRITICAL | walls(Citadel,Town walls) watch(Town watch) magicDef(Wizard's tower) | threat heartland | route river riverside
+    TIP: The walls and townsfolk of Prabhaganj would see off a raid but not a proper army, and nothing now under way will change that. Prabhaganj's defenders are a little worse off every month the trades behind them keep failing.
+    WAS: People at Prabhaganj admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-occupied-port-0 [CHANGED] town 1746 | occupied | badge Lightly Defended 28 | mil 0 CRITICAL | walls(Town walls,Citadel) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route port coastal
+    TIP: Walls at Khutulunkul with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The supply book for Khutulunkul's defenders runs short: the trades that should fe
+    WAS: Khutulunkul has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+rr3-town-occupied-port-1 [CHANGED] town 529 | occupied | badge Vulnerable 17 | mil 0 CRITICAL | walls(Town walls) watch(Town watch) | threat frontier | route port coastal
+    TIP: The walls and townsfolk of Jalalkhand would see off a raid but not a proper army, and nothing now under way will change that. The defenders at Jalalkhand make do: the town's workshops cannot keep them properly fed and equipped.
+    WAS: You can walk the length of Jalalkhand's walls and meet nobody on them.
+rr3-town-politically_fractured-rand-3 [CHANGED] town 1038 | politically_fractured | badge Defensible 50 | mil 60 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route road mountain
+    TIP: Walls at Lyssono with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The trades that should supply Lyssono's defenders are struggling, and the defenders g
+    WAS: You can walk the length of Lyssono's walls and meet nobody on them.
+rr3-town-politically_fractured-rand-4 [CHANGED] town 972 | politically_fractured | badge Defensible 39 | mil 100 STRONG | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat plagued | route road hills
+    TIP: Every household at Mironitsa would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The supply book for Mironitsa's defenders balances: the town's own trades feed and equip them, so a call to arm
+    WAS: People at Mironitsa admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-politically_fractured-rand-5 [CHANGED] town 423 | politically_fractured | badge Lightly Defended 36 | mil 50 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route river coastal
+    TIP: The walls and townsfolk of Doirethorpe would see off a raid but not a proper army, and nothing now under way will change that. The defenders at Doirethorpe make do: the town's workshops cannot keep them properly fed and equipped.
+    WAS: You can walk the length of Doirethorpe's walls and meet nobody on them.
+rr3-town-politically_fractured-port-0 [CHANGED] town 1058 | politically_fractured | badge Lightly Defended 29 | mil 44 ADEQUATE | walls(Town walls) watch(Town watch) | threat frontier | route port coastal
+    TIP: The walls and townsfolk of Silberfurt would see off a raid but not a proper army, and nothing now under way will change that. The supply book for Silberfurt's defenders runs short: the trades that should feed and equip them are failing, so 
+    WAS: Silberfurt has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+rr3-town-indebted-rand-5 [CHANGED] town 1719 | indebted | badge Defensible 38 | mil 61 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) magicDef(Alchemist shop) | threat plagued | route crossroads plains
+    TIP: Every household at Lundland would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. While the trades behind Lundland's defence keep working, its defenders will not go short.
+    WAS: You can walk the length of Lundland's walls and meet nobody on them.
+rr3-town-indebted-port-0 [CHANGED] town 548 | indebted | badge Lightly Defended 31 | mil 29 WEAK | walls(Town walls) watch(Town watch) | threat frontier | route port coastal
+    TIP: The walls and townsfolk of Petentepec would see off a raid but not a proper army, and nothing now under way will change that. The supply book for Petentepec's defenders runs short: the trades that should feed and equip them are failing, so 
+    WAS: You can walk the length of Petentepec's walls and meet nobody on them.
+rr3-town-indebted-port-1 [CHANGED] town 1787 | indebted | badge Defensible 43 | mil 39 WEAK | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route port coastal
+    TIP: Every household at Vysokonick would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The defenders at Vysokonick make do: the town's workshops cannot keep them properly fed and equipped.
+    WAS: People at Vysokonick admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-recently_betrayed-rand-0 [CHANGED] town 521 | recently_betrayed | badge Lightly Defended 33 | mil 45 ADEQUATE | walls(Town walls) watch(Town watch) | threat frontier | route crossroads plains
+    TIP: Walls at Hartthal with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The defenders at Hartthal make do: the town's workshops cannot keep them properly fe
+    WAS: People at Hartthal admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-recently_betrayed-rand-3 [CHANGED] town 734 | recently_betrayed | badge Defensible 50 | mil 41 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route road plains
+    TIP: The walls and townsfolk of Chichac would see off a raid but not a proper army, and nothing now under way will change that. You can see the defence at Chichac is kept supplied: food and gear come from the town's own workshops.
+    WAS: People at Chichac admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-recently_betrayed-rand-4 [CHANGED] town 782 | recently_betrayed | badge Defensible 54 | mil 52 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route crossroads plains
+    TIP: Walls at Rundwiese with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The trades that should supply Rundwiese's defenders are struggling, and the defende
+    WAS: People at Rundwiese admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-recently_betrayed-rand-5 [CHANGED] town 367 | recently_betrayed | badge Defensible 41 | mil 43 ADEQUATE | walls(Town walls) watch(Town watch) | threat frontier | route river forest
+    TIP: The walls and townsfolk of Skálås would see off a raid but not a proper army, and nothing now under way will change that. The supply book for Skálås's defenders runs short: the trades that should feed and equip them are failing, so the defe
+    WAS: Skálås has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+rr3-town-recently_betrayed-port-0 [CHANGED] town 1656 | recently_betrayed | badge Lightly Defended 29 | mil 33 WEAK | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route port coastal
+    TIP: Every household at Tikaloatl would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The supply book for Tikaloatl's defenders runs short: the trades that should feed and equip them are failing, s
+    WAS: Tikaloatl has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+rr3-town-recently_betrayed-port-1 [NEW] town 429 | recently_betrayed | badge Lightly Defended 30 | mil 31 WEAK | walls(Town walls) watch(Town watch) | threat plagued | route port coastal
+    TIP: The walls and townsfolk of Ögedeiköl would see off a raid but not a proper army, and nothing now under way will change that. The supply book for Ögedeiköl's defenders runs short: the trades that should feed and equip them are failing, so th
+    WAS: (silent)
+rr3-town-infiltrated-rand-4 [CHANGED] town 1964 | infiltrated | badge Defensible 40 | mil 52 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat plagued | route river coastal
+    TIP: Walls at Temürhiid with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The defenders at Temürhiid make do: the town's workshops cannot keep them properly 
+    WAS: You can walk the length of Temürhiid's walls and meet nobody on them.
+rr3-town-infiltrated-rand-5 [CHANGED] town 381 | infiltrated | badge Lightly Defended 24 | mil 23 WEAK | walls(Town walls) watch(Town watch) | threat frontier | route river plains
+    TIP: Every household at Ononbulag would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The supply book for Ononbulag's defenders runs short: the trades that should feed and equip them are failing, s
+    WAS: You can walk the length of Ononbulag's walls and meet nobody on them.
+rr3-town-infiltrated-port-0 [CHANGED] town 1074 | infiltrated | badge Defensible 40 | mil 45 ADEQUATE | walls(Citadel,Town walls) watch(Town watch) charter(Adventurers' charter hall) magicDef(Alchemist shop) | threat frontier | route port coastal
+    TIP: Every household at Morksund would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The trades that should supply Morksund's defenders are struggling, and the defenders go short of food or gear.
+    WAS: Morksund has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+rr3-town-plague_onset-rand-0 [CHANGED] town 1794 | plague_onset | badge Vulnerable 17 | mil 33 WEAK | walls(Town walls) watch(Town watch) | threat plagued | route road plains
+    TIP: The walls and townsfolk of Panteburg would see off a raid but not a proper army, and nothing now under way will change that. The supply book for Panteburg's defenders balances: the town's own trades feed and equip them, so a call to arms do
+    WAS: You can walk the length of Panteburg's walls and meet nobody on them.
+rr3-town-plague_onset-rand-1 [CHANGED] town 708 | plague_onset | badge Lightly Defended 24 | mil 55 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat plagued | route road forest
+    TIP: Every household at Ripacolonia would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The trades that should supply Ripacolonia's defenders are struggling, and the defenders go short of food or g
+    WAS: Ripacolonia has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+rr3-town-plague_onset-rand-2 [CHANGED] town 2309 | plague_onset | badge Defensible 49 | mil 45 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) magicDef(Alchemist shop) | threat frontier | route crossroads plains
+    TIP: The walls and townsfolk of Qingmiao would see off a raid but not a proper army, and nothing now under way will change that. The trades that should supply Qingmiao's defenders are struggling, and the defenders go short of food or gear.
+    WAS: You can walk the length of Qingmiao's walls and meet nobody on them.
+rr3-town-plague_onset-rand-5 [CHANGED] town 2269 | plague_onset | badge Defensible 48 | mil 51 ADEQUATE | walls(Town walls) watch(Town watch) magicDef(Alchemist shop) | threat frontier | route river riverside
+    TIP: The walls and townsfolk of Tighness would see off a raid but not a proper army, and nothing now under way will change that. The supply book for Tighness's defenders runs short: the trades that should feed and equip them are failing, so the 
+    WAS: Tighness has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+rr3-town-plague_onset-port-0 [CHANGED] town 2022 | plague_onset | badge Lightly Defended 31 | mil 25 WEAK | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route port coastal
+    TIP: Walls at Bhagagarh with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. Bhagagarh's defenders are a little worse off every month the trades behind them kee
+    WAS: You can walk the length of Bhagagarh's walls and meet nobody on them.
+rr3-town-plague_onset-port-1 [CHANGED] town 1164 | plague_onset | badge Defensible 43 | mil 47 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route port coastal
+    TIP: Walls at Indrapuram with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The trades that should supply Indrapuram's defenders are struggling, and the defen
+    WAS: People at Indrapuram admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-succession_void-rand-1 [CHANGED] town 2422 | succession_void | badge Defensible 38 | mil 29 WEAK | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route river forest
+    TIP: Every household at Dunkelhof would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The trades that should supply Dunkelhof's defenders are struggling, and the defenders go short of food or gear.
+    WAS: People at Dunkelhof admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-succession_void-rand-2 [CHANGED] town 1722 | succession_void | badge Defensible 42 | mil 79 STRONG | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) magicDef(Alchemist shop) | threat plagued | route road hills
+    TIP: The walls and townsfolk of Dzibcoatl would see off a raid but not a proper army, and nothing now under way will change that. You can see the defence at Dzibcoatl is kept supplied: food and gear come from the town's own workshops.
+    WAS: Dzibcoatl has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+rr3-town-succession_void-port-1 [CHANGED] town 2172 | succession_void | badge Defensible 44 | mil 28 WEAK | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route port coastal
+    TIP: Walls at Baiyuan with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The trades that should supply Baiyuan's defenders are struggling, and the defenders g
+    WAS: People at Baiyuan admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-monster_pressure-rand-0 [CHANGED] town 1923 | monster_pressure | badge Defensible 40 | mil 43 ADEQUATE | walls(Town walls) watch(Town watch) magicDef(Alchemist shop) | threat heartland | route road forest
+    TIP: Every household at Celoino would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The trades that should supply Celoino's defenders are struggling, and the defenders go short of food or gear.
+    WAS: People at Celoino admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-monster_pressure-rand-1 [CHANGED] town 1970 | monster_pressure | badge Defensible 47 | mil 90 STRONG | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) magicDef(Wizard's tower) | threat plagued | route road mountain
+    TIP: Walls at Edznatzin with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The supply book for Edznatzin's defenders runs short: the trades that should feed a
+    WAS: People at Edznatzin admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-monster_pressure-rand-2 [CHANGED] town 2496 | monster_pressure | badge Well-Defended 61 | mil 80 STRONG | walls(Citadel,Town walls) watch(Town watch) charter(Adventurers' charter hall) magicDef(Alchemist shop) | threat plagued | route road plains
+    TIP: Every household at Jabalserai would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The trades that should supply Jabalserai's defenders are struggling, and the defenders go short of food or gea
+    WAS: People at Jabalserai admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-monster_pressure-rand-3 [CHANGED] town 1576 | monster_pressure | badge Defensible 50 | mil 82 STRONG | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) magicDef(Wizard's tower) | threat frontier | route road riverside
+    TIP: Every household at Bayarserai would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The supply book for Bayarserai's defenders balances: the town's own trades feed and equip them, so a call to a
+    WAS: You can walk the length of Bayarserai's walls and meet nobody on them.
+rr3-town-monster_pressure-rand-4 [CHANGED] town 1860 | monster_pressure | badge Well-Defended 73 | mil 100 STRONG | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) magicDef(Wizard's tower) | threat frontier | route crossroads hills
+    TIP: The walls and townsfolk of Devaghat would see off a raid but not a proper army, and nothing now under way will change that. While the trades behind Devaghat's defence keep working, its defenders will not go short.
+    WAS: You can walk the length of Devaghat's walls and meet nobody on them.
+rr3-town-monster_pressure-rand-5 [CHANGED] town 624 | monster_pressure | badge Well-Defended 58 | mil 76 STRONG | walls(Citadel,Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route road forest
+    TIP: Every household at Vikvik would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. Vikvik's defenders are a little worse off every month the trades behind them keep failing.
+    WAS: People at Vikvik admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-monster_pressure-port-0 [CHANGED] town 1570 | monster_pressure | badge Vulnerable 23 | mil 20 WEAK | walls(Town walls) watch(Town watch) | threat frontier | route port coastal
+    TIP: Every household at Caerford would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. Caerford's defenders are a little worse off every month the trades behind them keep failing.
+    WAS: You can walk the length of Caerford's walls and meet nobody on them.
+rr3-town-monster_pressure-port-1 [CHANGED] town 1487 | monster_pressure | badge Defensible 45 | mil 39 WEAK | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route port coastal
+    TIP: Every household at Yaxchtepec would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. Yaxchtepec's defenders are a little worse off every month the trades behind them keep failing.
+    WAS: Yaxchtepec has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+rr3-town-insurgency-rand-1 [CHANGED] town 1564 | insurgency | badge Lightly Defended 37 | mil 46 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route road hills
+    TIP: The walls and townsfolk of Ulancaravansarai would see off a raid but not a proper army, and nothing now under way will change that. You can see the defence at Ulancaravansarai is kept supplied: food and gear come from the town's own worksho
+    WAS: Ulancaravansarai has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+rr3-town-insurgency-rand-2 [CHANGED] town 988 | insurgency | badge Well-Defended 57 | mil 59 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) magicDef(Alchemist shop) | threat frontier | route crossroads plains
+    TIP: Every household at Morkvik would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The defenders at Morkvik make do: the town's workshops cannot keep them properly fed and equipped.
+    WAS: You can walk the length of Morkvik's walls and meet nobody on them.
+rr3-town-insurgency-rand-4 [CHANGED] town 1770 | insurgency | badge Defensible 47 | mil 48 ADEQUATE | walls(Town walls) watch(Town watch) | threat frontier | route port coastal
+    TIP: Every household at Lyssopol would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The trades that should supply Lyssopol's defenders are struggling, and the defenders go short of food or gear.
+    WAS: You can walk the length of Lyssopol's walls and meet nobody on them.
+rr3-town-insurgency-rand-5 [CHANGED] town 581 | insurgency | badge Lightly Defended 31 | mil 39 WEAK | walls(Town walls) watch(Town watch) | threat frontier | route road riverside
+    TIP: The walls and townsfolk of Straththwaite would see off a raid but not a proper army, and nothing now under way will change that. The supply book for Straththwaite's defenders runs short: the trades that should feed and equip them are failin
+    WAS: You can walk the length of Straththwaite's walls and meet nobody on them.
+rr3-town-insurgency-port-0 [CHANGED] town 1996 | insurgency | badge Lightly Defended 32 | mil 41 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) magicDef(Alchemist shop) | threat frontier | route port coastal
+    TIP: The walls and townsfolk of Strathton would see off a raid but not a proper army, and nothing now under way will change that. The defenders at Strathton make do: the town's workshops cannot keep them properly fed and equipped.
+    WAS: Strathton has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+rr3-town-insurgency-port-1 [CHANGED] town 1460 | insurgency | badge Lightly Defended 36 | mil 35 WEAK | walls(Town walls) watch(Town watch) | threat frontier | route port coastal
+    TIP: Every household at Llanworth would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The supply book for Llanworth's defenders runs short: the trades that should feed and equip them are failing, s
+    WAS: People at Llanworth admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-religious_conversion-rand-0 [CHANGED] town 801 | religious_conversion | badge Lightly Defended 31 | mil 38 WEAK | walls(Town walls) watch(Town watch) | threat frontier | route river forest
+    TIP: Walls at Qal'atdeh with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The trades that feed and equip Qal'atdeh's defenders are busy and well stocked, and
+    WAS: You can walk the length of Qal'atdeh's walls and meet nobody on them.
+rr3-town-religious_conversion-rand-2 [CHANGED] town 1599 | religious_conversion | badge Defensible 54 | mil 65 STRONG | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route river riverside
+    TIP: Walls at Stormmo with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The supply book for Stormmo's defenders runs short: the trades that should feed and e
+    WAS: Stormmo has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+rr3-town-religious_conversion-rand-4 [CHANGED] town 933 | religious_conversion | badge Lightly Defended 33 | mil 50 ADEQUATE | walls(Citadel,Town walls) watch(Town watch) | threat frontier | route river coastal
+    TIP: The walls and townsfolk of Khirbetqila would see off a raid but not a proper army, and nothing now under way will change that. The trades that should supply Khirbetqila's defenders are struggling, and the defenders go short of food or gear.
+    WAS: People at Khirbetqila admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-religious_conversion-rand-5 [CHANGED] town 2017 | religious_conversion | badge Defensible 44 | mil 71 STRONG | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) magicDef(Alchemist shop) | threat plagued | route crossroads plains
+    TIP: The walls and townsfolk of Dunbridge would see off a raid but not a proper army, and nothing now under way will change that. The defenders at Dunbridge make do: the town's workshops cannot keep them properly fed and equipped.
+    WAS: Dunbridge has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+rr3-town-religious_conversion-port-0 [CHANGED] town 597 | religious_conversion | badge Defensible 39 | mil 51 ADEQUATE | walls(Town walls) watch(Town watch) magicDef(Alchemist shop) | threat frontier | route port coastal
+    TIP: Walls at Tighfell with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The trades that should supply Tighfell's defenders are struggling, and the defenders
+    WAS: People at Tighfell admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-religious_conversion-port-1 [CHANGED] town 1098 | religious_conversion | badge Defensible 47 | mil 65 STRONG | walls(Town walls) watch(Town watch) magicDef(Wizard's tower) | threat frontier | route port coastal
+    TIP: Walls at Koloy with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The defenders at Koloy make do: the town's workshops cannot keep them properly fed and 
+    WAS: You can walk the length of Koloy's walls and meet nobody on them.
+rr3-town-slave_revolt-rand-1 [CHANGED] town 1860 | slave_revolt | badge Defensible 50 | mil 88 STRONG | walls(Town walls) watch(Town watch) magicDef(Wizard's tower) | threat frontier | route crossroads hills
+    TIP: Walls at Dharmapeta with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The trades that should supply Dharmapeta's defenders are struggling, and the defen
+    WAS: Dharmapeta has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+rr3-town-slave_revolt-rand-2 [CHANGED] town 1951 | slave_revolt | badge Defensible 45 | mil 48 ADEQUATE | walls(Town walls) watch(Town watch) | threat frontier | route river riverside
+    TIP: Walls at Qal'atziyarat with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. You can see the defence at Qal'atziyarat is kept supplied: food and gear come f
+    WAS: People at Qal'atziyarat admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-slave_revolt-port-0 [CHANGED] town 1264 | slave_revolt | badge Defensible 50 | mil 65 STRONG | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route port coastal
+    TIP: Walls at Qaryahdarya with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. Qaryahdarya's defenders are a little worse off every month the trades behind them
+    WAS: Qaryahdarya has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+rr3-town-wartime-rand-1 [CHANGED] town 1595 | wartime | badge Lightly Defended 30 | mil 42 ADEQUATE | walls(Town walls) watch(Town watch) magicDef(Alchemist shop) | threat frontier | route crossroads plains
+    TIP: Walls at Palenqcoatl with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. While the trades behind Palenqcoatl's defence keep working, its defenders will no
+    WAS: You can walk the length of Palenqcoatl's walls and meet nobody on them.
+rr3-town-wartime-rand-3 [CHANGED] town 1649 | wartime | badge Defensible 48 | mil 75 STRONG | walls(Town walls,Gates (if walled)) watch(Town watch) magicDef(Hedge wizard) | threat frontier | route isolated forest
+    TIP: Every household at Fengan would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. Fengan's defenders are a little worse off every month the trades behind them keep failing.
+    WAS: You can walk the length of Fengan's walls and meet nobody on them.
+rr3-town-wartime-rand-5 [CHANGED] town 1161 | wartime | badge Lightly Defended 37 | mil 65 STRONG | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat plagued | route river riverside
+    TIP: Every household at Panteskala would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. You can see the defence at Panteskala is kept supplied: food and gear come from the town's own workshops.
+    WAS: You can walk the length of Panteskala's walls and meet nobody on them.
+rr3-town-wartime-port-0 [CHANGED] town 941 | wartime | badge Lightly Defended 36 | mil 42 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route port coastal
+    TIP: The walls and townsfolk of Inverheath would see off a raid but not a proper army, and nothing now under way will change that. The trades that should supply Inverheath's defenders are struggling, and the defenders go short of food or gear.
+    WAS: You can walk the length of Inverheath's walls and meet nobody on them.
+rr3-town-mass_migration-rand-0 [CHANGED] town 1550 | mass_migration | badge Defensible 43 | mil 45 ADEQUATE | walls(Citadel,Town walls) watch(Town watch) | threat frontier | route road plains
+    TIP: Walls at Tianzhou with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The trades that should supply Tianzhou's defenders are struggling, and the defenders
+    WAS: People at Tianzhou admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-mass_migration-rand-1 [CHANGED] town 1638 | mass_migration | badge Lightly Defended 32 | mil 54 ADEQUATE | walls(Town walls) watch(Town watch) | threat frontier | route road forest
+    TIP: Walls at Naglby with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. You can see the defence at Naglby is kept supplied: food and gear come from the town's
+    WAS: You can walk the length of Naglby's walls and meet nobody on them.
+rr3-town-mass_migration-rand-2 [CHANGED] town 854 | mass_migration | badge Defensible 45 | mil 61 ADEQUATE | walls(Town walls) watch(Town watch) magicDef(Alchemist shop) | threat plagued | route port coastal
+    TIP: Walls at Oberkoppel with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. Oberkoppel's defenders are a little worse off every month the trades behind them k
+    WAS: Oberkoppel has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+rr3-town-mass_migration-rand-3 [CHANGED] town 801 | mass_migration | badge Defensible 49 | mil 58 ADEQUATE | walls(Town walls) watch(Town watch) | threat plagued | route road forest
+    TIP: Walls at Grudvich with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The supply book for Grudvich's defenders runs short: the trades that should feed and
+    WAS: Grudvich has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+rr3-town-mass_migration-rand-5 [CHANGED] town 1317 | mass_migration | badge Defensible 45 | mil 45 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route port coastal
+    TIP: Walls at Geraspetra with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The defenders at Geraspetra make do: the town's workshops cannot keep them properl
+    WAS: People at Geraspetra admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-mass_migration-port-0 [CHANGED] town 1442 | mass_migration | badge Defensible 44 | mil 55 ADEQUATE | walls(Town walls) watch(Town watch) charter(Adventurers' charter hall) | threat frontier | route port coastal
+    TIP: The walls and townsfolk of Mahanagar would see off a raid but not a proper army, and nothing now under way will change that. Mahanagar's defenders are a little worse off every month the trades behind them keep failing.
+    WAS: People at Mahanagar admit it when asked: the town has walls and nobody to stand on them.
+rr3-town-under_siege+famine-rand-1 [CHANGED] town 667 | under_siege+famine | badge Undefended 10 | mil 19 CRITICAL | walls(Town walls) watch(Town watch) | threat frontier | route river plains
+    TIP: The walls and townsfolk of Shivabari would see off a raid but not a proper army, and nothing now under way will change that. The trades that feed and equip Shivabari's defenders are busy and well stocked, and the defenders know it.
+    WAS: You can walk the length of Shivabari's walls and meet nobody on them.
+rr3-town-under_siege+famine-rand-2 [CHANGED] town 539 | under_siege+famine | badge Vulnerable 18 | mil 39 WEAK | walls(Town walls) watch(Town watch) | threat frontier | route crossroads hills
+    TIP: The walls and townsfolk of Gangamandal would see off a raid but not a proper army, and nothing now under way will change that. The supply book for Gangamandal's defenders balances: the town's own trades feed and equip them, so a call to arm
+    WAS: You can walk the length of Gangamandal's walls and meet nobody on them.
+rr3-town-under_siege+famine-rand-4 [CHANGED] town 806 | under_siege+famine | badge Vulnerable 15 | mil 30 WEAK | walls(Town walls) watch(Town watch) | threat frontier | route road desert
+    TIP: The walls and townsfolk of Hochbrunn would see off a raid but not a proper army, and nothing now under way will change that. The trades that should supply Hochbrunn's defenders are struggling, and the defenders go short of food or gear.
+    WAS: You can walk the length of Hochbrunn's walls and meet nobody on them.
+rr3-town-under_siege+famine-port-1 [CHANGED] town 1703 | under_siege+famine | badge Vulnerable 16 | mil 23 WEAK | walls(Town walls) watch(Town watch) magicDef(Alchemist shop) | threat heartland | route port coastal
+    TIP: Every household at Grímhammer would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The trades that should supply Grímhammer's defenders are struggling, and the defenders go short of food or gea
+    WAS: You can walk the length of Grímhammer's walls and meet nobody on them.

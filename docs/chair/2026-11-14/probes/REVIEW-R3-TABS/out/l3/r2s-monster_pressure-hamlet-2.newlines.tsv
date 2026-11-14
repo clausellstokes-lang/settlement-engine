@@ -1,0 +1,15 @@
+state.publicOrder	ON PAGE	Doors at Ögedeibulag are shut at dusk, and the edge of town is left empty after dark.
+state.firstSurvey	not on page	This is how Ögedeibulag looks on a first visit; a season there might show it differently.
+threat.invasion	ON PAGE	Ögedeibulag has no line and no force, and the threat now at hand has noticed both.
+threat.internal	ON PAGE	The hamlet settles things itself, quickly, and does not always settle them well.
+threat.economic	ON PAGE	Ögedeibulag's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes.
+forces.fortification	ON PAGE	You can walk into Ögedeibulag from any direction and pass nobody on the way in.
+forces.force	ON PAGE	If Ögedeibulag were attacked, its people would fight with no leaders and no plan, each household for itself.
+forces.charter	not on page	Ögedeibulag sends whoever it can against things they are not trained for, and pays for it each time.
+forces.arcane	not on page	Ögedeibulag's defense is conventional throughout. What arrives unseen here goes undetected and therefore unanswered.
+posture.posture	ON PAGE	Ögedeibulag could deal with a brawl or a thief, but the hamlet could not hold off a raid.
+status.override	ON PAGE	The beasts give Ögedeibulag no rest between attacks, and each one costs the hamlet something it cannot quickly replace.
+status.viability	not on page	Ögedeibulag should come through this crisis if nothing else goes wrong, though its defence has had to change to meet it.
+wall.rationale	ON PAGE	Ögedeibulag is too small to wall, and what has come for it now makes the smallness a danger rather than a protection.
+criminal.structure	ON PAGE	Ögedeibulag's books record no gang, guild or racket: what wrongdoing the hamlet has, people do on their own account.
+criminal.capture	not on page	No criminal's money appears in the Elder Council's accounts at Ögedeibulag, so what the hall spends is spent on the hamlet.

@@ -1,0 +1,16 @@
+state.publicOrder	ON PAGE	At Ásfjord the creditors' agent decides which wrongs are worth pursuing, and the debts come first.
+state.firstSurvey	not on page	This account of Ásfjord's safety comes from a first survey, so trouble the hamlet keeps from newcomers may be missing from it.
+threat.beasts	ON PAGE	Ásfjord keeps armed people on an open frontier, which means the defense is reactive: whatever comes chooses where the fighting happens, and the hamlet arrives afterwards.
+threat.invasion	ON PAGE	The armed townspeople you meet at Ásfjord are capable on their own ground and have never stood in a line with anyone.
+threat.internal	ON PAGE	If you are wronged at Ásfjord, there is nowhere to take it, and no local is surprised.
+threat.economic	ON PAGE	The hamlet could not pay for a bad month at Ásfjord, and the people who would have to be paid know it.
+forces.fortification	ON PAGE	Ásfjord is unfortified. There is no perimeter, which means the hamlet cannot control entry and cannot make a chokepoint of anything.
+forces.force	not on page	Ásfjord's people take up arms when they must and go back to work after; they are not soldiers by trade.
+forces.charter	not on page	Ásfjord retains no specialists. Whatever comes out of the country is met by whoever the hamlet has, whether or not they are the right answer to it.
+forces.arcane	not on page	Ásfjord keeps no defence against anything it cannot see.
+posture.posture	ON PAGE	Ásfjord has not been attacked lately, and if it were, it would struggle to hold.
+status.override	ON PAGE	Ásfjord pays its creditors first and its defence with what is left, and what is left shrinks each year.
+status.viability	ON PAGE	Life in the hamlet goes on through the crisis: people work, eat and sleep, and the defence makes do with what is left over.
+wall.rationale	ON PAGE	Ásfjord is too small to wall and knows it; the hamlet's safety is its neighbours, its distance, and its unimportance.
+criminal.structure	not on page	Ásfjord's books record no gang, guild or racket: what wrongdoing the hamlet has, people do on their own account.
+criminal.capture	not on page	No criminal's money appears in the Free Elder Council's accounts at Ásfjord, so what the hall spends is spent on the hamlet.

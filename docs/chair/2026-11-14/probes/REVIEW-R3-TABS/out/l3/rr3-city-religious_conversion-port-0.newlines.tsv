@@ -1,0 +1,18 @@
+state.publicOrder	ON PAGE	At Ásey people are careful what they say about faith, and to whom.
+state.firstSurvey	not on page	What people at Ásey say about their safety is what they tell someone new; they may say more to someone they know.
+threat.beasts	ON PAGE	Very little reaches Ásey out of the wild country, and the reason is that the arrangements are visible from a long way off.
+threat.invasion	ON PAGE	People at Ásey believe the city could be held, and the soldiers on the walls give them good reason to. The trades that should supply Ásey's defenders are struggling, and the defenders go short of food or gear.
+threat.internal	ON PAGE	Ásey's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.
+threat.economic	ON PAGE	Trouble at Ásey has not turned into a collapse, because the city can pay its way through it.
+forces.fortification	ON PAGE	Ásey is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the city decides. You come into Ásey by a gate, and someone at the gate sees you come.
+forces.force	ON PAGE	Everyone entering Ásey is counted at the gate by a soldier whose job it is, and counted again on the way out.
+forces.contracted	ON PAGE	The city pays for some of its soldiers and knows which ones, and treats them accordingly.
+forces.charter	not on page	Ásey keeps a charter for specialist work. The things ordinary arms are wrong for go to people retained to handle exactly them. The charter hall at Ásey keeps a book of the bounties the city has posted, and every unclaimed one is a danger still at large.
+forces.arcane	ON PAGE	Something at Ásey's gate takes the measure of everyone who enters, and nobody tells them so. The city's defence against magic rests on the wizard's tower at Ásey, and no muster roll lists it: if the wizard leaves, it leaves too.
+posture.posture	ON PAGE	Ásey reads as a defended place from the road in: the approaches are watched, the works are kept up, and none of it looks like it was thrown together.
+status.override	ON PAGE	Neighbours who would defend Ásey side by side are no longer speaking, and the reason is their faith.
+status.viability	ON PAGE	Life in the city goes on through the crisis: people work, eat and sleep, and the defence makes do with what is left over.
+wall.rationale	ON PAGE	Ásey's defences are sound, but fewer people turn out each season to man the city walls and gates, and the city is slow to notice.
+supporting.naval	ON PAGE	Ásey has a harbour and nothing to hold it with; any vessel that wants the sea approaches has them.
+criminal.structure	not on page	Ask at Ásey who runs things on the quiet and you get blank looks; either nobody does, or the city hides it very well. Anyone at Ásey who knows whom to ask can buy contraband or stolen goods at the black market.
+criminal.capture	not on page	No criminal's money appears in the Merchant Guild Council's accounts at Ásey, so what the hall spends is spent on the city.

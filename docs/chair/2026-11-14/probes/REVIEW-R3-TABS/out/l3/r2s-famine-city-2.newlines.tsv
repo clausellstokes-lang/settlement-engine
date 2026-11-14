@@ -1,0 +1,16 @@
+state.publicOrder	ON PAGE	The relief lists at Ögedeinuur cannot feed everyone, and theft of food has become too common to punish.
+state.firstSurvey	not on page	What people at Ögedeinuur say about their safety is what they tell someone new; they may say more to someone they know.
+threat.beasts	ON PAGE	The tally of raids at Ögedeinuur is short for a frontier city: with a wall and armed people behind it, most of what comes out of the wild country turns back before it reaches the houses.
+threat.invasion	ON PAGE	Approaching Ögedeinuur, you see the walls and the soldiers who belong on them, and any attacker would think again about the cost. The supply book for Ögedeinuur's defenders runs short: the trades that should feed and equip them are failing, so the defence is weaker than its numbers suggest.
+threat.internal	ON PAGE	A thing done wrong at Ögedeinuur goes somewhere and takes time, and the city has come to rely on that rather than on the watch's temper.
+threat.economic	ON PAGE	The city could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.
+forces.fortification	ON PAGE	There is a line around Ögedeinuur and it is kept: the gates shut, the works are repaired, and a stranger enters where the city intends him to. The wall at Ögedeinuur is entered by its gates, and the gate tolls are counted there; a gate left unwatched is a toll lost.
+forces.force	not on page	Ögedeinuur keeps a standing force: people whose work is the defense of this city and who are answerable for it as work.
+forces.charter	ON PAGE	There is somewhere at Ögedeinuur to take the problems that are not soldiers' problems, and the city uses it more than it likes to say. Adventurers at Ögedeinuur take their contracts at the charter hall, and the city posts its worst problems there.
+forces.arcane	ON PAGE	Something at Ögedeinuur's gate takes the measure of everyone who enters, and nobody tells them so. Ögedeinuur's magical defence sits in the mages' guild's books, not the city's: the guild can withdraw it, and the city cannot hold it.
+posture.posture	ON PAGE	What Ögedeinuur can field and what Ögedeinuur has built are both in good order; the city would take real effort to threaten and knows it.
+status.override	ON PAGE	At Ögedeinuur the people who keep order spend their days at the food stores, not watching the roads.
+status.viability	not on page	Ögedeinuur may not come through this crisis, and what it spends on defence now only buys time.
+wall.rationale	ON PAGE	Ögedeinuur's accounts keep its city walls and gates in repair but fall short on the watch's wages, so the defences are sound and too few people man them.
+criminal.structure	not on page	Ask at Ögedeinuur who runs things on the quiet and you get blank looks; either nobody does, or the city hides it very well. Nothing sold at Ögedeinuur's black market reaches the toll book, so the city loses the dues on every load of contraband and stolen goods.
+criminal.capture	not on page	There is an understanding at Ögedeinuur that nobody has written down: what is permitted, and where the permitting stops.

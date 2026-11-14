@@ -1,0 +1,17 @@
+state.publicOrder	ON PAGE	The sickness has people at Ögedeikhurel keeping apart, and the sick and their families are shunned or worse.
+state.firstSurvey	not on page	This account of Ögedeikhurel's safety comes from a first survey, so trouble the metropolis keeps from newcomers may be missing from it.
+threat.beasts	ON PAGE	The tally of raids at Ögedeikhurel is short for a frontier metropolis: with a wall and armed people behind it, most of what comes out of the wild country turns back before it reaches the houses.
+threat.invasion	ON PAGE	Approaching Ögedeikhurel, you see the walls and the soldiers who belong on them, and any attacker would think again about the cost. The trades that should supply Ögedeikhurel's defenders are struggling, and the defenders go short of food or gear.
+threat.internal	ON PAGE	Offenders at Ögedeikhurel are arrested, tried and held, and each case is written into the court's lists, so people expect a hearing, not a beating.
+threat.economic	ON PAGE	Trouble at Ögedeikhurel has not turned into a collapse, because the metropolis can pay its way through it.
+forces.fortification	ON PAGE	Ögedeikhurel is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the metropolis decides. Whatever reaches Ögedeikhurel by road reaches it at a gate, and the metropolis can close them against it.
+forces.force	not on page	Ögedeikhurel keeps a standing force: people whose work is the defense of this metropolis and who are answerable for it as work.
+forces.contracted	ON PAGE	Part of what defends Ögedeikhurel is contracted rather than owed: competent, available, and loyal for exactly as long as the terms run.
+forces.charter	ON PAGE	There is somewhere at Ögedeikhurel to take the problems that are not soldiers' problems, and the metropolis uses it more than it likes to say. Adventurers at Ögedeikhurel take their contracts at the charter hall, and the metropolis posts its worst problems there.
+forces.arcane	ON PAGE	There are wards at Ögedeikhurel the metropolis does not discuss and would notice immediately if they stopped. The mages' guild at Ögedeikhurel keeps the metropolis's wards and answers hostile spells.
+posture.posture	ON PAGE	The metropolis does not spend much time thinking about being attacked: its defences are in good order, and its people know it.
+status.override	ON PAGE	Ögedeikhurel is closed against the sickness, not an army: the guards turn back travellers and traders alike.
+status.viability	not on page	Ögedeikhurel should come through this crisis if nothing else goes wrong, though its defence has had to change to meet it.
+wall.rationale	ON PAGE	Fresh repairs show on Ögedeikhurel's massive walls and fortifications; the metropolis keeps its defences in working order against a real threat.
+criminal.structure	not on page	Ask at Ögedeikhurel who runs things on the quiet and you get blank looks; either nobody does, or the metropolis hides it very well. Nothing sold at Ögedeikhurel's black market reaches the toll book, so the metropolis loses the dues on every load of contraband and stolen goods.
+criminal.capture	not on page	Whatever is run at Ögedeikhurel is run outside the hall, and business with the hall is straight.

@@ -1,0 +1,15 @@
+state.publicOrder	ON PAGE	Hunger has made thieves of ordinary people at Ögedeisaray, and anyone known to have food is a target.
+state.firstSurvey	not on page	This account of Ögedeisaray's safety comes from a first survey, so trouble the thorp keeps from newcomers may be missing from it.
+threat.invasion	ON PAGE	Ögedeisaray has no line and no force. Organized aggression cannot be resisted here; what preserves the thorp is distance, diplomacy, or being beneath notice.
+threat.internal	ON PAGE	The thorp settles things itself, quickly, and does not always settle them well.
+threat.economic	ON PAGE	The thorp could not pay for a bad month at Ögedeisaray, and the people who would have to be paid know it.
+forces.fortification	ON PAGE	You can walk into Ögedeisaray from any direction and pass nobody on the way in.
+forces.force	ON PAGE	Nobody at Ögedeisaray is responsible for defending the thorp; ask who is, and nobody can name anyone.
+forces.charter	not on page	Ögedeisaray retains no specialists. Whatever comes out of the country is met by whoever the thorp has, whether or not they are the right answer to it.
+forces.arcane	not on page	Ögedeisaray's defense is conventional throughout. What arrives unseen here goes undetected and therefore unanswered.
+posture.posture	ON PAGE	You can walk into the centre of Ögedeisaray without being stopped, challenged or counted by anybody at all.
+status.override	ON PAGE	At Ögedeisaray the people who keep order spend their days at the food stores, not watching the roads.
+status.viability	not on page	Ögedeisaray may not come through this crisis, and what it spends on defence now only buys time.
+wall.rationale	ON PAGE	Ögedeisaray is too small to wall and knows it; the thorp's safety is its neighbours, its distance, and its unimportance.
+criminal.structure	not on page	What goes wrong at Ögedeisaray goes wrong one thing at a time and belongs to whoever did it.
+criminal.capture	not on page	No criminal's money appears in the Elder Council's accounts at Ögedeisaray, so what the hall spends is spent on the thorp.

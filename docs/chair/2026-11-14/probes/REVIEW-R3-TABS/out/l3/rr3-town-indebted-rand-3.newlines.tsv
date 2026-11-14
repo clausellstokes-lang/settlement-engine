@@ -1,0 +1,13 @@
+state.publicOrder	ON PAGE	The creditors' accounts come first at Ögedeicaravansarai: what enforcement the town can afford goes where their agent directs, not where the crime is.
+state.firstSurvey	not on page	This account of Ögedeicaravansarai's safety comes from a first survey, so trouble the town keeps from newcomers may be missing from it.
+threat.internal	ON PAGE	The town's law can name a wrong and cannot keep the person who did it, so it reaches for the purse or the road.
+threat.economic	ON PAGE	Ögedeicaravansarai can fund a short crisis. A long one begins eating reserves within a few months, and the reserves are not deep enough to hide that from anybody.
+forces.fortification	ON PAGE	Ögedeicaravansarai is unfortified. There is no perimeter, which means the town cannot control entry and cannot make a chokepoint of anything.
+forces.force	not on page	Ögedeicaravansarai keeps a watch, which is a matter of order rather than of war. It answers what happens inside the town and is not built for what arrives from outside it.
+forces.arcane	ON PAGE	There are wards at Ögedeicaravansarai the town does not discuss and would notice immediately if they stopped. The mages' guild at Ögedeicaravansarai keeps the town's wards and answers hostile spells.
+posture.posture	ON PAGE	Ögedeicaravansarai could deal with a brawl or a thief, but the town could not hold off a raid.
+status.override	ON PAGE	At Ögedeicaravansarai the debt is paid before the guards are, and every guard knows it.
+status.viability	ON PAGE	A visitor to Ögedeicaravansarai would not guess at the trouble from the streets; the town is shaken but standing.
+wall.rationale	ON PAGE	Ögedeicaravansarai is as big as places that usually raise a wall of stone, and it never has; whether from confidence or thrift, the town lies open.
+criminal.structure	not on page	Ask at Ögedeicaravansarai who runs things on the quiet and you get blank looks; either nobody does, or the town hides it very well. Whatever Ögedeicaravansarai's gangs take in never appears on the tax lists, and the town is poorer by what they collect.
+criminal.capture	not on page	The criminals at Ögedeicaravansarai have bought their way into the hall, and each favour they get makes the next one easier.

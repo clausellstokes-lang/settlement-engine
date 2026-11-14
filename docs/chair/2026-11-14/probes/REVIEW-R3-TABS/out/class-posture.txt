@@ -1,0 +1,48 @@
+196	posture.posture | {S} could deal with a brawl or a thief, but the <tier> could not hold off a raid.
+	crises under_siege:27 famine:26 occupied:19 calm:18 monster_pressure:16 slave_revolt:16 wartime:14 insurgency:11 succession_void:11 plague_onset:10 infiltrated:9 indebted:8 politically_fractured:6 mass_migration:6 recently_betrayed:5 religious_conversion:5
+	badge Vulnerable:192 Lightly Defended:4 | mil CRITICAL:137 WEAK:39 ADEQUATE:20 | forces(WGMw$) -----:144 W-M--:17 W--w-:14 W----:9 ---w-:6 --M--:4 WG-w$:1 WG-w-:1 | threat frontier:97 heartland:78 plagued:21
+	e.g. r2r-thorp-4 r2r-thorp-10 r2r-thorp-24
+12	posture.posture | {S} has enough for the usual trouble and nothing spare, and a second trouble at the same time would find a gap.
+	crises calm:3 famine:3 slave_revolt:2 under_siege:2 wartime:1 politically_fractured:1 mass_migration:1 succession_void:1
+	badge Defensible:12 | mil ADEQUATE:5 STRONG:5 WEAK:1 CRITICAL:1 | forces(WGMw$) WG-w-:4 WG-w$:3 ---w-:2 W----:1 W-M--:1 W--w-:1 | threat frontier:5 plagued:4 heartland:3
+	e.g. r2r-thorp-47 r2r-town-15 r2r-town-18
+114	posture.posture | {S} has not been attacked lately, and if it were, it would struggle to hold.
+	crises calm:26 recently_betrayed:14 politically_fractured:14 indebted:13 famine:11 mass_migration:10 religious_conversion:9 infiltrated:7 plague_onset:5 succession_void:5
+	badge Vulnerable:103 Lightly Defended:11 | mil CRITICAL:64 ADEQUATE:27 WEAK:23 | forces(WGMw$) -----:70 W-M--:20 W--w-:13 ---w-:5 W----:3 --M--:2 WG-w$:1 | threat frontier:49 heartland:40 plagued:25
+	e.g. r2r-thorp-8 r2r-thorp-14 r2r-thorp-26
+9	posture.posture | {S} is covered against what it is likely to face, with little left over; two troubles at once would be too many.
+	crises calm:3 recently_betrayed:2 indebted:1 religious_conversion:1 wartime:1 mass_migration:1
+	badge Defensible:9 | mil ADEQUATE:5 CRITICAL:2 STRONG:1 WEAK:1 | forces(WGMw$) W--w-:4 ---w-:3 W----:1 WG-w$:1 | threat frontier:3 heartland:3 plagued:3
+	e.g. r2r-thorp-50 r2r-town-29 r2r-town-57
+50	posture.posture | {S} reads as a defended place from the road in: the approaches are watched, the works are kept up, and none of it looks 
+	crises monster_pressure:9 wartime:9 calm:4 slave_revolt:4 indebted:3 infiltrated:3 plague_onset:3 mass_migration:3 famine:3 occupied:3 insurgency:2 religious_conversion:2 succession_void:1 recently_betrayed:1
+	badge Well-Defended:46 Fortress:4 | mil STRONG:44 ADEQUATE:5 WEAK:1 | forces(WGMw$) WG-w$:32 WG-w-:14 W--w-:3 -G-w-:1 | threat frontier:21 heartland:20 plagued:9
+	e.g. r2r-city-15 r2r-city-23 r2r-city-29
+1	posture.posture | Much of {S}'s perimeter has nobody on it, and the people who live there seem used to that.
+	crises succession_void:1
+	badge Vulnerable:1 | mil WEAK:1 | forces(WGMw$) W----:1 | threat frontier:1
+	e.g. rr3-village-succession_void-rand-0
+7	posture.posture | Nothing presses {S} at present: its defences would make any attack costly, so raiders and rivals look elsewhere.
+	crises calm:7
+	badge Well-Defended:7 | mil STRONG:5 ADEQUATE:2 | forces(WGMw$) W--w-:3 WG-w$:3 WG-w-:1 | threat frontier:3 plagued:2 heartland:2
+	e.g. r2r-town-6 r2r-town-34 r2r-city-14
+6	posture.posture | People at {S} expect to hold against the usual trouble, and they claim no more than that.
+	crises calm:1 under_siege:1 famine:1 politically_fractured:1 wartime:1 succession_void:1
+	badge Defensible:6 | mil WEAK:2 STRONG:2 ADEQUATE:2 | forces(WGMw$) ---w-:2 W--w-:2 WG-w-:1 WG-w$:1 | threat heartland:4 frontier:2
+	e.g. r2r-town-30 r2s-under_siege-city-2 r2s-famine-town-3
+30	posture.posture | The <tier> does not spend much time thinking about being attacked: its defences are in good order, and its people know i
+	crises calm:10 succession_void:5 plague_onset:5 mass_migration:3 politically_fractured:2 religious_conversion:2 famine:2 indebted:1
+	badge Well-Defended:30 | mil STRONG:23 ADEQUATE:7 | forces(WGMw$) WG-w$:16 WG-w-:13 W--w-:1 | threat frontier:15 heartland:10 plagued:5
+	e.g. r2r-town-36 r2r-city-26 r2r-city-27
+6	posture.posture | To anyone arriving, {S} looks defended in the ordinary way: enough for the usual trouble, and nothing to spare.
+	crises calm:2 famine:2 wartime:1 succession_void:1 under_siege:1
+	badge Defensible:6 | mil WEAK:2 STRONG:2 ADEQUATE:1 CRITICAL:1 | forces(WGMw$) W--w-:2 ---w-:2 WG-w-:2 | threat frontier:3 heartland:3
+	e.g. r2r-town-43 r2s-famine-town-0 r2s-wartime-town-1
+34	posture.posture | What {S} can field and what {S} has built are both in good order; the <tier> would take real effort to threaten and know
+	crises calm:6 monster_pressure:5 indebted:4 succession_void:3 insurgency:3 politically_fractured:2 famine:2 recently_betrayed:2 mass_migration:2 occupied:1 infiltrated:1 plague_onset:1 religious_conversion:1 slave_revolt:1
+	badge Well-Defended:34 | mil STRONG:27 ADEQUATE:6 WEAK:1 | forces(WGMw$) WG-w$:19 WG-w-:12 W--w-:3 | threat frontier:17 heartland:9 plagued:8
+	e.g. r2r-city-2 r2r-city-10 r2r-city-47
+1	posture.posture | You can walk into the centre of {S} without being stopped, challenged or counted by anybody at all.
+	crises famine:1
+	badge Undefended:1 | mil CRITICAL:1 | forces(WGMw$) -----:1 | threat frontier:1
+	e.g. rr3-thorp-famine-rand-5

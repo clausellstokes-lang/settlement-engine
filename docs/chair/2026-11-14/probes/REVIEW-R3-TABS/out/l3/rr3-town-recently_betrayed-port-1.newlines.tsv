@@ -1,0 +1,17 @@
+state.publicOrder	ON PAGE	At Ögedeiköl you will be asked who you know and who sent you, and the answers are checked.
+state.firstSurvey	not on page	What people at Ögedeiköl say about their safety is what they tell someone new; they may say more to someone they know.
+threat.beasts	ON PAGE	The country around Ögedeiköl is thick with creatures and the town has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.
+threat.invasion	ON PAGE	The walls and townsfolk of Ögedeiköl would see off a raid but not a proper army, and nothing now under way will change that. The supply book for Ögedeiköl's defenders runs short: the trades that should feed and equip them are failing, so the defence is weaker than its numbers suggest.
+threat.internal	ON PAGE	The town's law can name a wrong and cannot keep the person who did it, so it reaches for the purse or the road.
+threat.economic	ON PAGE	Trouble at Ögedeiköl has not turned into a collapse, because the town can pay its way through it.
+forces.fortification	ON PAGE	There is a line around Ögedeiköl and it is kept: the gates shut, the works are repaired, and a stranger enters where the town intends him to. You come into Ögedeiköl by a gate, and someone at the gate sees you come.
+forces.force	ON PAGE	There are people walking the town at Ögedeiköl at night, and the town's sense of itself rests more on that than on anything at the gate.
+forces.charter	not on page	Ögedeiköl sends whoever it can against things they are not trained for, and pays for it each time.
+forces.arcane	ON PAGE	Nothing unseen is known to have come at Ögedeiköl, but the town keeps no wards or seers that would notice if it had.
+posture.posture	ON PAGE	Ögedeiköl has not been attacked lately, and if it were, it would struggle to hold.
+status.override	ON PAGE	The guards at Ögedeiköl have changed their rounds and will not say why, and everyone can guess.
+status.viability	not on page	Ögedeiköl should come through this crisis if nothing else goes wrong, though its defence has had to change to meet it.
+wall.rationale	ON PAGE	Nobody in Ögedeiköl thinks of the town walls as ornament; the town knows what it is for and checks it.
+supporting.naval	ON PAGE	Ögedeiköl has a harbour and nothing to hold it with; any vessel that wants the sea approaches has them.
+criminal.structure	not on page	Ask at Ögedeiköl who runs things on the quiet and you get blank looks; either nobody does, or the town hides it very well.
+criminal.capture	not on page	The criminals at Ögedeiköl have bought their way into the hall, and each favour they get makes the next one easier.

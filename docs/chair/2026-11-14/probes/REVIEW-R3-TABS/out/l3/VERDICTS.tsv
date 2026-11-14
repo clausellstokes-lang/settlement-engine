@@ -1,0 +1,148 @@
+r2r-thorp-8	state.publicOrder	FALSE-LOW	g	page: Legal Infrastructure None, no watch, Internal Critical; "the law ... close to even" has no law to stand on	The thorp's record of crimes at Ögedeikul is neither short nor growing: the law 
+r2r-thorp-8	threat.beasts	FALSE-MED	g	Beasts bar Weak, badge Vulnerable; wall line says fewer turn out to man the palisade; posture says not attacked lately	The country around Ögedeikul is thick with creatures and the thorp has answered 
+r2r-thorp-8	threat.invasion	TRUE		checked against facts and page	The walls and townsfolk of Ögedeikul would see off a raid but not a proper army,
+r2r-thorp-8	threat.internal	TRUE		checked against facts and page	The thorp settles things itself, quickly, and does not always settle them well.
+r2r-thorp-8	threat.economic	TRUE		checked against facts and page	Ögedeikul has been short of money for years, and each lean season leaves less to
+r2r-thorp-8	forces.force	FALSE-MED	c	population 10, prosperity Poor, economic 20 WEAK; page: "short of money for years"	Ögedeikul could keep soldiers and does not; the thorp has decided that arming it
+r2r-thorp-8	forces.arcane	TRUE		checked against facts and page	Nothing unseen is known to have come at Ögedeikul, but the thorp keeps no wards 
+r2r-thorp-8	posture.posture	TRUE		checked against facts and page	Ögedeikul has not been attacked lately, and if it were, it would struggle to hol
+r2r-thorp-8	wall.rationale	FALSE-MED	g	page Palisade: "Little real defence"; badge Vulnerable; "sound" contradicts both	Ögedeikul's defences are sound, but fewer people turn out each season to man the
+r2s-famine-city-2	state.publicOrder	TRUE		checked against facts and page	The relief lists at Ögedeinuur cannot feed everyone, and theft of food has becom
+r2s-famine-city-2	threat.beasts	TRUE		checked against facts and page	The tally of raids at Ögedeinuur is short for a frontier city: with a wall and a
+r2s-famine-city-2	threat.invasion	TRUE		checked against facts and page	Approaching Ögedeinuur, you see the walls and the soldiers who belong on them, a
+r2s-famine-city-2	threat.internal	TRUE		checked against facts and page	A thing done wrong at Ögedeinuur goes somewhere and takes time, and the city has
+r2s-famine-city-2	threat.economic	FALSE-MED	c	famine in force; page: "No one can earn a normal living ... every coin goes on food"; "may not come through this crisis"	The city could go through a bad season with its arrangements intact, and the peo
+r2s-famine-city-2	forces.fortification	TRUE		checked against facts and page	There is a line around Ögedeinuur and it is kept: the gates shut, the works are 
+r2s-famine-city-2	forces.charter	TRUE		checked against facts and page	There is somewhere at Ögedeinuur to take the problems that are not soldiers' pro
+r2s-famine-city-2	forces.arcane	TRUE		checked against facts and page	Something at Ögedeinuur's gate takes the measure of everyone who enters, and nob
+r2s-famine-city-2	posture.posture	TRUE		checked against facts and page	What Ögedeinuur can field and what Ögedeinuur has built are both in good order; 
+r2s-famine-city-2	status.override	TRUE		checked against facts and page	At Ögedeinuur the people who keep order spend their days at the food stores, not
+r2s-famine-city-2	wall.rationale	FALSE-LOW	g	posture: what it can field is "in good order"; professional watch 1 per 100 + garrison; economic 80 STRONG	Ögedeinuur's accounts keep its city walls and gates in repair but fall short on 
+r2s-monster_pressure-hamlet-2	state.publicOrder	TRUE		checked against facts and page	Doors at Ögedeibulag are shut at dusk, and the edge of town is left empty after 
+r2s-monster_pressure-hamlet-2	threat.invasion	TRUE		checked against facts and page	Ögedeibulag has no line and no force, and the threat now at hand has noticed bot
+r2s-monster_pressure-hamlet-2	threat.internal	TRUE		checked against facts and page	The hamlet settles things itself, quickly, and does not always settle them well.
+r2s-monster_pressure-hamlet-2	threat.economic	FALSE-MED	a	forces all null; page: "No organized force" - no paid defenders to pay late	Ögedeibulag's pay book is always behind: its defenders are paid late or not at a
+r2s-monster_pressure-hamlet-2	forces.fortification	TRUE		checked against facts and page	You can walk into Ögedeibulag from any direction and pass nobody on the way in.
+r2s-monster_pressure-hamlet-2	forces.force	TRUE		checked against facts and page	If Ögedeibulag were attacked, its people would fight with no leaders and no plan
+r2s-monster_pressure-hamlet-2	posture.posture	TRUE		checked against facts and page	Ögedeibulag could deal with a brawl or a thief, but the hamlet could not hold of
+r2s-monster_pressure-hamlet-2	status.override	TRUE		checked against facts and page	The beasts give Ögedeibulag no rest between attacks, and each one costs the haml
+r2s-monster_pressure-hamlet-2	wall.rationale	TRUE		checked against facts and page	Ögedeibulag is too small to wall, and what has come for it now makes the smallne
+r2s-monster_pressure-hamlet-2	criminal.structure	TRUE		checked against facts and page	Ögedeibulag's books record no gang, guild or racket: what wrongdoing the hamlet 
+r2s-monster_pressure-town-0	state.publicOrder	TRUE		checked against facts and page	Nobody at Ástun goes out after dark if they can help it, and the outlying houses
+r2s-monster_pressure-town-0	threat.beasts	FALSE-LOW	g	crisis: "defences were built for quieter times"; Vulnerabilities: forces chronically underfunded; wall line: too few man them	The country around Ástun is thick with creatures and the town has answered it pr
+r2s-monster_pressure-town-0	threat.invasion	FALSE-LOW	a	militia null; the forces are a town watch and a charter hall, not a household levy	Every household at Ástun would send someone to the walls, and everyone knows tha
+r2s-monster_pressure-town-0	threat.internal	TRUE		checked against facts and page	Ástun's court passes sentences it cannot enforce, so each unpaid fine makes the 
+r2s-monster_pressure-town-0	threat.economic	TRUE		checked against facts and page	Ástun can pay for a crisis of the ordinary length; a few months into a longer on
+r2s-monster_pressure-town-0	forces.fortification	TRUE		checked against facts and page	The town has a wall and arranges its day around the gates without noticing that 
+r2s-monster_pressure-town-0	forces.force	FALSE-MED	g	guardEff: "The town watch exists on paper"; page: "Nobody ... goes out after dark"; guards "watch the country, not the town"	There are people walking the town at Ástun at night, and the town's sense of its
+r2s-monster_pressure-town-0	forces.arcane	TRUE		checked against facts and page	Nothing unseen is known to have come at Ástun, but the town keeps no wards or se
+r2s-monster_pressure-town-0	posture.posture	TRUE		checked against facts and page	Ástun could deal with a brawl or a thief, but the town could not hold off a raid
+r2s-monster_pressure-town-0	status.override	TRUE		checked against facts and page	The guards at Ástun watch the country, not the town, and they do not stand down.
+r2s-monster_pressure-town-0	wall.rationale	FALSE-LOW	g	Vulnerabilities: "Fortification and forces ... chronically underfunded" - walls not kept in repair either	Ástun's accounts keep its town walls in repair but fall short on the watch's wag
+r2s-politically_fractured-town-1	state.publicOrder	TRUE		checked against facts and page	Which power holds a district of Ásstrand decides which rules apply there.
+r2s-politically_fractured-town-1	threat.beasts	TRUE		checked against facts and page	The tally of raids at Ásstrand is short for a frontier town: with a wall and arm
+r2s-politically_fractured-town-1	threat.invasion	FALSE-MED	c	prosperity Comfortable, economic 68 STRONG, blacksmiths + bowyers guild + food Secure; page: "can pay its way"	Walls at Ásstrand with townspeople behind them: credible against raiders, and in
+r2s-politically_fractured-town-1	threat.internal	TRUE		checked against facts and page	Ásstrand tries offences it cannot hold anyone for; the sentences available here 
+r2s-politically_fractured-town-1	threat.economic	TRUE		checked against facts and page	Trouble at Ásstrand has not turned into a collapse, because the town can pay its
+r2s-politically_fractured-town-1	forces.fortification	TRUE		checked against facts and page	The town has a wall and arranges its day around the gates without noticing that 
+r2s-politically_fractured-town-1	forces.force	TRUE		checked against facts and page	Anyone walking Ásstrand late is watched, not stopped, and the watchmen make sure
+r2s-politically_fractured-town-1	forces.arcane	TRUE		checked against facts and page	There are wards at Ásstrand the town does not discuss and would notice immediate
+r2s-politically_fractured-town-1	posture.posture	TRUE		checked against facts and page	People at Ásstrand expect to hold against the usual trouble, and they claim no m
+r2s-politically_fractured-town-1	status.override	TRUE		checked against facts and page	Every order at Ásstrand now takes longer to carry out, and in an attack that del
+r2s-politically_fractured-town-1	wall.rationale	FALSE-LOW	g	page military status: "repairs are put off"; turnout decline not in record	Ásstrand's defences are sound, but fewer people turn out each season to man the 
+r2s-politically_fractured-town-1	supporting.naval	TRUE		checked against facts and page	You can sail into Ásstrand unchallenged; nobody watches the harbour mouth.
+rr3-city-religious_conversion-port-0	state.publicOrder	TRUE		checked against facts and page	At Ásey people are careful what they say about faith, and to whom.
+rr3-city-religious_conversion-port-0	threat.beasts	TRUE		checked against facts and page	Very little reaches Ásey out of the wild country, and the reason is that the arr
+rr3-city-religious_conversion-port-0	threat.invasion	FALSE-MED	c	Comfortable, economic 93 STRONG, food Secure, blacksmiths/metalworkers/bowyers guild	People at Ásey believe the city could be held, and the soldiers on the walls giv
+rr3-city-religious_conversion-port-0	threat.internal	TRUE		checked against facts and page	Ásey's court passes sentences it cannot enforce, so each unpaid fine makes the n
+rr3-city-religious_conversion-port-0	threat.economic	TRUE		checked against facts and page	Trouble at Ásey has not turned into a collapse, because the city can pay its way
+rr3-city-religious_conversion-port-0	forces.fortification	FALSE-LOW	g	port; naval line: "any vessel that wants the sea approaches has them" - not every arrival comes by a gate	Ásey is walled, and every arrival goes through a gate and into the gate tally; t
+rr3-city-religious_conversion-port-0	forces.force	TRUE		checked against facts and page	Everyone entering Ásey is counted at the gate by a soldier whose job it is, and 
+rr3-city-religious_conversion-port-0	forces.contracted	TRUE		checked against facts and page	The city pays for some of its soldiers and knows which ones, and treats them acc
+rr3-city-religious_conversion-port-0	forces.arcane	TRUE		checked against facts and page	Something at Ásey's gate takes the measure of everyone who enters, and nobody te
+rr3-city-religious_conversion-port-0	posture.posture	TRUE		checked against facts and page	Ásey reads as a defended place from the road in: the approaches are watched, the
+rr3-city-religious_conversion-port-0	status.override	TRUE		checked against facts and page	Neighbours who would defend Ásey side by side are no longer speaking, and the re
+rr3-city-religious_conversion-port-0	status.viability	TRUE		checked against facts and page	Life in the city goes on through the crisis: people work, eat and sleep, and the
+rr3-city-religious_conversion-port-0	wall.rationale	FALSE-LOW	g	military 93 STRONG, watch+garrison+mercenary quarter, Comfortable; decline not in record	Ásey's defences are sound, but fewer people turn out each season to man the city
+rr3-city-religious_conversion-port-0	supporting.naval	TRUE		checked against facts and page	Ásey has a harbour and nothing to hold it with; any vessel that wants the sea ap
+rr3-hamlet-indebted-rand-0	state.publicOrder	TRUE		checked against facts and page	At Ásfjord the creditors' agent decides which wrongs are worth pursuing, and the
+rr3-hamlet-indebted-rand-0	threat.beasts	TRUE		checked against facts and page	Ásfjord keeps armed people on an open frontier, which means the defense is react
+rr3-hamlet-indebted-rand-0	threat.invasion	FALSE-LOW	g	page militia: "Able-bodied residents drill and muster"; guard: "well organised"	The armed townspeople you meet at Ásfjord are capable on their own ground and ha
+rr3-hamlet-indebted-rand-0	threat.internal	TRUE		checked against facts and page	If you are wronged at Ásfjord, there is nowhere to take it, and no local is surp
+rr3-hamlet-indebted-rand-0	threat.economic	TRUE		checked against facts and page	The hamlet could not pay for a bad month at Ásfjord, and the people who would ha
+rr3-hamlet-indebted-rand-0	forces.fortification	TRUE		checked against facts and page	Ásfjord is unfortified. There is no perimeter, which means the hamlet cannot con
+rr3-hamlet-indebted-rand-0	posture.posture	TRUE		checked against facts and page	Ásfjord has not been attacked lately, and if it were, it would struggle to hold.
+rr3-hamlet-indebted-rand-0	status.override	TRUE		checked against facts and page	Ásfjord pays its creditors first and its defence with what is left, and what is 
+rr3-hamlet-indebted-rand-0	status.viability	TRUE		checked against facts and page	Life in the hamlet goes on through the crisis: people work, eat and sleep, and t
+rr3-hamlet-indebted-rand-0	wall.rationale	TRUE		checked against facts and page	Ásfjord is too small to wall and knows it; the hamlet's safety is its neighbours
+rr3-metropolis-plague_onset-rand-0	state.publicOrder	TRUE		checked against facts and page	The sickness has people at Ögedeikhurel keeping apart, and the sick and their fa
+rr3-metropolis-plague_onset-rand-0	threat.beasts	TRUE		checked against facts and page	The tally of raids at Ögedeikhurel is short for a frontier metropolis: with a wa
+rr3-metropolis-plague_onset-rand-0	threat.invasion	FALSE-MED	c	Comfortable, economic 90 STRONG, food Secure, full smith/bowyer roster; page: "can pay its way"	Approaching Ögedeikhurel, you see the walls and the soldiers who belong on them,
+rr3-metropolis-plague_onset-rand-0	threat.internal	TRUE		checked against facts and page	Offenders at Ögedeikhurel are arrested, tried and held, and each case is written
+rr3-metropolis-plague_onset-rand-0	threat.economic	TRUE		checked against facts and page	Trouble at Ögedeikhurel has not turned into a collapse, because the metropolis c
+rr3-metropolis-plague_onset-rand-0	forces.fortification	FALSE-LOW	g	river port with docks; page: Port only, "Sea approaches are accessible to any vessel"	Ögedeikhurel is walled, and every arrival goes through a gate and into the gate 
+rr3-metropolis-plague_onset-rand-0	forces.contracted	TRUE		checked against facts and page	Part of what defends Ögedeikhurel is contracted rather than owed: competent, ava
+rr3-metropolis-plague_onset-rand-0	forces.charter	TRUE		checked against facts and page	There is somewhere at Ögedeikhurel to take the problems that are not soldiers' p
+rr3-metropolis-plague_onset-rand-0	forces.arcane	FALSE-MED	a	magicDef: Mages' district, Academy of magic, Golem workforce; no Mages' guild in record or page	There are wards at Ögedeikhurel the metropolis does not discuss and would notice
+rr3-metropolis-plague_onset-rand-0	posture.posture	TRUE		checked against facts and page	The metropolis does not spend much time thinking about being attacked: its defen
+rr3-metropolis-plague_onset-rand-0	status.override	TRUE		checked against facts and page	Ögedeikhurel is closed against the sickness, not an army: the guards turn back t
+rr3-metropolis-plague_onset-rand-0	wall.rationale	TRUE		checked against facts and page	Fresh repairs show on Ögedeikhurel's massive walls and fortifications; the metro
+rr3-thorp-famine-rand-5	state.publicOrder	TRUE		checked against facts and page	Hunger has made thieves of ordinary people at Ögedeisaray, and anyone known to h
+rr3-thorp-famine-rand-5	threat.invasion	TRUE		checked against facts and page	Ögedeisaray has no line and no force. Organized aggression cannot be resisted he
+rr3-thorp-famine-rand-5	threat.internal	TRUE		checked against facts and page	The thorp settles things itself, quickly, and does not always settle them well.
+rr3-thorp-famine-rand-5	threat.economic	TRUE		checked against facts and page	The thorp could not pay for a bad month at Ögedeisaray, and the people who would
+rr3-thorp-famine-rand-5	forces.fortification	TRUE		checked against facts and page	You can walk into Ögedeisaray from any direction and pass nobody on the way in.
+rr3-thorp-famine-rand-5	forces.force	TRUE		checked against facts and page	Nobody at Ögedeisaray is responsible for defending the thorp; ask who is, and no
+rr3-thorp-famine-rand-5	posture.posture	TRUE		checked against facts and page	You can walk into the centre of Ögedeisaray without being stopped, challenged or
+rr3-thorp-famine-rand-5	status.override	FALSE-LOW	g	page: no watch; "Nobody ... is responsible for defending"; no granary, only household stores	At Ögedeisaray the people who keep order spend their days at the food stores, no
+rr3-thorp-famine-rand-5	wall.rationale	TRUE		checked against facts and page	Ögedeisaray is too small to wall and knows it; the thorp's safety is its neighbo
+rr3-thorp-plague_onset-rand-2	state.publicOrder	FALSE-LOW	c	crisis summary: "not yet a plague"; no deaths recorded, so a register growing daily is a stretch	The burial register at Ásfjord grows every day, and medicine and graves cost wha
+rr3-thorp-plague_onset-rand-2	threat.beasts	TRUE		checked against facts and page	Whoever walks out of Ásfjord, in any direction and at any hour, meets nothing th
+rr3-thorp-plague_onset-rand-2	threat.invasion	TRUE		checked against facts and page	The thorp's plan for an army is to not be interesting to one, and everybody here
+rr3-thorp-plague_onset-rand-2	threat.internal	TRUE		checked against facts and page	Ásfjord keeps no court and no gaol, and no wrong done there is written down; ord
+rr3-thorp-plague_onset-rand-2	threat.economic	TRUE		checked against facts and page	Ásfjord cannot fund a response to anything. Any sustained pressure exhausts the 
+rr3-thorp-plague_onset-rand-2	forces.fortification	TRUE		checked against facts and page	Ásfjord is unfortified. There is no perimeter, which means the thorp cannot cont
+rr3-thorp-plague_onset-rand-2	forces.force	TRUE		checked against facts and page	Nobody at Ásfjord is responsible for defending the thorp; ask who is, and nobody
+rr3-thorp-plague_onset-rand-2	posture.posture	TRUE		checked against facts and page	Ásfjord has not been attacked lately, and if it were, it would struggle to hold.
+rr3-thorp-plague_onset-rand-2	status.override	FALSE-MED	c	crisis: "Quarantine measures are being resisted"; page: some families carry on as before; crime pattern quarantine violation	Nobody comes into Ásfjord and nobody leaves. The point now is to keep the sickne
+rr3-thorp-plague_onset-rand-2	status.viability	FALSE-LOW	g	forces all null; page: "Nobody ... is responsible for defending the thorp" - there is no defence to make do	Life in the thorp goes on through the crisis: people work, eat and sleep, and th
+rr3-thorp-plague_onset-rand-2	wall.rationale	TRUE		checked against facts and page	No wall marks where Ásfjord ends; the last houses simply give way to open countr
+rr3-town-calm-rand-2	state.publicOrder	TRUE		checked against facts and page	Order at Ögedeitash could tip either way: a few fewer watchmen or one bolder gan
+rr3-town-calm-rand-2	threat.beasts	TRUE		checked against facts and page	Very little reaches Ögedeitash out of the wild country, and the reason is that t
+rr3-town-calm-rand-2	threat.invasion	FALSE-LOW	a	no blacksmith, armourer or bowyer in institutions; gear from own workshops unsupported	People at Ögedeitash believe the town could be held, and the soldiers on the wal
+rr3-town-calm-rand-2	threat.internal	TRUE		checked against facts and page	Ögedeitash's court passes sentences it cannot enforce, so each unpaid fine makes
+rr3-town-calm-rand-2	threat.economic	TRUE		checked against facts and page	The town could go through a bad season with its arrangements intact, and the peo
+rr3-town-calm-rand-2	forces.fortification	TRUE		checked against facts and page	The town has a wall and arranges its day around the gates without noticing that 
+rr3-town-calm-rand-2	posture.posture	TRUE		checked against facts and page	To anyone arriving, Ögedeitash looks defended in the ordinary way: enough for th
+rr3-town-calm-rand-2	wall.rationale	FALSE-MED	g	Prosperous, economic 66 STRONG, military 87 STRONG, no crisis; guard: regular round; invasion line: soldiers on the walls	Ögedeitash's accounts keep its town walls in repair but fall short on the watch'
+rr3-town-indebted-rand-3	state.publicOrder	TRUE		checked against facts and page	The creditors' accounts come first at Ögedeicaravansarai: what enforcement the t
+rr3-town-indebted-rand-3	threat.internal	TRUE		checked against facts and page	The town's law can name a wrong and cannot keep the person who did it, so it rea
+rr3-town-indebted-rand-3	threat.economic	TRUE		checked against facts and page	Ögedeicaravansarai can fund a short crisis. A long one begins eating reserves wi
+rr3-town-indebted-rand-3	forces.fortification	TRUE		checked against facts and page	Ögedeicaravansarai is unfortified. There is no perimeter, which means the town c
+rr3-town-indebted-rand-3	forces.arcane	TRUE		checked against facts and page	There are wards at Ögedeicaravansarai the town does not discuss and would notice
+rr3-town-indebted-rand-3	posture.posture	FALSE-LOW	g	internal 0 CRITICAL; guard: "Public law enforcement is largely a formality"; criminal governance	Ögedeicaravansarai could deal with a brawl or a thief, but the town could not ho
+rr3-town-indebted-rand-3	status.override	TRUE		checked against facts and page	At Ögedeicaravansarai the debt is paid before the guards are, and every guard kn
+rr3-town-indebted-rand-3	status.viability	TRUE		checked against facts and page	A visitor to Ögedeicaravansarai would not guess at the trouble from the streets;
+rr3-town-indebted-rand-3	wall.rationale	TRUE		checked against facts and page	Ögedeicaravansarai is as big as places that usually raise a wall of stone, and i
+rr3-town-recently_betrayed-port-1	state.publicOrder	TRUE		checked against facts and page	At Ögedeiköl you will be asked who you know and who sent you, and the answers ar
+rr3-town-recently_betrayed-port-1	threat.beasts	FALSE-MED	g	Beasts bar Weak (31); Vulnerabilities: forces chronically underfunded, low morale	The country around Ögedeiköl is thick with creatures and the town has answered i
+rr3-town-recently_betrayed-port-1	threat.invasion	FALSE-LOW	g	military 31 WEAK; posture: "would struggle to hold"; economic 79 STRONG vs "trades failing"; no smiths exist to fail	The walls and townsfolk of Ögedeiköl would see off a raid but not a proper army,
+rr3-town-recently_betrayed-port-1	threat.internal	TRUE		checked against facts and page	The town's law can name a wrong and cannot keep the person who did it, so it rea
+rr3-town-recently_betrayed-port-1	threat.economic	TRUE		checked against facts and page	Trouble at Ögedeiköl has not turned into a collapse, because the town can pay it
+rr3-town-recently_betrayed-port-1	forces.fortification	FALSE-LOW	g	Vulnerabilities: fortification chronically underfunded; naval: any vessel has the sea approaches	There is a line around Ögedeiköl and it is kept: the gates shut, the works are r
+rr3-town-recently_betrayed-port-1	forces.force	TRUE		checked against facts and page	There are people walking the town at Ögedeiköl at night, and the town's sense of
+rr3-town-recently_betrayed-port-1	forces.arcane	FALSE-MED	g	page Arcane Support: Present, Adequate, Teleportation circle, "Detection, wards, counterspell"; magical 64 ADEQUATE	Nothing unseen is known to have come at Ögedeiköl, but the town keeps no wards o
+rr3-town-recently_betrayed-port-1	posture.posture	TRUE		checked against facts and page	Ögedeiköl has not been attacked lately, and if it were, it would struggle to hol
+rr3-town-recently_betrayed-port-1	status.override	TRUE		checked against facts and page	The guards at Ögedeiköl have changed their rounds and will not say why, and ever
+rr3-town-recently_betrayed-port-1	wall.rationale	TRUE		checked against facts and page	Nobody in Ögedeiköl thinks of the town walls as ornament; the town knows what it
+rr3-town-recently_betrayed-port-1	supporting.naval	TRUE		checked against facts and page	Ögedeiköl has a harbour and nothing to hold it with; any vessel that wants the s
+rr3-village-succession_void-rand-4	state.publicOrder	TRUE		checked against facts and page	With nobody clearly in charge at Ásaker, those who keep order are unsure whose o
+rr3-village-succession_void-rand-4	threat.beasts	TRUE		checked against facts and page	The village has never needed to think about what is outside it, and does not.
+rr3-village-succession_void-rand-4	threat.invasion	TRUE		checked against facts and page	The village's plan for an army is to not be interesting to one, and everybody he
+rr3-village-succession_void-rand-4	threat.internal	TRUE		checked against facts and page	Ásaker keeps no court and no gaol, and no wrong done there is written down; orde
+rr3-village-succession_void-rand-4	threat.economic	FALSE-MED	a	forces all null; page: "No organized force"; prosperity Comfortable	Ásaker's pay book is always behind: its defenders are paid late or not at all, a
+rr3-village-succession_void-rand-4	forces.fortification	TRUE		checked against facts and page	You can walk into Ásaker from any direction and pass nobody on the way in.
+rr3-village-succession_void-rand-4	posture.posture	TRUE		checked against facts and page	Ásaker has not been attacked lately, and if it were, it would struggle to hold.
+rr3-village-succession_void-rand-4	status.override	FALSE-LOW	g	no organized force on record or page; nobody has a defence to order	Several people at Ásaker could order the defence and none can do it alone, so th
+rr3-village-succession_void-rand-4	wall.rationale	TRUE		checked against facts and page	Ásaker is too small to wall and knows it; the village's safety is its neighbours
+rr3-village-succession_void-rand-4	criminal.structure	TRUE		checked against facts and page	What goes wrong at Ásaker goes wrong one thing at a time and belongs to whoever 

@@ -1,0 +1,17 @@
+state.publicOrder	ON PAGE	Which power holds a district of Ásstrand decides which rules apply there.
+state.firstSurvey	not on page	This is how Ásstrand looks on a first visit; a season there might show it differently.
+threat.beasts	ON PAGE	The tally of raids at Ásstrand is short for a frontier town: with a wall and armed people behind it, most of what comes out of the wild country turns back before it reaches the houses.
+threat.invasion	ON PAGE	Walls at Ásstrand with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear. The supply book for Ásstrand's defenders runs short: the trades that should feed and equip them are failing, so the defence is weaker than its numbers suggest.
+threat.internal	ON PAGE	Ásstrand tries offences it cannot hold anyone for; the sentences available here are money and exile, and both of them fall unevenly.
+threat.economic	ON PAGE	Trouble at Ásstrand has not turned into a collapse, because the town can pay its way through it.
+forces.fortification	ON PAGE	The town has a wall and arranges its day around the gates without noticing that it does. Whatever reaches Ásstrand by road reaches it at a gate, and the town can close them against it.
+forces.force	ON PAGE	Anyone walking Ásstrand late is watched, not stopped, and the watchmen make sure you know it.
+forces.charter	not on page	Ásstrand sends whoever it can against things they are not trained for, and pays for it each time.
+forces.arcane	ON PAGE	There are wards at Ásstrand the town does not discuss and would notice immediately if they stopped. The town's defence against magic rests on the wizard's tower at Ásstrand, and no muster roll lists it: if the wizard leaves, it leaves too.
+posture.posture	ON PAGE	People at Ásstrand expect to hold against the usual trouble, and they claim no more than that.
+status.override	ON PAGE	Every order at Ásstrand now takes longer to carry out, and in an attack that delay would cost lives.
+status.viability	not on page	Ásstrand should come through this crisis if nothing else goes wrong, though its defence has had to change to meet it.
+wall.rationale	ON PAGE	Ásstrand's defences are sound, but fewer people turn out each season to man the town walls, and the town is slow to notice.
+supporting.naval	ON PAGE	You can sail into Ásstrand unchallenged; nobody watches the harbour mouth.
+criminal.structure	not on page	What goes wrong at Ásstrand goes wrong one thing at a time and belongs to whoever did it.
+criminal.capture	not on page	No criminal's money appears in the Merchant oligarchy's accounts at Ásstrand, so what the hall spends is spent on the town.

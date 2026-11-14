@@ -1,0 +1,48 @@
+2	supporting.naval | {S} has a harbour and nothing to hold it with; any vessel that wants the sea approaches has them.
+	crises recently_betrayed:1 religious_conversion:1
+	badge Lightly Defended:1 Well-Defended:1 | mil WEAK:1 STRONG:1 | forces(WGMw$) W--w-:1 WG-w$:1 | threat plagued:1 frontier:1
+	e.g. rr3-town-recently_betrayed-port-1 rr3-city-religious_conversion-port-0
+1	supporting.naval | You can sail into {S} unchallenged; nobody watches the harbour mouth.
+	crises politically_fractured:1
+	badge Defensible:1 | mil STRONG:1 | forces(WGMw$) W--w-:1 | threat frontier:1
+	e.g. r2s-politically_fractured-town-1
+4	threat.beasts | {S} keeps armed people on an open frontier, which means the defense is reactive: whatever comes chooses where the fighti
+	crises monster_pressure:2 indebted:1 under_siege:1
+	badge Vulnerable:1 Undefended:1 Defensible:1 Lightly Defended:1 | mil WEAK:3 ADEQUATE:1 | forces(WGMw$) ---w-:3 --M--:1 | threat frontier:4
+	e.g. rr3-hamlet-indebted-rand-0 rr3-village-under_siege-rand-4 rr3-village-monster_pressure-rand-1
+13	threat.beasts | {S}'s walls and fighters are holding against the creatures, but each season wears them down, and the <tier> is barely ke
+	crises indebted:3 plague_onset:3 mass_migration:2 wartime:1 recently_betrayed:1 infiltrated:1 monster_pressure:1 religious_conversion:1
+	badge Defensible:7 Lightly Defended:3 Vulnerable:2 Well-Defended:1 | mil ADEQUATE:8 STRONG:4 WEAK:1 | forces(WGMw$) W--w-:13 | threat plagued:13
+	e.g. r2r-town-1 r2r-town-27 r2r-town-57
+5	threat.beasts | Defense at {S} is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and n
+	crises calm:1 infiltrated:1 plague_onset:1 religious_conversion:1 monster_pressure:1
+	badge Vulnerable:2 Well-Defended:1 Lightly Defended:1 Defensible:1 | mil STRONG:2 ADEQUATE:2 WEAK:1 | forces(WGMw$) W--w-:5 | threat plagued:5
+	e.g. r2r-town-34 r2s-infiltrated-town-1 r2s-plague_onset-town-3
+2	threat.beasts | People at {S} can drive off what attacks but cannot stop it arriving, so every season the <tier> loses something before 
+	crises calm:1 plague_onset:1
+	badge Defensible:1 Undefended:1 | mil ADEQUATE:1 CRITICAL:1 | forces(WGMw$) ---w-:2 | threat frontier:2
+	e.g. r2r-village-45 rr3-village-plague_onset-rand-0
+37	threat.beasts | The <tier> takes the frontier seriously and has taken it seriously long enough that the arrangements are ordinary rather
+	crises calm:9 occupied:5 plague_onset:4 insurgency:3 under_siege:3 succession_void:2 indebted:2 monster_pressure:2 religious_conversion:2 famine:2 mass_migration:1 politically_fractured:1 recently_betrayed:1 infiltrated:1 slave_revolt:1
+	badge Defensible:17 Lightly Defended:12 Vulnerable:6 Well-Defended:1 Undefended:1 | mil ADEQUATE:15 WEAK:10 STRONG:6 CRITICAL:6 | forces(WGMw$) W--w-:37 | threat frontier:37
+	e.g. r2r-village-40 r2r-town-3 r2r-town-6
+15	threat.beasts | The country around {S} is thick with creatures and the <tier> has answered it properly: there is a wall to hold and ther
+	crises calm:2 recently_betrayed:2 monster_pressure:2 indebted:1 insurgency:1 occupied:1 plague_onset:1 religious_conversion:1 politically_fractured:1 succession_void:1 wartime:1 mass_migration:1
+	badge Lightly Defended:6 Vulnerable:4 Defensible:4 Undefended:1 | mil ADEQUATE:7 STRONG:5 CRITICAL:2 WEAK:1 | forces(WGMw$) W--w-:14 W-M--:1 | threat plagued:15
+	e.g. r2r-thorp-8 r2r-town-0 r2r-town-7
+36	threat.beasts | The tally of raids at {S} is short for a frontier <tier>: with a wall and armed people behind it, most of what comes out
+	crises calm:5 famine:4 mass_migration:4 insurgency:4 politically_fractured:3 under_siege:3 monster_pressure:3 recently_betrayed:2 plague_onset:2 slave_revolt:2 religious_conversion:2 indebted:1 succession_void:1 wartime:1
+	badge Defensible:17 Lightly Defended:9 Well-Defended:5 Vulnerable:4 Fortress:1 | mil ADEQUATE:17 STRONG:12 WEAK:7 | forces(WGMw$) W--w-:34 WG-w-:1 WG-w$:1 | threat frontier:36
+	e.g. r2r-town-12 r2r-town-14 r2r-town-17
+34	threat.beasts | Very little reaches {S} out of the wild country, and the reason is that the arrangements are visible from a long way off
+	crises calm:9 recently_betrayed:5 famine:4 mass_migration:3 religious_conversion:3 infiltrated:2 slave_revolt:2 wartime:2 succession_void:1 politically_fractured:1 plague_onset:1 insurgency:1
+	badge Defensible:16 Lightly Defended:9 Well-Defended:5 Vulnerable:4 | mil ADEQUATE:18 WEAK:8 STRONG:7 CRITICAL:1 | forces(WGMw$) W--w-:32 WG-w-:1 WG-w$:1 | threat frontier:34
+	e.g. r2r-town-36 r2r-town-46 r2r-town-47
+1	threat.beasts | Whoever walks out of {S}, in any direction and at any hour, meets nothing that would justify a watch.
+	crises plague_onset:1
+	badge Vulnerable:1 | mil CRITICAL:1 | forces(WGMw$) -----:1 | threat heartland:1
+	e.g. rr3-thorp-plague_onset-rand-2
+4	threat.beasts | You see spears at {S} and no wall for them to stand on, so anything that came at the <tier> from two sides at once would
+	crises politically_fractured:1 calm:1 wartime:1 mass_migration:1
+	badge Lightly Defended:2 Defensible:1 Vulnerable:1 | mil ADEQUATE:2 STRONG:1 WEAK:1 | forces(WGMw$) ---w-:4 | threat frontier:4
+	e.g. r2r-village-25 rr3-village-calm-rand-0 rr3-village-wartime-port-0

@@ -1,0 +1,16 @@
+state.publicOrder	ON PAGE	Nobody at Ástun goes out after dark if they can help it, and the outlying houses stand empty at night.
+state.firstSurvey	not on page	This is how Ástun looks on a first visit; a season there might show it differently.
+threat.beasts	ON PAGE	The country around Ástun is thick with creatures and the town has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.
+threat.invasion	ON PAGE	Every household at Ástun would send someone to the walls, and everyone knows that townsfolk with spears are no trained army. The trades that should supply Ástun's defenders are struggling, and the defenders go short of food or gear.
+threat.internal	ON PAGE	Ástun's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.
+threat.economic	ON PAGE	Ástun can pay for a crisis of the ordinary length; a few months into a longer one, the money would run out.
+forces.fortification	ON PAGE	The town has a wall and arranges its day around the gates without noticing that it does. Whatever reaches Ástun by road reaches it at a gate, and the town can close them against it.
+forces.force	ON PAGE	There are people walking the town at Ástun at night, and the town's sense of itself rests more on that than on anything at the gate.
+forces.charter	not on page	Ástun keeps a chartered hall for trouble that ordinary arms cannot handle, and the hall is busy. The charter hall at Ástun keeps a book of the bounties the town has posted, and every unclaimed one is a danger still at large.
+forces.arcane	ON PAGE	Nothing unseen is known to have come at Ástun, but the town keeps no wards or seers that would notice if it had.
+posture.posture	ON PAGE	Ástun could deal with a brawl or a thief, but the town could not hold off a raid.
+status.override	ON PAGE	The guards at Ástun watch the country, not the town, and they do not stand down.
+status.viability	not on page	Ástun should come through this crisis if nothing else goes wrong, though its defence has had to change to meet it.
+wall.rationale	ON PAGE	Ástun's accounts keep its town walls in repair but fall short on the watch's wages, so the defences are sound and too few people man them.
+criminal.structure	not on page	What goes wrong at Ástun goes wrong one thing at a time and belongs to whoever did it. Whatever Ástun's gangs take in never appears on the tax lists, and the town is poorer by what they collect.
+criminal.capture	not on page	Someone at the Church Council of Ástun is in the criminals' pocket; the hall's accounts still balance, but the decisions behind them now bend to suit the criminals.
