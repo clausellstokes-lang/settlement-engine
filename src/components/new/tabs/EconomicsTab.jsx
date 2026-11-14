@@ -791,18 +791,7 @@ function foodSentence(s, eco, fb, fbal, foodBar, foodDeficit, foodSurplus) {
   return `${name} grows ${grown} of what it eats, and ${carriers} in ${brought}.${magic} ${short}`;
 }
 
-/**
- * W2-C-LEAVES-4 item 3(b) (the cut's #218, CENSUS-2's six BROUGHT_BANDS hits: "ships bring in" in a thorp with no wharf):
- * WHO BRINGS THE FOOD IN reads the route's own home (`economicState.tradeAccess`) and the roster: ships only where a
- * dock, wharf, quay or harbour stands (`facts/institutions.js :: hasInstitution(s, 'docks')`), boats only where one or a
- * ferry, a barge or a boatyard does; else no carrier is named ("trade brings in"). A road town's carts need no house.
- * Under a siege in force (`chainStateShown.js :: tradeStoppedHere`) nothing is said to come in but by a port's own ships:
- * '' (the sentence says no food comes in by trade, beside the siege's own note).
- * @type {(s: unknown, eco: { tradeAccess?: unknown } | null | undefined) => string} the carriers and their verb
- */
-const carriersOf = (s, eco, r = /** @type {any} */ (s)) => (eco?.tradeAccess === 'port' && hasInstitution(r, 'docks') ? 'ships bring' : tradeStoppedHere(s) ? '' : eco?.tradeAccess === 'port' ? 'trade brings' : eco?.tradeAccess !== 'river' ? 'carts bring'
-  : hasInstitution(r, 'docks') || liveInstitutionNames(r).some((n) => /\bferry|\bbarge|\bboat/i.test(n)) ? 'boats bring' : 'trade brings');
-import { hasInstitution, liveInstitutionNames } from '../../../domain/facts/institutions.js';
+import { carriersOf } from '../../../domain/display/foodCarrier.js'; // SURFACES-3 item 1: who brings the food in, moved whole to the leaf the PDF reads too
 
 export default React.memo(EconomicsTab);
 

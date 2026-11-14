@@ -33,6 +33,7 @@ import { institutionDisplayName } from '../../domain/display/institutionDisplayN
 import { chainHousesOf } from '../../domain/display/chainHouses.js'; // R2-CODE-B item 1b (ruling R1): the PROC row's houses
 import { SupplyChainFlow } from './SupplyChainFlow.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
+import { foodBlockShown } from '../../domain/display/foodCarrier.js'; // SURFACES-3 item 1: the tab's food row
 import { revenuesOffTheLists, tradeListsAsPrinted } from '../../domain/display/tradeListDisplay.js'; // CENSUS-3c R-P 2 — the revenues that left the trade lists; W2-C-LEAVES-7 item 8 — the tab's trade lists
 
 function renderedTradeLabel(economy, direction, item) {
@@ -224,7 +225,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
           <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             FOOD SECURITY
           </Text>
-          <FoodBalanceBlock fb={e.foodBalance} />
+          <FoodBalanceBlock fb={foodBlockShown(settlement, e.foodBalance)} />
         </>
       )}
 
