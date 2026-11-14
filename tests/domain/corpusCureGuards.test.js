@@ -113,6 +113,8 @@ const GUARDS = [
   { seed: 'w5-city-occupied-1', pool: 'DS-DEF-2::Invasion & War: walls AND professional garrison', vid: 1, why: 'an occupation: "raiders keep their distance and an army would pay dearly" of a town an army already holds (HANDBACK-9, LEFT FOR AFTER THE JOIN)' },
   { seed: 'w5-city-occupied-101', pool: 'DS-DEF-2::Invasion & War: walls AND professional garrison', vid: 2, why: 'an occupation: "any attacker would think again about the cost" of a town already taken (v1\'s sibling)' },
   { seed: 'w5-city-occupied-102', pool: 'DS-DEF-2::Invasion & War: walls AND professional garrison', vid: 3, why: 'an occupation: "People ... believe the town could be held" while the occupiers hold it (v1\'s sibling)' },
+  { seed: 'rww-city-under_siege-1', pool: 'DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force', vid: 2, why: 'a siege: "the rotations run, the gates close on time, and nobody treats any of it as unusual" (the round\'s #645, Panteakra)' },
+  { seed: 'w5-city-occupied-3', pool: 'DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force', vid: 2, why: 'an occupation: the same week\'s routine of a town the occupiers hold (#645, Gankhuuiin)' },
 ];
 
 /** @param {string} seed */

@@ -538,7 +538,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "gate"
+            "gate",
+            "no crisis: under_siege",
+            "no crisis: occupied"
           ],
           "text": "Defense at {settlement} is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual.",
           "slots": [
