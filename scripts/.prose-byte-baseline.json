@@ -79,8 +79,8 @@
       "ceilingGzip": 79355
     },
     "src/data/dossierStateProse/stressors.generated.js": {
-      "raw": 147696,
-      "gzip": 20830,
+      "raw": 147666,
+      "gzip": 20815,
       "ceilingRaw": 258858,
       "ceilingGzip": 57524
     },

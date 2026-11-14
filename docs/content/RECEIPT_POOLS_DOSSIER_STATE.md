@@ -5144,7 +5144,7 @@ THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE, second seat, 202
 
 **DIRECTION: `worsening` · CRISIS: `famine`** {crisis: famine}
 1. `[local · tier: ≥ village]` The famine in {settlement} is getting worse: the rations shrink each week, and the queues for them grow longer.
-2. `[official]` Each week {settlement} has more hungry mouths and less to give them, and those in charge have no grain left to promise.
+2. `[official]` Each week more people in {settlement} go hungry, and those in charge have not stopped it.
 3. `[trade]` Food costs more in {settlement} each week, and less of it comes in than the town needs.
 4. `[traveller]` In {settlement} you see thin faces at every door, and more of them each time you pass through.
 
