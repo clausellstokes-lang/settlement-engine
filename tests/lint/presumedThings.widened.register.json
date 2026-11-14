@@ -5093,19 +5093,7 @@
     "36da3a879b87a032"
    ],
    [
-    "smith",
-    "family",
-    "Charcoal furnaces reduce raw ore to refined metal. It stands between the mine and the smithy.",
-    "36da3a879b87a032"
-   ],
-   [
     "house: mine",
-    "family",
-    "Refines crude ore into workable metal over charcoal fire. The industrial step from what the mine yields to what the smit",
-    "f3d81ba2b93c4691"
-   ],
-   [
-    "smith",
     "family",
     "Refines crude ore into workable metal over charcoal fire. The industrial step from what the mine yields to what the smit",
     "f3d81ba2b93c4691"

@@ -2886,7 +2886,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false
     },
     {
       "id": "town|Crafts|Smelter#1",
@@ -2894,7 +2894,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false
     },
     {
       "id": "town|Crafts|Chandler#0",
