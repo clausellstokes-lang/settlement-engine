@@ -616,3 +616,34 @@ as the brief said. Never rewrite a commit at or below dbe379c13. EXECUTED unless
 | 1: the merge | lane/integration-2026-11-07 at 976db5b19 (read back from origin), a plain merge, base 9e57f5023 (100 commits of the line, 44 of the lane). Conflicted 9 files, none in src/: the eight edge bundles (taken from the line's side; re-emitted by `npm run build:edge-shared`, last and alone, at the statement) and tests/lint/presumedThings.register.json (taken from the line's side; re-derived by its door, below) | e5350ec8d |
 | 2a: presumed things, the starving set | `--check` at e5350ec8d: fresh 4, stale 9, first-register stale 1. outlookHookSiblings.js "The settlement is starving, and its hungriest are turning to banditry." was declared (`needs: ['food: ≤ deficit']`, drawn by resolveSibling) but its literal stood in a constant above the table; it moves into its member. Byte-identical | 92557fa6b |
 | 2b: presumed things, the registers | `--shrink` (9 widened + 1 first-register arm-1 rows: the OLD texts of lines this lane reworded) and `--shrink-arm2` (the sealed-walls arm-2 row). The first register now differs from the line's by exactly the lane's two removals (19d4a8506, 6fc505ea6). Walker: "no stale row" green | acee99f3a |
+| 2c: fact layers, the tavern test | `node scripts/fact-layers-door.mjs` at acee99f3a: 2 rises, both servicesGenerator.js (this lane's). The first, `hasInstitution({ institutions }, 'tavern')`, IS the home's reader; the arm strikes such a call only when its record is a name: now `const roster = { institutions }`. 720 births byte-identical | 67266734e |
+| 2d: fact layers, the fence name | the second rise, the roster name test for 'Fence (word of mouth)' (the crime family, outside its homes). Cure under the chair's 23:40Z ruling's second form: the fallback row is "Fencing stolen goods" everywhere (no new wording). DECLARED MOVE: availableServices.criminal[].name, 5 of 720 towns, 715 identical, no reorder, no draw. Red first 1 of 4 (the anchor r2r-town-15). Door after: 0 rises, 0 falls. (The commit body says its three carried reds were "the same at 67266734e": they were measured on acee99f3a's servicesGenerator.js, which 67266734e matches byte for byte on the 720; corrected here) | 6eb0dcbda |
+| 2e: the lighting census | red after the merge (files 3245 -> 3250: the lane's five test files meet the line's baseline); re-taken by its ritual on the clean committed tree, then plain green (34 of 34) | 5727f2d30 |
+| 2f: the other doors at the merged tip | observed shapes (`check-observed-shape-readers.mjs`) EXIT 0; writer reach (`check-writer-reach.mjs`) EXIT 0; the tuning inventory walker green; the page census's grid (`page-census.mjs --grid`) EXIT 0, 0 falls. The page census's 720 and the suite: at the final tip | — |
+
+### STOP (for the chair's ruling): three fresh presumed-things hits this lane cannot cure through a door
+
+`node scripts/presumed-things-door.mjs --check` at 5727f2d30: fresh 3, stale 0; the walker's arm 1 red ("every source
+literal that names a thing declares it, or has its row"), nothing else in it. Each is a line THIS LANE reworded after the
+instrument's base, of a line the line itself had banked (its old text, now shrunk out in acee99f3a), naming the same
+thing under the same print condition:
+1. src/domain/crisis/crisisSummaryVantage.js, wartime.defence.official (war, 7e7367a3ed3f5004): "With men called away
+   to the war, {name} has fewer hands than before to see to its own safety." (b0be6de8d; banked before as "Those who
+   keep {name} safe have fewer hands than before, with men called away to the war.", reason root).
+2. the same file, occupied.cover.trade (occupation, e77ca269515be2ef): "Everything sold in {name} pays the occupiers
+   their due first, and those who sell keep their prices and their opinions to themselves." (bbeb95b73; banked before
+   with "the merchants", reason word).
+3. src/generators/structuralValidator.js, the plagued-threat below-25 reason (armedForce, d58d6c2b46cc28f7):
+   "Embattled region. Infrastructure exists on paper, but the defences are so underfunded that they are barely
+   maintained and the defenders are few. This settlement will fall." (cdf84d431; banked before as "…the garrison is
+   skeletal", first register).
+Each is TRUE wherever it prints: the vantage table is keyed by the crisis kind (only a wartime town prints the war
+line, only an occupied one the occupiers'), and the validator's branch runs only where a fort AND a force stand. But no
+draw door reads either condition: CRISIS_SUMMARY_POOLS is picked by `crisisSummaryForSurface(entry, name, surface)`
+with no record and no door, and the validator's violation objects are handed to none. `--bank` refuses a line not at
+the widening's base, and that refusal is final; rewording only to slip the word past the matcher ("called away to
+fight") would route round the classifier. Routing the table through a door is a redesign of the four surfaces' call
+sites, not a cure. RECOMMENDATION: the chair rules them banked BY HAND as point 49's seven were (a reason key
+`after-base: r3-code-c`, "this lane's rewording of a banked line: the same thing, the same print condition; true by the
+crisis kind or the branch, which no draw door reads"), each owed to whoever routes the vantage table and the
+validator's reasons through a door. Until ruled: named reds of THIS lane, not banked.
