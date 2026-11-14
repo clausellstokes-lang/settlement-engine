@@ -3769,7 +3769,7 @@ SEATS2['UPKEEP-14'] = dict(
 
 SEATS2['W2-C-LEAVES-11'] = dict(
     title="W2-C-LEAVES-11 · the third leaves lane: its reader's two HIGH of the stage's own, two carried HIGH pills, the medium families",
-    branch='lane/w2-c-leaves-2026-11-13', tip='cccc75bf', statement=False,
+    branch='lane/w2-c-leaves-2026-11-13', tip='92d36e5f', statement=False,
     intro=("You are W2-C-LEAVES-11, the eleventh seat on the third leaves lane of the settlement-engine integration program (lane/w2-c-leaves-2026-11-13). "
            "The lane cures false lines at display: the Economics tab's chain cards, goods pills and food sentences, the Resources tab's cards, the "
            "PDF's and the Foundry journal's trade lists, the Defense tab's supporting rows; it moves no record. AN INDEPENDENT READER READ ITS STAGE "
@@ -3787,7 +3787,7 @@ SEATS2['W2-C-LEAVES-11'] = dict(
           "(docs/chair/2026-11-14/probes/REVIEW-W2-C-LEAVES/: the births `seeds-all.txt`, `render.sh`, `surfaces.sh`, `linediff.mjs`, "
           "`leaves.mjs`) are yours to copy out with git archive and run from outside every repository tree.\n"
           "3. On your lane, docs/chair/2026-11-13/W2-C-LEAVES-HANDBACK.md: ONLY \"# PART 10\" (from that line to the end, by script): what the tenth "
-          "seat did and the instruments it left.\n"
+          "seat did, the instruments it left, and its own list of what is left (the chair's two rulings it copied are rulings (1) and (2) below).\n"
           "4. The defence lane's measure of the Arcane Support row (`git fetch origin lane/coherence-upkeep-2026-11-12`; `git show "
           "origin/lane/coherence-upkeep-2026-11-12:docs/chair/2026-11-12/UPKEEP-HANDBACK.md`, ONLY the section headed \"### (d) M3 / M5\": by script).\n"
           "5. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (the section headed \"## 2m.\"; by script), before the first "
@@ -3889,7 +3889,7 @@ SEATS2['W2-C-LEAVES-11'] = dict(
           "THE HAND-BACK, kept current after every item: a new \"# PART 11\" at the end of docs/chair/2026-11-13/W2-C-LEAVES-HANDBACK.md: the "
           "rulings above copied; each row: its cause, its cure and commit, its counts, its guard and plant, the towns read; EVERY NEW OR "
           "CHANGED LINE with the towns it was read in (the owner's veto list, and the next reader's); the true lines each silence took; FOR "
-          "THE JOIN; what is left, line by line; `git diff --stat cccc75bff..HEAD -- src/` listed file by file, each change tied to a row."),
+          "THE JOIN; what is left, line by line; `git diff --stat 92d36e5f9..HEAD -- src/` listed file by file, each change tied to a row."),
     merges='',
     when="for a stop that blocks everything you have left, at step 1 (the tip; each HIGH row's count before and after), for a town list under ruling (4), and with your hand-back",
     turns='',
