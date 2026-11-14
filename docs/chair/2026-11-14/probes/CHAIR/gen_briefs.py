@@ -3594,6 +3594,70 @@ SEATS2['R3-CODE-C-9'] = dict(
 )
 
 
+SEATS2['W2-FIX-DATA-12'] = dict(
+    title="W2-FIX-DATA-12 · the data lane goes on curing: the sawmill's tag, the PDF's Architecture line, the forge line, then the ranked rows",
+    branch='lane/w2-fix-data-2026-11-13', tip='994733bc', statement=False,
+    intro=("You are W2-FIX-DATA-12, the twelfth seat on the data lane of the settlement-engine integration program (lane/w2-fix-data-2026-11-13). The lane "
+           "cures false lines written in the data tables: a house's description, a service's text, a history line, an arrival line. The eleventh seat "
+           "cleared the lane's named reds, wrote the draft shift record, RANKED the twenty-one medium rows a first measure against the release bar put "
+           "on these tables, cured the widest (the smelter: 102 false prints to 0), MEASURED the rows the chair sent it from the lane's reader and "
+           "from another lane, and handed back at its count with each cure written out. Yours: those measured rows FIRST (two of them HIGH), then "
+           "the ranked table, widest first. The lane goes on curing and lands later as a point of its own on the joined line: NO whole suite, NO new "
+           "statement."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-14/W2-FIX-DATA-HANDBACK-11.md WHOLE (94 lines, some very long: by script): the instruments; the "
+          "ranked table (section 4); THE CHAIR'S ROWS as measured, each with its cure written out (section 5); WHAT IS LEFT, line by line (section 6: "
+          "THAT IS YOUR LIST); FOR THE JOIN; the rulings.\n"
+          "3. THE LANE'S READER'S FILE, for the rows that came from it (`git fetch origin lane/review-w2-fix-data-3-2026-11-14`; `git show "
+          "origin/lane/review-w2-fix-data-3-2026-11-14:docs/chair/2026-11-14/REVIEW-W2-FIX-DATA-3-2026-11-14.md`, its section \"Done\", thirty lines; "
+          "the rows it names in REVIEW-W2-FIX-DATA-3-LINES-READ.md, by row label).\n"
+          "4. THE BAR'S ROWS FOR THIS LANE (`git fetch origin lane/chair-2026-11-08`; `git show "
+          "origin/lane/chair-2026-11-08:docs/chair/2026-11-14/bar-0-rows/BAR-0-ROWS-data.json`); the towns re-born by the probes on "
+          "origin/lane/review-bar-0-2026-11-14 (docs/chair/2026-11-14/probes/REVIEW-BAR-0/).\n"
+          "5. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (the section headed \"## 2m.\"; by script), before the first "
+          "register you touch."),
+    work=("THE WORK, in this order, each cause its own commit, measured first, red first (a collected arm; a guard town for every line a condition "
+          "takes off a town; each arm shown able to red by a plant made in a tree no suite is running in), pushed as made:\n"
+          "1. HIGH: THE COMMERCIAL SAWMILL'S TAG (the bar's #116: \"timber leaves {S} half-finished\" beside a sawmill, a sawyer and a milled-lumber "
+          "export; 48 of the corpus seat's 772 towns): src/data/institutionalCatalog.js, the house 'Sawmill (commercial)' lacks the timber chain's "
+          "processing tag its kind carries. Measure on your births (the towns that hold a commercial sawmill and print an unworked-timber line or "
+          "\"Needs: Sawmill\" on any surface); cure at the catalogue row as a DECLARED MOVE (say which families move: the resource analysis, the "
+          "chains, the lines that read them), three towns read. If the tag moves more than those towns' timber lines: STOP with the table.\n"
+          "2. HIGH, carried: THE PDF'S ARCHITECTURE LINE (src/pdf/sections/IdentityDailyLife.jsx prints `culturalIdentity.architecturalDetail` raw: a "
+          "market, a palisade or a river the town lacks; the eleventh seat checked by content that no other lane holds the file): the PDF prints "
+          "the detail through the same reading of the record the web page uses (find the web's leaf; one home), never raw. Count on the reader's "
+          "births, PDF text against record: -> 0. And the reader's A04 (a forge line where only an idle smelter stands).\n"
+          "3. THE STAGE'S OWN MEDIUM: THE ARRIVAL'S FORGE LINE (\"plainly lives by its forges\": false in 16 of 16 printing towns: metalwork is 3 to 12 "
+          "percent of income and never first): the eleventh seat wrote the cure out (section 5): make it, read where it prints.\n"
+          "4. ONE MESSAGE TO THE CHAIR (the tip; each of the three rows' counts before and after), then THE COUNT.\n"
+          "5. THE READER'S CARRIED MEDIUM ROWS: A06 (a twin lacking the siege exclusion its siblings carry: a twin carries every condition its "
+          "siblings carry) and the two guild lines (a Guild War beside \"No guild runs the market\").\n"
+          "6. THE RANKED TABLE (section 4), WIDEST FIRST, one cause a commit, until your count's mark. With it, as their turn comes by width, THE "
+          "ROWS OTHER LANES NAMED TO THIS LANE'S FILES: \"street kitchens\" in towns with no market (src/data/cultureProfiles.js: 63 of 164 no-market "
+          "towns: the seller gate this lane's earlier cure gave vendors, stalls and hawkers takes it too); the arrival's cart lines under a siege "
+          "(src/data/arrivalProse.js: under a siege in force no line says carts come in by road); the great fire's \"lower districts\" and "
+          "\"merchant stalls\" in a thorp (the history generator's great_fire: the size ruling: quarters and districts are an error in a small "
+          "place); AND THE POOL GUARD'S TWO ROWS OVER THEIR CEILINGS on the joined tree, this lane's own: plotHooks:succession_crisis (one line is "
+          "0.82 of that pool's draws against a ceiling of 0.64) and plotHooks:resource_scarcity (0.37 against 0.34): the cause is found (which cure "
+          "of this lane's declared the other lines off) and cured by making the pool wider with TRUE lines or by a narrower condition on the cure, "
+          "never by raising a ceiling.\n"
+          "A DATA ROW PRINTS ON MANY SURFACES (a house's card, the Services tab, the PDF, the journal): each cure is counted on every one. A row "
+          "that needs a word the vocabulary does not hold is PARKED with its word (the eleventh seat parked the catalogue's own smelter text and "
+          "the brick and mine services: they stay parked).\n"
+          "AFTER EVERY CURE: the lane's own doors for the table you touched (the ledger and the wiring census through the writer, as the lane's "
+          "instruments do it; a NEW pool's first row by the pool register's own form for a new pool, said in the commit); the presumed-things "
+          "walker (it reads every literal under src/); the twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop); the "
+          "strict-domain gate, the type ratchet and eslint on the touched files.\n"
+          "THE HAND-BACK, kept current after every item: docs/chair/2026-11-14/W2-FIX-DATA-HANDBACK-12.md: the rulings you worked to; the table "
+          "brought current; every row: its table, its counts before and after on every surface, its cure and commit, its guard, the towns read; "
+          "EVERY NEW OR CHANGED LINE with the towns it was read in (the owner's veto list, and the next reader's); the declared moves with their "
+          "field diff by family; FOR THE JOIN; what is left, line by line; how the instruments are re-made."),
+    merges='',
+    when="for a stop that blocks everything you have left, at step 4 (the tip; the three rows' counts), and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
