@@ -5,7 +5,7 @@
  *
  * The line names a house, so it reads the roster (record 386): the estate's one reader of a standing
  * house, `facts/institutions.js :: hasInstitution(record, 'tavern')`. Where none stands, its twin, which
- * names no house, prints under the same branches beside the same "Fence (word of mouth)" row. No draw.
+ * names no house, prints under the same branches beside the same fence row. No draw.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -38,8 +38,9 @@ describe('the fence names a tavern only where one stands', () => {
   });
 
   // THE CHAIR'S RULING (2026-11-13 23:40Z): a service never prints under the name of a house the roster does not
-  // hold. 'Fence (word of mouth)' is a catalogue house; the fallback's row takes that name only where it stands, and
-  // is otherwise "Fencing stolen goods" (a catalogue SERVICE name already, registered criminal; names no house).
+  // hold. 'Fence (word of mouth)' is a catalogue house; the fallback's row is "Fencing stolen goods" (a catalogue
+  // SERVICE name already, registered criminal; names no house) everywhere, the house standing or not (R3-CODE-C-6:
+  // the name test that gave the row the house's name read the crime fact outside its home, point 49's layer walker).
   const fenceRows = (s) => (s.availableServices?.criminal || []).filter((row) => row.institution === '(covert)' && /^Fenc/.test(row.name));
   const born = (seed, settType) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType }), null, { seed, customContent: {} });
   it('r2r-village-55 (no fence house): the row is "Fencing stolen goods"', () => {
@@ -47,9 +48,10 @@ describe('the fence names a tavern only where one stands', () => {
     expect((s.institutions || []).some((i) => i?.name === 'Fence (word of mouth)')).toBe(false);
     expect(fenceRows(s).map((r) => r.name)).toEqual(['Fencing stolen goods']);
   });
-  it('r2r-town-15 (the fence house stands): the row keeps the house\'s name', () => {
+  it('r2r-town-15 (the fence house stands): the row names no house, beside the house\'s own rows', () => {
     const s = born('r2r-town-15', 'town');
     expect((s.institutions || []).some((i) => i?.name === 'Fence (word of mouth)')).toBe(true);
-    expect(fenceRows(s).map((r) => r.name)).toEqual(['Fence (word of mouth)']);
+    expect(fenceRows(s).map((r) => r.name)).toEqual(['Fencing stolen goods']);
+    expect((s.availableServices?.criminal || []).filter((r) => r.institution === 'Fence (word of mouth)').map((r) => r.name)).toEqual(['Contraband purchase', 'Discreet sale']);
   });
 });
