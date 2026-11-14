@@ -81,8 +81,10 @@ function shapeViolations(table) {
           if (typeof text !== 'string' || !text) { out.push(`shape: ${family}.${sub}.${vantage} holds a non-line`); continue; }
           if (typeof entry !== 'string') {
             const keys = Object.keys(entry).sort().join(',');
-            if (keys !== 'line,needs') out.push(`shape: ${where} carries keys ${keys}`);
-            for (const atom of entry.needs || []) {
+            // POWERS-9 (the shape widened by one declared side, with its own check): a line whose words fail under a crisis
+            // in force declares it on its `excludes` side (the chair's siege ruling), each an atom of the vocabulary
+            if (keys !== 'line,needs' && keys !== 'excludes,line,needs') out.push(`shape: ${where} carries keys ${keys}`);
+            for (const atom of [...(entry.needs || []), ...(entry.excludes || [])]) {
               try { assertDeclarable(atom); } catch { out.push(`needs: '${atom}' is not a declarable atom — ${where}`); }
             }
           }
@@ -189,6 +191,8 @@ describe('goal families — the shape law', () => {
     expect(shapeViolations(plant('POWER', 'tense', 'short', "Undo {rival}'s last gain this season.")).some((x) => x.startsWith('contract: "{rival}\'s"'))).toBe(true);
     expect(shapeViolations(plant('POWER', 'tense', 'long', 'See that {rival} needs {power} more than ever.')).some((x) => x.startsWith('contract: "{rival} needs"'))).toBe(true);
     expect(shapeViolations(plant('TIES', 'ally', 'long', { line: 'Stand with {other} at the market.', needs: ['bazaar'] })).some((x) => x.startsWith("needs: 'bazaar'"))).toBe(true);
+    // POWERS-9: the excludes side is checked as the needs side is
+    expect(shapeViolations(plant('SUPPLY', 'impaired', 'short', { line: 'Waste nothing at {house}.', needs: [], excludes: ['crisis: bazaar'] })).some((x) => x.startsWith("needs: 'crisis: bazaar'"))).toBe(true);
   });
 });
 

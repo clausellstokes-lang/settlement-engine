@@ -30,6 +30,7 @@ import { membershipsOf } from './membership.js';
 import { allegianceOf, criminalPowersOf, hiddenMembershipOf, isCriminalPower } from './allegiance.js';
 import { CAPTURE_LINES, CAPTURE_RUNG_LABELS, PATRONAGE_LINES } from '../../data/people/dmPowerLines.js';
 import { keeperFormOf } from './seatKeeper.js';
+import { styledTitleOf } from '../../data/faceHonorifics.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {1 | 2 | 3 | 'steward'} PatronRank */
@@ -191,7 +192,7 @@ export const VIA_WORDS = Object.freeze({
 const faceOf = (card) => ({
   id: String(card.id ?? ''),
   name: String(card.name ?? ''),
-  title: String(card.title ?? card.role ?? ''),
+  title: String(styledTitleOf(card.title ?? card.role ?? '', card.gender)), // COHERENCE-POWERS-8 (R2's one home): a woman lord is "the lady" here too
   house: String(rec(card.institution).key ?? ''),
 });
 

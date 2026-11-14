@@ -69,9 +69,9 @@ function foldedInto(gone, finalRoster) {
 
 /**
  * The descriptions' standing sentences settled to the final roster. `annotated` is the roster the power step's
- * standing sentences were written on (standingRosterOf, taken before the resize). A power whose sentence names a
- * power that left, or was written for a rank it no longer holds, takes the sentence the final roster gives it, in
- * place of the old one at its description's end. A power whose description does not end in the old sentence (a
+ * standing sentences were written on (standingRosterOf, taken before the resize). A power whose sentence the final
+ * roster no longer gives it (it names a power that left, or was written for a rank or figures it no longer holds;
+ * COHERENCE-POWERS-7) takes the sentence the final roster gives it, in place of the old one at its description's end. A power whose description does not end in the old sentence (a
  * description another step rewrote) is left as it is. Returns the same object where nothing moves.
  * @template {{ factions?: Array<Record<string, any>> }} P
  * @param {P} powerStructure the final roster @param {RosterSeat[]} annotated @param {{ body: string }} force
@@ -81,18 +81,19 @@ export function settleStandingToRoster(powerStructure, annotated, force) {
   const factions = Array.isArray(powerStructure?.factions) ? powerStructure.factions : null;
   if (!factions || !annotated.length) return powerStructure;
   const finalRoster = standingRosterOf(factions);
-  const onPage = new Set(finalRoster.map((f) => f.faction));
-  const gone = annotated.map((f) => f.faction).filter((name) => !onPage.has(name));
   const before = standingsOf(annotated, force);
   const after = standingsOf(finalRoster, force);
-  const namesGone = (/** @type {string} */ line) => gone.some((name) => line.toLowerCase().includes(name.toLowerCase()));
   let moved = false;
   const next = factions.map((f) => {
     const name = String(f?.faction || '');
-    const old = before.get(name);
+    // COHERENCE-POWERS-7 (#291): a density-law rival is minted as a copy of its host, its host's standing sentence included;
+    // a power new to the roster whose description ends in another power's old sentence settles from it (POWERS-11: by desc)
+    const host = before.get(name) ? null : hostByStanding(String(f?.desc || ''), before);
+    const old = before.get(name) || (host ? before.get(host) : undefined);
     const now = after.get(name);
     if (!old || !now || !old.standing || old.standing === now.standing) return f;
-    if (!namesGone(old.standing) && old.rank === now.rank) return f;
+    // COHERENCE-POWERS-7 (cold list REVIEW-W2A-3 #109 #713): a sentence the final roster no longer gives is settled
+    // whether or not the rank moved — the figures moved under it ("a slow war with the guild" after the guild left)
     const desc = String(f.desc || '');
     const base = desc === old.standing ? '' : desc.endsWith(` ${old.standing}`) ? desc.slice(0, -old.standing.length - 1) : null;
     if (base === null) return f;
@@ -156,4 +157,19 @@ export function settleNarrativesToRoster(powerStructure, annotated) {
     return { ...row, narrative: MERCHANT_CRAFT_VOTE.sibling(merchants, craft) };
   });
   return moved ? { ...powerStructure, factionRelationships: next } : powerStructure;
+}
+
+/**
+ * The power whose old standing sentence a description ends in (or consists of): the host a density-law rival was minted
+ * from, read from the rival's own description, the settle's own test for a sentence at a description's end. Where
+ * several old sentences end it (two merchant powers share a closing sentence), the longest, the whole tail it carries.
+ * @param {string} desc @param {Map<string, { standing: string, rank: number }>} before @returns {string | null}
+ */
+function hostByStanding(desc, before) {
+  let host = null;
+  let best = 0;
+  for (const [name, { standing }] of before) {
+    if (standing && standing.length > best && (desc === standing || desc.endsWith(` ${standing}`))) { host = name; best = standing.length; }
+  }
+  return host;
 }

@@ -112,4 +112,5 @@ export const NOT_TABLE_CHANNELS = Object.freeze({
   DOSSIER_CONNECTIVE_DECLARATIONS: 'a list PARALLEL to each connective list, read by position (CENSUS-1h unit 7); the connectives are state-corpus joints, not an enrolled table',
   FIELD_DECLARATIONS: 'the edit cards\' field declarations (domain/edit), not prose',
   TENSION_TEMPLATE_DECLARATIONS: 'keyed by the tension template\'s TYPE beside the selection (CENSUS-1g unit 4); the history templates are not an enrolled table',
+  TITLE_LINE_DECLARATIONS: 'the card titles\' secret and presentation lines, keyed by SURFACE then text (COHERENCE-POWERS-7 D, POWERS-9: water needs and the governed content topics), read by people/poolMap.js :: settleTitleLines; the title tables (TITLE_SECRETS, TITLE_PRESENTATIONS) are not an enrolled table',
 });

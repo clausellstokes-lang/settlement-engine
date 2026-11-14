@@ -21,8 +21,10 @@
  * and the third answer to the Thieves' Guild"), variant 1 names the people, variant 2 says what it
  * means for the town. The rung's label is NOT in the line: `CAPTURE_RUNG_LABELS` carries it, the
  * skimmable skeleton beside the prose (the style law's §5 (4)). Every line is listed here FOR THE
- * OWNER'S VETO; nothing here imports or is imported by the generator.
+ * OWNER'S VETO; nothing here is imported by the generator, and the one import is the possessive leaf (a pure leaf).
  */
+
+import { powerPossessive, powerSentenceName } from '../../domain/display/powerSentenceName.js'; // COHERENCE-POWERS-7 (R3): a power's possessive through the one leaf, never a hand-formed "'s"
 
 /**
  * One patron's receipt (a face of the ruling power's ranked three, or the steward of its empty seat).
@@ -158,8 +160,8 @@ function askerLine(f) {
   const share = shareWords(f.share);
   if (f.rank === 1) return `${f.name} heads ${f.ruler} and also holds ${share} in ${f.power}, so what ${f.power} wants from ${f.ruler} goes straight to the top.`;
   if (f.rank === 2) return `${f.power} brings its requests to ${f.ruler} through ${f.name}, second in ${f.ruler}, who holds ${share} in ${f.power}.`;
-  if (f.rank === 3) return `${f.name} is third in ${f.ruler} and holds ${share} in ${f.power}, and carries ${f.power}'s requests to the two above.`;
-  return `While the seat of ${f.ruler} stands empty, its steward ${f.name} holds ${share} in ${f.power}, and ${f.power}'s requests go through ${f.name}.`;
+  if (f.rank === 3) return `${f.name} is third in ${f.ruler} and holds ${share} in ${powerSentenceName(f.power)}, and carries ${powerPossessive(f.power)} requests to the two above.`;
+  return `While the seat of ${f.ruler} stands empty, its steward ${f.name} holds ${share} in ${powerSentenceName(f.power)}, and ${powerPossessive(f.power)} requests go through ${f.name}.`;
 }
 
 /**
@@ -212,7 +214,7 @@ export const CAPTURE_LINES = Object.freeze({
   // the climate alone: a criminal power stands against the ruler and the ruler is winning; no agent in the three
   adversarial: Object.freeze([
     (f) => `${criminalsOf(f)} works against ${f.ruler}, and ${f.ruler} is winning. Nobody at its head answers to the criminals.`,
-    (f) => `${f.ruler} and ${criminalsOf(f)} are openly at odds. ${f.ruler} goes after ${criminalsOf(f)}'s people when it can catch them, and nobody in ${f.ruler} protects them.`,
+    (f) => `${f.ruler} and ${criminalsOf(f)} are openly at odds. ${f.ruler} goes after ${powerPossessive(criminalsOf(f))} people when it can catch them, and nobody in ${f.ruler} protects them.`,
     (f) => `${criminalsOf(f)} has no friend among the head, the second and the third of ${f.ruler}. It survives by staying out of their sight.`,
   ]),
   // one lesser agent in the three (the second or the third alone), or the climate alone (the two sides tolerate each other)
@@ -234,7 +236,7 @@ export const CAPTURE_LINES = Object.freeze({
       ? `${namedAnswerClause(f)}. Whatever ${f.ruler} decides, ${criminalsOf(f)} has usually decided first.`
       : `The heads of ${f.ruler} take their share of the crime here and see that nobody else takes it from them.`),
     (f) => (f.agents.length
-      ? `${f.ruler} still holds the seat, but it does not act against ${criminalsOf(f)}. A case that touches ${criminalsOf(f)}'s business goes nowhere.`
+      ? `${f.ruler} still holds the seat, but it does not act against ${criminalsOf(f)}. A case that touches ${powerPossessive(criminalsOf(f))} business goes nowhere.`
       : `Nobody in ${f.ruler} will act against crime that pays ${f.ruler}. A case that touches its business goes nowhere.`),
   ]),
   // the head and the second answer to the criminals (the third too, sometimes)
