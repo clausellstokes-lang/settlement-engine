@@ -142,3 +142,20 @@ describe('L05: "Complete production chain in place" only where the chain\'s hous
       .toEqual([expect.objectContaining({ product: 'dried dates, date wine, water rights', reason: '' })]);
   });
 });
+
+describe('L14: the noble subordinate line is not drawn of a body the record gives a say in every decision', () => {
+  const SUBORDINATE = 'still have their titles, but';
+  /** @type {Array<any>} */ let nobleTowns = [];
+  beforeAll(() => {
+    nobleTowns = ['r2r-metropolis-33', 'r2r-village-27', 'r2r-town-13', 'r2r-city-21']
+      .map((seed) => generateSettlementPipeline(cfgFor(seed), null, { seed, customContent: {} }));
+  }, 120000);
+  it('r2r-metropolis-33 and the reader\'s three true towns: the line prints only where the stability gives the body no say', () => {
+    const lines = nobleTowns.flatMap((s) => (s.powerStructure?.factionRelationships || [])
+      .filter((/** @type {any} */ r) => String(r?.narrative || '').includes(SUBORDINATE))
+      .map((/** @type {any} */ r) => ({ town: s.name, body: r.pair?.[0], stability: String(s.powerStructure?.stability || '') })));
+    expect(lines.filter((l) => /creditors have a say/i.test(l.stability) && /creditor/i.test(String(l.body)))).toEqual([]);
+    expect(lines.length).toBeGreaterThanOrEqual(3); // the reader's three true towns keep it
+    expect(String(nobleTowns[0].powerStructure?.stability)).toMatch(/creditors have a say in every decision/); // anchored
+  });
+});

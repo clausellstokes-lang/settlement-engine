@@ -537,6 +537,12 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
   }
 
   // ── Noble ↔ Governing (feudal dynamics) ────────────────────────────────────
+  // R3-CODE-C-8 (the reader's L14; the chair's ruling (c) of 2026-11-14, vetoable by the owner): the subordinate line
+  // ("still have their titles, but ... have taken most of their power") is not drawn of the indebted crisis's own
+  // creditor power (data/stressPowerFaces.js, the indebted row): beside it the Power tab prints "Strained — the creditors
+  // have a say in every decision" (governanceNarrative.js). r2r-metropolis-33, 1 of 128 subordinate lines.
+  const nobleIsCreditor = !!noble && stressed('indebted')
+    && STRESS_POWER_FACES.some((row) => row.stress === 'indebted' && row.power === noble.faction);
   if (noble && gov && !gov.faction?.toLowerCase().includes('feudal')) {
     const ratio = noble.power / Math.max(1, gov.power);
     let type, narrative;
@@ -551,7 +557,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
       ? `${noble.faction} live under the rule of ${gov.faction} but keep enough rights of their own (land, courts, levies) to bargain, not simply obey.`
       : `${noble.faction} still have their titles, but ${merc && (merc.power || 0) > (noble.power || 0) ? 'merchant money and ' : ''}the hall's offices have taken most of their power.`; // R3-CODE-C-2 (#pf-90): merchant money only where a merchant power outranks them
 
-    addRel({ pair: [noble.faction, gov.faction], type, direction: 'declining', ratio: Math.round(ratio*100)/100, narrative });
+    if (!(type === 'subordinate' && nobleIsCreditor)) addRel({ pair: [noble.faction, gov.faction], type, direction: 'declining', ratio: Math.round(ratio*100)/100, narrative });
   }
 
   // Deduplicate by pair (sorted key) — prevents double-relationships
