@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "9a12e541159bbc15acb67a1ba75fcd68c45eb8b5",
-  "measuredBy": "R2-CODE-B-9",
+  "measuredAtSha": "05cd22366c803f208e428dfcf256d4e9f8eaa675",
+  "measuredBy": "R2-CODE-B-11",
   "date": "2026-11-14",
-  "note": "the four red-first titles of the plague slot cure (9a12e5411, tests/domain/crisisHooks.test.js)",
-  "files": 3271,
+  "note": "row 179: tests/domain/crisisCastReaderRows.test.js added (the seat-11 rows arms)",
+  "files": 3272,
   "parked": 403,
-  "credited": 2868,
-  "titles": 29536,
-  "suiteTitles": 8016
+  "credited": 2869,
+  "titles": 29540,
+  "suiteTitles": 8017
 }
