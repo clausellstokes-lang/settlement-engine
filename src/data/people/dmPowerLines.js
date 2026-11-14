@@ -208,8 +208,11 @@ export const CAPTURE_LINES = Object.freeze({
   // no agent in the ruling three; no criminal power strong enough to count; the ruler is not criminal
   none: Object.freeze([
     (f) => `Nobody at the head of ${f.ruler} answers to a criminal house, and no criminal power here is strong enough to push it.`,
-    (f) => `The head, the second and the third of ${f.ruler} make their own decisions; none of them takes orders from the criminals.`,
-    (f) => `${f.ruler} rules in its own name. A criminal house that wants something from it has to ask, pay or wait like anyone else.`,
+    // POWERS-15 (REVIEW-POWERS-5 D1; the chair's ruling of 2026-11-14: under an occupation no line says the hall decides
+    // for itself): the rung's fact is the criminals' standing against the hall, so the two syndicate lines claim that
+    // only (were "... make their own decisions; none of them takes orders ..." and "<ruler> rules in its own name")
+    (f) => `None of the head, the second and the third of ${f.ruler} takes orders from the criminals.`,
+    (f) => `No criminal house gives ${f.ruler} its orders. One that wants something from it has to ask, pay or wait like anyone else.`,
   ]),
   // the climate alone: a criminal power stands against the ruler and the ruler is winning; no agent in the three
   adversarial: Object.freeze([
