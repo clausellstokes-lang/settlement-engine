@@ -649,7 +649,11 @@ const DESKTOP_BASELINE = Object.freeze({
   "Systems/Institutions": { measured: 72, sub14: 72 }, // T1-14, measured 2026-10-30 by this walk; 62 → 71 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine face rows each gain the "Connection:" label, a line of its own
   // 47 -> 40 (2026-10-30, UX consolidation U1, RULINGS-T2 T2-1..T2-8): no desktop token moved; the page lost
   // its duplicates (Economy/Food tiles, the Supply Chains rows, the Resource Exploitation chips, the plot hooks).
-  "Systems/Economics":   { measured: 46, sub14: 46 },
+  // 46 -> 45 (2026-11-14, R2-CODE-B-7, the merge 0aa0cce00 of the line 976db5b19 into the lane), the two sides' moves composed
+  // from the base's 47: the line's 47 -> 46 (point 47, COHERENCE-AGREE, e382be4b3) and the lane's 47 -> 48 -> 46 (R2-CODE-B-3
+  // item 2a, the stores' span crosses the measured length; R2-CODE-B-SIDE items 1 and 2, 2ed36a430 and a245e05fb, the chain
+  // card's upstream note and its "Import: <a chain's label>" From line left the card). Measured by this walk at the merged tip.
+  "Systems/Economics":   { measured: 45, sub14: 45 },
   // 28 -> 22 (2026-10-30, UX consolidation U5, T2-17..T2-19): Current Tensions, Active Conflicts and the
   // duplicate governing rows left the page; no token moved.
   "Systems/Power":       { measured: 34, sub14: 33 }, // 30 -> 29 OWNER-WORDS-DOSSIER item 3 (2026-11-09): the vignette line and the DS-POW-1/2 readings became one paragraph
@@ -677,7 +681,9 @@ const DESKTOP_BASELINE = Object.freeze({
   // 4 -> 5 (2026-11-12, W2-A-LEAVES, census row 3): the reliance line names its source (" · supplied by …"), so it
   // crosses the walk's forty-five characters and is measured; its 700 weight judges it chrome. No token moved.
   "Systems/Magic":       { measured: 5, sub14: 5 },
-  "World/NPCs":          { measured: 282, sub14: 282 },
+  // 282 -> 280 (2026-11-13, R2-CODE-B item 1, composed at the merge 0aa0cce00): two NPC card lines name their house by the
+  // seam's house label ("Merchant guilds", not "Merchant guilds (15-40)"), and the shorter line falls under the walk's MIN_CHARS. No token moved.
+  "World/NPCs":          { measured: 280, sub14: 280 },
   // 60 -> 61 / 58 -> 59 and mobile 58 -> 59 (2026-10-31, G3 at the merge, GS-1): the eight-variant tie lines wrap one
   // line longer in the fixture; no token moved.
   "World/Relationships": { measured: 174, sub14: 172 },
@@ -804,7 +810,10 @@ const MOBILE_BASELINE = Object.freeze({
   "Systems/Services":    { prose: 103, chrome: 1, sub14: 0, sub12: 0 },
   "Systems/Institutions": { prose: 71, chrome: 1, sub14: 0, sub12: 0 }, // 61 → 70 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine "Connection:" labels, each at the prose floor
   // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
-  "Systems/Economics":   { prose: 39, chrome: 7, sub14: 7, sub12: 0 },
+  // chrome 7 -> 6, sub14 7 -> 6 (2026-11-14, R2-CODE-B-7, the merge 0aa0cce00), composed from the base's 39/8/8: the line's
+  // chrome 8 -> 7 (point 47, e382be4b3) and the lane's prose 39 -> 40 -> 39, chrome 8 -> 7 (R2-CODE-B-3 item 2a, the stores
+  // line; the side items 1 and 2: the upstream note (prose) and the "Import:" From line (chrome) left the card). sub12 holds 0.
+  "Systems/Economics":   { prose: 39, chrome: 6, sub14: 6, sub12: 0 },
   // prose 27 -> 21 (2026-10-30, UX consolidation U5): tensions, conflicts and the duplicate rows left.
   "Systems/Power":       { prose: 33, chrome: 1, sub14: 0, sub12: 0 }, // 29 -> 28 OWNER-WORDS-DOSSIER item 3 (2026-11-09): the governance block is one paragraph
   // prose 27 -> 25, chrome 1 -> 2 (2026-10-30, UX consolidation U6): the criminal faction is now one
@@ -829,7 +838,9 @@ const MOBILE_BASELINE = Object.freeze({
   // chrome 1 -> 2 (2026-11-12, W2-A-LEAVES, census row 3): the reliance line names its source, crosses the walk's
   // forty-five characters and is measured, chrome by its 700 weight at the prose size (sub14 and sub12 hold).
   "Systems/Magic":       { prose: 3, chrome: 2, sub14: 1, sub12: 0 },
-  "World/NPCs":          { prose: 281, chrome: 1, sub14: 0, sub12: 0 },
+  // prose 281 -> 279 (2026-11-13, R2-CODE-B item 1, composed at the merge 0aa0cce00): the same two NPC card lines, shorter by
+  // the count range, fall under MIN_CHARS; sub12 stays 0 and the floors arm reads 0 violations.
+  "World/NPCs":          { prose: 279, chrome: 1, sub14: 0, sub12: 0 },
   "World/Relationships": { prose: 138, chrome: 36, sub14: 36, sub12: 0 },
   "World/Faith":         { prose: 2, chrome: 0, sub14: 0, sub12: 0 },
   "World/Daily Life":    { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
