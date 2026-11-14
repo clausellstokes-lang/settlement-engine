@@ -41,6 +41,7 @@ Every row the fourteenth seat counted that this seat's items touch, re-taken onc
 |---|---|---|---|---|
 | dc896075a | (n) the famine's foodways line is not composed from the source the famine failed | **66** births (the census's 66, set compared): census 66 / 121 -> **0 / 121** | `tests/generators/foodwaysFamineFailedSource.test.js`; plant (the call as it was) reds 5 of 6 | `foodGenerator.js`: the `composeFoodwaysLine` call hands `sourcesAFamineLeaves(foodSources, failedSource)` (at the file's end); DECLARED MOVE: `foodRecord.foodwaysLine` and its copy `culturalIdentity.foodways`, those 66 births only |
 | b0942c47a | (o) re-ruled, candidate D: an income row is borne out by the page | the measure's 476 false rows in 402 towns -> **0** (its `surfaceZero.mjs`, every rendered section: 402 towns -> 0) | `tests/generators/incomeRowsBorneOut.test.js` (five born towns of the measure's fifteen; a hand-made table; the treasury map); plant (the call removed) reds 5 of 8; three pins re-keyed by identity (`coherenceAgreeCures.test.js` the coal line and the felling line; `incomeLinesSayTheRecord.test.js` the towns #145 #277 #621 #910) | `incomeLineSiblings.js :: keepRowsThePageBearsOut` (one call in `economicState.js`, before the sort); `treasury.js` maps the six titles D can write; `treasury.test.js`'s totality scan spans `incomeLineSiblings.js` (the file that now builds emitted labels). DECLARED MOVE AS MEASURED: the field diff equals the measured D's exactly (146 families; every seed's set) |
+| 068535e4c | (b) #234 "managed felling" only where the felling is managed | **17** births (the census's 17 on D, set compared): census 17 / 107 -> **0 / 90** | `tests/generators/timberManagedFelling.test.js` (four born towns; the guard town r2r-hamlet-12, a managed forest); plant reds 4 of 5 | `economicState.js`, the `trueIncomeDesc` call: `managedForest` is a managed forest, or a shipbuilding stand a woodcutter works; one record leaf (`incomeSources[].desc`, 17 births). The twin "Local forest provides timber revenue." read in r2r-hamlet-27 (96), rv5-famine-town-2, rv5-occupied-town-0, r2r-city-38 (the largest it reaches) |
 
 ## THE DECLARED MOVES
 
@@ -65,12 +66,12 @@ Every row the fourteenth seat counted that this seat's items touch, re-taken onc
 
 ## REGISTERS MADE STALE (the chair's ruling of 12:52: named, never re-taken)
 
-- The lighting census (`tests/lint/.lighting-census-baseline.json`): this seat's new test files (the list grows with each cure): `tests/generators/foodwaysFamineFailedSource.test.js` (dc896075a), `tests/generators/incomeRowsBorneOut.test.js` (b0942c47a). The title that reds: `tests/lint/sovereigntyLightingContract.walker.test.js`'s census arm.
+- The lighting census (`tests/lint/.lighting-census-baseline.json`): this seat's new test files (the list grows with each cure): `tests/generators/foodwaysFamineFailedSource.test.js` (dc896075a), `tests/generators/incomeRowsBorneOut.test.js` (b0942c47a), `tests/generators/timberManagedFelling.test.js` (068535e4c). The title that reds: `tests/lint/sovereigntyLightingContract.walker.test.js`'s census arm.
 - The fork census's register (`src/domain/generation/generationForkRegistry.js :: GENERATION_TIER1`), made stale by D (b0942c47a): `tests/generators/generationForkCensus.test.js` A3e "the classification re-executed" reds with "factionCorrelationPass|institutions.stepDraws: declared 6 measured 7" and "keyMoves: declared 2 measured 3" (the declared power move). The fork census's rows are not this lane's.
 
 ## WHAT IS LEFT, line by line
 
-1. (c) #273: ANSWERED BY D (0 / 3). (b) #234 "managed felling" 17 / 107 (all with shipbuilding timber and no woodcutter); (d) #77 the fish line 33; (e) #90 the gates under a siege 29 + 1; then (l) the court, (m) the money lines, item 5's rows, (g) 11, (i) 11.
+1. (c) #273: ANSWERED BY D (0 / 3). (b) #234: DONE at 068535e4c; (d) #77 the fish line 33; (e) #90 the gates under a siege 29 + 1; then (l) the court, (m) the money lines, item 5's rows, (g) 11, (i) 11.
 2. (k) `criminalPreStress`.
 3. OPEN-coherence-upkeep.md's rows not answered above.
 
