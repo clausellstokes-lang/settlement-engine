@@ -13,6 +13,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { buildJournalPages } from '../../src/foundry/journalPages.js';
+import { IdentityDailyLife } from '../../src/pdf/sections/IdentityDailyLife.jsx';
 
 const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 
@@ -39,6 +40,21 @@ const journalTimberRow = (town) => {
   return (md.split('\n').find((l) => /^\| Timber \|/.test(l)) || '');
 };
 
+/** @react-pdf text leaves, calling each function component (tests/generators/foodwaysOneLine.test.jsx). @param {any} node @param {string[]} [out] @returns {string[]} */
+const pdfText = (node, out = []) => {
+  if (node == null || typeof node === 'boolean') return out;
+  if (typeof node === 'string' || typeof node === 'number') { out.push(String(node)); return out; }
+  if (Array.isArray(node)) { node.forEach((child) => pdfText(child, out)); return out; }
+  if (typeof node === 'object') return typeof node.type === 'function' ? pdfText(node.type(node.props), out) : pdfText(node.props?.children, out);
+  return out;
+};
+/** The PDF's Architecture row as it prints, or null. @param {any} town */
+const pdfArchitecture = (town) => {
+  const text = pdfText(IdentityDailyLife({ settlement: town, narrativeMode: false, vm: buildViewModel({ settlement: town }) }));
+  const at = text.indexOf('Architecture');
+  return at < 0 ? null : text[at + 1];
+};
+
 describe('W2-FIX-DATA-12: the measured rows in the data lane\'s files', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); }, 120_000);
 
@@ -53,5 +69,15 @@ describe('W2-FIX-DATA-12: the measured rows in the data lane\'s files', () => {
     const keep = bornCensus('r2r-town-12');
     expect(timberIn(keep, 'unexploited')).toContain('unexploited:timber');
     expect(journalTimberRow(keep)).toMatch(/\| unexploited \|/);
+  }, 180_000);
+
+  test('the reader\'s C02/C08 (HIGH): the PDF\'s Architecture row holds the detail to its row\'s declaration (r2r-village-12 no market; r2r-city-0 no palisade, no river; r2s-occupied-thorp-3 no landing); r2r-village-25, with a market, keeps it', () => {
+    expectNoSeedFailures(collectSeedFailures(['r2r-village-12', 'r2r-city-0', 'r2s-occupied-thorp-3'], (seed) => {
+      const town = bornCensus(seed);
+      expect(String(town.culturalIdentity?.architecturalDetail || ''), `${seed} carries a detail`).not.toBe('');
+      expect(pdfArchitecture(town), seed).toBeNull();
+    }), 'the detail names what the town lacks: the PDF prints no Architecture row');
+    const keep = bornCensus('r2r-village-25');
+    expect(pdfArchitecture(keep)).toBe('arcaded market fronts define the principal square');
   }, 180_000);
 });
