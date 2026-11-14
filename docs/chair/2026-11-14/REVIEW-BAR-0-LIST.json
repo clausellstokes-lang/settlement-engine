@@ -29,7 +29,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/institutionalCatalog.js",
+   "line": 939,
+   "fn": "INSTITUTION_FAMILIES",
+   "poolId": "",
+   "run": "Hundreds of houses of worship across all",
+   "files": [
+    "src/data/institutionalCatalog.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 3,
@@ -93,7 +108,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/institutionalCatalog.js",
+   "line": 243,
+   "fn": "INSTITUTION_FAMILIES",
+   "poolId": "",
+   "run": "A worked shaft or adit with hired",
+   "files": [
+    "src/data/institutionalCatalog.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 7,
@@ -141,7 +171,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/institutionServices.js",
+   "line": 1817,
+   "fn": "SERVICE_DESC_SIBLINGS",
+   "poolId": "",
+   "run": "Ore cut underground by the crews and",
+   "files": [
+    "src/data/institutionServices.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13"
+   ]
+  }
  },
  {
   "n": 10,
@@ -158,7 +202,28 @@
   "section7": false,
   "at": "exact",
   "tabOk": true,
-  "check": "CONFIRMED: importPct 45 against 'feeds itself'"
+  "check": "CONFIRMED: importPct 45 against 'feeds itself'",
+  "writer": {
+   "file": "src/data/dossierStateProse/economy.generated.js",
+   "line": 3230,
+   "fn": "pools",
+   "poolId": "",
+   "run": "feeds itself with a small margin",
+   "files": [
+    "src/data/dossierStateProse/economy.generated.js",
+    "src/domain/coherence/crisisBlindFindings.js",
+    "src/domain/coherence/pageCensusFindings.js",
+    "src/domain/compendium/bandLadders.js",
+    "src/domain/compendium/generated/compendiumData.generated.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ]
+  }
  },
  {
   "n": 11,
@@ -190,7 +255,24 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/dossierStateProse/economy.generated.js",
+   "line": 5664,
+   "fn": "pools",
+   "poolId": "",
+   "run": "there is nothing left worth taking, and",
+   "files": [
+    "src/data/dossierStateProse/economy.generated.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ]
+  }
  },
  {
   "n": 13,
@@ -238,7 +320,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/domain/display/governanceAccount.js",
+   "line": 348,
+   "fn": "competitive",
+   "poolId": "",
+   "run": "It can no longer make its orders",
+   "files": [
+    "src/domain/display/governanceAccount.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r3-code-c-2026-11-13"
+   ]
+  }
  },
  {
   "n": 16,
@@ -270,7 +366,23 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/powerSiblings.js",
+   "line": 87,
+   "fn": "FACTION_DESC_SIBLINGS",
+   "poolId": "",
+   "run": "it keeps order reliably and is growing",
+   "files": [
+    "src/data/powerSiblings.js",
+    "src/generators/power/rulingStructure.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r2-code-a-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 18,
@@ -286,7 +398,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/power/factionStanding.js",
+   "line": 126,
+   "fn": "annotateFactionStanding",
+   "poolId": "",
+   "run": "They are roughly even with the military",
+   "files": [
+    "src/generators/power/factionStanding.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "powers-follow-up-2026-11-13"
+   ]
+  }
  },
  {
   "n": 19,
@@ -414,7 +540,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/people/titleSecretsPresentations.js",
+   "line": 1025,
+   "fn": "ROWS",
+   "poolId": "",
+   "run": "hires workers by the week",
+   "files": [
+    "src/data/people/titleSecretsPresentations.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "powers-follow-up-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 27,
@@ -559,7 +700,26 @@
   "section7": false,
   "at": "exact",
   "tabOk": true,
-  "check": "CONFIRMED by the reviewer: page l.8 vs l.1279; record stress under_siege"
+  "check": "CONFIRMED by the reviewer: page l.8 vs l.1279; record stress under_siege",
+  "writer": {
+   "file": "src/data/narrativeData.js",
+   "line": 165,
+   "fn": "under_siege",
+   "poolId": "",
+   "run": "every person entering is noted, every cart",
+   "files": [
+    "src/data/narrativeData.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r2-code-a-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ],
+   "standsAtHolderTip": {
+    "r2-code-a-2026-11-13": true,
+    "coherence-upkeep-2026-11-12": true
+   }
+  }
  },
  {
   "n": 36,
@@ -575,7 +735,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/arrivalProse.js",
+   "line": 143,
+   "fn": "dominant",
+   "poolId": "",
+   "run": "Barrels of salt fish stand stacked for",
+   "files": [
+    "src/data/arrivalProse.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 37,
@@ -607,7 +782,24 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/dossierStateProse/general.generated.js",
+   "line": 9453,
+   "fn": "pools",
+   "poolId": "",
+   "run": "market grew up on the road's trade",
+   "files": [
+    "src/data/dossierStateProse/general.generated.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ]
+  }
  },
  {
   "n": 39,
@@ -623,7 +815,24 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/dossierStateProse/general.generated.js",
+   "line": 9809,
+   "fn": "pools",
+   "poolId": "",
+   "run": "warehouses and sell it when the price",
+   "files": [
+    "src/data/dossierStateProse/general.generated.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ]
+  }
  },
  {
   "n": 40,
@@ -703,7 +912,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/npcData.js",
+   "line": 1240,
+   "fn": "economy",
+   "poolId": "",
+   "run": "One of their most reliable suppliers has",
+   "files": [
+    "src/data/npcData.js",
+    "src/domain/hookThemes.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r2-code-a-2026-11-13"
+   ]
+  }
  },
  {
   "n": 45,
@@ -815,7 +1039,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/institutionDescVariants.js",
+   "line": 1010,
+   "fn": "PAIRS",
+   "poolId": "",
+   "run": "Brews ale and beer at commercial scale",
+   "files": [
+    "src/data/institutionDescVariants.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 52,
@@ -863,7 +1102,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/institutionDescColour.js",
+   "line": 214,
+   "fn": "DESC_VARIANT_COLOUR_DECLARATIONS",
+   "poolId": "",
+   "run": "relay stabling, coaches on a schedule, meals",
+   "files": [
+    "src/data/institutionDescColour.js",
+    "src/data/institutionDescVariants.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13"
+   ]
+  }
  },
  {
   "n": 55,
@@ -911,7 +1165,23 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/institutionDescVariants.js",
+   "line": 2030,
+   "fn": "DESC_VARIANT_SIBLINGS",
+   "poolId": "",
+   "run": "A covered fish market under the market",
+   "files": [
+    "src/data/institutionDescVariants.js",
+    "src/data/institutionalCatalog.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 58,
@@ -943,7 +1213,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/institutionalCatalog.js",
+   "line": 308,
+   "fn": "INSTITUTION_FAMILIES",
+   "poolId": "",
+   "run": "Letters of credit accepted",
+   "files": [
+    "src/data/institutionalCatalog.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 60,
@@ -960,7 +1245,22 @@
   "section7": false,
   "at": "exact",
   "tabOk": true,
-  "check": "sampled: holds (ferry carts waiting under a siege that closed the roads)"
+  "check": "sampled: holds (ferry carts waiting under a siege that closed the roads)",
+  "writer": {
+   "file": "src/data/institutionDescVariants.js",
+   "line": 334,
+   "fn": "PAIRS",
+   "poolId": "",
+   "run": "A flat-bottomed ferry over the river, the",
+   "files": [
+    "src/data/institutionDescVariants.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 61,
@@ -992,7 +1292,16 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/faceHonorifics.js",
+   "line": 138,
+   "fn": "",
+   "evidence": "the reader's source (file present at the joined tree; PLAUSIBLE)",
+   "holders": [
+    "powers-follow-up-2026-11-13"
+   ]
+  }
  },
  {
   "n": 63,
@@ -1024,7 +1333,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/institutionServices.js",
+   "line": 395,
+   "fn": "Brickmaker",
+   "poolId": "",
+   "run": "Standard-size fired clay bricks by the cartload",
+   "files": [
+    "src/data/institutionServices.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13"
+   ]
+  }
  },
  {
   "n": 65,
@@ -1072,7 +1395,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/institutionServices.js",
+   "line": 1084,
+   "fn": "Appraisal",
+   "poolId": "",
+   "run": "The largest trading event of the year",
+   "files": [
+    "src/data/institutionServices.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13"
+   ]
+  }
  },
  {
   "n": 68,
@@ -1088,7 +1425,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/institutionServices.js",
+   "line": 1085,
+   "fn": "Appraisal",
+   "poolId": "",
+   "run": "Major livestock sales across all species and",
+   "files": [
+    "src/data/institutionServices.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13"
+   ]
+  }
  },
  {
   "n": 69,
@@ -1136,7 +1487,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/institutionServices.js",
+   "line": 952,
+   "fn": "Betting",
+   "poolId": "",
+   "run": "Fish sold daily from the morning catch",
+   "files": [
+    "src/data/institutionServices.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13"
+   ]
+  }
  },
  {
   "n": 72,
@@ -1168,7 +1533,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/institutionServices.js",
+   "line": 1346,
+   "fn": "Protection",
+   "poolId": "",
+   "run": "Collect toll from all who cross",
+   "files": [
+    "src/data/institutionServices.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13"
+   ]
+  }
  },
  {
   "n": 74,
@@ -1201,7 +1580,30 @@
   "section7": false,
   "at": "exact",
   "tabOk": true,
-  "check": "CONFIRMED: prosperityStanding Prosperous; page l.16/855 vs l.861"
+  "check": "CONFIRMED: prosperityStanding Prosperous; page l.16/855 vs l.861",
+  "writer": {
+   "file": "src/data/dossierStateProse/economy.generated.js",
+   "line": 181,
+   "fn": "pools",
+   "poolId": "",
+   "run": "was poor even while its trade moved",
+   "files": [
+    "src/data/dossierStateProse/economy.generated.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ],
+   "standsAtHolderTip": {
+    "w2-fix-data-2026-11-13": false,
+    "w2-write-2026-11-13": true,
+    "w2-write-side-eco-2026-11-13": true,
+    "w2-write-side-rest-2026-11-13": true
+   }
+  }
  },
  {
   "n": 76,
@@ -1233,7 +1635,16 @@
   "severity": "MED",
   "section7": true,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/economy/economicState.js",
+   "line": 497,
+   "fn": "",
+   "evidence": "the reader's source (file present at the joined tree; PLAUSIBLE)",
+   "holders": [
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 78,
@@ -1281,7 +1692,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/domain/foodways.js",
+   "line": 26,
+   "fn": "SOURCE_PHRASES",
+   "poolId": "",
+   "run": "fish from the local waters",
+   "files": [
+    "src/domain/foodways.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r3-code-c-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 81,
@@ -1329,7 +1755,16 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/supplyChainData.js",
+   "line": 461,
+   "fn": "",
+   "evidence": "the reader's source (file present at the joined tree; PLAUSIBLE)",
+   "holders": [
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 84,
@@ -1345,7 +1780,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/domain/display/chainNeedShown.js",
+   "line": 75,
+   "fn": "name",
+   "poolId": "",
+   "run": "from outside, which the siege has cut",
+   "files": [
+    "src/domain/display/chainNeedShown.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-c-leaves-2026-11-13"
+   ]
+  }
  },
  {
   "n": 85,
@@ -1441,7 +1890,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/safetyProfile.js",
+   "line": 375,
+   "fn": "wallNote",
+   "poolId": "",
+   "run": "Everyone comes and goes by the gates",
+   "files": [
+    "src/generators/safetyProfile.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 91,
@@ -1490,7 +1953,22 @@
   "section7": false,
   "at": "exact",
   "tabOk": true,
-  "check": "sampled: holds"
+  "check": "sampled: holds",
+  "writer": {
+   "file": "src/components/new/tabs/ResourcesTab.jsx",
+   "line": 209,
+   "fn": "terrainColor",
+   "poolId": "",
+   "run": "siege has taken the outlying fields",
+   "files": [
+    "src/components/new/tabs/ResourcesTab.jsx",
+    "src/domain/display/defenseDisplay.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-c-leaves-2026-11-13"
+   ]
+  }
  },
  {
   "n": 94,
@@ -1570,7 +2048,16 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/faceHonorifics.js",
+   "line": 138,
+   "fn": "",
+   "evidence": "the reader's source (file present at the joined tree; PLAUSIBLE)",
+   "holders": [
+    "powers-follow-up-2026-11-13"
+   ]
+  }
  },
  {
   "n": 99,
@@ -1618,7 +2105,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/people/titleSecretsPresentations.js",
+   "line": 783,
+   "fn": "ROWS",
+   "poolId": "",
+   "run": "food, a bed and a fresh team",
+   "files": [
+    "src/data/people/titleSecretsPresentations.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "powers-follow-up-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 102,
@@ -1810,7 +2312,24 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/domain/coherence/crisisFactFindings.js",
+   "line": 8,
+   "fn": "",
+   "poolId": "",
+   "run": "months of grain",
+   "files": [
+    "src/domain/coherence/crisisFactFindings.js",
+    "src/domain/coherence/hookTruth.js",
+    "src/generators/economy/foodBalance.js",
+    "src/generators/foodGenerator.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r2-code-b-2026-11-13"
+   ]
+  }
  },
  {
   "n": 114,
@@ -1826,7 +2345,24 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/dossierStateProse/general.generated.js",
+   "line": 9682,
+   "fn": "pools",
+   "poolId": "",
+   "run": "merchant guild do most of the buying",
+   "files": [
+    "src/data/dossierStateProse/general.generated.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ]
+  }
  },
  {
   "n": 115,
@@ -1843,7 +2379,24 @@
   "section7": true,
   "at": "exact",
   "tabOk": true,
-  "check": "CONFIRMED: magic houses are Wizard's tower, Scroll scribe (no mages' guild)"
+  "check": "CONFIRMED: magic houses are Wizard's tower, Scroll scribe (no mages' guild)",
+  "writer": {
+   "file": "src/generators/economy/economicState.js",
+   "line": 311,
+   "fn": "if",
+   "poolId": "",
+   "run": "contracts, magical research commissions, and the licensing",
+   "files": [
+    "src/generators/economy/economicState.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "coherence-upkeep-2026-11-12"
+   ],
+   "standsAtHolderTip": {
+    "coherence-upkeep-2026-11-12": true
+   }
+  }
  },
  {
   "n": 116,
@@ -1860,7 +2413,30 @@
   "section7": false,
   "at": "exact",
   "tabOk": true,
-  "check": "CONFIRMED: Sawmill (commercial) on the roster"
+  "check": "CONFIRMED: Sawmill (commercial) on the roster",
+  "writer": {
+   "file": "src/data/dossierStateProse/economy.generated.js",
+   "line": 5544,
+   "fn": "pools",
+   "poolId": "",
+   "run": "half-finished, and nobody in the",
+   "files": [
+    "src/data/dossierStateProse/economy.generated.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ],
+   "standsAtHolderTip": {
+    "w2-fix-data-2026-11-13": true,
+    "w2-write-2026-11-13": true,
+    "w2-write-side-eco-2026-11-13": true,
+    "w2-write-side-rest-2026-11-13": true
+   }
+  }
  },
  {
   "n": 117,
@@ -1892,7 +2468,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/cultureProfiles.js",
+   "line": 376,
+   "fn": "foodways",
+   "poolId": "",
+   "run": "Intensive plots, terraces, raised fields, and tribute",
+   "files": [
+    "src/data/cultureProfiles.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 119,
@@ -1988,7 +2579,11 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "(not traced)",
+   "evidence": "no fixed run found; the reader named no source file"
+  }
  },
  {
   "n": 125,
@@ -2068,7 +2663,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/factionDynamics.js",
+   "line": 406,
+   "fn": "if",
+   "poolId": "",
+   "run": "each needs the other to stay strong",
+   "files": [
+    "src/generators/factionDynamics.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r3-code-c-2026-11-13"
+   ]
+  }
  },
  {
   "n": 130,
@@ -2084,7 +2693,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/components/new/tabs/power/PowerStrata.jsx",
+   "line": 198,
+   "fn": "mobile",
+   "poolId": "",
+   "run": "Institutions behind this power",
+   "files": [
+    "src/components/new/tabs/power/PowerStrata.jsx"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r2-code-b-2026-11-13"
+   ]
+  }
  },
  {
   "n": 131,
@@ -2100,7 +2723,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/components/new/tabs/power/PowerStrata.jsx",
+   "line": 198,
+   "fn": "mobile",
+   "poolId": "",
+   "run": "Institutions behind this power",
+   "files": [
+    "src/components/new/tabs/power/PowerStrata.jsx"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r2-code-b-2026-11-13"
+   ]
+  }
  },
  {
   "n": 132,
@@ -2116,7 +2753,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/power/stressFactions.js",
+   "line": 340,
+   "fn": "applyStressEventFactions",
+   "poolId": "",
+   "run": "Crown-appointed emergency body with powers over requisition",
+   "files": [
+    "src/generators/power/stressFactions.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "powers-follow-up-2026-11-13"
+   ]
+  }
  },
  {
   "n": 133,
@@ -2148,7 +2799,26 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 1306,
+   "fn": "pools",
+   "poolId": "",
+   "run": "can keep its defenders paid and buy",
+   "files": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r3-tabs-2026-11-13",
+    "w2-fix-data-2026-11-13",
+    "coherence-upkeep-2026-11-12",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ]
+  }
  },
  {
   "n": 135,
@@ -2180,7 +2850,11 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "(not traced)",
+   "evidence": "no fixed run found; the reader named no source file"
+  }
  },
  {
   "n": 137,
@@ -2196,7 +2870,24 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/domain/coherence/crisisFactFindings.js",
+   "line": 8,
+   "fn": "",
+   "poolId": "",
+   "run": "months of grain",
+   "files": [
+    "src/domain/coherence/crisisFactFindings.js",
+    "src/domain/coherence/hookTruth.js",
+    "src/generators/economy/foodBalance.js",
+    "src/generators/foodGenerator.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r2-code-b-2026-11-13"
+   ]
+  }
  },
  {
   "n": 138,
@@ -2212,7 +2903,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/people/titleSecretsPresentations.js",
+   "line": 299,
+   "fn": "ROWS",
+   "poolId": "",
+   "run": "Lied about the death of a prisoner",
+   "files": [
+    "src/data/people/titleSecretsPresentations.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "powers-follow-up-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 139,
@@ -2469,7 +3175,24 @@
   "section7": false,
   "at": "exact",
   "tabOk": true,
-  "check": "sampled: holds (surplusPct 38)"
+  "check": "sampled: holds (surplusPct 38)",
+  "writer": {
+   "file": "src/data/dossierStateProse/economy.generated.js",
+   "line": 3251,
+   "fn": "pools",
+   "poolId": "",
+   "run": "A poor harvest is felt at every",
+   "files": [
+    "src/data/dossierStateProse/economy.generated.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ]
+  }
  },
  {
   "n": 155,
@@ -2485,7 +3208,25 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/narrativeGenerator.js",
+   "line": 751,
+   "fn": "SMALL_PLACE_TIER_LINES",
+   "poolId": "",
+   "run": "What little the place grows or makes",
+   "files": [
+    "src/generators/narrativeGenerator.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r2-code-a-2026-11-13",
+    "w2-fix-data-2026-11-13",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ]
+  }
  },
  {
   "n": 156,
@@ -2501,7 +3242,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/institutionDescColour.js",
+   "line": 23,
+   "fn": "DESC_VARIANT_COLOUR_DECLARATIONS",
+   "poolId": "",
+   "run": "Each family tills a small holding, all",
+   "files": [
+    "src/data/institutionDescColour.js",
+    "src/data/institutionDescVariants.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13"
+   ]
+  }
  },
  {
   "n": 157,
@@ -2517,7 +3273,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/institutionDescColour.js",
+   "line": 40,
+   "fn": "DESC_VARIANT_COLOUR_DECLARATIONS",
+   "poolId": "",
+   "run": "A distant lord's man, set here to",
+   "files": [
+    "src/data/institutionDescColour.js",
+    "src/data/institutionDescVariants.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13"
+   ]
+  }
  },
  {
   "n": 158,
@@ -2533,7 +3304,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/historyGenerator.js",
+   "line": 794,
+   "fn": "resourceEvents",
+   "poolId": "",
+   "run": "A clause in the compact entitles certain",
+   "files": [
+    "src/generators/historyGenerator.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 159,
@@ -2549,7 +3335,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/narrative/settlementOriginProse.js",
+   "line": 103,
+   "fn": "ORIGIN_POOLS",
+   "poolId": "",
+   "run": "Founded at a junction on the oldest",
+   "files": [
+    "src/generators/narrative/settlementOriginProse.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r2-code-a-2026-11-13"
+   ]
+  }
  },
  {
   "n": 160,
@@ -2565,7 +3365,24 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/dossierStateProse/economy.generated.js",
+   "line": 6030,
+   "fn": "pools",
+   "poolId": "",
+   "run": "earns comes from a single trade, and",
+   "files": [
+    "src/data/dossierStateProse/economy.generated.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ]
+  }
  },
  {
   "n": 161,
@@ -2597,7 +3414,17 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/resourceGenerator.js",
+   "line": 423,
+   "fn": "",
+   "evidence": "the reader's source (file present at the joined tree; PLAUSIBLE)",
+   "holders": [
+    "r3-code-c-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 163,
@@ -2613,7 +3440,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/resourceGenerator.js",
+   "line": 382,
+   "fn": "if",
+   "poolId": "",
+   "run": "Complete production chain in place",
+   "files": [
+    "src/generators/resourceGenerator.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r3-code-c-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 164,
@@ -2645,7 +3487,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/domain/display/defenseDisplay.js",
+   "line": 624,
+   "fn": "opening",
+   "poolId": "",
+   "run": "under siege the outlying fields would be",
+   "files": [
+    "src/domain/display/defenseDisplay.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-c-leaves-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 166,
@@ -2661,7 +3518,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/safetyProfile.js",
+   "line": 328,
+   "fn": "wallNote",
+   "poolId": "",
+   "run": "A mix of safer and more exposed",
+   "files": [
+    "src/generators/safetyProfile.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 167,
@@ -2677,7 +3548,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/npcData.js",
+   "line": 2139,
+   "fn": "wary_alliance",
+   "poolId": "",
+   "run": "Refusing would cost the alliance its majority",
+   "files": [
+    "src/data/npcData.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r2-code-a-2026-11-13"
+   ]
+  }
  },
  {
   "n": 168,
@@ -2693,7 +3578,24 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/dossierStateProse/economy.generated.js",
+   "line": 2785,
+   "fn": "pools",
+   "poolId": "",
+   "run": "has money to spend and spends it",
+   "files": [
+    "src/data/dossierStateProse/economy.generated.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ]
+  }
  },
  {
   "n": 169,
@@ -2709,7 +3611,11 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "(not traced)",
+   "evidence": "no fixed run found; the reader named no source file"
+  }
  },
  {
   "n": 170,
@@ -2726,7 +3632,11 @@
   "section7": false,
   "at": "exact",
   "tabOk": true,
-  "check": "reviewer: DOUBTFUL, a named festival is not a market; at most LOW"
+  "check": "reviewer: DOUBTFUL, a named festival is not a market; at most LOW",
+  "writer": {
+   "file": "(not traced)",
+   "evidence": "no fixed run found; the reader named no source file"
+  }
  },
  {
   "n": 171,
@@ -2870,7 +3780,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/domain/crisis/crisisCast.js",
+   "line": 201,
+   "fn": "CAST_REASONS",
+   "poolId": "",
+   "run": "the most ambitious of a power that",
+   "files": [
+    "src/domain/crisis/crisisCast.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r2-code-b-2026-11-13"
+   ]
+  }
  },
  {
   "n": 180,
@@ -2886,7 +3810,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/stressTypes.js",
+   "line": 51,
+   "fn": "occupied",
+   "poolId": "",
+   "run": "The occupation's local collaborators include",
+   "files": [
+    "src/data/stressTypes.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13"
+   ]
+  }
  },
  {
   "n": 181,
@@ -2902,7 +3840,16 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/domain/summary/settlementQuickGuide.js",
+   "line": 893,
+   "fn": "",
+   "evidence": "the reader's source (file present at the joined tree; PLAUSIBLE)",
+   "holders": [
+    "r2-code-b-2026-11-13"
+   ]
+  }
  },
  {
   "n": 182,
@@ -2918,7 +3865,11 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "(not traced)",
+   "evidence": "no fixed run found; the reader named no source file"
+  }
  },
  {
   "n": 183,
@@ -2966,7 +3917,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/institutionDescColour.js",
+   "line": 265,
+   "fn": "DESC_VARIANT_COLOUR_DECLARATIONS",
+   "poolId": "",
+   "run": "The industrial step from what the mine",
+   "files": [
+    "src/data/institutionDescColour.js",
+    "src/data/institutionDescVariants.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13"
+   ]
+  }
  },
  {
   "n": 186,
@@ -3062,7 +4028,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/institutionServices.js",
+   "line": 395,
+   "fn": "Brickmaker",
+   "poolId": "",
+   "run": "Standard-size fired clay bricks by the cartload",
+   "files": [
+    "src/data/institutionServices.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13"
+   ]
+  }
  },
  {
   "n": 192,
@@ -3110,7 +4090,21 @@
   "severity": "MED",
   "section7": true,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/economy/economicState.js",
+   "line": 366,
+   "fn": "desc",
+   "poolId": "",
+   "run": "bring money in here, but it goes",
+   "files": [
+    "src/generators/economy/economicState.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 195,
@@ -3126,7 +4120,11 @@
   "severity": "MED",
   "section7": true,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "(not traced)",
+   "evidence": "no fixed run found; the reader named no source file"
+  }
  },
  {
   "n": 196,
@@ -3174,7 +4172,11 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "(not traced)",
+   "evidence": "no fixed run found; the reader named no source file"
+  }
  },
  {
   "n": 199,
@@ -3190,7 +4192,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/components/new/tabs/power/PowerStrata.jsx",
+   "line": 198,
+   "fn": "mobile",
+   "poolId": "",
+   "run": "Institutions behind this power",
+   "files": [
+    "src/components/new/tabs/power/PowerStrata.jsx"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r2-code-b-2026-11-13"
+   ]
+  }
  },
  {
   "n": 200,
@@ -3206,7 +4222,24 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/dossierStateProse/power.generated.js",
+   "line": 3055,
+   "fn": "pools",
+   "poolId": "",
+   "run": "streets now, nobody is watching its officials",
+   "files": [
+    "src/data/dossierStateProse/power.generated.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ]
+  }
  },
  {
   "n": 201,
@@ -3254,7 +4287,26 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 7544,
+   "fn": "pools",
+   "poolId": "",
+   "run": "would not guess at the trouble from",
+   "files": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r3-tabs-2026-11-13",
+    "w2-fix-data-2026-11-13",
+    "coherence-upkeep-2026-11-12",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ]
+  }
  },
  {
   "n": 204,
@@ -3287,7 +4339,26 @@
   "section7": false,
   "at": "exact",
   "tabOk": true,
-  "check": "sampled: holds (prosperity Poor)"
+  "check": "sampled: holds (prosperity Poor)",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 1393,
+   "fn": "pools",
+   "poolId": "",
+   "run": "the town is paying it from money",
+   "files": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r3-tabs-2026-11-13",
+    "w2-fix-data-2026-11-13",
+    "coherence-upkeep-2026-11-12",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ]
+  }
  },
  {
   "n": 206,
@@ -3303,7 +4374,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/domain/display/defenseDisplay.js",
+   "line": 407,
+   "fn": "caps",
+   "poolId": "",
+   "run": "No deterrence beyond force",
+   "files": [
+    "src/domain/display/defenseDisplay.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-c-leaves-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 207,
@@ -3367,7 +4453,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/economy/foodBalance.js",
+   "line": 63,
+   "fn": "grownShareOf",
+   "poolId": "",
+   "run": "The occupiers are fed from local stores",
+   "files": [
+    "src/generators/economy/foodBalance.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r2-code-a-2026-11-13"
+   ]
+  }
  },
  {
   "n": 211,
@@ -3415,7 +4515,11 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "(not traced)",
+   "evidence": "no fixed run found; the reader named no source file"
+  }
  },
  {
   "n": 214,
@@ -3447,7 +4551,16 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/domain/summary/tonightSheet.js",
+   "line": 693,
+   "fn": "",
+   "evidence": "the reader's source (file present at the joined tree; PLAUSIBLE)",
+   "holders": [
+    "r2-code-b-2026-11-13"
+   ]
+  }
  },
  {
   "n": 216,
@@ -3464,7 +4577,34 @@
   "section7": false,
   "at": "exact",
   "tabOk": true,
-  "check": "CONFIRMED: magicSupplement 0, magicOffset 0, magicPct 0"
+  "check": "CONFIRMED: magicSupplement 0, magicOffset 0, magicPct 0",
+  "writer": {
+   "file": "src/domain/display/dossierViewModel.js",
+   "line": 267,
+   "fn": "if",
+   "poolId": "",
+   "run": "from outside, and its own land does",
+   "files": [
+    "src/domain/display/dossierViewModel.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "w2-c-leaves-2026-11-13",
+    "coherence-upkeep-2026-11-12",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ],
+   "standsAtHolderTip": {
+    "w2-fix-data-2026-11-13": true,
+    "w2-c-leaves-2026-11-13": true,
+    "coherence-upkeep-2026-11-12": true,
+    "w2-write-2026-11-13": true,
+    "w2-write-side-eco-2026-11-13": true,
+    "w2-write-side-rest-2026-11-13": true
+   }
+  }
  },
  {
   "n": 217,
@@ -3481,7 +4621,34 @@
   "section7": false,
   "at": "exact",
   "tabOk": true,
-  "check": "CONFIRMED: hamlet of 87"
+  "check": "CONFIRMED: hamlet of 87",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 2596,
+   "fn": "pools",
+   "poolId": "",
+   "run": "are told which few streets to avoid",
+   "files": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r3-tabs-2026-11-13",
+    "w2-fix-data-2026-11-13",
+    "coherence-upkeep-2026-11-12",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ],
+   "standsAtHolderTip": {
+    "r3-tabs-2026-11-13": true,
+    "w2-fix-data-2026-11-13": true,
+    "coherence-upkeep-2026-11-12": true,
+    "w2-write-2026-11-13": true,
+    "w2-write-side-eco-2026-11-13": true,
+    "w2-write-side-rest-2026-11-13": true
+   }
+  }
  },
  {
   "n": 218,
@@ -3497,7 +4664,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/safetyProfile.js",
+   "line": 328,
+   "fn": "wallNote",
+   "poolId": "",
+   "run": "A mix of safer and more exposed",
+   "files": [
+    "src/generators/safetyProfile.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 219,
@@ -3513,7 +4694,11 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "(not traced)",
+   "evidence": "no fixed run found; the reader named no source file"
+  }
  },
  {
   "n": 220,
@@ -3529,7 +4714,16 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/domain/summary/tonightSheet.js",
+   "line": 693,
+   "fn": "",
+   "evidence": "the reader's source (file present at the joined tree; PLAUSIBLE)",
+   "holders": [
+    "r2-code-b-2026-11-13"
+   ]
+  }
  },
  {
   "n": 221,
@@ -3737,7 +4931,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/arrivalProse.js",
+   "line": 267,
+   "fn": "dominant",
+   "poolId": "",
+   "run": "Sacks of herbs and spices fill the",
+   "files": [
+    "src/data/arrivalProse.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 234,
@@ -3753,7 +4962,21 @@
   "severity": "MED",
   "section7": true,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/economy/incomeLineSiblings.js",
+   "line": 74,
+   "fn": "TIMBER_LINE",
+   "poolId": "",
+   "run": "forest provides sustainable timber revenue",
+   "files": [
+    "src/generators/economy/incomeLineSiblings.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 235,
@@ -3769,7 +4992,11 @@
   "severity": "MED",
   "section7": true,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "(not traced)",
+   "evidence": "no fixed run found; the reader named no source file"
+  }
  },
  {
   "n": 236,
@@ -3849,7 +5076,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/factionDynamics.js",
+   "line": 478,
+   "fn": "if",
+   "poolId": "",
+   "run": "Its priests look after their flocks and",
+   "files": [
+    "src/generators/factionDynamics.js",
+    "src/generators/power/claimStanding.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r3-code-c-2026-11-13"
+   ]
+  }
  },
  {
   "n": 241,
@@ -3913,7 +5155,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/safetyProfile.js",
+   "line": 567,
+   "fn": "if",
+   "poolId": "",
+   "run": "Petty theft, minor fraud, and opportunistic violence",
+   "files": [
+    "src/generators/safetyProfile.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 245,
@@ -3945,7 +5201,30 @@
   "severity": "HIGH",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/dossierStateProse/economy.generated.js",
+   "line": 6419,
+   "fn": "pools",
+   "poolId": "",
+   "run": "What the religious houses take in and",
+   "files": [
+    "src/data/dossierStateProse/economy.generated.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ],
+   "standsAtHolderTip": {
+    "w2-fix-data-2026-11-13": true,
+    "w2-write-2026-11-13": true,
+    "w2-write-side-eco-2026-11-13": true,
+    "w2-write-side-rest-2026-11-13": true
+   }
+  }
  },
  {
   "n": 247,
@@ -3961,7 +5240,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/institutionalCatalog.js",
+   "line": 935,
+   "fn": "INSTITUTION_FAMILIES",
+   "poolId": "",
+   "run": "Services mean the walk to the village",
+   "files": [
+    "src/data/institutionalCatalog.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 248,
@@ -3977,7 +5271,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/institutionServices.js",
+   "line": 1532,
+   "fn": "Citadel",
+   "poolId": "",
+   "run": "Attendance expected of all residents",
+   "files": [
+    "src/data/institutionServices.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13"
+   ]
+  }
  },
  {
   "n": 249,
@@ -3994,7 +5302,11 @@
   "section7": false,
   "at": "exact",
   "tabOk": true,
-  "check": "sampled: holds"
+  "check": "sampled: holds",
+  "writer": {
+   "file": "(not traced)",
+   "evidence": "no fixed run found; the reader named no source file"
+  }
  },
  {
   "n": 250,
@@ -4010,7 +5322,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/institutionServices.js",
+   "line": 813,
+   "fn": "Information",
+   "poolId": "",
+   "run": "Assemble merchants with compatible routes into shared",
+   "files": [
+    "src/data/institutionServices.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13"
+   ]
+  }
  },
  {
   "n": 251,
@@ -4106,7 +5432,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/safetyProfile.js",
+   "line": 26,
+   "fn": "DESPERATION_THEFT_DESC",
+   "poolId": "",
+   "run": "Hunger-driven theft of food, livestock, and stored",
+   "files": [
+    "src/generators/safetyProfile.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 257,
@@ -4122,7 +5462,30 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/components/new/tabs/MagicTab.jsx",
+   "line": 162,
+   "fn": "magicCoupling",
+   "poolId": "",
+   "run": "Reliance on magic",
+   "files": [
+    "src/components/new/tabs/MagicTab.jsx",
+    "src/components/new/tabs/OverviewTab.jsx",
+    "src/components/new/tabs/SubstrateTab.jsx",
+    "src/domain/coherence/magicWordsFindings.js",
+    "src/domain/coherence/pageCensusFindings.js",
+    "src/domain/display/dossierViewModel.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "w2-c-leaves-2026-11-13",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ]
+  }
  },
  {
   "n": 258,
@@ -4138,7 +5501,30 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/components/new/tabs/MagicTab.jsx",
+   "line": 162,
+   "fn": "magicCoupling",
+   "poolId": "",
+   "run": "Reliance on magic",
+   "files": [
+    "src/components/new/tabs/MagicTab.jsx",
+    "src/components/new/tabs/OverviewTab.jsx",
+    "src/components/new/tabs/SubstrateTab.jsx",
+    "src/domain/coherence/magicWordsFindings.js",
+    "src/domain/coherence/pageCensusFindings.js",
+    "src/domain/display/dossierViewModel.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "w2-c-leaves-2026-11-13",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ]
+  }
  },
  {
   "n": 259,
@@ -4154,7 +5540,26 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 8021,
+   "fn": "pools",
+   "poolId": "",
+   "run": "nothing it lives by would stop without",
+   "files": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r3-tabs-2026-11-13",
+    "w2-fix-data-2026-11-13",
+    "coherence-upkeep-2026-11-12",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ]
+  }
  },
  {
   "n": 260,
@@ -4362,7 +5767,20 @@
   "severity": "HIGH",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/power/rulingStructure.js",
+   "line": 317,
+   "fn": "generatePowerStructure (informalModifier: magic → \"mage-advised\")",
+   "run": "mage-advised",
+   "evidence": "hand trace at the joined tree (EXECUTED: read)",
+   "holders": [
+    "powers-follow-up-2026-11-13"
+   ],
+   "standsAtHolderTip": {
+    "powers-follow-up-2026-11-13": true
+   }
+  }
  },
  {
   "n": 273,
@@ -4378,7 +5796,21 @@
   "severity": "MED",
   "section7": true,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/economy/incomeLineSiblings.js",
+   "line": 19,
+   "fn": "LOCAL_COAL_SOLD_LINE",
+   "poolId": "",
+   "run": "is dug here and sold to the",
+   "files": [
+    "src/generators/economy/incomeLineSiblings.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 274,
@@ -4394,7 +5826,19 @@
   "severity": "MED",
   "section7": true,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/economy/tradeGoods.js",
+   "line": 143,
+   "fn": "bonuses",
+   "poolId": "",
+   "run": "duties, warehouse fees, and re-export premiums from",
+   "files": [
+    "src/generators/economy/tradeGoods.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": []
+  }
  },
  {
   "n": 275,
@@ -4410,7 +5854,24 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/dossierStateProse/economy.generated.js",
+   "line": 4578,
+   "fn": "pools",
+   "poolId": "",
+   "run": "The trade here is in the moving",
+   "files": [
+    "src/data/dossierStateProse/economy.generated.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "w2-fix-data-2026-11-13",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ]
+  }
  },
  {
   "n": 276,
@@ -4426,7 +5887,11 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "(not traced)",
+   "evidence": "no fixed run found; the reader named no source file"
+  }
  },
  {
   "n": 277,
@@ -4442,7 +5907,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/resourceGenerator.js",
+   "line": 382,
+   "fn": "if",
+   "poolId": "",
+   "run": "Complete production chain in place",
+   "files": [
+    "src/generators/resourceGenerator.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r3-code-c-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 278,
@@ -4458,7 +5938,26 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 6935,
+   "fn": "pools",
+   "poolId": "",
+   "run": "the less its defenders can do, and",
+   "files": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r3-tabs-2026-11-13",
+    "w2-fix-data-2026-11-13",
+    "coherence-upkeep-2026-11-12",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ]
+  }
  },
  {
   "n": 279,
@@ -4474,7 +5973,26 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 1087,
+   "fn": "pools",
+   "poolId": "",
+   "run": "would stop whatever did",
+   "files": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r3-tabs-2026-11-13",
+    "w2-fix-data-2026-11-13",
+    "coherence-upkeep-2026-11-12",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ]
+  }
  },
  {
   "n": 280,
@@ -4490,7 +6008,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/safetyProfile.js",
+   "line": 26,
+   "fn": "DESPERATION_THEFT_DESC",
+   "poolId": "",
+   "run": "Hunger-driven theft of food, livestock, and stored",
+   "files": [
+    "src/generators/safetyProfile.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 281,
@@ -4506,7 +6038,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/stressInstitutionEffects.js",
+   "line": 97,
+   "fn": "famine",
+   "poolId": "",
+   "run": "Helped engineer the original supply disruption that",
+   "files": [
+    "src/data/stressInstitutionEffects.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r2-code-a-2026-11-13"
+   ]
+  }
  },
  {
   "n": 282,
@@ -4667,7 +6213,26 @@
   "section7": false,
   "at": "exact",
   "tabOk": true,
-  "check": "CONFIRMED: no market on the roster"
+  "check": "CONFIRMED: no market on the roster",
+  "writer": {
+   "file": "src/generators/power/governanceNarrative.js",
+   "line": 481,
+   "fn": "if",
+   "poolId": "",
+   "run": "has been debating market levies for three",
+   "files": [
+    "src/generators/power/governanceNarrative.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "powers-follow-up-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ],
+   "standsAtHolderTip": {
+    "powers-follow-up-2026-11-13": true,
+    "coherence-upkeep-2026-11-12": true
+   }
+  }
  },
  {
   "n": 292,
@@ -4684,7 +6249,22 @@
   "section7": false,
   "at": "exact",
   "tabOk": true,
-  "check": "sampled: holds (factions Elder Council, Religious Authorities)"
+  "check": "sampled: holds (factions Elder Council, Religious Authorities)",
+  "writer": {
+   "file": "src/generators/power/governanceNarrative.js",
+   "line": 481,
+   "fn": "if",
+   "poolId": "",
+   "run": "The merchants have stopped attending the sessions",
+   "files": [
+    "src/generators/power/governanceNarrative.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "powers-follow-up-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 293,
@@ -4700,7 +6280,11 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "(not traced)",
+   "evidence": "no fixed run found; the reader named no source file"
+  }
  },
  {
   "n": 294,
@@ -4716,7 +6300,11 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "(not traced)",
+   "evidence": "no fixed run found; the reader named no source file"
+  }
  },
  {
   "n": 295,
@@ -4748,7 +6336,23 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/components/new/tabs/EconomicsTab.jsx",
+   "line": 837,
+   "fn": "names",
+   "poolId": "",
+   "run": "Needed, and not brought in",
+   "files": [
+    "src/components/new/tabs/EconomicsTab.jsx"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r2-code-b-2026-11-13",
+    "w2-c-leaves-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 297,
@@ -4764,7 +6368,26 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 7969,
+   "fn": "pools",
+   "poolId": "",
+   "run": "does better than its ground and roads",
+   "files": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r3-tabs-2026-11-13",
+    "w2-fix-data-2026-11-13",
+    "coherence-upkeep-2026-11-12",
+    "w2-write-2026-11-13",
+    "w2-write-side-eco-2026-11-13",
+    "w2-write-side-rest-2026-11-13"
+   ]
+  }
  },
  {
   "n": 298,
@@ -4796,7 +6419,21 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/generators/factionDynamics.js",
+   "line": 475,
+   "fn": "if",
+   "poolId": "",
+   "run": "tells people that both are right and",
+   "files": [
+    "src/generators/factionDynamics.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r3-code-c-2026-11-13"
+   ]
+  }
  },
  {
   "n": 300,
@@ -4812,7 +6449,22 @@
   "severity": "MED",
   "section7": false,
   "at": "exact",
-  "tabOk": true
+  "tabOk": true,
+  "writer": {
+   "file": "src/data/narrativeData.js",
+   "line": 108,
+   "fn": "river",
+   "poolId": "",
+   "run": "around a ferry crossing that became the",
+   "files": [
+    "src/data/narrativeData.js"
+   ],
+   "evidence": "git grep -n -F at the joined tree",
+   "holders": [
+    "r2-code-a-2026-11-13",
+    "coherence-upkeep-2026-11-12"
+   ]
+  }
  },
  {
   "n": 301,
