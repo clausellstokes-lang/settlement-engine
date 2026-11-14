@@ -1,5 +1,7 @@
 # NOLANE-1 HAND-BACK: the false lines no lane holds (kept current after every item)
 
+> **HANDED BACK at 12:4x on 2026-11-14.** The seat's count read 359,723 at the last waking; the remaining room could not hold a full cure with its reading and gates. The tip on origin is given in the chair message. Done: item 0's table (48d0805a0), LV-CAPITAL cured (b93ac6760), and ruling 3 read (7fdef7667). The next seat starts at WHAT IS LEFT, item 1, R2B-979 by the chair's ruling (1), then BAR-169/170, scoped below.
+
 Seat NOLANE-1, brief `origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-NOLANE-1.md`. Branch `lane/join-nolane-2026-11-14`, cut from the joined branch's tip **1e33be746** as it stood on origin when the seat began (the brief named 85e10f1e5; the merge seat had committed 035159bc7 and 1e33be746 since: registers and tests only).
 
 ## The laws worked to
@@ -142,7 +144,10 @@ None: LV-CAPITAL is display only.
 ## What is left (mine, in clean files, widest first)
 
 1. **R2B-979:** 461 towns, by the chair's ruling (1). It comes after the first three cures. `npcInteriorityRead.js` and `npcComponents.jsx`: the holders are to be checked by content; npcComponents is r2-code-b's.
-2. **BAR-169/170:** 65 towns, a fair tradition where no market or fair stands. `src/domain/traditions/genesis.js` / `TraditionsTab.jsx :: filterDeclared` (traditionCorpus.js is r2-code-b's).
+2. **BAR-169/170:** 65 towns, a fair tradition where no market or fair stands. **SCOPED, NOT BEGUN.**
+   - **The cure site:** `src/components/new/tabs/TraditionsTab.jsx` (no lane's file). Its filter declares only the motif ELEMENT's needs (`ELEMENT_NEEDS`, from `TRADITION_ELEMENTS`). The act `fair` (`traditionCorpus.js`, r2-code-b's file) declares none.
+   - **The one change:** the filter also takes the act's need, a local `ACT_NEEDS` of `fair → ['market']`. `market` is a registered presence atom (`facts/factVocabulary.js:267`), so no new word is needed. Display only, kind A: no draw moves.
+   - **Still to do:** the red arm over the births; a guard town (a fair in a town with a market still prints); the reading on World/Traditions in three towns (the smallest is a thorp, as in bar0-thorp-calm-rand-1 "Tyrby"); and the same filter on every other surface that prints the traditions.
 3. **LV-CANNOTPRODUCE:** 33 towns, and **BAR-274:** 19. `src/generators/economy/tradeGoods.js` (declared moves).
 4. **LV-MAGICNOTES:** ~28 towns. `src/generators/chainMagicSubstitution.js` (a declared move on `magicNote` only; `facts/magicSource.js :: MAGIC_NOTE_TRADITION` must carry any new note).
 5. **LV-PROCHOUSES:** 5, and **LV-OTHERNEED:** 5. `resourceChains.js` and `computeActiveChains.js`.
