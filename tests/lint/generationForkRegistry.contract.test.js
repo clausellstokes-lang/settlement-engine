@@ -170,7 +170,9 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
     // GS-2 one faction set (2026-10-31, ODQ §934.101): drawn 29 -> 26; the three retired rows were all drawn.
     // PEOPLE-4 TIES (2026-11-07, R-P7): drawn 27 -> 26, pure 46 -> 47 — generatePopulation|relationships measures pure (the step
     // provides `[]`; the ties are drawn at the coherence seam on their own family), the register's own re-measure.
-    expect(tallyOf(GENERATION_TIER1, 'class'), 'the entropy tally').toEqual({ drawn: 25, label: 1, pure: 48 /* ALLEGIANCE-CAR1 (2026-11-08): drawn 26 -> 25, the retired corruptionPass|npcs row was drawn (measured); */ /* MERGE-234 (one tie writer): 47 -> 48, assembleSettlement|relationships measures pure (the seam mint's `::tie` fork retired) */ }); // LANDING-1 (2026-11-04): factionCorrelationPass measures drawn at the landed tip (6 of 63 rows draw); before that, lane CRISIS (2026-11-03): resolveCrisisCast joins: both its rows are pure (45 -> 47)
+    // R2-CODE-B-4 (ROUND THREE item 4, 2026-11-14): drawn 25 -> 27, pure 48 -> 46 — the register's own re-measure (32438f8d1):
+    // resolveCrisisCast's two rows measure drawn (the cast's one temporary person, named on the step's own fork, 2 of 63 rows).
+    expect(tallyOf(GENERATION_TIER1, 'class'), 'the entropy tally').toEqual({ drawn: 27, label: 1, pure: 46 /* ALLEGIANCE-CAR1 (2026-11-08): drawn 26 -> 25, the retired corruptionPass|npcs row was drawn (measured); */ /* MERGE-234 (one tie writer): 47 -> 48, assembleSettlement|relationships measures pure (the seam mint's `::tie` fork retired) */ }); // LANDING-1 (2026-11-04): factionCorrelationPass measures drawn at the landed tip (6 of 63 rows draw); before that, lane CRISIS (2026-11-03): resolveCrisisCast joins: both its rows are pure (45 -> 47)
     expect(GENERATION_TIER1.filter((row) => row.class === 'label').map((row) => `${row.step}|${row.key}`),
       'the single label row: a key that moves under a zero-draw step').toEqual(['generatePower|powerIntent']);
     // GS-2 (2026-10-31, ODQ §934.101): same 35 -> 34 and transformed 15 -> 13 in BOTH comparands below, the three
