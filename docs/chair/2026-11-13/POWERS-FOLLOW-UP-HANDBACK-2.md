@@ -1476,3 +1476,95 @@ count: each row is false only where its fact is against it, still to be read per
 - ww#377 "Undermanned and underfunded; ...": 34 print it; 31 where a garrison AND a watch stand (a weak proxy: the
   true fact is defenseProfile.readiness, to read).
 - pf#524 "The crown rules here directly.": 21 print it; 1 under occupation or a vacant seat (r2r-metropolis-8).
+
+# PART 8 — POWERS-14, the lane's ninth seat: the medium rows by width (kept current after every item)
+
+The lane was read back from origin at **48839038f** before the first act, equal to the brief's. The builder is POWERS-14 (the chair is
+session_01ACmDYZrFEVXyZEUg1NDxxC; brief docs/chair/2026-11-14/briefs/BRIEF-POWERS-14.md on the chair's lane). A fresh container:
+scratch worktree /home/user/p14 (branch p14, `npm ci` once; it wrote `core.hookspath=.husky/_` as for every seat before), detached
+/home/user/wttip (48839038f, node_modules linked from p14, for classing a red against the tip). Long runs go to /home/user/runs/.
+Pushes by docs/chair/2026-11-14/probes/POWERS-14/push.sh (POWERS-11's, pointed at p14, with the rev-list test and a refs compare).
+
+## P8.0 The rulings worked to (the brief's; the chair's messages copied below as they arrive)
+- THE LIST, in order: (1) P7.4's table WIDEST FIRST, beginning with the rows P7.7 read as false (the coaching inn under a crisis
+  first); each row READ ON ITS PAGE IN ITS TOWN before it is cured: false -> cured at its cause; true -> said so with the towns and
+  struck; another lane's writer -> FOR THE JOIN; the owner's words -> PARKED. (2) L4; the census candidate (courts); P4.8's other
+  lines by file. (3) One message to the chair after the first three cures, then on until the count's mark.
+- NO whole suite, NO final statement. Never rewrite a commit at or below 48839038f. Change only files this lane holds (by content).
+- NAMED, NOT MINE: the 189 stored modifier keys; #312 and ww#656, the PDF's and the Summary tab's chips (FOR THE JOIN); the card's
+  title on a man (PARKED); the writer-reach re-bank and the declaration pass's rows.
+
+## P8.1 Item by item
+- **#101 THE COACHING INN UNDER A CRISIS: CURED, de125480f** (the lighting census re-taken by its ritual, 67169e8b4: files 3274 ->
+  3275, titles 29480 -> 29483).
+  - READ ON THE PAGE (census2 render at 48839038f of 14 towns, and the bar's town by REVIEW-BAR-0's render). The 54 towns that print
+    the welcoming line: 21 calm, 33 under some crisis. FALSE: under a siege (r2s-under_siege-town-1: "nothing comes in by road",
+    "The siege has cut every road in"; bar0-city-under_siege+famine-rand-1) and a famine (r2s-famine-city-1, r2s-famine-metropolis-3:
+    "Rationing has begun", "every coin goes on food"). Its twin the transactional line ("Calls out departures ..." / "Sells places on
+    the coach and beds by the night"), FALSE under a siege: r2s-under_siege-metropolis-0, r2s-under_siege-metropolis-3,
+    r2r-metropolis-14. READ TRUE, kept: occupation (r2s-occupied-city-1, r2s-occupied-metropolis-2), plague (r2s-plague_onset-city-2,
+    -metropolis-2), monster pressure (r2s-monster_pressure-city-1: the drivers avoid the attacked roads, the inn still trades), war,
+    migration, insurgency, a slave revolt; the transactional line under a famine. Of P7.7's seven proxy towns: 3 false, 4 true.
+  - THE CAUSE: the title table's lines declared only a water and a content topic; nothing could refuse a line by the crisis in force.
+    The cure: TITLE_LINE_DECLARATIONS takes `excludes` crisis atoms of the fact vocabulary (welcoming `crisis: under_siege` +
+    `crisis: famine`, transactional `crisis: under_siege`), and poolMap.js :: settleTitleLines hands `excludes` to declarationAdmits
+    beside `needs`. A refused line takes the title's next admitted line, draw-free; the cautious line declares nothing.
+  - DECLARED MOVE (b14.sh + fd14.mjs over the 720): 6 births differ, only npcs[].presentation (impression, disposition, behaviour) of
+    the six keepers above. Nothing else; no draw added or moved.
+  - Guard: tests/generators/people/coachingInnUnderCrisis.test.js (the declarations; settleTitleLines under each crisis; the six false
+    towns now print the admitted line; guard towns r2r-city-0, r2s-occupied-city-1, r2s-plague_onset-city-2, r2s-famine-metropolis-0
+    keep theirs). Red at 48839038f on the six; the plant (poolMap reading `needs` only) reds the same six.
+  - A first spelling `'crisis: under_siege, famine'` was a FRESH presumed-things hit (the walker reads a three-word literal as naming
+    famine); spelled as two atoms (the same rule: refused if either holds), --check is the tip's own fresh 10 / stale 0.
+  - Holders by content (holders.sh over the 244 lanes): none but this lane for titleSecretsPresentations.js or poolMap.js.
+  - Gates: eslint 0; typecheck:domain:strict and typecheck:ratchet exit 0; fact-layers the tip's 2 named rises (crimeSignal.js,
+    castPowers.js); observed shapes exit 0; the twelve-birth grid exit 0. The 9 test files naming the touched files: 2 red, the
+    generator golden master and espionageDormancyFence's driven golden, red at 48839038f on the same 513 keys (classed in /home/user/wttip:
+    the carried list, the merge seat's re-record).
+  - CANDIDATES MET, NOT CURED (same table, same kind, not on P7.4): the coaching-inn keeper's secret "Changes tired horses for fresh
+    ones ... / Travellers whose coaches broke down have started comparing notes" prints under a siege (r2s-under_siege-town-1,
+    r2r-metropolis-14, r2s-under_siege-metropolis-0): present-tense travel under cut roads; the innkeeper's "the gossip of the road".
+    To read on their pages before any cure.
+
+## P8.2 EVERY NEW OR CHANGED LINE, with the towns it was read in (the owner's veto list)
+- No line new or reworded. RE-ROUTED (#101), each read on its page at de125480f: under a siege the keeper now prints "Pleasant, but
+  asks where you are going and when, and writes it down." (r2s-under_siege-town-1, r2s-under_siege-metropolis-0,
+  r2s-under_siege-metropolis-3, r2r-metropolis-14, bar0-city-under_siege+famine-rand-1, a siege + famine); under a famine "Sells
+  places on the coach and beds by the night; asks for payment first." (r2s-famine-city-1, r2s-famine-metropolis-3). The coaching inn
+  stands from the town up: the smallest town, the largest metropolis.
+
+## P8.3 FOR THE JOIN (this seat's)
+- (none yet)
+
+## P8.4 THE TABLE, brought current (P7.4's rows; each read true, cured, or left)
+| towns at 609ff6472 | row | state |
+|---|---|---|
+| 587 | ww#375 "Free of the criminals. Nobody at the head of ..." | left |
+| 120 | ww#850 "Holds the title; the decisions that matter are made by ..." | left |
+| 104 | ww#440 "Merchants with local reach; ..." | left |
+| 100 | bar #17 "Well-funded city watch; ..." | left |
+| 54 | bar #101 the coaching inn | CURED de125480f: 6 false (3 welcoming, 3 transactional) -> 0; 48 true, kept |
+| 52 | pf#520 "holds a third share in" | left |
+| 49 | bar #26 "Sells ore by the cart; ..." | left |
+| 41 | bar #62/#98 "Mother" on a man | PARKED |
+| 37 | pf#164 | left |
+| 34 | bar #18 | left |
+| 34 | ww#377 | left |
+| 33 | the census candidate "... courts are all ecclesiastical" | left |
+| 28 | pf#234 | left |
+| 21 | pf#524 | left |
+| 14 | pf#486 | left |
+| 13 | ww#1048 | left |
+| 2 | pf#481/#474/#488 "Acting Fixer" | left |
+
+## P8.5 WHAT IS LEFT, line by line
+- P8.4's rows marked left, widest first by FALSE count (each read on its page first); L4; P4.8's other lines; P4.7's and P5.10's rows.
+- The two #101 candidates of P8.1 (the keeper's present-tense travel secret under a siege; the innkeeper's road gossip).
+
+## P8.6 THIS SEAT'S INSTRUMENTS (docs/chair/2026-11-14/probes/POWERS-14/)
+- b14.sh <tree> <out> [seeds] [n]: the 720 (or a list) born in the census shape, the whole record per birth (about 30 s at n=4);
+  q.mjs <births> <expr over (s,key)>: rows of a births run; fd14.mjs <a> <b>: the field diff by path, births and leaves;
+  atom.mjs: the declaration rule under each crisis; holders.sh <file>...: the lanes holding a file by content (fetch
+  `+refs/heads/lane/*:refs/remotes/origin/lane/*` first); gates.sh <tree> <logdir> <files>: eslint, presumed things, both type
+  gates, the grid, fact layers, observed shapes, each through gate-tail; push.sh. Pages: CENSUS-2's census2.sh with --seeds
+  (inn.seeds, inn6.seeds) and REVIEW-BAR-0's render2.sh for bar0- seeds, both archived from their lanes to /home/user/probes/.
