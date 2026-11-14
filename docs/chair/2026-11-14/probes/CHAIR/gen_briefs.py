@@ -772,6 +772,51 @@ SEATS2['W2-WRITE-8'] = dict(
 )
 
 
+SEATS2['W2-WRITE-SIDE-REST-3'] = dict(
+    title="W2-WRITE-SIDE-REST-3 · the corpus lane's other blocks: what is left of D and E, the census",
+    branch='lane/w2-write-side-rest-2026-11-13', tip='eac3498e', statement=False,
+    intro=("You are W2-WRITE-SIDE-REST-3, the third seat on the corpus lane's second side branch of the settlement-engine integration program "
+           "(lane/w2-write-side-rest-2026-11-13, cut from the corpus lane at dcd4759b0). The lane cures the false lines an independent reader found in the "
+           "dossier's written corpus. It is split by block among three seats; YOUR BLOCKS are every block but DS-DEF and DS-ECO (DS-POW, DS-GEN, DS-SUP, DS-STR, "
+           "DS-WAR, DS-FTH, DS-REL, DS-POP, DS-CND, DS-HK). The second seat did most of part D and began E, and handed back at its context mark with every row "
+           "left written out with its reading. Yours: those rows and the census; then you hand your tip to the chair. You make no statement: the main seat "
+           "merges your branch."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your branch, docs/chair/2026-11-13/W2-WRITE-SIDE-REST-HANDBACK.md: the section \"SEAT 2\" WHOLE (how the instruments are re-made from nothing; "
+          "the second seat's items with their towns; the rows already cured on a lane; the rows whose true writer is not the corpus; D LEFT; E LEFT, LINE BY "
+          "LINE WITH ITS READINGS: THAT IS YOUR LIST; F LEFT; the shared files moved, for the merge) and the sections \"Instruments\" and \"For the main seat "
+          "before it merges\" above it; and docs/chair/2026-11-13/probes/W2-WRITE-5/README.md (the instruments).\n"
+          "3. THE LISTS: `git fetch origin lane/round-3-cut-2026-11-13`: docs/chair/2026-11-13/ROUND-3-CUT.json and ROUND-3-CUT-INCREMENT.json (key `lines`: each "
+          "line's town, sentence, fact, writer; query by script, never print)."),
+    work=("THE WORK, in this order, each cause its own commit, red first, pushed as made:\n"
+          "1. D LEFT: #489 DS-GEN-14 FOUNDED-YOUNG v3 (re-said without the claim of one trade); #1076 DS-POW-4 Contested v3 with E's Contested rows. #72 (a "
+          "one-member Elder Council) waits on the PARKED council member count: listed, left.\n"
+          "2. E LEFT, pool by pool as the hand-back lists it, the high first. THE SECOND SEAT'S READINGS AND RECOMMENDATIONS ARE ACCEPTED BY THE CHAIR AS THE FORM "
+          "OF EACH CURE, and each line is still READ WHERE IT PRINTS before it is pushed: DS-POW-4 Contested v1 and v3 say what the label holds (the challenger "
+          "could now take the hall), never who has more people or more power; DS-POW-5 council v1, v2, v4 declared off a seat that is one person (`no ruler: "
+          "lord`, a guard at a Royal Authority town), the headman and the one-member council left on the parked word; council v3 off a succession crisis, the "
+          "religious conversion towns read before any second declaration; theocracy v3: no registered condition reads a rival creed: re-said without the creed, "
+          "and NAMED for the main seat's faith reading; DS-POW-6 capture ADVANCING v1 to v3 read at this tip first, any line that asserts buying under way "
+          "re-said as a disposition; RECOVERING v1 declared on organised crime through a registered condition, or re-said; the AGENT rung read in its town; "
+          "DS-GEN-16 LEGACY-UNRESOLVED v1 and v2 and DS-WAR-5's Tonight line: FIND THE TRUE WRITER FIRST (a slot filler or another surface is named with its "
+          "file and left); DS-GEN-13 craft guilds v1 re-said without the denial; \"a market, no guild\" v2 and v3 read in their towns; DS-GEN-17 GARRISONED v2 "
+          "re-said without the payment (the survival band is parked); DS-FTH-4 hunted v2's armed men and DS-GEN-18 BOUGHT-IN v8's carts read where they print "
+          "(a port; an isolated village; a town with no force).\n"
+          "3. F LEFT: the measuring seat's command over your generated files (power, general, stressors, warFaith, and economy for DS-SUP-2) at dcd4759b0 and "
+          "at your tip (`git fetch origin lane/census-2-2026-11-13`; `mkdir -p <scratch>/c2 && git archive origin/lane/census-2-2026-11-13 "
+          "docs/chair/2026-11-13/probes/CENSUS-2 | tar -x -C <scratch>/c2`; `sh <scratch>/c2/docs/chair/2026-11-13/probes/CENSUS-2/census2.sh <tree root> <an "
+          "out-dir outside the repository> 4 --files <your files, comma-separated>`, to a file, about twelve minutes each): every hit read against its town (a "
+          "hit is a candidate), cured or named; the count per kind at both.\n"
+          "THE SEVEN FAITH POOLS the hand-back names are NOT yours to change: the main seat cures them after it merges the integration line. The crown lines in "
+          "self-governing wartime towns are not corpus lines (the hand-back names their four files): left.\n"
+          "LAST: bring the hand-back current under a heading SEAT 3 (every row with what prints after; what is left; the shared files your branch moved, for the "
+          "merge) and send the chair ONE message: your tip, the counts, no statement.\n" + CORPUS2),
+    merges='',
+    when="for a stop that blocks everything you have left, when your blocks are done (the tip, the counts), and for a hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = SEATS2[seat]
     head = (
