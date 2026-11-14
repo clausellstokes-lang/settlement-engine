@@ -7,7 +7,13 @@
  * the home.
  *
  * The reference below is the generator's own `hasInst` as it stood at e1b2f9c1f, copied verbatim,
- * so the home's answers are proven equal to the answers the generator gave.
+ * so the home's answers are proven equal to the answers the generator gave, WITH THE CHAIR'S LATER
+ * RULINGS APPLIED BY NAME (UPKEEP-9, 2026-11-14, re-keyed by identity at the capacity merge c448bb3a0,
+ * where this file went red: the capacity branch's census did not run tests/domain): G3s (UPKEEP-CAPACITY
+ * C4b) a wayside shrine has no clergy, so `divineShrine` loses 'shrine'; G5 (C6) the alchemist is a trade
+ * and the casters are every magic house of the roster flags but the alchemist's, so `arcane` gains 'mage'
+ * and 'scroll scribe'; G3 (C4a) the walk to another's church is fabric, not a house, so the generator hands
+ * the home the HOUSED roster (`housedOf`, which drops the fabric rows) and the source pin reads that call.
  */
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -22,10 +28,10 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const referenceOf = (institutions) => {
   const hasInst = (...kws) => institutions.some((i) => kws.some((kw) => nativeSemanticName(i).toLowerCase().includes(kw)));
   return {
-    arcane: hasInst('wizard', 'mages', 'arcane', 'enchant', 'spellcasting', 'academy of magic', 'mages\' district'),
+    arcane: hasInst('wizard', 'mages', 'arcane', 'enchant', 'spellcasting', 'academy of magic', 'mages\' district', 'mage', 'scroll scribe'), // G5 (C6)
     arcaneGuild: hasInst('mages\' guild', 'wizard\'s tower', 'arcane academy', 'mages\' district', 'academy of magic'),
     divine: hasInst('cathedral', 'monastery', 'great cathedral', 'parish church'),
-    divineShrine: hasInst('shrine', 'temple', 'friary'),
+    divineShrine: hasInst('temple', 'friary'), // G3s (C4b): a wayside shrine has no clergy
     divineStrong: hasInst('cathedral', 'monastery', 'great cathedral'),
     druid: hasInst('druid circle', 'grove shrine', 'elder grove', 'sacred grove'),
     wardens: hasInst('warden\'s lodge'),
@@ -46,6 +52,7 @@ const ROSTERS = [
   [{ name: 'Teleportation circle' }, { name: 'Healer\'s house' }, { name: 'Smugglers\' den' }],
   [{ name: 'Free elder council' }, { name: 'Outlaw camp' }, { name: 'Temple of the Sun' }, { name: 'Friary' }],
   [{ name: 'Enchanter\'s workshop' }, { name: 'Arcane academy' }, { name: 'Monastery' }],
+  [{ name: 'Wayside shrine' }, { name: 'Scroll scribe' }], // UPKEEP-9: the two re-keyed rows, exercised
 ];
 
 describe('the defence traditions are read by the roster\'s defence home', () => {
@@ -56,7 +63,7 @@ describe('the defence traditions are read by the roster\'s defence home', () => 
 
   test('defenseGenerator.js reads no institution name: no nativeSemanticName, no hasInst', () => {
     const src = readFileSync(join(ROOT, 'src/generators/defenseGenerator.js'), 'utf8');
-    expect(src).toMatch(/defenseTraditionNamesOf\(institutions\)/);
+    expect(src).toMatch(/defenseTraditionNamesOf\(housedOf\(institutions\)\)/); // G3 (C4a): the housed roster
     expect(src).not.toMatch(/nativeSemanticName/); // anchored: the line above proves this is the generator, asking the home
     expect(src).not.toMatch(/\bhasInst\s*\(/); // anchored: the same read, proven above to be the generator's source
   });
