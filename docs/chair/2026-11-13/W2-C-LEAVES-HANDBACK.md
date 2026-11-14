@@ -1147,3 +1147,44 @@ Out dirs (container-local, lost on restart): /home/user/c7/c2tip, /home/user/c7/
 - Probes: /home/user/c7/probe/tri8.census.jsx + tri8.sh (`sh tri8.sh <tree> <corpus.ndjson.gz> <out.ndjson>`: the
   three surfaces' pills per town) and agree8.mjs (`TREE=<tree> node agree8.mjs <out.ndjson>`); copied to
   docs/chair/2026-11-14/probes/W2-C-LEAVES-7/ at the hand-back.
+
+# PART 8 — the eighth seat (W2-C-LEAVES-8, 2026-11-14, from f55d339d7)
+
+**Seat:** the Claude Code session session_01ACmDYZF9c4QR7gN3GNbVRr; the chair is session_01ACmDYZrFEVXyZEUg1NDxxC.
+Assignment: docs/chair/2026-11-14/briefs/BRIEF-W2-C-LEAVES-8.md on lane/chair-2026-11-08 (self-contained: THE LIST
+1-4 time-boxed at a count of 180,000, then THE CLOSE 5-7). Origin read back at the start: 4576cfc6a (the brief's).
+Scratch worktree <scratchpad>/wt (local branch w8); the seat's start tree <scratchpad>/b8 (git archive of 4576cfc6a);
+corpora born there: the 720 (SECOND-WAVE-CENSUS/births.mjs) and the fresh 180 (probes/W2-C-LEAVES-4/birthsR.mjs,
+fresh.txt). Full history fetched at the start: shallow false; merge bases 817980b33 and 69b53decd; the line's tip
+976db5b19. EXECUTED = run and read; PLAUSIBLE = read from code.
+
+## The chair's rulings to this seat by message (copied in; the messages are not on the branch)
+- 04:37 UTC: (1) THE LANE'S TIP IS f55d339d7, not the brief's 4576cfc6a: two documents-only commits of the seventh seat
+  after its hand-back. NOT A STOP: start from f55d339d7; never rewrite a commit at or below it. (2) THE BRIEF GOVERNS over
+  that addendum's "rows 1-3 are LEFT FOR AFTER THE JOIN": the lane's own rising row first; the court rows and the four
+  added rows follow inside the time-box. (3) A HAZARD BITTEN TWICE: a push with nothing to send falls into the pre-push
+  hook's whole suite, and tests in it (tests/scripts/implementationPackets.test.js, implementationSession.test.js) run
+  git against the real repository from a linked worktree. BEFORE EVERY PUSH: `test -n "$(git rev-list
+  origin/<lane>..<local>)"`, else do not push.
+- (The tripwire met: the lane moved 4576cfc6a -> f55d339d7 while item 1 was in hand; the seat pushed nothing until the
+  chair's message above was read. Item 1's one unpushed commit was placed on f55d339d7 (a rebase of that commit only) and
+  its trailer corrected to this seat's own session before its first push.)
+
+## Items (this seat)
+| item | commit | measured (4576cfc6a → after) | guard |
+|---|---|---|---|
+| 1 the lane's rising row: the Services tab's "· covers" run-on cut | a2eaf6a6a | the 720 15 towns → 0 (need rows 346 = 346, every other row byte-equal); fresh 180 31 → 0 (664 = 664) | tests/components/servicesImpactOnce.test.jsx re-keyed (red at 4576cfc6a); every row's own need |
+
+Item 1 READ WHERE IT PRINTS: the census's chainNeedShown.js row is NOT that leaf's line. It prints on the Services tab
+(src/components/new/serviceComponents.jsx :: ServiceItem, from ServicesTab.jsx's X-50 plan); CENSUS-2's writers2.mjs
+traced it to chainNeedShown.js because that leaf's doc comment quotes the record's impact sentence (the longest fixed
+run). Kind d is 381 towns / 35 lines at both ends: EXPOSURE (an attribution move), not origin. Cured on the brief's
+ruling all the same (nothing is run on to the impact sentence). FOR THE OWNER'S VETO: X-50's "followed by the chains it
+covers" is retired by this ruling (the pin re-keyed, not loosened: it now asserts nothing follows the impact).
+
+## Calls taken without the chair (this seat)
+1. Item 1's writer is outside the lane's named family (the Services tab), but the brief rules that exact line; the cut is
+   display only, two files, no new words; the line (lane/integration-2026-11-07) does not touch either file (both bases).
+
+## STATUS (kept current)
+- Item 1 DONE a2eaf6a6a. Next: item 2 (the court rows).
