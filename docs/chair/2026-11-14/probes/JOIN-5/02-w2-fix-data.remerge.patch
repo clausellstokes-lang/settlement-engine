@@ -1,0 +1,19 @@
+commit e9601b6b3a42feef8fbb27f5d2dc5fba2f650390
+Merge: 50420cb72 e6e1893f4
+Author: Claude <noreply@anthropic.com>
+Date:   Sat Nov 14 15:52:57 2026 +0000
+
+    join(JOIN-5 · 2): merge lane/w2-fix-data-2026-11-13 at e6e1893f4 — the third landing
+    
+    Tip read back from origin at 15:52 UTC: e6e1893f450f5c9617af9064e0286cefad9022ea
+    (JOIN-4 merged 8e814883c at its merge 5; the lane has since merged the
+    joined line at fe225f12a, the merge base).
+    No conflict; nothing moved by both sides.
+    Verify: 10 files changed, each equal to the lane's blob.
+    LISTED for the close: tests/lint/.lighting-census-baseline.json — the lane's
+    re-take for one new test title (6f86693a5, the R3C-REVOLTNOTE guard) yielded
+    inside the lane's own merge of the joined line (81df6fb80), so its tip
+    carries the joined side's census.
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_01ACmDYazSdYC8v2Fj1WVnzT

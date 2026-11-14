@@ -28,6 +28,7 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF: none so far.
 | # | lane | tip merged (read at the merge, UTC) | tip last landed (JOIN-4) | merge commit | conflicts | listed for the close |
 |---|---|---|---|---|---|---|
 | 1 | r2-code-a-2026-11-13 | e5064e855 (15:48) | bc9194bf7 (JOIN-4 merge 3) | 1a039553d | none | — |
+| 2 | w2-fix-data-2026-11-13 | e6e1893f4 (15:52) | 8e814883c (JOIN-4 merge 5) | e9601b6b3 | none | `.lighting-census-baseline.json` (the lane's re-take 6f86693a5 yielded in its own merge 81df6fb80) |
 
 ## 3. Every code resolution
 
@@ -55,7 +56,12 @@ Pins (joined side kept inside the hunk): `tests/lint/proseWiringCensus.walker.te
 Merged clean though both sides moved them (for the close to re-derive or measure by its door): `tests/lint/presumedThings.register.json` (3, 6); `tests/lint/presumedThings.widened.register.json` (5, 6); `tests/generators/generationForkCensus.test.js` (4, the mint bound A1); `src/data/dossierStateProse/defense.generated.js` (6, generated); `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` (6); the pins of merge 6's four tests (§3). `docs/content/prose-shift-register.json` moved by w2-write alone (6): taken from the lane. `tests/lint/.tuning-register.json` moved by upkeep-monotone alone (P2): taken from the lane. `src/domain/summary/tonightSheet.js` (P1, clean-both with item 4). The goldens the rebuild's declared moves shift (P2): `tests/property/generatorGoldenMaster.test.js`, `tests/property/espionageDormancyFence.test.js` (red and named by that lane), with its re-keyed pins (its `UPKEEP-MONOTONE-BUILD.md` step 3); the edge bundles are stale against every src change since JOIN-3's rebuild (128ab68c7): rebuilt once at the close.
 
 
-**[J5] additions:** none so far.
+**[J5] additions:**
+
+| file | lanes whose side was not taken (JOIN-5 merge #) |
+|---|---|
+| `tests/lint/.lighting-census-baseline.json` | w2-fix-data (2): its re-take for one new test title (6f86693a5, the R3C-REVOLTNOTE guard) yielded inside the lane's own merge of the joined line (81df6fb80) |
+
 
 ## 5. Item 2 at the landed tip
 
