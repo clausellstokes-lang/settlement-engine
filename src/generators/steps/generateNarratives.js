@@ -14,7 +14,7 @@ import { generateEconomicViability } from '../economicGenerator.js';
 import { generateHistory } from '../historyGenerator.js';
 import { deriveLegacyAnnotations } from '../legacyGenerator.js';
 import { getTerrainType } from '../terrainHelpers.js';
-import { getInstFlags } from '../priorityHelpers.js';
+import { getInstFlags } from '../priorityHelpers.js'; import { hasInstitution } from '../../domain/facts/institutions.js';
 import { recordTrace } from '../../domain/trace.js';
 import { availableNativeResourceKeys } from '../../domain/resourceSemantics.js';
 
@@ -62,7 +62,7 @@ registerStep('generateNarratives', {
   const settlementReason = generateSettlementReason(
     tier, tradeRoute, null, { ...effectiveConfig, _seed: ctx._seed },
     economicViability?.metrics?.foodBalance || null,
-    { hasDocks },
+    { hasDocks, hasTravellerHouse: hasInstitution({ institutions }, 'tavern') }, // R2-CODE-A-4 (#154): an inn or a tavern serves travellers
   );
   // Stamp the pipeline seed onto the config so generateHistory's prose-variant selection
   // (draw-free) is stable per settlement — effectiveConfig itself carries no _seed.

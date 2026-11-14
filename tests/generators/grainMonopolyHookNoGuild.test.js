@@ -11,7 +11,7 @@ import { deriveSupplyRiskAnalysis } from '../../src/generators/economy/foodBalan
 
 describe('the grain-monopoly hook presumes no guild (CENSUS-3e)', () => {
   it('a deficit on a river route prints the monopoly hook without a guild', () => {
-    const { plotHooks } = deriveSupplyRiskAnalysis(1000, 'plains', [], { tradeRouteAccess: 'river' }, { deficit: 50, dailyProduction: 100, dailyNeed: 150 });
+    const { plotHooks } = deriveSupplyRiskAnalysis(1000, 'plains', [], { tradeRouteAccess: 'river' }, { deficit: 50, dailyProduction: 100, dailyNeed: 150, importCoverage: 25, importChannel: 'river trade' }); // R2-CODE-A item 6: the importer presumes food comes in by trade, so the double states the channel the real writer sets on a traded route
     const monopoly = plotHooks.find((h) => h.category === 'Trade Monopoly');
     expect(monopoly?.hook).toBe('One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.');
     expect(monopoly?.hook).not.toMatch(/guild/i); // anchored: the exact hook text is pinned on the line above

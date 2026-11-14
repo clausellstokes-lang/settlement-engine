@@ -115,13 +115,13 @@ export const FOUNDING_SEEDS = Object.freeze([
     archetype: 'besieged_holdout',
     settType: 'town',
     synopsis:
-      'Grown from a single logging operation whose owner refused to leave when the contract ended, this river town has turned its wheel through an economic rift, a great migration, a religious war, an occupation, an arcane catastrophe, and a siege a generation gone. Upheaval after upheaval of the first rank, and the mills still turn. A chronicle of endurance, and of what endurance costs.',
+      'Grown up around an important river ford, this town has turned its wheel through an economic rift, a great migration, a religious war, an occupation, an arcane catastrophe, and a siege a generation gone. Upheaval after upheaval of the first rank, and the mills still turn. A chronicle of endurance, and of what endurance costs.',
     firstDecade:
       'A settlement defined by survival: five or more major upheavals across its history, closing with a siege within the last generation, yet standing today under a hand its people tolerate.',
     receipts: Object.freeze([
       'Its remembered history carries five or more MAJOR upheavals.',
       'A major siege sits within its history.',
-      'It grew from a single logging operation whose owner refused to leave when the contract ended.',
+      'It developed around an important river ford.',
       'Its mills still stand among its institutions.',
       "Its governance today reads as 'Tolerated' (a survivor, still standing).",
     ]),

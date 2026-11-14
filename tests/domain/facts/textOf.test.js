@@ -28,6 +28,7 @@ describe('textOf', () => {
     expect(rows.every((r) => typeof textOf(r) === 'function' || typeof textOf(r) === 'string')).toBe(true);
     // 86 → 92 by cause: CENSUS-2f unit 2 (R-AP) declared the fish key's three bare lines and the faith key's bell, incense and hymn;
     // 92 → 99: CENSUS-2f unit 7 — fish.dominant[1] declares `fish` (R-AP amended) and six read bare lines are marked colour (R-AO)
-    expect(rows.filter((r) => typeof r === 'object').length).toBe(99);
+    // 99 → 105: R2-CODE-A item 4 — the port scene's four harbour rows declare `docks` and two shore rows (`coast`) join them
+    expect(rows.filter((r) => typeof r === 'object').length).toBe(105);
   });
 });

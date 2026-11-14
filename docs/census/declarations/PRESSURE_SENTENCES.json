@@ -21,7 +21,7 @@
       "lines": [
         {
           "lineId": "PRESSURE_SENTENCES.under_siege[0]",
-          "text": "${name} is surrounded. Supply lines are cut, morale is fracturing, and ${topNPCName}, the ${topNPCRole}, is deciding whether to negotiate terms or hold out for relief that may not be coming.",
+          "text": "${name} is surrounded. Supply lines are cut, morale is fracturing, and ${govFaction} is deciding whether to negotiate terms or hold out for relief that may not be coming.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -110,18 +110,20 @@
       "lines": [
         {
           "lineId": "PRESSURE_SENTENCES.famine[0]",
-          "text": "${name} is two bad weeks from genuine starvation; ${topFaction} controls the remaining ${commodity} reserves and is not discussing it openly.",
-          "needs": [],
+          "text": "${name} is two bad weeks from genuine starvation; the remaining ${food} reserves are in few hands, and whoever holds them is not discussing it openly.",
+          "needs": [
+            "institution: granary"
+          ],
           "excludes": [],
           "crisis": [
             "famine"
           ],
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
           "lineId": "PRESSURE_SENTENCES.famine[1]",
-          "text": "Since the harvest failed, whoever holds the food in ${name} holds the power, and at least three powers are fighting over the stores.",
+          "text": "Since ${failed}, whoever holds the food in ${name} holds the power, and at least three powers are fighting over ${stores}.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -143,7 +145,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.famine[3]",
-          "text": "The bakers of ${name} have started cutting the bread with things that are not flour; everyone can taste it, and the fact that nobody complains is the most alarming part.",
+          "text": "${bakers ? 'The bakers of ${name} have started cutting the bread with things that are not flour' : 'What people eat in ${name} is being stretched with things that are not food'}; everyone can taste it, and the fact that nobody complains is the most alarming part.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -154,13 +156,15 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.famine[4]",
-          "text": "${govFaction} of ${name} promised a fair share of the ${commodity} reserves last week, and little of it has reached the poor.",
-          "needs": [],
+          "text": "${govFaction} of ${name} promised a fair share of the ${food} reserves last week, and little of it has reached the poor.",
+          "needs": [
+            "institution: granary"
+          ],
           "excludes": [],
           "crisis": [
             "famine"
           ],
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
@@ -759,12 +763,14 @@
         {
           "lineId": "PRESSURE_SENTENCES.succession_void[5]",
           "text": "The succession in ${name} will be settled by the ${commodity} more than by any claim of blood or law: whoever the merchants and the creditors decide to deal with becomes, retroactively, the legitimate successor.",
-          "needs": [],
+          "needs": [
+            "market"
+          ],
           "excludes": [],
           "crisis": [
             "succession_void"
           ],
-          "colour": true,
+          "colour": false,
           "stop": []
         }
       ]
@@ -886,12 +892,14 @@
         {
           "lineId": "PRESSURE_SENTENCES.insurgency(street)[1]",
           "text": "The streets of ${name} have gone quiet, and everyone is waiting for something to break. ${govFaction} gives orders that are heard and not obeyed, and each one weakens it further.",
-          "needs": [],
+          "needs": [
+            "population: ≥ middling"
+          ],
           "excludes": [],
           "crisis": [
             "insurgency"
           ],
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
@@ -1184,7 +1192,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.wartime(losing)[2]",
-          "text": "Every capable pair of hands ${name} could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (a workshop closed for want of a master, a field unsown for want of a back) while ${govFaction} reports the settlement loyal and does not report the rest.",
+          "text": "Every capable pair of hands ${name} could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (${workshop ? 'a workshop closed for want of a master' : 'a trade left without its master'}, a field unsown for want of a back) while ${govFaction} reports the settlement loyal and does not report the rest.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -1223,7 +1231,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.religious_conversion[1]",
-          "text": "${name}'s religious community has formally split. Both sides hold services, keep records, and claim the legitimate succession. Every legal document that required religious sanction is now in a grey zone that the courts are not equipped to resolve quickly.",
+          "text": "${name}'s religious community has formally split. Both sides hold services, keep records, and claim the legitimate succession. Every legal document that required religious sanction is now in a grey zone that ${court ? 'the courts are' : govFaction + ' is'} not equipped to resolve quickly.",
           "needs": [
             "institution: temple"
           ],
@@ -1302,7 +1310,9 @@
         {
           "lineId": "PRESSURE_SENTENCES.slave_revolt[0]",
           "text": "The revolt in ${name} is too big to put down by force alone: the enslaved hold whole districts and are organised, and the governing power has not committed what crushing them would take. The slave trade has stopped. What is left to settle is what ${name} becomes afterwards, and who decides.",
-          "needs": [],
+          "needs": [
+            "population: ≥ middling"
+          ],
           "excludes": [],
           "crisis": [
             "slave_revolt"

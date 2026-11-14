@@ -82,7 +82,7 @@ describe('CENSUS-5b unit 2 · the wired baseline conflicts', () => {
 
   it('soak1k-18 (a thorp with no market) no longer stores the church\'s "market day activities"', () => {
     expect(TEXT[18].some((s) => s.includes('market day activities'))).toBe(false);
-    expect(TEXT[18].some((s) => s.includes('approval rights over who may trade and when'))).toBe(true);
+    expect(TEXT[18].some((s) => s.includes('want a say over who may trade and when'))).toBe(true); // R2-CODE-A item 5 (the chair's P3): the twin, re-keyed by identity, names no church and no reeve the thorp lacks
   });
 
   it('soak1k-252 (no market) no longer stores "sells the most at market"', () => {
