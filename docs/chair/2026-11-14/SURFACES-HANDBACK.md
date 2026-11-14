@@ -230,9 +230,19 @@ change had landed), 333f91edc (c63241707, before the food word's push). Every me
 - (r5) is partly on the joined line now: the merge of 333f91edc brought `tests/pdf/defenseForceNamesLabelled.test.jsx`
   (UPKEEP-14's cure of the raw force name); to be measured at (r5) before any change.
 
+## The Safety row — MEASURED, NO FAULT (no commit)
+
+- The row the chair named (Systems Health "Safety" with no value, 28 thorps by the no-lane seat's dump read): on the 772
+  dumps, 29 towns read "Safety" followed by "Viability" (5 thorps, 10 hamlets, 8 villages, 4 towns, a city, a
+  metropolis). In all 29 the record's Prosperity and Safety are both "Moderate", and the real tab, rendered
+  (`OverviewTab`, jsdom, the 29 records), prints "Safety · Moderate" in 29 of 29. THE DUMP DROPS A WORD THAT REPEATS
+  the one two lines above it (Prosperity's "Moderate"); the tag is never empty. `safetyBandOf(label) ?? label` is
+  non-empty in 772 of 772 records. Nothing to cure; `OverviewTab.jsx`'s Safety line is untouched. (The instrument
+  that reads a tab from the dump undercounts any value equal to its neighbour's: a note for the sweep's reader.)
+
 ## What is left, line by line
 
-1. The Safety row (28 thorps, no value): its own commit. NEXT.
+1. (the Safety row: measured, no fault, above.)
 2. Item 2: the PDF's deficit against the tab's Short (253) and the journal's Economics "Food:" row (729).
 3. (r3) the other spelling (165); (r4) "Abundant" under a siege (56); (r5); (r6); item 6 the stores' unit (6); item 7
    the connectivity row (with a system state).
