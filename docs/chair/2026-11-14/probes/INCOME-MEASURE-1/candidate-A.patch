@@ -1,0 +1,49 @@
+diff --git a/src/generators/economy/economicState.js b/src/generators/economy/economicState.js
+index 4c29f2423..2b048185e 100644
+--- a/src/generators/economy/economicState.js
++++ b/src/generators/economy/economicState.js
+@@ -386,6 +386,12 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
+           return nativeSemanticName(inst).toLowerCase().includes(keyword);
+         });
+       },
++      // CANDIDATE A (INCOME-MEASURE-1, scratch only): a resource row only where a house of its trade stands.
++      hasInstMatching = function (re) {
++        return institutions.some(function (inst) {
++          return re.test(nativeSemanticName(inst).toLowerCase());
++        });
++      },
+       hasIncomeSource = function (keyword) {
+         return incomeBuild.some(function (entry) {
+           return (entry.source || '').toLowerCase().includes(keyword.toLowerCase());
+@@ -448,6 +454,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
+             return exp.includes('iron') || exp.includes('ore');
+           })) &&
+           hasInstNamed('smith'))) &&
++      hasInstMatching(/\bmines?\b|mining|smith|smelt|forge|foundr|metal|armou?r|weapon/) &&
+       !hasIncomeSource('iron') &&
+       !hasIncomeSource('metal')
+     ) {
+@@ -469,6 +476,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
+     // resources (mountain_timber, shipbuilding_timber, timber).
+     if (
+       hasNearbyResource('managed_forest', 'timber') &&
++      hasInstMatching(/woodcut|lumber|sawmill|logging|forester/) &&
+       !hasIncomeSource('timber') &&
+       !hasIncomeSource('lumber')
+     ) {
+@@ -487,6 +495,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
+         exportsLower.some(function (exp) {
+           return exp.includes('fish') || exp.includes('herring');
+         })) &&
++      hasInstMatching(/fish/) &&
+       !hasIncomeSource('fish') &&
+       // A-11: a catch lands only from water — the world law's, or a fishing landing on the roster (not aerial docks, not inland salt).
+       !hasIncomeSource('maritime') && (generationWorldLaw.portKind !== 'none' || hasWaterAccessInstitution((institutions || []).filter((i) => /\bfish/i.test(nativeSemanticName(i) || ''))))
+@@ -506,6 +515,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
+         exportsLower.some(function (exp) {
+           return exp.includes('stone') || exp.includes('quarry');
+         })) &&
++      hasInstMatching(/quarr|mason|stonecut/) &&
+       !hasIncomeSource('stone') &&
+       !hasIncomeSource('quarry')
+     ) {

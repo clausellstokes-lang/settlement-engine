@@ -1,0 +1,5 @@
+tip false rows 476 in 402 towns (of 1352 resource rows): {"Stone Quarrying":131,"Fish & Preserved Produce":27,"Timber Trade":108,"Iron & Metalwork":198,"Fish & Maritime Produce":12}
+candA false rows 0 in 0 towns (of 836 resource rows): {}
+candB false rows 398 in 346 towns (of 1352 resource rows): {"Building Stone Sales":121,"Salt Sales":14,"Timber Trade":108,"Iron Ore Sales":80,"Clay Sales":5,"Precious Metal Sales":40,"Fish & Preserved Produce":11,"Fish & Maritime Produce":6,"Coal Sales":13}
+candC false rows 77 in 76 towns (of 953 resource rows): {"Iron & Metalwork":68,"Fish & Maritime Produce":6,"Stone Quarrying":3}
+candD false rows 0 in 0 towns (of 953 resource rows): {}

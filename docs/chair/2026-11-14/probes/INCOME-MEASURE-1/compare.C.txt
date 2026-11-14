@@ -1,0 +1,23 @@
+towns whose income table changes: 346 of 972 (720: 254)
+rows removed 399; rows retitled 0; rows added {}
+shares moved on kept rows: 948 rows; mean 3.32 points; largest 20 (rv5-under_siege-hamlet-5 Agricultural Rents 80->100)
+towns where anything beyond the income table moves: 38 (720: 23)
+by family (972 / 720): arrivalScene 14/11 · economicState.economicComplexity 13/9 · coherenceNotes 8/1 · economicState.prosperityStanding 6/4 · defenseProfile 5/3 · economicState.prosperity 5/4 · powerStructure 5/4 · simulationTrace 5/4 · history 4/4 · economicState.foodSecurity 3/2 · generationCoherenceReceipt 2/2 · economicState.primaryImports 1/1 · npcs 1/1 · relationships 1/1 · stress 1/1 · stressors 1/1 · prominentRelationship 1/1 · availableServices 1/0
+named fields (972 / 720): economicState.prosperity 5/4 · economicState.prosperityStanding 6/4 · economicState.economicComplexity 13/9 · economicState.foodSecurity 3/2 · powerStructure 5/4 · npcs 1/1 · history 4/4 · relationships 1/1 · defenseProfile 5/3 · arrivalScene 14/11 · stress 1/1 · coherenceNotes 8/1 · generationCoherenceReceipt 2/2 · simulationTrace 5/4
+prosperity moves: {"Prosperous -> Comfortable":2,"Poor -> Struggling":1,"Wealthy -> Prosperous":1,"Comfortable -> Moderate":1}
+complexity moves: {"Highly diversified -> Diversified":4,"Diversified market economy -> Specialized production and trade":9}
+  read r2r-hamlet-14 Iron & Metalwork 12% -> row gone · rows 1
+  read r2r-thorp-16 Iron & Metalwork 11% -> 11% "Coal is dug here and sold on to other towns, so this income stream leans on the trade route." · rows 2
+  read rv5-wartime-village-4 Iron & Metalwork 7% -> row gone · rows 3
+  read r2r-city-10 Stone Quarrying 3% -> row gone · rows 13
+  read r2r-metropolis-7 Stone Quarrying 3% -> row gone · rows 10
+  read rv5-wartime-village-3 Stone Quarrying 6% -> row gone · rows 4
+  read r2r-hamlet-42 Timber Trade 9% -> row gone · rows 1
+  read r2r-town-25 Timber Trade 8% -> 8% "Local forest provides sustainable timber revenue; managed felling keeps production consistent." · rows 7
+  read rv5-wartime-thorp-2 Timber Trade 9% -> row gone · rows 1
+  read r2r-city-42 Fish & Preserved Produce 5% -> 5% "" · rows 13
+  read r2s-famine-metropolis-2 Fish & Preserved Produce 4% -> row gone · rows 11
+  read rv5-under_siege-town-2 Fish & Preserved Produce 6% -> row gone · rows 9
+  read r2r-city-19 Fish & Maritime Produce 4% -> 4% "" · rows 13
+  read r2r-thorp-24 Fish & Maritime Produce 11% -> 11% "" · rows 2
+  read r2s-succession_void-town-0 Fish & Maritime Produce 8% -> 8% "" · rows 6

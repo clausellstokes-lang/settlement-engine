@@ -1,0 +1,39 @@
+diff --git a/src/generators/economy/economicState.js b/src/generators/economy/economicState.js
+index 4c29f2423..0b276798b 100644
+--- a/src/generators/economy/economicState.js
++++ b/src/generators/economy/economicState.js
+@@ -819,6 +819,34 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
+   // Sort income sources by percentage desc, then by CODEPOINT source order (NOT
+   // localeCompare) — this list is persisted in the settlement, so the tiebreak
+   // must resolve identically across devices/locales — must be LAST
++  // CANDIDATE B (INCOME-MEASURE-1, scratch only): the resource rows read the finished record.
++  {
++    const _rosterHas = (re) => instNamesLower.some((n) => re.test(n));
++    const _ground = (keys) => nativeAvailableResources.filter((r) => keys.some((k) => r.startsWith(k)));
++    const _sold = (re) => primaryExports.some((x) => re.test(String(x)));
++    const _TRADE = {
++      'Iron & Metalwork': { house: /\bmines?\b|mining|smith|smelt|forge|foundr|metal|armou?r|weapon/, goods: [
++        { keys: ['iron_deposit'], title: 'Iron Ore Sales', sold: /\biron\b|\bore\b/i },
++        { keys: ['coal_deposit'], title: 'Coal Sales', sold: /^coal\b/i },
++        { keys: ['precious_metal'], title: 'Precious Metal Sales', sold: /silver|gold|precious/i }] },
++      'Stone Quarrying': { house: /quarr|mason|stonecut/, goods: [
++        { keys: ['stone_quarry'], title: 'Building Stone Sales', sold: /stone|marble|granite/i },
++        { keys: ['river_clay', 'clay'], title: 'Clay Sales', sold: /\bclay\b|potter/i }] },
++      'Timber Trade': { house: /woodcut|lumber|sawmill|logging|forester/, goods: [
++        { keys: ['managed_forest', 'mountain_timber', 'shipbuilding_timber', 'timber'], title: 'Timber Trade', sold: /timber|lumber|plank/i }] },
++      'Fish & Preserved Produce': { house: /fish/, goods: [
++        { keys: ['river_fish', 'fishing_grounds'], title: null, sold: /fish|herring|seafood/i },
++        { keys: ['salt_flat', 'desert_salt'], title: 'Salt Sales', sold: /salt/i }] },
++    };
++    _TRADE['Fish & Maritime Produce'] = _TRADE['Fish & Preserved Produce'];
++    for (const e of incomeNormalized) {
++      const t = _TRADE[e.source]; if (!t || _rosterHas(t.house)) continue;
++      const g = t.goods.find((x) => _ground(x.keys).length) || null;
++      if (g && g.title) e.source = g.title;
++      else if (!g && /^Fish/.test(e.source)) e.source = 'Salt Sales'; // the dock's salt: no fish ground stands
++      e.desc = ''; // the title and share alone: no trade the town lacks is named
++    }
++  }
+   incomeNormalized.sort((a, b) => b.percentage - a.percentage || compareCodepoint(a.source, b.source));
+   for (const entry of incomeNormalized) entry.desc = trueIncomeDesc(entry.desc, { roster: instNamesLower, besieged: stressArr.includes('under_siege'), imports: primaryImports, exports: primaryExports, chains: activeChainsList, top: entry === incomeNormalized[0], source: entry.source, managedForest: hasResource(['managed_forest', 'shipbuilding_timber']), grainFailed: _foodRecord?.failedSource === 'grain' }); // UPKEEP-8: each income line says only what the finished record holds
+   const { label: baseProsperity } = computeBaseProsperity(

@@ -1,0 +1,5 @@
+tip towns rendered 972; towns printing a false row title on any surface 402; by surface|title {"tab:economics|Stone Quarrying":153,"pdf|Stone Quarrying":131,"foundry|Stone Quarrying":131,"world-export-player|Stone Quarrying":131,"world-export-dm|Stone Quarrying":131,"tab:economics|Fish & Preserved Produce":27,"pdf|Fish & Preserved Produce":27,"world-export-player|Fish & Preserved Produce":27,"world-export-dm|Fish & Preserved Produce":27,"tab:economics|Timber Trade":115,"pdf|Timber Trade":108,"foundry|Timber Trade":108,"world-export-player|Timber Trade":108,"world-export-dm|Timber Trade":108,"tab:economics|Iron & Metalwork":198,"pdf|Iron & Metalwork":198,"world-export-player|Iron & Metalwork":198,"world-export-dm|Iron & Metalwork":198,"tab:economics|Fish & Maritime Produce":12,"pdf|Fish & Maritime Produce":12,"world-export-player|Fish & Maritime Produce":12,"world-export-dm|Fish & Maritime Produce":12}
+  "r2r-city-10 tab:economics: Stone Quarrying"
+  "r2r-city-10 tab:economics: Contributes to Stone Quarrying - 3% of income"
+  "r2r-city-10 pdf: Stone Quarrying"
+D towns rendered 972; towns printing a false row title on any surface 0; by surface|title {}

@@ -1,0 +1,42 @@
+ FAIL  tests/generators/coherenceAgreeCures.test.js > the felling line: a wild stand is felled and sawn only where a wood house works it > r2r-thorp-32, -47, r2r-town-12, -30, r2r-city-46 and r2s-religious_conversion-thorp-1: mountain timber, no wood house, no felling line
+AssertionError: a stand nobody works is felled and sawn — 6 of 6 case(s) failed. This is the TRUE count: every case ran. A bare seed loop would have reported 1 and stopped at the first one.
+[0] r2r-thorp-32 — r2r-thorp-32: expected undefined to be 'Timber sourced from more distant fore…' // Object.is equality
+[1] r2r-thorp-47 — r2r-thorp-47: expected undefined to be 'Timber sourced from more distant fore…' // Object.is equality
+[2] r2r-town-12 — r2r-town-12: expected undefined to be 'Timber sourced from more distant fore…' // Object.is equality
+[3] r2r-town-30 — r2r-town-30: expected undefined to be 'Timber sourced from more distant fore…' // Object.is equality
+[4] r2r-city-46 — r2r-city-46: expected undefined to be 'Timber sourced from more distant fore…' // Object.is equality
+[5] r2s-religious_conversion-thorp-1 — r2s-religious_conversion-thorp-1: expected undefined to be 'Timber sourced from more distant fore…' // Object.is equality: expected [ …(6) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "[0] r2r-thorp-32 — r2r-thorp-32: expected undefined to be 'Timber sourced from more distant fore…' // Object.is equality",
++   "[1] r2r-thorp-47 — r2r-thorp-47: expected undefined to be 'Timber sourced from more distant fore…' // Object.is equality",
++   "[2] r2r-town-12 — r2r-town-12: expected undefined to be 'Timber sourced from more distant fore…' // Object.is equality",
++   "[3] r2r-town-30 — r2r-town-30: expected undefined to be 'Timber sourced from more distant fore…' // Object.is equality",
++   "[4] r2r-city-46 — r2r-city-46: expected undefined to be 'Timber sourced from more distant fore…' // Object.is equality",
++   "[5] r2s-religious_conversion-thorp-1 — r2s-religious_conversion-thorp-1: expected undefined to be 'Timber sourced from more distant fore…' // Object.is equality",
++ ]
+
+ ❯ expectNoSeedFailures tests/helpers/seedFailures.js:147:26
+    145|   const header = `${label} — ${scale} case(s) failed. This is the TRUE…
+    146|     + ` A bare seed loop would have reported 1 and stopped at the firs…
+    147|   expect(roster, header).toEqual([]);
+       |                          ^
+    148| }
+    149|
+ ❯ tests/generators/coherenceAgreeCures.test.js:524:25
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 4 passed (5)
+      Tests  2 failed | 172 passed (174)
+   Start at  13:05:10
+   Duration  15.99s (transform 3.62s, setup 92ms, import 6.26s, tests 25.62s, environment 0ms)
+
+[gate-tail] end:  13:05:27 up 25 min,  0 user,  load average: 1.26, 2.15, 1.51
+[gate-tail] full log: /tmp/gate-tail.5379.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

@@ -1,0 +1,23 @@
+towns whose income table changes: 434 of 972 (720: 319)
+rows removed 474; rows retitled 42; rows added {"Local Trades":47}
+shares moved on kept rows: 1230 rows; mean 3.06 points; largest 20 (r2r-village-12 Agricultural Rents 80->100)
+towns where anything beyond the income table moves: 48 (720: 29)
+by family (972 / 720): economicState.economicComplexity 16/10 · arrivalScene 15/12 · coherenceNotes 12/4 · economicState.prosperityStanding 9/6 · economicState.prosperity 8/6 · powerStructure 8/6 · defenseProfile 8/5 · simulationTrace 8/6 · economicState.foodSecurity 6/4 · history 5/5 · availableServices 3/1 · economicState.situationDesc 2/1 · generationCoherenceReceipt 2/2 · npcs 2/1 · relationships 2/1 · stress 2/1 · stressors 2/1 · economicState.primaryImports 1/1 · prominentRelationship 1/1
+named fields (972 / 720): economicState.prosperity 8/6 · economicState.prosperityStanding 9/6 · economicState.economicComplexity 16/10 · economicState.situationDesc 2/1 · economicState.foodSecurity 6/4 · powerStructure 8/6 · npcs 2/1 · history 5/5 · relationships 2/1 · defenseProfile 8/5 · arrivalScene 15/12 · stress 2/1 · coherenceNotes 12/4 · generationCoherenceReceipt 2/2 · simulationTrace 8/6
+prosperity moves: {"Prosperous -> Comfortable":3,"Comfortable -> Moderate":3,"Poor -> Struggling":1,"Wealthy -> Prosperous":1}
+complexity moves: {"Highly diversified -> Diversified":5,"Diversified market economy -> Specialized production and trade":11}
+  read r2r-hamlet-14 Iron & Metalwork 12% -> row gone · rows 1
+  read r2r-thorp-16 Iron & Metalwork 11% -> row gone · rows 1
+  read rv5-wartime-village-4 Iron & Metalwork 7% -> row gone · rows 3
+  read r2r-city-10 Stone Quarrying 3% -> row gone · rows 13
+  read r2r-metropolis-7 Stone Quarrying 3% -> row gone · rows 10
+  read rv5-wartime-village-3 Stone Quarrying 6% -> row gone · rows 3
+  read r2r-hamlet-42 Timber Trade 9% -> row gone · rows 1
+  read r2r-town-25 Timber Trade 8% -> row gone · rows 6
+  read rv5-wartime-thorp-2 Timber Trade 9% -> row gone · rows 1
+  read r2r-city-42 Fish & Preserved Produce 5% -> row gone · rows 12
+  read r2s-famine-metropolis-2 Fish & Preserved Produce 4% -> row gone · rows 11
+  read rv5-under_siege-town-2 Fish & Preserved Produce 6% -> row gone · rows 9
+  read r2r-city-19 Fish & Maritime Produce 4% -> row gone · rows 12
+  read r2r-thorp-24 Fish & Maritime Produce 11% -> row gone · rows 1
+  read r2s-succession_void-town-0 Fish & Maritime Produce 8% -> row gone · rows 4

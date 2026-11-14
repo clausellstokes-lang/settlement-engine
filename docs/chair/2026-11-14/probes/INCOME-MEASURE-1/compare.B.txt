@@ -1,0 +1,23 @@
+towns whose income table changes: 417 of 972 (720: 307)
+rows removed 0; rows retitled 351; rows added {"Building Stone Sales":122,"Salt Sales":22,"Clay Sales":9,"Coal Sales":78,"Iron Ore Sales":80,"Precious Metal Sales":40}
+shares moved on kept rows: 0 rows; mean 0.00 points; largest 0 (undefined undefined undefined->undefined)
+towns where anything beyond the income table moves: 0 (720: 0)
+by family (972 / 720): 
+named fields (972 / 720): 
+prosperity moves: {}
+complexity moves: {}
+  read r2r-hamlet-14 Iron & Metalwork 12% -> retitled Iron Ore Sales 12% · rows 2
+  read r2r-thorp-16 Iron & Metalwork 11% -> retitled Coal Sales 11% · rows 2
+  read rv5-wartime-village-4 Iron & Metalwork 7% -> retitled Precious Metal Sales 7% · rows 4
+  read r2r-city-10 Stone Quarrying 3% -> retitled Building Stone Sales 3% · rows 14
+  read r2r-metropolis-7 Stone Quarrying 3% -> retitled Building Stone Sales 3% · rows 11
+  read rv5-wartime-village-3 Stone Quarrying 6% -> retitled Coal Sales 8%,Clay Sales 6% · rows 5
+  read r2r-hamlet-42 Timber Trade 9% -> 9% "" · rows 3
+  read r2r-town-25 Timber Trade 8% -> 8% "" · rows 7
+  read rv5-wartime-thorp-2 Timber Trade 9% -> 9% "" · rows 3
+  read r2r-city-42 Fish & Preserved Produce 5% -> 5% "" · rows 13
+  read r2s-famine-metropolis-2 Fish & Preserved Produce 4% -> retitled Salt Sales 4%,Clay Sales 3% · rows 13
+  read rv5-under_siege-town-2 Fish & Preserved Produce 6% -> retitled Salt Sales 6% · rows 10
+  read r2r-city-19 Fish & Maritime Produce 4% -> 4% "" · rows 13
+  read r2r-thorp-24 Fish & Maritime Produce 11% -> 11% "" · rows 2
+  read r2s-succession_void-town-0 Fish & Maritime Produce 8% -> retitled Salt Sales 8% · rows 6

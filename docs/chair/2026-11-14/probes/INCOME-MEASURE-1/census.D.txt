@@ -1,0 +1,7 @@
+births 972; towns with a row of the four trades and no house of it: 38
+title | rows | house | raw+export | raw only | export only | none | no-house: chain partial/full on Resources | no-house: a carpenter/cooper/woodcarver | no-house: line blank | no-house trigger
+Iron & Metalwork | 456 | 456 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | {}
+Stone Quarrying | 51 | 51 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | {}
+Fish & Maritime Produce | 133 | 125 | 8 | 0 | 0 | 0 | 8 | 0 | 8 | {"fish ground":8}
+Timber Trade | 112 | 90 | 22 | 0 | 0 | 0 | 2 | 20 | 0 | {"shipbuilding_timber":17,"mountain_timber":5}
+Fish & Preserved Produce | 124 | 114 | 10 | 0 | 0 | 0 | 10 | 0 | 10 | {"fish ground":10}
