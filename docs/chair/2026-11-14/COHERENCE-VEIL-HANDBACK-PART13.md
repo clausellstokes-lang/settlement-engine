@@ -89,15 +89,37 @@ deploy, no golden's door, no pull request. **Nothing is applied anywhere but tho
 | **V8-1** (HIGH) THE BOUNDARY INVERTED | `_gallery_veil_name_search` restated: a boundary is any neighbour not in the blocking table, asked by a lookbehind and a lookahead (nothing consumed), where that end of the name is in the table; the cut-out of open names (`_name_ready`) puts its mark alone, and the marks are read inside each string (`_name_hits`, the open names' pass). NEW `_gallery_veil_name_bound()` (the table: the letters and digits, L* and N*, of Latin, Greek, Cyrillic, Armenian and Georgian and the ASCII digits, over the code points the preparation leaves: 1,434 in 101 ranges; what left the old `bnd`: 760 a prepared text can hold, Armenian punctuation U+055A..U+055F, U+0589, U+058A, U+10FB, the Common modifiers, Coptic, Glagolitic, Tifinagh, Ethiopic and Bamum letters, the Cyrillic combining marks) and NEW `_gallery_veil_name_pad(text)` (call 2: 1,486 code points written between spaces before the search's preparation, in a name's fold and a text made ready; never in the words' fold). Both from `veil-probe-12/gen-name-bound.mjs` (Unicode 17.0, Node 22.23). Rollback: two more drops by signature. 68 helpers | `gallerySecondHomes.js :: NAME_BOUND`, `NAME_PAD`, `namePad` (in `nameFold`, `madeReady`, `buildNameSearch`), the same literals | Red at ac0bb20a4's bytes (`veil-probe-12/out/V8-1-red-at-ac0bb20a4.txt`, a git archive): town-f, 13 strings sent in each of 8 reads; the new arm VEIL-12 THE NEIGHBOURS, 310 sent in each of 8 (2,480), 0 controls lost. Green (`out/V8-1-green.txt`): town-f 0 of 13 sent, f19 and f20 kept, 0 paths server against twin; THE NEIGHBOURS 0 sent, 0 gone; THE TABLE IS ONE (the table and the padded set, every code point of every plane; a hidden name with each code point of the basic plane on each side, 126,974 strings) 0 differ; guards 50 of 50 (galleryVeilHandRows 13, gallerySecondHomes 5, galleryVeilCures 32; born counts unmoved); run-all 35 of 37 (a07, d06), twin 15 of 15. Cost (`out/V8-1-cost.txt`, ms, 211 / before / after): cost8 [50 500 500] 103-118 / 212-228 / 204-245, [200 2000 2000] 817-883 / 2031-2191 / 2090-2182; run-all 3,000 deep 30 / 35 / 37, 200 x 5,000 303 / 339 / 332, 600 x 10,000 1206 / 1216 / 1303 | 6b55663e5 |
 | **Ruling (2)** THE IMPRESSION BY ITS WORDS, CLAUSE BY CLAUSE | `_gallery_veil_card`'s impression arm restated: withheld with a shut appearance only where a clause of the appearance and a clause of the impression hold one another, either way (call 3). NEW `_gallery_veil_clauses(jsonb)` (each string in the one fold, cut at the sentence stops, the dashes, `,` `;` `:`, 12 code points or more); `_pieces` and `_embeds` unchanged, so the pressure sentence and the annotation keep their sentence pieces. Rollback: one more drop by signature. 69 helpers. WHAT THE IMPRESSION IS BUILT FROM: the title's presentations (`titleSecretsPresentations.js :: TITLE_PRESENTATIONS`, through `poolMap.js :: titleLinesFor`) or the category's `NPC_PLOT_HOOKS` (`npcGenerator.js :: pickTitle`), drawn whole as `{impression, disposition, behaviour}`; the appearance from `NPC_AGE_DATA`, `NPC_BUILDS`, `NPC_FEATURES` and `NPC_WANTS` (`generateNPCAppearance`): nothing of the one is made from the other | `gallerySecondHomes.js :: clausePieces` NEW (the same cut), `withholdImpression` restated (the same test); `galleryVeil.js`'s call unchanged (its comment) | Red at 4e4ee0528's bytes (`veil-probe-12/out/R2-red-at-4e4ee0528.txt`, a git archive): THE FIVE HOMES re-keyed, 48 rows red (Saltmere appended and rewritten; rewritten wholly in Latin and Greek, a shared clause of eleven, a run across a comma: each in 8 reads), 0 paths server against twin; the 14 WITHHELD rows and the controls green by identity; THE CLAUSES ARE ONE absent. Green (`out/R2-green.txt`): 0 red, 0 paths; the cut one in both engines (the basic plane, 128 texts, and 38 plant strings); the arm live (the three marks taken out of the cut: 12 of the 14 WITHHELD rows red); guards 50 of 50 (13, 5, 32); run-all 35 of 37 (a07, d06), e06 PASS, twin 15 of 15; town-f unchanged; typecheck 1113 / 167, eslint 0. Born (`out/R2-born.txt`, `veil-probe-12/r2-born.probe.jsx`): 464 impressions on the guard's towns (both shapes); the default veil 0 -> 0 withheld, every appearance eye shut 464 -> 0, in each of the four reads, DM off and on, server and twin; all 464 share no clause with their own appearance | the commit carrying this row |
 
-## 4. WHAT IS LEFT, in order
+## 4. WHAT IS LEFT, in order (line by line, for the next seat)
 
-1. ~~V8-1 (HIGH), the boundary inverted.~~ Done (section 3).
-2. ~~Ruling (2) clause by clause~~ (done, section 3); ruling (5) on all four strings; R2.
-3. V8-3; V8-9; V8-2, V8-4, V8-5.
+1. ~~V8-1 (HIGH), the boundary inverted.~~ Done (section 3; 6b55663e5).
+2. ~~Ruling (2) clause by clause.~~ Done (section 3; df73d2865). Then, each its own commit, red first:
+   - **Ruling (5) on all four strings**: PART 12 section 7, first bullet, is the design (by identity in
+     `_gallery_apply_member_overrides` and the twin's `galleryVeil.js :: galleryPayloadFor`; the pressure sentence by its
+     two ends and by the words; the hand rows `veil-probe-11/hand/town-p.json` and `town-pc.json`; the reader's own hand
+     row, `REVIEW-VEIL-8/hand/town-g.json`, its gcov1 to gcov3 strings, must go). The born count was 0 of 240.
+   - **R2**: PART 12 section 7, second bullet (the processor match lowered as the engine lowers; its hand row).
+3. V8-3 (one pass, the reader's `hand/cost8.sql` 10,000 row within TWICE 211); V8-9 (no unbounded pattern, the closed
+   answer at any bound); then V8-2, V8-4, V8-5 (each one commit by identity, else the pack's WHAT 212 DOES NOT CLOSE).
+   NOTE for V8-3 and V8-9: the name search now carries two generated literals (`_gallery_veil_name_bound`,
+   `_gallery_veil_name_pad`) and asks its boundaries by lookaround; any batching of the alternation must keep the
+   lookarounds on every batch and the cut-out's mark alone (section 3, V8-1).
 4. B (V7-5, a07); C (V7-8, d06; R3 with it); D (the income row by its house).
-5. E, the acceptance run at ONE checksum; F (a) to (e); G, the owner's pack.
+5. E, the acceptance run at ONE checksum (and the cost law: TWICE 211; at V8-1 the cost8 rows of 500 + 500 and
+   2,000 + 2,000 already stood at 2.0 to 2.5 times 211 BEFORE this seat: V8-3 owns them); F (a) to (e); G, the pack.
+6. FOR THE CHAIR, with this hand-back: call 1 and call 2 (V8-1) and call 3 (ruling (2), section 0a), each vetoable;
+   call 3 (d) above all: the born impressions with every appearance eye shut go from 464 withheld (by identity) to 0
+   (by clauses), and an appearance amended by appending with no clause mark now lets the born wording arrive in the
+   impression. Both are what the ruling, as written, gives.
 
-## 5. How the instruments are re-made (this container's are gone with it)
+## 5. HANDED BACK AT THE COUNT (2026-11-14, after ruling (2))
+
+The count was read at the brief's points: 188,303 before the first builder (most of it the session's fixed context),
+243,383 after V8-1 was pushed. With about 57,000 left the seat built one more small cure (ruling (2)), reviewed its diff
+line by line, ran the guards (50 of 50), the acceptance run (35 of 37: a07, d06 only; e06 PASS; the twin 15 of 15)
+and the three gates itself, pushed it with this file, and hands back: the next item cannot be built AND read line by
+line inside the 300,000 mark. Nothing is running; nothing is half built; every commit is pushed.
+
+## 6. How the instruments are re-made (this container's are gone with it)
 
 - Cluster: `mkdir -p /var/tmp/v12pg /var/tmp/rv7; chown postgres:postgres both; su postgres -c
   "/usr/lib/postgresql/16/bin/initdb -D /var/tmp/v12pg --locale=C.UTF-8 -E UTF8 --auth=trust -U postgres"`; append
