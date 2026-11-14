@@ -4522,6 +4522,56 @@ SEATS2['UPKEEP-15'] = dict(
 )
 
 
+SEATS2['R3-CODE-C-10'] = dict(
+    title="R3-CODE-C-10 · round three's code lane, a short last seat: the herding line, the fished-out water, the famine line's half, the addendum",
+    branch='lane/r3-code-c-2026-11-13', tip='28ac3b08', statement=False,
+    intro=("You are R3-CODE-C-10, a SHORT LAST SEAT on round three's code lane of the settlement-engine integration program "
+           "(lane/r3-code-c-2026-11-13). The lane holds cures in domain, generator and display files of the false lines round three's readers "
+           "found. The ninth seat cured four more rows of the release bar and handed back naming three things this lane can still cure in its "
+           "own files. Yours: those three, then the lane's ADDENDUM; then you hand back, and ONE fresh reader reads the lane to your tip. THE "
+           "ORDER (the chair, 2026-11-14 07:11 UTC): the true join has begun on lane/join-2026-11-14 and this lane is merged there; a lane goes "
+           "on curing and lands again later as a point of its own. NO whole suite."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/R3-CODE-C-HANDBACK.md: ONLY the part headed \"## THE NINTH SEAT\" (from that line to the end, by "
+          "script; about 130 lines): the rulings in force; the rows as cured; the veto list; the declared moves; FOR THE JOIN (items 4, 5 and 7 "
+          "are yours, as ruled below); what is left; how the instruments are re-made.\n"
+          "3. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (the section headed \"## 2m.\"; by script), before the first "
+          "register you touch."),
+    work=("THE CHAIR'S RULINGS (2026-11-14; each vetoable by the owner; copy them into the hand-back). The law of all three: A LINE THAT NAMES "
+          "WHERE THE FOOD COMES FROM READS THE FOOD RECORD.\n"
+          "(a) THE HERDING LINE (the ninth seat's item 5): a culture sentence that claims herding stands where no herd is a source of the "
+          "town's food: 124 lines on the 1,722 births: \"herding\" is a livestock word (src/domain/foodways.js, this lane's file): the sentence "
+          "is drawn only where the food record holds a herd. A DECLARED MOVE of the stored foodways line: measured (the births that move; "
+          "nothing else).\n"
+          "(b) THE FISHED-OUT WATER (item 4): a foodways line names a catch beside \"nothing left worth taking\" (98 lines): THE LINE names no "
+          "catch from a water the record calls depleted: cured WHERE THE LINE IS COMPOSED (this lane's reader, as the ninth seat cured the "
+          "failed source). WHETHER A FISHED-OUT WATER STILL FEEDS THE TOWN is the food home's arithmetic (src/generators/foodLand.js) and is "
+          "NOT moved here: say in the hand-back, with the count, in how many of those towns the food record still counts the catch, for the "
+          "chair.\n"
+          "(c) THE FAMINE LINE'S HALF (item 7, as the ninth seat wrote it out): crisisSummaryForSurface takes an OPTIONAL argument of the "
+          "record's facts and, for a famine, prints the no-grain twin (\"has gone short of food for a second season …\") where the facts hold "
+          "no grain, on the Tonight line AND on the overview line that presumes a harvest the same way; with no facts handed, it prints as "
+          "today (your pages byte-identical on your births: prove it). The r2-code-b lane's seat makes the other half (its caller passes the "
+          "facts); the two meet at the join. Your guard is a test that calls the function with facts.\n"
+          "THE WORK, in this order, each cause its own commit, measured first on the ninth seat's 1,722 births (count before and after), red "
+          "first (a collected arm; each arm shown able to red by a plant you do not commit, made in a tree no suite is running in), pushed as "
+          "made: (a), (b), (c). EVERY LINE A CURE NOW PRINTS IN A NEW TOWN, OR NEWLY LEAVES SILENT, READ WHERE IT PRINTS: three towns of its "
+          "cells, a famine among them, the smallest and the largest size it reaches; the towns and what printed in the commit body.\n"
+          "AFTER EVERY CURE: the presumed-things walker; the strict-domain gate, the type ratchet and eslint on the touched files; the "
+          "twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop); the test files that name the files you touched.\n"
+          "THEN THE ADDENDUM, in a part \"## THE TENTH SEAT\" at the end of the hand-back file: the three rows (cause, cure and commit, counts, "
+          "guard and plant, towns read); every new or changed line; THE LANE'S ADDENDUM TO ITS STATEMENT for the reader who follows: every "
+          "commit under src/ since the statement (`git log --oneline b6bd3a3c1..HEAD -- src/`), each tied to its row and its seat; the "
+          "declared moves of the eighth, ninth and tenth seats together, by family, on the census's 720 (base: b6bd3a3c1; tip: yours); the "
+          "reds at your tip in the test files that name the files those seats touched, each classed (a golden a declared move shifts: named, "
+          "not written; or yours: cured); FOR THE JOIN, gathered from the eighth and ninth seats' lists and yours. ONE MESSAGE TO THE CHAIR: "
+          "the tip; the three counts; the addendum's place."),
+    merges='',
+    when="for a stop that blocks everything you have left, and with your hand-back (the tip; the three counts)",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
