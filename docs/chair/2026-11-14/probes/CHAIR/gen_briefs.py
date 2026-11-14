@@ -3336,6 +3336,54 @@ SEATS2['UPKEEP-13'] = dict(
 )
 
 
+SEATS2['POWERS-14'] = dict(
+    title="POWERS-14 · the powers lane goes on curing: the medium rows by width, the missing guard, the lines left",
+    branch='lane/powers-follow-up-2026-11-13', tip='48839038', statement=False,
+    intro=("You are POWERS-14, the ninth seat on the powers lane of the settlement-engine integration program (lane/powers-follow-up-2026-11-13). The lane "
+           "holds who rules a town and who contests it: the powers' standing and claims, titles and honorifics, people's goals, ties and secrets. "
+           "The eighth seat cured the two HIGH rows a first measure against the release bar put on this lane (the raw modifier on the Power tab; the "
+           "market, court and merchant lines that did not read the roster), ranked the medium rows by how many towns print them, and handed back at "
+           "its count with the table written. A reader's first pass over the lane's stage found NO high and NO medium false line among those the "
+           "stage added. Yours: the ranked rows, WIDEST FIRST. The lane goes on curing and lands later as a point of its own on the joined line: NO "
+           "whole suite, NO final statement."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/POWERS-FOLLOW-UP-HANDBACK-2.md, BY LINE RANGE, BY SCRIPT (1,478 lines; open ONLY this): PART 7 WHOLE "
+          "(from the line \"# PART 7\" to the end, about one hundred and seventy lines: the rulings; the items as made; the veto list; FOR THE JOIN; "
+          "P7.4 THE TABLE of the medium rows by towns printing; P7.5 WHAT IS LEFT, line by line: THAT IS YOUR LIST; P7.6 the instruments and how "
+          "they are re-made (docs/chair/2026-11-14/probes/POWERS-13/); P7.7 the first false-count reads: PLAUSIBLE until each row is read on its "
+          "page). Of the older parts only what a row of yours names, by heading.\n"
+          "3. THE BAR'S ROWS FOR THIS LANE, for the rows P7.4 lists from it (`git fetch origin lane/chair-2026-11-08`; `git show "
+          "origin/lane/chair-2026-11-08:docs/chair/2026-11-14/bar-0-rows/BAR-0-ROWS-powers.json`); the towns are re-born by the probes on "
+          "origin/lane/review-bar-0-2026-11-14 (docs/chair/2026-11-14/probes/REVIEW-BAR-0/).\n"
+          "4. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (the section headed \"## 2m.\"; by script), before the first "
+          "register you touch."),
+    work=("THE WORK, in this order, each cause its own commit, measured first on the 720 and on the lane's births, red first (a collected arm, never a "
+          "bare seed loop; each arm shown able to red by a plant made in a tree NO suite is running in), pushed as made:\n"
+          "1. P7.4's TABLE, WIDEST FIRST, beginning with the rows P7.7 already read as false (the coaching inn under a crisis, seven towns, in the "
+          "lane's own file, first). EACH ROW IS READ ON ITS PAGE IN ITS TOWN BEFORE IT IS CURED (a count by a record proxy is a candidate, not a "
+          "fault): false -> cured at its cause; true -> said so with the towns, and struck from the table. A row whose true writer is another "
+          "lane's file goes under FOR THE JOIN (file, function, the one-line change); a row that needs the owner's words stays PARKED.\n"
+          "2. L4 (the guard the earlier reader found missing: its plant is in that reader's section); the census's carried candidate (\"... and "
+          "courts are all ecclesiastical\" in a town with no court: a line that names a court reads the roster); P4.8's other lines by file, as "
+          "P7.5 lists them.\n"
+          "3. ONE MESSAGE TO THE CHAIR after the first three cures (the tip; each row's count before and after), then on with the list until your "
+          "count's mark.\n"
+          "NAMED, NOT YOURS UNLESS THE CHAIR SAYS: the 189 stored modifier keys the record does not bear out (the page no longer prints them; what "
+          "else reads the stored key is a measure for a later seat); the PDF's and the Summary tab's chips, #312 and ww#656 (FOR THE JOIN); the "
+          "card's title on a man (PARKED); the writer-reach re-bank and the declaration pass's rows (the merge seat's and the pass's).\n"
+          "AFTER EVERY CURE: the presumed-things walker (it reads every literal under src/); at every commit that touches src/ the strict-domain "
+          "gate, the type ratchet and eslint on the touched files; the twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a "
+          "stop); the test files that name the files you touched.\n"
+          "THE HAND-BACK, kept current after every item: a new \"# PART 8\" at the end of the lane's hand-back file: the rulings you worked to; the "
+          "table brought current (each row: read true, cured with its commit and counts, or left); EVERY NEW OR CHANGED LINE with the towns it was "
+          "read in (the owner's veto list, and the next reader's); the declared moves with their field diff by family; FOR THE JOIN; what is "
+          "left, line by line; how the instruments are re-made.\n" + POWERS_METHOD),
+    merges='',
+    when="for a stop that blocks everything you have left, at step 3 (the tip; the first three rows' counts), and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
