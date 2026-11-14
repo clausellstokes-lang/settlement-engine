@@ -40,7 +40,7 @@ import { houseLabelsInText, institutionHouseLabel } from '../domain/display/inst
 import { resourceDisplayName } from '../domain/display/resourceDisplayName.js';
 import { tradeListsAsPrinted, revenuesOffTheLists } from '../domain/display/tradeListDisplay.js';
 import { foodwaysLineOf } from '../domain/foodways.js';
-import { chainAsShown } from '../domain/display/chainStateShown.js';
+import { chainStateOnPage } from '../pdf/lib/chainStateOnPage.js'; // SURFACES-1 item 1: the tab's state in the tab's words
 import {
   overviewHeadline, powerHeadline, economicsHeadline, defenseHeadline,
   servicesHeadline, resourcesHeadline, viabilityHeadline, historyHeadline,
@@ -334,7 +334,7 @@ function economicsPage(vm, settlement = vm.raw) { // W2-C-LEAVES-8: the settleme
     // CENSUS-3c (R-P 2): the revenues that left the trade lists, where the record holds their fact.
     revenuesOffTheLists(vm.raw).length ? kv('Also earned (no share recorded)', revenuesOffTheLists(vm.raw).map((r) => r.text).join(', ')) : null,
     // W2-C-LEAVES-7 item 9: the state the tab's card prints (chainStateShown.js :: chainAsShown; none: no state written).
-    (e.chains || []).length ? md('', '## Supply chains', e.chains.map((c, i) => { const rec = settlement?.economicState?.activeChains?.[i]; const st = rec ? String(chainAsShown(rec, settlement).status ?? '') : c.status;
+    (e.chains || []).length ? md('', '## Supply chains', e.chains.map((c, i) => { const rec = settlement?.economicState?.activeChains?.[i]; const st = rec ? chainStateOnPage(rec, settlement).word.toLowerCase() : c.status;
       return `- **${esc(c.name)}**${st ? ` *(${esc(st.replace(/_/g, ' '))})*` : ''}${c.description ? `: ${esc(c.description)}` : ''}`; })) : null,
   );
 }
