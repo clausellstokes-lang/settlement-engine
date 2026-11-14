@@ -1,6 +1,6 @@
 # W2-FIX-DATA-13: the data lane goes on curing (kept current after every item)
 
-**State: IN PROGRESS (cure 1 of the table pushed).** Every figure EXECUTED unless marked PLAUSIBLE.
+**State: IN PROGRESS: DATA-SMELTER and the chair's 12:11 HIGH cured and pushed.** Every figure EXECUTED unless marked PLAUSIBLE.
 
 **Seat.** The thirteenth seat on `lane/w2-fix-data-2026-11-13`, from `c4d941895` (read back from origin first: the brief's tip, no stop). Chair: `session_01ACmDYZrFEVXyZEUg1NDxxC`. Brief: `origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-W2-FIX-DATA-13.md`. Nothing at or below c4d941895 is rewritten.
 
@@ -56,12 +56,24 @@
 - `src/data/institutionalCatalog.js`, the Smelter's shared desc: "... The industrial intermediate between mine and smithy." -> "Converts raw ore to refined metal using charcoal-fueled furnaces." (the chair's 11:31 ruling). Holders by content: the Smelter row is byte-identical on every lane's copy (9 distinct blobs of the file, one Smelter line).
 - Counts on the 730: the old text 96 prints, 57 false -> 0; the variants 21, 0 false, unchanged. DECLARED MOVE: 96 births, only `.institutions[].desc`, the Smelter's catalogue text each time.
 - Read: r2r-town-26 (town, smallest), r2s-under_siege-city-2 (siege), r2s-occupied-metropolis-1 (occupation, largest): Systems/Institutions, the PDF view model (institutions, services.detailed, overview), the journal "- **Smelter**: ...": true.
-- Guard: `tests/data/w2FixData13Rows.test.js` DATA-SMELTER, red 3 of 3 with the old text planted, green after. Doors: presumed-things two stale rows (house: mine, smith) out by `--shrink` (banked 4658 -> 4656), fresh 49 carried; governing 77 files + walker: the same 3 reds as c4d941895 (ARM 1, the golden master, urbanBandInstitutions G5); grid 0; domain-strict, type ratchet, eslint 0.
+- Guard: `tests/data/w2FixData13Rows.test.js` DATA-SMELTER (its bare seed loop, red on the seed-loop totality walker, collected in `34b5110a7`), red 3 of 3 with the old text planted, green after. Doors: presumed-things two stale rows (house: mine, smith) out by `--shrink` (banked 4658 -> 4656), fresh 49 carried; governing 77 files + walker: the same 3 reds as c4d941895 (ARM 1, the golden master, urbanBandInstitutions G5); grid 0; domain-strict, type ratchet, eslint 0.
 - CARRIED: the edge-shared bundles are stale at c4d941895 (10 reds in the four freshness/replay files); not rebuilt here (the join's `build:edge-shared`).
+
+### 2 · THE CHAIR'S 12:11 HIGH: districts and quarters in the history below a town (REVIEW-W2-FIX-DATA-4): CURED, `05e98c31e` (lighting census `051a8a10c`; the smelter guard collected `34b5110a7`)
+
+- RULED: quarters and districts belong to a town or larger, whatever the head count; the whole class with the row. The class, listed by script over the 730 (every history string naming a district, a quarter or a ward, in a thorp, hamlet or village): exactly TWO table rows print there, both lasting effects of `src/data/historyData.js :: HISTORICAL_EVENTS_DATA` drawn raw by `historyGenerator.js :: generateEventNarrative` (and copied whole into a tension): the migration's "Newcomer and old-family districts remain socially distinct" and the economic divide's "The merchant quarter and the labourers' quarter remain walled apart"; the legacy annotations quote them. Every other district/quarter row of the history tables already carries `tier: ≥ town` (the stage's) or its small-place word. Holders: every differing copy of both files is an earlier state of this lane's own file.
+- CURE: the two rows take `needs ['tier: ≥ town']` in `HISTORY_DESC_SIBLINGS` (no twin, no new line); `src/generators/history/sizedLastingEffects.js` (new) resolves each drawn effect through `resolveSibling` (dropRefused): a refused effect gives way, draw-free, to the template's next unchosen effect whose own test holds, else silence; a tension's whole list drops it.
+- Counts on the 730, c4d941895+smelter -> here: history naming a district/quarter/ward: thorp 22 -> 0, hamlet 17 -> 0 (the reader's 39), village 21 -> 0; town 79, city 84, metropolis 103 unchanged. The reader's two towns r2r-thorp-58 Tallpatan (7) and r2s-indebted-thorp-0 Makrokastro (12): the line -> "A resettlement compact governs where new arrivals may hold property".
+- DECLARED MOVE (field diff): 60 births: `.history.historicalEvents[].lastingEffects[]` 53, `.history.currentTensions[].lastingEffects[]` 12, `.history.legacyAnnotations[].annotation` 7 (they quote the effect), `.generationCoherenceReceipt.judgments[]` 7 (the battery's own "walls without walls" finding on the quarters line: needs_review -> pass in 6 villages, a finding fewer in r2r-hamlet-15). The replacements: the migration's "A resettlement compact governs where new arrivals may hold property" 46 events (thorp 17, hamlet 15, village 14); the divide's "Wage disputes settled by a standing arbitration council since founded" 7; the tensions lose the line 12. No roll moved; nothing else.
+- Read (the PDF's History chapter, by its function components; the History tab prints no lasting effect; the journal none): r2r-thorp-58 and r2s-indebted-thorp-0 (thorps; the resettlement compact), r2r-hamlet-15 (hamlet, 42) and r2r-village-2 (village, 388; the arbitration council), r2r-town-7 (town: the fire's "lower districts ... whole quarters" stands, a town's).
+- Guard: the second test of `tests/data/w2FixData13Rows.test.js` (four small towns; r2r-town-1, a town, keeps both lines), red 4 of 4 with the resolution planted out, green after.
+- Doors: presumed-things fresh 49 / stale 0 (carried); fact layers 0 rises 0 falls; the wiring census is stale at c4d941895 by the same 131 bytes (tablePools), not moved here; grid 0; domain-strict, type ratchet, eslint 0 (the helpers moved out of historyGenerator.js for its max-lines rule; births byte-identical across the move).
+- A CANDIDATE (PLAUSIBLE LOW, not cured): "Wage disputes settled by a standing arbitration council since founded" claims a standing council in a hamlet of 42.
 
 ## 3. EVERY NEW OR CHANGED LINE, with the towns it was read in (the owner's veto list)
 
 - institutionalCatalog.js, Smelter: "Converts raw ore to refined metal using charcoal-fueled furnaces." (r2r-town-26, r2s-under_siege-city-2, r2s-occupied-metropolis-1).
+- No line written by the history cure (a size declaration on two existing rows; the replacements are the templates' own rows).
 
 ## 4. FOR THE JOIN
 
