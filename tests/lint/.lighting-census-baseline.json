@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "1b43907d1c0e8925ffad7614cd13df86fcacb0f6",
-  "measuredBy": "R2-CODE-A-9",
+  "measuredAtSha": "ebae362a4dd846cbb7dba6bb80b09778fdb60042",
+  "measuredBy": "R2-CODE-A-10",
   "date": "2026-11-14",
-  "note": "round two code lane A close: the lane s 37 test files over the line (976db5b19) and its table-driven tests made plain loops (1b43907d1), re-taken on the clean committed tree",
-  "files": 3282,
+  "note": "R2-CODE-A-10: one new test file, tests/generators/arrivalSiegeGatesShut.test.js (the bar HIGH #35 cure, ebae362a4)",
+  "files": 3283,
   "parked": 403,
-  "credited": 2879,
-  "titles": 29513,
-  "suiteTitles": 8035
+  "credited": 2880,
+  "titles": 29516,
+  "suiteTitles": 8036
 }
