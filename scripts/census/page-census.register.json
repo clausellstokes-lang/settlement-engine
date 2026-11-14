@@ -44,7 +44,7 @@
    "reader": "SECOND",
    "master": 0,
    "integration": 106,
-   "banked": 96
+   "banked": 0
   },
   "P5false": {
    "label": "5a a crime line the town's facts make false: bought officials where none is in pay, none bought where one is, a grip on a hall no agent holds",
@@ -238,7 +238,6 @@
   "r2s-infiltrated-town-0": [
    "P17",
    "P18",
-   "P4",
    "P6need"
   ],
   "r2r-city-0": [
