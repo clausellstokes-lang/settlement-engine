@@ -21,6 +21,7 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
 import { LIVING_FLOOR, TIME_BANDS, timeBandOf } from '../../src/domain/display/heraldCausalGrammar.js';
 import { yearBand } from '../../src/domain/display/stateProse/generalStateProse.js';
+import { RESOURCE_CHAINS } from '../../src/data/goods/chains.js';
 
 const OLD_WORDS = 'older than anyone living';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -32,6 +33,8 @@ const cfgFor = (seed) => {
   return birthConfig({ ...DEFAULT_CONFIG, ...DIALS, selectedStresses: [c[1]], selectedStressesRandom: false, settType: c[2] });
 };
 const READER_TOWNS = ['r2r-city-44', 'r2r-thorp-41', 'r2r-town-19', 'r2s-under_siege-village-2', 'r2s-under_siege-metropolis-0'];
+/** L05's: the famine thorp, the reader's four other livestock towns, and towns whose rows keep the claim. */
+const CHAIN_TOWNS = ['r2s-famine-thorp-1', 'r2r-thorp-37', 'r2r-thorp-14', 'r2r-town-29', 'r2r-city-11', 'r2s-famine-village-0', 'r2r-metropolis-0', 'r2r-city-0', 'r2r-metropolis-3', 'r2s-famine-city-3', 'r2s-infiltrated-thorp-3'];
 /** The record's elder age words at their oldest year (npcData.js, the elder band). */
 const ELDER_TOP = Object.freeze({ 'early sixties': 63, 'mid-sixties': 66, 'late sixties': 69, seventies: 79 });
 
@@ -60,10 +63,13 @@ const agesNamed = (/** @type {any} */ s, /** @type {string} */ phrase) => {
 };
 
 /** @type {Array<any>} */ let towns = [];
+/** @type {Array<any>} */ let chainTowns = [];
 beforeAll(async () => {
   await loadGenerationLawPayloads();
-  towns = READER_TOWNS.map((seed) => generateSettlementPipeline(cfgFor(seed), null, { seed, customContent: {} }));
-}, 120000);
+  const bear = (/** @type {string} */ seed) => generateSettlementPipeline(cfgFor(seed), null, { seed, customContent: {} });
+  towns = READER_TOWNS.map(bear);
+  chainTowns = CHAIN_TOWNS.map(bear);
+}, 180000);
 
 describe('L01: the sixth band says "older than anyone living" only past every living age', () => {
   it('the band keeps its id either side of the floor, and its predicate reads the floor', () => {
@@ -91,5 +97,48 @@ describe('L01: the sixth band says "older than anyone living" only past every li
     expect(wrong).toEqual([]);
     expect(printed.map((p) => p.town)).toEqual(expect.arrayContaining(['Kallition'])); // r2r-city-44: the siege, 61y ago
     expect(printed.length).toBeGreaterThanOrEqual(5); // the five reader towns each print it at the tip of this cure
+  });
+});
+
+/** A roster house as a kind: its head word, lower case, no counts, possessives or plural/-y ending. @param {unknown} name */
+const kind = (name) => (String(name || '').toLowerCase().replace(/\([^)]*\)/g, ' ').split(/[\s/]+/).find(Boolean) || '')
+  .replace(/['’]/g, '').replace(/s$/, '').replace(/y$/, '');
+/** The chain a famine's failed source stops, read from the food record's own words. */
+const STOPPED = { grain: 'grain', mill: 'grain', livestock: 'livestock', fish: 'fish' };
+
+describe('L05: "Complete production chain in place" only where the chain\'s houses stand and its source is not failed', () => {
+  it('on the reader\'s chain towns: every complete row has each house its chain names on the roster, and no failed source', () => {
+    const rows = chainTowns.flatMap((s) => (s.resourceAnalysis?.exports || [])
+      .filter((/** @type {any} */ e) => e.reason === 'Complete production chain in place')
+      .map((/** @type {any} */ e) => {
+        const [key, chain] = /** @type {[string, any]} */ (Object.entries(RESOURCE_CHAINS).find(([, c]) => c.rawResource === e.chain) || ['', {}]);
+        const kinds = new Set((s.institutions || []).map((/** @type {any} */ i) => kind(i?.name)));
+        const lacking = (chain.processingInstitutions || []).filter((/** @type {string} */ n) => !/^access to /i.test(n) && !kinds.has(kind(n)));
+        const failed = s.economicState?.foodSecurity?.foodRecord?.failedSource;
+        const named = (chain.processingInstitutions || []).filter((/** @type {string} */ n) => !/^access to /i.test(n)).length;
+        return { town: s.name, chain: key, product: e.product, lacking, named, stopped: STOPPED[/** @type {keyof typeof STOPPED} */ (failed)] === key };
+      }));
+    expect(rows.filter((r) => r.lacking.length > 0 || r.named === 0 || r.stopped)).toEqual([]);
+    expect(rows.length).toBeGreaterThan(0); // the claim still prints where it is true
+  });
+
+  it('r2s-famine-thorp-1: the failed herds feed no cheese and no preserved meat (the row is not listed)', () => {
+    const thorp = chainTowns[0];
+    expect(thorp.economicState?.foodSecurity?.foodRecord?.failedSource).toBe('livestock');
+    expect((thorp.resourceAnalysis?.exports || []).filter((/** @type {any} */ e) => e.chain === 'livestock')).toEqual([]);
+  });
+
+  it('r2s-famine-city-3: its mills and bakers stand, but the grain failed: no bread, beer or animal feed is listed', () => {
+    const city = chainTowns[CHAIN_TOWNS.indexOf('r2s-famine-city-3')];
+    expect(city.economicState?.foodSecurity?.foodRecord?.failedSource).toBe('grain');
+    const kinds = new Set((city.institutions || []).map((/** @type {any} */ i) => kind(i?.name)));
+    expect(['mill', 'baker'].filter((k) => !kinds.has(k))).toEqual([]); // anchored: the houses stand, so only the failed source stops it
+    expect((city.resourceAnalysis?.exports || []).filter((/** @type {any} */ e) => e.chain === 'grain')).toEqual([]);
+  });
+
+  it('r2s-infiltrated-thorp-3: the oasis dates name no house, so their row gives its goods without the claim', () => {
+    const thorp = chainTowns[CHAIN_TOWNS.indexOf('r2s-infiltrated-thorp-3')];
+    expect((thorp.resourceAnalysis?.exports || []).filter((/** @type {any} */ e) => e.chain === 'oasis_water'))
+      .toEqual([expect.objectContaining({ product: 'dried dates, date wine, water rights', reason: '' })]);
   });
 });

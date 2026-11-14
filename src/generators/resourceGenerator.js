@@ -390,19 +390,47 @@ const buildViabilityReport = (
 //       own settings (`nativeResourceConditionRecords`); otherwise the row gives its goods and
 //       its reason is empty (the page prints no reason).
 // A partial row is unchanged: its goods are intermediates, made by the lone processor it has.
+//
+// THE ROW NEEDS ITS HOUSES AND ITS SOURCE (R3-CODE-C-8, the reader's L05 and the #457 class carried;
+// the chair's ruling (b) of 2026-11-14). Two processors of ANY of the chain's tags made a chain
+// "fully exploited", so a famine thorp of Subsistence farming and an external mill printed "cheese,
+// preserved meat · Complete production chain in place" beside "The herds failed this year", with no
+// Butcher, Tannery or Dairy farmer standing, and a fish row stood on a Mill and Farmland. So a full
+// chain's row is written only where:
+//   (3) every house the chain names (`processingInstitutions`; an "Access to …" entry is a road to a
+//       house elsewhere, not a house in place, and is not one of them) stands on the roster: by its
+//       own name, or as a house that processes this chain and is the same kind ("Mills (2-5)" for
+//       Mill, "Tanners" for Tannery: the name's head word);
+//   (4) and the source the food record says a famine failed (`failedSource`) is not this chain's:
+//       the herds that failed feed no cheese and no preserved meat.
+// Elsewhere the good is not listed (the ruling's own arm; silence is not a false sentence). A chain that names no
+// house at all (the oasis dates) has nothing to stand the claim on: its goods are given without it, as (2) gives them.
+/** The chain a famine's failed source stops (foodBalance.js :: failedSource; the mill grinds the grain). */
+const FAILED_SOURCE_CHAIN = Object.freeze({ grain: 'grain', mill: 'grain', livestock: 'livestock', fish: 'fish' });
+/** A house name's head word, as a kind: lower case, no counts or possessives, no plural or -y ending. @param {unknown} name */
+const houseHead = (name) => (String(name || '').toLowerCase().replace(/\([^)]*\)/g, ' ')
+  .split(/[\s/]+/).find(Boolean) || '').replace(/['’]/g, '').replace(/s$/, '').replace(/y$/, '');
+/** @param {string} name a house the chain names @param {any} chain @param {Array<{ name?: string }>} institutions */
+const houseStands = (name, chain, institutions) => institutions.some((inst) => inst?.name === name
+  || (institutionSupportsChain(inst, chain) && houseHead(inst?.name) === houseHead(name)));
 
 /**
  * @param {{ fullyExploited?: Array<any>, partiallyExploited?: Array<any> }} exploitation
  * @param {Array<{ name?: string }>} [institutions] the native roster the gaps were read on
  * @param {Array<{ missing?: unknown }>} [gaps] this analysis's own gaps (evaluateInstitutionChain)
  * @param {Array<{ key: string, condition: string }>} [resourceConditions] the town's own settings
+ * @param {unknown} [failedSource] the food record's source a famine failed (economicState.foodSecurity.foodRecord)
  */
-const evaluateInstitutionDeps = (exploitation, institutions = [], gaps = [], resourceConditions = []) => {
+const evaluateInstitutionDeps = (exploitation, institutions = [], gaps = [], resourceConditions = [], failedSource = null) => {
   const exports = [];
   const listedMissing = new Set(gaps.flatMap((gap) => (Array.isArray(gap?.missing) ? gap.missing : [])));
   const depleted = resourceConditions.filter((record) => record?.condition === 'depleted');
+  const stoppedChain = typeof failedSource === 'string' ? FAILED_SOURCE_CHAIN[/** @type {keyof typeof FAILED_SOURCE_CHAIN} */ (failedSource)] : undefined;
 
   exploitation.fullyExploited?.forEach(chain => {
+    if (stoppedChain && chain.chainKey === stoppedChain) return; // (4)
+    const needed = (chain.processingInstitutions || []).filter((/** @type {string} */ name) => !/^access to /i.test(name));
+    if (!needed.every((/** @type {string} */ name) => houseStands(name, chain, institutions))) return; // (3)
     const absent = (chain.processingInstitutions || []).filter((name) => (
       listedMissing.has(name) && !institutions.some((inst) => inst?.name === name)));
     const madeByAbsent = Object.entries(RESOURCE_CHAINS)
@@ -420,7 +448,7 @@ const evaluateInstitutionDeps = (exploitation, institutions = [], gaps = [], res
       product: products.join(', '),
       chain:   chain.rawResource,
       value:   chain.exportValue,
-      reason:  sourceDepleted ? '' : 'Complete production chain in place',
+      reason:  sourceDepleted || needed.length === 0 ? '' : 'Complete production chain in place', // (3): a chain that names no house claims none
     });
   });
 
@@ -608,7 +636,8 @@ export const generateResourceAnalysis = (
   );
   const resourceConditions = nativeResourceConditionRecords(config);
   // after the gaps and the town's settings: a complete row reads both (#457, #1163)
-  const exports        = evaluateInstitutionDeps(exploitation, nativeInstitutions, gaps, resourceConditions);
+  const exports        = evaluateInstitutionDeps(exploitation, nativeInstitutions, gaps, resourceConditions,
+    economicState?.foodSecurity?.foodRecord?.failedSource); // (4): the source a famine failed
   const featureEffects = evaluateResourceChain(specialResources);
 
   const pri            = getPriorities(config);
