@@ -40,3 +40,33 @@ verdict above stands.
   mixed": the pin of DM-only positions, 203 → 167, cause 5a. Re-pin at the merge point with the manifest's door.
 - The drift arm's rows of the same suite: re-recorded at the merge point (this lane's share is the 36 cells above).
 - The four other red surfaces are red at the base with byte-identical output: not this lane's.
+
+---
+
+## PART 2 — the second seat (W2-A-LEAVES-2, 2026-11-13)
+
+**Code tip measured:** `6a3bb189d`, then `8f96276a9` (F3c; the six surfaces and the census re-run at `395cb592f`: identical). Display only: no generator file moved (the record field diff: the census's 720
+births at the base and at the tip are byte-identical, `births 720 errors 0` both, the same corpus file).
+
+| commit | cause | what it moves |
+|---|---|---|
+| 04bab40c6 F1 | the gap reader reads what trade brings (`importsAsPrinted(s).arriving`) | the Resources tab: 445 gap lines in 296 towns print again (as at the base; 0 towns differ from the base) |
+| 08c9f15bd F3 + 6a3bb189d F3b | each crime line struck only where the town makes it false (the cast's officials in pay; the hall's rung) | DM-only DS-POW-6 capture pressure (drawn at `none` again); DS-DEF-4's capture lens; the organised ring's note (its officials clause) |
+| 8f96276a9 F3c | the veil: the crime desk reads the cast and the rung for the DM only; the ring's note reworded to read nothing hidden | the organised ring's note in every organised ring ("and on any official it can buy"); public prose as at the base |
+| 433147d3e F2 | the Magic tab's source through the roster and the display seam | the Magic tab's reliance line (180 of 289 change; none lost) |
+| dce6a1d6c, 0297bac21, df008526a | the tuning refreeze; the reader arm; the key-read arm | nothing a reader sees |
+| ef3f04d89, c32f0d099, 395cb592f | the page arm's register lowered; the six edge-shared bundles rebuilt | the bundles' bytes (engine, aiGrounding; four by generatedAt) |
+
+## The six surfaces (each suite run at the base deb1544eb and at 6a3bb189d; its output compared)
+| surface | base deb1544eb | tip 6a3bb189d+ | this seat |
+|---|---|---|---|
+| generator golden master | red | red, identical output | **UNMOVED** (0 of 720 records move) |
+| espionage fence | red | red, identical output | **UNMOVED** |
+| dossier prose manifest | red: the 2 drift titles | red: the same 2 titles; 74,801 cells and DM-only positions 203 as at the base (the first seat's 74,765 / 167 undone; its "MIXED-POOL AUDIENCE" title green again) | **MOVED, PLAUSIBLE**: one diagnostic count moves (seedless cells drawing above index 0 after anchoring, 241 → 242), and the crime desk's struck lines change which line some DM cells draw; the drift arm's object is printed truncated and identical, so its per-cell diff is the merge seat's to re-record |
+| PDF golden | red (canon values) | red, identical output | **UNMOVED** |
+| Herald desk golden | red | red, identical output | **UNMOVED** |
+| preset-lighting witness | green | green | **UNMOVED** |
+
+**Rows red at the tip that are the merge seat's act:** the manifest's two drift titles (red at the base; this seat's
+share is the crime desk's struck lines, the ring notes' clause and the restored capture lens, display only). The
+first seat's "MIXED-POOL AUDIENCE" re-pin (203 → 167) is NO LONGER owed: it reads 203 again.

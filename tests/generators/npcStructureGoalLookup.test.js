@@ -36,9 +36,12 @@ describe('npcStructure registry goal lookup (CENSUS-1e unit 1)', () => {
     const { result, ledger } = enrich({ stress: [{ type: 'under_siege' }] });
     for (const npc of result) {
       expect(npc.goal).toEqual(ROLE_GOAL);
-      expect(npc.structuralPosition).toBeUndefined();
       expect(npc.activeConstraint).toBeUndefined();
     }
+    // COHERENCE-POWERS-5 (N1): A holds the seat (the seat's home names the governing power's first), so its card states
+    // the bare fact the seat row prints, no calm claimed; B takes no position, as before
+    expect(result.find((n) => n.id === 'a').structuralPosition).toBe('Holds the seat.');
+    expect(result.find((n) => n.id === 'b').structuralPosition).toBeUndefined();
     const rows = ledger.filter((e) => String(e.pool).startsWith('NPC_STRUCTURE.'));
     expect(rows.length).toBe(0); // a refused cell with no admitted member notes nothing (drawDeclared's 'none')
   });

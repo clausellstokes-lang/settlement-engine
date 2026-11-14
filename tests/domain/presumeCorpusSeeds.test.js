@@ -67,6 +67,8 @@ const CASES = [
   ['no official recourse', 'law', 'presume-town-4'],
   // the one reported row (the hand-back's §3 item 4): narrativeText's mass-migration line
   ['share the streets and the market', 'market', 'presume-village-38'],
+  // COHERENCE-POWERS-2 item 2: the creditor tie's counting-house, drawn by a council of a kind's Merchant Council
+  ['approved in', 'bank', 'presume-town-72'],
 ];
 
 /** @param {string} seed */

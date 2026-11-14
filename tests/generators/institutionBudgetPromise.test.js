@@ -112,67 +112,79 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 // RE-KEYED BY IDENTITY 2026-11-12 (STYLE-2-MERGE-8, point 43): 56 of 60 moved, none by the budget (densityFactor still
 // forced to 1), by the COHERENCE-PRESUME merge f922124d0 (docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json: a line names a thing the town does not have: the culture lines, the re-titled watch role and the ties it re-deals, the history and institution texts); the line before the merge reads all sixty green.
 // Re-captured at the merge with the factor forced to 1.0, this file's own loop (an untracked probe), twice and equal.
+// RE-KEYED BY IDENTITY 2026-11-12 (STYLE-2-MERGE-9, point 46): 50 of 60 moved, none by the budget (densityFactor still
+// forced to 1), by the COHERENCE-POWERS merge 6aeaa4154 (docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json: the dual hat re-deals the cast); the line before the merge reads all sixty green.
+// Re-captured at the merge with the factor forced to 1.0, this file's own loop (an untracked probe), twice and equal.
+// RE-KEYED BY IDENTITY 2026-11-13 (STYLE-2-MERGE-11, point 47): 60 of 60 moved, none by the budget (densityFactor still
+// forced to 1), by the COHERENCE-AGREE merge 22cc9ef7d (docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json: one fact, one answer: the resource roll's refused members refilled, the economy and defence read off the town's own record); the line before the merge reads all sixty green.
+// Re-captured at the merge with the factor forced to 1.0, this file's own loop (an untracked probe), twice and equal.
+// RE-KEYED BY IDENTITY 2026-11-13 (STYLE-2-MERGE-13, point 49): 1 of 60 moved, none by the budget (densityFactor still
+// forced to 1), by the W2-B-DECLARE merge (lane/w2-b-declare-2026-11-12 at 5657a229c; its draft record's ONE generated
+// cause, item 5, 1ae138b47: the church note reads the stored flag safetyProfile.flags.theocraticEconomy): seed 41
+// (6fce6e3d180fc1be -> 0b896078cabcb3c9) gains one `power_economic` coherence note, its only moved leaves
+// (.coherenceNotes.0: type, severity, tab, note); the line's tip 9e57f5023 reproduces the old hash. Red at the lane's own
+// tip and base for the agreement lane's cause, so the lane could not see it. Re-captured at the merge, the probe and this loop.
 const BEFORE = Object.freeze([
-  '9ea891a6cd71384f', // 0
-  'bfca5063e51c068b', // 1
-  'be745caa97c8e33e', // 2
-  '9e8232476e4f38be', // 3
-  '39ba1d8f074f6916', // 4
-  '70c586705e5510c7', // 5
-  '0bb8610778a4989a', // 6
-  'c633ac56124699e0', // 7
-  '8ad4969d64ed8d14', // 8
-  'a03d8566e0ca8dc3', // 9
-  'cc42558320907b6a', // 10
-  '1efe90eebfc78c15', // 11
-  '87feee0b9d0216cb', // 12
-  '070ea2663c87366d', // 13
-  'b9e9457eb9d2b04a', // 14
-  'd5ad3a9bc46b2da0', // 15
-  'a41c48bec78895ae', // 16
-  '60c25179a5ae5dac', // 17
-  '6aa92c6a184cb31d', // 18
-  'c5609e515649b766', // 19
-  '19ac4131b60acbe7', // 20
-  '736e8fc96c36c874', // 21
-  '7cb6bd6f457ff0e3', // 22
-  'fa50fbd71c663444', // 23
-  '70bae71dd604e229', // 24
-  '28c61f0da1dee9e7', // 25
-  '6ea19e9bbedae660', // 26
-  '294086c482d7c4a4', // 27
-  '74f51f9d03b4dfce', // 28
-  '460d60851d789d3b', // 29
-  '8a87eda6cd3bb8d5', // 30
-  'ebc8b4e0dc62e073', // 31
-  'cbd95b1043687ae7', // 32
-  'c10435c18b134be9', // 33
-  '136acc8fba335d12', // 34
-  'd032c9776c404a1d', // 35
-  '1013c3fa48e6f8b0', // 36
-  '4657230f79fb9ed4', // 37
-  'd75a5536042bb32b', // 38
-  '3295bc181100917e', // 39
-  '726c777b1986d371', // 40
-  '2a5d92947ecebf06', // 41
-  '71a0ca608a347c49', // 42
-  '5c3f1eacb3704c14', // 43
-  'd494d03e15926eff', // 44
-  'bd7af3252a4210a5', // 45
-  'a0c0d9fb6e78feb8', // 46
-  '89d468b57749660d', // 47
-  '851cfd098245a663', // 48
-  '2e73d1fbd65b1ec9', // 49
-  '768d2a9aa0e2d297', // 50
-  'de46e2c9193643f9', // 51
-  'af61f251b2dfe945', // 52
-  'c0b68af6baca6889', // 53
-  '13887d83f3ea8566', // 54
-  'b19cc38e9f58b57a', // 55
-  'ee7b25971b180448', // 56
-  '1979f45e0ccaea49', // 57
-  '7de1a7027f434268', // 58
-  '1346020966ace15b', // 59
+  '5846eb303e8ba516', // 0
+  '4995df767a612f94', // 1
+  '5d33c4fdc59d7f54', // 2
+  '92058181fabb379a', // 3
+  'fe63bd3821950b4a', // 4
+  '249ba08c1ca0ec02', // 5
+  'f31d6451479eb329', // 6
+  '029d750b2334bb07', // 7
+  'e186f30d21203608', // 8
+  '193d6286570ea98c', // 9
+  '786563116be92224', // 10
+  'e5c3de10fc7c175e', // 11
+  '292591d34a813144', // 12
+  '9b5e1d1469351341', // 13
+  'f5f10a7fcff76dcd', // 14
+  'ea102a6c9253a407', // 15
+  '1413b1473f378700', // 16
+  '2e2d2299b1dae456', // 17
+  'a6383fa022c4e283', // 18
+  'df7521324a6f5454', // 19
+  'e705e4fa503944a0', // 20
+  'ef7721cf7fb643ed', // 21
+  'd2b5134667e49da4', // 22
+  '343d2bc95388df18', // 23
+  '281e20ca5bfd1a29', // 24
+  'c4ac235f46933a9e', // 25
+  '75854a2e5961a709', // 26
+  '266fcb74c48a99e8', // 27
+  'f9224e0ed4d3bc5d', // 28
+  '7983caa001eee7da', // 29
+  '712ad4f148b53607', // 30
+  '98bab608996c9883', // 31
+  '61de1e198ead9183', // 32
+  '22ce1afc5e775697', // 33
+  '18703c4fb3f9e229', // 34
+  '27457d262f44c5b1', // 35
+  'ef693b7b839585ae', // 36
+  'a342a643fda176a3', // 37
+  'f1ef4fc4047259fc', // 38
+  '07015de5e6b7cffe', // 39
+  'caad5676d4326a51', // 40
+  '0b896078cabcb3c9', // 41
+  '7aeabecf762d9569', // 42
+  '7e44d8330739caeb', // 43
+  '00bac639c8e3061f', // 44
+  '07d65c0a80c9ed19', // 45
+  '8ad4cc8130b6d3ab', // 46
+  'e7cb33a42a3ab4fb', // 47
+  '4fe39e5407bffd9f', // 48
+  '9270867ba13a3544', // 49
+  '8f7d4ea8f6a7fb78', // 50
+  'efd1558c0bba487e', // 51
+  '884f68d1963e4adb', // 52
+  'a0939636e94032a4', // 53
+  '55efbde5e39ea54c', // 54
+  'e0f1b369eb044ed4', // 55
+  'dfcabc726908a708', // 56
+  '83f39ca5ae1d03cc', // 57
+  '27d71132630829a6', // 58
+  '7593b8429756cab7', // 59
 ]);
 
 const hashOf = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex').slice(0, 16);

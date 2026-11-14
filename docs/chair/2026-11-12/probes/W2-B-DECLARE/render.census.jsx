@@ -35,7 +35,9 @@ import { DEFAULT_CONFIG } from '__TREE__/src/store/configSlice.js';
 const OUT = process.env.CENSUS_OUT; const SEEDS = fs.readFileSync(process.env.CENSUS_SEEDS, 'utf8').trim().split('\n');
 const READ_CRISIS = { 'thorp-3':'famine','thorp-4':'monster_pressure','hamlet-3':'under_siege','hamlet-4':'mass_migration','village-3':'wartime','village-4':'indebted','town-3':'famine','town-4':'insurgency','city-3':'plague_onset','metropolis-3':'occupied' };
 const dials={ tradeRouteAccess:'random_trade', culture:'random_culture', monsterThreat:'random_threat', nearbyResourcesRandom:true, selectedStressesRandom:true, _randomizePriorities:true, magicExists:true, contentProfile:'grounded' };
+const FIX = process.env.CENSUS_FIXTURE ? JSON.parse(fs.readFileSync(process.env.CENSUS_FIXTURE, 'utf8')) : {}; // W2-B-DECLARE second seat: the cold list's towns, seed → config
 function cfgFor(seed){
+  if(FIX[seed]) return birthConfig({...DEFAULT_CONFIG,...FIX[seed]});
   let m=seed.match(/^r2r-(\w+)-(\d+)$/); if(m) return birthConfig({...DEFAULT_CONFIG,...dials,settType:m[1]});
   m=seed.match(/^r2s-(\w+)-(thorp|hamlet|village|town|city|metropolis)-(\d+)$/); if(m) return birthConfig({...DEFAULT_CONFIG,...dials,selectedStresses:[m[1]],selectedStressesRandom:false,settType:m[2]});
   m=seed.match(/^r2read-(\w+)-(\d)$/); if(m){ const c=READ_CRISIS[`${m[1]}-${m[2]}`]; return birthConfig({...DEFAULT_CONFIG,...dials,settType:m[1],...(c?{selectedStresses:[c],selectedStressesRandom:false}:{})}); }

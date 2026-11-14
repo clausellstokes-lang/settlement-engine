@@ -17,7 +17,7 @@ import { goldenCorpus, keyOf } from '../../helpers/goldenMasterCorpus.js';
 import { birth, ensureLaws } from '../../../scripts/audit/soak-review/corpus.mjs';
 import { CAST_REASONS } from '../../../src/domain/crisis/crisisCast.js';
 import { crisisCastFindings } from '../../../src/domain/coherence/crisisCastFindings.js';
-import { seatCandidatesOf } from '../../../src/domain/dossier/seatHolder.js';
+import { seatCandidatesOf, seatHouseFaceOf } from '../../../src/domain/dossier/seatHolder.js';
 import { rulingChainOf } from '../../../src/domain/dossier/powerStrata.js';
 import { factionArchetype, FACTION_ARCHETYPES as A } from '../../../src/domain/factionArchetypes.js';
 import { governingFactionOf, nameOf } from '../../../src/domain/rulingPower.js';
@@ -90,7 +90,9 @@ describe('step 1 — the crisis cast reads memberships (825 born settlements)', 
     let faced = 0;
     let bare = 0;
     for (const { label, s } of corpus) {
-      const faceOf = (house) => (s.npcs || []).find((n) => n?.institution?.kind === 'house' && n.institution.key === house && !n.temporary && !n.ousted) || null;
+      // COHERENCE-POWERS re-key (cure (i), one person, one face): the seat's house where a house leads is faced by the leader
+      const faceOf = (house) => (s.npcs || []).find((n) => n?.institution?.kind === 'house' && n.institution.key === house && !n.temporary && !n.ousted)
+        || seatHouseFaceOf(s, house);
       for (const e of stressesOf(s)) {
         for (const l of e.cast.levers) {
           const face = faceOf(l.institution);

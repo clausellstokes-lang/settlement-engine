@@ -14,7 +14,7 @@
  * RUNG, capped at 'equilibrium' so strengths alone describe only coexistence:
  *
  *   agentScore  = Σ over the ruling three's agents of weight[rank]           (HALL_CAPTURE_TUNING.weight)
- *   agentRung   = capture      the lord is an agent and agentScore ≥ captureScore
+ *   agentRung   = capture      the lord is an agent and agentScore ≥ captureScore, where a criminal power stands
  *                 corrupted    the lord is an agent, or agentScore ≥ corruptedScore, or the governing power
  *                              is itself criminal (a purchased council)
  *                 equilibrium  agentScore > 0
@@ -22,7 +22,7 @@
  *   climateRung = the classifier, capped at 'equilibrium'
  *   state       = max(agentRung, climateRung) on CAPTURE_LADDER
  *
- * What it guarantees (I-1): 'capture' always has an agent lord; 'corrupted' always has an agent in the
+ * What it guarantees (I-1): 'capture' always has an agent lord and a criminal power standing; 'corrupted' always has an agent in the
  * three or a criminal governing power. Neither is reachable from strengths alone.
  *
  * THE ONE WRITER (J-13). `writeHallCapture` is the only code that writes `criminalCaptureState` on a
@@ -109,15 +109,17 @@ export function hallCaptureOf(settlement, opts = {}) {
   }
   const agentScore = agents.reduce((sum, a) => sum + (Number(T.weight[a.rank]) || 0), 0);
   const lordAgent = agents.some((a) => a.rank === 1);
+  const underworld = nameOf(criminalPowersOf(s).find((p) => nameOf(p) !== ruler)) || null;
+  // COHERENCE-POWERS (the chair's ruling of 2026-11-12, cure (a)): capture is allowed WHERE A CRIMINAL POWER STANDS (the
+  // design §3.4); an agent lord with no organisation in the town to hold the hall is at most corrupted (a lord who is bought)
   /** @type {CaptureRung} */
-  const agentRung = lordAgent && agentScore >= T.captureScore ? 'capture'
+  const agentRung = lordAgent && agentScore >= T.captureScore && underworld ? 'capture'
     : (lordAgent || agentScore >= T.corruptedScore || rulerCriminal) ? 'corrupted'
       : agentScore > 0 ? 'equilibrium'
         : 'none';
   const climateIn = opts.climate !== undefined ? opts.climate : rec(s.powerStructure).criminalCaptureState;
   const climateRung = CAPTURE_LADDER[Math.min(indexOf(climateIn), T.climateCap)];
   const state = CAPTURE_LADDER[Math.max(indexOf(agentRung), indexOf(climateRung))];
-  const underworld = nameOf(criminalPowersOf(s).find((p) => nameOf(p) !== ruler)) || null;
   const facts = { ruler: ruler || 'the ruling power', agents, rulerCriminal, underworld };
   return { state, agentRung, climateRung, agentScore, agents, ruler, rulerCriminal, underworld, receipt: hallReceipt(state, facts) };
 }

@@ -1,5 +1,7 @@
 /**
- * domain/coherence/vocabularyPageFindings.js — THE PAGE MEASURED BY VOCABULARY (W2-B-DECLARE item 2; the
+ * domain/coherence/vocabularyPageFindings.js — THE REGISTERED-WORD FINDINGS of a page (W2-B-DECLARE item 2; named
+ * for what they are by the second seat, REVIEW-W2B F1: a list of the sentences that use a REGISTERED word the town
+ * makes false — not every false line a reader finds; its recall is scored against the cold list at every tip). The
  * chair's record 288, ruling 3: "B's first measure runs the walker's own matcher, with the new vocabularies,
  * over every VISIBLE sentence of the rendered dossiers against each town's leaves: a sentence that names what
  * the town lacks, or denies what it has, is a finding, whether or not anyone has named its pattern").
@@ -22,7 +24,7 @@
 import { factsOf } from '../facts/factsOf.js';
 import { liveInstitutionNames } from '../facts/institutions.js';
 import {
-  NEW_WORDS, THINGS, newWordsDeniedIn, newWordsNamedIn, presentForDenial, sentencesOf, thingsDeniedIn, thingsNamedIn,
+  onPageList, NEW_WORDS, THINGS, newWordsDeniedIn, newWordsNamedIn, presentForDenial, sentencesOf, thingsDeniedIn, thingsNamedIn,
 } from '../facts/registeredWords.js';
 
 /**
@@ -65,12 +67,16 @@ export function vocabularyPageFindings(settlement, views) {
         // The walker's own floor (presumedThings.shared.mjs, the printed-record arm: `text.length < 15`):
         // a heading or a chip names no claim. Not a tuning value: the measure reads what the walker reads.
         if (sentence.length < 15) continue;
-        for (const id of thingsNamedIn(sentence)) if (thingAbsent(id)) push(view, id, 'names', sentence, `the town lacks: ${id}`);
-        for (const id of thingsDeniedIn(sentence)) if (presentForDenial(id, facts, names)) push(view, id, 'denies', sentence, `the town has: ${id}`);
+        // the hand-written things left the page list at the precision read (`THINGS[id].pageWithdrawn`), but for a kept narrow phrase (F7: `onPageList`); arm 2 of the walker reads them
+        for (const id of thingsNamedIn(sentence)) if (onPageList(THINGS[id], sentence) && thingAbsent(id)) push(view, id, 'names', sentence, `the town lacks: ${id}`);
+        for (const id of thingsDeniedIn(sentence)) if (!THINGS[id].pageWithdrawn && presentForDenial(id, facts, names)) push(view, id, 'denies', sentence, `the town has: ${id}`);
         for (const id of newWordsNamedIn(sentence)) {
+          // the precision read withdrew its family from the page list (its reason is on the word), but for a kept narrow phrase (F7)
+          if (!onPageList(NEW_WORDS[id], sentence)) continue;
           if (NEW_WORDS[id].absent(facts, names, record, sentence)) push(view, id, 'names', sentence, `false here: ${id} (${NEW_WORDS[id].leaf})`);
         }
         for (const id of newWordsDeniedIn(sentence)) {
+          if (NEW_WORDS[id].pageWithdrawn) continue;
           if (!NEW_WORDS[id].absent(facts, names, record, sentence)) push(view, id, 'denies', sentence, `in force here: ${id}`);
         }
       }

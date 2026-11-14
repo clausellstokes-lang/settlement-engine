@@ -495,6 +495,13 @@ register; GREEN-BASE's bisect: 5c9218f62 reads 18, 4a3d37b86 reads 17). Members 
 factions `12 vs 12` hold. The arcane census over the mundane realm is still EMPTY; every ratio stays inside
 PENDING_BANDS. Copied from the MG-4.2 pin's own measured line; this block and the test header were moved in ONE act.
 
+⚠️ **RE-RECORDED 2026-11-12 (COHERENCE-POWERS 2B), ONE SAME-SEED SHIFT, THE MAGICAL TWIN MOVES.** factions `12 vs 12` →
+`12 vs 11` (1.000 → 1.091): at the density resize, a power of the ruler's own kind that no house stands behind is folded
+into the ruler (power/rulerKin.js :: settleHouselessPowers), and one of the magical twin's twelve is such a power (measured
+at the fold's own commit; the later not-built rule moves no axis here). Members `5 vs 5`, institutions `99 vs 102`, services `121 vs 124`, history events `17 vs 17` hold. The
+arcane census over the mundane realm is still EMPTY; every ratio stays inside PENDING_BANDS. Copied from the MG-4.2 pin's
+own measured line; this block and the test header were moved in ONE act.
+
 ⚠️ **RE-RECORDED 2026-11-07 (LANDING-R2 seat C2, the pool census composed; ODQ §934.105), ONE
 SAME-SEED SHIFT, BOTH TWINS MOVE.** services `127 vs 132` → `126 vs 130` (0.962 → 0.969); every other
 axis holds (members `5 vs 5`, institutions `99 vs 102`, factions `12 vs 12`, history events `18 vs 18`).

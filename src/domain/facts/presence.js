@@ -23,12 +23,25 @@ export const foldHouseName = (name) => String(name ?? '').toLowerCase().replace(
  * @returns {boolean}
  */
 export function houseHere(record, houseName) {
+  return liveHouseOf(record, houseName) !== null;
+}
+
+/**
+ * THE HOUSE OF THE ROSTER a catalogue name answers to, by the same rule (W2-A-LEAVES-2, 2026-11-13; REVIEW-W2A F2:
+ * the Magic tab printed a chain's catalogue names — "Parish churches (10-30)", "Cathedral (10,000+ only)" — beside
+ * the roster's own "Parish church" and "Cathedral", one house named twice). The first live house that carries the
+ * name; null where none does.
+ * @param {unknown} record a settlement record (its roster, `institutions`)
+ * @param {unknown} houseName a catalogue house name
+ * @returns {unknown} the roster's institution, or null
+ */
+export function liveHouseOf(record, houseName) {
   const want = foldHouseName(houseName);
-  if (!want) return false;
+  if (!want) return null;
   for (const inst of liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (record && typeof record === 'object' ? record : null))) {
     const have = foldHouseName(inst && typeof inst === 'object' ? /** @type {{ name?: unknown }} */ (inst).name : inst);
-    if (have === want) return true;
-    if (have.startsWith(want) && /^[\s'’]/.test(have.slice(want.length))) return true;
+    if (have === want) return inst;
+    if (have.startsWith(want) && /^[\s'’]/.test(have.slice(want.length))) return inst;
   }
-  return false;
+  return null;
 }

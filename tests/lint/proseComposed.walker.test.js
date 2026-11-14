@@ -1406,10 +1406,10 @@ describe('A13 — the PROVENANCE move, EXECUTABLE since the holder census landed
   const CAPTURED_TREASURY_TOWN = Object.freeze({
     config: {
       settType: 'town',
-      tradeRouteAccess: 'road',
-      monsterThreat: 'frontier',
-      culture: 'south_asian',
-      terrainOverride: 'desert',
+      tradeRouteAccess: 'isolated',
+      monsterThreat: 'random_threat',
+      culture: 'latin',
+      terrainOverride: 'hills',
     },
     // rate-9-2 -> rate-11-9 on 2026-09-30, with tests/fixtures/tasteTowns.js INTERESTED_TOWNS: the
     // same-seed shift left rate-9-2's Town hall without a tax service (urban band, ODQ §934.86).
@@ -1427,7 +1427,13 @@ describe('A13 — the PROVENANCE move, EXECUTABLE since the holder census landed
     // capture state is derived from the ruling three's agents (J-13), and rate-69-0's strengths-only hall reads
     // 'equilibrium'. The same scan at the car's tip names rate-105-2 (index 422) first of two (rate-165-1). The assertions
     // are unchanged.
-    seed: 'rate-105-2',
+    // rate-105-2 -> rate-33-1 on 2026-11-13 (STYLE-2-MERGE point 46, the COHERENCE-POWERS merge 6aeaa4154; the chair's ruling on
+    // STOP 46c), with INTERESTED_TOWNS and by identity with its cause: under the dual hat rate-105-2's seat is held by Supriya
+    // Prasad, the senior guild master (Merchant guilds (3-8)), no agent, so its hall reads 'equilibrium' (at 3575cf061: Bhavana
+    // Khanna, the mayor, a Thieves' Guild agent via the office). The rule: the first rateGrid town cell captured at birth, in the
+    // grid's own order: rate-33-1 (index 133). k of n: 2 of 3 (rate-69-0 too; rate-135-2 reads the treasury LICENSED). The
+    // assertions are unchanged.
+    seed: 'rate-33-1',
   });
 
   it('⭐⭐ THE FAIL LIMB IS REACHABLE ON REAL INPUT: a citing variant whose holder this town has captured', () => {

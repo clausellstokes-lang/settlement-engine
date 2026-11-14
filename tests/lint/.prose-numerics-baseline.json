@@ -319,13 +319,13 @@
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 155,
+    "line": 157,
     "category": "floatInterpolation",
     "snippet": "{rel.strength}"
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 161,
+    "line": 163,
     "category": "floatInterpolation",
     "snippet": "{rel.tension}"
   },
@@ -463,25 +463,25 @@
   },
   {
     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-    "line": 276,
+    "line": 277,
     "category": "floatInterpolation",
     "snippet": "`${r.name}: ${pct} percent (power ${r.power})`"
   },
   {
     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-    "line": 276,
+    "line": 277,
     "category": "percentToken",
     "snippet": "`${r.name}: ${pct} percent (power ${r.power})`"
   },
   {
     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-    "line": 278,
+    "line": 279,
     "category": "floatInterpolation",
     "snippet": "{pct}"
   },
   {
     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-    "line": 328,
+    "line": 331,
     "category": "floatInterpolation",
     "snippet": "{r.power}"
   },
@@ -919,7 +919,7 @@
   },
   {
     "path": "src/generators/steps/generateEconomy.js",
-    "line": 416,
+    "line": 417,
     "category": "floatInterpolation",
     "snippet": "`Chain depends on ${state.dependency.institution} (${state.dependency.severity || 'unspecified'}).`"
   },
@@ -931,13 +931,13 @@
   },
   {
     "path": "src/generators/steps/resolveResources.js",
-    "line": 613,
+    "line": 631,
     "category": "floatInterpolation",
     "snippet": "`Tier-weighted depletion (${Math.round((DEPLETION_PROB[tier] ?? 0.25) * 100)}%) marked this resource as depleted.`"
   },
   {
     "path": "src/generators/steps/resolveResources.js",
-    "line": 613,
+    "line": 631,
     "category": "percentToken",
     "snippet": "`Tier-weighted depletion (${Math.round((DEPLETION_PROB[tier] ?? 0.25) * 100)}%) marked this resource as depleted.`"
   },

@@ -1,0 +1,27 @@
+validate-hazard-registry exit 0
+validate-premortem exit 0
+validate-packets exit 0
+validate-data exit 0
+validate-custom-content-manifest exit 0
+validate-migration-head exit 0
+validate-edge exit 0
+validate-map exit 0
+validate-tuning-bands exit 0
+validate-foundry-module exit 0
+validate-mcp-server exit 0
+typecheck-ratchet exit 0
+domain-strict exit 0
+lint exit 0
+wiring-check exit 0
+stateprose-check exit 0
+writer-reach exit 0
+observed-shape exit 0
+presumed-door exit 0
+layers-door exit 0
+pool-guard exit 0
+pagecensus-grid exit 0
+build exit 0
+boot-smoke exit 0
+governing exit 1
+verify-dist exit 1
+DONE

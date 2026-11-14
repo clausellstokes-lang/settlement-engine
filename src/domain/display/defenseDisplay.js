@@ -167,7 +167,7 @@ export function criminalOpNote(name) {
 const CRIM_STRUCTURE_DATA = Object.freeze({
   organized: {
     key: 'organized', label: 'Organized Syndicate', color: '#8b1a1a', bg: '#fdf4f4',
-    note: 'One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it puts down random violence because that brings the law, and it lives on protection money and bought officials.',
+    note: 'One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it puts down random violence because that brings the law, and it lives on protection money and on any official it can buy.',
   },
   'semi-organized': {
     key: 'semi-organized', label: 'Semi-Organized Networks', color: '#8a3010', bg: '#fdf0e8',
@@ -659,12 +659,20 @@ import { hashKey } from './stateProse/stateProseKernel.js';
  */
 const ORGANIZED_RING_NOTES = Object.freeze([
   CRIM_STRUCTURE_DATA.organized.note,
-  'Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money and the officials it pays, and anyone who needs something from it can bargain.',
-  'Shopkeepers here pay one ring for protection, and the ring pays officials in turn. It stamps out random violence, which would bring the law, and its terms are known and can be negotiated.',
-  'Ask who runs crime here and the answer is one ring. It sets the rules and keeps to them, it can be bargained with, and it puts down any violence that would bring the law; it lives on protection money and bribed officials.',
+  'Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money and on whatever official it can pay, and anyone who needs something from it can bargain.',
+  'Shopkeepers here pay one ring for protection, and the ring pays any official who will take its money. It stamps out random violence, which would bring the law, and its terms are known and can be negotiated.',
+  'Ask who runs crime here and the answer is one ring. It sets the rules and keeps to them, it can be bargained with, and it puts down any violence that would bring the law; it lives on protection money and on any official it can bribe.',
 ]);
 
 /**
+ * W2-A-LEAVES-2 (2026-11-13; REVIEW-W2A F3, F3c). Each vantage said the ring "lives on protection money and bought
+ * officials" (the officials it pays, pays officials in turn, bribed officials): FALSE in 87 of the census's 720
+ * organised rings, where no official answers to a criminal house and the hall is not the criminals'. Whether one
+ * does is VEILED (the cast's allegiances and the hall's rung are stripped from the public record), and this note is
+ * one value printed on the DM's Defense tab and the public page alike, so it may not read it. The four vantages now
+ * say what is true in every town and read nothing hidden: the ring lives on "any official it can buy" (pays "any
+ * official who will take its money"), which presumes no buyer; the DM's "Who answers to whom" names those it has.
+ * The pick is the settlement's seed, as before (SW-B5); for the owner's veto, as new words.
  * @param {{ key: string, label: string, color: string, bg: string, note: string }} row
  * @param {{ _seed?: unknown }} settlement
  * @returns {{ key: string, label: string, color: string, bg: string, note: string }}

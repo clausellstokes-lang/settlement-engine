@@ -31,8 +31,13 @@ describe('the registry lookup enforces its tags (CENSUS-4b, CALM_ONLY)', () => {
   });
 
   it('under a crisis the stable entry is refused: the role goal stays, no calm position is written', () => {
-    const [mayor] = enrichNPCsWithStructure([npc(), npc()], place([{ type: 'infiltrated' }]));
+    const [mayor, second] = enrichNPCsWithStructure([npc(), npc()], place([{ type: 'infiltrated' }]));
     expect(mayor.goal.short).toBe('role goal');
-    expect(mayor.structuralPosition).toBeUndefined();
+    expect(second.goal.short).toBe('role goal');
+    // COHERENCE-POWERS-5 (N1): the first Oswin Hale holds the seat (the seat's home names him), so his card states the
+    // bare fact the seat row prints, no calm claimed and no constraint; the second card takes no position, as before
+    expect(mayor.structuralPosition).toBe('Holds the seat.');
+    expect(mayor.activeConstraint).toBeUndefined();
+    expect(second.structuralPosition).toBeUndefined();
   });
 });
