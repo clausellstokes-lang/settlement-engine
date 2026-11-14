@@ -647,3 +647,26 @@ sites, not a cure. RECOMMENDATION: the chair rules them banked BY HAND as point 
 `after-base: r3-code-c`, "this lane's rewording of a banked line: the same thing, the same print condition; true by the
 crisis kind or the branch, which no draw door reads"), each owed to whoever routes the vantage table and the
 validator's reasons through a door. Until ruled: named reds of THIS lane, not banked.
+
+### The chair's ruling on the STOP (04:05Z, copied whole; vetoable by the owner)
+
+"THE CHAIR RULES ON YOUR STOP (vetoable by the owner; copy it whole into the hand-back). The three are RE-KEYED BY HAND,
+by this ruling, by name, against the letter of 2m, as point 49's seven were: each is this lane's truer rewording of a
+line the line had banked (same file, same slot; the old rows you shrank), true wherever it prints by a key or a branch
+no draw door reads. FOUR CONDITIONS: (1) FIRST one guard test file, a collected arm over births: line 1 prints only in
+a wartime town; line 2 only in an occupied town; line 3's reason only where a fort and a force stand; each arm shown
+able to red by a plant you do not commit. If a line prints where its condition is false: STOP, it is cured, not
+banked. (2) Then the three rows in tests/lint/presumedThings.widened.register.json in the seven's own shape, reason
+`after-base: r3-code-c`, a commit of their own quoting this ruling; nothing else banked. (3) `--check` exit 0, the
+walker green. (4) FOR THE JOIN: the vantage table and the validator's reasons go through a draw door (the seat after the
+merges); the rows leave by --shrink then. Your statement says the register fell by ten rows and rose by three. Go on."
+
+| item | outcome | commit |
+|---|---|---|
+| 2g: condition (1), the guard | tests/generators/r3cRekeyedLinesTrue.test.js, 108 births; the war line seen 11 times, each wartime; the occupiers line 11, each occupied; the validator's reason (no birth reaches it: resolveConfig.js floors a plagued town's military priority at 25; reached through the edit-time checks) over the born rosters whole / without force / without fort at slider 12, seen 66, each with fort and force. Each arm planted red (not committed). Enters the mutation-coverage manifest (TOTALITY red before, 10/10 after) | 4f060b173 |
+| 2h: condition (2) and (3), the three rows | banked by the ruling, the seven's shape, reason `after-base: r3-code-c`; `--check` exit 0 (fresh 0, stale 0, banked 4714); the walker 43 of 43 | 6d4627205 |
+| 2i: the lighting census again | for the guard file: files 3250 -> 3251, titles 29452 -> 29455 | a89e8ba89 |
+
+**CORRECTED OUT LOUD.** 6d4627205's body says "10 rows fell … the first register's included". Exactly: 11 rows fell at
+acee99f3a: 9 arm-1 rows of the widened register, 1 arm-1 row of the first register (both by `--shrink`) and 1 arm-2 row
+of the first register (by `--shrink-arm2`); 10 of them arm-1 rows, the count the chair's ruling names. 3 rose here.
