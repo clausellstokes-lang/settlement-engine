@@ -22,6 +22,7 @@
  *     link to their in-context profile, which surfaces the compendium identity).
  */
 import { describe, it, expect, afterEach } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { render, screen, fireEvent, cleanup, within } from '@testing-library/react';
 import PowerTab from '../../src/components/new/tabs/PowerTab.jsx';
 import { SUPPORT_BASIS } from '../../src/domain/dossier/powerSupport.js';
@@ -337,10 +338,10 @@ describe('UX consolidation — Power (T2-17..T2-19)', () => {
     expect(a).toContain('Public legitimacy');
     expect(a).toContain(String(leg.score));
     expect(a).not.toContain('Breakdown'); // anchored: the score is asserted on this render
-    expect(a).not.toContain('Prosperity +8');
-    expect(a).not.toContain('Defense -3');
-    expect(a).not.toContain('Safety 0');
-    expect(a).not.toContain('Food 0');
+    expectAbsentWithAnchor(a, 'Prosperity +8', 'Public legitimacy', 'a modifier chip on the legitimacy block');
+    expectAbsentWithAnchor(a, 'Defense -3', 'Public legitimacy', 'a modifier chip on the legitimacy block');
+    expectAbsentWithAnchor(a, 'Safety 0', 'Public legitimacy', 'a modifier chip on the legitimacy block');
+    expectAbsentWithAnchor(a, 'Food 0', 'Public legitimacy', 'a modifier chip on the legitimacy block');
     cleanup();
     const still = { ...town, powerStructure: { ...town.powerStructure, publicLegitimacy: { ...leg, breakdown: { prosperity: 0, safety: 0, defense: 0, food: 0 }, governanceFractured: true } } };
     const b = render(<PowerTab powerStructure={still.powerStructure} settlement={still} narrativeNote={null} publicDossier />).container.textContent;

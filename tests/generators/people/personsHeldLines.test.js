@@ -55,9 +55,10 @@ describe('POWERS-9 · persons bought, sold or held: the declarations', () => {
     expect(kept.presentation.impression).toBe(PEOPLE);
     for (const boundaries of [{ ...both, slavery: false }, { ...both, human_trafficking: false }, resolveGenerationContentProfile({}).boundaries]) {
       const c = settleTitleLines(card(), 'the lanista', { facts: null, boundaries, held: null });
-      expect(c.secret.what).not.toMatch(HELD);
       expect(TITLE_SECRETS['the lanista'].map((r) => r.secret)).toContain(c.secret.what);
-      expect(c.presentation.impression).not.toMatch(HELD);
+      expect(c.secret.what).not.toMatch(HELD); // anchored: the line above asserts this secret is a live row of the lanista's own pool
+      expect(TITLE_PRESENTATIONS['the lanista'].map((r) => r.impression)).toContain(c.presentation.impression);
+      expect(c.presentation.impression).not.toMatch(HELD); // anchored: the line above asserts this impression is a live row of the lanista's own pool
     }
   });
 });

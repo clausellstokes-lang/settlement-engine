@@ -62,6 +62,6 @@ describe('COHERENCE-POWERS-7 · public legitimacy: the rating, never its points'
     const leaves = collectText(PowerStructure({ settlement: s, vm: buildViewModel({ settlement: s }) }));
     expect(leaves.join(' ')).toContain('PUBLIC LEGITIMACY');
     // a chip is one Text whose two leaves are the signed figure and the label ("-10 " + "Prosperity")
-    expect(leaves.join('')).not.toMatch(/(?:[+-]\d+|\b0) (?:Prosperity|Safety|Defense|Food security)\b/);
+    expect(leaves.join('')).not.toMatch(/(?:[+-]\d+|\b0) (?:Prosperity|Safety|Defense|Food security)\b/); // anchored: these same leaves are asserted to hold PUBLIC LEGITIMACY just above
   }, 60_000);
 });

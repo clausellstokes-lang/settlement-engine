@@ -17,6 +17,7 @@
  * No draw: the standing table is a pure function of the roster. Births in the reviewer's app shape; literal words.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
@@ -58,7 +59,7 @@ describe('(b) a rival of the density law carries its own standing, never its hos
     const s = born('rw3-metropolis-under_siege-1');
     const bloc = s.powerStructure.factions.find((f) => f.faction === 'The Garrison Bloc');
     expect(bloc?.contestsNiche, 'premise: the bloc is the density law\'s rival').toBe('Military/Guard');
-    expect(String(bloc.desc)).not.toContain('is narrow');
+    expectAbsentWithAnchor(String(bloc.desc), 'is narrow', 'keeps order reliably', 'the rival\'s own settled description');
   }, 60_000);
 });
 

@@ -36,9 +36,11 @@ describe('COHERENCE-POWERS-7 · a criminal house is never under the ruling power
     const under = deriveFactionSupport(s).get(ruler) || [];
     const criminal = under.filter((e) => e.why === DEFAULT_WORDS && isCriminalInstitution(e.institution)).map((e) => e.name);
     expect(criminal).toEqual([]);
+    const backers = institutionBackers(s);
+    expect(backers.size, 'premise: the backers map is live').toBeGreaterThan(0);
     for (const name of ['Smuggling network', "Thieves' guild chapter", 'Front businesses']) {
       expect(s.institutions.some((i) => i.name === name), `premise: ${name} is on the roster`).toBe(true);
-      expect(institutionBackers(s).get(name) || [], `${name} backs no one`).not.toContain(ruler);
+      expect(backers.get(name) || [], `${name} backs no one`).not.toContain(ruler); // anchored: the backers map is asserted live above and the house on the roster on the line before
     }
     expect(under.some((e) => e.why === DEFAULT_WORDS), 'a house of no power\'s kind still answers to the seat').toBe(true);
   }, 60_000);

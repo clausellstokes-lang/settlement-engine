@@ -50,13 +50,14 @@ describe('POWERS-9 · a structural row of the card\'s own body', () => {
   ])('%s prints no "%s"', (seed, line) => {
     const s = born(seed);
     expect(s.npcs.filter((c) => String(c.structuralPosition || '').startsWith(line)).map((c) => `${c.name}, ${c.title}`)).toEqual([]);
+    expect(s.npcs.length, 'premise: the roster is live').toBeGreaterThan(0);
     for (const c of s.npcs) {
       const kinds = BODY[c.category];
       const fp = firstPower(c, s);
       if (kinds && c.structuralPosition && !(fp && kinds.includes(fp.category))) {
-        expect(`${c.title}: ${c.structuralPosition}`).not.toMatch(c.category === 'other' ? OLD_FAMILY : UNDER);
+        expect(`${c.title}: ${c.structuralPosition}`).not.toMatch(c.category === 'other' ? OLD_FAMILY : UNDER); // anchored: the subject is built here from a card whose row is set (the if's guard); the roster is asserted live above
       }
-      if (c.category === 'military' && c.structuralRank === 'head') expect(String(c.structuralPosition || '')).not.toMatch(/^Leads a squad/);
+      if (c.category === 'military' && c.structuralRank === 'head') expect(String(c.structuralPosition || '')).not.toMatch(/^Leads a squad/); // anchored: a sweep of the head's own row; the roster is asserted live above
     }
   }, 60_000);
 

@@ -15,8 +15,10 @@ import { buildWartimeNarrative } from '../../../src/generators/power/governingSt
 describe('COHERENCE-POWERS-7 · no crown where the town governs itself', () => {
   it('the wartime vignette: a self-governing town names no crown; any other keeps its words', () => {
     const poor = { militaryEffective: 40, economyOutput: 40 }; const rich = { militaryEffective: 70, economyOutput: 60 };
-    for (const flags of [poor, rich]) {
-      expect(buildWartimeNarrative(flags, 'City-State Council', ['city-state government'])).not.toMatch(/crown/i);
+    for (const [flags, kept] of [[poor, 'Prices have risen and will rise again.'], [rich, 'The men who left to fight have not come back.']]) {
+      const free = buildWartimeNarrative(flags, 'City-State Council', ['city-state government']);
+      expect(free).toContain(kept);
+      expect(free).not.toMatch(/crown/i); // anchored: the same vignette's crown-free sentence is asserted on this text just above
       expect(buildWartimeNarrative(flags, 'Royal Authority', ['royal palace'])).toMatch(/crown/i);
     }
   });
