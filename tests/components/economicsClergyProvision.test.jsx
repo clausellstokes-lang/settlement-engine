@@ -9,6 +9,7 @@
  */
 import React from 'react';
 import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { cleanup, render } from '@testing-library/react';
 
 vi.mock('../../src/store/index.js', () => {
@@ -77,13 +78,13 @@ describe('the clergy\'s provision reads the defence\'s tradition (item 5)', () =
   }, 120000);
 
   test('no "N% recovery" chip on any card (rr2s-metropolis-calm-rand-1, rww-metropolis-famine-1, rww-city-under_siege-1)', () => {
-    for (const seed of ['rr2s-metropolis-calm-rand-1', 'rww-metropolis-famine-1', 'rww-city-under_siege-1']) {
+    expectNoSeedFailures(collectSeedFailures(['rr2s-metropolis-calm-rand-1', 'rww-metropolis-famine-1', 'rww-city-under_siege-1'], (seed) => {
       const town = birthApp(seed);
       expect((town.economicState.activeChains || []).some((/** @type {any} */ c) => c.magicRecovery), `anchored: ${seed} carries a recovery fraction`).toBe(true);
       const recovering = (town.economicState.activeChains || []).find((/** @type {any} */ c) => c.magicRecovery);
       expect(tabText(town), `${seed}: the recovering chain's card prints`).toContain(recovering.label);
       expect(tabText(town), seed).not.toMatch(/\d+% recovery/); // anchored: the line above finds the recovering card in this text
-    }
+    }), 'no seed\'s card prints a recovery chip');
   }, 120000);
 
   test('the food row names no kind of provision the defence denies (rww-village-famine-1, its tradition taken away)', () => {

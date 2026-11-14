@@ -9,6 +9,7 @@
  */
 import React from 'react';
 import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { cleanup, render } from '@testing-library/react';
 
 vi.mock('../../src/store/index.js', () => {
@@ -58,7 +59,7 @@ describe('the food balance row reads the food record and adds up as printed (ite
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
   test('the row prints the food record\'s own pounds, and they add up (#785, #1040, #1366, rww-metropolis-famine-1)', () => {
-    for (const seed of ['rr2s-city-famine-rand-1', 'rr2s-city-occupied-rand-1', 'rr2s-metropolis-plague_onset-port-1', 'rww-metropolis-famine-1']) {
+    expectNoSeedFailures(collectSeedFailures(['rr2s-city-famine-rand-1', 'rr2s-city-occupied-rand-1', 'rr2s-metropolis-plague_onset-port-1', 'rww-metropolis-famine-1'], (seed) => {
       const town = birthApp(seed); const fs = town.economicState.foodSecurity; const via = town.economicViability.metrics.foodBalance;
       expect(via.importCoverage, `anchored: ${seed}'s two homes disagree on the import`).not.toBe(fs.importCoverage);
       const r = rowOf(town);
@@ -67,7 +68,7 @@ describe('the food balance row reads the food record and adds up as printed (ite
       expect(r.imported, `${seed}: the food record's import`).toBe(fs.importCoverage);
       expect(r.provision ?? 0, `${seed}: the food record's provision`).toBe(fs.magicOffset);
       expect(addsUp(r), `${seed}: the row adds up as printed: ${r.text}`).toBe(r.need);
-    }
+    }), 'a seed\'s row does not print the food record or does not add up');
   }, 120000);
 
   test('no remainder of rounding is printed as an import under a siege that imports nothing (#442)', () => {

@@ -11,6 +11,7 @@
  * census's 720: 0 records differ).
  */
 import { beforeAll, describe, expect, test } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
@@ -42,13 +43,13 @@ describe('no "one ring" where rings rival (#1172, #1202, #716, #750, #813)', () 
   });
 
   test('the reader\'s towns: two rival rings beside a bought council (rr2s-city-calm-rand-1, rr2s-metropolis-calm-rand-1, rr2s-city-famine-rand-1)', () => {
-    for (const seed of ['rr2s-city-calm-rand-1', 'rr2s-metropolis-calm-rand-1', 'rr2s-city-famine-rand-1']) {
+    expectNoSeedFailures(collectSeedFailures(['rr2s-city-calm-rand-1', 'rr2s-metropolis-calm-rand-1', 'rr2s-city-famine-rand-1'], (seed) => {
       const town = birthApp(seed);
       const rings = town.powerStructure.factions.filter((/** @type {any} */ f) => f.category === 'criminal' && !f.isGoverning);
       expect(rings.length, `${seed}: anchored, two rings`).toBeGreaterThanOrEqual(2);
       const st = deriveCriminalStructure(town);
       expect(st?.key, seed).toBe('semi-organized');
       expect(st?.note, seed).toMatch(/lacks a single controlling authority/);
-    }
+    }), 'a reader\'s town reads one ring');
   }, 60000);
 });

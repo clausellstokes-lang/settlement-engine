@@ -8,6 +8,7 @@
  */
 import React from 'react';
 import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { cleanup, render } from '@testing-library/react';
 
 vi.mock('../../src/store/index.js', () => {
@@ -49,13 +50,13 @@ describe('the food sentence is true of the figures and the town (item 3)', () =>
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
   test('(a) 42 and 41 in a hundred are about two parts in five, not about a third (rr2s-thorp-famine-rand-1 #66, rr2s-metropolis-wartime-rand-1 #1251)', () => {
-    for (const seed of ['rr2s-thorp-famine-rand-1', 'rr2s-metropolis-wartime-rand-1']) {
+    expectNoSeedFailures(collectSeedFailures(['rr2s-thorp-famine-rand-1', 'rr2s-metropolis-wartime-rand-1'], (seed) => {
       const town = birthApp(seed); const fb = fbOf(town);
       expect(Math.round((100 * fb.dailyProduction) / fb.dailyNeed), `${seed} anchored`).toBeGreaterThanOrEqual(40);
       const t = foodSentence(town);
       expect(t, seed).toContain('grows about two parts in five of what it eats');
       expect(t, seed).not.toContain('about a third'); // anchored: the line above finds the sentence's share
-    }
+    }), 'a seed\'s sentence misstates its share');
   }, 60000);
 
   test('(a) a provision more than twice the harvest is not "a little more" (rww-metropolis-under_siege-1)', () => {
@@ -84,10 +85,10 @@ describe('the food sentence is true of the figures and the town (item 3)', () =>
   }, 60000);
 
   test('(c) no "nothing to spare against a bad year" beside six and fifteen months in store (rr2s-town-calm-rand-1 #362, rr2s-metropolis-calm-rand-1 #1147)', () => {
-    for (const seed of ['rr2s-town-calm-rand-1', 'rr2s-metropolis-calm-rand-1']) {
+    expectNoSeedFailures(collectSeedFailures(['rr2s-town-calm-rand-1', 'rr2s-metropolis-calm-rand-1'], (seed) => {
       const town = birthApp(seed);
       expect(Math.round(town.economicState.foodSecurity.foodRecord.storageMonths), `${seed} anchored`).toBeGreaterThanOrEqual(3);
       expect(foodSentence(town), seed).toBe("What is grown here and brought in covers each day's food.");
-    }
+    }), 'a seed\'s sentence misstates its stores');
   }, 60000);
 });
