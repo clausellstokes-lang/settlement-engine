@@ -1,6 +1,6 @@
 # W2-FIX-DATA-8 — the hand-back (kept current after every item; NOT the lane's final statement)
 
-**State (03:23 UTC by the clock): row 3 DONE (two writers cured, the rest read); row 4: the apothecary and the houses of work cured, three lines read (two gone, one parked), "hundreds" not done, the Mine NOT STARTED; rows 5 to 7, the chair's added row (the slave revolt's note), step 8, the history merge and the closing acts NOT STARTED.** Every figure EXECUTED unless marked PLAUSIBLE.
+**HANDED BACK BY FILE at 03:31 UTC (the count field read 358,277 at 03:05 and again at 03:29 with the cost unmoved: stale; this seat's own estimate is near 390,000, so it handed back before the next item would cross the 400,000 mark).** State: row 3 DONE (two writers cured, the rest read); row 4: the apothecary and the houses of work cured, three lines read (two gone, one parked), "hundreds" not done, the Mine NOT STARTED; rows 5 to 7, the chair's added row (the slave revolt's note), step 8, the history merge and the closing acts NOT STARTED.** Every figure EXECUTED unless marked PLAUSIBLE.
 
 **Seat.** The eighth seat on `lane/w2-fix-data-2026-11-13`, from `8e79b0237` (read back from origin first: equal to the brief's). Chair: `session_01ACmDYZrFEVXyZEUg1NDxxC`. Brief: `origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-W2-FIX-DATA-8.md` (its predecessor's brief BRIEF-W2-FIX-DATA-7 binds as written). The rulings this seat works to are copied in section 9.
 
