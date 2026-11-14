@@ -1391,3 +1391,40 @@ Brief: origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-R2-CODE-B
 ## HAND BACK (2026-11-14 ~14:25 UTC, at the count's mark: get_session read 342,054 at 13:57, and the landing stop took the rest). Nothing running; everything pushed.
 DONE (this seat, each pushed): (c) 3a6de5c7b; (d) stopped and named for the join; (m) with (s) 1a3505705; the landing stop e4520f77c + a412fc3b2; the hand-back 9c4ef0b93, b23b48613, ba87ebe2d and this commit. WHAT IS LEFT is the list above, in its order.
 
+
+# PART 13 — R2-CODE-B-13, the thirteenth seat (the reds classed; M10; the reader's rows; an ADDENDUM at the end, the statement not rewritten)
+
+Brief: origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-R2-CODE-B-13.md. Tip read back from origin at the start: a86646b84 (as the brief named). Full history fetched (`git rev-parse --is-shallow-repository` false). Scratch worktree wt-b13 (branch b13, own node_modules by npm ci); detached wt-join (600b9f743, the joined line's tip) and wt-pre (ba87ebe2d, the first parent of the merge e4520f77c), node_modules linked (one lockfile, db637c28d).
+
+## FIRST ACT — the joined line's tip merged, clean (08e43c072)
+origin/lane/join-2026-11-14 had moved 0a296575c → 600b9f743 (fe225f12a docs; 600b9f743 the Tonight famine caller hands the vantage its facts, item (i) landed at the join). `git merge-tree` clean; merged `--no-ff` as 08e43c072; the lane now holds 600b9f743. tests/domain/summary/tonightFamineLineReadsGrain.test.js green at the tip.
+
+## THE CHAIR'S RULINGS SINCE PART 12'S COPY (2026-11-14; each vetoable by the owner), copied
+(r1) THE FIFTEEN REDS ARE CLASSED BEFORE ANYTHING IS CURED: each red file run in three trees (the seat's tip; the joined line's tip held; the lane's own tip before the merge). (A) red on the joined line too: carried, named, not this lane's; (B) red at the lane's own tip before the merge: the lane's own, cured or re-keyed BY IDENTITY; (C) green on both, red together: composed: both cures stand each in its own case, else STOP with the two intents. The table here; one message to the chair with the counts by class.
+(r2) REGISTERS ARE RE-DERIVED ONCE, AT THE CLOSE: a red that is a stale register is (A) or NAMED, never re-taken, banked or hand-edited. A pin a cure moves is re-keyed BY IDENTITY in the same commit.
+(r3) THE SEAT'S OWN WORKLIST BY WIDTH: the census's one command at the tip with `--files` for this lane's files; ten hit lines of a writer READ where they print before it is cured (a hit is a candidate); the rows take their place by FALSE towns.
+(r4) (d) STAYS STOPPED AS NAMED (the journal's power slot; its writer is the view model, 4,395 cards): the exports' seats', not this lane's.
+
+## (r1) THE REDS CLASSED (each of the eight files run whole in the three trees; vitest JSON per tree, outside the tree)
+Columns: tip 08e43c072 · joined 600b9f743 · pre-merge ba87ebe2d (— = the file is not in that tree).
+
+| file | title | tip | joined | pre | class | what was done |
+|---|---|---|---|---|---|---|
+| tests/generators/generationForkCensus.test.js | A1 the instrument reaches the generator graph | R | R | G | A | carried (the control row's hash; a register of the joined line's) |
+| tests/generators/generationForkCensus.test.js | A3e the classification re-executed | R | R | R | A | carried (red in all three; not in PART 12's 15) |
+| tests/generators/generationForkCensus.test.js | A4 both landing triples re-executed | R | R | G | A | carried |
+| tests/generators/generationForkCensus.test.js | A5 the mint channel | R | R | G | A | carried (food.cropFortune vias) |
+| tests/property/editCorpusRatchet.test.js | A3 no merged object mixes a taken leaf | R | R | G | A | carried (327 vs 332, same on both) |
+| tests/property/editCorpusRatchet.test.js | A4 the town keeps its invariants | R | R | G | A | carried (E7 19 vs 21, same on both) |
+| tests/property/editCorpusRatchet.test.js | A7 the honesty figures are re-measured | R | R | R | A | carried; the figure differs by tree (tip 695, joined 697, pre 672, pin 682): a register, re-derived at the close |
+| tests/property/editCorpusRatchet.test.js | A8 the family declared instruments hold | R | R | G | A | carried; the message differs (tip: scores [26,33] vs [20,32]; joined: two rows) |
+| tests/generators/pipelinePinnedChoosers.test.js | A1 the null change | R | R | R | A | carried (tip and joined 41 moved rows, pre 3: the golden corpus) |
+| tests/generators/pipelinePinnedChoosers.test.js | A6 the pin bag is never written through | R | R | G | A | carried (50 vs 38) |
+| tests/domain/editWorldFactResources.test.js | A2 the no-edit path is unmoved | R | R | G | A | carried |
+| tests/domain/editWorldFactResources.test.js | A6 the mark is not the echo | R | R | G | A | carried |
+| tests/property/generatorGoldenMaster.test.js | every config byte-identical | R | R | R | A | carried (525 rows on tip and joined; 36 pre): the owner-signed golden, never re-taken |
+| tests/domain/worldFactRederive.test.js | A7 the goldens cannot see any of it | R | R | G | A | carried |
+| tests/domain/people/hallDecidesUnderOccupation.test.js | r2s-infiltrated-metropolis-3 | R | R | — | A | carried (the file came with the joined line) |
+| tests/data/w2FixData6Rows.test.js | ww-1416 the brewer sells barrels | R | R | — | A | carried (the data lane's file) |
+
+COUNTS: 16 red titles at the tip in the eight files (PART 12's 15 and generationForkCensus A3e, red in all three trees): (A) 16, (B) 0, (C) 0. Every failure message at the tip is the joined line's own, byte for byte, except editCorpusRatchet A7 and A8 (the honesty figures; registers). One title is red on the joined line and GREEN at the tip: editCorpusRatchet A1 (joined: "61 to be 63").
