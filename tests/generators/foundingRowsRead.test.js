@@ -49,7 +49,7 @@ describe('the founding rows read the record', () => {
   it.each([
     ['rr2s-town-under_siege-rand-1', /the local soil produces something/], // #488: no crop of its own
     ['rr2s-town-plague_onset-rand-1', /salt deposit/], // #594: no salt near
-    ['rr2s-city-famine-rand-1', /sacred grove/], // #845: no grove near
+    ['rr2s-village-famine-rand-29', /sacred grove/], // #845: no grove near (re-keyed by identity, R2-CODE-A-9: after the line's merge rr2s-city-famine-rand-1 holds an ancient grove, so the row is true there; this famine birth draws the row with none near)
     ['rww-thorp-plague_onset-1', /mill rights/], // ww-890: no mill of its own
     ['rww-hamlet-mass_migration-1', /riverside mill settlement/], // ww-915: no mill of its own
   ])('A2: %s — the false Origin row is gone and the row in its place is admitted', (seed, gone) => {
