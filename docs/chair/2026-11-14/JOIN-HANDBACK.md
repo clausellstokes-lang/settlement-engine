@@ -192,3 +192,24 @@ NEW `components/map/WorldPulseData.js` factionName on stressors 0→4; NEW `comp
 ## P2.7 THE HAND-BACK AT THE COUNT (2026-11-14, ~10:45 UTC)
 
 JOIN-2 handed back at ~375,000 tokens (get_session read 342,922 at 10:25; the next item, the fork census, would carry the seat past 400,000 mid-item). DONE: step 0 (nine merges, ab 282ccd34f..069c30e01); step 1 rows 2-6 through their doors (or stopped and ruled: P2.3); step 7 five pins (P2.5). LEFT, in order: step 7 items 1-4, 7, 8 of P2.5; step 8; step 9; step 10; the refreeze message; step 2 (gates, packets, six shards, the classing A-E); step 3 (CENSUS-2); step 4 (the classes and census tables; WHAT A LANE DOES TO LAND, which is section 2m of the book with the joined line's registers as the base). The instruments: P2.5's last paragraph; `/home/user/j2out/pwc.sh <tree>` measures the ALIAS DRAFT's four figures at any tree.
+
+# PART 3 — JOIN-3 (session `session_01ACmDYawcDw3tDavESkw22s`), brief `docs/chair/2026-11-14/briefs/BRIEF-JOIN-3.md` on `lane/chair-2026-11-08`
+
+Kept current after every item. Started from 7d12b40cb (origin's tip, as the brief gave it). Full history fetched (`is-shallow-repository` false); the nine lanes fetched. Worktree `/home/user/j3wt` (local branch `join3`), its own `npm ci`, `rerere.enabled true`. Every push plain by `git push origin join3:refs/heads/lane/join-2026-11-14` through `/home/user/j3out/push.sh` (fetch; tripwire: origin equals the last push; non-empty rev-list; clean tree; refs and local config snapshotted before and after: equal every time).
+
+## P3.1 The laws worked to (the brief's, copied)
+(a) every register shrink-only; a rise no lane's cause explains is a stop for that row, one message, go on. (b) expected reds, not stops: presumed things' fresh hits and fact layers' rises (one declaration pass follows the join); THE TWO DOORS (writer reach, observed shapes) are NOT written before the close (record 440): named door reds, ledger P2.6; neither door's writing mode is run. (c) a measured pin is measured at the joined tree by its own instrument and re-keyed by identity, every lane's cause in its note; never a sum. (d) nothing signed; no golden's door in its writing mode. (e) the edge bundles in a checkout with its own node_modules after every src change; the lighting census last.
+
+## P3.2 Step 7's pins, measured (each its own commit; the instruments: untracked probes in frozen trees `/home/user/j3ft/<lane>` at P2.2's merged tips, the line and the join)
+
+| pin | measured | causes | commit |
+|---|---|---|---|
+| `generationForkCensus` A6 (+ the register's `fnv1a32External`) | 24 -> 23, a FALL | by string identity: defence's foodways 3 and upkeep rolls 6; powers' tie prose 7 -> 6 (two pairs gone, one new); the rest the line's | e663b2b80 |
+| `generationForkCensus` A1 control hash | d4e728f3 (manifest f4fc47a0) | the generator golden: class B, re-keyed with the close's signing, never alone | — |
+| `generationForkCensus` A1 mint bound | 141 > 138, a RISE | powers +5 (a minted landed-gentry card's five forks; red at its own tip, 139; its draft names this figure for the merge seat to key), defence +2 (cropFortune). Sent back to the lanes (message 11:2x) | — |
+| `generationForkCensus` A4, A5 | economicState 'varies' (53/10); cropFortune x3 | the defence lane's own, red at 26474cda9 | — |
+| `institutionBudgetPromise` | 60 of 60 | every seed's moved leaves inside the union of the leaves its movers move at their tips (r3cc 28, r2a 37, powers 53, data 60, r2b 9, defence 60); twice equal | d6208a68a |
+| `phoneChromeFloor.census` | 622·865·667 -> 614·857·659 | the line 623·866·668; r3-tabs -1, powers -2, leaves -3, r2-code-b -3, each tip green on its own row | 85e10f1e5 |
+| `.prose-numerics-baseline.json` | 12 rows, line only | (path, category, snippet) multiset identical (186); defence's files 4, leaves/r2b/defence's EconomicsTrade.jsx | 035159bc7 |
+| `dossierPhoneFloorAllViews` x2 | five views each arm | every view = the line + its movers' moves (defence, r2a, powers, r2b); none by the join alone | 1e33be746 |
+| `corpusCureGuards` x4 | classed, not re-keyed | the corpus lane's rows (70/70 at its tip); each town's draw sent to the chair for that seat (message 11:5x) | — |
