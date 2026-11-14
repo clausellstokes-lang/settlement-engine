@@ -148,6 +148,17 @@ export function TraditionRow({ rec, preview, sameWindowAs = null }) {
  */
 /** element id → the facts it declares (`traditionCorpus.js :: TRADITION_ELEMENTS`' `needs`). */
 const ELEMENT_NEEDS = new Map(TRADITION_ELEMENTS.filter((e) => Array.isArray(e.needs) && e.needs.length).map((e) => [e.id, e.needs]));
+/**
+ * act id → the facts it declares. A FAIR IS KEPT WHERE THERE IS A MARKET (NOLANE-2, BAR-169/170: 65 of 278 births printed
+ * a "… Fair" tradition beside the Overview's own "No market or fair stands"): the act `fair` presumes the market the
+ * Overview's market line reads (`market`, the vocabulary's market atom, facts/market.js), as the Market element does. Kind A,
+ * display only: a filter over the list; genesis reads no declaration and the record is untouched.
+ */
+const ACT_NEEDS = new Map([['fair', ['market']]]);
+/** the facts a generated tradition's motif declares: its element's, and its act's. */
+function motifNeeds(rec) {
+  return [...new Set([...(ELEMENT_NEEDS.get(rec?.coreMotif?.element) || []), ...(ACT_NEEDS.get(rec?.coreMotif?.act) || [])])];
+}
 
 export default function TraditionsTab({ settlement }) {
   // THE PHONE PROSE FLOOR — the framing paragraph, the founding note and the
@@ -174,7 +185,7 @@ export default function TraditionsTab({ settlement }) {
     () => (Array.isArray(kept)
       // A DM's AUTHORED custom tradition (`customFounding.js`, id `custom:…`) is the DM's truth
       // and is printed as authored; only a generated row is held to its element's declaration.
-      ? filterDeclared(kept.map((rec) => ({ text: String(rec?.name ?? ''), needs: String(rec?.id ?? '').startsWith('custom:') ? [] : ELEMENT_NEEDS.get(rec?.coreMotif?.element) || [], rec })),
+      ? filterDeclared(kept.map((rec) => ({ text: String(rec?.name ?? ''), needs: String(rec?.id ?? '').startsWith('custom:') ? [] : motifNeeds(rec), rec })),
         { facts: () => factsOf(settlement), poolId: 'traditions:tab', surface: 'traditions', drawKind: 'A' }).map((row) => row.rec)
       : kept),
     [kept, settlement],

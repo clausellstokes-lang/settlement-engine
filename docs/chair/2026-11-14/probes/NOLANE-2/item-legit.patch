@@ -1,0 +1,97 @@
+diff --git a/src/components/new/tabs/SubstrateTab.jsx b/src/components/new/tabs/SubstrateTab.jsx
+index cf9589025..873f1bcab 100644
+--- a/src/components/new/tabs/SubstrateTab.jsx
++++ b/src/components/new/tabs/SubstrateTab.jsx
+@@ -109,6 +109,23 @@ function foodRecordWord(settlement) {
+   return { word: statusCase(label), tone: typeof fs.color === 'string' && fs.color ? fs.color : null };
+ }
+ 
++/**
++ * ⭐ THE PUBLIC'S LEGITIMACY HAS ONE HOME (NOLANE-2, the chair's ruling 4, BAR-182: 48 of the 112 births that print the
++ * row printed "Critical" here where the Power tab prints "Contested"). Two homes read one fact on two ladders: the
++ * causal score banded on the causal ladder, and the record's own stored label (`powerStructure.publicLegitimacy.label`,
++ * the band `rulingPower.js` writes and the Power tab prints). The row prints the record's label, in its colour, as the
++ * Food row prints the food record's. The causal band stays on `data-band` and orders the rows; a record without a
++ * label keeps the band word.
++ * @param {any} settlement
++ * @returns {{ word: string, tone: string | null } | null}
++ */
++function legitimacyRecordWord(settlement) {
++  const leg = settlement?.powerStructure?.publicLegitimacy;
++  const label = typeof leg?.label === 'string' ? leg.label.trim() : '';
++  if (!label) return null;
++  return { word: statusCase(label), tone: typeof leg.color === 'string' && leg.color ? leg.color : null };
++}
++
+ /**
+  * ⭐ UNDER A SIEGE THE TRADE ROW SAYS SO (R3-TABS, round two's #329 and #858; the chair's ruling of
+  * 2026-11-13: the tab does not print a connectivity word the town's own crisis contradicts). The reading
+@@ -208,6 +225,7 @@ export default function SubstrateTab({ settlement }) {
+         <NameColumns count={rows.length} style={{ padding: `0 ${SP.md}px` }}>
+           {rows.map(row => {
+             const recordRead = row.key === 'food_security' ? foodRecordWord(settlement)
++              : row.key === 'public_legitimacy' ? legitimacyRecordWord(settlement)
+               : row.key === 'trade_connectivity' ? siegeCrisisWord(settlement) : null;
+             return (
+             <div key={row.key} data-substrate-row style={{
+diff --git a/tests/components/substrateLegitimacyOneHome.test.jsx b/tests/components/substrateLegitimacyOneHome.test.jsx
+new file mode 100644
+index 000000000..bd06c35a8
+--- /dev/null
++++ b/tests/components/substrateLegitimacyOneHome.test.jsx
+@@ -0,0 +1,55 @@
++/** @vitest-environment jsdom */
++/**
++ * NOLANE-2, BAR-182 (the chair's ruling 4, 2026-11-14): THE PUBLIC'S LEGITIMACY HAS ONE HOME. The Foundations row banded
++ * the causal score on the causal ladder and printed "Critical" in 48 of the 112 births that print the row where the Power
++ * tab prints "Contested" (the record's own label, `powerStructure.publicLegitimacy.label`). The row now prints the record's
++ * label, as the Food row prints the food record's (substrateFoodOneHome.test.jsx). Display only: the record does not move.
++ */
++import { afterEach, beforeAll, describe, expect, test } from 'vitest';
++import { cleanup, render } from '@testing-library/react';
++import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
++import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
++import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
++import { statusCase } from '../../src/domain/display/labelCase.js';
++import { causalBandWord, deriveCausalState } from '../../src/domain/causalState.js';
++import { tokenCase } from '../../src/components/new/labelLadder.js';
++import SubstrateTab from '../../src/components/new/tabs/SubstrateTab.jsx';
++
++const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
++  selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
++function textNodes(root) {
++  const walker = root.ownerDocument.createTreeWalker(root, 4);
++  const out = [];
++  for (let n = walker.nextNode(); n; n = walker.nextNode()) if (n.nodeValue.trim()) out.push(n.nodeValue.trim());
++  return out;
++}
++const ROWS = [];
++beforeAll(async () => {
++  await loadGenerationLawPayloads();
++  for (let i = 0; i < 16; i++) {
++    for (const settType of ['thorp', 'village', 'city']) {
++      const seed = `r2r-${settType}-${i}`;
++      const s = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType }), null, { seed, customContent: {} });
++      const { container } = render(<SubstrateTab settlement={s} />);
++      const nodes = textNodes(container);
++      const at = nodes.indexOf('Public legitimacy');
++      const model = deriveCausalState(s);
++      ROWS.push({ seed, record: s.powerStructure?.publicLegitimacy?.label,
++        word: at >= 0 ? nodes[at + 1] : null,
++        causal: tokenCase(causalBandWord('public_legitimacy', model.variables?.public_legitimacy?.band)) });
++      cleanup();
++    }
++  }
++}, 600000);
++afterEach(cleanup);
++
++describe('the Foundations legitimacy row prints the record\'s label', () => {
++  test('anchored: the births print the row, and in some the causal ladder said another word', () => {
++    const printed = ROWS.filter((r) => r.word);
++    expect(printed.length).toBeGreaterThan(10);
++    expect(printed.filter((r) => r.causal !== statusCase(r.record)).length, 'the arm can red: two ladders, two words').toBeGreaterThan(0);
++  });
++  test('on every birth the row and the record say one word', () => {
++    expect(ROWS.filter((r) => r.word && r.record && r.word !== statusCase(r.record)).map((r) => `${r.seed}: ${r.word} vs ${r.record}`)).toEqual([]);
++  });
++});
