@@ -42,6 +42,7 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF:
 | 11 | join-nolane-2-2026-11-14 | 1b78763ae (16:28; final) | — (base 9618e0319) | 6d4b9cfa1 | none | — |
 | P1 | w2-fix-data-2026-11-13 | 78dd629bd (16:31; equal to the lane's tip) | e6e1893f4 (merge 2) | 3b873a03a | none | — |
 | P2 | r2-code-b-2026-11-13 | d7e9a40e7 (16:36; equal to the lane's tip) | 2d418c67f (merge 6) | e6233009b | none | — |
+| P3 | w2-write-2026-11-13 | 1ff581fd6 (23:01; equal to the lane's tip) | 9b08e5b69 (merge 3) | 460c108ad | none | clean-both: docs/content/RECEIPT_POOLS_DOSSIER_STATE.md tests/domain/corpusCureGuards.test.js docs/content/RECEIPT_POOLS_DOSSIER_STATE.md tests/domain/corpusCureGuards.test.js  |
 
 ## 3. Every code resolution
 
