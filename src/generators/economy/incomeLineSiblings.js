@@ -171,3 +171,31 @@ export function trueIncomeDesc(desc, f) {
     default: return desc;
   }
 }
+
+// ── #93 (UPKEEP-8; the chair's ruling of 2026-11-13, 23:48, a DECLARED MOVE of the income family) ──────────────────
+// Where Agricultural Rents is a small place's ONLY income line and a house of work stands on the roster, one line is
+// added at the branches' own weight for that house's WORK, worded from the trade (never the house's stored name, which a
+// user can rename or hide). It claims no ground, no catch for export and no trade route the record lacks; under a siege
+// nothing is said to be sold (the row prints its label and share alone).
+export const HOUSE_OF_WORK_LABEL = 'Local Trades';
+/** The houses of work and each trade's own sentence; the first such house on the roster speaks. */
+export const HOUSE_OF_WORK_LINES = Object.freeze([
+  Object.freeze({ re: /\bfisher|\bfishing\b/, text: 'What the fishers land is sold here.' }),
+  Object.freeze({ re: /\bwoodcutter/, text: 'The wood the woodcutters cut is sold here.' }),
+  Object.freeze({ re: /\bhunter/, text: 'The game and hides the hunters bring in are sold here.' }),
+  Object.freeze({ re: /\bmine\b/, text: 'What the miners dig is sold here.' }),
+  Object.freeze({ re: /\bquarr/, text: 'The stone the quarrymen cut is sold here.' }),
+]);
+
+/**
+ * The house of work's income line, or null.
+ * @param {string} tier @param {ReadonlyArray<{ source?: unknown }>} incomeBuild the lines built so far
+ * @param {ReadonlyArray<string>} roster the roster's names, lower-cased @param {boolean} besieged
+ * @returns {{ source: string, percentage: number, desc: string } | null}
+ */
+export function houseOfWorkLine(tier, incomeBuild, roster, besieged) {
+  if (!['thorp', 'hamlet', 'village'].includes(tier) || incomeBuild.length !== 1 || incomeBuild[0]?.source !== 'Agricultural Rents') return null;
+  const house = roster.find((n) => HOUSE_OF_WORK_LINES.some((h) => h.re.test(n))); // the first such house on the roster
+  const work = house && HOUSE_OF_WORK_LINES.find((h) => h.re.test(house));
+  return work ? { source: HOUSE_OF_WORK_LABEL, percentage: 10, desc: besieged ? '' : work.text } : null;
+}
