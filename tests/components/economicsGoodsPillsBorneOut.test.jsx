@@ -23,10 +23,11 @@ import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { exportsAsPrinted } from '../../src/domain/display/tradeListDisplay.js';
 
 /** The app's own shape, as the readers born their towns (rww-: render.rww.jsx; rr2s-: render.rr2s.jsx). @param {string} seed */
 const birthApp = (seed) => {
-  const m = /** @type {RegExpMatchArray} */ (seed.match(/^(?:rww|rr2s)-(\w+)-([a-z_+]+)(?:-(rand|port|river|road|isolated|crossroads))?-\d+$/));
+  const m = /** @type {RegExpMatchArray} */ (seed.match(/^(?:rww|rr2s|rr3w?)-(\w+)-([a-z_+]+)(?:-(rand|port|river|road|isolated|crossroads))?-\d+$/));
   const stresses = m[2] === 'calm' ? [] : m[2].split('+');
   const route = m[3] && m[3] !== 'rand' ? { tradeRouteAccess: m[3] } : {};
   return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...route, settType: m[1], selectedStressesRandom: false, selectedStresses: stresses,
@@ -78,8 +79,29 @@ describe('the goods pills print only where the record bears them out (item 2)', 
     const local = pillsUnder(town, 'Produced locally').map((p) => p.toLowerCase());
     expect(local, 'the list prints').toContain('stone');
     expect(local).not.toContain('grain'); // anchored: the line above finds stone among the same pills
+
+    // W2-C-LEAVES-12, the chair's ruling (3), HIGH (REVIEW-W2-C-LEAVES [13]): A RAW GOOD WHOSE OWN CARD THE PAGE MARKS IMPAIRED BY
+    // THE CRISIS IN FORCE IS NOT LISTED AS AN EXPORT ("Raw wool, Livestock" beside "The herds failed this year", 12 towns). The unit:
+    const herds = { chainId: 'livestock', resourceKey: 'grazing_land', resourceInputKey: 'grazing_land', status: 'running', processingInstitutions: ['Shepherd'], outputs: ['Leather goods'] };
+    /** @param {string[]} stresses */
+    const flock = (stresses) => /** @type {any} */ ({ name: 'Testford', config: { nearbyResources: ['grazing_land'] }, stress: stresses.map((type) => ({ type })),
+      institutions: [{ name: 'Shepherd' }], economicState: { activeChains: [herds], primaryExports: ['Raw wool', 'Livestock'],
+        foodSecurity: { foodRecord: { failedSource: 'livestock' } } } });
+    expect(exportsAsPrinted(flock(['famine'])), 'the herds failed: no wool, no beasts sent out').toEqual([]);
+    expect(exportsAsPrinted(flock([])), 'no famine: the raw goods leave').toEqual(['Raw wool', 'Livestock']);
+    // …and on the births (the reader's towns; a siege port among them, its card stopped by the siege)
+    for (const [seed, gone] of /** @type {Array<[string, string[]]>} */ ([['rr3-village-famine-rand-0', ['Raw wool', 'Livestock']],
+      ['rr3-hamlet-famine-rand-0', ['Raw wool', 'Livestock']], ['rr3w-village-famine-river-1', ['Raw wool', 'Livestock']],
+      ['rr3-town-under_siege-port-1', ['Magical services (naval route only)']]])) {
+      const born = birthApp(seed);
+      expect(born.economicState.primaryExports, `${seed}: anchored, the record exports them`).toEqual(expect.arrayContaining(gone));
+      const shown = exportsAsPrinted(born);
+      expect(shown.length, `${seed}: anchored, the list prints`).toBeGreaterThan(0);
+      for (const g of gone) expect(shown, `${seed}: ${g} beside its own card stopped by the crisis`).not.toContain(g);
+    }
+    expect(exportsAsPrinted(birthApp('rr3-hamlet-insurgency-rand-0')), 'guard: no famine, no siege: the wool leaves').toContain('Raw wool');
     expect(local).not.toContain('flour'); // anchored: stone was found among the same pills two lines above
-  }, 60000);
+  }, 240000);
 
   test('a key that is not a good never prints as one (rr2s-hamlet-under_siege-rand-1, #196: "Date export")', () => {
     const town = birthApp('rr2s-hamlet-under_siege-rand-1');

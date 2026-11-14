@@ -407,10 +407,28 @@ function pillAsPrinted(raw, side, settlement) {
     if (side !== 'exports' || !makers.some((c) => carries(c) && works(c))) return null;
     return mark.kinds.includes('transit') ? raw : [mark.label, 'transit', ...mark.kinds].map((k, i) => (i === 0 ? k : `(${k === 'naval' ? 'naval route only' : k === 'occupation' ? 'taxed by occupation' : k})`)).join(' ');
   }
-  if (!houseRe) return raw;
+  // W2-C-LEAVES-12, the chair's ruling (3), HIGH (REVIEW-W2-C-LEAVES [13]): a raw good whose own card the page marks Impaired
+  // by the crisis in force is not listed as an export ("Raw wool, Livestock" beside "The herds failed this year")
+  if (!houseRe) return side === 'exports' && rawCardStoppedByCrisis(good, chains, settlement) ? null : raw;
   if (!makerStands || landFailed(settlement, [...grounds, ...(RESOURCES_YIELDING.get(good) || [])])) return null;
   const onGround = chains.filter((c) => grounds.includes(String(c.resourceInputKey)));
   return onGround.length === 0 || onGround.some(works) ? raw : null;
+}
+
+/**
+ * A RAW GOOD'S OWN CARD, STOPPED BY THE CRISIS IN FORCE (W2-C-LEAVES-12, ruling (3) HIGH; the reader's [13]: exports under a
+ * famine listing the food that failed, 12 to 13 towns): the chains that work a ground the good comes from
+ * (`TRADE_GOOD_GROUNDS`, `RESOURCES_YIELDING`), where there is one, all print Impaired by the crisis read
+ * (`chainStateShown.js :: chainCrisisStateShown`: a famine's failed source, a siege's stopped field work) while the record
+ * holds them working. Then the good is not sent out: the card the page prints says so.
+ * @param {string} good the good, folded @param {ReadonlyArray<{ status?: unknown, resourceInputKey?: unknown }>} chains the record's chains
+ * @param {Parameters<typeof localProductionAsPrinted>[0]} settlement the record
+ * @returns {boolean}
+ */
+function rawCardStoppedByCrisis(good, chains, settlement) {
+  const grounds = [...(TRADE_GOOD_GROUNDS.get(good) || []), ...(RESOURCES_YIELDING.get(good) || [])];
+  const own = chains.filter((c) => grounds.includes(String(c.resourceInputKey)));
+  return own.length > 0 && own.every((c) => WORKING_CHAIN_STATUSES.includes(String(c.status)) && chainCrisisStateShown(c, settlement) === 'impaired');
 }
 
 /**
