@@ -954,6 +954,24 @@ executed). Scratch worktree `/home/user/wt/p11` on a local branch `p11` at the l
   a banked row is cured and shrunk), on lane/merge-15-point-49-wip-2026-11-14 (docs/INTEGRATION_STYLE_2_2026-11-09.md):
   read it before touching a register after the merge.
 
+- THE CHAIR, 03:15 UTC, A HAZARD FOR THE MERGE OF THE LINE: a shallow clone can give a WRONG merge base, not a missing
+  one (31 false conflict hunks measured for another lane). BEFORE THE MERGE: `git fetch --depth=2147483647 origin
+  lane/integration-2026-11-07 lane/powers-follow-up-2026-11-13` (about 250 MB); then `git rev-parse
+  --is-shallow-repository` prints false and `git merge-base --all origin/lane/integration-2026-11-07 HEAD` prints
+  e969a75b7. The chair's in-memory merge of this lane (18d249003) with the line (976db5b19): 10 conflicted files, NO
+  CODE: wiring-census.json, pool-dominance.register.json, and the edge bundles with their meta files: each taken from
+  ONE side and re-derived through its own door or script (the bundles by `npm run build:edge-shared`, alone, last),
+  never merged by hand. A code conflict means the base is wrong or the lane moved: look before resolving. FOR THE
+  JOIN: this lane and the data lane both change scripts/lib/table-pools.mjs: this lane's line there is ONE row,
+  NOT_TABLE_CHANNELS.TITLE_LINE_DECLARATIONS (d942ff36b).
+- THE CHAIR, 03:18 UTC: section 2m is pushed: `git fetch origin lane/merge-15-point-49-wip-2026-11-14` (d893d9289),
+  docs/INTEGRATION_STYLE_2_2026-11-09.md, "## 2m. FOR EVERY LANE THAT MERGES THE LINE AFTER POINT 49" (about forty
+  lines; by script, by range). Its part (3) names the three rows banked against this lane
+  (src/data/people/dmPowerLines.js rulingFaces "The ruling three of " and "The ruling two of ";
+  src/generators/power/rulerKin.js, the strip site FACTION_LABEL_SIBLINGS['Military/Guard']; reason `after-base:
+  powers`) and exactly how a holder cures one and shrinks it out. Read it before the first register touched after the
+  merge.
+
 ## P5.1 M4 at ec72918d4, the nine files run at both trees (executed, `--maxWorkers=3`, through the mutex)
 - At 714381934: 2 red titles (observedShapeReaders "the producers ran and the corpus is not empty";
   sovereigntyLightingContract "THE CENSUS IS AN ASSERTION, NOT A SENTENCE"): red at both trees, CARRIED.
@@ -989,6 +1007,17 @@ executed). Scratch worktree `/home/user/wt/p11` on a local branch `p11` at the l
   at a green tip), and the line's inventory differs from this lane's, so a lane refreeze is redone at the merge.
   RECOMMENDATION: the merge seat's ritual at the merge of this lane, its note naming 59f877e58.
 
+- L2 (the claim table's four LOW placements): DONE, b889007c8. Each rung reads a RungContext (the power, the roster,
+  the seat's name, the house names): the criminal council clause only where a council sits; "merchant capital" only
+  where a merchant power stands (ahead of a town's gentry); the town's leading merchant power, no merchant governing,
+  reads NEW WORDS "Merchants with local reach; a consistent civic presence, though other powers set the course here."
+  The 720: 75 descriptions in 56 towns, factions[].desc only. By town, before -> after: council 40 -> 12; gentry 5 -> 4;
+  noble competitive 5 -> 5; merchants 60 -> 31. EVERY PRINT LEFT IS rulingStructure.js's OWN LADDER LINE chosen from
+  the raw figure (not a table placement; the council class's 12 equal the reader's count at 714381934): NAMED, NOT
+  TOUCHED (the ladder's own base lines are not L2's; RECOMMENDATION: a row for the lane's next stage, the same
+  conditions on the ladder's own choice in generatePowerStructure). Guard: claimRungReadsRoster.test.js (4 of 4 red at
+  ec6d70a0e, green after; guard towns r2r-town-40, r2r-town-9).
+
 ## P5.3 M4 at 11457f38f, the nine files re-run (executed)
 - 217 passed, 3 red: observedShapeReaders "the producers ran and the corpus is not empty" and sovereigntyLightingContract
   "THE CENSUS IS AN ASSERTION" (red at 714381934 too: CARRIED; the second's figure is the estate's test-file count, 3227
@@ -1010,3 +1039,60 @@ executed). Scratch worktree `/home/user/wt/p11` on a local branch `p11` at the l
   the main checkout and the base worktree untouched. The push script now refuses a push with nothing to send and a
   push carrying any commit not of this seat. RECOMMENDATION for every seat: never let the pre-push hook run the whole
   suite from a linked worktree; read the reflog and the config after any suite.
+
+## P5.10 HANDED BACK at b889007c8+ (this seat's count 381,403 at 03:56 UTC by get_session: the next item would cross
+## the 400,000 mark mid-way). WHAT IS LEFT, IN ORDER, LINE BY LINE
+1. **M1, the five commanding claims beside Minor or Suppressed: NOT STARTED IN CODE, DESIGNED AND MEASURED.** At
+   ec72918d4 and at b889007c8 alike, the census's 720: 122 (Major church 40; "the ruling class and the merchant class
+   are the same people" 26; great families "structurally embedded in governance" 22; militarised nobles 18; standing
+   army 16; the reader's count exactly). The cure is five rows of power/claimStanding.js :: CLAIM_RUNGS, using the
+   context L2 built (b889007c8):
+   - `/^Major church institutions hold structural influence\. Land grants, [^.]*\./` (two variants, hospital and
+     charity; city and metropolis only): minor and suppressed both 'Clergy are present but operate at the margins of
+     civic life; their moral authority is real but their political leverage is limited.' (the table's own church rung
+     above a village, for the same reason: the standing sentence says the priests have no say in the hall).
+   - 'The ruling class and the merchant class are the same people; commercial decisions are political decisions and
+     civic access is purchased.' (printed only where a merchant power governs: 26 of 26 measured): minor and suppressed
+     `merchantRung` (a merchant governs, so LOCAL_MERCHANTS; where the guild ties the governing merchants on power the
+     new LEADING line, also true).
+   - 'Hereditary great families with land grants, court appointments, and dynastic marriage networks; structurally
+     embedded in governance even when not formally in power.' and "Militarised noble families whose landholdings double
+     as fortified estates; they provide the settlement's heavy cavalry and expect political weight in return.": minor
+     `nobleMinorRung`, suppressed LESSER_LANDED.
+   - 'Standing army with genuine political weight; command appointments are patronage, and the council knows it.' (city
+     and metropolis; all 16 towns hold a "Professional city watch"): minor 'Well-funded city watch; it keeps order
+     reliably and is growing more sure of its own authority.', suppressed 'City watch; law enforcement and external
+     defence, stretched between multiple responsibilities.', EACH ONLY where ctx.names holds a watch
+     (`/watch/.test(n)`), else null (the claim left: measure it is zero on the 4,305).
+   The towns of each, with their rosters and arms: `node /home/user/probes/m1army.mjs <births dir>` (re-made below).
+   Then: born again, m1count.mjs to 0 for the class; read where each rung prints (three towns of its cells, the
+   smallest and largest tier, a crisis); the density-law rivals copy the settled host (measure that no rival keeps a
+   claim); a red-first test (a plant per row); the 45 governing files; the gates; one commit.
+2. **L4, L5, L7** (required before the statement): NOT STARTED. L1, L3, L6: NOT STARTED.
+3. **The named rows** (P4.7 and P5.0's added row, the seat line's doubled title): NOT STARTED; and the chair's two
+   rulings of 01:36 UTC (the card's TITLE on a man; ww#656 with #312 after the merge).
+4. **The 44 lines of P4.8**: NOT STARTED.
+5. **CENSUS-2 at base and tip**: NOT RUN by this seat.
+6. **THE MERGE OF THE LINE (976db5b19, the word given at 03:08 UTC)** with the chair's hazard of 03:15 (deepen first;
+   the merge base must read e969a75b7), then #312 and ww#656, the three banked rows by section 2m part (3), the
+   instrument's findings, the stage's statement: NOT STARTED.
+7. **tuningRegister's six rows**: NAMED for the merge seat's ritual (P5.2); at the merge of the line the merge book's
+   section 2m may say otherwise: read it.
+
+## P5.11 This seat's instruments, and how a successor re-makes them (all outside the repository)
+- The scratch worktree /home/user/wt/p11 (branch p11), the base worktree /home/user/wt/base (714381934), and
+  /home/user/wt/tipcheck (a detached worktree for red-first runs at an older tip), each with node_modules linked from
+  p11 (`npm ci` in p11 once).
+- births: the fourth seat's probes/POWERS-9/births.mjs and births.sh, copied to /home/user/p9probes/ with its `C2`
+  constant pointed at the CENSUS-2 probes extracted to /home/user/c2 (`git archive origin/lane/census-2-2026-11-13
+  docs/chair/2026-11-13/probes/CENSUS-2 | tar -x -C /home/user/c2`); `sh /home/user/p9probes/births.sh <tree>
+  <outdir> 720 4` (about 3 minutes).
+- /home/user/probes/m1count.mjs <births dir> [--list N]: the M1 class beside Minor/Suppressed (the reader's
+  rungcount.mjs CLASS, on births rows) and the four L2 classes by town. m1army.mjs <dir>: the uncovered claims'
+  towns with seat, arms and merchant powers. descdiff.mjs <dirA> <dirB> [n]: the faction descriptions that moved
+  between two births of the same seeds, by old -> new opening, with every leaf path that moved. show.mjs <dir>
+  <substring> [n]: the towns printing a line, with their rosters and tier counts.
+- /home/user/runs/push.sh: fetch, refuse a push with nothing to send or carrying a commit not by Claude, check
+  fast-forward, push `p11:refs/heads/lane/powers-follow-up-2026-11-13`, compare the shared config.
+- The M4 walker dumps: a copy of sovereigntyLightingContract.walker.test.js writing `eachOnly` to a file (the park
+  debt's population at a tree); pool-dominance's measure of named pools (`import { measureDominance }`).
