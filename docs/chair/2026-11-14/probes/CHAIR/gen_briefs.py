@@ -2009,7 +2009,7 @@ READERS['REVIEW-R2-CODE-B'] = dict(
 
 READERS['REVIEW-R2-CODE-A'] = dict(
     title="REVIEW-R2-CODE-A · round two's first code lane read from its last read to its final statement",
-    lane='lane/r2-code-a-2026-11-13', own='lane/review-r2-code-a-2026-11-14', base='0d3972d8', tip=None,
+    lane='lane/r2-code-a-2026-11-13', own='lane/review-r2-code-a-2026-11-14', base='0d3972d8', tip='f63b5d76',
     what=("round two's first code lane: the founding paragraph, the history's origin, the arrival scenes, the pressure sentences and the people data"),
     before=("the tip the last reader read: NOT CLEAR there on two medium lines (a plague note's \"still at sea\" in inland towns; a famine hook's "
             "merchants with no market): check each cured"),
@@ -2017,7 +2017,13 @@ READERS['REVIEW-R2-CODE-A'] = dict(
     extra=("8. THE PAGE CENSUS ROSE on this lane's own lines at its merge of the line (\"two founders\": the origin sentence against the Founded-by line, "
            "banked 125, then 133) and its last seat cured it: by your own run of `node scripts/census/page-census.mjs --workers=2` at the tip, is that row "
            "at or under its banked figure, and does the cure hold on births the seat did not use? The statement names literals that stay RED AND NAMED "
-           "for a declaration pass: read each where it prints: true wherever its gate lets it print?"),
+           "for a declaration pass: read each where it prints: true wherever its gate lets it print? 9. THE LANE'S ACCOUNT IS ITS HAND-BACK'S "
+           "SECTIONS 13 TO 19 AS THEY STAND (each seat's items with commits and counts; section 18 holds the statement's measured parts): a "
+           "successor seat is composing the one final statement and anchoring test negatives WHILE YOU READ, with no change under src/ after "
+           "f63b5d76 until its statement is made: if `git diff --stat f63b5d76..origin/lane/r2-code-a-2026-11-13 -- src/` prints anything "
+           "when you write your verdict, say so in one line. THE TENTH SEAT'S TWO CURES ARE INSIDE YOUR STAGE: the siege's own description "
+           "pool (no line says the gates stand open or carts come in: twins in their own slots) and the famine's \"everyone is watching who "
+           "eats well\" lines (41 of its 1,800 births): read each where it prints, and what prints in its place."),
 )
 
 READERS['REVIEW-W2-C-LEAVES'] = dict(
@@ -3489,6 +3495,51 @@ SEATS2['R2-CODE-B-10'] = dict(
           "among them), listed in the hand-back under a heading of its own."),
     merges='',
     when="for a stop that blocks everything you have left, for a red new on the ninth seat's commits (step 2), and with your final statement or hand-back",
+    turns='',
+)
+
+
+SEATS2['R2-CODE-A-11'] = dict(
+    title="R2-CODE-A-11 · round two's first code lane: the statement composed first, the test debts, then the rows left",
+    branch='lane/r2-code-a-2026-11-13', tip='f63b5d76', statement=True,
+    intro=("You are R2-CODE-A-11, the eleventh seat on round two's first code lane of the settlement-engine integration program "
+           "(lane/r2-code-a-2026-11-13). The lane cures false lines in the founding paragraph, the history's origin, the arrival scenes, the pressure "
+           "sentences and the people data. The tenth seat cured the one HIGH row a first measure against the release bar put on this lane (the "
+           "siege's gates), the famine's \"who eats well\" lines and most of the lane's own red tests, and handed back before the statement's runs. "
+           "A FRESH READER IS READING THE LANE AT f63b5d762 WHILE YOU WORK: so NOTHING UNDER src/ IS YOURS TO CHANGE until your statement is made "
+           "and reported. Yours, IN THIS ORDER: the lane's ONE final statement (composed from parts two seats already measured); the lane's two test "
+           "debts (tests only); THEN, as a stage after the statement, the rows left."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/R2-CODE-A-HANDBACK.md, BY LINE RANGE, BY SCRIPT (open ONLY these): SECTION 19 WHOLE (from the "
+          "line \"## 19.\" to the end: the tenth seat's items; LEFT, in order: THAT IS YOUR LIST; the instruments); in SECTION 18 the block \"THE "
+          "FINAL STATEMENT'S MEASURED PARTS\" down to the line that begins \"**GATHERED BY SCRIPT\" (the census, the tip hits by line, the field "
+          "diff, the reds classed, the registered surfaces). THE GATHERED BLOCK (fifty very long lines) is NOT read: it is copied into the "
+          "statement by script.\n"
+          "3. EACH TEST'S OR WALKER'S OWN HEADER before you act on it: it names its door and its idiom."),
+    work=("THE WORK, in this order, pushed as made (steps 1 and 2 change NOTHING under src/):\n"
+          "1. THE LANE'S ONE FINAL STATEMENT in the form below, COMPOSED from section 18's measured parts brought current to f63b5d762: CENSUS-2 in "
+          "the lane's files and the 720 field diff re-run at that tip (the tenth seat's cures moved `.arrivalScene` and `.pressureSentence`: say "
+          "the counts); the reds re-classed by re-running the red FILES (tests/lint whole, the files that name a lane file, the registered golden "
+          "surfaces as files: the chair's order of 07:17: the whole suite is the joined tree's); ONE draft shift record (generationForkCensus A1 "
+          "and worldFactRederive A7 named as the merge seat's doors with their figures); the gathered block copied by script (FOR THE JOIN, the "
+          "new words, the declared re-deals) plus the tenth seat's (the siege carts in arrivalProse.js and the great fire's \"lower districts\": "
+          "the data lane's files); FOR THE DECLARATION PASS (the eighteen and the five); LEFT FOR AFTER THE JOIN; `node "
+          "scripts/implementation-packets.mjs validate`; the edge bundles checked (rebuilt only if a source hash moved). The base is e969a75b7; "
+          "the stage a reader has not read begins at 0d3972d8f. ONE message to the chair: the tip, the reds by class, where the statement is, and "
+          "the line: `git diff --stat f63b5d762..HEAD -- src/` prints nothing.\n"
+          "2. THE TWO TEST DEBTS (tests and their manifest only): (e) tests/lint/negativeAssertionAnchor.walker.test.js: thirty bare negatives in "
+          "sixteen of the lane's test files: each anchored by a positive assertion beside it (the subject really collected or really printed), in "
+          "the idiom the walker's header names, a plant showing the arm still reds; never a row in its baseline; (f) "
+          "tests/lint/mutationCoverageManifest.test.js: an entry for each of the thirty-eight invariant files: the mutation EXECUTED (break the "
+          "source, see the file red, restore, compare byte for byte), never asserted from reading. Batch them by file family, one commit a "
+          "family. If your count passes 300,000 inside this step: stop it at a commit, say how many are left, and go on to the hand-back.\n"
+          "3. A STAGE AFTER THE STATEMENT (src/ is yours again; only if your count is under 250,000): step 4's remaining rows of the census's tip "
+          "hits (section 18's table: each READ against its towns: false ones cured at their cause, red first, three towns read; the rows already "
+          "named stay named), then the bar's six MEDIUM rows (`git fetch origin lane/chair-2026-11-08`; `git show "
+          "origin/lane/chair-2026-11-08:docs/chair/2026-11-14/bar-0-rows/BAR-0-ROWS-r2a.json`; the towns re-born by the probes on "
+          "origin/lane/review-bar-0-2026-11-14), widest first; listed in the hand-back under a heading of its own."),
+    merges='',
+    when="for a stop that blocks everything you have left, with your final statement (the tip; the reds by class; the src/ line), and with your hand-back",
     turns='',
 )
 
