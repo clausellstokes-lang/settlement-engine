@@ -1,0 +1,39 @@
+{"id":"HEADER","town":"r2s-wartime-town-1","sev":"LOW","kind":"RECORD","why":"DEFENCE says hired: none, yet HOUSES lists Hired blades and PEOPLE gives a blade captain","other":""}
+{"id":"35346","town":"r2s-wartime-town-1","sev":"LOW","kind":"BROKEN","why":"Quick-reference row prints the vintner with an empty power cell; every other row names a power","other":""}
+{"id":"07329","town":"r2r-town-12","sev":"MED","kind":"PAIR","why":"says Thieves' Guild presses close behind; GOVERNMENT has Thieves' Guild Strong above Corrupt Council Significant, and 28969 says it outweighs the seat-holder","other":"28969"}
+{"id":"29778","town":"r2r-town-12","sev":"MED","kind":"STATE","why":"most missing food comes by teleportation circle; FOOD has magic 3% against 22% brought in, so the circle is a small share","other":""}
+{"id":"21336","town":"r2r-town-12","sev":"LOW","kind":"LACKS","why":"names Vigilantes as a party; GOVERNMENT lists only Thieves' Guild, Corrupt Council, Merchant Guilds as powers","other":""}
+{"id":"28489","town":"r2r-town-12","sev":"LOW","kind":"LACKS","why":"slash-joined label names Vigilantes; GOVERNMENT lists no such power","other":""}
+{"id":"16959","town":"r2s-mass_migration-town-3","sev":"LOW","kind":"LACKS","why":"slash-joined label 'Military/Guard / Vigilantes / Thieves' Guild' names Vigilantes; GOVERNMENT lists no such power","other":""}
+{"id":"21311","town":"r2s-mass_migration-town-3","sev":"LOW","kind":"LACKS","why":"names Vigilantes as a party; GOVERNMENT lists no Vigilantes power","other":""}
+{"id":"29751","town":"r2s-mass_migration-town-3","sev":"LOW","kind":"STATE","why":"prints Vessel maintenance as an export; TRADE exports do not list it (vessel supplies are imports)","other":""}
+{"id":"22718","town":"r2s-slave_revolt-town-0","sev":"MED","kind":"STATE","why":"says Revolt Leadership has no stake and could side with either camp; CRISIS is the Slave Revolt and PEOPLE name its leader, so it leads the revolt","other":""}
+{"id":"33753","town":"r2r-town-11","sev":"LOW","kind":"BROKEN","why":"Quick-reference row prints the front man with an empty power cell; every other row names a power","other":""}
+{"id":"14634","town":"r2s-infiltrated-town-0","sev":"MED","kind":"STATE","why":"says it sends out cut gems; TRADE exports list no gems, HOUSES has no gem-cutter, and LAND says gemstones cannot make final goods","other":""}
+{"id":"21341","town":"r2s-infiltrated-town-0","sev":"LOW","kind":"LACKS","why":"names Vigilantes as the only party; GOVERNMENT lists no Vigilantes power, and a single party is no list of parties","other":""}
+{"id":"16524","town":"r2r-town-3","sev":"MED","kind":"STATE","why":"puts Thieves' Guild close behind Merchant Council; GOVERNMENT has Thieves' Guild Strong above Merchant Council Minor, so the guild is ahead","other":""}
+{"id":"27012","town":"r2s-insurgency-town-0","sev":"MED","kind":"STATE","why":"town hall is run by the dean; Military/Guard is a Suppressed power, so naming it as the power that loses most contradicts the clergy-led hall under Church Council","other":""}
+{"id":"05973","town":"r2s-recently_betrayed-town-0","sev":"MED","kind":"LACKS","why":"a baker is told to raise bread prices; HOUSES has no Bakers","other":""}
+{"id":"11664","town":"r2s-recently_betrayed-town-0","sev":"MED","kind":"STATE","why":"prints a Great Fire as the town's history; PAST records no fire (Wild Magic, Debt Crisis, Migration, Religious Conflict, Occupation, Purge, Siege, Succession Crisis)","other":""}
+{"id":"11665","town":"r2s-mass_migration-town-1","sev":"MED","kind":"STATE","why":"prints a Great Fire as the town's history; PAST records only the Purge, the Migration and the Religious Conflict","other":""}
+{"id":"17197","town":"r2s-slave_revolt-town-2","sev":"MED","kind":"STATE","why":"claims money enough to ride out a long crisis; STATE gives prosperity Poor, safety Critical and legitimacy 23","other":""}
+{"id":"34013","town":"r2s-wartime-town-2","sev":"LOW","kind":"BROKEN","why":"Quick-reference row prints the house boss with an empty power cell; every other row names a power","other":""}
+{"id":"04949","town":"r2s-monster_pressure-town-3","sev":"MED","kind":"LACKS","why":"claims an arcane regulatory body with local authority; GOVERNMENT lists no arcane power and HOUSES has no arcane house","other":""}
+{"id":"14041","town":"r2s-monster_pressure-town-3","sev":"MED","kind":"TAG","why":"its people stand on the walls; true here (Town walls) but tag spans towns whose DEFENCE says walls: none","other":""}
+{"id":"30469","town":"r2s-wartime-town-3","sev":"LOW","kind":"LACKS","why":"slash-joined label names Vigilantes as a party; GOVERNMENT lists only Guild Council, Merchant Guilds, War Council, Thieves' Guild","other":""}
+{"id":"14611","town":"r2s-wartime-town-3","sev":"LOW","kind":"STATE","why":"says it sends out bread, beer and animal feed; TRADE exports list only milled flour among them, bread and beer being made here but not exported","other":""}
+{"id":"21344","town":"r2s-wartime-town-3","sev":"LOW","kind":"LACKS","why":"names Vigilantes as a party; GOVERNMENT lists no Vigilantes power","other":""}
+{"id":"13382","town":"r2r-town-35","sev":"LOW","kind":"BROKEN","why":"imports 'Precious metal veins', a resource name; TRADE imports say Precious metals","other":""}
+{"id":"03234","town":"r2r-town-43","sev":"MED","kind":"LACKS","why":"a ledger circulating in the workers' quarter; a quarter is a district a town of 366 (12 named people) cannot hold","other":""}
+{"id":"28490","town":"r2r-town-22","sev":"LOW","kind":"LACKS","why":"slash-joined label names Vigilantes and a criminal network; GOVERNMENT lists only Merchant oligarchy, Religious Authorities, Merchant Guilds","other":""}
+{"id":"21337","town":"r2r-town-22","sev":"LOW","kind":"LACKS","why":"names Vigilantes and a criminal network as parties; GOVERNMENT lists neither","other":""}
+{"id":"29819","town":"r2r-town-22","sev":"MED","kind":"STATE","why":"shows the Vintner yielding meals and drink with no caveat; LAND gaps say the Vintner lacks access to grapes","other":""}
+{"id":"28279","town":"r2r-town-22","sev":"LOW","kind":"STATE","why":"says the town has little food of its own; FOOD shows grown 104%, brought in 0%, surplus 4%","other":""}
+{"id":"22366","town":"r2r-town-4","sev":"MED","kind":"STATE","why":"gives the founding reason as a seaport inseparable from the sea; FOUNDING reason is that it grew around salt workings, founded by religious authorities","other":""}
+{"id":"16254","town":"r2r-town-16","sev":"MED","kind":"STATE","why":"prints a Market Crash in the town's history; PAST lists no crash (its economic event is the Guild War, 25 years ago)","other":"11761"}
+{"id":"03273","town":"r2r-town-16","sev":"MED","kind":"STATE","why":"hook rests on a Market Crash and a collapse; PAST records no crash, only the Guild War as its economic event","other":"16254"}
+{"id":"03737","town":"r2r-town-16","sev":"MED","kind":"STATE","why":"hook about a ruined family and an engineered panic after a Market Crash; PAST records no crash","other":"16254"}
+{"id":"26592","town":"r2r-town-16","sev":"MED","kind":"STATE","why":"hook about debts surviving the crash; PAST records no Market Crash","other":"16254"}
+{"id":"21324","town":"r2r-town-16","sev":"LOW","kind":"STATE","why":"parties of a crash (speculators, creditors); PAST has the Guild War, not a crash","other":"11761"}
+{"id":"23070","town":"r2r-town-16","sev":"LOW","kind":"STATE","why":"slash-joined crash parties (speculators, creditors); PAST has the Guild War, not a crash","other":"11761"}
+{"id":"DONE","lines":2210,"blocks":34,"flags":38}
