@@ -9355,6 +9355,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "food: ≥ pressured"
+          ],
           "text": "People at {settlement} make do with what they have; a good year is comfortable and a bad one is lean.",
           "slots": [
             "settlement"
