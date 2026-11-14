@@ -825,12 +825,12 @@ the access.
 3. `[visitor · no crisis · market]` Nothing about {settlement} looks rich or poor: the {access} is busy enough, the market is open, and nobody is building or selling up.
 
 **COMBINATION C4: a low rung on a working approach**
-1. `[ledger · no crisis: under_siege]` Traffic moves along {settlement}'s {access} every day, and little of its money stays behind.
-2. `[street · no crisis: under_siege]` Some trade comes past {settlement}, and little of it stops. The town is poor, and its people say so to anyone who asks.
-3. `[visitor · market · no crisis: under_siege]` {settlement}'s market sells little, though the {access} is busy; most of the traffic does not stop, and the traders here are poor.
+1. `[ledger · no crisis: under_siege · no crisis: plague_onset]` Trade comes and goes by {settlement}'s {access}, and the town stays poor all the same.
+2. `[street · no crisis: under_siege · no crisis: plague_onset]` Some trade comes past {settlement}, and little of it stops. The town is poor, and its people say so to anyone who asks.
+3. `[visitor · market · no crisis: under_siege · no crisis: plague_onset]` {settlement}'s market sells little, though the {access} is busy; most of the traffic does not stop, and the traders here are poor.
 4. `[ledger · crisis: under_siege]` With the siege closing every way in, {settlement} has lost even the little that passing trade used to leave behind.
 5. `[street · crisis: under_siege]` {settlement} was poor even while its trade moved freely, and the siege has stopped it moving at all.
-6. `[visitor · no market · no crisis: under_siege]` There is no market at {settlement} to hold the trade that passes by, and the town stays poor while the trade goes on its way.
+6. `[visitor · no market · no crisis: under_siege · no crisis: plague_onset]` There is no market at {settlement} to hold the trade that passes by, and the town stays poor while the trade goes on its way.
 7. `[ledger · crisis: under_siege]` {settlement} had little to begin with, and the siege has stopped the passing traffic that brought in the rest.
 
 **COMBINATION C5: a low rung on a narrow approach**
@@ -1137,7 +1137,7 @@ register and stand as canonical-at-zero for the two lower tiers (R-DST-C).
 7. `[street · no market]` Much of what changes hands at {settlement} changes hands quietly, between people who would rather nobody counted it.
 
 **TIER: minor shadow activity (≥3)**
-0. *(canonical)* `[colour]` Some petty theft goes on here, and some trading without a licence. It is a nuisance, nothing more.
+0. *(canonical)* `[no organised crime · no crisis: famine · no crisis: under_siege]` Some petty theft goes on here, and some trading without a licence. It is a nuisance, nothing more.
 1. `[ledger · dm-only · no organised crime]` A little of {settlement}'s trade goes unrecorded, small enough to annoy the clerks and too small to change what the town is.
 2. `[street · dm-only · no organised crime]` There is some thieving and some selling without a licence. Every town this size has both.
 3. `[counterforce · dm-only · no organised crime]` What passes for a shadow economy here has never grown into one. There is unlicensed trade and nothing organised behind it.
@@ -1365,20 +1365,19 @@ sentence in two voices. **No named deaths.**
 3. `[unfolding · colour]` The loss of the {good} will be felt all through the season ahead: less on every table at {settlement} and less put by against the next bad year.
 
 **HOW THE NEED IS MET: much of it brought in**
-1. `[visitor · colour]` Food carts come into {settlement} most days, and they matter: a good part of what the town eats is grown elsewhere and brought in.
-2. `[ledger · colour]` {settlement} grows only part of what it eats; the rest comes in from the farms around it and from trade.
-3. `[street · colour]` A good part of the bread at {settlement} comes in on carts, and everyone knows which days they arrive.
+1. `[visitor · no crisis: plague_onset]` Food carts come into {settlement} most days, and they matter: a good part of what the town eats is grown elsewhere and brought in.
+2. `[ledger · no crisis: plague_onset]` {settlement} grows only part of what it eats; the rest comes in from the farms around it and from trade.
+3. `[street · no crisis: plague_onset]` A good part of what {settlement} eats is brought in, and everyone knows when the next load is due.
 
 **HOW THE NEED IS MET: part of it by magic**
-1. `[ledger · colour]` Not all of {settlement}'s food is grown or bought: some of what the town eats is made or kept by magic, and the town would go shorter without it.
+1. `[ledger · colour]` Not all of {settlement}'s food is grown or bought: some of what the town eats is provided by spell or by prayer, and the town would go shorter without it.
 2. `[street · colour]` Part of {settlement}'s food is neither grown nor bought, and the table would be thinner without it.
-3. `[visitor · colour]` A visitor may not see it, but some of the food on {settlement}'s tables was never grown or bought: it is there by magic.
+3. `[visitor · colour]` A visitor may not see it, but some of the food on {settlement}'s tables was never grown or bought: it came by spell or by prayer.
 
 **FOOD SOURCES: one source**
-1. `[ledger · no crisis: famine]` {settlement} lives off its {good} and little else. One bad year for the {good} would be a hungry year for the whole town.
-2. `[street · colour]` Nearly every meal at {settlement} goes back to the {good}, and after a poor season for the {good}, everyone eats less.
+1. `[ledger · no crisis: famine]` {settlement}'s own food comes from its {good} and little else, so one bad year for the {good} would cost the whole town dear.
+2. `[street · colour]` The food {settlement} raises for itself all goes back to the {good}, and after a poor season for the {good} there is less to go round.
 3. `[unfolding · no crisis: famine]` {settlement} has little food of its own but its {good}, so a bad season for the {good} is felt at every table.
-4. `[ledger · crisis: famine]` {settlement} lived off its {good} and little else, and the {good} has failed; there is nothing else to turn to.
 
 **FOOD SOURCES: several, the largest named**
 1. `[ledger · no crisis: famine]` {settlement}'s food comes from more than one source, the {good} most of all, so a poor year in one does not empty the town's tables.
@@ -1559,7 +1558,7 @@ note that carries it on the six wired surfaces.
 1. `[ledger · no crisis: under_siege]` {settlement} sells on goods it never made: some of what leaves the town entered it as imports the same season.
 2. `[visitor · no crisis: under_siege]` The trade here is in the moving of things. Very little of what leaves began here.
 3. `[street · no crisis: under_siege]` The town's living is the road. Goods come, goods go, and the town takes its part of both.
-4. `[ledger · crisis: under_siege]` {settlement} lived by moving other people's goods, and the siege has stopped the moving.
+4. `[ledger · crisis: under_siege]` Some of {settlement}'s trade was in other towns' goods passing through, and the siege has stopped that trade.
 5. `[visitor · crisis: under_siege]` Goods that were only passing through {settlement} are stuck there now, with the roads closed and nowhere for them to go.
 
 **POSTURE: `import_dependent`**
@@ -1568,16 +1567,15 @@ note that carries it on the six wired surfaces.
 3. `[threshold]` The outward trade does not cover the inward. It works while there is something to pay with.
 
 **POSTURE: `established`**
-1. `[ledger · no hunger]` {settlement} sends several different goods out to market; if one trade fails, the others still go.
+1. `[ledger · no hunger]` {settlement} sells more than one thing beyond the town.
 2. `[visitor · tier: ≥ village · no crisis: under_siege · no crisis: famine]` The yards here are full of goods bound out and no two of them are the same. This is a town that sells.
-3. `[street · no crisis: under_siege · no crisis: famine]` There is always something going out. If one trade is quiet, another is not.
+3. `[street · no crisis: under_siege · no crisis: famine]` There is always something going out, and not always the same thing.
 4. `[trade · no crisis: under_siege · no crisis: famine]` The carts that leave {settlement} carry several kinds of goods, not one.
-5. `[local · colour]` People in {settlement} work at more than one trade that sells beyond the town.
+5. `[local · no crisis: under_siege]` Buyers from outside come to {settlement} for more than one thing.
 6. `[newcomer · no crisis: under_siege · no crisis: famine]` A merchant who comes to {settlement} for one thing usually leaves with two or three.
-7. `[ledger · crisis: under_siege]` {settlement} had several trades sending goods out before the siege, and none of them can send anything now.
+7. `[ledger · crisis: under_siege]` {settlement} had several trades selling outward before the siege, and none of them can reach a buyer now.
 8. `[unfolding · crisis: famine]` {settlement} has more than one trade sending goods out, and the famine has made every one of them harder to keep going.
 9. `[street · crisis: famine]` With the famine on, every trade {settlement} sells outward is judged by one thing: what it can bring back to eat.
-10. `[visitor · crisis: under_siege]` {settlement} has several kinds of goods to sell outward, and the siege has shut every one of them in.
 
 **SCARCITY: `shortage`**
 1. `[ledger · market]` {good} is scarce in {settlement} and its price has risen.
@@ -1718,12 +1716,11 @@ A composed page draws one of each grain, never two.
 3. `[threshold]` The {chain} between {resource} and {good} is begun and not finished here; what stands between the two is one {institution} the town does not have.
 4. `[street · no crisis: under_siege]` The town takes the easy half of this trade and sells the rest of it to whoever will do the hard half.
 5. `[unfolding · crisis: under_siege]` With the roads cut by the siege, {settlement} can no longer send out its {resource}, and what it has stays in the town.
-6. `[ledger · crisis: under_siege]` Half of this trade was always done elsewhere, and with the siege closing the roads, the half the town does has nowhere to go.
 
 **EXPLOITATION: `fullyExploited`**
 1. `[ledger · no crisis: under_siege]` The {resource} in {settlement}'s country is worked all the way to the finished {good}.
 2. `[visitor · gate]` Every stage of the {resource} trade at {settlement} is done here, from the ground to the gate.
-3. `[street · colour]` The town has taken this trade as far as it goes, from the ground to the finished thing.
+3. `[street · no crisis: under_siege]` One of {settlement}'s trades is carried through here from start to finish, from what the country gives to the finished thing.
 4. `[street · colour]` {settlement} takes everything it can from the {resource} its country gives.
 5. `[ledger · crisis: under_siege]` With the siege on, none of {settlement}'s {resource} can go out to buyers; whatever the town works, the town must use.
 
@@ -1824,23 +1821,20 @@ shape.
 3. `[street]` Half of what goes out of this town came into it the same season, and the town's part of the business is the yard and the road.
 
 **CRITICAL IMPORT: a house needs what the land lacks** *(`resourceAnalysis.imports.critical[]` with its `reasons` entry naming the house; slots from that one import, never the export bag)*
-1. `[ledger · no crisis: under_siege]` Some of {settlement}'s work cannot go on without {good}, and the country around the town produces none, so the town buys it from outside or that work stops.
-2. `[visitor · no crisis: under_siege]` Every load of {good} that {settlement}'s work needs comes in from elsewhere; a closed road would stop that work within the season.
-3. `[ledger · crisis: under_siege]` Since the siege closed the roads, none of the {good} that {settlement}'s work needs has reached it, and that work has stopped or soon will.
-4. `[visitor · crisis: under_siege]` {settlement} has no {good} of its own, and the siege lets none in, so the work that needs it is stopping.
+1. `[ledger · no crisis: under_siege]` Some of {settlement}'s work cannot go on without {good}, and the country around the town produces none, so the town buys from outside or that work stops.
+2. `[visitor · no crisis: under_siege]` Whatever {good} {settlement}'s work uses must come from elsewhere; when none comes, that work stands idle.
+3. `[ledger · crisis: under_siege · stores: < 6]` Since the siege closed the roads, none of the {good} that {settlement}'s work needs has reached it, and that work has stopped or soon will.
 
 **CRITICAL IMPORT: the land cannot give it** *(the `reasons` entry names the terrain alone)*
-1. `[ledger · colour]` The country around {settlement} produces no {good}: whatever the town has of it comes from outside.
-2. `[street · colour]` None of the {good} used at {settlement} comes from the country here; it is brought in or done without.
-3. `[ledger · no imports]` The country around {settlement} produces no {good}, and nothing comes in from outside to make up for it, so the town does without.
-4. `[street · no imports]` {settlement} neither grows nor buys any {good}; people there do without.
+1. `[ledger · colour]` The country around {settlement} produces no {good}, so the town has none but what it buys.
+2. `[street · colour]` None of the {good} used at {settlement} comes from the country here; the town brings in what it uses, or goes without.
+3. `[ledger · no imports]` The country around {settlement} produces no {good}, so the town must look elsewhere for whatever it uses.
 
 **INCOME WEIGHT: the religious houses** *(`compound.religionInfluence` high)*
 1. `[ledger · sacredHouse]` Faith carries real weight in {settlement}'s money. What the religious houses take in and spend is a large part of the town's business.
 2. `[street · sacredHouse]` The religious houses at {settlement} are among its biggest buyers and employers, and a bad year for them is a bad year for the town.
-3. `[ledger · no sacredHouse · no crisis: under_siege]` Faith carries real weight in {settlement}'s money, though the place keeps no house for it: what its people give for their faith leaves with them on the feast days.
-4. `[street · no sacredHouse · no crisis: under_siege]` At {settlement} the feast days set the calendar of buying and selling, and the offerings leave the place with the people who carry them.
-5. `[threshold · no sacredHouse]` {settlement} spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.
+3. `[ledger · no sacredHouse · no crisis: under_siege]` {settlement} keeps no house for its faith, so none of the town's money passes through one.
+4. `[street · no sacredHouse · no crisis: under_siege]` Whatever {settlement}'s people give for their faith is given elsewhere, or not at all: the place keeps no house to take it.
 
 **INCOME WEIGHT: the practice of magic** *(`compound.magicInfluence` high)*
 1. `[ledger · colour]` Magic carries real weight in {settlement}'s money. What the town's practitioners charge for, and what they buy, is a large part of its business.
