@@ -3,8 +3,8 @@
   "corpus": "[{\"tier\":\"thorp\",\"n\":150},{\"tier\":\"hamlet\",\"n\":200},{\"tier\":\"village\",\"n\":350},{\"tier\":\"town\",\"n\":550},{\"tier\":\"city\",\"n\":350},{\"tier\":\"metropolis\",\"n\":150},{\"tier\":\"village\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"under_siege\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"under_siege\"}]",
   "census": {
     "_note": "Figures for the second wave, never a red: re-written by every door.",
-    "pools": 929,
-    "printOneLine": 672,
+    "pools": 930,
+    "printOneLine": 670,
     "measuredUnder30Draws": 144,
     "highestSharesOver150Draws": [
       {
@@ -26,6 +26,20 @@
         "top1": 0.9464,
         "top5": 1,
         "draws": 205,
+        "lines": 2
+      },
+      {
+        "pool": "ledger:institutionServices:Coaching inn.Lodging",
+        "top1": 0.9101,
+        "top5": 1,
+        "draws": 545,
+        "lines": 2
+      },
+      {
+        "pool": "ledger:institutionServices:Coaching inn.Horse change",
+        "top1": 0.9042,
+        "top5": 1,
+        "draws": 386,
         "lines": 2
       },
       {
@@ -75,20 +89,6 @@
         "top1": 0.787,
         "top5": 1,
         "draws": 230,
-        "lines": 2
-      },
-      {
-        "pool": "ledger:crisisCast:CAST_REASON_SIBLINGS",
-        "top1": 0.7858,
-        "top5": 1,
-        "draws": 742,
-        "lines": 2
-      },
-      {
-        "pool": "ledger:institutionServices:River boatyard.Barge construction",
-        "top1": 0.7774,
-        "top5": 1,
-        "draws": 283,
         "lines": 2
       }
     ],
@@ -5742,6 +5742,12 @@
       "top1": 0.5,
       "top5": 1,
       "lines": 3,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:stressTypes:STRESS_TYPE_SIBLINGS": {
+      "top1": 0.7524,
+      "top5": 1,
+      "lines": 2,
       "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
     }
   }
