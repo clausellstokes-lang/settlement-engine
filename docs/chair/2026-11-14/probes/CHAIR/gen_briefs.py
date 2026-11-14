@@ -1050,7 +1050,7 @@ SEATS2['W2-FIX-DATA-9'] = dict(
 
 
 # THE REHEARSAL OF THE BAR: a reader seat on the joined rehearsal tree. JOINED is set to that tree's tip (read from origin) before generating.
-JOINED = None
+JOINED = '9e35d686'  # lane/join-rehearsal-2026-11-14, read from origin by the chair at 05:11 UTC on 2026-11-14 (twelve lanes merged; generated files by their doors at d8b7a5fd)
 
 def build_bar():
     assert JOINED, 'set JOINED to the join rehearsal branch tip before generating this brief'
@@ -1063,7 +1063,7 @@ def build_bar():
     body = '\n\n'.join([
         ("You are REVIEW-BAR-0, an independent reader of the settlement-engine integration program. You fix nothing and you change nothing on any branch you "
          "read. THE RELEASE IS HELD until a fresh round of thirty generated towns, read thoroughly and cold, shows NO high and NO medium false sentence (the "
-         "bar). Ten builder lanes have been curing false sentences, each on its own branch; a rehearsal seat has merged them all onto one tree: "
+         "bar). Twelve builder branches have been curing false sentences, each on its own; a rehearsal seat has merged them all onto one tree: "
          "lane/join-rehearsal-2026-11-14 at " + JOINED + ". YOUR JOB IS TO MEASURE THAT TREE AGAINST THE BAR, as a rehearsal: how many false sentences a town "
          "still prints, of what kinds, and whose files write them. The count you return decides where the next week's work goes. A false sentence you miss "
          "is the costly error; a true sentence you list wastes a builder's hour."),
@@ -1099,7 +1099,11 @@ def build_bar():
          "severity.\n"
          "C. WHOSE LINES. For every HIGH and MED row of B: the writer (the source file and the function or pool id: `git grep -n -F` a fixed run of the "
          "sentence in the joined tree; a composed sentence is traced to the leaf that wrote the false part) and the lane that holds that file by its own "
-         "commits since the line (`git log --oneline origin/lane/integration-2026-11-07..origin/lane/<lane> -- <file>` over the ten lanes; none: \"no lane\"). "
+         "commits since the line (`git log --oneline origin/lane/integration-2026-11-07..origin/lane/<lane> -- <file>` over the lanes merged: "
+         "r3-code-c-2026-11-13, r3-tabs-2026-11-13, r2-code-a-2026-11-13, r2-code-b-2026-11-13, powers-follow-up-2026-11-13, w2-fix-data-2026-11-13, "
+         "w2-c-leaves-2026-11-13, coherence-upkeep-2026-11-12, and the corpus's three, w2-write-2026-11-13, w2-write-side-eco-2026-11-13 and "
+         "w2-write-side-rest-2026-11-13; none: \"no lane\"). THE LANES HAVE MOVED SINCE THEY WERE MERGED HERE: for each HIGH row also say whether its "
+         "sentence still stands in the holding lane's CURRENT tip (`git grep -n -F` on origin/lane/<lane>): a row a lane has since cured is marked so. "
          "Group the rows by writer: the count of rows, of towns, and one example.\n"
          "D. THE REPORT, docs/chair/2026-11-14/REVIEW-BAR-0-2026-11-14.md on your branch, with the merged list as JSON and your probes under "
          "docs/chair/2026-11-14/probes/REVIEW-BAR-0/: (1) THE COUNT: HIGH, MED, LOW per town and in all, and per kind; the average per town beside the cut's "
