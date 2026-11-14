@@ -887,3 +887,42 @@ town in that column so that the war line planted in the famine pool REDS; prove 
    `{ text: '...', needs: ['market'] }`, as the holder lane already gates "market vendors". 63 no-market towns of 1,722.
 7. The golden-master pin census (tests/generators/powerEconomyFreshness.test.js A4): 18 rows at the lane tip, 31 after
    L05's declared move (L01, L14 and (e) add none): the signed regen.
+
+### Step 2 (sent): one message to the chair at 09:39Z, tip 3dcf0c1c2, each finding's count before and after.
+
+### Step 3, the bar's seven MEDIUM rows (BAR-0-ROWS-r3c.json), each read in its town (bar0 births: REVIEW-BAR-0 render.bar0.jsx :: cfgFor, the rr pattern)
+- **n162, n163 (bar0-thorp-calm-rand-1, Tyrby, thorp of 28; "bread, beer, animal feed · Complete production chain in
+  place" on an external mill)** and **n277 (bar0-village-famine-rand-1, Zelenoki, village of 187, the grain failed; the
+  same row beside a Mill only)**: EXECUTED: both rows print at 70d92ed06 and NEITHER prints at this seat's tip: answered
+  by L05 (1b3e0fdfd: no Bakers stand, and the famine failed the grain). Zelenoki's livestock claim is gone with them.
+- **n80 (bar0-city-under_siege+famine-rand-1, Agiospolis)**: EXECUTED, still prints at the tip: the food record holds
+  `failedSource: "fish"` and `foodSources: ["fish"]`, and `foodwaysLine` "The table rests on fish from the local
+  waters." The writer is foodGenerator.js's call of domain/foodways.js :: composeFoodwaysLine (it hands every source,
+  the failed one too, to the phrase libraries). NOT CURED (the count's mark).
+- **n240 (bar0-town-calm-rand-1, Gortfell)** and **n299 (bar0-village-calm-rand-1, Tzulco)**: EXECUTED, both print at the
+  tip, in powerStructure.factionRelationships (factionDynamics.js, the religious↔governing arm): "Its priests look after
+  their flocks and have no say in the hall." (ratio 0.31, subordinate) and "... Each props up the other." (ratio 0.7)
+  against the record's facts the row file gives. NOT CURED.
+- **n15 (bar0-metropolis-calm-rand-1, Shankou)**: not in the record (governanceAccount.js composes it on display); NOT READ.
+
+### HAND BACK AT THE COUNT (used_tokens 346,162 at 09:42Z, read by get_session; this turn would pass the mark)
+**Tip** 3dcf0c1c2 plus this section. **Done:** L01 be7f5a208, L05 1b3e0fdfd, L14 77f0e6792, (d) FOR THE JOIN, (e)
+1654b0ad3, the lighting census 47d16334c, the hand-back commits; step 2 sent.
+**WHAT IS LEFT, line by line:**
+1. n80: the foodways line under a famine that failed its only named source. Measure first on the 1,722 (foodRecord.
+   failedSource in foodRecord.foodSources and the line naming it); the cure is a DECLARED MOVE (foodways draws:
+   `FOODWAYS.SOURCE_PHRASES.*` through drawDeclared), first check by content who holds foodGenerator.js.
+2. n240, n299: the religious subordinate/props-up lines against the town's own conflicts and the faith's civic voice;
+   the arm is factionDynamics.js's religious↔governing block (this lane holds the file).
+3. n15: read it on the Power tab in its town at the tip (governanceAccount.js, this lane's file), then cure or clear.
+4. The full step-3 procedure for each: widest first, one cause a commit, red first, plants, the reading, gates.
+5. FOR THE JOIN, above: the golden regens (powerEconomyFreshness A4 18 -> 31; worldFactRederive A7 3 -> 4), the dossier
+   prose manifest re-record, cultureProfiles.js line 419 (63 towns), the corpus's ANCHORED-OLD line, the "beer" claims.
+**What a fresh reader needs:** the range 70d92ed06..<this tip>; source changed only in heraldCausalGrammar.js,
+resourceGenerator.js, factionDynamics.js; the reader's file's unfinished steps (its "WHAT IS LEFT", 1-6) stand untouched.
+**How the instruments are re-made (all outside the tree):** worktrees /tmp/claude-0/wt8 (c8, `npm ci`) and
+/tmp/claude-0/wtbase (70d92ed06, node_modules linked); births `TREE=<wt> OUT=<f.gz> SEEDS=seeds-all.txt node
+REVIEW-R3-CODE-C/births.mjs` (seeds-all = REVIEW-R3-STAGES seeds720 + seeds-app + seeds-plagued + REVIEW-R3-CODE-C
+seeds-extra); probes in /tmp/claude-0/tools: l01.mjs (History-desk sentences with the age named), l05*.mjs (export
+claims by chain, houses, failed source), samerec.mjs (records and families moved), bar0*.mjs (the bar towns). Local
+config and refs compared after every push: unchanged but for the local branch c8 and npm ci's core.hooksPath.
