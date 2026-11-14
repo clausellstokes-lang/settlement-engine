@@ -83,7 +83,7 @@ The clean tip is green on all six files. **Guards missing:**
 
 **None in the stage** (`git log --merges 3909655c3..0ea65f574` is empty). The registers the stage touched:
 - `page-census.register.json`, the grid: `node scripts/census/page-census.mjs --grid` at the tip reads 0 falls and exits 0, so the grid equals the door.
-- The banked P4 96 → 0 and NEW1 11 → 0 against the 720 door: __PC720__.
+- The banked P4 96 → 0 and NEW1 11 → 0 against the 720 door: `node scripts/census/page-census.mjs` at the tip (the 720, the door's own run) reads P4 0 and NEW1 0, each equal to its banked 0; "the banked corpus reads at or under the register", exit 0 (`results/pc720.tail.txt`). Every other row reads at its banked count.
 - `tests/lint/.lighting-census-baseline.json`: its walker is green at the tip.
 
 ## Step 6: the gates (at the tip, `sh scripts/gate-tail.sh`)
@@ -94,7 +94,28 @@ The clean tip is green on all six files. **Guards missing:**
 
 ## Step 7: CENSUS-2 as a second eye
 
-__C2__
+`census2.sh <tree> <out> 4 --files <the stage's eight src files>` was run at the base and at the tip, on the 720.
+
+**No kind rises.**
+
+| Pattern | Base (towns · distinct lines) | Tip |
+|---|---|---|
+| a | 712 · 607 | 712 · 593 |
+| b | 70 · 101 | 70 · 101 |
+| c | 301 · 298 | 301 · 298 |
+| d | 382 · 40 | 382 · 40 |
+| e | 60 · 20 | 60 · 20 |
+| f | 720 · 343 | 720 · 343 |
+| g | 720 · 6 | 720 · 6 |
+| h | 20 · 73 | 20 · 73 |
+
+By the stage's files:
+- `governanceNarrative.js`: a 34 towns / 20 lines → 24 / 8 (#291's cure); c 8 / 8, equal.
+- `titleSecretsPresentations.js`, `poolMap.js` and `patronage.js`: equal.
+
+The census traces no line to `governingModifierWords.js`. Its patterns do not see a chip that contradicts the hall (M1), so this second eye cannot catch M1.
+
+Counts: `results/c2.counts.{base,tip}720.txt`.
 
 ## Step 8: the two HIGH rows and the generator move
 
