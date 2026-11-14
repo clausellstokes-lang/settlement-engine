@@ -215,6 +215,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
+            "no walls",
             "crisis: any",
             "no crisis: threat, unrest"
           ],

@@ -2766,7 +2766,7 @@ margin *arm*. They are different fields on different rows and both are kept;
 **readiness `CRITICAL`** {crisis-scoped}
 1. `[ledger · crisis: any · no guardPresence]` {settlement} is all but undefended. Nothing in the town would stop a serious attack for long.
 2. `[street · crisis: any · no crisis: occupied, under_siege]` People at {settlement} know it could not survive a serious attack, so they take care not to provoke anyone who could mount one.
-3. `[visitor · crisis: any · no crisis: threat, unrest]` You can walk into the centre of {settlement} without being stopped, challenged or counted by anybody at all.
+3. `[visitor · no walls · crisis: any · no crisis: threat, unrest]` You can walk into the centre of {settlement} without being stopped, challenged or counted by anybody at all.
 4. `[street · crisis: any · guardPresence]` {settlement} has people under arms, but too few and too badly placed to hold off a serious attack for long.
 
 **terrain FAVOURABLE to the defender** {colour}

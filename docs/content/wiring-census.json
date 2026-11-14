@@ -333,7 +333,8 @@
         "guardPresence": 1,
         "no crisis: occupied, under_siege": 1,
         "no crisis: threat, unrest": 1,
-        "no guardPresence": 1
+        "no guardPresence": 1,
+        "no walls": 1
       },
       "undeclared": 0,
       "crisisScoped": true
