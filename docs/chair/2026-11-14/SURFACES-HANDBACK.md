@@ -42,8 +42,8 @@ sections, walked as tests/pdf do, and the journal's markdown print it) and `agg.
 | 1 the stored key printed ("*(entrepot)*") | journal | 220 | 629 | **0** | r2r-thorp-1, -30, r2r-hamlet-8 |
 | 1 chain state (class) | journal | 0 | | struck, 0 | |
 | 1 chain state (word: "Active" for "✓ Running") | PDF cards | 757 | 4,838 | **0** | |
-| 2 chain outputs the tab does not print | PDF flow | 596 | 881 | | r2r-thorp-0, -1, -2 |
-| 2 chain outputs the tab does not print | PDF cards | 756 | 5,853 | | r2r-thorp-0, -1, -2 |
+| 2 chain outputs the tab does not print | PDF flow | 596 | 881 | **0** | r2r-thorp-0, -1, -2 |
+| 2 chain outputs the tab does not print | PDF cards | 756 | 5,853 | **0** (the aggregator's 160 are cards printing no outputs, read) | r2r-thorp-0, -1, -2 |
 | 2 trade lists: exports, imports, local | PDF, journal | 0 | | struck, 0 | |
 | 2 imports under a siege | PDF, journal | 0 | | struck, 0 | |
 | 2 a pill in another spelling than the tab ("River fish") | PDF, journal | 165 | 165 | | r2r-thorp-44, -50, -56 |
@@ -73,6 +73,17 @@ The trade connectivity row (UPK-869) is not in this table: the PDF's FOUNDATIONS
 - NOT CURED, SAID: the flow colours "operational" green as "running" (its legend has no Operational swatch); the tab
   colours it neutral. The state is the tab's; the colour of one state is the flow's own.
 
+## Item 2: THE CHAIN'S OUTPUTS — DONE, e280d24e1
+
+- CAUSE: the PDF's flow printed the record's outputs (else the chain table's); its cards the first four raw.
+- CURE: both call the tab's reader `chainOutputsShown` (three, as the tab).
+- COUNTS: flow 596 -> 0 towns, cards 756 -> 0 (the table).
+- GUARD: the sixth title of `tests/pdf/chainStateThreeSurfaces.test.jsx`; each file uncured alone reds it.
+- READ: r2r-hamlet-0, r2r-hamlet-16, r2r-thorp-1, r2r-metropolis-14 (the commit body).
+- PRINTS LESS: the cards' fourth output.
+- LEFT IN ITEM 2: the other spelling of a good (165 towns: the PDF and the journal print `resourceDisplayName`'s
+  "River fisheries" where the tab prints the record's "River fish"): not begun.
+
 ## Found, not cured (file, holder)
 
 - **The lighting census is red at the joined tip 035159bc7** (`tests/lint/sovereigntyLightingContract.walker.test.js`,
@@ -85,6 +96,6 @@ The trade connectivity row (UPK-869) is not in this table: the PDF's FOUNDATIONS
 
 ## What is left
 
-Item 2 (outputs, the other spelling); item 3 (food deficit, the food word on every surface incl. the PDF Identity
+Item 2's other spelling (165); item 3 (food deficit, the food word on every surface incl. the PDF Identity
 block); "Abundant" under a siege; the bracketed names; the stores' unit in 6 towns; the trade connectivity row
 measured at its item.
