@@ -2031,7 +2031,7 @@ READERS['REVIEW-W2-C-LEAVES'] = dict(
 
 READERS['REVIEW-POWERS-4'] = dict(
     title="REVIEW-POWERS-4 · the powers lane read as a diff from 96a6ced46 to its stage's statement",
-    lane='lane/powers-follow-up-2026-11-13', own='lane/review-powers-4-2026-11-14', base='96a6ced4', tip=None,
+    lane='lane/powers-follow-up-2026-11-13', own='lane/review-powers-4-2026-11-14', base='96a6ced4', tip='3909655c',
     what=("the powers lane: who holds power in a town, the powers' standing and claims, titles and honorifics, people's goals, ties and secrets"),
     before=("the tip the last reader read: NOT CLEAR there on four medium and seven low findings (M1, the commanding claims beside Minor or Suppressed, 122 "
             "towns of 720; M4, eleven red test titles; the lows): the stage answers M1, M4, L2, L4, L5 and L7 and lists the rest: check each"),
@@ -2574,6 +2574,64 @@ SEATS2['W2-WRITE-10'] = dict(
           "re-made.\n" + CORPUS2),
     merges='',
     when="for a stop that blocks everything you have left, at step 3 (the tip; each HIGH row's count before and after), and with your hand-back",
+    turns='',
+)
+
+
+SEATS2['POWERS-13'] = dict(
+    title="POWERS-13 · the powers lane goes on curing: its two red tests, the bar's two HIGH rows, the raw modifier, the medium rows widest first",
+    branch='lane/powers-follow-up-2026-11-13', tip='3909655c', statement=False,
+    intro=("You are POWERS-13, the eighth seat on the powers lane of the settlement-engine integration program (lane/powers-follow-up-2026-11-13). The lane "
+           "holds who rules a town and who contests it: the powers' standing and claims, titles and honorifics, people's goals, ties and secrets. The "
+           "seventh seat built M1, merged the integration line and made the stage's statement (PART 6); A FRESH READER IS READING THAT STAGE NOW (96a6ced46 "
+           "to 3909655c3). THE ORDER HAS CHANGED (the chair, 2026-11-14 07:11 UTC): the true join has begun on lane/join-2026-11-14 and this lane is "
+           "merged there; A LANE WHOSE CLOSE IS DONE GOES ON CURING and lands again later as a point of its own. A first measure against the release bar "
+           "(ten fresh towns read cold) put 2 of its 9 high and 7 of its medium rows on this lane's files. Yours: the lane's two red tests, those rows, "
+           "and the rows the seventh seat left. NO whole suite, NO final statement: a hand-back the next reader can read your stage from."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/POWERS-FOLLOW-UP-HANDBACK-2.md, BY LINE RANGE, BY SCRIPT (the file is long; open only these): PART 6 "
+          "WHOLE (from the line \"# PART 6\" to the end, about two hundred lines: the rulings; the statement; FOR THE DECLARATION PASS; FOR THE JOIN; "
+          "P6.6 LEFT FOR AFTER THE JOIN: THAT IS YOUR LIST after the bar's rows; the hazards: read them; the writer-reach list); P4.8 (what is left of "
+          "the 78, by file) and P4.9 and P5.11 (the instruments and how they are re-made); the reader's sections the rows name, when you reach them.\n"
+          "3. THE BAR'S ROWS FOR THIS LANE (`git fetch origin lane/chair-2026-11-08`; `git show "
+          "origin/lane/chair-2026-11-08:docs/chair/2026-11-14/bar-0-rows/BAR-0-ROWS-powers.json`, with the README.md beside it): 9 rows, 2 HIGH: each a "
+          "sentence, its town, the fact against it and the file that wrote it on the rehearsal's tree (find the writer at your tip by the sentence's "
+          "fixed words). The towns are re-born by the measure's own probes (`git fetch origin lane/review-bar-0-2026-11-14`: "
+          "docs/chair/2026-11-14/probes/REVIEW-BAR-0/: copy them out with git archive; run them from outside every repository tree).\n"
+          "4. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (docs/INTEGRATION_STYLE_2_2026-11-09.md, the section headed "
+          "\"## 2m.\": about forty lines; by script), before the first register you touch."),
+    work=("THE LIST, in this order, each cause its own commit, measured first on the 720 and on the lane's births, red first (a collected arm, never a "
+          "bare seed loop; each arm shown able to red by a plant made in a tree NO suite is running in), pushed as made:\n"
+          "1. THE LANE'S TWO TESTS RED SINCE THE MERGE (P6.3): styledTitleOnRows (\"expected 9 to be >= 10\", a corpus floor) and mintedFaceUnderworld "
+          "(r2s-succession_void-city-2, \"the lord\": no underworld payroll line). Each checked at the tip IN ITS OWN TOWN first: a fault the merge "
+          "composed is cured at its cause; a floor or a guard town the line's change moved is re-keyed BY IDENTITY with its cause named, never loosened.\n"
+          "2. THE PAGE CENSUS'S 720 DOOR at the tip (`node scripts/census/page-census.mjs --workers=2`, to a file): a rise on this lane's lines is "
+          "cured before anything else; falls are lowered by the door's shrink form, its own commit.\n"
+          "3. THE BAR'S TWO HIGH ROWS. #272: the Power tab prints a modifier's key beside the ruling body (\"Elder Council (significant) mage-advised\") "
+          "in a village whose record holds no mage and no magic house. THIS IS THE RAW MODIFIER (P6.6; P4.8's ww#639, ww#980, pf#1, pf#23). COUNT IT "
+          "FIRST on the 720 (every page that prints a modifier key, by key). RULED: an identifier is never printed; a modifier prints in plain words "
+          "only where the town's own record bears it out (an arcane house stands; a force stands; the faith is not subordinate to the seat), else "
+          "nothing. Measure what reads the stored modifier: the cure is at DISPLAY unless nothing else reads it; a modifier STORED where the record "
+          "does not bear it out is a second finding: count it, and cure it at its writer as a declared move only if the count is small and the "
+          "family is one this lane declares; else name it with its count. #291: \"Elder Council has been debating market levies for three months\" "
+          "(governanceNarrative.js) in a village with no market: a line that names a market, a court, a guild, a temple or a force READS THE ROSTER: "
+          "every such line of that table is read, not only the one the reader met.\n"
+          "4. ONE MESSAGE TO THE CHAIR (the tip; the two HIGH rows' counts before and after; the page census's exit), then THE COUNT.\n"
+          "5. THE BAR'S SEVEN MEDIUM ROWS (the rows file) AND P6.6's ROWS, WIDEST FIRST: one script over your births that counts the towns printing "
+          "each row's sentence at your tip (the table goes in the hand-back); cure the widest causes, one cause a commit, until your count's mark: "
+          "among P6.6's: L4 (the missing guard: its plant in the reader's section), the census's carried candidate (\"... and courts are all "
+          "ecclesiastical\" in a town with no court), P4.8's other lines by file. A row that needs the owner's words (the card's title on a man) stays "
+          "PARKED; #312 and ww#656 stay FOR THE JOIN (another lane's leaf).\n"
+          "AFTER EVERY CURE: the presumed-things walker (it reads every literal under src/); at every commit that touches src/ the strict-domain gate, "
+          "the type ratchet and eslint on the touched files; the twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop).\n"
+          "NOT YOURS: the writer-reach re-bank (the merge seat's, signed); the three banked rows and the ten fresh hits (the declaration pass); the "
+          "whole suite; any golden's door in its writing mode; any file this lane does not hold (check BY CONTENT, as the laws below say).\n"
+          "THE HAND-BACK, kept current after every item: a new \"# PART 7\" at the end of the lane's hand-back file: the rulings you worked to (this "
+          "brief's, and the chair's messages copied); every row: its writer, its counts before and after, its cure and commit, its guard and the plant "
+          "that reds it, the towns read; EVERY NEW OR CHANGED LINE with the towns it was read in (the owner's veto list, and the next reader's); the "
+          "declared moves with their field diff by family; what is left, line by line; how the instruments are re-made.\n" + POWERS_METHOD),
+    merges='',
+    when="for a stop that blocks everything you have left, at step 4 (the tip; the two HIGH rows' counts; the page census's exit), and with your hand-back",
     turns='',
 )
 
