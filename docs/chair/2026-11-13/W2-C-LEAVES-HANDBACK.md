@@ -1576,6 +1576,21 @@ At item 4a this seat ran `git commit --amend --no-verify` once to correct two co
 against the brief's "NEVER --no-verify on any command". Corrected the same minute: the commit was undone (`git reset
 --soft HEAD~1`) and made again with the hook running (c27393afb); nothing pushed carried it.
 
-## STATUS (this seat, kept current)
-- Items 1-6 DONE (1, 5, 6 without code); nothing running. LEFT: the final gates and section 2m's five doors at the
-  final tip; the diff stat; the one message to the chair.
+## AT THE FINAL CODE TIP 63ca503b0 (a frozen `git archive`, 9,410 of 9,410 files; the commit after it is this text alone)
+- THE THREE FAST GATES (the lane hook's): `npm run typecheck:ratchet` exit 0 · `npm run typecheck:domain:strict` exit 0 ·
+  `npm run lint` exit 0.
+- SECTION 2m's FIVE DOORS: presumed things `--check` exit 1 (fresh exactly the two SERVICE_OUTPUTS words, item 5, by
+  ruling; stale 0) · fact layers exit 0 · observed shapes exit 0 (in the clean worktree at the same commit: in the
+  archive it exits 1 "not a git repository", the instrument shells out to git) · writer reach exit 0 · the page census
+  (the 720, 4 workers) exit 0, "the banked corpus reads at or under the register": EVERY ROW'S COUNT IDENTICAL to
+  da7a567f4's run (P6need 0).
+- `git diff --stat da7a567f4..HEAD -- src/`: ONE file, `src/domain/display/tradeListDisplay.js` (+34 −3), item 3
+  (ced855213) alone. Every other change is under tests/ (items 2, 4a, 4b) and docs/ (this part and its probes).
+- NOT RUN (the brief's 7): the whole suite; the tuning inventory and the lighting census (the merge seat's, by their
+  rituals: this seat added no test file and no title, so the lighting census's file count is unmoved by it); any golden.
+
+## STATUS (this seat, final)
+- Items 1-6 DONE (1, 5, 6 without code); nothing running; the one message to the chair sent with the tip.
+- FOR THE DECLARATION PASS (unchanged): the two SERVICE_OUTPUTS matchers (item 5's row); row dbd691c1c6f9171f.
+- LEFT FOR AFTER THE JOIN (new from this seat): item 6's neighbour, 58 lines / 35 towns ("depend on X brought in"
+  where X is also worked here; the record imports it too).
