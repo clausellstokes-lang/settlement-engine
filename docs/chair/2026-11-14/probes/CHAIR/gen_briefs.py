@@ -1097,6 +1097,77 @@ SEATS2['R2-CODE-B-7'] = dict(
 )
 
 
+SEATS2['UPKEEP-10'] = dict(
+    title="UPKEEP-10 · the defence lane's close: three rows, the line's merge, the banked row, the final statement",
+    branch='lane/coherence-upkeep-2026-11-12', tip='1bdf565e', statement=True,
+    intro=("You are UPKEEP-10, the tenth seat on the defence lane of the settlement-engine integration program (lane/coherence-upkeep-2026-11-12). The lane "
+           "holds the derived defence rating, the money a town can spend on it, and the safety, economy and outlook lines that speak of them. The ninth seat "
+           "merged the capacity branch (a house counts by its size), cured its rows and handed back at its context mark with its list written out. Yours: "
+           "three rows, the merge of the integration line, which now holds point 49 (the instrument lane), the one row banked against this lane, and the "
+           "lane's ONE final statement."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-12/UPKEEP-HANDBACK.md: THE NINTH SEAT'S PART WHOLE (the top of the file, down to the first line of three "
+          "dashes: about a hundred lines, long ones: by script). It holds every ruling in force (#869's among them), what the ninth seat did with its "
+          "measures, its FOR THE JOIN rows, LEFT (THAT IS YOUR LIST) and how the instruments are re-made (its probes: docs/chair/2026-11-14/probes/UPKEEP-9/). "
+          "The file is 1,200 lines: the older parts are opened ONLY where this brief names a heading, by script, by heading.\n"
+          "3. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (docs/INTEGRATION_STYLE_2_2026-11-09.md, the section headed "
+          "\"## 2m.\": the instrument's walkers and doors, by command, and how a banked row is cured and shrunk; about forty lines; by script), before the "
+          "first register you touch after the merge.\n"
+          "4. docs/chair/2026-11-13/UPKEEP-DEFENCE-PARTS.md (the lane's design) ONLY if a hunk of the merge touches how a rating is derived."),
+    work=("THE WORK, in this order, each writer its own commit, measured first, red first (a collected arm, never a bare seed loop), pushed as made:\n"
+          "1. #869 AT DISPLAY, as the ninth seat's part gives the ruling (the band is NOT moved; the page tells the siege's truth): measure which surfaces "
+          "still print trade connectivity as \"Adequate\" (or better) under a siege in force at the tip, on the census's 720 and on siege births; if the "
+          "printing leaf is a file this lane holds: a display-only cure, a guard town, its own commit; if another lane's: FOR THE JOIN (file, function, the "
+          "one-line change, a test that reds until it is made) and go on. The Substrate tab's row was cured on round three's tabs lane: do not rebuild it.\n"
+          "2. THE GRAIN LINE and THE COAL LINES UNDER A SIEGE (LEFT 1 (a) and (b), as written there: a condition at the choice; measure what still prints "
+          "first; each a DECLARED MOVE confined to the income lines, with its field diff on the lane's 1,490).\n"
+          "3. ONE MESSAGE TO THE CHAIR (the tip; the three rows' counts), then THE COUNT.\n"
+          "4. FULL HISTORY, THEN THE MERGE. `git fetch --depth=2147483647 origin lane/integration-2026-11-07 lane/coherence-upkeep-2026-11-12`; `git rev-parse "
+          "--is-shallow-repository` prints false; `git merge-base --all origin/lane/integration-2026-11-07 HEAD` prints 69b53decd (a shallow clone gives a "
+          "WRONG base and false conflicts). Then the merge of the line's tip as you read it back (976db5b19 when this was written; a plain merge commit, "
+          "never a rebase; say which commit and what conflicted). BY THE CHAIR'S TRIAL MERGE OF 1bdf565ec WITH 976db5b19: 12 conflicted files; a conflict "
+          "outside this list means the base is wrong or a side moved: look before resolving.\n"
+          "   (i) CODE, BY HAND AT THE CAUSE, each file read whole first, so that BOTH sides' cures stand: src/domain/display/defenseDisplay.js (3 hunks), "
+          "src/domain/display/dossierViewModel.js (1: two additions at the same place: both stand), src/domain/generation/generationForkRegistry.js (1: a "
+          "measured figure, see (iii)). List every hunk and what you kept; a hunk that needs a choice between two BEHAVIOURS is a STOP with both sides.\n"
+          "   (ii) TESTS, by hand, both sides' rows standing: tests/domain/foodEnduranceHeldStores.test.js (the line's re-keyed comment and this lane's "
+          "besieged arm both stand), tests/lint/heldKeyWriterCensus.walker.test.js (both lists of rows).\n"
+          "   (iii) TWO MEASURED PINS MEET (tests/generators/generationForkCensus.test.js with the registry's fnv1a32External: the line re-keyed 17 -> 16, "
+          "this lane 17 -> 18 -> 42; tests/lint/institutionTable.walker.test.js: the line re-measured 1,849 -> 1,843, this lane 1,849 -> 1,834 -> 1,837). "
+          "NEITHER side's figure is taken and none is computed: each is MEASURED at the merge by the pin's own instrument and re-keyed by identity, both "
+          "sides' causes kept in the comment and the merge named as the third; a measured figure the two causes together do not explain is a STOP.\n"
+          "   (iv) REGISTERS, each taken from ONE side in the merge and then re-derived through its own door, each its own commit, never merged by hand: "
+          "docs/content/wiring-census.json, tests/lint/.lighting-census-baseline.json, tests/lint/.tuning-inventory.json, "
+          "tests/lint/presumedThings.register.json (take THE LINE's: point 49 changed its form; this lane's old rows are not carried over by hand: whatever "
+          "its checking run then names in this lane's files is cured or declared through the door as section 2m gives it). "
+          "scripts/mutation-coverage-manifest.json is a hand-written register: both sides' entries stand.\n"
+          "5. EVERY CHECK SECTION 2m LISTS, right after the merge: each red that names a line, a literal, a pool row or a page line of THIS lane's files is "
+          "cured or declared through its door; a red on the line's own carried set or on another lane's file is NAMED with its owner and left; nothing is "
+          "banked by hand. THE ONE ROW BANKED AGAINST THIS LANE at point 49 (src/generators/economy/incomeLineSiblings.js, \"smith\", the coal line, reason "
+          "`after-base: defence`, in tests/lint/presumedThings.widened.register.json; section 2m's part (3); banked by the merge seat in 3628f37cc): cured "
+          "at its cause and SHRUNK from that register through its door. The page census on this lane's lines (2m's door, the 720).\n"
+          "6. THE LANE'S ITEM 4 (declarations, nothing built): (i) ONE LADDER FOR ONE NUMBER: the posture line "
+          "(src/domain/display/stateProse/defenseStateProse.js :: posturePoolKey, another lane's file) bands readiness on the aspects' ladder, not the "
+          "badge's: bring the measure current at your tip (the births where the posture line's pool and the badge's band disagree; the sixth seat's "
+          "docs/chair/2026-11-13/probes/UPKEEP-6/one-ladder.txt shows how) and write it under FOR THE JOIN; do not touch that file. (ii) The Services and "
+          "Magic tabs keep the shown label this release (the lows L3 and C11): LISTED, not built. (iii) The first read's corpus lines (M1, M2, M3, M5, L2) "
+          "and the fourth read's C-M1 six births: DECLARED AS EXPOSURE, town by town, at your tip (find each by its label in the older parts, by script).\n"
+          "7. THE LANE'S ONE FINAL STATEMENT in the form below, with this lane's own parts: the base is 69b53decd (the lane's reviewed base); EVERY RATING "
+          "MOVE of the lane declared with its count and its bands, gathered by script from the parts' own tables (the ninth and eighth seats' \"What this "
+          "seat did, in commit order\"; the seventh's \"LEFT, AND THE FINAL STATEMENT\": W1 and W3; the capacity branch's cumulative move); the count of "
+          "births where the Output figure and the prosperity word stand one band apart, and \"the word alone everywhere\" listed as the owner's open choice "
+          "(#608); THE EIGHT TOWNS owed to the owner: docs/chair/2026-11-13/UPKEEP-CAPACITY-EIGHT-TOWNS.md gives them before and after the capacity build: "
+          "under a new heading there, each town AT YOUR FINAL TIP in the same plain words (the readiness figure and band word, the five scores; what moved "
+          "since and why, in the world's terms; no machinery: no page shows a part); EVERY NEW OR CHANGED READER SENTENCE of the whole lane with the town it "
+          "was read in, gathered from the sections so headed in each seat's part (the owner vetoes by exception); FOR THE JOIN gathered whole from every "
+          "part. Then ONE message to the chair: the tip, the suite's reds by class, where the statement is. A fresh reader then reads the lane, the "
+          "capacity commits as their own stage: leave it what it needs (the walker change 1dac1ca25 and the monotonicity claims are its first acts)."),
+    merges="; the merge of the integration line's tip named in step 4",
+    when="for a stop that blocks everything you have left, at step 3 (the tip; the rows' counts), when the merge and its registers are pushed (the tip; what conflicted; the two measured pins), and with your final statement or hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
