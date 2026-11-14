@@ -1,0 +1,1000 @@
+[
+{
+"id": "15308",
+"sev": "HIGH",
+"n": 4,
+"town": "r2r-village-53",
+"section": "Systems/Defense",
+"fold": "Organized crime has filled the power vacuum left by absent or failed civil authority.",
+"text": "Organized crime has filled the power vacuum left by absent or failed civil authority.",
+"why": "organized crime fills the power vacuum; GOVERNMENT lists no criminal power (Merchant Guilds, Independent Bloc, Elder Council only)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 439,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "23466",
+"sev": "HIGH",
+"n": 1,
+"town": "r2r-village-49",
+"section": "Systems/Defense",
+"fold": "Visitors can walk anywhere at any hour, and there is little crime; the local guard sees to that.",
+"text": "Visitors can walk anywhere at any hour, and there is little crime; the local guard sees to that.",
+"why": "the local guard keeps the peace; DEFENCE has no garrison, watch or militia",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 311,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "03348",
+"sev": "MED",
+"n": 360,
+"town": "r2s-plague_onset-thorp-0",
+"section": "Systems/Economics",
+"fold": "Agricultural Rents Payments in kind or coin from tenant farmers; the primary revenue at this scale.",
+"text": "Agricultural Rents Payments in kind or coin from tenant farmers; the primary revenue at this scale.",
+"why": "Revenue from tenant farmers' rents; HOUSES has only subsistence farming, no landlord or tenants",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/economy/economicState.js",
+"line": 73,
+"fn": "generateEconomicState"
+}
+},
+{
+"id": "03905",
+"sev": "MED",
+"n": 240,
+"town": "r2s-plague_onset-city-3",
+"section": "Systems/Economics",
+"fold": "Armed escort & mercenary hire",
+"text": "Armed escort & mercenary hire",
+"why": "offers mercenary hire; DEFENCE hired: none and HOUSES has no free company or hireling hall",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/computeActiveChains.js",
+"line": 944,
+"fn": "INSTITUTIONAL_SERVICE_MAP"
+}
+},
+{
+"id": "10700",
+"sev": "MED",
+"n": 236,
+"town": "r2s-occupied-city-3",
+"section": "Systems/Economics",
+"fold": "Highly diversified — multiple major revenue streams",
+"text": "Highly diversified — multiple major revenue streams",
+"why": "calls the economy highly diversified; 00570 says it lives on two or three trades",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/prosperity.js",
+"line": 412,
+"fn": "complexityByExports"
+}
+},
+{
+"id": "07371",
+"sev": "MED",
+"n": 194,
+"town": "r2s-under_siege-city-1",
+"section": "Systems/Defense",
+"fold": "Everyone comes and goes by the gates, so smugglers have to get past the garrison and city watch.",
+"text": "Everyone comes and goes by the gates, so smugglers have to get past the garrison and city watch.",
+"why": "'everyone comes and goes by the gates'; under siege nothing comes in or goes out",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 375,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "00585",
+"sev": "MED",
+"n": 161,
+"town": "r2r-thorp-27",
+"section": "Systems/Outlook",
+"fold": "<N> gets through the year, buying in what its own land and trades do not provide.",
+"text": "Olympnea gets through the year, buying in what its own land and trades do not provide.",
+"why": "'buying in what its land does not provide': imports none, grows a surplus",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/dossierViewModel.js",
+"line": 311,
+"fn": "deriveViability"
+}
+},
+{
+"id": "15458",
+"sev": "MED",
+"n": 152,
+"town": "r2s-under_siege-village-0",
+"section": "Systems/Resources",
+"fold": "Partial processing - exports semi-finished goods",
+"text": "Partial processing - exports semi-finished goods",
+"why": "'exports semi-finished goods'; TRADE exports none, and Under Siege nothing goes out",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/resourceGenerator.js",
+"line": 472,
+"fn": "evaluateInstitutionDeps"
+}
+},
+{
+"id": "09714",
+"sev": "MED",
+"n": 150,
+"town": "r2r-village-43",
+"section": "Systems/Economics",
+"fold": "Goods change hands here in back rooms and after dark, the duty on them goes unpaid, and the stalls that pay their fees lose custom to the ones that do not.",
+"text": "Goods change hands here in back rooms and after dark, the duty on them goes unpaid, and the stalls that pay their fees lose custom to the ones that do not.",
+"why": "'stalls that pay their fees'; HOUSES has no market or stalls; trade access isolated and Under Siege",
+"kinds": [
+"LACKS",
+"PAIR"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 698,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "09274",
+"sev": "MED",
+"n": 111,
+"town": "r2s-plague_onset-metropolis-2",
+"section": "Systems/Defense",
+"fold": "Food endurance: Under siege the outlying fields would be lost; the granary would carry the metropolis for more than a year at full rations, more than # years on #, and what is still harvested would stretch it further.",
+"text": "Food endurance: Under siege the outlying fields would be lost; the granary would carry the metropolis for more than a year at full rations, more than two years on half, and what is still harvested would stretch it further.",
+"why": "granary would carry it over a year at full rations; another line says little is put by against being cut off, 10% deficit",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/display/defenseDisplay.js",
+"line": 625,
+"fn": "foodEnduranceLine"
+}
+},
+{
+"id": "07212",
+"sev": "MED",
+"n": 90,
+"town": "r2s-succession_void-thorp-0",
+"section": "Systems/Defense",
+"fold": "Enforcement struggles to distinguish survival crime from organised theft.",
+"text": "Enforcement struggles to distinguish survival crime from organised theft.",
+"why": "enforcement and organised theft; no watch, no criminal house, population 8",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/safetyLineTruth.js",
+"line": 31,
+"fn": "THEFT_NETWORK_DESC"
+}
+},
+{
+"id": "15707",
+"sev": "MED",
+"n": 83,
+"town": "r2s-famine-town-1",
+"section": "Systems/Economics",
+"fold": "Pilgrim Trade Offerings, hospitality fees, relic sales, and incidental commerce from visiting pilgrims.",
+"text": "Pilgrim Trade Offerings, hospitality fees, relic sales, and incidental commerce from visiting pilgrims.",
+"why": "pilgrim trade with relic sales; HOUSES has no shrine or relic site, TRADE lists no pilgrim trade",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/economicState.js",
+"line": 252,
+"fn": "generateEconomicState"
+}
+},
+{
+"id": "03703",
+"sev": "MED",
+"n": 83,
+"town": "r2s-plague_onset-city-1",
+"section": "Systems/Economics",
+"fold": "Apothecary & Alchemy A thriving alchemical trade in reagents, preparations, and curative potions draws customers from surrounding settlements.",
+"text": "Apothecary & Alchemy A thriving alchemical trade in reagents, preparations, and curative potions draws customers from surrounding settlements.",
+"why": "a thriving alchemical trade draws customers from around; city Poor, plague unrest, people not travelling as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/incomeLineSiblings.js",
+"line": 49,
+"fn": "ALCHEMY_TRADE_LINE"
+}
+},
+{
+"id": "11871",
+"sev": "MED",
+"n": 79,
+"town": "r2s-occupied-city-0",
+"section": "Systems/Economics",
+"fold": "Iron & Metalwork Local ore feeds the smithy directly.",
+"text": "Iron & Metalwork Local ore feeds the smithy directly.",
+"why": "says local ore feeds the smithy; HOUSES has a smelter but no mine",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/incomeLineSiblings.js",
+"line": 54,
+"fn": "LOCAL_ORE_LINE"
+}
+},
+{
+"id": "05801",
+"sev": "MED",
+"n": 75,
+"town": "r2s-succession_void-thorp-1",
+"section": "Systems/Defense",
+"fold": "Controlled goods (grain, salt, preserved meat) changing hands at extortionate prices through unofficial channels.",
+"text": "Controlled goods (grain, salt, preserved meat) changing hands at extortionate prices through unofficial channels.",
+"why": "grain, salt, preserved meat traded through unofficial channels; isolated, imports none, population 11",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 583,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "07231",
+"sev": "MED",
+"n": 75,
+"town": "r2s-plague_onset-village-1",
+"section": "Systems/Economics",
+"fold": "Entrepôt Trade Transit duties, warehouse fees, and re-export premiums from goods passing through the crossroads.",
+"text": "Entrepôt Trade Transit duties, warehouse fees, and re-export premiums from goods passing through the crossroads.",
+"why": "Revenue from warehouse fees and transit duties; HOUSES has no warehouse, toll or customs house",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/economy/tradeGoods.js",
+"line": 143,
+"fn": "generateTradeIncomeStreams"
+}
+},
+{
+"id": "28528",
+"sev": "MED",
+"n": 68,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Systems/Economics",
+"fold": "Waterborne freight services (cargo, pilotage)",
+"text": "Waterborne freight services (cargo, pilotage)",
+"why": "exports waterborne freight services while under active siege; nothing leaves by water",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/computeActiveChains.js",
+"line": 963,
+"fn": "INSTITUTIONAL_SERVICE_MAP"
+}
+},
+{
+"id": "09264",
+"sev": "MED",
+"n": 68,
+"town": "r2s-plague_onset-thorp-0",
+"section": "Systems/Defense",
+"fold": "Food endurance: No granary: under siege the outlying fields would be lost; household stores would carry the thorp for about # months at full rations, about # months on #, and what is still harvested would stretch them further.",
+"text": "Food endurance: No granary: under siege the outlying fields would be lost; household stores would carry the thorp for about two months at full rations, about three months on half, and what is still harvested would stretch them further.",
+"why": "Household stores carry the thorp about two months; another line says about a month and a half",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/display/defenseDisplay.js",
+"line": 625,
+"fn": "foodEnduranceLine"
+}
+},
+{
+"id": "06146",
+"sev": "MED",
+"n": 65,
+"town": "r2s-famine-hamlet-3",
+"section": "Systems/Economics",
+"fold": "CriminalBlack Market Revenue Untaxed trade, fencing and theft bring money in here, but it goes to the criminals who run them and the treasury sees none of it.",
+"text": "CriminalBlack Market Revenue Untaxed trade, fencing and theft bring money in here, but it goes to the criminals who run them and the treasury sees none of it.",
+"why": "black-market revenue to criminals who run it; HOUSES has no fence or criminal house",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/economy/economicState.js",
+"line": 366,
+"fn": "generateEconomicState"
+}
+},
+{
+"id": "07373",
+"sev": "MED",
+"n": 50,
+"town": "r2s-under_siege-town-3",
+"section": "Systems/Defense",
+"fold": "Everyone comes and goes by the gates, so smugglers have to get past the town watch.",
+"text": "Everyone comes and goes by the gates, so smugglers have to get past the town watch.",
+"why": "everyone comes and goes by the gates; under siege, and 11997 says the gate is shut fast",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 375,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "16644",
+"sev": "MED",
+"n": 48,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Systems/Economics",
+"fold": "River Tolls Tolls on river traffic, dock fees, and ferry rights.",
+"text": "River Tolls Tolls on river traffic, dock fees, and ferry rights.",
+"why": "revenue from river tolls, dock fees, ferry rights; siege stops river traffic",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/economicState.js",
+"line": 153,
+"fn": "generateEconomicState"
+}
+},
+{
+"id": "18655",
+"sev": "MED",
+"n": 39,
+"town": "r2r-hamlet-16",
+"section": "Systems/Economics",
+"fold": "Stone Quarrying Local quarry provides dressed stone to regional builders: reliable income with low transport overhead.",
+"text": "Stone Quarrying Local quarry provides dressed stone to regional builders: reliable income with low transport overhead.",
+"why": "quarry supplies dressed stone to regional builders; TRADE exports no stone, imports cut stone, and 29076 says the work stops half-way",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/economy/incomeLineSiblings.js",
+"line": 66,
+"fn": "QUARRY_LINE"
+}
+},
+{
+"id": "14654",
+"sev": "MED",
+"n": 38,
+"town": "r2s-plague_onset-village-3",
+"section": "Systems/Defense",
+"fold": "No single dominant organisation: just the steady pressure of too many people with too little, and too few consequences for taking.",
+"text": "No single dominant organisation: just the steady pressure of too many people with too little, and too few consequences for taking.",
+"why": "'No single dominant organisation' in crime; GOVERNMENT lists a Thieves' Guild of Significant strength",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 567,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "18046",
+"sev": "MED",
+"n": 36,
+"town": "r2s-under_siege-town-0",
+"section": "Systems/Defense",
+"fold": "Shopkeepers here pay # ring for protection, and the ring pays any official who will take its money.",
+"text": "Shopkeepers here pay one ring for protection, and the ring pays any official who will take its money.",
+"why": "shopkeepers all pay one protection ring; GOVERNMENT lists Thieves' Guild Suppressed and 22921 says the Council is winning",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/defenseDisplay.js",
+"line": 683,
+"fn": "ORGANIZED_RING_NOTES"
+}
+},
+{
+"id": "20612",
+"sev": "MED",
+"n": 35,
+"town": "r2s-plague_onset-metropolis-0",
+"section": "Systems/Defense",
+"fold": "The garrison and city watch is well paid, well equipped and patrols properly.",
+"text": "The garrison and city watch is well paid, well equipped and patrols properly.",
+"why": "compound subject with singular verb: 'The garrison and city watch is well paid'",
+"kinds": [
+"BROKEN",
+"STATE"
+],
+"writer": {
+"file": "src/generators/safetyLineTruth.js",
+"line": 77,
+"fn": "patrolTruth"
+}
+},
+{
+"id": "06148",
+"sev": "MED",
+"n": 34,
+"town": "r2s-plague_onset-hamlet-0",
+"section": "Systems/Economics",
+"fold": "CriminalShadow Economy (untaxed) Untaxed trade, fencing and theft bring money in here, but it goes to the criminals who run them and the treasury sees none of it.",
+"text": "CriminalShadow Economy (untaxed) Untaxed trade, fencing and theft bring money in here, but it goes to the criminals who run them and the treasury sees none of it.",
+"why": "Money goes to 'the criminals who run' fencing; hamlet of 25 has no criminal house; tag reaches thorps",
+"kinds": [
+"LACKS",
+"TAG"
+],
+"writer": {
+"file": "src/generators/economy/economicState.js",
+"line": 366,
+"fn": "generateEconomicState"
+}
+},
+{
+"id": "18752",
+"sev": "MED",
+"n": 33,
+"town": "r2s-wartime-thorp-2",
+"section": "Systems/Defense",
+"fold": "Suppliers adulterating grain and leather sold to crown contracts.",
+"text": "Suppliers adulterating grain and leather sold to crown contracts.",
+"why": "suppliers selling grain and leather to crown contracts: exports none, famine, deficit 72%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 633,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "11777",
+"sev": "MED",
+"n": 33,
+"town": "r2s-wartime-thorp-2",
+"section": "Systems/Defense",
+"fold": "Inspectors are overworked or bribed.",
+"text": "Inspectors are overworked or bribed.",
+"why": "'Inspectors' in an isolated thorp of 9 with no office but a household elder",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 633,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "21987",
+"sev": "MED",
+"n": 33,
+"town": "r2s-wartime-thorp-2",
+"section": "Systems/Defense",
+"fold": "The settlement's reputation for reliable supply is being consumed for short-term profit.",
+"text": "The settlement's reputation for reliable supply is being consumed for short-term profit.",
+"why": "its reputation for reliable supply: the thorp sells nothing outward",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 633,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "03039",
+"sev": "MED",
+"n": 33,
+"town": "r2s-wartime-thorp-2",
+"section": "Systems/Defense",
+"fold": "A small industry has emerged to provide all #.",
+"text": "A small industry has emerged to provide all three.",
+"why": "'a small industry' serving deserters: isolated thorp of 9 under famine",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 635,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "09343",
+"sev": "MED",
+"n": 32,
+"town": "r2s-mass_migration-thorp-3",
+"section": "Systems/Defense",
+"fold": "Forged residence documents, unofficial lodging, underground routes for those authorities have turned away.",
+"text": "Forged residence documents, unofficial lodging, underground routes for those authorities have turned away.",
+"why": "forged residence documents, unofficial lodging, underground routes past 'authorities'; tag reaches th, here a thorp of 7 under one headman",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 645,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "16495",
+"sev": "MED",
+"n": 28,
+"town": "r2s-religious_conversion-thorp-2",
+"section": "Systems/Defense",
+"fold": "Religious buildings, land, and endowments whose ownership is legally ambiguous following the change in religious authority.",
+"text": "Religious buildings, land, and endowments whose ownership is legally ambiguous following the change in religious authority.",
+"why": "'Religious buildings, land, and endowments' contested; HOUSES has no church or shrine, only Access to parish church",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 627,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "02876",
+"sev": "MED",
+"n": 26,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Summary/Plot Hooks",
+"fold": "A part from the wizard's tower has gone missing, and the black market has it; the fence wants a price the wizard will not pay.",
+"text": "A part from the wizard's tower has gone missing, and the black market has it; the fence wants a price the wizard will not pay.",
+"why": "names a wizard's tower; HOUSES has mages' district and academy, no tower",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 722,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "00628",
+"sev": "MED",
+"n": 26,
+"town": "r2s-plague_onset-thorp-0",
+"section": "Systems/Outlook",
+"fold": "<N> grows less than it eats, and the difference arrives by road.",
+"text": "Huzhou grows less than it eats, and the difference arrives by road.",
+"why": "'the difference arrives by road': imports cover 3 of an 8 gap, deficit 18%",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/display/dossierViewModel.js",
+"line": 272,
+"fn": "deriveViability"
+}
+},
+{
+"id": "20616",
+"sev": "MED",
+"n": 25,
+"town": "r2s-occupied-city-0",
+"section": "Systems/Defense",
+"fold": "The garrison and city watch walks the usual rounds.",
+"text": "The garrison and city watch walks the usual rounds.",
+"why": "'the garrison and city watch walks': plural subject, singular verb",
+"kinds": [
+"BROKEN",
+"PAIR"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 983,
+"fn": "STANDARD_PATROL"
+}
+},
+{
+"id": "09275",
+"sev": "MED",
+"n": 25,
+"town": "r2s-famine-town-2",
+"section": "Systems/Defense",
+"fold": "Food endurance: Under siege the outlying fields would be lost; the granary would carry the town for about # months at full rations, about # months on #, and what is still harvested would stretch it further.",
+"text": "Food endurance: Under siege the outlying fields would be lost; the granary would carry the town for about five months at full rations, about nine months on half, and what is still harvested would stretch it further.",
+"why": "granary would carry the town five months at full rations; town is in famine and 22974 says it has not been enough",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/display/defenseDisplay.js",
+"line": 625,
+"fn": "foodEnduranceLine"
+}
+},
+{
+"id": "18708",
+"sev": "MED",
+"n": 18,
+"town": "r2s-insurgency-hamlet-0",
+"section": "Systems/Defense",
+"fold": "Street-level confrontations between insurgent supporters and those who keep order.",
+"text": "Street-level confrontations between insurgent supporters and those who keep order.",
+"why": "confrontations with those who keep order; DEFENCE has no watch, militia or force",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 865,
+"fn": "SAFETY_LINE_SIBLINGS"
+}
+},
+{
+"id": "18786",
+"sev": "MED",
+"n": 16,
+"town": "r2r-village-24",
+"section": "Systems/Defense",
+"fold": "Susceptible to bribery; enforcers who can be bought by whoever has coin.",
+"text": "Susceptible to bribery; enforcers who can be bought by whoever has coin.",
+"why": "enforcers who can be bought; DEFENCE has no watch, militia or garrison, only a charter",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/safetyLineTruth.js",
+"line": 46,
+"fn": "PAPER_RE"
+}
+},
+{
+"id": "11808",
+"sev": "MED",
+"n": 15,
+"town": "r2s-under_siege-metropolis-1",
+"section": "Systems/Economics",
+"fold": "International Commerce Revenue from international trade: licensing fees, currency exchange, and commodity brokerage.",
+"text": "International Commerce Revenue from international trade: licensing fees, currency exchange, and commodity brokerage.",
+"why": "revenue from international trade, brokerage and exchange; CRISIS Under Siege, docks and markets critically impaired",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/tradeGoods.js",
+"line": 154,
+"fn": "generateTradeIncomeStreams"
+}
+},
+{
+"id": "16403",
+"sev": "MED",
+"n": 14,
+"town": "r2s-occupied-metropolis-0",
+"section": "Systems/Institutions",
+"fold": "Regulates port and airship traffic, assigns berths, collects anchorage fees.",
+"text": "Regulates port and airship traffic, assigns berths, collects anchorage fees.",
+"why": "Regulates port traffic; trade access is road only, Forest terrain, no waterway",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/steps/cascadePass.js",
+"line": 125,
+"fn": "instId"
+}
+},
+{
+"id": "20990",
+"sev": "MED",
+"n": 13,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Summary/Plot Hooks",
+"fold": "The merchant guild's private security force just detained someone, with no legal authority to do so.",
+"text": "The merchant guild's private security force just detained someone, with no legal authority to do so.",
+"why": "merchant guild security force detaining people; GOVERNMENT lists Merchant Guilds as Suppressed",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 746,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "17619",
+"sev": "MED",
+"n": 13,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Systems/Economics",
+"fold": "Security Contracts Guild-funded private security surcharges: effectively a privatised protection tax on trade.",
+"text": "Security Contracts Guild-funded private security surcharges: effectively a privatised protection tax on trade.",
+"why": "guild-funded security surcharge on trade; Merchant Guilds Suppressed and trade halted by siege",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/economicState.js",
+"line": 334,
+"fn": "generateEconomicState"
+}
+},
+{
+"id": "09269",
+"sev": "MED",
+"n": 5,
+"town": "r2s-under_siege-metropolis-2",
+"section": "Systems/Defense",
+"fold": "Food endurance: The siege has taken the outlying fields; the granary carries the metropolis for more than a year at full rations, more than # years on #, and what is still harvested stretches it further.",
+"text": "Food endurance: The siege has taken the outlying fields; the granary carries the metropolis for more than a year at full rations, more than two years on half, and what is still harvested stretches it further.",
+"why": "says the granary carries the city over a year at full rations; STATE gives viable False, deficit 30%, imports None",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/defenseDisplay.js",
+"line": 625,
+"fn": "foodEnduranceLine"
+}
+},
+{
+"id": "00386",
+"sev": "MED",
+"n": 4,
+"town": "r2s-under_siege-city-3",
+"section": "Systems/Economics",
+"fold": "<N> Trade Offerings, hospitality fees, relic sales, and incidental commerce from visiting pilgrims.",
+"text": "Pilgrim Trade Offerings, hospitality fees, relic sales, and incidental commerce from visiting pilgrims.",
+"why": "income from visiting pilgrims; Under Siege no pilgrims arrive, and no pilgrimage site on HOUSES",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/economicState.js",
+"line": 252,
+"fn": "generateEconomicState"
+}
+},
+{
+"id": "20992",
+"sev": "MED",
+"n": 4,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Systems/Defense",
+"fold": "The merchant guilds keep their own private security beside the garrison and city watch: real protection exists, but only for those with the right associations.",
+"text": "The merchant guilds keep their own private security beside the garrison and city watch: real protection exists, but only for those with the right associations.",
+"why": "merchant guilds keep private security beside garrison; Merchant Guilds Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 389,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "09256",
+"sev": "MED",
+"n": 4,
+"town": "r2r-thorp-58",
+"section": "Systems/Defense",
+"fold": "Food endurance: No granary: the siege has taken the outlying fields; household stores carry the thorp for about # months at full rations, about # months on #, and what is still harvested stretches them further.",
+"text": "Food endurance: No granary: the siege has taken the outlying fields; household stores carry the thorp for about two months at full rations, about four months on half, and what is still harvested stretches them further.",
+"why": "stores carry two months at full rations, yet most households already go short and hunger is here",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/display/defenseDisplay.js",
+"line": 625,
+"fn": "foodEnduranceLine"
+}
+},
+{
+"id": "01134",
+"sev": "MED",
+"n": 4,
+"town": "r2s-slave_revolt-town-0",
+"section": "Systems/Outlook",
+"fold": "<N> keeps order and pays its way, but it has to buy food to get through the year, and the food comes in by river.",
+"text": "Novafossae keeps order and pays its way, but it has to buy food to get through the year, and the food comes in by river.",
+"why": "says the town keeps order; stability is Unstable (revolt not contained) under a Slave Revolt",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/dossierViewModel.js",
+"line": 273,
+"fn": "deriveViability"
+}
+},
+{
+"id": "09273",
+"sev": "MED",
+"n": 4,
+"town": "r2s-famine-metropolis-2",
+"section": "Systems/Defense",
+"fold": "Food endurance: Under siege the outlying fields would be lost; the granary would carry the metropolis for more than a year at full rations, more than # years on #, and what is still harvested would stretch it further, but the hall will not open it.",
+"text": "Food endurance: Under siege the outlying fields would be lost; the granary would carry the metropolis for more than a year at full rations, more than two years on half, and what is still harvested would stretch it further, but the hall will not open it.",
+"why": "granary carries the city over a year at full rations; CRISIS Famine, deficit 23%, viable False",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/defenseDisplay.js",
+"line": 625,
+"fn": "foodEnduranceLine"
+}
+},
+{
+"id": "15119",
+"sev": "MED",
+"n": 3,
+"town": "r2s-succession_void-thorp-2",
+"section": "Systems/Outlook",
+"fold": "Nothing reliable reaches <N> from outside, and its own land does not grow enough; the rest comes from its stores and from magic.",
+"text": "Nothing reliable reaches Tulummal from outside, and its own land does not grow enough; the rest comes from its stores and from magic.",
+"why": "'its own land does not grow enough; the rest comes from its stores and from magic'; 14584 says it gets by on its own, enough for an ordinary year",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/display/dossierViewModel.js",
+"line": 267,
+"fn": "deriveViability"
+}
+},
+{
+"id": "16568",
+"sev": "MED",
+"n": 3,
+"town": "r2r-hamlet-54",
+"section": "Systems/Defense",
+"fold": "Residents protect themselves through community networks or tribute paid to whoever controls their street.",
+"text": "Residents protect themselves through community networks or tribute paid to whoever controls their street.",
+"why": "'whoever controls their street'; hamlet of 39 in 5-25 dwellings has no streets to control",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 350,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "09257",
+"sev": "MED",
+"n": 2,
+"town": "r2s-under_siege-thorp-1",
+"section": "Systems/Defense",
+"fold": "Food endurance: No granary: the siege has taken the outlying fields; household stores carry the thorp for about a month at full rations, about # months on #, and what is still harvested stretches them further.",
+"text": "Food endurance: No granary: the siege has taken the outlying fields; household stores carry the thorp for about a month at full rations, about three months on half, and what is still harvested stretches them further.",
+"why": "stores last about a month at full rations; other line says a month and a half",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/display/defenseDisplay.js",
+"line": 625,
+"fn": "foodEnduranceLine"
+}
+},
+{
+"id": "15062",
+"sev": "MED",
+"n": 2,
+"town": "r2r-hamlet-34",
+"section": "Systems/Outlook",
+"fold": "Nothing <N> needs to get through the year has to come from outside.",
+"text": "Nothing Zoltandavan needs to get through the year has to come from outside.",
+"why": "says nothing needed comes from outside; 14420 says the militia needs iron and 14660 says it runs on stockpiles",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/display/dossierViewModel.js",
+"line": 310,
+"fn": "deriveViability"
+}
+},
+{
+"id": "20993",
+"sev": "MED",
+"n": 2,
+"town": "r2s-religious_conversion-town-1",
+"section": "Systems/Defense",
+"fold": "The merchant guilds keep their own private security beside the town watch: real protection exists, but only for those with the right associations.",
+"text": "The merchant guilds keep their own private security beside the town watch: real protection exists, but only for those with the right associations.",
+"why": "says merchant guilds keep private security beside the watch; DEFENCE has hired: none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 389,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "04271",
+"sev": "MED",
+"n": 2,
+"town": "r2s-slave_revolt-metropolis-1",
+"section": "Systems/Outlook",
+"fold": "Banks stand here, but the metropolis does little trade.",
+"text": "Banks stand here, but the metropolis does little trade.",
+"why": "does little trade; same page says it is a metropolis that sells, and TRADE lists many exports, caravan exchange, district markets",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/economy/viability.js",
+"line": 422,
+"fn": "generatePowerDynamics"
+}
+},
+{
+"id": "30890",
+"sev": "MED",
+"n": 1,
+"town": "r2s-politically_fractured-city-2",
+"section": "Systems/Outlook",
+"fold": "→Add craft guilds: smiths, weavers, tanners, etc.",
+"text": "→Add craft guilds: smiths, weavers, tanners, etc.",
+"why": "advises adding smiths and tanners; HOUSES already has Blacksmiths (3-10), Tanner and Craft guilds (30-80)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/viability.js",
+"line": 255,
+"fn": "generatePowerDynamics"
+}
+}
+]

@@ -32,7 +32,7 @@ def names_of(s):
 NUMW=r'(?:one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred|thousand|dozen|half|third|thirds|quarter|quarters|fifth|fifths|tenth|tenths)'
 numw=re.compile(r'\b'+NUMW+r'(?:[- ]'+NUMW+r')*\b',re.I)
 SPLIT=re.compile(r'(?<=[.!?])["”]?\s+(?=["“<A-Z])| · ')
-RUN=re.compile(r'(?<=[a-z\)])(?=[A-Z])')
+RUN=re.compile(r'(?<!\bMac)(?<!\bMc)(?<=[a-z\)])(?=[A-Z])')   # a pill run's seams; never inside a Mac- or Mc- surname (the first read's artifact)
 def fold(t,pat):
     if pat: t=pat.sub('<N>',t)
     t=re.sub(r'\d[\d,.]*','#',t); t=numw.sub('#',t)

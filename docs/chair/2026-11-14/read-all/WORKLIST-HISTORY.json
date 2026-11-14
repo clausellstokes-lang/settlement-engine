@@ -1,0 +1,1541 @@
+[
+{
+"id": "00169",
+"sev": "HIGH",
+"n": 31,
+"town": "r2s-succession_void-thorp-1",
+"section": "Summary/Crisis",
+"fold": "# different powers have approached the players for support, each believing they represent the legitimate or best claim.",
+"text": "Three different powers have approached the players for support, each believing they represent the legitimate or best claim.",
+"why": "three different powers court the players; GOVERNMENT lists one power, the Elder Council",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/stressTypes.js",
+"line": 113,
+"fn": "STRESS_TYPE_MAP.succession_void"
+}
+},
+{
+"id": "09279",
+"sev": "HIGH",
+"n": 24,
+"town": "r2r-metropolis-14",
+"section": "Summary/Overview",
+"fold": "Food is being handed out to anyone who asks, and the line is patient.",
+"text": "Food is being handed out to anyone who asks, and the line is patient.",
+"why": "food handed to anyone who asks, the line patient; deficit 83% Under Siege with imports None (tag also reaches F)",
+"kinds": [
+"STATE",
+"TAG"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 345,
+"fn": "ARRIVAL_PEOPLE.south_asian"
+}
+},
+{
+"id": "02866",
+"sev": "HIGH",
+"n": 9,
+"town": "r2s-under_siege-hamlet-3",
+"section": "Summary/Overview",
+"fold": "A notice of the next fair is nailed up beside a doorway, and someone is reading it aloud for the others.",
+"text": "A notice of the next fair is nailed up beside a doorway, and someone is reading it aloud for the others.",
+"why": "a notice of the next fair; under siege nothing comes in by road and the market cannot draw a fair",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 298,
+"fn": "ARRIVAL_PEOPLE.germanic"
+}
+},
+{
+"id": "18323",
+"sev": "MED",
+"n": 182,
+"town": "r2s-succession_void-thorp-1",
+"section": "Summary/Plot Hooks",
+"fold": "Someone destroyed the competing supply route",
+"text": "Someone destroyed the competing supply route",
+"why": "competing supply route destroyed; trade access isolated, imports none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1215,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "16625",
+"sev": "MED",
+"n": 139,
+"town": "r2r-village-55",
+"section": "Summary/Overview",
+"fold": "Rival guilds fought over who may sell what, and over a say in how the place is run",
+"text": "Rival guilds fought over who may sell what, and over a say in how the place is run",
+"why": "'Rival guilds fought over who may sell'; 14605 says no guild runs the market, HOUSES has no guild",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1177,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "02538",
+"sev": "MED",
+"n": 108,
+"town": "r2r-hamlet-16",
+"section": "Summary/Plot Hooks",
+"fold": "A diplomatic channel exists that the war party is suppressing",
+"text": "A diplomatic channel exists that the war party is suppressing",
+"why": "a war party suppressing diplomacy; CRISIS is Famine only, GOVERNMENT has no war party",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1200,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "22261",
+"sev": "MED",
+"n": 107,
+"town": "r2r-hamlet-16",
+"section": "Summary/Plot Hooks",
+"fold": "The threat is being exaggerated by someone who profits from wartime contracts",
+"text": "The threat is being exaggerated by someone who profits from wartime contracts",
+"why": "someone profits from wartime contracts; CRISIS is Famine only, no war",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1199,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "07400",
+"sev": "MED",
+"n": 62,
+"town": "r2r-thorp-51",
+"section": "Summary/Overview",
+"fold": "Evidence of official corruption has surfaced but powerful figures resist investigation",
+"text": "Evidence of official corruption has surfaced but powerful figures resist investigation",
+"why": "'official corruption... powerful figures resist investigation'; tag reaches th, here a thorp of 11 with one household elder and roster of 1",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1267,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "28512",
+"sev": "MED",
+"n": 60,
+"town": "r2s-wartime-thorp-2",
+"section": "Systems/Economics",
+"fold": "Water access and preservation skill determine the balance between local produce and caravan-borne staples.",
+"text": "Water access and preservation skill determine the balance between local produce and caravan-borne staples.",
+"why": "caravan-borne staples; trade access isolated, imports none, forest terrain",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 205,
+"fn": "CULTURE_PROFILES.foodways"
+}
+},
+{
+"id": "18890",
+"sev": "MED",
+"n": 37,
+"town": "r2s-insurgency-hamlet-0",
+"section": "Summary/Crisis",
+"fold": "Taxes are disputed, some offices no longer send their revenue on, and the government runs on habit.",
+"text": "Taxes are disputed, some offices no longer send their revenue on, and the government runs on habit.",
+"why": "some offices no longer send revenue on; hamlet has no offices, only a headman",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/stressTypes.js",
+"line": 136,
+"fn": "STRESS_TYPE_MAP.insurgency"
+}
+},
+{
+"id": "04385",
+"sev": "MED",
+"n": 31,
+"town": "r2s-succession_void-thorp-1",
+"section": "Summary/Crisis",
+"fold": "Big decisions wait for a new leader, and in the meantime each office does as it sees fit.",
+"text": "Big decisions wait for a new leader, and in the meantime each office does as it sees fit.",
+"why": "'each office does as it sees fit': thorp of 11 lists no offices beyond the Elder Council",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/stressTypes.js",
+"line": 114,
+"fn": "STRESS_TYPE_MAP.succession_void"
+}
+},
+{
+"id": "00220",
+"sev": "MED",
+"n": 27,
+"town": "r2s-under_siege-hamlet-1",
+"section": "Summary/Overview",
+"fold": "# of <N> seems to be gutting, salting or selling fish.",
+"text": "Half of Zlatoko seems to be gutting, salting or selling fish.",
+"why": "half the hamlet selling fish: no market on HOUSES, and Under Siege no trade goes out",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 142,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "28829",
+"sev": "MED",
+"n": 27,
+"town": "r2s-occupied-city-2",
+"section": "World/History",
+"fold": "When the occupiers left, they left behind a city of former collaborators and former resisters, none of it ever settled",
+"text": "When the occupiers left, they left behind a city of former collaborators and former resisters, none of it ever settled",
+"why": "history says 'when the occupiers left'; CRISIS is Under Occupation now, occupiers' flags over the gate",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyDescVariants.js",
+"line": 65,
+"fn": "HISTORY_DESC_VARIANTS.occupation_legacy"
+}
+},
+{
+"id": "18324",
+"sev": "MED",
+"n": 25,
+"town": "r2r-thorp-38",
+"section": "Table/Tonight sheet",
+"fold": "Someone destroyed the competing supply route.",
+"text": "Someone destroyed the competing supply route.",
+"why": "competing supply route destroyed; trade access isolated, imports none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1215,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "21280",
+"sev": "MED",
+"n": 25,
+"town": "r2s-famine-village-1",
+"section": "Summary/Plot Hooks",
+"fold": "The pilgrim trade made # family rich enough to buy the office that authenticates relics",
+"text": "The pilgrim trade made one family rich enough to buy the office that authenticates relics",
+"why": "pilgrim trade and an office authenticating relics; HOUSES has no shrine or such office, no pilgrim export",
+"kinds": [
+"LACKS",
+"TAG"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1482,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "20265",
+"sev": "MED",
+"n": 23,
+"town": "r2s-wartime-village-0",
+"section": "Summary/Overview",
+"fold": "The clatter of looms follows you through <N>, from # shutter to the next.",
+"text": "The clatter of looms follows you through Abercross, from one shutter to the next.",
+"why": "clatter of looms; HOUSES has no weaver and the village imports raw cloth",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 155,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "03498",
+"sev": "MED",
+"n": 22,
+"town": "r2r-hamlet-0",
+"section": "Summary/Overview",
+"fold": "An apprentice hurries past on an errand, a master's mark stitched on his sleeve.",
+"text": "An apprentice hurries past on an errand, a master's mark stitched on his sleeve.",
+"why": "an apprentice with a master's mark; HOUSES of 22-person hamlet has no craft workshop or master of any trade",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 295,
+"fn": "ARRIVAL_PEOPLE.germanic"
+}
+},
+{
+"id": "02834",
+"sev": "MED",
+"n": 22,
+"town": "r2s-occupied-thorp-1",
+"section": "Summary/Overview",
+"fold": "A moneylender sits at a low table with a queue of familiar faces waiting.",
+"text": "A moneylender sits at a low table with a queue of familiar faces waiting.",
+"why": "moneylender with a queue in a thorp of 17; HOUSES has no lender, and Famine leaves no coin",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 343,
+"fn": "ARRIVAL_PEOPLE.south_asian"
+}
+},
+{
+"id": "04421",
+"sev": "MED",
+"n": 22,
+"town": "r2s-occupied-town-0",
+"section": "Summary/Overview",
+"fold": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+"text": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+"why": "carts of cloth and wool leave; wool is imported and exports list no cloth or wool",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 156,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "03507",
+"sev": "MED",
+"n": 22,
+"town": "r2s-plague_onset-thorp-0",
+"section": "Summary/Overview",
+"fold": "An elder settles a quarrel in a quiet voice before it can grow loud enough to need anyone else.",
+"text": "An elder settles a quarrel in a quiet voice before it can grow loud enough to need anyone else.",
+"why": "Elder quietly settles quarrels; GOVERNMENT has Legitimacy Crisis and Anxious stability, people ignore orders",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 332,
+"fn": "ARRIVAL_PEOPLE.east_asian"
+}
+},
+{
+"id": "02470",
+"sev": "MED",
+"n": 21,
+"town": "r2s-famine-village-1",
+"section": "Summary/Overview",
+"fold": "A clerk records every cartload that passes in a careful ledger.",
+"text": "A clerk records every cartload that passes in a careful ledger.",
+"why": "a clerk records every cartload; HOUSES has no office or clerk",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 331,
+"fn": "ARRIVAL_PEOPLE.east_asian"
+}
+},
+{
+"id": "18164",
+"sev": "MED",
+"n": 21,
+"town": "r2s-plague_onset-hamlet-0",
+"section": "Summary/Overview",
+"fold": "Smoke rises from a shared oven, and neighbours queue to bake together.",
+"text": "Smoke rises from a shared oven, and neighbours queue to bake together.",
+"why": "Neighbours queue to bake together at a shared oven; under Plague people do not gather; no oven on HOUSES",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 325,
+"fn": "ARRIVAL_PEOPLE.slavic"
+}
+},
+{
+"id": "10784",
+"sev": "MED",
+"n": 21,
+"town": "r2s-plague_onset-village-1",
+"section": "Summary/Overview",
+"fold": "Horse traders show their animals at the edge of the settlement, where herders and townsfolk meet.",
+"text": "Horse traders show their animals at the edge of the settlement, where herders and townsfolk meet.",
+"why": "Horse traders show animals where herders and townsfolk meet; under Plague people do not gather",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 349,
+"fn": "ARRIVAL_PEOPLE.steppe"
+}
+},
+{
+"id": "03340",
+"sev": "MED",
+"n": 21,
+"town": "r2s-religious_conversion-thorp-3",
+"section": "World/History",
+"fold": "After years of disputed grain prices, the major farming families agreed a formal compact regulating grain sale and storage.",
+"text": "After years of disputed grain prices, the major farming families agreed a formal compact regulating grain sale and storage.",
+"why": "'the major farming families agreed a formal compact regulating grain sale and storage'; tag reaches th, here 11 people on subsistence farming, no market or granary",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1725,
+"fn": "HISTORY_DESC_SIBLINGS"
+}
+},
+{
+"id": "00160",
+"sev": "MED",
+"n": 20,
+"town": "r2s-insurgency-hamlet-0",
+"section": "Summary/Overview",
+"fold": "# citizens argue a point of law loudly enough for a crowd to gather.",
+"text": "Two citizens argue a point of law loudly enough for a crowd to gather.",
+"why": "point of law argued before a crowd; hamlet of 35 with no court",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 355,
+"fn": "ARRIVAL_PEOPLE.greek"
+}
+},
+{
+"id": "15517",
+"sev": "MED",
+"n": 20,
+"town": "r2s-plague_onset-village-2",
+"section": "Summary/Overview",
+"fold": "People argue politics in the open, loudly, and seem to enjoy it.",
+"text": "People argue politics in the open, loudly, and seem to enjoy it.",
+"why": "People argue politics in the open and enjoy it; Plague Unrest, Anxious, not viable, 25% food deficit",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 303,
+"fn": "ARRIVAL_PEOPLE.latin"
+}
+},
+{
+"id": "15516",
+"sev": "MED",
+"n": 20,
+"town": "r2s-recently_betrayed-thorp-1",
+"section": "Summary/Overview",
+"fold": "People argue law in the open as freely as they trade.",
+"text": "People argue law in the open as freely as they trade.",
+"why": "'as freely as they trade'; trade access isolated, exports none, imports none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 319,
+"fn": "ARRIVAL_PEOPLE.norse"
+}
+},
+{
+"id": "03341",
+"sev": "MED",
+"n": 20,
+"town": "r2s-slave_revolt-hamlet-1",
+"section": "World/History",
+"fold": "After years of disputed grain prices, the major farming families and the guilds negotiated a formal compact regulating grain sale and storage.",
+"text": "After years of disputed grain prices, the major farming families and the guilds negotiated a formal compact regulating grain sale and storage.",
+"why": "farming families and the guilds negotiated a compact; hamlet of 36 has no guild on HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1723,
+"fn": "HISTORY_DESC_SIBLINGS"
+}
+},
+{
+"id": "21582",
+"sev": "MED",
+"n": 20,
+"town": "r2s-under_siege-village-1",
+"section": "World/History",
+"fold": "The quarry workers became a political force.",
+"text": "The quarry workers became a political force.",
+"why": "'quarry workers became a political force'; HOUSES has no quarry in a village of 95",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1709,
+"fn": "HISTORY_DESC_SIBLINGS"
+}
+},
+{
+"id": "15806",
+"sev": "MED",
+"n": 19,
+"town": "r2r-village-43",
+"section": "Summary/Overview",
+"fold": "Porters bent under loaded frames file past, and someone counts them in.",
+"text": "Porters bent under loaded frames file past, and someone counts them in.",
+"why": "loaded porters filing in; Under Siege and trade access isolated, nothing arrives",
+"kinds": [
+"STATE",
+"TAG"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 337,
+"fn": "ARRIVAL_PEOPLE.mesoamerican"
+}
+},
+{
+"id": "02463",
+"sev": "MED",
+"n": 19,
+"town": "r2s-plague_onset-hamlet-0",
+"section": "Summary/Plot Hooks",
+"fold": "A clause in the compact entitles certain families to first refusal on grain sales, and the current shortage makes that clause valuable",
+"text": "A clause in the compact entitles certain families to first refusal on grain sales, and the current shortage makes that clause valuable",
+"why": "'Current shortage' of grain; food ledger shows grown 50 of need 50, deficit 0%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/historyGenerator.js",
+"line": 794,
+"fn": "generateRelationshipEvent"
+}
+},
+{
+"id": "02902",
+"sev": "MED",
+"n": 19,
+"town": "r2s-plague_onset-town-3",
+"section": "Summary/Overview",
+"fold": "A poet holds a small crowd by the well, and nobody hurries the telling along.",
+"text": "A poet holds a small crowd by the well, and nobody hurries the telling along.",
+"why": "Poet holds a crowd at the well; Plague Unrest, people do not gather",
+"kinds": [
+"STATE",
+"TAG"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 307,
+"fn": "ARRIVAL_PEOPLE.celtic"
+}
+},
+{
+"id": "03195",
+"sev": "MED",
+"n": 18,
+"town": "r2s-plague_onset-thorp-2",
+"section": "Summary/Overview",
+"fold": "A work party heads out together, singing, with tools on their shoulders.",
+"text": "A work party heads out together, singing, with tools on their shoulders.",
+"why": "Work party heads out singing together; under Plague people do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 328,
+"fn": "ARRIVAL_PEOPLE.slavic"
+}
+},
+{
+"id": "20031",
+"sev": "MED",
+"n": 18,
+"town": "r2s-plague_onset-town-2",
+"section": "Summary/Plot Hooks",
+"fold": "The ailing ruler wants a final errand completed before naming a successor",
+"text": "The ailing ruler wants a final errand completed before naming a successor",
+"why": "ailing ruler names a successor; government is a Feudal Appointee placed by a lord, not a hereditary ruler",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1140,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "04287",
+"sev": "MED",
+"n": 18,
+"town": "r2r-thorp-58",
+"section": "Summary/Overview",
+"fold": "Barrels of salt fish stand stacked for the carts, and the gulls have opinions about every #.",
+"text": "Barrels of salt fish stand stacked for the carts, and the gulls have opinions about every one.",
+"why": "salt fish stacked for the carts: exports none, under siege nothing leaves by road",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 143,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "13420",
+"sev": "MED",
+"n": 18,
+"town": "r2s-infiltrated-thorp-0",
+"section": "Summary/Overview",
+"fold": "Merchants who benefit from cheap newcomer labour",
+"text": "Merchants who benefit from cheap newcomer labour",
+"why": "'Merchants who benefit from cheap newcomer labour'; tag reaches th, here a thorp of 14 with no market or merchant house",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1370,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "20647",
+"sev": "MED",
+"n": 18,
+"town": "r2r-thorp-23",
+"section": "Summary/Overview",
+"fold": "The goods on offer are mostly second-hand, and even those go slowly.",
+"text": "The goods on offer are mostly second-hand, and even those go slowly.",
+"why": "'The goods on offer are mostly second-hand'; isolated thorp of 20, no market, exports and imports none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 397,
+"fn": "ARRIVAL_TENSIONS.poor"
+}
+},
+{
+"id": "18940",
+"sev": "MED",
+"n": 18,
+"town": "r2r-hamlet-6",
+"section": "Summary/Overview",
+"fold": "Temple beneficiaries",
+"text": "Temple beneficiaries",
+"why": "'Temple beneficiaries' of a pilgrimage surge; HOUSES has only a wayside shrine, no temple",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1479,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "15722",
+"sev": "MED",
+"n": 18,
+"town": "r2s-wartime-village-1",
+"section": "Summary/Overview",
+"fold": "Pilgrims crowd the road in, and every second stall sells candles, tokens or someone's blessing.",
+"text": "Pilgrims crowd the road in, and every second stall sells candles, tokens or someone's blessing.",
+"why": "pilgrims crowd the road; TRADE has no pilgrimage, HOUSES no shrine, and wartime with monsters on the roads",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 185,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "18331",
+"sev": "MED",
+"n": 17,
+"town": "r2r-thorp-58",
+"section": "Summary/Crisis",
+"fold": "Someone else is considering a desperate sortie.",
+"text": "Someone else is considering a desperate sortie.",
+"why": "a sortie presumes a force; DEFENCE lists no garrison, militia, watch or hired",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/stressTypes.js",
+"line": 30,
+"fn": "STRESS_TYPE_MAP.under_siege"
+}
+},
+{
+"id": "02425",
+"sev": "MED",
+"n": 16,
+"town": "r2s-plague_onset-village-0",
+"section": "Summary/Overview",
+"fold": "A caravan broker shouts terms to a line of laden animals and the people leading them.",
+"text": "A caravan broker shouts terms to a line of laden animals and the people leading them.",
+"why": "Caravan broker shouting terms to laden animals; safety Quarantined under Plague, and the village has no market",
+"kinds": [
+"STATE",
+"TAG"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 351,
+"fn": "ARRIVAL_PEOPLE.steppe"
+}
+},
+{
+"id": "15723",
+"sev": "MED",
+"n": 16,
+"town": "r2s-plague_onset-village-1",
+"section": "Summary/Overview",
+"fold": "Pilgrims in travel-stained cloaks queue patiently for their turn at the holy places.",
+"text": "Pilgrims in travel-stained cloaks queue patiently for their turn at the holy places.",
+"why": "pilgrims queue at holy places under plague; tag is all P towns, and HOUSES has only a parish church",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 187,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "03543",
+"sev": "MED",
+"n": 15,
+"town": "r2s-wartime-hamlet-3",
+"section": "Summary/Overview",
+"fold": "An old judge listens to # neighbours by a gate and says nothing until both are finished.",
+"text": "An old judge listens to two neighbours by a gate and says nothing until both are finished.",
+"why": "an old judge hears neighbours; hamlet has no judge or court on HOUSES or GOVERNMENT",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 310,
+"fn": "ARRIVAL_PEOPLE.celtic"
+}
+},
+{
+"id": "02414",
+"sev": "MED",
+"n": 14,
+"town": "r2s-under_siege-metropolis-2",
+"section": "Summary/Overview",
+"fold": "A broker sits in the shade, matching buyers to goods from routes you have never travelled.",
+"text": "A broker sits in the shade, matching buyers to goods from routes you have never travelled.",
+"why": "a broker matching buyers to goods from far routes; Under Siege, imports cover None, no goods arrive by road",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 313,
+"fn": "ARRIVAL_PEOPLE.arabic"
+}
+},
+{
+"id": "02881",
+"sev": "MED",
+"n": 14,
+"town": "r2s-plague_onset-town-1",
+"section": "Summary/Overview",
+"fold": "A patron stands drinks at a wine shop, and makes sure everyone knows who is paying.",
+"text": "A patron stands drinks at a wine shop, and makes sure everyone knows who is paying.",
+"why": "Patron stands drinks for everyone at a wine shop; Plague Unrest, people do not gather; no wine shop on HOUSES",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 358,
+"fn": "ARRIVAL_PEOPLE.greek"
+}
+},
+{
+"id": "21252",
+"sev": "MED",
+"n": 14,
+"town": "r2s-infiltrated-thorp-0",
+"section": "World/History",
+"fold": "The overland trade that had made the settlement what it was collapsed, and the prosperity it once brought bled away over a handful of lean years",
+"text": "The overland trade that had made the settlement what it was collapsed, and the prosperity it once brought bled away over a handful of lean years",
+"why": "the trade that made the place collapsed and its prosperity bled away; STATE prosperity Comfortable and 00577 says it pays its own way",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/historyDescVariants.js",
+"line": 88,
+"fn": "HISTORY_DESC_VARIANTS.trade_collapse"
+}
+},
+{
+"id": "28615",
+"sev": "MED",
+"n": 14,
+"town": "r2r-thorp-49",
+"section": "Summary/Overview",
+"fold": "Well-fed children run errands through a busy street.",
+"text": "Well-fed children run errands through a busy street.",
+"why": "a busy street in a thorp of 15 with 1-8 dwellings; tag reaches every thorp",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 401,
+"fn": "ARRIVAL_TENSIONS.prosperous"
+}
+},
+{
+"id": "12852",
+"sev": "MED",
+"n": 13,
+"town": "r2s-famine-metropolis-1",
+"section": "Summary/Overview",
+"fold": "Magic is a trade in <N> like any other: signs offer enchanting and identification by the hour.",
+"text": "Magic is a trade in Hongji like any other: signs offer enchanting and identification by the hour.",
+"why": "magic 'a trade like any other', signs openly offer enchanting; GOVERNMENT has Arcane Orders and Mages' Compact Suppressed",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 280,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "21107",
+"sev": "MED",
+"n": 12,
+"town": "r2s-plague_onset-hamlet-3",
+"section": "Summary/Overview",
+"fold": "The neighbours turn out together to sweep and mend their own street.",
+"text": "The neighbours turn out together to sweep and mend their own street.",
+"why": "Neighbours turn out together to sweep the street; safety is Quarantined, under Plague people do not gather",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 338,
+"fn": "ARRIVAL_PEOPLE.mesoamerican"
+}
+},
+{
+"id": "16786",
+"sev": "MED",
+"n": 12,
+"town": "r2s-plague_onset-village-2",
+"section": "Summary/Overview",
+"fold": "Sacks of herbs and spices fill the carts, and the smell of them clings to your clothes.",
+"text": "Sacks of herbs and spices fill the carts, and the smell of them clings to your clothes.",
+"why": "carts full of herbs and spices; trade access isolated, imports none, and 14241 says spices are not brought in",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 267,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "21746",
+"sev": "MED",
+"n": 10,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Summary/Overview",
+"fold": "The river trade the settlement was built upon failed, and the wealth it once carried drained away within a few hard years",
+"text": "The river trade the settlement was built upon failed, and the wealth it once carried drained away within a few hard years",
+"why": "river trade failed and drained away; town has docks, barge companies, international trade centre, river exports",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1423,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "16223",
+"sev": "MED",
+"n": 10,
+"town": "r2s-plague_onset-metropolis-3",
+"section": "Summary/Overview",
+"fold": "Racks of spearheads and helms stand outside the workshops, waiting for the carts.",
+"text": "Racks of spearheads and helms stand outside the workshops, waiting for the carts.",
+"why": "racks of spearheads and helms await carts; TRADE makes and exports no weapons or armour, iron mines exhausted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 80,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "06031",
+"sev": "MED",
+"n": 10,
+"town": "r2r-village-57",
+"section": "Summary/Overview",
+"fold": "Craftspeople sit in rows, each row a different trade, each worker deep in their own work.",
+"text": "Craftspeople sit in rows, each row a different trade, each worker deep in their own work.",
+"why": "rows of craftspeople, each row a trade; village of 261 has one each of a handful of crafts",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 340,
+"fn": "ARRIVAL_PEOPLE.mesoamerican"
+}
+},
+{
+"id": "28830",
+"sev": "MED",
+"n": 8,
+"town": "r2s-occupied-hamlet-2",
+"section": "World/History",
+"fold": "When the occupiers left, they left behind a hamlet of former collaborators and former resisters, none of it ever settled",
+"text": "When the occupiers left, they left behind a hamlet of former collaborators and former resisters, none of it ever settled",
+"why": "'when the occupiers left' while the hamlet is Under Occupation now",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyDescVariants.js",
+"line": 65,
+"fn": "HISTORY_DESC_VARIANTS.occupation_legacy"
+}
+},
+{
+"id": "02382",
+"sev": "MED",
+"n": 8,
+"town": "r2s-famine-thorp-0",
+"section": "Summary/Overview",
+"fold": "A basket of fish, still flapping, is carried past at a run.",
+"text": "A basket of fish, still flapping, is carried past at a run.",
+"why": "fresh fish carried past at a run: the fishing failed this year",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 136,
+"fn": "ARRIVAL_SENSES.lines"
+}
+},
+{
+"id": "16785",
+"sev": "MED",
+"n": 7,
+"town": "r2s-plague_onset-town-3",
+"section": "Summary/Overview",
+"fold": "Sacks of flour are stacked shoulder high by the roadside, waiting to be carted out.",
+"text": "Sacks of flour are stacked shoulder high by the roadside, waiting to be carted out.",
+"why": "Flour stacked to be carted out; town runs a 7% food deficit under Plague, travel not as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 97,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "21611",
+"sev": "MED",
+"n": 7,
+"town": "r2s-mass_migration-hamlet-1",
+"section": "Summary/Overview",
+"fold": "The rasp of the saws carries from yard to yard all through the day.",
+"text": "The rasp of the saws carries from yard to yard all through the day.",
+"why": "saws rasping 'from yard to yard'; hamlet of 60 has one part-time carpenter, no sawmill or woodcutter",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 215,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "12415",
+"sev": "MED",
+"n": 6,
+"town": "r2s-plague_onset-hamlet-2",
+"section": "Summary/Overview",
+"fold": "Kiln smoke hangs over <N>, and the dust of fired clay is on everything.",
+"text": "Kiln smoke hangs over Jayaagam, and the dust of fired clay is on everything.",
+"why": "dust of fired clay on everything; HOUSES has a charcoal burner but no potter or kiln for clay",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 227,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "00155",
+"sev": "MED",
+"n": 5,
+"town": "r2r-thorp-31",
+"section": "Summary/Overview",
+"fold": "# broad street leading up to the hall organizes the settlement center.",
+"text": "One broad street leading up to the hall organizes the settlement center.",
+"why": "'One broad street leading up to the hall'; HOUSES has no hall",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 93,
+"fn": "CULTURE_PROFILES.architecturalDetails"
+}
+},
+{
+"id": "20269",
+"sev": "MED",
+"n": 5,
+"town": "r2r-thorp-53",
+"section": "Summary/Overview",
+"fold": "The coastal trade that had made the settlement what it was collapsed, and the prosperity it once brought bled away over a handful of lean years",
+"text": "The coastal trade that had made the settlement what it was collapsed, and the prosperity it once brought bled away over a handful of lean years",
+"why": "the coastal trade collapsed and its prosperity bled away; STATE prosperity Comfortable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyDescVariants.js",
+"line": 88,
+"fn": "HISTORY_DESC_VARIANTS.trade_collapse"
+}
+},
+{
+"id": "15281",
+"sev": "MED",
+"n": 5,
+"town": "r2r-hamlet-32",
+"section": "Summary/Overview",
+"fold": "Ore carts and stone carts grind along the road in a line that never seems to end.",
+"text": "Ore carts and stone carts grind along the road in a line that never seems to end.",
+"why": "endless line of ore and stone carts; hamlet of 63 has one open-cast mine and no quarry",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 200,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "00363",
+"sev": "MED",
+"n": 4,
+"town": "r2r-thorp-18",
+"section": "Summary/Overview",
+"fold": "#-timbered upper floors project above the busier lanes.",
+"text": "Half-timbered upper floors project above the busier lanes.",
+"why": "'Half-timbered upper floors project above the busier lanes'; tag reaches th, here 30 people with Dwellings (1-8)",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 91,
+"fn": "CULTURE_PROFILES.architecturalDetails"
+}
+},
+{
+"id": "18669",
+"sev": "MED",
+"n": 4,
+"town": "r2r-thorp-3",
+"section": "Summary/Overview",
+"fold": "Storehouses and caravan yards mark the boundary between settlement and seasonal encampment.",
+"text": "Storehouses and caravan yards mark the boundary between settlement and seasonal encampment.",
+"why": "'Storehouses and caravan yards mark the boundary'; HOUSES has no storehouse, river access and no caravan trade",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 479,
+"fn": "CULTURE_PROFILES.architecturalDetails"
+}
+},
+{
+"id": "02578",
+"sev": "MED",
+"n": 4,
+"town": "r2r-town-19",
+"section": "World/History",
+"fold": "A fire out of the riverside # spread through barges, warehouses, and wharf infrastructure across entire districts before anyone could bring it under control",
+"text": "A fire out of the riverside quarter spread through barges, warehouses, and wharf infrastructure across entire districts before anyone could bring it under control",
+"why": "fire through barges, warehouses and wharf infrastructure; HOUSES has no docks, warehouses or boatyard",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/historyGenerator.js",
+"line": 1268,
+"fn": "noteByTemplateRow"
+}
+},
+{
+"id": "22176",
+"sev": "MED",
+"n": 3,
+"town": "r2r-thorp-45",
+"section": "Systems/Economics",
+"fold": "The table is cheese and smoked meat from the grazing herds, with salted fish beside it.",
+"text": "The table is cheese and smoked meat from the grazing herds, with salted fish beside it.",
+"why": "a laden table of cheese, smoked meat and salt fish while deficit is 68% and imports cover None",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/foodways.js",
+"line": 25,
+"fn": "SOURCE_PHRASES"
+}
+},
+{
+"id": "30739",
+"sev": "MED",
+"n": 3,
+"town": "r2s-infiltrated-thorp-3",
+"section": "Summary/Overview",
+"fold": "the orthodox clergy",
+"text": "the orthodox clergy",
+"why": "'the orthodox clergy': no church, shrine or clergy in HOUSES, population 6",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/historyGenerator.js",
+"line": 568,
+"fn": "buildHistoricalEvent"
+}
+},
+{
+"id": "07020",
+"sev": "MED",
+"n": 3,
+"town": "r2r-thorp-37",
+"section": "Summary/Overview",
+"fold": "Earth-banked enclosures and older rounded foundations remain visible between newer halls.",
+"text": "Earth-banked enclosures and older rounded foundations remain visible between newer halls.",
+"why": "'between newer halls'; a thorp of 6 whose HOUSES list no hall",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 177,
+"fn": "CULTURE_PROFILES.architecturalDetails"
+}
+},
+{
+"id": "21101",
+"sev": "MED",
+"n": 3,
+"town": "r2s-infiltrated-hamlet-3",
+"section": "Summary/Overview",
+"fold": "The mountain trade the settlement was built upon failed, and the wealth it once carried drained away within a few hard years",
+"text": "The mountain trade the settlement was built upon failed, and the wealth it once carried drained away within a few hard years",
+"why": "says built upon mountain trade; terrain is Forest, access isolated, founded as a noble's hunting lodge",
+"kinds": [
+"RECORD"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1423,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "03621",
+"sev": "MED",
+"n": 3,
+"town": "r2s-plague_onset-town-2",
+"section": "Summary/Overview",
+"fold": "An uncontrolled surge of magic left its mark on the lumber yards and sawmill district and on the people who were there, and the effects have never fully faded",
+"text": "An uncontrolled surge of magic left its mark on the lumber yards and sawmill district and on the people who were there, and the effects have never fully faded",
+"why": "names lumber yards and a sawmill district; HOUSES has no sawmill and timber is imported, woodland cleared",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1512,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "10773",
+"sev": "MED",
+"n": 3,
+"town": "r2s-slave_revolt-town-0",
+"section": "Summary/Overview",
+"fold": "Hooves and wheels fill the road, and the yards are crowded with teams changing over.",
+"text": "Hooves and wheels fill the road, and the yards are crowded with teams changing over.",
+"why": "busy road and crowded yards of changing teams; CRISIS is an uncontained Slave Revolt, 21735 says the rising still goes on",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 241,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "01041",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-town-1",
+"section": "Summary/Overview",
+"fold": "<N> is loud with horses: shod, sold, hired and fed at every hour.",
+"text": "Hongcheng is loud with horses: shod, sold, hired and fed at every hour.",
+"why": "horses shod, sold, hired and fed at every hour; HOUSES has no smith, stable or horse market",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 242,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "28824",
+"sev": "MED",
+"n": 2,
+"town": "r2s-slave_revolt-thorp-2",
+"section": "World/History",
+"fold": "When the coastal trade the thorp depended on failed, the wealth that had flowed through it dried up faster than anyone was prepared for",
+"text": "When the coastal trade the thorp depended on failed, the wealth that had flowed through it dried up faster than anyone was prepared for",
+"why": "the coastal trade it depended on failed and wealth dried up; 11977 says its one trade does well enough now, prosperity Moderate",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/historyDescVariants.js",
+"line": 89,
+"fn": "HISTORY_DESC_VARIANTS.trade_collapse"
+}
+},
+{
+"id": "18339",
+"sev": "MED",
+"n": 2,
+"town": "r2r-village-58",
+"section": "Summary/Overview",
+"fold": "Someone has been baking since before dawn, and the air still carries it.",
+"text": "Someone has been baking since before dawn, and the air still carries it.",
+"why": "someone baking since dawn, smell in the air; CRISIS Famine, grain short, no baker; tag all F",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 89,
+"fn": "ARRIVAL_SENSES.lines"
+}
+},
+{
+"id": "18534",
+"sev": "MED",
+"n": 2,
+"town": "r2s-slave_revolt-village-0",
+"section": "Summary/Overview",
+"fold": "Stallholders call their wares over the noise of the market.",
+"text": "Stallholders call their wares over the noise of the market.",
+"why": "stallholders calling over a noisy market under a Slave Revolt, safety Critical; 21709 says market operations disrupted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 251,
+"fn": "ARRIVAL_SENSES.lines"
+}
+},
+{
+"id": "02598",
+"sev": "MED",
+"n": 2,
+"town": "r2r-town-16",
+"section": "World/History",
+"fold": "A flood rose fast across the mill and lumber district, carrying off livelihoods and leaving the ownership of # the ground in doubt",
+"text": "A flood rose fast across the mill and lumber district, carrying off livelihoods and leaving the ownership of half the ground in doubt",
+"why": "names a mill and lumber district; HOUSES has no sawmill or lumber trade, and 996 people hold no district",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyDescVariants.js",
+"line": 101,
+"fn": "HISTORY_DESC_VARIANTS.great_flood"
+}
+},
+{
+"id": "22077",
+"sev": "MED",
+"n": 1,
+"town": "r2s-succession_void-hamlet-1",
+"section": "Summary/Overview",
+"fold": "The smell of the mash tun follows you past the brewhouse door.",
+"text": "The smell of the mash tun follows you past the brewhouse door.",
+"why": "a mash tun and a brewhouse door; HOUSES has a maltster but no brewhouse or alehouse",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 119,
+"fn": "ARRIVAL_SENSES.lines"
+}
+},
+{
+"id": "02464",
+"sev": "MED",
+"n": 1,
+"town": "r2r-hamlet-31",
+"section": "Table/Tonight sheet",
+"fold": "A clause in the compact entitles certain families to first refusal on grain sales, and the current shortage makes that clause valuable.",
+"text": "A clause in the compact entitles certain families to first refusal on grain sales, and the current shortage makes that clause valuable.",
+"why": "'the current shortage' of grain; CRISIS none, grown 69 over need 54, exports Grain surplus",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/historyGenerator.js",
+"line": 794,
+"fn": "generateRelationshipEvent"
+}
+},
+{
+"id": "02888",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-56",
+"section": "World/History",
+"fold": "A period of ambitious stone building transformed the settlement's character, its walls and its larger houses raised from local quarry stone.",
+"text": "A period of ambitious stone building transformed the settlement's character, its walls and its larger houses raised from local quarry stone.",
+"why": "says its walls were raised from quarry stone; DEFENCE walls are Palisade or earthworks",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1712,
+"fn": "HISTORY_DESC_SIBLINGS"
+}
+},
+{
+"id": "09405",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-12",
+"section": "Summary/Overview",
+"fold": "Fountains, steps, and reused columns give the civic center a layered age.",
+"text": "Fountains, steps, and reused columns give the civic center a layered age.",
+"why": "a civic center with fountains and columns in a village of 80 with nine houses and no hall",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 136,
+"fn": "CULTURE_PROFILES.architecturalDetails"
+}
+},
+{
+"id": "20032",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-40",
+"section": "Table/Tonight sheet",
+"fold": "The ailing ruler wants a final errand completed before naming a successor.",
+"text": "The ailing ruler wants a final errand completed before naming a successor.",
+"why": "an ailing ruler about to name a successor; GOVERNMENT is Priestly Guidance, Stable, with no single ruler",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1140,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "04816",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-49",
+"section": "Summary/Overview",
+"fold": "Causeways and managed water divide the settlement into organized neighborhoods.",
+"text": "Causeways and managed water divide the settlement into organized neighborhoods.",
+"why": "organized neighborhoods divided by causeways in a village of 168",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 394,
+"fn": "CULTURE_PROFILES.architecturalDetails"
+}
+},
+{
+"id": "02684",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-43",
+"section": "Table/Tonight sheet",
+"fold": "A hidden ledger documenting wage theft is circulating in the workers' #.",
+"text": "A hidden ledger documenting wage theft is circulating in the workers' quarter.",
+"why": "names a workers' quarter in a place of 366 people",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1155,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "04685",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-10",
+"section": "Summary/Overview",
+"fold": "Caravan courts and covered lanes make movement through the merchant # deliberate.",
+"text": "Caravan courts and covered lanes make movement through the merchant quarter deliberate.",
+"why": "names caravan courts and a merchant quarter; 754 people hold no quarter and HOUSES has no caravan post",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 222,
+"fn": "CULTURE_PROFILES.architecturalDetails"
+}
+},
+{
+"id": "22172",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-40",
+"section": "Systems/Economics",
+"fold": "The table is bread from the home fields and cheese and smoked meat from the grazing herds, and salted fish carries it through the lean months.",
+"text": "The table is bread from the home fields and cheese and smoked meat from the grazing herds, and salted fish carries it through the lean months.",
+"why": "salted fish carries the lean months; 14291 says salt is needed and not brought in; TRADE has no salt or salted fish",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/foodways.js",
+"line": 35,
+"fn": "FRAMES"
+}
+},
+{
+"id": "10007",
+"sev": "MED",
+"n": 1,
+"town": "r2s-under_siege-metropolis-1",
+"section": "Summary/Overview",
+"fold": "Grand Military CouncilVigilantesthe criminal network",
+"text": "Grand Military CouncilVigilantesthe criminal network",
+"why": "names Vigilantes and a criminal network as factions; GOVERNMENT powers list neither",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1230,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+}
+]

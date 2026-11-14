@@ -1,0 +1,870 @@
+[
+{
+"id": "09820",
+"sev": "HIGH",
+"n": 120,
+"town": "r2r-village-58",
+"section": "Systems/Services",
+"fold": "Grain sold by the sack to a household, straight from the field at harvest.",
+"text": "Grain sold by the sack to a household, straight from the field at harvest.",
+"why": "grain sold by the sack straight from the field; famine 34% deficit, grain is imported",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1762,
+"fn": "INSTITUTION_SERVICES.Grain at harvest"
+}
+},
+{
+"id": "28960",
+"sev": "HIGH",
+"n": 119,
+"town": "r2r-thorp-50",
+"section": "Systems/Institutions",
+"fold": "Wholesale trade",
+"text": "Wholesale trade",
+"why": "lists Wholesale trade as an institution; HOUSES has no wholesale trade or market",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 953,
+"fn": "INSTITUTION_SERVICES.Wholesale trade"
+}
+},
+{
+"id": "02383",
+"sev": "MED",
+"n": 356,
+"town": "r2s-succession_void-thorp-1",
+"section": "Systems/Services",
+"fold": "A bed by the hearth and a place at a shared table, for a traveller who asks.",
+"text": "A bed by the hearth and a place at a shared table, for a traveller who asks.",
+"why": "offers a place at a shared table; CRISIS famine, 64% deficit, no imports",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1731,
+"fn": "INSTITUTION_SERVICES.Hospitality"
+}
+},
+{
+"id": "22125",
+"sev": "MED",
+"n": 262,
+"town": "r2s-famine-city-3",
+"section": "Systems/Services",
+"fold": "The staple food of most people.",
+"text": "The staple food of most people.",
+"why": "bread offered as the ordinary staple under Famine, 17% deficit and grain imported",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1469,
+"fn": "INSTITUTION_SERVICES.Fresh bread"
+}
+},
+{
+"id": "10025",
+"sev": "MED",
+"n": 240,
+"town": "r2s-plague_onset-hamlet-0",
+"section": "Systems/Services",
+"fold": "Grazing on the common for a traveller's beasts, for a small fee.",
+"text": "Grazing on the common for a traveller's beasts, for a small fee.",
+"why": "Grazing offered to travellers' beasts; under Plague travel stops; tag reaches S towns",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1765,
+"fn": "INSTITUTION_SERVICES.Pasturage"
+}
+},
+{
+"id": "04165",
+"sev": "MED",
+"n": 218,
+"town": "r2s-plague_onset-thorp-2",
+"section": "Systems/Services",
+"fold": "Attendance expected of all residents.",
+"text": "Attendance expected of all residents.",
+"why": "Attendance at worship expected of all, a walk to another village; under Plague people do not gather or travel",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1532,
+"fn": "INSTITUTION_SERVICES.Weekly rite"
+}
+},
+{
+"id": "12206",
+"sev": "MED",
+"n": 214,
+"town": "r2s-under_siege-city-1",
+"section": "Systems/Services",
+"fold": "Jewellery, fine clothing, rare spices, and luxury goods from across the world.",
+"text": "Jewellery, fine clothing, rare spices, and luxury goods from across the world.",
+"why": "offers luxury goods and spices from across the world; under siege nothing has come in",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1072,
+"fn": "INSTITUTION_SERVICES.High-end retail"
+}
+},
+{
+"id": "10827",
+"sev": "MED",
+"n": 184,
+"town": "r2r-city-44",
+"section": "Systems/Services",
+"fold": "House wine by the jug or bottle.",
+"text": "House wine by the jug or bottle.",
+"why": "house wine by the jug offered; no grapes reach the vintner",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 488,
+"fn": "INSTITUTION_SERVICES.Table wine"
+}
+},
+{
+"id": "13413",
+"sev": "MED",
+"n": 177,
+"town": "r2s-under_siege-city-2",
+"section": "Systems/Services",
+"fold": "Merchants from distant regions.",
+"text": "Merchants from distant regions.",
+"why": "the fair draws merchants from distant regions; under siege 29018 says every way in is closed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1084,
+"fn": "INSTITUTION_SERVICES.Large-scale trading"
+}
+},
+{
+"id": "15641",
+"sev": "MED",
+"n": 161,
+"town": "r2s-plague_onset-city-3",
+"section": "Systems/Services",
+"fold": "Performers, games, and live music at multiple venues nightly.",
+"text": "Performers, games, and live music at multiple venues nightly.",
+"why": "live music and games at venues nightly; plague, people fear sickness and do not gather as usual",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1053,
+"fn": "INSTITUTION_SERVICES.Entertainment"
+}
+},
+{
+"id": "16285",
+"sev": "MED",
+"n": 160,
+"town": "r2s-under_siege-city-0",
+"section": "Systems/Services",
+"fold": "Rare medications and treatments available through district-wide sourcing.",
+"text": "Rare medications and treatments available through district-wide sourcing.",
+"why": "rare medications available through district sourcing, yet herbs cut off by siege and being made to last",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 733,
+"fn": "INSTITUTION_SERVICES.Specialist compounds"
+}
+},
+{
+"id": "18167",
+"sev": "MED",
+"n": 159,
+"town": "r2s-plague_onset-city-3",
+"section": "Systems/Services",
+"fold": "Smoked, dried, and salt-preserved fish for storage and inland trade.",
+"text": "Smoked, dried, and salt-preserved fish for storage and inland trade.",
+"why": "preserved fish for inland trade; inland mountain city, TRADE exports and imports no fish",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 954,
+"fn": "INSTITUTION_SERVICES.Preserved fish"
+}
+},
+{
+"id": "07802",
+"sev": "MED",
+"n": 142,
+"town": "r2s-famine-thorp-0",
+"section": "Systems/Services",
+"fold": "Fish sold daily from the morning catch.",
+"text": "Fish sold daily from the morning catch.",
+"why": "fish sold daily from the catch; CRISIS famine, 26% deficit, fishing season poor",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 952,
+"fn": "INSTITUTION_SERVICES.Fresh fish retail"
+}
+},
+{
+"id": "12921",
+"sev": "MED",
+"n": 138,
+"town": "r2s-famine-city-1",
+"section": "Systems/Services",
+"fold": "Major livestock sales across all species and quality grades.",
+"text": "Major livestock sales across all species and quality grades.",
+"why": "major livestock sales of all species under Famine, with livestock imported because local grazing is depleted; tag also covers sieges",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1085,
+"fn": "INSTITUTION_SERVICES.Livestock auctions"
+}
+},
+{
+"id": "28979",
+"sev": "MED",
+"n": 127,
+"town": "r2s-infiltrated-town-3",
+"section": "Systems/Institutions",
+"fold": "Wine wholesale",
+"text": "Wine wholesale",
+"why": "offers wine wholesale to taverns; 14392 says grapes are needed and not brought in, TRADE makes no wine",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 490,
+"fn": "INSTITUTION_SERVICES.Wine wholesale"
+}
+},
+{
+"id": "16399",
+"sev": "MED",
+"n": 120,
+"town": "r2s-famine-town-2",
+"section": "Systems/Services",
+"fold": "Regular market days with produce, goods, and livestock.",
+"text": "Regular market days with produce, goods, and livestock.",
+"why": "regular market days with produce; CRISIS famine, food deficit, grain imported",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1096,
+"fn": "INSTITUTION_SERVICES.Weekly market"
+}
+},
+{
+"id": "11805",
+"sev": "MED",
+"n": 120,
+"town": "r2s-under_siege-city-1",
+"section": "Systems/Services",
+"fold": "Interment outside the gates.",
+"text": "Interment outside the gates.",
+"why": "interment outside the gates; under siege 20179 says the charnel house now holds the newly dead because the roads are cut",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1453,
+"fn": "INSTITUTION_SERVICES.Burial"
+}
+},
+{
+"id": "06254",
+"sev": "MED",
+"n": 120,
+"town": "r2s-under_siege-city-1",
+"section": "Systems/Services",
+"fold": "Customs checks and toll collection.",
+"text": "Customs checks and toll collection.",
+"why": "customs checks and toll collection at the gates; under siege nothing comes in or goes out",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1497,
+"fn": "INSTITUTION_SERVICES.Gate control"
+}
+},
+{
+"id": "04603",
+"sev": "MED",
+"n": 119,
+"town": "r2r-thorp-50",
+"section": "Systems/Services",
+"fold": "Bulk purchase by taverns, institutions, and inland traders.",
+"text": "Bulk purchase by taverns, institutions, and inland traders.",
+"why": "bulk purchase by taverns and institutions; thorp of 28 has no tavern or market on HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 953,
+"fn": "INSTITUTION_SERVICES.Wholesale trade"
+}
+},
+{
+"id": "14132",
+"sev": "MED",
+"n": 116,
+"town": "r2s-plague_onset-metropolis-2",
+"section": "Systems/Services",
+"fold": "Multiple venues offering plays, concerts, and entertainment nightly.",
+"text": "Multiple venues offering plays, concerts, and entertainment nightly.",
+"why": "plays and concerts at many venues nightly; plague, safety Restricted, people fear sickness and do not gather",
+"kinds": [
+"STATE",
+"TAG"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1173,
+"fn": "INSTITUTION_SERVICES.Regular performances"
+}
+},
+{
+"id": "04187",
+"sev": "MED",
+"n": 116,
+"town": "r2s-famine-city-0",
+"section": "Systems/Services",
+"fold": "Available every morning.",
+"text": "Available every morning.",
+"why": "fruit, vegetables, dairy and eggs 'available every morning' under Famine",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 905,
+"fn": "INSTITUTION_SERVICES.Fresh produce"
+}
+},
+{
+"id": "12523",
+"sev": "MED",
+"n": 107,
+"town": "r2s-under_siege-city-1",
+"section": "Systems/Services",
+"fold": "Large-scale commercial facilitation across regional markets.",
+"text": "Large-scale commercial facilitation across regional markets.",
+"why": "large-scale commercial facilitation across regional markets, under a siege that closed the roads",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 583,
+"fn": "INSTITUTION_SERVICES.Trade brokerage"
+}
+},
+{
+"id": "16397",
+"sev": "MED",
+"n": 97,
+"town": "r2s-occupied-metropolis-0",
+"section": "Systems/Services",
+"fold": "Register vessel and be assigned a berth.",
+"text": "Register vessel and be assigned a berth.",
+"why": "Registers vessels and berths; trade access is road only, no water route",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 494,
+"fn": "INSTITUTION_SERVICES.Berth assignment"
+}
+},
+{
+"id": "15282",
+"sev": "MED",
+"n": 96,
+"town": "r2s-plague_onset-metropolis-3",
+"section": "Systems/Services",
+"fold": "Ore cut underground by the crews and brought out by cart for sorting.",
+"text": "Ore cut underground by the crews and brought out by cart for sorting.",
+"why": "crews cut ore underground now; TRADE says local iron mines exhausted and lists no ore made here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1817,
+"fn": "SERVICE_DESC_SIBLINGS"
+}
+},
+{
+"id": "12416",
+"sev": "MED",
+"n": 89,
+"town": "r2s-occupied-city-3",
+"section": "Systems/Services",
+"fold": "Kiln-fired clay bricks for construction.",
+"text": "Kiln-fired clay bricks for construction.",
+"why": "offers kiln-fired bricks; HOUSES has a potter but no brickmaker",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 391,
+"fn": "INSTITUTION_SERVICES.Fired brick"
+}
+},
+{
+"id": "17648",
+"sev": "MED",
+"n": 89,
+"town": "r2s-under_siege-city-0",
+"section": "Systems/Services",
+"fold": "Send guild surveyors to map unknown or poorly-documented regions.",
+"text": "Send guild surveyors to map unknown or poorly-documented regions.",
+"why": "offers sending surveyors out to map regions; under siege nobody leaves by road",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 841,
+"fn": "INSTITUTION_SERVICES.Survey expeditions"
+}
+},
+{
+"id": "10819",
+"sev": "MED",
+"n": 69,
+"town": "r2s-famine-town-2",
+"section": "Systems/Services",
+"fold": "Hot meals and a range of drinks at multiple venues.",
+"text": "Hot meals and a range of drinks at multiple venues.",
+"why": "hot meals at multiple venues offered under famine with a food deficit",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1047,
+"fn": "INSTITUTION_SERVICES.Meals and drink"
+}
+},
+{
+"id": "10817",
+"sev": "MED",
+"n": 65,
+"town": "r2s-famine-town-1",
+"section": "Systems/Services",
+"fold": "Hot food in most establishments.",
+"text": "Hot food in most establishments.",
+"why": "hot food in most establishments; CRISIS famine, food deficit, stability Desperate",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1323,
+"fn": "INSTITUTION_SERVICES.Meals"
+}
+},
+{
+"id": "16147",
+"sev": "MED",
+"n": 65,
+"town": "r2s-famine-town-1",
+"section": "Systems/Services",
+"fold": "Quality ranges from pottage to roasted meats.",
+"text": "Quality ranges from pottage to roasted meats.",
+"why": "meals up to roasted meats offered under famine with a food deficit",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1323,
+"fn": "INSTITUTION_SERVICES.Meals"
+}
+},
+{
+"id": "18054",
+"sev": "MED",
+"n": 64,
+"town": "r2s-occupied-metropolis-0",
+"section": "Systems/Services",
+"fold": "Short-term warehousing on the dockside while goods await customs clearance.",
+"text": "Short-term warehousing on the dockside while goods await customs clearance.",
+"why": "Dockside warehousing; trade access is road only, no water route",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 608,
+"fn": "INSTITUTION_SERVICES.Cargo storage"
+}
+},
+{
+"id": "10818",
+"sev": "MED",
+"n": 51,
+"town": "r2s-famine-city-1",
+"section": "Systems/Services",
+"fold": "Hot food sold to working people.",
+"text": "Hot food sold to working people.",
+"why": "hot food sold freely to working people under Famine with 19% food deficit; tag also reaches sieges",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 907,
+"fn": "INSTITUTION_SERVICES.Street food"
+}
+},
+{
+"id": "18410",
+"sev": "MED",
+"n": 47,
+"town": "r2r-village-58",
+"section": "Systems/Services",
+"fold": "Someone moves goods without questions.",
+"text": "Someone moves goods without questions.",
+"why": "someone moves goods without questions; HOUSES has no fence, smuggler or criminal house",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/servicesGenerator.js",
+"line": 16,
+"fn": "ASK_AROUND_AT_THE_RIGHT_TAVERN_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS"
+}
+},
+{
+"id": "09525",
+"sev": "MED",
+"n": 47,
+"town": "r2s-under_siege-thorp-1",
+"section": "Systems/Services",
+"fold": "Funeral rites, said by the parish priest, who comes or is sent for.",
+"text": "Funeral rites, said by the parish priest, who comes or is sent for.",
+"why": "parish priest comes or is sent for; under siege no one comes in by road",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1535,
+"fn": "INSTITUTION_SERVICES.Last rites"
+}
+},
+{
+"id": "04548",
+"sev": "MED",
+"n": 46,
+"town": "r2s-occupied-town-2",
+"section": "Systems/Services",
+"fold": "Bring commercial and civil disputes before a magistrate.",
+"text": "Bring commercial and civil disputes before a magistrate.",
+"why": "disputes go before a magistrate; HOUSES has no courthouse or court",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1668,
+"fn": "INSTITUTION_SERVICES.Dispute arbitration"
+}
+},
+{
+"id": "06271",
+"sev": "MED",
+"n": 42,
+"town": "r2s-famine-hamlet-2",
+"section": "Systems/Services",
+"fold": "Daily milk from cattle, goats, or sheep depending on region.",
+"text": "Daily milk from cattle, goats, or sheep depending on region.",
+"why": "daily milk offered; same page says no livestock reaches the dairy farmer, under famine",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 911,
+"fn": "INSTITUTION_SERVICES.Fresh milk"
+}
+},
+{
+"id": "07253",
+"sev": "MED",
+"n": 34,
+"town": "r2s-occupied-village-1",
+"section": "Systems/Services",
+"fold": "Essential for transport and cavalry",
+"text": "Essential for transport and cavalry",
+"why": "names cavalry; DEFENCE has no garrison, militia, watch or hired force",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 145,
+"fn": "INSTITUTION_SERVICES.Horseshoeing"
+}
+},
+{
+"id": "15244",
+"sev": "MED",
+"n": 32,
+"town": "r2s-plague_onset-town-0",
+"section": "Systems/Services",
+"fold": "Once-a-year market drawing merchants from across the region.",
+"text": "Once-a-year market drawing merchants from across the region.",
+"why": "annual fair drawing merchants from across the region, presented as running; town Quarantined under plague",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 719,
+"fn": "INSTITUTION_SERVICES.Seasonal trading"
+}
+},
+{
+"id": "16871",
+"sev": "MED",
+"n": 29,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Systems/Services",
+"fold": "Scheduled passenger barges between river settlements.",
+"text": "Scheduled passenger barges between river settlements.",
+"why": "scheduled passenger barges between river settlements offered under active siege",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 774,
+"fn": "INSTITUTION_SERVICES.Cargo freight"
+}
+},
+{
+"id": "06688",
+"sev": "MED",
+"n": 26,
+"town": "r2s-occupied-town-2",
+"section": "Systems/Services",
+"fold": "Disputes end with whoever can apply more violence or pay more for protection.",
+"text": "Disputes end with whoever can apply more violence or pay more for protection.",
+"why": "disputes end in violence or bought protection; town watch and occupation curfew keep control, and 04548 sends disputes to a magistrate",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/servicesGenerator.js",
+"line": 30,
+"fn": "THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION"
+}
+},
+{
+"id": "12922",
+"sev": "MED",
+"n": 19,
+"town": "r2s-under_siege-town-0",
+"section": "Systems/Services",
+"fold": "Major livestock sales.",
+"text": "Major livestock sales.",
+"why": "major livestock sales; under siege (tag is siege towns only) nothing comes in by road",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 720,
+"fn": "INSTITUTION_SERVICES.Livestock auction"
+}
+},
+{
+"id": "16396",
+"sev": "MED",
+"n": 19,
+"town": "r2s-under_siege-town-0",
+"section": "Systems/Services",
+"fold": "Register to join an outgoing caravan.",
+"text": "Register to join an outgoing caravan.",
+"why": "offers registration for an outgoing caravan; under siege nothing goes out by road (tag S and F only)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 475,
+"fn": "INSTITUTION_SERVICES.Caravan assembly"
+}
+},
+{
+"id": "04168",
+"sev": "MED",
+"n": 16,
+"town": "r2s-plague_onset-city-1",
+"section": "Systems/Services",
+"fold": "Attracts pilgrims from across the region.",
+"text": "Attracts pilgrims from across the region.",
+"why": "cathedral 'attracts pilgrims from across the region' under Plague; tag is all P, people do not travel as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 852,
+"fn": "INSTITUTION_SERVICES.Pilgrimage destination"
+}
+},
+{
+"id": "14634",
+"sev": "MED",
+"n": 11,
+"town": "r2s-occupied-metropolis-2",
+"section": "Systems/Services",
+"fold": "No raiding force approaches a settlement with a visible dragon.",
+"text": "No raiding force approaches a settlement with a visible dragon.",
+"why": "no raiding force approaches a town with a dragon; CRISIS Under Occupation, a foreign force holds it",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 929,
+"fn": "INSTITUTION_SERVICES.Aerial deterrence"
+}
+},
+{
+"id": "15825",
+"sev": "MED",
+"n": 9,
+"town": "r2s-famine-village-2",
+"section": "Systems/Services",
+"fold": "Pottage, bread, and whatever was leftover from the household pot.",
+"text": "Pottage, bread, and whatever was leftover from the household pot.",
+"why": "ale house offers pottage and bread; famine 30% deficit, grain imported",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 714,
+"fn": "INSTITUTION_SERVICES.Basic food"
+}
+},
+{
+"id": "05233",
+"sev": "MED",
+"n": 5,
+"town": "r2r-village-21",
+"section": "Systems/Services",
+"fold": "Collects the lord's dues and the temple tithe",
+"text": "Collects the lord's dues and the temple tithe",
+"why": "'the lord's dues and the temple tithe'; no lord in GOVERNMENT (headman), no temple on HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 47,
+"fn": "INSTITUTION_SERVICES.Tithe and dues"
+}
+},
+{
+"id": "21230",
+"sev": "MED",
+"n": 4,
+"town": "r2r-village-53",
+"section": "Systems/Services",
+"fold": "The organization decides what flows through here.",
+"text": "The organization decides what flows through here.",
+"why": "a criminal organization decides what flows through; GOVERNMENT lists no criminal power",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/servicesGenerator.js",
+"line": 229,
+"fn": "generateAvailableServices"
+}
+},
+{
+"id": "02273",
+"sev": "MED",
+"n": 3,
+"town": "r2s-under_siege-metropolis-0",
+"section": "Systems/Institutions",
+"fold": "<N>age destination.",
+"text": "Pilgrimage destination.",
+"why": "pilgrimage destination presumes arrivals; CRISIS Under Siege cuts the roads; Great cathedral critically impaired",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 852,
+"fn": "INSTITUTION_SERVICES.Pilgrimage destination"
+}
+},
+{
+"id": "22546",
+"sev": "MED",
+"n": 2,
+"town": "r2s-under_siege-town-2",
+"section": "Systems/Services",
+"fold": "The yearly fair that draws merchants from across the region.",
+"text": "The yearly fair that draws merchants from across the region.",
+"why": "the fair draws merchants from across the region; 14961 says none can reach it while the roads are held",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1807,
+"fn": "SERVICE_DESC_SIBLINGS"
+}
+}
+]

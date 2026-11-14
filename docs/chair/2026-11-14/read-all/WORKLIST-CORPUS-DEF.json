@@ -1,0 +1,2550 @@
+[
+{
+"id": "20784",
+"sev": "HIGH",
+"n": 40,
+"town": "r2s-famine-hamlet-3",
+"section": "Systems/Defense",
+"fold": "The hamlet's defense is conventional throughout.",
+"text": "The hamlet's defense is conventional throughout.",
+"why": "defense conventional throughout; DEFENCE has no walls and no force",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 4768,
+"fn": "DS-DEF-5 › arcane defense ABSENT · v1"
+}
+},
+{
+"id": "20690",
+"sev": "HIGH",
+"n": 6,
+"town": "r2r-hamlet-34",
+"section": "Systems/Defense",
+"fold": "The guards at <N> have changed their rounds and will not say why, and everyone can guess.",
+"text": "The guards at Zoltandavan have changed their rounds and will not say why, and everyone can guess.",
+"why": "the guards have changed their rounds; DEFENCE has no watch or garrison, only a citizen militia",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 7151,
+"fn": "DS-DEF-8 › override: SECURITY COMPROMISED · v2"
+}
+},
+{
+"id": "23220",
+"sev": "HIGH",
+"n": 1,
+"town": "r2s-famine-village-3",
+"section": "Systems/Outlook",
+"fold": "Traders seldom reach <N>, and people there seldom miss them: the village has more than enough to get through a hard year.",
+"text": "Traders seldom reach Jabalkhel, and people there seldom miss them: the village has more than enough to get through a hard year.",
+"why": "says the village has more than enough for a hard year; CRISIS famine, deficit 58%, viable False",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 9330,
+"fn": "DS-DEF-12 › CAPACITY: ample · v3"
+}
+},
+{
+"id": "20580",
+"sev": "HIGH",
+"n": 1,
+"town": "r2r-village-53",
+"section": "Systems/Power",
+"fold": "The gang bosses settle disputes, collect debts and hand out punishments, and the village pays them as it would pay a tax.",
+"text": "The gang bosses settle disputes, collect debts and hand out punishments, and the village pays them as it would pay a tax.",
+"why": "gang bosses rule and tax the village; GOVERNMENT lists no thieves' guild or criminal power",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 2494,
+"fn": "DS-POW-5 › FLAG: crimeIsGovt · v2"
+}
+},
+{
+"id": "15309",
+"sev": "HIGH",
+"n": 1,
+"town": "r2r-village-10",
+"section": "Systems/Defense",
+"fold": "Organized criminals at <N> now outweigh the law outright, and nothing in the village gets done without someone's permission and someone's cut.",
+"text": "Organized criminals at Skáldal now outweigh the law outright, and nothing in the village gets done without someone's permission and someone's cut.",
+"why": "criminals outweigh the law outright; GOVERNMENT lists no criminal power, stability Stable, and 07609 gives the fence a voice not the last word",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 2748,
+"fn": "DS-DEF-3 › Dangerous · v2"
+}
+},
+{
+"id": "23219",
+"sev": "HIGH",
+"n": 1,
+"town": "r2s-under_siege-town-2",
+"section": "Systems/Outlook",
+"fold": "Traders seldom reach <N>, and people there seldom miss them: the town has more than enough to get through a hard year.",
+"text": "Traders seldom reach Yekehiid, and people there seldom miss them: the town has more than enough to get through a hard year.",
+"why": "more than enough to get through a hard year; under siege with deficit 40% and viable False",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 9330,
+"fn": "DS-DEF-12 › CAPACITY: ample · v3"
+}
+},
+{
+"id": "00333",
+"sev": "HIGH",
+"n": 1,
+"town": "r2s-succession_void-town-0",
+"section": "Systems/Power",
+"fold": "# person decides at <N> and decides quickly; what comes out of the <N> arrives whole and can change entirely between # season and the next.",
+"text": "One person decides at Shivamandal and decides quickly; what comes out of the Feudal Appointee arrives whole and can change entirely between one season and the next.",
+"why": "one person decides quickly; CRISIS is a leadership void, stability Volatile, and 00168 has three claimants",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 2023,
+"fn": "DS-POW-5 › autocrat · v1"
+}
+},
+{
+"id": "29118",
+"sev": "MED",
+"n": 97,
+"town": "r2r-hamlet-0",
+"section": "Systems/Defense",
+"fold": "You can walk into <N> from any direction and pass nobody on the way in.",
+"text": "You can walk into Spitzsteig from any direction and pass nobody on the way in.",
+"why": "CRISIS Under Siege: one cannot walk in from any direction unchallenged past a besieging force",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 4467,
+"fn": "DS-DEF-5 › walls ABSENT · v2"
+}
+},
+{
+"id": "29122",
+"sev": "MED",
+"n": 82,
+"town": "r2s-plague_onset-town-2",
+"section": "Systems/Defense",
+"fold": "You come into <N> by a gate, and someone at the gate sees you come.",
+"text": "You come into Tarkhankul by a gate, and someone at the gate sees you come.",
+"why": "entry by a gate with gatekeepers; DEFENCE and HOUSES list Town walls but no Gates",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 4819,
+"fn": "DS-DEF-5 › FIXTURE: gates · v3"
+}
+},
+{
+"id": "15200",
+"sev": "MED",
+"n": 60,
+"town": "r2s-occupied-town-1",
+"section": "Systems/Defense",
+"fold": "Offenders at <N> are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.",
+"text": "Offenders at Sundnes are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.",
+"why": "offenders are heard and each case recorded; HOUSES has no courthouse, only a small prison/stocks",
+"kinds": [
+"LACKS",
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1227,
+"fn": "DS-DEF-2 › Internal Security: full legal chain (court AND prison) · v1"
+}
+},
+{
+"id": "16620",
+"sev": "MED",
+"n": 60,
+"town": "r2s-slave_revolt-hamlet-2",
+"section": "Systems/Defense",
+"fold": "Rival crews at <N> are fighting over who runs the streets, and until # wins, people pay both the cut and the brawling.",
+"text": "Rival crews at Cnocthwaite are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.",
+"why": "rival crews fight over who runs the streets; HOUSES has one criminal house, a smuggling waypoint, in a hamlet",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 3824,
+"fn": "DS-DEF-4 › structure semi-organized · v3"
+}
+},
+{
+"id": "22421",
+"sev": "MED",
+"n": 48,
+"town": "r2r-village-58",
+"section": "Systems/Defense",
+"fold": "The village's defense is conventional throughout.",
+"text": "The village's defense is conventional throughout.",
+"why": "defense conventional throughout; DEFENCE has no walls and no force",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 4768,
+"fn": "DS-DEF-5 › arcane defense ABSENT · v1"
+}
+},
+{
+"id": "01008",
+"sev": "MED",
+"n": 44,
+"town": "r2r-thorp-40",
+"section": "Systems/Power",
+"fold": "<N> is governed by the Elder Council.",
+"text": "Malotsy is governed by the Elder Council.",
+"why": "'governed by the Elder Council' plainly, under Occupation with a Dominant Occupation Authority and stability Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 2273,
+"fn": "DS-POW-5 › economicBase: agrarian · v1"
+}
+},
+{
+"id": "23463",
+"sev": "MED",
+"n": 43,
+"town": "r2s-occupied-town-1",
+"section": "Systems/Defense",
+"fold": "Visitors at <N> are not robbed; someone quietly explains how things are run here and who runs them.",
+"text": "Visitors at Sundnes are not robbed; someone quietly explains how things are run here and who runs them.",
+"why": "visitors are not robbed and someone runs things; 15667/14654 say theft is persistent with no dominant organisation",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 3787,
+"fn": "DS-DEF-4 › structure organized · v3"
+}
+},
+{
+"id": "01111",
+"sev": "MED",
+"n": 39,
+"town": "r2r-city-19",
+"section": "Systems/Defense",
+"fold": "<N> is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the city decides.",
+"text": "Dunbury is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the city decides.",
+"why": "every arrival goes through a gate; it is a port where ships land at an unguarded waterfront",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 4368,
+"fn": "DS-DEF-5 › walls PRESENT · v2"
+}
+},
+{
+"id": "28742",
+"sev": "MED",
+"n": 38,
+"town": "r2s-occupied-thorp-1",
+"section": "Systems/Magic",
+"fold": "What the thorp makes it makes with hands and ground, and would go on making without a practitioner in it.",
+"text": "What the thorp makes it makes with hands and ground, and would go on making without a practitioner in it.",
+"why": "'makes it with hands and ground, would go on without a practitioner', yet 12 of 24 lbs/day come by magical provision",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 8068,
+"fn": "DS-DEF-9 › magicDependency false · v1"
+}
+},
+{
+"id": "15551",
+"sev": "MED",
+"n": 37,
+"town": "r2s-succession_void-thorp-1",
+"section": "Systems/Outlook",
+"fold": "People at <N> make do with what they have; a good year is comfortable and a bad # is lean.",
+"text": "People at Schwarzdorf make do with what they have; a good year is comfortable and a bad one is lean.",
+"why": "good year comfortable, bad year lean; famine 64% deficit, viable False, cannot last",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 9362,
+"fn": "DS-DEF-12 › CAPACITY: enough · v3"
+}
+},
+{
+"id": "01113",
+"sev": "MED",
+"n": 28,
+"town": "r2r-town-37",
+"section": "Systems/Defense",
+"fold": "<N> is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the town decides.",
+"text": "Hadithaserai is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the town decides.",
+"why": "Every arrival passes a gate tally; the sea approaches are open to any vessel and a smuggling network runs through",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 4368,
+"fn": "DS-DEF-5 › walls PRESENT · v2"
+}
+},
+{
+"id": "12714",
+"sev": "MED",
+"n": 27,
+"town": "r2s-plague_onset-metropolis-2",
+"section": "Systems/Defense",
+"fold": "Life in the metropolis goes on through the crisis: people work, eat and sleep, and the defence makes do with what is left over.",
+"text": "Life in the metropolis goes on through the crisis: people work, eat and sleep, and the defence makes do with what is left over.",
+"why": "life goes on through the crisis as usual; CRISIS Plague, stability Anxious, safety Restricted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 7593,
+"fn": "DS-DEF-8 › override active, viability intact · v2"
+}
+},
+{
+"id": "03161",
+"sev": "MED",
+"n": 25,
+"town": "r2s-plague_onset-village-1",
+"section": "Systems/Defense",
+"fold": "A visitor to <N> would not guess at the trouble from the streets; the village is shaken but standing.",
+"text": "A visitor to Erdenordu would not guess at the trouble from the streets; the village is shaken but standing.",
+"why": "says a visitor would not guess the trouble; safety Dangerous — Plague Unrest",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 7602,
+"fn": "DS-DEF-8 › override active, viability intact · v3"
+}
+},
+{
+"id": "01022",
+"sev": "MED",
+"n": 24,
+"town": "r2s-occupied-village-1",
+"section": "Systems/Power",
+"fold": "<N> is governed by the Household Council.",
+"text": "Celoichi is governed by the Household Council.",
+"why": "says the Household Council governs; under occupation the Occupation Authority is Dominant and the council does not rule freely",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 2273,
+"fn": "DS-POW-5 › economicBase: agrarian · v1"
+}
+},
+{
+"id": "19461",
+"sev": "MED",
+"n": 22,
+"town": "r2s-under_siege-hamlet-2",
+"section": "Systems/Power",
+"fold": "The Headman's Authority at <N> has left obvious decisions untaken because its members cannot agree on them.",
+"text": "The Headman's Authority at Kilshaw has left obvious decisions untaken because its members cannot agree on them.",
+"why": "'its members cannot agree'; Headman's Authority is one headman, not a membership",
+"kinds": [
+"LACKS",
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 2099,
+"fn": "DS-POW-5 › council · v4"
+}
+},
+{
+"id": "03160",
+"sev": "MED",
+"n": 22,
+"town": "r2s-plague_onset-town-1",
+"section": "Systems/Defense",
+"fold": "A visitor to <N> would not guess at the trouble from the streets; the town is shaken but standing.",
+"text": "A visitor to Olymparion would not guess at the trouble from the streets; the town is shaken but standing.",
+"why": "says streets show no trouble; STATE safety Dangerous, Plague Unrest, and 01549 shows a roped-off well",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 7602,
+"fn": "DS-DEF-8 › override active, viability intact · v3"
+}
+},
+{
+"id": "03156",
+"sev": "MED",
+"n": 22,
+"town": "r2s-plague_onset-city-1",
+"section": "Systems/Defense",
+"fold": "A visitor to <N> would not guess at the trouble from the streets; the city is shaken but standing.",
+"text": "A visitor to Sundbø would not guess at the trouble from the streets; the city is shaken but standing.",
+"why": "'would not guess at the trouble from the streets'; safety Dangerous, Plague Unrest; bedding burned in the street",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 7602,
+"fn": "DS-DEF-8 › override active, viability intact · v3"
+}
+},
+{
+"id": "03158",
+"sev": "MED",
+"n": 21,
+"town": "r2s-plague_onset-metropolis-0",
+"section": "Systems/Defense",
+"fold": "A visitor to <N> would not guess at the trouble from the streets; the metropolis is shaken but standing.",
+"text": "A visitor to Tarkhanshari would not guess at the trouble from the streets; the metropolis is shaken but standing.",
+"why": "a visitor would not guess the trouble from the streets; STATE safety Quarantined, stability Anxious under Plague",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 7602,
+"fn": "DS-DEF-8 › override active, viability intact · v3"
+}
+},
+{
+"id": "03110",
+"sev": "MED",
+"n": 19,
+"town": "r2r-city-19",
+"section": "Systems/Defense",
+"fold": "A thing done wrong at <N> goes somewhere and takes time, and the city has come to rely on that rather than on the watch's temper.",
+"text": "A thing done wrong at Dunbury goes somewhere and takes time, and the city has come to rely on that rather than on the watch's temper.",
+"why": "orderly process relied on; stability says people fear sickness more than heed orders, safety Dangerous - Plague Unrest",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1238,
+"fn": "DS-DEF-2 › Internal Security: full legal chain (court AND prison) · v2"
+}
+},
+{
+"id": "03157",
+"sev": "MED",
+"n": 19,
+"town": "r2s-plague_onset-hamlet-0",
+"section": "Systems/Defense",
+"fold": "A visitor to <N> would not guess at the trouble from the streets; the hamlet is shaken but standing.",
+"text": "A visitor to Belovich would not guess at the trouble from the streets; the hamlet is shaken but standing.",
+"why": "a visitor would not guess the trouble; safety is Dangerous — Plague Unrest, and a hamlet of 25 has no streets",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 7602,
+"fn": "DS-DEF-8 › override active, viability intact · v3"
+}
+},
+{
+"id": "00714",
+"sev": "MED",
+"n": 19,
+"town": "r2r-village-58",
+"section": "Summary/Crisis",
+"fold": "<N> has food, enough to matter.",
+"text": "Sudha Ghosh has food, enough to matter.",
+"why": "Sudha Ghosh 'has food, enough to matter', yet 11612 says she takes the worst of the famine",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 3463,
+"fn": "DS-POW-6 › operation role criminal revenue stream (unclassified) · v1"
+}
+},
+{
+"id": "23535",
+"sev": "MED",
+"n": 18,
+"town": "r2r-thorp-27",
+"section": "Systems/Defense",
+"fold": "Walls at <N> with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear.",
+"text": "Walls at Olympnea with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear.",
+"why": "palisade 'credible against raiders' with 'townspeople'; defence Vulnerable and the stakes 'stop nothing determined'",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 922,
+"fn": "DS-DEF-2 › Invasion & War: walls with citizen militia · v1"
+}
+},
+{
+"id": "01472",
+"sev": "MED",
+"n": 17,
+"town": "r2s-succession_void-town-3",
+"section": "Systems/Defense",
+"fold": "<N>'s accounts keep its town walls in repair but fall short on the watch's wages, so the defences are sound and too few people man them.",
+"text": "Skaldtun's accounts keep its town walls in repair but fall short on the watch's wages, so the defences are sound and too few people man them.",
+"why": "says the defences are sound; STATE defence Vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 9625,
+"fn": "DS-DEF-11 › WALLED-STRAINED · v1"
+}
+},
+{
+"id": "03383",
+"sev": "MED",
+"n": 17,
+"town": "r2s-famine-metropolis-1",
+"section": "Systems/Defense",
+"fold": "Alchemy is practised at <N>, and some of what it makes goes to the metropolis's defenders.",
+"text": "Alchemy is practised at Hongji, and some of what it makes goes to the metropolis's defenders.",
+"why": "alchemy practised and supplied to defenders; HOUSES has no Alchemist quarter or alchemist",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 4920,
+"fn": "DS-DEF-5 › ARCANE: alchemists · v1"
+}
+},
+{
+"id": "20245",
+"sev": "MED",
+"n": 16,
+"town": "r2s-plague_onset-city-1",
+"section": "Systems/Defense",
+"fold": "The city went into this trouble with money in hand, and its defenders are still paid on time.",
+"text": "The city went into this trouble with money in hand, and its defenders are still paid on time.",
+"why": "city entered the trouble with money in hand; prosperity Poor and the seat-holder cannot pay for repairs and relief",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1460,
+"fn": "DS-DEF-2 › Economic Survival: STRONG · v12"
+}
+},
+{
+"id": "21035",
+"sev": "MED",
+"n": 16,
+"town": "r2s-under_siege-metropolis-0",
+"section": "Systems/Defense",
+"fold": "The metropolis went into this trouble with money in hand, and its defenders are still paid on time.",
+"text": "The metropolis went into this trouble with money in hand, and its defenders are still paid on time.",
+"why": "went into trouble with money in hand; STATE prosperity Struggling",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1460,
+"fn": "DS-DEF-2 › Economic Survival: STRONG · v12"
+}
+},
+{
+"id": "11437",
+"sev": "MED",
+"n": 15,
+"town": "r2s-famine-city-0",
+"section": "Systems/Magic",
+"fold": "If the help beyond ordinary work failed at <N>, its baked goods would fall further short than it already does.",
+"text": "If the help beyond ordinary work failed at Weizhen, its baked goods would fall further short than it already does.",
+"why": "its baked goods would fall short; HOUSES has no bakers",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 8046,
+"fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v2"
+}
+},
+{
+"id": "01607",
+"sev": "MED",
+"n": 15,
+"town": "r2s-occupied-thorp-0",
+"section": "Systems/Defense",
+"fold": "<N>'s pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes.",
+"text": "Warmstadt's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes.",
+"why": "a pay book and paid defenders: DEFENCE has only an unpaid Household levy",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1508,
+"fn": "DS-DEF-2 › Economic Survival: WEAK · v1"
+}
+},
+{
+"id": "01519",
+"sev": "MED",
+"n": 15,
+"town": "r2s-plague_onset-town-3",
+"section": "Systems/Defense",
+"fold": "<N>'s defences are sound, but fewer people turn out each season to man them, and the town is slow to notice.",
+"text": "Ringford's defences are sound, but fewer people turn out each season to man them, and the town is slow to notice.",
+"why": "says Ringford's defences are sound; STATE defence Vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 9639,
+"fn": "DS-DEF-11 › WALLED-STRAINED · v2"
+}
+},
+{
+"id": "28625",
+"sev": "MED",
+"n": 15,
+"town": "r2s-insurgency-city-2",
+"section": "Systems/Defense",
+"fold": "What <N> can field and what <N> has built are both in good order; the city would take real effort to threaten and knows it.",
+"text": "What Jalalkul can field and what Jalalkul has built are both in good order; the city would take real effort to threaten and knows it.",
+"why": "forces 'in good order', hard to threaten; safety Dangerous under Insurgency, garrison patrols in daylight only",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 39,
+"fn": "DS-DEF-1 › readiness STRONG · v2"
+}
+},
+{
+"id": "14935",
+"sev": "MED",
+"n": 15,
+"town": "r2r-metropolis-38",
+"section": "Systems/Defense",
+"fold": "Nobody in <N> lies awake over a lean year: there is enough in hand to see the metropolis through #.",
+"text": "Nobody in Ulfstrand lies awake over a lean year: there is enough in hand to see the metropolis through one.",
+"why": "says enough in hand to ride out a lean year; STATE food ledger shows a 5% deficit even now",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1413,
+"fn": "DS-DEF-2 › Economic Survival: STRONG · v8"
+}
+},
+{
+"id": "06324",
+"sev": "MED",
+"n": 14,
+"town": "r2s-under_siege-hamlet-1",
+"section": "Systems/Power",
+"fold": "Decisions at <N> are slow because the whole Headman's Authority must agree, and once made they are rarely undone.",
+"text": "Decisions at Zlatoko are slow because the whole Headman's Authority must agree, and once made they are rarely undone.",
+"why": "'the whole Headman's Authority must agree' presumes a body; the power is a single headman",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 2063,
+"fn": "DS-POW-5 › council · v1"
+}
+},
+{
+"id": "15533",
+"sev": "MED",
+"n": 14,
+"town": "r2s-famine-thorp-2",
+"section": "Systems/Power",
+"fold": "People at <N> grumble, but nobody in the thorp stands ready to lead them, so Elder Council is safe in the hall.",
+"text": "People at Benham grumble, but nobody in the thorp stands ready to lead them, so Elder Council is safe in the hall.",
+"why": "Elder Council safe in the hall; HOUSES has no hall, stability Desperate",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1543,
+"fn": "DS-POW-4 › riskLabel: Stable (no challengers) · v3"
+}
+},
+{
+"id": "20442",
+"sev": "MED",
+"n": 14,
+"town": "r2s-plague_onset-city-2",
+"section": "Systems/Defense",
+"fold": "The defenders at <N> make do: the city's workshops cannot keep them properly fed and equipped.",
+"text": "The defenders at Kamalapeth make do: the city's workshops cannot keep them properly fed and equipped.",
+"why": "workshops cannot feed or equip defenders; prosperity Comfortable, defence Fortress, bowyers guild makes bows and arrows here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1658,
+"fn": "DS-DEF-2 › CHAIN: defence short · v3"
+}
+},
+{
+"id": "23021",
+"sev": "MED",
+"n": 14,
+"town": "r2s-plague_onset-city-2",
+"section": "Systems/Defense",
+"fold": "Though the present peace asks nothing of its defences, <N> keeps its city walls and gates in repair: mending costs less than building again.",
+"text": "Though the present peace asks nothing of its defences, Kamalapeth keeps its city walls and gates in repair: mending costs less than building again.",
+"why": "'the present peace asks nothing of its defences'; under Plague with safety Dangerous, Plague Unrest; tag is all P",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 9558,
+"fn": "DS-DEF-11 › WALLED-QUIET · v1"
+}
+},
+{
+"id": "20443",
+"sev": "MED",
+"n": 14,
+"town": "r2s-infiltrated-metropolis-3",
+"section": "Systems/Defense",
+"fold": "The defenders at <N> make do: the metropolis's workshops cannot keep them properly fed and equipped.",
+"text": "The defenders at Vatantash make do: the metropolis's workshops cannot keep them properly fed and equipped.",
+"why": "workshops cannot keep defenders fed and equipped; STATE prosperity Comfortable, food deficit 0%, blacksmiths and metalworkers listed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1658,
+"fn": "DS-DEF-2 › CHAIN: defence short · v3"
+}
+},
+{
+"id": "20059",
+"sev": "MED",
+"n": 13,
+"town": "r2s-succession_void-hamlet-3",
+"section": "Systems/Defense",
+"fold": "The arrest book at <N> fills with names that are let go again, because nobody is sure whose authority the arrests were made under.",
+"text": "The arrest book at Pianomonte fills with names that are let go again, because nobody is sure whose authority the arrests were made under.",
+"why": "an arrest book filling with names; hamlet of 28 has no watch, guard or court",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 3089,
+"fn": "DS-DEF-3 › COMPOUND: succession crisis · v3"
+}
+},
+{
+"id": "01514",
+"sev": "MED",
+"n": 13,
+"town": "r2s-famine-village-1",
+"section": "Systems/Defense",
+"fold": "<N>'s defences are sound, and the only people who would stand on them are the village's own.",
+"text": "Humen's defences are sound, and the only people who would stand on them are the village's own.",
+"why": "says defences are sound; STATE gives defence Vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 9703,
+"fn": "DS-DEF-11 › WALLED-STRAINED · v7"
+}
+},
+{
+"id": "21034",
+"sev": "MED",
+"n": 13,
+"town": "r2s-under_siege-metropolis-1",
+"section": "Systems/Defense",
+"fold": "The metropolis takes the frontier seriously and has taken it seriously long enough that the arrangements are ordinary rather than anxious.",
+"text": "The metropolis takes the frontier seriously and has taken it seriously long enough that the arrangements are ordinary rather than anxious.",
+"why": "defence arrangements ordinary rather than anxious; CRISIS Under Siege, stability Critical",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 667,
+"fn": "DS-DEF-2 › Beasts & Monsters: frontier, credible deterrence · v2"
+}
+},
+{
+"id": "00779",
+"sev": "MED",
+"n": 12,
+"town": "r2s-occupied-hamlet-0",
+"section": "Systems/Defense",
+"fold": "<N> has no wall to fall back behind, so the threat now at hand is being met in the open, house by house.",
+"text": "Qarahiid has no wall to fall back behind, so the threat now at hand is being met in the open, house by house.",
+"why": "threat met in the open house by house; town is occupied, stability Suppressed, resistance only simmers",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 9764,
+"fn": "DS-DEF-11 › UNWALLED-SMALL · v5"
+}
+},
+{
+"id": "01516",
+"sev": "MED",
+"n": 12,
+"town": "r2s-plague_onset-hamlet-1",
+"section": "Systems/Defense",
+"fold": "<N>'s defences are sound, but fewer people turn out each season to man them, and the hamlet is slow to notice.",
+"text": "Weichsee's defences are sound, but fewer people turn out each season to man them, and the hamlet is slow to notice.",
+"why": "'Defences are sound'; STATE defence is Vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 9639,
+"fn": "DS-DEF-11 › WALLED-STRAINED · v2"
+}
+},
+{
+"id": "15536",
+"sev": "MED",
+"n": 11,
+"town": "r2s-famine-thorp-0",
+"section": "Systems/Power",
+"fold": "People at <N> grumble, but nobody in the thorp stands ready to lead them, so Household Council is safe in the hall.",
+"text": "People at Makronea grumble, but nobody in the thorp stands ready to lead them, so Household Council is safe in the hall.",
+"why": "Household Council safe in the hall; HOUSES has no hall, stability Desperate",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1543,
+"fn": "DS-POW-4 › riskLabel: Stable (no challengers) · v3"
+}
+},
+{
+"id": "07715",
+"sev": "MED",
+"n": 11,
+"town": "r2s-insurgency-thorp-1",
+"section": "Summary/Overview",
+"fold": "Fewer merchants in <N> pay what the government asks, and more pay its rivals instead.",
+"text": "Fewer merchants in Ulfset pay what the government asks, and more pay its rivals instead.",
+"why": "'Fewer merchants pay what the government asks, and more pay its rivals'; tag reaches th, here 10 people, no merchants, one power on GOVERNMENT",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/dossierStateProse/stressors.generated.js",
+"line": 3552,
+"fn": "DS-CND-1 › DIRECTION: worsening · CRISIS: insurgency · v3"
+}
+},
+{
+"id": "01512",
+"sev": "MED",
+"n": 11,
+"town": "r2s-indebted-hamlet-3",
+"section": "Systems/Defense",
+"fold": "<N>'s defences are sound, and the only people who would stand on them are the hamlet's own.",
+"text": "Morkstrand's defences are sound, and the only people who would stand on them are the hamlet's own.",
+"why": "says Morkstrand's defences are sound; STATE defence is Vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 9703,
+"fn": "DS-DEF-11 › WALLED-STRAINED · v7"
+}
+},
+{
+"id": "22321",
+"sev": "MED",
+"n": 11,
+"town": "r2s-under_siege-town-0",
+"section": "Systems/Defense",
+"fold": "The town went into this trouble with money in hand, and its defenders are still paid on time.",
+"text": "The town went into this trouble with money in hand, and its defenders are still paid on time.",
+"why": "went into the trouble with money in hand; prosperity Struggling and 22306 says the town never quite makes ends meet",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1460,
+"fn": "DS-DEF-2 › Economic Survival: STRONG · v12"
+}
+},
+{
+"id": "04066",
+"sev": "MED",
+"n": 10,
+"town": "r2s-occupied-metropolis-1",
+"section": "Systems/Power",
+"fold": "At <N> # person gives the answer, and gives it quickly, and there is nobody to ask for a different #.",
+"text": "At Dionpetra one person gives the answer, and gives it quickly, and there is nobody to ask for a different one.",
+"why": "one person gives the answer, nobody else to ask; a ruling three governs, legitimacy Contested, Religious Authorities Strong",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 2032,
+"fn": "DS-POW-5 › autocrat · v2"
+}
+},
+{
+"id": "14859",
+"sev": "MED",
+"n": 10,
+"town": "r2s-plague_onset-thorp-3",
+"section": "Systems/Power",
+"fold": "Nobody at <N> is in a position to take Household Council's place; it has no rival, and nobody in the thorp is asking who comes next.",
+"text": "Nobody at Dharmaghat is in a position to take Household Council's place; it has no rival, and nobody in the thorp is asking who comes next.",
+"why": "Council has no rival and nobody asks who comes next; legitimacy is Contested and stability Anxious",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1517,
+"fn": "DS-POW-4 › riskLabel: Stable (no challengers) · v1"
+}
+},
+{
+"id": "23379",
+"sev": "MED",
+"n": 10,
+"town": "r2s-religious_conversion-thorp-3",
+"section": "Systems/Defense",
+"fold": "Until the quarrel over faith is settled at <N>, its defenders will not act as #.",
+"text": "Until the quarrel over faith is settled at Lidocolonia, its defenders will not act as one.",
+"why": "'its defenders will not act as one'; DEFENCE: garrison, militia, watch, hired all none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 7424,
+"fn": "DS-DEF-8 › override: RELIGIOUS UPHEAVAL · v3"
+}
+},
+{
+"id": "14024",
+"sev": "MED",
+"n": 10,
+"town": "r2s-politically_fractured-thorp-0",
+"section": "Systems/Defense",
+"fold": "More than # power at <N> claims to command its defence, and orders are given twice and obeyed once.",
+"text": "More than one power at Langhof claims to command its defence, and orders are given twice and obeyed once.",
+"why": "'More than one power claims to command its defence, and orders are given twice'; DEFENCE all none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 7048,
+"fn": "DS-DEF-8 › override: COMMAND SPLIT · v1"
+}
+},
+{
+"id": "14856",
+"sev": "MED",
+"n": 10,
+"town": "r2s-famine-hamlet-1",
+"section": "Systems/Power",
+"fold": "Nobody at <N> is in a position to take Free Elder Council's place; it has no rival, and nobody in the hamlet is asking who comes next.",
+"text": "Nobody at Vedaganj is in a position to take Free Elder Council's place; it has no rival, and nobody in the hamlet is asking who comes next.",
+"why": "says nobody asks who comes next; 15845 says the council has lost its standing, legitimacy Legitimacy Crisis",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1517,
+"fn": "DS-POW-4 › riskLabel: Stable (no challengers) · v1"
+}
+},
+{
+"id": "21584",
+"sev": "MED",
+"n": 10,
+"town": "r2s-plague_onset-hamlet-1",
+"section": "Systems/Power",
+"fold": "The question of who might replace the Elder Council at <N> does not come up, because there is nobody the hamlet would name if it did.",
+"text": "The question of who might replace the Elder Council at Weichsee does not come up, because there is nobody the hamlet would name if it did.",
+"why": "says replacing the council does not come up; legitimacy is Legitimacy Crisis",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1530,
+"fn": "DS-POW-4 › riskLabel: Stable (no challengers) · v2"
+}
+},
+{
+"id": "01541",
+"sev": "MED",
+"n": 10,
+"town": "r2s-succession_void-metropolis-0",
+"section": "Systems/Defense",
+"fold": "<N>'s food trades are failing, so little food is being put by; if the metropolis were cut off, it would have less to fall back on.",
+"text": "Kulubtitlan's food trades are failing, so little food is being put by; if the metropolis were cut off, it would have less to fall back on.",
+"why": "food trades failing, little put by; STATE prosperity Prosperous, food deficit 0%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1751,
+"fn": "DS-DEF-2 › CHAIN: food trades failing · v1"
+}
+},
+{
+"id": "22986",
+"sev": "MED",
+"n": 9,
+"town": "r2s-insurgency-hamlet-0",
+"section": "Summary/Overview",
+"fold": "Those in charge of <N> trust fewer of their own officers each week, and cannot tell which have changed sides.",
+"text": "Those in charge of Dioneia trust fewer of their own officers each week, and cannot tell which have changed sides.",
+"why": "those in charge distrust their own officers; only a village headman, no officers listed",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/stressors.generated.js",
+"line": 3560,
+"fn": "DS-CND-1 › DIRECTION: worsening · CRISIS: insurgency · v4"
+}
+},
+{
+"id": "01440",
+"sev": "MED",
+"n": 9,
+"town": "r2s-recently_betrayed-hamlet-2",
+"section": "Systems/Defense",
+"fold": "<N> was betrayed recently, and its defence is being rearranged on the assumption that the enemy knows the old arrangements.",
+"text": "Nikephrion was betrayed recently, and its defence is being rearranged on the assumption that the enemy knows the old arrangements.",
+"why": "defence being rearranged; DEFENCE is none throughout, defence Undefended",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 7140,
+"fn": "DS-DEF-8 › override: SECURITY COMPROMISED · v1"
+}
+},
+{
+"id": "13414",
+"sev": "MED",
+"n": 9,
+"town": "r2s-occupied-hamlet-1",
+"section": "Summary/Overview",
+"fold": "Merchants in <N> pay the occupiers the same share of every sale, season after season, and have learned to price it in.",
+"text": "Merchants in Llanhurst pay the occupiers the same share of every sale, season after season, and have learned to price it in.",
+"why": "merchants pay a share of every sale; isolated hamlet, exports and imports none, no market",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/stressors.generated.js",
+"line": 3018,
+"fn": "DS-CND-1 › DIRECTION: stable · CRISIS: occupied · v4"
+}
+},
+{
+"id": "01518",
+"sev": "MED",
+"n": 9,
+"town": "r2r-thorp-41",
+"section": "Systems/Defense",
+"fold": "<N>'s defences are sound, but fewer people turn out each season to man them, and the thorp is slow to notice.",
+"text": "Xinyuan's defences are sound, but fewer people turn out each season to man them, and the thorp is slow to notice.",
+"why": "'Defences are sound'; STATE defence is Vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 9639,
+"fn": "DS-DEF-11 › WALLED-STRAINED · v2"
+}
+},
+{
+"id": "03112",
+"sev": "MED",
+"n": 9,
+"town": "r2s-plague_onset-town-2",
+"section": "Systems/Defense",
+"fold": "A thing done wrong at <N> goes somewhere and takes time, and the town has come to rely on that rather than on the watch's temper.",
+"text": "A thing done wrong at Tarkhankul goes somewhere and takes time, and the town has come to rely on that rather than on the watch's temper.",
+"why": "orderly due process relied on; stability says people fear sickness more than heed orders, safety Dangerous - Plague Unrest",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1238,
+"fn": "DS-DEF-2 › Internal Security: full legal chain (court AND prison) · v2"
+}
+},
+{
+"id": "00985",
+"sev": "MED",
+"n": 9,
+"town": "r2r-thorp-41",
+"section": "Systems/Defense",
+"fold": "<N> is closed against the sickness, not an army: the guards turn back travellers and traders alike.",
+"text": "Xinyuan is closed against the sickness, not an army: the guards turn back travellers and traders alike.",
+"why": "'the guards turn back travellers': no watch or garrison, only a Household levy",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 7235,
+"fn": "DS-DEF-8 › override: QUARANTINE ACTIVE · v1"
+}
+},
+{
+"id": "04039",
+"sev": "MED",
+"n": 9,
+"town": "r2s-politically_fractured-thorp-3",
+"section": "Summary/Overview",
+"fold": "Ask who governs <N> and you get a different answer in every street, and the answers are angrier than they were.",
+"text": "Ask who governs Suryakota and you get a different answer in every street, and the answers are angrier than they were.",
+"why": "'a different answer in every street'; tag reaches th, here a thorp of 15 with Dwellings (1-8)",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/dossierStateProse/stressors.generated.js",
+"line": 3062,
+"fn": "DS-CND-1 › DIRECTION: worsening · CRISIS: politically_fractured · v3"
+}
+},
+{
+"id": "02617",
+"sev": "MED",
+"n": 9,
+"town": "r2s-famine-town-1",
+"section": "Systems/Defense",
+"fold": "A free company keeps a hall at <N> and hires out its swords to whoever pays.",
+"text": "A free company keeps a hall at Hongcheng and hires out its swords to whoever pays.",
+"why": "says a free company hires out swords here; DEFENCE hired: none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 4866,
+"fn": "DS-DEF-5 › FIXTURE: free company · v1"
+}
+},
+{
+"id": "20576",
+"sev": "MED",
+"n": 9,
+"town": "r2s-plague_onset-town-0",
+"section": "Systems/Defense",
+"fold": "The free company at <N> keeps its own muster roll, not the town's: its fighters answer to their captain and their contracts.",
+"text": "The free company at Ainkarez keeps its own muster roll, not the town's: its fighters answer to their captain and their contracts.",
+"why": "says a free company keeps its muster roll here; DEFENCE hired: none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 4874,
+"fn": "DS-DEF-5 › FIXTURE: free company · v2"
+}
+},
+{
+"id": "06123",
+"sev": "MED",
+"n": 9,
+"town": "r2r-metropolis-29",
+"section": "Systems/Power",
+"fold": "Criminal money finds little purchase at <N>: the metropolis is doing well, and its officials have little reason to sell.",
+"text": "Criminal money finds little purchase at Nokhoiserai: the metropolis is doing well, and its officials have little reason to sell.",
+"why": "criminal money finds little purchase, officials do not sell; CRISIS Infiltrated, regional criminal pressure, council already turned",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 3194,
+"fn": "DS-POW-6 › capture pressure RECOVERING (strong security, prosperity) · v4"
+}
+},
+{
+"id": "20485",
+"sev": "MED",
+"n": 8,
+"town": "r2s-occupied-metropolis-1",
+"section": "World/Faith",
+"fold": "The faithful of <N> treat magic as heresy and hunt it as such: a suspicion is enough to bring the neighbours to the door.",
+"text": "The faithful of Dionpetra treat magic as heresy and hunt it as such: a suspicion is enough to bring the neighbours to the door.",
+"why": "faithful hunt magic as heresy; HOUSES has an academy of magic, enchanter, scroll scribe, and it exports arcane services",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/warFaith.generated.js",
+"line": 6491,
+"fn": "DS-FTH-4 › FLAG: heresySuppression: hunted · v5"
+}
+},
+{
+"id": "06991",
+"sev": "MED",
+"n": 8,
+"town": "r2r-thorp-22",
+"section": "Summary/Overview",
+"fold": "Each week more of <N>'s officials stop answering to those in charge, and their orders go unheeded.",
+"text": "Each week more of Kaanche's officials stop answering to those in charge, and their orders go unheeded.",
+"why": "'more of Kaanche's officials' each week: thorp of 11, roster 1, no offices beyond the Elder Council",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/stressors.generated.js",
+"line": 3536,
+"fn": "DS-CND-1 › DIRECTION: worsening · CRISIS: insurgency · v1"
+}
+},
+{
+"id": "14648",
+"sev": "MED",
+"n": 8,
+"town": "r2r-thorp-32",
+"section": "Systems/Power",
+"fold": "No rival stands at <N> to take Household Council's place, and in a season of fighting that is small comfort: what threatens Household Council now is the fighting across the thorp.",
+"text": "No rival stands at Hochsee to take Household Council's place, and in a season of fighting that is small comfort: what threatens Household Council now is the fighting across the thorp.",
+"why": "'the fighting across the thorp'; 01039 says the front is somewhere Hochsee will never see; also 'take Household Council's place' lacks 'the'",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1580,
+"fn": "DS-POW-4 › riskLabel: Stable (no challengers) · v6"
+}
+},
+{
+"id": "22361",
+"sev": "MED",
+"n": 7,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Systems/Power",
+"fold": "The trading houses at <N> pay for their own armed guards, a private army that keeps order wherever the houses do business.",
+"text": "The trading houses at Andronrion pay for their own armed guards, a private army that keeps order wherever the houses do business.",
+"why": "trading houses keep a private army keeping order; Merchant Guilds Suppressed under siege",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 2531,
+"fn": "DS-POW-5 › FLAG: merchantArmy · v1"
+}
+},
+{
+"id": "11931",
+"sev": "MED",
+"n": 7,
+"town": "r2s-succession_void-thorp-0",
+"section": "Systems/Defense",
+"fold": "It could keep soldiers and does not; the thorp has decided that arming itself when needed costs less than paying anybody to be armed all year.",
+"text": "It could keep soldiers and does not; the thorp has decided that arming itself when needed costs less than paying anybody to be armed all year.",
+"why": "could keep soldiers and chooses not to; thorp of 8, Struggling, famine, viable False",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 4537,
+"fn": "DS-DEF-5 › militia PRESENT (no garrison) · v3"
+}
+},
+{
+"id": "06949",
+"sev": "MED",
+"n": 7,
+"town": "r2s-insurgency-hamlet-2",
+"section": "Systems/Defense",
+"fold": "Each crackdown on the insurgents at <N> turns more of its people to their side.",
+"text": "Each crackdown on the insurgents at Farolitus turns more of its people to their side.",
+"why": "crackdowns on the insurgents; DEFENCE has no garrison, watch or militia, steward is a Minor power",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 7386,
+"fn": "DS-DEF-8 › override: INSURGENCY ACTIVE · v3"
+}
+},
+{
+"id": "14852",
+"sev": "MED",
+"n": 7,
+"town": "r2s-plague_onset-hamlet-0",
+"section": "Systems/Power",
+"fold": "Nobody at <N> is in a position to take Elder Council's place; it has no rival, and nobody in the hamlet is asking who comes next.",
+"text": "Nobody at Belovich is in a position to take Elder Council's place; it has no rival, and nobody in the hamlet is asking who comes next.",
+"why": "No rival, nobody asks who comes next; GOVERNMENT has Legitimacy Crisis",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1517,
+"fn": "DS-POW-4 › riskLabel: Stable (no challengers) · v1"
+}
+},
+{
+"id": "04080",
+"sev": "MED",
+"n": 6,
+"town": "r2s-plague_onset-hamlet-2",
+"section": "Systems/Power",
+"fold": "At <N> the hamlet's business goes to the whole Headman's Authority, and everybody has learned how long the answer takes.",
+"text": "At Jayaagam the hamlet's business goes to the whole Headman's Authority, and everybody has learned how long the answer takes.",
+"why": "Business goes to 'the whole' Headman's Authority and is slow; it is one headman deciding without ceremony",
+"kinds": [
+"BROKEN",
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 2075,
+"fn": "DS-POW-5 › council · v2"
+}
+},
+{
+"id": "15102",
+"sev": "MED",
+"n": 6,
+"town": "r2s-succession_void-thorp-3",
+"section": "Summary/Overview",
+"fold": "Nothing large is agreed in <N> until someone is in charge, so merchants deal season to season and promise nothing longer.",
+"text": "Nothing large is agreed in Markazmahal until someone is in charge, so merchants deal season to season and promise nothing longer.",
+"why": "'merchants deal season to season'; tag reaches th, here a thorp of 14 with no market or merchant house",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/dossierStateProse/stressors.generated.js",
+"line": 3430,
+"fn": "DS-CND-1 › DIRECTION: stable · CRISIS: succession_void · v3"
+}
+},
+{
+"id": "14857",
+"sev": "MED",
+"n": 6,
+"town": "r2s-plague_onset-hamlet-2",
+"section": "Systems/Power",
+"fold": "Nobody at <N> is in a position to take Headman's Authority's place; it has no rival, and nobody in the hamlet is asking who comes next.",
+"text": "Nobody at Jayaagam is in a position to take Headman's Authority's place; it has no rival, and nobody in the hamlet is asking who comes next.",
+"why": "nobody asks who comes next; legitimacy Legitimacy Crisis, and 10305 says the headman is lying about the outbreak",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1517,
+"fn": "DS-POW-4 › riskLabel: Stable (no challengers) · v1"
+}
+},
+{
+"id": "21590",
+"sev": "MED",
+"n": 6,
+"town": "r2s-monster_pressure-hamlet-0",
+"section": "Systems/Power",
+"fold": "The question of who might replace the Headman's Authority at <N> does not come up, because there is nobody the hamlet would name if it did.",
+"text": "The question of who might replace the Headman's Authority at Hákonli does not come up, because there is nobody the hamlet would name if it did.",
+"why": "says replacing the headman does not come up; legitimacy is Legitimacy Crisis",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1530,
+"fn": "DS-POW-4 › riskLabel: Stable (no challengers) · v2"
+}
+},
+{
+"id": "01520",
+"sev": "MED",
+"n": 6,
+"town": "r2s-plague_onset-village-0",
+"section": "Systems/Defense",
+"fold": "<N>'s defences are sound, but fewer people turn out each season to man them, and the village is slow to notice.",
+"text": "Bayankhurel's defences are sound, but fewer people turn out each season to man them, and the village is slow to notice.",
+"why": "says defences are sound; STATE gives defence Vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 9639,
+"fn": "DS-DEF-11 › WALLED-STRAINED · v2"
+}
+},
+{
+"id": "28629",
+"sev": "MED",
+"n": 5,
+"town": "r2s-occupied-village-0",
+"section": "Systems/Outlook",
+"fold": "What <N> raises covers an ordinary year and no more, so # bad harvest would leave it short before spring.",
+"text": "What Spitzfeld raises covers an ordinary year and no more, so one bad harvest would leave it short before spring.",
+"why": "'covers an ordinary year': STATE shows grown 183 of 204 needed, a 3% deficit even with imports",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 9354,
+"fn": "DS-DEF-12 › CAPACITY: enough · v2"
+}
+},
+{
+"id": "21712",
+"sev": "MED",
+"n": 5,
+"town": "r2s-slave_revolt-thorp-1",
+"section": "Summary/Overview",
+"fold": "The revolt in <N> spreads to more work gangs each week, and less of the work gets done.",
+"text": "The revolt in Erdeniin spreads to more work gangs each week, and less of the work gets done.",
+"why": "'spreads to more work gangs each week'; tag reaches th, here a thorp of 15 with Dwellings (1-8)",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/dossierStateProse/stressors.generated.js",
+"line": 3676,
+"fn": "DS-CND-1 › DIRECTION: worsening · CRISIS: slave_revolt · v1"
+}
+},
+{
+"id": "21580",
+"sev": "MED",
+"n": 5,
+"town": "r2s-religious_conversion-village-0",
+"section": "Summary/Overview",
+"fold": "The quarrel over <N>'s faith has settled into habit: each household keeps the rite it has chosen, and the neighbours do not ask.",
+"text": "The quarrel over Steinfeld's faith has settled into habit: each household keeps the rite it has chosen, and the neighbours do not ask.",
+"why": "faith quarrel settled into habit; stability Tense, 07172 escalating, 16375 the Congregation could take the hall",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/stressors.generated.js",
+"line": 3624,
+"fn": "DS-CND-1 › DIRECTION: stable · CRISIS: religious_conversion · v1"
+}
+},
+{
+"id": "21587",
+"sev": "MED",
+"n": 4,
+"town": "r2s-plague_onset-hamlet-3",
+"section": "Systems/Power",
+"fold": "The question of who might replace the Feudal Stewardship at <N> does not come up, because there is nobody the hamlet would name if it did.",
+"text": "The question of who might replace the Feudal Stewardship at Tenoha does not come up, because there is nobody the hamlet would name if it did.",
+"why": "Nobody asks who might replace the Stewardship; GOVERNMENT has Legitimacy Crisis",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1530,
+"fn": "DS-POW-4 › riskLabel: Stable (no challengers) · v2"
+}
+},
+{
+"id": "18381",
+"sev": "MED",
+"n": 4,
+"town": "r2s-infiltrated-thorp-1",
+"section": "Systems/Defense",
+"fold": "Someone inside <N>'s defence works for the other side, and nobody has found them yet.",
+"text": "Someone inside Padmapeta's defence works for the other side, and nobody has found them yet.",
+"why": "'Someone inside Padmapeta's defence works for the other side'; DEFENCE all none and 00782 says nobody keeps the peace",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 7198,
+"fn": "DS-DEF-8 › override: INFILTRATION ACTIVE · v2"
+}
+},
+{
+"id": "20697",
+"sev": "MED",
+"n": 4,
+"town": "r2s-famine-village-1",
+"section": "Systems/Defense",
+"fold": "The guards' rations at <N> are cut like everyone else's, and a hungry guard cannot be asked for much for long.",
+"text": "The guards' rations at Humen are cut like everyone else's, and a hungry guard cannot be asked for much for long.",
+"why": "names guards on rations; DEFENCE lists garrison none and watch none, only citizen militia",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 6965,
+"fn": "DS-DEF-8 › override: INTERNAL PRESSURE (famine) · v1"
+}
+},
+{
+"id": "18205",
+"sev": "MED",
+"n": 4,
+"town": "r2r-village-34",
+"section": "Systems/Defense",
+"fold": "Some districts of <N> are closed off now, and whatever happens there goes unrecorded and unpunished.",
+"text": "Some districts of Lagoorum are closed off now, and whatever happens there goes unrecorded and unpunished.",
+"why": "'some districts are closed off' in a village of 355; tag reaches villages",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 2934,
+"fn": "DS-DEF-3 › COMPOUND: insurgency · v3"
+}
+},
+{
+"id": "00334",
+"sev": "MED",
+"n": 4,
+"town": "r2s-under_siege-town-2",
+"section": "Systems/Power",
+"fold": "# person decides at <N> and decides quickly; what comes out of the Feudal Appointee arrives whole and can change entirely between # season and the next.",
+"text": "One person decides at Yekehiid and decides quickly; what comes out of the Feudal Appointee arrives whole and can change entirely between one season and the next.",
+"why": "one person decides, the Appointee's word arrives whole; 07632 and 13625 say Military/Guard makes the decisions and no longer takes its orders",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 2023,
+"fn": "DS-POW-5 › autocrat · v1"
+}
+},
+{
+"id": "04064",
+"sev": "MED",
+"n": 4,
+"town": "r2s-occupied-city-0",
+"section": "Systems/Power",
+"fold": "At <N> # audience with the Military City Council gets a decision, good or bad, and there is nobody to appeal to afterwards.",
+"text": "At Breitgrund one audience with the Military City Council gets a decision, good or bad, and there is nobody to appeal to afterwards.",
+"why": "one audience with the Council gets a final decision, none to appeal; under Occupation nothing it decides stands until occupiers agree",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 2049,
+"fn": "DS-POW-5 › autocrat · v4"
+}
+},
+{
+"id": "04093",
+"sev": "MED",
+"n": 4,
+"town": "r2s-plague_onset-city-1",
+"section": "Systems/Magic",
+"fold": "At <N> the usual work no longer yields enough bows and crossbows, and part of the shortfall is made up by means beyond it.",
+"text": "At Sundbø the usual work no longer yields enough bows and crossbows, and part of the shortfall is made up by means beyond it.",
+"why": "usual work no longer yields enough bows and crossbows; HOUSES has no bowyer, TRADE makes no bows",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 8037,
+"fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v1"
+}
+},
+{
+"id": "06121",
+"sev": "MED",
+"n": 4,
+"town": "r2s-infiltrated-city-1",
+"section": "Systems/Power",
+"fold": "Criminal money finds little purchase at <N>: the city is doing well, and its officials have little reason to sell.",
+"text": "Criminal money finds little purchase at Olympagio: the city is doing well, and its officials have little reason to sell.",
+"why": "says criminal money finds little purchase; CRISIS is Infiltrated under regional criminal pressure, stability 'decisions shaped from outside'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 3194,
+"fn": "DS-POW-6 › capture pressure RECOVERING (strong security, prosperity) · v4"
+}
+},
+{
+"id": "13371",
+"sev": "MED",
+"n": 4,
+"town": "r2r-city-33",
+"section": "Systems/Power",
+"fold": "Merchant oligarchy outweighs everyone at <N> who wants its place, and the whole city knows who they are.",
+"text": "Merchant oligarchy outweighs everyone at Petenac who wants its place, and the whole city knows who they are.",
+"why": "oligarchy 'outweighs everyone'; GOVERNMENT rates Thieves' Guild and The Underground Significant, equal to it; legitimacy Contested; 00572 says it cannot change the underworld",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1591,
+"fn": "DS-POW-4 › riskLabel: Holding · v1"
+}
+},
+{
+"id": "15277",
+"sev": "MED",
+"n": 4,
+"town": "r2r-metropolis-25",
+"section": "Systems/Power",
+"fold": "Order at <N> is kept by a private army of hired swords on the trading houses' pay.",
+"text": "Order at Mönkhköl is kept by a private army of hired swords on the trading houses' pay.",
+"why": "says order kept by trading houses' private army; DEFENCE lists a professional city watch and multiple garrisons; assembly is Strong",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 2544,
+"fn": "DS-POW-5 › FLAG: merchantArmy · v2"
+}
+},
+{
+"id": "04089",
+"sev": "MED",
+"n": 3,
+"town": "r2s-wartime-thorp-2",
+"section": "Systems/Power",
+"fold": "At <N> the thorp's business goes to the whole Headman's Authority, and everybody has learned how long the answer takes.",
+"text": "At Hadithaoasis the thorp's business goes to the whole Headman's Authority, and everybody has learned how long the answer takes.",
+"why": "business goes to 'the whole Headman's Authority': one household elder holds that seat alone",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 2075,
+"fn": "DS-POW-5 › council · v2"
+}
+},
+{
+"id": "14646",
+"sev": "MED",
+"n": 3,
+"town": "r2s-wartime-thorp-2",
+"section": "Systems/Power",
+"fold": "No rival stands at <N> to take Headman's Authority's place, and in a season of fighting that is small comfort: what threatens Headman's Authority now is the fighting across the thorp.",
+"text": "No rival stands at Hadithaoasis to take Headman's Authority's place, and in a season of fighting that is small comfort: what threatens Headman's Authority now is the fighting across the thorp.",
+"why": "'the fighting across the thorp': the war is the kingdom's, no siege or occupation here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1580,
+"fn": "DS-POW-4 › riskLabel: Stable (no challengers) · v6"
+}
+},
+{
+"id": "16423",
+"sev": "MED",
+"n": 3,
+"town": "r2s-mass_migration-town-0",
+"section": "Systems/Power",
+"fold": "Religious Authorities could now take the hall from Church Council at <N>; Church Council keeps it only because the office is still its own.",
+"text": "Religious Authorities could now take the hall from Church Council at Zelenotsy; Church Council keeps it only because the office is still its own.",
+"why": "says Religious Authorities could take the hall now; GOVERNMENT has Church Council Dominant, Religious Authorities only Strong",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1620,
+"fn": "DS-POW-4 › riskLabel: Contested · v1"
+}
+},
+{
+"id": "19242",
+"sev": "MED",
+"n": 3,
+"town": "r2s-under_siege-city-1",
+"section": "Systems/Power",
+"fold": "The Ecclesiastical Council at <N> holds because no rival yet outweighs Ecclesiastical Council, and the weighing is done again every season.",
+"text": "The Ecclesiastical Council at Torrivilla holds because no rival yet outweighs Ecclesiastical Council, and the weighing is done again every season.",
+"why": "'no rival yet outweighs' the Ecclesiastical Council (Significant), but Military/Guard and The Martial Alliance are both Strong",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1608,
+"fn": "DS-POW-4 › riskLabel: Holding · v3"
+}
+},
+{
+"id": "13139",
+"sev": "MED",
+"n": 3,
+"town": "r2s-monster_pressure-city-3",
+"section": "Systems/Power",
+"fold": "Merchant City Council outweighs everyone at <N> who wants its place, and the whole city knows who they are.",
+"text": "Merchant City Council outweighs everyone at Villaplenum who wants its place, and the whole city knows who they are.",
+"why": "says council outweighs everyone wanting its place; 13611 says Military/Guard (also Significant) is about as strong",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1591,
+"fn": "DS-POW-4 › riskLabel: Holding · v1"
+}
+},
+{
+"id": "14854",
+"sev": "MED",
+"n": 2,
+"town": "r2r-hamlet-0",
+"section": "Systems/Power",
+"fold": "Nobody at <N> is in a position to take Feudal Stewardship's place; it has no rival, and nobody in the hamlet is asking who comes next.",
+"text": "Nobody at Spitzsteig is in a position to take Feudal Stewardship's place; it has no rival, and nobody in the hamlet is asking who comes next.",
+"why": "says nobody asks who comes next; legitimacy is Legitimacy Crisis and 19310 says the steward fears the hamlet turning on it",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1517,
+"fn": "DS-POW-4 › riskLabel: Stable (no challengers) · v1"
+}
+},
+{
+"id": "14866",
+"sev": "MED",
+"n": 2,
+"town": "r2r-hamlet-54",
+"section": "Systems/Defense",
+"fold": "Nobody at <N> warns visitors about particular streets, because the warning would cover all of them.",
+"text": "Nobody at Grímstad warns visitors about particular streets, because the warning would cover all of them.",
+"why": "warning about 'particular streets... all of them'; hamlet of 39 has no streets",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 2759,
+"fn": "DS-DEF-3 › Dangerous · v3"
+}
+},
+{
+"id": "07368",
+"sev": "MED",
+"n": 2,
+"town": "r2s-slave_revolt-village-1",
+"section": "Systems/Defense",
+"fold": "Everyone at <N> who could keep order has gone to fight the revolt, so the rest of the village keeps its own order.",
+"text": "Everyone at Deirmandi who could keep order has gone to fight the revolt, so the rest of the village keeps its own order.",
+"why": "says everyone who keeps order went to fight the revolt; DEFENCE lists no force of any kind",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 2980,
+"fn": "DS-DEF-3 › COMPOUND: slave revolt · v3"
+}
+},
+{
+"id": "01522",
+"sev": "MED",
+"n": 2,
+"town": "r2s-politically_fractured-village-2",
+"section": "Systems/Defense",
+"fold": "<N>'s defences still stand sound, though nobody in the village has the work of manning them.",
+"text": "Inverheath's defences still stand sound, though nobody in the village has the work of manning them.",
+"why": "says defences stand sound; STATE gives defence Vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 9689,
+"fn": "DS-DEF-11 › WALLED-STRAINED · v6"
+}
+},
+{
+"id": "15525",
+"sev": "MED",
+"n": 2,
+"town": "r2r-town-25",
+"section": "Systems/Defense",
+"fold": "People at <N> can drive off what attacks but cannot stop it arriving, so every season the town loses something before its fighters get there.",
+"text": "People at Brahmamandal can drive off what attacks but cannot stop it arriving, so every season the town loses something before its fighters get there.",
+"why": "says the town loses something to attackers every season; STATE safety is Very Safe and 23465 says little crime",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 715,
+"fn": "DS-DEF-2 › Beasts & Monsters: frontier, force without a perimeter · v3"
+}
+},
+{
+"id": "04316",
+"sev": "MED",
+"n": 2,
+"town": "r2s-monster_pressure-town-1",
+"section": "Systems/Defense",
+"fold": "Beasts come out of the country at <N> steadily, and the town loses guards and gear to them faster than it replaces them.",
+"text": "Beasts come out of the country at Al-mandi steadily, and the town loses guards and gear to them faster than it replaces them.",
+"why": "says the town loses guards faster than it replaces them; defence Well-Defended and 20058 says the arrangements are holding",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 7307,
+"fn": "DS-DEF-8 › override: BEAST PRESSURE · v1"
+}
+},
+{
+"id": "13247",
+"sev": "MED",
+"n": 2,
+"town": "r2r-town-12",
+"section": "Systems/Power",
+"fold": "Merchant Guilds could now take the hall from Corrupt Council at <N>; Corrupt Council keeps it only because the office is still its own.",
+"text": "Merchant Guilds could now take the hall from Corrupt Council at Qasrtappa; Corrupt Council keeps it only because the office is still its own.",
+"why": "says Merchant Guilds could now take the hall; GOVERNMENT has Merchant Guilds Minor, Corrupt Council Significant (Thieves' Guild is the Strong one)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1620,
+"fn": "DS-POW-4 › riskLabel: Contested · v1"
+}
+},
+{
+"id": "13169",
+"sev": "MED",
+"n": 2,
+"town": "r2s-mass_migration-town-1",
+"section": "Systems/Power",
+"fold": "Merchant Council outweighs everyone at <N> who wants its place, and the whole town knows who they are.",
+"text": "Merchant Council outweighs everyone at Archopolis who wants its place, and the whole town knows who they are.",
+"why": "says Merchant Council outweighs everyone who wants its place; GOVERNMENT has Merchant Guilds equally Strong",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1591,
+"fn": "DS-POW-4 › riskLabel: Holding · v1"
+}
+},
+{
+"id": "06326",
+"sev": "MED",
+"n": 2,
+"town": "r2s-wartime-town-0",
+"section": "Systems/Power",
+"fold": "Decisions at <N> are slow because the whole Town Council must agree, and once made they are rarely undone.",
+"text": "Decisions at Skálthorpe are slow because the whole Town Council must agree, and once made they are rarely undone.",
+"why": "says decisions wait on the whole Town Council; 23101 says Military/Guard makes the decisions that matter, Town Council only Minor",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 2063,
+"fn": "DS-POW-5 › council · v1"
+}
+},
+{
+"id": "13583",
+"sev": "MED",
+"n": 2,
+"town": "r2s-under_siege-city-2",
+"section": "Systems/Power",
+"fold": "Military/Guard could now take the hall from Noble Governorship at <N>; Noble Governorship keeps it only because the office is still its own.",
+"text": "Military/Guard could now take the hall from Noble Governorship at Andronarion; Noble Governorship keeps it only because the office is still its own.",
+"why": "Military/Guard could now take the hall; GOVERNMENT has Military/Guard Significant below Noble Governorship Strong",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1620,
+"fn": "DS-POW-4 › riskLabel: Contested · v1"
+}
+},
+{
+"id": "28863",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-city-1",
+"section": "Systems/Power",
+"fold": "Where the guards and the Merchant Guild Council disagree, the guards usually win.",
+"text": "Where the guards and the Merchant Guild Council disagree, the guards usually win.",
+"why": "the guards usually beat the Council; GOVERNMENT lists no Military/Guard power",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 2531,
+"fn": "DS-POW-5 › FLAG: merchantArmy · v1"
+}
+},
+{
+"id": "00335",
+"sev": "MED",
+"n": 2,
+"town": "r2s-under_siege-metropolis-1",
+"section": "Systems/Power",
+"fold": "# person decides at <N> and decides quickly; what comes out of the Grand Military Council arrives whole and can change entirely between # season and the next.",
+"text": "One person decides at Torriplenum and decides quickly; what comes out of the Grand Military Council arrives whole and can change entirely between one season and the next.",
+"why": "one person decides; the same page names a ruling three of the Grand Military Council",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 2023,
+"fn": "DS-POW-5 › autocrat · v1"
+}
+},
+{
+"id": "20174",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-metropolis-0",
+"section": "Systems/Power",
+"fold": "The challenger at <N> could now take the hall, but the Royal Authority has not changed hands yet.",
+"text": "The challenger at Ormvoll could now take the hall, but the Royal Authority has not changed hands yet.",
+"why": "a challenger could take the hall; Royal Authority Significant, every other power Minor or Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1639,
+"fn": "DS-POW-4 › riskLabel: Contested · v3"
+}
+},
+{
+"id": "04095",
+"sev": "MED",
+"n": 2,
+"town": "r2r-metropolis-25",
+"section": "Systems/Magic",
+"fold": "At <N> the usual work no longer yields enough game meat, and part of the shortfall is made up by means beyond it.",
+"text": "At Mönkhköl the usual work no longer yields enough game meat, and part of the shortfall is made up by means beyond it.",
+"why": "presumes usual work yields game meat; desert town, TRADE neither makes nor exports game meat and no hunting is listed",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 8037,
+"fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v1"
+}
+},
+{
+"id": "11439",
+"sev": "MED",
+"n": 2,
+"town": "r2s-monster_pressure-metropolis-2",
+"section": "Systems/Magic",
+"fold": "If the help beyond ordinary work failed at <N>, its game meat would fall further short than it already does.",
+"text": "If the help beyond ordinary work failed at Qasrmela, its game meat would fall further short than it already does.",
+"why": "presumes game meat production falling short; TRADE neither makes, exports nor imports game meat",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 8046,
+"fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v2"
+}
+},
+{
+"id": "13579",
+"sev": "MED",
+"n": 1,
+"town": "r2s-infiltrated-hamlet-0",
+"section": "Systems/Power",
+"fold": "Military/Guard could now take the hall from Free Elder Council at <N>; Free Elder Council keeps it only because the office is still its own.",
+"text": "Military/Guard could now take the hall from Free Elder Council at Ardgill; Free Elder Council keeps it only because the office is still its own.",
+"why": "says Military/Guard could take the hall; GOVERNMENT has Free Elder Council Dominant over Guard Strong, balance 'stable'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1620,
+"fn": "DS-POW-4 › riskLabel: Contested · v1"
+}
+},
+{
+"id": "22429",
+"sev": "MED",
+"n": 1,
+"town": "r2s-infiltrated-village-2",
+"section": "Systems/Defense",
+"fold": "The village's record of crimes at <N> stays short: there is crime, but enforcement keeps it down and keeps it from growing.",
+"text": "The village's record of crimes at Bayarserai stays short: there is crime, but enforcement keeps it down and keeps it from growing.",
+"why": "says enforcement keeps crime down; DEFENCE lists no watch, garrison, militia or any force",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 2598,
+"fn": "DS-DEF-3 › Safe · v2"
+}
+},
+{
+"id": "16375",
+"sev": "MED",
+"n": 1,
+"town": "r2s-religious_conversion-village-0",
+"section": "Systems/Power",
+"fold": "Reform Congregation could now take the hall from Elected Reeve at <N>; Elected Reeve keeps it only because the office is still its own.",
+"text": "Reform Congregation could now take the hall from Elected Reeve at Steinfeld; Elected Reeve keeps it only because the office is still its own.",
+"why": "Congregation could take the hall; Reeve is Dominant, Congregation Strong, and 04347 says it is too far behind to challenge",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1620,
+"fn": "DS-POW-4 › riskLabel: Contested · v1"
+}
+},
+{
+"id": "21205",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-town-3",
+"section": "Systems/Defense",
+"fold": "The older people of <N> say defences are easier to keep than to raise, so what the town built stands ahead of any present need.",
+"text": "The older people of Shattkarez say defences are easier to keep than to raise, so what the town built stands ahead of any present need.",
+"why": "says built defences stand ahead of any present need; STATE defence is Vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 9571,
+"fn": "DS-DEF-11 › WALLED-QUIET · v2"
+}
+},
+{
+"id": "16429",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-37",
+"section": "Systems/Power",
+"fold": "Religious Authorities could now take the hall from Feudal Appointee at <N>; Feudal Appointee keeps it only because the office is still its own.",
+"text": "Religious Authorities could now take the hall from Feudal Appointee at Hadithaserai; Feudal Appointee keeps it only because the office is still its own.",
+"why": "says Religious Authorities could take the hall; GOVERNMENT has them Minor, the Appointee Significant",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1620,
+"fn": "DS-POW-4 › riskLabel: Contested · v1"
+}
+},
+{
+"id": "14639",
+"sev": "MED",
+"n": 1,
+"town": "r2s-slave_revolt-town-3",
+"section": "Systems/Power",
+"fold": "No rival stands at <N> to take Church Council's place, and in a season of fighting that is small comfort: what threatens Church Council now is the fighting across the town.",
+"text": "No rival stands at Zhongba to take Church Council's place, and in a season of fighting that is small comfort: what threatens Church Council now is the fighting across the town.",
+"why": "says no rival stands to take Church Council's place; Thieves' Guild is an equal Minor power working against it",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1580,
+"fn": "DS-POW-4 › riskLabel: Stable (no challengers) · v6"
+}
+},
+{
+"id": "20172",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-13",
+"section": "Systems/Power",
+"fold": "The challenger at <N> could now take the hall, but the Military Council has not changed hands yet.",
+"text": "The challenger at Vatankher could now take the hall, but the Military Council has not changed hands yet.",
+"why": "says a challenger could now take the hall; GOVERNMENT has Military Council Strong, every rival weaker",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1639,
+"fn": "DS-POW-4 › riskLabel: Contested · v3"
+}
+},
+{
+"id": "04883",
+"sev": "MED",
+"n": 1,
+"town": "r2s-recently_betrayed-town-0",
+"section": "World/Faith",
+"fold": "Children at <N> are taught that spellwork is heresy, and they learn to look away from anyone who does it.",
+"text": "Children at Grünburg are taught that spellwork is heresy, and they learn to look away from anyone who does it.",
+"why": "says spellwork is taught as heresy; TRADE exports spellcasting and identification, DEFENCE has Wizard's tower and Scroll scribe",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/warFaith.generated.js",
+"line": 6537,
+"fn": "DS-FTH-4 › FLAG: heresySuppression: preached · v4"
+}
+},
+{
+"id": "22314",
+"sev": "MED",
+"n": 1,
+"town": "r2s-slave_revolt-town-2",
+"section": "Systems/Defense",
+"fold": "The town takes the frontier seriously and has taken it seriously long enough that the arrangements are ordinary rather than anxious.",
+"text": "The town takes the frontier seriously and has taken it seriously long enough that the arrangements are ordinary rather than anxious.",
+"why": "defence arrangements 'ordinary rather than anxious'; safety Critical, stability Unstable, 15450 says arms are turned inward",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 667,
+"fn": "DS-DEF-2 › Beasts & Monsters: frontier, credible deterrence · v2"
+}
+},
+{
+"id": "13595",
+"sev": "MED",
+"n": 1,
+"town": "r2s-wartime-town-2",
+"section": "Systems/Power",
+"fold": "Military/Guard has the strength, and the Feudal Appointee has only the office.",
+"text": "Military/Guard has the strength, and the Feudal Appointee has only the office.",
+"why": "says Military/Guard has the strength and the appointee only the office; Feudal Appointee Significant, Military/Guard Minor",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1660,
+"fn": "DS-POW-4 › riskLabel: Critical. The seat could fall · v1"
+}
+},
+{
+"id": "14680",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-city-0",
+"section": "Systems/Power",
+"fold": "Noble Families has the strength, and the Royal Authority has only the office.",
+"text": "Noble Families has the strength, and the Royal Authority has only the office.",
+"why": "Noble Families 'has the strength', Royal Authority only office; GOVERNMENT gives both Significant",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1660,
+"fn": "DS-POW-4 › riskLabel: Critical. The seat could fall · v1"
+}
+},
+{
+"id": "07358",
+"sev": "MED",
+"n": 1,
+"town": "r2s-occupied-city-0",
+"section": "Systems/Power",
+"fold": "Everyone at <N> can see Military City Council could lose the hall, and Occupation Authority has not yet moved to take it.",
+"text": "Everyone at Breitgrund can see Military City Council could lose the hall, and Occupation Authority has not yet moved to take it.",
+"why": "Occupation Authority 'has not yet moved to take' the hall; it already occupies and decides what is enforced",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1678,
+"fn": "DS-POW-4 › riskLabel: Critical. The seat could fall · v3"
+}
+},
+{
+"id": "15175",
+"sev": "MED",
+"n": 1,
+"town": "r2s-occupied-city-1",
+"section": "Systems/Power",
+"fold": "Occupation Authority could now take the hall from Merchant oligarchy at <N>; Merchant oligarchy keeps it only because the office is still its own.",
+"text": "Occupation Authority could now take the hall from Merchant oligarchy at Qaranuur; Merchant oligarchy keeps it only because the office is still its own.",
+"why": "Occupation Authority 'could now take the hall'; GOVERNMENT has Merchant oligarchy Strong, Occupation Authority only Significant",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1620,
+"fn": "DS-POW-4 › riskLabel: Contested · v1"
+}
+},
+{
+"id": "28862",
+"sev": "MED",
+"n": 1,
+"town": "r2s-infiltrated-city-0",
+"section": "Systems/Power",
+"fold": "Where the guards and the Merchant City Council disagree, the guards usually win.",
+"text": "Where the guards and the Merchant City Council disagree, the guards usually win.",
+"why": "guards usually win against the council; GOVERNMENT has Military/Guard Suppressed, council Strong; 13570 says the Guard carries out what the council decides",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 2531,
+"fn": "DS-POW-5 › FLAG: merchantArmy · v1"
+}
+},
+{
+"id": "22087",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-42",
+"section": "Systems/Magic",
+"fold": "The soldiers at <N> command its magic: the arcane houses answer to them, and their work goes first to the city's defence.",
+"text": "The soldiers at Mingjin command its magic: the arcane houses answer to them, and their work goes first to the city's defence.",
+"why": "says soldiers command the city's magic; GOVERNMENT lists no Military/Guard power, only Noble Governorship, Religious Authorities, Noble Families, Faithful Assembly",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 8142,
+"fn": "DS-DEF-9 › FLAG: magicMilitarized · v1"
+}
+},
+{
+"id": "28864",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-30",
+"section": "Systems/Power",
+"fold": "Where the guards and the Merchant oligarchy disagree, the guards usually win.",
+"text": "Where the guards and the Merchant oligarchy disagree, the guards usually win.",
+"why": "says guards usually beat the oligarchy; oligarchy is Dominant, GOVERNMENT lists no Military/Guard power and DEFENCE has no hired force",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 2531,
+"fn": "DS-POW-5 › FLAG: merchantArmy · v1"
+}
+},
+{
+"id": "13581",
+"sev": "MED",
+"n": 1,
+"town": "r2s-under_siege-metropolis-1",
+"section": "Systems/Power",
+"fold": "Military/Guard could now take the hall from Grand Military Council at <N>; Grand Military Council keeps it only because the office is still its own.",
+"text": "Military/Guard could now take the hall from Grand Military Council at Torriplenum; Grand Military Council keeps it only because the office is still its own.",
+"why": "Military/Guard could take the hall; GOVERNMENT: Grand Military Council Dominant, Military/Guard only Strong",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1620,
+"fn": "DS-POW-4 › riskLabel: Contested · v1"
+}
+},
+{
+"id": "28861",
+"sev": "MED",
+"n": 1,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Systems/Power",
+"fold": "Where the guards and the Grand Merchant Senate disagree, the guards usually win.",
+"text": "Where the guards and the Grand Merchant Senate disagree, the guards usually win.",
+"why": "guards usually win against the Senate; GOVERNMENT: Military/Guard Minor, Grand Merchant Senate Significant",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 2531,
+"fn": "DS-POW-5 › FLAG: merchantArmy · v1"
+}
+},
+{
+"id": "16424",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-metropolis-2",
+"section": "Systems/Power",
+"fold": "Religious Authorities could now take the hall from City-State Council at <N>; City-State Council keeps it only because the office is still its own.",
+"text": "Religious Authorities could now take the hall from City-State Council at Caththwaite; City-State Council keeps it only because the office is still its own.",
+"why": "Religious Authorities could take the hall; GOVERNMENT: City-State Council Strong, Religious Authorities only Significant",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1620,
+"fn": "DS-POW-4 › riskLabel: Contested · v1"
+}
+},
+{
+"id": "20496",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-metropolis-3",
+"section": "Systems/Defense",
+"fold": "The famine is costing the metropolis dearly, and the metropolis is paying: its money is going on food, and so far there is money enough.",
+"text": "The famine is costing the metropolis dearly, and the metropolis is paying: its money is going on food, and so far there is money enough.",
+"why": "so far there is money enough for food; STATE prosperity Struggling, deficit 15% uncovered, viable False",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1371,
+"fn": "DS-DEF-2 › Economic Survival: STRONG · v4"
+}
+},
+{
+"id": "21595",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-7",
+"section": "Systems/Power",
+"fold": "The question of who might replace the Shadow Senate at <N> does not come up, because there is nobody the metropolis would name if it did.",
+"text": "The question of who might replace the Shadow Senate at Ulancaravansarai does not come up, because there is nobody the metropolis would name if it did.",
+"why": "nobody could replace the Shadow Senate; same page says the gap to its rivals is narrow, and Thieves' Guild and The Underground are Strong",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1530,
+"fn": "DS-POW-4 › riskLabel: Stable (no challengers) · v2"
+}
+},
+{
+"id": "13591",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-50",
+"section": "Systems/Power",
+"fold": "Military/Guard has grown stronger than the Grand Council at <N>, and both know it; the Grand Council keeps the title while Military/Guard decides what is enforced.",
+"text": "Military/Guard has grown stronger than the Grand Council at Penham, and both know it; the Grand Council keeps the title while Military/Guard decides what is enforced.",
+"why": "says Military/Guard has grown stronger than Grand Council; GOVERNMENT gives both strength Minor; slash label as name",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 3553,
+"fn": "DS-POW-6 › GM ADVISORY: the commander is a political actor · v5"
+}
+},
+{
+"id": "13596",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-50",
+"section": "Systems/Power",
+"fold": "Military/Guard has the strength, and the Grand Council has only the office.",
+"text": "Military/Guard has the strength, and the Grand Council has only the office.",
+"why": "says Military/Guard has the strength; GOVERNMENT gives it and Grand Council equal strength Minor; slash label as name",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1660,
+"fn": "DS-POW-4 › riskLabel: Critical. The seat could fall · v1"
+}
+},
+{
+"id": "01055",
+"sev": "MED",
+"n": 1,
+"town": "r2s-wartime-metropolis-1",
+"section": "Systems/Power",
+"fold": "<N> is no longer sure the hall belongs to Grand Merchant Senate, and Grand Merchant Senate governs as though it is not sure either.",
+"text": "Vysokoichi is no longer sure the hall belongs to Grand Merchant Senate, and Grand Merchant Senate governs as though it is not sure either.",
+"why": "says town no longer sure the Senate rules; legitimacy Approved and 16050 says it has the town's approval",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1630,
+"fn": "DS-POW-4 › riskLabel: Contested · v2"
+}
+},
+{
+"id": "28860",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-44",
+"section": "Systems/Power",
+"fold": "Where the guards and the Grand Guild Consortium disagree, the guards usually win.",
+"text": "Where the guards and the Grand Guild Consortium disagree, the guards usually win.",
+"why": "guards usually beat the Consortium; GOVERNMENT has Consortium Significant, Military/Guard Minor, and 09877 says Consortium outweighs everyone",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 2531,
+"fn": "DS-POW-5 › FLAG: merchantArmy · v1"
+}
+},
+{
+"id": "20375",
+"sev": "MED",
+"n": 1,
+"town": "r2s-indebted-metropolis-3",
+"section": "Systems/Defense",
+"fold": "The creditors' accounts come first at <N>: what enforcement the metropolis can afford goes where their agent directs, not where the crime is.",
+"text": "The creditors' accounts come first at Lidocastra: what enforcement the metropolis can afford goes where their agent directs, not where the crime is.",
+"why": "says enforcement goes where the creditors' agent directs; GOVERNMENT lists Crown Creditors Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 3167,
+"fn": "DS-DEF-3 › COMPOUND: debt crisis · v3"
+}
+},
+{
+"id": "28453",
+"sev": "MED",
+"n": 1,
+"town": "r2s-wartime-metropolis-2",
+"section": "Systems/Power",
+"fold": "War Council could now take the hall from Ducal Governorship at <N>; Ducal Governorship keeps it only because the office is still its own.",
+"text": "War Council could now take the hall from Ducal Governorship at Nanwan; Ducal Governorship keeps it only because the office is still its own.",
+"why": "War Council could take the hall; GOVERNMENT has it Minor vs Ducal Governorship Significant, and 06882 says it carries out DG's orders",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1620,
+"fn": "DS-POW-4 › riskLabel: Contested · v1"
+}
+}
+]

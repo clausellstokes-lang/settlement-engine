@@ -1,0 +1,1086 @@
+[
+{
+"id": "03091",
+"sev": "HIGH",
+"n": 37,
+"town": "r2s-insurgency-hamlet-0",
+"section": "Summary/Crisis",
+"fold": "A strong power in <N> has stopped obeying the government.",
+"text": "A strong power in Dioneia has stopped obeying the government.",
+"why": "a strong power stopped obeying the government; GOVERNMENT lists only Headman's Authority",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/stressNarrative.js",
+"line": 185,
+"fn": "RENDERERS"
+}
+},
+{
+"id": "18671",
+"sev": "MED",
+"n": 350,
+"town": "r2s-famine-town-2",
+"section": "Summary/Crisis",
+"fold": "Stores: a granary, about # months of grain.",
+"text": "Stores: a granary, about five months of grain.",
+"why": "granary holds about five months of grain; CRISIS famine, 19% deficit, viable False",
+"kinds": [
+"STATE",
+"TAG"
+],
+"writer": {
+"file": "src/domain/coherence/crisisFactFindings.js",
+"line": 8,
+"fn": ""
+}
+},
+{
+"id": "06517",
+"sev": "MED",
+"n": 210,
+"town": "r2s-plague_onset-hamlet-1",
+"section": "World/Faith",
+"fold": "Devotion runs deep, and the rites set the rhythm of the week.",
+"text": "Devotion runs deep, and the rites set the rhythm of the week.",
+"why": "Rites set the rhythm of the week; under Quarantine and Plague people do not gather; church is a village miles off",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/dossier/faithReading.js",
+"line": 356,
+"fn": "observanceOf"
+}
+},
+{
+"id": "14027",
+"sev": "MED",
+"n": 157,
+"town": "r2r-thorp-58",
+"section": "World/Faith",
+"fold": "Most folk attend the rites through the year.",
+"text": "Most folk attend the rites through the year.",
+"why": "most folk attend the rites; no church here and the siege keeps them from the next parish",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/dossier/faithReading.js",
+"line": 355,
+"fn": "observanceOf"
+}
+},
+{
+"id": "06518",
+"sev": "MED",
+"n": 81,
+"town": "r2r-thorp-41",
+"section": "World/Faith",
+"fold": "Devotion runs through every part of life here, and few miss a rite.",
+"text": "Devotion runs through every part of life here, and few miss a rite.",
+"why": "Few miss a rite; under Plague people do not gather, and the thorp only has access to a church",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/dossier/faithReading.js",
+"line": 357,
+"fn": "observanceOf"
+}
+},
+{
+"id": "20893",
+"sev": "MED",
+"n": 39,
+"town": "r2s-famine-city-3",
+"section": "Summary/Plot Hooks",
+"fold": "The iron carts are # weeks late and the carters will not say why.",
+"text": "The iron carts are three weeks late and the carters will not say why.",
+"why": "iron carts expected; TRADE imports list no iron and HOUSES has no mine",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/economy/outlookHookSiblings.js",
+"line": 36,
+"fn": "PEACE_IRON_HOOKS"
+}
+},
+{
+"id": "12113",
+"sev": "MED",
+"n": 37,
+"town": "r2s-insurgency-hamlet-0",
+"section": "Summary/Crisis",
+"fold": "Its people stall, its taxes go unpaid, and it waits.",
+"text": "Its people stall, its taxes go unpaid, and it waits.",
+"why": "that power's people stall and taxes unpaid; no second power exists in GOVERNMENT",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/stressNarrative.js",
+"line": 185,
+"fn": "RENDERERS"
+}
+},
+{
+"id": "22079",
+"sev": "MED",
+"n": 36,
+"town": "r2s-politically_fractured-hamlet-1",
+"section": "Summary/Plot Hooks",
+"fold": "The smiths are rationing what they have, and work waits on mended tools.",
+"text": "The smiths are rationing what they have, and work waits on mended tools.",
+"why": "'The smiths are rationing' plural; HOUSES has one Resident smith (part-time)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/economy/outlookHookSiblings.js",
+"line": 36,
+"fn": "PEACE_IRON_HOOKS"
+}
+},
+{
+"id": "18434",
+"sev": "MED",
+"n": 34,
+"town": "r2s-monster_pressure-thorp-1",
+"section": "Summary/Crisis",
+"fold": "Something in the country around <N> has grown bolder: caravans go missing, and a farmstead was lost to fire last week.",
+"text": "Something in the country around Llanbeck has grown bolder: caravans go missing, and a farmstead was lost to fire last week.",
+"why": "'caravans go missing'; tag reaches th, and this thorp of 18 imports none on river access",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/generators/stressNarrative.js",
+"line": 175,
+"fn": "RENDERERS"
+}
+},
+{
+"id": "12078",
+"sev": "MED",
+"n": 34,
+"town": "r2s-monster_pressure-thorp-1",
+"section": "Summary/Crisis",
+"fold": "Its defences were built for quieter times.",
+"text": "Its defences were built for quieter times.",
+"why": "'its defences were built for quieter times'; DEFENCE is none on every line and 01147 says it kept no defence",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/stressNarrative.js",
+"line": 175,
+"fn": "RENDERERS"
+}
+},
+{
+"id": "20648",
+"sev": "MED",
+"n": 29,
+"town": "r2s-wartime-thorp-2",
+"section": "Summary/Crisis",
+"fold": "The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.",
+"text": "The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.",
+"why": "families thriving on contracts: isolated thorp of 9 that sells nothing outward",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/stressNarrative.js",
+"line": 285,
+"fn": "WARTIME_VARIANTS"
+}
+},
+{
+"id": "20908",
+"sev": "MED",
+"n": 27,
+"town": "r2r-hamlet-35",
+"section": "Summary/Plot Hooks",
+"fold": "The iron merchants have doubled their price this season, and the smiths are mending tools with scrap.",
+"text": "The iron merchants have doubled their price this season, and the smiths are mending tools with scrap.",
+"why": "iron merchants and 'the smiths'; hamlet of 36 has one part-time smith and no merchants on HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/economy/outlookHookSiblings.js",
+"line": 34,
+"fn": "PEACE_IRON_HOOKS"
+}
+},
+{
+"id": "21965",
+"sev": "MED",
+"n": 24,
+"town": "r2r-thorp-58",
+"section": "Summary/Plot Hooks",
+"fold": "The settlement is starving, and its hungriest are turning to banditry.",
+"text": "The settlement is starving, and its hungriest are turning to banditry.",
+"why": "banditry presumes travellers to rob; under siege nothing comes in by road; population 7",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/outlookHookSiblings.js",
+"line": 93,
+"fn": "OUTLOOK_HOOK_SIBLINGS"
+}
+},
+{
+"id": "28958",
+"sev": "MED",
+"n": 24,
+"town": "r2s-slave_revolt-thorp-2",
+"section": "Summary/Crisis",
+"fold": "Whole work gangs have downed tools and will not take them up again.",
+"text": "Whole work gangs have downed tools and will not take them up again.",
+"why": "'Whole work gangs have downed tools'; tag reaches th, here a thorp of 21 with Dwellings (1-8)",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/generators/stressNarrative.js",
+"line": 209,
+"fn": "RENDERERS"
+}
+},
+{
+"id": "22080",
+"sev": "MED",
+"n": 22,
+"town": "r2s-monster_pressure-hamlet-2",
+"section": "Summary/Plot Hooks",
+"fold": "The smiths blame whoever set it, and the tools still need mending.",
+"text": "The smiths blame whoever set it, and the tools still need mending.",
+"why": "'The smiths' plural; HOUSES has only one Resident smith (part-time)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/economy/outlookHookSiblings.js",
+"line": 38,
+"fn": "PEACE_IRON_HOOKS"
+}
+},
+{
+"id": "22640",
+"sev": "MED",
+"n": 14,
+"town": "r2r-thorp-52",
+"section": "Systems/Defense",
+"fold": "There is no fighting in <N>; the danger is quieter, officials who will not act and orders that go nowhere.",
+"text": "There is no fighting in Fjordaker; the danger is quieter, officials who will not act and orders that go nowhere.",
+"why": "'officials who will not act' in a thorp of 25 governed by head-of-household consensus; no officials on HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 344,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "22983",
+"sev": "MED",
+"n": 14,
+"town": "r2r-thorp-52",
+"section": "Table/Tonight sheet",
+"fold": "Those in charge of <N> know # of its strongest powers is defying them, and cannot say so openly without making it stronger.",
+"text": "Those in charge of Fjordaker know one of its strongest powers is defying them, and cannot say so openly without making it stronger.",
+"why": "'one of its strongest powers is defying them'; GOVERNMENT lists only Household Council",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 350,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "18585",
+"sev": "MED",
+"n": 13,
+"town": "r2s-occupied-hamlet-0",
+"section": "Summary/Overview",
+"fold": "Steppe-inspired: built for a pastoral life #-settled and #-moving, held by clan and caravan.",
+"text": "Steppe-inspired: built for a pastoral life half-settled and half-moving, held by clan and caravan.",
+"why": "'held by clan and caravan'; trade access isolated, no imports or exports",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 273,
+"fn": "scopeAgainstRecord"
+}
+},
+{
+"id": "28783",
+"sev": "MED",
+"n": 12,
+"town": "r2s-monster_pressure-thorp-0",
+"section": "Systems/Defense",
+"fold": "Whatever is attacking around <N>, wolves, raiders or worse, is getting bolder, and the lookouts count the days between attacks.",
+"text": "Whatever is attacking around Umabagh, wolves, raiders or worse, is getting bolder, and the lookouts count the days between attacks.",
+"why": "'the lookouts count the days between attacks'; DEFENCE: watch none, militia none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 318,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "03971",
+"sev": "MED",
+"n": 10,
+"town": "r2r-metropolis-14",
+"section": "Summary/Overview",
+"fold": "Ask about the place and you are told it is built around the tank and the bazaar, in # by trade, under temple and guild.",
+"text": "Ask about the place and you are told it is built around the tank and the bazaar, in quarters by trade, under temple and guild.",
+"why": "'under temple and guild'; GOVERNMENT lists Craft Guilds as Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 235,
+"fn": "SCOPE_LINE_FRAMES"
+}
+},
+{
+"id": "09631",
+"sev": "MED",
+"n": 10,
+"town": "r2s-plague_onset-hamlet-1",
+"section": "Summary/Overview",
+"fold": "Germanic-inspired: built in timber and stone, and run by its estates.",
+"text": "Germanic-inspired: built in timber and stone, and run by its estates.",
+"why": "Says it is 'run by its estates'; GOVERNMENT is an Elder Council with no estates",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 733,
+"fn": "SCOPE_PHRASE"
+}
+},
+{
+"id": "18583",
+"sev": "MED",
+"n": 9,
+"town": "r2s-occupied-metropolis-2",
+"section": "Summary/Overview",
+"fold": "Steppe-inspired, built on clan lines, held by clan and caravan.",
+"text": "Steppe-inspired, built on clan lines, held by clan and caravan.",
+"why": "Says the town is held by clan and caravan; it is a Ducal Governorship under an Occupation Authority",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 742,
+"fn": "SCOPE_PHRASE"
+}
+},
+{
+"id": "12540",
+"sev": "MED",
+"n": 9,
+"town": "r2r-thorp-24",
+"section": "Summary/Overview",
+"fold": "Latin-inspired, and it shows: run by patronage and law.",
+"text": "Latin-inspired, and it shows: run by patronage and law.",
+"why": "'run by patronage and law': governed by head-of-household consensus",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 734,
+"fn": "SCOPE_PHRASE"
+}
+},
+{
+"id": "07290",
+"sev": "MED",
+"n": 9,
+"town": "r2s-monster_pressure-thorp-3",
+"section": "Table/Tonight sheet",
+"fold": "Every cart that fails to reach <N> is food or goods it goes without, and the shortfall grows each week.",
+"text": "Every cart that fails to reach Chalmul is food or goods it goes without, and the shortfall grows each week.",
+"why": "'Every cart that fails to reach Chalmul is food... it goes without'; imports none, grown 27 over need 20",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 327,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "03978",
+"sev": "MED",
+"n": 8,
+"town": "r2r-village-21",
+"section": "Summary/Overview",
+"fold": "Ask about the place and you are told it is built in timber and stone, and run by its estates.",
+"text": "Ask about the place and you are told it is built in timber and stone, and run by its estates.",
+"why": "'run by its estates'; GOVERNMENT is a Headman's Authority and Religious Authorities, no estates",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 235,
+"fn": "SCOPE_LINE_FRAMES"
+}
+},
+{
+"id": "09628",
+"sev": "MED",
+"n": 8,
+"town": "r2s-occupied-village-0",
+"section": "Summary/Overview",
+"fold": "Germanic-inspired, built in timber and stone, and run by its estates.",
+"text": "Germanic-inspired, built in timber and stone, and run by its estates.",
+"why": "'run by its estates'; GOVERNMENT is an Elder Council under Occupation",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 733,
+"fn": "SCOPE_PHRASE"
+}
+},
+{
+"id": "18222",
+"sev": "MED",
+"n": 8,
+"town": "r2r-thorp-22",
+"section": "Table/Tonight sheet",
+"fold": "Some of <N>'s offices no longer send their revenue on, and the government runs on less each season.",
+"text": "Some of Kaanche's offices no longer send their revenue on, and the government runs on less each season.",
+"why": "'some of Kaanche's offices' withhold revenue: thorp of 11 with no offices",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 353,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "18124",
+"sev": "MED",
+"n": 8,
+"town": "r2r-thorp-10",
+"section": "Summary/Overview",
+"fold": "Slavic-inspired, built in timber compounds on land held in common, kin by kin.",
+"text": "Slavic-inspired, built in timber compounds on land held in common, kin by kin.",
+"why": "built in timber compounds in Desert/Arid terrain, while 14369 says timber is needed and not brought in",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 815,
+"fn": "INLAND_SCOPE_PHRASE"
+}
+},
+{
+"id": "18128",
+"sev": "MED",
+"n": 8,
+"town": "r2r-thorp-51",
+"section": "Summary/Overview",
+"fold": "Slavic-inspired: built in timber compounds on land held in common, kin by kin.",
+"text": "Slavic-inspired: built in timber compounds on land held in common, kin by kin.",
+"why": "built in timber compounds; terrain Desert/Arid and nothing made here is timber",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 815,
+"fn": "INLAND_SCOPE_PHRASE"
+}
+},
+{
+"id": "15568",
+"sev": "MED",
+"n": 8,
+"town": "r2s-infiltrated-hamlet-2",
+"section": "Systems/Defense",
+"fold": "People in <N> feel safe, and nothing they can see tells them otherwise.",
+"text": "People in Fjordnes feel safe, and nothing they can see tells them otherwise.",
+"why": "says people feel safe with nothing to tell them otherwise; 18429 says people watch each other and something has changed",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 242,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "09633",
+"sev": "MED",
+"n": 7,
+"town": "r2s-under_siege-hamlet-3",
+"section": "Summary/Overview",
+"fold": "Germanic-inspired; people here live in a place built in timber and stone, and run by its estates.",
+"text": "Germanic-inspired; people here live in a place built in timber and stone, and run by its estates.",
+"why": "'run by its estates'; GOVERNMENT is an Elder Council with a War Council, no estates",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 279,
+"fn": "scopeAgainstRecord"
+}
+},
+{
+"id": "09630",
+"sev": "MED",
+"n": 7,
+"town": "r2s-under_siege-metropolis-0",
+"section": "Summary/Overview",
+"fold": "Germanic-inspired: built in timber and stone, and run by guild and estate.",
+"text": "Germanic-inspired: built in timber and stone, and run by guild and estate.",
+"why": "'run by guild and estate'; GOVERNMENT is a High Theocratic Council, Craft Guilds and Noble Houses Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 733,
+"fn": "SCOPE_PHRASE"
+}
+},
+{
+"id": "11471",
+"sev": "MED",
+"n": 7,
+"town": "r2s-insurgency-thorp-2",
+"section": "Systems/Defense",
+"fold": "In <N> people keep out of the quarrel between the government and the power that defies it, and away from anyone asking questions.",
+"text": "In Uaymkin people keep out of the quarrel between the government and the power that defies it, and away from anyone asking questions.",
+"why": "'the power that defies it'; GOVERNMENT lists Elder Council alone",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 346,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "18459",
+"sev": "MED",
+"n": 6,
+"town": "r2s-occupied-metropolis-3",
+"section": "Summary/Overview",
+"fold": "South-Asian-inspired: built around the tank and the bazaar, in # by trade, under temple and guild.",
+"text": "South-Asian-inspired: built around the tank and the bazaar, in quarters by trade, under temple and guild.",
+"why": "Says the town lives 'under temple and guild'; it is a Merchant Oligarchy under Occupation, Craft Guilds Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 741,
+"fn": "SCOPE_PHRASE"
+}
+},
+{
+"id": "12545",
+"sev": "MED",
+"n": 6,
+"town": "r2r-thorp-54",
+"section": "Summary/Overview",
+"fold": "Latin-inspired: run by patronage and law.",
+"text": "Latin-inspired: run by patronage and law.",
+"why": "'run by patronage and law': elder consensus whose authority is moral, not formal",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 734,
+"fn": "SCOPE_PHRASE"
+}
+},
+{
+"id": "15481",
+"sev": "MED",
+"n": 6,
+"town": "r2s-indebted-thorp-2",
+"section": "Systems/Defense",
+"fold": "Passing through <N>, you meet the creditor's agents before you meet its own officials.",
+"text": "Passing through Kamalaganj, you meet the creditor's agents before you meet its own officials.",
+"why": "'before you meet its own officials'; thorp of 8 under head-of-household consensus has no officials",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 191,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "21315",
+"sev": "MED",
+"n": 6,
+"town": "r2s-insurgency-thorp-1",
+"section": "Table/Tonight sheet",
+"fold": "The power defying <N>'s government grows quietly, and those watching it cannot act in the open.",
+"text": "The power defying Ulfset's government grows quietly, and those watching it cannot act in the open.",
+"why": "'The power defying Ulfset's government'; GOVERNMENT lists Household Council alone",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 351,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "09632",
+"sev": "MED",
+"n": 5,
+"town": "r2s-under_siege-city-3",
+"section": "Summary/Overview",
+"fold": "Germanic-inspired; people here live in a place built in timber and stone, and run by guild and estate.",
+"text": "Germanic-inspired; people here live in a place built in timber and stone, and run by guild and estate.",
+"why": "'run by guild and estate'; GOVERNMENT is an Arcane Council with Religious Authorities, no estates",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 733,
+"fn": "SCOPE_PHRASE"
+}
+},
+{
+"id": "03974",
+"sev": "MED",
+"n": 5,
+"town": "r2s-plague_onset-village-1",
+"section": "Summary/Overview",
+"fold": "Ask about the place and you are told it is built for a pastoral life #-settled and #-moving, held by clan and caravan.",
+"text": "Ask about the place and you are told it is built for a pastoral life half-settled and half-moving, held by clan and caravan.",
+"why": "Says it is held by clan and caravan; powers are Religious Authorities and an Elder Council",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 235,
+"fn": "SCOPE_LINE_FRAMES"
+}
+},
+{
+"id": "20063",
+"sev": "MED",
+"n": 5,
+"town": "r2s-monster_pressure-thorp-1",
+"section": "Table/Tonight sheet",
+"fold": "The attacks around <N> follow a pattern, and the lookouts are beginning to see it.",
+"text": "The attacks around Llanbeck follow a pattern, and the lookouts are beginning to see it.",
+"why": "'the lookouts are beginning to see it'; DEFENCE: watch none, militia none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 325,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "15013",
+"sev": "MED",
+"n": 5,
+"town": "r2s-indebted-thorp-1",
+"section": "Summary/Overview",
+"fold": "Norse-inspired, and it shows: built around the hall, on kin, oath and the assembly.",
+"text": "Norse-inspired, and it shows: built around the hall, on kin, oath and the assembly.",
+"why": "'built around the hall... and the assembly'; HOUSES has no hall",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 737,
+"fn": "SCOPE_PHRASE"
+}
+},
+{
+"id": "09626",
+"sev": "MED",
+"n": 4,
+"town": "r2r-thorp-45",
+"section": "Summary/Overview",
+"fold": "Germanic-inspired, and it shows: built in timber and stone, and run by its estates.",
+"text": "Germanic-inspired, and it shows: built in timber and stone, and run by its estates.",
+"why": "'run by its estates': thorp of 20 governed by a Household Council",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 733,
+"fn": "SCOPE_PHRASE"
+}
+},
+{
+"id": "03984",
+"sev": "MED",
+"n": 4,
+"town": "r2s-under_siege-thorp-2",
+"section": "Summary/Overview",
+"fold": "Ask about the place and you are told it is built on hillside ground, and run by civic association.",
+"text": "Ask about the place and you are told it is built on hillside ground, and run by civic association.",
+"why": "'run by civic association': GOVERNMENT is an Elder Council",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 235,
+"fn": "SCOPE_LINE_FRAMES"
+}
+},
+{
+"id": "12542",
+"sev": "MED",
+"n": 4,
+"town": "r2s-religious_conversion-thorp-3",
+"section": "Summary/Overview",
+"fold": "Latin-inspired, run by patronage and law.",
+"text": "Latin-inspired, run by patronage and law.",
+"why": "'run by patronage and law'; GOVERNMENT is a Household Council by head-of-household consensus",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 734,
+"fn": "SCOPE_PHRASE"
+}
+},
+{
+"id": "01034",
+"sev": "MED",
+"n": 4,
+"town": "r2s-wartime-village-0",
+"section": "Summary/Crisis",
+"fold": "<N> is in a kingdom at war and doing well out of it: army contracts pay, prices are high, and merchants with the right friends are getting rich.",
+"text": "Abercross is in a kingdom at war and doing well out of it: army contracts pay, prices are high, and merchants with the right friends are getting rich.",
+"why": "says the town does well out of the war; 07287 says it is losing people and resources by attrition; prosperity only Moderate",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/stressNarrative.js",
+"line": 284,
+"fn": "WARTIME_VARIANTS"
+}
+},
+{
+"id": "03970",
+"sev": "MED",
+"n": 3,
+"town": "r2s-recently_betrayed-thorp-1",
+"section": "Summary/Overview",
+"fold": "Ask about the place and you are told it is built around the hall, on kin, oath and the assembly.",
+"text": "Ask about the place and you are told it is built around the hall, on kin, oath and the assembly.",
+"why": "'built around the hall... and the assembly'; HOUSES has no hall",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 235,
+"fn": "SCOPE_LINE_FRAMES"
+}
+},
+{
+"id": "15016",
+"sev": "MED",
+"n": 3,
+"town": "r2s-infiltrated-hamlet-2",
+"section": "Summary/Overview",
+"fold": "Norse-inspired, built around the hall, on kin, oath and the assembly.",
+"text": "Norse-inspired, built around the hall, on kin, oath and the assembly.",
+"why": "'built around the hall'; HOUSES has no hall",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 737,
+"fn": "SCOPE_PHRASE"
+}
+},
+{
+"id": "10044",
+"sev": "MED",
+"n": 2,
+"town": "r2s-under_siege-village-2",
+"section": "Summary/Overview",
+"fold": "Greek-inspired, and it shows: built on mountain ground, and run by civic association.",
+"text": "Greek-inspired, and it shows: built on mountain ground, and run by civic association.",
+"why": "'run by civic association'; GOVERNMENT is a Headman's Authority with Religious Authorities",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 250,
+"fn": "SCOPE_GROUND"
+}
+},
+{
+"id": "03987",
+"sev": "MED",
+"n": 2,
+"town": "r2s-recently_betrayed-thorp-0",
+"section": "Summary/Overview",
+"fold": "Ask about the place and you are told it is built on the open plain, and run by civic association.",
+"text": "Ask about the place and you are told it is built on the open plain, and run by civic association.",
+"why": "'run by civic association'; GOVERNMENT is a Household Council by head-of-household consensus",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 235,
+"fn": "SCOPE_LINE_FRAMES"
+}
+},
+{
+"id": "15015",
+"sev": "MED",
+"n": 2,
+"town": "r2r-hamlet-28",
+"section": "Summary/Overview",
+"fold": "Norse-inspired, built around the hall and the water, on kin, oath and the assembly.",
+"text": "Norse-inspired, built around the hall and the water, on kin, oath and the assembly.",
+"why": "'built around the hall'; HOUSES has no hall",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 737,
+"fn": "SCOPE_PHRASE"
+}
+},
+{
+"id": "15026",
+"sev": "MED",
+"n": 2,
+"town": "r2s-mass_migration-hamlet-2",
+"section": "Summary/Overview",
+"fold": "Norse-inspired; people here live in a place built around the hall and the water, on kin, oath and the assembly.",
+"text": "Norse-inspired; people here live in a place built around the hall and the water, on kin, oath and the assembly.",
+"why": "'built around the hall'; HOUSES has no hall",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 297,
+"fn": "scopeAgainstRecord"
+}
+},
+{
+"id": "10045",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-thorp-0",
+"section": "Summary/Overview",
+"fold": "Greek-inspired, and it shows: built on riverside ground, and run by civic association.",
+"text": "Greek-inspired, and it shows: built on riverside ground, and run by civic association.",
+"why": "'run by civic association': GOVERNMENT is a Household Council",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 248,
+"fn": "SCOPE_GROUND"
+}
+},
+{
+"id": "10066",
+"sev": "MED",
+"n": 1,
+"town": "r2r-thorp-27",
+"section": "Summary/Overview",
+"fold": "Greek-inspired: built on riverside ground, and run by civic association.",
+"text": "Greek-inspired: built on riverside ground, and run by civic association.",
+"why": "'run by civic association': GOVERNMENT is a Household Council",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 248,
+"fn": "SCOPE_GROUND"
+}
+},
+{
+"id": "03969",
+"sev": "MED",
+"n": 1,
+"town": "r2s-succession_void-hamlet-1",
+"section": "Summary/Overview",
+"fold": "Ask about the place and you are told it is built around the hall and the water, on kin, oath and the assembly.",
+"text": "Ask about the place and you are told it is built around the hall and the water, on kin, oath and the assembly.",
+"why": "'built around the hall'; HOUSES has no hall",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 235,
+"fn": "SCOPE_LINE_FRAMES"
+}
+},
+{
+"id": "10054",
+"sev": "MED",
+"n": 1,
+"town": "r2s-mass_migration-hamlet-1",
+"section": "Summary/Overview",
+"fold": "Greek-inspired, built around the harbour, on the coast, and run by civic association.",
+"text": "Greek-inspired, built around the harbour, on the coast, and run by civic association.",
+"why": "'run by civic association'; GOVERNMENT is Headman's Authority; 'built around the harbour' with no landing or docks",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 294,
+"fn": "scopeAgainstRecord"
+}
+},
+{
+"id": "10072",
+"sev": "MED",
+"n": 1,
+"town": "r2r-hamlet-12",
+"section": "Summary/Overview",
+"fold": "Greek-inspired; people here live in a place built in forest country, and run by civic association.",
+"text": "Greek-inspired; people here live in a place built in forest country, and run by civic association.",
+"why": "'run by civic association'; GOVERNMENT is Headman's Authority",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 294,
+"fn": "scopeAgainstRecord"
+}
+},
+{
+"id": "20852",
+"sev": "MED",
+"n": 1,
+"town": "r2s-infiltrated-town-0",
+"section": "Summary/Plot Hooks",
+"fold": "The infiltration turns on the town council, run by <N>: if it gives way, Religious Authorities lose most, because their own people feel the crisis first.",
+"text": "The infiltration turns on the town council, run by Vénus O'Mahony: if it gives way, Religious Authorities lose most, because their own people feel the crisis first.",
+"why": "town council run by the Corrupt Council's head, yet Religious Authorities lose most if it gives way",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 237,
+"fn": "STAKE_REASONS"
+}
+},
+{
+"id": "10049",
+"sev": "MED",
+"n": 1,
+"town": "r2s-occupied-metropolis-1",
+"section": "Summary/Overview",
+"fold": "Greek-inspired, built around the agora, on hillside ground, and run by civic association.",
+"text": "Greek-inspired, built around the agora, on hillside ground, and run by civic association.",
+"why": "run by civic association; GOVERNMENT is a Grand Military Council under an Occupation Authority",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 294,
+"fn": "scopeAgainstRecord"
+}
+},
+{
+"id": "10048",
+"sev": "MED",
+"n": 1,
+"town": "r2s-occupied-metropolis-0",
+"section": "Summary/Overview",
+"fold": "Greek-inspired, built around the agora, in forest country, and run by civic association.",
+"text": "Greek-inspired, built around the agora, in forest country, and run by civic association.",
+"why": "run by civic association; GOVERNMENT is a Grand Guild Consortium that carries out what the Occupation Authority decides",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 294,
+"fn": "scopeAgainstRecord"
+}
+},
+{
+"id": "03046",
+"sev": "MED",
+"n": 1,
+"town": "r2s-religious_conversion-metropolis-1",
+"section": "World/Faith",
+"fold": "A small voice in the metropolis’s affairs belongs to the New Faith Community.",
+"text": "A small voice in the metropolis’s affairs belongs to the New Faith Community.",
+"why": "gives New Faith Community a voice in affairs; GOVERNMENT lists it Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/dossier/faithReading.js",
+"line": 403,
+"fn": "factionLine"
+}
+}
+]

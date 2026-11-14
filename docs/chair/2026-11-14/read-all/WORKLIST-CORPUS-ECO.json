@@ -1,0 +1,2151 @@
+[
+{
+"id": "23470",
+"sev": "HIGH",
+"n": 76,
+"town": "r2s-plague_onset-hamlet-1",
+"section": "Summary/Overview",
+"fold": "Visitors find <N>'s market without asking.",
+"text": "Visitors find Weichsee's market without asking.",
+"why": "visitors find the market; safety is Quarantined and 07716 says travel is discouraged",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 9430,
+"fn": "DS-GEN-13 › MARKET-OPEN · v3"
+}
+},
+{
+"id": "00755",
+"sev": "HIGH",
+"n": 32,
+"town": "r2r-thorp-33",
+"section": "World/Daily Life",
+"fold": "<N> has money to spend and spends it on its halls and its defences.",
+"text": "Prabhamala has money to spend and spends it on its halls and its defences.",
+"why": "says money is spent on its halls and defences; DEFENCE is none throughout and HOUSES has no hall",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 2785,
+"fn": "DS-ECO-8 › PROSPEROUS · v1"
+}
+},
+{
+"id": "00991",
+"sev": "HIGH",
+"n": 4,
+"town": "r2s-occupied-village-1",
+"section": "Systems/Economics",
+"fold": "<N> is fed and dependent.",
+"text": "Celoichi is fed and dependent.",
+"why": "says the town is fed; deficit 21%, imports cover only 14 of 81 short, viable False",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3376,
+"fn": "DS-ECO-9 › IMPORT-DEPENDENT · v3"
+}
+},
+{
+"id": "15068",
+"sev": "HIGH",
+"n": 4,
+"town": "r2s-occupied-village-1",
+"section": "Systems/Economics",
+"fold": "Nothing about the arrangement is failing; everything about it rests on the road staying open.",
+"text": "Nothing about the arrangement is failing; everything about it rests on the road staying open.",
+"why": "says nothing is failing and rests on a road; viable False, deficit 21%, trade access isolated, under occupation",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3376,
+"fn": "DS-ECO-9 › IMPORT-DEPENDENT · v3"
+}
+},
+{
+"id": "01181",
+"sev": "HIGH",
+"n": 1,
+"town": "r2s-under_siege-town-2",
+"section": "Systems/Economics",
+"fold": "<N> lives on a market trade that feeds it and no more, and the road in is too poor to bring anything extra.",
+"text": "Yekehiid lives on a market trade that feeds it and no more, and the road in is too poor to bring anything extra.",
+"why": "market trade feeds it and the road brings goods; 15091 says the siege closed the roads, deficit 40%, viable False",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 223,
+"fn": "DS-ECO-1 › COMBINATION C5: a low rung on a narrow approach · v2"
+}
+},
+{
+"id": "18271",
+"sev": "MED",
+"n": 119,
+"town": "r2s-insurgency-hamlet-0",
+"section": "Systems/Economics",
+"fold": "Some of the money in <N> is made outside the law, and honest traders compete against it without knowing whom they are up against.",
+"text": "Some of the money in Dioneia is made outside the law, and honest traders compete against it without knowing whom they are up against.",
+"why": "honest traders against illegal money; isolated, no trade, no criminal house",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6138,
+"fn": "DS-ECO-12 › INCOME MIX: a criminal line is present · v2"
+}
+},
+{
+"id": "14619",
+"sev": "MED",
+"n": 113,
+"town": "r2s-occupied-thorp-1",
+"section": "Summary/Overview",
+"fold": "No market or fair stands in <N>: what trade the thorp does is done house to house and on the road.",
+"text": "No market or fair stands in Amarkota: what trade the thorp does is done house to house and on the road.",
+"why": "trade done 'on the road'; trade access isolated, no imports or exports, under Occupation curfew",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 9568,
+"fn": "DS-GEN-13 › NO-MARKET · v3"
+}
+},
+{
+"id": "14079",
+"sev": "MED",
+"n": 98,
+"town": "r2s-occupied-village-3",
+"section": "Systems/Economics",
+"fold": "Much of what changes hands at <N> came from somewhere else first.",
+"text": "Much of what changes hands at Grudka came from somewhere else first.",
+"why": "imports are only salt and arrowheads; no market; exports and goods made are all local",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 11539,
+"fn": "DS-GEN-18 › BOUGHT-IN · v9"
+}
+},
+{
+"id": "22618",
+"sev": "MED",
+"n": 92,
+"town": "r2s-plague_onset-thorp-1",
+"section": "Systems/Economics",
+"fold": "There is always something going out, and not always the same thing.",
+"text": "There is always something going out, and not always the same thing.",
+"why": "Always something going out; under Plague trade and travel are not as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 4674,
+"fn": "DS-ECO-10 › POSTURE: established · v3"
+}
+},
+{
+"id": "04637",
+"sev": "MED",
+"n": 89,
+"town": "r2r-thorp-41",
+"section": "Systems/Economics",
+"fold": "Buyers from outside come to <N> for more than # thing.",
+"text": "Buyers from outside come to Xinyuan for more than one thing.",
+"why": "Outside buyers come for many things; under Plague, Restricted safety, people do not travel as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 4695,
+"fn": "DS-ECO-10 › POSTURE: established · v5"
+}
+},
+{
+"id": "02818",
+"sev": "MED",
+"n": 79,
+"town": "r2s-plague_onset-thorp-0",
+"section": "Systems/Economics",
+"fold": "A merchant who comes to <N> for # thing usually leaves with # or #.",
+"text": "A merchant who comes to Huzhou for one thing usually leaves with two or three.",
+"why": "Merchants come and leave with two or three goods; under Plague, thorp of 14 with no market",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 4707,
+"fn": "DS-ECO-10 › POSTURE: established · v6"
+}
+},
+{
+"id": "20138",
+"sev": "MED",
+"n": 79,
+"town": "r2s-plague_onset-thorp-3",
+"section": "Systems/Economics",
+"fold": "The carts that leave <N> carry several kinds of goods, not #.",
+"text": "The carts that leave Dharmaghat carry several kinds of goods, not one.",
+"why": "Carts leave carrying several kinds of goods; under Plague travel is not as usual, thorp of 15 exports little",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 4684,
+"fn": "DS-ECO-10 › POSTURE: established · v4"
+}
+},
+{
+"id": "00639",
+"sev": "MED",
+"n": 69,
+"town": "r2s-famine-thorp-2",
+"section": "Systems/Economics",
+"fold": "<N> grows only part of what it eats; the rest comes in from the farms around it and from trade.",
+"text": "Benham grows only part of what it eats; the rest comes in from the farms around it and from trade.",
+"why": "'the rest comes in' from farms and trade: deficit 30% stays uncovered under famine",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3657,
+"fn": "DS-ECO-9 › HOW THE NEED IS MET: much of it brought in · v2"
+}
+},
+{
+"id": "22545",
+"sev": "MED",
+"n": 52,
+"town": "r2s-plague_onset-town-2",
+"section": "Systems/Economics",
+"fold": "The yards here are full of goods bound out and no # of them are the same.",
+"text": "The yards here are full of goods bound out and no two of them are the same.",
+"why": "yards full of outbound goods; town Struggling, plague unrest, people not trading as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 4664,
+"fn": "DS-ECO-10 › POSTURE: established · v2"
+}
+},
+{
+"id": "23392",
+"sev": "MED",
+"n": 48,
+"town": "r2s-famine-town-0",
+"section": "Systems/Economics",
+"fold": "Very little of what leaves began here.",
+"text": "Very little of what leaves began here.",
+"why": "very little of what leaves began here; exports iron ore, stone, ingots, tools and weapons all made here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 4587,
+"fn": "DS-ECO-10 › POSTURE: entrepot · v2"
+}
+},
+{
+"id": "21023",
+"sev": "MED",
+"n": 44,
+"town": "r2s-occupied-metropolis-0",
+"section": "Summary/Overview",
+"fold": "The metropolis keeps its own court and its own gaol.",
+"text": "The metropolis keeps its own court and its own gaol.",
+"why": "Under Occupation the court and gaol are not the town's own to keep; Occupation Authority holds power",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 11020,
+"fn": "DS-GEN-17 › ADMINISTERED · v1"
+}
+},
+{
+"id": "20129",
+"sev": "MED",
+"n": 41,
+"town": "r2s-plague_onset-city-0",
+"section": "World/Daily Life",
+"fold": "The buildings are finished rather than patched, and the stores are more than the season needs.",
+"text": "The buildings are finished rather than patched, and the stores are more than the season needs.",
+"why": "stores more than the season needs; food ledger shows a 3% deficit after imports, under plague quarantine",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 2774,
+"fn": "DS-ECO-8 › COMFORTABLE · v3"
+}
+},
+{
+"id": "20541",
+"sev": "MED",
+"n": 38,
+"town": "r2s-plague_onset-city-3",
+"section": "Systems/Economics",
+"fold": "The food <N> raises for itself all goes back to the grain harvest, and after a poor season for the grain harvest there is less to go round.",
+"text": "The food Xochiucan raises for itself all goes back to the grain harvest, and after a poor season for the grain harvest there is less to go round.",
+"why": "all home-grown food is the grain harvest; TRADE made-here lists livestock, dairy, game meat, cheese",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3728,
+"fn": "DS-ECO-9 › FOOD SOURCES: one source · v2"
+}
+},
+{
+"id": "00583",
+"sev": "MED",
+"n": 35,
+"town": "r2r-thorp-42",
+"section": "Systems/Economics",
+"fold": "<N> gets by on a thin margin, and little in its trade is spare.",
+"text": "Qaratala gets by on a thin margin, and little in its trade is spare.",
+"why": "'gets by on a thin margin, and little in its trade is spare'; STATE prosperity Comfortable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 105,
+"fn": "DS-ECO-1 › COMBINATION C3: the middle rungs · v2"
+}
+},
+{
+"id": "12197",
+"sev": "MED",
+"n": 32,
+"town": "r2s-famine-metropolis-2",
+"section": "Summary/Overview",
+"fold": "Its warehouses fill after the harvest and empty through the year as the metropolis trades out of them.",
+"text": "Its warehouses fill after the harvest and empty through the year as the metropolis trades out of them.",
+"why": "warehouses fill after the harvest and it trades out of them; CRISIS Famine, local grain fields depleted, deficit 23%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 9820,
+"fn": "DS-GEN-13 › WAREHOUSES · v3"
+}
+},
+{
+"id": "02808",
+"sev": "MED",
+"n": 31,
+"town": "r2s-under_siege-city-1",
+"section": "Summary/Overview",
+"fold": "A merchant at <N> can store a cargo in the city's warehouses and sell it when the price suits.",
+"text": "A merchant at Torrivilla can store a cargo in the city's warehouses and sell it when the price suits.",
+"why": "a merchant stores cargo and sells when the price suits; under siege nothing comes in and 15088 says nothing has come in",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 9809,
+"fn": "DS-GEN-13 › WAREHOUSES · v2"
+}
+},
+{
+"id": "22397",
+"sev": "MED",
+"n": 30,
+"town": "r2s-occupied-village-3",
+"section": "Systems/Economics",
+"fold": "The village is poor, and its people say so to anyone who asks.",
+"text": "The village is poor, and its people say so to anyone who asks.",
+"why": "says the village is poor; STATE prosperity is Struggling, not Poor",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 145,
+"fn": "DS-ECO-1 › COMBINATION C4: a low rung on a working approach · v2"
+}
+},
+{
+"id": "02809",
+"sev": "MED",
+"n": 30,
+"town": "r2s-under_siege-metropolis-2",
+"section": "Summary/Overview",
+"fold": "A merchant at <N> can store a cargo in the metropolis's warehouses and sell it when the price suits.",
+"text": "A merchant at Raassaray can store a cargo in the metropolis's warehouses and sell it when the price suits.",
+"why": "offers ordinary storing and selling of cargo; CRISIS is Under Siege, supply lines cut, imports cover None",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 9809,
+"fn": "DS-GEN-13 › WAREHOUSES · v2"
+}
+},
+{
+"id": "12196",
+"sev": "MED",
+"n": 29,
+"town": "r2s-famine-city-1",
+"section": "Summary/Overview",
+"fold": "Its warehouses fill after the harvest and empty through the year as the city trades out of them.",
+"text": "Its warehouses fill after the harvest and empty through the year as the city trades out of them.",
+"why": "warehouses 'fill after the harvest'; under Famine the city grows 1255 of 6804 needed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 9820,
+"fn": "DS-GEN-13 › WAREHOUSES · v3"
+}
+},
+{
+"id": "17631",
+"sev": "MED",
+"n": 26,
+"town": "r2r-thorp-17",
+"section": "World/Daily Life",
+"fold": "Sellers at <N> give credit more often than they would like, and are paid late.",
+"text": "Sellers at Chichich give credit more often than they would like, and are paid late.",
+"why": "sellers giving credit; isolated thorp of 11, no market or shop, exports none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 2643,
+"fn": "DS-ECO-8 › STRUGGLING · v6"
+}
+},
+{
+"id": "00588",
+"sev": "MED",
+"n": 22,
+"town": "r2s-occupied-city-3",
+"section": "Systems/Economics",
+"fold": "<N> grows a little less food than it needs, and every season the difference has to be bought or done without.",
+"text": "Muulchihua grows a little less food than it needs, and every season the difference has to be bought or done without.",
+"why": "says it grows a little less than it needs; it grows 5671 of 11210, about half",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3308,
+"fn": "DS-ECO-9 › PRESSURED · v1"
+}
+},
+{
+"id": "01563",
+"sev": "MED",
+"n": 20,
+"town": "r2s-plague_onset-city-0",
+"section": "Summary/Overview",
+"fold": "<N>'s market handles more than the city could ever use.",
+"text": "Novono's market handles more than the city could ever use.",
+"why": "market handles more than the city can use, as ordinary trade; city is Quarantined under plague",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 9504,
+"fn": "DS-GEN-13 › ENTREPOT · v1"
+}
+},
+{
+"id": "20457",
+"sev": "MED",
+"n": 20,
+"town": "r2s-under_siege-town-0",
+"section": "Systems/Economics",
+"fold": "The duties gathered at <N> fall short of the trade that plainly goes on there, and nobody is pressed to make up the difference.",
+"text": "The duties gathered at Ulffoss fall short of the trade that plainly goes on there, and nobody is pressed to make up the difference.",
+"why": "trade plainly goes on; under siege the roads are closed (09734) and nothing comes in",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 2068,
+"fn": "DS-ECO-6 › TIER: significant off-book activity (≥15) · v5"
+}
+},
+{
+"id": "28731",
+"sev": "MED",
+"n": 19,
+"town": "r2s-famine-metropolis-1",
+"section": "Systems/Economics",
+"fold": "What the metropolis's practitioners charge for, and what they buy, is a large part of its business.",
+"text": "What the metropolis's practitioners charge for, and what they buy, is a large part of its business.",
+"why": "practitioners' trade 'a large part of its business' while Arcane Orders and Mages' Compact are Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6478,
+"fn": "DS-ECO-12 › INCOME WEIGHT: the practice of magic · v1"
+}
+},
+{
+"id": "20660",
+"sev": "MED",
+"n": 18,
+"town": "r2s-under_siege-hamlet-2",
+"section": "Systems/Economics",
+"fold": "The grain harvest feeds <N> first, but not alone; when # source has a lean year, the others carry it.",
+"text": "The grain harvest feeds Kilshaw first, but not alone; when one source has a lean year, the others carry it.",
+"why": "'the others carry it'; food deficit 35% with imports cover None under siege: nothing carries the shortfall",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3766,
+"fn": "DS-ECO-9 › FOOD SOURCES: several, the largest named · v2"
+}
+},
+{
+"id": "02935",
+"sev": "MED",
+"n": 18,
+"town": "r2r-village-43",
+"section": "Systems/Economics",
+"fold": "A real portion of <N>'s trade sits outside the rolls, enough that the men who do pay their duties are competing at a disadvantage.",
+"text": "A real portion of Uaxachuitz's trade sits outside the rolls, enough that the men who do pay their duties are competing at a disadvantage.",
+"why": "a real portion of its trade outside the rolls; isolated, Under Siege, no exports: there is no trade",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 2026,
+"fn": "DS-ECO-6 › TIER: significant off-book activity (≥15) · v1"
+}
+},
+{
+"id": "20338",
+"sev": "MED",
+"n": 18,
+"town": "r2s-famine-thorp-3",
+"section": "Systems/Economics",
+"fold": "The country around <N> produces no luxury goods, so the thorp has none but what it buys.",
+"text": "The country around Monteminus produces no luxury goods, so the thorp has none but what it buys.",
+"why": "says no luxury goods produced; TRADE made here lists luxury, imports only salt and grain",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6390,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v1"
+}
+},
+{
+"id": "02770",
+"sev": "MED",
+"n": 18,
+"town": "r2s-occupied-hamlet-0",
+"section": "Systems/Economics",
+"fold": "A little of <N>'s trade goes unrecorded, small enough to annoy the clerks and too small to change what the hamlet is.",
+"text": "A little of Qarahiid's trade goes unrecorded, small enough to annoy the clerks and too small to change what the hamlet is.",
+"why": "trade annoys the clerks; isolated hamlet of 20 with no office, exports none",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 2115,
+"fn": "DS-ECO-6 › TIER: minor shadow activity (≥3) · v1"
+}
+},
+{
+"id": "07394",
+"sev": "MED",
+"n": 18,
+"town": "r2s-occupied-village-3",
+"section": "Systems/Services",
+"fold": "Everything a traveller expects at <N> is here but #.",
+"text": "Everything a traveller expects at Grudka is here but one.",
+"why": "HOUSES has no inn, market or smith; more than one thing a traveller expects is missing",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6777,
+"fn": "DS-SUP-3 › ONE EXPECTED CATEGORY MISSING · v2"
+}
+},
+{
+"id": "01099",
+"sev": "MED",
+"n": 17,
+"town": "r2s-occupied-thorp-1",
+"section": "Systems/Economics",
+"fold": "<N> is too poor to mend its road, and the road brings in too little to make it richer.",
+"text": "Amarkota is too poor to mend its road, and the road brings in too little to make it richer.",
+"why": "its road brings in too little; trade access isolated, exports and imports none",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 232,
+"fn": "DS-ECO-1 › COMBINATION C5: a low rung on a narrow approach · v3"
+}
+},
+{
+"id": "09301",
+"sev": "MED",
+"n": 17,
+"town": "r2r-city-44",
+"section": "Systems/Resources",
+"fold": "For as long as <N> has stood, its stone has been there to take, and nobody has found it worth the trouble.",
+"text": "For as long as Kallition has stood, its stone has been there to take, and nobody has found it worth the trouble.",
+"why": "stone never found worth taking; TRADE made here lists stone, history says walls raised from local quarry stone",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5527,
+"fn": "DS-ECO-11 › EXPLOITATION: unexploited, exportValue: medium or low · v3"
+}
+},
+{
+"id": "01191",
+"sev": "MED",
+"n": 16,
+"town": "r2r-village-43",
+"section": "Systems/Economics",
+"fold": "<N> lives on a subsistence living that feeds it and no more, and the road in is too poor to bring anything extra.",
+"text": "Uaxachuitz lives on a subsistence living that feeds it and no more, and the road in is too poor to bring anything extra.",
+"why": "'feeds it and no more'; food deficit 71%, imports None: the land does not feed it",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 223,
+"fn": "DS-ECO-1 › COMBINATION C5: a low rung on a narrow approach · v2"
+}
+},
+{
+"id": "18237",
+"sev": "MED",
+"n": 15,
+"town": "r2s-occupied-metropolis-0",
+"section": "Systems/Economics",
+"fold": "Some of <N>'s work cannot go on without grain, and the country around the metropolis produces none, so the metropolis buys from outside or that work stops.",
+"text": "Some of Chrissopetra's work cannot go on without grain, and the country around the metropolis produces none, so the metropolis buys from outside or that work stops.",
+"why": "Says the country produces no grain; food ledger shows 27041 grown locally",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6351,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: a house needs what the land lacks · v1"
+}
+},
+{
+"id": "20336",
+"sev": "MED",
+"n": 15,
+"town": "r2s-plague_onset-hamlet-3",
+"section": "Systems/Economics",
+"fold": "The country around <N> produces no luxury goods, so the hamlet has none but what it buys.",
+"text": "The country around Tenoha produces no luxury goods, so the hamlet has none but what it buys.",
+"why": "'Produces no luxury goods'; TRADE 'made here' lists luxury",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6390,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v1"
+}
+},
+{
+"id": "01193",
+"sev": "MED",
+"n": 15,
+"town": "r2r-city-19",
+"section": "Systems/Economics",
+"fold": "<N> lives on many small trades, and none of them brings in a real portion of its income.",
+"text": "Dunbury lives on many small trades, and none of them brings in a real portion of its income.",
+"why": "no trade brings a real share of income; another line says the harbour is the only asset that matters",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6098,
+"fn": "DS-ECO-12 › INCOME MIX: a broad spread, no leader · v1"
+}
+},
+{
+"id": "07396",
+"sev": "MED",
+"n": 15,
+"town": "r2s-occupied-hamlet-0",
+"section": "World/History",
+"fold": "Everything in <N> looks recently built, and the hamlet still does the job it began with.",
+"text": "Everything in Qarahiid looks recently built, and the hamlet still does the job it began with.",
+"why": "says it still does the job it began with; it began as a defensive stronghold and is now Undefended and occupied",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 10045,
+"fn": "DS-GEN-14 › FOUNDED-YOUNG · v2"
+}
+},
+{
+"id": "14849",
+"sev": "MED",
+"n": 14,
+"town": "r2s-under_siege-village-1",
+"section": "Systems/Resources",
+"fold": "Nobody at <N> bothers with the river fisheries this year: there is nothing left worth taking, and the people who lived off the river fisheries have turned to other work until the ground recovers.",
+"text": "Nobody at Neaddale bothers with the river fisheries this year: there is nothing left worth taking, and the people who lived off the river fisheries have turned to other work until the ground recovers.",
+"why": "nobody bothers with the river fisheries; HOUSES has a working Fisher's landing on the river",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5673,
+"fn": "DS-ECO-11 › RESOURCE CONDITION: worked out, recovers in time · v2"
+}
+},
+{
+"id": "02771",
+"sev": "MED",
+"n": 14,
+"town": "r2s-famine-thorp-3",
+"section": "Systems/Economics",
+"fold": "A little of <N>'s trade goes unrecorded, small enough to annoy the clerks and too small to change what the thorp is.",
+"text": "A little of Monteminus's trade goes unrecorded, small enough to annoy the clerks and too small to change what the thorp is.",
+"why": "trade annoys the clerks; thorp of 16 has no office or clerks on HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 2115,
+"fn": "DS-ECO-6 › TIER: minor shadow activity (≥3) · v1"
+}
+},
+{
+"id": "01572",
+"sev": "MED",
+"n": 14,
+"town": "r2s-occupied-city-3",
+"section": "Systems/Economics",
+"fold": "<N>'s market sells little, though the road is busy; most of the traffic does not stop, and the traders here are poor.",
+"text": "Muulchihua's market sells little, though the road is busy; most of the traffic does not stop, and the traders here are poor.",
+"why": "says the market sells little; HOUSES has daily markets, many squares, warehouse district, luxury quarter, and market taxes are a major revenue",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 158,
+"fn": "DS-ECO-1 › COMBINATION C4: a low rung on a working approach · v3"
+}
+},
+{
+"id": "14837",
+"sev": "MED",
+"n": 14,
+"town": "r2s-under_siege-hamlet-3",
+"section": "Systems/Resources",
+"fold": "Nobody at <N> bothers with the ancient grove this year: there is nothing left worth taking, and the people who lived off the ancient grove have turned to other work until the ground recovers.",
+"text": "Nobody at Rotholz bothers with the ancient grove this year: there is nothing left worth taking, and the people who lived off the ancient grove have turned to other work until the ground recovers.",
+"why": "names the ancient grove; resources (29900) list hunting grounds and iron deposits, no grove",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5673,
+"fn": "DS-ECO-11 › RESOURCE CONDITION: worked out, recovers in time · v2"
+}
+},
+{
+"id": "14605",
+"sev": "MED",
+"n": 13,
+"town": "r2s-occupied-village-2",
+"section": "Summary/Overview",
+"fold": "No guild runs <N>'s market: the village's only hold on trade is the stall fee.",
+"text": "No guild runs Caerwood's market: the village's only hold on trade is the stall fee.",
+"why": "says no guild runs the market; Merchant Guilds are a Strong power that set prices",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 9763,
+"fn": "DS-GEN-13 › COMMERCE: a market, no guild · v2"
+}
+},
+{
+"id": "09715",
+"sev": "MED",
+"n": 12,
+"town": "r2s-plague_onset-city-0",
+"section": "Systems/Economics",
+"fold": "Goods come, goods go, and the city takes its part of both.",
+"text": "Goods come, goods go, and the city takes its part of both.",
+"why": "goods come and go and the city takes its cut, as ordinary trade; city is Quarantined under plague",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 4596,
+"fn": "DS-ECO-10 › POSTURE: entrepot · v3"
+}
+},
+{
+"id": "20530",
+"sev": "MED",
+"n": 12,
+"town": "r2r-thorp-58",
+"section": "Systems/Economics",
+"fold": "The fishing feeds <N> first, but not alone; when # source has a lean year, the others carry it.",
+"text": "The fishing feeds Tallpatan first, but not alone; when one source has a lean year, the others carry it.",
+"why": "says other sources carry lean years; deficit 64% and most households already go hungry",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3766,
+"fn": "DS-ECO-9 › FOOD SOURCES: several, the largest named · v2"
+}
+},
+{
+"id": "20456",
+"sev": "MED",
+"n": 12,
+"town": "r2s-insurgency-hamlet-0",
+"section": "Systems/Economics",
+"fold": "The duties collected fall well short of the trade actually done, and the gap is not an accounting error.",
+"text": "The duties collected fall well short of the trade actually done, and the gap is not an accounting error.",
+"why": "duties fall short of trade actually done; isolated, exports none, imports none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 1970,
+"fn": "DS-ECO-6 › TIER: a large share off the books (≥30) · v1"
+}
+},
+{
+"id": "20354",
+"sev": "MED",
+"n": 11,
+"town": "r2r-thorp-40",
+"section": "Systems/Economics",
+"fold": "The country around <N> produces no timber, so the thorp has none but what it buys.",
+"text": "The country around Malotsy produces no timber, so the thorp has none but what it buys.",
+"why": "'country produces no timber'; TRADE exports Sacred wood",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6390,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v1"
+}
+},
+{
+"id": "28996",
+"sev": "MED",
+"n": 11,
+"town": "r2r-thorp-45",
+"section": "Systems/Economics",
+"fold": "With more than its herds to rely on, <N> can take a bad season in # source without going hungry.",
+"text": "With more than its herds to rely on, Weißgasse can take a bad season in one source without going hungry.",
+"why": "says it takes a bad season without going hungry; deficit 68% and it cannot feed itself",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3778,
+"fn": "DS-ECO-9 › FOOD SOURCES: several, the largest named · v3"
+}
+},
+{
+"id": "20341",
+"sev": "MED",
+"n": 10,
+"town": "r2s-famine-village-0",
+"section": "Systems/Economics",
+"fold": "The country around <N> produces no luxury goods, so the village has none but what it buys.",
+"text": "The country around Bailshaw produces no luxury goods, so the village has none but what it buys.",
+"why": "no luxury goods produced locally; TRADE made here lists gems",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6390,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v1"
+}
+},
+{
+"id": "21004",
+"sev": "MED",
+"n": 10,
+"town": "r2s-under_siege-metropolis-1",
+"section": "Systems/Economics",
+"fold": "The metropolis has little food of its own but its fishing, so a bad season for the fishing is felt at every table.",
+"text": "The metropolis has little food of its own but its fishing, so a bad season for the fishing is felt at every table.",
+"why": "says its only food is its fishing; TRADE imports salted fish, local sea fisheries exhausted; druidic provision feeds half",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3740,
+"fn": "DS-ECO-9 › FOOD SOURCES: one source · v3"
+}
+},
+{
+"id": "00743",
+"sev": "MED",
+"n": 9,
+"town": "r2s-under_siege-hamlet-3",
+"section": "Systems/Economics",
+"fold": "<N> has little food of its own but its hunting, so a bad season for the hunting is felt at every table.",
+"text": "Rotholz has little food of its own but its hunting, so a bad season for the hunting is felt at every table.",
+"why": "'little food of its own but its hunting'; HOUSES has subsistence farming, dairy, grazing; under siege hunters cannot range",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3740,
+"fn": "DS-ECO-9 › FOOD SOURCES: one source · v3"
+}
+},
+{
+"id": "21997",
+"sev": "MED",
+"n": 9,
+"town": "r2s-under_siege-city-2",
+"section": "World/Daily Life",
+"fold": "The shortage at <N> shows in small things: a repair not made, a stall not restocked, a hall not heated.",
+"text": "The shortage at Andronarion shows in small things: a repair not made, a stall not restocked, a hall not heated.",
+"why": "shortage 'shows in small things'; food deficit 76% Under Siege, imports cover 95 of 23490: hunger, not small things",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 2610,
+"fn": "DS-ECO-8 › STRUGGLING · v3"
+}
+},
+{
+"id": "14846",
+"sev": "MED",
+"n": 9,
+"town": "r2s-occupied-hamlet-0",
+"section": "Systems/Resources",
+"fold": "Nobody at <N> bothers with the marshlands this year: there is nothing left worth taking, and the people who lived off the marshlands have turned to other work until the ground recovers.",
+"text": "Nobody at Qarahiid bothers with the marshlands this year: there is nothing left worth taking, and the people who lived off the marshlands have turned to other work until the ground recovers.",
+"why": "names the marshlands; resources (29167) list alpine pasture, timber, pass, quarry, no marsh",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5673,
+"fn": "DS-ECO-11 › RESOURCE CONDITION: worked out, recovers in time · v2"
+}
+},
+{
+"id": "03994",
+"sev": "MED",
+"n": 8,
+"town": "r2s-famine-thorp-0",
+"section": "World/History",
+"fold": "Ask about the thorp's present quarrels in <N> and the succession crisis comes up before long.",
+"text": "Ask about the thorp's present quarrels in Makronea and the succession crisis comes up before long.",
+"why": "present quarrels bring up the succession crisis; CRISIS is Famine only, no succession void",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 10754,
+"fn": "DS-GEN-16 › LIVING-MEMORY · v2"
+}
+},
+{
+"id": "28786",
+"sev": "MED",
+"n": 8,
+"town": "r2s-famine-hamlet-2",
+"section": "Systems/Economics",
+"fold": "Whatever livestock <N>'s work uses must come from elsewhere; when none comes, that work stands idle.",
+"text": "Whatever livestock Velipol's work uses must come from elsewhere; when none comes, that work stands idle.",
+"why": "says all livestock must come from elsewhere; HOUSES has a Dairy farmer and common grazing land",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6363,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: a house needs what the land lacks · v2"
+}
+},
+{
+"id": "00473",
+"sev": "MED",
+"n": 7,
+"town": "r2s-under_siege-town-2",
+"section": "Summary/Overview",
+"fold": "<N> buys mostly what it makes itself.",
+"text": "Yekehiid buys mostly what it makes itself.",
+"why": "'buys mostly what it makes itself'; grows 1027 of 4906 food and imports grain, wool, dairy, provisions",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 9482,
+"fn": "DS-GEN-13 › MARKET-NARROW · v2"
+}
+},
+{
+"id": "09302",
+"sev": "MED",
+"n": 7,
+"town": "r2r-hamlet-28",
+"section": "Systems/Resources",
+"fold": "For as long as <N> has stood, its timber has been there to take, and nobody has found it worth the trouble.",
+"text": "For as long as Ravenoy has stood, its timber has been there to take, and nobody has found it worth the trouble.",
+"why": "timber never found worth taking; TRADE made here lists timber",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5527,
+"fn": "DS-ECO-11 › EXPLOITATION: unexploited, exportValue: medium or low · v3"
+}
+},
+{
+"id": "09716",
+"sev": "MED",
+"n": 7,
+"town": "r2s-plague_onset-hamlet-0",
+"section": "Systems/Economics",
+"fold": "Goods come, goods go, and the hamlet takes its part of both.",
+"text": "Goods come, goods go, and the hamlet takes its part of both.",
+"why": "'goods come, goods go' as usual; under plague 07340 says quarantine costs the hamlet its trade",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 4596,
+"fn": "DS-ECO-10 › POSTURE: entrepot · v3"
+}
+},
+{
+"id": "01591",
+"sev": "MED",
+"n": 7,
+"town": "r2s-indebted-village-3",
+"section": "Systems/Economics",
+"fold": "<N>'s own food comes from its fishing and little else, so # bad year for the fishing would cost the whole village dear.",
+"text": "Chrissonea's own food comes from its fishing and little else, so one bad year for the fishing would cost the whole village dear.",
+"why": "says food comes from fishing and little else; HOUSES has Farmland, grazing and a Mill and no fisher's landing, grown 147 of 150",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3716,
+"fn": "DS-ECO-9 › FOOD SOURCES: one source · v1"
+}
+},
+{
+"id": "18245",
+"sev": "MED",
+"n": 6,
+"town": "r2s-politically_fractured-hamlet-1",
+"section": "Systems/Economics",
+"fold": "Some of <N>'s work cannot go on without livestock, and the country around the hamlet produces none, so the hamlet buys from outside or that work stops.",
+"text": "Some of Karakistan's work cannot go on without livestock, and the country around the hamlet produces none, so the hamlet buys from outside or that work stops.",
+"why": "says country produces no livestock; HOUSES has Dairy farmer and Common grazing land",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6351,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: a house needs what the land lacks · v1"
+}
+},
+{
+"id": "22300",
+"sev": "MED",
+"n": 6,
+"town": "r2s-under_siege-town-3",
+"section": "Summary/Overview",
+"fold": "The town keeps its own court and its own gaol.",
+"text": "The town keeps its own court and its own gaol.",
+"why": "the town keeps its own court; HOUSES has a town hall and small prison/stocks but no court",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 11020,
+"fn": "DS-GEN-17 › ADMINISTERED · v1"
+}
+},
+{
+"id": "12095",
+"sev": "MED",
+"n": 6,
+"town": "r2s-famine-metropolis-0",
+"section": "Summary/Overview",
+"fold": "Its merchant guild sets the terms of trade and its members carry the metropolis's dealings outward.",
+"text": "Its merchant guild sets the terms of trade and its members carry the metropolis's dealings outward.",
+"why": "merchant guild sets the terms of trade; GOVERNMENT: Merchant Guilds Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 9671,
+"fn": "DS-GEN-13 › COMMERCE: a merchant guild, no bank · v2"
+}
+},
+{
+"id": "22666",
+"sev": "MED",
+"n": 5,
+"town": "r2r-village-58",
+"section": "Systems/Resources",
+"fold": "There is stone out there and nobody has ever thought it worth the trouble, which is the village's considered opinion rather than an oversight.",
+"text": "There is stone out there and nobody has ever thought it worth the trouble, which is the village's considered opinion rather than an oversight.",
+"why": "stone thought not worth the trouble; TRADE made here lists stone",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5519,
+"fn": "DS-ECO-11 › EXPLOITATION: unexploited, exportValue: medium or low · v2"
+}
+},
+{
+"id": "01569",
+"sev": "MED",
+"n": 5,
+"town": "r2s-occupied-city-1",
+"section": "Systems/Economics",
+"fold": "<N>'s market sells little, though the crossroads is busy; most of the traffic does not stop, and the traders here are poor.",
+"text": "Qaranuur's market sells little, though the crossroads is busy; most of the traffic does not stop, and the traders here are poor.",
+"why": "says the market sells little; HOUSES has annual fairs, banks, caravan exchange, and 07232 says the entrepot profits enormously",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 158,
+"fn": "DS-ECO-1 › COMBINATION C4: a low rung on a working approach · v3"
+}
+},
+{
+"id": "22267",
+"sev": "MED",
+"n": 5,
+"town": "r2s-occupied-thorp-1",
+"section": "Systems/Economics",
+"fold": "The timber around <N> goes unworked; no house takes it up.",
+"text": "The timber around Amarkota goes unworked; no house takes it up.",
+"why": "timber goes unworked; TRADE lists timber as made here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 11549,
+"fn": "DS-GEN-18 › UNWORKED · v1"
+}
+},
+{
+"id": "22667",
+"sev": "MED",
+"n": 5,
+"town": "r2s-famine-hamlet-1",
+"section": "Systems/Resources",
+"fold": "There is timber out there and nobody has ever thought it worth the trouble, which is the hamlet's considered opinion rather than an oversight.",
+"text": "There is timber out there and nobody has ever thought it worth the trouble, which is the hamlet's considered opinion rather than an oversight.",
+"why": "says nobody works the timber; TRADE makes timber and 30983 claims a timber trade",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5519,
+"fn": "DS-ECO-11 › EXPLOITATION: unexploited, exportValue: medium or low · v2"
+}
+},
+{
+"id": "01600",
+"sev": "MED",
+"n": 5,
+"town": "r2r-village-50",
+"section": "Systems/Economics",
+"fold": "<N>'s own food comes from its herds and little else, so # bad year for the herds would cost the whole village dear.",
+"text": "Somakota's own food comes from its herds and little else, so one bad year for the herds would cost the whole village dear.",
+"why": "says food comes from its herds and little else; HOUSES has Farmland and a Mill, grown 493 of 772",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3716,
+"fn": "DS-ECO-9 › FOOD SOURCES: one source · v1"
+}
+},
+{
+"id": "18251",
+"sev": "MED",
+"n": 5,
+"town": "r2s-occupied-town-1",
+"section": "Systems/Economics",
+"fold": "Some of <N>'s work draws on its food processing, which is in trouble itself, so the work that depends on it is at risk too.",
+"text": "Some of Sundnes's work draws on its food processing, which is in trouble itself, so the work that depends on it is at risk too.",
+"why": "says food processing is in trouble; 01545 says Sundnes's food trades are working, deficit 1%",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 4335,
+"fn": "DS-SUP-2 › UPSTREAM WEAK: a chain the town's work draws on is failing · v1"
+}
+},
+{
+"id": "22662",
+"sev": "MED",
+"n": 5,
+"town": "r2s-plague_onset-city-0",
+"section": "Systems/Resources",
+"fold": "There is stone out there and nobody has ever thought it worth the trouble, which is the city's considered opinion rather than an oversight.",
+"text": "There is stone out there and nobody has ever thought it worth the trouble, which is the city's considered opinion rather than an oversight.",
+"why": "says nobody works the stone; TRADE 'made here' lists stone and resources list a stone quarry",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5519,
+"fn": "DS-ECO-11 › EXPLOITATION: unexploited, exportValue: medium or low · v2"
+}
+},
+{
+"id": "03095",
+"sev": "MED",
+"n": 4,
+"town": "r2s-plague_onset-village-2",
+"section": "Systems/Economics",
+"fold": "A substantial part of what <N> eats is bought rather than grown.",
+"text": "A substantial part of what Villafundus eats is bought rather than grown.",
+"why": "'Substantial part' of food bought; imports cover 13 of 282, and TRADE lists imports none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3354,
+"fn": "DS-ECO-9 › IMPORT-DEPENDENT · v1"
+}
+},
+{
+"id": "22668",
+"sev": "MED",
+"n": 4,
+"town": "r2s-recently_betrayed-thorp-1",
+"section": "Systems/Resources",
+"fold": "There is timber out there and nobody has ever thought it worth the trouble, which is the thorp's considered opinion rather than an oversight.",
+"text": "There is timber out there and nobody has ever thought it worth the trouble, which is the thorp's considered opinion rather than an oversight.",
+"why": "'timber... nobody has ever thought it worth the trouble'; TRADE made here lists timber and 30011 shows managed forest",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5519,
+"fn": "DS-ECO-11 › EXPLOITATION: unexploited, exportValue: medium or low · v2"
+}
+},
+{
+"id": "01599",
+"sev": "MED",
+"n": 4,
+"town": "r2s-recently_betrayed-town-3",
+"section": "Systems/Economics",
+"fold": "<N>'s own food comes from its herds and little else, so # bad year for the herds would cost the whole town dear.",
+"text": "Milopol's own food comes from its herds and little else, so one bad year for the herds would cost the whole town dear.",
+"why": "says its food is herds and little else; 09791 and TRADE speak of its own grain harvest, and it has mills",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3716,
+"fn": "DS-ECO-9 › FOOD SOURCES: one source · v1"
+}
+},
+{
+"id": "20984",
+"sev": "MED",
+"n": 3,
+"town": "r2s-succession_void-thorp-1",
+"section": "Systems/Economics",
+"fold": "The medicinal herbs around <N> goes unworked; no house takes it up.",
+"text": "The medicinal herbs around Schwarzdorf goes unworked; no house takes it up.",
+"why": "herbs 'goes unworked'; TRADE lists medicinal herbs made here (also agreement error)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 11549,
+"fn": "DS-GEN-18 › UNWORKED · v1"
+}
+},
+{
+"id": "01603",
+"sev": "MED",
+"n": 3,
+"town": "r2s-occupied-village-3",
+"section": "Systems/Economics",
+"fold": "<N>'s own food comes from its hunting and little else, so # bad year for the hunting would cost the whole village dear.",
+"text": "Grudka's own food comes from its hunting and little else, so one bad year for the hunting would cost the whole village dear.",
+"why": "says its food comes from hunting and little else; HOUSES has Farmland, Common grazing land and a Mill, grown 292 of 322",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3716,
+"fn": "DS-ECO-9 › FOOD SOURCES: one source · v1"
+}
+},
+{
+"id": "07347",
+"sev": "MED",
+"n": 3,
+"town": "r2s-plague_onset-village-3",
+"section": "Systems/Resources",
+"fold": "Everybody in this village can point at the iron ore, and nobody in this village is working it.",
+"text": "Everybody in this village can point at the iron ore, and nobody in this village is working it.",
+"why": "says nobody works the iron ore; TRADE made here lists iron and metalwork",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5490,
+"fn": "DS-ECO-11 › EXPLOITATION: unexploited, exportValue: high · v3"
+}
+},
+{
+"id": "20334",
+"sev": "MED",
+"n": 3,
+"town": "r2s-famine-town-2",
+"section": "Systems/Economics",
+"fold": "The country around <N> produces no grain, so the town has none but what it buys.",
+"text": "The country around Vatanserai produces no grain, so the town has none but what it buys.",
+"why": "says the country grows no grain; food ledger shows 250 grown and 00614 says it grows about a third",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6390,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v1"
+}
+},
+{
+"id": "14987",
+"sev": "MED",
+"n": 3,
+"town": "r2s-slave_revolt-city-2",
+"section": "Systems/Economics",
+"fold": "None of the luxury goods used at <N> comes from the country here; the city brings in what it uses, or goes without.",
+"text": "None of the luxury goods used at Somanagar comes from the country here; the city brings in what it uses, or goes without.",
+"why": "'none of the luxury goods comes from the country here'; TRADE makes luxury and exports raw gemstones; resources list gemstone deposits",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6402,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v2"
+}
+},
+{
+"id": "21008",
+"sev": "MED",
+"n": 3,
+"town": "r2s-under_siege-metropolis-0",
+"section": "Systems/Resources",
+"fold": "The metropolis has worked out its coal or peat deposits, and it will not come back on its own: someone has to put labour and money into it before it yields again.",
+"text": "The metropolis has worked out its coal or peat deposits, and it will not come back on its own: someone has to put labour and money into it before it yields again.",
+"why": "says coal or peat deposits worked out; TRADE made here lists peat (only coal seams exhausted)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5687,
+"fn": "DS-ECO-11 › RESOURCE CONDITION: worked out, recovers only with work · v1"
+}
+},
+{
+"id": "03916",
+"sev": "MED",
+"n": 2,
+"town": "r2r-thorp-46",
+"section": "Systems/Resources",
+"fold": "Around <N> the glass sand lies unworked, and anyone who knows its price elsewhere will want to change that.",
+"text": "Around Erdenserai the glass sand lies unworked, and anyone who knows its price elsewhere will want to change that.",
+"why": "glass sand lies unworked; TRADE lists glass as made here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5481,
+"fn": "DS-ECO-11 › EXPLOITATION: unexploited, exportValue: high · v2"
+}
+},
+{
+"id": "29012",
+"sev": "MED",
+"n": 2,
+"town": "r2r-thorp-17",
+"section": "Systems/Economics",
+"fold": "With the hunting gone, <N> faces the season ahead on its stores and whatever it can buy, and neither will last long.",
+"text": "With the hunting gone, Chichich faces the season ahead on its stores and whatever it can buy, and neither will last long.",
+"why": "'whatever it can buy': isolated thorp, imports none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3595,
+"fn": "DS-ECO-9 › ACTIVE FAMINE: the failed source, most of the harvest · v3"
+}
+},
+{
+"id": "20355",
+"sev": "MED",
+"n": 2,
+"town": "r2s-monster_pressure-thorp-3",
+"section": "Systems/Economics",
+"fold": "The country around <N> produces no timber, so the thorp must look elsewhere for whatever it uses.",
+"text": "The country around Chalmul produces no timber, so the thorp must look elsewhere for whatever it uses.",
+"why": "'produces no timber'; TRADE exports Sacred wood and 30017 lists an ancient grove",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6414,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v3"
+}
+},
+{
+"id": "07397",
+"sev": "MED",
+"n": 2,
+"town": "r2s-recently_betrayed-thorp-0",
+"section": "World/History",
+"fold": "Everything in <N> looks recently built, and the thorp still does the job it began with.",
+"text": "Everything in Panteambelos looks recently built, and the thorp still does the job it began with.",
+"why": "'still does the job it began with'; it began as a grain depot for a city that no longer exists (15315), and HOUSES has no depot",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 10045,
+"fn": "DS-GEN-14 › FOUNDED-YOUNG · v2"
+}
+},
+{
+"id": "09300",
+"sev": "MED",
+"n": 2,
+"town": "r2s-slave_revolt-thorp-1",
+"section": "Systems/Resources",
+"fold": "For as long as <N> has stood, its clay has been there to take, and nobody has found it worth the trouble.",
+"text": "For as long as Erdeniin has stood, its clay has been there to take, and nobody has found it worth the trouble.",
+"why": "'its clay... nobody has found it worth the trouble'; TRADE made here lists clay and pottery, as 30300 shows",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5527,
+"fn": "DS-ECO-11 › EXPLOITATION: unexploited, exportValue: medium or low · v3"
+}
+},
+{
+"id": "03918",
+"sev": "MED",
+"n": 2,
+"town": "r2r-thorp-21",
+"section": "Systems/Resources",
+"fold": "Around <N> the iron ore lies unworked, and anyone who knows its price elsewhere will want to change that.",
+"text": "Around Ulaankhurel the iron ore lies unworked, and anyone who knows its price elsewhere will want to change that.",
+"why": "says iron ore lies unworked; TRADE lists iron and metalwork made here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5481,
+"fn": "DS-ECO-11 › EXPLOITATION: unexploited, exportValue: high · v2"
+}
+},
+{
+"id": "20758",
+"sev": "MED",
+"n": 2,
+"town": "r2s-under_siege-hamlet-1",
+"section": "Systems/Resources",
+"fold": "The hamlet has worked out its stone quarry, and it will not come back on its own: someone has to put labour and money into it before it yields again.",
+"text": "The hamlet has worked out its stone quarry, and it will not come back on its own: someone has to put labour and money into it before it yields again.",
+"why": "names the hamlet's stone quarry; HOUSES has no quarry and resources (29582) list no stone",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5687,
+"fn": "DS-ECO-11 › RESOURCE CONDITION: worked out, recovers only with work · v1"
+}
+},
+{
+"id": "29009",
+"sev": "MED",
+"n": 2,
+"town": "r2r-hamlet-28",
+"section": "Systems/Economics",
+"fold": "With the fishing gone, <N> faces the season ahead on its stores and whatever it can buy, and neither will last long.",
+"text": "With the fishing gone, Ravenoy faces the season ahead on its stores and whatever it can buy, and neither will last long.",
+"why": "says the fishing is gone; TRADE exports Salted fish, Smoked seafood and Fish oil and makes fish",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3595,
+"fn": "DS-ECO-9 › ACTIVE FAMINE: the failed source, most of the harvest · v3"
+}
+},
+{
+"id": "01601",
+"sev": "MED",
+"n": 2,
+"town": "r2r-hamlet-32",
+"section": "Systems/Economics",
+"fold": "<N>'s own food comes from its hunting and little else, so # bad year for the hunting would cost the whole hamlet dear.",
+"text": "Terrasinum's own food comes from its hunting and little else, so one bad year for the hunting would cost the whole hamlet dear.",
+"why": "food from hunting and little else; HOUSES has farming and a shepherd but no hunter's lodge",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3716,
+"fn": "DS-ECO-9 › FOOD SOURCES: one source · v1"
+}
+},
+{
+"id": "18246",
+"sev": "MED",
+"n": 2,
+"town": "r2s-occupied-village-1",
+"section": "Systems/Economics",
+"fold": "Some of <N>'s work cannot go on without livestock, and the country around the village produces none, so the village buys from outside or that work stops.",
+"text": "Some of Celoichi's work cannot go on without livestock, and the country around the village produces none, so the village buys from outside or that work stops.",
+"why": "says the country produces no livestock; HOUSES has Common grazing land, a Dairy farmer and a Pack animal trader",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6351,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: a house needs what the land lacks · v1"
+}
+},
+{
+"id": "12082",
+"sev": "MED",
+"n": 2,
+"town": "r2r-city-35",
+"section": "Systems/Economics",
+"fold": "Its food comes from more than # source, the fishing most of all, so a poor year in # does not empty the city's tables.",
+"text": "Its food comes from more than one source, the fishing most of all, so a poor year in one does not empty the city's tables.",
+"why": "says fishing is its main food source; TRADE says local river fishery exhausted and 04101 says river fish no longer suffice",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3754,
+"fn": "DS-ECO-9 › FOOD SOURCES: several, the largest named · v1"
+}
+},
+{
+"id": "12087",
+"sev": "MED",
+"n": 2,
+"town": "r2s-plague_onset-metropolis-3",
+"section": "Systems/Economics",
+"fold": "Its food comes from more than # source, the herds most of all, so a poor year in # does not empty the metropolis's tables.",
+"text": "Its food comes from more than one source, the herds most of all, so a poor year in one does not empty the metropolis's tables.",
+"why": "food chiefly from the herds; STATE: imports cover 28190 of 55346, more than all it grows (21794)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3754,
+"fn": "DS-ECO-9 › FOOD SOURCES: several, the largest named · v1"
+}
+},
+{
+"id": "23280",
+"sev": "MED",
+"n": 2,
+"town": "r2s-religious_conversion-metropolis-3",
+"section": "Systems/Economics",
+"fold": "Trouble in <N>'s precious metals mining puts what depends on it at risk.",
+"text": "Trouble in Hákonsund's precious metals mining puts what depends on it at risk.",
+"why": "speaks of the town's precious metals mining; HOUSES has no mine",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 4347,
+"fn": "DS-SUP-2 › UPSTREAM WEAK: a chain the town's work draws on is failing · v2"
+}
+},
+{
+"id": "22626",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-thorp-2",
+"section": "Systems/Resources",
+"fold": "There is iron ore in <N>'s country worth real money and nothing in the thorp works it.",
+"text": "There is iron ore in Benham's country worth real money and nothing in the thorp works it.",
+"why": "'nothing in the thorp works' the iron; TRADE lists iron and metalwork made here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5472,
+"fn": "DS-ECO-11 › EXPLOITATION: unexploited, exportValue: high · v1"
+}
+},
+{
+"id": "22223",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-thorp-0",
+"section": "Systems/Economics",
+"fold": "The thorp grows only part of what it eats; the rest comes in from the farms around it and from trade.",
+"text": "The thorp grows only part of what it eats; the rest comes in from the farms around it and from trade.",
+"why": "'the rest comes in': deficit 26% stays uncovered under famine",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3657,
+"fn": "DS-ECO-9 › HOW THE NEED IS MET: much of it brought in · v2"
+}
+},
+{
+"id": "22664",
+"sev": "MED",
+"n": 1,
+"town": "r2r-thorp-17",
+"section": "Systems/Resources",
+"fold": "There is stone out there and nobody has ever thought it worth the trouble, which is the thorp's considered opinion rather than an oversight.",
+"text": "There is stone out there and nobody has ever thought it worth the trouble, which is the thorp's considered opinion rather than an oversight.",
+"why": "nobody thought the stone worth the trouble; TRADE makes stone, quarrying marked exploited",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5519,
+"fn": "DS-ECO-11 › EXPLOITATION: unexploited, exportValue: medium or low · v2"
+}
+},
+{
+"id": "22619",
+"sev": "MED",
+"n": 1,
+"town": "r2s-occupied-thorp-0",
+"section": "Systems/Resources",
+"fold": "There is clay out there and nobody has ever thought it worth the trouble, which is the thorp's considered opinion rather than an oversight.",
+"text": "There is clay out there and nobody has ever thought it worth the trouble, which is the thorp's considered opinion rather than an oversight.",
+"why": "nobody thought the clay worth the trouble; TRADE makes clay and pottery",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5519,
+"fn": "DS-ECO-11 › EXPLOITATION: unexploited, exportValue: medium or low · v2"
+}
+},
+{
+"id": "04027",
+"sev": "MED",
+"n": 1,
+"town": "r2r-thorp-41",
+"section": "Systems/Economics",
+"fold": "Ask where <N> gets its medicinal herbs and you are pointed at the carts, not at anyone in the thorp.",
+"text": "Ask where Xinyuan gets its medicinal herbs and you are pointed at the carts, not at anyone in the thorp.",
+"why": "herbs come by cart, not from anyone here; TRADE lists medicinal herbs made here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 11478,
+"fn": "DS-GEN-18 › BOUGHT-IN · v4"
+}
+},
+{
+"id": "22253",
+"sev": "MED",
+"n": 1,
+"town": "r2s-wartime-thorp-3",
+"section": "Systems/Economics",
+"fold": "The thorp's food is a trade item, and the trade is not optional.",
+"text": "The thorp's food is a trade item, and the trade is not optional.",
+"why": "'The thorp's food is a trade item, and the trade is not optional'; isolated, exports none, imports none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3354,
+"fn": "DS-ECO-9 › IMPORT-DEPENDENT · v1"
+}
+},
+{
+"id": "28745",
+"sev": "MED",
+"n": 1,
+"town": "r2s-recently_betrayed-thorp-3",
+"section": "Systems/Economics",
+"fold": "What the thorp's practitioners charge for, and what they buy, is a large part of its business.",
+"text": "What the thorp's practitioners charge for, and what they buy, is a large part of its business.",
+"why": "'What the thorp's practitioners charge for... is a large part of its business'; HOUSES has no practitioner, DEFENCE magic none, no magic made",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6478,
+"fn": "DS-ECO-12 › INCOME WEIGHT: the practice of magic · v1"
+}
+},
+{
+"id": "20909",
+"sev": "MED",
+"n": 1,
+"town": "r2r-thorp-21",
+"section": "Systems/Economics",
+"fold": "The iron ore around <N> goes unworked; no house takes it up.",
+"text": "The iron ore around Ulaankhurel goes unworked; no house takes it up.",
+"why": "says iron ore goes unworked; TRADE lists iron and metalwork made here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 11549,
+"fn": "DS-GEN-18 › UNWORKED · v1"
+}
+},
+{
+"id": "20778",
+"sev": "MED",
+"n": 1,
+"town": "r2s-religious_conversion-hamlet-0",
+"section": "Systems/Resources",
+"fold": "The hamlet works part of the line that iron ore could support: the raw material moves, and it moves before it has been made into anything worth more.",
+"text": "The hamlet works part of the line that iron ore could support: the raw material moves, and it moves before it has been made into anything worth more.",
+"why": "says ore leaves unworked; TRADE says iron, metalwork and weapons are made here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5541,
+"fn": "DS-ECO-11 › EXPLOITATION: partiallyExploited · v1"
+}
+},
+{
+"id": "20750",
+"sev": "MED",
+"n": 1,
+"town": "r2r-hamlet-53",
+"section": "Systems/Economics",
+"fold": "The hamlet has little food of its own but its fishing, so a bad season for the fishing is felt at every table.",
+"text": "The hamlet has little food of its own but its fishing, so a bad season for the fishing is felt at every table.",
+"why": "says little food but fishing; HOUSES has Subsistence farming, Shepherd, Dairy farmer, grazing",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3740,
+"fn": "DS-ECO-9 › FOOD SOURCES: one source · v3"
+}
+},
+{
+"id": "23230",
+"sev": "MED",
+"n": 1,
+"town": "r2r-hamlet-47",
+"section": "Systems/Economics",
+"fold": "Traffic on <N>'s port is steady, and a subsistence living keeps everyone busy.",
+"text": "Traffic on Lidocastra's port is steady, and a subsistence living keeps everyone busy.",
+"why": "'a subsistence living keeps everyone busy'; STATE prosperity is Wealthy",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 21,
+"fn": "DS-ECO-1 › COMBINATION C1: a high rung on a working approach · v1"
+}
+},
+{
+"id": "22386",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-21",
+"section": "Systems/Economics",
+"fold": "The village has little food of its own but its fishing, so a bad season for the fishing is felt at every table.",
+"text": "The village has little food of its own but its fishing, so a bad season for the fishing is felt at every table.",
+"why": "says little food but fishing; HOUSES has Farmland, Mill, grazing; 82 grown plus divine provision",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3740,
+"fn": "DS-ECO-9 › FOOD SOURCES: one source · v3"
+}
+},
+{
+"id": "09248",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-village-1",
+"section": "Systems/Economics",
+"fold": "Food carts come into <N> most days, and they matter: a good part of what the village eats is grown elsewhere and brought in.",
+"text": "Food carts come into Humen most days, and they matter: a good part of what the village eats is grown elsewhere and brought in.",
+"why": "food carts come in most days, but trade access is river only and 00598 says boats bring the food",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3646,
+"fn": "DS-ECO-9 › HOW THE NEED IS MET: much of it brought in · v1"
+}
+},
+{
+"id": "22387",
+"sev": "MED",
+"n": 1,
+"town": "r2s-wartime-village-0",
+"section": "Systems/Economics",
+"fold": "The village has little food of its own but its herds, so a bad season for the herds is felt at every table.",
+"text": "The village has little food of its own but its herds, so a bad season for the herds is felt at every table.",
+"why": "says little food of its own but its herds; HOUSES has Farmland and Mill, grown 424 of 512 daily need",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3740,
+"fn": "DS-ECO-9 › FOOD SOURCES: one source · v3"
+}
+},
+{
+"id": "18231",
+"sev": "MED",
+"n": 1,
+"town": "r2s-religious_conversion-village-0",
+"section": "Systems/Economics",
+"fold": "Some of <N>'s work cannot go on without fish, and the country around the village produces none, so the village buys from outside or that work stops.",
+"text": "Some of Steinfeld's work cannot go on without fish, and the country around the village produces none, so the village buys from outside or that work stops.",
+"why": "says the country produces no fish; HOUSES has a Fisher's landing and the Reeve is boat-headman (05619)",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6351,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: a house needs what the land lacks · v1"
+}
+},
+{
+"id": "22669",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-59",
+"section": "Systems/Resources",
+"fold": "There is timber out there and nobody has ever thought it worth the trouble, which is the village's considered opinion rather than an oversight.",
+"text": "There is timber out there and nobody has ever thought it worth the trouble, which is the village's considered opinion rather than an oversight.",
+"why": "says nobody works the timber; TRADE 'made here' lists timber",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5519,
+"fn": "DS-ECO-11 › EXPLOITATION: unexploited, exportValue: medium or low · v2"
+}
+},
+{
+"id": "18224",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-14",
+"section": "Systems/Economics",
+"fold": "Some of <N>'s work cannot go on without animal hides, and the country around the village produces none, so the village buys from outside or that work stops.",
+"text": "Some of Skaldaker's work cannot go on without animal hides, and the country around the village produces none, so the village buys from outside or that work stops.",
+"why": "says the country yields no animal hides; HOUSES has Common grazing land and a Dairy farmer's herds feeding its Tannery",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6351,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: a house needs what the land lacks · v1"
+}
+},
+{
+"id": "21275",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-2",
+"section": "Systems/Economics",
+"fold": "The people who work magic at <N> are among its biggest buyers and employers, and much of the village's trade turns on their custom.",
+"text": "The people who work magic at Staroka are among its biggest buyers and employers, and much of the village's trade turns on their custom.",
+"why": "magic workers are big buyers and employers; HOUSES has no practitioner, DEFENCE magic none, TRADE makes no spellcasting",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6441,
+"fn": "DS-ECO-12 › INCOME WEIGHT: the religious houses · v2"
+}
+},
+{
+"id": "04020",
+"sev": "MED",
+"n": 1,
+"town": "r2s-recently_betrayed-town-0",
+"section": "Systems/Economics",
+"fold": "Ask where <N> gets its grain and you are pointed at the carts, not at anyone in the town.",
+"text": "Ask where Grünburg gets its grain and you are pointed at the carts, not at anyone in the town.",
+"why": "says grain comes in by cart, not from the town; food ledger: grown 3675 of 4248 needed (86% its own)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 11478,
+"fn": "DS-GEN-18 › BOUGHT-IN · v4"
+}
+},
+{
+"id": "01186",
+"sev": "MED",
+"n": 1,
+"town": "r2s-mass_migration-town-2",
+"section": "Systems/Economics",
+"fold": "<N> lives on a specialist trade that feeds it and no more, and the road in is too poor to bring anything extra.",
+"text": "Shivanand lives on a specialist trade that feeds it and no more, and the road in is too poor to bring anything extra.",
+"why": "says its trade feeds it and names a road in; viable False, deficit 27%, and 13074 says no trade road reaches it",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 223,
+"fn": "DS-ECO-1 › COMBINATION C5: a low rung on a narrow approach · v2"
+}
+},
+{
+"id": "03133",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-35",
+"section": "Summary/Overview",
+"fold": "A traveller passing through <N> can change coin, borrow or settle a debt at the town's bank without carrying the silver home.",
+"text": "A traveller passing through Olympnea can change coin, borrow or settle a debt at the town's bank without carrying the silver home.",
+"why": "names the town's bank; HOUSES has money changers, no bank",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 9614,
+"fn": "DS-GEN-13 › COMMERCE: a bank · v1"
+}
+},
+{
+"id": "20335",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-51",
+"section": "Systems/Economics",
+"fold": "The country around <N> produces no luxury goods, so the city has none but what it buys.",
+"text": "The country around Benham produces no luxury goods, so the city has none but what it buys.",
+"why": "'produces no luxury goods'; resources list precious metals, luxury, gems, and TRADE makes luxury goods and gems",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6390,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v1"
+}
+},
+{
+"id": "04025",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-44",
+"section": "Systems/Economics",
+"fold": "Ask where <N> gets its iron and you are pointed at the carts, not at anyone in the metropolis.",
+"text": "Ask where Tallchowk gets its iron and you are pointed at the carts, not at anyone in the metropolis.",
+"why": "says iron comes by carts; 12535 says iron comes by magic because no trade road reaches the isolated town",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 11478,
+"fn": "DS-GEN-18 › BOUGHT-IN · v4"
+}
+},
+{
+"id": "22663",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-11",
+"section": "Systems/Resources",
+"fold": "There is stone out there and nobody has ever thought it worth the trouble, which is the metropolis's considered opinion rather than an oversight.",
+"text": "There is stone out there and nobody has ever thought it worth the trouble, which is the metropolis's considered opinion rather than an oversight.",
+"why": "says the stone lies unworked; TRADE 'made here' lists stone and Resources shows a Stone Quarry",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5519,
+"fn": "DS-ECO-11 › EXPLOITATION: unexploited, exportValue: medium or low · v2"
+}
+},
+{
+"id": "04037",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-20",
+"section": "Systems/Economics",
+"fold": "Ask where <N> gets its stone and you are pointed at the carts, not at anyone in the metropolis.",
+"text": "Ask where Anba gets its stone and you are pointed at the carts, not at anyone in the metropolis.",
+"why": "says no one in the metropolis supplies stone; HOUSES lists a Stone quarry",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 11478,
+"fn": "DS-GEN-18 › BOUGHT-IN · v4"
+}
+}
+]

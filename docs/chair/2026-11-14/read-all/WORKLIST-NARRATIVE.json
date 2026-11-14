@@ -1,0 +1,1587 @@
+[
+{
+"id": "00053",
+"sev": "HIGH",
+"n": 12,
+"town": "r2s-under_siege-town-2",
+"section": "Summary/Overview",
+"fold": "\"Every plan made here now allows for the Siege happening again; nobody expects it, but nobody expected the first # either\"",
+"text": "\"Every plan made here now allows for the Siege happening again; nobody expects it, but nobody expected the first one either\"",
+"why": "says the Siege is past and nobody expects another; CRISIS is an active Under Siege",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 389,
+"fn": "POLITICAL_FLAVOR"
+}
+},
+{
+"id": "20438",
+"sev": "HIGH",
+"n": 3,
+"town": "r2r-hamlet-36",
+"section": "Summary/Overview",
+"fold": "The defences of <N> were built for quieter years than these, as <N>, the Elder, warned at the last muster.",
+"text": "The defences of Nahrmandi were built for quieter years than these, as Lina ibn Rashid, the Elder, warned at the last muster.",
+"why": "speaks of Nahrmandi's defences and a muster; DEFENCE has no wall and no force",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 170,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "20439",
+"sev": "HIGH",
+"n": 1,
+"town": "r2s-monster_pressure-hamlet-3",
+"section": "Summary/Overview",
+"fold": "The defences of <N> were built for quieter years than these, as <N>, the Headman, warned at the last muster.",
+"text": "The defences of Makrophoros were built for quieter years than these, as Christos Doukas, the Headman, warned at the last muster.",
+"why": "speaks of its defences and a muster; DEFENCE is none and 01146 says it kept no defence and never built one",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 170,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "09400",
+"sev": "MED",
+"n": 67,
+"town": "r2r-thorp-40",
+"section": "Summary/Overview",
+"fold": "Founded roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what stops for the night.",
+"text": "Founded roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what stops for the night.",
+"why": "'founded roadside', day measured in traffic; FOUNDING says farmland grant, and Occupation curfew holds",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrative/settlementOriginProse.js",
+"line": 93,
+"fn": "ORIGIN_POOLS"
+}
+},
+{
+"id": "23205",
+"sev": "MED",
+"n": 58,
+"town": "r2s-occupied-hamlet-3",
+"section": "Summary/Overview",
+"fold": "Trade flows in, goods flow out, people pass through.",
+"text": "Trade flows in, goods flow out, people pass through.",
+"why": "'trade flows in, people pass through' under Occupation curfew; tag also reaches plague towns",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrative/settlementOriginProse.js",
+"line": 91,
+"fn": "ORIGIN_POOLS"
+}
+},
+{
+"id": "09374",
+"sev": "MED",
+"n": 28,
+"town": "r2s-famine-metropolis-3",
+"section": "World/History",
+"fold": "Founded by:a dynastic decision that this crossroads would anchor the realm",
+"text": "Founded by:a dynastic decision that this crossroads would anchor the realm",
+"why": "founded by dynastic decision at 'this crossroads' vs origin grew round a ferry crossing; trade access is river",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/facts/founder.js",
+"line": 46,
+"fn": "FOUNDER_KIND"
+}
+},
+{
+"id": "09370",
+"sev": "MED",
+"n": 27,
+"town": "r2s-famine-city-3",
+"section": "Summary/Overview",
+"fold": "Founded at a junction on the oldest logic there is: whoever holds the meeting of roads holds what moves along them.",
+"text": "Founded at a junction on the oldest logic there is: whoever holds the meeting of roads holds what moves along them.",
+"why": "founded at a road junction; FOUNDING says founded on rich farmland granted to a favoured noble",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrative/settlementOriginProse.js",
+"line": 103,
+"fn": "ORIGIN_POOLS"
+}
+},
+{
+"id": "09381",
+"sev": "MED",
+"n": 27,
+"town": "r2s-famine-city-2",
+"section": "World/History",
+"fold": "Founded by:a military command that built fortifications and found civilians followed",
+"text": "Founded by:a military command that built fortifications and found civilians followed",
+"why": "founded by a military command building fortifications vs origin: founded when foresters found rich woodland",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/facts/founder.js",
+"line": 43,
+"fn": "FOUNDER_KIND"
+}
+},
+{
+"id": "17390",
+"sev": "MED",
+"n": 25,
+"town": "r2s-insurgency-hamlet-2",
+"section": "World/NPCs",
+"fold": "Secret: Ordered a crackdown that killed people who had nothing to do with the insurgency, then falsified the reports to record them as insurgents",
+"text": "Secret: Ordered a crackdown that killed people who had nothing to do with the insurgency, then falsified the reports to record them as insurgents",
+"why": "ordered a crackdown that killed people; the hamlet has no armed force of any kind",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/stressInstitutionEffects.js",
+"line": 389,
+"fn": "STRESS_INSTITUTION_EFFECTS.needs"
+}
+},
+{
+"id": "17123",
+"sev": "MED",
+"n": 20,
+"town": "r2r-thorp-10",
+"section": "World/NPCs",
+"fold": "Secret: Has been selling information about patrol schedules to an outside party who claims to be a monster hunter, and may not be",
+"text": "Secret: Has been selling information about patrol schedules to an outside party who claims to be a monster hunter, and may not be",
+"why": "sells 'patrol schedules'; DEFENCE: garrison, militia, watch all none, so there are no patrols",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/stressInstitutionEffects.js",
+"line": 364,
+"fn": "STRESS_INSTITUTION_EFFECTS.needs"
+}
+},
+{
+"id": "22818",
+"sev": "MED",
+"n": 20,
+"town": "r2s-monster_pressure-thorp-3",
+"section": "Table/Tonight sheet",
+"fold": "They sent a patrol into that territory # weeks ago and provoked something.",
+"text": "They sent a patrol into that territory three weeks ago and provoked something.",
+"why": "'They sent a patrol into that territory'; DEFENCE: garrison, militia, watch, hired all none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/stressInstitutionEffects.js",
+"line": 348,
+"fn": "STRESS_INSTITUTION_EFFECTS.monster_pressure"
+}
+},
+{
+"id": "02975",
+"sev": "MED",
+"n": 18,
+"town": "r2s-famine-village-2",
+"section": "Summary/Overview",
+"fold": "A road settlement: it makes its living from other people's journeys, in stabling and meals and small repairs.",
+"text": "A road settlement: it makes its living from other people's journeys, in stabling and meals and small repairs.",
+"why": "lives by stabling and meals for travellers; HOUSES has no inn or stable, CRISIS famine",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/narrative/settlementOriginProse.js",
+"line": 94,
+"fn": "ORIGIN_POOLS"
+}
+},
+{
+"id": "15395",
+"sev": "MED",
+"n": 18,
+"town": "r2s-famine-village-2",
+"section": "Summary/Overview",
+"fold": "Outsiders see a busy market; the people who live here know the stories behind it.\"",
+"text": "Outsiders see a busy market; the people who live here know the stories behind it.\"",
+"why": "'outsiders see a busy market' under famine, prosperity Struggling, viable False; tag also reaches plague/occupation",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 440,
+"fn": "POLITICAL_FLAVOR"
+}
+},
+{
+"id": "21748",
+"sev": "MED",
+"n": 17,
+"town": "r2r-thorp-14",
+"section": "Summary/Overview",
+"fold": "The road into <N> becomes a street at a point you can't precisely identify.",
+"text": "The road into Eisenburg becomes a street at a point you can't precisely identify.",
+"why": "'The road becomes a street... the settlement grows around you gradually'; tag reaches th, here a thorp of 19 with Dwellings (1-8)",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 73,
+"fn": "ARRIVAL_SCENES.ordinary"
+}
+},
+{
+"id": "11941",
+"sev": "MED",
+"n": 16,
+"town": "r2r-metropolis-14",
+"section": "Summary/Overview",
+"fold": "It exists because travellers had to stop somewhere, and the roads decided that somewhere was here.",
+"text": "It exists because travellers had to stop somewhere, and the roads decided that somewhere was here.",
+"why": "exists because travellers had to stop here; FOUNDING says it began as a grain depot for a larger city, by imperial decree",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/narrative/settlementOriginProse.js",
+"line": 104,
+"fn": "ORIGIN_POOLS"
+}
+},
+{
+"id": "17522",
+"sev": "MED",
+"n": 16,
+"town": "r2r-thorp-17",
+"section": "World/NPCs",
+"fold": "Secret: Sold the settlement's emergency grain reserves # months ago at peak price and reported them destroyed in a flood",
+"text": "Secret: Sold the settlement's emergency grain reserves three months ago at peak price and reported them destroyed in a flood",
+"why": "sold emergency grain reserves at peak price: no granary, isolated, exports none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/stressInstitutionEffects.js",
+"line": 77,
+"fn": "STRESS_INSTITUTION_EFFECTS.famine"
+}
+},
+{
+"id": "22572",
+"sev": "MED",
+"n": 15,
+"town": "r2s-under_siege-thorp-3",
+"section": "World/NPCs",
+"fold": "Their family left last week",
+"text": "Their family left last week",
+"why": "family left last week: under siege the thorp is surrounded and nobody goes out",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/stressInstitutionEffects.js",
+"line": 44,
+"fn": "STRESS_INSTITUTION_EFFECTS.excludes"
+}
+},
+{
+"id": "17204",
+"sev": "MED",
+"n": 15,
+"town": "r2r-thorp-38",
+"section": "World/NPCs",
+"fold": "Secret: Helped engineer the original supply disruption that triggered the famine, believing it would only last a week",
+"text": "Secret: Helped engineer the original supply disruption that triggered the famine, believing it would only last a week",
+"why": "a supply disruption triggered the famine: isolated thorp with imports none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/stressInstitutionEffects.js",
+"line": 97,
+"fn": "STRESS_INSTITUTION_EFFECTS.needs"
+}
+},
+{
+"id": "21981",
+"sev": "MED",
+"n": 15,
+"town": "r2s-politically_fractured-thorp-1",
+"section": "World/History",
+"fold": "The settlement was founded by people who agreed on its purpose.",
+"text": "The settlement was founded by people who agreed on its purpose.",
+"why": "'founded by people who agreed on its purpose'; FOUNDING: siblings who disagreed about which way to keep walking",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 422,
+"fn": "STRESS_NOTES.politically_fractured"
+}
+},
+{
+"id": "22973",
+"sev": "MED",
+"n": 14,
+"town": "r2r-thorp-51",
+"section": "World/History",
+"fold": "This settlement began as a promise between a few families, and someone inside has just broken it.",
+"text": "This settlement began as a promise between a few families, and someone inside has just broken it.",
+"why": "'began as a promise between a few families'; FOUNDING: a single extended family, grown at a crossroads (15339)",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 433,
+"fn": "STRESS_NOTES.recently_betrayed"
+}
+},
+{
+"id": "01626",
+"sev": "MED",
+"n": 13,
+"town": "r2s-occupied-thorp-1",
+"section": "Summary/Overview",
+"fold": "<N>'s street signs have been repainted in # languages, the local # second.",
+"text": "Amarkota's street signs have been repainted in two languages, the local one second.",
+"why": "street signs repainted in two languages: thorp of 17",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 210,
+"fn": "STRESS_DESCS.occupied"
+}
+},
+{
+"id": "17408",
+"sev": "MED",
+"n": 13,
+"town": "r2s-slave_revolt-village-0",
+"section": "World/NPCs",
+"fold": "Secret: Owned a share of the slave market and has been destroying the records of exactly whom they owned before those records can be turned against them",
+"text": "Secret: Owned a share of the slave market and has been destroying the records of exactly whom they owned before those records can be turned against them",
+"why": "names a slave market; HOUSES has no slave market",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/stressInstitutionEffects.js",
+"line": 525,
+"fn": "STRESS_INSTITUTION_EFFECTS.slave_revolt"
+}
+},
+{
+"id": "15361",
+"sev": "MED",
+"n": 12,
+"town": "r2s-plague_onset-town-0",
+"section": "World/History",
+"fold": "Origin:was established by a family granted mill rights by a distant lord who never visited",
+"text": "Origin:was established by a family granted mill rights by a distant lord who never visited",
+"why": "origin by a mill-rights family contradicts FOUNDING's merchant consortium founder",
+"kinds": [
+"RECORD"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 107,
+"fn": "TERRAIN_NARRATIVE_HOOKS.river"
+}
+},
+{
+"id": "03015",
+"sev": "MED",
+"n": 12,
+"town": "r2s-politically_fractured-thorp-3",
+"section": "World/History",
+"fold": "A shared purpose held the founders together.",
+"text": "A shared purpose held the founders together.",
+"why": "'A shared purpose held the founders together'; FOUNDING: siblings who disagreed about which way to keep walking",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 424,
+"fn": "STRESS_NOTES.politically_fractured"
+}
+},
+{
+"id": "00338",
+"sev": "MED",
+"n": 11,
+"town": "r2s-politically_fractured-thorp-1",
+"section": "Summary/Overview",
+"fold": "# powers in <N> are each waiting for # of the others to slip, and meanwhile nothing gets mended and no quarrel gets settled.",
+"text": "Three powers in Mayanek are each waiting for one of the others to slip, and meanwhile nothing gets mended and no quarrel gets settled.",
+"why": "'Three powers in Mayanek'; GOVERNMENT lists two: The Independent Bloc and Household Council",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 119,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "09398",
+"sev": "MED",
+"n": 11,
+"town": "r2s-famine-town-2",
+"section": "Summary/Overview",
+"fold": "Founded on the coast for the shelter of its anchorage.",
+"text": "Founded on the coast for the shelter of its anchorage.",
+"why": "says founded for its anchorage; FOUNDING reason and 15373 say founded as an artisans' workshop district",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/narrative/settlementOriginProse.js",
+"line": 144,
+"fn": "ORIGIN_POOLS"
+}
+},
+{
+"id": "21980",
+"sev": "MED",
+"n": 10,
+"town": "r2s-recently_betrayed-thorp-1",
+"section": "World/History",
+"fold": "The settlement was founded by a few families who trusted each other.",
+"text": "The settlement was founded by a few families who trusted each other.",
+"why": "'founded by a few families who trusted each other'; FOUNDING: a pair of siblings, a frontier outpost (15356)",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 432,
+"fn": "STRESS_NOTES.recently_betrayed"
+}
+},
+{
+"id": "18689",
+"sev": "MED",
+"n": 8,
+"town": "r2s-occupied-hamlet-0",
+"section": "Summary/Overview",
+"fold": "Strangers in foreign colours stand where the roads meet in <N>, and the locals walk around them as if they were furniture nobody wanted.",
+"text": "Strangers in foreign colours stand where the roads meet in Qarahiid, and the locals walk around them as if they were furniture nobody wanted.",
+"why": "strangers stand where the roads meet; trade access isolated",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 215,
+"fn": "STRESS_DESCS.occupied"
+}
+},
+{
+"id": "00172",
+"sev": "MED",
+"n": 8,
+"town": "r2s-monster_pressure-thorp-1",
+"section": "Summary/Overview",
+"fold": "# farmsteads have been abandoned in the last month; the families who abandoned them know something about what they saw that they haven't reported to the authorities.",
+"text": "Three farmsteads have been abandoned in the last month; the families who abandoned them know something about what they saw that they haven't reported to the authorities.",
+"why": "three farmsteads abandoned 'in the last month' and 'the authorities' in a thorp of 18 with Dwellings (1-8) and a household council",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 171,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "20558",
+"sev": "MED",
+"n": 8,
+"town": "r2r-thorp-32",
+"section": "World/History",
+"fold": "The founders built a place to trade.",
+"text": "The founders built a place to trade.",
+"why": "'The founders built a place to trade'; founding reason (15372) was to exploit rich mineral deposits",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 469,
+"fn": "STRESS_NOTES.wartime"
+}
+},
+{
+"id": "21761",
+"sev": "MED",
+"n": 8,
+"town": "r2s-plague_onset-village-1",
+"section": "World/History",
+"fold": "The roads and river that made this a good place to settle are the ones the sickness travelled.",
+"text": "The roads and river that made this a good place to settle are the ones the sickness travelled.",
+"why": "names a river the sickness travelled; terrain Plains, trade access crossroads, no river",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 443,
+"fn": "STRESS_NOTES.plague_onset"
+}
+},
+{
+"id": "22064",
+"sev": "MED",
+"n": 7,
+"town": "r2s-under_siege-thorp-2",
+"section": "World/History",
+"fold": "The site was chosen for trade, water, and good ground, none of which matters to the people now deciding whether its walls can hold.",
+"text": "The site was chosen for trade, water, and good ground, none of which matters to the people now deciding whether its walls can hold.",
+"why": "site chosen for trade; origin grew around a resource deposit, trade access isolated",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 408,
+"fn": "STRESS_NOTES.under_siege"
+}
+},
+{
+"id": "20302",
+"sev": "MED",
+"n": 7,
+"town": "r2s-religious_conversion-thorp-2",
+"section": "Summary/Overview",
+"fold": "The conversion order in <N> was accepted within the week, faster than anyone expected, and nobody in authority is asking whether the old rites still go on behind closed doors.",
+"text": "The conversion order in Archoakra was accepted within the week, faster than anyone expected, and nobody in authority is asking whether the old rites still go on behind closed doors.",
+"why": "conversion accepted within the week with nobody asking; 22121 says the split is open with two priests and two congregations",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 247,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "00014",
+"sev": "MED",
+"n": 7,
+"town": "r2r-thorp-11",
+"section": "Summary/Overview",
+"fold": "\"<N> is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere\"",
+"text": "\"The Religious Conflict is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere\"",
+"why": "'the local clergy and the civic authority'; HOUSES has a wayside shrine and Access to parish church, no clergy; head-of-household consensus",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 456,
+"fn": "POLITICAL_FLAVOR"
+}
+},
+{
+"id": "01080",
+"sev": "MED",
+"n": 7,
+"town": "r2s-wartime-village-3",
+"section": "Summary/Overview",
+"fold": "<N> is prosperous in a way that feels wrong.",
+"text": "Zelenonick is prosperous in a way that feels wrong.",
+"why": "says the village is prosperous; STATE gives prosperity Struggling",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 369,
+"fn": "STRESS_DESCS.wartime"
+}
+},
+{
+"id": "20552",
+"sev": "MED",
+"n": 7,
+"town": "r2s-wartime-village-3",
+"section": "Summary/Overview",
+"fold": "The forges work past dark, the warehouses are full, the coin is moving, and all of it points # direction, toward a war that is not fought here but is paid for here.",
+"text": "The forges work past dark, the warehouses are full, the coin is moving, and all of it points one direction, toward a war that is not fought here but is paid for here.",
+"why": "forges past dark, full warehouses, coin moving; one blacksmith, no warehouse in HOUSES, prosperity Struggling",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 369,
+"fn": "STRESS_DESCS.wartime"
+}
+},
+{
+"id": "15081",
+"sev": "MED",
+"n": 6,
+"town": "r2s-wartime-thorp-2",
+"section": "Summary/Overview",
+"fold": "Nothing comes in from outside; it gets by on what it produces itself.",
+"text": "Nothing comes in from outside; it gets by on what it produces itself.",
+"why": "'gets by on what it produces': famine with deficit 72%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrative/settlementOriginProse.js",
+"line": 183,
+"fn": "ORIGIN_POOLS"
+}
+},
+{
+"id": "09482",
+"sev": "MED",
+"n": 6,
+"town": "r2s-slave_revolt-thorp-2",
+"section": "World/History",
+"fold": "From its first season this place ran on enslaved hands.",
+"text": "From its first season this place ran on enslaved hands.",
+"why": "'From its first season this place ran on enslaved hands'; FOUNDING: two wandering siblings at a harbour fish preferred (15331)",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 478,
+"fn": "STRESS_NOTES.slave_revolt"
+}
+},
+{
+"id": "01529",
+"sev": "MED",
+"n": 6,
+"town": "r2s-slave_revolt-thorp-0",
+"section": "Summary/Overview",
+"fold": "<N>'s field gangs work without overseers today, or the overseers have dressed like the gangs.",
+"text": "Mönkhkher's field gangs work without overseers today, or the overseers have dressed like the gangs.",
+"why": "'field gangs work without overseers'; tag reaches th, here a thorp of 28 with Dwellings (1-8)",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 401,
+"fn": "STRESS_DESCS.slave_revolt"
+}
+},
+{
+"id": "15101",
+"sev": "MED",
+"n": 5,
+"town": "r2s-succession_void-thorp-1",
+"section": "Summary/Overview",
+"fold": "Nothing is brought in, and every season it gets by on what it produces itself.",
+"text": "Nothing is brought in, and every season it gets by on what it produces itself.",
+"why": "'gets by on what it produces' every season: famine, deficit 64%, short a second season",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/narrative/settlementOriginProse.js",
+"line": 184,
+"fn": "ORIGIN_POOLS"
+}
+},
+{
+"id": "01333",
+"sev": "MED",
+"n": 5,
+"town": "r2r-hamlet-33",
+"section": "Summary/Overview",
+"fold": "<N> still paints its civic buildings and still held its festival, all on borrowed money; everyone knows it, and nobody says it aloud.",
+"text": "Puripuram still paints its civic buildings and still held its festival, all on borrowed money; everyone knows it, and nobody says it aloud.",
+"why": "paints its civic buildings; hamlet of 32 has no civic building on HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 130,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "00340",
+"sev": "MED",
+"n": 5,
+"town": "r2s-religious_conversion-village-3",
+"section": "Summary/Overview",
+"fold": "# processions are forming in different #, and the people watching each are counting who watches the other.",
+"text": "Two processions are forming in different quarters, and the people watching each are counting who watches the other.",
+"why": "processions in different quarters; a village of 351 has no quarters",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 381,
+"fn": "STRESS_DESCS.religious_conversion"
+}
+},
+{
+"id": "00138",
+"sev": "MED",
+"n": 4,
+"town": "r2r-thorp-46",
+"section": "Summary/Overview",
+"fold": "\"This place made its name in trade, not war, and the Iron Dispute showed it that money lasts longer here than any military glory\"",
+"text": "\"This place made its name in trade, not war, and the Iron Dispute showed it that money lasts longer here than any military glory\"",
+"why": "'made its name in trade': trade access isolated, exports and imports none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 437,
+"fn": "POLITICAL_FLAVOR"
+}
+},
+{
+"id": "11487",
+"sev": "MED",
+"n": 4,
+"town": "r2r-thorp-22",
+"section": "Summary/Overview",
+"fold": "In <N> the rents go uncollected, the summons go unanswered, and the men Elder Council sends to enforce either turn back or turn coat.",
+"text": "In Kaanche the rents go uncollected, the summons go unanswered, and the men Elder Council sends to enforce either turn back or turn coat.",
+"why": "men sent to enforce rents and summons: DEFENCE lists no force of any kind",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 188,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "17124",
+"sev": "MED",
+"n": 4,
+"town": "r2r-thorp-10",
+"section": "Table/Tonight sheet",
+"fold": "Secret: Has been selling information about patrol schedules to an outside party who claims to be a monster hunter, and may not be.",
+"text": "Secret: Has been selling information about patrol schedules to an outside party who claims to be a monster hunter, and may not be.",
+"why": "sells 'patrol schedules'; DEFENCE: garrison, militia, watch all none, so there are no patrols",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/stressInstitutionEffects.js",
+"line": 364,
+"fn": "STRESS_INSTITUTION_EFFECTS.needs"
+}
+},
+{
+"id": "00649",
+"sev": "MED",
+"n": 4,
+"town": "r2s-religious_conversion-thorp-2",
+"section": "Summary/Overview",
+"fold": "<N> has # burial grounds now, # old and # new, and the thorp's grief is learning to sort itself accordingly.",
+"text": "Archoakra has two burial grounds now, one old and one new, and the thorp's grief is learning to sort itself accordingly.",
+"why": "'two burial grounds now, one old and one new'; HOUSES lists one Burial ground",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 387,
+"fn": "STRESS_DESCS.religious_conversion"
+}
+},
+{
+"id": "20366",
+"sev": "MED",
+"n": 4,
+"town": "r2s-indebted-thorp-3",
+"section": "Summary/Overview",
+"fold": "The creditor has begun taking payment from <N> in things other than coin (a warehouse here, a toll right there), and each transfer is legal, documented, and slightly worse than the last.",
+"text": "The creditor has begun taking payment from Villaoppidum in things other than coin (a warehouse here, a toll right there), and each transfer is legal, documented, and slightly worse than the last.",
+"why": "creditor takes 'a warehouse here, a toll right there'; HOUSES has no warehouse",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 129,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "15409",
+"sev": "MED",
+"n": 4,
+"town": "r2s-slave_revolt-village-0",
+"section": "Table/Tonight sheet",
+"fold": "Owned a share of the slave market and has been destroying the records of exactly whom they owned before those records can be turned against them.",
+"text": "Owned a share of the slave market and has been destroying the records of exactly whom they owned before those records can be turned against them.",
+"why": "names a slave market; HOUSES has no slave market",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/stressInstitutionEffects.js",
+"line": 525,
+"fn": "STRESS_INSTITUTION_EFFECTS.slave_revolt"
+}
+},
+{
+"id": "15332",
+"sev": "MED",
+"n": 3,
+"town": "r2s-plague_onset-city-3",
+"section": "World/History",
+"fold": "Origin:grew around a sheep run whose owner had the rare good sense to also build a mill and a market",
+"text": "Origin:grew around a sheep run whose owner had the rare good sense to also build a mill and a market",
+"why": "origin a sheep run with mill and market; the next history line says founded by a military command",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/narrative/foundingRowAdmits.js",
+"line": 103,
+"fn": "FOUNDING_REASON_ADMITS"
+}
+},
+{
+"id": "07115",
+"sev": "MED",
+"n": 3,
+"town": "r2s-insurgency-thorp-2",
+"section": "Summary/Overview",
+"fold": "Elder Council still holds the buildings and the official seal, but its orders go unanswered, and the first power leader to offer something better will find people ready to follow.",
+"text": "Elder Council still holds the buildings and the official seal, but its orders go unanswered, and the first power leader to offer something better will find people ready to follow.",
+"why": "'the first power leader to offer something better' presumes a rival power; GOVERNMENT lists Elder Council alone; 'power leader' reads garbled",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 186,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "01722",
+"sev": "MED",
+"n": 3,
+"town": "r2s-politically_fractured-thorp-2",
+"section": "Summary/Overview",
+"fold": "<N>, the Elder, is the only person all # powers will still speak to, which makes them either the key to resolution or the next target.",
+"text": "Seianus Maximus, the Elder, is the only person all three powers will still speak to, which makes them either the key to resolution or the next target.",
+"why": "'the only person all three powers will still speak to'; GOVERNMENT lists two powers",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 120,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "00010",
+"sev": "MED",
+"n": 3,
+"town": "r2r-thorp-59",
+"section": "Summary/Overview",
+"fold": "\"<N> is still discussed (carefully) by the practitioners who work here.",
+"text": "\"The Wild Magic is still discussed (carefully) by the practitioners who work here.",
+"why": "'the practitioners who work here'; thorp of 7, magic low, DEFENCE magic none, no practitioner on HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 472,
+"fn": "POLITICAL_FLAVOR"
+}
+},
+{
+"id": "00648",
+"sev": "MED",
+"n": 3,
+"town": "r2s-religious_conversion-hamlet-3",
+"section": "Summary/Overview",
+"fold": "<N> has # burial grounds now, # old and # new, and the hamlet's grief is learning to sort itself accordingly.",
+"text": "Yurtüüd has two burial grounds now, one old and one new, and the hamlet's grief is learning to sort itself accordingly.",
+"why": "says two burial grounds, old and new; HOUSES lists one Burial ground",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 387,
+"fn": "STRESS_DESCS.religious_conversion"
+}
+},
+{
+"id": "20320",
+"sev": "MED",
+"n": 3,
+"town": "r2s-politically_fractured-hamlet-0",
+"section": "Summary/Overview",
+"fold": "The council hall of <N> is dark; the business of governing has moved to # different taverns at opposite ends of town.",
+"text": "The council hall of Zelenoichi is dark; the business of governing has moved to two different taverns at opposite ends of town.",
+"why": "council hall and 'two taverns at opposite ends of town'; hamlet has one Alehouse, no hall, a headman not a council",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 229,
+"fn": "STRESS_DESCS.politically_fractured"
+}
+},
+{
+"id": "00349",
+"sev": "MED",
+"n": 3,
+"town": "r2s-religious_conversion-village-2",
+"section": "Summary/Overview",
+"fold": "# temples face each other across <N>'s central square, and only # has a queue.",
+"text": "Two temples face each other across Loughburn's central square, and only one has a queue.",
+"why": "two temples face each other across a central square; HOUSES has one Parish church",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 377,
+"fn": "STRESS_DESCS.religious_conversion"
+}
+},
+{
+"id": "20989",
+"sev": "MED",
+"n": 3,
+"town": "r2r-village-47",
+"section": "Summary/Overview",
+"fold": "The merchant district of <N> looks prosperous.",
+"text": "The merchant district of Mahapat looks prosperous.",
+"why": "a merchant district in a village of 375 with no market, isolated trade and no exports; prosperity Struggling",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 239,
+"fn": "STRESS_DESCS.indebted"
+}
+},
+{
+"id": "21705",
+"sev": "MED",
+"n": 3,
+"town": "r2r-village-47",
+"section": "Summary/Overview",
+"fold": "The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years.",
+"text": "The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years.",
+"why": "presumes a prosperous merchant district; village of 375, no market, isolated, Struggling",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 239,
+"fn": "STRESS_DESCS.indebted"
+}
+},
+{
+"id": "22166",
+"sev": "MED",
+"n": 3,
+"town": "r2s-succession_void-town-3",
+"section": "Summary/Overview",
+"fold": "The succession in <N> will be settled by the trade more than by any claim of blood or law: whoever the merchants and the creditors decide to deal with becomes, retroactively, the legitimate successor.",
+"text": "The succession in Skaldtun will be settled by the trade more than by any claim of blood or law: whoever the merchants and the creditors decide to deal with becomes, retroactively, the legitimate successor.",
+"why": "merchants and creditors decide the succession; GOVERNMENT and HOUSES list no merchant power or guild",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 165,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "22067",
+"sev": "MED",
+"n": 3,
+"town": "r2s-slave_revolt-town-2",
+"section": "Summary/Overview",
+"fold": "The slave market at its heart (you can see the empty auction platform from the gate) stands deserted, ringed by guards.",
+"text": "The slave market at its heart (you can see the empty auction platform from the gate) stands deserted, ringed by guards.",
+"why": "names a slave market with an auction platform at the town's heart; HOUSES has no slave market",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 395,
+"fn": "STRESS_DESCS.slave_revolt"
+}
+},
+{
+"id": "01042",
+"sev": "MED",
+"n": 3,
+"town": "r2s-monster_pressure-town-3",
+"section": "Summary/Overview",
+"fold": "<N> is more fortified than its size suggests.",
+"text": "Rundfeld is more fortified than its size suggests.",
+"why": "says more fortified than its size suggests; STATE defence is Lightly Defended, no garrison",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 311,
+"fn": "STRESS_DESCS.monster_pressure"
+}
+},
+{
+"id": "22030",
+"sev": "MED",
+"n": 2,
+"town": "r2s-under_siege-thorp-2",
+"section": "Summary/Overview",
+"fold": "The siege has closed the roads; it gets by on what it produces itself.",
+"text": "The siege has closed the roads; it gets by on what it produces itself.",
+"why": "'gets by on what it produces': deficit 42%, falls far short, will not survive",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/narrative/settlementOriginProse.js",
+"line": 193,
+"fn": "ORIGIN_POOLS"
+}
+},
+{
+"id": "14593",
+"sev": "MED",
+"n": 2,
+"town": "r2r-thorp-38",
+"section": "Summary/Overview",
+"fold": "No food reaches it from outside, and it gets by on what it produces itself.",
+"text": "No food reaches it from outside, and it gets by on what it produces itself.",
+"why": "'gets by on what it produces itself': famine with deficit 65%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrative/settlementOriginProse.js",
+"line": 182,
+"fn": "ORIGIN_POOLS"
+}
+},
+{
+"id": "10848",
+"sev": "MED",
+"n": 2,
+"town": "r2r-thorp-52",
+"section": "Summary/Overview",
+"fold": "Household Council still holds the buildings and the official seal, but its orders go unanswered, and the first power leader to offer something better will find people ready to follow.",
+"text": "Household Council still holds the buildings and the official seal, but its orders go unanswered, and the first power leader to offer something better will find people ready to follow.",
+"why": "'the first power leader to offer something better' presumes a rival power; GOVERNMENT lists Household Council alone; 'power leader' reads garbled",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 186,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "21756",
+"sev": "MED",
+"n": 2,
+"town": "r2s-monster_pressure-thorp-2",
+"section": "Summary/Overview",
+"fold": "The road into <N> runs its last mile between new watchtowers: timber, hasty, manned.",
+"text": "The road into Kashikund runs its last mile between new watchtowers: timber, hasty, manned.",
+"why": "'between new watchtowers: timber, hasty, manned'; DEFENCE: watch none, HOUSES has a palisade and no towers",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 319,
+"fn": "STRESS_DESCS.monster_pressure"
+}
+},
+{
+"id": "01760",
+"sev": "MED",
+"n": 2,
+"town": "r2r-hamlet-35",
+"section": "Summary/Overview",
+"fold": "<N>, the bloc's speaker, is the only person all # powers will still speak to, which makes them either the key to resolution or the next target.",
+"text": "Gudrun Thorsson, the bloc's speaker, is the only person all three powers will still speak to, which makes them either the key to resolution or the next target.",
+"why": "'all three powers'; GOVERNMENT lists two powers, the Independent Bloc and Headman's Authority",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 120,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "15280",
+"sev": "MED",
+"n": 2,
+"town": "r2s-insurgency-hamlet-1",
+"section": "Table/Tonight sheet",
+"fold": "Ordered a crackdown that killed people who had nothing to do with the insurgency, then falsified the reports to record them as insurgents.",
+"text": "Ordered a crackdown that killed people who had nothing to do with the insurgency, then falsified the reports to record them as insurgents.",
+"why": "ordered a crackdown that killed people; DEFENCE has no garrison, militia or watch to do it",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/stressInstitutionEffects.js",
+"line": 389,
+"fn": "STRESS_INSTITUTION_EFFECTS.needs"
+}
+},
+{
+"id": "28485",
+"sev": "MED",
+"n": 2,
+"town": "r2r-town-4",
+"section": "Summary/Overview",
+"fold": "Warehouses and chandlers crowd the waterfront, with the older streets climbing behind them.",
+"text": "Warehouses and chandlers crowd the waterfront, with the older streets climbing behind them.",
+"why": "chandlers crowd the waterfront; HOUSES has no chandler",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 41,
+"fn": "ARRIVAL_SCENES.port"
+}
+},
+{
+"id": "17174",
+"sev": "MED",
+"n": 1,
+"town": "r2s-succession_void-thorp-0",
+"section": "World/NPCs",
+"fold": "Secret: Has documentation proving the famine was caused by export decisions made by <N>, and has been paid to lose it",
+"text": "Secret: Has documentation proving the famine was caused by export decisions made by Household Council, and has been paid to lose it",
+"why": "famine caused by the council's export decisions: exports none, isolated",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/stressInstitutionEffects.js",
+"line": 107,
+"fn": "STRESS_INSTITUTION_EFFECTS.needs"
+}
+},
+{
+"id": "20149",
+"sev": "MED",
+"n": 1,
+"town": "r2s-insurgency-thorp-3",
+"section": "Summary/Overview",
+"fold": "The challenge to Household Council in <N> comes from its own officials: taxes held back, decisions left unsigned, a coalition forming.",
+"text": "The challenge to Household Council in Hochkirche comes from its own officials: taxes held back, decisions left unsigned, a coalition forming.",
+"why": "challenge 'comes from its own officials: taxes held back, decisions left unsigned'; thorp of 16 by head-of-household consensus has no officials or taxes",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 191,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "11478",
+"sev": "MED",
+"n": 1,
+"town": "r2s-slave_revolt-thorp-1",
+"section": "Summary/Overview",
+"fold": "In <N> the # sides have discovered they cannot simply win: the enslaved cannot hold the whole settlement, and Household Council cannot retake it without destroying the timber that made it worth holding.",
+"text": "In Erdeniin the two sides have discovered they cannot simply win: the enslaved cannot hold the whole settlement, and Household Council cannot retake it without destroying the timber that made it worth holding.",
+"why": "'without destroying the timber that made it worth holding'; TRADE makes no timber here",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 256,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "22014",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-village-3",
+"section": "Summary/Overview",
+"fold": "The shortfall is met through carts from the country around it or the tracks in a good season, and every season the terms are bargained again.",
+"text": "The shortfall is met through carts from the country around it or the tracks in a good season, and every season the terms are bargained again.",
+"why": "says the shortfall is met; famine deficit is 58% with imports covering only 26 of 514",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrative/settlementOriginProse.js",
+"line": 210,
+"fn": "ORIGIN_POOLS"
+}
+},
+{
+"id": "17182",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-village-3",
+"section": "World/NPCs",
+"fold": "Secret: Has documentation proving the famine was caused by export decisions made by Military/Guard, and has been paid to lose it",
+"text": "Secret: Has documentation proving the famine was caused by export decisions made by Military/Guard, and has been paid to lose it",
+"why": "famine caused by export decisions; TRADE exports none (also 'Military/Guard' as a name)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/stressInstitutionEffects.js",
+"line": 107,
+"fn": "STRESS_INSTITUTION_EFFECTS.needs"
+}
+},
+{
+"id": "00651",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-5",
+"section": "Summary/Overview",
+"fold": "<N> has # burial grounds now, # old and # new, and the village's grief is learning to sort itself accordingly.",
+"text": "Karakabad has two burial grounds now, one old and one new, and the village's grief is learning to sort itself accordingly.",
+"why": "says two burial grounds, old and new; HOUSES lists one Graveyard",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 387,
+"fn": "STRESS_DESCS.religious_conversion"
+}
+},
+{
+"id": "00708",
+"sev": "MED",
+"n": 1,
+"town": "r2s-monster_pressure-village-3",
+"section": "Summary/Overview",
+"fold": "<N> has drawn its edges inward (fields left unworked, a mill standing idle) trading the harvest it needs for a perimeter the able-bodied can actually hold.",
+"text": "Tallkhel has drawn its edges inward (fields left unworked, a mill standing idle) trading the harvest it needs for a perimeter the able-bodied can actually hold.",
+"why": "says fields left unworked and the mill idle; 16640 has the mill running, flour exported, grown 483 against need 414",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 172,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "01720",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-42",
+"section": "Summary/Overview",
+"fold": "<N>, the Elder Priest, is the only person all # powers will still speak to, which makes them either the key to resolution or the next target.",
+"text": "Mugain Kennedy, the Elder Priest, is the only person all three powers will still speak to, which makes them either the key to resolution or the next target.",
+"why": "'all three powers'; GOVERNMENT lists only two, The Independent Bloc and Priestly Guidance",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 120,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "17926",
+"sev": "MED",
+"n": 1,
+"town": "r2s-under_siege-town-2",
+"section": "Summary/Overview",
+"fold": "Set apart from the trade roads, on ground that does not quite feed it, and now cut off by a siege.",
+"text": "Set apart from the trade roads, on ground that does not quite feed it, and now cut off by a siege.",
+"why": "'does not quite feed it'; grown 1027 of daily need 4906, deficit 40%, viable False",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrative/settlementOriginProse.js",
+"line": 182,
+"fn": "ORIGIN_POOLS"
+}
+},
+{
+"id": "11943",
+"sev": "MED",
+"n": 1,
+"town": "r2s-under_siege-town-2",
+"section": "Summary/Overview",
+"fold": "It gets by on what it has in store and what it produces itself.",
+"text": "It gets by on what it has in store and what it produces itself.",
+"why": "says it gets by on stores and its own produce; deficit 40% under siege and viable False",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrative/settlementOriginProse.js",
+"line": 263,
+"fn": "holdingsOf"
+}
+},
+{
+"id": "21222",
+"sev": "MED",
+"n": 1,
+"town": "r2s-insurgency-town-1",
+"section": "Summary/Overview",
+"fold": "The opposition to Merchant oligarchy is a patient, well-lawyered thing that means to inherit the settlement intact rather than take it by force, and it is close to being able to.",
+"text": "The opposition to Merchant oligarchy is a patient, well-lawyered thing that means to inherit the settlement intact rather than take it by force, and it is close to being able to.",
+"why": "opposition means to inherit, not take by force; CRISIS Insurgency, Rebellion, and 03911 says armed rebels are active",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 193,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "07638",
+"sev": "MED",
+"n": 1,
+"town": "r2s-insurgency-town-2",
+"section": "Summary/Overview",
+"fold": "Feudal Appointee still holds the buildings and the official seal, but its orders go unanswered, and the first power leader to offer something better will find people ready to follow.",
+"text": "Feudal Appointee still holds the buildings and the official seal, but its orders go unanswered, and the first power leader to offer something better will find people ready to follow.",
+"why": "says Feudal Appointee's orders go unanswered; GOVERNMENT has it Strong and 13321 says Merchant Guilds works under its rules",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 186,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "22015",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-9",
+"section": "Summary/Overview",
+"fold": "The shortfall is met through the caravans that still come or the favour of a patron, and every season the terms are bargained again.",
+"text": "The shortfall is met through the caravans that still come or the favour of a patron, and every season the terms are bargained again.",
+"why": "shortfall met by 'the caravans that still come', but 12563 says no trade road reaches the isolated town",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/narrative/settlementOriginProse.js",
+"line": 210,
+"fn": "ORIGIN_POOLS"
+}
+},
+{
+"id": "18781",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-54",
+"section": "Summary/Overview",
+"fold": "Survival here rests on carriage by magic, the caravans that still come, or the favour of a patron — none of it certain.",
+"text": "Survival here rests on carriage by magic, the caravans that still come, or the favour of a patron — none of it certain.",
+"why": "survival rests on 'the caravans that still come', but 14569 says no camels reach the caravanserai and 04483 no road reaches",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/narrative/settlementOriginProse.js",
+"line": 219,
+"fn": "ORIGIN_POOLS"
+}
+},
+{
+"id": "01079",
+"sev": "MED",
+"n": 1,
+"town": "r2s-wartime-city-1",
+"section": "Summary/Overview",
+"fold": "<N> is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast, and all of it lost if the war turns.",
+"text": "Jalalserai is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast, and all of it lost if the war turns.",
+"why": "city 'is prospering' on the war; prosperity Moderate, and it was 'Wealthy before the war'",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 230,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "21223",
+"sev": "MED",
+"n": 1,
+"town": "r2s-insurgency-city-0",
+"section": "Summary/Overview",
+"fold": "The opposition to Noble Governorship is a patient, well-lawyered thing that means to inherit the settlement intact rather than take it by force, and it is close to being able to.",
+"text": "The opposition to Noble Governorship is a patient, well-lawyered thing that means to inherit the settlement intact rather than take it by force, and it is close to being able to.",
+"why": "opposition is patient and lawyered, not taking it by force; CRISIS is Insurgency with conditions Rebellion, stability 'insurgency contests authority'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 193,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "18099",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-metropolis-2",
+"section": "Summary/Overview",
+"fold": "Since the herds failed, whoever holds the food in <N> holds the power, and at least # powers are fighting over the stores.",
+"text": "Since the herds failed, whoever holds the food in Caththwaite holds the power, and at least three powers are fighting over the stores.",
+"why": "says the herds failed; TRADE makes livestock and dairy and exports livestock and raw wool",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 87,
+"fn": "famineFoodIsPower"
+}
+},
+{
+"id": "18092",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-metropolis-1",
+"section": "Summary/Overview",
+"fold": "Since the fishing failed, whoever holds the food in <N> holds the power, and at least # powers are fighting over the stores.",
+"text": "Since the fishing failed, whoever holds the food in Hongji holds the power, and at least three powers are fighting over the stores.",
+"why": "says the fishing failed; TRADE makes fish and freshwater catch and exports river fish, salted fish, smoked seafood",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 87,
+"fn": "famineFoodIsPower"
+}
+},
+{
+"id": "03831",
+"sev": "MED",
+"n": 1,
+"town": "r2s-indebted-metropolis-0",
+"section": "Summary/Overview",
+"fold": "Arcane Senate took the loans and Arcane Senate is repaying them: a distinction that has not gone unnoticed and is not forgotten.",
+"text": "Arcane Senate took the loans and Arcane Senate is repaying them: a distinction that has not gone unnoticed and is not forgotten.",
+"why": "both slots filled with Arcane Senate, so 'a distinction that has not gone unnoticed' contrasts a body with itself",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 127,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "21220",
+"sev": "MED",
+"n": 1,
+"town": "r2s-insurgency-metropolis-3",
+"section": "Summary/Overview",
+"fold": "The opposition to Ducal Governorship is a patient, well-lawyered thing that means to inherit the settlement intact rather than take it by force, and it is close to being able to.",
+"text": "The opposition to Ducal Governorship is a patient, well-lawyered thing that means to inherit the settlement intact rather than take it by force, and it is close to being able to.",
+"why": "says the opposition means to inherit, not take by force; CRISIS is an insurgency with rebellion contesting authority",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 193,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "00980",
+"sev": "MED",
+"n": 1,
+"town": "r2s-wartime-metropolis-3",
+"section": "Summary/Overview",
+"fold": "<N> is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the crown is paying.",
+"text": "Nanwan is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the crown is paying.",
+"why": "says 'the crown is paying'; GOVERNMENT is a Democratic assembly and lists no royal or crown power",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 228,
+"fn": "PRESSURE_SENTENCES"
+}
+}
+]

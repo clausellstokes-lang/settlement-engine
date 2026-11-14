@@ -1,0 +1,852 @@
+[
+{
+"id": "22767",
+"sev": "HIGH",
+"n": 147,
+"town": "r2r-hamlet-34",
+"section": "Summary/Plot Hooks",
+"fold": "They know who committed a crime the guard is currently investigating.",
+"text": "They know who committed a crime the guard is currently investigating.",
+"why": "a crime the guard is investigating; DEFENCE has no garrison or watch, only a citizen militia",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/hookThemes.js",
+"line": 144,
+"fn": "AUTHORED_HOOK_THEMES"
+}
+},
+{
+"id": "20473",
+"sev": "HIGH",
+"n": 27,
+"town": "r2s-occupied-hamlet-2",
+"section": "Systems/Power",
+"fold": "The elders of the hamlet decide things together, and no lord stands over them.",
+"text": "The elders of the hamlet decide things together, and no lord stands over them.",
+"why": "'no lord stands over them' under Occupation: a Dominant Occupation Authority does",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/powerSiblings.js",
+"line": 104,
+"fn": "GOV_DESC_OF_UNNAMED_SEAT"
+}
+},
+{
+"id": "00828",
+"sev": "MED",
+"n": 340,
+"town": "r2r-village-21",
+"section": "Summary/Overview",
+"fold": "<N> has started repaying the debt in coin.",
+"text": "Eberhard Huber has started repaying the debt in coin.",
+"why": "'has started repaying the debt in coin'; the other says it has been repaid in small amounts ever since",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 2201,
+"fn": "STRESS_ECONOMIC_EFFECTS.old_debt"
+}
+},
+{
+"id": "00669",
+"sev": "MED",
+"n": 320,
+"town": "r2r-village-21",
+"section": "Summary/Overview",
+"fold": "<N> has asked <N> for a vote against <N>'s own interests.",
+"text": "Osterhild Lehmann has asked Severin Wolf for a vote against Severin Wolf's own interests.",
+"why": "asks the headman for 'a vote'; Headman's Authority holds no votes",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 2200,
+"fn": "STRESS_ECONOMIC_EFFECTS.old_debt"
+}
+},
+{
+"id": "01204",
+"sev": "MED",
+"n": 312,
+"town": "r2s-under_siege-hamlet-1",
+"section": "Summary/Overview",
+"fold": "<N> lost the last contract to <N> by a single vote, and has learned who cast it.",
+"text": "Radmila Bogdanov lost the last contract to Konstantin Sokolov by a single vote, and has learned who cast it.",
+"why": "contract lost 'by a single vote'; a Headman's Authority has no voting body",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 2041,
+"fn": "STRESS_ECONOMIC_EFFECTS.peer_rivalry"
+}
+},
+{
+"id": "00699",
+"sev": "MED",
+"n": 307,
+"town": "r2r-thorp-24",
+"section": "Summary/Overview",
+"fold": "<N> has begun teaching <N>'s methods as <N>'s own.",
+"text": "Fabia Varro has begun teaching Minucia Aquila's methods as Fabia Varro's own.",
+"why": "Fabia teaches Minucia's methods; other lines make Fabia the teacher whose methods Minucia uses",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 2072,
+"fn": "STRESS_ECONOMIC_EFFECTS.mentor_legacy"
+}
+},
+{
+"id": "22432",
+"sev": "MED",
+"n": 299,
+"town": "r2r-village-21",
+"section": "Summary/Overview",
+"fold": "The vote <N> needs from <N> comes up next week, and <N> has named a new price.",
+"text": "The vote Eberhard Huber needs from Yolanda Krause comes up next week, and Yolanda Krause has named a new price.",
+"why": "'the vote ... comes up next week'; a Headman's Authority has no voting body",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 2102,
+"fn": "STRESS_ECONOMIC_EFFECTS.mutual_leverage"
+}
+},
+{
+"id": "01167",
+"sev": "MED",
+"n": 297,
+"town": "r2s-occupied-thorp-1",
+"section": "World/Relationships",
+"fold": "<N> learned the work at <N>'s side for # years.",
+"text": "Anusaya Bhat learned the work at Shashi Bajaj's side for seven years.",
+"why": "Anusaya learned at Shashi's side; the other line says Anusaya took Shashi in as apprentice",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 2055,
+"fn": "STRESS_ECONOMIC_EFFECTS.mentor_legacy"
+}
+},
+{
+"id": "03130",
+"sev": "MED",
+"n": 236,
+"town": "r2s-under_siege-town-1",
+"section": "Summary/Plot Hooks",
+"fold": "A traveller passed through asking which nights their door is left unbarred, and was gone by morning.",
+"text": "A traveller passed through asking which nights their door is left unbarred, and was gone by morning.",
+"why": "a traveller passed through and left by morning; Under Siege no one passes through",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/hookThemes.js",
+"line": 266,
+"fn": "AUTHORED_HOOK_THEMES"
+}
+},
+{
+"id": "00438",
+"sev": "MED",
+"n": 233,
+"town": "r2s-under_siege-hamlet-1",
+"section": "Summary/Overview",
+"fold": "<N> and <N> will both present proposals at the next council session.",
+"text": "Konstantin Sokolov and Evtim Bogdanov will both present proposals at the next council session.",
+"why": "'next council session'; GOVERNMENT is a Headman's Authority with no council",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 2040,
+"fn": "STRESS_ECONOMIC_EFFECTS.peer_rivalry"
+}
+},
+{
+"id": "02506",
+"sev": "MED",
+"n": 219,
+"town": "r2s-under_siege-town-1",
+"section": "Summary/Plot Hooks",
+"fold": "A cousin has arrived to stay without warning, and spends every day watching # particular house.",
+"text": "A cousin has arrived to stay without warning, and spends every day watching one particular house.",
+"why": "a cousin has just arrived to stay; Under Siege no one arrives by road",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/hookThemes.js",
+"line": 296,
+"fn": "AUTHORED_HOOK_THEMES"
+}
+},
+{
+"id": "22583",
+"sev": "MED",
+"n": 203,
+"town": "r2r-thorp-41",
+"section": "Summary/Plot Hooks",
+"fold": "Their oldest friend has started paying for drinks with new silver and will not say where it came from.",
+"text": "Their oldest friend has started paying for drinks with new silver and will not say where it came from.",
+"why": "Paying for drinks presumes a tavern; tag reaches thorps (this one of 22) with no inn",
+"kinds": [
+"LACKS",
+"TAG"
+],
+"writer": {
+"file": "src/domain/hookThemes.js",
+"line": 269,
+"fn": "AUTHORED_HOOK_THEMES"
+}
+},
+{
+"id": "20322",
+"sev": "MED",
+"n": 189,
+"town": "r2s-under_siege-hamlet-0",
+"section": "Summary/Overview",
+"fold": "The council has asked <N> and <N> to audit each other's accounts.",
+"text": "The council has asked Gaius Corvinus and Egeria Varro to audit each other's accounts.",
+"why": "'the council has asked'; GOVERNMENT is a Headman's Authority alone, no council",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 2171,
+"fn": "STRESS_ECONOMIC_EFFECTS.genuine_respect"
+}
+},
+{
+"id": "22560",
+"sev": "MED",
+"n": 189,
+"town": "r2r-thorp-58",
+"section": "Summary/Plot Hooks",
+"fold": "Their best customer owes them a year's takings and has started avoiding their street.",
+"text": "Their best customer owes them a year's takings and has started avoiding their street.",
+"why": "best customer, a year's takings and 'their street' in a thorp of 7 with no market",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/hookThemes.js",
+"line": 285,
+"fn": "AUTHORED_HOOK_THEMES"
+}
+},
+{
+"id": "20646",
+"sev": "MED",
+"n": 160,
+"town": "r2s-under_siege-town-0",
+"section": "Summary/Plot Hooks",
+"fold": "The goods are still arriving.",
+"text": "The goods are still arriving.",
+"why": "'the goods are still arriving'; Under Siege, imports cover None, nothing comes in",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/hookThemes.js",
+"line": 210,
+"fn": "AUTHORED_HOOK_THEMES"
+}
+},
+{
+"id": "03018",
+"sev": "MED",
+"n": 137,
+"town": "r2s-under_siege-town-2",
+"section": "Summary/Plot Hooks",
+"fold": "A shipment they weren't expecting arrived and is now in their warehouse.",
+"text": "A shipment they weren't expecting arrived and is now in their warehouse.",
+"why": "an unexpected shipment arrived; Under Siege and trade access isolated, no shipment comes in",
+"kinds": [
+"STATE",
+"TAG"
+],
+"writer": {
+"file": "src/domain/hookThemes.js",
+"line": 208,
+"fn": "AUTHORED_HOOK_THEMES"
+}
+},
+{
+"id": "02892",
+"sev": "MED",
+"n": 112,
+"town": "r2s-occupied-hamlet-0",
+"section": "Summary/Plot Hooks",
+"fold": "A petition they set aside has gathered names from # their street, and the people who signed it want an answer this week.",
+"text": "A petition they set aside has gathered names from half their street, and the people who signed it want an answer this week.",
+"why": "petition signed by 'half their street' in a hamlet of 20",
+"kinds": [
+"LACKS",
+"TAG"
+],
+"writer": {
+"file": "src/domain/hookThemes.js",
+"line": 152,
+"fn": "AUTHORED_HOOK_THEMES"
+}
+},
+{
+"id": "28616",
+"sev": "MED",
+"n": 101,
+"town": "r2s-occupied-city-2",
+"section": "Systems/Power",
+"fold": "Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.",
+"text": "Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.",
+"why": "watch keeps order and grows surer of its authority; GOVERNMENT has Military/Guard Suppressed under occupation",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/data/powerSiblings.js",
+"line": 87,
+"fn": "FACTION_DESC_SIBLINGS"
+}
+},
+{
+"id": "16774",
+"sev": "MED",
+"n": 89,
+"town": "r2r-hamlet-57",
+"section": "World/NPCs",
+"fold": "Runs a smaller house behind the leading # in quiet times.",
+"text": "Runs a smaller house behind the leading one in quiet times.",
+"why": "'a smaller house behind the leading one'; tag x89 reaches hamlets with no trading houses",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/generators/npcStructure.js",
+"line": 300,
+"fn": "reg"
+}
+},
+{
+"id": "20685",
+"sev": "MED",
+"n": 81,
+"town": "r2r-thorp-16",
+"section": "Summary/Plot Hooks",
+"fold": "The guard captain has a file.",
+"text": "The guard captain has a file.",
+"why": "'The guard captain has a file'; DEFENCE: garrison none, watch none; only a household levy",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/hookThemes.js",
+"line": 239,
+"fn": "AUTHORED_HOOK_THEMES"
+}
+},
+{
+"id": "22757",
+"sev": "MED",
+"n": 81,
+"town": "r2r-thorp-16",
+"section": "Summary/Plot Hooks",
+"fold": "They know because someone who works for the guard captain also works for them.",
+"text": "They know because someone who works for the guard captain also works for them.",
+"why": "'someone who works for the guard captain'; DEFENCE has no garrison or watch, so no guard captain",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/hookThemes.js",
+"line": 239,
+"fn": "AUTHORED_HOOK_THEMES"
+}
+},
+{
+"id": "00183",
+"sev": "MED",
+"n": 80,
+"town": "r2s-occupied-town-2",
+"section": "Summary/Plot Hooks",
+"fold": "# guards have gone missing in the same district on night patrol.",
+"text": "Three guards have gone missing in the same district on night patrol.",
+"why": "three guards lost in the same district; a town of 310 has no districts",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/hookThemes.js",
+"line": 164,
+"fn": "AUTHORED_HOOK_THEMES"
+}
+},
+{
+"id": "02676",
+"sev": "MED",
+"n": 71,
+"town": "r2s-occupied-hamlet-1",
+"section": "Systems/Power",
+"fold": "A headman settles disputes and gives the orders here.",
+"text": "A headman settles disputes and gives the orders here.",
+"why": "headman 'gives the orders here' under Occupation; the Occupation Authority stands equal and stability Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/powerSiblings.js",
+"line": 105,
+"fn": "GOV_DESC_OF_UNNAMED_SEAT"
+}
+},
+{
+"id": "17103",
+"sev": "MED",
+"n": 51,
+"town": "r2s-politically_fractured-thorp-1",
+"section": "World/NPCs",
+"fold": "Secret: Has been quietly shorting investments they publicly recommend, profiting from collapse",
+"text": "Secret: Has been quietly shorting investments they publicly recommend, profiting from collapse",
+"why": "'shorting investments they publicly recommend'; tag reaches th, here a thorp of 10 with no bank, exchange or merchant house",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1029,
+"fn": "NPC_CRIMINAL_SECRETS_BY_HOLDER.economic_betrayal"
+}
+},
+{
+"id": "28599",
+"sev": "MED",
+"n": 46,
+"town": "r2r-town-37",
+"section": "Summary/Plot Hooks",
+"fold": "Weapons from the armoury have been disappearing in small quantities for months.",
+"text": "Weapons from the armoury have been disappearing in small quantities for months.",
+"why": "Weapons go missing from the armoury; HOUSES has no armoury or garrison",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/hookThemes.js",
+"line": 165,
+"fn": "AUTHORED_HOOK_THEMES"
+}
+},
+{
+"id": "03139",
+"sev": "MED",
+"n": 44,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Summary/Plot Hooks",
+"fold": "A valuable cargo was reported lost at sea.",
+"text": "A valuable cargo was reported lost at sea.",
+"why": "cargo lost at sea; trade access is river, terrain plains, no sea",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/hookThemes.js",
+"line": 214,
+"fn": "AUTHORED_HOOK_THEMES"
+}
+},
+{
+"id": "23160",
+"sev": "MED",
+"n": 37,
+"town": "r2s-under_siege-town-2",
+"section": "Systems/Power",
+"fold": "Town watch; it enforces ordinances, manages disorder, and reports to the council.",
+"text": "Town watch; it enforces ordinances, manages disorder, and reports to the council.",
+"why": "watch reports to the council; GOVERNMENT is a Feudal Appointee and lists no council",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/powerSiblings.js",
+"line": 85,
+"fn": "FACTION_DESC_SIBLINGS"
+}
+},
+{
+"id": "14612",
+"sev": "MED",
+"n": 36,
+"town": "r2s-occupied-hamlet-3",
+"section": "Systems/Resources",
+"fold": "No livestock reaches the dairy farmer.",
+"text": "No livestock reaches the dairy farmer.",
+"why": "'no livestock reaches the dairy farmer', yet the farmer keeps cattle or goats and the hamlet has common grazing",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/faceHonorifics.js",
+"line": 40,
+"fn": "FACE_HONORIFICS.the dairy farmer"
+}
+},
+{
+"id": "10338",
+"sev": "MED",
+"n": 29,
+"town": "r2r-city-31",
+"section": "World/NPCs",
+"fold": "Heads the casters in quiet times; their place is secure and their spells are in demand.",
+"text": "Heads the casters in quiet times; their place is secure and their spells are in demand.",
+"why": "says the casters' place is secure and spells in demand; GOVERNMENT lists Arcane Orders as Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/npcStructure.js",
+"line": 451,
+"fn": "reg"
+}
+},
+{
+"id": "21114",
+"sev": "MED",
+"n": 20,
+"town": "r2s-occupied-metropolis-0",
+"section": "Summary/Plot Hooks",
+"fold": "The new play mocks someone powerful by another name, and the house is full every night.",
+"text": "The new play mocks someone powerful by another name, and the house is full every night.",
+"why": "Full house every night, yet safety is Controlled — Occupation Curfew",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/personHooksByTitle.js",
+"line": 78,
+"fn": "PERSON_HOOKS_BY_TITLE.the theatre manager"
+}
+},
+{
+"id": "27051",
+"sev": "MED",
+"n": 19,
+"town": "r2s-indebted-village-2",
+"section": "World/NPCs",
+"fold": "Wants Show the rest of Merchant Guilds that <N> can be wrong, without ever saying so aloud.",
+"text": "Wants Show the rest of Merchant Guilds that Giselbert Schneider can be wrong, without ever saying so aloud.",
+"why": "'the rest of Merchant Guilds' makes Giselbert Schneider a guild member; 02086 makes him mine captain and Headman of the rival power",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/goalFamilies.js",
+"line": 201,
+"fn": "GOAL_FAMILY_LINES"
+}
+},
+{
+"id": "16778",
+"sev": "MED",
+"n": 18,
+"town": "r2s-religious_conversion-hamlet-0",
+"section": "World/NPCs",
+"fold": "Runs a smaller house while money is short and the bigger houses take more of the trade.",
+"text": "Runs a smaller house while money is short and the bigger houses take more of the trade.",
+"why": "presumes 'the bigger houses' taking trade; hamlet of 80 has one pawnbroker and no trading houses",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/npcStructure.js",
+"line": 284,
+"fn": "reg"
+}
+},
+{
+"id": "05716",
+"sev": "MED",
+"n": 18,
+"town": "r2s-religious_conversion-hamlet-0",
+"section": "World/NPCs",
+"fold": "Constraint: The work the big houses leave alone is the work that pays least.",
+"text": "Constraint: The work the big houses leave alone is the work that pays least.",
+"why": "'the big houses' do not exist in a hamlet of 80",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/npcStructure.js",
+"line": 286,
+"fn": "reg"
+}
+},
+{
+"id": "12589",
+"sev": "MED",
+"n": 17,
+"town": "r2r-village-48",
+"section": "World/NPCs",
+"fold": "Leads the faith while rivals fight over the seat, and both sides want its blessing.",
+"text": "Leads the faith while rivals fight over the seat, and both sides want its blessing.",
+"why": "rivals fighting over the seat; crisis is Infiltrated not succession, and 10846 says Household Council outweighs everyone wanting its place",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/npcStructure.js",
+"line": 341,
+"fn": "reg"
+}
+},
+{
+"id": "21278",
+"sev": "MED",
+"n": 15,
+"town": "r2s-plague_onset-thorp-0",
+"section": "Summary/Plot Hooks",
+"fold": "The person who settled every quarrel here has died, and # neighbours both expect to take their place.",
+"text": "The person who settled every quarrel here has died, and two neighbours both expect to take their place.",
+"why": "the one who settled every quarrel has died; Elder Kenji Wang holds the seat and guides by consensus",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/hookThemes.js",
+"line": 314,
+"fn": "AUTHORED_HOOK_THEMES"
+}
+},
+{
+"id": "24514",
+"sev": "MED",
+"n": 8,
+"town": "r2s-monster_pressure-metropolis-0",
+"section": "World/NPCs",
+"fold": "Wants Find a second supplier of precious metals, so # lost cart cannot stop the work at the banking district.",
+"text": "Wants Find a second supplier of precious metals, so one lost cart cannot stop the work at the banking district.",
+"why": "presumes a supplier of precious metals; TRADE imports none and 14222 says gold/silver ore is not brought in",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/goalFamilies.js",
+"line": 433,
+"fn": "GOAL_FAMILY_LINES"
+}
+},
+{
+"id": "22483",
+"sev": "MED",
+"n": 6,
+"town": "r2r-city-3",
+"section": "World/Relationships",
+"fold": "The warehouse keeps # inventories, and only # is shown to the customs house.",
+"text": "The warehouse keeps two inventories, and only one is shown to the customs house.",
+"why": "an inventory is shown to the customs house; HOUSES has no customs house",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1661,
+"fn": "STRESS_ECONOMIC_EFFECTS.econ_crim_blur"
+}
+},
+{
+"id": "02528",
+"sev": "MED",
+"n": 6,
+"town": "r2r-city-3",
+"section": "Summary/Overview",
+"fold": "A customs officer has asked <N> for the names of every supplier.",
+"text": "A customs officer has asked Photios Glabas for the names of every supplier.",
+"why": "a customs officer demands supplier names; HOUSES has no customs house",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1678,
+"fn": "STRESS_ECONOMIC_EFFECTS.econ_crim_blur"
+}
+},
+{
+"id": "03038",
+"sev": "MED",
+"n": 4,
+"town": "r2s-occupied-town-0",
+"section": "Systems/Power",
+"fold": "A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them.",
+"text": "A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them.",
+"why": "calls Merchant Guilds a few traders who come on market days; HOUSES has resident Merchant guilds (3-8) and 02819 has merchants report to it",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/powerSiblings.js",
+"line": 91,
+"fn": "FACTION_DESC_SIBLINGS"
+}
+},
+{
+"id": "00899",
+"sev": "MED",
+"n": 3,
+"town": "r2s-wartime-town-3",
+"section": "World/Relationships",
+"fold": "<N> hired <N>'s company after the last caravan was lost.",
+"text": "Hedwig Maier hired Ignatz Schröder's company after the last caravan was lost.",
+"why": "Hedwig hires Ignatz Schröder's company; DEFENCE hired: none, and Ignatz runs the town watch, not a company",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1810,
+"fn": "STRESS_ECONOMIC_EFFECTS.econ_mil_contract"
+}
+},
+{
+"id": "20323",
+"sev": "MED",
+"n": 3,
+"town": "r2s-wartime-town-3",
+"section": "Summary/Overview",
+"fold": "The council wants <N>'s company under the watch's command.",
+"text": "The council wants Ignatz Schröder's company under the watch's command.",
+"why": "wants Ignatz Schröder's company put under the watch, but Ignatz Schröder runs the town watch",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1825,
+"fn": "STRESS_ECONOMIC_EFFECTS.econ_mil_contract"
+}
+},
+{
+"id": "01624",
+"sev": "MED",
+"n": 3,
+"town": "r2s-famine-city-1",
+"section": "World/Relationships",
+"fold": "<N>'s soldiers wear <N>'s colours on the road and take <N>'s orders without question.",
+"text": "Asger Yngvarsson's soldiers wear Mord Torvaldsson's colours on the road and take Mord Torvaldsson's orders without question.",
+"why": "a hired company of soldiers under contract; DEFENCE hired: none and HOUSES has no mercenaries or hired blades",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1808,
+"fn": "STRESS_ECONOMIC_EFFECTS.econ_mil_contract"
+}
+},
+{
+"id": "02650",
+"sev": "MED",
+"n": 3,
+"town": "r2s-famine-city-1",
+"section": "Summary/Overview",
+"fold": "A guard from <N>'s company was killed protecting <N>'s cargo.",
+"text": "A guard from Asger Yngvarsson's company was killed protecting Mord Torvaldsson's cargo.",
+"why": "a guard from a hired company; DEFENCE hired: none, no mercenary house",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1823,
+"fn": "STRESS_ECONOMIC_EFFECTS.econ_mil_contract"
+}
+},
+{
+"id": "22409",
+"sev": "MED",
+"n": 2,
+"town": "r2r-hamlet-59",
+"section": "Systems/Power",
+"fold": "The village reeve disagrees.",
+"text": "The village reeve disagrees.",
+"why": "'The village reeve'; a hamlet ruled by Household Council has no reeve",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/powerSiblings.js",
+"line": 43,
+"fn": "BASELINE_CONFLICT_SIBLINGS"
+}
+},
+{
+"id": "26039",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-thorp-1",
+"section": "World/NPCs",
+"fold": "Wants Keep the accounts of the local fence's people balanced, and show them to anyone who asks.",
+"text": "Wants Keep the accounts of the local fence's people balanced, and show them to anyone who asks.",
+"why": "the fence shows its accounts to anyone who asks; the fence is never spoken of aloud",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/goalFamilies.js",
+"line": 339,
+"fn": "GOAL_FAMILY_LINES"
+}
+},
+{
+"id": "26467",
+"sev": "MED",
+"n": 1,
+"town": "r2s-religious_conversion-town-3",
+"section": "World/NPCs",
+"fold": "Wants Learn why people favour Church Council, and do better for Merchant Guilds.",
+"text": "Wants Learn why people favour Church Council, and do better for Merchant Guilds.",
+"why": "presumes people favour Church Council; GOVERNMENT legitimacy is Legitimacy Crisis and Church Council only Minor",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/goalFamilies.js",
+"line": 279,
+"fn": "GOAL_FAMILY_LINES"
+}
+},
+{
+"id": "07549",
+"sev": "MED",
+"n": 1,
+"town": "r2s-indebted-metropolis-0",
+"section": "Summary/Plot Hooks",
+"fold": "Families who lived through it tell it this way: the vacuum is being maintained deliberately by an outside power that benefits from the instability",
+"text": "Families who lived through it tell it this way: the vacuum is being maintained deliberately by an outside power that benefits from the instability",
+"why": "speaks of a power vacuum; CRISIS is debt and Arcane Senate (Strong) holds the seat",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/dossier/plotHooks.js",
+"line": 198,
+"fn": "ECHO_PREFIXES"
+}
+}
+]

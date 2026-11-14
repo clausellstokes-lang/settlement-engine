@@ -21,10 +21,15 @@ for p in packets:
 flags = []; status = {}
 for p in packets:
     # crisis-07's file is on the crisis-06 branch; SUFFIX=-s reads the next model down's calibration branches; FLAGS_DIR reads local files
-    br = 'origin/lane/read-all-2026-11-14-' + ('crisis-06' if p == 'crisis-07' else p) + (os.environ.get('SUFFIX', '') if p.startswith('cal') else '')
+    # READ=2 reads the second read's branches and files (its short last packets are on the branch of the packet before)
+    READ2 = os.environ.get('READ') == '2'
+    ALIAS = {'main-18': 'main-17', 'crisis-08': 'crisis-07', 'cal-05': 'cal-04'} if READ2 else {'crisis-07': 'crisis-06'}
+    PREFIX = 'origin/lane/read-all-2-2026-11-14-' if READ2 else 'origin/lane/read-all-2026-11-14-'
+    FDIR = 'read-all-2' if READ2 else 'read-all'
+    br = PREFIX + ALIAS.get(p, p) + (os.environ.get('SUFFIX', '') if p.startswith('cal') else '')
     try:
         if os.environ.get('FLAGS_DIR'): txt = io.open('%s/%s.flags.jsonl' % (os.environ['FLAGS_DIR'], p), encoding='utf-8').read()
-        else: txt = subprocess.check_output(['git', '-C', REPO, 'show', '%s:docs/chair/2026-11-14/read-all/%s.flags.jsonl' % (br, p)], stderr=subprocess.DEVNULL).decode('utf-8')
+        else: txt = subprocess.check_output(['git', '-C', REPO, 'show', '%s:docs/chair/2026-11-14/%s/%s.flags.jsonl' % (br, FDIR, p)], stderr=subprocess.DEVNULL).decode('utf-8')
     except (subprocess.CalledProcessError, OSError):
         status[p] = 'NO FILE'; continue
     n = 0; bad = 0; done = ''
@@ -39,10 +44,17 @@ for p in packets:
         t = shown.get((p, i))
         o['text'] = t[1] if t else ''; o['block_town'] = t[0] if t else ''
         o['known_id'] = bool(t) or i == 'HEADER'
+        # the packet builder's own fault (2026-11-14): it split a pill run at every lower-to-upper boundary BEFORE folding names, so a
+        # surname like "MacCarthy" was cut in two: a BROKEN flag on such a fragment is the instrument's artifact, not the page's
+        o['artifact'] = bool(o['kind'] == 'BROKEN' and (re.search(r"\bMac\b|\bMc\b|mid-name|mid name|surname|fragment|split (?:at|across|mid)|cut (?:at|mid|off)|truncat", str(o.get('why', '')), re.I) or re.search(r"\b(?:Mac|Mc)$", o['text'].strip())))
         flags.append(o); n += 1
     status[p] = '%d flags%s%s' % (n, (' · %d unparsed lines' % bad) if bad else '', ' · ' + done if done else ' · NOT DONE')
 json.dump(flags, io.open(OUT + '/flags.all.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
 print('PACKETS:'); [print('  %-10s %s' % (p, status[p])) for p in packets]
+art = [f for f in flags if f['artifact']]
+print('ARTIFACTS OF THE PACKET BUILDER (BROKEN flags on a name it cut): %d, left out below' % len(art))
+flags = [f for f in flags if not f['artifact']]
+json.dump(art, io.open(OUT + '/artifacts.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
 main = [f for f in flags if not f['packet'].startswith('cal')]
 print('FLAGS on the 720: %d · by severity %s · by kind %s · ids unknown %d' % (len(main), dict(collections.Counter(f['sev'] for f in main)), dict(collections.Counter(f['kind'] for f in main)), sum(1 for f in main if not f['known_id'])))
 # ---- one row a sentence

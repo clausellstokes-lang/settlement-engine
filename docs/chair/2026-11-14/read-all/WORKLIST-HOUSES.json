@@ -1,0 +1,1557 @@
+[
+{
+"id": "16646",
+"sev": "HIGH",
+"n": 8,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Systems/Institutions",
+"fold": "River barges run in fleet, some to a schedule and some to order.",
+"text": "River barges run in fleet, some to a schedule and some to order.",
+"why": "barge fleets running on schedule; CRISIS is active siege, nothing moves by water",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 583,
+"fn": "PAIRS"
+}
+},
+{
+"id": "04601",
+"sev": "HIGH",
+"n": 8,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Systems/Institutions",
+"fold": "Bulk freight, passengers, and army supply all move on them through the river network.",
+"text": "Bulk freight, passengers, and army supply all move on them through the river network.",
+"why": "freight, passengers and supply moving through the river network under an active siege",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 583,
+"fn": "PAIRS"
+}
+},
+{
+"id": "29000",
+"sev": "HIGH",
+"n": 8,
+"town": "r2s-mass_migration-town-0",
+"section": "Systems/Institutions",
+"fold": "With no formal government in place, a loose council of leading citizens runs the town.",
+"text": "With no formal government in place, a loose council of leading citizens runs the town.",
+"why": "says no formal government, a loose council rules; GOVERNMENT is Church Council (Dominant) and 00999 says it governs",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 758,
+"fn": "PAIRS"
+}
+},
+{
+"id": "15793",
+"sev": "HIGH",
+"n": 1,
+"town": "r2s-politically_fractured-city-2",
+"section": "Systems/Outlook",
+"fold": "Population of # with only # craft institution.",
+"text": "Population of 5,280 with only 1 craft institution.",
+"why": "'only 1 craft institution'; HOUSES lists Craft guilds (30-80), blacksmiths, tanner, dyer, potter, brewery, fuller, ropemaker and more",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/geographyData.js",
+"line": 560,
+"fn": "TERRAIN_DATA.institutionModifiers"
+}
+},
+{
+"id": "14115",
+"sev": "MED",
+"n": 84,
+"town": "r2s-under_siege-city-1",
+"section": "Systems/Institutions",
+"fold": "Multiple inn districts catering to merchants, travelers, and long-term visitors.",
+"text": "Multiple inn districts catering to merchants, travelers, and long-term visitors.",
+"why": "inn districts cater to merchants and travellers; under siege no one arrives by road; also districts in a place of 2679",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 350,
+"fn": "INSTITUTION_FAMILIES.shared"
+}
+},
+{
+"id": "05285",
+"sev": "MED",
+"n": 83,
+"town": "r2s-under_siege-city-2",
+"section": "Systems/Institutions",
+"fold": "Commercial-scale ale and beer production supplying taverns and regional distribution.",
+"text": "Commercial-scale ale and beer production supplying taverns and regional distribution.",
+"why": "ale and beer supply regional distribution, under a siege where nothing is let through the gates (20696)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 710,
+"fn": "INSTITUTION_FAMILIES.shared"
+}
+},
+{
+"id": "15651",
+"sev": "MED",
+"n": 82,
+"town": "r2s-under_siege-city-2",
+"section": "Systems/Institutions",
+"fold": "Permanent markets in more than # square, each serving its own #.",
+"text": "Permanent markets in more than one square, each serving its own quarter.",
+"why": "permanent markets in every quarter, under an active siege with a 76% food deficit",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 351,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "17954",
+"sev": "MED",
+"n": 67,
+"town": "r2s-under_siege-city-3",
+"section": "Systems/Institutions",
+"fold": "Several inn districts, given over to merchants, travellers, and those who stay long.",
+"text": "Several inn districts, given over to merchants, travellers, and those who stay long.",
+"why": "inn districts given over to merchants and travellers; under siege no one arrives by road",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 356,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "02662",
+"sev": "MED",
+"n": 64,
+"town": "r2s-occupied-metropolis-3",
+"section": "Systems/Institutions",
+"fold": "A guild of professional cartographers producing regional maps, sea charts, property surveys, and military reconnaissance maps.",
+"text": "A guild of professional cartographers producing regional maps, sea charts, property surveys, and military reconnaissance maps.",
+"why": "Cartographers make sea charts; town is Hills at a crossroads with no coast or water access",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 888,
+"fn": "INSTITUTION_FAMILIES.shared"
+}
+},
+{
+"id": "10284",
+"sev": "MED",
+"n": 64,
+"town": "r2s-plague_onset-city-2",
+"section": "Systems/Institutions",
+"fold": "He sells by the barrel to taverns and by the bottle to the rich.",
+"text": "He sells by the barrel to taverns and by the bottle to the rich.",
+"why": "vintner sells wine by barrel and bottle; page says no grapes reach the vintner and none are brought in",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 662,
+"fn": "PAIRS"
+}
+},
+{
+"id": "28851",
+"sev": "MED",
+"n": 64,
+"town": "r2s-plague_onset-city-2",
+"section": "Systems/Institutions",
+"fold": "Where no vine grows, he imports and blends instead.",
+"text": "Where no vine grows, he imports and blends instead.",
+"why": "where no vine grows the vintner imports; page says grapes are needed and not brought in",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 662,
+"fn": "PAIRS"
+}
+},
+{
+"id": "15712",
+"sev": "MED",
+"n": 60,
+"town": "r2s-plague_onset-village-2",
+"section": "Systems/Economics",
+"fold": "Pilgrimage & Holy SitesReligion & civic✓ Running",
+"text": "Pilgrimage & Holy SitesReligion & civic✓ Running",
+"why": "Pilgrimage running; isolated village under Plague, no exports, people do not travel",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 1298,
+"fn": "SUPPLY_CHAIN_NEEDS.services"
+}
+},
+{
+"id": "09333",
+"sev": "MED",
+"n": 59,
+"town": "r2s-under_siege-city-2",
+"section": "Systems/Institutions",
+"fold": "Foreign traders attend, and credit by letter is taken.",
+"text": "Foreign traders attend, and credit by letter is taken.",
+"why": "foreign traders attend the fairs, under a siege where the gates are shut and nothing is let through",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 353,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "16857",
+"sev": "MED",
+"n": 58,
+"town": "r2s-under_siege-town-2",
+"section": "Systems/Institutions",
+"fold": "Salted, smoked and dried fish come in by cart, sold by weight and inspected for rot.",
+"text": "Salted, smoked and dried fish come in by cart, sold by weight and inspected for rot.",
+"why": "fish come in by cart; under siege nothing comes in by road",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 2032,
+"fn": "DESC_VARIANT_SIBLINGS"
+}
+},
+{
+"id": "14069",
+"sev": "MED",
+"n": 55,
+"town": "r2s-famine-city-2",
+"section": "Systems/Institutions",
+"fold": "Much of the region's building stone was cut here.",
+"text": "Much of the region's building stone was cut here.",
+"why": "quarry cuts much of the region's building stone, yet TRADE lists Stone among the city's imports",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 202,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "28978",
+"sev": "MED",
+"n": 54,
+"town": "r2r-city-44",
+"section": "Systems/Institutions",
+"fold": "Wine pressed and matured, from local fruit or imported must, sold in bulk to the taverns and direct to wealthy houses.",
+"text": "Wine pressed and matured, from local fruit or imported must, sold in bulk to the taverns and direct to wealthy houses.",
+"why": "wine pressed from local fruit or imported must; same page says no grapes reach the vintner, and TRADE imports none",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 663,
+"fn": "PAIRS"
+}
+},
+{
+"id": "11522",
+"sev": "MED",
+"n": 54,
+"town": "r2s-wartime-town-1",
+"section": "Systems/Institutions",
+"fold": "In a region without vines, the vintner turns importer and blender.",
+"text": "In a region without vines, the vintner turns importer and blender.",
+"why": "says the vintner turns importer and blender; 14347 says grapes are needed and not brought in",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 663,
+"fn": "PAIRS"
+}
+},
+{
+"id": "17955",
+"sev": "MED",
+"n": 50,
+"town": "r2s-under_siege-city-0",
+"section": "Systems/Institutions",
+"fold": "Several large grain stores feed the city between them.",
+"text": "Several large grain stores feed the city between them.",
+"why": "grain stores 'feed the city'; tag has F, and here food deficit 20% under siege",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 360,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "06002",
+"sev": "MED",
+"n": 49,
+"town": "r2s-under_siege-city-2",
+"section": "Systems/Institutions",
+"fold": "Covered stalls under the wardens' eye, selling salt fish and dried fish carted in by the barrel, each checked for rot.",
+"text": "Covered stalls under the wardens' eye, selling salt fish and dried fish carted in by the barrel, each checked for rot.",
+"why": "fish 'carted in by the barrel' to the stalls; Under Siege nothing comes in by road",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 2036,
+"fn": "DESC_VARIANT_SIBLINGS"
+}
+},
+{
+"id": "21670",
+"sev": "MED",
+"n": 46,
+"town": "r2s-under_siege-metropolis-2",
+"section": "Systems/Institutions",
+"fold": "The region's chief religious authority sits here, and the faithful travel to it.",
+"text": "The region's chief religious authority sits here, and the faithful travel to it.",
+"why": "says the faithful travel to it; CRISIS is Under Siege, gates closed, and 15719 marks pilgrimage Impaired",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 477,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "20982",
+"sev": "MED",
+"n": 45,
+"town": "r2s-plague_onset-city-2",
+"section": "Systems/Institutions",
+"fold": "The market wardens keep a roofed fish market where carted barrels of salt fish are weighed out and inspected before sale.",
+"text": "The market wardens keep a roofed fish market where carted barrels of salt fish are weighed out and inspected before sale.",
+"why": "carted barrels of salt fish weighed out; TRADE imports list no fish",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 2040,
+"fn": "DESC_VARIANT_SIBLINGS"
+}
+},
+{
+"id": "18556",
+"sev": "MED",
+"n": 43,
+"town": "r2s-plague_onset-city-3",
+"section": "Systems/Institutions",
+"fold": "Standing markets in more than #, open every day.",
+"text": "Standing markets in more than one quarter, open every day.",
+"why": "markets open every day as usual under plague, safety Dangerous - Plague Unrest",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 349,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "28847",
+"sev": "MED",
+"n": 43,
+"town": "r2s-under_siege-metropolis-0",
+"section": "Systems/Institutions",
+"fold": "Where foreign merchant agents gather, trade disputes are arbitrated, and commodities change hands.",
+"text": "Where foreign merchant agents gather, trade disputes are arbitrated, and commodities change hands.",
+"why": "foreign merchant agents gather and commodities change hands; CRISIS Under Siege, International trade center critically impaired, nothing comes in by road",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 461,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "10137",
+"sev": "MED",
+"n": 42,
+"town": "r2s-under_siege-town-2",
+"section": "Systems/Institutions",
+"fold": "Ground beside each house of worship, with burial beyond the gate where a ground has filled its own.",
+"text": "Ground beside each house of worship, with burial beyond the gate where a ground has filled its own.",
+"why": "burial beyond the gate; DEFENCE walls none, so no gate (tag reaches unwalled towns)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 730,
+"fn": "PAIRS"
+}
+},
+{
+"id": "04663",
+"sev": "MED",
+"n": 41,
+"town": "r2s-under_siege-town-0",
+"section": "Systems/Economics",
+"fold": "Camel Caravan Trade",
+"text": "Camel Caravan Trade",
+"why": "Camel Caravan Trade in a Norse riverside town; TRADE has no camels and the siege has cut the roads",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 878,
+"fn": "SUPPLY_CHAIN_NEEDS.services"
+}
+},
+{
+"id": "02534",
+"sev": "MED",
+"n": 40,
+"town": "r2s-plague_onset-metropolis-0",
+"section": "Systems/Defense",
+"fold": "A defence built in layers: outer wall, inner wall, and the ring about the citadel, with garrisons and gatehouses throughout.",
+"text": "A defence built in layers: outer wall, inner wall, and the ring about the citadel, with garrisons and gatehouses throughout.",
+"why": "layered defence ending in a ring about the citadel; DEFENCE and HOUSES have no Citadel",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 1287,
+"fn": "PAIRS"
+}
+},
+{
+"id": "16366",
+"sev": "MED",
+"n": 40,
+"town": "r2s-recently_betrayed-town-0",
+"section": "Systems/Economics",
+"fold": "Refined ingots",
+"text": "Refined ingots",
+"why": "names refined ingots as made here; HOUSES has no Smelter or Mint",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 377,
+"fn": "SUPPLY_CHAIN_NEEDS.intermediateGoods"
+}
+},
+{
+"id": "06832",
+"sev": "MED",
+"n": 39,
+"town": "r2s-under_siege-village-2",
+"section": "Systems/Resources",
+"fold": "Draws on: mountain forest, logging routes",
+"text": "Draws on: mountain forest, logging routes",
+"why": "draws on mountain forest and logging routes; the other says the timber goes unworked, no house takes it up",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/resourceChains.js",
+"line": 215,
+"fn": "RESOURCE_CHAINS.dependsOn"
+}
+},
+{
+"id": "15890",
+"sev": "MED",
+"n": 38,
+"town": "r2s-under_siege-city-3",
+"section": "Systems/Institutions",
+"fold": "Powerful political force.",
+"text": "Powerful political force.",
+"why": "merchant guilds called a powerful political force; GOVERNMENT lists no Merchant Guilds power",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 325,
+"fn": "INSTITUTION_FAMILIES.city"
+}
+},
+{
+"id": "15650",
+"sev": "MED",
+"n": 37,
+"town": "r2s-under_siege-city-3",
+"section": "Systems/Institutions",
+"fold": "Permanent market activity in multiple locations.",
+"text": "Permanent market activity in multiple locations.",
+"why": "permanent market activity in multiple locations, under an active siege with a 47% food deficit",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 295,
+"fn": "INSTITUTION_FAMILIES.city"
+}
+},
+{
+"id": "12702",
+"sev": "MED",
+"n": 36,
+"town": "r2s-under_siege-town-2",
+"section": "Systems/Institutions",
+"fold": "Levies charged on all trade in and out by road, collected by officials of crown or town.",
+"text": "Levies charged on all trade in and out by road, collected by officials of crown or town.",
+"why": "levies on all trade in and out by road; under siege nothing moves by road and trade access is isolated",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 595,
+"fn": "PAIRS"
+}
+},
+{
+"id": "11393",
+"sev": "MED",
+"n": 36,
+"town": "r2r-metropolis-14",
+"section": "Systems/Institutions",
+"fold": "Hub for international merchant representatives, trade arbitration, and commodity exchange.",
+"text": "Hub for international merchant representatives, trade arbitration, and commodity exchange.",
+"why": "hub for international merchant representatives and commodity exchange; CRISIS Under Siege cuts every road",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 318,
+"fn": "INSTITUTION_FAMILIES.metropolis"
+}
+},
+{
+"id": "02916",
+"sev": "MED",
+"n": 34,
+"town": "r2s-plague_onset-town-1",
+"section": "Systems/Institutions",
+"fold": "A principal source of the town's trade.",
+"text": "A principal source of the town's trade.",
+"why": "Salt works 'a principal source of the town's trade'; salt is in neither exports nor made-here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 205,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "20983",
+"sev": "MED",
+"n": 33,
+"town": "r2s-under_siege-metropolis-1",
+"section": "Systems/Institutions",
+"fold": "The market wardens keep a roofed fish market where fresh catch and salted barrels are weighed out and inspected before sale.",
+"text": "The market wardens keep a roofed fish market where fresh catch and salted barrels are weighed out and inspected before sale.",
+"why": "fresh catch weighed at the fish market; the other says nobody fishes this year, TRADE imports salted fish (fisheries exhausted)",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 507,
+"fn": "PAIRS"
+}
+},
+{
+"id": "03172",
+"sev": "MED",
+"n": 33,
+"town": "r2r-thorp-58",
+"section": "Systems/Institutions",
+"fold": "A walk of a few miles to the village house of worship for services.",
+"text": "A walk of a few miles to the village house of worship for services.",
+"why": "weekly walk of miles to a village church; under siege enemies surround the thorp",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 934,
+"fn": "INSTITUTION_FAMILIES.thorp"
+}
+},
+{
+"id": "21103",
+"sev": "MED",
+"n": 33,
+"town": "r2s-under_siege-thorp-0",
+"section": "Systems/Institutions",
+"fold": "The nearest house of worship is the village's, a walk of a few miles away for services.",
+"text": "The nearest house of worship is the village's, a walk of a few miles away for services.",
+"why": "services a walk of miles away at the village: under siege, enemies surround the thorp",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 35,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "16534",
+"sev": "MED",
+"n": 33,
+"town": "r2s-under_siege-city-3",
+"section": "Systems/Institutions",
+"fold": "Reports arrive from several roads and are checked against each other before anything is sold.",
+"text": "Reports arrive from several roads and are checked against each other before anything is sold.",
+"why": "reports arrive from several roads; under siege the roads are closed (18102)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 375,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "15765",
+"sev": "MED",
+"n": 33,
+"town": "r2s-famine-city-0",
+"section": "Systems/Institutions",
+"fold": "Politically, a power in their own right.",
+"text": "Politically, a power in their own right.",
+"why": "merchant guilds called a political power; GOVERNMENT lists no guild power",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 355,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "02600",
+"sev": "MED",
+"n": 32,
+"town": "r2s-occupied-city-0",
+"section": "Systems/Institutions",
+"fold": "A force to be reckoned with in politics.",
+"text": "A force to be reckoned with in politics.",
+"why": "calls the merchant guilds a political force; GOVERNMENT powers list no Merchant Guilds",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 354,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "17675",
+"sev": "MED",
+"n": 32,
+"town": "r2s-under_siege-thorp-1",
+"section": "Systems/Institutions",
+"fold": "Services mean a walk of a few miles to the village house of worship.",
+"text": "Services mean a walk of a few miles to the village house of worship.",
+"why": "services mean a walk of miles to another village; under siege, enemies camp around the thorp",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 34,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "04579",
+"sev": "MED",
+"n": 30,
+"town": "r2s-under_siege-metropolis-2",
+"section": "Systems/Institutions",
+"fold": "Building stone from here has gone to every part of the region.",
+"text": "Building stone from here has gone to every part of the region.",
+"why": "its stone 'has gone to every part of the region'; TRADE imports Stone and exports none, Under Siege nothing goes out",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 203,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "28857",
+"sev": "MED",
+"n": 30,
+"town": "r2s-occupied-metropolis-1",
+"section": "Systems/Institutions",
+"fold": "Where the deposits ran deep, the mine is the reason the settlement grew.",
+"text": "Where the deposits ran deep, the mine is the reason the settlement grew.",
+"why": "says the mine is why it grew; founding reason is a counting house, and iron ore is imported as local mines are exhausted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 200,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "02783",
+"sev": "MED",
+"n": 26,
+"town": "r2s-occupied-city-2",
+"section": "Systems/Institutions",
+"fold": "A looser arrangement than a council, but # that works.",
+"text": "A looser arrangement than a council, but one that works.",
+"why": "calls the government a looser arrangement than a council; GOVERNMENT is the Corrupt City Council",
+"kinds": [
+"LACKS",
+"PAIR"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 400,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "12916",
+"sev": "MED",
+"n": 26,
+"town": "r2s-under_siege-city-1",
+"section": "Systems/Defense",
+"fold": "Major forces (hundreds to thousands).",
+"text": "Major forces (hundreds to thousands).",
+"why": "mercenary forces of hundreds to thousands in a city of 2679 people",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 2018,
+"fn": "DESC_VARIANT_SIBLINGS"
+}
+},
+{
+"id": "05276",
+"sev": "MED",
+"n": 23,
+"town": "r2s-famine-metropolis-3",
+"section": "Systems/Institutions",
+"fold": "Commercial brewing of ale and beer supplies the taverns and ships across the region, employing many and consuming grain in bulk.",
+"text": "Commercial brewing of ale and beer supplies the taverns and ships across the region, employing many and consuming grain in bulk.",
+"why": "brewery supplies the region and consumes grain in bulk under Famine, 15% deficit, grain imported",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 1011,
+"fn": "PAIRS"
+}
+},
+{
+"id": "04797",
+"sev": "MED",
+"n": 20,
+"town": "r2s-plague_onset-town-0",
+"section": "Systems/Institutions",
+"fold": "Carts, beasts and walkers wait their turn on the bank.",
+"text": "Carts, beasts and walkers wait their turn on the bank.",
+"why": "carts, beasts and walkers queue at the ferry as usual; town is Quarantined under plague",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 334,
+"fn": "PAIRS"
+}
+},
+{
+"id": "06937",
+"sev": "MED",
+"n": 18,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Systems/Institutions",
+"fold": "Duties are taken here on goods passing through the port or the main roads.",
+"text": "Duties are taken here on goods passing through the port or the main roads.",
+"why": "duties taken on goods passing through port and main roads; siege halts all road and water traffic",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 594,
+"fn": "PAIRS"
+}
+},
+{
+"id": "07216",
+"sev": "MED",
+"n": 18,
+"town": "r2s-under_siege-town-3",
+"section": "Systems/Institutions",
+"fold": "Enough to resupply the caravans and outfit their guards.",
+"text": "Enough to resupply the caravans and outfit their guards.",
+"why": "resupplies the caravans and their guards; under siege no caravan comes or goes by road",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 651,
+"fn": "PAIRS"
+}
+},
+{
+"id": "04796",
+"sev": "MED",
+"n": 17,
+"town": "r2r-town-37",
+"section": "Systems/Institutions",
+"fold": "Carts, beasts and walkers wait their turn at the landing.",
+"text": "Carts, beasts and walkers wait their turn at the landing.",
+"why": "Carts, beasts and walkers queue at the ferry landing; Plague Unrest, people do not gather or travel as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 2061,
+"fn": "DESC_VARIANT_SIBLINGS"
+}
+},
+{
+"id": "04423",
+"sev": "MED",
+"n": 17,
+"town": "r2s-under_siege-city-3",
+"section": "Systems/Institutions",
+"fold": "Bonded freight, route intelligence, armed convoy assembly, and commercial dispute resolution are all conducted here.",
+"text": "Bonded freight, route intelligence, armed convoy assembly, and commercial dispute resolution are all conducted here.",
+"why": "bonded freight and armed convoy assembly conducted at the caravan exchange, under a siege that closed the roads",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 359,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "20218",
+"sev": "MED",
+"n": 15,
+"town": "r2s-plague_onset-city-3",
+"section": "Systems/Institutions",
+"fold": "The city is administered by a standing body of officials, clerks, and ward officers, less formally constituted than a council yet functional all the same.",
+"text": "The city is administered by a standing body of officials, clerks, and ward officers, less formally constituted than a council yet functional all the same.",
+"why": "says city run by officials less formally constituted than a council; GOVERNMENT is a Corrupt City Council",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 401,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "03031",
+"sev": "MED",
+"n": 14,
+"town": "r2s-insurgency-hamlet-0",
+"section": "Systems/Institutions",
+"fold": "A single respected figure acts as de facto authority.",
+"text": "A single respected figure acts as de facto authority.",
+"why": "respected figure simply acknowledged; legitimacy Crisis and the right to the seat is in dispute",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 1065,
+"fn": "INSTITUTION_FAMILIES.shared"
+}
+},
+{
+"id": "02668",
+"sev": "MED",
+"n": 14,
+"town": "r2s-occupied-metropolis-3",
+"section": "Systems/Institutions",
+"fold": "A handful of rich merchant houses monopolise power here; a political post is, in practice, something # purchases.",
+"text": "A handful of rich merchant houses monopolise power here; a political post is, in practice, something one purchases.",
+"why": "Merchant houses 'monopolise power'; the town is Under Occupation with an Occupation Authority, stability Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 293,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "20701",
+"sev": "MED",
+"n": 13,
+"town": "r2s-occupied-metropolis-0",
+"section": "Systems/Institutions",
+"fold": "The guild masters, banded into a consortium, hold the real civic power.",
+"text": "The guild masters, banded into a consortium, hold the real civic power.",
+"why": "Consortium holds the real civic power, but under Occupation the Occupation Authority is equally Significant; tag is O-only",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 405,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "00186",
+"sev": "MED",
+"n": 13,
+"town": "r2s-plague_onset-thorp-2",
+"section": "Systems/Institutions",
+"fold": "# head of household carries the settlement's voice by common habit, with no appointment behind it.",
+"text": "One head of household carries the settlement's voice by common habit, with no appointment behind it.",
+"why": "Everybody defers to the head of household; GOVERNMENT has Legitimacy Crisis, people ignore orders",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 43,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "14950",
+"sev": "MED",
+"n": 13,
+"town": "r2s-plague_onset-thorp-2",
+"section": "Systems/Institutions",
+"fold": "Nobody named them to it; everybody defers to it anyway.",
+"text": "Nobody named them to it; everybody defers to it anyway.",
+"why": "'Everybody defers to it anyway'; legitimacy is in crisis and stability Anxious",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 43,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "03029",
+"sev": "MED",
+"n": 13,
+"town": "r2s-under_siege-thorp-0",
+"section": "Systems/Institutions",
+"fold": "A single household head speaks for the settlement without ever being chosen to.",
+"text": "A single household head speaks for the settlement without ever being chosen to.",
+"why": "a single unchosen household head speaks for the place; GOVERNMENT is an Elder Council (Dominant)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 42,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "03077",
+"sev": "MED",
+"n": 12,
+"town": "r2s-occupied-metropolis-0",
+"section": "Systems/Institutions",
+"fold": "A station costs as much as a merchant house, so only the crown and the great guilds keep them.",
+"text": "A station costs as much as a merchant house, so only the crown and the great guilds keep them.",
+"why": "Names the crown; GOVERNMENT is a Grand Guild Consortium with an Occupation Authority, no monarch",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 520,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "04683",
+"sev": "MED",
+"n": 12,
+"town": "r2s-plague_onset-city-0",
+"section": "Systems/Economics",
+"fold": "Caravan & Overland TradeTrade & entrepôt✓ Running",
+"text": "Caravan & Overland TradeTrade & entrepôt✓ Running",
+"why": "Caravan & Overland Trade shown Running; city is Quarantined under plague",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 836,
+"fn": "SUPPLY_CHAIN_NEEDS.upstreamChains"
+}
+},
+{
+"id": "02643",
+"sev": "MED",
+"n": 12,
+"town": "r2s-famine-city-3",
+"section": "Systems/Institutions",
+"fold": "A governor appointed by king or duke holds sway, and the city runs as a noble fief.",
+"text": "A governor appointed by king or duke holds sway, and the city runs as a noble fief.",
+"why": "governor 'holds sway', city runs as noble fief; Noble Governorship is Minor and has 'only the office'",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 398,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "14325",
+"sev": "MED",
+"n": 11,
+"town": "r2s-under_siege-hamlet-0",
+"section": "Systems/Economics",
+"fold": "Needed, and not brought in: stone (for major construction), metals.",
+"text": "Needed, and not brought in: stone (for major construction), metals.",
+"why": "says metals are not brought in; TRADE imports Iron (weapons)",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/geographyData.js",
+"line": 191,
+"fn": "TERRAIN_DATA.mustImport"
+}
+},
+{
+"id": "02494",
+"sev": "MED",
+"n": 11,
+"town": "r2s-under_siege-metropolis-2",
+"section": "Systems/Institutions",
+"fold": "A consortium of guild masters holds effective civic power.",
+"text": "A consortium of guild masters holds effective civic power.",
+"why": "guild masters 'hold effective civic power'; GOVERNMENT has Grand Guild Consortium Minor, Military/Guard and Order of the Watch Dominant",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 1097,
+"fn": "INSTITUTION_FAMILIES.shared"
+}
+},
+{
+"id": "14953",
+"sev": "MED",
+"n": 11,
+"town": "r2s-recently_betrayed-hamlet-2",
+"section": "Systems/Institutions",
+"fold": "Nobody voted, nobody appointed, everybody accepts it.",
+"text": "Nobody voted, nobody appointed, everybody accepts it.",
+"why": "'everybody accepts it'; stability Shaken — nobody trusts those in charge, legitimacy Legitimacy Crisis",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 92,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "28852",
+"sev": "MED",
+"n": 11,
+"town": "r2s-plague_onset-town-1",
+"section": "Systems/Institutions",
+"fold": "Where nothing official exists, the town's notable men gather and govern by consensus.",
+"text": "Where nothing official exists, the town's notable men gather and govern by consensus.",
+"why": "says notables govern where nothing official exists; GOVERNMENT and 19214: the Corrupt Council governs",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 759,
+"fn": "PAIRS"
+}
+},
+{
+"id": "06984",
+"sev": "MED",
+"n": 11,
+"town": "r2s-famine-metropolis-2",
+"section": "Systems/Institutions",
+"fold": "Each station costs as much as a merchant house, and only the crown or the great guilds keep #.",
+"text": "Each station costs as much as a merchant house, and only the crown or the great guilds keep one.",
+"why": "only the crown keeps a message station; GOVERNMENT is a City-State Council, no crown among the powers",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 1715,
+"fn": "INSTITUTION_FAMILIES.metropolis"
+}
+},
+{
+"id": "03508",
+"sev": "MED",
+"n": 10,
+"town": "r2s-recently_betrayed-city-3",
+"section": "Systems/Institutions",
+"fold": "An elected council backed by a complete administrative staff.",
+"text": "An elected council backed by a complete administrative staff.",
+"why": "'an elected council' governs; GOVERNMENT is a Military City Council seated by the watch commander and Lord Marshal",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 402,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "12014",
+"sev": "MED",
+"n": 9,
+"town": "r2s-occupied-town-2",
+"section": "Systems/Institutions",
+"fold": "It keeps the taverns stocked and sends beer across the region, and stands among the larger buyers of grain and employers in the town.",
+"text": "It keeps the taverns stocked and sends beer across the region, and stands among the larger buyers of grain and employers in the town.",
+"why": "brewery sends beer across the region; TRADE exports: none and 28748 says no export column",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 659,
+"fn": "PAIRS"
+}
+},
+{
+"id": "28580",
+"sev": "MED",
+"n": 9,
+"town": "r2s-politically_fractured-town-0",
+"section": "Systems/Institutions",
+"fold": "Wealthy merchant families hold exclusive civic power; political office is effectively purchased.",
+"text": "Wealthy merchant families hold exclusive civic power; political office is effectively purchased.",
+"why": "says merchant families hold exclusive civic power; Merchant oligarchy is only Minor, Thieves' Guild Significant, stability Fractured",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 1105,
+"fn": "INSTITUTION_FAMILIES.shared"
+}
+},
+{
+"id": "03033",
+"sev": "MED",
+"n": 8,
+"town": "r2r-hamlet-24",
+"section": "Systems/Institutions",
+"fold": "A single trusted figure runs things by common agreement, holding no office.",
+"text": "A single trusted figure runs things by common agreement, holding no office.",
+"why": "trusted figure holding no office by agreement; HOUSES has Village headman, legitimacy Crisis, few accept its rule",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 93,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "13412",
+"sev": "MED",
+"n": 8,
+"town": "r2s-plague_onset-town-0",
+"section": "Systems/Institutions",
+"fold": "Merchants from across the region, and luxuries to be had.",
+"text": "Merchants from across the region, and luxuries to be had.",
+"why": "fair draws merchants from across the region; CRISIS plague, safety Quarantined",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 530,
+"fn": "PAIRS"
+}
+},
+{
+"id": "22677",
+"sev": "MED",
+"n": 7,
+"town": "r2s-plague_onset-town-0",
+"section": "Systems/Institutions",
+"fold": "These men fight in formation on salary, not for treasure.",
+"text": "These men fight in formation on salary, not for treasure.",
+"why": "presents salaried soldiers in town; DEFENCE hired: none, garrison none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 1295,
+"fn": "INSTITUTION_FAMILIES.town"
+}
+},
+{
+"id": "09319",
+"sev": "MED",
+"n": 7,
+"town": "r2r-metropolis-14",
+"section": "Systems/Magic",
+"fold": "Foraging & Smallholding: Blessed stores; divine provision fills the gap",
+"text": "Foraging & Smallholding: Blessed stores; divine provision fills the gap",
+"why": "divine provision fills the gap; STATE food deficit 83%, imports cover None, viable False",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 133,
+"fn": "SUPPLY_CHAIN_NEEDS.resourceSubstitutes"
+}
+},
+{
+"id": "17650",
+"sev": "MED",
+"n": 6,
+"town": "r2s-under_siege-town-1",
+"section": "Systems/Institutions",
+"fold": "Sends out hunting parties over the surrounding country and brings venison, pelts, and game to sell.",
+"text": "Sends out hunting parties over the surrounding country and brings venison, pelts, and game to sell.",
+"why": "hunting parties sent over the surrounding country; Under Siege they cannot leave",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 122,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "02794",
+"sev": "MED",
+"n": 6,
+"town": "r2r-town-37",
+"section": "Systems/Institutions",
+"fold": "A man of the lord's choosing governs, and noble authority overrides whatever the town was accustomed to.",
+"text": "A man of the lord's choosing governs, and noble authority overrides whatever the town was accustomed to.",
+"why": "Noble authority overrides all; the underworld controls vice and officials and the appointee has lost standing",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 286,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "21211",
+"sev": "MED",
+"n": 6,
+"town": "r2s-infiltrated-village-2",
+"section": "Systems/Institutions",
+"fold": "The oldest or most respected resident guides village decisions in the absence of formal authority.",
+"text": "The oldest or most respected resident guides village decisions in the absence of formal authority.",
+"why": "says decisions guided 'in the absence of formal authority'; GOVERNMENT is Headman's Authority, Dominant",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 1084,
+"fn": "INSTITUTION_FAMILIES.village"
+}
+},
+{
+"id": "22676",
+"sev": "MED",
+"n": 6,
+"town": "r2s-famine-town-1",
+"section": "Systems/Institutions",
+"fold": "These are salaried men who fight in formation, not for plunder.",
+"text": "These are salaried men who fight in formation, not for plunder.",
+"why": "presents salaried soldiers in town; DEFENCE hired: none and garrison none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 313,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "03522",
+"sev": "MED",
+"n": 5,
+"town": "r2s-occupied-town-0",
+"section": "Systems/Institutions",
+"fold": "An informal council of prominent citizens manages town affairs in the absence of formal authority.",
+"text": "An informal council of prominent citizens manages town affairs in the absence of formal authority.",
+"why": "says an informal council rules for want of formal authority; GOVERNMENT is Town Council with town hall and courthouse, Occupation Authority Strong",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 1076,
+"fn": "INSTITUTION_FAMILIES.town"
+}
+},
+{
+"id": "02485",
+"sev": "MED",
+"n": 5,
+"town": "r2s-under_siege-hamlet-3",
+"section": "Systems/Institutions",
+"fold": "A common stable for travellers to lodge their mounts; the stableman sees to basic shoeing and feed.",
+"text": "A common stable for travellers to lodge their mounts; the stableman sees to basic shoeing and feed.",
+"why": "a stable for travellers to lodge their mounts; under siege no traveller comes by road",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 80,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "02461",
+"sev": "MED",
+"n": 5,
+"town": "r2s-under_siege-city-1",
+"section": "Systems/Institutions",
+"fold": "A civic council put in by vote, with the full apparatus of office beneath it.",
+"text": "A civic council put in by vote, with the full apparatus of office beneath it.",
+"why": "describes a civic council elected by vote; the city is governed by an Ecclesiastical Council",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 403,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "02785",
+"sev": "MED",
+"n": 4,
+"town": "r2r-town-27",
+"section": "Systems/Institutions",
+"fold": "A lord's appointed official governs; noble authority supersedes local custom.",
+"text": "A lord's appointed official governs; noble authority supersedes local custom.",
+"why": "says the lord's appointee governs and supersedes custom; GOVERNMENT has Feudal Appointee Suppressed, Military/Guard Strong",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 1059,
+"fn": "INSTITUTION_FAMILIES.town"
+}
+},
+{
+"id": "14145",
+"sev": "MED",
+"n": 3,
+"town": "r2s-under_siege-town-0",
+"section": "Systems/Institutions",
+"fold": "Musters hunting parties across the lands about the settlement, selling venison, pelts, and game at market.",
+"text": "Musters hunting parties across the lands about the settlement, selling venison, pelts, and game at market.",
+"why": "hunting parties range the lands and sell at market; Under Siege, and imports say local hunting grounds exhausted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 121,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "23217",
+"sev": "MED",
+"n": 3,
+"town": "r2s-under_siege-town-0",
+"section": "Systems/Institutions",
+"fold": "Traders enrol their goods, hire escorts, and strike joint ventures.",
+"text": "Traders enrol their goods, hire escorts, and strike joint ventures.",
+"why": "traders enrol goods and hire escorts for caravans; under siege (tag siege only) and 29016 says the roads are cut",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 217,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "12766",
+"sev": "MED",
+"n": 2,
+"town": "r2s-under_siege-hamlet-0",
+"section": "Systems/Institutions",
+"fold": "Lodging above the stable and a common table for passing travellers.",
+"text": "Lodging above the stable and a common table for passing travellers.",
+"why": "a common table for passing travellers; under siege nobody passes by road",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 163,
+"fn": "PAIRS"
+}
+},
+{
+"id": "14350",
+"sev": "MED",
+"n": 2,
+"town": "r2r-village-53",
+"section": "Systems/Economics",
+"fold": "Needed, and not brought in: timber (for large vessels), livestock, clay.",
+"text": "Needed, and not brought in: timber (for large vessels), livestock, clay.",
+"why": "timber for vessels needed and not brought in; 07815 lists Shipbuilding Timber among the village's own resources",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/geographyData.js",
+"line": 111,
+"fn": "TERRAIN_DATA.mustImport"
+}
+},
+{
+"id": "12559",
+"sev": "MED",
+"n": 2,
+"town": "r2s-indebted-town-3",
+"section": "Systems/Economics",
+"fold": "Law enforcement, patrol and gate control here depend on iron brought in by magic: no trade road reaches <N>.",
+"text": "Law enforcement, patrol and gate control here depend on iron brought in by magic: no trade road reaches Kamalabari.",
+"why": "names gate control; DEFENCE walls none, no gates on HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/economicData.js",
+"line": 267,
+"fn": "TRADE_DEPENDENCY_NEEDS.svcs"
+}
+},
+{
+"id": "14282",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-57",
+"section": "Systems/Economics",
+"fold": "Needed, and not brought in: quality textiles, fish.",
+"text": "Needed, and not brought in: quality textiles, fish.",
+"why": "fish needed and not brought in, yet HOUSES lists a Fishmonger who buys and sells fish (04642)",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/geographyData.js",
+"line": 293,
+"fn": "TERRAIN_DATA.mustImport"
+}
+}
+]

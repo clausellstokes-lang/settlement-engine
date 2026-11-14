@@ -1,0 +1,2686 @@
+[
+{
+"id": "10714",
+"sev": "HIGH",
+"n": 7,
+"town": "r2s-mass_migration-hamlet-0",
+"section": "Systems/Institutions",
+"fold": "Hiring hall",
+"text": "Hiring hall",
+"why": "lists a Hiring hall finding workers and mercenaries; HOUSES has no hiring hall",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "16764",
+"sev": "MED",
+"n": 343,
+"town": "r2r-thorp-58",
+"section": "Summary/Foundations",
+"fold": "Ruling authorityAdequate",
+"text": "Ruling authorityAdequate",
+"why": "Ruling authority Adequate while stability Critical, legitimacy crisis, governance fractured",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "07065",
+"sev": "MED",
+"n": 314,
+"town": "r2s-under_siege-town-0",
+"section": "Summary/Overview",
+"fold": "Economic ResilienceStrong",
+"text": "Economic ResilienceStrong",
+"why": "Economic Resilience Strong; under siege, prosperity Struggling, deficit 44%, viable False",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10722",
+"sev": "MED",
+"n": 165,
+"town": "r2r-thorp-58",
+"section": "Summary/Overview",
+"fold": "Hoarders",
+"text": "Hoarders",
+"why": "'Price regulators' faction in a thorp of 7 with no market and few offices",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "16110",
+"sev": "MED",
+"n": 149,
+"town": "r2s-infiltrated-thorp-0",
+"section": "Summary/Foundations",
+"fold": "Public legitimacyAdequate",
+"text": "Public legitimacyAdequate",
+"why": "'Public legitimacy Adequate'; GOVERNMENT legitimacy is Tolerated, and 00369 prints Tolerated",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "16001",
+"sev": "MED",
+"n": 138,
+"town": "r2s-famine-thorp-1",
+"section": "Systems/Economics",
+"fold": "Production: # lbs/day+ # imported",
+"text": "Production: 18 lbs/day+ 8 imported",
+"why": "'+ 8 imported': header says imports cover 7",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "15124",
+"sev": "MED",
+"n": 135,
+"town": "r2s-occupied-thorp-1",
+"section": "Systems/Magic",
+"fold": "Nothing structural at <N> depends on arcane work.",
+"text": "Nothing structural at Amarkota depends on arcane work.",
+"why": "'nothing structural depends on arcane work', yet magical provision makes up about a third of what it eats",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/components/new/tabs/MagicTab.jsx",
+"line": 102,
+"fn": "MagicTab"
+}
+},
+{
+"id": "17769",
+"sev": "MED",
+"n": 119,
+"town": "r2s-under_siege-town-2",
+"section": "Systems/Institutions",
+"fold": "ServicesFresh bread",
+"text": "ServicesFresh bread",
+"why": "offers fresh bread as a service; tag has F (famine towns) and here a 40% food deficit under siege",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "16767",
+"sev": "MED",
+"n": 114,
+"town": "r2s-plague_onset-thorp-3",
+"section": "Summary/Foundations",
+"fold": "Ruling authoritySurplus",
+"text": "Ruling authoritySurplus",
+"why": "Ruling authority 'Surplus': legitimacy Contested, a rival claims the seat, stability Anxious",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "05780",
+"sev": "MED",
+"n": 94,
+"town": "r2s-famine-town-1",
+"section": "Systems/Economics",
+"fold": "Contributes to Grain Sales - #% of income",
+"text": "Contributes to Grain Sales - 4% of income",
+"why": "counts grain sales as income; CRISIS famine, grain imported, granary shut (18670)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "05688",
+"sev": "MED",
+"n": 89,
+"town": "r2r-hamlet-57",
+"section": "World/NPCs",
+"fold": "Constraint: Growing into the leading house's trade invites a reply; staying out of it means staying small.",
+"text": "Constraint: Growing into the leading house's trade invites a reply; staying out of it means staying small.",
+"why": "'the leading house's trade'; hamlets have no rival trading houses",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "19252",
+"sev": "MED",
+"n": 87,
+"town": "r2s-occupied-thorp-1",
+"section": "Systems/Power",
+"fold": "The Elder Council governs <N>.",
+"text": "The Elder Council governs Amarkota.",
+"why": "Elder Council governs; under occupation, Occupation Authority holds equal power and stability Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30975",
+"sev": "MED",
+"n": 87,
+"town": "r2s-under_siege-thorp-2",
+"section": "Systems/Resources",
+"fold": "✓ Mining",
+"text": "✓ Mining",
+"why": "Mining marked exploited: no mine in HOUSES, population 6, exports none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "00600",
+"sev": "MED",
+"n": 75,
+"town": "r2r-hamlet-16",
+"section": "Systems/Economics",
+"fold": "<N> grows about # parts in # of what it eats, and carts bring in about # parts in # of the rest.",
+"text": "Oxteha grows about two parts in five of what it eats, and carts bring in about two parts in three of the rest.",
+"why": "grows two fifths of what it eats; eats 30 (16 grown + 14 imported), so grows over half",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "13341",
+"sev": "MED",
+"n": 73,
+"town": "r2s-occupied-town-3",
+"section": "Systems/Power",
+"fold": "Merchant Guilds~Craft Guildsstable",
+"text": "Merchant Guilds~Craft Guildsstable",
+"why": "marks Merchant Guilds~Craft Guilds stable; 13269 and 10624 give High tension, 16773 a sustained dispute",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "05779",
+"sev": "MED",
+"n": 70,
+"town": "r2s-under_siege-town-0",
+"section": "Systems/Economics",
+"fold": "Contributes to Entrepôt Trade - #% of income",
+"text": "Contributes to Entrepôt Trade - 11% of income",
+"why": "entrepot trade brings 11% of income; Under Siege nothing comes in or goes out to redistribute",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "13120",
+"sev": "MED",
+"n": 59,
+"town": "r2s-plague_onset-town-0",
+"section": "Systems/Economics",
+"fold": "Mercenary ForcesDefense & security○ Operational",
+"text": "Mercenary ForcesDefense & security○ Operational",
+"why": "Mercenary Forces shown Operational in defense; DEFENCE says hired: none",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "12560",
+"sev": "MED",
+"n": 58,
+"town": "r2s-famine-town-2",
+"section": "Systems/Economics",
+"fold": "Law enforcement, patrol and gate control here depend on iron brought in, which a siege, a closed road or a blockade would cut off.",
+"text": "Law enforcement, patrol and gate control here depend on iron brought in, which a siege, a closed road or a blockade would cut off.",
+"why": "names gate control; DEFENCE walls none, no gates on HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/display/chainNeedShown.js",
+"line": 90,
+"fn": "chainNeedLine"
+}
+},
+{
+"id": "14552",
+"sev": "MED",
+"n": 55,
+"town": "r2r-thorp-17",
+"section": "Systems/Resources",
+"fold": "No # here works the stone near <N>.",
+"text": "No one here works the stone near Chichich.",
+"why": "no one works the stone; TRADE made here lists stone",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/validationOnPage.js",
+"line": 487,
+"fn": "exploitationGroupsShown"
+}
+},
+{
+"id": "19466",
+"sev": "MED",
+"n": 54,
+"town": "r2s-occupied-hamlet-1",
+"section": "Systems/Power",
+"fold": "The Headman's Authority governs <N>.",
+"text": "The Headman's Authority governs Llanhurst.",
+"why": "'The Headman's Authority governs Llanhurst' plainly, under Occupation with an equal Occupation Authority and stability Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "15704",
+"sev": "MED",
+"n": 51,
+"town": "r2s-under_siege-city-1",
+"section": "Systems/Services",
+"fold": "Pies, stews, roasted meats.",
+"text": "Pies, stews, roasted meats.",
+"why": "offers pies, stews and roasted meats as street food under siege; food deficit 82% and fresh produce gone by mid-morning",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "19516",
+"sev": "MED",
+"n": 50,
+"town": "r2r-thorp-24",
+"section": "Systems/Power",
+"fold": "The Household Council governs <N>.",
+"text": "The Household Council governs Sanctaminus.",
+"why": "'The Household Council governs Sanctaminus' plainly, under Occupation with a Dominant Occupation Authority and stability Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14553",
+"sev": "MED",
+"n": 49,
+"town": "r2s-famine-thorp-2",
+"section": "Systems/Resources",
+"fold": "No # here works the timber near <N>.",
+"text": "No one here works the timber near Benham.",
+"why": "no one works the timber; TRADE made here lists timber and founding was a logging operation",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/tradeListDisplay.js",
+"line": 246,
+"fn": "needMetBy"
+}
+},
+{
+"id": "30931",
+"sev": "MED",
+"n": 40,
+"town": "r2r-thorp-27",
+"section": "Systems/Resources",
+"fold": "✓ Agriculture✓ Milling✓ River trade",
+"text": "✓ Agriculture✓ Milling✓ River trade",
+"why": "ticks Milling; HOUSES has only Access to external mill",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "05224",
+"sev": "MED",
+"n": 40,
+"town": "r2s-recently_betrayed-town-0",
+"section": "Systems/Economics",
+"fold": "Coin minting",
+"text": "Coin minting",
+"why": "names coin minting as the town's work; HOUSES has no Mint",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14073",
+"sev": "MED",
+"n": 38,
+"town": "r2s-plague_onset-hamlet-2",
+"section": "Systems/Outlook",
+"fold": "Much of what <N> eats is brought in by road; its own land does not produce enough.",
+"text": "Much of what Jayaagam eats is brought in by road; its own land does not produce enough.",
+"why": "'Much of what it eats is brought in'; food ledger: grown 38 of 48, imports cover only 5",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "16004",
+"sev": "MED",
+"n": 37,
+"town": "r2s-under_siege-city-0",
+"section": "Systems/Economics",
+"fold": "Production: # lbs/day+ # imported+ # by druidic provision",
+"text": "Production: 5,041 lbs/day+ 6,439 imported+ 9,766 by druidic provision",
+"why": "'6,439 imported'; STATE gives imports cover 6422",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "04405",
+"sev": "MED",
+"n": 28,
+"town": "r2s-under_siege-town-0",
+"section": "Systems/Economics",
+"fold": "Blessed stores; divine provision fills the gap",
+"text": "Blessed stores; divine provision fills the gap",
+"why": "'divine provision fills the gap'; food deficit 44% with imports cover None, the gap is unfilled",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/magicProvisionShown.js",
+"line": 3,
+"fn": ""
+}
+},
+{
+"id": "03456",
+"sev": "MED",
+"n": 27,
+"town": "r2s-occupied-city-0",
+"section": "Systems/Economics",
+"fold": "Almshouse CareHealing & medicine○ Operational",
+"text": "Almshouse CareHealing & medicine○ Operational",
+"why": "lists almshouse care as operational; HOUSES has no almshouse",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14649",
+"sev": "MED",
+"n": 25,
+"town": "r2s-famine-metropolis-3",
+"section": "Systems/Resources",
+"fold": "No salt reaches the salt works.",
+"text": "No salt reaches the salt works.",
+"why": "'no salt reaches the salt works' contradicts salt won from local brine in evaporation pans",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30978",
+"sev": "MED",
+"n": 25,
+"town": "r2r-thorp-17",
+"section": "Systems/Resources",
+"fold": "✓ Mining✓ Stone quarrying",
+"text": "✓ Mining✓ Stone quarrying",
+"why": "Mining and Stone quarrying marked exploited: no mine or quarry in HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "12736",
+"sev": "MED",
+"n": 23,
+"town": "r2r-metropolis-14",
+"section": "Systems/Magic",
+"fold": "Livestock & Dairy: Blessed stores; divine provision fills the gap",
+"text": "Livestock & Dairy: Blessed stores; divine provision fills the gap",
+"why": "'divine provision fills the gap'; food deficit 83% with imports None, the gap is not filled (also 10776)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/magicProvisionShown.js",
+"line": 3,
+"fn": ""
+}
+},
+{
+"id": "30974",
+"sev": "MED",
+"n": 23,
+"town": "r2s-occupied-thorp-1",
+"section": "Systems/Resources",
+"fold": "✓ Metalworking✓ Mining",
+"text": "✓ Metalworking✓ Mining",
+"why": "Metalworking and Mining marked exploited: no mine or smithy in HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "22206",
+"sev": "MED",
+"n": 22,
+"town": "r2s-under_siege-hamlet-3",
+"section": "Systems/Economics",
+"fold": "The table rests on the hunters' game.",
+"text": "The table rests on the hunters' game.",
+"why": "the table rests on hunters' game; Under Siege the hunters cannot leave the hamlet",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14551",
+"sev": "MED",
+"n": 22,
+"town": "r2s-under_siege-town-2",
+"section": "Systems/Resources",
+"fold": "No # here works the mineral hot springs near <N>.",
+"text": "No one here works the mineral hot springs near Yekehiid.",
+"why": "nobody works the hot springs; the other says the town draws on the hot spring source and its properties",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/facts/chainWorking.js",
+"line": 34,
+"fn": "WORKING_CHAIN_STATUSES"
+}
+},
+{
+"id": "04329",
+"sev": "MED",
+"n": 22,
+"town": "r2r-metropolis-14",
+"section": "Systems/Magic",
+"fold": "Beekeeping & Wax: Blessed stores; divine provision fills the gap",
+"text": "Beekeeping & Wax: Blessed stores; divine provision fills the gap",
+"why": "'divine provision fills the gap'; food deficit 83% with imports None, the gap is not filled",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/magicProvisionShown.js",
+"line": 3,
+"fn": ""
+}
+},
+{
+"id": "13751",
+"sev": "MED",
+"n": 22,
+"town": "r2s-recently_betrayed-town-0",
+"section": "Systems/Economics",
+"fold": "Mining & CoinageRaw materials & fuel✓ Running",
+"text": "Mining & CoinageRaw materials & fuel✓ Running",
+"why": "says Mining & Coinage is running; HOUSES has no Mine and no Mint, and TRADE says iron mines and gem deposits exhausted",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "00587",
+"sev": "MED",
+"n": 20,
+"town": "r2s-plague_onset-city-0",
+"section": "World/Relationships",
+"fold": "<N> governs on <N>'s credit.",
+"text": "Uglješa Ivanov governs on Slobodan Marković's credit.",
+"why": "says the mint master governs; GOVERNMENT is a City-State Council and he is named only as mint master",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "16002",
+"sev": "MED",
+"n": 19,
+"town": "r2s-occupied-city-3",
+"section": "Systems/Economics",
+"fold": "Production: # lbs/day+ # imported+ # by arcane provision",
+"text": "Production: 5,671 lbs/day+ 4,628 imported+ 273 by arcane provision",
+"why": "gives 4,628 imported; header food line says imports cover 4596",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/foodBalanceBar.js",
+"line": 11,
+"fn": ""
+}
+},
+{
+"id": "11407",
+"sev": "MED",
+"n": 18,
+"town": "r2s-famine-city-3",
+"section": "Systems/Magic",
+"fold": "Hunting & Trapping: Blessed stores; divine provision fills the gap",
+"text": "Hunting & Trapping: Blessed stores; divine provision fills the gap",
+"why": "'divine provision fills the gap' under Famine while STATE still shows a 17% food deficit",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/magicProvisionShown.js",
+"line": 3,
+"fn": ""
+}
+},
+{
+"id": "09786",
+"sev": "MED",
+"n": 18,
+"town": "r2s-famine-metropolis-2",
+"section": "Systems/Magic",
+"fold": "Grain & Bread: Blessed stores; divine provision fills the gap",
+"text": "Grain & Bread: Blessed stores; divine provision fills the gap",
+"why": "Grain & Bread: 'divine provision fills the gap' under Famine; STATE shows 23% deficit, grain fields depleted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/magicProvisionShown.js",
+"line": 3,
+"fn": ""
+}
+},
+{
+"id": "19333",
+"sev": "MED",
+"n": 18,
+"town": "r2s-occupied-hamlet-2",
+"section": "Systems/Power",
+"fold": "The Free Elder Council governs <N>.",
+"text": "The Free Elder Council governs Dunkelstift.",
+"why": "'The Free Elder Council governs Dunkelstift' plainly, under Occupation with a Dominant Occupation Authority",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "19954",
+"sev": "MED",
+"n": 18,
+"town": "r2s-famine-town-2",
+"section": "Systems/Power",
+"fold": "The Thieves' Guild is at odds with it.",
+"text": "The Thieves' Guild is at odds with it.",
+"why": "says Thieves' Guild is at odds with the Mayor; 23123 and 14920 say they leave each other alone",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14404",
+"sev": "MED",
+"n": 17,
+"town": "r2r-hamlet-0",
+"section": "Systems/Economics",
+"fold": "Needed, and not brought in: timber, stone, metals.",
+"text": "Needed, and not brought in: timber, stone, metals.",
+"why": "says metals are not brought in; TRADE imports Iron (weapons)",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30977",
+"sev": "MED",
+"n": 17,
+"town": "r2s-plague_onset-hamlet-3",
+"section": "Systems/Resources",
+"fold": "✓ Mining✓ Sheep herding✓ Wool production",
+"text": "✓ Mining✓ Sheep herding✓ Wool production",
+"why": "Ticks Mining; HOUSES has no mine or quarry",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "04478",
+"sev": "MED",
+"n": 17,
+"town": "r2s-plague_onset-city-1",
+"section": "Systems/Economics",
+"fold": "Bowyer & fletcherManufacturing & crafts✦ Magically Sustained",
+"text": "Bowyer & fletcherManufacturing & crafts✦ Magically Sustained",
+"why": "a bowyer & fletcher, magically sustained; HOUSES has no bowyers or fletchers",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "23037",
+"sev": "MED",
+"n": 16,
+"town": "r2s-under_siege-metropolis-2",
+"section": "Systems/Magic",
+"fold": "Timber & Lumber: Druidic forest management accelerates regrowth and sustainable yield",
+"text": "Timber & Lumber: Druidic forest management accelerates regrowth and sustainable yield",
+"why": "druidic forest management sustains timber yield; TRADE imports Timber because local managed woodland is cleared (also 23039 'Magically Sustained')",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/facts/magicSource.js",
+"line": 39,
+"fn": "MAGIC_NOTE_TRADITION"
+}
+},
+{
+"id": "14550",
+"sev": "MED",
+"n": 16,
+"town": "r2r-village-24",
+"section": "Systems/Resources",
+"fold": "No # here works the medicinal herbs near <N>.",
+"text": "No one here works the medicinal herbs near Shandao.",
+"why": "no one works the medicinal herbs; TRADE made here lists medicinal herbs",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "09758",
+"sev": "MED",
+"n": 16,
+"town": "r2s-occupied-metropolis-0",
+"section": "Summary/Overview",
+"fold": "Governed by Grand Guild Consortium",
+"text": "Governed by Grand Guild Consortium",
+"why": "Under Occupation the Consortium does not govern freely; Occupation Authority is equally Significant and stability is Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "23039",
+"sev": "MED",
+"n": 16,
+"town": "r2s-plague_onset-city-1",
+"section": "Systems/Economics",
+"fold": "Timber & LumberRaw materials & fuel✦ Magically Sustained",
+"text": "Timber & LumberRaw materials & fuel✦ Magically Sustained",
+"why": "timber 'magically sustained' by druidic regrowth, yet TRADE imports timber because local managed woodland is cleared",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30946",
+"sev": "MED",
+"n": 15,
+"town": "r2r-city-19",
+"section": "Systems/Resources",
+"fold": "✓ Fishing industry✓ Maritime trade✓ Salt production✓ Shipbuilding",
+"text": "✓ Fishing industry✓ Maritime trade✓ Salt production✓ Shipbuilding",
+"why": "Shipbuilding ticked as a resource; HOUSES has no shipyard or boatyard",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30945",
+"sev": "MED",
+"n": 15,
+"town": "r2r-thorp-24",
+"section": "Systems/Resources",
+"fold": "✓ Fishing industry✓ Maritime trade✓ Salt production",
+"text": "✓ Fishing industry✓ Maritime trade✓ Salt production",
+"why": "Fishing industry and Maritime trade marked exploited: no fishing community or docks in HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30947",
+"sev": "MED",
+"n": 13,
+"town": "r2s-famine-hamlet-0",
+"section": "Systems/Resources",
+"fold": "✓ Fishing industry✓ Maritime trade✓ Shipbuilding",
+"text": "✓ Fishing industry✓ Maritime trade✓ Shipbuilding",
+"why": "ticks Shipbuilding as an industry; HOUSES has a fisher's landing only, no shipyard",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14543",
+"sev": "MED",
+"n": 13,
+"town": "r2r-thorp-40",
+"section": "Systems/Resources",
+"fold": "No # here works the animal hides near <N>.",
+"text": "No one here works the animal hides near Malotsy.",
+"why": "'no one works the animal hides'; TRADE says animal hides are made here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "11963",
+"sev": "MED",
+"n": 13,
+"town": "r2s-plague_onset-thorp-2",
+"section": "Systems/Resources",
+"fold": "It has worked out its river fisheries.",
+"text": "It has worked out its river fisheries.",
+"why": "river fisheries worked out; it has a Fishing community and fish on the table",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30972",
+"sev": "MED",
+"n": 13,
+"town": "r2s-famine-hamlet-2",
+"section": "Systems/Resources",
+"fold": "✓ Maritime trade✓ Salt production✓ Shipbuilding",
+"text": "✓ Maritime trade✓ Salt production✓ Shipbuilding",
+"why": "claims Shipbuilding; HOUSES has only a Fisher's landing, no shipyard",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "12961",
+"sev": "MED",
+"n": 12,
+"town": "r2s-under_siege-hamlet-2",
+"section": "Systems/Economics",
+"fold": "Many households go short, and a bad season would bring real hunger.",
+"text": "Many households go short, and a bad season would bring real hunger.",
+"why": "'a bad season would bring real hunger'; Under Siege with 35% deficit and imports None, hunger is already here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/components/new/tabs/EconomicsTab.jsx",
+"line": 768,
+"fn": "shortWords"
+}
+},
+{
+"id": "30973",
+"sev": "MED",
+"n": 12,
+"town": "r2s-under_siege-thorp-1",
+"section": "Systems/Resources",
+"fold": "✓ Maritime trade✓ Shipbuilding",
+"text": "✓ Maritime trade✓ Shipbuilding",
+"why": "maritime trade and shipbuilding marked exploited: thorp of 16, no shipyard or docks, exports none, besieged",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "13538",
+"sev": "MED",
+"n": 11,
+"town": "r2s-famine-town-3",
+"section": "Systems/Magic",
+"fold": "Military role: common",
+"text": "Military role: common",
+"why": "says magic's military role is common; DEFENCE magic: none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10708",
+"sev": "MED",
+"n": 11,
+"town": "r2s-plague_onset-town-3",
+"section": "Systems/Services",
+"fold": "Hired muscle",
+"text": "Hired muscle",
+"why": "offers hired muscle for coin; HOUSES has no gang or criminal house, DEFENCE hired: none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "19240",
+"sev": "MED",
+"n": 10,
+"town": "r2s-occupied-metropolis-2",
+"section": "Systems/Power",
+"fold": "The Ducal Governorship governs <N>.",
+"text": "The Ducal Governorship governs Nokhoihan.",
+"why": "Ducal Governorship 'governs' plainly; under Occupation it does not rule freely, an Occupation Authority holds power",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30928",
+"sev": "MED",
+"n": 10,
+"town": "r2s-plague_onset-thorp-2",
+"section": "Systems/Resources",
+"fold": "✓ Agriculture✓ Brewing",
+"text": "✓ Agriculture✓ Brewing",
+"why": "Brewing marked exploited: no brewery in HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30929",
+"sev": "MED",
+"n": 10,
+"town": "r2s-monster_pressure-thorp-1",
+"section": "Systems/Resources",
+"fold": "✓ Agriculture✓ Brewing✓ Milling✓ River trade",
+"text": "✓ Agriculture✓ Brewing✓ Milling✓ River trade",
+"why": "ticks Milling and Brewing; HOUSES has only Access to external mill, and brewing is not made here",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "04474",
+"sev": "MED",
+"n": 10,
+"town": "r2r-city-51",
+"section": "Systems/Magic",
+"fold": "Bowyer & fletcher: Arcane fabrication provides processed goods from alternative sources",
+"text": "Bowyer & fletcher: Arcane fabrication provides processed goods from alternative sources",
+"why": "bowyer & fletcher supplied by arcane fabrication; HOUSES has no bowyer or fletcher",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/facts/magicSource.js",
+"line": 46,
+"fn": "MAGIC_NOTE_TRADITION"
+}
+},
+{
+"id": "12888",
+"sev": "MED",
+"n": 9,
+"town": "r2r-thorp-54",
+"section": "Systems/Economics",
+"fold": "Magical provision makes up about a # of what it eats.",
+"text": "Magical provision makes up about a quarter of what it eats.",
+"why": "magic a quarter of what it eats; 9 of 21 lbs eaten (12 grown + 9) is over two fifths",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14549",
+"sev": "MED",
+"n": 9,
+"town": "r2s-plague_onset-village-3",
+"section": "Systems/Resources",
+"fold": "No # here works the iron ore near <N>.",
+"text": "No one here works the iron ore near Loughmere.",
+"why": "No one works the iron ore; TRADE 'made here' lists iron and metalwork",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "23301",
+"sev": "MED",
+"n": 9,
+"town": "r2s-succession_void-thorp-1",
+"section": "Systems/Power",
+"fold": "Uncontested▲",
+"text": "Uncontested▲",
+"why": "'Uncontested' while succession is contested and several race for the seat",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14072",
+"sev": "MED",
+"n": 9,
+"town": "r2s-slave_revolt-thorp-1",
+"section": "Systems/Outlook",
+"fold": "Much of what <N> eats is brought in by river; its own land does not produce enough.",
+"text": "Much of what Erdeniin eats is brought in by river; its own land does not produce enough.",
+"why": "'Much of what Erdeniin eats is brought in by river'; deficit 3%, imports none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10196",
+"sev": "MED",
+"n": 9,
+"town": "r2s-famine-town-0",
+"section": "Systems/Power",
+"fold": "Guild Council↔Merchant Guildsstable",
+"text": "Guild Council↔Merchant Guildsstable",
+"why": "marks Guild Council-Merchant Guilds stable; 10175 gives High tension",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "20721",
+"sev": "MED",
+"n": 8,
+"town": "r2r-village-14",
+"section": "Systems/Power",
+"fold": "The hall is at odds with the Military/Guard.",
+"text": "The hall is at odds with the Military/Guard.",
+"why": "hall at odds with the Military/Guard; 07126 gives the Elder Council~Military/Guard relation as stable",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/components/organic/samples/fixtures.js",
+"line": 25,
+"fn": "dossierFixture"
+}
+},
+{
+"id": "30938",
+"sev": "MED",
+"n": 7,
+"town": "r2s-occupied-hamlet-1",
+"section": "Systems/Resources",
+"fold": "✓ Exotic goods✓ Glass and gems",
+"text": "✓ Exotic goods✓ Glass and gems",
+"why": "ticks Glass and gems, yet the page says no one works the glass sand and the ore goes unworked",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "04908",
+"sev": "MED",
+"n": 7,
+"town": "r2s-politically_fractured-town-3",
+"section": "Systems/Power",
+"fold": "Church Council~Religious Authoritiesstable",
+"text": "Church Council~Religious Authoritiesstable",
+"why": "marks Church Council~Religious Authorities stable; 15604 says the two keep quarrelling",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "09761",
+"sev": "MED",
+"n": 6,
+"town": "r2s-occupied-metropolis-1",
+"section": "Summary/Overview",
+"fold": "Governed by Grand Military Council",
+"text": "Governed by Grand Military Council",
+"why": "says Grand Military Council governs; it is Minor, Religious Authorities Strong and Occupation Authority Significant",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "13403",
+"sev": "MED",
+"n": 6,
+"town": "r2s-famine-town-1",
+"section": "Systems/Power",
+"fold": "Merchant oligarchy↔Merchant Guildsstable",
+"text": "Merchant oligarchy↔Merchant Guildsstable",
+"why": "marks oligarchy-Merchant Guilds stable; 13377 and 10637 give High tension",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "18036",
+"sev": "MED",
+"n": 6,
+"town": "r2s-under_siege-city-0",
+"section": "Systems/Economics",
+"fold": "Shipbuilding and TimberRaw materials & fuel✦ Magically Sustained",
+"text": "Shipbuilding and TimberRaw materials & fuel✦ Magically Sustained",
+"why": "timber 'magically sustained', yet shipbuilding timber imported (stands cleared) and cut off by siege",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "23075",
+"sev": "MED",
+"n": 5,
+"town": "r2s-under_siege-thorp-0",
+"section": "Systems/Economics",
+"fold": "Toll Revenue",
+"text": "Toll Revenue",
+"why": "Toll Revenue under siege: nothing moves by road; no toll house in HOUSES",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "12547",
+"sev": "MED",
+"n": 5,
+"town": "r2s-famine-thorp-3",
+"section": "Summary/Overview",
+"fold": "Latin-inspired; people here live in a place run by patronage and law.",
+"text": "Latin-inspired; people here live in a place run by patronage and law.",
+"why": "'run by patronage and law': governed by head-of-household consensus, no court or patron",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14545",
+"sev": "MED",
+"n": 5,
+"town": "r2r-thorp-27",
+"section": "Systems/Resources",
+"fold": "No # here works the clay near <N>.",
+"text": "No one here works the clay near Olympnea.",
+"why": "nobody works the clay; TRADE makes clay and pottery",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "20768",
+"sev": "MED",
+"n": 5,
+"town": "r2s-wartime-hamlet-3",
+"section": "Systems/Resources",
+"fold": "The hamlet leaves its stone unworked.",
+"text": "The hamlet leaves its stone unworked.",
+"why": "says it leaves its stone unworked; TRADE lists stone made here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10188",
+"sev": "MED",
+"n": 5,
+"town": "r2s-under_siege-town-1",
+"section": "Systems/Power",
+"fold": "Guild Council~Religious Authoritiesstable",
+"text": "Guild Council~Religious Authoritiesstable",
+"why": "Guild Council~Religious Authorities stable; 20730 says the hall is at odds with them and 15618 says the two keep quarrelling",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30976",
+"sev": "MED",
+"n": 5,
+"town": "r2s-indebted-town-1",
+"section": "Systems/Resources",
+"fold": "✓ Mining✓ Sheep herding✓ Stone quarrying✓ Wool production",
+"text": "✓ Mining✓ Sheep herding✓ Stone quarrying✓ Wool production",
+"why": "ticks Mining and Stone quarrying running; HOUSES has no mine or quarry, gem deposits exhausted, 22665 says the stone is untouched",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "20234",
+"sev": "MED",
+"n": 5,
+"town": "r2r-city-51",
+"section": "Systems/Resources",
+"fold": "The city leaves its stone unworked.",
+"text": "The city leaves its stone unworked.",
+"why": "'leaves its stone unworked'; TRADE makes stone and resources list a stone quarry",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30953",
+"sev": "MED",
+"n": 5,
+"town": "r2s-recently_betrayed-city-0",
+"section": "Systems/Resources",
+"fold": "✓ Fully exploitedGold/silver orevery high value",
+"text": "✓ Fully exploitedGold/silver orevery high value",
+"why": "gold/silver ore 'fully exploited'; HOUSES has no mine",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "29070",
+"sev": "MED",
+"n": 4,
+"town": "r2s-occupied-city-0",
+"section": "Systems/Resources",
+"fold": "Work on the animal hides here stops #-way: no leatherworkers' guild finishes it.",
+"text": "Work on the animal hides here stops half-way: no leatherworkers' guild finishes it.",
+"why": "says hide work stops half-way; HOUSES has tanners and a tailor's guild, and boots and shoes are made here",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "20769",
+"sev": "MED",
+"n": 4,
+"town": "r2s-plague_onset-hamlet-3",
+"section": "Systems/Resources",
+"fold": "The hamlet leaves its timber unworked.",
+"text": "The hamlet leaves its timber unworked.",
+"why": "Leaves its timber unworked; TRADE 'made here' lists timber and exports sacred wood",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "22241",
+"sev": "MED",
+"n": 4,
+"town": "r2s-under_siege-thorp-0",
+"section": "Systems/Resources",
+"fold": "The thorp leaves its stone unworked.",
+"text": "The thorp leaves its stone unworked.",
+"why": "says stone left unworked; TRADE lists stone as made here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "23340",
+"sev": "MED",
+"n": 4,
+"town": "r2s-occupied-thorp-1",
+"section": "Systems/Resources",
+"fold": "UnexploitedAlpine pastureshigh value",
+"text": "UnexploitedAlpine pastureshigh value",
+"why": "alpine pastures unexploited; TRADE makes wool, livestock and dairy",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14542",
+"sev": "MED",
+"n": 4,
+"town": "r2s-occupied-thorp-1",
+"section": "Systems/Resources",
+"fold": "No # here works the alpine pastures near <N>.",
+"text": "No one here works the alpine pastures near Amarkota.",
+"why": "nobody works the alpine pastures; TRADE makes wool, livestock and dairy",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14075",
+"sev": "MED",
+"n": 3,
+"town": "r2s-plague_onset-thorp-1",
+"section": "Systems/Outlook",
+"fold": "Much of what <N> eats is brought in from outside; its own land does not produce enough.",
+"text": "Much of what Somathal eats is brought in from outside; its own land does not produce enough.",
+"why": "'much of what it eats is brought in': grows 41 of 50, imports cover 6",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21394",
+"sev": "MED",
+"n": 3,
+"town": "r2r-thorp-34",
+"section": "Systems/Power",
+"fold": "The powerElder Council (dominant)church guidance",
+"text": "The powerElder Council (dominant)church guidance",
+"why": "names church guidance as a power; GOVERNMENT lists only the Elder Council, and the thorp has only access to a parish church",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "23115",
+"sev": "MED",
+"n": 3,
+"town": "r2s-occupied-town-0",
+"section": "Systems/Power",
+"fold": "Town Council↓Merchant Guildsstable",
+"text": "Town Council↓Merchant Guildsstable",
+"why": "marks Town Council-Merchant Guilds stable; 23107 and 10687 give High tension",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "04499",
+"sev": "MED",
+"n": 3,
+"town": "r2s-religious_conversion-city-1",
+"section": "Systems/Magic",
+"fold": "Brewing & Malting: Arcane quickening of growth provides minor food supplement",
+"text": "Brewing & Malting: Arcane quickening of growth provides minor food supplement",
+"why": "names a Brewing & Malting trade; HOUSES has no brewery (only Vintner)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/facts/magicSource.js",
+"line": 45,
+"fn": "MAGIC_NOTE_TRADITION"
+}
+},
+{
+"id": "07801",
+"sev": "MED",
+"n": 3,
+"town": "r2s-slave_revolt-city-0",
+"section": "Systems/Economics",
+"fold": "Fish oilFreshwater catch",
+"text": "Fish oilFreshwater catch",
+"why": "lists Fish oil; TRADE exports and made-here have no fish oil (River fish, Freshwater catch only)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "09930",
+"sev": "MED",
+"n": 3,
+"town": "r2s-religious_conversion-metropolis-1",
+"section": "Summary/Plot Hooks",
+"fold": "Grand Merchant Oligarchy vs Military/Guard",
+"text": "Grand Merchant Oligarchy vs Military/Guard",
+"why": "plot hook of Oligarchy vs Military/Guard conflict; 09948 says the pair is stable",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14547",
+"sev": "MED",
+"n": 2,
+"town": "r2r-thorp-46",
+"section": "Systems/Resources",
+"fold": "No # here works the glass sand near <N>.",
+"text": "No one here works the glass sand near Erdenserai.",
+"why": "says nobody works the glass sand; TRADE makes glass and 30938 marks Glass and gems exploited",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "16853",
+"sev": "MED",
+"n": 2,
+"town": "r2r-hamlet-6",
+"section": "Systems/Economics",
+"fold": "Salted fish and the hunters' game anchor the table.",
+"text": "Salted fish and the hunters' game anchor the table.",
+"why": "table of salted fish and hunters' game; HOUSES has no fisher's landing, hunter's lodge or salt works",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "13395",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-town-1",
+"section": "Systems/Power",
+"fold": "Merchant oligarchy~Religious Authoritiesstable",
+"text": "Merchant oligarchy~Religious Authoritiesstable",
+"why": "marks oligarchy~Religious Authorities stable; 15622 and 26193 say the two keep quarrelling",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "07646",
+"sev": "MED",
+"n": 2,
+"town": "r2r-town-37",
+"section": "Systems/Power",
+"fold": "Feudal Appointee~Thieves' Guildescalating",
+"text": "Feudal Appointee~Thieves' Guildescalating",
+"why": "marks Feudal Appointee~Thieves' Guild escalating; 07626 and 14888 say they leave each other alone",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30964",
+"sev": "MED",
+"n": 2,
+"town": "r2s-recently_betrayed-city-0",
+"section": "Systems/Resources",
+"fold": "✓ Gemcutting✓ Metalworking✓ Mining",
+"text": "✓ Gemcutting✓ Metalworking✓ Mining",
+"why": "Mining shown running; HOUSES has no mine",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "23195",
+"sev": "MED",
+"n": 2,
+"town": "r2s-indebted-city-1",
+"section": "Summary/Foundations",
+"fold": "Trade connectivityCollapsed",
+"text": "Trade connectivityCollapsed",
+"why": "'Trade connectivity Collapsed'; prosperity Prosperous, river docks, caravan exchange and exports all running",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "04674",
+"sev": "MED",
+"n": 2,
+"town": "r2s-infiltrated-city-1",
+"section": "Systems/Economics",
+"fold": "Candles and waxMead",
+"text": "Candles and waxMead",
+"why": "lists Mead among goods; TRADE exports and made-here list no mead (only Wild honey, Candles and wax)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "06098",
+"sev": "MED",
+"n": 2,
+"town": "r2s-recently_betrayed-city-1",
+"section": "Systems/Power",
+"fold": "Crime keeps <N> from more than tolerating the Ecclesiastical Council.",
+"text": "Crime keeps Weicheng from more than tolerating the Ecclesiastical Council.",
+"why": "blames crime for mere toleration; header's cause is the betrayal: stability 'nobody trusts those in charge', safety Aftermath of Betrayal",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "13199",
+"sev": "MED",
+"n": 2,
+"town": "r2s-mass_migration-city-1",
+"section": "Summary/Crisis",
+"fold": "Merchant Guild Council no stake yet",
+"text": "Merchant Guild Council no stake yet",
+"why": "ruling Merchant Guild Council has 'no stake yet' in the migration; stability 'Strained (people arriving)' is its own, and 14504 says it must decide",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "06464",
+"sev": "MED",
+"n": 2,
+"town": "r2s-mass_migration-city-3",
+"section": "Summary/Crisis",
+"fold": "Democratic assembly no stake yet",
+"text": "Democratic assembly no stake yet",
+"why": "crisis tab says assembly has no stake; 06457 and 04645 make it the body bearing the migration choice",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "16740",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-metropolis-3",
+"section": "Systems/Power",
+"fold": "Royal Authority~Thieves' Guildescalating",
+"text": "Royal Authority~Thieves' Guildescalating",
+"why": "Royal Authority and Thieves' Guild escalating; same page says they leave each other alone, neither pushes",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "06925",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-metropolis-1",
+"section": "Systems/Power",
+"fold": "Ducal Governorship↔Merchant Guildsstable",
+"text": "Ducal Governorship↔Merchant Guildsstable",
+"why": "Ducal Governorship and Merchant Guilds relation stable; same page gives them High tension",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "09967",
+"sev": "MED",
+"n": 2,
+"town": "r2s-monster_pressure-metropolis-0",
+"section": "Summary/Plot Hooks",
+"fold": "Grand Merchant Senate vs Military/Guard",
+"text": "Grand Merchant Senate vs Military/Guard",
+"why": "plot hook of Senate vs Military/Guard conflict; 09980 says the pair is stable and cooperating",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "09931",
+"sev": "MED",
+"n": 2,
+"town": "r2s-religious_conversion-metropolis-1",
+"section": "Summary/Overview",
+"fold": "Grand Merchant Oligarchy vs Military/GuardHigh",
+"text": "Grand Merchant Oligarchy vs Military/GuardHigh",
+"why": "High tension Oligarchy vs Military/Guard; 09948/09914 call the pair stable, Guard carrying out orders",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10594",
+"sev": "MED",
+"n": 2,
+"town": "r2s-religious_conversion-metropolis-1",
+"section": "World/Relationships",
+"fold": "High tension Grand Merchant Oligarchy vs Military/Guard",
+"text": "High tension Grand Merchant Oligarchy vs Military/Guard",
+"why": "High tension Oligarchy vs Military/Guard; 09914 says Guard carries out its orders, each needing the other",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "06903",
+"sev": "MED",
+"n": 2,
+"town": "r2s-insurgency-metropolis-3",
+"section": "Summary/Overview",
+"fold": "Ducal Governorship vs Military/GuardHigh",
+"text": "Ducal Governorship vs Military/GuardHigh",
+"why": "High tension Ducal Governorship vs Military/Guard; 06928/06881 call the pair stable, Guard carrying out orders",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10575",
+"sev": "MED",
+"n": 2,
+"town": "r2s-insurgency-metropolis-3",
+"section": "World/Relationships",
+"fold": "High tension Ducal Governorship vs Military/Guard",
+"text": "High tension Ducal Governorship vs Military/Guard",
+"why": "High tension Ducal Governorship vs Military/Guard; 06881 says each needs the other and Guard obeys",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "06102",
+"sev": "MED",
+"n": 2,
+"town": "r2r-metropolis-58",
+"section": "Systems/Power",
+"fold": "Crime keeps <N> from more than tolerating the Grand Military Council.",
+"text": "Crime keeps Eldmark from more than tolerating the Grand Military Council.",
+"why": "blames crime for mere toleration; GOVERNMENT lists no criminal power and stability blames the creditors",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "22240",
+"sev": "MED",
+"n": 1,
+"town": "r2r-thorp-27",
+"section": "Systems/Resources",
+"fold": "The thorp leaves its clay unworked.",
+"text": "The thorp leaves its clay unworked.",
+"why": "leaves its clay unworked; TRADE makes clay and pottery",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "12110",
+"sev": "MED",
+"n": 1,
+"town": "r2s-indebted-thorp-2",
+"section": "Systems/Economics",
+"fold": "Its own food comes from its hunting and little else, so # bad year for the hunting would cost the whole thorp dear.",
+"text": "Its own food comes from its hunting and little else, so one bad year for the hunting would cost the whole thorp dear.",
+"why": "'food comes from its hunting and little else'; TRADE made here lists livestock and dairy and it exports live sheep",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "22229",
+"sev": "MED",
+"n": 1,
+"town": "r2r-thorp-18",
+"section": "Systems/Resources",
+"fold": "The thorp has the iron ore; what it lacks is Smelter to start the work.",
+"text": "The thorp has the iron ore; what it lacks is Smelter to start the work.",
+"why": "'has the iron ore; what it lacks is Smelter' — TRADE made here lists iron and metalwork; also missing article before 'Smelter'",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "20767",
+"sev": "MED",
+"n": 1,
+"town": "r2s-religious_conversion-hamlet-2",
+"section": "Systems/Resources",
+"fold": "The hamlet leaves its clay unworked.",
+"text": "The hamlet leaves its clay unworked.",
+"why": "says it leaves its clay unworked; TRADE makes clay and pottery",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21466",
+"sev": "MED",
+"n": 1,
+"town": "r2s-slave_revolt-hamlet-0",
+"section": "Systems/Power",
+"fold": "The powerHeadman's Authority (significant)church sway",
+"text": "The powerHeadman's Authority (significant)church sway",
+"why": "names church sway as a power; GOVERNMENT lists only the Headman's Authority and the hamlet has only a wayside shrine",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "12104",
+"sev": "MED",
+"n": 1,
+"town": "r2r-hamlet-14",
+"section": "Systems/Economics",
+"fold": "Its own food comes from its grain harvest and little else, so # bad year for the grain harvest would cost the whole hamlet dear.",
+"text": "Its own food comes from its grain harvest and little else, so one bad year for the grain harvest would cost the whole hamlet dear.",
+"why": "says food is grain and little else; HOUSES has Dairy farmer, date palms 'Running'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "16360",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-24",
+"section": "Systems/Economics",
+"fold": "Reeds and thatchWaterfowl",
+"text": "Reeds and thatchWaterfowl",
+"why": "lists reeds and thatch, waterfowl as trade goods; TRADE exports only Sacred wood and Ritual components",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "22405",
+"sev": "MED",
+"n": 1,
+"town": "r2s-occupied-village-0",
+"section": "Systems/Resources",
+"fold": "The village leaves its timber unworked.",
+"text": "The village leaves its timber unworked.",
+"why": "says timber is left unworked; TRADE made here lists timber",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "01192",
+"sev": "MED",
+"n": 1,
+"town": "r2s-succession_void-village-1",
+"section": "Systems/Economics",
+"fold": "<N> lives on a surplus farm trade and ends each year with money to spare, and the traffic on its port keeps it that way.",
+"text": "Chrissoeia lives on a surplus farm trade and ends each year with money to spare, and the traffic on its port keeps it that way.",
+"why": "says it lives on a surplus farm trade; exports are fish and boats only, grown 393 against need 390",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14395",
+"sev": "MED",
+"n": 1,
+"town": "r2s-monster_pressure-village-2",
+"section": "Systems/Economics",
+"fold": "Needed, and not brought in: timber, stone, luxury goods, fish.",
+"text": "Needed, and not brought in: timber, stone, luxury goods, fish.",
+"why": "fish needed and not brought in, yet HOUSES has a Fishmonger who holds the seat (05516)",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "07168",
+"sev": "MED",
+"n": 1,
+"town": "r2s-slave_revolt-village-0",
+"section": "Systems/Power",
+"fold": "Elected Reeve~Religious Authoritiesstable",
+"text": "Elected Reeve~Religious Authoritiesstable",
+"why": "Reeve and Religious Authorities 'stable'; 19894 says the Religious Authorities are at odds with it",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14400",
+"sev": "MED",
+"n": 1,
+"town": "r2s-religious_conversion-village-0",
+"section": "Systems/Economics",
+"fold": "Needed, and not brought in: timber, stone, metals, luxury goods, fish.",
+"text": "Needed, and not brought in: timber, stone, metals, luxury goods, fish.",
+"why": "fish needed and not brought in; HOUSES has a Fisher's landing and a Fishmonger",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "07174",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-45",
+"section": "Systems/Power",
+"fold": "Elected Reeve⇌Military/Guardstable",
+"text": "Elected Reeve⇌Military/Guardstable",
+"why": "Reeve and Military/Guard 'stable'; 07166 and 10582 give their tension as High",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14242",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-49",
+"section": "Systems/Economics",
+"fold": "Needed, and not brought in: luxury goods, spices, fine textiles, clay, fish.",
+"text": "Needed, and not brought in: luxury goods, spices, fine textiles, clay, fish.",
+"why": "fish needed and not brought in, yet HOUSES has a Fishmonger (17260 keeps the best of the catch)",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "12111",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-23",
+"section": "Systems/Economics",
+"fold": "Its own food comes from its hunting and little else, so # bad year for the hunting would cost the whole village dear.",
+"text": "Its own food comes from its hunting and little else, so one bad year for the hunting would cost the whole village dear.",
+"why": "food from hunting and little else; HOUSES has Farmland, grazing and a Mill (grown 477 of 542), and no hunter",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "12562",
+"sev": "MED",
+"n": 1,
+"town": "r2s-under_siege-town-1",
+"section": "Systems/Economics",
+"fold": "Law enforcement, patrol and gate control here depend on iron from outside, which the siege has cut off.",
+"text": "Law enforcement, patrol and gate control here depend on iron from outside, which the siege has cut off.",
+"why": "names gate control; DEFENCE walls none and 00979 says the town lies open",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/display/chainNeedShown.js",
+"line": 81,
+"fn": "chainNeedLine"
+}
+},
+{
+"id": "23138",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-town-2",
+"section": "Systems/Power",
+"fold": "Town Mayor~Thieves' Guildescalating",
+"text": "Town Mayor~Thieves' Guildescalating",
+"why": "marks Mayor~Thieves' Guild escalating; 23123 and 14920 say neither pushes the other",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "03799",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-town-3",
+"section": "Systems/Power",
+"fold": "Arcane Council~Thieves' Guildescalating",
+"text": "Arcane Council~Thieves' Guildescalating",
+"why": "marks Arcane Council~Thieves' Guild escalating; 03763 and 14872 say they leave each other alone",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10187",
+"sev": "MED",
+"n": 1,
+"town": "r2s-occupied-town-2",
+"section": "Systems/Power",
+"fold": "Guild Council~Occupation Authoritystable",
+"text": "Guild Council~Occupation Authoritystable",
+"why": "marks Guild Council~Occupation Authority stable; 00381 says the Occupation Authority is at odds with it, 10155 a protest",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "20796",
+"sev": "MED",
+"n": 1,
+"town": "r2s-monster_pressure-town-0",
+"section": "Systems/Power",
+"fold": "The head of Church Council answers to Street gang.",
+"text": "The head of Church Council answers to Street gang.",
+"why": "head of the ruling Church Council answers to Street gang; GOVERNMENT lists no gang among its powers",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "20609",
+"sev": "MED",
+"n": 1,
+"town": "r2s-mass_migration-town-2",
+"section": "Summary/Overview",
+"fold": "The gap is closed through the tracks in a good season — at a price the settlement feels.",
+"text": "The gap is closed through the tracks in a good season — at a price the settlement feels.",
+"why": "says the food gap is closed; STATE food deficit 27% and viable False",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "15073",
+"sev": "MED",
+"n": 1,
+"town": "r2s-wartime-town-2",
+"section": "Systems/Power",
+"fold": "Nothing at <N> protects the Feudal Appointee now.",
+"text": "Nothing at Shivapalli protects the Feudal Appointee now.",
+"why": "says nothing protects the Feudal Appointee; it is the strongest power (Significant), every rival Minor",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "09824",
+"sev": "MED",
+"n": 1,
+"town": "r2s-recently_betrayed-town-1",
+"section": "Systems/Economics",
+"fold": "Grain storage and emergency reserves here depend on grain brought in.",
+"text": "Grain storage and emergency reserves here depend on grain brought in.",
+"why": "says grain stores depend on grain brought in; food ledger: grown 4910 of 4718 needed, imports cover None",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "26926",
+"sev": "MED",
+"n": 1,
+"town": "r2s-under_siege-city-3",
+"section": "World/NPCs",
+"fold": "Wants Pay every hand at the undead labor in full and on time this season.",
+"text": "Wants Pay every hand at the undead labor in full and on time this season.",
+"why": "wants every hand at the undead labor paid in full; 14629 says the undead get no pay",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "00615",
+"sev": "MED",
+"n": 1,
+"town": "r2s-under_siege-city-0",
+"section": "Systems/Economics",
+"fold": "<N> grows about a # of what it eats, and ships bring in about a # of the rest.",
+"text": "Bellaurbs grows about a fifth of what it eats, and ships bring in about a third of the rest.",
+"why": "ships bring in a third of the rest; siege shut the water route and 'since the siege nothing has come in'",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "20719",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-city-0",
+"section": "Systems/Power",
+"fold": "The hall is at odds with the Military/Guard and the Noble Families.",
+"text": "The hall is at odds with the Military/Guard and the Noble Families.",
+"why": "hall 'at odds with' Military/Guard, but the relation reads Royal Authority~Military/Guard stable; slash label as a name",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/components/organic/samples/fixtures.js",
+"line": 25,
+"fn": "dossierFixture"
+}
+},
+{
+"id": "19722",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-city-3",
+"section": "Systems/Power",
+"fold": "The Military/Guard, the Religious Authorities and the Noble Families are at odds with it.",
+"text": "The Military/Guard, the Religious Authorities and the Noble Families are at odds with it.",
+"why": "Religious Authorities 'at odds with' the Governorship, but relation reads Noble Governorship~Religious Authorities stable",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "03798",
+"sev": "MED",
+"n": 1,
+"town": "r2s-occupied-city-3",
+"section": "Systems/Power",
+"fold": "Arcane Council~Occupation Authoritystable",
+"text": "Arcane Council~Occupation Authoritystable",
+"why": "Arcane Council~Occupation Authority 'stable', yet the same pair is High tension",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "13370",
+"sev": "MED",
+"n": 1,
+"town": "r2s-mass_migration-city-2",
+"section": "Summary/Crisis",
+"fold": "Merchant oligarchy no stake yet",
+"text": "Merchant oligarchy no stake yet",
+"why": "ruling Merchant oligarchy has 'no stake yet'; 13362 says it is being asked to choose between residents and arrivals; stability Strained (people arriving)",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14219",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-5",
+"section": "Systems/Economics",
+"fold": "Needed, and not brought in: gold/silver ore.",
+"text": "Needed, and not brought in: gold/silver ore.",
+"why": "lists only gold/silver ore as needed and not brought in; 14609 says no iron or copper ore reaches the smelter either; TRADE imports no iron",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "09976",
+"sev": "MED",
+"n": 1,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Systems/Power",
+"fold": "Grand Merchant Senate↓Merchant Guildsstable",
+"text": "Grand Merchant Senate↓Merchant Guildsstable",
+"why": "Senate and Merchant Guilds relation called stable; same page gives them High tension",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "09968",
+"sev": "MED",
+"n": 1,
+"town": "r2s-monster_pressure-metropolis-0",
+"section": "Summary/Overview",
+"fold": "Grand Merchant Senate vs Military/GuardHigh",
+"text": "Grand Merchant Senate vs Military/GuardHigh",
+"why": "High tension Grand Merchant Senate vs Military/Guard; 09980/09953 call the pair stable, each needing the other",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10600",
+"sev": "MED",
+"n": 1,
+"town": "r2s-monster_pressure-metropolis-0",
+"section": "World/Relationships",
+"fold": "High tension Grand Merchant Senate vs Military/Guard",
+"text": "High tension Grand Merchant Senate vs Military/Guard",
+"why": "High tension Grand Merchant Senate vs Military/Guard; 09980/09953 call the pair stable and mutually reliant",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "06101",
+"sev": "MED",
+"n": 1,
+"town": "r2s-religious_conversion-metropolis-1",
+"section": "Systems/Power",
+"fold": "Crime keeps <N> from more than tolerating the Grand Merchant Oligarchy.",
+"text": "Crime keeps Tyrhammer from more than tolerating the Grand Merchant Oligarchy.",
+"why": "blames crime for mere toleration; GOVERNMENT lists no criminal power and stability blames the contested creed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "09883",
+"sev": "MED",
+"n": 1,
+"town": "r2s-religious_conversion-metropolis-3",
+"section": "Summary/Overview",
+"fold": "Grand Guild Consortium vs Military/GuardHigh",
+"text": "Grand Guild Consortium vs Military/GuardHigh",
+"why": "High tension Consortium vs Military/Guard; 09893 calls the pair stable",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10588",
+"sev": "MED",
+"n": 1,
+"town": "r2s-religious_conversion-metropolis-3",
+"section": "World/Relationships",
+"fold": "High tension Grand Guild Consortium vs Military/Guard",
+"text": "High tension Grand Guild Consortium vs Military/Guard",
+"why": "High tension Consortium vs Military/Guard; 09893 calls the pair stable",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "06043",
+"sev": "MED",
+"n": 1,
+"town": "r2s-succession_void-metropolis-1",
+"section": "Systems/Power",
+"fold": "Crime and hunger keep <N> from more than tolerating the <N>.",
+"text": "Crime and hunger keep Filoprion from more than tolerating the Grand Guild Consortium.",
+"why": "blames crime for mere toleration; GOVERNMENT lists no criminal power and stability blames the succession void",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+}
+]

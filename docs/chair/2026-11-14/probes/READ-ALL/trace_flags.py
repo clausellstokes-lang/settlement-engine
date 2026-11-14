@@ -52,4 +52,4 @@ for lane, hs in sorted(lanes.items(), key=lambda kv: -sum(h['n'] for h in kv[1])
         fh.write('\n## The sentences\n\n| sev | towns | id | section | town read in | sentence | what the reader said | writer |\n|---|---|---|---|---|---|---|---|\n')
         for h in hs:
             w = h.get('writer') or {}
-            fh.write('| %s | %d | %s | %s | %s | %s | %s | %s:%s %s |\n' % (h['sev'], h['n'], h['rid'], h['view'], h['seed'], h['line'][:300].replace('|', '/'), h['why'][:220].replace('|', '/'), w.get('file', '?'), w.get('line', ''), str(w.get('fn', ''))[:60]))
+            fh.write('| %s | %d | %s | %s | %s | %s | %s | %s (line %s at e5b421802) %s |\n' % (h['sev'], h['n'], h['rid'], h['view'], h['seed'], h['line'][:300].replace('|', '/'), h['why'][:220].replace('|', '/'), w.get('file', '?'), w.get('line', ''), str(w.get('fn', ''))[:60]))
