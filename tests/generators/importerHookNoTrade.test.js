@@ -7,6 +7,7 @@
  * siege); where the siege has cut every road, the hoard inside is told instead. No draw: a T branch.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { deriveSupplyRiskAnalysis } from '../../src/generators/economy/foodBalance.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -34,13 +35,13 @@ describe('the importer hook reads the import coverage', () => {
 describe('the cold list\'s besieged towns, born as the app births them', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
   it('no importer while no food comes in by trade (every row)', () => {
-    for (const [seed] of [['rw3-hamlet-under_siege-1'], ['rw3-town-under_siege+famine-1']]) {
+    expectNoSeedFailures(collectSeedFailures([['rw3-hamlet-under_siege-1'], ['rw3-town-under_siege+famine-1']], ([seed]) => {
       const m = /** @type {RegExpMatchArray} */ (seed.match(/^rw3-(\w+)-([a-z_+]+)-\d+$/));
       const s = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2].split('+'), _randomizePriorities: true }), null, { seed, customContent: {} }));
       expect(s.economicState.foodSecurity.importCoverage || 0, `${seed}: no food comes in by trade`).toBe(0);
       const hooks = JSON.stringify((s.economicViability?.plotHooks || []).map((/** @type {any} */ h) => h.hook));
       expect(hooks, `${seed}: no importer`).not.toMatch(IMPORTER);
       expect(hooks, `${seed}: the no-trade hook prints`).toMatch(/No food comes in by trade now/);
-    }
+    }), 'no importer while no food comes in by trade');
   });
 });

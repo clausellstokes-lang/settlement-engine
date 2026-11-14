@@ -8,6 +8,7 @@
  * The "poor harvest somewhere else" hook carries the same clause and the same condition (record 386 (2)).
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -23,17 +24,17 @@ describe('the import hook reads the roster for its merchants, born as the app bi
   /** @param {any} s */
   const hook = (s) => (s.economicViability?.plotHooks || []).map((/** @type {any} */ h) => h?.hook).find((/** @type {string} */ h) => /watching it decide\.$/.test(h || ''));
   it('no market, so no merchants (every row)', () => {
-    for (const seed of ['rr2s-thorp-famine-rand-1', 'rww-village-famine-1']) {
+    expectNoSeedFailures(collectSeedFailures(['rr2s-thorp-famine-rand-1', 'rww-village-famine-1'], (seed) => {
       const s = born(seed);
       expect(hasMarketInstitution(s.institutions), `${seed}: no market`).toBe(false);
       expect(hook(s), `${seed}: no merchants`).toMatch(/and whoever brings the food in is watching it decide\.$/);
-    }
+    }), 'no market, so no merchants');
   });
   it('a market stands, and the merchants watch (every row)', () => {
-    for (const seed of ['rww-town-famine-1', 'rww-city-famine-1']) {
+    expectNoSeedFailures(collectSeedFailures(['rww-town-famine-1', 'rww-city-famine-1'], (seed) => {
       const s = born(seed);
       expect(hasMarketInstitution(s.institutions), `${seed}: a market stands`).toBe(true);
       expect(hook(s), `${seed}: the merchants watch`).toMatch(/and the merchants are watching it decide\.$/);
-    }
+    }), 'a market stands, and the merchants watch');
   });
 });

@@ -7,6 +7,7 @@
  * fall from grace; a predecessor's sealed letter) stay admitted for every holder.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -30,14 +31,14 @@ describe("the reader's two outbreak towns, born as the app births them", () => {
   /** @param {string} seed @param {string} settType @param {object} [route] */
   const born = (seed, settType, route = {}) => /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...route, settType, selectedStressesRandom: false, selectedStresses: ['plague_onset'], _randomizePriorities: true }), null, { seed, customContent: {} }));
   it('no holder outside the religious pool carries a priest\'s hook (every row)', () => {
-    for (const [seed, settType, route] of [
+    expectNoSeedFailures(collectSeedFailures([
       ['rr2s-town-plague_onset-rand-1', 'town', {}],
       ['rr2s-metropolis-plague_onset-port-1', 'metropolis', { tradeRouteAccess: 'port' }],
-    ]) {
+    ], ([seed, settType, route]) => {
       const s = born(seed, settType, route);
       const lay = (s.npcs || []).filter((/** @type {any} */ n) => n.category !== 'religious');
       const false_ = lay.flatMap((/** @type {any} */ n) => (n.plotHooks || []).filter((/** @type {string} */ h) => OFFICE.has(h)).map((/** @type {string} */ h) => `${n.role}: ${h}`));
       expect(false_, `${seed}: no holder outside the religious pool carries a priest's hook`).toEqual([]);
-    }
+    }), 'no holder outside the religious pool carries a priest\'s hook');
   });
 });

@@ -12,6 +12,7 @@
  * condition too (record 386 (2): a twin carries every condition its siblings carry).
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { ORIGIN_POOLS, selectOriginBody } from '../../src/generators/narrative/settlementOriginProse.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -49,15 +50,15 @@ describe("the readers' towns, born as the app births them", () => {
     return /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : m[2].split('+'), _randomizePriorities: true }), null, { seed, customContent: {} }));
   };
   it('the refused row does not print (every row)', () => {
-    for (const [seed, refused] of [
+    expectNoSeedFailures(collectSeedFailures([
       ['rww-village-under_siege-1', ORIGIN_POOLS.road[0]],
       ['rr2s-hamlet-under_siege-rand-1', ORIGIN_POOLS.road[3]],
-    ]) {
+    ], ([seed, refused]) => {
       const s = born(seed);
       expect(s.config.stressTypes, `${seed}: under siege`).toContain('under_siege');
       expect(ORIGIN_POOLS.road, `${seed}: the founding line is a road row`).toContain(s.settlementReason[0]);
       // anchored: the line above proves the founding line is a live row of the same road pool
       expect(s.settlementReason, `${seed}: the refused row does not print`).not.toContain(refused);
-    }
+    }), 'the refused row does not print');
   });
 });

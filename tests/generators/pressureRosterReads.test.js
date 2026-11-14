@@ -9,6 +9,7 @@
  *   treat, and the cast is derived after this line is drawn. The line names the governing power, never the first card.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { PRESSURE_SENTENCES } from '../../src/generators/narrativeText.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -35,9 +36,9 @@ describe("the reader's towns, born as the app births them", () => {
     expect(s.pressureSentence).not.toMatch(/bakers/);
   });
   it('the siege line names no card (every row)', () => {
-    for (const [seed, name] of [['rww-metropolis-under_siege-1', 'Yellow Corn Coh'], ['rww-village-under_siege-1', 'Khadija al-Aziz']]) {
+    expectNoSeedFailures(collectSeedFailures([['rww-metropolis-under_siege-1', 'Yellow Corn Coh'], ['rww-village-under_siege-1', 'Khadija al-Aziz']], ([seed, name]) => {
       const s = born(seed);
       expect(s.pressureSentence, `${seed}: the siege line names no card`).not.toContain(name);
-    }
+    }), 'the siege line names no card');
   });
 });

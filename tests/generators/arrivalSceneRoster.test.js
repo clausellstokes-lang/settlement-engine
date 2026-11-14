@@ -6,6 +6,7 @@
  * (river[2], declared on the mill alone). Record 386 (3): each reads the roster, the market atom and the docks atom.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { ARRIVAL_SCENES } from '../../src/data/narrativeData.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -20,10 +21,10 @@ describe('the arrival scenes read the roster', () => {
   });
   beforeAll(async () => { await loadGenerationLawPayloads(); });
   it('the line the roster refuses does not print (every row)', () => {
-    for (const [seed, settType, refused] of [['r2r-hamlet-22', 'hamlet', /A merchant argues with a carter/], ['r2r-town-20', 'town', /against a jetty/]]) {
+    expectNoSeedFailures(collectSeedFailures([['r2r-hamlet-22', 'hamlet', /A merchant argues with a carter/], ['r2r-town-20', 'town', /against a jetty/]], ([seed, settType, refused]) => {
       const s = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType }), null, { seed, customContent: {} }));
       expect(typeof s.arrivalScene, `${seed}: an arrival scene`).toBe('string');
       expect(refused.test(s.arrivalScene), `${seed}: ${s.arrivalScene}`).toBe(false);
-    }
+    }), 'the line the roster refuses does not print');
   });
 });

@@ -9,6 +9,7 @@
  *   error below the middling band (the chair's ruling (f)); the row needs it.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -18,13 +19,13 @@ describe("the reader's three towns, born as the app births them", () => {
   /** @param {string} seed */
   const born = (seed) => { const m = /** @type {RegExpMatchArray} */ (seed.match(/^rww-(\w+)-([a-z_+]+)-\d+$/)); return /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : m[2].split('+'), _randomizePriorities: true }), null, { seed, customContent: {} })); };
   it('the arrival names nothing its roster or size lacks (every row)', () => {
-    for (const [seed, false_] of [
+    expectNoSeedFailures(collectSeedFailures([
       ['rww-village-religious_conversion-1', /mason/i],
       ['rww-hamlet-succession_void-1', /masons|great house|scaffolding/i],
       ['rww-village-indebted-1', /merchant district/i],
-    ]) {
+    ], ([seed, false_]) => {
       const s = born(seed);
       expect(String(s.arrivalScene), `${seed}: the arrival names nothing its roster or size lacks`).not.toMatch(false_);
-    }
+    }), 'the arrival names nothing its roster or size lacks');
   });
 });

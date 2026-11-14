@@ -11,6 +11,7 @@
  * trade. Born in the app's own shape (the stress panel with Random off).
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { foodStoreWord } from '../../src/generators/economy/foodBalance.js';
 import { PRESSURE_SENTENCES } from '../../src/generators/narrativeText.js';
 import { SIEGE_GOALS } from '../../src/generators/npcGenerator.js';
@@ -73,17 +74,17 @@ describe('the cold list\'s towns, born as the app births them', () => {
     ...(s.npcs || []).flatMap((/** @type {any} */ n) => [n?.goal?.short, n?.goal?.text, n?.secret?.what].map((t) => String(t || ''))),
   ];
   it('every food slot says what the town eats and stores (every row)', () => {
-    for (const [seed] of [
+    expectNoSeedFailures(collectSeedFailures([
       ['rw3-metropolis-under_siege-1'], // "its days of legal", "Secure enough legal reserves", "skimming from the legal reserves"
       ['rw3-city-famine-1'], // "the remaining reeds reserves", "a hidden cache of reeds reserves", "receiving reeds shipments"
       ['rw3-town-under_siege-1'], // "its days of crafts", "crafts reserves"
       ['rw3-town-under_siege+famine-1'], // "meals reserves", "meals shipments"
-    ]) {
+    ], ([seed]) => {
       const s = /** @type {any} */ (born(seed));
       const own = foodStoreWord(s.economicState?.foodSecurity?.foodRecord);
       const words = printed(s).flatMap(foodWordsIn);
       expect(words.length, `${seed}: a food slot prints`).toBeGreaterThan(0);
       for (const w of words) expect([own, 'food'], `${seed}: ${w}`).toContain(w);
-    }
+    }), 'every food slot says what the town eats and stores');
   });
 });
