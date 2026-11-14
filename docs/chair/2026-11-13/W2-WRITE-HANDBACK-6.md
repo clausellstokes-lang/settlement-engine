@@ -47,13 +47,13 @@ seat itself; long runs never cross a turn's end, the suite in six shards; no pul
 | 13 | DS-DEF-2 CHAIN: defence supplied | v6 | struck (last row) | a17d14618 (sixth) | v5 prints, true |
 | 14 | DS-DEF-3 COMPOUND: insurgency | v5 | struck (last row) | a17d14618 (sixth) | v2, v4 print, true |
 | 15 | DS-DEF-11 WALLED-STRAINED | v3 | declared `no soldiers`, the slot out | this seat | v4 prints where soldiers stand |
-| 16 | DS-DEF-11 WALLED-STRAINED | v7 | LEFT | | |
+| 16 | DS-DEF-11 WALLED-STRAINED | v7 | reworded, `no crisis: occupied` | this seat | v7 itself, read true in 22 towns |
 | 17 | DS-DEF-5 NO organized force at all | v4 | LEFT | | |
 | 18 | DS-DEF-8 override: ACTIVE SIEGE | v4 | struck (last row) | a17d14618 (sixth) | v1-v3 print, true |
 | 19 | DS-DEF-9 magicDependency true, with a NAMED dependent chain | v1 | LEFT | | |
 | 20 | DS-DEF-2 Invasion & War: neither walls nor force | v5 | declared off siege, occupation | 2d1832b7b (fifth) | |
-| 21 | DS-DEF-11 WALLED-STRAINED | v8 | LEFT (last row) | | |
-| 22 | DS-DEF-11 WALLED-STRAINED | v6 | LEFT | | |
+| 21 | DS-DEF-11 WALLED-STRAINED | v8 | struck (last row) | this seat | v7 or v2 |
+| 22 | DS-DEF-11 WALLED-STRAINED | v6 | reworded, `no crisis: occupied` | this seat | under occupation v5 |
 | 23 | DS-DEF-5 ARCANE: alchemists | v2 | LEFT (last row) | | |
 | 24 | DS-DEF-11 UNWALLED-LARGE | v3 | struck (last row) | a17d14618 (sixth) | v1, v2 print, true |
 | 25 | DS-DEF-1 readiness STRONG | v6 | reworded | 47f8bdd8e (sixth) | read at Al-mandi, a siege city, a 574-person town |
@@ -66,7 +66,8 @@ Settled 17 (fifth seat 9, sixth seat 8); LEFT 10, and one style point (#27).
 | item | commit | what | read in |
 |---|---|---|---|
 | 0 | 7f4f3d339 | the table above | |
-| B #15, #26 | (this commit) | WALLED-STRAINED siege rows: v3 `no soldiers` (guard Tihono), v3 and v4 without `{defwork}` (the slot printed "palisade or earthworks" and broke agreement) | 62 STRAINED siege towns rendered: v3 at Prabhanagar (thorp 12), Hongguan, Zuuköl (siege+famine); v4 at Tihono, Hákonås (222,797), Belovich (thorp 5), Spitzplatz |
+| B #15, #26 | fe171885e | WALLED-STRAINED siege rows: v3 `no soldiers` (guard Tihono), v3 and v4 without `{defwork}` (the slot printed "palisade or earthworks" and broke agreement) | 62 STRAINED siege towns rendered: v3 at Prabhanagar (thorp 12), Hongguan, Zuuköl (siege+famine); v4 at Tihono, Hákonås (222,797), Belovich (thorp 5), Spitzplatz |
+| B #16, #21, #22 | (this commit) | WALLED-STRAINED v8 struck (last row); v6, v7 reworded without `{defwork}` (v6 printed it twice; v7 "pays anyone" and "stretched thin" beside volunteer militias), both `no crisis: occupied` (guards Ulfås, Shangou) | 50 STRAINED calm towns rendered: v7 at Tyrvik (thorp), Muulek (wartime), Loughbury (village 386, famine), 22 in all; v6 at Altgasse (plague), Beiguan (wartime), true in all 11 eligible |
 
 ## Named, not the corpus's (with the file)
 

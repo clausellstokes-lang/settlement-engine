@@ -7001,9 +7001,8 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 3. `[unfolding · no soldiers · crisis: under_siege]` {settlement} had too few hands for its defences before the siege; now everyone who can hold a weapon has a place on them, and most of them are learning as they go.
 4. `[ledger · crisis: under_siege]` The siege has put more people on {settlement}'s defences than the town could ever find for them in quieter seasons.
 5. `[ledger · no guardPresence · no crisis: under_siege]` {settlement} keeps its {defwork} in repair and pays nobody to stand guard there.
-6. `[street · no guardPresence · no crisis: under_siege]` {settlement} has nobody whose work it is to stand on its {defwork}, though the town keeps the {defwork} in repair.
-7. `[ledger · guardPresence · no watch · no crisis: under_siege]` {settlement} keeps its {defwork} in repair before it pays anyone to stand guard there, and the few who do turn out are stretched thin.
-8. `[street · guardPresence · no watch · no crisis: under_siege]` {settlement}'s people under arms are too few to cover its {defwork}, and the town spends on the {defwork} before it spends on them.
+6. `[street · no guardPresence · no crisis: under_siege · no crisis: occupied]` {settlement}'s defences still stand sound, though nobody in the town has the work of manning them.
+7. `[ledger · guardPresence · no watch · no crisis: under_siege · no crisis: occupied]` {settlement}'s defences are sound, and the only people who would stand on them are the town's own.
 
 **`UNWALLED-SMALL`** {crisis-scoped}
 1. `[street · no threat · crisis: any]` {settlement} is too small to wall and knows it; the town's safety is its neighbours, its distance, and its unimportance.

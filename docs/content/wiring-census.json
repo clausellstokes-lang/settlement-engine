@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2956,
+    "variants": 2955,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -11489,7 +11489,7 @@
         "defwork"
       ],
       "hasBag": true,
-      "variants": 8,
+      "variants": 7,
       "grammars": 1,
       "predicate": [
         {
@@ -11551,11 +11551,12 @@
       "declares": [],
       "lineDeclares": {
         "crisis: under_siege": 2,
-        "guardPresence": 3,
-        "no crisis: under_siege": 6,
+        "guardPresence": 2,
+        "no crisis: occupied": 2,
+        "no crisis: under_siege": 5,
         "no guardPresence": 2,
         "no soldiers": 1,
-        "no watch": 2,
+        "no watch": 1,
         "watch": 1
       },
       "undeclared": 0,
@@ -55446,7 +55447,7 @@
       "pools": [
         "DS-DEF-11 :: WALLED-STRAINED"
       ],
-      "variants": 8,
+      "variants": 7,
       "grammars": 1,
       "blocks": [
         "DS-DEF-11"
@@ -67895,7 +67896,7 @@
         "settlement.defenseProfile.economicGates.military"
       ],
       "readingFunction": "wallRationalePoolKey",
-      "count": "8 variant(s) · 1 grammar(s) · slots {defwork, settlement}"
+      "count": "7 variant(s) · 1 grammar(s) · slots {defwork, settlement}"
     },
     {
       "tier": "THIN",
