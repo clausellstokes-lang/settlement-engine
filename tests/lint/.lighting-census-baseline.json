@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "cf8e330fdfca2c5e2c1e02fef69bb564190a38be",
-  "measuredBy": "R2-CODE-B-7",
+  "measuredAtSha": "9a12e541159bbc15acb67a1ba75fcd68c45eb8b5",
+  "measuredBy": "R2-CODE-B-9",
   "date": "2026-11-14",
-  "note": "the line 976db5b19 merged into the lane (0aa0cce00), taken from the line side, re-taken on the committed tip; plus the three titles of tests/domain/chainSourceAbsent.test.js (e285c603f)",
+  "note": "the four red-first titles of the plague slot cure (9a12e5411, tests/domain/crisisHooks.test.js)",
   "files": 3271,
   "parked": 403,
   "credited": 2868,
-  "titles": 29532,
-  "suiteTitles": 8015
+  "titles": 29536,
+  "suiteTitles": 8016
 }
