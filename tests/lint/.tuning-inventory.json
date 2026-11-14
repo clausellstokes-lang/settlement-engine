@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "19dd60303f9a1fb2d1cf6966f3ddff8dda638fb7",
-  "measuredBy": "STYLE-2-MERGE-13",
-  "date": "2026-11-13",
-  "note": "point 49: W2-B-DECLARE (5657a229c) merged — RULING_PATRONAGE_TUNING gains the dependent src/domain/facts/registeredWords.js (F2 third seat: the ruling faces read dmPowerViewOf); no value moved",
+  "measuredAtSha": "f9ee7541dd1e8ee245c6ea8813d2fd0751b0291f",
+  "measuredBy": "R2-CODE-B-7",
+  "date": "2026-11-14",
+  "note": "the line 976db5b19 merged into lane/r2-code-b-2026-11-13 (0aa0cce00): taken from the line side, re-taken on the committed merged tip",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -327,7 +327,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 1,
-      "line": 94,
+      "line": 105,
       "spanDigest": "42cba822df4a8ecb71503a445184626bef2ef7ad321e9814d269397056f9ec97",
       "leaves": {
         "value": 6
@@ -341,7 +341,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 97,
+      "line": 108,
       "spanDigest": "d40adbe17add3b7a21a86063de313b25e7b09f1baca71e01cb51ffebf26a3f22",
       "leaves": {
         "value": 0.5
@@ -653,7 +653,7 @@
       "exported": true,
       "idiom": "mixed",
       "keys": 2,
-      "line": 48,
+      "line": 51,
       "spanDigest": "6b3d0a1b34604e0b09ffa63b1642dffa44a7552fa114d2ca602253156c8db98e",
       "leaves": {
         "rates.exploiter": {
@@ -2305,7 +2305,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 1,
-      "line": 132,
+      "line": 169,
       "spanDigest": "00c0e1f99fc53d650cd628cdac047d1e9e3d7d94218abe8ed2eed18c7a49b8ea",
       "leaves": {
         "value": 18
@@ -2313,6 +2313,7 @@
       "dependents": [
         "src/components/TableView.jsx",
         "src/components/TonightSheet.jsx",
+        "src/components/new/tabs/DailyLifeTab.jsx",
         "src/components/new/tabs/EconomicsTab.jsx",
         "src/components/new/tabs/OverviewTab.jsx",
         "src/components/session/SessionMode.jsx",
