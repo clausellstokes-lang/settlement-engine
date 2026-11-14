@@ -50,7 +50,7 @@
     },
     {
      "lineId": "STRESS_DESCS.under_siege[2]",
-     "text": "From outside, {name} still seems itself: smoke from cookfires, the noise of a market. It is the gate that gives it away: shut fast, the guards' faces set, their talk stopping dead when strangers come in sight.",
+     "text": "From outside, {name} still seems itself: smoke from cookfires, a murmur from the square. It is the gate that gives it away: shut fast, the guards' faces set, their talk stopping dead when strangers come in sight.",
      "needs": [
       "gate",
       "market"
