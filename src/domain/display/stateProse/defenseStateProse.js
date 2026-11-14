@@ -878,6 +878,24 @@ function withinTheBar(poolKey, militaryScore) {
 }
 
 /**
+ * ⛔ L2'S REVERSE (R3-TABS-4; the chair's ruling (a) of 2026-11-14 on the fresh reader's F1): NO STRONG POSTURE
+ * LINE BESIDE A WEAK OR CRITICAL INVASION & WAR BAR. The strong pool speaks of what the town can field and has
+ * built, which is that bar's own subject: "What Ingili can field and what Ingili has built are both in good
+ * order" stood over "Invasion & War — Weak" (2 of the reader's 1,536 at bb2bf91c5, 0 at the line's tip
+ * 976db5b19). Beside such a bar the posture draws no higher than the pool the line's tip drew for the town
+ * (`scoreBand` of the same readiness score, its ladder before L1), and says nothing where that too is strong.
+ * @param {string|null} poolKey @param {unknown} readinessScore @param {unknown} militaryScore @returns {string|null}
+ */
+function noStrongBesideAWeakBar(poolKey, readinessScore, militaryScore) {
+  if (poolKey !== 'readiness STRONG') return poolKey;
+  const bar = typeof militaryScore === 'number' && Number.isFinite(militaryScore) ? scoreBand(militaryScore) : null;
+  if (bar !== 'WEAK' && bar !== 'CRITICAL') return poolKey;
+  if (typeof readinessScore !== 'number' || !Number.isFinite(readinessScore)) return null;
+  const linePool = `readiness ${scoreBand(readinessScore)}`;
+  return linePool !== poolKey && CORPUS['DS-DEF-1'].pools[linePool] ? linePool : null;
+}
+
+/**
  * DS-DEF-1 lens 1 — THE READINESS BAND.
  *
  * ⭐ Reads `defenseProfile.readiness.score`, NOT `avgScore(scores)`. See the header: the
@@ -967,7 +985,10 @@ export function defensePostureProse(settlement, options = {}) {
 
   return Object.freeze({
     posture: projected(withinTheBar(
-      posturePoolKey(settlement?.defenseProfile?.readiness?.score), settlement?.defenseProfile?.scores?.military,
+      noStrongBesideAWeakBar(
+        posturePoolKey(settlement?.defenseProfile?.readiness?.score),
+        settlement?.defenseProfile?.readiness?.score, settlement?.defenseProfile?.scores?.military,
+      ), settlement?.defenseProfile?.scores?.military,
     ), corpusAdmittingPostureLines(CORPUS, settlement)),
     terrain: projected(terrainDefencePoolKey(terrain)),
     prize: projected(strategicPrizePoolKey(terrain)),

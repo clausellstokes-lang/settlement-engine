@@ -22,6 +22,11 @@
  *     Under a siege every strong line is struck and the posture says nothing; the banner names the siege.
  *   - A FORCE STANDS: any standing garrison, militia, watch or contracted company (`standingDefenseForces`,
  *     L0's reading).
+ *   - UNDER AN OCCUPATION: `stress[].type` `occupied` (R3-TABS-4; the chair's ruling (a) of 2026-11-14 on the
+ *     fresh reader's F1): the strong pool is struck WHOLE, as under a siege. Every one of its lines says the
+ *     town's own defences are in good order, beside the banner "The occupiers' troops at … protect it from
+ *     everyone except the people who sent them" (14 occupied towns of the reader's 1,536 at bb2bf91c5, 10 at
+ *     the line's tip 976db5b19).
  * Pure: no randomness, no clock, no write. One view per struck set.
  */
 import { standingDefenseForces } from '../../institutions/defenseInstitutionBuckets.js';
@@ -44,6 +49,9 @@ export const POSTURE_LINE_DISQUALIFIERS = Object.freeze({
   }),
 });
 
+/** The pools struck whole under an occupation. @type {ReadonlySet<string>} */
+const STRUCK_UNDER_AN_OCCUPATION = new Set(['readiness STRONG']);
+
 /** @type {Map<unknown, Map<string, unknown>>} */
 const VIEWS = new Map();
 
@@ -65,6 +73,7 @@ export function corpusAdmittingPostureLines(corpus, settlement) {
   const types = stressList(settlement?.stress).map((entry) => /** @type {{ type?: unknown } | null} */ (entry)?.type);
   const underSiege = types.includes('under_siege');
   const atWar = underSiege || types.includes('wartime');
+  const occupied = types.includes('occupied');
   const forces = standingDefenseForces(settlement);
   const force = forces.garrison.present || forces.militia.present || forces.watch.present || forces.mercenary.present;
   /** @type {Record<PostureLineDeclaration['falseWhere'], boolean>} */
@@ -74,9 +83,10 @@ export function corpusAdmittingPostureLines(corpus, settlement) {
   for (const [pool, declared] of Object.entries(POSTURE_LINE_DISQUALIFIERS)) {
     const variants = block.pools[pool];
     if (!Array.isArray(variants)) continue;
+    const wholePool = occupied && STRUCK_UNDER_AN_OCCUPATION.has(pool);
     const kept = variants.filter((v) => {
       const d = typeof v?.vid === 'number' ? declared[v.vid] : undefined;
-      const out = Boolean(d && holds[d.falseWhere]);
+      const out = wholePool || Boolean(d && holds[d.falseWhere]);
       if (out) struck.push(`${pool}#${v.vid}`);
       return !out;
     });
