@@ -1,0 +1,88 @@
+{"id":"02423","town":"r2r-village-50","sev":"LOW","kind":"LACKS","why":"a cordon around 'one quarter' of Somakota presumes quarters/districts in a village of 386","other":""}
+{"id":"05280","town":"r2r-village-50","sev":"LOW","kind":"STATE","why":"'Headman' used for Mandakini Basu, PEOPLE sex f (same for 20876, 02014)","other":""}
+{"id":"11113","town":"r2s-plague_onset-village-3","sev":"MED","kind":"STATE","why":"says the priest runs the office deciding the crisis; GOVERNMENT lists only Elder Council and Thieves' Guild, no religious power","other":""}
+{"id":"28521","town":"r2s-plague_onset-village-3","sev":"MED","kind":"STATE","why":"lists iron and metalwork as produced; LAND gaps say iron ore not processed and HOUSES has no smith","other":""}
+{"id":"14704","town":"r2s-plague_onset-village-3","sev":"MED","kind":"STATE","why":"says Elder Council is safe and nobody can lead; header has Legitimacy Crisis, score 5, escalating tension with a Significant Thieves' Guild","other":""}
+{"id":"11428","town":"r2s-plague_onset-village-3","sev":"MED","kind":"STATE","why":"guild 'keeps the streets quiet'; STATE safety is Dangerous, Plague Unrest; a village of 197 has no streets of consequence","other":"28242"}
+{"id":"02257","town":"r2s-plague_onset-village-3","sev":"LOW","kind":"STATE","why":"magic is high yet magical defence declared beyond the settlement","other":""}
+{"id":"09597","town":"r2s-indebted-village-3","sev":"MED","kind":"STATE","why":"says run by a civic association; GOVERNMENT is Elder Council Dominant with a Creditor's Representative","other":""}
+{"id":"03903","town":"r2s-indebted-village-3","sev":"LOW","kind":"STATE","why":"goods said to arrive by carts; trade access is port and imports come by the harbour","other":""}
+{"id":"11985","town":"r2s-indebted-village-3","sev":"MED","kind":"LACKS","why":"speaks of 'the defence' making do; STATE is Undefended and DEFENCE lists no force of any kind","other":""}
+{"id":"19361","town":"r2s-indebted-village-3","sev":"LOW","kind":"LACKS","why":"presumes enforcement the village can fund and direct; DEFENCE has no garrison, militia, watch or hired force","other":""}
+{"id":"20212","town":"r2r-village-5","sev":"LOW","kind":"STATE","why":"conversion order said to come from Priestly Guidance, yet the page frames a new faith gaining on the old house; unclear who ordered it","other":"20179"}
+{"id":"28112","town":"r2s-infiltrated-village-1","sev":"LOW","kind":"LACKS","why":"label 'defended pass'; DEFENCE is none on every line and defence is Vulnerable","other":""}
+{"id":"29148","town":"r2s-slave_revolt-village-1","sev":"LOW","kind":"STATE","why":"potions and tinctures named as made; LAND gap says medicinal herbs limited to intermediate products and the Apothecary lacks its input","other":""}
+{"id":"11540","town":"r2s-slave_revolt-village-1","sev":"LOW","kind":"STATE","why":"'Headman' used for Nada al-Qadir, PEOPLE sex f","other":""}
+{"id":"16050","town":"r2s-slave_revolt-village-1","sev":"LOW","kind":"LACKS","why":"presumes a defence being publicly organised; DEFENCE has no militia, watch or force and the town is Vulnerable","other":""}
+{"id":"05278","town":"r2r-village-1","sev":"LOW","kind":"STATE","why":"'Headman' used for Rajani Iyer, PEOPLE sex f (same for 20867, 11570)","other":""}
+{"id":"13285","town":"r2r-village-25","sev":"LOW","kind":"LACKS","why":"'workshops' plural begin with unloading a cart; HOUSES has one Blacksmith and no workshop; imports are salt, incense, parchment","other":""}
+{"id":"11576","town":"r2s-infiltrated-village-3","sev":"LOW","kind":"STATE","why":"'Headman' used for Yaretzi Kin, PEOPLE sex f","other":""}
+{"id":"19554","town":"r2s-infiltrated-village-3","sev":"LOW","kind":"TAG","why":"'inside the walls' is true here (palisade) but the tag reaches towns whose DEFENCE has no walls","other":""}
+{"id":"HEADER","town":"r2s-monster_pressure-village-3","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Samira al-Masri the title 'Rallies the neighbours' with no house or power: a description, not a title","other":""}
+{"id":"09754","town":"r2s-monster_pressure-village-3","sev":"LOW","kind":"STATE","why":"'He works from behind a legitimate trade' for the fence, Jana ibn Ahmed, PEOPLE sex f","other":""}
+{"id":"11430","town":"r2s-slave_revolt-village-2","sev":"MED","kind":"STATE","why":"says the sawmill lifts the village's building work; LAND gaps say the Sawmill lacks timber and 13832 says no timber reaches it","other":"13832"}
+{"id":"12079","town":"r2s-slave_revolt-village-2","sev":"LOW","kind":"STATE","why":"offers lumber milling as a service; LAND gaps say the Sawmill lacks access to timber","other":"13832"}
+{"id":"00519","town":"r2s-slave_revolt-village-2","sev":"LOW","kind":"STATE","why":"'cannot feed itself' while FOOD word is Secure (gap 3%, grown 87%, brought in 9%)","other":""}
+{"id":"09710","town":"r2s-slave_revolt-village-2","sev":"LOW","kind":"LACKS","why":"a defence 'they are publicly organising'; DEFENCE has no force of any kind and the town is Undefended","other":""}
+{"id":"09566","town":"r2s-succession_void-village-1","sev":"LOW","kind":"STATE","why":"says run by civic association; GOVERNMENT is Elder Council with Religious Authorities Dominant","other":""}
+{"id":"11166","town":"r2r-village-29","sev":"LOW","kind":"STATE","why":"'in the want of any formal power' the elder steers decisions; GOVERNMENT lists Elder Council (Strong) and Religious Authorities (Dominant)","other":""}
+{"id":"03638","town":"r2r-village-29","sev":"LOW","kind":"LACKS","why":"names 'the lord's court'; HOUSES has no court and GOVERNMENT lists no lord","other":""}
+{"id":"HEADER","town":"r2r-village-29","sev":"LOW","kind":"RECORD","why":"HOUSES has a Village elder but PEOPLE has nobody holding it: an office with nobody in it","other":""}
+{"id":"29902","town":"r2r-village-29","sev":"MED","kind":"STATE","why":"ticks a fur trade and timber trade; TRADE exports none, access isolated, and the timber gap says it cannot produce final goods","other":""}
+{"id":"07025","town":"r2r-village-30","sev":"MED","kind":"STATE","why":"says the sawmill expands construction output; LAND gaps say the Sawmill lacks access to timber","other":""}
+{"id":"05603","town":"r2r-village-30","sev":"LOW","kind":"STATE","why":"says the sawmill converts raw logs to planks; LAND gaps say it lacks timber","other":"07025"}
+{"id":"04663","town":"r2r-village-30","sev":"LOW","kind":"STATE","why":"'he arranges the work owed' for the reeve Zorana Volkov, PEOPLE sex f","other":""}
+{"id":"HEADER","town":"r2r-village-41","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Masao Ma the title 'Rallies the neighbours' with no house or power: a description, not a title","other":""}
+{"id":"HEADER","town":"r2s-infiltrated-village-2","sev":"LOW","kind":"RECORD","why":"HOUSES has a Village elder but PEOPLE has nobody holding it: an office with nobody in it","other":""}
+{"id":"HEADER","town":"r2s-monster_pressure-village-1","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Güchlüg Ongut the title 'Rallies the neighbours' with no house or power: a description, not a title","other":""}
+{"id":"HEADER","town":"r2s-wartime-village-2","sev":"LOW","kind":"RECORD","why":"HOUSES has a Village elder but PEOPLE has nobody holding it: an office with nobody in it","other":""}
+{"id":"09599","town":"r2s-wartime-village-2","sev":"LOW","kind":"STATE","why":"says run by civic association; GOVERNMENT is Elder Council (Minor) under Religious Authorities (Dominant)","other":""}
+{"id":"11170","town":"r2s-wartime-village-2","sev":"MED","kind":"STATE","why":"says the charter hall defends 'with no one named to lead it'; PEOPLE names Tornikes Chortasmenos, the charter master","other":"06083"}
+{"id":"09951","town":"r2s-wartime-village-2","sev":"MED","kind":"STATE","why":"says hides become leather here; LAND gaps say the Tannery lacks access to livestock and animal hides","other":"27741"}
+{"id":"11440","town":"r2s-wartime-village-2","sev":"LOW","kind":"STATE","why":"says shoes, harness and straps depend on the tannery; gaps say the Tannery lacks its hides and livestock","other":"27741"}
+{"id":"27822","town":"r2s-wartime-village-2","sev":"LOW","kind":"STATE","why":"'where no formal authority exists' the eldest guides decisions; GOVERNMENT lists Elder Council and Religious Authorities (same family as 11166)","other":""}
+{"id":"13188","town":"r2r-village-34","sev":"MED","kind":"STATE","why":"toll bridge revenue 'steady'; trade access is isolated, no road, river or port reaches the village, and TRADE shows no toll income","other":"13758"}
+{"id":"10750","town":"r2r-village-34","sev":"LOW","kind":"STATE","why":"heavy carts and people in a hurry pay at the gate; access isolated, no dependable road reaches the village","other":"13758"}
+{"id":"01949","town":"r2r-village-34","sev":"LOW","kind":"STATE","why":"'Headman' used for Plotina Cato, PEOPLE sex f","other":""}
+{"id":"04573","town":"r2r-village-39","sev":"LOW","kind":"LACKS","why":"carts of grain toward 'the mills'; HOUSES has one Mill","other":""}
+{"id":"19491","town":"r2r-village-39","sev":"MED","kind":"STATE","why":"salted fish anchor the table; LAND gap says the Salt works lacks its input (desert_salt) and TRADE makes no fish or salt","other":""}
+{"id":"HEADER","town":"r2r-village-39","sev":"LOW","kind":"RECORD","why":"PEOPLE titles Dawon Xie (f) 'the ferryman': a gendered title that does not fit her sex","other":""}
+{"id":"HEADER","town":"r2r-village-42","sev":"LOW","kind":"RECORD","why":"HOUSES has a Village elder but PEOPLE has nobody holding it: an office with nobody in it","other":""}
+{"id":"21055","town":"r2r-village-42","sev":"MED","kind":"STATE","why":"smell of sawn timber and sawdust everywhere; LAND gaps say the Sawmill lacks access to timber and mountain timber","other":""}
+{"id":"HEADER","town":"r2s-insurgency-village-3","sev":"LOW","kind":"RECORD","why":"PEOPLE titles Statius Flavius (m) 'the alewife': a gendered title that does not fit his sex","other":""}
+{"id":"HEADER","town":"r2s-infiltrated-village-2","sev":"LOW","kind":"RECORD","why":"PEOPLE titles Möngke Qatagin (m) 'the alewife': a gendered title that does not fit his sex","other":""}
+{"id":"HEADER","town":"r2s-succession_void-village-2","sev":"LOW","kind":"RECORD","why":"PEOPLE titles Ciara Burke (f) 'the ferryman': a gendered title that does not fit her sex","other":""}
+{"id":"01982","town":"r2s-insurgency-village-3","sev":"LOW","kind":"STATE","why":"'Headman' used for Lucia Capito, PEOPLE sex f","other":""}
+{"id":"13574","town":"r2s-mass_migration-village-1","sev":"LOW","kind":"BROKEN","why":"list repeats 'timber' twice ('timber, stone, metals, luxury goods, timber, mountain timber')","other":""}
+{"id":"17588","town":"r2s-mass_migration-village-2","sev":"LOW","kind":"STATE","why":"offers fired bricks by the cartload; LAND gaps say the Brickmaker lacks access to clay and 13746 says no clay reaches it","other":"13746"}
+{"id":"16204","town":"r2s-mass_migration-village-2","sev":"MED","kind":"STATE","why":"brickmaker has children treading the clay; LAND gaps say the Brickmaker lacks access to clay and no clay reaches it","other":"13746"}
+{"id":"19727","town":"r2s-mass_migration-village-2","sev":"LOW","kind":"STATE","why":"calls the place 'the hamlet'; TOWN size word is village (population 219)","other":""}
+{"id":"HEADER","town":"r2s-politically_fractured-village-1","sev":"LOW","kind":"RECORD","why":"HOUSES has a Village headman but PEOPLE has nobody holding it: an office with nobody in it","other":""}
+{"id":"11127","town":"r2s-slave_revolt-village-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"12820","town":"r2s-slave_revolt-village-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"HEADER","town":"r2r-village-56","sev":"LOW","kind":"RECORD","why":"PEOPLE titles Dáirine O'Brien (f) 'the ferryman': a gendered title that does not fit her sex","other":""}
+{"id":"17490","town":"r2r-village-56","sev":"LOW","kind":"TAG","why":"'inside the walls' true here (palisade) but the tag reaches towns whose DEFENCE has no walls","other":""}
+{"id":"20725","town":"r2r-village-56","sev":"LOW","kind":"STATE","why":"a family held the ferry right 'for generations'; the town is only 42 years old","other":""}
+{"id":"HEADER","town":"r2s-indebted-village-1","sev":"LOW","kind":"RECORD","why":"HOUSES has a Village elder but PEOPLE has nobody holding it; and PEOPLE titles Angelina Alexios (f) 'the ferryman'","other":""}
+{"id":"03983","town":"r2s-indebted-village-1","sev":"MED","kind":"STATE","why":"part of the salted-fish shortfall made up by magic; FOOD says by magic 0%, gap 0%, grown 100%","other":""}
+{"id":"07377","town":"r2s-indebted-village-1","sev":"LOW","kind":"STATE","why":"'Temple fishing rites improve depleted catch'; FOOD by magic 0%, the chain is vulnerable and HOUSES has a Parish church, no temple","other":"03983"}
+{"id":"15022","town":"r2s-wartime-village-3","sev":"MED","kind":"STATE","why":"says the saw widens the settlement's building timber and furniture output; LAND gaps say the Sawmill lacks access to mountain timber","other":""}
+{"id":"HEADER","town":"r2r-village-18","sev":"LOW","kind":"RECORD","why":"HOUSES has a Village elder but PEOPLE has nobody holding it: an office with nobody in it","other":""}
+{"id":"10348","town":"r2r-village-18","sev":"LOW","kind":"STATE","why":"'all his work' for the carpenter Zhen Gao, PEOPLE sex f","other":""}
+{"id":"29113","town":"r2r-village-18","sev":"LOW","kind":"LACKS","why":"label 'defended pass'; DEFENCE has no wall, garrison, militia or watch and defence is Vulnerable","other":""}
+{"id":"HEADER","town":"r2r-village-44","sev":"LOW","kind":"RECORD","why":"HOUSES has a Village elder but PEOPLE has nobody holding it: an office with nobody in it","other":""}
+{"id":"HEADER","town":"r2r-village-52","sev":"LOW","kind":"RECORD","why":"PEOPLE titles Reinhard Huber (m) 'the alewife': a gendered title that does not fit his sex","other":""}
+{"id":"03979","town":"r2s-infiltrated-village-0","sev":"MED","kind":"STATE","why":"part of the preserved-food shortfall made up by magic; FOOD says by magic 0%, gap 0%, grown 127%, surplus 26%","other":""}
+{"id":"10244","town":"r2s-infiltrated-village-0","sev":"MED","kind":"STATE","why":"'divine provision fills the gap'; FOOD says by magic 0%, gap 0%, surplus 26%","other":"03979"}
+{"id":"HEADER","town":"r2s-recently_betrayed-village-2","sev":"LOW","kind":"RECORD","why":"HOUSES has a Village elder but PEOPLE has nobody holding it: an office with nobody in it","other":""}
+{"id":"15892","town":"r2s-succession_void-village-0","sev":"LOW","kind":"STATE","why":"offers salt-cured fish as a service; LAND gaps say the Fishmonger lacks access to fish and 13761 says no fish reaches it","other":"13761"}
+{"id":"10450","town":"r2s-succession_void-village-0","sev":"LOW","kind":"STATE","why":"'why you are in the marsh'; terrain is Plains and LAND lists no marsh","other":""}
+{"id":"HEADER","town":"r2r-village-37","sev":"LOW","kind":"RECORD","why":"HOUSES has a Village elder but PEOPLE has nobody holding it: an office with nobody in it","other":""}
+{"id":"HEADER","town":"r2s-monster_pressure-village-0","sev":"LOW","kind":"RECORD","why":"HOUSES has a Village reeve with nobody holding it, and PEOPLE gives Nalayani Das the title 'Rallies the neighbours' with no house","other":""}
+{"id":"13540","town":"r2s-monster_pressure-village-0","sev":"LOW","kind":"BROKEN","why":"list repeats 'timber' three ways ('timber and building wood ... timber, mountain timber')","other":""}
+{"id":"27818","town":"r2s-recently_betrayed-village-3","sev":"LOW","kind":"STATE","why":"caravanserai called the settlement's economic heart where caravans come; LAND gaps say it lacks camel herds and the caravan chain is vulnerable; tag S/F","other":""}
+{"id":"27928","town":"r2s-recently_betrayed-village-3","sev":"MED","kind":"STATE","why":"'a little left over each year'; FOOD word is Pressured, grown 85%, gap 5%, surplus 0%","other":""}
+{"id":"13558","town":"r2r-village-26","sev":"LOW","kind":"BROKEN","why":"list repeats 'timber' ('timber, metals, luxury goods, timber, mountain timber')","other":""}
+{"id":"04847","town":"r2r-village-26","sev":"LOW","kind":"STATE","why":"clergy have limited political leverage; Religious Authorities is Significant and QUARRELS has Elder Council vs Religious Authorities at high intensity","other":""}
+{"id":"27526","town":"r2r-village-48","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'Weak defences has left'","other":""}
+{"id":"DONE","lines":2864,"blocks":56,"flags":87}
