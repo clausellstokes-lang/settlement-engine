@@ -92,6 +92,7 @@ describe('no "one ring" where rings rival (#1172, #1202, #716, #750, #813)', () 
       if (ONE_ORGANISATION.includes(seed)) {
         expect(governedOrGuilded(town), `${seed}: anchored, a governing or dominant criminal power or a guild`).toBe(true);
         expect(st?.key, seed).toBe('organized');
+        // anchored: the key is asserted 'organized' on the line above, and the guard towns below match the same words
         expect(st?.note ?? '', seed).not.toMatch(/lacks a single controlling authority|Several gangs/);
       } else {
         expect(governedOrGuilded(town), `${seed}: anchored, none governs, dominates or runs the trade`).toBe(false);
