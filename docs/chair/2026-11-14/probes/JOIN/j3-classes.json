@@ -1,0 +1,800 @@
+[
+ [
+  "D",
+  "tests/architecture/layerBoundaries.test.js",
+  "layer boundaries (F29) > dependency-cycle set equals the checked-in baseline (shrink-only)",
+  "leaves"
+ ],
+ [
+  "D",
+  "tests/data/canonicalRowsDeclared.test.js",
+  "the seven canonical v0 rows declare through the tag slot (CENSUS-3f unit 3) > the four canonical rows that presume nothing beyond their key: marked colour (R-AO, CENSUS-3g unit 3)",
+  "corpus"
+ ],
+ [
+  "A",
+  "tests/data/foundingWorldBones.test.js",
+  "every Founding World keeps every promise on its card > every promise holds in at least 19 of 20 forks at the card's dials",
+  "red at the line"
+ ],
+ [
+  "E",
+  "tests/data/w2FixData6Rows.test.js",
+  "W2-FIX-DATA-8: the census writers in the data lane's files (the eighth seat) > HANDBACK-6 row 3 (ww-1416): the brewer sells barrels to alehouses only where one stands; where none does, to the households (r2s-monster_pressure-village-1); a village with an alehouse keeps the line (r2r-village-15)",
+  "absent at: line,r3cc,r3tabs,r2a,powers,corpus,leaves,r2b,defence"
+ ],
+ [
+  "D",
+  "tests/domain/coherence/pageCensusFindings.test.js",
+  "the rendered-dossier arm: one planted fault per row > every row has a plant, and every plant reds its own row and no other",
+  "corpus"
+ ],
+ [
+  "D",
+  "tests/domain/coherence/pageCensusFindings.test.js",
+  "the rendered-dossier arm: one planted fault per row > the controls: each plant with its contradicting half removed reads nothing",
+  "corpus"
+ ],
+ [
+  "D",
+  "tests/domain/coherence/vocabularyPageFindings.test.js",
+  "F1 \u2014 the generated vocabulary > planted: each family is a finding where the town makes it false, and none where it is true",
+  "corpus"
+ ],
+ [
+  "E",
+  "tests/domain/corpusCureGuards.test.js",
+  "a cured line is not eligible in the fixed town that made it false > DS-DEF-11::WALLED-STRAINED v3 at w5-city-under_siege-1: a garrison: \"had too few hands ... most of them are learning as they go\" beside a standing garrison (LINES-READ, metropolis-under_siege-1; W2-WRITE-7 B, Tihono)",
+  "absent at: line,r3cc,r3tabs,r2a,powers,data,leaves,r2b,defence"
+ ],
+ [
+  "E",
+  "tests/domain/corpusCureGuards.test.js",
+  "a cured line is not eligible in the fixed town that made it false > DS-DEF-2::Beasts & Monsters: settled, nothing organized v6 at w5-town-monster_pressure-2: a town watch: \"nothing organised against what has come out of the country\" (the read's H4)",
+  "absent at: line,r3cc,r3tabs,r2a,powers,data,leaves,r2b,defence"
+ ],
+ [
+  "E",
+  "tests/domain/corpusCureGuards.test.js",
+  "a cured line is not eligible in the fixed town that made it false > DS-DEF-2::Invasion & War: walls with NO force v4 at rww-town-occupied-1: an occupation: \"kept by its watch and nobody else\" beside the occupiers' troops (the read's H5, its own town)",
+  "absent at: line,r3cc,r3tabs,r2a,powers,data,leaves,r2b,defence"
+ ],
+ [
+  "E",
+  "tests/domain/corpusCureGuards.test.js",
+  "a cured line is not eligible in the fixed town that made it false > DS-DEF-2::Invasion & War: walls with NO force v6 at w5-town-under_siege-1: a town watch: \"had nobody to put on its walls until the siege came\" (the read's H3; its siblings v1-v3 carry `no watch`)",
+  "absent at: line,r3cc,r3tabs,r2a,powers,data,leaves,r2b,defence"
+ ],
+ [
+  "D",
+  "tests/domain/crimeLineDisqualifiers.test.js",
+  "each line struck only where its fact makes it false, and no case left dry > the desks draw through the struck corpus",
+  "corpus"
+ ],
+ [
+  "D",
+  "tests/domain/crimeLineDisqualifiers.test.js",
+  "each line struck only where its fact makes it false, and no case left dry > the pressure pools, every rung below corrupted with and without an official in pay",
+  "corpus"
+ ],
+ [
+  "D",
+  "tests/domain/crimeLineDisqualifiers.test.js",
+  "the declarations are held to the corpus line by line > every declared vid opens with the words its declaration names (a re-generated corpus cannot shift one)",
+  "corpus"
+ ],
+ [
+  "D",
+  "tests/domain/crisisBlindDossierProse.test.js",
+  "F12 \u00b7 the crisis dimensions on the state-prose desks > a pool the marks partition is never mute under a crisis, and never draws a calm claim there",
+  "corpus"
+ ],
+ [
+  "D",
+  "tests/domain/crisisBlindWidened.test.js",
+  "rung 2D \u00b7 the crisis-blind instrument reads the twelve sampled rows > soak1k-5402: the line that no one export matters, under a famine that took the herds",
+  "corpus"
+ ],
+ [
+  "E",
+  "tests/domain/defensePostureAgainstItsFacts.test.js",
+  "no strong posture beside a guard that exists on paper > the strong pool is not drawn where the Guard assessment stands at its lowest tier",
+  "absent at: line,r3cc,r2a,powers,data,corpus,leaves,r2b,defence"
+ ],
+ [
+  "E",
+  "tests/domain/defensePostureAgainstItsFacts.test.js",
+  "the posture line against the facts beside it (F1, both directions of L2) > beside a Weak bar the posture draws the line tip's pool; a Well-Defended town at peace keeps the strong pool",
+  "absent at: line,r3cc,r2a,powers,data,corpus,leaves,r2b,defence"
+ ],
+ [
+  "E",
+  "tests/domain/defensePostureAgainstItsFacts.test.js",
+  "the posture line against the facts beside it (F1, both directions of L2) > the premise: each town is what the arm needs it to be",
+  "absent at: line,r3cc,r2a,powers,data,corpus,leaves,r2b,defence"
+ ],
+ [
+  "E",
+  "tests/domain/defensePostureReadsBadge.test.js",
+  "the posture line reads the readiness badge (L1) > under a siege the strong posture says nothing; at war it draws only its line that presumes no peace",
+  "absent at: line,r3cc,r2a,powers,data,corpus,leaves,r2b,defence"
+ ],
+ [
+  "E",
+  "tests/domain/defenseSupplyUnderACrisis.test.js",
+  "no well-supplied defence under a siege or a famine (F6) > a town at peace keeps the line",
+  "absent at: line,r3cc,r2a,powers,data,corpus,leaves,r2b,defence"
+ ],
+ [
+  "E",
+  "tests/domain/defenseWithinTheBar.test.js",
+  "no sentence stands against a Strong Invasion & War bar (L2) > neither the Invasion row nor the posture says an attacker walks in",
+  "absent at: line,r3cc,r2a,powers,data,corpus,leaves,r2b,defence"
+ ],
+ [
+  "E",
+  "tests/domain/defenseWithinTheBar.test.js",
+  "no sentence stands against a Strong Invasion & War bar (L2) > the premise: each town's Invasion bar reads Strong",
+  "absent at: line,r3cc,r2a,powers,data,corpus,leaves,r2b,defence"
+ ],
+ [
+  "D",
+  "tests/domain/display/arcaneNoneLeftOutBesideAMage.test.js",
+  "no \"No arcane practitioners\" beside a governing arcane power or a named mage > the reader's town: an Arcane Council governs and the council's archmage is named; the row is left out",
+  "leaves"
+ ],
+ [
+  "D",
+  "tests/domain/dossier/entityIndex.test.js",
+  "dossierSearch indexes the shipped prose on the player-view enumeration (SW-B7b item 3) > soak1k-9: a defense lens line the shared page prints is FOUND there, under Defense, as a prose object",
+  "r3tabs"
+ ],
+ [
+  "D",
+  "tests/domain/editWorldFactResources.test.js",
+  "EM-B2b2 \u2014 the DM's nearby-resources word survives resolveResources > A2 \u2014 THE NO-EDIT PATH IS UNMOVED: a dormant re-derivation is byte-identical to the PRE-CHANGE step's own output",
+  "r3cc,powers,data,defence"
+ ],
+ [
+  "D",
+  "tests/domain/editWorldFactResources.test.js",
+  "EM-B2b2 \u2014 the DM's nearby-resources word survives resolveResources > A6 \u2014 THE MARK IS NOT THE ECHO: the step's own resolved write-back, handed back in as a generation input, resolves exactly as before",
+  "r3cc,powers,data,defence"
+ ],
+ [
+  "D",
+  "tests/domain/facts/composeBareCrisis.test.js",
+  "the compose \u00b7 the two bare `needs: crisis` lines (R-I) > DS-DEF-2 :: Economic Survival: STRONG: declares `crisis`, refused in calm, admitted under a crisis",
+  "corpus"
+ ],
+ [
+  "E",
+  "tests/domain/facts/defenceTraditionReaders.test.js",
+  "the defence's divine and druidic traditions, read in one home > the census: r2r-thorp-0's defence holds the divine tradition, r2r-thorp-1's does not",
+  "absent at: line,r3cc,r3tabs,r2a,powers,data,corpus,r2b,defence"
+ ],
+ [
+  "D",
+  "tests/domain/facts/missingLeaves.test.js",
+  "the founder (pattern 7a: one founder, the \"Founded by\" row is its home) > the kind table classes EVERY line of the founder tables, and nothing else",
+  "r2a"
+ ],
+ [
+  "D",
+  "tests/domain/famineStoresOneRounding.test.js",
+  "rung 2D \u00b7 the held granary and the stores line read one rounding > soak1k-1582, -2452, -2962: a famine granary printed as six months is held, and the page says so",
+  "defence"
+ ],
+ [
+  "E",
+  "tests/domain/heraldCausalVoice.test.js",
+  "THE TIME BANDS \u2014 no digits, and the predicate-only sixth > no band's predicate leans on a pronoun, so the oldest reads after a siege in every legacy mold",
+  "green everywhere else"
+ ],
+ [
+  "D",
+  "tests/domain/intentAtlasSoakDistiller.test.js",
+  "intent atlas soak prior \u2014 the committed artifact is reproducible > the documented default run reproduces the committed distillate byte for byte",
+  "powers,defence"
+ ],
+ [
+  "D",
+  "tests/domain/mergeLadderHeldKeys.test.js",
+  "EM-R8 \u2014 the escalation ladder never overwrites a HELD key, and the receipt mirrors the merged record > A2 \u00b7 the escalation census by channel: the layer channel is silent and the config channel EXHAUSTS",
+  "defence"
+ ],
+ [
+  "D",
+  "tests/domain/mergeLadderHeldKeys.test.js",
+  "EM-R8 \u2014 the escalation ladder never overwrites a HELD key, and the receipt mirrors the merged record > A5 \u00b7 THE PROMISE: the repairs sub-path is never read and never written by the restatement",
+  "defence"
+ ],
+ [
+  "D",
+  "tests/domain/mergeLadderHeldKeys.test.js",
+  "EM-R8 \u2014 the escalation ladder never overwrites a HELD key, and the receipt mirrors the merged record > A6 \u00b7 where no rung fires the merged record IS the post-pass pipeline, byte for byte",
+  "defence"
+ ],
+ [
+  "D",
+  "tests/domain/powerStateProseDesk.test.js",
+  "DS-POW-6 \u2014 the capture pools are COVERT, and that is the kernel working > 5a RE-RULED (W2-A-LEAVES-2, REVIEW-W2A F3): the blanket silence at none is withdrawn \u2014 the pressure pools draw again",
+  "corpus"
+ ],
+ [
+  "D",
+  "tests/domain/powerStateProseDesk.test.js",
+  "DS-POW-6 \u2014 the reading lens TILES with DS-POW-1 rather than overlapping it > ALIVENESS: all thirteen pools fire across the two audiences",
+  "corpus"
+ ],
+ [
+  "D",
+  "tests/domain/recordInvariants.test.js",
+  "EM-R0b \u2014 recordInvariants: the town's own invariants as a module > EM-R0b A1 \u2014 the control over the declared stride: every plain generated record is clean, and the declared pins are exactly the offenders",
+  "r2b"
+ ],
+ [
+  "D",
+  "tests/domain/recordMerge.test.js",
+  "EM-R0c \u2014 the merge: the consequence of an edit is the difference of two re-derivations > A1 \u00b7 identity and the write base: merge(record, X, X) returns the record byte-identical, unmutated, with no key lost",
+  "r2b"
+ ],
+ [
+  "E",
+  "tests/domain/storesSpanFigure.test.js",
+  "ROUND THREE \u00b7 the stores' span in words contains the figure > the readers' three thorps: 1.5 months reads \"about a month and a half\", never \"two months\"",
+  "absent at: line,r3cc,r3tabs,r2a,powers,data,corpus,leaves,defence"
+ ],
+ [
+  "E",
+  "tests/domain/tonightOwnGoal.test.js",
+  "ROUND THREE \u00b7 the Tonight sheet voices a cast person with the card's own goal > the three lines the reader read are gone, and the cards' own goals print in their place",
+  "absent at: line,r3cc,r3tabs,r2a,powers,data,corpus,leaves,defence"
+ ],
+ [
+  "B",
+  "tests/domain/townCartographyCalibration.test.js",
+  "W2 the frozen measurement is re-measured live > every sampled row reproduces its manifest record exactly",
+  "surface cartography-calibration-corpus declared by r3cc,powers,data,r2b"
+ ],
+ [
+  "B",
+  "tests/domain/townCartographyCalibration.test.js",
+  "W8 the drawn corpus does not repeat itself > LIVE: each tier's argmax row re-measures at ZERO stacked buildings, and matches its record",
+  "surface cartography-calibration-corpus declared by r3cc,powers,data,r2b"
+ ],
+ [
+  "D",
+  "tests/domain/worldFactRederive.test.js",
+  "EM-B2b \u2014 world facts by consequence: the route, the refusals and the stated radius > A7 \u2014 THE GOLDENS CANNOT SEE ANY OF IT: both fixtures are byte-identical and a no-layer re-derivation is still the committed golden",
+  "r3cc,r2a,powers,data,defence"
+ ],
+ [
+  "D",
+  "tests/generators/captureBirthScale.test.js",
+  "birth-scale distribution sweep > overwhelming criminal presence reads contested/influenced at birth",
+  "defence"
+ ],
+ [
+  "E",
+  "tests/generators/clerkHookSmallPlace.test.js",
+  "the clerk line needs a place large enough to keep an office > no one in a thorp or a hamlet has an office with staff, and each keeps one hook (every row)",
+  "absent at: line,r3cc,r3tabs,powers,data,corpus,leaves,r2b,defence"
+ ],
+ [
+  "D",
+  "tests/generators/coherenceAgreeCures.test.js",
+  "the gate tally is not said where no gate stands > every dossier prose variant that names a gate carries the gate mark (the gates fixture is keyed on the roster's gates)",
+  "corpus"
+ ],
+ [
+  "D",
+  "tests/generators/coherenceAgreeCures.test.js",
+  "the gate tally is not said where no gate stands > r2r-village-6 and r2r-hamlet-18 are walled with no gate: the fortification line names no gate beside the twin",
+  "corpus"
+ ],
+ [
+  "D",
+  "tests/generators/densityLaw.test.js",
+  "end to end \u2014 the law through the real pipeline > hamlet: a v2 world lands inside both bands, crews every house, and stamps every figure",
+  "r2b"
+ ],
+ [
+  "E",
+  "tests/generators/economicHistoryRecent.test.js",
+  "the cold list's town, born as the app births it > rw3-hamlet-calm-1 (#181): an 88-year-old event is not called recent",
+  "absent at: line,r3cc,r3tabs,powers,data,corpus,leaves,r2b,defence"
+ ],
+ [
+  "D",
+  "tests/generators/generationForkCensus.test.js",
+  "EM-P2 \u2014 generation census by execution: the instrument, the classification, both channels > A1 \u2014 the instrument reaches the generator graph: mints split 4 direct / 106 via fork, no golden moves, 493 draws unpinned and 0 pinned",
+  "r3cc,r2a,powers,data,defence"
+ ],
+ [
+  "D",
+  "tests/generators/generationForkCensus.test.js",
+  "EM-P2 \u2014 generation census by execution: the instrument, the classification, both channels > A4 \u2014 both landing triples re-executed: the six varies rows, the sixteen disagreements, and zero differing landing paths",
+  "defence"
+ ],
+ [
+  "D",
+  "tests/generators/generationForkCensus.test.js",
+  "EM-P2 \u2014 generation census by execution: the instrument, the classification, both channels > A5 \u2014 the mint channel: four DIRECT mints, every seed root-prefixed, and one seed minted four times with a fork-first via list",
+  "defence"
+ ],
+ [
+  "D",
+  "tests/generators/hookThemeDraws.test.js",
+  "HK-3 draws \u2014 the corpus, through the real pipeline > pin:no-hook-is-lost \u2014 the count the DM sees is byte-for-byte what it was",
+  "powers,r2b"
+ ],
+ [
+  "E",
+  "tests/generators/hookTruthAtBirth.test.js",
+  "the record stores only hooks true of it > rww-city-insurgency-1 (one lord, no healer or hospital): the poisoning hook is not stored",
+  "green everywhere else"
+ ],
+ [
+  "E",
+  "tests/generators/hookTruthAtBirth.test.js",
+  "the record stores only hooks true of it > rww-thorp-calm-1: the sealed-walls hook is not stored where no walls stand, and its event keeps a hook",
+  "green everywhere else"
+ ],
+ [
+  "D",
+  "tests/generators/nameHeldThroughAssembly.test.js",
+  "EM-R4 \u2014 the settlement name is held through assembly > A1 \u2014 EM-R4: inert with no pins: the golden corpus and an empty bag leave every byte where it was",
+  "r3cc,r2a,powers,data,r2b,defence"
+ ],
+ [
+  "D",
+  "tests/generators/pipelinePinnedChoosers.test.js",
+  "EM-B2a3 \u2014 the institution and power choosers consult the pin seam > A1 \u2014 the null change: an unpinned run and pins {} leave the golden corpus byte-identical",
+  "r3cc,r2a,powers,data,r2b,defence"
+ ],
+ [
+  "D",
+  "tests/generators/pipelinePinnedChoosers.test.js",
+  "EM-B2a3 \u2014 the institution and power choosers consult the pin seam > A6 \u2014 the pin bag is never written through, and the uncloned control keeps that honest",
+  "defence"
+ ],
+ [
+  "D",
+  "tests/generators/pipelinePinnedMode.test.js",
+  "EM-B2a2 \u2014 the pin primitive has ONE exported home: chooseOrPin lives on the runner > A2 \u2014 the lift moves nothing: the golden corpus, the draw count and the one-stream shape",
+  "r3cc,r2a,powers,data,r2b,defence"
+ ],
+ [
+  "D",
+  "tests/generators/pipelinePinnedMode.test.js",
+  "EM-P0 \u2014 the pipeline seam: pins are consulted per chooser, on one stream > A1 \u2014 the null change: no pins and pins {} leave the golden corpus byte-identical",
+  "r3cc,r2a,powers,data,r2b,defence"
+ ],
+ [
+  "D",
+  "tests/generators/pipelinePinnedMode.test.js",
+  "EM-R1b \u2014 a recordPath-less chooser is not counted against a record-built bag > A5 \u2014 EM-R1b: a supplied transient chooser is still handed back, and the unpinned path is inert",
+  "r3cc,r2a,powers,data,r2b,defence"
+ ],
+ [
+  "D",
+  "tests/generators/powerEconomyFreshness.test.js",
+  "EM-R3 \u2014 the power structure is final under a held pin > A4 \u2014 the golden is unmoved by construction, and a held bag does move it",
+  "r3cc,r2a,powers,data,r2b,defence"
+ ],
+ [
+  "E",
+  "tests/generators/rosterDuplicateDraws.test.js",
+  "REVIEW-INTAKE-4 \u2014 no roster carries one secret or one goal twice > no roster repeats a secret",
+  "green everywhere else"
+ ],
+ [
+  "D",
+  "tests/generators/rosterDuplicateDraws.test.js",
+  "REVIEW-INTAKE-4 \u2014 no roster carries one secret or one goal twice > the corpus is live: the 1,000 births carry rosters of two or more",
+  "r2b"
+ ],
+ [
+  "D",
+  "tests/generators/rosterFinalUnderHeldRoster.test.js",
+  "EM-R2 \u2014 the roster is final inside enrichNpcCoherence under a held roster > A1 \u2014 inert with no pins: the golden corpus and the coherence tail are byte-unmoved",
+  "r3cc,r2a,powers,data,r2b,defence"
+ ],
+ [
+  "E",
+  "tests/generators/servicesStructure.test.js",
+  "servicesGenerator decomposition (F31) > entry stays a thin orchestrator (<= 400 lines)",
+  "green everywhere else"
+ ],
+ [
+  "D",
+  "tests/generators/timberHookForestHeld.test.js",
+  "the cut's towns and their guard, born as the app births them > the guard towns, with a forest standing, keep the timber hook, whichever sentence the draw of the line gives (a calm city with a managed forest; a village by shipbuilding timber)",
+  "r2a"
+ ],
+ [
+  "D",
+  "tests/generators/timberHookForestHeld.test.js",
+  "the timber line names a forest only where the record holds one > a siege with no channel past it writes no line; a siege a channel still feeds keeps it",
+  "r2a"
+ ],
+ [
+  "D",
+  "tests/generators/timberHookForestHeld.test.js",
+  "the timber line names a forest only where the record holds one > no stand of timber, or a stand worked out, writes no line; a standing forest keeps it",
+  "r2a"
+ ],
+ [
+  "D",
+  "tests/generators/tollNamePrintedEverywhere.test.js",
+  "FINDING 1: an NPC's goal names the toll by the town's access > r2r-city-8 (river): no goal names a crossroads, and a goal names \"River Toll\"",
+  "powers"
+ ],
+ [
+  "D",
+  "tests/generators/tollNamePrintedEverywhere.test.js",
+  "FINDING 1: an NPC's goal names the toll by the town's access > r2r-metropolis-49 (port): no goal names a crossroads, and a goal names \"Harbour Dues\"",
+  "powers"
+ ],
+ [
+  "D",
+  "tests/generators/tollNamePrintedEverywhere.test.js",
+  "FINDING 1: an NPC's goal names the toll by the town's access > r2r-metropolis-8 (river): no goal names a crossroads, and a goal names \"River Toll\"",
+  "powers"
+ ],
+ [
+  "E",
+  "tests/generators/upkeepVocation.test.jsx",
+  "a house keeps its own service, whatever the place can pay > RED-FIRST, the page: on the Services tab, every house shows each own service the roster offers when the place can pay in full",
+  "absent at: line,r3cc,r3tabs,r2a,powers,data,corpus,leaves,r2b"
+ ],
+ [
+  "D",
+  "tests/generators/urbanBandInstitutions.test.js",
+  "G5 \u2014 a magic-free world certifies its own world-law magic check > no magic-free settlement fails world_law_magic, at any tier, and the druid rows do appear",
+  "data"
+ ],
+ [
+  "D",
+  "tests/generators/x46NpcBand.test.js",
+  "X-46 car 4 (iii) \u2014 dark, the world is byte-identical; lit (in this test only), the roster follows the people > sixty seeds (ten a tier) generate byte-identically to the dark digests captured at the window tip (2026-11-04)",
+  "r3cc,r2a,powers,data,r2b,defence"
+ ],
+ [
+  "D",
+  "tests/joins/fieldManifest.test.js",
+  "producer/consumer registry (Wave 8 #3 \u2014 dead-field CI) > 'magicRecovery' is still read by EVERY listed consumer (no dead write, no stale list)",
+  "leaves"
+ ],
+ [
+  "D",
+  "tests/lib/instantWorld/mundaneRealmAcceptance.test.js",
+  "MG-4.2 \u2014 the twin-world envelope: a mundane realm is not a thinner realm > the recorded census figures are the ones the harness actually produces",
+  "data,defence"
+ ],
+ [
+  "D",
+  "tests/lint/arcaneClassifierCensus.walker.test.js",
+  "the arcane-spelling census (MG-3h / R-BLD-5) > no alternation mixes arcane tokens with ambiguous ones outside the recorded set",
+  "leaves"
+ ],
+ [
+  "D",
+  "tests/lint/defenceFactReaders.walker.test.js",
+  "the court, the gate and a hired company by its other names have one reader (shrink-only) > every file reads exactly its banked count, and no file reads outside the register",
+  "r2a"
+ ],
+ [
+  "C",
+  "tests/lint/factLayers.walker.test.js",
+  "nothing reads at or above its own layer (shrink-only) > READERS: every file reads exactly its banked LINES (by content, each with its reason), and no file reads outside the register",
+  "door red (law b)"
+ ],
+ [
+  "C",
+  "tests/lint/factLayers.walker.test.js",
+  "the layer table covers every leaf and every pool > every vocabulary dimension's home and every factsOf getter has a leaf row",
+  "door red (law b)"
+ ],
+ [
+  "D",
+  "tests/lint/mutationCoverageManifest.test.js",
+  "mutation-coverage manifest \u2014 the totality contract (E-A) > TOTALITY: every enumerated invariant file has a manifest entry",
+  "r2a,powers,defence"
+ ],
+ [
+  "D",
+  "tests/lint/negativeAssertionAnchor.walker.test.js",
+  "negative-assertion anchor walker (habitat removal) > no NEW un-anchored negative assertion anywhere in the test corpus",
+  "r2a,data,corpus,leaves,defence"
+ ],
+ [
+  "D",
+  "tests/lint/negativeAssertionAnchor.walker.test.js",
+  "negative-assertion anchor walker (habitat removal) > the generation-facing quarantine is EXACT (a new, grown or unbanked offender reds)",
+  "r2a,data,defence"
+ ],
+ [
+  "A",
+  "tests/lint/newsHeadlineContract.walker.test.js",
+  "<load>",
+  "red at the line"
+ ],
+ [
+  "A",
+  "tests/lint/newsVoiceContract.walker.test.js",
+  "<load>",
+  "red at the line"
+ ],
+ [
+  "D",
+  "tests/lint/noLegacyFactionReaders.walker.test.js",
+  "no legacy faction readers outside FPZ (PEOPLE-5, M-2; landed by PEOPLE-LAND) > every read outside the FPZ list is red; zero at the landing",
+  "r2a"
+ ],
+ [
+  "C",
+  "tests/lint/observedShapeReaders.walker.test.js",
+  "reader-with-no-writer ratchet: the EXECUTED corpus > the producers ran and the corpus is not empty",
+  "door red (law b)"
+ ],
+ [
+  "C",
+  "tests/lint/observedShapeReaders.walker.test.js",
+  "reader-with-no-writer ratchet: the live scan > A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live",
+  "door red (law b)"
+ ],
+ [
+  "C",
+  "tests/lint/observedShapeReaders.walker.test.js",
+  "reader-with-no-writer ratchet: the live scan > SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished",
+  "door red (law b)"
+ ],
+ [
+  "C",
+  "tests/lint/observedShapeReaders.walker.test.js",
+  "reader-with-no-writer ratchet: the live scan > THE ERASURE GUARD: no frozen row has vanished from the DETECTOR while its read still stands",
+  "door red (law b)"
+ ],
+ [
+  "C",
+  "tests/lint/observedShapeReaders.walker.test.js",
+  "reader-with-no-writer ratchet: the live scan > the UNREVIEWED-UI cohort is ENFORCED, banked, and exactly its measured size",
+  "door red (law b)"
+ ],
+ [
+  "C",
+  "tests/lint/observedShapeReaders.walker.test.js",
+  "reader-with-no-writer ratchet: the live scan > the provenance drift classifier separates a detector change from an input change > THE LIVE ESTATE INSTANCE: a freshly re-minted baseline has NO drift at all",
+  "door red (law b)"
+ ],
+ [
+  "D",
+  "tests/lint/poolDominance.walker.test.js",
+  "no drawn pool prints more of one line than its register allows > no pool rises above its ceiling beyond its own noise, or crosses into dominance, on both readings; none collapses",
+  "data"
+ ],
+ [
+  "C",
+  "tests/lint/presumedThings.walker.test.js",
+  "ARM 1 \u2014 the source > \u26d4 every source literal that names a thing declares it, or has its row",
+  "door red (law b)"
+ ],
+ [
+  "D",
+  "tests/lint/presumedThings.walker.test.js",
+  "ARM 2 \u2014 the printed corpus > \u26d4 no stale row: every arm-2 row still covers a printed line",
+  "r2a,data"
+ ],
+ [
+  "D",
+  "tests/lint/presumedThings.walker.test.js",
+  "ARM 3 \u2014 the strip ban (W2-B-DECLARE item 3; record 288, ruling 1, B (iii)) > \u26d4 no strip without its row: a new unwrap of a pool, in a shape the ban names, is red (draw it through a door)",
+  "defence"
+ ],
+ [
+  "A",
+  "tests/lint/proseFamilyContract.walker.test.js",
+  "four durable prose-family exact-totality contract > A1 reconstructs the exact four-family AO-0 corpus twice from one build",
+  "red at the line"
+ ],
+ [
+  "A",
+  "tests/lint/proseFamilyContract.walker.test.js",
+  "four durable prose-family exact-totality contract > A2 rejects malformed selector axes while retaining nulls and projected nested gaps",
+  "red at the line"
+ ],
+ [
+  "A",
+  "tests/lint/proseFamilyContract.walker.test.js",
+  "four durable prose-family exact-totality contract > A3 freezes all 58 identities counts bytes digest and movement polarities",
+  "red at the line"
+ ],
+ [
+  "A",
+  "tests/lint/proseFamilyContract.walker.test.js",
+  "four durable prose-family exact-totality contract > A5 closes twelve pulse-history records and pins overlapping headline aliases",
+  "red at the line"
+ ],
+ [
+  "A",
+  "tests/lint/proseFamilyContract.walker.test.js",
+  "four durable prose-family exact-totality contract > A6 reaches the regional audit log while proving its selected prose zero",
+  "red at the line"
+ ],
+ [
+  "D",
+  "tests/lint/recordRegisterTotality.walker.test.js",
+  "the record class register \u2014 totality over a generated record, in both directions > A6 \u2014 every consistency group is live, and no group covers another",
+  "r2b"
+ ],
+ [
+  "D",
+  "tests/lint/seedLoopTotality.walker.test.js",
+  "seed-loop totality walker (habitat removal) > no NEW bare seed loop anywhere in the test corpus",
+  "leaves,defence"
+ ],
+ [
+  "D",
+  "tests/lint/seedLoopTotality.walker.test.js",
+  "seed-loop totality walker (habitat removal) > the generation-facing quarantine is EXACT (a new, grown or unbanked offender reds)",
+  "defence"
+ ],
+ [
+  "A",
+  "tests/lint/siteCoherenceRatchet.test.js",
+  "site-coherence contradiction ratchet (Wave 0 \u2014 inventory freezing, never correctness) > C1 \u2014 the live row set equals the frozen baseline in both directions",
+  "red at the line"
+ ],
+ [
+  "D",
+  "tests/lint/sourceCitationIntegrity.walker.test.js",
+  "source citation integrity \u2014 the live estate > ARM 2 \u2014 ONLY-SHRINKS: no NEW past-EOF citation in a live document",
+  "defence"
+ ],
+ [
+  "C",
+  "tests/lint/writerReach.walker.test.js",
+  "writer-with-no-reader ratchet: the EXECUTED corpus and the closures > the producers ran and the write population is not empty",
+  "door red (law b)"
+ ],
+ [
+  "C",
+  "tests/lint/writerReach.walker.test.js",
+  "writer-with-no-reader ratchet: the frozen register > the declared DARK register is structurally lawful and every row is live-verified",
+  "door red (law b)"
+ ],
+ [
+  "C",
+  "tests/lint/writerReach.walker.test.js",
+  "writer-with-no-reader ratchet: the frozen register > the frozen shapesDigest EQUALS the in-process digest of corpus.shapes \u2014 two executions of one builder are one corpus by bit, not by count",
+  "door red (law b)"
+ ],
+ [
+  "C",
+  "tests/lint/writerReach.walker.test.js",
+  "writer-with-no-reader ratchet: the frozen register > the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity",
+  "door red (law b)"
+ ],
+ [
+  "C",
+  "tests/lint/writerReach.walker.test.js",
+  "writer-with-no-reader ratchet: the live judgment > every DARK identity is REGISTERED or BANKED \u2014 the shrink-only comparison is clean",
+  "door red (law b)"
+ ],
+ [
+  "C",
+  "tests/lint/writerReach.walker.test.js",
+  "writer-with-no-reader ratchet: the live judgment > the banked cohort is exact \u2014 a member now LIT or no longer written is stale, never silently spent",
+  "door red (law b)"
+ ],
+ [
+  "B",
+  "tests/pdf/goldenViewModel.test.js",
+  "pdf.6 \u2014 golden snapshot of the SHARED_FIELDS canon values > canon values for the fixed seed are golden (review any change, do not auto-update)",
+  "surface pdf-golden-view-model-snapshot declared by r3cc,powers,data,r2b,defence"
+ ],
+ [
+  "D",
+  "tests/property/dmLayerGoldenIsolation.test.js",
+  "EM-B2a4 \u2014 the DM layer, its pin bag and the golden isolation property > A7 \u2014 THE ISOLATION PROPERTY: a dormant layer is the committed golden on EVERY corpus row, and a one-root layer moves that root",
+  "r3cc,r2a,powers,data,r2b,defence"
+ ],
+ [
+  "B",
+  "tests/property/dossierProseManifest.test.js",
+  "the composed-prose manifest \u2014 the DRIFT corpus, both audiences > \u2b50 THE DRIFT ARM: no row added, no row removed, no row moved",
+  "surface dossier-prose-manifest declared by r3cc,powers,data,r2b,defence"
+ ],
+ [
+  "B",
+  "tests/property/dossierProseManifest.test.js",
+  "the composed-prose manifest \u2014 the DRIFT corpus, both audiences > \u2b50\u2b50 THE DRIFT CORPUS CARRIES FOUR SEEDS, and the tally is derived rather than described",
+  "surface dossier-prose-manifest declared by r3cc,powers,data,r2b,defence"
+ ],
+ [
+  "B",
+  "tests/property/dossierProseManifest.test.js",
+  "the two controls no one-audience manifest can see > \u2b50 THE MIXED-POOL AUDIENCE ARM: the two faces differ only where a pool is mixed",
+  "surface dossier-prose-manifest declared by r3cc,powers,data,r2b,defence"
+ ],
+ [
+  "D",
+  "tests/property/editCorpusRatchet.test.js",
+  "the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus > A1 the dormant re-derivation and the merge identity reproduce the record over the whole stride",
+  "r2b"
+ ],
+ [
+  "D",
+  "tests/property/editCorpusRatchet.test.js",
+  "the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus > A3 no merged object mixes a taken leaf with a settled leaf outside a declared consistency group",
+  "powers,data,defence"
+ ],
+ [
+  "D",
+  "tests/property/editCorpusRatchet.test.js",
+  "the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus > A4 the town keeps its invariants, the layer channel escalates nothing, and the config channel is named",
+  "defence"
+ ],
+ [
+  "D",
+  "tests/property/editCorpusRatchet.test.js",
+  "the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus > A7 the honesty figures are re-measured and the ride-along has its first population in the chain",
+  "powers,data,r2b"
+ ],
+ [
+  "D",
+  "tests/property/editCorpusRatchet.test.js",
+  "the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus > A8 the family declared instruments hold at this seam",
+  "r2b,defence"
+ ],
+ [
+  "B",
+  "tests/property/espionageDormancyFence.test.js",
+  "FENCE 1 (REPLACED) \u2014 the driven byte-identity golden, and the chain that terminates > THE DRIVEN GOLDEN: 360 settlements at this tip hash to the PRE-COUPLING corpus",
+  "surface espionage-dormancy-fence declared by r3cc,powers,data,r2b,defence"
+ ],
+ [
+  "B",
+  "tests/property/generatorGoldenMaster.test.js",
+  "generator golden master (cross-build output stability) > every config produces byte-identical output to the golden master",
+  "surface generator-golden-master declared by r3cc,powers,data,r2b,defence"
+ ],
+ [
+  "B",
+  "tests/property/heraldKnowledgeDeskGolden.test.js",
+  "the knowledge desk \u2014 the non-omniscient Herald golden (captured first, byte-stable after) > THE REFILE MOVES NO CONTENT BYTE, AND EXACTLY THE DECLARED ITEMS CHANGE DESK",
+  "surface herald-knowledge-desk-golden declared by r3cc,powers,data,r2b,defence"
+ ],
+ [
+  "D",
+  "tests/property/statecraftExposureBand.test.js",
+  "STATECRAFT-BAND U1 \u2014 the seeded run: the chain at the band > dramatic_campaign fp-read-2, head on, twenty years: scandals inside the measured band and mobilizations at the dark twin",
+  "defence"
+ ],
+ [
+  "B",
+  "tests/simulation/presetLightingWitness.test.js",
+  "preset lighting witness \u2014 the per-preset new-campaign bit witness > every witnessed row matches the recorded witness, and the diff names which moved",
+  "surface preset-lighting-witness declared by r3cc,powers,data,r2b,defence"
+ ],
+ [
+  "D",
+  "tests/ui/defenseTabFlow.test.js",
+  "T2-24 \u2014 magic does not function: no arcane provision, no magic-dependence reading > STOP-2: no \"Arcane defense\" force group (screen or print) in a dead-magic world, alchemist or not",
+  "defence"
+ ],
+ [
+  "D",
+  "tests/ui/economicsTabFlow.test.js",
+  "DESK-ECON2 \u2014 the mounted positions are DRAWS, not citations > economics.exportPosture: the posture sentence renders, and a public dossier renders none",
+  "corpus"
+ ],
+ [
+  "D",
+  "tests/ui/generalDeskTabFlow.test.js",
+  "<load>",
+  "corpus"
+ ]
+]
