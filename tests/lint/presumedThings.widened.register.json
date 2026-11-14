@@ -22907,12 +22907,6 @@
     "root",
     "Stores: a granary, ",
     "5e42deadb696f612"
-   ],
-   [
-    "granary",
-    "implied",
-    "No granary; a few weeks in the larder.",
-    "5a180024efea6ed4"
    ]
   ],
   "src/domain/supplyChainState.js": [
