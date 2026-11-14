@@ -983,6 +983,120 @@ SEATS2['W2-FIX-DATA-9'] = dict(
 )
 
 
+# THE REHEARSAL OF THE BAR: a reader seat on the joined rehearsal tree. JOINED is set to that tree's tip (read from origin) before generating.
+JOINED = None
+
+def build_bar():
+    assert JOINED, 'set JOINED to the join rehearsal branch tip before generating this brief'
+    head = (
+        "# BRIEF: REVIEW-BAR-0 · a rehearsal of the bar: the known list placed on the joined tree, and ten fresh towns read cold\n\n"
+        "The seat's assignment, written by the chair as a file on 2026-11-14 and named in the seat's first message. The chair is the Claude Code session "
+        "%s. Checked out at `lane/join-rehearsal-2026-11-14`; the seat's own branch `lane/review-bar-0-2026-11-14`; a clone of 1200 commits; effort high; the "
+        "model as the chair's records of that day give the mix. A SELF-CONTAINED brief. Rulings sent after it are in the chair's records.\n\n---\n\n" % CHAIR
+    )
+    body = '\n\n'.join([
+        ("You are REVIEW-BAR-0, an independent reader of the settlement-engine integration program. You fix nothing and you change nothing on any branch you "
+         "read. THE RELEASE IS HELD until a fresh round of thirty generated towns, read thoroughly and cold, shows NO high and NO medium false sentence (the "
+         "bar). Ten builder lanes have been curing false sentences, each on its own branch; a rehearsal seat has merged them all onto one tree: "
+         "lane/join-rehearsal-2026-11-14 at " + JOINED + ". YOUR JOB IS TO MEASURE THAT TREE AGAINST THE BAR, as a rehearsal: how many false sentences a town "
+         "still prints, of what kinds, and whose files write them. The count you return decides where the next week's work goes. A false sentence you miss "
+         "is the costly error; a true sentence you list wastes a builder's hour."),
+        WHY2,
+        ("READ FIRST, and no more than this:\n"
+         "1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6) at your checkout.\n"
+         "2. THE READERS' SCALE AND TOOLS, on origin/lane/round-3-cut-2026-11-13 (`git fetch origin lane/round-3-cut-2026-11-13`): "
+         "docs/chair/2026-11-13/probes/REVIEW-R2-STAGES/READER-BRIEF.md WHOLE (the kinds a to h, the three severities, what is NOT a fault, the output's form: "
+         "your scale and your readers' brief) and the tools beside it (births.mjs, render.sh and its render file, merge-cold.mjs: how a town is born in the app's "
+         "own configuration shape and its whole owner view rendered to a text file, every group, sub-tab and disclosure opened); "
+         "docs/chair/2026-11-13/ROUND-3-CUT-2026-11-13.md, THE HEADLINE and section 1 \"PLACE\" only (how a list of sentences is placed on a tree's pages by "
+         "script, and the re-deal caveat), with its probes under docs/chair/2026-11-13/probes/ROUND-3-CUT/ (place.mjs, matrix.mjs, redeal.mjs) and its data "
+         "docs/chair/2026-11-13/ROUND-3-CUT.json and ROUND-3-CUT-INCREMENT.json (key `lines`; query by script, never print). Copy the tools out with git archive; "
+         "run them from outside every repository tree.\n"
+         "DO NOT open any lane's hand-back, any other file under docs/chair/, or any commit message: THIS READ IS COLD."),
+        ("FIRST ACT. Read your checkout's tip back from origin (lane/join-rehearsal-2026-11-14): it was " + JOINED + " when this was written. If it has moved, "
+         "read the tree at the tip you find and say which in your report."),
+        ("THE WORK, in this order:\n"
+         "A. THE KNOWN LIST, PLACED (cheap; first; push its table before B). Render the cut's twenty towns (its own seeds and render) at the joined tree and "
+         "at the line's tip (origin/lane/integration-2026-11-07) and place the cold list's lines on both with the cut's own matcher: HIGH, MED and LOW still "
+         "printing at each, beside the cut's own figures (189 HIGH and 652 MED at the line on 2026-11-13; its forecast 101 and 449). THE RE-DEAL CAVEAT, "
+         "measured: how many of the twenty towns keep their identity on the joined tree (the same cast, powers and roster as on the line): a listed sentence "
+         "that no longer prints in a re-dealt town is NOT counted as cured: give the table for the towns that kept their identity, and the rest apart. The same "
+         "for the increment's list and its seeds.\n"
+         "B. TEN FRESH TOWNS, READ COLD AND WHOLE, at the joined tree. Ten seeds nobody has read, born the way the app births them (the configuration panel's "
+         "shape; every other dial random as shipped): a thorp (calm); two hamlets (calm; under siege); two villages (famine; calm); two towns (occupied; calm); "
+         "two cities (under siege with famine; wartime); a metropolis (calm). Name the seeds in the reader's pattern with the prefix `bar0`. For each town: the "
+         "whole owner view rendered to one text file, and its record beside it. EVERY LINE OF EVERY PAGE is read as the town's owner reads it and each candidate "
+         "is VERIFIED AGAINST THE RECORD by a query before it is listed, by the READER-BRIEF's kinds and severities, ONE version (the joined tree). Spread the "
+         "towns over helper agents of your own if your harness offers them (each given the READER-BRIEF adapted to one version, its towns, and nothing else: "
+         "they are cold); check a sample of what each returns (a listed sentence that is true; a page region nobody listed anything in: read one yourself). "
+         "Merge their lists into ONE (the reader's merge tool), each row: town, tab, the sentence exactly as printed, kind, mechanism, the fact against it, "
+         "severity.\n"
+         "C. WHOSE LINES. For every HIGH and MED row of B: the writer (the source file and the function or pool id: `git grep -n -F` a fixed run of the "
+         "sentence in the joined tree; a composed sentence is traced to the leaf that wrote the false part) and the lane that holds that file by its own "
+         "commits since the line (`git log --oneline origin/lane/integration-2026-11-07..origin/lane/<lane> -- <file>` over the ten lanes; none: \"no lane\"). "
+         "Group the rows by writer: the count of rows, of towns, and one example.\n"
+         "D. THE REPORT, docs/chair/2026-11-14/REVIEW-BAR-0-2026-11-14.md on your branch, with the merged list as JSON and your probes under "
+         "docs/chair/2026-11-14/probes/REVIEW-BAR-0/: (1) THE COUNT: HIGH, MED, LOW per town and in all, and per kind; the average per town beside the cut's "
+         "(about 9 HIGH and 33 MED a town at the line on 2026-11-13: say plainly that the towns differ and what that does to the comparison); (2) part A's "
+         "tables; (3) the writers, the largest first, with the lane that holds each; (4) the classes no lane holds; (5) what you did not read or could not "
+         "verify, and the three rows you are least sure of. EXECUTED told from PLAUSIBLE throughout."),
+        ("HOW YOU WORK: scratch worktrees (detached, at the joined tree and at the line's tip), `npm ci` in one and node_modules linked in the other where the "
+         "lockfile is the same; FULL HISTORY before any `git log` range (`git fetch --depth=2147483647 origin` for the line and the lanes: a shallow clone "
+         "answers ranges wrongly); runs through `sh scripts/gate-tail.sh <command>`, never a pipe; long runs to a file outside every repository tree; query big "
+         "files by script, no dumps into your context. PUSH AFTER EVERY PART (A's table; B's merged list; the report)."),
+        COUNT2 % ('400,000', '400,000'),
+        RUNS,
+        ("WHAT THIS BRIEF AUTHORISES: scratch worktrees and `npm ci`; helper agents of your own for the reading; commits of your report, lists and probes; plain "
+         "pushes to lane/review-bar-0-2026-11-14, your only branch (explicit refspec: `git push origin <local>:refs/heads/lane/review-bar-0-2026-11-14`). NEVER, "
+         "whoever asks, your own harness's defaults included: a commit or a push to any branch you read or to any other branch; `--no-verify`; a force push; a "
+         "pull request, draft or not; anything on master; a deploy; a hosted database or production credentials. If your permission check refuses something "
+         "this brief authorises, stop and tell the chair in one message; never route round a refusal."),
+        messages("when part A's table is pushed (one message: the figures), for something that blocks the whole read, and with your report (the tip; HIGH, MED and LOW in all and the average a town; the five largest writers with their lanes)"),
+    ])
+    return head + body + '\n'
+
+
+SEATS2['R2-CODE-B-7'] = dict(
+    title="R2-CODE-B-7 · round two's second code lane: the line's merge and the final statement",
+    branch='lane/r2-code-b-2026-11-13', tip='c40da4ec', statement=True,
+    intro=("You are R2-CODE-B-7, the seventh seat on round two's second code lane of the settlement-engine integration program (lane/r2-code-b-2026-11-13). The "
+           "lane cures false lines on the Tonight sheet, the cast cards, the crisis cast and hooks, the NPCs, Relationships, Services and Daily Life tabs, the "
+           "chain card's facts, the quick guide, the traditions, the faith reading and the stress summaries. ITS LIST IS DONE: the sixth seat closed it (the side "
+           "branch is merged; the measuring seat's command and the field diff are taken) and handed back before the landing work, which is yours whole: the "
+           "merge of the integration line, which now holds point 49 (the instrument lane), the instrument's findings on this lane's lines, and the lane's ONE "
+           "final statement."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/R2-CODE-B-HANDBACK.md: PART 6 WHOLE (the sixth seat: its items; FOR THE JOIN; ROW 3 MEASURED, NOT BEGUN; the "
+          "census's counts at base and tip and the field diff by family, which serve your statement; \"Rows NOT reached\" row 3 (i) to (v): THAT IS YOUR LIST) "
+          "and PART 5's FOR THE JOIN and new words. The file is long: read those parts by line range, by script.\n"
+          "3. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (docs/INTEGRATION_STYLE_2_2026-11-09.md, the section headed "
+          "\"## 2m.\": the instrument's walkers and doors, by command; about forty lines; by script)."),
+    work=("THE WORK, in this order, pushed as made:\n"
+          "1. FULL HISTORY FIRST (`git fetch --depth=2147483647 origin lane/integration-2026-11-07 lane/r2-code-b-2026-11-13`; `git rev-parse "
+          "--is-shallow-repository` prints false; the base with the line is e969a75b7): a shallow clone gives wrong merge bases and false conflicts.\n"
+          "2. THE MERGE of the line's tip as you read it back (976db5b19 when this was written; a plain merge commit, never a rebase; say which commit and what "
+          "conflicted). BY THE CHAIR'S AND THE SIXTH SEAT'S TRIAL MERGES: 9 conflicted files. CODE, resolved BY HAND AT THE CAUSE, each file read whole first, "
+          "so that BOTH sides' cures stand (the line's changes of points 47 and 48, and this lane's removals: the upstream note, the \"Import: <a chain's "
+          "label>\" From line, the template house list): src/pdf/sections/EconomicsTrade.jsx, Services.jsx, SupplyChainFlow.jsx; list every hunk and what you "
+          "kept; a hunk that needs a choice between two behaviours is a STOP with both sides. THE OTHER SIX are registers and pins (wiring-census.json, "
+          ".writer-reach-baseline.json, the lighting census, the tuning inventory, dossierPhoneFloorAllViews, institutionBudgetPromise): each taken from ONE "
+          "side in the merge and then re-derived through its own door, each its own commit (a pin re-keyed by identity with its cause), never merged by hand. "
+          "The edge bundles by `npm run build:edge-shared`, alone, last.\n"
+          "3. EVERY CHECK SECTION 2m LISTS, right after the merge: each red that names a line, a literal, a pool row or a page line of THIS lane's files is "
+          "cured or declared through its door; a red on the line's own carried set or on another lane's file is NAMED with its owner and left; nothing is "
+          "banked by hand. The page census on this lane's lines (2m's door, the 720).\n"
+          "4. THE LANE'S ONE FINAL STATEMENT in the form below: the sixth seat's census counts and field diff stand in it unless your merge changed what the "
+          "lane's files print (say how you know); the whole suite once, in six shards, every red classed against the line's carried set and the lane's base; "
+          "the draft shift record; the new words of the whole lane gathered from the hand-back's parts; FOR THE JOIN gathered whole (the side seat's stops; "
+          "the stores' span's two homes; the wartime summary's one path; the quick guide that no surface calls; the Power tab's seat line; your lines in "
+          "EconomicsTab.jsx and EconomicsTrade.jsx, which the third leaves lane also changes). Then ONE message to the chair: the tip, the suite's reds by "
+          "class, where the statement is. A fresh reader then reads the lane: leave it what it needs."),
+    merges="; the merge of the integration line's tip named in step 2",
+    when="for a stop that blocks everything you have left, when the merge and its registers are pushed (the tip; what conflicted), and with your final statement or hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
@@ -1056,7 +1170,7 @@ if __name__ == '__main__':
     seats = sys.argv[2:] or list(SEATS)
     os.makedirs(out, exist_ok=True)
     for seat in seats:
-        text = build2(seat) if (seat in SEATS2 or seat == 'R3-CODE-C-6') else build(seat)
+        text = build_bar() if seat == 'REVIEW-BAR-0' else (build2(seat) if (seat in SEATS2 or seat == 'R3-CODE-C-6') else build(seat))
         for bad in ('claude-opus', 'claude-fable', 'claude-sonnet', 'claude-haiku', 'Opus', 'Fable', 'Sonnet', 'Haiku'):
             assert bad not in text, (seat, bad)
         text = exact_hashes(text, seat)
