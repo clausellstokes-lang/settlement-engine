@@ -133,7 +133,8 @@ export function economyShowsMagic(record) {
   const es = record && typeof record === 'object'
     ? /** @type {{ economicState?: { primaryExports?: unknown, incomeSources?: unknown } | null }} */ (record).economicState
     : null;
-  const exportsOf = Array.isArray(es?.primaryExports) ? es.primaryExports : [];
+  const sold = es?.primaryExports; // read, never written (tradeListWriters)
+  const exportsOf = Array.isArray(sold) ? sold : [];
   const incomeOf = Array.isArray(es?.incomeSources) ? es.incomeSources : [];
   return exportsOf.some((x) => typeof x === 'string' && MAGIC_ECONOMY.test(x))
     || incomeOf.some((x) => {

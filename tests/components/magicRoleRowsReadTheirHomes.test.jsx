@@ -15,6 +15,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { deriveMagicPosture } from '../../src/domain/display/dossierViewModel.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 /** The reader's own shape (REVIEW-R2-STAGES render.rr2s.jsx :: cfgFor). @param {string} seed */
 const birthApp = (seed) => {
@@ -38,10 +39,9 @@ describe('the Magic tab\'s role rows read the homes that speak of each role (#10
     expect(plain, 'anchored: the four rows print').toContain('Economic role: absent');
     expect(plain).toContain('Military role: absent');
     const sold = rows({ ...base, economicState: { primaryExports: ['Alchemical trade (potions, reagents)'] } });
-    expect(sold).not.toContain('Economic role: absent');
-    expect(sold).toContain('Military role: absent');
-    expect(rows({ ...base, economicState: { incomeSources: [{ source: 'Apothecary & Alchemy' }] } })).not.toContain('Economic role: absent');
-    expect(rows({ ...base, economicState: {}, defenseProfile: { traditions: { hasArcane: true } } })).not.toContain('Military role: absent');
+    expectAbsentWithAnchor(sold, 'Economic role: absent', 'Military role: absent', 'an alchemical export');
+    expectAbsentWithAnchor(rows({ ...base, economicState: { incomeSources: [{ source: 'Apothecary & Alchemy' }] } }), 'Economic role: absent', 'Military role: absent', 'an alchemy income');
+    expectAbsentWithAnchor(rows({ ...base, economicState: {}, defenseProfile: { traditions: { hasArcane: true } } }), 'Military role: absent', 'Economic role: absent', 'the defence\'s arcane tradition');
   });
 
   test('the reader\'s town: rr2s-city-occupied-rand-1 sells alchemy and prints no "Economic role: absent"; a hamlet that sells none keeps it', () => {

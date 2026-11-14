@@ -24,6 +24,7 @@ import { ResourcesTab } from '../../src/components/new/tabs/ResourcesTab.jsx';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 /** The reader's own shape (REVIEW-R2-STAGES render.rr2s.jsx :: cfgFor). @param {string} seed */
 const birthApp = (seed) => {
@@ -46,8 +47,7 @@ describe('no word of plenty for the grounds under a siege (#937)', () => {
     const all = besieged.config.nearbyResources; const dep = besieged.config.nearbyResourcesDepleted || [];
     expect(all.filter((/** @type {string} */ k) => !dep.includes(k)).length, 'anchored: grounds not depleted').toBeGreaterThan(0);
     const t = textOf(besieged);
-    expect(t).toContain('Grain Fields');
-    expect(t).not.toMatch(/Abundant/);
+    expectAbsentWithAnchor(t, 'Abundant', 'Grain Fields', 'the besieged grounds print without the word of plenty');
     const calm = birthApp('rr2s-town-calm-rand-1');
     expect(textOf(calm)).toMatch(/Abundant/);
   }, 60000);
