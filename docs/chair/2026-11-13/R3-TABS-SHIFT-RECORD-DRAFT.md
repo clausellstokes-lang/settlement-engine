@@ -3,7 +3,7 @@
 **Base:** `aac79b808` (lane/integration-2026-11-07, the lane's cut). **The line merged in:** `9e57f5023` (point 48, by
 de0872aa5). **Code tip measured:** `e43bacae8` (the code of 6ed610479). Drafted by the third seat (R3-TABS-3,
 2026-11-14) as BRIEF-R3-TABS-2's item 3 asks: ONE draft record naming the six golden surfaces as moved or unmoved, by
-measure. DRAFT: point 49 is not yet merged into the lane; the record is measured again at the final tip.
+measure. Point 49 was merged after this draft was first written (841945a26, the line's tip 976db5b19); the record is RE-MEASURED at the final tip below.
 
 ## The causes this lane carries (one per commit)
 | commit | cause | what it moves |
@@ -22,6 +22,9 @@ measure. DRAFT: point 49 is not yet merged into the lane; the record is measured
 | b2682f748, d6b0526cb | a range is not a rating: no severity word for a ranged tension | the History tab, the dossier search's row, the PDF's Overview and History |
 | 9f95d404c | a naval line only where the route is the sea (record 422) | the defence desk's composed prose (DS-DEF-6) |
 | 6ed610479 | the crime rows' regex writes its quotes as escapes | nothing a reader sees (the same regex; the mount walker's read) |
+| 841945a26 | the merge of the line's tip 976db5b19 (point 49) | the line's own causes (not this lane's) |
+| 3a497ef5e | the ranged-tension row test collects every failure | nothing a reader sees (a test) |
+| cd63653bf, 2903e2143, f5622ab8f, b731c85e0, 268b26d8c | registers by their doors after the merge (wiring census, lighting census, the byte register's declared row, the observed-shape readers, the page census's two falls) | nothing a reader sees |
 | eaca79fcd, fc2e15afd, 66fd07e91, 76641edaf, 02a539072, 96c822457, a19a0ee1b | registers by their doors; pins re-keyed with causes | nothing a reader sees |
 
 ## The record: FIELD DIFF, base against tip
@@ -65,3 +68,18 @@ naval cure's are the 'Port only' lines off a route that is not the sea; L2's the
   moves the drift tally and the drift list as above. Re-recorded at the merge point through the manifest's door, with
   this lane's causes (L0, L2, the naval cure) named.
 - Every other surface green at base, line and tip.
+
+## RE-MEASURED AT THE FINAL TIP (after the merge of point 49)
+**The base for this lane's share is now the line 976db5b19.** Code tip: 268b26d8c (the final tip's later commits are
+documents).
+- **Field diff:** the census's 720, the reader's 20 and the 144 fresh births at the line 976db5b19 and at the final tip
+  5df403a1c: **byte-identical** (census 71d1f68d…, fresh 0a7713fa…, reader 2997a853…; 884 of 884, 0 errors at both).
+  (The census and fresh hashes differ from the base aac79b808's: the line's point 48 and 49 move births; the lane
+  moves none.)
+- **The six surfaces, in the whole suite at 2903e2143** (six vitest shards; the manifest also run at the line and the
+  pre-merge tip): generator golden master, espionage fence, PDF golden, Herald desk golden, preset-lighting witness
+  **green, UNMOVED**; the **dossier prose manifest** red with the same three titles at the line and the tip, and MOVED
+  by this lane exactly as above: the line 976db5b19 receives 410 / 396 / 396 / 73,446 cells with 1,038 moved rows; the
+  tip 402 / 390 / 390 / 73,196 with 1,050 (golden-master-v3 −250, the seeds −8 / −6 / −6, the same fourteen rows); the
+  mixed-pool arm's output identical at the line and the tip. The re-record is the merge seat's (the chair's word of
+  03:08 UTC: "Your draft record's note that the prose manifest MOVED on this lane stands").
