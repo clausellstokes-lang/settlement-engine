@@ -56,6 +56,11 @@ const TWO_ROLES = {
 const TWO_JOBS = {
   'Parish church': { clergy: "its clergy's powers", parish: "the building, the community's rallying point" },
   'Monastery or friary': { clergy: "its clergy's powers", hospital: 'its infirmary' },
+  // ⭐ RE-KEYED BY IDENTITY (UPKEEP-15, the chair's ruling (c) of 2026-11-14: a larger rung of a named two-job house
+  // is the same house). The cause: UPKEEP-MEASURE-2 X5 (1f6cc23d0) gives the monastery's ladder the clergy's names, so
+  // the ladder's larger rungs open the clergy beside the infirmary, as the Monastery or friary does: the same two jobs.
+  'Multiple monasteries': { clergy: "its clergy's powers", hospital: 'its infirmary' },
+  'Major monasteries (5-10)': { clergy: "its clergy's powers", hospital: 'its infirmary' },
 };
 /** THE NAMED ONE-JOB HOUSES the law reads by name: the one part each opens alone where it stands. */
 const ONE_JOB = { 'Wayside shrine': 'parish' };
