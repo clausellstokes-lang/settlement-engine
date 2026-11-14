@@ -1,0 +1,75 @@
+
+r2r-hamlet-14 (hamlet, calm) Iron & Metalwork 12% · trigger iron_deposits · roster 11 · houses of the trade 0 · near houses 0 · Resources-tab lines naming it 2 · chain stages none
+  1 "12% Iron & Metalwork"
+  2 "Nearby Resources: Ancient Grove Date Palms Desert Salt Grain Fields Iron Deposits"
+  3 "Produced locally: salt grain dates flour medicinal herbs honey iron metalwork Honey and beeswax Foraged goods Baked goods Date export Palm sugar Religious services Educ…"
+
+r2r-thorp-16 (thorp, wartime) Iron & Metalwork 11% · trigger coal_deposits · roster 11 · houses of the trade 0 · near houses 0 · Resources-tab lines naming it 2 · chain stages none
+  1 "11% Iron & Metalwork Coal is dug here and sold on to other towns, so this income stream leans on the trade route."
+  2 "(the Resources tab names no such ground)"
+  3 "Exports: Mineral salts Alum Sulfur Raw wool Live sheep Coal"
+
+rv5-wartime-village-4 (village, wartime) Iron & Metalwork 7% · trigger precious_metals · roster 12 · houses of the trade 0 · near houses 0 · Resources-tab lines naming it 2 · chain stages none
+  1 "7% Iron & Metalwork"
+  2 "(the Resources tab names no such ground)"
+  3 "(neither exports nor produced-locally names it)"
+
+r2r-city-10 (city, succession_void) Stone Quarrying 3% · trigger stone_quarry · roster 73 · houses of the trade 0 · near houses 0 · Resources-tab lines naming it 5 · chain stages none
+  1 "3% Stone Quarrying"
+  2 "Nearby Resources: Coal Deposits Gemstone Deposits Hunting Grounds"
+  3 "Produced locally: trade access stone honey medicinal herbs Rare spices and exotic dyes Financial services International banking services Honey and beeswax Foraged goods…"
+
+r2r-metropolis-7 (metropolis, indebted) Stone Quarrying 3% · trigger stone_quarry · roster 85 · houses of the trade 0 · near houses 0 · Resources-tab lines naming it 3 · chain stages none
+  1 "3% Stone Quarrying"
+  2 "Nearby Resources: Foraging Areas Gemstone Deposits Grain Fields Hunting Grounds Iron Deposits"
+  3 "Produced locally: trade access coal stone Rare spices and exotic dyes Toll income Market taxes"
+
+rv5-wartime-village-3 (village, wartime) Stone Quarrying 6% · trigger clay (pottery -> "stone") · roster 13 · houses of the trade 0 · near houses 0 · Resources-tab lines naming it 7 · chain stages none
+  1 "6% Stone Quarrying"
+  2 "Unexploited Clay medium value"
+  3 "Produced locally: flour processed textiles clay pottery medicinal herbs coal Medical care (basic) Spellcasting (minor) Flour and meal Milled lumber Religious services H…"
+
+r2r-hamlet-42 (hamlet, calm) Timber Trade 9% · trigger managed_forest · roster 10 · houses of the trade 0 · near houses 0 · Resources-tab lines naming it 9 · chain stages timber:unexploited,mountainTimber:unexploited
+  1 "9% Timber Trade Local forest provides sustainable timber revenue; managed felling keeps production consistent."
+  2 "Unexploited Mountain timber medium value"
+  3 "Produced locally: medicinal herbs timber trade access iron metalwork"
+
+r2r-town-25 (town, infiltrated) Timber Trade 8% · trigger shipbuilding_timber · roster 29 · houses of the trade 0 · near houses 1 · Resources-tab lines naming it 6 · chain stages timber:unexploited
+  1 "8% Timber Trade Local forest provides sustainable timber revenue; managed felling keeps production consistent."
+  2 "Unexploited Timber medium value"
+  3 "Exports: …d artefacts Ship passage Maritime trade access Shipbuilding timber River craft Cargo barges Preserved foods Maritime services (cargo, pilotage) Milita…"
+
+rv5-wartime-thorp-2 (thorp, wartime) Timber Trade 9% · trigger mountain_timber · roster 7 · houses of the trade 0 · near houses 0 · Resources-tab lines naming it 8 · chain stages timber:unexploited,mountainTimber:unexploited
+  1 "9% Timber Trade Timber sourced from more distant forests and resold or processed locally: trade route dependent."
+  2 "Unexploited Mountain timber medium value"
+  3 "Exports: Raw wool Live sheep Medicinal herbs Wild honey Sacred wood Ritual components"
+
+r2r-city-42 (city, calm) Fish & Preserved Produce 5% · trigger fish ground · roster 63 · houses of the trade 0 · near houses 0 · Resources-tab lines naming it 4 · chain stages fish:full
+  1 "5% Fish & Preserved Produce"
+  2 "✓ Fully exploited Fish medium value"
+  3 "Exports: River fish Freshwater catch Livestock Sacred wood Ritual components Recovered artefacts Rare texts Spellcasting (minor) Magical identification Salted …"
+
+r2s-famine-metropolis-2 (metropolis, famine) Fish & Preserved Produce 4% · trigger fish ground · roster 81 · houses of the trade 0 · near houses 0 · Resources-tab lines naming it 2 · chain stages none
+  1 "4% Fish & Preserved Produce"
+  2 "Nearby Resources: Grain Fields Iron Deposits Managed Forest River Fish"
+  3 "(neither exports nor produced-locally names it)"
+
+rv5-under_siege-town-2 (town, under_siege) Fish & Preserved Produce 6% · trigger salt from a dock/port/fishmonger · roster 38 · houses of the trade 0 · near houses 0 · Resources-tab lines naming it 0 · chain stages none
+  1 "6% Fish & Preserved Produce"
+  2 "(the Resources tab names no such ground)"
+  3 "(neither exports nor produced-locally names it)"
+
+r2r-city-19 (city, plague_onset) Fish & Maritime Produce 4% · trigger fish ground · roster 77 · houses of the trade 0 · near houses 0 · Resources-tab lines naming it 5 · chain stages fish:full
+  1 "4% Fish & Maritime Produce"
+  2 "✓ Fully exploited Fish medium value"
+  3 "Exports: Salted fish Smoked seafood Fish oil Sea salt Ship passage Maritime trade access Barrels and containers Luxury manufactured goods Fine metalwork and je…"
+
+r2r-thorp-24 (thorp, occupied) Fish & Maritime Produce 11% · trigger fish ground · roster 7 · houses of the trade 0 · near houses 0 · Resources-tab lines naming it 5 · chain stages fish:full
+  1 "11% Fish & Maritime Produce"
+  2 "✓ Fully exploited Fish medium value"
+  3 "Exports: Sea salt (taxed by occupation) Recovered artefacts (taxed by occupation)"
+
+r2s-succession_void-town-0 (town, succession_void) Fish & Maritime Produce 8% · trigger salt ground · roster 26 · houses of the trade 0 · near houses 0 · Resources-tab lines naming it 3 · chain stages none
+  1 "8% Fish & Maritime Produce"
+  2 "(the Resources tab names no such ground)"
+  3 "Exports: Ship passage Maritime trade access Sea salt Shipbuilding timber Barrels and containers Preserved foods Maritime trade revenue Ship construction Rare s…"
