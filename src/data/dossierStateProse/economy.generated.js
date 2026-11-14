@@ -6381,7 +6381,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "Every load of {good} that {settlement}'s work needs comes in from elsewhere; a closed road would stop that work within the season.",
+          "text": "Whatever {good} {settlement}'s work uses must come from elsewhere; when none comes, that work stands idle.",
           "slots": [
             "good",
             "settlement"
