@@ -345,7 +345,14 @@ const ROUTE_BASELINE = Object.freeze({
   // 621 -> 623, 864 -> 866, 666 -> 668; `bare` unmoved; re-measured by this census.
   // 2026-11-13, R3-TABS (ruling b1): DefenseTab.jsx's ForceCard loses its provenance badge (one `chromeFontSize` row) —
   // `floored` -1 on /create, /settlements, /gallery, 623 -> 622, 866 -> 865, 668 -> 667; `bare` unmoved; re-measured by this census.
-  '/create':                { roots: 1, files: 162, floored: 622, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
+  // 2026-11-14, JOIN-3 (THE TRUE JOIN, lane/join-2026-11-14): RE-MEASURED BY THIS CENSUS at the joined tree and re-keyed by cause:
+  // `floored` 614 · 857 · 659 on /create, /settlements, /gallery (the branch side's 622 · 865 · 667 was R3-TABS' alone). The line
+  // 976db5b19 measures 623 · 866 · 668, and each lane's merged tip measures its own row green: R3-TABS b1 (the ForceCard badge) -1;
+  // POWERS-10 (PowerTab's legitimacy Breakdown, a59796dda) -2; W2-C-LEAVES-8 (NeedsNotMet +1, the food card's machinery row -3, the
+  // magic note's recovery chip -1) -3; R2-CODE-B item 1 (the chain-depth chip) -1 and R2-CODE-B-SIDE items 1-2 (ChainRow's
+  // upstream note and imported pill) -2. The four lanes' sites are in four different files; nothing else moves; `bare` unmoved;
+  // /compendium 203 is R2-CODE-B-SIDE's and stands. A surface only shrank.
+  '/create':                { roots: 1, files: 162, floored: 614, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
   '/home':                  { roots: 1, files: 19, floored: 8, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
@@ -398,7 +405,7 @@ const ROUTE_BASELINE = Object.freeze({
   // the auto-resolve switch's label and the interval select, one `chromeFontSize` each; 0 bare.
   // 2026-11-13, R3-TABS (ruling b1): DefenseTab.jsx's ForceCard loses its provenance badge (one `chromeFontSize` row) —
   // `floored` -1 on /create, /settlements, /gallery, 623 -> 622, 866 -> 865, 668 -> 667; `bare` unmoved; re-measured by this census.
-  '/settlements':           { roots: 1, files: 206, floored: 865, ruled: 4, bare: 0 },
+  '/settlements':           { roots: 1, files: 206, floored: 857, ruled: 4, bare: 0 },
   // /compendium files 51 -> 50 with the same T6 cut: the size grid's one helper module left the
   // compendium's import closure when ConfigurationPanel stopped importing it; floored 211 -> 206.
   // floored 208 -> 206 (2026-11-10, COMPENDIUM-HUB H1, the owner's word "Rather than a horizontal
@@ -429,7 +436,7 @@ const ROUTE_BASELINE = Object.freeze({
   // PEOPLE-6 LINKS step 2: +1, the NPC card's role row (one `chromeFontSize` site, 0 bare).
   // 2026-11-13, R3-TABS (ruling b1): DefenseTab.jsx's ForceCard loses its provenance badge (one `chromeFontSize` row) —
   // `floored` -1 on /create, /settlements, /gallery, 623 -> 622, 866 -> 865, 668 -> 667; `bare` unmoved; re-measured by this census.
-  '/gallery':               { roots: 1, files: 151, floored: 667, ruled: 4, bare: 0 },
+  '/gallery':               { roots: 1, files: 151, floored: 659, ruled: 4, bare: 0 },
   '/founders':              { roots: 1, files: 13, floored: 8, ruled: 1, bare: 0 },
   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },
