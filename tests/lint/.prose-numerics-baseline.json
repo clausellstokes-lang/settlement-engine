@@ -439,19 +439,19 @@
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 510,
+    "line": 490,
     "category": "floatInterpolation",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 510,
+    "line": 490,
     "category": "percentToken",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 536,
+    "line": 516,
     "category": "floatInterpolation",
     "snippet": "{Math.round(rung.standing*100)}"
   },
@@ -1135,13 +1135,13 @@
   },
   {
     "path": "src/pdf/sections/PowerStructure.jsx",
-    "line": 102,
+    "line": 101,
     "category": "floatInterpolation",
     "snippet": "{p.criminalCapture.score}"
   },
   {
     "path": "src/pdf/sections/PowerStructure.jsx",
-    "line": 236,
+    "line": 235,
     "category": "floatInterpolation",
     "snippet": "{f.power}"
   },

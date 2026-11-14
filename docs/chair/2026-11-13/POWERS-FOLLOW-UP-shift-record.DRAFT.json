@@ -1,0 +1,391 @@
+{
+  "_doc": "COHERENCE-POWERS-6 (the powers follow-up seat) DRAFT, NOT A SIGNATURE. The lane drafts ONE record, declares every registered golden surface (tests/fixtures/.golden-freeze-register.json, 51 rows) MOVED or UNMOVED by measure at its own tip, runs no golden door, and leaves `seat`, the merge commit and the signing to the merge seat. Lane lane/powers-follow-up-2026-11-13, cut from lane/integration-2026-11-07 at e969a75b7; code and test tip 05f1ca96c (src unchanged since 7b3f3b692); the edge bundles re-emitted as its last commit.",
+  "ownerWords": "(the chair's rulings of 2026-11-13 under the owner's standing delegation; copied whole in docs/chair/2026-11-13/POWERS-FOLLOW-UP-HANDBACK.md)",
+  "cause": "COHERENCE-POWERS-6: 9fae351e1 item 1 (a noble power is faced by a noble, at its standing; a minted claimant at its seat's band); 535b58fce item 2 (the keeper of a vacant seat heads no contender) and its oracle ripple 28e740b34; 7c6373e80 item 3 (a minted lord pushes no true line off a card); eadd1de72 item 4 (the page guard, tests only); 7e01adea4 item 6 (the share arm, tests only); 7b3f3b692 item 8 (a power's and a suppressed institution's possessive through the leaf; pulse prose only); 05f1ca96c locksEngine re-keyed by identity (item 1's ripple, tests only). Items 5 and 7 are measures and change nothing.",
+  "seat": null,
+  "surfaces": [
+    {
+      "surface": "belief-axes-dormancy-golden",
+      "suite": "tests/property/beliefAxesDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/beliefAxesDormancyGolden.test.js passed (0 failed, 6 passed)"
+    },
+    {
+      "surface": "belief-map-golden",
+      "suite": "tests/property/beliefMapGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/beliefMapGolden.test.js passed (0 failed, 5 passed)"
+    },
+    {
+      "surface": "cartography-calibration-corpus",
+      "suite": "tests/domain/townCartographyCalibration.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/domain/townCartographyCalibration.test.js passed (0 failed, 32 passed)"
+    },
+    {
+      "surface": "chroniclers-letter-golden",
+      "suite": "tests/property/chroniclersLetterGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/chroniclersLetterGolden.test.js passed (0 failed, 2 passed)"
+    },
+    {
+      "surface": "contested-goals-dormancy-golden",
+      "suite": "tests/property/contestedGoalsDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/contestedGoalsDormancyGolden.test.js passed (0 failed, 7 passed)"
+    },
+    {
+      "surface": "corruption-web-dormancy-golden",
+      "suite": "tests/property/corruptionWebDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/corruptionWebDormancyGolden.test.js passed (0 failed, 5 passed)"
+    },
+    {
+      "surface": "demographics-lifecycle-golden",
+      "suite": "tests/property/demographicsLifecycleGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/demographicsLifecycleGolden.test.js passed (0 failed, 5 passed)"
+    },
+    {
+      "surface": "disposition-channels-dormancy-golden",
+      "suite": "tests/property/dispositionChannelsDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/dispositionChannelsDormancyGolden.test.js passed (0 failed, 8 passed)"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "suite": "tests/property/espionageDormancyFence.test.js",
+      "state": "MOVED",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant",
+      "measure": "tests/property/espionageDormancyFence.test.js: the driven golden over 360 settlements hashes 47f29d1c345c52c3... against the recorded f3f4be914caae918... (the cast re-dealt by items 1-3).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/espionageDormancyFence.test.js failed (1 failed, 20 passed)"
+    },
+    {
+      "surface": "espionage-mission-dormancy-fence",
+      "suite": "tests/property/espionageMissionDormancyFence.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/espionageMissionDormancyFence.test.js passed (0 failed, 20 passed)"
+    },
+    {
+      "surface": "espionage-rider-dormancy-fence",
+      "suite": "tests/property/espionageRiderDormancyFence.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/espionageRiderDormancyFence.test.js passed (0 failed, 9 passed)"
+    },
+    {
+      "surface": "generator-golden-master",
+      "suite": "tests/property/generatorGoldenMaster.test.js",
+      "state": "MOVED",
+      "action": "re-record",
+      "predictedRows": 320,
+      "proofForm": "settlement-hash",
+      "measure": "tests/property/generatorGoldenMaster.test.js red at the tip: 320 of 525 configurations differ (whole-record sha256, e969a75b7 against the tip, measured on the golden corpus dump: 320 of 525). Cause: items 1 (the minted lords and the re-ranked noble bodies), 2 (the keeper re-deal; 0 of the golden 525) and 3 (the enrichment cut). Item 8 moves 0 birth records.",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/generatorGoldenMaster.test.js failed (1 failed, 2 passed)"
+    },
+    {
+      "surface": "generosity-dormancy-golden",
+      "suite": "tests/property/generosityDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/generosityDormancyGolden.test.js passed (0 failed, 6 passed)"
+    },
+    {
+      "surface": "information-statecraft-dormancy-golden",
+      "suite": "tests/property/informationStatecraftDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/informationStatecraftDormancyGolden.test.js passed (0 failed, 5 passed)"
+    },
+    {
+      "surface": "intel-trade-dormancy-golden",
+      "suite": "tests/property/intelTradeDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/intelTradeDormancyGolden.test.js passed (0 failed, 5 passed)"
+    },
+    {
+      "surface": "interior-golden",
+      "suite": "tests/interior/interiorModel.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/interior/interiorModel.test.js passed (0 failed, 40 passed)"
+    },
+    {
+      "surface": "intervention-dormancy-golden",
+      "suite": "tests/property/interventionDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/interventionDormancyGolden.test.js passed (0 failed, 5 passed)"
+    },
+    {
+      "surface": "migration-rumors-dormancy-golden",
+      "suite": "tests/property/migrationRumorsDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/migrationRumorsDormancyGolden.test.js passed (0 failed, 7 passed)"
+    },
+    {
+      "surface": "momentum-dormancy-golden",
+      "suite": "tests/property/momentumDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/momentumDormancyGolden.test.js passed (0 failed, 6 passed)"
+    },
+    {
+      "surface": "npc-credibility-dormancy-golden",
+      "suite": "tests/property/npcCredibilityDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/npcCredibilityDormancyGolden.test.js passed (0 failed, 5 passed)"
+    },
+    {
+      "surface": "npc-growth-dormancy-golden",
+      "suite": "tests/property/npcGrowthDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/npcGrowthDormancyGolden.test.js passed (0 failed, 5 passed)"
+    },
+    {
+      "surface": "npc-ladder-dormancy-golden",
+      "suite": "tests/property/npcLadderDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/npcLadderDormancyGolden.test.js passed (0 failed, 6 passed)"
+    },
+    {
+      "surface": "npc-ledger-dormancy-golden",
+      "suite": "tests/property/npcLedgerDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/npcLedgerDormancyGolden.test.js passed (0 failed, 7 passed)"
+    },
+    {
+      "surface": "pdf-golden-view-model-snapshot",
+      "suite": "tests/pdf/goldenViewModel.test.js",
+      "state": "MOVED",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "derived-artefact",
+      "measure": "tests/pdf/goldenViewModel.test.js: pdf.6's one snapshot mismatched (the canon town's cast).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/pdf/goldenViewModel.test.js failed (1 failed, 3 passed)"
+    },
+    {
+      "surface": "peace-causal-dormancy-golden",
+      "suite": "tests/property/peaceCausalDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/peaceCausalDormancyGolden.test.js passed (0 failed, 6 passed)"
+    },
+    {
+      "surface": "provenance-dormancy-golden",
+      "suite": "tests/property/provenanceDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/provenanceDormancyGolden.test.js passed (0 failed, 6 passed)"
+    },
+    {
+      "surface": "resource-dynamics-dormancy-golden",
+      "suite": "tests/property/resourceDynamicsDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/resourceDynamicsDormancyGolden.test.js passed (0 failed, 5 passed)"
+    },
+    {
+      "surface": "roads-dormancy-golden",
+      "suite": "tests/property/roadsDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/roadsDormancyGolden.test.js passed (0 failed, 7 passed)"
+    },
+    {
+      "surface": "route-network-dormancy-golden",
+      "suite": "tests/domain/routeNetworkDormancy.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/domain/routeNetworkDormancy.test.js passed (0 failed, 18 passed)"
+    },
+    {
+      "surface": "rumor-ledger-golden",
+      "suite": "tests/property/rumorLedgerGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/rumorLedgerGolden.test.js passed (0 failed, 5 passed)"
+    },
+    {
+      "surface": "sea-lanes-golden",
+      "suite": "tests/property/seaLanesGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/seaLanesGolden.test.js passed (0 failed, 4 passed)"
+    },
+    {
+      "surface": "seasonal-overlay-golden",
+      "suite": "tests/property/seasonalOverlayGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/seasonalOverlayGolden.test.js passed (0 failed, 3 passed)"
+    },
+    {
+      "surface": "settlement-lifecycle-dormancy-golden",
+      "suite": "tests/property/settlementLifecycleDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/settlementLifecycleDormancyGolden.test.js passed (0 failed, 5 passed)"
+    },
+    {
+      "surface": "settlement-politics-dormancy-golden",
+      "suite": "tests/property/settlementPoliticsDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/settlementPoliticsDormancyGolden.test.js passed (0 failed, 5 passed)"
+    },
+    {
+      "surface": "spatial-consequence-dormancy-golden",
+      "suite": "tests/property/spatialConsequenceDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/spatialConsequenceDormancyGolden.test.js passed (0 failed, 5 passed)"
+    },
+    {
+      "surface": "spatial-digest-golden",
+      "suite": "tests/property/spatialDigestGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/spatialDigestGolden.test.js passed (0 failed, 2 passed)"
+    },
+    {
+      "surface": "supply-web-warfare-dormancy-golden",
+      "suite": "tests/property/supplyWebWarfareDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/supplyWebWarfareDormancyGolden.test.js passed (0 failed, 6 passed)"
+    },
+    {
+      "surface": "teleport-edges-golden",
+      "suite": "tests/property/teleportEdgesGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/teleportEdgesGolden.test.js passed (0 failed, 4 passed)"
+    },
+    {
+      "surface": "timeline-track-golden",
+      "suite": "tests/property/timelineTrackGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/timelineTrackGolden.test.js passed (0 failed, 2 passed)"
+    },
+    {
+      "surface": "town-cartography-dormancy-golden",
+      "suite": "tests/property/townCartographyDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/townCartographyDormancyGolden.test.js passed (0 failed, 7 passed)"
+    },
+    {
+      "surface": "town-map-golden",
+      "suite": "tests/property/townMapGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/townMapGolden.test.js passed (0 failed, 3 passed)"
+    },
+    {
+      "surface": "town-map-v2-golden",
+      "suite": "tests/property/townMapV2Golden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/townMapV2Golden.test.js passed (0 failed, 6 passed)"
+    },
+    {
+      "surface": "traditions-dormancy-golden",
+      "suite": "tests/property/traditionsDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/traditionsDormancyGolden.test.js passed (0 failed, 7 passed)"
+    },
+    {
+      "surface": "upswing-dormancy-golden",
+      "suite": "tests/property/upswingDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/upswingDormancyGolden.test.js passed (0 failed, 6 passed)"
+    },
+    {
+      "surface": "urban-fabric-dormancy-golden",
+      "suite": "tests/property/urbanFabricDormancyGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/urbanFabricDormancyGolden.test.js passed (0 failed, 5 passed)"
+    },
+    {
+      "surface": "worldpulse-golden-master",
+      "suite": "tests/property/worldpulseDeityGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/worldpulseDeityGolden.test.js passed (0 failed, 5 passed)"
+    },
+    {
+      "surface": "worldpulse-seasons-golden",
+      "suite": "tests/property/worldpulseSeasonsGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/worldpulseSeasonsGolden.test.js passed (0 failed, 4 passed)"
+    },
+    {
+      "surface": "worldpulse-spatial-golden",
+      "suite": "tests/property/worldpulseSpatialGolden.test.js",
+      "state": "UNMOVED",
+      "measure": "its suite green at the tip 7b3f3b692 (the 45 unmoved surfaces' suites run together: 45 files, 328 tests passed, none skipped; the whole suite at the tip agrees).",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/worldpulseSpatialGolden.test.js passed (0 failed, 6 passed)"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "suite": "tests/property/dossierProseManifest.test.js",
+      "state": "MOVED",
+      "action": "re-record",
+      "predictedRows": null,
+      "proofForm": "settlement-hash",
+      "measure": "tests/property/dossierProseManifest.test.js: red at the base too (the closing acts' carried class: drift rows 998, audience 204 against 203); MOVED FURTHER by this lane: the drift corpus cells 73,388 -> 73,324 (golden-master-v3 394 -> 392 at both), drift rows past the list's 1,000 cap; the audience arm 204 at base and tip (unmoved). Signed once at the final tip by the standing law.",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/dossierProseManifest.test.js failed (3 failed, 14 passed)"
+    },
+    {
+      "surface": "preset-lighting-witness",
+      "suite": "tests/simulation/presetLightingWitness.test.js",
+      "state": "MOVED",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "witness",
+      "measure": "tests/simulation/presetLightingWitness.test.js: ONE row moves, full_simulation, by item 8 ALONE (green at the item-3 tree 7c6373e80; red at 7b3f3b692): its proposal summary and Wizard News entry 105 read \"the craft guilds' standing\" where they read \"the craft guilds's standing\" (STYLE-2-MERGE section 2g's charge). 7 of 8 rows unmoved.",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/simulation/presetLightingWitness.test.js failed (1 failed, 6 passed)"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "suite": "tests/property/heraldKnowledgeDeskGolden.test.js",
+      "state": "MOVED",
+      "action": "re-record",
+      "predictedRows": null,
+      "proofForm": "settlement-hash",
+      "measure": "tests/property/heraldKnowledgeDeskGolden.test.js: the desk hash 86075798a48ab150... against the recorded 3e0c6d3a15ccd6fd... (the realm's news re-dealt with the cast, and item 8's possessive). Row count is the door's.",
+      "measurePOWERS8": "COHERENCE-POWERS-8: the whole suite at 1900b88fe (the ledger fetched first): tests/property/heraldKnowledgeDeskGolden.test.js failed (1 failed, 2 passed)"
+    }
+  ],
+  "_movedCount": 6,
+  "_unmovedCount": 45,
+  "_wholeLaneFieldDiff": "e969a75b7 against the tip, whole records, both corpora (4,305): 953 births differ (rvw 126/600, rvf 123/720, golden 320/525, critique 81/660, l2 303/1,800). 16 families, every one the cast and its readers: npcs[], relationships[], prominentRelationship (npc1, npc2, type, phrasing, full, tension), generationCoherenceReceipt.judgments, powerStructure.conflicts, conflicts / conflicts[], pressureSentence, simulationTrace[], stress.cast, stressors.cast. Labels (coup, capture, government, every power label, stability, legitimacy): 0. No economy, institution, service, economicViability, historicalEvents, publicLegitimacy or settlementReason family. The seat's person: the same in 4,305 of 4,305.",
+  "_alsoRedUntilTheGoldensMove": "the golden null-change pins: dmLayerGoldenIsolation A7, worldFactRederive A7, editWorldFactResources A2 and A6, nameHeldThroughAssembly A1, pipelinePinnedChoosers A1, pipelinePinnedMode A1, A2, A5, rosterFinalUnderHeldRoster A1, powerEconomyFreshness A4 (11; green at the base).",
+  "_otherDrivenFiguresTheMergeSeatKeys": "digests re-taken by their writers: x46NpcBand, institutionBudgetPromise, intentAtlasSoakDistiller; measured figures: hookThemeDraws (2,116 -> 2,156: one hook per minted lord), generationForkCensus A1 (control hash; mints 139 against the bound 138, the five new keyed streams of the census row's lord) and A6 (external fnv1a32 16 -> 15: one faction-conflict pair no longer drawn), editCorpusRatchet A3 ([684, 257, 2168] -> [711, 289, 2182]) and A7 (the idle instrument 329 -> 330), mergeLadderHeldKeys A3; registers: writerReach (9 titles: 21 new dark members, every one an already-banked kind on a new or re-dealt carrier, 9 stale; item 5 of the hand-back) and observedShapeReaders (its executed corpus's news grew 2,582 -> 2,607); proseFamilyContract A6 (the regional log's composed prose: occurrences 158 -> 143, distinct values 4 -> 2).",
+  "_lanesOwnParked": "three registers on files other lanes in flight change (the brief's law: a stop for that item; named, not edited): mutationCoverageManifest TOTALITY (rationale rows owed for nobleFaces, seatKeeperContender, mintedLordKeepsLines); dossierPhoneFloorAllViews (MOBILE and DESKTOP baselines, every move at 9fae351e1: Summary/Plot Hooks +1, World/NPCs +5, World/Relationships prose +2 chrome -1; desktop the same rows +1, +5, +1; zero sub-floor lines); sovereigntyLightingContract (the lighting census: estate test files 3,224 -> 3,227, the three new tests). The full texts are in the hand-back.",
+  "_edgeBundles": "engineBundleReplay (2), engineServiceStoreParity (1), edgeSharedBundleReproducibility (1): the committed bundles predate the lane's src; they leave with the last commit (the bundles re-emitted through their own script, alone).",
+  "causePOWERS8": "COHERENCE-POWERS-8 (the lane's third seat): ab5c7084f R2 (relationship role words); 4653685a8 the claim cure, f628cab05 #640, 0f8d05428 #295 (factions[].desc); 527198c17 #337 (conflicts[].issue/desc); 6127afa05 the head-row cure (npcs[].structuralPosition/activeConstraint/settlementCondition); 4053092ec #565; 1900b88fe the split (no output); a0504f61e patronage (display only); fb4561b03 seatKeeperStyledNameOf (no output); cda44d8b7 the walker cures (no output). Field diff of this seat, the census's 720: 314 births, the families above only."
+}

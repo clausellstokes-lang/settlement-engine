@@ -27,6 +27,8 @@ import { resolveGenerationWorldLaw } from '../generationContext.js'; import { ha
 
 import { renormalizeFactionPower } from './renormalizeFactionPower.js'; export { renormalizeFactionPower }; // LANDING-R2 (ODQ §934.105): moved verbatim to power/renormalizeFactionPower.js, re-exported for its importers
 import { normalizeAndAnnotateFactions } from './normalizeAndAnnotateFactions.js';
+import { settleClaimsToLabel } from './claimStanding.js'; // COHERENCE-POWERS-8: the claim table in its own module (F31's ceiling: a split, never a raise)
+export { settleClaimsToLabel };
 export { normalizeAndAnnotateFactions }; // COHERENCE-POWERS-3 (F12): moved verbatim to power/normalizeAndAnnotateFactions.js, re-exported for its importers
 
 
@@ -522,7 +524,11 @@ export const generatePowerStructure = (
                 : priorityToCategory(priorities.military) === 'very_high'
                   ? "Militarised noble families whose landholdings double as fortified estates; they provide the settlement's heavy cavalry and expect political weight in return."
                   : noblePower > 20
-                    ? 'Landed noble families whose hereditary rights, land rents, and marriage networks give them structural influence the elected council cannot easily override.'
+                    // COHERENCE-POWERS-8 (the lane's row #295, rw3-metropolis-under_siege-1): "the elected council" only where a
+                    // council sits in the seat; under a duke, a guild consortium or a military council, the seat itself
+                    ? (['Town Council', 'City Council', 'Grand Council'].includes(String(governingFaction || ''))
+                      ? 'Landed noble families whose hereditary rights, land rents, and marriage networks give them structural influence the elected council cannot easily override.'
+                      : 'Landed noble families whose hereditary rights, land rents, and marriage networks give them structural influence the seat cannot easily override.')
                     : noblePower > 10
                       ? tier === 'metropolis'
                         ? 'Hereditary great families with land grants, court appointments, and dynastic marriage networks; structurally embedded in governance even when not formally in power.'
@@ -727,6 +733,7 @@ export const generatePowerStructure = (
 
   // Apply multipliers before relationship computation (relationships use final powers)
   applyLegitimacyMultipliers(factions, publicLegitimacy, tier);
+  settleClaimsToLabel(factions, tier); // COHERENCE-POWERS-8: a description claims no standing the final label denies
   annotateFactionStanding(factions, standingForce); // SW-B1 (P51): on the power order the cards print, after the multipliers' re-sort
 
   const safetyRatio = safetyRatioOf(instFlags);
@@ -789,4 +796,3 @@ export function captureClimateOf(settlement) {
 /** The sets this step can answer (R-Q): every set whose atoms are settled before the power step. */
 const FACTION_DESC_SIBLINGS_SETTLED = Object.freeze(Object.fromEntries(Object.entries(FACTION_DESC_SIBLINGS)
   .filter(([, set]) => !set.some((l) => [...(/** @type {any} */ (l).needs || []), ...(/** @type {any} */ (l).excludes || [])].includes('militia')))));
-

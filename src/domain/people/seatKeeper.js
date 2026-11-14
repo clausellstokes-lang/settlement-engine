@@ -92,3 +92,17 @@ export function seatKeeperLineOf(settlement) {
   }
   return `${form ? `${form} ` : ''}${keeper.name} keeps the seat meanwhile.`;
 }
+
+/**
+ * THE KEEPER, STYLED, IN ONE CALL (COHERENCE-POWERS-8, for the chair's ruling of 2026-11-13: one home for how an empty
+ * seat's keeper is styled; the Tonight sheet and the conflict card read it): "Acting Burgomaster Tserenpuntsag Barlas",
+ * "Regent Biljana Nikolić" — the caretaker's form the seat row prints (keeperFormOf), then the name; the bare name where
+ * the keeper has no form; '' where the seat is held or no one keeps it.
+ * @param {unknown} settlement @returns {string}
+ */
+export function seatKeeperStyledNameOf(settlement) {
+  const keeper = seatKeeperOf(settlement);
+  if (!keeper) return '';
+  const form = keeperFormOf(settlement);
+  return form ? `${form} ${String(keeper.name || '')}` : String(keeper.name || '');
+}

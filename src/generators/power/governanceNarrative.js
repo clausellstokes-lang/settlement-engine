@@ -609,6 +609,7 @@ const buildStressNarratives = ({
     wartime: buildWartimeNarrative(
       institutionFlags,
       governingFactionName,
+      institutionNames, // COHERENCE-POWERS-7: the roster's names, for the independent polity's crown
     ),
     religious_conversion:
       buildReligiousConversionNarrative(governingFactionName),
