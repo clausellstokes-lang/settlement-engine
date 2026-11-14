@@ -42,6 +42,7 @@ import { tradeListsAsPrinted, revenuesOffTheLists } from '../domain/display/trad
 import { foodwaysLineOf } from '../domain/foodways.js';
 import { foodWordShown } from '../domain/display/foodWordShown.js';
 import { chainStateOnPage } from '../pdf/lib/chainStateOnPage.js'; // SURFACES-1 item 1: the tab's state in the tab's words
+import { cultureOnPage } from '../pdf/lib/cultureOnPage.js'; // EXPORTS-B24 · B2: the PDF's culture block's reader
 import {
   overviewHeadline, powerHeadline, economicsHeadline, defenseHeadline,
   servicesHeadline, resourcesHeadline, viabilityHeadline, historyHeadline,
@@ -273,7 +274,8 @@ function identityPage(vm, settlement = vm.raw) {
     kv('Age', id.age),
     kv('Trade access', id.tradeAccess ? humanize(id.tradeAccess) : null),
     kv('Governing power', id.anchor.governingName),
-    kv('Cultural notes', id.anchor.culturalNotes),
+    // EXPORTS-B24 · B2: the PDF's notes box: the generated notes in a town or larger, held to their rows' declarations; the user's own always.
+    kv('Cultural notes', cultureOnPage(settlement, id.anchor.culturalNotes).notes),
     // FOOD-4: the food record's foodways line, through the one reader — the PDF chapter's row.
     kv('Foodways', foodwaysLineOf(settlement)),
     // ⛔ No '## Quarters' section before the plat (X-47); the view model keeps `id.quarters`.
