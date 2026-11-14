@@ -733,3 +733,10 @@ Instruments, re-made in a minute: probe scripts in this seat's scratchpad are go
 the brief; field diff = births.mjs at two trees + a recursive JSON compare; reds = each shard's `--reporter=json`.
 
 **CORRECTED OUT LOUD** (65086cea2 said 14 and 16): the classes are 7 + 12 (+2 files) + 18 + 4 = 41 failed tests and 2 files.
+
+**HAZARD (the chair to every seat, 04:37Z, copied; it reached this seat at 06:44Z, after the hand-back):** a push
+with NOTHING TO SEND falls into the pre-push hook's WHOLE suite, where tests/scripts/implementationPackets.test.js and
+implementationSession.test.js run git against the REAL repository from the linked worktree (the local branch moved to
+a fixture commit, core.bare=true, a fixture user in the shared config). Before every push: `test -n "$(git rev-list
+origin/<branch>..<local>)"`, else do not push; never chain a push after a step that can fail. This seat: every push
+carried commits; local config and local branch refs compared to the snapshots after the last push: unchanged.
