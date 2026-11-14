@@ -1770,8 +1770,8 @@ shape.
 **SLOTS.** `{settlement}` `{good}` `{faction}` `{institution}`
 
 **INCOME MIX: one source carries the town**
-1. `[ledger · colour]` More than half of what {settlement} earns comes from a single trade, and most households depend on it one way or another.
-2. `[street · colour]` Almost everyone's living at {settlement} depends on one trade, whether or not they work in it.
+1. `[ledger · colour]` More than half of what {settlement} earns comes from a single source, and most households depend on it one way or another.
+2. `[street · colour]` Almost everyone's living at {settlement} depends on one source of income, whether or not they earn from it directly.
 3. `[threshold · no hunger · prosperity: ≥ moderate]` {settlement} lives on one trade. It is doing well enough now, but if that trade has a bad year, the whole town has a bad year.
 
 **INCOME MIX: two or three sources between them**
@@ -1780,13 +1780,13 @@ shape.
 3. `[counterforce]` No one trade earns half of what {settlement} makes, so a bad year in any one of them would hurt without ruining it.
 
 **INCOME MIX: a broad spread, no leader**
-1. `[ledger]` {settlement} lives on many small trades, and none of them brings in a real portion of its income.
+1. `[ledger]` {settlement} lives on many trades, and no one of them carries the town.
 2. `[visitor]` {settlement} is not known for any one trade; it lives on many small ones.
 3. `[threshold]` {settlement} would hardly notice losing one trade, but could not stand losing several at once.
 
 **INCOME MIX: a criminal line is present** *(every variant `dm-only`)*
 1. `[ledger · dm-only]` Some of {settlement}'s money is made by people who keep it off the tax lists, so the town collects nothing on it and honest traders carry the tax alone.
-2. `[street · dm-only]` Some of the money in {settlement} is made outside the law, and honest traders compete against it without knowing whom they are up against.
+2. `[street · dm-only]` Some of the money in {settlement} is made outside the law, and the people who earn theirs honestly do not know who is making it.
 3. `[counterforce · dm-only]` {faction} makes money at {settlement} outside the law, and nothing is collected on it.
 
 **INCOME MIX: the criminal line leads** *(every variant `dm-only`)*
@@ -1821,14 +1821,14 @@ shape.
 3. `[street]` Half of what goes out of this town came into it the same season, and the town's part of the business is the yard and the road.
 
 **CRITICAL IMPORT: a house needs what the land lacks** *(`resourceAnalysis.imports.critical[]` with its `reasons` entry naming the house; slots from that one import, never the export bag)*
-1. `[ledger · no crisis: under_siege]` Some of {settlement}'s work cannot go on without {good}, and the country around the town produces none, so the town buys from outside or that work stops.
-2. `[visitor · no crisis: under_siege]` Whatever {good} {settlement}'s work uses must come from elsewhere; when none comes, that work stands idle.
+1. `[ledger · no crisis: under_siege]` Some of {settlement}'s work cannot go on without {good}, and the country around the town does not give enough of it, so the town buys from outside or that work stops.
+2. `[visitor · no crisis: under_siege]` A good part of the {good} {settlement}'s work uses must come from elsewhere; when none comes, that work stands idle.
 3. `[ledger · crisis: under_siege · stores: < 6]` Since the siege closed the roads, none of the {good} that {settlement}'s work needs has reached it, and that work has stopped or soon will.
 
 **CRITICAL IMPORT: the land cannot give it** *(the `reasons` entry names the terrain alone)*
-1. `[ledger · colour]` The country around {settlement} produces no {good}, so the town has none but what it buys.
-2. `[street · colour]` None of the {good} used at {settlement} comes from the country here; the town brings in what it uses, or goes without.
-3. `[ledger · no imports]` The country around {settlement} produces no {good}, so the town must look elsewhere for whatever it uses.
+1. `[ledger · colour]` The country around {settlement} does not give the town enough {good}, so the town buys in what it needs.
+2. `[street · colour]` Not enough of the {good} used at {settlement} comes from the country here; the town brings in the rest, or goes without.
+3. `[ledger · no imports]` The country around {settlement} does not give the town enough {good}, so the town must look elsewhere for the rest.
 
 **INCOME WEIGHT: the religious houses** *(`compound.religionInfluence` high)*
 1. `[ledger · sacredHouse · tier: ≥ village]` Faith carries real weight in {settlement}'s money. What the religious houses take in and spend is a large part of the town's business.

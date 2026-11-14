@@ -6039,7 +6039,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "More than half of what {settlement} earns comes from a single trade, and most households depend on it one way or another.",
+          "text": "More than half of what {settlement} earns comes from a single source, and most households depend on it one way or another.",
           "slots": [
             "settlement"
           ],
@@ -6050,7 +6050,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Almost everyone's living at {settlement} depends on one trade, whether or not they work in it.",
+          "text": "Almost everyone's living at {settlement} depends on one source of income, whether or not they earn from it directly.",
           "slots": [
             "settlement"
           ],
@@ -6098,7 +6098,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "INCOME MIX: a broad spread, no leader": [
         {
           "angle": "ledger",
-          "text": "{settlement} lives on many small trades, and none of them brings in a real portion of its income.",
+          "text": "{settlement} lives on many trades, and no one of them carries the town.",
           "slots": [
             "settlement"
           ],
@@ -6138,7 +6138,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "Some of the money in {settlement} is made outside the law, and honest traders compete against it without knowing whom they are up against.",
+          "text": "Some of the money in {settlement} is made outside the law, and the people who earn theirs honestly do not know who is making it.",
           "slots": [
             "settlement"
           ],
@@ -6351,7 +6351,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "Some of {settlement}'s work cannot go on without {good}, and the country around the town produces none, so the town buys from outside or that work stops.",
+          "text": "Some of {settlement}'s work cannot go on without {good}, and the country around the town does not give enough of it, so the town buys from outside or that work stops.",
           "slots": [
             "settlement",
             "good"
@@ -6363,7 +6363,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "Whatever {good} {settlement}'s work uses must come from elsewhere; when none comes, that work stands idle.",
+          "text": "A good part of the {good} {settlement}'s work uses must come from elsewhere; when none comes, that work stands idle.",
           "slots": [
             "good",
             "settlement"
@@ -6390,7 +6390,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The country around {settlement} produces no {good}, so the town has none but what it buys.",
+          "text": "The country around {settlement} does not give the town enough {good}, so the town buys in what it needs.",
           "slots": [
             "settlement",
             "good"
@@ -6402,7 +6402,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "None of the {good} used at {settlement} comes from the country here; the town brings in what it uses, or goes without.",
+          "text": "Not enough of the {good} used at {settlement} comes from the country here; the town brings in the rest, or goes without.",
           "slots": [
             "good",
             "settlement"
@@ -6414,7 +6414,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no imports"
           ],
-          "text": "The country around {settlement} produces no {good}, so the town must look elsewhere for whatever it uses.",
+          "text": "The country around {settlement} does not give the town enough {good}, so the town must look elsewhere for the rest.",
           "slots": [
             "settlement",
             "good"
