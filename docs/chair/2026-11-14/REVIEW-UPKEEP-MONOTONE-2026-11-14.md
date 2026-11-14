@@ -4,7 +4,9 @@ Lane read: `lane/upkeep-monotone-2026-11-14` at **8bd8e3078** (the tip named; th
 
 ## VERDICT: NOT CLEAR
 
-One MEDIUM finding is the stage's own (M1). Without it the lane would read CLEAR: the law the stage was built to holds, by my own births and made records, everywhere the chair's rulings say it must.
+One MEDIUM finding is the stage's own (M1).
+
+WHERE M1 WENT (the chair, 2026-11-14 12:28 UTC): the cure belongs to the prose, not to the bound. The people's bound stands as built. The Invasion row's key reads its own band and draws no line claiming the place holds, deters or sees off a raid where that band is Critical. The cure goes to the tabs lane's seat as its own row, and the rebuild does not land on the joined line before that cure does. The four carried MEDIUM go to their files' seats from this file. Without it the lane would read CLEAR: the law the stage was built to holds, by my own births and made records, everywhere the chair's rulings say it must.
 
 ## Findings, ranked
 
