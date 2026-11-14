@@ -44,6 +44,7 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF:
 | P2 | r2-code-b-2026-11-13 | d7e9a40e7 (16:36; equal to the lane's tip) | 2d418c67f (merge 6) | e6233009b | none | — |
 | P3 | w2-write-2026-11-13 | 1ff581fd6 (23:01; equal to the lane's tip) | 9b08e5b69 (merge 3) | 460c108ad | none | clean-both: docs/content/RECEIPT_POOLS_DOSSIER_STATE.md tests/domain/corpusCureGuards.test.js docs/content/RECEIPT_POOLS_DOSSIER_STATE.md tests/domain/corpusCureGuards.test.js  |
 | P4 | w2-write-side-13-2026-11-14 | a2d7d78f3 (23:05; equal to the lane's tip) | f2bf55f1e (merge 4) | 0d5ab1539 | none | clean-both: docs/content/RECEIPT_POOLS_DOSSIER_STATE.md tests/domain/corpusCureGuards.test.js docs/content/RECEIPT_POOLS_DOSSIER_STATE.md tests/domain/corpusCureGuards.test.js  |
+| P5 | r2-code-a-2026-11-13 | 9ac157cc9 (23:08; equal to the lane's tip) | e5064e855 (merge 1) | cf3a0352b | none | — |
 
 ## 3. Every code resolution
 
