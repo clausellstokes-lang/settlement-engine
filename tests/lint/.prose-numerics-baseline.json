@@ -319,19 +319,19 @@
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 157,
+    "line": 165,
     "category": "floatInterpolation",
     "snippet": "{rel.strength}"
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 163,
+    "line": 171,
     "category": "floatInterpolation",
     "snippet": "{rel.tension}"
   },
   {
     "path": "src/components/new/tabs/DailyLifeTab.jsx",
-    "line": 249,
+    "line": 258,
     "category": "floatInterpolation",
     "snippet": "{storeAiProgress || 'Regenerating…'}"
   },
@@ -979,37 +979,37 @@
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 310,
+    "line": 312,
     "category": "floatInterpolation",
     "snippet": "{flow}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 379,
+    "line": 381,
     "category": "floatInterpolation",
     "snippet": "{iss.severity}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 478,
+    "line": 480,
     "category": "floatInterpolation",
     "snippet": "{fb.deficitPct}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 478,
+    "line": 480,
     "category": "percentToken",
     "snippet": "{fb.deficitPct}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 483,
+    "line": 485,
     "category": "floatInterpolation",
     "snippet": "{fb.coveragePct}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 483,
+    "line": 485,
     "category": "percentToken",
     "snippet": "{fb.coveragePct}"
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "path": "src/pdf/sections/HistoryFounding.jsx",
-    "line": 382,
+    "line": 388,
     "category": "floatInterpolation",
     "snippet": "{Math.round(min + span * p)}"
   },
@@ -1057,19 +1057,19 @@
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 183,
+    "line": 184,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 329,
+    "line": 331,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 382,
+    "line": 384,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
@@ -1105,7 +1105,7 @@
   },
   {
     "path": "src/pdf/sections/Services.jsx",
-    "line": 240,
+    "line": 246,
     "category": "floatInterpolation",
     "snippet": "{flow}"
   },

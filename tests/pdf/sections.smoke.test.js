@@ -472,7 +472,9 @@ describe('institution label — screen↔print parity', () => {
         }],
       },
     };
-    const text = collectText(Services({ settlement: villageSettlement, narrativeMode: false, vm })).join(' ');
+    // R2-CODE-B-SIDE item 3: the flow names the roster's own houses, so the roster holds the two this arm reads.
+    const roster = { ...villageSettlement, institutions: [...(villageSettlement.institutions || []), { name: 'Parish church' }, { name: 'Blacksmith' }] };
+    const text = collectText(Services({ settlement: roster, narrativeMode: false, vm })).join(' ');
     expect(text, 'the chapter rendered no chain flow at all').toContain('House of worship');
     // anchored: the line above proves the flow rendered, so this absence is about the label.
     expect(text).not.toMatch(/parish/i);

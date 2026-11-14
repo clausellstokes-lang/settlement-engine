@@ -415,7 +415,7 @@ const ROUTE_BASELINE = Object.freeze({
   // smaller than its fact lines"): the institution card's description now asks proseFontSize for FS.sm
   // (12 px, not below the chrome floor, so the census no longer counts it as floored); it still renders 14 px
   // on a phone and 12 px on desktop, never smaller than the 12 px fact lines. A fall, said here.
-  '/compendium':            { roots: 1, files: 50, floored: 205, ruled: 3, bare: 0 },
+  '/compendium':            { roots: 1, files: 50, floored: 203, ruled: 3, bare: 0 },
   '/about/what-this-is':    { roots: 1, files: 16, floored: 7, ruled: 1, bare: 0 },
   '/about/guide':           { roots: 1, files: 12, floored: 13, ruled: 3, bare: 0 },
   '/account':               { roots: 1, files: 46, floored: 107, ruled: 5, bare: 0 },

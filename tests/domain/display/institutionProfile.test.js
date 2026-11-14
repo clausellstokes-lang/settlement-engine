@@ -22,7 +22,7 @@ import {
 } from '../../../src/domain/display/institutionProfile.js';
 import { INSTITUTION_IDENTITY } from '../../../src/domain/display/institutionVocabulary.js';
 import {
-  institutionDisplayName, INSTITUTION_DISPLAY_NAMES,
+  institutionHouseLabel,
 } from '../../../src/domain/display/institutionDisplayName.js';
 
 const gen = (config, seed) => generateSettlementPipeline(config, null, { seed, customContent: {} });
@@ -47,10 +47,13 @@ describe('deriveInstitutionProfile — shape + honesty', () => {
         // parish-church keys the echo is legitimately false and this line would have
         // been a false red. The property worth keeping is not the echo but the
         // HONESTY behind it: the card names THIS institution and fabricates nothing.
-        expect(p.name).toBe(institutionDisplayName(inst));
-        // …and for everything outside the mapped family the echo still holds exactly,
+        // RE-KEYED (R2-CODE-B round 3, ruling (a), the chair 2026-11-13): the card's heading is
+        // the house's LABEL, the one display leaf (the display label less the catalogue's count
+        // range, gate or condition), so the honesty pin reads that leaf.
+        expect(p.name).toBe(institutionHouseLabel(inst));
+        // …and for every name with no bracket and no mapping the echo still holds exactly,
         // which is the assertion that would catch a seam wired to the wrong field.
-        if (!(inst.name in INSTITUTION_DISPLAY_NAMES)) expect(p.name).toBe(inst.name);
+        if (institutionHouseLabel(inst.name) === inst.name) expect(p.name).toBe(inst.name);
         // oneLiner is the authored identity or null — never fabricated. When
         // present it is the exact vocabulary string for this institution.
         if (p.oneLiner === null) {

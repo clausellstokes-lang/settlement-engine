@@ -124,10 +124,18 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 // (6fce6e3d180fc1be -> 0b896078cabcb3c9) gains one `power_economic` coherence note, its only moved leaves
 // (.coherenceNotes.0: type, severity, tab, note); the line's tip 9e57f5023 reproduces the old hash. Red at the lane's own
 // tip and base for the agreement lane's cause, so the lane could not see it. Re-captured at the merge, the probe and this loop.
+// RE-KEYED BY IDENTITY 2026-11-14 (R2-CODE-B-7, the merge 0aa0cce00 of the line 976db5b19 into lane/r2-code-b-2026-11-13):
+// 9 of 60 moved against the line's sixty, none by the budget (densityFactor still forced to 1; src/data/institutionBudget.js
+// unchanged on both sides): seeds 2, 13, 20, 27, 36, 43, 48, 49, 51, by THIS LANE's declared generator moves (R2-CODE-B-4
+// item 4, the crisis cast's reasons and the empty seat; R2-CODE-B-6 items 0 and 0b, the wartime summary), measured leaf by
+// leaf against a frozen tree of the line's tip: `stress` 34 leaves and `stressors` 34 leaves in the nine, `npcs` 3 leaves in
+// seeds 13, 43, 49; nothing else. Against the lane's own pin (c40da4ec6) all 60 moved, by the line's points 47-49.
+// Re-captured at the merged tip e285c603f (whose generation is 0aa0cce00's: the commits after it are display only) with the
+// factor forced to 1.0, this file's own loop (an untracked probe), twice and equal.
 const BEFORE = Object.freeze([
   '5846eb303e8ba516', // 0
   '4995df767a612f94', // 1
-  '5d33c4fdc59d7f54', // 2
+  '67507ab0ec1542be', // 2
   '92058181fabb379a', // 3
   'fe63bd3821950b4a', // 4
   '249ba08c1ca0ec02', // 5
@@ -138,21 +146,21 @@ const BEFORE = Object.freeze([
   '786563116be92224', // 10
   'e5c3de10fc7c175e', // 11
   '292591d34a813144', // 12
-  '9b5e1d1469351341', // 13
+  '173e69238c0fef15', // 13
   'f5f10a7fcff76dcd', // 14
   'ea102a6c9253a407', // 15
   '1413b1473f378700', // 16
   '2e2d2299b1dae456', // 17
   'a6383fa022c4e283', // 18
   'df7521324a6f5454', // 19
-  'e705e4fa503944a0', // 20
+  'b27d7017bef769bd', // 20
   'ef7721cf7fb643ed', // 21
   'd2b5134667e49da4', // 22
   '343d2bc95388df18', // 23
   '281e20ca5bfd1a29', // 24
   'c4ac235f46933a9e', // 25
   '75854a2e5961a709', // 26
-  '266fcb74c48a99e8', // 27
+  'e0965c929b223a2c', // 27
   'f9224e0ed4d3bc5d', // 28
   '7983caa001eee7da', // 29
   '712ad4f148b53607', // 30
@@ -161,22 +169,22 @@ const BEFORE = Object.freeze([
   '22ce1afc5e775697', // 33
   '18703c4fb3f9e229', // 34
   '27457d262f44c5b1', // 35
-  'ef693b7b839585ae', // 36
+  '9f8c291f1ca8bbce', // 36
   'a342a643fda176a3', // 37
   'f1ef4fc4047259fc', // 38
   '07015de5e6b7cffe', // 39
   'caad5676d4326a51', // 40
   '0b896078cabcb3c9', // 41
   '7aeabecf762d9569', // 42
-  '7e44d8330739caeb', // 43
+  '44e67d13d5a47a42', // 43
   '00bac639c8e3061f', // 44
   '07d65c0a80c9ed19', // 45
   '8ad4cc8130b6d3ab', // 46
   'e7cb33a42a3ab4fb', // 47
-  '4fe39e5407bffd9f', // 48
-  '9270867ba13a3544', // 49
+  '1ab27702f6b0a31e', // 48
+  '7078cb8f08e714fe', // 49
   '8f7d4ea8f6a7fb78', // 50
-  'efd1558c0bba487e', // 51
+  'e8ca645f5c698d9c', // 51
   '884f68d1963e4adb', // 52
   'a0939636e94032a4', // 53
   '55efbde5e39ea54c', // 54

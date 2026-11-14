@@ -136,8 +136,9 @@ export const LEAVES = Object.freeze({
     note: '`deriveCriminalStructure` reads the safety profile\'s crime lines, which assembly settles to the crime signal (a back-write at layer 3): it reads its own layer',
   }),
   crimeSignal: leaf({ layer: 3, module: 'domain/crimeSignal.js', exported: 'crimeSignalOf', call: 'crimeLists', reads: ['powerStructure', 'institutions'] }),
-  faith: home('faith', 3, ['institutions', 'config', 'economicState', 'powerStructure', 'npcs'], {
-    note: 'its value reads the config, the roster, the income and the factions (layer 3); it touches the cast (layer 3), banked',
+  faith: home('faith', 3, ['institutions', 'config', 'economicState', 'powerStructure', 'npcs', 'stress'], {
+    note: 'its value reads the config, the roster, the income and the factions (layer 3); it touches the cast (layer 3), banked; '
+      + 'it reads the crisis container (stress, layer 0) for a siege that bars the road to the next village\'s church (R2-CODE-B-SIDE item 7, 8b27458cd; declared at the line\'s merge, R2-CODE-B-7)',
   }),
   beastsReadiness: leaf({ layer: 3, module: 'domain/facts/beastsReadiness.js', exported: 'beastsReadinessOf', call: 'record', reads: ['config', 'defenseProfile'] }),
   leaderLead: leaf({ layer: 3, module: 'domain/facts/leaderLead.js', exported: 'leaderLeadOfRecord', call: 'record', reads: ['powerStructure'] }),

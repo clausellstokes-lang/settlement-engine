@@ -35,7 +35,8 @@ import { composeCrisisPage, CRISIS_PAGE_COPY } from '../domain/crisis/crisisPage
 // ⛔ ONE HOME PER SENTENCE (STYLE-0 §3's keep-on rules, applied by STYLE-RULINGS-2 B4, 2026-11-09):
 // the crisis page's two print rules are the PDF's, from one module.
 import { stakeLines, unprintedFacts } from '../pdf/lib/crisisPrint.js';
-import { institutionDisplayName } from '../domain/display/institutionDisplayName.js';
+// ROUND THREE, ruling (a): every house this journal prints is printed by its label, the one display leaf.
+import { houseLabelsInText, institutionHouseLabel } from '../domain/display/institutionDisplayName.js';
 import { resourceDisplayName } from '../domain/display/resourceDisplayName.js';
 import { tradeListsAsPrinted, revenuesOffTheLists } from '../domain/display/tradeListDisplay.js';
 import { foodwaysLineOf } from '../domain/foodways.js';
@@ -173,12 +174,12 @@ function crisisJournalPage(settlement) {
     '', `## ${esc(s.line)}`,
     s.summary ? esc(s.summary) : null,
     '', `### ${CRISIS_PAGE_COPY.cast}`,
-    s.cast.length ? s.cast.map(r => `- **${esc(r.roleLabel)}**: ${esc(r.name)} · ${esc(r.reason)}`) : `- ${CRISIS_PAGE_COPY.nobody}`,
+    s.cast.length ? s.cast.map(r => `- **${esc(r.roleLabel)}**: ${esc(r.kind === 'institution' ? institutionHouseLabel(r.name) : r.name)} · ${esc(r.reason)}`) : `- ${CRISIS_PAGE_COPY.nobody}`,
     s.stakes.length ? md('', `### ${CRISIS_PAGE_COPY.stakes}`,
       s.stakeLines.rows.map(k => `- **${esc(k.factionId)}** ${CRISIS_PAGE_COPY.stake[k.stake]}: ${esc(k.reason)}.`),
       s.stakeLines.untouched ? `- ${esc(s.stakeLines.untouched)}` : null) : null,
     '', `### ${CRISIS_PAGE_COPY.levers}`,
-    s.levers.length ? s.levers.map(l => `- ${esc(l.institution)}${l.holderName ? `, held by ${esc(l.holderName)}` : ''}`) : `- ${CRISIS_PAGE_COPY.noLevers}`,
+    s.levers.length ? s.levers.map(l => `- ${esc(institutionHouseLabel(l.institution))}${l.holderName ? `, held by ${esc(l.holderName)}` : ''}`) : `- ${CRISIS_PAGE_COPY.noLevers}`,
     s.seeFirst.length ? md('', `### ${CRISIS_PAGE_COPY.seeFirst}`, s.seeFirst.map(f => `- **${esc(f.label)}**: ${esc(f.text)}`)) : null,
     s.ifNothingIsDone ? md('', `### ${CRISIS_PAGE_COPY.ifNothing}`, esc(s.ifNothingIsDone)) : null,
   ))) || null;
@@ -201,7 +202,7 @@ function notableNpcPage(n) {
     kv('Role', n.title),
     kv('Race', n.race),
     kv('Member of', n.factionLabel),
-    kv('House', n.house),
+    kv('House', n.house ? institutionHouseLabel(n.house) : n.house),
     kv('Standing', n.powerLine),
     kv('Power', n.power),
     kv('Influence', n.influenceLabel),
@@ -240,7 +241,7 @@ function plotHooksPage(vm) {
   );
 }
 
-function powerPage(vm) {
+function powerPage(vm, houses = []) {
   const p = vm.power;
   return md(
     lede(powerHeadline(p, vm.identity)),
@@ -254,7 +255,7 @@ function powerPage(vm) {
       `- **${esc(f.name)}**${f.isGoverning ? ' *(governing)*' : ''}${f.description ? `: ${esc(f.description)}` : ''}`)) : null,
     p.tensions.length ? md('', '## Tensions', p.tensions.map(tn =>
       // The tension's key in words ("Resource scarcity"), no severity range ("minor / major").
-      `- **${esc(tn.label ? cap(humanize(tn.label)) : 'Tension')}**${tn.description ? `: ${esc(tn.description)}` : ''}`)) : null,
+      `- **${esc(tn.label ? cap(humanize(tn.label)) : 'Tension')}**${tn.description ? `: ${esc(houseLabelsInText(tn.description, houses))}` : ''}`)) : null,
     p.conflicts.length ? md('', '## Conflicts', p.conflicts.map(c =>
       `- **${esc((c.parties || []).join(' vs '))}**${c.intensity ? ` (${esc(c.intensity)})` : ''}${c.issue ? `: ${esc(c.issue)}` : ''}${c.stakes ? ` Stakes: ${esc(c.stakes)}` : ''}`)) : null,
   );
@@ -303,7 +304,7 @@ function institutionsPage(vm) {
       `## ${esc(cap(humanize(cat)))}`,
       // The institution label seam (ODQ 934.13): the VTT journal is a reader surface like
       // any other, and it printed the raw catalogue key beside a PDF that did not.
-      list.map(i => `- **${esc(institutionDisplayName(i))}**${i.status && i.status !== 'healthy' ? ` *(${esc(i.status)})*` : ''}${i.description ? `: ${esc(i.description)}` : ''}`),
+      list.map(i => `- **${esc(institutionHouseLabel(i))}**${i.status && i.status !== 'healthy' ? ` *(${esc(i.status)})*` : ''}${i.description ? `: ${esc(i.description)}` : ''}`),
       '',
     )),
   );
@@ -362,7 +363,7 @@ function defensePage(vm) {
     kv('Safety', d.safetyLabel),
     d.militaryStress ? kv('Military status', d.militaryStress.label || humanize(d.militaryStress.type)) : null,
     forces.length ? md('', '## Armed forces', forces.map(f =>
-      bullet(typeof f === 'string' ? f : `${f.name || ''}${f.desc ? `: ${f.desc}` : ''}${f.source ? ` (${f.source})` : ''}`)) ) : null,
+      bullet(typeof f === 'string' ? institutionHouseLabel(f) : `${institutionHouseLabel(f.name || '')}${f.desc ? `: ${f.desc}` : ''}${f.source ? ` (${f.source})` : ''}`)) ) : null,
     (d.criminalOps || []).length ? md('', '## Criminal operations', d.criminalOps.map(o =>
       `- **${esc(o.name)}**${o.note ? `: ${esc(o.note)}` : ''}`)) : null,
     (d.vulnerabilities || []).length ? md('', '## Vulnerabilities',
@@ -389,7 +390,7 @@ function historyPage(vm) {
   );
 }
 
-function viabilityPage(vm) {
+function viabilityPage(vm, houses = []) {
   const v = vm.viability;
   return md(
     lede(viabilityHeadline(v)),
@@ -398,7 +399,7 @@ function viabilityPage(vm) {
     // The summary without its opening verdict token: the Verdict row above is the label (W7 HOOKS).
     v.summary ? md('', esc(stripViabilityToken(v.summary))) : null,
     (v.issues || []).length ? md('', '## Issues', v.issues.map(i =>
-      `- **${esc(i.title || 'Issue')}**${i.severity ? ` (${esc(i.severity)})` : ''}${i.description ? `: ${esc(i.description)}` : ''}`)) : null,
+      `- **${esc(i.title || 'Issue')}**${i.severity ? ` (${esc(i.severity)})` : ''}${i.description ? `: ${esc(houseLabelsInText(i.description, houses))}` : ''}`)) : null,
   );
 }
 
@@ -523,7 +524,7 @@ export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked
     }
   }
   if (inc('plotHooks'))           push('Plot Hooks', plotHooksPage(vm));
-  if (inc('powerStructure'))      push('Power', powerPage(vm));
+  if (inc('powerStructure'))      push('Power', powerPage(vm, settlement?.institutions));
   if (inc('identityDailyLife'))   push('Identity & Daily Life', identityPage(vm, settlement));
   if (inc('services'))            push('Services', servicesPage(vm));
   if (inc('institutions'))        push('Institutions', institutionsPage(vm));
@@ -531,7 +532,7 @@ export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked
   if (inc('resourcesProduction')) push('Resources & Production', resourcesPage(vm));
   if (inc('defenseSecurity'))     push('Defense & Security', defensePage(vm));
   if (inc('historyFounding'))     push('History & Founding', historyPage(vm));
-  if (inc('viabilityAssessment')) push('Viability Assessment', viabilityPage(vm));
+  if (inc('viabilityAssessment')) push('Viability Assessment', viabilityPage(vm, settlement?.institutions));
   if (inc('relationships'))       push('Relationships & Neighbours', relationshipsPage(vm));
   if (inc('timeline'))            push('Timeline', timelinePage(vm, { faithUnlocked }));
 

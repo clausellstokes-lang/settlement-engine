@@ -53971,7 +53971,7 @@
       "name": "CAST_REASONS",
       "drawKind": "T",
       "drawSite": "crisisCast.js:461-701 (src/domain/crisis/crisisCast.js)",
-      "lines": 46,
+      "lines": 50,
       "declares": [],
       "lineDeclares": {
         "crisis: hunger": 1,
@@ -53983,7 +53983,7 @@
         "no walls": 1,
         "walls": 1
       },
-      "undeclared": 38,
+      "undeclared": 42,
       "crisisScoped": false
     },
     {
@@ -54382,10 +54382,10 @@
       "name": "TRADITION_ELEMENTS",
       "drawKind": "R",
       "drawSite": "",
-      "lines": 122,
+      "lines": 124,
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 122,
+      "undeclared": 124,
       "crisisScoped": false
     },
     {
