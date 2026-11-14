@@ -24,7 +24,8 @@ import { type, palette, space, pt } from '../theme.js';
 import { humanize, label, plural, stripZwnj } from '../lib/format.js';
 import { tokenCase } from '../../domain/display/labelCase.js';
 import { StateProse } from '../primitives/StateProse.jsx';
-import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
+import { chainHousesOf, chainSourceOf } from '../../domain/display/chainHouses.js';
 // RS-14: the card titles read the one label map the screen and the absences callout read.
 import { serviceLabel } from '../../domain/display/servicesDisplay.js';
 
@@ -102,7 +103,7 @@ export function Services({ settlement, narrativeMode, vm, stateProse }) {
             ACTIVE SUPPLY CHAINS · {s.activeChains.length}
           </Text>
           {s.activeChains.map((chain, i) => (
-            <ChainCard key={`chain-${i}`} chain={chain} town={settlement} />
+            <ChainCard key={`chain-${i}`} chain={chain} town={settlement} instNames={(settlement?.institutions || []).map((x) => x?.name)} />
           ))}
         </View>
       )}
@@ -188,7 +189,7 @@ function CategoryCard({ cat }) {
   );
 }
 
-function ChainCard({ chain, town }) { const shown = chainPrintName(chain, town); // COHERENCE-AGREE-6 (F1): the name and the source printed read the town's access
+function ChainCard({ chain, town, instNames = [] }) { const shown = chainPrintName(chain, town); // COHERENCE-AGREE-6 (F1): the name and the source printed read the town's access
   // Honor the chain's own disruption status first — the card used to label
   // trade-impaired/vulnerable chains 'Active', contradicting the web panel.
   const status = String(chain.status || '').toLowerCase();
@@ -216,8 +217,13 @@ function ChainCard({ chain, town }) { const shown = chainPrintName(chain, town);
   // — which already routes the same field through the seam — said 'House of worship'. The
   // seam goes BEFORE humanize so an unmapped institution still gets its casing.
   const flow = [
-    shown.resource ? humanize(label(shown.resource)) : null,
-    (chain.processingInstitutions || []).map((n) => humanize(institutionDisplayName(n) || n)).join(' + ') || null,
+    // R2-CODE-B round 3, ruling (d) (#804): no ground the record says is absent (chainHouses.js); with the town, a toll
+    // renamed by its access names that access (COHERENCE-AGREE-6 F1), as the screen's card reads it (R2-CODE-B-7).
+    chainSourceOf(chain, shown) ? humanize(label(chainSourceOf(chain, shown))) : null,
+    // R2-CODE-B item 1: the houses by the seam's house label, each once (domain/display/chainHouses.js),
+    // the screen's chain card's own read: no rank's count range the roster does not hold.
+    // Ruling (e): the roster is read, so a house held only as a road to elsewhere is named as the page names it.
+    chainHousesOf(chain.processingInstitutions, instNames).map((h) => humanize(h.name)).join(' + ') || null,
     ((outputs) => (outputs && chainYieldRefused(chain) ? `${NORMALLY_YIELDS}: ${outputs}` : outputs))((chain.outputs || []).map(humanize).slice(0, 4).join(', ') || null),
   ].filter(Boolean).join(' \u00bb ');
 
@@ -267,9 +273,11 @@ function svcLabel(svc) {
   // §934.13 — every arm goes through the label seam. `humanize` returns any string
   // containing whitespace unchanged, so it composes with the seam's authored case
   // rather than title-casing 'Access to a house of worship'.
-  if (typeof svc === 'string') return humanize(institutionDisplayName(svc));
-  return humanize(institutionDisplayName(svc)) ||
-         (svc.institution ? humanize(institutionDisplayName(svc.institution)) : '');
+  // ROUND THREE, ruling (a): through the house's label, the one display leaf (no catalogue count
+  // range, household range, gate or condition).
+  if (typeof svc === 'string') return humanize(institutionHouseLabel(svc));
+  return humanize(institutionHouseLabel(svc)) ||
+         (svc.institution ? humanize(institutionHouseLabel(svc.institution)) : '');
 }
 
 export default Services;

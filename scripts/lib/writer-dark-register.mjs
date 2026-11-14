@@ -266,24 +266,11 @@ export const WRITER_DARK_REGISTER = Object.freeze([
       + ' entry headline once the outcome applies; what a player sees is that headline, LIT on the Herald.',
     charter: '§934.88 the Voice Program wave 1 (heraldDeeds.js), measured DARK by the walker at the program tip f33d28798',
   }),
-  Object.freeze({
-    identity: 'gapPct on foodRecord',
-    key: 'gapPct',
-    shape: 'foodRecord',
-    writer: 'src/generators/economy/foodBalance.js',
-    reason: 'engine-internal',
-    consumer: Object.freeze({
-      file: 'src/generators/economy/prosperity.js',
-      symbol: 'the prosperity food cap, which reads foodSecurity.foodRecord.gapPct before falling back to '
-        + 'deficitPct',
-    }),
-    why: 'The remaining food gap as a rounded per cent: the same number as the deficit per cent the food '
-      + 'ledger already prints. The prosperity step reads it (prosperity.js:83) to cap or penalise the '
-      + 'prosperity rung, inside src/generators behind the closure STOP; what a player sees is the deficit '
-      + 'and the prosperity rung it moved.',
-    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
-      + 'W6, section ECO), consumer CONFIRMED at src/generators/economy/prosperity.js:83',
-  }),
+  // R2-CODE-B-6 (2026-11-14): `gapPct on foodRecord` LEFT this register by clause S (BANK THE WIN). R2-CODE-B-3 item 2b
+  // (d94638185) made tonightSheet.js :: foodBandOf the food label's one home, and it reads the record's `gapPct` (a
+  // "Secure" band that leaves a share of the need unmet reads "Pressured") on the Tonight sheet and the Daily Life tile:
+  // the identity is LIT, and the row would be wrong about its own reason (engine-internal). Struck with that cause; the
+  // prosperity step's read (prosperity.js:83) is unchanged.
   // MERGE-R2 (2026-11-07, the integration merge of the rung-2 landing): `growsMoreThanEats on foodRecord` LEFT this
   // register. W6 (section ECO) convicted it engine-internal because its consumer, src/domain/foodSurplus.js, sat
   // outside every surface closure; the rung-2 landing's chunk cure (computeActiveChains reads the food gate from
@@ -328,22 +315,6 @@ export const WRITER_DARK_REGISTER = Object.freeze([
       + 'which is shown its roster.',
     charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
       + 'W6, section ECO), consumer CONFIRMED at src/domain/generationOwnership.js:119',
-  }),
-  Object.freeze({
-    identity: 'forcedByToggle on institutions',
-    key: 'forcedByToggle',
-    shape: 'institutions',
-    writer: 'src/generators/steps/assembleInstitutions.js',
-    reason: 'engine-internal',
-    consumer: Object.freeze({
-      file: 'src/domain/generationOwnership.js',
-      symbol: 'the ownership law, which keeps an institution the DM\'s toggle demanded out of the regenerable set',
-    }),
-    why: 'Provenance of the DM\'s own choice: the toggle demanded this institution. The ownership law reads it '
-      + '(generationOwnership.js:78, :93, :233) so a regeneration never drops what the DM forced; the DM '
-      + 'already knows they forced it, and the player is shown the institution, not how it was chosen.',
-    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
-      + 'W6, section ECO), consumer CONFIRMED at src/domain/generationOwnership.js:78',
   }),
   Object.freeze({
     identity: 'exclusiveGroupCoexists on institutions',

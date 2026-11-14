@@ -1114,10 +1114,15 @@ describe('UX consolidation — the Economics page says each fact once', () => {
     const text = container.textContent;
     expect(text).toContain('Economic Flows');
     expect(text, 'the resource node, depleted').toContain('Iron ore (depleted)');
-    expect(text, 'the upstream import, by label').toContain('Import: Grain & Bread');
-    expect(text, 'the missing house is marked').toContain('Foundry (missing)');
-    expect(text, 'a present house is not').not.toContain('Smelter (missing)'); // anchored: toContain('Foundry (missing)') on this render
-    expect(text, 'the upstream note').toContain('Charcoal arrives by cart.');
+    // R2-CODE-B-SIDE item 2: a chain's label is not a good; the From line names no "Import: <a chain's label>".
+    expect(text, 'no upstream import by a chain\'s label').not.toContain('Import: Grain & Bread'); // anchored: toContain('Iron ore (depleted)') on this render
+    // R2-CODE-B-SIDE item 3: the card names the roster's houses that do the work; a template name the town lacks
+    // ("Foundry") is not named, and no house is marked missing.
+    expect(text, 'the house the roster holds is named').toContain('ViaSmelter');
+    expect(text, 'a template house the roster lacks is not').not.toContain('Foundry'); // anchored: toContain('ViaSmelter') on this render
+    expect(text, 'a present house is not').not.toContain('Smelter (missing)'); // anchored: toContain('ViaSmelter') on this render
+    // R2-CODE-B-SIDE item 1: the generator's upstream note leaves the card (no read the card holds makes it true).
+    expect(text, 'the upstream note leaves the card').not.toContain('Charcoal arrives by cart.'); // anchored: toContain('Iron ore (depleted)') on this render
     expect(text, 'the duplicate section is gone').not.toContain('Supply Chains'); // anchored: toContain('Economic Flows') on this render
   });
 

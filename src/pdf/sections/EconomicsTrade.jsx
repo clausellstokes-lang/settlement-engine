@@ -30,6 +30,7 @@ import {
 import { statusCase } from '../../domain/display/labelCase.js';
 import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js'; // §934.22 item 2 — the EXPORTS/IMPORTS lists
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js'; // §934.22 item 1(b) — the PROC row
+import { chainHousesOf } from '../../domain/display/chainHouses.js'; // R2-CODE-B item 1b (ruling R1): the PROC row's houses
 import { SupplyChainFlow } from './SupplyChainFlow.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
 import { revenuesOffTheLists, tradeListsAsPrinted } from '../../domain/display/tradeListDisplay.js'; // CENSUS-3c R-P 2 — the revenues that left the trade lists; W2-C-LEAVES-7 item 8 — the tab's trade lists
@@ -244,7 +245,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
               status={c.status}
               statusLabel={cap(c.status)}
               meta={[
-                c.processingInstitutions?.length ? { label: 'PROC', value: c.processingInstitutions.map((n) => label(institutionDisplayName(n))).filter(Boolean).join(', ') } : null,
+                c.processingInstitutions?.length ? { label: 'PROC', value: chainHousesOf(c.processingInstitutions, []).map((h) => label(h.name)).filter(Boolean).join(', ') } : null,
                 c.outputs?.length ? { label: chainYieldRefused(settlement?.economicState?.activeChains?.[i]) ? NORMALLY_YIELDS.toUpperCase() : 'OUT', value: c.outputs.map(label).filter(Boolean).join(', ') } : null,
                 c.dependency ? { label: 'DEP', value: depText(c.dependency) } : null,
                 c.incomeContribution != null ? { label: 'INC', value: smart(c.incomeContribution) } : null,
@@ -265,7 +266,8 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
             CUSTOM SUPPLY CHAINS · {e.customChains.length}
           </Text>
           {e.customChains.map((c, i) => {
-            const flow = [c.resource, ...(c.processingInstitutions || []), ...(c.outputs || [])]
+            // R2-CODE-B item 1b (ruling R1): the houses by the seam's house label, each once (chainHouses.js).
+            const flow = [c.resource, ...chainHousesOf(c.processingInstitutions, []).map((h) => h.name), ...(c.outputs || [])]
               .filter(Boolean)
               .map((n) => label(institutionDisplayName(n) || n) || String(n))
               .join(' » ');

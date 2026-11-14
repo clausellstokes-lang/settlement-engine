@@ -9,6 +9,7 @@ import { isViabilityItem, trimViabilitySummary } from '../../../domain/display/v
 // READER-R1 (the chair's rulings 1, 2 and 4): one critical list, the stress effects that are
 // not in it, an issue's text read against the route, and the generator's checks for staff only.
 import { byDesignItemsOf, criticalIssuesOf, stressEffectsOf, viabilityIssueText, staffValidationRows } from '../../../domain/display/validationOnPage.js';
+import { houseLabelsInText } from '../../../domain/display/institutionDisplayName.js';
 import { useStore } from '../../../store/index.js';
 
 
@@ -208,7 +209,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
               {issue.category&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.danger}}>{tokenCase(issue.category)}</span>}
               {issue.title&&<span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{issue.title}</span>}
             </div>
-            <p style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}>{viabilityIssueText(issue, s)}</p>
+            <p style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}>{houseLabelsInText(viabilityIssueText(issue, s), s?.institutions)}</p>
             {issue.priorityNote&&firstNoteAt.get(issue.priorityNote)===i&&<p style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch['#8B3A1A'],fontStyle:'italic',margin:'0 0 8px',lineHeight:1.4}}>{issue.priorityNote}</p>}
             {issue.suggestedFixes?.length>0&&<div style={{borderTop:'1px solid #e8c0c0',paddingTop:8}}>
               <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Suggested fixes</div>
@@ -233,7 +234,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
               {issue.category&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:sc}}>{tokenCase(issue.category)}</span>}
               {issue.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:swatch.inkMag}}>{issue.title}</span>}
             </div>
-            <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{viabilityIssueText(issue, s)}</p>
+            <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{houseLabelsInText(viabilityIssueText(issue, s), s?.institutions)}</p>
             {issue.suggestedFixes?.length>0&&<div style={{marginTop:6}}>
               {issue.suggestedFixes.map((fix,j)=>(
                 <div key={j} style={{display:'flex',gap:6,marginBottom:2}}>
@@ -251,7 +252,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
         {stressConsequences.map((item,i)=>(
           <div key={i} style={{background:swatch['#F9F3E8'],border:'1px solid #d4a96a',padding:'8px 10px',marginBottom:6}}>
             {item.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:swatch['#6B4C2A'],display:'block',marginBottom:2}}>{item.title}</span>}
-            <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch['#5A3E28'],lineHeight:1.5,margin:0}}>{typeof item.description==='object'?item.description.short||item.description.text||'':item.description||item.message||''}</p>
+            <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch['#5A3E28'],lineHeight:1.5,margin:0}}>{houseLabelsInText(typeof item.description==='object'?item.description.short||item.description.text||'':item.description||item.message||'', s?.institutions)}</p>
           </div>
         ))}
       </Section>}
@@ -278,7 +279,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
               {wobj.category&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:sc}}>{tokenCase(wobj.category)}</span>}
               {wobj.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:swatch.inkMag}}>{wobj.title}</span>}
             </div>
-            {wobj.description&&<p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 4px'}}>{wobj.description}</p>}
+            {wobj.description&&<p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 4px'}}>{houseLabelsInText(wobj.description, s?.institutions)}</p>}
             {wobj.impact&&<p style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch['#5A3A10'],fontStyle:'italic',margin:'0 0 6px',lineHeight:1.4}}>Impact: {wobj.impact}</p>}
             {wobj.suggestedFixes?.length>0&&<div>
               {wobj.suggestedFixes.map((fix,j)=>(

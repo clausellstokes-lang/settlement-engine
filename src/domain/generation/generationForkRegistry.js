@@ -101,6 +101,11 @@ const freezeRow = (/** @type {GenerationTier1Row} */ row) => Object.freeze(Objec
  * register telling a caller a single truth it does not have.
  * @type {readonly GenerationTier1Row[]}
  */
+// R2-CODE-B-4 (ROUND THREE item 4, 2026-11-14), RE-MEASURED, cells from the arm's printed literal (the literal differs from
+// this one in these two rows only): resolveCrisisCast|crisisCast and |settlement stepDraws 0 -> 2, keyMoves 0 -> 2, class
+// pure -> drawn, on the 63-row corpus. An "Access to ..." row (the road to another place's house; record 375) is no longer a
+// famine's lever, so where it was the only lever house the cast's own rule mints its one temporary person, named on the
+// step's own fork (rng.fork('resolveCrisisCast')); no other step's row moved, so no other stream moved.
 export const GENERATION_TIER1 = Object.freeze(/** @type {GenerationTier1Row[]} */ ([
   { step: 'resolveConfig', key: 'tier', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.tier' },
   { step: 'resolveConfig', key: 'population', via: 'provides', stepDraws: 63, keyMoves: 63, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.population' },
@@ -178,8 +183,8 @@ export const GENERATION_TIER1 = Object.freeze(/** @type {GenerationTier1Row[]} *
   // MERGE-234 (one tie writer, the chair's ruling of 10:4x UTC): drawn/51/same -> pure/0/transformed, MEASURED by A3e/A4 at the
   // 1+2+3+4 tip — the `other` mints' `people-powers::mint::<slug>::tie` fork at the seam is retired (drawTies writes their tie).
   { step: 'assembleSettlement', key: 'relationships', via: 'mutates', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.relationships' },
-  { step: 'resolveCrisisCast', key: 'crisisCast', via: 'provides', stepDraws: 0, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 63, same: 0, transformed: 0 }, onRecordClass: 'absent', producedOnRecord: { absent: 63, same: 0, transformed: 0 }, producedOnRecordClass: 'absent', recordPath: null },
-  { step: 'resolveCrisisCast', key: 'settlement', via: 'mutates', stepDraws: 0, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record' },
+  { step: 'resolveCrisisCast', key: 'crisisCast', via: 'provides', stepDraws: 2, keyMoves: 2, rows: 63, class: 'drawn', onRecord: { absent: 63, same: 0, transformed: 0 }, onRecordClass: 'absent', producedOnRecord: { absent: 63, same: 0, transformed: 0 }, producedOnRecordClass: 'absent', recordPath: null },
+  { step: 'resolveCrisisCast', key: 'settlement', via: 'mutates', stepDraws: 2, keyMoves: 2, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record' },
 ]).map(freezeRow));
 
 /**

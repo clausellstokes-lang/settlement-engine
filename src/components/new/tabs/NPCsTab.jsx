@@ -80,7 +80,9 @@ export function NPCsTab({
         <div style={{flex:1}}>
           <span style={{...serif,fontSize:FS.xl,fontWeight:600,color:swatch.inkMag}}>{npcs.length} Key Figures</span><InfoPill text={SECTION_HELP.npcs} />
           <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED,marginLeft:8}}>
-            {highCount>0&&`${highCount} high influence · `}{modCount>0&&`${modCount} moderate`}
+            {/* R2-CODE-B-5 (the increment's rpf-hamlet-succession_void-13 "1 high influence ·"): the separator stands
+                only between two counts, never after the last one. No word changes. */}
+            {[highCount>0&&`${highCount} high influence`, modCount>0&&`${modCount} moderate`].filter(Boolean).join(' · ')}
           </span>
         </div>
         {pinnedCount > 0 && (
