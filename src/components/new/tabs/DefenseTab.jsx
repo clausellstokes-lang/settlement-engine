@@ -172,7 +172,7 @@ export function wholeSentencesWithin(text, maxChars) {
   const t = typeof text === 'string' ? text.trim() : '';
   if (t.length <= maxChars) return t;
   const head = t.slice(0, maxChars + 1);
-  const ends = [...head.matchAll(/[.!?]["')\]]?(?=\s|$)/g)];
+  const ends = [...head.matchAll(/[.!?][\x22\x27)\]]?(?=\s|$)/g)]; // the closing quotes as \x22 \x27: a bare quote in this literal opened a string for the source scan of the mount walker
   const last = ends[ends.length - 1];
   return last ? t.slice(0, last.index + last[0].length) : t;
 }
