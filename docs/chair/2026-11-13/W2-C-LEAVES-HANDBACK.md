@@ -1186,5 +1186,19 @@ covers" is retired by this ruling (the pin re-keyed, not loosened: it now assert
 1. Item 1's writer is outside the lane's named family (the Services tab), but the brief rules that exact line; the cut is
    display only, two files, no new words; the line (lane/integration-2026-11-07) does not touch either file (both bases).
 
+## THE TIME-BOX (the brief's 180,000)
+- After item 1 this seat's count read 205,055 (get_session, external_metadata.context_usage.used_tokens, 04:51 UTC):
+  past the box. No item in hand: STRAIGHT TO THE CLOSE. Items 2, 3 and 4 are LEFT FOR AFTER THE JOIN (below, at the
+  final statement). Told to the chair in one line.
+
+## Row 5 (PART 6's): the second merge's registers verified by their doors (EXECUTED at 8e94e208e, before the line's merge)
+- The second merge 6a42e039d (df51100b1) and the early merge 1c36c1717 (777b81bdb) carried two register moves:
+  tests/lint/ruinFilterRoster.walker.test.js (the exempt row for defenseDisplay.js, 4bd24fc72) and the re-keyed pin
+  tests/components/defenseRingNoteProjection.test.jsx; PART 5's own: docs/content/wiring-census.json and
+  tests/lint/.prose-numerics-baseline.json. Doors: `vitest run` of ruinFilterRoster.walker, defenseRingNoteProjection,
+  proseNumerics, wiringCensusDeclared.walker, proseWiringCensus.walker: 5 files / 131 tests green;
+  `node scripts/wiring-census.mjs --check` exit 0 (856 pools / 2779 variants / 165 relation rows, 7 stamped files).
+  Nothing left to move.
+
 ## STATUS (kept current)
-- Item 1 DONE a2eaf6a6a. Next: item 2 (the court rows).
+- Item 1 DONE a2eaf6a6a. Time-box closed after it. Row 5 DONE (verified, nothing moved). Next: the line's merge.
