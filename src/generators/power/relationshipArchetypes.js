@@ -198,27 +198,39 @@ const tiePairPool = (archetype) => {
  *   {archetypeKey: string | undefined, proseVariant: number, description: string, tension: string}}
  */
 export const createTieProseDraw = (force, facts = null) => {
-  /** @type {Map<unknown, {base: number, used: number}>} */
+  /** @type {Map<unknown, {base: number, used: number, printed: Set<number>}>} */
   const draws = new Map();
   return (archetype, npc, partner) => {
     const archetypeKey = archetypeKeyOf(archetype);
     let draw = draws.get(archetype);
     if (!draw) {
-      draw = { base: fnv1a32(`${npc?.name ?? ''}>${partner?.name ?? ''}::${archetypeKey ?? archetype?.label}`), used: 0 };
+      draw = { base: fnv1a32(`${npc?.name ?? ''}>${partner?.name ?? ''}::${archetypeKey ?? archetype?.label}`), used: 0, printed: new Set() };
       draws.set(archetype, draw);
     }
     const size = archetype.tension.size;
     const named = bothNamedTensions(archetype);
-    const drawnVariant = draw.used < size || named.length === 0
+    const inHead = draw.used < size || named.length === 0;
+    const drawnVariant = inHead
       ? (draw.base + draw.used) % size
       : named[(draw.base + draw.used - size) % named.length];
     draw.used += 1;
     const pool = tiePairPool(archetype);
-    const resolved = drawDeclared(pool, {
-      draw: (p) => p[drawnVariant], facts, key: `${npc?.name ?? ''}>${partner?.name ?? ''}::${archetypeKey ?? archetype?.label}`,
+    /** @param {{ draw: (p: ReadonlyArray<any>) => any, held?: Set<string>, heldKey?: (l: any) => string }} how */
+    const resolveAt = (how) => drawDeclared(pool, {
+      ...how, facts, key: `${npc?.name ?? ''}>${partner?.name ?? ''}::${archetypeKey ?? archetype?.label}`,
       poolId: `npcData:${archetypeKey && Object.hasOwn(HANDLER_TIE_ARCHETYPES, archetypeKey) ? 'HANDLER_TIE_ARCHETYPES' : 'STRESS_ECONOMIC_EFFECTS'}.${archetypeKey ?? archetype?.label}`, surface: 'relationships', drawKind: 'H',
     });
+    // R2-CODE-A-14: WITHOUT REPLACEMENT HOLDS THROUGH THE RESOLUTION. In the head of the cycle (the first `size` ties
+    // of the archetype in the town) a refused index resolves to an admitted index NO EARLIER TIE OF THE ARCHETYPE
+    // PRINTED (the indices printed are `held`, so drawDeclared's hash argmax passes over them; a drawn index an
+    // earlier resolution already printed is refused as held and resolves the same way). Draw-free: the drawn index is
+    // the cycle's as before, and a town whose draws are all admitted resolves exactly as before. Only where every
+    // admitted index is printed does it resolve as it did (a repeat, never a false line).
+    const held = inHead && draw.printed.size ? new Set([...draw.printed].map(String)) : null;
+    const once = held ? resolveAt({ draw: () => pool[drawnVariant], held, heldKey: (l) => String(l.id) }) : null;
+    const resolved = once && once.line ? once : resolveAt({ draw: (p) => p[drawnVariant] });
     const proseVariant = resolved.line ? resolved.line.id : drawnVariant;
+    draw.printed.add(proseVariant);
     return {
       archetypeKey,
       proseVariant,
