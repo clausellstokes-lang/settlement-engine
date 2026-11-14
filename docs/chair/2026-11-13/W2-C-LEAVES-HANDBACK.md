@@ -1733,6 +1733,15 @@ out; "Every stage …" (46) and "built on …" (192) left with rows whose house 
   the door's, not done here.
 
 ## WHAT IS LEFT, line by line (in the brief's order; nothing begun of any)
+0. FIRST IN THIS LIST BY THE CHAIR'S WORD (12:19 UTC; WORKED after the HIGH rows and ruling (4), by their widths); three rows
+   measured on the joined tree's 720 by the no-lane seat (origin/lane/join-nolane-2026-11-14, docs/chair/2026-11-14/
+   NOLANE-HANDBACK.md, "Still false: A LANE'S", rows marked w2-c-leaves); MEASURE EACH AT THIS TIP FIRST:
+   (15) "Needed, and not brought in: … gold/silver ore" (93 towns, the Economics tab): NO SURFACE PRINTS A CATALOGUE LABEL
+   WITH A SLASH: the good's plain name, through the leaf the pills use.
+   (16) The Magic tab prints a chain's magic note raw (43 towns: a divine note where the town holds no divine tradition) while
+   the Economics card reads it through this lane's reader: ONE READER FOR ONE FACT ON EVERY SURFACE: the Magic tab calls it.
+   (17) A chain card's outputs run together ("Medical treatmentSurgeryQuarantine", 31 towns): TWO THINGS A PAGE SAYS ARE SET
+   APART, on the page and in the text taken from it; its twin: yield chips printed with no label on an impaired chain.
 1. (3) HIGH pills: "Master-crafted weapons" (tradeListDisplay.js :: chainMakesHere's default branch `heads.some(...)`
    passes a good with no MADE_GOOD_HOUSES row whenever a chain house's first word stands: the Mine). MEASURE FIRST how many
    pills (chain Outputs and exports) pass by that default on the 1,824: ruling "no maker row, not printed by default" may
