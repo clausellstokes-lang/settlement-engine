@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "8e31b88d95ae7f2fdb81265d88079f9b71bba86e",
-  "measuredBy": "UPKEEP-9",
+  "measuredAtSha": "3bd14d0b5b0d2375832b1f8d3ce676edbac432e6",
+  "measuredBy": "UPKEEP-10",
   "date": "2026-11-14",
-  "note": "4ff5b11e3 adds tests/generators/foodwaysCultureLineHolds.test.js (step 2(a)); f78522bf6 edits defenceTraditionNames",
+  "note": "UPKEEP-10: the grain line's three tests (3bd14d0b5)",
   "files": 3250,
   "parked": 403,
   "credited": 2847,
-  "titles": 29364,
-  "suiteTitles": 7977
+  "titles": 29367,
+  "suiteTitles": 7978
 }
