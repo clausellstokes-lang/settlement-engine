@@ -84,6 +84,13 @@
 --       and withheld by the twin; neither found a sharp s as 'ss', the dotless i as 'i' or an accented copy. Both now
 --       compare by one fold (_gallery_veil_case_fold, gallerySecondHomes.js :: caseFold): the name search's
 --       preparation, A-Z lowered, each other letter the first of its case class from the one table.
+--   (22) THE BOUNDARY INVERTED (COHERENCE-VEIL-12; REVIEW-VEIL-8's V8-1, the chair's ruling of 2026-11-14 04:42 UTC): the
+--       name search asked a word boundary as a LISTED separator, so any other neighbour blocked the match and a hidden
+--       name was sent beside a Hangul particle, kana, Han, Thai, an arrow, a star, an emoji, U+02BC or Armenian
+--       punctuation. Now a neighbour blocks only where it is in ONE table, the letters and digits of the scripts that
+--       separate their words by spaces (_gallery_veil_name_bound, gallerySecondHomes.js :: NAME_BOUND); every other
+--       neighbour is a boundary, judged as written: a character whose compatibility form would block (the trade-mark
+--       sign is TM) is written between spaces before the search's preparation (_gallery_veil_name_pad; section 4c).
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -95,14 +102,14 @@
 --       Reveal-DM projection of the gallery read and the import, beside 211's decrees and dmLayer; before, every
 --       reader and every importer of such a share received both.
 --
--- NEW: twenty-six helpers (_gallery_veil_pieces, _embeds, _case_fold, _fold, _hidden_name, _sources, _tie_pieces,
--- _second_homes, _member_revealed, _roster_members, _tie_roles, _roster_splice; and the name search's fourteen: _name_sep, _name_case,
--- _name_prep, _name_fold, _name_needle, _name_search, _name_ready, _name_hits, _name_hit, _named, _name_near,
+-- NEW: twenty-eight helpers (_gallery_veil_pieces, _embeds, _case_fold, _fold, _hidden_name, _sources, _tie_pieces,
+-- _second_homes, _member_revealed, _roster_members, _tie_roles, _roster_splice; and the name search's sixteen: _name_sep, _name_bound,
+-- _name_pad, _name_case, _name_prep, _name_fold, _name_needle, _name_search, _name_ready, _name_hits, _name_hit, _named, _name_near,
 -- _name_floor, _name_taken, _name_sweep). RESTATED, each as 211's statement plus the cure:
 -- _gallery_veil_card, _gallery_veil_apply, _gallery_apply_member_overrides, get_gallery_dossier and
 -- import_gallery_dossier (their grants restated as 211 states them). No helper of 211 changes its
 -- signature, so nothing 211 created is left behind. 211's section 7 is restated last: no _gallery_veil*
--- helper is callable by public, anon or authenticated (66 in all). NOT CHANGED: get_unlisted_dossier,
+-- helper is callable by public, anon or authenticated (68 in all). NOT CHANGED: get_unlisted_dossier,
 -- get_gallery_map and every other function. No table, column, constraint, policy or row.
 --
 -- COUPLED CLIENT TWIN: src/domain/display/gallerySecondHomes.js (the second homes, (9); the name search, (19)), called
@@ -259,7 +266,7 @@ returns text language sql immutable as $$
                                         'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '[^a-z0-9]+', '_', 'g'), '_')
 $$;
 
--- ── 4c. THE NAME SEARCH (COHERENCE-VEIL-10; REVIEW-VEIL-7's V7-1, V7-4, V7-6, V7-7, V7-9, V7-10) ──────────────
+-- ── 4c. THE NAME SEARCH (COHERENCE-VEIL-10, -12; REVIEW-VEIL-7's V7-1, V7-4, V7-6, V7-7, V7-9, V7-10; V8-1) ────
 -- The eighth seat's sweep (_gallery_veil_folded_name, _names, _sweep and its prefilter) is REPLACED, not patched. What
 -- stands here, and in the client's twin rule for rule (gallerySecondHomes.js, THE NAME SEARCH):
 --   THE PREPARATION of a text that holds a character outside ASCII: NFKD, then the combining marks U+0300 to U+036F
@@ -274,10 +281,22 @@ $$;
 --     as the bracket of its case class, from ONE table carried as the same literal by both engines
 --     (_gallery_veil_name_case); sharp s and "ss" are one.
 --   ONE SEARCH FOR ALL HIDDEN NAMES AT ONCE: one alternation; a name's words joined by '_' or by nothing (the squeezed
---     and the camel-cased spellings are the same needle); an English plural; a word boundary asked at an end of the
---     name only where that end is a letter or digit of an alphabet that separates its words (ASCII, Latin, Greek,
---     Cyrillic, Armenian, Georgian), so a name in Han, Thai or Arabic is found inside its sentence. A name's forms: the
---     name, and the name without its bracketed qualifier. A name that is separators only is searched as written.
+--     and the camel-cased spellings are the same needle); an English plural. A name's forms: the name, and the name
+--     without its bracketed qualifier. A name that is separators only is searched as written.
+--   A BOUNDARY IS ANY NEIGHBOUR NOT IN THE BLOCKING TABLE (COHERENCE-VEIL-12; V8-1, the chair's ruling of 2026-11-14
+--     04:42 UTC: the boundary inverted). The table (_gallery_veil_name_bound, the same literal in both engines) is the
+--     letters and digits of the scripts that separate their words by spaces (Latin, Greek, Cyrillic, Armenian,
+--     Georgian) and the ASCII digits. Where an end of a name is in the table, the neighbour on that side must not be:
+--     the start or the end of a text, a separator, a symbol, a mark, punctuation of any script, a letter of a script
+--     that writes no spaces, Hangul (whose particles join their noun) and the cut-out mark are each a boundary; a
+--     letter or digit in the table blocks ('a Black marketeer' is not the name). Asked without consuming the neighbour
+--     (a lookbehind and a lookahead), so two hits that share one neighbour are each found. Where an end is not in the
+--     table (a Han, Hangul or symbol end) no boundary is asked: a name in Han or Thai is found inside its sentence.
+--   THE NEIGHBOUR AS WRITTEN (the seat's call 2): a character that is not itself a letter or digit of the five
+--     alphabets but whose compatibility form begins or ends with one (the trade-mark sign is TM, a superscript two is
+--     2, a circled one is 1, a mathematical bold A is A) is a boundary: the search writes it between spaces before its
+--     preparation (_gallery_veil_name_pad, in the fold of a name and in a text made ready). The words' fold
+--     (_gallery_veil_case_fold) does not pad.
 --   AN OPEN NAME THAT HOLDS A HIDDEN ONE is cut out of a text before the search, longest first ('Black market bazaar'
 --     is not 'Black market'); an open name that IS a hidden one (the same letters) is not cut out: it keeps its floor.
 --   KEYS AS WELL AS VALUES; an id and a join are strings like any other. FLOORS, never asked: the town's own `name`;
@@ -301,6 +320,60 @@ create or replace function public._gallery_veil_name_sep(quote boolean)
 returns text language sql immutable as $$
   select case when quote then '\x01-\x2f' else '\x01-\x21\x23-\x2f' end
       || '\x3a-\x40\x5b-\x60\x7b-\xbf\xd7\xf7\u2000-\u206f\u2e00-\u2e7f\u3000-\u303f\ufe30-\ufe6f\ufeff\uff00-\uff0f\uff1a-\uff20\uff3b-\uff40\uff5b-\uff65'
+$$;
+
+-- [212: NEW] public._gallery_veil_name_bound
+-- THE BLOCKING TABLE (COHERENCE-VEIL-12; REVIEW-VEIL-8's V8-1), as the body of a bracket expression: the letters and the
+-- digits (General Category L*, N*) of the scripts that separate their words by spaces, Latin, Greek, Cyrillic, Armenian
+-- and Georgian (by the Script property: no Common or Inherited character), and the ASCII digits, over the code points
+-- the preparation leaves alone (so not U+212A, the cut-out mark). No punctuation, symbol, mark, separator, control,
+-- format character or modifier letter of the Common script (U+02BC) is in it. A neighbour in this table blocks a name;
+-- every other neighbour is a boundary. Generated once (docs/chair/2026-11-14/veil-probe-12/gen-name-bound.mjs, Unicode
+-- 17.0, Node 22.23): 1,434 code points in 101 ranges. The same literal, character for character, is
+-- gallerySecondHomes.js :: NAME_BOUND; the guard holds the two engines' membership equal for every code point.
+create or replace function public._gallery_veil_name_bound()
+returns text language sql immutable as $$
+  select ('"' ||
+    '0-9A-Za-z\u00c6\u00d0\u00d8\u00de\u00df\u00e6\u00f0\u00f8\u00fe\u0110\u0111\u0126\u0127\u0131\u0138\u0141\u0142'
+    '\u014a\u014b\u0152\u0153\u0166\u0167\u0180-\u019f\u01a2-\u01ae\u01b1-\u01c3\u01dd\u01e4\u01e5\u01f6\u01f7\u021c\u021d'
+    '\u0220-\u0225\u0234-\u02af\u0370-\u0373\u0376\u0377\u037b-\u037d\u037f\u0391-\u03a1\u03a3-\u03a9\u03b1-\u03c9\u03cf'
+    '\u03d7-\u03e1\u03f3\u03f7\u03f8\u03fa-\u03ff\u0402\u0404-\u0406\u0408-\u040b\u040f-\u0418\u041a-\u0438\u043a-\u044f'
+    '\u0452\u0454-\u0456\u0458-\u045b\u045f-\u0475\u0478-\u0481\u048a-\u04c0\u04c3-\u04cf\u04d4\u04d5\u04d8\u04d9\u04e0\u04e1'
+    '\u04e8\u04e9\u04f6\u04f7\u04fa-\u052f\u0531-\u0556\u0559\u0560-\u0586\u0588\u10a0-\u10c5\u10c7\u10cd\u10d0-\u10fa'
+    '\u10fd-\u10ff\u1c80-\u1c8a\u1c90-\u1cba\u1cbd-\u1cbf\u1d00-\u1d2b\u1d2f\u1d3b\u1d4e\u1d6b-\u1d77\u1d79-\u1d9a'
+    '\u1e9c-\u1e9f\u1efa-\u1eff\u2132\u214e\u2180-\u2188\u2c60-\u2c7b\u2c7e\u2c7f\u2d00-\u2d25\u2d27\u2d2d\ua640-\ua66e'
+    '\ua67f-\ua69b\ua722-\ua76f\ua771-\ua787\ua78b-\ua7dc\ua7f5-\ua7f7\ua7fa-\ua7ff\uab30-\uab5a\uab60-\uab68'
+    '\ud800\udd40-\ud800\udd78\ud800\udd8a\ud800\udd8b\ud801\udf80\ud837\udf00-\ud837\udf1e\ud837\udf25-\ud837\udf2a'
+    || '"')::jsonb #>> '{}'
+$$;
+
+-- [212: NEW] public._gallery_veil_name_pad
+-- THE NEIGHBOUR AS WRITTEN (COHERENCE-VEIL-12; the seat's call 2 on V8-1): a character that is not itself in the blocking
+-- table as written (judged by its own General Category and Script), but whose compatibility form begins or ends with a
+-- member (the trade-mark sign is TM, a superscript two is 2, a circled one is 1, a mathematical bold A is A), is written
+-- between two spaces, so that the preparation leaves a boundary where it stood. Called by THE NAME SEARCH alone, before
+-- its preparation (the fold of a name, a text made ready); never by the words' fold (_gallery_veil_case_fold). A
+-- full-width or ligature Latin letter is a Latin letter: not padded, it blocks. A text of ASCII alone is returned as it
+-- is (no padded character is ASCII). The set, 1,486 code points in 70 ranges, is generated once with the table
+-- (docs/chair/2026-11-14/veil-probe-12/gen-name-bound.mjs); the same literal, character for character, is
+-- gallerySecondHomes.js :: NAME_PAD.
+create or replace function public._gallery_veil_name_pad(t text)
+returns text language sql immutable as $$
+  select case when t is null or t !~ '[^\x01-\x7f]' then t
+    else regexp_replace(t, '[' || (('"' ||
+      '\u00b2\u00b3\u00b5\u00b9\u00bc-\u00be\u2070\u2074-\u2079\u2080-\u2089\u20a8\u2100-\u2103\u2105-\u2107\u2109-\u2113'
+      '\u2115\u2116\u2119-\u211d\u2120-\u2122\u2124\u2128\u212c\u212d\u212f-\u2131\u2133\u2134\u2139\u213b-\u213f\u2145-\u2149'
+      '\u2150-\u215f\u2189\u2460-\u2473\u2488-\u249b\u24b6-\u24ea\u3250-\u325f\u32b1-\u32cf\u3358-\u337a\u3380-\u33ff'
+      '\uff10-\uff19\ud833\udcd6-\ud833\udcf9\ud835\udc00-\ud835\udc54\ud835\udc56-\ud835\udc9c\ud835\udc9e\ud835\udc9f'
+      '\ud835\udca2\ud835\udca5\ud835\udca6\ud835\udca9-\ud835\udcac\ud835\udcae-\ud835\udcb9\ud835\udcbb'
+      '\ud835\udcbd-\ud835\udcc3\ud835\udcc5-\ud835\udd05\ud835\udd07-\ud835\udd0a\ud835\udd0d-\ud835\udd14'
+      '\ud835\udd16-\ud835\udd1c\ud835\udd1e-\ud835\udd39\ud835\udd3b-\ud835\udd3e\ud835\udd40-\ud835\udd44\ud835\udd46'
+      '\ud835\udd4a-\ud835\udd50\ud835\udd52-\ud835\udea5\ud835\udea8-\ud835\udec0\ud835\udec2-\ud835\udeda'
+      '\ud835\udedc-\ud835\udefa\ud835\udefc-\ud835\udf14\ud835\udf16-\ud835\udf34\ud835\udf36-\ud835\udf4e'
+      '\ud835\udf50-\ud835\udf6e\ud835\udf70-\ud835\udf88\ud835\udf8a-\ud835\udfa8\ud835\udfaa-\ud835\udfc2'
+      '\ud835\udfc4-\ud835\udfcb\ud835\udfce-\ud835\udfff\ud83c\udd00-\ud83c\udd0a\ud83c\udd2b-\ud83c\udd2e'
+      '\ud83c\udd30-\ud83c\udd4f\ud83c\udd6a-\ud83c\udd6c\ud83c\udd90\ud83e\udff0-\ud83e\udff9'
+      || '"')::jsonb #>> '{}') || ']', ' \& ', 'g') end
 $$;
 
 -- [212: NEW] public._gallery_veil_name_case
@@ -452,11 +525,12 @@ begin
 end $$;
 
 -- [212: NEW] public._gallery_veil_name_fold
--- THE FOLD OF A NAME: prepared, A-Z lowered by an explicit map, every run of separators one '_', none at either end.
+-- THE FOLD OF A NAME: padded (_gallery_veil_name_pad), prepared, A-Z lowered by an explicit map, every run of separators
+-- one '_', none at either end.
 -- The same string as the client's nameFold for every input.
 create or replace function public._gallery_veil_name_fold(t text)
 returns text language sql immutable as $$
-  select btrim(regexp_replace(translate(public._gallery_veil_name_prep(coalesce(t, '')), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),
+  select btrim(regexp_replace(translate(public._gallery_veil_name_prep(public._gallery_veil_name_pad(coalesce(t, ''))), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),
                               '[' || public._gallery_veil_name_sep(true) || ']+', '_', 'g'), '_')
 $$;
 
@@ -479,12 +553,16 @@ $$;
 --   raw    the names that are separators only: searched as written
 --   blank  the open names that hold a hidden name and are not one, as patterns, longest first: cut out before the search
 -- NULL when there is nothing to search for. A name's forms: itself, and itself without its bracketed qualifier.
+-- THE BOUNDARY (COHERENCE-VEIL-12; V8-1): where an end of a name is in the blocking table (_gallery_veil_name_bound), the
+-- neighbour on that side must not be; asked by a lookbehind and a lookahead, which consume nothing, so two hits that
+-- share one neighbour are both found and a cut-out puts back nothing but its mark.
 create or replace function public._gallery_veil_name_search(names text[], opens text[])
 returns jsonb language plpgsql immutable as $$
 declare
-  sep text := '[_"]';   -- a word boundary in a text made ready: the one '_' a run of separators became, or a string's end
-  -- an end of a name that asks a word boundary: a letter or digit of an alphabet that separates its words
-  bnd text := '[a-z0-9\u00c0-\u058f\u10a0-\u10ff\u1c80-\u1cbf\u1e00-\u1fff\u2c00-\u2dff\ua640-\ua7ff]';
+  -- one character of the blocking table: an end of a name in it asks a boundary, and a neighbour in it blocks the name
+  bnd text := '[' || public._gallery_veil_name_bound() || ']';
+  lbd text := '(?<!' || bnd || ')';   -- a left boundary: the text's start, or a neighbour before that is not in the table
+  rbd text := '(?!' || bnd || ')';    -- a right boundary: the text's end, or a neighbour after that is not in the table
   qual text := '(?:[ \t]*[(\[][^()\[\]]*[)\]])+[ \t]*$';
   cls jsonb := '{}';   -- {a character: its needle}
   cv text := '';       -- every member of a case class but its first
@@ -504,7 +582,7 @@ begin
            string_to_table(a.g, null) with ordinality b(ch, o2);
     cls := cls || jsonb_build_object('_', '_?', '=', '(?:ss|[' || chr(223) || chr(7838) || '])');
   end if;
-  with n1 as (select distinct x as n, public._gallery_veil_name_prep(x) as pn from unnest(names) x where x is not null and x <> ''),
+  with n1 as (select distinct x as n, public._gallery_veil_name_prep(public._gallery_veil_name_pad(x)) as pn from unnest(names) x where x is not null and x <> ''),
        n2 as (select n, pn, public._gallery_veil_name_fold(pn) as f from n1),
        fs as (select f from n2 union select public._gallery_veil_name_fold(regexp_replace(pn, qual, '')) from n2 where pn ~ '[)\]]'),
        fm as (select f, left(f, 1) ~ bnd as lb, right(f, 1) ~ bnd as rb,
@@ -514,25 +592,26 @@ begin
        g as (select lb, rb, string_agg(needle, '|' order by f collate "C") as alt from fm group by lb, rb)
   select (select coalesce(jsonb_agg(n order by n collate "C"), '[]') from n2 where f = ''),
          (select coalesce(array_agg(distinct k), '{}') from fm),
-         (select string_agg(case when lb and rb then '(?:^|' || sep || ')(?:' || alt || ')(?:e?s)?(?:' || sep || '|$)'
-                                 when lb then '(?:^|' || sep || ')(?:' || alt || ')'
-                                 when rb then '(?:' || alt || ')(?:e?s)?(?:' || sep || '|$)'
+         (select string_agg(case when lb and rb then lbd || '(?:' || alt || ')(?:e?s)?' || rbd
+                                 when lb then lbd || '(?:' || alt || ')'
+                                 when rb then '(?:' || alt || ')(?:e?s)?' || rbd
                                  else '(?:' || alt || ')' end, '|' order by lb desc, rb desc) from g)
     into raws, keys, p;
   if p is null and raws = '[]' then return null; end if;
   if p is not null and cardinality(opens) > 0 then
     -- the open names that hold a hidden name (asked together: each made ready, between quotation marks, and `p` run
-    -- once over them all, a mark set before each name it finds), less those that ARE a hidden name (the same letters)
+    -- once over them all, a mark set before each name it finds, inside its string: `p` consumes no neighbour), less
+    -- those that ARE a hidden name (the same letters)
     with o1 as (select distinct public._gallery_veil_name_ready(translate(x, '"', ' '), null) as po from unnest(opens) x where x is not null and x <> ''),
          held as (select distinct btrim(replace(m[1], chr(1), ''), '"') as po
-                    from regexp_matches(regexp_replace((select coalesce(string_agg('"' || po || '"', ''), '') from o1), p, chr(1) || '\&', 'g'), chr(1) || '?"[^"]*"', 'g') m
+                    from regexp_matches(regexp_replace((select coalesce(string_agg('"' || po || '"', ''), '') from o1), p, chr(1) || '\&', 'g'), '"[^"]*"', 'g') m
                    where position(chr(1) in m[1]) > 0),
          o2 as (select distinct public._gallery_veil_name_fold(po) as f from held),
          o3 as (select f, left(f, 1) ~ bnd as lb, right(f, 1) ~ bnd as rb,
                        replace(replace(case when f ~ '[^\x01-\x7f]' then translate(f, cv, cc) else f end, chr(223), 'ss'), '_', '') as k,
                        public._gallery_veil_name_needle(f, cls) as needle
                   from o2 where f <> '')
-    select coalesce(jsonb_agg(case when lb then '((?:^|' || sep || '))' else '()' end || needle || case when rb then '(?:e?s)?(?=' || sep || '|$)' else '' end
+    select coalesce(jsonb_agg(case when lb then lbd else '' end || needle || case when rb then '(?:e?s)?' || rbd else '' end
                               order by length(k) desc, k collate "C", f collate "C"), '[]')
       into blank from o3 where not (k = any(keys));
   end if;
@@ -540,21 +619,22 @@ begin
 end $$;
 
 -- [212: NEW] public._gallery_veil_name_ready
--- A text made ready for the search (THE FOLD of a text): prepared; A-Z lowered by an explicit map (never an engine's
+-- A text made ready for the search (THE FOLD of a text): padded (_gallery_veil_name_pad) and prepared; A-Z lowered by an explicit map (never an engine's
 -- lower(): the other letters keep their case, which is the needle's); every run of separators one '_' (the quotation
 -- mark aside: in a document's text it is where a string ends, and a string asked alone holds none by then); then each
 -- open name that holds a hidden one cut out, longest first (in its place the Kelvin sign, U+212A, which no prepared
--- text holds and no needle names: the preparation writes it K).
+-- text holds and no needle names: the preparation writes it K; nor is it in the blocking table, so a hidden name beside
+-- a cut-out is beside a boundary). A cut-out's pattern consumes no neighbour (COHERENCE-VEIL-12): the mark alone is put.
 create or replace function public._gallery_veil_name_ready(t text, blank jsonb)
 returns text language plpgsql immutable as $$
 declare
   b text;
 begin
-  t := regexp_replace(translate(public._gallery_veil_name_prep(t), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),
+  t := regexp_replace(translate(public._gallery_veil_name_prep(public._gallery_veil_name_pad(t)), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),
                       '[' || public._gallery_veil_name_sep(false) || ']+', '_', 'g');
   if blank is null or blank = '[]' then return t; end if;
   for b in select jsonb_array_elements_text(blank) loop
-    t := regexp_replace(t, b, '\1' || chr(8490), 'g');
+    t := regexp_replace(t, b, chr(8490), 'g');
   end loop;
   return t;
 end $$;
@@ -564,8 +644,9 @@ end $$;
 -- escape stands for a quotation mark, a reverse solidus or a control character: separators all), made ready ONCE; no
 -- match of `p`, and '{}' is the answer (a superset: it reads the punctuation between two strings as separators). Else
 -- what stands between two strings is dropped, so every string and key is one "..." after another; `p` is run over
--- that once more, a mark (U+0001, which a text made ready never holds) set before each name it finds; and the strings
--- that hold a mark are the answer: {the string as made ready: true}. Whether one string or key holds a hidden name is
+-- that once more, a mark (U+0001, which a text made ready never holds) set before each name it finds (inside its
+-- string: `p` consumes no neighbour, so two names that share one are each found); and the strings that hold a mark
+-- are the answer: {the string as made ready: true}. Whether one string or key holds a hidden name is
 -- from here on a look-up among these (_gallery_veil_name_hit): the alternation is never run a string at a time.
 create or replace function public._gallery_veil_name_hits(v jsonb, srch jsonb)
 returns jsonb language plpgsql immutable as $$
@@ -580,7 +661,7 @@ begin
   n := regexp_replace(regexp_replace(n, '"([^"]*)"[^"]*', '"\1"', 'g'), p, chr(1) || '\&', 'g');
   return coalesce((select jsonb_object_agg(z.h, true)
                      from (select distinct btrim(replace(m[1], chr(1), ''), '"') as h
-                             from regexp_matches(n, chr(1) || '?"[^"]*"', 'g') m where position(chr(1) in m[1]) > 0) z), '{}');
+                             from regexp_matches(n, '"[^"]*"', 'g') m where position(chr(1) in m[1]) > 0) z), '{}');
 end $$;
 
 -- [212: NEW] public._gallery_veil_name_hit

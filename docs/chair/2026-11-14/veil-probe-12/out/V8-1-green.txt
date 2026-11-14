@@ -1,0 +1,17 @@
+V8-1, THE BOUNDARY INVERTED: GREEN (212 e879358592e20f0eaeebb994a7a49038181315785168d69636a80ca32cf216ad,
+down 4b96fa6cfa1481132f636c419c855808e09031e8d12a672db87785ff188afb86; 211 eface6d0...be0b01 / ce8474ff...49712f untouched)
+== the reader's town-f + veil-f, x212 built from this tree, and the twin
+rv8f-base: differ: 0 | rv8f-veil: differ: 0 | rv8f-dm: differ: 0
+veil/gallery, veil/link, veil/import, veil/client, dm/gallery, dm/link, dm/import, dm/client: 0 of the 13 sent in each
+  controls withheld in each: f01 f02 f03 f04 f15 f18; kept in each: f19 (a Black marketeer), f20 (Fish market)
+  (with the table alone, before the pad, f12 "Black market™ goods" stayed in all 8: NFKD writes ™ as TM; the pad cures it)
+== the acceptance run: checks 37 | PASS 35 | FAIL 2 (a07, d06 only); the twin 15 of 15
+== the three guards (scripts/gate-tail.sh; the mutex refused the shared tier at three workers): Test Files 3 passed (3), Tests 50 passed (50)
+  galleryVeilHandRows 13 of 13 (11 + the two VEIL-12 arms); gallerySecondHomes 5 and galleryVeilCures 32 (37 of 37, born counts unmoved)
+  VEIL-12 THE NEIGHBOURS: 0 sent, 0 gone, 0 paths server against twin, in each of the 8 reads
+  VEIL-12 THE TABLE IS ONE: the table, 1,434 code points, and the padded set, 1,486, equal server against twin over every
+  code point of every plane; a hidden name with each of the 63,487 code points of the basic plane on its left and on its
+  right: 126,974 strings, 8 calls, 0 differ
+  VEIL-11's two arms green unchanged (the words' fold does not pad)
+== the gates: typecheck:domain:strict exit 0 (1113, ceiling 1113); typecheck:ratchet exit 0 (167, ceiling 167);
+   eslint exit 0 (gallerySecondHomes.js, galleryVeilHandRows.pglite.test.js); each through scripts/gate-tail.sh

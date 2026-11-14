@@ -162,8 +162,53 @@ const SEP_REST = String.raw`\x3a-\x40\x5b-\x60\x7b-\xbf\xd7\xf7\u2000-\u206f\u2e
 export const NAME_SEP = String.raw`\x01-\x2f` + SEP_REST;
 /** The separators but the quotation mark (in a document's text it is where a string ends; a string asked alone holds none by then). */
 const NAME_SEPQ = String.raw`\x01-\x21\x23-\x2f` + SEP_REST;
-/** An end of a name that asks a word boundary: a letter or digit of an alphabet that separates its words. */
-export const NAME_BOUND = String.raw`a-z0-9\u00c0-\u058f\u10a0-\u10ff\u1c80-\u1cbf\u1e00-\u1fff\u2c00-\u2dff\ua640-\ua7ff`;
+/**
+ * THE BLOCKING TABLE (COHERENCE-VEIL-12; REVIEW-VEIL-8's V8-1), as the body of a bracket expression: the letters and the
+ * digits (General Category L*, N*) of the scripts that separate their words by spaces, Latin, Greek, Cyrillic, Armenian
+ * and Georgian (by the Script property: no Common or Inherited character), and the ASCII digits, over the code points
+ * the preparation leaves alone (so not U+212A, the cut-out mark). No punctuation, symbol, mark, separator, control,
+ * format character or modifier letter of the Common script (U+02BC) is in it. A neighbour in this table blocks a name;
+ * every other neighbour is a boundary. Generated once (docs/chair/2026-11-14/veil-probe-12/gen-name-bound.mjs, Unicode
+ * 17.0, Node 22.23): 1,434 code points in 101 ranges, read with the `u` flag (astral ranges). The same literal,
+ * character for character, is migration 212 :: _gallery_veil_name_bound; the guard holds the two engines' membership
+ * equal for every code point.
+ */
+export const NAME_BOUND = [
+  '0-9A-Za-z\u00c6\u00d0\u00d8\u00de\u00df\u00e6\u00f0\u00f8\u00fe\u0110\u0111\u0126\u0127\u0131\u0138\u0141\u0142',
+  '\u014a\u014b\u0152\u0153\u0166\u0167\u0180-\u019f\u01a2-\u01ae\u01b1-\u01c3\u01dd\u01e4\u01e5\u01f6\u01f7\u021c\u021d',
+  '\u0220-\u0225\u0234-\u02af\u0370-\u0373\u0376\u0377\u037b-\u037d\u037f\u0391-\u03a1\u03a3-\u03a9\u03b1-\u03c9\u03cf',
+  '\u03d7-\u03e1\u03f3\u03f7\u03f8\u03fa-\u03ff\u0402\u0404-\u0406\u0408-\u040b\u040f-\u0418\u041a-\u0438\u043a-\u044f',
+  '\u0452\u0454-\u0456\u0458-\u045b\u045f-\u0475\u0478-\u0481\u048a-\u04c0\u04c3-\u04cf\u04d4\u04d5\u04d8\u04d9\u04e0\u04e1',
+  '\u04e8\u04e9\u04f6\u04f7\u04fa-\u052f\u0531-\u0556\u0559\u0560-\u0586\u0588\u10a0-\u10c5\u10c7\u10cd\u10d0-\u10fa',
+  '\u10fd-\u10ff\u1c80-\u1c8a\u1c90-\u1cba\u1cbd-\u1cbf\u1d00-\u1d2b\u1d2f\u1d3b\u1d4e\u1d6b-\u1d77\u1d79-\u1d9a',
+  '\u1e9c-\u1e9f\u1efa-\u1eff\u2132\u214e\u2180-\u2188\u2c60-\u2c7b\u2c7e\u2c7f\u2d00-\u2d25\u2d27\u2d2d\ua640-\ua66e',
+  '\ua67f-\ua69b\ua722-\ua76f\ua771-\ua787\ua78b-\ua7dc\ua7f5-\ua7f7\ua7fa-\ua7ff\uab30-\uab5a\uab60-\uab68',
+  '\ud800\udd40-\ud800\udd78\ud800\udd8a\ud800\udd8b\ud801\udf80\ud837\udf00-\ud837\udf1e\ud837\udf25-\ud837\udf2a',
+].join('');
+
+/**
+ * THE PADDED CHARACTERS (COHERENCE-VEIL-12; the seat's call 2 on V8-1: the neighbour as written), as the body of a
+ * bracket expression: every code point that is not itself in the blocking table as written (judged by its own General
+ * Category and Script) but whose compatibility form begins or ends with a member (the trade-mark sign is TM, a superscript
+ * two is 2, a circled one is 1, a mathematical bold A is A). THE NAME SEARCH writes each between spaces before its
+ * preparation (namePad), so it is a boundary; the words' fold (caseFold) does not. A full-width or ligature Latin letter
+ * is a Latin letter: not padded, it blocks. None is ASCII. Generated once with the table (gen-name-bound.mjs): 1,486 code
+ * points in 70 ranges. The same literal, character for character, is migration 212 :: _gallery_veil_name_pad.
+ */
+export const NAME_PAD = [
+  '\u00b2\u00b3\u00b5\u00b9\u00bc-\u00be\u2070\u2074-\u2079\u2080-\u2089\u20a8\u2100-\u2103\u2105-\u2107\u2109-\u2113',
+  '\u2115\u2116\u2119-\u211d\u2120-\u2122\u2124\u2128\u212c\u212d\u212f-\u2131\u2133\u2134\u2139\u213b-\u213f\u2145-\u2149',
+  '\u2150-\u215f\u2189\u2460-\u2473\u2488-\u249b\u24b6-\u24ea\u3250-\u325f\u32b1-\u32cf\u3358-\u337a\u3380-\u33ff',
+  '\uff10-\uff19\ud833\udcd6-\ud833\udcf9\ud835\udc00-\ud835\udc54\ud835\udc56-\ud835\udc9c\ud835\udc9e\ud835\udc9f',
+  '\ud835\udca2\ud835\udca5\ud835\udca6\ud835\udca9-\ud835\udcac\ud835\udcae-\ud835\udcb9\ud835\udcbb',
+  '\ud835\udcbd-\ud835\udcc3\ud835\udcc5-\ud835\udd05\ud835\udd07-\ud835\udd0a\ud835\udd0d-\ud835\udd14',
+  '\ud835\udd16-\ud835\udd1c\ud835\udd1e-\ud835\udd39\ud835\udd3b-\ud835\udd3e\ud835\udd40-\ud835\udd44\ud835\udd46',
+  '\ud835\udd4a-\ud835\udd50\ud835\udd52-\ud835\udea5\ud835\udea8-\ud835\udec0\ud835\udec2-\ud835\udeda',
+  '\ud835\udedc-\ud835\udefa\ud835\udefc-\ud835\udf14\ud835\udf16-\ud835\udf34\ud835\udf36-\ud835\udf4e',
+  '\ud835\udf50-\ud835\udf6e\ud835\udf70-\ud835\udf88\ud835\udf8a-\ud835\udfa8\ud835\udfaa-\ud835\udfc2',
+  '\ud835\udfc4-\ud835\udfcb\ud835\udfce-\ud835\udfff\ud83c\udd00-\ud83c\udd0a\ud83c\udd2b-\ud83c\udd2e',
+  '\ud83c\udd30-\ud83c\udd4f\ud83c\udd6a-\ud83c\udd6c\ud83c\udd90\ud83e\udff0-\ud83e\udff9',
+].join('');
 /** A hidden name at or below this level is not walked to: the container AT this level is withheld whole (the root is level 0). */
 export const NAME_WALK_BOUND = 64;
 
@@ -300,14 +345,19 @@ export const NAME_SKEW = Object.freeze(JSON.parse('{"\ua7f1":"S","\ud801\uddc9":
 
 const SKEW_ANY = new RegExp(`[${Object.keys(NAME_SKEW).join('')}]`, 'gu');
 const NON_ASCII = new RegExp(String.raw`[^\x00-\x7f]`);
+const PAD_ANY = new RegExp(`[${NAME_PAD}]`, 'gu');
 const SEP_RUN = new RegExp(`[${NAME_SEP}]+`, 'g');
 const SEPQ_RUN = new RegExp(`[${NAME_SEPQ}]+`, 'g');
 const BOUND_END = new RegExp(`^[${NAME_BOUND}]$`, 'u');
+/** A left boundary: the text's start, or a neighbour before that is not in the blocking table (consumes nothing; SQL: `lbd`). */
+const LEFT_BOUND = `(?<![${NAME_BOUND}])`;
+/** A right boundary: the text's end, or a neighbour after that is not in the blocking table (consumes nothing; SQL: `rbd`). */
+const RIGHT_BOUND = `(?![${NAME_BOUND}])`;
 /** A quotation mark, a reverse solidus, a control character: what JSON escapes; each one space (SQL: _gallery_veil_name_hit). */
 const ESCAPED = new RegExp(String.raw`["\\\x00-\x1f]`, 'g');
 /** The bracketed qualifier(s) a name ends with: 'Thieves' guild (powerful)' is 'Thieves' guild'. */
 const QUALIFIER = /(?:[ \t]*[([][^()[\]]*[)\]])+[ \t]*$/;
-/** In the place of an open name cut out of a text: the Kelvin sign, which no prepared text holds (it is written K). */
+/** In the place of an open name cut out of a text: the Kelvin sign, which no prepared text holds (it is written K) and the blocking table lacks (a boundary). */
 const CUT = '\u212a';
 
 /** @type {Map<string, string>} a character -> its needle: the bracket of its case class, A-Z aside (a text made ready has none) */
@@ -323,6 +373,13 @@ CASE_NEEDLE.set('_', '_?');
 CASE_NEEDLE.set('=', '(?:ss|[\u00df\u1e9e])');
 
 /**
+ * THE NEIGHBOUR AS WRITTEN: each padded character (NAME_PAD) between two spaces, in a text that holds a character outside
+ * ASCII; called by the name search alone, before its preparation (nameFold, madeReady). SQL twin: _gallery_veil_name_pad.
+ * @param {string} t @returns {string}
+ */
+export const namePad = (t) => (NON_ASCII.test(t) ? t.replace(PAD_ANY, ' $& ') : t);
+
+/**
  * THE PREPARATION of a text that holds a character outside ASCII: NFKD, the combining marks U+0300 to U+036F removed.
  * No text is ever case-mapped. SQL twin: _gallery_veil_name_prep.
  * @param {string} t @returns {string}
@@ -333,19 +390,19 @@ export function namePrep(t) {
 }
 
 /**
- * THE FOLD OF A NAME: prepared, A-Z lowered by an explicit map, every run of separators one '_', none at either end.
+ * THE FOLD OF A NAME: padded, prepared, A-Z lowered by an explicit map, every run of separators one '_', none at either end.
  * SQL twin: _gallery_veil_name_fold (the same string for every input; the guard asks every character of the basic plane).
  * @param {unknown} t @returns {string}
  */
-export const nameFold = (t) => asciiLower(namePrep(String(t ?? ''))).replace(SEP_RUN, '_').replace(/^_+|_+$/g, '');
+export const nameFold = (t) => asciiLower(namePrep(namePad(String(t ?? '')))).replace(SEP_RUN, '_').replace(/^_+|_+$/g, '');
 
 /**
- * A text made ready for the search (THE FOLD of a text): prepared, A-Z lowered, every run of separators one '_'. The
+ * A text made ready for the search (THE FOLD of a text): padded, prepared, A-Z lowered, every run of separators one '_'. The
  * other letters keep their case, which is the needle's. SQL twin: _gallery_veil_name_ready (which also cuts the open
  * names out; here buildNameSearch does).
  * @param {string} t @returns {string}
  */
-const madeReady = (t) => asciiLower(namePrep(t)).replace(SEPQ_RUN, '_');
+const madeReady = (t) => asciiLower(namePrep(namePad(t))).replace(SEPQ_RUN, '_');
 
 /** The needle of a folded name, for a text made ready: each letter that has another case outside A-Z the bracket of its class, each '_' one '_' or none. @param {string} f */
 const needleOf = (f) => Array.from(f.replace(/[\u00df\u1e9e]/g, 'ss').replace(/ss/g, '=')).map(ch => CASE_NEEDLE.get(ch) ?? ch).join('');
@@ -372,18 +429,19 @@ function byCodePoint(a, b) {
 
 /**
  * THE SEARCH, built once a projection from every name of the houses removed whole and every open name. A name's forms:
- * itself, and itself without its bracketed qualifier. SQL twin: _gallery_veil_name_search.
+ * itself, and itself without its bracketed qualifier. THE BOUNDARY (COHERENCE-VEIL-12; V8-1): where an end of a name is
+ * in the blocking table (NAME_BOUND), the neighbour on that side must not be; asked by a lookbehind and a lookahead,
+ * which consume nothing. SQL twin: _gallery_veil_name_search.
  * @param {Iterable<unknown>} names @param {Iterable<unknown>} opens @returns {NameSearch|null}
  */
 export function buildNameSearch(names, opens) {
-  const SEP = '[_"]'; // a word boundary in a text made ready: the one '_' a run of separators became, or a string's end
   /** @type {Set<string>} */
   const folds = new Set();
   /** @type {Set<string>} */
   const rawSet = new Set();
   for (const n of names) {
     if (typeof n !== 'string' || n === '') continue;
-    const pn = namePrep(n);
+    const pn = namePrep(namePad(n));
     const f = nameFold(pn);
     if (f === '') rawSet.add(n); else folds.add(f);
     if (/[)\]]/.test(pn)) {
@@ -401,7 +459,7 @@ export function buildNameSearch(names, opens) {
   for (const [lb, rb] of [[true, true], [true, false], [false, true], [false, false]]) {
     const alt = forms.filter(h => h.lb === lb && h.rb === rb).map(h => h.needle).join('|');
     if (alt === '') continue;
-    parts.push(`${lb ? `(?:^|${SEP})` : ''}(?:${alt})${rb ? `(?:e?s)?(?:${SEP}|$)` : ''}`);
+    parts.push(`${lb ? LEFT_BOUND : ''}(?:${alt})${rb ? `(?:e?s)?${RIGHT_BOUND}` : ''}`);
   }
   const pattern = parts.length ? parts.join('|') : null;
   const re = pattern === null ? null : new RegExp(pattern, 'u');
@@ -418,7 +476,7 @@ export function buildNameSearch(names, opens) {
   }
   const blank = [...held.entries()]
     .sort(([fa, ka], [fb, kb]) => (Array.from(kb).length - Array.from(ka).length) || byCodePoint(ka, kb) || byCodePoint(fa, fb))
-    .map(([f]) => { const e = ends(f); return `${e.lb ? `((?:^|${SEP}))` : '()'}${needleOf(f)}${e.rb ? `(?:e?s)?(?=${SEP}|$)` : ''}`; });
+    .map(([f]) => { const e = ends(f); return `${e.lb ? LEFT_BOUND : ''}${needleOf(f)}${e.rb ? `(?:e?s)?${RIGHT_BOUND}` : ''}`; });
   const cuts = blank.map(b => new RegExp(b, 'gu'));
   const raws = [...rawSet].sort(byCodePoint);
   /** @param {string} t @returns {boolean} */
@@ -426,7 +484,7 @@ export function buildNameSearch(names, opens) {
     if (raws.some(r => t.includes(r))) return true;
     if (!re) return false;
     let ready = madeReady(t.replace(ESCAPED, ' '));
-    for (const c of cuts) ready = ready.replace(c, `$1${CUT}`);
+    for (const c of cuts) ready = ready.replace(c, CUT);
     return re.test(ready);
   };
   /** @param {unknown} v @returns {boolean} without a call a level: a value may be thousands of levels deep */

@@ -349,12 +349,13 @@ $$;
 revoke execute on function public.import_gallery_dossier(text) from public;
 grant execute on function public.import_gallery_dossier(text) to authenticated;
 
--- ── 2. the helpers 212 created, by signature (twenty-six: COHERENCE-VEIL-10 replaced the eighth seat's sweep, _folded_name, _names and _sweep, by the name search's fourteen, _name_* and _named; COHERENCE-VEIL-11 added _case_fold) ──
+-- ── 2. the helpers 212 created, by signature (twenty-eight: COHERENCE-VEIL-10 replaced the eighth seat's sweep, _folded_name, _names and _sweep, by the name search's fourteen, _name_* and _named; COHERENCE-VEIL-11 added _case_fold; COHERENCE-VEIL-12 added _name_bound and _name_pad) ──
 drop function if exists public._gallery_veil_embeds(jsonb, text[]);
 drop function if exists public._gallery_veil_case_fold(text);
 drop function if exists public._gallery_veil_fold(text);
 drop function if exists public._gallery_veil_hidden_name(jsonb, jsonb, text[], jsonb);
 drop function if exists public._gallery_veil_member_revealed(jsonb, jsonb, boolean, boolean, boolean);
+drop function if exists public._gallery_veil_name_bound();
 drop function if exists public._gallery_veil_name_case();
 drop function if exists public._gallery_veil_name_floor(jsonb, jsonb);
 drop function if exists public._gallery_veil_name_fold(text);
@@ -362,6 +363,7 @@ drop function if exists public._gallery_veil_name_hit(text, jsonb, jsonb, jsonb)
 drop function if exists public._gallery_veil_name_hits(jsonb, jsonb);
 drop function if exists public._gallery_veil_name_near(jsonb, jsonb, jsonb, jsonb);
 drop function if exists public._gallery_veil_name_needle(text, jsonb);
+drop function if exists public._gallery_veil_name_pad(text);
 drop function if exists public._gallery_veil_name_prep(text);
 drop function if exists public._gallery_veil_name_ready(text, jsonb);
 drop function if exists public._gallery_veil_name_search(text[], text[]);

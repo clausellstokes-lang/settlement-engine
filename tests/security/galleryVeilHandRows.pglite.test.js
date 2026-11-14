@@ -42,6 +42,18 @@
  *                        stays: the stress's line, recentConflict, another tie's sentence, the open tension itself.
  *         NO EVENT, NO TIE   an entry in the older spelling, an entry whose event was renamed (by its type and years),
  *                        an entry with no event and a copy with no tie (closed: every event's, every tie's eye).
+ *   VEIL-12  THE BOUNDARY INVERTED (REVIEW-VEIL-8's V8-1; the chair's ruling of 2026-11-14 04:42 UTC; the seat's call 2,
+ *         the neighbour as written). Two arms:
+ *         THE NEIGHBOURS  a hidden name in Latin, Cyrillic, Greek with a final sigma, with a dotted capital I, with a sharp
+ *                        s, of symbols only and in Han, beside neighbours the reader did not plant (other scripts' letters
+ *                        and digits, punctuation, symbols, marks, a variation selector, an emoji with a joiner, and the
+ *                        padded characters, whose compatibility form would block), on the left and on the right; two
+ *                        hits that share one neighbour; a hidden name glued to an open name's cut-out; a hidden name that
+ *                        holds a padded character. What STAYS: the name inside a longer word of a spaced alphabet (either
+ *                        case, an ASCII digit, a full-width and a ligature Latin letter), 'an Ashgate ringer', an open
+ *                        house whose longer name holds it, a shown power named as it, the town's own name.
+ *         THE TABLE IS ONE   the blocking table and the padded characters, server against twin, every code point of
+ *                        every plane; and a hidden name with each character of the basic plane on its left and its right.
  */
 import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
@@ -797,5 +809,133 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     expect(sh.caseFold('ΧΡΕΟΣ')).toBe(sh.caseFold('χρεος'));
     expect(sh.caseFold('İSKELE KAPISI')).toBe(sh.caseFold('iskele kapısı'));
     expect(sh.caseFold('STRAẞE')).toBe(sh.caseFold('strasse'));
+  }, ARM_TIMEOUT_MS);
+  // ── COHERENCE-VEIL-12: THE BOUNDARY INVERTED (REVIEW-VEIL-8's V8-1; the chair's ruling of 2026-11-14 04:42 UTC) ────────
+  // A name matches UNLESS the neighbour on that side is a letter or a digit of a script that separates its words by
+  // spaces (the blocking table, one literal in both engines); every other neighbour is a boundary, judged AS WRITTEN (a
+  // character whose compatibility form would block, the trade-mark sign that is TM, is padded with spaces first).
+  it('VEIL-12 THE NEIGHBOURS: a hidden name in Latin, Cyrillic, Greek, with a dotted capital I, a sharp s, of symbols only and in Han is sent beside no neighbour that is not a letter or digit of a spaced alphabet, on either side, padded characters among them; what blocks still arrives', async () => {
+    const NAMES = [['Latin', 'Ashgate ring'], ['Cyrillic', 'Ночная стража'], ['Greek, a final sigma', 'Οδός Σκιάς'], ['a dotted capital I', 'İpek Yolu'],
+      ['a sharp s', 'Straßengilde'], ['symbols only', '☾✶☽'], ['Han', '夜市会']];
+    // a boundary: every neighbour the reader did not plant, and the padded characters (whose compatibility form would block)
+    const BOUNDARIES = [['a Devanagari letter', '\u0915'], ['an Arabic letter', '\u0628'], ['a Hebrew letter', '\u05e9'], ['a Khmer letter', '\u1780'], ['a Lao letter', '\u0e81'],
+      ['a Tibetan tsheg', '\u0f0b'], ['the middle dot', '\u00b7'], ['a currency sign', '\u20ac'], ['a mathematical operator', '\u2200'], ['a box-drawing character', '\u2500'],
+      ['the combining mark U+0483', '\u0483'], ['the combining mark U+20DD', '\u20dd'], ['the variation selector U+FE0F', '\ufe0f'], ['an emoji with a zero-width joiner', '\ud83d\udc69\u200d\ud83d\udd27'],
+      ['an Arabic-Indic digit', '\u0663'], ['a Devanagari digit', '\u0969'], ['the Greek question mark', '\u037e'], ['the ano teleia', '\u0387'],
+      ...[0x55a, 0x55b, 0x55c, 0x55d, 0x55e, 0x55f, 0x58a, 0x10fb, 0x2bb, 0x2bc].map(cp => [`U+${cp.toString(16).toUpperCase().padStart(4, '0')}`, String.fromCodePoint(cp)]),
+      ['the trade-mark sign (padded)', '\u2122'], ['a superscript two (padded)', '\u00b2'], ['a circled one (padded)', '\u2460'], ['the numero sign (padded)', '\u2116'],
+      ['the degree Celsius (padded)', '\u2103'], ['a mathematical bold A (padded)', '\ud835\udc00']];
+    // a block: a letter or digit of a spaced alphabet, either case; a full-width and a ligature Latin letter are Latin letters
+    const BLOCKS = [['a Latin letter', 'q'], ['a Latin capital', 'Q'], ['a Greek letter', '\u03bb'], ['a Greek capital', '\u039b'], ['a Cyrillic letter', '\u0436'], ['a Cyrillic capital', '\u0416'],
+      ['an Armenian letter', '\u0561'], ['an Armenian capital', '\u0531'], ['a Georgian letter', '\u10d0'], ['a Georgian capital', '\u1c90'], ['an ASCII digit', '7'],
+      ['a full-width Latin letter', '\uff21'], ['a Latin ligature', '\ufb01'], ['an accented Latin letter', '\u00e9']];
+    const go = []; const stay = [];
+    NAMES.forEach(([script, name], i) => {
+      const asked = !['symbols only', 'Han'].includes(script); // a name whose ends are letters of a spaced alphabet asks a boundary
+      for (const [what, ch] of [...BOUNDARIES, ...BLOCKS]) {
+        const left = `v12 n${i} left, ${what}: ${ch}${name} wares`;
+        const right = `v12 n${i} right, ${what}: the ${name}${ch} wares`;
+        const blocks = asked && BLOCKS.some(([, b]) => b === ch);
+        (blocks ? stay : go).push(left, right);
+      }
+    });
+    // two hits that share one neighbour; a hidden name glued to an open name's cut-out; a key
+    go.push('v12 shared: Ashgate ring\u00b7Ashgate ring', 'v12 shared: \u041d\u043e\u0447\u043d\u0430\u044f \u0441\u0442\u0440\u0430\u0436\u0430\u2192\u039f\u03b4\u03cc\u03c2 \u03a3\u03ba\u03b9\u03ac\u03c2', 'v12 shared: Ashgate ring\u2116\u041d\u043e\u0447\u043d\u0430\u044f \u0441\u0442\u0440\u0430\u0436\u0430',
+      'v12 glued: Ashgate ring\u2605Ashgate ring', 'v12 glued: the Ashgate ring hall\u2192Ashgate ring');
+    // a hidden name that holds a padded character: as written, its compatibility form, squeezed
+    const acmeForms = ['Paid to the Acme\u2122 Mill', 'Paid to the Acme TM Mill', 'Paid to the AcmeTMMill', 'paid to the acme tm mill'];
+    go.push(...acmeForms);
+    // what stays: the name inside a longer word, the open houses' strings, the shown power, the town
+    stay.push('v12 longer: an Ashgate ringer', 'v12 open: Ashgate ring hall dues', 'v12 open: Ashgate ring\u2605 wares', 'v12 open: the Fish market');
+    const houses = NAMES.map(([, name], i) => hiddenHouse(`inst-v12-${i}`, name));
+    const acme = hiddenHouse('inst-v12-acme', 'Acme\u2122 Mill');
+    const town = { name: 'Ashgate Ring Crossing', tier: 'town',
+      institutions: [...houses, acme, { id: 'inst-hall', name: 'Ashgate ring hall', category: 'Economy', desc: 'Dues are paid at the Ashgate ring hall.' },
+        { id: 'inst-star', name: 'Ashgate ring\u2605', category: 'Economy', desc: 'A stall with a star on its sign.' }, { id: 'inst-fish', name: 'Fish market', category: 'Economy', desc: 'Fish.' }],
+      npcs: [{ id: 'npc.una', name: 'Una Farrow', role: 'Factor at the Ashgate ring hall' }],
+      powerStructure: { factions: [{ faction: 'Ashgate Ring', power: 5, desc: 'A power that is shown.' }] },
+      economicState: { primaryExports: [...go, ...stay], tolls: { 'Ashgate ring\u2122': 3, 'Fish market': 1 } } };
+    const r = await sharesOf(town, hide(...houses, acme));
+    // the control: every planted string reaches a reader of the share with no veil record
+    const control = valuesOf(r.base.gallery).map(l => l.text);
+    expect([...go, ...stay].filter(t => !control.includes(t))).toEqual([]);
+    const staySet = new Set([...stay, 'Ashgate ring hall', 'Ashgate ring\u2605', 'Ashgate Ring', 'Ashgate Ring Crossing', 'Dues are paid at the Ashgate ring hall.', 'Factor at the Ashgate ring hall']);
+    const bad = []; let reads = 0;
+    for (const { tag, doc } of each(r)) {
+      reads += 1;
+      expect(isRec(doc), tag).toBe(true);
+      const back = new Set(valuesOf(doc).map(l => l.text));
+      for (const t of go) if (back.has(t)) bad.push(`${tag}: sent: ${JSON.stringify(t)}`);
+      for (const t of staySet) if (!back.has(t)) bad.push(`${tag}: gone: ${JSON.stringify(t)}`);
+      // and no hidden name arrives anywhere else, as written, lower-cased or squeezed
+      for (const [, name] of [...NAMES, ['', 'Acme TM Mill']]) {
+        for (const l of leaves(doc)) {
+          if (staySet.has(l.text)) continue;
+          if (l.text.includes(name) || l.text.toLowerCase().includes(name.toLowerCase()) || (squeeze(name) !== '' && squeeze(l.text).includes(squeeze(name)))) bad.push(`${tag}: ${l.kind} ${l.path} = ${JSON.stringify(l.text.slice(0, 70))}`);
+        }
+      }
+      if (doc.name !== 'Ashgate Ring Crossing') bad.push(`${tag}: the town's name is ${JSON.stringify(doc.name)}`);
+      if (JSON.stringify(Object.keys((doc.economicState || {}).tolls || {})) !== JSON.stringify(['Fish market'])) bad.push(`${tag}: tolls keeps ${JSON.stringify(Object.keys((doc.economicState || {}).tolls || {}))}`);
+      if (JSON.stringify((doc.institutions || []).map(i => i.name)) !== JSON.stringify(['Ashgate ring hall', 'Ashgate ring\u2605', 'Fish market'])) bad.push(`${tag}: institutions[] lists ${JSON.stringify((doc.institutions || []).map(i => i.name))}`);
+    }
+    if (process.env.VEIL_HAND_OUT) writeFileSync(process.env.VEIL_HAND_OUT, `${[...new Set(bad)].join('\n')}\n`);
+    expect(reads).toBe(8);
+    expect(go.length).toBe(7 * 2 * (BOUNDARIES.length + BLOCKS.length) - 5 * 2 * BLOCKS.length + 5 + acmeForms.length);
+    expect([...new Set(bad)]).toEqual([]);
+    expect(twinDiffers(r)).toEqual([]);
+  }, ARM_TIMEOUT_MS);
+
+  it('VEIL-12 THE TABLE IS ONE: the blocking table and the padded characters are one in both engines over every code point of every plane; and a hidden name with each character of the basic plane on its left and on its right is found, or not, alike in both engines', async () => {
+    const sh = await import('../../src/domain/display/gallerySecondHomes.js');
+    const one = async (sql, params = []) => (await db.query(sql, params)).rows[0];
+    expect((await one('select public._gallery_veil_name_bound() as v')).v).toBe(sh.NAME_BOUND);
+    const every = []; for (let cp = 1; cp <= 0x10ffff; cp += 1) if (cp < 0xd800 || cp > 0xdfff) every.push(cp);
+    // THE TABLE: the server's membership is its own regex's, over chr(cp); the twin's, its own
+    const T = new RegExp(`^[${sh.NAME_BOUND}]$`, 'u');
+    const twinTable = every.filter(cp => T.test(String.fromCodePoint(cp)));
+    const serverTable = (await one(`select coalesce(array_agg(cp order by cp), '{}') as t from generate_series(1, 1114111) cp
+      where (cp < 55296 or cp > 57343) and chr(cp) ~ ('^[' || public._gallery_veil_name_bound() || ']$')`)).t;
+    expect(serverTable.length).toBe(1434);
+    expect(serverTable).toEqual(twinTable);
+    // THE PADDED: a code point is padded where the pad changes it, in each engine by its own helper
+    const twinPad = every.filter(cp => sh.namePad(String.fromCodePoint(cp)) !== String.fromCodePoint(cp));
+    const serverPad = (await one(`select coalesce(array_agg(cp order by cp), '{}') as t from generate_series(1, 1114111) cp
+      where (cp < 55296 or cp > 57343) and public._gallery_veil_name_pad(chr(cp)) <> chr(cp)`)).t;
+    expect(serverPad.length).toBe(1486);
+    expect(serverPad).toEqual(twinPad);
+    expect(sh.namePad('a\u2122b')).toBe('a \u2122 b');
+    expect((await one('select public._gallery_veil_name_pad($1) as v', ['a\u2122b'])).v).toBe('a \u2122 b');
+    // what the ruling asks of the table: letters and digits only (no punctuation, symbol, mark, separator, control or
+    // format character), no Common or Inherited character but the ASCII digits; the two sets apart; no padded character ASCII
+    const table = new Set(twinTable);
+    expect(twinTable.filter(cp => /^[\p{P}\p{S}\p{M}\p{Z}\p{C}]$/u.test(String.fromCodePoint(cp)))).toEqual([]);
+    expect(twinTable.filter(cp => /^[\p{Script=Common}\p{Script=Inherited}]$/u.test(String.fromCodePoint(cp)) && !(cp >= 0x30 && cp <= 0x39))).toEqual([]);
+    expect([0x212a, 0x2bc, 0x2bb, 0x589, 0x55d, 0x10fb].filter(cp => table.has(cp))).toEqual([]);
+    expect(twinPad.filter(cp => table.has(cp) || cp < 0x80)).toEqual([]);
+    // EVERY NEIGHBOUR OF THE BASIC PLANE, left and right of a hidden name: one search, the strings asked in batches
+    const name = 'Ashgate ring';
+    const search = sh.buildNameSearch([name], []);
+    const plane = every.filter(cp => cp <= 0xffff).map(cp => String.fromCodePoint(cp));
+    const asked = plane.flatMap(c => [`${c}${name}`, `${name}${c}`]);
+    const differ = []; let calls = 0;
+    for (let i = 0; i < asked.length; i += 16384) {
+      const part = asked.slice(i, i + 16384);
+      calls += 1;
+      const a = (await one(`with s as (select public._gallery_veil_name_search(array[$2::text], '{}') as j),
+          h as (select s.j, public._gallery_veil_name_hits($1::jsonb, s.j) as hits from s)
+        select coalesce(jsonb_agg(public._gallery_veil_name_hit(x.t, h.hits, h.j -> 'blank', h.j -> 'raw') order by x.o), '[]') as a
+          from h, jsonb_array_elements_text($1::jsonb -> 'list') with ordinality x(t, o)`, [JSON.stringify({ name: 'T', list: part }), name])).a;
+      part.forEach((t, k) => { if (a[k] !== search.hit(t)) differ.push(`${JSON.stringify(t)}: server ${a[k]}, twin ${search.hit(t)}`); });
+    }
+    expect(asked.length).toBe(2 * 63487);
+    expect(calls).toBe(8);
+    expect(differ.slice(0, 20)).toEqual([]);
+    // and the answers themselves, on the characters the ruling names
+    const at = (c, side) => search.hit(side === 'left' ? `${c}${name}` : `${name}${c}`);
+    for (const c of ['\u2122', '\u00b2', '\u2460', '\uc5d0', '\u3053', '\u53bb', '\u0e19', '\u2192', '\u2605', '\u02bc', '\u0589', '\u055d', '\u00b7', '"', '_', ' ']) {
+      expect([c, at(c, 'left'), at(c, 'right')]).toEqual([c, true, true]);
+    }
+    for (const c of ['a', 'Q', '7', '\u00e9', '\uff21', '\ufb01', '\u03bb', '\u0436', '\u0561', '\u10d0']) expect([c, at(c, 'left'), at(c, 'right')]).toEqual([c, false, false]);
+    expect(at('s', 'right')).toBe(true); // the English plural
   }, ARM_TIMEOUT_MS);
 });

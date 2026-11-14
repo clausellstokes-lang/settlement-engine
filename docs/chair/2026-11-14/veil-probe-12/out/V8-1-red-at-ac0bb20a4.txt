@@ -1,0 +1,16 @@
+V8-1, THE BOUNDARY INVERTED: RED FIRST, at the base's bytes (git archive of ac0bb20a4, node_modules linked; 212 a4ed4c08...5e4f)
+== the reader's town-f + veil-f (REVIEW-VEIL-8/hand), through REVIEW-VEIL-7's hand/run.sh on x212 and the twin probe
+rv8f-base: differ: 0 | rv8f-veil: differ: 0 | rv8f-dm: differ: 0
+veil/gallery, veil/link, veil/import, veil/client, dm/gallery, dm/link, dm/import, dm/client: 13 strings SENT in each
+  (situationDesc "Everyone knows Black market에서 ..."; primaryExports f05 f06 f07 f08 f09 f10 f11 f12 f13 f14 f16 f17)
+  controls withheld in each: f01 f02 f03 f04 f15 f18; kept in each: f19 (a Black marketeer), f20 (Fish market)
+== the acceptance run (REVIEW-VEIL-7/run-all.sh): checks 37 | PASS 35 | FAIL 2 (a07, d06: items B and C); the twin 15 of 15
+== this seat's arm, VEIL-12 THE NEIGHBOURS (tests/security/galleryVeilHandRows.pglite.test.js, run in the archive)
+veil/gallery 310 sent, 0 gone | veil/link 310 sent, 0 gone | veil/import 310 sent, 0 gone | veil/client 310 sent, 0 gone
+dm/gallery 310 sent, 0 gone | dm/link 310 sent, 0 gone | dm/import 310 sent, 0 gone | dm/client 310 sent, 0 gone
+  (2,480 sends in all: each of the five names whose ends ask a boundary, Latin, Cyrillic, Greek, the dotted capital I and
+  the sharp s, sent beside 61 of its 68 planted boundaries (withheld already: the middle dot, the Greek question mark and
+  the ano teleia on both sides, the degree Celsius on the right: separators once prepared); the symbols-only and Han names
+  none (they ask no boundary); and "Ночная стража→Οδός Σκιάς", "Ashgate ring№Ночная стража", the hidden name glued to
+  the open "Ashgate ring★"'s cut-out, "Paid to the Acme TM Mill", "paid to the acme tm mill"; the key tolls."Ashgate ring™")
+== VEIL-12 THE TABLE IS ONE: red as absent (function public._gallery_veil_name_bound() does not exist)

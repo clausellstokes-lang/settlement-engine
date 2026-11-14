@@ -1,0 +1,9 @@
+V8-1, THE COST, re-measured (PostgreSQL 16.15, local cluster; ms; 211 / before (ac0bb20a4) / after (this commit))
+the acceptance run (REVIEW-VEIL-7/hand/deep-cost.sql):
+  3,000 deep, Reveal DM          30 / 35 / 37
+  200 hidden houses, 5,000       303 / 339 / 332
+  600 hidden houses, 10,000      1206 / 1216 / 1303
+the reader's REVIEW-VEIL-8/hand/cost8.sql (houses hitrows coldrows namelen), two runs each:
+  [50 500 500 0]                 103-118 / 212-228 / 204-245
+  [200 2000 2000 0]              817-883 / 2031-2191 / 2090-2182
+(the 10,000-row rows are V8-3's and were not run; "211" is the frozen 211 alone, x211, in the same run as "after")
