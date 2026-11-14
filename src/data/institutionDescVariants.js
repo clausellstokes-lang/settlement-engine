@@ -119,8 +119,8 @@ const PAIRS = [
     "Runs sheep for their wool and meat, moving the flocks with the seasons: down to the lowland in winter, up to the hills in summer. The textile trade leans on him.",
   ],
   [
-    "Runs cattle or goats for their milk, butter, and cheese. The one dependable fat and protein when the grain runs short. The work is seasonal, and heaviest in summer.",
-    "Keeps a herd of cattle or goats for milk, butter, and cheese. In a bad grain year it is the only fat and protein to be had. Seasonal work, cresting in the summer months.",
+    "Milk, butter, and cheese from cattle or goats, when there are beasts to run. The work is seasonal, and heaviest in summer.",
+    "A dairy for milk, butter, and cheese, from a herd of cattle or goats where one can be kept. Seasonal work, cresting in the summer months.",
   ],
   [
     "A forest-edge camp of fellers and a yard where the logs are stacked. Timber, charcoal wood, and the hauling of both keep the place alive.",
@@ -143,8 +143,8 @@ const PAIRS = [
     "A quarry opened with picks and wedges, its stone cut and dressed for building by hand. Slow work, and the only real building stone the place has known.",
   ],
   [
-    "Boils or dries naturally saline brine, yielding the raw salt that preserves food. It works only where salt flats, springs, or other workable deposits provide a local supply.",
-    "Evaporates brine to leave salt behind: the raw mineral used to preserve nearly everything. The works can operate only where a strong local brine source supports it.",
+    "Boils or dries saline brine when brine can be had, yielding the raw salt that preserves food. It works best where workable brine lies close by.",
+    "Evaporates brine, when brine can be had, to leave salt behind: the raw mineral used to preserve nearly everything. A strong brine source close by serves it best.",
   ],
   [
     "Hunters share what they know, dress their game, and sell the pelts. Among them they keep the routes, the seasons, and the beasts worth avoiding.",
@@ -263,16 +263,16 @@ const PAIRS = [
     "Common grazing held by the village as a whole, next to the open fields, for every household's beasts.",
   ],
   [
-    "Buys the catch, salts it, and sells it on. The trade that carries fish from the net to the table. By the water it comes fresh; inland, dried or salted.",
-    "Deals in fish: bought, salted, and sold. It bridges the fisherman and the eater. Near water the stock is fresh, further inland dried or salted.",
+    "Buys whatever catch can be had, salts it, and sells it on. The trade that carries fish from the net to the table. By the water it comes fresh; inland, dried or salted.",
+    "Deals in fish, when fish can be had: bought, salted, and sold. It bridges the fisherman and the eater. Near water the stock is fresh, further inland dried or salted.",
   ],
   [
     "An open stall or small roofed market for selling the day's catch. The price falls quickly, for fish keeps no better than a day.",
     "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.",
   ],
   [
-    "Runs cattle or goats for their milk, butter, and soft cheese. Vital protein and fat when the grain runs thin. What isn't used goes to the weekly market.",
-    "Keeps a herd of cattle or goats, yielding milk, butter, and soft cheese; in the lean grain months these are the settlement's protein and fat. The surplus is sold at the weekly market.",
+    "Milk, butter, and soft cheese from cattle or goats, when there are beasts to run. What isn't used is sold on.",
+    "A herd of cattle or goats, where one can be kept, for milk, butter, and soft cheese. Any surplus is sold on.",
   ],
   [
     "Keeps hives for their honey and wax. The honey sweetens; the beeswax goes to candles, seals, and polish.",
@@ -295,8 +295,8 @@ const PAIRS = [
     "A quarry for building stone, opened with method. Set on the right ground, a village can meet half a region's need for it. Something the quarry master never forgets.",
   ],
   [
-    "Evaporation pans and brine-works turn the local saline source into salt, and no household does without it.",
-    "Salt is won from local brine in broad evaporation pans. It is a necessity in every home.",
+    "Evaporation pans and brine-works for making salt whenever brine can be had, and no household does without salt.",
+    "Broad evaporation pans, where salt is won from brine whenever brine can be had. Salt is a necessity in every home.",
   ],
   [
     "Musters hunting parties across the lands about the settlement, selling venison, pelts, and game at market. It is also where the wilderness is known best: which trails are safe and which are not.",
@@ -371,16 +371,16 @@ const PAIRS = [
     "Turns out bows, crossbows, and arrows, selling ready-made ammunition and taking commissions for bespoke bows. The first door an adventurer knocks on when the quiver runs dry.",
   ],
   [
-    "A saw driven by water or ox, cutting raw logs into planks and beams. It lifts what building and furniture-making the village can do.",
-    "Powered by water or ox, the saw reduces logs to planks and beams, widening the settlement's output of building timber and furniture.",
+    "A saw driven by water or ox, for cutting raw logs into planks and beams whenever logs can be had, for building and furniture-making.",
+    "Powered by water or ox, the saw reduces logs to planks and beams whenever logs reach it, for building timber and furniture.",
   ],
   [
     "Turns malted grain into ale by the barrel. Only bread takes more of the grain. It supplies both alehouses and homes.",
     "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. Alehouses and households alike are stocked from here.",
   ],
   [
-    "Turns hides to leather with oak bark. The stink of it keeps it downstream. Without it there are no shoes, no harness, no straps.",
-    "Hides become leather here, cured with oak bark. It reeks, and so it sits downstream, but shoes, harness, and straps all depend on it.",
+    "Turns hides to leather with oak bark, when hides can be had. The stink of it keeps it downstream. Without it there are no shoes, no harness, no straps.",
+    "Hides become leather here whenever they can be had, cured with oak bark. It reeks, and so it sits downstream, but shoes, harness, and straps all depend on it.",
   ],
   [
     "Finishes woven cloth, cleaning and thickening it, the work often driven by water. Raw weave leaves as hard-wearing textile.",
@@ -391,12 +391,12 @@ const PAIRS = [
     "Puts colour into wool and cloth, raw or woven. Anything beyond plain grey wool depends on the work.",
   ],
   [
-    "Throws pottery at the wheel for the household (plates, jugs, vessels for storage) and fires it in a small kiln.",
-    "Domestic ware thrown on the wheel: plates, jugs, and storage jars, all fired in a modest kiln.",
+    "Pottery for the household (plates, jugs, vessels for storage), thrown at the wheel and fired in a small kiln whenever there is clay to throw.",
+    "A wheel and a modest kiln for domestic ware: plates, jugs, and storage jars, as far as the clay to hand allows.",
   ],
   [
-    "Shapes and fires clay into bricks for building. With them, structures can be made to last. Clay deposits and fuel are needed.",
-    "Clay is moulded and fired into building brick here, which allows sturdier, more lasting construction. The work depends on clay beds and fuel.",
+    "Shapes and fires clay into bricks for building, when there is clay to shape. With them, structures can be made to last. Clay and fuel are needed.",
+    "Moulds and a kiln for building brick, fired whenever clay reaches them; brick allows sturdier, more lasting construction. The work depends on clay and fuel.",
   ],
   [
     "Makes and mends shoes and boots. Everyone needs something on their feet, which keeps this among the steadiest trades going.",
@@ -659,8 +659,8 @@ const PAIRS = [
     "A brewery working at commercial scale. It keeps the taverns stocked and sends beer across the region, and stands among the larger buyers of grain and employers in the town.",
   ],
   [
-    "Makes and ages wine, whether from grapes grown near or must brought in. He sells by the barrel to taverns and by the bottle to the rich. Where no vine grows, he imports and blends instead.",
-    "Wine pressed and matured, from local fruit or imported must, sold in bulk to the taverns and direct to wealthy houses. In a region without vines, the vintner turns importer and blender.",
+    "A cellar of presses and casks for wine, from grapes grown near or must brought in, whenever either can be had. Such wine as it holds goes by the barrel, and by the bottle to the rich.",
+    "Wine pressed and matured from local fruit or imported must, when either comes to the cellar, and sold in bulk or direct to wealthy houses.",
   ],
   [
     "Leather-making. Kept downstream and downwind wherever the ground allows.",
@@ -699,8 +699,8 @@ const PAIRS = [
     "Makes candles of tallow and beeswax, and turns like materials to soap and rope. The town depends on it for lighting.",
   ],
   [
-    "Glass worked on a small scale: bottles, window panes, goblets. It calls for silica sand, potash, and a skilled hand at the furnace.",
-    "A modest glassworks making bottles, panes, and goblets, dependent on silica sand, potash, and a practised furnace operator.",
+    "Glass worked on a small scale, whenever sand reaches the furnace: bottles, window panes, goblets. It calls for silica sand, potash, and a skilled hand at the furnace.",
+    "A modest glassworks for bottles, panes, and goblets, dependent on silica sand, potash, and a practised furnace operator.",
   ],
   [
     "Spins hemp, flax, and other plant fibres into rope and cordage. Ships, building work, and farming all depend on it.",
@@ -1941,39 +1941,39 @@ export const DESC_VARIANT_SIBLINGS = Object.freeze({
   ]),
   "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers. Metalworking here burns through a forest a generation.": Object.freeze([
     Object.freeze({ text: "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers. Metalworking here burns through a forest a generation.", needs: Object.freeze(["terrain: forest"]) }),
-    Object.freeze({ text: "Turf-covered kilns burn wood slowly down to charcoal, the fuel that forge and oven need to run hot.", twinOf: "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers. Metalworking here burns through a forest a generation.", excludes: Object.freeze(["terrain: forest"]) }),
+    Object.freeze({ text: "Turf-covered kilns for burning wood slowly down to charcoal whenever wood can be had: the fuel that burns hottest.", twinOf: "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers. Metalworking here burns through a forest a generation.", excludes: Object.freeze(["terrain: forest"]) }),
   ]),
   "Crews tend kilns out in the woods and sell charcoal to smelters, smiths, and bakers. The metal trades here use up a forest a generation.": Object.freeze([
     Object.freeze({ text: "Crews tend kilns out in the woods and sell charcoal to smelters, smiths, and bakers. The metal trades here use up a forest a generation.", needs: Object.freeze(["terrain: forest"]) }),
-    Object.freeze({ text: "Charcoal kilns, tended day and night while a burn lasts. What they make feeds the hottest fires in the settlement.", twinOf: "Crews tend kilns out in the woods and sell charcoal to smelters, smiths, and bakers. The metal trades here use up a forest a generation.", excludes: Object.freeze(["terrain: forest"]) }),
+    Object.freeze({ text: "Charcoal kilns, tended day and night while a burn lasts, whenever there is wood to burn. Charcoal feeds the hottest fires.", twinOf: "Crews tend kilns out in the woods and sell charcoal to smelters, smiths, and bakers. The metal trades here use up a forest a generation.", excludes: Object.freeze(["terrain: forest"]) }),
   ]),
   "Charcoal from woodland kilns feeds the smelters, the smithies, and the bake ovens. At this pace of metalwork, a forest lasts a generation.": Object.freeze([
     Object.freeze({ text: "Charcoal from woodland kilns feeds the smelters, the smithies, and the bake ovens. At this pace of metalwork, a forest lasts a generation.", needs: Object.freeze(["terrain: forest"]) }),
-    Object.freeze({ text: "A collier's kilns, smoking under their turf, turning whatever wood can be had into charcoal for forge and oven.", twinOf: "Charcoal from woodland kilns feeds the smelters, the smithies, and the bake ovens. At this pace of metalwork, a forest lasts a generation.", excludes: Object.freeze(["terrain: forest"]) }),
+    Object.freeze({ text: "A collier's kilns under their turf, for turning whatever wood can be had into charcoal, the fuel that burns hottest.", twinOf: "Charcoal from woodland kilns feeds the smelters, the smithies, and the bake ovens. At this pace of metalwork, a forest lasts a generation.", excludes: Object.freeze(["terrain: forest"]) }),
   ]),
   "Operates kilns in the surrounding woodland, supplying fuel for smithing, baking, and heating. The settlement's most reliable fuel source when timber is abundant.": Object.freeze([
     Object.freeze({ text: "Operates kilns in the surrounding woodland, supplying fuel for smithing, baking, and heating. The settlement's most reliable fuel source when timber is abundant.", needs: Object.freeze(["terrain: forest"]) }),
-    Object.freeze({ text: "Turf-covered kilns burn wood slowly down to charcoal, the fuel that forge and oven need to run hot.", twinOf: "Operates kilns in the surrounding woodland, supplying fuel for smithing, baking, and heating. The settlement's most reliable fuel source when timber is abundant.", excludes: Object.freeze(["terrain: forest"]) }),
+    Object.freeze({ text: "Turf-covered kilns for burning wood slowly down to charcoal whenever wood can be had: the fuel that burns hottest.", twinOf: "Operates kilns in the surrounding woodland, supplying fuel for smithing, baking, and heating. The settlement's most reliable fuel source when timber is abundant.", excludes: Object.freeze(["terrain: forest"]) }),
   ]),
   "Works kilns out in the surrounding woods, producing the fuel for smiths, bakers, and hearths. Where timber runs plentiful, no fuel source is steadier.": Object.freeze([
     Object.freeze({ text: "Works kilns out in the surrounding woods, producing the fuel for smiths, bakers, and hearths. Where timber runs plentiful, no fuel source is steadier.", needs: Object.freeze(["terrain: forest"]) }),
-    Object.freeze({ text: "Charcoal kilns, tended day and night while a burn lasts. What they make feeds the hottest fires in the settlement.", twinOf: "Works kilns out in the surrounding woods, producing the fuel for smiths, bakers, and hearths. Where timber runs plentiful, no fuel source is steadier.", excludes: Object.freeze(["terrain: forest"]) }),
+    Object.freeze({ text: "Charcoal kilns, tended day and night while a burn lasts, whenever there is wood to burn. Charcoal feeds the hottest fires.", twinOf: "Works kilns out in the surrounding woods, producing the fuel for smiths, bakers, and hearths. Where timber runs plentiful, no fuel source is steadier.", excludes: Object.freeze(["terrain: forest"]) }),
   ]),
   "Tends charcoal kilns in the nearby woodland to feed the forge, the oven, and the fire. When timber is abundant, it is the settlement's surest supply of fuel.": Object.freeze([
     Object.freeze({ text: "Tends charcoal kilns in the nearby woodland to feed the forge, the oven, and the fire. When timber is abundant, it is the settlement's surest supply of fuel.", needs: Object.freeze(["terrain: forest"]) }),
-    Object.freeze({ text: "A collier's kilns, smoking under their turf, turning whatever wood can be had into charcoal for forge and oven.", twinOf: "Tends charcoal kilns in the nearby woodland to feed the forge, the oven, and the fire. When timber is abundant, it is the settlement's surest supply of fuel.", excludes: Object.freeze(["terrain: forest"]) }),
+    Object.freeze({ text: "A collier's kilns under their turf, for turning whatever wood can be had into charcoal, the fuel that burns hottest.", twinOf: "Tends charcoal kilns in the nearby woodland to feed the forge, the oven, and the fire. When timber is abundant, it is the settlement's surest supply of fuel.", excludes: Object.freeze(["terrain: forest"]) }),
   ]),
   "Operates kilns in nearby woodland. Supplies fuel for smithing and baking. Essential intermediate step between forest and forge.": Object.freeze([
     Object.freeze({ text: "Operates kilns in nearby woodland. Supplies fuel for smithing and baking. Essential intermediate step between forest and forge.", needs: Object.freeze(["terrain: forest"]) }),
-    Object.freeze({ text: "Turf-covered kilns burn wood slowly down to charcoal, the fuel that forge and oven need to run hot.", twinOf: "Operates kilns in nearby woodland. Supplies fuel for smithing and baking. Essential intermediate step between forest and forge.", excludes: Object.freeze(["terrain: forest"]) }),
+    Object.freeze({ text: "Turf-covered kilns for burning wood slowly down to charcoal whenever wood can be had: the fuel that burns hottest.", twinOf: "Operates kilns in nearby woodland. Supplies fuel for smithing and baking. Essential intermediate step between forest and forge.", excludes: Object.freeze(["terrain: forest"]) }),
   ]),
   "Tends kilns out in the nearby woods, supplying the fuel that smiths and bakers burn. The necessary link between forest and forge.": Object.freeze([
     Object.freeze({ text: "Tends kilns out in the nearby woods, supplying the fuel that smiths and bakers burn. The necessary link between forest and forge.", needs: Object.freeze(["terrain: forest"]) }),
-    Object.freeze({ text: "Charcoal kilns, tended day and night while a burn lasts. What they make feeds the hottest fires in the settlement.", twinOf: "Tends kilns out in the nearby woods, supplying the fuel that smiths and bakers burn. The necessary link between forest and forge.", excludes: Object.freeze(["terrain: forest"]) }),
+    Object.freeze({ text: "Charcoal kilns, tended day and night while a burn lasts, whenever there is wood to burn. Charcoal feeds the hottest fires.", twinOf: "Tends kilns out in the nearby woods, supplying the fuel that smiths and bakers burn. The necessary link between forest and forge.", excludes: Object.freeze(["terrain: forest"]) }),
   ]),
   "Works his kilns in the woodland close by, turning timber into the fuel for forge and oven. Without him nothing gets from the trees to the fire.": Object.freeze([
     Object.freeze({ text: "Works his kilns in the woodland close by, turning timber into the fuel for forge and oven. Without him nothing gets from the trees to the fire.", needs: Object.freeze(["terrain: forest"]) }),
-    Object.freeze({ text: "A collier's kilns, smoking under their turf, turning whatever wood can be had into charcoal for forge and oven.", twinOf: "Works his kilns in the woodland close by, turning timber into the fuel for forge and oven. Without him nothing gets from the trees to the fire.", excludes: Object.freeze(["terrain: forest"]) }),
+    Object.freeze({ text: "A collier's kilns under their turf, for turning whatever wood can be had into charcoal, the fuel that burns hottest.", twinOf: "Works his kilns in the woodland close by, turning timber into the fuel for forge and oven. Without him nothing gets from the trees to the fire.", excludes: Object.freeze(["terrain: forest"]) }),
   ]),
   "Levies duties on goods entering and leaving via the port or main roads. Run by royal or municipal officials.": Object.freeze([
     Object.freeze({ text: "Levies duties on goods entering and leaving via the port or main roads. Run by royal or municipal officials.", needs: Object.freeze(["institution: docks"]) }),
@@ -2071,11 +2071,11 @@ export const DESC_VARIANT_SIBLINGS = Object.freeze({
   // VETOABLE wording (the owner's).
   "Charcoal furnaces reduce raw ore to refined metal. It stands between the mine and the smithy.": Object.freeze([
     Object.freeze({ text: "Charcoal furnaces reduce raw ore to refined metal. It stands between the mine and the smithy.", needs: Object.freeze(["institution: mine", "institution: smith"]) }),
-    Object.freeze({ text: "Charcoal furnaces reduce raw ore to refined metal, cast in bars for whoever will buy them.", twinOf: "Charcoal furnaces reduce raw ore to refined metal. It stands between the mine and the smithy." }),
+    Object.freeze({ text: "Charcoal furnaces for reducing raw ore to refined metal whenever ore reaches them, cast in bars for whoever will buy them.", twinOf: "Charcoal furnaces reduce raw ore to refined metal. It stands between the mine and the smithy." }),
   ]),
   "Refines crude ore into workable metal over charcoal fire. The industrial step from what the mine yields to what the smith uses.": Object.freeze([
     Object.freeze({ text: "Refines crude ore into workable metal over charcoal fire. The industrial step from what the mine yields to what the smith uses.", needs: Object.freeze(["institution: mine", "institution: smith"]) }),
-    Object.freeze({ text: "Refines crude ore into workable metal over charcoal fire, and sells it on by the bar.", twinOf: "Refines crude ore into workable metal over charcoal fire. The industrial step from what the mine yields to what the smith uses." }),
+    Object.freeze({ text: "Refines crude ore into workable metal over charcoal fire whenever ore can be had, and sells it on by the bar.", twinOf: "Refines crude ore into workable metal over charcoal fire. The industrial step from what the mine yields to what the smith uses." }),
   ]),
   // W2-FIX-DATA-5 (2026-11-13; REVIEW-W2A-3 #973, #238; the cell of ROUND-3-CUT-INCREMENT ww-494): the Annual fair's merchants
   // and the toll bridge's steady fees under a siege that cuts every road. Each text declares the siege off; its twin says
@@ -2148,8 +2148,8 @@ export const DESC_VARIANT_DECLARATIONS = Object.freeze({
   "Contraband moves through here, skirting the tolls and the customs checks. The hamlet takes its cut in goods, not coin.": Object.freeze({ needs: Object.freeze(["tier: ≤ hamlet"]) }), // hamlet|Criminal|Smuggling waypoint#1
   "An open stall or small roofed market for selling the day's catch. The price falls quickly, for fish keeps no better than a day.": Object.freeze({ needs: Object.freeze(["navigable"]) }), // village|Economy|Fish market#0
   "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.": Object.freeze({ needs: Object.freeze(["navigable"]) }), // village|Economy|Fish market#1
-  "Runs cattle or goats for their milk, butter, and soft cheese. Vital protein and fat when the grain runs thin. What isn't used goes to the weekly market.": Object.freeze({ needs: Object.freeze(["market"]) }), // village|Economy|Dairy farmer#0
-  "Keeps a herd of cattle or goats, yielding milk, butter, and soft cheese; in the lean grain months these are the settlement's protein and fat. The surplus is sold at the weekly market.": Object.freeze({ needs: Object.freeze(["market"]) }), // village|Economy|Dairy farmer#1
+  "Milk, butter, and soft cheese from cattle or goats, when there are beasts to run. What isn't used is sold on.": Object.freeze({ needs: Object.freeze(["market"]) }), // village|Economy|Dairy farmer#0
+  "A herd of cattle or goats, where one can be kept, for milk, butter, and soft cheese. Any surplus is sold on.": Object.freeze({ needs: Object.freeze(["market"]) }), // village|Economy|Dairy farmer#1
   "Catches wildfowl (using snares, nets, and trained birds) to stock the market with duck, goose, and pigeon.": Object.freeze({ needs: Object.freeze(["market"]) }), // village|Economy|Wildfowler#1
   "Works kilns out in the surrounding woods, producing the fuel for smiths, bakers, and hearths. Where timber runs plentiful, no fuel source is steadier.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
   "Tends charcoal kilns in the nearby woodland to feed the forge, the oven, and the fire. When timber is abundant, it is the settlement's surest supply of fuel.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
@@ -2157,8 +2157,8 @@ export const DESC_VARIANT_DECLARATIONS = Object.freeze({
   "The river is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Economy|River ferry#1
   "Builds and mends flat-bottomed river craft: barges, punts, ferries, fishing boats. The work turns on river-boat knowledge: shallow draft, a hull that flexes, parts made to be replaced.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Economy|River boatyard#0
   "River boats, all flat-bottomed, made and repaired here: barges, punts, ferries, and fishing craft. It takes a specialist's hand. Shallow in the draft, supple in the hull, and built so parts can be swapped out.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Economy|River boatyard#1
-  "Turns hides to leather with oak bark. The stink of it keeps it downstream. Without it there are no shoes, no harness, no straps.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Crafts|Tannery#0
-  "Hides become leather here, cured with oak bark. It reeks, and so it sits downstream, but shoes, harness, and straps all depend on it.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Crafts|Tannery#1
+  "Turns hides to leather with oak bark, when hides can be had. The stink of it keeps it downstream. Without it there are no shoes, no harness, no straps.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Crafts|Tannery#0
+  "Hides become leather here whenever they can be had, cured with oak bark. It reeks, and so it sits downstream, but shoes, harness, and straps all depend on it.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Crafts|Tannery#1
   "Crews tend kilns out in the woods and sell charcoal to smelters, smiths, and bakers. The metal trades here use up a forest a generation.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
   "Charcoal from woodland kilns feeds the smelters, the smithies, and the bake ovens. At this pace of metalwork, a forest lasts a generation.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
   "Builds and mends ocean-going merchantmen. It wants a steady supply of timber, iron fittings, and skilled shipwrights. A great employer, and a heavy investment of capital.": Object.freeze({ needs: Object.freeze(["coast"]) }), // town|Economy|Shipyard#0
