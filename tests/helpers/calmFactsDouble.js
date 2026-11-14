@@ -25,6 +25,8 @@ export const CALM_FACTS_ADMIT_ALL = Object.freeze({
   hasInstitution: () => true,
   warState: 'peace',
   hasOtherNpc: () => true,
+  // R2-CODE-A-14 (the chair's ruling (s1)): the pair atom `shared power`; "every presence atom holds".
+  sharesPower: () => true,
   // CENSUS-5b (2026-11-05): CENSUS-1c's delegated getters (R-E) arrived after the double was
   // written; "every presence atom holds" covers them too (`factsOf.js :: soldiers / commander /
   // faith`), so a sweep over a pool that declares `soldiers` or `priest` measures what it did.

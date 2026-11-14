@@ -191,7 +191,8 @@ const tiePairPool = (archetype) => {
  * on the directed pair, so two ties of one archetype do not collapse onto one line). `facts` is the
  * birth's facts at the draw (R-V / R-Z: the roster and the government only; CENSUS-4c measured all
  * 30 declared rows settled there, 0 of 585 births differ); absent, a declared index is refused
- * (fail-closed, R-N).
+ * (fail-closed, R-N). R2-CODE-A-14 (the chair's ruling (s1)): the draw hands the PAIR as its context (`ctx.pair`,
+ * `[npc, partner]`), so a line about the two of them (`shared power`: "share a council bloc") reads the pair.
  * @param {Readonly<{ body: string, members: string, member: string }>} [force]
  * @param {object | (() => object) | null} [facts]
  * @returns {(archetype: any, npc: {name?: string}, partner: {name?: string}) =>
@@ -217,7 +218,7 @@ export const createTieProseDraw = (force, facts = null) => {
     const pool = tiePairPool(archetype);
     /** @param {{ draw: (p: ReadonlyArray<any>) => any, held?: Set<string>, heldKey?: (l: any) => string }} how */
     const resolveAt = (how) => drawDeclared(pool, {
-      ...how, facts, key: `${npc?.name ?? ''}>${partner?.name ?? ''}::${archetypeKey ?? archetype?.label}`,
+      ...how, facts, ctx: { pair: [npc, partner] }, key: `${npc?.name ?? ''}>${partner?.name ?? ''}::${archetypeKey ?? archetype?.label}`,
       poolId: `npcData:${archetypeKey && Object.hasOwn(HANDLER_TIE_ARCHETYPES, archetypeKey) ? 'HANDLER_TIE_ARCHETYPES' : 'STRESS_ECONOMIC_EFFECTS'}.${archetypeKey ?? archetype?.label}`, surface: 'relationships', drawKind: 'H',
     });
     // R2-CODE-A-14: WITHOUT REPLACEMENT HOLDS THROUGH THE RESOLUTION. In the head of the cycle (the first `size` ties
