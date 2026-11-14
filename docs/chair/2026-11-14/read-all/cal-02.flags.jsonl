@@ -1,0 +1,78 @@
+{"id":"HEADER","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"RECORD","why":"made here lists glass, luxury, Date export, Education; HOUSES has no glassworks or school, and exports are none","other":""}
+{"id":"C4278","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"someone watching the treeline; terrain is Desert/Arid","other":""}
+{"id":"C4292","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"says Poor before the siege and Struggling during it: the siege reads as raising prosperity","other":""}
+{"id":"C4315","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"newcomers arriving and noticed; under siege nothing comes in by road (C4317)","other":"C4317"}
+{"id":"C4334","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"PAIR","why":"field work has stopped, yet the hamlet still grows 37 lbs/day and C4482 speaks of what it can still grow","other":"C4482"}
+{"id":"C4355","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"PAIR","why":"housing pressure Adequate while every outlying family sleeps under a neighbour's roof","other":"C4278"}
+{"id":"C4365","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"LACKS","why":"acquiring a competitor through intermediaries; hamlet of 65 has one caravanserai, no competing house","other":""}
+{"id":"C4369","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"BROKEN","why":"sentence ends on a bare label fragment ': holds the seat.'","other":""}
+{"id":"C4373","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"LACKS","why":"names a war party; GOVERNMENT lists only the Elder Council in a hamlet of 65","other":""}
+{"id":"C4412","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"PAIR","why":"timber-frame thatched dwellings in Desert/Arid terrain, where timber is needed and not brought in","other":"C4466"}
+{"id":"C4424","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"BROKEN","why":"'Healing' category holds burial, a wayside blessing and a weekly rite; no healing service at all","other":""}
+{"id":"C4435","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"weekly attendance expected at a church miles off; hamlet is surrounded under siege","other":""}
+{"id":"C4430","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"STATE","why":"blessing for travelers on the road; under siege no one travels the road","other":""}
+{"id":"C4439","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"STATE","why":"bed for a traveller who asks; under siege no travellers arrive","other":""}
+{"id":"C4443","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"feed and shelter for travellers' horses during stays; under siege nothing comes in by road","other":""}
+{"id":"C4446","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"assembles merchant caravans as an offered service; under siege, roads cut and no trade","other":""}
+{"id":"C4449","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"travellers' beasts grazing the common for a fee; under siege livestock penned inside, no travellers","other":"C4278"}
+{"id":"C4478","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"magic is 37 of 74 lbs eaten (half), not about a quarter","other":"C4474"}
+{"id":"C4507","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"LACKS","why":"trade unrecorded to annoy 'the clerks'; hamlet of 65 under siege has no clerks and no trade","other":""}
+{"id":"C4524","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"STATE","why":"a newcomer soon hears; under siege nothing comes in by road","other":"C4317"}
+{"id":"C4583","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"LACKS","why":"Elder Council 'safe in the hall'; HOUSES has no hall","other":""}
+{"id":"C4624","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"PAIR","why":"stores last a month at full rations (three on half); C4331 says about a month and a half","other":"C4331"}
+{"id":"C4357","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"PAIR","why":"healing capacity Adequate; the page says no healer is kept here and medical readiness None","other":"C4653"}
+{"id":"C4655","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"magic Limited; header says magic medium","other":""}
+{"id":"C4670","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"PAIR","why":"nothing would stop without magic; magic supplies half the food eaten and the hamlet would go shorter without it","other":"C4483"}
+{"id":"C4648","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"PAIR","why":"no arcane practitioners and no clergy (C4405), yet 37 lbs/day of food is magical provision","other":"C4474"}
+{"id":"C4706","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"LACKS","why":"customs men; hamlet of 65 has no customs office, charter none, and is under siege","other":""}
+{"id":"C4774","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"PAIR","why":"founders chose it for trade, water and good ground; origin is a defensible position on the road, in desert","other":"C4770"}
+{"id":"C4791","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"the siege is remembered as a past event (8y ago, C4783); CRISIS says the hamlet is under siege now","other":"C4285"}
+{"id":"C4800","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"PAIR","why":"most folk attend the rites through the year; the siege keeps them from the parish church","other":"C4799"}
+{"id":"C4817","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"BROKEN","why":"sentence ends on a bare label fragment ': holds the seat.'","other":""}
+{"id":"C4830","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"ordinary in the best sense; stability is Unstable with pervasive organized crime and monsters on the roads","other":""}
+{"id":"C4897","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"law and order Adequate; stability is Unstable (pervasive organized crime)","other":""}
+{"id":"C5119","town":"bar0-metropolis-calm-rand-1","sev":"LOW","kind":"LACKS","why":"guild turns out sea charts; plains metropolis with road access only, no coast or water trade","other":""}
+{"id":"C5253","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"thieves' guild is 'the ruling criminal syndicate, suffered' (tolerated); GOVERNMENT lists Thieves' Guild as Suppressed","other":""}
+{"id":"C5361","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"merchant guilds convened as a formal parliament of trade; GOVERNMENT lists Merchant Guilds as Suppressed","other":""}
+{"id":"C5366","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"PAIR","why":"the mine is the reason the settlement grew; FOUNDING says a dynastic crossroads, grown as an agricultural market","other":"C4878"}
+{"id":"C5416","town":"bar0-metropolis-calm-rand-1","sev":"LOW","kind":"BROKEN","why":"'told by Deception': a capitalised stored skill name used as prose","other":""}
+{"id":"C4919","town":"bar0-metropolis-calm-rand-1","sev":"LOW","kind":"PAIR","why":"about 110 hooks print under the one name Huilan Ma, a mercenary captain (C5283), incl. leading weekly prayers; verify the NPC grouping","other":"C5283"}
+{"id":"C5591","town":"bar0-metropolis-calm-rand-1","sev":"LOW","kind":"STATE","why":"perimeter defence badged Vulnerable (also citadel, mercenaries); STATE says Well-Defended, defence readiness Adequate","other":""}
+{"id":"C5822","town":"bar0-metropolis-calm-rand-1","sev":"LOW","kind":"BROKEN","why":"'Healing' category holds burial, bathing, grooming and citywide religious infrastructure","other":""}
+{"id":"C6069","town":"bar0-metropolis-calm-rand-1","sev":"LOW","kind":"PAIR","why":"grapes needed and not brought in; the vintner is said to import must and blend where no vine grows","other":"C5221"}
+{"id":"C6235","town":"bar0-metropolis-calm-rand-1","sev":"LOW","kind":"LACKS","why":"'Glass & Print' flow yields books and broadsheets via the glassmakers; HOUSES has no printer or press","other":""}
+{"id":"C6364","town":"bar0-metropolis-calm-rand-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"C6367","town":"bar0-metropolis-calm-rand-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"C6370","town":"bar0-metropolis-calm-rand-1","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'Merchant Guilds works ... and pays'","other":""}
+{"id":"C6391","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"PAIR","why":"the governor also heads Noble Houses, the seat's chief contender, in a High rivalry with the Governorship","other":"C4872"}
+{"id":"HEADER","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"RECORD","why":"HOUSES has 'Thieves' guild (powerful)' while GOVERNMENT lists Thieves' Guild as Suppressed","other":""}
+{"id":"C6496","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"PAIR","why":"watch resource-constrained, poorly equipped, irregular pay; C6480 calls it well-funded and keeping order reliably","other":"C6480"}
+{"id":"C6496","town":"bar0-metropolis-calm-rand-1","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'The garrison and city watch is'","other":""}
+{"id":"C6487","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"thieves 'roughly even with the military'; GOVERNMENT has Thieves' Guild Suppressed (8) vs Military Minor (15)","other":"C6425"}
+{"id":"C6491","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"mages hold real influence through a monopoly; GOVERNMENT lists Arcane Orders Suppressed, and C5549 has practitioners outside guild oversight","other":"C5549"}
+{"id":"C6499","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"PAIR","why":"everyone must pass the gates; the underground network moves shipments and people beneath the walls unseen","other":"C5262"}
+{"id":"C6521","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"PAIR","why":"neither law nor crime has the upper hand; C6425 says the Governorship is winning, Thieves' Guild Suppressed","other":"C6425"}
+{"id":"C6607","town":"bar0-metropolis-calm-rand-1","sev":"LOW","kind":"STATE","why":"magic Common; header says magic medium (the hamlet at medium reads Limited)","other":""}
+{"id":"C6645","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"'with nothing pressing'; stability Unstable (pervasive organized crime), monsters on the roads","other":""}
+{"id":"C6715","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"watch commander in 'quiet times', 'nothing threatening'; stability Unstable, merchants murdered this season (C6311)","other":"C6311"}
+{"id":"C6649","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"PAIR","why":"the governor's business is a contraband front; C6426 says nobody at the Governorship's head answers to criminals","other":"C6426"}
+{"id":"C6773","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"merchant head's hold 'secure', 'say is real', 'in quiet times'; Merchant Guilds Suppressed, stability Unstable","other":""}
+{"id":"C6784","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"casters' place 'secure' 'in quiet times' (also C6785); Arcane Orders Suppressed, stability Unstable","other":"C6785"}
+{"id":"C7300","town":"bar0-metropolis-calm-rand-1","sev":"LOW","kind":"PAIR","why":"the chief justice took the smith-master as apprentice and taught them the trade; Xin Cao is Chief Justice, not a smith","other":"C6662"}
+{"id":"C7318","town":"bar0-metropolis-calm-rand-1","sev":"LOW","kind":"PAIR","why":"the Academy's Lord Chancellor learned 'the work' for seven years at the side of the Master of the Games","other":"C6793"}
+{"id":"C7414","town":"bar0-metropolis-calm-rand-1","sev":"LOW","kind":"PAIR","why":"'has started repaying in coin'; C7413 says the debt has been repaid in small amounts of coin ever since","other":"C7413"}
+{"id":"C7472","town":"bar0-metropolis-calm-rand-1","sev":"LOW","kind":"PAIR","why":"master of granaries, second of the Strong ruling Governorship, has as 'only asset' a debt owed him","other":"C6652"}
+{"id":"HEADER","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"RECORD","why":"founder a healer who stopped for a traveller, yet founded on land granted to a noble; thorp of 28 makes luxury, exports toll revenue with no toll house","other":""}
+{"id":"C7697","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"LACKS","why":"built around 'the hall' and 'the assembly'; HOUSES has no hall, government is a Feudal Stewardship in a thorp of 28","other":""}
+{"id":"C7709","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"LACKS","why":"names a merchant; thorp of 28 has no merchant house, roster holds only the reeve and head shepherd","other":""}
+{"id":"C7737","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"PAIR","why":"little left to sell; grows 78 lbs/day for a need of 56, exports grain surplus, Prosperous","other":"C7877"}
+{"id":"C7777","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"STATE","why":"'the current shortage' of grain; food Secure, 78 grown against 56 needed, no crisis","other":"C7877"}
+{"id":"C7796","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"PAIR","why":"every holding is 'all of it for the table'; the thorp exports a grain surplus","other":"C7867"}
+{"id":"C7799","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"PAIR","why":"the reeve's 'welcome is not' legitimate; legitimacy Approved and C7919 says the Stewardship has Tyrby's approval","other":"C7919"}
+{"id":"C7812","town":"bar0-thorp-calm-rand-1","sev":"LOW","kind":"PAIR","why":"timber dwellings; the country produces no timber and none is brought in","other":"C7864"}
+{"id":"C7833","town":"bar0-thorp-calm-rand-1","sev":"LOW","kind":"BROKEN","why":"'Healing' category holds burial, a rite of entry and a weekly rite; no healing service","other":""}
+{"id":"C7987","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"PAIR","why":"household stores carry two months at full rations; C7878 says about a month and a half","other":"C7878"}
+{"id":"C8078","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"LACKS","why":"backing a candidate, the alliance's 'majority'; a two-member Feudal Stewardship in a thorp of 28 holds no vote","other":"C8077"}
+{"id":"C8085","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"LACKS","why":"spends on 'its halls and its defences'; HOUSES has no hall, DEFENCE only a household levy, no walls","other":""}
+{"id":"C8089","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"PAIR","why":"a Charter Fair (and Greening Fair) kept here; C7727 says no market or fair stands in Tyrby","other":"C7727"}
+{"id":"DONE","lines":3978,"blocks":3,"flags":77}
