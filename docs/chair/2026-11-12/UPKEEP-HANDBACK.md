@@ -57,12 +57,24 @@ Income ROWS whose trade has no house standing (measure for (c)/(d)): title: no h
 - Wool & Textile Trade: 0 / 383
 - Arcane Industry: 0 / 87
 
-The order of work (the brief: (j) first, it is HIGH; then widest first): (j) 963; (h) 84; (f) 79; (c) 63; (b) 53; (d) 43; (e) 29; (g) 11; (i) 11; then (k); then the carried templates of this lane's or no lane's files: "the barracks is all that stands guard" 13, "nobody organised to meet it" 22, "paid late" 5 (threatAssessment.js and headlines.js: holders re-read before the first edit). The pool rows (p1–p4, "already owed") are the corpus's: NAMED, not made.
+
+**The chair's rows added after the brief** (messages of 10:58 and 11:22 UTC, measured by the same script at 364c2313d):
+
+| row | false / printing | note |
+|---|---|---|
+| (1) HIGH: `DefenseSecurity.jsx` prints a force's catalogue name raw in the PDF's defence list ("Gates (if walled)", a count range) | **18 / 18** | holders by content: this lane alone |
+| (2) HIGH: `OverviewTab.jsx` prints the stored tensions with a catalogue count range ("Taverns (5-20)") | **1 / 1** (r2r-town-9) | the reader's on 1,536 towns |
+| (3) MED: `OverviewTab.jsx`'s Food Security row reads the stored label, not `foodBandOf` | not measured here | **`foodBandOf` is not on this lane's tree** (it is r2-code-b's `tonightSheet.js`, and the join's): the one-line change needs that function; NAMED FOR THE JOIN |
+| (4) MED: a REQ / FORCED badge on the PDF's defence list | **0 / 0** | already off the defence list at this lane's tip (COHERENCE-UPKEEP-7, item 3); the PDF's REQ lines are the institutions list's, not this list |
+| (5) the stored foodways line handed the source a famine failed (`foodGenerator.js :: generateFoodSecurity`) | **66** births hold a failed source in the sources the composer is handed | the move is counted at the cure |
+
+The order of work (the brief: (j) first, it is HIGH; the chair: the two HIGH added rows straight after it; then widest first): (j) 963; (1) 18; (2) 1; (h) 84; (f) 79; (c) 63; (b) 53; (d) 43; (e) 29; (g) 11; (i) 11; then (k); then the carried templates of this lane's or no lane's files: "the barracks is all that stands guard" 13, "nobody organised to meet it" 22, "paid late" 5 (threatAssessment.js and headlines.js: holders re-read before the first edit). The pool rows (p1–p4, "already owed") are the corpus's: NAMED, not made.
 
 ## What this seat did, in commit order
 
 | Commit | Item | Measure (the 972) | Guard and plant | Moved |
 |---|---|---|---|---|
+| 364c2313d | (j) HIGH: the Foundry journal names each supply chain by its record | the journal's chain list in **963** births: **12,983** lines "- **Chain** *(…)*" -> the record's label; every other surface and the record byte-identical | `tests/pdf/journalChainNames.test.js` (three born towns; the nameless chain); plant (the file as it was) reds 4 of 4 | `viewModelBodySlices.js :: economicsSlice` reads `chainPrintName(c, s).label`; the chain-print walker reclasses the file EXEMPT -> PRINT_SITES (a narrowing: it must import the leaf) |
 
 ## FOR THE JOIN (this seat's, gathered)
 
