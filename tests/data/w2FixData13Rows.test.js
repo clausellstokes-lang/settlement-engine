@@ -45,4 +45,18 @@ describe('W2-FIX-DATA-13: the measured rows in the data lane\'s files', () => {
     }), 'no Smelter description names a mine or a smithy the roster lacks');
   }, 120_000);
 
+  // THE CHAIR'S 12:11 HIGH (REVIEW-W2-FIX-DATA-4): the history tables' lasting effects named districts and quarters in
+  // thorps, hamlets and villages (39 thorps and hamlets, 21 villages of the 730); RULED: quarters and districts belong to
+  // a town or larger. r2r-town-1 is the guard town: a town keeps both lines.
+  test('the history names no district, quarter or ward below a town; a town keeps them', () => {
+    const SMALL = /\bdistricts?\b|\bquarters?\b|\bwards?\b/i;
+    expectNoSeedFailures(collectSeedFailures(['r2r-thorp-58', 'r2s-indebted-thorp-0', 'r2r-hamlet-15', 'r2r-village-2'], (seed) => {
+      const town = bornCensus(seed);
+      const effects = ['historicalEvents', 'currentTensions'].flatMap((k) => (town.history?.[k] || []).flatMap((/** @type {any} */ e) => e.lastingEffects || []));
+      expect(effects.filter((line) => SMALL.test(String(line))), `${seed} (${town.tier})`).toEqual([]);
+    }), 'no lasting effect below a town names a district, a quarter or a ward');
+    const guard = JSON.stringify(bornCensus('r2r-town-1').history);
+    expect(guard).toContain('Newcomer and old-family districts remain socially distinct');
+    expect(guard).toContain("The merchant quarter and the labourers' quarter remain walled apart");
+  }, 120_000);
 });
