@@ -1242,3 +1242,49 @@ WHAT IS LEFT, in order (the successor's list):
 
 ## Instruments (outside the tree; lost with the container)
 - <scratch>/wt (branch b10, own node_modules by npm ci), wt-line (976db5b19), wt-tip0 (30ed925ee), wt-pre (750b7a612), node_modules symlinked from wt. <scratch>/tools: cmp.mjs (two vitest JSON runs, per file: tests, reds, NEW@B, GREEN@B), fails.mjs (each failed title with its message), shift.mjs (the shift record's rows from two runs). <scratch>/bar: born.mjs (a bar0 town by the probes' cfgFor), support.mjs (deriveFactionSupport per power); <scratch>/p0 (the REVIEW-BAR-0 probes, by git archive) and its render2.sh/render.bar0.jsx for the rendered views. Re-made from this description in minutes.
+
+# PART 11 — R2-CODE-B-11, the eleventh seat (a new stage on top of the statement: the bar's row 179, the fresh reader's rows; an ADDENDUM, the statement not rewritten)
+
+Brief: origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-R2-CODE-B-11.md. Tip read back from origin at the start: 045d19ac1 (as the brief named). Scratch worktree <scratch>/../wt-b11 (branch b11, own node_modules by npm ci); the base tree wt-b11-base (detached, node_modules symlinked). The reader's file: origin/lane/review-r2-code-b-2026-11-14:docs/chair/2026-11-14/REVIEW-R2-CODE-B-LINES-READ.md; its 1,536 births re-born by its own births.mjs and seeds1536.txt (copied out by git archive), at every tree measured.
+
+## THE CHAIR'S RULINGS (2026-11-14; each vetoable by the owner), copied
+(a) THE BAR'S ROW 179: THE COLLABORATOR IS NEVER THE OCCUPIER. In the occupation kinds no member of the power the crisis brings (the face's own faction) is cast as collaborator, and never the face's own id; where no local remains the role is ABSENT by its own reason, never a false line. The linked row (the famine's exploiter) is read the same way.
+(b) H2-1, H2-2, H2-3: THE BRUNT AND THE STAKES READ ONE FACT. The brunt is drawn only from a house whose stake the record holds as a loss; where the town's one power has no stake or gains, nobody of it bears the brunt: the role is ABSENT by its own reason (the one-power fallback goes).
+(c) H2-14, H2-16, H1-3: A MINTED STAND-IN IS A WHOLE PERSON, AND ITS WORDS CLAIM NO OFFICE, HOUSE OR FORCE THE PAGE DENIES. The stand-in's role names what they DO in the crisis, in lay words, wherever the record holds no such office; the lever's want names a scarce thing the town HAS (guards only where a force stands). New words read on the NPCs tab, the Crisis tab, the hooks, the Tonight sheet, the PDF and the journal, and listed for the owner's veto.
+(d) H2-15: the Foundry journal's power slot prints a power or says none, for every card with no power ("Member of: civic", and the exporter's "other"/"criminal" fallback). journalPages.js held by three lanes BY CONTENT: change only inside this lane's own hunks, else STOP with the line.
+(e) H4-7: where the siege clause prints, the observance sentence after it does not say folk attend: a twin true under the siege, or silence.
+(f) H1-1: THE CAST AND THE GOAL AGREE: a person whose own goal answers the crisis is not cast as its instigator or exploiter: the next candidate, else ABSENT by its reason.
+(g) H2-4: "no one named to lead it" only where no roster person faces the house; else that person defends. The hook's "the palisade leads the defence": reworded in the same commit if one line.
+(h) HIGH, carried, outside the family: "built around the Palace/government complex" (27 metropolises; seatIntoPhrase): this lane's or no lane's BY CONTENT → the seat named through the house-label leaf; else NAMED for its lane with the count.
+(i) THE CHAIR, 11:22 UTC (a message): the Tonight famine line "has lost a second harvest" (54 of 58 towns without grain or mill): EACH LANE MAKES ITS OWN HALF: this lane's is the Tonight caller (src/domain/summary/tonightSheet.js) passing the record's facts to crisisSummaryForSurface as an optional argument (ignored on this lane today: the pages byte-identical, proved on the births); the r3-code-c lane makes the function read it. Its own commit, after (a) and (b); one line under FOR THE JOIN.
+
+## (a) ROW 179 — DONE (05cd22366, its follow-up 5996dd9da; census f98b63def)
+- CAUSE: crisisCast.js :: collaboratorCandidates (Rule 9) took the most ambitious member of any power that gains; in an occupation the occupier gains, so its governor was cast as its own collaborator.
+- CURE: no member of an occupying power (isOccupier) in either arm; the linked famine exploiter refused when the face or an occupier's member. ABSENT reason: CAST_ABSENCES.occupierOnly "no one is named: no local power gains" where every gainer is an occupier; else the old noGains.
+- COUNTS (1,536 births, 045d19ac1 → 5996dd9da): collaborator = the face 28 (1 by the link) → 0; an occupier's member 6 → 0; locals 9 → 13; 30 ABSENT by the new reason; infiltrated unchanged. Field diff: 34 towns, `stress` 69 / `stressors` 69 leaves, nothing else.
+- CORRECTION (said in 5996dd9da's body): 05cd22366 shipped the wording "no local is named: none of the town's own powers gains", never born whole before its push (its body's field diff was measured on an earlier wording); the record stores the raw reason and the coherence battery flagged "town" for a hamlet (r2s-occupied-hamlet-0's receipt pass → needs_review: a leaf outside the family, 1 town). 5996dd9da cured it; the receipt is unmoved at 5996dd9da.
+- GUARD AND PLANT: tests/domain/crisisCastReaderRows.test.js (a): collected over 22 towns (bar0-town-occupied-rand-1 and 21 of the reader's 34) red 22/22 at 045d19ac1; the keep-guard (r2s-occupied-city-1) red under a plant emptying the local roster; the taken-off guard r2r-thorp-24; the link r2s-occupied-hamlet-0.
+- TOWNS READ: Crisis tab absent line in r2r-thorp-24 (thorp 20), r2s-occupied-hamlet-0 (hamlet 20), r2s-occupied-village-1 (village 132), r2s-occupied-city-3 (city 4,671), rr3-metropolis-occupied-rand-3 (metropolis 301,467); the recast locals on the Crisis tab, its hook and the journal in r2s-occupied-town-3 (town 2,018), r2s-occupied-metropolis-1 (105,466), rr3-metropolis-occupied-rand-4 (96,635); the bar's town (1,571): Sujin Ma, the dean of a gaining church. All TRUE.
+
+## (b) H2-1, H2-2, H2-3 — DONE (27c39b750; census 48db164ff)
+- CAUSE: bruntCandidates' one-power fallback (the only power whatever its stake) and its losers set (every stake but 'gains').
+- CURE: losers = 'loses' or the gains-and-loses 'split'; the fallback gone; ABSENT by noBase "no house's base is hit" (no new word).
+- COUNTS (5996dd9da → 27c39b750): no-loss brunt rows 45 + 20 + 1 → 0; 66 roles ABSENT; brunt rows on losing houses unchanged. Field diff: 66 towns, `stress` 526 / `stressors` 526, nothing else.
+- GUARD AND PLANT: (b) arms: collected over 31 of the 66, red 31/31 at 5996dd9da; the keep-guard (three words, r2r-thorp-17, r2r-hamlet-16, r2r-village-58) red under a plant emptying the losers; the taken-off guard r2r-thorp-10.
+- TOWNS READ (before/after, Crisis tab, hooks, Tonight, journal Tonight/Crisis/Plot Hooks): r2r-thorp-10 (10), r2r-hamlet-36 (74), r2s-plague_onset-thorp-0 (14), r2s-monster_pressure-village-3 (207, the largest), rr3-thorp-monster_pressure-rand-0 (5, the smallest), rr3-thorp-plague_onset-rand-3 (16, a famine beside: the famine's brunt kept). Newly silent: the brunt row, its hook, the Tonight person and the clause "The worst of it falls on …"; the Tonight line falls to the lever ("… holds the key to it."), whole.
+- RED BY THE DECLARED MOVE, NAMED (not loosened): tests/generators/people/castDerived.test.js "every person a cast names is on the roster; …": the corpus floor "draws people from powers" > 500 now 497 (correctness arm green).
+
+## EVERY NEW OR CHANGED LINE (for the owner's veto)
+- "collaborates: no one is named: no local power gains" (Crisis tab only; 30 of the 1,536) — read in the five towns of (a).
+
+## FOR THE JOIN
+- (i) the Tonight famine line: this lane's half (the caller passes facts) is item (i), to come; the r3-code-c lane's half makes crisisSummaryForSurface read it.
+
+## WHAT IS LEFT, line by line
+1. (i) the Tonight caller's half. 2. (c), (d), (e), (f), (g), (h). 3. THE DECLARED MOVE measured whole (the 720 field diff 976db5b19 against the tip, by family), the draft shift record's rows re-measured, the edge bundles re-built LAST and committed alone, THE ADDENDUM (S2, S3, S4, S5, S8).
+
+## `git diff --stat 045d19ac1..HEAD -- src/`
+- src/domain/crisis/crisisCast.js: (a) collaboratorCandidates + the collaboratorFromExploiter link + CAST_ABSENCES.occupierOnly; (b) bruntCandidates' losers and the fallback.
+
+## Instruments (outside the tree; lost with the container)
+<scratch>/tools: births.mjs (the reader's), load.mjs, ab.mjs (rows (a)/(b) counts), fdiff.mjs (leaves by family), rdiff.mjs (cast rows changed; receipt judgments), surf.mjs (a needle on the Crisis tab, hooks, Tonight and the journal's three variants), peek.mjs, speak.mjs, bar.mjs (a bar0 town), co.mjs/fam.mjs. Re-made from this description in minutes.
