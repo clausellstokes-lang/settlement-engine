@@ -1,0 +1,148 @@
+{"id":"03139","town":"r2s-under_siege-metropolis-3","sev":"MED","kind":"LACKS","why":"cargo lost at sea; trade access is river, terrain plains, no sea","other":""}
+{"id":"02876","town":"r2s-under_siege-metropolis-3","sev":"MED","kind":"LACKS","why":"names a wizard's tower; HOUSES has mages' district and academy, no tower","other":""}
+{"id":"20990","town":"r2s-under_siege-metropolis-3","sev":"MED","kind":"STATE","why":"merchant guild security force detaining people; GOVERNMENT lists Merchant Guilds as Suppressed","other":""}
+{"id":"16646","town":"r2s-under_siege-metropolis-3","sev":"HIGH","kind":"STATE","why":"barge fleets running on schedule; CRISIS is active siege, nothing moves by water","other":""}
+{"id":"04601","town":"r2s-under_siege-metropolis-3","sev":"HIGH","kind":"STATE","why":"freight, passengers and supply moving through the river network under an active siege","other":""}
+{"id":"06937","town":"r2s-under_siege-metropolis-3","sev":"MED","kind":"STATE","why":"duties taken on goods passing through port and main roads; siege halts all road and water traffic","other":""}
+{"id":"16871","town":"r2s-under_siege-metropolis-3","sev":"MED","kind":"STATE","why":"scheduled passenger barges between river settlements offered under active siege","other":""}
+{"id":"16644","town":"r2s-under_siege-metropolis-3","sev":"MED","kind":"STATE","why":"revenue from river tolls, dock fees, ferry rights; siege stops river traffic","other":""}
+{"id":"17619","town":"r2s-under_siege-metropolis-3","sev":"MED","kind":"STATE","why":"guild-funded security surcharge on trade; Merchant Guilds Suppressed and trade halted by siege","other":""}
+{"id":"28528","town":"r2s-under_siege-metropolis-3","sev":"MED","kind":"STATE","why":"exports waterborne freight services while under active siege; nothing leaves by water","other":""}
+{"id":"HEADER","town":"r2s-under_siege-metropolis-3","sev":"MED","kind":"RECORD","why":"TRADE exports cultural tourism and waterborne freight while CRISIS is active siege","other":""}
+{"id":"07269","town":"r2s-under_siege-metropolis-3","sev":"MED","kind":"STATE","why":"merchants funding civic works expecting council access; Merchant Guilds and Merchant Bloc are Suppressed","other":""}
+{"id":"22361","town":"r2s-under_siege-metropolis-3","sev":"MED","kind":"STATE","why":"trading houses keep a private army keeping order; Merchant Guilds Suppressed under siege","other":""}
+{"id":"00339","town":"r2s-under_siege-metropolis-3","sev":"MED","kind":"STATE","why":"three powers level; GOVERNMENT has two Significant, rest Minor or Suppressed","other":""}
+{"id":"23333","town":"r2s-under_siege-metropolis-3","sev":"MED","kind":"STATE","why":"force undermanned, unable to enforce law; DEFENCE is Fortress, multiple garrisons, professional watch","other":""}
+{"id":"20992","town":"r2s-under_siege-metropolis-3","sev":"MED","kind":"STATE","why":"merchant guilds keep private security beside garrison; Merchant Guilds Suppressed","other":""}
+{"id":"21746","town":"r2s-under_siege-metropolis-3","sev":"MED","kind":"PAIR","why":"river trade failed and drained away; town has docks, barge companies, international trade centre, river exports","other":"16646"}
+{"id":"02383","town":"r2s-succession_void-thorp-1","sev":"MED","kind":"STATE","why":"offers a place at a shared table; CRISIS famine, 64% deficit, no imports","other":""}
+{"id":"18323","town":"r2s-succession_void-thorp-1","sev":"MED","kind":"LACKS","why":"competing supply route destroyed; trade access isolated, imports none","other":""}
+{"id":"21207","town":"r2s-succession_void-thorp-1","sev":"MED","kind":"PAIR","why":"people follow the elders out of respect; legitimacy is Crisis and few accept its right to rule","other":"07686"}
+{"id":"05801","town":"r2s-succession_void-thorp-1","sev":"MED","kind":"LACKS","why":"grain, salt, preserved meat traded through unofficial channels; isolated, imports none, population 11","other":""}
+{"id":"15551","town":"r2s-succession_void-thorp-1","sev":"MED","kind":"PAIR","why":"good year comfortable, bad year lean; famine 64% deficit, viable False, cannot last","other":"00537"}
+{"id":"HEADER","town":"r2s-famine-thorp-1","sev":"MED","kind":"RECORD","why":"thorp of 20 with no school or priest makes Education (basic) and Religious services","other":""}
+{"id":"14553","town":"r2s-famine-thorp-2","sev":"MED","kind":"STATE","why":"no one works the timber; TRADE made here lists timber and founding was a logging operation","other":""}
+{"id":"15533","town":"r2s-famine-thorp-2","sev":"LOW","kind":"LACKS","why":"Elder Council safe in the hall; HOUSES has no hall, stability Desperate","other":""}
+{"id":"HEADER","town":"r2s-famine-thorp-2","sev":"MED","kind":"RECORD","why":"thorp of 28 makes iron and metalwork; HOUSES has no smith, mine or smelter","other":""}
+{"id":"20338","town":"r2s-famine-thorp-3","sev":"MED","kind":"STATE","why":"says no luxury goods produced; TRADE made here lists luxury, imports only salt and grain","other":""}
+{"id":"02771","town":"r2s-famine-thorp-3","sev":"LOW","kind":"LACKS","why":"trade annoys the clerks; thorp of 16 has no office or clerks on HOUSES","other":""}
+{"id":"HEADER","town":"r2s-famine-thorp-3","sev":"MED","kind":"RECORD","why":"thorp of 16 makes luxury and Education (basic) with no school or workshop","other":""}
+{"id":"28512","town":"r2s-wartime-thorp-2","sev":"MED","kind":"LACKS","why":"caravan-borne staples; trade access isolated, imports none, forest terrain","other":""}
+{"id":"18208","town":"r2s-wartime-thorp-2","sev":"LOW","kind":"LACKS","why":"goods traded without licence or duty; isolated thorp of 9 with no trade and no licensing office","other":""}
+{"id":"22252","town":"r2s-wartime-thorp-2","sev":"LOW","kind":"LACKS","why":"defense conventional throughout; DEFENCE has no walls and no force at all","other":""}
+{"id":"HEADER","town":"r2s-wartime-thorp-2","sev":"MED","kind":"RECORD","why":"isolated thorp of 9 makes luxury goods","other":""}
+{"id":"HEADER","town":"r2r-thorp-46","sev":"MED","kind":"RECORD","why":"desert thorp of 26 makes glass, timber, iron, metalwork, education; no smith or glassworks","other":""}
+{"id":"12888","town":"r2r-thorp-54","sev":"MED","kind":"STATE","why":"magic a quarter of what it eats; 9 of 21 lbs eaten (12 grown + 9) is over two fifths","other":"16000"}
+{"id":"07802","town":"r2s-famine-thorp-0","sev":"MED","kind":"STATE","why":"fish sold daily from the catch; CRISIS famine, 26% deficit, fishing season poor","other":"20540"}
+{"id":"11289","town":"r2s-famine-thorp-0","sev":"MED","kind":"STATE","why":"quick to offer a meal of fish; CRISIS famine, food deficit 26%","other":""}
+{"id":"15536","town":"r2s-famine-thorp-0","sev":"LOW","kind":"LACKS","why":"Household Council safe in the hall; HOUSES has no hall, stability Desperate","other":""}
+{"id":"03994","town":"r2s-famine-thorp-0","sev":"MED","kind":"STATE","why":"present quarrels bring up the succession crisis; CRISIS is Famine only, no succession void","other":""}
+{"id":"HEADER","town":"r2s-famine-thorp-0","sev":"MED","kind":"RECORD","why":"thorp of 19 makes iron, metalwork, flour, textiles, exports pilgrim hospitality; no smith, mill or inn","other":""}
+{"id":"01099","town":"r2s-occupied-thorp-1","sev":"MED","kind":"LACKS","why":"its road brings in too little; trade access isolated, exports and imports none","other":""}
+{"id":"19252","town":"r2s-occupied-thorp-1","sev":"MED","kind":"STATE","why":"Elder Council governs; under occupation, Occupation Authority holds equal power and stability Suppressed","other":""}
+{"id":"HEADER","town":"r2s-occupied-thorp-1","sev":"MED","kind":"RECORD","why":"isolated thorp of 17 makes iron and metalwork with no smith; founded at a strategic pass yet isolated","other":""}
+{"id":"18324","town":"r2r-thorp-38","sev":"MED","kind":"LACKS","why":"competing supply route destroyed; trade access isolated, imports none","other":""}
+{"id":"HEADER","town":"r2r-thorp-38","sev":"MED","kind":"RECORD","why":"isolated thorp of 26 makes gems and Education (basic); grew at a strategic pass yet isolated","other":""}
+{"id":"07212","town":"r2s-succession_void-thorp-0","sev":"MED","kind":"LACKS","why":"enforcement and organised theft; no watch, no criminal house, population 8","other":""}
+{"id":"11931","town":"r2s-succession_void-thorp-0","sev":"MED","kind":"STATE","why":"could keep soldiers and chooses not to; thorp of 8, Struggling, famine, viable False","other":""}
+{"id":"HEADER","town":"r2s-succession_void-thorp-0","sev":"MED","kind":"RECORD","why":"thorp of 8 makes gems, Religious services and Education (basic)","other":""}
+{"id":"14552","town":"r2r-thorp-17","sev":"MED","kind":"STATE","why":"no one works the stone; TRADE made here lists stone","other":""}
+{"id":"17631","town":"r2r-thorp-17","sev":"MED","kind":"LACKS","why":"sellers giving credit; isolated thorp of 11, no market or shop, exports none","other":""}
+{"id":"HEADER","town":"r2r-thorp-17","sev":"MED","kind":"RECORD","why":"thorp of 11 makes stone, Religious services and Education (basic) with no quarry, priest or school","other":""}
+{"id":"18131","town":"r2s-famine-hamlet-3","sev":"LOW","kind":"PAIR","why":"built in timber compounds; same page says no timber locally and none brought in","other":"20353"}
+{"id":"06146","town":"r2s-famine-hamlet-3","sev":"MED","kind":"LACKS","why":"black-market revenue to criminals who run it; HOUSES has no fence or criminal house","other":""}
+{"id":"20784","town":"r2s-famine-hamlet-3","sev":"LOW","kind":"LACKS","why":"defense conventional throughout; DEFENCE has no walls and no force","other":""}
+{"id":"HEADER","town":"r2s-famine-hamlet-3","sev":"MED","kind":"RECORD","why":"hamlet of 22 makes gems, leather, education, religious services; imports votive candles with no church","other":""}
+{"id":"18689","town":"r2s-occupied-hamlet-0","sev":"MED","kind":"LACKS","why":"strangers stand where the roads meet; trade access isolated","other":""}
+{"id":"HEADER","town":"r2s-occupied-hamlet-0","sev":"LOW","kind":"RECORD","why":"made here lists 'trade access' as a good; founded as defensive stronghold yet no walls","other":""}
+{"id":"02770","town":"r2s-occupied-hamlet-0","sev":"LOW","kind":"LACKS","why":"trade annoys the clerks; isolated hamlet of 20 with no office, exports none","other":""}
+{"id":"00779","town":"r2s-occupied-hamlet-0","sev":"MED","kind":"STATE","why":"threat met in the open house by house; town is occupied, stability Suppressed, resistance only simmers","other":""}
+{"id":"09279","town":"r2r-hamlet-24","sev":"HIGH","kind":"STATE","why":"food handed out to anyone who asks; famine deficit 69%, no imports, no granary, stability Desperate","other":""}
+{"id":"03033","town":"r2r-hamlet-24","sev":"MED","kind":"PAIR","why":"trusted figure holding no office by agreement; HOUSES has Village headman, legitimacy Crisis, few accept its rule","other":"07701"}
+{"id":"06324","town":"r2r-hamlet-24","sev":"MED","kind":"STATE","why":"whole Headman's Authority must agree; a headman is one person, not a council","other":"03033"}
+{"id":"15531","town":"r2r-hamlet-24","sev":"LOW","kind":"LACKS","why":"Headman's Authority safe in the hall; HOUSES has no hall, stability Desperate","other":""}
+{"id":"03917","town":"r2r-hamlet-24","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'gold/silver ore' used in prose","other":""}
+{"id":"HEADER","town":"r2r-hamlet-24","sev":"MED","kind":"RECORD","why":"hamlet makes gems, Education, Religious services with no school or priest; pass-guide founding yet isolated","other":""}
+{"id":"16005","town":"r2r-hamlet-28","sev":"LOW","kind":"STATE","why":"21 lbs imported; header food ledger says imports cover 20","other":""}
+{"id":"09302","town":"r2r-hamlet-28","sev":"MED","kind":"STATE","why":"timber never found worth taking; TRADE made here lists timber","other":""}
+{"id":"HEADER","town":"r2s-famine-hamlet-1","sev":"MED","kind":"RECORD","why":"isolated hamlet of 41 makes iron, metalwork, Education, Religious services; no smith, school or priest","other":""}
+{"id":"00160","town":"r2s-insurgency-hamlet-0","sev":"LOW","kind":"LACKS","why":"point of law argued before a crowd; hamlet of 35 with no court","other":""}
+{"id":"22986","town":"r2s-insurgency-hamlet-0","sev":"MED","kind":"LACKS","why":"those in charge distrust their own officers; only a village headman, no officers listed","other":""}
+{"id":"03091","town":"r2s-insurgency-hamlet-0","sev":"HIGH","kind":"LACKS","why":"a strong power stopped obeying the government; GOVERNMENT lists only Headman's Authority","other":""}
+{"id":"12113","town":"r2s-insurgency-hamlet-0","sev":"MED","kind":"LACKS","why":"that power's people stall and taxes unpaid; no second power exists in GOVERNMENT","other":"03091"}
+{"id":"18890","town":"r2s-insurgency-hamlet-0","sev":"MED","kind":"LACKS","why":"some offices no longer send revenue on; hamlet has no offices, only a headman","other":""}
+{"id":"03031","town":"r2s-insurgency-hamlet-0","sev":"MED","kind":"PAIR","why":"respected figure simply acknowledged; legitimacy Crisis and the right to the seat is in dispute","other":"29817"}
+{"id":"18271","town":"r2s-insurgency-hamlet-0","sev":"MED","kind":"LACKS","why":"honest traders against illegal money; isolated, no trade, no criminal house","other":""}
+{"id":"18708","town":"r2s-insurgency-hamlet-0","sev":"MED","kind":"LACKS","why":"confrontations with those who keep order; DEFENCE has no watch, militia or force","other":""}
+{"id":"HEADER","town":"r2s-insurgency-hamlet-0","sev":"LOW","kind":"RECORD","why":"made here lists 'trade access' and gems; strategic pass founding yet isolated","other":""}
+{"id":"01440","town":"r2s-recently_betrayed-hamlet-2","sev":"MED","kind":"LACKS","why":"defence being rearranged; DEFENCE is none throughout, defence Undefended","other":""}
+{"id":"HEADER","town":"r2s-recently_betrayed-hamlet-2","sev":"MED","kind":"RECORD","why":"hamlet makes gems and Education; founded as defensive stronghold but has no walls","other":""}
+{"id":"03543","town":"r2s-wartime-hamlet-3","sev":"MED","kind":"LACKS","why":"an old judge hears neighbours; hamlet has no judge or court on HOUSES or GOVERNMENT","other":""}
+{"id":"30947","town":"r2s-famine-hamlet-0","sev":"MED","kind":"LACKS","why":"ticks Shipbuilding as an industry; HOUSES has a fisher's landing only, no shipyard","other":""}
+{"id":"HEADER","town":"r2s-famine-hamlet-0","sev":"LOW","kind":"RECORD","why":"made here lists 'maritime access' as a good","other":""}
+{"id":"06949","town":"r2s-insurgency-hamlet-2","sev":"MED","kind":"LACKS","why":"crackdowns on the insurgents; DEFENCE has no garrison, watch or militia, steward is a Minor power","other":""}
+{"id":"17390","town":"r2s-insurgency-hamlet-2","sev":"MED","kind":"LACKS","why":"ordered a crackdown that killed people; the hamlet has no armed force of any kind","other":""}
+{"id":"13414","town":"r2s-occupied-hamlet-1","sev":"MED","kind":"LACKS","why":"merchants pay a share of every sale; isolated hamlet, exports and imports none, no market","other":""}
+{"id":"15103","town":"r2s-occupied-hamlet-1","sev":"LOW","kind":"LACKS","why":"settled in the hall; HOUSES has no hall","other":""}
+{"id":"HEADER","town":"r2s-occupied-hamlet-1","sev":"MED","kind":"RECORD","why":"isolated hamlet makes glass, gems and Hospitality for travellers; no glassworks or inn","other":""}
+{"id":"22261","town":"r2r-hamlet-16","sev":"MED","kind":"STATE","why":"someone profits from wartime contracts; CRISIS is Famine only, no war","other":""}
+{"id":"02538","town":"r2r-hamlet-16","sev":"MED","kind":"STATE","why":"a war party suppressing diplomacy; CRISIS is Famine only, GOVERNMENT has no war party","other":""}
+{"id":"00600","town":"r2r-hamlet-16","sev":"MED","kind":"STATE","why":"grows two fifths of what it eats; eats 30 (16 grown + 14 imported), so grows over half","other":""}
+{"id":"HEADER","town":"r2r-hamlet-16","sev":"LOW","kind":"RECORD","why":"made here lists 'trade access' as a good","other":""}
+{"id":"06271","town":"r2s-famine-hamlet-2","sev":"MED","kind":"PAIR","why":"daily milk offered; same page says no livestock reaches the dairy farmer, under famine","other":"14612"}
+{"id":"21783","town":"r2s-famine-hamlet-2","sev":"MED","kind":"STATE","why":"ruling three of Feudal Stewardship; a stewardship is one lord's steward","other":""}
+{"id":"HEADER","town":"r2s-famine-hamlet-2","sev":"LOW","kind":"RECORD","why":"made here lists 'maritime access' as a good","other":""}
+{"id":"18410","town":"r2r-village-58","sev":"MED","kind":"LACKS","why":"someone moves goods without questions; HOUSES has no fence, smuggler or criminal house","other":""}
+{"id":"09820","town":"r2r-village-58","sev":"HIGH","kind":"STATE","why":"grain sold by the sack straight from the field; famine 34% deficit, grain is imported","other":""}
+{"id":"HEADER","town":"r2r-village-58","sev":"LOW","kind":"RECORD","why":"two powers both Dominant; founded by a noble and by a disbanded military unit","other":""}
+{"id":"04012","town":"r2r-village-58","sev":"LOW","kind":"LACKS","why":"a quieter smuggling way in; HOUSES has no fence or criminal house","other":""}
+{"id":"22666","town":"r2r-village-58","sev":"MED","kind":"STATE","why":"stone thought not worth the trouble; TRADE made here lists stone","other":""}
+{"id":"22803","town":"r2r-village-58","sev":"MED","kind":"STATE","why":"power working in the council's shadow; Grain Holders are Dominant, level with the Household Council","other":""}
+{"id":"22421","town":"r2r-village-58","sev":"LOW","kind":"LACKS","why":"defense conventional throughout; DEFENCE has no walls and no force","other":""}
+{"id":"04301","town":"r2r-village-58","sev":"LOW","kind":"LACKS","why":"offers wound and disease care; HOUSES has no healer, apothecary or midwife","other":""}
+{"id":"20341","town":"r2s-famine-village-0","sev":"MED","kind":"STATE","why":"no luxury goods produced locally; TRADE made here lists gems","other":""}
+{"id":"02773","town":"r2s-famine-village-0","sev":"LOW","kind":"LACKS","why":"trade annoys the clerks; HOUSES has no office or clerks","other":""}
+{"id":"29034","town":"r2s-famine-village-0","sev":"LOW","kind":"LACKS","why":"the hall settles nothing; HOUSES has no hall","other":""}
+{"id":"HEADER","town":"r2s-famine-village-0","sev":"LOW","kind":"RECORD","why":"made here lists 'trade access' as a good, and gems with no mine","other":""}
+{"id":"02470","town":"r2s-famine-village-1","sev":"LOW","kind":"LACKS","why":"a clerk records every cartload; HOUSES has no office or clerk","other":""}
+{"id":"21280","town":"r2s-famine-village-1","sev":"MED","kind":"LACKS","why":"pilgrim trade and an office authenticating relics; HOUSES has no shrine or such office, no pilgrim export","other":""}
+{"id":"19721","town":"r2s-famine-village-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"18060","town":"r2s-famine-village-1","sev":"MED","kind":"LACKS","why":"significant military force with a commander; DEFENCE has no garrison, only a citizen militia","other":""}
+{"id":"21791","town":"r2s-famine-village-1","sev":"MED","kind":"STATE","why":"ruling three of Headman's Authority; a headman's authority is one headman","other":""}
+{"id":"HEADER","town":"r2s-famine-village-1","sev":"MED","kind":"RECORD","why":"Military/Guard Dominant with no garrison or watch; makes iron and metalwork with no smith","other":""}
+{"id":"02975","town":"r2s-famine-village-2","sev":"MED","kind":"LACKS","why":"lives by stabling and meals for travellers; HOUSES has no inn or stable, CRISIS famine","other":""}
+{"id":"15825","town":"r2s-famine-village-2","sev":"MED","kind":"STATE","why":"ale house offers pottage and bread; famine 30% deficit, grain imported","other":""}
+{"id":"HEADER","town":"r2s-famine-village-2","sev":"LOW","kind":"RECORD","why":"village makes gems with no mine; imports master-crafted plate armour with no force","other":""}
+{"id":"14550","town":"r2r-village-24","sev":"MED","kind":"STATE","why":"no one works the medicinal herbs; TRADE made here lists medicinal herbs","other":""}
+{"id":"18786","town":"r2r-village-24","sev":"MED","kind":"LACKS","why":"enforcers who can be bought; DEFENCE has no watch, militia or garrison, only a charter","other":""}
+{"id":"HEADER","town":"r2r-village-24","sev":"MED","kind":"RECORD","why":"two powers both Dominant; makes iron and metalwork with no smith or mine","other":""}
+{"id":"11127","town":"r2s-famine-village-3","sev":"MED","kind":"STATE","why":"offers a meal and road gossip at once; famine 58% deficit, trade access isolated","other":""}
+{"id":"13624","town":"r2s-famine-village-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"07107","town":"r2s-famine-village-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"HEADER","town":"r2s-famine-village-3","sev":"MED","kind":"RECORD","why":"trade access isolated yet food imports cover 26 and imports are listed; makes luxury","other":""}
+{"id":"18671","town":"r2s-famine-town-2","sev":"MED","kind":"STATE","why":"granary holds about five months of grain; CRISIS famine, 19% deficit, viable False","other":""}
+{"id":"16399","town":"r2s-famine-town-2","sev":"MED","kind":"STATE","why":"regular market days with produce; CRISIS famine, food deficit, grain imported","other":""}
+{"id":"10819","town":"r2s-famine-town-2","sev":"MED","kind":"STATE","why":"hot meals at multiple venues offered under famine with a food deficit","other":""}
+{"id":"HEADER","town":"r2s-famine-town-2","sev":"LOW","kind":"RECORD","why":"founded by a noble with resources and by artisans pooling resources; the two founders exclude each other","other":""}
+{"id":"03509","town":"r2s-famine-town-3","sev":"MED","kind":"STATE","why":"merchants and guilds compete for council seats; GOVERNMENT is Arcane Council, no merchant power listed","other":""}
+{"id":"HEADER","town":"r2s-famine-town-3","sev":"MED","kind":"RECORD","why":"Arcane Council governs yet HOUSES and DEFENCE hold no arcane house beyond an alchemist shop","other":""}
+{"id":"01041","town":"r2s-famine-town-1","sev":"MED","kind":"LACKS","why":"horses shod, sold, hired and fed at every hour; HOUSES has no smith, stable or horse market","other":""}
+{"id":"HEADER","town":"r2s-famine-town-1","sev":"LOW","kind":"RECORD","why":"made here lists 'trade access', toll income and market taxes as goods; exports meals under famine","other":""}
+{"id":"10823","town":"r2s-famine-town-1","sev":"LOW","kind":"TAG","why":"says city watch livery; Hongcheng is a town with a town watch, and the tag reaches towns","other":""}
+{"id":"10817","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"hot food in most establishments; CRISIS famine, food deficit, stability Desperate","other":""}
+{"id":"16147","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"meals up to roasted meats offered under famine with a food deficit","other":""}
+{"id":"15707","town":"r2s-famine-town-1","sev":"MED","kind":"LACKS","why":"pilgrim trade with relic sales; HOUSES has no shrine or relic site, TRADE lists no pilgrim trade","other":""}
+{"id":"16004","town":"r2s-famine-town-1","sev":"LOW","kind":"STATE","why":"1,226 lbs imported; header food ledger says imports cover 1230","other":""}
+{"id":"23392","town":"r2s-famine-town-0","sev":"MED","kind":"STATE","why":"very little of what leaves began here; exports iron ore, stone, ingots, tools and weapons all made here","other":"22351"}
+{"id":"HEADER","town":"r2s-famine-town-0","sev":"LOW","kind":"RECORD","why":"made here lists 'trade access' and rare spices and exotic dyes on a plains mining town","other":""}
+{"id":"03139","town":"r2s-famine-city-0","sev":"MED","kind":"LACKS","why":"cargo lost at sea; trade access river, terrain riverside, no sea","other":""}
+{"id":"13614","town":"r2s-famine-city-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"21802","town":"r2s-famine-city-0","sev":"MED","kind":"PAIR","why":"ruling three of Royal Authority; same page says the crown rules directly through the monarch Li Ma","other":"20406"}
+{"id":"11437","town":"r2s-famine-city-0","sev":"LOW","kind":"LACKS","why":"its baked goods would fall short; HOUSES has no bakers","other":""}
+{"id":"11047","town":"r2s-famine-city-0","sev":"MED","kind":"STATE","why":"gives a room and a meal; CRISIS famine, food deficit 15%","other":""}
+{"id":"28978","town":"r2r-city-44","sev":"MED","kind":"PAIR","why":"wine pressed from local fruit or imported must; same page says no grapes reach the vintner, and TRADE imports none","other":"14602"}
+{"id":"10827","town":"r2r-city-44","sev":"MED","kind":"PAIR","why":"house wine by the jug offered; no grapes reach the vintner","other":"14602"}
+{"id":"11176","town":"r2r-city-44","sev":"LOW","kind":"PAIR","why":"vintner talks about the year's grapes; no grapes reach the vintner","other":"14602"}
+{"id":"16003","town":"r2r-city-44","sev":"LOW","kind":"STATE","why":"2,178 lbs imported; header food ledger says imports cover 2195","other":""}
+{"id":"09301","town":"r2r-city-44","sev":"MED","kind":"PAIR","why":"stone never found worth taking; TRADE made here lists stone, history says walls raised from local quarry stone","other":"23539"}
+{"id":"DONE","lines":2697,"blocks":38,"flags":147}
