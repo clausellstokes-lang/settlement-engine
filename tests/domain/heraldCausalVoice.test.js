@@ -45,6 +45,7 @@ import {
   POOL_PARENT,
   TERMINALS,
   TIME_BANDS,
+  LIVING_FLOOR,
   avalanche32,
   connectiveFor,
   fnv1a32,
@@ -342,11 +343,14 @@ describe('THE TIME BANDS — no digits, and the predicate-only sixth', () => {
   // so a band word that leans on a pronoun (a grudge's "its bearers") misreads after a siege, a ruin
   // or the town itself. Every predicate is said of no one in particular.
   test('no band\'s predicate leans on a pronoun, so the oldest reads after a siege in every legacy mold', () => {
-    const leaning = TIME_BANDS.map((band) => timeBandWord(band, 'predicate'))
+    const leaning = [...TIME_BANDS.map((band) => timeBandWord(band, 'predicate')), LIVING_FLOOR.predicate]
       .filter((word) => typeof word === 'string' && /\b(?:its|their|his|her)\b/i.test(word));
     expect(leaning).toEqual([]);
+    // R3-CODE-C-8 (the reader's L01, the chair's ruling (a)): re-keyed by identity. A siege 77 years gone is
+    // within the life of the record's oldest (the elder ages reach "seventies"): the band says what only
+    // they remember; "older than anyone living" is said at ninety and over.
     const age = yearBand(77).predicate;
-    expect(age).toBe('older than anyone living');
+    expect(age).toBe('older than all but the oldest alive');
     const slots = { settlement: 'Jalaliin', calamity: 'siege', timeband_age: age };
     const lines = ['LEGACY-RECOVERED', 'LEGACY-UNRESOLVED', 'LEGACY-SHIFTED']
       .flatMap((poolKey) => poolMemberTexts({ leaf: 'general', blockId: 'DS-GEN-16', poolKey, slots }));
