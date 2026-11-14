@@ -1899,13 +1899,41 @@ education (no new line); r2r-town-0 (theatres) silent. No line newly silent.
 Gates after the cure: strict 0, ratchet 0, eslint 0, the grid 0 falls, the 16 test files naming tradeListDisplay.js 66/66.
 
 ## FOR THE JOIN
+- EconomicsTab.jsx is held also by census-3 (R2-CODE-B), coherence-upkeep (UPKEEP-6) and income-measure: their hunks are
+  far from this seat's (NeedsNotMet, line 834). ResourcesTab.jsx: no other holder.
+- the PDF's ResourcesProduction / EconomicsTrade and the journal's Resources page print "gold/silver ore" (200 / 182 / 17 towns):
+  the exports seats': call `tradeListDisplay.js :: plainGoodName` over what they print.
 - tradeListDisplay.js: no other lane holds it (census-3's copy differs only by this lane's own W2-C-LEAVES-7/8 commits;
   round-3-cut has no own commit).
 - REGISTERS NAMED: the presumed-things walker's 165 rows (the joined line's own, above). The grid: 0 falls at e6f875058.
 
+| (15) slash label | the needs line and the Resources card printed "gold/silver ore" (data/resourceChains.js) through the seam unchanged | `plainGoodName` (tradeListDisplay.js) over `resourceDisplayName`, at EconomicsTab :: NeedsNotMet and ResourcesTab's chain card (26feb58dd) | the census's 720: needs line 60 -> 0, the card 13 -> 0 (births of the test); records 0/1,824, pills 0 | economicsImportsAreArrivals (15): unit + births on each surface, RED by two plants, GREEN |
+
+## THE TABLE, BY FALSE TOWNS (the census's 720 at f82214b96 unless marked; EXECUTED counts unless marked "as stood")
+| # | row | false towns | writer (this lane's leaf, or NAMED) | state |
+|---|---|---|---|---|
+| 1 | (15) "gold/silver ore" on the needs line + Resources card | 60 + 13 | EconomicsTab / ResourcesTab via plainGoodName | DONE 26feb58dd |
+| 2 | (15b) the same slash label in the tabs' prose fills ("No one here works the gold/silver ore near X", "... can point at the gold/silver ore", the economy desk) | 52 | economyStateProse.js (bareCommonFill) / validationOnPage.js :: resourceGapLines; may move stored publicProse: a DECLARED move | NEXT; measure the publicProse blocks first |
+| 3 | PART 12's carried silence: "Caravan trade goods" / "Exotic imports" on the camel card where the caravan masters stand | 42 (122 cards of 1,824) | tradeListDisplay.js :: CARRIED_GOOD_ROWS (one row: caravan masters' exchange, caravaneer's post, caravanserai) | open; read first |
+| 4 | (r3) the court line names the hall: "Courts without detention." / "Court only" / "Court + Prison" where a Town hall alone drew a court service | 32 (all size town) | defenseDisplay.js :: courtOnRoster / deriveSupportingCapabilities; the PDF twin NAMED (src/pdf DefenseSecurity: call the same leaf) | open |
+| 5 | (r4 ii) "Fully exploited" Fish with no fisher (a city's granary/butchers/bakers; thorps with no house) | 27 (candidate) | ResourcesTab / validationOnPage :: exploitationGroupsShown (read first: a thorp's households may fish) | open |
+| 6 | the chair's row of 15:40: the Medical Readiness note's catalogue bracket (surfaces seat's 772) | not measured | defenseDisplay.js :: deriveSupportingCapabilities (`houseLabelsInText(facts.healerName)`) | open |
+| 7 | "Stone Quarrying" on the Economic Flows card (bar#235) | 7.4 of 8 | EconomicsTab :: EconomicFlowsSection | open |
+| 8 | CRIM_STRUCTURE_DATA "Less predictable than a guild ..." with no guild | 5.6 of 6 | defenseDisplay.js :: CRIM_STRUCTURE_DATA | open |
+| 9 | (16) the Magic tab's chain note raw | 43 as stood | MagicTab.jsx -> the chain magic note reader | open |
+| 10 | (17) outputs run together ("Legal services (...)Military contract services...") | 3 (the census's b) / 31 as stood | EconomicsTab :: EconomicsTab | open |
+| 11 | "Divination and scrying" at a Sage's quarter (PART 12's silence) | 65 would print (193 cards) | NOT CURED: a sage is no diviner by the catalogue; silence is true; FOR THE CHAIR | named |
+| - | (r4 i) "Produced locally" naming metalwork/stone with no house | 0 | (cured upstream) | measured, nothing to cure |
+| - | (r4 iii) exports selling timber the Resources tab calls Unexploited | 0 (14 hits are "Sacred wood", a grove's good: true) | - | measured, nothing to cure |
+| - | (7), (5), (10), (8), (6), (9), (3) medium, (14), (11) | not measured this seat | as PART 12 | open |
+SLASH HOUSE NAMES, NAMED (not goods, not this lane's leaf): "Weavers/Textile workers" (127 towns) and "Docks/port facilities"
+(112) print in the cards' "Via" rows: the catalogue's own names; the label seam's (institutionDisplayName.js); and the
+underworld card's output "Import/export bypass" (91): a good with a slash; plainGoodName would print "Import and export
+bypass": for the chair (a word change).
+
 ## WHAT IS LEFT, line by line
-1. DONE: (r2) (e6f875058); its message to the chair (sent). The yield-label pin re-keyed (6fd8f8c4e).
-2. NEXT: the one table by false towns (PART 12's list, r3, r4, the census rows above), then the cures in its order.
+1. DONE: (r2) (e6f875058); its message to the chair (sent; ACCEPTED by the chair 15:40). The yield-label pin re-keyed (6fd8f8c4e). (15) (26feb58dd).
+2. NEXT: the table above from row 2, in its order.
 
 ## INSTRUMENTS (docs/chair/2026-11-14/probes/W2-C-LEAVES-13/; replace <scratchpad>; with PART 11's run.sh, PART 12's run4.sh, pilldiff.mjs, recdiff.mjs)
 - `pills13.jsx`: PART 12's pills.jsx plus the town's magic fact and crises; `two.mjs <jsonl>` the five silenced goods'
@@ -1915,4 +1943,4 @@ Gates after the cure: strict 0, ratchet 0, eslint 0, the grid 0 falls, the 16 te
 - Frozen trees: a tar of wt without .git, node_modules linked (<scratchpad>/fz-r2 carries e6f875058's measure).
 
 ## STATUS (this seat, current)
-Working. Pushed through 6fd8f8c4e and this docs commit. Nothing running.
+Working. Pushed through 26feb58dd and this docs commit. Nothing running.
