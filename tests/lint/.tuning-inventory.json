@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "34963d56df3a393c82c44afe2f67e3505c2cdea6",
-  "measuredBy": "UPKEEP-10",
+  "measuredAtSha": "982eec996e9c851350022616253510bb661fec7c",
+  "measuredBy": "UPKEEP-15",
   "date": "2026-11-14",
-  "note": "UPKEEP-10: re-taken after the merge ef9f38e80 (taken from the line; this lane defence-file tuning rows)",
+  "note": "UPKEEP-13's P4 (7509b3794) adds DEFENCE_TUNING.people.milPerHead (1): the military score is full at the place's people times it; one row, no value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -131,9 +131,9 @@
     "src/data/defenceWeights.js#DEFENCE_TUNING": {
       "exported": true,
       "idiom": "literal",
-      "keys": 33,
+      "keys": 34,
       "line": 14,
-      "spanDigest": "57869cffa511464733928ec83cbe9de0a1b2afc80cd318d8fdfde5945754a85e",
+      "spanDigest": "de55771b511aa92aa0ab076ee225d8f9b7027f81c0fd6c6df5e95725b89e25f1",
       "leaves": {
         "walls.mil": 30,
         "walls.mon": 20,
@@ -141,6 +141,7 @@
         "wallKind.palisade": 0.6,
         "houseScale.least": 0.8,
         "houseScale.greatest": 1.2,
+        "people.milPerHead": 1,
         "garrison.mil": 28,
         "garrison.mon": 20,
         "garrison.int": 15,
@@ -9250,7 +9251,7 @@
   "unclosed": [],
   "totals": {
     "tables": 280,
-    "keys": 2292,
+    "keys": 2293,
     "unregisteredNamed": 539,
     "bareDecimals": 6879,
     "zeroDependentTables": 10,
