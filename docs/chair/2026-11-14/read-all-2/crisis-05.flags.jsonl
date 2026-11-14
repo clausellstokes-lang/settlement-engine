@@ -1,0 +1,29 @@
+{"id":"06916","town":"r2s-occupied-city-3","sev":"MED","kind":"LACKS","why":"names a temple in every district; HOUSES has Parish churches (10-30) and no temple","other":""}
+{"id":"03373","town":"r2s-occupied-city-3","sev":"MED","kind":"TAG","why":"administration 'manages city affairs'; tag has O and CRISIS is Occupation: officers do not rule freely, Occupation Authority contests licensing","other":""}
+{"id":"02441","town":"r2s-occupied-city-3","sev":"MED","kind":"LACKS","why":"a criminal operation holding part of the place; GOVERNMENT lists no criminal power and HOUSES no criminal house","other":"14046"}
+{"id":"20740","town":"r2s-occupied-city-3","sev":"MED","kind":"STATE","why":"says settlement grew along the road's verge; FOUNDING says a mining camp by royal decree that became permanent when families arrived","other":""}
+{"id":"05303","town":"r2s-occupied-city-3","sev":"LOW","kind":"STATE","why":"'Innkeeper' is Flower Holpop's title per PEOPLE; Ek Chuah Zaz is the coaching-inn keeper","other":""}
+{"id":"03858","town":"r2s-occupied-city-0","sev":"MED","kind":"STATE","why":"says the place is 'run by guild and estate'; GOVERNMENT is Military City Council under a Strong Occupation Authority; no estate power listed","other":""}
+{"id":"00188","town":"r2s-occupied-city-0","sev":"MED","kind":"STATE","why":"one importer brings in all the grain; FOOD word Secure, 59% grown locally, imports 36%, gap 5%","other":""}
+{"id":"27786","town":"r2s-occupied-city-0","sev":"MED","kind":"STATE","why":"potter turns pottery as if at work; LAND gaps: Potter exists but lacks access to clay","other":""}
+{"id":"07347","town":"r2s-occupied-city-0","sev":"LOW","kind":"STATE","why":"pottery fired in a small kiln as if producing; LAND gaps: Potter lacks access to clay","other":"27786"}
+{"id":"03507","town":"r2s-occupied-city-0","sev":"MED","kind":"LACKS","why":"names a temple district; HOUSES has no temple district (Parish churches only); PAST records The Wild Magic as minor, 65 years ago, not effects never faded","other":""}
+{"id":"12116","town":"r2s-occupied-city-1","sev":"MED","kind":"LACKS","why":"names a temple district; HOUSES has no temple district (Parish churches only); the Wild Magic and Arcane Incident are 297 and 289 years ago","other":""}
+{"id":"10818","town":"r2s-occupied-city-1","sev":"LOW","kind":"STATE","why":"brickmaker takes orders for bricks as if at work; LAND gaps: Brickmaker exists but lacks access to clay","other":""}
+{"id":"15887","town":"r2s-occupied-city-2","sev":"MED","kind":"STATE","why":"salt won from local brine; LAND gaps: Salt works lacks access to desert_salt, and Salt flats are absent","other":""}
+{"id":"06897","town":"r2s-occupied-city-2","sev":"LOW","kind":"STATE","why":"salt works service offers raw salt production; LAND gaps: Salt works exists but lacks its input (salt flats absent)","other":"15887"}
+{"id":"00345","town":"r2s-occupied-city-2","sev":"MED","kind":"STATE","why":"half the region's building stone cut here; TRADE imports Stone, LAND lists no stone resource, and 15555 says religious work depends on stone brought in","other":"15555"}
+{"id":"14388","town":"r2s-occupied-city-2","sev":"MED","kind":"TAG","why":"officials and ward officers run the city's affairs between them; CRISIS Occupation (tag has O): town's own officers do not rule freely","other":""}
+{"id":"02938","town":"r2s-occupied-metropolis-1","sev":"MED","kind":"STATE","why":"a sickness thinned families for three seasons; PAST records no plague or sickness (CRISIS is Occupation)","other":""}
+{"id":"20278","town":"r2s-occupied-metropolis-1","sev":"MED","kind":"STATE","why":"plague pit and list of the dead presume a plague; PAST has no plague event","other":"02938"}
+{"id":"20557","town":"r2s-occupied-metropolis-1","sev":"MED","kind":"STATE","why":"a quarantine used to settle scores presumes a plague; PAST has no plague event","other":"02938"}
+{"id":"19069","town":"r2s-occupied-metropolis-1","sev":"LOW","kind":"STATE","why":"'the bereaved and the blamed' belong to a plague; PAST records none","other":"02938"}
+{"id":"06417","town":"r2s-occupied-metropolis-1","sev":"MED","kind":"STATE","why":"pottery thrown and fired as if at work; LAND gaps: Potter exists but lacks access to clay","other":""}
+{"id":"02747","town":"r2s-occupied-metropolis-1","sev":"MED","kind":"STATE","why":"mine with winding gear and ore carts presented as working; LAND Iron Ore Deposits depleted, TRADE: local iron mines exhausted","other":""}
+{"id":"10244","town":"r2s-occupied-metropolis-1","sev":"MED","kind":"STATE","why":"says divine provision fills the food gap; FOOD shows 0% made by magic, Pressured, gap 5%, grazing depleted","other":""}
+{"id":"10908","town":"r2s-occupied-metropolis-1","sev":"MED","kind":"STATE","why":"presumes help beyond ordinary work props up the food supply; FOOD gives 0% by magic, magic low","other":"10244"}
+{"id":"10676","town":"r2s-occupied-metropolis-1","sev":"MED","kind":"STATE","why":"charcoal sold by the sack; LAND gaps: Charcoal burner lacks access to mountain_timber, and 13831 says no timber reaches it","other":"13831"}
+{"id":"10698","town":"r2s-occupied-metropolis-1","sev":"LOW","kind":"STATE","why":"potter fills orders from the shelves as if at work; LAND gaps: Potter exists but lacks access to clay","other":"06417"}
+{"id":"15974","town":"r2s-occupied-metropolis-2","sev":"MED","kind":"STATE","why":"vintner bought a vineyard by lending to its owner; LAND gaps: Vintner exists but lacks access to grapes, and no vineyard or grape resource is listed","other":""}
+{"id":"16428","town":"r2s-occupied-metropolis-2","sev":"LOW","kind":"STATE","why":"charcoal sold in weighted sacks as if produced; LAND gaps: Charcoal burner exists but lacks access to mountain_timber","other":""}
+{"id":"DONE","lines":1914,"blocks":7,"flags":28}
