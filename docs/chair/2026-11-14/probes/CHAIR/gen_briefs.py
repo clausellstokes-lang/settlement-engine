@@ -5278,6 +5278,93 @@ SEATS2['R2-CODE-B-12'] = dict(
 )
 
 
+SEATS2['JOIN-4'] = dict(
+    title="JOIN-4 · the second landing: every lane's new commits merged onto the joined line as points, the registers listed for the one closing refreeze",
+    branch='lane/join-2026-11-14', tip='b6a5f97a', statement=False,
+    intro=("You are JOIN-4, a merge seat of THE TRUE JOIN of the settlement-engine integration program. Nine builder lanes cure false lines on "
+           "the generated town pages. JOIN-1 and JOIN-2 merged all nine onto lane/join-2026-11-14 (THE JOINED LINE) at their tips of 08:50 "
+           "UTC; JOIN-3 finished the first refreeze there (b6a5f97ab) and is now classing the whole check at that tip. SINCE THOSE MERGES "
+           "EVERY LANE HAS MOVED: five hours of cures stand on the lanes and not on the joined line, and seats cut from the joined line "
+           "cannot cure a row whose file another lane has since changed. Yours: THE SECOND LANDING: each lane's tip, read back from origin "
+           "at its merge, merged onto the joined line as one point, in the first join's order and by its second seat's method; then the two "
+           "lanes that were cut from the joined line; then a build and the count at the landed tip. YOU CURE NO PAGE LINE, YOU RE-DERIVE NO "
+           "REGISTER AND YOU SIGN NOTHING: the registers are re-derived ONCE, at the close, on the final tree: you LIST what the close must "
+           "re-derive. JOIN-3 is still writing on this branch (its hand-back, docs only): you are the only one MERGING on it."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your branch, docs/chair/2026-11-14/JOIN-HANDBACK.md, by script (225 lines, some very long): PART 1's sections 1 (the order, "
+          "the method), 2 (every code resolution of the first join: the two files that conflict and how both lanes' cures stand), 3a, 3b "
+          "and 3c (the registers taken whole from the branch side; the pins kept from the branch side inside a hunk; what merged clean "
+          "though both sides moved it), 6 (hazards) and 7 (how the instruments are re-made: THE COMMANDS OF A MERGE); PART 2's P2.1 (the "
+          "chair's rulings: copy the ones still in force into your part) and P2.2 (STEP 0: \"each lane once more at its tip\": THAT IS THE "
+          "FORM OF YOUR WORK, lane by lane, with its verify step) and P2.6 (the two doors' ledger); PART 3 as far as it is written.\n"
+          "3. Nothing else. Not the merge book's doors (you run none), not the lanes' hand-backs, not the chair's handoffs."),
+    first=("FIRST ACT. FULL HISTORY (`git fetch --depth=2147483647 origin lane/join-2026-11-14 lane/integration-2026-11-07` and each lane you "
+           "merge, at its merge; `git rev-parse --is-shallow-repository` prints false: a shallow clone answers merge bases wrongly). Read "
+           "your branch's tip back from origin: it was b6a5f97ab when this was written; later commits by JOIN-3 (docs under "
+           "docs/chair/2026-11-14/ only) are NOT a stop: start from the tip you read and say which. A scratch worktree on a local branch at "
+           "that tip, its own `npm ci`, `git config rerere.enabled true`."),
+    work=("THE LAWS OF A LANDING (the chair's rulings, 2026-11-14 12:49 UTC; each vetoable by the owner; copy them into your hand-back):\n"
+          "(a) ONE MERGE COMMIT A LANE (`git merge --no-ff --no-commit <the full hash you read back>`), in this order: r3-code-c-2026-11-13, "
+          "r3-tabs-2026-11-13, r2-code-a-2026-11-13, powers-follow-up-2026-11-13, w2-fix-data-2026-11-13, w2-write-2026-11-13, "
+          "w2-c-leaves-2026-11-13, r2-code-b-2026-11-13, coherence-upkeep-2026-11-12. BUILDERS ARE PUSHING ON MOST OF THEM: the tip you "
+          "read at the merge IS the point; what a lane pushes afterwards lands later. NOT MERGED, whoever asks: "
+          "lane/upkeep-monotone-2026-11-14 (the defence rating's rebuild: it lands through the defence lane's close, after the tabs lane), "
+          "lane/coherence-veil-2026-11-11, any review branch.\n"
+          "(b) A CODE CONFLICT: the file read whole; BOTH LANES' CURES STAND (the first join met two files and resolved each so: PART 1 "
+          "section 2). A hunk that needs a CHOICE between two behaviours is a STOP FOR THAT LANE: `git merge --abort`, one message to the "
+          "chair with the file, the function and both sides' intent in a sentence each; GO ON with the next lane.\n"
+          "(c) A REGISTER, A BASELINE, A GENERATED FILE OR AN EDGE BUNDLE that conflicts (PART 1 section 3a names nineteen; a new one of "
+          "the same kind is treated the same): THE JOINED SIDE IS KEPT (`git checkout --ours`, `git add`) and the file is LISTED with the "
+          "lane, for the close. One that merges clean though both sides moved it is LISTED too (section 3c's kind). You run no door in a "
+          "writing mode: after your merges the registers are NAMED REDS until the close's one refreeze.\n"
+          "(d) A PINNED FIGURE in a test that BOTH sides moved (section 3b's kind): the joined side kept INSIDE the hunk, every change "
+          "outside the hunk standing, and the pin LISTED (file, title, both figures): it is MEASURED at the close, never summed. A pin "
+          "ONLY THE LANE moved (re-keyed by identity for its own cure) merges clean and stands.\n"
+          "(e) AFTER EACH MERGE, BEFORE ITS COMMIT: the verify step of P2.2 (every file the merge changed equals the lane's blob wherever "
+          "the joined line had not moved it; lint-staged changes nothing). THEN the commit, the hook's three gates at the push (the type "
+          "ratchet, the strict-domain gate, eslint). A gate RED after a merge: find by `git diff` which side's change it is; a ceiling is "
+          "never raised and no error is suppressed: where two lanes' changes are each green alone and red together, that is a COMPOSED "
+          "RED: cure it only if it is one line that keeps both behaviours (its own commit, said in the body); else STOP FOR THAT LANE with "
+          "the error and go on.\n"
+          "(f) EVERY PUSH IS PLAIN, with the explicit refspec, after `git fetch origin lane/join-2026-11-14` and a merge of whatever JOIN-3 "
+          "pushed meanwhile (docs: clean); a push git rejects is fetched, merged and pushed again; never a force.\n"
+          "THE WORK, in this order:\n"
+          "1. THE NINE LANDINGS, by (a) to (f); a table kept in your hand-back as you go (lane; the tip merged and the minute read; the "
+          "tip JOIN-2 merged; the merge commit; conflicts; what was listed for the close).\n"
+          "2. THE TWO LANES CUT FROM THE JOINED LINE (at 035159bc7, before the refreeze): lane/join-nolane-2026-11-14 at 3ccdc0711 (its "
+          "seat has handed back), then lane/join-surfaces-2026-11-14 at the tip you read (its seat is working). The lighting census "
+          "baseline is the joined side's, by (c).\n"
+          "3. AT THE LANDED TIP, each run to a file outside every tree, read by its tail: `npm run build` (does the application build?); "
+          "the twelve-birth grid (`node scripts/census/page-census.mjs --grid`); the test files that name a file in which you resolved a "
+          "code conflict; and THE COUNT: the measuring seat's command (`git fetch origin lane/census-2-2026-11-13`; `mkdir -p <scratch>/c2 "
+          "&& git archive origin/lane/census-2-2026-11-13 docs/chair/2026-11-13/probes/CENSUS-2 | tar -x -C <scratch>/c2`; `sh "
+          "<scratch>/c2/docs/chair/2026-11-13/probes/CENSUS-2/census2.sh <tree root> <an out-dir outside the repository> 4`): its eight "
+          "kinds beside the figures PART 3 or the rehearsal's hand-back gives for the joined line before your merges.\n"
+          "4. ONE CHANGE THAT WAITS FOR TWO LANES, only if BOTH halves are in the landed tree (read the function first): the Tonight "
+          "sheet's famine line \"has lost a second harvest\" prints in towns with neither grain nor mill (54 of 58 as named). The cure is "
+          "TWO LINES IN TWO LANES' FILES: src/domain/summary/tonightSheet.js :: composeTonightSheet's head line calls "
+          "`crisisSummaryForSurface(lead, place, 'tonight', factsOf(source))` with `import { factsOf } from '../facts/factsOf.js'`; the "
+          "function in the crisis summary's vantage file must already take and read an optional fourth argument (the r3-code-c lane's "
+          "half). If it does: make the caller's change, its own commit, red first (an arm on births: the line not printed where the town "
+          "has neither grain nor mill; shown able to red), the strict-domain gate green. If the function's half has NOT landed: change "
+          "nothing and say so.\n"
+          "5. ONE MESSAGE TO THE CHAIR: the landed tip read back from origin; each lane's merged tip; every code conflict and its "
+          "resolution in a line; the stops; the count of files and pins listed for the close; the build's exit; the count's eight kinds.\n"
+          "6. THE HAND-BACK: docs/chair/2026-11-14/JOIN-4-HANDBACK.md (YOUR OWN FILE: JOIN-3 is writing in JOIN-HANDBACK.md): the laws "
+          "copied; the table; every code resolution (file, function, both sides, what stands); THE LIST FOR THE CLOSE (registers, "
+          "baselines, generated files, bundles, pins: each with the lanes whose side was not taken); the remerge patches under "
+          "docs/chair/2026-11-14/probes/JOIN-4/ (`git show --remerge-diff <merge>`, the listed files left out); hazards; how the "
+          "instruments are re-made.\n"
+          "7. THEN, WHILE YOUR COUNT ALLOWS, FURTHER POINTS ON THE CHAIR'S MESSAGES ONLY (\"LAND: <lane> at <hash>\"): that commit merged "
+          "by the same laws, pushed, ONE LINE back with the joined line's new tip.\n"
+          "NOT YOURS: any register's door in a writing mode; the refreeze; the whole check (JOIN-3 is classing it at b6a5f97ab: its "
+          "classes stand for that tip); the two doors; a golden; a page line other than item 4's."),
+    merges='; the merges into YOUR branch of the lanes this brief names, and of the commits the chair names afterwards',
+    when="for each stop (one message a stop; go on meanwhile), with the landed tip and the count (item 5), one line for each later point, and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
