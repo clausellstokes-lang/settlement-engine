@@ -32,7 +32,7 @@ import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js'; // §934.22 item 1(b) — the PROC row
 import { SupplyChainFlow } from './SupplyChainFlow.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
-import { revenuesOffTheLists } from '../../domain/display/tradeListDisplay.js'; // CENSUS-3c R-P 2 — the revenues that left the trade lists
+import { revenuesOffTheLists, tradeListsAsPrinted } from '../../domain/display/tradeListDisplay.js'; // CENSUS-3c R-P 2 — the revenues that left the trade lists; W2-C-LEAVES-7 item 8 — the tab's trade lists
 
 function renderedTradeLabel(economy, direction, item) {
   // §934.22 item 2 — A PRINT GOES THROUGH THE SEAM, A MATCH NEVER DOES. The ownership read
@@ -121,7 +121,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
       })()}
 
       {/* ── Trade flows ───────────────────────────────────────── */}
-      {(e.primaryExports?.length > 0 || e.primaryImports?.length > 0 || e.localProduction?.length > 0) && (
+      {(() => { const trade = tradeListsAsPrinted(settlement); return (trade.exports.length > 0 || trade.imports.length > 0 || trade.local.length > 0) && ( /* W2-C-LEAVES-7 item 8: the tab's lists, one reader (a siege that stops trade: no IMPORTS) */
         <>
       <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
         TRADE FLOWS
@@ -131,7 +131,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
           <View>
             <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.good }}>EXPORTS</Text>
             <BulletList
-              items={e.primaryExports}
+              items={trade.exports}
               tone="good"
               emptyText="None significant"
               itemRender={(item) => renderedTradeLabel(e, 'exports', item)}
@@ -140,11 +140,11 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
         }
         b={
           <View>
-            <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.warn }}>IMPORTS</Text>
+            {!trade.tradeStopped && <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.warn }}>IMPORTS</Text>}
             <BulletList
-              items={e.primaryImports}
+              items={trade.imports}
               tone="warn"
-              emptyText="None significant"
+              emptyText={trade.tradeStopped ? undefined : 'None significant'}
               itemRender={(item) => renderedTradeLabel(e, 'imports', item)}
             />
           </View>
@@ -153,7 +153,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
           <View>
             <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted }}>LOCAL PRODUCTION</Text>
             <BulletList
-              items={e.localProduction}
+              items={trade.local}
               tone="muted"
               emptyText="None recorded"
               itemRender={(item) => label(item)}
@@ -162,7 +162,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
         }
       />
         </>
-      )}
+      ); })()}
 
       {/* Entrepôt + necessity flags */}
       {(e.isEntrepot || e.necessityImports) && (

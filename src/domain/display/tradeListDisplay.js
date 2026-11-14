@@ -576,3 +576,25 @@ export function chainOutputsShown(chain, settlement) {
     return !NOT_A_GOOD_HERE.has(good) && chainMakesHere(chain, good, settlement, roster);
   });
 }
+
+/**
+ * THE TRADE LISTS AS THE PAGE PRINTS THEM, IN ONE CALL (W2-C-LEAVES-7 item 8, 2026-11-14). The Economics tab's Exports,
+ * Imports and "Produced locally" are this file's readers; the PDF's TRADE FLOWS (`pdf/sections/EconomicsTrade.jsx`)
+ * printed the record's three lists raw and the Foundry journal (`foundry/journalPages.js`) its two through
+ * `displayTradeList` alone, so a toll printed as an export, Grain as an import under a siege that stops trade, and
+ * "Stone" as made in a thorp that works no quarry. The tab and both twins read this one composition:
+ *   · `exports`: `exportsAsPrinted` (each pill borne out, an entrepôt's carried good as transit);
+ *   · `imports`: what trade brings in (`importsAsPrinted(s).arriving`), and NOTHING where a siege in force stops trade
+ *     (`chainStateShown.js :: tradeStoppedHere`, #169: the tab leaves its Imports heading out; `tradeStopped` says so);
+ *   · `needed`: a need no import meets (the tab prints it apart, as a need not met);
+ *   · `local`: `localProductionAsPrinted`.
+ * Display only: the record's lists do not change.
+ * @param {Parameters<typeof exportsAsPrinted>[0] & Parameters<typeof importsAsPrinted>[0]} settlement the record
+ * @returns {{ exports: string[], arriving: string[], imports: string[], needed: string[], local: string[], tradeStopped: boolean }}
+ */
+export function tradeListsAsPrinted(settlement) {
+  const { arriving, needed } = importsAsPrinted(settlement);
+  const tradeStopped = tradeStoppedHere(settlement);
+  return { exports: exportsAsPrinted(settlement), arriving, imports: tradeStopped ? [] : arriving, needed, local: localProductionAsPrinted(settlement), tradeStopped };
+}
+import { tradeStoppedHere } from './chainStateShown.js';

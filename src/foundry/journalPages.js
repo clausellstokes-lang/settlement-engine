@@ -37,7 +37,7 @@ import { composeCrisisPage, CRISIS_PAGE_COPY } from '../domain/crisis/crisisPage
 import { stakeLines, unprintedFacts } from '../pdf/lib/crisisPrint.js';
 import { institutionDisplayName } from '../domain/display/institutionDisplayName.js';
 import { resourceDisplayName } from '../domain/display/resourceDisplayName.js';
-import { displayTradeList, revenuesOffTheLists } from '../domain/display/tradeListDisplay.js';
+import { tradeListsAsPrinted, revenuesOffTheLists } from '../domain/display/tradeListDisplay.js';
 import { foodwaysLineOf } from '../domain/foodways.js';
 import {
   overviewHeadline, powerHeadline, economicsHeadline, defenseHeadline,
@@ -310,7 +310,7 @@ function institutionsPage(vm) {
 
 function economicsPage(vm) {
   const e = vm.economics;
-  const fb = e.foodBalance || {};
+  const fb = e.foodBalance || {}; const trade = tradeListsAsPrinted(vm.raw); // W2-C-LEAVES-7 item 8: the tab's lists (a siege that stops trade: no Imports row)
   return md(
     lede(economicsHeadline(e)),
     '',
@@ -319,8 +319,8 @@ function economicsPage(vm) {
     // The resource label seam: a trade list may carry a raw RESOURCE_DATA key beside an
     // authored phrase, and the VTT journal printed both exactly as the record spells them.
     // F11 / CENSUS-3b unit 3: the journal reads the SCREEN's lists (one display reader).
-    kv('Exports', displayTradeList(e.primaryExports, vm.raw, { side: 'exports' }).map(x => resourceDisplayName(x)).filter(Boolean).join(', ')),
-    kv('Imports', displayTradeList(e.primaryImports, vm.raw, { side: 'imports', exports: e.primaryExports }).map(x => resourceDisplayName(x)).filter(Boolean).join(', ')),
+    kv('Exports', trade.exports.map(x => resourceDisplayName(x)).filter(Boolean).join(', ')),
+    kv('Imports', trade.imports.map(x => resourceDisplayName(x)).filter(Boolean).join(', ')),
     fb.display ? kv('Food', fb.display) : (fb.deficit ? kv('Food deficit', fb.deficit) : kv('Food surplus', fb.surplus)),
     (e.incomeSources || []).length ? md('', '## Income', e.incomeSources.map(s =>
       `- ${esc(label(s.source) || s.source)}: ${esc(Math.round(s.percentage))}%`)) : null,

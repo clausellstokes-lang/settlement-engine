@@ -25,7 +25,7 @@ import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.j
 import { generalDeskLines } from '../generalDeskRead.js'; // DS-GEN-18 · the general desk's ONE caller
 import Button from '../../primitives/Button.jsx';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
-import { exportsAsPrinted, tradeMarksOnPage, revenuesOffTheLists, importsAsPrinted, localProductionAsPrinted, chainOutputsShown } from '../../../domain/display/tradeListDisplay.js'; // CENSUS-3b unit 3 — the trade lists' one display reader (kind A, filterDeclared)
+import { tradeListsAsPrinted, tradeMarksOnPage, revenuesOffTheLists, chainOutputsShown } from '../../../domain/display/tradeListDisplay.js'; // CENSUS-3b unit 3 — the trade lists' one display reader (kind A, filterDeclared)
 import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js'; // §934.22 item 2 — the native-resource label seam (the Imports pills)
 import { edged } from '../../../design/edgedBox.js';
 import { foodStoresWords } from '../../../domain/summary/tonightSheet.js'; // the stores sentence's ONE writer (TRIM-2 request 3)
@@ -351,10 +351,10 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // CENSUS-3b unit 3: the lists AS PRINTED — the category errors out, the export wins over the
   // import, every item filtered by its declaration (the luxury class: `tier: ≥ village`). The
   // record's lists are untouched; the legend reads the marks actually on the page.
-  const shownExports = exportsAsPrinted({ ...s, economicState: eco }); // W2-C-LEAVES-4 item 2: each pill borne out by the record (tradeListDisplay.js :: pillBorneOut)
+  const trade = tradeListsAsPrinted({ ...s, economicState: eco }); const shownExports = trade.exports; // W2-C-LEAVES-7 item 8: the trade lists' one composition, the PDF's and the journal's too (each export borne out, pillBorneOut)
   // W2-C-LEAVES item 4(b): the Imports are what trade brings (`importsAsPrinted`, the leaf the gap reader reads); a
   // need no import meets, under any name, prints apart as a need not met (`NeedsNotMet`, at the end of the file).
-  const { arriving: shownImports, needed: unmetNeeds } = importsAsPrinted({ ...s, economicState: eco }); const shownLocal = localProductionAsPrinted({ ...s, economicState: eco }); // W2-C-LEAVES 4(c): what is made here
+  const { arriving: shownImports, needed: unmetNeeds, local: shownLocal } = trade; // W2-C-LEAVES 4(c): what is made here (localProductionAsPrinted)
   const exportMarks = tradeMarksOnPage(shownExports);
   const shownCriticals = terrainCriticals.filter(tc => shownImports.some(imp => imp.toLowerCase().includes(tc.toLowerCase()) || tc.toLowerCase().includes(imp.toLowerCase())));
 
