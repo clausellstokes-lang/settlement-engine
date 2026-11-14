@@ -27,6 +27,12 @@
  *   rr3-metropolis-under_siege+famine-rand-1 (88,895, fed by its fish): "... has lost a second harvest." (55 of the 58
  *   Tonight lines on the 1,722; the Overview's 52 of 54).
  *
+ * (d) THE HOUSE BY WHAT IT IS (the chair's message of 2026-11-14, 11:36 UTC) · a line that names a house the town lacks
+ *   reads the roster by what the house is, never by one spelling of its name: a partial chain's missing houses
+ *   (generators/resourceGenerator.js :: evaluateInstitutionChain; the page's "Work on the timber here stops half-way: no
+ *   sawmill or carpenters' guild finishes it.") are those no house of the same kind stands for. rr3-city-infiltrated-
+ *   rand-5 (12,842): that line beside 'Sawmill (commercial)' and 'Carpenters (5-15)'.
+ *
  * The towns are born as the reader's probes bear them (REVIEW-R3-CODE-C births.mjs :: cfgFor), as the ninth seat's guard
  * (tests/domain/r3c9ReaderLinesTrue.test.js) bears them. Each arm collects first and asserts on the collection, and
  * asserts that it saw the culture whose line it watches (a guard that never meets its line proves nothing).
@@ -106,6 +112,13 @@ const OVERVIEW_NO_GRAIN = ['rr3-thorp-under_siege+famine-rand-2', 'rr3-village-f
 const TONIGHT_GRAIN = ['rr3-hamlet-under_siege+famine-rand-2', 'rr3-town-famine-rand-0'];
 const OVERVIEW_GRAIN = ['r2s-famine-town-1', 'rr3-metropolis-famine-rand-4'];
 
+/** (d)'s towns: a commercial sawmill beside a partial timber chain (the smallest, a town of 1,299; a city; the largest, a
+ * metropolis of 169,385), and towns whose tanners, weavers or apothecary stand beside a partial chain (one under famine). */
+const KIND_TOWNS = ['r2r-town-56', 'rr3-city-infiltrated-rand-5', 'rr3-metropolis-recently_betrayed-rand-4', 'r2s-religious_conversion-city-0', 'r2s-politically_fractured-city-0', 'rr3-town-famine-isolated-1'];
+/** A house name's kind, as resourceGenerator.js :: houseHead reads it. @param {unknown} name */
+const kindOf = (name) => (String(name || '').toLowerCase().replace(/\([^)]*\)/g, ' ').split(/[\s/]+/).find(Boolean) || '').replace(/['’]/g, '').replace(/s$/, '').replace(/y$/, '');
+
+/** @type {Array<any>} */ let kindTowns = [];
 /** @type {Array<any>} */ let famineTowns = [];
 /** @type {Array<any>} */ let fishedOutTowns = [];
 /** @type {Array<any>} */ let liveWaterTowns = [];
@@ -117,6 +130,7 @@ beforeAll(async () => {
   herdTowns = HERD_TOWNS.map(bear);
   fishedOutTowns = FISHED_OUT_TOWNS.map(bear);
   liveWaterTowns = LIVE_WATER_TOWNS.map(bear);
+  kindTowns = KIND_TOWNS.map(bear);
   famineTowns = [...TONIGHT_NO_GRAIN, ...OVERVIEW_NO_GRAIN, ...TONIGHT_GRAIN, ...OVERVIEW_GRAIN].map((seed) => ({ seed, s: bear(seed) }));
 }, 180000);
 
@@ -186,5 +200,22 @@ describe("(c) the famine line's half: handed the record's facts, the official li
     const bare = [...TONIGHT_NO_GRAIN.map((seed) => ({ surface: /** @type {'tonight'} */ ('tonight'), ...famineLine(seed, 'tonight', false) })),
       ...OVERVIEW_NO_GRAIN.map((seed) => ({ surface: /** @type {'overview'} */ ('overview'), ...famineLine(seed, 'overview', false) }))];
     expect(bare.filter((t) => !HARVEST[t.surface].test(t.line))).toEqual([]);
+  });
+});
+
+describe('(d) a partial chain names as missing no house whose kind stands on the roster', () => {
+  it('no partial gap names a house the town holds by another spelling; a house no kind of stands is still named', () => {
+    const seen = kindTowns.map((s) => {
+      const names = (s.institutions || []).map((/** @type {any} */ i) => String(i?.name || ''));
+      const partial = (s.resourceAnalysis?.gaps || []).filter((/** @type {any} */ g) => /limited to intermediate/.test(String(g?.impact || '')));
+      const named = partial.flatMap((/** @type {any} */ g) => g.missing || []);
+      return { town: s.name, sawmill: names.includes('Sawmill (commercial)'), named,
+        held: named.filter((/** @type {string} */ m) => names.some((n) => kindOf(n) === kindOf(m))) };
+    });
+    // The arm met its commercial sawmills.
+    expect(seen.slice(0, 3).map((t) => t.sawmill)).toEqual([true, true, true]);
+    expect(seen.filter((t) => t.held.length)).toEqual([]);
+    // A house no kind of stands is still named (the line is not emptied wholesale).
+    expect(seen.filter((t) => t.named.length).length).toBeGreaterThanOrEqual(3);
   });
 });

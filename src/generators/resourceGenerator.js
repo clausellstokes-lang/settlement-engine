@@ -515,9 +515,14 @@ const supplyOfInput = (rawResource, institutions, evidence = {}) => {
 const evaluateInstitutionChain = (exploitation, institutions, evidence = {}) => {
   const gaps = [];
 
+  // R3-CODE-C-10 (d) (the chair's ruling of 2026-11-14, vetoable by the owner): A LINE THAT NAMES A HOUSE THE TOWN
+  // LACKS READS THE ROSTER BY WHAT THE HOUSE IS, NEVER BY ONE SPELLING OF ITS NAME. A partial chain's missing houses
+  // ("Work on the timber here stops half-way: no sawmill or carpenters' guild finishes it.", validationOnPage.js) are
+  // those no house of the same kind stands for (houseHead, as (3) and (5) read a house): 'Sawmill' is not missing
+  // beside 'Sawmill (commercial)', nor "Carpenters' guild" beside 'Carpenters (5-15)'.
   exploitation.partiallyExploited?.forEach(chain => {
     const missingInsts = chain.processingInstitutions.filter(name =>
-      !institutions.some(i => i.name === name));
+      !institutions.some(i => i.name === name || houseHead(i?.name) === houseHead(name)));
     if (missingInsts.length > 0) {
       gaps.push({
         chain:   chain.rawResource,
