@@ -1,0 +1,1 @@
+r2r-thorp-16,r2r-hamlet-3,r2r-town-29,r2r-city-0,rv5-calm-town-3,r2r-thorp-6;r2s-under_siege-town-0,rv5-occupied-town-0,r2r-town-26,r2r-hamlet-11,rv5-wartime-thorp-4,r2r-metropolis-7;rv5-under_siege+famine-metropolis-1,r2s-monster_pressure-town-2,r2r-town-50,r2r-thorp-34,rv5-famine-town-3,r2r-village-40

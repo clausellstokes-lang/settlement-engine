@@ -1,0 +1,7 @@
+1
+A exit 1
+1
+B exit 1
+1
+C exit 0
+PLANTS-DONE
