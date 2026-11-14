@@ -33,6 +33,7 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF: none so far.
 | 4 | w2-write-side-13-2026-11-14 (the corpus's side branch) | f2bf55f1e (16:00) | — (base 525541b42) | b4dad83e4 | none | clean-both: `RECEIPT_POOLS_DOSSIER_STATE.md`, `corpusCureGuards.test.js`, `proseComposed.walker.test.js`, `proseWiringCensus.walker.test.js`; lane-only leaf `general.generated.js` |
 | (g) | THE CORPUS'S DOOR at b4dad83e4 | `node scripts/generate-dossier-state-prose.mjs --check` | — | — | — | **exit 0**: 69 state blocks / 2951 variants verified; the census not stale, no leaf stale; nothing re-taken, nothing rebuilt |
 | 5 | w2-c-leaves-2026-11-13 | 5f95bf473 (16:04) | 9ac076d5e (JOIN-4 merge 7) | 770e20190 | none | — ((g) `--check` re-run after it: exit 0) |
+| 6 | r2-code-b-2026-11-13 | 2d418c67f (16:07) | a86646b84 (JOIN-4 point 1) | f7288399f | none | — (5 files staged: M10 the journal force tag, M12 the faith contender; law (h): the lane lands first) |
 
 ## 3. Every code resolution
 
