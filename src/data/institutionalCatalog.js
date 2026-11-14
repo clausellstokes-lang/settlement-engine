@@ -602,12 +602,12 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     // One identity name ('Mills (2-5)') from town up; the display seam drops the count so a city never
     // reads 'Mills (2-5)'.
     {
-      shared: { front: 'prime', name: 'Mills (2-5)', face: 'the miller', required: true, desc: 'Grain, fulling, and saw mills along every usable watercourse, many under guild or civic licence.', tags: ['essential'], priorityCategory: 'economy' },
+      shared: { front: 'prime', name: 'Mills (2-5)', face: 'the miller', required: true, desc: 'Wheels turn on every usable watercourse, many under guild or civic licence.', tags: ['essential'], priorityCategory: 'economy' },
       at: {
         thorp: { name: 'Access to external mill', fabric: true, desc: 'Must travel to manor/village mill. Home grinding often illegal.', tags: ['essential', 'agriculture'] },
         hamlet: { name: 'Access to external mill', fabric: true, desc: 'Manor mill with milling monopoly (banalité).', tags: ['essential', 'agriculture'] },
         village: { name: 'Mill', desc: 'Water or windmill with monopoly milling rights. The miller is often the wealthiest and most resented figure in the village.', tags: ['essential', 'food'], priorityCategory: 'crafts' },
-        town: { desc: 'Multiple mills for grain, fulling cloth.' },
+        town: { desc: 'Grain ground at several sites.' },
         city: {},
         metropolis: {},
       },

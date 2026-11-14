@@ -1,6 +1,6 @@
 # W2-FIX-DATA-14: the data lane, its own worklist by the census's command (kept current after every item)
 
-**State: IN WORK. Pushed to a7266c5ec: the merge, the table, LV-CATHEDRAL.** Every figure EXECUTED unless marked PLAUSIBLE.
+**State: HANDED BACK BY FILE at the count (304,451 at 15:45; the next cure with its births, reads and doors would cross 400,000).** Cured and pushed: LV-CATHEDRAL (`a7266c5ec`), FULLING (`ed89033b0`). The merge, the table and the ONE MESSAGE are done. Every figure EXECUTED unless marked PLAUSIBLE.
 
 **Seat.** The fourteenth seat on `lane/w2-fix-data-2026-11-13`, from `6f70f3d04` (read back from origin first: the brief's tip, no stop). Chair: `session_01ACmDYZrFEVXyZEUg1NDxxC`. Brief: `origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-W2-FIX-DATA-14.md`. Nothing at or below 6f70f3d04 is rewritten.
 
@@ -60,9 +60,20 @@ The census's own widest row for this lane, `institutionDescColour.js :: DESC_VAR
 - Read (CENSUS-3's render of every surface on the cured tree): r2r-city-23 (10,036, the smallest), r2s-under_siege-city-0 (the siege's form), r2s-occupied-city-2 (occupation; the shared clause), r2s-famine-metropolis-2 (famine; Great cathedral), r2r-metropolis-8 (344,689, the largest). The line prints on the Economics tab's chain card only. The re-renders differ from the tip's dumps in one more place, a "Patron deity" premium panel absent in two of them: a render-environment difference, not this cure's (PLAUSIBLE; the field diff moves no other family).
 - Guard: `tests/data/w2FixData14Rows.test.js` LV-CATHEDRAL, red 4 of 4 before; each of its three arms red 4 of 4 by a plant not committed. Doors: presumed-things walker red on 3 titles, identical at the merged base (ARM 1 153 rows, ARM 3 one strip in foodGenerator.js, ARM 2 two stale rows: the joined line's, no rise); grid 0 falls; domain-strict, type ratchet, eslint 0; the five test files naming economicData.js green.
 
+### 2 · FULLING, the Mills (2-5) texts of the town and the city: CURED, `ed89033b0`
+
+- RULED by the method (4): no vocabulary word names a cloth trade (`factVocabulary.js :: INSTITUTION_WORDS` has none, and none may be added), so the lines cannot take a condition; the mills keep their grain and say no fulling. The texts name no mill at all (the house's heading does): a text that said "mills" was a new literal for the presumed-things walker (ARM 1 153 -> 159 on the first wording; withdrawn).
+- `institutionalCatalog.js` Mills (2-5): shared "Grain, fulling, and saw mills along every usable watercourse, many under guild or civic licence." -> "Wheels turn on every usable watercourse, many under guild or civic licence."; town "Multiple mills for grain, fulling cloth." -> "Grain ground at several sites." `institutionDescVariants.js` PAIRS: "Several mills, some for grain, some for fulling cloth." -> "Several sites grind the town's grain."; "A handful of mills, grinding grain and fulling cloth." -> "The town's grain is ground at a handful of sites."; "Mills for grain, fulling, and sawing line every usable stream, many licensed by guild or city." -> "Wheels turn on every usable stream, many licensed by guild or city."; "Every workable watercourse turns a grain, fulling, or saw mill, most under a guild's or the city's licence." -> "Every workable watercourse turns a wheel, most under a guild's or the city's licence."
+- RE-KEYED BY IDENTITY in the same commit: the colour column's two town keys (`institutionDescColour.js`), the declaration ledger's four rows' `text` (`docs/census/declarations/institutionDescVariants.INSTITUTION_DESC_VARIANTS.json`, ids unchanged); the presumed-things register's six rows of the old texts out by its own door (`node scripts/presumed-things-door.mjs --shrink`: removed exactly those six, `--check` before named them and nothing else).
+- Counts on the 720: Mills descriptions naming fulling 360 -> 0 (the census's false towns 53 -> 0). DECLARED MOVE: 360 births, `.institutions[].desc` only (the Mills row's own text; the variant pick is by hash, no draw moves).
+- Read where it prints (Institutions tab, PDF, journal, rendered on the cured tree): r2s-occupied-town-2 (town 310, the smallest; occupation), r2r-town-1 (town), r2s-under_siege-town-2 (siege), r2s-famine-city-0 (famine city), r2r-metropolis-8 (344,689, the largest): true. The four variant forms read in their records (the same field on the same surfaces): r2s-under_siege-town-0, r2s-famine-town-2 ("Several sites..."), r2s-famine-town-0, r2r-town-3 ("...a handful of sites"), r2s-under_siege-city-0, r2r-city-0 ("...turns a wheel"), r2s-under_siege-city-2, r2r-city-2 ("...every usable stream").
+- Guard: the FULLING test of `tests/data/w2FixData14Rows.test.js`, red 5 of 5 with the old texts planted (not committed), green after. Its second arm (the mills keep a description) was not planted (NOT SHOWN ABLE TO RED).
+
 ## 4. EVERY NEW OR CHANGED LINE, with the towns it was read in (the owner's veto list)
 
 - economicData.js, both cathedral rows: the service "cathedral repairs", printed "Cathedral repairs here depend on stone brought in[, which a siege, a closed road or a blockade would cut off]." / "... depend on stone from outside, which the siege has cut off." (r2r-city-23, r2s-under_siege-city-0, r2s-occupied-city-2, r2s-famine-metropolis-2, r2r-metropolis-8).
+
+- The Mills (2-5) texts, as section 3 item 2 gives them (the towns there).
 
 ## 5. NAMED for the surfaces lane (r4), and FOR THE JOIN
 
@@ -74,12 +85,14 @@ The census's own widest row for this lane, `institutionDescColour.js :: DESC_VAR
 ## 6. THE REGISTERS NAMED STALE (re-derived once, at the close; nothing banked here)
 
 - `tests/lint/.lighting-census-baseline.json`: the merge took JOIN-3's tuple; this lane's R3C-REVOLTNOTE guard title and this seat's new test file (`tests/data/w2FixData14Rows.test.js`, one title per cure) are not in it.
-- The generator golden master (`tests/property/generatorGoldenMaster.test.js`): the cathedral cure moves 100 births' `affectedServices` (carried red at the lane already).
+- The generator golden master (`tests/property/generatorGoldenMaster.test.js`): the cathedral cure moves 100 births' `affectedServices`, the fulling cure 360 births' Mills `desc` (carried red at the lane already).
+- `docs/content/wiring-census.json` (the prose wiring census): carried stale (HANDBACK-13); the reworded description texts are in its pools: not re-taken.
+- The presumed-things register: moved only by its own door in the fulling commit (six rows out); no other register touched.
 - The edge-shared bundles (`supabase/functions/_shared/*Bundle.js`): stale for every data cure here (carried, HANDBACK-13).
 
 ## 7. WHAT IS LEFT, line by line (the table's order)
 
-2. FULLING (53): the Mills (2-5) texts of the town and the city (catalogue `institutionalCatalog.js` shared/town and the four variants in `institutionDescVariants.js` PAIRS) name fulling where no cloth trade stands. No vocabulary word names a cloth trade (and none may be added): the cure is SILENCE on fulling, the mills keep their grain; the colour column and the declaration ledger re-keyed by identity in the same commit.
+2. FULLING: CURED (section 3 item 2).
 3. Dispute arbitration "before a magistrate" with no court (25, tab): read ten, then cure or strike.
 4. The siege and famine cells (23 by the census; HANDBACK-13's siege rows beside them, re-measure): crisis twins in the shape of 18fcc08ca / 43e80bfde.
 5. #158 the grain clause (19 prints), #36 the salt fish (18), #233 herbs and spices (12): re-read at this tip.
@@ -87,3 +100,11 @@ The census's own widest row for this lane, `institutionDescColour.js :: DESC_VAR
 7. The generated state prose (dossierStateProse/*.generated.js): place by holder; their door is the generator.
 8. THE POOL GUARD'S TWO ROWS (plotHooks:succession_crisis, plotHooks:resource_scarcity): as HANDBACK-13 section 5 item 4.
 9. Parked and carried: HANDBACK-13 section 5 item 5.
+
+## 8. How the instruments are re-made (all in the seat's scratchpad; minutes)
+
+- Scratch worktree on local branch `w14` at the lane's tip, `npm ci` there (it wrote `core.hooksPath=.husky/_`; refs and local config snapshotted before and after every push and suite: no other change).
+- THE CENSUS: `git archive origin/lane/census-3-2026-11-14 docs/chair/2026-11-14/probes/CENSUS-3 | tar -x -C <s>`; an integrity-counted archive of the tip with node_modules linked, then `git init -q && git add -A` IN THE ARCHIVE (the writer trace runs `git grep`; a bare archive leaves every row "(untraced)"); `COLD_CUT=<ROUND-3-CUT.json> COLD_INC=<ROUND-3-CUT-INCREMENT.json> HOLDERS=<probes>/holders.tipA.json sh <probes>/census3.sh <archive> <out> 4 --files <list>` (the cold lists by `git show origin/lane/round-3-cut-2026-11-13:docs/chair/2026-11-13/<f>`). `--seeds <file> --count-only` renders a few towns on every surface in about a minute.
+- Births only: `TREE=<tree> OUT=<out> SEEDS=<probes>/seeds.txt node <probes>/births.mjs` (about 5 minutes); a cured tree is copied with `git ls-files -z | tar --null -T - -cf - | tar -x -C <dir>` (not xargs: it splits the archive).
+- `fdiff.mjs <before.gz> <after.gz> [path-regex]` (field diff by family), `q-town.mjs <corpus> <seed> [regex]` (tier, crisis, roster, matching houses), `q-row.mjs <hits.json> <writer> [n]` (a census writer's hits by sentence), `holders.sh <file>` (each of the 75 lanes of 11-12..11-14 whose copy differs from integration's, and whether it is a state of this lane's file).
+- The merged base archive (81df6fb80, node_modules linked) for classing reds; the lane-file test list is the tests naming the lane's src/data files by import path.

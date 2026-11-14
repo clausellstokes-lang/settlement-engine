@@ -43,4 +43,20 @@ describe('W2-FIX-DATA-14: the measured rows in the data lane\'s files', () => {
       expect(lines.some((l) => /^Cathedral repairs here depend on stone/.test(l)), `${seed} keeps the cathedral's need line`).toBe(true);
     }), 'no cathedral need line names worship, pilgrimage or teaching');
   }, 240_000);
+
+  // FULLING (53 of the census's 720, every one read false where read): the Mills (2-5) texts of the town and the city
+  // named fulling where no weaver, fuller, dyer, tailor or wool stands (r2r-town-1, r2s-under_siege-town-2,
+  // r2s-famine-city-0). The vocabulary has no word for a cloth trade, so the mills keep their grain and say no fulling (the texts name no mill: the house's own heading does);
+  // r2r-metropolis-8 (the largest) and r2s-occupied-town-2 (the smallest, 310) keep a Mills description.
+  test('FULLING: no Mills description names fulling; every town keeps its mills', () => {
+    expectNoSeedFailures(collectSeedFailures(['r2r-town-1', 'r2s-under_siege-town-2', 'r2s-famine-city-0', 'r2s-occupied-town-2', 'r2r-metropolis-8'], (seed) => {
+      const town = /** @type {any} */ (bornCensus(seed));
+      const mills = (town.institutions || []).filter((/** @type {any} */ i) => i.name === 'Mills (2-5)');
+      expect(mills.length, `${seed} has its mills`).toBeGreaterThan(0);
+      for (const m of mills) {
+        expect(String(m.desc || ''), seed).not.toMatch(/fulling/i);
+        expect(String(m.desc || ''), `${seed} keeps a description of its mills`).toMatch(/\bgrain\b|\bwheels?\b/i);
+      }
+    }), 'no Mills description names fulling');
+  }, 240_000);
 });
