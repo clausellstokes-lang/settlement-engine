@@ -1871,8 +1871,13 @@ PART 11's (1)-(17) and PART 12's rulings STAND.
 
 ## THE FIRST ACT (EXECUTED)
 (1) THE MERGE: `git merge --no-ff origin/lane/join-2026-11-14` at its tip 600b9f743 -> f82214b96. NO CONFLICT (merge base
-9ac076d5e). After it: the type ratchet 0, the strict-domain gate 0, eslint 0. The 123 test files naming this lane's files:
-see Items. THE PRESUMED-THINGS WALKER is red (3 tests, 165 rows) IDENTICALLY at the joined tip 600b9f743 itself, at the
+9ac076d5e). After it: the type ratchet 0, the strict-domain gate 0, eslint 0. The 123 test files naming this lane's files
+at f82214b96 (EXECUTED, vitest shared tier, 2 workers): 114 green, 7 red; each run again at both sides: ALL SEVEN RED AT THE
+JOINED TIP 600b9f743 ITSELF (none composed by the merge): dossierPhoneFloorAllViews (2 tests), crimeLineDisqualifiers
+(3), gapLineHousesByKind, famineStoresOneRounding, proseNumerics (the baseline), defenseTabFlow (STOP-2, the dead-magic
+"Arcane defense" group): the join's, NAMED for the merge seat. economicsChainYieldLabel was red at this lane's own tip
+3285d3280 too (the twelfth seat's b9b4033e3 left its pin un-re-keyed): RE-KEYED BY IDENTITY in 6fd8f8c4e (a header over
+the outputs a card bears out; 5 of 24 seeds had cards whose every output is unborne), green. THE PRESUMED-THINGS WALKER is red (3 tests, 165 rows) IDENTICALLY at the joined tip 600b9f743 itself, at the
 merged tip and after this seat's cure: the join's, not composed by this merge; this lane's rows in it are only PART 12's
 two named SERVICE_OUTPUTS hits. NAMED for the merge seat (not a composed red: red on one side before the merge).
 (2) THE WORKLIST: census3.sh at f82214b96 (720 births, 4 workers, births+render 894 s, count+trace 487 s, EXIT 0) with
@@ -1899,7 +1904,7 @@ Gates after the cure: strict 0, ratchet 0, eslint 0, the grid 0 falls, the 16 te
 - REGISTERS NAMED: the presumed-things walker's 165 rows (the joined line's own, above). The grid: 0 falls at e6f875058.
 
 ## WHAT IS LEFT, line by line
-1. DONE: (r2) (e6f875058); its message to the chair.
+1. DONE: (r2) (e6f875058); its message to the chair (sent). The yield-label pin re-keyed (6fd8f8c4e).
 2. NEXT: the one table by false towns (PART 12's list, r3, r4, the census rows above), then the cures in its order.
 
 ## INSTRUMENTS (docs/chair/2026-11-14/probes/W2-C-LEAVES-13/; replace <scratchpad>; with PART 11's run.sh, PART 12's run4.sh, pilldiff.mjs, recdiff.mjs)
@@ -1910,4 +1915,4 @@ Gates after the cure: strict 0, ratchet 0, eslint 0, the grid 0 falls, the 16 te
 - Frozen trees: a tar of wt without .git, node_modules linked (<scratchpad>/fz-r2 carries e6f875058's measure).
 
 ## STATUS (this seat, current)
-Working. Pushed through the (r2) docs commit. Nothing running but the 123 lane test files at f82214b96 (to a file).
+Working. Pushed through 6fd8f8c4e and this docs commit. Nothing running.
