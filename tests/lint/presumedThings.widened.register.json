@@ -15,7 +15,8 @@
   "after-base: powers": "another lane's line, written after the instrument's base: its holder declares it when its lane joins the line (banked BY HAND at STYLE-2-MERGE point 49 under the chair's ruling on STOP 49a (ii)/(iii), record 405, against the letter of the door's base rule; holder: the powers lane)",
   "after-base: leaves-3": "another lane's line, written after the instrument's base: its holder declares it when its lane joins the line (banked BY HAND at STYLE-2-MERGE point 49 under the chair's ruling on STOP 49a (ii)/(iii), record 405, against the letter of the door's base rule; holder: the third leaves lane)",
   "after-base: defence": "another lane's line, written after the instrument's base: its holder declares it when its lane joins the line (banked BY HAND at STYLE-2-MERGE point 49 under the chair's ruling on STOP 49a (ii)/(iii), record 405, against the letter of the door's base rule; holder: the defence lane)",
-  "after-base: after-merges": "another lane's line, written after the instrument's base: its holder declares it when its lane joins the line (banked BY HAND at STYLE-2-MERGE point 49 under the chair's ruling on STOP 49a (ii)/(iii), record 405, against the letter of the door's base rule; holder: the seat after the merges (its lane, W2-A-LEAVES, landed already))"
+  "after-base: after-merges": "another lane's line, written after the instrument's base: its holder declares it when its lane joins the line (banked BY HAND at STYLE-2-MERGE point 49 under the chair's ruling on STOP 49a (ii)/(iii), record 405, against the letter of the door's base rule; holder: the seat after the merges (its lane, W2-A-LEAVES, landed already))",
+  "after-base: r3-code-c": "this lane's truer rewording of a line the line had banked (same file, same slot; its old row shrunk out at acee99f3a), true wherever it prints by a key or a branch no draw door reads: the crisis kind of the vantage table, the fort-and-force branch of the validator (banked BY HAND under the chair's ruling of 2026-11-14 04:05Z on R3-CODE-C-6's STOP, against the letter of section 2m, as point 49's seven; held true by tests/generators/r3cRekeyedLinesTrue.test.js; owed FOR THE JOIN: the vantage table and the validator's reasons go through a draw door, and the rows leave by --shrink)"
  },
  "arm1": {
   "src/components/AccountPage.jsx": [
@@ -12303,6 +12304,18 @@
     "family",
     "Anyone new inside {name} is another mouth to feed and perhaps a spy for the besiegers, and is treated as both.",
     "050d2d3627066975"
+   ],
+   [
+    "occupation",
+    "after-base: r3-code-c",
+    "Everything sold in {name} pays the occupiers their due first, and those who sell keep their prices and their opinions to",
+    "e77ca269515be2ef"
+   ],
+   [
+    "war",
+    "after-base: r3-code-c",
+    "With men called away to the war, {name} has fewer hands than before to see to its own safety.",
+    "7e7367a3ed3f5004"
    ]
   ],
   "src/domain/customContentSchema.js": [
@@ -29117,6 +29130,12 @@
     "family",
     "A river settlement should exploit its water access: mills, docks, or fishmongers.",
     "42b0b9c83c65fd57"
+   ],
+   [
+    "armedForce",
+    "after-base: r3-code-c",
+    "Embattled region. Infrastructure exists on paper, but the defences are so underfunded that they are barely maintained an",
+    "d58d6c2b46cc28f7"
    ]
   ]
  },
