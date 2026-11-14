@@ -6,13 +6,14 @@ Step 1 for a1481aaf7..994733bcd is `REVIEW-W2-FIX-DATA-4-LINES-READ.md` (c2e9415
 is the first reader's `REVIEW-W2-FIX-DATA-3-LINES-READ.md` (6dc6d84d5), which stands. Every figure is EXECUTED unless
 marked PLAUSIBLE. Probes: `probes/REVIEW-W2-FIX-DATA-4/`.
 
-## THE VERDICT: NOT CLEAR, on three findings that are the stage's own
+## THE VERDICT: NOT CLEAR, on four findings that are the stage's own (one HIGH, three MEDIUM)
 
 | # | rank | the stage's own / carried | finding | how measured |
 |---|---|---|---|---|
 | 1 | **HIGH** | **THE STAGE'S OWN** (a draw it moved) | **r2r-thorp-58, Tallpatan, a thorp of 7**, and **r2s-indebted-thorp-0, Makrokastro, a thorp of 12**. Each PDF prints under The Migration's lasting effects: "Newcomer and old-family districts remain socially distinct." A thorp has no districts (kind d). At the base 4114cf5a6 the same towns printed "Spellcasting now requires a licence…" or "Watch towers…", and in Makrokastro's Migration slot "A resettlement compact governs where new arrivals may hold property". The stage's history re-deal put the line there. Writer: `src/data/historyData.js:1373`, a lasting-effect row with no tier condition, though the stage gave its district siblings (`HISTORY_QUARTER_WORDS`, the fire texts) tier twins. The class is CARRIED and shrinking: thorps and hamlets with a district or quarter word in history fall from 91 (base) to 39 (tip). In those 39 the same line, or its slot's, printed at the base. These 2 are the only new ones. | EXECUTED: census 720 at the tip and the base, history fields diffed per town; both PDFs rendered through the soak harness |
 | 2 | **MED** | **THE STAGE'S OWN** (the first reader's A01, left uncured) | **r2s-infiltrated-metropolis-3, Vatantash.** The arrival reads: "The hammering echoes through all of Vatantash, and the place plainly lives by its forges." Iron & Metalwork is 4% of income (8th source; Market Taxes first at 26%), and the same page says two or three trades are named, not one. At the base no forge line printed here. At 994733bcd it still prints: the eleventh seat measured it (HANDBACK-11 §5 item 1) and did not cure it. A second new print in my fresh births: **rv4-any-metropolis-under_siege-7** (a metropolis under siege), A04 "… lives by its forges: the clang of iron is in every lane". There Iron & Metalwork is 6th at 6% and Market Taxes first at 31%; the base printed no forge line in that town. The class (`arrivalProse.js:65` A01 and A04) is CARRIED: 54 prints at the tip (72 at the base), metal never the first source in any of them; 52 of the 54 printed a forge line at the base too. | EXECUTED: `forge.mjs` over 936 births at the tip and the base |
 | 3 | **MED** | **THE STAGE'S OWN** (the eleventh seat, not named) | **`docs/content/wiring-census.json` is stale at 994733bcd.** `node scripts/wiring-census.mjs --check` exits 1 ("is stale"); it exits 0 at a1481aaf7. `tests/lint/proseWiringCensus.walker.test.js` reds 2 titles at the tip, both green at a1481aaf7: "⭐ THE DRY READ: both modes, and the one that writes is not among them" and "the committed census is byte-identical to a fresh build, and the stamp is live". The cause is the smelter's two new sibling sets (930836ac5). The door's write moves `lines` 1109 → 1115, `colour` 758 → 752, and adds `institution: mine` 6 and `institution: smith` 6. The register was not re-derived through its own door, and HANDBACK-11 names neither red. | EXECUTED at both trees; the write was made in a scratch worktree, read and restored |
+| 4 | **MED** | **THE STAGE'S OWN** (carried writers newly placed by the stage's draw moves; the cause is PLAUSIBLE, the prints EXECUTED) | Found by step 7's new tip hits and read against the record. Each line prints at the tip and not at the base in the same town. **r2r-metropolis-11** (riverside metropolis, no docks on the roster): a current tension, also on the Summary, reads "A fire that began in the riverside quarter consumed barges, warehouses, and wharf infrastructure across whole districts…" (`historyRouteContext.js:55`). **r2s-recently_betrayed-town-3** (plains town of 322, no sawmill, no timber house): "An uncontrolled surge of magic left its mark on the lumber yards and sawmill district…" (`historyRouteContext.js:44`). **r2r-city-50** (no tannery, no chandler): the Offal service "By-products sold to chandlers and tanners." (`institutionServices.js:600`; HANDBACK-10 §4 lists Offal as not read). None of the three texts changed in the stage. | EXECUTED: CENSUS-2 at the tip and the base, each hit read against its town's record |
 
 The one thing the chair must rule (finding 1's cure): give the lasting effect a tier twin, as the stage did for its district
 siblings, or silence it below town. Either is a declared move of `history.historicalEvents[].lastingEffects[]`.
@@ -77,8 +78,10 @@ at the tip and at the base (`cures.mjs`, `brew.mjs`).
 - **No new word in the vocabulary:** EXECUTED. `src/domain/facts/` is byte-identical between the line 976db5b19 and the tip.
 - **No draw added or moved undeclared:** the eleventh seat added none. For the whole stage, the history re-deal above
   (PLAUSIBLY declared).
-- **The draft shift record** (`W2-FIX-DATA-shift-record.DRAFT.json`): measured at ddadf07c5, before the smelter. [STEP 7
-  AND THE RECORD'S RE-MEASURE: below, filled when run.]
+- **The draft shift record** (`W2-FIX-DATA-shift-record.DRAFT.json`, measured at ddadf07c5, before the smelter),
+  RE-MEASURED at 994733bcd, all 51 registered suites as files: **378 passed, 5 failed**, the record's figures. The 48
+  UNMOVED are green. The 3 declared moved (generator-golden-master 1, espionage-dormancy-fence 1, dossier-prose-manifest
+  3) are red, as declared. The smelter adds no surface to the moved list; the size of each move was not re-measured.
 - **The page shows ratings, not machinery:** no new line of the eleventh seat names machinery. The stage's earlier lines:
   the first reader's step 1.
 
@@ -114,7 +117,7 @@ exclusion (no cure was made).
 | `scripts/.prose-byte-baseline.json` | `proseCorpusBytes.test.js` green at the tip | equal |
 | `tests/lint/.lighting-census-baseline.json` | `sovereigntyLightingContract.walker.test.js` green at the tip (red at the base: the file count) | equal |
 | `docs/census/declarations/…INSTITUTION_DESC_VARIANTS.json` | `institutionProseDeclared.test.js` green at the tip. The smelter rows read `colour: false, needs: []`: the ledger reads `DESC_VARIANT_DECLARATIONS`, and the sibling sets' needs are not in this column (as for every sibling set) | equal |
-| `scripts/census/page-census.register.json` | NOT RE-RUN (the 720 render's cost); see "not measured" | |
+| `scripts/census/page-census.register.json` | `--grid` exit 0, 0 falls; the 720 arm not re-run | grid equal |
 
 ## Step 6 — the gates (my run at 994733bcd, through `sh scripts/gate-tail.sh`)
 - `npm run typecheck:domain:strict`: **exit 0** (1113, ceiling 1113). `npm run typecheck:ratchet`: **exit 0** (167, ceiling
@@ -140,8 +143,23 @@ exclusion (no cure was made).
 Refs and the shared local config were compared before and after every suite: unchanged. `npm ci` wrote
 `core.hooksPath=.husky/_` once at the start; it was removed at once and the config compared equal.
 
-## Step 7 — CENSUS-2 at the tip and the base
-[filled when the run ends]
+## Step 7 — CENSUS-2 at the tip and the base (EXECUTED)
+`census2.sh <tree> <out> 4 --files <the stage's 20 src files vs the line>`: both runs exit 0 (tip: births and render
+926 s, count 168 s; base: 1,039 s and 189 s). Refs and the shared config compared before and after: unchanged.
+Patterns, towns, base → tip: a 713 → 707 · b 70 → 70 · **c 271 → 273** · **d 381 → 387** · e 83 → 60 · f 720 · g 720 ·
+**h 0 → 20**. The pattern-wide d and h rises come from writers outside the stage's files (the line's people and power
+rows: run-together severities, role labels, `{N}` slots); none of the 37 new d or 64 new h hits traces to a stage file.
+By the stage's files (towns), **rises**: institutionDescVariants a 52 → 153 and b 5 → 7; institutionDescColour c 1 → 2;
+institutionServices a 92 → 95. Falls: historyGenerator a 62 → 6 and c 15 → 0, cultureProfiles a 52 → 0 and c 88 → 21,
+stressTypes a 50 → 0, historyData a 53 → 24 and c 17 → 0, historyDescVariants a 28 → 0 and c 7 → 0, the catalogue
+a 51 → 34, arrivalProse a 19 → 5, services b 15 → 11, inland b 2 → 0, historyRouteContext c 8 → 0. The tip's file rows
+match HANDBACK-10 §4. The stage's 154 new tip hits, read: 130 the burial ground's and Last rites' priest twins
+(clergy/church; the priest is fetched from elsewhere: TRUE, as the statement reads them, and 4 of my 30 literal reads);
+2 "brought in time" under a siege (a priest brought: TRUE); 9 quarry history lines in villages and towns with no quarry
+(the Great Construction's stage-reworded twins and the foreman line; 6 of the 9 towns printed a quarry-kind hit at the base
+too: LOW, the first reader's H11 class); **finding 4's three**; the magistrate (r2r-town-16: a Town hall holds the court,
+HANDBACK-7's reading); the fulling mills (PARKED, a cloth word); Radhagrad's Compact (named); one "urban" druid line in a
+village (r2s-slave_revolt-village-0, the colour column: LOW); 2 boatyard "fishing boats" (ACCEPTED by the chair).
 
 ## Step 8
 - **Each reworded data row on every surface (EXECUTED).** In the 20 census towns rendered on every surface, 56
@@ -160,10 +178,11 @@ Refs and the shared local config were compared before and after every suite: unc
 - `src/data/historyData.js:1373` "Newcomer and old-family districts remain socially distinct" below town (finding 1).
 - The catalogue's smelter text's second sentence where the mine or the smith is absent (the twin's form).
 - `arrivalProse.js:65`'s "and the place plainly lives by its forges" (the eleventh seat's own recommendation).
+- `historyRouteContext.js:44,55`'s sawmill-district and wharf location words where the record has no sawmill or docks; the Offal service's "chandlers and tanners" where neither stands.
 
 ## What I did not measure
 - The twelfth seat (b75f78914's commits).
-- `scripts/census/page-census.register.json` re-derived on the 720 (its `--grid` arm: below if run).
+- `scripts/census/page-census.register.json` re-derived on the 720. Its `--grid` arm at the tip: exit 0, 0 falls.
 - Steps 2–8 for lines the first reader read: only its own list, as it stands, with its findings re-checked where I cite
   them (Vatantash, Radhagrad).
 - The display one-liner `institutionVocabulary.js:335` in a live browser (the harness did not print it).
