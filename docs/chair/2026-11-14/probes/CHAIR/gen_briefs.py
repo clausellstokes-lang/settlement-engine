@@ -2240,6 +2240,75 @@ SEATS2['UPKEEP-10'] = dict(
 )
 
 
+SEATS2['R2-CODE-B-8'] = dict(
+    title="R2-CODE-B-8 · round two's second code lane's close, finished: two reds read, the twenty-seven classed, the census, the final statement",
+    branch='lane/r2-code-b-2026-11-13', tip='327035149', statement=True,
+    intro=("You are R2-CODE-B-8, the eighth seat on round two's second code lane of the settlement-engine integration program (lane/r2-code-b-2026-11-13). The "
+           "lane cures false lines on the Tonight sheet, the cast cards, the crisis cast and hooks, the NPCs, Relationships, Services and Daily Life tabs, the "
+           "chain card's facts, the quick guide, the traditions, the faith reading and the stress summaries. ITS LIST IS DONE AND THE INTEGRATION LINE IS "
+           "MERGED INTO IT (0aa0cce00, with the registers re-derived; accepted by the chair at 9e8d2af22). The seventh seat ran the whole suite once in six "
+           "shards, classed it, and handed back at its context mark with the rest of the close written out. Yours: that rest and the lane's ONE final "
+           "statement. NO NEW CURE OF A PAGE LINE IS YOURS beyond what the checks ask."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/R2-CODE-B-HANDBACK.md, BY LINE RANGE, BY SCRIPT (the file is long; open only this): PART 7 WHOLE (from "
+          "the line \"# PART 7\" to the end, about fifty-five long lines: the merge's hunks; the registers and pins re-derived; section 2m's exits; the two "
+          "stops as the chair ruled them; THE WHOLE SUITE classed; FOR THE DECLARATION PASS; \"HAND BACK\": THE EXACT NEXT STEP, in order: THAT IS YOUR "
+          "LIST; the instruments and how they are re-made). Of the older parts only what the statement gathers, by heading, by script: PART 6's ROW 2 (the "
+          "census's counts at the base and at the sixth seat's tip, and the field diff by family) and the FOR THE JOIN and new-words paragraphs PART 7's "
+          "next step names.\n"
+          "3. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (docs/INTEGRATION_STYLE_2_2026-11-09.md, the section headed "
+          "\"## 2m.\": about forty lines; by script), before the first register you touch."),
+    work=("THE CHAIR'S RE-RULING ON THE QUICK GUIDE (2026-11-14 06:40 UTC, on the fact the seventh seat found; vetoable). (i) THE HARBOUR NEEDS NO NEW "
+          "WORD: the Greek frame's member of QUICK_GUIDE_SIBLINGS already declares `navigable`; ruling 5 stands (a coast's harbour by its water); the "
+          "chair's \"parked with its word\" of 04:58 is WITHDRAWN. (ii) THE STRUCK VARIANTS ARE NOT MADE TWINS NOW: a variant that a replace() cuts from an "
+          "admitted frame is not a literal standing apart from its declaring member (class 2's case is a constant or a moved literal): to make it a member "
+          "moves HOW the variant is chosen, from the replace to the door's twin rule, and the size gate and the guild-house gate have no atom of the door's "
+          "yet: that is the re-route class (3) keeps for the pass. All eighteen stay RED AND NAMED under FOR THE DECLARATION PASS. (iii) WHAT CHANGES IS "
+          "THE ROWS' WORDING in your statement, and it is all you do with them: for each of the fifteen quick-guide hits say (a) whether the literal is a "
+          "replace()'s FIRST argument (a matcher of text the frame already holds: no page prints it from there) or its SECOND (text a page prints); (b) "
+          "whether the frame's own member already declares the hit's atom (the seventh seat's fact: `market` on the mesoamerican and south-asian frames, "
+          "`institution: temple` on the south-asian, `navigable` on the Greek, whose gate is scopePhrase's own water branch with `water === 'maritime'` "
+          "for the harbour): such a hit is a SHAPE ROW (no gate changes at the pass, no new word); (c) for the rest (the size hits `streets` and "
+          "`quarters`; the faith reading's three) the code condition and the atom it would need. The fact-layers reader's row stays as ruled: named, both "
+          "contents given, nothing re-keyed.\n"
+          "THE WORK, in this order, pushed as made:\n"
+          "1. THE TWO UNREAD REDS COMPOSED AT THE MERGE (tests/lint/defenceFactReaders.walker.test.js \"every file reads exactly its banked count\"; "
+          "tests/lint/proseNumerics.test.js \"legacy debt moved/fell\", 193 rows): read each at the tip, with the test's own header and its door. A count- "
+          "or line-keyed register that a merged file only MOVED (the same reads, the same debts, at new lines or in a file both sides changed) is re-derived "
+          "through its own door, its own commit, the door's output in the body. A count that ROSE is read first: which line of this lane's files is the "
+          "new read or the new debt, and is it what the register exists to stop (a defence fact read past the sanctioned reader; a new bare number in a "
+          "sentence)? Then it is cured at its cause, red first, never banked; a door that refuses a rise, or a rise in a file this lane does not hold, is "
+          "a STOP: one message to the chair with the row.\n"
+          "2. THE TWENTY-SEVEN (PART 7's list: red at the lane's own tip before the merge, green on the line and at the base): each put in ONE of three "
+          "classes BY READING ITS FAILURE, not its title, the table in your statement: (a) a golden or a pin that a DECLARED move of this lane shifts: "
+          "named in the draft shift record with the move that shifts it and the measure (the merge seat signs at the join; you run no golden's door in "
+          "its writing mode); (b) a walker, a manifest or a register that this lane's own files red (the candidates: negativeAssertionAnchor, "
+          "recordRegisterTotality, seedLoopTotality, mutationCoverageManifest, fieldManifest): cured through its own door NOW, each its own commit; where "
+          "the door is the merge seat's, named with that door's command and why; (c) the edge bundles' three titles: step 6. A red that fits none of the "
+          "three is a STOP with its failure text. Re-run the red files at the tip first (JSON, to a file): the merge and the seventh seat's cures may "
+          "have changed the set; say what changed.\n"
+          "3. CENSUS-2 AT THE TIP (the 720; the command in the statement's form below, `--files` the lane's files) against the sixth seat's counts (PART 6, "
+          "ROW 2): every kind that rises is read town by town (the merge changes what the lane's files print where the toll's From line moved, 96 of the "
+          "seventh seat's 800, and where the line's changes compose) and is cured or explained by a named change of the line's; then the 720-birth field "
+          "diff, the base e969a75b7 against the tip, by family, each family one the lane declares.\n"
+          "4. ONE DRAFT SHIFT RECORD named for the lane (the six golden surfaces and every registered surface the red titles pin: "
+          "tests/fixtures/.golden-freeze-register.json), by measure.\n"
+          "5. GATHERED, by script from the parts' own paragraphs, never from memory: FOR THE JOIN whole (the side seat's stops; the stores' span's two "
+          "homes; the wartime summary's one path; the quick guide that no surface calls; the Power tab's seat line; this lane's lines in EconomicsTab.jsx "
+          "and EconomicsTrade.jsx, which the third leaves lane also changes; the tests' git helper that must clear the inherited git environment); THE NEW "
+          "WORDS of every seat with the towns each was read in; FOR THE DECLARATION PASS as re-ruled above; LEFT FOR AFTER THE JOIN (every row a part "
+          "parked or did not reach, or the one word \"none\").\n"
+          "6. THE EDGE BUNDLES LAST: `npm run build:edge-shared`, committed alone if they differ; then the three edge titles re-run.\n"
+          "7. THE LANE'S ONE FINAL STATEMENT in the form below (the base is e969a75b7; the stage a reader has not read begins at 80b96017b; the whole "
+          "suite's classing is the seventh seat's, brought current by your steps 1, 2 and 6: do NOT run the whole suite again unless a step of yours "
+          "changed a file under src/, and then only the shards that hold the touched files' tests, said so). Then ONE message to the chair: the tip, the "
+          "reds by class, where the statement is. A fresh reader then reads the lane from 80b96017b: leave it what it needs."),
+    merges='',
+    when="for a stop that blocks everything you have left, when steps 1 and 2 are pushed (one message: the two reds' causes; the twenty-seven by class), and with your final statement or hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
