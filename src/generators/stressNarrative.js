@@ -228,10 +228,15 @@ const RENDERERS = {
   // R2-CODE-B-6 item 0 (the chair's ruling): "Supply caravans pass through on crown requisition" is false of an isolated
   // place (`route: isolated`, the record's own trade route): no caravans pass through it. No sentence is true there in
   // its place, so the loss text leaves the clause out (silence, not a twin). No draw; an unread record keeps it.
+  // The same fault in the price line (the chair's ruling, R2-CODE-B-6): on a fed record (`crisis: hunger` refused)
+  // "Food prices have doubled." resolves to its CENSUS-2d twin "The army has the carts and the road, …", and an
+  // isolated place has no road; the resolver reaches one twin only, so where the place is isolated AND fed the line
+  // is left out here, before the declared resolution. Under hunger the price line prints as before.
   wartime: (name, roll, facts) => {
     const s = name || "the settlement";
     const isolated = facts ? atomHolds('route: isolated', facts) === true : false;
-    const [profit, loss] = WARTIME_VARIANTS(s, isolated);
+    const fedIsolated = isolated && atomHolds('crisis: hunger', facts) === false;
+    const [profit, loss] = WARTIME_VARIANTS(s, isolated, fedIsolated);
     const refused = facts
       ? atomHolds('prosperity: ≥ moderate', facts) === false || atomHolds('market', facts) === false || isolated
       : false;
@@ -268,15 +273,16 @@ const WARTIME_CARAVANS = 'Supply caravans pass through on crown requisition. ';
 /**
  * wartime's two texts for one place (`s` = the name, or "the settlement"): the profit text, true only
  * where the place is at least of moderate prosperity (checked at the renderer), and the loss text,
- * whose caravans sentence an isolated place does not carry.
+ * whose caravans sentence an isolated place does not carry, nor its price line where the place is also fed.
  * @param {string} s
  * @param {boolean} [isolated] - the record's trade route is `isolated` (read at the renderer)
+ * @param {boolean} [fedIsolated] - isolated, and the record refuses `crisis: hunger` (read at the renderer)
  * @returns {ReadonlyArray<{ id: string, text: string }>}
  */
-function WARTIME_VARIANTS(s, isolated = false) {
+function WARTIME_VARIANTS(s, isolated = false, fedIsolated = false) {
   return [
     { id: 'profit', text: s + " is in a kingdom at war and doing well out of it: army contracts pay, prices are high, and merchants with the right friends are getting rich. The bill will come later." },
-    { id: 'loss', text: s + " is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. " + (isolated ? '' : WARTIME_CARAVANS) + WARTIME_PRICES + " The governing authority is demanding sacrifice while certain families are quietly thriving on contracts." },
+    { id: 'loss', text: s + " is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. " + (isolated ? '' : WARTIME_CARAVANS) + (fedIsolated ? '' : WARTIME_PRICES + ' ') + "The governing authority is demanding sacrifice while certain families are quietly thriving on contracts." },
   ];
 }
 
