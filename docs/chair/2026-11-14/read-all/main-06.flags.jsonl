@@ -1,0 +1,132 @@
+{"id":"20265","town":"r2s-wartime-village-0","sev":"MED","kind":"LACKS","why":"clatter of looms; HOUSES has no weaver and the village imports raw cloth","other":""}
+{"id":"01034","town":"r2s-wartime-village-0","sev":"MED","kind":"PAIR","why":"says the town does well out of the war; 07287 says it is losing people and resources by attrition; prosperity only Moderate","other":"07287"}
+{"id":"22387","town":"r2s-wartime-village-0","sev":"MED","kind":"STATE","why":"says little food of its own but its herds; HOUSES has Farmland and Mill, grown 424 of 512 daily need","other":""}
+{"id":"14385","town":"r2r-village-26","sev":"LOW","kind":"BROKEN","why":"timber listed twice (and again as mountain timber) in one list","other":""}
+{"id":"28553","town":"r2r-village-48","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'Weak defences has left'","other":""}
+{"id":"12589","town":"r2r-village-48","sev":"MED","kind":"PAIR","why":"rivals fighting over the seat; crisis is Infiltrated not succession, and 10846 says Household Council outweighs everyone wanting its place","other":"10846"}
+{"id":"06031","town":"r2r-village-57","sev":"MED","kind":"LACKS","why":"rows of craftspeople, each row a trade; village of 261 has one each of a handful of crafts","other":""}
+{"id":"14282","town":"r2r-village-57","sev":"MED","kind":"PAIR","why":"fish needed and not brought in, yet HOUSES lists a Fishmonger who buys and sells fish (04642)","other":"04642"}
+{"id":"16932","town":"r2r-village-57","sev":"MED","kind":"LACKS","why":"names the bakers; HOUSES has no baker (tag reaches villages)","other":""}
+{"id":"HEADER","town":"r2s-monster_pressure-village-2","sev":"LOW","kind":"RECORD","why":"village of 242 on plains makes gems; HOUSES has no mine, miner or gem cutter","other":""}
+{"id":"14395","town":"r2s-monster_pressure-village-2","sev":"MED","kind":"PAIR","why":"fish needed and not brought in, yet HOUSES has a Fishmonger who holds the seat (05516)","other":"05516"}
+{"id":"HEADER","town":"r2s-slave_revolt-village-0","sev":"LOW","kind":"RECORD","why":"plains village makes gems and exports barrels; HOUSES has no mine, cooper or woodcutter","other":""}
+{"id":"18534","town":"r2s-slave_revolt-village-0","sev":"MED","kind":"STATE","why":"stallholders calling over a noisy market under a Slave Revolt, safety Critical; 21709 says market operations disrupted","other":"21709"}
+{"id":"07168","town":"r2s-slave_revolt-village-0","sev":"MED","kind":"PAIR","why":"Reeve and Religious Authorities 'stable'; 19894 says the Religious Authorities are at odds with it","other":"19894"}
+{"id":"07154","town":"r2s-slave_revolt-village-0","sev":"MED","kind":"PAIR","why":"Reeve and Thieves' Guild leave each other alone; 07169 calls the relation escalating, 19894 at odds","other":"07169"}
+{"id":"14886","town":"r2s-slave_revolt-village-0","sev":"MED","kind":"PAIR","why":"neither side pushes the other; 07169 escalating and 23616 a Guild move against the Reeve","other":"07169"}
+{"id":"22709","town":"r2s-slave_revolt-village-0","sev":"MED","kind":"LACKS","why":"guild funds two charitable institutions; HOUSES has none in a village of 386","other":""}
+{"id":"17408","town":"r2s-slave_revolt-village-0","sev":"MED","kind":"LACKS","why":"names a slave market; HOUSES has no slave market","other":""}
+{"id":"15409","town":"r2s-slave_revolt-village-0","sev":"MED","kind":"LACKS","why":"names a slave market; HOUSES has no slave market","other":""}
+{"id":"01153","town":"r2s-slave_revolt-village-0","sev":"LOW","kind":"BROKEN","why":"name repeated where a pronoun belongs: 'Paullus Lateranus stops being useful' after 'Paullus Lateranus knows'","other":""}
+{"id":"00752","town":"r2s-slave_revolt-village-0","sev":"LOW","kind":"BROKEN","why":"name repeated as its own object: 'could protect Paullus Lateranus' after 'Paullus Lateranus has made'","other":""}
+{"id":"HEADER","town":"r2s-insurgency-village-2","sev":"MED","kind":"RECORD","why":"village of 293 exports iron ore and makes advanced arms, guild-manufactured goods, fine wool cloth; HOUSES has no mine, guild or weaver","other":""}
+{"id":"HEADER","town":"r2s-succession_void-village-3","sev":"LOW","kind":"RECORD","why":"exports iron ore, weapons and armour, makes barrels; HOUSES has no mine, armourer or cooper","other":""}
+{"id":"14339","town":"r2s-succession_void-village-3","sev":"LOW","kind":"BROKEN","why":"lists mineral hot springs as a good needed and not brought in; a spring cannot be imported","other":""}
+{"id":"20989","town":"r2r-village-47","sev":"MED","kind":"LACKS","why":"a merchant district in a village of 375 with no market, isolated trade and no exports; prosperity Struggling","other":""}
+{"id":"21705","town":"r2r-village-47","sev":"MED","kind":"LACKS","why":"presumes a prosperous merchant district; village of 375, no market, isolated, Struggling","other":""}
+{"id":"11440","town":"r2r-village-47","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'its herbal remedies would fall further short than it already does'","other":""}
+{"id":"15308","town":"r2r-village-53","sev":"HIGH","kind":"LACKS","why":"organized crime fills the power vacuum; GOVERNMENT lists no criminal power (Merchant Guilds, Independent Bloc, Elder Council only)","other":""}
+{"id":"20580","town":"r2r-village-53","sev":"HIGH","kind":"LACKS","why":"gang bosses rule and tax the village; GOVERNMENT lists no thieves' guild or criminal power","other":""}
+{"id":"21230","town":"r2r-village-53","sev":"MED","kind":"LACKS","why":"a criminal organization decides what flows through; GOVERNMENT lists no criminal power","other":""}
+{"id":"14350","town":"r2r-village-53","sev":"MED","kind":"PAIR","why":"timber for vessels needed and not brought in; 07815 lists Shipbuilding Timber among the village's own resources","other":"07815"}
+{"id":"HEADER","town":"r2s-insurgency-village-1","sev":"MED","kind":"RECORD","why":"exports quality tools and advanced weapons and armor, makes metalwork; HOUSES has no blacksmith or armourer","other":""}
+{"id":"HEADER","town":"r2s-religious_conversion-village-0","sev":"LOW","kind":"RECORD","why":"exports baked goods and pilgrim hospitality; HOUSES has no baker and no inn","other":""}
+{"id":"21580","town":"r2s-religious_conversion-village-0","sev":"MED","kind":"PAIR","why":"faith quarrel settled into habit; stability Tense, 07172 escalating, 16375 the Congregation could take the hall","other":"07172"}
+{"id":"18231","town":"r2s-religious_conversion-village-0","sev":"MED","kind":"PAIR","why":"says the country produces no fish; HOUSES has a Fisher's landing and the Reeve is boat-headman (05619)","other":"05619"}
+{"id":"14400","town":"r2s-religious_conversion-village-0","sev":"MED","kind":"PAIR","why":"fish needed and not brought in; HOUSES has a Fisher's landing and a Fishmonger","other":"05619"}
+{"id":"16375","town":"r2s-religious_conversion-village-0","sev":"MED","kind":"PAIR","why":"Congregation could take the hall; Reeve is Dominant, Congregation Strong, and 04347 says it is too far behind to challenge","other":"04347"}
+{"id":"HEADER","town":"r2s-wartime-village-1","sev":"LOW","kind":"RECORD","why":"desert village has a Fish market and exports glass blanks, coal, barrels; HOUSES has no glassworks, mine or cooper","other":""}
+{"id":"15722","town":"r2s-wartime-village-1","sev":"MED","kind":"LACKS","why":"pilgrims crowd the road; TRADE has no pilgrimage, HOUSES no shrine, and wartime with monsters on the roads","other":""}
+{"id":"06689","town":"r2s-wartime-village-1","sev":"LOW","kind":"LACKS","why":"'distinct from the inn' presumes an inn; HOUSES has none","other":""}
+{"id":"14398","town":"r2s-indebted-village-0","sev":"LOW","kind":"BROKEN","why":"timber listed twice, and mineral hot springs as an import; sawmill and charcoal burner on HOUSES have no timber","other":""}
+{"id":"04075","town":"r2s-indebted-village-0","sev":"LOW","kind":"LACKS","why":"names paid guards; DEFENCE has only a citizen militia, no watch, garrison or hired force","other":""}
+{"id":"00340","town":"r2s-religious_conversion-village-3","sev":"MED","kind":"LACKS","why":"processions in different quarters; a village of 351 has no quarters","other":""}
+{"id":"11555","town":"r2s-religious_conversion-village-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label used as a name: 'of Military/Guard'","other":""}
+{"id":"HEADER","town":"r2s-indebted-village-2","sev":"LOW","kind":"RECORD","why":"village of 318 exports advanced weapons and armor and makes processed textiles; one blacksmith, no armourer or weaver","other":""}
+{"id":"14320","town":"r2s-indebted-village-2","sev":"LOW","kind":"BROKEN","why":"lists mineral hot springs as a good needed and not brought in","other":""}
+{"id":"27051","town":"r2s-indebted-village-2","sev":"MED","kind":"PAIR","why":"'the rest of Merchant Guilds' makes Giselbert Schneider a guild member; 02086 makes him mine captain and Headman of the rival power","other":"02086"}
+{"id":"HEADER","town":"r2r-village-12","sev":"LOW","kind":"RECORD","why":"village of 80 makes fish, salt and coal; HOUSES has no fisher, salt works or mine","other":""}
+{"id":"09405","town":"r2r-village-12","sev":"MED","kind":"LACKS","why":"a civic center with fountains and columns in a village of 80 with nine houses and no hall","other":""}
+{"id":"HEADER","town":"r2r-village-33","sev":"LOW","kind":"RECORD","why":"exports mineral salts, alum, sulfur and founded by two mining operations; HOUSES has no mine","other":""}
+{"id":"15309","town":"r2r-village-10","sev":"HIGH","kind":"LACKS","why":"criminals outweigh the law outright; GOVERNMENT lists no criminal power, stability Stable, and 07609 gives the fence a voice not the last word","other":"07609"}
+{"id":"29602","town":"r2r-village-10","sev":"LOW","kind":"BROKEN","why":"house label used as a name: 'Fence (word of mouth)'","other":""}
+{"id":"19010","town":"r2r-village-10","sev":"LOW","kind":"BROKEN","why":"house label used as a name: 'answers to Fence (word of mouth)'","other":""}
+{"id":"07609","town":"r2r-village-10","sev":"LOW","kind":"BROKEN","why":"house label used as a name: 'Fence (word of mouth) has a voice'","other":""}
+{"id":"00670","town":"r2r-village-10","sev":"LOW","kind":"BROKEN","why":"name repeated where a pronoun belongs: 'something Palnatoke Andersson cannot give'","other":""}
+{"id":"HEADER","town":"r2r-village-17","sev":"LOW","kind":"RECORD","why":"mountain village has a Fish market and a master fishmonger reeve with no fishing, and makes gems and barrels with no mine or cooper","other":""}
+{"id":"07346","town":"r2r-village-17","sev":"LOW","kind":"BROKEN","why":"slash-joined label in prose: 'the gold/silver ore'","other":""}
+{"id":"HEADER","town":"r2r-village-32","sev":"LOW","kind":"RECORD","why":"exports baked goods, ale and beer, makes iron and metalwork; HOUSES has no baker, brewer or smith","other":""}
+{"id":"28552","town":"r2r-village-22","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'Weak defences has left'","other":""}
+{"id":"09217","town":"r2r-village-27","sev":"LOW","kind":"LACKS","why":"lists Fulled cloth; HOUSES has no fuller or weaver","other":""}
+{"id":"22669","town":"r2r-village-59","sev":"MED","kind":"STATE","why":"says nobody works the timber; TRADE 'made here' lists timber","other":""}
+{"id":"28865","town":"r2r-village-7","sev":"LOW","kind":"LACKS","why":"'where the inn sees to comfort' presumes an inn; HOUSES has none","other":""}
+{"id":"14396","town":"r2r-village-7","sev":"LOW","kind":"BROKEN","why":"lists mineral hot springs as a good needed and not brought in","other":""}
+{"id":"HEADER","town":"r2r-village-0","sev":"LOW","kind":"RECORD","why":"isolated with imports none, yet food imports cover 35 and a caravan Waystation; mountain Fish market; makes gems with no mine","other":""}
+{"id":"29072","town":"r2r-village-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label in prose: 'the gold/silver ore'","other":""}
+{"id":"28599","town":"r2r-village-40","sev":"MED","kind":"LACKS","why":"names an armoury; HOUSES has none and DEFENCE has only a palisade and an unpaid village watch","other":""}
+{"id":"20032","town":"r2r-village-40","sev":"MED","kind":"LACKS","why":"an ailing ruler about to name a successor; GOVERNMENT is Priestly Guidance, Stable, with no single ruler","other":""}
+{"id":"07174","town":"r2r-village-45","sev":"MED","kind":"PAIR","why":"Reeve and Military/Guard 'stable'; 07166 and 10582 give their tension as High","other":"07166"}
+{"id":"07155","town":"r2r-village-45","sev":"MED","kind":"PAIR","why":"Guard carries out the Reeve's orders, each needs the other; 10582 says High tension between them","other":"10582"}
+{"id":"30463","town":"r2r-village-45","sev":"LOW","kind":"BROKEN","why":"same source listed twice: 'Hedge wizard' and 'Munkhtuya Jalayir' are the one hedge wizard (10389)","other":"10389"}
+{"id":"20686","town":"r2r-village-54","sev":"MED","kind":"LACKS","why":"names the guard; DEFENCE has no garrison, watch or militia and GOVERNMENT no Guard power","other":""}
+{"id":"14239","town":"r2r-village-6","sev":"LOW","kind":"PAIR","why":"clay needed and not brought in, yet HOUSES has a working Brickmaker","other":""}
+{"id":"14267","town":"r2r-village-20","sev":"LOW","kind":"BROKEN","why":"lists mineral hot springs as a good needed and not brought in","other":""}
+{"id":"15278","town":"r2r-village-49","sev":"MED","kind":"LACKS","why":"strong military presence; DEFENCE has no walls, garrison, militia or watch, only a charter hall","other":""}
+{"id":"04816","town":"r2r-village-49","sev":"MED","kind":"LACKS","why":"organized neighborhoods divided by causeways in a village of 168","other":""}
+{"id":"14242","town":"r2r-village-49","sev":"MED","kind":"PAIR","why":"fish needed and not brought in, yet HOUSES has a Fishmonger (17260 keeps the best of the catch)","other":"17260"}
+{"id":"23466","town":"r2r-village-49","sev":"HIGH","kind":"LACKS","why":"the local guard keeps the peace; DEFENCE has no garrison, watch or militia","other":""}
+{"id":"18224","town":"r2r-village-14","sev":"MED","kind":"STATE","why":"says the country yields no animal hides; HOUSES has Common grazing land and a Dairy farmer's herds feeding its Tannery","other":""}
+{"id":"20721","town":"r2r-village-14","sev":"MED","kind":"PAIR","why":"hall at odds with the Military/Guard; 07126 gives the Elder Council~Military/Guard relation as stable","other":"07126"}
+{"id":"12111","town":"r2r-village-23","sev":"MED","kind":"STATE","why":"food from hunting and little else; HOUSES has Farmland, grazing and a Mill (grown 477 of 542), and no hunter","other":""}
+{"id":"14323","town":"r2r-village-13","sev":"LOW","kind":"BROKEN","why":"lists mineral hot springs as a good needed and not brought in","other":""}
+{"id":"21275","town":"r2r-village-2","sev":"MED","kind":"LACKS","why":"magic workers are big buyers and employers; HOUSES has no practitioner, DEFENCE magic none, TRADE makes no spellcasting","other":""}
+{"id":"14266","town":"r2r-village-2","sev":"LOW","kind":"BROKEN","why":"lists mineral hot springs as a good needed and not brought in","other":""}
+{"id":"14382","town":"r2r-village-4","sev":"LOW","kind":"BROKEN","why":"timber listed twice (and again as mountain timber); a Sawmill is on HOUSES","other":""}
+{"id":"19011","town":"r2r-village-4","sev":"LOW","kind":"BROKEN","why":"house label used as a power: 'answers to Smuggling waypoint'; GOVERNMENT lists only Elder Council","other":""}
+{"id":"18181","town":"r2r-village-4","sev":"LOW","kind":"BROKEN","why":"house label used as a power: 'Smuggling waypoint has a voice in Elder Council'","other":""}
+{"id":"28561","town":"r2r-village-36","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'Weak defences keeps'","other":""}
+{"id":"17926","town":"r2s-under_siege-town-2","sev":"MED","kind":"STATE","why":"'does not quite feed it'; grown 1027 of daily need 4906, deficit 40%, viable False","other":""}
+{"id":"11943","town":"r2s-under_siege-town-2","sev":"MED","kind":"STATE","why":"says it gets by on stores and its own produce; deficit 40% under siege and viable False","other":""}
+{"id":"18671","town":"r2s-under_siege-town-2","sev":"MED","kind":"TAG","why":"six months of grain in store; tag has F, and here deficit 40% under siege with viable False","other":""}
+{"id":"17769","town":"r2s-under_siege-town-2","sev":"MED","kind":"TAG","why":"offers fresh bread as a service; tag has F (famine towns) and here a 40% food deficit under siege","other":""}
+{"id":"12702","town":"r2s-under_siege-town-2","sev":"MED","kind":"STATE","why":"levies on all trade in and out by road; under siege nothing moves by road and trade access is isolated","other":""}
+{"id":"16857","town":"r2s-under_siege-town-2","sev":"MED","kind":"STATE","why":"fish come in by cart; under siege nothing comes in by road","other":""}
+{"id":"02794","town":"r2s-under_siege-town-2","sev":"LOW","kind":"STATE","why":"lord's man governs and overrides all; GOVERNMENT has Feudal Appointee Minor beside Military/Guard Strong","other":""}
+{"id":"10137","town":"r2s-under_siege-town-2","sev":"MED","kind":"LACKS","why":"burial beyond the gate; DEFENCE walls none, so no gate (tag reaches unwalled towns)","other":""}
+{"id":"16399","town":"r2s-under_siege-town-2","sev":"MED","kind":"STATE","why":"regular market days with produce and livestock under siege; 28605 marks the weekly market Impaired and 15091 says nothing comes in","other":"28605"}
+{"id":"22546","town":"r2s-under_siege-town-2","sev":"MED","kind":"PAIR","why":"the fair draws merchants from across the region; 14961 says none can reach it while the roads are held","other":"14961"}
+{"id":"01181","town":"r2s-under_siege-town-2","sev":"HIGH","kind":"PAIR","why":"market trade feeds it and the road brings goods; 15091 says the siege closed the roads, deficit 40%, viable False","other":"15091"}
+{"id":"HEADER","town":"r2s-under_siege-town-2","sev":"LOW","kind":"RECORD","why":"trade access isolated, yet made here lists trade access, toll income and pass control","other":""}
+{"id":"00334","town":"r2s-under_siege-town-2","sev":"MED","kind":"PAIR","why":"one person decides, the Appointee's word arrives whole; 07632 and 13625 say Military/Guard makes the decisions and no longer takes its orders","other":"07632"}
+{"id":"23160","town":"r2s-under_siege-town-2","sev":"MED","kind":"LACKS","why":"watch reports to the council; GOVERNMENT is a Feudal Appointee and lists no council","other":""}
+{"id":"22127","town":"r2s-under_siege-town-2","sev":"LOW","kind":"LACKS","why":"names a steward and a household bargaining power; GOVERNMENT has an appointee and lists no manor household","other":""}
+{"id":"20623","town":"r2s-under_siege-town-2","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'The garrison and town watch walks'","other":""}
+{"id":"15200","town":"r2s-under_siege-town-2","sev":"MED","kind":"PAIR","why":"offenders get a hearing and a record; 12656, 06514 and 03756 say prison only, detention without process, arbitrary enforcement","other":"06514"}
+{"id":"23219","town":"r2s-under_siege-town-2","sev":"HIGH","kind":"STATE","why":"more than enough to get through a hard year; under siege with deficit 40% and viable False","other":"15091"}
+{"id":"22300","town":"r2s-under_siege-town-3","sev":"MED","kind":"LACKS","why":"the town keeps its own court; HOUSES has a town hall and small prison/stocks but no court","other":""}
+{"id":"07216","town":"r2s-under_siege-town-3","sev":"MED","kind":"STATE","why":"resupplies the caravans and their guards; under siege no caravan comes or goes by road","other":""}
+{"id":"20982","town":"r2s-under_siege-town-3","sev":"MED","kind":"STATE","why":"carted barrels of salt fish weighed for sale; under siege nothing comes in by road, imports cover None","other":""}
+{"id":"10823","town":"r2s-under_siege-town-3","sev":"LOW","kind":"TAG","why":"'city watch livery'; tag reaches towns, and this town has a Town watch","other":""}
+{"id":"07373","town":"r2s-under_siege-town-3","sev":"MED","kind":"PAIR","why":"everyone comes and goes by the gates; under siege, and 11997 says the gate is shut fast","other":"11997"}
+{"id":"01235","town":"r2s-under_siege-town-3","sev":"LOW","kind":"BROKEN","why":"name repeated where a pronoun belongs: 'more than Naoise Gallagher could repay'","other":""}
+{"id":"07065","town":"r2s-under_siege-town-0","sev":"MED","kind":"STATE","why":"Economic Resilience Strong; under siege, prosperity Struggling, deficit 44%, viable False","other":""}
+{"id":"12922","town":"r2s-under_siege-town-0","sev":"MED","kind":"STATE","why":"major livestock sales; under siege (tag is siege towns only) nothing comes in by road","other":""}
+{"id":"23217","town":"r2s-under_siege-town-0","sev":"MED","kind":"STATE","why":"traders enrol goods and hire escorts for caravans; under siege (tag siege only) and 29016 says the roads are cut","other":"29016"}
+{"id":"28853","town":"r2s-under_siege-town-0","sev":"LOW","kind":"STATE","why":"regional caravans mustered and briefed, present tense; under siege no caravan leaves (tag siege only)","other":"29016"}
+{"id":"16396","town":"r2s-under_siege-town-0","sev":"MED","kind":"STATE","why":"offers registration for an outgoing caravan; under siege nothing goes out by road (tag S and F only)","other":"29016"}
+{"id":"10817","town":"r2s-under_siege-town-0","sev":"MED","kind":"PAIR","why":"hot food in most establishments, pottage to roast meats (16147); 13064 marks Meals Impaired, deficit 44% under siege","other":"13064"}
+{"id":"04548","town":"r2s-under_siege-town-0","sev":"LOW","kind":"LACKS","why":"disputes go before a magistrate; HOUSES has no court and GOVERNMENT no magistrate","other":""}
+{"id":"09243","town":"r2s-under_siege-town-0","sev":"LOW","kind":"STATE","why":"food and shelter for travellers and pilgrims; under siege no travellers arrive and food runs 44% short (tag siege only)","other":""}
+{"id":"20340","town":"r2s-under_siege-town-0","sev":"LOW","kind":"STATE","why":"produces no luxury goods and buys them; TRADE made here lists rare spices and exotic dyes, and siege stops buying","other":""}
+{"id":"04663","town":"r2s-under_siege-town-0","sev":"MED","kind":"LACKS","why":"Camel Caravan Trade in a Norse riverside town; TRADE has no camels and the siege has cut the roads","other":""}
+{"id":"20457","town":"r2s-under_siege-town-0","sev":"MED","kind":"STATE","why":"trade plainly goes on; under siege the roads are closed (09734) and nothing comes in","other":"09734"}
+{"id":"23096","town":"r2s-under_siege-town-0","sev":"MED","kind":"PAIR","why":"War Council carries out the Council's orders, each needs the other; 23109 and 10688 give their tension as High","other":"10688"}
+{"id":"04923","town":"r2s-under_siege-town-0","sev":"MED","kind":"PAIR","why":"church holds temporal power and all courts; 19965 says the Town Council governs and 23100 has it collecting the taxes","other":"19965"}
+{"id":"22321","town":"r2s-under_siege-town-0","sev":"MED","kind":"PAIR","why":"went into the trouble with money in hand; prosperity Struggling and 22306 says the town never quite makes ends meet","other":"22306"}
+{"id":"18046","town":"r2s-under_siege-town-0","sev":"MED","kind":"STATE","why":"shopkeepers all pay one protection ring; GOVERNMENT lists Thieves' Guild Suppressed and 22921 says the Council is winning","other":"22921"}
+{"id":"10980","town":"r2s-under_siege-town-0","sev":"LOW","kind":"STATE","why":"says which caravans have room; under siege no caravan goes out (tag S and F only)","other":"29016"}
+{"id":"11080","town":"r2s-under_siege-town-0","sev":"LOW","kind":"PAIR","why":"hires carriers by the day and load; 29016 says with the roads cut the wagons stand idle","other":"29016"}
+{"id":"12562","town":"r2s-under_siege-town-1","sev":"MED","kind":"LACKS","why":"names gate control; DEFENCE walls none and 00979 says the town lies open","other":"00979"}
+{"id":"10188","town":"r2s-under_siege-town-1","sev":"MED","kind":"PAIR","why":"Guild Council~Religious Authorities stable; 20730 says the hall is at odds with them and 15618 says the two keep quarrelling","other":"20730"}
+{"id":"30567","town":"r2s-under_siege-town-1","sev":"LOW","kind":"BROKEN","why":"same source listed twice: 'Wizard's tower' and 'Ai Xiao', its one wizard","other":""}
+{"id":"DONE","lines":3357,"blocks":51,"flags":131}
