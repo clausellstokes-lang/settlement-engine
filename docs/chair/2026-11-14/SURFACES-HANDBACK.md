@@ -271,7 +271,8 @@ min at 3 workers); then `sh food.sh <tree> <records> <out> seeds772.txt` (~8 min
 Seat SURFACES-3, session session_01ACmDYagjWqZ7qwhc7fz4sa; chair session_01ACmDYZrFEVXyZEUg1NDxxC. Branch
 `lane/join-surfaces-2026-11-14`, read back at e6cb445db at the start (as the brief said). Merges of the joined line
 into the lane: 2166b7266 (600b9f743, the first act; clean), the merge of 9618e0319 before item 1's push (clean; the
-food count re-taken on records born at it: every cell of item 1 still 0).
+food count re-taken on records born at it: every cell of item 1 still 0), 65dc92af9 (clean), 474c5f966 before item 2's push
+(clean; records re-born at it, both counts re-taken: every cell of items 1 and 2 still 0).
 
 ## The rulings this seat works to (the chair's brief of 2026-11-14; each vetoable by the owner)
 
