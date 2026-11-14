@@ -245,6 +245,9 @@ rv2/rv3/rv4 seeds in the app's shape; classes by classes3.py's own patterns) and
   "Gates (if walled)" would print as stored).
 - DefenseTab.jsx's "Active criminal operations" prints `safetyProfile.criminalInstitutions[]` raw.
 - HistoryTab.jsx and SubstrateTab.jsx print no house name.
+- P9 (the chair's ruling to R3-TABS-3, 2026-11-14 05:52 UTC: NOT this lane's): the Beasts & Monsters row's settled
+  lines are the corpus's (the DS-DEF-2 Beasts pools, the corpus lane's main block, its #1509): 114 towns of the 720 where
+  a settled line sits beside a Weak or Critical bar (the page census row P9 at 268b26d8c).
 
 ### 16. CENSUS-2 (2686272b1) in this seat's files, and one hit cured — DONE (317f1e19c)
 - Run at the lane's base aac79b808 and at 87d361dae, `--files` DefenseTab, HistoryTab, SubstrateTab, ServicesTab,
