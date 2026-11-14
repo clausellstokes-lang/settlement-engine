@@ -711,7 +711,10 @@ describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => 
     cleanup();
     const pub = render(e(EconomicsTab, { settlement: GROUND, saveId: null, publicDossier: true }));
     const pubText = pub.container.textContent;
-    expectPresentThenAbsent(privText, pubText, GROUND_LINES.posture, 'economics.exportPosture');
+    // RE-KEYED BY IDENTITY (W2-WRITE-11, the lane's red of HANDBACK-9): the corpus writes "the town" of any size and the
+    // desk speaks it in the record's own noun; GROUND is a village, so the page prints "beyond the village" (right for the
+    // size). The anchor is spoken in the record's noun as onPage() speaks every other anchor here; the line is unchanged.
+    expectPresentThenAbsent(privText, pubText, speakTierNoun(GROUND_LINES.posture, tierNounFor(GROUND.tier)), 'economics.exportPosture');
     // The Trade Profile section itself is the surface and survives the gate.
     expect(pubText).toContain('Timber');
     expect(pubText).toContain('Exports');
