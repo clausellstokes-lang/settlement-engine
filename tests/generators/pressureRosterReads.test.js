@@ -33,11 +33,15 @@ describe("the reader's towns, born as the app births them", () => {
   it('Ulfset (ww-28): no bakers in a hamlet with no bakery', () => {
     const s = born('rww-hamlet-famine-1');
     expect((s.institutions || []).some((/** @type {any} */ i) => /baker/i.test(i.name))).toBe(false);
+    expect(String(s.pressureSentence).length, 'a famine line printed').toBeGreaterThan(40);
+    // anchored: the line above asserts the famine line really printed
     expect(s.pressureSentence).not.toMatch(/bakers/);
   });
   it('the siege line names no card (every row)', () => {
     expectNoSeedFailures(collectSeedFailures([['rww-metropolis-under_siege-1', 'Yellow Corn Coh'], ['rww-village-under_siege-1', 'Khadija al-Aziz']], ([seed, name]) => {
       const s = born(seed);
+      expect(String(s.pressureSentence).length, `${seed}: a siege line printed`).toBeGreaterThan(40);
+      // anchored: the line above asserts the siege line really printed
       expect(s.pressureSentence, `${seed}: the siege line names no card`).not.toContain(name);
     }), 'the siege line names no card');
   });

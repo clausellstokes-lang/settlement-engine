@@ -26,6 +26,7 @@ describe('the pressure sentence honours its rows\' declarations', () => {
     expectNoSeedFailures(collectSeedFailures([['rw3-hamlet-under_siege-1'], ['rw3-town-under_siege+famine-1']], ([seed]) => {
       const s = born(seed);
       expect(factsOf(s).defence?.gate, `${seed}: no gate`).toBe(false);
+      // anchored: the next line asserts the next siege row printed in its place
       expect(s.pressureSentence, `${seed}: no "rationing and the gates"`).not.toMatch(/the rationing and the gates/);
       expect(s.pressureSentence, `${seed}: the next siege row in its place`).toMatch(/cache in .* has been inventoried and argued over/);
     }), 'no gate, so no "rationing and the gates"; the next siege row in its place');

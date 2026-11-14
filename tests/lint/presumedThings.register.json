@@ -30,7 +30,6 @@
   {"thing": "docks", "path": ".institutions[].desc", "text": "by road or harbour", "reason": "hedge", "note": "\"by road or harbour\": the sentence states the alternative", "towns": 22},
   {"thing": "garrison", "path": ".institutions[].desc", "text": "garrison contracts", "reason": "figure", "note": "the hire company's trade, wherever it is hired", "towns": 5},
   {"thing": "garrison", "path": ".institutions[].desc", "text": "garrison work", "reason": "figure", "note": "the hire company's trade, wherever it is hired", "towns": 5},
-  {"thing": "market", "path": ".history.founding.reason", "text": "grew as an agricultural market center", "reason": "past", "note": "the founding: a past event", "towns": 1},
   {"thing": "market", "path": ".history.founding.reason", "text": "on the open market", "reason": "figure", "note": "\"the open market\": trade at large", "towns": 1},
   {"thing": "market", "path": ".institutions[].desc", "text": "game at market", "reason": "figure", "note": "\"at market\": to sell, wherever the selling is", "towns": 1},
   {"thing": "market", "path": ".institutions[].desc", "text": "game to market", "reason": "figure", "note": "\"to market\": to sell, wherever the selling is", "towns": 1},

@@ -11,10 +11,17 @@
  * mountain_timber, not depleted), and not under a siege that cuts every road with no channel past it
  * (`siegeCutsImports`, the importer's rule). Elsewhere it is not written (no twin: a twin naming the
  * import would be new words, left to the owner). No draw: a T branch.
+ * RE-KEYED BY IDENTITY (R2-CODE-A-10), its cause the line's own: the merge of the line (16e5184bf) brought
+ * COHERENCE-AGREE's 2a59c4c2e, `foodBalance.js :: deriveSupplyRiskAnalysis` "a live material is no import and no
+ * hook" (`localMaterials.js :: liveMaterialFor`: managed_forest, mountain_timber, shipbuilding_timber are timber).
+ * A stand still standing is therefore no import at all, and no timber line is written beside it, under a siege or
+ * not: the three "keeps it" expectations are re-keyed to that rule, the same configs and the same guard towns.
+ * Nothing printed is false: the forest sentence is written nowhere now (no stand → this cure; a stand → the line's).
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { deriveSupplyRiskAnalysis } from '../../src/generators/economy/foodBalance.js';
 import { availableNativeResourceKeys } from '../../src/domain/resourceSemantics.js';
+import { liveMaterialFor } from '../../src/generators/economy/localMaterials.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -28,15 +35,18 @@ const timberFor = (/** @type {any} */ config, balance = BALANCE) => deriveSupply
   .plotHooks.some((h) => TIMBER.test(h.hook));
 
 describe('the timber line names a forest only where the record holds one', () => {
-  it('no stand of timber, or a stand worked out, writes no line; a standing forest keeps it', () => {
+  it('no stand of timber, or a stand worked out, writes no line; a standing forest is no import (the line\'s rule), so no line either', () => {
     expect(timberFor({ nearbyResources: ['magical_node'] })).toBe(false);
     expect(timberFor({ nearbyResources: ['managed_forest'], nearbyResourcesDepleted: ['managed_forest'] })).toBe(false);
-    expect(timberFor({ nearbyResources: ['managed_forest'] })).toBe(true);
-    expect(timberFor({ nearbyResources: ['mountain_timber', 'iron_deposits'] })).toBe(true);
+    expect(liveMaterialFor('timber', ['managed_forest'])).toBe('managed_forest');
+    expect(liveMaterialFor('timber', ['mountain_timber', 'iron_deposits'])).toBe('mountain_timber');
+    expect(timberFor({ nearbyResources: ['managed_forest'] })).toBe(false);
+    expect(timberFor({ nearbyResources: ['mountain_timber', 'iron_deposits'] })).toBe(false);
   });
-  it('a siege with no channel past it writes no line; a siege a channel still feeds keeps it', () => {
+  it('a siege with no channel past it writes no line; under a siege a channel still feeds, the standing forest is still no import', () => {
     expect(timberFor({ nearbyResources: ['managed_forest'], stressTypes: ['under_siege'] })).toBe(false);
-    expect(timberFor({ nearbyResources: ['managed_forest'], stressTypes: ['under_siege'] }, { ...BALANCE, importChannel: 'teleportation circle' })).toBe(true);
+    expect(liveMaterialFor('timber', ['managed_forest'])).toBe('managed_forest');
+    expect(timberFor({ nearbyResources: ['managed_forest'], stressTypes: ['under_siege'] }, { ...BALANCE, importChannel: 'teleportation circle' })).toBe(false);
   });
 });
 
@@ -67,8 +77,8 @@ describe('the cut\'s towns and their guard, born as the app births them', () => 
     const falseForest = towns.filter(({ s }) => !forestHeld(s) && printsTimber(s)).map(({ seed }) => seed);
     expect(falseForest).toEqual([]);
   });
-  it('the guard towns, with a forest standing, keep the timber hook, whichever sentence the draw of the line gives (a calm city with a managed forest; a village by shipbuilding timber)', () => {
+  it('the guard towns, with a forest standing, import no timber and so print no timber hook, by the line\'s rule (a calm city with a managed forest; a village by shipbuilding timber)', () => {
     const towns = ['r2r-city-26', 'r2r-village-11'].map((seed) => ({ seed, s: born(seed) }));
-    expect(towns.map(({ seed, s }) => [seed, forestHeld(s), printsTimberHook(s)])).toEqual(towns.map(({ seed }) => [seed, true, true]));
+    expect(towns.map(({ seed, s }) => [seed, forestHeld(s), printsTimberHook(s)])).toEqual(towns.map(({ seed }) => [seed, true, false]));
   });
 });
