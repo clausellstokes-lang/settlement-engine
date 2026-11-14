@@ -2,7 +2,7 @@
 
 The seat: REVIEW-R2-CODE-A (session_01ACmDYYowHxrkJSzxsVoQxD), the chair's brief `docs/chair/2026-11-14/briefs/BRIEF-REVIEW-R2-CODE-A.md` on `lane/chair-2026-11-08`. Read: `lane/r2-code-a-2026-11-13` at **f63b5d762** (origin read back: unmoved at the first act). The stage's own change: the lane's 74 first-parent commits after 0d3972d8f and the merge of the line `16e5184bf` (its remerge diff: one code file). Instruments under `probes/REVIEW-R2-CODE-A/`; nothing here was run in a tree a suite was running in; refs and the local config were compared before and after every suite and push (unchanged).
 
-THE VERDICT: (at the end of the file)
+**THE VERDICT: NOT CLEAR** for the lane at f63b5d762: three MEDIUM findings that are the stage's own (L46's siege market; the Origin resolution's farmland row; the conversion's burial row), 0 HIGH of its own. Details at the end.
 
 ## Step 1 — every new or reworded line, read where it prints
 
@@ -92,3 +92,33 @@ The registers the stage touched, read through their own walkers at the tip: `poo
 
 `census2.sh <tree> <out> 2 --files …` at f63b5d762 and at 0d3972d8f (both exit 0; counts in `probes/…/out/census2-{tip,base}.counts.txt`). Whole tree, towns by kind, base → tip: a 716 → 711 · b 70 → 70 · **c 291 → 293** · **d 381 → 382** · e 60 → 57 · f 720 → 720 · g 720 → 720 · h 21 → 20 (distinct lines fall in every kind but d, 36 → 36). **In the stage's own files, every kind falls and none rises:** narrativeData.js a 40 → 2 towns, c 36 → 4; narrativeText.js a 27 → 12, b 5 → 0, c 6 → 0; foodBalance.js a 14 → 0, b 2 → 2; npcData.js a 8 → 6; settlementOriginProse.js b 8 → 2, e 4 → 0; narrativeGenerator.js b 3 → 0. The whole-tree rises in c (+2 towns) and d (+1) are in no file of the stage (the tip's by-file rows for the stage's files carry no d and c only in narrativeData.js, 4): the line's, arrived by the merge; NOT traced further.
 
+
+## Step 8 — the page census's "two founders" row
+
+`node scripts/census/page-census.mjs --workers=2` at f63b5d762 (my run, the 720; exit 0, "the banked corpus reads at or under the register"): **P7a 116, banked 116** (master 128, integration 127): at its banked figure, under the 125 and 133 the brief names. **On births the seat did not use** (my 3,048 against the neutralised tip): of the 436 Origin rows the resolution moves, **0 land on a P7a shape** ("was founded by", "was settled by", "was established by", "grew because a healer / a famous navigator", "was built around a single family"); without the resolution 83 would. The cure HOLDS. Beyond P7a's shapes the resolution still lands on rows that name a founding of their own (the farmland row's noble grant: step 2; the fishers and the logging owner: step 1, LOW). The 538 towns whose DRAWN Origin row names a founder beside "Founded by:" are the base's draws (the row the cure leaves standing by design: "a row DRAWN as one of them is the draw's and stands").
+
+The literals RED AND NAMED for a declaration pass: step 5 (one of them false where it prints, carried).
+
+The lane at the verdict: `origin/lane/r2-code-a-2026-11-13` reads **f63b5d762** (unmoved; `git diff --stat f63b5d762..origin/lane/r2-code-a-2026-11-13 -- src/` prints nothing).
+
+## THE VERDICT: NOT CLEAR for the lane at f63b5d762
+
+Three MEDIUM findings that are THE STAGE'S OWN, each EXECUTED (by script in every town it prints in, and read on rendered pages):
+
+| rank | finding | town and sentence | the fact against it | own / carried |
+|---|---|---|---|---|
+| MED (c) | L46, the siege's reworded arrival row (`narrativeData.js :: STRESS_DESCS.under_siege[2]`, R2-CODE-A-10) | `r2s-under_siege-town-3`: "From outside, Rathwell still seems itself: smoke from cookfires, the noise of a market. It is the gate that gives it away…" | 18 of 18 records: "Field work and trade have stopped…"; 15 of 18 pages: the markets "critically impaired by siege" | OWN (the rewording; the market clause survives from the base) |
+| MED (c) | the Origin resolution lands on an untested row (`foundingRowAdmits.js`, R2-CODE-A-5 299e79cca) | `r2r-thorp-8`: "Origin: was founded on rich farmland granted to a favoured noble" / "Founded by: a pair of siblings…" | 95 of 436 moved rows land there; 81 of the 95 hold no crop resource (game 24, herds 18, fish 4, none 34) | OWN |
+| MED (a) | the conversion's redraw lands on the burial row (`narrativeData.js :: STRESS_DESCS.religious_conversion`, R2-CODE-A-4 932211dfb) | `r2r-village-5`: "Karakabad has two burial grounds now, one old and one new…" | 34 prints at the base, 77 at the tip, every one with ONE burial house | OWN (43 new prints in the cure's place; the row's text is the base's) |
+| LOW ×15 | step 1's twelve (L25 ×2, L27, L33 ×2, L45 ×2, L09 ×2, L37 ×2, L41); the government hooks' seal and petition twins in thorps (step 2: 24 → 34, 25 → 31); #215's magic channel left unsaid (9 of 48) | see steps 1 and 2 | | OWN |
+| HIGH (a) | "The merchant district of X looks prosperous…" in villages with no market (L05) | `rr3x-village-indebted-mountain_pass-2`, `r2r-village-47` | page: "No market or fair stands in Xochicoatl" | CARRIED (`narrativeData.js`; the stage gave the row a size condition and no `market`, which its famine twin carries) |
+| HIGH (a) | "…keeps the forges of X running day and night…" with no smith | `rr3x-hamlet-wartime-road-2` (73), 3 of 8 prints | no smith or forge on the roster | CARRIED (`narrativeText.js`; 2 at the base, 1 arrived with the line) |
+| HIGH/MED | the other carried rows of step 1 (L07, L10 at ruling (f)'s edge; L08; L12, L13; L18 a priest's master craftsman; L20 the quarantine secret's holder; L31; L22b; L24; L02) and of step 2 (the minted faces, 17 towns); neighbours in `arrivalProse.js` / `cultureProfiles.js` (a waterfront with no water; a wine shop in a thorp of 8; carts and travellers under a siege) | steps 1 and 2 | | CARRIED |
+
+Counts: **the stage's own: 0 HIGH, 3 MEDIUM, 15 LOW. Carried: 2 HIGH (my rank) and about 14 HIGH/MED rows as the readers rank them** (each re-checked false at the base on the same seed).
+
+**The lines I would strike or change, for the owner's veto:** (1) L46's market clause ("smoke from cookfires" and the shut gate stand alone); (2) the farmland Origin row, unless it takes the soil row's crop test; (3) the burial row under the conversion, unless the record holds two burial grounds; (4) L05's "merchant district" without `market`; (5) the forges row where no smith stands (its gate reads a roster that later loses the smith: not traced).
+
+**Where I would rule differently** (step 2): #215 (name the magic channel that feeds a town past a siege); the streets gate (`tier: ≥ village`, not the middling band: ruling (f) puts plural streets out only in a thorp or a hamlet); "the next admitted row" must be one whose own test holds.
+
+**What I did not measure:** the whole suite (the brief: the named files); the Tonight sheet, the PDF, the world book and the Foundry journal rendered separately (the same record strings); a HIDDEN power against the stored pressure sentence that now names `govFaction`; the lighting census and the tuning inventory by their own walkers; #ww-1219 and #pf-394 (their seeds' shape); the whole-tree CENSUS-2 rises (c +2, d +1 towns), which sit in no file of the stage; step 2's removed-line counts were read by my helper and only the still-false rows and the farmland and burial counts re-run by me.
