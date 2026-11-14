@@ -16,6 +16,9 @@ The session's context field reads 0: this seat's count is its own estimate (abou
 | 1 | HIGH #1170 DS-DEF-2 walls AND professional garrison v1 | 7832ef469 | "garrison roll puts paid soldiers on every stretch of its walls" beside DS-DEF-11 WALLED-STRAINED's "too few people man them" (23 of 74 towns drawn; Ringfield, Cobachihua, Kaltenplatz, Miloburg, Lundstrand). No registered condition reads the upkeep gate (`economicGates.military`): reworded, vid and declaration kept | all 232 eligible towns, 74 drawn |
 | 1 | HIGH #642 DS-DEF-2 walls with NO force v2 | read, kept | at the tip v2 carries `no watch · no mercenary`; drawn in 6 towns (Kolbø, Nordey, Ioannolimani, Evangeanthi, Kamenin, Nishidao), every one's Armed Forces row "1 wall" and no force: true. The row's own town is a `-port-` birth this render does not reproduce | 12 eligible |
 
+| 5 | THE MERGE, first side: lane/w2-write-side-rest-2026-11-13 at ddb7453e9 | ffc447555 | HANDBACK-5's eight steps; the source merged clean; pins re-derived through iterate.sh and by hand (CONTROL 4 share 0.658 -> 0.660); the proof: 0 of 59,642 eligibility and 0 of 60,129 owner-page town-pool cells differ from each block's holder over 762 towns | seeds-w5a.txt |
+| 5 | THE MERGE, second side: lane/w2-write-side-eco-2026-11-13 at 4134b0882 | (this commit) | the same eight steps; the source and economy.generated.js merged clean (DS-SUP-2 and DS-ECO lines disjoint); guards 68 rows (53 + 35 - 20); pins re-derived (2954 -> 2948 variants; CONTROL 4 shares 0.660 -> 0.661, 0.161 -> 0.159 by hand; composeStateProse's DS-ECO-6 cell row 171 -> 172 carried from the eco side by identity); the proof at the three-way merge: eco 67 pools, rest 194/196, main 110/115, 0 differing on both instruments | seeds-w5a.txt |
+
 ## New or changed lines (for the lane's veto list, with their towns)
 - DS-DEF-2 Invasion & War: walls AND professional garrison v1 CHANGED: "{settlement} keeps paid soldiers behind its walls, so raiders keep their distance and an army would pay dearly; a long siege would be another matter." (74 drawn: Ringfield metropolis, Lundstrand metropolis famine, Cobachihua city famine, Kaltenplatz town famine, Miloburg town wartime)
 
@@ -23,7 +26,7 @@ The session's context field reads 0: this seat's count is its own estimate (abou
 the item in hand (#1170) finished and pushed; every row below not reached goes AFTER THE JOIN; the seat goes to THE CLOSE.
 
 ## What is left (line by line)
-- THE CLOSE: step 4's message sent (04:59 UTC); steps 5 to 8 wait on the chair's naming of the two side tips.
+- THE CLOSE: step 4 sent (04:59 UTC); step 5 THE MERGE done (both sides, pushed). Next: step 6, the merge of the line (976db5b19), then 2m's checks, step 7, step 8.
 
 ## LEFT FOR AFTER THE JOIN
 Rows of this seat's list not reached at the time-box (the row, its writer, what is known):
@@ -34,6 +37,12 @@ Rows of this seat's list not reached at the time-box (the row, its writer, what 
 - The two the seventh seat found (HANDBACK-6): DS-DEF-5 NO organized force at all v1-v3 under an occupation (Ulfås, w5-hamlet-occupied-104: "Nobody ... is responsible for defending the town" where the occupiers' troops stand); DS-DEF-11 WALLED-STRAINED v2 under an occupation, its `{defwork}` slot printing the catalogue label. Not reached.
 - Step 2, not reached: the re-read at the tip of the five HIGH rows earlier seats cured (#812 #953 #1305 #954 #1392). From the hand-back of the eighth seat: #812 re-read in its part C and kept.
 - Step 3, not reached: CENSUS-2 over defense.generated.js at dcd4759b0 and at the tip.
+
+## From the chair for after THE MERGE (05:06 and 05:12 UTC, copied; this seat's to carry as the lane's main seat)
+- The eco side's census on economy.generated.js: kind b RISING, 16 towns / 8 lines at dcd4759b0 to 18 / 10 at its tip, classed by its seat only as PLAUSIBLY exposure and not read hit by hit: after THE MERGE, READ those two rising rows' hits against their towns (b/siege:brought-in DS-ECO-12 CRITICAL IMPORT land v2, 4 -> 6; b/siege:trade-flows DS-ECO-6 TIER minor shadow v1, 3 -> 5): origin is a cure of this seat's, exposure is declared with its cause.
+- The eco side's note (ii), this block's: DS-DEF-2 Economic Survival STRONG beside DS-DEF-8's doom line ("may not come through this crisis"), 5 of 78 doom towns at e0c1f8b60 (w5-city-famine-102 v3, w5-city-famine-106 v4, w5-city-under_siege-103 v12, w5-metropolis-famine-106 v10, w5-metropolis-famine-3 v4): LEFT FOR AFTER THE JOIN with those figures.
+- ww1298 (the eco side): the generator's fault (76 of 153 unexploited draws beside a running chain; `resourceGenerator.js :: evaluateInstitutions`): FOR THE JOIN.
+- Two reds the chair's rehearsal of the join found at the corpus branches' own tips: (1) tests/ui/generalDeskTabFlow.test.js FAILS TO LOAD, "drawnMember: NOTHING DRAWS at DS-GEN-18 :: STALLED · seed forge_town" (red at 143d51c5d): measure which commit emptied it; the cure is a line true in that case (read in three towns) or the seed re-keyed by identity to a town the pool still serves, with its cause; (2) tests/ui/economicsTabFlow.test.js, the "economics.exportPosture" anchor expects "... beyond the town", the page prints "... beyond the village" (red at e0c1f8b60): a re-key by identity with its cause, or a cure if the word is wrong for the size. Both files run after THE MERGE, their exits in the statement.
 
 ## Hazards (the chair's, copied)
 - 04:37 UTC: a push with NOTHING TO SEND falls into the pre-push hook's whole suite, whose implementationPackets / implementationSession tests run git against the real repository from a linked worktree (branch moved, `core.bare=true`, a fixture user). Before every push: `test -n "$(git rev-list origin/<branch>..<local>)"`; never chain a push after a step that can fail.
