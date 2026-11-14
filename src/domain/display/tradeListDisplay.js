@@ -389,7 +389,7 @@ function pillAsPrinted(raw, side, settlement) {
   /** @param {{ status?: unknown }} c */
   const works = (c) => WORKING_CHAIN_STATUSES.includes(String(chainCrisisStateShown(c, settlement)));
   const houseRe = MADE_GOOD_HOUSES.get(good);
-  const makerStands = !!houseRe && own.some((n) => houseRe.test(n));
+  const makerStands = !!houseRe && own.some((n) => houseMakesGood(good, houseRe, n, settlement));
   const grounds = TRADE_GOOD_GROUNDS.get(good) || [];
   const makers = chains.filter((c) => (Array.isArray(c.outputs) ? c.outputs : []).some((o) => fold(o) === good));
   if (makers.length > 0) {
@@ -453,7 +453,7 @@ const NOT_A_GOOD_HERE = new Set(['trade access', 'maritime trade access', 'toll 
  * @type {ReadonlyArray<readonly [ReadonlyArray<string>, RegExp]>} */
 const MADE_GOOD_ROWS = Object.freeze([
   // the glass and print chain's Glassmakers make no book (rww-city-famine-1); a scriptorium, a library, a sage does
-  [['books and manuscripts'], /\bprint|\bscriptor|\bbookbind|\blibrar|\buniversit|\bcollege|\bscribe|\bsage|\bwizard/],
+  [['books and manuscripts'], /\bprint|\bscriptor|\bbookbind|\blibrar|\buniversit|\bcollege|\bscribe|\bsage/], // + its chain's house through the detector (end of file)
   [['printing services'], /\bprint/],
   [['glassware', 'window glass', 'glass blanks'], /\bglass/],
   // the parish chain's outputs need a house of worship: an almshouse or a foundling home holds no service
@@ -554,7 +554,7 @@ function chainMakesHere(c, good, settlement, roster) {
   const ofGround = !houseRe && (TRADE_GOOD_GROUNDS.get(good) || []).includes(String(c.resourceInputKey)) && ['own', 'substitute'].includes(chainCarrierOf(c, settlement).kind);
   if (ofGround) return true;
   const roadOnly = heads.some((h) => { const m = roster.filter((r) => r.includes(h)); return m.length > 0 && m.every((r) => r.startsWith('access to')); });
-  return !roadOnly && (houseRe ? own.some((n) => houseRe.test(n)) : heads.some((h) => own.some((n) => n.includes(h))));
+  return !roadOnly && (houseRe ? own.some((n) => houseMakesGood(good, houseRe, n, settlement)) : heads.some((h) => own.some((n) => n.includes(h))));
 }
 
 /**
@@ -599,3 +599,34 @@ export function tradeListsAsPrinted(settlement) {
   return { exports: exportsAsPrinted(settlement), arriving, imports: tradeStopped ? [] : arriving, needed, local: localProductionAsPrinted(settlement), tradeStopped };
 }
 import { tradeStoppedHere } from './chainStateShown.js';
+
+
+// ─── W2-C-LEAVES-10 item 3: THE ARCANE HOUSE A GOOD'S MAKING NEEDS, THROUGH THE CANONICAL DETECTOR (at the end of the file) ───
+// The books row of MADE_GOOD_ROWS named its arcane maker by a token, `\bwizard`, in one alternation with "college" and
+// "sage": the W-K2 shape tests/lint/arcaneClassifierCensus.walker.test.js reds (a tower is masonry, a college scholars).
+// The token stood for the ancient ruins chain's own house ("Wizard's tower", beside "Sage's quarter", whose outputs are
+// Books and manuscripts), and it also took a Hedge wizard for a maker of books. The arcane half is read here instead,
+// from the record: a house of the live roster that the canonical detector calls arcane (`isArcaneInstitution`, R-BLD-5:
+// the catalog's licence and tag first) and that one of the town's own chains making the good names among its houses.
+// No token is typed here. Only the goods whose row named an arcane maker read it (`ARCANE_MADE_GOODS`).
+import { isArcaneInstitution } from '../arcaneInstitutionIdentity.js';
+
+/** The goods whose making an arcane house of their own chain does (their row named one). */
+const ARCANE_MADE_GOODS = Object.freeze(['books and manuscripts']);
+
+/**
+ * Does this house of the live roster (its name, lower case) make the good: the good's row (MADE_GOOD_HOUSES), or an
+ * arcane house one of the record's chains that makes the good names (above)?
+ * @param {string} good the good, folded @param {RegExp} houseRe the good's row @param {string} name the house, lower case
+ * @param {Parameters<typeof localProductionAsPrinted>[0]} settlement the record
+ * @returns {boolean}
+ */
+function houseMakesGood(good, houseRe, name, settlement) {
+  if (houseRe.test(name)) return true;
+  if (!ARCANE_MADE_GOODS.includes(good) || !isArcaneInstitution(name)) return false;
+  const eco = /** @type {{ activeChains?: unknown } | null | undefined} */ (settlement?.economicState);
+  const chains = /** @type {Array<{ outputs?: unknown, processingInstitutions?: unknown }>} */ (
+    (Array.isArray(eco?.activeChains) ? eco.activeChains : []).filter((c) => c && typeof c === 'object'));
+  return chains.some((c) => (Array.isArray(c.outputs) ? c.outputs : []).some((o) => fold(o) === good)
+    && (Array.isArray(c.processingInstitutions) ? c.processingInstitutions : []).some((h) => fold(h) === name));
+}
