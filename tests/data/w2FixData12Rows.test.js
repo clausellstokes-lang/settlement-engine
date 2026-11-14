@@ -80,4 +80,12 @@ describe('W2-FIX-DATA-12: the measured rows in the data lane\'s files', () => {
     const keep = bornCensus('r2r-village-25');
     expect(pdfArchitecture(keep)).toBe('arcaded market fronts define the principal square');
   }, 180_000);
+
+  test('REVIEW-R2-CODE-A (the chair\'s 10:57, HIGH): the wine shop\'s patron stands drinks only where a tavern stands, at a village\'s size or more (r2r-thorp-27, r2s-recently_betrayed-hamlet-1, r2r-village-55 hold none); r2r-town-2 keeps it', () => {
+    const WINE = /A patron stands drinks at a wine shop/;
+    expectNoSeedFailures(collectSeedFailures(['r2r-thorp-27', 'r2s-recently_betrayed-hamlet-1', 'r2r-village-55'], (seed) => {
+      expect(String(bornCensus(seed).arrivalScene || ''), seed).not.toMatch(WINE);
+    }), 'no tavern: no wine shop in the arrival');
+    expect(String(bornCensus('r2r-town-2').arrivalScene || '')).toMatch(WINE);
+  }, 180_000);
 });

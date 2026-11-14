@@ -355,7 +355,7 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     { text: () => 'Two citizens argue a point of law loudly enough for a crowd to gather.', excludes: ['crisis: occupied'], crisis: ['any'] },
     { text: () => 'A notice of the next assembly is chalked on a wall, and someone has corrected the spelling.', excludes: ['crisis: occupied'], crisis: ['any'] },
     { text: () => 'A money changer sits at his table with coins from many mints.', needs: ['institution: bank'], crisis: ['any'] }, // COHERENCE-PRESUME: it printed in towns with no money changer
-    { text: () => 'A patron stands drinks at a wine shop, and makes sure everyone knows who is paying.', crisis: ['any'] },
+    { text: () => 'A patron stands drinks at a wine shop, and makes sure everyone knows who is paying.', needs: ['institution: tavern', 'tier: ≥ village'], crisis: ['any'] }, // W2-FIX-DATA-12 (REVIEW-R2-CODE-A, the chair's 10:57): a wine shop stands on the roster, and a thorp or hamlet has none to stand drinks in
   ],
   mixed: [
     { text: () => 'You hear three languages in as many steps, and nobody seems to find it strange.', crisis: ['any'] },
