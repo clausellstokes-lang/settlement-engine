@@ -530,7 +530,10 @@ LAWS2 = (
     "pushes plainly. Query big files by script. A count falling is not a cure. A claim of zero names the instrument that looked everywhere the words can print. "
     "A bound is proved on births the builder did not tune on. A rising row is origin (stop) or exposure (declared). A red is classed against the lane's reviewed "
     "base as well as the seat's own. The page shows ratings, never the machinery. A line is in its pool unless the town makes it false. A classifier's refusal "
-    "is never routed round. A hand-back carries the rulings its seat worked to: the chair's messages are not on the branch.\n"
+    "is never routed round. A hand-back carries the rulings its seat worked to: the chair's messages are not on the branch. YOU CHANGE ONLY FILES YOUR "
+    "LANE HOLDS: before the first edit of any file, `git log --oneline origin/lane/integration-2026-11-07..origin/<each other lane> -- <file>`: a fault "
+    "whose true writer is a file another lane has changed is NAMED under FOR THE JOIN (file, function, the one-line change) and left: two lanes curing "
+    "one fault is a conflict at the join (it happened on 2026-11-14).\n"
     "THE METHOD for every line you write or reword: (1) a line is READ WHERE IT PRINTS before it is pushed: three towns of its own cells, a siege, a famine or an "
     "occupation among them wherever it can print under one, the smallest and the largest size it reaches, the towns and what printed in the commit body; (2) a "
     "twin carries every condition its siblings carry; (3) a line that names a house, a role, a force or a good reads the roster; (4) a line that cannot be made "
@@ -568,7 +571,17 @@ STATEMENT2 = (
     "suite's red titles pin (the register is tests/fixtures/.golden-freeze-register.json); the whole suite once, IN SIX SHARDS, every red classed against the "
     "line's own failing set at the lane's base (a red new on the lane is the lane's to cure through its door, or is named with its owner); the new words with "
     "their towns, for the owner's veto; FOR THE JOIN, whatever the lane names for the seat that joins the lanes; the edge bundles checked last and committed "
-    "alone if they differ. Signing is the merge seat's: you run no golden's door in its writing mode."
+    "alone if they differ. Signing is the merge seat's: you run no golden's door in its writing mode. THE INSTRUMENT'S FRESH HITS AFTER YOUR MERGE OF "
+    "THE LINE, RULED FOR EVERY LANE (the chair, 2026-11-14 04:57 UTC): (1) a stale row leaves by the door's shrink form; (2) a fresh hit where a set or "
+    "table ALREADY DECLARES the atom and the text only stands apart from it (a constant, a moved literal): the SHAPE CURE: the literal goes into its "
+    "declaring member, the output byte-identical; (3) a fresh hit on a line GATED IN CODE (true wherever it prints, by a condition the code tests) but "
+    "not declared through a draw door: NOT banked, NOT keyed by hand, NOT reworded to slip the matcher, NOT re-routed now: it stays RED AND NAMED: the "
+    "statement lists each under FOR THE DECLARATION PASS (file, the text, the code condition that gates it, the atom it would declare, any new word it "
+    "needs): ONE DECLARATION PASS is made after the join, on the joined tree, for every lane at once; (4) a fresh hit on a line that is FALSE somewhere "
+    "is a cure, now; the same for a fact-layers rise that is only a reader's reworded condition (named, both contents given). The statement gives each "
+    "walker's exit and says which reds are the lane's, named. Also in it: `node scripts/implementation-packets.mjs validate` at the final tip, its exit "
+    "(a symbol your lane retired that a landed packet requires takes a `retiredBy` on that one manifest row, citing the ledger section that authorized "
+    "the change)."
 )
 
 COUNT2 = (
@@ -1177,6 +1190,61 @@ SEATS2['POWERS-12'] = dict(
           "then reads the stage as a diff from 96a6ced46: leave it what it needs.\n" + POWERS_METHOD),
     merges="; the merge of the integration line's tip named in step 5",
     when="for a stop that blocks everything you have left, when M1 is pushed (one line: the count), when the line's merge and its registers are pushed (the tip; what conflicted), and with your statement or hand-back",
+    turns='',
+)
+
+
+SEATS2['W2-FIX-DATA-10'] = dict(
+    title="W2-FIX-DATA-10 · the data lane's close: the line's merge, the instrument's checks, the final statement",
+    branch='lane/w2-fix-data-2026-11-13', tip='46a91fa2', statement=True,
+    intro=("You are W2-FIX-DATA-10, the tenth seat on the data lane of the settlement-engine integration program (lane/w2-fix-data-2026-11-13). The lane cures "
+           "false lines written in the data tables: a house's description, a service's text, a history line that the town's own record makes false. ITS "
+           "LIST IS CLOSED: the ninth seat cured the last rows, merged the lane's history branch, MEASURED the merge of the integration line without "
+           "landing it, and handed back with the close written out. Yours: THE CLOSE, whole: the line's merge, the instrument's checks on this lane's "
+           "lines, the census at the tip, and the lane's ONE final statement. NO NEW CURE OF A PAGE LINE IS YOURS beyond what the checks ask: the rest is "
+           "LEFT FOR AFTER THE JOIN and already written."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-14/W2-FIX-DATA-HANDBACK-9.md WHOLE (80 lines: the instruments; the rows with their commits; section 2, LEFT "
+          "FOR AFTER THE JOIN, which is NOT yours and goes into the statement as it stands; SECTION 3, THE CLOSE: done, measured, and what is left: THAT IS "
+          "YOUR LIST; section 4, the census at the lane's base; the rulings) and the list docs/chair/2026-11-14/probes/W2-FIX-DATA-9/"
+          "line-merge-presumed-fresh-50.txt (by script).\n"
+          "3. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (docs/INTEGRATION_STYLE_2_2026-11-09.md, the section headed "
+          "\"## 2m.\": about forty lines; by script) and the instrument's rule book tests/lint/presumedThings.shared.mjs (what a draw door and a carrier "
+          "are), before the first register you touch after the merge."),
+    work=("THE WORK, in this order, pushed as made:\n"
+          "1. THE MERGE OF THE LINE (the word is given): full history first (`git fetch --depth=2147483647 origin lane/integration-2026-11-07 "
+          "lane/w2-fix-data-2026-11-13`; `git rev-parse --is-shallow-repository` prints false; `git merge-base --all origin/lane/integration-2026-11-07 HEAD` "
+          "prints TWO bases, 96d698de7 and 9d5d6e091); the line's tip as you read it back (976db5b19 when this was written; a plain merge; say which commit "
+          "and what conflicted). BY THE NINTH SEAT'S MERGE (tried and aborted) AND THE CHAIR'S TRIAL MERGE OF 46a91fa2: 15 conflicted files, NO CODE: "
+          "docs/content/wiring-census.json, scripts/.prose-byte-baseline.json, scripts/census/pool-dominance.register.json (each from ONE side, then "
+          "re-derived by its own script, its own commit; the pool-dominance instrument RUNS on `--help`: read its header for its modes), the two "
+          "presumed-things registers (from THE LINE's side: point 49 changed their form), and the edge bundles with their meta files (by `npm run "
+          "build:edge-shared`, alone, last). A conflict outside this list means the base is wrong or a side moved: look before resolving.\n"
+          "2. THE PRESUMED-THINGS DOOR after the merge (the ninth seat measured from the line's side: fresh 50, stale 54, first-register stale 26; its "
+          "list of the 50 by file and text is the probe file above: 31 in institutionDescVariants.js, 10 in historyData.js, 7 in institutionalCatalog.js, "
+          "1 in institutionServices.js, 1 in defense.generated.js). BY THE RULING IN THE STATEMENT'S FORM BELOW (the four classes): a house's OWN "
+          "description naming that house prints only on that house's card: where the row's own declaration (its `needs`, in the form the rule book "
+          "reads) can carry the atom, DECLARE IT: that is class (2) for this lane, the output byte-identical; a line that is false somewhere is cured; a "
+          "line gated in code that a row's declaration cannot carry stays RED AND NAMED under FOR THE DECLARATION PASS; the one in defense.generated.js "
+          "is the corpus lane's: NAMED with its owner. The 80 stale rows leave by the shrink form in the commits that answer them. Nothing is banked by "
+          "hand; no walker's list is widened.\n"
+          "3. THE REST OF SECTION 2m's CHECKS at that tip: the page census (`node scripts/census/page-census.mjs --workers=2`, the 720, about twenty "
+          "minutes, to a file; and `--grid`), the fact layers, the observed shapes, writer reach, the tuning inventory, the lighting census (this lane's "
+          "new test titles): a rise or a red on THIS lane's lines is cured through its door; a fall is lowered by the shrink form in the same commit; a red "
+          "of the line's own or another lane's file is NAMED with its owner. THE POOL GUARD's three red titles (resource_scarcity 0.374 over 0.336; "
+          "succession_crisis 0.815 over 0.640: the history seat's stop) stay RED AND NAMED: no hand edit, no ceiling raised: for the seat after the "
+          "join.\n"
+          "4. The measuring seat's command at your final tip over the lane's files (docs/chair/2026-11-14/probes/W2-FIX-DATA-9/lanefiles.txt; the base's "
+          "counts at 96d698de7 are in the hand-back's section 4), every hit in the lane's files read against its town: a hit on a row already under LEFT "
+          "FOR AFTER THE JOIN is said so; a HIGH one not listed there is cured.\n"
+          "5. THE LANE'S ONE FINAL STATEMENT in the form below (the lane's bases with the line are the two above; the last read of the lane was at "
+          "4114cf5a6: a diff-only reader reads from there): the rows of every seat with their counts and commits, gathered by script from the hand-backs "
+          "(docs/chair/2026-11-14/W2-FIX-DATA-HANDBACK-9.md and -8.md; the earlier ones by their tables); the history branch's merge and its field diff; "
+          "LEFT FOR AFTER THE JOIN as section 2 gives it, with the history branch's rulings (a) to (c); FOR THE JOIN (scripts/lib/table-pools.mjs is "
+          "changed by the powers lane too: say this lane's rows there; institutionVocabulary.js's one-liner; the Mine's service twin). Then ONE message "
+          "to the chair: the tip, the suite's reds by class, where the statement is."),
+    merges="; the merge of the integration line's tip named in step 1",
+    when="for a stop that blocks everything you have left, when the merge and its registers are pushed (the tip; what conflicted; the presumed-things door's counts by class), and with your final statement or hand-back",
     turns='',
 )
 
