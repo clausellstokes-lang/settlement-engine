@@ -158,8 +158,8 @@ export function criminalsOf(f) {
  */
 function askerLine(f) {
   const share = shareWords(f.share);
-  if (f.rank === 1) return `${f.name} heads ${f.ruler} and also holds ${share} in ${f.power}, so what ${f.power} wants from ${f.ruler} goes straight to the top.`;
-  if (f.rank === 2) return `${f.power} brings its requests to ${f.ruler} through ${f.name}, second in ${f.ruler}, who holds ${share} in ${f.power}.`;
+  if (f.rank === 1) return `${f.name} heads ${f.ruler} and also holds ${share} in ${powerSentenceName(f.power)}, so what ${powerSentenceName(f.power)} wants from ${f.ruler} goes straight to the top.`;
+  if (f.rank === 2) return `${powerSentenceName(f.power)} brings its requests to ${f.ruler} through ${f.name}, second in ${f.ruler}, who holds ${share} in ${powerSentenceName(f.power)}.`;
   if (f.rank === 3) return `${f.name} is third in ${f.ruler} and holds ${share} in ${powerSentenceName(f.power)}, and carries ${powerPossessive(f.power)} requests to the two above.`;
   return `While the seat of ${f.ruler} stands empty, its steward ${f.name} holds ${share} in ${powerSentenceName(f.power)}, and ${powerPossessive(f.power)} requests go through ${f.name}.`;
 }
@@ -184,15 +184,15 @@ export function boostWords(base, boost) {
 export const PATRONAGE_LINES = Object.freeze({
   // the face's open membership in another power (the boost is shown on the DM layer only, J-9)
   open: Object.freeze([
-    (f) => `${f.name}, ${patronPlace(f.rank, f.ruler)}, also holds ${shareWords(f.share)} in ${f.power}, and that lends ${f.power} weight it would not have on its own.`,
+    (f) => `${f.name}, ${patronPlace(f.rank, f.ruler)}, also holds ${shareWords(f.share)} in ${powerSentenceName(f.power)}, and that lends ${powerSentenceName(f.power)} weight it would not have on its own.`,
     (f) => askerLine(f),
-    (f) => `${f.name} serves ${f.ruler} and ${f.power} at once. While ${f.name} holds both places, ${f.power} counts for more here than its own members would make it.`,
+    (f) => `${f.name} serves ${f.ruler} and ${powerSentenceName(f.power)} at once. While ${f.name} holds both places, ${powerSentenceName(f.power)} counts for more here than its own members would make it.`,
   ]),
   // the face's hidden allegiance to a criminal power (DM-only; the public page shows base strength)
   hidden: Object.freeze([
-    (f) => `${f.name}, ${patronPlace(f.rank, f.ruler)}, secretly answers to ${f.power}, and that lends ${f.power} strength nobody outside the arrangement can see.`,
-    (f) => `${f.power} has its own voice in ${f.ruler}: ${f.name}, ${patronPlace(f.rank, f.ruler)}. The others there hear it as ${f.name}'s own opinion.`,
-    (f) => `Anyone who weighs ${f.power} by its known members leaves out ${f.name}, ${patronPlace(f.rank, f.ruler)}, who serves it in secret. Counting ${f.name}, ${f.power} is stronger than it looks.`,
+    (f) => `${f.name}, ${patronPlace(f.rank, f.ruler)}, secretly answers to ${powerSentenceName(f.power)}, and that lends ${powerSentenceName(f.power)} strength nobody outside the arrangement can see.`,
+    (f) => `${powerSentenceName(f.power)} has its own voice in ${f.ruler}: ${f.name}, ${patronPlace(f.rank, f.ruler)}. The others there hear it as ${f.name}'s own opinion.`,
+    (f) => `Anyone who weighs ${powerSentenceName(f.power)} by its known members leaves out ${f.name}, ${patronPlace(f.rank, f.ruler)}, who serves it in secret. Counting ${f.name}, ${powerSentenceName(f.power)} is stronger than it looks.`,
   ]),
 });
 

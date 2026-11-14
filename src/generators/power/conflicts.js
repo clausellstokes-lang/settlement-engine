@@ -5,6 +5,7 @@
 import { getInstFlags, getStressFlags, pick, randInt } from '../helpers.js';
 import { createGenerationWorldLaw } from '../generationContext.js';
 import { nameOf } from '../../domain/rulingPower.js';
+import { powerSentenceName } from '../../domain/display/powerSentenceName.js';
 import { drawDeclared, lineText } from '../../domain/facts/drawDeclared.js';
 import { fnv1a32 } from '../../kernel/proseHash.js';
 import { getActiveRng } from '../../kernel/rngContext.js';
@@ -69,7 +70,8 @@ const buildConflictPlotHooks = (factionA, factionB, conflict, instFlags, stressF
         ? 'the next chapter assembly'
         : 'the next council session';
   return [
-    `A neutral figure is being pressured by both ${factionA.name} and ${factionB.name} to take a side before ${arbitrationVenue}.`,
+    // POWERS-16 (the chair's ruling (r2)): a power named in a sentence takes its prose form, from one leaf
+    `A neutral figure is being pressured by both ${powerSentenceName(factionA.name)} and ${powerSentenceName(factionB.name)} to take a side before ${arbitrationVenue}.`,
     'A letter has turned up showing that someone outside both powers paid for the last clash between them.',
     ...flagHooks,
   ].slice(0, 3);
@@ -199,7 +201,8 @@ export const generateConflicts = (powers, relationships, config = {}, institutio
       issue: chosen.issue,
       stakes: chosen.stakes,
       intensity,
-      desc: `${factionA.name} and ${factionB.name} are in ${intensity} conflict over ${chosen.issue.toLowerCase()}. The stakes are ${chosen.stakes.toLowerCase()}.${touched ? ` It reaches ${touched.name} too, who are not a party to it.` : ''}`,
+      // POWERS-16 (the chair's ruling (r2)): the powers named in the sentence take their prose form, from one leaf
+      desc: `${powerSentenceName(factionA.name)} and ${powerSentenceName(factionB.name)} are in ${intensity} conflict over ${chosen.issue.toLowerCase()}. The stakes are ${chosen.stakes.toLowerCase()}.${touched ? ` It reaches ${powerSentenceName(touched.name)} too, who are not a party to it.` : ''}`,
       plotHooks: buildConflictPlotHooks(factionA, factionB, chosen, instFlags, stressFlags, facts),
     });
   }

@@ -32,6 +32,7 @@
 import { coupContenders } from '../rulingPowerCoup.js';
 import { governingFactionOf, nameOf, num } from '../rulingPower.js';
 import { factionArchetype } from '../factionArchetypes.js';
+import { powerSentenceName } from '../display/powerSentenceName.js';
 
 /** @typedef {import('../rulingPower.js').RulingPowerSettlement} RulingPowerSettlement */
 /** @typedef {import('../rulingPower.js').RulingFaction} RulingFaction */
@@ -452,6 +453,7 @@ export function crisisNoteFor(settlement, faction) {
   if (!note.includes(APPEARS_TO_GOVERN)) return note;
   const governing = governingFactionOf(settlement);
   const rival = governing && faction === governing ? outrankingRivalOf(settlement) : null;
-  const said = rival ? `Holds the title; the decisions that matter are made by ${rival}.` : '';
+  // POWERS-16 (the chair's ruling (r2)): the rival named in the sentence takes its prose form, from one leaf
+  const said = rival ? `Holds the title; the decisions that matter are made by ${powerSentenceName(rival)}.` : '';
   return note.replace(APPEARS_TO_GOVERN, said).replace(/\s{2,}/g, ' ').trim();
 }
