@@ -2921,6 +2921,72 @@ SEATS2['UPKEEP-MEASURE-2'] = dict(
 )
 
 
+SEATS2['R2-CODE-A-10'] = dict(
+    title="R2-CODE-A-10 · round two's first code lane: the bar's HIGH row, the lane's own reds through their doors, the census hits read, the final statement",
+    branch='lane/r2-code-a-2026-11-13', tip='1869ac9b', statement=True,
+    intro=("You are R2-CODE-A-10, the tenth seat on round two's first code lane of the settlement-engine integration program (lane/r2-code-a-2026-11-13). "
+           "The lane cures false lines in the founding paragraph, the history's origin, the arrival scenes, the pressure sentences and the people data. "
+           "ITS LIST IS CLOSED, THE LINE IS MERGED, THE RISE IS CURED AND THE STATEMENT'S PARTS ARE MEASURED (the ninth seat, which handed back at its "
+           "count). Yours: ONE HIGH row a first measure against the release bar found in this lane's file, the lane's own red tests through their "
+           "doors, the census's hits read, and the lane's ONE final statement, composed from parts already measured."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/R2-CODE-A-HANDBACK.md, BY LINE RANGE, BY SCRIPT (795 lines; open ONLY these): from \"## 18.\" down to "
+          "the line that begins \"**GATHERED BY SCRIPT from sections 13\" (about ninety lines: step 1; step 2, the eighteen named; THE FINAL "
+          "STATEMENT'S MEASURED PARTS: the census, the 52 tip hits by line, the field diff, THE REDS CLASSED, the registered surfaces), and from "
+          "\"### HANDED BACK BY FILE at THE COUNT\" to the end (LEFT, in order; the instruments). THE GATHERED BLOCK between them is fifty very long "
+          "lines: it is NOT read: it is copied into the statement by script.\n"
+          "3. THE BAR'S ROWS FOR THIS LANE (`git fetch origin lane/chair-2026-11-08`; `git show "
+          "origin/lane/chair-2026-11-08:docs/chair/2026-11-14/bar-0-rows/BAR-0-ROWS-r2a.json`, with the README.md beside it): 7 rows, 1 HIGH. The "
+          "towns are re-born by the measure's own probes (`git fetch origin lane/review-bar-0-2026-11-14`: "
+          "docs/chair/2026-11-14/probes/REVIEW-BAR-0/: copy them out with git archive; run them from outside every repository tree).\n"
+          "4. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (docs/INTEGRATION_STYLE_2_2026-11-09.md, the section headed "
+          "\"## 2m.\": about forty lines; by script), and EACH RED TEST'S OWN HEADER before you act on it: it names its door."),
+    work=("THE WORK, in this order, each cause its own commit, pushed as made:\n"
+          "1. THE BAR'S HIGH ROW (#35): under a siege the Overview prints \"{S}'s gates are open but attended: every person entering is noted, every "
+          "cart searched\" while the same town's Defense tab says its gates are shut and barred (the writer: src/data/narrativeData.js on the "
+          "rehearsal's tree; find it at your tip by the sentence's fixed words; this lane holds that file). RULED: UNDER A SIEGE IN FORCE NO LINE "
+          "SAYS THE GATES STAND OPEN OR THAT PEOPLE AND CARTS COME IN BY ROAD. Every line of that pool is read under a siege (and under an "
+          "occupation: who searches the carts?), not only the one the reader met: count on your births, by line, the towns that print each against "
+          "the record; cure by a registered condition, a twin true under the siege, or silence; red first (a collected arm), a guard town, three "
+          "towns read, a siege and an occupation among them.\n"
+          "2. THE LANE'S OWN REDS (section 18's \"The lane's, before this seat\"), each through its own door or in its own test file, each READ "
+          "FIRST (its failure text at your tip, to a file): (a) tests/generators/timberHookForestHeld.test.js, three titles: a guard of this lane's "
+          "own cure that is RED: find which commit reds it (a cure of the lane's before the merge, the merge 16e5184bf, or a later seat's): a fault the "
+          "merge composed is cured at its cause; a guard town the line's change moved is re-keyed BY IDENTITY with its cause; (b) "
+          "tests/domain/facts/missingLeaves.test.js (the kind table classes every line of the founder tables): the lane's new founder lines enter "
+          "the table by its own rule; (c) tests/lint/noLegacyFactionReaders.walker.test.js (a read outside its list): the read is made through the "
+          "sanctioned reader, never listed; (d) tests/lint/defenceFactReaders.walker.test.js (a banked count): a fall is lowered by the register's "
+          "own form, a rise is a new raw read: cured; (e) tests/lint/negativeAssertionAnchor.walker.test.js, two titles: each bare negative in a "
+          "lane test anchored by a positive assertion beside it, shown able to red by a plant; never a row in its baseline; (f) "
+          "tests/lint/mutationCoverageManifest.test.js: an entry for each new invariant file, the mutation EXECUTED (break, see red, restore); (g) "
+          "the presumed-things walker's \"no stale row\" (an arm-2 row covers no printed line): out by the door's shrink form for arm 2; (h) "
+          "tests/lint/writerReach.walker.test.js, two titles: as section 2m gives the door: its check first; `--write` on the clean committed tree "
+          "ONLY IF the pinned totals hold and no new identity appears; else named for the merge seat with the figures; (i) THE TUNING REGISTER "
+          "(foodBalance.js FAMINE_HELD_STORE_MONTHS, \"dependents moved\"): THE CHAIR NAMES THE POINT: NOW, on the clean committed tree after (a) to "
+          "(h), by the inventory's own ritual as 2m's part (4) gives it; no value moves. A door's refusal you cannot cure is a STOP with its output; "
+          "nothing is banked by hand. THE GOLDENS AND THE TWO DOORS (generationForkCensus A1, worldFactRederive A7) are the merge seat's: named in "
+          "the draft shift record with their figures, not run.\n"
+          "3. ONE MESSAGE TO THE CHAIR (the tip; row #35's counts; each red of step 2: cured, re-keyed or named), then THE COUNT.\n"
+          "4. THE CENSUS'S 52 TIP HITS (section 18's table), READ AGAINST THEIR TOWNS: first the nine \"Since the {hunt|fishing|herds} failed, food is "
+          "power in {S}, and everyone is watching who eats well\" rows (kind b under a famine: does anyone eat well?) and the slave-revolt line's "
+          "\"lower districts\" and \"merchant stalls\" in a thorp; a line FALSE where it prints is cured now, its own commit; the rows already named "
+          "(the clergy row, \"its house of worship survived\", the informant secret, the baseline twins, the customs house and the magistrate) stay "
+          "named, each with the section that names it.\n"
+          "5. THE EDGE BUNDLES LAST (`npm run build:edge-shared` in a checkout with ITS OWN node_modules), committed alone if they differ.\n"
+          "6. THE LANE'S ONE FINAL STATEMENT in the form below, COMPOSED from section 18's measured parts, brought current where your commits moved "
+          "them (the census in the lane's files and the field diff re-run at your final tip; the reds re-classed by re-running the red files; "
+          "`node scripts/implementation-packets.mjs validate`); ONE draft shift record; the gathered block copied by script (FOR THE JOIN, the new "
+          "words, the declared re-deals); FOR THE DECLARATION PASS (the eighteen and the five); LEFT FOR AFTER THE JOIN. The base is e969a75b7; the "
+          "stage a reader has not read begins at 0d3972d8f. THE WHOLE SUITE IS NOT RUN (the joined tree's). Then ONE message to the chair: the "
+          "tip, the reds by class, where the statement is.\n"
+          "7. ONLY IF YOUR COUNT IS THEN UNDER 250,000: the bar's six MEDIUM rows of the rows file, widest first (count each on your births), one "
+          "cause a commit, each line read where it prints, listed in the hand-back under a heading of its own (a stage after the statement)."),
+    merges='',
+    when="for a stop that blocks everything you have left, at step 3 (the tip; row #35's counts; step 2's reds one by one), and with your final statement or hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
