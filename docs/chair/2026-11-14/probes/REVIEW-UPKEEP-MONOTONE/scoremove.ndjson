@@ -1,0 +1,380 @@
+{"seed": "r2r-city-14", "tier": "city", "pop": 5381, "monster": [81, 74], "internal": [58, 57], "readiness": [66, 64]}
+{"seed": "r2r-city-29", "tier": "city", "pop": 5866, "monster": [81, 74], "internal": [52, 51], "readiness": [67, 65]}
+{"seed": "r2r-city-31", "tier": "city", "pop": 3183, "economic": [96, 98]}
+{"seed": "r2r-city-33", "tier": "city", "pop": 7362, "economic": [88, 90]}
+{"seed": "r2r-city-39", "tier": "city", "pop": 2866, "internal": [82, 81]}
+{"seed": "r2r-city-4", "tier": "city", "pop": 7265, "military": [95, 100], "monster": [100, 93], "internal": [68, 67], "readiness": [70, 69]}
+{"seed": "r2r-city-41", "tier": "city", "pop": 7409, "military": [91, 98], "readiness": [83, 85]}
+{"seed": "r2r-city-44", "tier": "city", "pop": 2408, "military": [86, 93], "economic": [91, 93], "readiness": [45, 47]}
+{"seed": "r2r-city-46", "tier": "city", "pop": 2578, "monster": [95, 88], "internal": [84, 83], "readiness": [82, 81]}
+{"seed": "r2r-city-48", "tier": "city", "pop": 10560, "internal": [86, 85]}
+{"seed": "r2r-city-49", "tier": "city", "pop": 6341, "internal": [75, 74], "readiness": [83, 82]}
+{"seed": "r2r-city-53", "tier": "city", "pop": 4556, "military": [93, 100], "readiness": [74, 75]}
+{"seed": "r2r-city-54", "tier": "city", "pop": 8586, "internal": [79, 78]}
+{"seed": "r2r-city-8", "tier": "city", "pop": 10739, "economic": [97, 99], "readiness": [67, 68]}
+{"seed": "r2r-city-9", "tier": "city", "pop": 7350, "military": [77, 84], "readiness": [71, 73]}
+{"seed": "r2r-hamlet-11", "tier": "hamlet", "pop": 46, "military": [71, 46], "readiness": [27, 22], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "r2r-hamlet-16", "tier": "hamlet", "pop": 20, "military": [48, 20], "readiness": [6, 1]}
+{"seed": "r2r-hamlet-17", "tier": "hamlet", "pop": 40, "military": [67, 40], "readiness": [16, 10]}
+{"seed": "r2r-hamlet-18", "tier": "hamlet", "pop": 56, "military": [71, 56], "readiness": [20, 17]}
+{"seed": "r2r-hamlet-20", "tier": "hamlet", "pop": 99, "military": [57, 55]}
+{"seed": "r2r-hamlet-23", "tier": "hamlet", "pop": 96, "military": [36, 35], "readiness": [21, 20]}
+{"seed": "r2r-hamlet-3", "tier": "hamlet", "pop": 50, "military": [74, 50], "readiness": [27, 23], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "r2r-hamlet-34", "tier": "hamlet", "pop": 50, "military": [53, 50], "readiness": [11, 10]}
+{"seed": "r2r-hamlet-4", "tier": "hamlet", "pop": 41, "military": [33, 32], "readiness": [22, 21]}
+{"seed": "r2r-hamlet-40", "tier": "hamlet", "pop": 27, "military": [59, 27], "readiness": [32, 26]}
+{"seed": "r2r-hamlet-45", "tier": "hamlet", "pop": 85, "military": [33, 32]}
+{"seed": "r2r-hamlet-50", "tier": "hamlet", "pop": 78, "military": [60, 48], "readiness": [35, 33]}
+{"seed": "r2r-hamlet-55", "tier": "hamlet", "pop": 73, "military": [75, 73]}
+{"seed": "r2r-hamlet-6", "tier": "hamlet", "pop": 57, "military": [73, 57], "readiness": [22, 19]}
+{"seed": "r2r-metropolis-21", "tier": "metropolis", "pop": 22766, "monster": [100, 98], "internal": [71, 70]}
+{"seed": "r2r-metropolis-38", "tier": "metropolis", "pop": 26824, "internal": [86, 85]}
+{"seed": "r2r-thorp-0", "tier": "thorp", "pop": 11, "military": [17, 11], "readiness": [29, 27]}
+{"seed": "r2r-thorp-10", "tier": "thorp", "pop": 10, "military": [13, 10]}
+{"seed": "r2r-thorp-12", "tier": "thorp", "pop": 23, "military": [64, 23], "readiness": [25, 17], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "r2r-thorp-13", "tier": "thorp", "pop": 17, "military": [74, 17], "readiness": [36, 24]}
+{"seed": "r2r-thorp-16", "tier": "thorp", "pop": 10, "military": [81, 10], "internal": [24, 25], "readiness": [32, 18], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "r2r-thorp-17", "tier": "thorp", "pop": 11, "military": [48, 11], "readiness": [8, 0]}
+{"seed": "r2r-thorp-18", "tier": "thorp", "pop": 30, "military": [47, 30], "readiness": [27, 24]}
+{"seed": "r2r-thorp-2", "tier": "thorp", "pop": 27, "military": [45, 27], "internal": [25, 26], "readiness": [30, 27]}
+{"seed": "r2r-thorp-21", "tier": "thorp", "pop": 17, "military": [26, 17], "readiness": [20, 18]}
+{"seed": "r2r-thorp-24", "tier": "thorp", "pop": 20, "military": [21, 20]}
+{"seed": "r2r-thorp-25", "tier": "thorp", "pop": 21, "military": [58, 21], "readiness": [20, 12]}
+{"seed": "r2r-thorp-26", "tier": "thorp", "pop": 15, "military": [55, 15], "readiness": [20, 12]}
+{"seed": "r2r-thorp-28", "tier": "thorp", "pop": 18, "military": [26, 18], "readiness": [29, 27]}
+{"seed": "r2r-thorp-29", "tier": "thorp", "pop": 11, "military": [19, 11], "readiness": [22, 20]}
+{"seed": "r2r-thorp-3", "tier": "thorp", "pop": 12, "military": [18, 12], "readiness": [28, 27]}
+{"seed": "r2r-thorp-30", "tier": "thorp", "pop": 15, "military": [19, 15], "readiness": [27, 26]}
+{"seed": "r2r-thorp-31", "tier": "thorp", "pop": 26, "military": [37, 26], "readiness": [23, 21]}
+{"seed": "r2r-thorp-32", "tier": "thorp", "pop": 8, "military": [18, 8], "readiness": [20, 18]}
+{"seed": "r2r-thorp-33", "tier": "thorp", "pop": 18, "military": [20, 18]}
+{"seed": "r2r-thorp-34", "tier": "thorp", "pop": 18, "military": [69, 18], "readiness": [26, 16], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "r2r-thorp-35", "tier": "thorp", "pop": 20, "military": [21, 20]}
+{"seed": "r2r-thorp-36", "tier": "thorp", "pop": 5, "military": [13, 5], "readiness": [18, 17]}
+{"seed": "r2r-thorp-37", "tier": "thorp", "pop": 6, "military": [16, 6], "readiness": [18, 16]}
+{"seed": "r2r-thorp-39", "tier": "thorp", "pop": 29, "military": [56, 29], "readiness": [29, 24]}
+{"seed": "r2r-thorp-4", "tier": "thorp", "pop": 30, "military": [44, 30], "readiness": [28, 25]}
+{"seed": "r2r-thorp-41", "tier": "thorp", "pop": 22, "military": [60, 22], "readiness": [21, 13]}
+{"seed": "r2r-thorp-43", "tier": "thorp", "pop": 19, "military": [30, 19], "readiness": [24, 22], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "r2r-thorp-45", "tier": "thorp", "pop": 20, "military": [48, 20], "readiness": [14, 8]}
+{"seed": "r2r-thorp-47", "tier": "thorp", "pop": 15, "military": [46, 15], "readiness": [28, 22], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "r2r-thorp-50", "tier": "thorp", "pop": 28, "military": [41, 28], "internal": [18, 21], "readiness": [28, 26]}
+{"seed": "r2r-thorp-51", "tier": "thorp", "pop": 11, "military": [29, 11], "internal": [1, 2], "economic": [32, 33], "readiness": [21, 17]}
+{"seed": "r2r-thorp-55", "tier": "thorp", "pop": 17, "military": [21, 17]}
+{"seed": "r2r-thorp-57", "tier": "thorp", "pop": 11, "military": [17, 11], "readiness": [26, 25]}
+{"seed": "r2r-thorp-58", "tier": "thorp", "pop": 7, "military": [15, 7], "readiness": [16, 15]}
+{"seed": "r2r-thorp-59", "tier": "thorp", "pop": 7, "military": [14, 7], "readiness": [25, 23], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "r2r-thorp-6", "tier": "thorp", "pop": 19, "military": [75, 19], "internal": [34, 35], "readiness": [26, 15], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "r2r-thorp-7", "tier": "thorp", "pop": 9, "military": [56, 9], "readiness": [30, 20], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "r2r-thorp-8", "tier": "thorp", "pop": 10, "military": [53, 10], "readiness": [18, 9]}
+{"seed": "r2r-thorp-9", "tier": "thorp", "pop": 20, "military": [23, 20]}
+{"seed": "r2r-town-0", "tier": "town", "pop": 708, "military": [50, 44], "internal": [8, 11], "economic": [52, 54], "magical": [11, 12], "readiness": [14, 11]}
+{"seed": "r2r-town-1", "tier": "town", "pop": 1590, "military": [44, 38], "economic": [36, 57], "magical": [45, 72], "readiness": [27, 24]}
+{"seed": "r2r-town-10", "tier": "town", "pop": 754, "readiness": [71, 70]}
+{"seed": "r2r-town-11", "tier": "town", "pop": 1790, "economic": [70, 72], "magical": [46, 48], "readiness": [42, 41]}
+{"seed": "r2r-town-12", "tier": "town", "pop": 1099, "military": [62, 61], "monster": [59, 60], "economic": [51, 64], "magical": [29, 36], "readiness": [35, 34]}
+{"seed": "r2r-town-13", "tier": "town", "pop": 1671, "monster": [72, 65], "internal": [63, 62], "economic": [81, 80], "readiness": [69, 67]}
+{"seed": "r2r-town-14", "tier": "town", "pop": 1359, "military": [44, 43], "economic": [78, 85], "magical": [33, 37], "readiness": [40, 39]}
+{"seed": "r2r-town-15", "tier": "town", "pop": 2344, "readiness": [45, 44]}
+{"seed": "r2r-town-16", "tier": "town", "pop": 996, "military": [100, 99]}
+{"seed": "r2r-town-17", "tier": "town", "pop": 1558, "military": [67, 66], "monster": [55, 56], "economic": [68, 83], "magical": [45, 55], "readiness": [48, 47]}
+{"seed": "r2r-town-18", "tier": "town", "pop": 1095, "economic": [70, 69]}
+{"seed": "r2r-town-19", "tier": "town", "pop": 1590, "monster": [34, 33], "internal": [35, 34], "readiness": [37, 36]}
+{"seed": "r2r-town-2", "tier": "town", "pop": 914, "military": [26, 16], "internal": [43, 44], "economic": [60, 85], "magical": [34, 51], "readiness": [39, 34], "label": ["Defensible", "Lightly Defended"]}
+{"seed": "r2r-town-20", "tier": "town", "pop": 2443, "military": [57, 45], "internal": [33, 37], "economic": [48, 59], "magical": [25, 31], "readiness": [34, 30]}
+{"seed": "r2r-town-21", "tier": "town", "pop": 1181, "military": [39, 37], "monster": [35, 28], "internal": [47, 46], "economic": [76, 75], "readiness": [45, 43]}
+{"seed": "r2r-town-22", "tier": "town", "pop": 540, "military": [38, 37], "magical": [3, 5], "readiness": [18, 17]}
+{"seed": "r2r-town-23", "tier": "town", "pop": 1317, "internal": [29, 30], "economic": [64, 81], "magical": [34, 45]}
+{"seed": "r2r-town-24", "tier": "town", "pop": 423, "economic": [49, 56], "magical": [10, 20]}
+{"seed": "r2r-town-25", "tier": "town", "pop": 1655, "military": [48, 47], "economic": [87, 86]}
+{"seed": "r2r-town-26", "tier": "town", "pop": 968, "military": [53, 51], "monster": [84, 78], "internal": [36, 35], "economic": [73, 72], "readiness": [55, 53], "label": ["Well-Defended", "Defensible"]}
+{"seed": "r2r-town-28", "tier": "town", "pop": 2273, "military": [91, 89], "monster": [64, 57], "internal": [47, 46], "economic": [87, 86], "readiness": [51, 49]}
+{"seed": "r2r-town-29", "tier": "town", "pop": 1900, "military": [11, 9], "economic": [38, 65], "magical": [29, 59], "readiness": [24, 23], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "r2r-town-3", "tier": "town", "pop": 1168, "military": [33, 31], "economic": [40, 37], "magical": [8, 14], "readiness": [17, 16]}
+{"seed": "r2r-town-30", "tier": "town", "pop": 1809, "readiness": [38, 37], "label": ["Defensible", "Lightly Defended"]}
+{"seed": "r2r-town-31", "tier": "town", "pop": 2335, "military": [20, 19], "economic": [62, 73], "magical": [32, 38], "readiness": [31, 30]}
+{"seed": "r2r-town-32", "tier": "town", "pop": 2057, "economic": [88, 89], "readiness": [41, 40]}
+{"seed": "r2r-town-33", "tier": "town", "pop": 1471, "military": [21, 11], "internal": [37, 48], "economic": [44, 70], "magical": [25, 41], "readiness": [27, 28]}
+{"seed": "r2r-town-34", "tier": "town", "pop": 2074, "economic": [84, 83]}
+{"seed": "r2r-town-35", "tier": "town", "pop": 2149, "economic": [74, 73]}
+{"seed": "r2r-town-36", "tier": "town", "pop": 440, "military": [50, 48], "monster": [67, 62], "internal": [38, 37], "economic": [73, 72], "readiness": [47, 45]}
+{"seed": "r2r-town-38", "tier": "town", "pop": 1393, "military": [42, 43], "economic": [75, 91], "magical": [32, 40]}
+{"seed": "r2r-town-4", "tier": "town", "pop": 691, "military": [16, 9], "economic": [70, 80], "magical": [20, 25], "readiness": [34, 31]}
+{"seed": "r2r-town-40", "tier": "town", "pop": 2151, "military": [12, 10], "monster": [20, 21], "economic": [44, 70], "magical": [28, 52], "readiness": [23, 21]}
+{"seed": "r2r-town-41", "tier": "town", "pop": 745, "military": [12, 10], "economic": [43, 63], "magical": [23, 40], "readiness": [24, 23], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "r2r-town-42", "tier": "town", "pop": 1455, "military": [33, 25], "economic": [45, 72], "magical": [32, 52], "readiness": [31, 28]}
+{"seed": "r2r-town-43", "tier": "town", "pop": 366, "military": [59, 54], "internal": [38, 42], "economic": [48, 57], "magical": [8, 11], "readiness": [30, 29]}
+{"seed": "r2r-town-44", "tier": "town", "pop": 776, "monster": [38, 37], "readiness": [34, 33]}
+{"seed": "r2r-town-45", "tier": "town", "pop": 2341, "military": [77, 82], "internal": [26, 31], "economic": [82, 91], "magical": [44, 50], "readiness": [50, 53]}
+{"seed": "r2r-town-46", "tier": "town", "pop": 384, "economic": [84, 83], "readiness": [45, 44]}
+{"seed": "r2r-town-47", "tier": "town", "pop": 1410, "military": [46, 43], "economic": [52, 66], "magical": [18, 29], "readiness": [33, 31]}
+{"seed": "r2r-town-48", "tier": "town", "pop": 1728, "military": [39, 36], "monster": [35, 28], "internal": [42, 41], "magical": [59, 60], "readiness": [52, 47]}
+{"seed": "r2r-town-49", "tier": "town", "pop": 1724, "economic": [86, 91], "magical": [49, 53], "readiness": [57, 54], "label": ["Well-Defended", "Defensible"]}
+{"seed": "r2r-town-5", "tier": "town", "pop": 1314, "economic": [39, 52], "magical": [11, 17], "readiness": [23, 22]}
+{"seed": "r2r-town-50", "tier": "town", "pop": 1118, "military": [50, 48], "monster": [35, 28], "internal": [44, 43], "economic": [77, 76], "readiness": [55, 52], "label": ["Well-Defended", "Defensible"]}
+{"seed": "r2r-town-53", "tier": "town", "pop": 2055, "military": [54, 49], "internal": [34, 37], "economic": [50, 70], "magical": [21, 41], "readiness": [32, 30]}
+{"seed": "r2r-town-54", "tier": "town", "pop": 2451, "military": [24, 15], "internal": [47, 50], "economic": [69, 88], "magical": [40, 52], "readiness": [42, 39]}
+{"seed": "r2r-town-55", "tier": "town", "pop": 511, "military": [43, 36], "internal": [20, 34], "economic": [40, 59], "magical": [15, 21], "readiness": [23, 26], "label": ["Vulnerable", "Lightly Defended"]}
+{"seed": "r2r-town-56", "tier": "town", "pop": 1299, "military": [60, 53], "internal": [48, 53], "economic": [77, 76]}
+{"seed": "r2r-town-57", "tier": "town", "pop": 1144, "military": [80, 82], "internal": [33, 34], "economic": [69, 79], "magical": [21, 24]}
+{"seed": "r2r-town-58", "tier": "town", "pop": 2468, "military": [18, 21], "economic": [34, 47], "magical": [10, 21]}
+{"seed": "r2r-town-59", "tier": "town", "pop": 1283, "military": [70, 64], "internal": [40, 53], "economic": [45, 71], "magical": [18, 30], "readiness": [34, 36]}
+{"seed": "r2r-town-6", "tier": "town", "pop": 1614, "military": [81, 75], "economic": [81, 86], "magical": [61, 66], "readiness": [59, 55]}
+{"seed": "r2r-town-7", "tier": "town", "pop": 723, "military": [36, 32], "internal": [18, 24]}
+{"seed": "r2r-town-8", "tier": "town", "pop": 1177, "military": [68, 66], "monster": [72, 65], "internal": [6, 5], "economic": [74, 73], "readiness": [42, 40]}
+{"seed": "r2r-town-9", "tier": "town", "pop": 2161, "military": [81, 77], "monster": [71, 70], "economic": [74, 73], "readiness": [60, 59]}
+{"seed": "r2r-village-0", "tier": "village", "pop": 308, "economic": [38, 37]}
+{"seed": "r2r-village-1", "tier": "village", "pop": 85, "military": [31, 30]}
+{"seed": "r2r-village-13", "tier": "village", "pop": 347, "military": [43, 41]}
+{"seed": "r2r-village-14", "tier": "village", "pop": 371, "military": [66, 65]}
+{"seed": "r2r-village-17", "tier": "village", "pop": 156, "military": [62, 63], "internal": [8, 9], "economic": [34, 32]}
+{"seed": "r2r-village-18", "tier": "village", "pop": 225, "military": [52, 51]}
+{"seed": "r2r-village-25", "tier": "village", "pop": 255, "military": [43, 42]}
+{"seed": "r2r-village-26", "tier": "village", "pop": 335, "economic": [20, 28], "magical": [17, 25]}
+{"seed": "r2r-village-27", "tier": "village", "pop": 247, "military": [52, 46], "readiness": [17, 16]}
+{"seed": "r2r-village-28", "tier": "village", "pop": 249, "military": [47, 46], "economic": [34, 32], "readiness": [23, 22]}
+{"seed": "r2r-village-36", "tier": "village", "pop": 368, "economic": [46, 55], "magical": [29, 37]}
+{"seed": "r2r-village-40", "tier": "village", "pop": 350, "military": [69, 68], "internal": [34, 41], "readiness": [29, 30]}
+{"seed": "r2r-village-45", "tier": "village", "pop": 270, "military": [54, 52], "internal": [38, 43], "economic": [58, 57]}
+{"seed": "r2r-village-46", "tier": "village", "pop": 274, "monster": [58, 57], "economic": [50, 49], "readiness": [41, 40]}
+{"seed": "r2r-village-47", "tier": "village", "pop": 375, "military": [41, 40]}
+{"seed": "r2r-village-49", "tier": "village", "pop": 168, "military": [52, 50]}
+{"seed": "r2r-village-50", "tier": "village", "pop": 386, "military": [47, 44], "readiness": [14, 13]}
+{"seed": "r2r-village-6", "tier": "village", "pop": 291, "military": [93, 84], "readiness": [31, 29]}
+{"seed": "r2r-village-7", "tier": "village", "pop": 359, "military": [64, 63], "economic": [32, 30], "readiness": [16, 15]}
+{"seed": "r2r-village-8", "tier": "village", "pop": 316, "monster": [36, 35], "economic": [32, 30], "readiness": [32, 31]}
+{"seed": "r2s-famine-town-0", "tier": "town", "pop": 1696, "military": [39, 41], "economic": [41, 59], "magical": [38, 60]}
+{"seed": "r2s-famine-town-1", "tier": "town", "pop": 1336, "economic": [74, 73]}
+{"seed": "r2s-famine-town-2", "tier": "town", "pop": 407, "military": [7, 2], "economic": [25, 38], "magical": [17, 28], "readiness": [12, 10]}
+{"seed": "r2s-famine-town-3", "tier": "town", "pop": 737, "military": [54, 46], "economic": [18, 42], "magical": [26, 42], "readiness": [25, 23], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "r2s-famine-village-1", "tier": "village", "pop": 90, "military": [63, 58], "internal": [5, 6], "readiness": [5, 4]}
+{"seed": "r2s-famine-village-3", "tier": "village", "pop": 257, "military": [76, 73], "readiness": [7, 6]}
+{"seed": "r2s-indebted-city-1", "tier": "city", "pop": 3289, "economic": [82, 84]}
+{"seed": "r2s-indebted-city-3", "tier": "city", "pop": 8576, "internal": [86, 85], "economic": [91, 93]}
+{"seed": "r2s-indebted-hamlet-0", "tier": "hamlet", "pop": 67, "military": [76, 67], "readiness": [22, 20]}
+{"seed": "r2s-indebted-hamlet-3", "tier": "hamlet", "pop": 65, "military": [76, 64], "readiness": [17, 15]}
+{"seed": "r2s-indebted-metropolis-1", "tier": "metropolis", "pop": 145383, "economic": [99, 100]}
+{"seed": "r2s-indebted-metropolis-3", "tier": "metropolis", "pop": 44209, "economic": [97, 98]}
+{"seed": "r2s-indebted-thorp-2", "tier": "thorp", "pop": 8, "military": [41, 8], "internal": [22, 23], "readiness": [23, 16]}
+{"seed": "r2s-indebted-town-0", "tier": "town", "pop": 1919, "military": [60, 67], "internal": [44, 52], "economic": [50, 71], "magical": [44, 69], "readiness": [40, 45]}
+{"seed": "r2s-indebted-town-1", "tier": "town", "pop": 357, "military": [57, 51], "internal": [15, 20], "economic": [38, 53], "magical": [20, 28], "readiness": [16, 15]}
+{"seed": "r2s-indebted-town-2", "tier": "town", "pop": 590, "military": [4, 1], "economic": [24, 40], "magical": [19, 40], "readiness": [15, 14]}
+{"seed": "r2s-indebted-town-3", "tier": "town", "pop": 1546, "military": [35, 28], "internal": [19, 30], "readiness": [43, 44]}
+{"seed": "r2s-infiltrated-city-1", "tier": "city", "pop": 3578, "monster": [75, 68], "internal": [63, 62], "readiness": [69, 67]}
+{"seed": "r2s-infiltrated-hamlet-0", "tier": "hamlet", "pop": 83, "military": [68, 56], "readiness": [20, 17]}
+{"seed": "r2s-infiltrated-thorp-3", "tier": "thorp", "pop": 6, "military": [22, 6], "readiness": [16, 13]}
+{"seed": "r2s-infiltrated-town-0", "tier": "town", "pop": 1716, "monster": [89, 84], "internal": [7, 6], "readiness": [61, 59]}
+{"seed": "r2s-infiltrated-town-1", "tier": "town", "pop": 319, "military": [50, 51], "economic": [50, 61], "magical": [10, 18]}
+{"seed": "r2s-infiltrated-town-2", "tier": "town", "pop": 660, "military": [48, 47], "monster": [41, 42], "economic": [58, 66], "magical": [9, 12], "readiness": [26, 25]}
+{"seed": "r2s-infiltrated-town-3", "tier": "town", "pop": 1363, "military": [33, 31], "monster": [52, 45], "internal": [23, 22], "economic": [84, 83], "readiness": [48, 46]}
+{"seed": "r2s-infiltrated-village-3", "tier": "village", "pop": 77, "military": [62, 54], "readiness": [15, 13]}
+{"seed": "r2s-insurgency-city-0", "tier": "city", "pop": 10271, "internal": [80, 79], "readiness": [91, 90]}
+{"seed": "r2s-insurgency-city-3", "tier": "city", "pop": 3504, "economic": [99, 100]}
+{"seed": "r2s-insurgency-hamlet-3", "tier": "hamlet", "pop": 42, "military": [57, 42], "readiness": [13, 10]}
+{"seed": "r2s-insurgency-thorp-0", "tier": "thorp", "pop": 22, "military": [47, 22], "internal": [26, 27], "readiness": [28, 23], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "r2s-insurgency-thorp-1", "tier": "thorp", "pop": 10, "military": [14, 10], "readiness": [20, 19]}
+{"seed": "r2s-insurgency-thorp-2", "tier": "thorp", "pop": 9, "military": [20, 9], "readiness": [17, 15]}
+{"seed": "r2s-insurgency-town-0", "tier": "town", "pop": 2117, "military": [89, 88], "monster": [62, 61], "internal": [54, 53], "readiness": [59, 58]}
+{"seed": "r2s-insurgency-town-1", "tier": "town", "pop": 648, "military": [24, 16], "internal": [49, 61], "economic": [71, 76], "magical": [12, 13], "readiness": [33, 34]}
+{"seed": "r2s-insurgency-town-2", "tier": "town", "pop": 2081, "military": [48, 46], "economic": [43, 51], "magical": [18, 39], "readiness": [27, 25]}
+{"seed": "r2s-insurgency-town-3", "tier": "town", "pop": 2162, "economic": [79, 86], "magical": [38, 42], "readiness": [41, 40]}
+{"seed": "r2s-insurgency-village-2", "tier": "village", "pop": 293, "monster": [2, 4], "economic": [18, 42], "magical": [22, 42]}
+{"seed": "r2s-insurgency-village-3", "tier": "village", "pop": 264, "economic": [32, 30]}
+{"seed": "r2s-mass_migration-hamlet-1", "tier": "hamlet", "pop": 60, "military": [72, 60], "readiness": [24, 22], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "r2s-mass_migration-hamlet-3", "tier": "hamlet", "pop": 82, "military": [83, 74], "readiness": [25, 23], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "r2s-mass_migration-thorp-3", "tier": "thorp", "pop": 7, "military": [18, 7], "readiness": [21, 19]}
+{"seed": "r2s-mass_migration-town-0", "tier": "town", "pop": 649, "military": [84, 82], "monster": [78, 70], "internal": [56, 54], "economic": [90, 89], "readiness": [63, 61]}
+{"seed": "r2s-mass_migration-town-1", "tier": "town", "pop": 2357, "military": [55, 54], "monster": [63, 62], "economic": [81, 84], "magical": [45, 47], "readiness": [42, 40]}
+{"seed": "r2s-mass_migration-town-2", "tier": "town", "pop": 1901, "military": [15, 8], "internal": [5, 8], "economic": [44, 58], "magical": [21, 29], "readiness": [19, 17]}
+{"seed": "r2s-mass_migration-town-3", "tier": "town", "pop": 1159, "economic": [83, 82]}
+{"seed": "r2s-monster_pressure-city-0", "tier": "city", "pop": 6454, "monster": [100, 99], "internal": [80, 79]}
+{"seed": "r2s-monster_pressure-thorp-2", "tier": "thorp", "pop": 21, "military": [65, 21], "internal": [32, 34], "readiness": [39, 30], "label": ["Defensible", "Lightly Defended"]}
+{"seed": "r2s-monster_pressure-thorp-3", "tier": "thorp", "pop": 10, "military": [13, 10], "readiness": [19, 18]}
+{"seed": "r2s-monster_pressure-town-0", "tier": "town", "pop": 753, "economic": [59, 58]}
+{"seed": "r2s-monster_pressure-town-1", "tier": "town", "pop": 1295, "monster": [82, 81]}
+{"seed": "r2s-monster_pressure-town-2", "tier": "town", "pop": 1344, "military": [37, 45], "internal": [37, 44], "economic": [68, 75], "magical": [21, 23], "readiness": [35, 39], "label": ["Lightly Defended", "Defensible"]}
+{"seed": "r2s-monster_pressure-village-2", "tier": "village", "pop": 242, "monster": [5, 8], "economic": [15, 28], "magical": [11, 28]}
+{"seed": "r2s-occupied-hamlet-2", "tier": "hamlet", "pop": 59, "military": [27, 32], "internal": [5, 6], "economic": [16, 22], "readiness": [14, 16]}
+{"seed": "r2s-occupied-hamlet-3", "tier": "hamlet", "pop": 43, "military": [14, 15]}
+{"seed": "r2s-occupied-thorp-0", "tier": "thorp", "pop": 13, "military": [23, 13], "readiness": [10, 8]}
+{"seed": "r2s-occupied-town-0", "tier": "town", "pop": 1580, "military": [35, 33], "monster": [43, 39], "economic": [35, 38], "magical": [10, 17], "readiness": [21, 18]}
+{"seed": "r2s-occupied-town-1", "tier": "town", "pop": 1994, "military": [42, 45], "monster": [40, 42], "economic": [35, 63], "magical": [24, 55]}
+{"seed": "r2s-occupied-town-2", "tier": "town", "pop": 310, "military": [32, 35], "economic": [28, 42], "magical": [12, 29]}
+{"seed": "r2s-occupied-town-3", "tier": "town", "pop": 2018, "military": [37, 35], "monster": [66, 65], "economic": [61, 74], "magical": [27, 33], "readiness": [37, 35]}
+{"seed": "r2s-plague_onset-hamlet-1", "tier": "hamlet", "pop": 35, "military": [49, 35], "readiness": [13, 10]}
+{"seed": "r2s-plague_onset-thorp-1", "tier": "thorp", "pop": 25, "military": [43, 25], "readiness": [26, 23], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "r2s-plague_onset-town-0", "tier": "town", "pop": 830, "military": [76, 74], "monster": [42, 38], "internal": [41, 40], "economic": [45, 44], "readiness": [30, 29]}
+{"seed": "r2s-plague_onset-town-3", "tier": "town", "pop": 475, "military": [36, 33], "internal": [19, 20], "economic": [25, 43], "magical": [22, 39], "readiness": [10, 9]}
+{"seed": "r2s-politically_fractured-city-1", "tier": "city", "pop": 10768, "economic": [97, 99]}
+{"seed": "r2s-politically_fractured-city-2", "tier": "city", "pop": 5280, "economic": [83, 84], "readiness": [45, 46]}
+{"seed": "r2s-politically_fractured-hamlet-0", "tier": "hamlet", "pop": 92, "military": [45, 42], "readiness": [23, 22]}
+{"seed": "r2s-politically_fractured-hamlet-1", "tier": "hamlet", "pop": 63, "military": [66, 63], "readiness": [16, 15]}
+{"seed": "r2s-politically_fractured-hamlet-2", "tier": "hamlet", "pop": 52, "military": [36, 35]}
+{"seed": "r2s-politically_fractured-thorp-0", "tier": "thorp", "pop": 9, "military": [20, 9], "readiness": [22, 20]}
+{"seed": "r2s-politically_fractured-thorp-1", "tier": "thorp", "pop": 10, "military": [16, 10], "readiness": [19, 17]}
+{"seed": "r2s-politically_fractured-thorp-2", "tier": "thorp", "pop": 9, "military": [51, 9], "readiness": [20, 12]}
+{"seed": "r2s-politically_fractured-thorp-3", "tier": "thorp", "pop": 15, "military": [20, 15], "readiness": [23, 22]}
+{"seed": "r2s-politically_fractured-town-0", "tier": "town", "pop": 843, "military": [50, 42], "economic": [31, 39], "magical": [14, 32], "readiness": [19, 16]}
+{"seed": "r2s-politically_fractured-town-1", "tier": "town", "pop": 1023, "military": [74, 72], "monster": [93, 87], "internal": [21, 20], "readiness": [57, 56]}
+{"seed": "r2s-politically_fractured-town-2", "tier": "town", "pop": 1738, "military": [63, 61], "monster": [52, 45], "internal": [42, 41], "economic": [73, 72], "readiness": [53, 51]}
+{"seed": "r2s-politically_fractured-town-3", "tier": "town", "pop": 1633, "military": [13, 10], "economic": [38, 48], "magical": [12, 24], "readiness": [20, 18]}
+{"seed": "r2s-recently_betrayed-city-0", "tier": "city", "pop": 2407, "monster": [85, 84]}
+{"seed": "r2s-recently_betrayed-city-3", "tier": "city", "pop": 2781, "economic": [97, 99]}
+{"seed": "r2s-recently_betrayed-hamlet-0", "tier": "hamlet", "pop": 73, "military": [37, 35], "readiness": [21, 20]}
+{"seed": "r2s-recently_betrayed-hamlet-3", "tier": "hamlet", "pop": 84, "military": [45, 39], "readiness": [24, 22], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "r2s-recently_betrayed-thorp-3", "tier": "thorp", "pop": 16, "military": [36, 16], "internal": [5, 6], "economic": [18, 20], "readiness": [20, 17]}
+{"seed": "r2s-recently_betrayed-town-0", "tier": "town", "pop": 2124, "military": [52, 50], "monster": [60, 59], "internal": [11, 10], "economic": [69, 80], "magical": [31, 37], "readiness": [31, 30]}
+{"seed": "r2s-recently_betrayed-town-1", "tier": "town", "pop": 2359, "military": [61, 59], "monster": [88, 82], "internal": [39, 38], "economic": [82, 81], "readiness": [58, 55]}
+{"seed": "r2s-recently_betrayed-town-2", "tier": "town", "pop": 1298, "military": [22, 19], "monster": [32, 25], "internal": [25, 24], "economic": [61, 73], "magical": [43, 53], "readiness": [38, 34], "label": ["Defensible", "Lightly Defended"]}
+{"seed": "r2s-recently_betrayed-town-3", "tier": "town", "pop": 322, "military": [42, 33], "internal": [17, 21], "economic": [48, 53], "magical": [13, 14], "readiness": [26, 23], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "r2s-religious_conversion-city-1", "tier": "city", "pop": 4774, "economic": [96, 98], "readiness": [83, 84]}
+{"seed": "r2s-religious_conversion-city-3", "tier": "city", "pop": 7386, "monster": [100, 97], "internal": [32, 31], "readiness": [73, 72]}
+{"seed": "r2s-religious_conversion-thorp-0", "tier": "thorp", "pop": 15, "military": [19, 15], "readiness": [19, 18]}
+{"seed": "r2s-religious_conversion-thorp-1", "tier": "thorp", "pop": 26, "military": [50, 26], "readiness": [33, 29]}
+{"seed": "r2s-religious_conversion-town-0", "tier": "town", "pop": 474, "military": [19, 9], "internal": [30, 32], "economic": [53, 70], "magical": [25, 43], "readiness": [28, 24]}
+{"seed": "r2s-religious_conversion-town-1", "tier": "town", "pop": 909, "military": [46, 43], "economic": [65, 67], "magical": [11, 12], "readiness": [17, 15]}
+{"seed": "r2s-religious_conversion-town-2", "tier": "town", "pop": 1575, "military": [72, 71], "monster": [27, 24], "internal": [43, 42]}
+{"seed": "r2s-religious_conversion-town-3", "tier": "town", "pop": 1419, "military": [58, 56], "monster": [72, 65], "internal": [39, 38], "readiness": [50, 47]}
+{"seed": "r2s-religious_conversion-village-3", "tier": "village", "pop": 351, "monster": [43, 42], "economic": [40, 39], "readiness": [37, 36]}
+{"seed": "r2s-slave_revolt-city-0", "tier": "city", "pop": 6942, "economic": [96, 98], "readiness": [79, 80]}
+{"seed": "r2s-slave_revolt-city-1", "tier": "city", "pop": 10755, "internal": [69, 68], "readiness": [82, 81]}
+{"seed": "r2s-slave_revolt-city-3", "tier": "city", "pop": 4552, "military": [98, 100]}
+{"seed": "r2s-slave_revolt-thorp-1", "tier": "thorp", "pop": 15, "military": [17, 15]}
+{"seed": "r2s-slave_revolt-town-0", "tier": "town", "pop": 1243, "military": [69, 70], "monster": [46, 45], "internal": [48, 49], "economic": [83, 82]}
+{"seed": "r2s-slave_revolt-town-1", "tier": "town", "pop": 343, "military": [57, 50], "internal": [24, 26], "economic": [56, 67], "magical": [20, 24], "readiness": [35, 33]}
+{"seed": "r2s-slave_revolt-town-2", "tier": "town", "pop": 2239, "military": [71, 69], "monster": [72, 65], "internal": [43, 42], "economic": [74, 73], "readiness": [58, 56]}
+{"seed": "r2s-slave_revolt-town-3", "tier": "town", "pop": 1271, "military": [4, 2], "economic": [40, 58], "magical": [23, 34], "readiness": [19, 18]}
+{"seed": "r2s-slave_revolt-village-3", "tier": "village", "pop": 171, "military": [69, 65], "readiness": [16, 15]}
+{"seed": "r2s-succession_void-hamlet-1", "tier": "hamlet", "pop": 52, "military": [61, 52], "readiness": [14, 12]}
+{"seed": "r2s-succession_void-hamlet-2", "tier": "hamlet", "pop": 55, "military": [79, 55], "readiness": [18, 13]}
+{"seed": "r2s-succession_void-metropolis-0", "tier": "metropolis", "pop": 16189, "internal": [96, 95], "readiness": [86, 85]}
+{"seed": "r2s-succession_void-thorp-0", "tier": "thorp", "pop": 8, "military": [45, 8], "readiness": [7, 0]}
+{"seed": "r2s-succession_void-thorp-3", "tier": "thorp", "pop": 14, "military": [48, 14], "readiness": [15, 8]}
+{"seed": "r2s-succession_void-town-0", "tier": "town", "pop": 1089, "military": [34, 33], "economic": [68, 77], "magical": [38, 44], "readiness": [40, 39]}
+{"seed": "r2s-succession_void-town-1", "tier": "town", "pop": 1263, "military": [76, 75], "monster": [79, 74], "readiness": [47, 46]}
+{"seed": "r2s-succession_void-town-2", "tier": "town", "pop": 2154, "monster": [55, 52], "internal": [5, 4], "economic": [38, 46], "magical": [8, 11], "readiness": [24, 22], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "r2s-succession_void-town-3", "tier": "town", "pop": 321, "military": [53, 49], "internal": [5, 14], "economic": [27, 39], "magical": [6, 15], "readiness": [18, 20]}
+{"seed": "r2s-under_siege-city-1", "tier": "city", "pop": 2679, "monster": [98, 91], "internal": [71, 70], "readiness": [62, 60]}
+{"seed": "r2s-under_siege-city-2", "tier": "city", "pop": 11745, "monster": [80, 73], "internal": [55, 54], "readiness": [71, 69]}
+{"seed": "r2s-under_siege-city-3", "tier": "city", "pop": 5059, "internal": [46, 50], "economic": [82, 84], "readiness": [85, 86]}
+{"seed": "r2s-under_siege-metropolis-3", "tier": "metropolis", "pop": 46730, "internal": [44, 51], "readiness": [86, 88]}
+{"seed": "r2s-under_siege-thorp-0", "tier": "thorp", "pop": 9, "military": [66, 9], "readiness": [17, 5]}
+{"seed": "r2s-under_siege-thorp-1", "tier": "thorp", "pop": 16, "military": [56, 16], "readiness": [15, 7]}
+{"seed": "r2s-under_siege-thorp-2", "tier": "thorp", "pop": 6, "military": [71, 6], "readiness": [17, 4]}
+{"seed": "r2s-under_siege-thorp-3", "tier": "thorp", "pop": 7, "military": [66, 7], "readiness": [16, 4]}
+{"seed": "r2s-under_siege-town-0", "tier": "town", "pop": 2137, "military": [24, 26], "monster": [20, 21], "economic": [45, 67], "magical": [32, 52], "readiness": [28, 27]}
+{"seed": "r2s-under_siege-town-1", "tier": "town", "pop": 1339, "military": [11, 9], "monster": [19, 21], "economic": [39, 58], "magical": [22, 34], "readiness": [24, 23], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "r2s-under_siege-town-2", "tier": "town", "pop": 2453, "military": [80, 77], "monster": [68, 61], "internal": [53, 52], "economic": [51, 50], "readiness": [63, 61]}
+{"seed": "r2s-under_siege-town-3", "tier": "town", "pop": 2192, "military": [50, 53], "economic": [21, 45], "magical": [22, 45]}
+{"seed": "r2s-under_siege-village-0", "tier": "village", "pop": 281, "economic": [21, 19]}
+{"seed": "r2s-wartime-city-2", "tier": "city", "pop": 13169, "internal": [61, 62]}
+{"seed": "r2s-wartime-hamlet-2", "tier": "hamlet", "pop": 25, "military": [77, 25], "readiness": [20, 9]}
+{"seed": "r2s-wartime-metropolis-2", "tier": "metropolis", "pop": 160267, "economic": [97, 99]}
+{"seed": "r2s-wartime-thorp-1", "tier": "thorp", "pop": 21, "military": [26, 21], "readiness": [15, 14]}
+{"seed": "r2s-wartime-thorp-2", "tier": "thorp", "pop": 9, "military": [17, 9], "readiness": [9, 8]}
+{"seed": "r2s-wartime-thorp-3", "tier": "thorp", "pop": 6, "military": [31, 6], "readiness": [18, 13]}
+{"seed": "r2s-wartime-town-1", "tier": "town", "pop": 1916, "military": [19, 9], "monster": [19, 21], "economic": [42, 71], "magical": [42, 71], "readiness": [34, 30]}
+{"seed": "r2s-wartime-town-2", "tier": "town", "pop": 1803, "military": [19, 9], "internal": [24, 28], "economic": [36, 62], "magical": [32, 60], "readiness": [24, 22], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "r2s-wartime-town-3", "tier": "town", "pop": 1949, "economic": [61, 66], "magical": [50, 55], "readiness": [41, 40]}
+{"seed": "r2s-wartime-village-0", "tier": "village", "pop": 256, "economic": [21, 30], "magical": [34, 49]}
+{"seed": "r2s-wartime-village-1", "tier": "village", "pop": 287, "economic": [17, 16]}
+{"seed": "rv5-calm-hamlet-0", "tier": "hamlet", "pop": 82, "military": [44, 45], "internal": [20, 21]}
+{"seed": "rv5-calm-thorp-3", "tier": "thorp", "pop": 8, "military": [9, 8]}
+{"seed": "rv5-calm-thorp-5", "tier": "thorp", "pop": 13, "military": [46, 13], "internal": [25, 27], "readiness": [27, 21], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "rv5-calm-town-0", "tier": "town", "pop": 1280, "economic": [66, 67], "readiness": [21, 20]}
+{"seed": "rv5-calm-town-2", "tier": "town", "pop": 992, "military": [76, 75], "monster": [56, 51], "internal": [56, 55], "economic": [73, 72], "readiness": [52, 50]}
+{"seed": "rv5-calm-town-3", "tier": "town", "pop": 577, "military": [69, 86], "internal": [28, 42], "economic": [36, 53], "magical": [25, 37], "readiness": [32, 43], "label": ["Lightly Defended", "Defensible"]}
+{"seed": "rv5-calm-town-4", "tier": "town", "pop": 623, "economic": [73, 72]}
+{"seed": "rv5-calm-town-5", "tier": "town", "pop": 416, "monster": [36, 39], "readiness": [49, 50]}
+{"seed": "rv5-calm-village-0", "tier": "village", "pop": 276, "economic": [23, 25], "magical": [31, 34]}
+{"seed": "rv5-famine-city-0", "tier": "city", "pop": 13388, "economic": [97, 99]}
+{"seed": "rv5-famine-city-1", "tier": "city", "pop": 9247, "military": [93, 99], "readiness": [61, 62]}
+{"seed": "rv5-famine-city-2", "tier": "city", "pop": 4060, "monster": [92, 85], "internal": [58, 57], "readiness": [69, 67]}
+{"seed": "rv5-famine-city-3", "tier": "city", "pop": 4869, "economic": [59, 60], "readiness": [57, 58]}
+{"seed": "rv5-famine-city-4", "tier": "city", "pop": 3718, "military": [73, 71], "monster": [71, 64], "internal": [41, 40], "economic": [58, 60], "readiness": [46, 44]}
+{"seed": "rv5-famine-hamlet-1", "tier": "hamlet", "pop": 38, "military": [71, 38], "readiness": [11, 4]}
+{"seed": "rv5-famine-hamlet-4", "tier": "hamlet", "pop": 89, "internal": [2, 3], "readiness": [15, 16]}
+{"seed": "rv5-famine-thorp-1", "tier": "thorp", "pop": 25, "military": [34, 25], "internal": [7, 8], "readiness": [18, 17]}
+{"seed": "rv5-famine-thorp-2", "tier": "thorp", "pop": 28, "military": [40, 28], "readiness": [7, 4]}
+{"seed": "rv5-famine-town-0", "tier": "town", "pop": 1914, "military": [39, 40], "economic": [53, 66], "magical": [25, 31], "readiness": [33, 32]}
+{"seed": "rv5-famine-town-1", "tier": "town", "pop": 442, "military": [31, 28], "economic": [18, 23], "magical": [7, 19], "readiness": [11, 10]}
+{"seed": "rv5-famine-town-2", "tier": "town", "pop": 2166, "military": [85, 83], "monster": [81, 75], "internal": [18, 17], "economic": [72, 71], "readiness": [67, 65]}
+{"seed": "rv5-famine-town-3", "tier": "town", "pop": 616, "military": [89, 87], "monster": [57, 52], "internal": [23, 22], "readiness": [38, 37], "label": ["Defensible", "Lightly Defended"]}
+{"seed": "rv5-famine-town-4", "tier": "town", "pop": 2018, "monster": [47, 49], "internal": [25, 24], "economic": [50, 49]}
+{"seed": "rv5-famine-town-5", "tier": "town", "pop": 2220, "military": [45, 44], "monster": [49, 46], "readiness": [28, 27]}
+{"seed": "rv5-famine-village-2", "tier": "village", "pop": 256, "internal": [10, 12]}
+{"seed": "rv5-monster_pressure-city-0", "tier": "city", "pop": 4016, "economic": [99, 100], "readiness": [79, 80]}
+{"seed": "rv5-monster_pressure-city-4", "tier": "city", "pop": 3166, "military": [90, 97], "readiness": [68, 69]}
+{"seed": "rv5-monster_pressure-city-5", "tier": "city", "pop": 14745, "military": [92, 99], "readiness": [82, 83]}
+{"seed": "rv5-monster_pressure-hamlet-0", "tier": "hamlet", "pop": 31, "military": [67, 31], "readiness": [19, 12]}
+{"seed": "rv5-monster_pressure-thorp-0", "tier": "thorp", "pop": 9, "military": [16, 9], "readiness": [19, 18]}
+{"seed": "rv5-monster_pressure-thorp-2", "tier": "thorp", "pop": 20, "military": [45, 20], "readiness": [16, 11]}
+{"seed": "rv5-monster_pressure-town-0", "tier": "town", "pop": 2319, "economic": [83, 86], "magical": [46, 48], "readiness": [53, 52]}
+{"seed": "rv5-monster_pressure-town-1", "tier": "town", "pop": 1145, "military": [31, 34], "internal": [50, 54], "economic": [69, 83], "magical": [40, 50], "readiness": [41, 43]}
+{"seed": "rv5-monster_pressure-town-2", "tier": "town", "pop": 2382, "military": [54, 52], "economic": [34, 59], "magical": [27, 53], "readiness": [21, 20]}
+{"seed": "rv5-monster_pressure-town-3", "tier": "town", "pop": 502, "military": [33, 30], "economic": [42, 50], "magical": [10, 26], "readiness": [22, 21]}
+{"seed": "rv5-monster_pressure-town-4", "tier": "town", "pop": 1483, "military": [26, 21], "monster": [13, 12], "internal": [14, 21], "economic": [51, 65], "magical": [14, 18]}
+{"seed": "rv5-monster_pressure-town-5", "tier": "town", "pop": 2001, "economic": [87, 86], "readiness": [54, 53]}
+{"seed": "rv5-monster_pressure-village-5", "tier": "village", "pop": 174, "military": [47, 49], "internal": [29, 31], "readiness": [26, 27]}
+{"seed": "rv5-occupied-city-0", "tier": "city", "pop": 2247, "economic": [96, 98]}
+{"seed": "rv5-occupied-city-2", "tier": "city", "pop": 14268, "military": [99, 100]}
+{"seed": "rv5-occupied-city-3", "tier": "city", "pop": 7634, "internal": [62, 61]}
+{"seed": "rv5-occupied-thorp-0", "tier": "thorp", "pop": 17, "military": [26, 17], "readiness": [17, 16]}
+{"seed": "rv5-occupied-thorp-2", "tier": "thorp", "pop": 19, "military": [17, 13]}
+{"seed": "rv5-occupied-town-0", "tier": "town", "pop": 2068, "military": [36, 32], "monster": [59, 52], "internal": [29, 28], "economic": [66, 81], "magical": [29, 43], "readiness": [39, 34], "label": ["Defensible", "Lightly Defended"]}
+{"seed": "rv5-occupied-town-1", "tier": "town", "pop": 2101, "military": [53, 52], "monster": [65, 60], "internal": [21, 20], "readiness": [43, 39]}
+{"seed": "rv5-occupied-town-2", "tier": "town", "pop": 2277, "military": [35, 31], "economic": [23, 27], "magical": [6, 18], "readiness": [21, 20]}
+{"seed": "rv5-occupied-town-3", "tier": "town", "pop": 1214, "military": [37, 34], "internal": [27, 31], "economic": [30, 39], "magical": [15, 39]}
+{"seed": "rv5-occupied-town-4", "tier": "town", "pop": 978, "military": [29, 26], "economic": [40, 58], "magical": [20, 48], "readiness": [24, 23], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "rv5-occupied-town-5", "tier": "town", "pop": 732, "military": [35, 33], "economic": [40, 46], "magical": [9, 15], "readiness": [25, 24]}
+{"seed": "rv5-under_siege+famine-city-3", "tier": "city", "pop": 7410, "internal": [7, 14], "readiness": [38, 40]}
+{"seed": "rv5-under_siege+famine-hamlet-3", "tier": "hamlet", "pop": 82, "military": [31, 30]}
+{"seed": "rv5-under_siege+famine-metropolis-0", "tier": "metropolis", "pop": 22005, "economic": [62, 64], "readiness": [69, 70]}
+{"seed": "rv5-under_siege+famine-metropolis-1", "tier": "metropolis", "pop": 39022, "internal": [28, 35], "economic": [91, 93], "readiness": [75, 77], "label": ["Well-Defended", "Fortress"]}
+{"seed": "rv5-under_siege+famine-metropolis-2", "tier": "metropolis", "pop": 30479, "economic": [64, 66], "readiness": [66, 67]}
+{"seed": "rv5-under_siege+famine-metropolis-3", "tier": "metropolis", "pop": 31123, "economic": [63, 65]}
+{"seed": "rv5-under_siege+famine-metropolis-4", "tier": "metropolis", "pop": 20887, "economic": [99, 100]}
+{"seed": "rv5-under_siege+famine-thorp-0", "tier": "thorp", "pop": 15, "military": [16, 15]}
+{"seed": "rv5-under_siege+famine-thorp-1", "tier": "thorp", "pop": 18, "military": [58, 18], "readiness": [10, 2]}
+{"seed": "rv5-under_siege+famine-thorp-3", "tier": "thorp", "pop": 16, "military": [30, 16], "readiness": [12, 9]}
+{"seed": "rv5-under_siege+famine-thorp-4", "tier": "thorp", "pop": 26, "military": [59, 26], "readiness": [20, 13]}
+{"seed": "rv5-under_siege+famine-town-0", "tier": "town", "pop": 1972, "magical": [6, 2], "readiness": [3, 2]}
+{"seed": "rv5-under_siege+famine-town-1", "tier": "town", "pop": 1180, "military": [44, 42], "magical": [42, 37], "readiness": [19, 17]}
+{"seed": "rv5-under_siege+famine-town-2", "tier": "town", "pop": 443, "military": [14, 12], "magical": [29, 26], "readiness": [7, 6]}
+{"seed": "rv5-under_siege+famine-town-3", "tier": "town", "pop": 649, "military": [48, 50], "monster": [35, 36]}
+{"seed": "rv5-under_siege+famine-town-5", "tier": "town", "pop": 2256, "military": [2, 0], "monster": [2, 4], "magical": [11, 7], "readiness": [5, 3]}
+{"seed": "rv5-under_siege+famine-village-1", "tier": "village", "pop": 218, "monster": [28, 31], "readiness": [21, 22]}
+{"seed": "rv5-under_siege+famine-village-2", "tier": "village", "pop": 389, "military": [73, 62], "readiness": [16, 14]}
+{"seed": "rv5-under_siege-city-0", "tier": "city", "pop": 8065, "internal": [71, 82], "readiness": [90, 92]}
+{"seed": "rv5-under_siege-city-1", "tier": "city", "pop": 9239, "internal": [63, 70], "economic": [88, 90], "readiness": [78, 80]}
+{"seed": "rv5-under_siege-city-2", "tier": "city", "pop": 8618, "internal": [80, 87], "readiness": [90, 91]}
+{"seed": "rv5-under_siege-city-4", "tier": "city", "pop": 4112, "economic": [82, 84]}
+{"seed": "rv5-under_siege-city-5", "tier": "city", "pop": 13232, "economic": [96, 98], "readiness": [72, 73]}
+{"seed": "rv5-under_siege-hamlet-0", "tier": "hamlet", "pop": 55, "military": [68, 55], "readiness": [29, 26]}
+{"seed": "rv5-under_siege-metropolis-1", "tier": "metropolis", "pop": 34984, "internal": [47, 54], "readiness": [81, 82]}
+{"seed": "rv5-under_siege-metropolis-4", "tier": "metropolis", "pop": 320576, "internal": [72, 79], "readiness": [92, 94]}
+{"seed": "rv5-under_siege-thorp-0", "tier": "thorp", "pop": 8, "military": [15, 8], "readiness": [10, 9]}
+{"seed": "rv5-under_siege-thorp-1", "tier": "thorp", "pop": 20, "military": [59, 20], "readiness": [27, 19], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "rv5-under_siege-thorp-2", "tier": "thorp", "pop": 5, "military": [14, 5], "readiness": [10, 8]}
+{"seed": "rv5-under_siege-thorp-4", "tier": "thorp", "pop": 15, "military": [44, 15], "readiness": [18, 12]}
+{"seed": "rv5-under_siege-town-0", "tier": "town", "pop": 1442, "military": [25, 20], "economic": [36, 48], "magical": [27, 37], "readiness": [28, 25]}
+{"seed": "rv5-under_siege-town-1", "tier": "town", "pop": 1151, "military": [27, 21], "internal": [18, 29], "economic": [42, 49], "magical": [7, 8], "readiness": [21, 22]}
+{"seed": "rv5-under_siege-town-2", "tier": "town", "pop": 1658, "military": [34, 21], "internal": [4, 6], "economic": [39, 50], "magical": [32, 42], "readiness": [26, 21], "label": ["Lightly Defended", "Vulnerable"]}
+{"seed": "rv5-under_siege-town-3", "tier": "town", "pop": 2063, "military": [63, 56], "internal": [2, 10], "economic": [35, 47], "magical": [24, 33]}
+{"seed": "rv5-under_siege-town-4", "tier": "town", "pop": 905, "military": [50, 44], "internal": [5, 6], "economic": [24, 31], "magical": [14, 19], "readiness": [8, 6]}
+{"seed": "rv5-under_siege-town-5", "tier": "town", "pop": 733, "economic": [34, 33]}
+{"seed": "rv5-under_siege-village-2", "tier": "village", "pop": 195, "internal": [1, 2]}
+{"seed": "rv5-wartime-city-1", "tier": "city", "pop": 4533, "military": [80, 78], "monster": [81, 74], "internal": [70, 69], "readiness": [65, 64]}
+{"seed": "rv5-wartime-city-3", "tier": "city", "pop": 10839, "military": [71, 69], "monster": [69, 64], "readiness": [61, 60]}
+{"seed": "rv5-wartime-city-5", "tier": "city", "pop": 9518, "internal": [71, 70], "economic": [94, 96], "readiness": [91, 92]}
+{"seed": "rv5-wartime-metropolis-5", "tier": "metropolis", "pop": 44187, "economic": [99, 100]}
+{"seed": "rv5-wartime-thorp-1", "tier": "thorp", "pop": 15, "military": [20, 15], "readiness": [16, 15]}
+{"seed": "rv5-wartime-thorp-2", "tier": "thorp", "pop": 14, "military": [17, 14], "readiness": [22, 21]}
+{"seed": "rv5-wartime-thorp-3", "tier": "thorp", "pop": 7, "military": [12, 7], "readiness": [15, 14]}
+{"seed": "rv5-wartime-thorp-4", "tier": "thorp", "pop": 15, "military": [47, 15], "readiness": [18, 12]}
+{"seed": "rv5-wartime-town-0", "tier": "town", "pop": 1111, "economic": [45, 44]}
+{"seed": "rv5-wartime-town-1", "tier": "town", "pop": 2076, "military": [43, 35], "internal": [33, 42], "economic": [58, 57]}
+{"seed": "rv5-wartime-town-2", "tier": "town", "pop": 2075, "economic": [61, 60]}
+{"seed": "rv5-wartime-town-3", "tier": "town", "pop": 781, "military": [60, 71], "internal": [14, 23], "readiness": [17, 21]}
+{"seed": "rv5-wartime-town-5", "tier": "town", "pop": 1493, "military": [21, 14], "monster": [22, 20], "internal": [30, 32], "economic": [70, 69], "readiness": [35, 33]}
+{"seed": "rv5-wartime-village-3", "tier": "village", "pop": 204, "economic": [13, 12]}
