@@ -167,3 +167,22 @@ RED 7 of 17 at the base twin with the pin re-keyed, GREEN 17 of 17 with both; th
 547, 1652 ms against x211 36, 399, 1694); typecheck domain-strict 1113 (ceiling 1113), ratchet 167 (ceiling 167), eslint
 0 on the touched files. Local config and refs snapshotted before and after every suite: unchanged (`npm ci` wrote
 `core.hooksPath=.husky/_` once, as the brief warns).
+
+## 8. HANDED BACK AT THE COUNT (2026-11-14 13:24 UTC, after item 0)
+
+The count was read at the brief's point after the first pushed item (`get_session`: external_metadata.context_usage.used_tokens):
+**386,648**, over the mark of 300,000 by about 87,000. Item 0 took it: the bisect over seven commits of the lane, the
+eight-town difference dump, the born role count in two runs (master's shape re-run after this seat's first cut matched
+ties by index), the hand rows, the builder's cure and the seat's line-by-line reading of it, the chair's ruling of 12:34
+built into the pin (the re-key and law (4) with its plant, red at the base twin), the chair's question (3) measured on
+an archive of origin/master, and the lighting census classed against the base and re-taken through its door. Item 1
+cannot be built AND read line by line inside any mark from here, so the seat hands back with no item half built.
+Nothing is running; every commit is pushed (2da90b732..2291f0209, then this file). The chair's message of 13:13 UTC
+("nothing of yours is pushed") crossed the push of 13:15; the 13:16 message answered its question (3).
+
+**DONE:** the first act; item 0 (26b6179f9 the cure and the pin; f30463abe this file and the probe records; 97d6c3f13 the
+lighting census through its door; 2291f0209 its line corrected).
+**WHAT IS LEFT:** section 5, items 1 to 6, in order; items 1 and 2 have written sub-briefs ready (veil-probe-13/briefs).
+**FOR THE NEXT SEAT:** the instruments of section 6 are this container's and go with it (the cluster, the library copy, the
+archives); every script that made a number in this file is in `veil-probe-14/measure`. The acceptance run at 2291f0209 is
+the base's verdicts (section 7); the next seat runs it after its own first change, as the brief says.
