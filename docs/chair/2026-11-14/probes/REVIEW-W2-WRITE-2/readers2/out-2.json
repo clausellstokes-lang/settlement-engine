@@ -1,0 +1,1731 @@
+[
+ {
+  "id": "DS-ECO-1::COMBINATION C4: a low rung on a working approach::v2",
+  "read": 11,
+  "removedTrue": 11,
+  "removedFalse": 0,
+  "removedFalseWorst": null,
+  "examples": [
+   {
+    "town": "r2r-city-19",
+    "removed": "Some trade comes past Dunbury, and little of it stops.",
+    "true": true,
+    "severity": null,
+    "fact": "Prosperity Poor/Struggling; plague: \"fewer come to market, travel discouraged\" fits \"little of it stops\"."
+   }
+  ],
+  "replacement": {
+   "silence": 11,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Removed line was true under plague onset; nothing replaces it (prosperity header now has no sentence)."
+ },
+ {
+  "id": "DS-ECO-1::COMBINATION C4: a low rung on a working approach::v3",
+  "read": 4,
+  "removedTrue": 0,
+  "removedFalse": 4,
+  "removedFalseWorst": "LOW",
+  "examples": [
+   {
+    "town": "r2s-plague_onset-city-3",
+    "removed": "Xochiucan's market sells little, though the road is busy; most of the traffic does not stop, and the traders here are poor.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c)/(g) \"the road is busy\" vs the page's plague note \"travel is discouraged\" and \"quarantine have emptied the market\"; market/poor parts true."
+   },
+   {
+    "town": "rv2-city-plague_onset-1",
+    "removed": "Nahrbazaar's market sells little, though the road is busy; most of the traffic does not stop, and the traders here are poor.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c)/(g) \"the road is busy\" vs the page's plague note \"travel is discouraged\" and \"quarantine have emptied the market\"; market/poor parts true."
+   },
+   {
+    "town": "rv2-metropolis-plague_onset-1",
+    "removed": "Fortelitus's market sells little, though the road is busy; most of the traffic does not stop, and the traders here are poor.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c)/(g) \"the road is busy\" vs the page's plague note \"travel is discouraged\" and \"quarantine have emptied the market\"; market/poor parts true."
+   },
+   {
+    "town": "rv2-town-plague_onset-2",
+    "removed": "Nokhoikum's market sells little, though the road is busy; most of the traffic does not stop, and the traders here are poor.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c)/(g) \"the road is busy\" vs the page's plague note \"travel is discouraged\" and \"quarantine have emptied the market\"; market/poor parts true."
+   }
+  ],
+  "replacement": {
+   "silence": 4,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Only the \"road is busy\" clause is wrong under plague; silence in its place."
+ },
+ {
+  "id": "DS-ECO-1::COMBINATION C4: a low rung on a working approach::v6",
+  "read": 6,
+  "removedTrue": 6,
+  "removedFalse": 0,
+  "removedFalseWorst": null,
+  "examples": [
+   {
+    "town": "r2s-plague_onset-hamlet-0",
+    "removed": "There is no market at Belovich to hold the trade that passes by, and the hamlet stays poor while the trade goes on its way.",
+    "true": true,
+    "severity": null,
+    "fact": "No market institution in record; poor (Struggling/Poor)."
+   }
+  ],
+  "replacement": {
+   "silence": 6,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "True; silence in its place."
+ },
+ {
+  "id": "DS-ECO-6::TIER: minor shadow activity (≥3)::v0",
+  "read": 30,
+  "removedTrue": 5,
+  "removedFalse": 25,
+  "removedFalseWorst": "HIGH",
+  "examples": [
+   {
+    "town": "r2r-city-13",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(b) record: Multiple criminal factions, Contract killer, Black market, Whisper market; criminal capture \"corrupted\"."
+   },
+   {
+    "town": "r2r-city-22",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(b) Thieves' Guild faction, Multiple criminal factions, Black market; capture adversarial."
+   },
+   {
+    "town": "r2r-city-35",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) Black market + Front businesses on page (Criminal economy, operational)."
+   },
+   {
+    "town": "r2r-city-52",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(b) Smuggling network, Multiple criminal factions, Black market; criminal priority 87."
+   },
+   {
+    "town": "rww-city-calm-1",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(b) Thieves' guild chapter, Smuggling network, Black market."
+   },
+   {
+    "town": "r2s-monster_pressure-city-3",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(b) Thieves' guild chapter, Smuggling network, Whisper market, Black market."
+   },
+   {
+    "town": "r2s-plague_onset-city-0",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) Black market + Front businesses."
+   },
+   {
+    "town": "r2s-succession_void-city-1",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) Black market + Front businesses, gambling halls."
+   },
+   {
+    "town": "r2r-hamlet-20",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "Smuggling waypoint in record: more than unlicensed trade, a stretch."
+   },
+   {
+    "town": "r2r-metropolis-12",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(b) Thieves' guild (powerful), Assassins' guild, Underground city, Smuggling network."
+   },
+   {
+    "town": "r2r-metropolis-36",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(b) Multiple criminal factions, Smuggling network, Underground network, Black market bazaar."
+   },
+   {
+    "town": "r2r-metropolis-55",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(b) Multiple criminal factions, Underground city, Rookery, Contract killer, Black market bazaar."
+   },
+   {
+    "town": "rww-metropolis-infiltrated-1",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(b) Thieves' guild (powerful)."
+   },
+   {
+    "town": "r2s-monster_pressure-metropolis-1",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(b) Thieves' guild (powerful), Whisper market."
+   },
+   {
+    "town": "rv2-metropolis-monster_pressure-2",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(b) Thieves' guild (powerful), Underground city; Thieves' Guild faction."
+   },
+   {
+    "town": "r2s-politically_fractured-metropolis-0",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(b) Assassins' guild, Multiple criminal factions, Underground city, Thieves' Guild faction."
+   },
+   {
+    "town": "r2s-religious_conversion-metropolis-3",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(b) Thieves' guild (powerful), Underground network."
+   },
+   {
+    "town": "r2r-town-30",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) Street gang, gambling den."
+   },
+   {
+    "town": "r2r-town-42",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) Smuggling operation, Underground network."
+   },
+   {
+    "town": "r2r-town-55",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) criminal capture \"corrupted\", Corrupt Council faction power 52."
+   },
+   {
+    "town": "r2s-indebted-town-3",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(b) Thieves' Guild faction (power 28), Street gang, Front businesses; capture \"corrupted\"."
+   },
+   {
+    "town": "r2r-town-5",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) Smuggling operation."
+   },
+   {
+    "town": "r2s-occupied-town-3",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) Smuggling operation, Rookery; capture \"corrupted\"."
+   },
+   {
+    "town": "r2s-recently_betrayed-town-2",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) capture \"corrupted\", Corrupt Council faction."
+   },
+   {
+    "town": "r2r-village-4",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "Smuggling waypoint; a stretch."
+   },
+   {
+    "town": "r2s-famine-hamlet-3",
+    "removed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": true,
+    "severity": null,
+    "fact": "No criminal institutions."
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 27,
+   "false": 3,
+   "falseExamples": [
+    {
+     "town": "rv2-hamlet-under_siege-1",
+     "sentence": "A little of Obersteig's trade goes unrecorded, small enough to annoy the clerks and too small to change what the hamlet is.",
+     "severity": "LOW",
+     "fact": "(a) \"clerks\" in a hamlet of 32 with no government or toll house."
+    },
+    {
+     "town": "r2s-under_siege-thorp-3",
+     "sentence": "A little of Tailing's trade goes unrecorded, small enough to annoy the clerks and too small to change what the thorp is.",
+     "severity": "LOW",
+     "fact": "(a) \"annoy the clerks\" in a thorp of 7 with no office or clerk (Subsistence farming, Fishing community, Woodcutter's camp only)."
+    },
+    {
+     "town": "r2s-under_siege-village-1",
+     "sentence": "A little of Neaddale's trade goes unrecorded, small enough to annoy the clerks and too small to change what the village is.",
+     "severity": "LOW",
+     "fact": "(a) \"clerks\" in a village of 95 with no government house."
+    }
+   ]
+  },
+  "note": "Removed line denied organised crime in 23 of 30 towns; \"somebody organises it\" replacements match the record."
+ },
+ {
+  "id": "DS-ECO-9::HOW THE NEED IS MET: much of it brought in::v1",
+  "read": 1,
+  "removedTrue": 1,
+  "removedFalse": 0,
+  "removedFalseWorst": null,
+  "examples": [
+   {
+    "town": "r2s-plague_onset-town-2",
+    "removed": "Food carts come into Tarkhankul most days, and they matter: a good part of what the town eats is grown elsewhere and brought in.",
+    "true": true,
+    "severity": null,
+    "fact": "Pressured; 25% of need imported; plague does not cut the roads."
+   }
+  ],
+  "replacement": {
+   "silence": 1,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "True; silence."
+ },
+ {
+  "id": "DS-ECO-9::HOW THE NEED IS MET: much of it brought in::v2",
+  "read": 5,
+  "removedTrue": 5,
+  "removedFalse": 0,
+  "removedFalseWorst": null,
+  "examples": [
+   {
+    "town": "rv2-city-plague_onset-2",
+    "removed": "The city grows only part of what it eats; the rest comes in from the farms around it and from trade.",
+    "true": true,
+    "severity": null,
+    "fact": "Grown 46-65% of need, the rest imported (record food figures)."
+   }
+  ],
+  "replacement": {
+   "silence": 4,
+   "true": 1,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "True; one reworded fishing sentence (true), else silence."
+ },
+ {
+  "id": "DS-ECO-10::POSTURE: vulnerable::v3",
+  "read": 4,
+  "removedTrue": 0,
+  "removedFalse": 4,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "rv2-city-under_siege+famine-2",
+    "removed": "Treness has goods to sell, but the way out is unreliable, and a trader never knows whether a load will get through.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under siege: page says \"Field work and trade have stopped\", \"market is shut\"; \"unreliable, a trader never knows\" understates a total closure."
+   },
+   {
+    "town": "rw3-metropolis-under_siege-1",
+    "removed": "Hochfurt has goods to sell, but the way out is unreliable, and a trader never knows whether a load will get through.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under siege: page says \"Field work and trade have stopped\", \"market is shut\"; \"unreliable, a trader never knows\" understates a total closure."
+   },
+   {
+    "town": "r2s-under_siege-town-2",
+    "removed": "Yekehiid has goods to sell, but the way out is unreliable, and a trader never knows whether a load will get through.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under siege: page says \"Field work and trade have stopped\", \"market is shut\"; \"unreliable, a trader never knows\" understates a total closure."
+   },
+   {
+    "town": "rww-town-under_siege-1",
+    "removed": "Sanctavallis has goods to sell, but the way out is unreliable, and a trader never knows whether a load will get through.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under siege: page says \"Field work and trade have stopped\", \"market is shut\"; \"unreliable, a trader never knows\" understates a total closure."
+   }
+  ],
+  "replacement": {
+   "silence": 4,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "False under a siege; silence in its place."
+ },
+ {
+  "id": "DS-ECO-12::INCOME WEIGHT: the religious houses::v1",
+  "read": 27,
+  "removedTrue": 0,
+  "removedFalse": 27,
+  "removedFalseWorst": "HIGH",
+  "examples": [
+   {
+    "town": "r2r-hamlet-14",
+    "removed": "Faith carries real weight in Yaxchich's money. What the religious houses take in and spend is a large part of the hamlet's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2r-hamlet-20",
+    "removed": "Faith carries real weight in Jómsmark's money. What the religious houses take in and spend is a large part of the hamlet's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2r-hamlet-21",
+    "removed": "Faith carries real weight in Celoburg's money. What the religious houses take in and spend is a large part of the hamlet's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2r-hamlet-43",
+    "removed": "Faith carries real weight in Devamala's money. What the religious houses take in and spend is a large part of the hamlet's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2r-hamlet-59",
+    "removed": "Faith carries real weight in Frostnes's money. What the religious houses take in and spend is a large part of the hamlet's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2s-famine-hamlet-2",
+    "removed": "Faith carries real weight in Velipol's money. What the religious houses take in and spend is a large part of the hamlet's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "rv2-hamlet-famine-2",
+    "removed": "Faith carries real weight in Torrimonte's money. What the religious houses take in and spend is a large part of the hamlet's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2s-infiltrated-hamlet-1",
+    "removed": "Faith carries real weight in Sundland's money. What the religious houses take in and spend is a large part of the hamlet's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2s-infiltrated-hamlet-3",
+    "removed": "Faith carries real weight in Linfeng's money. What the religious houses take in and spend is a large part of the hamlet's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2s-insurgency-hamlet-1",
+    "removed": "Faith carries real weight in Neuhof's money. What the religious houses take in and spend is a large part of the hamlet's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2s-plague_onset-hamlet-3",
+    "removed": "Faith carries real weight in Tenoha's money. What the religious houses take in and spend is a large part of the hamlet's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2s-religious_conversion-hamlet-1",
+    "removed": "Faith carries real weight in Hagiolathra's money. What the religious houses take in and spend is a large part of the hamlet's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2s-under_siege-hamlet-0",
+    "removed": "Faith carries real weight in Sanctaurbs's money. What the religious houses take in and spend is a large part of the hamlet's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2s-under_siege-hamlet-2",
+    "removed": "Faith carries real weight in Kilshaw's money. What the religious houses take in and spend is a large part of the hamlet's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "rv2-hamlet-under_siege+famine-1",
+    "removed": "Faith carries real weight in Goldfeld's money. What the religious houses take in and spend is a large part of the hamlet's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2r-hamlet-53",
+    "removed": "Faith carries real weight in Markazdeh's money. What the religious houses take in and spend is a large part of the hamlet's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2r-thorp-15",
+    "removed": "Faith carries real weight in Buyanshari's money. What the religious houses take in and spend is a large part of the thorp's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2r-thorp-28",
+    "removed": "Faith carries real weight in Zelenoev's money. What the religious houses take in and spend is a large part of the thorp's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2r-thorp-29",
+    "removed": "Faith carries real weight in Yurtbulag's money. What the religious houses take in and spend is a large part of the thorp's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2s-mass_migration-thorp-1",
+    "removed": "Faith carries real weight in Yurtdavan's money. What the religious houses take in and spend is a large part of the thorp's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2r-thorp-19",
+    "removed": "Faith carries real weight in Doireworth's money. What the religious houses take in and spend is a large part of the thorp's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2r-thorp-41",
+    "removed": "Faith carries real weight in Xinyuan's money. What the religious houses take in and spend is a large part of the thorp's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2s-politically_fractured-thorp-2",
+    "removed": "Faith carries real weight in Ripavetum's money. What the religious houses take in and spend is a large part of the thorp's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2s-under_siege-thorp-2",
+    "removed": "Faith carries real weight in Agioslimani's money. What the religious houses take in and spend is a large part of the thorp's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2r-thorp-11",
+    "removed": "Faith carries real weight in Muulcoba's money. What the religious houses take in and spend is a large part of the thorp's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2r-thorp-55",
+    "removed": "Faith carries real weight in Yekekum's money. What the religious houses take in and spend is a large part of the thorp's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   },
+   {
+    "town": "r2s-wartime-thorp-1",
+    "removed": "Faith carries real weight in Breitgate's money. What the religious houses take in and spend is a large part of the thorp's business.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) hamlet/thorp keeps only a Wayside shrine, \"Access to parish church\", Burial ground; income is Agricultural Rents 61-100% with no religious line."
+   }
+  ],
+  "replacement": {
+   "silence": 5,
+   "true": 17,
+   "false": 5,
+   "falseExamples": [
+    {
+     "town": "r2s-plague_onset-hamlet-3",
+     "sentence": "The country around Tenoha produces no luxury goods, so the hamlet has none but what it buys.",
+     "severity": "MED",
+     "fact": "(b)/(g) Resources tab lists Gemstone Deposits (output \"luxury\"), available."
+    },
+    {
+     "town": "r2s-religious_conversion-hamlet-1",
+     "sentence": "The country around Hagiolathra produces no luxury goods, so the hamlet has none but what it buys.",
+     "severity": "MED",
+     "fact": "(b)/(g) Resources tab lists Gemstone Deposits (output \"luxury\"), available."
+    },
+    {
+     "town": "r2r-thorp-15",
+     "sentence": "The country around Buyanshari produces no luxury goods, so the thorp has none but what it buys.",
+     "severity": "MED",
+     "fact": "(b)/(g) Resources tab lists Precious Metals (luxury, gems), available."
+    },
+    {
+     "town": "r2r-thorp-29",
+     "sentence": "The country around Yurtbulag produces no luxury goods, so the thorp has none but what it buys.",
+     "severity": "MED",
+     "fact": "(b)/(g) Resources tab lists Precious Metals (luxury, gems), available."
+    },
+    {
+     "town": "r2s-under_siege-thorp-2",
+     "sentence": "The country around Agioslimani produces no luxury goods, so the thorp has none but what it buys.",
+     "severity": "MED",
+     "fact": "(b)/(g) Resources tab lists Gemstone Deposits (output \"luxury\"), available."
+    }
+   ]
+  },
+  "note": "Removed line was false everywhere; 5 replacements say \"produces no luxury goods\" beside gem/precious-metal deposits."
+ },
+ {
+  "id": "DS-ECO-12::INCOME WEIGHT: the religious houses::v2",
+  "read": 19,
+  "removedTrue": 0,
+  "removedFalse": 19,
+  "removedFalseWorst": "HIGH",
+  "examples": [
+   {
+    "town": "r2r-hamlet-2",
+    "removed": "The religious houses at Tulumac are among its biggest buyers and employers, and a bad year for them is a bad year for the hamlet.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) no religious house (Wayside shrine, Access to parish church, Burial ground only); income Agricultural Rents 64-100%, no religious line."
+   },
+   {
+    "town": "r2r-hamlet-29",
+    "removed": "The religious houses at Tighness are among its biggest buyers and employers, and a bad year for them is a bad year for the hamlet.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) no religious house (Wayside shrine, Access to parish church, Burial ground only); income Agricultural Rents 64-100%, no religious line."
+   },
+   {
+    "town": "r2r-hamlet-37",
+    "removed": "The religious houses at Madinatdarya are among its biggest buyers and employers, and a bad year for them is a bad year for the hamlet.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) no religious house (Wayside shrine, Access to parish church, Burial ground only); income Agricultural Rents 64-100%, no religious line."
+   },
+   {
+    "town": "r2r-hamlet-39",
+    "removed": "The religious houses at Fortecastra are among its biggest buyers and employers, and a bad year for them is a bad year for the hamlet.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) no religious house (Wayside shrine, Access to parish church, Burial ground only); income Agricultural Rents 64-100%, no religious line."
+   },
+   {
+    "town": "r2r-hamlet-6",
+    "removed": "The religious houses at Weichgrund are among its biggest buyers and employers, and a bad year for them is a bad year for the hamlet.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) no religious house (Wayside shrine, Access to parish church, Burial ground only); income Agricultural Rents 64-100%, no religious line."
+   },
+   {
+    "town": "r2s-insurgency-hamlet-2",
+    "removed": "The religious houses at Farolitus are among its biggest buyers and employers, and a bad year for them is a bad year for the hamlet.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) no religious house (Wayside shrine, Access to parish church, Burial ground only); income Agricultural Rents 64-100%, no religious line."
+   },
+   {
+    "town": "r2s-occupied-hamlet-1",
+    "removed": "The religious houses at Llanhurst are among its biggest buyers and employers, and a bad year for them is a bad year for the hamlet.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) no religious house (Wayside shrine, Access to parish church, Burial ground only); income Agricultural Rents 64-100%, no religious line."
+   },
+   {
+    "town": "r2r-hamlet-45",
+    "removed": "The religious houses at Staroovo are among its biggest buyers and employers, and a bad year for them is a bad year for the hamlet.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) no religious house (Wayside shrine, Access to parish church, Burial ground only); income Agricultural Rents 64-100%, no religious line."
+   },
+   {
+    "town": "r2s-politically_fractured-hamlet-0",
+    "removed": "The religious houses at Zelenoichi are among its biggest buyers and employers, and a bad year for them is a bad year for the hamlet.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) no religious house (Wayside shrine, Access to parish church, Burial ground only); income Agricultural Rents 64-100%, no religious line."
+   },
+   {
+    "town": "r2s-slave_revolt-hamlet-0",
+    "removed": "The religious houses at Velikoichi are among its biggest buyers and employers, and a bad year for them is a bad year for the hamlet.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) no religious house (Wayside shrine, Access to parish church, Burial ground only); income Agricultural Rents 64-100%, no religious line."
+   },
+   {
+    "town": "rv2-hamlet-wartime-1",
+    "removed": "The religious houses at Llanbridge are among its biggest buyers and employers, and a bad year for them is a bad year for the hamlet.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) no religious house (Wayside shrine, Access to parish church, Burial ground only); income Agricultural Rents 64-100%, no religious line."
+   },
+   {
+    "town": "rv2-hamlet-wartime-2",
+    "removed": "The religious houses at Tarkhangol are among its biggest buyers and employers, and a bad year for them is a bad year for the hamlet.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) no religious house (Wayside shrine, Access to parish church, Burial ground only); income Agricultural Rents 64-100%, no religious line."
+   },
+   {
+    "town": "r2r-thorp-34",
+    "removed": "The religious houses at Tihoin are among its biggest buyers and employers, and a bad year for them is a bad year for the thorp.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) no religious house (Wayside shrine, Access to parish church, Burial ground only); income Agricultural Rents 64-100%, no religious line."
+   },
+   {
+    "town": "r2r-thorp-48",
+    "removed": "The religious houses at Huawan are among its biggest buyers and employers, and a bad year for them is a bad year for the thorp.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) no religious house (Wayside shrine, Access to parish church, Burial ground only); income Agricultural Rents 64-100%, no religious line."
+   },
+   {
+    "town": "rv2-thorp-calm-1",
+    "removed": "The religious houses at Ormfjord are among its biggest buyers and employers, and a bad year for them is a bad year for the thorp.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) no religious house (Wayside shrine, Access to parish church, Burial ground only); income Agricultural Rents 64-100%, no religious line."
+   },
+   {
+    "town": "r2r-thorp-46",
+    "removed": "The religious houses at Erdenserai are among its biggest buyers and employers, and a bad year for them is a bad year for the thorp.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) no religious house (Wayside shrine, Access to parish church, Burial ground only); income Agricultural Rents 64-100%, no religious line."
+   },
+   {
+    "town": "r2r-thorp-5",
+    "removed": "The religious houses at Glenburn are among its biggest buyers and employers, and a bad year for them is a bad year for the thorp.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) no religious house (Wayside shrine, Access to parish church, Burial ground only); income Agricultural Rents 64-100%, no religious line."
+   },
+   {
+    "town": "rv2-thorp-plague_onset-2",
+    "removed": "The religious houses at Innisbridge are among its biggest buyers and employers, and a bad year for them is a bad year for the thorp.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) no religious house (Wayside shrine, Access to parish church, Burial ground only); income Agricultural Rents 64-100%, no religious line."
+   },
+   {
+    "town": "r2s-succession_void-thorp-3",
+    "removed": "The religious houses at Markazmahal are among its biggest buyers and employers, and a bad year for them is a bad year for the thorp.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(a)/(c) no religious house (Wayside shrine, Access to parish church, Burial ground only); income Agricultural Rents 64-100%, no religious line."
+   }
+  ],
+  "replacement": {
+   "silence": 4,
+   "true": 15,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Removed line false everywhere; critical-import replacements check out."
+ },
+ {
+  "id": "DS-ECO-9::FOOD SOURCES: one source::v4",
+  "read": 13,
+  "removedTrue": 2,
+  "removedFalse": 11,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "rv2-city-famine-1",
+    "removed": "The city lived off its fishing and little else, and the fishing has failed; there is nothing else to turn to.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(f) grown 25%, imports 57%, magic 7%, granary 8 months."
+   },
+   {
+    "town": "r2s-famine-hamlet-2",
+    "removed": "The hamlet lived off its fishing and little else, and the fishing has failed; there is nothing else to turn to.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(f) grown 35%, imports 45%, magic 8%."
+   },
+   {
+    "town": "r2s-famine-hamlet-3",
+    "removed": "The hamlet lived off its herds and little else, and the herds has failed; there is nothing else to turn to.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "grown 48%, imports 18%: \"nothing else\" a stretch."
+   },
+   {
+    "town": "rv2-hamlet-famine-1",
+    "removed": "The hamlet lived off its grain harvest and little else, and the grain harvest has failed; there is nothing else to turn to.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(f) grown 38%, imports 37%."
+   },
+   {
+    "town": "r2s-occupied-hamlet-1",
+    "removed": "The hamlet lived off its hunting and little else, and the hunting has failed; there is nothing else to turn to.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(f) no imports, but 29% of food by spell or prayer."
+   },
+   {
+    "town": "r2s-famine-metropolis-1",
+    "removed": "The metropolis lived off its fishing and little else, and the fishing has failed; there is nothing else to turn to.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(f) grown 19%, imports 39%, magic 27%, 14 months stores."
+   },
+   {
+    "town": "r2s-famine-metropolis-2",
+    "removed": "The metropolis lived off its herds and little else, and the herds has failed; there is nothing else to turn to.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(f) grown 19%, imports 49%, magic 10%, 13 months stores."
+   },
+   {
+    "town": "rv2-metropolis-famine-2",
+    "removed": "The metropolis lived off its fishing and little else, and the fishing has failed; there is nothing else to turn to.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(f) grown 17%, imports 63%, magic 13%, 15 months stores."
+   },
+   {
+    "town": "rw3-thorp-famine-1",
+    "removed": "The thorp lived off its grain harvest and little else, and the grain harvest has failed; there is nothing else to turn to.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(f) grown 35%, imports 39%."
+   },
+   {
+    "town": "r2s-famine-village-1",
+    "removed": "The village lived off its fishing and little else, and the fishing has failed; there is nothing else to turn to.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(f) grown 38%, imports 32%."
+   },
+   {
+    "town": "rv2-village-famine-2",
+    "removed": "The village lived off its fishing and little else, and the fishing has failed; there is nothing else to turn to.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(f) grown 39%, imports 37%, magic 9%."
+   },
+   {
+    "town": "rv2-village-under_siege+famine-1",
+    "removed": "The village lived off its grain harvest and little else, and the grain harvest has failed; there is nothing else to turn to.",
+    "true": true,
+    "severity": null,
+    "fact": "Siege: imports 0, magic 0, stores 0.1 months; grain failed."
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 13,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Struck line contradicted the import/magic figures in 11 of 13; replacements (single source, spell/prayer share) match the record."
+ },
+ {
+  "id": "DS-ECO-10::POSTURE: established::v10",
+  "read": 9,
+  "removedTrue": 8,
+  "removedFalse": 1,
+  "removedFalseWorst": "LOW",
+  "examples": [
+   {
+    "town": "r2s-under_siege-town-3",
+    "removed": "Rathwell has several kinds of goods to sell outward, and the siege has shut every one of them in.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(e) \"several kinds\" for 2 exports (tools/weapons, letters of credit)."
+   },
+   {
+    "town": "r2s-under_siege-city-2",
+    "removed": "Andronarion has several kinds of goods to sell outward, and the siege has shut every one of them in.",
+    "true": true,
+    "severity": null,
+    "fact": "Under siege, several exports, all shut in (record: \"trade has stopped\")."
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 8,
+   "false": 1,
+   "falseExamples": [
+    {
+     "town": "r2s-under_siege-town-3",
+     "sentence": "Rathwell had several trades selling outward before the siege, and none of them can reach a buyer now.",
+     "severity": "LOW",
+     "fact": "(e) \"several trades\" for 2 exports."
+    }
+   ]
+  },
+  "note": "True; reworded past-tense replacement equally true."
+ },
+ {
+  "id": "DS-ECO-11::EXPLOITATION: partiallyExploited::v6",
+  "read": 10,
+  "removedTrue": 10,
+  "removedFalse": 0,
+  "removedFalseWorst": null,
+  "examples": [
+   {
+    "town": "r2s-under_siege-city-1",
+    "removed": "Half of this trade was always done elsewhere, and with the siege closing the roads, the half the city does has nowhere to go.",
+    "true": true,
+    "severity": null,
+    "fact": "Partially exploited chain on the page; siege closes the roads."
+   }
+  ],
+  "replacement": {
+   "silence": 1,
+   "true": 8,
+   "false": 1,
+   "falseExamples": [
+    {
+     "town": "r2s-under_siege-city-1",
+     "sentence": "Torrivilla has worked out its coal or peat deposits, and it will not come back on its own: someone has to put labour and money into it before it yields again.",
+     "severity": "LOW",
+     "fact": "(h)/(b) \"coal or peat deposits\" worked out: only coal_deposits is depleted; peat (marshlands) is available."
+    }
+   ]
+  },
+  "note": "True (its \"this trade\" leans on the chip above); replacements mostly the depletion line with the town named."
+ },
+ {
+  "id": "DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks::v4",
+  "read": 17,
+  "removedTrue": 17,
+  "removedFalse": 0,
+  "removedFalseWorst": null,
+  "examples": [
+   {
+    "town": "r2s-under_siege-city-0",
+    "removed": "The city has no grain of its own, and the siege lets none in, so the work that needs it is stopping.",
+    "true": true,
+    "severity": null,
+    "fact": "Good is a critical import the terrain cannot give; the house (Mill/Vintner/Potter/Smelter) exists; siege in force."
+   }
+  ],
+  "replacement": {
+   "silence": 15,
+   "true": 2,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "True; struck as a duplicate of v3; 2 towns get the v3 wording (true), 15 silence."
+ },
+ {
+  "id": "DS-ECO-12::CRITICAL IMPORT: the land cannot give it::v4",
+  "read": 11,
+  "removedTrue": 10,
+  "removedFalse": 1,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2s-succession_void-thorp-0",
+    "removed": "The thorp neither grows nor buys any luxury goods; people there do without.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) \"neither grows ... any luxury goods\": record and Resources tab have Precious Metals (luxury, gems) available."
+   },
+   {
+    "town": "r2s-famine-hamlet-1",
+    "removed": "The hamlet neither grows nor buys any stone; people there do without.",
+    "true": true,
+    "severity": null,
+    "fact": "Critical import, no primaryImports, no house using it."
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 10,
+   "false": 1,
+   "falseExamples": [
+    {
+     "town": "r2s-succession_void-thorp-0",
+     "sentence": "Whatever Qingmen's people give for their faith is given elsewhere, or not at all: the place keeps no house to take it. The country around Qingmen produces no luxury goods, so the thorp has none but what it buys.",
+     "severity": "MED",
+     "fact": "(b)/(g) \"produces no luxury goods\": Precious Metals (luxury, gems) available on the Resources tab."
+    }
+   ]
+  },
+  "note": "True in 10 of 11; replacements true but one keeps the gem-deposit denial."
+ },
+ {
+  "id": "DS-ECO-12::INCOME WEIGHT: the religious houses::v5",
+  "read": 30,
+  "removedTrue": 0,
+  "removedFalse": 30,
+  "removedFalseWorst": "LOW",
+  "examples": [
+   {
+    "town": "r2r-hamlet-11",
+    "removed": "The hamlet spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "r2r-hamlet-40",
+    "removed": "The hamlet spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "r2r-hamlet-41",
+    "removed": "The hamlet spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "r2r-hamlet-58",
+    "removed": "The hamlet spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "r2r-hamlet-7",
+    "removed": "The hamlet spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "r2r-hamlet-24",
+    "removed": "The hamlet spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "r2s-famine-hamlet-1",
+    "removed": "The hamlet spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "r2s-mass_migration-hamlet-1",
+    "removed": "The hamlet spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "r2s-monster_pressure-hamlet-3",
+    "removed": "The hamlet spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "rv2-hamlet-plague_onset-1",
+    "removed": "The hamlet spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "rv2-hamlet-plague_onset-2",
+    "removed": "The hamlet spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "r2s-politically_fractured-hamlet-2",
+    "removed": "The hamlet spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "r2s-succession_void-hamlet-2",
+    "removed": "The hamlet spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "r2s-wartime-hamlet-1",
+    "removed": "The hamlet spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "r2r-thorp-2",
+    "removed": "The thorp spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "r2r-thorp-30",
+    "removed": "The thorp spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "r2r-thorp-37",
+    "removed": "The thorp spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "r2r-thorp-49",
+    "removed": "The thorp spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "r2r-thorp-6",
+    "removed": "The thorp spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "r2r-thorp-26",
+    "removed": "The thorp spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "r2s-insurgency-thorp-2",
+    "removed": "The thorp spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "rv2-thorp-insurgency-1",
+    "removed": "The thorp spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "rv2-thorp-monster_pressure-2",
+    "removed": "The thorp spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "r2s-plague_onset-thorp-2",
+    "removed": "The thorp spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "rww-thorp-plague_onset-1",
+    "removed": "The thorp spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "r2s-recently_betrayed-thorp-0",
+    "removed": "The thorp spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "r2s-slave_revolt-thorp-3",
+    "removed": "The thorp spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "r2s-under_siege-thorp-0",
+    "removed": "The thorp spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "rv2-thorp-under_siege+famine-2",
+    "removed": "The thorp spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   },
+   {
+    "town": "r2s-wartime-thorp-3",
+    "removed": "The thorp spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) record holds no faith spending or religious income share (Agricultural Rents 61-100%); \"felt in its money first\" a stretch."
+   }
+  ],
+  "replacement": {
+   "silence": 1,
+   "true": 28,
+   "false": 1,
+   "falseExamples": [
+    {
+     "town": "rv2-thorp-monster_pressure-2",
+     "sentence": "It keeps no house for its faith, so none of the thorp's money passes through one. None of the luxury goods used at Mintarshahr comes from the country here; the thorp brings in what it uses, or goes without.",
+     "severity": "MED",
+     "fact": "(b)/(g) \"None of the luxury goods ... comes from the country\": Gemstone Deposits (luxury) available on Resources tab."
+    }
+   ]
+  },
+  "note": "Removed line a doubtful stretch; \"keeps no house\" replacements true."
+ },
+ {
+  "id": "DS-ECO-1::COMBINATION C4: a low rung on a working approach::v1",
+  "read": 6,
+  "removedTrue": 0,
+  "removedFalse": 6,
+  "removedFalseWorst": "LOW",
+  "examples": [
+   {
+    "town": "r2s-plague_onset-hamlet-2",
+    "removed": "Traffic moves along Jayaagam's road every day, and little of its money stays behind.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) \"Traffic moves along ... every day\" vs page plague note \"travel is discouraged\", quarantine keeps people from trading."
+   },
+   {
+    "town": "rv2-hamlet-plague_onset-1",
+    "removed": "Traffic moves along Ráðoy's river every day, and little of its money stays behind.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) \"Traffic moves along ... every day\" vs page plague note \"travel is discouraged\", quarantine keeps people from trading."
+   },
+   {
+    "town": "r2s-plague_onset-town-1",
+    "removed": "Traffic moves along Olymparion's river every day, and little of its money stays behind.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) \"Traffic moves along ... every day\" vs page plague note \"travel is discouraged\", quarantine keeps people from trading."
+   },
+   {
+    "town": "r2s-plague_onset-town-2",
+    "removed": "Traffic moves along Tarkhankul's river every day, and little of its money stays behind.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) \"Traffic moves along ... every day\" vs page plague note \"travel is discouraged\", quarantine keeps people from trading."
+   },
+   {
+    "town": "r2s-plague_onset-village-1",
+    "removed": "Traffic moves along Erdenordu's crossroads every day, and little of its money stays behind.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) as above, and \"moves along Erdenordu's crossroads\" (slot word wrong kind)."
+   },
+   {
+    "town": "r2s-plague_onset-village-3",
+    "removed": "Traffic moves along Loughmere's road every day, and little of its money stays behind.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) \"Traffic moves along ... every day\" vs page plague note \"travel is discouraged\", quarantine keeps people from trading."
+   }
+  ],
+  "replacement": {
+   "silence": 6,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Doubtful under plague; silence."
+ },
+ {
+  "id": "DS-ECO-9::SECURE::v3",
+  "read": 30,
+  "removedTrue": 0,
+  "removedFalse": 30,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2r-metropolis-15",
+    "removed": "Nandamala is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2r-metropolis-16",
+    "removed": "Dunkelkirche is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2r-metropolis-17",
+    "removed": "Achilpetra is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2r-metropolis-28",
+    "removed": "Yekeobo is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2r-metropolis-30",
+    "removed": "Ulfoy is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2r-metropolis-36",
+    "removed": "Rajitala is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2r-metropolis-46",
+    "removed": "Beiguan is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2r-metropolis-48",
+    "removed": "Sundaker is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2r-metropolis-53",
+    "removed": "Gantulgashari is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2r-metropolis-56",
+    "removed": "Albastagnum is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "rv2-metropolis-calm-1",
+    "removed": "Divovich is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2r-metropolis-33",
+    "removed": "Hvaliya is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2r-metropolis-7",
+    "removed": "Ulancaravansarai is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2s-indebted-metropolis-1",
+    "removed": "Olympskala is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "rv2-metropolis-indebted-2",
+    "removed": "Mintarkhel is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2r-metropolis-29",
+    "removed": "Nokhoiserai is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2s-infiltrated-metropolis-3",
+    "removed": "Vatantash is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2r-metropolis-26",
+    "removed": "Kitaxian is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "rv2-metropolis-insurgency-1",
+    "removed": "Ioannoanthi is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2s-mass_migration-metropolis-3",
+    "removed": "Balgill is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "rv2-metropolis-mass_migration-2",
+    "removed": "Umapur is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2s-plague_onset-metropolis-1",
+    "removed": "Chandrapur is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2s-politically_fractured-metropolis-0",
+    "removed": "Xochiatl is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2s-politically_fractured-metropolis-3",
+    "removed": "Gangaghat is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2s-recently_betrayed-metropolis-0",
+    "removed": "Ormstrand is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2s-religious_conversion-metropolis-0",
+    "removed": "Baizhen is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2s-religious_conversion-metropolis-3",
+    "removed": "Hákonsund is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2s-slave_revolt-metropolis-0",
+    "removed": "Stormbrekka is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2s-slave_revolt-metropolis-1",
+    "removed": "Tikalkin is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   },
+   {
+    "town": "r2r-metropolis-8",
+    "removed": "Langenberg is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) foodSecurity Secure, granary 15-15.5 months on the page (\"Stores: a granary, 16 months\"): \"fed only just, a poor harvest felt at every table\" is false."
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 26,
+   "false": 4,
+   "falseExamples": [
+    {
+     "town": "r2r-metropolis-16",
+     "sentence": "Nobody at Dunkelkirche worries much about one poor harvest: the stores would cover it. Its own food comes from its fishing and little else, so one bad year for the fishing would cost the whole metropolis dear.",
+     "severity": "LOW",
+     "fact": "(g) \"stores would cover it\" beside \"one bad year for the fishing would cost ... dear\"."
+    },
+    {
+     "town": "r2r-metropolis-28",
+     "sentence": "Yekeobo eats, and what it keeps put by would carry it through a bad harvest and well beyond. A good part of what Yekeobo eats is brought in, and everyone knows when the next load is due. The metropolis has little food of its own but its fishing, so a bad season for the fishing is felt at every table.",
+     "severity": "MED",
+     "fact": "(g) same paragraph: stores \"would carry it through a bad harvest and well beyond\", then \"a bad season for the fishing is felt at every table\"; 15.3 months stores."
+    },
+    {
+     "town": "r2r-metropolis-48",
+     "sentence": "Nobody at Sundaker worries much about one poor harvest: the stores would cover it. Its own food comes from its fishing and little else, so one bad year for the fishing would cost the whole metropolis dear.",
+     "severity": "LOW",
+     "fact": "(g) \"stores would cover it\" beside \"one bad year for the fishing would cost ... dear\"."
+    },
+    {
+     "town": "r2r-metropolis-29",
+     "sentence": "Nobody at Nokhoiserai worries much about one poor harvest: the stores would cover it. Its own food comes from its grain harvest and little else, so one bad year for the grain harvest would cost the whole metropolis dear.",
+     "severity": "MED",
+     "fact": "(g) same paragraph: \"stores would cover\" one poor harvest, then \"one bad year for the grain harvest would cost the whole metropolis dear\"; 15 months stores."
+    }
+   ]
+  },
+  "note": "Removed line false in all 30 (15 months stores); replacements right except two single-source lines that undo the stores line."
+ },
+ {
+  "id": "DS-ECO-10::POSTURE: established::v5",
+  "read": 8,
+  "removedTrue": 0,
+  "removedFalse": 8,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2s-under_siege-city-1",
+    "removed": "People in Torrivilla work at more than one trade, so a bad year for one is not a bad year for everyone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under siege (\"Field work and trade have stopped\"): diversification \"a bad year for one is not a bad year for everyone\" presumes normal trade."
+   },
+   {
+    "town": "rv2-city-under_siege-25",
+    "removed": "People in Mayantitlan work at more than one trade, so a bad year for one is not a bad year for everyone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under siege (\"Field work and trade have stopped\"): diversification \"a bad year for one is not a bad year for everyone\" presumes normal trade."
+   },
+   {
+    "town": "rv2-city-under_siege-8",
+    "removed": "People in Villalitus work at more than one trade, so a bad year for one is not a bad year for everyone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under siege (\"Field work and trade have stopped\"): diversification \"a bad year for one is not a bad year for everyone\" presumes normal trade."
+   },
+   {
+    "town": "rv2-city-under_siege-9",
+    "removed": "People in Balness work at more than one trade, so a bad year for one is not a bad year for everyone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under siege (\"Field work and trade have stopped\"): diversification \"a bad year for one is not a bad year for everyone\" presumes normal trade."
+   },
+   {
+    "town": "rw3-hamlet-under_siege-1",
+    "removed": "People in Lidostagnum work at more than one trade, so a bad year for one is not a bad year for everyone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under siege (\"Field work and trade have stopped\"): diversification \"a bad year for one is not a bad year for everyone\" presumes normal trade."
+   },
+   {
+    "town": "r2s-under_siege-metropolis-2",
+    "removed": "People in Raassaray work at more than one trade, so a bad year for one is not a bad year for everyone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under siege (\"Field work and trade have stopped\"): diversification \"a bad year for one is not a bad year for everyone\" presumes normal trade."
+   },
+   {
+    "town": "rv2-metropolis-under_siege-2",
+    "removed": "People in Nokhoiiin work at more than one trade, so a bad year for one is not a bad year for everyone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under siege (\"Field work and trade have stopped\"): diversification \"a bad year for one is not a bad year for everyone\" presumes normal trade."
+   },
+   {
+    "town": "rw3-town-under_siege+famine-1",
+    "removed": "People in Cobapan work at more than one trade, so a bad year for one is not a bad year for everyone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under siege (\"Field work and trade have stopped\"): diversification \"a bad year for one is not a bad year for everyone\" presumes normal trade."
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 7,
+   "false": 1,
+   "falseExamples": [
+    {
+     "town": "rw3-town-under_siege+famine-1",
+     "sentence": "Cobapan has more than one trade sending goods out, and the famine has made every one of them harder to keep going.",
+     "severity": "MED",
+     "fact": "(c) siege in force (\"Field work and trade have stopped\", \"market is shut\") yet \"has more than one trade sending goods out, and the famine has made every one ... harder\"."
+    }
+   ]
+  },
+  "note": "Removed line false under siege; one replacement names famine and keeps trade running under siege."
+ },
+ {
+  "id": "DS-ECO-11::EXPLOITATION: fullyExploited::v3",
+  "read": 13,
+  "removedTrue": 13,
+  "removedFalse": 0,
+  "removedFalseWorst": null,
+  "examples": [
+   {
+    "town": "rv2-city-under_siege-8",
+    "removed": "The city has taken this trade as far as it goes, from the ground to the finished thing.",
+    "true": true,
+    "severity": null,
+    "fact": "Fully exploited chain shown on the page."
+   }
+  ],
+  "replacement": {
+   "silence": 3,
+   "true": 10,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "True; replacements name the chain correctly."
+ },
+ {
+  "id": "DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks::v3",
+  "read": 22,
+  "removedTrue": 22,
+  "removedFalse": 0,
+  "removedFalseWorst": null,
+  "examples": [
+   {
+    "town": "rv2-city-under_siege-15",
+    "removed": "The city's Vintner has had no grapes since the siege closed the roads, and its work has stopped or soon will.",
+    "true": true,
+    "severity": null,
+    "fact": "House exists, good is a critical import, siege closes the roads."
+   }
+  ],
+  "replacement": {
+   "silence": 22,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "True; silence in all 22."
+ },
+ {
+  "id": "DS-ECO-12::INCOME WEIGHT: the religious houses::v3",
+  "read": 1,
+  "removedTrue": 0,
+  "removedFalse": 1,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2s-under_siege-thorp-1",
+    "removed": "Faith carries real weight in Lyssono's money, though the place keeps no house for it: what its people give for their faith leaves with them on the feast days.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) \"real weight in its money\" vs Agricultural Rents 90%/no religious line; under siege people cannot leave on feast days (\"nothing is bought or sold\")."
+   }
+  ],
+  "replacement": {
+   "silence": 1,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "False; silence."
+ },
+ {
+  "id": "DS-ECO-12::INCOME WEIGHT: the religious houses::v4",
+  "read": 2,
+  "removedTrue": 0,
+  "removedFalse": 2,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2s-under_siege-hamlet-1",
+    "removed": "At Zlatoko the feast days set the calendar of buying and selling, and the offerings leave the place with the people who carry them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under siege the page says \"nothing is bought or sold\"; feast-day buying and people leaving with offerings presume open roads."
+   },
+   {
+    "town": "rw3-hamlet-under_siege-1",
+    "removed": "At Lidostagnum the feast days set the calendar of buying and selling, and the offerings leave the place with the people who carry them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under siege the page says \"nothing is bought or sold\"; feast-day buying and people leaving with offerings presume open roads."
+   }
+  ],
+  "replacement": {
+   "silence": 1,
+   "true": 1,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "False under siege; one true timber line, one silence."
+ }
+]

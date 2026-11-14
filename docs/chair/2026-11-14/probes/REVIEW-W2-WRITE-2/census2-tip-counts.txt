@@ -1,0 +1,168 @@
+PATTERN a: towns 711 · distinct lines 501 (NEW 306) · writers 91 (NEW 40) · untraced lines 46
+PATTERN b: towns 70 · distinct lines 96 (NEW 62) · writers 33 (NEW 16) · untraced lines 16
+PATTERN c: towns 270 · distinct lines 292 (NEW 169) · writers 37 (NEW 17) · untraced lines 8
+PATTERN d: towns 382 · distinct lines 40 (NEW 20) · writers 11 (NEW 5) · untraced lines 15
+PATTERN e: towns 46 · distinct lines 18 (NEW 12) · writers 4 (NEW 2) · untraced lines 3
+PATTERN f: towns 720 · distinct lines 344 (NEW 191) · writers 14 (NEW 7) · untraced lines 124
+PATTERN g: towns 720 · distinct lines 14 (NEW 0) · writers 3 (NEW 0) · untraced lines 8
+PATTERN h: towns 20 · distinct lines 63 (NEW 60) · writers 15 (NEW 13) · untraced lines 26
+FILE src/data/dossierStateProse/economy.generated.js [wr]: a 62 towns/2 lines/2 fns · b 18 towns/10 lines/5 fns
+FILE src/data/dossierStateProse/defense.generated.js [wc,wr]: b 7 towns/2 lines/2 fns · c 9 towns/5 lines/5 fns · a 17 towns/17 lines/2 fns
+FILE src/data/dossierStateProse/general.generated.js [wr]: e 15 towns/14 lines/3 fns · a 4 towns/2 lines/2 fns
+FILE src/data/dossierStateProse/stressors.generated.js [wr]: c 3 towns/1 lines/1 fns · a 12 towns/3 lines/3 fns
+FILE src/data/dossierStateProse/power.generated.js [wr]: b 3 towns/1 lines/1 fns
+  HIT c/streets r2r-thorp-1 Summary/Overview [DS-CND-1 › DIRECTION: stable · CRISIS: occupied · v2] NEW: The occupiers in Terrapolis's streets are the same faces as last season, and they no longer bother to look about them.
+  HIT a/merchants r2r-thorp-1 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Terrapolis for one thing usually leaves with two or three.
+  HIT b/occupied:order-own r2r-thorp-1 Systems/Defense [DS-DEF-2 › Internal Security: no legal infrastructure · v1] NEW: Terrapolis keeps no court and no gaol, and no wrong done there is written down; order is kept by whoever is armed and standing there, and when they leave, nothing keeps it.
+  HIT a/merchants r2r-thorp-3 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Gantulgaabad for one thing usually leaves with two or three.
+  HIT a/merchants r2r-thorp-12 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Nahrhaven for one thing usually leaves with two or three.
+  HIT b/famine:plenty r2r-thorp-17 Systems/Economics [DS-ECO-1 › COMBINATION C5: a low rung on a narrow approach · v2] cut#19~: Chichich lives on a subsistence living that feeds it and no more, and the road in is too poor to bring anything extra.
+  HIT a/merchants r2r-thorp-17 Systems/Economics [DS-ECO-10 › POSTURE: none · v2] NEW: A merchant who came to buy in quantity has come to the wrong place.
+  HIT a/merchants r2r-thorp-21 Systems/Economics [DS-ECO-10 › POSTURE: none · v2] NEW: A merchant who came to buy in quantity has come to the wrong place.
+  HIT a/merchants r2r-thorp-24 Summary/Overview [DS-CND-1 › DIRECTION: stable · CRISIS: occupied · v4] NEW: Merchants in Sanctaminus pay the occupiers the same share of every sale, season after season, and have learned to price it in.
+  HIT c/streets r2r-thorp-27 Summary/Overview [DS-CND-1 › DIRECTION: stable · CRISIS: occupied · v2] NEW: The occupiers in Olympnea's streets are the same faces as last season, and they no longer bother to look about them.
+  HIT b/occupied:order-own r2r-thorp-27 Systems/Defense [DS-DEF-2 › Internal Security: no legal infrastructure · v1] NEW: Olympnea keeps no court and no gaol, and no wrong done there is written down; order is kept by whoever is armed and standing there, and when they leave, nothing keeps it.
+  HIT a/merchants r2r-thorp-34 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Tihoin for one thing usually leaves with two or three.
+  HIT a/merchants r2r-thorp-38 Systems/Economics [DS-ECO-10 › POSTURE: none · v2] NEW: A merchant who came to buy in quantity has come to the wrong place.
+  HIT a/merchants r2r-thorp-40 Summary/Overview [DS-CND-1 › DIRECTION: stable · CRISIS: occupied · v4] NEW: Merchants in Malotsy pay the occupiers the same share of every sale, season after season, and have learned to price it in.
+  HIT a/merchants r2r-thorp-45 Systems/Economics [DS-ECO-10 › POSTURE: none · v2] NEW: A merchant who came to buy in quantity has come to the wrong place.
+  HIT b/famine:plenty r2r-thorp-46 Systems/Economics [DS-ECO-1 › COMBINATION C5: a low rung on a narrow approach · v2] cut#19~: Erdenserai lives on a subsistence living that feeds it and no more, and the road in is too poor to bring anything extra.
+  HIT a/merchants r2r-thorp-46 Systems/Economics [DS-ECO-10 › POSTURE: none · v2] NEW: A merchant who came to buy in quantity has come to the wrong place.
+  HIT a/merchants r2r-thorp-47 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Hongzhou for one thing usually leaves with two or three.
+  HIT a/merchants r2r-thorp-48 Systems/Economics [DS-ECO-10 › POSTURE: none · v2] NEW: A merchant who came to buy in quantity has come to the wrong place.
+  HIT a/merchants r2r-thorp-54 Systems/Economics [DS-ECO-10 › POSTURE: none · v2] NEW: A merchant who came to buy in quantity has come to the wrong place.
+  HIT a/merchants r2r-thorp-57 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Brahmawadi for one thing usually leaves with two or three.
+  HIT b/siege:brought-in r2r-hamlet-0 Systems/Economics [DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v2] NEW: None of the timber used at Spitzsteig comes from the country here; the hamlet brings in what it uses, or goes without.
+  HIT a/merchants r2r-hamlet-0 Systems/Economics [DS-ECO-10 › POSTURE: none · v2] NEW: A merchant who came to buy in quantity has come to the wrong place.
+  HIT b/siege:trade-flows r2r-hamlet-0 Systems/Economics [DS-ECO-6 › TIER: minor shadow activity (≥3) · v1] NEW: A little of Spitzsteig's trade goes unrecorded, small enough to annoy the clerks and too small to change what the hamlet is.
+  HIT a/merchants r2r-hamlet-18 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Caerwick for one thing usually leaves with two or three.
+  HIT c/streets r2r-hamlet-20 Systems/Defense [DS-DEF-4 › structure semi-organized · v3] NEW: Rival crews at Jómsmark are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.
+  HIT a/merchants r2r-hamlet-24 Systems/Economics [DS-ECO-10 › POSTURE: none · v2] NEW: A merchant who came to buy in quantity has come to the wrong place.
+  HIT a/merchants r2r-hamlet-34 Systems/Economics [DS-ECO-10 › POSTURE: none · v2] NEW: A merchant who came to buy in quantity has come to the wrong place.
+  HIT a/merchants r2r-hamlet-37 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Madinatdarya for one thing usually leaves with two or three.
+  HIT a/merchants r2r-hamlet-42 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Zhongzhen for one thing usually leaves with two or three.
+  HIT a/merchants r2r-hamlet-44 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Longzhou for one thing usually leaves with two or three.
+  HIT e/guild r2r-hamlet-47 Summary/Overview [DS-GEN-13 › COMMERCE: a market, no guild · v3] NEW: Buying and selling at Lidocastra is done face to face at the market with no guild between seller and buyer.
+  HIT a/merchants r2r-hamlet-52 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Ormdal for one thing usually leaves with two or three.
+  HIT a/merchants r2r-hamlet-53 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Markazdeh for one thing usually leaves with two or three.
+  HIT a/merchants r2r-hamlet-56 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Polavich for one thing usually leaves with two or three.
+  HIT e/guild r2r-village-2 Summary/Overview [DS-GEN-13 › COMMERCE: a market, no guild · v3] NEW: Buying and selling at Staroka is done face to face at the market with no guild between seller and buyer.
+  HIT a/merchants r2r-village-8 Systems/Economics [DS-ECO-10 › POSTURE: none · v2] NEW: A merchant who came to buy in quantity has come to the wrong place.
+  HIT a/merchants r2r-village-9 Summary/Overview [DS-CND-1 › DIRECTION: stable · CRISIS: succession_void · v3] NEW: Nothing large is agreed in Megalburg until someone is in charge, so merchants deal season to season and promise nothing longer.
+  HIT e/guild r2r-village-11 Summary/Overview [DS-GEN-13 › COMMERCE: a market, no guild · v2] NEW: No guild runs Milonick's market: the village's only hold on trade is the stall fee.
+  HIT a/merchants r2r-village-12 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Fortecolonia for one thing usually leaves with two or three.
+  HIT e/guild r2r-village-14 Summary/Overview [DS-GEN-13 › COMMERCE: a market, no guild · v2] NEW: No guild runs Skaldaker's market: the village's only hold on trade is the stall fee.
+  HIT a/merchants r2r-village-19 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Chinggistash for one thing usually leaves with two or three.
+  HIT e/guild r2r-village-25 Summary/Overview [DS-GEN-13 › COMMERCE: a market, no guild · v2] NEW: No guild runs Lagosinum's market: the village's only hold on trade is the stall fee.
+  HIT a/merchants r2r-village-30 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Celono for one thing usually leaves with two or three.
+  HIT a/merchants r2r-village-32 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Jómsland for one thing usually leaves with two or three.
+  HIT a/merchants r2r-village-34 Systems/Economics [DS-ECO-10 › POSTURE: none · v2] NEW: A merchant who came to buy in quantity has come to the wrong place.
+  HIT c/districts r2r-village-34 Systems/Defense [DS-DEF-3 › COMPOUND: insurgency · v3] NEW: Some districts of Lagoorum are closed off now, and whatever happens there goes unrecorded and unpunished.
+  HIT a/merchants r2r-village-37 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Dobroets for one thing usually leaves with two or three.
+  HIT a/merchants r2r-village-41 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Hukou for one thing usually leaves with two or three.
+  HIT a/merchants r2r-village-46 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Glenheath for one thing usually leaves with two or three.
+  HIT e/guild r2r-village-49 Summary/Overview [DS-GEN-13 › COMMERCE: a market, no guild · v2] NEW: No guild runs Yaxchtzal's market: the village's only hold on trade is the stall fee.
+  HIT a/merchants r2r-village-50 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Somakota for one thing usually leaves with two or three.
+  HIT e/guild:merchant r2r-town-12 Summary/Overview [DS-GEN-13 › COMMERCE: craft guilds, no merchant guild · v1] ww#674: A buyer at Qasrtappa deals with each craft guild on its own, with no merchant guild above them.
+  HIT e/guild:merchant r2r-town-21 Summary/Overview [DS-GEN-13 › COMMERCE: craft guilds, no merchant guild · v1] ww#674: A buyer at Campoplenum deals with each craft guild on its own, with no merchant guild above them.
+  HIT a/alchemist r2r-city-48 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] NEW: Alchemy is practised at Vishnumala, and some of what it makes goes to the city's defenders.
+  HIT a/alchemist r2r-city-49 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] NEW: Alchemy is practised at Fontecivitas, and some of what it makes goes to the city's defenders.
+  HIT a/alchemist r2r-metropolis-1 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] NEW: Alchemy is practised at Varapeth, and some of what it makes goes to the metropolis's defenders.
+  HIT a/alchemist r2r-metropolis-18 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] NEW: Alchemy is practised at Víkthorpe, and some of what it makes goes to the metropolis's defenders.
+  HIT a/alchemist r2r-metropolis-49 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] NEW: Alchemy is practised at Inverholme, and some of what it makes goes to the metropolis's defenders.
+  HIT a/alchemist r2r-metropolis-50 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] NEW: Alchemy is practised at Penham, and some of what it makes goes to the metropolis's defenders.
+  HIT a/alchemist r2r-metropolis-58 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] NEW: Alchemy is practised at Eldmark, and some of what it makes goes to the metropolis's defenders.
+  HIT b/siege:brought-in r2s-under_siege-thorp-0 Systems/Economics [DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v2] NEW: None of the metals used at Qaradavan comes from the country here; the thorp brings in what it uses, or goes without.
+  HIT a/merchants r2s-under_siege-thorp-0 Systems/Economics [DS-ECO-10 › POSTURE: none · v2] NEW: A merchant who came to buy in quantity has come to the wrong place.
+  HIT b/siege:brought-in r2s-under_siege-thorp-2 Systems/Economics [DS-ECO-1 › COMBINATION C5: a low rung on a narrow approach · v3] NEW: Agioslimani is too poor to mend its road, and the road brings in too little to make it richer.
+  HIT c/streets r2s-under_siege-thorp-2 Systems/Defense [DS-DEF-3 › COMPOUND: active siege · v1] NEW: With the thorp under siege, quarrels over rations and theft of food are the trouble on Agioslimani's streets now.
+  HIT b/siege:trade-flows r2s-under_siege-thorp-3 Systems/Economics [DS-ECO-6 › TIER: minor shadow activity (≥3) · v1] NEW: A little of Tailing's trade goes unrecorded, small enough to annoy the clerks and too small to change what the thorp is.
+  HIT b/siege:brought-in r2s-under_siege-hamlet-0 Systems/Economics [DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v2] NEW: None of the metals used at Sanctaurbs comes from the country here; the hamlet brings in what it uses, or goes without.
+  HIT b/siege:brought-in r2s-under_siege-hamlet-1 Systems/Economics [DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v2] NEW: None of the timber used at Zlatoko comes from the country here; the hamlet brings in what it uses, or goes without.
+  HIT b/siege:trade-flows r2s-under_siege-hamlet-1 Systems/Economics [DS-ECO-6 › TIER: minor shadow activity (≥3) · v1] NEW: A little of Zlatoko's trade goes unrecorded, small enough to annoy the clerks and too small to change what the hamlet is.
+  HIT c/streets r2s-under_siege-hamlet-1 Systems/Defense [DS-DEF-3 › COMPOUND: active siege · v1] NEW: With the hamlet under siege, quarrels over rations and theft of food are the trouble on Zlatoko's streets now.
+  HIT a/merchants r2s-under_siege-hamlet-2 Systems/Economics [DS-ECO-10 › POSTURE: none · v2] NEW: A merchant who came to buy in quantity has come to the wrong place.
+  HIT c/streets r2s-under_siege-hamlet-3 Systems/Defense [DS-DEF-3 › COMPOUND: active siege · v1] NEW: With the hamlet under siege, quarrels over rations and theft of food are the trouble on Rotholz's streets now.
+  HIT b/siege:brought-in r2s-under_siege-village-1 Systems/Economics [DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v2] NEW: None of the luxury goods used at Neaddale comes from the country here; the village brings in what it uses, or goes without.
+  HIT b/siege:trade-flows r2s-under_siege-village-1 Systems/Economics [DS-ECO-6 › TIER: minor shadow activity (≥3) · v1] NEW: A little of Neaddale's trade goes unrecorded, small enough to annoy the clerks and too small to change what the village is.
+  HIT b/siege:arrivals r2s-under_siege-village-2 Systems/Power [DS-POW-4 › riskLabel: Contested · v4] NEW: Visitors to Dionpyrgos are quietly told to stay polite to Religious Authorities as well as to Headman's Authority, and nobody says why.
+  HIT b/siege:brought-in r2s-under_siege-village-3 Systems/Economics [DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v2] NEW: None of the timber used at Tenohuacan comes from the country here; the village brings in what it uses, or goes without.
+  HIT b/siege:arrivals r2s-under_siege-village-3 Systems/Power [DS-POW-4 › riskLabel: Contested · v4] NEW: Visitors to Tenohuacan are quietly told to stay polite to Military/Guard as well as to Elder Council, and nobody says why.
+  HIT b/siege:trade-flows r2s-under_siege-town-1 Systems/Economics [DS-ECO-6 › TIER: minor shadow activity (≥3) · v1] NEW: A little of Fengling's trade goes unrecorded, small enough to annoy the clerks and too small to change what the town is.
+  HIT b/siege:road-open r2s-under_siege-city-0 Systems/Defense [DS-DEF-1 › readiness STRONG · v1] NEW: Bellaurbs reads as a defended place from the road in: the approaches are watched, the works are kept up, and none of it looks like it was thrown together.
+  HIT b/siege:arrivals r2s-under_siege-city-3 Systems/Power [DS-POW-4 › riskLabel: Contested · v4] NEW: Visitors to Weichhof are quietly told to stay polite to Religious Authorities as well as to Arcane Council, and nobody says why.
+  HIT b/siege:road-open r2s-under_siege-metropolis-2 Systems/Defense [DS-DEF-1 › readiness STRONG · v1] NEW: Raassaray reads as a defended place from the road in: the approaches are watched, the works are kept up, and none of it looks like it was thrown together.
+  HIT b/famine:plenty r2s-famine-hamlet-1 Systems/Economics [DS-ECO-1 › COMBINATION C5: a low rung on a narrow approach · v2] cut#19~: Vedaganj lives on a subsistence living that feeds it and no more, and the road in is too poor to bring anything extra.
+  HIT a/merchants r2s-famine-hamlet-1 Systems/Economics [DS-ECO-10 › POSTURE: none · v2] NEW: A merchant who came to buy in quantity has come to the wrong place.
+  HIT a/merchants r2s-famine-village-3 Systems/Economics [DS-ECO-10 › POSTURE: none · v2] NEW: A merchant who came to buy in quantity has come to the wrong place.
+  HIT a/alchemist r2s-famine-metropolis-1 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] NEW: Alchemy is practised at Hongji, and some of what it makes goes to the metropolis's defenders.
+  HIT a/guild r2s-occupied-thorp-0 World/History [DS-GEN-16 › LEGACY-SHIFTED · v1] NEW: The guild war is older than its bearers; what Warmstadt settled in its wake is a legacy that still shapes the thorp, though much has changed since.
+  HIT b/famine:plenty r2s-occupied-thorp-1 Systems/Economics [DS-ECO-10 › POSTURE: none · v3] NEW: Whatever surplus there is stays, and is eaten or worn here.
+  HIT a/merchants r2s-occupied-thorp-2 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Shanxian for one thing usually leaves with two or three.
+  HIT b/occupied:order-own r2s-occupied-thorp-2 Systems/Defense [DS-DEF-2 › Internal Security: no legal infrastructure · v1] NEW: Shanxian keeps no court and no gaol, and no wrong done there is written down; order is kept by whoever is armed and standing there, and when they leave, nothing keeps it.
+  HIT a/merchants r2s-occupied-thorp-3 Summary/Overview [DS-CND-1 › DIRECTION: stable · CRISIS: occupied · v4] NEW: Merchants in Víkberg pay the occupiers the same share of every sale, season after season, and have learned to price it in.
+  HIT a/merchants r2s-occupied-thorp-3 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Víkberg for one thing usually leaves with two or three.
+  HIT a/merchants r2s-occupied-hamlet-1 Summary/Overview [DS-CND-1 › DIRECTION: stable · CRISIS: occupied · v4] NEW: Merchants in Llanhurst pay the occupiers the same share of every sale, season after season, and have learned to price it in.
+  HIT b/famine:plenty r2s-occupied-hamlet-1 Systems/Economics [DS-ECO-1 › COMBINATION C5: a low rung on a narrow approach · v2] cut#19~: Llanhurst lives on a subsistence living that feeds it and no more, and the road in is too poor to bring anything extra.
+  HIT b/famine:plenty r2s-occupied-hamlet-1 Systems/Economics [DS-ECO-10 › POSTURE: none · v3] NEW: Whatever surplus there is stays, and is eaten or worn here.
+  HIT c/streets r2s-occupied-hamlet-2 Summary/Overview [DS-CND-1 › DIRECTION: stable · CRISIS: occupied · v2] NEW: The occupiers in Dunkelstift's streets are the same faces as last season, and they no longer bother to look about them.
+  HIT a/merchants r2s-occupied-hamlet-2 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Dunkelstift for one thing usually leaves with two or three.
+  HIT a/merchants r2s-occupied-hamlet-3 Summary/Overview [DS-CND-1 › DIRECTION: stable · CRISIS: occupied · v4] NEW: Merchants in Hochgasse pay the occupiers the same share of every sale, season after season, and have learned to price it in.
+  HIT a/merchants r2s-occupied-village-0 Summary/Overview [DS-CND-1 › DIRECTION: stable · CRISIS: occupied · v4] NEW: Merchants in Spitzfeld pay the occupiers the same share of every sale, season after season, and have learned to price it in.
+  HIT b/occupied:order-own r2s-occupied-village-0 Systems/Defense [DS-DEF-2 › Internal Security: no legal infrastructure · v1] NEW: Spitzfeld keeps no court and no gaol, and no wrong done there is written down; order is kept by whoever is armed and standing there, and when they leave, nothing keeps it.
+  HIT b/occupied:order-own r2s-occupied-village-1 Systems/Defense [DS-DEF-2 › Internal Security: no legal infrastructure · v1] NEW: Celoichi keeps no court and no gaol, and no wrong done there is written down; order is kept by whoever is armed and standing there, and when they leave, nothing keeps it.
+  HIT e/guild r2s-occupied-village-2 Summary/Overview [DS-GEN-13 › COMMERCE: a market, no guild · v2] NEW: No guild runs Caerwood's market: the village's only hold on trade is the stall fee.
+  HIT a/merchants r2s-politically_fractured-village-1 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Geraseia for one thing usually leaves with two or three.
+  HIT a/merchants r2s-politically_fractured-village-3 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Medinashahr for one thing usually leaves with two or three.
+  HIT a/merchants r2s-indebted-thorp-1 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Ravenås for one thing usually leaves with two or three.
+  HIT e/guild r2s-indebted-village-2 Summary/Overview [DS-GEN-13 › COMMERCE: a market, no guild · v2] NEW: No guild runs Oberkirche's market: the village's only hold on trade is the stall fee.
+  HIT e/guild:merchant r2s-indebted-town-2 Summary/Overview [DS-GEN-13 › COMMERCE: craft guilds, no merchant guild · v1] ww#674: A buyer at Xinmiao deals with each craft guild on its own, with no merchant guild above them.
+  HIT a/alchemist r2s-indebted-metropolis-3 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] NEW: Alchemy is practised at Lidocastra, and some of what it makes goes to the metropolis's defenders.
+  HIT a/merchants r2s-recently_betrayed-thorp-0 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Panteambelos for one thing usually leaves with two or three.
+  HIT a/merchants r2s-recently_betrayed-hamlet-2 Systems/Economics [DS-ECO-10 › POSTURE: none · v2] NEW: A merchant who came to buy in quantity has come to the wrong place.
+  HIT a/merchants r2s-recently_betrayed-hamlet-3 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Penmere for one thing usually leaves with two or three.
+  HIT e/guild r2s-recently_betrayed-village-3 Summary/Overview [DS-GEN-13 › COMMERCE: a market, no guild · v2] NEW: No guild runs Novasinum's market: the village's only hold on trade is the stall fee.
+  HIT a/guild r2s-infiltrated-hamlet-1 World/History [DS-GEN-16 › LEGACY-UNRESOLVED · v1] ww#56~: The guild war is years old, and it left a legacy of trouble in Sundland that has never been fully put right.
+  HIT a/merchants r2s-infiltrated-hamlet-3 Systems/Economics [DS-ECO-10 › POSTURE: none · v2] NEW: A merchant who came to buy in quantity has come to the wrong place.
+  HIT a/merchants r2s-infiltrated-village-1 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Al-pur for one thing usually leaves with two or three.
+  HIT a/force r2s-infiltrated-village-2 Systems/Defense [DS-DEF-3 › Safe · v2] cut#105: The village's record of crimes at Bayarserai stays short: there is crime, but enforcement keeps it down and keeps it from growing.
+  HIT a/alchemist r2s-infiltrated-metropolis-0 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] NEW: Alchemy is practised at Xibu, and some of what it makes goes to the metropolis's defenders.
+  HIT a/merchants r2s-plague_onset-thorp-0 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Huzhou for one thing usually leaves with two or three.
+  HIT a/merchants r2s-plague_onset-village-2 Systems/Economics [DS-ECO-10 › POSTURE: none · v2] NEW: A merchant who came to buy in quantity has come to the wrong place.
+  HIT a/merchants r2s-succession_void-thorp-0 Systems/Economics [DS-ECO-10 › POSTURE: none · v2] NEW: A merchant who came to buy in quantity has come to the wrong place.
+  HIT b/famine:plenty r2s-succession_void-thorp-1 Systems/Economics [DS-ECO-1 › COMBINATION C5: a low rung on a narrow approach · v2] cut#19~: Schwarzdorf lives on a subsistence living that feeds it and no more, and the road in is too poor to bring anything extra.
+  HIT b/famine:plenty r2s-succession_void-thorp-1 Systems/Economics [DS-ECO-10 › POSTURE: none · v3] NEW: Whatever surplus there is stays, and is eaten or worn here.
+  HIT a/merchants r2s-succession_void-thorp-3 Summary/Overview [DS-CND-1 › DIRECTION: stable · CRISIS: succession_void · v3] NEW: Nothing large is agreed in Markazmahal until someone is in charge, so merchants deal season to season and promise nothing longer.
+  HIT a/merchants r2s-succession_void-thorp-3 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Markazmahal for one thing usually leaves with two or three.
+  HIT a/merchants r2s-succession_void-hamlet-3 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Pianomonte for one thing usually leaves with two or three.
+  HIT a/merchants r2s-succession_void-village-1 Summary/Overview [DS-CND-1 › DIRECTION: stable · CRISIS: succession_void · v3] NEW: Nothing large is agreed in Chrissoeia until someone is in charge, so merchants deal season to season and promise nothing longer.
+  HIT a/merchants r2s-succession_void-village-1 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Chrissoeia for one thing usually leaves with two or three.
+  HIT a/merchants r2s-succession_void-village-2 Summary/Overview [DS-CND-1 › DIRECTION: stable · CRISIS: succession_void · v3] NEW: Nothing large is agreed in Caerworth until someone is in charge, so merchants deal season to season and promise nothing longer.
+  HIT a/guild r2s-monster_pressure-thorp-2 World/History [DS-GEN-16 › LEGACY-UNRESOLVED · v1] ww#56~: The guild war is years old, and it left a legacy of trouble in Kashikund that has never been fully put right.
+  HIT a/merchants r2s-monster_pressure-village-0 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Dharmagiri for one thing usually leaves with two or three.
+  HIT e/guild:merchant r2s-monster_pressure-town-1 Summary/Overview [DS-GEN-13 › COMMERCE: craft guilds, no merchant guild · v1] ww#674: A buyer at Al-mandi deals with each craft guild on its own, with no merchant guild above them.
+  HIT a/alchemist r2s-monster_pressure-metropolis-3 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] NEW: Alchemy is practised at Brahmabagh, and some of what it makes goes to the metropolis's defenders.
+  HIT a/merchants r2s-insurgency-thorp-1 Summary/Overview [DS-CND-1 › DIRECTION: worsening · CRISIS: insurgency · v3] NEW: Fewer merchants in Ulfset pay what the government asks, and more pay its rivals instead.
+  HIT a/merchants r2s-insurgency-hamlet-0 Systems/Economics [DS-ECO-10 › POSTURE: none · v2] NEW: A merchant who came to buy in quantity has come to the wrong place.
+  HIT b/famine:plenty r2s-insurgency-hamlet-2 Systems/Economics [DS-ECO-10 › POSTURE: none · v3] NEW: Whatever surplus there is stays, and is eaten or worn here.
+  HIT a/merchants r2s-insurgency-village-0 Summary/Overview [DS-CND-1 › DIRECTION: worsening · CRISIS: insurgency · v3] NEW: Fewer merchants in Kamentsy pay what the government asks, and more pay its rivals instead.
+  HIT a/alchemist r2s-insurgency-metropolis-3 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] NEW: Alchemy is practised at Yuling, and some of what it makes goes to the metropolis's defenders.
+  HIT a/guild r2s-religious_conversion-thorp-1 World/History [DS-GEN-16 › LEGACY-UNRESOLVED · v1] ww#56~: The guild war is years old, and it left a legacy of trouble in Mironitsa that has never been fully put right.
+  HIT a/merchants r2s-religious_conversion-village-3 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Archodion for one thing usually leaves with two or three.
+  HIT a/alchemist r2s-religious_conversion-metropolis-1 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] NEW: Alchemy is practised at Tyrhammer, and some of what it makes goes to the metropolis's defenders.
+  HIT c/streets r2s-slave_revolt-thorp-2 Systems/Defense [DS-DEF-3 › COMPOUND: slave revolt · v2] NEW: People at Fenggang keep away from the streets where the revolt is being fought, and nobody walks them after dark.
+  HIT c/streets r2s-slave_revolt-hamlet-0 Systems/Defense [DS-DEF-3 › COMPOUND: slave revolt · v2] NEW: People at Velikoichi keep away from the streets where the revolt is being fought, and nobody walks them after dark.
+  HIT c/streets r2s-slave_revolt-hamlet-2 Systems/Defense [DS-DEF-4 › structure semi-organized · v3] NEW: Rival crews at Cnocthwaite are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.
+  HIT a/merchants r2s-wartime-thorp-1 Systems/Economics [DS-ECO-10 › POSTURE: none · v2] NEW: A merchant who came to buy in quantity has come to the wrong place.
+  HIT b/famine:plenty r2s-wartime-thorp-2 Systems/Economics [DS-ECO-1 › COMBINATION C5: a low rung on a narrow approach · v2] cut#19~: Hadithaoasis lives on a subsistence living that feeds it and no more, and the road in is too poor to bring anything extra.
+  HIT b/famine:plenty r2s-wartime-hamlet-3 Systems/Economics [DS-ECO-1 › COMBINATION C5: a low rung on a narrow approach · v2] cut#19~: Caercross lives on a subsistence living that feeds it and no more, and the road in is too poor to bring anything extra.
+  HIT e/guild r2s-wartime-village-0 Summary/Overview [DS-GEN-13 › COMMERCE: a market, no guild · v2] NEW: No guild runs Abercross's market: the village's only hold on trade is the stall fee.
+  HIT a/alchemist r2s-wartime-metropolis-0 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] NEW: Alchemy is practised at Qasrchowk, and some of what it makes goes to the metropolis's defenders.
+  HIT a/alchemist r2s-wartime-metropolis-2 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] NEW: Alchemy is practised at Nanwan, and some of what it makes goes to the metropolis's defenders.
+  HIT a/merchants r2s-mass_migration-thorp-3 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Qal'atqala for one thing usually leaves with two or three.
+  HIT c/crowds r2s-mass_migration-hamlet-1 Systems/Defense [DS-DEF-8 › override: MIGRATION, arrivals · v1] NEW: More people are arriving at Eleftakra than its guards can keep in order, so they spend their days on the crowds, not on the roads.
+  HIT a/merchants r2s-mass_migration-hamlet-2 Systems/Economics [DS-ECO-10 › POSTURE: none · v2] NEW: A merchant who came to buy in quantity has come to the wrong place.
+  HIT a/merchants r2s-mass_migration-village-0 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Jayakund for one thing usually leaves with two or three.
+  HIT a/merchants r2s-mass_migration-village-1 Systems/Economics [DS-ECO-10 › POSTURE: established · v6] NEW: A merchant who comes to Shangtian for one thing usually leaves with two or three.
+  HIT e/guild:merchant r2s-mass_migration-town-2 Summary/Overview [DS-GEN-13 › COMMERCE: craft guilds, no merchant guild · v1] ww#674: A buyer at Shivanand deals with each craft guild on its own, with no merchant guild above them.
+  HIT a/alchemist r2s-mass_migration-metropolis-1 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] NEW: Alchemy is practised at Unterthal, and some of what it makes goes to the metropolis's defenders.

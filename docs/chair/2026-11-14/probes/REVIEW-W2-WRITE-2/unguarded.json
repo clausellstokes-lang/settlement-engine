@@ -1,0 +1,157 @@
+[
+ {
+  "id": "DS-DEF-2::Beasts & Monsters: settled, nothing organized::v4",
+  "add": [
+   "no crisis: under_siege",
+   "no crisis: occupied",
+   "no guardPresence"
+  ],
+  "guarded": false
+ },
+ {
+  "id": "DS-DEF-2::Beasts & Monsters: settled, nothing organized::v5",
+  "add": [
+   "no crisis: under_siege",
+   "no crisis: occupied",
+   "no guardPresence"
+  ],
+  "guarded": false
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls with NO force::v2",
+  "add": [
+   "no mercenary",
+   "no crisis: occupied"
+  ],
+  "guarded": false
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls with NO force::v3",
+  "add": [
+   "no mercenary",
+   "no crisis: occupied"
+  ],
+  "guarded": false
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls with NO force::v5",
+  "add": [
+   "no mercenary",
+   "no crisis: occupied"
+  ],
+  "guarded": false
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v9",
+  "add": [
+   "no crisis: occupied"
+  ],
+  "guarded": false
+ },
+ {
+  "id": "DS-DEF-2::Economic Survival: STRONG::v2",
+  "add": [
+   "no crisis"
+  ],
+  "guarded": false
+ },
+ {
+  "id": "DS-ECO-10::POSTURE: vulnerable::v2",
+  "add": [
+   "no crisis: under_siege"
+  ],
+  "guarded": false
+ },
+ {
+  "id": "DS-GEN-13::MARKET-OPEN::v1",
+  "add": [
+   "no crisis: plague_onset"
+  ],
+  "guarded": false
+ },
+ {
+  "id": "DS-GEN-13::MARKET-OPEN::v2",
+  "add": [
+   "no crisis: plague_onset"
+  ],
+  "guarded": false
+ },
+ {
+  "id": "DS-GEN-13::NO-MARKET::v1",
+  "add": [
+   "no crisis: under_siege"
+  ],
+  "guarded": false
+ },
+ {
+  "id": "DS-GEN-13::NO-MARKET::v2",
+  "add": [
+   "no crisis: under_siege"
+  ],
+  "guarded": false
+ },
+ {
+  "id": "DS-GEN-13::NO-MARKET::v3",
+  "add": [
+   "no crisis: under_siege"
+  ],
+  "guarded": false
+ },
+ {
+  "id": "DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)::v1",
+  "add": [
+   "no crisis: threat"
+  ],
+  "guarded": false
+ },
+ {
+  "id": "DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)::v2",
+  "add": [
+   "no crisis: threat"
+  ],
+  "guarded": false
+ },
+ {
+  "id": "DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)::v5",
+  "add": [
+   "crisis: threat"
+  ],
+  "guarded": false
+ },
+ {
+  "id": "DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)::v9",
+  "add": [
+   "crisis: threat"
+  ],
+  "guarded": false
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v6",
+  "add": [
+   "no crisis: under_siege",
+   "no crisis: occupied"
+  ],
+  "guarded": false
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v8",
+  "add": [
+   "no crisis: occupied"
+  ],
+  "guarded": false
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: food trades working::v4",
+  "add": [
+   "food: > famine"
+  ],
+  "guarded": false
+ },
+ {
+  "id": "DS-ECO-9::SECURE::v3",
+  "add": [
+   "stores: < 12"
+  ],
+  "guarded": false
+ }
+]

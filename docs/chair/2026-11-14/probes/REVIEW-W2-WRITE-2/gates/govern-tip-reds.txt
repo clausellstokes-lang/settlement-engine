@@ -1,0 +1,31 @@
+       × THE LIVE ESTATE INSTANCE: a freshly re-minted baseline has NO drift at all
+     × 5a RE-RULED (W2-A-LEAVES-2, REVIEW-W2A F3): the blanket silence at none is withdrawn — the pressure pools draw again
+     × ALIVENESS: all thirteen pools fire across the two audiences
+     × economics.exportPosture: the posture sentence renders, and a public dossier renders none
+     × r2r-city-0
+     × r2r-metropolis-0
+     × r2r-thorp-0
+     × r2s-insurgency-metropolis-0
+     × r2s-occupied-hamlet-0
+     × r2s-succession_void-city-0
+     × r2s-under_siege-thorp-0
+     × ⛔ every source literal that names a thing declares it, or has its row
+     × ⭐ THE DRIFT ARM: no row added, no row removed, no row moved
+     × ⭐ THE MIXED-POOL AUDIENCE ARM: the two faces differ only where a pool is mixed
+     × ⭐⭐ THE DRIFT CORPUS CARRIES FOUR SEEDS, and the tally is derived rather than described
+ FAIL  tests/components/pageCensus.walker.test.jsx > the rendered dossier reads exactly its banked rows (the grid) > r2r-city-0
+ FAIL  tests/components/pageCensus.walker.test.jsx > the rendered dossier reads exactly its banked rows (the grid) > r2r-metropolis-0
+ FAIL  tests/components/pageCensus.walker.test.jsx > the rendered dossier reads exactly its banked rows (the grid) > r2r-thorp-0
+ FAIL  tests/components/pageCensus.walker.test.jsx > the rendered dossier reads exactly its banked rows (the grid) > r2s-insurgency-metropolis-0
+ FAIL  tests/components/pageCensus.walker.test.jsx > the rendered dossier reads exactly its banked rows (the grid) > r2s-occupied-hamlet-0
+ FAIL  tests/components/pageCensus.walker.test.jsx > the rendered dossier reads exactly its banked rows (the grid) > r2s-succession_void-city-0
+ FAIL  tests/components/pageCensus.walker.test.jsx > the rendered dossier reads exactly its banked rows (the grid) > r2s-under_siege-thorp-0
+ FAIL  tests/domain/powerStateProseDesk.test.js > DS-POW-6 — the capture pools are COVERT, and that is the kernel working > 5a RE-RULED (W2-A-LEAVES-2, REVIEW-W2A F3): the blanket silence at none is withdrawn — the pressure pools draw again
+ FAIL  tests/domain/powerStateProseDesk.test.js > DS-POW-6 — the reading lens TILES with DS-POW-1 rather than overlapping it > ALIVENESS: all thirteen pools fire across the two audiences
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > the provenance drift classifier separates a detector change from an input change > THE LIVE ESTATE INSTANCE: a freshly re-minted baseline has NO drift at all
+ FAIL  tests/lint/presumedThings.walker.test.js > ARM 1 — the source > ⛔ every source literal that names a thing declares it, or has its row
+ FAIL  tests/property/dossierProseManifest.test.js > the composed-prose manifest — the DRIFT corpus, both audiences > ⭐ THE DRIFT ARM: no row added, no row removed, no row moved
+ FAIL  tests/property/dossierProseManifest.test.js > the composed-prose manifest — the DRIFT corpus, both audiences > ⭐⭐ THE DRIFT CORPUS CARRIES FOUR SEEDS, and the tally is derived rather than described
+ FAIL  tests/property/dossierProseManifest.test.js > the two controls no one-audience manifest can see > ⭐ THE MIXED-POOL AUDIENCE ARM: the two faces differ only where a pool is mixed
+ FAIL  tests/ui/economicsTabFlow.test.js > DESK-ECON2 — the mounted positions are DRAWS, not citations > economics.exportPosture: the posture sentence renders, and a public dossier renders none
+ FAIL  tests/ui/generalDeskTabFlow.test.js [ tests/ui/generalDeskTabFlow.test.js ]

@@ -1,0 +1,2587 @@
+[
+ {
+  "id": "DS-GEN-13::MARKET-OPEN::v1",
+  "read": 1,
+  "removedTrue": 0,
+  "removedFalse": 1,
+  "removedFalseWorst": "HIGH",
+  "examples": [
+   {
+    "town": "r2s-plague_onset-town-3",
+    "removed": "Market day is when Ringford fills: the roads bring buyers.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c)/(g) plague_onset: page says \"Fear of the sickness and the quarantine have emptied the market\"; \"Fewer people come to market\""
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 1,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Plague town: \"market fills\" against an emptied market; the replacement line about the market site is true."
+ },
+ {
+  "id": "DS-GEN-13::MARKET-OPEN::v2",
+  "read": 5,
+  "removedTrue": 0,
+  "removedFalse": 5,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2s-plague_onset-city-1",
+    "removed": "Sundbø's market lives off through-traffic.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) plague_onset: transit routes 0 in record; page \"travel is discouraged\", \"emptied the market\""
+   },
+   {
+    "town": "r2s-plague_onset-hamlet-1",
+    "removed": "Weichsee's market lives off through-traffic.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) plague_onset: transit routes 0 in record; page \"travel is discouraged\", \"emptied the market\""
+   },
+   {
+    "town": "r2s-plague_onset-metropolis-2",
+    "removed": "Zoltansaray's market lives off through-traffic.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) plague_onset: transit routes 0 in record; page \"travel is discouraged\", \"emptied the market\""
+   },
+   {
+    "town": "rv2-metropolis-plague_onset-1",
+    "removed": "Fortelitus's market lives off through-traffic.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) plague_onset: transit routes 0 in record; page \"travel is discouraged\", \"emptied the market\""
+   },
+   {
+    "town": "rv2-town-plague_onset-2",
+    "removed": "Nokhoikum's market lives off through-traffic.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) plague_onset: transit routes 0 in record; page \"travel is discouraged\", \"emptied the market\""
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 5,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Plague towns, no transit: through-traffic claim false; replacements true (thinned market / site / location)."
+ },
+ {
+  "id": "DS-GEN-13::MARKET-OPEN::v4",
+  "read": 8,
+  "removedTrue": 8,
+  "removedFalse": 0,
+  "removedFalseWorst": null,
+  "examples": [
+   {
+    "town": "rv2-city-under_siege-24",
+    "removed": "The market stands where carts always stopped.",
+    "true": true,
+    "severity": null,
+    "fact": "history of the market site; true under siege"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 8,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Siege: a line about the market site is true; the removal was over-strict; the \"grew up on the road's trade\" replacement is equally true."
+ },
+ {
+  "id": "DS-GEN-13::ENTREPOT::v1",
+  "read": 14,
+  "removedTrue": 0,
+  "removedFalse": 14,
+  "removedFalseWorst": "HIGH",
+  "examples": [
+   {
+    "town": "r2s-under_siege-city-0",
+    "removed": "Bellaurbs's market handles more than the city could ever use.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) under_siege: page \"The market is shut and the caravans have stopped coming\"; no entrepot living while besieged"
+   },
+   {
+    "town": "rv2-city-under_siege-15",
+    "removed": "Ribatshahr's market handles more than the city could ever use.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) under_siege: page \"The market is shut and the caravans have stopped coming\"; no entrepot living while besieged"
+   },
+   {
+    "town": "r2r-metropolis-14",
+    "removed": "Prabhapeta's market handles more than the metropolis could ever use.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) under_siege: page \"The market is shut and the caravans have stopped coming\"; no entrepot living while besieged"
+   },
+   {
+    "town": "r2s-under_siege-metropolis-1",
+    "removed": "Torriplenum's market handles more than the metropolis could ever use.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) under_siege: page \"The market is shut and the caravans have stopped coming\"; no entrepot living while besieged"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-1",
+    "removed": "Khanobo's market handles more than the metropolis could ever use.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) under_siege: page \"The market is shut and the caravans have stopped coming\"; no entrepot living while besieged"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-21",
+    "removed": "Tianmen's market handles more than the metropolis could ever use.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) under_siege: page \"The market is shut and the caravans have stopped coming\"; no entrepot living while besieged"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-22",
+    "removed": "Innisheath's market handles more than the metropolis could ever use.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) under_siege: page \"The market is shut and the caravans have stopped coming\"; no entrepot living while besieged"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-24",
+    "removed": "Pratomunicipium's market handles more than the metropolis could ever use.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) under_siege: page \"The market is shut and the caravans have stopped coming\"; no entrepot living while besieged"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-28",
+    "removed": "Morkvik's market handles more than the metropolis could ever use.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) under_siege: page \"The market is shut and the caravans have stopped coming\"; no entrepot living while besieged"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-8",
+    "removed": "Bhagapur's market handles more than the metropolis could ever use.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) under_siege: page \"The market is shut and the caravans have stopped coming\"; no entrepot living while besieged"
+   },
+   {
+    "town": "rv2-metropolis-under_siege+famine-2",
+    "removed": "Ononkhurel's market handles more than the metropolis could ever use.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) under_siege: page \"The market is shut and the caravans have stopped coming\"; no entrepot living while besieged"
+   },
+   {
+    "town": "r2s-under_siege-town-0",
+    "removed": "Ulffoss's market handles more than the town could ever use.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) under_siege: page \"The market is shut and the caravans have stopped coming\"; no entrepot living while besieged"
+   },
+   {
+    "town": "rv2-town-under_siege-1",
+    "removed": "Grudmir's market handles more than the town could ever use.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) under_siege: page \"The market is shut and the caravans have stopped coming\"; no entrepot living while besieged"
+   },
+   {
+    "town": "r2r-village-55",
+    "removed": "Megaikon's market handles more than the village could ever use.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) under_siege: page \"The market is shut and the caravans have stopped coming\"; no entrepot living while besieged"
+   }
+  ],
+  "replacement": {
+   "silence": 14,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Siege: entrepot living false at a glance; nothing replaces it."
+ },
+ {
+  "id": "DS-GEN-13::NO-MARKET::v3",
+  "read": 30,
+  "removedTrue": 0,
+  "removedFalse": 30,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2r-hamlet-0",
+    "removed": "No market or fair stands in Spitzsteig: what trade the hamlet does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "r2s-under_siege-hamlet-0",
+    "removed": "No market or fair stands in Sanctaurbs: what trade the hamlet does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "r2s-under_siege-hamlet-1",
+    "removed": "No market or fair stands in Zlatoko: what trade the hamlet does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "r2s-under_siege-hamlet-2",
+    "removed": "No market or fair stands in Kilshaw: what trade the hamlet does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "rv2-hamlet-under_siege-1",
+    "removed": "No market or fair stands in Obersteig: what trade the hamlet does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "rv2-hamlet-under_siege-2",
+    "removed": "No market or fair stands in Anyuan: what trade the hamlet does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "rw3-hamlet-under_siege-1",
+    "removed": "No market or fair stands in Lidostagnum: what trade the hamlet does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "rww-hamlet-under_siege-1",
+    "removed": "No market or fair stands in Miroko: what trade the hamlet does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "rv2-hamlet-under_siege+famine-1",
+    "removed": "No market or fair stands in Goldfeld: what trade the hamlet does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "rv2-hamlet-under_siege+famine-2",
+    "removed": "No market or fair stands in Nordfoss: what trade the hamlet does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "r2r-thorp-45",
+    "removed": "No market or fair stands in Weißgasse: what trade the thorp does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "r2r-thorp-58",
+    "removed": "No market or fair stands in Tallpatan: what trade the thorp does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "r2s-under_siege-thorp-0",
+    "removed": "No market or fair stands in Qaradavan: what trade the thorp does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "r2s-under_siege-thorp-1",
+    "removed": "No market or fair stands in Lyssono: what trade the thorp does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "r2s-under_siege-thorp-2",
+    "removed": "No market or fair stands in Agioslimani: what trade the thorp does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "r2s-under_siege-thorp-3",
+    "removed": "No market or fair stands in Tailing: what trade the thorp does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "rv2-thorp-under_siege-1",
+    "removed": "No market or fair stands in Jómsli: what trade the thorp does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "rv2-thorp-under_siege-2",
+    "removed": "No market or fair stands in Palenqxochitl: what trade the thorp does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "rww-thorp-under_siege-1",
+    "removed": "No market or fair stands in Belovich: what trade the thorp does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "rv2-thorp-under_siege+famine-1",
+    "removed": "No market or fair stands in Mingtian: what trade the thorp does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "rv2-thorp-under_siege+famine-2",
+    "removed": "No market or fair stands in Miroya: what trade the thorp does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "r2r-village-21",
+    "removed": "No market or fair stands in Rotbrücke: what trade the village does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "r2r-village-43",
+    "removed": "No market or fair stands in Uaxachuitz: what trade the village does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "r2s-under_siege-village-1",
+    "removed": "No market or fair stands in Neaddale: what trade the village does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "r2s-under_siege-village-2",
+    "removed": "No market or fair stands in Dionpyrgos: what trade the village does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "r2s-under_siege-village-3",
+    "removed": "No market or fair stands in Tenohuacan: what trade the village does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "rv2-village-under_siege-1",
+    "removed": "No market or fair stands in Lagonovum: what trade the village does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "rv2-village-under_siege-2",
+    "removed": "No market or fair stands in Tighbridge: what trade the village does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "rv2-village-under_siege+famine-1",
+    "removed": "No market or fair stands in Edznacoatl: what trade the village does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   },
+   {
+    "town": "rv2-village-under_siege+famine-2",
+    "removed": "No market or fair stands in Achilarion: what trade the village does is done house to house and on the road.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\", yet trade said done \"on the road\""
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 30,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Siege: the \"on the road\" clause contradicts \"nothing comes in by road\"; the trimmed \"no market\" replacements are true."
+ },
+ {
+  "id": "DS-GEN-13::COMMERCE: a bank::v1",
+  "read": 6,
+  "removedTrue": 0,
+  "removedFalse": 6,
+  "removedFalseWorst": "LOW",
+  "examples": [
+   {
+    "town": "r2s-under_siege-city-3",
+    "removed": "A traveller passing through Weichhof can change coin, borrow or settle a debt at the city's bank without carrying the silver home.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: nobody passes through; caravans stopped (bank exists)"
+   },
+   {
+    "town": "rv2-city-under_siege-2",
+    "removed": "A traveller passing through Nanmiao can change coin, borrow or settle a debt at the city's bank without carrying the silver home.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: nobody passes through; caravans stopped (bank exists)"
+   },
+   {
+    "town": "rv2-city-under_siege-9",
+    "removed": "A traveller passing through Balness can change coin, borrow or settle a debt at the city's bank without carrying the silver home.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: nobody passes through; caravans stopped (bank exists)"
+   },
+   {
+    "town": "rww-city-under_siege-1",
+    "removed": "A traveller passing through Panteakra can change coin, borrow or settle a debt at the city's bank without carrying the silver home.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: nobody passes through; caravans stopped (bank exists)"
+   },
+   {
+    "town": "r2s-under_siege-metropolis-3",
+    "removed": "A traveller passing through Andronrion can change coin, borrow or settle a debt at the metropolis's bank without carrying the silver home.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: nobody passes through; caravans stopped (bank exists)"
+   },
+   {
+    "town": "rv2-metropolis-under_siege+famine-2",
+    "removed": "A traveller passing through Ononkhurel can change coin, borrow or settle a debt at the metropolis's bank without carrying the silver home.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: nobody passes through; caravans stopped (bank exists)"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 6,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Siege: the \"passing traveller\" bank line is a stretch; the bank replacements are true."
+ },
+ {
+  "id": "DS-GEN-13::COMMERCE: a merchant guild, no bank::v2",
+  "read": 2,
+  "removedTrue": 0,
+  "removedFalse": 2,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2s-under_siege-town-1",
+    "removed": "Its merchant guild sets the terms of trade and its members carry the town's dealings outward.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under_siege: members cannot carry dealings outward; \"nothing comes in by road\""
+   },
+   {
+    "town": "rv2-town-under_siege+famine-1",
+    "removed": "Its merchant guild sets the terms of trade and its members carry the town's dealings outward.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under_siege: members cannot carry dealings outward; \"nothing comes in by road\""
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 2,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Siege: dealings carried outward is false; the \"members do the buying and selling\" replacement is true."
+ },
+ {
+  "id": "DS-GEN-13::COMMERCE: a merchant guild, no bank::v4",
+  "read": 4,
+  "removedTrue": 0,
+  "removedFalse": 4,
+  "removedFalseWorst": "LOW",
+  "examples": [
+   {
+    "town": "r2s-under_siege-metropolis-2",
+    "removed": "An outside trader at Raassaray either accepts its merchant guild's terms or sells to the guild's members at their price.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no outside traders arrive (guild exists)"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-21",
+    "removed": "An outside trader at Tianmen either accepts its merchant guild's terms or sells to the guild's members at their price.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no outside traders arrive (guild exists)"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-28",
+    "removed": "An outside trader at Morkvik either accepts its merchant guild's terms or sells to the guild's members at their price.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no outside traders arrive (guild exists)"
+   },
+   {
+    "town": "r2s-under_siege-town-0",
+    "removed": "An outside trader at Ulffoss either accepts its merchant guild's terms or sells to the guild's members at their price.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no outside traders arrive (guild exists)"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 4,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Siege: the outside-trader rule is a stretch; replacement true."
+ },
+ {
+  "id": "DS-GEN-13::COMMERCE: craft guilds, no merchant guild::v4",
+  "read": 3,
+  "removedTrue": 3,
+  "removedFalse": 0,
+  "removedFalseWorst": null,
+  "examples": [
+   {
+    "town": "rv2-town-under_siege-1",
+    "removed": "A newcomer with a trade at Grudmir must be taken on by its guild before they can work here.",
+    "true": true,
+    "severity": null,
+    "fact": "craft guilds exist; a guild rule, not a trade state"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 3,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Guild entry rule true under siege; removal over-strict; replacements true."
+ },
+ {
+  "id": "DS-GEN-13::WAREHOUSES::v1",
+  "read": 12,
+  "removedTrue": 0,
+  "removedFalse": 12,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2s-under_siege-city-2",
+    "removed": "Goods wait in Andronarion's warehouses between the road and the buyer until the price is right.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: goods do not move \"between the road and the buyer\"; page \"nothing comes in by road\""
+   },
+   {
+    "town": "rv2-city-under_siege-24",
+    "removed": "Goods wait in Palaiocastron's warehouses between the road and the buyer until the price is right.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: goods do not move \"between the road and the buyer\"; page \"nothing comes in by road\""
+   },
+   {
+    "town": "rv2-city-under_siege-9",
+    "removed": "Goods wait in Balness's warehouses between the road and the buyer until the price is right.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: goods do not move \"between the road and the buyer\"; page \"nothing comes in by road\""
+   },
+   {
+    "town": "rv2-city-under_siege+famine-1",
+    "removed": "Goods wait in Longhu's warehouses between the road and the buyer until the price is right.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: goods do not move \"between the road and the buyer\"; page \"nothing comes in by road\""
+   },
+   {
+    "town": "r2s-under_siege-metropolis-0",
+    "removed": "Goods wait in Grünmoor's warehouses between the road and the buyer until the price is right.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: goods do not move \"between the road and the buyer\"; page \"nothing comes in by road\""
+   },
+   {
+    "town": "rv2-metropolis-under_siege-16",
+    "removed": "Goods wait in Altaiörtöö's warehouses between the road and the buyer until the price is right.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: goods do not move \"between the road and the buyer\"; page \"nothing comes in by road\""
+   },
+   {
+    "town": "rv2-metropolis-under_siege-19",
+    "removed": "Goods wait in Nokhoikotan's warehouses between the road and the buyer until the price is right.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: goods do not move \"between the road and the buyer\"; page \"nothing comes in by road\""
+   },
+   {
+    "town": "rv2-metropolis-under_siege-2",
+    "removed": "Goods wait in Nokhoiiin's warehouses between the road and the buyer until the price is right.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: goods do not move \"between the road and the buyer\"; page \"nothing comes in by road\""
+   },
+   {
+    "town": "rv2-metropolis-under_siege-22",
+    "removed": "Goods wait in Innisheath's warehouses between the road and the buyer until the price is right.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: goods do not move \"between the road and the buyer\"; page \"nothing comes in by road\""
+   },
+   {
+    "town": "rw3-metropolis-under_siege-1",
+    "removed": "Goods wait in Hochfurt's warehouses between the road and the buyer until the price is right.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: goods do not move \"between the road and the buyer\"; page \"nothing comes in by road\"; trade access isolated"
+   },
+   {
+    "town": "rv2-town-under_siege+famine-1",
+    "removed": "Goods wait in Pratocolonia's warehouses between the road and the buyer until the price is right.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: goods do not move \"between the road and the buyer\"; page \"nothing comes in by road\""
+   },
+   {
+    "town": "rv2-town-under_siege+famine-2",
+    "removed": "Goods wait in Honggou's warehouses between the road and the buyer until the price is right.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: goods do not move \"between the road and the buyer\"; page \"nothing comes in by road\""
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 12,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Siege: road-to-buyer storage false; the \"store a cargo\" capability replacement is true."
+ },
+ {
+  "id": "DS-GEN-13::WAREHOUSES::v3",
+  "read": 7,
+  "removedTrue": 0,
+  "removedFalse": 7,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2s-under_siege-city-0",
+    "removed": "Its warehouses fill after the harvest and empty through the year as the city trades out of them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under_siege: the town cannot trade out of its warehouses; page \"market is shut\", \"nothing comes in by road\""
+   },
+   {
+    "town": "r2s-under_siege-city-3",
+    "removed": "Its warehouses fill after the harvest and empty through the year as the city trades out of them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under_siege: the town cannot trade out of its warehouses; page \"market is shut\", \"nothing comes in by road\""
+   },
+   {
+    "town": "rv2-city-under_siege-4",
+    "removed": "Its warehouses fill after the harvest and empty through the year as the city trades out of them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under_siege: the town cannot trade out of its warehouses; page \"market is shut\", \"nothing comes in by road\""
+   },
+   {
+    "town": "rv2-city-under_siege+famine-2",
+    "removed": "Its warehouses fill after the harvest and empty through the year as the city trades out of them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under_siege: the town cannot trade out of its warehouses; page \"market is shut\", \"nothing comes in by road\""
+   },
+   {
+    "town": "rww-metropolis-under_siege-1",
+    "removed": "Its warehouses fill after the harvest and empty through the year as the metropolis trades out of them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under_siege: the town cannot trade out of its warehouses; page \"market is shut\", \"nothing comes in by road\""
+   },
+   {
+    "town": "rv2-metropolis-under_siege+famine-1",
+    "removed": "Its warehouses fill after the harvest and empty through the year as the metropolis trades out of them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under_siege: the town cannot trade out of its warehouses; page \"market is shut\", \"nothing comes in by road\""
+   },
+   {
+    "town": "rv2-metropolis-under_siege+famine-2",
+    "removed": "Its warehouses fill after the harvest and empty through the year as the metropolis trades out of them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under_siege: the town cannot trade out of its warehouses; page \"market is shut\", \"nothing comes in by road\""
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 7,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Siege: the \"trades out of them\" cycle is false; replacement true."
+ },
+ {
+  "id": "DS-GEN-13::WAREHOUSES::v4",
+  "read": 9,
+  "removedTrue": 0,
+  "removedFalse": 9,
+  "removedFalseWorst": "LOW",
+  "examples": [
+   {
+    "town": "r2s-under_siege-city-1",
+    "removed": "A trader at Torrivilla can rent warehouse space and leave goods there between journeys.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no trader journeys in or out (warehouses exist)"
+   },
+   {
+    "town": "rv2-city-under_siege-1",
+    "removed": "A trader at Kaliburg can rent warehouse space and leave goods there between journeys.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no trader journeys in or out (warehouses exist)"
+   },
+   {
+    "town": "rv2-city-under_siege-2",
+    "removed": "A trader at Nanmiao can rent warehouse space and leave goods there between journeys.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no trader journeys in or out (warehouses exist)"
+   },
+   {
+    "town": "rv2-city-under_siege-25",
+    "removed": "A trader at Mayantitlan can rent warehouse space and leave goods there between journeys.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no trader journeys in or out (warehouses exist)"
+   },
+   {
+    "town": "rww-city-under_siege-1",
+    "removed": "A trader at Panteakra can rent warehouse space and leave goods there between journeys.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no trader journeys in or out (warehouses exist)"
+   },
+   {
+    "town": "r2r-metropolis-14",
+    "removed": "A trader at Prabhapeta can rent warehouse space and leave goods there between journeys.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no trader journeys in or out (warehouses exist)"
+   },
+   {
+    "town": "r2s-under_siege-metropolis-1",
+    "removed": "A trader at Torriplenum can rent warehouse space and leave goods there between journeys.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no trader journeys in or out (warehouses exist)"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-24",
+    "removed": "A trader at Pratomunicipium can rent warehouse space and leave goods there between journeys.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no trader journeys in or out (warehouses exist)"
+   },
+   {
+    "town": "r2s-under_siege-town-0",
+    "removed": "A trader at Ulffoss can rent warehouse space and leave goods there between journeys.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no trader journeys in or out (warehouses exist)"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 9,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Siege: the \"between journeys\" line is a stretch; replacement true."
+ },
+ {
+  "id": "DS-GEN-17::GARRISONED::v2",
+  "read": 5,
+  "removedTrue": 0,
+  "removedFalse": 5,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2s-occupied-city-2",
+    "removed": "(not found; judged from template + record)",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied, prosperity Poor: record \"The occupiers take the revenue\"; the money is not \"found every season\""
+   },
+   {
+    "town": "r2s-occupied-city-3",
+    "removed": "(not found; judged from template + record)",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied, prosperity Poor: record \"The occupiers take the revenue\"; the money is not \"found every season\""
+   },
+   {
+    "town": "r2s-occupied-town-2",
+    "removed": "(not found; judged from template + record)",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied, prosperity Poor: record \"The occupiers take the revenue\"; the money is not \"found every season\""
+   },
+   {
+    "town": "r2s-occupied-town-3",
+    "removed": "(not found; judged from template + record)",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied, prosperity Poor: record \"The occupiers take the revenue\"; the money is not \"found every season\""
+   },
+   {
+    "town": "rww-town-occupied-1",
+    "removed": "(not found; judged from template + record)",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied, prosperity Poor: record \"The occupiers take the revenue\"; the money is not \"found every season\""
+   }
+  ],
+  "replacement": {
+   "silence": 5,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Mount not found before or after (base/tip null); judged from the template and the record: occupied and Poor, the occupiers take the revenue. Nothing prints in its place."
+ },
+ {
+  "id": "DS-GEN-17::GREAT HOUSE: monastery::v1",
+  "read": 5,
+  "removedTrue": 0,
+  "removedFalse": 5,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2r-metropolis-14",
+    "removed": "Robed monks and nuns are a common sight on the way into Prabhapeta.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under_siege: no one comes \"on the way into\" the town; page \"nothing comes in by road\""
+   },
+   {
+    "town": "rv2-metropolis-under_siege-11",
+    "removed": "Robed monks and nuns are a common sight on the way into Khutulunhiid.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under_siege: no one comes \"on the way into\" the town; page \"nothing comes in by road\""
+   },
+   {
+    "town": "rv2-metropolis-under_siege-2",
+    "removed": "Robed monks and nuns are a common sight on the way into Nokhoiiin.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under_siege: no one comes \"on the way into\" the town; page \"nothing comes in by road\""
+   },
+   {
+    "town": "rv2-metropolis-under_siege+famine-1",
+    "removed": "Robed monks and nuns are a common sight on the way into Purigarh.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under_siege: no one comes \"on the way into\" the town; page \"nothing comes in by road\""
+   },
+   {
+    "town": "rv2-town-under_siege-1",
+    "removed": "Robed monks and nuns are a common sight on the way into Grudmir.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under_siege: no one comes \"on the way into\" the town; page \"nothing comes in by road\""
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 5,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Mount null; the removed and added text was recovered from the same town's market paragraph in other list entries. \"Way into\" a besieged town is false; the monk replacements are true."
+ },
+ {
+  "id": "DS-GEN-17::GREAT HOUSE: monastery::v3",
+  "read": 8,
+  "removedTrue": 8,
+  "removedFalse": 0,
+  "removedFalseWorst": null,
+  "examples": [
+   {
+    "town": "r2s-under_siege-metropolis-2",
+    "removed": "Anyone new to Raassaray who needs a meal or a bed is sent to the monks.",
+    "true": true,
+    "severity": null,
+    "fact": "monastery present; a charity rule, not a trade state"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 8,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Charity rule true under siege; removal over-strict; replacements true."
+ },
+ {
+  "id": "DS-POW-5::council::v1",
+  "read": 30,
+  "removedTrue": 0,
+  "removedFalse": 30,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2r-city-27",
+    "removed": "Decisions at Qaraiin are slow because the whole Royal Authority must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority): page \"The crown rules here directly. How far its word carries depe\"; no body that \"must agree\""
+   },
+   {
+    "town": "r2r-city-4",
+    "removed": "Decisions at Ainfort are slow because the whole Noble Governorship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Noble Governorship): page \"A noble governor rules by hereditary or royal appointment; t\"; no body that \"must agree\""
+   },
+   {
+    "town": "rww-city-calm-1",
+    "removed": "Decisions at Vysokoko are slow because the whole Royal Authority must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority): page \"The crown rules here directly. How far its word carries depe\"; no body that \"must agree\""
+   },
+   {
+    "town": "r2s-insurgency-city-0",
+    "removed": "Decisions at Fionnhurst are slow because the whole Noble Governorship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Noble Governorship): page \"A noble governor rules by hereditary or royal appointment; t\"; no body that \"must agree\""
+   },
+   {
+    "town": "r2s-insurgency-city-2",
+    "removed": "Decisions at Jalalkul are slow because the whole Noble Governorship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Noble Governorship): page \"A noble governor rules by hereditary or royal appointment; t\"; no body that \"must agree\""
+   },
+   {
+    "town": "r2s-insurgency-city-3",
+    "removed": "Decisions at Achilambelos are slow because the whole Noble Governorship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Noble Governorship): page \"A noble governor rules by hereditary or royal appointment; t\"; no body that \"must agree\""
+   },
+   {
+    "town": "r2s-slave_revolt-city-0",
+    "removed": "Decisions at Großhof are slow because the whole Noble Governorship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Noble Governorship): page \"A noble governor rules by hereditary or royal appointment; t\"; no body that \"must agree\""
+   },
+   {
+    "town": "r2s-succession_void-city-2",
+    "removed": "Decisions at Polaburg are slow because the whole Noble Governorship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Noble Governorship): page \"A noble governor rules by hereditary or royal appointment; t\"; no body that \"must agree\""
+   },
+   {
+    "town": "rv2-city-under_siege-15",
+    "removed": "Decisions at Ribatshahr are slow because the whole Noble Governorship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Noble Governorship): page \"A noble governor rules by hereditary or royal appointment; t\"; no body that \"must agree\""
+   },
+   {
+    "town": "r2s-wartime-city-0",
+    "removed": "Decisions at Wadiabad are slow because the whole Noble Governorship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Noble Governorship): page \"A noble governor rules by hereditary or royal appointment; t\"; no body that \"must agree\""
+   },
+   {
+    "town": "r2r-hamlet-40",
+    "removed": "Decisions at Tikalbalam are slow because the whole Feudal Stewardship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship): page \"A lord's steward administers the settlement; authority flows\"; no body that \"must agree\""
+   },
+   {
+    "town": "r2s-famine-hamlet-2",
+    "removed": "Decisions at Velipol are slow because the whole Feudal Stewardship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship): page \"A lord's steward administers the settlement; authority flows\"; no body that \"must agree\""
+   },
+   {
+    "town": "rww-hamlet-succession_void-1",
+    "removed": "Decisions at Xitang are slow because the whole Feudal Stewardship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship): page \"A lord's steward administers the settlement; authority flows\"; no body that \"must agree\""
+   },
+   {
+    "town": "r2r-metropolis-15",
+    "removed": "Decisions at Nandamala are slow because the whole Ducal Governorship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Ducal Governorship): page \"A duke or duchess governs the metropolis by royal appointmen\"; no body that \"must agree\""
+   },
+   {
+    "town": "r2r-metropolis-21",
+    "removed": "Decisions at Altmoor are slow because the whole Ducal Governorship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Ducal Governorship): page \"A duke or duchess governs the metropolis by royal appointmen\"; no body that \"must agree\""
+   },
+   {
+    "town": "r2r-metropolis-46",
+    "removed": "Decisions at Beiguan are slow because the whole Ducal Governorship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Ducal Governorship): page \"A duke or duchess governs the metropolis by royal appointmen\"; no body that \"must agree\""
+   },
+   {
+    "town": "rv2-metropolis-indebted-1",
+    "removed": "Decisions at Weigang are slow because the whole Royal Authority must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority): page \"The crown rules here directly. How far its word carries depe\"; no body that \"must agree\""
+   },
+   {
+    "town": "r2s-occupied-metropolis-2",
+    "removed": "Decisions at Nokhoihan are slow because the whole Ducal Governorship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Ducal Governorship): page \"A duke or duchess governs the metropolis by royal appointmen\"; no body that \"must agree\""
+   },
+   {
+    "town": "r2s-recently_betrayed-metropolis-0",
+    "removed": "Decisions at Ormstrand are slow because the whole Ducal Governorship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Ducal Governorship): page \"A duke or duchess governs the metropolis by royal appointmen\"; no body that \"must agree\""
+   },
+   {
+    "town": "r2s-slave_revolt-metropolis-2",
+    "removed": "Decisions at Weichfeld are slow because the whole Royal Authority must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority): page \"The crown rules here directly. How far its word carries depe\"; no body that \"must agree\""
+   },
+   {
+    "town": "r2s-succession_void-metropolis-0",
+    "removed": "Decisions at Kulubtitlan are slow because the whole Ducal Governorship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Ducal Governorship): page \"A duke or duchess governs the metropolis by royal appointmen\"; no body that \"must agree\""
+   },
+   {
+    "town": "rw3-metropolis-under_siege-1",
+    "removed": "Decisions at Hochfurt are slow because the whole Ducal Governorship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Ducal Governorship): page \"A duke or duchess governs the metropolis by royal appointmen\"; no body that \"must agree\""
+   },
+   {
+    "town": "rww-metropolis-under_siege-1",
+    "removed": "Decisions at Naranjotepec are slow because the whole Royal Authority must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority): page \"The crown rules here directly. How far its word carries depe\"; no body that \"must agree\""
+   },
+   {
+    "town": "rww-metropolis-wartime-1",
+    "removed": "Decisions at Jalaliin are slow because the whole Royal Authority must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority): page \"The crown rules here directly. How far its word carries depe\"; no body that \"must agree\""
+   },
+   {
+    "town": "rw3-thorp-famine-1",
+    "removed": "Decisions at Chichek are slow because the whole Feudal Stewardship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship): page \"A lord's steward administers the settlement; authority flows\"; no body that \"must agree\""
+   },
+   {
+    "town": "r2s-religious_conversion-thorp-0",
+    "removed": "Decisions at Palenqcalco are slow because the whole Feudal Stewardship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship): page \"A lord's steward administers the settlement; authority flows\"; no body that \"must agree\""
+   },
+   {
+    "town": "r2s-slave_revolt-thorp-0",
+    "removed": "Decisions at Mönkhkher are slow because the whole Feudal Stewardship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship): page \"A lord's steward administers the settlement; authority flows\"; no body that \"must agree\""
+   },
+   {
+    "town": "r2r-thorp-16",
+    "removed": "Decisions at Beizhou are slow because the whole Feudal Stewardship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship): page \"A lord's steward administers the settlement; authority flows\"; no body that \"must agree\""
+   },
+   {
+    "town": "r2r-village-46",
+    "removed": "Decisions at Glenheath are slow because the whole Feudal Stewardship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship): page \"A lord's steward administers the settlement; authority flows\"; no body that \"must agree\""
+   },
+   {
+    "town": "rv2-village-famine-2",
+    "removed": "Decisions at Shattabad are slow because the whole Feudal Stewardship must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship): page \"A lord's steward administers the settlement; authority flows\"; no body that \"must agree\""
+   }
+  ],
+  "replacement": {
+   "silence": 3,
+   "true": 22,
+   "false": 5,
+   "falseExamples": [
+    {
+     "town": "r2r-city-27",
+     "sentence": "The Royal Authority at Qaraiin watches the city's temper closely: what it fears is the city turning on it.",
+     "severity": "MED",
+     "fact": "(g) page prints \"92 Endorsed\" beside a ruler whose fear is the town turning on it; stability \"Stable\""
+    },
+    {
+     "town": "rww-city-calm-1",
+     "sentence": "The Royal Authority at Vysokoko watches the city's temper closely: what it fears is the city turning on it.",
+     "severity": "LOW",
+     "fact": "legitimacy 72 Approved, Stable, no crisis: fear of the town turning on it is a stretch"
+    },
+    {
+     "town": "r2r-metropolis-15",
+     "sentence": "The Ducal Governorship at Nandamala watches the metropolis's temper closely: what it fears is the metropolis turning on it.",
+     "severity": "LOW",
+     "fact": "legitimacy 72 Approved, Stable, no crisis: fear of the town turning on it is a stretch"
+    },
+    {
+     "town": "r2r-metropolis-46",
+     "sentence": "The Ducal Governorship at Beiguan watches the metropolis's temper closely: what it fears is the metropolis turning on it.",
+     "severity": "MED",
+     "fact": "(g) page prints \"100 Endorsed\" beside a ruler whose fear is the town turning on it; stability \"Ordered (strong military prese\""
+    },
+    {
+     "town": "r2r-village-46",
+     "sentence": "The Feudal Stewardship at Glenheath watches the village's temper closely: what it fears is the village turning on it.",
+     "severity": "LOW",
+     "fact": "legitimacy 70 Approved, Ordered (strong military , no crisis: fear of the town turning on it is a stretch"
+    }
+   ]
+  },
+  "note": "Single-ruler seats called a body that \"must agree\": all false. Replacement \"fears the town turning on it\" is false beside an Endorsed rating."
+ },
+ {
+  "id": "DS-POW-5::council::v2",
+  "read": 26,
+  "removedTrue": 0,
+  "removedFalse": 26,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2r-city-15",
+    "removed": "At Jalalcaravansarai the city's business goes to the whole Noble Governorship, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Noble Governorship), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "r2r-city-16",
+    "removed": "At Copantzin the city's business goes to the whole Noble Governorship, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Noble Governorship), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "r2r-city-58",
+    "removed": "At Oxtechihua the city's business goes to the whole Noble Governorship, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Noble Governorship), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "r2s-famine-city-0",
+    "removed": "At Weizhen the city's business goes to the whole Royal Authority, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "r2s-religious_conversion-city-0",
+    "removed": "At Chinggisnuur the city's business goes to the whole Noble Governorship, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Noble Governorship), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "r2s-slave_revolt-city-2",
+    "removed": "At Somanagar the city's business goes to the whole Noble Governorship, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Noble Governorship), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "r2s-under_siege-city-2",
+    "removed": "At Andronarion the city's business goes to the whole Noble Governorship, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Noble Governorship), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "rww-hamlet-famine-1",
+    "removed": "At Ulfset the hamlet's business goes to the whole Feudal Stewardship, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "r2s-insurgency-hamlet-2",
+    "removed": "At Farolitus the hamlet's business goes to the whole Feudal Stewardship, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "r2s-mass_migration-hamlet-3",
+    "removed": "At Yaxchco the hamlet's business goes to the whole Feudal Stewardship, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "rv2-hamlet-plague_onset-1",
+    "removed": "At Ráðoy the hamlet's business goes to the whole Feudal Stewardship, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "r2r-hamlet-0",
+    "removed": "At Spitzsteig the hamlet's business goes to the whole Feudal Stewardship, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "r2r-metropolis-56",
+    "removed": "At Albastagnum the metropolis's business goes to the whole Royal Authority, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "r2s-famine-metropolis-1",
+    "removed": "At Hongji the metropolis's business goes to the whole Ducal Governorship, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Ducal Governorship), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "rww-metropolis-infiltrated-1",
+    "removed": "At Aqualitus the metropolis's business goes to the whole Ducal Governorship, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Ducal Governorship), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "r2s-insurgency-metropolis-3",
+    "removed": "At Yuling the metropolis's business goes to the whole Ducal Governorship, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Ducal Governorship), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "r2s-plague_onset-metropolis-0",
+    "removed": "At Tarkhanshari the metropolis's business goes to the whole Royal Authority, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "r2s-plague_onset-metropolis-1",
+    "removed": "At Chandrapur the metropolis's business goes to the whole Ducal Governorship, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Ducal Governorship), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "r2s-plague_onset-metropolis-3",
+    "removed": "At Umagrad the metropolis's business goes to the whole Ducal Governorship, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Ducal Governorship), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "r2s-slave_revolt-metropolis-1",
+    "removed": "At Tikalkin the metropolis's business goes to the whole Ducal Governorship, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Ducal Governorship), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "r2r-metropolis-8",
+    "removed": "At Langenberg the metropolis's business goes to the whole Royal Authority, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-1",
+    "removed": "At Khanobo the metropolis's business goes to the whole Ducal Governorship, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Ducal Governorship), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "r2r-thorp-4",
+    "removed": "At Hochthal the thorp's business goes to the whole Feudal Stewardship, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "r2s-mass_migration-thorp-0",
+    "removed": "At Erdenkotan the thorp's business goes to the whole Feudal Stewardship, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "r2r-village-49",
+    "removed": "At Yaxchtzal the village's business goes to the whole Feudal Stewardship, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship), not a body the business \"goes to the whole\" of"
+   },
+   {
+    "town": "r2s-wartime-village-0",
+    "removed": "At Abercross the village's business goes to the whole Feudal Stewardship, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship), not a body the business \"goes to the whole\" of"
+   }
+  ],
+  "replacement": {
+   "silence": 1,
+   "true": 21,
+   "false": 4,
+   "falseExamples": [
+    {
+     "town": "r2r-city-15",
+     "sentence": "The Noble Governorship at Jalalcaravansarai watches the city's temper closely: what it fears is the city turning on it.",
+     "severity": "LOW",
+     "fact": "legitimacy 65 Approved, Stable, no crisis: fear of the town turning on it is a stretch"
+    },
+    {
+     "town": "r2r-city-58",
+     "sentence": "The Noble Governorship at Oxtechihua watches the city's temper closely: what it fears is the city turning on it.",
+     "severity": "MED",
+     "fact": "(g) page prints \"90 Endorsed\" beside a ruler whose fear is the town turning on it; stability \"Stable\""
+    },
+    {
+     "town": "r2r-metropolis-56",
+     "sentence": "The Royal Authority at Albastagnum watches the metropolis's temper closely: what it fears is the metropolis turning on it.",
+     "severity": "MED",
+     "fact": "(g) page prints \"95 Endorsed\" beside a ruler whose fear is the town turning on it; stability \"Ordered (strong military prese\""
+    },
+    {
+     "town": "r2r-village-49",
+     "sentence": "The Feudal Stewardship at Yaxchtzal watches the village's temper closely: what it fears is the village turning on it.",
+     "severity": "MED",
+     "fact": "(g) page prints \"85 Endorsed\" beside a ruler whose fear is the town turning on it; stability \"Ordered (strong military prese\""
+    }
+   ]
+  },
+  "note": "Same as v1."
+ },
+ {
+  "id": "DS-POW-5::council::v4",
+  "read": 30,
+  "removedTrue": 0,
+  "removedFalse": 30,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2r-city-59",
+    "removed": "The Noble Governorship at Kilwick has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Noble Governorship): no \"members\" to disagree"
+   },
+   {
+    "town": "r2s-infiltrated-city-2",
+    "removed": "The Noble Governorship at Qaryatsaray has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Noble Governorship): no \"members\" to disagree"
+   },
+   {
+    "town": "rv2-city-occupied-1",
+    "removed": "The Royal Authority at Roccasaltus has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority): no \"members\" to disagree"
+   },
+   {
+    "town": "r2r-city-19",
+    "removed": "The Royal Authority at Dunbury has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority): no \"members\" to disagree"
+   },
+   {
+    "town": "r2s-plague_onset-city-2",
+    "removed": "The Noble Governorship at Kamalapeth has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Noble Governorship): no \"members\" to disagree"
+   },
+   {
+    "town": "rww-city-recently_betrayed-1",
+    "removed": "The Royal Authority at Qaryatqala has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority): no \"members\" to disagree"
+   },
+   {
+    "town": "r2s-under_siege-city-0",
+    "removed": "The Royal Authority at Bellaurbs has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority): no \"members\" to disagree"
+   },
+   {
+    "town": "r2r-hamlet-14",
+    "removed": "The Feudal Stewardship at Yaxchich has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship): no \"members\" to disagree"
+   },
+   {
+    "town": "r2r-hamlet-15",
+    "removed": "The Feudal Stewardship at Sübeteiordu has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship): no \"members\" to disagree"
+   },
+   {
+    "town": "r2r-hamlet-20",
+    "removed": "The Feudal Stewardship at Jómsmark has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship): no \"members\" to disagree"
+   },
+   {
+    "town": "r2r-hamlet-49",
+    "removed": "The Feudal Stewardship at Vishnugram has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship): no \"members\" to disagree"
+   },
+   {
+    "town": "r2s-plague_onset-hamlet-3",
+    "removed": "The Feudal Stewardship at Tenoha has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship): no \"members\" to disagree"
+   },
+   {
+    "town": "rv2-hamlet-wartime-2",
+    "removed": "The Feudal Stewardship at Tarkhangol has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship): no \"members\" to disagree"
+   },
+   {
+    "town": "r2r-metropolis-22",
+    "removed": "The Royal Authority at Vatanshari has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority): no \"members\" to disagree"
+   },
+   {
+    "town": "r2r-metropolis-23",
+    "removed": "The Royal Authority at Drumbury has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority): no \"members\" to disagree"
+   },
+   {
+    "town": "r2r-metropolis-3",
+    "removed": "The Ducal Governorship at Dionnea has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Ducal Governorship): no \"members\" to disagree"
+   },
+   {
+    "town": "r2r-metropolis-30",
+    "removed": "The Royal Authority at Ulfoy has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority): no \"members\" to disagree"
+   },
+   {
+    "town": "r2r-metropolis-43",
+    "removed": "The Royal Authority at Hochstift has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority): no \"members\" to disagree"
+   },
+   {
+    "town": "r2r-metropolis-52",
+    "removed": "The Ducal Governorship at Steinsee has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Ducal Governorship): no \"members\" to disagree"
+   },
+   {
+    "town": "r2r-metropolis-9",
+    "removed": "The Ducal Governorship at Satyagarh has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Ducal Governorship): no \"members\" to disagree"
+   },
+   {
+    "town": "rww-metropolis-calm-1",
+    "removed": "The Ducal Governorship at Temürger has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Ducal Governorship): no \"members\" to disagree"
+   },
+   {
+    "town": "r2s-famine-metropolis-0",
+    "removed": "The Royal Authority at Ormvoll has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority): no \"members\" to disagree"
+   },
+   {
+    "town": "r2s-famine-metropolis-3",
+    "removed": "The Royal Authority at Nektarambelos has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority): no \"members\" to disagree"
+   },
+   {
+    "town": "r2r-metropolis-33",
+    "removed": "The Royal Authority at Hvaliya has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority): no \"members\" to disagree"
+   },
+   {
+    "town": "r2r-metropolis-51",
+    "removed": "The Royal Authority at Divoko has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority): no \"members\" to disagree"
+   },
+   {
+    "town": "r2s-mass_migration-metropolis-0",
+    "removed": "The Royal Authority at Xiaguan has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority): no \"members\" to disagree"
+   },
+   {
+    "town": "rv2-metropolis-under_siege+famine-1",
+    "removed": "The Royal Authority at Purigarh has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Royal Authority): no \"members\" to disagree"
+   },
+   {
+    "town": "r2s-wartime-metropolis-2",
+    "removed": "The Ducal Governorship at Nanwan has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Ducal Governorship): no \"members\" to disagree"
+   },
+   {
+    "town": "r2s-indebted-thorp-0",
+    "removed": "The Feudal Stewardship at Makrokastro has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship): no \"members\" to disagree"
+   },
+   {
+    "town": "r2r-village-59",
+    "removed": "The Feudal Stewardship at Nokhoiobo has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) seat is a single ruler (Feudal Stewardship): no \"members\" to disagree"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 21,
+   "false": 9,
+   "falseExamples": [
+    {
+     "town": "r2r-city-59",
+     "sentence": "The Noble Governorship at Kilwick watches the city's temper closely: what it fears is the city turning on it.",
+     "severity": "MED",
+     "fact": "(g) page prints \"75 Endorsed\" beside a ruler whose fear is the town turning on it; stability \"Unstable (pervasive organized \""
+    },
+    {
+     "town": "r2r-hamlet-15",
+     "sentence": "The Feudal Stewardship at Sübeteiordu watches the hamlet's temper closely: what it fears is the hamlet turning on it.",
+     "severity": "LOW",
+     "fact": "legitimacy 64 Approved, Stable, no crisis: fear of the town turning on it is a stretch"
+    },
+    {
+     "town": "r2r-metropolis-22",
+     "sentence": "The Royal Authority at Vatanshari watches the metropolis's temper closely: what it fears is the metropolis turning on it.",
+     "severity": "LOW",
+     "fact": "legitimacy 73 Approved, Stable, no crisis: fear of the town turning on it is a stretch"
+    },
+    {
+     "town": "r2r-metropolis-23",
+     "sentence": "The Royal Authority at Drumbury watches the metropolis's temper closely: what it fears is the metropolis turning on it.",
+     "severity": "LOW",
+     "fact": "legitimacy 72 Approved, Stable, no crisis: fear of the town turning on it is a stretch"
+    },
+    {
+     "town": "r2r-metropolis-3",
+     "sentence": "The Ducal Governorship at Dionnea watches the metropolis's temper closely: what it fears is the metropolis turning on it.",
+     "severity": "LOW",
+     "fact": "legitimacy 65 Approved, Tense (militarised, chron, no crisis: fear of the town turning on it is a stretch"
+    },
+    {
+     "town": "r2r-metropolis-30",
+     "sentence": "The Royal Authority at Ulfoy watches the metropolis's temper closely: what it fears is the metropolis turning on it.",
+     "severity": "MED",
+     "fact": "(g) page prints \"97 Endorsed\" beside a ruler whose fear is the town turning on it; stability \"Fragile (private security abov\""
+    },
+    {
+     "town": "r2r-metropolis-43",
+     "sentence": "The Royal Authority at Hochstift watches the metropolis's temper closely: what it fears is the metropolis turning on it.",
+     "severity": "MED",
+     "fact": "(g) page prints \"90 Endorsed\" beside a ruler whose fear is the town turning on it; stability \"Stable\""
+    },
+    {
+     "town": "r2r-metropolis-9",
+     "sentence": "The Ducal Governorship at Satyagarh watches the metropolis's temper closely: what it fears is the metropolis turning on it.",
+     "severity": "MED",
+     "fact": "(g) page prints \"90 Endorsed\" beside a ruler whose fear is the town turning on it; stability \"Stable\""
+    },
+    {
+     "town": "rww-metropolis-calm-1",
+     "sentence": "The Ducal Governorship at Temürger watches the metropolis's temper closely: what it fears is the metropolis turning on it.",
+     "severity": "LOW",
+     "fact": "legitimacy 65 Approved, Ordered (strong military , no crisis: fear of the town turning on it is a stretch"
+    }
+   ]
+  },
+  "note": "Same as v1; most Endorsed and Approved metropolises are r2r-calm."
+ },
+ {
+  "id": "DS-POW-5::FLAG: merchantArmy::v1",
+  "read": 1,
+  "removedTrue": 1,
+  "removedFalse": 0,
+  "removedFalseWorst": null,
+  "examples": [
+   {
+    "town": "rv2-metropolis-occupied-2",
+    "removed": "The trading houses at Svetoko pay for their own armed guards, a private army that keeps order wherever the houses do business.",
+    "true": true,
+    "severity": null,
+    "fact": "record flags merchantArmy true (merchant guild private security); occupation not denied"
+   }
+  ],
+  "replacement": {
+   "silence": 1,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Record flags merchantArmy; the line is true; its mount prints nothing now."
+ },
+ {
+  "id": "DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)::v8",
+  "read": 4,
+  "removedTrue": 0,
+  "removedFalse": 4,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2s-insurgency-city-2",
+    "removed": "A watch walks Jalalkul's streets, but the danger is in the hall, where officials paid next to nothing are worth buying.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) insurgency: stability \"Unstable (insurgency contests authority)\": the danger is in the streets, not only the hall"
+   },
+   {
+    "town": "r2s-slave_revolt-city-0",
+    "removed": "A watch walks Großhof's streets, but the danger is in the hall, where officials paid next to nothing are worth buying.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) slave_revolt: stability \"Unstable (revolt not contained)\": the danger is in the streets, not only the hall"
+   },
+   {
+    "town": "r2s-slave_revolt-metropolis-3",
+    "removed": "A watch walks Anoarion's streets, but the danger is in the hall, where officials paid next to nothing are worth buying.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) slave_revolt: stability \"Unstable (revolt not contained)\": the danger is in the streets, not only the hall"
+   },
+   {
+    "town": "r2r-town-11",
+    "removed": "A watch walks Ardbridge's streets, but the danger is in the hall, where officials paid next to nothing are worth buying.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) insurgency: stability \"Unstable (insurgency contests authority)\": the danger is in the streets, not only the hall"
+   }
+  ],
+  "replacement": {
+   "silence": 1,
+   "true": 3,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Insurgency/revolt: danger is in the streets; the \"officials paid little\" replacement is true; Ardbridge is silent."
+ },
+ {
+  "id": "DS-POW-6::operation role duty evasion::v2",
+  "read": 9,
+  "removedTrue": 0,
+  "removedFalse": 9,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "rv2-city-under_siege-15",
+    "removed": "A share of what arrives at Ribatshahr never appears at the gate, and the share is not small.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\"; no flow of arrivals for a share to bypass the gate"
+   },
+   {
+    "town": "rv2-city-under_siege-24",
+    "removed": "A share of what arrives at Palaiocastron never appears at the gate, and the share is not small.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\"; no flow of arrivals for a share to bypass the gate"
+   },
+   {
+    "town": "rv2-city-under_siege-4",
+    "removed": "A share of what arrives at Taigang never appears at the gate, and the share is not small.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\"; no flow of arrivals for a share to bypass the gate"
+   },
+   {
+    "town": "r2s-under_siege-metropolis-2",
+    "removed": "A share of what arrives at Raassaray never appears at the gate, and the share is not small.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\"; no flow of arrivals for a share to bypass the gate"
+   },
+   {
+    "town": "r2s-under_siege-metropolis-3",
+    "removed": "A share of what arrives at Andronrion never appears at the gate, and the share is not small.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\"; no flow of arrivals for a share to bypass the gate"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-16",
+    "removed": "A share of what arrives at Altaiörtöö never appears at the gate, and the share is not small.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\"; no flow of arrivals for a share to bypass the gate"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-19",
+    "removed": "A share of what arrives at Nokhoikotan never appears at the gate, and the share is not small.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\"; no flow of arrivals for a share to bypass the gate"
+   },
+   {
+    "town": "rw3-metropolis-under_siege-1",
+    "removed": "A share of what arrives at Hochfurt never appears at the gate, and the share is not small.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\"; no flow of arrivals for a share to bypass the gate"
+   },
+   {
+    "town": "rww-metropolis-under_siege-1",
+    "removed": "A share of what arrives at Naranjotepec never appears at the gate, and the share is not small.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\"; no flow of arrivals for a share to bypass the gate"
+   }
+  ],
+  "replacement": {
+   "silence": 9,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Siege: arrivals bypassing the gate contradict \"nothing comes in by road\"; nothing replaces it."
+ },
+ {
+  "id": "DS-POW-6::GM ADVISORY: the commander is a political actor::v3",
+  "read": 6,
+  "removedTrue": 0,
+  "removedFalse": 6,
+  "removedFalseWorst": "HIGH",
+  "examples": [
+   {
+    "town": "r2s-occupied-city-0",
+    "removed": "Occupation Authority answers to the Military City Council at Breitgrund in name only: whatever the Military City Council plans needs its consent, and that consent is bargained for.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) occupied: inverts the power; record \"its own officials take their orders\" from the occupiers, Occupation Authority outranks the governing council"
+   },
+   {
+    "town": "r2s-occupied-metropolis-1",
+    "removed": "Occupation Authority answers to the Grand Military Council at Dionpetra in name only: whatever the Grand Military Council plans needs its consent, and that consent is bargained for.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) occupied: inverts the power; record \"its own officials take their orders\" from the occupiers, Occupation Authority outranks the governing council"
+   },
+   {
+    "town": "r2s-occupied-town-0",
+    "removed": "Occupation Authority answers to the Town Council at Cerrocastra in name only: whatever the Town Council plans needs its consent, and that consent is bargained for.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) occupied: inverts the power; record \"its own officials take their orders\" from the occupiers, Occupation Authority outranks the governing council"
+   },
+   {
+    "town": "r2s-occupied-village-0",
+    "removed": "Occupation Authority answers to the Elder Council at Spitzfeld in name only: whatever the Elder Council plans needs its consent, and that consent is bargained for.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) occupied: inverts the power; record \"its own officials take their orders\" from the occupiers, Occupation Authority outranks the governing council"
+   },
+   {
+    "town": "r2s-occupied-village-1",
+    "removed": "Occupation Authority answers to the Household Council at Celoichi in name only: whatever the Household Council plans needs its consent, and that consent is bargained for.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) occupied: inverts the power; record \"its own officials take their orders\" from the occupiers, Occupation Authority outranks the governing council"
+   },
+   {
+    "town": "rv2-village-occupied-2",
+    "removed": "Occupation Authority answers to the Elder Council at Kaltenberg in name only: whatever the Elder Council plans needs its consent, and that consent is bargained for.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) occupied: inverts the power; record \"its own officials take their orders\" from the occupiers, Occupation Authority outranks the governing council"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 5,
+   "false": 1,
+   "falseExamples": [
+    {
+     "town": "r2s-occupied-metropolis-1",
+     "sentence": "The commander at Dionpetra is a political player in their own right.",
+     "severity": "LOW",
+     "fact": "occupation authority (power 25) dropped; \"the commander\" is ambiguous: the seat-holder is himself the watch commander and the occupying governor is unnamed"
+    }
+   ]
+  },
+  "note": "Inverts the occupation: false at a glance; 5 replacements are true, Dionpetra's \"commander\" line is LOW."
+ },
+ {
+  "id": "DS-GEN-18::BOUGHT-IN::v10",
+  "read": 16,
+  "removedTrue": 16,
+  "removedFalse": 0,
+  "removedFalseWorst": null,
+  "examples": [
+   {
+    "town": "rv2-city-under_siege-8",
+    "removed": "Villalitus is running short of livestock, and the siege lets none in.",
+    "true": true,
+    "severity": null,
+    "fact": "good is in primaryImports; siege cuts imports"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 16,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Struck line was true (good imported, siege in force); its rewording is equally true."
+ },
+ {
+  "id": "DS-GEN-13::MARKET-OPEN::v3",
+  "read": 16,
+  "removedTrue": 3,
+  "removedFalse": 13,
+  "removedFalseWorst": "LOW",
+  "examples": [
+   {
+    "town": "r2s-under_siege-city-1",
+    "removed": "Visitors find Torrivilla's market without asking.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no visitors arrive (\"nothing comes in by road\"; market shut)"
+   },
+   {
+    "town": "r2s-under_siege-city-2",
+    "removed": "Visitors find Andronarion's market without asking.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no visitors arrive (\"nothing comes in by road\"; market shut)"
+   },
+   {
+    "town": "rv2-city-under_siege-2",
+    "removed": "Visitors find Nanmiao's market without asking.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no visitors arrive (\"nothing comes in by road\"; market shut)"
+   },
+   {
+    "town": "rv2-city-under_siege-25",
+    "removed": "Visitors find Mayantitlan's market without asking.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no visitors arrive (\"nothing comes in by road\"; market shut)"
+   },
+   {
+    "town": "rv2-city-under_siege-4",
+    "removed": "Visitors find Taigang's market without asking.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no visitors arrive (\"nothing comes in by road\"; market shut)"
+   },
+   {
+    "town": "rww-city-under_siege-1",
+    "removed": "Visitors find Panteakra's market without asking.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no visitors arrive (\"nothing comes in by road\"; market shut)"
+   },
+   {
+    "town": "r2s-under_siege-metropolis-0",
+    "removed": "Visitors find Grünmoor's market without asking.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no visitors arrive (\"nothing comes in by road\"; market shut)"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-16",
+    "removed": "Visitors find Altaiörtöö's market without asking.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no visitors arrive (\"nothing comes in by road\"; market shut)"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-19",
+    "removed": "Visitors find Nokhoikotan's market without asking.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no visitors arrive (\"nothing comes in by road\"; market shut)"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-2",
+    "removed": "Visitors find Nokhoiiin's market without asking.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no visitors arrive (\"nothing comes in by road\"; market shut)"
+   },
+   {
+    "town": "rww-metropolis-under_siege-1",
+    "removed": "Visitors find Naranjotepec's market without asking.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no visitors arrive (\"nothing comes in by road\"; market shut)"
+   },
+   {
+    "town": "rv2-town-under_siege-2",
+    "removed": "Visitors find Mayantitlan's market without asking.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no visitors arrive (\"nothing comes in by road\"; market shut)"
+   },
+   {
+    "town": "rv2-town-under_siege+famine-1",
+    "removed": "Visitors find Pratocolonia's market without asking.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) under_siege: no visitors arrive (\"nothing comes in by road\"; market shut)"
+   },
+   {
+    "town": "r2s-plague_onset-city-2",
+    "removed": "Visitors find Kamalapeth's market without asking.",
+    "true": true,
+    "severity": null,
+    "fact": "plague: travel discouraged, not cut; market findable"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 16,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Siege: visitors cannot arrive (LOW); plague: true. All replacements true."
+ },
+ {
+  "id": "DS-GEN-17::GARRISONED::v1",
+  "read": 3,
+  "removedTrue": 0,
+  "removedFalse": 3,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2s-occupied-city-0",
+    "removed": "(not found; judged from template + record)",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied, Poor: the forces of another power hold the town and take the revenue"
+   },
+   {
+    "town": "rv2-town-occupied-1",
+    "removed": "(not found; judged from template + record)",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied, Poor: the forces of another power hold the town and take the revenue; page \"people under arms, but too few and too badly placed to hold off a serious attack\""
+   },
+   {
+    "town": "rv2-town-occupied-2",
+    "removed": "(not found; judged from template + record)",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied, Poor: the forces of another power hold the town and take the revenue"
+   }
+  ],
+  "replacement": {
+   "silence": 3,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Mount null; occupied and Poor; nothing prints in its place."
+ },
+ {
+  "id": "DS-GEN-18::STALLED::v2",
+  "read": 30,
+  "removedTrue": 5,
+  "removedFalse": 25,
+  "removedFalseWorst": "HIGH",
+  "examples": [
+   {
+    "town": "r2r-city-21",
+    "removed": "Oxteche's Tanner (established) is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(h) catalogue name \"Tanner (established)\" printed in prose; (c) chain only vulnerable, not stalled"
+   },
+   {
+    "town": "r2r-city-36",
+    "removed": "Schwarzmoor's Furrier's district is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) chain for Furrier's district is \"vulnerable\" (input bought in), not short or stalled; no crisis cuts supply"
+   },
+   {
+    "town": "r2r-city-59",
+    "removed": "Kilwick's Garrison is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) chain for Garrison is \"vulnerable\" (input bought in), not short or stalled; no crisis cuts supply"
+   },
+   {
+    "town": "r2s-insurgency-city-0",
+    "removed": "Fionnhurst's Post relay station is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) chain for Post relay station is \"vulnerable\" (input bought in), not short or stalled; no crisis cuts supply"
+   },
+   {
+    "town": "r2s-occupied-city-1",
+    "removed": "Qaranuur's Garrison is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) chain for Garrison is \"vulnerable\" (input bought in), not short or stalled; no crisis cuts supply"
+   },
+   {
+    "town": "r2s-politically_fractured-city-2",
+    "removed": "Flachbrunn's Tanner (established) is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(h) catalogue name \"Tanner (established)\" printed in prose; (c) chain only vulnerable, not stalled"
+   },
+   {
+    "town": "r2s-slave_revolt-city-3",
+    "removed": "Balhurst's Smelter is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) chain for Smelter is \"vulnerable\" (input bought in), not short or stalled; no crisis cuts supply"
+   },
+   {
+    "town": "r2r-hamlet-51",
+    "removed": "Velipol's Palisade is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(a) record has no \"Palisade\" (it has \"Palisade or earthworks\"); (c) chain vulnerable, not short"
+   },
+   {
+    "town": "r2r-metropolis-0",
+    "removed": "Baigang's Smelter is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) chain for Smelter is \"vulnerable\" (input bought in), not short or stalled; no crisis cuts supply"
+   },
+   {
+    "town": "r2r-metropolis-5",
+    "removed": "Filopambelos's Garrison is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(a) record has no \"Garrison\" (it has \"Multiple garrisons\"); (c) chain vulnerable, not short"
+   },
+   {
+    "town": "r2s-infiltrated-metropolis-1",
+    "removed": "Petenhuacan's Cobbler's guild is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) chain for Cobbler's guild is \"vulnerable\" (input bought in), not short or stalled; no crisis cuts supply"
+   },
+   {
+    "town": "r2r-metropolis-25",
+    "removed": "Mönkhköl's Caravanserai is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) chain for Caravanserai is \"vulnerable\" (input bought in), not short or stalled; no crisis cuts supply"
+   },
+   {
+    "town": "r2r-metropolis-50",
+    "removed": "Penham's Cobbler's guild is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) chain for Cobbler's guild is \"vulnerable\" (input bought in), not short or stalled; no crisis cuts supply"
+   },
+   {
+    "town": "r2s-slave_revolt-metropolis-0",
+    "removed": "Stormbrekka's Smelter is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) chain for Smelter is \"vulnerable\" (input bought in), not short or stalled; no crisis cuts supply"
+   },
+   {
+    "town": "r2r-town-17",
+    "removed": "Weichstift's Carriers' guild is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) chain for Carriers' guild is \"vulnerable\" (input bought in), not short or stalled; no crisis cuts supply"
+   },
+   {
+    "town": "r2r-town-34",
+    "removed": "Rundholz's Carriers' guild is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) chain for Carriers' guild is \"vulnerable\" (input bought in), not short or stalled; no crisis cuts supply"
+   },
+   {
+    "town": "r2r-town-53",
+    "removed": "Khanhan's Smelter is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) chain for Smelter is \"vulnerable\" (input bought in), not short or stalled; no crisis cuts supply"
+   },
+   {
+    "town": "rww-town-calm-1",
+    "removed": "Drumton's Carriers' guild is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) chain for Carriers' guild is \"vulnerable\" (input bought in), not short or stalled; no crisis cuts supply"
+   },
+   {
+    "town": "r2s-infiltrated-town-1",
+    "removed": "Waldstadt's Smelter is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) chain for Smelter is \"vulnerable\" (input bought in), not short or stalled; no crisis cuts supply"
+   },
+   {
+    "town": "r2s-mass_migration-town-3",
+    "removed": "Breitenbrunn's Carriers' guild is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) chain for Carriers' guild is \"vulnerable\" (input bought in), not short or stalled; no crisis cuts supply"
+   },
+   {
+    "town": "r2r-village-0",
+    "removed": "Lundborg's Waystation is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) chain for Waystation is \"vulnerable\" (input bought in), not short or stalled; no crisis cuts supply"
+   },
+   {
+    "town": "r2r-village-51",
+    "removed": "Lipovich's Pack animal trader is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) chain for Pack animal trader is \"vulnerable\" (input bought in), not short or stalled; no crisis cuts supply"
+   },
+   {
+    "town": "rv2-village-famine-2",
+    "removed": "Shattabad's Waystation is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) chain for Waystation is \"vulnerable\" (input bought in), not short or stalled; no crisis cuts supply"
+   },
+   {
+    "town": "r2r-village-35",
+    "removed": "Liponick's Cartographer's guild is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(a) record has no \"Cartographer's guild\" (it has \"Cartographer's workshop\"); (c) chain vulnerable, not short"
+   },
+   {
+    "town": "r2s-under_siege-village-0",
+    "removed": "Izamtzal's Cartographer's guild is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(a) record has no \"Cartographer's guild\" (it has \"Cartographer's workshop\")"
+   },
+   {
+    "town": "rww-city-famine-1",
+    "removed": "Megaousa's Garrison is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+    "true": true,
+    "severity": null,
+    "fact": "famine: imports cut / food short"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 30,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Chains are only \"vulnerable\": the \"short\" claim is false outside siege/famine; 2 print the catalogue name \"Tanner (established)\"; 4 name a house the record words differently (Palisade, Garrison, Cartographer's guild). Replacements true."
+ },
+ {
+  "id": "DS-POW-5::council::v3",
+  "read": 12,
+  "removedTrue": 0,
+  "removedFalse": 12,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2s-politically_fractured-city-0",
+    "removed": "The Noble Governorship at Aryabagh worries less about rivals than about the city turning on it.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) politically_fractured: stability \"Fractured — no stable governing authorit\"; rivals are the seat's main danger"
+   },
+   {
+    "town": "r2r-hamlet-4",
+    "removed": "The Headman's Authority at Gantulgaiin worries less about rivals than about the hamlet turning on it.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) politically_fractured: stability \"Fractured — no stable governing authorit\"; rivals are the seat's main danger"
+   },
+   {
+    "town": "r2s-politically_fractured-hamlet-2",
+    "removed": "The Free Elder Council at Viknes worries less about rivals than about the hamlet turning on it.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) politically_fractured: stability \"Fractured — no stable governing authorit\"; rivals are the seat's main danger"
+   },
+   {
+    "town": "r2s-politically_fractured-hamlet-3",
+    "removed": "The Headman's Authority at Achillathra worries less about rivals than about the hamlet turning on it.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) politically_fractured: stability \"Fractured — no stable governing authorit\"; rivals are the seat's main danger"
+   },
+   {
+    "town": "r2s-succession_void-hamlet-2",
+    "removed": "The Feudal Stewardship at Weichturm worries less about rivals than about the hamlet turning on it.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) succession_void: stability \"Volatile — power is available to whoever\"; rivals are the seat's main danger"
+   },
+   {
+    "town": "r2r-metropolis-50",
+    "removed": "The Grand Council at Penham worries less about rivals than about the metropolis turning on it.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) politically_fractured: stability \"Fractured — no stable governing authorit\"; rivals are the seat's main danger"
+   },
+   {
+    "town": "r2r-metropolis-6",
+    "removed": "The Grand Council at Becanatl worries less about rivals than about the metropolis turning on it.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) succession_void: stability \"Volatile — power is available to whoever\"; rivals are the seat's main danger"
+   },
+   {
+    "town": "r2s-politically_fractured-thorp-1",
+    "removed": "The Household Council at Mayanek worries less about rivals than about the thorp turning on it.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) politically_fractured: stability \"Fractured — no stable governing authorit\"; rivals are the seat's main danger"
+   },
+   {
+    "town": "r2s-succession_void-thorp-3",
+    "removed": "The Household Council at Markazmahal worries less about rivals than about the thorp turning on it.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) succession_void: stability \"Volatile — power is available to whoever\"; rivals are the seat's main danger"
+   },
+   {
+    "town": "r2r-village-35",
+    "removed": "The Elder Council at Liponick worries less about rivals than about the village turning on it.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) politically_fractured: stability \"Fractured — no stable governing authorit\"; rivals are the seat's main danger"
+   },
+   {
+    "town": "r2r-village-53",
+    "removed": "The Elder Council at Dongan worries less about rivals than about the village turning on it.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) politically_fractured: stability \"Fractured — no stable governing authorit\"; rivals are the seat's main danger"
+   },
+   {
+    "town": "r2s-politically_fractured-village-2",
+    "removed": "The Feudal Stewardship at Inverheath worries less about rivals than about the village turning on it.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) politically_fractured: stability \"Fractured — no stable governing authorit\"; rivals are the seat's main danger"
+   }
+  ],
+  "replacement": {
+   "silence": 3,
+   "true": 7,
+   "false": 2,
+   "falseExamples": [
+    {
+     "town": "r2r-hamlet-4",
+     "sentence": "The Headman's Authority at Gantulgaiin has left obvious decisions untaken because its members cannot agree on them.",
+     "severity": "MED",
+     "fact": "(c) the Headman's Authority is one headman (\"A headman settles disputes and gives the orders\"): no \"members\""
+    },
+    {
+     "town": "r2s-politically_fractured-hamlet-3",
+     "sentence": "The Headman's Authority at Achillathra has left obvious decisions untaken because its members cannot agree on them.",
+     "severity": "MED",
+     "fact": "(c) the Headman's Authority is one headman (\"A headman settles disputes and gives the orders\"): no \"members\""
+    }
+   ]
+  },
+  "note": "Fractured/succession: rivals are the danger; Headman seats wrongly given \"members\" in their replacement."
+ },
+ {
+  "id": "DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)::v7",
+  "read": 3,
+  "removedTrue": 0,
+  "removedFalse": 3,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "rv2-city-insurgency-2",
+    "removed": "Kamengorod's watch keeps the streets, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) insurgency: stability \"Unstable (insurgency contests authority)\": the watch does not keep the streets"
+   },
+   {
+    "town": "r2r-town-3",
+    "removed": "Llanthwaite's watch keeps the streets, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) insurgency: stability \"Unstable (insurgency contests authority)\": the watch does not keep the streets"
+   },
+   {
+    "town": "r2s-slave_revolt-town-3",
+    "removed": "Zhongba's watch keeps the streets, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) slave_revolt: stability \"Unstable (revolt not contained)\": the watch does not keep the streets"
+   }
+  ],
+  "replacement": {
+   "silence": 1,
+   "true": 2,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Insurgency/revolt: the watch does not keep the streets; replacements true; Llanthwaite is silent."
+ },
+ {
+  "id": "DS-POW-6::operation role duty evasion::v1",
+  "read": 5,
+  "removedTrue": 0,
+  "removedFalse": 5,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "rww-city-under_siege-1",
+    "removed": "Goods reach Panteakra around the customs rather than through them. The cargo lists are false, the landing places are unofficial, and the duties the city should collect are never paid.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\"; no goods \"reach\" the town; (a) no customs house in record"
+   },
+   {
+    "town": "r2r-metropolis-14",
+    "removed": "Goods reach Prabhapeta around the customs rather than through them. The cargo lists are false, the landing places are unofficial, and the duties the metropolis should collect are never paid.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\"; no goods \"reach\" the town"
+   },
+   {
+    "town": "r2s-under_siege-metropolis-0",
+    "removed": "Goods reach Grünmoor around the customs rather than through them. The cargo lists are false, the landing places are unofficial, and the duties the metropolis should collect are never paid.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\"; no goods \"reach\" the town"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-1",
+    "removed": "Goods reach Khanobo around the customs rather than through them. The cargo lists are false, the landing places are unofficial, and the duties the metropolis should collect are never paid.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\"; no goods \"reach\" the town"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-24",
+    "removed": "Goods reach Pratomunicipium around the customs rather than through them. The cargo lists are false, the landing places are unofficial, and the duties the metropolis should collect are never paid.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\"; no goods \"reach\" the town"
+   }
+  ],
+  "replacement": {
+   "silence": 5,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Siege: no goods reach the town; Panteakra has no customs house; nothing replaces it."
+ },
+ {
+  "id": "DS-POW-6::operation role duty evasion::v3",
+  "read": 9,
+  "removedTrue": 0,
+  "removedFalse": 9,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "rv2-city-under_siege-2",
+    "removed": "The customs at Nanmiao keep proper books, and a good share of goods goes around them anyway.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\"; no share of goods to go around customs"
+   },
+   {
+    "town": "rv2-city-under_siege-25",
+    "removed": "The customs at Mayantitlan keep proper books, and a good share of goods goes around them anyway.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\"; no share of goods to go around customs"
+   },
+   {
+    "town": "rv2-city-under_siege-9",
+    "removed": "The customs at Balness keep proper books, and a good share of goods goes around them anyway.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\"; no share of goods to go around customs"
+   },
+   {
+    "town": "rv2-city-under_siege+famine-1",
+    "removed": "The customs at Longhu keep proper books, and a good share of goods goes around them anyway.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\"; no share of goods to go around customs; (a) no customs house in record"
+   },
+   {
+    "town": "rv2-city-under_siege+famine-2",
+    "removed": "The customs at Treness keep proper books, and a good share of goods goes around them anyway.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\"; no share of goods to go around customs"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-11",
+    "removed": "The customs at Khutulunhiid keep proper books, and a good share of goods goes around them anyway.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\"; no share of goods to go around customs"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-21",
+    "removed": "The customs at Tianmen keep proper books, and a good share of goods goes around them anyway.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\"; no share of goods to go around customs"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-8",
+    "removed": "The customs at Bhagapur keep proper books, and a good share of goods goes around them anyway.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\"; no share of goods to go around customs"
+   },
+   {
+    "town": "rv2-metropolis-under_siege+famine-2",
+    "removed": "The customs at Ononkhurel keep proper books, and a good share of goods goes around them anyway.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under_siege: page \"nothing comes in by road\"; no share of goods to go around customs"
+   }
+  ],
+  "replacement": {
+   "silence": 9,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Siege: no goods to go around customs; Longhu has no customs house; nothing replaces it."
+ }
+]

@@ -1,0 +1,2382 @@
+[
+ {
+  "id": "DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force::v2",
+  "read": 4,
+  "removedTrue": 0,
+  "removedFalse": 4,
+  "removedFalseWorst": "HIGH",
+  "examples": [
+   {
+    "town": "rv2-city-under_siege-2",
+    "removed": "Defense at Nanmiao is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) siege/occupation in force; 'gates close on time, nobody treats it as unusual' states normal times"
+   },
+   {
+    "town": "rww-city-under_siege-1",
+    "removed": "Defense at Panteakra is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) siege/occupation in force; 'gates close on time, nobody treats it as unusual' states normal times"
+   },
+   {
+    "town": "r2s-occupied-metropolis-1",
+    "removed": "Defense at Dionpetra is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) siege/occupation in force; 'gates close on time, nobody treats it as unusual' states normal times"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-24",
+    "removed": "Defense at Pratomunicipium is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) siege/occupation in force; 'gates close on time, nobody treats it as unusual' states normal times"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 4,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Removed lines stated peacetime routine under siege/occupation; replacements (creature-wall lines, plagued country) are true."
+ },
+ {
+  "id": "DS-DEF-2::Beasts & Monsters: settled, nothing organized::v4",
+  "read": 12,
+  "removedTrue": 0,
+  "removedFalse": 12,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "rv2-hamlet-occupied-2",
+    "removed": "Tumentala kept no defence because the country never asked for one, and the country is asking now; the hamlet is improvising what it never built.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied: another power holds the place; the town is not improvising a defence, and nothing came from the country (monsterThreat heartland)"
+   },
+   {
+    "town": "r2s-occupied-hamlet-0",
+    "removed": "Qarahiid kept no defence because the country never asked for one, and the country is asking now; the hamlet is improvising what it never built.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied: another power holds the place; the town is not improvising a defence, and nothing came from the country (monsterThreat heartland)"
+   },
+   {
+    "town": "r2s-under_siege-hamlet-1",
+    "removed": "Zlatoko kept no defence because the country never asked for one, and the country is asking now; the hamlet is improvising what it never built.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) the threat at hand is a besieging army; monsterThreat heartland, so 'the country is asking now' is a stretch"
+   },
+   {
+    "town": "rv2-hamlet-under_siege+famine-1",
+    "removed": "Goldfeld kept no defence because the country never asked for one, and the country is asking now; the hamlet is improvising what it never built.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) the threat at hand is a besieging army; monsterThreat heartland, so 'the country is asking now' is a stretch"
+   },
+   {
+    "town": "rv2-hamlet-under_siege+famine-2",
+    "removed": "Nordfoss kept no defence because the country never asked for one, and the country is asking now; the hamlet is improvising what it never built.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) the threat at hand is a besieging army; monsterThreat heartland, so 'the country is asking now' is a stretch"
+   },
+   {
+    "town": "r2s-occupied-thorp-2",
+    "removed": "Shanxian kept no defence because the country never asked for one, and the country is asking now; the thorp is improvising what it never built.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied: another power holds the place; the town is not improvising a defence, and nothing came from the country (monsterThreat heartland)"
+   },
+   {
+    "town": "rv2-thorp-under_siege-2",
+    "removed": "Palenqxochitl kept no defence because the country never asked for one, and the country is asking now; the thorp is improvising what it never built.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) the threat at hand is a besieging army; monsterThreat heartland, so 'the country is asking now' is a stretch"
+   },
+   {
+    "town": "rv2-thorp-under_siege+famine-2",
+    "removed": "Miroya kept no defence because the country never asked for one, and the country is asking now; the thorp is improvising what it never built.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) the threat at hand is a besieging army; monsterThreat heartland, so 'the country is asking now' is a stretch"
+   },
+   {
+    "town": "rv2-town-monster_pressure-2",
+    "removed": "Qasrshahr kept no defence because the country never asked for one, and the country is asking now; the town is improvising what it never built.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b)/(g) has a Town watch; crisis text says 'its defences were built for quieter times'"
+   },
+   {
+    "town": "r2s-under_siege-town-1",
+    "removed": "Fengling kept no defence because the country never asked for one, and the country is asking now; the town is improvising what it never built.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(b) has a Town watch; and the threat is a besieging army, not 'the country'"
+   },
+   {
+    "town": "rw3-town-under_siege+famine-1",
+    "removed": "Cobapan kept no defence because the country never asked for one, and the country is asking now; the town is improvising what it never built.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(b) has a Town watch; and the threat is a besieging army, not 'the country'"
+   },
+   {
+    "town": "r2s-under_siege-village-0",
+    "removed": "Izamtzal kept no defence because the country never asked for one, and the country is asking now; the village is improvising what it never built.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) the threat at hand is a besieging army; monsterThreat heartland, so 'the country is asking now' is a stretch"
+   }
+  ],
+  "replacement": {
+   "silence": 3,
+   "true": 9,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "All 12 false (occupied MED, siege/watch LOW); replacements are silence or true 'no line and no force' lines."
+ },
+ {
+  "id": "DS-DEF-2::Beasts & Monsters: settled, nothing organized::v5",
+  "read": 7,
+  "removedTrue": 6,
+  "removedFalse": 1,
+  "removedFalseWorst": "LOW",
+  "examples": [
+   {
+    "town": "rww-town-under_siege-1",
+    "removed": "Nothing at Sanctavallis was organized against the country, and the threat now at hand has found the gap.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(b) the town has a Town watch"
+   },
+   {
+    "town": "r2s-under_siege-hamlet-0",
+    "removed": "Nothing at Sanctaurbs was organized against the country, and the threat now at hand has found the gap.",
+    "true": true,
+    "severity": null,
+    "fact": "no wall, no force; a threat is at hand"
+   }
+  ],
+  "replacement": {
+   "silence": 6,
+   "true": 1,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Mostly true duplicate of the 'no line and no force' line; mainly silence after."
+ },
+ {
+  "id": "DS-DEF-2::Beasts & Monsters: settled, nothing organized::v6",
+  "read": 6,
+  "removedTrue": 0,
+  "removedFalse": 6,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2s-occupied-hamlet-1",
+    "removed": "You find Llanhurst with nothing organised against what has come out of the country, and people arming themselves with whatever is at hand.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied, monsterThreat heartland: nothing has 'come out of the country'; another power holds the place"
+   },
+   {
+    "town": "r2r-thorp-40",
+    "removed": "You find Malotsy with nothing organised against what has come out of the country, and people arming themselves with whatever is at hand.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied, monsterThreat heartland: nothing has 'come out of the country'; another power holds the place"
+   },
+   {
+    "town": "r2s-occupied-thorp-1",
+    "removed": "You find Amarkota with nothing organised against what has come out of the country, and people arming themselves with whatever is at hand.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied, monsterThreat heartland: nothing has 'come out of the country'; another power holds the place"
+   },
+   {
+    "town": "r2s-monster_pressure-town-2",
+    "removed": "You find Velipol with nothing organised against what has come out of the country, and people arming themselves with whatever is at hand.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) has Town watch and a Free company hall (professional soldiers for hire)"
+   },
+   {
+    "town": "rv2-town-monster_pressure-1",
+    "removed": "You find Uaxaccoba with nothing organised against what has come out of the country, and people arming themselves with whatever is at hand.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) has Town watch and a Warden's Lodge (rangers)"
+   },
+   {
+    "town": "r2s-under_siege-town-0",
+    "removed": "You find Ulffoss with nothing organised against what has come out of the country, and people arming themselves with whatever is at hand.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) threat is a besieging army, not something out of the country; (b) has a Town watch"
+   }
+  ],
+  "replacement": {
+   "silence": 3,
+   "true": 1,
+   "false": 2,
+   "falseExamples": [
+    {
+     "town": "r2s-monster_pressure-town-2",
+     "sentence": "With trouble at hand, Velipol's watch is all the town has to send, and there is no wall to send it to.",
+     "severity": "MED",
+     "fact": "(b) Velipol has a Free company hall (band of professional soldiers) as well as its watch"
+    },
+    {
+     "town": "rv2-town-monster_pressure-1",
+     "sentence": "Uaxaccoba has no wall and only its watch, and danger is close at hand.",
+     "severity": "LOW",
+     "fact": "(b) Uaxaccoba also has a Warden's Lodge (rangers who scout and track in a crisis)"
+    }
+   ]
+  },
+  "note": "All 6 false; one replacement ('watch is all the town has to send') denies Velipol's Free company hall."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls AND professional garrison::v2",
+  "read": 5,
+  "removedTrue": 0,
+  "removedFalse": 5,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2s-occupied-city-1",
+    "removed": "Approaching Qaranuur, you see the walls and the soldiers who belong on them, and any attacker would think again about the cost.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied: the city is already held by another power (garrison backs the Occupation Authority); 'any attacker would think again' is normal-times deterrence"
+   },
+   {
+    "town": "r2s-occupied-city-3",
+    "removed": "Approaching Muulchihua, you see the walls and the soldiers who belong on them, and any attacker would think again about the cost.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied: the city is already held by another power (garrison backs the Occupation Authority); 'any attacker would think again' is normal-times deterrence"
+   },
+   {
+    "town": "rv2-city-occupied-2",
+    "removed": "Approaching Celoev, you see the walls and the soldiers who belong on them, and any attacker would think again about the cost.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied: the city is already held by another power (garrison backs the Occupation Authority); 'any attacker would think again' is normal-times deterrence"
+   },
+   {
+    "town": "rv2-metropolis-occupied-1",
+    "removed": "Approaching Mönkhiin, you see the walls and the soldiers who belong on them, and any attacker would think again about the cost.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied: the city is already held by another power (garrison backs the Occupation Authority); 'any attacker would think again' is normal-times deterrence"
+   },
+   {
+    "town": "rv2-town-occupied-2",
+    "removed": "Approaching Villaminus, you see the walls and the soldiers who belong on them, and any attacker would think again about the cost.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied: the city is already held by another power (garrison backs the Occupation Authority); 'any attacker would think again' is normal-times deterrence"
+   }
+  ],
+  "replacement": {
+   "silence": 5,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Removed deterrence lines were false under occupation; silence after."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls AND professional garrison::v3",
+  "read": 4,
+  "removedTrue": 0,
+  "removedFalse": 4,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2s-occupied-city-2",
+    "removed": "People at Petenxochitl believe the city could be held, and the soldiers on the walls give them good reason to.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied: the town was already taken; its garrison backs the occupier, so 'people believe the town could be held' is not so"
+   },
+   {
+    "town": "r2s-occupied-metropolis-0",
+    "removed": "People at Chrissopetra believe the metropolis could be held, and the soldiers on the walls give them good reason to.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied: the town was already taken; its garrison backs the occupier, so 'people believe the town could be held' is not so"
+   },
+   {
+    "town": "r2s-occupied-metropolis-3",
+    "removed": "People at Rajigarh believe the metropolis could be held, and the soldiers on the walls give them good reason to.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied: the town was already taken; its garrison backs the occupier, so 'people believe the town could be held' is not so"
+   },
+   {
+    "town": "rv2-metropolis-occupied-2",
+    "removed": "People at Svetoko believe the metropolis could be held, and the soldiers on the walls give them good reason to.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied: the town was already taken; its garrison backs the occupier, so 'people believe the town could be held' is not so"
+   }
+  ],
+  "replacement": {
+   "silence": 4,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "False under occupation; silence after."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls with NO force::v1",
+  "read": 1,
+  "removedTrue": 0,
+  "removedFalse": 1,
+  "removedFalseWorst": "LOW",
+  "examples": [
+   {
+    "town": "r2r-thorp-24",
+    "removed": "Sanctaminus has walls and nobody to put on them. A determined attacker takes this thorp with ladders and patience, and requires nothing else.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) occupied: another power already holds the thorp; the 'determined attacker' frame ignores it (walls/no force are true)"
+   }
+  ],
+  "replacement": {
+   "silence": 1,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Doubtful under occupation; silence after."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls with NO force::v3",
+  "read": 1,
+  "removedTrue": 1,
+  "removedFalse": 0,
+  "removedFalseWorst": null,
+  "examples": [
+   {
+    "town": "r2s-occupied-hamlet-2",
+    "removed": "People at Dunkelstift admit it when asked: the hamlet has walls and nobody to stand on them.",
+    "true": true,
+    "severity": null,
+    "fact": "palisade/earthworks and no local force (record)"
+   }
+  ],
+  "replacement": {
+   "silence": 1,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "True; silence after."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls with NO force::v4",
+  "read": 10,
+  "removedTrue": 2,
+  "removedFalse": 8,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2r-town-34",
+    "removed": "The town's walls are kept by its watch and nobody else, which is enough to see who comes and goes and nothing like enough to hold them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) the town also has a Free company hall (professional soldiers for hire), so not 'its watch and nobody else'"
+   },
+   {
+    "town": "rv2-town-famine-2",
+    "removed": "Chernomir's walls are kept by its watch and nobody else, which is enough to see who comes and goes and nothing like enough to hold them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) the town also has a Free company hall (professional soldiers for hire), so not 'its watch and nobody else'"
+   },
+   {
+    "town": "r2s-monster_pressure-town-3",
+    "removed": "The town's walls are kept by its watch and nobody else, which is enough to see who comes and goes and nothing like enough to hold them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) the town also has a Free company hall (professional soldiers for hire), so not 'its watch and nobody else'"
+   },
+   {
+    "town": "r2s-occupied-town-0",
+    "removed": "Cerrocastra's walls are kept by its watch and nobody else, which is enough to see who comes and goes and nothing like enough to hold them.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(b) the town also has an Adventurers' charter hall"
+   },
+   {
+    "town": "rww-town-occupied-1",
+    "removed": "The town's walls are kept by its watch and nobody else, which is enough to see who comes and goes and nothing like enough to hold them.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(b) the town also has an Adventurers' charter hall and Hunter's lodge"
+   },
+   {
+    "town": "r2s-plague_onset-town-0",
+    "removed": "The town's walls are kept by its watch and nobody else, which is enough to see who comes and goes and nothing like enough to hold them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) the town also has a Free company hall (professional soldiers for hire), so not 'its watch and nobody else'"
+   },
+   {
+    "town": "rv2-town-plague_onset-2",
+    "removed": "The town's walls are kept by its watch and nobody else, which is enough to see who comes and goes and nothing like enough to hold them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) the town also has a Free company hall (professional soldiers for hire), so not 'its watch and nobody else'"
+   },
+   {
+    "town": "r2s-religious_conversion-town-2",
+    "removed": "The town's walls are kept by its watch and nobody else, which is enough to see who comes and goes and nothing like enough to hold them.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) the town also has a Free company hall (professional soldiers for hire), so not 'its watch and nobody else'"
+   },
+   {
+    "town": "r2s-occupied-town-2",
+    "removed": "The town's walls are kept by its watch and nobody else, which is enough to see who comes and goes and nothing like enough to hold them.",
+    "true": true,
+    "severity": null,
+    "fact": "walls and only a Town watch in the record"
+   }
+  ],
+  "replacement": {
+   "silence": 10,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Six of ten denied a Free company hall; silence after."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls with NO force::v5",
+  "read": 8,
+  "removedTrue": 0,
+  "removedFalse": 8,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2r-town-23",
+    "removed": "The only people on Qaryatfort's walls are the watch on their rounds, and everyone knows that would not stop an army.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) the town also has a Free company hall (professional soldiers for hire), so the watch is not 'the only people'"
+   },
+   {
+    "town": "r2r-town-45",
+    "removed": "The only people on Varanand's walls are the watch on their rounds, and everyone knows that would not stop an army.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) the town also has a Free company hall (professional soldiers for hire), so the watch is not 'the only people'"
+   },
+   {
+    "town": "r2s-famine-town-1",
+    "removed": "The only people on Hongcheng's walls are the watch on their rounds, and everyone knows that would not stop an army.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) the town also has a Free company hall (professional soldiers for hire), so the watch is not 'the only people'"
+   },
+   {
+    "town": "r2s-indebted-town-0",
+    "removed": "The only people on Knockdale's walls are the watch on their rounds, and everyone knows that would not stop an army.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) the town also has a Free company hall (professional soldiers for hire), so the watch is not 'the only people'"
+   },
+   {
+    "town": "r2s-occupied-town-3",
+    "removed": "The only people on Lykopetra's walls are the watch on their rounds, and everyone knows that would not stop an army.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(b) the town also has an Adventurers' charter hall"
+   },
+   {
+    "town": "r2s-plague_onset-town-2",
+    "removed": "The only people on Tarkhankul's walls are the watch on their rounds, and everyone knows that would not stop an army.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) the town also has a Free company hall (professional soldiers for hire), so the watch is not 'the only people'"
+   },
+   {
+    "town": "r2r-town-57",
+    "removed": "The only people on Pianoium's walls are the watch on their rounds, and everyone knows that would not stop an army.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) the town also has a Free company hall (professional soldiers for hire), so the watch is not 'the only people'"
+   },
+   {
+    "town": "r2s-slave_revolt-town-0",
+    "removed": "The only people on Novafossae's walls are the watch on their rounds, and everyone knows that would not stop an army.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(b) the town also has a Free company hall (professional soldiers for hire), so the watch is not 'the only people'"
+   }
+  ],
+  "replacement": {
+   "silence": 8,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Seven of eight denied a Free company hall; silence after."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls with NO force::v6",
+  "read": 2,
+  "removedTrue": 0,
+  "removedFalse": 2,
+  "removedFalseWorst": "LOW",
+  "examples": [
+   {
+    "town": "r2s-under_siege-town-3",
+    "removed": "Rathwell had nobody to put on its walls until the siege came; the people on them now are townsfolk who have never held a wall before.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(b) the town had a Town watch before the siege, so not 'nobody'"
+   },
+   {
+    "town": "rv2-town-under_siege-1",
+    "removed": "Grudmir had nobody to put on its walls until the siege came; the people on them now are townsfolk who have never held a wall before.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(b) the town had a Town watch and Hired blades before the siege, so not 'nobody'"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 2,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Doubtful (watch existed); replacement 'manned by whoever can be spared' is true."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v5",
+  "read": 20,
+  "removedTrue": 18,
+  "removedFalse": 2,
+  "removedFalseWorst": "LOW",
+  "examples": [
+   {
+    "town": "r2s-occupied-village-2",
+    "removed": "With trouble at hand, Caerwood has no wall to close and nobody trained to send, and each household is deciding for itself whether to stay.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(b) the village has an Adventurers' charter hall"
+   },
+   {
+    "town": "rv2-village-occupied-1",
+    "removed": "With trouble at hand, Kripanagar has no wall to close and nobody trained to send, and each household is deciding for itself whether to stay.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(b) the village has an Adventurers' charter hall"
+   },
+   {
+    "town": "r2s-occupied-hamlet-0",
+    "removed": "With trouble at hand, Qarahiid has no wall to close and nobody trained to send, and each household is deciding for itself whether to stay.",
+    "true": true,
+    "severity": null,
+    "fact": "no wall, no force; crisis in force"
+   }
+  ],
+  "replacement": {
+   "silence": 7,
+   "true": 13,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Mostly true; removal looks like duplicate trimming; replacements true."
+ },
+ {
+  "id": "DS-DEF-2::Economic Survival: STRONG::v2",
+  "read": 30,
+  "removedTrue": 26,
+  "removedFalse": 4,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "rv2-city-occupied-2",
+    "removed": "The city could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied: prosperity Poor and 'the occupiers take the revenue'; its arrangements are not intact"
+   },
+   {
+    "town": "r2s-under_siege-metropolis-2",
+    "removed": "The metropolis could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under siege in force, prosperity Struggling, viability false; 'could go through a bad season' ignores the crisis"
+   },
+   {
+    "town": "r2s-under_siege-metropolis-3",
+    "removed": "The metropolis could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) under siege in force, prosperity Struggling, viability false; 'could go through a bad season' ignores the crisis"
+   },
+   {
+    "town": "rww-town-occupied-1",
+    "removed": "The town could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied: prosperity Poor and 'the occupiers take the revenue'; its arrangements are not intact"
+   },
+   {
+    "town": "r2s-insurgency-city-1",
+    "removed": "The city could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.",
+    "true": true,
+    "severity": null,
+    "fact": "economic score 67-100 and prosperity Comfortable/Moderate or better"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 28,
+   "false": 2,
+   "falseExamples": [
+    {
+     "town": "rv2-city-occupied-2",
+     "sentence": "The city went into this trouble with money in hand, and its defenders are still paid on time.",
+     "severity": "MED",
+     "fact": "(c)/(g) occupied, prosperity Poor, and the crisis text says 'the occupiers take the revenue'; 'defenders still paid on time/from money laid by' is not so"
+    },
+    {
+     "town": "rww-town-occupied-1",
+     "sentence": "The town had money laid by before this trouble began, and its defenders are still paid from it.",
+     "severity": "MED",
+     "fact": "(c)/(g) occupied, prosperity Poor, and the crisis text says 'the occupiers take the revenue'; 'defenders still paid on time/from money laid by' is not so"
+    }
+   ]
+  },
+  "note": "Mostly true (strong economy); the replacements for the 2 occupied towns claim defenders paid from the town's money while occupiers take the revenue."
+ },
+ {
+  "id": "DS-DEF-3::Moderate::v3",
+  "read": 23,
+  "removedTrue": 0,
+  "removedFalse": 23,
+  "removedFalseWorst": "HIGH",
+  "examples": [
+   {
+    "town": "r2r-hamlet-12",
+    "removed": "Visitors to Aristoburg are told which few streets to avoid, and the advice turns out to be right.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(d) hamlet of 27: no streets to avoid"
+   },
+   {
+    "town": "r2r-hamlet-22",
+    "removed": "Visitors to Yugou are told which few streets to avoid, and the advice turns out to be right.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(d) hamlet of 73: 'which few streets to avoid' is a size it lacks"
+   },
+   {
+    "town": "r2r-hamlet-25",
+    "removed": "Visitors to Rotbrücke are told which few streets to avoid, and the advice turns out to be right.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(d) hamlet of 32: no streets to avoid"
+   },
+   {
+    "town": "r2r-hamlet-37",
+    "removed": "Visitors to Madinatdarya are told which few streets to avoid, and the advice turns out to be right.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(d) hamlet of 46: no streets to avoid"
+   },
+   {
+    "town": "r2r-hamlet-39",
+    "removed": "Visitors to Fortecastra are told which few streets to avoid, and the advice turns out to be right.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(d) hamlet of 85: 'which few streets to avoid' is a size it lacks"
+   },
+   {
+    "town": "r2r-hamlet-52",
+    "removed": "Visitors to Ormdal are told which few streets to avoid, and the advice turns out to be right.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(d) hamlet of 99: 'which few streets to avoid' is a size it lacks"
+   },
+   {
+    "town": "r2r-hamlet-57",
+    "removed": "Visitors to Ulanköl are told which few streets to avoid, and the advice turns out to be right.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(d) hamlet of 89: 'which few streets to avoid' is a size it lacks"
+   },
+   {
+    "town": "r2r-hamlet-58",
+    "removed": "Visitors to Vatanbulag are told which few streets to avoid, and the advice turns out to be right.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(d) hamlet of 93: 'which few streets to avoid' is a size it lacks"
+   },
+   {
+    "town": "rv2-hamlet-calm-2",
+    "removed": "Visitors to Frosthammer are told which few streets to avoid, and the advice turns out to be right.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(d) hamlet of 50: 'which few streets to avoid' is a size it lacks"
+   },
+   {
+    "town": "rww-hamlet-calm-1",
+    "removed": "Visitors to Ormaker are told which few streets to avoid, and the advice turns out to be right.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(d) hamlet of 73: 'which few streets to avoid' is a size it lacks"
+   },
+   {
+    "town": "r2s-infiltrated-hamlet-1",
+    "removed": "Visitors to Sundland are told which few streets to avoid, and the advice turns out to be right.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(d) hamlet of 77: 'which few streets to avoid' is a size it lacks"
+   },
+   {
+    "town": "r2s-infiltrated-hamlet-3",
+    "removed": "Visitors to Linfeng are told which few streets to avoid, and the advice turns out to be right.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(d) hamlet of 72: 'which few streets to avoid' is a size it lacks"
+   },
+   {
+    "town": "r2r-thorp-0",
+    "removed": "Visitors to Izamitza are told which few streets to avoid, and the advice turns out to be right.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(d) thorp of 11: no streets to avoid"
+   },
+   {
+    "town": "r2r-thorp-15",
+    "removed": "Visitors to Buyanshari are told which few streets to avoid, and the advice turns out to be right.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(d) thorp of 23: no streets to avoid"
+   },
+   {
+    "town": "r2r-thorp-2",
+    "removed": "Visitors to Indrapat are told which few streets to avoid, and the advice turns out to be right.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(d) thorp of 27: no streets to avoid"
+   },
+   {
+    "town": "r2r-thorp-3",
+    "removed": "Visitors to Gantulgaabad are told which few streets to avoid, and the advice turns out to be right.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(d) thorp of 12: no streets to avoid"
+   },
+   {
+    "town": "r2r-thorp-44",
+    "removed": "Visitors to Tikalahau are told which few streets to avoid, and the advice turns out to be right.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(d) thorp of 12: no streets to avoid"
+   },
+   {
+    "town": "r2r-thorp-47",
+    "removed": "Visitors to Hongzhou are told which few streets to avoid, and the advice turns out to be right.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(d) thorp of 15: no streets to avoid"
+   },
+   {
+    "town": "r2r-thorp-48",
+    "removed": "Visitors to Huawan are told which few streets to avoid, and the advice turns out to be right.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(d) thorp of 28: no streets to avoid"
+   },
+   {
+    "town": "r2r-thorp-50",
+    "removed": "Visitors to Tlalatl are told which few streets to avoid, and the advice turns out to be right.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(d) thorp of 28: no streets to avoid"
+   },
+   {
+    "town": "r2r-thorp-53",
+    "removed": "Visitors to Grünfurt are told which few streets to avoid, and the advice turns out to be right.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(d) thorp of 18: no streets to avoid"
+   },
+   {
+    "town": "r2r-thorp-59",
+    "removed": "Visitors to Prabhapura are told which few streets to avoid, and the advice turns out to be right.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(d) thorp of 7: no streets to avoid"
+   },
+   {
+    "town": "r2s-infiltrated-thorp-0",
+    "removed": "Visitors to Pratolitus are told which few streets to avoid, and the advice turns out to be right.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(d) thorp of 14: no streets to avoid"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 23,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Removed size line was false in every thorp/hamlet; the order-keeping replacements are true."
+ },
+ {
+  "id": "DS-DEF-5::garrison PRESENT::v3",
+  "read": 6,
+  "removedTrue": 0,
+  "removedFalse": 6,
+  "removedFalseWorst": "HIGH",
+  "examples": [
+   {
+    "town": "r2s-under_siege-city-1",
+    "removed": "Everyone entering Torrivilla is counted at the gate by a soldier whose job it is, and counted again on the way out.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) under siege: 'nothing comes in by road', yet everyone entering is counted at the gate"
+   },
+   {
+    "town": "r2s-under_siege-city-2",
+    "removed": "Everyone entering Andronarion is counted at the gate by a soldier whose job it is, and counted again on the way out.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) under siege: 'nothing comes in by road', yet everyone entering is counted at the gate"
+   },
+   {
+    "town": "rv2-city-under_siege-1",
+    "removed": "Everyone entering Kaliburg is counted at the gate by a soldier whose job it is, and counted again on the way out.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) under siege: 'nothing comes in by road', yet everyone entering is counted at the gate"
+   },
+   {
+    "town": "rww-city-under_siege-1",
+    "removed": "Everyone entering Panteakra is counted at the gate by a soldier whose job it is, and counted again on the way out.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) under siege: 'nothing comes in by road', yet everyone entering is counted at the gate"
+   },
+   {
+    "town": "rv2-town-under_siege-3",
+    "removed": "Everyone entering Wuzhou is counted at the gate by a soldier whose job it is, and counted again on the way out.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) under siege: 'nothing comes in by road', yet everyone entering is counted at the gate"
+   },
+   {
+    "town": "rv2-town-under_siege+famine-2",
+    "removed": "Everyone entering Honggou is counted at the gate by a soldier whose job it is, and counted again on the way out.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c) under siege: 'nothing comes in by road', yet everyone entering is counted at the gate"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 6,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "False under siege; the standing-force replacements are true."
+ },
+ {
+  "id": "DS-DEF-5::NO organized force at all::v1",
+  "read": 9,
+  "removedTrue": 0,
+  "removedFalse": 9,
+  "removedFalseWorst": "LOW",
+  "examples": [
+   {
+    "town": "r2s-occupied-hamlet-2",
+    "removed": "The hamlet has no organized force. Defense here is individual armed citizens, with no command, no training and no way to coordinate a response.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) occupied: another power's forces hold the place; 'defense here is individual armed citizens' ignores them (no local force is true)"
+   },
+   {
+    "town": "r2s-occupied-hamlet-0",
+    "removed": "The hamlet has no organized force. Defense here is individual armed citizens, with no command, no training and no way to coordinate a response.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) occupied: another power's forces hold the place; 'defense here is individual armed citizens' ignores them (no local force is true)"
+   },
+   {
+    "town": "r2r-thorp-24",
+    "removed": "The thorp has no organized force. Defense here is individual armed citizens, with no command, no training and no way to coordinate a response.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) occupied: another power's forces hold the place; 'defense here is individual armed citizens' ignores them (no local force is true)"
+   },
+   {
+    "town": "r2s-occupied-thorp-2",
+    "removed": "The thorp has no organized force. Defense here is individual armed citizens, with no command, no training and no way to coordinate a response.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) occupied: another power's forces hold the place; 'defense here is individual armed citizens' ignores them (no local force is true)"
+   },
+   {
+    "town": "r2s-occupied-thorp-3",
+    "removed": "The thorp has no organized force. Defense here is individual armed citizens, with no command, no training and no way to coordinate a response.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) occupied: another power's forces hold the place; 'defense here is individual armed citizens' ignores them (no local force is true)"
+   },
+   {
+    "town": "rv2-thorp-occupied-1",
+    "removed": "The thorp has no organized force. Defense here is individual armed citizens, with no command, no training and no way to coordinate a response.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) occupied: another power's forces hold the place; 'defense here is individual armed citizens' ignores them (no local force is true)"
+   },
+   {
+    "town": "rv2-thorp-occupied-2",
+    "removed": "The thorp has no organized force. Defense here is individual armed citizens, with no command, no training and no way to coordinate a response.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) occupied: another power's forces hold the place; 'defense here is individual armed citizens' ignores them (no local force is true)"
+   },
+   {
+    "town": "r2s-occupied-village-1",
+    "removed": "The village has no organized force. Defense here is individual armed citizens, with no command, no training and no way to coordinate a response.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) occupied: another power's forces hold the place; 'defense here is individual armed citizens' ignores them (no local force is true)"
+   },
+   {
+    "town": "r2s-occupied-village-3",
+    "removed": "The village has no organized force. Defense here is individual armed citizens, with no command, no training and no way to coordinate a response.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) occupied: another power's forces hold the place; 'defense here is individual armed citizens' ignores them (no local force is true)"
+   }
+  ],
+  "replacement": {
+   "silence": 8,
+   "true": 1,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Doubtful under occupation; mainly silence after."
+ },
+ {
+  "id": "DS-DEF-5::NO organized force at all::v2",
+  "read": 3,
+  "removedTrue": 3,
+  "removedFalse": 0,
+  "removedFalseWorst": null,
+  "examples": [
+   {
+    "town": "rv2-hamlet-occupied-1",
+    "removed": "If Rotbrunn were attacked, its people would fight with no leaders and no plan, each household for itself.",
+    "true": true,
+    "severity": null,
+    "fact": "no local force (record); hypothetical"
+   }
+  ],
+  "replacement": {
+   "silence": 3,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "True; silence after."
+ },
+ {
+  "id": "DS-DEF-5::NO organized force at all::v3",
+  "read": 3,
+  "removedTrue": 3,
+  "removedFalse": 0,
+  "removedFalseWorst": null,
+  "examples": [
+   {
+    "town": "r2s-occupied-hamlet-1",
+    "removed": "Nobody at Llanhurst is responsible for defending the hamlet; ask who is, and nobody can name anyone.",
+    "true": true,
+    "severity": null,
+    "fact": "no local force or defence institution (record)"
+   }
+  ],
+  "replacement": {
+   "silence": 3,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "True; silence after."
+ },
+ {
+  "id": "DS-DEF-5::NO organized force at all::v4",
+  "read": 7,
+  "removedTrue": 0,
+  "removedFalse": 7,
+  "removedFalseWorst": "LOW",
+  "examples": [
+   {
+    "town": "r2r-hamlet-5",
+    "removed": "The hamlet kept no defenders of its own, and the people defending it now are neighbours who stepped forward when the trouble came.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) wartime is a distant war (conscription, requisition); nothing in the record has the town attacked or 'defended now'"
+   },
+   {
+    "town": "rv2-hamlet-wartime-1",
+    "removed": "The hamlet kept no defenders of its own, and the people defending it now are neighbours who stepped forward when the trouble came.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) wartime is a distant war (conscription, requisition); nothing in the record has the town attacked or 'defended now'"
+   },
+   {
+    "town": "r2s-wartime-hamlet-3",
+    "removed": "The hamlet kept no defenders of its own, and the people defending it now are neighbours who stepped forward when the trouble came.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) wartime is a distant war (conscription, requisition); nothing in the record has the town attacked or 'defended now'"
+   },
+   {
+    "town": "r2r-thorp-55",
+    "removed": "The thorp kept no defenders of its own, and the people defending it now are neighbours who stepped forward when the trouble came.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) wartime is a distant war (conscription, requisition); nothing in the record has the town attacked or 'defended now'"
+   },
+   {
+    "town": "r2s-wartime-village-0",
+    "removed": "The village kept no defenders of its own, and the people defending it now are neighbours who stepped forward when the trouble came.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) wartime is a distant war (conscription, requisition); nothing in the record has the town attacked or 'defended now'"
+   },
+   {
+    "town": "rv2-village-wartime-1",
+    "removed": "The village kept no defenders of its own, and the people defending it now are neighbours who stepped forward when the trouble came.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) wartime is a distant war (conscription, requisition); nothing in the record has the town attacked or 'defended now'"
+   },
+   {
+    "town": "rv2-village-wartime-2",
+    "removed": "The village kept no defenders of its own, and the people defending it now are neighbours who stepped forward when the trouble came.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) wartime is a distant war (conscription, requisition); nothing in the record has the town attacked or 'defended now'"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 7,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Doubtful (war is distant); replacement is true."
+ },
+ {
+  "id": "DS-DEF-5::NO organized force at all::v5",
+  "read": 10,
+  "removedTrue": 0,
+  "removedFalse": 10,
+  "removedFalseWorst": "LOW",
+  "examples": [
+   {
+    "town": "r2r-hamlet-53",
+    "removed": "There was never a force at Markazdeh; whoever leads the defence now is learning the work as the trouble goes on.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) wartime is a distant war; nobody is 'leading the defence' of the place in the record"
+   },
+   {
+    "town": "r2s-wartime-hamlet-0",
+    "removed": "There was never a force at Nishiyuan; whoever leads the defence now is learning the work as the trouble goes on.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) wartime is a distant war; nobody is 'leading the defence' of the place in the record"
+   },
+   {
+    "town": "rv2-hamlet-wartime-2",
+    "removed": "There was never a force at Tarkhangol; whoever leads the defence now is learning the work as the trouble goes on.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) wartime is a distant war; nobody is 'leading the defence' of the place in the record"
+   },
+   {
+    "town": "r2r-thorp-32",
+    "removed": "There was never a force at Hochsee; whoever leads the defence now is learning the work as the trouble goes on.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) wartime is a distant war; nobody is 'leading the defence' of the place in the record"
+   },
+   {
+    "town": "r2s-wartime-thorp-0",
+    "removed": "There was never a force at Amarghat; whoever leads the defence now is learning the work as the trouble goes on.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) wartime is a distant war; nobody is 'leading the defence' of the place in the record"
+   },
+   {
+    "town": "r2s-wartime-thorp-1",
+    "removed": "There was never a force at Breitgate; whoever leads the defence now is learning the work as the trouble goes on.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) wartime is a distant war; nobody is 'leading the defence' of the place in the record"
+   },
+   {
+    "town": "r2s-wartime-thorp-3",
+    "removed": "There was never a force at Madinatsaray; whoever leads the defence now is learning the work as the trouble goes on.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) wartime is a distant war; nobody is 'leading the defence' of the place in the record"
+   },
+   {
+    "town": "rv2-thorp-wartime-2",
+    "removed": "There was never a force at Nikephchori; whoever leads the defence now is learning the work as the trouble goes on.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) wartime is a distant war; nobody is 'leading the defence' of the place in the record"
+   },
+   {
+    "town": "r2s-wartime-thorp-2",
+    "removed": "There was never a force at Hadithaoasis; whoever leads the defence now is learning the work as the trouble goes on.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) wartime is a distant war; nobody is 'leading the defence' of the place in the record"
+   },
+   {
+    "town": "r2s-wartime-village-3",
+    "removed": "There was never a force at Zelenonick; whoever leads the defence now is learning the work as the trouble goes on.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) wartime is a distant war; nobody is 'leading the defence' of the place in the record; also has a Veteran's lodge"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 10,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Doubtful; replacement is true."
+ },
+ {
+  "id": "DS-DEF-12::CAPACITY: enough::v1",
+  "read": 14,
+  "removedTrue": 0,
+  "removedFalse": 14,
+  "removedFalseWorst": "HIGH",
+  "examples": [
+   {
+    "town": "rv2-hamlet-famine-2",
+    "removed": "No dependable road, river or port reaches Torrimonte, and the hamlet gets by on its own: enough for an ordinary year, with little to spare.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c)/(f) food Deficit — Active Famine, food ratio 0.38 (63% short); it does not 'get by on its own'"
+   },
+   {
+    "town": "r2s-insurgency-hamlet-0",
+    "removed": "No dependable road, river or port reaches Dioneia, and the hamlet gets by on its own: enough for an ordinary year, with little to spare.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c)/(f) food Deficit — Active Famine, food ratio 0.31 (69% short); it does not 'get by on its own'"
+   },
+   {
+    "town": "rv2-hamlet-under_siege-2",
+    "removed": "No dependable road, river or port reaches Anyuan, and the hamlet gets by on its own: enough for an ordinary year, with little to spare.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c)/(f) food Deficit, food ratio 0.3 (70% short); it does not 'get by on its own'"
+   },
+   {
+    "town": "r2r-thorp-17",
+    "removed": "No dependable road, river or port reaches Chichich, and the thorp gets by on its own: enough for an ordinary year, with little to spare.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c)/(f) food Deficit — Active Famine, food ratio 0.35 (64% short); it does not 'get by on its own'"
+   },
+   {
+    "town": "r2s-occupied-thorp-1",
+    "removed": "No dependable road, river or port reaches Amarkota, and the thorp gets by on its own: enough for an ordinary year, with little to spare.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c)/(f) food Deficit — Active Famine, food ratio 0.58 (41% short); it does not 'get by on its own'"
+   },
+   {
+    "town": "r2s-succession_void-thorp-0",
+    "removed": "No dependable road, river or port reaches Qingmen, and the thorp gets by on its own: enough for an ordinary year, with little to spare.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c)/(f) food Deficit — Active Famine, food ratio 0.63 (38% short); it does not 'get by on its own'"
+   },
+   {
+    "town": "r2s-succession_void-thorp-1",
+    "removed": "No dependable road, river or port reaches Schwarzdorf, and the thorp gets by on its own: enough for an ordinary year, with little to spare.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c)/(f) food Deficit — Active Famine, food ratio 0.35 (64% short); it does not 'get by on its own'"
+   },
+   {
+    "town": "r2s-under_siege-thorp-2",
+    "removed": "No dependable road, river or port reaches Agioslimani, and the thorp gets by on its own: enough for an ordinary year, with little to spare.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c)/(f) food Deficit, food ratio 0.58 (42% short); it does not 'get by on its own'"
+   },
+   {
+    "town": "r2s-wartime-thorp-3",
+    "removed": "No dependable road, river or port reaches Madinatsaray, and the thorp gets by on its own: enough for an ordinary year, with little to spare.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(g) food Import-Dependent, ratio 0.86 (17% short); not 'enough on its own'"
+   },
+   {
+    "town": "r2s-mass_migration-town-2",
+    "removed": "No dependable road, river or port reaches Shivanand, and the town gets by on its own: enough for an ordinary year, with little to spare.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(g) food Import-Dependent, ratio 0.73 (27% short); not 'enough on its own'"
+   },
+   {
+    "town": "rww-town-under_siege-1",
+    "removed": "No dependable road, river or port reaches Sanctavallis, and the town gets by on its own: enough for an ordinary year, with little to spare.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(c)/(f) food Deficit, food ratio 0.53 (47% short); it does not 'get by on its own'"
+   },
+   {
+    "town": "r2s-plague_onset-village-2",
+    "removed": "No dependable road, river or port reaches Villafundus, and the village gets by on its own: enough for an ordinary year, with little to spare.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(g) food Import-Dependent, ratio 0.75 (25% short); not 'enough on its own'"
+   },
+   {
+    "town": "rv2-village-plague_onset-1",
+    "removed": "No dependable road, river or port reaches Aquavilla, and the village gets by on its own: enough for an ordinary year, with little to spare.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(g) food Import-Dependent, ratio 0.71 (29% short); not 'enough on its own'"
+   },
+   {
+    "town": "r2s-slave_revolt-village-1",
+    "removed": "No dependable road, river or port reaches Deirmandi, and the village gets by on its own: enough for an ordinary year, with little to spare.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(g) food Import-Dependent, ratio 0.78 (22% short); not 'enough on its own'"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 5,
+   "false": 9,
+   "falseExamples": [
+    {
+     "town": "rv2-hamlet-famine-2",
+     "sentence": "People at Torrimonte make do with what they have; a good year is comfortable and a bad one is lean.",
+     "severity": "LOW",
+     "fact": "(c) 'a good year is comfortable' is the ordinary lot, beside a famine/deficit in force (food ratio 0.38)"
+    },
+    {
+     "town": "r2s-insurgency-hamlet-0",
+     "sentence": "People at Dioneia make do with what they have; a good year is comfortable and a bad one is lean.",
+     "severity": "LOW",
+     "fact": "(c) 'a good year is comfortable' is the ordinary lot, beside a famine/deficit in force (food ratio 0.31)"
+    },
+    {
+     "town": "rv2-hamlet-under_siege-2",
+     "sentence": "People at Anyuan make do with what they have; a good year is comfortable and a bad one is lean.",
+     "severity": "LOW",
+     "fact": "(c) 'a good year is comfortable' is the ordinary lot, beside a famine/deficit in force (food ratio 0.3)"
+    },
+    {
+     "town": "r2r-thorp-17",
+     "sentence": "People at Chichich make do with what they have; a good year is comfortable and a bad one is lean.",
+     "severity": "LOW",
+     "fact": "(c) 'a good year is comfortable' is the ordinary lot, beside a famine/deficit in force (food ratio 0.35)"
+    },
+    {
+     "town": "r2s-occupied-thorp-1",
+     "sentence": "People at Amarkota make do with what they have; a good year is comfortable and a bad one is lean.",
+     "severity": "LOW",
+     "fact": "(c) 'a good year is comfortable' is the ordinary lot, beside a famine/deficit in force (food ratio 0.58)"
+    },
+    {
+     "town": "r2s-succession_void-thorp-0",
+     "sentence": "People at Qingmen make do with what they have; a good year is comfortable and a bad one is lean.",
+     "severity": "LOW",
+     "fact": "(c) 'a good year is comfortable' is the ordinary lot, beside a famine/deficit in force (food ratio 0.63)"
+    },
+    {
+     "town": "r2s-succession_void-thorp-1",
+     "sentence": "People at Schwarzdorf make do with what they have; a good year is comfortable and a bad one is lean.",
+     "severity": "LOW",
+     "fact": "(c) 'a good year is comfortable' is the ordinary lot, beside a famine/deficit in force (food ratio 0.35)"
+    },
+    {
+     "town": "r2s-under_siege-thorp-2",
+     "sentence": "People at Agioslimani make do with what they have; a good year is comfortable and a bad one is lean.",
+     "severity": "LOW",
+     "fact": "(c) 'a good year is comfortable' is the ordinary lot, beside a famine/deficit in force (food ratio 0.58)"
+    },
+    {
+     "town": "rww-town-under_siege-1",
+     "sentence": "People at Sanctavallis make do with what they have; a good year is comfortable and a bad one is lean.",
+     "severity": "LOW",
+     "fact": "(c) 'a good year is comfortable' is the ordinary lot, beside a famine/deficit in force (food ratio 0.53)"
+    }
+   ]
+  },
+  "note": "All 14 false (famine/siege HIGH, imports MED); the 'make do' replacement is general but softer (LOW under famine)."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v10",
+  "read": 4,
+  "removedTrue": 4,
+  "removedFalse": 0,
+  "removedFalseWorst": null,
+  "examples": [
+   {
+    "town": "r2s-monster_pressure-town-2",
+    "removed": "The town lies open on every side; its watch keeps to its rounds while the danger everyone talks about is close.",
+    "true": true,
+    "severity": null,
+    "fact": "no wall, a Town watch, a crisis in force"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 2,
+   "false": 2,
+   "falseExamples": [
+    {
+     "town": "r2s-monster_pressure-town-2",
+     "sentence": "With trouble at hand, Velipol's watch is all the town has to send, and there is no wall to send it to.",
+     "severity": "MED",
+     "fact": "(b) Velipol also has a Free company hall (professional soldiers for hire)"
+    },
+    {
+     "town": "rw3-town-under_siege+famine-1",
+     "sentence": "With trouble at hand, Cobapan's watch is all the town has to send, and there is no wall to send it to.",
+     "severity": "LOW",
+     "fact": "(b) Cobapan also has Hired blades"
+    }
+   ]
+  },
+  "note": "Removed line was true; one replacement denies Velipol's Free company hall."
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: defence supplied::v6",
+  "read": 10,
+  "removedTrue": 5,
+  "removedFalse": 5,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "rww-city-famine-1",
+    "removed": "You can see that Megaousa's defenders are armed and equipped from the city's own trades; you can also see that they eat no better than anyone else.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) no running arms chain (bowyer_fletcher impaired); record defence-chain modifier small"
+   },
+   {
+    "town": "rv2-city-under_siege-24",
+    "removed": "You can see that Palaiocastron's defenders are armed and equipped from the city's own trades; you can also see that they eat no better than anyone else.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) no running arms chain (no weapons/bowyer chain); record defence-chain modifier small"
+   },
+   {
+    "town": "r2r-hamlet-16",
+    "removed": "You can see that Oxteha's defenders are armed and equipped from the hamlet's own trades; you can also see that they eat no better than anyone else.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(a) hamlet of 20 has no arms trades (chains: fishing, petty mining, fortification, forage, parish)"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-24",
+    "removed": "You can see that Pratomunicipium's defenders are armed and equipped from the metropolis's own trades; you can also see that they eat no better than anyone else.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) no running arms chain (leather impaired, weapons none); record defence-chain modifier small"
+   },
+   {
+    "town": "rv2-metropolis-under_siege+famine-2",
+    "removed": "You can see that Ononkhurel's defenders are armed and equipped from the metropolis's own trades; you can also see that they eat no better than anyone else.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) weapons_armor, iron and smelting chains all impaired"
+   },
+   {
+    "town": "r2s-famine-city-3",
+    "removed": "You can see that Vatanabad's defenders are armed and equipped from the city's own trades; you can also see that they eat no better than anyone else.",
+    "true": true,
+    "severity": null,
+    "fact": "arms/defence chains running or guild present; positive military chain modifier"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 10,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Mixed; the 'food is short, but the trades behind its defence do more good than harm' replacement matches the positive chain modifier."
+ },
+ {
+  "id": "DS-DEF-3::COMPOUND: insurgency::v5",
+  "read": 5,
+  "removedTrue": 4,
+  "removedFalse": 1,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2s-insurgency-thorp-0",
+    "removed": "Those who keep order at Llanheath walk in pairs now, and there are lanes they no longer walk at all.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(d) thorp of 22 with a household levy: no 'lanes' or order-keepers walking in pairs"
+   },
+   {
+    "town": "r2s-insurgency-city-0",
+    "removed": "Those who keep order at Fionnhurst walk in pairs now, and there are lanes they no longer walk at all.",
+    "true": true,
+    "severity": null,
+    "fact": "insurgency in force; watch/militia present"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 5,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Mostly true; replacements true."
+ },
+ {
+  "id": "DS-DEF-5::garrison PRESENT::v4",
+  "read": 30,
+  "removedTrue": 28,
+  "removedFalse": 2,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "rv2-city-under_siege-15",
+    "removed": "The city's soldiers are paid by the season and drilled by the week, whether or not anything comes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(g) the same page says the pay book is always behind: 'defenders are paid late or not at all'"
+   },
+   {
+    "town": "rww-metropolis-under_siege-1",
+    "removed": "The metropolis's soldiers are paid by the season and drilled by the week, whether or not anything comes.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(g) the same page says the pay book is always behind: 'defenders are paid late or not at all'"
+   },
+   {
+    "town": "r2r-city-0",
+    "removed": "The city's soldiers are paid by the season and drilled by the week, whether or not anything comes.",
+    "true": true,
+    "severity": null,
+    "fact": "professional garrison in the record"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 30,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Mostly true; replacements (standing force / year-round soldiers / gate count in unsieged towns) true."
+ },
+ {
+  "id": "DS-DEF-8::override: ACTIVE SIEGE::v4",
+  "read": 7,
+  "removedTrue": 7,
+  "removedFalse": 0,
+  "removedFalseWorst": null,
+  "examples": [
+   {
+    "town": "r2r-hamlet-0",
+    "removed": "Spitzsteig had nobody whose work was its defence before the army came, so the siege is being held by householders taking turns.",
+    "true": true,
+    "severity": null,
+    "fact": "under siege, no force before (record)"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 7,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "True; replacements true."
+ },
+ {
+  "id": "DS-DEF-8::override: MIGRATION, arrivals::v4",
+  "read": 8,
+  "removedTrue": 7,
+  "removedFalse": 1,
+  "removedFalseWorst": "LOW",
+  "examples": [
+   {
+    "town": "r2s-mass_migration-hamlet-3",
+    "removed": "At Yaxchco you find the guards posted where the newcomers camp, not at the edges of the place.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(a) hamlet of 82 with only a citizen militia: 'guards posted' is a stretch"
+   },
+   {
+    "town": "r2r-city-37",
+    "removed": "At Tikalac you find the guards posted where the newcomers camp, not at the edges of the place.",
+    "true": true,
+    "severity": null,
+    "fact": "mass migration; garrison/watch present"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 8,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "True; replacements true."
+ },
+ {
+  "id": "DS-DEF-11::WALLED-STRAINED::v8",
+  "read": 19,
+  "removedTrue": 5,
+  "removedFalse": 14,
+  "removedFalseWorst": "LOW",
+  "examples": [
+   {
+    "town": "r2r-hamlet-17",
+    "removed": "Faroaltum's people under arms are too few to cover its palisade or earthworks, and the hamlet spends on the palisade or earthworks before it spends on them.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(h) the {defwork} slot prints the catalogue name 'palisade or earthworks' (otherwise true: readiness Strained)"
+   },
+   {
+    "town": "r2r-hamlet-26",
+    "removed": "Grudya's people under arms are too few to cover its palisade or earthworks, and the hamlet spends on the palisade or earthworks before it spends on them.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(h) the {defwork} slot prints the catalogue name 'palisade or earthworks' (otherwise true: readiness Strained)"
+   },
+   {
+    "town": "r2r-hamlet-3",
+    "removed": "Breitenmoor's people under arms are too few to cover its palisade or earthworks, and the hamlet spends on the palisade or earthworks before it spends on them.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(h) the {defwork} slot prints the catalogue name 'palisade or earthworks' (otherwise true: readiness Strained)"
+   },
+   {
+    "town": "r2r-hamlet-41",
+    "removed": "Keshigbulag's people under arms are too few to cover its palisade or earthworks, and the hamlet spends on the palisade or earthworks before it spends on them.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(h) the {defwork} slot prints the catalogue name 'palisade or earthworks' (otherwise true: readiness Strained)"
+   },
+   {
+    "town": "r2r-hamlet-27",
+    "removed": "Jabalistan's people under arms are too few to cover its palisade or earthworks, and the hamlet spends on the palisade or earthworks before it spends on them.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(h) the {defwork} slot prints the catalogue name 'palisade or earthworks' (otherwise true: readiness Strained)"
+   },
+   {
+    "town": "r2s-plague_onset-hamlet-1",
+    "removed": "Weichsee's people under arms are too few to cover its palisade or earthworks, and the hamlet spends on the palisade or earthworks before it spends on them.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(h) the {defwork} slot prints the catalogue name 'palisade or earthworks' (otherwise true: readiness Strained)"
+   },
+   {
+    "town": "r2r-hamlet-34",
+    "removed": "Zoltandavan's people under arms are too few to cover its palisade or earthworks, and the hamlet spends on the palisade or earthworks before it spends on them.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(h) the {defwork} slot prints the catalogue name 'palisade or earthworks' (otherwise true: readiness Strained)"
+   },
+   {
+    "town": "r2s-succession_void-hamlet-0",
+    "removed": "Pratocivitas's people under arms are too few to cover its palisade or earthworks, and the hamlet spends on the palisade or earthworks before it spends on them.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(h) the {defwork} slot prints the catalogue name 'palisade or earthworks' (otherwise true: readiness Strained)"
+   },
+   {
+    "town": "r2r-village-46",
+    "removed": "Glenheath's people under arms are too few to cover its palisade or earthworks, and the village spends on the palisade or earthworks before it spends on them.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(h) the {defwork} slot prints the catalogue name 'palisade or earthworks' (otherwise true: readiness Strained)"
+   },
+   {
+    "town": "r2r-village-8",
+    "removed": "Khandavan's people under arms are too few to cover its palisade or earthworks, and the village spends on the palisade or earthworks before it spends on them.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(h) the {defwork} slot prints the catalogue name 'palisade or earthworks' (otherwise true: readiness Strained)"
+   },
+   {
+    "town": "r2s-famine-village-1",
+    "removed": "Humen's people under arms are too few to cover its palisade or earthworks, and the village spends on the palisade or earthworks before it spends on them.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(h) the {defwork} slot prints the catalogue name 'palisade or earthworks' (otherwise true: readiness Strained)"
+   },
+   {
+    "town": "r2s-infiltrated-village-3",
+    "removed": "Yaxchtitlan's people under arms are too few to cover its palisade or earthworks, and the village spends on the palisade or earthworks before it spends on them.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(h) the {defwork} slot prints the catalogue name 'palisade or earthworks' (otherwise true: readiness Strained)"
+   },
+   {
+    "town": "r2s-politically_fractured-village-0",
+    "removed": "Capofundus's people under arms are too few to cover its palisade or earthworks, and the village spends on the palisade or earthworks before it spends on them.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(h) the {defwork} slot prints the catalogue name 'palisade or earthworks' (otherwise true: readiness Strained)"
+   },
+   {
+    "town": "r2r-village-56",
+    "removed": "Treford's people under arms are too few to cover its palisade or earthworks, and the village spends on the palisade or earthworks before it spends on them.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(h) the {defwork} slot prints the catalogue name 'palisade or earthworks' (otherwise true: readiness Strained)"
+   },
+   {
+    "town": "r2r-thorp-12",
+    "removed": "Nahrhaven's people under arms are too few to cover its palisade, and the thorp spends on the palisade before it spends on them.",
+    "true": true,
+    "severity": null,
+    "fact": "palisade, household levy, readiness Strained/Critical"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 6,
+   "false": 13,
+   "falseExamples": [
+    {
+     "town": "r2r-hamlet-17",
+     "sentence": "Faroaltum's defences are sound, and the only people who would stand on them are the hamlet's own.",
+     "severity": "MED",
+     "fact": "(g) the same page rates it Undefended (Defense readiness Strained)"
+    },
+    {
+     "town": "r2r-hamlet-26",
+     "sentence": "Grudya's defences are sound, but fewer people turn out each season to man the palisade or earthworks, and the hamlet is slow to notice.",
+     "severity": "LOW",
+     "fact": "(h) 'to man the palisade or earthworks' prints the catalogue name"
+    },
+    {
+     "town": "r2r-hamlet-27",
+     "sentence": "Jabalistan's defences are sound, but fewer people turn out each season to man the palisade or earthworks, and the hamlet is slow to notice.",
+     "severity": "LOW",
+     "fact": "(h) 'to man the palisade or earthworks' prints the catalogue name"
+    },
+    {
+     "town": "r2s-plague_onset-hamlet-1",
+     "sentence": "Weichsee's defences are sound, but fewer people turn out each season to man the palisade or earthworks, and the hamlet is slow to notice.",
+     "severity": "LOW",
+     "fact": "(h) 'to man the palisade or earthworks' prints the catalogue name"
+    },
+    {
+     "town": "r2r-hamlet-34",
+     "sentence": "Zoltandavan's defences are sound, but fewer people turn out each season to man the palisade or earthworks, and the hamlet is slow to notice.",
+     "severity": "LOW",
+     "fact": "(h) 'to man the palisade or earthworks' prints the catalogue name"
+    },
+    {
+     "town": "r2s-succession_void-hamlet-0",
+     "sentence": "Pratocivitas's defences are sound, and the only people who would stand on them are the hamlet's own.",
+     "severity": "LOW",
+     "fact": "(c) fortification chain vulnerable"
+    },
+    {
+     "town": "r2r-thorp-25",
+     "sentence": "Tlalpan's defences are sound, but fewer people turn out each season to man the palisade, and the thorp is slow to notice.",
+     "severity": "MED",
+     "fact": "(g) the same page rates it readiness Critical (Defense readiness Critical)"
+    },
+    {
+     "town": "r2r-thorp-1",
+     "sentence": "Terrapolis's defences are sound, but fewer people turn out each season to man the palisade, and the thorp is slow to notice.",
+     "severity": "MED",
+     "fact": "(g) the same page rates it Undefended, readiness Critical (Defense readiness Critical)"
+    },
+    {
+     "town": "r2r-village-8",
+     "sentence": "Khandavan's defences are sound, but fewer people turn out each season to man the palisade or earthworks, and the village is slow to notice.",
+     "severity": "LOW",
+     "fact": "(h) 'to man the palisade or earthworks' prints the catalogue name"
+    },
+    {
+     "town": "r2s-famine-village-1",
+     "sentence": "Humen's defences are sound, and the only people who would stand on them are the village's own.",
+     "severity": "MED",
+     "fact": "(g) the same page rates it Undefended (Defense readiness Strained)"
+    },
+    {
+     "town": "r2s-infiltrated-village-3",
+     "sentence": "Yaxchtitlan's defences are sound, and the only people who would stand on them are the village's own.",
+     "severity": "MED",
+     "fact": "(g) the same page rates it Undefended (Defense readiness Strained)"
+    },
+    {
+     "town": "r2s-politically_fractured-village-0",
+     "sentence": "Capofundus's defences are sound, but fewer people turn out each season to man the palisade or earthworks, and the village is slow to notice.",
+     "severity": "LOW",
+     "fact": "(h) 'to man the palisade or earthworks' prints the catalogue name"
+    },
+    {
+     "town": "r2r-village-56",
+     "sentence": "Treford's defences are sound, and the only people who would stand on them are the village's own.",
+     "severity": "MED",
+     "fact": "(g) the same page rates it Undefended (Defense readiness Strained)"
+    }
+   ]
+  },
+  "note": "Removed line was right about strain; 'X's defences are sound' replacement contradicts an Undefended/Critical rating in 6 towns."
+ },
+ {
+  "id": "DS-DEF-11::UNWALLED-LARGE::v3",
+  "read": 19,
+  "removedTrue": 18,
+  "removedFalse": 1,
+  "removedFalseWorst": "LOW",
+  "examples": [
+   {
+    "town": "r2s-famine-town-2",
+    "removed": "Vatanserai is large enough that anyone arriving expects a wall around it, and is surprised to walk straight in from open country.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(d) a town of 407: 'large enough that anyone expects a wall' is a stretch"
+   },
+   {
+    "town": "r2r-town-4",
+    "removed": "Jayagiri is large enough that anyone arriving expects a wall around it, and is surprised to walk straight in from open country.",
+    "true": true,
+    "severity": null,
+    "fact": "town tier, no walls in record"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 18,
+   "false": 1,
+   "falseExamples": [
+    {
+     "town": "r2s-famine-town-2",
+     "sentence": "Vatanserai is as big as places that usually raise a wall of stone, and it never has; whether from confidence or thrift, the town lies open.",
+     "severity": "LOW",
+     "fact": "(d) a town of 407 'as big as places that usually raise a wall of stone'"
+    }
+   ]
+  },
+  "note": "True; replacements true."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls AND professional garrison::v1",
+  "read": 5,
+  "removedTrue": 0,
+  "removedFalse": 5,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "r2s-occupied-city-0",
+    "removed": "The city's garrison roll puts paid soldiers on every stretch of its walls, so raiders stay away and an army would pay dearly; a long siege would be another matter.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied: the city is already held, garrison backs the occupier; 'raiders stay away and an army would pay dearly'; (g) page rates it Lightly Defended"
+   },
+   {
+    "town": "rv2-city-occupied-1",
+    "removed": "The city's garrison roll puts paid soldiers on every stretch of its walls, so raiders stay away and an army would pay dearly; a long siege would be another matter.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied: the city is already held, garrison backs the occupier; 'raiders stay away and an army would pay dearly'"
+   },
+   {
+    "town": "r2s-occupied-metropolis-1",
+    "removed": "The metropolis's garrison roll puts paid soldiers on every stretch of its walls, so raiders stay away and an army would pay dearly; a long siege would be another matter.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied: the city is already held, garrison backs the occupier; 'raiders stay away and an army would pay dearly'; (g) page rates it Lightly Defended"
+   },
+   {
+    "town": "r2s-occupied-metropolis-2",
+    "removed": "Its garrison roll puts paid soldiers on every stretch of its walls, so raiders stay away and an army would pay dearly; a long siege would be another matter.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied: the city is already held, garrison backs the occupier; 'raiders stay away and an army would pay dearly'"
+   },
+   {
+    "town": "r2s-occupied-town-1",
+    "removed": "The town's garrison roll puts paid soldiers on every stretch of its walls, so raiders stay away and an army would pay dearly; a long siege would be another matter.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) occupied: the city is already held, garrison backs the occupier; 'raiders stay away and an army would pay dearly'"
+   }
+  ],
+  "replacement": {
+   "silence": 3,
+   "true": 2,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "False under occupation; silence or true creature-wall lines."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v4",
+  "read": 5,
+  "removedTrue": 0,
+  "removedFalse": 5,
+  "removedFalseWorst": "LOW",
+  "examples": [
+   {
+    "town": "r2s-occupied-hamlet-3",
+    "removed": "Hochgasse has no line and no force, and the threat now at hand has noticed both.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) occupied: the threat (an occupying power) is already in the place, not 'noticing' it"
+   },
+   {
+    "town": "rv2-hamlet-occupied-2",
+    "removed": "The hamlet has no line and no force, and the threat now at hand has noticed both.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) occupied: the threat (an occupying power) is already in the place, not 'noticing' it"
+   },
+   {
+    "town": "rv2-thorp-occupied-1",
+    "removed": "Chernonitsa has no line and no force, and the threat now at hand has noticed both.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) occupied: the threat (an occupying power) is already in the place, not 'noticing' it"
+   },
+   {
+    "town": "r2s-occupied-village-0",
+    "removed": "Spitzfeld has no line and no force, and the threat now at hand has noticed both.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) occupied: the threat (an occupying power) is already in the place, not 'noticing' it"
+   },
+   {
+    "town": "r2s-occupied-village-3",
+    "removed": "Grudka has no line and no force, and the threat now at hand has noticed both.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) occupied: the threat (an occupying power) is already in the place, not 'noticing' it"
+   }
+  ],
+  "replacement": {
+   "silence": 5,
+   "true": 0,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "Doubtful under occupation; silence after."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v6",
+  "read": 13,
+  "removedTrue": 0,
+  "removedFalse": 13,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "rv2-hamlet-occupied-1",
+    "removed": "You find Rotbrunn open on every side, with nobody posted anywhere, while the danger everyone talks about is close.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) occupied: the danger is already in the place, not 'close'"
+   },
+   {
+    "town": "r2r-hamlet-0",
+    "removed": "You find Spitzsteig open on every side, with nobody posted anywhere, while the danger everyone talks about is close.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under siege: the enemy is camped around it, and the page's military status says the siege is held by householders, so not 'nobody posted anywhere ... danger close'"
+   },
+   {
+    "town": "rv2-hamlet-under_siege-2",
+    "removed": "You find Anyuan open on every side, with nobody posted anywhere, while the danger everyone talks about is close.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under siege: the enemy is camped around it, and the page's military status says the siege is held by householders, so not 'nobody posted anywhere ... danger close'"
+   },
+   {
+    "town": "rw3-hamlet-under_siege-1",
+    "removed": "You find Lidostagnum open on every side, with nobody posted anywhere, while the danger everyone talks about is close.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under siege: the enemy is camped around it, and the page's military status says the siege is held by householders, so not 'nobody posted anywhere ... danger close'"
+   },
+   {
+    "town": "rww-hamlet-under_siege-1",
+    "removed": "You find Miroko open on every side, with nobody posted anywhere, while the danger everyone talks about is close.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under siege: the enemy is camped around it, and the page's military status says the siege is held by householders, so not 'nobody posted anywhere ... danger close'"
+   },
+   {
+    "town": "rv2-hamlet-under_siege+famine-1",
+    "removed": "You find Goldfeld open on every side, with nobody posted anywhere, while the danger everyone talks about is close.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under siege: the enemy is camped around it, and the page's military status says the siege is held by householders, so not 'nobody posted anywhere ... danger close'"
+   },
+   {
+    "town": "r2s-occupied-thorp-2",
+    "removed": "You find Shanxian open on every side, with nobody posted anywhere, while the danger everyone talks about is close.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) occupied: the danger is already in the place, not 'close'"
+   },
+   {
+    "town": "rv2-thorp-occupied-2",
+    "removed": "You find Agiosarion open on every side, with nobody posted anywhere, while the danger everyone talks about is close.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) occupied: the danger is already in the place, not 'close'"
+   },
+   {
+    "town": "r2s-occupied-village-1",
+    "removed": "You find Celoichi open on every side, with nobody posted anywhere, while the danger everyone talks about is close.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(c) occupied: the danger is already in the place, not 'close'"
+   },
+   {
+    "town": "r2r-village-43",
+    "removed": "You find Uaxachuitz open on every side, with nobody posted anywhere, while the danger everyone talks about is close.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under siege: the enemy is camped around it, and the page's military status says the siege is held by householders, so not 'nobody posted anywhere ... danger close'"
+   },
+   {
+    "town": "r2r-village-55",
+    "removed": "You find Megaikon open on every side, with nobody posted anywhere, while the danger everyone talks about is close.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under siege: the enemy is camped around it, and the page's military status says the siege is held by householders, so not 'nobody posted anywhere ... danger close'"
+   },
+   {
+    "town": "r2s-under_siege-village-0",
+    "removed": "You find Izamtzal open on every side, with nobody posted anywhere, while the danger everyone talks about is close.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under siege: the enemy is camped around it, and the page's military status says the siege is held by householders, so not 'nobody posted anywhere ... danger close'"
+   },
+   {
+    "town": "rv2-village-under_siege+famine-2",
+    "removed": "You find Achilarion open on every side, with nobody posted anywhere, while the danger everyone talks about is close.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c)/(g) under siege: the enemy is camped around it, and the page's military status says the siege is held by householders, so not 'nobody posted anywhere ... danger close'"
+   }
+  ],
+  "replacement": {
+   "silence": 4,
+   "true": 9,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "False under siege (MED); 'no line and no force, and danger is close at hand' is true."
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: food trades working::v4",
+  "read": 2,
+  "removedTrue": 0,
+  "removedFalse": 2,
+  "removedFalseWorst": "MED",
+  "examples": [
+   {
+    "town": "rv2-city-under_siege+famine-1",
+    "removed": "Longhu is cut off now, and what its food trades salted and dried before the siege is what stands between the city and hunger.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) famine already active (Deficit, Active Famine); stores do not 'stand between the town and hunger', hunger is here"
+   },
+   {
+    "town": "rv2-metropolis-under_siege+famine-2",
+    "removed": "Ononkhurel is cut off now, and what its food trades salted and dried before the siege is what stands between the metropolis and hunger.",
+    "true": false,
+    "severity": "MED",
+    "fact": "(c) famine already active (Deficit, Active Famine); stores do not 'stand between the town and hunger', hunger is here"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 2,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "False beside an active famine; replacements name the hunger and are true."
+ },
+ {
+  "id": "DS-DEF-12::CAPACITY: enough::v2",
+  "read": 10,
+  "removedTrue": 0,
+  "removedFalse": 10,
+  "removedFalseWorst": "HIGH",
+  "examples": [
+   {
+    "town": "r2s-occupied-hamlet-1",
+    "removed": "The hamlet's count of its stores at Llanhurst covers an ordinary year and no more, so one bad harvest would leave it short before spring.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(f)/(c) stores 0.1 months, Deficit — Active Famine; not 'an ordinary year'"
+   },
+   {
+    "town": "r2s-recently_betrayed-hamlet-2",
+    "removed": "The hamlet's count of its stores at Nikephrion covers an ordinary year and no more, so one bad harvest would leave it short before spring.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(f)/(c) stores 0.1 months, Deficit — Active Famine; not 'an ordinary year'"
+   },
+   {
+    "town": "r2s-wartime-hamlet-3",
+    "removed": "The hamlet's count of its stores at Caercross covers an ordinary year and no more, so one bad harvest would leave it short before spring.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(f)/(c) stores 0.1 months, Deficit — Active Famine; not 'an ordinary year'"
+   },
+   {
+    "town": "r2r-thorp-38",
+    "removed": "The thorp's count of its stores at Khanabad covers an ordinary year and no more, so one bad harvest would leave it short before spring.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(f)/(c) stores 0.1 months, Deficit — Active Famine; not 'an ordinary year'"
+   },
+   {
+    "town": "r2r-thorp-46",
+    "removed": "The thorp's count of its stores at Erdenserai covers an ordinary year and no more, so one bad harvest would leave it short before spring.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(f)/(c) stores 0.1 months, Deficit — Active Famine; not 'an ordinary year'"
+   },
+   {
+    "town": "rww-thorp-calm-1",
+    "removed": "The thorp's count of its stores at Cnocholme covers an ordinary year and no more, so one bad harvest would leave it short before spring.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(f)/(c) stores 0.1 months, Deficit — Active Famine; not 'an ordinary year'"
+   },
+   {
+    "town": "r2s-wartime-thorp-2",
+    "removed": "The thorp's count of its stores at Hadithaoasis covers an ordinary year and no more, so one bad harvest would leave it short before spring.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(f)/(c) stores 0.1 months, Deficit — Active Famine; not 'an ordinary year'"
+   },
+   {
+    "town": "rv2-village-famine-1",
+    "removed": "The village's count of its stores at Sübeteishari covers an ordinary year and no more, so one bad harvest would leave it short before spring.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(f)/(c) stores 0.1 months, Deficit — Active Famine; not 'an ordinary year'"
+   },
+   {
+    "town": "rww-village-famine-1",
+    "removed": "The village's count of its stores at Naranjopeten covers an ordinary year and no more, so one bad harvest would leave it short before spring.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(f)/(c) stores 0.1 months, Deficit — Active Famine; not 'an ordinary year'"
+   },
+   {
+    "town": "r2r-village-43",
+    "removed": "The village's count of its stores at Uaxachuitz covers an ordinary year and no more, so one bad harvest would leave it short before spring.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(f)/(c) stores 1.9 months, Deficit; not 'an ordinary year'"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 0,
+   "false": 10,
+   "falseExamples": [
+    {
+     "town": "r2s-occupied-hamlet-1",
+     "sentence": "People at Llanhurst make do with what they have; a good year is comfortable and a bad one is lean.",
+     "severity": "LOW",
+     "fact": "(c) the ordinary lot ('a good year is comfortable'), beside an active famine/deficit"
+    },
+    {
+     "town": "r2s-recently_betrayed-hamlet-2",
+     "sentence": "People at Nikephrion make do with what they have; a good year is comfortable and a bad one is lean.",
+     "severity": "LOW",
+     "fact": "(c) the ordinary lot ('a good year is comfortable'), beside an active famine/deficit"
+    },
+    {
+     "town": "r2s-wartime-hamlet-3",
+     "sentence": "People at Caercross make do with what they have; a good year is comfortable and a bad one is lean.",
+     "severity": "LOW",
+     "fact": "(c) the ordinary lot ('a good year is comfortable'), beside an active famine/deficit"
+    },
+    {
+     "town": "r2r-thorp-38",
+     "sentence": "People at Khanabad make do with what they have; a good year is comfortable and a bad one is lean.",
+     "severity": "LOW",
+     "fact": "(c) the ordinary lot ('a good year is comfortable'), beside an active famine/deficit"
+    },
+    {
+     "town": "r2r-thorp-46",
+     "sentence": "People at Erdenserai make do with what they have; a good year is comfortable and a bad one is lean.",
+     "severity": "LOW",
+     "fact": "(c) the ordinary lot ('a good year is comfortable'), beside an active famine/deficit"
+    },
+    {
+     "town": "rww-thorp-calm-1",
+     "sentence": "People at Cnocholme make do with what they have; a good year is comfortable and a bad one is lean.",
+     "severity": "LOW",
+     "fact": "(c) the ordinary lot ('a good year is comfortable'), beside an active famine/deficit"
+    },
+    {
+     "town": "r2s-wartime-thorp-2",
+     "sentence": "People at Hadithaoasis make do with what they have; a good year is comfortable and a bad one is lean.",
+     "severity": "LOW",
+     "fact": "(c) the ordinary lot ('a good year is comfortable'), beside an active famine/deficit"
+    },
+    {
+     "town": "rv2-village-famine-1",
+     "sentence": "People at Sübeteishari make do with what they have; a good year is comfortable and a bad one is lean.",
+     "severity": "LOW",
+     "fact": "(c) the ordinary lot ('a good year is comfortable'), beside an active famine/deficit"
+    },
+    {
+     "town": "rww-village-famine-1",
+     "sentence": "People at Naranjopeten make do with what they have; a good year is comfortable and a bad one is lean.",
+     "severity": "LOW",
+     "fact": "(c) the ordinary lot ('a good year is comfortable'), beside an active famine/deficit"
+    },
+    {
+     "town": "r2r-village-43",
+     "sentence": "People at Uaxachuitz make do with what they have; a good year is comfortable and a bad one is lean.",
+     "severity": "LOW",
+     "fact": "(c) the ordinary lot ('a good year is comfortable'), beside an active famine/deficit"
+    }
+   ]
+  },
+  "note": "All 10 false (HIGH figure); the 'make do' replacement is LOW under famine."
+ },
+ {
+  "id": "DS-DEF-11::WALLED-STRAINED::v3",
+  "read": 18,
+  "removedTrue": 0,
+  "removedFalse": 18,
+  "removedFalseWorst": "HIGH",
+  "examples": [
+   {
+    "town": "rv2-city-under_siege-1",
+    "removed": "Kaliburg's city walls and gates was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(h) slot fills a catalogue name: \"X's city walls and gates was short of hands\" (ungrammatical); also (b) a professional garrison holds the walls"
+   },
+   {
+    "town": "rv2-city-under_siege-15",
+    "removed": "Ribatshahr's city walls and gates was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(h) slot fills a catalogue name: \"X's city walls and gates was short of hands\" (ungrammatical); also (b) a professional garrison holds the walls"
+   },
+   {
+    "town": "rv2-city-under_siege-2",
+    "removed": "Nanmiao's city walls and gates was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(h) slot fills a catalogue name: \"X's city walls and gates was short of hands\" (ungrammatical); also (b) a professional garrison holds the walls"
+   },
+   {
+    "town": "rv2-city-under_siege-4",
+    "removed": "Taigang's city walls and gates was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(h) slot fills a catalogue name: \"X's city walls and gates was short of hands\" (ungrammatical); also (b) a professional garrison holds the walls"
+   },
+   {
+    "town": "rv2-city-under_siege-8",
+    "removed": "Villalitus's city walls and gates was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(h) slot fills a catalogue name: \"X's city walls and gates was short of hands\" (ungrammatical); also (b) a professional garrison holds the walls"
+   },
+   {
+    "town": "rv2-city-under_siege-9",
+    "removed": "Balness's city walls and gates was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(h) slot fills a catalogue name: \"X's city walls and gates was short of hands\" (ungrammatical); also (b) a professional garrison holds the walls"
+   },
+   {
+    "town": "rv2-city-under_siege+famine-1",
+    "removed": "Longhu's city walls and gates was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(h) slot fills a catalogue name: \"X's city walls and gates was short of hands\" (ungrammatical); also (b) a professional garrison holds the walls"
+   },
+   {
+    "town": "r2s-under_siege-metropolis-2",
+    "removed": "Raassaray's massive walls and fortifications was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(h) slot fills a catalogue name: \"X's city walls and gates was short of hands\" (ungrammatical); also (b) a professional garrison holds the walls"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-1",
+    "removed": "Khanobo's massive walls and fortifications was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(h) slot fills a catalogue name: \"X's city walls and gates was short of hands\" (ungrammatical); also (b) a professional garrison holds the walls"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-11",
+    "removed": "Khutulunhiid's massive walls and fortifications was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(h) slot fills a catalogue name: \"X's city walls and gates was short of hands\" (ungrammatical); also (b) a professional garrison holds the walls"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-19",
+    "removed": "Nokhoikotan's massive walls and fortifications was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(h) slot fills a catalogue name: \"X's city walls and gates was short of hands\" (ungrammatical); also (b) a professional garrison holds the walls"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-21",
+    "removed": "Tianmen's massive walls and fortifications was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(h) slot fills a catalogue name: \"X's city walls and gates was short of hands\" (ungrammatical); also (b) a professional garrison holds the walls"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-24",
+    "removed": "Pratomunicipium's massive walls and fortifications was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(h) slot fills a catalogue name: \"X's city walls and gates was short of hands\" (ungrammatical); also (b) a professional garrison holds the walls"
+   },
+   {
+    "town": "rww-metropolis-under_siege-1",
+    "removed": "Naranjotepec's massive walls and fortifications was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(h) slot fills a catalogue name: \"X's city walls and gates was short of hands\" (ungrammatical); also (b) a professional garrison holds the walls"
+   },
+   {
+    "town": "rv2-metropolis-under_siege+famine-1",
+    "removed": "Purigarh's massive walls and fortifications was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(h) slot fills a catalogue name: \"X's city walls and gates was short of hands\" (ungrammatical); also (b) a professional garrison holds the walls"
+   },
+   {
+    "town": "rv2-metropolis-under_siege+famine-2",
+    "removed": "Ononkhurel's massive walls and fortifications was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(h) slot fills a catalogue name: \"X's city walls and gates was short of hands\" (ungrammatical); also (b) a professional garrison holds the walls"
+   },
+   {
+    "town": "rv2-town-under_siege+famine-1",
+    "removed": "Pratocolonia's town walls was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(h) slot fills a catalogue name: \"X's city walls and gates was short of hands\" (ungrammatical); also (b) a professional garrison holds the walls"
+   },
+   {
+    "town": "rv2-town-under_siege+famine-2",
+    "removed": "Honggou's town walls was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.",
+    "true": false,
+    "severity": "HIGH",
+    "fact": "(h) slot fills a catalogue name: \"X's city walls and gates was short of hands\" (ungrammatical); also (b) a professional garrison holds the walls"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 18,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "All broken slot text; replacement is true."
+ },
+ {
+  "id": "DS-DEF-11::WALLED-STRAINED::v6",
+  "read": 1,
+  "removedTrue": 1,
+  "removedFalse": 0,
+  "removedFalseWorst": null,
+  "examples": [
+   {
+    "town": "r2r-thorp-24",
+    "removed": "Sanctaminus has nobody whose work it is to stand on its palisade, though the thorp keeps the palisade in repair.",
+    "true": true,
+    "severity": null,
+    "fact": "palisade, no force (record)"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 1,
+   "false": 0,
+   "falseExamples": []
+  },
+  "note": "True; replacement true."
+ },
+ {
+  "id": "DS-DEF-11::WALLED-STRAINED::v7",
+  "read": 1,
+  "removedTrue": 0,
+  "removedFalse": 1,
+  "removedFalseWorst": "LOW",
+  "examples": [
+   {
+    "town": "rv2-village-occupied-2",
+    "removed": "Kaltenberg keeps its palisade or earthworks in repair before it pays anyone to stand guard there, and the few who do turn out are stretched thin.",
+    "true": false,
+    "severity": "LOW",
+    "fact": "(h) 'its palisade or earthworks' prints the catalogue name"
+   }
+  ],
+  "replacement": {
+   "silence": 0,
+   "true": 0,
+   "false": 1,
+   "falseExamples": [
+    {
+     "town": "rv2-village-occupied-2",
+     "sentence": "Kaltenberg's defences are sound, but fewer people turn out each season to man the palisade or earthworks, and the village is slow to notice.",
+     "severity": "MED",
+     "fact": "(g) the same page rates Kaltenberg Undefended (Defense readiness Strained); also (h) 'the palisade or earthworks'"
+    }
+   ]
+  },
+  "note": "Removed slot LOW; replacement claims sound defences beside Undefended."
+ }
+]

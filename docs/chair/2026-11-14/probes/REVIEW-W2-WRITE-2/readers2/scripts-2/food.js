@@ -1,0 +1,3 @@
+const rec=require('./rec.js');const L=require('/tmp/claude-0/-home-user-settlement-engine/b820d610-fd3f-5b2e-a6a5-c562b3a50edf/scratchpad/readers2/removals-2.json');
+for(const t of L[+process.argv[2]].read){const r=rec(t.town);const f=r.economicState.foodSecurity||{};
+console.log(t.town,r.tier,r.population,'acc='+r.economicState.tradeAccess,'stress='+[].concat(r.stress||[]).map(s=>s&&s.type),JSON.stringify({l:f.label,ratio:f.foodRatio,def:f.deficitPct,sur:f.surplusPct,need:f.dailyNeed,prod:f.dailyProduction,imp:f.importCoverage,chains:f.chains}),'imports='+(r.economicState.primaryImports||[]).filter(x=>/grain|food|flour|meat|fish|bread/i.test(x)).join(';'));}
