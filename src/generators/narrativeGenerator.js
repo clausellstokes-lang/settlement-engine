@@ -318,7 +318,8 @@ export const genArrivalDetail = (
     ],
     hamlet: [
       'three or four families who agreed to try wintering together and never stopped',
-      'a household that settled first and found others following it in', // R2-CODE-A-3 (the increment's ww-53): it read "a miller who built a mill and found customers before they found customers", garbled, in hamlets that hold no mill; the founder is picked with no roster in reach, so the line names no house
+      // R2-CODE-A-3 (the increment's ww-53): it read "a miller who built a mill and found customers before they found customers", garbled, in hamlets that hold no mill; the founder is picked with no roster in reach, so the line names no house
+      'a household that settled first and found others following it in',
       'a retired tradesperson whose skills attracted dependents',
       'a small religious community whose members drifted into secular life over two generations',
     ],
