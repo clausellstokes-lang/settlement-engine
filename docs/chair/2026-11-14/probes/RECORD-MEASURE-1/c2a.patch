@@ -1,0 +1,15 @@
+diff --git a/src/generators/computeActiveChains.js b/src/generators/computeActiveChains.js
+index f5ce78d3d..43130268f 100644
+--- a/src/generators/computeActiveChains.js
++++ b/src/generators/computeActiveChains.js
+@@ -915,7 +915,9 @@ export function deriveLocalProductionFromChains(
+     ))
+     .forEach(chain => chain.outputs.slice(0, 2).forEach(o => local.add(o)));
+ 
+-  return [...local];
++  // RECORD-MEASURE-1 C2-A (candidate): a category key or a revenue line is no good MADE here.
++  const NOT_A_GOOD = /^(trade access|maritime access|toll income|market taxes|luxury|strategic control|water)$/i;
++  return [...local].filter((g) => !NOT_A_GOOD.test(String(g)));
+ }
+ 
+ // ── Institutional Services ────────────────────────────────────────────────────

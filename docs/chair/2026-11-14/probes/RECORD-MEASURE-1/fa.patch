@@ -1,0 +1,57 @@
+diff --git a/src/generators/narrative/foundingRowAdmits.js b/src/generators/narrative/foundingRowAdmits.js
+index 890e2cc58..73d5f0e92 100644
+--- a/src/generators/narrative/foundingRowAdmits.js
++++ b/src/generators/narrative/foundingRowAdmits.js
+@@ -28,6 +28,34 @@
+ import { birthFactsOf } from '../../domain/facts/factsOf.js';
+ import { declarationAdmits } from '../../domain/facts/factVocabulary.js';
+ import { TERRAIN_NARRATIVE_HOOKS } from '../../data/narrativeData.js';
++// RECORD-MEASURE-1 (candidate): the Origin rows that name WHO began the place by their KIND (an agent group, not a
++// person), and the founder kinds (domain/facts/founder.js FOUNDER_KIND) that can be that who.
++import { FOUNDER_KIND as RM1_FOUNDER_KIND } from '../../domain/facts/founder.js';
++export const RM1_ORIGIN_AGENT = {
++  'began as a naval base protecting the coast': ['military', 'crown', 'noble'],
++  'was established as a defensive stronghold that attracted dependents': ['military', 'crown', 'noble'],
++  'was established as a frontier outpost that outlasted its original purpose': ['military', 'crown', 'noble'],
++  'developed at a defensible position on the road': ['military', 'crown', 'noble', 'community'],
++  'began as a toll collection point that became a permanent post': ['crown', 'noble', 'military', 'trade'],
++  'began as a customs post where trade roads crossed': ['crown', 'noble', 'military', 'trade'],
++  'began as a grain storage depot for a larger city that no longer exists': ['crown', 'noble', 'trade'],
++  'developed around a sacred grove that attracted religious settlement': ['religious', 'healer', 'community', 'family'],
++  'developed where herders gathered seasonally until the gathering became permanent': ['family', 'community'],
++  'started as a seasonal camp for deep-water fishers who stopped bothering to go home between seasons': ['family', 'community'],
++  'started as a seasonal camp beside a dependable river fishery and became permanent when traders began stopping there': ['family', 'community', 'trade'],
++  'began as a mining camp that became permanent when families arrived': ['family', 'community', 'trade'],
++  'was built where two rival mining operations agreed to share infrastructure': ['trade'],
++  'grew from a logging camp': ['family', 'community', 'trade'],
++  'grew from a seasonal fair that became year-round as traders chose to winter here': ['trade', 'community'],
++  'developed from a hidden refuge community that emerged after a generation': ['community', 'religious', 'family'],
++  'began as a hunting lodge settlement for a noble who died without heirs': ['noble'],
++  'grew from a single household that others joined over decades until it became permanent': ['family'],
++  'began when a merchant realised the local sheep produced finer wool than anything available on the open market': ['trade'],
++  'began when a failed soldier received a land grant and discovered the soil was worth more than any battlefield': ['military'],
++  'grew from a fishing village into a maritime hub': ['family', 'community', 'trade'],
++};
++export const rm1FounderAgrees = (reason, foundedBy) => { const ok = RM1_ORIGIN_AGENT[String(reason)]; return !ok || ok.includes(RM1_FOUNDER_KIND[String(foundedBy || '').trim()] || 'other'); };
++
+ 
+ /**
+  * @typedef {object} FoundingState
+@@ -202,13 +230,14 @@ export const FOUNDER_AGREES = /** @type {ReadonlyMap<string, ReadonlySet<string>
+  * @returns {string | null}
+  */
+ export const oneFounderRow = (pool, reason, foundedBy, admits, state) => {
+-  if (!state || reason == null || !NAMES_A_FOUNDER.has(String(reason))) return reason;
+-  if (FOUNDER_AGREES.get(String(reason))?.has(String(foundedBy))) return reason;
++  const rm1Named = reason != null && RM1_ORIGIN_AGENT[String(reason)] && !rm1FounderAgrees(reason, foundedBy); // FA (candidate)
++  if (!state || reason == null || (!NAMES_A_FOUNDER.has(String(reason)) && !rm1Named)) return reason;
++  if (!rm1Named && FOUNDER_AGREES.get(String(reason))?.has(String(foundedBy))) return reason;
+   const at = pool.indexOf(reason);
+   for (let k = 1; k < pool.length; k++) {
+     const row = pool[(at + k) % pool.length];
+     const test = admits[String(row)];
+-    if ((test && !test(state)) || NAMES_A_FOUNDER.has(String(row))) continue;
++    if ((test && !test(state)) || NAMES_A_FOUNDER.has(String(row)) || !rm1FounderAgrees(row, foundedBy)) continue;
+     return row;
+   }
+   return null;

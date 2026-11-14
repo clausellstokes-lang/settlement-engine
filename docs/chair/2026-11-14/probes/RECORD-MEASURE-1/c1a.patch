@@ -1,0 +1,47 @@
+diff --git a/src/generators/computeActiveChains.js b/src/generators/computeActiveChains.js
+index f5ce78d3d..479175766 100644
+--- a/src/generators/computeActiveChains.js
++++ b/src/generators/computeActiveChains.js
+@@ -884,7 +884,14 @@ export function deriveLocalProductionFromChains(
+   activeChains,
+   nearbyResources,
+   depletedResources = [],
++  institutions = null,
+ ) {
++  // RECORD-MEASURE-1 C1-A (candidate): what the land provides is MADE HERE only where the house that works it
++  // stands (the export's own RESOURCE_EXTRACTION_GATES), and a chain whose only processor is an "Access to ..."
++  // house (another town's) makes nothing here. A caller that passes no roster keeps the old reading.
++  const roster = Array.isArray(institutions) ? institutions.filter(Boolean) : null;
++  const worked = (key) => !roster || !RESOURCE_EXTRACTION_GATES[key] || RESOURCE_EXTRACTION_GATES[key].some((kw) => roster.some((i) => institutionMatchesGate(i, kw)));
++  const heldHere = (chain) => !roster || (chain.processingInstitutions || []).some((p) => roster.some((i) => !/^access to/i.test(String(i?.name || '')) && institutionMatchesProcessor(i, p)));
+   const local = new Set();
+   const depleted = new Set(
+     depletedResources.map(resource => resourceKeyForLabel(resource) || resource),
+@@ -898,6 +905,7 @@ export function deriveLocalProductionFromChains(
+     const key = resourceKeyForLabel(rk) || rk;
+     if (depleted.has(key)) return;
+     const rd = RESOURCE_DATA[key];
++    if (!worked(key)) return;
+     if (rd?.commodities) rd.commodities.forEach(c => {
+       const good = c.replace(/_/g, ' ');
+       if (!refusedOnly.has(good.toLowerCase())) local.add(good);
+@@ -912,6 +920,7 @@ export function deriveLocalProductionFromChains(
+       c.activatedByResource
+       && !chainYieldRefused(c)
+       && c.resourceInputAvailable !== false
++      && heldHere(c)
+     ))
+     .forEach(chain => chain.outputs.slice(0, 2).forEach(o => local.add(o)));
+ 
+diff --git a/src/generators/economy/economicState.js b/src/generators/economy/economicState.js
+index 924e61c9a..4c699817d 100644
+--- a/src/generators/economy/economicState.js
++++ b/src/generators/economy/economicState.js
+@@ -739,6 +739,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
+     activeChainsList,
+     nativeNearbyResources,
+     depletedResources,
++    institutions || [], // RECORD-MEASURE-1 C1-A (candidate)
+   );
+   const instServices = deriveInstitutionalServices(institutions || []);
+   const serviceExports = deriveServiceExports(instServices, goodsOnlyRefusedChainsMake(activeChainsList)); // COHERENCE-AGREE-8 (F2's fifth writer): the services ask the leaf too

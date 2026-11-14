@@ -1,0 +1,63 @@
+diff --git a/src/generators/narrative/foundingRowAdmits.js b/src/generators/narrative/foundingRowAdmits.js
+index 890e2cc58..7010993cb 100644
+--- a/src/generators/narrative/foundingRowAdmits.js
++++ b/src/generators/narrative/foundingRowAdmits.js
+@@ -28,6 +28,34 @@
+ import { birthFactsOf } from '../../domain/facts/factsOf.js';
+ import { declarationAdmits } from '../../domain/facts/factVocabulary.js';
+ import { TERRAIN_NARRATIVE_HOOKS } from '../../data/narrativeData.js';
++// RECORD-MEASURE-1 (candidate): the Origin rows that name WHO began the place by their KIND (an agent group, not a
++// person), and the founder kinds (domain/facts/founder.js FOUNDER_KIND) that can be that who.
++import { FOUNDER_KIND as RM1_FOUNDER_KIND } from '../../domain/facts/founder.js';
++export const RM1_ORIGIN_AGENT = {
++  'began as a naval base protecting the coast': ['military', 'crown', 'noble'],
++  'was established as a defensive stronghold that attracted dependents': ['military', 'crown', 'noble'],
++  'was established as a frontier outpost that outlasted its original purpose': ['military', 'crown', 'noble'],
++  'developed at a defensible position on the road': ['military', 'crown', 'noble', 'community'],
++  'began as a toll collection point that became a permanent post': ['crown', 'noble', 'military', 'trade'],
++  'began as a customs post where trade roads crossed': ['crown', 'noble', 'military', 'trade'],
++  'began as a grain storage depot for a larger city that no longer exists': ['crown', 'noble', 'trade'],
++  'developed around a sacred grove that attracted religious settlement': ['religious', 'healer', 'community', 'family'],
++  'developed where herders gathered seasonally until the gathering became permanent': ['family', 'community'],
++  'started as a seasonal camp for deep-water fishers who stopped bothering to go home between seasons': ['family', 'community'],
++  'started as a seasonal camp beside a dependable river fishery and became permanent when traders began stopping there': ['family', 'community', 'trade'],
++  'began as a mining camp that became permanent when families arrived': ['family', 'community', 'trade'],
++  'was built where two rival mining operations agreed to share infrastructure': ['trade'],
++  'grew from a logging camp': ['family', 'community', 'trade'],
++  'grew from a seasonal fair that became year-round as traders chose to winter here': ['trade', 'community'],
++  'developed from a hidden refuge community that emerged after a generation': ['community', 'religious', 'family'],
++  'began as a hunting lodge settlement for a noble who died without heirs': ['noble'],
++  'grew from a single household that others joined over decades until it became permanent': ['family'],
++  'began when a merchant realised the local sheep produced finer wool than anything available on the open market': ['trade'],
++  'began when a failed soldier received a land grant and discovered the soil was worth more than any battlefield': ['military'],
++  'grew from a fishing village into a maritime hub': ['family', 'community', 'trade'],
++};
++export const rm1FounderAgrees = (reason, foundedBy) => { const ok = RM1_ORIGIN_AGENT[String(reason)]; return !ok || ok.includes(RM1_FOUNDER_KIND[String(foundedBy || '').trim()] || 'other'); };
++
+ 
+ /**
+  * @typedef {object} FoundingState
+diff --git a/src/generators/narrativeGenerator.js b/src/generators/narrativeGenerator.js
+index b1377c2b3..9932a22e2 100644
+--- a/src/generators/narrativeGenerator.js
++++ b/src/generators/narrativeGenerator.js
+@@ -40,7 +40,7 @@ import { cardInstitutionVeilOf } from '../domain/people/cardPowers.js';
+ import { drawTies } from './people/ties.js';
+ import { dealGoals } from './people/goals.js';
+ import { pickVariant } from '../kernel/proseHash.js';
+-import { selectOriginBody, supportChannelsOf } from './narrative/settlementOriginProse.js'; import { FOUNDER_ADMITS, FOUNDING_REASON_ADMITS, NAMES_A_FOUNDER, admittedRow, foundingStateOf, oneFounderRow } from './narrative/foundingRowAdmits.js'; // R2-CODE-A-5: one line, so no cited line moves
++import { selectOriginBody, supportChannelsOf } from './narrative/settlementOriginProse.js'; import { FOUNDER_ADMITS, FOUNDING_REASON_ADMITS, NAMES_A_FOUNDER, admittedRow, foundingStateOf, oneFounderRow, rm1FounderAgrees } from './narrative/foundingRowAdmits.js'; // R2-CODE-A-5: one line, so no cited line moves
+ import { resolvePrimaryStress } from './stressPriority.js';
+ import { migrationDirectionOfStress, migrationDirectionOfConfig } from '../domain/migrationDirection.js';
+ import { pick, pickRandom, pickRandom2, random01 } from './helpers.js';
+@@ -418,7 +418,9 @@ export const genArrivalDetail = (
+   // canonical index-0 note, byte-identical to the old behaviour.
+   // STRESS_NOTES (now variant pools, canonical-at-zero) lives in src/data/narrativeData.js.
+ 
+-  const foundingState = foundingStateOf(config, economicContext, worldLaw), founders = FOUNDERS_BY_TIER[tier] || FOUNDERS_BY_TIER.village, drawnReason = pick(reasonPool), foundedBy = admittedRow(founders, pick(founders), FOUNDER_ADMITS, foundingState); return { // R2-CODE-A-5 (#488 #594 #845, #571/#916): a refused row resolves draw-free to the next admitted one; R2-CODE-A-13: the two picks in their order
++  const foundingState = foundingStateOf(config, economicContext, worldLaw), founders = FOUNDERS_BY_TIER[tier] || FOUNDERS_BY_TIER.village, drawnReason = pick(reasonPool), founderDrawn = admittedRow(founders, pick(founders), FOUNDER_ADMITS, foundingState); // FB (candidate): the founder agrees with the Origin row, draw-free
++  const _rm1Reason = admittedRow(reasonPool, drawnReason, FOUNDING_REASON_ADMITS, foundingState, NAMES_A_FOUNDER);
++  const foundedBy = (() => { if (!foundingState || rm1FounderAgrees(_rm1Reason, founderDrawn)) return founderDrawn; const at = founders.indexOf(founderDrawn); for (let k = 1; k < founders.length; k++) { const f = founders[(at + k) % founders.length]; const t = FOUNDER_ADMITS[f]; if ((!t || t(foundingState)) && rm1FounderAgrees(_rm1Reason, f)) return f; } return founderDrawn; })(); return { // R2-CODE-A-5 (#488 #594 #845, #571/#916): a refused row resolves draw-free to the next admitted one; R2-CODE-A-13: the two picks in their order
+     age: null, // filled in by historyGenerator
+     reason: oneFounderRow(reasonPool, admittedRow(reasonPool, drawnReason, FOUNDING_REASON_ADMITS, foundingState, NAMES_A_FOUNDER), foundedBy, FOUNDING_REASON_ADMITS, foundingState), // R2-CODE-A-9: a refused row resolves onto no second founder; R2-CODE-A-13 (ruling (4)): a founder row stands only beside its own founder
+     foundedBy,
