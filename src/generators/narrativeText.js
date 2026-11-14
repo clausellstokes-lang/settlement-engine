@@ -323,8 +323,8 @@ export const POLITICAL_FLAVOR = {
       `Ask why a custom here seems excessive and the answer is always the same shape: it did not used to be, until the ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} made it necessary, and now it is simply how things are done`, colour: true },
   ],
   economic_heavy: [
-    (r) =>
-      `A settlement whose identity was built on commerce. The ${pickRandom2(r.filter((s) => s.type === "economic"))?.name || "this event"} didn't create the merchant class here, but it defined what the merchant class could become`,
+    { text: (r) =>
+      `A settlement whose identity was built on commerce. The ${pickRandom2(r.filter((s) => s.type === "economic"))?.name || "this event"} didn't create the merchant class here, but it defined what the merchant class could become`, needs: ['market'] }, // R2-CODE-A-7 (step 1 item 2): a merchant class only where the roster holds a market
     (r) =>
       ((e) => (e?.yearsAgo > 60 ? `Economically dynamic in ways that occasionally tip into instability: the ${e.name} is long past, but nobody here has forgotten that prosperity has always been earned and can always be lost` : `Economically dynamic in ways that occasionally tip into instability: the ${e?.name || "this event"} is recent enough to remind everyone that prosperity here has always been earned and can always be lost`))(pickRandom2(r.filter((s) => s.type === "economic"))), // R2-CODE-A-2 (cold #181): the one pick, then its age (ruling B: past sixty years an event is not recent)
     (r) =>

@@ -10,10 +10,14 @@
  * - R2-CODE-A-7 (the hand-back's step 1 item 1; record 422): religious_conversion[1] "the courts are not equipped"
  *   in a town with no courthouse. RULED: the page names a court only where a courthouse stands on the roster; elsewhere
  *   the line speaks of the governing council (genPressureDetail's hasCourt; a branch inside the drawn row).
+ * - R2-CODE-A-7 (step 1 item 2): POLITICAL_FLAVOR.economic_heavy[0] "didn't create the merchant class here" in towns
+ *   whose roster holds no market (r2s-occupied-village-0): `market`; a refused row resolves to the hash argmax over the
+ *   pool's admitted rows (historyCoherence.js :: flavorOf), only on the refused births.
  * A declared row refused resolves draw-free to the next admitted one (generatePressureSentence).
  */
 import { beforeAll, describe, expect, it } from 'vitest';
-import { PRESSURE_SENTENCES } from '../../src/generators/narrativeText.js';
+import { PRESSURE_SENTENCES, POLITICAL_FLAVOR } from '../../src/generators/narrativeText.js';
+import { declarationOf } from '../../src/domain/facts/factVocabulary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -44,6 +48,12 @@ describe('A1b the courts only where a courthouse stands', () => {
   });
 });
 
+describe('A1c the history\'s merchant class needs a market', () => {
+  it('economic_heavy[0] declares `market`', () => {
+    expect(declarationOf(POLITICAL_FLAVOR.economic_heavy[0]).needs).toEqual(['market']);
+  });
+});
+
 describe('A2 the census towns, born in the census shape', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
   const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -66,5 +76,18 @@ describe('A2 the census towns, born in the census shape', () => {
     ['r2s-religious_conversion-city-0', /the courts are not equipped/],
   ])('%s keeps its row where the record bears it out', (seed, words) => {
     expect(born(seed).pressureSentence).toMatch(words);
+  });
+});
+
+describe('A3 the history\'s character, born in the census shape', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+  /** @param {string} seed */
+  const born = (seed) => { const m = /** @type {RegExpMatchArray} */ (seed.match(/^r2s-(\w+)-(thorp|hamlet|village|town|city|metropolis)-\d+$/)); return /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, selectedStresses: [m[1]], selectedStressesRandom: false, settType: m[2] }), null, { seed, customContent: {} })); };
+  it('guard town r2s-occupied-village-0 (no market): no merchant class', () => {
+    expect(born('r2s-occupied-village-0').history.historicalCharacter).not.toMatch(/merchant class/);
+  });
+  it('r2s-famine-town-0 (a market) keeps the line', () => {
+    expect(born('r2s-famine-town-0').history.historicalCharacter).toMatch(/didn't create the merchant class/);
   });
 });

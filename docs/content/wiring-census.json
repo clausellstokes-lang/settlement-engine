@@ -53810,10 +53810,10 @@
         "crisis: any": 5,
         "institution: granary": 1,
         "magic": 4,
-        "market": 1,
+        "market": 2,
         "sacredHouse": 2
       },
-      "undeclared": 31,
+      "undeclared": 30,
       "crisisScoped": false
     },
     {
