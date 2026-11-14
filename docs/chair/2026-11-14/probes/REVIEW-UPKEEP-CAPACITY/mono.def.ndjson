@@ -1,0 +1,853 @@
+{"seed":"r2r-hamlet-1","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[43,31]}}
+{"seed":"r2r-hamlet-1","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[43,31]}}
+{"seed":"r2r-hamlet-8","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[43,30]}}
+{"seed":"r2r-hamlet-8","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[43,27]}}
+{"seed":"r2r-hamlet-9","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[28,14]}}
+{"seed":"r2r-hamlet-9","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[28,15]}}
+{"seed":"r2r-hamlet-12","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[28,25]}}
+{"seed":"r2r-hamlet-12","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[28,25]}}
+{"seed":"r2r-hamlet-15","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[51,41]}}
+{"seed":"r2r-hamlet-15","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[51,40]}}
+{"seed":"r2r-hamlet-19","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[39,35]}}
+{"seed":"r2r-hamlet-22","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[25,24]}}
+{"seed":"r2r-hamlet-22","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[25,19]}}
+{"seed":"r2r-hamlet-25","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[39,26]}}
+{"seed":"r2r-hamlet-25","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[39,23]}}
+{"seed":"r2r-hamlet-28","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[23,20]}}
+{"seed":"r2r-hamlet-28","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[23,16]}}
+{"seed":"r2r-hamlet-31","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[31,27]}}
+{"seed":"r2r-hamlet-32","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[18,15]}}
+{"seed":"r2r-hamlet-32","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[18,15]}}
+{"seed":"r2r-hamlet-35","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[31,26]}}
+{"seed":"r2r-hamlet-35","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[31,20]}}
+{"seed":"r2r-hamlet-38","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[29,26]}}
+{"seed":"r2r-hamlet-38","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[29,21]}}
+{"seed":"r2r-hamlet-42","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[23,20]}}
+{"seed":"r2r-hamlet-42","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[23,17]}}
+{"seed":"r2r-hamlet-44","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[25,24]}}
+{"seed":"r2r-hamlet-47","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[50,35]}}
+{"seed":"r2r-hamlet-47","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[50,30]}}
+{"seed":"r2r-hamlet-48","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[29,27]}}
+{"seed":"r2r-hamlet-48","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[29,28]}}
+{"seed":"r2r-hamlet-52","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[28,27]}}
+{"seed":"r2r-hamlet-54","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[33,29]}}
+{"seed":"r2r-hamlet-59","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[44,41]}}
+{"seed":"r2r-hamlet-59","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[44,41]}}
+{"seed":"r2r-village-0","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[38,27]}}
+{"seed":"r2r-village-0","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[38,23]}}
+{"seed":"r2r-village-0","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[38,24]}}
+{"seed":"r2r-village-0","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[38,26]}}
+{"seed":"r2r-village-2","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[46,32]}}
+{"seed":"r2r-village-2","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[46,27]}}
+{"seed":"r2r-village-2","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[46,45]}}
+{"seed":"r2r-village-2","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[46,28]}}
+{"seed":"r2r-village-2","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[46,43]}}
+{"seed":"r2r-village-2","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[46,35]}}
+{"seed":"r2r-village-4","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[37,30]}}
+{"seed":"r2r-village-4","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[37,24]}}
+{"seed":"r2r-village-4","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[37,25]}}
+{"seed":"r2r-village-4","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[37,28]}}
+{"seed":"r2r-village-6","tier":"village","kind":"add","house":null,"to":"Town hall","jobs":["court"],"falls":{"military":[91,82]}}
+{"seed":"r2r-village-6","tier":"village","kind":"add","house":null,"to":"Courthouse","jobs":["court"],"falls":{"military":[91,82]}}
+{"seed":"r2r-village-6","tier":"village","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[91,82]}}
+{"seed":"r2r-village-7","tier":"village","kind":"add","house":null,"to":"Town hall","jobs":["court"],"falls":{"military":[63,62]}}
+{"seed":"r2r-village-7","tier":"village","kind":"add","house":null,"to":"Courthouse","jobs":["court"],"falls":{"military":[63,62]}}
+{"seed":"r2r-village-7","tier":"village","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[63,62]}}
+{"seed":"r2r-village-9","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[29,22]}}
+{"seed":"r2r-village-9","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[29,21]}}
+{"seed":"r2r-village-9","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[29,22]}}
+{"seed":"r2r-village-9","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[29,27]}}
+{"seed":"r2r-village-10","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[27,24]}}
+{"seed":"r2r-village-10","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[27,24]}}
+{"seed":"r2r-village-11","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[46,41]}}
+{"seed":"r2r-village-11","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[46,33]}}
+{"seed":"r2r-village-11","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[46,34]}}
+{"seed":"r2r-village-11","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[46,43]}}
+{"seed":"r2r-village-11","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[46,44]}}
+{"seed":"r2r-village-12","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[23,22]}}
+{"seed":"r2r-village-12","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[23,21]}}
+{"seed":"r2r-village-12","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[23,21]}}
+{"seed":"r2r-village-12","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[23,22]}}
+{"seed":"r2r-village-14","tier":"village","kind":"add","house":null,"to":"Town hall","jobs":["court"],"falls":{"military":[64,63]}}
+{"seed":"r2r-village-14","tier":"village","kind":"add","house":null,"to":"Courthouse","jobs":["court"],"falls":{"military":[64,63]}}
+{"seed":"r2r-village-14","tier":"village","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[64,63]}}
+{"seed":"r2r-village-15","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[38,33]}}
+{"seed":"r2r-village-15","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[38,29]}}
+{"seed":"r2r-village-15","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[38,29]}}
+{"seed":"r2r-village-15","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[38,32]}}
+{"seed":"r2r-village-16","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[35,27]}}
+{"seed":"r2r-village-16","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[35,26]}}
+{"seed":"r2r-village-16","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[35,26]}}
+{"seed":"r2r-village-16","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[35,27]}}
+{"seed":"r2r-village-16","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[35,34]}}
+{"seed":"r2r-village-17","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[34,33]}}
+{"seed":"r2r-village-17","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[34,28]}}
+{"seed":"r2r-village-17","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[34,28]}}
+{"seed":"r2r-village-17","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[34,32]}}
+{"seed":"r2r-village-17","tier":"village","kind":"add","house":null,"to":"Town hall","jobs":["court"],"falls":{"military":[62,59]}}
+{"seed":"r2r-village-17","tier":"village","kind":"add","house":null,"to":"Courthouse","jobs":["court"],"falls":{"military":[62,59]}}
+{"seed":"r2r-village-17","tier":"village","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[62,59]}}
+{"seed":"r2r-village-20","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[25,24]}}
+{"seed":"r2r-village-20","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[25,24]}}
+{"seed":"r2r-village-20","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[25,23]}}
+{"seed":"r2r-village-22","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[30,23]}}
+{"seed":"r2r-village-22","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[30,18]}}
+{"seed":"r2r-village-22","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[30,18]}}
+{"seed":"r2r-village-22","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[30,29]}}
+{"seed":"r2r-village-22","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[30,26]}}
+{"seed":"r2r-village-26","tier":"village","kind":"add","house":null,"to":"Periodic market","jobs":["market"],"falls":{"monster":[7,6]}}
+{"seed":"r2r-village-26","tier":"village","kind":"add","house":null,"to":"Fish market","jobs":["market"],"falls":{"monster":[7,6]}}
+{"seed":"r2r-village-26","tier":"village","kind":"add","house":null,"to":"Weekly market","jobs":["market"],"falls":{"monster":[7,6]}}
+{"seed":"r2r-village-26","tier":"village","kind":"add","house":null,"to":"Market square","jobs":["market"],"falls":{"monster":[7,6]}}
+{"seed":"r2r-village-26","tier":"village","kind":"add","house":null,"to":"Annual fair","jobs":["market"],"falls":{"monster":[7,6]}}
+{"seed":"r2r-village-26","tier":"village","kind":"add","house":null,"to":"Merchant guilds (3-8)","jobs":["market"],"falls":{"monster":[7,6]}}
+{"seed":"r2r-village-26","tier":"village","kind":"add","house":null,"to":"Caravaneer's post","jobs":["market"],"falls":{"monster":[7,6]}}
+{"seed":"r2r-village-26","tier":"village","kind":"add","house":null,"to":"Carriers' guild","jobs":["market"],"falls":{"monster":[7,6]}}
+{"seed":"r2r-village-26","tier":"village","kind":"add","house":null,"to":"Auction house","jobs":["market"],"falls":{"monster":[7,6]}}
+{"seed":"r2r-village-26","tier":"village","kind":"add","house":null,"to":"Cobbler's guild","jobs":["market"],"falls":{"monster":[7,6]}}
+{"seed":"r2r-village-26","tier":"village","kind":"add","house":null,"to":"Tailor's guild","jobs":["market"],"falls":{"monster":[7,6]}}
+{"seed":"r2r-village-27","tier":"village","kind":"add","house":null,"to":"Town hall","jobs":["court"],"falls":{"military":[50,45]}}
+{"seed":"r2r-village-27","tier":"village","kind":"add","house":null,"to":"Courthouse","jobs":["court"],"falls":{"military":[50,45]}}
+{"seed":"r2r-village-27","tier":"village","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[50,45]}}
+{"seed":"r2r-village-29","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[27,26]}}
+{"seed":"r2r-village-29","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[27,21]}}
+{"seed":"r2r-village-29","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[27,21]}}
+{"seed":"r2r-village-29","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[27,24]}}
+{"seed":"r2r-village-30","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[22,19]}}
+{"seed":"r2r-village-30","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[22,13]}}
+{"seed":"r2r-village-30","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[22,13]}}
+{"seed":"r2r-village-30","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[22,20]}}
+{"seed":"r2r-village-30","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[22,18]}}
+{"seed":"r2r-village-31","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[45,34]}}
+{"seed":"r2r-village-31","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[45,28]}}
+{"seed":"r2r-village-31","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[45,29]}}
+{"seed":"r2r-village-31","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[45,42]}}
+{"seed":"r2r-village-31","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[45,37]}}
+{"seed":"r2r-village-32","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[30,29]}}
+{"seed":"r2r-village-32","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[30,29]}}
+{"seed":"r2r-village-35","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[17,13]}}
+{"seed":"r2r-village-35","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[17,8]}}
+{"seed":"r2r-village-35","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[17,8]}}
+{"seed":"r2r-village-35","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[17,15]}}
+{"seed":"r2r-village-35","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[17,16]}}
+{"seed":"r2r-village-36","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[50,48]}}
+{"seed":"r2r-village-37","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[32,24]}}
+{"seed":"r2r-village-37","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[32,21]}}
+{"seed":"r2r-village-37","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[32,24]}}
+{"seed":"r2r-village-37","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[32,23]}}
+{"seed":"r2r-village-38","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[18,17]}}
+{"seed":"r2r-village-38","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[18,16]}}
+{"seed":"r2r-village-39","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[32,29]}}
+{"seed":"r2r-village-39","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[32,28]}}
+{"seed":"r2r-village-39","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[32,28]}}
+{"seed":"r2r-village-39","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[32,29]}}
+{"seed":"r2r-village-41","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[42,41]}}
+{"seed":"r2r-village-41","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[42,41]}}
+{"seed":"r2r-village-42","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[27,23]}}
+{"seed":"r2r-village-42","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[27,26]}}
+{"seed":"r2r-village-42","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[27,26]}}
+{"seed":"r2r-village-48","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[13,12]}}
+{"seed":"r2r-village-48","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[13,6]}}
+{"seed":"r2r-village-48","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[13,7]}}
+{"seed":"r2r-village-48","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[13,12]}}
+{"seed":"r2r-village-50","tier":"village","kind":"add","house":null,"to":"Town hall","jobs":["court"],"falls":{"military":[46,43]}}
+{"seed":"r2r-village-50","tier":"village","kind":"add","house":null,"to":"Courthouse","jobs":["court"],"falls":{"military":[46,43]}}
+{"seed":"r2r-village-50","tier":"village","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[46,43]}}
+{"seed":"r2r-village-51","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[40,31]}}
+{"seed":"r2r-village-51","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[40,30]}}
+{"seed":"r2r-village-51","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[40,30]}}
+{"seed":"r2r-village-51","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[40,31]}}
+{"seed":"r2r-village-51","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[40,39]}}
+{"seed":"r2r-village-53","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[28,24]}}
+{"seed":"r2r-village-53","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[28,19]}}
+{"seed":"r2r-village-53","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[28,19]}}
+{"seed":"r2r-village-53","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[28,26]}}
+{"seed":"r2r-village-55","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[26,22]}}
+{"seed":"r2r-village-55","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[26,17]}}
+{"seed":"r2r-village-55","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[26,17]}}
+{"seed":"r2r-village-55","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[26,24]}}
+{"seed":"r2r-village-55","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[26,24]}}
+{"seed":"r2r-village-56","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[29,28]}}
+{"seed":"r2r-village-56","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[29,19]}}
+{"seed":"r2r-village-56","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[29,20]}}
+{"seed":"r2r-village-56","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[29,27]}}
+{"seed":"r2r-village-57","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[10,6]}}
+{"seed":"r2r-village-57","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[10,7]}}
+{"seed":"r2r-village-57","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[10,9]}}
+{"seed":"r2r-village-58","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[1,0]}}
+{"seed":"r2r-village-58","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[1,0]}}
+{"seed":"r2r-village-58","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[1,0]}}
+{"seed":"r2r-village-58","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[1,0]}}
+{"seed":"r2r-town-0","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[54,53]}}
+{"seed":"r2r-town-0","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[54,52]}}
+{"seed":"r2r-town-0","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[54,53]}}
+{"seed":"r2r-town-1","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[59,58]}}
+{"seed":"r2r-town-2","tier":"town","kind":"enlarge","house":"Monastery or friary","to":"Multiple monasteries","jobs":["hospital"],"falls":{"military":[26,19],"economic":[62,59],"readiness":[40,38]}}
+{"seed":"r2r-town-2","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"military":[26,25]}}
+{"seed":"r2r-town-2","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"military":[26,25]}}
+{"seed":"r2r-town-2","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[26,25]}}
+{"seed":"r2r-town-2","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[26,25]}}
+{"seed":"r2r-town-3","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[43,42]}}
+{"seed":"r2r-town-3","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[43,40]}}
+{"seed":"r2r-town-3","tier":"town","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[43,41]}}
+{"seed":"r2r-town-3","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[43,41]}}
+{"seed":"r2r-town-3","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[43,41]}}
+{"seed":"r2r-town-3","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[43,39]}}
+{"seed":"r2r-town-3","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[33,32]}}
+{"seed":"r2r-town-3","tier":"town","kind":"add","house":null,"to":"Warden's Lodge","jobs":["wardens"],"falls":{"military":[33,32]}}
+{"seed":"r2r-town-3","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[43,39]}}
+{"seed":"r2r-town-3","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"economic":[43,41]}}
+{"seed":"r2r-town-3","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"economic":[43,41]}}
+{"seed":"r2r-town-3","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[33,32]}}
+{"seed":"r2r-town-4","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[73,72]}}
+{"seed":"r2r-town-4","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[73,71]}}
+{"seed":"r2r-town-4","tier":"town","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[73,71]}}
+{"seed":"r2r-town-4","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[73,72]}}
+{"seed":"r2r-town-4","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[73,72]}}
+{"seed":"r2r-town-4","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[73,69]}}
+{"seed":"r2r-town-4","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[16,15]}}
+{"seed":"r2r-town-4","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[73,69]}}
+{"seed":"r2r-town-4","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"economic":[73,72]}}
+{"seed":"r2r-town-4","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"economic":[73,72]}}
+{"seed":"r2r-town-4","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[16,15]}}
+{"seed":"r2r-town-5","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[43,42]}}
+{"seed":"r2r-town-5","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[43,41]}}
+{"seed":"r2r-town-5","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[43,42]}}
+{"seed":"r2r-town-8","tier":"town","kind":"enlarge","house":"Monastery or friary","to":"Multiple monasteries","jobs":["hospital"],"falls":{"military":[68,61],"readiness":[43,42]}}
+{"seed":"r2r-town-12","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[57,56]}}
+{"seed":"r2r-town-12","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[57,56]}}
+{"seed":"r2r-town-14","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[85,84]}}
+{"seed":"r2r-town-14","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[85,84]}}
+{"seed":"r2r-town-17","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[77,76]}}
+{"seed":"r2r-town-19","tier":"town","kind":"enlarge","house":"Monastery or friary","to":"Multiple monasteries","jobs":["hospital"],"falls":{"military":[32,26],"readiness":[40,39]}}
+{"seed":"r2r-town-20","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"military":[57,56]}}
+{"seed":"r2r-town-20","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[50,48]}}
+{"seed":"r2r-town-20","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[50,49]}}
+{"seed":"r2r-town-20","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[50,49]}}
+{"seed":"r2r-town-20","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"military":[57,56]}}
+{"seed":"r2r-town-20","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[57,56]}}
+{"seed":"r2r-town-20","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"economic":[50,49]}}
+{"seed":"r2r-town-20","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"economic":[50,49]}}
+{"seed":"r2r-town-20","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[57,56]}}
+{"seed":"r2r-town-22","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[43,42]}}
+{"seed":"r2r-town-22","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[43,39]}}
+{"seed":"r2r-town-22","tier":"town","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[43,41]}}
+{"seed":"r2r-town-22","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[43,40]}}
+{"seed":"r2r-town-22","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[43,40]}}
+{"seed":"r2r-town-22","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[43,39]}}
+{"seed":"r2r-town-22","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[38,37]}}
+{"seed":"r2r-town-22","tier":"town","kind":"add","house":null,"to":"Warden's Lodge","jobs":["wardens"],"falls":{"military":[38,37]}}
+{"seed":"r2r-town-22","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"economic":[43,41]}}
+{"seed":"r2r-town-22","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[43,39]}}
+{"seed":"r2r-town-22","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"economic":[43,40]}}
+{"seed":"r2r-town-22","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"economic":[43,40]}}
+{"seed":"r2r-town-22","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[38,37]}}
+{"seed":"r2r-town-23","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[70,69]}}
+{"seed":"r2r-town-24","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[54,51]}}
+{"seed":"r2r-town-24","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[54,52]}}
+{"seed":"r2r-town-24","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"economic":[54,53]}}
+{"seed":"r2r-town-24","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"economic":[54,52]}}
+{"seed":"r2r-town-24","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"economic":[54,52]}}
+{"seed":"r2r-town-31","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[71,69]}}
+{"seed":"r2r-town-31","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[71,70]}}
+{"seed":"r2r-town-31","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[71,70]}}
+{"seed":"r2r-town-31","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"economic":[71,70]}}
+{"seed":"r2r-town-31","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"economic":[71,70]}}
+{"seed":"r2r-town-33","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[47,46]}}
+{"seed":"r2r-town-41","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[47,46]}}
+{"seed":"r2r-town-42","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"military":[33,32]}}
+{"seed":"r2r-town-42","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"military":[33,32]}}
+{"seed":"r2r-town-42","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"military":[33,32]}}
+{"seed":"r2r-town-42","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"military":[33,32]}}
+{"seed":"r2r-town-42","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"military":[33,32]}}
+{"seed":"r2r-town-42","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"military":[33,32]}}
+{"seed":"r2r-town-43","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[51,50]}}
+{"seed":"r2r-town-43","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[51,48]}}
+{"seed":"r2r-town-43","tier":"town","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[51,50]}}
+{"seed":"r2r-town-43","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[51,49]}}
+{"seed":"r2r-town-43","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[51,49]}}
+{"seed":"r2r-town-43","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[51,47]}}
+{"seed":"r2r-town-43","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"economic":[51,50]}}
+{"seed":"r2r-town-43","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[51,48]}}
+{"seed":"r2r-town-43","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"economic":[51,49]}}
+{"seed":"r2r-town-43","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"economic":[51,49]}}
+{"seed":"r2r-town-45","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"military":[81,80]}}
+{"seed":"r2r-town-45","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[88,87]}}
+{"seed":"r2r-town-45","tier":"town","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"monster":[46,45]}}
+{"seed":"r2r-town-45","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[81,80]}}
+{"seed":"r2r-town-45","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"monster":[46,45]}}
+{"seed":"r2r-town-45","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"monster":[46,45],"economic":[88,87]}}
+{"seed":"r2r-town-45","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[81,80]}}
+{"seed":"r2r-town-47","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"military":[46,45]}}
+{"seed":"r2r-town-47","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[57,55]}}
+{"seed":"r2r-town-47","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[57,56]}}
+{"seed":"r2r-town-47","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[57,56]}}
+{"seed":"r2r-town-47","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"military":[46,45]}}
+{"seed":"r2r-town-47","tier":"town","kind":"add","house":null,"to":"Warden's Lodge","jobs":["wardens"],"falls":{"military":[46,45]}}
+{"seed":"r2r-town-47","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"economic":[57,56]}}
+{"seed":"r2r-town-47","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"economic":[57,56]}}
+{"seed":"r2r-town-47","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"economic":[57,56]}}
+{"seed":"r2r-town-53","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[53,52]}}
+{"seed":"r2r-town-54","tier":"town","kind":"enlarge","house":"Monastery or friary","to":"Multiple monasteries","jobs":["hospital"],"falls":{"military":[23,18],"economic":[74,70],"readiness":[45,43]}}
+{"seed":"r2r-town-54","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[74,73]}}
+{"seed":"r2r-town-55","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"military":[43,42]}}
+{"seed":"r2r-town-55","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[43,41]}}
+{"seed":"r2r-town-55","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[43,42]}}
+{"seed":"r2r-town-55","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[43,42]}}
+{"seed":"r2r-town-55","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"military":[43,42]}}
+{"seed":"r2r-town-55","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[43,42]}}
+{"seed":"r2r-town-55","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"economic":[43,42]}}
+{"seed":"r2r-town-55","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"economic":[43,42]}}
+{"seed":"r2r-town-55","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"economic":[43,42]}}
+{"seed":"r2r-town-55","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[43,42]}}
+{"seed":"r2r-town-57","tier":"town","kind":"enlarge","house":"Alchemist shop","to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[77,75]}}
+{"seed":"r2r-town-57","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[77,76]}}
+{"seed":"r2r-town-57","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"military":[86,85],"economic":[77,75]}}
+{"seed":"r2r-town-57","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"military":[86,85]}}
+{"seed":"r2r-town-57","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[77,73]}}
+{"seed":"r2r-town-57","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[77,73]}}
+{"seed":"r2r-town-57","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"military":[86,85]}}
+{"seed":"r2r-town-57","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"military":[86,85]}}
+{"seed":"r2r-town-58","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[36,35]}}
+{"seed":"r2r-town-58","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[36,34]}}
+{"seed":"r2r-town-58","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[36,35]}}
+{"seed":"r2r-town-59","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[48,47]}}
+{"seed":"r2r-town-59","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[48,47]}}
+{"seed":"r2r-town-59","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[48,47]}}
+{"seed":"r2r-town-59","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"economic":[48,47]}}
+{"seed":"r2r-town-59","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"economic":[48,47]}}
+{"seed":"r2r-town-59","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"economic":[48,47]}}
+{"seed":"r2s-under_siege-hamlet-3","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[21,12]}}
+{"seed":"r2s-under_siege-hamlet-3","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[21,8]}}
+{"seed":"r2s-under_siege-village-0","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[21,19]}}
+{"seed":"r2s-under_siege-village-0","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[21,15]}}
+{"seed":"r2s-under_siege-village-0","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[21,20]}}
+{"seed":"r2s-under_siege-town-0","tier":"town","kind":"enlarge","house":"Monastery or friary","to":"Multiple monasteries","jobs":["hospital"],"falls":{"military":[24,17],"internal":[12,5],"economic":[47,41],"readiness":[29,24]}}
+{"seed":"r2s-under_siege-town-0","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[47,46]}}
+{"seed":"r2s-under_siege-town-1","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"military":[11,10]}}
+{"seed":"r2s-under_siege-town-1","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"military":[11,10]}}
+{"seed":"r2s-under_siege-town-1","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[11,10]}}
+{"seed":"r2s-under_siege-town-1","tier":"town","kind":"add","house":null,"to":"Warden's Lodge","jobs":["wardens"],"falls":{"military":[11,10]}}
+{"seed":"r2s-under_siege-town-1","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[42,41]}}
+{"seed":"r2s-under_siege-town-1","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[11,10]}}
+{"seed":"r2s-under_siege-town-3","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"military":[51,50]}}
+{"seed":"r2s-under_siege-town-3","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"military":[51,50]}}
+{"seed":"r2s-under_siege-town-3","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"military":[51,50]}}
+{"seed":"r2s-under_siege-town-3","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"military":[51,50]}}
+{"seed":"r2s-under_siege-town-3","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"military":[51,50]}}
+{"seed":"r2s-famine-hamlet-0","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[16,11]}}
+{"seed":"r2s-famine-hamlet-2","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[23,22]}}
+{"seed":"r2s-famine-hamlet-2","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[23,19]}}
+{"seed":"r2s-famine-village-0","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[1,0]}}
+{"seed":"r2s-famine-village-0","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[1,0]}}
+{"seed":"r2s-famine-village-1","tier":"village","kind":"add","house":null,"to":"Town hall","jobs":["court"],"falls":{"military":[58,53]}}
+{"seed":"r2s-famine-village-1","tier":"village","kind":"add","house":null,"to":"Courthouse","jobs":["court"],"falls":{"military":[58,53]}}
+{"seed":"r2s-famine-village-1","tier":"village","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[58,53]}}
+{"seed":"r2s-famine-village-3","tier":"village","kind":"add","house":null,"to":"Town hall","jobs":["court"],"falls":{"military":[73,68]}}
+{"seed":"r2s-famine-village-3","tier":"village","kind":"add","house":null,"to":"Courthouse","jobs":["court"],"falls":{"military":[73,68]}}
+{"seed":"r2s-famine-village-3","tier":"village","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[73,68]}}
+{"seed":"r2s-famine-town-3","tier":"town","kind":"enlarge","house":"Alchemist shop","to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[41,40]}}
+{"seed":"r2s-famine-town-3","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[41,39]}}
+{"seed":"r2s-occupied-hamlet-2","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[16,11]}}
+{"seed":"r2s-occupied-hamlet-2","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[16,7]}}
+{"seed":"r2s-occupied-village-0","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[18,15]}}
+{"seed":"r2s-occupied-village-0","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[18,10]}}
+{"seed":"r2s-occupied-village-0","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[18,16]}}
+{"seed":"r2s-occupied-village-0","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[18,10]}}
+{"seed":"r2s-occupied-village-0","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[18,16]}}
+{"seed":"r2s-occupied-village-0","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[18,16]}}
+{"seed":"r2s-occupied-village-2","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[58,48]}}
+{"seed":"r2s-occupied-village-2","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[58,41]}}
+{"seed":"r2s-occupied-village-2","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[58,42]}}
+{"seed":"r2s-occupied-village-2","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[58,51]}}
+{"seed":"r2s-occupied-town-0","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[40,39]}}
+{"seed":"r2s-occupied-town-0","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[40,38]}}
+{"seed":"r2s-occupied-town-0","tier":"town","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[40,39]}}
+{"seed":"r2s-occupied-town-0","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[40,38]}}
+{"seed":"r2s-occupied-town-0","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[40,38]}}
+{"seed":"r2s-occupied-town-0","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[40,37]}}
+{"seed":"r2s-occupied-town-0","tier":"town","kind":"add","house":null,"to":"Warden's Lodge","jobs":["wardens"],"falls":{"military":[35,34]}}
+{"seed":"r2s-occupied-town-0","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[40,38]}}
+{"seed":"r2s-occupied-town-0","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"economic":[40,38]}}
+{"seed":"r2s-occupied-town-0","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"economic":[40,38]}}
+{"seed":"r2s-occupied-town-1","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[45,44]}}
+{"seed":"r2s-occupied-town-3","tier":"town","kind":"enlarge","house":"Monastery or friary","to":"Multiple monasteries","jobs":["hospital"],"falls":{"military":[38,32],"economic":[68,64],"readiness":[42,39]}}
+{"seed":"r2s-occupied-town-3","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"military":[38,37]}}
+{"seed":"r2s-occupied-town-3","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[68,67]}}
+{"seed":"r2s-occupied-town-3","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[38,37]}}
+{"seed":"r2s-occupied-town-3","tier":"town","kind":"add","house":null,"to":"Warden's Lodge","jobs":["wardens"],"falls":{"military":[38,37]}}
+{"seed":"r2s-occupied-town-3","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[38,37]}}
+{"seed":"r2s-politically_fractured-hamlet-3","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[15,12]}}
+{"seed":"r2s-politically_fractured-hamlet-3","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[15,11]}}
+{"seed":"r2s-politically_fractured-village-1","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[17,16]}}
+{"seed":"r2s-politically_fractured-village-1","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[17,10]}}
+{"seed":"r2s-politically_fractured-village-1","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[17,10]}}
+{"seed":"r2s-politically_fractured-village-1","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[17,15]}}
+{"seed":"r2s-politically_fractured-village-2","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[28,22]}}
+{"seed":"r2s-politically_fractured-village-2","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[28,22]}}
+{"seed":"r2s-politically_fractured-village-2","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[28,22]}}
+{"seed":"r2s-politically_fractured-village-2","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[28,22]}}
+{"seed":"r2s-politically_fractured-village-2","tier":"village","kind":"add","house":null,"to":"Town hall","jobs":["court"],"falls":{"military":[60,57]}}
+{"seed":"r2s-politically_fractured-village-2","tier":"village","kind":"add","house":null,"to":"Courthouse","jobs":["court"],"falls":{"military":[60,57]}}
+{"seed":"r2s-politically_fractured-village-2","tier":"village","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[60,57]}}
+{"seed":"r2s-politically_fractured-village-3","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[27,25]}}
+{"seed":"r2s-politically_fractured-village-3","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[27,24]}}
+{"seed":"r2s-politically_fractured-village-3","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[27,24]}}
+{"seed":"r2s-politically_fractured-village-3","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[27,25]}}
+{"seed":"r2s-politically_fractured-town-0","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[35,34]}}
+{"seed":"r2s-politically_fractured-town-0","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[35,34]}}
+{"seed":"r2s-politically_fractured-town-0","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[35,34]}}
+{"seed":"r2s-politically_fractured-town-0","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"economic":[35,34]}}
+{"seed":"r2s-politically_fractured-town-0","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"economic":[35,34]}}
+{"seed":"r2s-politically_fractured-town-0","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"economic":[35,34]}}
+{"seed":"r2s-politically_fractured-town-3","tier":"town","kind":"enlarge","house":"Monastery or friary","to":"Multiple monasteries","jobs":["hospital"],"falls":{"military":[13,7],"economic":[40,36],"readiness":[21,19]}}
+{"seed":"r2s-politically_fractured-town-3","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[40,39]}}
+{"seed":"r2s-politically_fractured-city-2","tier":"city","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"monster":[45,44]}}
+{"seed":"r2s-politically_fractured-city-2","tier":"city","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"monster":[45,44],"economic":[82,80]}}
+{"seed":"r2s-indebted-village-1","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[22,21]}}
+{"seed":"r2s-indebted-village-1","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[22,21]}}
+{"seed":"r2s-indebted-village-1","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[22,21]}}
+{"seed":"r2s-indebted-village-1","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[22,20]}}
+{"seed":"r2s-indebted-village-3","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[18,17]}}
+{"seed":"r2s-indebted-village-3","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[18,16]}}
+{"seed":"r2s-indebted-village-3","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[18,17]}}
+{"seed":"r2s-indebted-town-0","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"military":[64,63]}}
+{"seed":"r2s-indebted-town-0","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"military":[64,63]}}
+{"seed":"r2s-indebted-town-0","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[64,63]}}
+{"seed":"r2s-indebted-town-0","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[64,63]}}
+{"seed":"r2s-indebted-town-1","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"military":[57,56]}}
+{"seed":"r2s-indebted-town-1","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[40,39]}}
+{"seed":"r2s-indebted-town-1","tier":"town","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"internal":[19,18]}}
+{"seed":"r2s-indebted-town-1","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[57,56]}}
+{"seed":"r2s-indebted-town-1","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"internal":[19,18]}}
+{"seed":"r2s-indebted-town-1","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[57,56]}}
+{"seed":"r2s-indebted-town-2","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[4,3]}}
+{"seed":"r2s-indebted-town-2","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[4,3]}}
+{"seed":"r2s-recently_betrayed-hamlet-1","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[18,16]}}
+{"seed":"r2s-recently_betrayed-hamlet-1","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[18,10]}}
+{"seed":"r2s-recently_betrayed-village-0","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[29,24]}}
+{"seed":"r2s-recently_betrayed-village-0","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[29,19]}}
+{"seed":"r2s-recently_betrayed-village-0","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[29,19]}}
+{"seed":"r2s-recently_betrayed-village-0","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[29,23]}}
+{"seed":"r2s-recently_betrayed-village-1","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[38,28]}}
+{"seed":"r2s-recently_betrayed-village-1","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[38,24]}}
+{"seed":"r2s-recently_betrayed-village-1","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[38,27]}}
+{"seed":"r2s-recently_betrayed-village-1","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[38,30]}}
+{"seed":"r2s-recently_betrayed-village-2","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[23,20]}}
+{"seed":"r2s-recently_betrayed-village-2","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[23,13]}}
+{"seed":"r2s-recently_betrayed-village-2","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[23,14]}}
+{"seed":"r2s-recently_betrayed-village-2","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[23,20]}}
+{"seed":"r2s-recently_betrayed-village-2","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[23,19]}}
+{"seed":"r2s-recently_betrayed-village-3","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[27,19]}}
+{"seed":"r2s-recently_betrayed-village-3","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[27,14]}}
+{"seed":"r2s-recently_betrayed-village-3","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[27,14]}}
+{"seed":"r2s-recently_betrayed-village-3","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[27,25]}}
+{"seed":"r2s-recently_betrayed-village-3","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[27,18]}}
+{"seed":"r2s-recently_betrayed-town-0","tier":"town","kind":"enlarge","house":"Monastery or friary","to":"Multiple monasteries","jobs":["hospital"],"falls":{"military":[53,46],"economic":[77,73],"readiness":[37,34]}}
+{"seed":"r2s-recently_betrayed-town-0","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[77,76]}}
+{"seed":"r2s-recently_betrayed-town-0","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[77,76]}}
+{"seed":"r2s-recently_betrayed-town-0","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[77,73]}}
+{"seed":"r2s-recently_betrayed-town-0","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[77,75]}}
+{"seed":"r2s-recently_betrayed-town-2","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"military":[22,21]}}
+{"seed":"r2s-recently_betrayed-town-2","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[22,21]}}
+{"seed":"r2s-recently_betrayed-town-2","tier":"town","kind":"add","house":null,"to":"Warden's Lodge","jobs":["wardens"],"falls":{"military":[22,21]}}
+{"seed":"r2s-recently_betrayed-town-2","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[22,21]}}
+{"seed":"r2s-recently_betrayed-town-3","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"military":[42,41]}}
+{"seed":"r2s-recently_betrayed-town-3","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[51,48]}}
+{"seed":"r2s-recently_betrayed-town-3","tier":"town","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[51,49]}}
+{"seed":"r2s-recently_betrayed-town-3","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[51,49]}}
+{"seed":"r2s-recently_betrayed-town-3","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[51,49]}}
+{"seed":"r2s-recently_betrayed-town-3","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"military":[42,41]}}
+{"seed":"r2s-recently_betrayed-town-3","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[42,41]}}
+{"seed":"r2s-recently_betrayed-town-3","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"economic":[51,49]}}
+{"seed":"r2s-recently_betrayed-town-3","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[51,48]}}
+{"seed":"r2s-recently_betrayed-town-3","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"economic":[51,49]}}
+{"seed":"r2s-recently_betrayed-town-3","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"economic":[51,49]}}
+{"seed":"r2s-recently_betrayed-town-3","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[42,41]}}
+{"seed":"r2s-infiltrated-hamlet-1","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[23,21]}}
+{"seed":"r2s-infiltrated-hamlet-1","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[23,17]}}
+{"seed":"r2s-infiltrated-hamlet-2","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[31,27]}}
+{"seed":"r2s-infiltrated-hamlet-3","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[23,20]}}
+{"seed":"r2s-infiltrated-hamlet-3","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[23,21]}}
+{"seed":"r2s-infiltrated-village-0","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[32,22]}}
+{"seed":"r2s-infiltrated-village-0","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[32,18]}}
+{"seed":"r2s-infiltrated-village-0","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[32,19]}}
+{"seed":"r2s-infiltrated-village-0","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[32,30]}}
+{"seed":"r2s-infiltrated-village-0","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[32,21]}}
+{"seed":"r2s-infiltrated-village-1","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[23,18]}}
+{"seed":"r2s-infiltrated-village-1","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[23,14]}}
+{"seed":"r2s-infiltrated-village-1","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[23,14]}}
+{"seed":"r2s-infiltrated-village-1","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[23,21]}}
+{"seed":"r2s-infiltrated-village-2","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[25,24]}}
+{"seed":"r2s-infiltrated-village-2","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[25,21]}}
+{"seed":"r2s-infiltrated-village-2","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[25,24]}}
+{"seed":"r2s-infiltrated-village-2","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[25,23]}}
+{"seed":"r2s-infiltrated-village-3","tier":"village","kind":"add","house":null,"to":"Town hall","jobs":["court"],"falls":{"military":[60,54]}}
+{"seed":"r2s-infiltrated-village-3","tier":"village","kind":"add","house":null,"to":"Courthouse","jobs":["court"],"falls":{"military":[60,54]}}
+{"seed":"r2s-infiltrated-village-3","tier":"village","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[60,54]}}
+{"seed":"r2s-infiltrated-town-1","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[54,53]}}
+{"seed":"r2s-infiltrated-town-1","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[54,52]}}
+{"seed":"r2s-infiltrated-town-1","tier":"town","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[54,53]}}
+{"seed":"r2s-infiltrated-town-1","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[54,53]}}
+{"seed":"r2s-infiltrated-town-1","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[54,51]}}
+{"seed":"r2s-infiltrated-town-1","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"economic":[54,53]}}
+{"seed":"r2s-infiltrated-town-1","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[54,52]}}
+{"seed":"r2s-infiltrated-town-1","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"economic":[54,53]}}
+{"seed":"r2s-infiltrated-town-1","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"economic":[54,53]}}
+{"seed":"r2s-infiltrated-town-2","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[70,69]}}
+{"seed":"r2s-infiltrated-town-2","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[70,69]}}
+{"seed":"r2s-infiltrated-town-2","tier":"town","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[70,68]}}
+{"seed":"r2s-infiltrated-town-2","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[70,65]}}
+{"seed":"r2s-infiltrated-town-2","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"economic":[70,68]}}
+{"seed":"r2s-infiltrated-town-2","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[70,66]}}
+{"seed":"r2s-plague_onset-hamlet-2","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[8,7]}}
+{"seed":"r2s-plague_onset-village-1","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[38,37]}}
+{"seed":"r2s-plague_onset-village-1","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[38,34]}}
+{"seed":"r2s-plague_onset-village-1","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[38,37]}}
+{"seed":"r2s-plague_onset-town-3","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"military":[36,35]}}
+{"seed":"r2s-plague_onset-town-3","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[36,35]}}
+{"seed":"r2s-plague_onset-town-3","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"internal":[22,21]}}
+{"seed":"r2s-plague_onset-town-3","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[36,35]}}
+{"seed":"r2s-succession_void-hamlet-3","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[25,19]}}
+{"seed":"r2s-succession_void-hamlet-3","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[25,14]}}
+{"seed":"r2s-succession_void-village-0","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[32,25]}}
+{"seed":"r2s-succession_void-village-0","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[32,25]}}
+{"seed":"r2s-succession_void-village-0","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[32,24]}}
+{"seed":"r2s-succession_void-village-0","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[32,29]}}
+{"seed":"r2s-succession_void-village-0","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[32,30]}}
+{"seed":"r2s-succession_void-village-1","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[40,27]}}
+{"seed":"r2s-succession_void-village-1","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[40,23]}}
+{"seed":"r2s-succession_void-village-1","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[40,36]}}
+{"seed":"r2s-succession_void-village-1","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[40,26]}}
+{"seed":"r2s-succession_void-village-1","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[40,37]}}
+{"seed":"r2s-succession_void-village-1","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[40,30]}}
+{"seed":"r2s-succession_void-village-2","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[22,15]}}
+{"seed":"r2s-succession_void-village-2","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[22,10]}}
+{"seed":"r2s-succession_void-village-2","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[22,10]}}
+{"seed":"r2s-succession_void-village-2","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[22,20]}}
+{"seed":"r2s-succession_void-village-2","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[22,18]}}
+{"seed":"r2s-succession_void-village-3","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[22,17]}}
+{"seed":"r2s-succession_void-village-3","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[22,12]}}
+{"seed":"r2s-succession_void-village-3","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[22,21]}}
+{"seed":"r2s-succession_void-village-3","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[22,15]}}
+{"seed":"r2s-succession_void-village-3","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[22,19]}}
+{"seed":"r2s-succession_void-village-3","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[22,21]}}
+{"seed":"r2s-succession_void-town-0","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[77,76]}}
+{"seed":"r2s-succession_void-town-2","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"military":[38,37],"economic":[41,40]}}
+{"seed":"r2s-succession_void-town-2","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"military":[38,37],"economic":[41,40]}}
+{"seed":"r2s-succession_void-town-2","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"military":[38,37],"economic":[41,40]}}
+{"seed":"r2s-succession_void-town-2","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[41,39]}}
+{"seed":"r2s-succession_void-town-2","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"military":[38,37],"economic":[41,40]}}
+{"seed":"r2s-succession_void-town-2","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"military":[38,37],"economic":[41,40]}}
+{"seed":"r2s-succession_void-town-2","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"military":[38,37],"economic":[41,40]}}
+{"seed":"r2s-succession_void-town-3","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"military":[53,52]}}
+{"seed":"r2s-succession_void-town-3","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[29,28]}}
+{"seed":"r2s-succession_void-town-3","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[29,28]}}
+{"seed":"r2s-succession_void-town-3","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[29,28]}}
+{"seed":"r2s-succession_void-town-3","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"military":[53,52]}}
+{"seed":"r2s-succession_void-town-3","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[53,52]}}
+{"seed":"r2s-succession_void-town-3","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[29,28]}}
+{"seed":"r2s-succession_void-town-3","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"economic":[29,28]}}
+{"seed":"r2s-succession_void-town-3","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"economic":[29,28]}}
+{"seed":"r2s-succession_void-town-3","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[53,52]}}
+{"seed":"r2s-monster_pressure-hamlet-0","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[25,18]}}
+{"seed":"r2s-monster_pressure-hamlet-0","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[25,18]}}
+{"seed":"r2s-monster_pressure-hamlet-1","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[31,29]}}
+{"seed":"r2s-monster_pressure-hamlet-1","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[31,24]}}
+{"seed":"r2s-monster_pressure-hamlet-2","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[40,35]}}
+{"seed":"r2s-monster_pressure-hamlet-3","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[28,25]}}
+{"seed":"r2s-monster_pressure-village-0","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[25,15]}}
+{"seed":"r2s-monster_pressure-village-0","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[25,16]}}
+{"seed":"r2s-monster_pressure-village-0","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[25,16]}}
+{"seed":"r2s-monster_pressure-village-0","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[25,15]}}
+{"seed":"r2s-monster_pressure-town-2","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[76,74]}}
+{"seed":"r2s-monster_pressure-town-2","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[76,73]}}
+{"seed":"r2s-monster_pressure-town-2","tier":"town","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[76,73]}}
+{"seed":"r2s-monster_pressure-town-2","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[76,74]}}
+{"seed":"r2s-monster_pressure-town-2","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[76,74]}}
+{"seed":"r2s-monster_pressure-town-2","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[76,71]}}
+{"seed":"r2s-monster_pressure-town-2","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"economic":[76,74]}}
+{"seed":"r2s-monster_pressure-town-2","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"economic":[76,74]}}
+{"seed":"r2s-insurgency-village-3","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[32,27]}}
+{"seed":"r2s-insurgency-village-3","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[32,27]}}
+{"seed":"r2s-insurgency-village-3","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[32,30]}}
+{"seed":"r2s-insurgency-town-1","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[77,75]}}
+{"seed":"r2s-insurgency-town-1","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[77,73]}}
+{"seed":"r2s-insurgency-town-1","tier":"town","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[77,74]}}
+{"seed":"r2s-insurgency-town-1","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[77,74]}}
+{"seed":"r2s-insurgency-town-1","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[77,74]}}
+{"seed":"r2s-insurgency-town-1","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[77,71]}}
+{"seed":"r2s-insurgency-town-1","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"economic":[77,74]}}
+{"seed":"r2s-insurgency-town-1","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[77,71]}}
+{"seed":"r2s-insurgency-town-1","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"economic":[77,74]}}
+{"seed":"r2s-insurgency-town-1","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"economic":[77,74]}}
+{"seed":"r2s-insurgency-town-2","tier":"town","kind":"enlarge","house":"Alchemist shop","to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[74,72]}}
+{"seed":"r2s-insurgency-town-2","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"military":[67,66]}}
+{"seed":"r2s-insurgency-town-2","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[74,73]}}
+{"seed":"r2s-insurgency-town-2","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"military":[67,66]}}
+{"seed":"r2s-insurgency-town-2","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[67,66]}}
+{"seed":"r2s-insurgency-town-2","tier":"town","kind":"add","house":null,"to":"Warden's Lodge","jobs":["wardens"],"falls":{"military":[67,66]}}
+{"seed":"r2s-insurgency-town-2","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"economic":[74,72]}}
+{"seed":"r2s-insurgency-town-2","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[74,70]}}
+{"seed":"r2s-insurgency-town-2","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[67,66]}}
+{"seed":"r2s-religious_conversion-hamlet-0","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[28,20]}}
+{"seed":"r2s-religious_conversion-hamlet-0","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[28,16]}}
+{"seed":"r2s-religious_conversion-hamlet-1","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[23,22]}}
+{"seed":"r2s-religious_conversion-hamlet-1","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[23,20]}}
+{"seed":"r2s-religious_conversion-hamlet-3","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[40,32]}}
+{"seed":"r2s-religious_conversion-hamlet-3","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[40,27]}}
+{"seed":"r2s-religious_conversion-village-0","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[32,28]}}
+{"seed":"r2s-religious_conversion-village-0","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[32,28]}}
+{"seed":"r2s-religious_conversion-village-1","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[44,33]}}
+{"seed":"r2s-religious_conversion-village-1","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[44,28]}}
+{"seed":"r2s-religious_conversion-village-1","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[44,39]}}
+{"seed":"r2s-religious_conversion-village-1","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[44,28]}}
+{"seed":"r2s-religious_conversion-village-1","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[44,41]}}
+{"seed":"r2s-religious_conversion-village-1","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[44,36]}}
+{"seed":"r2s-religious_conversion-village-2","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[29,27]}}
+{"seed":"r2s-religious_conversion-village-2","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[29,26]}}
+{"seed":"r2s-religious_conversion-village-2","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[29,27]}}
+{"seed":"r2s-religious_conversion-village-2","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[29,27]}}
+{"seed":"r2s-religious_conversion-town-0","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[19,18]}}
+{"seed":"r2s-religious_conversion-town-0","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[19,18]}}
+{"seed":"r2s-religious_conversion-town-1","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[67,65]}}
+{"seed":"r2s-religious_conversion-town-1","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[67,66]}}
+{"seed":"r2s-religious_conversion-town-1","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[67,64]}}
+{"seed":"r2s-religious_conversion-town-1","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[67,65]}}
+{"seed":"r2s-religious_conversion-town-1","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"economic":[67,66]}}
+{"seed":"r2s-religious_conversion-town-1","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"economic":[67,66]}}
+{"seed":"r2s-religious_conversion-town-3","tier":"town","kind":"enlarge","house":"Monastery or friary","to":"Multiple monasteries","jobs":["hospital"],"falls":{"military":[58,52],"readiness":[51,50]}}
+{"seed":"r2s-slave_revolt-hamlet-1","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[36,32]}}
+{"seed":"r2s-slave_revolt-hamlet-1","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[36,24]}}
+{"seed":"r2s-slave_revolt-hamlet-3","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[25,20]}}
+{"seed":"r2s-slave_revolt-hamlet-3","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[25,16]}}
+{"seed":"r2s-slave_revolt-village-1","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[27,25]}}
+{"seed":"r2s-slave_revolt-village-1","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[27,20]}}
+{"seed":"r2s-slave_revolt-village-1","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[27,20]}}
+{"seed":"r2s-slave_revolt-village-2","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[30,26]}}
+{"seed":"r2s-slave_revolt-village-2","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[30,23]}}
+{"seed":"r2s-slave_revolt-village-2","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[30,23]}}
+{"seed":"r2s-slave_revolt-village-2","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[30,29]}}
+{"seed":"r2s-slave_revolt-village-3","tier":"village","kind":"add","house":null,"to":"Town hall","jobs":["court"],"falls":{"military":[67,64]}}
+{"seed":"r2s-slave_revolt-village-3","tier":"village","kind":"add","house":null,"to":"Courthouse","jobs":["court"],"falls":{"military":[67,64]}}
+{"seed":"r2s-slave_revolt-village-3","tier":"village","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[67,64]}}
+{"seed":"r2s-slave_revolt-town-0","tier":"town","kind":"enlarge","house":"Monastery or friary","to":"Multiple monasteries","jobs":["hospital"],"falls":{"military":[73,67],"readiness":[51,50]}}
+{"seed":"r2s-slave_revolt-town-1","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"military":[57,56],"economic":[60,58]}}
+{"seed":"r2s-slave_revolt-town-1","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"military":[57,56],"economic":[60,59]}}
+{"seed":"r2s-slave_revolt-town-1","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"military":[57,56],"economic":[60,59]}}
+{"seed":"r2s-slave_revolt-town-1","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"military":[57,56],"economic":[60,59]}}
+{"seed":"r2s-slave_revolt-town-1","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"military":[57,56],"economic":[60,59]}}
+{"seed":"r2s-slave_revolt-town-3","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"military":[4,3]}}
+{"seed":"r2s-slave_revolt-town-3","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[43,42]}}
+{"seed":"r2s-slave_revolt-town-3","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"military":[4,3]}}
+{"seed":"r2s-slave_revolt-town-3","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[4,3]}}
+{"seed":"r2s-slave_revolt-town-3","tier":"town","kind":"add","house":null,"to":"Warden's Lodge","jobs":["wardens"],"falls":{"military":[4,3]}}
+{"seed":"r2s-slave_revolt-town-3","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[4,3]}}
+{"seed":"r2s-wartime-village-0","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[22,20]}}
+{"seed":"r2s-wartime-town-1","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"military":[19,18]}}
+{"seed":"r2s-wartime-town-1","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[19,18]}}
+{"seed":"r2s-wartime-town-1","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[19,18]}}
+{"seed":"r2s-wartime-town-2","tier":"town","kind":"enlarge","house":"Alchemist shop","to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[64,62]}}
+{"seed":"r2s-wartime-town-2","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"economic":[64,62]}}
+{"seed":"r2s-wartime-town-2","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[64,61]}}
+{"seed":"r2s-wartime-town-3","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"military":[56,55]}}
+{"seed":"r2s-wartime-town-3","tier":"town","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"military":[56,55]}}
+{"seed":"r2s-wartime-town-3","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"military":[56,55]}}
+{"seed":"r2s-wartime-town-3","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"military":[56,55]}}
+{"seed":"r2s-wartime-town-3","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"military":[56,55]}}
+{"seed":"r2s-wartime-town-3","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"military":[56,55],"economic":[63,62]}}
+{"seed":"r2s-wartime-town-3","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"military":[56,55]}}
+{"seed":"r2s-wartime-town-3","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"military":[56,55]}}
+{"seed":"r2s-mass_migration-hamlet-2","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[35,32]}}
+{"seed":"r2s-mass_migration-village-3","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[27,24]}}
+{"seed":"r2s-mass_migration-village-3","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[27,19]}}
+{"seed":"r2s-mass_migration-village-3","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[27,19]}}
+{"seed":"r2s-mass_migration-village-3","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[27,26]}}
+{"seed":"r2s-mass_migration-town-0","tier":"town","kind":"enlarge","house":"Monastery or friary","to":"Multiple monasteries","jobs":["hospital"],"falls":{"military":[84,78],"readiness":[65,63]}}
+{"seed":"r2s-mass_migration-town-1","tier":"town","kind":"enlarge","house":"Monastery or friary","to":"Multiple monasteries","jobs":["hospital"],"falls":{"military":[57,50],"economic":[87,86],"readiness":[47,45]}}
+{"seed":"r2s-mass_migration-town-2","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"military":[15,14]}}
+{"seed":"r2s-mass_migration-town-2","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[47,46]}}
+{"seed":"rv5-calm-hamlet-1","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[23,19]}}
+{"seed":"rv5-calm-hamlet-2","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[46,41]}}
+{"seed":"rv5-calm-hamlet-2","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[46,34]}}
+{"seed":"rv5-calm-hamlet-3","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[36,30]}}
+{"seed":"rv5-calm-hamlet-3","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[36,30]}}
+{"seed":"rv5-calm-village-0","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[24,22]}}
+{"seed":"rv5-calm-village-3","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[46,27]}}
+{"seed":"rv5-calm-village-3","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[46,25]}}
+{"seed":"rv5-calm-village-3","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[46,41]}}
+{"seed":"rv5-calm-village-3","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[46,25]}}
+{"seed":"rv5-calm-village-3","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[46,42]}}
+{"seed":"rv5-calm-village-3","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[46,30]}}
+{"seed":"rv5-calm-village-4","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[38,34]}}
+{"seed":"rv5-calm-village-4","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[38,32]}}
+{"seed":"rv5-calm-village-4","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[38,33]}}
+{"seed":"rv5-calm-village-4","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[38,33]}}
+{"seed":"rv5-calm-town-3","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[40,39]}}
+{"seed":"rv5-calm-town-3","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[71,70]}}
+{"seed":"rv5-calm-town-3","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[71,70]}}
+{"seed":"rv5-under_siege-village-1","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[31,27]}}
+{"seed":"rv5-under_siege-village-1","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[31,24]}}
+{"seed":"rv5-under_siege-village-1","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[31,28]}}
+{"seed":"rv5-under_siege-village-1","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[31,29]}}
+{"seed":"rv5-under_siege-village-2","tier":"village","kind":"add","house":null,"to":"Town hall","jobs":["court"],"falls":{"military":[58,55]}}
+{"seed":"rv5-under_siege-village-2","tier":"village","kind":"add","house":null,"to":"Courthouse","jobs":["court"],"falls":{"military":[58,55]}}
+{"seed":"rv5-under_siege-village-2","tier":"village","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[58,55]}}
+{"seed":"rv5-under_siege-village-4","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[21,20]}}
+{"seed":"rv5-under_siege-village-4","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[21,15]}}
+{"seed":"rv5-under_siege-village-4","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[21,15]}}
+{"seed":"rv5-under_siege-village-5","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[29,23]}}
+{"seed":"rv5-under_siege-village-5","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[29,18]}}
+{"seed":"rv5-under_siege-village-5","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[29,19]}}
+{"seed":"rv5-under_siege-village-5","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[29,22]}}
+{"seed":"rv5-under_siege-town-0","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[39,38]}}
+{"seed":"rv5-under_siege-town-0","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[39,37]}}
+{"seed":"rv5-under_siege-town-1","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[45,43]}}
+{"seed":"rv5-under_siege-town-1","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"military":[27,26],"economic":[45,42]}}
+{"seed":"rv5-under_siege-town-1","tier":"town","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"military":[27,26],"economic":[45,44]}}
+{"seed":"rv5-under_siege-town-1","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"military":[27,26],"economic":[45,43]}}
+{"seed":"rv5-under_siege-town-1","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"military":[27,26],"economic":[45,43]}}
+{"seed":"rv5-under_siege-town-1","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[45,40]}}
+{"seed":"rv5-under_siege-town-1","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"military":[27,26],"economic":[45,44]}}
+{"seed":"rv5-under_siege-town-1","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"military":[27,26],"economic":[45,42]}}
+{"seed":"rv5-under_siege-town-1","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"military":[27,26],"economic":[45,43]}}
+{"seed":"rv5-under_siege-town-1","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"military":[27,26],"economic":[45,43]}}
+{"seed":"rv5-under_siege-town-2","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"military":[34,33]}}
+{"seed":"rv5-under_siege-town-2","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"military":[34,33]}}
+{"seed":"rv5-under_siege-town-2","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"military":[34,33]}}
+{"seed":"rv5-under_siege-town-2","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"military":[34,33]}}
+{"seed":"rv5-under_siege-town-2","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"military":[34,33]}}
+{"seed":"rv5-under_siege-town-3","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[39,38]}}
+{"seed":"rv5-under_siege-town-4","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"military":[50,49]}}
+{"seed":"rv5-under_siege-town-4","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[27,25]}}
+{"seed":"rv5-under_siege-town-4","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[27,26]}}
+{"seed":"rv5-under_siege-town-4","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[27,26]}}
+{"seed":"rv5-under_siege-town-4","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[50,49]}}
+{"seed":"rv5-under_siege-town-4","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"economic":[27,26]}}
+{"seed":"rv5-under_siege-town-4","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"economic":[27,26]}}
+{"seed":"rv5-under_siege-town-4","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"economic":[27,26]}}
+{"seed":"rv5-under_siege-town-4","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[50,49]}}
+{"seed":"rv5-famine-hamlet-2","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[10,8]}}
+{"seed":"rv5-famine-hamlet-3","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[18,13]}}
+{"seed":"rv5-famine-hamlet-3","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[18,13]}}
+{"seed":"rv5-famine-village-0","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[1,0]}}
+{"seed":"rv5-famine-village-0","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[1,0]}}
+{"seed":"rv5-famine-village-2","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"internal":[14,13]}}
+{"seed":"rv5-famine-town-0","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[64,63]}}
+{"seed":"rv5-famine-town-0","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[64,63]}}
+{"seed":"rv5-famine-town-0","tier":"town","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"military":[46,45],"monster":[35,34]}}
+{"seed":"rv5-famine-town-0","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"monster":[35,34],"economic":[64,60]}}
+{"seed":"rv5-famine-town-0","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"military":[46,45],"monster":[35,34]}}
+{"seed":"rv5-famine-town-0","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"military":[46,45],"monster":[35,34]}}
+{"seed":"rv5-famine-town-1","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[21,20]}}
+{"seed":"rv5-famine-town-1","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[21,20]}}
+{"seed":"rv5-famine-town-1","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[21,20]}}
+{"seed":"rv5-famine-town-1","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[30,29]}}
+{"seed":"rv5-famine-town-1","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[21,20]}}
+{"seed":"rv5-famine-town-1","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"economic":[21,20]}}
+{"seed":"rv5-famine-town-1","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"economic":[21,20]}}
+{"seed":"rv5-famine-town-1","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[30,29]}}
+{"seed":"rv5-famine-town-4","tier":"town","kind":"enlarge","house":"Monastery or friary","to":"Multiple monasteries","jobs":["hospital"],"falls":{"military":[77,70],"readiness":[46,45]}}
+{"seed":"rv5-occupied-hamlet-0","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[5,3]}}
+{"seed":"rv5-occupied-hamlet-1","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[25,18]}}
+{"seed":"rv5-occupied-hamlet-1","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[25,14]}}
+{"seed":"rv5-occupied-hamlet-3","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[11,7]}}
+{"seed":"rv5-occupied-hamlet-3","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[11,7]}}
+{"seed":"rv5-occupied-hamlet-5","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[25,17]}}
+{"seed":"rv5-occupied-village-1","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[25,21]}}
+{"seed":"rv5-occupied-village-1","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[25,15]}}
+{"seed":"rv5-occupied-village-1","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[25,14]}}
+{"seed":"rv5-occupied-village-1","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[25,15]}}
+{"seed":"rv5-occupied-village-1","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[25,23]}}
+{"seed":"rv5-occupied-village-1","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[25,23]}}
+{"seed":"rv5-occupied-village-2","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[28,21]}}
+{"seed":"rv5-occupied-village-2","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[28,17]}}
+{"seed":"rv5-occupied-village-2","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[28,23]}}
+{"seed":"rv5-occupied-village-2","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[28,17]}}
+{"seed":"rv5-occupied-village-2","tier":"village","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[28,26]}}
+{"seed":"rv5-occupied-village-2","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[28,23]}}
+{"seed":"rv5-occupied-village-3","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[1,0]}}
+{"seed":"rv5-occupied-village-3","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[1,0]}}
+{"seed":"rv5-occupied-village-4","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[13,11]}}
+{"seed":"rv5-occupied-village-4","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[13,11]}}
+{"seed":"rv5-occupied-town-0","tier":"town","kind":"enlarge","house":"Alchemist shop","to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[89,87]}}
+{"seed":"rv5-occupied-town-0","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[89,87]}}
+{"seed":"rv5-occupied-town-0","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[89,88]}}
+{"seed":"rv5-occupied-town-0","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[89,88]}}
+{"seed":"rv5-occupied-town-0","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"economic":[89,86]}}
+{"seed":"rv5-occupied-town-0","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[89,85]}}
+{"seed":"rv5-occupied-town-0","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"economic":[89,88]}}
+{"seed":"rv5-occupied-town-0","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"economic":[89,88]}}
+{"seed":"rv5-occupied-town-2","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[28,27]}}
+{"seed":"rv5-occupied-town-2","tier":"town","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[28,27]}}
+{"seed":"rv5-occupied-town-2","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[28,27]}}
+{"seed":"rv5-occupied-town-2","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[28,27]}}
+{"seed":"rv5-occupied-town-2","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"economic":[28,27]}}
+{"seed":"rv5-occupied-town-2","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[28,27]}}
+{"seed":"rv5-occupied-town-2","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"economic":[28,27]}}
+{"seed":"rv5-occupied-town-2","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"economic":[28,27]}}
+{"seed":"rv5-occupied-town-3","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"military":[37,36]}}
+{"seed":"rv5-occupied-town-3","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"military":[37,36]}}
+{"seed":"rv5-occupied-town-3","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[37,36]}}
+{"seed":"rv5-occupied-town-3","tier":"town","kind":"add","house":null,"to":"Warden's Lodge","jobs":["wardens"],"falls":{"military":[37,36]}}
+{"seed":"rv5-occupied-town-3","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[37,36]}}
+{"seed":"rv5-occupied-town-5","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[44,43]}}
+{"seed":"rv5-occupied-town-5","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[44,42]}}
+{"seed":"rv5-occupied-town-5","tier":"town","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[44,43]}}
+{"seed":"rv5-occupied-town-5","tier":"town","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[44,43]}}
+{"seed":"rv5-occupied-town-5","tier":"town","kind":"add","house":null,"to":"Small hospital","jobs":["hospital"],"falls":{"economic":[44,43]}}
+{"seed":"rv5-occupied-town-5","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[44,41]}}
+{"seed":"rv5-occupied-town-5","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[35,34]}}
+{"seed":"rv5-occupied-town-5","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[44,42]}}
+{"seed":"rv5-occupied-town-5","tier":"town","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"economic":[44,43]}}
+{"seed":"rv5-occupied-town-5","tier":"town","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"economic":[44,43]}}
+{"seed":"rv5-occupied-town-5","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[35,34]}}
+{"seed":"rv5-occupied-metropolis-1","tier":"metropolis","kind":"add","house":null,"to":"Multiple monasteries","jobs":["hospital"],"falls":{"readiness":[76,75]}}
+{"seed":"rv5-occupied-metropolis-1","tier":"metropolis","kind":"add","house":null,"to":"Major hospital","jobs":["hospital"],"falls":{"readiness":[76,75]}}
+{"seed":"rv5-occupied-metropolis-1","tier":"metropolis","kind":"add","house":null,"to":"Major monasteries (5-10)","jobs":["hospital"],"falls":{"readiness":[76,75]}}
+{"seed":"rv5-occupied-metropolis-1","tier":"metropolis","kind":"add","house":null,"to":"Hospital network","jobs":["hospital"],"falls":{"readiness":[76,75]}}
+{"seed":"rv5-wartime-town-5","tier":"town","kind":"enlarge","house":"Monastery or friary","to":"Multiple monasteries","jobs":["hospital"],"falls":{"military":[21,15],"readiness":[36,35]}}
+{"seed":"rv5-wartime-town-5","tier":"town","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"monster":[23,22]}}
+{"seed":"rv5-wartime-town-5","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"monster":[23,22]}}
+{"seed":"rv5-wartime-town-5","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"monster":[23,22]}}
+{"seed":"rv5-monster_pressure-hamlet-1","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[1,0]}}
+{"seed":"rv5-monster_pressure-hamlet-3","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[31,22]}}
+{"seed":"rv5-monster_pressure-hamlet-3","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[31,22]}}
+{"seed":"rv5-monster_pressure-hamlet-4","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[23,19]}}
+{"seed":"rv5-monster_pressure-hamlet-4","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[23,20]}}
+{"seed":"rv5-monster_pressure-hamlet-5","tier":"hamlet","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[33,21]}}
+{"seed":"rv5-monster_pressure-hamlet-5","tier":"hamlet","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[33,21]}}
+{"seed":"rv5-monster_pressure-village-0","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[27,15]}}
+{"seed":"rv5-monster_pressure-village-0","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[27,15]}}
+{"seed":"rv5-monster_pressure-village-0","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[27,15]}}
+{"seed":"rv5-monster_pressure-village-0","tier":"village","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[27,18]}}
+{"seed":"rv5-monster_pressure-village-4","tier":"village","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"economic":[44,36]}}
+{"seed":"rv5-monster_pressure-village-4","tier":"village","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[44,36]}}
+{"seed":"rv5-monster_pressure-village-4","tier":"village","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"economic":[44,35]}}
+{"seed":"rv5-monster_pressure-village-4","tier":"village","kind":"add","house":null,"to":"Monastery or friary","jobs":["clergy","hospital"],"falls":{"economic":[44,37]}}
+{"seed":"rv5-monster_pressure-village-5","tier":"village","kind":"add","house":null,"to":"Town hall","jobs":["court"],"falls":{"military":[47,45]}}
+{"seed":"rv5-monster_pressure-village-5","tier":"village","kind":"add","house":null,"to":"Courthouse","jobs":["court"],"falls":{"military":[47,45]}}
+{"seed":"rv5-monster_pressure-village-5","tier":"village","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[47,45]}}
+{"seed":"rv5-monster_pressure-town-1","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[82,81]}}
+{"seed":"rv5-monster_pressure-town-2","tier":"town","kind":"add","house":null,"to":"Druid Circle","jobs":["druids"],"falls":{"military":[55,54]}}
+{"seed":"rv5-monster_pressure-town-3","tier":"town","kind":"enlarge","house":"Alchemist shop","to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[45,44]}}
+{"seed":"rv5-monster_pressure-town-3","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[45,44]}}
+{"seed":"rv5-monster_pressure-town-3","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"economic":[45,43]}}
+{"seed":"rv5-monster_pressure-town-3","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[33,32]}}
+{"seed":"rv5-monster_pressure-town-3","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"economic":[45,43]}}
+{"seed":"rv5-monster_pressure-town-3","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[33,32]}}
+{"seed":"rv5-monster_pressure-town-4","tier":"town","kind":"enlarge","house":"Monastery or friary","to":"Multiple monasteries","jobs":["hospital"],"falls":{"military":[26,20],"economic":[54,50],"readiness":[27,25]}}
+{"seed":"rv5-monster_pressure-town-4","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"economic":[54,53]}}
+{"seed":"rv5-monster_pressure-town-4","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"economic":[54,53]}}
+{"seed":"rv5-under_siege+famine-village-2","tier":"village","kind":"add","house":null,"to":"Town hall","jobs":["court"],"falls":{"military":[68,64]}}
+{"seed":"rv5-under_siege+famine-village-2","tier":"village","kind":"add","house":null,"to":"Courthouse","jobs":["court"],"falls":{"military":[68,64]}}
+{"seed":"rv5-under_siege+famine-village-2","tier":"village","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[68,64]}}
+{"seed":"rv5-under_siege+famine-town-3","tier":"town","kind":"add","house":null,"to":"Healer (divine, 1st level)","jobs":["hospital"],"falls":{"military":[49,48]}}
+{"seed":"rv5-under_siege+famine-town-3","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"military":[49,48],"readiness":[16,15]}}
+{"seed":"rv5-under_siege+famine-town-5","tier":"town","kind":"add","house":null,"to":"Alchemist shop","jobs":["alchemists"],"falls":{"monster":[3,2],"readiness":[6,5]}}
+{"seed":"rv5-under_siege+famine-town-5","tier":"town","kind":"add","house":null,"to":"Elder Grove Council","jobs":["druids"],"falls":{"monster":[3,2]}}
+{"seed":"rv5-under_siege+famine-town-5","tier":"town","kind":"add","house":null,"to":"Small prison/stocks","jobs":["prison"],"falls":{"military":[1,0]}}
+{"seed":"rv5-under_siege+famine-town-5","tier":"town","kind":"add","house":null,"to":"Warden's Lodge","jobs":["wardens"],"falls":{"military":[1,0]}}
+{"seed":"rv5-under_siege+famine-town-5","tier":"town","kind":"add","house":null,"to":"Apothecary district","jobs":["alchemists"],"falls":{"readiness":[6,5]}}
+{"seed":"rv5-under_siege+famine-town-5","tier":"town","kind":"add","house":null,"to":"Alchemist quarter","jobs":["alchemists"],"falls":{"monster":[3,2],"readiness":[6,5]}}
+{"seed":"rv5-under_siege+famine-town-5","tier":"town","kind":"add","house":null,"to":"Large prison","jobs":["prison"],"falls":{"military":[1,0]}}
