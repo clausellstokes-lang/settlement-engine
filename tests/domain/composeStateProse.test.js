@@ -353,7 +353,9 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
       // was one canonical line, gains two lines for a town with organised crime (v4, v5 `organised crime`, appended
       // after the three dm-only lines), so the cells where the run reaches such a town and draws v4 read vid 4 at
       // player index 1. MEASURED by this arm's own measuredApart at the lane's tip: 171 cells, one coordinate.
-      'DS-ECO-6 :: TIER: minor shadow activity (≥3)': { cells: 171, coordinates: ['vid 4 / index 1'] },
+      // W2-WRITE-SIDE-ECO-2 D #1378 (2026-11-14), re-declared BY IDENTITY: the canonical v0 is declared off organised crime,
+      // a famine and a siege, so one more recorded cell reads vid 4 at player index 1 (the same coordinate). MEASURED by this arm: 171 -> 172.
+      'DS-ECO-6 :: TIER: minor shadow activity (≥3)': { cells: 172, coordinates: ['vid 4 / index 1'] },
     };
     /** @type {Record<string, { cells: number, coordinates: string[] }>} */
     const measuredApart = {};

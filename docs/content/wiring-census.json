@@ -14031,8 +14031,9 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 1,
-        "no organised crime": 3,
+        "no crisis: famine": 1,
+        "no crisis: under_siege": 1,
+        "no organised crime": 4,
         "organised crime": 2
       },
       "undeclared": 0,

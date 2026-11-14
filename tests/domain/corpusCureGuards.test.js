@@ -68,6 +68,9 @@ const GUARDS = [
   { seed: 'w5-city-plague_onset-3', pool: 'DS-ECO-1::COMBINATION C4: a low rung on a working approach', vid: 2, why: 'a plague\'s quarantine: "Some trade comes past X, and little of it stops" beside "Nobody comes into X and nobody leaves" (round three #212; v1 carries the same mark)' },
   { seed: 'w5-city-plague_onset-3', pool: 'DS-ECO-1::COMBINATION C4: a low rung on a working approach', vid: 3, why: 'a plague\'s quarantine: "the {access} is busy; most of the traffic does not stop" beside "Nobody comes into X and nobody leaves" (round three #212; v1 carries the same mark)' },
   { seed: 'w5-thorp-plague_onset-1', pool: 'DS-ECO-1::COMBINATION C4: a low rung on a working approach', vid: 6, why: 'a plague\'s quarantine: "the trade that passes by" beside "Nobody comes into X and nobody leaves" (round three #212; v1 carries the same mark)' },
+  { seed: 'rww-city-calm-1', pool: 'DS-ECO-6::TIER: minor shadow activity (≥3)', vid: 0, why: 'organised crime: "a nuisance, nothing more" beside a thieves\' guild chapter and an organised syndicate (the increment\'s ww791; round three #1378; v4 v5 are the organised rows)' },
+  { seed: 'rww-hamlet-famine-1', pool: 'DS-ECO-6::TIER: minor shadow activity (≥3)', vid: 0, why: 'a famine: "a nuisance, nothing more" beside "Desperate: hunger is eroding order" (the increment\'s ww36)' },
+  { seed: 'rww-village-under_siege-1', pool: 'DS-ECO-6::TIER: minor shadow activity (≥3)', vid: 0, why: 'a siege: "a nuisance, nothing more" beside desperation theft and black-market food (the increment\'s ww1245)' },
 ];
 
 /** @param {string} seed */

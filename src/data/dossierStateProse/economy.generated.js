@@ -2098,7 +2098,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "canonical",
           "marks": [
-            "colour"
+            "no organised crime",
+            "no crisis: famine",
+            "no crisis: under_siege"
           ],
           "text": "Some petty theft goes on here, and some trading without a licence. It is a nuisance, nothing more.",
           "slots": [],
