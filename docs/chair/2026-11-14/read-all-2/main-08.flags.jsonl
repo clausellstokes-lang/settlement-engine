@@ -1,0 +1,58 @@
+{"id":"21281","town":"r2s-under_siege-town-0","sev":"MED","kind":"STATE","why":"says the town keeps people under arms; DEFENCE has no garrison, militia or hired force, only a town watch","other":""}
+{"id":"21649","town":"r2s-under_siege-town-0","sev":"MED","kind":"STATE","why":"criminals run the street order, but Thieves' Guild is Suppressed and Town Council is winning against it","other":"21896"}
+{"id":"11922","town":"r2s-under_siege-town-0","sev":"MED","kind":"LACKS","why":"'Court only' legal infrastructure; HOUSES has no court (only Town hall, Mayor and council)","other":""}
+{"id":"05733","town":"r2s-under_siege-town-0","sev":"MED","kind":"LACKS","why":"'Courts without detention'; HOUSES lists no court","other":""}
+{"id":"03247","town":"r2s-under_siege-town-1","sev":"MED","kind":"STATE","why":"adventurers, merchants and scouts all stop here; town is under siege with the roads shut","other":""}
+{"id":"04627","town":"r2s-under_siege-town-1","sev":"MED","kind":"STATE","why":"smelter reduces ore for any buyer; Smelting & Refining is impaired, iron ore depleted, gaps say smelter lacks ore, no iron made here","other":""}
+{"id":"17202","town":"r2s-under_siege-town-1","sev":"MED","kind":"STATE","why":"says smelter turns raw ore to ingots; chain impaired, iron ore depleted, gaps say it lacks ore","other":""}
+{"id":"15417","town":"r2s-under_siege-town-1","sev":"MED","kind":"STATE","why":"offers refined iron ingots; Smelting & Refining impaired, iron ore depleted, TRADE makes no iron","other":""}
+{"id":"14840","town":"r2s-under_siege-town-1","sev":"MED","kind":"STATE","why":"offers pig iron; Smelting & Refining impaired, iron ore depleted, TRADE makes no iron","other":""}
+{"id":"04587","town":"r2s-under_siege-town-1","sev":"MED","kind":"STATE","why":"offers cast iron goods; Smelting & Refining impaired, iron ore depleted, TRADE makes no iron","other":""}
+{"id":"14785","town":"r2s-under_siege-town-1","sev":"MED","kind":"STATE","why":"says the two powers keep quarrelling; QUARRELS is none, relation is tense but stable","other":""}
+{"id":"19177","town":"r2s-under_siege-town-1","sev":"MED","kind":"STATE","why":"church says magic is heresy and reports spell-workers; town keeps a Wizard's tower and gets 31% of food by magic","other":""}
+{"id":"01036","town":"r2s-famine-town-2","sev":"MED","kind":"STATE","why":"calls the town orderly; stability reads Desperate, hunger eroding order, legitimacy crisis, safety Dangerous","other":""}
+{"id":"11046","town":"r2s-famine-town-2","sev":"MED","kind":"STATE","why":"puts Güchlüg Jirgin 'of Town Mayor'; PEOPLE has them as granary reeve of the Town granary, not in the Mayor's ruling three","other":"19381"}
+{"id":"15904","town":"r2s-famine-town-2","sev":"MED","kind":"STATE","why":"salted and smoked seafood as a product; Fishing Grounds depleted, Fishing & Seafood impaired, TRADE makes none","other":""}
+{"id":"22098","town":"r2s-famine-town-2","sev":"MED","kind":"STATE","why":"says Town Mayor and Thieves' Guild leave each other alone; QUARRELS has them tense and escalating","other":""}
+{"id":"14093","town":"r2s-famine-town-2","sev":"MED","kind":"STATE","why":"says neither side pushes the other; relation is tense, escalating","other":"22098"}
+{"id":"22104","town":"r2s-famine-town-2","sev":"MED","kind":"STATE","why":"Mayor leaves Thieves' Guild alone; relation is tense, escalating","other":""}
+{"id":"HEADER","town":"r2s-famine-town-2","sev":"MED","kind":"RECORD","why":"FOUNDING: founded by a noble granted crown lands, yet reason is artisans pooling resources for a workshop district; both cannot hold (see 14542)","other":"14542"}
+{"id":"11037","town":"r2s-famine-town-3","sev":"MED","kind":"STATE","why":"puts Maisa al-Qadir 'of Arcane Council'; PEOPLE has her as granary reeve of the Town granary, not among the council's three","other":""}
+{"id":"09848","town":"r2s-famine-town-3","sev":"MED","kind":"LACKS","why":"'the town court'; HOUSES has no court, only Town council and Town hall","other":""}
+{"id":"03654","town":"r2s-famine-town-3","sev":"MED","kind":"STATE","why":"says Arcane Council leaves Thieves' Guild alone; QUARRELS has an open moderate quarrel and a tense, escalating relation","other":"25123"}
+{"id":"03644","town":"r2s-famine-town-3","sev":"MED","kind":"STATE","why":"says the two leave each other alone; QUARRELS open moderate quarrel, tense and escalating","other":"25123"}
+{"id":"14045","town":"r2s-famine-town-3","sev":"MED","kind":"STATE","why":"says neither side pushes the other; relation is tense, escalating, with an informer planted","other":"25123"}
+{"id":"17142","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"says three or more powers fight over the stores; QUARRELS has one open conflict, between two powers (oligarchy and Merchant Guilds)","other":""}
+{"id":"19260","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"claims the common people once rose against the rulers; PAST records only a succession crisis, a harvest compact and an arcane incident","other":""}
+{"id":"11043","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"puts Wen Ma 'of Merchant oligarchy'; PEOPLE has Wen Ma as magistrate of the Courthouse","other":""}
+{"id":"04346","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"offers bottles, flasks and cups; gaps say the Glassblower lacks glass sand and no glass sand reaches it","other":"13769"}
+{"id":"14621","town":"r2s-famine-town-1","sev":"LOW","kind":"LACKS","why":"watch 'hold the gates'; DEFENCE lists Town walls and Citadel, no gates, and HOUSES has none","other":""}
+{"id":"09326","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"grain sales as income under famine whose failed source is grain; town is in grain deficit","other":""}
+{"id":"13390","town":"r2s-famine-town-1","sev":"LOW","kind":"BROKEN","why":"'fine glass sand, fine glass sand' repeated in the list","other":""}
+{"id":"14789","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"says Religious Authorities and Merchant oligarchy keep quarrelling; QUARRELS lists no such quarrel, relation is tense but stable","other":""}
+{"id":"25166","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"names a quarrel between Merchant oligarchy and Religious Authorities; QUARRELS' only open quarrel is oligarchy vs Merchant Guilds","other":"10105"}
+{"id":"14249","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"says nothing protects the oligarchy; Military/Guard is symbiotic with it, DEFENCE has walls, Citadel, watch, defence Well-Defended","other":"12626"}
+{"id":"11041","town":"r2s-famine-town-0","sev":"MED","kind":"STATE","why":"puts Christoph Fischbach 'of Guild Council'; PEOPLE has him as magistrate of the Courthouse","other":""}
+{"id":"13543","town":"r2s-famine-town-0","sev":"LOW","kind":"BROKEN","why":"'fine glass sand, fine glass sand' repeated in the list","other":""}
+{"id":"22198","town":"r2s-occupied-town-2","sev":"LOW","kind":"TAG","why":"says traffic goes through its gates; tag reaches towns with walls none, and HOUSES lists no gates here","other":""}
+{"id":"17195","town":"r2s-occupied-town-1","sev":"MED","kind":"STATE","why":"offers small window panes; gaps say the Glassblower lacks glass sand, and the Economics line itself says that work cannot go on","other":"17279"}
+{"id":"27918","town":"r2s-occupied-town-1","sev":"LOW","kind":"STATE","why":"lists window glass as a service; gaps say the Glassblower lacks glass sand","other":"17279"}
+{"id":"13492","town":"r2s-occupied-town-1","sev":"LOW","kind":"BROKEN","why":"'fine glass sand, fine glass sand' repeated in the list","other":""}
+{"id":"00162","town":"r2s-occupied-town-1","sev":"MED","kind":"LACKS","why":"one criminal ring decides what crime is allowed; GOVERNMENT lists no criminal power (Merchant oligarchy, Occupation Authority, Merchant Guilds, Religious Authorities)","other":""}
+{"id":"11531","town":"r2s-occupied-town-1","sev":"MED","kind":"LACKS","why":"a criminal ring with predictable rules and bought officials; no criminal power in GOVERNMENT's list","other":"00162"}
+{"id":"17460","town":"r2s-occupied-town-3","sev":"MED","kind":"LACKS","why":"robbery of 'one of their fronts'; HOUSES has no Front businesses (only Smuggling operation, Rookery, Gambling den)","other":""}
+{"id":"13409","town":"r2s-occupied-town-3","sev":"LOW","kind":"BROKEN","why":"'fine glass sand, fine glass sand' repeated in the list","other":""}
+{"id":"25131","town":"r2s-occupied-town-3","sev":"LOW","kind":"STATE","why":"names a quarrel between Corrupt Council and Occupation Authority; QUARRELS lists only Council vs Craft Guilds and Merchant vs Craft Guilds","other":""}
+{"id":"22433","town":"r2s-plague_onset-town-3","sev":"MED","kind":"LACKS","why":"violence for hire; DEFENCE hired none and HOUSES has no hireling hall, gang or company","other":""}
+{"id":"11247","town":"r2s-plague_onset-town-3","sev":"MED","kind":"BROKEN","why":"stored key 'guild_controlled' printed in prose, glued to the label","other":""}
+{"id":"04836","town":"r2s-plague_onset-town-1","sev":"MED","kind":"STATE","why":"says clay is fired into brick here; gaps say the Brickmaker lacks access to clay","other":"21511"}
+{"id":"07201","town":"r2r-town-37","sev":"MED","kind":"STATE","why":"says Feudal Appointee leaves Thieves' Guild alone; QUARRELS has them tense and escalating","other":""}
+{"id":"07194","town":"r2r-town-37","sev":"MED","kind":"STATE","why":"says the two leave each other alone; relation is tense, escalating","other":""}
+{"id":"14061","town":"r2r-town-37","sev":"MED","kind":"STATE","why":"says neither side pushes the other; relation is tense, escalating","other":""}
+{"id":"13486","town":"r2s-plague_onset-town-0","sev":"LOW","kind":"BROKEN","why":"'fine glass sand, fine glass sand' repeated in the list","other":""}
+{"id":"19085","town":"r2s-recently_betrayed-town-3","sev":"MED","kind":"STATE","why":"Town hall 'run by Teodora Gusev'; PEOPLE has her as watch captain of the Town watch, and nobody is listed for the Town hall","other":""}
+{"id":"00999","town":"r2s-indebted-town-1","sev":"MED","kind":"STATE","why":"says Xiaba is in reasonable shape; prosperity Struggling, stability Strained with creditors steering decisions, legitimacy crisis","other":"12989"}
+{"id":"11061","town":"r2s-indebted-town-1","sev":"MED","kind":"STATE","why":"puts Reiko Inoue 'of Merchant Guilds'; PEOPLE has her as senior craft-guild master of Craft guilds, and HOUSES has no Merchant guilds","other":""}
+{"id":"04223","town":"r2s-indebted-town-1","sev":"LOW","kind":"LACKS","why":"lower districts, street by street, whole quarters lost; population is 357","other":""}
+{"id":"27528","town":"r2s-infiltrated-town-1","sev":"LOW","kind":"BROKEN","why":"'Weak defences keeps' subject and verb disagree","other":""}
+{"id":"DONE","lines":2760,"blocks":19,"flags":57}
