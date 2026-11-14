@@ -223,3 +223,57 @@ Kept current after every item. Started from 7d12b40cb (origin's tip, as the brie
 | 10 lighting, LAST | `LIGHTING_CENSUS_REFREEZE='JOIN-3' LIGHTING_CENSUS_NOTE=… npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js`, then plain | 1 (by design), 0 (34/34); files 3251 -> 3448, titles 29455 -> 30107 | 05d1dc180 |
 
 The refreeze message sent to the chair at 05d1dc180 (no stops; a correction: the powers draft names A1's mint figure 139 > 138 for the merge seat to key: the chair's to rule).
+
+## P3.4 THE WHOLE CHECK at b6a5f97ab (the refreeze's tip), every red classed by script
+Gates (through gate-tail): `typecheck:ratchet` 0, `typecheck:domain:strict` 0, `lint` 0; `node scripts/implementation-packets.mjs validate` 0; the ledger ref fetched. The suite in six shards (`npx vitest run --exclude='tests/build/**' --shard=<i>/6 --reporter=json`, each to /home/user/j3out/check/shard-<i>.json, 12:12–13:31 UTC): every shard exit 1, refs and local config equal around each. **133 red titles in 82 files.** The 82 files re-run with the same reporter on the frozen trees (the line 976db5b19 and the nine merged tips of P2.2). The table, row by row: `docs/chair/2026-11-14/probes/JOIN/j3-classes.json` (`classify.py`: C first — the two doors, fact layers, presumed things ARM 1 — then B by `tests/fixtures/.golden-freeze-register.json` suite with a lane draft naming the surface, then A, D, E). No registered surface red without a lane declaring it: no stop.
+| class | titles |
+|---|---|
+| A | 9 |
+| B | 10 |
+| C | 15 |
+| D | 76 |
+| E | 23 |
+
+**Class D, lane by lane** (red at that lane's merged tip too; a title red at several tips is under each):
+- corpus (12 files): canonicalRowsDeclared.test.js, coherenceAgreeCures.test.js, composeBareCrisis.test.js, crimeLineDisqualifiers.test.js, crisisBlindDossierProse.test.js, crisisBlindWidened.test.js, economicsTabFlow.test.js, generalDeskTabFlow.test.js, negativeAssertionAnchor.walker.test.js, pageCensusFindings.test.js, powerStateProseDesk.test.js, vocabularyPageFindings.test.js
+- data (16 files): dmLayerGoldenIsolation.test.js, editCorpusRatchet.test.js, editWorldFactResources.test.js, generationForkCensus.test.js, mundaneRealmAcceptance.test.js, nameHeldThroughAssembly.test.js, negativeAssertionAnchor.walker.test.js, pipelinePinnedChoosers.test.js, pipelinePinnedMode.test.js, poolDominance.walker.test.js, powerEconomyFreshness.test.js, presumedThings.walker.test.js, rosterFinalUnderHeldRoster.test.js, urbanBandInstitutions.test.js, worldFactRederive.test.js, x46NpcBand.test.js
+- defence (23 files): captureBirthScale.test.js, defenseTabFlow.test.js, dmLayerGoldenIsolation.test.js, editCorpusRatchet.test.js, editWorldFactResources.test.js, famineStoresOneRounding.test.js, generationForkCensus.test.js, intentAtlasSoakDistiller.test.js, mergeLadderHeldKeys.test.js, mundaneRealmAcceptance.test.js, mutationCoverageManifest.test.js, nameHeldThroughAssembly.test.js, negativeAssertionAnchor.walker.test.js, pipelinePinnedChoosers.test.js, pipelinePinnedMode.test.js, powerEconomyFreshness.test.js, presumedThings.walker.test.js, rosterFinalUnderHeldRoster.test.js, seedLoopTotality.walker.test.js, sourceCitationIntegrity.walker.test.js, statecraftExposureBand.test.js, worldFactRederive.test.js, x46NpcBand.test.js
+- leaves (6 files): arcaneClassifierCensus.walker.test.js, arcaneNoneLeftOutBesideAMage.test.js, fieldManifest.test.js, layerBoundaries.test.js, negativeAssertionAnchor.walker.test.js, seedLoopTotality.walker.test.js
+- powers (15 files): dmLayerGoldenIsolation.test.js, editCorpusRatchet.test.js, editWorldFactResources.test.js, generationForkCensus.test.js, hookThemeDraws.test.js, intentAtlasSoakDistiller.test.js, mutationCoverageManifest.test.js, nameHeldThroughAssembly.test.js, pipelinePinnedChoosers.test.js, pipelinePinnedMode.test.js, powerEconomyFreshness.test.js, rosterFinalUnderHeldRoster.test.js, tollNamePrintedEverywhere.test.js, worldFactRederive.test.js, x46NpcBand.test.js
+- r2a (16 files): defenceFactReaders.walker.test.js, dmLayerGoldenIsolation.test.js, generationForkCensus.test.js, missingLeaves.test.js, mutationCoverageManifest.test.js, nameHeldThroughAssembly.test.js, negativeAssertionAnchor.walker.test.js, noLegacyFactionReaders.walker.test.js, pipelinePinnedChoosers.test.js, pipelinePinnedMode.test.js, powerEconomyFreshness.test.js, presumedThings.walker.test.js, rosterFinalUnderHeldRoster.test.js, timberHookForestHeld.test.js, worldFactRederive.test.js, x46NpcBand.test.js
+- r2b (14 files): densityLaw.test.js, dmLayerGoldenIsolation.test.js, editCorpusRatchet.test.js, hookThemeDraws.test.js, nameHeldThroughAssembly.test.js, pipelinePinnedChoosers.test.js, pipelinePinnedMode.test.js, powerEconomyFreshness.test.js, recordInvariants.test.js, recordMerge.test.js, recordRegisterTotality.walker.test.js, rosterDuplicateDraws.test.js, rosterFinalUnderHeldRoster.test.js, x46NpcBand.test.js
+- r3cc (10 files): dmLayerGoldenIsolation.test.js, editWorldFactResources.test.js, generationForkCensus.test.js, nameHeldThroughAssembly.test.js, pipelinePinnedChoosers.test.js, pipelinePinnedMode.test.js, powerEconomyFreshness.test.js, rosterFinalUnderHeldRoster.test.js, worldFactRederive.test.js, x46NpcBand.test.js
+- r3tabs (1 files): entityIndex.test.js
+
+**Class A (the line's own):** foundingWorldBones.test.js, newsHeadlineContract.walker.test.js, newsVoiceContract.walker.test.js, proseFamilyContract.walker.test.js, siteCoherenceRatchet.test.js
+
+**Class B (registered golden surfaces declared moved):** dossierProseManifest.test.js, espionageDormancyFence.test.js, generatorGoldenMaster.test.js, goldenViewModel.test.js, heraldKnowledgeDeskGolden.test.js, presetLightingWitness.test.js, townCartographyCalibration.test.js
+
+**Class C (named door reds, law b):** factLayers.walker.test.js, observedShapeReaders.walker.test.js, presumedThings.walker.test.js, writerReach.walker.test.js
+
+**Class E (composed at the join: red here, green at the line and at every tip where the file exists), each read; none is a predecessor's resolution, so none cured; named with the lanes that meet:** see P3.5.
+
+**Known: the mutation-coverage manifest's TOTALITY** (class D at three tips): 78 invariant files with no entry, r2-code-a 38, powers 24, defence 16 (`probes/JOIN/j3-mutation-manifest-by-lane.txt`); entries not written (a later seat).
+
+## P3.5 Class E, the 23 titles composed at the join (each read: the failing assertion, the lanes that meet)
+
+Most are a lane's own fixed-seed test whose towns moved under the OTHER lanes' generation moves (a premise or a drawn line no longer holds at the joined birth). None is the product of a predecessor's resolution (JOIN-1 §2), so none is cured here.
+
+| file (owner lane: the only tip holding it) | title (short) | failing assertion | lanes that meet |
+|---|---|---|---|
+| `corpusCureGuards` (corpus) ×4 | DS-DEF-11 WALLED-STRAINED v3; DS-DEF-2 Beasts v6; Invasion v4, v6 | "<town> no longer reads <pool>" (what each town draws: sent to the chair 11:5x) | corpus × the generation movers (defence's ratings plausibly) |
+| `defensePostureAgainstItsFacts` (r3-tabs) ×3 | the premise; Weak-bar posture; guard on paper | premise 3/6 towns not as needed (rr3-metropolis-occupied-rand-2 bar STRONG …); `undefined` to be 'readiness ADEQUATE' | r3-tabs × defence (the bars), powers, r2a |
+| `defensePostureReadsBadge` (r3-tabs) | under a siege the strong posture says nothing | 2/2: "meets it strongly defended" under a siege (rv2-under_siege-city-4) | r3-tabs × defence |
+| `defenseSupplyUnderACrisis` (r3-tabs) | a town at peace keeps the line | the peace town's line no longer the well-supplied one | r3-tabs × defence |
+| `defenseWithinTheBar` (r3-tabs) ×2 | premise: bar Strong; no attacker walks in | 2/5 bars now ADEQUATE (rv2-wartime-hamlet-5, rv2-calm-hamlet-30); "walls and nobody to put on them" | r3-tabs × defence |
+| `defenceTraditionReaders` (leaves) | r2r-thorp-0 holds the divine tradition | anchored: false | leaves × defence |
+| `storesSpanFigure` (r2-code-b) | 1.5 months reads "a month and a half" | rpf-thorp-succession_void-13: 1.2 to be 1.5 | r2b × defence (stores at the label's share) |
+| `tonightOwnGoal` (r2-code-b) | the cards' own goals print | `.toMatch()` got undefined (the cast person gone) | r2b × powers (the cast) |
+| `clerkHookSmallPlace` (r2-code-a) | thorp/hamlet keeps one hook | 2/7: r2s-recently_betrayed-hamlet-2 "Grain Steward keeps one hoo…" | r2a × powers, defence |
+| `economicHistoryRecent` (r2-code-a) | rw3-hamlet-calm-1: an 88-year-old event | value undefined (the event no longer drawn) | r2a × the generation movers |
+| `upkeepVocation.test.jsx` (defence) | every house shows each own service | 38 rows missing | defence × r2b (the services rows), r3cc |
+| `w2FixData6Rows` (data) | HANDBACK-6 row 3: barrels to alehouses | r2s-monster_pressure-village-1 no longer the case | data × the generation movers |
+| `heraldCausalVoice` (the line's) | no band's predicate leans on a pronoun | 6 bands | green at the line and every tip: the composed herald corpus (defence, powers, r2a) |
+| `hookTruthAtBirth` (the line's) ×2 | sealed-walls hook; poisoning hook | undefined; one hook stored | green everywhere else: composed (defence's walls, powers' cast) |
+| `rosterDuplicateDraws` (the line's) | no roster repeats a secret | 1 of 1000 rosters | green everywhere else: composed (powers' minted lords × r2a's secret pools) |
+| `servicesStructure` (the line's) | entry ≤ 400 lines | 402: `src/generators/servicesGenerator.js` 391 at the line, r3-code-c +8, defence +2, merged clean | r3-code-c × defence (FOR THE JOIN: the entry's ceiling; one lane's lines move to `services/`) |
