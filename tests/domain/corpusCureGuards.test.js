@@ -54,6 +54,7 @@ const GUARDS = [
   { seed: 'w5-thorp-under_siege-3', pool: 'DS-ECO-12::INCOME WEIGHT: the religious houses', vid: 3, why: 'a siege: "what its people give for their faith leaves with them on the feast days" out of a town nobody leaves' },
   { seed: 'rww-city-under_siege-1', pool: 'DS-GEN-13::MARKET-OPEN', vid: 3, why: 'a siege: "Visitors find X\'s market without asking" beside a market critically impaired by the siege (the read\'s M2)' },
   { seed: 'rww-metropolis-under_siege-1', pool: 'DS-GEN-13::MARKET-OPEN', vid: 3, why: 'a siege: the same (the read\'s M2, its second town)' },
+  { seed: 'w5-village-plague_onset-102', pool: 'DS-GEN-13::MARKET-OPEN', vid: 3, why: 'a plague closure: "Visitors find X\'s market without asking" where the guards turn travellers back (the reader\'s M5; its siblings v1, v2 carry `no crisis: plague_onset`)' },
   { seed: 'rw3-town-under_siege-1', pool: 'DS-GEN-13::MARKET-OPEN', vid: 4, why: 'a siege: "The market stands where carts always stopped" beside "the caravans have stopped coming" (the read\'s M4, #964)' },
   { seed: 'w5-city-slave_revolt-102', pool: 'DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)', vid: 7, by: 'record', why: 'a slave revolt: "its watch keeps the streets" while the revolt holds them (LINES-READ, slave_revolt-town-3)' },
   { seed: 'w5-city-slave_revolt-102', pool: 'DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)', vid: 8, by: 'record', why: 'a slave revolt: "A watch walks X\'s streets" (v7\'s twin)' },

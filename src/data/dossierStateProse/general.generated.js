@@ -9424,8 +9424,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
+            "market",
             "crisis: any",
-            "no crisis: under_siege"
+            "no crisis: under_siege",
+            "no crisis: plague_onset"
           ],
           "text": "Visitors find {settlement}'s market without asking; the main road leads straight to it.",
           "slots": [
@@ -9448,9 +9450,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
+            "market",
             "crisis: under_siege"
           ],
-          "text": "{settlement}'s market grew up on the road's trade, and with the siege closing the road it has almost nobody left to sell to.",
+          "text": "With the siege closing the road, {settlement}'s market has only the town's own people left to sell to.",
           "slots": [
             "settlement"
           ],
@@ -9459,6 +9462,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
+            "market",
             "crisis: plague_onset"
           ],
           "text": "The sickness has thinned {settlement}'s market: the stalls still open, and fewer people come to them.",
@@ -9574,9 +9578,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
+            "no market",
             "crisis: under_siege"
           ],
-          "text": "No market or fair stands in {settlement}, and since the siege closed the road, almost nothing changes hands at all.",
+          "text": "Since the siege closed the road, almost nothing changes hands at {settlement}, which keeps no market or fair.",
           "slots": [
             "settlement"
           ],
@@ -9585,9 +9590,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
+            "no market",
             "crisis: under_siege"
           ],
-          "text": "{settlement} keeps no market, and with the road shut by the siege, the trade it once did on the road has stopped.",
+          "text": "With the road shut by the siege, what little trade {settlement} did with no market of its own has stopped.",
           "slots": [
             "settlement"
           ],
@@ -9596,9 +9602,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
+            "no market",
             "crisis: under_siege"
           ],
-          "text": "There is no market at {settlement} to find, and with the siege across the road, nobody comes in to sell.",
+          "text": "With the siege across the road, nobody comes in to sell at {settlement}, which has no market to come to.",
           "slots": [
             "settlement"
           ],
