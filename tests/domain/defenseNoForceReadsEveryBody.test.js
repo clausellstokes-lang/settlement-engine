@@ -5,9 +5,10 @@
  * militia), so a town whose force was its watch was "walls and nobody to put on them" on the Invasion row and
  * "long stretches … with nobody on them" on the Beasts row, beside its own watch on the force cards (the defence
  * lane's fourth read, classes A and B). The selector now reads all four from the projection it already held:
- * a watch stands with the townspeople's pools, a contracted company with the paid professionals'; an UNWALLED
- * town whose only force is its watch is a cell the corpus did not write (`militia only` names a militia), and
- * the row is silent there.
+ * a contracted company stands with the paid professionals' pools. RE-KEYED BY R3-TABS-4 (the chair's ruling (c) of
+ * 2026-11-14 on the fresh reader's F2: L0's note that "a watch stands with the townspeople's pools" WITHDRAWN): a
+ * watch is not the townspeople in arms, so a town whose only force is its watch, walled or not, hears no
+ * citizen-militia line and no no-force line, and its Invasion row is silent (tests/domain/defenseWatchIsNotTheLevy.test.js).
  *
  * RED-FIRST at 9e57f5023 (the line with point 48): on 884 births in the app's shape, 77 walled and 41 unwalled
  * watch-only towns changed on each row; the three towns below printed "nobody" / "no line and no force".
@@ -47,14 +48,16 @@ describe('the threat rows read every armed body as a force (L0)', () => {
     });
     expectNoSeedFailures(failures, 'each planted town keeps only a watch');
   });
-  test('a walled watch town reads the townspeople\'s pool on Invasion, and no row says it has no force', () => {
+  test('a walled watch town: the Invasion row is silent (no townspeople in arms), and no row says it has no force', () => {
     const failures = collectSeedFailures(WALLED, (seed) => {
       const { prose } = TOWNS[seed];
-      const inv = textOf(prose.invasion);
-      if (!inv || !/townspeople|townsfolk|household/i.test(inv)) throw new Error(`invasion: ${inv}`);
-      for (const k of ['invasion', 'beasts']) if (NOBODY.test(textOf(prose[k]) || '')) throw new Error(`${k}: ${textOf(prose[k])}`);
+      if (prose.invasion !== null) throw new Error(`invasion: ${textOf(prose.invasion)}`);
+      for (const k of ['invasion', 'beasts']) {
+        if (NOBODY.test(textOf(prose[k]) || '')) throw new Error(`${k}: ${textOf(prose[k])}`);
+        if (/townspeople|townsfolk|household/i.test(textOf(prose[k]) || '')) throw new Error(`${k}: ${textOf(prose[k])}`);
+      }
     });
-    expectNoSeedFailures(failures, 'a watch is a force on the walls');
+    expectNoSeedFailures(failures, 'a watch is a force, not a levy');
   });
   test('an unwalled watch town: the Invasion row is silent, and the Beasts row never says it has no force', () => {
     const failures = collectSeedFailures(UNWALLED, (seed) => {
