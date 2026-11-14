@@ -1218,7 +1218,7 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
   const terrainKey = terrainNamed ? terrainPoolKey(settlement?.config?.terrainType) : null;
   const strengthsKey = terrainNamed ? economicStrengthsPoolKey(analysis?.economicStrengths) : null;
   const strategicKey = strategicValuePoolKey(analysis?.strategicValue);
-  const leading = leadingExploitation(analysis);
+  const leading = leadingExploitation(/** @type {ResourceAnalysisView} */ (exploitationForDesk(/** @type {Parameters<typeof exploitationForDesk>[0]} */ (settlement)))); // W2-C-LEAVES-3 P1-c (SHARED FILE, this one read): the grade the cards print
   const exploitKey = leading ? exploitationPoolKey(leading.row, leading.bucket) : null;
   // ⚠ THE EXPLOITATION LENS CARRIES ITS OWN SLOT BAG, and that is the whole of finding
   // R-DST-ROLE. `{good}` in the shared bag means THE TOWN'S LEADING EXPORT (DS-ECO-12's
@@ -1353,3 +1353,6 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
     upstreamWeak: commercialRung(line('DS-SUP-2', upstreamKey, upstreamSlots)),
   });
 }
+
+// W2-C-LEAVES-3 P1-c: the grade the Resources tab's cards print (at the end of the file, so no line-keyed row above moves).
+import { exploitationForDesk } from '../validationOnPage.js';

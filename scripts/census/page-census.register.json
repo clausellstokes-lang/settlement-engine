@@ -67,7 +67,7 @@
    "master": null,
    "integration": null,
    "base": 642,
-   "banked": 641
+   "banked": 0
   },
   "P7a": {
    "label": "7a two founders",
@@ -88,7 +88,7 @@
    "reader": "CROSS",
    "master": 0,
    "integration": 220,
-   "banked": 221
+   "banked": 129
   },
   "P9": {
    "label": "9 a weak beasts grade over settled-country text",
@@ -151,7 +151,7 @@
    "reader": "GLANCE",
    "master": 681,
    "integration": 680,
-   "banked": 671
+   "banked": 395
   },
   "P18": {
    "label": "18 catalogue count ranges printed as names",
