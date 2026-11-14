@@ -1526,12 +1526,35 @@ Pushes by docs/chair/2026-11-14/probes/POWERS-14/push.sh (POWERS-11's, pointed a
     r2r-metropolis-14, r2s-under_siege-metropolis-0): present-tense travel under cut roads; the innkeeper's "the gossip of the road".
     To read on their pages before any cure.
 
+- **ww#375 THE HALL'S NONE LINE BESIDE A SYNDICATE: CURED, d9bb4085d** (the lighting census re-taken, 0413f1443: files 3275 -> 3276).
+  - READ ON THE PAGE. The 587 towns print "Free of the criminals. Nobody at the head of <ruler> answers to a criminal house, and no
+    criminal power here is strong enough to push it." (the DM view's hall: patronage.js :: hallOf, variant 0; the Power tab's DM
+    panel and the PDF's DM chapter). No criminal power stands as a faction in any of them; the town's crime structure
+    (factsOf(record).crime, the Defense tab's "Criminal structure") is none in 370, diffuse in 30, semi-organized in 59, organized
+    in 128. FALSE beside an organized syndicate ("Crime here answers to one ring"): r2r-city-0, r2r-town-44, r2s-under_siege-
+    metropolis-0 (an assassins' guild, a smuggling network, "A guard captain is on the payroll of the criminal network"). READ
+    TRUE: a semi-organized network ("lacks a single controlling authority": r2r-village-0) and a diffuse presence ("there is no
+    boss to threaten or to bribe": r2r-thorp-8).
+  - The cure, at display: where a syndicate stands, the none rung takes CAPTURE_LINES.none[1] (claims only the hall) where the hall
+    has a second and a third, else none[2] (counts no rank: 0 towns on the 720; it says "<ruler> rules in its own name", which
+    would be false under an occupation: no such town today). A first cut also took the line off the semi-organized and diffuse
+    towns; it printed "the head, the second and the third" over 19 halls with only a head, and was narrowed before the commit.
+  - COUNT (hall375.mjs, 720): the denial beside a syndicate 128 -> 0; kept 459. The record is unchanged (no field diff).
+  - Guard: tests/domain/people/hallLineReadsCrime.test.js; red at 48839038f's code on the three syndicate towns (classed in wttip);
+    the plant (the syndicate condition never true) reds the same three. Holders: none but this lane.
+  - Gates: as for #101 (eslint 0; both type gates exit 0; presumed things fresh 10 / stale 0; fact layers the 2 named rises;
+    observed shapes 0; the grid 0); the 12 test files naming patronage.js, the hall lines or the DM view: 171 passed.
+
 ## P8.2 EVERY NEW OR CHANGED LINE, with the towns it was read in (the owner's veto list)
 - No line new or reworded. RE-ROUTED (#101), each read on its page at de125480f: under a siege the keeper now prints "Pleasant, but
   asks where you are going and when, and writes it down." (r2s-under_siege-town-1, r2s-under_siege-metropolis-0,
   r2s-under_siege-metropolis-3, r2r-metropolis-14, bar0-city-under_siege+famine-rand-1, a siege + famine); under a famine "Sells
   places on the coach and beds by the night; asks for payment first." (r2s-famine-city-1, r2s-famine-metropolis-3). The coaching inn
   stands from the town up: the smallest town, the largest metropolis.
+- RE-ROUTED (ww#375), read at d9bb4085d: "Free of the criminals. The head, the second and the third of <ruler> make their own
+  decisions; none of them takes orders from the criminals." now prints beside "Criminal structure: Organized syndicate" in 128 towns,
+  under the heading "The hall": r2r-town-44 (a town, the smallest size it reaches), r2r-city-0, r2s-occupied-town-1 (an occupation),
+  r2s-famine-metropolis-1 (a famine), r2s-under_siege-metropolis-0 (a siege, a metropolis, the largest).
 
 ## P8.3 FOR THE JOIN (this seat's)
 - (none yet)
@@ -1539,7 +1562,7 @@ Pushes by docs/chair/2026-11-14/probes/POWERS-14/push.sh (POWERS-11's, pointed a
 ## P8.4 THE TABLE, brought current (P7.4's rows; each read true, cured, or left)
 | towns at 609ff6472 | row | state |
 |---|---|---|
-| 587 | ww#375 "Free of the criminals. Nobody at the head of ..." | left |
+| 587 | ww#375 "Free of the criminals. Nobody at the head of ..." | CURED d9bb4085d: 128 false (beside a syndicate) -> 0; 459 true, kept |
 | 120 | ww#850 "Holds the title; the decisions that matter are made by ..." | left |
 | 104 | ww#440 "Merchants with local reach; ..." | left |
 | 100 | bar #17 "Well-funded city watch; ..." | left |
@@ -1558,13 +1581,16 @@ Pushes by docs/chair/2026-11-14/probes/POWERS-14/push.sh (POWERS-11's, pointed a
 | 2 | pf#481/#474/#488 "Acting Fixer" | left |
 
 ## P8.5 WHAT IS LEFT, line by line
+- ww#375's label "Free of the criminals" stays beside the hall-only line in the syndicate towns: it labels the hall (its heading),
+  true; for the owner's veto if it reads as the town.
 - P8.4's rows marked left, widest first by FALSE count (each read on its page first); L4; P4.8's other lines; P4.7's and P5.10's rows.
 - The two #101 candidates of P8.1 (the keeper's present-tense travel secret under a siege; the innkeeper's road gossip).
 
 ## P8.6 THIS SEAT'S INSTRUMENTS (docs/chair/2026-11-14/probes/POWERS-14/)
 - b14.sh <tree> <out> [seeds] [n]: the 720 (or a list) born in the census shape, the whole record per birth (about 30 s at n=4);
   q.mjs <births> <expr over (s,key)>: rows of a births run; fd14.mjs <a> <b>: the field diff by path, births and leaves;
-  atom.mjs: the declaration rule under each crisis; holders.sh <file>...: the lanes holding a file by content (fetch
+  atom.mjs: the declaration rule under each crisis; hall375.mjs <tree> <births>: the hall's line by rung and crime structure;
+  three375.mjs / three375b.mjs: the hall's ranked three under each line; crime375.mjs: the crime structure of the none-rung towns; holders.sh <file>...: the lanes holding a file by content (fetch
   `+refs/heads/lane/*:refs/remotes/origin/lane/*` first); gates.sh <tree> <logdir> <files>: eslint, presumed things, both type
   gates, the grid, fact layers, observed shapes, each through gate-tail; push.sh. Pages: CENSUS-2's census2.sh with --seeds
   (inn.seeds, inn6.seeds) and REVIEW-BAR-0's render2.sh for bar0- seeds, both archived from their lanes to /home/user/probes/.
