@@ -62,6 +62,9 @@ const GUARDS = [
   { seed: 'w5-city-plague_onset-3', pool: 'DS-ECO-1::COMBINATION C4: a low rung on a working approach', vid: 1, why: 'a plague\'s quarantine: "Trade comes and goes by X\'s river" beside "Nobody comes into X and nobody leaves" (the defence page\'s QUARANTINE ACTIVE override)' },
   { seed: 'rww-metropolis-under_siege-1', pool: 'DS-ECO-11::EXPLOITATION: fullyExploited', vid: 3, why: 'a siege: "carried through here from start to finish, from what the country gives" of a town whose fields and trade have stopped (v1, its twin, carries `no crisis: under_siege`)' },
   { seed: 'rww-city-under_siege-1', pool: 'DS-ECO-10::POSTURE: established', vid: 5, why: 'a siege: "More than one of X\'s goods finds a buyer beyond the town" where nothing goes out by road (its siblings v2-v4, v6 carry `no crisis: under_siege`; v7 is the siege row)' },
+  { seed: 'w5-city-plague_onset-3', pool: 'DS-ECO-9::HOW THE NEED IS MET: much of it brought in', vid: 1, why: 'a plague\'s quarantine: "Food carts come into X most days" beside "Nobody comes into X and nobody leaves"' },
+  { seed: 'w5-city-plague_onset-3', pool: 'DS-ECO-9::HOW THE NEED IS MET: much of it brought in', vid: 2, why: 'a plague\'s quarantine: "the rest comes in from the farms around it and from trade" beside "Nobody comes into X and nobody leaves"' },
+  { seed: 'w5-city-plague_onset-3', pool: 'DS-ECO-9::HOW THE NEED IS MET: much of it brought in', vid: 3, why: 'a plague\'s quarantine: "everyone knows when the next load is due" beside "Nobody comes into X and nobody leaves"' },
 ];
 
 /** @param {string} seed */

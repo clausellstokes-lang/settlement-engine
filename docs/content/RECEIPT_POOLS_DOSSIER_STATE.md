@@ -1365,9 +1365,9 @@ sentence in two voices. **No named deaths.**
 3. `[unfolding · colour]` The loss of the {good} will be felt all through the season ahead: less on every table at {settlement} and less put by against the next bad year.
 
 **HOW THE NEED IS MET: much of it brought in**
-1. `[visitor · colour]` Food carts come into {settlement} most days, and they matter: a good part of what the town eats is grown elsewhere and brought in.
-2. `[ledger · colour]` {settlement} grows only part of what it eats; the rest comes in from the farms around it and from trade.
-3. `[street · colour]` A good part of the bread at {settlement} comes in on carts, and everyone knows which days they arrive.
+1. `[visitor · no crisis: plague_onset]` Food carts come into {settlement} most days, and they matter: a good part of what the town eats is grown elsewhere and brought in.
+2. `[ledger · no crisis: plague_onset]` {settlement} grows only part of what it eats; the rest comes in from the farms around it and from trade.
+3. `[street · no crisis: plague_onset]` A good part of what {settlement} eats is brought in, and everyone knows when the next load is due.
 
 **HOW THE NEED IS MET: part of it by magic**
 1. `[ledger · colour]` Not all of {settlement}'s food is grown or bought: some of what the town eats is made or kept by magic, and the town would go shorter without it.

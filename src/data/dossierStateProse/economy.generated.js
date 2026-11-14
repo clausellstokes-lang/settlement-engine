@@ -3636,7 +3636,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "colour"
+            "no crisis: plague_onset"
           ],
           "text": "Food carts come into {settlement} most days, and they matter: a good part of what the town eats is grown elsewhere and brought in.",
           "slots": [
@@ -3647,7 +3647,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "colour"
+            "no crisis: plague_onset"
           ],
           "text": "{settlement} grows only part of what it eats; the rest comes in from the farms around it and from trade.",
           "slots": [
@@ -3658,9 +3658,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "colour"
+            "no crisis: plague_onset"
           ],
-          "text": "A good part of the bread at {settlement} comes in on carts, and everyone knows which days they arrive.",
+          "text": "A good part of what {settlement} eats is brought in, and everyone knows when the next load is due.",
           "slots": [
             "settlement"
           ],
