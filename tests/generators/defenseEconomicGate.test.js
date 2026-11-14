@@ -123,12 +123,38 @@ describe('economic survival respects the actual economy', () => {
     // Re-keyed by identity (UPKEEP-CAPACITY C1, a house counts by its rung): the market this test was written for
     // counts at today's points, so the town keeps a one-rung market house (the catalogue's Fish market) in the
     // Market Square's stead; a market square is the least rung of its ladder and counts 0.8 of the market's weights.
-    const SAME_BUILDINGS = [{ name: 'Granary' }, { name: 'Grist Mill' }, { name: 'Fish market' }, { name: 'Town Watch' }];
+    // ⭐ RE-KEYED BY IDENTITY (UPKEEP-15, the chair's ruling (b) of 2026-11-14): the fixture's identity is "a market
+    // house that counts at today's points". The cause: the off-ladder rule (UPKEEP-13's P3, bb0aaa3fe: a house on no
+    // ladder of a laddered job counts at the least rung the catalogue offers at its size) places the Fish market at the
+    // market's least rung (factor 0.8), so it no longer counts at today's points. The catalogue reads "Merchant guilds
+    // (15-40)" at factor 1 (rung 2 of 3); it stands on the city's shelf, and no market house of the town's shelf reads
+    // at factor 1 (each reads 0.8 or 0.93), so it is taken: of the scaled parts it opens the market alone. The
+    // threshold is unchanged. The Fish market's own case is stated by the arm below.
+    const SAME_BUILDINGS = [{ name: 'Granary' }, { name: 'Grist Mill' }, { name: 'Merchant guilds (15-40)' }, { name: 'Town Watch' }];
     const poor = partsOf(town({ priorityEconomy: 15, prosperity: 'Struggling', institutions: SAME_BUILDINGS }));
     const rich = partsOf(town({ priorityEconomy: 80, prosperity: 'Prosperous', institutions: SAME_BUILDINGS }));
     expect(poor.some((x) => x.id === 'sustainsHeld'), 'anchored: the limit binds this town').toBe(true);
+    expect(rich.find((x) => x.id === 'market')?.full, 'anchored: the market house counts at today\'s points').toBe(2.5);
     expect(supplyBeforeTheLimit(rich)).toBeGreaterThan(supplyBeforeTheLimit(poor) + 15);
     expect(supplyBeforeTheLimit(rich)).toBeGreaterThanOrEqual(60);
+  });
+
+  test('the Fish market, placed at the least rung, still lets the healthy economy score higher, by the measured margin (UPKEEP-15)', () => {
+    // The case that moved, not hidden (the chair's ruling (b)): the off-ladder rule places the Fish market at the
+    // market's least rung (factor 0.8: 2 points full, against the market's 2.5 at today's points), and the healthy
+    // economy still scores higher than the poor one, by the margin measured at UPKEEP-15: 74 against 59, the
+    // market's points 2 and 1.2.
+    /** @param {any} d */
+    const supplyBeforeTheLimit = (d) => Math.round(d.filter((x) => x.group === 'SUSTAINS').reduce((a, x) => a + x.points, 0) * 4);
+    const FISH = [{ name: 'Granary' }, { name: 'Grist Mill' }, { name: 'Fish market' }, { name: 'Town Watch' }];
+    const poor = partsOf(town({ priorityEconomy: 15, prosperity: 'Struggling', institutions: FISH }));
+    const rich = partsOf(town({ priorityEconomy: 80, prosperity: 'Prosperous', institutions: FISH }));
+    expect(rich.find((x) => x.id === 'market')?.full).toBe(2);
+    expect(rich.find((x) => x.id === 'market')?.points).toBe(2);
+    expect(poor.find((x) => x.id === 'market')?.points).toBe(1.2);
+    expect(supplyBeforeTheLimit(rich)).toBe(74);
+    expect(supplyBeforeTheLimit(poor)).toBe(59);
+    expect(supplyBeforeTheLimit(rich)).toBeGreaterThan(supplyBeforeTheLimit(poor));
   });
 
   test('the gate scales monotonically with economy priority', () => {
@@ -364,6 +390,11 @@ describe('stacking famine mitigation never worsens the penalty', () => {
     const starving = mk(['famine']);
     return { econ: fed.economic - starving.economic, mil: fed.military - starving.military };
   };
+  /** The famine's own toll on the parts, in whole tenths: the sum of every part's famine crisis line. */
+  const famineToll = ({ priorityReligion }) => defencePartsOf(town({
+    magicExists: true, priorityMagic: 40, priorityReligion,
+    institutions: FAITHFUL_GROVE, stressTypes: ['famine'],
+  }), keepOf(undefined)).reduce((a, x) => a + Math.round((x.crisis?.famine || 0) * 10), 0);
 
   test('divine + druid famine mitigation is at least as good as druid alone', () => {
     const druidOnly = faminePenalties({ priorityReligion: 30 }); // parish present, relPri too low for divine
@@ -372,10 +403,32 @@ describe('stacking famine mitigation never worsens the penalty', () => {
     expect(druidAndDivine.mil).toBeLessThanOrEqual(druidOnly.mil);
     // Divine caps at -12/-6, above the druid -8/-5 floor: layering it changes
     // nothing, so the two profiles lose exactly the same amount to famine.
-    // (Both diffs also carry famine's shared upstream economy degradation,
-    // which is identical across the two configs and cancels out.)
-    expect(druidAndDivine.econ).toBe(druidOnly.econ);
+    // ⭐ RE-KEYED BY IDENTITY (UPKEEP-15, the chair's ruling (a) of 2026-11-14): the economic claim is read on
+    // the famine's own toll, the parts' crisis lines, EXACTLY equal (no tolerance). The cause: the build reads
+    // each score at hundredths before the whole point (UPKEEP-MEASURE-2 X9), over limit 1 held score by score
+    // (P2), so a score is a fraction before it prints: the famine takes the same 27.33 economic points from
+    // both places, and the difference of two printed scores (60 - 32 against 76 - 49) rounds that one toll to
+    // 28 and to 27. The difference of two printed figures no longer carries the claim; the toll does.
+    expect(famineToll({ priorityReligion: 70 })).toBe(famineToll({ priorityReligion: 30 }));
+    expect(famineToll({ priorityReligion: 30 }), 'anchored: the famine takes something').toBeLessThan(0);
     expect(druidAndDivine.mil).toBe(druidOnly.mil);
+  });
+
+  test('every printed score with the divine added is at least the printed score without it, fed and starving (UPKEEP-15)', () => {
+    // The owner's rule is about the figures the page PRINTS (the chair's ruling (a)): the divine added to the
+    // druid never lowers a whole-point score or readiness, in either fixture.
+    const read = (priorityReligion, stressTypes) => {
+      const p = generateDefenseProfile(town({
+        magicExists: true, priorityMagic: 40, priorityReligion, institutions: FAITHFUL_GROVE, stressTypes,
+      }));
+      return { ...Object.fromEntries(['military', 'monster', 'internal', 'economic', 'magical'].map((k) => [k, p.scores[k]])), readiness: p.readiness.score };
+    };
+    const fell = [[], ['famine']].flatMap((stressTypes) => {
+      const without = read(30, stressTypes);
+      const withDivine = read(70, stressTypes);
+      return Object.keys(without).filter((k) => withDivine[k] < without[k]).map((k) => `${stressTypes.join() || 'fed'} ${k}: ${without[k]} -> ${withDivine[k]}`);
+    });
+    expect(fell).toEqual([]);
   });
 });
 
