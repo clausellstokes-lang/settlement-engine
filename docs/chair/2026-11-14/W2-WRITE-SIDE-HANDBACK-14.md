@@ -32,7 +32,7 @@ TAKES, IN PRINTING POOLS (landed pool by pool below):
   v5 the siege line inherits).
 - R98 DS-GEN-13 WAREHOUSES v2 ("A merchant ... can store a cargo ... and sell it when the price suits") + `no crisis: under_siege`
   (the bar's #39; v1 v3 v4's condition); the pool would fall MUTE under a siege: TWIN v5 `[ledger · crisis: under_siege]` "Since
-  the siege began, nothing new has come into {settlement}'s warehouses, and nothing in them can be sent on."
+  the siege began, nothing new has come in to be stored at {settlement}, and nothing stored there can be sent on."
 - R104 DS-GEN-13 COMMERCE: a bank v2 ("larger dealings, from cargoes ...") + `no crisis: under_siege` (v1's condition; v3 v4
   inherit: savings and credit, true inside the walls).
 
@@ -88,11 +88,51 @@ TRUE WITHOUT THE CONDITION, SAID (row: the lacking lines, why; one town each in 
   (households put by; the debt is the town's books). R126 DS-ECO-6 large share v1 v2 without `guild`. R128 DS-ECO-8 WEALTHY v1 v3
   without `gate`. R129 GEN-3.
 
+## THE BATCH, MEASURED BY REPLAY (before any landing)
+`replay2.mjs` (W2-WRITE-13's `replay.mjs` + a new vid is eligible where its pool was reached and its declaration admits): on the base
+it reproduces all 59,761 single draws, 0 misses. The whole batch (7 declarations + 1 twin) moves 67 draws in exactly the four pools
+and nothing else: WAREHOUSES v2 -> v5 45; the bank v2 -> v4 5, -> v3 1; POSTURE established v9 -> v7 8, v8 -> v7 4; fullyExploited
+v2 -> v5 2, v4 -> v5 2. No state falls mute.
+
 ## Pools landed
-(none yet: the batch is measured by replay first)
+| pool | before -> after (772, replay) | cure | commit | guard |
+|---|---|---|---|---|
+| DS-GEN-13 WAREHOUSES, COMMERCE: a bank | WAREHOUSES v2 109 -> 64, v5 0 -> 45 (all 45 besieged warehouse towns); bank v2 41 -> 35 | v2 + `no crisis: under_siege` (both); WAREHOUSES twin v5 | fba284bcf | corpusCureGuards WAREHOUSES v2 at w5-city-under_siege-1, bank v2 at w5-city-under_siege-104 (red on the base: "is eligible") |
+
+## New or changed lines (the owner's veto list, with the towns read)
+- DS-GEN-13 WAREHOUSES v5 (NEW, fba284bcf) `[ledger · crisis: under_siege]` "Since the siege began, nothing new has come in to be stored
+  at {settlement}, and nothing stored there can be sent on." Prints on the Overview clipped: "Since the siege began, nothing new has
+  come in to be stored at X." Read in w5-town-under_siege-3 Celotsy (the smallest it reaches: a town), w5-metropolis-under_siege-1
+  Qal'atpatan (the largest), bar0-city-under_siege+famine-rand-1 Agiospolis (siege and famine).
+- Declarations only (text unchanged): WAREHOUSES v2, the bank v2 (+ `no crisis: under_siege`).
+
+## THE INHERITORS READ
+- The bank v3 "Townsfolk at Vysokoin keep their savings at the bank ..." (w5-city-under_siege-104); v4 "A trader wanting credit at
+  Qal'atpatan must satisfy the bank ..." (w5-metropolis-under_siege-1; w5-metropolis-under_siege+famine-103 Silbergasse).
+- POSTURE established v7 "X had several trades selling outward before the siege, and none of them can reach a buyer now." in
+  w5-hamlet-under_siege+famine-2 Erdenbash (the smallest), w5-town-under_siege+famine-2 Izammul, w5-metropolis-under_siege+famine-1
+  Tarkhannuur (the largest).
+- fullyExploited v5 "With the siege on, none of X's {resource} can go out to buyers; whatever the town works, the town must use."
+  in w5-hamlet-under_siege-102 Al-chowk (grain), w5-village-under_siege-104 Chrissopolis (grain), w5-city-under_siege-6 Chrissoousa
+  (fish).
+
+## THE REGISTERS NAMED STALE (not re-taken)
+- The shift register (`docs/content/prose-shift-register.json`): fba284bcf's new line moves its variant-count pins (2950 -> 2951, the
+  per-pool count, face and vid hashes): SEAM car 4's two tests ("recomputes every pin", "MUTANT") red from fba284bcf on.
+- The byte baseline (proseCorpusBytes "RAW is EXACT") and the wiring census (proseWiringCensus "car 0", "THE DRY READ";
+  wiringCensusDeclared "four columns"): stale before this seat, moved again.
+
+## FOR THE JOIN
+- Count pins re-keyed by this branch's one new line (2950 -> 2951 in composeStateProse, proseComposed, proseWiringCensus x3 and its
+  histogram; 3418 -> 3419, 2713 -> 2714 x2 in proseEntryContradiction): the corpus lane, the join lanes and r2-code-a/b hold newer
+  copies of proseComposed and proseWiringCensus with the same figures at these lines; a twin the corpus lane adds meets this one at
+  the same line: re-measure on the joined tree and re-key once, with both causes.
+- SEEN on the read pages, another block's line, not this seat's: "A shipment they weren't expecting arrived and is now in their
+  warehouse." (a person's hook) prints in besieged towns (w5-metropolis-under_siege+famine-103, bar0-city-under_siege+famine-rand-1,
+  w5-city-under_siege-6).
 
 ## What is left (line by line, the brief's order)
-1. The sweep's batch: replay; inheritors read; land DS-GEN-13 (WAREHOUSES + bank), DS-ECO-10, DS-ECO-11.
+1. The sweep's batch: DS-GEN-13 LANDED (fba284bcf); DS-ECO-10 and DS-ECO-11 next (measured, read; their guards to write).
 2. The bar's rows: #275 entrepot (DS-ECO-10), #168 halls (DS-ECO-8 PROSPEROUS), #12 abandonment (DS-ECO-11 RESOURCE CONDITION),
    #114 merchant guild where only a merchant oligarchy stands (DS-GEN-13 COMMERCE), #116 timber (find its pool). #39 is in the batch.
 3. The reader's rows still false; the slash label; the hand-back-13 list.
