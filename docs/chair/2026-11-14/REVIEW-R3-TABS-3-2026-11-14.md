@@ -115,7 +115,22 @@ There is no merge in 30157258..68e9e97b5.
 
 ## Step 7 — CENSUS-2 (`census2.sh`, the census's 720, `--files` the stage's two src files)
 
-IN FLIGHT at this commit (the tip run; the base counts are the second reader's at 301572583, `census2.counts.tip.txt` on its branch). Filled in the next commit.
+Run at the tip by me (exit 0, every stage's own exit read; births+render 611 s, count+trace 116 s). The base counts are the
+second reader's run at 301572583, this stage's base (`census2.counts.tip.txt` on its branch).
+
+| kind | base 30157258 (towns · distinct lines) | tip 68e9e97b5 |
+|---|---|---|
+| a | 712 · 610 | 712 · 610 |
+| b | 70 · 98 | 70 · 98 |
+| c | 301 · 298 | 301 · 298 |
+| d | 105 · 37 | 105 · 37 |
+| e | 46 · 18 | 46 · 18 |
+| f | 720 · 344 | 720 · 344 |
+| g | 720 · 14 | 720 · 14 |
+| h | 20 · 63 | 20 · 63 |
+
+**No kind rises.** None moves: the census's patterns hit neither the 71 silenced lines nor the gate label. Of 21,156 hits
+at the tip, **0 trace to the stage's two files** (`--files DefenseTab.jsx,defenseStateProse.js`).
 
 ## Step 10 — measure only: does (h) follow the rebuilt rating?
 
