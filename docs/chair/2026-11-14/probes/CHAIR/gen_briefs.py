@@ -1105,126 +1105,133 @@ def build_bar():
     return head + body + '\n'
 
 
-POWERS_SPLIT = (
-    "THE LANE IS SPLIT BY FAMILY BETWEEN TWO SEATS FROM HERE (the chair, 2026-11-14: what is left is some forty commits, too long for one seat after "
-    "another). THE MAIN SEAT (POWERS-12, on lane/powers-follow-up-2026-11-13) holds THE STANDING FAMILY: the powers' claims, standing sentences, modifiers "
-    "and strata (src/generators/power/ but for the one file named below, src/domain/dossier/powerStrata.js, src/components/new/tabs/power/, src/data/people/dmPowerLines.js) and the lane's "
-    "close. THE SIDE SEAT (POWERS-SIDE-1, on lane/powers-side-2026-11-14, cut from 57cdd341) holds THE PEOPLE FAMILY: handlers and allegiances, titles and "
-    "honorifics, the keeper of an empty seat, the ties (src/data/faceHonorifics.js, src/data/officeTitles.js, src/domain/people/, "
-    "src/generators/people/ties.js, src/generators/power/relationshipArchetypes.js). NEITHER SEAT CHANGES A FILE OF THE OTHER'S FAMILY: a row that needs one "
-    "is written in the hand-back under FOR THE OTHER SEAT (file, function, the one-line change) and left. Registers both seats move (the lighting census, "
-    "the wiring census, the pool-dominance register) are re-derived through their doors when the main seat merges the side branch, on the chair's word."
+CLOSE_NOW = (
+    "THE CLOSE COMES FIRST (the chair's change of order for every lane, 2026-11-14 04:15 UTC, vetoable by the owner). Every lane is to be FINAL for the "
+    "join in the seat it has now. The lanes' lists were cut from readings of twenty towns on an older tree; after the join ONE fresh measure of the joined "
+    "tree ranks what is still false, and those rows are cured there, on one tree, where no cure waits on another lane's file. SO YOUR LIST IS TIME-BOXED: "
+    "work it in its order until your count passes %s (read it as THE COUNT says); then finish the item in hand and go STRAIGHT to THE CLOSE, whatever is "
+    "left of the list. Every row you did not reach is written in the hand-back under LEFT FOR AFTER THE JOIN (the row, its writer, what you know of it): "
+    "it is not lost, and it is no longer this lane's. A lane that is final with rows left is worth more to the release than a longer list on a lane that "
+    "is not."
 )
 
 POWERS_METHOD = (
     "THE LANE'S OWN WAY, beside the laws below: every row is CHECKED AT THE TIP FIRST, in its own town born in the app's shape (the hand-back's P4.9: "
     "still.mjs): a row an earlier cure already took is said so with the commit and left. A cure in a generator is a DECLARED MOVE: its field diff on the "
     "census's 720 confined to the family you name (the re-deal of goals and ties by the mint is accepted as DECLARED: say its counts). ONE CAUSE, ONE "
-    "COMMIT: rows that share a cause are cured together and named together. Every possessive of a power through the lane's one leaf (never \"Guilds's\"); a "
-    "share word contains its figure; the page shows ratings, never the machinery (no identifier, no modifier key). A line that names a power, a house or a "
-    "face reads the record: the power must stand among the town's powers, the house on its roster, the face at the head of THAT house. HAZARD, bitten by "
-    "the last seat: a push with nothing to send, or one git rejects, falls into the pre-push hook's WHOLE suite, and a test in it that runs git from a "
-    "linked worktree rewrote the local branch and the shared config: use the last seat's push.sh (docs/chair/2026-11-13/probes/POWERS-11/: it refuses a "
-    "push with nothing to send), and compare refs and config after every push."
+    "COMMIT. Every possessive of a power through the lane's one leaf (never \"Guilds's\"); the page shows ratings, never the machinery (no identifier, no "
+    "modifier key). HAZARD, bitten by the last seat: a push with nothing to send, or one git rejects, falls into the pre-push hook's WHOLE suite, and a "
+    "test in it that runs git from a linked worktree rewrote the local branch and the shared config: use the last seat's push.sh "
+    "(docs/chair/2026-11-13/probes/POWERS-11/: it refuses a push with nothing to send), and compare refs and config after every push."
 )
 
 SEATS2['POWERS-12'] = dict(
-    title="POWERS-12 · the powers lane's main seat: M1, the standing family's rows, then the two merges and the stage's statement",
+    title="POWERS-12 · the powers lane's close: M1, the raw modifier, one guard, then the line's merge and the stage's statement",
     branch='lane/powers-follow-up-2026-11-13', tip='57cdd341', statement=True,
     intro=("You are POWERS-12, the seventh seat on the powers lane of the settlement-engine integration program (lane/powers-follow-up-2026-11-13). The lane "
            "holds who rules a town and who contests it: the powers' standing and claims, titles and honorifics, people's goals, ties and secrets. A reader "
            "found its last stage NOT CLEAR on four medium findings; the sixth seat cured the lane's own red tests and the claim table's low rows, designed "
-           "and measured the largest medium (M1) and handed back at its context mark with its list written out. " + POWERS_SPLIT),
+           "and measured the largest medium (M1) and handed back at its context mark. Yours: M1 built, two more items, and THE LANE'S CLOSE."),
     read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
           "2. On your lane, docs/chair/2026-11-13/POWERS-FOLLOW-UP-HANDBACK-2.md, BY LINE RANGE, BY SCRIPT (the file is 1,100 lines; open only these): PART 5 "
           "WHOLE (from the line \"# PART 5\" to the end: the rulings in force, what the sixth seat cured, L2's RungContext, the hazard, P5.10 WHAT IS LEFT, "
-          "P5.11 the instruments); P4.8 (the 44 lines by file: only the rows under YOUR family's files) and P4.9 (the instruments); P4.7's rows in "
-          "power/conflicts.js.\n"
-          "3. The reader's three low findings you close at the statement: on origin/lane/chair-2026-11-08 (`git fetch origin lane/chair-2026-11-08`), "
+          "P5.11 the instruments) and P4.9 (the instruments). P4.8's four rows of the raw modifier only (ww#639 ww#980 pf#1 pf#23).\n"
+          "3. The reader's findings you close: on origin/lane/chair-2026-11-08 (`git fetch origin lane/chair-2026-11-08`), "
           "docs/chair/2026-11-13/REVIEW-POWERS-96a6ced46-2026-11-13.md, the sections headed L4, L5 and L7 only.\n"
-          "4. At step 6: the merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (docs/INTEGRATION_STYLE_2_2026-11-09.md, the section "
-          "headed \"## 2m.\": about forty lines; by script)."),
-    work=("THE WORK, in this order, measured first, red first (a collected arm, never a bare seed loop), pushed as made:\n"
+          "4. At THE CLOSE: the merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (docs/INTEGRATION_STYLE_2_2026-11-09.md, the "
+          "section headed \"## 2m.\": about forty lines; by script)."),
+    work=(CLOSE_NOW % '180,000' + "\n"
+          "THE LIST, in this order, measured first, red first (a collected arm, never a bare seed loop), pushed as made:\n"
           "1. M1, AS P5.10's ITEM 1 DESIGNS IT (the five commanding claims beside Minor or Suppressed: 122 towns of the 720; five rows of "
           "power/claimStanding.js :: CLAIM_RUNGS on the context L2 built). THE DESIGN IS ACCEPTED BY THE CHAIR AS THE FORM OF THE CURE; each rung is still "
-          "READ WHERE IT PRINTS before it is pushed, and the class is counted to zero on the 720 and on the lane's 4,305.\n"
-          "2. THE STANDING FAMILY'S ROWS OF P4.8, by cause, the widest first. RULED for them: (a) THE RAW MODIFIER on the Power tab (\"arcane-advised\", "
-          "\"military-dominated\", \"theocratic-aligned\": ww#639 ww#980 pf#1 pf#23): an identifier is never printed; a modifier prints in plain words only "
-          "where the town's own record bears it out (an arcane house stands; a force stands; the faith is not subordinate to the seat), else nothing; "
-          "measure first what reads the stored modifier: the cure is at DISPLAY unless nothing else reads it. (b) \"THREE POWERS STAND ALMOST LEVEL … NO ONE "
-          "LEADS\" and \"roughly even\" (pf#486 pf#626 pf#673 pf#525 ww#162): a standing sentence reads the figures: it is chosen only where the figures "
-          "bear it out by the lane's own bands. (c) THE CLAIM LINES THE TOWN DENIES (ww#377 ww#440 pf#27 pf#526 pf#734 pf#627 pf#524 pf#234 pf#164 pf#738 "
-          "ww#1048 ww#850 ww#375): a condition at the choice, by M1's and L2's method (the rung reads the record); the ladder's own base lines in "
-          "rulingStructure.js that the sixth seat NAMED after L2 are in this class. (d) pf#520: the possessive through the lane's leaf; a share word "
-          "contains its figure. (e) PowerStrata.jsx (pf#235 pf#335 pf#480 pf#783): the strata read the record's own relation: a subordinate power does not "
-          "contest the seat; an occupier is not filed as a contender; a power on neither side of a crisis is not shown on one; a body's \"second\" is one of "
-          "its own members. (f) P4.7's rows in power/conflicts.js (#ww-371 #pf-813 #pf-89 #ww-1432). ww#656 waits for step 6.\n"
+          "READ WHERE IT PRINTS before it is pushed, and the class is counted to zero on the 720 and on the lane's 4,305. One line to the chair when it is "
+          "pushed.\n"
+          "2. THE RAW MODIFIER on the Power tab (\"arcane-advised\", \"military-dominated\", \"theocratic-aligned\": P4.8's ww#639 ww#980 pf#1 pf#23). COUNT "
+          "IT FIRST on the 720 (every page that prints a modifier key). RULED: an identifier is never printed; a modifier prints in plain words only where "
+          "the town's own record bears it out (an arcane house stands; a force stands; the faith is not subordinate to the seat), else nothing. Measure "
+          "what reads the stored modifier: the cure is at DISPLAY unless nothing else reads it.\n"
           "3. L4: the guard the reader found missing (its section names the cure and its plant).\n"
-          "4. ONE MESSAGE TO THE CHAIR (the tip; each class's count before and after), then THE COUNT. The chair then gives the word for THE MERGE OF THE "
-          "SIDE BRANCH (a plain merge of lane/powers-side-2026-11-14 at the tip the chair names; code by hand only if both families met in one file, which "
-          "is a finding; each register re-derived through its own door, its own commit).\n"
-          "5. The measuring seat's command at the stage's base 96a6ced46 and at your tip (the form below gives it), every hit in the lane's files read.\n"
-          "6. THE MERGE OF THE LINE (the word is given): full history first (`git fetch --depth=2147483647 origin lane/integration-2026-11-07 "
+          "THE CLOSE, each step its own commit or commits:\n"
+          "4. The measuring seat's command at the stage's base 96a6ced46 and at your tip (the form below gives it), every hit in the lane's files read.\n"
+          "5. THE MERGE OF THE LINE (the word is given): full history first (`git fetch --depth=2147483647 origin lane/integration-2026-11-07 "
           "lane/powers-follow-up-2026-11-13`; `git rev-parse --is-shallow-repository` prints false; the base is e969a75b7); the line's tip as you read it back "
-          "(976db5b19 when this was written; a plain merge). BY THE CHAIR'S TRIAL MERGE OF 57cdd341: 10 conflicted files, NO CODE (wiring-census.json, "
-          "pool-dominance.register.json, the edge bundles and their meta files): each taken from ONE side and re-derived through its own door or script "
-          "(the bundles by `npm run build:edge-shared`, alone, last); a code conflict means the base is wrong or a side moved. THEN, each its own commit: "
-          "every check section 2m lists; the THREE ROWS BANKED AGAINST THIS LANE (2m's part (3): dmPowerLines.js rulingFaces \"The ruling three of \" and "
-          "\"The ruling two of \"; rulerKin.js, the strip site FACTION_LABEL_SIBLINGS['Military/Guard']) cured and shrunk out as 2m gives it; #312 "
-          "(people/goals.js reads the chain leaf, which arrives with the merge) and ww#656 with it; THE TUNING INVENTORY'S SIX ROWS (corruption.js's tables, "
-          "\"dependents moved\", cause 59f877e58) by the inventory's own ritual as 2m's part (4) gives it: THE CHAIR NAMES THE POINT NOW: on the clean "
-          "committed tree right after the merge's registers. A refusal of a door you cannot cure is a STOP to the chair with the door's output.\n"
+          "(976db5b19 when this was written; a plain merge; say which commit and what conflicted). BY THE CHAIR'S TRIAL MERGE OF 57cdd341: 10 conflicted "
+          "files, NO CODE (wiring-census.json, pool-dominance.register.json, the edge bundles and their meta files): each taken from ONE side and re-derived "
+          "through its own door or script (the bundles by `npm run build:edge-shared`, alone, last); a code conflict means the base is wrong or a side "
+          "moved: look before resolving. THEN: every check section 2m lists; the THREE ROWS BANKED AGAINST THIS LANE (2m's part (3): dmPowerLines.js "
+          "rulingFaces \"The ruling three of \" and \"The ruling two of \"; rulerKin.js, the strip site FACTION_LABEL_SIBLINGS['Military/Guard']) cured and "
+          "shrunk out as 2m gives it; THE TUNING INVENTORY'S SIX ROWS (corruption.js's tables, \"dependents moved\", cause 59f877e58) by the inventory's own "
+          "ritual as 2m's part (4) gives it: THE CHAIR NAMES THE POINT NOW: on the clean committed tree right after the merge's registers. A door's "
+          "refusal you cannot cure is a STOP to the chair with the door's output: nothing is banked by hand.\n"
+          "6. ONLY IF YOUR COUNT IS UNDER 300,000 THEN: #312 (people/goals.js reads the chain leaf, which arrived with the merge) and ww#656 with it (the "
+          "chair's ruling in P5.0), each its own commit; else both are LEFT FOR AFTER THE JOIN.\n"
           "7. THE STAGE'S STATEMENT in the form below, for the stage 96a6ced46 to your tip: L5 closed in it (the declaration names the three families the "
           "tie re-deal moves: conflicts, prominentRelationship, pressureSentence, with their counts) and L7 (the draft record's figures for the generator "
-          "golden master and the Herald desk measured at YOUR tip); L1, L3 and L6 LISTED as low and left, with their counts at your tip; the new words of "
-          "both seats with their towns; FOR THE JOIN gathered whole (P4.2b, the side seat's rows, the seat line's doubled title, table-pools.mjs's one "
-          "row). A fresh reader then reads the stage as a diff from 96a6ced46: leave it what it needs.\n" + POWERS_METHOD),
-    merges="; on the chair's word, the merge of lane/powers-side-2026-11-14; the merge of the integration line's tip named in step 6",
-    when="for a stop that blocks everything you have left, when M1 is pushed (one line: the count), at step 4, when the line's merge and its registers are pushed, and with your statement or hand-back",
+          "golden master and the Herald desk measured at YOUR tip); L1, L3 and L6 listed as low and left; the new words with their towns; FOR THE JOIN "
+          "gathered whole (P4.2b, the seat line's doubled title, table-pools.mjs's one row); and LEFT FOR AFTER THE JOIN: P4.8's 40 other lines by file as "
+          "they stand there (say only which of them your cures took), P4.7's rows, the card's title on a man, P5.10's rows not reached. A fresh reader "
+          "then reads the stage as a diff from 96a6ced46: leave it what it needs.\n" + POWERS_METHOD),
+    merges="; the merge of the integration line's tip named in step 5",
+    when="for a stop that blocks everything you have left, when M1 is pushed (one line: the count), when the line's merge and its registers are pushed (the tip; what conflicted), and with your statement or hand-back",
     turns='',
 )
 
-SEATS2['POWERS-SIDE-1'] = dict(
-    title="POWERS-SIDE-1 · the powers lane's side branch: the people family's rows",
-    branch='lane/powers-side-2026-11-14', tip='57cdd341', statement=False,
-    intro=("You are POWERS-SIDE-1, the first seat on the powers lane's side branch of the settlement-engine integration program (lane/powers-side-2026-11-14, "
-           "cut by the chair from the powers lane at 57cdd341). The powers lane holds who rules a town and who contests it: the powers' standing and claims, "
-           "titles and honorifics, people's goals, ties and secrets. Readers left it a list of medium false lines. " + POWERS_SPLIT + " You make no "
-           "statement: the main seat merges your branch."),
+
+SEATS2['R2-CODE-A-8'] = dict(
+    title="R2-CODE-A-8 · round two's first code lane's close: the widest rows left, its own reds, the line's merge, the final statement",
+    branch='lane/r2-code-a-2026-11-13', tip='ae12d68d', statement=True,
+    intro=("You are R2-CODE-A-8, the eighth seat on round two's first code lane of the settlement-engine integration program (lane/r2-code-a-2026-11-13). The "
+           "lane cures false lines in the founding paragraph, the history's origin, the arrival scenes, the pressure sentences and the people data: a line a "
+           "page prints that the town's own record makes false. The seventh seat cured four writers, named what it could not cure and handed back at its "
+           "context mark with its list written out. Yours: the widest rows left, inside a time-box, and THE LANE'S CLOSE."),
     read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
-          "2. On your branch, docs/chair/2026-11-13/POWERS-FOLLOW-UP-HANDBACK-2.md, BY LINE RANGE, BY SCRIPT (the file is 1,100 lines; open only these): "
-          "P5.0 (the rulings in force: the card's TITLE on a man; the seat line's doubled title), P5.9 (the hazard), P5.11 and P4.9 (the instruments and how "
-          "they are re-made); P4.7 (the rows other lanes named: patronage.js and the six mentor rows are yours); P4.8 (the 44 lines by file: only the rows "
-          "under YOUR family's files: faceHonorifics.js, officeTitles.js, allegiance.js, cardPowers.js, seatKeeper.js)."),
-    work=("THE WORK, in this order, measured first, red first (a collected arm, never a bare seed loop), pushed as made:\n"
-          "0. YOUR HAND-BACK FILE: docs/chair/2026-11-14/POWERS-SIDE-HANDBACK.md: begun with the rulings you work to (copied from this brief), kept current "
-          "after every item (the row, the cause, the count before and after, the towns read, the commit).\n"
-          "1. THE HANDLER OF A CRIMINAL HOUSE (ww#164 ww#799 ww#800 pf#267 pf#268 pf#630 in faceHonorifics.js; pf#285 pf#286 in allegiance.js; P4.7's "
-          "patronage.js rows: \"answers to Black market through\" a whisper broker, #944 #946 #1077, and \"handled by … (Multiple criminal factions)\" under "
-          "another house's boss): ONE FAMILY. RULED: a line that says who handles, heads or speaks for a house names the face at the head of THAT house on "
-          "the roster, or names no one; a power is \"led by\" the head the record gives that power. Count the class on the 720 first (every card and row "
-          "where the face named belongs to another house).\n"
-          "2. THE KEEPER OF AN EMPTY SEAT (pf#314 pf#315 pf#316 pf#355 in officeTitles.js: \"Headman\", \"Master of the Guilds\" outright while the seat "
-          "stands empty; pf#481 pf#488 pf#474 in cardPowers.js and seatKeeper.js: \"Acting Fixer\"): RULED: the keeper is styled by the SEAT he keeps "
-          "(\"Acting Headman\"), through the lane's own leaf (seatKeeper.js :: seatKeeperStyledNameOf), on every surface that names him, the relationship "
-          "rows among them; never the seat's title outright while it stands empty, never \"Acting\" before his own trade.\n"
-          "3. pf#682: a catalogue name (\"Fence (word of mouth)\") printed as a criminal house's name: if the house-label leaf "
-          "(institutionDisplayName.js :: institutionHouseLabel) is not on your branch, it is written FOR THE JOIN (file, function, the one-line change) and "
-          "left.\n"
-          "4. THE CARD'S TITLE ON A MAN (\"the alewife\", \"the midwife\", \"the madam\"), as P5.0 gives the chair's ruling: the men's words, each a plain "
-          "word of the period that names the trade and not the sex where one exists, read where it prints in three towns, red first, one commit, every new "
-          "word listed with its towns for the owner's veto; no new word in the vocabulary file (a title that can only be made there is PARKED with its "
-          "word); a title the card shares with a styled-title leaf goes through that leaf.\n"
-          "5. THE SEAT LINE'S DOUBLED TITLE, as P5.0 gives it: src/domain/display/governanceAccount.js is another lane's by its own commit: FOR THE JOIN "
-          "(file, function, the one-line change, the test that would red until it is made, as text) unless the doubling is made in a file of your family: "
-          "measure which.\n"
-          "6. THE SIX MENTOR ROWS (P4.7: a mentor tie both ways, 52 pairs in 25 towns, src/generators/people/ties.js :: drawTies; two masters; a mentor "
-          "across unrelated trades, src/generators/power/relationshipArchetypes.js): a DECLARED MOVE of the ties, its field diff confined to them and to "
-          "what is drawn from them (say which families follow); no draw added: a condition at the choice.\n"
-          "LAST: the hand-back current (every row with what prints after; what is left; FOR THE OTHER SEAT; FOR THE JOIN; the shared files and registers "
-          "your branch moved, for the merge; the new words with their towns) and ONE message to the chair: your tip, the counts, no statement.\n" + POWERS_METHOD),
-    merges='',
-    when="for a stop that blocks everything you have left, when item 1 is pushed (one line: the count before and after), when your list is done (the tip, the counts), and for a hand-back",
+          "2. On your lane, docs/chair/2026-11-13/R2-CODE-A-HANDBACK.md, BY LINE RANGE, BY SCRIPT (the file is long; open only these): SECTION 16 WHOLE (the "
+          "seventh seat: the rulings, its four cures with their measures and guards, what it named and parked, \"WHAT IS LEFT\", the reds it ran with, how "
+          "the instruments are re-made); in section 12 the two paragraphs \"Round three's list\" (its NOT STARTED rows) and \"The increment\"; in section 13 "
+          "the paragraphs on the lane's own reds.\n"
+          "3. THE LISTS the row numbers refer to: `git fetch origin lane/round-3-cut-2026-11-13`: docs/chair/2026-11-13/ROUND-3-CUT.json and "
+          "ROUND-3-CUT-INCREMENT.json (key `lines`: each line's number, town, sentence, fact, writer; query by script, never print).\n"
+          "4. At THE CLOSE: the merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (docs/INTEGRATION_STYLE_2_2026-11-09.md, the "
+          "section headed \"## 2m.\": about forty lines; by script)."),
+    work=(CLOSE_NOW % '180,000' + "\n"
+          "THE LIST, in this order, each writer its own commit, measured first on births in the app's own shape (section 16 says how the seventh seat built "
+          "its corpora), red first (a collected arm, never a bare seed loop), pushed as made:\n"
+          "1. ITEM 7: foodBalance.js :: deriveSupplyRiskAnalysis, \"One importer now brings in all the grain\" under a siege (the cut's #208, with #1004 and "
+          "#1336 of the same function: a grain importer where no grain is imported; \"the forest the timber comes from\" where none supplies it). RULED: "
+          "under a siege nothing is brought in by road; a line names an import or a source only where the record holds it.\n"
+          "2. RANK BEFORE YOU CURE: for every other row left (section 16's item 9: section 12's medium rows and the increment's rows in the lane's files), "
+          "ONE script over your births that counts the towns printing each row's sentence at the tip; cure the widest causes first, one cause a commit, "
+          "until the time-box closes. A row that needs a word the vocabulary does not hold is PARKED with its word; a row whose true writer is another "
+          "lane's file goes under FOR THE JOIN (file, function, the one-line change). The table of counts goes in the hand-back: it serves the seat after "
+          "the join.\n"
+          "3. ITEM 4's READ, RULED: \"selling the game in the market\" in a place with no market is NOT a figure of speech: the roster's merchant rule the "
+          "seventh seat built (1ddf992e2) takes it too (where no market stands the secret is not dealt, or a twin says the game is sold on the quiet), IF "
+          "that can be done through the doors; a door's refusal is written under FOR THE JOIN with its output, and the line stays.\n"
+          "NOT YOURS, AS THE SEVENTH SEAT LEFT THEM: item 2's clergy row (faithReading.js is round two B's file: FOR THE JOIN as written; the chair adds for "
+          "the join that `^abbot` does not match \"senior abbot\" even with the article gone: to be measured on the joined tree); item 3 (FOR THE JOIN); "
+          "item 4's minted faces (FOR THE JOIN); item 6 (PARKED with its two words); item 8's reads (record each as read, no more); the six mentor rows; "
+          "the wayside shrine.\n"
+          "THE CLOSE, each step its own commit or commits:\n"
+          "4. THE LANE'S OWN TWO REDS through their doors (section 16's step 2): the wiring census's alias draft re-keyed by identity once its new rows are "
+          "read; the pool-dominance register's new pool row (ARRIVAL_SENSES.stone.lines) through the register's `--tighten` form, the one door for a new "
+          "pool (no re-base), as the powers lane's seat used it. The two golden surfaces the fifth seat's founding cure moved (generationForkCensus A1, "
+          "worldFactRederive A7) are the merge seat's doors: NAMED with their measured figures in the draft shift record; open no golden's door.\n"
+          "5. THE MERGE OF THE LINE (the word is given): full history first (`git fetch --depth=2147483647 origin lane/integration-2026-11-07 "
+          "lane/r2-code-a-2026-11-13`; `git rev-parse --is-shallow-repository` prints false; the base is e969a75b7); the line's tip as you read it back "
+          "(976db5b19 when this was written; a plain merge; say which commit and what conflicted). BY THE CHAIR'S TRIAL MERGE OF ae12d68d: 2 conflicted "
+          "files, NO CODE (docs/content/wiring-census.json, tests/lint/presumedThings.register.json): each taken from the LINE's side and re-derived through "
+          "its own door after the merge, never merged by hand; a code conflict means the base is wrong or a side moved. THEN every check section 2m "
+          "lists: each red that names a line, a literal, a pool row or a page line of THIS lane's files is cured or declared through its door; a red on the "
+          "line's carried set or another lane's file is NAMED with its owner; nothing is banked by hand: a door's refusal you cannot cure is a STOP to the "
+          "chair with the door's output. The page census on this lane's lines (2m's door, the 720).\n"
+          "6. THE LANE'S ONE FINAL STATEMENT in the form below (the base is e969a75b7; the stage a reader has not read begins at 0d3972d8f): with the "
+          "declared re-deals of every seat gathered from the hand-back's sections by script (section 12's step 4 lists them), the new words of the whole "
+          "lane, FOR THE JOIN gathered whole, and LEFT FOR AFTER THE JOIN (step 2's table and every row not reached). A fresh reader then reads the lane "
+          "from 0d3972d8f: leave it what it needs.\n"
+          "A HAZARD THE SIXTH SEAT MET: the presumed-things walker reads EVERY literal under src/: run tests/lint/presumedThings.walker.test.js at every "
+          "commit that adds, splits or rewords a literal, and move its register only through its own door."),
+    merges="; the merge of the integration line's tip named in step 5",
+    when="for a stop that blocks everything you have left, when the list's time-box closes (one line: the tip; what was cured, what is left), when the line's merge and its registers are pushed, and with your final statement or hand-back",
     turns='',
 )
 
