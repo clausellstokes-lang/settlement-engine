@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 262444,
-      "gzip": 35290,
+      "raw": 262582,
+      "gzip": 35296,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -603,6 +603,14 @@
       "toRaw": 184088,
       "gzipAfter": 25665,
       "reason": "+66 B raw over the committed 184022 (gzip level 9: 25652 -> 25665): DS-ECO-12 religious houses v1 v2: + tier: ≥ village"
+    },
+    {
+      "car": "W2-WRITE-10 DS-DEF-2 occupied",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 262444,
+      "toRaw": 262582,
+      "gzipAfter": 35296,
+      "reason": "+138 B raw over the committed 262444 (gzip level 9: 35290 -> 35296): DS-DEF-2 walls AND garrison v1-v3: + no crisis: occupied"
     }
   ],
   "ceilingTransfersNewLeaves": [

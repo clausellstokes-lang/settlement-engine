@@ -1148,6 +1148,7 @@
       "lineDeclares": {
         "crisis: under_siege": 1,
         "garrison": 1,
+        "no crisis: occupied": 3,
         "no crisis: under_siege": 2
       },
       "undeclared": 0,

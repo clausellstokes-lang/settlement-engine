@@ -848,7 +848,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "no crisis: under_siege"
+            "no crisis: under_siege",
+            "no crisis: occupied"
           ],
           "text": "{settlement} keeps paid soldiers behind its walls, so raiders keep their distance and an army would pay dearly; a long siege would be another matter.",
           "slots": [
@@ -859,7 +860,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "no crisis: under_siege"
+            "no crisis: under_siege",
+            "no crisis: occupied"
           ],
           "text": "Approaching {settlement}, you see the walls and the soldiers who belong on them, and any attacker would think again about the cost.",
           "slots": [
@@ -869,6 +871,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: occupied"
+          ],
           "text": "People at {settlement} believe the town could be held, and the soldiers on the walls give them good reason to.",
           "slots": [
             "settlement"
