@@ -1841,3 +1841,114 @@ Pushes by probes/POWERS-15/push.sh (POWERS-14's, pointed at p15: fetch, fast-for
 - Tip: this file's commit on 301108e7f. Done: the toll re-keyed (0eb30242f), the six titles green, the fork pin re-keyed
   (60b89e5ce), the conflict issue found cured (527198c17), A5 (de53b4b58), D1 (2557ea1ef), A7 (5e511271f); each red first,
   plant-proven, read on its page (A7: four calm towns only). Left: P9.5, in that order.
+
+# PART 10 — POWERS-16, the lane's eleventh seat: the HIGH cure's crisis read, a faction's name in prose, the title word on a man, then the table by width (kept current after every item)
+
+The lane was read back from origin at **30b03024f** before the first act, equal to the brief's. The builder is POWERS-16 (session
+session_01ACmDYYtrUFwoGbdruvLS66; the chair session_01ACmDYZrFEVXyZEUg1NDxxC; brief docs/chair/2026-11-14/briefs/BRIEF-POWERS-16.md on
+the chair's lane). A fresh container: scratch worktree /home/user/p16 (branch p16, `npm ci` once: it wrote `core.hooksPath=.husky/_`
+as for every seat before), detached /home/user/wtt at 30b03024f for renders (node_modules linked from p16). Long runs to /home/user/runs/.
+Births by POWERS-15's b15.sh (the 720; the reader's 996 by REVIEW-POWERS-5's seedcfg.mjs and seeds.own.txt).
+
+## P10.0 The rulings worked to
+- THE BRIEF (the chair's rulings of 2026-11-14, each vetoable by the owner), copied: (r1) REGISTERS ARE RE-DERIVED ONCE, AT THE
+  CLOSE, ON THE FINAL TREE: a seat re-takes no census or baseline after a cure (the lighting census, the wiring census, the byte
+  baseline, the bundles); a register a cure makes stale is NAMED here (file; the title that reds; the commit), never banked,
+  raised or hand-edited; the three fast gates, the presumed-things walker and the test files naming the touched files still run
+  after every cure; a pin a cure moves is re-keyed BY IDENTITY in the same commit. (r2) "Military/Guard" INSIDE A SENTENCE: A
+  FACTION NAMED IN A SENTENCE TAKES ITS PROSE FORM, FROM ONE LEAF (one reader beside the governing modifier's, used by every
+  sentence of this lane that names a power; every power name with a slash, a bracket or a count listed with what it prints as;
+  the words to the chair in the first message). (r3) L3: the title word follows the honorific through the same leaf: A LINE
+  NAMES NO SEX THE RECORD DOES NOT HOLD.
+- THE CHAIR, 2026-11-14 13:01 UTC (to this seat), copied: "ONE ROW MORE FOR YOUR TABLE, in a file of yours
+  (src/data/people/titleSecretsPresentations.js, ROWS "the master of the hunt"), measured on the joined 720 by the no-lane seat:
+  R2A-LEFT-GAME: "selling the game in the market" where no market stands: 4 false of 9 printing. The row takes the roster's
+  no-market rule, or a twin true without one ("sold on the quiet"). It is the same declaration table as E3 and bar #26: cure the
+  three together where one commit serves, each with its own arm. Place it by width (narrow)."
+
+## P10.1 Item by item
+- **ITEM 1, THE FIFTEENTH SEAT'S HIGH CURE READ WHERE IT WAS NOT (A7, 5e511271f): READ TRUE, no cure.** The 720 born at
+  30b03024f: 184 rulers print words (modsurf's figure, unchanged). Rendered (CENSUS-2's census2.sh --seeds, the Power tab; the PDF's
+  Power chapter by its text leaves and SummaryTab rendered, probe v/sumpdf.test.jsx) in seven towns; the three surfaces print the
+  same words in each, and no surface the key: r2s-under_siege-thorp-2 (a siege; 6 souls, the smallest town printing a modifier)
+  "Elder Council · church guidance"; r2s-under_siege-metropolis-2 (a siege) "Grand Guild Consortium · armed sway";
+  r2r-metropolis-13 (328,486, the largest) "City-State Council · armed sway"; r2s-famine-metropolis-1 (a famine) "Ducal Governorship
+  · merchant sway"; r2s-famine-village-1 (a famine) "Headman's Authority · armed backing"; r2s-occupied-city-1 (an occupation)
+  "Merchant oligarchy · occupied · armed sway" (the Crisis card: "The forces of another power hold Qaranuur, and its own
+  officials take their orders": the armed sway reads true of it); r2s-occupied-metropolis-3 (an occupation) "Grand Merchant
+  Oligarchy · occupied · church sway". The PDF's GOVERNING box reads [name, category, words]; the Summary legend [name, the stress
+  chips, words, share].
+- **(r2) A FACTION NAMED IN A SENTENCE TAKES ITS PROSE FORM, FROM ONE LEAF: CURED (this commit, "fix(POWERS-16, r2)").** THE
+  LEAF: display/powerSentenceName.js (already the pulse's and the patron line's reader) gains PROSE_FORMS, every power name the
+  generators write with a slash, a bracket or a count (none carries a count): "Military/Guard" -> "The Guard"; "Monster Hunters /
+  Adventurers" -> "Monster Hunters"; "Noble Claimant (Senior Line)" -> "The Senior Line"; "Noble Claimant (Reform Line)" -> "The
+  Reform Line"; "Third Bloc (Neutrals)" -> "The Neutrals"; "Crown Creditors (Noble Coalition)" -> "Crown Creditors"; a label not
+  in the table keeps the first-of-a-slash rule, a trailing bracket now dropped. A NAME, not a phrase: it reads at a sentence's
+  head and in its middle alike ("The Independent Bloc" and "The Peerage" already do, the goal slots' contract). Not "Military"
+  ("third share in Military"); not "Military Command" (48 of the 720 hold "Military Council" or "The Garrison Bloc" beside the
+  Guard). withPowerSentenceNames(text) for a sentence that quotes a rank chip whole. THE SITES (this lane's, no other holder by
+  content): generators/people/goals.js (the {power} {rival} {guild} slots, at fill time only: the keyed intent keeps the record's
+  names); generators/power/conflicts.js (the quarrel's desc and its fallback hook); generators/power/factionStanding.js (the
+  standing sentences); domain/dossier/powerStrata.js (crisisNoteFor's rival); data/people/dmPowerLines.js (the patron lines: 13
+  raw slots); pdf/lib/headlines.js (the people headline, PDF and Foundry lede); domain/factionRename.js (the rename cascade moves
+  the prose form with the label: FOUND BY THE FIELD DIFF, the label close renames "Military/Guard" to its twin "Military Party"
+  where no guard stands, AFTER the goals are written: without it 6 guardless towns printed "The Guard", 13 lines; a DM's own
+  rename needs the same). COUNT (pname.mjs over CENSUS-2's render, a sentence = a "·"-segment with four lowercase words): before
+  237 towns of the 720 print a slashed or bracketed power in a sentence (Military/Guard 235); after (render at the stored-field
+  cure, before dmPowerLines and headlines) 226, every one through a writer another lane holds (FOR THE JOIN below); the no-lane
+  seat's 200 is its own instrument's. DECLARED MOVE (fd.mjs, the 720 at 30b03024f against the cure): 214 towns, 7 paths, all text:
+  npcs[].goal.long 168 towns / 426 lines, .goal.short 154 / 378, powerStructure.conflicts[].desc and conflicts[].desc 103 / 107,
+  powerStructure.factions[].desc 45 / 52, conflicts[].plotHooks[] (both copies) 4 / 4; fdcheck.mjs: 1,078 changes, every one
+  exactly label -> prose form, 0 other, 0 towns moved without such a power. No draw, no key, no tie. GUARD
+  tests/domain/powerProseNameInSentences.test.js (the leaf; nine towns born as the 720: r2r-town-39, r2s-wartime-metropolis-1,
+  r2r-metropolis-8, r2r-metropolis-33, r2s-politically_fractured-metropolis-0, r2r-hamlet-27, r2s-famine-village-1, r2r-hamlet-18,
+  r2r-city-18; KEEP r2r-hamlet-4, no slashed power; KEEP-TWIN r2r-village-18, "Military Party", never "The Guard"): RED FIRST at
+  30b03024f 8 of 9 (the keep green); PLANTS (each site's old file put back alone, restored): goals 7 red, conflicts 3, standing
+  3, powerStrata 2, dmPowerLines 3, headlines 4, factionRename the twin 1. tests/domain/powerSentenceName.test.js RE-KEYED BY
+  IDENTITY ("Military" -> "The Guard", "Military's" -> "The Guard's"). READ WHERE IT PRINTS (census2 --seeds and v/surf.test.jsx
+  at the cure: the tabs, the PDF text, the Foundry module, the world import, the Tonight sheet): r2r-hamlet-18 (56 souls, the
+  smallest) Power "Sadhbh Doherty, third in Headman's Authority, also holds a third share in The Guard, and that lends The Guard
+  weight it would not have on its own."; r2r-metropolis-8 (344,689, the largest; a succession void) NPCs/PDF/Foundry "Make The
+  Senior Line so much their own that it could not run a week without them.", "Lead The Reform Line so long and so well ...";
+  r2s-under_siege-town-2 (a siege) Power "Holds the title; the decisions that matter are made by The Guard.", world import "Gain
+  ground for Feudal Appointee at the expense of The Guard before the season is out."; r2s-famine-village-1 (a famine) "... made
+  by The Guard.", Foundry "Turn the contest with The Guard into a partnership on terms set by Headman's Authority."; r2s-occupied-
+  city-2 (an occupation) the goal "Be the first person The Guard would turn to, before anyone thinks to ask Nahui Ox." (on no
+  surface rendered: a card no tab lists); r2r-town-20 standing "they play The Guard and Military Council against each other";
+  r2r-village-8 NPCs "Make sure every decision of The Guard this season goes out under their own name."; r2s-wartime-city-0 (a war)
+  NPCs "Stop Noble Governorship from taking anything more from The Guard this season."; r2r-village-18 (the twin) "Military
+  Party" kept. The quarrel's desc prints on no tab (0 of 720 dumps). Each reads true. Chips and rank rows ("first of
+  Military/Guard", "Headman's Authority vs Military/Guard") keep the roster's label: they are not sentences.
+  Gates: eslint 0 on the ten files; typecheck:domain:strict 0; typecheck:ratchet 0; the grid 0; presumed things fresh 10 / stale
+  0 at both trees (no rise). The 73 test files naming the touched files: 6 red at the cure; 5 red identically at 30b03024f
+  (generationForkCensus A1, A6; rosterFinalUnderHeldRoster A1; editCorpusRatchet A3, A7: same messages), the 6th the re-keyed pin;
+  proseNumerics red identically at both trees (carried).
+
+## P10.2 EVERY NEW OR CHANGED LINE, with the towns it was read in
+- (r2) REWORDED BY THE LEAF: every goal, quarrel, quarrel hook, standing, crisis note, patron line and people headline of this
+  lane that named "Military/Guard" or a bracketed stress power now names it "The Guard", "The Senior Line", "The Reform Line",
+  "The Neutrals", "Crown Creditors" (214 towns of the 720 in the stored fields; the patron lines and the headline at render);
+  read in r2r-hamlet-18, r2r-metropolis-8, r2s-under_siege-town-2, r2s-famine-village-1, r2s-occupied-city-2, r2r-town-20,
+  r2r-village-8, r2s-wartime-city-0, r2r-city-18 (quoted in P10.1).
+
+## P10.3 FOR THE JOIN (this seat's)
+- (r2) THE SENTENCES THAT STILL PRINT A CATALOGUE LABEL, every writer held by another lane by content (each: the file, the
+  function, the one-line change: `powerSentenceName(<name>)` from display/powerSentenceName.js where the name enters the
+  sentence): generators/factionDynamics.js (the relationship narratives: "the orders and Military/Guard carries them out" 76 towns,
+  "Military/Guard is now about as" 31, "no longer takes orders" 29, "knows where", "is hunting", "carries out what": the join
+  lanes and r3-code-c, review-bar-0, review-r3-code-c hold it); data/dossierStateProse/power.generated.js ("now has more people",
+  "stay polite to", "has not yet moved": the write lanes); domain/display/governanceAccount.js ("The Military/Guard and the
+  Merchant Guilds no longer take its orders": a site that writes its own "The" before every power: it takes the prose form AND
+  drops its article); domain/crisis/crisisHooks.js ("if it gives way, Military/Guard loses most", "In the siege, <name> of
+  Military/Guard leads the defence"); generators/npcGenerator.js (SIEGE_GOALS "keep the Military/Guard standing"); generators/
+  narrativeText.js ("Military/Guard controls the remaining fish reserves"); data/stressInstitutionEffects.js (the secret "that
+  Military/Guard helped cause"). The corpus lane prints the same words from its own filler until the two lanes meet.
+
+## P10.4 THE REGISTERS NAMED STALE (ruling r1: never banked, raised or hand-edited here)
+- (r2) tests/lint/.lighting-census-baseline.json: tests/lint/sovereigntyLightingContract.walker.test.js "THE CENSUS IS AN
+  ASSERTION, NOT A SENTENCE — every stated figure is executed" reds 3281 vs 3280 (the new guard file).
+- (r2) supabase/functions/_shared/engineBundle.js (the bundle): tests/build/engineBundleReplay.test.js "every golden-corpus
+  config: the committed bundle's settlement JSON equals the in-process ..." 210 of 525 rows, "the bundle's hashes equal the
+  committed golden fixture ..." 210, and the espionage fence's corpus 13 -> 184 of 360 (green / green / 13 at 30b03024f).
+- (r2) The generator golden master and the dormant-layer isolation read 513 rows red at both trees (already stale at the lane's
+  base; the cure's text rows join the re-record at the join).
