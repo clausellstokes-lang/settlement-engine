@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-13T20:57:46.792Z",
+  "generatedAt": "2026-11-14T10:02:33.453Z",
   "entry": "src/engine/serviceEntry.js",
-  "sourceHash": "9efe8877254a3ead",
-  "engineVersion": "9fef871db7fd0981",
-  "builtFromCommit": "15473e34ad3424f11a8815516c7a535e22a43e1e",
+  "sourceHash": "51c2a04ad138fd10",
+  "engineVersion": "b8b997e3e924404f",
+  "builtFromCommit": "750b7a612b113c324ad483cbf60c2f69eeedbcd5",
   "inputs": [
     "node_modules/seedrandom/seedrandom.js",
     "src/data/arrivalProse.js",
