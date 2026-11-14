@@ -8,6 +8,7 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { foodWordsFindings } from '../../src/domain/coherence/foodWordsFindings.js';
 import { composeFoodwaysLine, sourcesNamedIn } from '../../src/domain/foodways.js';
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -54,13 +55,16 @@ describe('a culture line naming sellers stands only where a market does', () => 
   const OVENS = 'Public ovens, neighborhood vendors, and shared dining customs make food distribution visibly civic.';
   it('no market: the sellers line is refused, a line naming no source or seller is kept', () => {
     const line = composeFoodwaysLine({ sources: ['livestock'], cultureLines: [OVENS], identity: 'thorp|28', market: false });
-    expect(line).not.toContain('vendors');
-    expect(composeFoodwaysLine({ sources: ['livestock'], cultureLines: [OVENS], identity: 'thorp|28', market: true })).toContain('vendors');
+    const withMarket = composeFoodwaysLine({ sources: ['livestock'], cultureLines: [OVENS], identity: 'thorp|28', market: true });
+    expectPresentThenAbsent(withMarket, line, 'vendors', 'the sellers line stands with a market and is refused without one');
     expect(composeFoodwaysLine({ sources: [], cultureLines: [OVENS], identity: 'thorp|28', market: false })).toBe('Meals follow the season and what the household has put by.');
   });
   it('THE GUARD TOWN rww-thorp-monster_pressure-1 (no market): its foodways line names no vendor', () => {
     const seed = 'rww-thorp-monster_pressure-1';
     const s = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'thorp', selectedStressesRandom: false, selectedStresses: ['monster_pressure'], _randomizePriorities: true }), null, { seed, customContent: {} });
-    expect(String(s.economicState?.foodSecurity?.foodRecord?.foodwaysLine)).not.toMatch(/vendors|Public ovens/);
+    const foodways = s.economicState?.foodSecurity?.foodRecord?.foodwaysLine;
+    expect(typeof foodways === 'string' && foodways.trim().length > 0, 'the guard town prints a foodways line').toBe(true);
+    // anchored: the town's foodways line is asserted a printed, non-empty string on the line above, so an absent line reds there
+    expect(foodways).not.toMatch(/vendors|Public ovens/);
   });
 });

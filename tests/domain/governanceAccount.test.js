@@ -19,6 +19,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { seatKeeperLineOf } from '../../src/domain/people/seatKeeper.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const COUNCIL = 'Corrupt Council';
 const SEAT = {
@@ -104,7 +105,7 @@ describe('the chair\'s conditions (b) and (c), 2026-11-09', () => {
     vacant.npcs = [{ id: 'keeper-1', name: 'Iulia Laenas', memberships: [{ power, rank: 1 }] }];
     const text = governanceAccountOf(vacant).text;
     expect(text.startsWith('No one holds the seat at Polaovo.')).toBe(true);
-    expect(text).not.toContain('governs without a head');
+    expectAbsentWithAnchor(text, 'governs without a head', 'No one holds the seat at Polaovo.', 'a kept seat is not headless');
   });
 
   it('THE GUARD TOWN rpf-city-succession_void+politically_fractured-13 (an acting governor keeps the seat)', async () => {
@@ -112,7 +113,7 @@ describe('the chair\'s conditions (b) and (c), 2026-11-09', () => {
     const seed = 'rpf-city-succession_void+politically_fractured-13';
     const s = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'city', selectedStressesRandom: false, selectedStresses: ['succession_void', 'politically_fractured'], _randomizePriorities: true }), null, { seed, customContent: {} });
     expect(seatKeeperLineOf(s)).toMatch(/keeps the seat meanwhile/);
-    expect(governanceAccountOf(s).text).not.toContain('governs without a head');
+    expectAbsentWithAnchor(governanceAccountOf(s).text, 'governs without a head', `No one holds the seat at ${s.name}.`, 'the acting governor keeps the seat');
   });
 
   it('(c) a fractured town NAMES the blocs the stress added, even with no relationship row, and drops the fractured line', () => {

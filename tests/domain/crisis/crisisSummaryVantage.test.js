@@ -142,10 +142,17 @@ describe('R3-CODE-C-3: a vantage promises no force, no merchant and no streets i
   const linesOf = (s) => (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : [])
     .flatMap((e) => SURFACES.map((sf) => crisisSummaryForSurface(e, s.name, sf) || ''));
   it('the four lines, reworded', () => {
-    expect(CRISIS_SUMMARY_POOLS.famine.defence.official).not.toMatch(/keep order|guard/i);
-    expect(CRISIS_SUMMARY_POOLS.famine.tonight.watch).not.toMatch(/guard/i);
-    expect(CRISIS_SUMMARY_POOLS.succession_void.tonight.trade).not.toMatch(/merchant/i);
-    expect(CRISIS_SUMMARY_POOLS.politically_fractured.defence.local).not.toMatch(/streets?/i);
+    const reworded = [
+      ['famine.defence.official', CRISIS_SUMMARY_POOLS.famine.defence.official, /keep order|guard/i],
+      ['famine.tonight.watch', CRISIS_SUMMARY_POOLS.famine.tonight.watch, /guard/i],
+      ['succession_void.tonight.trade', CRISIS_SUMMARY_POOLS.succession_void.tonight.trade, /merchant/i],
+      ['politically_fractured.defence.local', CRISIS_SUMMARY_POOLS.politically_fractured.defence.local, /streets?/i],
+    ];
+    for (const [key, line, refused] of reworded) {
+      expect(typeof line === 'string' && line.trim().length > 0, `${key}: the reworded line is still in its pool`).toBe(true);
+      // anchored: the line is asserted a non-empty string of its pool on the line above, so a renamed or emptied entry reds there
+      expect(line, key).not.toMatch(refused);
+    }
   });
   it('rww-thorp-calm-1 (a famine; nobody paid to keep order): no line guards its stores', () => {
     const s = appShape('rww-thorp-calm-1');

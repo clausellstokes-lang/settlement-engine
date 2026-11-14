@@ -101,6 +101,8 @@ describe('R3-CODE-C-3: an empty cast and an empty lever list claim no zero the r
     return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : [m[2]], _randomizePriorities: true }), null, { seed, customContent: {} });
   };
   it('the copy: no institution lever is not nobody holding the lever; an empty cast is not a crisis that touches nobody', () => {
+    expect(typeof CRISIS_PAGE_COPY.noLevers === 'string' && CRISIS_PAGE_COPY.noLevers.trim().length > 0).toBe(true);
+    // anchored: the copy is asserted a non-empty string on the line above, so a renamed or emptied key reds there
     expect(CRISIS_PAGE_COPY.noLevers).not.toMatch(/^nobody/i);
     expect(CRISIS_PAGE_COPY.nobody).not.toBe('nobody');
   });
