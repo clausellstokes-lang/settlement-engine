@@ -1,0 +1,135 @@
+{"id":"25018","town":"r2r-thorp-32","sev":"MED","kind":"STATE","why":"Stoneworking presented as production; LAND gap says stone raw resource available but not being processed, no stone house in HOUSES","other":""}
+{"id":"00615","town":"r2r-thorp-32","sev":"MED","kind":"LACKS","why":"busier lanes with upper floors: thorp of 8 people with 1 dwelling house cannot hold busy lanes","other":""}
+{"id":"19746","town":"r2r-thorp-32","sev":"MED","kind":"STATE","why":"'Defended Pass' while DEFENCE is none on every force and no walls; LAND names it Mountain Pass","other":""}
+{"id":"08654","town":"r2r-thorp-51","sev":"MED","kind":"LACKS","why":"names Reformers and Complicit beneficiaries as parties; GOVERNMENT lists only Elder Council, roster has one person","other":""}
+{"id":"21269","town":"r2r-thorp-51","sev":"MED","kind":"LACKS","why":"Reformers and Complicit beneficiaries as parties vs Elder Council; GOVERNMENT lists one power only, population 11, roster of one","other":"08654"}
+{"id":"00579","town":"r2r-thorp-51","sev":"LOW","kind":"STATE","why":"'first of Elder Council': PEOPLE brackets show Tomislav sits on no council, only the household elder seat","other":""}
+{"id":"13807","town":"r2r-thorp-51","sev":"LOW","kind":"STATE","why":"'Tomislav Lebedev of Elder Council': PEOPLE brackets show no council seat; only household elder house","other":"00579"}
+{"id":"27028","town":"r2r-thorp-51","sev":"MED","kind":"LACKS","why":"an investigator exists; roster of one has no investigator; CRISIS is Recently Betrayed, no corruption scandal in PAST","other":""}
+{"id":"03263","town":"r2r-thorp-51","sev":"MED","kind":"LACKS","why":"a key witness who needs protection; PEOPLE whole roster is one person; no corruption scandal in CRISIS or PAST","other":""}
+{"id":"27026","town":"r2r-thorp-51","sev":"MED","kind":"LACKS","why":"investigator not on roster of one; Corruption Scandal not in CRISIS (Recently Betrayed) nor PAST","other":""}
+{"id":"03260","town":"r2r-thorp-51","sev":"MED","kind":"LACKS","why":"key witness not on roster of one; Corruption Scandal not in CRISIS nor PAST","other":""}
+{"id":"26437","town":"r2r-thorp-51","sev":"MED","kind":"LACKS","why":"'the reformers are being used': no reformers in GOVERNMENT (Elder Council only), roster of one; no corruption scandal recorded","other":""}
+{"id":"07353","town":"r2r-thorp-51","sev":"MED","kind":"STATE","why":"states a live corruption scandal; CRISIS is Recently Betrayed and PAST records no scandal; one-person roster, one power","other":""}
+{"id":"01755","town":"r2r-thorp-52","sev":"MED","kind":"STATE","why":"'looks calm' and 'one of its strongest powers has turned': safety is Dangerous, GOVERNMENT lists one power only; roster of one","other":""}
+{"id":"22374","town":"r2r-thorp-52","sev":"MED","kind":"STATE","why":"settled reason is a major crossroads; FOUNDING reason is herders gathering seasonally until permanent","other":""}
+{"id":"13979","town":"r2r-thorp-52","sev":"LOW","kind":"STATE","why":"'Varg Olafsson of Household Council': PEOPLE brackets show no council seat, only Head-of-household consensus","other":""}
+{"id":"00583","town":"r2s-indebted-thorp-0","sev":"LOW","kind":"STATE","why":"'first of Feudal Stewardship': PEOPLE brackets show no power seat for the reeve, only Lord's reeve house","other":""}
+{"id":"24807","town":"r2s-indebted-thorp-0","sev":"LOW","kind":"STATE","why":"'first of Feudal Stewardship': PEOPLE brackets show no power seat, only the Lord's reeve house","other":""}
+{"id":"00576","town":"r2s-indebted-thorp-1","sev":"MED","kind":"STATE","why":"gives Eir the title Household Elder; PEOPLE first title is head shepherd, HOUSES has no household elder; brackets show no council","other":""}
+{"id":"20948","town":"r2s-infiltrated-thorp-0","sev":"MED","kind":"LACKS","why":"names Old families, Newcomers, Merchants as parties; GOVERNMENT lists Elder Council only; no merchants or market in HOUSES, roster of one","other":""}
+{"id":"21314","town":"r2s-infiltrated-thorp-0","sev":"MED","kind":"LACKS","why":"parties Old families, Newcomers, Merchants: GOVERNMENT lists only Elder Council; no market in HOUSES; population 14","other":"20948"}
+{"id":"21685","town":"r2s-infiltrated-thorp-0","sev":"MED","kind":"STATE","why":"says a recently arrived group is in sustained conflict; CRISIS is Infiltrated, QUARRELS none, only migration in PAST is 175 years ago","other":""}
+{"id":"27361","town":"r2s-infiltrated-thorp-0","sev":"LOW","kind":"STATE","why":"live newcomer-friction hook; no such crisis in CRISIS or QUARRELS, only Migration 175 years ago","other":"21685"}
+{"id":"03771","town":"r2s-infiltrated-thorp-0","sev":"LOW","kind":"STATE","why":"accidents targeting newcomers; no friction in CRISIS or QUARRELS; only migration was 175 years ago","other":"21685"}
+{"id":"04521","town":"r2s-infiltrated-thorp-0","sev":"LOW","kind":"STATE","why":"old family driving out a newcomer; no friction in CRISIS or QUARRELS; roster of one, migration 175 years ago","other":"21685"}
+{"id":"27358","town":"r2s-infiltrated-thorp-0","sev":"LOW","kind":"STATE","why":"newcomers fled something and agents followed; no friction crisis in header, only Migration 175 years ago","other":"21685"}
+{"id":"03768","town":"r2s-infiltrated-thorp-0","sev":"LOW","kind":"STATE","why":"accidents targeting newcomers; no friction in CRISIS or QUARRELS","other":"21685"}
+{"id":"04518","town":"r2s-infiltrated-thorp-0","sev":"LOW","kind":"STATE","why":"old family driving out a newcomer; no friction in CRISIS or QUARRELS","other":"21685"}
+{"id":"00574","town":"r2s-infiltrated-thorp-0","sev":"MED","kind":"STATE","why":"gives Messalina title Elder; PEOPLE first title is head shepherd; brackets show no council seat","other":""}
+{"id":"29127","town":"r2s-mass_migration-thorp-3","sev":"LOW","kind":"LACKS","why":"carts crowd the roads: population is 7, roads/crowds cannot be held","other":""}
+{"id":"10399","town":"r2s-mass_migration-thorp-3","sev":"MED","kind":"STATE","why":"says food is running short; FOOD word Secure, grown 106%, gap 0%, surplus 6%","other":""}
+{"id":"16309","town":"r2s-mass_migration-thorp-3","sev":"MED","kind":"STATE","why":"says food is running short; FOOD word Secure, grown 106%, gap 0%, surplus 6%","other":"10399"}
+{"id":"08832","town":"r2s-mass_migration-thorp-3","sev":"MED","kind":"LACKS","why":"three factions named incl. those profiting from the churn; GOVERNMENT lists Headman's Authority only; population 7","other":""}
+{"id":"21271","town":"r2s-mass_migration-thorp-3","sev":"MED","kind":"LACKS","why":"three parties vs each other; GOVERNMENT lists Headman's Authority only; population 7","other":"08832"}
+{"id":"05296","town":"r2s-mass_migration-thorp-3","sev":"MED","kind":"STATE","why":"gives Fuad title Headman; PEOPLE first title head shepherd; brackets show no seat on Headman's Authority","other":""}
+{"id":"00874","town":"r2s-mass_migration-thorp-3","sev":"MED","kind":"STATE","why":"Fuad titled Headman; PEOPLE title is head shepherd, no headman house","other":"05296"}
+{"id":"24781","town":"r2s-mass_migration-thorp-3","sev":"MED","kind":"STATE","why":"Standing: Headman; PEOPLE title is head shepherd; brackets show no Headman's Authority seat","other":"05296"}
+{"id":"19353","town":"r2s-politically_fractured-thorp-1","sev":"MED","kind":"LACKS","why":"Multiple weak claimants/Pragmatists/Vacuum as parties; GOVERNMENT lists The Independent Bloc and Household Council, two strong powers","other":""}
+{"id":"21313","town":"r2s-politically_fractured-thorp-1","sev":"MED","kind":"LACKS","why":"parties 'Multiple weak claimants' etc; GOVERNMENT lists two powers only, Independent Bloc Dominant, Council Strong","other":"19353"}
+{"id":"00468","town":"r2s-politically_fractured-thorp-1","sev":"MED","kind":"STATE","why":"Citlali titled Household Elder; PEOPLE title is head shepherd; HOUSES has no household elder","other":""}
+{"id":"11965","town":"r2s-politically_fractured-thorp-1","sev":"MED","kind":"LACKS","why":"shorting publicly recommended investments: thorp of 10 with no market or finance house in HOUSES","other":""}
+{"id":"25870","town":"r2s-politically_fractured-thorp-1","sev":"MED","kind":"LACKS","why":"'controls a distinct district or institution': population 10 cannot hold a district; HOUSES lists no institution for the Bloc","other":""}
+{"id":"10863","town":"r2s-religious_conversion-thorp-2","sev":"MED","kind":"STATE","why":"Gemcutting as production; LAND gap says gemstones raw resource available but not being processed; no gem house in HOUSES","other":""}
+{"id":"13843","town":"r2s-religious_conversion-thorp-2","sev":"LOW","kind":"STATE","why":"'Laskaris Botaneiates of Elder Council': PEOPLE brackets show no council seat, only Informal elder consensus","other":""}
+{"id":"00570","town":"r2s-religious_conversion-thorp-3","sev":"MED","kind":"STATE","why":"Calvus titled Household Elder; PEOPLE first title camp foreman @ Woodcutter's camp; no household elder in HOUSES","other":""}
+{"id":"13855","town":"r2s-religious_conversion-thorp-3","sev":"LOW","kind":"STATE","why":"'Calvus Corvinus of Household Council': PEOPLE brackets show no council seat, only Woodcutter's camp","other":""}
+{"id":"14061","town":"r2s-slave_revolt-thorp-2","sev":"LOW","kind":"STATE","why":"'Tianmei Wu of Elder Council': PEOPLE brackets show no council seat, only Fishing community (boat-headman)","other":""}
+{"id":"01035","town":"r2s-succession_void-thorp-2","sev":"MED","kind":"LACKS","why":"names a 'Popular candidate' party; GOVERNMENT lists Household Council only; roster of one","other":""}
+{"id":"21238","town":"r2s-succession_void-thorp-2","sev":"MED","kind":"LACKS","why":"'Popular candidate' as a party vs Household Council; GOVERNMENT lists one power, roster of one","other":"01035"}
+{"id":"00580","town":"r2s-wartime-thorp-3","sev":"LOW","kind":"STATE","why":"'first of Headman's Authority': PEOPLE brackets show no power seat, only Household elder house","other":""}
+{"id":"28950","town":"r2r-thorp-19","sev":"LOW","kind":"LACKS","why":"'two defenders died': DEFENCE shows no garrison, militia, watch or hired force; no one under arms","other":""}
+{"id":"31869","town":"r2r-thorp-29","sev":"LOW","kind":"LACKS","why":"'broad lanes sized for herds, carts': population 11 cannot hold lanes of that scale; thorp with 1 dwelling house","other":""}
+{"id":"03614","town":"r2r-thorp-29","sev":"MED","kind":"LACKS","why":"'half their street' signed a petition: population 11 has no street to speak of; roster of one","other":""}
+{"id":"00567","town":"r2s-indebted-thorp-3","sev":"MED","kind":"STATE","why":"Pulvillus titled Household Elder; PEOPLE first title boat-headman @ Fishing community; no household elder in HOUSES","other":""}
+{"id":"25408","town":"r2s-insurgency-thorp-1","sev":"LOW","kind":"LACKS","why":"'some offices keep the revenue': population 10, one power and one-person roster; no offices to hold","other":""}
+{"id":"14255","town":"r2s-insurgency-thorp-1","sev":"LOW","kind":"LACKS","why":"'some offices keep the revenue': population 10, one power, roster of one","other":"25408"}
+{"id":"12380","town":"r2s-insurgency-thorp-1","sev":"MED","kind":"STATE","why":"'a path over the hills': terrain is Plains; LAND lists no hills or pass","other":""}
+{"id":"13662","town":"r2s-insurgency-thorp-2","sev":"LOW","kind":"LACKS","why":"'some offices no longer send their revenue on': population 9, one power, roster of one","other":""}
+{"id":"00569","town":"r2s-insurgency-thorp-2","sev":"MED","kind":"STATE","why":"gives Yohualli title Elder; PEOPLE first title camp foreman @ Woodcutter's camp; brackets show no council seat","other":""}
+{"id":"05244","town":"r2s-insurgency-thorp-3","sev":"MED","kind":"STATE","why":"Mechthild titled Household Elder; PEOPLE title boat-headman @ Fishing community; no household elder in HOUSES","other":""}
+{"id":"21808","town":"r2s-insurgency-thorp-3","sev":"LOW","kind":"PAIR","why":"Pragmatic Alliance (back each other) vs Mutual Leverage (nothing to give away) for the same pair; QUARRELS lists no relations","other":"19368"}
+{"id":"15128","town":"r2s-mass_migration-thorp-0","sev":"LOW","kind":"PAIR","why":"goal 'rise together with Toghrul Jadaran' vs relationship: Lkhagvajav wants Toghrul's position (Professional Rivalry)","other":"21920"}
+{"id":"08263","town":"r2s-mass_migration-thorp-0","sev":"LOW","kind":"STATE","why":"'people in the camp are dying of the shortfall'; FOOD ledger shows gap 2%, band secure, no failed source","other":""}
+{"id":"15796","town":"r2s-mass_migration-thorp-0","sev":"MED","kind":"STATE","why":"says 'he holds official charge'; the Lord's reeve Lkhagvajav Taichiud is (f) in PEOPLE","other":""}
+{"id":"15776","town":"r2s-monster_pressure-thorp-3","sev":"MED","kind":"LACKS","why":"lookouts watch the roads; DEFENCE shows watch none and no one under arms; population 10","other":""}
+{"id":"08668","town":"r2s-politically_fractured-thorp-0","sev":"LOW","kind":"STATE","why":"Bloc 'pressing close behind' Elder Council; GOVERNMENT has The Independent Bloc Dominant, Elder Council only Significant","other":""}
+{"id":"12958","town":"r2s-politically_fractured-thorp-1","sev":"LOW","kind":"STATE","why":"Bloc 'pressing close behind' Household Council; GOVERNMENT has The Independent Bloc Dominant, Council only Strong","other":""}
+{"id":"12947","town":"r2s-recently_betrayed-thorp-2","sev":"MED","kind":"LACKS","why":"names Reformers and Complicit beneficiaries as parties; GOVERNMENT lists Household Council only; roster of one, population 13","other":""}
+{"id":"21294","town":"r2s-recently_betrayed-thorp-2","sev":"MED","kind":"LACKS","why":"Reformers and Complicit beneficiaries as parties; GOVERNMENT lists one power only, population 13","other":"12947"}
+{"id":"13815","town":"r2s-recently_betrayed-thorp-2","sev":"LOW","kind":"STATE","why":"'Atotoztli Caan of Household Council': PEOPLE brackets show no council seat, only Fishing community","other":""}
+{"id":"31407","town":"r2s-mass_migration-thorp-2","sev":"MED","kind":"STATE","why":"says food is running short; FOOD word Secure, grown 107%, gap 0%, surplus 8%","other":""}
+{"id":"22278","town":"r2s-monster_pressure-thorp-2","sev":"MED","kind":"STATE","why":"'quiet country, little is kept against it'; safety is Strained Monster Threat and DEFENCE has a palisade and Household levy","other":""}
+{"id":"22748","town":"r2s-wartime-thorp-1","sev":"MED","kind":"STATE","why":"'rival claimants hold competing partial authority'; GOVERNMENT lists Elder Council (Strong) only; CRISIS is Wartime, Interregnum was 79 years ago","other":""}
+{"id":"00788","town":"r2s-wartime-thorp-1","sev":"MED","kind":"STATE","why":"'no one has yet consolidated their position' for an event 79 years ago; GOVERNMENT has a Strong Elder Council and a named elder","other":"22748"}
+{"id":"03283","town":"r2s-wartime-thorp-1","sev":"LOW","kind":"STATE","why":"a claimant has fabricated a mandate; GOVERNMENT lists one power, roster of one, no succession crisis in CRISIS; Interregnum 79 years ago","other":"22748"}
+{"id":"03390","town":"r2s-wartime-thorp-1","sev":"LOW","kind":"STATE","why":"a vacuum maintained by an outside power; GOVERNMENT has a Strong Elder Council, CRISIS is Wartime","other":"22748"}
+{"id":"22746","town":"r2r-thorp-11","sev":"MED","kind":"LACKS","why":"charters lodged with 'the court': HOUSES lists no court; population 18","other":""}
+{"id":"08230","town":"r2r-thorp-26","sev":"MED","kind":"LACKS","why":"names Displaced traders, Workers, Rivals as parties; GOVERNMENT lists Headman's Authority only; roster of one, no market","other":""}
+{"id":"21261","town":"r2r-thorp-26","sev":"MED","kind":"LACKS","why":"parties Displaced traders vs Workers vs Rivals; GOVERNMENT lists Headman's Authority only; population 15","other":"08230"}
+{"id":"00575","town":"r2r-thorp-26","sev":"MED","kind":"STATE","why":"gives Daria title Headman; PEOPLE first title head shepherd @ Shepherd collective; brackets show no Headman's Authority seat","other":""}
+{"id":"29429","town":"r2r-thorp-26","sev":"MED","kind":"STATE","why":"states a trade collapse that failed overland trade; PAST records no trade collapse (Succession Crisis, Siege, Shortage only); CRISIS is Infiltrated","other":""}
+{"id":"27883","town":"r2r-thorp-26","sev":"LOW","kind":"STATE","why":"route closed hook labelled Trade Collapse; PAST records no trade collapse","other":"29429"}
+{"id":"02902","town":"r2r-thorp-26","sev":"LOW","kind":"STATE","why":"caravan master says the collapse was arranged; PAST records no trade collapse","other":"29429"}
+{"id":"04514","town":"r2r-thorp-26","sev":"LOW","kind":"STATE","why":"contract obliges a partner to trade (Trade Collapse); PAST records no trade collapse","other":"29429"}
+{"id":"27881","town":"r2r-thorp-26","sev":"LOW","kind":"STATE","why":"route closed hook labelled Trade Collapse; PAST records no trade collapse","other":"29429"}
+{"id":"02900","town":"r2r-thorp-26","sev":"LOW","kind":"STATE","why":"caravan master says the collapse was arranged; PAST records no trade collapse","other":"29429"}
+{"id":"04511","town":"r2r-thorp-26","sev":"LOW","kind":"STATE","why":"contract obliges a partner to trade (Trade Collapse); PAST records no trade collapse","other":"29429"}
+{"id":"00566","town":"r2s-insurgency-thorp-0","sev":"MED","kind":"STATE","why":"gives Rónán title Headman; PEOPLE first title boat-headman @ Fishing community; brackets show no Headman's Authority seat","other":""}
+{"id":"00568","town":"r2s-succession_void-thorp-3","sev":"MED","kind":"STATE","why":"gives Nabila title Acting Household Elder; PEOPLE title camp foreman; HOUSES has no household elder","other":""}
+{"id":"28819","town":"r2r-thorp-16","sev":"MED","kind":"LACKS","why":"'works for the guard captain': DEFENCE shows no garrison, watch or hired force; no guard captain; population 10","other":""}
+{"id":"05294","town":"r2s-politically_fractured-thorp-2","sev":"MED","kind":"STATE","why":"gives Seianus Maximus title Elder; PEOPLE first title head shepherd @ Shepherd collective; brackets show no council seat","other":""}
+{"id":"22265","town":"r2r-thorp-14","sev":"MED","kind":"LACKS","why":"plague factions as parties (Quarantine hardliners, Healers); CRISIS none, PAST records no plague, GOVERNMENT lists Feudal Stewardship only","other":""}
+{"id":"21319","town":"r2r-thorp-14","sev":"MED","kind":"LACKS","why":"plague factions as parties; CRISIS none, PAST has no plague, GOVERNMENT lists one power","other":"22265"}
+{"id":"21602","town":"r2r-thorp-14","sev":"MED","kind":"STATE","why":"a three-season sickness struck the settlement; PAST records Arcane Incident, Occupation, Trade Collapse and no plague","other":""}
+{"id":"27568","town":"r2r-thorp-14","sev":"LOW","kind":"STATE","why":"plague pit, dead list; PAST records no plague years","other":"21602"}
+{"id":"27661","town":"r2r-thorp-14","sev":"LOW","kind":"STATE","why":"quarantine used to settle scores; PAST records no plague years","other":"21602"}
+{"id":"27566","town":"r2r-thorp-14","sev":"LOW","kind":"STATE","why":"plague pit, dead list; PAST records no plague years","other":"21602"}
+{"id":"27659","town":"r2r-thorp-14","sev":"LOW","kind":"STATE","why":"quarantine used to settle scores; PAST records no plague years","other":"21602"}
+{"id":"10541","town":"r2r-thorp-23","sev":"MED","kind":"LACKS","why":"Former rebels/restored order/changed sides as parties; CRISIS none, PAST has no uprising, GOVERNMENT lists Household Council only","other":""}
+{"id":"21277","town":"r2r-thorp-23","sev":"MED","kind":"LACKS","why":"parties Former rebels vs The restored order; CRISIS none, PAST has no uprising, one power only","other":"10541"}
+{"id":"21680","town":"r2r-thorp-23","sev":"MED","kind":"STATE","why":"a popular uprising happened; PAST lists Migration, Succession Crisis, Religious Conflict only; CRISIS none","other":""}
+{"id":"03424","town":"r2r-thorp-23","sev":"LOW","kind":"STATE","why":"list of those who informed on the rebels names people in office; no uprising in PAST, roster of one","other":"21680"}
+{"id":"28362","town":"r2r-thorp-23","sev":"LOW","kind":"STATE","why":"the uprising was funded from outside; PAST records no uprising","other":"21680"}
+{"id":"03422","town":"r2r-thorp-23","sev":"LOW","kind":"STATE","why":"list of informers names people in office; no uprising in PAST, roster of one","other":"21680"}
+{"id":"28360","town":"r2r-thorp-23","sev":"LOW","kind":"STATE","why":"the uprising was funded from outside; PAST records no uprising","other":"21680"}
+{"id":"02983","town":"r2r-thorp-23","sev":"LOW","kind":"STATE","why":"a concession won in the revolt rolled back; PAST records no revolt or uprising","other":"21680"}
+{"id":"23542","town":"r2r-thorp-36","sev":"MED","kind":"LACKS","why":"Security hardliners/Civil libertarians/Actual agents as parties; CRISIS none, GOVERNMENT lists Elder Council only, population 5, roster of one","other":""}
+{"id":"21325","town":"r2r-thorp-36","sev":"MED","kind":"LACKS","why":"three factions as parties; CRISIS none, GOVERNMENT lists one power, population 5","other":"23542"}
+{"id":"08229","town":"r2r-thorp-37","sev":"MED","kind":"LACKS","why":"Displaced families/Landowners/profiteers as parties from a redrawing; CRISIS none, PAST has no flood, GOVERNMENT one power, population 6","other":""}
+{"id":"21260","town":"r2r-thorp-37","sev":"MED","kind":"LACKS","why":"parties Displaced families vs Landowners vs Those who profited; CRISIS none, PAST has no flood, population 6","other":"08229"}
+{"id":"11671","town":"r2r-thorp-37","sev":"MED","kind":"STATE","why":"a Great Flood reshaped the low ground; PAST records Pilgrimage, Succession Crisis, Migration only","other":""}
+{"id":"27440","town":"r2r-thorp-37","sev":"LOW","kind":"STATE","why":"old boundaries washed away in a flood; PAST records no flood","other":"11671"}
+{"id":"27438","town":"r2r-thorp-37","sev":"LOW","kind":"STATE","why":"old boundaries washed away in a flood; PAST records no flood","other":"11671"}
+{"id":"25186","town":"r2r-thorp-9","sev":"MED","kind":"LACKS","why":"fire factions as parties (Survivors, Rebuilders, Those accused); CRISIS none, PAST records no fire, GOVERNMENT lists one power","other":""}
+{"id":"21327","town":"r2r-thorp-9","sev":"MED","kind":"LACKS","why":"fire factions as parties; CRISIS none, PAST records only an Uprising, GOVERNMENT one power","other":"25186"}
+{"id":"11663","town":"r2r-thorp-9","sev":"MED","kind":"STATE","why":"a Great Fire burned the houses; PAST records only The Uprising 113 years ago","other":""}
+{"id":"26666","town":"r2r-thorp-9","sev":"LOW","kind":"STATE","why":"fire spared houses one power wanted cleared; PAST records no fire, GOVERNMENT one power","other":"11663"}
+{"id":"02990","town":"r2r-thorp-9","sev":"LOW","kind":"STATE","why":"confession from a scapegoat for a fire; PAST records no fire","other":"11663"}
+{"id":"22405","town":"r2r-thorp-9","sev":"LOW","kind":"STATE","why":"rebuilding after a fire; PAST records no fire","other":"11663"}
+{"id":"26664","town":"r2r-thorp-9","sev":"LOW","kind":"STATE","why":"fire spared houses one power wanted cleared; PAST records no fire, one power","other":"11663"}
+{"id":"02988","town":"r2r-thorp-9","sev":"LOW","kind":"STATE","why":"confession from a scapegoat for a fire; PAST records no fire","other":"11663"}
+{"id":"22403","town":"r2r-thorp-9","sev":"LOW","kind":"STATE","why":"rebuilding after a fire; PAST records no fire","other":"11663"}
+{"id":"22396","town":"r2r-thorp-9","sev":"MED","kind":"STATE","why":"settled reason 'set apart from the trade roads'; FOUNDING reason is a sacred grove that attracted religious settlement","other":""}
+{"id":"15690","town":"r2r-thorp-9","sev":"MED","kind":"STATE","why":"'little has happened here worth writing down'; PAST records The Uprising, catastrophic, 113 years ago","other":""}
+{"id":"01414","town":"r2r-thorp-18","sev":"LOW","kind":"BROKEN","why":"'what it lacks is Smelter': capitalised label with no article, reads as an unfilled slot","other":""}
+{"id":"20951","town":"r2r-thorp-20","sev":"MED","kind":"LACKS","why":"regime factions as parties (Old loyalists, Those who suffered, Beneficiaries); CRISIS none, PAST has no tyranny, GOVERNMENT one power","other":""}
+{"id":"21315","town":"r2r-thorp-20","sev":"MED","kind":"LACKS","why":"regime factions as parties; CRISIS none, PAST records no tyranny, GOVERNMENT lists Household Council only","other":"20951"}
+{"id":"29579","town":"r2r-thorp-20","sev":"MED","kind":"STATE","why":"a single figure seized power and ruled without check; PAST records only Succession Crisis and Migration","other":""}
+{"id":"28354","town":"r2r-thorp-20","sev":"LOW","kind":"STATE","why":"the tyrant's records survived; PAST records no tyranny","other":"29579"}
+{"id":"03151","town":"r2r-thorp-20","sev":"LOW","kind":"STATE","why":"fortune confiscated by the regime; PAST records no tyranny or regime","other":"29579"}
+{"id":"28352","town":"r2r-thorp-20","sev":"LOW","kind":"STATE","why":"the tyrant's records survived; PAST records no tyranny","other":"29579"}
+{"id":"03149","town":"r2r-thorp-20","sev":"LOW","kind":"STATE","why":"fortune confiscated by the regime; PAST records no tyranny or regime","other":"29579"}
+{"id":"24316","town":"r2r-thorp-20","sev":"LOW","kind":"STATE","why":"someone is rehabilitating the tyrant's reputation; PAST records no tyranny","other":"29579"}
+{"id":"10486","town":"r2r-thorp-31","sev":"LOW","kind":"STATE","why":"table rests on bread of the local grain; LAND gives the Grain & Bread chain vulnerable with grain fields absent","other":""}
+{"id":"DONE","lines":2709,"blocks":67,"flags":134}
