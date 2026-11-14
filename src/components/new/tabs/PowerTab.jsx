@@ -11,7 +11,7 @@ import { factionIdFromName } from '../../../lib/entities.js';
 import { hasLadder } from '../../../domain/townMap/ladderRead.js';
 import { PowerStrata } from './power/PowerStrata.jsx'; // X-50: one line, so no cited line moves
 import { rulingChainOf } from '../../../domain/dossier/powerStrata.js';
-import { governingFactionOf } from '../../../domain/rulingPower.js';
+import { governingModifierWordsOf } from '../../../domain/display/governingModifierWords.js';
 // THE POWER DESK IS REACHED THROUGH ITS ONE CALLER (ARM 2), shared with the public prose
 // composer (SW-B7b): the reader owns the desk, the ladder rung and the governance paragraph.
 import { powerDeskRead, powerDeskReadings, powerLadderRead, powerLadderRowsOf, governanceAccountRead } from '../powerDeskRead.js';
@@ -100,10 +100,11 @@ function RulingChainBlock({ settlement }) {
   // "this is a word" is the suffix; the sibling reads on this row already pass
   // by it (`powerLabel`, `.name`). This one just lacked the declaration.
   const governmentWord = chain.power?.government || '';
-  // STOP-1 (R7): the governing faction's character word (corruption-riddled, theocratic-aligned,
-  // military-dominated ...), which the migration kernel reads. Its one screen home since T2-17
-  // cut the "Governing authority" box is this chip on the power line.
-  const governingModifier = chain.power ? String(governingFactionOf(settlement)?.modifier || '') : '';
+  // STOP-1 (R7): the governing faction's character word, its one screen home since T2-17 cut the
+  // "Governing authority" box is this chip on the power line. POWERS-13 (the bar's #272): never the
+  // stored key ('mage-advised'); its plain words, and only where the town's record bears it out
+  // (display/governingModifierWords.js), else no chip.
+  const governingModifier = chain.power ? governingModifierWordsOf(settlement) : '';
   return (
     <div data-testid="ruling-chain" style={{
       background: swatch['#FAF8F4'], border: `1px solid ${swatch['#E0D0B0']}`,

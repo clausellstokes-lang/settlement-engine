@@ -1429,24 +1429,6 @@
     "6398129f0b224671"
    ],
    [
-    "smith",
-    "family",
-    ", and the place plainly lives by its forges.",
-    "8f91b1ce5da5666f"
-   ],
-   [
-    "smith",
-    "family",
-    "Forge smoke hangs over everything here, and the ring of the anvils never quite stops.",
-    "09f57d3e1f553d7e"
-   ],
-   [
-    "smith",
-    "family",
-    " lives by its forges: the clang of iron is in every lane.",
-    "a73477bf04bfc2ec"
-   ],
-   [
     "house: tannery",
     "family",
     "The tannery makes itself known long before you reach it.",
@@ -2045,18 +2027,6 @@
    [
     "practitioner",
     "word",
-    "{settlement} runs on arcane work. What the town produces, and in some measure what the town eats, depends on practitione",
-    "aeb8b241032c410f"
-   ],
-   [
-    "practitioner",
-    "word",
-    "{settlement} leans on its practitioners; a hard season for them (a feud, a sickness, a falling-out with the hall) is a h",
-    "43ee1250202c3af8"
-   ],
-   [
-    "practitioner",
-    "word",
     "Arcane work at {settlement} answers to its military, and the practitioners' own books show it: defence work first, payin",
     "3e9e9737608a06bb"
    ],
@@ -2434,12 +2404,6 @@
    ],
    [
     "famine",
-    "family",
-    "The longer the hunger lasts at {settlement}, the less its defenders can do, and nothing is filling the stores again yet.",
-    "64af7f8fa3304a8e"
-   ],
-   [
-    "armedForce",
     "family",
     "The longer the hunger lasts at {settlement}, the less its defenders can do, and nothing is filling the stores again yet.",
     "64af7f8fa3304a8e"
@@ -4926,19 +4890,7 @@
     "36da3a879b87a032"
    ],
    [
-    "smith",
-    "family",
-    "Charcoal furnaces reduce raw ore to refined metal. It stands between the mine and the smithy.",
-    "36da3a879b87a032"
-   ],
-   [
     "house: mine",
-    "family",
-    "Refines crude ore into workable metal over charcoal fire. The industrial step from what the mine yields to what the smit",
-    "f3d81ba2b93c4691"
-   ],
-   [
-    "smith",
     "family",
     "Refines crude ore into workable metal over charcoal fire. The industrial step from what the mine yields to what the smit",
     "f3d81ba2b93c4691"
@@ -6846,18 +6798,6 @@
     "family",
     "the master baker",
     "3c27cb53dcc50109"
-   ],
-   [
-    "house: mine",
-    "family",
-    "Converts raw ore to refined metal using charcoal-fueled furnaces. The industrial intermediate between mine and smithy.",
-    "d3537bad8b5539cb"
-   ],
-   [
-    "smith",
-    "family",
-    "Converts raw ore to refined metal using charcoal-fueled furnaces. The industrial intermediate between mine and smithy.",
-    "d3537bad8b5539cb"
    ],
    [
     "clergy",

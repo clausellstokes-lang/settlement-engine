@@ -4,6 +4,8 @@
  * craft, thieves vs guard, noble vs merchant, clergy vs arcane, …).
  */
 
+import { powerSentenceName } from '../../domain/display/powerSentenceName.js';
+
 // annotateFactionStanding — enrich faction descriptions with their position in
 // the (already normalised and sorted) power ranking (mutates in place).
 export const annotateFactionStanding = (factions, force = { body: 'garrison' }) => { // F1: `force` is `defenseFacts.js :: forceWordsOf`, the garrison's words by default
@@ -16,6 +18,8 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
           });
         },
         topFactionName = factions[0] ? factions[0].faction : null;
+      // POWERS-16 (the chair's ruling (r2)): a power named in a standing sentence takes its prose form, from one leaf
+      var topSaid = topFactionName ? powerSentenceName(topFactionName) : null;
       factions[1] && factions[1].faction;
       var topPower = factions[0] ? factions[0].power : 0,
         secondPower = factions[1] ? factions[1].power : 0,
@@ -48,18 +52,18 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
             (topTwoGap <= 6
               ? (standing = topFactionName
                   ? 'The gap between them and ' +
-                    (topFactionName && factions[0].isGoverning && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topFactionName) +
+                    (topFactionName && factions[0].isGoverning && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topSaid) +
                     ' is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.'
                   : 'No one clearly leads here; one scandal or one lost ally could change who does.')
               : topTwoGap <= 14
                 ? (standing = topFactionName
                     ? 'They operate in the shadow of ' +
-                      (topFactionName && factions[0].isGoverning && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topFactionName) +
+                      (topFactionName && factions[0].isGoverning && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topSaid) +
                       ' but not comfortably: they are waiting for a chance to push back.'
                     : 'They are strong enough to resist those above them, but too far behind to risk an open fight.')
                 : (standing = topFactionName
                     ? 'Behind ' +
-                      (topFactionName && factions[0].isGoverning && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topFactionName) +
+                      (topFactionName && factions[0].isGoverning && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topSaid) +
                       ' by too much to challenge openly, so they get their way through petitions and procedure instead.'
                     : 'The order is settled for now; they are busy holding on to second place and make no move on first.')),
           rank === 2 &&
@@ -70,9 +74,9 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
               : gapAbove <= 10
                 ? (standing =
                     'Close enough to the two above that their support is worth buying; they play ' +
-                    (higherNeighbor ? higherNeighbor.faction : 'the second power') +
+                    (higherNeighbor ? powerSentenceName(higherNeighbor.faction) : 'the second power') +
                     ' and ' +
-                    (factions[0] ? factions[0].faction : 'the leading power') +
+                    (factions[0] ? powerSentenceName(factions[0].faction) : 'the leading power') +
                     ' against each other when they can.')
                 : (standing =
                     'They are always at the table, but cannot set their own terms.')),

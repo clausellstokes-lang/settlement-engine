@@ -3,7 +3,9 @@
  * people car, PEOPLE-2 CAST-DERIVED, 2026-11-07; brief
  * docs/chair/2026-11-07/BRIEF-PEOPLE-2-CAST-DERIVED-2026-11-07.md §1).
  *
- * Over the golden 525 and the soak 1,000's first 300 (825 born settlements):
+ * Over the golden 525 and the soak 1,000's first 320 (845 born settlements; the soak's 300-319 added by R2-CODE-B-11,
+ * the chair's ruling of 2026-11-14: a floor of WITNESSES is never lowered: the cast's cures (row 179, 34 false collaborators;
+ * H2-1/2/3, 66 false brunts) made 96 false roles ABSENT, and the corpus gains births until the floor holds again):
  *   step 1 — every cast role that names a person names a card on the roster; a person drawn from a
  *            power holds a membership in a power that stands in that relation to the crisis; the
  *            lever's holder is the lever house's face wherever the house has one, and nobody else;
@@ -32,8 +34,8 @@ beforeAll(async () => {
     const { _seed, ...rest } = cfg;
     corpus.push({ label: keyOf(cfg), s: generateSettlementPipeline(rest, null, { seed: _seed, customContent: {} }) });
   }
-  for (let i = 0; i < 300; i += 1) corpus.push({ label: `soak1k-${i}`, s: birth(i).settlement });
-}, 300_000); // measured: ~49 s for the 825 births on one core
+  for (let i = 0; i < 320; i += 1) corpus.push({ label: `soak1k-${i}`, s: birth(i).settlement });
+}, 300_000); // measured: ~49 s for the 825 births on one core (845 since R2-CODE-B-11)
 
 const stressesOf = (s) => (Array.isArray(s.stress) ? s.stress : (s.stress ? [s.stress] : [])).filter((e) => e && e.cast);
 const powersOf = (s) => s.powerStructure?.factions || [];
@@ -58,7 +60,7 @@ function relationFor(row) {
   return null;
 }
 
-describe('step 1 — the crisis cast reads memberships (825 born settlements)', () => {
+describe('step 1 — the crisis cast reads memberships (845 born settlements)', () => {
   it('every person a cast names is on the roster; a power-drawn person holds a membership in a power of that relation', () => {
     const misses = [];
     let people = 0;
@@ -116,7 +118,7 @@ describe('step 1 — the crisis cast reads memberships (825 born settlements)', 
   });
 });
 
-describe('step 2 — the seat row is the governing power\'s rank-1 face (825 born settlements)', () => {
+describe('step 2 — the seat row is the governing power\'s rank-1 face (845 born settlements)', () => {
   it('every settlement seats its governing power\'s rank-1 face, or reads its claimant vacancy', () => {
     const misses = [];
     let seated = 0;
@@ -136,7 +138,7 @@ describe('step 2 — the seat row is the governing power\'s rank-1 face (825 bor
   });
 });
 
-describe('step 3 — the structural standing is the first-rank power\'s (825 born settlements)', () => {
+describe('step 3 — the structural standing is the first-rank power\'s (845 born settlements)', () => {
   it('every card carries structuralRank from its first-rank power: rank 1 head, 2–3 inner circle, unranked member, none unaffiliated', () => {
     const misses = [];
     const seen = { head: 0, inner_circle: 0, member: 0, unaffiliated: 0 };

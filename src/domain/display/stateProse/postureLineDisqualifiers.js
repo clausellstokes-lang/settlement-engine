@@ -34,6 +34,11 @@
  *     reader's 1,536 at the line's tip 976db5b19, 32 at bb2bf91c5 by L1). Read from THE SAME FACT the assessment
  *     reads (`safetyProfile.js`, its tier, never its sentence): a military institution, no state crime, effective
  *     military under 30 and the economy priority under 35 (agreeing with the sentence in 1,536 of 1,536).
+ *   - THE DEFENCE SHORT OF SUPPLY (R3-TABS-4; the chair's ruling of 2026-11-14 08:53 UTC on this seat's measure): the
+ *     strong pool is struck WHOLE where the Invasion row's supply sentence says the defenders go short ("…make do",
+ *     "…a little worse off every month"): 141 towns of the reader's 1,536 at the line's tip, 203 at bb2bf91c5 (L1).
+ *     Read from THE SAME FACT the supply key reads (`defenceSupplyPoolKey`: the chain's military arm below zero, beside
+ *     a force the Invasion row speaks for: a garrison, a militia or a contracted company; a watch alone is silent there).
  *   - UNDER AN OCCUPATION: `stress[].type` `occupied` (R3-TABS-4; the chair's ruling (a) of 2026-11-14 on the
  *     fresh reader's F1): the strong pool is struck WHOLE, as under a siege. Every one of its lines says the
  *     town's own defences are in good order, beside the banner "The occupiers' troops at … protect it from
@@ -103,9 +108,12 @@ export function corpusAdmittingPostureLines(corpus, settlement) {
   const underSiege = types.includes('under_siege');
   const atWar = underSiege || types.includes('wartime');
   const occupied = types.includes('occupied');
-  const strikeWhole = occupied || guardOnPaper(settlement);
   const forces = standingDefenseForces(settlement);
   const force = forces.garrison.present || forces.militia.present || forces.watch.present || forces.mercenary.present;
+  const chainMilitary = /** @type {{ defenseProfile?: { chainModifiers?: { military?: unknown } } } | null | undefined} */ (settlement)?.defenseProfile?.chainModifiers?.military;
+  const supplyShort = (forces.garrison.present || forces.militia.present || forces.mercenary.present)
+    && typeof chainMilitary === 'number' && Number.isFinite(chainMilitary) && chainMilitary < 0;
+  const strikeWhole = occupied || guardOnPaper(settlement) || supplyShort;
   /** @type {Record<PostureLineFact, boolean>} */
   const holds = {
     'at war': atWar, 'under siege': underSiege, 'a force stands': force,

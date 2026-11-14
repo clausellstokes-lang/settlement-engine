@@ -3067,6 +3067,7 @@
         "neighbour.rival": "multiplier",
         "neighbour.tense": "multiplier",
         "neighbour.trade_partner": "multiplier",
+        "people.milPerHead": "multiplier",
         "prison.int": "points",
         "purse.sup": "points",
         "sea.sup": "points",

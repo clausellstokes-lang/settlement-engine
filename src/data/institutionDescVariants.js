@@ -2064,6 +2064,19 @@ export const DESC_VARIANT_SIBLINGS = Object.freeze({
     Object.freeze({ text: "The river is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.", needs: Object.freeze(["river"]) }),
     Object.freeze({ text: "The water is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.", twinOf: "The river is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.", excludes: Object.freeze(["river"]) }),
   ]),
+  // W2-FIX-DATA-11 (2026-11-14; REVIEW-BAR-0 #185): the smelter's two variants "between the mine and the smithy" where
+  // the town has no mine or no smith (every smelter town of the census prints one of three such texts; 159 of 241 lack a
+  // house). Each text declares both houses; its twin names neither. The catalogue's own text ("The industrial intermediate
+  // between mine and smithy") is not keyed here: its literal would be a new `house: mine` line (PARKED, HANDBACK-11).
+  // VETOABLE wording (the owner's).
+  "Charcoal furnaces reduce raw ore to refined metal. It stands between the mine and the smithy.": Object.freeze([
+    Object.freeze({ text: "Charcoal furnaces reduce raw ore to refined metal. It stands between the mine and the smithy.", needs: Object.freeze(["institution: mine", "institution: smith"]) }),
+    Object.freeze({ text: "Charcoal furnaces reduce raw ore to refined metal, cast in bars for whoever will buy them.", twinOf: "Charcoal furnaces reduce raw ore to refined metal. It stands between the mine and the smithy." }),
+  ]),
+  "Refines crude ore into workable metal over charcoal fire. The industrial step from what the mine yields to what the smith uses.": Object.freeze([
+    Object.freeze({ text: "Refines crude ore into workable metal over charcoal fire. The industrial step from what the mine yields to what the smith uses.", needs: Object.freeze(["institution: mine", "institution: smith"]) }),
+    Object.freeze({ text: "Refines crude ore into workable metal over charcoal fire, and sells it on by the bar.", twinOf: "Refines crude ore into workable metal over charcoal fire. The industrial step from what the mine yields to what the smith uses." }),
+  ]),
   // W2-FIX-DATA-5 (2026-11-13; REVIEW-W2A-3 #973, #238; the cell of ROUND-3-CUT-INCREMENT ww-494): the Annual fair's merchants
   // and the toll bridge's steady fees under a siege that cuts every road. Each text declares the siege off; its twin says
   // the roads are held. VETOABLE wording (the owner's).

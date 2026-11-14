@@ -44,6 +44,7 @@ describe('A1b the courts only where a courthouse stands', () => {
   it('the court is named only on a roster that holds one', () => {
     expect(String(/** @type {any} */ (PRESSURE_SENTENCES.religious_conversion({ name: 'X', hasCourt: true })[1]).text)).toContain('that the courts are not equipped');
     const none = String(/** @type {any} */ (PRESSURE_SENTENCES.religious_conversion({ name: 'X', hasCourt: false, govFaction: 'Town Council' })[1]).text);
+    // anchored: the next line asserts the same row printed its council clause
     expect(none).not.toMatch(/court/i);
     expect(none).toContain('that Town Council is not equipped to resolve quickly');
   });
@@ -68,6 +69,8 @@ describe('A2 the census towns, born in the census shape', () => {
       ['r2s-slave_revolt-hamlet-3', /districts/],
       ['r2s-religious_conversion-town-2', /courts/],
     ], ([seed, words]) => {
+      expect(String(born(seed).pressureSentence).length, `${seed}: a pressure line printed`).toBeGreaterThan(40);
+      // anchored: the line above asserts the pressure line really printed
       expect(born(seed).pressureSentence, `${seed}: the line does not say what the town lacks`).not.toMatch(words);
     }), 'guard town: the line does not say what the town lacks');
   });
@@ -90,9 +93,22 @@ describe('A3 the history\'s character, born in the census shape', () => {
   /** @param {string} seed */
   const born = (seed) => { const m = /** @type {RegExpMatchArray} */ (seed.match(/^r2s-(\w+)-(thorp|hamlet|village|town|city|metropolis)-\d+$/)); return /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, selectedStresses: [m[1]], selectedStressesRandom: false, settType: m[2] }), null, { seed, customContent: {} })); };
   it('guard town r2s-occupied-village-0 (no market): no merchant class', () => {
+    expect(String(born('r2s-occupied-village-0').history.historicalCharacter).length, 'a historical character printed').toBeGreaterThan(40);
+    // anchored: the line above asserts the historical character really printed
     expect(born('r2s-occupied-village-0').history.historicalCharacter).not.toMatch(/merchant class/);
   });
   it('r2s-famine-town-0 (a market) keeps the line', () => {
     expect(born('r2s-famine-town-0').history.historicalCharacter).toMatch(/didn't create the merchant class/);
+  });
+});
+
+describe('A4 a famine with fewer than two powers says no one eats well (R2-CODE-A-10, CENSUS-2 b/famine:plenty)', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  it('the census\'s thorps and hamlets at a third of their need are not told someone eats well (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures([['r2s-famine-thorp-0', 'thorp'], ['r2s-famine-hamlet-0', 'hamlet']], ([seed, size]) => {
+      const s = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded', settType: size, selectedStresses: ['famine'], selectedStressesRandom: false }), null, { seed, customContent: {} }));
+      expect(String(s.pressureSentence), `${seed}: the famine's power line prints`).toMatch(/^Since the \w+ failed, food is power in /);
+      expect(String(s.pressureSentence), `${seed}: nobody eats well`).not.toMatch(/eats? well/); // anchored: the line above asserts the same sentence prints; red at 8e6fd5e58
+    }), 'a famine with fewer than two powers says no one eats well');
   });
 });

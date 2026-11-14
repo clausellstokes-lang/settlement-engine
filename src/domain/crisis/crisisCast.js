@@ -211,6 +211,7 @@ export const CAST_ABSENCES = Object.freeze({
   noBase: "no house's base is hit",
   noLever: 'no house the crisis turns on stands here',
   noGains: 'no power gains',
+  occupierOnly: 'no one is named: no local power gains', // R2-CODE-B-11, row 179: the collaborator is a local
   outsideHand: 'an outside hand, unnamed',
   noSeat: 'no seat or governing house stands',
   noMilitary: 'no military, garrison or watch stands',
@@ -267,6 +268,23 @@ export const CRISIS_LEVERS = Object.freeze(/** @type {Record<string, { house: Re
   recently_betrayed: { house: /council|court|watch|hall/i, temporary: null },
   infiltrated: { house: /watch|guard|court|council|customs/i, temporary: null },
 }));
+
+/**
+ * THE STAND-IN'S ROLE, IN LAY WORDS (R2-CODE-B-12, the chair's ruling (c) on H2-14, H2-16 and M6: "Healer" beside "No
+ * healer is kept here", "Grain Steward" beside "No granary", "Warden" where no force stands). A temporary person is
+ * minted only where the crisis's lever has neither a house nor an office-holder, so the record holds no such office:
+ * the role names what the person DOES in the crisis they were minted for, never an office, a house or a force. Keyed by
+ * the crisis kind; `STAND_IN_ROLE_FALLBACK` for a kind with none. Read by the pipeline's mint
+ * (generators/steps/resolveCrisisCast.js) and by the plague hook's slot (crisisHooks.js), which names a stand-in
+ * without calling them a healer.
+ */
+export const STAND_IN_ROLE = Object.freeze(/** @type {Record<string, string>} */ ({
+  famine: 'Rations the food',
+  plague_onset: 'Tends the sick',
+  mass_migration: 'Takes charge of the migration',
+  monster_pressure: 'Rallies the neighbours',
+}));
+export const STAND_IN_ROLE_FALLBACK = 'Stepped in for the crisis';
 
 // ── The base each affected system hits (rule 1) ───────────────────────────────────────────
 
@@ -560,7 +578,12 @@ export function bruntCandidates(s, kind, stakes) {
   const factions = factionsOf(s);
   const governing = governingFactionOf(/** @type {never} */ (s));
   const govName = governing ? factionName(/** @type {CastFaction} */ (governing)) : '';
-  const losers = new Set(stakes.filter((k) => k.stake !== 'gains').map((k) => k.factionId));
+  // R2-CODE-B-11, the chair's ruling (b) (the reader's H2-1, H2-2, H2-3: "the only one in the house the crisis hits" beside
+  // that house's "no stake yet" or "gains" on the same tab): THE BRUNT AND THE STAKES READ ONE FACT. The brunt is drawn only
+  // from a house whose stake the record holds as a LOSS ('loses', or 'split' because it gains and loses at once; never the
+  // untouched 'split', "no stake yet", and never 'gains'), and the one-power fallback is gone: where the town's one power has
+  // no stake or gains, nobody of it bears the brunt, and the role is absent by its own reason (noBase). No draw.
+  const losers = new Set(stakes.filter((k) => k.stake === 'loses' || (k.stake === 'split' && k.reason === STAKE_REASONS.split)).map((k) => k.factionId));
   /** @type {CastRow[]} */
   const out = [];
   // F10 unit 4, CENSUS-1c: a reason that names walls the place lacks resolves to its declared sibling (CAST_REASON_SIBLINGS).
@@ -578,12 +601,6 @@ export function bruntCandidates(s, kind, stakes) {
       out.push(factionRow(f, 'brunt', resolveSibling(CAST_REASONS.bruntBase[sys] || CAST_REASONS.bruntLeast, BRUNT_SIBLINGS, defence)));
     }
     if (out.length) break;
-  }
-  if (!out.length && factions.length === 1) {
-    const f = factions[0];
-    const members = membersOf(s, factionName(f)).reverse();
-    for (const n of members) out.push(npcRow(n, 'brunt', leastSayOf(members)));
-    out.push(factionRow(f, 'brunt', CAST_REASONS.bruntLeast));
   }
   return { candidates: out, absent: CAST_ABSENCES.noBase };
 }
@@ -859,7 +876,12 @@ export function treaterCandidates(s) {
  * @returns {Candidates}
  */
 export function collaboratorCandidates(s, stakes) {
-  const roster = rosterOf(s);
+  // R2-CODE-B-11, the bar's row 179 (the chair's ruling (a), 2026-11-14): THE COLLABORATOR IS NEVER THE OCCUPIER. The role
+  // is cast only in the occupation kinds (occasionalRolesOf), and a collaborator is a LOCAL who deals with the power the
+  // crisis brings: no member of an occupying power (the face's own house, faceCandidates) is cast, in either arm. Where no
+  // local remains the role is absent by its own reason (occupierOnly where the occupier alone gains). No draw.
+  const occupiers = new Set(factionsOf(s).filter(isOccupier).map(factionName));
+  const roster = rosterOf(s).filter((n) => !memberOfAny(n, occupiers));
   /** @type {CastRow[]} */
   const out = roster.filter((n) => !!allegianceOf(n)).map((n) => npcRow(n, 'collaborator', CAST_REASONS.collaboratorCorrupt));
   const gainers = new Set(stakes.filter((k) => k.stake === 'gains').map((k) => k.factionId));
@@ -870,7 +892,8 @@ export function collaboratorCandidates(s, stakes) {
       return (am(a.n) - am(b.n)) || (numOf(b.n.power) - numOf(a.n.power)) || (a.at - b.at);
     });
   for (const { n } of ambitious) out.push(npcRow(n, 'collaborator', CAST_REASONS.collaboratorAmbition));
-  return { candidates: out, absent: CAST_ABSENCES.noGains };
+  const onlyTheOccupier = [...gainers].every((g) => occupiers.has(g)) && [...gainers].some((g) => occupiers.has(g));
+  return { candidates: out, absent: onlyTheOccupier ? CAST_ABSENCES.occupierOnly : CAST_ABSENCES.noGains };
 }
 
 /**
@@ -1013,7 +1036,11 @@ export function deriveCrisisCast(settlement, entries, seed, options = {}) {
           if (p) { links.push(link.from); return { ...p, role: 'exploiter', reason: CAST_REASONS.exploiterLinked }; }
         } else {
           const e = prev.get('exploiter');
-          if (e) { links.push(link.from); return { ...e, role: 'collaborator', reason: CAST_REASONS.collaboratorLinked }; }
+          // Row 179, read the same way: the famine's exploiter is the occupation's collaborator only as a LOCAL (never the
+          // face, never a member of an occupying power); else the link is not read and the role falls to Rule 9.
+          const occupiers = new Set(factionsOf(settlement).filter(isOccupier).map(factionName));
+          const own = !!e && (e.kind === 'faction' ? occupiers.has(e.id) : memberOfAny(rosterOf(settlement).find((n) => (str(n.id) || str(n.name)) === e.id) || {}, occupiers));
+          if (e && !own && !roles.some((r) => r.role === 'face' && keyOf(r) === keyOf(e))) { links.push(link.from); return { ...e, role: 'collaborator', reason: CAST_REASONS.collaboratorLinked }; }
         }
       }
       return null;

@@ -15,7 +15,7 @@ import { neighbourMilitaryFactorOf } from '../../src/generators/priorityHelpers.
 import { keepOfRecord } from '../../src/domain/facts/keep.js';
 import { readinessBandOf } from '../../src/data/bandLadders.js';
 import { deriveCausalState } from '../../src/domain/causalState.js';
-import { defenseWallOf } from '../../src/domain/institutions/defenseInstitutionBuckets.js';
+import { defenseWallOf, defenceHeldOf } from '../../src/domain/institutions/defenseInstitutionBuckets.js';
 import { DEFENCE_TUNING, DEFENCE_WEIGHT_REASONS, DEFENCE_WORDS } from '../../src/data/defenceWeights.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -107,16 +107,23 @@ describe('defence is the sum of its parts', () => {
   });
 
   test('readiness sits on its scale and its band is the ladder\'s for the score; the five scores sit on theirs', () => {
+    // UPKEEP-12 (the chair's ruling (a)): the ladder reads the roster. A town holding walls or a force is never
+    // "Undefended", and the corpus holds such towns under the Vulnerable cut, so the arm is never empty.
+    let floored = 0;
     for (const [key, s] of Object.entries(births)) {
       const { readiness, scores } = s.defenseProfile;
+      const held = defenceHeldOf(s.defenseProfile.institutions);
       expect(readiness.score, key).toBeGreaterThanOrEqual(0);
       expect(readiness.score, key).toBeLessThanOrEqual(100);
-      expect(readiness.label, key).toBe(readinessBandOf(readiness.score).label);
+      expect(readiness.label, key).toBe(readinessBandOf(readiness.score, held).label);
+      if (held) expect(readiness.label, `${key}: walls or a force, and labelled Undefended`).not.toBe('Undefended');
+      if (held && readinessBandOf(readiness.score).label === 'Undefended') floored += 1;
       for (const k of ['military', 'monster', 'internal', 'economic', 'magical']) {
         expect(scores[k], `${key} ${k}`).toBeGreaterThanOrEqual(0);
         expect(scores[k], `${key} ${k}`).toBeLessThanOrEqual(100);
       }
     }
+    expect(floored, 'a held town under the Vulnerable cut is in the corpus').toBeGreaterThan(0);
   });
 
   // COHERENCE-UPKEEP-6 (the chair's ruling on the fifth seat's call 1): the band is read from the score AS
@@ -129,7 +136,8 @@ describe('defence is the sum of its parts', () => {
       const said = deriveCausalState(s).variables.defense_readiness.contributors
         .find((c) => c.source === 'defenseProfile.readiness.score')?.reason;
       const printed = Number(/Defense readiness score: (\d+)\./.exec(String(said))?.[1]);
-      if (!Number.isInteger(readiness.score) || printed !== readiness.score || readinessBandOf(printed).label !== readiness.label) {
+      if (!Number.isInteger(readiness.score) || printed !== readiness.score
+        || readinessBandOf(printed, defenceHeldOf(s.defenseProfile.institutions)).label !== readiness.label) {
         bad.push([key, readiness.score, printed, readiness.label]);
       }
     }

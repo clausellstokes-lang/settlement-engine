@@ -24,7 +24,11 @@ const CATALOGUE = readFileSync(`${ROOT}src/data/institutionalCatalog.js`, 'utf8'
 const NAMES = [...new Set([...CATALOGUE.matchAll(/name:\s*(['"`])((?:(?!\1).)+)\1/g)].map((m) => m[2]))];
 
 /** The cut's classes (catalogue-forms.mjs), split into the machinery the leaf strips and the rest. */
-const MACHINERY = (p) => /^\d/.test(p) || /^(multiple|several|many)$/i.test(p) || /^if /i.test(p) || /^high magic$/i.test(p);
+// R2-CODE-B-12, ruling (m): the catalogue's grades are machinery too (how the house is found, its scale, its strength, a
+// spell level); measured over every bracketed name of the 1,536 births, none is part of the house's own name.
+const GRADE = (p) => /^(word of mouth|commercial|powerful)$/i.test(p) || /^[a-z]+, \d+(?:st|nd|rd|th) level$/i.test(p);
+const MACHINERY = (p) => /^\d/.test(p) || /^(multiple|several|many)$/i.test(p) || /^if /i.test(p) || /^high magic$/i.test(p) || GRADE(p);
+const KEPT_FORMS = ['district', 'established', 'established', 'guild', 'official', 'open cast', 'part-time', 'part-time', 'red light district', 'resident'];
 const BRACKETS = NAMES.flatMap((n) => [...n.matchAll(/\(([^)]*)\)/g)].map((m) => ({ name: n, inner: m[1].trim() })));
 
 describe('the house label: every parenthetical form the catalogue holds', () => {
@@ -52,7 +56,9 @@ describe('the house label: every parenthetical form the catalogue holds', () => 
 
   test('an in-world qualifier stays as part of the name', () => {
     const kept = BRACKETS.filter((b) => !MACHINERY(b.inner));
-    expect(kept.length).toBeGreaterThan(10);
+    // R2-CODE-B-12, ruling (m): the floor "more than 10" re-keyed BY IDENTITY (stricter than a count): the four grades are
+    // machinery now and the catalogue holds no other house names, so the arm names every in-world qualifier it keeps.
+    expect(kept.map((b) => b.inner).sort()).toEqual(KEPT_FORMS);
     for (const { name, inner } of kept) expect(institutionHouseLabel(name), name).toContain(`(${inner})`);
   });
 
@@ -66,6 +72,17 @@ describe('the house label: every parenthetical form the catalogue holds', () => 
     expect(institutionHouseLabel('Housing (75-650 households)')).toBe('Housing');
     expect(institutionHouseLabel('Cathedral (10,000+ only)')).toBe('Cathedral');
     expect(institutionHouseLabel('Stormwatch Keep')).toBe('Stormwatch Keep');
+  });
+
+  test("ruling (m): the catalogue's grades are read without them; the house's own descriptions stay", () => {
+    expect(institutionHouseLabel('Fence (word of mouth)')).toBe('Fence');
+    expect(institutionHouseLabel('Sawmill (commercial)')).toBe('Sawmill');
+    expect(institutionHouseLabel("Thieves' guild (powerful)")).toBe("Thieves' guild");
+    expect(institutionHouseLabel('Healer (divine, 1st level)')).toBe('Healer');
+    // keep-guards: the in-world qualifiers the brief and the leaf hold as part of the name
+    expect(institutionHouseLabel('Mint (official)')).toBe('Mint (official)');
+    expect(institutionHouseLabel('Brothel (red light district)')).toBe('Brothel (red light district)');
+    expect(institutionHouseLabel('Resident smith (part-time)')).toBe('Resident smith (part-time)');
   });
 });
 

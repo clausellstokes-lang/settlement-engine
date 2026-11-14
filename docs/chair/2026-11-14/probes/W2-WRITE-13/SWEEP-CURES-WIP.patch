@@ -1,0 +1,571 @@
+diff --git a/docs/content/RECEIPT_POOLS_DOSSIER_STATE.md b/docs/content/RECEIPT_POOLS_DOSSIER_STATE.md
+index a9eb4ae40..abd12a91c 100644
+--- a/docs/content/RECEIPT_POOLS_DOSSIER_STATE.md
++++ b/docs/content/RECEIPT_POOLS_DOSSIER_STATE.md
+@@ -2572,11 +2572,11 @@ own entailment and licenses nothing about who runs it.
+ 3. `[visitor · market]` There is money at {settlement} that does not come from the market, and people will not say where it does come from.
+ 
+ **GM ADVISORY: the commander is a political actor** *(WIRING W3 C1: `factionRelationships[].dmNote` on a competitive governing-military pair; every variant `dm-only`)*
+-1. `[ledger · dm-only · commander]` The commander at {settlement} is a political player in their own right. Whatever the {seat} plans needs the commander's backing, and that backing has to be kept, bought or worked around.
+-2. `[counterforce · dm-only · commander]` Treat the commander at {settlement} as a power, not a servant: the {seat} cannot act against the soldiers' wishes, and anyone who wins the commander over wins the town's muscle.
++1. `[ledger · dm-only · commander · no crisis: occupied]` The commander at {settlement} is a political player in their own right. Whatever the {seat} plans needs the commander's backing, and that backing has to be kept, bought or worked around.
++2. `[counterforce · dm-only · commander · no crisis: occupied]` Treat the commander at {settlement} as a power, not a servant: the {seat} cannot act against the soldiers' wishes, and anyone who wins the commander over wins the town's muscle.
+ 3. `[ledger · dm-only · no crisis: occupied]` {faction} answers to the {seat} at {settlement} in name only: whatever the {seat} plans needs its consent, and that consent is bargained for.
+-4. `[street · dm-only · colour]` Nothing the {seat} orders at {settlement} goes ahead if {faction} refuses it, and whoever can win {faction} over can steer the place.
+-5. `[unfolding · dm-only · colour]` {faction} has grown stronger than the {seat} at {settlement}, and both know it; the {seat} keeps the title while {faction} decides what is enforced.
++4. `[street · dm-only · no crisis: occupied]` Nothing the {seat} orders at {settlement} goes ahead if {faction} refuses it, and whoever can win {faction} over can steer the place.
++5. `[unfolding · dm-only · no crisis: occupied]` {faction} has grown stronger than the {seat} at {settlement}, and both know it; the {seat} keeps the title while {faction} decides what is enforced.
+ 
+ **GM ADVISORY: officials with criminal arrangements** *(WIRING W3 C1: `factionRelationships[].dmNote` on a governing-criminal pair whose capture state is past adversarial; every variant `dm-only`)*
+ 1. `[ledger · dm-only · colour]` Some officials of the {seat} at {settlement} have an understanding with {faction}, and each owes it something different; every one of them is a thread the party can pull.
+@@ -2760,15 +2760,15 @@ margin *arm*. They are different fields on different rows and both are kept;
+ 4. `[threshold · no crisis: occupied]` {settlement} has enough for the usual trouble and nothing spare, and a second trouble at the same time would find a gap.
+ 
+ **readiness `WEAK`** {crisis-scoped}
+-1. `[ledger · crisis: any]` {settlement} could deal with a brawl or a thief, but the town could not hold off a raid.
++1. `[ledger · crisis: any · no crisis: occupied]` {settlement} could deal with a brawl or a thief, but the town could not hold off a raid.
+ 2. `[visitor · walls · crisis: any · no crisis: threat, unrest]` Much of {settlement}'s perimeter has nobody on it, and the people who live there seem used to that.
+ 3. `[unfolding · crisis: any · no crisis: threat, unrest]` {settlement} would struggle to hold against anything more than a handful of raiders, and the people who live there know it.
+ 
+ **readiness `CRITICAL`** {crisis-scoped}
+-1. `[ledger · crisis: any · no guardPresence]` {settlement} is all but undefended. Nothing in the town would stop a serious attack for long.
++1. `[ledger · crisis: any · no guardPresence · no crisis: occupied]` {settlement} is all but undefended. Nothing in the town would stop a serious attack for long.
+ 2. `[street · crisis: any · no crisis: occupied, under_siege]` People at {settlement} know it could not survive a serious attack, so they take care not to provoke anyone who could mount one.
+-3. `[visitor · no walls · crisis: any · no crisis: threat, unrest]` You can walk into the centre of {settlement} without being stopped, challenged or counted by anybody at all.
+-4. `[street · crisis: any · guardPresence]` {settlement} has people under arms, but too few and too badly placed to hold off a serious attack for long.
++3. `[visitor · no walls · crisis: any · no crisis: threat, unrest · no guardPresence]` You can walk into the centre of {settlement} without being stopped, challenged or counted by anybody at all.
++4. `[street · crisis: any · guardPresence · no crisis: occupied]` {settlement} has people under arms, but too few and too badly placed to hold off a serious attack for long.
+ 
+ **terrain FAVOURABLE to the defender** {colour}
+ 1. `[visitor]` The ground does more for {settlement} than the town does. The approach is narrow, and anything coming at it has to come the long way and in the open.
+@@ -2821,10 +2821,10 @@ supplies the ancestry.
+ **PDF PARITY:** parity (`viewModel.js` defense slice).
+ 
+ **`Beasts & Monsters`: `plagued`, perimeter AND organized force**
+-1. `[ledger · colour]` The country around {settlement} is thick with creatures, and the town keeps both a wall and people to hold it, and both are in use constantly.
++1. `[ledger · no crisis: occupied]` The country around {settlement} is thick with creatures, and the town keeps both a wall and people to hold it, and both are in use constantly.
+ 2. `[street · gate · no crisis: under_siege · no crisis: occupied]` Defense at {settlement} is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual.
+ 3. `[unfolding · colour]` {settlement}'s walls and fighters face the creatures season after season.
+-4. `[visitor · colour]` {settlement} keeps its wall against the creatures, and nobody walks out past it unarmed.
++4. `[visitor · no crisis: under_siege · no crisis: occupied]` {settlement} keeps its wall against the creatures, and nobody walks out past it unarmed.
+ 
+ **`Beasts & Monsters`: `plagued`, perimeter but NO force to hold it**
+ 1. `[ledger · colour]` {settlement}'s duty list has names enough to man its wall for one night and no longer, and in this country the creatures do not come for one night only.
+@@ -2837,10 +2837,10 @@ supplies the ancestry.
+ 3. `[visitor]` Visitors to {settlement} sense the danger before anyone mentions it: there is no wall, no organised defence, and nothing arranged to meet what comes out of the country.
+ 
+ **`Beasts & Monsters`: `frontier`, credible deterrence** {crisis-scoped}
+-1. `[ledger · crisis: any]` The tally of raids at {settlement} is short for a frontier town: with a wall and armed people behind it, most of what comes out of the wild country turns back before it reaches the houses.
+-2. `[street · crisis: any]` The town takes the frontier seriously and has taken it seriously long enough that the arrangements are ordinary rather than anxious.
++1. `[ledger · crisis: any · no crisis: threat]` The tally of raids at {settlement} is short for a frontier town: with a wall and armed people behind it, most of what comes out of the wild country turns back before it reaches the houses.
++2. `[street · crisis: any · no crisis: threat]` The town takes the frontier seriously and has taken it seriously long enough that the arrangements are ordinary rather than anxious.
+ 3. `[counterforce · crisis: any · no crisis: threat]` Very little reaches {settlement} out of the wild country, and the reason is that the arrangements are visible from a long way off.
+-4. `[ledger · threat · crisis: any]` The arrangements that kept {settlement} safe on the frontier are being tested in earnest now, and so far they are holding.
++4. `[ledger · threat · crisis: any · no crisis: occupied]` The arrangements that kept {settlement} safe on the frontier are being tested in earnest now, and so far they are holding.
+ 
+ **`Beasts & Monsters`: `frontier`, force without a perimeter** {colour}
+ 1. `[ledger]` {settlement} keeps armed people on an open frontier, which means the defense is reactive: whatever comes chooses where the fighting happens, and the town arrives afterwards.
+@@ -2895,7 +2895,7 @@ supplies the ancestry.
+ **`Invasion & War`: neither walls nor force** {crisis-scoped}
+ 1. `[ledger · crisis: any · no crisis: threat · no watch · no mercenary]` {settlement} has no line and no force. Organized aggression cannot be resisted here; what preserves the town is distance, diplomacy, or being beneath notice.
+ 2. `[counterforce · no threat · crisis: any · no mercenary]` Nothing has come for {settlement}, and nothing about the town would stop whatever did. Its safety rests on nobody having wanted it.
+-3. `[street · no threat · crisis: any]` The town's plan for an army is to not be interesting to one, and everybody here can state the plan.
++3. `[street · no threat · crisis: any · no mercenary]` The town's plan for an army is to not be interesting to one, and everybody here can state the plan.
+ 4. `[counterforce · threat · crisis: any · no watch · no crisis: occupied · no mercenary]` {settlement} has no line and no force, and danger is close at hand.
+ 5. `[street · threat · crisis: any · no watch · no crisis: under_siege · no crisis: occupied · no mercenary]` With trouble at hand, {settlement} has no wall to close and nobody trained to send, and each household is deciding for itself whether to stay.
+ 6. `[visitor · threat · crisis: any · no watch · no crisis: under_siege · no crisis: occupied · no mercenary]` You find {settlement} with no wall and nobody under arms, and its people keeping close to home until the danger passes.
+@@ -2924,19 +2924,19 @@ supplies the ancestry.
+ 3. `[visitor]` If you are wronged at {settlement}, there is no court to take it to, and no local is surprised.
+ 
+ **`Economic Survival`: `STRONG`**
+-1. `[ledger · no crisis: debt · no crisis: famine · prosperity: ≥ moderate]` {settlement}'s accounts have money in hand: the town can keep its defenders paid and buy what a bad season needs without going begging.
+-2. `[street · no crisis]` The town could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.
+-3. `[counterforce · crisis · no crisis: debt · no crisis: occupied]` {settlement} had money laid by before this trouble began, and its defenders are still paid from it.
+-4. `[ledger · crisis: famine]` The famine is costing the town dearly, and the town is paying: its money is going on food, and so far there is money enough.
++1. `[ledger · no crisis: debt · no crisis: famine · prosperity: ≥ moderate · no crisis: occupied]` {settlement}'s accounts have money in hand: the town can keep its defenders paid and buy what a bad season needs without going begging.
++2. `[street · no crisis · prosperity: ≥ poor]` The town could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.
++3. `[counterforce · crisis · no crisis: debt · no crisis: occupied · no crisis: famine · prosperity: ≥ poor]` {settlement} had money laid by before this trouble began, and its defenders are still paid from it.
++4. `[ledger · crisis: famine · prosperity: ≥ poor]` The famine is costing the town dearly, and the town is paying: its money is going on food, and so far there is money enough.
+ 5. `[ledger · crisis: debt]` The debt takes much of what {settlement} earns, but what is left still keeps the town's own business running.
+ 6. `[street · crisis: debt]` People in {settlement} complain of what the creditor takes, but the town still meets its payments.
+ 7. `[unfolding · crisis: debt]` {settlement} cannot pay off what it owes, but it can carry the debt, and for now it does.
+-8. `[street · no crisis]` Nobody in {settlement} lies awake over a lean year: there is enough in hand to see the town through one.
++8. `[street · no crisis · prosperity: ≥ poor]` Nobody in {settlement} lies awake over a lean year: there is enough in hand to see the town through one.
+ 9. `[ledger · crisis · no crisis: debt · no crisis: famine · no crisis: occupied · prosperity: ≥ poor]` Whatever the present trouble costs {settlement}, the town is paying it from money it had put by.
+-10. `[street · crisis: famine]` Hunger has come to the town, but its money has not run out: what food can be bought, it buys.
+-11. `[visitor · crisis: famine]` Food is dear and hard to find here, but whatever food reaches the town is bought: the money is there for it.
+-12. `[street · crisis · no crisis: debt · no crisis: famine · no crisis: occupied]` The town went into this trouble with money in hand, and its defenders are still paid on time.
+-13. `[ledger · crisis: occupied]` {settlement} had money laid by when the occupiers came; what the town earns now goes to them.
++10. `[street · crisis: famine · prosperity: ≥ poor]` Hunger has come to the town, but its money has not run out: what food can be bought, it buys.
++11. `[visitor · crisis: famine · prosperity: ≥ poor]` Food is dear and hard to find here, but whatever food reaches the town is bought: the money is there for it.
++12. `[street · crisis · no crisis: debt · no crisis: famine · no crisis: occupied · prosperity: ≥ poor]` The town went into this trouble with money in hand, and its defenders are still paid on time.
++13. `[ledger · crisis: occupied · prosperity: ≥ poor]` {settlement} had money laid by when the occupiers came; what the town earns now goes to them.
+ 
+ **`Economic Survival`: `ADEQUATE`** {colour}
+ 1. `[ledger]` {settlement} can fund a short crisis. A long one begins eating reserves within a few months, and the reserves are not deep enough to hide that from anybody.
+@@ -2980,7 +2980,7 @@ in about two towns in five that keep a force.
+ **CHAIN: food trades working** {colour}
+ 1. `[ledger · no crisis: under_siege · no crisis: famine]` {settlement}'s food trades are working, and what they put by means the town would not run short at once if it were cut off.
+ 2. `[street · no crisis: under_siege]` The food trades at {settlement} are working, which would matter a great deal if the town were ever cut off.
+-3. `[unfolding · no crisis: under_siege]` As long as {settlement}'s food trades keep working, the town has some provisions to fall back on if it is cut off.
++3. `[unfolding · no crisis: under_siege · no crisis: famine]` As long as {settlement}'s food trades keep working, the town has some provisions to fall back on if it is cut off.
+ 4. `[ledger · crisis: under_siege · food: > famine]` {settlement} is cut off now, and what its food trades put by before the siege is helping to keep the town fed.
+ 5. `[ledger · crisis: under_siege · food: famine]` {settlement} is cut off and already hungry, and what its food trades put by before the siege is being eked out.
+ 6. `[street · crisis: under_siege · food: famine]` The siege has brought hunger to {settlement}, and what its food trades put by is rationed now.
+@@ -3124,7 +3124,7 @@ the ledger).
+ 
+ **COMPOUND: political fracture**
+ 1. `[street · population: ≥ middling]` Which power holds a district of {settlement} decides which rules apply there.
+-2. `[visitor · colour]` Cross a street at {settlement} and you may cross from one power's rules into another's.
++2. `[visitor · population: ≥ middling]` Cross a street at {settlement} and you may cross from one power's rules into another's.
+ 3. `[ledger · population: ≥ middling]` Each power at {settlement} keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.
+ 4. `[street · colour]` At {settlement} a quarrel is settled by whichever power the quarrelling households look to, and the answers seldom match.
+ 5. `[ledger · colour]` What counts as an offence at {settlement} depends on who is asked, because each power keeps its own rules and enforces them on its own people.
+@@ -3297,9 +3297,9 @@ may not say the contract is failing unless the economic arm supplies that.
+ **PDF PARITY:** parity.
+ 
+ **walls PRESENT**
+-1. `[visitor · gate]` There is a line around {settlement} and it is kept: the gates shut, the works are repaired, and a stranger enters where the town intends him to.
++1. `[visitor · gate · no crisis: under_siege]` There is a line around {settlement} and it is kept: the gates shut, the works are repaired, and a stranger enters where the town intends him to.
+ 2. `[ledger · gate · guardPresence · no crisis: under_siege]` {settlement} is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the town decides.
+-3. `[street · gate]` The town has a wall and arranges its day around the gates without noticing that it does.
++3. `[street · gate · no crisis: under_siege]` The town has a wall and arranges its day around the gates without noticing that it does.
+ 4. `[visitor · no gate · no crisis: under_siege]` {settlement} has a wall but no proper gate in it: people come and go by gaps everyone knows, and the wall slows trouble more than it stops it.
+ 5. `[street · no gate · no crisis: under_siege]` The wall around {settlement} turns back a wandering beast and slows a raid; nobody counts who comes in, because there is no gate to count them at.
+ 6. `[ledger · crisis: under_siege]` {settlement}'s wall is all that stands between the town and the siege, and every stretch of it is watched now.
+@@ -3373,7 +3373,7 @@ lines.
+ 1. `[street · no crisis: under_siege]` Traffic in and out of {settlement} goes through its gates, and that is where anyone arriving is first seen.
+ 2. `[ledger · no crisis: under_siege]` The wall at {settlement} is entered by its gates, and the gate tolls are counted there; a gate left unwatched is a toll lost.
+ 3. `[visitor · no crisis: under_siege]` You come into {settlement} by a gate, and someone at the gate sees you come.
+-4. `[unfolding]` Whatever reaches {settlement} by road reaches it at a gate, and the town can close them against it.
++4. `[unfolding · no crisis: under_siege]` Whatever reaches {settlement} by road reaches it at a gate, and the town can close them against it.
+ 5. `[visitor · crisis: under_siege]` {settlement}'s gates are shut and barred, and nothing has come through them since the siege began.
+ 
+ **FIXTURE: charter hall** {colour}
+@@ -3675,7 +3675,7 @@ street, the unfolding).
+ **override: INTERNAL PRESSURE (famine)**
+ 1. `[ledger · guardPresence]` The guards' rations at {settlement} are cut like everyone else's, and a hungry guard cannot be asked for much for long.
+ 2. `[street · guardPresence]` At {settlement} the people who keep order spend their days at the food stores, not watching the roads.
+-3. `[unfolding · colour]` The longer the hunger lasts at {settlement}, the less its defenders can do, and nothing is filling the stores again yet.
++3. `[unfolding · guardPresence]` The longer the hunger lasts at {settlement}, the less its defenders can do, and nothing is filling the stores again yet.
+ 4. `[ledger · no guardPresence]` {settlement} has nobody paid to defend it, only households, and every household is minding its own share of what is left.
+ 5. `[street · no guardPresence]` With nobody at {settlement} paid to keep order, the hunger is policed by neighbours watching each other's doors.
+ 
+@@ -3691,13 +3691,13 @@ street, the unfolding).
+ 4. `[street · no guardPresence]` {settlement} has no standing force to command, and the quarrel over who would command one is louder for it.
+ 
+ **override: UNDER TRIBUTE**
+-1. `[ledger · colour]` {settlement} pays its creditors first and its defence with what is left, and what is left shrinks each year.
++1. `[ledger · guardPresence]` {settlement} pays its creditors first and its defence with what is left, and what is left shrinks each year.
+ 2. `[street · guardPresence]` At {settlement} the debt is paid before the guards are, and every guard knows it.
+ 3. `[unfolding · colour]` Every year the debt stands, less of {settlement}'s money reaches its defence.
+ 4. `[street · no guardPresence]` {settlement} keeps no defenders to pay, and the debt is one more reason it never will.
+ 
+ **override: SECURITY COMPROMISED**
+-1. `[ledger · colour]` {settlement} was betrayed recently, and its defence is being rearranged on the assumption that the enemy knows the old arrangements.
++1. `[ledger · guardPresence]` {settlement} was betrayed recently, and its defence is being rearranged on the assumption that the enemy knows the old arrangements.
+ 2. `[street · guardPresence]` The guards at {settlement} have changed their rounds and will not say why, and everyone can guess.
+ 3. `[unfolding · colour]` Until {settlement} has changed everything the traitor knew, its defence is weaker than it looks.
+ 4. `[street · no guardPresence]` {settlement} has no defenders to reorganize after the betrayal, only households that now bar their doors and keep their own counsel.
+@@ -3729,7 +3729,7 @@ street, the unfolding).
+ **override: INSURGENCY ACTIVE**
+ 1. `[ledger · colour]` {settlement} is defending itself against its own people, and its defence was never built for that.
+ 2. `[street · guardPresence]` The guards at {settlement} walk streets where they are not welcome, and that is more dangerous to them than any ambush outside.
+-3. `[unfolding · colour]` Each crackdown on the insurgents at {settlement} turns more of its people to their side.
++3. `[unfolding · guardPresence]` Each crackdown on the insurgents at {settlement} turns more of its people to their side.
+ 4. `[street · no guardPresence · crisis: insurgency]` {settlement} has nobody to send against the insurgents, and each household decides for itself what to keep quiet about.
+ 
+ **override: RELIGIOUS UPHEAVAL** {colour}
+@@ -6986,8 +6986,8 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
+ 
+ **`WALLED-QUIET`** {crisis-scoped}
+ 1. `[visitor · no threat · crisis: any · no crisis: unrest]` Though the present peace asks nothing of its defences, {settlement} keeps its {defwork} in repair: mending costs less than building again.
+-2. `[elder · no threat · crisis: any]` The older people of {settlement} say defences are easier to keep than to raise, so what the town built stands ahead of any present need.
+-3. `[ledger · no threat · crisis: any]` {settlement}'s accounts show little spent on its {defwork} now that it asks little of it, since built work needs little upkeep.
++2. `[elder · no threat · crisis: any · no crisis: unrest]` The older people of {settlement} say defences are easier to keep than to raise, so what the town built stands ahead of any present need.
++3. `[ledger · no threat · crisis: any · no crisis: unrest]` {settlement}'s accounts show little spent on its {defwork} now that it asks little of it, since built work needs little upkeep.
+ 4. `[visitor · threat · crisis: any]` {settlement} kept its {defwork} through the quiet years, and that care is earning its keep now.
+ 5. `[ledger · threat · crisis: any]` What {settlement} spent on its {defwork} in the quiet years is what stands between the town and the threat at hand.
+ 
+diff --git a/src/data/dossierStateProse/defense.generated.js b/src/data/dossierStateProse/defense.generated.js
+index 0a38f46c3..bfba5cfc4 100644
+--- a/src/data/dossierStateProse/defense.generated.js
++++ b/src/data/dossierStateProse/defense.generated.js
+@@ -165,7 +165,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+         {
+           "angle": "ledger",
+           "marks": [
+-            "crisis: any"
++            "crisis: any",
++            "no crisis: occupied"
+           ],
+           "text": "{settlement} could deal with a brawl or a thief, but the town could not hold off a raid.",
+           "slots": [
+@@ -204,7 +205,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+           "angle": "ledger",
+           "marks": [
+             "crisis: any",
+-            "no guardPresence"
++            "no guardPresence",
++            "no crisis: occupied"
+           ],
+           "text": "{settlement} is all but undefended. Nothing in the town would stop a serious attack for long.",
+           "slots": [
+@@ -229,7 +231,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+           "marks": [
+             "no walls",
+             "crisis: any",
+-            "no crisis: threat, unrest"
++            "no crisis: threat, unrest",
++            "no guardPresence"
+           ],
+           "text": "You can walk into the centre of {settlement} without being stopped, challenged or counted by anybody at all.",
+           "slots": [
+@@ -241,7 +244,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+           "angle": "street",
+           "marks": [
+             "crisis: any",
+-            "guardPresence"
++            "guardPresence",
++            "no crisis: occupied"
+           ],
+           "text": "{settlement} has people under arms, but too few and too badly placed to hold off a serious attack for long.",
+           "slots": [
+@@ -540,7 +544,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+         {
+           "angle": "ledger",
+           "marks": [
+-            "colour"
++            "no crisis: occupied"
+           ],
+           "text": "The country around {settlement} is thick with creatures, and the town keeps both a wall and people to hold it, and both are in use constantly.",
+           "slots": [
+@@ -575,7 +579,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+         {
+           "angle": "visitor",
+           "marks": [
+-            "colour"
++            "no crisis: under_siege",
++            "no crisis: occupied"
+           ],
+           "text": "{settlement} keeps its wall against the creatures, and nobody walks out past it unarmed.",
+           "slots": [
+@@ -647,7 +652,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+         {
+           "angle": "ledger",
+           "marks": [
+-            "crisis: any"
++            "crisis: any",
++            "no crisis: threat"
+           ],
+           "text": "The tally of raids at {settlement} is short for a frontier town: with a wall and armed people behind it, most of what comes out of the wild country turns back before it reaches the houses.",
+           "slots": [
+@@ -658,7 +664,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+         {
+           "angle": "street",
+           "marks": [
+-            "crisis: any"
++            "crisis: any",
++            "no crisis: threat"
+           ],
+           "text": "The town takes the frontier seriously and has taken it seriously long enough that the arrangements are ordinary rather than anxious.",
+           "slots": [],
+@@ -680,7 +687,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+           "angle": "ledger",
+           "marks": [
+             "threat",
+-            "crisis: any"
++            "crisis: any",
++            "no crisis: occupied"
+           ],
+           "text": "The arrangements that kept {settlement} safe on the frontier are being tested in earnest now, and so far they are holding.",
+           "slots": [
+@@ -1116,7 +1124,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+           "angle": "street",
+           "marks": [
+             "no threat",
+-            "crisis: any"
++            "crisis: any",
++            "no mercenary"
+           ],
+           "text": "The town's plan for an army is to not be interesting to one, and everybody here can state the plan.",
+           "slots": [],
+@@ -1329,7 +1338,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+           "marks": [
+             "no crisis: debt",
+             "no crisis: famine",
+-            "prosperity: ≥ moderate"
++            "prosperity: ≥ moderate",
++            "no crisis: occupied"
+           ],
+           "text": "{settlement}'s accounts have money in hand: the town can keep its defenders paid and buy what a bad season needs without going begging.",
+           "slots": [
+@@ -1340,7 +1350,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+         {
+           "angle": "street",
+           "marks": [
+-            "no crisis"
++            "no crisis",
++            "prosperity: ≥ poor"
+           ],
+           "text": "The town could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.",
+           "slots": [],
+@@ -1351,7 +1362,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+           "marks": [
+             "crisis",
+             "no crisis: debt",
+-            "no crisis: occupied"
++            "no crisis: occupied",
++            "no crisis: famine",
++            "prosperity: ≥ poor"
+           ],
+           "text": "{settlement} had money laid by before this trouble began, and its defenders are still paid from it.",
+           "slots": [
+@@ -1362,7 +1375,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+         {
+           "angle": "ledger",
+           "marks": [
+-            "crisis: famine"
++            "crisis: famine",
++            "prosperity: ≥ poor"
+           ],
+           "text": "The famine is costing the town dearly, and the town is paying: its money is going on food, and so far there is money enough.",
+           "slots": [],
+@@ -1404,7 +1418,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+         {
+           "angle": "street",
+           "marks": [
+-            "no crisis"
++            "no crisis",
++            "prosperity: ≥ poor"
+           ],
+           "text": "Nobody in {settlement} lies awake over a lean year: there is enough in hand to see the town through one.",
+           "slots": [
+@@ -1430,7 +1445,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+         {
+           "angle": "street",
+           "marks": [
+-            "crisis: famine"
++            "crisis: famine",
++            "prosperity: ≥ poor"
+           ],
+           "text": "Hunger has come to the town, but its money has not run out: what food can be bought, it buys.",
+           "slots": [],
+@@ -1439,7 +1455,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+         {
+           "angle": "visitor",
+           "marks": [
+-            "crisis: famine"
++            "crisis: famine",
++            "prosperity: ≥ poor"
+           ],
+           "text": "Food is dear and hard to find here, but whatever food reaches the town is bought: the money is there for it.",
+           "slots": [],
+@@ -1451,7 +1468,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+             "crisis",
+             "no crisis: debt",
+             "no crisis: famine",
+-            "no crisis: occupied"
++            "no crisis: occupied",
++            "prosperity: ≥ poor"
+           ],
+           "text": "The town went into this trouble with money in hand, and its defenders are still paid on time.",
+           "slots": [],
+@@ -1460,7 +1478,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+         {
+           "angle": "ledger",
+           "marks": [
+-            "crisis: occupied"
++            "crisis: occupied",
++            "prosperity: ≥ poor"
+           ],
+           "text": "{settlement} had money laid by when the occupiers came; what the town earns now goes to them.",
+           "slots": [
+@@ -1693,7 +1712,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+         {
+           "angle": "unfolding",
+           "marks": [
+-            "no crisis: under_siege"
++            "no crisis: under_siege",
++            "no crisis: famine"
+           ],
+           "text": "As long as {settlement}'s food trades keep working, the town has some provisions to fall back on if it is cut off.",
+           "slots": [
+@@ -3021,7 +3041,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+         {
+           "angle": "visitor",
+           "marks": [
+-            "colour"
++            "population: ≥ middling"
+           ],
+           "text": "Cross a street at {settlement} and you may cross from one power's rules into another's.",
+           "slots": [
+@@ -4346,7 +4366,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+         {
+           "angle": "visitor",
+           "marks": [
+-            "gate"
++            "gate",
++            "no crisis: under_siege"
+           ],
+           "text": "There is a line around {settlement} and it is kept: the gates shut, the works are repaired, and a stranger enters where the town intends him to.",
+           "slots": [
+@@ -4370,7 +4391,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+         {
+           "angle": "street",
+           "marks": [
+-            "gate"
++            "gate",
++            "no crisis: under_siege"
+           ],
+           "text": "The town has a wall and arranges its day around the gates without noticing that it does.",
+           "slots": [],
+@@ -4820,6 +4842,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+         },
+         {
+           "angle": "unfolding",
++          "marks": [
++            "no crisis: under_siege"
++          ],
+           "text": "Whatever reaches {settlement} by road reaches it at a gate, and the town can close them against it.",
+           "slots": [
+             "settlement"
+@@ -6978,7 +7003,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+         {
+           "angle": "unfolding",
+           "marks": [
+-            "colour"
++            "guardPresence"
+           ],
+           "text": "The longer the hunger lasts at {settlement}, the less its defenders can do, and nothing is filling the stores again yet.",
+           "slots": [
+@@ -7085,7 +7110,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+         {
+           "angle": "ledger",
+           "marks": [
+-            "colour"
++            "guardPresence"
+           ],
+           "text": "{settlement} pays its creditors first and its defence with what is left, and what is left shrinks each year.",
+           "slots": [
+@@ -7131,7 +7156,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+         {
+           "angle": "ledger",
+           "marks": [
+-            "colour"
++            "guardPresence"
+           ],
+           "text": "{settlement} was betrayed recently, and its defence is being rearranged on the assumption that the enemy knows the old arrangements.",
+           "slots": [
+@@ -7377,7 +7402,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+         {
+           "angle": "unfolding",
+           "marks": [
+-            "colour"
++            "guardPresence"
+           ],
+           "text": "Each crackdown on the insurgents at {settlement} turns more of its people to their side.",
+           "slots": [
+@@ -9565,7 +9590,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+           "angle": "elder",
+           "marks": [
+             "no threat",
+-            "crisis: any"
++            "crisis: any",
++            "no crisis: unrest"
+           ],
+           "text": "The older people of {settlement} say defences are easier to keep than to raise, so what the town built stands ahead of any present need.",
+           "slots": [
+@@ -9577,7 +9603,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
+           "angle": "ledger",
+           "marks": [
+             "no threat",
+-            "crisis: any"
++            "crisis: any",
++            "no crisis: unrest"
+           ],
+           "text": "{settlement}'s accounts show little spent on its {defwork} now that it asks little of it, since built work needs little upkeep.",
+           "slots": [
+diff --git a/src/data/dossierStateProse/power.generated.js b/src/data/dossierStateProse/power.generated.js
+index 095f1e012..3e52af875 100644
+--- a/src/data/dossierStateProse/power.generated.js
++++ b/src/data/dossierStateProse/power.generated.js
+@@ -3494,7 +3494,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
+           "angle": "ledger",
+           "marks": [
+             "dm-only",
+-            "commander"
++            "commander",
++            "no crisis: occupied"
+           ],
+           "text": "The commander at {settlement} is a political player in their own right. Whatever the {seat} plans needs the commander's backing, and that backing has to be kept, bought or worked around.",
+           "slots": [
+@@ -3507,7 +3508,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
+           "angle": "counterforce",
+           "marks": [
+             "dm-only",
+-            "commander"
++            "commander",
++            "no crisis: occupied"
+           ],
+           "text": "Treat the commander at {settlement} as a power, not a servant: the {seat} cannot act against the soldiers' wishes, and anyone who wins the commander over wins the town's muscle.",
+           "slots": [
+@@ -3534,7 +3536,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
+           "angle": "street",
+           "marks": [
+             "dm-only",
+-            "colour"
++            "no crisis: occupied"
+           ],
+           "text": "Nothing the {seat} orders at {settlement} goes ahead if {faction} refuses it, and whoever can win {faction} over can steer the place.",
+           "slots": [
+@@ -3548,7 +3550,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
+           "angle": "unfolding",
+           "marks": [
+             "dm-only",
+-            "colour"
++            "no crisis: occupied"
+           ],
+           "text": "{faction} has grown stronger than the {seat} at {settlement}, and both know it; the {seat} keeps the title while {faction} decides what is enforced.",
+           "slots": [
+diff --git a/tests/domain/corpusCureGuards.test.js b/tests/domain/corpusCureGuards.test.js
+index 6457e5f13..b960438cd 100644
+--- a/tests/domain/corpusCureGuards.test.js
++++ b/tests/domain/corpusCureGuards.test.js
+@@ -139,6 +139,36 @@ const GUARDS = [
+   { seed: 'w5-town-occupied-3', pool: 'DS-DEF-2::Economic Survival: STRONG', vid: 3, why: 'an occupation: "its defenders are still paid from it" of a defence the occupiers hold' },
+   { seed: 'w5-city-occupied-101', pool: 'DS-DEF-2::Economic Survival: STRONG', vid: 12, why: 'an occupation: "its defenders are still paid on time" (v3\'s twin)' },
+   { seed: 'w5-city-under_siege-103', pool: 'DS-DEF-2::Economic Survival: STRONG', vid: 9, why: 'a Struggling town: "paying it from money it had put by" off the two lowest prosperity rungs (the chair\'s ruling on BAR-0 #205)' },
++  { seed: 'w5-hamlet-occupied-1', pool: 'DS-DEF-1::readiness CRITICAL', vid: 1, why: 'an occupation: "all but undefended" of a town the occupiers garrison (v2\'s condition) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'rww-town-famine-1', pool: 'DS-DEF-1::readiness CRITICAL', vid: 3, why: 'people paid to keep order: "without being stopped, challenged or counted by anybody at all" (v1\'s `no guardPresence`) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'w5-hamlet-occupied-103', pool: 'DS-DEF-1::readiness CRITICAL', vid: 4, why: 'an occupation: "too few and too badly placed to hold off a serious attack" of the occupiers\' troops (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'rww-town-occupied-1', pool: 'DS-DEF-1::readiness WEAK', vid: 1, why: 'an occupation: "could not hold off a raid" under the occupiers\' troops (its siblings exclude every threat) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'w5-city-monster_pressure-104', pool: 'DS-DEF-2::Beasts & Monsters: frontier, credible deterrence', vid: 1, why: 'a threat at hand: "The tally of raids ... is short" (v3\'s `no crisis: threat`) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'rww-metropolis-under_siege-1', pool: 'DS-DEF-2::Beasts & Monsters: frontier, credible deterrence', vid: 2, why: 'a siege: "ordinary rather than anxious" (v3\'s `no crisis: threat`) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'w5-city-occupied-1', pool: 'DS-DEF-2::Beasts & Monsters: frontier, credible deterrence', vid: 4, why: 'an occupation: "so far they are holding" of a town already taken (the inheritor of v1 v2, read before the push) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'w5-city-occupied-3', pool: 'DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force', vid: 1, why: 'an occupation: "the town keeps both a wall and people to hold it" (v2\'s condition) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'rww-thorp-under_siege-1', pool: 'DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force', vid: 4, why: 'a siege: "nobody walks out past it unarmed" where nobody walks out (v2\'s condition) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'rww-metropolis-famine-1', pool: 'DS-DEF-2::CHAIN: food trades working', vid: 3, why: 'a famine: "some provisions to fall back on" (v1\'s `no crisis: famine`) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'w5-city-famine-102', pool: 'DS-DEF-2::Economic Survival: STRONG', vid: 3, why: 'a famine: "its defenders are still paid from it" (v9 v12\'s `no crisis: famine`) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'w5-city-famine-106', pool: 'DS-DEF-2::Economic Survival: STRONG', vid: 4, why: 'a town off the two lowest prosperity rungs: "so far there is money enough" (v9\'s `prosperity: ≥ poor`) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'w5-metropolis-famine-106', pool: 'DS-DEF-2::Economic Survival: STRONG', vid: 10, why: 'the same: "its money has not run out" (v9\'s `prosperity: ≥ poor`) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'rww-metropolis-famine-1', pool: 'DS-DEF-2::Economic Survival: STRONG', vid: 11, why: 'the same: "the money is there for it" (v9\'s `prosperity: ≥ poor`) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'w5-city-under_siege-103', pool: 'DS-DEF-2::Economic Survival: STRONG', vid: 12, why: 'the same: "went into this trouble with money in hand" (v9\'s `prosperity: ≥ poor`) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'w5-town-calm-105', pool: 'DS-DEF-2::Invasion & War: neither walls nor force', vid: 3, why: 'a hired company: "The town\'s plan for an army is to not be interesting to one" (every sibling\'s `no mercenary`) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'w5-thorp-politically_fractured-2', pool: 'DS-DEF-3::COMPOUND: political fracture', vid: 2, why: 'a place of a few houses: "Cross a street ... from one power\'s rules into another\'s" (v1 v3\'s `population: ≥ middling`) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'w5-city-under_siege+famine-1', pool: 'DS-DEF-5::FIXTURE: gates', vid: 4, why: 'a siege: "Whatever reaches X by road reaches it at a gate" (v1-v3\'s `no crisis: under_siege`) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'w5-city-under_siege+famine-1', pool: 'DS-DEF-5::walls PRESENT', vid: 1, why: 'a siege: "a stranger enters where the town intends him to" (v2 v4 v5 v7\'s condition) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'rww-metropolis-under_siege-1', pool: 'DS-DEF-5::walls PRESENT', vid: 3, why: 'a siege: "arranges its day around the gates without noticing that it does" beside "gates are shut and barred" (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'w5-hamlet-insurgency-1', pool: 'DS-DEF-8::override: INSURGENCY ACTIVE', vid: 3, why: 'nobody paid to keep order: "Each crackdown on the insurgents" (v4: nobody to send) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'w5-hamlet-famine-103', pool: 'DS-DEF-8::override: INTERNAL PRESSURE (famine)', vid: 3, why: 'nobody paid to keep order: "the less its defenders can do" (HANDBACK-12 #278) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'w5-village-recently_betrayed-102', pool: 'DS-DEF-8::override: SECURITY COMPROMISED', vid: 1, why: 'nobody paid to keep order: "its defence is being rearranged" (v4: no defenders to reorganize) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'w5-hamlet-indebted-1', pool: 'DS-DEF-8::override: UNDER TRIBUTE', vid: 1, why: 'nobody paid to keep order: "pays ... its defence with what is left" (v4: keeps no defenders to pay) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'w5-town-insurgency-1', pool: 'DS-DEF-11::WALLED-QUIET', vid: 2, why: 'an insurgency: "stands ahead of any present need" (v1\'s `no crisis: unrest`) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'rww-city-insurgency-1', pool: 'DS-DEF-11::WALLED-QUIET', vid: 3, why: 'an insurgency: "now that it asks little of it" (v1\'s `no crisis: unrest`) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'w5-town-occupied-103', pool: 'DS-POW-6::GM ADVISORY: the commander is a political actor', vid: 1, by: 'record', why: 'an occupation: "Whatever the {seat} plans needs the commander\'s backing" of an occupier\'s seat (v3\'s condition) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'w5-town-occupied-103', pool: 'DS-POW-6::GM ADVISORY: the commander is a political actor', vid: 2, by: 'record', why: 'an occupation: "the {seat} cannot act against the soldiers\' wishes" (v3\'s condition) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'w5-town-occupied-104', pool: 'DS-POW-6::GM ADVISORY: the commander is a political actor', vid: 4, by: 'record', why: 'an occupation: "Nothing the {seat} orders ... goes ahead if {faction} refuses it" (v3\'s condition) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
++  { seed: 'w5-hamlet-occupied-1', pool: 'DS-POW-6::GM ADVISORY: the commander is a political actor', vid: 5, by: 'record', why: 'an occupation: "the {seat} keeps the title while {faction} decides" (v3\'s condition) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
+ ];
+ 
+ /** @param {string} seed */

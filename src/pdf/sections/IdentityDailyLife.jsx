@@ -23,6 +23,9 @@ import { type, palette, space, pt } from '../theme.js';
 import { humanize } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
 import { foodwaysLineOf } from '../../domain/foodways.js';
+import { factsOf } from '../../domain/facts/factsOf.js';
+import { architecturalDetailRefused, resolveCultureProfileKey } from '../../data/cultureProfiles.js';
+import { foodWordShown } from '../../domain/display/foodWordShown.js';
 
 export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse }) {
   const id = vm.identity;
@@ -30,6 +33,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
   const a = id.anchor || {};
   const culture = id.culturalIdentity;
   const accent = narrativeMode ? palette.ai : palette.gold;
+  const foodWord = foodWordShown(settlement); // the food word's one home (SURFACES-2 item 1)
 
   const founded = foundingLabel(id.founding);
   const idRows = [
@@ -68,8 +72,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
 
       {/* ── Anchor facts ─────────────────────────────────────── */}
       {(a.governingName || a.prosperity || a.safety || a.culturalNotes ||
-        a.foodDeficit != null ||
-        a.foodSurplus != null || a.magicDependency || a.activeStress?.length > 0) && (
+        foodWord || a.magicDependency || a.activeStress?.length > 0) && (
         <View
           style={{
             marginBottom: space.sm,
@@ -91,24 +94,16 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
           />
           <KeyValRow
             pairs={[
-              // Tri-state, matching every sibling renderer (EconomicsTrade's
-              // FoodBalanceBlock and Overview's FoodBalanceBar both guard on
-              // `> 0`) and the domain's own word for the third state
-              // (dossierViewModel.js:141 `display = 'Balanced'`). The old
-              // `foodSurplus != null` fallback printed "+0 units" for a
-              // settlement in balance. The no-data case is nulled upstream in
-              // viewModel.js, so a missing row here means "not calculated".
               // The state in a word, not the engine's daily units (STYLE-RULINGS-2 B4, 2026-11-09: the
               // machinery off the reader's page; the Economics chapter carries the food figures).
               // "Score avg", the mean of the defence scores, left with it: the Defense chapter
               // carries the readiness label.
-              a.foodDeficit > 0
-                ? { label: 'Food',  value: 'Deficit' }
-                : a.foodSurplus > 0
-                  ? { label: 'Food',  value: 'Surplus' }
-                  : (a.foodDeficit != null || a.foodSurplus != null)
-                    ? { label: 'Food',  value: 'Balanced' }
-                    : null,
+              // THE FOOD WORD HAS ONE HOME (SURFACES-2 item 1, the chair's ruling (r2) of 2026-11-14): the
+              // block prints the food band the Tonight page, the Overview and Daily Life print
+              // (domain/display/foodWordShown.js), or no Food row. Its own second vocabulary (Deficit,
+              // Surplus, Balanced off the view's daily figures) is gone: it said "Surplus" beside this
+              // document's own Tonight "Secure" (729 of 772 births).
+              foodWord ? { label: 'Food', value: foodWord.label } : null,
               /* ⛔ THE `MAGIC` CHIP IS GONE, AND IT IS A DELETION RATHER THAN A REPAIR.
                  It printed `humanize(a.magicalCapability)`, and `defenseProfile.magicalCapability`
                  HAS NO WRITER: `generateDefenseProfile` returns scores/readiness/institutions/
@@ -213,7 +208,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
               {culture.scope}
             </Text>
           )}
-          <CultureRows culture={culture} foodwaysLine={foodwaysLineOf(settlement)} />
+          <CultureRows culture={culture} foodwaysLine={foodwaysLineOf(settlement)} architectureLine={architectureLineOf(settlement, culture)} />
         </View>
       )}
 
@@ -291,7 +286,17 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
 // (domain/foodways.js :: foodwaysLineOf, FOOD-4). The culture's authored line is printed only
 // for a save older than that record (lane WIRING-2, FOOD R-print).
 
-function CultureRows({ culture, foodwaysLine }) {
+// W2-FIX-DATA-12 item 2: the Architecture row prints the materialized detail through the one reading the arrival's
+// sight beat uses (data/cultureProfiles.js :: architecturalDetailRefused): held to its row's declaration against the
+// whole record, a detail naming a market, a palisade or a river the town lacks prints nothing, never raw.
+function architectureLineOf(settlement, culture) {
+  const detail = culture.architecturalDetail;
+  if (!detail) return null;
+  const profileKey = resolveCultureProfileKey(culture.key || settlement?.config?.culture || 'germanic');
+  return architecturalDetailRefused(detail, profileKey, () => factsOf(settlement)) ? null : detail;
+}
+
+function CultureRows({ culture, foodwaysLine, architectureLine }) {
   const rows = [
     ['Built form', culture.builtForm],
     ['Civic pattern', culture.civicPattern],
@@ -300,7 +305,7 @@ function CultureRows({ culture, foodwaysLine }) {
     ['Sacred life', culture.sacredLife],
     ['Defense', culture.defensePattern],
     ['Social texture', culture.socialTexture],
-    ['Architecture', culture.architecturalDetail],
+    ['Architecture', architectureLine],
   ].filter(([, value]) => value);
 
   return (

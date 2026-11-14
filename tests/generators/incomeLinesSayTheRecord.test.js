@@ -26,7 +26,7 @@ beforeAll(async () => { await loadGenerationLawPayloads(); });
 
 /** The reader's shape: rr2s-<size>-<crisis|calm>-<route|rand>-<i>, rww-<size>-<crisis|calm>-<i>. */
 function cfgFor(seed) {
-  const m = /^(rr2s|rww)-(\w+?)-([a-z_+]+?)(?:-(rand|port))?-(\d+)$/.exec(seed);
+  const m = /^(rr2s|rww|bar0)-(\w+?)-([a-z_+]+?)(?:-(rand|port))?-(\d+)$/.exec(seed); // bar0: the bar's readers' shape, the same
   if (!m) throw new Error(seed);
   return birthConfig({ ...DEFAULT_CONFIG, ...(m[4] === 'port' ? { tradeRouteAccess: 'port' } : {}), settType: m[2],
     selectedStressesRandom: false, selectedStresses: m[3] === 'calm' ? [] : m[3].split('+'), _randomizePriorities: true });
@@ -40,18 +40,23 @@ describe('the reader\'s towns: the cured line does not print', () => {
     ['rr2s-town-under_siege-rand-1', LOCAL_COAL_SOLD_LINE, null], // #501: nothing sold out by road under a siege
     ['rr2s-town-under_siege-rand-1', GRAIN_BOUGHT_LINE, null], // #438: nothing bought in under a siege
     ['rr2s-town-under_siege-rand-1', WOOL_LOCAL_LINE, WOOL_LOCAL_WORKED_LINE], // #437: no fullers, and no cloth sold across the region
-    ['rr2s-hamlet-calm-rand-1', IRON_IMPORTED_LINE, null], // #145: no smithy, no iron brought in
-    ['rr2s-village-famine-rand-1', QUARRY_LINE, null], // #277: a stone resource, no quarry house
-    ['rr2s-town-indebted-port-1', FISH_EXPORT_LINE, null], // #621: no fishing house
-    ['rr2s-city-under_siege+famine-rand-1', FISH_EXPORT_LINE, null], // #910: no fishing house, and a siege
+    ['rr2s-hamlet-calm-rand-1', IRON_IMPORTED_LINE, null, 'Iron & Metalwork'], // #145: no smithy, no iron brought in
+    ['rr2s-village-famine-rand-1', QUARRY_LINE, null, 'Stone Quarrying'], // #277: a stone resource, no quarry house
+    ['rr2s-town-indebted-port-1', FISH_EXPORT_LINE, null, /^Fish & /], // #621: no fishing house
+    ['rr2s-city-under_siege+famine-rand-1', FISH_EXPORT_LINE, null, /^Fish & /], // #910: no fishing house, and a siege
     ['rr2s-city-under_siege+famine-rand-1', ALCHEMY_TRADE_LINE, ALCHEMY_UNDER_SIEGE_LINE], // an alchemist, under a siege
     ['rr2s-metropolis-wartime-rand-1', LOCAL_COAL_LINE, METAL_WORKED_LINE], // #1301: no iron among the imports
     ['rww-metropolis-wartime-1', TITHES_RENTS_LINE, TITHES_RENTS_PLAIN_LINE], // #ww-414: the third source does not dominate
   ];
   test("each reader's town: the cured line does not print, and its twin or the silent row does", () => {
-    for (const [seed, cured, twin] of ROWS) {
-      const printed = lines(birth(seed));
+    for (const [seed, cured, twin, gone] of ROWS) {
+      const s = birth(seed);
+      const printed = lines(s);
       if (twin) expect(printed).toContain(twin);
+      // UPKEEP-16 (the chair's ruling (o) re-ruled, candidate D), re-keyed BY IDENTITY, the same towns and lines: where no
+      // house of the trade stands and the good is not sold from the town's ground, the page does not bear the row out and it
+      // is taken off (`gone`, its title); elsewhere the row prints its source and share alone, as before.
+      else if (gone) expect(s.economicState.incomeSources.map((e) => e.source).filter((t) => (typeof gone === 'string' ? t === gone : gone.test(t))), seed).toEqual([]);
       else expect(printed).toContain(''); // the row prints its source and share alone
       expect(printed).not.toContain(cured); // anchored: the twin, or the silent row, was asserted present on the line above
     }
@@ -83,11 +88,19 @@ describe('the law, over births of every crisis the lines print under', () => {
         if (/^Local quarry\b/.test(d)) expect(has(/quarr/), `${seed}: ${d}`).toBe(true);
         if (d === FISH_EXPORT_LINE) expect(has(/fisher|fishing/), `${seed}: ${d}`).toBe(true);
         if (/sawmilling/.test(d)) expect(has(/sawmill|lumber/), `${seed}: ${d}`).toBe(true);
+        if (/mages' guild/.test(d)) expect(has(/mages' guild|mages' district|academy/), `${seed}: ${d}`).toBe(true); // UPKEEP-12 (#115)
       }
       // the census's siege lines (CENSUS-2): tolls on the roads, at the gates, customs and transit trade print no sentence
       for (const e of s.economicState.incomeSources) if (siege && SIEGE_CLOSED_SOURCES.includes(e.source)) expect(e.desc, `${seed}: ${e.source}`).toBe('');
     }));
     expect(alch, 'an alchemist line printed somewhere in the corpus').toBeGreaterThan(0);
+    // UPKEEP-12 (#115, the bar's row): the bar's town bar0-city-wartime-rand-1 holds a Wizard's tower and no mages' guild
+    // or academy; its Arcane Industry line prints without the guild's clause.
+    const tower = birth('bar0-city-wartime-rand-1');
+    const arcane = tower.economicState.incomeSources.find((e) => e.source === 'Arcane Industry');
+    expect(tower.institutions.some((i) => /wizard's tower/i.test(i.name)), 'the guard town holds a tower').toBe(true);
+    expect(arcane?.desc, 'the guard town prints its Arcane Industry line').toMatch(/^Enchanting contracts/);
+    expect(arcane?.desc).not.toMatch(/mages' guild/); // anchored: the line is matched on the line above
     expect(siegeRows, 'sieges were read').toBeGreaterThan(0);
   });
 });

@@ -26,6 +26,7 @@ import { deriveMagicRelianceView, magicRowsGated } from '../../../domain/display
 import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, GREEN, AMBER, RED, sans, SP, swatch } from '../../theme.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { offersFoodSurplus } from '../../../domain/foodSurplus.js';
+import { foodWordShown } from '../../../domain/display/foodWordShown.js';
 import NameColumns from '../../primitives/NameColumns.jsx';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 
@@ -96,17 +97,16 @@ function BandPill({ variable, band, word: recordWord = null, tone: recordTone = 
  * chair's ruling (c): a line that disagrees with another home on the same page reads the home the record
  * bears out). The Food row banded the causal score on the causal ladder and printed "Strained" beside the
  * Overview's "Food Security · Deficit" (a siege, a 68% deficit) and "Adequate" beside "Pressured". The
- * food record's band is the page's one food reading (the Overview, the Crisis tab and this row now print
- * the same word, `economicState.foodSecurity.label`, cased as the Overview cases it, in its colour). The
- * causal band stays on `data-band` and orders the rows; a record without a label keeps the band word.
+ * food word has ONE home on every surface (SURFACES-2 item 1, the chair's ruling (r2) of 2026-11-14): the
+ * food band the Tonight sheet, Daily Life, the Overview and the PDF print (domain/display/foodWordShown.js),
+ * cased as the Overview cases it, in the band's colour; no longer the record's stored label. The causal band
+ * stays on `data-band` and orders the rows; a record with no food word keeps the band word.
  * @param {any} settlement
  * @returns {{ word: string, tone: string | null } | null}
  */
 function foodRecordWord(settlement) {
-  const fs = settlement?.economicState?.foodSecurity;
-  const label = typeof fs?.label === 'string' ? fs.label.trim() : '';
-  if (!label) return null;
-  return { word: statusCase(label), tone: typeof fs.color === 'string' && fs.color ? fs.color : null };
+  const shown = foodWordShown(settlement);
+  return shown ? { word: statusCase(shown.label), tone: shown.color } : null;
 }
 
 /**

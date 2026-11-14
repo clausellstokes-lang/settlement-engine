@@ -82,7 +82,7 @@ describe('the founding rows read the record', () => {
       ['r2r-thorp-29', /logging operation/], // sacred wood sold, no timber near
       ['r2r-hamlet-6', /riverside mill settlement/], // no mill of its own
     ], ([seed, gone]) => {
-      expect(born(seed).history.founding.reason, `${seed}: the row does not print`).not.toMatch(gone);
+      expect(String(born(seed).history.founding.reason), `${seed}: the row does not print`).not.toMatch(gone);
     }), 'A3: guard town — the row does not print');
   });
 
@@ -110,7 +110,24 @@ describe('the founding rows read the record', () => {
     const src = readFileSync(new URL('../../src/generators/narrativeGenerator.js', import.meta.url), 'utf8');
     const commodity = [...src.matchAll(/^\s*['"]((?:was|grew|began|started|developed|attracted)[^'"\n]*?)['"],?\s*$/gm)].map((m) => m[1]);
     const rows = [...Object.values(TERRAIN_NARRATIVE_HOOKS).flat(), ...commodity];
-    expect(new Set(rows.filter((r) => SHAPE.test(r)))).toEqual(new Set(NAMES_A_FOUNDER));
+    // R2-CODE-A-12 (ruling (2), the whole table read): the rows that name a founder in other words, by identity
+    const NAMED = [
+      TERRAIN_NARRATIVE_HOOKS.plains[1], TERRAIN_NARRATIVE_HOOKS.forest[3], TERRAIN_NARRATIVE_HOOKS.forest[5],
+      TERRAIN_NARRATIVE_HOOKS.crossroads[4], TERRAIN_NARRATIVE_HOOKS.isolated[5],
+      'grew from a single logging operation whose owner refused to leave when the contract ended',
+      'was founded when foresters discovered that the surrounding woodland was three times richer than the maps showed',
+      'began when a failed soldier received a land grant and discovered the soil was worth more than any battlefield',
+      'was established on farmland that three generations of the same family refused to sell, and eventually others settled around them',
+      'grew around a smithing operation that discovered the local ore was unusually pure and refused to share the location',
+      'began when quarry workers sent to extract stone for a distant cathedral decided the site was worth keeping for themselves',
+      'began when a merchant realised the local sheep produced finer wool than anything available on the open market',
+      'grew around a sheep run whose owner had the rare good sense to also build a mill and a market',
+      'was established to control a salt deposit that the local lord considered more valuable than the surrounding farmland combined',
+      'began when a wandering alchemist settled here specifically because of what grows along the river margins',
+      'was founded when a group of skilled artisans pooled resources to build a permanent workshop district away from guild restrictions',
+    ];
+    for (const r of NAMED) expect(rows.includes(r), r).toBe(true);
+    expect(new Set([...rows.filter((r) => SHAPE.test(r)), ...NAMED])).toEqual(new Set(NAMES_A_FOUNDER));
   });
 
   it('A5: a refused coastal row resolves onto no second founder (every row)', () => {
@@ -135,7 +152,9 @@ describe('the founding rows read the record', () => {
     expect(admittedRow(['p', 'q'], 'p', { p: no, q: no }, st, new Set(['nav']))).toBe('p');
   });
 
-  it('A5: guard town r2r-city-16 — the navigator row DRAWN as such still prints', () => {
-    expect(born('r2r-city-16').history.founding.reason).toBe('grew because a famous navigator retired here and others followed');
+  // R2-CODE-A-13 (ruling (4)): re-keyed by identity — a founder row DRAWN as such still prints, now where it agrees with
+  // the "Founded by:" row (r2r-city-16's navigator beside a noble house is two founders; tests/generators/foundingOneFounder.test.js)
+  it('A5: guard town r2r-thorp-17 — a founder row DRAWN as such still prints', () => {
+    expect(born('r2r-thorp-17').history.founding.reason).toBe('grew from a single household that others joined over decades until it became permanent');
   });
 });

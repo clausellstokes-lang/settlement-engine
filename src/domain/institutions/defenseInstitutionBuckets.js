@@ -106,6 +106,7 @@ export const DEFENSE_BUCKET_KEYWORDS = Object.freeze({
   magicDef: Object.freeze([
     'wizard', "mages' guild", 'mage', 'academy of magic',
     'golem workforce', // UPKEEP-CAPACITY C6 (the chair's G5): the alchemist's shop and quarter are a trade
+    'scroll scribe', "enchanter's shop", // UPKEEP-13 (the chair's ruling of 2026-11-14 10:40 on UPKEEP-12's M3/M5): both practise wards
   ]),
 });
 
@@ -153,6 +154,25 @@ export function partitionDefenseInstitutions(institutions) {
     buckets[bucket] = list.filter((_, i) => keywords.some((kw) => lowered[i].includes(kw)));
   }
   return buckets;
+}
+
+/**
+ * THE BUCKETS THAT HOLD A PLACE (UPKEEP-12, the chair's ruling (a)): walls, or a force under arms (a
+ * garrison, a militia or levy, a watch, a contracted company). A town holding any of them is never
+ * labelled "Undefended" (`bandLadders.js :: readinessBandOf`). The charter hall and the arcane bucket
+ * are not in it: the ruling names walls and forces.
+ * @type {ReadonlyArray<string>}
+ */
+export const DEFENCE_HOLDING_BUCKETS = Object.freeze(['walls', 'garrison', 'militia', 'watch', 'mercenary']);
+
+/**
+ * Whether a partition (`partitionDefenseInstitutions`'s result, or the record's stored
+ * `defenseProfile.institutions`) holds walls or a force.
+ * @param {unknown} buckets @returns {boolean}
+ */
+export function defenceHeldOf(buckets) {
+  const b = /** @type {Record<string, unknown>} */ (buckets && typeof buckets === 'object' ? buckets : {});
+  return DEFENCE_HOLDING_BUCKETS.some((key) => Array.isArray(b[key]) && b[key].length > 0);
 }
 
 /**
@@ -204,9 +224,9 @@ export function standingDefenseForces(settlement) {
 export const DEFENSE_TRADITION_KEYWORDS = Object.freeze({
   arcane: Object.freeze(['wizard', 'mages', 'arcane', 'enchant', 'spellcasting', 'academy of magic', "mages' district", 'mage', 'scroll scribe']), // UPKEEP-CAPACITY C6 (G5): the casters, with no alchemist
   arcaneGuild: Object.freeze(["mages' guild", "wizard's tower", 'arcane academy', "mages' district", 'academy of magic']),
-  divine: Object.freeze(['cathedral', 'monastery', 'great cathedral', 'parish church']),
+  divine: Object.freeze(['cathedral', 'monastery', 'monasteries', 'great cathedral', 'parish church']), // UPKEEP-MEASURE-2 X5: the monastery's ladder (L4)
   divineShrine: Object.freeze(['temple', 'friary']), // UPKEEP-CAPACITY C4b (the chair's G3s): a wayside shrine has no clergy
-  divineStrong: Object.freeze(['cathedral', 'monastery', 'great cathedral']),
+  divineStrong: Object.freeze(['cathedral', 'monastery', 'monasteries', 'great cathedral']),
   druid: Object.freeze(['druid circle', 'grove shrine', 'elder grove', 'sacred grove']),
   wardens: Object.freeze(["warden's lodge"]), // a ranger post, defence in every world (J31)
   alchemy: Object.freeze(['alchemist', 'apothecary district', 'alchemist quarter']),
@@ -214,7 +234,7 @@ export const DEFENSE_TRADITION_KEYWORDS = Object.freeze({
   teleport: Object.freeze(['teleportation', 'teleport']),
   elders: Object.freeze(['reeve', 'steward', 'elder', 'household council', 'free elder']),
   criminalDen: Object.freeze(['fence', 'smuggl', 'gang', 'outlaw']),
-  actualMagic: Object.freeze(['healer', 'monastery', 'cathedral', 'divine', 'healing', 'druid', 'wizard', 'mage', 'arcane', 'enchant']),
+  actualMagic: Object.freeze(['healer', 'monastery', 'monasteries', 'cathedral', 'divine', 'healing', 'druid', 'wizard', 'mage', 'arcane', 'enchant']),
 });
 
 /**

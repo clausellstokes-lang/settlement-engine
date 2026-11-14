@@ -14,7 +14,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { scoreBand } from '../../src/domain/display/defenseScoreBands.js';
-import { defensePostureProse } from '../../src/domain/display/stateProse/defenseStateProse.js';
+import { defensePostureProse, defenseThreatProse } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { standingDefenseForces } from '../../src/domain/institutions/defenseInstitutionBuckets.js';
 
@@ -75,10 +75,39 @@ describe('the posture line against the facts beside it (F1, both directions of L
     });
     expectNoSeedFailures(failures, 'the posture within its facts');
   });
+  // R3-TABS-5, the chair's ruling (c) of 2026-11-14 on the second reader's R1: RE-KEYED BY IDENTITY. Ingili's own
+  // record (occupied, a Weak bar) pinned the ADEQUATE fallback, a false line two rows above "Keeping order … is the
+  // occupiers' business now"; under an occupation the row is now silent. Its record with the occupation lifted
+  // still draws the line tip's pool beside the Weak bar, so the reverse guard keeps its own arm.
   test('beside a Weak bar the posture draws the line tip\'s pool; a Well-Defended town at peace keeps the strong pool', () => {
-    expect(postureOf('rr3-metropolis-occupied-rand-2')?.rung?.provenance?.poolKey).toBe('readiness ADEQUATE');
+    expect(postureOf('rr3-metropolis-occupied-rand-2')?.beside ?? null).toBe(null);
     expect(postureOf(LIFTED)?.rung?.provenance?.poolKey).toBe('readiness ADEQUATE');
     expect(postureOf(KEEPS)?.rung?.provenance?.poolKey).toBe('readiness STRONG');
+  });
+});
+
+/**
+ * R3-TABS-5, the chair's ruling (c) of 2026-11-14 on the second reader's R1 (MEDIUM) and the carried C3: UNDER AN
+ * OCCUPATION THE POSTURE ROW IS SILENT, beside any bar. The occupation strike runs before the fallback, and before
+ * every pool: "People at Muulcoba expect to hold against the usual trouble" stood two rows above "Keeping order in
+ * Muulcoba is the occupiers' business now … the arms in the town are theirs". RED-FIRST at b5a335a46 on the second
+ * reader's 1,536 births: a posture line in 64 of the 76 occupied towns (adequate, weak and critical pools). The towns
+ * below hold every bar band and every pool that printed; the badge and the Guard assessment are not this arm's.
+ */
+const OCCUPIED = ['rr3-town-occupied-rand-1', 'rr3-metropolis-occupied-rand-2', 'rr3-city-occupied-rand-2', 'rr3-village-occupied-rand-0',
+  'rr3-thorp-occupied-rand-1', 'rr3-city-occupied-rand-0'];
+describe('under an occupation the posture row is silent (ruling (c))', () => {
+  beforeAll(() => { for (const seed of OCCUPIED) TOWNS[seed] = TOWNS[seed] || birth(seed); }, 300000);
+  test('the premise: each town is occupied, and the arm spans the bar bands', () => {
+    expect(OCCUPIED.filter((seed) => !types(TOWNS[seed]).includes('occupied'))).toEqual([]);
+    expect(new Set(OCCUPIED.map(barOf)).size).toBeGreaterThan(2);
+  });
+  test('no posture line prints under an occupation, beside any bar', () => {
+    const failures = collectSeedFailures(OCCUPIED, (seed) => {
+      const posture = postureOf(seed);
+      if (posture?.beside) throw new Error(`${posture.rung?.provenance?.poolKey} beside a ${barOf(seed)} bar: ${posture.beside}`);
+    });
+    expectNoSeedFailures(failures, 'the posture under an occupation');
   });
 });
 
@@ -90,23 +119,38 @@ describe('the posture line against the facts beside it (F1, both directions of L
  * too; a walled town keeps the line.
  */
 const UNWALLED = ['r2r-town-52', 'rr3-town-religious_conversion-rand-1', 'rr3-town-occupied-rand-1'];
-const WALLED_KEEPS = 'rr3-town-slave_revolt-rand-5';
+const WALLED_KEEPS = 'rr3-town-monster_pressure-rand-4';
 const NAMES_WORKS = /the works are kept up|the approaches are watched/;
 /** The watch half alone: the walled town's own record with its watch and garrison taken off the roster. */
+const UNWATCHED_FROM = 'rr3-town-slave_revolt-rand-5';
 const UNWATCHED = 'rr3-town-slave_revolt-rand-5 with no watch or garrison';
 const offTheRoster = (s) => ({ ...s, institutions: (s.institutions || []).filter((inst) => {
   const f = standingDefenseForces({ ...s, institutions: [inst] }); return !f.watch.present && !f.garrison.present;
 }) });
+/**
+ * R3-TABS-5, the chair's ruling (e) on the second reader's R3 (LOW): the 'no walls' arm could not red on its own fault
+ * (on the 1,536 every unwalled strong town is taken first by a later strike). Its made record: the walled keeper's own
+ * record with ONLY its walls taken off the roster, so that 'no walls' alone keeps the line off: its watch stands, no
+ * siege, no occupation, the guard not on paper, its supply not short. The plant ('no walls' off) reds it.
+ */
+const UNWALLED_MADE = 'rr3-town-monster_pressure-rand-4 with its walls taken off the roster';
+const wallsOffTheRoster = (s) => ({ ...s, institutions: (s.institutions || []).filter((inst) => !standingDefenseForces({ ...s, institutions: [inst] }).walls.present) });
+const recordSeed = (seed) => (seed === UNWATCHED ? UNWATCHED_FROM : seed === UNWALLED_MADE ? WALLED_KEEPS : seed);
 describe('a posture line that names works or a watch reads the roster (F3)', () => {
   beforeAll(() => {
-    for (const seed of [...UNWALLED, WALLED_KEEPS]) TOWNS[seed] = TOWNS[seed] || birth(seed);
-    TOWNS[UNWATCHED] = offTheRoster(TOWNS[WALLED_KEEPS]);
+    for (const seed of [...UNWALLED, WALLED_KEEPS, UNWATCHED_FROM]) TOWNS[seed] = TOWNS[seed] || birth(seed);
+    TOWNS[UNWATCHED] = offTheRoster(TOWNS[UNWATCHED_FROM]);
+    TOWNS[UNWALLED_MADE] = wallsOffTheRoster(TOWNS[WALLED_KEEPS]);
   }, 300000);
+  test('the made record differs from its keeper by its walls alone', () => {
+    const made = standingDefenseForces(TOWNS[UNWALLED_MADE]); const kept = standingDefenseForces(TOWNS[WALLED_KEEPS]);
+    expect([made.walls.present, made.watch.present || made.garrison.present, kept.walls.present]).toEqual([false, true, true]);
+  });
   test('no unwalled town, and none without a watch or a garrison, is told its works are kept up', () => {
-    const failures = collectSeedFailures([...UNWALLED, UNWATCHED], (seed) => {
+    const failures = collectSeedFailures([...UNWALLED, UNWALLED_MADE, UNWATCHED], (seed) => {
       const s = TOWNS[seed]; const f = standingDefenseForces(s);
       if (seed === UNWATCHED ? (!f.walls.present || f.watch.present || f.garrison.present) : f.walls.present) throw new Error('premise');
-      const line = defensePostureProse(s, { seed: seed === UNWATCHED ? WALLED_KEEPS : seed }).posture?.beside || '';
+      const line = defensePostureProse(s, { seed: recordSeed(seed) }).posture?.beside || '';
       if (NAMES_WORKS.test(line)) throw new Error(`${seed === UNWATCHED ? 'no watch or garrison' : 'no walls'}: ${line}`);
     });
     expectNoSeedFailures(failures, 'the works read from the roster');
@@ -137,5 +181,27 @@ describe('no strong posture beside a guard that exists on paper', () => {
       if (posture?.rung?.provenance?.poolKey === 'readiness STRONG') throw new Error(`strong beside the guard on paper: ${posture.beside}`);
     });
     expectNoSeedFailures(failures, 'the posture beside its guard');
+  });
+});
+
+/**
+ * The chair's ruling of 2026-11-14 08:53 UTC (on this seat's own measure): NO STRONG POSTURE BESIDE A DEFENCE SHORT OF
+ * SUPPLY. "What … can field … are both in good order" stood over the Invasion row's "The defenders at … make do: the
+ * town's workshops cannot keep them properly fed and equipped" in 173 of the reader's 1,536 at 6b74eb2aa (141 at the
+ * line's tip 976db5b19, 203 at bb2bf91c5 by L1). The strong pool is not drawn where the supply key reads short, read
+ * from the same fact. RED-FIRST at 08acc23d4: the three towns below.
+ */
+const SHORT = ['rr3-town-religious_conversion-rand-1', 'rr3-city-famine-rand-5', 'rr3-city-wartime-rand-1'];
+const GOES_SHORT = /make do|the defenders go short|worse off|runs short/;
+describe('no strong posture beside a defence short of supply', () => {
+  beforeAll(() => { for (const seed of SHORT) TOWNS[seed] = TOWNS[seed] || birth(seed); }, 300000);
+  test('the strong pool is not drawn where the Invasion row says the defenders go short', () => {
+    const failures = collectSeedFailures(SHORT, (seed) => {
+      const s = TOWNS[seed];
+      if (!GOES_SHORT.test(defenseThreatProse(s, { seed }).invasion?.sentence || '')) throw new Error('premise: no short supply sentence');
+      const posture = postureOf(seed);
+      if (posture?.rung?.provenance?.poolKey === 'readiness STRONG') throw new Error(`strong beside a short supply: ${posture.beside}`);
+    });
+    expectNoSeedFailures(failures, 'the posture beside its supply');
   });
 });

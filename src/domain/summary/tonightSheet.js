@@ -33,6 +33,7 @@ import { FOOD_SECURITY_BANDS } from '../../data/bandLadders.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.js';
 import { CRISIS_ROLE_LABEL, castHash, effectiveCastOf } from '../crisis/crisisCast.js';
 import { crisisSummaryForSurface } from '../crisis/crisisSummaryVantage.js';
+import { factsOf } from '../facts/factsOf.js';
 import { CRISIS_NOUN, LINE_ROLE_CLAUSE } from '../crisis/crisisHooks.js';
 import { powerNameInProse } from '../display/governanceAccount.js';
 import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
@@ -105,6 +106,29 @@ const SCARCE_OF_KIND = Object.freeze(/** @type {Record<string, string>} */ ({
 }));
 
 /**
+ * THE SCARCE GOOD IS ONE THE TOWN HAS (R2-CODE-B-12, the chair's ruling (c) on H1-3 / H2-16: r2r-thorp-5, "Wants to
+ * decide who gets the guards" beside the sheet's own "Defence: No walls and no standing force."). Guards are given out
+ * only where a force stands (a garrison, a watch, a militia or a free company: `defenseFactsOf`); where none does, the
+ * raids make shelter scarce, which every town has. @param {string} crisis @param {{ forceStands?: boolean }} facts
+ * @returns {string}
+ */
+function scarceOf(crisis, facts) {
+  if (crisis === 'monster_pressure' && !facts.forceStands) return 'shelter';
+  return SCARCE_OF_KIND[crisis] || 'help';
+}
+
+/**
+ * The town's facts a cast want is read against, from one home for every caller (the sheet and the coherence battery's
+ * re-derivation, crisisFactFindings.js): `seatEmpty` (people/seatKeeper.js :: isSeatVacant) and `forceStands` (a
+ * garrison, a watch, a militia or a free company stands: defense/defenseFacts.js). Draw-free.
+ * @param {unknown} source @returns {{ seatEmpty: boolean, forceStands: boolean }}
+ */
+export function castWantFactsOf(source) {
+  const d = defenseFactsOf(/** @type {Parameters<typeof defenseFactsOf>[0]} */ (source));
+  return { seatEmpty: isSeatVacant(/** @type {never} */ (source)), forceStands: d.hasGarrison || d.hasWatch || d.hasMilitia || d.hasMercenary };
+}
+
+/**
  * The role wants that say the seat is still held (it can still "give way", it can still "fail"): false where the seat
  * stands empty (the increment's #303, rpf-city-succession_void+politically_fractured-13: "keep the pressure on until the
  * seat gives way" where the seat has given way). Read by reference to the pool, so the pool's words stay its own.
@@ -133,7 +157,7 @@ function castWantAdmits(line, house, noun, facts) {
  * admitted line; '' where none is admitted. Filled with the crisis's scarce good and noun and the person's own house
  * (their first-rank power; '' when they hold none). A role with no pool (never voiced today) falls back to `ownWant`.
  * @param {string} role @param {string} personId @param {string} crisis @param {string} ownWant @param {string} [house]
- * @param {{ seatEmpty?: boolean }} [facts] the town's facts a line is read against (`seatEmpty`: people/seatKeeper.js :: isSeatVacant)
+ * @param {{ seatEmpty?: boolean, forceStands?: boolean }} [facts] the town's facts a line is read against (`castWantFactsOf`)
  * @returns {string}
  */
 export function castWantOf(role, personId, crisis, ownWant, house = '', facts = {}) {
@@ -147,7 +171,7 @@ export function castWantOf(role, personId, crisis, ownWant, house = '', facts = 
   return line
     .replace(/\{people\}/g, named ? `the people of ${named}` : 'their own people')
     .replace(/\{house\}/g, named)
-    .replace(/\{scarce\}/g, SCARCE_OF_KIND[crisis] || 'help')
+    .replace(/\{scarce\}/g, scarceOf(crisis, facts))
     .replace(/\{noun\}/g, noun);
 }
 
@@ -375,7 +399,7 @@ function crisisOf(source) {
   // the label and the people; the crisis page keeps the full text. The place is named in that sentence, so
   // the head is the label alone. A crisis with no vantage line (an authored custom kind) keeps the old head.
   const lead = leadStressOf(source);
-  const official = lead && place ? crisisSummaryForSurface(lead, place, 'tonight') : null;
+  const official = lead && place ? crisisSummaryForSurface(lead, place, 'tonight', /** @type {Parameters<typeof crisisSummaryForSurface>[3]} */ (factsOf(source))) : null;
   const said = official && official !== clean(lead?.summary) ? official : null;
   const head = said ? `${type}. ${said}` : place ? `${place}: ${type}` : type;
   const tail = castTail(persons);
@@ -556,7 +580,7 @@ function peopleOf(source) {
   // (`voicedLineOf`: their goal where it is voiceable, else their secret, else their temperament); the role's line
   // (CAST_WANTS) only for a person whose card carries no goal, and only where the town leaves it true (`castWantOf`).
   const order = powerOrderOf(/** @type {never} */ (source));
-  const seatEmpty = isSeatVacant(source);
+  const wantFacts = castWantFactsOf(source);
   for (const slot of VOICE_SLOTS) {
     let filled = false;
     for (const { cast, kind } of casts) {
@@ -564,7 +588,7 @@ function peopleOf(source) {
         const row = cast.roles.find((r) => r.role === role && r.kind === 'npc');
         const hit = row ? npcs.find(({ npc }) => (clean(/** @type {{ id?: unknown }} */ (npc).id) || clean(npc.name)) === row.id) : undefined;
         if (hit && row && !out.some((p) => p.name === clean(hit.npc.name))) {
-          const roleWant = hasOwnGoal(hit.npc) ? '' : castWantOf(role, row.id, kind, '', clean(firstRankMembershipOf(/** @type {never} */ (hit.npc), order)?.power), { seatEmpty });
+          const roleWant = hasOwnGoal(hit.npc) ? '' : castWantOf(role, row.id, kind, '', clean(firstRankMembershipOf(/** @type {never} */ (hit.npc), order)?.power), wantFacts);
           const own = roleWant ? { says: /** @type {'want'} */ ('want'), line: roleWant } : ownLineOf(hit.npc, { withholdSecret: withholdSecret(hit.npc) });
           add(hit, 'cast', own.line, CRISIS_ROLE_LABEL[role], own.says, { castId: row.id, castKind: kind });
           filled = true; break;

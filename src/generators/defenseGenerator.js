@@ -39,7 +39,7 @@
 import { getInstFlags, getPriorities } from './helpers.js';
 import { computeEffectiveMagicPresence, neighbourMilitaryFactorOf } from './priorityHelpers.js';
 import { hasTradeRouteConnection } from '../domain/tradeRouteSemantics.js';
-import { partitionDefenseInstitutions, defenseTraditionNamesOf, defenseWallOf } from '../domain/institutions/defenseInstitutionBuckets.js';
+import { partitionDefenseInstitutions, defenseTraditionNamesOf, defenseWallOf, defenceHeldOf } from '../domain/institutions/defenseInstitutionBuckets.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { readinessBandOf } from '../data/bandLadders.js';
 import { deriveMagicReliance } from '../domain/magicReliance.js';
@@ -67,6 +67,8 @@ const SCORE_NAMES = Object.freeze({ mil: 'military', mon: 'monster', int: 'inter
 const TOUCHES = Object.freeze({ sup: 'SUSTAINS', mil: 'STANDS', int: 'STANDS', mon: 'STANDS' });
 /** The armed bodies: who mans a wall (R7) and who carries the martial will (R13). */
 const ARMED = new Set(['garrison', 'militia', 'watch', 'company', 'charter', 'households', 'wardens']);
+/** The three traditions' parts, held together by their shared cap against beasts (R2). Part ids, not house names. */
+const TRADITION_PARTS = new Set(['arcane', 'clergy', 'druids']);
 /** The small places (thorp, hamlet, village): the tiers the community's own defence is written for. */
 const SMALL = W.community.arms;
 
@@ -122,8 +124,10 @@ const crisisPointsOf = (has, t, magPri) => {
   const out = [];
   if (has('under_siege')) {
     const c = C.under_siege; let e = c.sup, i = c.int;
+    // UPKEEP-MEASURE-2 X3: each relief is its own (a teleport circle eases supply, a guild eases order); one never
+    // takes the other's away, so adding the circle to a guild town never raises what the siege takes from order.
     if (t.hasArcane && magPri >= c.teleportFrom && t.hasTeleport) e = Math.round(e * c.teleportEco);
-    else if (t.hasArcaneGuild && magPri >= c.guildFrom) i = Math.round(i * c.guildInt);
+    if (t.hasArcaneGuild && magPri >= c.guildFrom) i = Math.round(i * c.guildInt);
     if (t.hasDivineStrong) i = Math.round(i * c.strongInt);
     if (t.hasDruid && magPri >= c.druidFrom) e = Math.round(e * c.druidEco);
     out.push(['under_siege', { sup: e, int: i }]);
@@ -316,8 +320,10 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
   };
   const A = W.arcane;
   const arcMon = t.hasArcane ? Math.round(A.mon + Math.min(A.monMax, (magPri - G.arcane) * A.monPerDial)) : 0;
-  // R2: the three traditions together count at most 35 against monsters (one job, once).
-  const tradF = Math.min(1, W.traditionsMonsterMax / Math.max(1, arcMon + (t.hasDivine ? W.clergy.mon : 0) + (t.hasDruid ? W.druids.mon : 0)));
+  // R2: the three traditions together count at most 35 against monsters (one job, once). UPKEEP-MEASURE-2 X2: held on
+  // the points they COUNT (each house's scale and the casters' pay already in), after the three are added below, so one
+  // more tradition never lowers the beasts score (the weights' share left the scaled and paid points out).
+  const tradF = 1;
   const hasStanding = inst.hasGarrison || inst.hasMilitia || inst.hasWatch;
   const hired = inst.hasMercenary || inst.hasCharterHall;
   const law = inst.hasCourtSystem || inst.hasPrison || inst.hasGarrison || inst.hasWatch;
@@ -375,6 +381,19 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
     });
   }
   if (t.hasDruid) add('STANDS', 'druids', { mon: W.druids.mon * tradF });
+  // The traditions' monster points as the cap reads them (`counted`) and as they stand after it (`held`): a reading for
+  // `defenceExactOf` (UPKEEP-15), changing no figure.
+  const tradMon = { counted: 0, held: 0 };
+  {
+    const trad = parts.filter((q) => TRADITION_PARTS.has(q.id));
+    const mon = trad.reduce((a, q) => a + (q.dims.mon || 0), 0);
+    if (mon > W.traditionsMonsterMax) {
+      const k = W.traditionsMonsterMax / mon;
+      for (const q of trad) if (q.dims.mon) { q.dims.mon *= k; q.raw.mon *= k; }
+    }
+    tradMon.counted = mon;
+    tradMon.held = trad.reduce((a, q) => a + (q.dims.mon || 0), 0);
+  }
   // SUSTAINS: what keeps the force going. The stores were laid by at the standing share by their writer.
   const months = fs?.storageMonths ?? (inst.hasGranary ? W.stores.granaryMonths : W.stores.noGranaryMonths);
   add('SUSTAINS', 'stores', { sup: storesPointsOf(months) }, 1, { months: tenths(months) });
@@ -441,14 +460,23 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
   const sumOf = (dims) => Object.entries(dims).reduce((a, [d, v]) => a + (d === 'mag' && !magicExists ? 0 : v), 0);
 
   // R13: the will counts for no more than the armed bodies that carry it, where something is built or standing.
+  // UPKEEP-MEASURE-2 X1: SCORE BY SCORE: the will's points on each score count for no more than the armed bodies' points
+  // on that score (its military to their military, its order to their order), so a will that rises on one score (a
+  // court's law) never lowers it on another. X4: and never below the will the same place has with nothing built or
+  // standing (the base configuration's own rate, unheld), so a wall never lowers the will.
   let willHeld = 0;
   if (bos) {
-    const armed = parts.filter((q) => ARMED.has(q.id)).reduce((a, q) => a + sumOf(q.dims), 0);
+    const armedParts = parts.filter((q) => ARMED.has(q.id));
     const will = parts.find((q) => q.id === 'will');
-    if (will && sumOf(will.dims) > armed) {
-      const k = armed > 0 ? armed / sumOf(will.dims) : 0;
-      willHeld = (sumOf(will.dims) - armed) / n;
-      for (const d of Object.keys(will.dims)) will.dims[d] *= k;
+    if (will) {
+      const before = sumOf(will.dims);
+      const unheld = { mil: Math.round(dial * (hired ? D.none + D.hiredExtra : D.none)), int: Math.round(dial * (law ? D.int : D.intNoLaw)) };
+      for (const d of Object.keys(will.dims)) {
+        const armedOn = armedParts.reduce((a, q) => a + Math.max(0, q.dims[d] || 0), 0);
+        const floor = Math.min(will.dims[d], Object.hasOwn(unheld, d) ? /** @type {any} */ (unheld)[d] : 0);
+        will.dims[d] = Math.max(floor, Math.min(will.dims[d], armedOn));
+      }
+      willHeld = (before - sumOf(will.dims)) / n;
     }
   }
 
@@ -457,13 +485,22 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
   const groupSum = (g) => parts.filter((p) => p.group === g).reduce((a, p) => a + p.points, 0);
   const sustains = groupSum('SUSTAINS');
   const force = groupSum('STANDS');
-  // Limit 1: what sustains a force counts for no more than the force (the parts scaled together).
-  let sustainsHeld = 0;
-  if (sustains > force) {
-    const k = sustains > 0 ? Math.max(0, force) / sustains : 0;
-    for (const q of parts) if (q.group === 'SUSTAINS') { for (const d of Object.keys(q.dims)) q.dims[d] *= k; q.points *= k; }
-    sustainsHeld = groupSum('SUSTAINS') - sustains;
+  // Limit 1, SCORE BY SCORE (UPKEEP-13: the chair's ruling (1) on UPKEEP-MEASURE-2's P2): on each score, what sustains the force counts
+  // for no more than the force (the force's whole points, on that score's scale); the sustaining parts of that ONE score
+  // are held together, so a part on another score never lowers it. A part's negative points (provisions short, food
+  // processing broken) are not sustaining: they count in full, never relieved by the hold.
+  const forcePts = Math.max(0, force) * n;
+  /** @type {Record<string, number>} */
+  const sustPos = {};
+  for (const d of SCORE_KEYS) {
+    const on = parts.filter((q) => q.group === 'SUSTAINS' && (q.dims[d] || 0) > 0);
+    const held = on.reduce((a, q) => a + q.dims[d], 0);
+    const k = held > forcePts ? forcePts / held : 1;
+    if (k < 1) for (const q of on) q.dims[d] *= k;
+    sustPos[d] = held * k;
   }
+  for (const q of parts) if (q.group === 'SUSTAINS') q.points = sumOf(q.dims) / n;
+  let sustainsHeld = groupSum('SUSTAINS') - sustains;
   // R2 (the owner's rule; the lane writer's ruling of 2026-11-13): a hired-only place's military never reads
   // above the same place with a watch in its hired force's stead — that place's REAL military, run through
   // this same code (the pay, the terrain, the crises, R13's hold, limit 1). Where it would, the hired parts'
@@ -501,14 +538,28 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
   const dims = {};
   for (const q of parts) for (const [d, v] of Object.entries(q.dims)) if (!(d === 'mag' && !magicExists)) dims[d] = (dims[d] || 0) + v;
   // R1: each score full at 100 (the rest held in reserve) and never below nothing.
-  const full = Object.fromEntries(Object.entries(dims).map(([d, v]) => [d, Math.min(100, Math.max(0, v))]));
+  // UPKEEP-MEASURE-2 P4: A FORCE IS NO GREATER THAN ITS PEOPLE. The military score is full at its people's measure (the
+  // people times `W.people.milPerHead`, and never above 100); what stands and is built beyond it is held in reserve, on
+  // the fullness line's own words. A record with no population keeps the 100.
+  const pop = Number(settlement.population);
+  /** @type {Record<string, number>} */
+  const top = { mil: Number.isFinite(pop) && pop > 0 ? Math.min(100, pop * W.people.milPerHead) : 100 };
+  const topOf = (/** @type {string} */ d) => (Object.hasOwn(top, d) ? top[d] : 100);
+  const full = Object.fromEntries(Object.entries(dims).map(([d, v]) => [d, Math.min(topOf(d), Math.max(0, v))]));
   const size = Object.hasOwn(W.size, tier) ? W.size[tier] : 0;
   const danger = Object.hasOwn(W.threat.penalty, threat) ? W.threat.penalty[threat] : 0;
-  const raw = Object.values(full).reduce((a, v) => a + v, 0) / n + size - danger;
+  // P2's second hold: READINESS's sustaining total counts for no more than the force. The scores' sum (each full at 100)
+  // is held to the same sum without what sustains, plus the force; both sides only rise when a house is added, so their
+  // least only rises. It is carried on limit 1's own line (no new word).
+  const fullSum = Object.values(full).reduce((a, v) => a + v, 0) / n;
+  const bare = Object.entries(dims).reduce((a, [d, v]) => a + Math.min(topOf(d), Math.max(0, v - (sustPos[d] || 0))), 0) / n;
+  const readinessHeld = Math.max(0, fullSum - (bare + Math.max(0, force)));
+  sustainsHeld -= readinessHeld;
+  const raw = fullSum - readinessHeld + size - danger;
   const total = Math.min(100, Math.max(0, raw));
 
   return { parts, crises, n, dims, full, size, danger, raw, total, willHeld, sustainsHeld, wallsFull, wallsPart,
-    t, inst, hasStanding, hired, law, chains, magicExists };
+    t, inst, hasStanding, hired, law, chains, magicExists, tradMon };
 };
 
 /** One line of the list, as the record stores it. @param {string} id @param {string} group */
@@ -554,7 +605,7 @@ const listOf = (r) => {
   // The score is the figure the page prints: whole points, the exact sum rounded once (COHERENCE-UPKEEP-6, the
   // chair's ruling on the fifth seat's call 1: the band is read from the score as the page shows it). The
   // rounding is its own line, so every part keeps its own measure and the tenths still sum to the score.
-  const score = Math.round(r.total);
+  const score = Math.round(Math.round(r.total * 100) / 100); // UPKEEP-MEASURE-2 X9: read at hundredths first
   if (score !== r.total) rows.push({ exact: score - r.total, line: lineOf('rounding', 'LIMIT') });
   const target = score * 10;
   const shares = apportionTenths(rows.map((x) => x.exact), target);
@@ -598,16 +649,20 @@ export function generateDefenseProfile(settlement, upkeep = keepOf(undefined)) {
   /** @type {any} */
   const scores = {
     // Each score in whole points, the form the page has always shown (the owner, record 328: V3 changes values, not forms).
-    ...Object.fromEntries(SCORE_KEYS.map((d) => [SCORE_NAMES[d], Math.round(r.full[d] ?? 0)])),
+    // UPKEEP-MEASURE-2 X9: read at hundredths before the whole point, so a sum held at the same value (a hold's parts
+    // re-scaled) never prints two figures through the float's last digit.
+    ...Object.fromEntries(SCORE_KEYS.map((d) => [SCORE_NAMES[d], Math.round(Math.round((r.full[d] ?? 0) * 100) / 100)])),
     magicDependency, traditions, ...(disasterScore !== undefined ? { disaster: disasterScore } : {}),
   };
 
-  const band = readinessBandOf(score);
+  // THE LABEL READS THE ROSTER (UPKEEP-12, ruling (a)): walls or a force are never "Undefended".
+  const defenceInstitutions = getDefenseInstitutions(s.institutions || []);
+  const band = readinessBandOf(score, defenceHeldOf(defenceInstitutions));
   const hasAnyDefense = r.inst.hasWalls || r.hasStanding || r.hired;
   return {
     scores,
     readiness: { score, label: band.label, color: band.color, background: band.background, border: band.border },
-    institutions: getDefenseInstitutions(s.institutions || []),
+    institutions: defenceInstitutions,
     magicDependency,
     traditions,
     // Informational: the chains' own readings, each also a part in the list.
@@ -641,4 +696,22 @@ export function generateDefenseProfile(settlement, upkeep = keepOf(undefined)) {
 export function defencePartsOf(settlement, upkeep) {
   const s = /** @type {any} */ (settlement);
   return listOf(computeDefenseScores(s, upkeep ?? keepOfRecord(s.economicState))).list;
+}
+
+/**
+ * THE SCORES BEFORE THE WHOLE POINT (UPKEEP-15, for the monotone guard on made records, the chair's ruling (a)): the
+ * five scores and readiness exactly as the arithmetic holds them, before the page's whole point; and the traditions'
+ * monster points as their shared cap reads them (`traditionsMonster.counted`, before the cap) and holds them (`.held`,
+ * after it), for the count-once test's cap (the chair's ruling (c)). Nothing stores or prints this; it is re-derived
+ * from the record, as the parts are. Pure in the record.
+ * @param {Object} settlement @param {{ bought: number, funded: number }} [upkeep] the standing keep
+ * @returns {Record<string, number> & { traditionsMonster: { counted: number, held: number, cap: number } }}
+ */
+export function defenceExactOf(settlement, upkeep) {
+  const s = /** @type {any} */ (settlement);
+  const r = computeDefenseScores(s, upkeep ?? keepOfRecord(s.economicState));
+  return /** @type {any} */ ({
+    ...Object.fromEntries(SCORE_KEYS.map((d) => [SCORE_NAMES[d], r.full[d] ?? 0])), readiness: r.total,
+    traditionsMonster: { ...r.tradMon, cap: W.traditionsMonsterMax },
+  });
 }

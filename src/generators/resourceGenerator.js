@@ -390,19 +390,55 @@ const buildViabilityReport = (
 //       own settings (`nativeResourceConditionRecords`); otherwise the row gives its goods and
 //       its reason is empty (the page prints no reason).
 // A partial row is unchanged: its goods are intermediates, made by the lone processor it has.
+//
+// THE ROW NEEDS ITS HOUSES AND ITS SOURCE (R3-CODE-C-8, the reader's L05 and the #457 class carried;
+// the chair's ruling (b) of 2026-11-14). Two processors of ANY of the chain's tags made a chain
+// "fully exploited", so a famine thorp of Subsistence farming and an external mill printed "cheese,
+// preserved meat · Complete production chain in place" beside "The herds failed this year", with no
+// Butcher, Tannery or Dairy farmer standing, and a fish row stood on a Mill and Farmland. So a full
+// chain's row is written only where:
+//   (3) every house the chain names (`processingInstitutions`; an "Access to …" entry is a road to a
+//       house elsewhere, not a house in place, and is not one of them) stands on the roster: by its
+//       own name, or as a house that processes this chain and is the same kind ("Mills (2-5)" for
+//       Mill, "Tanners" for Tannery: the name's head word);
+//   (4) and the source the food record says a famine failed (`failedSource`) is not this chain's:
+//       the herds that failed feed no cheese and no preserved meat.
+// Elsewhere the good is not listed (the ruling's own arm; silence is not a false sentence). A chain that names no
+// house at all (the oasis dates) has nothing to stand the claim on: its goods are given without it, as (2) gives them.
+//
+// A GOOD NO HOUSE OF ITS CHAIN MAKES (R3-CODE-C-9; the eighth seat's named row, the chair's ruling of 2026-11-14 as
+// its L05's): (5) the grain chain names a Mill and Bakers and no brewer, so its row named "beer" in towns with Inns and
+// Taverns and no brewer standing (19 of the reader's 1,722; r2r-town-24, town of 423: "bread, beer, animal feed ·
+// Complete production chain in place"). Such a good is listed only where its maker stands on the roster, read by kind
+// as (3) reads a house (`houseHead`: a Brewery or a Brewer is a brewer; an alehouse is not); elsewhere it is not listed.
+/** The goods a chain lists that none of its own houses makes, and the kind of house that makes each (houseHead's word). */
+const UNHOUSED_GOOD_MAKER = Object.freeze({ beer: 'brewer' });
+/** The chain a famine's failed source stops (foodBalance.js :: failedSource; the mill grinds the grain). */
+const FAILED_SOURCE_CHAIN = Object.freeze({ grain: 'grain', mill: 'grain', livestock: 'livestock', fish: 'fish' });
+/** A house name's head word, as a kind: lower case, no counts or possessives, no plural or -y ending. @param {unknown} name */
+const houseHead = (name) => (String(name || '').toLowerCase().replace(/\([^)]*\)/g, ' ')
+  .split(/[\s/]+/).find(Boolean) || '').replace(/['’]/g, '').replace(/s$/, '').replace(/y$/, '');
+/** @param {string} name a house the chain names @param {any} chain @param {Array<{ name?: string }>} institutions */
+const houseStands = (name, chain, institutions) => institutions.some((inst) => inst?.name === name
+  || (institutionSupportsChain(inst, chain) && houseHead(inst?.name) === houseHead(name)));
 
 /**
  * @param {{ fullyExploited?: Array<any>, partiallyExploited?: Array<any> }} exploitation
  * @param {Array<{ name?: string }>} [institutions] the native roster the gaps were read on
  * @param {Array<{ missing?: unknown }>} [gaps] this analysis's own gaps (evaluateInstitutionChain)
  * @param {Array<{ key: string, condition: string }>} [resourceConditions] the town's own settings
+ * @param {unknown} [failedSource] the food record's source a famine failed (economicState.foodSecurity.foodRecord)
  */
-const evaluateInstitutionDeps = (exploitation, institutions = [], gaps = [], resourceConditions = []) => {
+const evaluateInstitutionDeps = (exploitation, institutions = [], gaps = [], resourceConditions = [], failedSource = null) => {
   const exports = [];
   const listedMissing = new Set(gaps.flatMap((gap) => (Array.isArray(gap?.missing) ? gap.missing : [])));
   const depleted = resourceConditions.filter((record) => record?.condition === 'depleted');
+  const stoppedChain = typeof failedSource === 'string' ? FAILED_SOURCE_CHAIN[/** @type {keyof typeof FAILED_SOURCE_CHAIN} */ (failedSource)] : undefined;
 
   exploitation.fullyExploited?.forEach(chain => {
+    if (stoppedChain && chain.chainKey === stoppedChain) return; // (4)
+    const needed = (chain.processingInstitutions || []).filter((/** @type {string} */ name) => !/^access to /i.test(name));
+    if (!needed.every((/** @type {string} */ name) => houseStands(name, chain, institutions))) return; // (3)
     const absent = (chain.processingInstitutions || []).filter((name) => (
       listedMissing.has(name) && !institutions.some((inst) => inst?.name === name)));
     const madeByAbsent = Object.entries(RESOURCE_CHAINS)
@@ -410,7 +446,11 @@ const evaluateInstitutionDeps = (exploitation, institutions = [], gaps = [], res
         && absent.some((name) => (other.processingInstitutions || []).includes(name)))
       .flatMap(([, other]) => [...(other.intermediateGoods || []), ...(other.finalProducts || [])]);
     const products = (chain.finalProducts || []).filter((product) => (
-      !madeByAbsent.some((good) => tokensReconcile(product, good))));
+      !madeByAbsent.some((good) => tokensReconcile(product, good))))
+      .filter((product) => { // (5): a good its chain's houses do not make stands only beside its maker
+        const maker = UNHOUSED_GOOD_MAKER[/** @type {keyof typeof UNHOUSED_GOOD_MAKER} */ (normalizeToken(product))];
+        return !maker || institutions.some((inst) => houseHead(inst?.name) === maker);
+      });
     if (products.length === 0) return;
     const raws = [chain.rawResource, ...terrainSynonymsFor(chain.rawResource)];
     const sourceDepleted = depleted.some((record) => (
@@ -420,7 +460,7 @@ const evaluateInstitutionDeps = (exploitation, institutions = [], gaps = [], res
       product: products.join(', '),
       chain:   chain.rawResource,
       value:   chain.exportValue,
-      reason:  sourceDepleted ? '' : 'Complete production chain in place',
+      reason:  sourceDepleted || needed.length === 0 ? '' : 'Complete production chain in place', // (3): a chain that names no house claims none
     });
   });
 
@@ -475,9 +515,14 @@ const supplyOfInput = (rawResource, institutions, evidence = {}) => {
 const evaluateInstitutionChain = (exploitation, institutions, evidence = {}) => {
   const gaps = [];
 
+  // R3-CODE-C-10 (d) (the chair's ruling of 2026-11-14, vetoable by the owner): A LINE THAT NAMES A HOUSE THE TOWN
+  // LACKS READS THE ROSTER BY WHAT THE HOUSE IS, NEVER BY ONE SPELLING OF ITS NAME. A partial chain's missing houses
+  // ("Work on the timber here stops half-way: no sawmill or carpenters' guild finishes it.", validationOnPage.js) are
+  // those no house of the same kind stands for (houseHead, as (3) and (5) read a house): 'Sawmill' is not missing
+  // beside 'Sawmill (commercial)', nor "Carpenters' guild" beside 'Carpenters (5-15)'.
   exploitation.partiallyExploited?.forEach(chain => {
     const missingInsts = chain.processingInstitutions.filter(name =>
-      !institutions.some(i => i.name === name));
+      !institutions.some(i => i.name === name || houseHead(i?.name) === houseHead(name)));
     if (missingInsts.length > 0) {
       gaps.push({
         chain:   chain.rawResource,
@@ -608,7 +653,8 @@ export const generateResourceAnalysis = (
   );
   const resourceConditions = nativeResourceConditionRecords(config);
   // after the gaps and the town's settings: a complete row reads both (#457, #1163)
-  const exports        = evaluateInstitutionDeps(exploitation, nativeInstitutions, gaps, resourceConditions);
+  const exports        = evaluateInstitutionDeps(exploitation, nativeInstitutions, gaps, resourceConditions,
+    economicState?.foodSecurity?.foodRecord?.failedSource); // (4): the source a famine failed
   const featureEffects = evaluateResourceChain(specialResources);
 
   const pri            = getPriorities(config);

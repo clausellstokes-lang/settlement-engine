@@ -40,12 +40,12 @@ import { cardInstitutionVeilOf } from '../domain/people/cardPowers.js';
 import { drawTies } from './people/ties.js';
 import { dealGoals } from './people/goals.js';
 import { pickVariant } from '../kernel/proseHash.js';
-import { selectOriginBody, supportChannelsOf } from './narrative/settlementOriginProse.js'; import { FOUNDER_ADMITS, FOUNDING_REASON_ADMITS, NAMES_A_FOUNDER, admittedRow, foundingStateOf } from './narrative/foundingRowAdmits.js'; // R2-CODE-A-5: one line, so no cited line moves
+import { selectOriginBody, supportChannelsOf } from './narrative/settlementOriginProse.js'; import { FOUNDER_ADMITS, FOUNDING_REASON_ADMITS, NAMES_A_FOUNDER, admittedRow, foundingStateOf, oneFounderRow } from './narrative/foundingRowAdmits.js'; // R2-CODE-A-5: one line, so no cited line moves
 import { resolvePrimaryStress } from './stressPriority.js';
 import { migrationDirectionOfStress, migrationDirectionOfConfig } from '../domain/migrationDirection.js';
 import { pick, pickRandom, pickRandom2, random01 } from './helpers.js';
 import { resolveTerrain } from '../domain/resolveTerrain.js';
-import { deriveTradeCommodity } from './tradeCommodity.js'; import { catalogIdForName } from '../data/institutionalCatalog.js'; const COURT_IDS = new Set(['Courthouse', 'Multiple courthouses', 'Multiple court buildings'].map(catalogIdForName)); // R2-CODE-A-7: the roster's courthouses (record 422)
+import { deriveTradeCommodity } from './tradeCommodity.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; // R2-CODE-A-7: the roster's courthouses (record 422), read from the defence home (R2-CODE-A-10)
 
 import {
   TERRAIN_NARRATIVE_HOOKS,
@@ -318,7 +318,8 @@ export const genArrivalDetail = (
     ],
     hamlet: [
       'three or four families who agreed to try wintering together and never stopped',
-      'a household that settled first and found others following it in', // R2-CODE-A-3 (the increment's ww-53): it read "a miller who built a mill and found customers before they found customers", garbled, in hamlets that hold no mill; the founder is picked with no roster in reach, so the line names no house
+      // R2-CODE-A-3 (the increment's ww-53): it read "a miller who built a mill and found customers before they found customers", garbled, in hamlets that hold no mill; the founder is picked with no roster in reach, so the line names no house
+      'a household that settled first and found others following it in',
       'a retired tradesperson whose skills attracted dependents',
       'a small religious community whose members drifted into secular life over two generations',
     ],
@@ -417,10 +418,10 @@ export const genArrivalDetail = (
   // canonical index-0 note, byte-identical to the old behaviour.
   // STRESS_NOTES (now variant pools, canonical-at-zero) lives in src/data/narrativeData.js.
 
-  const foundingState = foundingStateOf(config, economicContext, worldLaw), founders = FOUNDERS_BY_TIER[tier] || FOUNDERS_BY_TIER.village; return { // R2-CODE-A-5 (#488 #594 #845, #571/#916): a refused row resolves draw-free to the next admitted one
+  const foundingState = foundingStateOf(config, economicContext, worldLaw), founders = FOUNDERS_BY_TIER[tier] || FOUNDERS_BY_TIER.village, drawnReason = pick(reasonPool), foundedBy = admittedRow(founders, pick(founders), FOUNDER_ADMITS, foundingState); return { // R2-CODE-A-5 (#488 #594 #845, #571/#916): a refused row resolves draw-free to the next admitted one; R2-CODE-A-13: the two picks in their order
     age: null, // filled in by historyGenerator
-    reason: admittedRow(reasonPool, pick(reasonPool), FOUNDING_REASON_ADMITS, foundingState, NAMES_A_FOUNDER), // R2-CODE-A-9: a refused row resolves onto no second founder
-    foundedBy: admittedRow(founders, pick(founders), FOUNDER_ADMITS, foundingState),
+    reason: oneFounderRow(reasonPool, admittedRow(reasonPool, drawnReason, FOUNDING_REASON_ADMITS, foundingState, NAMES_A_FOUNDER), foundedBy, FOUNDING_REASON_ADMITS, foundingState), // R2-CODE-A-9: a refused row resolves onto no second founder; R2-CODE-A-13 (ruling (4)): a founder row stands only beside its own founder
+    foundedBy,
     initialChallenge: pick(
       CHALLENGES_BY_ROUTE[challengeRoute] || CHALLENGES_BY_ROUTE.road,
     ),
@@ -516,6 +517,7 @@ const genPressureDetail = settlement => {
 
   // FIX-PUBLIC-VEIL (the second seat): is the top card a veiled face (its house record veiled)?
   const topCardVeiled = cardInstitutionVeilOf(npcs?.[0]) === 'veiled';
+  const defense = defenseFactsOf({ institutions }); // the court building, from the one home (defenceFactReaders' court member)
   return {
     name,
     tier,
@@ -526,7 +528,7 @@ const genPressureDetail = settlement => {
     // WIRING-W0 (R-W7 e): the migration direction the record declares; the mass_migration pressure
     // lines read it (narrativeText.js), never a score of their own.
     migrationDirection: migrationDirectionOfStress(stress),
-    commodity, foodRecord: economicState?.foodSecurity?.foodRecord ?? null, powerCount: factions.length, hasBakery: hasInst('baker'), hasWorkshop: (institutions || []).some(i => i?.category === 'Crafts' && !/^access to\b/i.test(String(i?.name || ''))), hasCourt: (institutions || []).some(i => COURT_IDS.has(i?.catalogId ?? catalogIdForName(i?.name))), // R2-CODE-A-7 (record 422): a courthouse on the roster, by catalog id (the label-join freeze), for the line that names the courts // R2-CODE-A-6: a house of craft on the roster (an "Access to" row is not one: record 375) // R2-CODE-A-3: the powers the record holds (#48); the bakers the roster holds (the increment's ww-28) // R2-CODE-A P1: the food record, for the lines that mean food (narrativeText.js :: PRESSURE_SENTENCES, through foodBalance.js :: foodStoreWord)
+    commodity, foodRecord: economicState?.foodSecurity?.foodRecord ?? null, powerCount: factions.length, hasBakery: hasInst('baker'), hasWorkshop: (institutions || []).some(i => i?.category === 'Crafts' && !/^access to\b/i.test(String(i?.name || ''))), hasCourt: defense.hasCourthouse, // R2-CODE-A-7 (record 422): a courthouse on the roster, by catalog id (the label-join freeze), for the line that names the courts // R2-CODE-A-6: a house of craft on the roster (an "Access to" row is not one: record 375) // R2-CODE-A-3: the powers the record holds (#48); the bakers the roster holds (the increment's ww-28) // R2-CODE-A P1: the food record, for the lines that mean food (narrativeText.js :: PRESSURE_SENTENCES, through foodBalance.js :: foodStoreWord)
     // compound: the economic/military/criminal effectiveness triplet the
     // wartime/mass_migration/insurgency PRESSURE_SENTENCES closures branch on
     // (r.compound?.economyOutput / militaryEffective / criminalEffective). Without

@@ -173,6 +173,12 @@ export function estrangedPowersOf(settlement, governing) {
     if (!governing || !pair.includes(governing)) continue;
     const other = pair.find((/** @type {string} */ n) => n && n !== governing);
     if (!other) continue;
+    // R3-CODE-C-9 (the bar's n15, bar0-metropolis-calm-rand-1, Shankou): the criminal row at the adversarial capture
+    // rung (factionDynamics.js :: govCriminalRelation, "... is hunting {criminals} in earnest") is the hall pursuing a
+    // rival it is beating (the same tab: "{criminals} works against {ruler}, and {ruler} is winning",
+    // dmPowerLines.js); it has not broken with the hall, so the account names it neither as refusing the hall's orders
+    // nor as a cost to them ("It can no longer make its orders hold alone"). 30 of the reader's 1,722 accounts.
+    if (rel.type === 'competitive' && rel.captureState === 'adversarial') continue;
     const tie = rel.type === 'corrupted' ? (rel.captureState === 'capture' ? 'capture' : 'corrupted')
       : rel.type === 'competitive' ? 'competitive'
         : rel.type === 'tense' ? 'tense' : null;

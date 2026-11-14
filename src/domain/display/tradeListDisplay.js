@@ -350,7 +350,7 @@ function arrivingOf(settlement) {
  *   (ii) a MADE good (a chain's output, or a good of `MADE_GOOD_HOUSES`) prints only where a chain that makes it works
  *        here, in the state its card prints (`chainStateShown.js`, the crisis read; `facts/chainWorking.js ::
  *        WORKING_CHAIN_STATUSES`), none of its houses held only as a road to elsewhere, and the house its making
- *        needs stands on the live roster (`MADE_GOOD_HOUSES`, else any house of the chain): "Books and manuscripts" by
+ *        needs stands on the live roster (`MADE_GOOD_HOUSES`; no row, no maker, W2-C-LEAVES-12): "Books and manuscripts" by
  *        Glassmakers alone, "metalwork" with no smithy, guild goods with no guild, are not borne out. A good the land
  *        gives and a house finishes ("Milled flour") prints only where a chain on that ground still works (a famine
  *        that failed the grain mills none); an export of a made good whose chain is impaired or broken (on a
@@ -389,7 +389,7 @@ function pillAsPrinted(raw, side, settlement) {
   /** @param {{ status?: unknown }} c */
   const works = (c) => WORKING_CHAIN_STATUSES.includes(String(chainCrisisStateShown(c, settlement)));
   const houseRe = MADE_GOOD_HOUSES.get(good);
-  const makerStands = !!houseRe && own.some((n) => houseRe.test(n));
+  const makerStands = !!houseRe && own.some((n) => houseMakesGood(good, houseRe, n, settlement));
   const grounds = TRADE_GOOD_GROUNDS.get(good) || [];
   const makers = chains.filter((c) => (Array.isArray(c.outputs) ? c.outputs : []).some((o) => fold(o) === good));
   if (makers.length > 0) {
@@ -399,7 +399,7 @@ function pillAsPrinted(raw, side, settlement) {
     // (`chainMakesHere`, at the end of the file), shared with a chain card's own Outputs (`chainOutputsShown`), so the
     // pills and the card read the same rule (iii). The helper is the reading that stood here, moved whole: the good is
     // the land's own on the ground the chain works (no house makes it), or none of the chain's houses is held only as a
-    // road to elsewhere and the house its making needs stands (`MADE_GOOD_HOUSES`, else any house of the chain by its
+    // road to elsewhere and the house its making needs stands (`MADE_GOOD_HOUSES`; since W2-C-LEAVES-12 no row, no maker; once any house by its
     // first word). The chain's state (`works`) and an entrepôt's carriage (`carries`) stay read here. Eight lines, as
     // the four closures took: a census row below keys this file by line (`tests/lint/arcaneClassifierCensus`).
     // (The record is not touched.)
@@ -407,10 +407,28 @@ function pillAsPrinted(raw, side, settlement) {
     if (side !== 'exports' || !makers.some((c) => carries(c) && works(c))) return null;
     return mark.kinds.includes('transit') ? raw : [mark.label, 'transit', ...mark.kinds].map((k, i) => (i === 0 ? k : `(${k === 'naval' ? 'naval route only' : k === 'occupation' ? 'taxed by occupation' : k})`)).join(' ');
   }
-  if (!houseRe) return raw;
+  // W2-C-LEAVES-12, the chair's ruling (3), HIGH (REVIEW-W2-C-LEAVES [13]): a raw good whose own card the page marks Impaired
+  // by the crisis in force is not listed as an export ("Raw wool, Livestock" beside "The herds failed this year")
+  if (!houseRe) return side === 'exports' && rawCardStoppedByCrisis(good, chains, settlement) ? null : raw;
   if (!makerStands || landFailed(settlement, [...grounds, ...(RESOURCES_YIELDING.get(good) || [])])) return null;
   const onGround = chains.filter((c) => grounds.includes(String(c.resourceInputKey)));
   return onGround.length === 0 || onGround.some(works) ? raw : null;
+}
+
+/**
+ * A RAW GOOD'S OWN CARD, STOPPED BY THE CRISIS IN FORCE (W2-C-LEAVES-12, ruling (3) HIGH; the reader's [13]: exports under a
+ * famine listing the food that failed, 12 to 13 towns): the chains that work a ground the good comes from
+ * (`TRADE_GOOD_GROUNDS`, `RESOURCES_YIELDING`), where there is one, all print Impaired by the crisis read
+ * (`chainStateShown.js :: chainCrisisStateShown`: a famine's failed source, a siege's stopped field work) while the record
+ * holds them working. Then the good is not sent out: the card the page prints says so.
+ * @param {string} good the good, folded @param {ReadonlyArray<{ status?: unknown, resourceInputKey?: unknown }>} chains the record's chains
+ * @param {Parameters<typeof localProductionAsPrinted>[0]} settlement the record
+ * @returns {boolean}
+ */
+function rawCardStoppedByCrisis(good, chains, settlement) {
+  const grounds = [...(TRADE_GOOD_GROUNDS.get(good) || []), ...(RESOURCES_YIELDING.get(good) || [])];
+  const own = chains.filter((c) => grounds.includes(String(c.resourceInputKey)));
+  return own.length > 0 && own.every((c) => WORKING_CHAIN_STATUSES.includes(String(c.status)) && chainCrisisStateShown(c, settlement) === 'impaired');
 }
 
 /**
@@ -449,13 +467,14 @@ const NOT_A_GOOD_HERE = new Set(['trade access', 'maritime trade access', 'toll 
 
 /**
  * (ii), (iii) THE HOUSE A GOOD'S MAKING NEEDS, by the roster's own words (a closed list, each entry its cause; a good
- * not here needs any house of the chain that makes it). Matched on the live roster's own houses, never an access row.
+ * not here is made by no house and is not printed as made, W2-C-LEAVES-12 ruling (3)). Matched on the live roster's own
+ * houses, never an access row.
  * @type {ReadonlyArray<readonly [ReadonlyArray<string>, RegExp]>} */
 const MADE_GOOD_ROWS = Object.freeze([
   // the glass and print chain's Glassmakers make no book (rww-city-famine-1); a scriptorium, a library, a sage does
-  [['books and manuscripts'], /\bprint|\bscriptor|\bbookbind|\blibrar|\buniversit|\bcollege|\bscribe|\bsage|\bwizard/],
+  [['books and manuscripts'], /\bprint|\bscriptor|\bbookbind|\blibrar|\buniversit|\bcollege|\bscribe|\bsage/], // + its chain's house through the detector (end of file)
   [['printing services'], /\bprint/],
-  [['glassware', 'window glass', 'glass blanks'], /\bglass/],
+  [['glassware', 'window glass', 'optical glass', 'glass blanks'], /\bglass/],
   // the parish chain's outputs need a house of worship: an almshouse or a foundling home holds no service
   [['religious services', 'education (basic)', 'sanctuary'], /\bchurch|\bcathedral|\bchapel|\bshrine|\btemple|\babbey|\bmonaster|\bfriary|\bpriest/],
   // guild goods with no guild (rww-village-famine-1: a Shepherd alone)
@@ -463,7 +482,7 @@ const MADE_GOOD_ROWS = Object.freeze([
   // barrels need a cooper or a woodworker (rww-village-famine-1: a Thatcher alone)
   [['barrels and containers'], /\bcooper|\bcarpenter|\bjoiner|wright\b/],
   // tools, arms and metalwork need a smithy (rww-thorp-plague_onset-1: "metalwork" with no smith)
-  [['quality tools and weapons', 'advanced weapons and armor', 'weapons and armour', 'basic metalwork', 'metalwork', 'ironwork'], /smith|\bforge|\bmetalwork|\barmou?r|\bweapon/],
+  [['quality tools and weapons', 'advanced weapons and armor', 'master-crafted weapons', 'weapons and armour', 'basic metalwork', 'metalwork', 'ironwork'], /smith|\bforge|\bmetalwork|\barmou?r|\bweapon/],
   [['fine metalwork and jewelry', 'jewellery', 'cut gemstones'], /\bmetalwork|\bjewel|goldsmith|silversmith|\bgem/],
   // the luxury goods chains' manufacture: a metalworker, a luxury goods quarter or a silk house makes it here
   [['luxury manufactured goods'], /\bmetalwork|\bjewel|\bluxury goods|\bsilk|\bweav|\btailor/],
@@ -477,9 +496,140 @@ const MADE_GOOD_ROWS = Object.freeze([
   // flour needs a mill (a sawmill is none) or a baker; bread a baker
   [['milled flour', 'flour and meal', 'flour'], /(?:^|[^a-z])mill(?:s|er|ers)?\b|\bbaker/],
   [['baked goods'], /(?:^|[^a-z])mill(?:s|er|ers)?\b|\bbaker/],
+  // ── W2-C-LEAVES-12, the chair's rulings (3) and (2b) of 2026-11-14: A GOOD WITH NO MAKER ROW IS NOT PRINTED BY DEFAULT;
+  // THE HOUSE THAT FINISHES A GOOD MAKES THAT GOOD. The default read any house of the chain by the first word of its name,
+  // so a Mine made "Master-crafted weapons" (the reader's [11], 21 of 21), a Mill brewed beer, "Multiple market squares"
+  // gave armed escort, "Blacksmiths" sold contraband (the black market's first word) and "Great cathedral" drew maps (the
+  // great library's): 52,603 card outputs, 2,624 exports and 5,478 local pills passed that way on the reader's 1,824
+  // births. Each good of the chain table now names the houses that make or offer it (the roster's own words):
+  // drink, board and the road's services
+  [['meals and drink'], /\btavern|\binns?\b|alehouse|ale house|\bbrew|\bvintner/],
+  [['lodging'], /\btavern|\binns?\b|alehouse|ale house|caravanserai|waystation|hostel/],
+  [['stabling'], /\btavern|\binns?\b|\bstable|caravanserai|waystation/],
+  [['hiring hall', 'gambling'], /\btavern|\binns?\b|alehouse|ale house|gambl/],
+  [['message relay'], /\btavern|\binns?\b|post relay|message network|cartograph|\bcrier|courier/],
+  [['ale (barrel)', 'beer (barrel)', 'malt'], /\bbrew|alehouse|ale house|maltster/], // a mill mills: it brews nothing (ruling 2b)
+  [['mead'], /\bbrew|alehouse|ale house|\bmead|beekeep/],
+  // food kept and caught: a cooper makes the barrel, not what goes in it; a fish market sells the catch, it renders no oil
+  [['preserved foods'], /salt works|\bbutcher|fishmonger|fish market|\bdairy|smokehouse|\bpreserv/],
+  [['honey and beeswax', 'foraged goods'], /beekeep|subsistence|smallhold|\bforag|elder grove/],
+  [['candles and wax'], /\bchandler|beekeep/],
+  [['medicinal honey'], /apothecar|beekeep|herbalist/],
+  [['herbal remedies'], /apothecar|herbalist|midwife|\bhealer|\bwarden|elder grove/],
+  [['potions and elixirs'], /apothecar|herbalist|\balchemist/], // + an arcane house of its own chain (ARCANE_MADE_GOODS)
+  [['alchemical products'], /\balchemist/], // + an arcane house of its own chain
+  [['aged cheese', 'luxury dairy products'], /\bdairy|cheese/],
+  [['dates and fruit', 'preserved fruit', 'palm sugar'], /\bfarm|orchard|subsistence|\bgrove\b/],
+  [['water trade', 'caravan resupply'], /caravanserai|waystation|\bwells?\b|cistern/],
+  [['grain export', 'agricultural produce', 'surplus food'], /\bfarm|granary|(?:^|[^a-z])mills?\b/],
+  // healing and faith
+  [['medical treatment'], /hospital|infirmar|physician|almshouse|foundling/],
+  [['surgery'], /hospital|surgeon/],
+  [['quarantine'], /hospital|lazar|pest ?house/],
+  [['medical training'], /hospital|universit|physician/],
+  [['medical care (basic)'], /\bchurch|cathedral|chapel|temple|abbey|monaster|friary|priory|shrine|\bhealer|hospital|infirmar|almshouse/],
+  [['spellcasting (minor)'], /\bchurch|cathedral|chapel|temple|abbey|monaster|friary|priory/], // + an arcane house of its own chain
+  [['poor relief'], /\bchurch|cathedral|chapel|temple|abbey|monaster|friary|priory|almshouse|foundling/],
+  [['record keeping'], /\bchurch|cathedral|temple|abbey|monaster|priory|\bscribe|librar/],
+  [['hospitality for travellers'], /\bchurch|cathedral|abbey|monaster|friary|priory|hospice|almshouse/],
+  [['illuminated manuscripts'], /monaster|abbey|priory|cathedral|scriptor/],
+  // arms, watch and law
+  [['defence services'], /\bwatch\b|garrison|barracks|militia|\bguards?\b|citadel|castle|\bfort/],
+  [['weapons training'], /\bwatch\b|garrison|barracks|militia|\bguards?\b|mercenar|free company|fencing/],
+  [['armed escort'], /mercenar|free company|adventurer|veteran|caravan guard/],
+  [['mercenary hire', 'training services'], /mercenar|free company/],
+  [['monster hunting services', 'dungeon clearance'], /adventurer|veteran|monster hunt/],
+  [['legal services'], /\bcourthouse|\bcourt buildings?\b|town hall|city hall|\bnotar|lawyer|advocate/],
+  [['strategic control', 'trade access fees', 'transit trade profit'], /\btoll|customs|garrison|caravaneer|coaching inn|citadel/],
+  // the underworld's trades
+  [['contraband goods'], /smuggl|\bfences?\b|black market|thieves|front business|outlaw/],
+  [['forged documents', 'fencing stolen goods', 'illegal services'], /\bfences?\b|black market|thieves|front business|forger/],
+  [['import/export bypass', 'safe houses'], /smuggl|outlaw|\bfences?\b|thieves/],
+  [['information brokerage'], /thieves|street gang|\bsage|post relay|listening post|whisper|informant/],
+  [['guild protection', 'contract killing', 'intimidation services', 'comprehensive black market'], /thieves|street gang|syndicate|assassin/],
+  [['forced labour services', 'domestic servants', 'agricultural labour', 'mine labour'], /slave|workhouse|labour/],
+  // news, maps, letters and learning
+  [['news and information'], /cartograph|librar|\bcrier|message network|post relay|\bprint|herald/],
+  [['maps and charts'], /cartograph|librar|navigator/],
+  [['broadsheets'], /\bprint|cartograph/],
+  [['public proclamations'], /\bcrier|herald|town hall|city hall|cartograph/],
+  [['long-distance messages'], /post relay|message network|courier|caravaneer/],
+  [['intelligence services'], /post relay|listening post|\bsage|\bspy|spies/],
+  [['divination and scrying'], /\bscry|\bseer|oracle/], // + an arcane house of its own chain
+  // higher learning: a sage, a library or a university; a house the detector calls arcane, of the good's own chain, too
+  [['higher education', 'research', 'publishing'], /\bsage|librar|universit|scholar|\bprint/],
+  // the magic trades: only an arcane house of the good's own chain (ARCANE_MADE_GOODS; the canonical detector)
+  [['magical identification', 'enchanting services', 'spellcasting (greater)', 'teleportation', 'magical item market', 'weapon enchantment', 'armour warding', 'utility enchantments', 'magical entertainment'], /(?!)/],
+  [['planar travel information', 'diplomatic access'], /\bplanar/], // extraplanar goods: carried by the planar traders (transit), made only by an arcane house of its chain
+  // shows and games
+  [['performances', 'music and song'], /theat|\bbard|performer|minstrel|musician/],
+  [['musical education'], /\bbard|music/],
+  [['games of chance'], /gambl/],
+  [['gladiatorial combat', 'monster exhibitions', 'public games'], /\barena|colosseum|amphitheat/],
+  // beasts
+  [['cavalry mounts', 'draft horses', 'working animals'], /\bstable|horse|beast trainer|pack animal|breeder|ostler/],
+  [['hunting dogs'], /beast trainer|kennel|\bhunter/],
+  [['trained falcons'], /beast trainer|falconer/],
+  // leather, cloth, bows
+  [['saddles and harness', 'belts and straps'], /\bsaddler|\bleather|\btann|\bcobbler|harness/],
+  [['leather armour'], /\bleather|\btann|\barmou?r/],
+  [['tailored garments', 'livery and uniforms'], /\btailor|\bdraper|seamst/],
+  [['bows and crossbows', 'arrows (sheaf)', 'crossbow bolts', 'hunting equipment'], /\bbowyer|\bfletcher/],
+  // metal, stone, clay, wood and fuel: a Mine digs ore, it forges no blade
+  [['refined iron ingots', 'pig iron', 'cast iron goods'], /\bsmelt|foundry|ironworks|\bmetalwork/],
+  [['refined ingots', 'assay certificates'], /\bmint\b|\bmetalwork|\bjewel|goldsmith|silversmith|\bassay|\bsmelt/],
+  [['gem appraisal'], /\bjewel|lapidar|\bgem/],
+  [['fuel wood'], /charcoal|sawmill|woodcutter|forester/],
+  [['structural timber'], /sawmill|sawyer|\bcarpenter|lumber|forester/],
+  [['drainage pipes'], /\bbrick|\bpotter|\btile/],
+  [['basket goods'], /basket|ropemaker|wicker/],
+  // boats and ships: the reader's MEDIUM, "Ship construction"/"Ocean-going vessels" with no shipyard
+  [['ship construction', 'ocean-going vessels', 'coastal craft'], /shipyard|shipwright/],
+  [['river barges', 'fishing boats'], /shipyard|shipwright|boatyard|boatwright/],
+  [['river craft', 'cargo barges'], /shipyard|boatyard|boatwright|\bbarge/],
+  [['ferries'], /\bferry|boatyard/],
+  [['vessel maintenance'], /shipyard|\bdocks?\b|port facilit|harbou?r|boatyard/],
+  // trade's own houses
+  [['cargo handling', 'goods storage'], /warehouse|\bdocks?\b|port facilit|\bbarge|caravan master|caravaneer|carriers|storehouse/],
+  // (the caravan's trade goods and exotic imports are carried through, not made: no row, so an entrepôt prints them as transit)
+  [['overland cargo transport', 'escorted caravan', 'pack animal hire', 'route intelligence', 'overland freight revenue'], /caravan|carriers|pack animal|waystation/],
+  [['financial services', 'international banking services'], /\bbank|money ?changer|moneylender/],
+  [['extreme luxury goods'], /luxury goods|\bjewel|goldsmith|\bsilk|\bmetalwork/],
 ]);
 /** @type {ReadonlyMap<string, RegExp>} */
 const MADE_GOOD_HOUSES = new Map(MADE_GOOD_ROWS.flatMap(([goods, re]) => goods.map((g) => /** @type {[string, RegExp]} */ ([g, re]))));
+
+/**
+ * THE HOUSES THAT WORK A LAND'S OWN GOOD OFF ITS GROUND (W2-C-LEAVES-12, ruling (3)): a good of the resource table's
+ * `tradeGoods` (`TRADE_GOOD_GROUNDS`: coal, quarried stone, salted fish) is the land's own on the ground its chain works
+ * (`chainMakesHere :: ofGround`), and a raw export of it stands (W2-C-LEAVES-3 P1-b); these rows are read only where the
+ * chain does not work that ground: there a house of the row must stand (a charcoal burner digs no coal; a thatcher mills
+ * no lumber, the reader's MEDIUM). Apart from `MADE_GOOD_ROWS`, so a land good's ground and its raw export read as before.
+ * @type {ReadonlyArray<readonly [ReadonlyArray<string>, RegExp]>} */
+const LAND_GOOD_ROWS = Object.freeze([
+  [['salted fish', 'smoked seafood'], /salt works|\bsalter|fishmonger|fish market|\bfisher|smokehouse/],
+  [['fish oil'], /\bfisher'|\bfishers?\b|\bchandler|render/], // a fish market sells the catch: it renders no oil (ruling 2b)
+  [['freshwater catch', 'river fish'], /\bfisher|fishmonger|fish market/],
+  [['game meat', 'hunting trophies'], /\bhunter|\bwarden|wildfowl|\btrapper/],
+  [['furs and pelts'], /\bhunter|\bfurrier|\btrapper|\btann/],
+  [['wild honey'], /beekeep|subsistence|\bforag/],
+  [['alchemical reagents'], /\balchemist|apothecar|herbalist/],
+  [['grain surplus', 'agricultural surplus', 'bulk food exports'], /\bfarm|granary|(?:^|[^a-z])mills?\b/], // a sawmill is no mill
+  [['precious metals', 'coin minting'], /\bmint\b|\bmetalwork|\bjewel|goldsmith|silversmith|\bassay|\bsmelt|\bmines?\b/],
+  [['iron ore'], /\bmines?\b|\bminer/],
+  [['coal'], /\bmines?\b|collier/], // a charcoal burner burns charcoal, not coal
+  [['peat fuel'], /\bpeat/],
+  [['charcoal'], /charcoal/],
+  [['milled lumber'], /sawmill|sawyer|\blumber|\bcarpenter/], // the reader's MEDIUM: "Milled lumber" with only a thatcher
+  [['quarried stone'], /\bquarr|stonecutter|\bmason/],
+  [['building materials'], /\bquarr|\bbrick|\bmason|sawmill/],
+  [['pottery and ceramics'], /\bpotter|ceramic|\bkiln/],
+  [['reeds and thatch'], /thatch|\breed|\bcutter/],
+  [['waterfowl'], /wildfowl|\bfowler|\bhunter/],
+  [['fired brick', 'roof tiles'], /\bbrick|\bpotter|\btile/],
+]);
+/** @type {ReadonlyMap<string, RegExp>} */
+const LAND_GOOD_HOUSES = new Map(LAND_GOOD_ROWS.flatMap(([goods, re]) => goods.map((g) => /** @type {[string, RegExp]} */ ([g, re]))));
 
 /** The grounds a land's trade good comes from (`RESOURCE_DATA[k].tradeGoods`), lower case. */
 const TRADE_GOOD_GROUNDS = (() => {
@@ -539,8 +689,8 @@ export function houseDoesChainsWork(chain, house) {
  * WHETHER A CHAIN MAKES A GOOD HERE BY ITS HOUSES OR ITS GROUND (the goods pills' reading, rules (ii) and (iii); one
  * reading for the trade lists' pills and, since W2-C-LEAVES-6 item 7, a chain card's own Outputs): the good is the land's
  * own on the ground the chain works (no house makes it), or none of the chain's houses is held only as a road to
- * elsewhere and the house its making needs stands on the live roster (`MADE_GOOD_HOUSES`, else any house of the chain,
- * by the house's first word). The chain's state is not read here: the caller reads it.
+ * elsewhere and the house its making needs stands on the live roster (`MADE_GOOD_HOUSES`; a good with no row there is
+ * made by no house, W2-C-LEAVES-12 ruling (3)). The chain's state is not read here: the caller reads it.
  * @param {{ processingInstitutions?: unknown, resourceInputKey?: unknown }} c the chain
  * @param {string} good the good, folded (lower case, spaced)
  * @param {Parameters<typeof localProductionAsPrinted>[0]} settlement the record
@@ -554,7 +704,10 @@ function chainMakesHere(c, good, settlement, roster) {
   const ofGround = !houseRe && (TRADE_GOOD_GROUNDS.get(good) || []).includes(String(c.resourceInputKey)) && ['own', 'substitute'].includes(chainCarrierOf(c, settlement).kind);
   if (ofGround) return true;
   const roadOnly = heads.some((h) => { const m = roster.filter((r) => r.includes(h)); return m.length > 0 && m.every((r) => r.startsWith('access to')); });
-  return !roadOnly && (houseRe ? own.some((n) => houseRe.test(n)) : heads.some((h) => own.some((n) => n.includes(h))));
+  // W2-C-LEAVES-12, ruling (3): a good with no maker row is not printed by default (the default read any house of the chain
+  // by its first word: a Mine made master-crafted weapons)
+  const makerRe = houseRe || LAND_GOOD_HOUSES.get(good);
+  return !roadOnly && !!makerRe && own.some((n) => houseMakesGood(good, makerRe, n, settlement));
 }
 
 /**
@@ -599,3 +752,54 @@ export function tradeListsAsPrinted(settlement) {
   return { exports: exportsAsPrinted(settlement), arriving, imports: tradeStopped ? [] : arriving, needed, local: localProductionAsPrinted(settlement), tradeStopped };
 }
 import { tradeStoppedHere } from './chainStateShown.js';
+
+
+// ─── W2-C-LEAVES-10 item 3: THE ARCANE HOUSE A GOOD'S MAKING NEEDS, THROUGH THE CANONICAL DETECTOR (at the end of the file) ───
+// The books row of MADE_GOOD_ROWS named its arcane maker by a token, `\bwizard`, in one alternation with "college" and
+// "sage": the W-K2 shape tests/lint/arcaneClassifierCensus.walker.test.js reds (a tower is masonry, a college scholars).
+// The token stood for the ancient ruins chain's own house ("Wizard's tower", beside "Sage's quarter", whose outputs are
+// Books and manuscripts), and it also took a Hedge wizard for a maker of books. The arcane half is read here instead,
+// from the record: a house of the live roster that the canonical detector calls arcane (`isArcaneInstitution`, R-BLD-5:
+// the catalog's licence and tag first) and that one of the town's own chains making the good names among its houses.
+// No token is typed here. Only the goods whose row named an arcane maker read it (`ARCANE_MADE_GOODS`).
+import { isArcaneInstitution } from '../arcaneInstitutionIdentity.js';
+
+/** The goods whose making an arcane house of their own chain does (their row named one). */
+const ARCANE_MADE_GOODS = Object.freeze(['books and manuscripts', 'potions and elixirs', 'alchemical reagents', 'alchemical products',
+  'spellcasting (minor)', 'divination and scrying', 'higher education', 'research', 'publishing', 'magical identification',
+  'enchanting services', 'spellcasting (greater)', 'teleportation', 'magical item market', 'weapon enchantment', 'armour warding',
+  'utility enchantments', 'magical entertainment', 'extraplanar goods']);
+
+/**
+ * Does this house of the live roster (its name, lower case) make the good: the good's row (MADE_GOOD_HOUSES), or an
+ * arcane house one of the record's chains that makes the good names (above)?
+ * @param {string} good the good, folded @param {RegExp} houseRe the good's row @param {string} name the house, lower case
+ * @param {Parameters<typeof localProductionAsPrinted>[0]} settlement the record
+ * @returns {boolean}
+ */
+function houseMakesGood(good, houseRe, name, settlement) {
+  if (houseRe.test(name)) return true;
+  if (!ARCANE_MADE_GOODS.includes(good) || !isArcaneInstitution(name)) return false;
+  const eco = /** @type {{ activeChains?: unknown } | null | undefined} */ (settlement?.economicState);
+  const chains = /** @type {Array<{ outputs?: unknown, processingInstitutions?: unknown }>} */ (
+    (Array.isArray(eco?.activeChains) ? eco.activeChains : []).filter((c) => c && typeof c === 'object'));
+  return chains.some((c) => (Array.isArray(c.outputs) ? c.outputs : []).some((o) => fold(o) === good)
+    && (Array.isArray(c.processingInstitutions) ? c.processingInstitutions : []).some((h) => fold(h) === name));
+}
+
+/**
+ * THE HOUSE THAT FINISHES A GOOD MAKES THAT GOOD (W2-C-LEAVES-12, the chair's ruling (2b) of 2026-11-14, on the eleventh
+ * seat's veto rows "Mill finishes it, and it leaves as beer" and "Fish market finishes it, and it leaves as fish oil"):
+ * whether the good's own maker row (`MADE_GOOD_HOUSES`, the table the pills read) holds this house of the live roster. A
+ * good with no row is made by no house. The economy desk's full row names a house only where this says yes.
+ * @param {string} good the good as a list prints it (a trade mark may follow)
+ * @param {string} house the house's native roster name
+ * @param {Parameters<typeof localProductionAsPrinted>[0]} settlement the record
+ * @returns {boolean}
+ */
+export function houseMakesGoodNamed(good, house, settlement) {
+  const key = fold(tradeMarkOf(good).label).replace(/_/g, ' ');
+  const name = fold(house);
+  const houseRe = MADE_GOOD_HOUSES.get(key) || LAND_GOOD_HOUSES.get(key);
+  return !!houseRe && !!name && !name.startsWith('access to') && houseMakesGood(key, houseRe, name, settlement);
+}

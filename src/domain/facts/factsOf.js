@@ -27,6 +27,7 @@ import { hasInstitution } from './institutions.js';
 import { populationBandOf } from './populationBand.js';
 import { terrainClassOf, tradeRouteOf } from './terrain.js';
 import { hasOtherNpc } from './otherNpc.js';
+import { pairSharesPower } from './sharedPower.js';
 import { faithReadingOf } from '../dossier/faithReading.js';
 import { guildOf } from './guild.js';
 import { canonExports, canonImports } from '../canonicalAccessors.js';
@@ -97,6 +98,8 @@ export function factsOf(record, options = {}) {
     get tier() { return typeof /** @type {FactsOwnFields} */ (record)?.tier === 'string' ? /** @type {{ tier: string }} */ (record).tier : undefined; },
     /** fact 14: a second, named NPC beside this one */
     hasOtherNpc: (/** @type {number | object} */ npc) => hasOtherNpc(record, npc),
+    /** R2-CODE-A-14 (the chair's ruling (s1), 2026-11-14): the two cards a pair line names share a power (`sharedPower.js`) */
+    sharesPower: (/** @type {unknown} */ pair) => pairSharesPower(record, pair),
     // ── CENSUS-3b unit 1 (the chair's ruling R-E; the vocabulary rulings §2): DELEGATIONS to the
     // one canonical reader each — no field reader, no new logic. ──
     /** the food record's sources (`foodBalance.js :: deriveFoodRecord`), or undefined when it carries none */
