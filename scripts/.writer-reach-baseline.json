@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "5f78010f5e91397dece5035d65966815db5b8c0a",
+ "frozenAtSha": "e285c603f40ece6a25604286d0296ba4fef61264",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -23,8 +23,8 @@
   "transitionCount": 22789
  },
  "shapesDigest": "b893dc47ed27912883c163f88b939db6d111bdd2fb5038461eabbb3cdbdd3bbe",
- "detectorDigest": "b46ceef56a1cb2a33d9bdadcd987a30195d6e68f170cf6835e083a51c9738c0e",
- "verdictDigest": "86e8c050aff725f4549c33f39c93fde88f656c9774a16987578f652a77b67e2d",
+ "detectorDigest": "5aeccfc7d5f2cd8c6b3f1de5ff60bde13eed2e467f491d7e831de49d1aa737b3",
+ "verdictDigest": "d7dced65b15d4898d5eceb18529b2320001d72bf172563c34420604eb0bba58b",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -73,7 +73,7 @@
  ],
  "closureSizes": {
   "web-display": 771,
-  "web-transitive": 1013,
+  "web-transitive": 1014,
   "dossier-pdf": 523,
   "campaign-pdf": 152,
   "world-book": 167,
@@ -83,27 +83,27 @@
  },
  "population": {
   "judged": 12345,
-  "lit": 674,
-  "litName": 10258,
-  "dark": 1413,
+  "lit": 675,
+  "litName": 10259,
+  "dark": 1411,
   "thinKeys": 16646,
   "thinShapes": 1198,
   "knownShapes": 534
  },
  "scanStats": {
-  "files": 1785,
-  "sites": 42642,
-  "propRead": 40392,
+  "files": 1786,
+  "sites": 42747,
+  "propRead": 40497,
   "elemRead": 0,
   "destructure": 2232,
   "inOp": 18,
-  "rGrades": 6811,
-  "nGrades": 1759709,
-  "resolvedReceivers": 7723
+  "rGrades": 6858,
+  "nGrades": 1765512,
+  "resolvedReceivers": 7770
  },
- "registerDigest": "771e695b5f18354efc056070ee67c3a0edf828f0d7b076264102ffc472ba64d4",
+ "registerDigest": "28bcaac052a15f141ed702412986e258218a10e3b6661eb543975f79752baf83",
  "pendingSurfaceCeiling": 0,
- "reviewableDarkCount": 396,
+ "reviewableDarkCount": 394,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -8424,7 +8424,7 @@
   "resourceCondition on activeChains": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "resourceDepleted on activeChains": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "resourceIcon on activeChains": "web-display=N web-transitive=N",
-  "resourceInputAvailable on activeChains": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
+  "resourceInputAvailable on activeChains": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "resourceInputCondition on activeChains": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "resourceInputKey on activeChains": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "resourceKey on activeChains": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
@@ -9400,12 +9400,12 @@
   "famineCutPct on foodRecord": "dossier-pdf=R web-display=R",
   "foodSources on foodRecord": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "foodwaysLine on foodRecord": "dossier-pdf=R foundry=R web-display=N web-transitive=R",
-  "gapPct on foodRecord": "",
+  "gapPct on foodRecord": "dossier-pdf=R foundry=R web-transitive=R",
   "grownPct on foodRecord": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "growsMoreThanEats on foodRecord": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "hasGranary on foodRecord": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "magicPct on foodRecord": "dossier-pdf=R web-display=R",
-  "normalImportPct on foodRecord": "dossier-pdf=R foundry=R web-display=R",
+  "normalImportPct on foodRecord": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
   "storageMonths on foodRecord": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "storesHeld on foodRecord": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "surplusPct on foodRecord": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
@@ -9620,7 +9620,7 @@
   "hasWizardTower on inst": "dossier-pdf=R web-display=R",
   "names on inst": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "family on institution": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
-  "key on institution": "campaign-pdf=R dossier-pdf=R foundry=R json-export=R web-display=N web-transitive=R world-book=R",
+  "key on institution": "campaign-pdf=R dossier-pdf=R foundry=R json-export=R web-display=R web-transitive=R world-book=R",
   "kind on institution": "campaign-pdf=R dossier-pdf=R foundry=R json-export=R news=N web-display=N web-transitive=R world-book=R",
   "title on institution": "campaign-pdf=R dossier-pdf=R foundry=R json-export=R web-display=R web-transitive=R world-book=R",
   "veiled on institution": "campaign-pdf=R dossier-pdf=R foundry=R json-export=R web-transitive=R world-book=R",
@@ -9652,7 +9652,7 @@
   "factionSource on institutions": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "forbiddenResources on institutions": "web-transitive=R",
   "forbiddenTradeRoutes on institutions": "web-transitive=N",
-  "forcedByToggle on institutions": "web-transitive=R",
+  "forcedByToggle on institutions": "web-display=N web-transitive=R",
   "garrison on institutions": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "impairments on institutions": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "magicDef on institutions": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N world-book=N",
@@ -10000,7 +10000,7 @@
   "id on npcs": "campaign-pdf=R dossier-pdf=R foundry=R json-export=A news=R web-display=R web-transitive=R world-book=R",
   "importance on npcs": "campaign-pdf=N dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=N",
   "influence on npcs": "campaign-pdf=R dossier-pdf=R foundry=R json-export=A web-display=R web-transitive=R world-book=R",
-  "institution on npcs": "campaign-pdf=R dossier-pdf=R foundry=R json-export=R web-display=N web-transitive=R world-book=R",
+  "institution on npcs": "campaign-pdf=R dossier-pdf=R foundry=R json-export=R web-display=R web-transitive=R world-book=R",
   "institutionId on npcs": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "lastExposed on npcs": "dossier-pdf=N foundry=N web-transitive=N",
   "legitimacyContribution on npcs": "dossier-pdf=N foundry=N web-transitive=N",
