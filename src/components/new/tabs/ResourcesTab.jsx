@@ -16,6 +16,7 @@ import { institutionDisplayName } from '../../../domain/display/institutionDispl
 import { resourceGapLines, housesStillNeeded, exploitationGroupsShown } from '../../../domain/display/validationOnPage.js';
 import { FLUSH } from '../../../design/flush.js';
 import { tradeStoppedHere } from '../../../domain/display/chainStateShown.js';
+import { plainGoodName } from '../../../domain/display/tradeListDisplay.js'; // W2-C-LEAVES-13 (15): no slash label
 
 /**
  * WHAT A RESOURCE DRAWS ON (`exploitation.*[].dependsOn`). Its only reader was Economics'
@@ -46,18 +47,18 @@ export function ResourceChainCard({ chain, stage, settlement = null, moved = fal
     <div style={{background:swatch['#FDF8E8'],border:'1px solid #e0c060',borderLeft:'3px solid #b8860b',padding:'10px 14px'}}>
       <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
         <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>Unexploited</span>
-        <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
+        <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{plainGoodName(resourceDisplayName(chain.rawResource))}</span>
         <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
       </div>
       {/* Chain flow */}
       <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap',marginBottom:6}}>
-        <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600}}>{resourceDisplayName(chain.rawResource)}</span>
+        <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600}}>{plainGoodName(resourceDisplayName(chain.rawResource))}</span>
         {/* P1-a: a card the analysis filed worked that the record shows idle (exploitationCardShown :: moved) prints the
             resource alone: the chain table's goods and what it draws on are not what the record holds of a spent ground. */}
         {(moved ? [] : (chain.intermediateGoods||[])).map((g,j)=>(
           <React.Fragment key={j}>
             <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span>
-            <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{g}</span>
+            <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{plainGoodName(g)}</span>
           </React.Fragment>
         ))}
         {(chain.finalProducts||[]).slice(0,moved?0:2).map((g,j)=>(
@@ -77,15 +78,15 @@ export function ResourceChainCard({ chain, stage, settlement = null, moved = fal
     <div style={{background:swatch['#F4FAF4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #5a6a1a',padding:'10px 14px'}}>
       <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4,flexWrap:'wrap'}}>
         <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#3A5A1A'],background:swatch['#D8ECD8'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>Partial</span>
-        <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
+        <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{plainGoodName(resourceDisplayName(chain.rawResource))}</span>
         <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
       </div>
       <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap'}}>
-        <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600}}>{resourceDisplayName(chain.rawResource)}</span>
+        <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600}}>{plainGoodName(resourceDisplayName(chain.rawResource))}</span>
         {/* P1: a card the analysis filed Unexploited that a chain works here (exploitationCardShown :: moved) prints
             the resource alone: the filed goods are the chain table's promise, not the record. */}
         {(moved ? [] : (chain.intermediateGoods||[])).map((g,j)=>(
-          <React.Fragment key={j}><span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span><span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{g}</span></React.Fragment>
+          <React.Fragment key={j}><span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span><span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{plainGoodName(g)}</span></React.Fragment>
         ))}
       </div>
       <DrawsOn deps={chain.dependsOn} mobile={mobile} />
@@ -95,7 +96,7 @@ export function ResourceChainCard({ chain, stage, settlement = null, moved = fal
     <div style={{background:swatch['#FAF8F4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #1a5a28',padding:'8px 14px'}}>
       <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
         <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch.success,background:swatch['#C8ECD4'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>✓ Fully exploited</span>
-        <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
+        <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{plainGoodName(resourceDisplayName(chain.rawResource))}</span>
         <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
       </div>
       <DrawsOn deps={chain.dependsOn} mobile={mobile} />

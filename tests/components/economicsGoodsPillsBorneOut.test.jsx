@@ -89,6 +89,9 @@ describe('the goods pills print only where the record bears them out (item 2)', 
         foodSecurity: { foodRecord: { failedSource: 'livestock' } } } });
     expect(exportsAsPrinted(flock(['famine'])), 'the herds failed: no wool, no beasts sent out').toEqual([]);
     expect(exportsAsPrinted(flock([])), 'no famine: the raw goods leave').toEqual(['Raw wool', 'Livestock']);
+    // …and where no card works the failed ground at all, the famine's failed ground says it (the chair, 14:10 UTC; r2s-famine-thorp-1)
+    const bare = { ...flock(['famine']), economicState: { ...flock(['famine']).economicState, activeChains: [] } };
+    expect(exportsAsPrinted(bare), 'no herd card, the grazing failed: no wool, no beasts').toEqual([]);
     // …and on the births (the reader's towns; a siege port among them, its card stopped by the siege)
     for (const [seed, gone] of /** @type {Array<[string, string[]]>} */ ([['rr3-village-famine-rand-0', ['Raw wool', 'Livestock']],
       ['rr3-hamlet-famine-rand-0', ['Raw wool', 'Livestock']], ['rr3w-village-famine-river-1', ['Raw wool', 'Livestock']],
