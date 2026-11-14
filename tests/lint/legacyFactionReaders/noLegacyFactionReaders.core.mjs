@@ -59,7 +59,12 @@ export const OTHER_SHAPES = Object.freeze({
   'src/pdf/lib/viewModel.js:346': 'a tension', 'src/pdf/lib/viewModel.js:509': 'a tension', 'src/pdf/lib/viewModel.js:691': 'a tension', // W4 PEOPLE second seat (merging the car): re-keyed +3 by line, #29's crisisSummaryForSurface import and cover/overview vantage lines above them
   'src/pdf/sections/PowerStructure.jsx': 'vm.power',
   // COHERENCE-POWERS-3 F2 (28c93c9da): a tension's parties, re-named for the final roster (settleTensionsToRoster); read as viewModel's are
-  'src/generators/power/rosterText.js:123': 'a tension',
+  // re-keyed by identity 123 -> 124 (POWERS-10, the reader's M4 at 96a6ced46: the same tension read, moved one line by 943e34d6f's
+  // settleStandingToRoster, COHERENCE-POWERS-7 H-c)
+  'src/generators/power/rosterText.js:124': 'a tension',
+  // COHERENCE-POWERS-7 leftover 1 (1022e9887): withTownsOwnUnderworld reads the town's crime signal (`crimeSignalOf`'s
+  // criminal powers' names, roster order), the class defenseDisplay.js's row names; read by POWERS-10 at the site
+  'src/domain/crimeSignal.js:91': 'the crime signal',
   // density plan / ladder rows that PEOPLE-1 retires with the roster (kept so the draft is exact at the base):
   'src/generators/density/applyDensityLaw.js:269': 'the density plan', 'src/generators/density/applyDensityLaw.js:375': 'a powerStructure copy',
   'src/generators/density/applyDensityLaw.js:476': 'the density plan',

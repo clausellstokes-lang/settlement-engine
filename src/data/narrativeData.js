@@ -28,19 +28,25 @@ export const ARRIVAL_SCENES = {
     (r) =>
       `${r} runs along the water the way settlements do when water is the reason they exist: practical, a little chaotic at the waterfront, tidier as you move inland.`,
     { text: (r) =>
-      `The river carries the sounds of ${r} to you around the bend before the buildings appear: a mill wheel, the knock of boats against a jetty, someone calling a tally across the water.`, needs: ['institution: mill'] },
+      `The river carries the sounds of ${r} to you around the bend before the buildings appear: a mill wheel, the knock of boats against a jetty, someone calling a tally across the water.`, needs: ['institution: mill', 'institution: docks'] }, // R2-CODE-A-4 (CENSUS-2 a/docks): a jetty only where the roster holds a landing (the docks atom)
     (r) =>
       `${r} has its back to the land and its face to the river; the approach by road brings you in the rear way, past the yards and the drying nets, into a settlement that plainly considers the water its front door.`,
   ],
   port: [
-    (r) =>
-      `The harbour at ${r} announces itself beyond the last rise: masts above the roofs, gulls wheeling over the quays, and salt bright in the air.`,
-    (r) =>
-      `${r} faces the sea as deliberately as a fortress faces its enemy. Warehouses and chandlers crowd the waterfront, with the older streets climbing behind them.`,
-    (r) =>
-      `You hear ${r}'s harbour before you see it: rigging knocking against masts, dock crews calling cargo tallies, and surf working against the outer wall.`,
-    (r) =>
-      `The road into ${r} descends toward a forest of masts. Tar, salt, fish, and woodsmoke mark the boundary between the coast and the working port.`,
+    // R2-CODE-A item 4 (the cold list REVIEW-W2A-3, HIGH #1): the four harbour scenes declare the docks; 44 of
+    // the census's 92 port scenes are a shore with no harbour, and the two rows after them say only the shore.
+    { text: (r) =>
+      `The harbour at ${r} announces itself beyond the last rise: masts above the roofs, gulls wheeling over the quays, and salt bright in the air.`, needs: ['docks'] },
+    { text: (r) =>
+      `${r} faces the sea as deliberately as a fortress faces its enemy. Warehouses and chandlers crowd the waterfront, with the older streets climbing behind them.`, needs: ['docks'] },
+    { text: (r) =>
+      `You hear ${r}'s harbour before you see it: rigging knocking against masts, dock crews calling cargo tallies, and surf working against the outer wall.`, needs: ['docks'] },
+    { text: (r) =>
+      `The road into ${r} descends toward a forest of masts. Tar, salt, fish, and woodsmoke mark the boundary between the coast and the working port.`, needs: ['docks'] },
+    { text: (r) =>
+      `The road into ${r} comes down to the sea, and the salt reaches you a mile before the first roof does.`, needs: ['coast'] },
+    { text: (r) =>
+      `${r} sits with its back to the land and its face to the open water, and the wind off the sea carries salt and weed a long way inland.`, needs: ['coast'] },
   ],
   smoke: [
     { text: (r) =>
@@ -70,7 +76,7 @@ export const ARRIVAL_SCENES = {
     { text: (r) =>
       `A child runs past you on the road into ${r}, chasing something or being chased by something (unclear which). Nobody in the street pays attention.`, crisis: ['any'] },
     { text: (r) =>
-      `A merchant argues with a carter on the road into ${r} about the size of a load. Nobody else pays them any attention. This is clearly a daily occurrence.`, crisis: ['any'] },
+      `A merchant argues with a carter on the road into ${r} about the size of a load. Nobody else pays them any attention. This is clearly a daily occurrence.`, crisis: ['any'], needs: ['market'] }, // R2-CODE-A-4 (CENSUS-2 a/merchants): a daily merchant only where the roster holds a market
     { text: (r) =>
       `The first person you meet on the road into ${r} wants to know your business, and the second already knows it.`, crisis: ['any'] },
   ],
@@ -156,9 +162,9 @@ export const STRESS_DESCS = {
     { text: r =>
       `The gates of ${r} are closed. There are people on the walls. This is not the relaxed watch of a settlement going about its day. These are people watching the treeline. A runner comes out of the small side gate, sees your group, stops.`, needs: ['gate', 'walls'] },
     { text: r =>
-      `${r}'s gates are open but attended: every person entering is noted, every cart searched. The guards are professional about it, which makes it worse. Professional means this has been happening long enough to become routine.`, needs: ['gate', 'guardPresence'] },
+      `${r}'s gates are shut and barred. The guards on them are professional about it, which makes it worse: nobody comes near without being challenged, and nothing is let through. Professional means they expect this to last.`, needs: ['gate', 'guardPresence'] }, // R2-CODE-A-10 (the bar's HIGH #35): a siege's gates are shut; it said them open, every cart searched
     { text: r =>
-      `From the road, ${r} looks ordinary. Smoke from cookfires, the sound of a market. It is only at the gate that the weight becomes apparent: the guards' expressions, the way conversation stops when strangers approach.`, needs: ['gate', 'market', 'guardPresence'] },
+      `From outside, ${r} still seems itself: smoke from cookfires, a murmur from the square. It is the gate that gives it away: shut fast, the guards' faces set, their talk stopping dead when strangers come in sight.`, needs: ['gate', 'market', 'guardPresence'] }, // R2-CODE-A-10 (#35): not ordinary from a road its besiegers hold; R2-CODE-A-12 (L46): under a siege no line hears a market trading
     { text: r =>
       `The approach to ${r} is quieter than it should be for a settlement this size. The outlying farms are empty. The road has not been maintained recently. The settlement itself is intact, but everything around it has been abandoned to the walls.`, needs: ['walls'] },
     // CONTENT-GT-FINAL (Charge 4): every pool below grew +2. Selection is a single
@@ -176,7 +182,7 @@ export const STRESS_DESCS = {
   ],
   famine: [
     { text: r =>
-      `${r} looks prosperous in the merchant quarter: new paint, loaded carts, a market stall with produce. It is only when you walk further in that the other version of the settlement appears: shuttered houses, people sitting on doorsteps with no particular purpose.`, needs: ['market'] },
+      `${r} looks prosperous in the merchant quarter: new paint, loaded carts, a market stall with produce. It is only when you walk further in that the other version of the settlement appears: shuttered houses, people sitting on doorsteps with no particular purpose.`, needs: ['market', 'population: ≥ middling'] }, // R2-CODE-A-4 (CENSUS-2 c/quarters): a merchant quarter, at the middling band
     { text: r =>
       `${r} is functional. The market is open, the streets are swept, the guards are at their posts. Something is wrong anyway. It takes a moment to identify: there are no children playing in the street.`, needs: ['market', 'guardPresence'] },
     { text: r =>
@@ -229,8 +235,8 @@ export const STRESS_DESCS = {
       "A building near the gate has a new sign, freshly painted with the name of an outside creditor. The creditor has opened an office here, and the locals walk past it without looking in.", needs: ['gate'] },
     { text: r =>
       `${r} gets by. The market is busy enough, the streets clean enough and the civic buildings kept up just enough, and nothing more is being spent.`, needs: ['market'] },
-    r =>
-      `The merchant district of ${r} looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years.`,
+    { text: r =>
+      `The merchant district of ${r} looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years.`, needs: ['population: ≥ middling'] }, // R2-CODE-A-3 (the increment's ww-920): a district is a size error below the middling band (ruling (f))
     { text: r =>
       `The finest building in ${r} is new, stone-built, and belongs to nobody local: a counting house, its brass plate polished daily by a clerk who arrived with the ledgers. It is what everything else in town is working to pay for.`, needs: ['institution: bank'] }, // COHERENCE-PRESUME: it printed in towns with no counting house
     { text: r =>
@@ -295,8 +301,8 @@ export const STRESS_DESCS = {
       `The road into ${r} has been busy recently. You can tell by the wheel ruts, the quality of the mud, the number of horses at the inn you pass on the approach. Something is happening that requires people to arrive quickly.`, needs: ['institution: tavern'] },
     { text: r =>
       `${r} functions, after a fashion. The market is open, the gates are attended. The flagpole above the council building is empty. Someone removed the standard and hasn't replaced it yet.`, needs: ['market', 'gate'] },
-    r =>
-      `The masons of ${r} have stopped mid-job on the great house; scaffolding stands empty on dressed stone. Work that fine waits on a patron, and the town is not currently sure who that is.`,
+    { text: r =>
+      `Building has stopped mid-job across ${r}; scaffolding stands empty on dressed stone. Work that fine waits on a patron, and the town is not currently sure who that is.`, needs: ['tier: ≥ town'] }, // R2-CODE-A-3 (the increment's ww-540): no masons or great house the roster cannot name (record 386 (3)); stone building work at a town's size
     { text: r =>
       `In ${r}'s taproom the toast is to "the settlement": a formulation everyone has adopted at once, smooth as furniture, since naming anyone more specific has become a wager.`, needs: ['institution: tavern'] },
   ],
@@ -371,12 +377,12 @@ export const STRESS_DESCS = {
       `Two temples face each other across ${r}'s central square, and only one has a queue. The other's doors are open but its steps are swept too clean, walked on too little. Something has moved from one building to the other, and it was not only worshippers.`, needs: ['institution: temple', 'market'] },
     { text: r =>
       `The shrine at ${r}'s gate has been recently altered: one symbol chiselled away, another set in its place, the old outline still faintly visible beneath the new. Someone did this carefully. Someone else has been scratching at the replacement.`, needs: ['institution: temple', 'gate'] },
-    r =>
-      `${r} is observing a holy day, and you cannot tell which one. Some shops are shut and draped; others are pointedly open. Two processions are forming in different quarters, and the people watching each are counting who watches the other.`,
     { text: r =>
-      `The bells of ${r} ring twice for every hour: one set of chimes, then another from a different quarter, a beat later and out of tune. Nobody in the street looks up.`, needs: ['institution: temple'] },
-    r =>
-      `The mason's yard in ${r} is its busiest enterprise: one set of holy symbols coming down, another going up, and the same three workmen paid for both. They no longer joke about it.`,
+      `${r} is observing a holy day, and you cannot tell which one. Some shops are shut and draped; others are pointedly open. Two processions are forming in different quarters, and the people watching each are counting who watches the other.`, needs: ['population: ≥ middling'] }, // R2-CODE-A-4 (CENSUS-2 c/quarters): shops and quarters are a size error below the middling band (ruling (f))
+    { text: r =>
+      `The bells of ${r} ring twice for every hour: one set of chimes, then another from a different quarter, a beat later and out of tune. Nobody in the street looks up.`, needs: ['institution: temple', 'population: ≥ middling'] }, // R2-CODE-A-4 (CENSUS-2 c/quarters): a different quarter, at the middling band
+    { text: r =>
+      `The busiest work in ${r} is on its holy symbols: one set coming down, another going up, and the same three workmen paid for both. They no longer joke about it.`, needs: ['sacredHouse'] }, // R2-CODE-A-3 (the increment's ww-58): no mason's yard the roster cannot name (record 386 (3)); the symbols are a sacred house's
     r =>
       `${r} has two burial grounds now, one old and one new, and the town's grief is learning to sort itself accordingly. The gravedigger serves both and is the most carefully neutral man alive.`,
   ],
@@ -387,10 +393,10 @@ export const STRESS_DESCS = {
       `The approach to ${r} is blocked by a hasty checkpoint: overturned carts, armed men who are not the regular watch, a hard question about your business before you are allowed within sight of the gate. Whatever is happening inside, they have decided strangers are a risk.`, needs: ['gate', 'watch'] },
     { text: r =>
       `${r} is quiet in the way a held breath is quiet. The slave market at its heart (you can see the empty auction platform from the gate) stands deserted, ringed by guards. The chains are still there. The people who wore them are not.`, needs: ['market', 'gate', 'guardPresence'] },
+    { text: r =>
+      `There are bodies being carried through ${r}'s streets under cloth, and the people carrying them are not mourners but labourers doing grim, fast work. The rising that did this is not finished; you can hear it, somewhere in the lower districts, still going on.`, needs: ['population: ≥ middling'] }, // R2-CODE-A-4 (CENSUS-2 c/streets, c/districts): streets and lower districts, at the middling band
     r =>
-      `There are bodies being carried through ${r}'s streets under cloth, and the people carrying them are not mourners but labourers doing grim, fast work. The rising that did this is not finished; you can hear it, somewhere in the lower districts, still going on.`,
-    r =>
-      `The manacle-maker's shop in ${r} is shuttered and scorched: the only burned building on the street, which tells you the fire was a statement, not an accident.`,
+      `One building in ${r} is shuttered and scorched, the only burned one in sight, which tells you the fire was a statement, not an accident.`, // R2-CODE-A-4 (record 386 (3)/(4)): no manacle-maker's shop the roster cannot name; read where it prints, a hamlet of 48 up
     r =>
       `${r}'s field gangs work without overseers today, or the overseers have dressed like the gangs. From the road you cannot tell which, and that is the whole story of the settlement this season.`,
   ],
@@ -453,14 +459,14 @@ export const STRESS_NOTES = {
       'The rules the founders set have outlived the reasons for them, and people have stopped obeying.',
     ],
     mass_migration: [
-      'The founders built for a few families who knew each other. Now newcomers crowd the streets, and half the faces are strangers.',
-      'The settlement was laid out for the families that founded it. Its streets and wells were never meant for this many people.',
+      'The founders built for a few families who knew each other. Now newcomers crowd in, and half the faces are strangers.', // R2-CODE-A-4 (CENSUS-2 c/streets): no streets said of a thorp or a hamlet; true at every size
+      'The settlement was laid out for the families that founded it. Its houses and its water were never meant for this many people.', // R2-CODE-A-4 (CENSUS-2 c/streets): as above
       'The founders knew every name inside the walls. Now no one does: too many have arrived too fast.',
     ],
     wartime: [
       'The settlement was founded for trade and quiet growth. Now it feeds and arms a war.',
       'Everything here was chosen for peace: the site, the trades, the debts. Now there is a war, and the settlement is paying for it.',
-      'The founders built a place to trade. Now the army takes what the market used to sell.',
+      'The founders built a place to trade. Now the army takes what the settlement used to sell.', // R2-CODE-A-4 (CENSUS-2 a/market): no market said where the roster holds none; true at every size
     ],
     religious_conversion: [
       'The founding was blessed under a faith that is no longer ascendant here. The oaths and endowments made in its name are now contested ground.',

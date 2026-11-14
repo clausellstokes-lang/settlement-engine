@@ -55,14 +55,14 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 263682,
-      "gzip": 35261,
+      "raw": 262544,
+      "gzip": 35291,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 184067,
-      "gzip": 25650,
+      "raw": 184022,
+      "gzip": 25652,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
@@ -73,8 +73,8 @@
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 130557,
-      "gzip": 18338,
+      "raw": 130008,
+      "gzip": 18272,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
@@ -109,8 +109,8 @@
       "ceilingGzip": 6751
     },
     "src/data/dossierRelations.generated.js": {
-      "raw": 28249,
-      "gzip": 2664,
+      "raw": 28926,
+      "gzip": 2673,
       "ceilingRaw": 43888,
       "ceilingGzip": 9753
     }
@@ -541,132 +541,60 @@
       "reason": "+7 B raw (gzip level 9: 20,772 -> 20,773): C8's word-only swaps in the stressors annex lines ('faction' -> 'power' and the map's hand wordings, Appendix X) projected through node scripts/generate-dossier-state-prose.mjs; no pool, variant, mark or slot added. The same commit SHRANK five leaves (defense -6, general -2, power -13, warFaith -7, the causal leaf -10), lowered in the same register commit. Measured per commit over bd07005b9..e63c6aae6: every leaf unmoved until e63c6aae6."
     },
     {
-      "car": "W2-WRITE (the corpus lane, merged at d004d56b6)",
+      "car": "R3-TABS (the first seat, eaca79fcd, 2026-11-13; the chair ruling L1 \"one ladder for one number\"): the four DS-DEF-1 posture pools the badge now reads take readsCount",
       "leaf": "src/data/dossierStateProse/defense.generated.js",
       "fromRaw": 234453,
-      "toRaw": 262433,
-      "gzipAfter": 35276,
-      "reason": "+27988 B raw over the committed 234445 (gzip level 9: 31731 -> 35276): the corpus lane's cures and its two side branches composed (the per-cure rows stand in the lane's history at cfa9c17dd)"
+      "toRaw": 234545,
+      "gzipAfter": 31738,
+      "reason": "+92 B over the chain (+100 over the committed 234445; the leaf had shrunk 8 B undeclared since its last row) (gzip level 9: 31731 -> 31738): eaca79fcd re-took the wiring census over the moved defence composer (L1: POSTURE_POOL_OF_BADGE resolves four DS-DEF-1 posture pools) and projected the leaves through node scripts/generate-dossier-state-prose.mjs, which writes `\"readsCount\": 1,` (25 B) into the poolMeta of those four pools; nothing else in the leaf moves (no pool, variant or word). The lane left the row undeclared; declared by its third seat at the lane tip after the merge of point 49 (--check exit 0)."
     },
     {
-      "car": "W2-WRITE (the corpus lane, merged at d004d56b6)",
+      "car": "JOIN-2 (the true join's first refreeze, 2026-11-14; the chair's ruling of 09:09 UTC)",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 234545,
+      "toRaw": 262544,
+      "gzipAfter": 35291,
+      "reason": "+27999 B raw over the committed 234545 (gzip level 9: 31738 -> 35291): measured at the joined tree after the state-prose generator ran through its door (a80825e8c), never summed. The six state desk leaves: the declared growth of the corpus lane (W2-WRITE, fdae163f3) and the data lane (W2-FIX-DATA, 8d2aa98b1), each already keyed on its own lane through this instrument, composed by the join. dossierRelations.generated.js (28,249 -> 28,926): the defence lane's (coherence-upkeep 26474cda9) fundedGate and upkeep relations on the economicGates rows in src/generators/defenseGenerator.js, re-projected by the generator here; that lane's undeclared growth (it never regenerated the leaf). No ceiling moved; every leaf under its ceiling."
+    },
+    {
+      "car": "JOIN-2 (the true join's first refreeze, 2026-11-14; the chair's ruling of 09:09 UTC)",
       "leaf": "src/data/dossierStateProse/economy.generated.js",
       "fromRaw": 170551,
-      "toRaw": 183999,
-      "gzipAfter": 25641,
-      "reason": "+13744 B raw over the committed 170255 (gzip level 9: 23958 -> 25641): the corpus lane's cures and its two side branches composed (the per-cure rows stand in the lane's history at cfa9c17dd)"
+      "toRaw": 184022,
+      "gzipAfter": 25652,
+      "reason": "+13767 B raw over the committed 170255 (gzip level 9: 23958 -> 25652): measured at the joined tree after the state-prose generator ran through its door (a80825e8c), never summed. The six state desk leaves: the declared growth of the corpus lane (W2-WRITE, fdae163f3) and the data lane (W2-FIX-DATA, 8d2aa98b1), each already keyed on its own lane through this instrument, composed by the join. dossierRelations.generated.js (28,249 -> 28,926): the defence lane's (coherence-upkeep 26474cda9) fundedGate and upkeep relations on the economicGates rows in src/generators/defenseGenerator.js, re-projected by the generator here; that lane's undeclared growth (it never regenerated the leaf). No ceiling moved; every leaf under its ceiling."
     },
     {
-      "car": "W2-WRITE (the corpus lane, merged at d004d56b6)",
+      "car": "JOIN-2 (the true join's first refreeze, 2026-11-14; the chair's ruling of 09:09 UTC)",
       "leaf": "src/data/dossierStateProse/general.generated.js",
       "fromRaw": 287856,
       "toRaw": 297282,
       "gzipAfter": 37947,
-      "reason": "+17714 B raw over the committed 279568 (gzip level 9: 35664 -> 37947): the corpus lane's cures and its two side branches composed (the per-cure rows stand in the lane's history at cfa9c17dd)"
+      "reason": "+17714 B raw over the committed 279568 (gzip level 9: 35664 -> 37947): measured at the joined tree after the state-prose generator ran through its door (a80825e8c), never summed. The six state desk leaves: the declared growth of the corpus lane (W2-WRITE, fdae163f3) and the data lane (W2-FIX-DATA, 8d2aa98b1), each already keyed on its own lane through this instrument, composed by the join. dossierRelations.generated.js (28,249 -> 28,926): the defence lane's (coherence-upkeep 26474cda9) fundedGate and upkeep relations on the economicGates rows in src/generators/defenseGenerator.js, re-projected by the generator here; that lane's undeclared growth (it never regenerated the leaf). No ceiling moved; every leaf under its ceiling."
     },
     {
-      "car": "W2-WRITE (the corpus lane, merged at d004d56b6)",
+      "car": "JOIN-2 (the true join's first refreeze, 2026-11-14; the chair's ruling of 09:09 UTC)",
       "leaf": "src/data/dossierStateProse/power.generated.js",
       "fromRaw": 125681,
       "toRaw": 130008,
       "gzipAfter": 18272,
-      "reason": "+5757 B raw over the committed 124251 (gzip level 9: 17495 -> 18272): the corpus lane's cures and its two side branches composed (the per-cure rows stand in the lane's history at cfa9c17dd)"
+      "reason": "+5757 B raw over the committed 124251 (gzip level 9: 17495 -> 18272): measured at the joined tree after the state-prose generator ran through its door (a80825e8c), never summed. The six state desk leaves: the declared growth of the corpus lane (W2-WRITE, fdae163f3) and the data lane (W2-FIX-DATA, 8d2aa98b1), each already keyed on its own lane through this instrument, composed by the join. dossierRelations.generated.js (28,249 -> 28,926): the defence lane's (coherence-upkeep 26474cda9) fundedGate and upkeep relations on the economicGates rows in src/generators/defenseGenerator.js, re-projected by the generator here; that lane's undeclared growth (it never regenerated the leaf). No ceiling moved; every leaf under its ceiling."
     },
     {
-      "car": "W2-WRITE (the corpus lane, merged at d004d56b6)",
+      "car": "JOIN-2 (the true join's first refreeze, 2026-11-14; the chair's ruling of 09:09 UTC)",
       "leaf": "src/data/dossierStateProse/stressors.generated.js",
       "fromRaw": 147483,
       "toRaw": 147666,
       "gzipAfter": 20815,
-      "reason": "+183 B raw over the committed 147483 (gzip level 9: 20773 -> 20815): the corpus lane's cures and its two side branches composed (the per-cure rows stand in the lane's history at cfa9c17dd)"
+      "reason": "+183 B raw over the committed 147483 (gzip level 9: 20773 -> 20815): measured at the joined tree after the state-prose generator ran through its door (a80825e8c), never summed. The six state desk leaves: the declared growth of the corpus lane (W2-WRITE, fdae163f3) and the data lane (W2-FIX-DATA, 8d2aa98b1), each already keyed on its own lane through this instrument, composed by the join. dossierRelations.generated.js (28,249 -> 28,926): the defence lane's (coherence-upkeep 26474cda9) fundedGate and upkeep relations on the economicGates rows in src/generators/defenseGenerator.js, re-projected by the generator here; that lane's undeclared growth (it never regenerated the leaf). No ceiling moved; every leaf under its ceiling."
     },
     {
-      "car": "W2-WRITE-10 #75",
-      "leaf": "src/data/dossierStateProse/economy.generated.js",
-      "fromRaw": 183999,
-      "toRaw": 184022,
-      "gzipAfter": 25652,
-      "reason": "+23 B raw over the committed 183999 (gzip level 9: 25641 -> 25652): DS-ECO-1 C4 v4 v5 v7 reworded: the siege lines no longer claim the town was poor before the siege"
-    },
-    {
-      "car": "W2-WRITE-10 #217",
-      "leaf": "src/data/dossierStateProse/defense.generated.js",
-      "fromRaw": 262433,
-      "toRaw": 262444,
-      "gzipAfter": 35290,
-      "reason": "+11 B raw over the committed 262433 (gzip level 9: 35276 -> 35290): DS-DEF-3 Moderate v3: colour -> tier: ≥ village"
-    },
-    {
-      "car": "W2-WRITE-10 #246",
-      "leaf": "src/data/dossierStateProse/economy.generated.js",
-      "fromRaw": 184022,
-      "toRaw": 184088,
-      "gzipAfter": 25665,
-      "reason": "+66 B raw over the committed 184022 (gzip level 9: 25652 -> 25665): DS-ECO-12 religious houses v1 v2: + tier: ≥ village"
-    },
-    {
-      "car": "W2-WRITE-10 DS-DEF-2 occupied",
-      "leaf": "src/data/dossierStateProse/defense.generated.js",
-      "fromRaw": 262444,
-      "toRaw": 262582,
-      "gzipAfter": 35296,
-      "reason": "+138 B raw over the committed 262444 (gzip level 9: 35290 -> 35296): DS-DEF-2 walls AND garrison v1-v3: + no crisis: occupied"
-    },
-    {
-      "car": "W2-WRITE-10 #645",
-      "leaf": "src/data/dossierStateProse/defense.generated.js",
-      "fromRaw": 262582,
-      "toRaw": 262655,
-      "gzipAfter": 35299,
-      "reason": "+73 B raw over the committed 262582 (gzip level 9: 35296 -> 35299): DS-DEF-2 plagued perimeter AND force v2: + no crisis: under_siege, occupied"
-    },
-    {
-      "car": "W2-WRITE-10 DS-DEF-5 occupied",
-      "leaf": "src/data/dossierStateProse/defense.generated.js",
-      "fromRaw": 262655,
-      "toRaw": 262760,
-      "gzipAfter": 35307,
-      "reason": "+105 B raw over the committed 262655 (gzip level 9: 35299 -> 35307): DS-DEF-5 NO organized force v1-v3: + no crisis: occupied"
-    },
-    {
-      "car": "W2-WRITE-11 DEF-11",
-      "leaf": "src/data/dossierStateProse/defense.generated.js",
-      "fromRaw": 262760,
-      "toRaw": 262797,
-      "gzipAfter": 35196,
-      "reason": "+73 B raw over the committed 262724 (gzip level 9: 35201 -> 35196): DS-DEF-11 WALLED-STRAINED v1 v2 v5 + no crisis: occupied, v2 slot out"
-    },
-    {
-      "car": "W2-WRITE-11 ADEQ",
-      "leaf": "src/data/dossierStateProse/defense.generated.js",
-      "fromRaw": 262797,
-      "toRaw": 263069,
-      "gzipAfter": 35199,
-      "reason": "+272 B raw over the committed 262797 (gzip level 9: 35196 -> 35199): DS-DEF-1 readiness ADEQUATE v1-v4 + no crisis: occupied"
-    },
-    {
-      "car": "W2-WRITE-12 #203",
-      "leaf": "src/data/dossierStateProse/defense.generated.js",
-      "fromRaw": 263069,
-      "toRaw": 263205,
-      "gzipAfter": 35213,
-      "reason": "+136 B raw over the committed 263069 (gzip level 9: 35199 -> 35213): DS-DEF-8 v2 v3 gain no crisis: occupied"
-    },
-    {
-      "car": "W2-WRITE-12 #200",
-      "leaf": "src/data/dossierStateProse/power.generated.js",
-      "fromRaw": 130008,
-      "toRaw": 130557,
-      "gzipAfter": 18338,
-      "reason": "+549 B raw over the committed 130008 (gzip level 9: 18272 -> 18338): DS-POW-6 ADVANCING v11, the occupation twin"
-    },
-    {
-      "car": "W2-WRITE-12 #205",
-      "leaf": "src/data/dossierStateProse/defense.generated.js",
-      "fromRaw": 263205,
-      "toRaw": 263682,
-      "gzipAfter": 35261,
-      "reason": "+477 B raw over the committed 263205 (gzip level 9: 35213 -> 35261): DS-DEF-2 STRONG v13, the occupation twin"
+      "car": "JOIN-2 (the true join's first refreeze, 2026-11-14; the chair's ruling of 09:09 UTC)",
+      "leaf": "src/data/dossierRelations.generated.js",
+      "fromRaw": 28249,
+      "toRaw": 28926,
+      "gzipAfter": 2673,
+      "reason": "+677 B raw over the committed 28249 (gzip level 9: 2664 -> 2673): measured at the joined tree after the state-prose generator ran through its door (a80825e8c), never summed. The six state desk leaves: the declared growth of the corpus lane (W2-WRITE, fdae163f3) and the data lane (W2-FIX-DATA, 8d2aa98b1), each already keyed on its own lane through this instrument, composed by the join. dossierRelations.generated.js (28,249 -> 28,926): the defence lane's (coherence-upkeep 26474cda9) fundedGate and upkeep relations on the economicGates rows in src/generators/defenseGenerator.js, re-projected by the generator here; that lane's undeclared growth (it never regenerated the leaf). No ceiling moved; every leaf under its ceiling."
     }
   ],
   "ceilingTransfersNewLeaves": [

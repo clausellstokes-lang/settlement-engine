@@ -399,6 +399,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           7,
           8
         ],
+        "readsCount": 1,
         "attach": [],
         "crisisScoped": true
       },
@@ -417,6 +418,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
+        "readsCount": 1,
         "attach": [],
         "colour": true
       },
@@ -433,6 +435,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
+        "readsCount": 1,
         "attach": [],
         "crisisScoped": true
       },
@@ -451,6 +454,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
+        "readsCount": 1,
         "attach": [],
         "crisisScoped": true
       },

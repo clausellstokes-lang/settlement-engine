@@ -88,7 +88,9 @@ describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', ()
     const hamlet = town({ tier: 'hamlet' });
     const entry = { type: 'under_siege', cast: cast([{ role: 'defender', kind: 'institution', id: 'Watch house', name: 'Watch house', reason: CAST_REASONS.defenderInstitution, temporary: false }]) };
     const [hook] = crisisHooksOf(hamlet, entry);
-    expect(hook.text).toBe("In the siege, the Watch house leads the defence: the hamlet's defence, with no one on the roster leading it.");
+    // re-keyed by identity (R2-CODE-B-4, ROUND THREE item 4, the chair's ruling): the hook names the house through houseInProse,
+    // so the catalogue's sentence-case "Watch house" reads lower-led mid-sentence; the same hook, the same holder and reason.
+    expect(hook.text).toBe("In the siege, the watch house leads the defence: the hamlet's defence, with no one on the roster leading it.");
     expect(hookTruthViolations(hook.text, settlementHookFacts(hamlet))).toEqual([]);
   });
 

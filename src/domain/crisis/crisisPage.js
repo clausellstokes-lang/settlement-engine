@@ -37,8 +37,12 @@ export const CRISIS_PAGE_COPY = Object.freeze({
   seeFirst: 'What the players see first',
   ifNothing: 'If nothing is done',
   hook: 'Hook',
-  nobody: 'nobody',
-  noLevers: 'Nobody here controls what this crisis turns on.',
+  // R3-CODE-C-3 (ROUND-3-CUT-INCREMENT #ww-1263, #ww-702): two claims of zero the record does not hold. An empty cast
+  // (an infiltration, whose infiltrator and recruits are the roster's secrets, or a war with no defender here) is not
+  // a crisis that touches nobody: no one is yet NAMED for it. An empty `levers` list holds no institution: it says
+  // nothing of a person who holds the cast's lever role (rww-thorp-monster_pressure-1's acting warden).
+  nobody: 'no one yet named',
+  noLevers: 'No house here holds what this crisis turns on.',
   edited: '✎ YOU',
   editedTitle: 'Named by you',
   edit: '✎ Edit',

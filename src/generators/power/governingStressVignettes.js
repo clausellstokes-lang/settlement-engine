@@ -31,18 +31,22 @@ export const buildInsurgencyNarrative = (
   );
 };
 
-export const buildWartimeNarrative = (institutionFlags, governingFactionName) => {
+export const buildWartimeNarrative = (institutionFlags, governingFactionName, institutionNames = []) => {
+  // COHERENCE-POWERS-7 (cold list REVIEW-W2A-3 #706 #707): a town that governs itself as an independent polity (the
+  // roster's City-state government: "No higher lord, no external charter") has no crown to pay, take or send an officer
+  const sovereign = (institutionNames || []).some((n) => /^city-state government$/i.test(String(n || '')));
   const isWellSupplied =
     (institutionFlags.militaryEffective || 50) >= 55 &&
     (institutionFlags.economyOutput || 50) >= 45;
 
   if (isWellSupplied) {
     return (
-      'The garrison has doubled and the crown pays its bills, so contracts for grain, leather and ironwork go to anyone who can fill them. ' +
+      (sovereign ? 'Those under arms have doubled, and the city treasury pays their keep, so contracts for grain, leather and ironwork go to anyone who can fill them. ' : 'The garrison has doubled and the crown pays its bills, so contracts for grain, leather and ironwork go to anyone who can fill them. ') +
       'The men who left to fight have not come back. ' +
       `${governingFactionName} must decide how much more the settlement can give to the war.`
     );
   }
+  if (sovereign) return 'Conscription has taken the workers, and the farms and workshops are short-handed. The army\'s supply carts take what they need first, and local needs come second. Prices have risen and will rise again. An army quartermaster came last week and left with a list of what will be taken next month, and those in charge signed it because they saw no other choice.';
   return 'Conscription has taken the workers, and the farms and workshops are short-handed. Crown supply carts take what they need first, and local needs come second. Prices have risen and will rise again. A crown officer came last week and left with a list of what will be taken next month, and those in charge signed it because they saw no other choice.';
 };
 

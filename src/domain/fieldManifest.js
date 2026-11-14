@@ -348,10 +348,10 @@ export const ENGINE_FIELD_REGISTRY = Object.freeze([
     field: 'upstreamNote',
     path: 'economicState.activeChains[].upstreamNote',
     producer: 'src/generators/computeActiveChains.js',
+    // R2-CODE-B-SIDE item 1 (2ed36a430): the generator's upstream note left the chain card and the PDF's chain flow
+    // (no read either holds makes it true there); the record keeps it, carried into the canonical envelope.
     consumers: [
       'src/domain/supplyChainState.js',
-      'src/components/new/SupplyChainsPanel.jsx',
-      'src/pdf/sections/SupplyChainFlow.jsx',
     ],
   },
   {

@@ -842,6 +842,13 @@ describe('DS-GEN-6 — the route, the tier overlay, and the demoted deficit dime
           armToPool.set(arm, originRoutePoolKey(route));
           const noDocks = originArmKey({ route, terrainType, hasFoodDeficit, hasDocks: false });
           if (noDocks === 'ground') armToPool.set(noDocks, originRoutePoolKey(route));
+          // R2-CODE-A-4 (round three #7): the food record's imports are a producer input too — an isolated
+          // shortfall the record brings nothing in for founds on the `isolated.unsupplied` arm.
+          const unsupplied = originArmKey({ route, terrainType, hasFoodDeficit, hasFoodImport: false });
+          if (unsupplied === 'isolated.unsupplied') armToPool.set(unsupplied, originRoutePoolKey(route));
+          // …and its #215: the siege is an input — an isolated shortfall under a siege founds on `isolated.besieged`.
+          const besieged = originArmKey({ route, terrainType, hasFoodDeficit, siege: true });
+          if (besieged === 'isolated.besieged') armToPool.set(besieged, originRoutePoolKey(route));
         }
       }
     }

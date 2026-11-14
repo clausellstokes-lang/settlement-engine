@@ -39,13 +39,16 @@ describe('partitionDefenseInstitutions — one name reading per institution per 
     const buckets = partitionDefenseInstitutions(roster);
     expect(Object.keys(buckets)).toEqual([...DEFENSE_BUCKET_KEYS]);
     expect(buckets.walls).toEqual([roster[1]]);
-    expect(buckets.garrison).toEqual([roster[0], roster[7]]);
+    // UPKEEP-CAPACITY C2 (the chair's G1): the professional city watch is the watch only, no longer a garrison member.
+    expect(buckets.garrison).toEqual([roster[7]]);
     expect(buckets.watch).toEqual([roster[0]]);
     expect(buckets.militia).toEqual([roster[4]]);
-    expect(buckets.magicDef).toEqual([roster[3]]);
+    // UPKEEP-CAPACITY C6 (the chair's G5): an alchemist is a trade, not arcane defence; the roster holds no other magic house.
+    expect(buckets.magicDef).toEqual([]);
     expect(buckets.mercenary).toEqual([]);
     expect(buckets.charter).toEqual([]);
-    expect(buckets.garrison[0]).toBe(roster[0]);
+    expect(buckets.garrison[0]).toBe(roster[7]);
+    expect(buckets.watch[0]).toBe(roster[0]);
     expect(partitionDefenseInstitutions(null)).toEqual(Object.fromEntries(DEFENSE_BUCKET_KEYS.map((k) => [k, []])));
   });
 });

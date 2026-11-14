@@ -324,11 +324,19 @@ export const CHAIN_END_BANNED = Object.freeze([
 // ── §0d THE TIME-BAND FAMILY ─────────────────────────────────────────────────
 
 /**
- * The six canonical bands in four print positions. "Older than its bearers" is
+ * The six canonical bands in four print positions. "Older than anyone living" is
  * PREDICATE-ONLY: it is a comparison, not a quantity, and it cannot be made to sit
  * before a noun, after a preposition, or alone — the other three columns are null
  * and a mold needing one of them falls back to §3's bare connective rather than
  * printing a broken phrase.
+ *
+ * THE PREDICATE NAMES NO BEARER (R3-CODE-C-2, ROUND-3-CUT-INCREMENT #ww-470). It was "older
+ * than its bearers", a phrase for a grudge: its "its" needs a thing that is borne. The one
+ * filler of the column (generalStateProse.js :: timebandAgeFill) puts it after any subject
+ * and in the legacy molds' apposition, so the page printed "Jalaliin came through the
+ * siege, older than its bearers; …" of a siege 77 years gone, and "{settlement} is older
+ * than its bearers". The comparison the band makes (past sixty years: nobody living saw it)
+ * is said of no one in particular, so it reads after a town, a ruin, a calamity or a grudge.
  */
 export const TIME_BANDS = Object.freeze([
   Object.freeze({ id: 'this_season', maxWeeks: 13, attributive: "this season's", span: 'this season', since: 'this season', predicate: 'of this season' }),
@@ -336,8 +344,23 @@ export const TIME_BANDS = Object.freeze([
   Object.freeze({ id: 'years_on', maxWeeks: 52 * 10, attributive: "years'", span: 'years', since: 'years on', predicate: 'years old' }),
   Object.freeze({ id: 'a_decade', maxWeeks: 52 * 25, attributive: "a decade's", span: 'a decade', since: 'a decade on', predicate: 'a decade old' }),
   Object.freeze({ id: 'a_generation', maxWeeks: 52 * 60, attributive: "a generation's", span: 'a generation', since: 'a generation on', predicate: 'a generation old' }),
-  Object.freeze({ id: 'older_than_bearers', maxWeeks: Infinity, attributive: null, span: null, since: null, predicate: 'older than its bearers' }),
+  Object.freeze({ id: 'older_than_bearers', maxWeeks: Infinity, attributive: null, span: null, since: null, predicate: 'older than anyone living' }),
 ]);
+
+/**
+ * THE SIXTH BAND'S LIVING FLOOR (R3-CODE-C-8, the reader's L01; the chair's ruling (a) of 2026-11-14,
+ * vetoable by the owner). The band starts at sixty years, but the record's people reach their seventies
+ * (npcData.js, the elder ages: "seventies"), so "older than anyone living" printed of a siege 61 years
+ * gone with its "61y ago" on the same tab. The predicate is said only at ninety years and over, older
+ * than every age a person of the record carries; from sixty to ninety the band says what only the
+ * oldest remember. The band keeps its id and its three null columns either side of the floor (the
+ * pools keyed on the id, FOUNDED-OLD and ANCHORED-OLD, and the herald's index do not move); only the
+ * predicate column reads the floor.
+ */
+export const LIVING_FLOOR = Object.freeze({ floorWeeks: 52 * 90, predicate: 'older than all but the oldest alive' });
+/** The sixth band as it prints under its living floor: the same band, its predicate the floor's. */
+const SIXTH_BAND_UNDER_FLOOR = /** @type {typeof TIME_BANDS[number]} */ (/** @type {unknown} */ (
+  Object.freeze({ ...TIME_BANDS[TIME_BANDS.length - 1], predicate: LIVING_FLOOR.predicate })));
 
 /** The four print positions a time band may occupy. */
 export const TIME_BAND_POSITIONS = Object.freeze(['attributive', 'span', 'since', 'predicate']);
@@ -355,7 +378,10 @@ export function timeBandOf(sinceTicks, intervalWeeks = 1) {
   const ticks = Number.isFinite(sinceTicks) ? Math.max(0, Number(sinceTicks)) : 0;
   const per = Number.isFinite(intervalWeeks) && Number(intervalWeeks) > 0 ? Number(intervalWeeks) : 1;
   const weeks = ticks * per;
-  for (const band of TIME_BANDS) if (weeks <= band.maxWeeks) return band;
+  for (const band of TIME_BANDS) {
+    if (weeks > band.maxWeeks) continue;
+    return band.id === 'older_than_bearers' && weeks < LIVING_FLOOR.floorWeeks ? SIXTH_BAND_UNDER_FLOOR : band;
+  }
   return TIME_BANDS[TIME_BANDS.length - 1];
 }
 

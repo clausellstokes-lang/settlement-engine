@@ -221,14 +221,14 @@
  "digests": {
   "corpusMeta": "742e01c8db0f29bb0cdc145db586b9529fabe782a080de8d3d89c913d98bc4ff",
   "inventory": "201a0aab8d961cb8d036bb1c4405f96f7bac3613efc06b8fbc4729792b0abbf0",
-  "manifests": "e7e0d160accdf8c83664b3a771f9c985d7b10c67f94b2451c2005c4159b64f5e",
+  "manifests": "73fa8c60bbc447bf4acb824abb951565b1fa1207eb6e94d7104e05469335da5d",
   "migrationReview": "4c287868d2a8ff06eb6f4015b80b2eb2b774f1fdd66dc3cff68093cee4d52d6d",
   "rowTags": "a3127aa474bc89b4a9970dcd722ffd474cf0c8a23a54f66e13512a73135e28f4",
-  "scanStats": "72b1bed498cc0ecb834f463d2fbd96bf4b6a91c5a90f791c7f6b8a8ba128d400",
-  "sentinel": "2af9fee5b17a0af1a5308b7b5edecfda5a791c285d4eb371a959694c39f2838f"
+  "scanStats": "4c43c5e47d4639ab3dee03d165808034ca4f5f077e63d3925743b41e51f6996b",
+  "sentinel": "330b86ac8ad297eba7bd023193f4ce4d456f6c55140d3761aba90ba2b734ac71"
  },
  "frozen": "2026-11-14",
- "frozenAtSha": "dde899d2c966f09a3c3e545dcdc3dde9533d7b53",
+ "frozenAtSha": "f5622ab8f5cb5c9df445e342443152b06132e0bf",
  "identities": 1530,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2720,7 +2720,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "697aee5469b5f905c49e94e55932814efe912debb2253090f6753c86baf9cedc",
+   "digest": "f8b8da0f44db4dedf1c8599f07651341e2296b1dae0abd989b624215b3d1e9e5",
    "entries": [
     {
      "mode": "100644",
@@ -5868,8 +5868,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/DefenseTab.jsx",
-     "sha256": "973be8eaa12c62bbaee333e1878e37c6895f3ee18c6b92ba48cbacf75f4a0845",
-     "size": 49574,
+     "sha256": "f20f93f07adea73d6b3617c779e83041e37ee05e08be59ae6d10c9b9d1d5d7a1",
+     "size": 50832,
      "type": "file"
     },
     {
@@ -5896,8 +5896,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/HistoryTab.jsx",
-     "sha256": "2e631f8103724c969318cea694875494b1d161c6759fbc1cc126c96de34a36a3",
-     "size": 20159,
+     "sha256": "79714ee2ae84f03c8de6d4a53554659d9a7b4fac3aae69ea75eef8c244f48a6b",
+     "size": 21454,
      "type": "file"
     },
     {
@@ -6001,8 +6001,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/SubstrateTab.jsx",
-     "sha256": "0287fb112898275f0f30bf1a594d620bcecb2243f7604f5a3f6296844dc312bd",
-     "size": 10795,
+     "sha256": "b4bc989eb7c00211eaac366fc365f1445efbc99cf60862152bc559cc0708901b",
+     "size": 13243,
      "type": "file"
     },
     {
@@ -7352,43 +7352,43 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/defense.generated.js",
-     "sha256": "b00e7b78b447a559accbbeb6e4b037ee46261a16a0ffdb370ad6e19b129bfcde",
-     "size": 262433,
+     "sha256": "8802e754a2e3497cd4f4cf268483d3d8163c14b7e3aaf330ffe160b7e39f60b5",
+     "size": 234545,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/economy.generated.js",
-     "sha256": "7b57d1a9b6b831440670a5f081da9f67520e63e0501de5e1d9ed26552f1d3bcd",
-     "size": 183999,
+     "sha256": "f1bbc28a8b41d7443016a559b5a5e66dd15b46a045647e5f4e8f0e4a4a3ef532",
+     "size": 170255,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/general.generated.js",
-     "sha256": "8402c8a5428a27fc5679e8ec9c159c87d4084bffcf894db936d3c9de94b1ffb4",
-     "size": 297282,
+     "sha256": "553d7eab9137ec41466cf4736393a8b013c7a8c3e65f26da5c28cc8197434653",
+     "size": 279568,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/power.generated.js",
-     "sha256": "0e629262d62157f3f7be1c2be0c282121d2e564984fdf4aa658fce5ae19e06f1",
-     "size": 130008,
+     "sha256": "5443cc3aa945d71901a60a4356dde62692474f20e4c123985dda9cb88ead7d1c",
+     "size": 124251,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/stressors.generated.js",
-     "sha256": "43c18d7201a0bfb16d7c4460d7f488be739ed93001b13397818ce8637d1d267c",
-     "size": 147666,
+     "sha256": "749ac4731bf242c82aac869753267b6098087d28bbe3a4c719a5318413efe7a5",
+     "size": 147483,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/warFaith.generated.js",
-     "sha256": "aa6853c948533595fba230cd13c6601ba49f73a7894277f1a9bc2b701871263f",
-     "size": 180300,
+     "sha256": "6c6b1de77acfb58e3e1429b7a5312575da9f35d431ff864cae2afc6b081972cd",
+     "size": 178226,
      "type": "file"
     },
     {
@@ -9984,8 +9984,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/defenseStateProse.js",
-     "sha256": "63b984f0669f9c3b58f7f0141c3393a8343f338efa3a7c769fc8e40d88d21818",
-     "size": 126360,
+     "sha256": "6a501d976c4cd4102ef33ade391316e16e4fb6b4d7dedd1bcef0c47e282070ce",
+     "size": 131521,
      "type": "file"
     },
     {
@@ -10042,6 +10042,13 @@
      "path": "src/domain/display/stateProse/legibilityRung.js",
      "sha256": "aeb02378d0371b9ca96cfe28cb2c827cbdc2fb3c4ad69015e4eb0b33f596ab2d",
      "size": 4191,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/display/stateProse/postureLineDisqualifiers.js",
+     "sha256": "96ef656af3534e24852e36856496d70cf49b60a4e52d650d3ebb1c6e889188cf",
+     "size": 5736,
      "type": "file"
     },
     {
@@ -19238,8 +19245,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/lib/viewModel.js",
-     "sha256": "6a7475418aadacce86f813d01d9d9cd7066279d941446331ab083ad509f7f61f",
-     "size": 46614,
+     "sha256": "1cd3b5317ab340dbb6c69e31d39fc4a4c03b11e1ab36846644c36488a3dcbcf5",
+     "size": 46785,
      "type": "file"
     },
     {
@@ -19406,8 +19413,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/HistoryFounding.jsx",
-     "sha256": "7da6e4c897fb7ab305a04174d9295ee6766a4d218eedfe23da5158c5c9e828ff",
-     "size": 16063,
+     "sha256": "ae7eb62778193aa900c3575cf36749b188fc3cc730c6fa77ef71d0a395c8f6bf",
+     "size": 16633,
      "type": "file"
     },
     {
@@ -20310,7 +20317,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "fb15a80794ba8bbee22203423deddadc1016567ff23d42d04da3b8953edf629a",
+   "digest": "0783504645b836f887466d46e07dd9c8003cbda0965ee2072b2a4b1bd518153b",
    "entries": [
     {
      "mode": "100644",
@@ -23388,8 +23395,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/DefenseTab.jsx",
-     "sha256": "973be8eaa12c62bbaee333e1878e37c6895f3ee18c6b92ba48cbacf75f4a0845",
-     "size": 49574,
+     "sha256": "f20f93f07adea73d6b3617c779e83041e37ee05e08be59ae6d10c9b9d1d5d7a1",
+     "size": 50832,
      "type": "file"
     },
     {
@@ -23416,8 +23423,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/HistoryTab.jsx",
-     "sha256": "2e631f8103724c969318cea694875494b1d161c6759fbc1cc126c96de34a36a3",
-     "size": 20159,
+     "sha256": "79714ee2ae84f03c8de6d4a53554659d9a7b4fac3aae69ea75eef8c244f48a6b",
+     "size": 21454,
      "type": "file"
     },
     {
@@ -23521,8 +23528,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/SubstrateTab.jsx",
-     "sha256": "0287fb112898275f0f30bf1a594d620bcecb2243f7604f5a3f6296844dc312bd",
-     "size": 10795,
+     "sha256": "b4bc989eb7c00211eaac366fc365f1445efbc99cf60862152bc559cc0708901b",
+     "size": 13243,
      "type": "file"
     },
     {
@@ -27385,8 +27392,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/defenseStateProse.js",
-     "sha256": "63b984f0669f9c3b58f7f0141c3393a8343f338efa3a7c769fc8e40d88d21818",
-     "size": 126360,
+     "sha256": "6a501d976c4cd4102ef33ade391316e16e4fb6b4d7dedd1bcef0c47e282070ce",
+     "size": 131521,
      "type": "file"
     },
     {
@@ -27443,6 +27450,13 @@
      "path": "src/domain/display/stateProse/legibilityRung.js",
      "sha256": "aeb02378d0371b9ca96cfe28cb2c827cbdc2fb3c4ad69015e4eb0b33f596ab2d",
      "size": 4191,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/display/stateProse/postureLineDisqualifiers.js",
+     "sha256": "96ef656af3534e24852e36856496d70cf49b60a4e52d650d3ebb1c6e889188cf",
+     "size": 5736,
      "type": "file"
     },
     {
@@ -36639,8 +36653,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/lib/viewModel.js",
-     "sha256": "6a7475418aadacce86f813d01d9d9cd7066279d941446331ab083ad509f7f61f",
-     "size": 46614,
+     "sha256": "1cd3b5317ab340dbb6c69e31d39fc4a4c03b11e1ab36846644c36488a3dcbcf5",
+     "size": 46785,
      "type": "file"
     },
     {
@@ -36807,8 +36821,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/HistoryFounding.jsx",
-     "sha256": "7da6e4c897fb7ab305a04174d9295ee6766a4d218eedfe23da5158c5c9e828ff",
-     "size": 16063,
+     "sha256": "ae7eb62778193aa900c3575cf36749b188fc3cc730c6fa77ef71d0a395c8f6bf",
+     "size": 16633,
      "type": "file"
     },
     {
@@ -37704,7 +37718,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "a0cd0c549839e174897be53f97f4021305a92f3c3b6a6a7d93fd8d34c60bc6ad",
+   "digest": "f2c9961204f52b72790fff5421ab97e8aefcd0cc1420728829d90b41d7668376",
    "entries": [
     {
      "mode": "100644",
@@ -40782,8 +40796,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/DefenseTab.jsx",
-     "sha256": "973be8eaa12c62bbaee333e1878e37c6895f3ee18c6b92ba48cbacf75f4a0845",
-     "size": 49574,
+     "sha256": "f20f93f07adea73d6b3617c779e83041e37ee05e08be59ae6d10c9b9d1d5d7a1",
+     "size": 50832,
      "type": "file"
     },
     {
@@ -40810,8 +40824,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/HistoryTab.jsx",
-     "sha256": "2e631f8103724c969318cea694875494b1d161c6759fbc1cc126c96de34a36a3",
-     "size": 20159,
+     "sha256": "79714ee2ae84f03c8de6d4a53554659d9a7b4fac3aae69ea75eef8c244f48a6b",
+     "size": 21454,
      "type": "file"
     },
     {
@@ -40915,8 +40929,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/SubstrateTab.jsx",
-     "sha256": "0287fb112898275f0f30bf1a594d620bcecb2243f7604f5a3f6296844dc312bd",
-     "size": 10795,
+     "sha256": "b4bc989eb7c00211eaac366fc365f1445efbc99cf60862152bc559cc0708901b",
+     "size": 13243,
      "type": "file"
     },
     {
@@ -42266,43 +42280,43 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/defense.generated.js",
-     "sha256": "b00e7b78b447a559accbbeb6e4b037ee46261a16a0ffdb370ad6e19b129bfcde",
-     "size": 262433,
+     "sha256": "8802e754a2e3497cd4f4cf268483d3d8163c14b7e3aaf330ffe160b7e39f60b5",
+     "size": 234545,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/economy.generated.js",
-     "sha256": "7b57d1a9b6b831440670a5f081da9f67520e63e0501de5e1d9ed26552f1d3bcd",
-     "size": 183999,
+     "sha256": "f1bbc28a8b41d7443016a559b5a5e66dd15b46a045647e5f4e8f0e4a4a3ef532",
+     "size": 170255,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/general.generated.js",
-     "sha256": "8402c8a5428a27fc5679e8ec9c159c87d4084bffcf894db936d3c9de94b1ffb4",
-     "size": 297282,
+     "sha256": "553d7eab9137ec41466cf4736393a8b013c7a8c3e65f26da5c28cc8197434653",
+     "size": 279568,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/power.generated.js",
-     "sha256": "0e629262d62157f3f7be1c2be0c282121d2e564984fdf4aa658fce5ae19e06f1",
-     "size": 130008,
+     "sha256": "5443cc3aa945d71901a60a4356dde62692474f20e4c123985dda9cb88ead7d1c",
+     "size": 124251,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/stressors.generated.js",
-     "sha256": "43c18d7201a0bfb16d7c4460d7f488be739ed93001b13397818ce8637d1d267c",
-     "size": 147666,
+     "sha256": "749ac4731bf242c82aac869753267b6098087d28bbe3a4c719a5318413efe7a5",
+     "size": 147483,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/warFaith.generated.js",
-     "sha256": "aa6853c948533595fba230cd13c6601ba49f73a7894277f1a9bc2b701871263f",
-     "size": 180300,
+     "sha256": "6c6b1de77acfb58e3e1429b7a5312575da9f35d431ff864cae2afc6b081972cd",
+     "size": 178226,
      "type": "file"
     },
     {
@@ -44898,8 +44912,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/defenseStateProse.js",
-     "sha256": "63b984f0669f9c3b58f7f0141c3393a8343f338efa3a7c769fc8e40d88d21818",
-     "size": 126360,
+     "sha256": "6a501d976c4cd4102ef33ade391316e16e4fb6b4d7dedd1bcef0c47e282070ce",
+     "size": 131521,
      "type": "file"
     },
     {
@@ -44956,6 +44970,13 @@
      "path": "src/domain/display/stateProse/legibilityRung.js",
      "sha256": "aeb02378d0371b9ca96cfe28cb2c827cbdc2fb3c4ad69015e4eb0b33f596ab2d",
      "size": 4191,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/display/stateProse/postureLineDisqualifiers.js",
+     "sha256": "96ef656af3534e24852e36856496d70cf49b60a4e52d650d3ebb1c6e889188cf",
+     "size": 5736,
      "type": "file"
     },
     {
@@ -54152,8 +54173,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/lib/viewModel.js",
-     "sha256": "6a7475418aadacce86f813d01d9d9cd7066279d941446331ab083ad509f7f61f",
-     "size": 46614,
+     "sha256": "1cd3b5317ab340dbb6c69e31d39fc4a4c03b11e1ab36846644c36488a3dcbcf5",
+     "size": 46785,
      "type": "file"
     },
     {
@@ -54320,8 +54341,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/HistoryFounding.jsx",
-     "sha256": "7da6e4c897fb7ab305a04174d9295ee6766a4d218eedfe23da5158c5c9e828ff",
-     "size": 16063,
+     "sha256": "ae7eb62778193aa900c3575cf36749b188fc3cc730c6fa77ef71d0a395c8f6bf",
+     "size": 16633,
      "type": "file"
     },
     {
@@ -55545,21 +55566,21 @@
   }
  },
  "scanStats": {
-  "files": 2484,
-  "reads": 143055,
-  "resolved": 11690,
-  "unresolved": 131365
+  "files": 2485,
+  "reads": 143112,
+  "resolved": 11710,
+  "unresolved": 131402
  },
  "scannerProvenance": {
   "detectorDigest": "dfae03aa3df76d77b18b05535d2bb6c140a171ae401e136d3324e790f0dc2c6b",
-  "executionTreeDigest": "697aee5469b5f905c49e94e55932814efe912debb2253090f6753c86baf9cedc",
-  "scanTreeDigest": "fb15a80794ba8bbee22203423deddadc1016567ff23d42d04da3b8953edf629a",
-  "sourceTreeDigest": "a0cd0c549839e174897be53f97f4021305a92f3c3b6a6a7d93fd8d34c60bc6ad",
-  "unscannedInputDigest": "0968b546f28a6022d1075aeb4e2075404945f2e911faea2ce6173cea39923fae"
+  "executionTreeDigest": "f8b8da0f44db4dedf1c8599f07651341e2296b1dae0abd989b624215b3d1e9e5",
+  "scanTreeDigest": "0783504645b836f887466d46e07dd9c8003cbda0965ee2072b2a4b1bd518153b",
+  "sourceTreeDigest": "f2c9961204f52b72790fff5421ab97e8aefcd0cc1420728829d90b41d7668376",
+  "unscannedInputDigest": "360881ee3cc8d458503a56dc062f9b9fb8ba15854afd4410f23c7328d26305ff"
  },
  "schema": 42,
  "sentinel": {
-  "resolvedReads": 11690,
+  "resolvedReads": 11710,
   "totalKeys": 12345,
   "usableShapes": 534
  },

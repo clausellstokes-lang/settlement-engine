@@ -1,0 +1,377 @@
+{
+  "_doc": "W2-FIX-DATA, THE DRAFT SHIFT RECORD the tenth seat did not write (BRIEF-W2-FIX-DATA-11 item 2). NOT SIGNED: ownerWords, ownerDate, odqRow and seat stay blank; the merge seat signs at the joined line's refreeze. No golden door was run in its writing mode. MEASURED: every registered surface of tests/fixtures/.golden-freeze-register.json (51) run as its suite file, `npx vitest run --maxWorkers=3 --reporter=json <the 51 suites>`, at the lane's tip ddadf07c5 (W2-FIX-DATA-11 after the three reds; source identical to a1481aaf7 but for one test file and one register) and at the line's tip 976db5b19, with no UPDATE_* variable set: tip 378 passed / 5 failed, line 380 passed / 3 failed. THE CAUSE: the lane's declared families (HANDBACK-10 section 5, the line 976db5b19 against the tip over the census 720 / a fresh 720): institutions 631 / 613 towns (.institutions[].desc), history 563 / 582 (events' descriptions, lasting effects, plot hooks, tensions), culturalIdentity 316 / 314 (foodways, architectural detail), economicState 219 / 214 (the foodways line, the trade dependencies' affected services), availableServices 209 / 219 (.availableServices.*[].desc), arrivalScene 174 / 200, generationCoherenceReceipt 160 / 228 (its evidence reads the texts above), defenseProfile 111 / 103 (the institutions' descriptions mirrored), stress / stressors 59 / 70 (the crisis hook and viability note), culturalNotes 28 / 38: the data tables' texts and the copies that read them; no person, roster, house, power, band or score re-dealt by the lane's own commits.",
+  "ownerWords": "",
+  "ownerDate": "",
+  "odqRow": "",
+  "cause": "The data lane's cures of false lines in its tables (institution descriptions and services with their declared twins, history texts, culture and arrival lines, the crisis cells), declared by family as above.",
+  "seat": "",
+  "measuredAt": {
+    "tip": "ddadf07c5",
+    "line": "976db5b19"
+  },
+  "surfaces": [
+    {
+      "surface": "belief-axes-dormancy-golden",
+      "suite": "tests/property/beliefAxesDormancyGolden.test.js",
+      "atLine": "passed (6 passed, 0 failed)",
+      "atTip": "passed (6 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "belief-map-golden",
+      "suite": "tests/property/beliefMapGolden.test.js",
+      "atLine": "passed (5 passed, 0 failed)",
+      "atTip": "passed (5 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "cartography-calibration-corpus",
+      "suite": "tests/domain/townCartographyCalibration.test.js",
+      "atLine": "passed (32 passed, 0 failed)",
+      "atTip": "passed (32 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "chroniclers-letter-golden",
+      "suite": "tests/property/chroniclersLetterGolden.test.js",
+      "atLine": "passed (2 passed, 0 failed)",
+      "atTip": "passed (2 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "contested-goals-dormancy-golden",
+      "suite": "tests/property/contestedGoalsDormancyGolden.test.js",
+      "atLine": "passed (7 passed, 0 failed)",
+      "atTip": "passed (7 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "corruption-web-dormancy-golden",
+      "suite": "tests/property/corruptionWebDormancyGolden.test.js",
+      "atLine": "passed (5 passed, 0 failed)",
+      "atTip": "passed (5 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "demographics-lifecycle-golden",
+      "suite": "tests/property/demographicsLifecycleGolden.test.js",
+      "atLine": "passed (5 passed, 0 failed)",
+      "atTip": "passed (5 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "disposition-channels-dormancy-golden",
+      "suite": "tests/property/dispositionChannelsDormancyGolden.test.js",
+      "atLine": "passed (8 passed, 0 failed)",
+      "atTip": "passed (8 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "suite": "tests/property/espionageDormancyFence.test.js",
+      "atLine": "passed (21 passed, 0 failed)",
+      "atTip": "failed (20 passed, 1 failed)",
+      "state": "MOVED",
+      "action": "re-record",
+      "why": "MOVED by measure: \"THE DRIVEN GOLDEN: 360 settlements at this tip hash to the PRE-COUPLING corpus\" green at the line, red at the tip (the in-file corpus constant hashes whole settlement records, so it moves with every text the lane changes: the same families). Its re-record is the merge seat's, inside whatever window the chair names."
+    },
+    {
+      "surface": "espionage-mission-dormancy-fence",
+      "suite": "tests/property/espionageMissionDormancyFence.test.js",
+      "atLine": "passed (20 passed, 0 failed)",
+      "atTip": "passed (20 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "espionage-rider-dormancy-fence",
+      "suite": "tests/property/espionageRiderDormancyFence.test.js",
+      "atLine": "passed (9 passed, 0 failed)",
+      "atTip": "passed (9 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "generator-golden-master",
+      "suite": "tests/property/generatorGoldenMaster.test.js",
+      "atLine": "passed (3 passed, 0 failed)",
+      "atTip": "failed (2 passed, 1 failed)",
+      "state": "MOVED",
+      "action": "re-record",
+      "why": "MOVED by measure: \"every config produces byte-identical output to the golden master\" green at the line 976db5b19, red at the tip ddadf07c5 with 525 configuration hashes differing (expected [ …(525) ] to deeply equal []). Its control row (generationForkCensus A1, town|germanic|plains|road|civilized|golden-master-v3) moves f4fc47a0ffe9036b899c2ce86a4fbb071857e321eb222599108adc3f6ccea662 (the line, = the committed manifest) -> b90094e24fa41de2877ddf7a1f09842f68b2fe19641152cb2ff2aa9e2c3658ae (the tip), 22 leaves in four families: .institutions[22].desc and its .defenseProfile.institutions.watch[0].desc copy (the watch twin \"hold the gates\" -> \"keep the peace\", 4c4a1c269), .history 15 (two event descriptions reworded, b91fcfe11; the iron-rights event reworded and its \"Fortified extraction sites\" effect taken off a town with no mine, ab58c3ec3; the infiltration_fear tension leaves the timeline, 009ee1466, item G, bisected: present at 009ee1466^, absent at 009ee1466), .generationCoherenceReceipt 5 (its evidence cites the tension). Signing and the re-record are the merge seat's."
+    },
+    {
+      "surface": "generosity-dormancy-golden",
+      "suite": "tests/property/generosityDormancyGolden.test.js",
+      "atLine": "passed (6 passed, 0 failed)",
+      "atTip": "passed (6 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "information-statecraft-dormancy-golden",
+      "suite": "tests/property/informationStatecraftDormancyGolden.test.js",
+      "atLine": "passed (5 passed, 0 failed)",
+      "atTip": "passed (5 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "intel-trade-dormancy-golden",
+      "suite": "tests/property/intelTradeDormancyGolden.test.js",
+      "atLine": "passed (5 passed, 0 failed)",
+      "atTip": "passed (5 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "interior-golden",
+      "suite": "tests/interior/interiorModel.test.js",
+      "atLine": "passed (40 passed, 0 failed)",
+      "atTip": "passed (40 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "intervention-dormancy-golden",
+      "suite": "tests/property/interventionDormancyGolden.test.js",
+      "atLine": "passed (5 passed, 0 failed)",
+      "atTip": "passed (5 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "migration-rumors-dormancy-golden",
+      "suite": "tests/property/migrationRumorsDormancyGolden.test.js",
+      "atLine": "passed (7 passed, 0 failed)",
+      "atTip": "passed (7 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "momentum-dormancy-golden",
+      "suite": "tests/property/momentumDormancyGolden.test.js",
+      "atLine": "passed (6 passed, 0 failed)",
+      "atTip": "passed (6 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "npc-credibility-dormancy-golden",
+      "suite": "tests/property/npcCredibilityDormancyGolden.test.js",
+      "atLine": "passed (5 passed, 0 failed)",
+      "atTip": "passed (5 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "npc-growth-dormancy-golden",
+      "suite": "tests/property/npcGrowthDormancyGolden.test.js",
+      "atLine": "passed (5 passed, 0 failed)",
+      "atTip": "passed (5 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "npc-ladder-dormancy-golden",
+      "suite": "tests/property/npcLadderDormancyGolden.test.js",
+      "atLine": "passed (6 passed, 0 failed)",
+      "atTip": "passed (6 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "npc-ledger-dormancy-golden",
+      "suite": "tests/property/npcLedgerDormancyGolden.test.js",
+      "atLine": "passed (7 passed, 0 failed)",
+      "atTip": "passed (7 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "pdf-golden-view-model-snapshot",
+      "suite": "tests/pdf/goldenViewModel.test.js",
+      "atLine": "passed (4 passed, 0 failed)",
+      "atTip": "passed (4 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "peace-causal-dormancy-golden",
+      "suite": "tests/property/peaceCausalDormancyGolden.test.js",
+      "atLine": "passed (6 passed, 0 failed)",
+      "atTip": "passed (6 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "provenance-dormancy-golden",
+      "suite": "tests/property/provenanceDormancyGolden.test.js",
+      "atLine": "passed (6 passed, 0 failed)",
+      "atTip": "passed (6 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "resource-dynamics-dormancy-golden",
+      "suite": "tests/property/resourceDynamicsDormancyGolden.test.js",
+      "atLine": "passed (5 passed, 0 failed)",
+      "atTip": "passed (5 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "roads-dormancy-golden",
+      "suite": "tests/property/roadsDormancyGolden.test.js",
+      "atLine": "passed (7 passed, 0 failed)",
+      "atTip": "passed (7 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "route-network-dormancy-golden",
+      "suite": "tests/domain/routeNetworkDormancy.test.js",
+      "atLine": "passed (18 passed, 0 failed)",
+      "atTip": "passed (18 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "rumor-ledger-golden",
+      "suite": "tests/property/rumorLedgerGolden.test.js",
+      "atLine": "passed (5 passed, 0 failed)",
+      "atTip": "passed (5 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "sea-lanes-golden",
+      "suite": "tests/property/seaLanesGolden.test.js",
+      "atLine": "passed (4 passed, 0 failed)",
+      "atTip": "passed (4 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "seasonal-overlay-golden",
+      "suite": "tests/property/seasonalOverlayGolden.test.js",
+      "atLine": "passed (3 passed, 0 failed)",
+      "atTip": "passed (3 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "settlement-lifecycle-dormancy-golden",
+      "suite": "tests/property/settlementLifecycleDormancyGolden.test.js",
+      "atLine": "passed (5 passed, 0 failed)",
+      "atTip": "passed (5 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "settlement-politics-dormancy-golden",
+      "suite": "tests/property/settlementPoliticsDormancyGolden.test.js",
+      "atLine": "passed (5 passed, 0 failed)",
+      "atTip": "passed (5 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "spatial-consequence-dormancy-golden",
+      "suite": "tests/property/spatialConsequenceDormancyGolden.test.js",
+      "atLine": "passed (5 passed, 0 failed)",
+      "atTip": "passed (5 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "spatial-digest-golden",
+      "suite": "tests/property/spatialDigestGolden.test.js",
+      "atLine": "passed (2 passed, 0 failed)",
+      "atTip": "passed (2 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "supply-web-warfare-dormancy-golden",
+      "suite": "tests/property/supplyWebWarfareDormancyGolden.test.js",
+      "atLine": "passed (6 passed, 0 failed)",
+      "atTip": "passed (6 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "teleport-edges-golden",
+      "suite": "tests/property/teleportEdgesGolden.test.js",
+      "atLine": "passed (4 passed, 0 failed)",
+      "atTip": "passed (4 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "timeline-track-golden",
+      "suite": "tests/property/timelineTrackGolden.test.js",
+      "atLine": "passed (2 passed, 0 failed)",
+      "atTip": "passed (2 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "town-cartography-dormancy-golden",
+      "suite": "tests/property/townCartographyDormancyGolden.test.js",
+      "atLine": "passed (7 passed, 0 failed)",
+      "atTip": "passed (7 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "town-map-golden",
+      "suite": "tests/property/townMapGolden.test.js",
+      "atLine": "passed (3 passed, 0 failed)",
+      "atTip": "passed (3 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "town-map-v2-golden",
+      "suite": "tests/property/townMapV2Golden.test.js",
+      "atLine": "passed (6 passed, 0 failed)",
+      "atTip": "passed (6 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "traditions-dormancy-golden",
+      "suite": "tests/property/traditionsDormancyGolden.test.js",
+      "atLine": "passed (7 passed, 0 failed)",
+      "atTip": "passed (7 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "upswing-dormancy-golden",
+      "suite": "tests/property/upswingDormancyGolden.test.js",
+      "atLine": "passed (6 passed, 0 failed)",
+      "atTip": "passed (6 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "urban-fabric-dormancy-golden",
+      "suite": "tests/property/urbanFabricDormancyGolden.test.js",
+      "atLine": "passed (5 passed, 0 failed)",
+      "atTip": "passed (5 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "worldpulse-golden-master",
+      "suite": "tests/property/worldpulseDeityGolden.test.js",
+      "atLine": "passed (5 passed, 0 failed)",
+      "atTip": "passed (5 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "worldpulse-seasons-golden",
+      "suite": "tests/property/worldpulseSeasonsGolden.test.js",
+      "atLine": "passed (4 passed, 0 failed)",
+      "atTip": "passed (4 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "worldpulse-spatial-golden",
+      "suite": "tests/property/worldpulseSpatialGolden.test.js",
+      "atLine": "passed (6 passed, 0 failed)",
+      "atTip": "passed (6 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "suite": "tests/property/dossierProseManifest.test.js",
+      "atLine": "failed (14 passed, 3 failed)",
+      "atTip": "failed (14 passed, 3 failed)",
+      "state": "MOVED (red at both; further by the lane)",
+      "action": "re-record",
+      "why": "RED AT BOTH ENDS, MOVED FURTHER BY THE LANE: the same three tests red at the line and at the tip (the line's own drift, carried); \"rows whose composed prose moved\" 1,038 at the line -> 1,050 at the tip (net 12 more; the rows themselves not compared one by one); the DRIFT corpus tally and the mixed-pool audience arm (178 vs 203) read the same at both. Its re-record is the merge seat's."
+    },
+    {
+      "surface": "preset-lighting-witness",
+      "suite": "tests/simulation/presetLightingWitness.test.js",
+      "atLine": "passed (7 passed, 0 failed)",
+      "atTip": "passed (7 passed, 0 failed)",
+      "state": "UNMOVED"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "suite": "tests/property/heraldKnowledgeDeskGolden.test.js",
+      "atLine": "passed (3 passed, 0 failed)",
+      "atTip": "passed (3 passed, 0 failed)",
+      "state": "UNMOVED"
+    }
+  ]
+}

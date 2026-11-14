@@ -1226,7 +1226,7 @@ describe('SEAM car 4 — poolMeta, the RENDER half, projected and never hand-edi
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6: present 341 -> 349.
     // MEASURED at this tip: exactly the RESOLVED / WIRING-UNRESOLVED split of the census. 341 / 368 -> 345 / 369
     // at W5 HIS construction (2026-11-07, ODQ §934.105): DS-GEN-16 gains LIVING-MEMORY and four LEGACY-* pools.
-    expect({ present, absent }).toEqual({ present: 488, absent: 368 }); // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): DS-GEN-11's zero pool, a read pool, leaves (489 -> 488). // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 343 -> 347 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 356 -> 361 (the five DS-DEF-12 pools each read) // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 361 -> 365 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 365 -> 398 (the thirty-three new pools each read) // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (341 -> 425; 368 -> 367) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (341 -> 433; 368 -> 367) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (341 -> 485; 368 -> 367) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (341 -> 489; 368 -> 368)
+    expect({ present, absent }).toEqual({ present: 492, absent: 364 }); // R3-TABS L1 (2026-11-13): the posture lens reads the badge through a key table (POSTURE_POOL_OF_BADGE), which the census resolves: the four DS-DEF-1 readiness pools are read (488 -> 492; 368 -> 364). // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): DS-GEN-11's zero pool, a read pool, leaves (489 -> 488). // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 343 -> 347 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 356 -> 361 (the five DS-DEF-12 pools each read) // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 361 -> 365 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 365 -> 398 (the thirty-three new pools each read) // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (341 -> 425; 368 -> 367) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (341 -> 433; 368 -> 367) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (341 -> 485; 368 -> 367) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (341 -> 489; 368 -> 368)
     expect(present).toBe(CENSUS.rows.filter((r) => r.reads.length > 0).length);
   });
 
@@ -1569,10 +1569,13 @@ describe('SEAM car 4 — the three leaves, at their floors', () => {
     expect(META_ROWS.length - keys.length).toBe(unfired);
   });
 
-  it('⛔ RELATIONS: 165 rows with a direction, three ratified aliases, and a join of ZERO', () => {
-    expect(Object.keys(DOSSIER_RELATIONS).length).toBe(165);
+  // 165 → 169 at THE JOIN (JOIN-2, 2026-11-14): the defence lane's fundedGate and upkeep relations on the economicGates rows of
+  // src/generators/defenseGenerator.js (coherence-upkeep 94c5d408f..83883baaa), re-projected by the generator at the joined tree
+  // (that lane never regenerated the leaf); measured, re-keyed by identity.
+  it('⛔ RELATIONS: 169 rows with a direction, three ratified aliases, and a join of ZERO', () => {
+    expect(Object.keys(DOSSIER_RELATIONS).length).toBe(169);
     const rows = Object.values(DOSSIER_RELATIONS).flat();
-    expect(rows.length).toBe(165);
+    expect(rows.length).toBe(169);
     const directions = new Set(rows.map((r) => r.direction));
     expect([...directions]).toEqual(['a→b']);
     expect([...new Set(rows.map((r) => r.relation))]).toEqual(['consequence']);
@@ -1600,7 +1603,9 @@ describe('SEAM car 4 — the three leaves, at their floors', () => {
     // Non-vacuity: the resolver CAN resolve — ten rows join on exactly one endpoint.
     const half = Object.keys(DOSSIER_RELATIONS)
       .filter((key) => key.split('|').some((endpoint) => resolves(endpoint))).length;
-    expect(half).toBe(10);
+    // 10 → 11 at THE JOIN (JOIN-2, 2026-11-14): the defence lane's re-keyed relations put two keys on the aliased endpoint
+    // economicGates.military (fundedGate| and upkeep|) where the line had one (econOutput|); measured at the joined tree.
+    expect(half).toBe(11);
     expect(deskRoots.size).toBeGreaterThanOrEqual(60);
   });
 
@@ -2235,7 +2240,7 @@ describe('SEAM car 4d — the seat licence, computed where the census is visible
     const lands = (endpoint) => readPaths.some((p) => endpointReads(endpoint, p, ALIAS_OF));
     const joining = CENSUS.relations.rows.filter((r) => lands(r.a) && lands(r.b));
     const oneSide = CENSUS.relations.rows.filter((r) => lands(r.a) !== lands(r.b));
-    expect(CENSUS.relations.rows).toHaveLength(165);
+    expect(CENSUS.relations.rows).toHaveLength(169); // 165 → 169 at the join: the defence lane's relations (above)
     expect(joining, 'no row joins on both endpoints').toEqual([]);
     // THE NON-VACUITY CONTROL: the walk is not simply blind — rows DO land on one side.
     expect(oneSide.length, 'rows landing on exactly one endpoint').toBeGreaterThan(0);

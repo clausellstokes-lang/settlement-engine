@@ -27,8 +27,9 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { foodStoresWords } from '../../src/domain/summary/tonightSheet.js';
 import { readFileSync } from 'node:fs';
 
-/** A stored-food figure: a span of time in store. */
-const STORES_FIGURE = /\b(?:\w+ months?|a month|a few weeks|weeks)\b[^.]{0,30}\b(?:of grain|in store|in the larder|household stores)\b/gi;
+/** A stored-food figure: a span of time in store. RE-KEYED (R2-CODE-B item 3): the span under a month is
+ *  said in days or weeks (tonightSheet.js :: storesSpanWords), so the figure reads those units too. */
+const STORES_FIGURE = /\b(?:\w+ months?|a month|a few weeks|weeks|\w+ weeks?|\w+ days?|a day)\b[^.]{0,30}\b(?:of grain|in store|in the larder|household stores)\b/gi;
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const seeds = (n) => TIERS.flatMap((tier) => Array.from({ length: n }, (_, i) => ({ tier, seed: `food-stores-${tier}-${i}` })));
 const gen = ({ tier, seed }) => generateSettlementPipeline({ settType: tier }, null, { seed, customContent: {} });

@@ -10,7 +10,9 @@
 import { registerStep } from '../pipeline.js';
 import { applyCascadeInstitutions } from '../cascadeGenerator.js';
 import { applySubsumption } from './subsumptionPass.js';
-import { collapseUpgradeChains, settlementDensity, shipFreeDesc } from './assembleInstitutions.js';
+import { collapseUpgradeChains, settlementDensity, settledStressTypes, shipFreeDesc } from './assembleInstitutions.js';
+import { drawInstitutionDesc } from './institutionDescDraw.js';
+import { birthFactsOf } from '../../domain/facts/factsOf.js';
 import { recordTrace } from '../../domain/trace.js';
 import {
   nativeSemanticName,
@@ -143,6 +145,22 @@ registerStep('cascadePass', {
         });
       }
     });
+  }
+
+  // W2-FIX-DATA-4 item 3 (REVIEW-W2-FIX-DATA F2; REVIEW-W2A-3 #502): A ROW THE CASCADE ADDS MEETS THE DECLARED DRAW.
+  // The cascade's rows kept their catalogue text and never met the description draw's resolution, so a line the
+  // record makes false printed as written: a customs house "via the port" in a road town with no docks, a river
+  // boatyard's "river craft" in a coastal port with no river. Each addition still on the roster is resolved here,
+  // at the step's end (after the airship override, which can add docks), through the same resolution the
+  // assembler's rows take (`institutionDescDraw.js`): over a pool of one text the hash pick is that text, a refused
+  // line takes its declared twin where the record admits it, else it stays. Draw-free: no rng is read.
+  if (cascadeAdditions.length > 0) {
+    let held = null;
+    const facts = () => (held ??= birthFactsOf({ institutions, config: { ...(ctx.config || {}), stressTypes: settledStressTypes(ctx.effectiveConfig || {}, ctx.config || {}) }, tier }, worldLaw));
+    for (const add of cascadeAdditions) {
+      if (!institutions.includes(add) || typeof add.desc !== 'string') continue;
+      add.desc = drawInstitutionDesc([add.desc], `${ctx._seed}:${add.name}`, facts, `${tier}|${add.category}|${add.name}`) ?? add.desc;
+    }
   }
 
   return {};

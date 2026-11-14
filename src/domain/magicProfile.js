@@ -36,6 +36,7 @@ import { nativeSemanticName } from './content/customContentSemanticAuthority.js'
 // mandate temper. deityAxes is a dependency-free leaf (no cycle; its bytes ride
 // the aiGrounding edge bundle, rebuilt with this change).
 import { deityTemper } from './worldPulse/deityAxes.js';
+import { keepOf, buysLessMagic } from './facts/keep.js';
 
 const MAGIC_LEVEL_VALUES = Object.freeze({
   // Canonical bands the GENERATOR emits (getMagicLevel: 0=none, <=25 low, <=65 medium, else high).
@@ -126,9 +127,24 @@ function deriveAvailability(settlement, contributors) {
       effect: 'arcane_present',
       reason: `${arcane.length} arcane institution(s) extend public availability.`,
     });
-    return upBand(AVAILABILITY_BANDS, tmpl.availability, 1);
+    return buyable(settlement, upBand(AVAILABILITY_BANDS, tmpl.availability, 1), contributors);
   }
-  return tmpl.availability;
+  return buyable(settlement, tmpl.availability, contributors);
+}
+
+/**
+ * COHERENCE-UPKEEP (the chair's ruling 5 of 2026-11-12): magic is bought, and a place that keeps
+ * too little to buy it (`buysLessMagic(keepOf(prosperity))`, the one home) finds it one band less
+ * available. A pervasive world does not move: there the magic is in the air, not on the shelf.
+ * @param {MagicSettlement} settlement @param {string} availability @param {MagicContributor[]} contributors
+ * @returns {string}
+ */
+function buyable(settlement, availability, contributors) {
+  if ((settlement.config?.magicLevel || 'low') === 'pervasive') return availability;
+  const prosperity = /** @type {{ economicState?: { prosperity?: unknown } }} */ (settlement).economicState?.prosperity;
+  if (!buysLessMagic(keepOf(prosperity))) return availability;
+  contributors.push({ source: 'economicState.prosperity', effect: 'short_of_coin', reason: 'Too poor to keep magic stocked: one step less available.' });
+  return downBand(AVAILABILITY_BANDS, availability, 1);
 }
 
 /**

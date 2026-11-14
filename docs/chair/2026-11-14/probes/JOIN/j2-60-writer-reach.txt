@@ -1,0 +1,62 @@
+[gate-tail] start:  09:46:17 up  1:21,  0 user,  load average: 0.71, 0.91, 1.43 · cores: 4
+WRWALKER HOLD — judged 12677 · LIT 682 · LIT-NAME 10576 · DARK 1419 (reviewable 390) · pending-surface debt: none
+  ✗ DARK and unregistered: criminalPreStress on compound — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: deployedQuality on osr006 — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: endsTick on osr007 — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: logisticsBurden on osr006 — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: osr008:npc_mill on npcs — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: proud on osr003:npc_power_landed_gentry — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: proud on osr004:npc_power_noble_families — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: proud on osr005:npc_power_noble_families — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: proud on osr007:npc_power_noble_families — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: ransoms on roads — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: recallTargetId on autoApplied — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: recallTargetId on metadata — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: recallTargetId on selected — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: reinforcementFlow on osr006 — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: returnCondition on osr006 — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: rivalTriumphBand on metadata — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: rivalTriumphBand on pulseHistory — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: rivalTriumphBand on warTerminationReads — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: sizingBias on osr006 — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: survivors on autoApplied — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: survivors on metadata — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: survivors on selected — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: warReturnedSettlementIds on pulseHistory — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: weakness on osr001:npc_power_landed_gentry — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: weakness on osr002:npc_power_landed_gentry — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: weakness on osr003:npc_power_landed_gentry — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: weakness on osr004:npc_power_noble_families — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: weakness on osr005:npc_power_noble_families — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: weakness on osr006:npc_power_noble_families — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: weakness on osr007:npc_power_noble_families — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: weakness on osr008:npc_mill — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: weakness on osr013:npc_power_landed_gentry — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: weakness on osr014:npc_power_landed_gentry — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: weakness on osr015:npc_power_landed_gentry — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ STALE bank member: authoritySignature on selected is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: authoritySignature on warRulingRead is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: booksDirection on selected is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: booksDirection on warRulingRead is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: booksReason on selected is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: booksReason on warRulingRead is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: causeState on selected is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: causeState on warRulingRead is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: lastTargetedBy on osr001:npc_merchant_guilds_3_8 is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: lastTargetedBy on osr013:npc_blacksmiths_3_10 is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: lastTargetedTick on osr001:npc_merchant_guilds_3_8 is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: lastTargetedTick on osr013:npc_blacksmiths_3_10 is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: momentumBroken on selected is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: momentumBroken on warRulingRead is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: proud on osr004:npc_mills_2_5 is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: proud on osr005:npc_vintner is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: proud on osr007:npc_theaters is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: rulerLawfulnessBand on selected is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: rulerLawfulnessBand on warRulingRead is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: rulerMoralityBand on selected is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: rulerMoralityBand on warRulingRead is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: warRulingRead on selected is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: weakness on osr004:npc_vintner is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: weakness on osr005:npc_mills_2_5 is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: weakness on osr006:npc_mills_2_5 is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+[gate-tail] end:  09:46:53 up  1:21,  0 user,  load average: 1.90, 1.18, 1.50

@@ -139,4 +139,83 @@ export function institutionDisplayName(instOrName) {
   return DISPLAY_BY_LOWER.get(raw.toLowerCase()) ?? raw;
 }
 
+/**
+ * THE CATALOGUE'S MACHINERY IN A NAME (R2-CODE-B item 1, the cold list REVIEW-W2A-3: "Merchant guilds
+ * (15-40) · member of Merchant Guilds", "Dream parlors (high magic) · member of Arcane Orders", "Craft
+ * guilds (5-15) · Bowyers & fletchers (guild)"). A trailing bracket that holds a COUNT RANGE (a
+ * digit-led "(15-40)", "(100-150+)", "(10,000+ only)") or the CONDITION the registry gates the row on
+ * ("(high magic)", "(if walled)") is how the catalogue sorts its rows, not a fact a reader is told.
+ * A bracket that describes the house ("(part-time)", "(guild)", "(district)") stays.
+ *
+ * ROUND THREE, ruling (a) (the chair, 2026-11-13; ROUND-3-CUT §7 (a)): the same strip covers the
+ * household ranges and floors ("(75-650 households)", "(3500+ households)": digit-led) and the
+ * display-name table's own ranges ("Houses of worship (10-30)", stripped after the table maps).
+ */
+const CATALOGUE_MACHINERY_BRACKET = /\s*\((?:\d[^)]*|high magic|if walled)\)\s*$/i;
+
+/**
+ * A COUNT WORD IS A PLURAL, NEVER A PARENTHESIS (ruling (a)): the catalogue's one count word,
+ * "Inn (multiple)", reads as the plain plural of its house. Keyed by the catalogue name; read only by
+ * the house label below, so `institutionDisplayName` (which generators read into stored sentences)
+ * and every record keep their bytes.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const HOUSE_LABEL_PLURALS = Object.freeze({
+  'Inn (multiple)': 'Inns',
+});
+const PLURAL_BY_LOWER = new Map(
+  Object.entries(HOUSE_LABEL_PLURALS).map(([key, label]) => [key.toLowerCase(), label]),
+);
+
+/**
+ * THE HOUSE'S LABEL: the one display leaf every surface reads when it prints a house (the roster, the
+ * Services, the Power and Crisis tabs, the Outlook, the NPC cards, the chain cards, the PDF and the
+ * Foundry journal): the seam's display label, without the catalogue's count range, household range or
+ * floor, population gate or gating condition, and with a count word carried by a plural. The in-world
+ * qualifiers stay as part of the name ("(part-time)", "(established)", "(open cast)", "(guild)",
+ * "(district)", "(resident)"). Display only: the catalogue's names, the record and every key keep the
+ * raw spelling (a MATCH reads the raw name, by this module's law). A custom house ('Stormwatch Keep')
+ * carries no such bracket and passes through unchanged.
+ * @param {unknown} instOrName an institution object, or its raw name
+ * @returns {string}
+ */
+export function institutionHouseLabel(instOrName) {
+  const label = institutionDisplayName(instOrName);
+  const plural = PLURAL_BY_LOWER.get(label.toLowerCase());
+  if (plural) return plural;
+  const bare = label.replace(CATALOGUE_MACHINERY_BRACKET, '').trim();
+  return bare || label;
+}
+
+/**
+ * A STORED SENTENCE THAT NAMES A HOUSE, read with the house's label (ruling (a); the Outlook's
+ * "5 institutions critically impaired by siege: Taverns (5-20), …", written at birth by
+ * generators/economy/viability.js and kept in the record). The record keeps its bytes (a saved world
+ * reads the same way); at read, every name of a house the settlement holds, in its raw or its
+ * display spelling, is replaced by the house's label wherever it stands whole in the sentence.
+ * Longest names first, so "Parish churches (2-5)" is read before any shorter name inside it. A name
+ * with no machinery in it is not touched. Pure: no draw, no write.
+ * @param {unknown} text the stored sentence
+ * @param {ReadonlyArray<unknown>} houses the settlement's institutions (objects or raw names)
+ * @returns {string}
+ */
+export function houseLabelsInText(text, houses) {
+  let out = typeof text === 'string' ? text : '';
+  if (!out) return out;
+  /** @type {Map<string, string>} */
+  const swaps = new Map();
+  for (const h of Array.isArray(houses) ? houses : []) {
+    const raw = typeof h === 'string' ? h : (h && typeof h === 'object' ? /** @type {{ name?: unknown }} */ (h).name : null);
+    if (typeof raw !== 'string' || !raw) continue;
+    const label = institutionHouseLabel(raw);
+    for (const spelled of [raw, institutionDisplayName(raw)]) {
+      if (spelled && spelled !== label && !swaps.has(spelled)) swaps.set(spelled, label);
+    }
+  }
+  for (const [spelled, label] of [...swaps].sort((a, b) => b[0].length - a[0].length)) {
+    if (out.includes(spelled)) out = out.split(spelled).join(label);
+  }
+  return out;
+}
+
 export default institutionDisplayName;

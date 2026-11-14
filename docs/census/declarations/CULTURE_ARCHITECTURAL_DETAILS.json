@@ -31,10 +31,12 @@
         {
           "lineId": "CULTURE_PROFILES.germanic.architecturalDetails[1]",
           "text": "steep roofs, enclosed craft yards, and carved lintels mark the older wards",
-          "needs": [],
+          "needs": [
+            "tier: ≥ town"
+          ],
           "excludes": [],
           "crisis": null,
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
@@ -67,7 +69,8 @@
           "lineId": "CULTURE_PROFILES.latin.architecturalDetails[0]",
           "text": "arcaded market fronts define the principal square",
           "needs": [
-            "market"
+            "market",
+            "tier: ≥ village"
           ],
           "excludes": [],
           "crisis": null,
@@ -77,19 +80,23 @@
         {
           "lineId": "CULTURE_PROFILES.latin.architecturalDetails[1]",
           "text": "warm tile roofs and enclosed courtyards break up the stone streets",
-          "needs": [],
+          "needs": [
+            "tier: ≥ town"
+          ],
           "excludes": [],
           "crisis": null,
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
           "lineId": "CULTURE_PROFILES.latin.architecturalDetails[2]",
           "text": "fountains, steps, and reused columns give the civic center a layered age",
-          "needs": [],
+          "needs": [
+            "tier: ≥ village"
+          ],
           "excludes": [],
           "crisis": null,
-          "colour": true,
+          "colour": false,
           "stop": []
         }
       ]
@@ -157,7 +164,8 @@
           "lineId": "CULTURE_PROFILES.arabic.architecturalDetails[0]",
           "text": "shaded arcades and latticed upper windows soften the market streets",
           "needs": [
-            "market"
+            "market",
+            "tier: ≥ village"
           ],
           "excludes": [],
           "crisis": null,
@@ -176,7 +184,10 @@
         {
           "lineId": "CULTURE_PROFILES.arabic.architecturalDetails[2]",
           "text": "caravan courts and covered lanes make movement through the merchant quarter deliberate",
-          "needs": [],
+          "needs": [
+            "market",
+            "tier: ≥ town"
+          ],
           "excludes": [],
           "crisis": null,
           "colour": false,
@@ -205,10 +216,12 @@
         {
           "lineId": "CULTURE_PROFILES.norse.architecturalDetails[0]",
           "text": "carved roof beams and long hall ridges dominate the older quarter",
-          "needs": [],
+          "needs": [
+            "tier: ≥ town"
+          ],
           "excludes": [],
           "crisis": null,
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
@@ -275,7 +288,8 @@
           "text": "palisade lines and river stairs reveal successive stages of expansion",
           "needs": [
             "palisade",
-            "river"
+            "river",
+            "tier: ≥ town"
           ],
           "excludes": [],
           "crisis": null,
@@ -311,16 +325,20 @@
         {
           "lineId": "CULTURE_PROFILES.east_asian.architecturalDetails[1]",
           "text": "ward gates, shop fronts, and planted courtyards divide public from household space",
-          "needs": [],
+          "needs": [
+            "tier: ≥ town"
+          ],
           "excludes": [],
           "crisis": null,
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
           "lineId": "CULTURE_PROFILES.east_asian.architecturalDetails[2]",
           "text": "the main street ends at the administrative precinct",
-          "needs": [],
+          "needs": [
+            "tier: ≥ town"
+          ],
           "excludes": [],
           "crisis": null,
           "colour": false,
@@ -346,7 +364,9 @@
         {
           "lineId": "CULTURE_PROFILES.mesoamerican.architecturalDetails[0]",
           "text": "a raised ceremonial precinct overlooks a broad and busy open plaza",
-          "needs": [],
+          "needs": [
+            "tier: ≥ town"
+          ],
           "excludes": [],
           "crisis": null,
           "colour": false,
@@ -364,7 +384,9 @@
         {
           "lineId": "CULTURE_PROFILES.mesoamerican.architecturalDetails[2]",
           "text": "causeways and managed water divide the settlement into organized neighborhoods",
-          "needs": [],
+          "needs": [
+            "tier: ≥ village"
+          ],
           "excludes": [],
           "crisis": null,
           "colour": false,
@@ -404,16 +426,21 @@
         {
           "lineId": "CULTURE_PROFILES.south_asian.architecturalDetails[1]",
           "text": "carved stone, plastered courtyards, and workshop lanes layer sacred and commercial space",
-          "needs": [],
+          "needs": [
+            "market",
+            "tier: ≥ village"
+          ],
           "excludes": [],
           "crisis": null,
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
           "lineId": "CULTURE_PROFILES.south_asian.architecturalDetails[2]",
           "text": "occupational quarters cluster around shared wells and water channels",
-          "needs": [],
+          "needs": [
+            "tier: ≥ town"
+          ],
           "excludes": [],
           "crisis": null,
           "colour": false,
@@ -486,7 +513,8 @@
           "lineId": "CULTURE_PROFILES.greek.architecturalDetails[0]",
           "text": "a colonnaded market edge frames the busiest civic ground",
           "needs": [
-            "market"
+            "market",
+            "tier: ≥ village"
           ],
           "excludes": [],
           "crisis": null,
@@ -495,21 +523,20 @@
         },
         {
           "lineId": "CULTURE_PROFILES.greek.architecturalDetails[1]",
-          "text": "whitewashed courts and stone stairs climb toward a fortified high precinct",
+          "text": "whitewashed courts and stone steps catch the light between the houses",
           "needs": [],
           "excludes": [],
           "crisis": null,
           "colour": false,
-          "stop": [
-            "fortified high precinct (an inner fortification, not the perimeter)"
-          ]
+          "stop": []
         },
         {
           "lineId": "CULTURE_PROFILES.greek.architecturalDetails[2]",
           "text": "workshops, shrines, and meeting halls crowd the approaches to the agora",
           "needs": [
             "market",
-            "institution: temple"
+            "institution: temple",
+            "tier: ≥ village"
           ],
           "excludes": [],
           "crisis": null,

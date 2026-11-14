@@ -75,19 +75,23 @@
         {
           "lineId": "ARRIVAL_PEOPLE.latin[0]",
           "text": "A patron moves through the crowd with clients at their heels, greeting people by name.",
-          "needs": [],
+          "needs": [
+            "tier: ≥ town"
+          ],
           "excludes": [],
           "crisis": "any",
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
           "lineId": "ARRIVAL_PEOPLE.latin[1]",
           "text": "A notary's clerk hurries past with a satchel of contracts.",
-          "needs": [],
+          "needs": [
+            "tier: ≥ town"
+          ],
           "excludes": [],
           "crisis": "any",
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
@@ -197,9 +201,11 @@
           "lineId": "ARRIVAL_PEOPLE.arabic[1]",
           "text": "Travellers are offered water before anyone asks their business.",
           "needs": [],
-          "excludes": [],
+          "excludes": [
+            "crisis: under_siege"
+          ],
           "crisis": null,
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
@@ -214,10 +220,12 @@
         {
           "lineId": "ARRIVAL_PEOPLE.arabic[3]",
           "text": "A merchant swears an oath on his scales, and the buyer watches the scales anyway.",
-          "needs": [],
+          "needs": [
+            "market"
+          ],
           "excludes": [],
           "crisis": null,
-          "colour": true,
+          "colour": false,
           "stop": []
         }
       ]
@@ -374,19 +382,23 @@
         {
           "lineId": "ARRIVAL_PEOPLE.east_asian[2]",
           "text": "Tea is poured for a merchant before the bargaining begins, and the bargaining waits for it.",
-          "needs": [],
+          "needs": [
+            "market"
+          ],
           "excludes": [],
           "crisis": null,
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
           "lineId": "ARRIVAL_PEOPLE.east_asian[3]",
           "text": "Each lane seems to keep to its own trade, and each trade to its own lane.",
-          "needs": [],
+          "needs": [
+            "tier: ≥ town"
+          ],
           "excludes": [],
           "crisis": null,
-          "colour": true,
+          "colour": false,
           "stop": []
         }
       ]
@@ -524,7 +536,7 @@
         },
         {
           "lineId": "ARRIVAL_PEOPLE.steppe[1]",
-          "text": "Felt tents stand beside the timber houses, and their owners seem at home in either.",
+          "text": "Felt tents stand beside the houses, and their owners seem at home in either.",
           "needs": [],
           "excludes": [],
           "crisis": "any",

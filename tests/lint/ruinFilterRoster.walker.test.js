@@ -106,7 +106,6 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   // LANDING-R2 seat E (2026-11-07): the two raw readers the pool census merged in, each classified
   // by reading its one roster read (neither aggregates providers):
   'src/domain/facts/factsOf.js': 'delegates — birthFactsOf (census-1c unit 2, fbba809db) only HANDS `partial.institutions` on to factsOf, whose institution facts are answered by facts/institutions.js :: hasInstitution → liveInstitutionNames → liveInstitutions (the ruin filter). The file reads no row itself and credits nothing.',
-  'src/domain/display/validationOnPage.js': 'name-lookup/display — resourceGapLines (reader-r1 unit 2, d3b9280f6) resolves the ONE house a generator gap row already names (`institutions.find(i => i?.name === name)`, falling back to `{ name }`) so the gap line can word that house. It credits no institution with capacity and sums nothing.',
   'src/domain/coherence/hookTruth.js': 'existence-gate — reads `defenseProfile.institutions` ONLY to know whether the record carries a defence roster at all (`defenseKnown`: an unknown roster licenses nothing). Every defence and hospital FACT comes from defenseFacts.js :: defenseFactsOf, which reads the live roster through liveInstitutions(). Lane WIRING-2 (2026-11-03, HOOKS request 6) moved the facts there; before it this file was COMPLIANT through its own isLiveInstitution hospital read.',
   'src/domain/traditions/politics.js': 'existence/candidate — tradition-owner candidate membership (deferred; owner glance)',
   // MF-UC0 (ODQ §311.1, §441, §445.2): the underground SHEET's existence gate reads the RAW
@@ -212,7 +211,10 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   // derives reports capacity, never sums it into a provider total.
   'src/domain/worldPulse/institutionStatusLifecycle.js': 'status-grader — grades operational/impaired/shell, so it MUST see the non-live rows liveInstitutions() drops (a shell IS _worldPulseInactive); carries its own isRuinedInstitution guard via institutionStatusModel.js, and credits no provider capacity',
   // ── display: renders the roster (showing a ruin is correct) ──────────────────────
-  'src/domain/display/defenseDisplay.js': 'display — defenseProfile.institutions force buckets, not the roster',
+  // ⭐ defenseDisplay.js's exempt row is DELETED (W2-C-LEAVES-SIDE, 2026-11-13, the chair's #575): its Legal
+  // Infrastructure row now reads the LIVE roster (`liveInstitutions`, a ruined courthouse tries no case), so this
+  // walker reads the file as compliant and asked for the row ("now routes through the ruin filter"). Its other reads
+  // of the defence buckets (`defenseProfile.institutions`) are unchanged and stay a display of what the town built.
   'src/domain/display/institutionProfile.js': 'display — defenseProfile.institutions buckets',
   // ⭐ threatAssessment.js's exempt row is DELETED (lane DEFENSE, 2026-11-03): its rows now ask
   // `domain/defense/defenseFacts.js :: defenseFactsOf`, which reads the LIVE roster through

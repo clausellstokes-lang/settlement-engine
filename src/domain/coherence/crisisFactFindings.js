@@ -14,7 +14,9 @@
  *                        (`migrationDirectionOf`). Per surface.
  *   crisis-cast-sense    the crisis cast contradicting itself, read from the one Tonight sheet
  *                        (`composeTonightSheet`) and the cast it reads:
- *                          want_not_role:<role>  a cast person's want is not drawn from that
+ *                          want_not_own:<role>   a cast person whose card carries a goal voiced with
+ *                                                another want (ROUND THREE: the card's goal is the one home);
+ *                          want_not_role:<role>  a cast person with no goal: the want is not drawn from that
  *                                                role's own pool (`CAST_WANTS`): the instigator
  *                                                wanting to identify the infiltrator (soak1k-1805),
  *                                                the split's instigator wanting no political
@@ -31,8 +33,12 @@
  * receipt runs never sees them, so no receipt moves. Pure: no clock, no seed, no draw.
  */
 
-import { composeTonightSheet, castWantOf } from '../summary/tonightSheet.js';
+import { composeTonightSheet, castWantOf, hasOwnGoal, DAYS_PER_MONTH } from '../summary/tonightSheet.js';
 import { governingFactionOf } from '../rulingPower.js';
+import { isSeatVacant } from '../people/seatKeeper.js';
+
+/** A want compared in one form: lower-cased, unclosed, spaces folded. @param {unknown} v @returns {string} */
+const bareWant = (v) => (typeof v === 'string' ? v : '').replace(/\s+/g, ' ').trim().replace(/[.!?]$/, '').toLowerCase();
 import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.js';
 import { migrationDirectionOf } from '../crisis/migrationDirection.js';
 import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
@@ -86,8 +92,13 @@ const stressesOf = (s) => {
 // ── famine-stores ────────────────────────────────────────────────────────────────────────
 
 const NUMBER_WORDS = Object.freeze(['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve']);
-/** The stores sentence `foodStoresWords` writes, in its granary forms. */
-const STORES_LINE = /Stores: a granary(?:,| of) (about a month|a few weeks|[a-z]+|\d+) months?\b[^.]*\./gi;
+/**
+ * The stores sentence `foodStoresWords` writes, in its granary forms: the span is read whole and
+ * turned back into months (`monthsOfSpan`), in every unit the writer prints (R2-CODE-B item 3:
+ * `tonightSheet.js :: storesSpanWords` speaks days and weeks under a month; "a few weeks" is the
+ * older form, still read for a page written before it).
+ */
+const STORES_LINE = /Stores: a granary(?:,| of) (a few weeks|(?:about |less than )?(?:a|[a-z]+|\d+)(?: and a half)? (?:months?|weeks?|days?)(?: and a half)?)\b[^.]*\./gi;
 /** The words that say the stores are held back, not in hand. */
 const HELD = /\bwill not open\b|\bwithh(?:eld|olds?)\b|\bhoard/i;
 /** The months a famine's stores line may print without saying they are held. */
@@ -96,13 +107,19 @@ export const FAMINE_STORES_HELD_MONTHS = 6;
 /** The months 'a few weeks' reads back as (ODQ §934.105). */
 const FEW_WEEKS_AS_MONTHS = 0.5;
 
-/** @param {string} w @returns {number} */
-function monthsOfWord(w) {
-  const lower = w.toLowerCase();
-  if (lower === 'about a month') return 1;
+/** The months one of each unit the stores line speaks in is worth (the writer's own days per month). */
+const UNIT_MONTHS = Object.freeze({ month: 1, week: 7 / DAYS_PER_MONTH, day: 1 / DAYS_PER_MONTH });
+
+/** @param {string} span the stores line's span ("six months", "about a month", "about three days") @returns {number} */
+function monthsOfSpan(span) {
+  const lower = span.toLowerCase();
   if (lower === 'a few weeks') return FEW_WEEKS_AS_MONTHS;
-  const at = NUMBER_WORDS.indexOf(lower);
-  return at >= 0 ? at : Number(lower);
+  // ROUND THREE: the half forms the writer says from a month up ("about a month and a half", "about two and a half months").
+  const m = lower.match(/^(?:about |less than )?(\S+)( and a half)? (month|week|day)s?( and a half)?$/);
+  if (!m) return NaN;
+  const at = NUMBER_WORDS.indexOf(m[1]);
+  const n = (m[1] === 'a' ? 1 : at >= 0 ? at : Number(m[1])) + (m[2] || m[4] ? 1 / 2 : 0);
+  return n * UNIT_MONTHS[/** @type {'month'|'week'|'day'} */ (m[3])];
 }
 
 /**
@@ -117,7 +134,7 @@ export function famineStoresFindings(settlement, text) {
   /** @type {CrisisFactFinding[]} */
   const out = [];
   for (const m of str(text).matchAll(STORES_LINE)) {
-    const months = monthsOfWord(m[1]);
+    const months = monthsOfSpan(m[1]);
     if (!(months >= FAMINE_STORES_HELD_MONTHS) || HELD.test(m[0])) continue;
     out.push({ quote: m[0], detail: `active famine; the line prints ${months} months in hand (record ${/** @type {{ storageMonths?: unknown }} */ (record).storageMonths})` });
   }
@@ -189,15 +206,23 @@ export function crisisCastSenseFindings(settlement, surfaces = {}) {
 
   if (entries.length) {
     const sheet = composeTonightSheet(settlement);
-    // want_not_role: every cast-voiced person's want, against its role's own pool.
+    // want_not_own / want_not_role: every cast-voiced person's want. ROUND THREE (the chair's ruling: one home for what
+    // a person wants, the card's own goal): a person whose card carries a goal wants that goal, never a role's line
+    // (want_not_own); a person with none wants their role's line, re-derived through the writer's own fill (the role,
+    // the person, the crisis, the person's house, the seat) and compared by EXACT equality (want_not_role, SW-6 #40).
+    // A secret or a temperament (`says`) is not a want and is not read here.
+    const seatEmpty = isSeatVacant(settlement);
     for (const p of sheet.people || []) {
-      if (p.why !== 'cast' || p.sameAs) continue;
+      if (p.why !== 'cast' || p.sameAs || (p.says && p.says !== 'want') || !str(p.line)) continue;
       const role = ROLE_OF_LABEL[str(p.castLabel)] || str(p.castLabel);
-      // SW-6 CRISIS-SURFACES (#40, the chair's grant 12:5x): the want is re-derived through the writer's own fill
-      // (the role, the person, the crisis, the person's house) and compared by EXACT equality, not pool membership.
       const npc = npcById(str(p.castId));
+      if (npc && hasOwnGoal(npc)) {
+        const goal = str(typeof npc.goal === 'object' && npc.goal ? (npc.goal.short || npc.goal.long) : npc.goal).replace(/^to\s+/i, '');
+        if (bareWant(p.line) !== bareWant(goal)) out.push({ surface: 'tonight', quote: `${p.name} (${p.castLabel}): ${p.line}`, detail: `want_not_own:${role}` });
+        continue;
+      }
       const house = str(firstRankMembershipOf(npc, powerOrderOf(settlement))?.power);
-      const want = castWantOf(role, str(p.castId), str(p.castKind), '', house);
+      const want = castWantOf(role, str(p.castId), str(p.castKind), '', house, { seatEmpty });
       if (!want || str(p.line) !== want) out.push({ surface: 'tonight', quote: `${p.name} (${p.castLabel}): ${p.line}`, detail: `want_not_role:${role}` });
     }
     // target_runs_plot: a crisis's target voiced with that crisis's own secret.

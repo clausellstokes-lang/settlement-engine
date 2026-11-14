@@ -23,13 +23,18 @@ import { entityIdFor } from '../../domain/dossier/entityLinks.js';
 import { customSupplyChainViewModel } from './customSupplyChains.js';
 import { stressArray, foodCore, avgScore } from './viewModelPrimitives.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
-import { resourceGapLines } from '../../domain/display/validationOnPage.js';
+import { resourceGapLines, exploitationGroupsShown, housesStillNeeded } from '../../domain/display/validationOnPage.js';
 import { crisisSummaryForSurface } from '../../domain/crisis/crisisSummaryVantage.js';
+import { deriveProsperityPosture } from '../../domain/display/dossierViewModel.js';
 
 // Pull the human resource name off an exploitation chain entry (engine stores
 // it as `rawResource`; tolerate a few legacy shapes + bare strings).
 export const exploitName = (c) =>
   typeof c === 'string' ? c : (c?.rawResource || c?.resource || c?.chainKey || c?.name || '');
+
+// UPKEEP-14 (the bar's carried HIGH, the chair's ruling (j)): a chain prints under the name its record holds, through the
+// leaf every print site of a chain's name reads; the import sits beside its one reader.
+import { chainPrintName } from '../../domain/display/chainPrintName.js';
 
 export function economicsSlice(active) {
   const s = active || {};
@@ -39,8 +44,10 @@ export function economicsSlice(active) {
   const sp = ec?.safetyProfile || {};
 
   // Economic flows / chains
-  const chains = (ec?.activeChains || []).map(c => ({
-    name: c?.name || c?.chainName || 'Chain',
+  // UPKEEP-14 (j): the name is the record's label as the page prints it (`chainPrintName`), never a stand-in; a chain
+  // with no name is not printed (the Foundry journal prints each row's name: "- **Chain**" named none of them).
+  const chains = (ec?.activeChains || []).filter((c) => chainPrintName(c, s).label).map(c => ({
+    name: String(chainPrintName(c, s).label),
     status: c?.status || 'productive',
     processingInstitutions: c?.processingInstitutions || c?.processing || [],
     outputs: c?.outputs || [],
@@ -60,6 +67,7 @@ export function economicsSlice(active) {
 
   return {
     prosperity:         ec.prosperity || null,
+    prosperityInCrisis: deriveProsperityPosture(s).inCrisis, // ruling 1(a): the label's ordinary-years sentence, or null
     economicComplexity: ec.economicComplexity || null,
     economyOutput:      ec.compound?.economyOutput ?? null,
     tradeAccess:        ec.tradeAccess || s?.config?.tradeRouteAccess || null,
@@ -286,13 +294,27 @@ export function resourcesSlice(active) {
   const exp = ra?.exploitation || {};
   const EXP_KEYS = { full: 'fullyExploited', partial: 'partiallyExploited', unexploited: 'unexploited' };
   const chainRows = [];
+  // P1 (W2-C-LEAVES-3; SHARED LINES of this file, the grade's own): the grade a row prints is the Resources tab's,
+  // read through ONE reader (validationOnPage.js :: exploitationCardShown): a card filed Unexploited that a chain
+  // works here is printed Partial, with no processing or output: the filed ones are the chain table's promise, not
+  // the record. The Foundry journal reads these rows too.
+  const shownOf = new Map();
+  for (const group of Object.values(exploitationGroupsShown(s))) for (const x of group) shownOf.set(x.card, x);
   for (const [which, engineKey] of Object.entries(EXP_KEYS)) {
     for (const item of (exp?.[engineKey] || exp?.[which] || [])) {
+      const shown = item && typeof item === 'object' ? shownOf.get(item) : null;
       if (typeof item === 'string') {
         if (item) chainRows.push({ resource: item, status: which, processing: null, output: null });
       } else if (item) {
         const resource = item?.rawResource || item?.resource || item?.chainKey || item?.name || '';
         if (!resource) continue;
+        // W2-C-LEAVES-8 (the observed-shape readers after the line's merge): each legacy key of the persisted entry is
+        // read once, for both rows below.
+        const quality = item?.quality || null, accessibility = item?.accessibility || null, houses = item?.processingInstitutions || [];
+        if (shown && shown.stage !== which) {
+          chainRows.push({ resource, status: shown.stage, processing: null, output: null, chainStatus: null, quality, accessibility });
+          continue;
+        }
         chainRows.push({
           resource,
           status: which,
@@ -301,13 +323,17 @@ export function resourcesSlice(active) {
           // the join happens in this line and the renderer can no longer tell one name from
           // the next. Same rule as `servicesSlice` above: a print goes through the seam, and
           // an unmapped name passes through as itself.
-          processing: institutionDisplayName(item?.processing) || institutionDisplayName(item?.institution) ||
-                      (item?.processingInstitutions || []).map((n) => institutionDisplayName(n) || n).join(', ') || null,
+          // W2-C-LEAVES-SIDE (the twin of #452; the processing column only): an Unexploited row names only the houses the
+          // live roster does not hold, by the reader the tab's "Needs:" line reads (validationOnPage.js :: housesStillNeeded).
+          processing: which === 'unexploited'
+            ? housesStillNeeded(s, houses).map((n) => institutionDisplayName(n) || n).join(', ') || null
+            : institutionDisplayName(item?.processing) || institutionDisplayName(item?.institution) ||
+                      houses.map((n) => institutionDisplayName(n) || n).join(', ') || null,
           output: item?.output || item?.product ||
                   (item?.finalProducts || item?.outputs || []).join(', ') || null,
           chainStatus: item?.chainStatus || null,
-          quality: item?.quality || null,
-          accessibility: item?.accessibility || null,
+          quality,
+          accessibility,
         });
       }
     }

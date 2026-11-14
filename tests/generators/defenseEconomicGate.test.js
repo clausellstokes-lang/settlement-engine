@@ -12,14 +12,32 @@
  *   • famine now also degrades MONSTER defense (starving militias patrol less);
  *   • magical defense respects the crime/economy-degraded magic influence
  *     (the previously dead magInfluence parameter).
+ *
+ * ⭐ RE-KEYED BY IDENTITY TO THE LABEL (COHERENCE-UPKEEP-4, the chair's ruling P1 of 2026-11-12).
+ * The upkeep gates read the prosperity LABEL now, through the one home (`keepOf`,
+ * `fundedGate`: COHERENCE-UPKEEP 07ebe8bdc, ruling 3, B), no longer the economy's output, and
+ * the pipeline hands the profile `keepOf(economicState.prosperity)`
+ * (`assembleSettlement.js`). So each fixture that drove a gate through `priorityEconomy` now
+ * carries the label its economy stands for, over the SAME buildings: Struggling where it was
+ * struggling or destitute, Prosperous where it was healthy, the ladder Struggling, Poor,
+ * Moderate, Comfortable where it climbed 10, 30, 50, 80. Each is profiled the way the pipeline
+ * profiles it (`profile`). Each pin keeps its claim; the output still feeds the economic
+ * score's capacity term, so each slider stays as it was.
  */
 
 import { describe, expect, test } from 'vitest';
-import { generateDefenseProfile } from '../../src/generators/defenseGenerator.js';
+import { generateDefenseProfile, defencePartsOf } from '../../src/generators/defenseGenerator.js';
 import { computeEffectiveMagicPresence } from '../../src/generators/priorityHelpers.js';
 import { buildThreatAssessment } from '../../src/domain/display/threatAssessment.js';
 import { deriveDefenseReadiness } from '../../src/domain/display/defenseDisplay.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { keepOf } from '../../src/domain/facts/keep.js';
+
+/** The profile as the pipeline makes it: what the place can keep up, from its label (`assembleSettlement.js`). @param {any} s */
+const profile = (s) => generateDefenseProfile(s, keepOf(s.economicState?.prosperity));
+// Re-keyed by identity at COHERENCE-UPKEEP-6 (the chair's ruling 2: the parts are NOT stored): the two pins that
+// read the parts read them from the one function that computes them from the record, at the same keep.
+const partsOf = (s) => defencePartsOf(s, keepOf(s.economicState?.prosperity));
 
 function town({
   priorityEconomy = 50,
@@ -31,6 +49,7 @@ function town({
   institutions,
   tradeRouteAccess = 'crossroads',
   terrainType = 'plains',
+  prosperity,
 } = {}) {
   return {
     name: 'Gatewatch',
@@ -55,6 +74,7 @@ function town({
       { name: 'Town Watch' },
     ],
     economicState: {
+      ...(prosperity ? { prosperity } : {}),
       foodSecurity: { storageMonths: 6.25, deficitPct: 0, surplusPct: 5, importDependency: 0.2, resilienceScore: 70 },
     },
   };
@@ -72,9 +92,12 @@ const FUNDED_DEFENSES = [
   { name: 'Market Square' },
 ];
 
+/** The economy's climb, each step with the label it stands for. @type {Array<[number, string]>} */
+const LADDER = [[10, 'Struggling'], [30, 'Poor'], [50, 'Moderate'], [80, 'Comfortable']];
+
 describe('economic survival respects the actual economy', () => {
   test('a struggling economy no longer earns the strong economic verdict off its buildings', () => {
-    const poor = generateDefenseProfile(town({ priorityEconomy: 15 }));
+    const poor = profile(town({ priorityEconomy: 15, prosperity: 'Struggling' }));
     expect(poor.scores.economic).toBeLessThanOrEqual(55);
     const assessment = buildThreatAssessment(poor);
     const economicLine = JSON.stringify(assessment);
@@ -89,16 +112,28 @@ describe('economic survival respects the actual economy', () => {
     );
   });
 
+  // ⭐ RE-KEYED BY IDENTITY (COHERENCE-UPKEEP-5, V3, one cause: limit 1, "what sustains a force counts for no
+  // more than the force"). This town's one force is a watch, so after the limit its supply score reads the
+  // watch, rich or poor alike (57 against 44). The claim is about what the economy PAYS for, so it is read
+  // where pay acts: the supply score of the SUSTAINS parts before the limit (their listed points × the
+  // number of scores), with the same margins (76 against 60).
   test('a healthy economy with identical buildings scores meaningfully higher', () => {
-    const poor = generateDefenseProfile(town({ priorityEconomy: 15 }));
-    const rich = generateDefenseProfile(town({ priorityEconomy: 80 }));
-    expect(rich.scores.economic).toBeGreaterThan(poor.scores.economic + 15);
-    expect(rich.scores.economic).toBeGreaterThanOrEqual(60);
+    /** @param {any} d */
+    const supplyBeforeTheLimit = (d) => Math.round(d.filter((x) => x.group === 'SUSTAINS').reduce((a, x) => a + x.points, 0) * 4);
+    // Re-keyed by identity (UPKEEP-CAPACITY C1, a house counts by its rung): the market this test was written for
+    // counts at today's points, so the town keeps a one-rung market house (the catalogue's Fish market) in the
+    // Market Square's stead; a market square is the least rung of its ladder and counts 0.8 of the market's weights.
+    const SAME_BUILDINGS = [{ name: 'Granary' }, { name: 'Grist Mill' }, { name: 'Fish market' }, { name: 'Town Watch' }];
+    const poor = partsOf(town({ priorityEconomy: 15, prosperity: 'Struggling', institutions: SAME_BUILDINGS }));
+    const rich = partsOf(town({ priorityEconomy: 80, prosperity: 'Prosperous', institutions: SAME_BUILDINGS }));
+    expect(poor.some((x) => x.id === 'sustainsHeld'), 'anchored: the limit binds this town').toBe(true);
+    expect(supplyBeforeTheLimit(rich)).toBeGreaterThan(supplyBeforeTheLimit(poor) + 15);
+    expect(supplyBeforeTheLimit(rich)).toBeGreaterThanOrEqual(60);
   });
 
   test('the gate scales monotonically with economy priority', () => {
-    const scores = [10, 30, 50, 80].map(priorityEconomy =>
-      generateDefenseProfile(town({ priorityEconomy })).scores.economic);
+    const scores = LADDER.map(([priorityEconomy, prosperity]) =>
+      profile(town({ priorityEconomy, prosperity })).scores.economic);
     for (let i = 1; i < scores.length; i++) {
       expect(scores[i]).toBeGreaterThanOrEqual(scores[i - 1]);
     }
@@ -124,25 +159,28 @@ describe('economic survival respects the actual economy', () => {
 });
 
 describe('famine degrades monster defense', () => {
+  // ⭐ RE-KEYED BY IDENTITY (COHERENCE-UPKEEP-5, V3, one cause: a crisis takes from the parts it touches). The
+  // default town's one force is a watch, which patrols no bandit road (no monster points), so a famine has
+  // no patrol to cut; the claim is about a town that patrols, so it is read on the funded apparatus.
   test('a starving town patrols its bandit roads less', () => {
-    const fed = generateDefenseProfile(town({}));
-    const starving = generateDefenseProfile(town({ stressTypes: ['famine'] }));
+    const fed = generateDefenseProfile(town({ institutions: FUNDED_DEFENSES }));
+    const starving = generateDefenseProfile(town({ stressTypes: ['famine'], institutions: FUNDED_DEFENSES }));
     expect(starving.scores.monster).toBeLessThan(fed.scores.monster);
   });
 });
 
 describe('garrison wages, watch pay, and patrol provisioning respect the economy', () => {
   test('a struggling economy fields weaker military / internal / monster coverage than a healthy one', () => {
-    const poor = generateDefenseProfile(town({ priorityEconomy: 10, institutions: FUNDED_DEFENSES }));
-    const rich = generateDefenseProfile(town({ priorityEconomy: 80, institutions: FUNDED_DEFENSES }));
+    const poor = profile(town({ priorityEconomy: 10, prosperity: 'Struggling', institutions: FUNDED_DEFENSES }));
+    const rich = profile(town({ priorityEconomy: 80, prosperity: 'Prosperous', institutions: FUNDED_DEFENSES }));
     expect(poor.scores.military).toBeLessThan(rich.scores.military);
     expect(poor.scores.internal).toBeLessThan(rich.scores.internal);
     expect(poor.scores.monster).toBeLessThan(rich.scores.monster);
   });
 
   test('every dimension scales monotonically with economy priority', () => {
-    const profiles = [10, 30, 50, 80].map(priorityEconomy =>
-      generateDefenseProfile(town({ priorityEconomy, institutions: FUNDED_DEFENSES })));
+    const profiles = LADDER.map(([priorityEconomy, prosperity]) =>
+      profile(town({ priorityEconomy, prosperity, institutions: FUNDED_DEFENSES })));
     for (const dim of ['military', 'internal', 'monster']) {
       for (let i = 1; i < profiles.length; i++) {
         expect(profiles[i].scores[dim]).toBeGreaterThanOrEqual(profiles[i - 1].scores[dim]);
@@ -151,8 +189,8 @@ describe('garrison wages, watch pay, and patrol provisioning respect the economy
   });
 
   test('the upkeep gates report their multipliers for attribution', () => {
-    const poor = generateDefenseProfile(town({ priorityEconomy: 10, institutions: FUNDED_DEFENSES }));
-    const rich = generateDefenseProfile(town({ priorityEconomy: 80, institutions: FUNDED_DEFENSES }));
+    const poor = profile(town({ priorityEconomy: 10, prosperity: 'Struggling', institutions: FUNDED_DEFENSES }));
+    const rich = profile(town({ priorityEconomy: 80, prosperity: 'Prosperous', institutions: FUNDED_DEFENSES }));
     expect(poor.economicGates.military).toBeLessThan(1);
     expect(poor.economicGates.internal).toBeLessThan(1);
     expect(poor.economicGates.monster).toBeLessThan(1);
@@ -162,8 +200,8 @@ describe('garrison wages, watch pay, and patrol provisioning respect the economy
   });
 
   test('gates floor, never zero: a destitute walled town keeps most of its defenses', () => {
-    const destitute = generateDefenseProfile(town({ priorityEconomy: 0, institutions: FUNDED_DEFENSES }));
-    const funded = generateDefenseProfile(town({ priorityEconomy: 80, institutions: FUNDED_DEFENSES }));
+    const destitute = profile(town({ priorityEconomy: 0, prosperity: 'Struggling', institutions: FUNDED_DEFENSES }));
+    const funded = profile(town({ priorityEconomy: 80, prosperity: 'Prosperous', institutions: FUNDED_DEFENSES }));
     // Floors are 0.6 (military) / 0.65 (internal) / 0.7 (monster); built walls
     // keep standing — scores degrade, they do not collapse.
     expect(destitute.scores.military).toBeGreaterThan(funded.scores.military * 0.4);
@@ -171,7 +209,7 @@ describe('garrison wages, watch pay, and patrol provisioning respect the economy
   });
 
   test("a destitute thorp's unpaid community defense is not gated away", () => {
-    const thorp = generateDefenseProfile({
+    const thorp = profile({
       name: 'Mudfoot', tier: 'thorp', population: 40,
       config: {
         tradeRouteAccess: 'isolated', monsterThreat: 'frontier', magicExists: false,
@@ -179,7 +217,7 @@ describe('garrison wages, watch pay, and patrol provisioning respect the economy
         priorityReligion: 20, priorityMagic: 0, stressTypes: [],
       },
       institutions: [{ name: 'Wayside shrine' }],
-      economicState: { foodSecurity: { storageMonths: 1.5, deficitPct: 0, surplusPct: 0, importDependency: 0 } },
+      economicState: { prosperity: 'Struggling', foodSecurity: { storageMonths: 1.5, deficitPct: 0, surplusPct: 0, importDependency: 0 } },
     });
     // Community self-policing and armed households are unpaid: the economy
     // gate must not strip a subsistence thorp of its baseline order.
@@ -190,7 +228,7 @@ describe('garrison wages, watch pay, and patrol provisioning respect the economy
     // A destitute hamlet with no paid defenses and no law infrastructure must
     // not report economicGates.military/internal — those gates never bit, so
     // attributing "garrison pay at 60%" to it would be a lie.
-    const hamlet = generateDefenseProfile({
+    const hamlet = profile({
       name: 'Dripwell', tier: 'hamlet', population: 180,
       config: {
         tradeRouteAccess: 'isolated', monsterThreat: 'frontier', magicExists: false,
@@ -198,7 +236,7 @@ describe('garrison wages, watch pay, and patrol provisioning respect the economy
         priorityReligion: 20, priorityMagic: 0, stressTypes: [],
       },
       institutions: [{ name: 'Wayside shrine' }],
-      economicState: { foodSecurity: { storageMonths: 1.5, deficitPct: 0, surplusPct: 0, importDependency: 0 } },
+      economicState: { prosperity: 'Struggling', foodSecurity: { storageMonths: 1.5, deficitPct: 0, surplusPct: 0, importDependency: 0 } },
     });
     expect(hamlet.economicGates.military).toBeUndefined();
     expect(hamlet.economicGates.internal).toBeUndefined();
@@ -208,7 +246,7 @@ describe('garrison wages, watch pay, and patrol provisioning respect the economy
   });
 
   test('the monster gate exempts the unpaid communal baseline and volunteer traditions', () => {
-    const mk = (priorityEconomy, institutions) => generateDefenseProfile({
+    const mk = (priorityEconomy, institutions) => profile({
       name: 'Thornhollow', tier: 'village', population: 600,
       config: {
         tradeRouteAccess: 'road', monsterThreat: 'frontier', magicExists: true,
@@ -216,7 +254,7 @@ describe('garrison wages, watch pay, and patrol provisioning respect the economy
         priorityReligion: 20, priorityMagic: 30, stressTypes: [],
       },
       institutions,
-      economicState: { foodSecurity: { storageMonths: 2, deficitPct: 0, surplusPct: 0, importDependency: 0 } },
+      economicState: { prosperity: priorityEconomy < 50 ? 'Struggling' : 'Prosperous', foodSecurity: { storageMonths: 2, deficitPct: 0, surplusPct: 0, importDependency: 0 } },
     });
     // Frontier baseline (+4) and druidic wardens (+12) are unpaid — a poor
     // village with no paid monster coverage keeps exactly what a rich one
@@ -232,22 +270,22 @@ describe('garrison wages, watch pay, and patrol provisioning respect the economy
 describe('the gates have a consumer: readiness rows carry funding notes', () => {
   const withProfile = (opts) => {
     const settlement = town(opts);
-    return { ...settlement, defenseProfile: generateDefenseProfile(settlement) };
+    return { ...settlement, defenseProfile: profile(settlement) };
   };
 
   test('an underfunded gate annotates its row; fully funded rows stay silent', () => {
-    const poorRows = deriveDefenseReadiness(withProfile({ priorityEconomy: 10, institutions: FUNDED_DEFENSES }));
+    const poorRows = deriveDefenseReadiness(withProfile({ priorityEconomy: 10, prosperity: 'Struggling', institutions: FUNDED_DEFENSES }));
     expect(poorRows.find(r => r.label === 'Invasion & War').fundingNote).toMatch(/defence upkeep for .+ at \d+%/);
     expect(poorRows.find(r => r.label === 'Internal Security').fundingNote).toMatch(/watch and court funding at \d+%/);
-    const richRows = deriveDefenseReadiness(withProfile({ priorityEconomy: 80, institutions: FUNDED_DEFENSES }));
+    const richRows = deriveDefenseReadiness(withProfile({ priorityEconomy: 80, prosperity: 'Prosperous', institutions: FUNDED_DEFENSES }));
     expect(richRows.every(r => r.fundingNote === null)).toBe(true);
   });
 });
 
 describe('disaster & famine readiness is gated by economic capacity', () => {
   test('relief costs money: a poor town absorbs disasters worse than a rich one with the same granary', () => {
-    const poor = generateDefenseProfile(town({ priorityEconomy: 10 }));
-    const rich = generateDefenseProfile(town({ priorityEconomy: 80 }));
+    const poor = profile(town({ priorityEconomy: 10, prosperity: 'Struggling' }));
+    const rich = profile(town({ priorityEconomy: 80, prosperity: 'Prosperous' }));
     expect(poor.scores.disaster).toBeLessThan(rich.scores.disaster);
     // Identity at healthy economies: the rich town's disaster score IS its
     // food-resilience score, untouched.
@@ -269,14 +307,16 @@ describe('magical defense respects degraded magic influence', () => {
     { name: 'Arcane Academy' },
   ];
 
+  // ⭐ RE-KEYED BY IDENTITY (COHERENCE-UPKEEP-5, R5 and count once): magic keeps 0.45 + 0.55 × funded from the
+  // ONE label, and crime counts once, in Crime. The destitute city is the one whose label is Struggling.
   test('a crime-ridden destitute city fields weaker arcane defenses than a healthy one', () => {
-    const healthy = generateDefenseProfile(town({
+    const healthy = profile(town({
       magicExists: true, priorityMagic: 70, priorityEconomy: 70, priorityCriminal: 10,
-      institutions: arcaneInstitutions,
+      institutions: arcaneInstitutions, prosperity: 'Prosperous',
     }));
-    const rotten = generateDefenseProfile(town({
+    const rotten = profile(town({
       magicExists: true, priorityMagic: 70, priorityEconomy: 10, priorityCriminal: 85,
-      institutions: arcaneInstitutions,
+      institutions: arcaneInstitutions, prosperity: 'Struggling',
     }));
     expect(healthy.scores.magical).toBeGreaterThan(0);
     expect(rotten.scores.magical).toBeLessThan(healthy.scores.magical);
@@ -288,12 +328,19 @@ describe('magical defense respects degraded magic influence', () => {
     // (presence score is well below the raw slider) shaved ~30% off healthy
     // settlements and double-counted weak presence.
     const cfg = { magicExists: true, priorityMagic: 70, priorityEconomy: 70, priorityCriminal: 10 };
-    const healthy = generateDefenseProfile(town({ ...cfg, institutions: arcaneInstitutions }));
+    const healthyTown = town({ ...cfg, institutions: arcaneInstitutions });
+    // ⭐ RE-KEYED BY IDENTITY, BACK (COHERENCE-UPKEEP-7, the chair's ruling W1: reading A withdrawn): the presence
+    // reads the WHOLE roster again, the Mages' Guild included; the magic presence is the whole of the Magical
+    // Capability score, and the guild feeds that score through no second part.
     const presence = computeEffectiveMagicPresence(arcaneInstitutions, {
       magicExists: true, priorityMagic: 70, nearbyResources: [],
     });
-    // Ungated baseline: presence score + the arcane-guild profile bonus (+8).
-    expect(healthy.scores.magical).toBe(Math.min(100, presence.score + 8));
+    // ⭐ RE-KEYED BY IDENTITY (COHERENCE-UPKEEP-5, V3): the magic PART keeps all of itself at full funding (the
+    // identity), and it is the presence alone: the guild stands as its own part, never added again (count
+    // once, so no +8). The score is then held by limit 1 (this town fields no force), a separate rule.
+    const magic = defencePartsOf(healthyTown, keepOf(undefined)).find((x) => x.id === 'magic');
+    expect(magic.full).toBe(Math.round((presence.score / 5) * 10) / 10);
+    expect(magic.points).toBe(magic.full);
   });
 });
 

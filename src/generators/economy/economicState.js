@@ -9,7 +9,7 @@ import { generateSafetyProfile } from '../safetyProfile.js';
 import { TRADE_DEPENDENCY_NEEDS } from '../../data/goods/chains.js';
 import { computeActiveChains, deriveExportsFromChains, deriveImportsFromChains, deriveLocalProductionFromChains, deriveInstitutionalServices, deriveServiceExports } from '../computeActiveChains.js';
 import { generateTradeIncomeStreams } from './tradeGoods.js';
-import { computeBaseProsperity, deriveEconomicComplexity, deriveProsperityLabel, deriveEconomicSituationDesc } from './prosperity.js';
+import { computeBaseProsperity, deriveEconomicComplexity, deriveProsperityLabels, standingBaseProsperity, deriveEconomicSituationDesc } from './prosperity.js';
 import { nativeSemanticName } from '../../domain/content/customContentSemanticAuthority.js';
 import { resolveNativeEconomicInputs } from './nativeEconomicInputs.js';
 import { applyFinishedGoodsDemandWithOwnership, applySubsistenceTradeBoundary,
@@ -24,7 +24,7 @@ import { hasLocalAgriculturalSupply } from './localSupplyEvidence.js';
 import { generateFoodSecurity } from '../foodGenerator.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, the file sits at its line cap
 import { goodsHeldByFoodRecord } from './foodBalance.js';
 import { liveMaterialFor } from './localMaterials.js'; import { hasMarketInstitution } from '../../domain/facts/market.js';
-import { GRAIN_OWN_FIELDS_LINE, GRAIN_SURPLUS_LINE, LOCAL_COAL_LINE, LOCAL_COAL_SOLD_LINE, FORGE_HOUSE_WORDS } from './incomeLineSiblings.js'; import { offersFoodSurplus } from '../../domain/foodSurplus.js';
+import { GRAIN_OWN_FIELDS_LINE, GRAIN_SURPLUS_LINE, LOCAL_COAL_LINE, LOCAL_COAL_SOLD_LINE, FORGE_HOUSE_WORDS, ALCHEMY_TRADE_LINE, ALCHEMIST_SUPPLEMENTS_LINE, GRAIN_BOUGHT_LINE, WOOL_LOCAL_LINE, WOOL_BOUGHT_LINE, LOCAL_ORE_LINE, IRON_IMPORTED_LINE, FISH_EXPORT_LINE, QUARRY_LINE, MASONS_LINE, TIMBER_LINE, TIMBER_BOUGHT_LINE, trueIncomeDesc, houseOfWorkLine } from './incomeLineSiblings.js'; import { offersFoodSurplus } from '../../domain/foodSurplus.js';
 
 
 export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggles = {}, config = {}) => {
@@ -280,8 +280,8 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         percentage: pct,
         desc:
           magPri < 35
-            ? 'Herbal remedies, minor alchemical preparations, and potion sales. The local alchemist supplements conventional trade.'
-            : 'A thriving alchemical trade in reagents, preparations, and curative potions draws customers from surrounding settlements.',
+            ? ALCHEMIST_SUPPLEMENTS_LINE // UPKEEP-8: the originals print by their declared constants (incomeLineSiblings.js)
+            : ALCHEMY_TRADE_LINE,
       });
     }
 
@@ -308,7 +308,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         percentage: pct,
         desc: ecoStressFlags.magicFillsVoid
           ? 'Magic has absorbed functions normally provided by conventional trade, government, and religion. Arcane licences, guild dues, and service fees constitute the primary revenue base.'
-          : "Enchanting contracts, magical research commissions, and the licensing of spellcasting practitioners. The mages' guild contributes meaningfully to civic revenue.",
+          : arcaneIndustryLineOf(hasInst), // UPKEEP-12 (#115): the guild's sentence only where a guild or an academy stands
       });
       // Bonus: enchanting multiplier boosts metalwork/crafts income when present
       // (represented as a cross-chain enhancement note in the existing income entries)
@@ -417,7 +417,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         percentage: Math.max(6, Math.round(ecoInstFlags.economyOutput / 9)),
         desc: hasNearbyResource('grain_field', 'fertile_flood') // the surplus words read the food record below (F7)
           ? GRAIN_SURPLUS_LINE
-          : 'Grain purchased from farming regions and resold or processed locally; margin depends on stable supply routes.',
+          : GRAIN_BOUGHT_LINE,
       });
     }
     if (
@@ -435,8 +435,8 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         source: 'Wool & Textile Trade',
         percentage: Math.max(8, Math.round(ecoInstFlags.economyOutput / 7)),
         desc: hasNearbyResource('grazing_land')
-          ? 'Local flocks provide raw wool; weavers and fullers convert it to cloth sold across the region.'
-          : 'Wool bought from pastoral regions and processed locally: value-add trade dependent on consistent supply.',
+          ? WOOL_LOCAL_LINE
+          : WOOL_BOUGHT_LINE,
       });
     }
     if (
@@ -457,10 +457,10 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         // COHERENCE-AGREE: "local ore" only where the town has ore; coal fires the forges and is not ore. The smith's
         // ore is iron, the material table's one answer (COHERENCE-AGREE-3, F3): gold or silver alone buys its iron in.
         desc: liveMaterialFor('metals', nearbyResources)
-          ? 'Local ore feeds the smithy directly. Metalwork income is not trade-route dependent.'
+          ? LOCAL_ORE_LINE
           : hasNearbyResource('coal_deposit')
             ? (FORGE_HOUSE_WORDS.some((w) => hasInstNamed(w)) ? LOCAL_COAL_LINE : LOCAL_COAL_SOLD_LINE) // declared in incomeLineSiblings.js (F13; COHERENCE-AGREE-8 T3: the twin where no forge house stands)
-            : 'Iron imported from mining regions and worked locally; this income stream is vulnerable to supply disruption.',
+            : IRON_IMPORTED_LINE,
       });
     }
     // Timber income. Old needles 'forest_access'/'timber_rights' matched no
@@ -476,8 +476,8 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         source: 'Timber Trade',
         percentage: Math.max(7, Math.round(ecoInstFlags.economyOutput / 8)),
         desc: (hasNearbyResource('managed_forest', 'shipbuilding_timber') || ['sawmill', 'lumber', 'timber', 'carpent', 'wood', 'forest'].some((w) => hasInstNamed(w))) // COHERENCE-AGREE-8 (T2): a managed or shipbuilding forest, or a wild stand a wood house works
-          ? 'Local forest provides sustainable timber revenue; managed felling and sawmilling keep production consistent.'
-          : 'Timber sourced from more distant forests and resold or processed locally: trade route dependent.',
+          ? TIMBER_LINE
+          : TIMBER_BOUGHT_LINE,
       });
     }
     if (
@@ -496,7 +496,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           ? 'Fish & Maritime Produce'
           : 'Fish & Preserved Produce',
         percentage: Math.max(8, Math.round(ecoInstFlags.economyOutput / 8)),
-        desc: 'Catch landed and sold fresh or preserved; salt fish are a major regional export commodity.',
+        desc: FISH_EXPORT_LINE,
       });
     }
     if (
@@ -513,8 +513,8 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         source: 'Stone Quarrying',
         percentage: Math.max(6, Math.round(ecoInstFlags.economyOutput / 10)),
         desc: hasNearbyResource('stone_quarry') // COHERENCE-AGREE: a gem deposit is not a quarry of dressed stone
-          ? 'Local quarry provides dressed stone to regional builders: reliable income with low transport overhead.'
-          : 'Stone masons work imported material; the quarrying income notation reflects processing margin only.',
+          ? QUARRY_LINE
+          : MASONS_LINE,
       });
     }
     // Custom goods the caller has force-toggled on — one income line each.
@@ -539,7 +539,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         }
       });
     }
-  } // ── Stage 3: Income normalization ───────────────────────────────────────────
+  } { const work = houseOfWorkLine(tier, incomeBuild, instNamesLower, (config.stressTypes || []).includes('under_siege')); if (work) incomeBuild.push(work); } // #93 (UPKEEP-8): a small place's house of work earns too. ── Stage 3: Income normalization ──
   const incomeMultiplier = priorityToMultiplier(ecoInstFlags.economyOutput);
   const incomeWeighted = incomeBuild.map((entry) => ({ ...entry, weight: entry.percentage * incomeMultiplier }));
   const incomeTotalWeight = incomeWeighted.reduce((sum, entry) => sum + entry.weight, 0) || 1;
@@ -820,6 +820,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   // localeCompare) — this list is persisted in the settlement, so the tiebreak
   // must resolve identically across devices/locales — must be LAST
   incomeNormalized.sort((a, b) => b.percentage - a.percentage || compareCodepoint(a.source, b.source));
+  for (const entry of incomeNormalized) entry.desc = trueIncomeDesc(entry.desc, { roster: instNamesLower, besieged: stressArr.includes('under_siege'), imports: primaryImports, exports: primaryExports, chains: activeChainsList, top: entry === incomeNormalized[0], source: entry.source, managedForest: hasResource(['managed_forest', 'shipbuilding_timber']), grainFailed: _foodRecord?.failedSource === 'grain' }); // UPKEEP-8: each income line says only what the finished record holds
   const { label: baseProsperity } = computeBaseProsperity(
     tier,
     tradeRoute,
@@ -829,16 +830,26 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     incomeNormalized,
     _foodSec,
   );
-  const prosperityLabel = deriveProsperityLabel(baseProsperity, config, institutions); // drawn first, as before
+  const { prosperity, prosperityStanding } = deriveProsperityLabels(baseProsperity, standingBaseProsperity(tier, tradeRoute, institutions, config, instNames, incomeNormalized), config, institutions); // COHERENCE-UPKEEP-5 (R3): beside the printed label, the label with no crisis in force, the one draw replayed
+  // COHERENCE-UPKEEP (ruling 7): the guard assessment says what the place can pay for its hired force. Since
+  // COHERENCE-UPKEEP-6 (the chair's ruling A) that is written AFTER the defence profile, which it reads
+  // (steps/assembleSettlement.js, beside generateDefenseProfile): one home for pay on every surface.
+  // COHERENCE-UPKEEP (ruling 6): the stores are laid by at the label's share, at the stores' writer,
+  // AFTER prosperity (which read the full-granary record above and reads no months). The writer's
+  // only draw is a label-keyed fork, so this second call draws the same crop fortune and moves no
+  // stream; every storage field (the months, the note, the resilience) follows the kept months.
+  const _keptFoodSec = generateFoodSecurity(
+    tier, institutions, { ...config, tradeRouteAccess: tradeRoute }, boughtShare('stores', keepOf(prosperityStanding)), // R3: laid by at the standing label's share
+  );
   return {
       tier: tier,
-      prosperity: prosperityLabel,
+      prosperity, prosperityStanding, // R3: the standing label sits beside the printed one
       situationDesc: deriveEconomicSituationDesc(
         config,
         tier,
         institutions,
-        _foodSec,
-        prosperityLabel, // COHERENCE-AGREE-3 (F11): the trade line reads the label printed beside it
+        _keptFoodSec,
+        prosperity, // COHERENCE-AGREE-3 (F11): the trade line reads the label printed beside it
       ),
       incomeSources: incomeNormalized,
       primaryExports: primaryExports,
@@ -855,7 +866,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       tradeDependencies: tradeDependencies,
       institutionalServices: instServices,
       activeChains: activeChains,
-      foodSecurity: _foodSec,
+      foodSecurity: _keptFoodSec,
       economicComplexity: deriveEconomicComplexity(
         tier,
         incomeNormalized.length,
@@ -867,4 +878,15 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
 };
 import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js'; import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js'; // at the END on purpose: this file's writes are cited by LINE; the Gate Tolls line speaks the tier noun (lane TIER-NOUN-POOLS, tests/generators/tierNounPoolDraws.test.js)
 import { buildPrimaryTradeLists, sayHowLittleGrain } from './primaryTradeLists.js'; // at the END for the same reason: the pre-chain trade lists, extracted for the cohesion ceiling (LANDING-3)
+import { keepOf, boughtShare } from '../../domain/facts/keep.js';
 import { goodsOnlyRefusedChainsMake } from '../../domain/chainYield.js'; // at the END for the same reason: COHERENCE-AGREE-6 (F2), the export bonus asks the one predicate
+
+// UPKEEP-12 (#115, the chair's step 3): an income line that names a house reads the roster. The Arcane Industry gate
+// admits a wizard's tower alone; the line's second sentence (the guild's) prints only where a mages' guild or an academy
+// stands, and a tower alone prints the first sentence of the same line. At the END of the file so no cited line moves.
+const ARCANE_INDUSTRY_LINE = "Enchanting contracts, magical research commissions, and the licensing of spellcasting practitioners. The mages' guild contributes meaningfully to civic revenue.";
+/** @param {(...names: string[]) => boolean} hasInst the roster's own name test @returns {string} */
+function arcaneIndustryLineOf(hasInst) {
+  return hasInst("mages' guild", "mages' district", 'arcane academy', 'academy of magic', 'magical academy')
+    ? ARCANE_INDUSTRY_LINE : ARCANE_INDUSTRY_LINE.slice(0, ARCANE_INDUSTRY_LINE.indexOf('.') + 1);
+}

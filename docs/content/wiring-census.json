@@ -4,8 +4,8 @@
     "files": {
       "src/domain/display/stateProse/generalStateProse.js": "42dae5a46fae776296e499465519fec29b3322ec12f7b7d3fcb49c68aed79ef9",
       "src/domain/display/stateProse/powerStateProse.js": "37ca798950bfde97c2e406ae72bab3856dcb97c22d6595b6ad12744d18568a2e",
-      "src/domain/display/stateProse/economyStateProse.js": "1f730c5bac18dd1491b979cd16cded450c80ad9f832e5dc8bdda85cc89ad65c9",
-      "src/domain/display/stateProse/defenseStateProse.js": "63b984f0669f9c3b58f7f0141c3393a8343f338efa3a7c769fc8e40d88d21818",
+      "src/domain/display/stateProse/economyStateProse.js": "3480fa792f166d77aa7de7129bf1fe404d1b2e1e86823d9923b119134c118fb2",
+      "src/domain/display/stateProse/defenseStateProse.js": "f7bc0f32583fe824d1f7ad456e5c79faf9f33e39579ad74f6d30ead494b4d376",
       "src/domain/display/stateProse/stressorsStateProse.js": "e35010d5433bd9cdbde3f6b67c82302bef32d95f51f5b25cb58b0bb1a063d212",
       "src/domain/display/stateProse/warFaithStateProse.js": "cd457c6496e5d84828e782f46c8a242c395c3636d62b0096469d14c3a1e1e3df",
       "src/domain/display/stateProse/dossierMounts.js": "5032fe8e0b7d67567a054af136f13a8a54b7d7aa267b1cf4ba3fce629eb750b7"
@@ -18,23 +18,23 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1345
+    "producerIndexFiles": 1359
   },
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2950,
-    "resolved": 488,
-    "unresolved": 368,
-    "resolvedWithPredicate": 317,
-    "resolvedWithCleanPredicate": 317,
+    "variants": 2948,
+    "resolved": 492,
+    "unresolved": 364,
+    "resolvedWithPredicate": 321,
+    "resolvedWithCleanPredicate": 321,
     "keyFunctions": 151,
     "keyFunctionsConsulted": 151,
-    "keyTables": 39,
+    "keyTables": 40,
     "slotless": 69,
     "bagless": 129,
     "predicatesOverUnreadFields": 108,
-    "syntheticTableFields": 174,
+    "syntheticTableFields": 178,
     "tiers": {
       "MISSING": 33,
       "THIN": 611,
@@ -55,15 +55,15 @@
       "method-call": 18
     },
     "zeroK": 85,
-    "kExecutable": 488,
-    "kNotExecutable": 368,
-    "branchGrainRows": 455,
-    "functionGrainRows": 401,
+    "kExecutable": 492,
+    "kNotExecutable": 364,
+    "branchGrainRows": 459,
+    "functionGrainRows": 397,
     "customReachableRows": 28,
-    "relationRows": 165,
+    "relationRows": 169,
     "relationRowsJoinable": 0,
     "ratifiedAliases": 3,
-    "tableRungRowsWithoutAbsence": 174,
+    "tableRungRowsWithoutAbsence": 178,
     "modifierEligibleFactsByTab": [
       [
         "economics",
@@ -140,15 +140,27 @@
       "hasBag": true,
       "variants": 8,
       "grammars": 2,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "readinessBandOf(readinessScore).label (via POSTURE_POOL_OF_BADGE in defenseStateProse.js)",
+          "op": "===",
+          "value": "Fortress"
+        }
+      ],
+      "branchReads": [
+        "readinessBandOf(readinessScore).label (via POSTURE_POOL_OF_BADGE in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "readinessBandOf(readinessScore).label (via POSTURE_POOL_OF_BADGE in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "POSTURE_POOL_OF_BADGE",
+      "rung": "table",
+      "reads": [
+        "readinessBandOf(readinessScore).label (via POSTURE_POOL_OF_BADGE in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -158,13 +170,16 @@
         "defense.postureHeader"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 2487,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "readinessScore": "",
+          "label": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -197,15 +212,27 @@
       "hasBag": true,
       "variants": 4,
       "grammars": 1,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "readinessBandOf(readinessScore).label (via POSTURE_POOL_OF_BADGE in defenseStateProse.js)",
+          "op": "===",
+          "value": "Defensible"
+        }
+      ],
+      "branchReads": [
+        "readinessBandOf(readinessScore).label (via POSTURE_POOL_OF_BADGE in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "readinessBandOf(readinessScore).label (via POSTURE_POOL_OF_BADGE in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "POSTURE_POOL_OF_BADGE",
+      "rung": "table",
+      "reads": [
+        "readinessBandOf(readinessScore).label (via POSTURE_POOL_OF_BADGE in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -215,22 +242,23 @@
         "defense.postureHeader"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 2578,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "readinessScore": "",
+          "label": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {
-        "no crisis: occupied": 4
-      },
+      "lineDeclares": {},
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -247,15 +275,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 1,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "readinessBandOf(readinessScore).label (via POSTURE_POOL_OF_BADGE in defenseStateProse.js)",
+          "op": "===",
+          "value": "Lightly Defended"
+        }
+      ],
+      "branchReads": [
+        "readinessBandOf(readinessScore).label (via POSTURE_POOL_OF_BADGE in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "readinessBandOf(readinessScore).label (via POSTURE_POOL_OF_BADGE in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "POSTURE_POOL_OF_BADGE",
+      "rung": "table",
+      "reads": [
+        "readinessBandOf(readinessScore).label (via POSTURE_POOL_OF_BADGE in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -265,13 +305,16 @@
         "defense.postureHeader"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 3099,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "readinessScore": "",
+          "label": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -299,15 +342,27 @@
       "hasBag": true,
       "variants": 4,
       "grammars": 2,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "readinessBandOf(readinessScore).label (via POSTURE_POOL_OF_BADGE in defenseStateProse.js)",
+          "op": "===",
+          "value": "Undefended"
+        }
+      ],
+      "branchReads": [
+        "readinessBandOf(readinessScore).label (via POSTURE_POOL_OF_BADGE in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "readinessBandOf(readinessScore).label (via POSTURE_POOL_OF_BADGE in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "POSTURE_POOL_OF_BADGE",
+      "rung": "table",
+      "reads": [
+        "readinessBandOf(readinessScore).label (via POSTURE_POOL_OF_BADGE in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -317,13 +372,16 @@
         "defense.postureHeader"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 1823,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "readinessScore": "",
+          "label": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -335,8 +393,7 @@
         "guardPresence": 1,
         "no crisis: occupied, under_siege": 1,
         "no crisis: threat, unrest": 1,
-        "no guardPresence": 1,
-        "no walls": 1
+        "no guardPresence": 1
       },
       "undeclared": 0,
       "crisisScoped": true
@@ -658,9 +715,7 @@
       "declares": [],
       "lineDeclares": {
         "colour": 3,
-        "gate": 1,
-        "no crisis: occupied": 1,
-        "no crisis: under_siege": 1
+        "gate": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -954,7 +1009,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 5,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [
         {
           "field": "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)",
@@ -1006,7 +1061,6 @@
       "declares": [],
       "lineDeclares": {
         "crisis: any": 5,
-        "no crisis: occupied": 2,
         "no crisis: unrest": 1,
         "no threat": 3,
         "threat": 2
@@ -1154,7 +1208,6 @@
       "lineDeclares": {
         "crisis: under_siege": 1,
         "garrison": 1,
-        "no crisis: occupied": 3,
         "no crisis: under_siege": 2
       },
       "undeclared": 0,
@@ -1797,8 +1850,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 13,
-      "grammars": 3,
+      "variants": 12,
+      "grammars": 2,
       "predicate": [
         {
           "field": "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)",
@@ -1848,13 +1901,10 @@
         "crisis": 3,
         "crisis: famine": 3,
         "crisis: indebted": 3,
-        "crisis: occupied": 1,
         "no crisis": 2,
         "no crisis: debt": 4,
         "no crisis: famine": 3,
-        "no crisis: occupied": 3,
-        "prosperity: ≥ moderate": 1,
-        "prosperity: ≥ poor": 1
+        "prosperity: ≥ moderate": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -5354,7 +5404,6 @@
       "lineDeclares": {
         "crisis: under_siege": 2,
         "crisis: under_siege, wartime": 1,
-        "no crisis: occupied": 3,
         "no crisis: under_siege": 3,
         "no crisis: wartime": 3
       },
@@ -9433,9 +9482,7 @@
         "stateOrgan": true
       },
       "declares": [],
-      "lineDeclares": {
-        "no crisis: occupied": 2
-      },
+      "lineDeclares": {},
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -11568,7 +11615,7 @@
       "lineDeclares": {
         "crisis: under_siege": 2,
         "guardPresence": 2,
-        "no crisis: occupied": 5,
+        "no crisis: occupied": 2,
         "no crisis: under_siege": 5,
         "no guardPresence": 2,
         "no soldiers": 1,
@@ -19629,8 +19676,7 @@
       "lineDeclares": {
         "no crisis: under_siege": 2,
         "no sacredHouse": 2,
-        "sacredHouse": 2,
-        "tier: ≥ village": 2
+        "sacredHouse": 2
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -36223,7 +36269,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 11,
+      "variants": 10,
       "grammars": 4,
       "predicate": [
         {
@@ -36297,17 +36343,15 @@
       },
       "declares": [],
       "lineDeclares": {
-        "crisis: occupied": 1,
         "crisis: threat": 2,
         "crisis: wartime": 2,
         "no crisis: insurgency": 2,
-        "no crisis: occupied": 3,
         "no crisis: slave_revolt": 2,
         "no crisis: threat": 4,
         "no crisis: wartime": 4,
         "no watch": 2,
         "tier: ≤ hamlet": 1,
-        "tier: ≥ village": 9,
+        "tier: ≥ village": 8,
         "watch": 2
       },
       "undeclared": 0,
@@ -53896,7 +53940,7 @@
       "lineDeclares": {
         "crisis: any": 28,
         "institution: bank": 1,
-        "market": 2,
+        "market": 5,
         "navigable": 1,
         "no crisis: hunger": 3,
         "no crisis: infiltrated": 1,
@@ -53904,9 +53948,10 @@
         "no crisis: plague_onset": 1,
         "no crisis: recently_betrayed": 1,
         "no crisis: threat": 1,
-        "no crisis: under_siege": 1
+        "no crisis: under_siege": 4,
+        "tier: ≥ town": 3
       },
-      "undeclared": 18,
+      "undeclared": 13,
       "crisisScoped": false
     },
     {
@@ -53915,16 +53960,20 @@
       "name": "ARRIVAL_SCENES",
       "drawKind": "R",
       "drawSite": "src/generators/narrative/arrivalScene.js:216-228 (sceneKey from route/terrain/market fragments, then one pickRandom on t",
-      "lines": 26,
+      "lines": 28,
       "declares": [],
       "lineDeclares": {
+        "coast": 2,
         "crisis: any": 7,
+        "docks": 4,
+        "institution: docks": 1,
         "institution: mill": 1,
         "institution: smith": 1,
+        "market": 1,
         "population: ≥ middling": 1,
         "walls": 1
       },
-      "undeclared": 15,
+      "undeclared": 11,
       "crisisScoped": false
     },
     {
@@ -53936,20 +53985,24 @@
       "lines": 320,
       "declares": [],
       "lineDeclares": {
+        "church": 2,
         "colour": 6,
         "crisis: any": 40,
+        "crisis: wartime, insurgency": 1,
         "fish": 6,
         "institution: mill": 2,
-        "market": 7,
+        "institution: smith": 4,
+        "market": 8,
         "navigable": 3,
         "no crisis: hunger": 6,
         "no crisis: monster_pressure": 1,
         "no crisis: threat": 4,
-        "no crisis: under_siege": 9,
+        "no crisis: under_siege": 11,
         "no crisis: unrest": 1,
-        "sacredHouse": 3
+        "sacredHouse": 3,
+        "tier: ≥ town": 8
       },
-      "undeclared": 262,
+      "undeclared": 257,
       "crisisScoped": false
     },
     {
@@ -54012,10 +54065,10 @@
         "crisis: any": 5,
         "institution: granary": 1,
         "magic": 4,
-        "market": 1,
+        "market": 2,
         "sacredHouse": 2
       },
-      "undeclared": 31,
+      "undeclared": 30,
       "crisisScoped": false
     },
     {
@@ -54074,11 +54127,14 @@
         "no crisis: under_siege": 1,
         "no crisis: unrest": 5,
         "no war: front": 1,
+        "population: ≥ middling": 5,
+        "sacredHouse": 1,
         "soldiers": 2,
+        "tier: ≥ town": 1,
         "walls": 12,
         "watch": 4
       },
-      "undeclared": 30,
+      "undeclared": 25,
       "crisisScoped": false
     },
     {
@@ -54111,7 +54167,7 @@
       "name": "CAST_REASONS",
       "drawKind": "T",
       "drawSite": "crisisCast.js:461-701 (src/domain/crisis/crisisCast.js)",
-      "lines": 46,
+      "lines": 50,
       "declares": [],
       "lineDeclares": {
         "crisis: hunger": 1,
@@ -54123,7 +54179,7 @@
         "no walls": 1,
         "walls": 1
       },
-      "undeclared": 38,
+      "undeclared": 42,
       "crisisScoped": false
     },
     {
@@ -54147,16 +54203,22 @@
       "lines": 87,
       "declares": [],
       "lineDeclares": {
-        "guardPresence": 1,
+        "guild": 2,
+        "healer": 1,
         "institution: temple": 3,
         "market": 3,
         "migration: exodus": 1,
         "migration: influx": 2,
         "navigable": 2,
+        "no crisis: occupied": 1,
+        "no crisis: succession_void": 2,
         "no ruler: council": 2,
-        "tier: >= town": 1
+        "no ruler: elder": 2,
+        "tier: >= town": 1,
+        "tier: ≥ town": 1,
+        "watch": 1
       },
-      "undeclared": 72,
+      "undeclared": 67,
       "crisisScoped": false
     },
     {
@@ -54165,26 +54227,43 @@
       "name": "INSTITUTION_DESC_VARIANTS",
       "drawKind": "H",
       "drawSite": "assembleInstitutions.js:65 shipFreeDesc + :1004 kernel/proseHash.js pickVariant over [catalogDesc, ...variants]",
-      "lines": 1039,
+      "lines": 1109,
       "declares": [],
       "lineDeclares": {
+        "church access": 2,
         "coast": 5,
-        "colour": 777,
+        "colour": 758,
+        "crisis: famine": 1,
+        "crisis: under_siege": 11,
         "garrison": 6,
-        "gate": 2,
+        "gate": 4,
         "guild": 25,
-        "market": 11,
-        "navigable": 2,
+        "institution: bank": 6,
+        "institution: docks": 6,
+        "institution: tavern": 6,
+        "market": 23,
+        "mercenary": 8,
+        "navigable": 8,
+        "no church access": 2,
+        "no crisis: famine": 1,
+        "no crisis: under_siege": 11,
         "no garrison": 2,
+        "no institution: bank": 6,
+        "no institution: docks": 6,
+        "no institution: tavern": 4,
+        "no navigable": 6,
+        "no river": 16,
+        "no terrain: forest": 10,
         "no walls": 1,
         "river": 24,
         "terrain: forest": 10,
+        "tier: = metropolis": 4,
         "tier: ≤ hamlet": 6,
-        "tier: ≥ city": 15,
+        "tier: ≥ city": 9,
         "walls": 8,
         "watch": 7
       },
-      "undeclared": 147,
+      "undeclared": 129,
       "crisisScoped": false
     },
     {
@@ -54193,29 +54272,35 @@
       "name": "INSTITUTION_SERVICES",
       "drawKind": "R",
       "drawSite": "services/institutionServices.js:69/203 one _rng()<p roll per eligible definition (A-printed at serviceRollMaterializatio",
-      "lines": 992,
+      "lines": 1004,
       "declares": [],
       "lineDeclares": {
         "coast": 2,
+        "crisis: under_siege": 6,
         "gate": 6,
         "guardPresence": 1,
         "guild": 3,
         "institution: mill": 3,
+        "institution: tavern": 1,
         "institution: temple": 1,
         "magic": 13,
         "market": 4,
         "militia": 3,
         "navigable": 3,
+        "no crisis: under_siege": 6,
+        "no river": 4,
+        "no tier: ≥ town": 1,
         "no walls": 2,
         "organised crime": 1,
-        "river": 2,
+        "river": 6,
         "terrain: forest": 1,
         "tier: ≤ village": 2,
         "tier: ≥ city": 3,
+        "tier: ≥ town": 1,
         "walls": 4,
         "watch": 6
       },
-      "undeclared": 939,
+      "undeclared": 927,
       "crisisScoped": false
     },
     {
@@ -54339,11 +54424,13 @@
         "guardPresence": 9,
         "institution: temple": 1,
         "magic": 3,
-        "market": 1,
+        "market": 2,
         "navigable": 1,
-        "no navigable": 1
+        "no navigable": 1,
+        "population: ≥ middling": 1,
+        "tier: ≥ village": 10
       },
-      "undeclared": 159,
+      "undeclared": 147,
       "crisisScoped": false
     },
     {
@@ -54476,16 +54563,17 @@
       "lineDeclares": {
         "gate": 2,
         "institution: temple": 1,
-        "market": 1,
+        "market": 2,
         "migration: exodus": 2,
         "migration: influx": 5,
         "no ruler: lord": 6,
         "no ruler: occupier": 6,
         "other npc": 20,
+        "prosperity: ≥ comfortable": 1,
         "starving": 1,
         "tier: ≥ town": 1
       },
-      "undeclared": 63,
+      "undeclared": 61,
       "crisisScoped": false
     },
     {
@@ -54519,10 +54607,10 @@
       "name": "TRADITION_ELEMENTS",
       "drawKind": "R",
       "drawSite": "",
-      "lines": 122,
+      "lines": 124,
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 122,
+      "undeclared": 124,
       "crisisScoped": false
     },
     {
@@ -54805,7 +54893,7 @@
         "DS-DEF-2 :: Beasts & Monsters: settled, nothing organized"
       ],
       "variants": 28,
-      "grammars": 10,
+      "grammars": 11,
       "blocks": [
         "DS-DEF-2"
       ]
@@ -54827,7 +54915,7 @@
         "DS-POW-6 :: capture pressure ADVANCING (weak security, poor prosperity)",
         "DS-POW-6 :: capture pressure RECOVERING (strong security, prosperity)"
       ],
-      "variants": 15,
+      "variants": 14,
       "grammars": 7,
       "blocks": [
         "DS-POW-6"
@@ -54839,7 +54927,7 @@
         "DS-POW-6 :: capture pressure ADVANCING (weak security, poor prosperity)",
         "DS-POW-6 :: capture pressure RECOVERING (strong security, prosperity)"
       ],
-      "variants": 15,
+      "variants": 14,
       "grammars": 7,
       "blocks": [
         "DS-POW-6"
@@ -55342,6 +55430,20 @@
       ]
     },
     {
+      "fact": "readinessBandOf(readinessScore).label (via POSTURE_POOL_OF_BADGE in defenseStateProse.js)",
+      "pools": [
+        "DS-DEF-1 :: readiness STRONG",
+        "DS-DEF-1 :: readiness ADEQUATE",
+        "DS-DEF-1 :: readiness WEAK",
+        "DS-DEF-1 :: readiness CRITICAL"
+      ],
+      "variants": 19,
+      "grammars": 6,
+      "blocks": [
+        "DS-DEF-1"
+      ]
+    },
+    {
       "fact": "reading.rungs.length",
       "pools": [
         "DS-POW-3 :: shallow ladder (few rungs recorded)"
@@ -55457,8 +55559,8 @@
         "DS-DEF-2 :: Economic Survival: WEAK",
         "DS-DEF-2 :: Economic Survival: CRITICAL"
       ],
-      "variants": 24,
-      "grammars": 6,
+      "variants": 23,
+      "grammars": 5,
       "blocks": [
         "DS-DEF-2"
       ]
@@ -56486,6 +56588,15 @@
         "mountsModifier": 0,
         "spineTabs": [
           "economics"
+        ],
+        "modifierMounts": []
+      },
+      {
+        "field": "readinessBandOf(readinessScore)",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "defense"
         ],
         "modifierMounts": []
       },
@@ -58667,10 +58778,10 @@
     },
     {
       "block": "DS-DEF-1",
-      "spines": 4,
-      "facts": 2,
+      "spines": 8,
+      "facts": 3,
       "spinesReachedBp": 10000,
-      "meanReachBp": 5000
+      "meanReachBp": 6667
     },
     {
       "block": "DS-DEF-11",
@@ -59492,14 +59603,27 @@
     },
     {
       "block": "DS-DEF-1",
-      "spines": 4,
-      "facts": 2,
+      "spines": 8,
+      "facts": 3,
       "spinesReachedBp": 10000,
-      "meanReachBp": 5000,
+      "meanReachBp": 6667,
       "byFact": [
+        {
+          "field": "readinessBandOf(readinessScore).label (via POSTURE_POOL_OF_BADGE in defenseStateProse.js)",
+          "attach": [
+            "terrain FAVOURABLE to the defender",
+            "terrain EXPOSED",
+            "strategic value HIGH",
+            "strategic value LOW"
+          ]
+        },
         {
           "field": "text(terrain) (via TERRAIN_DEFENCE_OF in defenseStateProse.js)",
           "attach": [
+            "readiness STRONG",
+            "readiness ADEQUATE",
+            "readiness WEAK",
+            "readiness CRITICAL",
             "strategic value HIGH",
             "strategic value LOW"
           ]
@@ -59507,6 +59631,10 @@
         {
           "field": "text(terrain) (via TERRAIN_PRIZE_OF in defenseStateProse.js)",
           "attach": [
+            "readiness STRONG",
+            "readiness ADEQUATE",
+            "readiness WEAK",
+            "readiness CRITICAL",
             "terrain FAVOURABLE to the defender",
             "terrain EXPOSED"
           ]
@@ -63019,8 +63147,8 @@
   ],
   "factBudget": {
     "zeroK": 85,
-    "executable": 488,
-    "notExecutable": 368,
+    "executable": 492,
+    "notExecutable": 364,
     "byBlock": [
       [
         "DS-DEF-5",
@@ -63180,7 +63308,7 @@
         "DS-DEF-1",
         {
           "zeroK": 0,
-          "spines": 4
+          "spines": 8
         }
       ],
       [
@@ -63447,15 +63575,15 @@
       ],
       [
         2,
-        300
+        304
       ]
     ]
   },
   "grains": {
     "branch": {
       "zeroK": 85,
-      "executable": 488,
-      "notExecutable": 368,
+      "executable": 492,
+      "notExecutable": 364,
       "histogram": [
         [
           -8,
@@ -63495,7 +63623,7 @@
         ],
         [
           2,
-          300
+          304
         ]
       ],
       "blocksWithSpine": 55,
@@ -63519,7 +63647,7 @@
         "DS-SUP-2",
         "DS-WAR-3"
       ],
-      "readPaths": 847,
+      "readPaths": 851,
       "modifierEligibleFactsByTab": [
         [
           "economics",
@@ -63577,8 +63705,8 @@
     },
     "function": {
       "zeroK": 169,
-      "executable": 488,
-      "notExecutable": 368,
+      "executable": 492,
+      "notExecutable": 364,
       "histogram": [
         [
           -8,
@@ -63610,7 +63738,7 @@
         ],
         [
           2,
-          217
+          221
         ]
       ],
       "blocksWithSpine": 55,
@@ -63637,7 +63765,7 @@
         "DS-SUP-2",
         "DS-WAR-3"
       ],
-      "readPaths": 1146,
+      "readPaths": 1150,
       "modifierEligibleFactsByTab": [
         [
           "economics",
@@ -64037,7 +64165,7 @@
       "fields": {
         "LICENSED": 233,
         "OFFICE": 5,
-        "SOURCE-UNRESOLVED": 849
+        "SOURCE-UNRESOLVED": 857
       },
       "byKind": [
         [
@@ -64082,11 +64210,11 @@
         ]
       ],
       "unresolvedGrounds": {
-        "no-mapping": 849,
+        "no-mapping": 857,
         "no-institution-in-roster": 0
       },
       "twoSourceRows": 10,
-      "rowsWithNoReading": 368,
+      "rowsWithNoReading": 364,
       "kindsWithNoInstitution": [
         "tradition"
       ]
@@ -65367,7 +65495,7 @@
         "via": "CAUSE_SIGNAL predicate source"
       },
       {
-        "a": "src/generators/defenseGenerator.js::econOutput",
+        "a": "src/generators/defenseGenerator.js::fundedGate",
         "b": "economicGates.military",
         "relation": "consequence",
         "source": "c",
@@ -65375,7 +65503,15 @@
         "via": "src/generators/defenseGenerator.js economicGates literal, two alias hops"
       },
       {
-        "a": "src/generators/defenseGenerator.js::econOutput",
+        "a": "src/generators/defenseGenerator.js::upkeep",
+        "b": "economicGates.military",
+        "relation": "consequence",
+        "source": "c",
+        "direction": "a->b",
+        "via": "src/generators/defenseGenerator.js economicGates literal, two alias hops"
+      },
+      {
+        "a": "src/generators/defenseGenerator.js::fundedGate",
         "b": "economicGates.monster",
         "relation": "consequence",
         "source": "c",
@@ -65383,7 +65519,15 @@
         "via": "src/generators/defenseGenerator.js economicGates literal, two alias hops"
       },
       {
-        "a": "src/generators/defenseGenerator.js::econOutput",
+        "a": "src/generators/defenseGenerator.js::upkeep",
+        "b": "economicGates.monster",
+        "relation": "consequence",
+        "source": "c",
+        "direction": "a->b",
+        "via": "src/generators/defenseGenerator.js economicGates literal, two alias hops"
+      },
+      {
+        "a": "src/generators/defenseGenerator.js::fundedGate",
         "b": "economicGates.internal",
         "relation": "consequence",
         "source": "c",
@@ -65391,7 +65535,15 @@
         "via": "src/generators/defenseGenerator.js economicGates literal, two alias hops"
       },
       {
-        "a": "src/generators/defenseGenerator.js::econOutput",
+        "a": "src/generators/defenseGenerator.js::upkeep",
+        "b": "economicGates.internal",
+        "relation": "consequence",
+        "source": "c",
+        "direction": "a->b",
+        "via": "src/generators/defenseGenerator.js economicGates literal, two alias hops"
+      },
+      {
+        "a": "src/generators/defenseGenerator.js::fundedGate",
         "b": "economicGates.economic",
         "relation": "consequence",
         "source": "c",
@@ -65399,7 +65551,15 @@
         "via": "src/generators/defenseGenerator.js economicGates literal, two alias hops"
       },
       {
-        "a": "src/generators/defenseGenerator.js::instFlags",
+        "a": "src/generators/defenseGenerator.js::upkeep",
+        "b": "economicGates.economic",
+        "relation": "consequence",
+        "source": "c",
+        "direction": "a->b",
+        "via": "src/generators/defenseGenerator.js economicGates literal, two alias hops"
+      },
+      {
+        "a": "src/generators/defenseGenerator.js::fundedGate",
         "b": "economicGates.disaster",
         "relation": "consequence",
         "source": "c",
@@ -65407,7 +65567,7 @@
         "via": "src/generators/defenseGenerator.js economicGates literal, two alias hops"
       },
       {
-        "a": "src/generators/defenseGenerator.js::economyOutput",
+        "a": "src/generators/defenseGenerator.js::upkeep",
         "b": "economicGates.disaster",
         "relation": "consequence",
         "source": "c",
@@ -65426,23 +65586,23 @@
       ],
       [
         "c",
-        6
+        10
       ]
     ],
     "byDirection": [
       [
         "a->b",
-        165
+        169
       ]
     ],
     "join": {
       "strictBoth": 0,
       "strictEither": 0,
       "leafBoth": 0,
-      "leafEither": 2,
+      "leafEither": 3,
       "leafRows": [],
-      "deskRoots": 108,
-      "deskSegments": 276
+      "deskRoots": 109,
+      "deskSegments": 279
     }
   },
   "ratifiedAliases": {
@@ -66301,32 +66461,40 @@
       "tier": "THIN",
       "block": "DS-DEF-1",
       "subject": "readiness STRONG",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "readinessBandOf(readinessScore).label (via POSTURE_POOL_OF_BADGE in defenseStateProse.js)"
+      ],
+      "readingFunction": "POSTURE_POOL_OF_BADGE",
       "count": "8 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-1",
       "subject": "readiness ADEQUATE",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "readinessBandOf(readinessScore).label (via POSTURE_POOL_OF_BADGE in defenseStateProse.js)"
+      ],
+      "readingFunction": "POSTURE_POOL_OF_BADGE",
       "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-1",
       "subject": "readiness WEAK",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "readinessBandOf(readinessScore).label (via POSTURE_POOL_OF_BADGE in defenseStateProse.js)"
+      ],
+      "readingFunction": "POSTURE_POOL_OF_BADGE",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-1",
       "subject": "readiness CRITICAL",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "readinessBandOf(readinessScore).label (via POSTURE_POOL_OF_BADGE in defenseStateProse.js)"
+      ],
+      "readingFunction": "POSTURE_POOL_OF_BADGE",
       "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
@@ -66427,7 +66595,7 @@
         "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "BEASTS_ROW_POOL",
-      "count": "5 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -66544,7 +66712,7 @@
         "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "ECONOMIC_ROW_POOL",
-      "count": "13 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "12 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -71280,7 +71448,7 @@
         "breakdown.prosperity"
       ],
       "readingFunction": "capturePoolKey",
-      "count": "11 variant(s) · 4 grammar(s) · slots {seat, settlement}"
+      "count": "10 variant(s) · 4 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "THIN",
