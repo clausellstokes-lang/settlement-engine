@@ -5609,7 +5609,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "gate"
+            "gate",
+            "no crisis: under_siege"
           ],
           "text": "Every stage of the {resource} trade at {settlement} is done here, from the ground to the gate.",
           "slots": [
@@ -5632,7 +5633,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "colour"
+            "no crisis: under_siege"
           ],
           "text": "{settlement} takes everything it can from the {resource} its country gives.",
           "slots": [
