@@ -23,12 +23,16 @@ describe('COHERENCE-POWERS-7 · no crown where the town governs itself', () => {
     }
   });
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  it('rw3-city-wartime-1: no crown on the Power tab\'s powers or in its account of the war', () => {
+  // POWERS-12: re-keyed by identity after the merge of the line (976db5b19 at 835cce92c): rw3-city-wartime-1 no longer
+  // stands a City-state government (the premise reds); rw3-city-wartime-2 is the first seed of the same shape that does,
+  // and its Military/Guard prints the self-governing twin ("Authority flows through military channels now.")
+  it('rw3-city-wartime-2: no crown on the Power tab\'s powers or in its account of the war', () => {
     const s = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'city', selectedStressesRandom: false,
-      selectedStresses: ['wartime'], _randomizePriorities: true }), null, { seed: 'rw3-city-wartime-1', customContent: {} });
+      selectedStresses: ['wartime'], _randomizePriorities: true }), null, { seed: 'rw3-city-wartime-2', customContent: {} });
     expect(s.institutions.some((i) => i.name === 'City-state government'), 'premise: the town governs itself').toBe(true);
     const texts = [...s.powerStructure.factions.map((f) => f.desc), s.powerStructure.recentConflict];
     expect(texts.filter((t) => /\bcrown\b/i.test(String(t || '')))).toEqual([]);
     expect(String(s.powerStructure.factions.find((f) => f.faction === 'War Council')?.desc)).toMatch(/^Emergency body /);
+    expect(String(s.powerStructure.factions.find((f) => f.faction === 'Military/Guard')?.desc)).toContain('Authority flows through military channels now.');
   }, 60_000);
 });
