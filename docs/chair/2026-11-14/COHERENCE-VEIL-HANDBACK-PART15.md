@@ -124,8 +124,11 @@ with 211, before the line's client ships. No lines for the owner are owed (the c
 
 ## 5. WHAT IS LEFT, in order (line by line, for the next seat)
 
-0. ~~Item 0, the red security test.~~ DONE (sections 2 and 3). The lighting census re-taken through its door after the
-   cure (+the seat's probe records and two titles): its own commit.
+0. ~~Item 0, the red security test.~~ DONE (sections 2 and 3). THE LIGHTING CENSUS, re-taken through its door in its own
+   commit after the cure: the walker was ALREADY RED at the base 2da90b732 (files 3230 against the register's 3229),
+   measured there through the same door in a scratch worktree (3230 files, 2832 credited, 29267 titles, 7907 suite
+   titles: +1, +1, +16, +1 since the register's 38cc496f6, the lane's earlier seats, unbanked); this seat's commits
+   move titles by +1 (29268); the seat's probe records are not in its estate. The ordinary run after: green.
 1. The impression by a shared run of twelve (PART 14 section 0; sub-brief `veil-probe-13/briefs/SUB-BRIEF-IMPRESSION-RUN.md`,
    base f2bffdbf0; OVER 23 born chance runs is a STOP).
 2. R2 (sub-brief `veil-probe-13/briefs/SUB-BRIEF-R2.md`; first the premise proved over every plane).
