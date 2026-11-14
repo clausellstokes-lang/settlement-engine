@@ -12,7 +12,7 @@
 - A RECURRING CHECK-IN FOR THE CHAIR WAS REFUSED by this session's permission layer (create_trigger); it is not routed round. The owner's one permitting line (a rule for mcp__claude-code-remote__create_trigger) allows it if the owner wants it. One one-time reminder was allowed and is set for 02:12 UTC; the seats' own messages wake the chair otherwise.
 
 ## 2. The line
-`lane/integration-2026-11-07` is at **9e57f5023** (point 48). POINT 49 (the instrument lane) is prepared on the save branches at 11c565b96 and is being landed by the fifteenth merge seat from `lane/merge-15-point-49-wip-2026-11-14`: the chair's word to land waits only for its READY TO LAND with no red new at the merge. WHEN POINT 49 IS ON THE LINE: tell every seat the tip (each then merges the line, cures the rows banked against it, reads the instrument's page census on its lines and makes its final statement); open R3-TABS-3; name the next point to the merge seat (the first lane final and read CLEAR).
+`lane/integration-2026-11-07` is at **9e57f5023** (point 48). POINT 49 (the instrument lane) is prepared on the save branches at 11c565b96 and is being landed by the fifteenth merge seat from `lane/merge-15-point-49-wip-2026-11-14`: the chair's word to land waits only for its READY TO LAND with no red new at the merge. WHEN POINT 49 IS ON THE LINE: tell every seat the tip (each then merges the line, cures the rows banked against it, reads the instrument's page census on its lines and makes its final statement); name the next point to the merge seat (the first lane final and read CLEAR).
 
 ## 3. The lanes and their seats (every session below is a child of this chair's)
 | lane | tip on origin | seat | brief | it holds |
@@ -29,6 +29,7 @@
 | round two A `lane/r2-code-a-2026-11-13` | ff71e26c2 | R2-CODE-A-6 `session_01ACmDYZkMmPxmRchgNF3DbA` | `briefs/BRIEF-R2-CODE-A-6.md` | step 4's rows, the medium rows, the low 8, its two reds, the census; after point 49: the line's merge, the final statement |
 | round two B (both branches) `lane/r2-code-b-2026-11-13` | 5063298a2 | R2-CODE-B-5 `session_01ACmDYWXYWK8GnFZ2AehCjo` | `briefs/BRIEF-R2-CODE-B-5.md` | the rows left; THE WORD GIVEN for the side branch's merge (no side seat); the census once on the merged tree; after point 49: the line's merge, the final statement |
 | round three code `lane/r3-code-c-2026-11-13` | e2aa8e278 | R3-CODE-C-5 `session_01ACmDYbEJ513ujr2NhacwG8` | `briefs/BRIEF-R3-CODE-C-5.md` | the close (census, one rewording pass, two manifest entries); after point 49: the line's merge, the instrument's findings, the final statement |
+| round three tabs `lane/r3-tabs-2026-11-13` | a19a0ee1b | R3-TABS-3 `session_01ACmDYZtLzkWLZ51P7fGxyC` | `briefs/BRIEF-R3-TABS-3.md` | the second seat's unrecorded naval-line cure written up and verified; the statement's parts that need no suite; after point 49: the line's merge, the page census, the whole suite once, the final statement |
 
 No seat, and why:
 | lane | tip on origin | state |
@@ -37,7 +38,6 @@ No seat, and why:
 | third leaves, side `lane/w2-c-leaves-side-2026-11-13` | df51100b1 | FINAL; merged into the third leaves lane by its fifth seat |
 | data's history branch `lane/w2-fix-data-history-2026-11-13` | 864948c8b | FINAL; merged by W2-FIX-DATA-8 at its step 2 |
 | round two B, side `lane/r2-code-b-side-2026-11-13` | 5975515ad | no seat: merged by R2-CODE-B-5 at its step 2, which also runs the census it lacks |
-| round three tabs `lane/r3-tabs-2026-11-13` | a19a0ee1b | HELD: lacks only its final statement; its seat (R3-TABS-3) is opened when point 49 lands |
 | instrument `lane/w2-b-declare-2026-11-12` | a1a8ec794 | FINAL and reviewed CLEAR; it IS point 49 |
 
 ## 4. Rulings made by this chair (each vetoable; the record that holds it is named by its heading)
