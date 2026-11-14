@@ -627,6 +627,9 @@ const desktopShape = (perView) => Object.fromEntries(
 // World/History +1 prose — views that print families the draft declares (the summary's economy and situation, the plot hooks,
 // the trade cards, the history); the single lines themselves are not traced here.
 // Desktop: Overview 14 -> 15, Plot Hooks 87 -> 89, Economics 47 -> 46, History 15 -> 16.
+// ── RE-MEASURED 2026-11-14 (JOIN-3, THE TRUE JOIN; the same compose by cause, the same trees and lanes as the mobile note):
+// Desktop: Overview 15/14 -> 16/15 (coherence-upkeep), Defense 35 -> 34 and Services 104 -> 103 (coherence-upkeep), NPCs 280 -> 285
+// (powers +5, r2-code-b -2), Relationships 174/172 -> 175/173 (powers +1); Plot Hooks 89 (r2-code-a -1, powers +1). No token moved.
 const DESKTOP_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 220 -> 284, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -636,7 +639,7 @@ const DESKTOP_BASELINE = Object.freeze({
   // (8dff691f3: World/NPCs 23 -> 220, World/Relationships 61 -> 178, Summary/Plot Hooks 37 -> 88 with the car's one hook per face)
   // and the wave's lines (Systems/Power 22 -> 30, Services 109 -> 104, Resources 2 -> 1, Outlook 1 -> 2; World/Daily Life 1 -> 0,
   // WAVE-RULINGS #37). Per-view attribution to single lanes is PLAUSIBLE (not bisected per view). No desktop FS token moved.
-  "Summary/Overview":    { measured: 15, sub14: 14 },
+  "Summary/Overview":    { measured: 16, sub14: 15 },
   // T2-25 measured it at 1 under Systems/Causes; X-12 moves it here (BUILD-T1), same count.
   "Summary/Foundations": { measured: 1, sub14: 1 },
   // 37 -> 38 (2026-10-31, the G2 + W2-LINKS composition at the integration merge): one conflict line more in
@@ -645,7 +648,7 @@ const DESKTOP_BASELINE = Object.freeze({
 // Plot Hooks 88 -> 89 on both arms. Red on SW-8's own tip b951ce7da and unkeyed there; bisected over the lane: green at
 // c85fd3f85, red at d12e20112 (the conflict hooks reworded). No token moved; sub12 0.
   "Summary/Plot Hooks":  { measured: 89, sub14: 89 },
-  "Systems/Services":    { measured: 104, sub14: 104 },
+  "Systems/Services":    { measured: 103, sub14: 103 },
   "Systems/Institutions": { measured: 72, sub14: 72 }, // T1-14, measured 2026-10-30 by this walk; 62 → 71 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine face rows each gain the "Connection:" label, a line of its own
   // 47 -> 40 (2026-10-30, UX consolidation U1, RULINGS-T2 T2-1..T2-8): no desktop token moved; the page lost
   // its duplicates (Economy/Food tiles, the Supply Chains rows, the Resource Exploitation chips, the plot hooks).
@@ -663,7 +666,7 @@ const DESKTOP_BASELINE = Object.freeze({
   // hook left the Defense page for the Plot Hooks tab; no token moved (bisected: 317307cc green, 987602c0 moves it).
   // 25 -> 26 (2026-11-04, REGISTERS-4 door 7, measured at the composed tip): DEFENSE-3's X-52 food endurance line
   // (8e9de64b9, the siege reading of the stores) adds one prose line on WIRING-2's re-measure; no token moved.
-  "Systems/Defense":     { measured: 35, sub14: 35 },
+  "Systems/Defense":     { measured: 34, sub14: 34 },
   // 5 -> 4 (2026-10-30, UX consolidation U2, T2-10): the "Depleted. Consumed locally, export potential
   // reduced" label shortened to "Depleted" and fell under the walk's measuring length; no token moved.
   "Systems/Resources":   { measured: 1, sub14: 1 },
@@ -683,10 +686,10 @@ const DESKTOP_BASELINE = Object.freeze({
   "Systems/Magic":       { measured: 5, sub14: 5 },
   // 282 -> 280 (2026-11-13, R2-CODE-B item 1, composed at the merge 0aa0cce00): two NPC card lines name their house by the
   // seam's house label ("Merchant guilds", not "Merchant guilds (15-40)"), and the shorter line falls under the walk's MIN_CHARS. No token moved.
-  "World/NPCs":          { measured: 280, sub14: 280 },
+  "World/NPCs":          { measured: 285, sub14: 285 },
   // 60 -> 61 / 58 -> 59 and mobile 58 -> 59 (2026-10-31, G3 at the merge, GS-1): the eight-variant tie lines wrap one
   // line longer in the fixture; no token moved.
-  "World/Relationships": { measured: 174, sub14: 172 },
+  "World/Relationships": { measured: 175, sub14: 173 },
   "World/Faith":         { measured: 2, sub14: 2 },
   "World/Daily Life":    { measured: 1, sub14: 1 },
   "World/Rumors & News": { measured: 1, sub14: 1 }, // X-7a launch teaser (BUILD-T1 registers it always)
@@ -794,6 +797,15 @@ const DESKTOP_BASELINE = Object.freeze({
 // World/History +1 prose — views that print families the draft declares (the summary's economy and situation, the plot hooks,
 // the trade cards, the history); the single lines themselves are not traced here.
 // Mobile: Overview prose 12 -> 13, Plot Hooks prose 86 -> 88, Economics chrome 8 -> 7 (sub14 8 -> 7), History prose 15 -> 16.
+// ── RE-MEASURED 2026-11-14 (JOIN-3, THE TRUE JOIN on lane/join-2026-11-14; the book's 2n: a LINE-LEVEL compose by cause): this
+// file's own walk at the joined tree, the line 976db5b19 and every lane's merged tip (P2.2). Every view's count at the join is the
+// line's plus the movement of exactly the lanes that move it at their own tips (r2-code-a, powers-follow-up and coherence-upkeep
+// read their own moves red, unkeyed, there): Summary/Overview prose +1 (coherence-upkeep); Summary/Plot Hooks prose -1 (r2-code-a)
+// +1 (powers-follow-up); Systems/Defense prose -1 and Systems/Services prose -1 (coherence-upkeep); World/NPCs prose +5
+// (powers-follow-up) -2 (r2-code-b); World/Relationships prose +2, chrome -1, sub14 -1 (powers-follow-up); Systems/Economics
+// chrome 6 already composed (r2-code-b's merge). No view moved by the join alone; no token moved; sub12 0 and zero violations.
+// Mobile: Overview prose 13 -> 14, Defense 34 -> 33, Services 103 -> 102, NPCs 279 -> 284, Relationships prose 138 -> 140,
+// chrome and sub14 36 -> 35.
 const MOBILE_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 219 -> 283, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -802,12 +814,12 @@ const MOBILE_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-WAVE's GREEN-BASE point (2026-11-08, GREEN-BASE §4.4), the same walk at 375px: the people car's
   // rows (8dff691f3) and GREEN-BASE's 27b858fd9 (the car's rows on the PROSE floor) with the wave's lines; World/Relationships
   // chrome 3 -> 39 (the car's tie cards' chrome rows, all >= 12px). sub12 stays 0 in every view; the floors arm reads 0 violations.
-  "Summary/Overview":    { prose: 13, chrome: 2, sub14: 1, sub12: 0 },
+  "Summary/Overview":    { prose: 14, chrome: 2, sub14: 1, sub12: 0 },
   "Summary/Foundations": { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   // 37 -> 38 and Relationships 57 -> 58 (2026-10-31, the G2 + W2-LINKS composition at the merge): one conflict
   // line more (X-26a); both sub-floor counts stay where they were.
   "Summary/Plot Hooks":  { prose: 88, chrome: 1, sub14: 1, sub12: 0 },
-  "Systems/Services":    { prose: 103, chrome: 1, sub14: 0, sub12: 0 },
+  "Systems/Services":    { prose: 102, chrome: 1, sub14: 0, sub12: 0 },
   "Systems/Institutions": { prose: 71, chrome: 1, sub14: 0, sub12: 0 }, // 61 → 70 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine "Connection:" labels, each at the prose floor
   // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
   // chrome 7 -> 6, sub14 7 -> 6 (2026-11-14, R2-CODE-B-7, the merge 0aa0cce00), composed from the base's 39/8/8: the line's
@@ -827,7 +839,7 @@ const MOBILE_BASELINE = Object.freeze({
   // Gangs" operation taking its own gang note (C1) where it shared the catch-all (not bisected);
   // sub12 stays 0 and the floors arm reads 0 violations.
   // STYLE-2-MERGE point 24: composed with SW-B7b's Defense +10 (33 at point 23): prose 33 -> 34, chrome 1, sub14 1.
-  "Systems/Defense":     { prose: 34, chrome: 1, sub14: 1, sub12: 0 },
+  "Systems/Defense":     { prose: 33, chrome: 1, sub14: 1, sub12: 0 },
   // chrome 1 -> 0 (2026-10-30, UX consolidation U2): the long Depleted label is now one word.
   "Systems/Resources":   { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   // prose 5 -> 2 (2026-10-30, UX consolidation U3): the caption and the receipt left the page.
@@ -840,8 +852,8 @@ const MOBILE_BASELINE = Object.freeze({
   "Systems/Magic":       { prose: 3, chrome: 2, sub14: 1, sub12: 0 },
   // prose 281 -> 279 (2026-11-13, R2-CODE-B item 1, composed at the merge 0aa0cce00): the same two NPC card lines, shorter by
   // the count range, fall under MIN_CHARS; sub12 stays 0 and the floors arm reads 0 violations.
-  "World/NPCs":          { prose: 279, chrome: 1, sub14: 0, sub12: 0 },
-  "World/Relationships": { prose: 138, chrome: 36, sub14: 36, sub12: 0 },
+  "World/NPCs":          { prose: 284, chrome: 1, sub14: 0, sub12: 0 },
+  "World/Relationships": { prose: 140, chrome: 35, sub14: 35, sub12: 0 },
   "World/Faith":         { prose: 2, chrome: 0, sub14: 0, sub12: 0 },
   "World/Daily Life":    { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Rumors & News": { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
