@@ -1,4 +1,4 @@
-# W2-WRITE — the hand-back of the fourteenth seat (KEPT CURRENT AFTER EVERY POOL)
+# W2-WRITE — the hand-back of the fourteenth seat (STOPPED at 16:30 UTC on the chair's 16:00 message: the program converges on the joined line)
 
 **Lane:** `lane/w2-write-2026-11-13`. Brief: `docs/chair/2026-11-14/briefs/BRIEF-W2-WRITE-14.md` on the chair's lane
 (the chair session_01ACmDYZrFEVXyZEUg1NDxxC). This seat: session_01ACmDYa6vXfmDnBgLSkBKTB. The lane's tip read back
@@ -43,23 +43,50 @@ main clone's refs and local config compared before and after (no change but the 
 | DS-DEF-8 INSURGENCY v3 | + `guardPresence` (was colour) | v3->v1 3, v3->v4 3 (hamlet, village) | v1 TRUE (LOW: "its defence" of a no-force town, as the page's posture line says it) Dongyuan (hamlet), Lundtun (village) | 1 row green | f034cbc8b |
 | DS-DEF-8 SECURITY COMPROMISED v1 | + `guardPresence` (was colour) | v1->v3 1 (Malono, village) | v3 TRUE at Malono | 1 row green | 502629c2d |
 
-MEASURED, NOT YET LANDED (replay of the whole patch on the merged base): frontier v1/v2 -> v4 27, silent 7 occupied;
-CRITICAL v3 -> v4 1 (CRITICAL v1 v4, WEAK v1 under an occupation: 0 moves now, the readiness row is silent there on the
-joined line); STRONG silent in 62; plagued 12 moves; INTERNAL PRESSURE v3 -> v4/v5 11; CHAIN v3 -> v2 4; INSURGENCY 6;
-SECURITY COMPROMISED 1; UNDER TRIBUTE 8; WALLED-QUIET silent 19; GM ADVISORY silent 12; fracture 3.
-THE TWO GATES SEEN on the patch at the merge: the authoring bill (mute +3: neither walls nor force threat=no threat;
-STRONG crisis / no crisis) and the aliveness sweep (only `Economic Survival: STRONG` falls mute in the fact-free fort).
+THE BILL AND THE ALIVENESS TEST BY THIS SEAT'S RUN, at the tip: `dossierStateProseProjection.contract.test.js` "names the
+authoring bill" and "reads NOTHING ..." GREEN (ceiling 28 untouched; no mute added: the three cures that add a mute state
+are not landed); `defenseStateProseDesk.test.js` "all TWENTY-SIX pools speak" GREEN. THE TWINS (r1): NOT WRITTEN (their
+pools not reached). (r3) the council lines: NOT MADE.
+PUSH NOTE: INSURGENCY (f034cbc8b) and SECURITY COMPROMISED (502629c2d) went up in one push (f5711233d), each with its own
+after.sh; every other pool was pushed alone.
+
+## NOT LANDED: THE REST OF THE PATCH, POOL BY POOL, WITH ITS MEASURES (replay of the whole patch on the merged base, 772)
+The source stays `probes/W2-WRITE-13/SWEEP-CURES-WIP.patch` (its rows for the landed pools are now on the lane; `git apply`
+will refuse those hunks: apply the rest by `declare.py` filtered, as `declare2.py` here, and `guards.py` for the rows).
+- DS-DEF-2 Economic Survival STRONG (v1 `no crisis: occupied`; v3 `no crisis: famine`; `prosperity: ≥ poor` on v2 v3 v4 v8
+  v10 v11 v12 v13): silent in 62 (v3 19, v12 21, v11 9, v4 8, v10 5). ADDS TWO MUTE STATES (crisis / no crisis) and is the
+  ONLY pool the aliveness sweep loses: NEEDS ITS TWINS FIRST (r1). Measured: the calm double carries no prosperity, so a twin
+  that answers the bill must declare no prosperity atom: true at every rung. Proposed (unread, for the next seat): no crisis
+  `[street · no crisis]` "Whatever {settlement} earns, it has kept enough of it back to carry the town through a bad
+  season."; crisis `[counterforce · crisis · no crisis: debt · no crisis: famine · no crisis: occupied]` "Whatever
+  {settlement} earned before this trouble, it kept part of it back, and that is what carries the town now." NOTE: the
+  chair's BAR-0 #205 ruling called money put by false off the two lowest rungs; r1 offers this twin; the chair to weigh.
+- DS-DEF-2 neither walls nor force v3 `no mercenary`: ADDS the mute state threat=no threat (the double holds a mercenary):
+  NEEDS ITS TWIN FIRST: proposed `[ledger · no threat · crisis: any · mercenary]` "{settlement} has no wall and no soldiers of
+  its own; it pays a hired company to stand between the town and trouble." (no `no watch`: the double holds a watch).
+- DS-DEF-1 CRITICAL v1 v4, WEAK v1 `no crisis: occupied`: 0 moves on the joined base (the readiness row is silent under an
+  occupation there); CRITICAL v3 `no guardPresence`: v3->v4 1 (rww-town-famine-1). Guard rows: no town of the case reads
+  the pool now: write them `by: 'record'` (the control: another line admitted).
+- DS-DEF-2 plagued v1 `no crisis: occupied`, v4 `no crisis: under_siege · no crisis: occupied`: 12 moves (v4->v1 5, v4->v3 4,
+  v1->v3 3). CHAIN food trades working v3 `no crisis: famine`: v3->v2 4 (its guard town rww-metropolis-famine-1 no longer
+  reads the pool: re-key). DS-DEF-3 political fracture v2 `population: ≥ middling`: 3 (v2->v4 1, v2->v5 2).
+- DS-DEF-11 WALLED-QUIET v2 v3 `no crisis: unrest`: silent 19 (insurgency, slave revolt, wartime towns): read that the row
+  may go silent there.
+- DS-POW-6 GM ADVISORY v1 v2 v4 v5 `no crisis: occupied`: silent 12; HANDBACK-13's recommendation stands (v4 v5 only; v1 v2
+  TRUE of a commander under an occupation); its `by: 'record'` rows fail their control in occupied towns: re-key.
+- THE JOIN'S 11 GUARD ROWS red on the merged base (listed under the first act): re-key BY IDENTITY.
 
 ## New or changed lines (the owner's veto list, with the towns read)
 (none yet: the landed cures are declarations)
 
 ## What is left (line by line)
-- STEP 1: the rest of the batch, widest first: the frontier (DS-DEF-2 Beasts frontier v1 v2 v4), DS-DEF-1, DS-DEF-8
-  (INTERNAL PRESSURE, INSURGENCY, SECURITY COMPROMISED, UNDER TRIBUTE), STRONG with its twins (r1), neither walls nor
-  force v3 with its twin (r1), WALLED-QUIET, plagued, CHAIN, fracture, GM ADVISORY (HANDBACK-13's recommendation: v4 v5
-  only; v1 v2 TRUE under an occupation). The join's 11 guard rows above: re-key BY IDENTITY (a town of the case on the
-  merged base, or `by: 'record'` where the composer now silences the row in every town of the case).
-- STEP 2, 3: as the brief.
+- STEP 1: the pools above, NOT LANDED, with their measures; the ONE MESSAGE "the batch is in": not sent (the batch is not in).
+- STEP 2 (r3, the council lines in a headman's town; DS-DEF-2 v7 at the reader's town; HIGH 1's guard row; the sister-pool
+  sweep for "all the town has / only / nothing but", with walls PRESENT v6 "all that stands" added, LOW): NOT BEGUN.
+- STEP 3 (the three red test files; DEF-2 v4 v6; STRONG v3 v12; the last read's rows by width; the slash labels, whose words
+  are now the powers lane's `powerSentenceName.js :: PROSE_FORMS`, per the chair's 14:38 message): NOT BEGUN.
+- Registers: the byte baseline and the shift register NAMED, not re-taken; the wiring census stale again by every corpus
+  edit since e28e1305f (its three walkers red, NAMED: re-take only when the generator refuses).
 
 ## FOR THE JOIN
 - The joined line's wiring census is stale against defenseStateProse.js (the stop above): its merge seat's.
