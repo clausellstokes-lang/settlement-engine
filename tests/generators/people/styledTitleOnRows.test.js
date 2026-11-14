@@ -79,9 +79,12 @@ describe('COHERENCE-POWERS-8 R2 · a woman\'s row agrees with her card', () => {
   it('on fresh births: no woman\'s row keeps a masculine word her title has a feminine for, and every man\'s row is his role', async () => {
     await loadGenerationLawPayloads();
     // chosen by a scan of p8-<size>-1..12 at 91a3a9623 for a woman lord or abbot with a row (the class's exposure), plus two
-    // controls with none; the scan read the base only, never this file's expectations
+    // controls with none; the scan read the base only, never this file's expectations. RE-KEYED BY IDENTITY (POWERS-13): the
+    // line's merge (835cce92c) re-dealt p8-city-10's roster and ties (68 -> 66 cards), and Volkera Wolf's rows went 5 -> 2, so
+    // the six read 9 ends at 3909655c3. p8-city-3 is added, the first town of the same scan at 3909655c3 with the exposure
+    // that the list did not hold (Yasmeen ibn Sina, the senior abbot, 3 rows); the scan read exposure only.
     let gendered = 0;
-    const failures = collectSeedFailures(['p8-town-8', 'p8-town-10', 'p8-city-10', 'p8-metropolis-11', 'p8-city-1', 'p8-village-1'], (seed) => {
+    const failures = collectSeedFailures(['p8-town-8', 'p8-town-10', 'p8-city-10', 'p8-metropolis-11', 'p8-city-3', 'p8-city-1', 'p8-village-1'], (seed) => {
       const wrong = ends(born(seed)).filter(([c, word]) => {
         if (c.gender !== 'female') return word !== c.role;
         if (/^the (?:lord|abbot|senior abbot)$/.test(c.role)) gendered++;
@@ -90,6 +93,6 @@ describe('COHERENCE-POWERS-8 R2 · a woman\'s row agrees with her card', () => {
       expect(wrong, seed).toEqual([]);
     });
     expectNoSeedFailures(failures, 'every row end reads its card\'s styled title (a woman\'s feminine, a man\'s role)');
-    expect(gendered).toBeGreaterThanOrEqual(10); // 12 at 91a3a9623
+    expect(gendered).toBeGreaterThanOrEqual(10); // 12 at 91a3a9623; 12 at 3909655c3 with p8-city-3
   }, 120000);
 });
