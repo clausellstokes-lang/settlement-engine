@@ -24,6 +24,7 @@ import { type, palette, space, pt, swatch, factionColors } from '../theme.js';
 import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js';
 import { cap, label, humanize } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
+import { tradeStoppedHere } from '../../domain/display/chainStateShown.js'; // SURFACES-3 item 2 (r4): the tab's siege reader
 
 const _STATUS_TONE = { full: 'good', partial: 'warn', unexploited: 'bad' };
 const VALUE_TONE  = { 'very high': 'good', high: 'good', medium: 'warn', low: 'muted' };
@@ -156,6 +157,11 @@ export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse 
           <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             NEARBY RESOURCES
           </Text>
+          {/* SURFACES-3 item 2 (r4): under a siege in force the grounds print first and unlabelled, never as "Abundant":
+              the tab's reader (chainStateShown.js :: tradeStoppedHere, ResourcesTab.jsx's Nearby Resources). */}
+          {tradeStoppedHere(settlement) && r.nearbyAbundant?.length > 0 && (
+            <ResourceRow kicker={null} tone="muted" items={r.nearbyAbundant} customNames={r.nearbyCustom} />
+          )}
           {r.nearbyDepleted?.length > 0 && (
             <ResourceRow
               kicker="Depleted"
@@ -164,7 +170,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse 
               customNames={r.nearbyCustom}
             />
           )}
-          {r.nearbyAbundant?.length > 0 && (
+          {!tradeStoppedHere(settlement) && r.nearbyAbundant?.length > 0 && (
             <ResourceRow
               kicker="Abundant"
               tone="good"
