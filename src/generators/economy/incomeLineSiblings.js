@@ -131,7 +131,8 @@ export const INCOME_STATE_SIBLINGS = Object.freeze({
  * @param {{ roster: ReadonlyArray<string>, besieged: boolean, imports: ReadonlyArray<unknown>, exports: ReadonlyArray<unknown>,
  *   chains: ReadonlyArray<{ chainId?: unknown, status?: unknown }>, top: boolean, source?: string, managedForest?: boolean,
  *   grainFailed?: boolean }} f the roster's names lower-cased; the siege; the final trade lists; the chains with their
- *   states; whether the row is the largest source; its source label; whether a managed or shipbuilding forest stands;
+ *   states; whether the row is the largest source; its source label; whether the felling is managed (a managed forest,
+ *   or a shipbuilding stand a woodcutter works: UPKEEP-16, the chair's ruling (b));
  *   whether the food record names grain as the source a famine failed
  * @returns {string}
  */
