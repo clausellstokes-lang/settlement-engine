@@ -17,6 +17,11 @@
  *   institutions exercise meaningful civic influence ..." and "A voice in the town's affairs belongs to the Religious
  *   Authorities."
  *
+ * Beer (the eighth seat's named row; the chair's ruling, its L05's): a good is claimed as made here only where every
+ *   house its chain needs stands; the grain chain names a Mill and Bakers and no brewer, so "beer" is listed in a grain
+ *   row only where a brewer (a Brewery or Brewer) stands on the roster. r2r-town-24 (town of 423): "bread, beer, animal
+ *   feed · Complete production chain in place" with Inns and Taverns and no brewer.
+ *
  * The towns are born as the reader's probes bear them (REVIEW-R3-CODE-C births.mjs :: cfgFor; the bar's towns by
  * REVIEW-BAR-0 render.bar0.jsx :: cfgFor, the rr pattern). Each arm collects first and asserts on the collection, and
  * asserts that it saw its line print (a guard that never sees its line proves nothing).
@@ -60,6 +65,13 @@ const CALM_TOWNS = ['r2r-village-35', 'bar0-town-calm-rand-1'];
 /** n240's towns: Gortfell, villages, towns and cities whose faith stood below half the hall, under siege and occupation. */
 const FAITH_TOWNS = ['bar0-town-calm-rand-1', 'r2r-village-12', 'r2r-village-15', 'r2s-occupied-town-1', 'rr3-town-under_siege-rand-0', 'rr3-city-under_siege-rand-2', 'r2r-metropolis-0'];
 const NO_SAY = 'have no say in the hall';
+/** The beer towns: grain rows with no brewer standing (an occupied town among them), and towns whose brewer stands. */
+const NO_BREWER_TOWNS = ['r2r-town-24', 'r2r-town-2', 'r2s-occupied-town-1', 'rr3-town-wartime-rand-5', 'rr3p-city-calm-rand-0'];
+const BREWER_TOWNS = ['r2r-town-39', 'r2r-city-1', 'r2r-metropolis-3'];
+/** @param {any} s */
+const brewerStands = (s) => (s.institutions || []).some((/** @type {any} */ i) => /^brew/i.test(String(i?.name || '')));
+/** @param {any} s */
+const grainRows = (s) => (s.resourceAnalysis?.exports || []).filter((/** @type {any} */ e) => e.chain === 'grain');
 
 /** The sources a famine's failure stops: the failed one; grain and the mill together (the mill grinds the grain). @param {unknown} failed */
 const stoppedBy = (failed) => (failed === 'grain' || failed === 'mill' ? ['grain', 'mill'] : failed ? [String(failed)] : []);
@@ -67,11 +79,15 @@ const stoppedBy = (failed) => (failed === 'grain' || failed === 'mill' ? ['grain
 /** @type {Array<any>} */ let famineTowns = [];
 /** @type {Array<any>} */ let calmTowns = [];
 /** @type {Array<any>} */ let faithTowns = [];
+/** @type {Array<any>} */ let noBrewerTowns = [];
+/** @type {Array<any>} */ let brewerTowns = [];
 beforeAll(async () => {
   await loadGenerationLawPayloads();
   famineTowns = FAMINE_TOWNS.map(bear);
   calmTowns = CALM_TOWNS.map(bear);
   faithTowns = FAITH_TOWNS.map(bear);
+  noBrewerTowns = NO_BREWER_TOWNS.map(bear);
+  brewerTowns = BREWER_TOWNS.map(bear);
 }, 180000);
 
 describe('n80: the foodways line names no source the famine failed', () => {
@@ -123,5 +139,20 @@ describe('n240: the faith is not said to have no say in the hall where the recor
       return Boolean(gov && faith && faith.power / Math.max(1, gov.power) < 0.5);
     });
     expect(pairs).toEqual(FAITH_TOWNS.map(() => true));
+  });
+});
+
+describe('beer: a grain row lists beer only where a brewer stands', () => {
+  it('no grain row names beer where no brewer stands, and the row keeps its other goods', () => {
+    const seen = noBrewerTowns.map((s) => ({ town: s.name, brewer: brewerStands(s), rows: grainRows(s).map((/** @type {any} */ e) => e.product) }));
+    // The arm reads towns with a grain row and no brewer.
+    expect(seen.filter((t) => t.brewer || !t.rows.length)).toEqual([]);
+    expect(seen.filter((t) => t.rows.some((/** @type {string} */ p) => /\bbeer\b/.test(p)))).toEqual([]);
+    expect(seen.filter((t) => !t.rows.some((/** @type {string} */ p) => /\bbread\b/.test(p)))).toEqual([]);
+  });
+
+  it('where a brewer stands, the grain row still lists beer', () => {
+    const seen = brewerTowns.map((s) => ({ town: s.name, brewer: brewerStands(s), beer: grainRows(s).some((/** @type {any} */ e) => /\bbeer\b/.test(e.product)) }));
+    expect(seen.map((t) => [t.brewer, t.beer])).toEqual(BREWER_TOWNS.map(() => [true, true]));
   });
 });

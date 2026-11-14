@@ -405,6 +405,14 @@ const buildViabilityReport = (
 //       the herds that failed feed no cheese and no preserved meat.
 // Elsewhere the good is not listed (the ruling's own arm; silence is not a false sentence). A chain that names no
 // house at all (the oasis dates) has nothing to stand the claim on: its goods are given without it, as (2) gives them.
+//
+// A GOOD NO HOUSE OF ITS CHAIN MAKES (R3-CODE-C-9; the eighth seat's named row, the chair's ruling of 2026-11-14 as
+// its L05's): (5) the grain chain names a Mill and Bakers and no brewer, so its row named "beer" in towns with Inns and
+// Taverns and no brewer standing (19 of the reader's 1,722; r2r-town-24, town of 423: "bread, beer, animal feed ·
+// Complete production chain in place"). Such a good is listed only where its maker stands on the roster, read by kind
+// as (3) reads a house (`houseHead`: a Brewery or a Brewer is a brewer; an alehouse is not); elsewhere it is not listed.
+/** The goods a chain lists that none of its own houses makes, and the kind of house that makes each (houseHead's word). */
+const UNHOUSED_GOOD_MAKER = Object.freeze({ beer: 'brewer' });
 /** The chain a famine's failed source stops (foodBalance.js :: failedSource; the mill grinds the grain). */
 const FAILED_SOURCE_CHAIN = Object.freeze({ grain: 'grain', mill: 'grain', livestock: 'livestock', fish: 'fish' });
 /** A house name's head word, as a kind: lower case, no counts or possessives, no plural or -y ending. @param {unknown} name */
@@ -438,7 +446,11 @@ const evaluateInstitutionDeps = (exploitation, institutions = [], gaps = [], res
         && absent.some((name) => (other.processingInstitutions || []).includes(name)))
       .flatMap(([, other]) => [...(other.intermediateGoods || []), ...(other.finalProducts || [])]);
     const products = (chain.finalProducts || []).filter((product) => (
-      !madeByAbsent.some((good) => tokensReconcile(product, good))));
+      !madeByAbsent.some((good) => tokensReconcile(product, good))))
+      .filter((product) => { // (5): a good its chain's houses do not make stands only beside its maker
+        const maker = UNHOUSED_GOOD_MAKER[/** @type {keyof typeof UNHOUSED_GOOD_MAKER} */ (normalizeToken(product))];
+        return !maker || institutions.some((inst) => houseHead(inst?.name) === maker);
+      });
     if (products.length === 0) return;
     const raws = [chain.rawResource, ...terrainSynonymsFor(chain.rawResource)];
     const sourceDepleted = depleted.some((record) => (
