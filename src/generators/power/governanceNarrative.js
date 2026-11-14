@@ -336,7 +336,13 @@ const annotateMonsterThreat = (stability, monsterThreat) => {
 
 // ⛔ THE ARCANE SIGNAL ASKS THE WORLD LAW FIRST (GS-4, ODQ §934.101): a mundane 'Alchemist shop' (licence `none`)
 // raised the hedge-wizard line in 11 of 250 no-magic towns, each convicted by the coherence receipt and shipped.
-const deriveInstitutionSignals = (institutionNames, magicWorks) => ({
+// POWERS-13 (the bar's HIGH row #291): a line that names a market or a court READS THE ROSTER. `hasLiveMarket` is the
+// vocabulary's one market fact (`factsOf(...).market`, the reader the sibling door below uses), never the loose
+// `hasMarketInstitution` ('guild', 'trading' and a black market all match it); `hasCourt` is the record's own court
+// system (`instFlags.inst.hasCourtSystem`, the reader `deriveBaselineStability` uses).
+const deriveInstitutionSignals = (institutionNames, magicWorks, instFlags = null) => ({
+  hasLiveMarket: Boolean(factsOf({ institutions: (institutionNames || []).map((name) => ({ name })) }).market),
+  hasCourt: Boolean(instFlags?.inst?.hasCourtSystem),
   hasMilitaryInstitution: includesAnyInstitution(
     institutionNames,
     ['garrison', 'barracks', 'militia', 'watch', 'guard', 'mercenary'],
@@ -385,6 +391,8 @@ const deriveBaselineConflict = ({
     hasCivicInstitution,
     hasMarketInstitution,
     hasReligiousInstitution,
+    hasLiveMarket,
+    hasCourt,
   } = institutionSignals;
 
   if (stressFlags.stateCrime) {
@@ -423,7 +431,8 @@ const deriveBaselineConflict = ({
   }
   if (neighbourRelationship) return `Relations with ${neighbourRelationship.neighborName} have soured, and everyone here knows it.`;
   if (institutionFlags.criminalEffective > 65) {
-    return hasMilitaryInstitution || hasCivicInstitution
+    // POWERS-13: the merchants and the guard it names stand (a market; a force), else the communal stores
+    return hasMilitaryInstitution && hasLiveMarket
       ? 'Several merchants have been found murdered this season, and people say the guard is doing nothing about it.'
       : 'Someone has been stealing from the communal stores. Everyone suspects someone. No one is saying anything.';
   }
@@ -436,16 +445,16 @@ const deriveBaselineConflict = ({
     }
     return "The crown's last order took six weeks to get through the noble houses that were meant to pass it on. The crown and the nobles bargain over everything now, and each bargain comes harder.";
   }
-  if (hasNoblePower && institutionFlags.economyOutput > 55) {
+  if (hasNoblePower && institutionFlags.economyOutput > 55 && hasLiveMarket) { // POWERS-13: both lines name the merchants and their market
     return priorities.economy > 65
       ? 'The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have not forgotten.'
       : "A noble family is contesting a merchant's right to operate in their traditional market territory. The council is hearing the case and wishes it were not.";
   }
   if (institutionFlags.militaryEffective > 68) {
-    if (hasMilitaryInstitution) {
+    if (hasMilitaryInstitution && hasCourt) { // POWERS-13: the civilian courts it names stand
       return 'The military commanders are pushing for expanded authority over civilian courts, and the council is losing ground.';
     }
-    if (hasCivicInstitution) {
+    if (hasCivicInstitution && !hasMilitaryInstitution) {
       return 'The village militia captain is pushing for authority over disputes that the reeve used to handle.';
     }
     return "The strongest armed household has started making decisions on everyone's behalf without asking.";
@@ -477,7 +486,7 @@ const deriveBaselineConflict = ({
     }
     return 'Farms nearby have been abandoned after attacks. The community cannot agree on whether to shelter in place, build defences, or leave.';
   }
-  if (hasCivicInstitution || hasUrbanCommerceInstitution) {
+  if ((hasCivicInstitution || hasUrbanCommerceInstitution) && hasLiveMarket) { // POWERS-13 (#291): the market it levies, and its merchants, stand
     return 'The council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the other has already lost.';
   }
   if (hasMarketInstitution) {
@@ -662,7 +671,7 @@ export const buildGovernanceLabels = ({
   );
   const stability = annotateMonsterThreat(stressStability, monsterThreat);
 
-  const institutionSignals = deriveInstitutionSignals(institutionNames, magicWorks);
+  const institutionSignals = deriveInstitutionSignals(institutionNames, magicWorks, institutionFlags);
   const hasRoyalAuthority =
     configuredGoverningFaction &&
     configuredGoverningFaction.includes('Royal Authority');
