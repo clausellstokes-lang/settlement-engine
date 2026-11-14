@@ -310,17 +310,34 @@ food count re-taken on records born at it: every cell of item 1 still 0).
   lines byte-identical; the grid 0 rises, 0 falls; the 90 test files naming the touched files: the base's 18 reds
   title for title.
 
+## Item 2 (r3): THE OTHER SPELLING — DONE, e31da7379
+
+- CAUSE: the tab prints an export as the list spells it and an import through the seam (`resourceDisplayName`); the
+  PDF's EXPORTS column (`EconomicsTrade.jsx :: renderedTradeLabel`) and the journal's Exports row sent exports through
+  the seam too.
+- CURE: `src/domain/display/tradePillWord.js` (an import through the seam, an export as the list spells it); the tab,
+  the PDF and the journal each call it. No match moves (ownership and terrain tests take the raw value).
+- COUNTS (`probes/SURFACES-3/trade.census.jsx` + `tradeagg.mjs`, records born at 9618e0319): PDF exports 83 -> 0
+  (38 "River fisheries", 30 "Precious metal veins", 15 "Coastal timber"); journal Exports 83 -> 0; imports 0 -> 0.
+  SURFACES-1's 165 was at 035159bc7. No export of the 772 is machine-shaped (the seam guarded nothing there).
+- GUARD: `tests/pdf/tradePillWordEverySurface.test.jsx`; each surface reds alone; the guard title (an import's raw key
+  still resolved) reds alone under a plant.
+- RE-KEYED BY IDENTITY: `tests/lint/resourceLabelSeam.census.test.js` (THREADED_VIA_PILL: the PDF, the journal and the
+  tab call the pill's leaf; the leaf joins THREADED; the lane-25 split pins its two re-keyed lines).
+- GATES: as item 1; the named tests: the base's 17 reds title for title.
+
 ## Every new or changed word on a surface (the owner's veto list)
 
 | surface | before | after | towns read |
 |---|---|---|---|
 | PDF Economics, FOOD SECURITY block | the view's DEFICIT, share, cover, provision | the tab's row: DEFICIT = the tab's Short; its share; cover only where the row imports; the provision the row credits | r2s-famine-thorp-0 (10 -> 11), r2s-under_siege-metropolis-0 (80026 -> 80237, provision line gone), r2s-under_siege-city-2 ("imports cover 1%" gone), r2s-occupied-town-0 (228 -> 245), r2r-thorp-32 (2 -> 1) |
 | journal Economics "Food" | "Deficit −10 (26% of need)", "Surplus +1", "Balanced" | the food word: "Deficit — Active Famine", "Deficit", "Pressured", "Secure" | r2s-famine-thorp-0, r2s-under_siege-metropolis-0, r2s-occupied-town-0, r2r-thorp-32 |
+| PDF EXPORTS, journal Exports | "River fisheries", "Precious metal veins", "Coastal timber" | the tab's "River fish", "Precious metals", "Shipbuilding timber" | r2r-thorp-44, r2s-famine-city-2, r2s-wartime-metropolis-1, r2r-town-52 |
 
 ## Registers named stale (r1)
 
-- `tests/lint/sovereigntyLightingContract.walker.test.js` "THE CENSUS IS AN ASSERTION": red before me; my new test file
-  `tests/pdf/foodFiguresEverySurface.test.jsx` adds to what a re-take counts. Not re-taken.
+- `tests/lint/sovereigntyLightingContract.walker.test.js` "THE CENSUS IS AN ASSERTION": red before me; my new test files
+  `tests/pdf/foodFiguresEverySurface.test.jsx` and `tests/pdf/tradePillWordEverySurface.test.jsx` add to what a re-take counts. Not re-taken.
 
 ## Found, not cured
 
@@ -328,13 +345,16 @@ food count re-taken on records born at it: every cell of item 1 still 0).
 
 ## What is left, line by line
 
-1. (r3) the other spelling (165 towns, "River fisheries" / "River fish"): the tab's word on the PDF and the journal.
-2. (r4) "Abundant" under a siege (56 of 56): the PDF prints the groups the tab prints.
-3. (r5) the Defence chapter's force name and provenance chip: MEASURE FIRST (the defence lane's cure is on the line).
-4. (r6) the tension rows' bracket; the stores' unit (6 towns); the trade connectivity row (with a system state).
-5. THE SWEEP, once, at the end.
+1. (r4) "Abundant" under a siege (56 of 56): `ResourcesProduction.jsx` ~167 `r.nearbyAbundant`; the PDF prints the
+   groups the tab prints, through the tab's reader ((r7): only that group's hunk in that file).
+2. (r5) the Defence chapter's force name and provenance chip: MEASURE FIRST (UPKEEP-14's
+   `tests/pdf/defenseForceNamesLabelled.test.jsx` is on the line).
+3. (r6) the tension rows' bracket ("Taverns (5-20)", History and Overview, through `houseLabelsInText`); the PDF's
+   medical line; the stores' unit (6 towns); the trade connectivity row (with a system state).
+4. THE SWEEP, once, at the end.
 
 HOW THE INSTRUMENTS ARE RE-MADE: `probes/SURFACES-3/run.sh <tree> <x.census.jsx> <out> <seeds> <workers> [VAR=val]`
 runs a census under vitest in shards. Records: `run.sh <tree> births.census.jsx <out> probes/SURFACES-2/seeds772.txt 4
 RECORD_OUT=<records>` (39 s for the 772: births only, no render). The food figures: `run.sh <tree>
-foodblock.census.jsx <out> <seeds> 4 RECORDS=<records>` (45 s), then `node foodblockagg.mjs <out>`.
+foodblock.census.jsx <out> <seeds> 4 RECORDS=<records>` (45 s), then `node foodblockagg.mjs <out>`. The trade pills: `run.sh <tree> trade.census.jsx <out> <seeds> 4
+RECORDS=<records>`, then `node tradeagg.mjs <out>`.
