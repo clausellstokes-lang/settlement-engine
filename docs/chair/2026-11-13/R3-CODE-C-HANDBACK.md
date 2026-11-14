@@ -465,3 +465,68 @@ them."; "In {name} what food is left is watched day and night, and those watchin
 "…, and those waiting on one are losing patience."; "People in {name} keep away from where one power's ground meets
 another's, most of all after dark." (b6208d93a); "No house here holds what this crisis turns on."; "no one yet named"
 (2ce44a973).
+
+## THE FOURTH SEAT (R3-CODE-C-4)
+
+Seated 2026-11-14 00:20 UTC (session_01FE9mEu8voZvyXV6r9VQVue) for the lane's close; its session ended with the
+account at about 00:55 UTC and it pushed NOTHING (the lane's tip stayed e2aa8e278). Its brief, BRIEF-R3-CODE-C-4.md on
+the chair lane, passed whole to the fifth seat.
+
+## THE FIFTH SEAT (R3-CODE-C-5), kept current after every item
+
+The seat R3-CODE-C-5 (session_01ACmDYbEJ513ujr2NhacwG8), for the chair session_01ACmDYZrFEVXyZEUg1NDxxC (the program
+moved to this account on 2026-11-14; the owner, in that chair's chat: "Continue with the pending work! ... I defer all
+decisions to you and give you all permissions you may require"). Its assignment: BRIEF-R3-CODE-C-5.md (chair lane,
+docs/chair/2026-11-14/briefs/), which makes BRIEF-R3-CODE-C-4.md its brief whole: the census, one rewording pass of
+the vantage table, the two manifest entries, ONE message to the chair, then on the chair's word the merge of point
+49's line and THE LANE'S ONE FINAL STATEMENT. The tip read back from origin at the start: e2aa8e278, as the brief
+said. Never rewrite a commit at or below e2aa8e278. EXECUTED unless marked.
+
+**How the measures were made.** CENSUS-2 (lane/census-2-2026-11-13 at 2686272b1, census2.sh, 4 workers, `--files` the
+29 lane files of the third seat's list, each resolved to one path) at aac79b808 and at b45d9154b (src identical to
+e2aa8e278), each from scratch, both EXIT 0 (every stage's own exit read by the script; 720 of 720 dumps each). The
+960 for the vantage table: CENSUS-2's 720 born at the tip by its births.mjs, and the lane's 240 fresh
+(REVIEW-R2-STAGES births.mjs with the first seat's fresh seeds r2r-<size>-fresh3c-0..9, r2s-<crisis>-<size>-70..71;
+240 of 240, 0 errors). The surfaces: REVIEW-R2-STAGES surfaces.sh (the PDF in three variants, the Foundry journal,
+the Tonight sheet). HAZARD seen: `npm ci` set `core.hookspath=.husky/_` (unset before); kept, as the third seat did;
+refs and local config compared before and after every push since, only this seat's pushes and fetches differ.
+
+### Items
+
+| item | outcome | commit |
+|---|---|---|
+| 3: the manifest entries | tests/generators/embattledReasonNoSlider.test.js and occupierRelationLine.test.js (the first seat's OWED rows) AND tests/generators/fenceWordOfMouthTavern.test.js (the third seat's; CORRECTED OUT LOUD: its hand-back said the file "avoids the manifest's name pattern", but tests/generators is one of ENFORCER_DIRS, so it is enumerated by its directory and was the third red row of TOTALITY). Each the admitted-tree rationale (generators-tree-admitted-subject-coupled-2026-08-30), which the manifest test re-derives per member (imports src/, asserts). Red first 1 of 10 at e2aa8e278; 10 of 10 | b45d9154b |
+| 2: one rewording pass of crisisSummaryVantage.js :: CRISIS_SUMMARY_POOLS | On the 960 at the tip, by the call sites' own picks: "keep order" 33 prints in 30 towns with no force -> 0 (eight lines; the occupation's "Keeping order in {name} is the occupiers' business" KEPT: its occupiers are the kind's force); "the merchants" 10 in 10 with no market or merchant house -> 0 (three lines; "Big business waits" owned whole); "street(s)" 33 in 33 thorps and hamlets -> 0 (ten lines, the two departures lines among them, which no birth prints: MIGRATION_DIRECTION_AT_BIRTH is 'arrivals'). 21 lines, each read in three rendered towns (63 of 63 found: thorps of 7 to 16, metropolises to 452,020); one draft ("Many houses") reworded before the commit. Display only (240 records byte-identical). Red first 6; guard towns r2s-slave_revolt-thorp-70, r2s-occupied-hamlet-70, r2s-plague_onset-thorp-70. New wording in the commit body | bbeb95b73 |
+| 1: CENSUS-2, the lane's files | per kind, hits (towns) at aac79b808 -> tip: a 102 (92) -> 63 (61); b 7 -> 7; c 13 -> 11; d 0 -> 1; e 0 -> 0; f 6 -> 26; g 54 -> 0; h 0 -> 0. The rises are officialsInPay.js (d 1, f 20), a file that exists only on the line, brought by the merge 8e9046124, printed by rb's WhoRunsThisTownPanel: EXPOSURE, declared, not origin. Every one of the 108 tip hits READ (below). Its limits: the dossier's views only (not the PDF, the journal, the Tonight sheet); it cannot see two lines disagreeing. The tip census ran before bbeb95b73 (its Defense-tab lines); the final statement's census is at the final tip | — |
+
+**The 108 tip hits, read (CENSUS-2 at b45d9154b; a hit is a candidate).**
+- TRUE, not changed: outlookHookSiblings.js MODERATE_GAP_TWIN 11, STARVING_HOOK 6, PEACE_IRON_HOOKS 2 (19 towns, every one
+  on a road, river or crossroads route and none besieged: a trader can come; the second seat's 0b3ce25a3 already took the
+  hook off the isolated and besieged); factionDynamics.js "courts" 1 (r2s-plague_onset-town-0: rights, the third seat's
+  reading, which the chair let stand).
+- NAMED, as the earlier seats named them (same sentences, same towns): plotHooks.js ECHO_PREFIXES 18 and TENSION_LABELS 2
+  (the hooks' texts and the tension's choice: historyData.js / historyGenerator.js, fd's); the district hook's fourth
+  town (r2s-infiltrated-village-2) is credited by the trace to hookTruth.js :: VILLAGER_TIERS, a Set of tier names that
+  prints nothing (a trace tie: the text is historyData.js's); hookThemes.js 14 (npcData.js's person hooks, ra's);
+  magicSource.js 11 (the chain catalogue's label, the data lane's; MagicTab.jsx prints it); officialsInPay.js d 1 (rb's
+  panel row, the cure named) and f 20 (FOR THE JOIN, above); incomeLineSiblings.js LOCAL_COAL_LINE 1 and
+  LOCAL_COAL_SOLD_LINE 3 (economicState.js's choice, the defence lane's); resourceSemantics.js 3 (EconomicsTab.jsx's
+  Trade Profile under a siege, wc's and up's, the first seat's #512 class).
+- NAMED, new to this seat: **stressNarrative.js :: RENDERERS (wartime), 8 towns** (thorps, hamlets, villages, two of
+  them isolated: r2r-thorp-11, -16, -32, -56, r2s-wartime-thorp-1, -hamlet-2, -hamlet-3, -village-2): the stored summary
+  "… is in a kingdom at war and doing well out of it: army contracts pay, prices are high, and merchants with the right
+  friends are getting rich." beside no merchant and, in two, an isolated route. The file is rb's (its own commits on it);
+  the cure is rb's: the profitable roll's line names no merchant, and an isolated place is not said to do well on army
+  contracts. **crisisHooks.js :: leverSentence, 6 towns** (r2r-town-8, -13, -36, r2s-mass_migration-town-0, -2, -3):
+  "The migration turns on the inn (multiple), run by …": `houseInProse` strips "(2-5)" and "(district)" only, so a
+  catalogue tag "(multiple)" prints. FOR THE JOIN: crisisHooks.js is held by up and rb; at the join houseInProse reads rb's
+  `institutionHouseLabel` (domain/display/institutionDisplayName.js on rb's lane) in place of its own strip regex.
+
+### Found on the way (NAMED, not changed: no adjacent repair)
+
+- **"Those who keep {name} safe"** in the same table (recently_betrayed, monster_pressure, wartime and the departures
+  defence.official): 35 prints on the 960, 19 in towns with no force. Softer than "keep order" (whoever keeps a place
+  safe need not be a force), but the same presumption in places with nobody at all. Recommendation: the same pass,
+  "Those who answer for {name}'s safety" (the siege's own wording), if the chair rules it a force.
+- **slave_revolt's catalogue text** (src/data/stressTypes.js, the data lane's): its viabilityNote says "everyone who keeps
+  order is busy containing the revolt", the presumption this pass took out of the table.
