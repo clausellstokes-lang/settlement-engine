@@ -25,6 +25,7 @@ import { HistoryTab, TensionRow } from '../../src/components/new/tabs/HistoryTab
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { SettlementPDF } from '../../src/pdf/SettlementPDF.jsx';
 import { buildJournalPages } from '../../src/foundry/journalPages.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const SEEDS = ['rr2s-town-under_siege-rand-1', 'rr2s-city-calm-rand-1', 'rr2s-metropolis-plague_onset-port-1'];
 const VARIANTS = ['canon_dossier', 'draft_brief', 'timeline_packet'];
@@ -90,13 +91,20 @@ describe('a range is not a rating: no surface prints two severity words for one 
       expect(twoWords(leaves)).toEqual([]);
     });
     test(`${seed}: each ranged tension's row prints no severity word; its label and description print`, () => {
-      for (const t of towns[seed].history.currentTensions.filter((x) => severities(x).length > 1)) {
-        const { container } = render(<TensionRow t={t} />);
-        const leaves = domLeaves(container);
-        expect(leaves.join(' ')).toContain(t.description.slice(0, 20));
-        expect(leaves.filter((l) => SEV.test(l))).toEqual([]);
-        cleanup();
-      }
+      // Every ranged tension is read, the failures collected (tests/helpers/seedFailures.js): a bare loop stopped at the first.
+      const ranged = towns[seed].history.currentTensions.filter((x) => severities(x).length > 1);
+      expect(ranged.length).toBeGreaterThan(0);
+      const failures = collectSeedFailures(ranged, (t) => {
+        try {
+          const { container } = render(<TensionRow t={t} />);
+          const leaves = domLeaves(container);
+          expect(leaves.join(' ')).toContain(t.description.slice(0, 20));
+          expect(leaves.filter((l) => SEV.test(l))).toEqual([]);
+        } finally {
+          cleanup();
+        }
+      });
+      expectNoSeedFailures(failures, `${seed}: every ranged tension's row prints no severity word`);
     });
     test(`${seed}: the PDF (every variant) prints no two severity words for one tension`, () => {
       const town = towns[seed];
