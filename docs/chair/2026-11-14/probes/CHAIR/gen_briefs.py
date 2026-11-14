@@ -922,6 +922,67 @@ SEATS2['JOIN-REHEARSAL'] = dict(
 )
 
 
+SEATS2['W2-FIX-DATA-9'] = dict(
+    title="W2-FIX-DATA-9 · the data lane: the rows left, the history branch's merge, the line's merge, the final statement",
+    branch='lane/w2-fix-data-2026-11-13', tip='fb00318d', statement=True,
+    intro=("You are W2-FIX-DATA-9, the ninth seat on the data lane of the settlement-engine integration program (lane/w2-fix-data-2026-11-13). The lane cures "
+           "false lines written by the catalogue and the data tables: the institutions' descriptions and services, the stress summaries, the finished-goods and "
+           "import tables. Its side branch (the history, culture and arrival files, lane/w2-fix-data-history-2026-11-13) is FINAL at 864948c8b and waits to be "
+           "merged by this lane's seat. The eighth seat cured rows 3 and 4 and handed back at its context mark with its list written out. Yours: that list, the "
+           "two merges, and the lane's ONE final statement."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane: docs/chair/2026-11-14/W2-FIX-DATA-HANDBACK-8.md WHOLE (60 lines: the instruments, re-made in minutes; the rows done, each with its "
+          "measure; SECTION 2, WHAT IS LEFT, LINE BY LINE: THAT IS YOUR LIST; section 9, the rulings copied) and, only where its section 2 points you: "
+          "docs/chair/2026-11-13/W2-FIX-DATA-HANDBACK-6.md section 8 (rows 5 to 7 as first written) and section 2 (the lane's own six named reds).\n"
+          "3. On origin/lane/w2-fix-data-history-2026-11-13, when you reach the merge: docs/chair/2026-11-13/W2-FIX-DATA-HISTORY-HANDBACK.md (its red guards "
+          "with their doors; the other lane's rows each marked; what it left).\n"
+          "4. When you reach the line's merge: the merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 "
+          "(docs/INTEGRATION_STYLE_2_2026-11-09.md, the section headed \"## 2m.\": the instrument's walkers and doors, by command; about forty lines, by script)."),
+    work=("THE WORK, in the hand-back's order, each writer its own commit, MEASURED FIRST on the lane's births in the app's own shape and on the reader's own town, "
+          "red first (each a collected arm, never a bare seed loop), pushed as made:\n"
+          "1. SECTION 2's ROWS 1 TO 6, with these rulings: THE FARRIER, CONFIRMED: the stable district's \"farriery\" is the house's own trade (a house's "
+          "description speaks of the house): READ TRUE, the line stays, the measuring seat's hit is named as not a fault. \"HUNDREDS OF HOUSES OF WORSHIP\" for "
+          "50 to 100 and more: a figure true of the range, reworded WITHOUT the district words or declared through the lane's twin table, then the "
+          "presumed-things door's `--shrink`: the door banks no new line and that refusal is final. The river boatyard's fishing boats: NAMED for the seat after "
+          "the merges (the food record is born after the draw): accepted, left. The Mine's patch (docs/chair/2026-11-13/W2-FIX-DATA-5-item1229.patch): apply, "
+          "measure, read, red first. Row 5 (the services under a siege or a famine: read each first: a coastal siege may still land fish). Row 6 (the "
+          "finished-goods and import tables: each a disqualifier read from the chain model's leaf or the roster, or parked with its word). Row 7 (read, then "
+          "cure or name). THE SLAVE REVOLT'S NOTE (src/data/stressTypes.js, \"everyone who keeps order is busy containing the revolt\"): measured first (which "
+          "surfaces print it; in how many slave-revolt towns no force stands: a garrison, a militia or household levy, a watch, a contracted company); the "
+          "lane's form for a stored crisis note: through its declared sets at assembleSettlement.js :: rerenderStressSummary ONLY, a twin true of the town or "
+          "nothing; that note's own lines only (the crown lines there stay parked).\n"
+          "2. STEP 8: the measuring seat's command at your tip and at the lane's base, every hit in the lane's files read against its town, cured or named "
+          "(the hand-back lists four hits in PAIRS not yet in any row).\n"
+          "3. THE HISTORY BRANCH, THE WORD GIVEN: FIRST make your history whole (`git fetch --depth=2147483647 origin lane/integration-2026-11-07 "
+          "lane/w2-fix-data-2026-11-13 lane/w2-fix-data-history-2026-11-13`; `git rev-parse --is-shallow-repository` prints false: a shallow clone gives WRONG "
+          "merge bases and false conflicts). Merge origin/lane/w2-fix-data-history-2026-11-13 at 864948c8b (a plain merge: the chair's in-memory merge of the "
+          "two is CLEAN; the wiring census, the presumed-things door and the pin count re-run after it, each through its own door). THEN WHAT THAT SEAT LEFT, "
+          "RULED: (a) the Succession Crisis event in a town a council governs today is not a fault by itself (\"the ruler of the time\" is a past ruler): the "
+          "event stays and its selection is not changed; a fault IS a variant, a description or a lasting effect that speaks of a ruler in the PRESENT in such "
+          "a town: declared off, or put into the past; (b) the succession hooks under a priest-ruled council (10 of 115 towns): read, and declared off what is "
+          "false of a council of clergy; (c) the one hook left under an elders' rule (\"A would-be heir approaches outsiders\"): read it in three elders' towns "
+          "and SAY whether \"heir\" is false of a council's seat; the succession hook pool's dominance (0.81 against a ceiling of 0.64) is CARRIED RED TO THE "
+          "CLOSING ACTS, named: no hand edit, no line written for it. ONE message to the chair: the tip, the counts.\n"
+          "4. THE LINE, THE WORD GIVEN: point 49 is on the line (lane/integration-2026-11-07 = 976db5b19 when this was written). Merge the line's tip as you "
+          "read it back (a plain merge; say which commit). BY THE CHAIR'S IN-MEMORY MERGE the conflicts are 15 files and NO CODE: wiring-census.json, "
+          ".prose-byte-baseline.json, pool-dominance.register.json, the two presumed-things registers, and the edge bundles with their meta files: each taken "
+          "from ONE side and re-derived through its own door or script (the bundles by `npm run build:edge-shared`, alone, last), never merged by hand. IF "
+          "registeredWords.js, vocabularyPageFindings.js or the door's script conflict, your history is not whole: STOP and fix the fetch. Then every check "
+          "section 2m lists, each red on this lane's lines cured or declared through its door; the page census on this lane's lines.\n"
+          "5. THE LANE'S ONE FINAL STATEMENT in the form below.\n"
+          "THIS LANE'S OWN LIMITS, binding: PARKED ROWS STAY PARKED (a row that needs a word the vocabulary does not hold: a tannery, a cloth trade, a monarch, a "
+          "marsh, a crown: listed with its word and its towns, and left). THE POOL GUARD'S ONE ROW (resource_scarcity) is CARRIED RED to the closing acts, "
+          "named: no hand edit of the register, no new mode in the guard. THE THREE customContentPresentationClaims titles stay red and named until the lanes "
+          "are joined (their cause is src/domain/dossier/faithReading.js, cured on another lane): do not touch that file; do not weaken the test. THE LANE DOES "
+          "NOT GO TO THE MERGE SEAT RED ON ITS OWN GUARDS: when you move a guard's ground, the guard moves through its own door in the same or the next commit; "
+          "at the end the lane's own red count is the six named, or fewer. A HAZARD an earlier seat met: if a push of yours reads back anything but `<your "
+          "previous tip>..<your new tip>`, stop and tell the chair with both lines."),
+    merges="; the merge of origin/lane/w2-fix-data-history-2026-11-13 named in step 3; the merge of the integration line's tip named in step 4",
+    when="for a stop that blocks everything you have left, when step 3 is pushed (the tip, the counts), and for your final statement or hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
