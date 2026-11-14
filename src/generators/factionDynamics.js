@@ -482,7 +482,15 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
               : stressed('plague_onset')         ? 'escalating'  // church gains legitimacy in crisis
               : 'stable';
 
-    addRel({ pair: [gov.faction, rel.faction], type, direction, ratio: Math.round(ratio*100)/100, narrative });
+    // R3-CODE-C-9 (the bar's n240; the chair's ruling of 2026-11-14, vetoable by the owner: the line reads the
+    // relationship's own standing, the fact the record prints beside it, and is not drawn where the record contradicts
+    // it; 77f0e6792's form). The subordinate line says the faith has "no say in the hall"; World/Faith gives the
+    // strongest religious power a voice in the town's affairs wherever one stands (dossier/faithReading.js ::
+    // factionLine: a small voice below 15, a voice, real weight from 30), and its own card on the Power tab gives it
+    // civic reach in every band (rulingStructure.js's religious desc: "limited" at the least). So it is not drawn.
+    // Gortfell (bar0-town-calm-rand-1): beside "A voice in the town's affairs belongs to the Religious Authorities."
+    // 149 of the reader's 1,722 births.
+    if (type !== 'subordinate') addRel({ pair: [gov.faction, rel.faction], type, direction, ratio: Math.round(ratio*100)/100, narrative });
   }
 
   // ── Governing ↔ Criminal ────────────────────────────────────────────────────
@@ -537,6 +545,12 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
   }
 
   // ── Noble ↔ Governing (feudal dynamics) ────────────────────────────────────
+  // R3-CODE-C-8 (the reader's L14; the chair's ruling (c) of 2026-11-14, vetoable by the owner): the subordinate line
+  // ("still have their titles, but ... have taken most of their power") is not drawn of the indebted crisis's own
+  // creditor power (data/stressPowerFaces.js, the indebted row): beside it the Power tab prints "Strained — the creditors
+  // have a say in every decision" (governanceNarrative.js). r2r-metropolis-33, 1 of 128 subordinate lines.
+  const nobleIsCreditor = !!noble && stressed('indebted')
+    && STRESS_POWER_FACES.some((row) => row.stress === 'indebted' && row.power === noble.faction);
   if (noble && gov && !gov.faction?.toLowerCase().includes('feudal')) {
     const ratio = noble.power / Math.max(1, gov.power);
     let type, narrative;
@@ -551,7 +565,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
       ? `${noble.faction} live under the rule of ${gov.faction} but keep enough rights of their own (land, courts, levies) to bargain, not simply obey.`
       : `${noble.faction} still have their titles, but ${merc && (merc.power || 0) > (noble.power || 0) ? 'merchant money and ' : ''}the hall's offices have taken most of their power.`; // R3-CODE-C-2 (#pf-90): merchant money only where a merchant power outranks them
 
-    addRel({ pair: [noble.faction, gov.faction], type, direction: 'declining', ratio: Math.round(ratio*100)/100, narrative });
+    if (!(type === 'subordinate' && nobleIsCreditor)) addRel({ pair: [noble.faction, gov.faction], type, direction: 'declining', ratio: Math.round(ratio*100)/100, narrative });
   }
 
   // Deduplicate by pair (sorted key) — prevents double-relationships

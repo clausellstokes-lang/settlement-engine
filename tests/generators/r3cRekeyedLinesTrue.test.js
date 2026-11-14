@@ -54,6 +54,9 @@ beforeAll(async () => {
     born(`r3c6-wartime-${tier}-${k}`, tier, ['wartime']),
     born(`r3c6-occupied-${tier}-${k}`, tier, ['occupied']),
     born(`r3c6-random-${tier}-${k}`, tier, null),
+    // R3-CODE-C-8 (the reader's LOW finding 6; the chair's ruling (e)): a famine town in every column, so that the war
+    // line planted in the famine pool reds the war arm (the random column drew none in 108 births).
+    born(`r3c8-famine-${tier}-${k}`, tier, ['famine']),
   ]));
 }, 300000);
 
@@ -70,6 +73,10 @@ describe('the re-keyed vantage lines print only under their own crisis', () => {
       }
     }
     expect(seen.length).toBeGreaterThan(0);
+    // anchored: the famine column draws the very vantage the war line would sit in, so a war line planted there reds above
+    const FAMINE_OFFICIAL = 'Those who answer for {name} spend their days settling quarrels over food';
+    expect(towns.filter((s) => vantagePrints(s).some((p) => p.kind === 'famine' && p.surface === 'defence'
+      && String(p.text).startsWith(FAMINE_OFFICIAL.replace('{name}', s.name)))).length).toBeGreaterThan(0);
   });
 
   it('the occupiers line: only in an occupied town', () => {

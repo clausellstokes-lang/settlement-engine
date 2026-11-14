@@ -294,8 +294,9 @@ describe('a complete export row says only what the analysis holds', () => {
   it('#457 rr2s-town-under_siege-rand-1: no leather goods while the analysis lists the Tannery missing; #1163 rr2s-metropolis-calm-rand-1: no claim beside a depleted herb ground', async () => {
     const town = await born('town', ['under_siege']);
     expect(town.gaps.some((g) => (g.missing || []).includes('Tannery'))).toBe(true);
-    const livestock = town.exports.find((e) => e.chain === 'livestock');
-    expect(livestock).toEqual({ product: 'cheese, preserved meat', chain: 'livestock', value: livestock.value, reason: 'Complete production chain in place' });
+    // R3-CODE-C-8 (the reader's L05, the chair's ruling (b)): re-keyed by identity. The claim needs every house the chain
+    // names standing; with the Tannery missing the livestock row is not listed at all (no "leather goods", no claim).
+    expect(town.exports.filter((e) => e.chain === 'livestock')).toEqual([]);
 
     const metropolis = await born('metropolis', []);
     expect(metropolis.resourceConditions.some((r) => r.condition === 'depleted' && r.key === 'foraging_areas')).toBe(true);
