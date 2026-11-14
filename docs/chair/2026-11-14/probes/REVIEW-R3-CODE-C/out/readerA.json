@@ -1,0 +1,317 @@
+[
+ {
+  "town": "r2r-thorp-37",
+  "line": "L01",
+  "tab": "World/History",
+  "sentence": "Cnocton still carries the shape it took after the pilgrimage, older than anyone living; that legacy holds, though the times have moved on.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "history.historicalEvents The Pilgrimage yearsAgo 214; page prints '214y ago' under 'Deep history'."
+ },
+ {
+  "town": "r2r-thorp-37",
+  "line": "L05",
+  "tab": "Systems/Resources",
+  "sentence": "Export Potential | cheese, preserved meat | Complete production chain in place",
+  "verdict": "FALSE",
+  "severity": "LOW",
+  "fact": "(c) resourceAnalysis livestock chain processingInstitutions = Butcher, Tannery, Dairy farmer; institutions[] has none of them (Subsistence farming, external mill, burial ground, consensus, dwellings, water, church access); thorp of 6. Same page Trade Profile exports 'Raw wool, Livestock...', not cheese/preserved meat; Food tab does say 'The table rests on cheese and smoked meat from the grazing herds' (household making), hence LOW."
+ },
+ {
+  "town": "r2r-thorp-17",
+  "line": "L01",
+  "tab": "World/History",
+  "sentence": "Chichich still carries the shape it took after the great construction, older than anyone living; that legacy holds, though the times have moved on.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "history.historicalEvents The Great Construction yearsAgo 125; page '125y ago' (listed after the 101y 'Ancient' band)."
+ },
+ {
+  "town": "r2r-thorp-17",
+  "line": "L07",
+  "tab": "Systems/Defense",
+  "sentence": "Embattled region. Fortification and forces are present but chronically underfunded: poor equipment, low morale, and thin reinforcement. A beleaguered outpost surviving on the edge.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "institutions Palisade + Household levy present; config.monsterThreat plagued, tradeRouteAccess isolated; population 11, famine in force: small and cut-off enough for 'outpost'."
+ },
+ {
+  "town": "r2r-thorp-17",
+  "line": "L08",
+  "tab": "Summary/Plot Hooks",
+  "sentence": "The settlement is starving, and its hungriest are turning to banditry.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "stress.type famine (in force); Food 'Deficit - active famine', short 14 lbs/day; Crime Wave tension and 'Survival crime' on Defense tab."
+ },
+ {
+  "town": "r2r-thorp-17",
+  "line": "L16",
+  "tab": "Systems/Services",
+  "sentence": "Fencing stolen goods",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "institutions[] 'Local fence' (Fence Atl Caan). Note: the row's source prints as a bare '(covert)' line, and a second row 'Sell stolen goods' from the Local fence duplicates it."
+ },
+ {
+  "town": "r2r-thorp-17",
+  "line": "L16",
+  "tab": "Systems/Economics",
+  "sentence": "Contraband goodsForged documentsFencing stolen goods",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "Black market flow via institutions[] 'Local fence'; Shadow Economy 10%."
+ },
+ {
+  "town": "r2r-thorp-17",
+  "line": "V",
+  "tab": "Systems/Defense",
+  "sentence": "Hunger has made Chichich tense: what food is stored is watched day and night, and every quarrel over food turns ugly fast.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "stress.type famine in force; hoarding tension. (Overview says 'Hunger has made Chichich quiet... haggling has gone out of people': a different mood but not a direct contradiction.)"
+ },
+ {
+  "town": "r2r-thorp-17",
+  "line": "V",
+  "tab": "Systems/Defense",
+  "sentence": "The longer the hunger lasts at Chichich, the less its defenders can do, and nothing is filling the stores again yet. The crisis could end Chichich, and what it spends on its defence now goes to keeping it alive.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "stress famine; viability 'Not viable'; Palisade + Household levy."
+ },
+ {
+  "town": "r2r-city-44",
+  "line": "L01",
+  "tab": "World/History",
+  "sentence": "The siege, older than anyone living, left a legacy of trouble in Kallition that has never been fully put right.",
+  "verdict": "FALSE",
+  "severity": "MED",
+  "fact": "(f/g) history.historicalEvents The Siege yearsAgo 61; page prints '61y ago' grouped under 'Last century' (not 'Ancient'); 61 years is within living memory."
+ },
+ {
+  "town": "r2r-city-44",
+  "line": "L05",
+  "tab": "Systems/Resources",
+  "sentence": "Export Potential | preserved fish, fish oil | Complete production chain in place",
+  "verdict": "FALSE",
+  "severity": "MED",
+  "fact": "(c/g) stress.type famine in force; same page (Economics food and History tension): 'The fishing failed this year and took most of Kallition's own food with it'; Overview: hoarded fish. Also chain processingInstitutions Fishmonger + Salters' guild: no Salters' guild in institutions[] (Fish market only)."
+ },
+ {
+  "town": "r2r-city-44",
+  "line": "L11",
+  "tab": "Systems/Power",
+  "sentence": "Military/Guard no longer takes orders from Ecclesiastical Council.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "powerStructure.factions Military/Guard power 24 > Ecclesiastical Council (governing) 15; factionRelationships competitive/escalating, ratio 1.54."
+ },
+ {
+  "town": "r2r-city-44",
+  "line": "L13",
+  "tab": "Systems/Power",
+  "sentence": "People take their marriages, inheritances and hard times to Religious Authorities, not to Ecclesiastical Council, and the two keep quarrelling over who decides what.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "factions Religious Authorities 31 vs Ecclesiastical Council (religious govt) 15; factionRelationships tense/stable."
+ },
+ {
+  "town": "r2r-city-44",
+  "line": "L13",
+  "tab": "Systems/Power",
+  "sentence": "The hall is at odds with the Religious Authorities.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "Governance-account variant; factionRelationships Ecclesiastical Council~Religious Authorities tense."
+ },
+ {
+  "town": "r2r-city-44",
+  "line": "L16",
+  "tab": "Systems/Economics",
+  "sentence": "Contraband goodsForged documentsFencing stolen goods",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "institutions[] 'Black market' (Georgios II Iasites); Shadow Economy 25%."
+ },
+ {
+  "town": "r2r-city-44",
+  "line": "V",
+  "tab": "Systems/Defense",
+  "sentence": "Hunger has made Kallition tense: what food is stored is watched day and night, and every quarrel over food turns ugly fast.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "stress.type famine; Crisis tab: 'a granary of seven months that the hall will not open'; hoarding."
+ },
+ {
+  "town": "r2r-city-44",
+  "line": "V",
+  "tab": "Systems/Defense",
+  "sentence": "The longer the hunger lasts at Kallition, the less its defenders can do, and nothing is filling the stores again yet. The crisis could end Kallition, and what it spends on its defence now goes to keeping it alive.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "stress famine; viability 'Not viable'; walls, watch, garrison present."
+ },
+ {
+  "town": "r2r-town-19",
+  "line": "L01",
+  "tab": "World/History",
+  "sentence": "Nobody in Altaikum has finished putting right the legacy of the great fire, older than anyone living.",
+  "verdict": "FALSE",
+  "severity": "MED",
+  "fact": "(f/g) history.historicalEvents The Great Fire yearsAgo 68; page prints '68y ago' under 'Last century'; within living memory."
+ },
+ {
+  "town": "r2r-town-19",
+  "line": "L05",
+  "tab": "Systems/Resources",
+  "sentence": "Export Potential | bread, beer, animal feed | Complete production chain in place | leather goods, cheese, preserved meat | preserved fish, fish oil",
+  "verdict": "FALSE",
+  "severity": "MED",
+  "fact": "(g/a) Same page: Grain Sales 'it eats more than it grows, so none is left to sell to other settlements' and food 2,938 + 242 imported vs need 3,180; Leatherworking flow 'Needs imported livestock: no local source' and imports 'Raw hides and animal products'; no Bakers, Butcher, Dairy farmer, Fishmonger or Salters' guild in institutions[] (chains' processingInstitutions); Fishing & Seafood flow 'Vulnerable'. Only Tanners and Mills exist."
+ },
+ {
+  "town": "r2r-town-19",
+  "line": "L13",
+  "tab": "Systems/Power",
+  "sentence": "The Religious Authorities are at odds with it. Nothing large is settled in the hall without bargaining with them first.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "govt Church Council (religious, theocratic-aligned) 40 vs Religious Authorities 60; factionRelationships tense/stable."
+ },
+ {
+  "town": "r2r-town-19",
+  "line": "L13",
+  "tab": "Systems/Power",
+  "sentence": "People take their marriages, inheritances and hard times to Religious Authorities, not to Church Council, and the two keep quarrelling over who decides what.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "factionRelationships narrative, tense, ratio 1.5; RA 60 > CC 40."
+ },
+ {
+  "town": "r2r-village-9",
+  "line": "L05",
+  "tab": "Systems/Resources",
+  "sentence": "Export Potential | bread, beer, animal feed | Complete production chain in place",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "institutions[] Mill; grain_fields available; food 229 vs need 190 (surplus); Grain & Bread flow Running; Trade Profile exports Grain surplus, Milled flour, Baked goods. (No baker/brewer, but Mill is a listed chain institution.)"
+ },
+ {
+  "town": "r2r-village-9",
+  "line": "L13",
+  "tab": "Systems/Power",
+  "sentence": "People take their marriages, inheritances and hard times to Religious Authorities, not to Elder Council, and the two keep quarrelling over who decides what.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "Not a church government (Elder Council, category government) but true: RA 79 vs EC 21, factionRelationships tense, ratio 3.73."
+ },
+ {
+  "town": "r2r-village-9",
+  "line": "L13",
+  "tab": "Systems/Power",
+  "sentence": "The hall is at odds with the Religious Authorities. The hall settles nothing large without bargaining with them first.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "Governance-account variant; factionRelationships tense."
+ },
+ {
+  "town": "r2r-village-9",
+  "line": "L47",
+  "tab": "Summary/Crisis",
+  "sentence": "No house here holds what this crisis turns on.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "stress.cast.levers = [] (succession_void); seat empty."
+ },
+ {
+  "town": "r2r-village-9",
+  "line": "L49",
+  "tab": "Systems/Power",
+  "sentence": "The seatStands empty; the succession is unsettled. Acting Elder Komnenissa Chortasmenos, the miller, keeps the seat meanwhile.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "stress.type succession_void; Elder Council first member Komnenissa Chortasmenos (Acting Elder, DM block); Mill present."
+ },
+ {
+  "town": "r2r-village-9",
+  "line": "L49",
+  "tab": "Systems/Power",
+  "sentence": "No one holds the seat at Megalburg. ... The elder who kept the peace is gone. No one has stepped forward to take that role.",
+  "verdict": "FALSE",
+  "severity": "LOW",
+  "fact": "(g) No 'governs without a head' (fixed), but 'No one has stepped forward to take that role' sits beside the seat row's 'Acting Elder Komnenissa Chortasmenos ... keeps the seat meanwhile' and the crisis 'several people are racing to take the seat first'."
+ },
+ {
+  "town": "r2r-village-9",
+  "line": "V",
+  "tab": "Systems/Defense",
+  "sentence": "Travellers in Megalburg see the claimants' followers gathering openly, and hear talk of who will strike first.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "stress succession_void; Overview: 'everyone who did well under the old order is gathering followers to back a claim'."
+ },
+ {
+  "town": "r2r-village-9",
+  "line": "V",
+  "tab": "Systems/Defense",
+  "sentence": "Several people at Megalburg could order the defence and none can do it alone, so they watch each other instead of the roads.",
+  "verdict": "FALSE",
+  "severity": "LOW",
+  "fact": "(g/a) defenseProfile.institutions all empty; same tab: 'No organized force... No command structure, no training, no coordinated response'. There is no defence to order."
+ },
+ {
+  "town": "r2r-village-19",
+  "line": "L07",
+  "tab": "Systems/Defense",
+  "sentence": "Embattled region. Fortification and forces are present but chronically underfunded: poor equipment, low morale, and thin reinforcement. A beleaguered outpost surviving on the edge.",
+  "verdict": "FALSE",
+  "severity": "LOW",
+  "fact": "(d/g) Forces present is true (Palisade or earthworks, Citizen militia; monsterThreat plagued), but population 237 on a road (tradeRouteAccess road) with caravans, pilgrims and a caravan broker is not an 'outpost'; same tab says 'the village has answered it properly: there is a wall to hold and there are people to hold it' and Invasion & War 'Strong'."
+ },
+ {
+  "town": "r2r-village-19",
+  "line": "L13",
+  "tab": "Systems/Power",
+  "sentence": "The Religious Authorities are at odds with it. Without bargaining with them first, the hall settles nothing large.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "Elder Council (government) 48 vs Religious Authorities 52; factionRelationships tense; Overview tension 'Religious Authorities vs Elder Council Moderate'."
+ },
+ {
+  "town": "r2r-village-19",
+  "line": "L13",
+  "tab": "Systems/Power",
+  "sentence": "People take their marriages, inheritances and hard times to Religious Authorities, not to Elder Council, and the two keep quarrelling over who decides what.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "Not a church government; RA 52 vs EC 48 (ratio 1.1), tense. Note the Village elder institution itself offers 'Marriage and inheritance' service, so 'not to Elder Council' is a stretch; left TRUE."
+ },
+ {
+  "town": "r2r-village-19",
+  "line": "L15",
+  "tab": "Systems/Services",
+  "sentence": "Ask around quietly. Someone moves goods without questions.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "availableServices.criminal 'Fencing stolen goods', institution '(covert)'; Shadow Economy 8%; no criminal house named, and the line names none."
+ },
+ {
+  "town": "r2r-village-19",
+  "line": "L16",
+  "tab": "Systems/Services",
+  "sentence": "Fencing stolen goods",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "availableServices.criminal covert row; criminalCaptureState none; no fence institution. Note the row's source prints as a bare '(covert)' line (provenance tag, kind h)."
+ },
+ {
+  "town": "r2r-village-19",
+  "line": "L48",
+  "tab": "Systems/Economics",
+  "sentence": "Meals follow the season and what the household has put by.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "Food 466 + 8 imported vs need 474; 'No granary; two months in household stores'; pastoral steppe culture."
+ }
+]

@@ -1,0 +1,29 @@
+famine.defence.official | 51 | thorp,hamlet,village,town,city,metropolis | rr3p-thorp-famine-rand-0 (6) | rr3-metropolis-famine-rand-5 (124125) | r2r-thorp-38 (famine) | r2r-thorp-38 r2r-thorp-46
+famine.tonight.watch | 51 | thorp,hamlet,village,town,city,metropolis | rr3p-thorp-famine-rand-0 (6) | rr3-metropolis-famine-rand-5 (124125) | r2r-thorp-38 (famine) | r2r-thorp-38 r2r-thorp-46
+occupied.cover.trade | 15 | thorp,hamlet,village,city,metropolis | r2s-occupied-thorp-0 (13) | rr3-metropolis-occupied-rand-3 (301467) | r2r-thorp-40 (occupied) | r2r-thorp-40 r2s-occupied-thorp-0
+occupied.overview.local | 30 | thorp,hamlet,village,town,city,metropolis | rr3p-thorp-occupied-rand-2 (9) | r2s-occupied-metropolis-2 (36400) | r2r-thorp-1 (occupied) | r2r-thorp-1 r2r-thorp-27
+politically_fractured.defence.local | 21 | thorp,hamlet,village,town,city,metropolis | r2s-politically_fractured-thorp-1 (10) | rr3-metropolis-politically_fractured-rand-1 (53075) |  | r2r-village-42 r2s-politically_fractured-thorp-1
+indebted.cover.traveller | 25 | thorp,hamlet,village,town,city,metropolis | rr3-thorp-indebted-rand-5 (11) | r2r-metropolis-33 (25067) | rr3-thorp-indebted-rand-0 (indebted+famine) | r2r-hamlet-32 r2r-village-52
+indebted.defence.official | 25 | thorp,hamlet,village,town,city,metropolis | rr3-thorp-indebted-rand-2 (29) | r2s-indebted-metropolis-1 (145383) |  | r2r-hamlet-38 r2r-village-1
+recently_betrayed.defence.official | 24 | thorp,hamlet,village,town,city,metropolis | rr3-thorp-recently_betrayed-rand-1 (9) | rr3-metropolis-recently_betrayed-port-0 (39750) | r2s-recently_betrayed-hamlet-2 (recently_betrayed+famine) | r2r-town-12 r2r-town-24
+plague_onset.cover.traveller | 10 | thorp,hamlet,town,city,metropolis | rr3-thorp-plague_onset-rand-5 (6) | r2s-plague_onset-metropolis-3 (27673) |  | r2s-plague_onset-thorp-3 r2s-plague_onset-hamlet-1
+plague_onset.tonight.watch | 22 | thorp,hamlet,village,town,city,metropolis | r2s-plague_onset-thorp-2 (9) | rr3-metropolis-plague_onset-rand-5 (57746) | rr3-thorp-plague_onset-rand-3 (plague_onset+famine) | r2s-plague_onset-thorp-2 r2s-plague_onset-hamlet-0
+succession_void.cover.trade | 20 | thorp,hamlet,village,town,city,metropolis | r2s-succession_void-thorp-0 (8) | r2r-metropolis-8 (344689) | r2s-succession_void-thorp-0 (succession_void+famine) | r2r-city-2 r2r-metropolis-8
+succession_void.cover.watch | 21 | thorp,hamlet,village,town,city,metropolis | rr3-thorp-succession_void-rand-4 (21) | rr3-metropolis-succession_void-rand-5 (65873) |  | r2r-village-9 r2r-village-56
+succession_void.tonight.trade | 21 | thorp,hamlet,village,town,city,metropolis | rr3-thorp-succession_void-rand-4 (21) | rr3-metropolis-succession_void-rand-5 (65873) |  | r2r-village-9 r2r-village-56
+monster_pressure.defence.official | 22 | thorp,hamlet,village,town,city,metropolis | rr3-thorp-monster_pressure-rand-1 (10) | rr3-metropolis-monster_pressure-rand-5 (45813) |  | r2r-hamlet-36 r2s-monster_pressure-thorp-1
+insurgency.cover.trade | 24 | thorp,hamlet,village,town,city,metropolis | rr3-thorp-insurgency-rand-2 (8) | r2s-insurgency-metropolis-1 (24522) |  | r2r-city-33 r2s-insurgency-thorp-2
+insurgency.defence.watch | 18 | thorp,hamlet,village,town,city,metropolis | r2s-insurgency-thorp-3 (16) | rr3-metropolis-insurgency-port-0 (103065) |  | r2r-thorp-25 r2r-thorp-52
+insurgency.defence.official | 16 | thorp,hamlet,village,town,metropolis | r2s-insurgency-thorp-1 (10) | rr3-metropolis-insurgency-rand-0 (40274) |  | r2r-village-26 r2r-village-29
+religious_conversion.cover.traveller | 19 | thorp,hamlet,village,town,metropolis | rr3-thorp-religious_conversion-rand-1 (8) | r2s-religious_conversion-metropolis-3 (45843) |  | r2r-village-39 r2r-metropolis-59
+religious_conversion.defence.official | 24 | thorp,hamlet,village,town,city,metropolis | rr3-thorp-religious_conversion-port-1 (7) | rr3-metropolis-religious_conversion-port-1 (63940) |  | r2r-village-18 r2s-religious_conversion-hamlet-0
+religious_conversion.defence.local | 15 | thorp,hamlet,village,town,city,metropolis | r2s-religious_conversion-thorp-0 (15) | r2s-religious_conversion-metropolis-0 (46801) |  | r2s-religious_conversion-thorp-0 r2s-religious_conversion-hamlet-2
+slave_revolt.cover.watch | 15 | thorp,hamlet,village,town,city | rr3-thorp-slave_revolt-rand-5 (5) | rr3-city-slave_revolt-rand-5 (12212) |  | r2s-slave_revolt-hamlet-3 r2s-slave_revolt-village-3
+slave_revolt.defence.watch | 15 | hamlet,village,town,city,metropolis | rr3-hamlet-slave_revolt-rand-3 (46) | r2s-slave_revolt-metropolis-2 (127443) |  | r2s-slave_revolt-hamlet-0 r2s-slave_revolt-hamlet-2
+slave_revolt.defence.official | 20 | thorp,hamlet,village,town,city,metropolis | rr3-thorp-slave_revolt-rand-2 (13) | rr3-metropolis-slave_revolt-rand-2 (94781) |  | r2s-slave_revolt-thorp-0 r2s-slave_revolt-thorp-1
+slave_revolt.tonight.watch | 20 | thorp,hamlet,village,town,city,metropolis | rr3-thorp-slave_revolt-rand-2 (13) | rr3-metropolis-slave_revolt-rand-2 (94781) |  | r2s-slave_revolt-thorp-0 r2s-slave_revolt-thorp-1
+wartime.defence.official | 14 | thorp,hamlet,village,town,city,metropolis | r2r-thorp-32 (8) | rr3-metropolis-wartime-rand-0 (68423) | r2s-wartime-hamlet-3 (wartime+famine) | r2r-thorp-32 r2r-thorp-55
+mass_migration.arrivals.defence.official | 23 | thorp,hamlet,village,town,city,metropolis | r2s-mass_migration-thorp-3 (7) | rr3-metropolis-mass_migration-rand-4 (56271) |  | r2r-city-3 r2r-city-37
+mass_migration.departures.cover.traveller | 0 |  | - | - |  | 
+mass_migration.departures.cover.watch | 0 |  | - | - |  | 
+mass_migration.departures.defence.official | 0 |  | - | - |  | 

@@ -1,0 +1,3 @@
+P8-war-in-famine	RED	Tests 1 ⎯⎯⎯⎯⎯⎯⎯	tests/domain/crisis/crisisSummaryVantage.test.js
+P8-occupiers-in-indebted	RED	Tests 2 ⎯⎯⎯⎯⎯⎯⎯	tests/generators/r3cRekeyedLinesTrue.test.js tests/domain/crisis/crisisSummaryVantage.test.js
+P8-validator-no-fort	RED	Tests 1 ⎯⎯⎯⎯⎯⎯⎯	tests/generators/r3cRekeyedLinesTrue.test.js

@@ -1,0 +1,5 @@
+[
+["P8-war-in-famine","src/domain/crisis/crisisSummaryVantage.js","official: 'Those who answer for {name} spend their days settling quarrels over food, and every week there are more of them.',","official: 'With men called away to the war, {name} has fewer hands than before to see to its own safety.',"],
+["P8-occupiers-in-indebted","src/domain/crisis/crisisSummaryVantage.js","trade: 'Much of what {name} earns goes straight to its creditor, and nothing is left over to build with.',","trade: 'Everything sold in {name} pays the occupiers their due first, and those who sell keep their prices and their opinions to themselves.',"],
+["P8-validator-no-fort","src/generators/structuralValidator.js","    } else if (!hasFort) {","    } else if (false) {"]
+]

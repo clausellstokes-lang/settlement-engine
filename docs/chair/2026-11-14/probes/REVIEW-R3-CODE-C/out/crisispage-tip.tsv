@@ -1,0 +1,548 @@
+r2r-thorp-1	thorp	30	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Lepidus Brutus
+r2r-thorp-5	thorp	23	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Banbh Ryan; holds the lever:Deirdre Murphy
+r2r-thorp-10	thorp	10	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Marta Popov; holds the lever:Filomena Novikov
+r2r-thorp-11	thorp	18	wartime	NOBODY	absent=defends:no military, garrison or watch stands; profits:no power gains
+r2r-thorp-11	thorp	18	wartime	NOLEVERS	matchingHouses=	npcRoles=
+r2r-thorp-16	thorp	10	wartime	NOBODY	absent=defends:no military, garrison or watch stands
+r2r-thorp-16	thorp	10	wartime	NOLEVERS	matchingHouses=	npcRoles=
+r2r-thorp-19	thorp	26	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Liber MacDonald; holds the lever:Fionnuala O'Connor
+r2r-thorp-22	thorp	11	insurgency	NOLEVERS	matchingHouses=	npcRoles=target:Akna Balam
+r2r-thorp-24	thorp	20	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Fabia Varro; collaborates:Fabia Varro
+r2r-thorp-25	thorp	21	insurgency	NOLEVERS	matchingHouses=	npcRoles=instigator:People's Council; target:Xoc Caan
+r2r-thorp-26	thorp	15	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+r2r-thorp-26	thorp	15	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+r2r-thorp-27	thorp	25	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Photeine Botaneiates
+r2r-thorp-29	thorp	11	insurgency	NOLEVERS	matchingHouses=	npcRoles=target:Yisugei Kiyad; takes the fall:Yisugei Kiyad
+r2r-thorp-32	thorp	8	wartime	NOBODY	absent=defends:no military, garrison or watch stands; profits:no power gains
+r2r-thorp-32	thorp	8	wartime	NOLEVERS	matchingHouses=	npcRoles=
+r2r-thorp-39	thorp	29	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Iulius Varro; takes the fall:Iulius Varro
+r2r-thorp-40	thorp	20	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Dimitri Sidorov; profits:Dimitri Sidorov; collaborates:Dimitri Sidorov
+r2r-thorp-43	thorp	19	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Hana al-Hassan
+r2r-thorp-51	thorp	11	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Tomislav Lebedev
+r2r-thorp-52	thorp	25	insurgency	NOLEVERS	matchingHouses=	npcRoles=target:Varg Olafsson
+r2r-thorp-55	thorp	17	wartime	NOBODY	absent=defends:no military, garrison or watch stands
+r2r-thorp-55	thorp	17	wartime	NOLEVERS	matchingHouses=	npcRoles=
+r2r-thorp-56	thorp	24	wartime	NOBODY	absent=defends:no military, garrison or watch stands
+r2r-thorp-56	thorp	24	wartime	NOLEVERS	matchingHouses=	npcRoles=
+r2r-thorp-58	thorp	7	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Sulayman al-Hassan
+r2r-hamlet-0	hamlet	22	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Tassilo Bauer
+r2r-hamlet-5	hamlet	97	wartime	NOBODY	absent=defends:no military, garrison or watch stands
+r2r-hamlet-9	hamlet	33	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Folker Wolf; holds the lever:Christoph Schneider
+r2r-hamlet-32	hamlet	63	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Metellus Corvinus
+r2r-hamlet-33	hamlet	32	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Chitragupta Acharya
+r2r-hamlet-34	hamlet	50	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Vangchug Jadaran
+r2r-hamlet-35	hamlet	36	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Gudrun Thorsson; target:Grettir Magnusson
+r2r-hamlet-36	hamlet	74	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Ghalia al-Jabbar; holds the lever:Husayn al-Malik
+r2r-hamlet-38	hamlet	47	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Yash Choudhry
+r2r-hamlet-53	hamlet	95	wartime	NOBODY	absent=defends:no military, garrison or watch stands
+r2r-village-1	village	85	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Rajani Iyer
+r2r-village-9	village	95	succession_void	NOLEVERS	matchingHouses=	npcRoles=instigator:Stylianos Gregoraios; target:Elder Council
+r2r-village-21	village	144	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Severin Wolf
+r2r-village-25	village	255	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Antonius Rufus; target:Rutilius Rufus
+r2r-village-26	village	335	insurgency	NOLEVERS	matchingHouses=	npcRoles=instigator:People's Council; target:Blanda Brutus; takes the fall:Blanda Brutus
+r2r-village-29	village	137	insurgency	NOLEVERS	matchingHouses=	npcRoles=instigator:Thorstein Ljotsson; target:Folki Sigmundsson; wavers:Thorstein Ljotsson; takes the fall:Folki Sigmundsson
+r2r-village-30	village	175	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Hristo Kozlov; target:Zorana Volkov; takes the fall:Zorana Volkov
+r2r-village-34	village	355	insurgency	NOLEVERS	matchingHouses=	npcRoles=instigator:Trebius Fronto; target:Plotina Cato
+r2r-village-35	village	180	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Dragana Ivanov; target:Milena Kovalev; takes the fall:Milena Kovalev
+r2r-village-37	village	141	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=instigator:Darya Klimov; target:Angela Ilyin
+r2r-village-38	village	230	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Tailte Murphy
+r2r-village-41	village	81	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=holds the lever:Masao Ma
+r2r-village-42	village	144	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Ian Kelly; target:Mugain Kennedy; wavers:Mugain Kennedy
+r2r-village-43	village	149	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Xochiquetzal Coh
+r2r-village-44	village	182	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+r2r-village-44	village	182	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+r2r-village-47	village	375	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Pankaj Bajaj
+r2r-village-48	village	387	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+r2r-village-48	village	387	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+r2r-village-52	village	162	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Theotmar Schröder
+r2r-village-53	village	269	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Lan Xu; target:Natsuki Sun
+r2r-village-55	village	102	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Christos Iasites
+r2r-village-56	village	117	succession_void	NOLEVERS	matchingHouses=	npcRoles=instigator:Eanán Burke; target:Elder Council
+r2r-village-57	village	261	succession_void	NOLEVERS	matchingHouses=	npcRoles=instigator:Ek Chuah Dzul; target:Elected Reeve; wavers:Citlali Ek
+r2r-town-7	town	723	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Damayanti Dixit
+r2s-under_siege-hamlet-0	hamlet	48	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Gaius Corvinus
+r2s-under_siege-hamlet-1	hamlet	57	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Konstantin Sokolov
+r2s-under_siege-hamlet-2	hamlet	94	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Hamish Quinn
+r2s-under_siege-hamlet-3	hamlet	80	under_siege	NOLEVERS	matchingHouses=	npcRoles=defends:Gebhard Wolf; would treat:Brunhild Weber
+r2s-under_siege-village-0	village	281	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Ek Coh
+r2s-under_siege-village-1	village	95	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Peadar Flaherty
+r2s-under_siege-village-2	village	224	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Phokas Attaleiates
+r2s-occupied-thorp-0	thorp	13	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Wolfger Schulz; collaborates:Wolfger Schulz
+r2s-occupied-thorp-1	thorp	17	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Anusaya Bhat; profits:Anusaya Bhat
+r2s-occupied-thorp-2	thorp	28	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Hiroshi Wang
+r2s-occupied-thorp-3	thorp	18	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Thorkel Gunnarsson; collaborates:Thorkel Gunnarsson
+r2s-occupied-hamlet-0	hamlet	20	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Toghan Jadaran; profits:Toghan Jadaran; collaborates:Toghan Jadaran
+r2s-occupied-hamlet-1	hamlet	95	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Étaín Walsh
+r2s-occupied-hamlet-2	hamlet	59	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Irene Schäfer; collaborates:Irene Schäfer
+r2s-occupied-village-0	village	85	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Lorenz Braun; profits:Lorenz Braun
+r2s-occupied-village-1	village	132	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Dimitri Kovalev; profits:Dimitri Kovalev; collaborates:Dimitri Kovalev
+r2s-occupied-village-3	village	134	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Varvara Golubev
+r2s-politically_fractured-thorp-0	thorp	9	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Friedrich Schulz; target:Christoph Weber
+r2s-politically_fractured-thorp-1	thorp	10	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Xaman Chan; target:Citlali Caan
+r2s-politically_fractured-thorp-2	thorp	9	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Seianus Corvinus; target:Seianus Maximus
+r2s-politically_fractured-thorp-3	thorp	15	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Archana Chatterjee; target:Meera Ahuja
+r2s-politically_fractured-hamlet-0	hamlet	92	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Evtim Borisov; target:Ivan Bogdanov; takes the fall:Ivan Bogdanov
+r2s-politically_fractured-hamlet-1	hamlet	63	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Iman al-Aziz; target:Nadia ibn Khalid; takes the fall:Nadia ibn Khalid
+r2s-politically_fractured-hamlet-3	hamlet	49	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Kallistrate Chomatenos; target:Eirenaion Chrysoberges; takes the fall:Eirenaion Chrysoberges
+r2s-politically_fractured-village-1	village	324	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Apokaukos Drimys; target:Kyriake Argyros; wavers:Nikolaos Iasites
+r2s-politically_fractured-village-2	village	331	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Uinseann Jordan; target:Liam Murphy
+r2s-politically_fractured-village-3	village	78	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Duha al-Din; target:Yara ibn Ahmed
+r2s-indebted-thorp-0	thorp	12	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Symeon Chomatenos
+r2s-indebted-thorp-1	thorp	14	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Eir Ragnarsson
+r2s-indebted-thorp-2	thorp	8	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Amitabh Banerjee
+r2s-indebted-thorp-3	thorp	15	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Pulvillus Varro
+r2s-indebted-hamlet-0	hamlet	67	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Günji Kereit
+r2s-indebted-hamlet-1	hamlet	63	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Laith al-Amin
+r2s-indebted-hamlet-2	hamlet	85	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Diemoda Klein
+r2s-indebted-hamlet-3	hamlet	65	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Nott Gunnarsson
+r2s-indebted-village-0	village	294	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Xib Dzul; profits:Nicte Koh
+r2s-indebted-village-1	village	228	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Sofokles Chortasmenos
+r2s-indebted-village-2	village	318	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Giselbert Schneider
+r2s-indebted-village-3	village	75	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Philippos Chrysoberges
+r2s-indebted-town-0	town	1919	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Saoirse Doyle
+r2s-indebted-town-1	town	357	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Reiko Inoue; profits:Xian Song
+r2s-indebted-town-2	town	590	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Tomoko Sato
+r2s-indebted-town-3	town	1546	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Hemavati Kumar
+r2s-indebted-city-1	city	3289	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Vachir Kipchak
+r2s-indebted-city-3	city	8576	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Ottilie Weber
+r2s-recently_betrayed-thorp-0	thorp	11	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Theophano Akropolites
+r2s-recently_betrayed-thorp-1	thorp	27	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Gudrun Ragnarsson; takes the fall:Gudrun Ragnarsson
+r2s-recently_betrayed-thorp-2	thorp	13	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Atotoztli Caan
+r2s-recently_betrayed-thorp-3	thorp	16	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Cassius Aquila; takes the fall:Cassius Aquila
+r2s-recently_betrayed-hamlet-1	hamlet	44	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Demetrios Argyros; takes the fall:Demetrios Argyros
+r2s-recently_betrayed-hamlet-2	hamlet	86	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Sisinnios Attaleiates
+r2s-recently_betrayed-hamlet-3	hamlet	84	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=instigator:Clothra MacDonald; target:Vénus Ryan
+r2s-recently_betrayed-village-0	village	321	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=instigator:Lan Zhang; target:Chae Xie; wavers:Lan Zhang
+r2s-recently_betrayed-village-1	village	174	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=instigator:Yong Liang; target:Min Zhang; wavers:Yong Liang
+r2s-recently_betrayed-village-2	village	394	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=instigator:Filippos Akropolites; target:Maria Kalojan; wavers:Filippos Akropolites
+r2s-recently_betrayed-village-3	village	231	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=instigator:Macrina Capito; target:Tullia Corvinus
+r2s-infiltrated-thorp-0	thorp	14	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+r2s-infiltrated-thorp-0	thorp	14	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+r2s-infiltrated-thorp-1	thorp	16	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+r2s-infiltrated-thorp-1	thorp	16	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+r2s-infiltrated-thorp-2	thorp	25	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+r2s-infiltrated-thorp-2	thorp	25	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+r2s-infiltrated-thorp-3	thorp	6	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+r2s-infiltrated-thorp-3	thorp	6	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+r2s-infiltrated-hamlet-0	hamlet	83	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+r2s-infiltrated-hamlet-0	hamlet	83	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+r2s-infiltrated-hamlet-1	hamlet	77	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+r2s-infiltrated-hamlet-1	hamlet	77	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+r2s-infiltrated-hamlet-2	hamlet	39	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+r2s-infiltrated-hamlet-2	hamlet	39	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+r2s-infiltrated-hamlet-3	hamlet	72	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+r2s-infiltrated-hamlet-3	hamlet	72	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+r2s-infiltrated-village-0	village	162	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+r2s-infiltrated-village-0	village	162	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+r2s-infiltrated-village-1	village	117	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+r2s-infiltrated-village-1	village	117	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+r2s-infiltrated-village-2	village	388	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+r2s-infiltrated-village-2	village	388	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+r2s-infiltrated-village-3	village	77	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+r2s-infiltrated-village-3	village	77	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+r2s-infiltrated-town-0	town	1716	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+r2s-infiltrated-town-1	town	319	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+r2s-infiltrated-town-2	town	660	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+r2s-infiltrated-town-3	town	1363	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+r2s-infiltrated-metropolis-1	metropolis	29728	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+r2s-infiltrated-metropolis-3	metropolis	33900	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+r2s-plague_onset-thorp-0	thorp	14	plague_onset	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Kenji Wang; holds the lever:Jiahao Wu
+r2s-plague_onset-thorp-1	thorp	25	plague_onset	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Pavithra Banerjee; holds the lever:Raj Banerjee
+r2s-plague_onset-thorp-3	thorp	15	plague_onset	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Chandra Chatterjee; holds the lever:Tribhuvan Bajaj
+r2s-succession_void-thorp-0	thorp	8	succession_void	NOLEVERS	matchingHouses=	npcRoles=target:Household Council
+r2s-succession_void-thorp-1	thorp	11	succession_void	NOLEVERS	matchingHouses=	npcRoles=target:Elder Council
+r2s-succession_void-thorp-2	thorp	30	succession_void	NOLEVERS	matchingHouses=	npcRoles=target:Household Council
+r2s-succession_void-thorp-3	thorp	14	succession_void	NOLEVERS	matchingHouses=	npcRoles=target:Household Council
+r2s-succession_void-hamlet-0	hamlet	99	succession_void	NOLEVERS	matchingHouses=	npcRoles=instigator:Zenobia Cicero; target:Free Elder Council
+r2s-succession_void-hamlet-1	hamlet	52	succession_void	NOLEVERS	matchingHouses=	npcRoles=target:Headman's Authority
+r2s-succession_void-hamlet-2	hamlet	55	succession_void	NOLEVERS	matchingHouses=	npcRoles=target:Feudal Stewardship
+r2s-succession_void-hamlet-3	hamlet	28	succession_void	NOLEVERS	matchingHouses=	npcRoles=target:Elder Council
+r2s-succession_void-village-0	village	270	succession_void	NOLEVERS	matchingHouses=	npcRoles=instigator:Jamila al-Farabi; target:Priestly Guidance
+r2s-succession_void-village-1	village	195	succession_void	NOLEVERS	matchingHouses=	npcRoles=instigator:Philippos Bryennios; target:Elder Council
+r2s-succession_void-village-2	village	87	succession_void	NOLEVERS	matchingHouses=	npcRoles=instigator:Teague Murphy; target:Elder Council
+r2s-succession_void-village-3	village	301	succession_void	NOLEVERS	matchingHouses=	npcRoles=instigator:Niamhan Larkin; target:Elder Council; wavers:Cara Hayes
+r2s-monster_pressure-thorp-0	thorp	16	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Chandra Bhat; holds the lever:Omkara Banerjee
+r2s-monster_pressure-thorp-1	thorp	18	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Naoise Ryan; holds the lever:Ronan Murphy
+r2s-monster_pressure-thorp-3	thorp	10	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Itzel Chi; holds the lever:Ollin Chuc
+r2s-monster_pressure-hamlet-0	hamlet	56	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Dyrfinna Thorsson; holds the lever:Birger Svensson
+r2s-monster_pressure-hamlet-1	hamlet	64	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Tomislav Alexeyev; holds the lever:Panayot Morozov
+r2s-monster_pressure-hamlet-2	hamlet	94	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Chagatai Kiyad; holds the lever:Yesülün Qonggirad
+r2s-monster_pressure-hamlet-3	hamlet	48	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Christos Doukas; holds the lever:Elias Chrysoberges
+r2s-monster_pressure-village-0	village	267	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=holds the lever:Nalayani Das
+r2s-monster_pressure-village-1	village	245	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=holds the lever:Güchlüg Ongut; exploits it:Börte Taichiud
+r2s-monster_pressure-village-2	village	242	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Archana Chatterjee; holds the lever:Yashodha Jha
+r2s-monster_pressure-village-3	village	207	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Maisa al-Jazari; holds the lever:Samira al-Masri
+r2s-insurgency-thorp-0	thorp	22	insurgency	NOLEVERS	matchingHouses=	npcRoles=target:Rónán Ryan
+r2s-insurgency-thorp-1	thorp	10	insurgency	NOLEVERS	matchingHouses=	npcRoles=target:Asgaut Olafsson; takes the fall:Asgaut Olafsson
+r2s-insurgency-thorp-2	thorp	9	insurgency	NOLEVERS	matchingHouses=	npcRoles=target:Yohualli Balam
+r2s-insurgency-thorp-3	thorp	16	insurgency	NOLEVERS	matchingHouses=	npcRoles=instigator:Franz Weber; target:Mechthild Becker
+r2s-insurgency-hamlet-0	hamlet	35	insurgency	NOLEVERS	matchingHouses=	npcRoles=target:Eirenika Comnenus
+r2s-insurgency-hamlet-1	hamlet	75	insurgency	NOLEVERS	matchingHouses=	npcRoles=target:Ilse Hoffmann
+r2s-insurgency-hamlet-2	hamlet	72	insurgency	NOLEVERS	matchingHouses=	npcRoles=target:Aemilia Corvinus
+r2s-insurgency-hamlet-3	hamlet	42	insurgency	NOLEVERS	matchingHouses=	npcRoles=target:Anna Chrysoberges
+r2s-insurgency-village-0	village	323	insurgency	NOLEVERS	matchingHouses=	npcRoles=instigator:Bojana Kozlov; target:Fedor Popov; wavers:Bojana Kozlov
+r2s-insurgency-village-2	village	293	insurgency	NOLEVERS	matchingHouses=	npcRoles=instigator:Dewei Zheng; target:Guiying Liu; takes the fall:Guiying Liu
+r2s-insurgency-village-3	village	264	insurgency	NOLEVERS	matchingHouses=	npcRoles=instigator:Volso Calvus; target:Lucia Capito
+r2s-religious_conversion-thorp-3	thorp	11	religious_conversion	NOLEVERS	matchingHouses=	npcRoles=target:Calvus Corvinus; takes the fall:Calvus Corvinus
+r2s-slave_revolt-thorp-0	thorp	28	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=target:Samarkand Kiyad; takes the fall:Samarkand Kiyad
+r2s-slave_revolt-thorp-1	thorp	15	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=target:Organa Tayichi'ud
+r2s-slave_revolt-thorp-2	thorp	21	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=target:Tianmei Wu; takes the fall:Tianmei Wu
+r2s-slave_revolt-thorp-3	thorp	23	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=target:Badr ibn Rashid
+r2s-slave_revolt-hamlet-0	hamlet	89	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=target:Bogdan Kozlov; takes the fall:Bogdan Kozlov
+r2s-slave_revolt-hamlet-2	hamlet	98	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=instigator:Hugh O'Brien; target:Eileen MacDonald
+r2s-slave_revolt-hamlet-3	hamlet	48	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=target:Notburga Becker
+r2s-slave_revolt-village-0	village	386	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=instigator:Isidora Silanus; target:Tubertus Bassus
+r2s-slave_revolt-village-1	village	89	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=instigator:Dhul-Nun al-Qadir; target:Nada al-Qadir
+r2s-slave_revolt-village-2	village	106	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=instigator:Fatima Jalayir; target:Borchigid Jalayir
+r2s-slave_revolt-village-3	village	171	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=instigator:Egor Lebedev; target:Olia Pavlov; takes the fall:Olia Pavlov
+r2s-wartime-thorp-0	thorp	18	wartime	NOBODY	absent=defends:no military, garrison or watch stands
+r2s-wartime-thorp-0	thorp	18	wartime	NOLEVERS	matchingHouses=	npcRoles=
+r2s-wartime-thorp-1	thorp	21	wartime	NOBODY	absent=defends:no military, garrison or watch stands
+r2s-wartime-thorp-1	thorp	21	wartime	NOLEVERS	matchingHouses=	npcRoles=
+r2s-wartime-thorp-2	thorp	9	wartime	NOBODY	absent=defends:no military, garrison or watch stands; profits:no power gains
+r2s-wartime-thorp-2	thorp	9	wartime	NOLEVERS	matchingHouses=	npcRoles=
+r2s-wartime-thorp-3	thorp	6	wartime	NOBODY	absent=defends:no military, garrison or watch stands
+r2s-wartime-thorp-3	thorp	6	wartime	NOLEVERS	matchingHouses=	npcRoles=
+r2s-wartime-hamlet-0	hamlet	75	wartime	NOBODY	absent=defends:no military, garrison or watch stands
+r2s-wartime-hamlet-0	hamlet	75	wartime	NOLEVERS	matchingHouses=	npcRoles=
+r2s-wartime-hamlet-1	hamlet	22	wartime	NOBODY	absent=defends:no military, garrison or watch stands; profits:no power gains
+r2s-wartime-hamlet-1	hamlet	22	wartime	NOLEVERS	matchingHouses=	npcRoles=
+r2s-wartime-hamlet-3	hamlet	84	wartime	NOBODY	absent=defends:no military, garrison or watch stands; profits:no power gains
+r2s-wartime-hamlet-3	hamlet	84	wartime	NOLEVERS	matchingHouses=	npcRoles=
+r2s-wartime-village-0	village	256	wartime	NOBODY	absent=defends:no military, garrison or watch stands
+r2s-wartime-village-2	village	370	wartime	NOBODY	absent=defends:no military, garrison or watch stands
+r2s-wartime-village-2	village	370	wartime	NOLEVERS	matchingHouses=	npcRoles=
+r2s-wartime-village-3	village	213	wartime	NOBODY	absent=defends:no military, garrison or watch stands
+rr3-thorp-under_siege-rand-1	thorp	6	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Nonia Caesar
+rr3-thorp-under_siege-rand-2	thorp	9	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Dmytro Petrov
+rr3-thorp-under_siege-rand-4	thorp	5	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Madhuri Bajaj
+rr3-thorp-under_siege-rand-5	thorp	27	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Licinia Cato
+rr3-thorp-under_siege-port-0	thorp	6	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Ananya Basu
+rr3-thorp-occupied-rand-0	thorp	24	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Ctirad Morozov; profits:Ctirad Morozov; collaborates:Ctirad Morozov
+rr3-thorp-occupied-rand-1	thorp	24	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Aischylos Attaleiates; profits:Aischylos Attaleiates; collaborates:Aischylos Attaleiates
+rr3-thorp-occupied-rand-2	thorp	22	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Elias Angelos; profits:Elias Angelos; collaborates:Elias Angelos
+rr3-thorp-occupied-rand-3	thorp	24	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Miho Wu; profits:Miho Wu; collaborates:Miho Wu
+rr3-thorp-occupied-rand-4	thorp	13	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Terentia Brutus; collaborates:Terentia Brutus
+rr3-thorp-occupied-rand-5	thorp	14	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Kamala Bhat; collaborates:Kamala Bhat
+rr3-thorp-occupied-port-0	thorp	22	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Daria Novikov; profits:Daria Novikov; collaborates:Daria Novikov
+rr3-thorp-occupied-port-1	thorp	28	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Vladislav Pavlov; profits:Vladislav Pavlov
+rr3-thorp-politically_fractured-rand-0	thorp	22	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Patrick Burke; target:Cnoc MacCarthy
+rr3-thorp-politically_fractured-rand-1	thorp	16	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Zina Kozlov; target:Xeno Sokolov; wavers:Nataliya Volkov; takes the fall:Xeno Sokolov
+rr3-thorp-politically_fractured-rand-2	thorp	23	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Felix Wagner; target:Elisabeth Richter
+rr3-thorp-politically_fractured-rand-3	thorp	25	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Yara al-Aziz; target:Yahya al-Rahman
+rr3-thorp-politically_fractured-rand-4	thorp	29	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Nikolaus Becker; target:Cordula Wagner
+rr3-thorp-politically_fractured-rand-5	thorp	20	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Möngke Kereit; target:Urangua Borjigin
+rr3-thorp-politically_fractured-port-0	thorp	9	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Yagul Caan; target:Tochtli Ahau
+rr3-thorp-politically_fractured-port-1	thorp	6	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Chae Chen; target:Gwon Li
+rr3-thorp-indebted-rand-0	thorp	21	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Laoghaire Murphy
+rr3-thorp-indebted-rand-1	thorp	28	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Oyuntuya Jadaran
+rr3-thorp-indebted-rand-2	thorp	29	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Cosij Batab
+rr3-thorp-indebted-rand-3	thorp	19	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Ludmila Volkov
+rr3-thorp-indebted-rand-4	thorp	6	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Eileen Ryan
+rr3-thorp-indebted-rand-5	thorp	11	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Zuochen Chen
+rr3-thorp-indebted-port-0	thorp	25	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Oppia Cato
+rr3-thorp-indebted-port-1	thorp	6	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Khatan Tayichi'ud
+rr3-thorp-recently_betrayed-rand-0	thorp	23	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Udelhild Becker; takes the fall:Udelhild Becker
+rr3-thorp-recently_betrayed-rand-1	thorp	9	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Vipsanius Maximus
+rr3-thorp-recently_betrayed-rand-2	thorp	9	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Nikon Alexios
+rr3-thorp-recently_betrayed-rand-3	thorp	10	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Anna Wagner
+rr3-thorp-recently_betrayed-rand-4	thorp	22	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Jaguar Chel
+rr3-thorp-recently_betrayed-rand-5	thorp	5	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Guo Wang; takes the fall:Guo Wang
+rr3-thorp-recently_betrayed-port-0	thorp	14	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Gisli Olafsson; takes the fall:Gisli Olafsson
+rr3-thorp-recently_betrayed-port-1	thorp	28	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Slavko Sidorov
+rr3-thorp-infiltrated-rand-0	thorp	29	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+rr3-thorp-infiltrated-rand-0	thorp	29	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-thorp-infiltrated-rand-1	thorp	30	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+rr3-thorp-infiltrated-rand-1	thorp	30	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-thorp-infiltrated-rand-2	thorp	6	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+rr3-thorp-infiltrated-rand-2	thorp	6	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-thorp-infiltrated-rand-3	thorp	13	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+rr3-thorp-infiltrated-rand-3	thorp	13	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-thorp-infiltrated-rand-4	thorp	21	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+rr3-thorp-infiltrated-rand-4	thorp	21	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-thorp-infiltrated-rand-5	thorp	22	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+rr3-thorp-infiltrated-rand-5	thorp	22	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-thorp-infiltrated-port-0	thorp	26	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+rr3-thorp-infiltrated-port-0	thorp	26	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-thorp-infiltrated-port-1	thorp	14	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+rr3-thorp-infiltrated-port-1	thorp	14	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-thorp-plague_onset-rand-1	thorp	25	plague_onset	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Drengr Sigmundsson; holds the lever:Magnus Gunnarsson
+rr3-thorp-plague_onset-rand-3	thorp	16	plague_onset	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Ogmund Bjornsson; holds the lever:Gudrun Haraldsson
+rr3-thorp-plague_onset-rand-5	thorp	6	plague_onset	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Jelena Sokolov; holds the lever:Tanya Volkov
+rr3-thorp-plague_onset-port-0	thorp	29	plague_onset	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Podromissa Bryennios; holds the lever:Laskarina Botaneiates
+rr3-thorp-plague_onset-port-1	thorp	11	plague_onset	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Nergüi Naiman; holds the lever:Arghun Naiman
+rr3-thorp-succession_void-rand-0	thorp	25	succession_void	NOLEVERS	matchingHouses=	npcRoles=target:Feudal Stewardship
+rr3-thorp-succession_void-rand-1	thorp	15	succession_void	NOLEVERS	matchingHouses=	npcRoles=target:Elder Council
+rr3-thorp-succession_void-rand-2	thorp	22	succession_void	NOLEVERS	matchingHouses=	npcRoles=target:Household Council
+rr3-thorp-succession_void-rand-3	thorp	12	succession_void	NOLEVERS	matchingHouses=	npcRoles=target:Elder Council
+rr3-thorp-succession_void-rand-4	thorp	21	succession_void	NOLEVERS	matchingHouses=	npcRoles=instigator:Balarama Acharya; target:Elder Council
+rr3-thorp-succession_void-rand-5	thorp	19	succession_void	NOLEVERS	matchingHouses=	npcRoles=target:Household Council
+rr3-thorp-succession_void-port-0	thorp	26	succession_void	NOLEVERS	matchingHouses=	npcRoles=target:Elder Council
+rr3-thorp-succession_void-port-1	thorp	29	succession_void	NOLEVERS	matchingHouses=	npcRoles=target:Household Council
+rr3-thorp-monster_pressure-rand-0	thorp	5	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Sevaste Argyros; holds the lever:Christophoros Attaleiates
+rr3-thorp-monster_pressure-rand-1	thorp	10	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Wind Chan; holds the lever:Jaguar Chan
+rr3-thorp-monster_pressure-rand-2	thorp	17	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Ashoka Bajaj; holds the lever:Suvarchala Ahuja
+rr3-thorp-monster_pressure-rand-3	thorp	6	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Thunder Ahau; holds the lever:Pitao Chi
+rr3-thorp-monster_pressure-rand-4	thorp	24	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Járnsaxa Olafsson; holds the lever:Olof Gunnarsson
+rr3-thorp-monster_pressure-rand-5	thorp	25	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Fuad ibn Ahmed; holds the lever:Huda al-Malik
+rr3-thorp-monster_pressure-port-1	thorp	18	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Natsuko Wu; holds the lever:Yafang Huang
+rr3-thorp-insurgency-rand-0	thorp	19	insurgency	NOLEVERS	matchingHouses=	npcRoles=instigator:Vera Aquila; target:Flavia Severus
+rr3-thorp-insurgency-rand-1	thorp	20	insurgency	NOLEVERS	matchingHouses=	npcRoles=target:Chimalli Caan; takes the fall:Chimalli Caan
+rr3-thorp-insurgency-rand-2	thorp	8	insurgency	NOLEVERS	matchingHouses=	npcRoles=target:Saidhbhín Fitzgerald
+rr3-thorp-insurgency-rand-3	thorp	6	insurgency	NOLEVERS	matchingHouses=	npcRoles=target:Daisuke Zhang; takes the fall:Daisuke Zhang
+rr3-thorp-insurgency-rand-4	thorp	27	insurgency	NOLEVERS	matchingHouses=	npcRoles=target:Rabiria Severus
+rr3-thorp-insurgency-rand-5	thorp	30	insurgency	NOLEVERS	matchingHouses=	npcRoles=target:Nanna Olafsson
+rr3-thorp-insurgency-port-0	thorp	19	insurgency	NOLEVERS	matchingHouses=	npcRoles=target:Hector Ryan
+rr3-thorp-insurgency-port-1	thorp	16	insurgency	NOLEVERS	matchingHouses=	npcRoles=target:Valentina Volkov
+rr3-thorp-religious_conversion-rand-0	thorp	21	religious_conversion	NOLEVERS	matchingHouses=	npcRoles=target:Samir al-Malik; takes the fall:Samir al-Malik
+rr3-thorp-religious_conversion-port-0	thorp	17	religious_conversion	NOLEVERS	matchingHouses=	npcRoles=target:Udelhild Wagner; takes the fall:Udelhild Wagner
+rr3-thorp-slave_revolt-rand-0	thorp	8	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=target:Andronikos I Argyros
+rr3-thorp-slave_revolt-rand-1	thorp	14	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=target:Wanru Zhang
+rr3-thorp-slave_revolt-rand-2	thorp	13	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=instigator:Eirik Olafsson; target:Katla Eriksson
+rr3-thorp-slave_revolt-rand-3	thorp	12	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=target:Othman al-Din
+rr3-thorp-slave_revolt-rand-4	thorp	18	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=target:Yusuf al-Qadir
+rr3-thorp-slave_revolt-rand-5	thorp	5	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=target:Terentius Varro
+rr3-thorp-slave_revolt-port-0	thorp	9	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=target:Devayani Basu
+rr3-thorp-slave_revolt-port-1	thorp	28	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=target:Lepidus Aurelius
+rr3-thorp-wartime-rand-0	thorp	22	wartime	NOBODY	absent=defends:no military, garrison or watch stands; profits:no power gains
+rr3-thorp-wartime-rand-0	thorp	22	wartime	NOLEVERS	matchingHouses=	npcRoles=
+rr3-thorp-wartime-rand-1	thorp	21	wartime	NOBODY	absent=defends:no military, garrison or watch stands; profits:no power gains
+rr3-thorp-wartime-rand-1	thorp	21	wartime	NOLEVERS	matchingHouses=	npcRoles=
+rr3-thorp-wartime-rand-2	thorp	14	wartime	NOBODY	absent=defends:no military, garrison or watch stands
+rr3-thorp-wartime-rand-2	thorp	14	wartime	NOLEVERS	matchingHouses=	npcRoles=
+rr3-thorp-wartime-rand-3	thorp	9	wartime	NOBODY	absent=defends:no military, garrison or watch stands
+rr3-thorp-wartime-rand-3	thorp	9	wartime	NOLEVERS	matchingHouses=	npcRoles=
+rr3-thorp-wartime-rand-4	thorp	13	wartime	NOBODY	absent=defends:no military, garrison or watch stands; profits:no power gains
+rr3-thorp-wartime-rand-4	thorp	13	wartime	NOLEVERS	matchingHouses=	npcRoles=
+rr3-thorp-wartime-rand-5	thorp	27	wartime	NOBODY	absent=defends:no military, garrison or watch stands
+rr3-thorp-wartime-rand-5	thorp	27	wartime	NOLEVERS	matchingHouses=	npcRoles=
+rr3-thorp-wartime-port-0	thorp	5	wartime	NOBODY	absent=defends:no military, garrison or watch stands; profits:no power gains
+rr3-thorp-wartime-port-0	thorp	5	wartime	NOLEVERS	matchingHouses=	npcRoles=
+rr3-thorp-wartime-port-1	thorp	30	wartime	NOBODY	absent=defends:no military, garrison or watch stands
+rr3-thorp-wartime-port-1	thorp	30	wartime	NOLEVERS	matchingHouses=	npcRoles=
+rr3-thorp-mass_migration-rand-5	thorp	17	mass_migration	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Sigibald Richter; holds the lever:Osterhild Wagner
+rr3-thorp-mass_migration-port-0	thorp	11	mass_migration	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Geirþrúðr Sigmundsson; holds the lever:Freya Ragnarsson
+rr3-thorp-mass_migration-port-1	thorp	23	mass_migration	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Fulvia Caesar; holds the lever:Clodia Severus
+rr3-thorp-under_siege+famine-rand-0	thorp	22	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Karim al-Hassan
+rr3-thorp-under_siege+famine-rand-1	thorp	15	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Oyun Kereit
+rr3-thorp-under_siege+famine-rand-2	thorp	5	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Coatl Chan
+rr3-thorp-under_siege+famine-rand-3	thorp	23	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Hyunji Yang
+rr3-thorp-under_siege+famine-rand-4	thorp	27	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Basilissa Chomatenos
+rr3-thorp-under_siege+famine-rand-5	thorp	30	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Devayani Balan
+rr3-thorp-under_siege+famine-port-0	thorp	29	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Cveta Pavlov
+rr3-hamlet-under_siege-rand-0	hamlet	72	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Manuela Comnenus
+rr3-hamlet-under_siege-rand-1	hamlet	93	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Fengyi Liu
+rr3-hamlet-under_siege-rand-2	hamlet	30	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Branko Volkov
+rr3-hamlet-under_siege-rand-3	hamlet	84	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Líadan Kelly
+rr3-hamlet-under_siege-rand-5	hamlet	20	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Aarti Bhat
+rr3-hamlet-under_siege-port-0	hamlet	73	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Chac Chan
+rr3-hamlet-under_siege-port-1	hamlet	38	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Ermintrude Fischer
+rr3-hamlet-occupied-rand-0	hamlet	38	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Zakariya al-Hassan
+rr3-hamlet-occupied-rand-1	hamlet	94	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Ingvar Sigmundsson; collaborates:Ingvar Sigmundsson
+rr3-hamlet-occupied-rand-2	hamlet	69	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Finn Magnusson; profits:Finn Magnusson; collaborates:Finn Magnusson
+rr3-hamlet-occupied-rand-3	hamlet	33	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Xenophon Botaneiates; profits:Xenophon Botaneiates; collaborates:Xenophon Botaneiates
+rr3-hamlet-occupied-rand-4	hamlet	53	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Birger Ragnarsson; collaborates:Birger Ragnarsson
+rr3-hamlet-occupied-rand-5	hamlet	92	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Gantuyaa Kereit; collaborates:Gantuyaa Kereit
+rr3-hamlet-occupied-port-0	hamlet	45	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Ulf Magnusson; profits:Ulf Magnusson
+rr3-hamlet-politically_fractured-rand-0	hamlet	47	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Saidhbhín MacCarthy; target:Gareth Quinn
+rr3-hamlet-politically_fractured-rand-1	hamlet	96	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Zenobia Caesar; target:Valentinus Maximus
+rr3-hamlet-politically_fractured-rand-2	hamlet	97	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Jassim al-Malik; target:Kamil al-Farabi
+rr3-hamlet-politically_fractured-rand-3	hamlet	87	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Laoghaire Byrne; target:Barra Kelly
+rr3-hamlet-politically_fractured-rand-4	hamlet	40	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Dzizib Caan; target:Xochitl Hau
+rr3-hamlet-politically_fractured-rand-5	hamlet	68	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Emil Andreyev; target:Jevgeni Volkov; takes the fall:Jevgeni Volkov
+rr3-hamlet-politically_fractured-port-1	hamlet	64	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Caecilia Flavius; target:Claudia Varro
+rr3-hamlet-indebted-rand-0	hamlet	94	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Egil Bjarnarson
+rr3-hamlet-indebted-rand-1	hamlet	64	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Kyriakos Chomatenos
+rr3-hamlet-indebted-rand-2	hamlet	65	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Intisar al-Farabi
+rr3-hamlet-indebted-rand-3	hamlet	65	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Maryam ibn Ahmed
+rr3-hamlet-indebted-rand-4	hamlet	99	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Diarmuid Quinn
+rr3-hamlet-indebted-rand-5	hamlet	31	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Thyra Thorsson
+rr3-hamlet-indebted-port-0	hamlet	75	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Ulugh Kiyad
+rr3-hamlet-indebted-port-1	hamlet	27	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Bhavana Banerjee
+rr3-hamlet-recently_betrayed-rand-0	hamlet	66	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Trebonianus Flavius; takes the fall:Trebonianus Flavius
+rr3-hamlet-recently_betrayed-rand-2	hamlet	87	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Hallgerd Olafsson
+rr3-hamlet-recently_betrayed-rand-3	hamlet	100	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Constantinos Argyros; wavers:Argyros Angelos; takes the fall:Constantinos Argyros
+rr3-hamlet-recently_betrayed-rand-4	hamlet	98	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Háken O'Connor
+rr3-hamlet-recently_betrayed-rand-5	hamlet	35	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Abhimanyu Deshpande; takes the fall:Abhimanyu Deshpande
+rr3-hamlet-recently_betrayed-port-1	hamlet	93	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Ome Caan
+rr3-hamlet-infiltrated-rand-0	hamlet	36	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+rr3-hamlet-infiltrated-rand-0	hamlet	36	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-hamlet-infiltrated-rand-1	hamlet	84	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+rr3-hamlet-infiltrated-rand-1	hamlet	84	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-hamlet-infiltrated-rand-2	hamlet	46	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+rr3-hamlet-infiltrated-rand-2	hamlet	46	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-hamlet-infiltrated-rand-3	hamlet	80	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+rr3-hamlet-infiltrated-rand-3	hamlet	80	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-hamlet-infiltrated-rand-4	hamlet	37	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+rr3-hamlet-infiltrated-rand-4	hamlet	37	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-hamlet-infiltrated-rand-5	hamlet	98	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+rr3-hamlet-infiltrated-rand-5	hamlet	98	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-hamlet-infiltrated-port-0	hamlet	55	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+rr3-hamlet-infiltrated-port-0	hamlet	55	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-hamlet-infiltrated-port-1	hamlet	50	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+rr3-hamlet-infiltrated-port-1	hamlet	50	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-hamlet-succession_void-rand-0	hamlet	52	succession_void	NOLEVERS	matchingHouses=	npcRoles=target:Feudal Stewardship
+rr3-hamlet-succession_void-rand-1	hamlet	32	succession_void	NOLEVERS	matchingHouses=	npcRoles=target:Free Elder Council
+rr3-hamlet-succession_void-rand-2	hamlet	49	succession_void	NOLEVERS	matchingHouses=	npcRoles=instigator:Vranas Comnenus; target:Feudal Stewardship
+rr3-hamlet-succession_void-rand-3	hamlet	63	succession_void	NOLEVERS	matchingHouses=	npcRoles=target:Free Elder Council
+rr3-hamlet-succession_void-rand-4	hamlet	97	succession_void	NOLEVERS	matchingHouses=	npcRoles=instigator:Dogshin Barlas; target:Free Elder Council
+rr3-hamlet-succession_void-rand-5	hamlet	22	succession_void	NOLEVERS	matchingHouses=	npcRoles=target:Elder Council
+rr3-hamlet-succession_void-port-0	hamlet	84	succession_void	NOLEVERS	matchingHouses=	npcRoles=target:Headman's Authority
+rr3-hamlet-succession_void-port-1	hamlet	43	succession_void	NOLEVERS	matchingHouses=	npcRoles=target:Elder Council
+rr3-hamlet-monster_pressure-rand-0	hamlet	52	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Antonius Cicero; holds the lever:Fulvia Varro
+rr3-hamlet-monster_pressure-rand-2	hamlet	35	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Vladimir Novikov; holds the lever:Lyuben Ivanov
+rr3-hamlet-monster_pressure-rand-3	hamlet	80	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Knud Olafsson; holds the lever:Járnsaxa Olafsson
+rr3-hamlet-monster_pressure-rand-4	hamlet	75	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Melane Alexios; holds the lever:Charis Akropolites
+rr3-hamlet-monster_pressure-rand-5	hamlet	23	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Khutulun Tayichi'ud; holds the lever:Khatan Kereit
+rr3-hamlet-monster_pressure-port-0	hamlet	64	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Chan Ahau; holds the lever:Sak Cohuoh
+rr3-hamlet-monster_pressure-port-1	hamlet	75	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Nidud Gunnarsson; holds the lever:Ogmund Svensson
+rr3-hamlet-insurgency-rand-0	hamlet	54	insurgency	NOLEVERS	matchingHouses=	npcRoles=target:Uathach Burke
+rr3-hamlet-insurgency-rand-1	hamlet	70	insurgency	NOLEVERS	matchingHouses=	npcRoles=instigator:Wajiha al-Basri; target:Samira ibn Ahmed
+rr3-hamlet-insurgency-rand-2	hamlet	64	insurgency	NOLEVERS	matchingHouses=	npcRoles=target:Niall Sullivan
+rr3-hamlet-insurgency-rand-3	hamlet	91	insurgency	NOLEVERS	matchingHouses=	npcRoles=instigator:People's Council; target:Chimalxochitl Chi; takes the fall:Chimalxochitl Chi
+rr3-hamlet-insurgency-rand-5	hamlet	60	insurgency	NOLEVERS	matchingHouses=	npcRoles=target:Ísgerðr Magnusson
+rr3-hamlet-insurgency-port-0	hamlet	86	insurgency	NOLEVERS	matchingHouses=	npcRoles=target:Munatia Caesar; takes the fall:Munatia Caesar
+rr3-hamlet-insurgency-port-1	hamlet	67	insurgency	NOLEVERS	matchingHouses=	npcRoles=target:Iztli Ek
+rr3-hamlet-slave_revolt-rand-0	hamlet	59	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=target:Jovianus Varro; takes the fall:Jovianus Varro
+rr3-hamlet-slave_revolt-rand-2	hamlet	74	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=instigator:Tuyaa Kiyad; target:Ariun Taichiud
+rr3-hamlet-slave_revolt-rand-3	hamlet	46	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=target:Qudama al-Basri; takes the fall:Qudama al-Basri
+rr3-hamlet-slave_revolt-rand-4	hamlet	91	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=target:Hierotheos Bryennios
+rr3-hamlet-slave_revolt-port-0	hamlet	60	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=target:Gebhard Neumann
+rr3-hamlet-slave_revolt-port-1	hamlet	33	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=target:Zorica Alexeyev
+rr3-hamlet-wartime-rand-0	hamlet	43	wartime	NOBODY	absent=defends:no military, garrison or watch stands; profits:no power gains
+rr3-hamlet-wartime-rand-1	hamlet	99	wartime	NOBODY	absent=defends:no military, garrison or watch stands
+rr3-hamlet-wartime-rand-1	hamlet	99	wartime	NOLEVERS	matchingHouses=	npcRoles=
+rr3-hamlet-wartime-rand-2	hamlet	98	wartime	NOBODY	absent=defends:no military, garrison or watch stands; profits:no power gains
+rr3-hamlet-wartime-rand-2	hamlet	98	wartime	NOLEVERS	matchingHouses=	npcRoles=
+rr3-hamlet-wartime-rand-3	hamlet	81	wartime	NOBODY	absent=defends:no military, garrison or watch stands
+rr3-hamlet-wartime-rand-3	hamlet	81	wartime	NOLEVERS	matchingHouses=	npcRoles=
+rr3-hamlet-wartime-rand-4	hamlet	62	wartime	NOBODY	absent=defends:no military, garrison or watch stands
+rr3-hamlet-wartime-rand-5	hamlet	29	wartime	NOBODY	absent=defends:no military, garrison or watch stands; profits:no power gains
+rr3-hamlet-wartime-rand-5	hamlet	29	wartime	NOLEVERS	matchingHouses=	npcRoles=
+rr3-hamlet-wartime-port-0	hamlet	29	wartime	NOBODY	absent=defends:no military, garrison or watch stands
+rr3-hamlet-wartime-port-0	hamlet	29	wartime	NOLEVERS	matchingHouses=	npcRoles=
+rr3-hamlet-wartime-port-1	hamlet	31	wartime	NOBODY	absent=defends:no military, garrison or watch stands; profits:no power gains
+rr3-hamlet-under_siege+famine-rand-0	hamlet	49	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Anand Bajaj
+rr3-hamlet-under_siege+famine-rand-1	hamlet	29	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Dubravka Novikov
+rr3-hamlet-under_siege+famine-rand-2	hamlet	85	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Sky Woman Balam
+rr3-hamlet-under_siege+famine-rand-4	hamlet	91	under_siege	NOLEVERS	matchingHouses=	npcRoles=defends:Badr al-Farabi; would treat:Badr al-Hassan
+rr3-hamlet-under_siege+famine-rand-5	hamlet	36	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Ludmila Borisov
+rr3-hamlet-under_siege+famine-port-0	hamlet	69	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Konstantinos Angelos
+rr3-village-under_siege-rand-1	village	159	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Alaa al-Din
+rr3-village-under_siege-rand-2	village	89	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Tacitus Cato
+rr3-village-under_siege-rand-3	village	282	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Waheed al-Rahman
+rr3-village-under_siege-rand-5	village	276	under_siege	NOLEVERS	matchingHouses=	npcRoles=defends:Peppo Weber; would treat:Joachim Hoffmann
+rr3-village-under_siege-port-0	village	155	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Cuauhtli Chan
+rr3-village-under_siege-port-1	village	179	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Klaus Becker
+rr3-village-occupied-rand-1	village	216	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Mörnir Mordsson; profits:Mörnir Mordsson; collaborates:Mörnir Mordsson
+rr3-village-occupied-rand-2	village	357	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Pall Ragnarsson; collaborates:Pall Ragnarsson
+rr3-village-occupied-rand-4	village	79	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Rónnat Murray; profits:Rónnat Murray; collaborates:Rónnat Murray
+rr3-village-occupied-rand-5	village	231	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Calvus Cato; profits:Calvus Cato
+rr3-village-occupied-port-0	village	170	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Gantulga Kiyad; profits:Gantulga Kiyad
+rr3-village-occupied-port-1	village	360	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Nirmala Kaur
+rr3-village-politically_fractured-rand-0	village	85	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Eleni Gregoraios; target:Raoul Gabalas; wavers:Raoul Gabalas
+rr3-village-politically_fractured-rand-1	village	359	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Uchakhain Suldus; target:Munkhtuya Noyakin; wavers:Uchakhain Suldus; takes the fall:Munkhtuya Noyakin
+rr3-village-politically_fractured-rand-2	village	301	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Pansa Julianus; target:Rutilius Celer; takes the fall:Rutilius Celer
+rr3-village-politically_fractured-rand-4	village	351	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Rain Chi; target:Oc Koh; wavers:Rain Chi
+rr3-village-politically_fractured-rand-5	village	163	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Christoph Kaiser; target:Elfriede Huber
+rr3-village-politically_fractured-port-0	village	348	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Xiaoling Li; target:Jiro Chen
+rr3-village-politically_fractured-port-1	village	353	politically_fractured	NOLEVERS	matchingHouses=	npcRoles=instigator:Laxman Kapur; target:Pavithra Dutta; wavers:Sudha Jain; takes the fall:Pavithra Dutta
+rr3-village-indebted-rand-0	village	80	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Gisli Njálsson
+rr3-village-indebted-rand-1	village	393	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Alastair Sullivan
+rr3-village-indebted-rand-2	village	308	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Kuchug Mangghud
+rr3-village-indebted-rand-3	village	331	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Guelagetza Kin; profits:Kaban Caan
+rr3-village-indebted-rand-4	village	282	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Niamh MacCarthy
+rr3-village-indebted-rand-5	village	278	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Dietmar Becker; profits:Wolfger Maier
+rr3-village-indebted-port-0	village	366	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Josip Frolov
+rr3-village-indebted-port-1	village	209	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Postumia Bassus
+rr3-village-recently_betrayed-rand-0	village	242	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=instigator:Moira Quinn; target:Ériu Carey; wavers:Moira Quinn
+rr3-village-recently_betrayed-rand-1	village	323	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=instigator:Prakash Chaudhary; target:Supriya Balan
+rr3-village-recently_betrayed-rand-2	village	299	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=instigator:Maxim Denisov; target:Vladimir Ilyin
+rr3-village-recently_betrayed-rand-3	village	203	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=instigator:Fatima Borjigin; target:Munkhtuya Noyakin
+rr3-village-recently_betrayed-rand-4	village	264	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=target:Phokas Kalojan
+rr3-village-recently_betrayed-rand-5	village	290	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=instigator:Sneha Choudhry; target:Santosh Joshi; wavers:Manju Goswami
+rr3-village-recently_betrayed-port-1	village	82	recently_betrayed	NOLEVERS	matchingHouses=	npcRoles=instigator:Bolontiku Ixim; target:Itzcuintli Kanil
+rr3-village-infiltrated-rand-0	village	207	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+rr3-village-infiltrated-rand-0	village	207	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-village-infiltrated-rand-1	village	258	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+rr3-village-infiltrated-rand-1	village	258	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-village-infiltrated-rand-2	village	92	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+rr3-village-infiltrated-rand-2	village	92	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-village-infiltrated-rand-3	village	211	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+rr3-village-infiltrated-rand-3	village	211	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-village-infiltrated-rand-4	village	342	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+rr3-village-infiltrated-rand-4	village	342	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-village-infiltrated-rand-5	village	143	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+rr3-village-infiltrated-rand-5	village	143	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-village-infiltrated-port-0	village	159	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+rr3-village-infiltrated-port-0	village	159	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-village-infiltrated-port-1	village	161	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+rr3-village-infiltrated-port-1	village	161	infiltrated	NOLEVERS	matchingHouses=	npcRoles=
+rr3-village-succession_void-rand-0	village	385	succession_void	NOLEVERS	matchingHouses=	npcRoles=target:Priestly Guidance
+rr3-village-succession_void-rand-1	village	178	succession_void	NOLEVERS	matchingHouses=	npcRoles=instigator:Tun Kanil; target:Elder Council
+rr3-village-succession_void-rand-2	village	138	succession_void	NOLEVERS	matchingHouses=	npcRoles=instigator:Laskaris Gabalas; target:Elder Council
+rr3-village-succession_void-rand-3	village	202	succession_void	NOLEVERS	matchingHouses=	npcRoles=target:Priestly Guidance; wavers:Indumati Dixit
+rr3-village-succession_void-rand-4	village	116	succession_void	NOLEVERS	matchingHouses=	npcRoles=target:Priestly Guidance
+rr3-village-succession_void-rand-5	village	286	succession_void	NOLEVERS	matchingHouses=	npcRoles=instigator:Drusilla Aquila; target:Elder Council; wavers:Cassia Calvus
+rr3-village-succession_void-port-1	village	373	succession_void	NOLEVERS	matchingHouses=	npcRoles=instigator:Lena Krüger; target:Elected Reeve; wavers:Gertrude Hartmann
+rr3-village-monster_pressure-rand-2	village	85	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=holds the lever:Salome Walter; exploits it:Frieda Becker
+rr3-village-monster_pressure-rand-3	village	286	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Vijay Chaudhary; holds the lever:Murugan Banerjee
+rr3-village-monster_pressure-rand-4	village	368	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Titia Laenas; holds the lever:Cato Laenas
+rr3-village-monster_pressure-rand-5	village	383	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=bears the brunt:Zayd al-Mawsili; holds the lever:Salim al-Kindi
+rr3-village-monster_pressure-port-0	village	160	monster_pressure	NOLEVERS	matchingHouses=	npcRoles=holds the lever:Yaretzi Kin
+rr3-village-insurgency-rand-0	village	93	insurgency	NOLEVERS	matchingHouses=	npcRoles=instigator:People's Council; target:Noriko Zheng
+rr3-village-insurgency-rand-1	village	239	insurgency	NOLEVERS	matchingHouses=	npcRoles=instigator:People's Council; target:Balarama Kaur
+rr3-village-insurgency-rand-2	village	375	insurgency	NOLEVERS	matchingHouses=	npcRoles=instigator:Lokesh Ahuja; target:Kailash Bhatt
+rr3-village-insurgency-rand-4	village	112	insurgency	NOLEVERS	matchingHouses=	npcRoles=instigator:Salma al-Ghazali; target:Widad ibn Khalid; takes the fall:Widad ibn Khalid
+rr3-village-insurgency-rand-5	village	170	insurgency	NOLEVERS	matchingHouses=	npcRoles=instigator:People's Council; target:Postumia Severus
+rr3-village-insurgency-port-0	village	149	insurgency	NOLEVERS	matchingHouses=	npcRoles=instigator:Labeo Julianus; target:Cara Silanus
+rr3-village-insurgency-port-1	village	215	insurgency	NOLEVERS	matchingHouses=	npcRoles=instigator:Thodoros Hexamilites; target:Roxane Chrysoberges
+rr3-village-slave_revolt-rand-0	village	107	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=target:Ulfhéðinn Thorsson
+rr3-village-slave_revolt-rand-1	village	350	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=instigator:Khulood al-Masri; target:Nabil ibn Ahmed
+rr3-village-slave_revolt-rand-2	village	387	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=instigator:Predrag Kozlov; target:Daria Novikov; wavers:Mykola Sokolov; takes the fall:Daria Novikov
+rr3-village-slave_revolt-rand-3	village	122	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=instigator:Wu Tang; target:Ruihua Liang; wavers:Wu Tang
+rr3-village-slave_revolt-rand-4	village	286	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=instigator:Arne Mordsson; target:Ulf Asgersson
+rr3-village-slave_revolt-rand-5	village	329	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=instigator:Maria Schmidt; target:Volker Lange; takes the fall:Volker Lange
+rr3-village-slave_revolt-port-0	village	309	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=instigator:Dalibor Frolov; target:Dubravka Kiselev; takes the fall:Dubravka Kiselev
+rr3-village-slave_revolt-port-1	village	148	slave_revolt	NOLEVERS	matchingHouses=	npcRoles=instigator:Franziska Braun; target:Gregor Richter
+rr3-village-wartime-rand-0	village	262	wartime	NOLEVERS	matchingHouses=	npcRoles=profits:Dan Zhou
+rr3-village-wartime-rand-1	village	114	wartime	NOBODY	absent=defends:no military, garrison or watch stands; profits:no power gains
+rr3-village-wartime-rand-1	village	114	wartime	NOLEVERS	matchingHouses=	npcRoles=
+rr3-village-wartime-rand-2	village	108	wartime	NOBODY	absent=defends:no military, garrison or watch stands
+rr3-village-wartime-rand-2	village	108	wartime	NOLEVERS	matchingHouses=	npcRoles=
+rr3-village-wartime-rand-4	village	230	wartime	NOBODY	absent=defends:no military, garrison or watch stands
+rr3-village-wartime-rand-4	village	230	wartime	NOLEVERS	matchingHouses=	npcRoles=
+rr3-village-wartime-rand-5	village	86	wartime	NOBODY	absent=defends:no military, garrison or watch stands
+rr3-village-wartime-rand-5	village	86	wartime	NOLEVERS	matchingHouses=	npcRoles=
+rr3-village-under_siege+famine-rand-0	village	305	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Franziska Zimmermann
+rr3-village-under_siege+famine-rand-1	village	105	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Toragana Olqunu'ud
+rr3-village-under_siege+famine-rand-2	village	112	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Chan Dzul
+rr3-village-under_siege+famine-rand-3	village	361	under_siege	NOLEVERS	matchingHouses=	npcRoles=defends:Flann Larkin; would treat:Saoirse Flaherty
+rr3-village-under_siege+famine-rand-4	village	371	under_siege	NOLEVERS	matchingHouses=	npcRoles=defends:Cato Cato; would treat:Valerianus Caesar
+rr3-village-under_siege+famine-port-1	village	191	under_siege	NOLEVERS	matchingHouses=	npcRoles=would treat:Ulugh Suldus
+rr3-town-indebted-rand-0	town	840	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Maroula Argyros; profits:Panteleimon Bryennios
+rr3-town-indebted-rand-2	town	2127	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Decius Cicero
+rr3-town-indebted-rand-4	town	2185	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Vasileia Limniotes
+rr3-town-indebted-rand-5	town	1719	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Jora Vargsson; profits:Víðr Ulfsson
+rr3-town-indebted-port-0	town	548	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Quetzalli Ek
+rr3-town-indebted-port-1	town	1787	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Sonya Dmitriev; profits:Zina Nikitin
+rr3-town-infiltrated-rand-0	town	2426	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+rr3-town-infiltrated-rand-2	town	2012	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+rr3-town-infiltrated-rand-3	town	566	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+rr3-town-infiltrated-rand-4	town	1964	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+rr3-town-infiltrated-rand-5	town	381	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+rr3-town-infiltrated-port-0	town	1074	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+rr3-town-infiltrated-port-1	town	573	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+rr3-city-indebted-rand-0	city	4775	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Eudokia Niketas
+rr3-city-infiltrated-rand-0	city	4983	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+rr3-city-infiltrated-rand-4	city	14195	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+rr3-city-infiltrated-port-1	city	6659	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+rr3-metropolis-indebted-rand-1	metropolis	22384	indebted	NOLEVERS	matchingHouses=	npcRoles=would treat:Apokaukos Photeinopoulos
+rr3-metropolis-infiltrated-port-0	metropolis	23734	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed; collaborates:no power gains
+rr3-metropolis-infiltrated-port-1	metropolis	33782	infiltrated	NOBODY	absent=instigator:an outside hand, unnamed
+rr3p-thorp-occupied-rand-0	thorp	27	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Shobha Acharya
+rr3p-thorp-occupied-rand-1	thorp	23	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Goran Kozlov
+rr3p-thorp-occupied-rand-2	thorp	9	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Wolfhard Schneider; profits:Wolfhard Schneider
+rr3p-hamlet-occupied-rand-0	hamlet	42	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Uqba al-Hassan; collaborates:Uqba al-Hassan
+rr3p-hamlet-occupied-rand-2	hamlet	48	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Wiglaf Ragnarsson
+rr3p-village-occupied-rand-0	village	215	occupied	NOLEVERS	matchingHouses=	npcRoles=the occupier's local face:Laskaris Hyaleas; collaborates:Laskaris Hyaleas

@@ -1,0 +1,47 @@
+births base 1722 tip 1722 missing 0; leaf diffs 3528; towns moved 800
+family availableServices: 249 towns
+family history: 232 towns
+family economicViability: 142 towns
+family resourceAnalysis: 129 towns
+family powerStructure: 113 towns
+family economicState: 74 towns
+family culturalIdentity: 74 towns
+family structuralViolations: 69 towns
+family npcs: 29 towns
+family generationCoherenceReceipt: 20 towns
+  249	.availableServices.criminal[].name	 e.g. r2r-thorp-17 r2r-village-11 r2r-village-12
+  184	.history.historicalEvents[].plotHooks[]	 e.g. r2r-thorp-12 r2r-thorp-19 r2r-thorp-20
+  113	.powerStructure.factionRelationships[].narrative	 e.g. r2r-village-27 r2r-town-13 r2r-town-15
+  104	.economicViability.plotHooks[].hook	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-46
+  82	.resourceAnalysis.exports[].product	 e.g. r2r-thorp-14 r2r-thorp-37 r2r-thorp-40
+  74	.economicState.foodSecurity.foodRecord.foodwaysLine	 e.g. r2r-thorp-1 r2r-thorp-6 r2r-thorp-24
+  74	.culturalIdentity.foodways	 e.g. r2r-thorp-1 r2r-thorp-6 r2r-thorp-24
+  69	.structuralViolations[].reason	 e.g. r2r-city-47 r2r-city-50 r2r-city-51
+  55	.economicViability.plotHooks[]	 e.g. r2r-thorp-23 r2r-thorp-48 r2r-hamlet-43
+  55	.availableServices.criminal[].desc	 e.g. r2r-village-19 r2r-village-27 r2r-village-43
+  53	.history.currentTensions[].plotHooks[]	 e.g. r2r-thorp-48 r2r-hamlet-31 r2r-village-1
+  47	.resourceAnalysis.exports[].reason	 e.g. r2r-town-1 r2r-town-17 r2r-town-27
+  31	.powerStructure.factionRelationships[].type	 e.g. r2r-town-19 r2r-town-44 r2r-town-57
+  29	.npcs[].goal.short	 e.g. r2r-town-19 r2r-town-44 r2r-town-57
+  29	.npcs[].goal.long	 e.g. r2r-town-19 r2r-town-44 r2r-town-57
+  29	.npcs[].goal.intent.short.target.id	 e.g. r2r-town-19 r2r-town-44 r2r-town-57
+  29	.npcs[].goal.intent.long.family	 e.g. r2r-town-19 r2r-town-44 r2r-town-57
+  29	.npcs[].goal.intent.long.kind	 e.g. r2r-town-19 r2r-town-44 r2r-town-57
+  29	.npcs[].goal.intent.long.key	 e.g. r2r-town-19 r2r-town-44 r2r-town-57
+  29	.npcs[].goal.intent.long.target.id	 e.g. r2r-town-19 r2r-town-44 r2r-town-57
+  28	.npcs[].goal.intent.long.target.kind	 e.g. r2r-town-19 r2r-town-44 r2r-town-57
+  27	.npcs[].goal.intent.short.kind	 e.g. r2r-town-19 r2r-town-44 r2r-town-57
+  26	.npcs[].goal.intent.short.family	 e.g. r2r-town-19 r2r-town-44 r2r-town-57
+  26	.npcs[].goal.intent.short.key	 e.g. r2r-town-19 r2r-town-44 r2r-town-57
+  23	.economicViability.summary	 e.g. r2r-village-0 r2r-town-9 r2r-town-12
+  23	.npcs[].goal.intent.short.target.kind	 e.g. r2r-town-19 r2r-town-44 r2r-town-57
+  21	.availableServices.criminal[].institution	 e.g. r2r-city-16 r2r-metropolis-21 r2r-metropolis-23
+  20	.generationCoherenceReceipt.judgments[].findings[]	 e.g. r2r-village-16 r2r-village-20 r2r-village-26
+  20	.npcs[].goal.intent.long.target	 e.g. r2r-town-19 r2r-town-44 r2r-city-44
+  17	.economicViability.plotHooks[].category	 e.g. r2s-occupied-village-1 rr3-town-wartime-rand-3 rr3-city-plague_onset-rand-4
+  13	.generationCoherenceReceipt.judgments[].status	 e.g. r2r-village-20 r2r-village-26 r2r-village-50
+  10	.npcs[].goal.intent.short.target	 e.g. r2s-insurgency-town-0 rr3-town-famine-rand-0 rr3-town-famine-rand-5
+  9	.economicViability.plotHooks[].severity	 e.g. rr3-town-wartime-rand-3 rr3-city-plague_onset-rand-4 rr3-village-calm-isolated-3
+  1	.npcs[].stressNote (GONE KEY)	 e.g. r2s-insurgency-city-1
+  1	.npcs[].stressNote (NEW KEY)	 e.g. r2s-insurgency-city-1
+NEW/GONE KEY rows 2 [".npcs[].stressNote (GONE KEY)",".npcs[].stressNote (NEW KEY)"]

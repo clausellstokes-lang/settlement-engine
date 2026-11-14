@@ -1,0 +1,23 @@
+P01-timeband-pronoun	RED	Tests 3 ⎯⎯⎯⎯⎯⎯⎯	tests/domain/heraldCausalVoice.test.js tests/domain/presumeTimeLens.test.js
+P02-walls-inside	RED	Tests 2 ⎯⎯⎯⎯⎯⎯⎯	tests/generators/hookTruthAtBirth.test.js tests/domain/coherence/hookTruth.test.js
+P03-ruler-council	RED	Tests 1 ⎯⎯⎯⎯⎯⎯⎯	tests/domain/coherence/hookTruth.test.js
+P04-physician	RED	Tests 2 ⎯⎯⎯⎯⎯⎯⎯	tests/generators/hookTruthAtBirth.test.js tests/domain/coherence/hookTruth.test.js
+P05a-export-goods	RED	Tests 1 ⎯⎯⎯⎯⎯⎯⎯	tests/generators/resourceAnalysisCoupling.test.js
+P05b-export-claim	RED	Tests 1 ⎯⎯⎯⎯⎯⎯⎯	tests/generators/resourceAnalysisCoupling.test.js
+P06-outpost	RED	Tests 1 ⎯⎯⎯⎯⎯⎯⎯	tests/generators/embattledReasonNoSlider.test.js
+P07-merchant-excl	RED	Tests 1 ⎯⎯⎯⎯⎯⎯⎯	tests/generators/outlookHookDropRefused.test.js
+P07b-moderate-excl	RED	Tests 2 ⎯⎯⎯⎯⎯⎯⎯	tests/generators/outlookHookDropRefused.test.js tests/generators/outlookHooksResolved.test.js
+P08a-strongest	RED	Tests 1 ⎯⎯⎯⎯⎯⎯⎯	tests/generators/occupierRelationLine.test.js
+P08b-merchant-money	RED	Tests 1 ⎯⎯⎯⎯⎯⎯⎯	tests/generators/occupierRelationLine.test.js
+P08c-same-people	RED	Tests 1 ⎯⎯⎯⎯⎯⎯⎯	tests/generators/occupierRelationLine.test.js
+P09a-tavern	RED	Tests 1 ⎯⎯⎯⎯⎯⎯⎯	tests/generators/fenceWordOfMouthTavern.test.js
+P09b-fence-name	RED	Tests 2 ⎯⎯⎯⎯⎯⎯⎯	tests/generators/fenceWordOfMouthTavern.test.js
+P10a-street	RED	Tests 1 ⎯⎯⎯⎯⎯⎯⎯	tests/domain/crisis/crisisSummaryVantage.test.js
+P10b-merchant	RED	Tests 1 ⎯⎯⎯⎯⎯⎯⎯	tests/domain/crisis/crisisSummaryVantage.test.js
+P10c-keep-order	RED	Tests 1 ⎯⎯⎯⎯⎯⎯⎯	tests/domain/crisis/crisisSummaryVantage.test.js
+P10d-keep-safe	RED	Tests 1 ⎯⎯⎯⎯⎯⎯⎯	tests/domain/crisis/crisisSummaryVantage.test.js
+P10e-guards-famine	RED	Tests 2 ⎯⎯⎯⎯⎯⎯⎯	tests/domain/crisis/crisisSummaryVantage.test.js
+P11-nobody	RED	Tests 2 ⎯⎯⎯⎯⎯⎯⎯	tests/domain/crisisPage.test.js
+P11b-nolevers	RED	Tests 2 ⎯⎯⎯⎯⎯⎯⎯	tests/domain/crisisPage.test.js
+P12-sellers	RED	Tests 2 ⎯⎯⎯⎯⎯⎯⎯	tests/domain/foodWordsGoodsList.test.js
+P13-keeper	RED	Tests 2 ⎯⎯⎯⎯⎯⎯⎯	tests/domain/governanceAccount.test.js

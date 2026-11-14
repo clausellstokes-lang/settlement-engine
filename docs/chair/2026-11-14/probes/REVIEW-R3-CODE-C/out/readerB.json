@@ -1,0 +1,272 @@
+[
+ {
+  "town": "r2r-metropolis-33",
+  "line": "L16",
+  "tab": "Systems/Economics",
+  "sentence": "Contraband goodsForged documentsFencing stolen goods",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "Black market flow via Front businesses; institutions include Front businesses, Multiple criminal factions, Pawnbroker"
+ },
+ {
+  "town": "r2r-metropolis-33",
+  "line": "L14",
+  "tab": "Systems/Power",
+  "sentence": "Crown Creditors (Noble Coalition) still have their titles, but the hall's offices have taken most of their power.",
+  "verdict": "FALSE",
+  "severity": "MED",
+  "fact": "Same tab: Stability 'Strained — the creditors have a say in every decision'; governance account: 'Three of its decisions this year were reversed after private meetings with the lords it owes'; stress = indebted (creditor decides what it can do). Record factionRelationships marks the pair subordinate (ratio 0.34), so the sentence follows the power numbers but contradicts the page and the crisis"
+ },
+ {
+  "town": "r2r-metropolis-33",
+  "line": "L13",
+  "tab": "Systems/Power",
+  "sentence": "Royal Authority keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained. Each props up the other.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "powerStructure.factionRelationships Royal Authority/Religious Authorities type dependent, stable; Professional city watch present (not a church government; the pair line still holds)"
+ },
+ {
+  "town": "r2r-metropolis-33",
+  "line": "L01",
+  "tab": "World/History",
+  "sentence": "Hvaliya still carries the shape it took after the schism, older than anyone living; that legacy holds, though the times have moved on.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "The Schism printed 232y ago (history.historicalEvents yearsAgo 232), band 'Deep history'"
+ },
+ {
+  "town": "r2s-under_siege-village-2",
+  "line": "L47",
+  "tab": "Summary/Crisis",
+  "sentence": "No house here holds what this crisis turns on.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "under_siege; institutions have no granary, garrison, watch or walls ('defends: no military, garrison or watch stands'; 'No granary; two months in household stores'). Only Mill and Multiple water sources could be argued"
+ },
+ {
+  "town": "r2s-under_siege-village-2",
+  "line": "L08",
+  "tab": "Summary/Plot Hooks (Outlook)",
+  "sentence": "The settlement is starving, and its hungriest are turning to banditry.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "Economics: short 318 of 448 lbs/day, 'Most households go short, and hunger is already here'; Defense: 'the hungry have started to steal'"
+ },
+ {
+  "town": "r2s-under_siege-village-2",
+  "line": "L48",
+  "tab": "Systems/Economics",
+  "sentence": "Meals follow the season and what the household has put by.",
+  "verdict": "FALSE",
+  "severity": "LOW",
+  "fact": "Under siege: 'Field work and trade have stopped'; 'the siege has taken the outlying fields'; the line just before says 'Most households go short, and hunger is already here'. 'What the household has put by' fits ('two months in household stores'); 'follow the season' implies normal seasonal eating"
+ },
+ {
+  "town": "r2s-under_siege-village-2",
+  "line": "L13",
+  "tab": "Systems/Power",
+  "sentence": "Headman's Authority keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained. Each props up the other.",
+  "verdict": "FALSE",
+  "severity": "LOW",
+  "fact": "Record: relationship dependent, stable (the 'props up' half holds). But 'keeps order' conflicts with the page: Foundations 'Law & order Collapsed'; Defense 'Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families'; 'If you are wronged at Dionpyrgos, there is nowhere to take it'"
+ },
+ {
+  "town": "r2s-under_siege-village-2",
+  "line": "V",
+  "tab": "Systems/Defense",
+  "sentence": "Those who answer for Dionpyrgos's safety must choose between holding out and seeking terms, and every week makes the choice harder.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "stress under_siege; Crisis hook: Phokas Attaleiates is considering terms, someone else a sortie"
+ },
+ {
+  "town": "r2s-under_siege-village-2",
+  "line": "L01",
+  "tab": "World/History",
+  "sentence": "Dionpyrgos still carries the shape it took after the religious conflict, older than anyone living; that legacy holds, though the times have moved on.",
+  "verdict": "FALSE",
+  "severity": "MED",
+  "fact": "The Religious Conflict printed '68y ago', band 'Last century' (history.historicalEvents yearsAgo 68): people now in their seventies were alive then"
+ },
+ {
+  "town": "r2s-occupied-thorp-1",
+  "line": "L47",
+  "tab": "Summary/Crisis",
+  "sentence": "No house here holds what this crisis turns on.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "Occupation crisis; the thorp's 8 institutions (Subsistence farming, Access to external mill, Wayside shrine, Access to parish church, Burial ground, Informal elder consensus, Dwellings, Water source) hold no force, office or revenue house"
+ },
+ {
+  "town": "r2s-occupied-thorp-1",
+  "line": "L08",
+  "tab": "Summary/Plot Hooks (Outlook)",
+  "sentence": "The settlement is starving, and its hungriest are turning to banditry.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "stress includes famine; Foundations Food Collapsed; 'a few weeks in the larder'; Defense 'People are hungry and stealing to eat... Anyone known to have food hidden away is robbed'"
+ },
+ {
+  "town": "r2s-occupied-thorp-1",
+  "line": "L01",
+  "tab": "World/History",
+  "sentence": "What Amarkota settled in the wake of the pilgrimage, older than anyone living, is a legacy that still shapes the thorp, though much has changed since.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "The Pilgrimage printed 122y ago (yearsAgo 122)"
+ },
+ {
+  "town": "r2s-famine-metropolis-3",
+  "line": "L16",
+  "tab": "Systems/Services",
+  "sentence": "Fencing stolen goods",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "Listed under Underground network; institutions include Underground network, Multiple criminal factions, Front businesses, Whisper market"
+ },
+ {
+  "town": "r2s-famine-metropolis-3",
+  "line": "L16",
+  "tab": "Systems/Economics",
+  "sentence": "Contraband goodsForged documentsFencing stolen goods",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "Black market via Front businesses (present)"
+ },
+ {
+  "town": "r2s-famine-metropolis-3",
+  "line": "L05",
+  "tab": "Systems/Resources",
+  "sentence": "Export Potential: bread, beer, animal feed / Complete production chain in place",
+  "verdict": "FALSE",
+  "severity": "MED",
+  "fact": "Chain houses exist (Mills (2-5), Bakers (5-15), Brewery; grain_fields available), but the stress is famine ('lost its harvest for a second season') and the same page says 'Grain Sales... it eats more than it grows, so none is left to sell to other settlements', with Grain among Imports and 'The grain harvest failed'"
+ },
+ {
+  "town": "r2s-famine-metropolis-3",
+  "line": "L05",
+  "tab": "Systems/Resources",
+  "sentence": "Export Potential: pottery, bricks, roof tiles",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "resourceAnalysis.exports clay chain 'Complete production chain in place'; Potter and Brickmaker present; river_clay available"
+ },
+ {
+  "town": "r2s-famine-metropolis-3",
+  "line": "L13",
+  "tab": "Systems/Power",
+  "sentence": "People take their marriages, inheritances and hard times to Religious Authorities, not to Royal Authority, and the two keep quarrelling over who decides what.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "Relationship tense, stable; Religious Authorities power 32 vs Royal Authority 21; governance account 'The hall is at odds with the Religious Authorities'"
+ },
+ {
+  "town": "r2s-famine-metropolis-3",
+  "line": "V",
+  "tab": "Systems/Defense",
+  "sentence": "Those who answer for Nektarambelos spend their days settling quarrels over food, and every week there are more of them.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "stress famine; same tab 'the people who keep order spend their days at the food stores'; garrison and watch present"
+ },
+ {
+  "town": "r2s-famine-metropolis-3",
+  "line": "L07",
+  "tab": "Systems/Defense",
+  "sentence": "Embattled region. Fortification and forces are present but chronically underfunded: poor equipment, low morale, and thin reinforcement.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "config.monsterThreat 'plagued' (Stability 'monsters on the roads'); Massive walls, watch and garrisons present; Guard assessment 'exists on paper. Chronically underpaid and poorly equipped'. No outpost clause (metropolis)"
+ },
+ {
+  "town": "r2s-under_siege-metropolis-0",
+  "line": "L48",
+  "tab": "Systems/Economics",
+  "sentence": "Meals follow the season and what the household has put by.",
+  "verdict": "FALSE",
+  "severity": "MED",
+  "fact": "Line just above: 'Stores: a granary, 15 months of grain' (State granary complex, a metropolis of 46,527), and 'Most households go short, and hunger is already here'; under siege 'Field work and trade have stopped'. Meals are not from household stores or the season"
+ },
+ {
+  "town": "r2s-under_siege-metropolis-0",
+  "line": "L16",
+  "tab": "Systems/Economics",
+  "sentence": "Contraband goodsForged documentsFencing stolen goods",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "Black market via Front businesses · Black market; institutions include Black market bazaar, Front businesses, Multiple criminal factions"
+ },
+ {
+  "town": "r2s-under_siege-metropolis-0",
+  "line": "L05",
+  "tab": "Systems/Resources",
+  "sentence": "Export Potential: medicines, restorative treatments, mineral salts / Complete production chain in place",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "hot_springs_mineral available; chain needs Alchemist/Apothecary: Alchemist quarter and Apothecary district present"
+ },
+ {
+  "town": "r2s-under_siege-metropolis-0",
+  "line": "L05",
+  "tab": "Systems/Resources",
+  "sentence": "Export Potential: lumber, planks, charcoal / Partial processing - exports semi-finished goods",
+  "verdict": "FALSE",
+  "severity": "LOW",
+  "fact": "resourceAnalysis.exports says Partial, but institutions include Sawmill (commercial), Carpenters (5-15) and Charcoal burner, i.e. every house the mountain_timber chain names (Sawmill, Carpenters' guild, Charcoal burner); the name mismatch looks like the cause. The goods themselves are made here"
+ },
+ {
+  "town": "r2s-under_siege-metropolis-0",
+  "line": "L14",
+  "tab": "Systems/Power",
+  "sentence": "Noble Houses still have their titles, but the hall's offices have taken most of their power.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "Relationship Noble Houses/High Theocratic Council subordinate, declining; Noble Houses power 8 vs 23"
+ },
+ {
+  "town": "r2s-under_siege-metropolis-0",
+  "line": "L13",
+  "tab": "Systems/Power",
+  "sentence": "The Military/Guard is at odds with it. (governance account, church government)",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "Government is High Theocratic Council (religious, isGoverning); relationship with Military/Guard tense, escalating"
+ },
+ {
+  "town": "r2s-under_siege-metropolis-0",
+  "line": "L01",
+  "tab": "World/History",
+  "sentence": "Nobody in Grünmoor has finished putting right the legacy of the religious conflict, older than anyone living.",
+  "verdict": "FALSE",
+  "severity": "MED",
+  "fact": "The Religious Conflict printed '61y ago', band 'Last century' (yearsAgo 61): well within living memory"
+ },
+ {
+  "town": "r2s-famine-thorp-1",
+  "line": "L16",
+  "tab": "Systems/Economics",
+  "sentence": "Contraband goodsForged documentsFencing stolen goods",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "Black market via Local fence (institution present)"
+ },
+ {
+  "town": "r2s-famine-thorp-1",
+  "line": "L05",
+  "tab": "Systems/Resources",
+  "sentence": "Export Potential: cheese, preserved meat / Complete production chain in place",
+  "verdict": "FALSE",
+  "severity": "MED",
+  "fact": "The livestock chain names Butcher, Tannery, Dairy farmer; none is among the institutions (Subsistence farming, Access to external mill, Wayside shrine, Burial ground, Dwellings, Water source, Local fence). Also famine: page says 'The herds failed this year and took most of Purinagar's own food with it'; Exports list has no cheese or meat"
+ },
+ {
+  "town": "r2s-famine-thorp-1",
+  "line": "L01",
+  "tab": "World/History",
+  "sentence": "The wild magic, older than anyone living, left a legacy of trouble in Purinagar that has never been fully put right.",
+  "verdict": "TRUE",
+  "severity": "-",
+  "fact": "The Wild Magic printed 129y ago (yearsAgo 129)"
+ }
+]
