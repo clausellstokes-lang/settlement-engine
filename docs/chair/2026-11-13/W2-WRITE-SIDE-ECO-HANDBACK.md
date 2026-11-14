@@ -18,19 +18,24 @@
 | 6 | DS-ECO-10 POSTURE entrepot | v4 (middle) | reworded ("some of its trade was in other towns' goods") | 10e765d64 | under a siege v4 or v5 |
 | 7 | DS-ECO-10 POSTURE established | v10 (last) | STRUCK; v7 reworded (trades, not goods) | 632dd1259 | under a siege v7, v5, v8/v9 with a famine |
 | 8 | DS-ECO-9 FOOD SOURCES one source | v3 (middle) | reworded (fifth seat, #755) | 17be3ddc4 | |
-| 9 | DS-ECO-9 FOOD SOURCES one source | v4 (last) | open | | |
-| 10 | DS-ECO-11 partiallyExploited | v6 (last) | open | | |
-| 11 | DS-ECO-1 COMBINATION C4 | v1 (middle) | open | | |
-| 12 | DS-ECO-11 fullyExploited | v3 (middle) | open | | |
+| 9 | DS-ECO-9 FOOD SOURCES one source | v4 (last) | STRUCK (second seat); then v1 v2 reworded to the town's own food (D #1200, ww142) | 89cb2d8c8, d49e3068d | under a famine v2; outside v1, v2, v3 |
+| 10 | DS-ECO-11 partiallyExploited | v6 (last) | STRUCK (second seat) | a6b36afd8 | under a siege v5 where the resource is singular, else silence (v3 never eligible: its {chain} slot has no fill) |
+| 11 | DS-ECO-1 COMBINATION C4 | v1 (middle) | reworded (no fill fault, no money claim) and declared `no crisis: plague_onset` (guard w5-city-plague_onset-3) (second seat) | 7959b65eb | outside a siege and a plague v1, v2, v3, v6; under a plague v2, v3, v6 (their quarantine fault is D #212) |
+| 12 | DS-ECO-11 fullyExploited | v3 (middle) | reworded ('One of X's trades is carried through here...') and declared `no crisis: under_siege` as v1 (guard rww-metropolis-under_siege-1) (second seat) | a0fe5faf6 | outside a siege v1, v2, v3, v4; under a siege v2, v4, v5 (note i) |
 | 13 | DS-ECO-12 CRITICAL IMPORT the land cannot give it | v4 (last) | STRUCK; v1 v2 agreement; v3 off "nothing comes in" | 0a90a9796 | v1 or v2 everywhere, v3 beside them where no import is listed |
 | 14 | DS-ECO-12 CRITICAL IMPORT a house needs what the land lacks | v1 (middle) | reworded (no pronoun) | 6bca79928 | (as 4) |
 | 15 | DS-ECO-12 CRITICAL IMPORT the land cannot give it | v2 (middle) | reworded (agreement) | 0a90a9796 | (as 13) |
 | + | DS-ECO-12 house needs v2 (the 00:23 ruling) | v2 (middle) | reworded: no claim that the good comes in | 3f46ef5bb | |
 
-Settled at `632dd1259`: 11 of 15 (and the ruling's v2). Left: 9, 10, 11, 12.
+Settled at `632dd1259`: 11 of 15 (and the ruling's v2). The second seat settled 9, 10, 11, 12: B is 15 of 15.
 
 ## Open stops and questions
 None found in the first seat's commits: its one ruling (00:23 UTC) is copied into 3f46ef5bb; no commit names a question left with the old chair.
 
+## Named, not the corpus's (with the file)
+- DS-ECO-9 one source: the food record keeps a worked-out ground as the town's one food source (Temurger: fishing, while the resource conditions say the fishing grounds are worked out; 13 of 130 one-source fishing towns at the base): two homes disagree, the generator's (the food record against `resourceAnalysis.resourceConditions`).
+- DS-ECO-11: the generator calls a chain fully exploited at two roster houses carrying its processing tag (`src/generators/resourceGenerator.js :: evaluateInstitutions`): a thorp with only a Fishing community is "Fully exploited" in fish, "Complete production chain in place", with no fishmonger or salter (67 of 160 full-leading towns have none of the row's named houses). The lines agree with the tab; the tab's premise is the generator's.
+- DS-ECO-11 partiallyExploited v3 is never eligible: the exploitation lens's slot bag fills `{resource}`, `{good}`, `{institution}` but not `{chain}` (`economyStateProse.js`, `exploitSlots`). A dead line, not false; left.
+
 ## The state
-B: 11 of 15 settled by the first seat; this seat continues from item 9.
+B: DONE, 15 of 15 (11 by the first seat, 4 by the second), and D #1200 (the one-source pool's v1 v2) taken with item 9 because B's strike left v2 alone under a famine. Next: C.
