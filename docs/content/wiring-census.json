@@ -2,10 +2,10 @@
   "schema": "wiring-census/1",
   "stamp": {
     "files": {
-      "src/domain/display/stateProse/generalStateProse.js": "3ed396f7ef5d6f42fca58446646f1b7591120505df425f816909b5c856454218",
-      "src/domain/display/stateProse/powerStateProse.js": "7e4efbfaec1bf89875a6669978588b204d5151ec0c4ddb5708d0e417c035cc13",
+      "src/domain/display/stateProse/generalStateProse.js": "42dae5a46fae776296e499465519fec29b3322ec12f7b7d3fcb49c68aed79ef9",
+      "src/domain/display/stateProse/powerStateProse.js": "37ca798950bfde97c2e406ae72bab3856dcb97c22d6595b6ad12744d18568a2e",
       "src/domain/display/stateProse/economyStateProse.js": "1f730c5bac18dd1491b979cd16cded450c80ad9f832e5dc8bdda85cc89ad65c9",
-      "src/domain/display/stateProse/defenseStateProse.js": "afa7daa4602d68f9871058a6759fe067a004ba8c99744d2f31cab063146121b0",
+      "src/domain/display/stateProse/defenseStateProse.js": "63b984f0669f9c3b58f7f0141c3393a8343f338efa3a7c769fc8e40d88d21818",
       "src/domain/display/stateProse/stressorsStateProse.js": "e35010d5433bd9cdbde3f6b67c82302bef32d95f51f5b25cb58b0bb1a063d212",
       "src/domain/display/stateProse/warFaithStateProse.js": "cd457c6496e5d84828e782f46c8a242c395c3636d62b0096469d14c3a1e1e3df",
       "src/domain/display/stateProse/dossierMounts.js": "5032fe8e0b7d67567a054af136f13a8a54b7d7aa267b1cf4ba3fce629eb750b7"
@@ -18,7 +18,7 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1337
+    "producerIndexFiles": 1346
   },
   "totals": {
     "pools": 856,
@@ -4896,8 +4896,7 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 1,
-        "gate": 2
+        "gate": 3
       },
       "undeclared": 0,
       "crisisScoped": false
