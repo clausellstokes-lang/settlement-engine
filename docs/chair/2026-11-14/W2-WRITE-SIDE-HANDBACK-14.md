@@ -98,13 +98,14 @@ v2 -> v5 2, v4 -> v5 2. No state falls mute.
 | pool | before -> after (772, replay) | cure | commit | guard |
 |---|---|---|---|---|
 | DS-GEN-13 WAREHOUSES, COMMERCE: a bank | WAREHOUSES v2 109 -> 64, v5 0 -> 45 (all 45 besieged warehouse towns); bank v2 41 -> 35 | v2 + `no crisis: under_siege` (both); WAREHOUSES twin v5 | fba284bcf | corpusCureGuards WAREHOUSES v2 at w5-city-under_siege-1, bank v2 at w5-city-under_siege-104 (red on the base: "is eligible") |
+| DS-ECO-10 POSTURE: established | v7 33 -> 45, v8 21 -> 17, v9 21 -> 13 (12 besieged and starving towns) | v8 v9 + `no crisis: under_siege` | a89c224c6 | v8 at w5-town-under_siege+famine-2, v9 at w5-city-under_siege+famine-1 (red on the base) |
 
 ## New or changed lines (the owner's veto list, with the towns read)
 - DS-GEN-13 WAREHOUSES v5 (NEW, fba284bcf) `[ledger · crisis: under_siege]` "Since the siege began, nothing new has come in to be stored
   at {settlement}, and nothing stored there can be sent on." Prints on the Overview clipped: "Since the siege began, nothing new has
   come in to be stored at X." Read in w5-town-under_siege-3 Celotsy (the smallest it reaches: a town), w5-metropolis-under_siege-1
   Qal'atpatan (the largest), bar0-city-under_siege+famine-rand-1 Agiospolis (siege and famine).
-- Declarations only (text unchanged): WAREHOUSES v2, the bank v2 (+ `no crisis: under_siege`).
+- Declarations only (text unchanged): WAREHOUSES v2, the bank v2 (+ `no crisis: under_siege`); DS-ECO-10 POSTURE established v8 v9 (+ `no crisis: under_siege`).
 
 ## THE INHERITORS READ
 - The bank v3 "Townsfolk at Vysokoin keep their savings at the bank ..." (w5-city-under_siege-104); v4 "A trader wanting credit at
@@ -132,7 +133,7 @@ v2 -> v5 2, v4 -> v5 2. No state falls mute.
   w5-city-under_siege-6).
 
 ## What is left (line by line, the brief's order)
-1. The sweep's batch: DS-GEN-13 LANDED (fba284bcf); DS-ECO-10 and DS-ECO-11 next (measured, read; their guards to write).
+1. The sweep's batch: DS-GEN-13 LANDED (fba284bcf), DS-ECO-10 LANDED (a89c224c6); DS-ECO-11 fullyExploited v2 v4 next (measured, read: `sd.py eco11`; guards v2 at w5-city-under_siege-6, v4 at w5-hamlet-under_siege-102).
 2. The bar's rows: #275 entrepot (DS-ECO-10), #168 halls (DS-ECO-8 PROSPEROUS), #12 abandonment (DS-ECO-11 RESOURCE CONDITION),
    #114 merchant guild where only a merchant oligarchy stands (DS-GEN-13 COMMERCE), #116 timber (find its pool). #39 is in the batch.
 3. The reader's rows still false; the slash label; the hand-back-13 list.
