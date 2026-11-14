@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "2ccba2906c30f2aa0fbf461c6b61d3194f9c2cd0",
-  "measuredBy": "POWERS-12",
+  "measuredAtSha": "8dad2e5678b6c6d629018156e62d12f7c262e062",
+  "measuredBy": "POWERS-13",
   "date": "2026-11-14",
-  "note": "the merge of the line 976db5b19 into the powers lane (835cce92c): the test-file and title census re-taken on the clean committed tree after the merge; the lane adds its own new test files (POWERS-9 to POWERS-12)",
-  "files": 3273,
+  "note": "POWERS-13 #291: one new test file, tests/generators/power/conflictLadderReadsRoster.test.js (2 titles)",
+  "files": 3274,
   "parked": 402,
-  "credited": 2871,
-  "titles": 29478,
-  "suiteTitles": 8011
+  "credited": 2872,
+  "titles": 29480,
+  "suiteTitles": 8012
 }
