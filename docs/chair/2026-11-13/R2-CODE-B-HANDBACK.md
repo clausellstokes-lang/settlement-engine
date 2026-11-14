@@ -1341,7 +1341,17 @@ Brief: origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-R2-CODE-B
 - GUARD AND PLANTS: tests/domain/crisisStandInWords.test.js (collected over 12 census towns; the want with its keep-guard; the hook with its keep-guard r2r-city-19). Six plants, each red on its arm, none committed. Pins re-keyed: crisisHooks.test.js, tonightOwnGoal.test.js.
 - TOWNS READ, six surfaces: rr3-thorp-monster_pressure-rand-0 (5), r2r-thorp-5, rr3-village-monster_pressure-rand-5 (383); rr3-thorp-under_siege+famine-rand-2 (a siege), r2s-wartime-thorp-2 (a war), r2r-hamlet-24; rr3-thorp-plague_onset-rand-5, r2s-plague_onset-thorp-0, rr3-hamlet-plague_onset-rand-5; r2s-mass_migration-thorp-3, -hamlet-0, -hamlet-1. All TRUE.
 
+## (m) with (s) — DONE (1a3505705)
+- CAUSE: the house-label leaf's machinery pattern took count ranges, "(if walled)" and "(high magic)" only; four catalogue GRADES printed on every surface that reads the leaf.
+- CURE: CATALOGUE_MACHINERY_BRACKET takes "(word of mouth)", "(commercial)", "(powerful)" and "(<kind>, <n>th level)". Display only; no record leaf moves.
+- LISTED BY SCRIPT: 43 bracketed house names on the 1,536; 14 kept their bracket; the four grades stripped (Fence 38 towns, Sawmill 458, Thieves' guild 106, Healer (divine, 1st level) 16: 618 → 0); the ten in-world qualifiers kept: (official), (established) ×2, (part-time) ×2, (resident), (guild), (district), (open cast), (red light district).
+- RENDERED (11 towns, every surface, before/after): 107 → 16. The 16 left: the Defense tab and PDF healer lines (12, defenseDisplay.js, FOR THE JOIN) and a Services row's own title "Fence (word of mouth)" (4, a service name: LEFT, below).
+- (s) at this tip: "Gates (if walled)" 0 in the journal, 0 on the Crisis tab's Levers list (its one lever town, r2s-monster_pressure-town-3); raw on the Defense tab and the PDF (another lane's).
+- GUARD: houseLabelEveryForm.test.js's new arm (+ three keep-guards); the floor "kept > 10" RE-KEYED BY IDENTITY to the exact ten kept forms (the catalogue holds no other house names to grow it by; never lowered). Plant: three arms red.
+- TOWNS READ: r2s-succession_void-hamlet-3, r2r-town-15, r2s-famine-village-3, rr3-village-succession_void-rand-1, rr3-village-occupied-rand-3, rr3-village-under_siege+famine-rand-0, r2s-succession_void-town-3, r2r-metropolis-8, rr3-town-occupied-rand-2, rr3-metropolis-under_siege-port-0, r2r-city-44. All TRUE.
+
 ## EVERY NEW OR CHANGED LINE (for the owner's veto)
+- (m): the house labels "Fence", "Sawmill", "Thieves' guild", "Healer" (each with its catalogue grade dropped) on every surface reading the leaf (618 town-occurrences).
 - The stand-in's role (NPCs tab card, PDF Notable Figures and Tonight, the journal's NPC Quick Reference and Tonight, the Tonight sheet): "Rations the food" (62 towns), "Tends the sick" (20), "Takes charge of the migration" (23), "Rallies the neighbours" (36); "Stepped in for the crisis" never printed.
 - The raids' lever want where no force stands: "decide who gets the shelter, and not be blamed by those who go without." / "share out the shelter without being crushed between those who want it." (36 towns).
 - The plague hook (Crisis tab, Plot Hooks, PDF, journal Overview): "{name}, who identified the outbreak first, has gone quiet. Their last message suggested the disease is not natural. …" (20 towns).
@@ -1359,9 +1369,14 @@ Brief: origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-R2-CODE-B
 
 ## FOR THE JOIN (carried)
 - (i) the Tonight famine line: both halves in one change at the join (PART 11).
+- (m) THE DEFENSE TAB'S HEALER LINES: src/domain/display/defenseDisplay.js (Medical Readiness note `${facts.healerName}. Wounds and fevers …`, Arcane Support `${practitioners…}. Detection, wards, counterspell.`) print the raw catalogue name ("Healer (divine, 1st level)"); the one-line change: each name through institutionHouseLabel. 12 prints in 11 towns read (tab + PDF twin). Whose: the lane holding defenseDisplay.js (upkeep / w2-c-leaves).
 - (d) THE POWER SLOT: viewModel.js's npc row drops the category fallback, `labelOfFactionRef(firstPower || n?.faction)`, and the journal's two "Member of" lines print "In no power" (the NPCs tab's own words) where `factionLabel` is empty; the PDF readers of `factionLabel` / `factionAffiliation` read the same way. 4,395 cards on the 1,536 (above). Whose: the lane that holds viewModel.js at the join (r3-tabs / upkeep), with journalPages.js's two lines.
 
 ## WHAT IS LEFT, line by line
 1. (d) STOPPED, named for the join (above).
-2. (m) with (s): the catalogue brackets through the house-label leaf; "Gates (if walled)" on the journal and the Levers list.
+2. (m) DONE (1a3505705); LEFT from it: a Services row whose own SERVICE name carries a grade ("Fence (word of mouth)", 4 prints in 11 towns; serviceComponents.jsx, this lane's): a ruling whether a service title reads the house-label leaf.
 3. (e) H4-7; 4. (f) H1-1; 5. (g) H2-4; 6. (h) with M14; 7. (n): M10, M12, M11, M4, M6's other half, M13, M14, the two guards made able to red; 8. (o), (p), (q); 9. item 9 (the 720 field diff of the stage by family, the shift record's rows, the ADDENDUM; registers re-derived once at the close by ruling (r)).
+
+## How the instruments are re-made (scratch, outside the tree; lost with the container)
+- births.mjs + seeds1536.txt (the reader's, git archive); load.mjs (stream the ndjson.gz); mint.mjs (minted roles against defenseFactsOf, the Tonight want, the plague hook); want.mjs (every Tonight want's scarce word + crisisCastSenseFindings want_not_*); fdiff.mjs (leaves by family, npcs split minted/other); memberof.mjs (buildViewModel's factionLabel for powerless cards); brackets.mjs (every bracketed house name through institutionHouseLabel); holders.sh (lanes whose copy differs from their merge base with integration); surf.census.jsx + surf.sh (a throw-away vitest render planted in the tree and removed: the walked OutputContainer tabs, the PDF via a @react-pdf/renderer mock to DOM + renderToStaticMarkup, buildJournalPages canon_dossier, composeTonightSheet); readsurf.mjs (the lines naming the minted person per surface). Each a few lines; re-made from this description in minutes.
+
