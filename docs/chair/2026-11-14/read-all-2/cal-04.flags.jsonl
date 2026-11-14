@@ -1,0 +1,70 @@
+{"id":"C8294","town":"bar0-town-calm-rand-1","sev":"MED","kind":"STATE","why":"Blacksmiths labelled Vulnerable; LAND gives Iron & Metalwork impaired, its iron ore depleted","other":""}
+{"id":"C8402","town":"bar0-town-calm-rand-1","sev":"LOW","kind":"STATE","why":"'Lord Mayor' given to Teamhair MacDonald, who is f; PEOPLE gives her 'the mayor'","other":""}
+{"id":"C8436","town":"bar0-town-calm-rand-1","sev":"LOW","kind":"PAIR","why":"says disputes end by violence or payment; same page offers dispute arbitration before a magistrate at the town hall","other":"C8537"}
+{"id":"C8475","town":"bar0-town-calm-rand-1","sev":"LOW","kind":"LACKS","why":"'city watch livery' in a town; DEFENCE has a town watch, the place is no city","other":""}
+{"id":"C8169","town":"bar0-town-calm-rand-1","sev":"MED","kind":"PAIR","why":"carts full of spice sacks; TRADE imports no spices and the page says spices are needed and not brought in","other":"C8604"}
+{"id":"C8604","town":"bar0-town-calm-rand-1","sev":"MED","kind":"STATE","why":"lists luxury goods as needed and lacking; TRADE 'made here' includes luxury from available gemstone deposits","other":""}
+{"id":"C8760","town":"bar0-town-calm-rand-1","sev":"MED","kind":"STATE","why":"says Merchant and Craft Guilds vote together on trade; QUARRELS has them in high conflict over market licensing","other":""}
+{"id":"C8766","town":"bar0-town-calm-rand-1","sev":"LOW","kind":"BROKEN","why":"'Merchant Guilds works ... pays ... it wants': plural subject with singular verbs","other":""}
+{"id":"C8786","town":"bar0-town-calm-rand-1","sev":"LOW","kind":"PAIR","why":"hall 'partly in criminal hands'; the page says the council is itself run as a criminal concern","other":"C8787"}
+{"id":"C8837","town":"bar0-town-calm-rand-1","sev":"LOW","kind":"BROKEN","why":"'The garrison and town watch maintains': compound subject with singular verb","other":""}
+{"id":"C8871","town":"bar0-town-calm-rand-1","sev":"MED","kind":"PAIR","why":"'No single dominant organisation'; same block names an organized syndicate, one protection ring","other":"C8865"}
+{"id":"C8870","town":"bar0-town-calm-rand-1","sev":"MED","kind":"PAIR","why":"opportunistic violence persistent; same block says there is very little street violence","other":"C8872"}
+{"id":"C8935","town":"bar0-town-calm-rand-1","sev":"LOW","kind":"STATE","why":"'Lord Mayor' for Teamhair MacDonald (f); PEOPLE titles her 'the mayor'","other":""}
+{"id":"C8991","town":"bar0-town-calm-rand-1","sev":"LOW","kind":"STATE","why":"printer is second of Merchant Guilds and a member of Craft Guilds, two powers QUARRELS has in high conflict","other":""}
+{"id":"C9065","town":"bar0-town-calm-rand-1","sev":"MED","kind":"STATE","why":"Killian Nolan, PEOPLE's senior craft-guild master, sits unranked outside Craft Guilds while the smith is 'first of Craft Guilds'","other":"C9020"}
+{"id":"C9108","town":"bar0-town-calm-rand-1","sev":"LOW","kind":"PAIR","why":"Peadar Daly seeks a patron among the council's leaders; the page makes him the mayor's mentor and successor already","other":"C8937"}
+{"id":"C9169","town":"bar0-town-calm-rand-1","sev":"LOW","kind":"PAIR","why":"'has started repaying the debt in coin'; the line before says it has been repaid in small amounts ever since","other":"C9168"}
+{"id":"C9278","town":"bar0-town-calm-rand-1","sev":"MED","kind":"STATE","why":"Infiltration Fear given as a current major tension; PAST dates the Purge 114 years ago, and the page files it as Ancient","other":"C9313"}
+{"id":"HEADER","town":"bar0-town-occupied-rand-1","sev":"LOW","kind":"RECORD","why":"HOUSES lists a Free company hall and LAND a Mercenary Forces chain, but DEFENCE gives hired: none","other":""}
+{"id":"C9388","town":"bar0-town-occupied-rand-1","sev":"MED","kind":"STATE","why":"Food Security 'Pressured'; FOOD gives the word Secure, band secure","other":""}
+{"id":"C9430","town":"bar0-town-occupied-rand-1","sev":"MED","kind":"STATE","why":"'Food: Pressured'; FOOD gives the word Secure, band secure","other":""}
+{"id":"C9456","town":"bar0-town-occupied-rand-1","sev":"MED","kind":"STATE","why":"Food 'Pressured' in foundations; FOOD gives the word Secure","other":""}
+{"id":"C9386","town":"bar0-town-occupied-rand-1","sev":"LOW","kind":"PAIR","why":"Economic Resilience Strong in a Poor town under vassal extraction; same page has Economic capacity Strained","other":"C9447"}
+{"id":"C9536","town":"bar0-town-occupied-rand-1","sev":"MED","kind":"STATE","why":"brickmaker moulds and fires clay bricks; LAND gaps say the Brickmaker lacks access to clay","other":""}
+{"id":"C9558","town":"bar0-town-occupied-rand-1","sev":"MED","kind":"STATE","why":"potter throws and fires pottery; LAND gaps say the Potter lacks access to clay","other":""}
+{"id":"C9704","town":"bar0-town-occupied-rand-1","sev":"MED","kind":"STATE","why":"fired clay bricks sold by the cartload; LAND gaps say the Brickmaker lacks access to clay","other":""}
+{"id":"C9713","town":"bar0-town-occupied-rand-1","sev":"MED","kind":"STATE","why":"plates, jugs, crocks offered; LAND gaps say the Potter lacks access to clay","other":""}
+{"id":"C9685","town":"bar0-town-occupied-rand-1","sev":"LOW","kind":"LACKS","why":"'The gangs are territorial'; HOUSES has one Street gang","other":""}
+{"id":"C9858","town":"bar0-town-occupied-rand-1","sev":"MED","kind":"STATE","why":"prints 903 lbs/day imported and 103 short; STATE gives imports cover 893, so the shortfall is 113","other":"C9860"}
+{"id":"C10007","town":"bar0-town-occupied-rand-1","sev":"LOW","kind":"BROKEN","why":"'Institutions behind this power (16)' over fifteen listed items","other":""}
+{"id":"C10047","town":"bar0-town-occupied-rand-1","sev":"LOW","kind":"BROKEN","why":"'Merchant Guilds works ... pays ... it wants': plural subject with singular verbs","other":""}
+{"id":"C10066","town":"bar0-town-occupied-rand-1","sev":"MED","kind":"STATE","why":"says the guilds' wants go straight to the oligarchy's top; QUARRELS has Merchant oligarchy vs Merchant Guilds in open conflict over public money","other":""}
+{"id":"C10179","town":"bar0-town-occupied-rand-1","sev":"MED","kind":"PAIR","why":"late walkers 'watched, not stopped'; the page's curfew takes in anyone out after dark without an occupiers' pass","other":"C10140"}
+{"id":"C10139","town":"bar0-town-occupied-rand-1","sev":"MED","kind":"PAIR","why":"'Thieves are scarce now'; the page's street gang runs pickpocketing, muggings and extortion","other":"C9681"}
+{"id":"C10161","town":"bar0-town-occupied-rand-1","sev":"MED","kind":"PAIR","why":"'very little street violence'; the same section has a street gang controlling territory through violence that comes and goes","other":"C10154"}
+{"id":"C10162","town":"bar0-town-occupied-rand-1","sev":"LOW","kind":"LACKS","why":"'Longyuan's gangs'; HOUSES has one Street gang","other":""}
+{"id":"C10190","town":"bar0-town-occupied-rand-1","sev":"LOW","kind":"PAIR","why":"Legal Infrastructure None, 'no deterrence beyond force'; the page's hearings hand down fines and exile and a town hall gives legal services","other":"C10130"}
+{"id":"C10215","town":"bar0-town-occupied-rand-1","sev":"LOW","kind":"PAIR","why":"town would go on 'more slowly and less comfortably' without magic; the page gives every magic role absent and reliance None","other":"C10210"}
+{"id":"C10222","town":"bar0-town-occupied-rand-1","sev":"MED","kind":"STATE","why":"food must stretch about a fifth further; FOOD gives gap 3%, famine cut 0%, word Secure","other":""}
+{"id":"C10244","town":"bar0-town-occupied-rand-1","sev":"LOW","kind":"STATE","why":"a celebrated decisive victory; PAST records no victory or war, only a catastrophic siege, purge, crisis, shortage, pilgrimage, migration","other":""}
+{"id":"C10438","town":"bar0-town-occupied-rand-1","sev":"MED","kind":"STATE","why":"occupying governor and the oligarchy's head in a warm, public friendship; QUARRELS gives Merchant oligarchy ~ Occupation Authority tense, and the page has protests ignored","other":"C9369"}
+{"id":"C10456","town":"bar0-town-occupied-rand-1","sev":"LOW","kind":"PAIR","why":"'has started repaying the debt in coin'; the line before says it has been repaid in small amounts ever since","other":"C10455"}
+{"id":"C10371","town":"bar0-town-occupied-rand-1","sev":"LOW","kind":"PAIR","why":"wants to buy grain 'while the price is still fair'; the page's outlook has one importer quadrupling the grain price","other":"C9517"}
+{"id":"C10557","town":"bar0-town-occupied-rand-1","sev":"MED","kind":"STATE","why":"Daily Life food 'Pressured'; FOOD gives the word Secure","other":""}
+{"id":"C10650","town":"bar0-town-occupied-rand-1","sev":"MED","kind":"STATE","why":"Tonight sheet 'Food Pressured'; FOOD gives the word Secure","other":""}
+{"id":"C10593","town":"bar0-town-occupied-rand-1","sev":"MED","kind":"STATE","why":"founders came to be far from others' rule; FOUNDING gives merchants seeing economic potential, growing round a retired navigator","other":""}
+{"id":"C10670","town":"bar0-village-calm-rand-1","sev":"MED","kind":"STATE","why":"racks of drying fish and catch everywhere; LAND gaps say the Fishmonger lacks access to fish, no fish resource listed","other":""}
+{"id":"C10678","town":"bar0-village-calm-rand-1","sev":"LOW","kind":"BROKEN","why":"'Safety' label printed with no value; STATE gives safety Moderate","other":""}
+{"id":"C10687","town":"bar0-village-calm-rand-1","sev":"LOW","kind":"PAIR","why":"Magical Capability Critical in a medium-magic village that makes minor spellcasting and runs magical healing; page says magic Relied upon","other":"C10684"}
+{"id":"C10693","town":"bar0-village-calm-rand-1","sev":"MED","kind":"STATE","why":"a corruption scandal given as current tension and history; PAST records only the Iron Dispute and the Trade Collapse","other":"C10745"}
+{"id":"C10796","town":"bar0-village-calm-rand-1","sev":"MED","kind":"STATE","why":"fishmonger buys, salts and sells fish; LAND gaps say the Fishmonger lacks access to fish","other":""}
+{"id":"C10800","town":"bar0-village-calm-rand-1","sev":"MED","kind":"STATE","why":"offers Salted fish; LAND gaps say the Fishmonger lacks access to fish","other":""}
+{"id":"C10814","town":"bar0-village-calm-rand-1","sev":"LOW","kind":"LACKS","why":"'Unlike the inn' presumes an inn; HOUSES has none","other":""}
+{"id":"C10870","town":"bar0-village-calm-rand-1","sev":"MED","kind":"STATE","why":"fresh fish, 'Catch of the day'; LAND gaps say the Fishmonger lacks access to fish, no fish resource listed","other":""}
+{"id":"C10932","town":"bar0-village-calm-rand-1","sev":"MED","kind":"STATE","why":"income from catch landed and sold; LAND gaps say the Fishmonger lacks access to fish","other":""}
+{"id":"C10968","town":"bar0-village-calm-rand-1","sev":"MED","kind":"STATE","why":"'The table is fish from the local waters'; LAND gives no fish resource and the Fishmonger lacks access to fish","other":""}
+{"id":"C10904","town":"bar0-village-calm-rand-1","sev":"LOW","kind":"BROKEN","why":"'Lodging(2)' heading over one item, Hospitality","other":""}
+{"id":"C10954","town":"bar0-village-calm-rand-1","sev":"MED","kind":"STATE","why":"luxury goods 'needed, and not brought in'; TRADE imports Quetzal feathers and jade","other":""}
+{"id":"HEADER","town":"bar0-village-calm-rand-1","sev":"LOW","kind":"RECORD","why":"a village of 225 with one smith makes advanced weapons and armor and exports weapons and armour","other":""}
+{"id":"C11075","town":"bar0-village-calm-rand-1","sev":"MED","kind":"STATE","why":"'Each props up the other'; QUARRELS has Elder Council vs Religious Authorities in conflict over a ruling one refuses to obey","other":""}
+{"id":"C11104","town":"bar0-village-calm-rand-1","sev":"LOW","kind":"PAIR","why":"church too far behind to challenge openly; the page has it refusing a ruling and turning away the man sent to enforce it","other":"C10743"}
+{"id":"C11132","town":"bar0-village-calm-rand-1","sev":"MED","kind":"PAIR","why":"'keeps order well enough by itself'; the page gives Law & order Critical and Internal Security Critical","other":"C10708"}
+{"id":"C11164","town":"bar0-village-calm-rand-1","sev":"LOW","kind":"PAIR","why":"religious acceptance of magic hostile; the page says the magic relied upon is supplied by the House of worship","other":"C11167"}
+{"id":"C11175","town":"bar0-village-calm-rand-1","sev":"LOW","kind":"PAIR","why":"'pays its own way'; the page says Tzulco has been short of money for years","other":"C11124"}
+{"id":"C11194","town":"bar0-village-calm-rand-1","sev":"MED","kind":"STATE","why":"talks about the catch, offers a meal of fish; LAND gaps say the Fishmonger lacks access to fish","other":""}
+{"id":"C11206","town":"bar0-village-calm-rand-1","sev":"MED","kind":"STATE","why":"fishmonger names a price per fish; LAND gaps say the Fishmonger lacks access to fish","other":""}
+{"id":"C11225","town":"bar0-village-calm-rand-1","sev":"MED","kind":"STATE","why":"faith 'at peace with the seat beside it'; QUARRELS has Elder Council vs Religious Authorities in moderate conflict","other":""}
+{"id":"C11378","town":"bar0-village-calm-rand-1","sev":"MED","kind":"STATE","why":"Corruption scandal given as a current major tension; PAST records only the Iron Dispute and the Trade Collapse","other":""}
+{"id":"HEADER","town":"bar0-village-calm-rand-1","sev":"LOW","kind":"RECORD","why":"founding reason says the ferry crossing became a bridge; HOUSES has a River ferry and no bridge","other":""}
+{"id":"DONE","lines":3378,"blocks":3,"flags":69}

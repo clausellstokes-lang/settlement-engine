@@ -1,0 +1,25 @@
+{"id":"HEADER","town":"bar0-village-famine-rand-1","sev":"MED","kind":"RECORD","why":"LAND gives Grain & Bread running on available grain fields while FOOD gives the failed source grain and a 50% famine cut","other":""}
+{"id":"C11447","town":"bar0-village-famine-rand-1","sev":"MED","kind":"STATE","why":"neighbours queue to bake together at a shared oven; FOOD has grain as the failed source in an active famine","other":""}
+{"id":"C11473","town":"bar0-village-famine-rand-1","sev":"MED","kind":"STATE","why":"'market handles more than the village could ever use'; HOUSES has only a fish market, and FOOD is in Deficit, active famine","other":""}
+{"id":"C11474","town":"bar0-village-famine-rand-1","sev":"MED","kind":"LACKS","why":"strangers sell 'on the next market day' at a stall; HOUSES has no market or market square, only a fish market","other":""}
+{"id":"C11453","town":"bar0-village-famine-rand-1","sev":"LOW","kind":"LACKS","why":"'The market still opens, the queues still form'; HOUSES has no market, only a fish market","other":""}
+{"id":"C11488","town":"bar0-village-famine-rand-1","sev":"MED","kind":"STATE","why":"exists because travellers had to stop here; FOUNDING gives rich farmland granted to a favoured noble by the crown","other":""}
+{"id":"C11557","town":"bar0-village-famine-rand-1","sev":"MED","kind":"STATE","why":"Generational Divide given as history and a current tension; PAST records no such event","other":"C11483"}
+{"id":"C11587","town":"bar0-village-famine-rand-1","sev":"MED","kind":"STATE","why":"farmland offers 'Grain at harvest'; FOOD gives grain as the failed source, the harvest lost","other":""}
+{"id":"C11589","town":"bar0-village-famine-rand-1","sev":"LOW","kind":"LACKS","why":"fish market sells salted and smoked fish; a plains village whose LAND has no fishery and TRADE imports no fish","other":""}
+{"id":"C11623","town":"bar0-village-famine-rand-1","sev":"MED","kind":"STATE","why":"grain sold by the sack straight from the field at harvest; FOOD gives grain as the failed source in an active famine","other":""}
+{"id":"C11666","town":"bar0-village-famine-rand-1","sev":"LOW","kind":"LACKS","why":"income from warehouse fees; HOUSES has no warehouse","other":""}
+{"id":"C11681","town":"bar0-village-famine-rand-1","sev":"MED","kind":"STATE","why":"luxury goods 'needed, and not brought in'; TRADE imports silver ornaments and coins","other":""}
+{"id":"C11694","town":"bar0-village-famine-rand-1","sev":"LOW","kind":"PAIR","why":"shared ovens 'stretch the harvest through winter'; the next line says the grain harvest failed this year","other":"C11695"}
+{"id":"C11807","town":"bar0-village-famine-rand-1","sev":"LOW","kind":"LACKS","why":"'the streets stay badly guarded'; DEFENCE has no watch or force at all, in a village of 187","other":""}
+{"id":"C11844","town":"bar0-village-famine-rand-1","sev":"HIGH","kind":"STATE","why":"'Nothing has come for Zelenoki'; PAST records a catastrophic Occupation 64 years ago, and the page says the village was rebuilt after it","other":"C11439"}
+{"id":"C11845","town":"bar0-village-famine-rand-1","sev":"MED","kind":"STATE","why":"'Its safety rests on nobody having wanted it'; PAST records a catastrophic Occupation 64 years ago","other":""}
+{"id":"C11830","town":"bar0-village-famine-rand-1","sev":"MED","kind":"PAIR","why":"quarrels mostly settled before blows; the page gives Law & order Collapsed, food theft, and people robbed or worse","other":"C11858"}
+{"id":"C11836","town":"bar0-village-famine-rand-1","sev":"LOW","kind":"LACKS","why":"'the less its defenders can do'; DEFENCE has no force of any kind","other":""}
+{"id":"C11837","town":"bar0-village-famine-rand-1","sev":"LOW","kind":"LACKS","why":"'what it spends on defence now'; DEFENCE has nothing, and the page says it cannot fund a response","other":"C11849"}
+{"id":"C11876","town":"bar0-village-famine-rand-1","sev":"LOW","kind":"PAIR","why":"'defense is conventional throughout'; the page says there is no organized force and no walls","other":"C11870"}
+{"id":"C11930","town":"bar0-village-famine-rand-1","sev":"LOW","kind":"PAIR","why":"food seller haggles with pleasure and cuts bulk prices in a famine; the page says the haggling has gone out of people","other":"C11453"}
+{"id":"C11965","town":"bar0-village-famine-rand-1","sev":"MED","kind":"LACKS","why":"sold 'the settlement's emergency grain reserves'; FOOD gives granary False, only household stores","other":""}
+{"id":"C12091","town":"bar0-village-famine-rand-1","sev":"MED","kind":"LACKS","why":"priest sold 'the settlement's emergency grain reserves'; FOOD gives granary False, only household stores","other":""}
+{"id":"C12062","town":"bar0-village-famine-rand-1","sev":"LOW","kind":"LACKS","why":"compact negotiated with 'the guilds'; a village of 187 whose HOUSES has no guild","other":""}
+{"id":"DONE","lines":700,"blocks":1,"flags":24}
