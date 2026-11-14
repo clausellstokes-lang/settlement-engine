@@ -879,6 +879,7 @@ OutputContainer, every tab opened): the whole 1,536 at 301572583, and the towns 
 | (b) | `HistoryTab.jsx :: TensionRow` prints the stored text raw | NOT CURED: the chair's re-ruling (FOR THE JOIN) | 1 town (r2r-town-9) at 301572583. On this lane the roster prints "Taverns (5-20)" too: the strip is r2-code-b's | — |
 | (c) | the ADEQUATE fallback and every pool ran before any occupation strike | 1ad5ca6e7: `defenseStateProse.js :: silentUnderAnOccupation`, first in `defensePostureProse` | posture line under an occupation 64 -> 0 of 76 occupied towns (adequate 12, weak 32, critical 20); 64 cells move, all posture, line -> silent | `defensePostureAgainstItsFacts.test.js`, the occupation arm (red first at b5a335a46, 5 of 6); Ingili's ADEQUATE pin re-keyed to silence, its lifted record keeps the reverse guard · the old order restored |
 | (a) sweep | — | the claim of zero's instrument: every rendered page of the 1,536 at 301572583 (`render.sh`), the Defense, History and Foundations sections, for a name ending in a digit-led, "(if walled)" or "(high magic)" bracket | Defense: "Gates (if walled)" 14 (cured above), "Major monasteries (5-10)" 12 (FOR THE JOIN); History: "Taverns (5-20)" 1 ((b)); Foundations: 0. The rest are the page's own tallies ("Vulnerabilities (1)", "Current Tensions (2)") | — |
+| (h) | `defenseStateProse.js :: withinTheBar` read only the Strong band | 60b56d3cb: L2's table reads the Critical band too: walls AND garrison, walls with militia, force with NO walls not drawn there | 542 births read Critical; a hold claim beside Critical 6 -> 0 (5 thorps; all occupied); 7 cells move, all threat.invasion line -> silent: the 6 and Shivamandal (r2s-succession_void-town-0), whose "You see armed fighters … and no wall" was TRUE (the pool-level strike's one true line lost, declared) | `tests/domain/defenseInvasionWithinACriticalBand.test.js`: two real towns and made records set Critical (red first at 268c40013, 5 of 5); defenseWatchIsNotTheLevy's militia keeper (Makropyrgos, now false) re-keyed by identity to rr3-thorp-famine-rand-0 |
 | (f) | — | already cured on this lane by f19e75e41 (R3-TABS 1, ruling b1): the reader read a tree without it | "REQ" / "FORCED" as a node on the rendered Defense tab: 0 of 1,536 pages at 301572583 (`render.sh`) | `tests/components/defenseForceCardNoProvenance.test.jsx` (existing) |
 
 ## Every new or changed line, with the towns it was read in
@@ -890,7 +891,13 @@ OutputContainer, every tab opened): the whole 1,536 at 301572583, and the towns 
   occupation" banner print: r2s-occupied-thorp-0 Warmstadt (the smallest, 13), r2s-occupied-metropolis-1 Dionpetra
   (the largest, 105,466), rr3-town-occupied-rand-1 Muulcoba, rr3-metropolis-occupied-rand-2 Ingili.
 
+- **Newly silent (h):** the Invasion row's sentence (and its supply clause) beside a Critical band in 7 towns: the bar and
+  its band print: r2s-occupied-thorp-0 Warmstadt (the smallest, 13), rr3-town-occupied-rand-4 Dar-al-mandi (the largest,
+  2,465), rr3-thorp-occupied-rand-1 Makropyrgos, r2s-succession_void-town-0 Shivamandal (not occupied).
+
 ## FOR THE JOIN
+- **(h) at the join:** once the defence rating's rebuild lands, re-measure its Critical towns there (the reader's 12 of
+  972): the key reads the band the chip prints, so it follows the rebuild without a change.
 - **(b), by the chair's ruling:** `src/components/new/tabs/HistoryTab.jsx :: TensionRow`: its text through
   `houseLabelsInText(text, r.institutions)` (the leaf in r2-code-b's institutionDisplayName.js; the join's
   HistoryFounding.jsx:51 does the same); the tab hands the settlement's institutions to the row. The Overview's twin
@@ -910,4 +917,4 @@ OutputContainer, every tab opened): the whole 1,536 at 301572583, and the towns 
 - **C1, C2:** the deterrence lines under a siege and an occupation are the corpus's pools (declared off both there).
 
 ## What is left (kept current)
-(e), (d), (h), (g); the close.
+(e), (d), (g); the close.
