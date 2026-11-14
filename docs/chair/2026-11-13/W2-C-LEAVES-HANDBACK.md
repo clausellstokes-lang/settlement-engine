@@ -1933,7 +1933,7 @@ bypass": for the chair (a word change).
 
 ## WHAT IS LEFT, line by line
 1. DONE: (r2) (e6f875058); its message to the chair (sent; ACCEPTED by the chair 15:40). The yield-label pin re-keyed (6fd8f8c4e). (15) (26feb58dd).
-2. NEXT: the table above from row 2, in its order.
+2. LEFT, line by line: the table above, rows 2 to 11 and the unmeasured PART 12 rows, in its order (nothing begun).
 
 ## INSTRUMENTS (docs/chair/2026-11-14/probes/W2-C-LEAVES-13/; replace <scratchpad>; with PART 11's run.sh, PART 12's run4.sh, pilldiff.mjs, recdiff.mjs)
 - `pills13.jsx`: PART 12's pills.jsx plus the town's magic fact and crises; `two.mjs <jsonl>` the five silenced goods'
@@ -1942,5 +1942,9 @@ bypass": for the chair (a word change).
 - The reader's seeds: `git show origin/lane/review-w2-c-leaves-2026-11-14:docs/chair/2026-11-14/probes/REVIEW-W2-C-LEAVES/seeds-all.txt`.
 - Frozen trees: a tar of wt without .git, node_modules linked (<scratchpad>/fz-r2 carries e6f875058's measure).
 
-## STATUS (this seat, current)
-Working. Pushed through 26feb58dd and this docs commit. Nothing running.
+## STATUS (this seat, final)
+STOPPED at the chair's word of 16:00 UTC (the program converges on the joined line; the next wave is cut from it). Count at
+the last check 260,915 (15:32 UTC). Pushed: f82214b96 (the merge of join 600b9f743), e6f875058 (r2), 6fd8f8c4e (the
+yield-label pin), 26feb58dd (15), with the docs commits 18edb6d8a, b351464ea, 67840baa8 and this one. Nothing running.
+`git diff --stat 3285d3280..HEAD -- src/` (the merge aside): tradeListDisplay.js, EconomicsTab.jsx, ResourcesTab.jsx.
+Records unmoved 1,824 of 1,824 at each cure; publicProse unmoved. LEFT: the table above from row 2, in its order.
