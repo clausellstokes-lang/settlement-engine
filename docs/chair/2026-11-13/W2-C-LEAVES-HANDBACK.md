@@ -776,3 +776,57 @@ Trapping) already read Impaired at 408c2e30c (832d140fe); measured, not re-cured
 | pills.mjs / pillclass.mjs / why.mjs / townpills.mjs / boughtkept.mjs | `node pillclass.mjs <corpus> <beforeTree> <afterTree>` (READ=30 for a stride read) | item 2's classes, reads, per-town diffs, the named disagreements |
 | foodrender.probe.jsx.txt | copy into `<tree>/probe4/foodrender.test.jsx`; i.e. copy into `<tree>/probe4/`, `CORPUS=<corpus> OUT=<ndjson> npx vitest run --maxWorkers=1 probe4/foodrender.test.jsx` (remove the dir before a push: the hook lints the working tree) | the rendered food section, chips and provision notes per town |
 | foodcls.mjs | `node foodcls.mjs <corpus> <food.ndjson> <tree>` | item 3's classes against the stat line's figures |
+
+# PART 5 — the fifth seat (W2-C-LEAVES-5, 2026-11-13/14, from 303abbf67)
+
+**Seat:** session_01FE9mEtAexiKmB2VdKxWGkJ. Assignment: items 4 to 10 of PART 4's "NOT DONE, LINE BY LINE", with the
+chair's two additions (item 8 widened: both shared files read the tab's whole trade-list reader; item 9: the crisis
+reader of a chain's state moves out of the tab into the lane's display leaf, the PDF's chain flow written FOR THE JOIN).
+The chair's constraints: EconomicsTab.jsx's 600-line ceiling is not raised and no row is banked; the prose-numerics
+baseline keys the file by line (replace in place; where a row falls, regenerate by the test's own scanner and lower the
+reviewed ceilings). Origin read back at the start: 303abbf67, documents only past the code tip 1f4b15fb6.
+Scratch worktree /home/user/wt5 (local branch w5-local); before-tree /home/user/wt5b at 303abbf67. Corpora: the 720
+(SECOND-WAVE-CENSUS/births.mjs), the fresh 180 and the readers' 50 (probes/W2-C-LEAVES-4/birthsR.mjs), born at 303abbf67.
+
+## Items (this seat)
+| item | commit | on the 720 (before → after) | fresh / readers | read | guard |
+|---|---|---|---|---|---|
+| pins | 7adbe1d3b | seven food-sentence pins item 3 left red at 303abbf67 (green at 1e72843b6), re-keyed by identity | — | each new word checked true of its fixture's figures | the pins themselves |
+| 4 the food balance row | fb3128664 | rows not adding up 12 → 4 (the rounding-only class, named); an import where the record has none 1 → 0; an import other than the record's 208 → 0; a provision other than the record's 76 → 0; 228 rows, 74 sentences changed; share words false of the printed figures 0 → 0 | fresh: not adding 8 → 1, import 70 → 0, provision 47 → 0; readers: 2 → 0, 17 → 0, 12 → 0 | thorp, village, siege town / metropolis / port, famine, occupation, the largest | economicsFoodBalanceRowOneHome.test.jsx (303abbf67: 4 of 4 red) |
+
+## Calls taken without the chair (this seat)
+1. **The pins item 3 left red are re-keyed, in their own commit (7adbe1d3b).** Seven expectations in economicsTabFlow and
+   economicsFoodTradeUnderSiege held item 3's old share words; the sentence is this seat's file. Re-keyed to the words
+   now true of each fixture; the siege case's negative check is tighter (any carrier bringing food in).
+2. **Item 4, WHETHER food comes in is the record's pounds.** The tab's foodComesByTrade (item 4(a): the record's rounded
+   share) had no reader left once the row reads the record's pounds; the siege's cut is the carriers' test, as the
+   sentence's. 2 of 720 towns now print "+ 4 imported" / "brought in" where the share rounds to 0%.
+3. **Item 4, the remainder goes to the shortfall, never to the import, and is never a shortfall by itself.** Where the
+   record has a shortfall the printed Short is the remainder of the printed figures (±1 lb against the record's own in
+   74 of 720); where it has none, a pound of rounding is not printed as one (4 of 720 then do not add up by one pound:
+   the honest alternatives were a false import or a false shortfall).
+4. **Item 4, the provision's kind** (druidic, divine, arcane) is still read from the view's note: it is item 5's.
+
+## Found, not mine (this seat) — the record's disagreements, NAMED with counts (for the seat after the merges)
+- The food record's two homes (economicState.foodSecurity against economicViability.metrics.foodBalance) disagree on the
+  import, the provision or the shortfall in 229 of 720 towns (211 / 76 / 207); fresh 96 of 180; readers 25 of 50.
+- The food record's own parts, rounded apart, do not add up to its need in 78 of 720 (74 with a shortfall, by a pound;
+  4 without: r2r-thorp-42, r2r-hamlet-46, r2s-indebted-thorp-2, r2s-plague_onset-thorp-3); fresh 30.
+- Under a siege the food record keeps an import share in a town that is no port: 2 of 720 (r2s-under_siege-town-2,
+  r2s-under_siege-metropolis-3), 4 of the fresh 60 (fr4-town-under_siege+famine-5, fr4-metropolis-under_siege-3/-5,
+  fr4-metropolis-under_siege+famine-3). The row and the sentence follow the siege.
+- The record's share (foodRecord.normalImportPct) and its pounds (importCoverage) disagree on whether any food comes in:
+  13 of 720 (11 a share of 1-2% beside 0 lb; 2 a share of 0% beside 4 and 2 lb).
+- The PDF's food block (src/pdf/lib/viewModelPrimitives.js :: foodCore, printed by EconomicsTrade.jsx) still prints the
+  view: its deficit differs from the tab's Short in 223 of 720, its provision in 76. Not this lane's file.
+
+## Registers moved, each through its own door (this seat)
+- docs/content/wiring-census.json: producerIndexFiles 1338 → 1339 (the new leaf), by `node scripts/wiring-census.mjs`.
+
+## Red met, not this seat's (identical bodies at 303abbf67)
+- tests/lint: 20 reds in 19 files at 303abbf67 and at fb3128664 alike (domainAnyCastBaseline's five, factLayers.walker
+  READERS, defenceFactReaders.walker, arcaneClassifierCensus, chainPrintSites, institutionTable, tuningRegister and the
+  rest); classed in the final statement.
+
+## STATUS (kept current)
+- Item 4 DONE fb3128664. Items 5 to 10: not started.
