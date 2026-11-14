@@ -860,6 +860,68 @@ def _r3c6():
     )
 
 
+SEATS2['JOIN-REHEARSAL'] = dict(
+    title="JOIN-REHEARSAL · every builder lane merged onto the line on a save branch, as a rehearsal: the conflicts, the gates, the count",
+    branch='lane/join-rehearsal-2026-11-14', tip='976db5b1', statement=False,
+    intro=("You are JOIN-REHEARSAL, a merge seat of the settlement-engine integration program. Ten builder lanes are curing false lines on the generated town "
+           "pages, each on its own branch; when they are final they will be JOINED and landed on the integration line (lane/integration-2026-11-07, at "
+           "976db5b19 with point 49). YOUR JOB IS A REHEARSAL OF THAT JOIN, NOW, at the lanes' tips as they stand, on a save branch of your own that starts at "
+           "the line's tip: NOTHING reaches the line or any lane, nothing is signed. It buys three things: the join's real conflicts resolved once and recorded "
+           "so the true join replays them; one tree that holds every lane's cures, on which the chair has fresh towns read; and one count of what the cures did "
+           "together."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6) and CONTRIBUTING.md at your checkout.\n"
+          "2. The chair's join map, on origin/lane/chair-2026-11-08 (`git fetch origin lane/chair-2026-11-08`): "
+          "docs/chair/2026-11-14/probes/CHAIR/joinmap-0318.json (every pair of lanes merged in memory at 03:18 UTC on 2026-11-14: `pairs` gives each pair's "
+          "conflicted files, `files` gives for each file the pairs that meet on it, `tips` the tips it used) and joinmap.py beside it (run it again yourself in a "
+          "clone with FULL history to see the map at the tips you merge). Query the JSON by script.\n"
+          "3. The merge book at your checkout, docs/INTEGRATION_STYLE_2_2026-11-09.md: section 5 (the gate per point) and, when it is pushed, section 2m on "
+          "origin/lane/merge-15-point-49-wip-2026-11-14 (the instrument's doors, by command). Long lines: by script, in ranges. Do NOT read the rest of the book."),
+    work=("FIRST: FULL HISTORY. A shallow clone gives WRONG merge bases and conflicts that are not real (measured by the chair: 31 false hunks in one file). "
+          "`git fetch --depth=2147483647 origin` for the line and every lane below; `git rev-parse --is-shallow-repository` must print false before any merge.\n"
+          "THE LANES, at their tips on origin when you merge each (read each tip back and write it down): lane/r3-code-c-2026-11-13, lane/r3-tabs-2026-11-13, "
+          "lane/r2-code-a-2026-11-13, lane/powers-follow-up-2026-11-13, lane/w2-fix-data-2026-11-13 and then lane/w2-fix-data-history-2026-11-13 (if the data "
+          "lane has not merged it yet), lane/w2-write-2026-11-13 then lane/w2-write-side-eco-2026-11-13 then lane/w2-write-side-rest-2026-11-13 (the corpus's "
+          "three blocks), lane/w2-c-leaves-2026-11-13, lane/r2-code-b-2026-11-13, lane/coherence-upkeep-2026-11-12 (the defence lane, last: it meets the most). "
+          "NOT the veil lane (lane/coherence-veil-2026-11-11): it lands alone after its security read. The lanes are being worked on while you merge: that is "
+          "expected; a lane that has itself merged the line meanwhile is merged as it stands.\n"
+          "THE WORK, in this order:\n"
+          "1. YOUR SAVE BRANCH lane/join-rehearsal-2026-11-14 at the line's tip; a scratch worktree, `npm ci`, `git config rerere.enabled true` in that clone "
+          "(so each resolution is recorded: say in your hand-back where the rerere cache is and commit a copy of your resolutions as patches under "
+          "docs/chair/2026-11-14/probes/JOIN-REHEARSAL/).\n"
+          "2. MERGE EACH LANE IN THE ORDER ABOVE, one merge commit a lane (never a rebase). BY THE CHAIR'S MAP only about nine CODE files truly conflict "
+          "(src/domain/display/defenseDisplay.js and dossierViewModel.js; src/domain/generation/generationForkRegistry.js; src/domain/goods.schema.js; "
+          "src/pdf/sections/EconomicsTrade.jsx, Services.jsx and SupplyChainFlow.jsx; src/components/new/tabs/EconomicsTab.jsx; scripts/lib/table-pools.mjs): "
+          "each resolved BY HAND AT THE CAUSE so that BOTH lanes' cures stand, read whole first, listed in your hand-back with the hunks and what you kept; a "
+          "conflict that needs a choice between two behaviours is written down with both sides and resolved to the side whose lane holds the file by its own "
+          "commits, marked FOR THE CHAIR. EVERYTHING ELSE that conflicts is a register, a baseline, a pinned test, a generated file or a bundle (the wiring "
+          "census, the lighting census, the presumed-things registers, the pool-dominance and page-census registers, the byte baseline, the phone floors, the "
+          "tuning inventory, the mutation manifest, the writer-reach baseline, the walkers' pins, the edge bundles and their meta files, "
+          "src/data/dossierStateProse/*.generated.js): IN THIS REHEARSAL take the side already on your branch and LIST the file: do not re-derive registers "
+          "lane by lane. The corpus's source document (docs/content/RECEIPT_POOLS_DOSSIER_STATE.md) is merged as text (one hunk against the line by the map: "
+          "resolve it so both sides' lines stand); corpusCureGuards.test.js takes BOTH sides' appended rows.\n"
+          "3. AT THE JOINED TREE, once: regenerate the corpus's generated files from the merged source document by the corpus's own generator (the corpus "
+          "lane's docs/chair/2026-11-13/probes/W2-WRITE-5/README.md names it) and the edge bundles by `npm run build:edge-shared`; then the three gates, each "
+          "through `sh scripts/gate-tail.sh`: `npm run typecheck:ratchet`, `npm run typecheck:domain:strict`, `npm run lint`: a red here that comes of a merge "
+          "resolution is cured; any other is LISTED with its lane, not cured. Then prove the tree GENERATES AND RENDERS: the measuring seat's command once, as "
+          "a count (`git fetch origin lane/census-2-2026-11-13`; `mkdir -p <scratch>/c2 && git archive origin/lane/census-2-2026-11-13 "
+          "docs/chair/2026-11-13/probes/CENSUS-2 | tar -x -C <scratch>/c2`; `sh <scratch>/c2/docs/chair/2026-11-13/probes/CENSUS-2/census2.sh <tree root> <an "
+          "out-dir outside the repository> 4`, to a file, about twelve to twenty-five minutes): its eight kinds a to h on the JOINED tree beside the line's own "
+          "figures (docs/chair/2026-11-13/CENSUS-2-2026-11-13.md on the chair's lane): THAT TABLE IS THE COUNT THE CHAIR WANTS.\n"
+          "4. PUSH the save branch (the lane hook's three gates must pass: that is why step 3 comes first) and send the chair ONE message: the tip; the lanes' "
+          "tips you merged; the code conflicts by file with one line each; the census's eight kinds, the line against the joined tree; what you listed and "
+          "did not cure. DO NOT run the whole suite; DO NOT re-derive the registers; DO NOT sign anything: the true join does those once.\n"
+          "5. THE HAND-BACK, docs/chair/2026-11-14/JOIN-REHEARSAL-HANDBACK.md on your branch: for the seat that makes the true join: the order that worked; "
+          "every code resolution; EVERY register, baseline, pin, generated file and bundle you took one side of, with the door or script that re-derives it and "
+          "the order the doors must run in (as far as the book's 2m and section 5 give it: name what you could not find); what the three gates met; how long "
+          "each step took."),
+    merges="; the merges of the lanes named above INTO your save branch",
+    first=("FIRST ACT. Read the LINE's tip back from origin (lane/integration-2026-11-07): it was 976db5b1 when this was written. A later tip that adds "
+           "documents only is not a stop: say so and start your save branch from it; any other difference: tell the chair before you start."),
+    when="for a stop that blocks the whole rehearsal, and when the joined tree is pushed (step 4)",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
@@ -873,7 +935,7 @@ def build2(seat):
         s['intro'],
         WHY2 + ' Never rewrite a commit at or below %s.' % s['tip'],
         "READ, AND NO MORE THAN THIS (the laws and forms the older briefs carried are written out below: do not open the brief chain or the chair's handoffs):\n" + s['read'],
-        "FIRST ACT. Read the lane's tip back from origin: it was %s when this was written; any difference is a stop: tell the chair." % s['tip'],
+        s.get('first') or ("FIRST ACT. Read the lane's tip back from origin: it was %s when this was written; any difference is a stop: tell the chair." % s['tip']),
         s['work'],
         LAWS2,
         how2(s['branch']),
