@@ -6889,10 +6889,10 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 **`MARKET-OPEN`** {crisis-scoped · market}
 1. `[street · no crisis: under_siege · no crisis: plague_onset · crisis: any · tier: ≤ town]` Market day is when {settlement} fills: the roads bring buyers, and the stalls are there for them.
 2. `[ledger · crisis: any · no crisis: under_siege · no crisis: plague_onset]` {settlement}'s market lives off through-traffic; the town sells to the road as much as to itself.
-3. `[visitor · crisis: any · no crisis: under_siege]` Visitors find {settlement}'s market without asking; the main road leads straight to it.
+3. `[visitor · market · crisis: any · no crisis: under_siege · no crisis: plague_onset]` Visitors find {settlement}'s market without asking; the main road leads straight to it.
 4. `[elder · crisis: any · no crisis: under_siege]` The market stands where carts always stopped; stalls followed the carts, and {settlement} grew around them.
-5. `[ledger · crisis: under_siege]` {settlement}'s market grew up on the road's trade, and with the siege closing the road it has almost nobody left to sell to.
-6. `[street · crisis: plague_onset]` The sickness has thinned {settlement}'s market: the stalls still open, and fewer people come to them.
+5. `[ledger · market · crisis: under_siege]` With the siege closing the road, {settlement}'s market has only the town's own people left to sell to.
+6. `[street · market · crisis: plague_onset]` The sickness has thinned {settlement}'s market: the stalls still open, and fewer people come to them.
 
 **`MARKET-NARROW`** {colour · market}
 1. `[ledger]` {settlement}'s market serves the town itself; little passes through that was not always coming here.
@@ -6908,13 +6908,13 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 1. `[counterforce · gate · institution: tavern · no crisis: under_siege]` No market or fair stands in {settlement}: what trade the town does is done at the gate, at the inn and on the road.
 2. `[visitor · gate · institution: tavern · no crisis: under_siege]` {settlement} has no market square; trade is done at the gate, at the inn and along the road.
 3. `[street · no crisis: under_siege]` No market or fair stands in {settlement}: what trade the town does is done house to house and on the road.
-4. `[street · crisis: under_siege]` No market or fair stands in {settlement}, and since the siege closed the road, almost nothing changes hands at all.
-5. `[ledger · crisis: under_siege]` {settlement} keeps no market, and with the road shut by the siege, the trade it once did on the road has stopped.
-6. `[visitor · crisis: under_siege]` There is no market at {settlement} to find, and with the siege across the road, nobody comes in to sell.
+4. `[street · no market · crisis: under_siege]` Since the siege closed the road, almost nothing changes hands at {settlement}, which keeps no market or fair.
+5. `[ledger · no market · crisis: under_siege]` With the road shut by the siege, what little trade {settlement} did with no market of its own has stopped.
+6. `[visitor · no market · crisis: under_siege]` With the siege across the road, nobody comes in to sell at {settlement}, which has no market to come to.
 
 **`COMMERCE: a bank`** *(the commercial houses on the live roster, `compound.inst`: `hasBank`)*
 1. `[visitor · no crisis: under_siege]` A traveller passing through {settlement} can change coin, borrow or settle a debt at the town's bank without carrying the silver home.
-2. `[ledger · colour]` {settlement}'s larger dealings, from cargoes to building work, are paid for through its bank.
+2. `[ledger · no crisis: under_siege]` {settlement}'s larger dealings, from cargoes to building work, are paid for through its bank.
 3. `[street · colour]` Townsfolk at {settlement} keep their savings at the bank and go there when they need to borrow.
 4. `[threshold · colour]` A trader wanting credit at {settlement} must satisfy the bank about who they are before it lends.
 
@@ -6938,9 +6938,10 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 
 **`WAREHOUSES`** *(`hasWarehouse`, R-W3: one clause, only when true)*
 1. `[visitor · no crisis: under_siege]` Goods wait in {settlement}'s warehouses between the road and the buyer until the price is right.
-2. `[ledger · colour]` A merchant at {settlement} can store a cargo in the town's warehouses and sell it when the price suits.
+2. `[ledger · no crisis: under_siege]` A merchant at {settlement} can store a cargo in the town's warehouses and sell it when the price suits.
 3. `[street · no crisis: under_siege]` {settlement}'s warehouses fill after the harvest and empty through the year as the town trades out of them.
 4. `[threshold · no crisis: under_siege]` A trader at {settlement} can rent warehouse space and leave goods there between journeys.
+5. `[ledger · crisis: under_siege]` Since the siege began, nothing new has come in to be stored at {settlement}, and nothing stored there can be sent on.
 ---
 
 ### DS-GEN-14 · History › Founded once, grown since (the first cause, and the accretion over it) · `history.founding` presence × `history.age` banded
@@ -7131,21 +7132,21 @@ compass word, no real-world place, no named analogy.*
 **PROVENANCE:** **`anchored` IS THE GATE, AND THIS BLOCK IS BUILT AROUND IT.** `DS-GEN-9` rules that `anchored: true` is the record's own assertion that an event still bears on the present and is therefore the licence for an "and it still" clause, that an unanchored event "gets described and NOT connected forward", and that this is "the sharpest line in the shape and the easiest to blur". A block whose entire subject is an event's PRESENT REMAINDER blurs that line by construction unless the gate is keyed, so it is keyed: every forward-connecting pool below requires `anchored`, and `RECORDED-UNANCHORED` exists precisely so that the unanchored case has somewhere lawful to go instead of borrowing an anchored sentence. Its two variants describe the event and decline to carry it forward, which is the ruling rendered as prose. **Non-redundancy, twice over (`R-DST-A`):** `DS-GEN-9` renders the event rows AS A TIMELINE and owns the founding and the record itself; this block renders what the record says REMAINS, and only where `anchored` or `lastingEffects` actually asserts a remainder. `DS-GEN-15` reads the fabric mirror, which is what the STONES show; this block reads the history table, which is what the RECORD says. The two cite different fields and may compose together, since neither restates the other's cell. No variant carries a year: `DS-GEN-9` records that the surface prints a numeral beside its own band ladder, and `R-DST-D` keeps the prose banded.
 
 **`ANCHORED-RECENT`** {colour}
-1. `[street]` The {calamity} is recent enough that people in {settlement} still say 'before' and 'after' it.
+1. `[street]` People in {settlement} still say 'before' and 'after' the {calamity}.
 2. `[unfolding]` What the {calamity} took from {settlement} is still being counted, and some of the counting is done aloud.
-3. `[visitor]` {settlement} has been careful since the {calamity}; people still remember how bad it was.
+3. `[visitor]` {settlement} has been careful since the {calamity}; people still remember how bad that time was.
 
 **`ANCHORED-OLD`** {colour}
-1. `[elder]` The {calamity} is {timeband_age}, and {settlement} still keeps habits from that time that nobody can now explain.
+1. `[elder]` {settlement} still keeps habits nobody can now explain, from the time of the {calamity}; that time is {timeband_age}.
 2. `[ledger]` {settlement} still does things differently because of the {calamity}, a long-past event.
-3. `[street]` Nobody now in {settlement} saw the {calamity}, and everybody here lives in the town it made.
+3. `[street]` Nobody now in {settlement} saw the {calamity}, and everybody here lives in the town that time made.
 
 **`LAYERED-ANCHORED`** {colour}
 1. `[elder]` One hard season after another has passed over {settlement}, and each still shapes the town.
 2. `[visitor]` {settlement} has been knocked down and has answered more than once, and the answering shows; this is a town with practice.
 
 **`RECORDED-UNANCHORED`** {colour}
-1. `[ledger]` The {calamity} happened here, but {settlement} has moved on; nothing in the town today turns on it.
+1. `[ledger]` The {calamity} happened here, but {settlement} has moved on; nothing in the town today turns on that time.
 2. `[elder]` {settlement} remembers the {calamity} as an event that happened, not something that still matters.
 
 **`UNMARKED`** {crisis-scoped}
@@ -7153,24 +7154,24 @@ compass word, no real-world place, no named analogy.*
 2. `[ledger · crisis: any]` {settlement} has never had a disaster worth the name.
 
 **`LIVING-MEMORY`** {colour}
-1. `[street]` People in {settlement} still remember the {calamity}, and it weighs on the quarrels the town is having now.
-2. `[visitor]` Ask about the town's present quarrels in {settlement} and the {calamity} comes up before long.
+1. `[street]` People in {settlement} still remember the {calamity}, and the memory weighs on the quarrels the town is having now.
+2. `[visitor]` Ask about the town's present quarrels in {settlement} and before long somebody brings up the {calamity}.
 
 **`LEGACY-UNRESOLVED`** {colour}
-1. `[ledger]` The {calamity} is {timeband_age}, and it left a legacy of trouble in {settlement} that has never been fully put right.
-2. `[street]` The {calamity} is {timeband_age}, and nobody in {settlement} has finished putting right the legacy it left.
+1. `[ledger]` The {calamity} left a legacy of trouble in {settlement} that has never been fully put right, and that legacy is {timeband_age}.
+2. `[street]` Nobody in {settlement} has finished putting right the legacy the {calamity} left, and that legacy is {timeband_age}.
 
 **`LEGACY-RECOVERED`** {colour}
-1. `[ledger]` {settlement} came through the {calamity}, which is {timeband_age} now; its legacy is what the town built in answer to it, and that still stands.
-2. `[street]` The {calamity} is {timeband_age}, and its legacy is much of what stands in {settlement} now: it was built in the years after.
+1. `[ledger]` {settlement} came through the {calamity}, and what the town built in answer still stands; that legacy is {timeband_age}.
+2. `[street]` Much of what stands in {settlement} now was built after the {calamity}; that legacy is {timeband_age}.
 
 **`LEGACY-SHIFTED`** {colour}
-1. `[ledger]` The {calamity} is {timeband_age}; what {settlement} settled in its wake is a legacy that still shapes the town, though much has changed since.
-2. `[street]` The {calamity} is {timeband_age}, and {settlement} still carries the shape it took after it; that legacy holds, though the times have moved on.
+1. `[ledger]` What {settlement} settled in the wake of the {calamity} still shapes the town, though much has changed since; that legacy is {timeband_age}.
+2. `[street]` {settlement} still keeps the shape the town took after the {calamity}, though the times have moved on; that legacy is {timeband_age}.
 
 **`LEGACY-LINKED`** {colour}
-1. `[ledger]` The {calamity} is {timeband_age}, and its legacy still bears on how {settlement} lives.
-2. `[street]` {settlement} still lives with the legacy of the {calamity}, which is {timeband_age}.
+1. `[ledger]` What the {calamity} left behind is {timeband_age}, and that legacy still bears on how {settlement} lives.
+2. `[street]` {settlement} still lives with what the {calamity} left, and that legacy is {timeband_age}.
 
 ---
 
@@ -7301,9 +7302,9 @@ no compass word, no real-world place, no named analogy.*
 
 **`STALLED`** {colour}
 1. `[unfolding]` {institution} at {settlement} has run out of {resource}; it is working through its last stores.
-2. `[ledger · no crisis: under_siege]` Some of the work at {settlement} depends on goods brought in from outside, because nothing here makes them.
-3. `[street · no crisis: under_siege]` No trade at {settlement} makes what some of its work needs, so that much is always bought in.
-4. `[unfolding · crisis: under_siege]` Some of the work at {settlement} depended on goods brought in from outside, and the siege has stopped them coming.
+2. `[ledger · no crisis: under_siege]` Some of the work at {settlement} needs goods that nothing here makes.
+3. `[street · no crisis: under_siege]` No trade at {settlement} makes what some of its work needs, so that much must come from elsewhere or be done without.
+4. `[unfolding · crisis: under_siege]` Some of the work at {settlement} needs goods that nothing here makes, and since the siege nothing comes in from outside.
 
 **`HOME-FED`** {colour}
 1. `[ledger]` {institution} stands in {settlement} because the {resource} is right here.
