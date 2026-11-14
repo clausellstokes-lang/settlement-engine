@@ -1087,7 +1087,7 @@ executed). Scratch worktree `/home/user/wt/p11` on a local branch `p11` at the l
   constant pointed at the CENSUS-2 probes extracted to /home/user/c2 (`git archive origin/lane/census-2-2026-11-13
   docs/chair/2026-11-13/probes/CENSUS-2 | tar -x -C /home/user/c2`); `sh /home/user/p9probes/births.sh <tree>
   <outdir> 720 4` (about 3 minutes).
-- /home/user/probes/m1count.mjs <births dir> [--list N]: the M1 class beside Minor/Suppressed (the reader's
+- (copied to docs/chair/2026-11-13/probes/POWERS-11/, with births.mjs as pointed here, push.sh and uneach.mjs, the it.each reformat) /home/user/probes/m1count.mjs <births dir> [--list N]: the M1 class beside Minor/Suppressed (the reader's
   rungcount.mjs CLASS, on births rows) and the four L2 classes by town. m1army.mjs <dir>: the uncovered claims'
   towns with seat, arms and merchant powers. descdiff.mjs <dirA> <dirB> [n]: the faction descriptions that moved
   between two births of the same seeds, by old -> new opening, with every leaf path that moved. show.mjs <dir>
