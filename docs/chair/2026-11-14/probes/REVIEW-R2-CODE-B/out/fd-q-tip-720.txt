@@ -1,0 +1,52 @@
+births base 720 tip 720 missing 0; leaf diffs 1018; towns moved 136
+family stress: 127 towns
+family stressors: 127 towns
+family npcs: 57 towns
+family generationCoherenceReceipt: 57 towns
+  72	.stress.cast.roles[].reason	 e.g. r2r-thorp-5 r2r-thorp-10 r2r-thorp-17
+  72	.stressors.cast.roles[].reason	 e.g. r2r-thorp-5 r2r-thorp-10 r2r-thorp-17
+  57	.generationCoherenceReceipt.judgments[].evidence[].evidence	 e.g. r2r-thorp-5 r2r-thorp-10 r2r-thorp-17
+  39	.stress.summary	 e.g. r2r-thorp-11 r2r-thorp-16 r2r-thorp-17
+  39	.stressors.summary	 e.g. r2r-thorp-11 r2r-thorp-16 r2r-thorp-17
+  37	.npcs[]	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-46
+  36	.stress.cast.levers[]	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-41
+  36	.stressors.cast.levers[]	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-41
+  35	.stress.cast.roles[].id	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-45
+  35	.stress.cast.roles[].name	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-45
+  35	.stressors.cast.roles[].id	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-45
+  35	.stressors.cast.roles[].name	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-45
+  33	.stress.cast.roles[].kind	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-45
+  33	.stressors.cast.roles[].kind	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-45
+  27	.stress.cast.roles[].temporary	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-46
+  27	.stressors.cast.roles[].temporary	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-46
+  27	.stress.cast.stakes[].reason	 e.g. r2r-village-9 r2r-village-24 r2r-village-56
+  27	.stressors.cast.stakes[].reason	 e.g. r2r-village-9 r2r-village-24 r2r-village-56
+  20	.npcs[].importance (NEW KEY)	 e.g. r2r-thorp-5 r2r-thorp-10 r2r-thorp-19
+  20	.npcs[].structuralRank (NEW KEY)	 e.g. r2r-thorp-5 r2r-thorp-10 r2r-thorp-19
+  11	.stress[].cast.roles[].reason	 e.g. r2r-city-56 r2s-occupied-thorp-1 r2s-occupied-hamlet-0
+  11	.stressors[].cast.roles[].reason	 e.g. r2r-city-56 r2s-occupied-thorp-1 r2s-occupied-hamlet-0
+  10	.stress.cast.stakes[].stake	 e.g. r2r-village-24 r2r-village-58 r2s-famine-village-2
+  10	.stressors.cast.stakes[].stake	 e.g. r2r-village-24 r2r-village-58 r2s-famine-village-2
+  10	.stress[].summary	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  10	.stress[].cast.roles[].kind	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  10	.stress[].cast.roles[].id	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  10	.stress[].cast.roles[].name	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  10	.stress[].cast.roles[].temporary	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  10	.stress[].cast.levers[]	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  10	.stressors[].summary	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  10	.stressors[].cast.roles[].kind	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  10	.stressors[].cast.roles[].id	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  10	.stressors[].cast.roles[].name	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  10	.stressors[].cast.roles[].temporary	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  10	.stressors[].cast.levers[]	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  8	.stress.cast.roles[]	 e.g. r2r-thorp-16 r2r-thorp-45 r2s-under_siege-thorp-0
+  8	.stress.cast.absent[]	 e.g. r2r-thorp-16 r2r-thorp-45 r2s-under_siege-thorp-0
+  8	.stressors.cast.roles[]	 e.g. r2r-thorp-16 r2r-thorp-45 r2s-under_siege-thorp-0
+  8	.stressors.cast.absent[]	 e.g. r2r-thorp-16 r2r-thorp-45 r2s-under_siege-thorp-0
+  6	.stress.cast.roles[].role	 e.g. r2r-thorp-45 r2s-under_siege-thorp-0 r2s-under_siege-thorp-1
+  6	.stressors.cast.roles[].role	 e.g. r2r-thorp-45 r2s-under_siege-thorp-0 r2s-under_siege-thorp-1
+  2	.stress.cast.absent[].role	 e.g. r2s-under_siege-thorp-1 r2s-under_siege-thorp-2
+  2	.stress.cast.absent[].reason	 e.g. r2s-under_siege-thorp-1 r2s-under_siege-thorp-2
+  2	.stressors.cast.absent[].role	 e.g. r2s-under_siege-thorp-1 r2s-under_siege-thorp-2
+  2	.stressors.cast.absent[].reason	 e.g. r2s-under_siege-thorp-1 r2s-under_siege-thorp-2
+NEW/GONE KEY rows 40 [".npcs[].importance (NEW KEY)",".npcs[].structuralRank (NEW KEY)"]

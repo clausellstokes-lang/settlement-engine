@@ -1,0 +1,6 @@
+## gov-tip.json files 50 passed 463 failed 2
+  RED tests/generators/generationForkCensus.test.js 6/7 :: A3e — the classification re-executed: the declared corpus is 63 rows, 12 steps draw, and every stepDraws and keyMoves reproduces
+  RED tests/generators/institutionBudgetPromise.test.js 0/1 :: every one of sixty seeds is byte-identical with the density factor forced to 1.0
+## gov-q.json files 30 passed 321 failed 2
+  RED tests/components/dossierPhoneFloorAllViews.test.jsx 0/2 :: every line in every tab clears its floor (prose 14px, chrome 12px) at phone width | desktop is untouched — the SAME walk, pinned to DESKTOP_BASELINE
+  RED tests/lint/writerReach.walker.test.js 0/0 ::  MSG writer-reach dark register row "forcedByToggle on institutions" is UNVERIFIABLE (clause S): the identity is now LIT-NAME

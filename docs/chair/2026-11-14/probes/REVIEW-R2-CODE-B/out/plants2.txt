@@ -1,0 +1,7 @@
+742ff4e43 tests/components/traditionsTabMarketRow.test.jsx REVERT-CONFLICT
+2ed36a430 tests/domain/chainCardTruth.test.js REVERT-CONFLICT
+99432257c tests/domain/chainSourceAbsent.test.js REVERT-CONFLICT
+ffe89ab39 tests/domain/faithAccessOnlyChurch.test.js reverted-src-files=1 exit=1 2/3 failed 1 :: an access to an external mill gives no walk to a parish church
+922fe5141 tests/domain/scopeLineAtSize.test.js REVERT-CONFLICT
+111e8b152 tests/generators/stressSummaryDeclared.test.js REVERT-CONFLICT
+c1efd7f93 tests/pdf/pdfChainHouseLabels.test.jsx REVERT-CONFLICT

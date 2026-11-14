@@ -111,3 +111,110 @@ The rest agree in rate with their 800.
   - It says npcs moved "37 / 37 (whole entries)" and "No other family". At the tip, npcs is 77 / 57 and generationCoherenceReceipt moves in 57 towns.
   - Its surfaces: 51 rows, the register's 51, none missing.
   - My run of its moved surfaces, its moved pins and a sample of its unmoved surfaces at the tip and at Q is in §3b.
+
+### 3b. The shift record's surfaces, my run (EXECUTED; `probes/.../out/shift-*.txt`)
+I ran 16 files at the tip and at Q: its 2 moved surfaces, its 5 moved pins, its RED-ON-THE-LINE row and 8 unmoved surfaces as a sample.
+
+- **Red at the tip and green at Q** (the stage's moves, each one the record declares):
+  - generatorGoldenMaster: 1 of 3;
+  - espionageDormancyFence, THE DRIVEN GOLDEN;
+  - hookThemeDraws, pin:no-hook-is-lost;
+  - rosterDuplicateDraws, the corpus is live;
+  - x46NpcBand, sixty seeds;
+  - editCorpusRatchet A7: [672, 269, 2185], which equals part 9's re-measure, not the draft JSON's [674, …];
+  - institutionBudgetPromise.
+- **editCorpusRatchet A5** was red under load and green run alone (a timeout).
+- **dossierProseManifest** is red at both the tip and Q: the line's, as the record says.
+- **The 8 unmoved surfaces sampled** are green at the tip: belief-map, npc-ledger dormancy, the PDF golden view model, rumor-ledger, settlement-politics dormancy, timeline-track, interior, demographics lifecycle.
+- **The record's own text is stale**, as said above, and institutionBudgetPromise is red again after the mint: its re-key at 0bd857e2e predates part 9. The statement lists both as LEFT.
+
+## 4. Plants, one fault per new guard (EXECUTED; `probes/.../out/plants*.txt`)
+The stage added 20 guard files. For each, a plant took its own cure out of a scratch copy of the tip and ran the guard alone. There were three ways to plant:
+- the commit's src change reverse-applied (`plants.sh`);
+- the commit reverted with its tests kept;
+- a hand plant of one edit (`plants3.txt`).
+
+Results:
+- **18 guards red on their plant:** npcCardAllegianceHandler, peopleRowsApart, powerSeatHeading, traditionsTabForgeRow, traditionsTabMarketRow, crisisCastDefenceHome, crisisCastSeatAndAccess, faithAccessOnlyChurch, faithAccessUnderSiege, faithNativeIdentity, houseLabelEveryForm, quickGuideScopeRoster, scopeLineAtSize, storesSpanFigure, tonightOwnGoal, chainSourceAbsent, houseLabelEverySurface (the leaf returning the raw name), pdfChainHouseLabels (ChainRow back to the raw patterns).
+- **All 20 guards are green at the tip**, so none reds on anything but its fault. 50 of the stage's 50 touched test files ran at the tip. The two reds there are generationForkCensus (a timeout, green alone) and institutionBudgetPromise (the declared pin).
+- **Not planted:** chainCardTruth and stressSummaryDeclared. Their cures conflict with later commits, and a hand plant was not made: NOT MEASURED.
+
+**Cures that take a line off towns with no guard of their own** (PLAUSIBLE that none exists; searched by name in tests/):
+- 57395ee18, Faith's "real political weight": no test, only a register row. It is also the removal that took true lines (§2, item 4).
+- 535e654d6, the Tonight keeper styled "Acting …".
+- f09e55042, the relationship card's keeper. The powers lane's seatKeeper and powerSeatRender tests guard the form, not these two surfaces.
+
+## 5. The merge of the line inside the stage (EXECUTED: `git show --remerge-diff 0aa0cce00`)
+The resolution keeps both sides' cures in all three conflicted code files:
+- **EconomicsTrade.jsx:** the lane's PROC through `chainHousesOf`, and the line's OUT label `chainYieldRefused`/"Normally yields".
+- **Services.jsx ChainCard:** both props kept (`town` and `instNames`). The line's `chainPrintName` is kept and read through the lane's ruling (d) (`chainSourceOf({ ...chain, ...shown })`). The lane's houses stand, and so do the line's NORMALLY_YIELDS outputs.
+- **SupplyChainFlow.jsx:** the line's `refused` is kept. `importedUpstream` is removed, and the lane had removed it before the merge (c40da4ec6 has no `importedUpstream`). The source node is read as in Services.
+
+No cure of the line's was dropped. One LOW, PLAUSIBLE in reach and EXECUTED in code:
+- The PROC value and the custom-chain flow call `chainHousesOf(c.processingInstitutions, [])` with an EMPTY roster. That function names only roster houses, so the PROC row never prints and the custom flow carries no houses.
+- This is the lane's own c1efd7f93 (ruling R1), kept by the resolution. The path runs only with `pdfVisualChains` off, and it is the default. The line's PROC (display names) is replaced by silence there: no false text, but a row lost.
+
+**The registers the stage touched, each by its door's own checking run at the tip** (`out/reg-tip.txt`, then a re-run alone of the timed-out ones):
+- **Green:**
+  - wiringCensusDeclared and proseWiringCensus. The prior review's LOW finding 5 is CURED: the census is byte-identical to a fresh build.
+  - writerReach, green alone. It was red at the base 80b960171 ("forcedByToggle on institutions … UNVERIFIABLE"), so the stage cured it.
+  - sovereigntyLightingContract (the lighting census).
+  - proseNumerics.
+  - tuningRegister.
+  - defenceFactReaders.
+  - mutationCoverageManifest.
+  - pageCensus, green alone.
+- **Red: presumedThings.walker**, "every source literal that names a thing declares it, or has its row", with 18 undeclared literals. It is green at the base, so this is THE STAGE'S. It is exactly the statement's "red and named" eighteen (step 8).
+
+## 6. The gates and the governing files (EXECUTED, my runs at the tip; `sh scripts/gate-tail.sh`, exits read)
+- `npm run typecheck:domain:strict`: exit 0.
+- `npm run typecheck:ratchet`: exit 0.
+- `npx eslint` on the stage's 39 src files: exit 0.
+- The stage's 50 touched test files at the tip: 463 passed, 2 red (both classed in §4). At Q, the 30 that exist there: 2 red. One is an artefact of Q's conflict resolution (dossierPhoneFloorAllViews, taken from the line's side by my Q). The other is writerReach, red at the base too.
+- The statement's classed reds, each file run at the tip and at the base: see §6b.
+
+## 7. CENSUS-2, the measuring seat's command (EXECUTED; `census2.sh <tree> <out> 4 --files <the stage's 39 src files>`, both exits 0)
+
+| kind | base 80b960171 (towns · lines) | tip ac8168c8c (towns · lines) |
+|---|---|---|
+| a | 716 · 619 | 678 · 523 |
+| b | 70 · 99 | 70 · 101 |
+| c | 292 · 296 | 276 · 155 |
+| d | 377 · 24 | 350 · 15 |
+| e | 60 · 20 | 60 · 20 |
+| f | 720 · 210 | 309 · 53 |
+| g | 720 · 14 | 720 · 14 |
+| h | 21 · 68 | 2 · 2 |
+
+- The tip's counts equal part 9's figures exactly.
+- No kind rises in towns. Kind b's distinct lines rise 99 -> 101.
+- By writer file, three rises (base -> tip):
+  - EconomicsTab.jsx b 26 -> 29 towns and f 206 -> 213;
+  - institutionDisplayName.js f 0 -> 7.
+- Each new hit was read against Q's render: "a bad season would" under a famine, the Exports list under a siege, "Inns and taverns (district)" and "Bowyers & fletchers (guild)" as a house's name. **Each prints the same at Q** (4 of 4 rendered towns checked: r2s-famine-city-3, r2s-under_siege-city-2, r2r-town-27, r2r-city-29). The rises come with the line's arrival, not the stage's (CARRIED). The base lacks the line, so base against tip is not the stage alone.
+
+## 8. The eighteen literals and the reader's row, read where they print (EXECUTED; `decl18.mjs`, `cultureScopeLine` over the 1536 at the tip and at Q)
+
+| literal (settlementQuickGuide.js scope frames) | prints in | lacking its presumed thing |
+|---|---|---|
+| `streets`: civic square | 91 (village and up) | 0 |
+| `streets`: agora | 78 | 0 |
+| `streets`: in quarters by trade | 79 (town and up) | 0 |
+| `quarters`: kin districts | 64 (town and up) | 0 |
+| `market` (4 variants) | 70 | 0 without a market house |
+| `temple` (2) | 94 | 0 without a temple or church house |
+| `docks`: built around the harbour (2) | 35 | **5 without any dock, harbour, landing or fishing house** |
+| reader's row `guild`: "run by guild and estate" | 60 | 0 without a guild house |
+
+- **`docks` is FALSE in 5 towns** (MEDIUM, (a)):
+  - r2s-indebted-village-3 (village, 75): "built around the harbour, on the coast, and run by civic association".
+  - r2s-mass_migration-hamlet-1 (hamlet, 60).
+  - rr3-thorp-plague_onset-port-0 (thorp, 29), and 2 more.
+  - The gate is the record's water (`maritime`), not a harbour house.
+  - At Q the same towns printed "the agora and the harbour": the stage struck the agora by size and kept the harbour. The clause is CARRIED. By the chair's method ("a seat that rewords a sentence owns it whole") the sentence is the stage's.
+- **faithReading.js, 3 literals:**
+  - `shrine`, ", and the shrines answer to no named god.": true by its gate, LOW where the roster holds one Wayside shrine (3 towns, the plural; r2s-famine-thorp-1).
+  - `siege` and `temple`, "… the siege keeps its people from the next village's parish church.": FALSE beside its follower in 38 of 39 siege towns. It is §9's M9.
+- **Outside the eighteen, CARRIED:**
+  - "run by its estates" in 49 thorps and hamlets (r2r-thorp-7, 9 people): printed the same at Q.
+  - "built around the Palace/government complex" in 27 metropolises (HIGH, `seatIntoPhrase`, the same at Q).

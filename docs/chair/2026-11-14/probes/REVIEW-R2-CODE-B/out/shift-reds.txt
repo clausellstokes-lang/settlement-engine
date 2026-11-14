@@ -1,0 +1,11 @@
+## shift-tip.json files 16 passed 152 failed 11
+  RED tests/generators/hookThemeDraws.test.js 12/13 :: pin:no-hook-is-lost — the count the DM sees is byte-for-byte what it was
+  RED tests/generators/institutionBudgetPromise.test.js 0/1 :: every one of sixty seeds is byte-identical with the density factor forced to 1.0
+  RED tests/generators/rosterDuplicateDraws.test.js 2/3 :: the corpus is live: the 1,000 births carry rosters of two or more
+  RED tests/generators/x46NpcBand.test.js 23/24 :: sixty seeds (ten a tier) generate byte-identically to the dark digests captured at the window tip (2026-11-04)
+  RED tests/property/dossierProseManifest.test.js 14/17 :: ⭐⭐ THE DRIFT CORPUS CARRIES FOUR SEEDS, and the tally is derived rather than described | ⭐ THE DRIFT ARM: no row added, no row removed, no row moved | ⭐ THE MIXED-POOL AUDIENCE ARM: the two faces differ only where a pool
+  RED tests/property/editCorpusRatchet.test.js 6/8 :: A5 a chain is deterministic, undo then re-edit reproduces the town, and the ordered pairs are counted | A7 the honesty figures are re-measured and the ride-along has its first population in the chain
+  RED tests/property/espionageDormancyFence.test.js 20/21 :: THE DRIVEN GOLDEN: 360 settlements at this tip hash to the PRE-COUPLING corpus
+  RED tests/property/generatorGoldenMaster.test.js 2/3 :: every config produces byte-identical output to the golden master
+## shift-q.json files 16 passed 160 failed 3
+  RED tests/property/dossierProseManifest.test.js 14/17 :: ⭐⭐ THE DRIFT CORPUS CARRIES FOUR SEEDS, and the tally is derived rather than described | ⭐ THE DRIFT ARM: no row added, no row removed, no row moved | ⭐ THE MIXED-POOL AUDIENCE ARM: the two faces differ only where a pool

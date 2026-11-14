@@ -1,0 +1,17 @@
+## reg-tip.json files 10 passed 313 failed 3
+  RED tests/components/pageCensus.walker.test.jsx 13/14 :: r2r-town-0
+  RED tests/lint/presumedThings.walker.test.js 41/43 :: ⛔ every source literal that names a thing declares it, or has its row | the admitted instruments: each reads EXACTLY its named counts, and only these two are admitted
+  RED tests/lint/writerReach.walker.test.js 0/0 ::  MSG Hook timed out in 300000ms.
+If this is a long-running hook, pass a timeout value as the last argument or configure it gl
+## re-tip-editCorpusRatchet.test.json files 1 passed 7 failed 1
+  RED tests/property/editCorpusRatchet.test.js 7/8 :: A7 the honesty figures are re-measured and the ride-along has its first population in the chain
+## re-tip-generationForkCensus.test.json files 1 passed 7 failed 0
+## re-tip-pageCensus.walker.test.json files 1 passed 14 failed 0
+## re-tip-presumedThings.walker.test.json files 1 passed 42 failed 1
+  RED tests/lint/presumedThings.walker.test.js 42/43 :: ⛔ every source literal that names a thing declares it, or has its row
+## re-tip-writerReach.walker.test.json files 1 passed 52 failed 0
+## re-base-editCorpusRatchet.test.json files 1 passed 8 failed 0
+## re-base-generationForkCensus.test.json files 1 passed 7 failed 0
+## re-base-presumedThings.walker.test.json files 1 passed 17 failed 0
+## re-base-writerReach.walker.test.json files 1 passed 0 failed 0
+  RED tests/lint/writerReach.walker.test.js 0/0 ::  MSG writer-reach dark register row "forcedByToggle on institutions" is UNVERIFIABLE (clause S): the identity is now LIT-NAME
