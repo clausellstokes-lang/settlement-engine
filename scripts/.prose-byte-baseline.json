@@ -67,8 +67,8 @@
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 297274,
-      "gzip": 37929,
+      "raw": 297256,
+      "gzip": 37924,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },

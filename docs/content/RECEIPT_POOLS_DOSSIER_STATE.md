@@ -6897,7 +6897,7 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 **`MARKET-OPEN`** {crisis-scoped · market}
 1. `[street · no crisis: under_siege · no crisis: plague_onset · crisis: any · tier: ≤ town]` Market day is when {settlement} fills: the roads bring buyers, and the stalls are there for them.
 2. `[ledger · crisis: any · no crisis: under_siege · no crisis: plague_onset]` {settlement}'s market lives off through-traffic; the town sells to the road as much as to itself.
-3. `[visitor · crisis: any · no crisis: under_siege]` Visitors find {settlement}'s market without asking; the busiest street through town leads straight to it.
+3. `[visitor · crisis: any · no crisis: under_siege]` Visitors find {settlement}'s market without asking; the main road leads straight to it.
 4. `[elder · crisis: any · no crisis: under_siege]` The market stands where carts always stopped; stalls followed the carts, and {settlement} grew around them.
 5. `[ledger · crisis: under_siege]` {settlement}'s market grew up on the road's trade, and with the siege closing the road it has almost nobody left to sell to.
 6. `[street · crisis: plague_onset]` The sickness has thinned {settlement}'s market: the stalls still open, and fewer people come to them.

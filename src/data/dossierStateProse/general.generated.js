@@ -9427,7 +9427,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
             "crisis: any",
             "no crisis: under_siege"
           ],
-          "text": "Visitors find {settlement}'s market without asking; the busiest street through town leads straight to it.",
+          "text": "Visitors find {settlement}'s market without asking; the main road leads straight to it.",
           "slots": [
             "settlement"
           ],
