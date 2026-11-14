@@ -42,6 +42,7 @@ import { generalDeskLines, siteClause } from '../../src/components/new/generalDe
 import { relationshipsDeskLists } from '../../src/domain/display/stateProse/relationshipsDeskRead.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
+import { crisisDimensionsOf } from '../../src/domain/crisis/crisisFacts.js';
 import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { drawnMember, drawnMembers, poolMemberTexts } from '../helpers/drawnProse.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -918,6 +919,11 @@ const FORGE = Object.freeze({
 const CRAFT = drawnMember({
   leaf: 'general', blockId: 'DS-GEN-18', poolKey: 'STALLED', seed: FORGE._seed,
   slots: { settlement: 'Forge Town', institution: 'Smelter' },
+  // RE-KEYED BY IDENTITY (W2-WRITE-11, the lane's red of HANDBACK-9: "NOTHING DRAWS ... no facts"): STALLED v2 and v3
+  // declare `no crisis: under_siege`, which the kernel reads fail-closed, and v1 names `{resource}` (not in the bag), so a
+  // spec that answers no crisis dimension found none eligible. The spec now hands in the desk's whole bag, FORGE's own
+  // crisis dimensions and facts, exactly as economicsTabFlow's GROUND spec does; the pool and its lines are unchanged.
+  dimensions: crisisDimensionsOf(FORGE), facts: factsOf(FORGE),
 });
 
 describe('DS-GEN-18 DRAWS ON THE ECONOMICS TAB — and is silent for a free viewer', () => {

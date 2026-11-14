@@ -5469,7 +5469,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "EXPLOITATION: unexploited, exportValue: high": [
         {
           "angle": "ledger",
-          "text": "There is {resource} in {settlement}'s country worth real money and nothing in the town takes it out of the ground.",
+          "text": "There is {resource} in {settlement}'s country worth real money and nothing in the town works it.",
           "slots": [
             "resource",
             "settlement"
@@ -5507,7 +5507,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "EXPLOITATION: unexploited, exportValue: medium or low": [
         {
           "angle": "ledger",
-          "text": "{settlement} leaves its {resource} unworked. It would fetch barely enough to pay for the digging.",
+          "text": "{settlement} leaves its {resource} unworked. It would fetch barely enough to pay for the work.",
           "slots": [
             "settlement",
             "resource"
@@ -6423,7 +6423,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "sacredHouse"
+            "sacredHouse",
+            "tier: ≥ village"
           ],
           "text": "Faith carries real weight in {settlement}'s money. What the religious houses take in and spend is a large part of the town's business.",
           "slots": [
@@ -6434,7 +6435,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "sacredHouse"
+            "sacredHouse",
+            "tier: ≥ village"
           ],
           "text": "The religious houses at {settlement} are among its biggest buyers and employers, and a bad year for them is a bad year for the town.",
           "slots": [
