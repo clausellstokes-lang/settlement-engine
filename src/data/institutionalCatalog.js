@@ -936,7 +936,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
         village: { face: 'the priest', name: 'Parish church', required: true, exclusiveGroup: 'religiousCenter', desc: 'Center of village life. Stone construction. Mandatory tithes.' },
         town: { name: 'Parish churches (2-5)', required: true, desc: 'Several houses of worship within town.' },
         city: { name: 'Parish churches (10-30)', required: true, desc: 'One per neighborhood.' },
-        metropolis: { name: 'Parish churches (50-100+)', required: true, desc: 'Hundreds of houses of worship across all districts. The faith is woven into every neighbourhood.', tags: ['religious', 'church'], priorityCategory: 'infrastructure' },
+        metropolis: { name: 'Parish churches (50-100+)', required: true, desc: 'Scores of parishes, from fifty to a hundred and more. The faith reaches every street of the city.', tags: ['religious', 'church'], priorityCategory: 'infrastructure' },
       },
     },
     {

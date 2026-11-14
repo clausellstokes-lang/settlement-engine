@@ -126,3 +126,18 @@ describe('W2-FIX-DATA-8: the census writers in the data lane\'s files (the eight
     }), 'another line carries the income: no trade is the whole of it');
   }, 240_000);
 });
+
+describe('W2-FIX-DATA-9: the census writers in the data lane\'s files (the ninth seat)', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); }, 120_000);
+
+  test('HANDBACK-6 row 4 (ww-331): the metropolis\'s parish churches (50-100+) give no figure the range makes false, "hundreds" in none (r2r-metropolis-1, r2r-metropolis-3, r2s-under_siege-metropolis-0); the third text stands as it was (r2r-metropolis-0)', () => {
+    /** @param {string} seed */
+    const parish = (seed) => String((bornCensus(seed).institutions || []).find((/** @type {any} */ i) => i.name === 'Parish churches (50-100+)').desc);
+    expectNoSeedFailures(collectSeedFailures(['r2r-metropolis-1', 'r2r-metropolis-3', 'r2s-under_siege-metropolis-0'], (seed) => {
+      const desc = parish(seed);
+      expect(desc, seed).not.toMatch(/hundreds/i);
+      expect(desc, seed).toMatch(/fifty/);
+    }), 'fifty to a hundred and more: never hundreds');
+    expect(parish('r2r-metropolis-0')).toBe('Every quarter keeps its own parish, so that faith runs through every part of the city.');
+  }, 240_000);
+});

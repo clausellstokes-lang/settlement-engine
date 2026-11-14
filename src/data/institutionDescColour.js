@@ -470,7 +470,7 @@ export const DESC_VARIANT_COLOUR_DECLARATIONS = Object.freeze({
   "State-managed grain stores, kept as a strategic reserve.": COLOUR,
   "More than a hundred separate craft specialisations, each with a guild. No trade goes unrepresented.": COLOUR,
   "A guild for every trade imaginable, well past a hundred distinct crafts in all.": COLOUR,
-  "Houses of worship in the hundreds, across every district. No neighbourhood is without the faith.": COLOUR,
+  "Parishes by the score, anywhere from fifty to past a hundred. No street of the city is far from the faith.": COLOUR,
   "Every quarter keeps its own parish, so that faith runs through every part of the city.": COLOUR,
   "One central roll now holds what the local grounds can no longer track. Wards are assigned to grounds, so a family that moves across the city may find itself divided by the assignment.": COLOUR,
   "Between five and ten great monastic houses, each given to scholarship, contemplation, and charity at scale.": COLOUR,

@@ -1239,7 +1239,7 @@ const PAIRS = [
     "A guild for every trade imaginable, well past a hundred distinct crafts in all.",
   ],
   [
-    "Houses of worship in the hundreds, across every district. No neighbourhood is without the faith.",
+    "Parishes by the score, anywhere from fifty to past a hundred. No street of the city is far from the faith.",
     "Every quarter keeps its own parish, so that faith runs through every part of the city.",
   ],
   [
