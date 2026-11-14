@@ -1973,7 +1973,7 @@ R2STAGES_TOOLS = (
 # The entries below wait for their lanes' final statements: set 'tip', then generate.
 READERS['REVIEW-R3-CODE-C'] = dict(
     title="REVIEW-R3-CODE-C · round three's code lane read from its last read to its final statement",
-    lane='lane/r3-code-c-2026-11-13', own='lane/review-r3-code-c-2026-11-14', base='fb8b24fb', tip=None,
+    lane='lane/r3-code-c-2026-11-13', own='lane/review-r3-code-c-2026-11-14', base='fb8b24fb', tip='b6bd3a3c',
     what="round three's code lane: cures in domain, generator and display files of the false lines round three's readers found",
     before="the tip the last reader read: NOT CLEAR there on one medium line of the stage, since given to the lane's seats: check it cured",
     stmt='docs/chair/2026-11-13/R3-CODE-C-HANDBACK.md', tools=R3STAGES_TOOLS,
@@ -1981,7 +1981,12 @@ READERS['REVIEW-R3-CODE-C'] = dict(
            "`after-base: r3-code-c`: crisisSummaryVantage.js's wartime and occupied lines; structuralValidator.js's plagued-threat reason), on four "
            "conditions the statement copies: READ each of the three where it prints: true wherever its key or branch lets it print? Plant against its "
            "guard test. And prove NOTHING ELSE was added to either presumed-things register by hand (every row the stage added against the door's own "
-           "output)."),
+           "output).\n"
+           "9. FOUR WALKERS ARE RED AT THE TIP AND NAMED IN THE STATEMENT AS THE LANE'S OWN, NOT CURED (negativeAssertionAnchor; poolDominance; "
+           "writerReach, two titles): a successor seat is curing them through their doors WHILE YOU READ, in commits after b6bd3a3c that touch tests "
+           "and registers only. They are not findings of yours and do not hold your verdict; the statement's \"dossier-prose-manifest UNMEASURED\" "
+           "likewise. If, when you write your verdict, `git diff --stat b6bd3a3c..origin/lane/r3-code-c-2026-11-13 -- src/` prints anything, say so "
+           "in one line: the chair then has that diff read."),
 )
 
 READERS['REVIEW-R2-CODE-B'] = dict(
@@ -2305,6 +2310,58 @@ SEATS2['R2-CODE-B-8'] = dict(
           "reds by class, where the statement is. A fresh reader then reads the lane from 80b96017b: leave it what it needs."),
     merges='',
     when="for a stop that blocks everything you have left, when steps 1 and 2 are pushed (one message: the two reds' causes; the twenty-seven by class), and with your final statement or hand-back",
+    turns='',
+)
+
+
+SEATS2['R3-CODE-C-7'] = dict(
+    title="R3-CODE-C-7 · round three's code lane: the four walkers left red, the prose manifest measured, the statement brought current",
+    branch='lane/r3-code-c-2026-11-13', tip='b6bd3a3c', statement=False,
+    intro=("You are R3-CODE-C-7, the seventh seat on round three's code lane of the settlement-engine integration program (lane/r3-code-c-2026-11-13). THE "
+           "LANE IS CLOSED BUT FOR FOUR REDS: its list is done, the integration line is merged into it, the instrument's checks are clean, the whole suite "
+           "is run and classed and the lane's final statement is written (the sixth seat, at its context mark). Yours is SMALL AND EXACT: four walkers "
+           "that are red at the lane's tip and green at the line's, one unmeasured surface for the shift record, and the statement brought current. A "
+           "FRESH READER IS READING THE LANE AT b6bd3a3c1 WHILE YOU WORK: so NOTHING UNDER src/ IS YOURS TO CHANGE; a walker that can only be cured by a "
+           "change under src/ is a STOP: one message to the chair with the file and the line."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/R3-CODE-C-HANDBACK.md, BY LINE RANGE, BY SCRIPT (the file is long; open only this): from the line "
+          "\"### THE LANE'S FINAL STATEMENT (R3-CODE-C-6\" to the end (about sixty lines: the statement you bring current; \"HAND BACK AT THE COUNT — WHAT "
+          "IS LEFT\": THAT IS YOUR LIST).\n"
+          "3. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (docs/INTEGRATION_STYLE_2_2026-11-09.md, the section headed "
+          "\"## 2m.\": about forty lines; by script): the table of doors and the paragraph \"The writer-reach door\", before the first register you touch.\n"
+          "4. Each walker's OWN HEADER (the comment at the top of its test file) before you act on it: it names its door and what the door may do."),
+    work=("THE WORK, in this order, each its own commit, pushed as made. For each walker FIRST its failure text at the tip (run the one file, JSON, to a file "
+          "outside the tree) and the same file at the line's tip 976db5b19 and at the lane's pre-merge tip dbe379c13 (frozen trees: `git worktree add "
+          "--detach`), so that you know WHICH lane commit reds it:\n"
+          "1. tests/lint/negativeAssertionAnchor.walker.test.js (\"no NEW un-anchored negative assertion\"): it names the test file and the bare negative "
+          "(a `not.` assertion with no positive anchor beside it: a test that passes when the thing it reads is absent). The cure is IN THAT TEST FILE: "
+          "the negative is anchored by a positive assertion that the subject was really collected or really printed (the collected set is not empty; the "
+          "line it must not contain belongs to a page that was rendered), shown able to red by a plant you do not commit. NEVER by a row in the walker's "
+          "baseline or allow-list.\n"
+          "2. tests/lint/poolDominance.walker.test.js (\"no ceiling sits loose above its measure\"): a cure of this lane lowered a pool's measured "
+          "dominance and its ceiling now sits loose. Its door LOWERS the ceiling to the measure (the walker's header gives the command), its own commit, "
+          "the door's output in the body. A ceiling that would RISE is never raised, by the door or by hand: that row is a STOP with its measure.\n"
+          "3. tests/lint/writerReach.walker.test.js, two titles (the frozen shapes digest; the lit arm): the lane's declared families changed the "
+          "shapes its corpus is born with. As section 2m gives the door: `node scripts/check-writer-reach.mjs` (its exit and what it names), then "
+          "`--write` on the CLEAN COMMITTED tree, its own commit. BEFORE the writing run say what will move: the cohort's count and the walker's pinned "
+          "totals before and after. If only the digest and line positions move and the pinned totals hold: commit. If a pinned total moves, a new "
+          "identity appears, or a dark-register row turns unverifiable: do NOT write: that is the merge seat's signed act: name each identity with its "
+          "measured figure under FOR THE JOIN, leave the walker red and named, and go on.\n"
+          "4. THE DOSSIER PROSE MANIFEST (tests/property/dossierProseManifest.test.js, red at the line's tip and at the lane's): compare its failure "
+          "output at 976db5b19 and at your tip, row by row, by script: MOVED (which rows, by which declared family of the lane) or UNMOVED, BY MEASURE, "
+          "into docs/chair/2026-11-13/R3-CODE-C-shift-record.DRAFT.json in the shape its other surfaces have. You run no golden's door in its writing "
+          "mode: signing is the merge seat's.\n"
+          "5. THE LIGHTING CENSUS if a step of yours added or renamed a test title (section 2m's part (4): the ritual on the clean committed tree), and "
+          "tests/lint/mutationCoverageManifest.test.js once.\n"
+          "6. THE STATEMENT BROUGHT CURRENT, under a new heading \"THE SEVENTH SEAT\" at the end of the hand-back: each of the four walkers: its cause "
+          "(the lane commit), its cure and commit, or why it is named for the merge seat; the prose manifest's measure; the three fast gates' exits at "
+          "your final tip (the strict-domain gate, the type ratchet, eslint on the files you touched: each through `sh scripts/gate-tail.sh`); `node "
+          "scripts/implementation-packets.mjs validate`, its exit; the five instrument doors of section 2m once more at your final tip, each exit (they "
+          "were clean at the sixth seat's tip: say that they still are, by your own run); and ONE LINE: \"no file under src/ changed after b6bd3a3c1\", "
+          "proved by `git diff --stat b6bd3a3c1..HEAD -- src/` printing nothing. The whole suite is NOT run again: re-run only the four walkers' files "
+          "and every test file you touched. Then ONE message to the chair: the tip, the four walkers' outcomes, what is named for the join."),
+    merges='',
+    when="for a stop that blocks everything you have left, and with your final tip (the four walkers' outcomes; what is named for the join)",
     turns='',
 )
 
