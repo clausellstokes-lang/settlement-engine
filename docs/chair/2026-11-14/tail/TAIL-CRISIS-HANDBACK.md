@@ -21,6 +21,22 @@ at e5b421802). Instruments: READ-ALL `inventory.py` / `inventory_diff.py`, CENSU
 - **(K5)** (23:25 UTC) `src/domain/coherence/hookTruth.js` stays this seat's, but the TIES seat moves `ruledByCouncil`
   to `src/domain/facts/` and re-exports it. This seat does not change, move or rename it.
 
+- **(K6)** (23:57 UTC) The insurgency summary: the reworded line ships as the pool's FALLBACK, true in all 37. The
+  atom `rival power` is GRANTED: it is true where the record holds a power OTHER THAN THE GOVERNING ONE whose own
+  standing is Significant or above (one leaf, the same reading that "pressing close behind" uses). It goes into the
+  vocabulary in ITS OWN COMMIT with its test, apart from the end of the list, because TIES adds `ruling body` to the
+  same file. The old line is then keyed `needs: ['rival power']`, and the new line has no needs. Expected: 27 towns
+  keep "A strong power…" and 10 take the plain line. The family is now named: shared power, ruling body, rival power.
+  **NOT DONE this session (handed back at budget). OWED, in this order:** (1) the atom, in its own commit, in
+  `src/domain/facts/factVocabulary.js`, read from the standing leaf that "pressing close behind" reads (find it with
+  `grep -rn "pressing close behind" src`), with a home in `factsOf.js` and a test over the 720 that counts 27 true and
+  10 false among the insurgencies; (2) at `stressNarrative.js :: RENDERERS.insurgency`, `atomHolds('rival power', facts)
+  === true` gives the old two sentences, and anything else gives the batch-1 line. The vantage lines that batch 1 reworded
+  away from "power" (22983 21315 11471 and the cover/traveller line) can be keyed the same way. Veto list for the
+  owner: the atom, "A strong power in X has stopped obeying the government. Its people stall, its taxes go unpaid, and
+  it waits." (true with a rival power), and "Some in X have stopped obeying the government. They stall, their taxes go
+  unpaid, and they wait." (the fallback).
+
 ## Batch 1: the crisis texts (faith K2, stress summaries K3, the vantage pools, the besieged famine hook)
 
 Writers: `domain/dossier/faithReading.js` (observanceOf, faithLinesOf), `generators/stressNarrative.js` (RENDERERS,
