@@ -934,7 +934,11 @@ function labelOfHook(h) {
  * The engine sometimes emits severity as an array (`['minor', 'major']`),
  * a min/max object (`{ min: 'minor', max: 'major' }`), or just a string.
  * Without normalization, an array renders as "minormajor" because react-pdf
- * joins array children with no separator. Pick the strongest readable form.
+ * joins array children with no separator.
+ * ⛔ A RANGE IS NOT A RATING (the chair's ruling, R3-TABS second seat): a tension's
+ * record holds the template's list of severities, unresolved, so more than one
+ * severity is a range and NO word is returned (it was joined "minor / major");
+ * nothing is chosen for the reader. One severity returns that word.
  */
 function normSeverity(s) {
   if (s == null) return null;
@@ -942,14 +946,12 @@ function normSeverity(s) {
   if (Array.isArray(s)) {
     const parts = s.map(x => (typeof x === 'string' ? x : (x?.label || x?.value || ''))).filter(Boolean);
     if (parts.length === 0) return null;
-    if (parts.length === 1) return parts[0];
-    // "minor / major" reads correctly; the worst element is usually last
-    return parts.join(' / ');
+    return new Set(parts).size === 1 ? parts[0] : null;
   }
   if (typeof s === 'object') {
     if (s.label) return s.label;
     if (s.value) return String(s.value);
-    if (s.max && s.min && s.max !== s.min) return `${s.min} / ${s.max}`;
+    if (s.max && s.min && s.max !== s.min) return null;
     if (s.max) return s.max;
     if (s.min) return s.min;
     if (s.level) return s.level;

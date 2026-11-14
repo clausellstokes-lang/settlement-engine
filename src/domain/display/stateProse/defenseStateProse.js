@@ -100,6 +100,7 @@ import { magicWorksAt } from '../../worldPulse/magicWorksAt.js';
 import { deriveMagicReliance, magicDialAbsent } from '../../magicReliance.js';
 import { SMALL_TIERS, TOWN_PLUS_TIERS } from '../../../data/constants.js';
 import { scoreBand } from '../defenseScoreBands.js';
+import { readinessBandOf } from '../../../data/bandLadders.js';
 import { DEFENSE_STRESS_STATUS } from '../defenseDisplay.js';
 import { migrationDirectionOfEntry, migrationDirectionOfStress } from '../../migrationDirection.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../../data/dossierStateProse/defense.generated.js';
@@ -114,6 +115,7 @@ import { wallsAnswered } from '../../defense/defenseFacts.js';
 import { crisisAnswered } from '../../crisis/crisisFacts.js';
 import { factsAnswered } from '../../facts/factsAnswered.js';
 import { corpusAdmittingCrimeLines, crimeLineFactsOf } from './crimeLineDisqualifiers.js';
+import { corpusAdmittingPostureLines } from './postureLineDisqualifiers.js';
 
 /**
  * The desk's corpus, typed at the import boundary — the generated leaves stay PURE DATA.
@@ -160,7 +162,9 @@ function properFill(value) {
   if (/[.!?]\s|[.!?]$/.test(value)) return undefined;
   if (/[0-9]/.test(value)) return undefined;
   if (/[a-z]+_[a-z]+/.test(value)) return undefined;
-  return /^[A-Z]/.test(value) ? value : undefined;
+  // L3 (R3-TABS): a capital in any script opens a proper name. `/^[A-Z]/` refused Ásey, Ögedeinuur and Ástun,
+  // and every line of this desk names `{settlement}`, so the whole desk fell silent in those towns.
+  return /^\p{Lu}/u.test(value) ? value : undefined;
 }
 
 /**
@@ -680,7 +684,7 @@ function chainArm(chainModifiers, arm) {
  * why a ruined citadel does not read here as standing walls.
  *
  * @param {{name?: string, config?: {monsterThreat?: unknown}|null, institutions?: unknown,
- *   defenseProfile?: {scores?: {economic?: unknown}|null, chainModifiers?: {military?: unknown, economic?: unknown}|null}|null,
+ *   defenseProfile?: {scores?: {economic?: unknown, military?: unknown}|null, chainModifiers?: {military?: unknown, economic?: unknown}|null}|null,
  *   economicState?: {compound?: {inst?: Record<string, unknown>}|null}|null}|null|undefined} settlement
  * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{beasts: object|null, invasion: object|null, internal: object|null,
@@ -697,6 +701,20 @@ export function defenseThreatProse(settlement, options = {}) {
   const walls = forces.walls.present;
   const garrison = forces.garrison.present;
   const militia = forces.militia.present;
+  // ⛔ L0 (R3-TABS; the chair's ruling of 2026-11-13): "NO FORCE" READS EVERY ARMED BODY. A town has
+  // no force only when it holds no garrison, no militia (the household levy is one), no watch and no
+  // contracted company; the projection already carries all four. Read from three of them, a town whose
+  // force was its watch was "walls and nobody to put on them" while its force cards printed the watch
+  // (79 walled and 41 unwalled watch-only births of 884 at 9e57f5023). For the invasion row a watch
+  // stands with the townspeople's pools and a contracted company with the paid professionals' pools.
+  // ⚠ ONE CELL THE CORPUS DID NOT WRITE, AND IT IS SILENT: an UNWALLED town whose only force is its watch.
+  // `militia only` names a militia ("The militia at … know every path"), which such a town lacks, and no
+  // other pool is true of it; the row says nothing there rather than round it into a neighbour (this
+  // desk's idiom, `beastsRowSituation`). The cell is the corpus lane's to write.
+  const watch = forces.watch.present;
+  const contracted = forces.mercenary.present;
+  const force = garrison || militia || watch || contracted;
+  const watchAloneUnwalled = !walls && watch && !garrison && !militia && !contracted;
 
   // ⭐ ROUTED THROUGH THE COMPOSER (SEAM car 3f), as is every entry point on this leaf. The
   // spine key is this desk's own key function and every bag is unchanged; the candidates
@@ -736,10 +754,10 @@ export function defenseThreatProse(settlement, options = {}) {
   };
 
   return Object.freeze({
-    beasts: rung(beastsRowPoolKey(settlement?.config?.monsterThreat, walls, garrison || militia)),
+    beasts: rung(beastsRowPoolKey(settlement?.config?.monsterThreat, walls, force)),
     invasion: rungWith(
-      invasionRowPoolKey(walls, garrison, militia),
-      defenceSupplyPoolKey(settlement?.defenseProfile?.chainModifiers, garrison || militia),
+      withinTheBar(watchAloneUnwalled ? null : invasionRowPoolKey(walls, garrison || contracted, militia || watch), dp.scores?.military),
+      defenceSupplyPoolKey(settlement?.defenseProfile?.chainModifiers, force),
     ),
     internal: rung(internalRowPoolKey(
       civicFlag(compound.hasCourtSystem), civicFlag(compound.hasPrison),
@@ -821,6 +839,45 @@ export const TERRAIN_DEFENCE_NAMES = Object.freeze(Object.keys(TERRAIN_DEFENCE_O
 export const TERRAIN_PRIZE_NAMES = Object.freeze(Object.keys(TERRAIN_PRIZE_OF));
 
 /**
+ * ⭐ L1, ONE LADDER FOR ONE NUMBER (R3-TABS; the chair's ruling of 2026-11-13). The posture line
+ * banded `readiness.score` on the aspects' ladder (`scoreBand`: 65/40/20) while the badge beside it
+ * bands the same score on the readiness ladder (`bandLadders.js :: readinessBandOf`: 76/55/38/24/12),
+ * so "Defensible" stood over "could not hold off a raid" and "Vulnerable" over "all but undefended"
+ * (the defence lane's fourth read, classes E and K). The line now reads the BADGE through its one
+ * home, `readinessBandOf` — the very label `readiness.label` holds (884 of 884 births at 9e57f5023):
+ * Fortress and Well-Defended read the strong pool, Defensible the adequate, Lightly Defended and
+ * Vulnerable the weak, Undefended the critical. No new words; all four pools kept.
+ * @type {Readonly<Record<string, string>>}
+ */
+const POSTURE_POOL_OF_BADGE = Object.freeze({
+  Fortress: 'readiness STRONG',
+  'Well-Defended': 'readiness STRONG',
+  Defensible: 'readiness ADEQUATE',
+  'Lightly Defended': 'readiness WEAK',
+  Vulnerable: 'readiness WEAK',
+  Undefended: 'readiness CRITICAL',
+});
+
+/**
+ * ⛔ L2, THE SENTENCE IS DRAWN WITHIN THE BAND ITS BAR PRINTS (R3-TABS; the chair's ruling of 2026-11-13;
+ * the defence lane's fourth read, classes A1 and F). Where the Invasion & War bar reads Strong
+ * (`scoreBand(scores.military)`, the band the tab prints beside it), no sentence says an attacker walks in:
+ * the Invasion row's two no-force pools ("walls and nobody to put on them", "no line and no force") and the
+ * posture's weak and critical pools ("could not hold off a raid", "would struggle to hold", "all but
+ * undefended") are silent there. The bar and the badge stay; nothing is said against them.
+ * @type {ReadonlySet<string>}
+ */
+const AGAINST_A_STRONG_BAR = new Set([
+  'Invasion & War: walls with NO force', 'Invasion & War: neither walls nor force',
+  'readiness WEAK', 'readiness CRITICAL',
+]);
+/** @param {string|null} poolKey @param {unknown} militaryScore @returns {string|null} */
+function withinTheBar(poolKey, militaryScore) {
+  const strong = typeof militaryScore === 'number' && Number.isFinite(militaryScore) && scoreBand(militaryScore) === 'STRONG';
+  return poolKey && strong && AGAINST_A_STRONG_BAR.has(poolKey) ? null : poolKey;
+}
+
+/**
  * DS-DEF-1 lens 1 — THE READINESS BAND.
  *
  * ⭐ Reads `defenseProfile.readiness.score`, NOT `avgScore(scores)`. See the header: the
@@ -832,8 +889,8 @@ export const TERRAIN_PRIZE_NAMES = Object.freeze(Object.keys(TERRAIN_PRIZE_OF));
  */
 export function posturePoolKey(readinessScore) {
   if (typeof readinessScore !== 'number' || !Number.isFinite(readinessScore)) return null;
-  const key = `readiness ${scoreBand(readinessScore)}`;
-  return CORPUS['DS-DEF-1'].pools[key] ? key : null;
+  const key = POSTURE_POOL_OF_BADGE[readinessBandOf(readinessScore).label];
+  return key && CORPUS['DS-DEF-1'].pools[key] ? key : null;
 }
 
 /**
@@ -876,9 +933,10 @@ export function strategicPrizePoolKey(terrain) {
  * against the registry. Reasoning about which fields "feel" DM-editable is how the
  * overwrite gets written.
  *
- * @param {{name?: string, defenseProfile?: {readiness?: {score?: unknown}|null}|null,
+ * @param {{name?: string, defenseProfile?: {readiness?: {score?: unknown}|null, scores?: {military?: unknown}|null}|null,
  *   resourceAnalysis?: {terrain?: unknown}|null,
- *   economicState?: {safetyProfile?: {guardEffectivenessDesc?: unknown}|null}|null
+ *   economicState?: {safetyProfile?: {guardEffectivenessDesc?: unknown}|null}|null,
+ *   stress?: unknown, institutions?: unknown
  *   }|null|undefined} settlement
  * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{posture: object|null, terrain: object|null, prize: object|null}>}
@@ -892,10 +950,10 @@ export function defensePostureProse(settlement, options = {}) {
   // reader so this desk cannot spell the path differently from the registry that declares it.
   const dmField = readProsePath(settlement, DM_FIELD_FRAMED_BY_BLOCK['DS-DEF-1']);
 
-  /** @param {string|null} poolKey */
-  const projected = (poolKey) => {
+  /** @param {string|null} poolKey @param {typeof CORPUS} [corpus] */
+  const projected = (poolKey, corpus = CORPUS) => {
     if (!poolKey) return null;
-    const line = composeStateProse(CORPUS, 'DS-DEF-1', {
+    const line = composeStateProse(corpus, 'DS-DEF-1', {
       ...options,
       slots,
       spineKey: poolKey,
@@ -908,7 +966,9 @@ export function defensePostureProse(settlement, options = {}) {
   };
 
   return Object.freeze({
-    posture: projected(posturePoolKey(settlement?.defenseProfile?.readiness?.score)),
+    posture: projected(withinTheBar(
+      posturePoolKey(settlement?.defenseProfile?.readiness?.score), settlement?.defenseProfile?.scores?.military,
+    ), corpusAdmittingPostureLines(CORPUS, settlement)),
     terrain: projected(terrainDefencePoolKey(terrain)),
     prize: projected(strategicPrizePoolKey(terrain)),
   });
@@ -1787,13 +1847,22 @@ export function navalDefensePoolKey(navy, port, blockaded) {
 }
 
 /**
+ * ⛔ THE ROUTE IS THE HOME OF "THIS IS A PORT" AND OF WHICH WATER IT STANDS ON (the chair's ruling to
+ * R3-TABS-2, 2026-11-14, "the port's two homes"). Every naval pool speaks of the SEA (its approaches, a
+ * harbour mouth, a fleet), and the key was offered wherever the roster's docks set `hasPort`: 61 river-route
+ * towns of the 720 and the 144 fresh births read "… has a harbour and nothing to hold it with; any vessel
+ * that wants the sea approaches has them". A naval line is now offered only where the route is the sea
+ * (`tradeRouteAccess` 'port', and the one water reading `waterAccessKind` says maritime, so an inland river
+ * port stays silent too); on a river or any other route the key offers nothing (the pool holds no line true
+ * of a river landing). A record with no config reads as before (A-11).
  * @param {{ config?: { terrainType?: unknown, tradeRouteAccess?: unknown } | null } | null | undefined} settlement
- * @returns {boolean} the record's own config says there is no water
+ * @returns {boolean} the record's own route is the sea (or the record carries no config)
  */
-const dryRecord = (settlement) => {
+const seaRoute = (settlement) => {
   const config = settlement?.config;
-  if (!config || typeof config !== 'object') return false;
-  return waterAccessKind(/** @type {string | null | undefined} */ (config.terrainType), /** @type {string | null | undefined} */ (config.tradeRouteAccess)) === 'none';
+  if (!config || typeof config !== 'object') return true;
+  return text(config.tradeRouteAccess) === 'port'
+    && waterAccessKind(/** @type {string | null | undefined} */ (config.terrainType), /** @type {string | null | undefined} */ (config.tradeRouteAccess)) === 'maritime';
 };
 
 /**
@@ -1840,7 +1909,7 @@ export function defenseSupportingProse(settlement, options = {}) {
     // override seats aerial docks in a dry city, which set `hasPort`; the port flag now also needs
     // `waterAccessKind` not 'none' (a record with no config reads as before).
     naval: rung(navalDefensePoolKey(
-      civicFlag(compound.hasNavy), civicFlag(compound.hasPort) && !dryRecord(settlement),
+      civicFlag(compound.hasNavy) && seaRoute(settlement), civicFlag(compound.hasPort) && seaRoute(settlement),
       stockpile ? stockpile.blockaded === true : false,
     )),
   });
