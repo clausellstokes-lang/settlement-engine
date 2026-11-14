@@ -825,7 +825,7 @@ the access.
 3. `[visitor · no crisis · market]` Nothing about {settlement} looks rich or poor: the {access} is busy enough, the market is open, and nobody is building or selling up.
 
 **COMBINATION C4: a low rung on a working approach**
-1. `[ledger · no crisis: under_siege]` Traffic moves along {settlement}'s {access} every day, and little of its money stays behind.
+1. `[ledger · no crisis: under_siege · no crisis: plague_onset]` Trade comes and goes by {settlement}'s {access}, and the town stays poor all the same.
 2. `[street · no crisis: under_siege]` Some trade comes past {settlement}, and little of it stops. The town is poor, and its people say so to anyone who asks.
 3. `[visitor · market · no crisis: under_siege]` {settlement}'s market sells little, though the {access} is busy; most of the traffic does not stop, and the traders here are poor.
 4. `[ledger · crisis: under_siege]` With the siege closing every way in, {settlement} has lost even the little that passing trade used to leave behind.

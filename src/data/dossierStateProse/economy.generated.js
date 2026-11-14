@@ -126,9 +126,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "no crisis: under_siege"
+            "no crisis: under_siege",
+            "no crisis: plague_onset"
           ],
-          "text": "Traffic moves along {settlement}'s {access} every day, and little of its money stays behind.",
+          "text": "Trade comes and goes by {settlement}'s {access}, and the town stays poor all the same.",
           "slots": [
             "settlement",
             "access"

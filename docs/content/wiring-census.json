@@ -11977,6 +11977,7 @@
       "lineDeclares": {
         "crisis: under_siege": 3,
         "market": 1,
+        "no crisis: plague_onset": 1,
         "no crisis: under_siege": 4,
         "no market": 1
       },
