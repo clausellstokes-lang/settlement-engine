@@ -129,6 +129,8 @@ const GUARDS = [
   { seed: 'w5-town-occupied-3', pool: 'DS-DEF-1::readiness ADEQUATE', vid: 1, why: 'an occupation: "covered against what it is likely to face" of a town already taken (v3\'s sibling) (W2-WRITE-11)' },
   { seed: 'w5-city-occupied-104', pool: 'DS-DEF-1::readiness ADEQUATE', vid: 2, why: 'an occupation: "looks defended in the ordinary way: enough for the usual trouble" of an occupied city (v3\'s sibling) (W2-WRITE-11)' },
   { seed: 'w5-city-occupied-2', pool: 'DS-DEF-1::readiness ADEQUATE', vid: 4, why: 'an occupation: "has enough for the usual trouble and nothing spare" of an occupied city (v3\'s sibling) (W2-WRITE-11)' },
+  { seed: 'w5-city-occupied-1', pool: 'DS-DEF-8::override active, viability intact', vid: 3, why: 'an occupation: "A visitor ... would not guess at the trouble from the streets" beside the occupiers\' checkpoints and curfew (BAR-0 #203, Longyuan)' },
+  { seed: 'rww-town-occupied-1', pool: 'DS-DEF-8::override active, viability intact', vid: 2, why: 'an occupation: "the defence makes do with what is left over" of a defence the occupiers hold ("the arms in the town are theirs")' },
 ];
 
 /** @param {string} seed */

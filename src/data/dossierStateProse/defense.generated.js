@@ -7558,12 +7558,18 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: occupied"
+          ],
           "text": "Life in the town goes on through the crisis: people work, eat and sleep, and the defence makes do with what is left over.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "visitor",
+          "marks": [
+            "no crisis: occupied"
+          ],
           "text": "A visitor to {settlement} would not guess at the trouble from the streets; the town is shaken but standing.",
           "slots": [
             "settlement"

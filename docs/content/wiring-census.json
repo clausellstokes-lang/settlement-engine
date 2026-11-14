@@ -9430,7 +9430,9 @@
         "stateOrgan": true
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "no crisis: occupied": 2
+      },
       "undeclared": 0,
       "crisisScoped": false
     },

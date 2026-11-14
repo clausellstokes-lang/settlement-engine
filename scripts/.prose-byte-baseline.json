@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 263069,
-      "gzip": 35199,
+      "raw": 263205,
+      "gzip": 35213,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -643,6 +643,14 @@
       "toRaw": 263069,
       "gzipAfter": 35199,
       "reason": "+272 B raw over the committed 262797 (gzip level 9: 35196 -> 35199): DS-DEF-1 readiness ADEQUATE v1-v4 + no crisis: occupied"
+    },
+    {
+      "car": "W2-WRITE-12 #203",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 263069,
+      "toRaw": 263205,
+      "gzipAfter": 35213,
+      "reason": "+136 B raw over the committed 263069 (gzip level 9: 35199 -> 35213): DS-DEF-8 v2 v3 gain no crisis: occupied"
     }
   ],
   "ceilingTransfersNewLeaves": [
