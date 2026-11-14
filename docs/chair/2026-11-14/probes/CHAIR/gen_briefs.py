@@ -1991,7 +1991,7 @@ READERS['REVIEW-R3-CODE-C'] = dict(
 
 READERS['REVIEW-R2-CODE-B'] = dict(
     title="REVIEW-R2-CODE-B · round two's second code lane read from its last read to its final statement",
-    lane='lane/r2-code-b-2026-11-13', own='lane/review-r2-code-b-2026-11-14', base='80b96017', tip=None,
+    lane='lane/r2-code-b-2026-11-13', own='lane/review-r2-code-b-2026-11-14', base='80b96017', tip='ac8168c8',
     what=("round two's second code lane: the Tonight sheet, the cast cards, the crisis cast and hooks, the NPCs, Relationships, Services and Daily Life tabs, "
           "the chain card's facts, the quick guide, the traditions, the faith reading and the stress summaries"),
     before="the tip the last reader read: NOT CLEAR there on one medium and one low finding: check each cured",
@@ -1999,7 +1999,12 @@ READERS['REVIEW-R2-CODE-B'] = dict(
     extra=("8. THE STAGE IS LARGE (some forty-seven commits touching src/, a side branch of the lane's own merged in among them): spread step 1 over helper "
            "agents of your own, by file family, and check a sample of each; say at step 1's push how many lines you listed. The lane's statement names "
            "eighteen literals and one reader's row that stay RED AND NAMED for a declaration pass after the join (lines gated in code, not declared "
-           "through a draw door): for EACH, read it where it prints: is it true wherever its gate lets it print? A false one is a finding of the stage."),
+           "through a draw door): for EACH, read it where it prints: is it true wherever its gate lets it print? A false one is a finding of the stage. "
+           "9. THE LANE'S ACCOUNT IS ITS HAND-BACK'S PARTS 5 TO 9 AS THEY STAND (each seat's items with commits and counts): a successor seat "
+           "is composing the one final statement, re-measuring the draft shift record and rebuilding the edge bundles WHILE YOU READ, with no "
+           "change under src/ after ac8168c8: if `git diff --stat ac8168c8..origin/lane/r2-code-b-2026-11-13 -- src/` prints anything when you "
+           "write your verdict, say so in one line. THE NINTH SEAT'S TWO CURES ARE INSIDE YOUR STAGE: a temporary person minted WHOLE (57 towns "
+           "of the 720 mint one: read the person where it prints) and the plague hook's slot reading its holder's role (8 towns)."),
 )
 
 READERS['REVIEW-R2-CODE-A'] = dict(
@@ -3442,6 +3447,48 @@ SEATS2['W2-WRITE-11'] = dict(
           "(the owner's veto list, and the next reader's); the table of counts; what is left, line by line; how the instruments are re-made.\n" + CORPUS2),
     merges='',
     when="for a stop that blocks everything you have left, at step 3 (the tip; each row's count before and after), and with your hand-back",
+    turns='',
+)
+
+
+SEATS2['R2-CODE-B-10'] = dict(
+    title="R2-CODE-B-10 · round two's second code lane: the statement composed, the record re-measured, the bundles (nothing under src/)",
+    branch='lane/r2-code-b-2026-11-13', tip='ac8168c8', statement=True,
+    intro=("You are R2-CODE-B-10, the tenth seat on round two's second code lane of the settlement-engine integration program (lane/r2-code-b-2026-11-13). "
+           "EVERY CURE OF THE LANE IS MADE (the ninth seat: the temporary person minted whole; the plague hook's slot reading its holder's role) and "
+           "the census and the field diff are taken at the tip. WHAT IS LEFT IS PAPER AND TWO RUNS: the draft shift record re-measured, the touched "
+           "tests at both trees, the declaration rows worded, the edge bundles, and the lane's ONE final statement. A FRESH READER IS READING THE "
+           "LANE AT ac8168c8c WHILE YOU WORK: so NOTHING UNDER src/ IS YOURS TO CHANGE in steps 1 to 5. THE TENTH SEAT OF A LANE MUST NOT SPEND ITS "
+           "COUNT ON READING: open only what this brief names."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/R2-CODE-B-HANDBACK.md, BY LINE RANGE, BY SCRIPT (open ONLY these): PART 9 WHOLE (from the line "
+          "\"# PART 9\" to the end: the ninth seat's items, its census and field diff at the tip, FOR THE JOIN, \"HAND BACK\": WHAT IS LEFT, line by "
+          "line: THAT IS YOUR LIST; the instruments). From PART 8: its HAND BACK item 4 (the declaration rows as the chair re-ruled them) and "
+          "\"Step 4: THE DRAFT SHIFT RECORD\". PART 8's step 5 (the gathering, two hundred very long lines) is NOT read: it is copied into the "
+          "statement by script."),
+    work=("THE WORK, in this order, pushed as made (steps 1 to 5 change NOTHING under src/):\n"
+          "1. THE DRAFT SHIFT RECORD RE-MEASURED at the tip (docs/chair/2026-11-13/R2-CODE-B-shift-record.DRAFT.json: the goldens and pins of class "
+          "(a) moved again with the mint: run the registered surfaces as files at ac8168c8c and at the line's tip 976db5b19; every surface MOVED or "
+          "UNMOVED by measure; the pins' new figures named, not re-keyed: signing and the measured pins are the merge seat's).\n"
+          "2. THE TEST FILES THAT NAME THE FILES THE NINTH SEAT TOUCHED, at ac8168c8c and at 30ed925ee (JSON, to files): no red new on its commits; a "
+          "red new is read and named with its cause (a cure under src/ is NOT yours: one message to the chair).\n"
+          "3. THE STATEMENT'S ROWS FOR THE DECLARATION PASS, worded as the chair re-ruled (PART 8's item 4 gives it whole): each of the fifteen "
+          "quick-guide hits: a replace()'s first argument or its second; a SHAPE ROW where the frame's member already declares the atom; else the "
+          "code condition and the atom. The fact-layers reader's row: both contents. Read the fifteen literals in the file itself, by line.\n"
+          "4. THE EDGE BUNDLES (`npm run build:edge-shared` in a checkout with ITS OWN node_modules: a symlinked one leaks paths into them), "
+          "committed alone if they differ; the three edge titles re-run.\n"
+          "5. `node scripts/implementation-packets.mjs validate`, its exit; THE LANE'S ONE FINAL STATEMENT in the form below, COMPOSED from PARTS 6 "
+          "to 9 and PART 8's gathering copied by script (the base is e969a75b7; the stage a reader has not read begins at 80b960171; the whole "
+          "suite's classing is the seventh seat's, brought current by the eighth's and ninth's cures: the whole suite is NOT run); ONE message to "
+          "the chair: the tip, the reds by class, where the statement is; and one line: `git diff --stat ac8168c8c..HEAD -- src/` prints nothing.\n"
+          "6. ONLY IF YOUR COUNT IS THEN UNDER 250,000: THE LANE GOES ON CURING (a stage after the statement; src/ is yours again from here): the "
+          "bar's rows for this lane (`git fetch origin lane/chair-2026-11-08`; `git show "
+          "origin/lane/chair-2026-11-08:docs/chair/2026-11-14/bar-0-rows/BAR-0-ROWS-r2b.json`, with the README.md beside it: five MEDIUM rows; the "
+          "towns re-born by the probes on origin/lane/review-bar-0-2026-11-14, docs/chair/2026-11-14/probes/REVIEW-BAR-0/): each read in its town "
+          "at your tip, counted on your births, cured widest first, one cause a commit, each line read where it prints (three towns, a crisis "
+          "among them), listed in the hand-back under a heading of its own."),
+    merges='',
+    when="for a stop that blocks everything you have left, for a red new on the ninth seat's commits (step 2), and with your final statement or hand-back",
     turns='',
 )
 
