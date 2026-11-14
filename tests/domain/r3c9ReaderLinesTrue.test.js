@@ -22,6 +22,13 @@
  *   row only where a brewer (a Brewery or Brewer) stands on the roster. r2r-town-24 (town of 423): "bread, beer, animal
  *   feed · Complete production chain in place" with Inns and Taverns and no brewer.
  *
+ * n15 · the governance account (domain/display/governanceAccount.js, composed on display) names the powers that have
+ *   broken with the hall and what that costs it. A criminal row at the adversarial capture rung is the hall hunting a
+ *   rival it is beating (factionDynamics.js :: govCriminalRelation; the Power tab's "works against {ruler}, and {ruler}
+ *   is winning", dmPowerLines.js): it is not a power that "no longer takes its orders", and the hall's orders hold.
+ *   Shankou (bar0-metropolis-calm-rand-1): "It can no longer make its orders hold alone, though the hall still gives
+ *   them." beside Ducal Governorship 30 (Strong) and the Thieves' Guild 8 (Suppressed).
+ *
  * The towns are born as the reader's probes bear them (REVIEW-R3-CODE-C births.mjs :: cfgFor; the bar's towns by
  * REVIEW-BAR-0 render.bar0.jsx :: cfgFor, the rr pattern). Each arm collects first and asserts on the collection, and
  * asserts that it saw its line print (a guard that never sees its line proves nothing).
@@ -31,6 +38,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { foodwaysLineOf, sourcesNamedIn } from '../../src/domain/foodways.js';
+import { governanceAccountOf, governanceStressTypesOf } from '../../src/domain/display/governanceAccount.js';
 import { faithLinesOf, faithReadingOf } from '../../src/domain/dossier/faithReading.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -68,6 +76,9 @@ const NO_SAY = 'have no say in the hall';
 /** The beer towns: grain rows with no brewer standing (an occupied town among them), and towns whose brewer stands. */
 const NO_BREWER_TOWNS = ['r2r-town-24', 'r2r-town-2', 'r2s-occupied-town-1', 'rr3-town-wartime-rand-5', 'rr3p-city-calm-rand-0'];
 const BREWER_TOWNS = ['r2r-town-39', 'r2r-city-1', 'r2r-metropolis-3'];
+/** n15's towns: Shankou, and towns whose only competitive tie with the hall is the adversarial criminal rung. */
+const HUNTED_TOWNS = ['bar0-metropolis-calm-rand-1', 'r2r-town-58', 'r2r-city-12', 'r2r-metropolis-10'];
+const HOLD_ALONE = /make its orders hold alone|can no longer make them hold alone/;
 /** @param {any} s */
 const brewerStands = (s) => (s.institutions || []).some((/** @type {any} */ i) => /^brew/i.test(String(i?.name || '')));
 /** @param {any} s */
@@ -80,6 +91,7 @@ const stoppedBy = (failed) => (failed === 'grain' || failed === 'mill' ? ['grain
 /** @type {Array<any>} */ let calmTowns = [];
 /** @type {Array<any>} */ let faithTowns = [];
 /** @type {Array<any>} */ let noBrewerTowns = [];
+/** @type {Array<any>} */ let huntedTowns = [];
 /** @type {Array<any>} */ let brewerTowns = [];
 beforeAll(async () => {
   await loadGenerationLawPayloads();
@@ -88,6 +100,7 @@ beforeAll(async () => {
   faithTowns = FAITH_TOWNS.map(bear);
   noBrewerTowns = NO_BREWER_TOWNS.map(bear);
   brewerTowns = BREWER_TOWNS.map(bear);
+  huntedTowns = HUNTED_TOWNS.map(bear);
 }, 180000);
 
 describe('n80: the foodways line names no source the famine failed', () => {
@@ -154,5 +167,19 @@ describe('beer: a grain row lists beer only where a brewer stands', () => {
   it('where a brewer stands, the grain row still lists beer', () => {
     const seen = brewerTowns.map((s) => ({ town: s.name, brewer: brewerStands(s), beer: grainRows(s).some((/** @type {any} */ e) => /\bbeer\b/.test(e.product)) }));
     expect(seen.map((t) => [t.brewer, t.beer])).toEqual(BREWER_TOWNS.map(() => [true, true]));
+  });
+});
+
+describe('n15: a hunted underworld the hall is beating is not said to break its orders', () => {
+  it('the account names no such rival and says no cost of it', () => {
+    const seen = huntedTowns.map((s) => {
+      const text = governanceAccountOf(s, { primaryStress: governanceStressTypesOf(s)[0] ?? null })?.text || '';
+      const gov = s.powerStructure.factions.find((/** @type {any} */ f) => f.isGoverning)?.faction;
+      const hunted = (s.powerStructure.factionRelationships || []).filter((/** @type {any} */ r) => r.pair.includes(gov) && r.captureState === 'adversarial');
+      return { town: s.name, hunted: hunted.length, account: text.length, holdAlone: HOLD_ALONE.test(text), noOrders: hunted.some((/** @type {any} */ r) => text.includes(`${r.pair.find((/** @type {string} */ n) => n !== gov)} no longer takes its orders`) || text.includes(`${r.pair.find((/** @type {string} */ n) => n !== gov)} takes its orders no longer`)) };
+    });
+    // The arm reads towns whose hall hunts an underworld at the adversarial rung, and an account in each.
+    expect(seen.filter((t) => !t.hunted || !t.account)).toEqual([]);
+    expect(seen.filter((t) => t.holdAlone || t.noOrders)).toEqual([]);
   });
 });
