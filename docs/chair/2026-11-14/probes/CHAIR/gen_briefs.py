@@ -2121,6 +2121,31 @@ READERS['REVIEW-W2-WRITE-2'] = dict(
 
 
 # Filled when the lane is final: set 'tip' to the lane's final tip as read from origin, then generate.
+READERS['REVIEW-R3-TABS-2'] = dict(
+    title="REVIEW-R3-TABS-2 · round three's tabs lane: the cure of its first read's findings, and the steps that read left",
+    lane='lane/r3-tabs-2026-11-13', own='lane/review-r3-tabs-2-2026-11-14', base='bb2bf91c', tip=None,
+    what="round three's tabs lane: cures at display on the Defense, History, Substrate and Magic tabs; the lane moves no record",
+    before=("the tip the first reader read: NOT CLEAR there on one high and two medium findings of the stage's own (F1 to F3), with F6 to F8 beside "
+            "them: a cure seat answered each under the chair's rulings: check each cured AND what prints in its place true"),
+    stmt='docs/chair/2026-11-13/R3-TABS-HANDBACK.md (the part headed THE FOURTH SEAT)',
+    tools=("`origin/lane/review-r3-tabs-2026-11-14` (cca967fac: `git fetch origin lane/review-r3-tabs-2026-11-14`): "
+           "docs/chair/2026-11-14/REVIEW-R3-TABS-2026-11-14.md (the first read: its findings, each of which you check cured; WHAT IS LEFT) and "
+           "REVIEW-R3-TABS-LINES-READ.md, and its probes under docs/chair/2026-11-14/probes/REVIEW-R3-TABS/ (births.mjs with seeds1536.txt, render.sh, "
+           "desk.mjs, deskdiff.mjs, fielddiff.mjs: copy them out with git archive and run them from outside every repository tree: the SAME 1,536 "
+           "births make your counts comparable with the first read's)."),
+    extra=("8. THE FIRST READER RAN STEPS 1, 2 AND 8 ON THE LANE'S WHOLE STAGE (aac79b808 to bb2bf91c5) AND HANDED BACK AT ITS COUNT: ITS STEPS 3 TO 7 "
+           "ARE YOURS, ON THE WHOLE LANE STAGE (aac79b808 to your tip), not only on the cure's range: the field diff and the draft shift record; a "
+           "plant for each guard the lane added (does any red on the first reader's F1?); the remerge diffs of the lane's merges of the line and each "
+           "register it touched re-derived by its own door; the gates; the measuring seat's command at aac79b808 and at your tip. 9. THE CURE SEAT "
+           "WORKED TO THESE RULINGS OF THE CHAIR (judge the cure against them; say where you would rule differently): the strong posture pool is "
+           "struck under an occupation and never drawn beside a Weak or Critical Invasion & War bar, nor beside a guard assessment that \"exists on "
+           "paper\"; a variant naming works reads the walls; A WATCH IS NOT THE TOWNSPEOPLE IN ARMS: the citizen-militia pools and the beasts row's "
+           "held-perimeter lines no longer take a watch-only town, whose row is SILENT unless a true line exists (read the rendered row: no "
+           "dangling label; and say how many towns are silent: the corpus owes that cell a pool); the supply line is not drawn under a siege or a "
+           "famine; the Plot Hooks tab's twin of the History rename. A CURE BY SILENCE IS READ TOO: thirty of the towns a line left: was it false "
+           "there?"),
+)
+
 READERS['REVIEW-R3-TABS'] = dict(
     title="REVIEW-R3-TABS · round three's tabs lane read whole, from its base to its final statement",
     lane='lane/r3-tabs-2026-11-13', own='lane/review-r3-tabs-2026-11-14', base='aac79b80', tip='bb2bf91c',
@@ -3238,6 +3263,75 @@ SEATS2['W2-C-LEAVES-10'] = dict(
           "stage after it). Then ONE message to the chair: the tip, each item's outcome."),
     merges='',
     when="for a stop that blocks everything you have left, for a finding at item 1 (a true line silenced), and with your final tip (each item's outcome)",
+    turns='',
+)
+
+
+SEATS2['UPKEEP-13'] = dict(
+    title="UPKEEP-13 · the defence rating made monotone: the measured cures built on a side branch (a house never lowers a score)",
+    branch='lane/upkeep-monotone-2026-11-14', checkout='lane/coherence-upkeep-2026-11-12', tip='26474cda', statement=False,
+    intro=("You are UPKEEP-13, a builder seat of the settlement-engine integration program. The defence lane (lane/coherence-upkeep-2026-11-12) holds "
+           "the derived defence rating: readiness is a list of parts and their sum (the owner's design). An independent reader showed that, as built, "
+           "ADDING A HOUSE CAN LOWER A SCORE (an Alchemist shop lowers Economic in 125 of 972 births) and that a house on no ladder outweighs a "
+           "ladder's least rung. A measuring seat reproduced it, measured the cures and showed them: ALL TOGETHER THEY LEAVE ZERO FALLS in 972 births. "
+           "THE CHAIR HAS RULED ON ITS TABLES. YOURS: THE BUILD, exactly as measured, on a SIDE BRANCH of your own "
+           "(lane/upkeep-monotone-2026-11-14, cut from the defence lane's tip by your first push), because another seat (UPKEEP-12) is curing what "
+           "the page SAYS on the lane itself at the same time. YOUR CHECKOUT IS THE DEFENCE LANE, READ ONLY: you never push to it."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. THE MEASURE (`git fetch origin lane/upkeep-measure-2-2026-11-14`; `git show "
+          "origin/lane/upkeep-measure-2-2026-11-14:docs/chair/2026-11-14/UPKEEP-MONOTONE-MEASURE.md`): WHOLE (276 lines: the first page; the causes "
+          "traced; each candidate measured; P3's table of thirteen houses; P4; the owner's example and the eight towns; every number and word; what "
+          "was not measured; how every figure is re-made) and its probes and patches under docs/chair/2026-11-14/probes/UPKEEP-MEASURE-2/ (the README; "
+          "patches/*.patch: the candidates as measured; mono2.mjs: the monotonicity probe; the corpus scripts): copy them out with git archive; run "
+          "them from outside every repository tree.\n"
+          "3. THE CODE YOU CHANGE, EACH READ WHOLE, ONCE, before you change it: src/generators/defenseGenerator.js, src/data/defenceWeights.js, "
+          "src/domain/institutions/defenseInstitutionBuckets.js and the house-scale file the measure names.\n"
+          "4. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (the section headed \"## 2m.\"; by script), before the first "
+          "register you touch."),
+    first=("FIRST ACT. Read the defence lane's tip back from origin: it was 26474cda when this was written. A later tip by UPKEEP-12 is NOT a stop: cut "
+           "your branch from the tip you read and say which. YOUR OWN BRANCH, THE SAFE WAY: do not commit in the checkout while it stands on the "
+           "lane's branch: `git worktree add -b lane/upkeep-monotone-2026-11-14 <scratch>/own <that tip>`, work there, `git add` files BY NAME, plain "
+           "commits, and, alone, `git push origin lane/upkeep-monotone-2026-11-14:refs/heads/lane/upkeep-monotone-2026-11-14`."),
+    work=("THE CHAIR'S RULINGS ON THE MEASURE (2026-11-14 08:58 UTC; each vetoable by the owner; copy them into your hand-back):\n"
+          "(1) P2: BUILD THE CHAIR'S CANDIDATE: the first limit held SCORE BY SCORE, and readiness's sustaining total held to the force on the "
+          "limit's own line. (2) P3: BUILD AS MEASURED: the thirteen houses placed as the measure's table places them. THE CROSS-LADDER ORDER it "
+          "names (a village's Weekly market above a town's Market square) is NOT built: NAMED, for a later measure. (3) P4: BUILD THE FORM, AT ONE "
+          "POINT A PERSON (the tuning row `people.milPerHead: 1`, with its reason row): \"Strong\" against an invasion then needs at least a "
+          "village's people; two points a person stays shown beside it for the owner. (4) X1 TO X5 AND X9: BUILT WITH P2 (without them the falls "
+          "are not zero). (5) P5: the score stands and the LINE moves: NOT YOURS (the display seat's). (6) SCOPE: a house of crime lowers order BY "
+          "DESIGN: the monotone law does not reach it; the six renames across a function or a government are not \"a larger house of its own "
+          "kind\": both LISTED in your hand-back, not cured.\n"
+          "THE WORK, in this order, ONE CAUSE A COMMIT, pushed as made:\n"
+          "1. THE GUARD FIRST, RED: the monotonicity law as a TEST of the lane (a collected arm over births, never a bare seed loop): for every "
+          "house of the reader's set added, and every rung raised, no score and no readiness falls. It is red at your base for the measured count; "
+          "say the count.\n"
+          "2. P2 WITH X1 TO X5 AND X9, each its own commit where the measure made them separable (the measure's patches are the form: READ each "
+          "hunk before you apply it; a hunk you would write differently is said, not silently changed); then P3; then P4. After each: the guard's "
+          "count; the lane's 3,756 births and the census's 720 against the previous commit: readiness moved, bands moved, the five scores' bands, "
+          "powers re-drawn, AI threats: BESIDE THE MEASURE'S OWN FIGURES for that candidate: a difference is explained or is a STOP.\n"
+          "3. THE PINS the build moves (tests/generators/defenceParts.test.js and their kin; the derived-rating walker "
+          "tests/lint/defenceDerived.walker.test.js must stay green: every number in the tuning table): re-keyed BY IDENTITY with their cause, never "
+          "loosened.\n"
+          "4. MERGE THE DEFENCE LANE'S TIP into your branch (a plain merge; UPKEEP-12's label cure: a town with walls or a force is never labelled "
+          "Undefended: it composes with P4, which lowers small places: the measure warns 464 -> 526 Undefended without it). A conflict in the "
+          "generator is resolved at the cause, both cures standing; a choice between two behaviours is a STOP. Then THE GUARD AT ZERO on the "
+          "reader's 972 births, and the final measure on the 3,756 and the 720.\n"
+          "5. ONE MESSAGE TO THE CHAIR (your branch's tip; the guard at zero; the bands moved against the measure's 214 of 3,756 and 44 of 720), "
+          "then THE COUNT.\n"
+          "6. THE DECLARATION AND THE REGISTERS: the build is a DECLARED MOVE of the defence profile and of what follows it (powers re-drawn, "
+          "legitimacy, AI threats, the persons, ties and quarrels a re-drawn power re-deals): its field diff by family on the 720, with counts; THE "
+          "TUNING INVENTORY by its own ritual on the clean committed tree (one row added; no other value moves); section 2m's five doors, each "
+          "exit; a red on your own lines cured or declared through its door; the registered golden surfaces run as files, for ONE draft shift "
+          "record named for the build. No whole suite; no golden's door in its writing mode.\n"
+          "7. FOR THE OWNER: docs/chair/2026-11-13/UPKEEP-CAPACITY-EIGHT-TOWNS.md, a new heading: each of the eight towns at your final tip in "
+          "the same plain words (the readiness figure and band word, the five scores; what moved and why, in the world's terms; no machinery), and "
+          "the shop against the quarter (the measure's section 3), and the one new number with what it means (\"a place's strength in war is "
+          "bounded by its people\") and the value shown beside it.\n"
+          "8. THE HAND-BACK: docs/chair/2026-11-14/UPKEEP-MONOTONE-BUILD.md on your branch: the rulings; each commit: its cause, its counts, its "
+          "pins; the guard; the final measure beside the measure seat's; the declared move; what is named and not built; what a fresh reader "
+          "needs. ONE message to the chair: the tip; the guard; the moved bands; the stops, if any."),
+    merges="; the merge INTO YOUR OWN BRANCH of the defence lane's tip (step 4)",
+    when="for a stop that blocks the build, for a figure that differs from the measure's and is not explained, at step 5 (the tip; the guard at zero; the bands moved), and with your hand-back",
     turns='',
 )
 
