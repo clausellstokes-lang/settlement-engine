@@ -182,3 +182,68 @@ Worked in a scratch worktree on the local branch `u15-own`, pushed by explicit r
   lane's to shrink), equal to its tip's (the build's one rise, cured above); observed shapes exit 1 and writer reach exit 1,
   each identical to the lane's tip (stale rows and stale bank members: the lane's; their doors' writing forms need a clean
   committed tree and the writer-reach door is NOT written: the chair banks it at the close). NOT MINE: FOR THE JOIN.
+
+### The final measure (EXECUTED; base: the defence lane's tip 9d48785a1 as merged; tip: this branch)
+Births by the measure's `born.mjs` (given a `NOREC` switch and hashes of the persons, ties and quarrels), at
+detached trees of 9d48785a1 and of 4204409ec, over the measure's corpus (3,756) and the reader's 972 (the census's
+720 = the 972 less rv5).
+| | the 3,756 | the census 720 | the 972 |
+|---|---|---|---|
+| readiness moved | 1,214 (249 up, 965 down) | 208 (21 up, 187 down) | 281 (45 up, 236 down) |
+| readiness bands moved | 153: thorp 70, town 56, hamlet 13, city 9, village 4, metropolis 1 | 31: town 15, thorp 11, hamlet 5 | 39 |
+| band moves | Lightly Defended -> Vulnerable 96; Defensible -> Lightly Defended 24; Well-Defended -> Defensible 12; Vulnerable -> Undefended 7; Lightly Defended -> Defensible 4; Well-Defended -> Fortress 4; Defensible -> Well-Defended 2; Fortress -> Well-Defended 2; Vulnerable -> Lightly Defended 2 | LD -> V 22; D -> LD 4; WD -> D 3; LD -> D 1; V -> LD 1 | |
+| the five scores' bands | 889 (military 380, economic 205, magical 196, internal 78, monster 30) | 166 (military 72, economic 40, magical 37, internal 11, monster 6) | 211 |
+| powers re-drawn | 94 | 21 | 27 |
+| persons / ties / quarrels re-drawn | 4 / 2 / 0 | 1 / 0 / 0 | 1 / 0 / 0 |
+| AI threats re-drawn | 176 | 39 | 48 |
+EVERY FIGURE EQUALS UPKEEP-13's ALL against its merged tip: no commit of UPKEEP-15 and not the merge moves a rating.
+The guard 0 on the 972; the made records 0 on 1,105,920 (printed and exact). The people's limit holds the war score
+of 425 thorps and hamlets of the 3,756 at their people.
+
+### The declaration
+- THE FIELD DIFF BY FAMILY on the 720 (records at both trees): `defenseProfile` 413 births (scores 277, readiness 208,
+  `institutions` 162: UPKEEP-13's declared magicDef row); `powerStructure` 21 (`publicLegitimacy` 21, factions 2, their
+  relationships 2); `simulationTrace` 19; `activeConditions` 12; `economicState.safetyProfile` 2; `npcs` 1; `stress` and
+  `stressors` (cast) 1. EVERY non-defence family moves ONLY on births whose defence scores or readiness moved (EXECUTED):
+  each is a reader of defence; no other family moves. No draw is added or moved.
+- THE TUNING INVENTORY by its ritual: one row, the people's measure. The register gained its unit (982eec996:
+  `people.milPerHead: multiplier`, as C1's 94c5d408f gave houseScale its units); the inventory refrozen at 982eec996
+  (5f3557110: DEFENCE_TUNING keys 33 -> 34; 280 tables, 539 named, 6,879 bare); the plain run 76 passed. Draft, the
+  owner's to sign.
+- THE LIGHTING CENSUS re-taken by its ritual (4204409ec: files 3,274 -> 3,279; titles 29,533 -> 29,541); plain run 34 passed.
+- SECTION 2m's DOORS, each exit (check forms; shrink forms only where a door would accept one):
+  presumed things exit 1 = the lane's tip (28 fresh, one strip: the lane's), no stale row of mine to shrink;
+  fact layers exit 1 = the lane's tip (5 rises: the lane's; so `--shrink` is refused there, and its 14 falls wait for
+  the lane); observed shapes exit 1 = the lane's tip (stale rows, the lane's); writer reach exit 1 = the lane's tip
+  (stale bank members: NOT written, the chair banks the door once, at the close); the twelve-birth grid 0 rises;
+  THE PAGE CENSUS over the 720 (`node scripts/census/page-census.mjs`): see the row below.
+  THE PAGE CENSUS over the 720, run at BOTH trees (EXECUTED): exit 1 at both. At the lane's tip 9d48785a1 it ROSE on P4
+  (96 banked, 98 now: '"three powers stand almost level" beside a leader far ahead') and NEW1 (11 banked, 12 now); at this
+  branch's tip only P4 rises (98), and NEW1 reads 11. Every other row is equal at the two trees. So P4's rise is THE
+  LANE'S (it stands at its tip), NOT this branch's; the build lowers NEW1 by one against the lane. No `--shrink` is run
+  (the door refuses while P4 stands risen). NAMED FOR THE JOIN: P4 at the lane's tip, the lane's to cure.
+- THE GOLDEN SURFACES as files (the kin run at fc328fccd): `tests/property/generatorGoldenMaster.test.js` ("every
+  config produces byte-identical output") and `tests/property/espionageDormancyFence.test.js` ("THE DRIVEN GOLDEN:
+  360 settlements") are RED: MOVED by the build (a declared move: the defence family and its readers, the table
+  above); red at the merged base b42be5de9 already (UPKEEP-13). Their doors' writing modes are NOT run (ruling (d)):
+  for one draft shift record, the signer's.
+
+### The statement (UPKEEP-15)
+THE LAW HOLDS: adding a house, or raising a house a rung, lowers no score and no readiness, on the reader's 972 births
+(the guard) and on 1,105,920 made changes (every crisis beside every relief, printed and exact). The one fall the brief
+named was NOT a fall (the chair's ruling (a)); the four other reds are traced and re-keyed by identity under the chair's
+rulings (b) and (c); the two goldens stay RED AND NAMED (d). After 8bd8e3078 ONE commit touches the arithmetic file and
+it moves no figure (90cc017e0, the Set of part ids; and 51c4c5033 / 9b7ef036b add readers only): THE BIRTHS IT MOVES:
+NONE, on the 3,756 and the 972 (the final measure equals UPKEEP-13's figures to the birth count).
+- Reds standing at this tip: the two goldens (d); and, the lane's own, equal at its tip: presumed things (28 fresh, one
+  strip), fact layers (5 rises), observed shapes, writer reach, the page census's P4.
+- THE LINES THAT NEWLY PRINT BECAUSE A BAND MOVED are THE READER'S to list (the 31 band moves and 166 score-band moves
+  of the 720 are the population): not listed here.
+- NAMED, NOT BUILT: as UPKEEP-13 named them (P3's cross-ladder order; P4's own word, PARKED; P5's lines, the display
+  seat's; the 13 criminal houses and six renames, outside the law by ruling).
+- WHAT IS LEFT: the reader's read of the build; the merge of this branch into the lane (a later seat, after the reader);
+  the writer-reach door (the chair, at the close); the goldens' signing and the tuning row's signature (the owner's).
+- Instruments (outside every tree; re-made from the measure's probes): `born.mjs` + NOREC and hashes of npcs,
+  relationships and conflicts; the summaries compared birth by birth; the eight towns by a probe that births each seed
+  at both trees and prints its scores, bands and parts (`defencePartsOf`); `dims`-style per-part dims by a debugging copy
+  of the generator exporting `computeDefenseScores`, removed after.
