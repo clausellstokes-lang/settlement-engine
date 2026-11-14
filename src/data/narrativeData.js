@@ -164,7 +164,7 @@ export const STRESS_DESCS = {
     { text: r =>
       `${r}'s gates are shut and barred. The guards on them are professional about it, which makes it worse: nobody comes near without being challenged, and nothing is let through. Professional means they expect this to last.`, needs: ['gate', 'guardPresence'] }, // R2-CODE-A-10 (the bar's HIGH #35): a siege's gates are shut; it said them open, every cart searched
     { text: r =>
-      `From outside, ${r} still seems itself: smoke from cookfires, a murmur from the square. It is the gate that gives it away: shut fast, the guards' faces set, their talk stopping dead when strangers come in sight.`, needs: ['gate', 'market', 'guardPresence'] }, // R2-CODE-A-10 (#35): not ordinary from a road its besiegers hold; R2-CODE-A-12 (L46): under a siege no line hears a market trading
+      `From outside, ${r} still seems itself: smoke from cookfires, a murmur from the square. It is the gate that gives it away: shut fast, the guards' faces set, their talk stopping dead when strangers come in sight.`, needs: ['gate', 'market', 'tier: ≥ town', 'guardPresence'] }, // R2-CODE-A-10 (#35): not ordinary from a road its besiegers hold; R2-CODE-A-12 (L46): under a siege no line hears a market trading; the square is a town's (every market town holds one; no village does)
     { text: r =>
       `The approach to ${r} is quieter than it should be for a settlement this size. The outlying farms are empty. The road has not been maintained recently. The settlement itself is intact, but everything around it has been abandoned to the walls.`, needs: ['walls'] },
     // CONTENT-GT-FINAL (Charge 4): every pool below grew +2. Selection is a single
@@ -383,8 +383,8 @@ export const STRESS_DESCS = {
       `The bells of ${r} ring twice for every hour: one set of chimes, then another from a different quarter, a beat later and out of tune. Nobody in the street looks up.`, needs: ['institution: temple', 'population: ≥ middling'] }, // R2-CODE-A-4 (CENSUS-2 c/quarters): a different quarter, at the middling band
     { text: r =>
       `The busiest work in ${r} is on its holy symbols: one set coming down, another going up, and the same three workmen paid for both. They no longer joke about it.`, needs: ['sacredHouse'] }, // R2-CODE-A-3 (the increment's ww-58): no mason's yard the roster cannot name (record 386 (3)); the symbols are a sacred house's
-    r =>
-      `${r} has two burial grounds now, one old and one new, and the town's grief is learning to sort itself accordingly. The gravedigger serves both and is the most carefully neutral man alive.`,
+    r => // R2-CODE-A-12 (ruling (3)): a count word reads the roster; no roster holds two burial houses here, so the rows are the graves'
+      `The dead of ${r} are buried in two rows now, the old faith's and the new, and the town's grief is learning to sort itself accordingly. Whoever digs the graves digs both, and is the most carefully neutral soul alive.`,
   ],
   slave_revolt: [
     { text: r =>

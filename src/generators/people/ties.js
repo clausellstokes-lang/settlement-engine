@@ -38,6 +38,7 @@ import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.
 import { random as _rng } from '../../kernel/rngContext.js';
 import { onStream, seatHouseOf, SEAT_CARD_ID } from './representatives.js';
 import { birthFactsOf } from '../../domain/facts/factsOf.js';
+import { sharesPower } from '../../domain/facts/sharedPower.js';
 import { tieArchetype } from '../npc/tieKind.js';
 import { styledTitleOf } from '../../data/faceHonorifics.js';
 
@@ -83,17 +84,10 @@ export function targetWeightOf(card) {
   return weight === 0 ? 0.5 : weight;
 }
 
-/** The powers a card belongs to. @param {Record<string, any>} card @returns {Set<string>} */
-const powersOf = (card) => new Set((Array.isArray(card?.memberships) ? card.memberships : [])
-  .map((m) => String(m?.power || '')).filter(Boolean));
-
-/** Whether two cards share a power (any membership in common). */
-export function sharesPower(a, b) {
-  const mine = powersOf(a);
-  if (!mine.size) return false;
-  for (const p of powersOf(b)) if (mine.has(p)) return true;
-  return false;
-}
+/** Whether two cards share a power (any membership in common): the shared-power home's own rule
+ * (`domain/facts/sharedPower.js`, R2-CODE-A-14, the chair's ruling (s1)), moved there verbatim so the
+ * target's weight here and the `shared power` atom a tie line declares are one reading; re-exported. */
+export { sharesPower };
 
 /**
  * THE TIES: one outgoing tie per card that has a peer, in roster order.

@@ -42,6 +42,15 @@ describe('under a siege in force the arrival hears no market trading', () => {
     expect(lines.filter((t) => MARKET_TRADING.test(t)), 'the siege pool').toEqual([]);
   });
 
+  // The chair (13:35): a line written for a town's size is not printed in a small place. "the square" is a town's: in
+  // the 3,048 every town, city and metropolis that holds a market holds a square, and no village does (142 market
+  // villages, none with one). The row is declared `tier: ≥ town` (0 of the 3,048 move).
+  it("the square's row is declared for a town or larger", () => {
+    const row = STRESS_DESCS.under_siege.find((l) => /a murmur from the square/.test(textOf(l)('Q')));
+    expect(row, 'the row').toBeTruthy();
+    expect(/** @type {any} */ (row).needs).toEqual(expect.arrayContaining(['market', 'tier: ≥ town']));
+  });
+
   // The reader's town, the smallest (a town of 667, with a famine) and the largest (a metropolis of 39,844, with a
   // famine) of the 18 that drew the row, and a city.
   it("the towns that drew the row open on the cookfires and the shut gate, and hear no market", () => {
