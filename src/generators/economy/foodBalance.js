@@ -789,7 +789,7 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
         severity: 'critical',
       });
     } else if (route !== 'isolated') {
-      hooks.push({
+      if (siegeCutsImports(config, foodBalance) || importHeld(facts, GRAIN_IMPORT)) hooks.push({ // R2-CODE-A-8 item 7 (ROUND-3-CUT #208): the importer names grain only where the record imports it
         category: siegeCutsImports(config, foodBalance) ? 'Hoarded Food' : 'Trade Monopoly',
         // CENSUS-3e (answer 2, R-V measured): `guild` at this step differs from the final record on
         // 25 of 1,000 births, so the hook presumes only the imports its branch guarantees.
@@ -894,4 +894,4 @@ function moderateGapGrade(facts) {
   if (severity === undefined) return {};
   return { category: FOOD_SECURITY_BANDS[/** @type {keyof typeof FOOD_SECURITY_BANDS} */ (band)].label, severity };
 }
-import { MODERATE_GAP_TWIN, OUTLOOK_HOOK_SIBLINGS } from './outlookHookSiblings.js'; export { OUTLOOK_HOOK_SIBLINGS }; // LANDING-R2 (ODQ §934.105): the outlook hooks' declared siblings moved verbatim to economy/outlookHookSiblings.js, re-exported; below every cited line, so none moves
+/** R2-CODE-A-8 item 7 (the chair's ruling: a line names an import or a source only where the record holds it): does the record's import list (`factsOf(…).imports`, the economic state's `primaryImports`) hold a good this pattern names? No facts (a direct caller): held, as resolveSibling keeps a line it cannot read. @param {object | (() => object) | null} facts @param {RegExp} pattern @returns {boolean} */ function importHeld(facts, pattern) { const f = /** @type {any} */ (typeof facts === 'function' ? facts() : facts); if (!f) return true; const list = Array.isArray(f.imports) ? f.imports : []; return list.some((/** @type {any} */ x) => pattern.test(typeof x === 'string' ? x : String(x?.name ?? ''))); } const GRAIN_IMPORT = /grain/i; import { MODERATE_GAP_TWIN, OUTLOOK_HOOK_SIBLINGS } from './outlookHookSiblings.js'; export { OUTLOOK_HOOK_SIBLINGS }; // LANDING-R2 (ODQ §934.105): the outlook hooks' declared siblings moved verbatim to economy/outlookHookSiblings.js, re-exported; below every cited line, so none moves
