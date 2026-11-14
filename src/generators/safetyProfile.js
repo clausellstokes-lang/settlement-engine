@@ -325,7 +325,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const lawRef  = inst.hasGarrison ? 'The garrison patrols' : inst.hasWatch ? 'The watch covers'
                   : inst.hasMilitia  ? 'Militia volunteers patrol' : 'Locals watch over';
     const wallNote = inst.hasWalls ? ' The walls keep the trouble inside, off the roads beyond.' : '';
-    safetyDesc = `A mix of safer and more exposed areas. ${lawRef} the main paths; quieter spots after dark carry genuine risk. ` +
+    safetyDesc = tiny ? `${TINY_MODERATE_LINE}${wallNote}` : `A mix of safer and more exposed areas. ${lawRef} the main paths; quieter spots after dark carry genuine risk. ` + // UPKEEP-14 (f): no areas, paths or corners in a thorp or hamlet
       `Residents know which corners to avoid.${wallNote}`;
   } else if (effectiveSafety >= 0.6) {
     safetyLabel = 'Unsafe';
@@ -1087,3 +1087,8 @@ import { GANG_HOUSES_OF, MERCHANT_ARMY_BESIDE, SMALL_PLACES, THEFT_NETWORK_DESC,
 
 /** The enforcement sentence the desperation-theft lines end on (UPKEEP-14, ruling (h)): dropped where no enforcer stands. */
 const ENFORCEMENT_STRUGGLES = ' Enforcement struggles to distinguish survival crime from organised theft.';
+
+/** UPKEEP-14 (the chair's ruling (f), the bar's #166 #218): a thorp's or a hamlet's Moderate line. Areas, main paths and
+ *  corners belong to a village or larger; a small place is Moderate by its community order (`communityOrderBonus`), and
+ *  this line says that, naming no force. */
+const TINY_MODERATE_LINE = 'The neighbours keep an eye on one another, and what trouble there is, everyone soon hears of.';
