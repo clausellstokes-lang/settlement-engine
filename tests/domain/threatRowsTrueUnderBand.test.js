@@ -24,6 +24,9 @@ const birth = (seed) => {
   return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: tier, selectedStresses: crisis === 'calm' ? [] : crisis.split('+'), selectedStressesRandom: false }), null, { seed, customContent: {} });
 };
 const rows = (s) => Object.fromEntries(deriveDefenseReadiness(s).map((r) => [r.label, r]));
+/** The census's shape (SECOND-WAVE-CENSUS births.mjs): r2r-<size>-<i>, every dial random. UPKEEP-12's guard towns. */
+const CENSUS_DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+const censusBirth = (seed) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...CENSUS_DIALS, settType: /^r2r-(\w+)-\d+$/.exec(seed)[1] }), null, { seed, customContent: {} });
 
 /** Each judging clause and the bands its words cannot stand under. */
 const FALSE_UNDER = [
@@ -59,10 +62,14 @@ describe('the law, over births of every size', () => {
   const seeds = ['thorp', 'hamlet', 'village', 'town', 'city'].flatMap((t) => Array.from({ length: 12 }, (_, i) => `rv2-calm-${t}-${i}`))
     .concat(['village', 'town'].flatMap((t) => [0, 1, 2, 3].map((i) => `rv2-under_siege-${t}-${i}`)));
   test('no sentence says no force stands beside one, and none stands under a band its words deny', () => {
-    let judged = 0, alone = 0;
+    let judged = 0, alone = 0, walled = 0;
     expectNoSeedFailures(collectSeedFailures(seeds, (seed) => {
       const s = birth(seed); const f = standingDefenseForces(s);
       const force = f.garrison.present || f.militia.present || f.watch.present || f.mercenary.present;
+      if (f.walls.present) {
+        walled++;
+        for (const r of deriveDefenseReadiness(s)) expect(/\bno perimeter\b/i.test(r.assess || ''), `${seed} ${r.label}: ${r.assess}`).toBe(false);
+      }
       for (const label of ['Beasts & Monsters', 'Invasion & War']) {
         const r = rows(s)[label];
         if (!r.assess) { alone++; continue; }
@@ -70,6 +77,13 @@ describe('the law, over births of every size', () => {
         for (const [words, bands] of FALSE_UNDER) if (words.test(r.assess)) { judged++; expect(bands, `${seed} ${label} ${r.status}: ${r.assess}`).not.toContain(r.status); } // anchored: `judged` counts the clauses read, asserted below
       }
     }));
+    // UPKEEP-12 (H2, the chair's ruling (b)): a sentence that says NO PERIMETER reads the walls the page lists. The guard
+    // town r2r-town-27 (Town walls, a Town watch, an adventurers' charter hall, plagued) printed "No perimeter, but the
+    // charter hall…" beside "Walls, and a watch to keep them."; it prints its band alone now.
+    const guard = censusBirth('r2r-town-27');
+    expect(standingDefenseForces(guard).walls.present, 'the guard town is walled').toBe(true);
+    for (const r of deriveDefenseReadiness(guard)) expect(/\bno perimeter\b/i.test(r.assess || ''), `r2r-town-27 ${r.label}: ${r.assess}`).toBe(false);
+    expect(walled, 'walled towns were read').toBeGreaterThan(1);
     expect(judged, 'judging clauses were read').toBeGreaterThan(20);
     expect(alone, 'a few rows print their band alone').toBeLessThan(seeds.length);
   });
