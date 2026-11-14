@@ -413,7 +413,9 @@ export function deriveSupportingCapabilities(settlement) {
           : clergyHere(r) ? 'Clergy care' : 'None', // W2-C-LEAVES item 3: clergy who live here, by the faith's home
       color: facts.hasHospital ? '#1a5a28' : (facts.hasHealer || clergyHere(r)) ? '#7a5010' : '#8b1a1a', score: null,
       note: facts.hasHospital ? 'Casualty treatment, outbreak containment, recovery capacity.'
-        : facts.hasHealer ? `${facts.healerName}. Wounds and fevers treated one at a time; no beds to contain an outbreak.`
+        // W2-C-LEAVES-12, the chair's ruling (H): NO SURFACE PRINTS A CATALOGUE NAME'S BRACKET ("Major monasteries (5-10)."):
+        // the healer is named by its display label, its count band struck (`healerLabel`)
+        : facts.hasHealer ? `${healerLabel(facts.healerName)}. Wounds and fevers treated one at a time; no beds to contain an outbreak.`
           : clergyHere(r) ? 'Clerical care. Basic wound and disease management.' : 'No healer is kept here; the sick are tended by their own families.',
     },
     // ⛔ THE LOGISTICS & SUPPLY ROW IS GONE FROM THE DEFENSE SURFACES (the owner's word,
@@ -876,3 +878,15 @@ function courtOnRoster(settlement) {
 // ─── W2-C-LEAVES-9: THE RING'S VANTAGES PASS THE LIST DOOR (at the end of the file, so no line above moves) ───
 import { filterDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
+
+import { institutionDisplayName } from './institutionDisplayName.js';
+/**
+ * A house as the Medical Readiness line names it (W2-C-LEAVES-12, ruling (H)): its display label (`institutionDisplayName`,
+ * the label seam), a catalogue count band struck ("Major monasteries (5-10)" -> "Major monasteries"); a note that says what
+ * the house is stays ("Healer (divine, 1st level)", pinned by tests/domain/defenseWordsFindings.test.js).
+ * @param {string | null | undefined} name the roster name
+ * @returns {string}
+ */
+function healerLabel(name) {
+  return String(institutionDisplayName(name) || name || '').replace(/\s*\(\d+\s*[-\u2013]\s*\d+\)/g, '').replace(/\s+/g, ' ').trim();
+}

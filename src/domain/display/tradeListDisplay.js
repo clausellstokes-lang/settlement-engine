@@ -428,7 +428,10 @@ function pillAsPrinted(raw, side, settlement) {
 function rawCardStoppedByCrisis(good, chains, settlement) {
   const grounds = [...(TRADE_GOOD_GROUNDS.get(good) || []), ...(RESOURCES_YIELDING.get(good) || [])];
   const own = chains.filter((c) => grounds.includes(String(c.resourceInputKey)));
-  return own.length > 0 && own.every((c) => WORKING_CHAIN_STATUSES.includes(String(c.status)) && chainCrisisStateShown(c, settlement) === 'impaired');
+  // W2-C-LEAVES-12 (the chair, 14:10 UTC): where no card works the good's ground, a famine that failed every such ground of
+  // the town's own (`landFailed`) stops it too (r2s-famine-thorp-1: grazing land, no herd card, "Raw wool, Livestock")
+  if (own.length === 0) return grounds.length > 0 && landFailed(settlement, grounds);
+  return own.every((c) => WORKING_CHAIN_STATUSES.includes(String(c.status)) && chainCrisisStateShown(c, settlement) === 'impaired');
 }
 
 /**
@@ -559,7 +562,10 @@ const MADE_GOOD_ROWS = Object.freeze([
   // higher learning: a sage, a library or a university; a house the detector calls arcane, of the good's own chain, too
   [['higher education', 'research', 'publishing'], /\bsage|librar|universit|scholar|\bprint/],
   // the magic trades: only an arcane house of the good's own chain (ARCANE_MADE_GOODS; the canonical detector)
-  [['magical identification', 'enchanting services', 'spellcasting (greater)', 'teleportation', 'magical item market', 'weapon enchantment', 'armour warding', 'utility enchantments', 'magical entertainment'], /(?!)/],
+  [['magical identification', 'enchanting services', 'spellcasting (greater)', 'teleportation', 'magical item market', 'weapon enchantment', 'armour warding', 'utility enchantments'], /(?!)/],
+  // W2-C-LEAVES-13, the chair's ruling (r2): the bards' college makes its magical entertainment, where magic works here
+  // (`MAGIC_WORKED_GOODS`, end of file); a theatre or a travelling troupe makes none
+  [['magical entertainment'], /\bbardic college/],
   [['planar travel information', 'diplomatic access'], /\bplanar/], // extraplanar goods: carried by the planar traders (transit), made only by an arcane house of its chain
   // shows and games
   [['performances', 'music and song'], /theat|\bbard|performer|minstrel|musician/],
@@ -727,7 +733,7 @@ export function chainOutputsShown(chain, settlement) {
     .map((i) => String(/** @type {{ name?: unknown }} */ (i)?.name ?? '').toLowerCase()).filter(Boolean);
   return outputs.filter((o) => {
     const good = fold(tradeMarkOf(o).label).replace(/_/g, ' ');
-    return !NOT_A_GOOD_HERE.has(good) && chainMakesHere(chain, good, settlement, roster);
+    return !NOT_A_GOOD_HERE.has(good) && (chainMakesHere(chain, good, settlement, roster) || chainCarriesHere(chain, good, roster));
   });
 }
 
@@ -778,7 +784,7 @@ const ARCANE_MADE_GOODS = Object.freeze(['books and manuscripts', 'potions and e
  * @returns {boolean}
  */
 function houseMakesGood(good, houseRe, name, settlement) {
-  if (houseRe.test(name)) return true;
+  if (houseRe.test(name)) return !MAGIC_WORKED_GOODS.has(good) || magicOf(/** @type {Parameters<typeof magicOf>[0]} */ (settlement)).functions;
   if (!ARCANE_MADE_GOODS.includes(good) || !isArcaneInstitution(name)) return false;
   const eco = /** @type {{ activeChains?: unknown } | null | undefined} */ (settlement?.economicState);
   const chains = /** @type {Array<{ outputs?: unknown, processingInstitutions?: unknown }>} */ (
@@ -803,3 +809,58 @@ export function houseMakesGoodNamed(good, house, settlement) {
   const houseRe = MADE_GOOD_HOUSES.get(key) || LAND_GOOD_HOUSES.get(key);
   return !!houseRe && !!name && !name.startsWith('access to') && houseMakesGood(key, houseRe, name, settlement);
 }
+
+// ─── W2-C-LEAVES-13, the chair's ruling (r2) of 2026-11-14: TWO TRUE OUTPUTS GIVEN BACK THEIR MAKERS (at the end of the file) ───
+// W2-C-LEAVES-12's maker table (no row, no maker) also silenced two outputs that are often true: "Rare spices and exotic
+// dyes" on the Spices & Dyes card (507 cards of the reader's 1,824 births: the merchants carry them) and the bards'
+// "Magical entertainment" (585). THE TWO ARE NOT SILENCED WHERE A MAKER STANDS: a line is in its pool unless the town
+// makes it false. The bards' good has its row in MADE_GOOD_ROWS (the bardic college; magic must work here). The spices
+// are CARRIED, not made: a MADE_GOOD_ROWS row would turn their transit exports and local pills into "made" (the twelfth
+// seat's first cut made 219 spice exports false), so a carried good takes a table only the chain card reads.
+import { magicOf } from '../facts/magic.js';
+
+/** The goods a house makes only where magic works here (`facts/magic.js :: magicOf(...).functions`). */
+const MAGIC_WORKED_GOODS = new Set(['magical entertainment']);
+
+/**
+ * THE HOUSES THAT CARRY AN ENTREPÔT'S GOOD THROUGH (W2-C-LEAVES-13, ruling (r2)): the chain's own houses, by the roster's
+ * words. Read ONLY by a chain card's Outputs (`chainOutputsShown`), never by the trade lists' pills (`pillAsPrinted`):
+ * the Exports keep printing the good as transit, and "Produced locally" never names it.
+ * @type {ReadonlyArray<readonly [ReadonlyArray<string>, RegExp]>} */
+const CARRIED_GOOD_ROWS = Object.freeze([
+  // the Spices & Dyes chain's houses (`data/supplyChainData.js :: spices_dyes`): the merchant guilds, the luxury goods
+  // quarter, an annual fair; a warehouse stores and an oligarchy governs, neither carries the trade
+  [['rare spices and exotic dyes'], /\bmerchant guilds?\b|\bluxury goods quarter\b|\bannual fairs?\b/],
+]);
+/** @type {ReadonlyMap<string, RegExp>} */
+const CARRIED_GOOD_HOUSES = new Map(CARRIED_GOOD_ROWS.flatMap(([goods, re]) => goods.map((g) => /** @type {[string, RegExp]} */ ([g, re]))));
+
+/**
+ * Whether an entrepôt chain carries a good through here: a house of the good's carrier row stands on the live roster (an
+ * "Access to ..." row is none), and none of the chain's houses is held only as a road to elsewhere.
+ * @param {{ entrepot?: unknown, processingInstitutions?: unknown }} c the chain @param {string} good the good, folded
+ * @param {ReadonlyArray<string>} roster the live roster's names, lower case
+ * @returns {boolean}
+ */
+function chainCarriesHere(c, good, roster) {
+  const re = CARRIED_GOOD_HOUSES.get(good);
+  if (c.entrepot !== true || !re) return false;
+  const heads = (Array.isArray(c.processingInstitutions) ? c.processingInstitutions : []).map((h) => String(h).toLowerCase().split(/[\s(]/)[0]).filter(Boolean);
+  const roadOnly = heads.some((h) => { const m = roster.filter((r) => r.includes(h)); return m.length > 0 && m.every((r) => r.startsWith('access to')); });
+  return !roadOnly && roster.some((n) => !n.startsWith('access to') && re.test(n));
+}
+
+// ─── W2-C-LEAVES-13, the chair's ruling (15): NO SURFACE PRINTS A CATALOGUE LABEL WITH A SLASH (at the end of the file) ───
+/**
+ * A GOOD'S PLAIN NAME (W2-C-LEAVES-13; the no-lane seat's row, "Needed, and not brought in: … gold/silver ore", 93 towns of
+ * the joined tree's 720): the resource chain table spells two goods with a slash (`data/resourceChains.js :: preciousMetals`,
+ * "gold/silver ore", "gold/silver bars"). A page prints the plain name, the two metals joined by "and" ("gold and silver
+ * ore"); every other name is returned as given. Called on what the native-resource seam already printed
+ * (`resourceDisplayName.js`, the pills' leaf), so case and words stay that leaf's. Display only; a MATCH never reads it.
+ * @param {unknown} text a good's name as a page would print it
+ * @returns {string}
+ */
+export function plainGoodName(text) {
+  return String(text ?? '').replace(/(\p{L})\s*\/\s*(\p{L})/gu, '$1 and $2');
+}
+

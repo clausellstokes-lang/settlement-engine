@@ -10,6 +10,7 @@ import { cleanup, fireEvent, render } from '@testing-library/react';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
 import { NORMALLY_YIELDS, chainYieldRefused } from '../../src/domain/chainYield.js';
+import { chainOutputsShown } from '../../src/domain/display/tradeListDisplay.js';
 
 const TIERS = ['village', 'town', 'city', 'metropolis'];
 const SEEDS = Array.from({ length: 24 }, (_, i) => ({ seed: `yield-label-${i}`, config: { settType: TIERS[i % TIERS.length] } }));
@@ -23,7 +24,9 @@ beforeAll(() => {
     // the Economic Flows section opens by default only when a chain is impaired: open it where it is shut
     const toggle = [...container.querySelectorAll('[aria-expanded]')].find((b) => /Economic Flows/.test(b.textContent || ''));
     if (toggle && toggle.getAttribute('aria-expanded') === 'false') fireEvent.click(toggle);
-    const chains = (s.economicState?.activeChains || []).filter((c) => (c?.outputs || []).length > 0);
+    // W2-C-LEAVES-13, re-keyed by identity: a card prints a header over the outputs it bears out (tradeListDisplay.js ::
+    // chainOutputsShown, W2-C-LEAVES-6 item 7; no maker row, no output, W2-C-LEAVES-12); a card with none prints neither
+    const chains = (s.economicState?.activeChains || []).filter((c) => chainOutputsShown(c, s).length > 0);
     ROWS.push({ seed, text: container.textContent || '', refused: chains.filter((c) => chainYieldRefused(c)).length, whole: chains.filter((c) => !chainYieldRefused(c)).length });
     cleanup();
   }

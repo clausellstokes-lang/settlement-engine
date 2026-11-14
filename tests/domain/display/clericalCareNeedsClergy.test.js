@@ -32,6 +32,12 @@ const birthCensus = (seed) => {
   const parts = seed.split('-');
   return generateSettlementPipeline(configOf({ size: parts.at(-2), crisis: null }, DEFAULT_CONFIG, birthConfig), null, { seed, customContent: {} });
 };
+/** The reader's app shape (REVIEW-W2-C-LEAVES render.rr3s.jsx :: cfgFor, rr3w-). @param {string} seed */
+const birthReader = (seed) => {
+  const m = /** @type {RegExpMatchArray} */ (seed.match(/^rr3w-(\w+)-([a-z_+]+)-([a-z_]+)-\d+$/));
+  return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...(m[3] === 'rand' ? {} : { tradeRouteAccess: m[3] }), settType: m[1],
+    selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : m[2].split('+'), _randomizePriorities: true }), null, { seed, customContent: {} });
+};
 const NONE_NOTE = 'No healer is kept here; the sick are tended by their own families.';
 
 describe('clerical care is said only where clergy live (item 3)', () => {
@@ -44,6 +50,8 @@ describe('clerical care is said only where clergy live (item 3)', () => {
     expect(medical(town(['Wayside shrine', 'Access to parish church']))).toMatchObject({ status: 'None', note: NONE_NOTE });
     expect(medical(town(['Parish church']))).toMatchObject({ status: 'Clergy care', note: 'Clerical care. Basic wound and disease management.' });
     expect(medical(town(['Access to parish church'], [{ name: 'Brother Aldo', role: 'Priest' }]))).toMatchObject({ status: 'Clergy care' });
+    // W2-C-LEAVES-12, the chair's ruling (H): NO SURFACE PRINTS A CATALOGUE NAME'S BRACKET: the healer by its display label
+    expect(medical(town(['Major monasteries (5-10)'])).note, 'no count band').toBe('Major monasteries. Wounds and fevers treated one at a time; no beds to contain an outbreak.');
   });
 
   test('the cold list\'s thorp (rw3-thorp-calm-2, the app\'s shape): a wayside shrine and access to a church, no clergy', () => {
@@ -61,5 +69,13 @@ describe('clerical care is said only where clergy live (item 3)', () => {
       expect(medical(town).status, seed).toBe(clergy ? 'Clergy care' : 'None');
       expect(seed.includes('village') ? clergy : !clergy, `anchored: ${seed} reads as its kind`).toBe(true);
     }), 'clerical care said where no clergy live, or lost where they do');
-  }, 180000);
+    // ruling (H) on the births: the 18 of the reader's 1,824 whose note printed "Major monasteries (5-10)." at f9db28270
+    // (the census's two, a siege-and-famine metropolis, an occupied one): the healer's name with no count band
+    expectNoSeedFailures(collectSeedFailures(['r2r-metropolis-32', 'r2r-metropolis-51', 'rr3w-metropolis-under_siege+famine-rand-0', 'rr3w-metropolis-occupied-rand-1'], (seed) => {
+      const town = seed.startsWith('rr3w-') ? birthReader(seed) : birthCensus(seed);
+      expect(town.institutions.some((/** @type {{ name?: string }} */ i) => /\(\d+-\d+\)/.test(String(i.name)) && /monaster/i.test(String(i.name))), `anchored: ${seed} keeps a counted house`).toBe(true);
+      expect(medical(town).note, seed).not.toMatch(/\(\d+\s*-\s*\d+\)/);
+      expect(medical(town).note, seed).toMatch(/^Major monasteries\. Wounds/);
+    }), 'a catalogue count band printed on the Medical Readiness line');
+  }, 300000);
 });
