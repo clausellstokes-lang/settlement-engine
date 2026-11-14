@@ -6998,8 +6998,8 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 **`WALLED-STRAINED`**
 1. `[ledger · watch · no crisis: under_siege]` {settlement}'s accounts keep its {defwork} in repair but fall short on the watch's wages, so the defences are sound and too few people man them.
 2. `[unfolding · guardPresence · no crisis: under_siege]` {settlement}'s defences are sound, but fewer people turn out each season to man the {defwork}, and the town is slow to notice.
-3. `[unfolding · crisis: under_siege]` {settlement} had too few hands for its {defwork} before the siege; now everyone who can hold a weapon has a place there, and most of them are learning as they go.
-4. `[ledger · crisis: under_siege]` The siege has put more people on {settlement}'s {defwork} than the town could ever find for it in quieter seasons.
+3. `[unfolding · no soldiers · crisis: under_siege]` {settlement} had too few hands for its defences before the siege; now everyone who can hold a weapon has a place on them, and most of them are learning as they go.
+4. `[ledger · crisis: under_siege]` The siege has put more people on {settlement}'s defences than the town could ever find for them in quieter seasons.
 5. `[ledger · no guardPresence · no crisis: under_siege]` {settlement} keeps its {defwork} in repair and pays nobody to stand guard there.
 6. `[street · no guardPresence · no crisis: under_siege]` {settlement} has nobody whose work it is to stand on its {defwork}, though the town keeps the {defwork} in repair.
 7. `[ledger · guardPresence · no watch · no crisis: under_siege]` {settlement} keeps its {defwork} in repair before it pays anyone to stand guard there, and the few who do turn out are stretched thin.

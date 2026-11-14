@@ -9578,12 +9578,12 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "unfolding",
           "marks": [
+            "no soldiers",
             "crisis: under_siege"
           ],
-          "text": "{settlement} had too few hands for its {defwork} before the siege; now everyone who can hold a weapon has a place there, and most of them are learning as they go.",
+          "text": "{settlement} had too few hands for its defences before the siege; now everyone who can hold a weapon has a place on them, and most of them are learning as they go.",
           "slots": [
-            "settlement",
-            "defwork"
+            "settlement"
           ],
           "vid": 3
         },
@@ -9592,10 +9592,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: under_siege"
           ],
-          "text": "The siege has put more people on {settlement}'s {defwork} than the town could ever find for it in quieter seasons.",
+          "text": "The siege has put more people on {settlement}'s defences than the town could ever find for them in quieter seasons.",
           "slots": [
-            "settlement",
-            "defwork"
+            "settlement"
           ],
           "vid": 4
         },

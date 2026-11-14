@@ -8,7 +8,7 @@ origin at the start: `2f1ff0e78`, as the brief names it (no difference). Scratch
 `w2w7`; pushed by `git push origin w2w7:refs/heads/lane/w2-write-2026-11-13`. No commit at or below
 `2f1ff0e78` rewritten.
 
-**Status:** item 0 (this file) begun. B in progress.
+**Status:** item 0 done. B in progress.
 
 **The chair:** session_01ACmDYZrFEVXyZEUg1NDxxC (from 2026-11-14). The brief binds this seat to
 BRIEF-W2-WRITE-6 as written (its reading, its work in order, its METHOD, its RULED list, its HOW YOU WORK, its
@@ -46,7 +46,7 @@ seat itself; long runs never cross a turn's end, the suite in six shards; no pul
 | 12 | DS-DEF-3 Moderate | v1 | LEFT | | |
 | 13 | DS-DEF-2 CHAIN: defence supplied | v6 | struck (last row) | a17d14618 (sixth) | v5 prints, true |
 | 14 | DS-DEF-3 COMPOUND: insurgency | v5 | struck (last row) | a17d14618 (sixth) | v2, v4 print, true |
-| 15 | DS-DEF-11 WALLED-STRAINED | v3 | agreement only (d56c896f8, fifth); "too few hands" beside a garrison LEFT | | |
+| 15 | DS-DEF-11 WALLED-STRAINED | v3 | declared `no soldiers`, the slot out | this seat | v4 prints where soldiers stand |
 | 16 | DS-DEF-11 WALLED-STRAINED | v7 | LEFT | | |
 | 17 | DS-DEF-5 NO organized force at all | v4 | LEFT | | |
 | 18 | DS-DEF-8 override: ACTIVE SIEGE | v4 | struck (last row) | a17d14618 (sixth) | v1-v3 print, true |
@@ -57,7 +57,7 @@ seat itself; long runs never cross a turn's end, the suite in six shards; no pul
 | 23 | DS-DEF-5 ARCANE: alchemists | v2 | LEFT (last row) | | |
 | 24 | DS-DEF-11 UNWALLED-LARGE | v3 | struck (last row) | a17d14618 (sixth) | v1, v2 print, true |
 | 25 | DS-DEF-1 readiness STRONG | v6 | reworded | 47f8bdd8e (sixth) | read at Al-mandi, a siege city, a 574-person town |
-| 26 | DS-DEF-11 WALLED-STRAINED | v4 | LEFT | | |
+| 26 | DS-DEF-11 WALLED-STRAINED | v4 | reworded (the slot out, "for them") | this seat | |
 | 27 | DS-DEF-2 Invasion & War: neither walls nor force | v8 | declared off occupation (2d1832b7b, fifth); the style point LEFT | | |
 
 Settled 17 (fifth seat 9, sixth seat 8); LEFT 10, and one style point (#27).
@@ -65,7 +65,8 @@ Settled 17 (fifth seat 9, sixth seat 8); LEFT 10, and one style point (#27).
 ## Items of this seat
 | item | commit | what | read in |
 |---|---|---|---|
-| 0 | (this file) | the table above | |
+| 0 | 7f4f3d339 | the table above | |
+| B #15, #26 | (this commit) | WALLED-STRAINED siege rows: v3 `no soldiers` (guard Tihono), v3 and v4 without `{defwork}` (the slot printed "palisade or earthworks" and broke agreement) | 62 STRAINED siege towns rendered: v3 at Prabhanagar (thorp 12), Hongguan, Zuuköl (siege+famine); v4 at Tihono, Hákonås (222,797), Belovich (thorp 5), Spitzplatz |
 
 ## Named, not the corpus's (with the file)
 

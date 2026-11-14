@@ -11554,6 +11554,7 @@
         "guardPresence": 3,
         "no crisis: under_siege": 6,
         "no guardPresence": 2,
+        "no soldiers": 1,
         "no watch": 2,
         "watch": 1
       },
