@@ -1850,3 +1850,64 @@ ea7d451c2 (before the hand-back's 37c884859, whose 8 pills in 3 towns were measu
 brief's second render before the hand-back is NOT done, said plainly). `git diff --stat f9db28270..37c884859 -- src/`:
 tradeListDisplay.js, validationOnPage.js, defenseDisplay.js; five test files changed, no title added (no lighting-census
 row moved by title). Records unmoved 1,824 of 1,824 at every cure; publicProse moved only by b9b4033e3 (the 83 towns).
+
+# PART 13 — the thirteenth seat (W2-C-LEAVES-13, 2026-11-14, from 3285d3280)
+
+**Seat:** the Claude Code session session_01ACmDYYrizDxrhJ647QcJoy; the chair is session_01ACmDYZrFEVXyZEUg1NDxxC.
+Assignment: docs/chair/2026-11-14/briefs/BRIEF-W2-C-LEAVES-13.md on lane/chair-2026-11-08. Origin read back at the start:
+3285d3280 (matched). Scratch worktree <scratchpad>/wt (local branch w13); the frozen merged tip <scratchpad>/fz (detached
+worktree at f82214b96); the joined tip <scratchpad>/fj (detached, 600b9f743). EXECUTED = run and read; PLAUSIBLE = read from code.
+
+## THE CHAIR'S RULINGS SINCE PART 12'S COPY (copied from the brief, 2026-11-14; each vetoable by the owner)
+(r1) REGISTERS ARE RE-DERIVED ONCE, AT THE CLOSE: no census, no baseline, no bundle re-taken; the grid's falls NAMED; a
+register a cure or the merge leaves stale is NAMED; a pin a cure moves is re-keyed BY IDENTITY in the same commit.
+(r2) THE TWO WIDE SILENCES ARE NOT ACCEPTED WHERE A MAKER STANDS: spices (507 cards) and the bards' "Magical entertainment"
+(585) print where a house that truly makes or carries them stands; a carried good takes a table ONLY THE CARD READS.
+(r3) THE COURT LINE NAMES THE HALL: the flag is not moved; where a hall alone hears cases the Defense tab's supporting row
+names the hall by its display label through one leaf; the PDF twin is another lane's (NAMED with the leaf to call).
+(r4) THREE ROWS PARKED IN THIS LANE'S FACTS: "Produced locally" naming a trade with no house; "Fully exploited" Fish with
+no fisher (35); exports selling timber the Resources tab calls "Unexploited". Each measured first.
+PART 11's (1)-(17) and PART 12's rulings STAND.
+
+## THE FIRST ACT (EXECUTED)
+(1) THE MERGE: `git merge --no-ff origin/lane/join-2026-11-14` at its tip 600b9f743 -> f82214b96. NO CONFLICT (merge base
+9ac076d5e). After it: the type ratchet 0, the strict-domain gate 0, eslint 0. The 123 test files naming this lane's files:
+see Items. THE PRESUMED-THINGS WALKER is red (3 tests, 165 rows) IDENTICALLY at the joined tip 600b9f743 itself, at the
+merged tip and after this seat's cure: the join's, not composed by this merge; this lane's rows in it are only PART 12's
+two named SERVICE_OUTPUTS hits. NAMED for the merge seat (not a composed red: red on one side before the merge).
+(2) THE WORKLIST: census3.sh at f82214b96 (720 births, 4 workers, births+render 894 s, count+trace 487 s, EXIT 0) with
+`--files` the eleven display leaves this lane changed since its merge base 976db5b19 with integration. This lane's rows
+(false towns / towns): deriveSupportingCapabilities "Courts without detention." 29.8/32 (all towns of size town: a Town
+hall that drew a court service; ruling r3); EconomicsTab :: EconomicFlowsSection "Stone Quarrying" 7.4/8 (bar#235);
+CRIM_STRUCTURE_DATA "Less predictable than a guild, more structured than street crime." 5.6/6 (no guild on the roster);
+EconomicsTab :: EconomicsTab outputs run together 2.8/3 ((17)).
+
+## Items (this seat)
+| row | cause | cure, commit | counts (the reader's 1,824 births) | guard, plant |
+|---|---|---|---|---|
+| (r2) spices + bards | b9b4033e3's table: no row, no maker; spices (carried) and the bards' good had none | spices: `CARRIED_GOOD_ROWS` read only by `chainOutputsShown` (`chainCarriesHere`: merchant guilds, luxury goods quarter, annual fair); bards: MADE_GOOD_ROWS `bardic college`, only where `magicOf().functions` (e6f875058) | spices card outputs 0 -> 507, printed 0 -> 507 towns; bards in the reader 0 -> 395 (190 theatre/troupe-only cards stay silent), PRINTED 0 -> 0 (all three surfaces print a card's first three outputs and the college makes all three first: NAMED, not widened); exports 0 moved (226 spice exports transit, unchanged), local 0, full row 0; records 0 of 1,824 moved, publicProse 0 | economicsChainOutputsBorneOut (r2) test: unit (carriers, a warehouse, an access row, exports transit, never local; bards, theatres, magic off) + births (4 spice towns, 3 bard towns with the guard r2r-town-0): RED at f82214b96 by each arm (a plant copy, not committed), GREEN |
+READ WHERE IT PRINTS (EXECUTED, readcard.jsx, the tab's Economic Flows): spices: r2s-infiltrated-town-1 (319, smallest),
+r2s-under_siege-town-0 ("Impaired ... Normally yields"), r2s-famine-town-0, rr3-city-occupied-rand-4, r2r-metropolis-8
+(344,689, largest): true. Bards: r2s-recently_betrayed-city-3 (2,781, smallest), r2s-under_siege-metropolis-0,
+r2s-occupied-metropolis-0, r2s-famine-city-0, r2r-metropolis-8: the card prints Performances, Music and song, Musical
+education (no new line); r2r-town-0 (theatres) silent. No line newly silent.
+Gates after the cure: strict 0, ratchet 0, eslint 0, the grid 0 falls, the 16 test files naming tradeListDisplay.js 66/66.
+
+## FOR THE JOIN
+- tradeListDisplay.js: no other lane holds it (census-3's copy differs only by this lane's own W2-C-LEAVES-7/8 commits;
+  round-3-cut has no own commit).
+- REGISTERS NAMED: the presumed-things walker's 165 rows (the joined line's own, above). The grid: 0 falls at e6f875058.
+
+## WHAT IS LEFT, line by line
+1. DONE: (r2) (e6f875058); its message to the chair.
+2. NEXT: the one table by false towns (PART 12's list, r3, r4, the census rows above), then the cures in its order.
+
+## INSTRUMENTS (docs/chair/2026-11-14/probes/W2-C-LEAVES-13/; replace <scratchpad>; with PART 11's run.sh, PART 12's run4.sh, pilldiff.mjs, recdiff.mjs)
+- `pills13.jsx`: PART 12's pills.jsx plus the town's magic fact and crises; `two.mjs <jsonl>` the five silenced goods'
+  cards, shown, carriers, exports, local; `readcard.jsx` (SEEDS, LABELS='<card label>|...') the tab's Economic Flows text
+  around a card; `gates.sh <tag> <testlist> <src...>` the after-cure gates (vitest shared tier at --maxWorkers=2: 3 is refused).
+- The reader's seeds: `git show origin/lane/review-w2-c-leaves-2026-11-14:docs/chair/2026-11-14/probes/REVIEW-W2-C-LEAVES/seeds-all.txt`.
+- Frozen trees: a tar of wt without .git, node_modules linked (<scratchpad>/fz-r2 carries e6f875058's measure).
+
+## STATUS (this seat, current)
+Working. Pushed through the (r2) docs commit. Nothing running but the 123 lane test files at f82214b96 (to a file).
