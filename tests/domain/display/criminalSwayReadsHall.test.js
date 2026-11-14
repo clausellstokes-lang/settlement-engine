@@ -26,7 +26,7 @@ const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', mon
 /** seed -> [the hall's rung, the town's crime structure, the hall line's first words] at 0ea65f574 */
 const FALSE_TOWNS = {
   'r2r-thorp-8': ['none', 'Nobody at the head of'], // the reader's own: a diffuse presence, the smallest size the row reaches
-  'r2r-city-3': ['none', 'The head, the second and the third of'], // an organized syndicate, the none rung's second line
+  'r2r-city-3': ['none', 'None of the head, the second and the third of'], // an organized syndicate, the none rung's second line
   'r2r-metropolis-52': ['adversarial', "Thieves' Guild works against"], // the largest size
   'r2r-town-31': ['equilibrium', 'Guild Council and'], // the climate alone: "... leave each other alone. Nobody at the head ..."
 };
@@ -57,7 +57,7 @@ describe('the "criminal sway" chip reads the hall\'s rung, never the crime struc
       const hall = hallOf(s);
       expect(hall?.rung).toBe(rung);
       expect(hall.line.startsWith(lead), hall.line).toBe(true);
-      expect(hall.line, 'no agent in the three: the line clears the head').toMatch(/Nobody at (?:the head of |its head)|make their own decisions/);
+      expect(hall.line, 'no agent in the three: the line clears the head').toMatch(/Nobody at (?:the head of |its head)|None of the head, the second and the third/);
       expect(governingModifierWordsOf(s)).toBe('');
     });
   }

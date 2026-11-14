@@ -29,7 +29,8 @@ function born(seed) {
   return generateSettlementPipeline(birthConfig(cfg), null, { seed, customContent: {} });
 }
 const DENIES = /no criminal power here is strong enough/;
-const HALL_ONLY = /make their own decisions; none of them takes orders from the criminals\.$/;
+// POWERS-15 (REVIEW-POWERS-5 D1): the line reworded to claim the criminals' standing only; RE-KEYED BY IDENTITY, the same line
+const HALL_ONLY = /^None of the head, the second and the third of .+ takes orders from the criminals\.$/;
 
 describe('POWERS-14 · the hall line reads the town\'s criminal structure', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
