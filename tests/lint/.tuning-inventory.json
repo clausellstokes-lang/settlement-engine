@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "19dd60303f9a1fb2d1cf6966f3ddff8dda638fb7",
-  "measuredBy": "STYLE-2-MERGE-13",
-  "date": "2026-11-13",
-  "note": "point 49: W2-B-DECLARE (5657a229c) merged — RULING_PATRONAGE_TUNING gains the dependent src/domain/facts/registeredWords.js (F2 third seat: the ruling faces read dmPowerViewOf); no value moved",
+  "measuredAtSha": "99dfd9b924c8096e8fda7515894d5ad2768cac45",
+  "measuredBy": "R2-CODE-A-10",
+  "date": "2026-11-14",
+  "note": "R2-CODE-A-10 step 2i at the point the chair names (after 2a-2h): foodBalance.js#FAMINE_HELD_STORE_MONTHS dependents moved by the lane; no value moves",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -8205,7 +8205,9 @@
         "src/generators/economy/economicState.js",
         "src/generators/economy/viability.js",
         "src/generators/foodGenerator.js",
-        "src/generators/foodLand.js"
+        "src/generators/foodLand.js",
+        "src/generators/narrativeText.js",
+        "src/generators/npcGenerator.js"
       ],
       "namedDependents": []
     },
