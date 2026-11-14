@@ -398,7 +398,7 @@ export const INSTITUTION_SERVICES = {
   },
   "Brewer": {
     "Ale (jug)": { on: true, p: 1.0, desc: "Small batch ale sold by the jug." },
-    "Ale (barrel)": { on: true, p: 0.9, desc: "Bulk supply to alehouses. Priced by barrel." },
+    "Ale (barrel)": { on: true, p: 0.9, desc: "Bulk supply to alehouses. Priced by barrel.", needs: ["institution: tavern"] }, // W2-FIX-DATA-8 (ww-1416): its twin where no alehouse stands, SERVICE_DESC_SIBLINGS
     "Mead": { on: false, p: 0.4, desc: "Honey wine. Seasonal." }
   },
     "Beekeeper": {
@@ -1824,6 +1824,13 @@ export const SERVICE_DESC_SIBLINGS = Object.freeze({
   "Hull patching, oar replacement, caulking. River traffic takes constant punishment.": Object.freeze([
     Object.freeze({ text: "Hull patching, oar replacement, caulking. River traffic takes constant punishment.", needs: Object.freeze(["river"]) }),
     Object.freeze({ text: "Hull patching, oar replacement, caulking. Small boats in the shallows take constant punishment.", twinOf: "Hull patching, oar replacement, caulking. River traffic takes constant punishment.", excludes: Object.freeze(["river"]) }),
+  ]),
+  // W2-FIX-DATA-8 (2026-11-14; ROUND-3-CUT-INCREMENT ww-1416, HANDBACK-6 section 8 row 3): the brewer's barrel trade names the
+  // alehouses it supplies; where none stands its twin sells to the households, and presumes no alehouse either way (the cascade
+  // can add one after the roll). VETOABLE wording (the owner's).
+  "Bulk supply to alehouses. Priced by barrel.": Object.freeze([
+    Object.freeze({ text: "Bulk supply to alehouses. Priced by barrel.", needs: Object.freeze(['institution: tavern']) }),
+    Object.freeze({ text: "Ale by the barrel, for households laying in a stock. Priced by barrel.", twinOf: "Bulk supply to alehouses. Priced by barrel." }),
   ]),
   // W2-FIX-DATA-6 (2026-11-13; CENSUS-2 kind b, the coaching inn under a siege: r2r-metropolis-14, r2s-under_siege-*): no
   // traveller comes down a road the siege holds, and no coach or rider goes out. VETOABLE wording (the owner's).

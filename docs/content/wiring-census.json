@@ -54050,7 +54050,7 @@
       "name": "INSTITUTION_SERVICES",
       "drawKind": "R",
       "drawSite": "services/institutionServices.js:69/203 one _rng()<p roll per eligible definition (A-printed at serviceRollMaterializatio",
-      "lines": 1003,
+      "lines": 1004,
       "declares": [],
       "lineDeclares": {
         "coast": 2,
@@ -54059,6 +54059,7 @@
         "guardPresence": 1,
         "guild": 3,
         "institution: mill": 3,
+        "institution: tavern": 1,
         "institution: temple": 1,
         "magic": 13,
         "market": 4,
@@ -54077,7 +54078,7 @@
         "walls": 4,
         "watch": 6
       },
-      "undeclared": 928,
+      "undeclared": 927,
       "crisisScoped": false
     },
     {

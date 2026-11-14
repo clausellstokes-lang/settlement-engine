@@ -97,4 +97,12 @@ describe('W2-FIX-DATA-8: the census writers in the data lane\'s files (the eight
     expect((late.institutions || []).find((/** @type {any} */ i) => i.name === 'Ale house').cascadeAdded).toBe(true);
     expect((late.institutions || []).find((/** @type {any} */ i) => i.name === 'Brewer').desc).toBe('Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. The households are stocked from here.');
   }, 240_000);
+
+  test('HANDBACK-6 row 3 (ww-1416): the brewer sells barrels to alehouses only where one stands; where none does, to the households (r2s-monster_pressure-village-1); a village with an alehouse keeps the line (r2r-village-15)', () => {
+    expectNoSeedFailures(collectSeedFailures(['r2s-monster_pressure-village-1'], (seed) => {
+      const barrel = servicesOf(bornCensus(seed), 'Brewer').filter((/** @type {any} */ v) => v.name === 'Ale (barrel)').map((/** @type {any} */ v) => String(v.desc));
+      expect(barrel, seed).toEqual(['Ale by the barrel, for households laying in a stock. Priced by barrel.']);
+    }), 'no tavern, inn or alehouse: no barrels go to one');
+    expect(servicesOf(bornCensus('r2r-village-15'), 'Brewer').find((/** @type {any} */ v) => v.name === 'Ale (barrel)').desc).toBe('Bulk supply to alehouses. Priced by barrel.');
+  }, 240_000);
 });

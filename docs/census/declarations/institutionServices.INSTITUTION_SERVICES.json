@@ -1997,7 +1997,9 @@
     {
       "id": "Brewer|Ale (barrel)",
       "text": "Bulk supply to alehouses. Priced by barrel.",
-      "needs": [],
+      "needs": [
+        "institution: tavern"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
