@@ -1256,6 +1256,9 @@ Brief: origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-R2-CODE-B
 (f) H1-1: THE CAST AND THE GOAL AGREE: a person whose own goal answers the crisis is not cast as its instigator or exploiter: the next candidate, else ABSENT by its reason.
 (g) H2-4: "no one named to lead it" only where no roster person faces the house; else that person defends. The hook's "the palisade leads the defence": reworded in the same commit if one line.
 (h) HIGH, carried, outside the family: "built around the Palace/government complex" (27 metropolises; seatIntoPhrase): this lane's or no lane's BY CONTENT → the seat named through the house-label leaf; else NAMED for its lane with the count.
+(j) THE CHAIR, 11:38 UTC: TWO THINGS A PAGE SAYS ARE SET APART, in the page and in the text taken from it: the Services row's need and its sentence ("Needs TimberSupply route severed.", the reading list's 163, 427, 497, 891); the "· covers" chip counted to 0 on every surface; its own commit, a guard on the rendered text.
+(k) THE CHAIR, 11:42 UTC, A FENCE: src/pdf/sections/SupplyChainFlow.jsx and src/pdf/sections/Services.jsx are NOT this lane's from that message on (the SURFACES-1 lane); a row needing them is NAMED under FOR THE JOIN. journalPages.js: only inside this lane's hunks, and nothing in its economics page.
+(l) THE CHAIR, 11:58 UTC, on castDerived's floor: A FLOOR IS NOT LOWERED. A floor of WITNESSES: the corpus gains births in its own idiom until the floor holds; the note names the cause; tests only, its own commit.
 (i) THE CHAIR, 11:22 UTC (a message): the Tonight famine line "has lost a second harvest" (54 of 58 towns without grain or mill): EACH LANE MAKES ITS OWN HALF: this lane's is the Tonight caller (src/domain/summary/tonightSheet.js) passing the record's facts to crisisSummaryForSurface as an optional argument (ignored on this lane today: the pages byte-identical, proved on the births); the r3-code-c lane makes the function read it. Its own commit, after (a) and (b); one line under FOR THE JOIN.
 
 ## (a) ROW 179 — DONE (05cd22366, its follow-up 5996dd9da; census f98b63def)
@@ -1274,14 +1277,26 @@ Brief: origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-R2-CODE-B
 - TOWNS READ (before/after, Crisis tab, hooks, Tonight, journal Tonight/Crisis/Plot Hooks): r2r-thorp-10 (10), r2r-hamlet-36 (74), r2s-plague_onset-thorp-0 (14), r2s-monster_pressure-village-3 (207, the largest), rr3-thorp-monster_pressure-rand-0 (5, the smallest), rr3-thorp-plague_onset-rand-3 (16, a famine beside: the famine's brunt kept). Newly silent: the brunt row, its hook, the Tonight person and the clause "The worst of it falls on …"; the Tonight line falls to the lever ("… holds the key to it."), whole.
 - RED BY THE DECLARED MOVE, NAMED (not loosened): tests/generators/people/castDerived.test.js "every person a cast names is on the roster; …": the corpus floor "draws people from powers" > 500 now 497 (correctness arm green).
 
+## (l) THE FLOOR — DONE (fa85c6592)
+- tests/generators/people/castDerived.test.js: the soak 1,000's seeds 300-319 added (825 -> 845 births); "the corpus draws people from powers" 497 -> 516 (read by a throw-away plant); the floor's 500 unmoved; the six tests green; the lighting census unmoved (34 passed). The cause named in the file's header: the 96 false roles made absent.
+
+## (i) THE TONIGHT FAMINE CALLER — STOPPED, NAMED FOR THE JOIN (nothing committed)
+- The one-line change (src/domain/summary/tonightSheet.js, composeTonightSheet's head line): `crisisSummaryForSurface(lead, place, 'tonight', factsOf(source))` with `import { factsOf } from '../facts/factsOf.js'`. Made and measured, then reverted: ALONE it reds the strict-domain gate (tonightSheet.js 1 error, baseline 0: TS2554, a fourth argument the function on this lane does not declare). A cast round the type would route round the gate's refusal, so it is not done. It lands WITH the r3-code-c half (crisisSummaryVantage.js :: crisisSummaryForSurface taking the optional `facts`), at the join, in one change: the joining seat applies both lines together.
+
+## (j) THE SERVICES RUN-TOGETHER — ALREADY CURED ON THIS LANE, MEASURED (no code change)
+- e878a1367 (R2-CODE-B-3) set the need and its sentence apart in serviceComponents.jsx :: ServiceItem (two elements; a full stop and a space); f2c77472c removed the "· covers" chip; the guard on the rendered text is tests/components/servicesRowMachinery.test.jsx (that commit's).
+- MEASURED by a throw-away render of ServicesTab (jsdom; never committed) over the census's 360 r2r- towns, per need paragraph: the line 976db5b19 run-together 5 (5 towns: r2r-hamlet-34, r2r-village-8, r2r-village-23, … "Needs IronNo …"), "· covers" 2 (2 towns); THIS TIP 0 and 0. The chip's words stand nowhere in src/ but one comment (Grep). A whole-tab textContent shows "Needs TimberGeneral trade" in 2 towns: two separate block rows (a need with no sentence, then the next row's name) glued by textContent alone; the page and copied text set them apart.
+- The reading list's four rows were read on a tree without this lane's cure (the tabs lane's); at the join the cure arrives with this lane.
+
 ## EVERY NEW OR CHANGED LINE (for the owner's veto)
 - "collaborates: no one is named: no local power gains" (Crisis tab only; 30 of the 1,536) — read in the five towns of (a).
 
 ## FOR THE JOIN
-- (i) the Tonight famine line: this lane's half (the caller passes facts) is item (i), to come; the r3-code-c lane's half makes crisisSummaryForSurface read it.
+- (i) the Tonight famine line: BOTH halves in one change at the join (above): tonightSheet.js passes `factsOf(source)`; crisisSummaryVantage.js reads the optional `facts` (r3-code-c's item 7). This lane's half alone reds the strict gate.
+- (k) the fence: no row of this seat's needed SupplyChainFlow.jsx or Services.jsx.
 
-## WHAT IS LEFT, line by line
-1. (i) the Tonight caller's half. 2. (c), (d), (e), (f), (g), (h). 3. THE DECLARED MOVE measured whole (the 720 field diff 976db5b19 against the tip, by family), the draft shift record's rows re-measured, the edge bundles re-built LAST and committed alone, THE ADDENDUM (S2, S3, S4, S5, S8).
+## WHAT IS LEFT, line by line (the successor's list, in order)
+1. (c), (d), (e), (f), (g), (h). 3. THE DECLARED MOVE measured whole (the 720 field diff 976db5b19 against the tip, by family), the draft shift record's rows re-measured, the edge bundles re-built LAST and committed alone, THE ADDENDUM (S2, S3, S4, S5, S8).
 
 ## `git diff --stat 045d19ac1..HEAD -- src/`
 - src/domain/crisis/crisisCast.js: (a) collaboratorCandidates + the collaboratorFromExploiter link + CAST_ABSENCES.occupierOnly; (b) bruntCandidates' losers and the fallback.
