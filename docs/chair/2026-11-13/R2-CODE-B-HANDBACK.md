@@ -277,3 +277,44 @@ The patch (apply on 87c541620 with `git apply docs/chair/2026-11-13/R2-CODE-B-3-
 - #693 and inc #14 (and the craft-in-noble-power rows): PARK to the powers lane (memberships / the Power tab's contender label).
 - #389's words, #979, #510's goal fill: name to their writers' lanes (above).
 - The Overview and Quick Guide food labels: FOR THE JOIN (above).
+
+
+# PART 4 — R2-CODE-B-4, the fourth seat (item 4 committed; items 5 on; the lane's one final statement)
+
+**Seat:** R2-CODE-B-4 (session_01FE9mEtWoAUqxb42BaXTiCv). **Tip read back from origin at start:** db61f66fc (as the brief gave it). Scratch worktree on a local branch; a frozen base worktree at db61f66fc; plain pushes with the explicit refspec.
+
+## The brief's rulings, copied (the chair's message of 2026-11-14; it is not on the branch)
+- MY FILES: the people and crisis surfaces (as PART 3) and the lane's ONE final statement. NOT MINE: #693 and the craft faces ranked in noble powers (the powers lane); #389's words (the powers lane); viability.js (the defence lane); the Overview's food label (OverviewTab.jsx: FOR THE JOIN as PART 3 wrote it); the Defence tab's endurance line.
+- ITEM 4 RULED: (a) no draw added or moved unless declared: a mint on a stream other draws share is a STOP with the stream's name; on the cast's own fork with the fork census green through its own door it is a DECLARED MOVE (say the towns, and that no existing person changed). (b) a red that is the patch's own is cured at its cause; a pin re-keyed by identity with its cause; none loosened. (c) the plural holder ("the houses of worship is stirring it"): cure it in the same commit, read in three towns, or declare the clause off plural holders. Then one commit, the gates, push; read ten changed lines, a siege and an empty seat among them.
+- ITEM 5: RelationshipsTab.jsx (rpf-thorp-calm-13: check the first seat's cure reaches it); NPCsTab.jsx "1 high influence ·" (rpf-hamlet-succession_void-13). The NPC card's trait chips ("Flaw: vainTemperament: clever"): set apart as the Services need was; no word changes; count before and after.
+- Then: the page re-count of the third seat's items 3-5 and mine on its 800 (`--count-only`); the lighting census re-frozen through its own door at a clean tip (own commit); CENSUS-2 at my tip and at 62e30c7e7 over the lane's files; then tell the chair (one message) and WAIT. ON THE CHAIR'S WORD ONLY: merge lane/r2-code-b-side-2026-11-13 (plain; registers re-made through their doors); then the quick guide's food line takes `tonightSheet.js :: foodBandOf(foodRecord)`; then THE ONE FINAL STATEMENT as part 2's "EXACT NEXT STEP" item 2.
+- THE METHOD (records 386, 387, 404) and the page laws as PART 3 copies them. Never rewrite a commit at or below db61f66fc.
+
+## The chair's rulings received by this seat (notifications)
+- 00:20 UTC: ONE ROW added to item 2: tabs/WhoRunsThisTownPanel.jsx's agent row prints a title twice ("Tserenpuntsag Jalayir (the workhouse master), the workhouse master", r2r-metropolis-7; CENSUS-2 kind d). RULED: the row adds the title only where the link's own label does not already carry it; count before and after on the 800; the PDF's twin (src/pdf/sections/WhoRunsThisTown.jsx) the same. For the statement, no work: round three's code lane reworded the crisis page's "Who it touches: nobody" to "no one yet named" (an infiltration's cast is empty while the roster's secrets hold its infiltrator and recruits); leave it so and say it.
+
+## Instruments (outside the tree; lost with the container)
+- /home/user/m: the 800 seeds (CENSUS-2's seeds.txt + seeds.readers.txt), births by CENSUS-2's births.mjs in any tree (base/, p4/ corpora); `cast.mjs` (each crisis's roles, stakes, levers and hooks read with a tree's code), `count4.mjs`, `fielddiff.mjs` (leaf-path diff of two corpora by family).
+
+## Items (this seat)
+| item | commit | measured (800, app shape, db61f66fc vs the commit) |
+|---|---|---|
+| 4 the crisis cast and hooks (the third seat's patch + two cures) | 77ed210af | empty-seat "whoever holds the seat" roles 12->0, stakes 25->0, hooks 12->0; "Access to" levers 56->0, hooks 57 (53 towns)->0; "holds what the crisis makes scarce" 14->0 (all 14 false by roster; a guard test holds the rule where a member faces a granary); hooks 884->831, crises with none 26->26. DECLARED MOVE: 94 towns, families stress/stressors (cast) and npcs (47 towns: exactly ONE temporary person appended, 32 Grain Stewards + 15 Healers; every existing person byte-equal). |
+| 4 the fork census door | 32438f8d1 | resolveCrisisCast's two rows stepDraws/keyMoves 0->2 of 63, pure->drawn; "steps that draw" 12->13; no other row moved. |
+| 4 fix-forward: the register's tally | 01ee0bac6 | the contract's entropy tally drawn 25->27, pure 48->46 (the register's own re-measure). Governing set (40 files): 379 passed; red only pipelinePinnedChoosers A1, institutionBudgetPromise, dmLayerGoldenIsolation A7, each the same rows as db61f66fc (origin). |
+
+### Item 4: the five reds, classed (each file run at db61f66fc without the patch and with it)
+- crisisHooks.test.js (the tier noun): the ruled houseInProse ("the watch house"): pin re-keyed by identity.
+- people/castDerived.test.js ("a power-drawn person holds a membership of that relation"; soak1k-227): THE PATCH'S OWN: an empty-seat rival whose stake is split was told "its power gains from the crisis". Cured at its cause: under an empty seat the rival is an instigator by this rule only where its stake IS gains. Green.
+- institutionBudgetPromise.test.js: red at db61f66fc on 8 seeds (2 13 20 27 36 43 48 49), origin (the merge seat's); the patch added seed 51 (cast.roles[].reason, cast.stakes[].reason only): re-keyed by identity. Item 4 also moves 13, 43, 49 (already red at base; hash measured, not field-diffed). The failing set is now the base's.
+- pipelinePinnedChoosers.test.js A1: the same three rows red at db61f66fc: origin.
+- generationForkCensus.test.js A3e: THE DRAW QUESTION: the temporary person's name is drawn by npcGenerator :: pickFirst on the active stream, which in this step is rng.fork('resolveCrisisCast') (pipeline.js), the step's only draw. Measured: only that step's two rows move. Not a shared stream: a DECLARED MOVE through the census's own door (32438f8d1). Green.
+- Ruling (c): DECLARED OFF PLURAL HOLDERS (only 6 hooks of 800 have a house as the line holder, none plural: plural verbs could not be read where they print). Guard: r2r-thorp-16 "the palisade leads the defence".
+- Named, not cured: r2s-succession_void-town-3: the rival gains and loses at once, so the instigator is absent ("no power gains") beside two powers that "gain and lose by it at once": the vocabulary's existing pair (14 such crises at base, 15 now). Recommendation: the crisis lane rules whether "no power gains" should read "no power gains alone" (a word change on a ruled vocabulary).
+
+## Rows NOT reached (line by line; kept current)
+1. Item 5 (RelationshipsTab, NPCsTab), the chair's added row (WhoRunsThisTownPanel + its PDF twin), the trait chips.
+2. The page re-count (`--count-only`) of items 3-5 and this seat's.
+3. The lighting census re-freeze (own commit).
+4. CENSUS-2 at the tip and at 62e30c7e7 over the lane's files.
+5. The message to the chair; then, on the chair's word, the merge, the quick guide's food line, THE FINAL STATEMENT.
