@@ -330,7 +330,9 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
     // headline says the count in words); scripts/lib/writer-dark-register.mjs names it.
     // 35 -> 34 (2026-11-13, R2-CODE-B item 2): `forcedByToggle on institutions` struck with cause (clause S, LIT: the
     // Institutions tab's YOU badge reads it, InstitutionsTab.jsx :: institutionBadge); scripts/lib/writer-dark-register.mjs.
-    expect(WRITER_DARK_REGISTER.length).toBe(34); // SW-B7b (2026-11-09): + `situationDesc on economicState`, engine-internal, the Economics fallback's read left with the economy desk's public branch (34 -> 35) // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (43 -> 37) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (42 -> 36) // MERGE-WAVE at the W7 HOOKS merge: both lanes' deltas composed (42 -> 35) // MERGE-TRAIN at the ALLEGIANCE-CAR3 merge: car 3's one strike composed (35 -> 34)
+    // 34 -> 33 (2026-11-14, R2-CODE-B-6): `gapPct on foodRecord` struck with cause (clause S, LIT: tonightSheet.js :: foodBandOf,
+    // the food label's one home since R2-CODE-B-3 item 2b, d94638185); scripts/lib/writer-dark-register.mjs.
+    expect(WRITER_DARK_REGISTER.length).toBe(33); // SW-B7b (2026-11-09): + `situationDesc on economicState`, engine-internal, the Economics fallback's read left with the economy desk's public branch (34 -> 35) // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (43 -> 37) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (42 -> 36) // MERGE-WAVE at the W7 HOOKS merge: both lanes' deltas composed (42 -> 35) // MERGE-TRAIN at the ALLEGIANCE-CAR3 merge: car 3's one strike composed (35 -> 34)
     expect(liveEvidence.map((row) => row.identity).sort())
       .toEqual(WRITER_DARK_REGISTER.map((row) => row.identity).sort());
     for (const row of liveEvidence) {
@@ -544,7 +546,8 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // W4 PEOPLE second seat (merging the car, 2026-11-08): and the lane's one strike, `isSurplus on foodSecurity` (its consumer conditionPromotion.js entered the dossier-pdf closure through the DS-CND-1 condition desk; clause E): 42 -> 41.
     // 42 -> 41 at W7 HOOKS (composed over MERGE-CAR) (2026-11-07): `dependencyCount on metrics` struck, LIT by the viability headline (clause S).
     // 35 -> 34 (2026-11-13, R2-CODE-B item 2): `forcedByToggle on institutions` struck, LIT by the YOU badge (clause S).
-    expect(registeredAndDark.length).toBe(34); // SW-B7b (2026-11-09): + `situationDesc on economicState` (34 -> 35) // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (43 -> 37) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (42 -> 36) // MERGE-WAVE at the W7 HOOKS merge: both lanes' deltas composed (42 -> 35) // MERGE-TRAIN at the ALLEGIANCE-CAR3 merge: car 3's one strike composed (35 -> 34)
+    // 34 -> 33 (2026-11-14, R2-CODE-B-6): `gapPct on foodRecord` struck, LIT by foodBandOf, the food label's one home (clause S).
+    expect(registeredAndDark.length).toBe(33); // SW-B7b (2026-11-09): + `situationDesc on economicState` (34 -> 35) // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (43 -> 37) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (42 -> 36) // MERGE-WAVE at the W7 HOOKS merge: both lanes' deltas composed (42 -> 35) // MERGE-TRAIN at the ALLEGIANCE-CAR3 merge: car 3's one strike composed (35 -> 34)
     expect(baseline.darkUnregistered.length).toBe(cohort.length - registeredAndDark.length);
     expect(reviewableDark(cohort).length).toBe(baseline.reviewableDarkCount);
     expect(reviewableDark(cohort).length).toBeLessThan(cohort.length);

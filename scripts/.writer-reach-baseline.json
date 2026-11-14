@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "42028f01d32cdd00760b1f3205e55b653025dcc7",
+ "frozenAtSha": "fc7514261dadae8faf12bc74debff33bdc25ee57",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -23,8 +23,8 @@
   "transitionCount": 22742
  },
  "shapesDigest": "2df7f38658d5d4281b46d2c23a0fb1009c686a6e619c9a4fe025eccc7f94235e",
- "detectorDigest": "14605c3fe30040fdfe646114e930a9bf8f85969011a37f72142821f1015f18d4",
- "verdictDigest": "59386f70ffef9b677d186da8e9e59bd74bf0b6b47cdeab57a8915057e39d4775",
+ "detectorDigest": "6f2f02bdda55f07cad6f631be3ba06f5de8b004cd6d50d2d79a21ef6b52c3679",
+ "verdictDigest": "46affa926821a1a3ab0eede3bff2cbf8a1cdff575b91d093975e87768de5ad32",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -72,9 +72,9 @@
   "json-export"
  ],
  "closureSizes": {
-  "web-display": 770,
+  "web-display": 769,
   "web-transitive": 1008,
-  "dossier-pdf": 516,
+  "dossier-pdf": 515,
   "campaign-pdf": 148,
   "world-book": 163,
   "foundry": 421,
@@ -83,27 +83,27 @@
  },
  "population": {
   "judged": 12336,
-  "lit": 674,
+  "lit": 675,
   "litName": 10265,
-  "dark": 1397,
+  "dark": 1396,
   "thinKeys": 16699,
   "thinShapes": 1195,
   "knownShapes": 536
  },
  "scanStats": {
-  "files": 1779,
-  "sites": 42652,
-  "propRead": 40402,
+  "files": 1778,
+  "sites": 42676,
+  "propRead": 40426,
   "elemRead": 0,
   "destructure": 2232,
   "inOp": 18,
-  "rGrades": 6798,
-  "nGrades": 1776958,
-  "resolvedReceivers": 7713
+  "rGrades": 6821,
+  "nGrades": 1779294,
+  "resolvedReceivers": 7733
  },
- "registerDigest": "da8c042fcdd188d4324d0f6037bff9c68a8b9a6a2bffbc5a0ca6c804210b5924",
+ "registerDigest": "5c785a3a9c39e59c156f658cf9696bb21548e97d11dde444abb356d75bf5d543",
  "pendingSurfaceCeiling": 0,
- "reviewableDarkCount": 396,
+ "reviewableDarkCount": 395,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -9331,12 +9331,12 @@
   "famineCutPct on foodRecord": "dossier-pdf=R web-display=R",
   "foodSources on foodRecord": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "foodwaysLine on foodRecord": "dossier-pdf=R foundry=R web-display=N web-transitive=R",
-  "gapPct on foodRecord": "",
+  "gapPct on foodRecord": "dossier-pdf=R foundry=R web-transitive=R",
   "grownPct on foodRecord": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "growsMoreThanEats on foodRecord": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "hasGranary on foodRecord": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "magicPct on foodRecord": "dossier-pdf=R web-display=R",
-  "normalImportPct on foodRecord": "dossier-pdf=R foundry=R web-display=R",
+  "normalImportPct on foodRecord": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
   "storageMonths on foodRecord": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "storesHeld on foodRecord": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "surplusPct on foodRecord": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
@@ -9551,7 +9551,7 @@
   "hasWizardTower on inst": "dossier-pdf=R web-display=R",
   "names on inst": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "family on institution": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
-  "key on institution": "campaign-pdf=R dossier-pdf=R foundry=R json-export=R web-display=N web-transitive=R world-book=R",
+  "key on institution": "campaign-pdf=R dossier-pdf=R foundry=R json-export=R web-display=R web-transitive=R world-book=R",
   "kind on institution": "campaign-pdf=R dossier-pdf=R foundry=R json-export=R news=N web-display=N web-transitive=R world-book=R",
   "title on institution": "campaign-pdf=R dossier-pdf=R foundry=R json-export=R web-display=R web-transitive=R world-book=R",
   "veiled on institution": "campaign-pdf=R dossier-pdf=R foundry=R json-export=R web-transitive=R world-book=R",
@@ -9930,7 +9930,7 @@
   "id on npcs": "campaign-pdf=R dossier-pdf=R foundry=R json-export=A news=R web-display=R web-transitive=R world-book=R",
   "importance on npcs": "campaign-pdf=N dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=N",
   "influence on npcs": "campaign-pdf=R dossier-pdf=R foundry=R json-export=A web-display=R web-transitive=R world-book=R",
-  "institution on npcs": "campaign-pdf=R dossier-pdf=R foundry=R json-export=R web-display=N web-transitive=R world-book=R",
+  "institution on npcs": "campaign-pdf=R dossier-pdf=R foundry=R json-export=R web-display=R web-transitive=R world-book=R",
   "institutionId on npcs": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "lastExposed on npcs": "dossier-pdf=N foundry=N web-transitive=N",
   "legitimacyContribution on npcs": "dossier-pdf=N foundry=N web-transitive=N",
