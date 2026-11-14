@@ -1,0 +1,49 @@
+RULING (5), GREEN (VEIL-13; the seat's call V13-1, option A; amended on the seat's review: the identity in ONE spelling, and the
+sanitiser pin's loader). Verdict lines, not logs; every run local (chains on the unix socket /var/tmp/rv7, in-process pglite).
+
+THE ARM: VEIL-13 RULING 5 alone, on the amended tree: exit 0, 1 passed (red: R5-red-at-2937f9ac9.txt, 780 at the base, 108 at 380a933fd).
+THE GUARDS (the mutex refuses the shared tier, 'worker cap 3 exceeds the ceiling of 2'; so through scripts/gate-tail.sh):
+  galleryVeilHandRows, gallerySecondHomes, galleryVeilCures: Tests  51 passed (51); exit 0 = 14 + 5 + 32 (each file's own
+  count of arms; at the base 13 + 5 + 32 = 50). The rollback pin (galleryVeilCures: 001..212 then 212's down file equals a chain
+  stopped at 211, byte for byte, get_unlisted_dossier among the reads compared) is among the 32: green.
+THE SANITISER PIN (this commit's own red, cured): tests/security/gallerySanitizer.pglite.test.js with tests/domain/display/publicSafe.test.js:
+  Tests  92 passed (92), exit 0 (the sanitiser file 36 of 36; at 380a933fd 30 passed, 6 skipped: 'function
+  public._gallery_veil_str(jsonb) does not exist'). Its loader takes, callee first, the helpers the apply now calls: _gallery_veil_str,
+  _gallery_veil_pieces, _gallery_veil_name_case, _gallery_veil_name_prep, _gallery_veil_case_fold, _gallery_veil_embeds; no assertion moved.
+THE ACCEPTANCE RUN (run-all.sh, the CPU idle): checks 37 | PASS 35 | FAIL 2; FAIL rows a07, d06 only; every one of the 37
+  rows the base's verdict (e06 PASS); server against twin (all 15 equal); exit 1. Deep and large rows, x211 | x212, ms:
+  3,000 deep, Reveal DM 38 | 45; 200 hidden houses, 5000 strings 391 | 421; 600 hidden houses, 10000 strings 1379 | 1377 (base 50 | 45, 413 | 386, 1350 | 1388; each PASS).
+
+THE LIBRARY'S HAND TOWNS (a..e of REVIEW-VEIL-7, f and g of REVIEW-VEIL-8, p and pc of veil-probe-11), each stored three times on a chain
+  of the base's migrations (r5b212) and of the amended tree's (r5c212), read by gallery, link, import, and the twin over each:
+  responses 108; changed 18; differing paths outside the two withheld keys: 0
+  after: server (gallery) against twin, differing paths over 27 shares: 0
+  every changed path one of the two withheld keys of town-p's copy (9 reads) or town-g's copy and sentence (9 reads each); town-pc
+  and a..f byte-equal; the markers gcov1-3 and COVERTMARK on no public read and not on the Reveal-DM link.
+
+THE LINK WIDENS NOTHING: _gallery_apply_member_overrides reads dm_full for its npcs[] in the splice only, and for its type, its
+  relationships[], prominentRelationship and pressureSentence in the covert check; no function it calls receives dm_full. The link's
+  dm_full gains exactly those three keys of the live town (each where the live town has it). get_unlisted_dossier against 211's statement:
+    31a32
+    >   -- 212 (ruling (5)): the covert check alone reads the live town's relationships[], prominentRelationship, pressureSentence
+    34c35,39
+    <       pub.j, pub.j,
+    ---
+    >       pub.j,
+    >       case when jsonb_typeof(base.j) = 'object'
+    >            then pub.j || (select coalesce(jsonb_object_agg(k, base.j -> k), '{}'::jsonb)
+    >                             from unnest(array['relationships', 'prominentRelationship', 'pressureSentence']) k where base.j ? k)
+    >            else pub.j end,
+  By run: the born towns' link reads (R5-born.txt) and the hand towns' (above): no path moved but the withheld strings.
+212 applied twice equals 212 applied once (r5c212: 509 public functions, signature, body, grants, volatility, settings: 0 lines differ).
+
+THE GATES (scripts/gate-tail.sh): typecheck:domain:strict exit 0 (1113 errors, ceiling 1113); typecheck:ratchet exit 0
+  (167 error(s), ceiling 167); eslint on galleryVeil.js, gallerySecondHomes.js and the two touched test files: exit 0, 0 problems.
+
+COST, the largest born town ('Langengrund', a metropolis: 503,699 characters stored, 97 ties, 8 of them covert), stored Reveal DM off,
+  the median of 25 runs a chain (five rounds, the chains alternated), ms: the frozen 211 alone | 212 at the base | 212 amended:
+    the link, no veil record: 270.5 | 567.9 | 560.1  (after / 211: 2.07; base / 211: 2.10)
+    the link, the default veil: 265.5 | 546.2 | 556.0  (after / 211: 2.09; base / 211: 2.06)
+    the gallery read, the default veil: 346.4 | 610.2 | 608.1  (after / 211: 1.76; base / 211: 1.76)
+  the cure moves each within 10 ms (noise). The link at the BASE is already 2.10 x the frozen 211 on this town: the cost law's TWICE is
+  broken there before this commit (named for item 4, V8-3), not by it.

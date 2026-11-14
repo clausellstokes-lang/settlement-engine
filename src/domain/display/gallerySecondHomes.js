@@ -46,7 +46,8 @@
  *
  * SQL TWIN, rule for rule: migration 212 :: _gallery_veil_pieces, _gallery_veil_clauses, _gallery_veil_embeds, _gallery_veil_sources,
  * _gallery_veil_tie_pieces, _gallery_veil_second_homes, the impression arm of _gallery_veil_card, and THE NAME SEARCH
- * (section 4c: _gallery_veil_name_search and its helpers; below, buildNameSearch and sweepHiddenNames). PINNED BY EXECUTION: tests/security/gallerySecondHomes.pglite.test.js (planted markers,
+ * (section 4c: _gallery_veil_name_search and its helpers; below, buildNameSearch and sweepHiddenNames); and VEIL-13's ruling (5),
+ * withholdCovertCopies (a covert tie's four strings, run by galleryPayloadFor): _gallery_apply_member_overrides. PINNED BY EXECUTION: tests/security/gallerySecondHomes.pglite.test.js (planted markers,
  * every eye shut, the whole payload of the four reads searched as text, both stored shapes), and the twin's
  * parity by tests/security/galleryServerVeil.pglite.test.js and galleryVeilCures.pglite.test.js.
  *
@@ -880,6 +881,54 @@ export function withholdSecondHomes(s, src, gone, openNames, houseFields, births
   // the chair's ruling (a), in COHERENCE-VEIL-10's form: last, every key and every string of the projection that names
   // a house removed whole leaves it, the floors aside. SQL twin: _gallery_veil_name_sweep.
   if (search) sweepHiddenNames(s, search);
+}
+
+/**
+ * VEIL-13, RULING (5) (the chair's ruling (5) and its 04:55 addition): THE COVERT TIE'S FOUR STRINGS. The public
+ * projection drops a tie flagged `covert: true` from relationships[] (publicSafe.js :: sanitizePublicValue), and
+ * prominentRelationship (the tie's copy: full, tension, phrasing) and pressureSentence still told it. The identity is
+ * judged IN ONE SPELLING, the town as stored against itself (`full`: its relationships[], prominentRelationship and
+ * pressureSentence are read): the projection writes a hidden power's name as 'an unseen interest' in every string leaf
+ * and the stored town as written, so a copy compared across the two would be its tie's in neither. On a PUBLIC
+ * projection (`shareDm` false) the dropped ties are the stored town's ties the sanitiser removes by its own condition
+ * (`covert` exactly true), and the projection loses:
+ *   prominentRelationship, WHOLE, where the stored copy is a dropped tie's (the same two ends and type, or a copy equal
+ *     to its text: withholdSecondHomes' own rule);
+ *   pressureSentence, where the stored sentence names both ends of a dropped tie, each end found as written, or holds
+ *     the words (embedsAny) of that tie's description or tension or, where the copy goes with it, the copy's stored
+ *     wording (its full and tension);
+ *   both, WHERE UNSURE: the stored town is not a record, its relationships[] is there and not an array, or a dropped
+ *     tie's two ends do not both carry a name.
+ * Reveal DM keeps the tie in the projection, so it keeps the four strings. A projection that is not a record is returned
+ * as it is (the public projection of any such value is already {}). The projection is not changed: a copy comes back
+ * without the keys that go. SQL twin, rule for rule: migration 212 :: _gallery_apply_member_overrides (the CASE around
+ * its splice).
+ * @param {unknown} pub the projection (galleryPayloadFor's toPublicSafe output)
+ * @param {unknown} full the town as stored
+ * @param {boolean} shareDm
+ * @returns {unknown}
+ */
+export function withholdCovertCopies(pub, full, shareDm) {
+  if (!isRec(pub) || shareDm) return pub;
+  const unread = !isRec(full) || (Object.prototype.hasOwnProperty.call(full, 'relationships') && !Array.isArray(full.relationships));
+  /** @type {Rec[]} */
+  const dropped = isRec(full) && Array.isArray(full.relationships)
+    ? full.relationships.filter(/** @returns {t is Rec} */ (t) => isRec(t) && t.covert === true) : [];
+  const closed = unread || dropped.some(t => str(t.npc1Name) === '' || str(t.npc2Name) === '');
+  const pr = isRec(full) ? full.prominentRelationship : undefined;
+  const prDropped = isRec(pr) && dropped.some(t => (str(t.npc1Name) === str(pr.npc1) && str(t.npc2Name) === str(pr.npc2) && str(t.typeName) === str(pr.type))
+    || (str(pr.full) !== '' && t.description === pr.full) || (str(pr.tension) !== '' && t.tension === pr.tension));
+  const ps = isRec(full) ? full.pressureSentence : undefined;
+  const psTold = typeof ps === 'string'
+    && (dropped.some(t => str(t.npc1Name) !== '' && str(t.npc2Name) !== '' && ps.includes(str(t.npc1Name)) && ps.includes(str(t.npc2Name)))
+      || embedsAny(ps, secondHomePieces([dropped.map(t => [t.description, t.tension]), prDropped && isRec(pr) ? [pr.full, pr.tension] : null])));
+  const prGoes = closed || prDropped;
+  const psGoes = closed || psTold;
+  if (!(prGoes && 'prominentRelationship' in pub) && !(psGoes && 'pressureSentence' in pub)) return pub;
+  const out = { ...pub };
+  if (prGoes) delete out.prominentRelationship;
+  if (psGoes) delete out.pressureSentence;
+  return out;
 }
 
 /** The groupings that hide what the criminal income row is built from (its label's list, its sentence's figure). */

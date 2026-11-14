@@ -70,7 +70,7 @@ import { factionIdFromName } from '../../lib/entities.js';
 import { cardHouseOf } from '../people/cardPowers.js';
 import { brokerageLegalityOf } from '../../data/informationBrokerageTuning.js';
 import { isCriminalInstitution, isClandestineInstitution, isHideableHouse } from '../people/cardVeil.js';
-import { secondHomeSources, withholdCriminalIncome, withholdImpression, withholdSecondHomes } from './gallerySecondHomes.js';
+import { secondHomeSources, withholdCovertCopies, withholdCriminalIncome, withholdImpression, withholdSecondHomes } from './gallerySecondHomes.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {{ address: string, hidden: boolean }} VeilDelta */
@@ -976,16 +976,21 @@ export function readShareMode(memberOverrides) {
  * saved row (toPublicSafe with the DM door and the per-member overrides), before the veil.
  * A snapshot freezes exactly this; the reader veils it at view time, so the DM's eyes keep
  * working on a frozen copy and an un-hidden fact comes back without a refresh.
+ * VEIL-13, RULING (5): a tie the public projection drops as covert takes its four strings
+ * with it (gallerySecondHomes.js :: withholdCovertCopies, the identity judged on the raw town
+ * against itself, one spelling; the server's twin is migration 212 ::
+ * _gallery_apply_member_overrides, which every read runs).
  * @param {unknown} settlement  the raw saved settlement
  * @param {{ shareDm?: boolean, memberOverrides?: unknown }} [opts]
  * @returns {Rec}
  */
 export function galleryPayloadFor(settlement, { shareDm = false, memberOverrides = null } = {}) {
-  return /** @type {Rec} */ (toPublicSafe(settlement, {
+  const pub = toPublicSafe(settlement, {
     full: shareDm === true,
     memberOverrides: isRec(memberOverrides)
       ? /** @type {Record<string, { revealDm?: boolean, allowImport?: boolean }>} */ (memberOverrides) : null,
-  }));
+  });
+  return /** @type {Rec} */ (withholdCovertCopies(pub, settlement, shareDm === true));
 }
 
 // ── CURATE (X-21 (e), X-21b): the model the curate screen draws ───────────────────────

@@ -1,7 +1,7 @@
 -- 212_share_veil_later_cures.down.sql — reversal for migration 212 (COHERENCE-VEIL-7).
 --
 -- DATA-SAFE and WHOLE, per supabase/rollback/README.md: 212 wrote no row, column, constraint or
--- policy, so its reversal is entirely schema: the five functions it restated go back to 211's
+-- policy, so its reversal is entirely schema: the six functions it restated go back to 211's
 -- statements (the file at 333b33973, sha256 eface6d0...0be01, copied verbatim), then the
 -- helpers it created are dropped by signature.
 --
@@ -9,7 +9,8 @@
 -- forty helpers 211 creates, so run after 212 without this one it would leave 212's own behind.
 -- The functions go back FIRST because they call the helpers; dropping a helper first would leave
 -- them raising "function does not exist" for the width of the script. CREATE OR REPLACE keeps each
--- function's grants, which 212 restated unchanged; the two reads' grants are restated here too.
+-- function's grants, which 212 restated unchanged; the three reads' grants are restated here too
+-- (get_unlisted_dossier, restated by 212 for VEIL-13's ruling (5), takes back 211's one grant).
 --
 -- PROVEN BY EXECUTION on local chains (docs/chair/2026-11-13/veil-probe-7/): 001..211 + 212 + this
 -- file equals 001..211, and 203 + 211 + 212 + this file equals 203 + 211, by the lane's rehearsal
@@ -18,7 +19,7 @@
 --
 -- NOT reversed, because there is nothing to: no stored row was written by 212.
 
--- ── 1. the five functions 212 restated, at the frozen 211's statements, verbatim ──────────────────────
+-- ── 1. the six functions 212 restated, at the frozen 211's statements, verbatim ───────────────────────
 
 -- [212 down: back to 211 at 333b33973] public._gallery_veil_card
 create or replace function public._gallery_veil_card(kind text, c jsonb, cls jsonb, byid jsonb, excj jsonb, legacy jsonb)
@@ -288,6 +289,52 @@ $$;
 
 revoke execute on function public.get_gallery_dossier(text) from public;
 grant execute on function public.get_gallery_dossier(text) to authenticated, anon;
+
+-- [212 down: back to 211 at 333b33973] public.get_unlisted_dossier
+create or replace function public.get_unlisted_dossier(p_slug text)
+returns jsonb
+language sql stable security definer set search_path = public, pg_temp
+as $$
+  select jsonb_build_object(
+    'id', s.id,
+    'name', s.name,
+    'tier', s.tier,
+    'slug', s.unlisted_slug,
+    'unlisted', true,
+    'author_name', ap.external_name,
+    'is_owner', coalesce(s.user_id = auth.uid(), false),
+    'gallery_share_dm', false,
+    -- 211: nothing of the share travels but each member's two booleans and the served marker.
+    'gallery_member_overrides', vl.v -> 'served',
+    'dossier', vl.v -> 'body'
+  )
+  from public.settlements s
+  left join public.profiles ap on ap.id = s.user_id
+  cross join lateral (
+    select case
+      when s.gallery_share_narrated
+        and s.ai_data is not null
+        and jsonb_typeof(s.ai_data -> 'aiSettlement') = 'object'
+      then s.ai_data -> 'aiSettlement'
+      else s.data
+    end as j
+  ) base
+  -- R12 (the re-review of 2026-11-10): the sanitizer runs ONCE per read on the whole document;
+  -- its result is both the splice's base and its only source.
+  cross join lateral (select public._gallery_sanitize_public_json(base.j) as j offset 0) pub
+  cross join lateral (
+    select public._gallery_apply_member_overrides(
+      pub.j, pub.j,
+      s.gallery_member_overrides, false, s.gallery_importable, false
+    ) as d
+    offset 0
+  ) proj
+  -- 211: the share's veil; an unmarked share takes the default veil (the link's readers are players)
+  cross join lateral (select public._gallery_veil(proj.d, s.gallery_member_overrides, true) as v offset 0) vl
+  where s.unlisted_slug = p_slug
+  limit 1;
+$$;
+grant execute on function public.get_unlisted_dossier(text) to authenticated, anon;
 
 -- [212 down: back to 211 at 333b33973] public.import_gallery_dossier
 create or replace function public.import_gallery_dossier(dossier_slug text)

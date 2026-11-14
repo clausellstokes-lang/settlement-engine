@@ -1,0 +1,84 @@
+RULING (5), BORN, BY RUN, SERVER AND TWIN (VEIL-13; veil-probe-13/measure/r5-born.probe.jsx, the same probe file run once on each
+tree: the base's archive of 2937f9ac9 on a chain of its migrations (r5b212), and the amended tree (the identity in one spelling) on a
+chain of its own (r5c212)).
+The 240 born towns PART 12 section 5 counted (born-ties.probe.jsx's seeds 'v11-ties', six sizes, calm and infiltrated, twenty each),
+in both stored shapes (the new one with its public prose, and master's), each stored three times (no veil record, Reveal DM off; the
+default veil, Reveal DM off; the default veil, Reveal DM on), read by the gallery, the party link, the import and the twin: 5,760 reads.
+The probe's own counter (not the engines'): a copy is a covert tie's where born-ties.probe.jsx's match says so; a pressure sentence
+tells one where it holds both ends' names as written or (lower case) a run of 12 or more of the tie's description or tension.
+
+BEFORE (the base), per stored shape, share and read: (with a prominent relationship | its tie covert and dropped in that read |
+  TELLS: full tension phrasing pressureSentence | pressure sentences withheld | ...)
+  shape/share/read | with prominent | its tie covert+dropped | TELLS: full tension phrasing pressureSentence | ps withheld | pr withheld | pr with no tie in the read / in the stored town | towns with a dropped covert tie | twin differs (gallery)
+  new/none/gallery | 114 | 2 | 2 2 2 0 | 0 | 0 | 2 / 0 | 59 | 0
+  new/none/link | 114 | 2 | 2 2 2 0 | 0 | 0 | 2 / 0 | 59 | 0
+  new/none/import | 114 | 2 | 2 2 2 0 | 0 | 0 | 2 / 0 | 59 | 0
+  new/none/client | 114 | 2 | 2 2 2 0 | 0 | 0 | 2 / 0 | 59 | 0
+  new/veil/gallery | 114 | 2 | 2 2 2 0 | 0 | 0 | 2 / 0 | 59 | 0
+  new/veil/link | 114 | 2 | 2 2 2 0 | 0 | 0 | 2 / 0 | 59 | 0
+  new/veil/import | 114 | 2 | 2 2 2 0 | 0 | 0 | 2 / 0 | 59 | 0
+  new/veil/client | 114 | 2 | 2 2 2 0 | 0 | 0 | 2 / 0 | 59 | 0
+  new/dm/gallery | 114 | 0 | 0 0 0 0 | 0 | 0 | 0 / 0 | 0 | 0
+  new/dm/link | 114 | 2 | 2 2 2 0 | 0 | 0 | 2 / 0 | 59 | 0
+  new/dm/import | 114 | 0 | 0 0 0 0 | 0 | 0 | 0 / 0 | 0 | 0
+  new/dm/client | 114 | 0 | 0 0 0 0 | 0 | 0 | 0 / 0 | 0 | 0
+  old/none/gallery | 114 | 2 | 2 2 2 0 | 0 | 0 | 2 / 0 | 59 | 0
+  old/none/link | 114 | 2 | 2 2 2 0 | 0 | 0 | 2 / 0 | 59 | 0
+  old/none/import | 114 | 2 | 2 2 2 0 | 0 | 0 | 2 / 0 | 59 | 0
+  old/none/client | 114 | 2 | 2 2 2 0 | 0 | 0 | 2 / 0 | 59 | 0
+  old/veil/gallery | 114 | 2 | 2 2 2 0 | 0 | 0 | 2 / 0 | 59 | 0
+  old/veil/link | 114 | 2 | 2 2 2 0 | 0 | 0 | 2 / 0 | 59 | 0
+  old/veil/import | 114 | 2 | 2 2 2 0 | 0 | 0 | 2 / 0 | 59 | 0
+  old/veil/client | 114 | 2 | 2 2 2 0 | 0 | 0 | 2 / 0 | 59 | 0
+  old/dm/gallery | 114 | 0 | 0 0 0 0 | 0 | 0 | 0 / 0 | 0 | 0
+  old/dm/link | 114 | 2 | 2 2 2 0 | 0 | 0 | 2 / 0 | 59 | 0
+  old/dm/import | 114 | 0 | 0 0 0 0 | 0 | 0 | 0 / 0 | 0 | 0
+  old/dm/client | 114 | 0 | 0 0 0 0 | 0 | 0 | 0 / 0 | 0 | 0
+  the covert prominent towns: city/calm/14, metropolis/infiltrated/3
+
+AFTER (the amended tree):
+  shape/share/read | with prominent | its tie covert+dropped | TELLS: full tension phrasing pressureSentence | ps withheld | pr withheld | pr with no tie in the read / in the stored town | towns with a dropped covert tie | twin differs (gallery)
+  new/none/gallery | 114 | 2 | 0 0 0 0 | 0 | 2 | 2 / 0 | 59 | 0
+  new/none/link | 114 | 2 | 0 0 0 0 | 0 | 2 | 2 / 0 | 59 | 0
+  new/none/import | 114 | 2 | 0 0 0 0 | 0 | 2 | 2 / 0 | 59 | 0
+  new/none/client | 114 | 2 | 0 0 0 0 | 0 | 2 | 2 / 0 | 59 | 0
+  new/veil/gallery | 114 | 2 | 0 0 0 0 | 0 | 2 | 2 / 0 | 59 | 0
+  new/veil/link | 114 | 2 | 0 0 0 0 | 0 | 2 | 2 / 0 | 59 | 0
+  new/veil/import | 114 | 2 | 0 0 0 0 | 0 | 2 | 2 / 0 | 59 | 0
+  new/veil/client | 114 | 2 | 0 0 0 0 | 0 | 2 | 2 / 0 | 59 | 0
+  new/dm/gallery | 114 | 0 | 0 0 0 0 | 0 | 0 | 0 / 0 | 0 | 0
+  new/dm/link | 114 | 2 | 0 0 0 0 | 0 | 2 | 2 / 0 | 59 | 0
+  new/dm/import | 114 | 0 | 0 0 0 0 | 0 | 0 | 0 / 0 | 0 | 0
+  new/dm/client | 114 | 0 | 0 0 0 0 | 0 | 0 | 0 / 0 | 0 | 0
+  old/none/gallery | 114 | 2 | 0 0 0 0 | 0 | 2 | 2 / 0 | 59 | 0
+  old/none/link | 114 | 2 | 0 0 0 0 | 0 | 2 | 2 / 0 | 59 | 0
+  old/none/import | 114 | 2 | 0 0 0 0 | 0 | 2 | 2 / 0 | 59 | 0
+  old/none/client | 114 | 2 | 0 0 0 0 | 0 | 2 | 2 / 0 | 59 | 0
+  old/veil/gallery | 114 | 2 | 0 0 0 0 | 0 | 2 | 2 / 0 | 59 | 0
+  old/veil/link | 114 | 2 | 0 0 0 0 | 0 | 2 | 2 / 0 | 59 | 0
+  old/veil/import | 114 | 2 | 0 0 0 0 | 0 | 2 | 2 / 0 | 59 | 0
+  old/veil/client | 114 | 2 | 0 0 0 0 | 0 | 2 | 2 / 0 | 59 | 0
+  old/dm/gallery | 114 | 0 | 0 0 0 0 | 0 | 0 | 0 / 0 | 0 | 0
+  old/dm/link | 114 | 2 | 0 0 0 0 | 0 | 2 | 2 / 0 | 59 | 0
+  old/dm/import | 114 | 0 | 0 0 0 0 | 0 | 0 | 0 / 0 | 0 | 0
+  old/dm/client | 114 | 0 | 0 0 0 0 | 0 | 0 | 0 / 0 | 0 | 0
+  the covert prominent towns: city/calm/14, metropolis/infiltrated/3
+
+BEFORE AGAINST AFTER, read for read (the read's fingerprint whole and without the two keys; the two keys' values):
+  rows: before 5760, after 5760, unmatched 0; towns 240 / 240
+  gallery: 1440 reads; byte-equal 1432; prominentRelationship withheld (a dropped covert tie's copy) 8; pressureSentence withheld (telling one) 0; any other move 0
+  link: 1440 reads; byte-equal 1428; prominentRelationship withheld (a dropped covert tie's copy) 12; pressureSentence withheld (telling one) 0; any other move 0
+  import: 1440 reads; byte-equal 1432; prominentRelationship withheld (a dropped covert tie's copy) 8; pressureSentence withheld (telling one) 0; any other move 0
+  client: 1440 reads; byte-equal 1432; prominentRelationship withheld (a dropped covert tie's copy) 8; pressureSentence withheld (telling one) 0; any other move 0
+  STOP rows: 0
+  towns whose PUBLIC reads (Reveal DM off, and every link) tell a covert tie the projection drops, per string: before {"full":2,"tension":2,"phrasing":2,"pressureSentence":0} | after {"full":0,"tension":0,"phrasing":0,"pressureSentence":0}
+  server (gallery) against twin, rows with a differing path: before 0, after 0
+  pressure sentences withheld (stored, not sent), over every read: before 0, after 0
+  Reveal DM (gallery, import, twin): reads that keep a stored prominentRelationship: before 684, after 684
+
+So: the towns told by a public read: 2 of 240 before (city/calm/14 'Held Over Them', metropolis/infiltrated/3 'Silent Partnership';
+  full, tension and phrasing each), 0 after; by pressureSentence 0 before and 0 after (the chair's 04:55 count: 0 of 240, so
+  said); pressure sentences withheld: 0 before, 0 after. Every read that moved is a withheld covert copy (2 towns x 2 shapes x the
+  public reads); no other path of any read moved (0 STOP rows). Of the 240 towns, 59 have a covert tie the public projection drops;
+  no born town stores relationships[] that is not an array and no covert tie lacks an end's name (the 'unsure' arm never fires).
+  (The first cure, 380a933fd, judged across two spellings, gave the same counts on these 240 towns: /var/tmp/v13/out/r5/born-after.json.)

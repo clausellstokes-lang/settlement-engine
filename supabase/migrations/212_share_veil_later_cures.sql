@@ -102,6 +102,17 @@
 --       mark, cut too), of 12 code points or more (_gallery_veil_clauses, gallerySecondHomes.js :: clausePieces). The
 --       record keeps one wording of each, so the current is the stored. Every other words-rule keeps its sentence
 --       pieces (_gallery_veil_pieces, _embeds unchanged).
+--   (24) THE COVERT TIE'S FOUR STRINGS (VEIL-13; the chair's ruling (5) and its 04:55 addition; the seat's call V13-1):
+--       the public sanitiser drops a tie flagged `covert: true` from relationships[], and every public read (each
+--       share's party link too) still told it in prominentRelationship's full, tension and phrasing and in a
+--       pressureSentence. _gallery_apply_member_overrides, which holds the full town, now judges IN ONE SPELLING (the
+--       full town's own copy and sentence against its own ties; the projection masks a hidden power's name, the full
+--       town does not) and, on a public read, where the sanitiser drops a tie by its own condition (covert JSON true),
+--       withholds the copy whole where it is that tie's, and the pressure sentence where it names both ends of such a
+--       tie or holds its words (current, or the copy's stored wording); where the full town, its ties or a dropped tie's
+--       ends cannot be read, both go. get_unlisted_dossier is restated to hand the apply the live town's relationships[],
+--       prominentRelationship and pressureSentence (it handed the projection twice, so the link could not know the tie);
+--       its people still come from the projection alone. Reveal DM keeps the tie and its strings.
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -117,19 +128,20 @@
 -- _second_homes, _member_revealed, _roster_members, _tie_roles, _roster_splice; and the name search's sixteen: _name_sep, _name_bound,
 -- _name_pad, _name_case, _name_prep, _name_fold, _name_needle, _name_search, _name_ready, _name_hits, _name_hit, _named, _name_near,
 -- _name_floor, _name_taken, _name_sweep). RESTATED, each as 211's statement plus the cure:
--- _gallery_veil_card, _gallery_veil_apply, _gallery_apply_member_overrides, get_gallery_dossier and
--- import_gallery_dossier (their grants restated as 211 states them). No helper of 211 changes its
--- signature, so nothing 211 created is left behind. 211's section 7 is restated last: no _gallery_veil*
--- helper is callable by public, anon or authenticated (69 in all). NOT CHANGED: get_unlisted_dossier,
--- get_gallery_map and every other function. No table, column, constraint, policy or row.
+-- _gallery_veil_card, _gallery_veil_apply, _gallery_apply_member_overrides, get_gallery_dossier, get_unlisted_dossier
+-- (VEIL-13, ruling (5): its apply's full town) and import_gallery_dossier (their grants restated as 211 states them).
+-- No helper of 211 changes its signature, so nothing 211 created is left behind. 211's section 7 is restated last: no _gallery_veil*
+-- helper is callable by public, anon or authenticated (69 in all). NOT CHANGED: get_gallery_map and every
+-- other function. No table, column, constraint, policy or row.
 --
 -- COUPLED CLIENT TWIN: src/domain/display/gallerySecondHomes.js (the second homes, (9); the name search, (19)), called
--- by src/domain/display/galleryVeil.js :: applyVeil. PINNED BY EXECUTION: tests/security/gallerySecondHomes.pglite.test.js,
--- tests/security/galleryVeilHandRows.pglite.test.js (rows written by hand: (18), (19)) and
+-- by src/domain/display/galleryVeil.js :: applyVeil; and (24)'s, gallerySecondHomes.js :: withholdCovertCopies, called by
+-- galleryVeil.js :: galleryPayloadFor. PINNED BY EXECUTION: tests/security/gallerySecondHomes.pglite.test.js,
+-- tests/security/galleryVeilHandRows.pglite.test.js (rows written by hand: (18), (19), (24)) and
 -- tests/security/galleryVeilCures.pglite.test.js (V5-3, V5-4, V5-7 and the rollback pins).
 --
 -- @rollback: supabase/rollback/212_share_veil_later_cures.down.sql, run FIRST, before 211's own: it recreates the
---   five functions at 211's statements (the file at 333b33973, verbatim) and drops 212's helpers by signature.
+--   six functions at 211's statements (the file at 333b33973, verbatim) and drops 212's helpers by signature.
 --   No row is written or lost either way. Rehearsed on local chains: 001..211 + 212 + this down file equals
 --   001..211; 203 + 211 + 212 + this down file equals 203 + 211.
 
@@ -1403,6 +1415,29 @@ end $$;
 -- simple CASE evaluates its subject once): the overrides can hold the whole frozen copy, and every
 -- lookup reads them again. The client only ever writes booleans
 -- (src/lib/gallery.js :: the member clamp), so no generated town changes.
+-- VEIL-13, RULING (5) (the chair's ruling (5) and its 04:55 addition; the seat's call V13-1): THE COVERT TIE'S FOUR
+-- STRINGS. The public sanitiser drops a tie flagged `covert: true` from relationships[]; the veil's apply sees only that
+-- projection, where a dropped tie cannot be told from a copy whose people were renamed. This function holds the full
+-- town (`dm_full`: the gallery read's and the import's _gallery_dm_full_json; on the party link the projection with the
+-- live town's relationships[], prominentRelationship and pressureSentence), so ONE CASE around the splice judges the
+-- identity IN ONE SPELLING, the full town's own copy and sentence against the full town's own ties (the projection
+-- writes a hidden power's name as 'an unseen interest' in every string leaf, the full town as written: compared across
+-- the two, a copy whose end or text holds that name was its tie's in neither), and withholds the projection's:
+--   prominentRelationship, WHOLE, where the full town's copy is the copy of a DROPPED tie (the same two ends and type, or
+--     a copy equal to its text: _gallery_veil_second_homes' own rule); dropped, by the sanitiser's own condition (210 ::
+--     _gallery_sanitize_public_json: a non-root object whose `covert` is JSON true is removed): on a public read every
+--     tie of the full town flagged so, on a Reveal-DM read none;
+--   pressureSentence, which the record ties to no tie, where the full town's sentence names both ends of a dropped tie,
+--     each end found by position as rule (1) of _gallery_veil_second_homes finds it, or holds the words
+--     (_gallery_veil_embeds, the one fold, both directions) of that tie's description or tension or, where the copy goes
+--     with it, the copy's stored wording (prominentRelationship.full, .tension);
+--   both, on a public read, WHERE UNSURE: the full town is not an object, its relationships[] is there and not an array,
+--     or a dropped tie's two ends do not both carry a name; and a projection that is not an object, holding either key
+--     at any depth, is the closed answer {} (the veil's own answer for it; the twin's public projection of it is {}).
+-- Reveal DM keeps the tie in the projection, so it keeps the four strings. Ruling (3) stands for every other pressure
+-- sentence. dm_full is read here for its npcs[] by the splice (a revealed person's own record) and for its
+-- relationships[], prominentRelationship and pressureSentence by this CASE; nothing else of it. Twin, rule for rule:
+-- gallerySecondHomes.js :: withholdCovertCopies, called by galleryVeil.js :: galleryPayloadFor.
 create or replace function public._gallery_apply_member_overrides(
   base jsonb,
   dm_full jsonb,
@@ -1411,6 +1446,18 @@ create or replace function public._gallery_apply_member_overrides(
   settlement_importable boolean,
   for_import boolean
 ) returns jsonb language sql immutable as $$
+  -- VEIL-13, ruling (5): the four strings of a covert tie the projection drops (the CASE; the splice is as before)
+  select case
+    when jsonb_typeof(sp.d) is distinct from 'object' then
+      case when not coalesce(settlement_share_dm, false)
+                and (jsonb_path_exists(sp.d, 'lax $.**.prominentRelationship') or jsonb_path_exists(sp.d, 'lax $.**.pressureSentence'))
+           then '{}'::jsonb else sp.d end
+    when cv.closed or cv.pr_dropped or ws.ps_told
+      then sp.d - array_remove(array[case when cv.closed or cv.pr_dropped then 'prominentRelationship' end,
+                                     case when cv.closed or ws.ps_told then 'pressureSentence' end], null)
+    else sp.d
+  end
+  from (
   -- V5-4: the roster copies follow the person's own entry (_gallery_veil_roster_splice, below)
   select public._gallery_veil_roster_splice(case
     when jsonb_typeof(base -> 'npcs') is distinct from 'array' then base
@@ -1438,7 +1485,47 @@ create or replace function public._gallery_apply_member_overrides(
       )
       from jsonb_array_elements(base -> 'npcs') with ordinality as t(npc, ord)
     ), '[]'::jsonb))
-  end, overrides, settlement_share_dm, settlement_importable, for_import);
+  end, overrides, settlement_share_dm, settlement_importable, for_import) as d
+  offset 0) sp
+  -- THE FULL TOWN IN ONE SPELLING: its own copy, its own sentence, its own ties. `pub`: a read the sanitiser projected
+  -- (Reveal DM off; the party link always); `dropped`: on such a read, every tie of the full town the sanitiser removes by
+  -- its own condition (an object of relationships[] whose `covert` is JSON true); `unread`: the full town or its ties
+  -- cannot be read
+  cross join lateral (
+    select not coalesce(settlement_share_dm, false) as pub,
+           jsonb_typeof(dm_full) is distinct from 'object'
+             or (dm_full ? 'relationships' and jsonb_typeof(dm_full -> 'relationships') is distinct from 'array') as unread,
+           coalesce((select jsonb_agg(t) from jsonb_array_elements(case when jsonb_typeof(dm_full -> 'relationships') = 'array' then dm_full -> 'relationships' else '[]' end) t
+                      where jsonb_typeof(t) = 'object' and (t -> 'covert') = 'true'::jsonb), '[]') as dropped,
+           dm_full -> 'prominentRelationship' as pr,
+           dm_full -> 'pressureSentence' as ps
+    offset 0
+  ) cw
+  -- `closed`: unsure, so both go; `pr_dropped`: the full town's copy is a dropped tie's (raw against raw)
+  cross join lateral (
+    select cw.pub and (cw.unread or exists (select 1 from jsonb_array_elements(cw.dropped) t
+                                             where public._gallery_veil_str(t -> 'npc1Name') = '' or public._gallery_veil_str(t -> 'npc2Name') = '')) as closed,
+           cw.pub and coalesce(jsonb_typeof(cw.pr) = 'object'
+             and exists (select 1 from jsonb_array_elements(cw.dropped) t
+                          where (public._gallery_veil_str(t -> 'npc1Name') = public._gallery_veil_str(cw.pr -> 'npc1') and public._gallery_veil_str(t -> 'npc2Name') = public._gallery_veil_str(cw.pr -> 'npc2')
+                                 and public._gallery_veil_str(t -> 'typeName') = public._gallery_veil_str(cw.pr -> 'type'))
+                             or (public._gallery_veil_str(cw.pr -> 'full') <> '' and t -> 'description' = cw.pr -> 'full')
+                             or (public._gallery_veil_str(cw.pr -> 'tension') <> '' and t -> 'tension' = cw.pr -> 'tension')), false) as pr_dropped
+    offset 0
+  ) cv
+  -- `ps_told`: the full town's pressure sentence names both ends of a dropped tie, or holds its words, current or (with the
+  -- copy) stored
+  cross join lateral (
+    select cw.pub and coalesce(jsonb_typeof(cw.ps) = 'string'
+      and (exists (select 1 from jsonb_array_elements(cw.dropped) t
+                    where public._gallery_veil_str(t -> 'npc1Name') <> '' and public._gallery_veil_str(t -> 'npc2Name') <> ''
+                      and position(public._gallery_veil_str(t -> 'npc1Name') in (cw.ps #>> '{}')) > 0
+                      and position(public._gallery_veil_str(t -> 'npc2Name') in (cw.ps #>> '{}')) > 0)
+           or public._gallery_veil_embeds(cw.ps, public._gallery_veil_pieces(jsonb_build_array(
+                (select jsonb_agg(jsonb_build_array(t -> 'description', t -> 'tension')) from jsonb_array_elements(cw.dropped) t),
+                case when cv.pr_dropped then jsonb_build_array(cw.pr -> 'full', cw.pr -> 'tension') end)))), false) as ps_told
+    offset 0
+  ) ws;
 $$;
 
 -- [212: RESTATED (211's statement, with the cure)] public.get_gallery_dossier
@@ -1553,6 +1640,64 @@ $$;
 
 revoke execute on function public.get_gallery_dossier(text) from public;
 grant execute on function public.get_gallery_dossier(text) to authenticated, anon;
+
+-- [212: RESTATED (211's statement, with the cure)] public.get_unlisted_dossier
+-- get_unlisted_dossier: 208's body (as amended) plus the veil (211's statement), and ONE change (VEIL-13, ruling (5);
+-- the seat's call V13-1): the apply's `dm_full` is the projection with the live town's own relationships[],
+-- prominentRelationship and pressureSentence in place of its own (each where the live town has it), nothing else of the
+-- live town, so _gallery_apply_member_overrides judges a covert tie the sanitiser dropped by identity, in the live town's
+-- one spelling, here as on the gallery read and the import. The splice still takes every person from the projection
+-- alone (it reads dm_full only for npcs[], and those are the projection's): the link widens nothing. A live town that is
+-- not an object hands the projection itself, as 211 did.
+create or replace function public.get_unlisted_dossier(p_slug text)
+returns jsonb
+language sql stable security definer set search_path = public, pg_temp
+as $$
+  select jsonb_build_object(
+    'id', s.id,
+    'name', s.name,
+    'tier', s.tier,
+    'slug', s.unlisted_slug,
+    'unlisted', true,
+    'author_name', ap.external_name,
+    'is_owner', coalesce(s.user_id = auth.uid(), false),
+    'gallery_share_dm', false,
+    -- 211: nothing of the share travels but each member's two booleans and the served marker.
+    'gallery_member_overrides', vl.v -> 'served',
+    'dossier', vl.v -> 'body'
+  )
+  from public.settlements s
+  left join public.profiles ap on ap.id = s.user_id
+  cross join lateral (
+    select case
+      when s.gallery_share_narrated
+        and s.ai_data is not null
+        and jsonb_typeof(s.ai_data -> 'aiSettlement') = 'object'
+      then s.ai_data -> 'aiSettlement'
+      else s.data
+    end as j
+  ) base
+  -- R12 (the re-review of 2026-11-10): the sanitizer runs ONCE per read on the whole document;
+  -- its result is both the splice's base and its only source.
+  cross join lateral (select public._gallery_sanitize_public_json(base.j) as j offset 0) pub
+  -- 212 (ruling (5)): the covert check alone reads the live town's relationships[], prominentRelationship, pressureSentence
+  cross join lateral (
+    select public._gallery_apply_member_overrides(
+      pub.j,
+      case when jsonb_typeof(base.j) = 'object'
+           then pub.j || (select coalesce(jsonb_object_agg(k, base.j -> k), '{}'::jsonb)
+                            from unnest(array['relationships', 'prominentRelationship', 'pressureSentence']) k where base.j ? k)
+           else pub.j end,
+      s.gallery_member_overrides, false, s.gallery_importable, false
+    ) as d
+    offset 0
+  ) proj
+  -- 211: the share's veil; an unmarked share takes the default veil (the link's readers are players)
+  cross join lateral (select public._gallery_veil(proj.d, s.gallery_member_overrides, true) as v offset 0) vl
+  where s.unlisted_slug = p_slug
+  limit 1;
+$$;
+grant execute on function public.get_unlisted_dossier(text) to authenticated, anon;
 
 -- [212: RESTATED (211's statement, with the cure)] public.import_gallery_dossier
 -- import_gallery_dossier: 131's body plus the veil, and the frozen copy read exactly as the gallery

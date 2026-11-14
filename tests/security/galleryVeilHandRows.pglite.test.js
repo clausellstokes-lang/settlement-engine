@@ -62,6 +62,16 @@
  *                        house whose longer name holds it, a shown power named as it, the town's own name.
  *         THE TABLE IS ONE   the blocking table and the padded characters, server against twin, every code point of
  *                        every plane; and a hidden name with each character of the basic plane on its left and its right.
+ *   VEIL-13 RULING 5  THE COVERT TIE'S FOUR STRINGS (the chair's ruling (5) and its 04:55 addition; the seat's call V13-1:
+ *         the party link hands the apply the live town's ties). One arm: town-p and the reader's town-g shape, the ends'
+ *         names in Cyrillic and Han, of symbols only, with a dotted capital I and with a sharp s, a sentence that holds the
+ *         tie's words in the one fold and one that holds the copy's stored wording; THE IDENTITY ACROSS TWO SPELLINGS (the
+ *         projection writes a hidden power's name as 'an unseen interest', the full town as written: an end named with it,
+ *         a copy and sentence whose words name it, a copy that is its tie's by its text alone); WHERE UNSURE (relationships[] an
+ *         object, null, a dropped tie with no end names; a stored value that is not a town): on every public read (both
+ *         shares Reveal DM off and the Reveal-DM link) the copy and the sentence go and no marker arrives. What STAYS:
+ *         Reveal DM's gallery, import and twin keep the four strings; town-pc's open copy; a sentence naming one end of
+ *         the dropped tie; one naming an open tie's two ends; another person's tie. Server against twin: every share.
  */
 import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
@@ -186,7 +196,7 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
       const slug = `hand${seq}-${share}`;
       await db.query(`insert into public.settlements (id,user_id,name,tier,data,is_public,public_slug,published_at,unlisted_slug,visibility,gallery_member_overrides,gallery_share_dm,gallery_importable)
         values (gen_random_uuid(), $1, $2, 'town', $3::jsonb, true, $4, now(), $5, 'unlisted', $6::jsonb, $7, true)`,
-      [OWNER, town.name, JSON.stringify(town), slug, `${slug}-l`, JSON.stringify(overrides), dm]);
+      [OWNER, isRec(town) ? town.name : 'A stored value that is not a town', JSON.stringify(town), slug, `${slug}-l`, JSON.stringify(overrides), dm]);
       await db.exec(`set test.uid = '';`);
       const gallery = (await db.query(`select to_jsonb(g.data) as d from public.get_gallery_dossier($1) g`, [slug])).rows[0]?.d;
       const link = (await db.query(`select public.get_unlisted_dossier($1) -> 'dossier' as d`, [`${slug}-l`])).rows[0]?.d;
@@ -1060,5 +1070,136 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     }
     for (const c of ['a', 'Q', '7', '\u00e9', '\uff21', '\ufb01', '\u03bb', '\u0436', '\u0561', '\u10d0']) expect([c, at(c, 'left'), at(c, 'right')]).toEqual([c, false, false]);
     expect(at('s', 'right')).toBe(true); // the English plural
+  }, ARM_TIMEOUT_MS);
+
+  // \u2500\u2500 VEIL-13 RULING 5: THE COVERT TIE'S FOUR STRINGS (the chair's ruling (5) and its 04:55 addition; the seat's call V13-1) \u2500\u2500
+  // The public sanitiser drops a tie flagged `covert: true` from relationships[]; prominentRelationship (the tie's copy:
+  // full, tension, phrasing) and pressureSentence still told it, on every public read. Each now goes BY IDENTITY with the
+  // tie it tells, judged IN ONE SPELLING, the full town's own copy and sentence against its own ties (212 ::
+  // _gallery_apply_member_overrides, to which the party link now hands the live town's ties, copy and sentence; the twin's
+  // galleryPayloadFor): on a public read the copy whole where it is a dropped tie's; the pressure sentence where it names
+  // both ends of a dropped tie, or by the words (one fold) against the dropped tie's description and tension and the copy's
+  // stored wording. Where the full town, its ties or a dropped tie's ends cannot be read, both go on a public read.
+  // Reveal DM keeps the tie, so it keeps the four strings.
+
+  /** veil-probe-11/hand/town-p.json and town-pc.json, written out: the prominent tie covert (COVERTMARK), and open. */
+  const coldharbour = (prominentOf) => ({ name: prominentOf === 'covert' ? 'Coldharbour' : 'Coldharbour control', tier: 'town',
+    institutions: [{ name: 'Rope walk', category: 'Economy', desc: 'Rope.' }],
+    npcs: [{ id: 'npc.ivo', name: 'Ivo Marchetti', role: 'Harbourmaster' }, { id: 'npc.tamsin', name: 'Tamsin Vey', role: 'Chandler' },
+      { id: 'npc.olek', name: 'Olek Brandt', role: 'Cooper' }, { id: 'npc.ruth', name: 'Ruth Calloway', role: 'Netmaker' }],
+    relationships: [
+      { id: 'tie.ivo-tamsin', from: 'npc.ivo', to: 'npc.tamsin', npc1Name: 'Ivo Marchetti', npc2Name: 'Tamsin Vey', type: 'secret_patron', typeName: 'Silent Partnership',
+        covert: true, description: 'COVERTMARK the harbourmaster quietly owns half of the chandlery', tension: 'COVERTMARK the customs ledger would show it if anyone looked' },
+      { id: 'tie.olek-ruth', from: 'npc.olek', to: 'npc.ruth', npc1Name: 'Olek Brandt', npc2Name: 'Ruth Calloway', type: 'rival', typeName: 'Professional Rivalry',
+        description: 'They bid against each other for every barrel contract', tension: 'Ruth undercut the last contract by a single copper' }],
+    prominentRelationship: prominentOf === 'covert'
+      ? { npc1: 'Ivo Marchetti', npc2: 'Tamsin Vey', type: 'Silent Partnership', full: 'COVERTMARK the harbourmaster quietly owns half of the chandlery',
+          tension: 'COVERTMARK the customs ledger would show it if anyone looked', phrasing: 'Ivo Marchetti and Tamsin Vey share a silent partnership. COVERTMARK the customs ledger would show it if anyone looked.' }
+      : { npc1: 'Olek Brandt', npc2: 'Ruth Calloway', type: 'Professional Rivalry', full: 'They bid against each other for every barrel contract',
+          tension: 'Ruth undercut the last contract by a single copper', phrasing: 'Ruth undercut the last contract by a single copper' },
+    pressureSentence: 'The harbour is busy this season.' });
+  /**
+   * The reader's town-g shape (REVIEW-VEIL-8 hand/town-g.json, its covert tie): an open tie (Orrin Vale and the first end)
+   * and a covert tie between `a` and `b` whose description, tension and phrasing carry `${tag}1` to `${tag}3`; the pressure
+   * sentence is the phrasing (it names both ends) unless given. `stored`: the copy's wording where the tie changed since.
+   */
+  function covertTown(tag, a, b, { desc, ten, stored = {}, pressure, rels, prominent, extra = {} } = {}) {
+    const d = desc ?? `${tag}1 the two of them meet in the salt cellar at night`;
+    const t = ten ?? `${tag}2 if the council learns of it both hang`;
+    const open = { id: 'tie.orrin-a', from: 'npc.orrin', to: 'npc.a', npc1Name: 'Orrin Vale', npc2Name: a, type: 'rival', typeName: 'Rivals', description: 'They split the docks.' };
+    const covert = { id: 'tie.a-b', from: 'npc.a', to: 'npc.b', npc1Name: a, npc2Name: b, type: 'lover', typeName: 'Secret lovers', description: d, tension: t, covert: true };
+    const phrasing = `${tag}3 they say ${a} and ${b} meet at night`;
+    return { name: `Saltmere ${tag}`, tier: 'town', institutions: [{ name: 'Fish market', category: 'Economy', desc: 'Fish.' }],
+      npcs: [{ id: 'npc.orrin', name: 'Orrin Vale', role: 'Guildmaster' }, { id: 'npc.a', name: a, role: 'Fence' }, { id: 'npc.b', name: b, role: 'Smith' }],
+      relationships: rels ? rels(open, covert) : [open, covert],
+      prominentRelationship: prominent ?? { npc1: a, npc2: b, type: 'Secret lovers', phrasing, full: stored.full ?? d, tension: stored.tension ?? t },
+      pressureSentence: pressure ?? phrasing, ...extra };
+  }
+  const needles = (tag, ...ns) => ns.map(n => `${tag}${n}`);
+  /** A power hidden by its own row (`hidden: true`): the public sanitiser writes its name as 'an unseen interest' in every string leaf. */
+  const NIGHT_GUILD_HIDDEN = { powerStructure: { factions: [{ faction: 'Night Guild', power: 10, hidden: true }, { faction: 'Council', power: 40 }] } };
+
+  it('VEIL-13 RULING 5: THE COVERT TIE\'S FOUR STRINGS: a tie the public sanitiser drops as covert is told by no public read (gallery, party link, import, the twin) in prominentRelationship\'s full, tension or phrasing, nor in a pressureSentence that names its two ends (in any script, of symbols only, with a dotted capital I or a sharp s) or holds its words (one fold; current and stored); where the full town, its ties or a dropped tie\'s ends cannot be read, both go; Reveal DM keeps them, and an open tie\'s copy, another sentence and another person\'s tie stay', async () => {
+    const bad = []; const differs = [];
+    const publicReads = (r) => [...each(r, ['base', 'veil']), ...each(r, ['dm'], ['link'])];
+    const dmKeeps = (r) => each(r, ['dm'], ['gallery', 'import', 'client']);
+    const engines = (what, r) => ['base', 'veil', 'dm'].flatMap(s => differ(r[s].gallery, r[s].client).map(d => `${what}, ${s}: ${d}`));
+    const OPEN_COPY = { npc1: 'Orrin Vale', npc2: 'Mira Vane', type: 'Rivals', full: 'They split the docks.', phrasing: 'Orrin Vale and Mira Vane split the docks.' };
+    // [what, town, needles that must not arrive on a public read, whether the pressure sentence goes on a public read]
+    const PLANTS = [
+      ['town-p (COVERTMARK); its pressure sentence names no one and stays (ruling (3))', coldharbour('covert'), ['COVERTMARK'], false],
+      ['the reader\'s town-g shape: gcov1 to gcov3, the pressure sentence the phrasing', covertTown('gcov', 'Mira Vane', 'Tam Reed', { desc: 'gcov1 Mira and Tam meet in the salt cellar at night' }), needles('gcov', 1, 2, 3), true],
+      ['the ends in another script (Cyrillic, Han)', covertTown('kcov', '\u041c\u0438\u0440\u0430 \u0412\u044d\u0439\u043d', '\u6797\u5c0f\u96e8'), needles('kcov', 1, 2, 3), true],
+      ['the ends of symbols only', covertTown('scov', '\u2606\u2605\u2606', '\u265c\u265e\u265c'), needles('scov', 1, 2, 3), true],
+      ['a dotted capital I (U+0130) in both ends', covertTown('icov', '\u0130lkay Demir', 'Ay\u015fe \u0130nan'), needles('icov', 1, 2, 3), true],
+      ['a sharp s (U+00DF) in both ends', covertTown('zcov', 'J\u00f6rg Strau\u00df', 'Grete Wei\u00df'), needles('zcov', 1, 2, 3), true],
+      ['THE WORDS in one fold: a sentence that names neither end in full holds the tie\'s tension lower-cased, the dotted I as i, the sharp s as ss',
+        covertTown('wcov', '\u0130lkay Demir', 'Grete Wei\u00df', { ten: 'wcov2 \u0130lkay keeps the toll books twice over for the Stra\u00dfe', pressure: 'Down at the quay: wcov2 ilkay keeps the toll books twice over for the strasse.' }), needles('wcov', 1, 2, 3), true],
+      ['THE WORDS, stored: the tie rewritten wholly since; the sentence holds the tension as born, which the copy keeps',
+        covertTown('xcov', 'Odile Marsh', 'Fenn Carter', { desc: 'xcov4 nothing is said of it now', ten: 'xcov5 an old matter between two households',
+          stored: { full: 'xcov1 Odile pays Fenn to keep the dye vats quiet', tension: 'xcov2 the guild would close the yard if it knew' }, pressure: 'People whisper that xcov2 the guild would close the yard if it knew.' }), needles('xcov', 1, 2, 3, 4, 5), true],
+      // THE IDENTITY ACROSS TWO SPELLINGS (the seat's review of 380a933fd): the public projection writes a hidden power's
+      // name as 'an unseen interest' in every string leaf, the full town keeps it as written
+      ['TWO SPELLINGS: an end named with a hidden power\'s name inside it (Mara of the Night Guild, the Night Guild hidden), the copy as born',
+        covertTown('hcov', 'Tam Reed', 'Mara of the Night Guild', { desc: 'hcov1 Tam Reed and Mara of the Night Guild meet in the salt cellar at night',
+          ten: 'hcov2 if the council learns that Mara of the Night Guild loves him both hang', extra: NIGHT_GUILD_HIDDEN }), needles('hcov', 1, 2, 3), true],
+      ['TWO SPELLINGS: only the copy\'s full and tension (its tie\'s, as born) name the hidden power; the sentence holds the tension',
+        covertTown('h2cov', 'Odile Marsh', 'Fenn Carter', { desc: 'h2cov1 the Night Guild pays Odile Marsh to keep the dye vats quiet',
+          ten: 'h2cov2 the Night Guild would close the dye yard if it knew', pressure: 'Word on the quay: h2cov2 the Night Guild would close the dye yard if it knew.', extra: NIGHT_GUILD_HIDDEN }), needles('h2cov', 1, 2, 3), true],
+      ['TWO SPELLINGS: the copy is its tie\'s by its text alone (an end renamed since), and the text names the hidden power',
+        covertTown('h3cov', 'Odile Carter', 'Fenn Carter', { desc: 'h3cov1 the Night Guild pays Odile to keep the dye vats quiet', ten: 'h3cov2 the Night Guild would close the dye yard if it knew',
+          prominent: { npc1: 'Odile Marsh', npc2: 'Fenn Carter', type: 'Secret lovers', full: 'h3cov1 the Night Guild pays Odile to keep the dye vats quiet', tension: 'h3cov2 the Night Guild would close the dye yard if it knew', phrasing: 'h3cov3 the Night Guild keeps two people quiet' },
+          pressure: 'Word on the quay: h3cov2 the Night Guild would close the dye yard if it knew.', extra: NIGHT_GUILD_HIDDEN }), needles('h3cov', 1, 2, 3), true],
+      // WHERE UNSURE, WITHHOLD (the seat's call V13-1, item 3): the read does not raise and both strings go
+      ['relationships[] stored as an object, the covert tie inside it', covertTown('ocov', 'Mira Vane', 'Tam Reed', { rels: (o, c) => ({ 'tie.orrin-a': o, 'tie.a-b': c }) }), needles('ocov', 1, 2, 3), true],
+      ['relationships[] stored as null', covertTown('ncov', 'Mira Vane', 'Tam Reed', { rels: () => null }), needles('ncov', 1, 2, 3), true],
+      ['a dropped covert tie whose ends carry no names (its two ids only), though the copy and the sentence tell the open tie',
+        covertTown('ucov', 'Mira Vane', 'Tam Reed', { rels: (o, c) => { const { npc1Name: _a, npc2Name: _b, ...rest } = c; return [o, rest]; }, prominent: OPEN_COPY, pressure: 'Orrin Vale and Mira Vane split the docks.' }),
+        needles('ucov', 1, 2), true],
+    ];
+    for (const [what, town, gone, psGoes] of PLANTS) {
+      const r = await sharesOf(town, []);
+      differs.push(...engines(what, r));
+      for (const { tag, doc } of publicReads(r)) {
+        if (!isRec(doc)) { bad.push(`${what}, ${tag}: no document (${JSON.stringify(doc)})`); continue; }
+        if (doc.prominentRelationship !== undefined) bad.push(`${what}, ${tag}: prominentRelationship is sent: ${JSON.stringify(doc.prominentRelationship).slice(0, 90)}`);
+        if (psGoes && doc.pressureSentence !== undefined) bad.push(`${what}, ${tag}: the pressure sentence is sent: ${JSON.stringify(doc.pressureSentence).slice(0, 90)}`);
+        if (!psGoes && doc.pressureSentence !== town.pressureSentence) bad.push(`${what}, ${tag}: the pressure sentence is ${JSON.stringify(doc.pressureSentence)}`);
+        for (const n of gone) bad.push(...arrivals(doc, n).map(a => `${what}, ${tag}: ${a}`));
+        if (!valuesOf(doc).some(l => l.text === town.npcs[1].name)) bad.push(`${what}, ${tag}: the person ${town.npcs[1].name} is gone`);
+      }
+      // CONTROL: Reveal DM keeps the tie, so its gallery read, its import and the twin keep the four strings
+      for (const { tag, doc } of dmKeeps(r)) {
+        if (differ(doc?.prominentRelationship, town.prominentRelationship).length) bad.push(`${what}, ${tag}: Reveal DM lost the copy: ${JSON.stringify(doc?.prominentRelationship).slice(0, 90)}`);
+        if (doc?.pressureSentence !== town.pressureSentence) bad.push(`${what}, ${tag}: Reveal DM lost the pressure sentence`);
+      }
+    }
+    // CONTROLS on the public reads: an open tie's copy, a sentence that names one end, an open tie's two ends, another person's tie
+    const CONTROLS = [
+      ['town-pc: the prominent tie open, a covert tie beside it', coldharbour('open'), ['COVERTMARK'], { pr: true, ps: true }],
+      ['the pressure sentence names ONE end of the dropped tie', covertTown('c1cov', 'Mira Vane', 'Tam Reed', { pressure: 'They say Mira Vane walks the salt pans alone.' }), needles('c1cov', 1, 2, 3), { pr: false, ps: true }],
+      ['the pressure sentence names the two ends of an open tie', covertTown('c2cov', 'Mira Vane', 'Tam Reed', { pressure: 'Orrin Vale and Mira Vane split the docks between them.' }), needles('c2cov', 1, 2, 3), { pr: false, ps: true }],
+      ['another person\'s tie: the copy of the open tie, the covert tie dropped beside it', covertTown('c3cov', 'Mira Vane', 'Tam Reed', { prominent: OPEN_COPY, pressure: 'The quay is quiet this season.' }), needles('c3cov', 1, 2), { pr: true, ps: true }],
+    ];
+    for (const [what, town, gone, stays] of CONTROLS) {
+      const r = await sharesOf(town, []);
+      differs.push(...engines(what, r));
+      for (const { tag, doc } of [...publicReads(r), ...dmKeeps(r)]) {
+        if (!isRec(doc)) { bad.push(`${what}, ${tag}: no document`); continue; }
+        const dm = tag.startsWith('dm/') && !tag.endsWith('/link');
+        if ((stays.pr || dm) && differ(doc.prominentRelationship, town.prominentRelationship).length) bad.push(`${what}, ${tag}: the copy is ${JSON.stringify(doc.prominentRelationship).slice(0, 90)}`);
+        if (!stays.pr && !dm && doc.prominentRelationship !== undefined) bad.push(`${what}, ${tag}: the covert copy is sent`);
+        if ((stays.ps || dm) && doc.pressureSentence !== town.pressureSentence) bad.push(`${what}, ${tag}: the pressure sentence is ${JSON.stringify(doc.pressureSentence)}`);
+        if (!dm) for (const n of gone) bad.push(...arrivals(doc, n).map(a => `${what}, ${tag}: ${a}`));
+      }
+    }
+    // A STORED VALUE THAT IS NOT A TOWN (the live town cannot be read): no read raises, and nothing of the covert tie arrives
+    {
+      const r = await sharesOf([coldharbour('covert')], []);
+      differs.push(...engines('a stored array', r));
+      for (const { tag, doc } of each(r, ['base', 'veil', 'dm'])) bad.push(...arrivals(doc ?? null, 'COVERTMARK').map(a => `a stored array, ${tag}: ${a}`));
+    }
+    expect(bad, `${bad.length} sends or losses`).toEqual([]);
+    expect(differs).toEqual([]);
   }, ARM_TIMEOUT_MS);
 });

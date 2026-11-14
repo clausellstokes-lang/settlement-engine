@@ -194,8 +194,11 @@ describe('gallery per-member overrides — net-current execution (pglite)', () =
   const KEY = netCurrentFn('_gallery_npc_key');
   const APPLY = netCurrentFn('_gallery_apply_member_overrides');
   // Since 212 (the fifth review's V5-4; COHERENCE-VEIL-8's tie roles) the net-current apply ends in the roster
-  // splice, which calls these helpers: the loader takes what the body needs, in the order each calls the next
-  const SPLICE = ['_gallery_veil_member_revealed', '_gallery_veil_roster_members', '_gallery_veil_tie_roles', '_gallery_veil_roster_splice']
+  // splice, which calls these helpers: the loader takes what the body needs, in the order each calls the next.
+  // VEIL-13's ruling (5): the apply's covert check calls _gallery_veil_str, _gallery_veil_pieces and _gallery_veil_embeds
+  // (which calls _gallery_veil_case_fold, which calls _gallery_veil_name_case and _gallery_veil_name_prep).
+  const SPLICE = ['_gallery_veil_str', '_gallery_veil_pieces', '_gallery_veil_name_case', '_gallery_veil_name_prep', '_gallery_veil_case_fold',
+    '_gallery_veil_embeds', '_gallery_veil_member_revealed', '_gallery_veil_roster_members', '_gallery_veil_tie_roles', '_gallery_veil_roster_splice']
     .map((name) => netCurrentFn(name));
 
   it('locates the net-current override helpers (6-arg apply: base + dm_full)', () => {
