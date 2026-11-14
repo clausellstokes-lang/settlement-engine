@@ -517,6 +517,18 @@ describe('composeSettlementQuickGuide', () => {
     expect(withExport.sourcePath).toBe('economicState.prosperity|foodSecurity|primaryExports');
   });
 
+  it('reads the food word from its one home, tonightSheet.js :: foodBandOf, as the Tonight sheet does (R2-CODE-B-6 row 1d)', () => {
+    const lives = (label, foodRecord) => composeSettlementQuickGuide({
+      economicState: { prosperity: 'Moderate', foodSecurity: { label, foodRecord } },
+    }).definingTruths[2].text;
+    // a Secure band whose record leaves a share of the need unmet (r2r-thorp-4, -10, -16: 160 towns of the 800)
+    expect(lives('Secure', { band: 'secure', gapPct: 12 })).toBe('The economy is moderate; the food supply is under pressure.');
+    // "Import-Dependent" where no food comes in by trade (r2s-under_siege-hamlet-2, -village-1, -metropolis-1)
+    expect(lives('Import-Dependent', { band: 'importDependent', normalImportPct: 0 })).toBe('The economy is moderate; food is in deficit.');
+    // the guard town: a Secure band with no gap keeps its word
+    expect(lives('Secure', { band: 'secure', gapPct: 0 })).toBe('The economy is moderate; the food supply is secure.');
+  });
+
   it('recognizes the actual conflict prose keys when pressureSentence is absent', () => {
     const guide = composeSettlementQuickGuide({
       conflicts: [{ desc: 'The guild has barricaded the counting house.' }],

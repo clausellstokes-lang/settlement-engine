@@ -23,7 +23,7 @@ import { waterAccessKind } from '../tradeRouteSemantics.js';
 import { resolveTerrain } from '../resolveTerrain.js';
 import { populationBandOf } from '../facts/populationBand.js';
 import { pickVariant } from '../../kernel/proseHash.js';
-import { voicedLineOf } from './tonightSheet.js';
+import { foodBandOf, voicedLineOf } from './tonightSheet.js';
 
 const INFLUENCE_RANK = Object.freeze({
   high: 0,
@@ -106,7 +106,7 @@ const INFLUENCE_RANK = Object.freeze({
  * }} [powerStructure]
  * @property {{
  *   prosperity?: string | { tier?: unknown } | null,
- *   foodSecurity?: { label?: unknown },
+ *   foodSecurity?: { label?: unknown, foodRecord?: Parameters<typeof foodBandOf>[0] },
  *   primaryExports?: unknown,
  *   situationDesc?: unknown,
  * }} [economicState]
@@ -888,7 +888,11 @@ function composeMaterialTruth(settlement) {
       ? economy.prosperity?.tier
       : economy.prosperity,
   );
-  const food = cleanText(economy.foodSecurity?.label);
+  // R2-CODE-B-6 (PART 5's row 1d): the food word from its ONE home, tonightSheet.js :: foodBandOf over the food record,
+  // so this line agrees with the Tonight sheet and the Daily Life tile (a "Secure" band whose record leaves a share of
+  // the need unmet reads "Pressured"; an import dependence with no imports reads "Deficit"). A record with no food
+  // record (a legacy save) keeps its stored label, as it always read.
+  const food = cleanText(foodBandOf(economy.foodSecurity?.foodRecord)?.label || economy.foodSecurity?.label);
   const topExport = cleanText(firstText(economy.primaryExports));
   const situation = cleanText(economy.situationDesc);
 
