@@ -4217,6 +4217,69 @@ SEATS2['R3-TABS-5'] = dict(
 )
 
 
+SEATS2['JOIN-ROWS-1'] = dict(
+    title="JOIN-ROWS-1 · every row the lanes named FOR THE JOIN, in one table: who holds it now, whether it is already cured, what is open",
+    branch='lane/join-rows-2026-11-14', checkout='lane/join-2026-11-14', tip='7d12b40c', statement=False,
+    intro=("You are JOIN-ROWS-1, a GATHERING AND MEASURING seat of the settlement-engine integration program. YOU CURE NOTHING AND YOU CHANGE NO "
+           "CODE. Nine builder lanes cure false sentences on the generated town pages; each lane's seats, and the independent readers of each "
+           "lane, have NAMED rows they could not cure: a false line whose cure lies in a file another lane holds, or that needs two lanes' "
+           "changes together: \"FOR THE JOIN\". All nine lanes are now merged on lane/join-2026-11-14 (your checkout, READ ONLY) and the lanes "
+           "keep curing at their own tips. Nobody holds the whole list. Yours: ONE TABLE of every such row, each traced to the function that "
+           "writes it, to the lane that holds that function NOW, and to its state TODAY: already cured somewhere, sent to a seat, or OPEN: so "
+           "that the chair can hand every open row to exactly one seat."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 4 and 6: measure first; honesty) at your checkout.\n"
+          "2. THE SOURCES, each BY SCRIPT, by heading, never whole (they are long): at each lane's tip on origin (`git fetch` the nine lanes: "
+          "lane/w2-write-2026-11-13, lane/w2-fix-data-2026-11-13, lane/coherence-upkeep-2026-11-12, lane/powers-follow-up-2026-11-13, "
+          "lane/r2-code-a-2026-11-13, lane/r2-code-b-2026-11-13, lane/r3-code-c-2026-11-13, lane/w2-c-leaves-2026-11-13, "
+          "lane/r3-tabs-2026-11-13), every hand-back and statement file of that lane under docs/chair/ (find them: `git ls-tree -r "
+          "--name-only origin/<lane> -- docs/chair | grep -i -E 'HANDBACK|STATEMENT'`; a lane's own files are the ones its own commits "
+          "touched): every section or bullet headed FOR THE JOIN, NAMED, NOT MINE, FOUND AND NOT THIS LANE'S, LEFT, or FOR THE DECLARATION "
+          "PASS (the last kind is listed by COUNT per lane only: another pass owns it).\n"
+          "3. THE READERS' FILES of 2026-11-14 on their own branches (`git ls-remote origin 'refs/heads/lane/review-*-2026-11-14'`): in each "
+          "REVIEW-*-2026-11-14.md and REVIEW-*-LINES-READ.md, the lists headed CARRIED (false at the stage's base too: whose file writes it): "
+          "the HIGH and MEDIUM rows only.\n"
+          "4. WHAT THE CHAIR HAS ALREADY SENT: on origin/lane/chair-2026-11-08, docs/chair/2026-11-14/CHAIR-HANDOFF-FIFTH.md, section 7, ONLY the "
+          "lines stamped 09:00 UTC or later (by script), and the briefs of the seats now running "
+          "(docs/chair/2026-11-14/briefs/BRIEF-W2-FIX-DATA-12.md, BRIEF-UPKEEP-14.md, BRIEF-W2-C-LEAVES-11.md, BRIEF-R2-CODE-B-11.md, "
+          "BRIEF-R3-TABS-5.md, BRIEF-R3-CODE-C-9.md, BRIEF-W2-WRITE-11.md, BRIEF-POWERS-14.md, BRIEF-R2-CODE-A-11.md): only to mark a row "
+          "SENT TO <seat>: grep each row's fixed words in them.\n"
+          "5. THE RELEASE BAR'S ROWS (origin/lane/chair-2026-11-08, docs/chair/2026-11-14/bar-0-rows/: the README and the files "
+          "BAR-0-ROWS-no-lane.json and BAR-0-ROWS-untraced.json: 3 and 33 rows that no lane's file was found to write): they are rows of your "
+          "table too."),
+    first=("FIRST ACT. FULL HISTORY (`git fetch --depth=2147483647 origin lane/join-2026-11-14 lane/integration-2026-11-07` and the nine lanes; `git "
+           "rev-parse --is-shallow-repository` prints false). Your own branch: `git worktree add -b lane/join-rows-2026-11-14 <scratch>/own "
+           "origin/lane/join-2026-11-14` (the joined branch's tip was 7d12b40c when this was written; a later tip is not a stop: say which you "
+           "took)."),
+    work=("THE WORK:\n"
+          "1. GATHER. One script-made list of every row from the sources: the lane or reader that named it, the file it was named in and the "
+          "heading, THE SENTENCE (its fixed words), its severity where given, its COUNT as measured there (towns false / towns printing, and on "
+          "which births), and the file or function the namer thought writes it. A row named by two sources is ONE row with both sources.\n"
+          "2. TRACE EACH ROW TO ITS WRITER ON THE JOINED TREE: by the sentence's fixed words (`git grep` at origin/lane/join-2026-11-14: the "
+          "data table, the pool, the template or the JSX that holds them) and then the function that chooses or gates the line. A line that "
+          "exists only as a corpus pool variant (src/data/dossierStateProse/*.generated.js) is the CORPUS LANE's, with its pool and variant id.\n"
+          "3. WHO HOLDS THE WRITER NOW, BY FUNCTION: for the writer's file, each lane whose OWN change touches it (`git diff -U0 $(git "
+          "merge-base origin/lane/integration-2026-11-07 origin/<lane>) origin/<lane> -- <file>`: the hunks' enclosing functions): the lane "
+          "whose hunks touch the writer's function holds the row; if none does, the row is NO LANE'S (any one seat may take it: say which "
+          "lane's function is nearest).\n"
+          "4. ITS STATE TODAY, one of: CURED AT <lane>'s tip (the sentence gone or newly gated there: show the diff line; or a count if a "
+          "cheap one exists in a probe you can run); CURED ON THE JOINED TREE (two lanes' changes together make it true); SENT TO <seat> (the "
+          "chair's notes or a running seat's brief name it); OPEN. Do not guess: a row you cannot settle is OPEN with what you found.\n"
+          "5. THE TABLE: docs/chair/2026-11-14/JOIN-ROWS.md on your branch (and JOIN-ROWS.json beside it, one object a row): sorted OPEN first, "
+          "HIGH before MEDIUM, widest first; then SENT; then CURED. Under it: the counts by state and by holding lane; the rows where two "
+          "sources disagree about the count or the writer; the declaration-pass counts by lane; what you did not check. Your scripts under "
+          "docs/chair/2026-11-14/probes/JOIN-ROWS/.\n"
+          "6. ONE MESSAGE TO THE CHAIR: your branch's tip read back from origin; how many rows; how many OPEN at HIGH and at MEDIUM, by "
+          "holding lane; the five widest open rows by name.\n"
+          "LAWS OF THIS SEAT: you run no door in its writing mode, no test suite, no render of the whole census (a count is taken only "
+          "where a lane's or a reader's probe gives it for a few towns in minutes: otherwise the namer's count stands, marked AS NAMED). "
+          "Your context is your budget: every source is queried by script and only the rows come into your context. A row is quoted with "
+          "its source's path and heading, never from memory. Hashes are read from git, never typed from memory."),
+    merges='',
+    when="for something that blocks the whole table, and with the table (step 6)",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
