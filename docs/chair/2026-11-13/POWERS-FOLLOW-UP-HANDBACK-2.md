@@ -1702,6 +1702,15 @@ Pushes by probes/POWERS-15/push.sh (POWERS-14's, pointed at p15: fetch, fast-for
   `stagepins.py --control`; section 2n's step 7 (c) is the form), every new fork named in the note with its cause; if no ruling
   declares it, tell me with the commit. It goes after the toll, before the medium rows; tests and the pin only; one line in your
   hand-back. A6 fell at the join (24 to 23: your re-dealt tie prose): the merge seat keyed it; nothing for you."
+- THE CHAIR, 2026-11-14 11:38 UTC: the conflict issue "A ruling one power refuses to obey" (BASE_ISSUES): RULED an issue reads
+  as a whole phrase; every other issue of the table that drops its relative word or reads broken beside the pill reworded in
+  the same commit; a declared move of the stored issue text only; read in three towns.
+- THE CHAIR, 2026-11-14 11:48 UTC, from REVIEW-POWERS-5 (step 1, the lane at 0ea65f574, 1,716 births), BEFORE L3, T2 and the
+  table: (1) the "criminal sway" chip against the hall's line (48 of 95): TWO LINES ON ONE PAGE READ ONE FACT; (2) the hall's
+  "make their own decisions" under an occupation or beside "decisions shaped from outside" (38): UNDER AN OCCUPATION NO LINE
+  SAYS THE HALL DECIDES FOR ITSELF; (3) CARRIED: the coaching-inn keeper's coach secrets under a siege (16): UNDER A SIEGE NO
+  COACH RUNS. One line to the chair after (1) and (2).
+- THE CHAIR, 2026-11-14 11:43 UTC: the count read 236,227 by the chair; a 0 is a read too soon; hand back at 380,000.
 
 ## P9.1 Item by item
 - **THE TOLL: RE-KEYED BY IDENTITY, 0eb30242f (tests only).** MEASURED FIRST (probes/POWERS-15/toll.mjs over the 720 born at
@@ -1737,8 +1746,31 @@ Pushes by probes/POWERS-15/push.sh (POWERS-14's, pointed at p15: fetch, fast-for
   BASE_ISSUES and the 15 STRESS_ISSUES are whole noun phrases or "who/whether" clauses; none drops a relative word or reads broken
   after "·": none reworded. No commit under src/, no move.
 
+- **REVIEW-POWERS-5 A5, THE "criminal sway" CHIP: CURED, de53b4b58** (the lighting census re-taken, 1c54458b8: files 3277 ->
+  3278). display/governingModifierWords.js: the crime family is borne out where the hall is in criminal hands (the stored
+  criminalCaptureState, the rung hallOf and the public "Criminal capture" badge read: corrupted or capture), not by the crime
+  structure. COUNT (chip.mjs, 1,716 = the 720 + the reader's 996, born at 0ea65f574): 95 -> 36 (all corrupted); silenced 59
+  (adversarial 15, equilibrium 28, none 16); no town gains a chip. Read on the page: silent beside "Free of" (r2r-thorp-8, a
+  thorp), "Fighting" (r2r-metropolis-52, a metropolis), "Living with" (r2s-occupied-metropolis-2, an occupation); kept beside
+  "Partly in criminal hands" (r2r-town-0). Guard tests/domain/display/criminalSwayReadsHall.test.js (red 5 at 0ea65f574's code;
+  plant equilibrium-as-captured reds 2); powerTabSupport STOP-1 re-keyed by identity (its fixture's hall at corrupted) and
+  strengthened (a criminal house with the hall free: no chip). No record field moves.
+- **REVIEW-POWERS-5 D1, THE HALL "MAKES ITS OWN DECISIONS": CURED, 2557ea1ef** (the lighting census re-taken, a7adba76d: files
+  3278 -> 3279). dmPowerLines.js CAPTURE_LINES.none[1] -> "None of the head, the second and the third of <ruler> takes orders
+  from the criminals."; none[2] -> "No criminal house gives <ruler> its orders. One that wants something from it has to ask,
+  pay or wait like anyone else." (prints in no birth measured). COUNT (hallv.mjs, 1,716): none[1] 307 (28 occupied, 10 shaped
+  from outside, 269 others), the same 307 reworded; the old words 0. Read on the page: r2s-occupied-town-1 (occupation, a town,
+  the smallest), r2s-under_siege-metropolis-0 (siege, a metropolis, the largest), r2s-infiltrated-metropolis-3, r2r-city-0.
+  Guard tests/domain/people/hallDecidesUnderOccupation.test.js (red 5 at 1c54458b8's code; the plant "they make their own
+  decisions" reds 5); hallLineReadsCrime HALL_ONLY and criminalSwayReadsHall r2r-city-3 re-keyed to the same line's words.
+  Display only: no record field moves.
+
 ## P9.2 EVERY NEW OR CHANGED LINE, with the towns it was read in
-- None yet: the two items are tests only.
+- REWORDED (D1, 2557ea1ef): "None of the head, the second and the third of <ruler> takes orders from the criminals." (307 towns;
+  read in r2s-occupied-town-1, r2s-under_siege-metropolis-0, r2s-infiltrated-metropolis-3, r2r-city-0); "No criminal house gives
+  <ruler> its orders. One that wants something from it has to ask, pay or wait like anyone else." (0 towns; read composed).
+- NEWLY SILENT (A5, de53b4b58): the chip "criminal sway" in 59 towns of 1,716 (read in r2r-thorp-8, r2r-metropolis-52,
+  r2s-occupied-metropolis-2); kept in 36 (r2r-town-0).
 
 ## P9.3 FOR THE JOIN (this seat's)
 - generationForkCensus A1: the bound 139 is this lane's tip figure; re-measure at the joined tree (ten lanes carry their own
@@ -1749,9 +1781,11 @@ Pushes by probes/POWERS-15/push.sh (POWERS-14's, pointed at p15: fetch, fast-for
 - Unchanged from P8.4 so far.
 
 ## P9.5 WHAT IS LEFT, line by line
+- REVIEW-POWERS-5 E3 (CARRIED): the coaching-inn keeper's two coach secrets under a siege (16 keepers;
+  TITLE_LINE_DECLARATIONS.secret, the twin of #101's presentation rows): the same `excludes: crisis: under_siege` cure.
 - L3 (faceHonorifics.js :: styledTitleOf: the title word through the honorific's leaf); T2 (rulingStructure.js) with T1/T3 where
   the same cure; then P8.4's rows left, widest first by false count (ww#850, ww#440, bar #17, pf#520, bar #26, then the rest);
   then P8.5's L4, the last reader's L5 and L4, the courts candidate, the two coaching-inn candidates.
 
 ## P9.6 `git diff --stat 0ea65f574..HEAD -- src/`
-- (none)
+- src/data/people/dmPowerLines.js (D1); src/domain/display/governingModifierWords.js (A5). (Kept current: re-run at each item.)
