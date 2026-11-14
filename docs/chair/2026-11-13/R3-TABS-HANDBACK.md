@@ -396,3 +396,58 @@ branch at that tip (`npm ci` there); every measurement after the cure is of a CO
   moved to 386) and cured by d6b0526cb without moving the register; `dossierMountRegistry.walker` › "THE SHIPPED TABLE"
   red with byte-identical failure text at fdfd471d9: not this lane's.
 - Births: no generator file is touched (three display files); the field diff is in the final statement.
+
+## Item 2 — the command's rule (record 403): CENSUS-2 in the lane's files, base, line and tip — DONE (read; nothing to cure)
+- **Run** (`census2.sh` from origin/lane/census-2-2026-11-13 at 2686272b1, unchanged, 4 workers; `--files` the first
+  seat's six files, the corpus file the desk draws from, and this seat's `HistoryFounding.jsx`, `viewModel.js`), each
+  stage's own exit read (census2 exit 0 every run; births 720 errors 0; 720 of 720 dumps): at the lane's base
+  **aac79b808**, at the line **9e57f5023** (point 48, merged into the lane by de0872aa5) and at the tip's code
+  **b2682f748** (d6b0526cb changes only `src/pdf/sections/HistoryFounding.jsx`, which no dossier view imports: the
+  dossier's views are the same tree's). The first seat's base out-dir was gone: the base was re-run, not reused. Every
+  run in a git worktree of its sha (the writer trace is `git grep`; an archive traces nothing).
+
+| kind | base aac79b808 | line 9e57f5023 | tip | the lane's own commits |
+|---|---|---|---|---|
+| a | 3,693 hits / 712 towns / 612 lines | 3,692 / 712 / 611 | 3,692 / 712 / 610 | 0 (two untraced hits re-traced to HistoryTab) |
+| b | 215 / 70 / 101 | 215 / 70 / 101 | 213 / 70 / 100 | −2 (DS-DEF-1 under a siege, 317f1e19c) |
+| c | 764 / 291 / 298 | 817 / 301 / 298 | 817 / 301 / 298 | 0 (the rise is the line's: `power.generated.js` 77 → 130 hits, point 48) |
+| d | 523 / 382 / 40 | 523 / 382 / 40 | 131 / 105 / 37 | −392 (FORCED, b1; the run-together severities, item 1: 146 → 0) |
+| e | 61 / 60 / 20 | 61 / 60 / 20 | 47 / 46 / 18 | −14 (L0) |
+| f | 12,832 / 720 / 344 | same | same | 0 |
+| g | 3,373 / 720 / 14 | same | same | 0 |
+| h | 64 / 20 / 63 | same | same | 0 |
+
+- **The rising row, kind c (+10 towns, base → tip):** origin in the line (point 48: W2-A-LEAVES's DS-POW crime desk,
+  `power.generated.js`), equal at the line and the tip by the census's own count; not this lane's: DECLARED exposure of
+  the merge, no stop.
+- **Every hit in the lane's files at the tip, read against its town:**
+  - `HistoryTab.jsx :: TENSION_META` kind a, 2 towns, "Guild Conflict" (r2r-hamlet-43, r2r-village-12): untraced at
+    the base as "Guild Conflictminormajor"; traced now the chips are gone. FALSE in both towns: a guild_conflict tension
+    ("Rival guilds fought over who may sell what…", parties "Established guilds | Upstart guilds") drawn where the
+    roster holds no guild. The label is the tension's own type; the draw is `historyGenerator.js` / `historyData.js`
+    (held by fd). NAMED, not cured (the row is true wherever a guild stands).
+  - `ServicesTab.jsx` kind f (716 towns / 25 lines) and kind d (1 town / 1 line, "Needs Trade access + grainNo trade
+    access: … · covers …"): equal at base, line and tip. NAMED: the label leaf and `serviceComponents.jsx` (R2-CODE-B),
+    the first seat's item 14.
+  - `defense.generated.js` (the corpus, held by wc, fd, wr), every desk but DS-DEF-1, equal at base, line and tip:
+    - kind a 45 towns / 41 lines: DS-DEF-5 "ARCANE: alchemists" v1/v2 (38 towns; "The magical help at Vishnumala comes
+      from its alchemists", r2r-city-48, whose roster holds an apothecary district and a hedge wizard, no alchemist):
+      the cell is keyed by the record's flags `economicState.compound.inst.hasAlchemist` /
+      `defenseProfile.traditions.hasAlchemy` (`defenseStateProse.js :: arcaneFixturePoolKey` reads them as written):
+      the flag is the generators' (the defence lane's); DS-DEF-2 "full legal chain" "the court's lists" with no court
+      (5); DS-DEF-3 Safe v2 "enforcement keeps it down" with no force (1); DS-DEF-2 CHAIN v3 "workshops" (1).
+    - kind b 7 towns / 3 lines: DS-DEF-2 "no legal infrastructure" "order is kept by whoever is armed" under an
+      occupation (5); DS-DEF-2 CHAIN v2 "busy and well stocked" under a famine (2).
+    - kind c 53 towns / 9 lines: "streets" in thorps and hamlets (DS-DEF-3 Moderate v3, 26; active siege v1; slave
+      revolt v2; DS-DEF-4 semi-organized v3), "districts" (DS-DEF-3 insurgency v1/v3, political fracture v1/v3),
+      "crowds" in a hamlet of 60 (DS-DEF-8 migration v1).
+    All read true faults by the census's own fact; none is DS-DEF-1 (the posture this lane's rulings covered); the
+    variants are the corpus lane's and the cells' keys the desk's. NAMED, not cured (no ruling reaches them; no adjacent
+    repair).
+- **The first census's counter**, run on the same dumps (its render is census-2's walk with the seed map moved; the 720
+  seeds and configurations identical), outside any pipe, its own exit read (exit 0 at base, line and tip; stderr empty;
+  counts.txt 50, 50, 47 rows: the three absent at the tip are rows at zero), `compare.mjs` base → tip: 26 rows, no WORSE,
+  no NEW; BETTER row 9 "Critical over reassuring text" 148 → 114 (this lane's: equal base → line, 148 → 114 line → tip)
+  and row 20 "siege text, no siege" 689 → 0 (the line's: 689 → 0 base → line); every other row OLD.
+- **Its limits, beside every zero above:** the dossier's views only (no PDF, journal, export, Tonight); it cannot see two
+  lines of a page disagreeing; a hit is a candidate until read.
