@@ -92,7 +92,8 @@ export const generateAvailableServices = (
     worldLaw,
   });
   const fenceName = institutions.some((inst) => nativeSemanticName(inst) === FENCE_WORD_OF_MOUTH) ? FENCE_WORD_OF_MOUTH : FENCING_STOLEN_GOODS;
-  const fenceAskLine = hasInstitution({ institutions }, 'tavern') // R3-CODE-C-3: the tavern only where one stands
+  const roster = { institutions };
+  const fenceAskLine = hasInstitution(roster, 'tavern') // R3-CODE-C-3: the tavern only where one stands
     ? ASK_AROUND_AT_THE_RIGHT_TAVERN_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS : ASK_AROUND_QUIETLY_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS;
   const hasCriminalInst = institutions.some((inst) => {
       if (isMaterializedCustomContent(inst)) return false;
