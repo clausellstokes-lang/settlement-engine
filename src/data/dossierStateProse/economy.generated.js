@@ -4724,7 +4724,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "unfolding",
           "marks": [
-            "crisis: famine"
+            "crisis: famine",
+            "no crisis: under_siege"
           ],
           "text": "{settlement} has more than one trade sending goods out, and the famine has made every one of them harder to keep going.",
           "slots": [
@@ -4735,7 +4736,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "crisis: famine"
+            "crisis: famine",
+            "no crisis: under_siege"
           ],
           "text": "With the famine on, every trade {settlement} sells outward is judged by one thing: what it can bring back to eat.",
           "slots": [
@@ -5607,7 +5609,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "gate"
+            "gate",
+            "no crisis: under_siege"
           ],
           "text": "Every stage of the {resource} trade at {settlement} is done here, from the ground to the gate.",
           "slots": [
@@ -5630,7 +5633,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "colour"
+            "no crisis: under_siege"
           ],
           "text": "{settlement} takes everything it can from the {resource} its country gives.",
           "slots": [

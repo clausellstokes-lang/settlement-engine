@@ -1574,8 +1574,8 @@ note that carries it on the six wired surfaces.
 5. `[local · no crisis: under_siege]` Buyers from outside come to {settlement} for more than one thing.
 6. `[newcomer · no crisis: under_siege · no crisis: famine]` A merchant who comes to {settlement} for one thing usually leaves with two or three.
 7. `[ledger · crisis: under_siege]` {settlement} had several trades selling outward before the siege, and none of them can reach a buyer now.
-8. `[unfolding · crisis: famine]` {settlement} has more than one trade sending goods out, and the famine has made every one of them harder to keep going.
-9. `[street · crisis: famine]` With the famine on, every trade {settlement} sells outward is judged by one thing: what it can bring back to eat.
+8. `[unfolding · crisis: famine · no crisis: under_siege]` {settlement} has more than one trade sending goods out, and the famine has made every one of them harder to keep going.
+9. `[street · crisis: famine · no crisis: under_siege]` With the famine on, every trade {settlement} sells outward is judged by one thing: what it can bring back to eat.
 
 **SCARCITY: `shortage`**
 1. `[ledger · market]` {good} is scarce in {settlement} and its price has risen.
@@ -1719,9 +1719,9 @@ A composed page draws one of each grain, never two.
 
 **EXPLOITATION: `fullyExploited`**
 1. `[ledger · no crisis: under_siege]` The {resource} in {settlement}'s country is worked all the way to the finished {good}.
-2. `[visitor · gate]` Every stage of the {resource} trade at {settlement} is done here, from the ground to the gate.
+2. `[visitor · gate · no crisis: under_siege]` Every stage of the {resource} trade at {settlement} is done here, from the ground to the gate.
 3. `[street · no crisis: under_siege]` One of {settlement}'s trades is carried through here from start to finish, from what the country gives to the finished thing.
-4. `[street · colour]` {settlement} takes everything it can from the {resource} its country gives.
+4. `[street · no crisis: under_siege]` {settlement} takes everything it can from the {resource} its country gives.
 5. `[ledger · crisis: under_siege]` With the siege on, none of {settlement}'s {resource} can go out to buyers; whatever the town works, the town must use.
 
 **EXPLOITATION — nothing in any bucket** · **R-DST-K GATED: no exploitation record ⇒ no section ⇒ no sentence.**
