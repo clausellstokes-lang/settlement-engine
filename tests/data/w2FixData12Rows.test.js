@@ -101,4 +101,10 @@ describe('W2-FIX-DATA-12: the measured rows in the data lane\'s files', () => {
       expect(String(bornCensus(seed).arrivalScene || ''), seed).not.toMatch(POOL);
     }), 'no smith: no forge in the arrival');
   }, 180_000);
+
+  test('item 5, the reader\'s A06: the arms racks wait for no carts under a siege, as their twins do (r2s-under_siege-city-3); r2r-town-48 keeps them', () => {
+    const RACKS = /Racks of spearheads and helms/;
+    expect(String(bornCensus('r2s-under_siege-city-3').arrivalScene || '')).not.toMatch(RACKS);
+    expect(String(bornCensus('r2r-town-48').arrivalScene || '')).toMatch(RACKS);
+  }, 180_000);
 });

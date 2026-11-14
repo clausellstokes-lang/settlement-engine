@@ -77,7 +77,7 @@ export const ARRIVAL_SENSES = Object.freeze([
       // W2-FIX-DATA-4 (REVIEW-W2A-3 #184; ROUND-3 #600): the arms key is reached by a bowyer or a trade word with no smith on the roster, and
       // three of its lines speak of many forges and workshops: each needs a smith, and the three a town (a hamlet has one part-time smith)
       { text: (n) => `The hammering echoes throughout ${n}, and most of it is the sound of blades being made.`, needs: ['institution: smith', 'tier: ≥ town'], crisis: ['any'] },
-      { text: () => 'Racks of spearheads and helms stand outside the workshops, waiting for the carts.', needs: ['institution: smith', 'tier: ≥ town'], crisis: ['any'] },
+      { text: () => 'Racks of spearheads and helms stand outside the workshops, waiting for the carts.', needs: ['institution: smith', 'tier: ≥ town'], excludes: ['crisis: under_siege'], crisis: ['any'] }, // W2-FIX-DATA-12 item 5 (the reader's A06): the twin carries its siblings' siege exclusion: no cart reaches a besieged town
       { text: () => 'Every forge you pass is making something meant for a war, and the carts on the road out are full of it.', needs: ['institution: smith', 'tier: ≥ town'], excludes: ['crisis: under_siege'], crisis: ['wartime', 'insurgency'] }, // W2-FIX-DATA-5 (ww-1157): a war the record holds
       { text: () => 'A smith tests a new blade against a post, frowns, and sends it back to the fire.', needs: ['institution: smith'], crisis: ['any'] },
     ] },
