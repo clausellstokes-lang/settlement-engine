@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-13T20:57:46.792Z",
+  "generatedAt": "2026-11-14T09:32:52.950Z",
   "entry": "src/engine/serviceEntry.js",
-  "sourceHash": "9efe8877254a3ead",
-  "engineVersion": "9fef871db7fd0981",
-  "builtFromCommit": "15473e34ad3424f11a8815516c7a535e22a43e1e",
+  "sourceHash": "a299c51709237abc",
+  "engineVersion": "095b93bdd475d239",
+  "builtFromCommit": "d810f660b2e8fd3e8c8b72c11f090793937e86a6",
   "inputs": [
     "node_modules/seedrandom/seedrandom.js",
     "src/data/arrivalProse.js",
@@ -276,6 +276,7 @@
     "src/generators/isolationSupport.js",
     "src/generators/legacyGenerator.js",
     "src/generators/narrative/arrivalScene.js",
+    "src/generators/narrative/foundingRowAdmits.js",
     "src/generators/narrative/historyCoherence.js",
     "src/generators/narrative/settlementOriginProse.js",
     "src/generators/narrative/siegeCapability.js",
