@@ -6962,7 +6962,7 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 **`FOUNDED-YOUNG`** {colour}
 1. `[ledger]` {settlement} is young, and it still lives by its first reason.
 2. `[visitor]` Everything in {settlement} looks recently built, and the town still does the job it began with.
-3. `[street]` {settlement} still does the one thing it was started for, and nothing else.
+3. `[street]` {settlement} has not stood long enough to forget why it was started.
 
 **`FOUNDED-OLD`** {colour}
 1. `[elder]` {settlement} was made for a purpose, and that purpose is {timeband_age}; the town has been added to every year since.

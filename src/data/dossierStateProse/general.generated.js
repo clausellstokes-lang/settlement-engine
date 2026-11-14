@@ -10050,7 +10050,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "{settlement} still does the one thing it was started for, and nothing else.",
+          "text": "{settlement} has not stood long enough to forget why it was started.",
           "slots": [
             "settlement"
           ],
