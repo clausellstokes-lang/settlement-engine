@@ -7705,12 +7705,6 @@
   ],
   "src/data/narrativeData.js": [
    [
-    "quarters",
-    "word",
-    " looks prosperous in the merchant quarter: new paint, loaded carts, a market stall with produce. It is only when you wal",
-    "f884a3314afbfb48"
-   ],
-   [
     "occupation",
     "word",
     "'s street signs have been repainted in two languages, the local one second. The new lettering is neat, official, and eve",
@@ -7723,28 +7717,10 @@
     "c7008f79e01034fe"
    ],
    [
-    "quarters",
-    "word",
-    "The merchant district of ",
-    "f532a63d6a02a34e"
-   ],
-   [
-    "quarters",
-    "word",
-    " looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for the merchant distr",
-    "662e9e0f1bc99685"
-   ],
-   [
     "housesCount",
     "word",
     "Two temples face each other across ",
     "411613139f212ed0"
-   ],
-   [
-    "quarters",
-    "word",
-    "'s streets under cloth, and the people carrying them are not mourners but labourers doing grim, fast work. The rising th",
-    "f79ada5e9837264a"
    ],
    [
     "siege",
@@ -7861,12 +7837,6 @@
     "c031692c7a8a0038"
    ],
    [
-    "mason",
-    "family",
-    "The masons of ",
-    "8ad99b8beca7fbe8"
-   ],
-   [
     "streets",
     "family",
     "'s streets, but they move in pairs and do not linger. The people watch them pass with the particular blankness of a plac",
@@ -7877,12 +7847,6 @@
     "family",
     " is prosperous in a way that feels wrong. The forges work past dark, the warehouses are full, the coin is moving, and al",
     "33cd6edee138e74a"
-   ],
-   [
-    "mason",
-    "family",
-    "The mason's yard in ",
-    "3b1b70f5190004a7"
    ],
    [
     "streets",
@@ -7903,18 +7867,6 @@
     "f79ada5e9837264a"
    ],
    [
-    "streets",
-    "family",
-    "The founders built for a few families who knew each other. Now newcomers crowd the streets, and half the faces are stran",
-    "db03e952d014f60b"
-   ],
-   [
-    "streets",
-    "family",
-    "The settlement was laid out for the families that founded it. Its streets and wells were never meant for this many peopl",
-    "db1d6edbec495fa0"
-   ],
-   [
     "temple",
     "implied",
     "Two temples face each other across ",
@@ -7927,12 +7879,6 @@
     "word",
     "Identify the source of unexplained magical disturbances in the northern district",
     "81a2b72bebd767e6"
-   ],
-   [
-    "quarters",
-    "word",
-    "They've been quietly buying up property in a district that hasn't been announced as a development site. Yet.",
-    "d3a7fa9d85e96b93"
    ],
    [
     "quarters",
@@ -9281,20 +9227,8 @@
    [
     "house: reeve",
     "family",
-    "The strongest armed household is pushing for authority over disputes that the reeve used to handle.",
-    "d7ad8916ef37ddc0"
-   ],
-   [
-    "house: reeve",
-    "family",
     "The church wants approval rights over market day activities. The village reeve disagrees.",
     "e836596fd75d7b87"
-   ],
-   [
-    "house: reeve",
-    "family",
-    "The church wants approval rights over who may trade and when. The village reeve disagrees.",
-    "34d22323ae3f4ba7"
    ],
    [
     "house: headman",
@@ -10005,12 +9939,6 @@
     "family",
     "The relationship predates the siege. They've been using it to buy time, but the council would not accept the distinction",
     "dd4157e803c19033"
-   ],
-   [
-    "siege",
-    "family",
-    "Has been skimming from the {commodity} reserves to pay a personal debt that predates the siege",
-    "99a6c4fddd758589"
    ],
    [
     "house: smuggling",
@@ -26785,12 +26713,6 @@
   ],
   "src/generators/economy/foodBalance.js": [
    [
-    "plague",
-    "word",
-    "The plague has killed or sickened many who work the fields. Those still standing face a short harvest and a hard winter.",
-    "9518a09ef4bec6a8"
-   ],
-   [
     "occupation",
     "word",
     "The occupiers are fed from local stores, so the food has to stretch about a fifth further than before.",
@@ -27247,18 +27169,6 @@
   ],
   "src/generators/narrative/settlementOriginProse.js": [
    [
-    "docks",
-    "implied",
-    ". It has no wharf of its own.",
-    "2efa0ba77dd14506"
-   ],
-   [
-    "docks",
-    "implied",
-    "; the place has no wharf.",
-    "78cabd2126c9e5a2"
-   ],
-   [
     "openTrade",
     "family",
     "Founded roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what stop",
@@ -27334,18 +27244,6 @@
    ]
   ],
   "src/generators/narrativeText.js": [
-   [
-    "starving",
-    "word",
-    " is two bad weeks from genuine starvation; ",
-    "afb92e0eeda6b80c"
-   ],
-   [
-    "powersCount",
-    "word",
-    " holds the power, and at least three powers are fighting over the stores.",
-    "0b3eb9a38e8f0c0d"
-   ],
    [
     "occupation",
     "word",

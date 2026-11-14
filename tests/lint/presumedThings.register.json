@@ -336,7 +336,6 @@
    ["watch", "after-release", "Sergeant of the Watch", "0af34cfec1116693"]
   ],
   "src/data/foundingSeeds.js": [
-   ["mill", "after-release", "Grown from a single logging operation whose owner refused to leave when the contract ended, this river town has turned i", "c9742f9f314f8669"],
    ["mill", "after-release", "Its mills still stand among its institutions.", "0eb14d7ce1da4368"],
    ["mill", "after-release", "The Mill That Outlived Its Wars", "ad5e7e637bfe41ef"]
   ],
@@ -565,14 +564,10 @@
   ],
   "src/data/narrativeData.js": [
    ["bank", "after-release", "was founded when a powerful merchant family built a counting house at the junction", "0d200b8e0cbd9952"],
-   ["docks", "after-release", " announces itself beyond the last rise: masts above the roofs, gulls wheeling over the quays, and salt bright in the air", "d8038670e7e5820e"],
-   ["docks", "after-release", "'s harbour before you see it: rigging knocking against masts, dock crews calling cargo tallies, and surf working against", "4cc4370b42f2514d"],
-   ["docks", "after-release", "The harbour at ", "01f9ab971382c90a"],
    ["docks", "after-release", "was established to exploit the natural harbour", "89ef9cf90e50859c"],
    ["market", "after-release", " against a tide of people leaving it. The market has ended for the day, and the settlement is exhaling its visitors back", "ecde53e76c116b24"],
    ["market", "after-release", "'s market day has the comfortable chaos of something that has been happening in the same place for a long time and has w", "ed5262a969858209"],
    ["market", "after-release", "grew as an agricultural market center", "2270c7558c955a85"],
-   ["market", "after-release", "The founders built a place to trade. Now the army takes what the market used to sell.", "ed1de8047c7fcbf9"],
    ["market", "after-release", "The market at ", "09a0d77ee957a22f"],
    ["market", "after-release", "was established as a market town where merchants could meet", "d1a44dd8a765360e"],
    ["mill", "after-release", "began as a riverside mill settlement", "a70845241c46c424"],
@@ -652,8 +647,7 @@
    ["market", "after-release", "The Market Guild", "e896137f7db911ab"]
   ],
   "src/data/powerSiblings.js": [
-   ["temple", "after-release", "The church wants approval rights over market day activities. The village reeve disagrees.", "e836596fd75d7b87"],
-   ["temple", "after-release", "The church wants approval rights over who may trade and when. The village reeve disagrees.", "34d22323ae3f4ba7"]
+   ["temple", "after-release", "The church wants approval rights over market day activities. The village reeve disagrees.", "e836596fd75d7b87"]
   ],
   "src/data/resourceData.js": [
    ["bank", "after-release", "Silver, gold, or copper deposits; attracts merchants and banking infrastructure", "09d73cd2d1fd589c"],
@@ -852,9 +846,6 @@
    ["watch", "after-release", "professional city watch", "4fcdf8d8e07451d2"]
   ],
   "src/generators/narrative/settlementOriginProse.js": [
-   ["docks", "after-release", " and has never had a wharf.", "dbac32fac1dc1414"],
-   ["docks", "after-release", ", and no one has ever built a wharf here.", "eb134e780d04aa97"],
-   ["docks", "after-release", "; ask for the docks and you are told there are none.", "94c6cf9b173a6542"],
    ["docks", "after-release", "A port settlement whose wharves and navigable water define its trade.", "be7dd9778ae8e3d8"],
    ["docks", "after-release", "A port: the wharves are why the place exists, and everything else grew up behind them.", "1e8ca35c59011c1f"],
    ["docks", "after-release", "A river port built around navigable inland water; barges, wharves, and seasonal river traffic shape its economy.", "c654f46293b19687"],
@@ -870,7 +861,6 @@
    ["market", "after-release", "grew around a sheep run whose owner had the rare good sense to also build a mill and a market", "5ce058a24e9fc77b"],
    ["market", "after-release", "The market stalls near the gate are attended by people who seem more interested in watching the street than selling.", "ee5896f82bbd47f2"],
    ["mercenary", "after-release", "the mercenary company", "8a88361744c9d8e8"],
-   ["mill", "after-release", "a miller who built a mill and found customers before they found customers", "dd41b715e7948d26"],
    ["mill", "after-release", "grew around a sheep run whose owner had the rare good sense to also build a mill and a market", "5ce058a24e9fc77b"],
    ["temple", "after-release", "began when quarry workers sent to extract stone for a distant cathedral decided the site was worth keeping for themselve", "865f6b58bf2e29b9"]
   ],
@@ -878,7 +868,6 @@
    ["granary", "after-release", "The settlement keeps more in reserve than its size explains: granaries a little too large, stores a little too deep.", "18800481eb742132"],
    ["granary", "after-release", "The settlement keeps more in reserve than its size explains: granaries a little too large, walls a little too strong.", "b443347f937904fb"],
    ["militia", "after-release", " is why this settlement has walls where others do not, why the militia drills when other villages have forgotten how, an", "60cc62a9c7e7172c"],
-   ["war", "after-release", " could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (a", "b141cb1fd92f9a6f"],
    ["war", "after-release", " is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the crown is pa", "477f2721e5d2d6ad"],
    ["war", "after-release", " is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast, and all of it lost if ", "65cf322223134a9b"],
    ["war", "after-release", " trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.", "43b91f14a98deff6"],
