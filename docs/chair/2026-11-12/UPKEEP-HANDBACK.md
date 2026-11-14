@@ -1,3 +1,264 @@
+# COHERENCE-UPKEEP: the hand-back (the fourteenth seat, UPKEEP-14, 2026-11-14) — IN PROGRESS
+
+**The lane:** `lane/coherence-upkeep-2026-11-12`. **Base of this seat:** 9c32016c9 (read back from origin before any work; it matched the brief). **This seat's session:** `session_01ACmDYZGcuZzHGcnNZBoikr`. **The brief:** `origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-UPKEEP-14.md`. **The births:** the capacity reader's 972 (`probes/REVIEW-UPKEEP-CAPACITY/all.seeds`), every surface rendered by its `render5.mjs` at the lane's tip and at each cure. **The instruments** (outside every tree, in the seat's container, `/home/user/ins/`): `rend.sh` (four shards of `render5.mjs`), `census14.mjs` (item 1's one script: every row's printing towns on every surface, and the towns printing it against the record, by the tree's own fact readers `defenceOf` and `scoreBand`), `holders.sh` (holders by content: a lane whose copy differs from integration's, from ours and from every past version of the file in this lane's history, less lanes whose tip is in this line).
+
+## The brief and the rulings this seat works to
+
+THE CHAIR'S RULINGS (2026-11-14; each vetoable by the owner; copy them into the hand-back):
+- (a) THE LAW OF THESE ROWS: A LINE THAT NAMES A HOUSE, A ROLE, A PRACTICE OR A FORCE READS THE ROSTER; A LINE THAT PRESUMES NORMAL TIMES READS THE CRISIS IN FORCE; A LINE WRITTEN FOR A TOWN'S SIZE IS NOT PRINTED IN A THORP; TWO LINES ON ONE PAGE READ ONE FACT. Where the line's file already keeps declared twins (incomeLineSiblings.js does), the true twin is chosen; where no true line exists, one is written and read where it prints, or the line is silent. Silence is true.
+- (b) #234 (incomeLineSiblings.js: "Timber Trade … managed felling keeps production consistent": the twelfth seat measured 111 of the 201 births that print "managed felling" with no woodcutter, lumber house or sawmill): "managed felling" only where a woodcutter, a lumber house, a sawmill or a managed forest stands; otherwise the plain twin.
+- (c) #273 (incomeLineSiblings.js: "Iron & Metalwork: Coal is dug here and sold to the forges of other towns…" in a village with no mine, pit, smithy or forge): "is dug here" only where a house that digs stands. AND MEASURE, do not cure: the births that hold an income ROW (its title and its share) for a trade none of whose houses stand, by title: that is the generator's row and a move of the income shares: the table to the chair.
+- (d) #77 (economicState.js: an income line "Fish & Preserved Produce" where the record calls the fishery depleted, its chain impaired, and salted fish is an import): the line says the truth of it (the river is fished out; what is sold is the last of what was put by) or is silent; if the SHARE itself is the false thing (income from a dead source), measure it and tell the chair with (c)'s table.
+- (e) #90 (safetyProfile.js: "Everyone comes and goes by the gates, so smugglers have to get past the garrison and city watch" under a siege whose own line says the gates are shut and barred): under a siege no line says the gates stand open: a true siege twin (what moves, moves over the wall or by a bribed postern, if the record supports it) or silence.
+- (f) #166 and #218 (safetyProfile.js: "A mix of safer and more exposed areas. Militia volunteers patrol the main paths; … Residents know which corners to avoid." in a thorp of 28 and a hamlet of 87 with no watch): areas, main paths and corners belong to a village or larger; "militia volunteers patrol" only where a militia stands. A thorp or a hamlet gets a small-place line that is true of it, or silence.
+- (g) #244 (safetyProfile.js: "No single dominant organisation: just the steady pressure of too many people with too little…" beside "Criminal structure: Organized syndicate" and a criminal power that governs): the crime summary and the criminal structure row read ONE fact: the line denies a dominant organisation only where the record holds no criminal power that governs or dominates and no thieves' guild. (The structure row is the leaves lane's function; its seat is curing the opposite fault there by the same fact: read the record's criminal power, not the row.)
+- (h) #256 and #280 (safetyProfile.js: "Hunger-driven theft … Enforcement struggles to distinguish survival crime from organised theft." where no watch, court, militia or garrison stands): a line that names enforcement reads the roster: where none stands the sentence stops at the theft.
+- (i) P5, AS THE TWELFTH SEAT WROTE IT OUT (its section "P5", the first bullet): the charter hall's "Effective for monster incursions and major disturbances, less so for routine crime prevention." is dropped where the town's own Beasts & Monsters band reads Critical (11 births): `assembleSettlement.js :: withGuardPaidFromDefence` passes the monster score in `read`, `safetyProfile.js :: keptGuardLine` reads it. assembleSettlement.js is held by this lane AND the data lane BY CONTENT: change ONLY inside `withGuardPaidFromDefence` (this lane's own function); if your change must touch a line outside it: STOP and tell the chair with the lines.
+- (j) HIGH, carried, found by the leaves lane's reader on 1,824 births: THE FOUNDRY JOURNAL NAMES EVERY SUPPLY CHAIN "Chain" ("- **Chain** *(impaired)*": 23,653 lines, every town): `src/pdf/lib/viewModelBodySlices.js :: economicsSlice` reads `c?.name || c?.chainName || 'Chain'` while the record's chains carry `label`. This lane holds that function BY CONTENT (the leaves lane holds `resourcesSlice` in the same file: do not touch it). RULED: the slice reads the name the record holds; a chain with no name is not printed as "Chain". A DECLARED MOVE of the journal's chain lines in every town (and of whatever else reads the slice's `name`: measure which surfaces: if the PDF moves too, say so with counts).
+- (k) ONE STORED KEY (the writer-reach door, measured on the joined tree): this lane newly stores `criminalPreStress` on the record's compound (priorityHelpers.js writes it; defenseGenerator.js reads it at line 239; no customer surface reads it). A NEW KEY IN THE STORED RECORD THAT NO SURFACE READS IS NOT ADDED: the value is handed to the generator without being stored (the pages byte-identical on your births), OR, if it must be stored, it is rowed in the writer-dark register by that register's own form with its evidence (scripts/lib/writer-dark-register.mjs: read its header first). The read at line 239 is in a fenced file: if the cure needs a change there, it is one line and it is NAMED for the builder seat (UPKEEP-13) with the exact change, not made; tell the chair.
+
+## ITEM 1 — THE CENSUS (the 972 at 9c32016c9; `TREE=<tree> node census14.mjs <out> --towns`)
+
+"printing" = the births that print the sentence on any surface (tab, Tonight, PDF, Foundry, AI prompt and grounding, registers, world exports); "false" = those of them whose record makes it false by the row's ruling. The surfaces column counts the false births per surface.
+
+| row | false / printing | surfaces printing it false |
+|---|---|---|
+| HIGH (j) Foundry journal "- **Chain** *(" (every supply chain named "Chain") | **963 / 963** (12983 lines) | foundry 963 |
+| #234 (b) "managed felling" with no woodcutter, lumber house, sawmill or managed forest | **53 / 201** | tab 53, pdf 53, export 106 |
+| #273 (c) "Coal is dug here" with no house that digs | **63 / 68** | tab 63, pdf 63, export 126 |
+| #77 (d) a Fish income row where the fishery is depleted (an exhausted-fishery import, or a fishing chain on a depleted resource) | **43 / 296** | tab 43 |
+| #90 (e) "comes and goes by the gates" / "comes in by the gates" under a siege | **29 / 347** | tab 29, pdf 29, export 58 |
+| (e) the gateless twin "The walls leave few ways in, so smugglers" under a siege | **1 / 27** | tab 1, pdf 1, export 2 |
+| #166 #218 (f) "A mix of safer and more exposed areas" in a thorp or hamlet | **79 / 212** | export 158 |
+| (f) "Militia volunteers patrol" where no militia stands | **0 / 19** |  |
+| #244 (g) "No single dominant organisation" beside a criminal power that governs or dominates, or a thieves' guild | **11 / 50** | tab 11, export 22 |
+| (g, measured wider) the same line beside ANY criminal power on the roster | **10 / 50** | tab 10, export 20 |
+| #256 #280 (h) "Enforcement struggles to distinguish" where no watch, court, militia or garrison stands | **84 / 248** | tab 84, export 168 |
+| P5 (i) "Effective for monster incursions" where the Beasts & Monsters band is Critical | **11 / 20** | tab 11, pdf 11, export 22 |
+| carried: "nobody organised to meet it" beside a charter hall (threatAssessment.js) | **22 / 228** | pdf 22 |
+| carried: "paid late" where prosperity is Prosperous or Wealthy | **5 / 327** | pdf 5 |
+| carried: "already owed" / "short of money for years" where Prosperous or Wealthy (corpus pool) | **5 / 202** | tab 5 |
+| carried: "the barracks is all that stands guard" beside a watch (headlines.js) | **13 / 13** | pdf 13, foundry 13 |
+| carried: "the town watch is all that stands guard" beside a free company hall (headlines.js) | **3 / 44** | pdf 3, foundry 3 |
+| carried (pool): "could not hold off a raid" beside "credible against raiders" | **7 / 119** | tab 7 |
+| carried (pool): "would take real effort to threaten" while occupied or besieged | **21 / 105** | tab 21 |
+| carried (pool): "all but undefended" while besieged with a watch | **8 / 196** | tab 8 |
+| carried (pool): "reads as a defended place from the road in" while besieged | **10 / 105** | tab 10 |
+| carried: "Governance fractured." beside "Stability: Stable" (PowerTab, another lane) | **11 / 438** | tab 11, pdf 11 |
+
+Income ROWS whose trade has no house standing (measure for (c)/(d)): title: no house / rows
+- Iron & Metalwork: 198 / 654
+- Stone Quarrying: 131 / 182
+- Timber Trade: 98 / 220
+- Fish & Preserved Produce: 37 / 151
+- Fish & Maritime Produce: 6 / 145
+- Herbalist & Apothecary: 5 / 101
+- Apothecary & Alchemy: 4 / 290
+- Wool & Textile Trade: 0 / 383
+- Arcane Industry: 0 / 87
+
+
+**The chair's rows added after the brief** (messages of 10:58 and 11:22 UTC, measured by the same script at 364c2313d):
+
+| row | false / printing | note |
+|---|---|---|
+| (1) HIGH: `DefenseSecurity.jsx` prints a force's catalogue name raw in the PDF's defence list ("Gates (if walled)", a count range) | **18 / 18** | holders by content: this lane alone |
+| (2) HIGH: `OverviewTab.jsx` prints the stored tensions with a catalogue count range ("Taverns (5-20)") | **1 / 1** (r2r-town-9) | the reader's on 1,536 towns |
+| (3) MED: `OverviewTab.jsx`'s Food Security row reads the stored label, not `foodBandOf` | not measured here | **`foodBandOf` is not on this lane's tree** (it is r2-code-b's `tonightSheet.js`, and the join's): the one-line change needs that function; NAMED FOR THE JOIN |
+| (4) MED: a REQ / FORCED badge on the PDF's defence list | **0 / 0** | already off the defence list at this lane's tip (COHERENCE-UPKEEP-7, item 3); the PDF's REQ lines are the institutions list's, not this list |
+| (5) the stored foodways line handed the source a famine failed (`foodGenerator.js :: generateFoodSecurity`) | **66** births hold a failed source in the sources the composer is handed | the move is counted at the cure |
+
+The order of work (the brief: (j) first, it is HIGH; the chair: the two HIGH added rows straight after it; then widest first): (j) 963; (1) 18; (2) 1; (h) 84; (f) 79; (c) 63; (b) 53; (d) 43; (e) 29; (g) 11; (i) 11; then (k); then the carried templates of this lane's or no lane's files: "the barracks is all that stands guard" 13, "nobody organised to meet it" 22, "paid late" 5 (threatAssessment.js and headlines.js: holders re-read before the first edit). The pool rows (p1–p4, "already owed") are the corpus's: NAMED, not made.
+
+## What this seat did, in commit order
+
+| Commit | Item | Measure (the 972) | Guard and plant | Moved |
+|---|---|---|---|---|
+| 6ddb94336 | (h) #256 #280: the enforcement sentence reads the roster | **84** births (the census's 84): the stored crime line, the Defense tab and both exports; census 84 / 248 -> **0 / 164** | `tests/generators/safetyEnforcementReadsRoster.test.js`; plant reds it; two pins re-keyed by identity (safetySurvivalLineListed/Signal) | `safetyProfile.js :: settleCrimeLinesToSignal` + `ENFORCEMENT_STRUGGLES` at the file's end |
+| afc90dc96 | the chair's (1) HIGH: the PDF's defence list prints a force under the roster's label | **18** births, the PDF only: "Gates (if walled)" -> "Town gates" (18 lines) | `tests/pdf/defenseForceNamesLabelled.test.jsx` (r2r-town-11, census shape); plant (the file as it was) reds it | `DefenseSecurity.jsx`: `institutionDisplayName(force.name) \|\| force.name` |
+| 364c2313d | (j) HIGH: the Foundry journal names each supply chain by its record | the journal's chain list in **963** births: **12,983** lines "- **Chain** *(…)*" -> the record's label; every other surface and the record byte-identical | `tests/pdf/journalChainNames.test.js` (three born towns; the nameless chain); plant (the file as it was) reds 4 of 4 | `viewModelBodySlices.js :: economicsSlice` reads `chainPrintName(c, s).label`; the chain-print walker reclasses the file EXEMPT -> PRINT_SITES (a narrowing: it must import the leaf) |
+
+## FOR THE JOIN (this seat's, gathered)
+
+1. The chair's (1), the tab's twin: `src/components/new/tabs/DefenseTab.jsx` prints `force.name` raw ("Gates (if walled)" on the Defense tab of the same 18 births); held by lane/r3-tabs-2026-11-13 by content. The one-line change: `{institutionDisplayName(force.name) || force.name}`.
+2. The chair's (2): `OverviewTab.jsx`'s stored tensions print "Taverns (5-20)" (1 of the 972: r2r-town-9). The pass the reader names (`houseLabelsInText`, `institutionDisplayName.js`) is NOT on this lane's tree (r2-code-b's stage, H3-18); on this tree the roster itself prints "Taverns (5-20)" (Institutions, Services, Economics tabs and the PDF), so the Overview agrees with this tree's roster. The change, once that function is joined: `{houseLabelsInText(typeof t==='object'?t.description:t, r.institutions)}` in the Tensions block (and HistoryTab.jsx's twin).
+3. The chair's (3): the Overview's Food Security row: ruled to SURFACES-1 (the chair, 11:42).
+
+## WHAT IS LEFT, line by line
+
+**EVERY NEW OR CHANGED LINE, with the towns it was read in (the owner's veto list):** (j) the journal's "- **<chain label>** *(<status>)*" (r2r-thorp-36, r2r-metropolis-8, rv5-under_siege+famine-hamlet-3, r2s-occupied-town-2); (1) the PDF's "Town gates" (rv5-under_siege-town-5, r2s-famine-town-3, r2s-recently_betrayed-town-1); (h) "Hunger-driven theft of food, livestock, and stored goods." and "Theft of food, livestock, and stored goods by people with too little." (rv5-famine-thorp-0, rv5-under_siege-thorp-2, r2s-occupied-thorp-1, rv5-famine-village-1).
+
+- The chair's rows of 11:43 (the lane's reader REVIEW-UPKEEP-4): a court named in 133 towns with no court house (measure which houses set the court flag first); "Money enough … laid by before the debt crisis" (25 towns); "nobody organised to meet it" (in item 5).
+
+---
+
+# COHERENCE-UPKEEP: the hand-back (the twelfth seat, UPKEEP-12, 2026-11-14) — HANDED BACK AT THE COUNT (390,079 at the 10:02 check: under the mark by less than one step-4 item, so handed back rather than crossing it mid-item): H1, H2 and the bar's two HIGH rows (#115, #216) CURED and pushed; H3, M3/M5 and P5 NAMED FOR THE JOIN; M7 declared by field diff with the shift record's 51 surfaces measured; step 4 (the medium rows) NOT STARTED
+
+**The lane:** `lane/coherence-upkeep-2026-11-12`. **Base of this seat:** 26474cda9 (read back from origin before any work; it matched the brief). **This seat's session:** `session_01ACmDYYjzumywJQGkqxyCna`. **The brief:** `origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-UPKEEP-12.md`. **The births:** the capacity reader's 972 (`probes/REVIEW-UPKEEP-CAPACITY/all.seeds`: the census's 720 + 252 of the app's shape), every surface rendered by its `render5.mjs`, born at the lane's tip and at each cure. **The instruments** (outside every tree, in the seat's container): `rend.sh` (four shards of `render5.mjs`), `h1.py` (base -> cure: label, legitimacy, powers, persons, ties, quarrels, and the page-line multiset diff by surface), `lines.py` (the masked lines by surface), `grepw.py` (towns printing a sentence, split by walls), `arc.mjs` (the arcane census against the bucket), `p5.py` (a line by the Beasts band its tab prints), `m7.py` + the reader's `fielddiff.mjs`, `holders2.sh` (holders by content: a lane whose copy differs from the line's, less lanes already in the line and copies that are a past version of the line's file).
+
+## The brief and the rulings this seat works to
+
+- **Who asks:** the chair, `session_01ACmDYZrFEVXyZEUg1NDxxC`; the owner in its chat, 2026-11-14: "Continue with the pending work! ... I defer all decisions to you and give you all permissions you may require." Merging and the deploy stay the owner's; no commit at or below 26474cda9 is rewritten; no pull request.
+- **THE CHAIR'S RULINGS (2026-11-14 08:28 UTC; each vetoable by the owner), copied:**
+  - (a) H1, HIGH: THE READINESS LABEL READS THE ROSTER. "Undefended" means, on every surface that reads it, no walls, no garrison and no watch. A TOWN WHOSE ROSTER HOLDS WALLS OR A FORCE (a garrison, a militia or levy, a watch, a contracted company) IS NEVER LABELLED UNDEFENDED: its lowest label is "Vulnerable". THE SCORE IS NOT MOVED. The cure is made in ONE HOME, where `readiness.label` is derived, so that every reader of the label agrees: a DECLARED MOVE of the label and of what keys off it: MEASURE FIRST; if more than the label's own towns move, or a power is re-drawn in a town whose label did not move: STOP with the table.
+  - (b) H2, HIGH: the PDF's beasts line "No perimeter, but the charter hall provides specialist response…" beside Town walls: a line that says NO PERIMETER reads the same fact the page's own walls line reads, or it is not written.
+  - (c) H3, HIGH: "You can walk into the centre of {S} without being stopped…" in a walled town: if the writer is a file this lane holds, or one no lane holds, the line reads the walls; if it is the corpus's pool, it is NAMED for the corpus lane with the count and left.
+  - (d) M3 AND M5 (one cause): "the town keeps no wards or seers" and an empty Arcane defense list beside "Arcane Support: Present". Measure which side is wrong: the bucket (this lane's file) or the line's key (another lane's file: then FOR THE JOIN). The word and the list read ONE fact.
+  - (e) M7: the capacity build's re-draws of whole persons, ties and quarrels are DECLARED with their counts by the seat's own field diff, and the build's draft shift record names every registered surface MOVED or UNMOVED by measure.
+  - (f) NOT YOURS: M1, M2, M4 and M6 (the scores: the measuring seat's); the eleventh seat's fifty-two lane-new red tests and the rest of its close (the seat after this one); the carried medium templates whose writers are the corpus's pools or another lane's files: NAMED, with the reader's counts, for the join.
+- **THE CHAIR TO UPKEEP-12, 08:59 UTC (three things, copied):** (1) A FENCE: a builder seat (UPKEEP-13) is rebuilding the rating's arithmetic on a SIDE BRANCH cut from 26474cda9. After the H1 commit, THIS SEAT DOES NOT TOUCH `defenseGenerator.js`, `defenceWeights.js`, `defenseInstitutionBuckets.js` or the house-scale file. If (d)'s cure lies in the buckets file: do not make it: name the row, with the measure, for that seat. (2) PUSH H1 AS SOON AS IT IS GREEN and send the chair one line with its commit (sent: ffe0750d4). (3) P5 RULED, a display row, after (c): the charter block's "effective for monster incursions" and "musters the defence", and "has answered it properly: there is a wall to hold and there are people to hold it", print ONLY where Beasts & Monsters reads Weak or better; silent otherwise (the score stands: 21 towns). If a line's writer is another lane's file or the corpus's pool: named, with the count.
+
+## Incidents (this seat)
+
+- None pushed wrong. The first H1 commit message was drafted with the chair's session in the `Claude-Session` trailer; it was caught before the commit (read back with `get_session`) and committed with this seat's own.
+
+## What this seat did, in commit order
+
+| Commit | Item | Measure (the 972) | Guard and plant | Moved |
+|---|---|---|---|---|
+| ffe0750d4 | (a) H1: the label reads the roster | Undefended -> Vulnerable in **26** births (the reader's four among them); 0 births change outside them | `defenceParts.test.js` (held never Undefended; the corpus holds a floored town); plant `readinessBandOf` ignoring `held` reds it (v3build-famine-village-1) | `bandLadders.js :: readinessBandOf(score, held)`; `defenseInstitutionBuckets.js :: defenceHeldOf` + `DEFENCE_HOLDING_BUCKETS`; `defenseGenerator.js` calls it; `recordInvariants.js` V-BAND-READINESS reads the stored partition by path (`recordInvariantMeta.js` path added) |
+| 7cbcbf5e9 | (b) H2: "No perimeter, but the charter hall…" reads the walls | **11 -> 0** births (all walled, PDF only); no birth gains a line | `threatRowsTrueUnderBand.test.js` (no walled row says "no perimeter", over its 68 births and the guard town r2r-town-27); plant (the old branch) reds 4 of 68 | `threatAssessment.js :: buildThreatAssessment`, `else if (hasCharter && !hasWalls)` |
+| fd1330673 | step 3, the bar's #115: the Arcane Industry line names the mages' guild only where a guild, a district or an academy stands | **5** births move (the record's income desc only); the bar's town cured; every income line of the table read against the roster (below) | `incomeLinesSayTheRecord.test.js` (the law; the bar's town); plant (the file as it was) reds the law | `economicState.js :: arcaneIndustryLineOf` (at the END of the file) |
+| fb7a61558 | step 3, the bar's #216: the Outlook names magic only where the record holds a magic food supply | **0** of the 972 move (16 print a magic clause, all with the record's supply); the bar's town cured | `dossierViewModel.test.js`, the isolated matrix (a viability offset the record does not hold names no magic); plant reds it | `dossierViewModel.js :: deriveViability` `magicFed` + `recordHoldsMagicFood` (at the END of the file) |
+
+### (a) H1, THE DECLARED MOVE, by family (the lane's tip 26474cda9 against ffe0750d4; every surface and the record)
+
+| family | births moved | all within the 26 label towns? |
+|---|---|---|
+| `defenseProfile.readiness.label` | 26 (all Undefended -> Vulnerable) | yes (the set itself) |
+| `defenseProfile.readiness.score` | 0 | — |
+| legitimacy score (`powerStructure.publicLegitimacy.score`: the defence share -10 -> -5, scaled) | 21 | yes |
+| legitimacy band | 1 (r2s-occupied-town-2: Legitimacy Crisis 27 -> Contested 31) | yes |
+| powers re-drawn (`powerStructure.factions` order) | 1 (r2s-occupied-town-2: the band crossing re-orders Guild Council, Religious Authorities, Occupation Authority) | yes |
+| npcs, relationships | 1 each (r2s-occupied-town-2, following its powers) | yes |
+| conflicts, institutions, economicState, history | 0 | — |
+| page lines | 26 | yes |
+
+No power is re-drawn in a town whose label did not move; nothing moves outside the label's own towns: NO STOP. The 26: r2r-hamlet-16, r2r-hamlet-34, r2r-thorp-1, r2r-thorp-17, r2r-thorp-27, r2r-town-7, r2r-village-56, r2s-famine-village-1, r2s-famine-village-3, r2s-occupied-thorp-0, r2s-occupied-town-2, r2s-plague_onset-town-3, r2s-succession_void-thorp-0, r2s-under_siege-village-3, rv5-famine-hamlet-1, rv5-famine-hamlet-5, rv5-famine-thorp-2, rv5-famine-town-1, rv5-famine-village-2, rv5-monster_pressure-village-2, rv5-under_siege+famine-thorp-1, rv5-under_siege+famine-town-0, rv5-under_siege+famine-town-2, rv5-under_siege+famine-town-5, rv5-under_siege+famine-village-4, rv5-under_siege-town-4. (The reader counted 4 new + 19 carried on the capacity tip; the lane's tip has moved since.)
+
+**EVERY NEW OR CHANGED LINE, with the towns it was read in (the owner's veto list):**
+- "Vulnerable" (the Defense tab badge, the Overview tag, the PDF readiness row and cover "Defense: Vulnerable", the Foundry "- **Readiness:** Vulnerable", the AI prompt "Defense posture: Vulnerable, military score N/100"): 26 births.
+- The PDF/Foundry headline, its label now "Vulnerable": "Vulnerable: palisade or earthworks, held by the citizen militia." (7), "Vulnerable: a palisade, held by the household levy." (7), "Vulnerable: town walls, held by the town watch." (4), "Vulnerable: palisade or earthworks, held by the village watch." (2), "Vulnerable: no walls; the town watch is all that stands guard." (2), and the suffixed "… It leans on magic to hold." (4, carried suffix).
+- Following legitimacy in r2s-occupied-town-2: "Contested" for "Legitimacy Crisis", the governance sentence "Poverty and crime have left the Guild Council's right to rule contested…" for "Poverty and weak defences have cost the Guild Council its standing…", "Governance fractured." gone, the powers' order and their drawn lines, and its persons' goals and ties (the re-draw named above); the AI grounding's administrative capacity "strained" for "critical" in 4 births (it reads the legitimacy score).
+- READ WHERE IT PRINTS: r2r-thorp-1 (thorp, the smallest; under occupation; Palisade and a force: "Vulnerable" over "Terrapolis is all but undefended."), r2s-occupied-town-2 (occupation; town, the largest size it reaches), rv5-under_siege-town-4 (siege; Town walls, Gates, Town watch: "Vulnerable" over "Neadbridge is all but undefended."), rv5-famine-hamlet-1 (famine; palisade and citizen militia). The Daily Life cell for Vulnerable needs a watch and stays silent where none stands; no label-keyed pool line moved on any tab.
+
+### (b) H2 — the towns newly silent, read
+
+The PDF's Beasts & Monsters row prints its band alone where the line was: r2r-town-27 ("Adequate"; its Invasion row "Walls, and a watch to keep them."), rv5-under_siege+famine-town-4 (siege and famine; "Adequate"), r2s-monster_pressure-town-0 ("Weak"). On these births the line reached towns only; the guard's seeds reach it in villages (rv2-calm-village-11). No new sentence was written (a walled town with a watch or a company and a charter hall has no true sentence in the branch: it prints its band alone; one could be written later, read where it prints).
+
+### (c) H3 — NAMED FOR THE JOIN (the corpus's pool)
+
+"You can walk into the centre of {settlement} without being stopped, challenged or counted by anybody at all." is `src/data/dossierStateProse/defense.generated.js`, DS-DEF-2 pool "readiness CRITICAL", vid 3 (marks `crisis: any`, `no crisis: threat, unrest`), keyed by `src/domain/display/stateProse/defenseStateProse.js :: posturePoolKey` (`scoreBand(readiness.score)`). Holders by content: the pool by the corpus lanes (r3-tabs, w2-fix-data, w2-fix-data-history, w2-write, w2-write-side-eco, w2-write-side-rest); the picker by r3-tabs. **Count on the 972 at 7cbcbf5e9: 75 births print it (the Defense tab), 18 of them walled** (r2r-hamlet-17, r2r-hamlet-26, r2r-town-22, r2r-town-7, r2r-village-7, r2s-famine-village-3, r2s-indebted-hamlet-3, r2s-plague_onset-hamlet-1, r2s-plague_onset-town-3, r2s-politically_fractured-hamlet-1, r2s-politically_fractured-town-0, r2s-politically_fractured-village-2, r2s-succession_void-hamlet-1, r2s-succession_void-hamlet-2, r2s-succession_void-thorp-3, r2s-succession_void-town-3, rv5-calm-village-1, rv5-famine-town-1). THE CHANGE FOR THE JOIN: the line's marks gain `excludes: walls` (the walls atom the draw door reads), or the reworded line names nothing a walled town denies. H1 does not touch it (the pool keys off the score, not the label).
+
+### (d) M3 / M5 — MEASURED; BOTH SIDES OUTSIDE THIS SEAT'S HANDS (one row for the builder seat, one for the join)
+
+The three readings: "Arcane Support: Present … Detection, wards, counterspell" (`src/domain/display/defenseDisplay.js :: deriveSupportingCapabilities`, which reads `magicReliance.js :: magicPractitioners`: any house or person the catalogue says practises); the Defense tab's "Arcane defense" list and "…the town keeps no wards or seers…" / "…conventional throughout" (both read the defence home's `magicDef` bucket: `standingDefenseForces(r).magicDef.present`, through `defenseStateProse.js :: arcaneDefensePoolKey`). On the 972 at 7cbcbf5e9: Present with the bucket empty in **33** births (19 of them also print "no wards or seers" / "conventional throughout"); the bucket full and Present 277; neither 662; the bucket full and None 0. The practitioners the census counts in those 33: Teleportation circle 19 births, Healer (divine, 1st level) 7, Scroll scribe 7, Enchanter's shop 6, Dragon resident 1.
+- **Where the line's key is wrong (26 of 33 births: only a teleportation circle, a divine healer or a dragon):** "Arcane Support: Present … Detection, wards, counterspell" is false of a teleportation circle and of a divine healer. Writer `defenseDisplay.js` (held by this lane AND by lane/w2-c-leaves and w2-c-leaves-side, by content): FOR THE JOIN. THE CHANGE: `deriveSupportingCapabilities`'s arcane row reads the arcane-defence fact the list reads (`standingDefenseForces(r).magicDef.present`), not the practitioner census.
+- **Where the bucket is wrong (7 births: a Scroll scribe and/or an Enchanter's shop: r2r-city-0, r2r-city-19, r2r-city-41, r2r-city-5, r2r-town-10, r2s-infiltrated-city-0, r2s-religious_conversion-city-3):** these practise wards; the `magicDef` keywords ('wizard', "mages' guild", 'mage', 'academy of magic', 'golem workforce') hold neither. Writer `defenseInstitutionBuckets.js :: DEFENSE_BUCKET_KEYWORDS.magicDef`: FENCED (the chair, 08:59): NAMED FOR UPKEEP-13, the builder seat: add 'scroll scribe' and "enchanter's shop" to `magicDef` (a move of the bucket, so of the arcane part of the scores: the builder's), measured there. After both, the word and the list read one fact.
+
+### P5 (the chair's 08:59 ruling) — MEASURED; NAMED FOR THE JOIN, line by line
+
+By the Beasts & Monsters band each town's own Defense tab prints, on the 972 at 7cbcbf5e9:
+- "The adventurers' charter hall coordinates emergency response to threats. Effective for monster incursions and major disturbances, less so for routine crime prevention. Not a police force." (the Guard assessment; tab, PDF, both world exports): Critical **11**, Weak 7, Adequate 2. The Critical 11: r2r-hamlet-21, r2r-hamlet-23, r2r-hamlet-45, r2r-village-18, r2r-village-47, r2s-occupied-hamlet-3, r2s-politically_fractured-hamlet-2, rv5-famine-village-1, rv5-occupied-hamlet-4, rv5-under_siege+famine-hamlet-3, rv5-under_siege+famine-hamlet-5. The writer `src/generators/safetyProfile.js` (this lane's) writes it at birth, before the profile exists; the one place that sees the band is `src/generators/steps/assembleSettlement.js :: withGuardPaidFromDefence` (held by this lane AND lane/w2-fix-data, by content), which hands `keptGuardLine` its `read`. THE CHANGE FOR THE JOIN (two files, one hand): `withGuardPaidFromDefence` passes `monsterScore: settlement.defenseProfile?.scores?.monster` in `read`; `safetyProfile.js :: keptGuardLine` drops " Effective for monster incursions and major disturbances, less so for routine crime prevention." where `scoreBand(read.monsterScore)` is CRITICAL (the lead and " Not a police force." stay). Not made here: half of it would be inert and unprovable on births.
+- "…with no garrison to call on it musters the defence…" (the charter hall's description: tab, Institutions tab, PDF, Foundry, world exports): Critical **4** (r2r-hamlet-21, r2r-hamlet-45, r2s-occupied-hamlet-3, rv5-monster_pressure-hamlet-2), Weak 2. Writer `src/data/institutionDescVariants.js` (held by lane/w2-fix-data and w2-fix-data-history): FOR THE JOIN.
+- "The country around {settlement} is thick with creatures and the town has answered it properly: there is a wall to hold and there are people to hold it…" (DS-DEF pool, the Defense tab): Critical **22**, Weak 10, Adequate 3, Strong 17. Writer the corpus's pool `src/data/dossierStateProse/defense.generated.js`: FOR THE JOIN (the corpus lane), 22 births: r2r-hamlet-17, r2r-hamlet-26, r2r-hamlet-6, r2r-thorp-25, r2r-thorp-26, r2r-thorp-27, r2r-thorp-45, r2r-thorp-6, r2r-village-14, r2r-village-7, r2s-indebted-hamlet-0, r2s-infiltrated-hamlet-0, r2s-occupied-thorp-0, r2s-politically_fractured-hamlet-1, r2s-politically_fractured-thorp-2, r2s-slave_revolt-village-3, r2s-succession_void-hamlet-0, r2s-succession_void-hamlet-2, r2s-under_siege-village-3, rv5-famine-thorp-2, rv5-monster_pressure-thorp-2, rv5-wartime-thorp-4.
+
+### (e) M7 — THE CAPACITY BUILD'S RE-DRAWS, DECLARED (this seat's own field diff: DEF 6e61d042a -> the capacity tip 9354d792a, the 972, every record leaf)
+
+| family | births moved | the births |
+|---|---|---|
+| ties (relationship pairs or kinds re-drawn) | **8** | r2r-city-55, r2r-metropolis-15, r2r-metropolis-52, r2s-infiltrated-metropolis-2, r2s-religious_conversion-metropolis-0, r2s-slave_revolt-metropolis-3, rv5-calm-town-2, rv5-monster_pressure-town-5 |
+| quarrels (`conflicts`) | **5** | r2r-city-55, r2s-infiltrated-metropolis-2, r2s-religious_conversion-metropolis-0, r2s-slave_revolt-metropolis-3, rv5-monster_pressure-town-5 |
+| persons (`npcs`; the cast's names stand in all of them; their allegiance, goals, constraints, category or gender re-drawn) | **12** | the eight above, and r2r-town-19, r2s-monster_pressure-town-2, r2s-occupied-town-2, r2s-wartime-town-2 (constraint and goal fields only) |
+| powers (the set re-drawn) | 1 (r2r-city-55); re-ordered 3 | — |
+| the rest, by top family | defenseProfile 782, powerStructure 126, simulationTrace 122, economicState 42, activeConditions 29, stress 6, stressors 6, prominentRelationship 4, pressureSentence 2, coherenceNotes 1, generationCoherenceReceipt 1 | keys only at DEF: `defenseProfile.institutions.magicDef[].factionSource` (C6's bucket change); none only at the tip |
+
+The reader counted persons in 8 (the eight tie births); this seat's diff counts any `npcs` leaf, so 12. THE SHIFT RECORD'S SURFACES: see the table below (each of the 51 registered surfaces of `tests/fixtures/.golden-freeze-register.json`, its suite run alone, in read mode, at DEF and at the capacity tip).
+
+Each suite run ALONE (`npx vitest run --maxWorkers=1 <suite>`, no UPDATE variable in the environment: no golden's door opened), its whole output kept and compared with the run number, the timings and the tree's path taken out. The 5 MOVED: cartography-calibration-corpus (35 -> 32 rows off), espionage-dormancy-fence (the driven corpus's hash e5b9d7d1… -> cde51067…), pdf-golden-view-model-snapshot (`defense.scoreAvg` 37 -> 35), dossier-prose-manifest (cells that would draw differently 9,309 -> 9,337 of 74,351), herald-knowledge-desk-golden (its hash 6ae9be3d… -> 8d98fa91…). generator-golden-master is red at DEF already in all 525 configurations, byte for byte the same report at the tip: the instrument cannot see a further move, so it is "UNMOVED as measured" with that limit beside it.
+
+| surface | suite | at DEF 6e61d042a | at the capacity tip 9354d792a | by measure |
+|---|---|---|---|---|
+| belief-axes-dormancy-golden | `tests/property/beliefAxesDormancyGolden.test.js` | exit 0: 6 passed (6) | exit 0: 6 passed (6) | UNMOVED (green at both) |
+| belief-map-golden | `tests/property/beliefMapGolden.test.js` | exit 0: 5 passed (5) | exit 0: 5 passed (5) | UNMOVED (green at both) |
+| cartography-calibration-corpus | `tests/domain/townCartographyCalibration.test.js` | exit 1: 2 failed | 30 passed (32) | exit 1: 2 failed | 30 passed (32) | **MOVED** (red at both; the failure differs) |
+| chroniclers-letter-golden | `tests/property/chroniclersLetterGolden.test.js` | exit 0: 2 passed (2) | exit 0: 2 passed (2) | UNMOVED (green at both) |
+| contested-goals-dormancy-golden | `tests/property/contestedGoalsDormancyGolden.test.js` | exit 0: 7 passed (7) | exit 0: 7 passed (7) | UNMOVED (green at both) |
+| corruption-web-dormancy-golden | `tests/property/corruptionWebDormancyGolden.test.js` | exit 0: 5 passed (5) | exit 0: 5 passed (5) | UNMOVED (green at both) |
+| demographics-lifecycle-golden | `tests/property/demographicsLifecycleGolden.test.js` | exit 0: 5 passed (5) | exit 0: 5 passed (5) | UNMOVED (green at both) |
+| disposition-channels-dormancy-golden | `tests/property/dispositionChannelsDormancyGolden.test.js` | exit 0: 8 passed (8) | exit 0: 8 passed (8) | UNMOVED (green at both) |
+| espionage-dormancy-fence | `tests/property/espionageDormancyFence.test.js` | exit 1: 1 failed | 20 passed (21) | exit 1: 1 failed | 20 passed (21) | **MOVED** (red at both; the failure differs) |
+| espionage-mission-dormancy-fence | `tests/property/espionageMissionDormancyFence.test.js` | exit 0: 20 passed (20) | exit 0: 20 passed (20) | UNMOVED (green at both) |
+| espionage-rider-dormancy-fence | `tests/property/espionageRiderDormancyFence.test.js` | exit 0: 9 passed (9) | exit 0: 9 passed (9) | UNMOVED (green at both) |
+| generator-golden-master | `tests/property/generatorGoldenMaster.test.js` | exit 1: 1 failed | 2 passed (3) | exit 1: 1 failed | 2 passed (3) | UNMOVED as measured (the same red, byte for byte, at both) |
+| generosity-dormancy-golden | `tests/property/generosityDormancyGolden.test.js` | exit 0: 6 passed (6) | exit 0: 6 passed (6) | UNMOVED (green at both) |
+| information-statecraft-dormancy-golden | `tests/property/informationStatecraftDormancyGolden.test.js` | exit 0: 5 passed (5) | exit 0: 5 passed (5) | UNMOVED (green at both) |
+| intel-trade-dormancy-golden | `tests/property/intelTradeDormancyGolden.test.js` | exit 0: 5 passed (5) | exit 0: 5 passed (5) | UNMOVED (green at both) |
+| interior-golden | `tests/interior/interiorModel.test.js` | exit 0: 40 passed (40) | exit 0: 40 passed (40) | UNMOVED (green at both) |
+| intervention-dormancy-golden | `tests/property/interventionDormancyGolden.test.js` | exit 0: 5 passed (5) | exit 0: 5 passed (5) | UNMOVED (green at both) |
+| migration-rumors-dormancy-golden | `tests/property/migrationRumorsDormancyGolden.test.js` | exit 0: 7 passed (7) | exit 0: 7 passed (7) | UNMOVED (green at both) |
+| momentum-dormancy-golden | `tests/property/momentumDormancyGolden.test.js` | exit 0: 6 passed (6) | exit 0: 6 passed (6) | UNMOVED (green at both) |
+| npc-credibility-dormancy-golden | `tests/property/npcCredibilityDormancyGolden.test.js` | exit 0: 5 passed (5) | exit 0: 5 passed (5) | UNMOVED (green at both) |
+| npc-growth-dormancy-golden | `tests/property/npcGrowthDormancyGolden.test.js` | exit 0: 5 passed (5) | exit 0: 5 passed (5) | UNMOVED (green at both) |
+| npc-ladder-dormancy-golden | `tests/property/npcLadderDormancyGolden.test.js` | exit 0: 6 passed (6) | exit 0: 6 passed (6) | UNMOVED (green at both) |
+| npc-ledger-dormancy-golden | `tests/property/npcLedgerDormancyGolden.test.js` | exit 0: 7 passed (7) | exit 0: 7 passed (7) | UNMOVED (green at both) |
+| pdf-golden-view-model-snapshot | `tests/pdf/goldenViewModel.test.js` | exit 1: 1 failed | 3 passed (4) | exit 1: 1 failed | 3 passed (4) | **MOVED** (red at both; the failure differs) |
+| peace-causal-dormancy-golden | `tests/property/peaceCausalDormancyGolden.test.js` | exit 0: 6 passed (6) | exit 0: 6 passed (6) | UNMOVED (green at both) |
+| provenance-dormancy-golden | `tests/property/provenanceDormancyGolden.test.js` | exit 0: 6 passed (6) | exit 0: 6 passed (6) | UNMOVED (green at both) |
+| resource-dynamics-dormancy-golden | `tests/property/resourceDynamicsDormancyGolden.test.js` | exit 0: 5 passed (5) | exit 0: 5 passed (5) | UNMOVED (green at both) |
+| roads-dormancy-golden | `tests/property/roadsDormancyGolden.test.js` | exit 0: 7 passed (7) | exit 0: 7 passed (7) | UNMOVED (green at both) |
+| route-network-dormancy-golden | `tests/domain/routeNetworkDormancy.test.js` | exit 0: 18 passed (18) | exit 0: 18 passed (18) | UNMOVED (green at both) |
+| rumor-ledger-golden | `tests/property/rumorLedgerGolden.test.js` | exit 0: 5 passed (5) | exit 0: 5 passed (5) | UNMOVED (green at both) |
+| sea-lanes-golden | `tests/property/seaLanesGolden.test.js` | exit 0: 4 passed (4) | exit 0: 4 passed (4) | UNMOVED (green at both) |
+| seasonal-overlay-golden | `tests/property/seasonalOverlayGolden.test.js` | exit 0: 3 passed (3) | exit 0: 3 passed (3) | UNMOVED (green at both) |
+| settlement-lifecycle-dormancy-golden | `tests/property/settlementLifecycleDormancyGolden.test.js` | exit 0: 5 passed (5) | exit 0: 5 passed (5) | UNMOVED (green at both) |
+| settlement-politics-dormancy-golden | `tests/property/settlementPoliticsDormancyGolden.test.js` | exit 0: 5 passed (5) | exit 0: 5 passed (5) | UNMOVED (green at both) |
+| spatial-consequence-dormancy-golden | `tests/property/spatialConsequenceDormancyGolden.test.js` | exit 0: 5 passed (5) | exit 0: 5 passed (5) | UNMOVED (green at both) |
+| spatial-digest-golden | `tests/property/spatialDigestGolden.test.js` | exit 0: 2 passed (2) | exit 0: 2 passed (2) | UNMOVED (green at both) |
+| supply-web-warfare-dormancy-golden | `tests/property/supplyWebWarfareDormancyGolden.test.js` | exit 0: 6 passed (6) | exit 0: 6 passed (6) | UNMOVED (green at both) |
+| teleport-edges-golden | `tests/property/teleportEdgesGolden.test.js` | exit 0: 4 passed (4) | exit 0: 4 passed (4) | UNMOVED (green at both) |
+| timeline-track-golden | `tests/property/timelineTrackGolden.test.js` | exit 0: 2 passed (2) | exit 0: 2 passed (2) | UNMOVED (green at both) |
+| town-cartography-dormancy-golden | `tests/property/townCartographyDormancyGolden.test.js` | exit 0: 7 passed (7) | exit 0: 7 passed (7) | UNMOVED (green at both) |
+| town-map-golden | `tests/property/townMapGolden.test.js` | exit 0: 3 passed (3) | exit 0: 3 passed (3) | UNMOVED (green at both) |
+| town-map-v2-golden | `tests/property/townMapV2Golden.test.js` | exit 0: 6 passed (6) | exit 0: 6 passed (6) | UNMOVED (green at both) |
+| traditions-dormancy-golden | `tests/property/traditionsDormancyGolden.test.js` | exit 0: 7 passed (7) | exit 0: 7 passed (7) | UNMOVED (green at both) |
+| upswing-dormancy-golden | `tests/property/upswingDormancyGolden.test.js` | exit 0: 6 passed (6) | exit 0: 6 passed (6) | UNMOVED (green at both) |
+| urban-fabric-dormancy-golden | `tests/property/urbanFabricDormancyGolden.test.js` | exit 0: 5 passed (5) | exit 0: 5 passed (5) | UNMOVED (green at both) |
+| worldpulse-golden-master | `tests/property/worldpulseDeityGolden.test.js` | exit 0: 5 passed (5) | exit 0: 5 passed (5) | UNMOVED (green at both) |
+| worldpulse-seasons-golden | `tests/property/worldpulseSeasonsGolden.test.js` | exit 0: 4 passed (4) | exit 0: 4 passed (4) | UNMOVED (green at both) |
+| worldpulse-spatial-golden | `tests/property/worldpulseSpatialGolden.test.js` | exit 0: 6 passed (6) | exit 0: 6 passed (6) | UNMOVED (green at both) |
+| dossier-prose-manifest | `tests/property/dossierProseManifest.test.js` | exit 1: 3 failed | 14 passed (17) | exit 1: 3 failed | 14 passed (17) | **MOVED** (red at both; the failure differs) |
+| preset-lighting-witness | `tests/simulation/presetLightingWitness.test.js` | exit 0: 7 passed (7) | exit 0: 7 passed (7) | UNMOVED (green at both) |
+| herald-knowledge-desk-golden | `tests/property/heraldKnowledgeDeskGolden.test.js` | exit 1: 1 failed | 2 passed (3) | exit 1: 1 failed | 2 passed (3) | **MOVED** (red at both; the failure differs) |
+
+**5 MOVED, 46 UNMOVED** of 51 registered surfaces.
+
+
+### STEP 3 — the bar's two HIGH rows (both writers this lane's, by content)
+
+- **#115** (bar0-city-wartime-rand-1): cured at fd1330673. EVERY INCOME LINE of the table that names a house or a role, against the roster, on the 972 at 7cbcbf5e9 (prints / false): mages' guild 87 / **5** (cured); resident clergy 259 / 0; garrison 149 / 0; smithy 99 / 0; the local alchemist 43 / 0; weavers and fullers 44 / 0; sawmilling 86 / 0; court fees 386 / 0; guild oversight 483 / 0; banking 245 / 0; port 72 / 0; docks and ferry 68 / 0; the gates 102 / 0; within the walls 429 / 0; spell services 230 / 0; woodcutters, fishers, hunters, miners 6, 2, 1, 1 / 0; the quarry 44 / 0; magical conduits 6 / 0; the criminal guild 89 / 0; **"managed felling" 201 / 111** (no woodcutter, lumber house or sawmill): `incomeLineSiblings.js` (held also by lane/coherence-veil, r2-code-b-side, round-3-cut): FOR THE JOIN (the bar's #234, below). The "Arcane Economy" branch of the same gate ("…Arcane licences, guild dues, and service fees…") prints in none of the 972: NOT reworded (a line no birth reaches cannot be read where it prints); for the next reader: it names guild dues under the same tower-admitting gate. READ: r2s-monster_pressure-city-0 (Wizard's tower, Enchanter's shop, Scroll scribe), r2s-religious_conversion-city-1 (Wizard's tower, Scroll scribe, Teleportation circle), bar0-city-wartime-rand-1 (wartime): "Arcane Industry Enchanting contracts, magical research commissions, and the licensing of spellcasting practitioners." on the Economics tab, the PDF and both world exports. Cities only (the gate is city and up).
+- **#216** (bar0-hamlet-calm-rand-1): cured at fb7a61558. The viability balance carried a divine provision (1 lb/day) the food record never counted; the Outlook now names magic only where the record's food home holds a supply. The bar's town reads "…; the rest comes from its stores." beside "Reliance on magic: None" (Viability tab, PDF, Foundry). On the 972: 0 move. THE TWO HOMES STILL DISAGREE (for the join's food reader): the viability balance's `magicFoodOffset` > 0 where the food generator's `magicOffset` is 0 in 8 of the 972 (and the food record's `magicSupplement` disagrees with `magicOffset` in 378: supplement without offset 325, offset without supplement 53): which home is the magic food supply is the food lane's ruling; this seat made the Outlook read the record's.
+
+## FOR THE JOIN (this seat's, gathered)
+
+1. H3: `defense.generated.js` DS-DEF-2 "readiness CRITICAL" vid 3, `excludes: walls` (18 walled of 75).
+2. M5 / M3, the line's side: `defenseDisplay.js :: deriveSupportingCapabilities`, the arcane row reads `standingDefenseForces(r).magicDef.present` (26 births; with the builder's bucket row, 33).
+3. P5: `assembleSettlement.js :: withGuardPaidFromDefence` + `safetyProfile.js :: keptGuardLine` (11 births); `institutionDescVariants.js`, the charter hall's "musters the defence" under Critical (4); `defense.generated.js`, "has answered it properly" under Critical (22).
+4. FOR UPKEEP-13 (the fence): `defenseInstitutionBuckets.js :: DEFENSE_BUCKET_KEYWORDS.magicDef` gains 'scroll scribe' and "enchanter's shop" (7 births).
+5. The bar's #234 ("Timber Trade … managed felling keeps production consistent" with no sawmill, woodcutters or carpenters): `incomeLineSiblings.js`, 111 of the 201 births that print "managed felling" hold no woodcutter, lumber house or sawmill.
+6. The ruin-filter walker (`tests/lint/ruinFilterRoster.walker.test.js`) scans `.institutions` tokens: H1's invariant reads the stored defence partition by its declared path (`readPath(s, 'defenseProfile.institutions')`, the file's own idiom: every check of `recordInvariants.js` reads by dotted path), which the walker does not enrol. The read is ruin-blind by design (the label and the partition are one generation's snapshot). Named for the walker's owner: it sees no dotted-path read.
+
+## WHAT IS LEFT, line by line
+
+1. Step 2: the one message to the chair (sent with this hand-back's push), then THE COUNT.
+2. Step 3: DONE (fd1330673, fb7a61558).
+3. Step 4, NOT STARTED, for the next seat: the bar's ten medium rows (`BAR-0-ROWS-defence.json`: #206 defenseDisplay.js "No deterrence beyond force." beside a court (shared with w2-c-leaves: JOIN); #77 economicState.js "Fish & Preserved Produce" beside a depleted fishery (this lane's); #234 and #273 incomeLineSiblings.js (shared: JOIN); #90, #166, #218, #244, #256, #280 safetyProfile.js (this lane's: the gates line under a siege, the "areas / corners" line in a thorp or hamlet, the "no single dominant organisation" line beside a syndicate, the hunger-theft "Enforcement struggles" line where no enforcer stands)) and the reader's lows, widest first, one script over the 972 counting each row's sentence against the record (the census table into this part), one cause a commit. Holders by content were read at 07:10-era tips with `holders2.sh` (in this part's instruments); re-read them before the first edit. The carried medium templates in this lane's files (`threatAssessment.js`: "Wild country all round and nobody organised to meet it" beside a charter hall, 15 at DEF; "already paid late"; `headlines.js`, no lane: "no walls; the barracks is all that stands guard" beside a watch) go in that table; the carried ones in other lanes' files (the corpus pool's "could not hold off a raid", "would take real effort to threaten", "already owed", "short of money for years", "all but undefended", "reads as a defended place from the road in"; `PowerTab.jsx` / `PowerStructure.jsx` "Governance fractured." beside Stable, held by lane/powers-follow-up) are named for the join with the reader's counts.
+4. The eleventh seat's close (its 52 lane-new reds, census-2, the final statement): NOT this seat's.
+
+**How the instruments are re-made:** a scratch worktree on a local branch at the lane's tip, `npm ci`, `git config --local --unset core.hookspath`; detached worktrees at the base, DEF and the capacity tip with a symlinked `node_modules` (the lockfile is the same at all four); the reader's probes by `git archive origin/lane/review-upkeep-capacity-2026-11-14 docs/chair/2026-11-14/probes/REVIEW-UPKEEP-CAPACITY | tar -x` outside every tree; `TREE=<tree> node render5.mjs <seeds> <out>` in four shards (about 7 minutes for the 972 on four cores). Commits and pushes with `git -c core.hooksPath=.husky/_`, after the `git rev-list` test; refs and the shared config compared before and after each push: unchanged.
+
+---
+
 # COHERENCE-UPKEEP: the hand-back (the eleventh seat, UPKEEP-11, 2026-11-14) — HANDED BACK AT THE COUNT: steps 1 to 3 DONE (no line measured false; every red named); step 4 (i) and (ii) DONE; the whole suite run and classed against the base and the line (52 new reds named); step 4 (iii) and step 5 LEFT
 
 **The lane:** `lane/coherence-upkeep-2026-11-12`. **Base of this seat:** 878fce4a8 (read back from origin before any work). **The brief:** `origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-UPKEEP-11.md` (self-contained: the laws, the four classes of the chair's 04:57 ruling, the final statement's form). **The probes:** `docs/chair/2026-11-14/probes/UPKEEP-11/` (README there). **The births:** the lane's 1,490 born at 878fce4a8 (UPKEEP-9's `birthgz.mjs`).

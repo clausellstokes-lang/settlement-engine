@@ -308,7 +308,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         percentage: pct,
         desc: ecoStressFlags.magicFillsVoid
           ? 'Magic has absorbed functions normally provided by conventional trade, government, and religion. Arcane licences, guild dues, and service fees constitute the primary revenue base.'
-          : "Enchanting contracts, magical research commissions, and the licensing of spellcasting practitioners. The mages' guild contributes meaningfully to civic revenue.",
+          : arcaneIndustryLineOf(hasInst), // UPKEEP-12 (#115): the guild's sentence only where a guild or an academy stands
       });
       // Bonus: enchanting multiplier boosts metalwork/crafts income when present
       // (represented as a cross-chain enhancement note in the existing income entries)
@@ -880,3 +880,13 @@ import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.
 import { buildPrimaryTradeLists, sayHowLittleGrain } from './primaryTradeLists.js'; // at the END for the same reason: the pre-chain trade lists, extracted for the cohesion ceiling (LANDING-3)
 import { keepOf, boughtShare } from '../../domain/facts/keep.js';
 import { goodsOnlyRefusedChainsMake } from '../../domain/chainYield.js'; // at the END for the same reason: COHERENCE-AGREE-6 (F2), the export bonus asks the one predicate
+
+// UPKEEP-12 (#115, the chair's step 3): an income line that names a house reads the roster. The Arcane Industry gate
+// admits a wizard's tower alone; the line's second sentence (the guild's) prints only where a mages' guild or an academy
+// stands, and a tower alone prints the first sentence of the same line. At the END of the file so no cited line moves.
+const ARCANE_INDUSTRY_LINE = "Enchanting contracts, magical research commissions, and the licensing of spellcasting practitioners. The mages' guild contributes meaningfully to civic revenue.";
+/** @param {(...names: string[]) => boolean} hasInst the roster's own name test @returns {string} */
+function arcaneIndustryLineOf(hasInst) {
+  return hasInst("mages' guild", "mages' district", 'arcane academy', 'academy of magic', 'magical academy')
+    ? ARCANE_INDUSTRY_LINE : ARCANE_INDUSTRY_LINE.slice(0, ARCANE_INDUSTRY_LINE.indexOf('.') + 1);
+}

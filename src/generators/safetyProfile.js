@@ -806,6 +806,13 @@ export function settleCrimeLinesToSignal(economicState, lists) {
   if (infrastructure && settled.some((entry) => entry?.type === 'Survival crime')) {
     settled = settled.filter((entry) => !(entry?.type === 'desperation theft' && entry.desc === DESPERATION_THEFT_DESC));
   }
+  // UPKEEP-14 (the chair's ruling (h), the bar's #256 #280): a line that names enforcement reads the roster: where no
+  // watch, court, militia or garrison stands on the final roster, the sentence stops at the theft.
+  const enforced = defenceOf({ institutions: lists?.estate ?? [] });
+  if (!(enforced.watch || enforced.court || enforced.militia || enforced.garrison)) {
+    settled = settled.map((entry) => typeof entry?.desc === 'string' && entry.desc.endsWith(ENFORCEMENT_STRUGGLES)
+      ? { ...entry, desc: entry.desc.slice(0, -ENFORCEMENT_STRUGGLES.length) } : entry);
+  }
   if (settled.length === crimes.length && settled.every((entry, i) => entry === crimes[i])) return economicState;
   return { ...economicState, safetyProfile: { ...safetyProfile, crimeTypes: settled } };
 }
@@ -1077,3 +1084,6 @@ export function keptGuardLine(desc, institutions, prosperity, read = {}) {
 // At the END of the file, as the frames above, so no producer write moves.
 import { defenseFactsOf } from '../domain/defense/defenseFacts.js';
 import { GANG_HOUSES_OF, MERCHANT_ARMY_BESIDE, SMALL_PLACES, THEFT_NETWORK_DESC, TINY_PLACES, hungerIn, paperTruth, patrolTruth } from './safetyLineTruth.js';
+
+/** The enforcement sentence the desperation-theft lines end on (UPKEEP-14, ruling (h)): dropped where no enforcer stands. */
+const ENFORCEMENT_STRUGGLES = ' Enforcement struggles to distinguish survival crime from organised theft.';

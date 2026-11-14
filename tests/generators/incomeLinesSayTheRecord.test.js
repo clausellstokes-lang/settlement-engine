@@ -26,7 +26,7 @@ beforeAll(async () => { await loadGenerationLawPayloads(); });
 
 /** The reader's shape: rr2s-<size>-<crisis|calm>-<route|rand>-<i>, rww-<size>-<crisis|calm>-<i>. */
 function cfgFor(seed) {
-  const m = /^(rr2s|rww)-(\w+?)-([a-z_+]+?)(?:-(rand|port))?-(\d+)$/.exec(seed);
+  const m = /^(rr2s|rww|bar0)-(\w+?)-([a-z_+]+?)(?:-(rand|port))?-(\d+)$/.exec(seed); // bar0: the bar's readers' shape, the same
   if (!m) throw new Error(seed);
   return birthConfig({ ...DEFAULT_CONFIG, ...(m[4] === 'port' ? { tradeRouteAccess: 'port' } : {}), settType: m[2],
     selectedStressesRandom: false, selectedStresses: m[3] === 'calm' ? [] : m[3].split('+'), _randomizePriorities: true });
@@ -83,11 +83,19 @@ describe('the law, over births of every crisis the lines print under', () => {
         if (/^Local quarry\b/.test(d)) expect(has(/quarr/), `${seed}: ${d}`).toBe(true);
         if (d === FISH_EXPORT_LINE) expect(has(/fisher|fishing/), `${seed}: ${d}`).toBe(true);
         if (/sawmilling/.test(d)) expect(has(/sawmill|lumber/), `${seed}: ${d}`).toBe(true);
+        if (/mages' guild/.test(d)) expect(has(/mages' guild|mages' district|academy/), `${seed}: ${d}`).toBe(true); // UPKEEP-12 (#115)
       }
       // the census's siege lines (CENSUS-2): tolls on the roads, at the gates, customs and transit trade print no sentence
       for (const e of s.economicState.incomeSources) if (siege && SIEGE_CLOSED_SOURCES.includes(e.source)) expect(e.desc, `${seed}: ${e.source}`).toBe('');
     }));
     expect(alch, 'an alchemist line printed somewhere in the corpus').toBeGreaterThan(0);
+    // UPKEEP-12 (#115, the bar's row): the bar's town bar0-city-wartime-rand-1 holds a Wizard's tower and no mages' guild
+    // or academy; its Arcane Industry line prints without the guild's clause.
+    const tower = birth('bar0-city-wartime-rand-1');
+    const arcane = tower.economicState.incomeSources.find((e) => e.source === 'Arcane Industry');
+    expect(tower.institutions.some((i) => /wizard's tower/i.test(i.name)), 'the guard town holds a tower').toBe(true);
+    expect(arcane?.desc, 'the guard town prints its Arcane Industry line').toMatch(/^Enchanting contracts/);
+    expect(arcane?.desc).not.toMatch(/mages' guild/); // anchored: the line is matched on the line above
     expect(siegeRows, 'sieges were read').toBeGreaterThan(0);
   });
 });
