@@ -213,3 +213,13 @@ Kept current after every item. Started from 7d12b40cb (origin's tip, as the brie
 | `.prose-numerics-baseline.json` | 12 rows, line only | (path, category, snippet) multiset identical (186); defence's files 4, leaves/r2b/defence's EconomicsTrade.jsx | 035159bc7 |
 | `dossierPhoneFloorAllViews` x2 | five views each arm | every view = the line + its movers' moves (defence, r2a, powers, r2b); none by the join alone | 1e33be746 |
 | `corpusCureGuards` x4 | classed, not re-keyed | the corpus lane's rows (70/70 at its tip); each town's draw sent to the chair for that seat (message 11:5x) | — |
+
+## P3.3 The three rituals (steps 8, 9, 10), in order, each on the clean committed tree
+
+| step | command (through gate-tail) | exits | commit |
+|---|---|---|---|
+| 8 tuning | `TUNING_INVENTORY_REFREEZE='JOIN-3' TUNING_INVENTORY_NOTE=… npx vitest run tests/lint/tuningRegister.walker.test.js`, then plain | 1 (by design), 0 (76/76); tables 277 -> 280 (defence's DEFENCE_TUNING, KEEP_TUNING, KEEP_SCALE_TUNING), bareDecimals 6931 -> 6879 | b3a1bb3ea |
+| 9 edge bundles | `npm run build:edge-shared` in /home/user/j3wt (own node_modules) | 0; sourceHash moved in aiCharter, aiGrounding, aiOutputSchema, engine; ALL TEN metas kept from the one run (Appendix B's revert of the unmoved two reds `edgeSharedBundleReproducibility` "a single build window"; 2n's row says "all metas from ONE run"); tests/edgeFunctions 950/950 | 128ab68c7 |
+| 10 lighting, LAST | `LIGHTING_CENSUS_REFREEZE='JOIN-3' LIGHTING_CENSUS_NOTE=… npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js`, then plain | 1 (by design), 0 (34/34); files 3251 -> 3448, titles 29455 -> 30107 | 05d1dc180 |
+
+The refreeze message sent to the chair at 05d1dc180 (no stops; a correction: the powers draft names A1's mint figure 139 > 138 for the merge seat to key: the chair's to rule).
