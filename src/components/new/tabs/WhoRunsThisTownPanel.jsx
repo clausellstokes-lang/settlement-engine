@@ -27,6 +27,14 @@ import { boostWords, rulingHeadOf } from '../../../data/people/dmPowerLines.js';
 
 const PLACE = Object.freeze({ 1: 'Head', 2: 'Second', 3: 'Third', steward: 'Steward' });
 const RANK_WORD = Object.freeze({ 1: 'first', 2: 'second', 3: 'third' });
+/**
+ * R2-CODE-B-5 (the chair's ruling, CENSUS-2 kind d: "Tserenpuntsag Jalayir (the workhouse master), the workhouse master",
+ * r2r-metropolis-7): a row adds a person's title only where the link's own label (the person's name, as the record
+ * holds it) does not already carry it. No word changes. The PDF's twin (pdf/sections/WhoRunsThisTown.jsx) reads the same.
+ * @param {{ name?: string, title?: string } | null | undefined} face
+ */
+const carriesTitle = (/** @type {unknown} */ name, /** @type {string} */ title) => new RegExp(`(^|[^\\p{L}])${title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[^\\p{L}])`, 'iu').test(String(name || ''));
+const titleAfter = (face) => (face?.title && !carriesTitle(face.name, String(face.title)) ? `, ${face.title}` : '');
 
 const box = { background: swatch['#FAF8F4'], border: '1px solid #d8c090', borderLeft: '4px solid #4a1a4a', padding: '10px 14px', ...FLUSH };
 const head = { fontWeight: 800, color: swatch.inkMag3, margin: '10px 0 4px' };
@@ -55,7 +63,7 @@ export default function WhoRunsThisTownPanel({ settlement }) {
       {view.rulingThree.map((f) => (
         <div key={f.id} data-testid="dm-ruling-face">
           <div style={row}>
-            <strong>{f.place || PLACE[f.rank]}</strong>{' · '}<Face face={f} />{f.title ? `, ${f.title}` : ''}
+            <strong>{f.place || PLACE[f.rank]}</strong>{' · '}<Face face={f} />{titleAfter(f)}
             {f.openPowers.length > 0 && <span style={{ color: MUTED }}>{` · also ${f.openPowers.map((m) => (m.rank ? `${RANK_WORD[m.rank]} in ${m.powerName}` : `in ${m.powerName}`)).join(', ')}`}</span>}
             {f.answersTo && <span>{` · answers to ${f.answersTo.guild}${f.answersTo.handler ? ` through ${f.answersTo.handler}` : ''}`}</span>}
           </div>
@@ -67,13 +75,13 @@ export default function WhoRunsThisTownPanel({ settlement }) {
         <div style={headStyle}>Who answers to whom</div>
         {view.answers.map((g) => (
           <div key={g.guild} data-testid="dm-answers-group" style={{ marginBottom: 6 }}>
-            <div style={row}><strong>{g.guild}</strong>{g.boss && <>{' · led by '}<Face face={g.boss} />{g.boss.title ? `, ${g.boss.title}` : ''}</>}</div>
+            <div style={row}><strong>{g.guild}</strong>{g.boss && <>{' · led by '}<Face face={g.boss} />{titleAfter(g.boss)}</>}</div>
             {g.handlers.map((h) => (
               <div key={h.id} style={{ marginLeft: 12 }}>
-                <div style={row}>{'handled by '}<Face face={h} />{h.title ? `, ${h.title}` : ''}{h.house ? ` (${institutionHouseLabel(h.house)})` : ''}</div>
+                <div style={row}>{'handled by '}<Face face={h} />{titleAfter(h)}{h.house ? ` (${institutionHouseLabel(h.house)})` : ''}</div>
                 {h.agents.map((a) => (
                   <div key={a.id} style={{ ...row, marginLeft: 12 }}>
-                    <Face face={a} />{a.title ? `, ${a.title}` : ''}{a.house ? ` (${institutionHouseLabel(a.house)})` : ''}
+                    <Face face={a} />{titleAfter(a)}{a.house ? ` (${institutionHouseLabel(a.house)})` : ''}
                     <span style={{ color: MUTED }}>{` · brings ${a.brings}${a.tie ? ` · ${a.tie}` : ''}`}</span>
                   </div>
                 ))}

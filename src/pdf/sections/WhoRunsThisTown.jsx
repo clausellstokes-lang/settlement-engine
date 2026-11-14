@@ -15,6 +15,14 @@ import { institutionHouseLabel } from '../../domain/display/institutionDisplayNa
 
 const PLACE = Object.freeze({ 1: 'Head', 2: 'Second', 3: 'Third', steward: 'Steward' });
 const RANK_WORD = Object.freeze({ 1: 'first', 2: 'second', 3: 'third' });
+/**
+ * R2-CODE-B-5 (the chair's ruling): a row adds a person's title only where the person's name, as the record holds it,
+ * does not already carry it ("Tserenpuntsag Jalayir (the workhouse master), the workhouse master"). The page's twin
+ * (components/new/tabs/WhoRunsThisTownPanel.jsx) reads the same.
+ * @param {{ name?: string, title?: string } | null | undefined} face
+ */
+const carriesTitle = (/** @type {unknown} */ name, /** @type {string} */ title) => new RegExp(`(^|[^\\p{L}])${title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[^\\p{L}])`, 'iu').test(String(name || ''));
+const titleAfter = (face) => (face?.title && !carriesTitle(face.name, String(face.title)) ? `, ${face.title}` : '');
 
 const headStyle = { ...type.label, color: palette.gold, fontSize: pt['8'], marginTop: space.sm, marginBottom: 2 };
 const rowStyle = { ...type.body, fontSize: pt['9'] };
@@ -30,7 +38,7 @@ export function WhoRunsThisTown({ dm }) {
         {dm.rulingThree.map((f) => (
           <View key={f.id} wrap={false}>
             <Text style={rowStyle}>
-              {`${f.place || PLACE[f.rank]} · ${f.name}${f.title ? `, ${f.title}` : ''}`}
+              {`${f.place || PLACE[f.rank]} · ${f.name}${titleAfter(f)}`}
               {f.openPowers.length ? ` · also ${f.openPowers.map((m) => (m.rank ? `${RANK_WORD[m.rank]} in ${m.powerName}` : `in ${m.powerName}`)).join(', ')}` : ''}
               {f.answersTo ? ` · answers to ${f.answersTo.guild}${f.answersTo.handler ? ` through ${f.answersTo.handler}` : ''}` : ''}
             </Text>
@@ -41,13 +49,13 @@ export function WhoRunsThisTown({ dm }) {
         {dm.answers.length > 0 && <Text style={headStyle}>WHO ANSWERS TO WHOM</Text>}
         {dm.answers.map((g) => (
           <View key={g.guild}>
-            <Text style={rowStyle}>{`${g.guild}${g.boss ? ` · led by ${g.boss.name}${g.boss.title ? `, ${g.boss.title}` : ''}` : ''}`}</Text>
+            <Text style={rowStyle}>{`${g.guild}${g.boss ? ` · led by ${g.boss.name}${titleAfter(g.boss)}` : ''}`}</Text>
             {g.handlers.map((h) => (
               <View key={h.id} style={{ marginLeft: 8 }}>
-                <Text style={rowStyle}>{`handled by ${h.name}${h.title ? `, ${h.title}` : ''}${h.house ? ` (${institutionHouseLabel(h.house)})` : ''}`}</Text>
+                <Text style={rowStyle}>{`handled by ${h.name}${titleAfter(h)}${h.house ? ` (${institutionHouseLabel(h.house)})` : ''}`}</Text>
                 {h.agents.map((a) => (
                   <Text key={a.id} style={{ ...rowStyle, marginLeft: 8 }}>
-                    {`${a.name}${a.title ? `, ${a.title}` : ''}${a.house ? ` (${institutionHouseLabel(a.house)})` : ''} · brings ${a.brings}${a.tie ? ` · ${a.tie}` : ''}`}
+                    {`${a.name}${titleAfter(a)}${a.house ? ` (${institutionHouseLabel(a.house)})` : ''} · brings ${a.brings}${a.tie ? ` · ${a.tie}` : ''}`}
                   </Text>
                 ))}
               </View>

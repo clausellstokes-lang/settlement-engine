@@ -72,3 +72,53 @@ describe('CHIPS — two trait chips are two things', () => {
     expectAbsentWithAnchor(text, ' Flaw: proud', 'Flaw: proud', 'a space before the first chip');
   });
 });
+
+// ── WHO RUNS — the DM view's rows add a person's title only where the person's name does not already carry it (the
+// chair's ruling; CENSUS-2 kind d: "Tserenpuntsag Jalayir (the workhouse master), the workhouse master", r2r-metropolis-7).
+// The rows are read from a fixed view (the panel's one reader, dmPowerViewOf, is mocked), page and PDF alike.
+const DM_VIEW = vi.hoisted(() => ({
+  tierNoun: 'city', ruler: null,
+  rulingThree: [
+    { id: 'npc_r1', rank: 1, name: 'Toghan Arlat (the master of granaries)', title: 'the master of granaries', openPowers: [], lends: [], answersTo: null },
+    { id: 'npc_r2', rank: 2, name: 'Alda Reeve', title: 'the reeve', openPowers: [], lends: [], answersTo: null },
+  ],
+  answers: [{
+    guild: 'Thieves guild', boss: { id: 'npc_b', name: 'Orm Lordsson', title: 'Lord' },
+    handlers: [{
+      id: 'npc_h', name: 'Kunhild Ihle (the pawnbroker)', title: 'the pawnbroker', house: null,
+      agents: [
+        { id: 'npc_a1', name: 'Tserenpuntsag Jalayir (the workhouse master)', title: 'the workhouse master', house: null, brings: 'coin', tie: null },
+        { id: 'npc_a2', name: 'Bran Smith', title: 'the smith', house: null, brings: 'tools', tie: null },
+      ],
+    }],
+  }],
+  fronts: [], hall: { label: 'The hall', line: 'It keeps its own counsel.' }, boosts: [],
+}));
+vi.mock('../../src/domain/people/patronage.js', async (orig) => ({ ...(await orig()), dmPowerViewOf: () => DM_VIEW }));
+import WhoRunsThisTownPanel from '../../src/components/new/tabs/WhoRunsThisTownPanel.jsx';
+import { WhoRunsThisTown } from '../../src/pdf/sections/WhoRunsThisTown.jsx';
+
+/** Every string a react-pdf element tree prints, in order (components are not called: their children are walked). */
+const pdfText = (node) => (node == null || typeof node === 'boolean' ? '' : typeof node === 'string' || typeof node === 'number' ? String(node)
+  : Array.isArray(node) ? node.map(pdfText).join('\n') : pdfText(node.props?.children));
+
+describe('WHO RUNS — a title is added only where the name does not carry it', () => {
+  const twice = ['the master of granaries), the master of granaries', 'the pawnbroker), the pawnbroker', 'the workhouse master), the workhouse master'];
+  test('the page: no title printed twice; a title the name lacks still prints', () => {
+    const text = render(<WhoRunsThisTownPanel settlement={{ id: 'x' }} />).container.textContent;
+    for (const t of twice) expectAbsentWithAnchor(text, t, 'Tserenpuntsag Jalayir (the workhouse master)', 'a title printed twice');
+    expect(text).toContain('Tserenpuntsag Jalayir (the workhouse master) · brings coin');
+    expect(text).toContain('Bran Smith, the smith');
+    expect(text).toContain('Alda Reeve, the reeve');
+    // a title inside a longer word of the name is not carried by it
+    expect(text).toContain('Orm Lordsson, Lord');
+  });
+  test('the PDF twin: the same rows', () => {
+    const text = pdfText(WhoRunsThisTown({ dm: DM_VIEW }));
+    for (const t of twice) expectAbsentWithAnchor(text, t, 'Tserenpuntsag Jalayir (the workhouse master)', 'a title printed twice');
+    expect(text).toContain('Tserenpuntsag Jalayir (the workhouse master) · brings coin');
+    expect(text).toContain('Bran Smith, the smith');
+    expect(text).toContain('Second · Alda Reeve, the reeve');
+    expect(text).toContain('led by Orm Lordsson, Lord');
+  });
+});
