@@ -1,0 +1,22 @@
+{"id":"03841","town":"r2s-famine-city-1","sev":"LOW","kind":"STATE","why":"says built on kin, oath and the assembly; GOVERNMENT is Merchant Guild Council, no assembly listed","other":""}
+{"id":"12464","town":"r2s-famine-city-1","sev":"MED","kind":"PAIR","why":"says council leaves Thieves' Guild alone; QUARRELS has them in a high open conflict over prices","other":"12487"}
+{"id":"16920","town":"r2s-famine-city-3","sev":"LOW","kind":"STATE","why":"offers quality furs; LAND has hunting grounds depleted and Furs & Pelts impaired; TRADE exports no furs","other":""}
+{"id":"13931","town":"r2s-famine-city-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as the power's name; the page elsewhere says 'The Guard'","other":""}
+{"id":"13482","town":"r2s-famine-city-2","sev":"MED","kind":"STATE","why":"says spices are needed and not brought in; LAND gaps name only copper ore (smelter) and clay/iron imports, no spice chain or house","other":""}
+{"id":"01477","town":"r2s-occupied-city-0","sev":"MED","kind":"STATE","why":"says little food is put by; FOOD word is Secure with 8.8 months in store and a granary standing","other":""}
+{"id":"23859","town":"r2s-occupied-city-2","sev":"LOW","kind":"BROKEN","why":"Quiahuitl Chi names two people in PEOPLE (customs collector and master weaver); the bare name cannot say which is meant","other":""}
+{"id":"27760","town":"r2s-plague_onset-city-3","sev":"MED","kind":"STATE","why":"says nothing the city lives by would stop without magic; FOOD shows 7% of food made by magic","other":""}
+{"id":"19790","town":"r2s-plague_onset-city-3","sev":"LOW","kind":"PAIR","why":"says a healer first identified the outbreak; the overview says the dean did","other":"17483"}
+{"id":"04756","town":"r2s-plague_onset-city-1","sev":"MED","kind":"PAIR","why":"says council and Thieves' Guild leave each other alone; QUARRELS has an open moderate conflict over stolen goods sold openly, relation tense","other":"04792"}
+{"id":"04763","town":"r2s-plague_onset-city-1","sev":"MED","kind":"PAIR","why":"says council leaves Thieves' Guild alone; QUARRELS has an open moderate conflict with it over stolen goods sold openly","other":"04792"}
+{"id":"01952","town":"r2r-city-19","sev":"LOW","kind":"STATE","why":"prints 'the lady' for Grainne Shaughnessy; PEOPLE gives her title as 'the lord' of Noble Families","other":""}
+{"id":"21088","town":"r2r-city-51","sev":"LOW","kind":"STATE","why":"city hall said run by Honor Burke; PEOPLE makes her circle-keeper of the Teleportation circle, nobody listed for city hall","other":""}
+{"id":"12141","town":"r2r-city-51","sev":"LOW","kind":"LACKS","why":"prints a major revenue stream across 'urban districts'; population is 2,414 and trade access isolated","other":""}
+{"id":"09887","town":"r2s-wartime-city-1","sev":"MED","kind":"LACKS","why":"names multiple dry docks, ropewalk, sail loft and ironworks; HOUSES has only a Shipyard, no ropemaker, smith or smelter, in a town of 2,054","other":""}
+{"id":"19076","town":"r2s-recently_betrayed-city-0","sev":"LOW","kind":"STATE","why":"city hall said run by Mimir Helgason; PEOPLE makes him dean of the Parish churches, nobody listed for city hall","other":""}
+{"id":"13899","town":"r2s-insurgency-city-2","sev":"MED","kind":"PAIR","why":"says governorship leaves Thieves' Guild alone; QUARRELS has a high open conflict with it over legitimacy, relation tense and escalating","other":"21881"}
+{"id":"14087","town":"r2s-insurgency-city-2","sev":"MED","kind":"PAIR","why":"says neither side pushes the other; QUARRELS has Thieves' Guild vs Noble Governorship high and escalating, insurgency contesting authority","other":"21881"}
+{"id":"19528","town":"r2s-insurgency-city-2","sev":"MED","kind":"STATE","why":"says little food is put by and food trades struggle; FOOD word is Secure, 8.5 months in store, granary standing","other":""}
+{"id":"14050","town":"r2s-infiltrated-city-1","sev":"MED","kind":"STATE","why":"says no criminal power is strong enough to push the council; stability line says decisions are shaped from outside, crisis Infiltrated by regional criminal pressure","other":"27887"}
+{"id":"21327","town":"r2s-infiltrated-city-1","sev":"MED","kind":"STATE","why":"says the town was built in the years after the trade collapse; it is 223 years old and the collapse was 181 years ago","other":""}
+{"id":"DONE","lines":2414,"blocks":22,"flags":21}
