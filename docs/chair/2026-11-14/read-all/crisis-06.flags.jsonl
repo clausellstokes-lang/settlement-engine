@@ -1,0 +1,91 @@
+{"id":"HEADER","town":"r2s-plague_onset-town-0","sev":"MED","kind":"RECORD","why":"founder is a merchant consortium seeking a waypoint, but reason says a family granted mill rights founded it","other":""}
+{"id":"15361","town":"r2s-plague_onset-town-0","sev":"MED","kind":"RECORD","why":"origin by a mill-rights family contradicts FOUNDING's merchant consortium founder","other":""}
+{"id":"04797","town":"r2s-plague_onset-town-0","sev":"MED","kind":"STATE","why":"carts, beasts and walkers queue at the ferry as usual; town is Quarantined under plague","other":""}
+{"id":"15244","town":"r2s-plague_onset-town-0","sev":"MED","kind":"STATE","why":"annual fair drawing merchants from across the region, presented as running; town Quarantined under plague","other":""}
+{"id":"12096","town":"r2s-plague_onset-town-0","sev":"LOW","kind":"STATE","why":"merchant guild carrying dealings outward as normal; plague quarantine stops ordinary travel","other":""}
+{"id":"13120","town":"r2s-plague_onset-town-0","sev":"MED","kind":"LACKS","why":"Mercenary Forces shown Operational in defense; DEFENCE says hired: none","other":""}
+{"id":"20815","town":"r2s-plague_onset-town-0","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'The herds feeds'","other":""}
+{"id":"19720","town":"r2s-plague_onset-town-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"HEADER","town":"r2s-plague_onset-town-2","sev":"LOW","kind":"RECORD","why":"Coastal town with docks, harbour master and sea fisheries, yet trade access is only river","other":""}
+{"id":"29122","town":"r2s-plague_onset-town-2","sev":"MED","kind":"LACKS","why":"entry by a gate with gatekeepers; DEFENCE and HOUSES list Town walls but no Gates","other":""}
+{"id":"14531","town":"r2s-plague_onset-town-2","sev":"LOW","kind":"LACKS","why":"watch does gate duty; town has no Gates on HOUSES or DEFENCE","other":""}
+{"id":"20031","town":"r2s-plague_onset-town-2","sev":"MED","kind":"LACKS","why":"ailing ruler names a successor; government is a Feudal Appointee placed by a lord, not a hereditary ruler","other":""}
+{"id":"11871","town":"r2s-plague_onset-town-2","sev":"MED","kind":"STATE","why":"local ore feeds smithy, metalwork not trade-dependent; TRADE imports refined iron and metalwork","other":""}
+{"id":"22545","town":"r2s-plague_onset-town-2","sev":"MED","kind":"STATE","why":"yards full of outbound goods; town Struggling, plague unrest, people not trading as usual","other":""}
+{"id":"03112","town":"r2s-plague_onset-town-2","sev":"MED","kind":"STATE","why":"orderly due process relied on; stability says people fear sickness more than heed orders, safety Dangerous - Plague Unrest","other":""}
+{"id":"04368","town":"r2s-plague_onset-town-2","sev":"LOW","kind":"LACKS","why":"leading and lesser families contend for a failing seat; GOVERNMENT lists no gentry or noble families","other":""}
+{"id":"20218","town":"r2s-plague_onset-city-3","sev":"MED","kind":"PAIR","why":"says city run by officials less formally constituted than a council; GOVERNMENT is a Corrupt City Council","other":"19211"}
+{"id":"20541","town":"r2s-plague_onset-city-3","sev":"MED","kind":"STATE","why":"all home-grown food is the grain harvest; TRADE made-here lists livestock, dairy, game meat, cheese","other":""}
+{"id":"18167","town":"r2s-plague_onset-city-3","sev":"MED","kind":"LACKS","why":"preserved fish for inland trade; inland mountain city, TRADE exports and imports no fish","other":""}
+{"id":"06002","town":"r2s-plague_onset-city-3","sev":"LOW","kind":"LACKS","why":"salt fish carted in by the barrel; TRADE imports list no fish","other":""}
+{"id":"03905","town":"r2s-plague_onset-city-3","sev":"MED","kind":"LACKS","why":"offers mercenary hire; DEFENCE hired: none and HOUSES has no free company or hireling hall","other":""}
+{"id":"15641","town":"r2s-plague_onset-city-3","sev":"MED","kind":"STATE","why":"live music and games at venues nightly; plague, people fear sickness and do not gather as usual","other":""}
+{"id":"18556","town":"r2s-plague_onset-city-3","sev":"LOW","kind":"STATE","why":"markets open every day as usual under plague, safety Dangerous - Plague Unrest","other":""}
+{"id":"02917","town":"r2s-plague_onset-city-3","sev":"LOW","kind":"PAIR","why":"a prisoner held in custody; another line says there is nowhere to hold the guilty, and HOUSES has no prison","other":"02505"}
+{"id":"HEADER","town":"r2s-plague_onset-city-3","sev":"MED","kind":"RECORD","why":"founder is a military command building fortifications; reason says it grew around a sheep run with mill and market","other":""}
+{"id":"15332","town":"r2s-plague_onset-city-3","sev":"MED","kind":"PAIR","why":"origin a sheep run with mill and market; the next history line says founded by a military command","other":"09381"}
+{"id":"01563","town":"r2s-plague_onset-city-0","sev":"MED","kind":"STATE","why":"market handles more than the city can use, as ordinary trade; city is Quarantined under plague","other":""}
+{"id":"18504","town":"r2s-plague_onset-city-0","sev":"LOW","kind":"STATE","why":"stalls piled high in every lane, a busy market scene; city Quarantined, people not gathering","other":""}
+{"id":"09370","town":"r2s-plague_onset-city-0","sev":"LOW","kind":"STATE","why":"founded at a road junction; FOUNDING says royal decree and began as a riverside mill settlement","other":""}
+{"id":"09715","town":"r2s-plague_onset-city-0","sev":"MED","kind":"STATE","why":"goods come and go and the city takes its cut, as ordinary trade; city is Quarantined under plague","other":""}
+{"id":"04683","town":"r2s-plague_onset-city-0","sev":"MED","kind":"STATE","why":"Caravan & Overland Trade shown Running; city is Quarantined under plague","other":""}
+{"id":"03456","town":"r2s-plague_onset-city-0","sev":"MED","kind":"LACKS","why":"Almshouse Care shown Operational; HOUSES has no almshouse (and no hospital)","other":""}
+{"id":"20360","town":"r2s-plague_onset-city-0","sev":"MED","kind":"STATE","why":"craft guilds close behind, contesting every decision in council; GOVERNMENT lists Craft Guilds as Suppressed","other":""}
+{"id":"28617","town":"r2s-plague_onset-city-0","sev":"MED","kind":"STATE","why":"craft guilds a persistent civic voice merchants must negotiate with; GOVERNMENT has Craft Guilds Suppressed","other":""}
+{"id":"16773","town":"r2s-plague_onset-city-0","sev":"MED","kind":"STATE","why":"craft guilds running close behind merchant guilds in a sustained dispute; Craft Guilds are Suppressed","other":""}
+{"id":"23333","town":"r2s-plague_onset-city-0","sev":"LOW","kind":"PAIR","why":"force undermanned, cannot enforce law; DEFENCE Well-Defended with garrison and professional watch on regular rounds","other":"20615"}
+{"id":"17354","town":"r2s-plague_onset-city-0","sev":"LOW","kind":"LACKS","why":"a prisoner died in the cells; HOUSES has no prison and a line says there is little room to hold offenders","other":"15202"}
+{"id":"17190","town":"r2s-plague_onset-city-0","sev":"LOW","kind":"PAIR","why":"walls left unrepaired, money pocketed; another line says fresh repairs show on the walls and gates","other":"09470"}
+{"id":"00587","town":"r2s-plague_onset-city-0","sev":"MED","kind":"PAIR","why":"says the mint master governs; GOVERNMENT is a City-State Council and he is named only as mint master","other":"02092"}
+{"id":"20129","town":"r2s-plague_onset-city-0","sev":"MED","kind":"STATE","why":"stores more than the season needs; food ledger shows a 3% deficit after imports, under plague quarantine","other":""}
+{"id":"03703","town":"r2s-plague_onset-city-1","sev":"MED","kind":"STATE","why":"a thriving alchemical trade draws customers from around; city Poor, plague unrest, people not travelling as usual","other":""}
+{"id":"09301","town":"r2s-plague_onset-city-1","sev":"MED","kind":"PAIR","why":"nobody has found the stone worth taking; TRADE makes stone here and history raises walls from local quarry stone","other":"23539"}
+{"id":"28616","town":"r2s-plague_onset-city-1","sev":"MED","kind":"STATE","why":"well-funded watch keeps order reliably; city Poor, safety Dangerous - Plague Unrest, people heed sickness over orders","other":"12223"}
+{"id":"12831","town":"r2s-plague_onset-city-1","sev":"MED","kind":"STATE","why":"mages hold real influence; GOVERNMENT has Arcane Orders and The Arcane Circle both Suppressed","other":"20266"}
+{"id":"20245","town":"r2s-plague_onset-city-1","sev":"MED","kind":"PAIR","why":"city entered the trouble with money in hand; prosperity Poor and the seat-holder cannot pay for repairs and relief","other":"05676"}
+{"id":"04923","town":"r2s-plague_onset-city-1","sev":"LOW","kind":"PAIR","why":"courts are all ecclesiastical; government is a City-State Council and a civic chief magistrate holds the courthouses","other":"01808"}
+{"id":"06866","town":"r2s-plague_onset-city-1","sev":"LOW","kind":"STATE","why":"druidic forest management accelerates regrowth; TRADE imports timber because local managed woodland is cleared","other":""}
+{"id":"10284","town":"r2s-plague_onset-city-2","sev":"MED","kind":"PAIR","why":"vintner sells wine by barrel and bottle; page says no grapes reach the vintner and none are brought in","other":"14602"}
+{"id":"11176","town":"r2s-plague_onset-city-2","sev":"LOW","kind":"PAIR","why":"talks of the year's grapes and suggests a cask; no grapes reach the vintner","other":"14602"}
+{"id":"28851","town":"r2s-plague_onset-city-2","sev":"LOW","kind":"PAIR","why":"where no vine grows the vintner imports; page says grapes are needed and not brought in","other":"14230"}
+{"id":"20982","town":"r2s-plague_onset-city-2","sev":"LOW","kind":"LACKS","why":"carted barrels of salt fish weighed out; TRADE imports list no fish","other":""}
+{"id":"14719","town":"r2s-plague_onset-city-2","sev":"MED","kind":"PAIR","why":"governorship and guard need each other, work in step; another line marks high tension between them","other":"10656"}
+{"id":"20442","town":"r2s-plague_onset-city-2","sev":"MED","kind":"STATE","why":"workshops cannot feed or equip defenders; prosperity Comfortable, defence Fortress, bowyers guild makes bows and arrows here","other":""}
+{"id":"21800","town":"r2s-plague_onset-city-2","sev":"LOW","kind":"PAIR","why":"'ruling three' of a Noble Governorship whose seat one governor holds alone","other":"01905"}
+{"id":"HEADER","town":"r2r-city-19","sev":"MED","kind":"RECORD","why":"made-here lists ship construction, ocean-going vessels and river barges; HOUSES has no shipyard or boatyard","other":""}
+{"id":"30946","town":"r2r-city-19","sev":"MED","kind":"LACKS","why":"Shipbuilding ticked as a resource; HOUSES has no shipyard or boatyard","other":""}
+{"id":"HEADER","town":"r2r-city-19","sev":"LOW","kind":"RECORD","why":"founded by a merchant coalition from another town, yet reason says it grew from a fishing village","other":""}
+{"id":"15344","town":"r2r-city-19","sev":"LOW","kind":"PAIR","why":"origin a fishing village grown into a hub; next line says founded by a merchant coalition from elsewhere","other":"09379"}
+{"id":"01193","town":"r2r-city-19","sev":"MED","kind":"PAIR","why":"no trade brings a real share of income; another line says the harbour is the only asset that matters","other":"22265"}
+{"id":"01111","town":"r2r-city-19","sev":"MED","kind":"PAIR","why":"every arrival goes through a gate; it is a port where ships land at an unguarded waterfront","other":"15069"}
+{"id":"03110","town":"r2r-city-19","sev":"MED","kind":"STATE","why":"orderly process relied on; stability says people fear sickness more than heed orders, safety Dangerous - Plague Unrest","other":""}
+{"id":"21802","town":"r2r-city-19","sev":"LOW","kind":"LACKS","why":"'ruling three' of a Royal Authority, a crown governing directly","other":"20406"}
+{"id":"29774","town":"r2r-city-19","sev":"LOW","kind":"LACKS","why":"house label 'Rival gangs' is not on HOUSES (which has Multiple criminal factions)","other":""}
+{"id":"17267","town":"r2r-city-19","sev":"LOW","kind":"BROKEN","why":"sentence ends mid-name: 'Knows something about Flann Mac'","other":""}
+{"id":"00720","town":"r2r-city-19","sev":"LOW","kind":"BROKEN","why":"sentence ends mid-name: 'against Flann Mac'","other":""}
+{"id":"20069","town":"r2r-city-19","sev":"LOW","kind":"BROKEN","why":"sentence ends mid-clause and mid-name: 'The balance between Gobnat Mac'","other":""}
+{"id":"00387","town":"r2r-city-19","sev":"LOW","kind":"BROKEN","why":"sentence ends mid-clause and mid-name: 'Olwen Doyle and Ériu Mac'","other":""}
+{"id":"04462","town":"r2r-city-19","sev":"LOW","kind":"BROKEN","why":"sentence ends mid-name: 'the scar is on Ériu Mac'","other":""}
+{"id":"14069","town":"r2s-plague_onset-metropolis-2","sev":"MED","kind":"PAIR","why":"region's building stone cut here; TRADE imports stone and a line says its services depend on stone brought in","other":"16510"}
+{"id":"02783","town":"r2s-plague_onset-metropolis-2","sev":"MED","kind":"LACKS","why":"officials run affairs in a looser arrangement than a council; GOVERNMENT is a Grand Council (Strong)","other":""}
+{"id":"20964","town":"r2s-plague_onset-metropolis-2","sev":"LOW","kind":"LACKS","why":"names a mages' guild; HOUSES has an Academy of magic and Mages' district but no mages' guild","other":""}
+{"id":"14132","town":"r2s-plague_onset-metropolis-2","sev":"MED","kind":"STATE","why":"plays and concerts at many venues nightly; plague, safety Restricted, people fear sickness and do not gather","other":""}
+{"id":"16002","town":"r2s-plague_onset-metropolis-2","sev":"MED","kind":"STATE","why":"gives 18,172 imported a day; food ledger says imports cover 18,056","other":""}
+{"id":"09274","town":"r2s-plague_onset-metropolis-2","sev":"MED","kind":"PAIR","why":"granary would carry it over a year at full rations; another line says little is put by against being cut off, 10% deficit","other":"20546"}
+{"id":"09786","town":"r2s-plague_onset-metropolis-2","sev":"LOW","kind":"STATE","why":"divine provision fills the grain gap; food ledger still shows a 10% deficit","other":""}
+{"id":"16353","town":"r2s-plague_onset-metropolis-2","sev":"LOW","kind":"LACKS","why":"a reed and marsh harvest in a mountain metropolis whose TRADE makes and imports no reeds","other":""}
+{"id":"20614","town":"r2s-plague_onset-city-2","sev":"LOW","kind":"BROKEN","why":"compound subject with singular verb: 'The garrison and city watch maintains'","other":""}
+{"id":"02534","town":"r2s-plague_onset-metropolis-0","sev":"MED","kind":"LACKS","why":"layered defence ending in a ring about the citadel; DEFENCE and HOUSES have no Citadel","other":""}
+{"id":"15754","town":"r2s-plague_onset-metropolis-0","sev":"LOW","kind":"LACKS","why":"gambling kept honest by compelled truth, a magic; magic low and DEFENCE magic: none","other":""}
+{"id":"10424","town":"r2s-plague_onset-metropolis-0","sev":"MED","kind":"LACKS","why":"'the council works alongside them'; GOVERNMENT is Royal Authority with no council among its powers","other":""}
+{"id":"20612","town":"r2s-plague_onset-metropolis-0","sev":"LOW","kind":"BROKEN","why":"compound subject with singular verb: 'The garrison and city watch is well paid'","other":""}
+{"id":"03111","town":"r2s-plague_onset-metropolis-0","sev":"LOW","kind":"STATE","why":"orderly process relied on; stability says people fear the sickness more than they heed orders","other":""}
+{"id":"21303","town":"r2s-plague_onset-metropolis-0","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'The plague years is older'","other":""}
+{"id":"09279","town":"r2s-plague_onset-metropolis-1","sev":"LOW","kind":"STATE","why":"a patient food line for all comers; safety Dangerous - Plague Unrest, people fear sickness and avoid gathering","other":""}
+{"id":"02876","town":"r2s-plague_onset-metropolis-1","sev":"MED","kind":"LACKS","why":"names the wizard's tower; HOUSES has a Mages' district and Academy but no Wizard's tower","other":""}
+{"id":"06026","town":"r2s-plague_onset-metropolis-1","sev":"MED","kind":"STATE","why":"craft guilds a reliable secondary presence in civic life; GOVERNMENT lists Craft Guilds as Suppressed","other":""}
+{"id":"21778","town":"r2s-plague_onset-metropolis-1","sev":"LOW","kind":"PAIR","why":"'ruling three' of a Ducal Governorship that one duke governs by appointment","other":"02559"}
+{"id":"01064","town":"r2s-plague_onset-metropolis-1","sev":"LOW","kind":"PAIR","why":"no one known trade; page shows iron ore fully exploited at very high value, iron and weapons exported","other":"30955"}
+{"id":"18252","town":"r2s-plague_onset-metropolis-1","sev":"LOW","kind":"LACKS","why":"work draws on its own livestock; TRADE makes and lists no livestock","other":""}
+{"id":"01112","town":"r2s-plague_onset-metropolis-1","sev":"LOW","kind":"PAIR","why":"every arrival goes through a gate; the metropolis runs airship docking with scheduled passenger service","other":"23031"}
+{"id":"DONE","lines":2447,"blocks":10,"flags":90}

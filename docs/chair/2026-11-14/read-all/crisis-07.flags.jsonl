@@ -1,0 +1,8 @@
+{"id":"HEADER","town":"r2s-plague_onset-metropolis-3","sev":"MED","kind":"RECORD","why":"founded by a great trade house, yet reason says it began as a hunting lodge settlement for a noble","other":""}
+{"id":"15316","town":"r2s-plague_onset-metropolis-3","sev":"LOW","kind":"RECORD","why":"origin a noble's hunting lodge contradicts FOUNDING's great trade house founder","other":""}
+{"id":"16223","town":"r2s-plague_onset-metropolis-3","sev":"MED","kind":"STATE","why":"racks of spearheads and helms await carts; TRADE makes and exports no weapons or armour, iron mines exhausted","other":""}
+{"id":"15282","town":"r2s-plague_onset-metropolis-3","sev":"MED","kind":"STATE","why":"crews cut ore underground now; TRADE says local iron mines exhausted and lists no ore made here","other":""}
+{"id":"13318","town":"r2s-plague_onset-metropolis-3","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'Merchant Guilds works'","other":""}
+{"id":"07269","town":"r2s-plague_onset-metropolis-3","sev":"LOW","kind":"LACKS","why":"merchants expect council access; GOVERNMENT is a Ducal Governorship with no council, Merchant Guilds Suppressed","other":""}
+{"id":"15967","town":"r2s-plague_onset-metropolis-3","sev":"LOW","kind":"STATE","why":"priests and mages share authority; Religious Authorities Strong, Arcane Orders only Minor","other":""}
+{"id":"DONE","lines":227,"blocks":1,"flags":7}
