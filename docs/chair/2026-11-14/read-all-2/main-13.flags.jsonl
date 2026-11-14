@@ -1,0 +1,10 @@
+{"id":"00630","town":"r2s-religious_conversion-city-1","sev":"LOW","kind":"LACKS","why":"says two burial grounds, one old one new; HOUSES lists a single 'Burial grounds and charnel house'","other":""}
+{"id":"05840","town":"r2s-mass_migration-city-1","sev":"MED","kind":"LACKS","why":"crime blamed for weak legitimacy; HOUSES has no smuggling/criminal house, GOVERNMENT lists no criminal power; legitimacy is Tolerated","other":""}
+{"id":"21139","town":"r2r-city-2","sev":"MED","kind":"STATE","why":"says city hall is run by Enlai Kwon; PEOPLE places Enlai Kwon at Mages' guild and gives city hall nobody","other":"05122"}
+{"id":"04491","town":"r2r-city-37","sev":"MED","kind":"STATE","why":"says Merchant Guild Council cannot keep the arrivals fed; FOOD word is Secure, 9 months in store, granary stands, gap only 3%","other":""}
+{"id":"04486","town":"r2r-city-3","sev":"MED","kind":"STATE","why":"says City-State Council cannot keep arrivals fed; FOOD word is Secure, 8.5 months in store, granary stands, gap only 2%","other":""}
+{"id":"01249","town":"r2r-city-3","sev":"MED","kind":"STATE","why":"gives Constantinos Kontostephanos import papers; PEOPLE has him as quarry master (warehouse factor is Xristos Kurtikios) and HOUSES has no Customs house","other":"01375"}
+{"id":"01375","town":"r2r-city-3","sev":"MED","kind":"STATE","why":"calls it Constantinos Kontostephanos's warehouse; PEOPLE has him as quarry master @ Stone quarry, warehouse factor is Xristos Kurtikios","other":"01249"}
+{"id":"04151","town":"r2s-politically_fractured-city-0","sev":"MED","kind":"STATE","why":"says the city does little trade; TRADE lists ~25 exports and 10 imports incl. financial services, coin minting, iron ore, coal, on a road trade access","other":"10921"}
+{"id":"10921","town":"r2s-politically_fractured-city-0","sev":"MED","kind":"STATE","why":"says its banks find little business; TRADE exports 'Financial services (letters of credit)' and 'Coin minting', and Banking houses and Mint both stand","other":"04151"}
+{"id":"DONE","lines":2418,"blocks":34,"flags":9}
