@@ -3798,10 +3798,10 @@ relied on by nothing.
 **PDF PARITY:** parity (`viewModel.js` viability slice).
 
 **`magicDependency` true** {colour}
-1. `[ledger]` {settlement} runs on arcane work. What the town produces, and in some measure what the town eats, depends on practitioners continuing to be here and continuing to be willing.
-2. `[street]` A handful of people at {settlement} do work nobody else can do, and the town's whole arrangement rests on them without ever having decided to.
-3. `[unfolding]` {settlement} leans on its practitioners; a hard season for them (a feud, a sickness, a falling-out with the hall) is a hard season for everyone.
-4. `[visitor]` {settlement} does better than its ground and roads would explain, and the reason is the arcane work done here.
+1. `[ledger]` {settlement} relies on help beyond ordinary work, and on the people who give it continuing to be here and continuing to be willing.
+2. `[street]` Some at {settlement} do work that nobody else there can do, and the town has come to lean on it without ever deciding to.
+3. `[unfolding]` {settlement} leans on the people who give it help beyond ordinary work; a hard season for them (a feud, a sickness, a falling-out) is a hard season for the town.
+4. `[visitor]` A visitor to {settlement} soon learns how much the town leans on help beyond ordinary work, and on the people who give it.
 
 **`magicDependency` true, with a NAMED dependent chain** {colour}
 1. `[ledger]` At {settlement} the usual work no longer yields enough {good}, and part of the shortfall is made up by means beyond it.

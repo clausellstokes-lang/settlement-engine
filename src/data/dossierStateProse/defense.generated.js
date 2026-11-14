@@ -7953,7 +7953,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "magicDependency true": [
         {
           "angle": "ledger",
-          "text": "{settlement} runs on arcane work. What the town produces, and in some measure what the town eats, depends on practitioners continuing to be here and continuing to be willing.",
+          "text": "{settlement} relies on help beyond ordinary work, and on the people who give it continuing to be here and continuing to be willing.",
           "slots": [
             "settlement"
           ],
@@ -7961,7 +7961,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "A handful of people at {settlement} do work nobody else can do, and the town's whole arrangement rests on them without ever having decided to.",
+          "text": "Some at {settlement} do work that nobody else there can do, and the town has come to lean on it without ever deciding to.",
           "slots": [
             "settlement"
           ],
@@ -7969,7 +7969,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "{settlement} leans on its practitioners; a hard season for them (a feud, a sickness, a falling-out with the hall) is a hard season for everyone.",
+          "text": "{settlement} leans on the people who give it help beyond ordinary work; a hard season for them (a feud, a sickness, a falling-out) is a hard season for the town.",
           "slots": [
             "settlement"
           ],
@@ -7977,7 +7977,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "{settlement} does better than its ground and roads would explain, and the reason is the arcane work done here.",
+          "text": "A visitor to {settlement} soon learns how much the town leans on help beyond ordinary work, and on the people who give it.",
           "slots": [
             "settlement"
           ],
