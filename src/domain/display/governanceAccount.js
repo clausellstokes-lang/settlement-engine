@@ -25,6 +25,7 @@
  * owner's to veto (docs/chair/2026-11-09/OWNER-WORDS-DOSSIER-2026-11-09.md).
  */
 import { rulingChainOf } from '../dossier/powerStrata.js';
+import { seatKeeperOf } from '../people/seatKeeper.js';
 
 /** @param {unknown} v @returns {string} */
 const text = (v) => (typeof v === 'string' ? v.trim() : '');
@@ -285,9 +286,12 @@ export function governanceAccountOf(settlement, opts = {}) {
     // fills the gap, from the record: the claimants it names, else the power governing without a head.
     sentences.push(`No one holds the seat at ${place}.`);
     const claimants = Array.isArray(chain.absence.claimants) ? chain.absence.claimants.map(text).filter(Boolean) : [];
-    sentences.push(claimants.length
-      ? `${listOf(claimants)} ${claimants.length === 1 ? 'contends' : 'contend'} for it.`
-      : `${capFirst(ruler)} governs without a head.`);
+    // R3-CODE-C-3 (ROUND-3-CUT-INCREMENT #pf-260, rpf-city-succession_void+politically_fractured-13): "governs without
+    // a head" beside the same tab's "Acting Governor Iulia Laenas keeps the seat meanwhile". The keeper has one home
+    // (people/seatKeeper.js :: seatKeeperOf); where one keeps the seat the power is not headless, and the tab's seat row
+    // already names the keeper, so the sentence is left out rather than said twice.
+    if (claimants.length) sentences.push(`${listOf(claimants)} ${claimants.length === 1 ? 'contends' : 'contend'} for it.`);
+    else if (!seatKeeperOf(s)) sentences.push(`${capFirst(ruler)} governs without a head.`);
   } else {
     sentences.push(`${place} is governed by ${ruler}. No one is named to its seat.`);
   }
