@@ -211,7 +211,6 @@
    "P8any"
   ],
   "r2s-occupied-hamlet-0": [
-   "P11",
    "P17",
    "P6need",
    "P8any",
@@ -224,13 +223,11 @@
   ],
   "r2s-indebted-village-0": [
    "NEW2",
-   "P11",
    "P14",
    "P17",
    "P6need"
   ],
   "r2r-town-0": [
-   "P16powers",
    "P17",
    "P18",
    "P6need"
@@ -242,18 +239,13 @@
    "P6need"
   ],
   "r2r-city-0": [
-   "P11",
    "P13",
-   "P16powers",
    "P17",
-   "P18",
    "P1b",
    "P6need",
    "P7a"
   ],
   "r2s-succession_void-city-0": [
-   "P11",
-   "P16powers",
    "P16three",
    "P17",
    "P18",
@@ -261,14 +253,11 @@
    "P6need"
   ],
   "r2r-metropolis-0": [
-   "P16powers",
    "P17",
-   "P18",
    "P1b",
    "P6need"
   ],
   "r2s-insurgency-metropolis-0": [
-   "P16powers",
    "P16three",
    "P17",
    "P18",
