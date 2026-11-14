@@ -16,7 +16,14 @@
  * church and the Monastery or friary. Two arms: THE STATIC ARM (the parts each house opens ALONE in its own place, minus
  * what an empty roster opens, standing in the birth and sharing a score) and THE DROP ARM (each house dropped alone).
  * The traditions' shared cap against beasts (R2: arcane, clergy and druids count 35 at most together) moves the other
- * traditions' parts when one opens or closes: that is the cap at work, classed apart, not a second feed of the house.
+ * traditions' SHARES where their counted monster points stand at the cap on AT LEAST ONE side of a drop: that is the
+ * cap at work, classed apart, not a second feed of the house (UPKEEP-15, the chair's rulings (c) of 2026-11-14:
+ * re-keyed by identity to what the cap is; the old proxy, a tradition opening or closing, went when the monastery's
+ * ladder came to open the clergy, UPKEEP-MEASURE-2 X5, so a drop can leave the clergy open at a lower rung). The drop
+ * arm asserts the cap's TOTAL by case: at the cap on both sides, equal; at the cap on one side only, the cap with the
+ * house and no greater without it (a drop never raises it). Under the cap on both sides, a second part moving is red.
+ * Under the shared cap, taking one tradition's house away can raise another tradition's share while the score stands:
+ * the law is on scores, and it holds.
  * THE WAYSIDE SHRINE is a house that opens ONE part, by name (the chair's G3s: "No resident clergy", so no clergy part;
  * its parish row, the place's rallying point, stays).
  * The corpus adds births in the app's own shape at every tier, thorps and hamlets among them, with the dials drawn
@@ -27,7 +34,7 @@ import { beforeAll, describe, expect, test } from 'vitest';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { defencePartsOf } from '../../src/generators/defenseGenerator.js';
+import { defencePartsOf, defenceExactOf } from '../../src/generators/defenseGenerator.js';
 
 /**
  * THE HOUSES THAT STAND IN TWO ROLES (measured on the reader's 330 births at the W1 tree,
@@ -122,9 +129,15 @@ beforeAll(async () => {
  */
 const opensAlone = (s, inst, empty) => partsOf({ ...s, institutions: [inst] }).map((p) => p.id).filter((id) => !empty.has(id));
 
+/** The traditions' monster points as their shared cap reads and holds them. @param {any} s */
+const capOf = (s) => defenceExactOf(s).traditionsMonster;
+/** The cap at work: the counted points at the cap or above it. @param {{ counted: number, cap: number }} t */
+const atCap = (t) => t.counted >= t.cap;
 /**
- * Drop each house alone: the parts that move, with the scores each feeds. A tradition part that stays open and moves
- * only because another tradition opened or closed is R2's shared cap at work (`cap`), not in `moved`.
+ * Drop each house alone: the parts that move, with the scores each feeds. Where the traditions' counted monster points
+ * stand at the shared cap on at least one side of the drop, a tradition part that stays open, that the house does not
+ * open alone, and moves, is R2's shared cap at work (`cap`), not in `moved`; `total` is the cap's reading with the house
+ * and without it, which the drop arm asserts by case.
  * @param {any} s
  */
 function dropEach(s) {
@@ -133,15 +146,18 @@ function dropEach(s) {
   /** @type {Record<string, string[]>} */
   const feeds = Object.fromEntries(base.map((p) => [p.id, p.feeds]));
   const empty = new Set(partsOf({ ...s, institutions: [] }).map((p) => p.id));
+  const t0 = capOf(s);
   return s.institutions.map((/** @type {any} */ inst, /** @type {number} */ i) => {
-    const now = partsOf({ ...s, institutions: s.institutions.filter((/** @type {any} */ _, /** @type {number} */ j) => j !== i) });
+    const dropped = { ...s, institutions: s.institutions.filter((/** @type {any} */ _, /** @type {number} */ j) => j !== i) };
+    const now = partsOf(dropped);
+    const t1 = capOf(dropped);
     for (const p of now) feeds[p.id] ??= p.feeds;
     const was = Object.fromEntries(now.map((p) => [p.id, p.full]));
     const all = [...new Set([...Object.keys(full), ...Object.keys(was)])].filter((k) => Math.abs((full[k] ?? 0) - (was[k] ?? 0)) > 1e-9);
     const opens = opensAlone(s, inst, empty);
-    const toggled = [...TRADITIONS].some((id) => (id in full) !== (id in was));
-    const cap = all.filter((id) => TRADITIONS.has(id) && id in full && id in was && !opens.includes(id) && toggled);
-    return { inst, moved: all.filter((id) => !cap.includes(id)), cap, feeds };
+    const capped = atCap(t0) || atCap(t1);
+    const cap = capped ? all.filter((id) => TRADITIONS.has(id) && id in full && id in was && !opens.includes(id)) : [];
+    return { inst, moved: all.filter((id) => !cap.includes(id)), cap, feeds, total: { with: t0, without: t1 } };
   });
 }
 
@@ -181,8 +197,16 @@ describe('count once, on the design\'s own law (ruling W1)', () => {
     const bad = [];
     let capped = 0;
     for (const { seed, s } of births) {
-      for (const { inst, moved, cap, feeds } of dropsOf(s)) {
+      for (const { inst, moved, cap, feeds, total } of dropsOf(s)) {
         if (cap.length) capped += 1;
+        // Under the cap a share may move; the cap's total, by case (hundredths, the generator's reading): at the cap on
+        // both sides, equal; at the cap on one side only, the cap with the house and no greater without it.
+        if (cap.length) {
+          const h = (/** @type {number} */ v) => Math.round(v * 100);
+          const [w, wo] = [total.with, total.without];
+          const ok = atCap(w) && atCap(wo) ? h(w.held) === h(wo.held) : atCap(w) && h(w.held) === h(w.cap) && h(wo.held) <= h(w.held);
+          if (!ok) bad.push([seed, inst.name, `the cap's total: ${w.held} with the house, ${wo.held} without`]);
+        }
         const twice = sharedScores(moved, feeds).filter(([, ids]) => !isNamedTwoJobs(inst, ids));
         if (twice.length) bad.push([seed, inst.name, twice.map(([sc, ids]) => `${sc}: ${ids.join('+')}`).join('; ')]);
       }

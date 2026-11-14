@@ -381,6 +381,9 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
     });
   }
   if (t.hasDruid) add('STANDS', 'druids', { mon: W.druids.mon * tradF });
+  // The traditions' monster points as the cap reads them (`counted`) and as they stand after it (`held`): a reading for
+  // `defenceExactOf` (UPKEEP-15), changing no figure.
+  const tradMon = { counted: 0, held: 0 };
   {
     const trad = parts.filter((q) => TRADITION_PARTS.has(q.id));
     const mon = trad.reduce((a, q) => a + (q.dims.mon || 0), 0);
@@ -388,6 +391,8 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
       const k = W.traditionsMonsterMax / mon;
       for (const q of trad) if (q.dims.mon) { q.dims.mon *= k; q.raw.mon *= k; }
     }
+    tradMon.counted = mon;
+    tradMon.held = trad.reduce((a, q) => a + (q.dims.mon || 0), 0);
   }
   // SUSTAINS: what keeps the force going. The stores were laid by at the standing share by their writer.
   const months = fs?.storageMonths ?? (inst.hasGranary ? W.stores.granaryMonths : W.stores.noGranaryMonths);
@@ -554,7 +559,7 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
   const total = Math.min(100, Math.max(0, raw));
 
   return { parts, crises, n, dims, full, size, danger, raw, total, willHeld, sustainsHeld, wallsFull, wallsPart,
-    t, inst, hasStanding, hired, law, chains, magicExists };
+    t, inst, hasStanding, hired, law, chains, magicExists, tradMon };
 };
 
 /** One line of the list, as the record stores it. @param {string} id @param {string} group */
@@ -695,13 +700,18 @@ export function defencePartsOf(settlement, upkeep) {
 
 /**
  * THE SCORES BEFORE THE WHOLE POINT (UPKEEP-15, for the monotone guard on made records, the chair's ruling (a)): the
- * five scores and readiness exactly as the arithmetic holds them, before the page's whole point. Nothing stores or
- * prints this; it is re-derived from the record, as the parts are. Pure in the record.
+ * five scores and readiness exactly as the arithmetic holds them, before the page's whole point; and the traditions'
+ * monster points as their shared cap reads them (`traditionsMonster.counted`, before the cap) and holds them (`.held`,
+ * after it), for the count-once test's cap (the chair's ruling (c)). Nothing stores or prints this; it is re-derived
+ * from the record, as the parts are. Pure in the record.
  * @param {Object} settlement @param {{ bought: number, funded: number }} [upkeep] the standing keep
- * @returns {Record<string, number>} military, monster, internal, economic, magical, readiness
+ * @returns {Record<string, number> & { traditionsMonster: { counted: number, held: number, cap: number } }}
  */
 export function defenceExactOf(settlement, upkeep) {
   const s = /** @type {any} */ (settlement);
   const r = computeDefenseScores(s, upkeep ?? keepOfRecord(s.economicState));
-  return { ...Object.fromEntries(SCORE_KEYS.map((d) => [SCORE_NAMES[d], r.full[d] ?? 0])), readiness: r.total };
+  return /** @type {any} */ ({
+    ...Object.fromEntries(SCORE_KEYS.map((d) => [SCORE_NAMES[d], r.full[d] ?? 0])), readiness: r.total,
+    traditionsMonster: { ...r.tradMon, cap: W.traditionsMonsterMax },
+  });
 }
