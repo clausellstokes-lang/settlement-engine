@@ -1,0 +1,4 @@
+{"$veil":{"v":1,"mode":"live","deltas":[
+ {"address":"card:institution:inst-bm","hidden":true},
+ {"address":"card:institution:inst-arm","hidden":true},
+ {"address":"card:institution:inst-ru","hidden":true}]}}

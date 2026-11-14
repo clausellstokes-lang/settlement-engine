@@ -1,0 +1,29 @@
+{"name":"Saltmere","tier":"town",
+ "institutions":[
+  {"id":"inst-mill","name":"Old Wheel","catalogId":"mill","category":"Economy","desc":"gdesc1 the cellar under the wheel hides the ledgers"},
+  {"id":"inst-dup","name":"Thieves' guild (powerful)","category":"Criminal","desc":"The guild."},
+  {"id":"inst-dup","name":"Candle makers","category":"Economy","desc":"gdup1 a second record under one id"},
+  {"id":"inst-fish","name":"Fish market","category":"Economy","desc":"Fish."}],
+ "defenseProfile":{"institutions":{"walls":[
+  {"name":"Mill","desc":"gdesc1 the cellar under the wheel hides the ledgers"},
+  {"name":"Old Wheel","desc":"gdesc1 the cellar under the wheel hides the ledgers"},
+  {"name":"Candle makers","desc":"gdup1 a second record under one id"}]}},
+ "npcs":[
+  {"id":"npc.orrin","name":"Thieves' Guild Master Orrin","role":"Guildmaster"},
+  {"id":"npc.mira","name":"Mira Vane","role":"Fence"},
+  {"id":"npc.tam","name":"Tam Reed","role":"Smith"}],
+ "relationships":[
+  {"from":"npc.orrin","to":"npc.mira","npc1Name":"Thieves' Guild Master Orrin","npc2Name":"Mira Vane","type":"rival","typeName":"Rivals","description":"They split the docks."},
+  {"from":"npc.mira","to":"npc.tam","npc1Name":"Mira Vane","npc2Name":"Tam Reed","type":"lover","typeName":"Secret lovers","description":"gcov1 Mira and Tam meet in the salt cellar at night","tension":"gcov2 if the council learns of it both hang","covert":true}],
+ "prominentRelationship":{"npc1":"Mira Vane","npc2":"Tam Reed","type":"Secret lovers","phrasing":"gcov3 they say Mira Vane and Tam Reed meet at night","full":"gcov1 Mira and Tam meet in the salt cellar at night","tension":"gcov2 if the council learns of it both hang"},
+ "pressureSentence":"gcov3 they say Mira Vane and Tam Reed meet at night",
+ "factions":[{"faction":"Thieves' Guild","power":10,"desc":"A shown power, top-level list."}],
+ "powerStructure":{"factions":[{"faction":"Thieves' Guild","power":10,"desc":"A shown power."},{"faction":"Council","power":40}]},
+ "history":{
+  "historicalEvents":[
+   {"id":"ev1","name":"The Salt Fire","type":"disaster","yearsAgo":40,"description":"A fire.","lastingEffects":["gev1 the harbour chain was never re-forged and smugglers pass freely"]},
+   {"id":"ev2","name":"The Reckoning","type":"political","yearsAgo":10,"description":"gev2 ten years on, since the harbour chain was never re-forged and smugglers pass freely, the council fell."}],
+  "legacyAnnotations":[
+   {"eventName":"The Salt Fire","eventType":"disaster","yearsAgo":40,"annotation":"The Salt Fire (40 years ago): its mark remains","effect":"gev1 the harbour chain was never re-forged and smugglers pass freely","summary":"gev3 smugglers pass freely since the fire"}]},
+ "economicState":{"primaryExports":["Salt fish","Candle makers wax","Mill flour"],
+   "compound":{"inst":{"names":["mill","thieves' guild (powerful)","candle makers","fish market"]}}}}
