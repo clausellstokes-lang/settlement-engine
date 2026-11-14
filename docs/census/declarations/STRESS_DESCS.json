@@ -35,7 +35,7 @@
     },
     {
      "lineId": "STRESS_DESCS.under_siege[1]",
-     "text": "{name}'s gates are open but attended: every person entering is noted, every cart searched. The guards are professional about it, which makes it worse. Professional means this has been happening long enough to become routine.",
+     "text": "{name}'s gates are shut and barred. The guards on them are professional about it, which makes it worse: nobody comes near without being challenged, and nothing is let through. Professional means they expect this to last.",
      "needs": [
       "gate"
      ],
@@ -50,7 +50,7 @@
     },
     {
      "lineId": "STRESS_DESCS.under_siege[2]",
-     "text": "From the road, {name} looks ordinary. Smoke from cookfires, the sound of a market. It is only at the gate that the weight becomes apparent: the guards' expressions, the way conversation stops when strangers approach.",
+     "text": "From outside, {name} still seems itself: smoke from cookfires, the noise of a market. It is the gate that gives it away: shut fast, the guards' faces set, their talk stopping dead when strangers come in sight.",
      "needs": [
       "gate",
       "market"
