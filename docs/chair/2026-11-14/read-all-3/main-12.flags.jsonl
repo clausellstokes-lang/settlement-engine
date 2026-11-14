@@ -1,0 +1,68 @@
+{"id":"04369","town":"r2s-under_siege-city-3","sev":"MED","kind":"STATE","why":"offers bronze and brass alloys; LAND gaps: Smelter lacks access to copper ore","other":""}
+{"id":"14642","town":"r2s-under_siege-city-3","sev":"MED","kind":"STATE","why":"'sends out tools, weapons, armor' as present; under siege nothing goes out by road, gate or water","other":""}
+{"id":"22277","town":"r2s-under_siege-city-3","sev":"MED","kind":"STATE","why":"'Quiet country, far more defences than it calls for' while CRISIS is an active siege, safety Desperate","other":""}
+{"id":"17199","town":"r2s-under_siege-city-3","sev":"MED","kind":"STATE","why":"'Money enough to ride out a long crisis' but STATE prosperity is Struggling and the city imports Capital","other":""}
+{"id":"06288","town":"r2s-under_siege-city-3","sev":"LOW","kind":"TAG","why":"exchange where caravan masters meet merchants and escorts to transact; under siege nothing comes in by road","other":""}
+{"id":"14230","town":"r2s-under_siege-city-3","sev":"LOW","kind":"TAG","why":"inn districts 'given over to merchants, travellers'; under siege no travellers arrive","other":""}
+{"id":"34383","town":"r2s-under_siege-city-3","sev":"LOW","kind":"BROKEN","why":"power column left empty for Peter Mayer, a label that always carries a value","other":""}
+{"id":"33051","town":"r2s-under_siege-city-3","sev":"LOW","kind":"BROKEN","why":"power column left empty for Nikolaus Vogt, a label that always carries a value","other":""}
+{"id":"13011","town":"r2s-under_siege-city-3","sev":"LOW","kind":"LACKS","why":"names 'Houses of worship'; HOUSES lists Parish churches (10-30), no such house","other":""}
+{"id":"13019","town":"r2s-under_siege-city-3","sev":"LOW","kind":"LACKS","why":"'Houses of worship' institution not on HOUSES, which lists Parish churches (10-30)","other":""}
+{"id":"14724","town":"r2s-under_siege-city-2","sev":"MED","kind":"STATE","why":"'imports make up some of the gap'; FOOD brought in 0%, gap 76%, and under siege nothing comes in","other":""}
+{"id":"16005","town":"r2s-under_siege-city-2","sev":"MED","kind":"STATE","why":"'Foreign traders attend' the annual fairs; under siege nothing comes in by road, gate or water","other":""}
+{"id":"15374","town":"r2s-under_siege-city-2","sev":"LOW","kind":"TAG","why":"'The largest trading event of the year' stated as running; under siege no fair or trade can be held","other":""}
+{"id":"34082","town":"r2s-under_siege-city-2","sev":"LOW","kind":"BROKEN","why":"power column empty for Anna Chortasmenos, a label that always carries a value","other":""}
+{"id":"13017","town":"r2s-under_siege-city-2","sev":"LOW","kind":"LACKS","why":"'Houses of worship' not on HOUSES, which lists Parish churches (10-30)","other":""}
+{"id":"34201","town":"r2s-under_siege-city-2","sev":"MED","kind":"STATE","why":"Isaakios Photeinopoulos is (m) per PEOPLE but titled 'the madam'; the title does not fit the person's sex","other":""}
+{"id":"33595","town":"r2s-under_siege-city-0","sev":"MED","kind":"STATE","why":"Pacuvius Tubertus is (m) per PEOPLE but titled 'the district madam'; the title does not fit the person's sex","other":""}
+{"id":"34154","town":"r2s-under_siege-city-0","sev":"LOW","kind":"STATE","why":"Cassia Strabo is (f) per PEOPLE but titled 'the lord'; title does not fit the person's sex","other":""}
+{"id":"31379","town":"r2s-under_siege-city-0","sev":"MED","kind":"STATE","why":"Wine & Spirits printed 'impaired'; LAND gives the Wine & Spirits chain as entrepot","other":""}
+{"id":"11874","town":"r2s-under_siege-city-0","sev":"LOW","kind":"STATE","why":"'Harbour Dues (impaired)': LAND has no such chain (Harbour and Maritime impaired; Strategic Crossroads Toll entrepot)","other":""}
+{"id":"12997","town":"r2s-under_siege-city-0","sev":"LOW","kind":"LACKS","why":"'Houses of worship' not on HOUSES, which lists Parish churches (10-30) and Cathedral","other":""}
+{"id":"22838","town":"r2s-famine-city-0","sev":"MED","kind":"STATE","why":"offers salted fish, smoked seafood, fish oil; FOOD failed source is fish (Active Famine), and Fishing & Seafood is vulnerable","other":""}
+{"id":"22847","town":"r2s-famine-city-0","sev":"MED","kind":"STATE","why":"offers river fish, freshwater catch, salted fish; under famine the failed source is fish","other":""}
+{"id":"30855","town":"r2s-famine-city-0","sev":"MED","kind":"STATE","why":"'What goes out of here is mostly river fish'; FOOD failed source is fish and the famine cut is 50%","other":""}
+{"id":"10665","town":"r2s-famine-city-0","sev":"MED","kind":"TAG","why":"offers fruit, vegetables, dairy, eggs as available; tag has F, Weizhen's grain fields are depleted and famine cut is 50%","other":""}
+{"id":"17185","town":"r2s-famine-city-0","sev":"MED","kind":"STATE","why":"'Money enough to ride out a long crisis, laid by'; STATE prosperity Struggling, legitimacy crisis, viable False","other":""}
+{"id":"26057","town":"r2s-famine-city-0","sev":"MED","kind":"STATE","why":"'keeps order reliably'; GOVERNMENT stability is Desperate, hunger eroding order","other":""}
+{"id":"10284","town":"r2r-city-44","sev":"MED","kind":"STATE","why":"offers salted fish, smoked seafood, fish oil; FOOD failed source is fish (Active Famine, famine cut 65%)","other":""}
+{"id":"13013","town":"r2r-city-44","sev":"LOW","kind":"LACKS","why":"'Houses of worship' not on HOUSES, which lists Parish churches (10-30) and Multiple monasteries","other":""}
+{"id":"25995","town":"r2r-city-44","sev":"MED","kind":"STATE","why":"'keeps order reliably', 'well-funded'; GOVERNMENT stability Desperate, hunger eroding order, prosperity Struggling, legitimacy score 0","other":""}
+{"id":"29427","town":"r2r-city-44","sev":"MED","kind":"STATE","why":"records a Trade Collapse; PAST lists no such event (Heresy Trials, Religious Conflict, Great Construction, Purge, Siege, Succession Crisis, Occupation)","other":""}
+{"id":"HEADER","town":"r2r-city-44","sev":"LOW","kind":"RECORD","why":"FOUNDING 'by royal decree and a century of forced investment' cannot also be 'a seasonal camp for deep-water fishers' that grew on its own","other":""}
+{"id":"HEADER","town":"r2s-famine-city-1","sev":"LOW","kind":"RECORD","why":"FOUNDING by royal decree cannot also be 'a seasonal fair that became year-round'; and a desert town has a Fish market and no fishing resource","other":""}
+{"id":"07733","town":"r2s-famine-city-1","sev":"LOW","kind":"BROKEN","why":"service line ends after the houses with no yield list after the arrow, where such lines always carry products","other":""}
+{"id":"29937","town":"r2s-famine-city-1","sev":"MED","kind":"LACKS","why":"'citadel above the wells'; DEFENCE walls are City walls and gates only and HOUSES has no Citadel","other":""}
+{"id":"15452","town":"r2s-famine-city-1","sev":"MED","kind":"LACKS","why":"'citadel above the wells'; DEFENCE walls are City walls and gates only and HOUSES has no Citadel","other":""}
+{"id":"33582","town":"r2s-famine-city-3","sev":"MED","kind":"STATE","why":"Güchlüg Suldus is (m) per PEOPLE but titled 'the district madam'; the title does not fit the person's sex","other":""}
+{"id":"12999","town":"r2s-famine-city-3","sev":"LOW","kind":"LACKS","why":"'Houses of worship' not on HOUSES, which lists Parish churches (10-30), Multiple monasteries and Cathedral","other":""}
+{"id":"33591","town":"r2s-famine-city-2","sev":"MED","kind":"STATE","why":"Ügedei Ba'arin is (m) per PEOPLE but titled 'the district madam'; the title does not fit the person's sex","other":""}
+{"id":"26381","town":"r2s-famine-city-2","sev":"MED","kind":"STATE","why":"hook cites a Heresy Trial; PAST lists Siege, Purge, Arcane Incident, Religious Conflict, Debt Crisis only, no Heresy Trial","other":""}
+{"id":"17192","town":"r2s-occupied-city-3","sev":"MED","kind":"PAIR","why":"'Money enough to ride out a long crisis' vs STATE prosperity Poor and 14493 'what the city earns now goes to them'","other":"14493"}
+{"id":"19224","town":"r2s-occupied-city-3","sev":"MED","kind":"LACKS","why":"'the citadel at the summit'; DEFENCE walls are City walls and gates only and HOUSES has no Citadel","other":""}
+{"id":"15433","town":"r2s-occupied-city-3","sev":"MED","kind":"LACKS","why":"'the citadel at the summit'; DEFENCE walls are City walls and gates only and HOUSES has no Citadel","other":""}
+{"id":"14628","town":"r2s-occupied-city-0","sev":"MED","kind":"STATE","why":"'It sends out leather'; TRADE exports list no leather or hides (only taxed herbs, honey, reagents, services)","other":""}
+{"id":"33593","town":"r2s-occupied-city-0","sev":"MED","kind":"STATE","why":"Johann Schenk is (m) per PEOPLE but titled 'the district madam'; the title does not fit the person's sex","other":""}
+{"id":"33732","town":"r2s-occupied-city-0","sev":"MED","kind":"STATE","why":"Ulrich Pfaff is (m) per PEOPLE but titled 'the foundling-mother'; the title does not fit the person's sex","other":""}
+{"id":"34536","town":"r2s-occupied-city-0","sev":"LOW","kind":"STATE","why":"Otto Wagner is (m) per PEOPLE but titled 'the midwife'; the title does not fit the person's sex","other":""}
+{"id":"00877","town":"r2s-occupied-city-0","sev":"LOW","kind":"STATE","why":"Guta Hoffmann is (f) per PEOPLE but given the title 'Lord Marshal'; title does not fit the person's sex","other":"24785"}
+{"id":"24785","town":"r2s-occupied-city-0","sev":"LOW","kind":"STATE","why":"'Standing: Lord Marshal' for Guta Hoffmann, who is (f) per PEOPLE; title does not fit the person's sex","other":"00877"}
+{"id":"00433","town":"r2r-city-44","sev":"LOW","kind":"STATE","why":"Melanthi Kantakouzenos is (f) per PEOPLE but given the title 'Lord Warden'; title does not fit the person's sex","other":""}
+{"id":"33911","town":"r2s-occupied-city-1","sev":"LOW","kind":"BROKEN","why":"power column empty for Bochak Uighur, a label that always carries a value","other":""}
+{"id":"35488","town":"r2s-occupied-city-1","sev":"LOW","kind":"BROKEN","why":"power column empty for Ibaka Nogai, a label that always carries a value","other":""}
+{"id":"29577","town":"r2s-occupied-city-1","sev":"MED","kind":"STATE","why":"prints a Tyranny event; PAST lists no Tyranny (Succession Crisis, Economic Divide, Wild Magic, Arcane Incident, Occupation, Purge, Siege, Migration)","other":""}
+{"id":"16958","town":"r2s-occupied-city-2","sev":"MED","kind":"STATE","why":"'Military/Guard / Vigilantes' slash-joined; QUARRELS lists only Council vs Craft Guilds and Merchant Guilds vs Craft Guilds, no Vigilantes conflict","other":"21310"}
+{"id":"21310","town":"r2s-occupied-city-2","sev":"MED","kind":"STATE","why":"'Parties: Military/Guard vs Vigilantes'; QUARRELS has no such conflict and no Vigilantes power in GOVERNMENT","other":"16958"}
+{"id":"12811","town":"r2s-occupied-city-2","sev":"LOW","kind":"LACKS","why":"'Houses of worship' not on HOUSES, which lists Parish churches (10-30), Multiple monasteries and Cathedral","other":""}
+{"id":"12812","town":"r2s-occupied-city-2","sev":"LOW","kind":"LACKS","why":"'Houses of worship' not on HOUSES, which lists Parish churches (10-30), Multiple monasteries and Cathedral","other":""}
+{"id":"11217","town":"r2s-occupied-city-2","sev":"LOW","kind":"LACKS","why":"Glassmakers yield 'Books and manuscripts'; HOUSES has no Printing house and Glass & Print is vulnerable","other":""}
+{"id":"22499","town":"r2s-plague_onset-city-3","sev":"MED","kind":"STATE","why":"names parties 'Poor workers / Moderate reformers'; GOVERNMENT powers and QUARRELS (Council vs Hidden Hand) list no such powers; slash-joined","other":""}
+{"id":"17193","town":"r2s-plague_onset-city-3","sev":"MED","kind":"STATE","why":"'Money enough to ride out a long crisis, laid by'; STATE prosperity is Poor and legitimacy Crisis","other":""}
+{"id":"21321","town":"r2s-plague_onset-city-3","sev":"MED","kind":"STATE","why":"'Parties: Religious Authorities vs Poor workers vs Moderate reformers'; no such powers in GOVERNMENT and QUARRELS has only Council vs Hidden Hand","other":"22499"}
+{"id":"13012","town":"r2s-plague_onset-city-0","sev":"LOW","kind":"LACKS","why":"'Houses of worship' not on HOUSES, which lists Parish churches (10-30), Multiple monasteries and Foundling home","other":""}
+{"id":"06697","town":"r2s-plague_onset-city-0","sev":"LOW","kind":"STATE","why":"'holding no external charter, answering to no higher lord'; FOUNDING is by royal decree and a century of forced investment","other":""}
+{"id":"21593","town":"r2s-plague_onset-city-1","sev":"MED","kind":"STATE","why":"'Attracts pilgrims from across the region' stated as current; under plague people do not gather or travel as usual","other":""}
+{"id":"25560","town":"r2s-plague_onset-city-1","sev":"LOW","kind":"STATE","why":"'hold real influence through monopoly on magical services'; GOVERNMENT lists The Arcane Circle as Suppressed","other":""}
+{"id":"06695","town":"r2s-plague_onset-city-1","sev":"LOW","kind":"STATE","why":"'An independent state'; FOUNDING is by royal decree and a century of forced investment","other":""}
+{"id":"34678","town":"r2s-plague_onset-city-2","sev":"LOW","kind":"BROKEN","why":"power column empty for Prasad Sinha, a label that always carries a value","other":""}
+{"id":"DONE","lines":2171,"blocks":16,"flags":67}
