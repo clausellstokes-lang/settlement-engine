@@ -443,16 +443,19 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
   // R13: the will counts for no more than the armed bodies that carry it, where something is built or standing.
   // UPKEEP-MEASURE-2 X1: SCORE BY SCORE: the will's points on each score count for no more than the armed bodies' points
   // on that score (its military to their military, its order to their order), so a will that rises on one score (a
-  // court's law) never lowers it on another.
+  // court's law) never lowers it on another. X4: and never below the will the same place has with nothing built or
+  // standing (the base configuration's own rate, unheld), so a wall never lowers the will.
   let willHeld = 0;
   if (bos) {
     const armedParts = parts.filter((q) => ARMED.has(q.id));
     const will = parts.find((q) => q.id === 'will');
     if (will) {
       const before = sumOf(will.dims);
+      const unheld = { mil: Math.round(dial * (hired ? D.none + D.hiredExtra : D.none)), int: Math.round(dial * (law ? D.int : D.intNoLaw)) };
       for (const d of Object.keys(will.dims)) {
         const armedOn = armedParts.reduce((a, q) => a + Math.max(0, q.dims[d] || 0), 0);
-        will.dims[d] = Math.min(will.dims[d], armedOn);
+        const floor = Math.min(will.dims[d], Object.hasOwn(unheld, d) ? /** @type {any} */ (unheld)[d] : 0);
+        will.dims[d] = Math.max(floor, Math.min(will.dims[d], armedOn));
       }
       willHeld = (before - sumOf(will.dims)) / n;
     }
