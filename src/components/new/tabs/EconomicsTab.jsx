@@ -327,12 +327,12 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   if (!eco) return <Empty message="No economic data available."/>;
 
   const prosColor = PROSPERITY_COLORS[eco.prosperity] || '#a0762a';
-  const fb = via?.metrics?.foodBalance;
+  const fbRow = foodRowShown(s, !!carriersOf(s, eco)); const fb = fbRow?.fb ?? via?.metrics?.foodBalance; // W2-C-LEAVES-5 item 4: the food record, one home
   // Deficit % MUST come from the canonical display model, the same value the PDF
   // prints. Since ODQ §934.15 that model states the RECORD'S own residual share
   // rather than re-deriving one from the published pounds, so this tab, the PDF
   // chapter, Daily Life and the AI brief carry one number. (A+ pdf.3, one source.)
-  const fbal = deriveFoodBalance(s);
+  const fbal = fbRow ? { deficitPct: fbRow.deficitPct } : deriveFoodBalance(s);
   // ODQ §934.20 — THE PICTURE AND THE FIGURE ARE FED FROM ONE FIELD. The balance
   // bar drew production and imports and stopped, so the magical food offset the
   // writer credits (foodBalance.magicFoodOffset — druidic/divine/arcane, applied
@@ -559,13 +559,13 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
         <div style={{marginBottom:10}}>
           <div style={{display:'flex',justifyContent:'space-between',fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,marginBottom:4}}>
             <span>Production: {formatCount(fb.dailyProduction)} lbs/day</span>
-            {fb.importCoverage>0&&foodComesByTrade(eco)&&<span style={{color:swatch['#2A5A8A']}}>+ {formatCount(fb.importCoverage)} imported</span>}
+            {fb.importCoverage>0&&<span style={{color:swatch['#2A5A8A']}}>+ {formatCount(fb.importCoverage)} imported</span>}
             {fb.magicFoodOffset>0&&<span style={{color:swatch.info}}>+ {formatCount(fb.magicFoodOffset)} by {foodBar.magicChannel} provision</span>}
             <span>Need: {formatCount(fb.dailyNeed)} lbs/day</span>{fb.deficit>0&&<span style={{color:swatch.danger}}>Short: {formatCount(fb.deficit)} lbs/day</span>}
           </div>
           <div style={{height:10,background:swatch['#E8DCC8'],overflow:'hidden',position:'relative'}}>
             <div style={{height:'100%',width:`${foodBar.production}%`,background:foodDeficit?'#c08080':foodSurplus?'#1a5a28':'#a0762a'}}/>
-            {foodBar.imports>0&&foodComesByTrade(eco)&&<div style={{position:'absolute',top:0,left:`${foodBar.production}%`,height:'100%',width:`${foodBar.imports}%`,background:swatch['#2A5A8A']}}/>}
+            {foodBar.imports>0&&<div style={{position:'absolute',top:0,left:`${foodBar.production}%`,height:'100%',width:`${foodBar.imports}%`,background:swatch['#2A5A8A']}}/>}
             {foodBar.magic>0&&<div style={{position:'absolute',top:0,left:`${foodBar.production+foodBar.imports}%`,height:'100%',width:`${foodBar.magic}%`,background:swatch.info}}/>}
           </div>
           {/* W2-C-LEAVES item 4(c) (2026-11-13; the cold list REVIEW-W2A-3, fifteen MEDIUM lines in twenty towns): the row that
@@ -780,12 +780,12 @@ function foodSentence(s, eco, fb, fbal, foodBar, foodDeficit, foodSurplus) {
   const carriers = carriersOf(s, eco); // W2-C-LEAVES-4 item 3(b): the route's own home and the wharf on the roster
   const magic = fb.magicFoodOffset > 0 ? ` ${foodBar.magicChannel.charAt(0).toUpperCase()}${foodBar.magicChannel.slice(1)} provision makes up ${shareWords(fb.magicFoodOffset / Math.max(1, fb.dailyNeed), GROWN_BANDS, 'nearly all')} of what it eats.` : '';
   if (!foodDeficit) {
-    if (!foodSurplus) return `What is grown here${fb.importCoverage > 0 && foodComesByTrade(eco) && carriers ? ' and brought in' : ''} covers each day's food${Math.round(Number(eco?.foodSecurity?.foodRecord?.storageMonths)) >= 3 ? '.' : ', with nothing to spare against a bad year.'}`;
+    if (!foodSurplus) return `What is grown here${fb.importCoverage > 0 && carriers ? ' and brought in' : ''} covers each day's food${Math.round(Number(eco?.foodSecurity?.foodRecord?.storageMonths)) >= 3 ? '.' : ', with nothing to spare against a bad year.'}`;
     const over = fb.surplus / Math.max(1, fb.dailyNeed);
     return `${name} grows ${over < 0.1 ? 'a little more than it eats' : over < 0.3 ? 'more than it eats' : 'far more than it eats'}, with some to put by against a bad year.`;
   }
   const short = shortWords(fbal.deficitPct, famineOf(s).famine);
-  if (!(fb.importCoverage > 0) || !foodComesByTrade(eco) || !carriers) return `No food comes into ${name} by trade.${magic} ${short}`;
+  if (!(fb.importCoverage > 0) || !carriers) return `No food comes into ${name} by trade.${magic} ${short}`;
   const grown = shareWords(fb.dailyProduction / Math.max(1, fb.dailyNeed), GROWN_BANDS, 'nearly all');
   const brought = shareWords(fb.importCoverage / (fb.rawDeficit || fb.importCoverage), BROUGHT_BANDS, 'nearly all the rest');
   return `${name} grows ${grown} of what it eats, and ${carriers} in ${brought}.${magic} ${short}`;
@@ -816,15 +816,12 @@ import { famineOf } from '../../../domain/facts/famine.js'; // W2-C-LEAVES item 
  * eats, and carts bring in a little of the rest." under a siege that has cut every road in). WHETHER FOOD COMES IN BY
  * TRADE is the food record's (`economicState.foodSecurity.foodRecord.normalImportPct`, the one food record every surface
  * states its shares from): the viability metric's `importCoverage` kept a trickle the siege had cut (12 lb/day beside a
- * record of none). The sentence, the "imported" figure, the bar's import run and the "Trade covers" note read it; a
- * record with no food record keeps the metric's answer. At the end of the file, so no line-keyed row above moves.
- * @param {{ foodSecurity?: { foodRecord?: { normalImportPct?: unknown } | null } | null } | null | undefined} eco
- * @returns {boolean}
+ * record of none). SUPERSEDED by W2-C-LEAVES-5 item 4 (below): the row, the bar and the sentence read the food record's own
+ * pounds through one leaf, and the siege's cut is the carriers' test (`carriersOf`).
  */
-function foodComesByTrade(eco) {
-  const record = eco?.foodSecurity?.foodRecord;
-  return record ? Number(record.normalImportPct) > 0 : true;
-}
+// W2-C-LEAVES-5 item 4: the row, the bar and the sentence now read ONE figure for it, the food record's own pounds brought
+// in as the row prints them (domain/display/foodRowShown.js): the record's share rounds a few pounds to 0% (2 of 720).
+import { foodRowShown } from '../../../domain/display/foodRowShown.js';
 
 /**
  * W2-C-LEAVES item 4(b) (2026-11-13; REVIEW-W2A-3 R2; the census's row P6need, 642 of 720): A NEED IS NOT AN IMPORT.
