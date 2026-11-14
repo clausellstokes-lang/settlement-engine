@@ -38,6 +38,16 @@ import { defenseFactsOf } from '../defense/defenseFacts.js';
 import { SCORE_BAND_CUTS, economicSurvivalBandOf, scoreBand } from './defenseScoreBands.js';
 import { laidByBeforeCrisis } from './prosperityInCrisis.js';
 import { standingDefenseForces } from '../institutions/defenseInstitutionBuckets.js';
+import { liveInstitutionNames, ACCESS_ONLY } from '../facts/institutions.js';
+
+/**
+ * A HOUSE WITH CLERGY STANDS (EXPORTS-B1, the chair's ruling C on EXPORTS-MEASURE-1 B1): a church, temple, cathedral, chapel,
+ * abbey, monastery, friary or priory on the live roster. A wayside shrine alone keeps no clergy, and "Access to parish church"
+ * is a neighbour's house: the economy compound's `hasChurch` counts both, so the clergy line reads this, not it.
+ */
+const CLERGY_HOUSE_RE = /\btemple|\bchurch|\bcathedral|\bchapel|\babbey|\bmonaster|\bfriary|\bpriory/i;
+/** @param {{ institutions?: unknown } | null | undefined} r @returns {boolean} */
+const clergyStand = (r) => liveInstitutionNames(r).some((n) => !ACCESS_ONLY.test(n) && CLERGY_HOUSE_RE.test(n));
 
 /**
  * A FORCE STANDS (UPKEEP-8, F3, the chair's ruling (a)): a garrison, a militia (a household levy is one), a watch or a
@@ -304,10 +314,13 @@ export function buildThreatAssessment(r) {
   const laidClause = laid ? `, ${laid}` : '';
   if (money === 'long') {
     econA = `Money enough to ride out a long crisis${laidClause}: emergency measures can be paid for, and `
-      + (hasGarrison ? 'the garrison kept paid' : 'the defenders kept paid')
+      + (hasGarrison ? 'the garrison kept paid' : force ? 'the defenders kept paid' : 'the place kept going')
       + ' while it lasts.';
   } else if (money === 'short') {
     econA = `Money enough for a short crisis${laidClause}; a long siege would start eating the reserves within months.`;
+  } else if (money === 'late' && !force) {
+    // EXPORTS-B1 (the chair's ruling C): where no force stands there are no defenders to pay late (new words: the owner's veto).
+    econA = 'Money is already short; a long crisis would empty the reserves.';
   } else if (money === 'late') {
     econA = 'The defenders are already paid late; a long crisis would empty the reserves and '
       + (hasGarrison ? 'wear out the garrison\'s patience.' : 'wear down the people who defend the place.');
@@ -328,7 +341,7 @@ export function buildThreatAssessment(r) {
     ? 'The hospital can isolate the sick and keep an outbreak from spreading.'
     : facts.hasHealer
       ? healerSubject(facts.healerName) + ' treats the sick one at a time; an outbreak would outrun it.'
-      : f.hasChurch
+      : clergyStand(r)
         ? 'Clergy provide basic wound care: better than nothing, worse than a hospital.'
         : 'Nobody here treats the sick, and a plague would run until it burned out.';
   const disA = inActiveFamine(r) ? `${FAMINE_SENTENCE} ${care}` : care;
