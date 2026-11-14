@@ -4803,6 +4803,70 @@ SEATS2['NOLANE-1'] = dict(
 )
 
 
+SEATS2['W2-FIX-DATA-13'] = dict(
+    title="W2-FIX-DATA-13 · the data lane goes on curing: the ranked table's rest, widest first, and the pool guard's two rows",
+    branch='lane/w2-fix-data-2026-11-13', tip='c4d94189', statement=False,
+    intro=("You are W2-FIX-DATA-13, the thirteenth seat on the data lane of the settlement-engine integration program (lane/w2-fix-data-2026-11-13). The "
+           "lane cures false lines written in the data tables: a house's description, a service's text, a history line, an arrival line. The "
+           "twelfth seat cured the LAST of the nine HIGH rows a first measure against the release bar found (the commercial sawmill's tag: "
+           "timber filed unexploited beside a sawmill, 47 towns to 0), the PDF's Architecture line, the forge lines, the arms racks under a "
+           "siege and a wine shop in a thorp, and handed back at its count with its list written out. Yours: that list, WIDEST FIRST. A "
+           "reader is reading the lane up to the eleventh seat's tip NOW: your commits are a later stage. The lane goes on curing and lands "
+           "later as a point of its own on the joined line: NO whole suite, NO new statement."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-14/W2-FIX-DATA-HANDBACK-12.md WHOLE (77 lines, some very long: by script): the instruments (its "
+          "sections 0 and 5); the rulings; the rows as cured (the form of a cure in these tables: a crisis twin, a declaration, the lighting "
+          "census re-taken after it); FOR THE JOIN; WHAT IS LEFT (section 4: THAT IS YOUR LIST). And of W2-FIX-DATA-HANDBACK-11.md ONLY its "
+          "section 4 (the ranked table with its counts) and section 9, by heading.\n"
+          "3. THE ROWS OTHER SEATS NAMED TO THIS LANE (`git fetch origin lane/chair-2026-11-08`; `git show "
+          "origin/lane/chair-2026-11-08:docs/chair/2026-11-14/join-rows/OPEN-w2-fix-data.md`: four bullets; and in OPEN-no-lane-s.md the "
+          "rows DATA-SMELTER and DATA-FAIRS, by id): each a CANDIDATE as named: measured at your tip first.\n"
+          "4. THE BAR'S ROWS FOR THIS LANE, for a row your table names from it (`git show "
+          "origin/lane/chair-2026-11-08:docs/chair/2026-11-14/bar-0-rows/BAR-0-ROWS-data.json`); the towns are re-born by the probes on "
+          "origin/lane/review-bar-0-2026-11-14 (docs/chair/2026-11-14/probes/REVIEW-BAR-0/).\n"
+          "5. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (the section headed \"## 2m.\"; by script), before the first "
+          "register you touch."),
+    work=("THE CHAIR'S RULINGS IN FORCE ON THESE ROWS (each vetoable by the owner; the twelfth seat's file copies the earlier ones): UNDER A "
+          "SIEGE NOTHING COMES IN OR GOES OUT BY ROAD, GATE OR WATER (no carts waiting, no travellers arriving, no fair's merchants, no "
+          "caravan forming, no walk to the next village's church), AND A MAGIC CHANNEL THE RECORD HOLDS MAY BE SAID; UNDER A FAMINE NO "
+          "LINE OFFERS THE FOOD THAT FAILED; A HOUSE'S DESCRIPTION NAMES NO OTHER HOUSE THE ROSTER MAY LACK and CLAIMS NO VERDICT THAT A "
+          "BAND ON ITS OWN PAGE CAN DENY; A LINE WRITTEN FOR A TOWN'S SIZE IS NOT PRINTED IN A THORP (quarters and districts belong to a "
+          "town or larger; plural streets to a village or larger); A LINE THAT NAMES A HOUSE READS THE ROSTER; a line names no sex the "
+          "record does not hold.\n"
+          "THE WORK, in this order, each cause its own commit, measured first on your births (the twelfth seat's 730: count before and "
+          "after), red first (a collected arm; a guard town for every line a condition takes off a town; each arm shown able to red by a "
+          "plant you do not commit, made in a tree no suite is running in), pushed as made:\n"
+          "1. ONE TABLE FIRST: every row of section 4 and of the rows named to this lane, re-measured at your tip (false / printing), in "
+          "your hand-back; then WIDEST FIRST. The twelfth seat's order stands where counts tie: the smelter's catalogue text (ruled: the "
+          "default text says what a smelter does and names neither neighbour); \"street kitchens\" where no market stands; the siege cells "
+          "of the services and descriptions, with the arrival's carts and the lanes of stalls under a siege (one cause: crisis twins); the "
+          "fairs' and the caravans' services under a siege, the daily market's fresh produce under a famine; the charter hall's "
+          "description (ruled: what the hall does, no claim that the defence is mustered); the two guild lines (a guild war or a guild "
+          "negotiating beside \"no guild\": find the writers first); the parish church's services under a siege (the bar's rows 247 and "
+          "248); the rest of its (d) to (h).\n"
+          "2. ONE MESSAGE TO THE CHAIR after the first four cures (the tip; the table; each row's count before and after), then THE COUNT.\n"
+          "3. THE POOL GUARD'S TWO ROWS OVER THEIR CEILINGS on the joined tree (plotHooks:succession_crisis 0.82 against 0.64; "
+          "plotHooks:resource_scarcity 0.37 against 0.34): find which of this lane's cures declared the other lines off; widen the pool "
+          "with lines READ TRUE in three towns of the case, or narrow that cure's condition; NEVER raise a ceiling, never re-base a row.\n"
+          "4. PARKED rows stay parked with the word they lack; candidates of section 4's item 5 are read in their towns and either cured "
+          "as rows or said true.\n"
+          "A CURE IN A DATA TABLE THAT A GENERATOR READS IS A DECLARED MOVE: say which families move, with counts; if more moves than the "
+          "row's own lines, STOP with the table. EVERY LINE YOU WRITE OR REWORD IS READ WHERE IT PRINTS before it is pushed, ON EVERY "
+          "SURFACE THAT PRINTS THE ROW (a house's card, the Services tab, the PDF, the journal): three towns of its cells, a siege, a "
+          "famine or an occupation among them, the smallest and the largest size it reaches. YOU CHANGE ONLY FILES THIS LANE HOLDS OR THAT "
+          "NO LANE HOLDS, checked by content before the first edit of each file.\n"
+          "AFTER EVERY CURE: as the twelfth seat's rows show (the presumed-things walker; the three gates on the touched files; the "
+          "twelve-birth grid; the test files that name the files you touched; the lighting census re-taken by its ritual where a guard "
+          "file is added).\n"
+          "THE HAND-BACK, kept current after every item: docs/chair/2026-11-14/W2-FIX-DATA-HANDBACK-13.md in the form of the twelfth's: the "
+          "table; the rows as cured; EVERY NEW OR CHANGED LINE with the towns it was read in (the owner's veto list, and the next "
+          "reader's); FOR THE JOIN, carried forward; what is left, line by line."),
+    merges='',
+    when="for a stop that blocks everything you have left, after the first four cures (the tip; the table; the counts), and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
