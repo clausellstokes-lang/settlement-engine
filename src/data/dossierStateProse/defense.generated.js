@@ -7097,7 +7097,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "colour"
+            "guardPresence"
           ],
           "text": "{settlement} pays its creditors first and its defence with what is left, and what is left shrinks each year.",
           "slots": [
@@ -7143,7 +7143,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "colour"
+            "guardPresence"
           ],
           "text": "{settlement} was betrayed recently, and its defence is being rearranged on the assumption that the enemy knows the old arrangements.",
           "slots": [
@@ -7389,7 +7389,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "unfolding",
           "marks": [
-            "colour"
+            "guardPresence"
           ],
           "text": "Each crackdown on the insurgents at {settlement} turns more of its people to their side.",
           "slots": [
