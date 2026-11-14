@@ -99,3 +99,32 @@ A worktree at `origin/lane/join-2026-11-14` (`git worktree add <scratch>/wt -b j
 ## 8. Phase B
 
 Waiting on the chair's "MERGE AGAIN: <lane> at <hash>" messages; none yet.
+
+---
+
+# PART 2 — JOIN-2 (session `session_01ACmDYaoDSWJQ9WgrQh7njn`), brief `docs/chair/2026-11-14/briefs/BRIEF-JOIN-2.md` on `lane/chair-2026-11-08`
+
+Kept current after every item. Started from 216eeb41f (origin's tip, unchanged since JOIN-1). Full history fetched (`is-shallow-repository` false). Worktree `/home/user/j2wt` (local branch `join`), its own `npm ci`, `rerere.enabled true`. Every push plain by `git push origin join:refs/heads/lane/join-2026-11-14` after a fetch and a non-empty rev-list; refs and local config of the shared repository snapshotted before and after: unchanged every time.
+
+## P2.1 The chair's rulings worked to (copied; the chair's messages are not on the branch)
+
+- **(d3), 08:29 UTC:** THE POOL GUARD'S TIGHTEN IS RUN ONCE, BY JOIN-2: after step 0's merges and the wiring census, `node scripts/census/pool-dominance.mjs` first (its figures to a file), then its `--tighten` form: it LOWERS loose ceilings to their measures (round three's code lane measured one: OUTLOOK_HOOK_SIBLINGS 0.649 over a measure of 0.5449, cause 0b3ce25a3). It never raises: a row OVER its ceiling stays red and goes to the chair with its figures at the joined tree, the line's tip and the lane's tip (the data lane carries two such). Its own commit, the door's output in the body.
+- **08:33 UTC:** JOIN-1's rerere cache is lost; in step 0 a pinned test re-meeting a hunk keeps the branch side inside it (JOIN-1 §3b). Snapshot refs and local config around every shard (the two git-running tests).
+
+## P2.2 Step 0: each lane once more at its tip (read back at its merge)
+
+| # | lane | JOIN-1's tip | merged now | merge commit | taken from the branch side (listed for the refreeze) |
+|---|---|---|---|---|---|
+| 0.1 | r3-code-c | 5eba19f9b | 70d92ed06 | 282ccd34f | `scripts/.writer-reach-baseline.json` (r3-code-c's f242b80be re-freeze) |
+| 0.2 | r3-tabs | 5efbfde7e | 6b74eb2aa | e0f848db5 | `tests/lint/.lighting-census-baseline.json` (five R3-TABS-4 re-takes) |
+| 0.3 | r2-code-a | c77bd5d57 | 52932a0c2 | b23ae4272 | `tests/lint/.lighting-census-baseline.json` (311573463) |
+| 0.4 | powers-follow-up | 3909655c3 | 77d7bcace | e3aa23681 | none (clean) |
+| 0.5 | w2-fix-data | 166d8b789 | 8d2aa98b1 | 35d474994 | eight edge bundles/metas (e22e1546e); `aiCharterBundle.js`, `aiOutputSchemaBundle.js` merged clean from the lane's side |
+| 0.6 | w2-write | 6fdff4abd | fdae163f3 | 4f24025c2 | `docs/content/wiring-census.json`, `scripts/.prose-byte-baseline.json`; merged clean: `defense.generated.js`, `economy.generated.js`, `presumedThings.widened.register.json` (−6 lines, the lane's shrink) |
+| 0.7 | w2-c-leaves | 5853eaeef | da7a567f4 | 66d29668d | ten edge bundles/metas (da7a567f4) |
+| 0.8 | r2-code-b | 30ed925ee | — skipped, unmoved | — | — |
+| 0.9 | coherence-upkeep | c56fd565e | 26474cda9 | 069c30e01 | none (docs only) |
+
+The book's lane (merge-15-point-49-wip, b5a783c61) unmoved: skipped. No code conflict; no pinned-test hunk met. Every merge: each file the merge changed compared with the lane's blob where the branch had not moved it (`verify.sh`: no difference; lint-staged changed nothing); the hook's three gates green at every push.
+
+**The lanes moved again during step 0** (read 08:53 UTC; NOT merged: they land later as points on the chair's word): r3-tabs 08acc23d4 (+1, docs), r2-code-a 8a8776dfc (+3), powers 609ff6472 (+5), data 4a3597e39 (+2), w2-write 1dfa83d89 (+3), leaves 180b5930a (+1), r2-code-b ef0b6208d (+1).
