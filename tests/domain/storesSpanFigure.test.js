@@ -12,6 +12,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { DAYS_PER_MONTH, composeTonightSheet, foodStoresWords, storesSpanWords } from '../../src/domain/summary/tonightSheet.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const READERS = ['rpf-thorp-under_siege-13', 'rpf-thorp-succession_void-13', 'rpf-thorp-occupied-13'];
 /** @param {string} seed */
@@ -40,14 +41,14 @@ function monthsSaid(span) {
 
 describe('ROUND THREE · the stores\' span in words contains the figure', () => {
   it('the readers\' three thorps: 1.5 months reads "about a month and a half", never "two months"', () => {
-    for (const seed of READERS) {
+    expectNoSeedFailures(collectSeedFailures(READERS, (seed) => {
       const record = born[seed].economicState.foodSecurity.foodRecord;
       expect(record.storageMonths, seed).toBe(1.5);
       const food = composeTonightSheet(born[seed]).facts.find((f) => f.id === 'food');
       expect(food?.text, seed).toContain('No granary; about a month and a half in household stores.');
       // anchored: the same text holds the stores line, asserted present on the line just above
       expect(food?.text, seed).not.toMatch(/two months/);
-    }
+    }), 'the readers\' thorps read "about a month and a half"');
   });
 
   it('every span from a month to two years is said within a quarter of its figure below three months, half a month above', () => {

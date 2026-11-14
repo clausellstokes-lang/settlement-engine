@@ -18,6 +18,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { CAST_WANTS, castWantOf, composeTonightSheet } from '../../src/domain/summary/tonightSheet.js';
 import { crisisCastSenseFindings } from '../../src/domain/coherence/crisisFactFindings.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 /** The readers' shape (rpf-: the increment's render.rw3.jsx) and the census's (r2s-: births.mjs). */
 const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -48,7 +49,7 @@ const npcNamed = (s, name) => (s.npcs || []).find((n) => n.name === name);
 
 describe('ROUND THREE · the Tonight sheet voices a cast person with the card\'s own goal', () => {
   it('the readers\' three towns: each cast person with a goal of their own wants that goal, never a role\'s line', () => {
-    for (const seed of READERS) {
+    expectNoSeedFailures(collectSeedFailures(READERS, (seed) => {
       const s = born[seed];
       const cast = composeTonightSheet(s).people.filter((p) => p.why === 'cast');
       expect(cast.length, seed).toBeGreaterThan(0);
@@ -57,7 +58,7 @@ describe('ROUND THREE · the Tonight sheet voices a cast person with the card\'s
         expect(hasOwnGoal(npc), `${seed} ${p.name}`).toBe(true);
         if (p.says === 'want') expect(bare(p.line), `${seed} ${p.name}`).toBe(bare(npc.goal.short || npc.goal.long));
       }
-    }
+    }), 'each cast person wants their own goal');
   });
 
   it('the three lines the reader read are gone, and the cards\' own goals print in their place', () => {
@@ -68,19 +69,19 @@ describe('ROUND THREE · the Tonight sheet voices a cast person with the card\'s
   });
 
   it('GUARD: a cast person whose card carries no goal still voices the role\'s line, true of the role', () => {
-    for (const seed of GUARDS) {
+    expectNoSeedFailures(collectSeedFailures(GUARDS, (seed) => {
       const s = born[seed];
       const p = composeTonightSheet(s).people.find((x) => x.why === 'cast' && !hasOwnGoal(npcNamed(s, x.name)));
       expect(p, seed).toBeDefined();
       expect(p.says, seed).toBe('want');
       expect(p.line, seed).toMatch(/^(decide who gets the|share out the) (medicine|guards)/);
-    }
+    }), 'a goal-less cast person voices the role line');
   });
 
   it('the Tonight cast reads back clean: no want over a goal, no role line the writer would not fill', () => {
-    for (const seed of [...READERS, ...GUARDS]) {
+    expectNoSeedFailures(collectSeedFailures([...READERS, ...GUARDS], (seed) => {
       expect(crisisCastSenseFindings(born[seed]).filter((f) => /^want_not_/.test(f.detail)), seed).toEqual([]);
-    }
+    }), 'the Tonight cast reads back clean');
   });
 });
 

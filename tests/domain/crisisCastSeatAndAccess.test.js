@@ -14,6 +14,7 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { CAST_REASONS, STAKE_REASONS, deriveStakes } from '../../src/domain/crisis/crisisCast.js';
 import { crisisHooksOf, houseInProse } from '../../src/domain/crisis/crisisHooks.js';
 import { isSeatVacant } from '../../src/domain/people/seatKeeper.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
@@ -43,7 +44,7 @@ const entries = (s) => (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stres
 
 describe('ROUND THREE · the crisis cast reads the empty seat, the roster and the road', () => {
   it('the readers\' two empty seats: no role, stake or hook says the rival outweighs whoever holds the seat', () => {
-    for (const seed of EMPTY) {
+    expectNoSeedFailures(collectSeedFailures(EMPTY, (seed) => {
       const s = born[seed];
       expect(isSeatVacant(s), seed).toBe(true);
       const e = entries(s).find((x) => x.type === 'succession_void');
@@ -52,7 +53,7 @@ describe('ROUND THREE · the crisis cast reads the empty seat, the roster and th
       const said = [...e.cast.roles.map((r) => r.reason), ...e.cast.stakes.map((k) => k.reason), ...crisisHooksOf(s, e).map((h) => h.text)];
       expect(said.filter((x) => /whoever holds the seat/.test(x)), seed).toEqual([]);
       expect(e.cast.stakes.some((k) => k.reason === STAKE_REASONS.gainsClaim), seed).toBe(true);
-    }
+    }), 'no empty seat is outweighed by a rival');
   });
   it('GUARD: a held seat keeps "already carries more weight than whoever holds the seat"', () => {
     const s = born[HELD];
@@ -61,13 +62,13 @@ describe('ROUND THREE · the crisis cast reads the empty seat, the roster and th
     expect(e.cast.roles.some((r) => r.reason === CAST_REASONS.instigatorRival)).toBe(true);
   });
   it('an "Access to …" row is never a lever: the famine with no house of its own is held by the one who stepped in', () => {
-    for (const seed of ACCESS) {
+    expectNoSeedFailures(collectSeedFailures(ACCESS, (seed) => {
       const e = entries(born[seed]).find((x) => x.type === 'famine');
       expect(e.cast.levers.map((l) => l.institution).filter((n) => /^access to/i.test(n)), seed).toEqual([]);
       const lever = e.cast.roles.find((r) => r.role === 'lever');
       expect(lever, seed).toMatchObject({ kind: 'npc', temporary: true, reason: CAST_REASONS.leverTemporary });
       expect(crisisHooksOf(born[seed], e).filter((h) => /access to/i.test(h.text)), seed).toEqual([]);
-    }
+    }), 'no "Access to" row is a lever');
   });
   it('a power "holds what the crisis makes scarce" only where one of its members faces a house of that kind', () => {
     const e = entries(born[GRAIN]).find((x) => x.type === 'famine');

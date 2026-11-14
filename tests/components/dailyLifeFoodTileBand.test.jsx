@@ -30,6 +30,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { composeTonightSheet } from '../../src/domain/summary/tonightSheet.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 afterEach(cleanup);
 
@@ -90,12 +91,12 @@ describe('ROUND THREE · the food label reads one home on the Daily Life tile an
       const tonight = String(composeTonightSheet(s).facts.find((f) => f.id === 'food')?.text || '').split('. ')[0];
       got[seed] = { tile: tileOf(s), tonight, gap: Number(s.economicState.foodSecurity.foodRecord.gapPct) };
     }
-    for (const seed of SEEDS) expect(got[seed].tile, seed).toBe(got[seed].tonight);
+    expectNoSeedFailures(collectSeedFailures(SEEDS, (seed) => { expect(got[seed].tile, seed).toBe(got[seed].tonight); }), 'every tile reads its Tonight word');
     expect(got['rr2s-city-famine-rand-1'].tile).toBe('Deficit — Active Famine');
     expect(got['rpf-thorp-occupied-13']).toMatchObject({ tile: 'Pressured', gap: 2 });
     expect(got['rpf-thorp-succession_void-13']).toMatchObject({ tile: 'Pressured', gap: 5 });
     expect(got['rpf-thorp-under_siege-13'].tile).toBe('Deficit');
-    for (const seed of SEEDS) if (got[seed].gap > 0) expect(['Secure', 'Surplus'], seed).not.toContain(got[seed].tile); // anchored: each tile is asserted equal to its Tonight word above
+    expectNoSeedFailures(collectSeedFailures(SEEDS, (seed) => { if (got[seed].gap > 0) expect(['Secure', 'Surplus'], seed).not.toContain(got[seed].tile); }), 'no tile of plenty beside an unmet need'); // anchored: each tile is asserted equal to its Tonight word above
   }, 300000);
   test('GUARD: a town whose record leaves no need unmet keeps "Secure" on both', async () => {
     await loadGenerationLawPayloads();
