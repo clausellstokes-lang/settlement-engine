@@ -15,14 +15,14 @@
    "reader": "SECOND",
    "master": 0,
    "integration": 57,
-   "banked": 57
+   "banked": 0
   },
   "P1b": {
    "label": "1b \"a small margin\" beside a quarter or more bought in",
    "reader": "SECOND",
    "master": 64,
    "integration": 64,
-   "banked": 64
+   "banked": 0
   },
   "P2siege": {
    "label": "2 a siege figure in the indicative outside a siege",
@@ -45,7 +45,7 @@
    "reader": "SECOND",
    "master": 0,
    "integration": 106,
-   "banked": 96
+   "banked": 0
   },
   "P5false": {
    "label": "5a a crime line the town's facts make false: bought officials where none is in pay, none bought where one is, a grip on a hall no agent holds",
@@ -89,49 +89,49 @@
    "reader": "CROSS",
    "master": 0,
    "integration": 220,
-   "banked": 129
+   "banked": 123
   },
   "P9": {
    "label": "9 a weak beasts grade over settled-country text",
    "reader": "GLANCE",
    "master": 148,
    "integration": 149,
-   "banked": 114
+   "banked": 103
   },
   "P10": {
    "label": "10 \"hold the gates\" with no walls",
    "reader": "SECOND",
    "master": 18,
    "integration": 17,
-   "banked": 17
+   "banked": 0
   },
   "P11": {
    "label": "11 a flow card naming a resource the town lacks",
    "reader": "CROSS",
    "master": 396,
    "integration": 411,
-   "banked": 448
+   "banked": 0
   },
   "F4": {
    "label": "F4 an income line naming a working the roster lacks",
    "reader": "CROSS",
    "master": 274,
    "integration": 245,
-   "banked": 202
+   "banked": 0
   },
   "P13": {
    "label": "13 \"… and go on.\" doubled",
    "reader": "GLANCE",
    "master": 173,
    "integration": 172,
-   "banked": 170
+   "banked": 0
   },
   "P14": {
    "label": "14 size words in small places",
    "reader": "SECOND",
    "master": 183,
    "integration": 167,
-   "banked": 148
+   "banked": 23
   },
   "P16three": {
    "label": "16a \"the ruling three\" over fewer",
@@ -145,7 +145,7 @@
    "reader": "GLANCE",
    "master": 0,
    "integration": 291,
-   "banked": 281
+   "banked": 0
   },
   "P17": {
    "label": "17 non-goods produced locally",
@@ -159,7 +159,7 @@
    "reader": "GLANCE",
    "master": 337,
    "integration": 360,
-   "banked": 360
+   "banked": 341
   },
   "P19": {
    "label": "19 a diagnostic printed as a tension",
