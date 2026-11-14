@@ -365,7 +365,15 @@ food count re-taken on records born at it: every cell of item 1 still 0), 65dc92
    `tests/pdf/defenseForceNamesLabelled.test.jsx` is on the line).
 2. (r6) the tension rows' bracket ("Taverns (5-20)", History and Overview, through `houseLabelsInText`); the PDF's
    medical line; the stores' unit (6 towns); the trade connectivity row (with a system state).
-3. THE SWEEP, once, at the end.
+3. THE CHAIR'S THREE ROWS (15:35 UTC; named by other seats; measure first, by false towns; one line back each when pushed):
+   (a) the PDF's IdentityDailyLife prints "brought in falls short" in 31 besieged towns (under a siege nothing is
+   brought in): the tab's reader or a twin; (b) "Underground city bazaar" prints on the PDF only, 22 towns: find its
+   writer; the export's row prints what the tab's card prints; (c) `src/pdf/lib/viewModel.js`, the Overview's
+   `crisisSummaryForSurface(x, s?.name, 'overview')` hands no facts, so "has lost a second harvest" can print on the
+   PDF's Overview where the town has neither grain nor mill: the Tonight caller's one-line cure of 600b9f743
+   (`factsOf(source)`), red first on births. NOT MINE (the chair): the journal's provenance tag on a force (cured twice:
+   r2-code-b a48cf4126, exports-b24 2779a3d6d).
+4. THE SWEEP, once, at the end.
 
 HOW THE INSTRUMENTS ARE RE-MADE: `probes/SURFACES-3/run.sh <tree> <x.census.jsx> <out> <seeds> <workers> [VAR=val]`
 runs a census under vitest in shards. Records: `run.sh <tree> births.census.jsx <out> probes/SURFACES-2/seeds772.txt 4
