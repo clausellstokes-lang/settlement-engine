@@ -30,10 +30,13 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF: none so far.
 | 1 | r2-code-a-2026-11-13 | e5064e855 (15:48) | bc9194bf7 (JOIN-4 merge 3) | 1a039553d | none | — |
 | 2 | w2-fix-data-2026-11-13 | e6e1893f4 (15:52) | 8e814883c (JOIN-4 merge 5) | e9601b6b3 | none | `.lighting-census-baseline.json` (the lane's re-take 6f86693a5 yielded in its own merge 81df6fb80) |
 | 3 | w2-write-2026-11-13 (the corpus) | 9b08e5b69 (15:55) | 525541b42 (JOIN-4 merge 6) | 88bfa6885 | none | lane-only, taken from the lane: `wiring-census.json` (re-take e28e1305f), `presumedThings.widened.register.json` (b159401a1), `defense.generated.js` (leaf; (g) below) |
+| 4 | w2-write-side-13-2026-11-14 (the corpus's side branch) | f2bf55f1e (16:00) | — (base 525541b42) | b4dad83e4 | none | clean-both: `RECEIPT_POOLS_DOSSIER_STATE.md`, `corpusCureGuards.test.js`, `proseComposed.walker.test.js`, `proseWiringCensus.walker.test.js`; lane-only leaf `general.generated.js` |
+| (g) | THE CORPUS'S DOOR at b4dad83e4 | `node scripts/generate-dossier-state-prose.mjs --check` | — | — | — | **exit 0**: 69 state blocks / 2951 variants verified; the census not stale, no leaf stale; nothing re-taken, nothing rebuilt |
 
 ## 3. Every code resolution
 
-None so far.
+No code conflict so far. Merged clean though both sides moved them (each read in both sides' diffs from the merge base; independent lines; both stand):
+- Merge 4: `tests/lint/proseComposed.walker.test.js` (joined: relations 165 -> 169; lane: corpus 2950 -> 2951); `tests/lint/proseWiringCensus.walker.test.js` (joined: resolved 492 / unresolved 364, relations 169, the draft 19 · 5 · 83 · 43, SOURCE-UNRESOLVED 857; lane: variants 2951 and the histogram 4: 147, 5: 45); `tests/domain/corpusCureGuards.test.js`; `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md`. Each pin moved by one side at its own line: stands by (d); the close measures.
 
 ## 4. THE LIST FOR THE CLOSE
 
@@ -61,6 +64,8 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 
 | file | lanes whose side was not taken (JOIN-5 merge #) |
 |---|---|
+| merged clean though both sides moved (4) | `RECEIPT_POOLS_DOSSIER_STATE.md`, `corpusCureGuards.test.js`, `proseComposed.walker.test.js`, `proseWiringCensus.walker.test.js` (pins, §3) |
+| lane-only registers taken from the lane | `wiring-census.json` (w2-write 3, e28e1305f), `presumedThings.widened.register.json` (3, b159401a1); leaves `defense.generated.js` (3), `general.generated.js` (4): (g) exit 0 at merge 4 |
 | `tests/lint/.lighting-census-baseline.json` | w2-fix-data (2): its re-take for one new test title (6f86693a5, the R3C-REVOLTNOTE guard) yielded inside the lane's own merge of the joined line (81df6fb80) |
 
 
