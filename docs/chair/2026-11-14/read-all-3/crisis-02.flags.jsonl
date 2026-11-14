@@ -1,0 +1,97 @@
+{"id":"22375","town":"r2r-hamlet-28","sev":"MED","kind":"PAIR","why":"says settlers meant to trade by water; FOUNDING reason is a seasonal fishers' camp, not trade","other":"32560"}
+{"id":"10657","town":"r2r-hamlet-28","sev":"MED","kind":"STATE","why":"offers fresh fish for sale; the famine's failed food source is fish","other":""}
+{"id":"06426","town":"r2r-hamlet-28","sev":"MED","kind":"STATE","why":"catch sold fresh and salt fish a major export under famine where fish is the failed source; pop 23","other":""}
+{"id":"12239","town":"r2r-hamlet-28","sev":"MED","kind":"STATE","why":"hamlet of 23 with no force, defence Vulnerable, cannot control sea routes or naval access","other":""}
+{"id":"25084","town":"r2r-hamlet-28","sev":"MED","kind":"STATE","why":"hamlet of 23 with no force, defence Vulnerable, cannot control sea routes or naval access","other":""}
+{"id":"33071","town":"r2r-hamlet-28","sev":"LOW","kind":"STATE","why":"table puts Varg in Elder Council; PEOPLE gives his house as Fisher's landing, no council bracket","other":""}
+{"id":"01687","town":"r2s-recently_betrayed-hamlet-2","sev":"MED","kind":"STATE","why":"says the place stood before the Siege; town is 41 years old and the Siege was 41 years ago","other":""}
+{"id":"04165","town":"r2s-recently_betrayed-hamlet-2","sev":"MED","kind":"LACKS","why":"presumes a lord and banalite mill; GOVERNMENT is Headman's Authority only, no lord listed","other":""}
+{"id":"05241","town":"r2s-famine-hamlet-0","sev":"MED","kind":"STATE","why":"puts Piso Caesar first of Elder Council; PEOPLE gives his house as Fisher's landing with no council bracket","other":""}
+{"id":"07114","town":"r2s-occupied-hamlet-1","sev":"MED","kind":"LACKS","why":"lists Communal labour as an institution; not on the 9 HOUSES","other":""}
+{"id":"14622","town":"r2s-occupied-hamlet-1","sev":"MED","kind":"STATE","why":"says it sends out dates, wine and water rights; TRADE exports none, access isolated, under famine and occupation","other":""}
+{"id":"16470","town":"r2s-occupied-hamlet-1","sev":"MED","kind":"STATE","why":"occupying governor names the local headman her successor; QUARRELS has the two powers tense and escalating, occupier does not mentor local successor","other":""}
+{"id":"00634","town":"r2s-occupied-hamlet-1","sev":"MED","kind":"STATE","why":"writes occupier and headman as mentor and successor; QUARRELS has them tense, escalating","other":""}
+{"id":"22837","town":"r2r-hamlet-16","sev":"MED","kind":"STATE","why":"fish products flow River fisheries to landing to salted fish; famine's failed source is fish, Fishing Grounds absent","other":""}
+{"id":"22836","town":"r2r-hamlet-16","sev":"MED","kind":"STATE","why":"fish and freshwater catch flow offered; famine's failed source is fish, Fishing & Seafood chain vulnerable","other":""}
+{"id":"25228","town":"r2r-hamlet-16","sev":"MED","kind":"STATE","why":"names a ruling three of Elder Council; PEOPLE brackets show nobody on Elder Council, their houses are landing, militia, quarry","other":""}
+{"id":"24732","town":"r2r-hamlet-16","sev":"LOW","kind":"STATE","why":"gives a standing third of Elder Council; PEOPLE shows no one seated on Elder Council","other":""}
+{"id":"24892","town":"r2r-hamlet-16","sev":"LOW","kind":"STATE","why":"gives a standing second of Elder Council; PEOPLE shows no one seated on Elder Council","other":""}
+{"id":"10663","town":"r2s-famine-hamlet-2","sev":"MED","kind":"STATE","why":"offers daily fresh milk; LAND gaps say the dairy farmer lacks access to livestock","other":""}
+{"id":"07711","town":"r2s-famine-hamlet-2","sev":"MED","kind":"STATE","why":"says the dairy farmer keeps cattle or goats for milk; LAND gaps say it lacks livestock","other":""}
+{"id":"06427","town":"r2s-famine-hamlet-2","sev":"MED","kind":"STATE","why":"catch landed and sold fresh or preserved; famine's failed source is fish, TRADE exports none","other":""}
+{"id":"00946","town":"r2s-famine-hamlet-2","sev":"LOW","kind":"BROKEN","why":"opens a parenthesis and ends mid-clause: Ilya Sokolov (the dairy farmer","other":""}
+{"id":"06293","town":"r2r-village-58","sev":"MED","kind":"STATE","why":"offers assembling caravans; LAND says Caravanserai lacks access to camel herds (depleted) and the caravan chain is vulnerable","other":""}
+{"id":"11324","town":"r2r-village-58","sev":"LOW","kind":"TAG","why":"grain sold by the sack at harvest offered as a line under a famine with deficit and months of stores near zero","other":""}
+{"id":"35551","town":"r2s-famine-village-0","sev":"MED","kind":"STATE","why":"Grain shown full; FOOD gives grain as the failed source with stores 0.1 months and a 30% gap","other":""}
+{"id":"35544","town":"r2r-hamlet-28","sev":"MED","kind":"STATE","why":"Fish shown full; FOOD gives fish as the failed source of a famine","other":""}
+{"id":"00500","town":"r2s-famine-village-0","sev":"LOW","kind":"STATE","why":"makes Rory MacDonald first of Elder Council; PEOPLE gives his house as Mill with no council bracket","other":""}
+{"id":"25014","town":"r2s-famine-village-0","sev":"LOW","kind":"PAIR","why":"calls it a stone-built village; Dwellings are timber-framed on stone foundations","other":"08480"}
+{"id":"15442","town":"r2s-famine-village-0","sev":"LOW","kind":"PAIR","why":"calls it a stone-built village; Dwellings are timber-framed on stone foundations","other":"08480"}
+{"id":"29174","town":"r2s-famine-village-1","sev":"MED","kind":"STATE","why":"says order clearly outmatches criminals; stability Desperate with order eroding by hunger, safety Strained, defence Vulnerable, monsters on roads","other":""}
+{"id":"25433","town":"r2s-famine-village-1","sev":"LOW","kind":"LACKS","why":"names Temple beneficiaries; HOUSES has only a Parish church, no temple","other":""}
+{"id":"12107","town":"r2s-famine-village-1","sev":"MED","kind":"STATE","why":"Military/Guard 'pressing close behind' the headman; GOVERNMENT has Military/Guard Dominant above Headman's Authority Significant","other":""}
+{"id":"12107","town":"r2s-famine-village-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in a sentence","other":""}
+{"id":"16971","town":"r2s-famine-village-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":""}
+{"id":"17038","town":"r2s-famine-village-1","sev":"MED","kind":"STATE","why":"calls Military/Guard Significant; GOVERNMENT has it Dominant; DEFENCE shows only a citizen militia and no garrison, defence Vulnerable","other":""}
+{"id":"22370","town":"r2s-famine-village-2","sev":"MED","kind":"LACKS","why":"town lives by stabling and meals for travellers; HOUSES has no stable and no inn, only an Ale house; famine","other":""}
+{"id":"00936","town":"r2r-village-24","sev":"LOW","kind":"BROKEN","why":"sentence ends mid-clause with an open parenthesis: Zhu Deng (the charter master","other":""}
+{"id":"06381","town":"r2r-village-24","sev":"MED","kind":"STATE","why":"cartographer draws and sells 'his' work; PEOPLE gives the cartographer Qiong Liang as f","other":""}
+{"id":"08662","town":"r2s-famine-village-3","sev":"MED","kind":"STATE","why":"Military/Guard 'pressing close behind'; GOVERNMENT has Military/Guard Strong above Elder Council Significant, which governs","other":""}
+{"id":"08662","town":"r2s-famine-village-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in a sentence","other":""}
+{"id":"14590","town":"r2s-famine-village-3","sev":"MED","kind":"STATE","why":"says it leans on magic to hold; DEFENCE shows magic: none, only palisade and citizen militia","other":""}
+{"id":"01018","town":"r2s-famine-village-3","sev":"LOW","kind":"BROKEN","why":"sentence ends mid-clause with an open parenthesis: Yusuf al-Ghazali (the stable keeper","other":""}
+{"id":"22278","town":"r2s-famine-town-2","sev":"MED","kind":"STATE","why":"calls it quiet country; STATE safety Dangerous under famine, stability Desperate, defence Vulnerable","other":""}
+{"id":"28629","town":"r2s-famine-town-2","sev":"MED","kind":"LACKS","why":"says there is a court; HOUSES has a Town hall but no court","other":""}
+{"id":"06139","town":"r2s-famine-town-2","sev":"MED","kind":"LACKS","why":"burial beyond the gate; DEFENCE walls none, HOUSES has no gates","other":""}
+{"id":"10204","town":"r2s-famine-town-3","sev":"MED","kind":"STATE","why":"offers fired clay bricks by the cartload; LAND gaps say the Brickmaker lacks access to clay","other":""}
+{"id":"25015","town":"r2s-famine-town-3","sev":"MED","kind":"LACKS","why":"keep visible above the market quarter; no keep, garrison or lord listed in DEFENCE or HOUSES","other":""}
+{"id":"15443","town":"r2s-famine-town-3","sev":"MED","kind":"LACKS","why":"keep visible above the market quarter; no keep, garrison or lord listed in DEFENCE or HOUSES","other":""}
+{"id":"00983","town":"r2s-famine-town-3","sev":"LOW","kind":"BROKEN","why":"sentence ends mid-clause with an open parenthesis: Huda al-Rumi (the master fishmonger","other":""}
+{"id":"00947","town":"r2s-famine-town-3","sev":"LOW","kind":"BROKEN","why":"sentence ends mid-clause with an open parenthesis: Yasmeen ibn Khalid (the dean","other":""}
+{"id":"05998","town":"r2s-famine-town-3","sev":"MED","kind":"STATE","why":"Brickmaker moulds and fires clay bricks; LAND gaps say the Brickmaker lacks access to clay","other":""}
+{"id":"10827","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"offers game meat from the hunt; LAND gives Hunting grounds absent for the Furs & Pelts chain","other":""}
+{"id":"13074","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"hunting parties bring venison and pelts to sell; LAND gives Hunting grounds absent","other":""}
+{"id":"21735","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"offers pottery and ceramics; LAND gaps say the Potter lacks access to clay","other":""}
+{"id":"22984","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"offers clay roof tiles; LAND gaps say Brickmaker and Potter both lack access to clay","other":""}
+{"id":"21727","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"Potter makes wheel-thrown pottery; LAND gaps say the Potter lacks access to clay","other":""}
+{"id":"14728","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"income rests on milled flour; under a famine whose failed source is grain, deficit with stores of grain short","other":""}
+{"id":"20913","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"income from visiting pilgrims and relic sales; LAND has no pilgrimage chain, TRADE no pilgrim trade, famine under way","other":""}
+{"id":"00987","town":"r2s-famine-town-1","sev":"LOW","kind":"BROKEN","why":"sentence ends mid-clause with an open parenthesis: Qinglong Lu (the master of the hunt","other":""}
+{"id":"16606","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"says Merchant Guilds has no stake yet; QUARRELS has Merchant oligarchy vs Merchant Guilds at high intensity","other":""}
+{"id":"22374","town":"r2s-famine-town-0","sev":"MED","kind":"PAIR","why":"settled at a crossroads for trade; FOUNDING reason is an agricultural market centre","other":"32097"}
+{"id":"14371","town":"r2s-famine-town-0","sev":"MED","kind":"STATE","why":"smelts raw ore into pig iron and ingots; LAND gaps say the Smelter lacks its ore (copper, gold/silver), chain vulnerable","other":""}
+{"id":"14363","town":"r2s-famine-city-0","sev":"MED","kind":"STATE","why":"iron ingots and pig iron from Smelter; LAND gaps say the Smelter lacks access to copper ore and gold/silver ore, chain vulnerable","other":""}
+{"id":"10717","town":"r2s-famine-city-0","sev":"LOW","kind":"LACKS","why":"says every district has a temple; HOUSES lists Parish churches (10-30), no temple","other":""}
+{"id":"10219","town":"r2s-famine-city-0","sev":"MED","kind":"STATE","why":"fish is sold here fresh or preserved; famine's failed source is fish, Fishing & Seafood chain vulnerable","other":""}
+{"id":"10228","town":"r2s-famine-city-0","sev":"MED","kind":"STATE","why":"stalls sell the morning's catch and salted barrels; famine's failed source is fish","other":""}
+{"id":"12631","town":"r2s-famine-city-0","sev":"LOW","kind":"BROKEN","why":"opens mid-clause with an unmatched parenthesis: Holds the seat): Wants to make sure no one else learns","other":""}
+{"id":"20281","town":"r2s-famine-city-0","sev":"MED","kind":"STATE","why":"Noble Families has no stake yet; QUARRELS has Noble Families vs Royal Authority moderate, relation tense and declining","other":""}
+{"id":"17043","town":"r2s-famine-city-0","sev":"MED","kind":"STATE","why":"says Military/Guard keeps order reliably; stability Desperate (hunger eroding order), safety Strained, relation to Royal Authority tense","other":""}
+{"id":"HEADER","town":"r2r-city-44","sev":"LOW","kind":"RECORD","why":"founded by royal decree and a century of forced investment, yet the reason is a seasonal fishers' camp that grew by itself; the two cannot both be true","other":""}
+{"id":"14750","town":"r2r-city-44","sev":"MED","kind":"STATE","why":"income rests on salted fish; famine's failed source is fish, so the line offers the food that failed","other":""}
+{"id":"14751","town":"r2r-hamlet-28","sev":"MED","kind":"STATE","why":"income rests on salted fish; famine's failed source is fish, so the line offers the food that failed","other":""}
+{"id":"04369","town":"r2r-city-44","sev":"MED","kind":"STATE","why":"offers bronze and brass alloys; LAND gaps say the Smelter lacks access to copper ore and runs on imported iron ore","other":""}
+{"id":"06712","town":"r2r-city-44","sev":"MED","kind":"STATE","why":"says civic musters come first; DEFENCE shows militia none, only a garrison and a professional watch","other":""}
+{"id":"00959","town":"r2r-city-44","sev":"LOW","kind":"BROKEN","why":"sentence ends mid-clause with an open parenthesis: Alexios Hyaleas (the garrison commander","other":""}
+{"id":"HEADER","town":"r2s-famine-city-1","sev":"LOW","kind":"RECORD","why":"founded by royal decree and a century of forced investment, yet the reason is a seasonal fair that became year-round as traders chose to winter; the two cannot both be true","other":""}
+{"id":"02978","town":"r2s-famine-city-1","sev":"LOW","kind":"TAG","why":"settlement stretches along shoreline or roadstead; this town is desert/arid with crossroads access and no coast","other":""}
+{"id":"00945","town":"r2s-famine-city-1","sev":"LOW","kind":"BROKEN","why":"sentence ends mid-clause with an open parenthesis: Alfhild Dagsson (the customs collector","other":""}
+{"id":"21725","town":"r2s-famine-city-1","sev":"MED","kind":"STATE","why":"Potter fires plates and jugs in its kiln; LAND gaps say the Potter lacks access to clay","other":""}
+{"id":"11342","town":"r2s-famine-city-3","sev":"MED","kind":"STATE","why":"grain fields feed bakers and baked goods; famine's failed source is grain, stores of grain short","other":""}
+{"id":"21359","town":"r2s-famine-city-3","sev":"MED","kind":"STATE","why":"offers pies, tarts and pastries as a line; famine's failed source is grain","other":""}
+{"id":"05663","town":"r2s-famine-village-2","sev":"MED","kind":"STATE","why":"offers pottage and bread as a line; famine's failed source is grain, stores 0.1 months","other":""}
+{"id":"22277","town":"r2s-famine-city-3","sev":"MED","kind":"STATE","why":"calls it quiet country with far more defences than needed; STATE safety Strained under famine, stability Desperate, hunger eroding order","other":""}
+{"id":"03824","town":"r2s-famine-city-3","sev":"MED","kind":"STATE","why":"says a small permanent guard relies on reinforcement; DEFENCE has a Fortress with garrison, city watch and a mercenary quarter","other":""}
+{"id":"29930","town":"r2s-famine-city-3","sev":"LOW","kind":"LACKS","why":"names a standing arbitration council for wage disputes; no such house in HOUSES, only courthouses","other":""}
+{"id":"05999","town":"r2s-famine-city-3","sev":"MED","kind":"STATE","why":"Brickmaker shapes and fires clay into bricks; LAND gaps say the Brickmaker lacks access to clay","other":""}
+{"id":"24068","town":"r2s-famine-city-3","sev":"MED","kind":"STATE","why":"Smelter reduces raw ore to refined metal; LAND gaps say the Smelter lacks access to iron ore and copper ore","other":""}
+{"id":"03872","town":"r2s-famine-city-2","sev":"LOW","kind":"LACKS","why":"standing levy roster kept in the city archive; DEFENCE militia none and HOUSES has no archive","other":""}
+{"id":"03874","town":"r2s-famine-metropolis-2","sev":"LOW","kind":"LACKS","why":"standing levy roster kept in the metropolis archive; DEFENCE militia none and HOUSES has no archive","other":""}
+{"id":"00986","town":"r2s-famine-metropolis-2","sev":"LOW","kind":"BROKEN","why":"sentence ends mid-clause with an open parenthesis: Seosamh Larkin (the master of granaries","other":""}
+{"id":"25559","town":"r2s-famine-metropolis-2","sev":"MED","kind":"STATE","why":"The Arcane Circle has no stake yet; QUARRELS has City-State Council vs The Arcane Circle at high intensity (an unpaid debt)","other":""}
+{"id":"23017","town":"r2s-famine-metropolis-3","sev":"MED","kind":"STATE","why":"Royal Authority governs with Religious Authorities 'close behind'; GOVERNMENT has Religious Authorities Strong above Royal Authority Significant","other":""}
+{"id":"06578","town":"r2s-famine-metropolis-3","sev":"MED","kind":"STATE","why":"says citizen or district levies provide defence; DEFENCE shows militia none, defended by garrisons, watch and mercenary quarter","other":""}
+{"id":"00951","town":"r2s-famine-metropolis-3","sev":"LOW","kind":"BROKEN","why":"sentence ends mid-clause with an open parenthesis: Kyr Kataphloron (the exchange's steward","other":""}
+{"id":"12647","town":"r2s-famine-metropolis-3","sev":"LOW","kind":"BROKEN","why":"opens mid-clause with an unmatched parenthesis: Holds the seat): Wants to put away more coin","other":""}
+{"id":"23261","town":"r2s-famine-metropolis-3","sev":"MED","kind":"STATE","why":"salt won from local brine in pans; LAND gaps say the Salt works lacks access to its salt (desert_salt) and Salt & Preservation has no salt flats","other":""}
+{"id":"DONE","lines":2524,"blocks":27,"flags":96}
