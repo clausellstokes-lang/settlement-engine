@@ -287,11 +287,21 @@ describe('PowerTab — the §815 ruling chain ("Who runs this place?")', () => {
     const s = base();
     s.powerStructure.factions[0].modifier = 'corruption-riddled';
     s.institutions = [{ name: "Thieves' guild chapter" }];
+    // POWERS-15 (REVIEW-POWERS-5 A5): the crime family is borne out by the HALL's rung, the fact its line on the same tab
+    // reads ("Criminal capture: Corrupted Officials"), never by a criminal house alone
+    s.powerStructure.criminalCaptureState = 'corrupted';
     render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
     const chip = screen.getByTestId('ruling-chain-modifier');
     expect(chip.textContent).toBe('criminal sway');
     expect(screen.getByTestId('ruling-chain').textContent.split('criminal sway').length - 1, 'said once on the page').toBe(1);
     expectAbsentWithAnchor(screen.getByTestId('ruling-chain').textContent, 'corruption-riddled', 'Merchant Guild', 'the stored key is never printed');
+    cleanup();
+    const houseOnly = base(); // a criminal house stands and the hall is free of it: the chip is silent
+    houseOnly.powerStructure.factions[0].modifier = 'corruption-riddled';
+    houseOnly.institutions = [{ name: "Thieves' guild chapter" }];
+    render(<PowerTab powerStructure={houseOnly.powerStructure} settlement={houseOnly} narrativeNote={null} />);
+    expect(screen.getByTestId('ruling-chain').textContent, 'anchored: the chain block renders').toContain('Merchant Guild');
+    expect(screen.queryByTestId('ruling-chain-modifier'), 'the hall is free of the criminals: no "criminal sway"').toBeNull();
     cleanup();
     const bare = base();
     bare.powerStructure.factions[0].modifier = 'corruption-riddled'; // no criminal house, no criminal power: not borne out

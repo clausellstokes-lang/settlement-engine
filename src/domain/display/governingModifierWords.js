@@ -17,7 +17,13 @@
  *   - faith (theocratic-aligned, church-guided): a sacred house stands (`factsOf(...).sacredHouse`) and the faith's
  *     power does not answer to the seat (no `subordinate` relationship from the ruling power to a religious one);
  *   - commerce (commerce-driven, merchant-led): a live market or a guild stands (`factsOf(...).market`, `.guild`);
- *   - crime (corruption-riddled, compromised): the town has a criminal structure (`factsOf(...).crime`).
+ *   - crime (corruption-riddled, compromised): the HALL is in criminal hands, read from the hall's own rung (the stored
+ *     `powerStructure.criminalCaptureState`, the rung the Power tab's "Criminal capture" badge and the DM view's hall
+ *     line both read: `domain/people/patronage.js :: hallOf`): corrupted or capture. POWERS-15 (REVIEW-POWERS-5 A5, the
+ *     chair's ruling of 2026-11-14: two lines on one page read one fact): the town's crime STRUCTURE is not the hall's
+ *     standing, and the chip said "criminal sway" beside "Nobody at the head of ... answers to a criminal house". At
+ *     none, adversarial and equilibrium the chip is silent (an equilibrium hall with a lesser agent gives the criminals
+ *     "a voice": silence beside it is no false sentence, and the chip is never the tell of a hidden allegiance).
  * A key of no family (a key a later writer adds) prints nothing: an identifier is never printed.
  *
  * Read-only; no draw, no write. The stored modifier is left as it is (nothing else reads it but the pages).
@@ -43,6 +49,9 @@ const MODIFIER_WORDS = Object.freeze({
   'corruption-riddled': { family: 'crime', words: 'criminal sway' },
   compromised: { family: 'crime', words: 'criminal sway' },
 });
+
+/** The hall's rungs at which the criminals sway the ruler (dmPowerLines.js :: CAPTURE_RUNG_LABELS: "Partly in criminal hands", "Run by the criminals"). */
+const HALL_IN_CRIMINAL_HANDS = new Set(['corrupted', 'capture']);
 
 /** The families' keys, for the guard and the census. @type {ReadonlyArray<string>} */
 export const GOVERNING_MODIFIER_KEYS = Object.freeze(Object.keys(MODIFIER_WORDS));
@@ -72,7 +81,7 @@ export function modifierBorneOut(settlement, family, rulerName) {
   if (family === 'force') return Boolean(facts.guardPresence);
   if (family === 'faith') return Boolean(facts.sacredHouse) && !faithAnswersToSeat(settlement, rulerName);
   if (family === 'commerce') return Boolean(facts.market) || Boolean(facts.guild);
-  if (family === 'crime') return facts.crime !== 'none';
+  if (family === 'crime') return HALL_IN_CRIMINAL_HANDS.has(String(settlement?.powerStructure?.criminalCaptureState || 'none'));
   return false;
 }
 
