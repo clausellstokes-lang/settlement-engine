@@ -1,5 +1,7 @@
 # W2-FIX-DATA-9: the hand-back (kept current after every item; NOT the lane's final statement)
 
+**HANDED BACK BY FILE (04:5x UTC). The chair read this seat's count at 227,829 at 04:19 and its rate at about 6,000 a minute: past the 330,000 the chair set with the statement not made. State: rows 4's parish churches and Mine CURED; the history branch MERGED (38c93321d, pushed); the line's merge TRIED and ABORTED in this seat's scratch worktree (nothing of it committed or pushed), its measure in section 3; the final statement NOT MADE.**
+
 **Seat.** The ninth seat on `lane/w2-fix-data-2026-11-13`, from `fb00318d9` (read back from origin first: equal to the brief's). Chair: `session_01ACmDYZrFEVXyZEUg1NDxxC`. Brief: `origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-W2-FIX-DATA-9.md` (self-contained; its rulings are not repeated here). Every figure EXECUTED unless marked PLAUSIBLE.
 
 ## 0. Instruments (re-made in minutes)
@@ -30,6 +32,44 @@
 5. Step 8's four PAIRS hits not in any row (HANDBACK-8 section 1): the vintner's "must brought in" under a siege, the commercial brewery's "taverns and ships", the smuggling waypoint's "customs checks" (reads true), the city mills' "fulling" (PARKED, a cloth word).
 6. The Mine's service twin "Ore cut underground by the crews ..." (`institutionServices.js`, the cut's #1246) and the parish churches' card one-liner (`src/domain/display/institutionVocabulary.js`, "Hundreds of houses of worship ..."): named in 383f1d9a7 and 792b1d11f.
 7. The history branch's rulings (a) to (c) (the Succession Crisis's present-tense ruler lines in a council's town; the succession hooks under a priest-ruled council; "A would-be heir approaches outsiders" in three elders' towns): the merge is the close's; the reading is after the join.
+
+## 3. THE CLOSE: done, measured, and what is left (for the successor), line by line
+
+DONE: (a) full history: `git fetch --depth=2147483647 origin lane/integration-2026-11-07 lane/w2-fix-data-2026-11-13 lane/w2-fix-data-history-2026-11-13`; `--is-shallow-repository` false; `merge-base --all` with the line prints 96d698de7 and 9d5d6e091. (b) The history branch merged at 864948c8b, plain, NOTHING CONFLICTED (`38c93321d`); after it, each through its door: `wiring-census.mjs --check` exit 0 (856 pools / 2,841 variants / 165 relation rows), `presumed-things-door.mjs --check` fresh 8 (carried) stale 0 banked 2,375, textOf's pin 109 green; poolDominance red on its three titles as named (resource_scarcity 0.374 > 0.336; succession_crisis 0.815 > 0.640, the history seat's STOP, carried red, no hand edit), presumedThings' "every source literal" red on the carried 8. The step-3 message sent.
+
+THE LINE'S MERGE, MEASURED, NOT LANDED (976db5b19 read back; this seat's merge of it at 38c93321d, then `git merge --abort`): the conflicts are EXACTLY the chair's fifteen (wiring-census.json, .prose-byte-baseline.json, pool-dominance.register.json, presumedThings.register.json, presumedThings.widened.register.json, the eight edge-bundle and meta files); registeredWords.js, vocabularyPageFindings.js and the door script merged clean. THE PRESUMED-THINGS REGISTERS: the LINE's side is the only side (the lane's side under the line's rule book: fresh 5,516, banked 0, the row format changed); from the line's side `--check` reads fresh 50 · stale 54 · first-register stale 26 · banked 4,720 · strips 0/0/107. The 50 fresh are this lane's (and the history seat's) reworded lines that the line's widened rule book now reads as things (e.g. "house: mine" in the Mine's own texts, "house: stone quarry" / "resource: stone_quarry" in the quarry's, "house: druid" / "streets" in the druid council's, "house: alehouse" / "house: baker" in the brewers', "quarters" / "temple" in historyData's districts, "clergy" in the funeral service, "granary" in defense.generated.js): the list, by file and text, is `probes/W2-FIX-DATA-9/line-merge-presumed-fresh-50.txt` (31 institutionDescVariants.js, 10 historyData.js, 7 institutionalCatalog.js, 1 institutionServices.js, 1 defense.generated.js). Each is NEW (not at the widening's base), so `--bank` refuses it and that refusal is final: each is CURED or DECLARED (a house's own description naming the house is true wherever it prints: declare the atom the draw door reads, e.g. on the ledger row's `needs`), then `--shrink` for the 80 stale.
+
+LEFT, in order: 1. the line's merge again (plain; the same fifteen): wiring-census.json and .prose-byte-baseline.json and pool-dominance.register.json each from ONE side and re-derived by its script (NOTE: `node scripts/census/pool-dominance.mjs --help` RUNS the instrument; read its header for its modes); the presumed-things registers from the line's side, the 50 cured or declared, `--shrink`; the bundles LAST by `npm run build:edge-shared`, alone. 2. Every check of section 2m (page census `--workers=2` on the 720, fact layers, observed shapes, writer reach, the tuning inventory, the lighting census after this lane's new test titles), each red on this lane's lines cured or declared through its door. 3. The census (CENSUS-2, `--files` the sixteen data files and assembleSettlement.js: `probes/W2-FIX-DATA-9/lanefiles.txt`) at the tip; the base run, at 96d698de7, in section 4. 4. The whole suite in six shards; the draft shift record; the final statement in the brief's form.
+
+## 4. The census at the lane base (EXECUTED)
+
+CENSUS-2 `census2.sh <worktree at 96d698de7> <out> 3 --files <lanefiles.txt>`: exit 0, births+render 1,032 s, count+trace 146 s, counts.txt 963 rows. Its FILE rows for the lane's files, as printed (a hit is a candidate, not a fault until read; this instrument sees the dossier views only, not the PDF, the Foundry journal, the exports or the Tonight sheet, and it cannot see two lines disagreeing):
+
+```
+FILE src/data/historyData.js [fd]: a 103 towns/19 lines/3 fns · c 47 towns/8 lines/3 fns
+FILE src/data/cultureProfiles.js [fd]: c 88 towns/59 lines/2 fns · a 52 towns/27 lines/2 fns
+FILE src/data/institutionalCatalog.js [fd]: a 132 towns/11 lines/3 fns · b 4 towns/1 lines/1 fns · c 1 towns/1 lines/1 fns
+FILE src/data/institutionServices.js [fd]: a 92 towns/7 lines/7 fns · b 24 towns/6 lines/6 fns
+FILE src/data/institutionDescColour.js [fd]: a 69 towns/11 lines/1 fns · c 1 towns/1 lines/1 fns · b 9 towns/7 lines/1 fns
+FILE src/data/historyDescVariants.js [fd]: a 53 towns/7 lines/4 fns · c 7 towns/5 lines/3 fns
+FILE src/data/stressTypes.js [none]: a 50 towns/4 lines/3 fns
+FILE src/data/institutionDescVariants.js [fd]: a 38 towns/10 lines/1 fns · b 5 towns/1 lines/1 fns
+FILE src/data/arrivalProse.js [fd]: a 19 towns/19 lines/4 fns · c 1 towns/1 lines/1 fns · b 1 towns/1 lines/1 fns
+FILE src/data/finishedGoodsCategory.js [none]: a 9 towns/9 lines/1 fns · d 1 towns/1 lines/1 fns · b 6 towns/6 lines/1 fns
+FILE src/data/inlandDescriptions.js [fd]: b 2 towns/1 lines/1 fns
+FILE src/data/geographyData.js [none]: b 1 towns/1 lines/1 fns
+FILE src/data/economicData.js [none]: d 1 towns/1 lines/1 fns
+FILE src/data/supplyChainData.js [none]: b 1 towns/1 lines/1 fns
+PATTERN a: towns 714 · distinct lines 602 (NEW 0) · writers 103 (NEW 0) · untraced lines 41
+PATTERN b: towns 70 · distinct lines 100 (NEW 0) · writers 38 (NEW 0) · untraced lines 14
+PATTERN c: towns 281 · distinct lines 296 (NEW 0) · writers 41 (NEW 0) · untraced lines 8
+PATTERN d: towns 381 · distinct lines 33 (NEW 0) · writers 8 (NEW 0) · untraced lines 11
+PATTERN e: towns 83 · distinct lines 24 (NEW 0) · writers 6 (NEW 0) · untraced lines 3
+PATTERN f: towns 720 · distinct lines 366 (NEW 0) · writers 10 (NEW 0) · untraced lines 159
+PATTERN g: towns 720 · distinct lines 14 (NEW 0) · writers 3 (NEW 0) · untraced lines 8
+```
+
+The tip's run is the successor's, after the line's merge (section 3).
 
 ## 9. The rulings this seat works to, copied
 
