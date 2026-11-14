@@ -179,7 +179,7 @@
    "reader": "SECOND",
    "master": 10,
    "integration": 11,
-   "banked": 11
+   "banked": 0
   },
   "NEW2": {
    "label": "NEW-2 magic income, and no practitioner on the rolls",

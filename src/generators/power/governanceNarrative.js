@@ -230,6 +230,10 @@ const rewriteFactionPhrasing = (
     );
 };
 
+/** The readiness labels (defenseProfile.readiness.label) the Defense verdict prints as defended, and as exposed. */
+const DEFENDED_READINESS_LABELS = new Set(['Defensible', 'Well-Defended', 'Fortress']);
+const EXPOSED_READINESS_LABELS = new Set(['Undefended', 'Lightly Defended', 'Vulnerable']);
+
 /**
  * Synthesis flags are authored conclusions and therefore outrank numerical
  * indicators. Only when no synthesis applies do the ordinary institutional
@@ -239,7 +243,16 @@ const deriveBaselineStability = ({
   stressFlags,
   institutionFlags,
   neighbourRelationship,
+  defenseLabel = null,
 }) => {
+  // POWERS-14 (the chair's ruling of 2026-11-14, ONE LADDER FOR ONE WORD; the page census's NEW1): the defence word
+  // reads the record's own readiness label (defenseProfile.readiness.label, the Defense verdict the Overview prints),
+  // handed in by the power step's replay after the defence profile (rulingStructure.js `projection.defenseLabel`).
+  // "underdefended" never stands over a Defensible, Well-Defended or Fortress label; "strong military presence" never
+  // over an Undefended, Lightly Defended or Vulnerable one. Absent (the first pass, which the replay overwrites), the
+  // label refuses neither word.
+  const defended = DEFENDED_READINESS_LABELS.has(String(defenseLabel));
+  const exposed = EXPOSED_READINESS_LABELS.has(String(defenseLabel));
   if (stressFlags.stateCrime) return 'Enforced Order (authoritarian)';
   if (stressFlags.crimeIsGovt) return 'Unstable — criminal governance';
   if (stressFlags.crusaderSynthesis) return 'Rigid (militant theocracy)';
@@ -263,11 +276,12 @@ const deriveBaselineStability = ({
   }
   if (
     institutionFlags.economyOutput > 68 &&
-    institutionFlags.militaryEffective < 30
+    institutionFlags.militaryEffective < 30 &&
+    !defended
   ) {
     return 'Vulnerable (prosperous but underdefended)';
   }
-  if (institutionFlags.militaryEffective > 68) {
+  if (institutionFlags.militaryEffective > 68 && !exposed) {
     return 'Ordered (strong military presence)';
   }
   return 'Stable';
@@ -654,6 +668,7 @@ export const buildGovernanceLabels = ({
   stressEntries = [],
   fallbackStressType,
   worldLaw = null, // absent, it resolves from config exactly as generatePowerStructure builds its own
+  defenseLabel = null, // POWERS-14: the record's readiness label, on the power step's replay after the defence profile
 }) => {
   const magicWorks = resolveGenerationWorldLaw(worldLaw, config).magicFunctions();
   const hasStress = stressType => stressTypes.includes(stressType);
@@ -664,6 +679,7 @@ export const buildGovernanceLabels = ({
     stressFlags,
     institutionFlags,
     neighbourRelationship,
+    defenseLabel,
   });
   const stressStability = applyStressStability(
     baselineStability,
