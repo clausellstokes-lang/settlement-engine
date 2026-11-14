@@ -36,7 +36,7 @@ import { institutionHasAnyTag } from '../../lib/entities.js';
 import { institutionDisplayName } from './institutionDisplayName.js';
 import { resourceDisplayName } from './resourceDisplayName.js';
 import { compareCodepoint } from '../deterministicSort.js';
-import { exportsAsPrinted, importsAsPrinted, tradeMarkOf } from './tradeListDisplay.js';
+import { exportsAsPrinted, houseMakesGoodNamed, importsAsPrinted, tradeMarkOf } from './tradeListDisplay.js';
 import { chainModelsResource, chainWorksResource } from '../facts/chainWorking.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { familyOfInstitution, institutionalCatalog } from '../../data/institutionalCatalog.js';
@@ -433,20 +433,23 @@ export function exploitationForDesk(s) {
  * @returns {ExploitationCard | null}
  */
 function fullRowAsHeld(s, card) {
-  const house = arr(card.processingInstitutions).map(str).filter(Boolean)
+  const houses = arr(card.processingInstitutions).map(str).filter(Boolean)
     .map((n) => houseOfKindOn(s, n) ?? tradeFinisherOn(s, n))
     // a road to a neighbour's house finishes nothing here; a catalogue count band ("Blacksmiths (3-10)") is many houses,
     // and the sentence's slot names one
-    .find((inst) => inst !== undefined && !/^access to/i.test(str(inst?.name)) && !/\(\d/.test(str(inst?.name)));
-  if (!house) return null;
+    .filter((inst) => inst !== undefined && !/^access to/i.test(str(inst?.name)) && !/\(\d/.test(str(inst?.name)));
+  if (!houses.length) return null;
   const exported = exportsAsPrinted(/** @type {Parameters<typeof exportsAsPrinted>[0]} */ (s)).map((x) => tradeMarkOf(x).label);
-  /** @type {string | undefined} */ let good;
+  // W2-C-LEAVES-12, the chair's ruling (2b): THE HOUSE THAT FINISHES A GOOD MAKES THAT GOOD. The house and the good are
+  // named together only where the good's own maker row holds that house (`houseMakesGoodNamed`): a mill makes flour, not
+  // beer; a fish market sells fish, it renders no oil. The first such pair in the chain's order, else no row.
   for (const product of arr(card.finalProducts).map(str).filter(Boolean)) {
-    good = exported.find((x) => norm(x).includes(norm(product)));
-    if (good) break;
+    const good = exported.find((x) => norm(x).includes(norm(product)));
+    const house = good && houses.find((inst) => houseMakesGoodNamed(good, str(inst?.name), /** @type {Parameters<typeof houseMakesGoodNamed>[2]} */ (s)));
+    // the export as the page names it, in running prose: its bracketed note struck, a common noun ("Beer (barrel)" -> "beer")
+    if (good && house) return { ...card, processingInstitutions: [proseHouseName(house)], finalProducts: [good.replace(/\s*\([^)]*\)/g, '').trim().toLowerCase()] };
   }
-  // the export as the page names it, in running prose: its bracketed note struck, a common noun ("Beer (barrel)" -> "beer")
-  return good ? { ...card, processingInstitutions: [proseHouseName(house)], finalProducts: [good.replace(/\s*\([^)]*\)/g, '').trim().toLowerCase()] } : null;
+  return null;
 }
 
 /** A house as running prose names it: its display label, any bracketed count or note struck ("Bakers (5-15)" -> "Bakers"). @param {{ name?: unknown } | null | undefined} inst */

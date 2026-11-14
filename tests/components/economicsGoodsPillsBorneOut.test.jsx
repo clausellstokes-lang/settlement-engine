@@ -62,7 +62,10 @@ describe('the goods pills print only where the record bears them out (item 2)', 
     const town = birthApp('rww-village-famine-1');
     expect(town.economicState.localProduction, 'anchored: the record lists them').toEqual(expect.arrayContaining(['Guild-manufactured goods', 'Barrels and containers', 'Fine wool cloth']));
     const local = pillsUnder(town, 'Produced locally');
-    expect(local, 'the list prints').toContain('Preserved foods');
+    // the list prints (re-keyed by W2-C-LEAVES-12: its anchor was "Preserved foods", which a Shepherd and Common grazing land
+    // made by the default read; ruling (3), a good no house of its maker row makes is not printed, takes it off)
+    expect(local, 'the list prints').toContain('wool');
+    expect(local, 'preserved foods by a shepherd alone (ruling 3)').not.toContain('Preserved foods');
     for (const good of ['Guild-manufactured goods', 'Barrels and containers', 'Fine wool cloth']) expect(local, good).not.toContain(good); // anchored: the line above
   }, 60000);
 
