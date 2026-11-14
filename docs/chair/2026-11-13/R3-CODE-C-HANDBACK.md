@@ -1055,3 +1055,109 @@ and gov15sent.mjs (the account's sentences, base against tip), samerec.mjs (reco
 (lanes that changed a file since their merge base with integration; a lane already in lane/join-2026-11-14 counted
 as joined). Local config and refs compared after every push: unchanged but for the local branch c9 and npm ci's
 core.hooksPath.
+
+## THE TENTH SEAT (R3-CODE-C-10, 2026-11-14; brief docs/chair/2026-11-14/briefs/BRIEF-R3-CODE-C-10.md on the chair's lane, and the chair's message of 11:36 UTC (item (d)); EXECUTED unless marked)
+
+**The tip.** On origin it read 28ac3b08b, as the brief wrote. Scratch worktree /tmp/claude-0/wt10 (local branch c10);
+/tmp/claude-0/wtbase (detached, moved to each pushed tip for red-first and page diffs); /tmp/claude-0/wtstmt at b6bd3a3c1.
+Births: the ninth seat's 1,722 (seeds-all.txt, rebuilt from REVIEW-R3-STAGES + REVIEW-R3-CODE-C seeds-extra).
+
+### The chair's rulings this seat worked to (copied from the brief and the message; vetoable by the owner)
+The law of all four: A LINE THAT NAMES WHERE THE FOOD COMES FROM READS THE FOOD RECORD.
+(a) a culture sentence that claims herding is drawn only where the food record holds a herd ("herding" a livestock word).
+(b) a foodways line names no catch from a water the record calls depleted, cured where the line is composed (the reader);
+    whether a fished-out water still feeds the town is the food home's arithmetic, not moved: counted for the chair.
+(c) crisisSummaryForSurface takes an OPTIONAL argument of the record's facts and prints the no-grain twin on the Tonight
+    and Overview official lines where they hold no grain; with none handed it prints as today (proved).
+(d) (11:36 UTC) A LINE THAT NAMES A HOUSE THE TOWN LACKS READS THE ROSTER BY WHAT THE HOUSE IS (its chain's tag or its
+    kind), NEVER BY ONE SPELLING OF ITS NAME: the resource gaps' missing list; the count taken again where the data
+    lane's tag meets it.
+
+### Rows (full counts, guards, plants and the towns read in each commit's body)
+1. **(a), 63098d1e8.** Cause: domain/foodways.js :: SOURCE_WORDS.livestock read "herd(s)" but not "herding". Cure: it
+   does. Counts (1,722): herding claimed with no herd 124 -> 0 on every copy (printed, foodRecord.foodwaysLine,
+   culturalIdentity.foodways); where a famine failed the herds the reader strips it too (23 -> 21 kept with a herd).
+   Declared move: culturalIdentity.foodways 126, foodRecord.foodwaysLine 124, nothing else (720: 49/48).
+2. **(b), 28e468f1e.** Cause: foodwaysLineOf read the famine and nothing of the water. Cure: where every chain row of
+   economicState.activeChains working a fish water (fishing_grounds, river_fish) calls it depleted, fedLineOf stops
+   "fish" as it stops a failed source. **JUDGMENT for the veto:** the page's own fact is
+   resourceAnalysis.resourceConditions, but the Economy tab (EconomicsTab.jsx:306) and the identity record at assembly
+   (assembleSettlement.js:173), both held by other lanes, hand the reader only the economy; read there, the screen and
+   the PDF would disagree in 98 towns. The chains reach every caller (all surfaces agree) and miss 2 of the 98. Counts:
+   printed 98 -> 2, culturalIdentity.foodways 98 -> 2. **FOR THE CHAIR: in all 98 the food record still counts the catch**
+   (foodSources holds "fish" by foodLand.js :: fishRowOnWater). Declared move: culturalIdentity.foodways 96 only (720:
+   44). The ninth seat's guard re-keyed to the same law, not loosened (its "still fed" excludes a fished-out water; its
+   untouched town r2r-village-35, now in (b)'s arm, gives way to r2r-village-2).
+3. **(c), cc9e23bdc.** NO_GRAIN_TWINS in crisisSummaryVantage.js; facts read by atomHolds('grain'). Counts (218 famine
+   towns): handed the facts, Tonight's harvest line in towns growing no grain 55 -> 0, the Overview's 52 -> 0.
+   Byte-identity: 5,752 no-facts calls against 28e468f1e, 0 differ; twelve famine pages identical (but a render-timing
+   flake of the Patron deity upsell panel, shown flaking both ways). No record moves.
+4. **(d), 58242f2f5.** evaluateInstitutionChain's partial arm reads the roster by kind (houseHead). Counts: partial-gap
+   houses named beside a house of their kind 251 -> 0 (Carpenters' guild/Carpenters, Sawmill/Sawmill (commercial),
+   Weavers' guild/Weavers, Dyers' guild/Dyer, Tannery/Tanners, Apothecary, Blacksmiths' guild, Alchemist shop); the
+   commercial sawmill's partial "Sawmill" 10 -> 0 (the unexploited arm still lists it in 87, printing no house).
+   Declared move: resourceAnalysis.gaps 158, priorityNotes 2 (720: 74).
+Guard for all four: tests/domain/r3c10FoodLinesTrue.test.js (a new file), each arm red at its parent, each shown able to
+red by an uncommitted plant.
+
+### EVERY NEW OR CHANGED LINE (the owner's veto list; quoted in full with the towns in each commit)
+No new words. (a), (b): the foodways line (Economy tab, PDF, Foundry) now prints the composer's no-source sentence "Meals
+follow the season and what the household has put by." (57 + 40 towns), the composer's own sentence on what still feeds
+the town (69 + 25), or the culture's claimless sentence alone (31; e.g. Becanatl, 216,641: "Intensive plots, terraces,
+raised fields, and tribute redistribution support dense populations.", printed beside the catch before: **the next
+reader should read that culture sentence beside a record with no grain source**). (c): the two twins, printing nowhere
+until a caller hands the facts. (d): the Resources gap line names fewer houses ("Work on the wool here stops half-way: no
+dyers' guild or fulling mill finishes it.") or is not written (9 towns).
+
+### THE LANE'S ADDENDUM TO ITS STATEMENT (b6bd3a3c1..58242f2f5 -- src/, for the reader who follows)
+| commit | seat | row | file |
+|---|---|---|---|
+| be7f5a208 | 8 | L01 "older than anyone living" at ninety and over | domain/display/heraldCausalGrammar.js |
+| 1b3e0fdfd | 8 | L05 "Complete production chain in place" only where every house stands, no failed source | generators/resourceGenerator.js |
+| 77f0e6792 | 8 | L14 the noble subordinate line not drawn of the creditor power | generators/factionDynamics.js |
+| 52d440373 | 9 | n80 the foodways line names no failed source | domain/foodways.js |
+| f03732b9e | 9 | n240 the faith's "no say in the hall" not drawn beside its voice | generators/factionDynamics.js |
+| 9fb62639d | 9 | beer listed only beside a brewer | generators/resourceGenerator.js |
+| 1db43b7eb | 9 | n15 the hunted underworld not counted estranged | domain/display/governanceAccount.js |
+| 63098d1e8 | 10 | (a) herding | domain/foodways.js |
+| 28e468f1e | 10 | (b) the fished-out water | domain/foodways.js |
+| cc9e23bdc | 10 | (c) the famine line's half | domain/crisis/crisisSummaryVantage.js |
+| 58242f2f5 | 10 | (d) the house by what it is | generators/resourceGenerator.js |
+**Declared moves of the eighth, ninth and tenth seats together, by family, on the census's 720** (samerec, b6bd3a3c1 ->
+58242f2f5): 420 births. resourceAnalysis.exports 308 (L05, beer); culturalIdentity.foodways 103 (n80, (a), (b));
+powerStructure.factionRelationships 80 (L14, n240); resourceAnalysis.gaps 74 and priorityNotes 1 ((d));
+economicState.foodSecurity.foodRecord.foodwaysLine 48 ((a)). Nothing else. (L01, n15, (c): display only.)
+**Reds at the tip** in the 40 test files that name the six files those seats touched (625 tests): 2, both goldens a
+declared move shifts, NAMED, NOT WRITTEN: tests/generators/powerEconomyFreshness.test.js A4, pin census 18 at b6bd3a3c1
+-> 37 here (eighth 31, ninth 35, (a)/(b)/(d) the rest); tests/domain/worldFactRederive.test.js A7, 3 -> 6 (eighth 4,
+ninth 5; 6 at 28e468f1e and unmoved by (c), (d)). Mine to cure: none left (the ninth seat's r3c9 guard, red under (b),
+was re-keyed in 28e468f1e).
+
+### FOR THE JOIN (gathered: the eighth seat's 1-7, the ninth seat's 1-7, and this seat's)
+- Lighting census re-take for the new guard files (eighth 1; ninth 6; this seat's r3c10FoodLinesTrue.test.js).
+- The signed golden regens, the merge seat's act: powerEconomyFreshness A4 37, worldFactRederive A7 6, espionageDormancy
+  Fence's driven hash, generatorGoldenMaster 412, generationForkCensus's control row (ninth 3); the dossier prose
+  manifest re-record (eighth 2).
+- The corpus lane: DS-GEN-16 ANCHORED-OLD keyed from sixty years (eighth 3). cultureProfiles.js:419 "street kitchens"
+  `needs: ['market']`, 63 towns (eighth 6, held by w2-fix-data).
+- foodGenerator.js :: generateFoodSecurity composeFoodwaysLine's sources without the failed one (ninth 1); with (b), the
+  raw foodRecord.foodwaysLine still names the catch in 104 towns beside a fished-out water: the same call with the
+  depleted fish water left out of `sources`, or foodLand.js :: fishRowOnWater not counting a depleted water (the food
+  home's arithmetic: it still counts the catch in all 98; THE CHAIR'S to place).
+- (b)'s 2 towns: EconomicsTab.jsx:306 and assembleSettlement.js:173 hand the reader `resourceAnalysis` with the economy;
+  the reader then reads resourceAnalysis.resourceConditions (r2s-plague_onset-thorp-2, rr3-thorp-monster_pressure-rand-2).
+- (c)'s other half, the r2-code-b lane's: tonightSheet.js:341 `crisisSummaryForSurface(lead, place, 'tonight',
+  factsOf(settlement))` and viewModel.js:338 the same for 'overview' (ninth 7). NAMED, not ruled: the famine trade
+  vantages "whoever holds grain decides who eats" / "whoever sells grain names the price" presume grain the same way.
+- (d): take the count again where the data lane's tag (fe2e15e34: 'Sawmill (commercial)' carries TAG.TIMBER) meets it;
+  the unexploited arm's list is every processor, read by no roster (prints no house; the JSON export carries it).
+- n299's dependent row beside a conflict between the same pair (ninth 2); the beer claims are cured (eighth 5, ninth 4).
+
+### WHAT IS LEFT
+Nothing of this brief. The ONE fresh reader reads the lane to 58242f2f5 (plus this hand-back's commit).
+**How the instruments are re-made (outside the tree, /tmp/claude-0/tools):** births.mjs (REVIEW-R3-CODE-C's) `TREE=<wt>
+OUT=<f.gz> SEEDS=seeds-all.txt node births.mjs`; fw10.mjs (herding and fished-out counts, every copy); fam10.mjs (the
+famine official lines with and without facts); same-c.mjs (no-facts byte-identity against a base module); saw10.mjs
+(the kind class); samerec.mjs / samerec2.mjs (DEPTH=n: families moved); holders.sh; render/render.sh (REVIEW-R3-STAGES)
+with ctx.mjs (a line and its neighbours). Local config and refs compared after every push: unchanged but for the local
+branch c10 and npm ci's core.hooksPath.
