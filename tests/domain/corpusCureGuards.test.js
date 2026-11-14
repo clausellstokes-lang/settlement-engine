@@ -122,6 +122,9 @@ const GUARDS = [
   { seed: 'w5-city-occupied-104', pool: 'DS-DEF-2::Beasts & Monsters: settled, defenses beyond the need', vid: 5, why: 'an occupation: "works manned in earnest ... being held against something real" of a city an army holds (W2-WRITE-11)' },
   { seed: 'w5-town-famine-6', pool: 'DS-DEF-1::readiness CRITICAL', vid: 3, why: 'walls: "walk into the centre without being stopped, challenged or counted" of a town behind Town walls and a Citadel (the chair\'s row of 10:40, W2-WRITE-11)' },
   { seed: 'w5-hamlet-famine-5', pool: 'DS-DEF-1::readiness CRITICAL', vid: 3, why: 'walls: the same line in a hamlet behind its palisade or earthworks (W2-WRITE-11)' },
+  { seed: 'w5-city-occupied-1', pool: 'DS-DEF-11::WALLED-STRAINED', vid: 2, why: 'an occupation: "fewer people turn out each season to man the city walls and gates, and the city is slow to notice" of walls the occupiers hold (HANDBACK-6, W2-WRITE-11, Markaztappa)' },
+  { seed: 'w5-city-occupied-1', pool: 'DS-DEF-11::WALLED-STRAINED', vid: 1, why: 'an occupation: "accounts keep its walls in repair but fall short on the watch\'s wages" of a town whose revenue the occupiers take (v2\'s sibling, W2-WRITE-11)' },
+  { seed: 'w5-hamlet-occupied-104', pool: 'DS-DEF-11::WALLED-STRAINED', vid: 5, why: 'an occupation: "keeps its works in repair and pays nobody to stand guard there" beside the occupiers\' troops (v2\'s sibling, W2-WRITE-11)' },
 ];
 
 /** @param {string} seed */

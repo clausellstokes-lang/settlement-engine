@@ -11561,7 +11561,7 @@
       "lineDeclares": {
         "crisis: under_siege": 2,
         "guardPresence": 2,
-        "no crisis: occupied": 2,
+        "no crisis: occupied": 5,
         "no crisis: under_siege": 5,
         "no guardPresence": 2,
         "no soldiers": 1,

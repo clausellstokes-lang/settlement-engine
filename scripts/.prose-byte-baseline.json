@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 262724,
-      "gzip": 35201,
+      "raw": 262797,
+      "gzip": 35196,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -627,6 +627,14 @@
       "toRaw": 262760,
       "gzipAfter": 35307,
       "reason": "+105 B raw over the committed 262655 (gzip level 9: 35299 -> 35307): DS-DEF-5 NO organized force v1-v3: + no crisis: occupied"
+    },
+    {
+      "car": "W2-WRITE-11 DEF-11",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 262760,
+      "toRaw": 262797,
+      "gzipAfter": 35196,
+      "reason": "+73 B raw over the committed 262724 (gzip level 9: 35201 -> 35196): DS-DEF-11 WALLED-STRAINED v1 v2 v5 + no crisis: occupied, v2 slot out"
     }
   ],
   "ceilingTransfersNewLeaves": [

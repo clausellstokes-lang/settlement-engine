@@ -9572,7 +9572,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "angle": "ledger",
           "marks": [
             "watch",
-            "no crisis: under_siege"
+            "no crisis: under_siege",
+            "no crisis: occupied"
           ],
           "text": "{settlement}'s accounts keep its {defwork} in repair but fall short on the watch's wages, so the defences are sound and too few people man them.",
           "slots": [
@@ -9585,12 +9586,12 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "angle": "unfolding",
           "marks": [
             "guardPresence",
-            "no crisis: under_siege"
+            "no crisis: under_siege",
+            "no crisis: occupied"
           ],
-          "text": "{settlement}'s defences are sound, but fewer people turn out each season to man the {defwork}, and the town is slow to notice.",
+          "text": "{settlement}'s defences are sound, but fewer people turn out each season to man them, and the town is slow to notice.",
           "slots": [
-            "settlement",
-            "defwork"
+            "settlement"
           ],
           "vid": 2
         },
@@ -9621,7 +9622,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "angle": "ledger",
           "marks": [
             "no guardPresence",
-            "no crisis: under_siege"
+            "no crisis: under_siege",
+            "no crisis: occupied"
           ],
           "text": "{settlement} keeps its {defwork} in repair and pays nobody to stand guard there.",
           "slots": [
