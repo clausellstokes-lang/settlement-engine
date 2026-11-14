@@ -1,0 +1,156 @@
+{"id":"HEADER","town":"r2s-famine-village-1","sev":"MED","kind":"RECORD","why":"Military/Guard is the Dominant power, yet DEFENCE lists no garrison and no watch, only a citizen militia","other":""}
+{"id":"HEADER","town":"r2s-famine-village-1","sev":"LOW","kind":"RECORD","why":"made here lists iron and metalwork, but HOUSES has no smith or forge","other":""}
+{"id":"11609","town":"r2s-famine-village-1","sev":"LOW","kind":"BROKEN","why":"garbled clause 'one of the house the crisis hits' does not parse","other":""}
+{"id":"09248","town":"r2s-famine-village-1","sev":"MED","kind":"PAIR","why":"food carts come in most days, but trade access is river only and 00598 says boats bring the food","other":"00598"}
+{"id":"13630","town":"r2s-famine-village-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"10307","town":"r2s-famine-village-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"15130","town":"r2s-famine-village-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name, twice","other":""}
+{"id":"06974","town":"r2s-famine-village-1","sev":"LOW","kind":"LACKS","why":"'the streets stay badly guarded' in a village of 90 with no watch or garrison","other":""}
+{"id":"20697","town":"r2s-famine-village-1","sev":"MED","kind":"LACKS","why":"names guards on rations; DEFENCE lists garrison none and watch none, only citizen militia","other":""}
+{"id":"01514","town":"r2s-famine-village-1","sev":"MED","kind":"STATE","why":"says defences are sound; STATE gives defence Vulnerable","other":""}
+{"id":"15395","town":"r2s-famine-village-2","sev":"MED","kind":"STATE","why":"'outsiders see a busy market' under famine, prosperity Struggling, viable False; tag also reaches plague/occupation","other":""}
+{"id":"HEADER","town":"r2s-famine-village-2","sev":"MED","kind":"RECORD","why":"exports Milled flour while in famine with grain harvest gone, 30% deficit and grain imported","other":""}
+{"id":"16360","town":"r2r-village-24","sev":"MED","kind":"LACKS","why":"lists reeds and thatch, waterfowl as trade goods; TRADE exports only Sacred wood and Ritual components","other":""}
+{"id":"HEADER","town":"r2s-famine-village-3","sev":"MED","kind":"RECORD","why":"Military/Guard is a Strong power, yet DEFENCE lists garrison none and watch none, only citizen militia","other":""}
+{"id":"22014","town":"r2s-famine-village-3","sev":"MED","kind":"STATE","why":"says the shortfall is met; famine deficit is 58% with imports covering only 26 of 514","other":""}
+{"id":"20728","town":"r2s-famine-village-3","sev":"LOW","kind":"LACKS","why":"'the hall' presumes a council hall; HOUSES has only Informal elder consensus, and 14637 says no reeve, no steward","other":""}
+{"id":"15126","town":"r2s-famine-village-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name, twice","other":""}
+{"id":"23220","town":"r2s-famine-village-3","sev":"HIGH","kind":"STATE","why":"says the village has more than enough for a hard year; CRISIS famine, deficit 58%, viable False","other":""}
+{"id":"17182","town":"r2s-famine-village-3","sev":"MED","kind":"LACKS","why":"famine caused by export decisions; TRADE exports none (also 'Military/Guard' as a name)","other":""}
+{"id":"HEADER","town":"r2s-occupied-village-0","sev":"MED","kind":"RECORD","why":"founders are settlers seeking new opportunities, but the reason says it was founded by religious hermits seeking isolation","other":""}
+{"id":"22405","town":"r2s-occupied-village-0","sev":"MED","kind":"STATE","why":"says timber is left unworked; TRADE made here lists timber","other":""}
+{"id":"01510","town":"r2s-occupied-village-0","sev":"LOW","kind":"LACKS","why":"says the arms in the village are the occupiers'; DEFENCE lists no force of any kind, garrison none","other":""}
+{"id":"07323","town":"r2s-occupied-village-3","sev":"LOW","kind":"LACKS","why":"'every other doorway sells a remedy' in a village of 134 with one apothecary","other":""}
+{"id":"15105","town":"r2s-occupied-village-3","sev":"LOW","kind":"PAIR","why":"'nothing magical here', yet made here lists Potions and elixirs","other":"15820"}
+{"id":"14249","town":"r2s-occupied-village-3","sev":"LOW","kind":"BROKEN","why":"'mineral hot springs' listed as a good needed and not brought in","other":""}
+{"id":"01603","town":"r2s-occupied-village-3","sev":"MED","kind":"STATE","why":"says its food comes from hunting and little else; HOUSES has Farmland, Common grazing land and a Mill, grown 292 of 322","other":""}
+{"id":"18246","town":"r2s-occupied-village-1","sev":"MED","kind":"STATE","why":"says the country produces no livestock; HOUSES has Common grazing land, a Dairy farmer and a Pack animal trader","other":""}
+{"id":"HEADER","town":"r2s-occupied-village-1","sev":"LOW","kind":"RECORD","why":"made here lists Hospitality for travellers but HOUSES has no inn, and trade access is isolated","other":""}
+{"id":"HEADER","town":"r2s-occupied-village-2","sev":"LOW","kind":"RECORD","why":"made here lists 'trade access' as a product","other":""}
+{"id":"06303","town":"r2s-occupied-village-2","sev":"MED","kind":"STATE","why":"says taxes are bargained, not ordered; CRISIS is occupation with vassal extraction, every export taxed by occupation","other":""}
+{"id":"15723","town":"r2s-plague_onset-village-1","sev":"MED","kind":"STATE","why":"pilgrims queue at holy places under plague; tag is all P towns, and HOUSES has only a parish church","other":""}
+{"id":"03161","town":"r2s-plague_onset-village-1","sev":"MED","kind":"STATE","why":"says a visitor would not guess the trouble; safety Dangerous — Plague Unrest","other":""}
+{"id":"21761","town":"r2s-plague_onset-village-1","sev":"MED","kind":"LACKS","why":"names a river the sickness travelled; terrain Plains, trade access crossroads, no river","other":""}
+{"id":"HEADER","town":"r2s-plague_onset-village-0","sev":"MED","kind":"RECORD","why":"founders are tradespeople from a larger settlement, but the reason says a disbanded military unit founded it","other":""}
+{"id":"16427","town":"r2s-plague_onset-village-0","sev":"LOW","kind":"LACKS","why":"'take the hall from Elder Council'; HOUSES has no council hall","other":""}
+{"id":"01520","town":"r2s-plague_onset-village-0","sev":"MED","kind":"STATE","why":"says defences are sound; STATE gives defence Vulnerable","other":""}
+{"id":"16786","town":"r2s-plague_onset-village-2","sev":"MED","kind":"PAIR","why":"carts full of herbs and spices; trade access isolated, imports none, and 14241 says spices are not brought in","other":"14241"}
+{"id":"12875","town":"r2s-plague_onset-village-2","sev":"LOW","kind":"PAIR","why":"says no magical compounds, yet made here lists Potions and elixirs","other":""}
+{"id":"14611","town":"r2s-plague_onset-village-2","sev":"LOW","kind":"STATE","why":"says no livestock reaches the tannery; HOUSES has Common grazing land","other":""}
+{"id":"16428","town":"r2s-plague_onset-village-2","sev":"LOW","kind":"LACKS","why":"'take the hall from Elected Reeve'; HOUSES has no hall, only a village reeve","other":""}
+{"id":"06972","town":"r2s-plague_onset-village-2","sev":"LOW","kind":"LACKS","why":"'streets stay badly guarded' in a village of 141 with no watch","other":""}
+{"id":"HEADER","town":"r2s-plague_onset-village-2","sev":"LOW","kind":"RECORD","why":"made here lists Hospitality for travellers; HOUSES has no inn and trade access is isolated","other":""}
+{"id":"HEADER","town":"r2r-village-50","sev":"MED","kind":"RECORD","why":"Military/Guard is a Significant power, yet DEFENCE lists garrison none and watch none, only citizen militia","other":""}
+{"id":"HEADER","town":"r2r-village-50","sev":"LOW","kind":"RECORD","why":"exports and makes barrels and dyed cloth, but HOUSES has no cooper and no dyer","other":""}
+{"id":"02499","town":"r2r-village-50","sev":"LOW","kind":"LACKS","why":"a cordon around 'one quarter' of a village of 386 that has no quarters","other":""}
+{"id":"01600","town":"r2r-village-50","sev":"MED","kind":"STATE","why":"says food comes from its herds and little else; HOUSES has Farmland and a Mill, grown 493 of 772","other":""}
+{"id":"HEADER","town":"r2s-plague_onset-village-3","sev":"LOW","kind":"RECORD","why":"made here lists iron and metalwork but HOUSES has no smith","other":""}
+{"id":"07347","town":"r2s-plague_onset-village-3","sev":"MED","kind":"STATE","why":"says nobody works the iron ore; TRADE made here lists iron and metalwork","other":""}
+{"id":"20729","town":"r2s-plague_onset-village-3","sev":"LOW","kind":"LACKS","why":"'the hall' presumes a council hall; HOUSES has none","other":""}
+{"id":"07095","town":"r2s-plague_onset-village-3","sev":"MED","kind":"PAIR","why":"says Elder Council and Thieves' Guild leave each other alone; 07132 marks them escalating and 20729 says at odds","other":"07132"}
+{"id":"01166","town":"r2s-plague_onset-village-3","sev":"LOW","kind":"BROKEN","why":"sentence ends mid-name 'Clothra Mac'; the rest ('Donald's side…') prints as a separate sentence 06798; same split in 00222, 01395","other":"06798"}
+{"id":"HEADER","town":"r2s-indebted-village-3","sev":"MED","kind":"RECORD","why":"trade access port, founded as a coastal trading port, makes fish, yet HOUSES has no harbour, docks or fisher's landing","other":""}
+{"id":"10071","town":"r2s-indebted-village-3","sev":"LOW","kind":"LACKS","why":"'built around the harbour'; HOUSES has no harbour or docks","other":""}
+{"id":"23184","town":"r2s-indebted-village-3","sev":"LOW","kind":"LACKS","why":"trade by the village's port; HOUSES has no harbour or docks","other":""}
+{"id":"01591","town":"r2s-indebted-village-3","sev":"MED","kind":"STATE","why":"says food comes from fishing and little else; HOUSES has Farmland, grazing and a Mill and no fisher's landing, grown 147 of 150","other":""}
+{"id":"HEADER","town":"r2r-village-5","sev":"MED","kind":"RECORD","why":"exports and makes River craft and Cargo barges, but HOUSES has no boatyard; also no harbour or fisher's landing at a port","other":""}
+{"id":"00651","town":"r2r-village-5","sev":"MED","kind":"LACKS","why":"says two burial grounds, old and new; HOUSES lists one Graveyard","other":""}
+{"id":"01060","town":"r2r-village-5","sev":"LOW","kind":"LACKS","why":"'the hall' presumes a governing hall; HOUSES has none","other":""}
+{"id":"06976","town":"r2r-village-5","sev":"LOW","kind":"LACKS","why":"'streets stay badly guarded' in a village of 117 with no watch","other":""}
+{"id":"HEADER","town":"r2s-infiltrated-village-1","sev":"MED","kind":"RECORD","why":"a village of 117 with one blacksmith and no mine exports iron ore and Advanced weapons and armor","other":""}
+{"id":"HEADER","town":"r2s-slave_revolt-village-1","sev":"MED","kind":"RECORD","why":"founders are tradespeople who left a larger settlement, but the reason says it began as a noble's hunting lodge","other":""}
+{"id":"14260","town":"r2s-slave_revolt-village-1","sev":"LOW","kind":"BROKEN","why":"'mineral hot springs' listed as a good needed and not brought in","other":""}
+{"id":"07368","town":"r2s-slave_revolt-village-1","sev":"MED","kind":"LACKS","why":"says everyone who keeps order went to fight the revolt; DEFENCE lists no force of any kind","other":""}
+{"id":"HEADER","town":"r2r-village-1","sev":"LOW","kind":"RECORD","why":"a Fish market and a fishmonger headman on Plains with no fisher's landing, river or coast","other":""}
+{"id":"11877","town":"r2r-village-1","sev":"LOW","kind":"PAIR","why":"lists Iron Deposits and Marshlands; the resource line 29245 has neither","other":"29245"}
+{"id":"HEADER","town":"r2r-village-25","sev":"MED","kind":"RECORD","why":"a village of 255 with one blacksmith and no mine exports iron ore and Advanced weapons and armor","other":""}
+{"id":"11956","town":"r2r-village-25","sev":"LOW","kind":"STATE","why":"says its extensive grain fields are worked out; food grown 552 against need 510, deficit 0%","other":""}
+{"id":"13248","town":"r2r-village-25","sev":"LOW","kind":"LACKS","why":"'take the hall from Household Council'; HOUSES has no hall","other":""}
+{"id":"11437","town":"r2r-village-25","sev":"MED","kind":"STATE","why":"says baked goods already fall short; grown 552 against need 510, deficit 0%, and TRADE lists no baked goods","other":""}
+{"id":"09786","town":"r2r-village-25","sev":"LOW","kind":"STATE","why":"divine provision 'fills the gap' in grain and bread; there is no gap, grown 552 against need 510","other":""}
+{"id":"HEADER","town":"r2r-village-9","sev":"MED","kind":"RECORD","why":"founders are settlers seeking new opportunities, but the reason says farmland granted to a favoured noble","other":""}
+{"id":"HEADER","town":"r2r-village-9","sev":"LOW","kind":"RECORD","why":"exports coal and baked goods, but HOUSES has no mine and no baker","other":""}
+{"id":"06970","town":"r2r-village-9","sev":"LOW","kind":"LACKS","why":"'streets stay badly guarded' in a village of 95 with no watch","other":""}
+{"id":"HEADER","town":"r2s-infiltrated-village-3","sev":"MED","kind":"RECORD","why":"founded by escaped serfs, but the reason says farmland granted to a favoured noble; also Military/Guard power with no garrison or watch","other":""}
+{"id":"HEADER","town":"r2s-monster_pressure-village-3","sev":"LOW","kind":"RECORD","why":"made here lists Milled lumber and processed textiles, but HOUSES has no sawmill and no weaver","other":""}
+{"id":"00708","town":"r2s-monster_pressure-village-3","sev":"MED","kind":"PAIR","why":"says fields left unworked and the mill idle; 16640 has the mill running, flour exported, grown 483 against need 414","other":"16640"}
+{"id":"HEADER","town":"r2s-slave_revolt-village-2","sev":"LOW","kind":"RECORD","why":"made here lists iron and metalwork but HOUSES has no smith","other":""}
+{"id":"HEADER","town":"r2s-succession_void-village-1","sev":"MED","kind":"RECORD","why":"exports and makes River craft and Cargo barges, but HOUSES has no boatyard","other":""}
+{"id":"01192","town":"r2s-succession_void-village-1","sev":"MED","kind":"STATE","why":"says it lives on a surplus farm trade; exports are fish and boats only, grown 393 against need 390","other":""}
+{"id":"HEADER","town":"r2r-village-29","sev":"LOW","kind":"RECORD","why":"founders are settlers seeking new opportunities, but the reason says a noble's hunting lodge","other":""}
+{"id":"03757","town":"r2r-village-29","sev":"LOW","kind":"LACKS","why":"quarrels settled 'before they reach the lord's court'; GOVERNMENT lists no lord, HOUSES no court","other":""}
+{"id":"HEADER","town":"r2r-village-30","sev":"LOW","kind":"RECORD","why":"made here lists iron and metalwork but HOUSES has no smith","other":""}
+{"id":"20159","town":"r2r-village-30","sev":"LOW","kind":"LACKS","why":"'could now take the hall'; HOUSES has no hall","other":""}
+{"id":"11019","town":"r2r-village-30","sev":"LOW","kind":"LACKS","why":"a trader who cuts cloth to measure and sells by the length; HOUSES has no tailor or draper","other":""}
+{"id":"19530","town":"r2r-village-35","sev":"LOW","kind":"LACKS","why":"'take the hall from Elder Council'; HOUSES has no hall","other":""}
+{"id":"HEADER","town":"r2r-village-41","sev":"LOW","kind":"RECORD","why":"founders are settlers seeking new opportunities, but the reason says it began as a naval base","other":""}
+{"id":"HEADER","town":"r2s-infiltrated-village-2","sev":"LOW","kind":"RECORD","why":"exports Barrels and containers but HOUSES has no cooper","other":""}
+{"id":"21211","town":"r2s-infiltrated-village-2","sev":"MED","kind":"STATE","why":"says decisions guided 'in the absence of formal authority'; GOVERNMENT is Headman's Authority, Dominant","other":""}
+{"id":"22429","town":"r2s-infiltrated-village-2","sev":"MED","kind":"LACKS","why":"says enforcement keeps crime down; DEFENCE lists no watch, garrison, militia or any force","other":""}
+{"id":"10314","town":"r2s-insurgency-village-0","sev":"LOW","kind":"BROKEN","why":"'the first power leader to offer something better' is garbled, a slot filled with a bare word","other":""}
+{"id":"17570","town":"r2s-insurgency-village-0","sev":"LOW","kind":"LACKS","why":"brewer charges 'the taverns'; HOUSES has no tavern or ale house and TRADE exports none","other":""}
+{"id":"HEADER","town":"r2s-monster_pressure-village-1","sev":"LOW","kind":"RECORD","why":"exports Mineral salts, Alum and Sulfur, but HOUSES has no mine or works","other":""}
+{"id":"11039","town":"r2s-monster_pressure-village-1","sev":"LOW","kind":"LACKS","why":"'hears everything the taverns say'; HOUSES has no tavern or ale house, only a brewer","other":""}
+{"id":"HEADER","town":"r2s-succession_void-village-2","sev":"MED","kind":"RECORD","why":"founded by escaped serfs, but the reason says veterans granted land; also made here iron and metalwork with no smith","other":""}
+{"id":"HEADER","town":"r2s-wartime-village-2","sev":"LOW","kind":"RECORD","why":"made here lists fish, salt, iron and metalwork, but HOUSES has no fisher's landing, salt works or smith","other":""}
+{"id":"11705","town":"r2s-wartime-village-2","sev":"LOW","kind":"BROKEN","why":"'leads the defence: the defence of the place, with no one named to lead it' repeats itself and contradicts 'leads'","other":""}
+{"id":"18205","town":"r2r-village-34","sev":"MED","kind":"LACKS","why":"'some districts are closed off' in a village of 355; tag reaches villages","other":""}
+{"id":"14585","town":"r2r-village-34","sev":"LOW","kind":"PAIR","why":"says no dependable road reaches it; HOUSES has a toll bridge and a travelers' inn, and 11282 has heavy carts paying toll","other":"11282"}
+{"id":"HEADER","town":"r2r-village-39","sev":"LOW","kind":"RECORD","why":"made here lists iron, metalwork, Milled lumber and processed textiles, but HOUSES has no smith, sawmill or weaver","other":""}
+{"id":"10837","town":"r2r-village-39","sev":"MED","kind":"PAIR","why":"has the Conversion Enforcement Office blessing the council's rule as ordained; 10862 marks them escalating, and 07476 says it is an external verifying body","other":"10862"}
+{"id":"HEADER","town":"r2r-village-42","sev":"LOW","kind":"RECORD","why":"reason says it grew around a ferry crossing that became a bridge, but HOUSES has no ferry or bridge; also exports coal with no mine","other":""}
+{"id":"01720","town":"r2r-village-42","sev":"MED","kind":"LACKS","why":"'all three powers'; GOVERNMENT lists only two, The Independent Bloc and Priestly Guidance","other":""}
+{"id":"19532","town":"r2r-village-42","sev":"LOW","kind":"LACKS","why":"'take the hall from Priestly Guidance'; HOUSES has no hall","other":""}
+{"id":"HEADER","town":"r2s-insurgency-village-3","sev":"LOW","kind":"RECORD","why":"a Fish market and a fishmonger headman in Desert/Arid terrain with no fisher's landing, river or coast","other":""}
+{"id":"18308","town":"r2s-insurgency-village-3","sev":"LOW","kind":"BROKEN","why":"'overstepped badly over legitimacy of the current governing authority' drops a label into the slot","other":""}
+{"id":"HEADER","town":"r2s-mass_migration-village-1","sev":"LOW","kind":"RECORD","why":"exports coal but HOUSES has no mine","other":""}
+{"id":"14401","town":"r2s-mass_migration-village-1","sev":"LOW","kind":"BROKEN","why":"'timber' listed twice in the same list","other":""}
+{"id":"HEADER","town":"r2s-mass_migration-village-2","sev":"LOW","kind":"RECORD","why":"exports coal but HOUSES has no mine","other":""}
+{"id":"20744","town":"r2s-mass_migration-village-2","sev":"LOW","kind":"STATE","why":"calls the place 'the hamlet'; it is a village of 219, tag vi only","other":""}
+{"id":"06126","town":"r2s-mass_migration-village-2","sev":"LOW","kind":"LACKS","why":"'its streets are badly watched' in a village of 219 with no watch","other":""}
+{"id":"02075","town":"r2s-mass_migration-village-2","sev":"LOW","kind":"BROKEN","why":"doubled label 'the miller (Mill)'","other":""}
+{"id":"21943","town":"r2s-mass_migration-village-2","sev":"LOW","kind":"LACKS","why":"treats Smuggling waypoint, a house, as a power others answer to; GOVERNMENT lists no criminal power","other":""}
+{"id":"HEADER","town":"r2s-politically_fractured-village-1","sev":"LOW","kind":"RECORD","why":"makes Barrels and containers but HOUSES has no cooper","other":""}
+{"id":"HEADER","town":"r2s-slave_revolt-village-3","sev":"MED","kind":"RECORD","why":"Military/Guard Dominant with no garrison or watch; exports pilgrim hospitality, barrels and coal with no inn, cooper or mine","other":""}
+{"id":"11662","town":"r2s-slave_revolt-village-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"13552","town":"r2s-slave_revolt-village-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"HEADER","town":"r2r-village-28","sev":"LOW","kind":"RECORD","why":"a Fish market and fishmonger elder in the Hills with no fisher's landing or river; exports coal with no mine","other":""}
+{"id":"19712","town":"r2r-village-28","sev":"LOW","kind":"PAIR","why":"says the Military Party is at odds with the Elder Council; 07125 marks Elder Council and Military Party stable","other":"07125"}
+{"id":"HEADER","town":"r2r-village-56","sev":"LOW","kind":"RECORD","why":"reason says it grew beside a strategic bridge, but HOUSES has no bridge; exports Pilgrim hospitality with no inn","other":""}
+{"id":"02888","town":"r2r-village-56","sev":"MED","kind":"STATE","why":"says its walls were raised from quarry stone; DEFENCE walls are Palisade or earthworks","other":""}
+{"id":"14353","town":"r2s-mass_migration-village-0","sev":"LOW","kind":"BROKEN","why":"'mineral hot springs' listed as a good needed and not brought in","other":""}
+{"id":"12102","town":"r2s-mass_migration-village-0","sev":"LOW","kind":"STATE","why":"says food comes from fishing and little else; HOUSES has Farmland, grazing and a Mill","other":""}
+{"id":"15113","town":"r2s-mass_migration-village-0","sev":"LOW","kind":"STATE","why":"says nothing more can be taken from the salt flats; HOUSES has working Salt works and made here lists salt","other":""}
+{"id":"HEADER","town":"r2s-politically_fractured-village-0","sev":"LOW","kind":"RECORD","why":"exports coal but HOUSES has no mine","other":""}
+{"id":"00183","town":"r2s-politically_fractured-village-0","sev":"MED","kind":"LACKS","why":"three guards missing on night patrol in a district; DEFENCE has no watch or garrison, only militia, in a village of 187","other":""}
+{"id":"06973","town":"r2s-politically_fractured-village-2","sev":"LOW","kind":"LACKS","why":"'streets stay badly guarded' in a village of 331 with no watch","other":""}
+{"id":"01522","town":"r2s-politically_fractured-village-2","sev":"MED","kind":"STATE","why":"says defences stand sound; STATE gives defence Vulnerable","other":""}
+{"id":"HEADER","town":"r2s-recently_betrayed-village-1","sev":"LOW","kind":"RECORD","why":"made here lists iron and metalwork but HOUSES has no smith","other":""}
+{"id":"HEADER","town":"r2s-religious_conversion-village-2","sev":"LOW","kind":"RECORD","why":"founded by deep-water fishers and exports salted fish, but HOUSES has no fisher's landing; exports barrels and coal with no cooper or mine","other":""}
+{"id":"00349","town":"r2s-religious_conversion-village-2","sev":"MED","kind":"LACKS","why":"two temples face each other across a central square; HOUSES has one Parish church","other":""}
+{"id":"HEADER","town":"r2s-wartime-village-3","sev":"MED","kind":"RECORD","why":"exports iron ore and Advanced weapons and armor, but HOUSES has one blacksmith and no mine","other":""}
+{"id":"01080","town":"r2s-wartime-village-3","sev":"MED","kind":"STATE","why":"says the village is prosperous; STATE gives prosperity Struggling","other":""}
+{"id":"20552","town":"r2s-wartime-village-3","sev":"MED","kind":"STATE","why":"forges past dark, full warehouses, coin moving; one blacksmith, no warehouse in HOUSES, prosperity Struggling","other":""}
+{"id":"HEADER","town":"r2r-village-18","sev":"MED","kind":"RECORD","why":"exports iron ore, mineral salts, alum, sulfur, charcoal and planks, but HOUSES has no mine, charcoal burner or sawmill","other":""}
+{"id":"29108","town":"r2r-village-38","sev":"LOW","kind":"BROKEN","why":"sentence cut at 'Bé Bhinn Mac'; the rest prints as 06733 'Donald a favour…'; same split in 04655, 06750","other":"06733"}
+{"id":"HEADER","town":"r2r-village-44","sev":"LOW","kind":"RECORD","why":"defence Lightly Defended, yet DEFENCE lists no walls and no force of any kind","other":""}
+{"id":"14384","town":"r2r-village-44","sev":"LOW","kind":"BROKEN","why":"'mineral hot springs' listed as a good needed and not brought in","other":""}
+{"id":"HEADER","town":"r2r-village-52","sev":"LOW","kind":"RECORD","why":"reason says it grew beside a strategic bridge, but HOUSES has no bridge; exports Pilgrim hospitality with no inn","other":""}
+{"id":"HEADER","town":"r2s-infiltrated-village-0","sev":"LOW","kind":"RECORD","why":"exports coal but HOUSES has no mine","other":""}
+{"id":"04421","town":"r2s-infiltrated-village-0","sev":"MED","kind":"PAIR","why":"carts full of cloth and wool bound out; TRADE exports no cloth or wool, and 29055 says little cloth is made here","other":"29055"}
+{"id":"04098","town":"r2s-infiltrated-village-0","sev":"LOW","kind":"STATE","why":"says ordinary work no longer yields enough preserved foods; grown 410 against need 324, and TRADE lists no preserved foods","other":""}
+{"id":"HEADER","town":"r2s-recently_betrayed-village-2","sev":"LOW","kind":"RECORD","why":"made here lists Hospitality for travellers, but HOUSES has no inn and trade access is isolated","other":""}
+{"id":"HEADER","town":"r2s-religious_conversion-village-1","sev":"LOW","kind":"RECORD","why":"grew around salt workings and exports Sea salt, but HOUSES has no salt works","other":""}
+{"id":"07105","town":"r2s-religious_conversion-village-1","sev":"MED","kind":"PAIR","why":"has the breakaway Reform Congregation blessing the council's rule as ordained; 07140 marks the two escalating","other":"07140"}
+{"id":"HEADER","town":"r2s-succession_void-village-0","sev":"MED","kind":"RECORD","why":"exports iron ore and makes Advanced weapons with no mine; a Fishmonger on Plains with no fisher's landing or river","other":""}
+{"id":"10982","town":"r2s-succession_void-village-0","sev":"LOW","kind":"LACKS","why":"'asks why you are in the marsh'; terrain Plains and the resource line lists no marshland","other":""}
+{"id":"HEADER","town":"r2r-village-37","sev":"LOW","kind":"RECORD","why":"made here lists iron, metalwork and Milled lumber, but HOUSES has no smith and no sawmill","other":""}
+{"id":"HEADER","town":"r2s-monster_pressure-village-0","sev":"LOW","kind":"RECORD","why":"made here lists iron and metalwork but HOUSES has no smith","other":""}
+{"id":"14367","town":"r2s-monster_pressure-village-0","sev":"LOW","kind":"BROKEN","why":"'timber' listed twice, and 'mineral hot springs' listed as a good not brought in","other":""}
+{"id":"01051","town":"r2s-monster_pressure-village-0","sev":"LOW","kind":"LACKS","why":"'the hall belongs to Elected Reeve'; HOUSES has no hall, only a village reeve","other":""}
+{"id":"01738","town":"r2s-monster_pressure-village-0","sev":"LOW","kind":"BROKEN","why":"doubled label 'the apothecary (Apothecary)'","other":""}
+{"id":"29765","town":"r2s-monster_pressure-village-0","sev":"LOW","kind":"BROKEN","why":"doubled label 'the bandit contact (Bandit affiliate)'","other":""}
+{"id":"HEADER","town":"r2s-recently_betrayed-village-0","sev":"LOW","kind":"RECORD","why":"exports river fish with no fisher's landing; makes iron with no smith; grew beside a bridge with no bridge in HOUSES","other":""}
+{"id":"14321","town":"r2s-recently_betrayed-village-0","sev":"LOW","kind":"BROKEN","why":"'mineral hot springs' listed as a good needed and not brought in","other":""}
+{"id":"HEADER","town":"r2s-recently_betrayed-village-3","sev":"LOW","kind":"RECORD","why":"a Fish market in Desert/Arid terrain with no fishery; exports Glass blanks with no glassworks","other":""}
+{"id":"DONE","lines":3234,"blocks":64,"flags":155}
