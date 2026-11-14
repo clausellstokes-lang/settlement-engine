@@ -1,0 +1,67 @@
+{"id":"21354","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"hook names an uprising funded from outside; PAST records no revolt or uprising (Succession Crisis, Harvest Compact, Arcane Incident only)","other":""}
+{"id":"02414","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"hook names a revolt and a concession won in it; PAST records no revolt","other":""}
+{"id":"27786","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"describes wheel-thrown pottery as made; LAND gaps say Potter lacks access to clay","other":"13747"}
+{"id":"05939","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"describes clay tiles made; LAND gaps say Brickmaker lacks access to clay","other":""}
+{"id":"07347","town":"r2s-famine-town-1","sev":"LOW","kind":"STATE","why":"kiln firing described as at work; potter and brickmaker both lack clay per LAND gaps","other":"13747"}
+{"id":"16083","town":"r2s-famine-town-1","sev":"MED","kind":"PAIR","why":"secret has the potter digging clay now; LAND gap and 13747 say no clay reaches the potter","other":"13747"}
+{"id":"21131","town":"r2s-famine-town-1","sev":"LOW","kind":"STATE","why":"succession crisis is 93 years ago in PAST; not older than anyone living","other":""}
+{"id":"05150","town":"r2s-famine-town-0","sev":"MED","kind":"STATE","why":"calls Fastrada Wolf (f) Alderman; PEOPLE gives her only the title senior guild master; no alderman office in GOVERNMENT","other":""}
+{"id":"12521","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"says Merchant Guilds have no stake yet; QUARRELS has Merchant Guilds as the opposing party in a high-intensity quarrel with the ruling oligarchy, amid famine","other":""}
+{"id":"20892","town":"r2s-famine-town-0","sev":"MED","kind":"STATE","why":"calls Fastrada Wolf (f) Alderman and seat-holder; PEOPLE gives her only senior guild master @ Merchant guilds; no alderman office","other":"05150"}
+{"id":"11586","town":"r2s-famine-town-0","sev":"MED","kind":"STATE","why":"gives Fastrada Wolf (f) the title Alderman; PEOPLE lists her only as senior guild master of Merchant guilds","other":"05150"}
+{"id":"03302","town":"r2s-famine-town-0","sev":"LOW","kind":"STATE","why":"office Alderman, first of Guild Council; PEOPLE has no one in Guild Council and no alderman","other":"11586"}
+{"id":"13860","town":"r2s-famine-city-0","sev":"MED","kind":"STATE","why":"says Noble Families have no stake yet; QUARRELS has Noble Families as a party to the open quarrel with Royal Authority, amid famine","other":""}
+{"id":"05738","town":"r2s-famine-city-0","sev":"MED","kind":"STATE","why":"fish market sells the morning's catch and salted barrels; FOOD failed source is fish and Fishing chain is vulnerable under famine","other":""}
+{"id":"07361","town":"r2s-famine-city-0","sev":"MED","kind":"STATE","why":"says fish is sold here fresh or preserved; FOOD gives fish as the failed source of the famine","other":"05738"}
+{"id":"05324","town":"r2r-city-44","sev":"MED","kind":"STATE","why":"gives Melanthi Kantakouzenos (f) the title Lord Warden; PEOPLE lists her only as dean of Parish churches; no warden office in GOVERNMENT","other":""}
+{"id":"17807","town":"r2r-city-44","sev":"MED","kind":"STATE","why":"says the vintner supplies taverns and inns; LAND gaps say Vintner lacks access to grapes (13775: no grapes reach the vintner)","other":"13775"}
+{"id":"07357","town":"r2r-city-44","sev":"MED","kind":"STATE","why":"says fish is sold here fresh or preserved; FOOD gives fish as the failed source of the famine","other":""}
+{"id":"15137","town":"r2r-city-44","sev":"MED","kind":"STATE","why":"prints 2,178 imported; STATE and FOOD header give imports cover 2195, so the line's figure contradicts the ledger","other":""}
+{"id":"20834","town":"r2r-city-44","sev":"MED","kind":"STATE","why":"gives Melanthi Kantakouzenos (f) the title Lord Warden; PEOPLE lists her only as dean of Parish churches","other":"05324"}
+{"id":"12064","town":"r2r-city-44","sev":"LOW","kind":"STATE","why":"office Lord Warden, first of Ecclesiastical Council; PEOPLE has no warden and the dean is a woman","other":"20834"}
+{"id":"16523","town":"r2r-city-44","sev":"MED","kind":"STATE","why":"fishmonger sells yesterday's fish packed in ice as fresh; FOOD failed source is fish, so a fish trade at ordinary volume is off","other":"07357"}
+{"id":"21021","town":"r2r-city-44","sev":"LOW","kind":"STATE","why":"siege 'older than all but the oldest alive'; PAST puts the Siege only 61 years ago, within many living lives","other":""}
+{"id":"19898","town":"r2s-famine-city-1","sev":"MED","kind":"STATE","why":"kilns lit all day, heat in every lane; HOUSES has one Potter and LAND gaps say it lacks clay (13382: clay not brought in)","other":"13382"}
+{"id":"06417","town":"r2s-famine-city-1","sev":"MED","kind":"PAIR","why":"potter's ware thrown and fired in a kiln; LAND gaps and 13382 say the Potter lacks access to clay","other":"13382"}
+{"id":"02626","town":"r2s-famine-city-1","sev":"LOW","kind":"STATE","why":"offers camel stabling; LAND gaps say the Caravanserai lacks access to camel herds","other":""}
+{"id":"10908","town":"r2s-famine-city-1","sev":"LOW","kind":"LACKS","why":"names the town's preserved foods; TRADE lists no preserved foods made or imported here","other":""}
+{"id":"10797","town":"r2s-famine-city-1","sev":"LOW","kind":"STATE","why":"potter shows visitors how a pot is thrown; LAND gaps say the Potter lacks access to clay","other":"13382"}
+{"id":"17053","town":"r2s-famine-city-3","sev":"MED","kind":"STATE","why":"describes bricks shaped and fired; LAND gaps say the Brickmaker lacks access to clay","other":"04835"}
+{"id":"12199","town":"r2s-famine-city-3","sev":"LOW","kind":"STATE","why":"vintner makes and ages wine; LAND gaps say the Vintner lacks access to grapes","other":""}
+{"id":"08906","town":"r2s-famine-city-3","sev":"LOW","kind":"STATE","why":"anvils never stop; LAND has iron ore absent, Smelter lacks iron ore and TRADE imports list no iron","other":""}
+{"id":"14709","town":"r2s-famine-city-3","sev":"MED","kind":"STATE","why":"says work holds up only with help beyond ordinary labour; FOOD by magic 0%, DEFENCE magic none, no arcane house in HOUSES","other":""}
+{"id":"16204","town":"r2s-famine-city-3","sev":"MED","kind":"STATE","why":"secret has someone treading clay for pay now; LAND gaps say Brickmaker and Potter both lack access to clay","other":"04835"}
+{"id":"19917","town":"r2s-famine-city-3","sev":"LOW","kind":"STATE","why":"says no one has yet consolidated power after the last strong leader; the Noble Governorship holds the seat and the Interregnum was 319 years ago","other":""}
+{"id":"03364","town":"r2s-famine-city-2","sev":"LOW","kind":"STATE","why":"says the timber trade is under strain; LAND gives Timber & Lumber as running on available managed woodland, and no timber failure","other":""}
+{"id":"27830","town":"r2s-famine-city-2","sev":"MED","kind":"STATE","why":"says the mine is why the place grew at all; FOUNDING: a military command, reason foresters finding richer woodland","other":""}
+{"id":"02097","town":"r2s-famine-city-2","sev":"LOW","kind":"STATE","why":"gives Höelün Samarkand the title First Magnate; PEOPLE lists her only as senior guild master of Merchant guilds, and nobody is rostered for Merchant oligarchy","other":""}
+{"id":"12634","town":"r2s-famine-city-2","sev":"MED","kind":"STATE","why":"says Merchant oligarchy tolerates Thieves' Guild; QUARRELS relation is tense, escalating","other":"12623"}
+{"id":"12623","town":"r2s-famine-city-2","sev":"MED","kind":"STATE","why":"says Merchant oligarchy and Thieves' Guild leave each other alone; QUARRELS has them tense, escalating","other":"12634"}
+{"id":"14083","town":"r2s-famine-city-2","sev":"MED","kind":"STATE","why":"says neither side pushes the other; QUARRELS has Merchant oligarchy and Thieves' Guild tense, escalating","other":"12634"}
+{"id":"12633","town":"r2s-famine-city-2","sev":"MED","kind":"STATE","why":"has Religious Authorities endorsing Merchant oligarchy's rule; QUARRELS has them in a high quarrel over public money","other":""}
+{"id":"00530","town":"r2s-famine-city-2","sev":"MED","kind":"STATE","why":"says Enkhbold Qipchaq commands the patrols; PEOPLE: he is blade captain of Hired blades; watch and garrison commanders are others","other":""}
+{"id":"03387","town":"r2s-famine-city-2","sev":"MED","kind":"STATE","why":"gives Enkhbold Qipchaq arrest records; PEOPLE has him as blade captain of Hired blades, not watch or garrison","other":"00530"}
+{"id":"27511","town":"r2s-famine-metropolis-2","sev":"MED","kind":"STATE","why":"describes a flood that reshaped the riverside quarter; PAST records only Harvest Compact, Succession Crisis, Occupation and Siege, no flood","other":""}
+{"id":"21987","town":"r2s-famine-metropolis-2","sev":"LOW","kind":"STATE","why":"label for those who profited from a flood's redrawing; PAST records no flood","other":"27511"}
+{"id":"03008","town":"r2s-famine-metropolis-2","sev":"MED","kind":"STATE","why":"hook about a flood barrier left to rot; PAST records no flood or disaster except the Siege","other":"27511"}
+{"id":"19522","town":"r2s-famine-metropolis-2","sev":"MED","kind":"STATE","why":"hook says the flood uncovered a foundation; PAST records no flood","other":"27511"}
+{"id":"18039","town":"r2s-famine-metropolis-2","sev":"MED","kind":"STATE","why":"says The Arcane Circle has no stake yet; QUARRELS has it in a high quarrel with City-State Council over an unpaid debt","other":""}
+{"id":"22510","town":"r2s-famine-metropolis-2","sev":"MED","kind":"LACKS","why":"names a citadel ring; DEFENCE gives only Massive walls and fortifications and HOUSES has no Citadel","other":""}
+{"id":"04763","town":"r2s-famine-metropolis-2","sev":"MED","kind":"STATE","why":"says City-State Council leaves Thieves' Guild alone; QUARRELS relation is tense, escalating","other":""}
+{"id":"05316","town":"r2s-famine-metropolis-2","sev":"LOW","kind":"STATE","why":"calls Gobnat Nolan (f) Lord Chancellor; PEOPLE gives chancellor of the Academy of magic","other":""}
+{"id":"20889","town":"r2s-famine-metropolis-2","sev":"LOW","kind":"STATE","why":"gives Ronan MacGregor the office First Councillor; PEOPLE lists only senior craft-guild master","other":""}
+{"id":"07349","town":"r2s-famine-metropolis-2","sev":"LOW","kind":"STATE","why":"office First Councillor; PEOPLE lists Ronan MacGregor only as senior craft-guild master","other":"20889"}
+{"id":"01427","town":"r2s-famine-metropolis-2","sev":"MED","kind":"STATE","why":"gives Fódla O'Brien an arrest record; PEOPLE has her as blade captain of Hired blades; watch commander and garrison commander are others","other":""}
+{"id":"01040","town":"r2s-famine-metropolis-2","sev":"MED","kind":"STATE","why":"has Maeve MacGillivray praised for speaking out against crime; PEOPLE gives her as the potter, who holds no public office","other":"00562"}
+{"id":"00562","town":"r2s-famine-metropolis-2","sev":"MED","kind":"STATE","why":"says Maeve MacGillivray remembers who chooses which criminals are caught; PEOPLE has her as the potter, with no part in policing","other":"01040"}
+{"id":"01285","town":"r2s-famine-metropolis-2","sev":"MED","kind":"STATE","why":"has Teague O'Mahony keeping doors unwatched; PEOPLE has him as lanista of the Gladiatorial school, not watch or garrison","other":""}
+{"id":"01379","town":"r2s-famine-metropolis-2","sev":"LOW","kind":"STATE","why":"says Teague O'Mahony was promoted last month; PEOPLE has him as lanista, a post with no rank to be promoted in","other":"01285"}
+{"id":"15315","town":"r2s-famine-metropolis-3","sev":"LOW","kind":"STATE","why":"racks of new ironwork waiting for carts; LAND has Iron & Metalwork and Smelting impaired, iron ore depleted","other":""}
+{"id":"11885","town":"r2s-famine-metropolis-3","sev":"MED","kind":"LACKS","why":"names a citadel ring; DEFENCE gives only Massive walls and fortifications and HOUSES has no Citadel","other":""}
+{"id":"15887","town":"r2s-famine-metropolis-3","sev":"MED","kind":"STATE","why":"says salt is won from local brine in pans; LAND gaps say the Salt works lacks access to desert_salt and salt flats are absent","other":""}
+{"id":"06437","town":"r2s-famine-metropolis-3","sev":"MED","kind":"LACKS","why":"names drainage and sewer systems; HOUSES has Advanced water infrastructure but no Sewage system","other":""}
+{"id":"13252","town":"r2s-famine-metropolis-3","sev":"MED","kind":"STATE","why":"says most meals start from the day's catch; FOOD gives 38% grown, 48% brought in, grain failed; LAND lists no fishery","other":""}
+{"id":"27789","town":"r2s-famine-metropolis-3","sev":"MED","kind":"STATE","why":"has Euphrosyne Phakrases signing prisoner releases; PEOPLE has her as lanista of the Gladiatorial school; the warden and magistrate are others","other":""}
+{"id":"27787","town":"r2s-famine-metropolis-3","sev":"MED","kind":"STATE","why":"says Euphrosyne Phakrases orders arrests; PEOPLE has her as lanista of the Gladiatorial school, with no policing office","other":"27789"}
+{"id":"01390","town":"r2s-famine-metropolis-3","sev":"LOW","kind":"STATE","why":"payment names someone to be arrested by Euphrosyne Phakrases, a lanista per PEOPLE with no arrest power","other":"27789"}
+{"id":"DONE","lines":1988,"blocks":9,"flags":66}
