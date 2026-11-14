@@ -3506,10 +3506,10 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "dm-only",
             "colour"
           ],
-          "text": "At {settlement} the {seat} gives no order {faction} would refuse, and whoever can turn {faction} turns the place's armed strength with it.",
+          "text": "Nothing the {seat} orders at {settlement} goes ahead if {faction} refuses it, and whoever can win {faction} over can steer the place.",
           "slots": [
-            "settlement",
             "seat",
+            "settlement",
             "faction"
           ],
           "vid": 4
