@@ -839,3 +839,75 @@ defence supply (FOR THE JOIN above). The PR's merge, the deploy and the manifest
   ratchets, the presumed-things door, observed shapes, fact layers, writer reach exit 0; governing files 599/0; the
   lighting census re-taken (246a22eb7). The page census of the 720 was NOT re-run after this commit (it ran at
   6b74eb2aa: exit 0, no rise): a fresh reader's step.
+
+# THE FIFTH SEAT (R3-TABS-5, 2026-11-14): the second reader's two findings, two raw catalogue names, the badges
+The seat's brief: `docs/chair/2026-11-14/briefs/BRIEF-R3-TABS-5.md` on lane/chair-2026-11-08. The second reader:
+`docs/chair/2026-11-14/REVIEW-R3-TABS-2-2026-11-14.md` on lane/review-r3-tabs-2-2026-11-14 (NOT CLEAR at 301572583);
+the other lane's rows H3-T1, H3-T2, H3-T4 (`REVIEW-R2-CODE-B-LINES-READ.md` on lane/review-r2-code-b-2026-11-14).
+First act: the lane's tip read back from origin, 301572583, as the brief named it. Range: **301572583..<the tip>**.
+EXECUTED unless marked. Instrument: the second reader's 1,536 births (the first reader's `births.mjs`, seeds1536.txt,
+0 errors), the desk by `desk.mjs` (defenseDeskRead) diffed cell by cell; pages by `render.sh` (the real
+OutputContainer, every tab opened): the whole 1,536 at 301572583, and the towns read at each cure.
+
+## The rulings this seat worked to (copied; vetoable by the owner)
+- **(a) HIGH, carried (H3-T2):** DefenseTab.jsx prints a force's catalogue name raw ("Gates (if walled)", 14 towns).
+  NO SURFACE PRINTS A CATALOGUE NAME'S BRACKET (a count range, an "(if …)"): the name goes through the house-label leaf
+  the roster uses. Every bracketed catalogue name the tabs' files print is the same cure.
+- **(b) HIGH, carried (H3-T4):** HistoryTab.jsx prints the stored tensions without the house-label pass the PDF's
+  History uses ("…Taverns (5-20)…"). **RE-RULED by the chair (11:43 UTC, on this seat's stop):** FOR THE JOIN: this
+  lane does NOT carry another lane's leaf; a new lane cut from the joined branch (SURFACES-1) passes the History tab's
+  and the Overview's stored tensions through the house-label pass; HistoryTab.jsx's tension row is left alone.
+- **(c) R1 + the carried C3, MEDIUM:** UNDER AN OCCUPATION THE POSTURE ROW IS SILENT, beside any bar: the occupation
+  strike runs before the fallback; the guard that pinned the false line re-keyed by identity.
+- **(d) R2, MEDIUM:** the wiring census rebuilt through its door at the tip (and after every later cure that moves
+  it); the writer-reach walker's surface-reach title NAMED, not written (record 440: banked once, at the close).
+- **(e) R3, LOW:** the guard's 'no walls' arm gains a town or a made record in which only the walls condition keeps
+  the line off, the plant shown red.
+- **(f) MEDIUM, carried (H3-T1):** the REQ / FORCED badge off the Defense tab, as off the roster.
+- **(g) MEASURE ONLY** on the joined branch: the Foundations tab's food word against the Tonight sheet's, in the
+  release bar's two towns.
+- **(h) the chair, 11:43 UTC (after (c)):** A LINE CLAIMS NO VERDICT THAT A BAND ON ITS OWN PAGE CAN DENY: the
+  Invasion row draws no line that claims the place holds, deters or sees off a raid where its own Invasion & War band
+  reads Critical: the key reads the band; there the row is silent or draws only a pool whose every line is true
+  beside Critical. Measured on this tree (the rebuild is absent here), cured, guarded with a made record.
+- NOT THIS SEAT'S: C1, C2 (the corpus's pools); R4's true lines lost (named below).
+
+## Each row: cause, cure and commit, counts, guard and plant, towns read
+| row | cause | cure | counts on the 1,536 | guard · plant |
+|---|---|---|---|---|
+| (a) | `DefenseTab.jsx :: ForceCard` printed `i.name` raw | a193ba4fe: through `institutionDisplayName`, the seam this lane's roster prints a house with ("Town gates"); dedupe and matches keep the raw key | a bracketed catalogue name on a force card 14 towns -> 0 ("Gates (if walled)" the only one; all 14 walled, all towns) | `tests/components/defenseForceCardHouseLabel.test.jsx` (red first at 301572583, 2 of 3) · the raw name restored. The provenance file's by-name pin re-keyed by identity to the printed label |
+| (b) | `HistoryTab.jsx :: TensionRow` prints the stored text raw | NOT CURED: the chair's re-ruling (FOR THE JOIN) | 1 town (r2r-town-9) at 301572583. On this lane the roster prints "Taverns (5-20)" too: the strip is r2-code-b's | — |
+| (c) | the ADEQUATE fallback and every pool ran before any occupation strike | 1ad5ca6e7: `defenseStateProse.js :: silentUnderAnOccupation`, first in `defensePostureProse` | posture line under an occupation 64 -> 0 of 76 occupied towns (adequate 12, weak 32, critical 20); 64 cells move, all posture, line -> silent | `defensePostureAgainstItsFacts.test.js`, the occupation arm (red first at b5a335a46, 5 of 6); Ingili's ADEQUATE pin re-keyed to silence, its lifted record keeps the reverse guard · the old order restored |
+| (a) sweep | — | the claim of zero's instrument: every rendered page of the 1,536 at 301572583 (`render.sh`), the Defense, History and Foundations sections, for a name ending in a digit-led, "(if walled)" or "(high magic)" bracket | Defense: "Gates (if walled)" 14 (cured above), "Major monasteries (5-10)" 12 (FOR THE JOIN); History: "Taverns (5-20)" 1 ((b)); Foundations: 0. The rest are the page's own tallies ("Vulnerabilities (1)", "Current Tensions (2)") | — |
+| (f) | — | already cured on this lane by f19e75e41 (R3-TABS 1, ruling b1): the reader read a tree without it | "REQ" / "FORCED" as a node on the rendered Defense tab: 0 of 1,536 pages at 301572583 (`render.sh`) | `tests/components/defenseForceCardNoProvenance.test.jsx` (existing) |
+
+## Every new or changed line, with the towns it was read in
+- **Newly prints (a):** "Town gates" over the town's own gate line ("Controlled entry points with gatekeepers." /
+  "Entry controlled at fixed points, gatekeepers posted."), under "Town walls": r2r-town-11 Ardbridge (insurgency),
+  r2s-famine-town-3 Shattkarez (famine, the smallest, 737), rr3-town-occupied-rand-4 (occupied, the largest, 2,465),
+  rr2s-town-under_siege-rand-1 Nahrhaven (siege).
+- **Newly silent (c):** the posture line in 64 occupied towns: the badge, the Guard assessment and the "Under
+  occupation" banner print: r2s-occupied-thorp-0 Warmstadt (the smallest, 13), r2s-occupied-metropolis-1 Dionpetra
+  (the largest, 105,466), rr3-town-occupied-rand-1 Muulcoba, rr3-metropolis-occupied-rand-2 Ingili.
+
+## FOR THE JOIN
+- **(b), by the chair's ruling:** `src/components/new/tabs/HistoryTab.jsx :: TensionRow`: its text through
+  `houseLabelsInText(text, r.institutions)` (the leaf in r2-code-b's institutionDisplayName.js; the join's
+  HistoryFounding.jsx:51 does the same); the tab hands the settlement's institutions to the row. The Overview's twin
+  (`OverviewTab.jsx`, held by the upkeep lanes) likewise. For SURFACES-1.
+- **(a)'s other bracket on the Defense tab (found by this seat's page sweep; another lane's file):** Supporting
+  Capabilities · Medical Readiness prints "Major monasteries (5-10). Wounds and fevers treated one at a time…" in 12
+  metropolises at 301572583 (r2r-metropolis-32, r2r-metropolis-51, r2s-indebted-metropolis-2 …). The writer is
+  `src/domain/display/defenseDisplay.js :: deriveSupportingCapabilities` (the note's `${facts.healerName}`), held by
+  the upkeep lanes and w2-c-leaves: at the join, `${institutionHouseLabel(facts.healerName)}`. Not changed here.
+- **(a)'s twin at the join:** where `institutionHouseLabel` exists, `ForceCard` may read it instead of
+  `institutionDisplayName` (one word); today no force name carries a bracket the seam does not map.
+- **(a) and (f) in the PDF:** `src/pdf/sections/DefenseSecurity.jsx` (held by the upkeep lanes) prints force.name raw
+  and the REQ / FORCED chip (H3-T1's PDF half, H3-T2's Pc/Pd): the same two cures there.
+- **R4 (the corpus owes pools; the second reader's counts):** S1 52 v1 "reads as a defended place from the road in…"
+  beside short supply only; S2 59 "The walls and townsfolk of {S} would see off a raid…" in walled watch-only towns;
+  S3 74 force-free beasts lines; the Invasion row silent in 220 watch-only towns, the beasts row in 207.
+- **C1, C2:** the deterrence lines under a siege and an occupation are the corpus's pools (declared off both there).
+
+## What is left (kept current)
+(e), (d), (h), (g); the close.
