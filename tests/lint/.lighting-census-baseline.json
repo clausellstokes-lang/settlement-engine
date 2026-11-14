@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "b4ebf817726013c7e1dee62a9e94f1e12f57d7b9",
-  "measuredBy": "STYLE-2-MERGE-13",
-  "date": "2026-11-13",
-  "note": "point 49: the final tip a1a8ec794 and the cure commits of record 405 (two new walker arms: presumedThings admitted instruments, factLayers re-based pools)",
-  "files": 3245,
-  "parked": 402,
-  "credited": 2843,
-  "titles": 29407,
-  "suiteTitles": 7974
+  "measuredAtSha": "23bfefde36590aac1ab207627603f50a0729a039",
+  "measuredBy": "W2-FIX-DATA-10",
+  "date": "2026-11-14",
+  "note": "the data lane close: the line merged (976db5b19); the lane and its history branch added test files and titles",
+  "files": 3264,
+  "parked": 408,
+  "credited": 2856,
+  "titles": 29476,
+  "suiteTitles": 7992
 }
