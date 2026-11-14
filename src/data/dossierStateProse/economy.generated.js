@@ -5469,7 +5469,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "EXPLOITATION: unexploited, exportValue: high": [
         {
           "angle": "ledger",
-          "text": "There is {resource} in {settlement}'s country worth real money and nothing in the town takes it out of the ground.",
+          "text": "There is {resource} in {settlement}'s country worth real money and nothing in the town works it.",
           "slots": [
             "resource",
             "settlement"
@@ -5507,7 +5507,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "EXPLOITATION: unexploited, exportValue: medium or low": [
         {
           "angle": "ledger",
-          "text": "{settlement} leaves its {resource} unworked. It would fetch barely enough to pay for the digging.",
+          "text": "{settlement} leaves its {resource} unworked. It would fetch barely enough to pay for the work.",
           "slots": [
             "settlement",
             "resource"
