@@ -1,0 +1,55 @@
+# W2-WRITE-SIDE-REST: the side seat's hand-back (DS-POW, DS-GEN, DS-SUP, DS-STR, DS-WAR, DS-FTH, DS-REL, DS-POP, DS-CND, DS-HK)
+
+**Branch:** `lane/w2-write-side-rest-2026-11-13`, cut from the lane at `dcd4759b0` (code tip `d56c896f8`; both read back from origin at the start, no difference). Scratch worktree on local branch `wsr`; pushed by `push.sh` (refs and local config of the main checkout compared at every push: the same every time; the main checkout's status stayed empty).
+**Status: B DONE AND PUSHED (code tip `4a124b1c7`). C, D, E and F are not begun: the turn ends here for the chair's word.** This file is kept current after every part.
+
+## The rulings this seat works to (the chair's messages are not on the branch)
+The brief W2-WRITE-SIDE-REST (the chair, session_01FE9mEws7PXYRYdjQPbSX15, 2026-11-13), in substance. **Blocks:** every `### DS-` section except DS-DEF and DS-ECO; no text of those two changes. **Order:** B (the 16 lines of the strike table in my blocks) · C (the fourth seat's unreviewed rewordings in my blocks: W2-WRITE-HANDBACK-4 items 4 and 5, 30895bb67) · D (round three's rest in general, power, stressors, warFaith; the siege Overview road lines; MARKET-OPEN v3 in hamlets) · E (the increment's rows in my files, the measuring seat's candidates; for every pool touched, all its firing variants read; a line whose writer is not the corpus is named and left; #ww-468 is another lane's) · F (census2.sh on my generated files, every hit read, the count per kind at dcd4759b0 and at the tip). **The two notes:** (i) the crown named in self-governing wartime towns (sovereignty is PARKED: declare off by a registered condition if one exists, else list each line with three towns); (ii) seven faith pools that name a church or a temple wait for another lane's faith reading: named below, not touched. **The method** (record 386): read where it prints in three towns of the pool's cells, a siege, famine or occupation among them, the smallest and the largest tier; a twin carries its siblings' conditions; a line naming a house, role, force, good or place reads the record through a registered condition, and a slot never prints a catalogue label or breaks agreement; no line says how the model works; a line that cannot be made true is not written, and a line true somewhere is declared off where false; every disqualifier cure has a guard row, red first. **The calls the chair accepts:** a middle row is never struck (reworded or declared); only a pool's last rows are struck; the under-claim debt rises through its own door. **RULED:** parked rows stay parked; never "at peace" of a fighting town; a force is a garrison, a militia, a watch or a contracted company; under a siege nothing comes in or goes out by road; the size words; a power's rank word agrees with its label; plain words; no new key, no shape change, no draw added or moved. **Never:** another branch, `--no-verify`, a force push, an empty push, a pull request, master, a golden's door, a deploy, a hosted database. **Messages:** notifications after every commit; to the chair only for a stop that blocks everything, when B is pushed (one line), and for the hand-back (150 words); the turn ends after every part.
+
+## Instruments
+The fifth seat's folder (`docs/chair/2026-11-13/probes/W2-WRITE-5/`, taken by `git archive`), unchanged: render.sh on the 762 `w5-`/`rww-` seeds at the base (762 of 762, every worker exit 0), render.sh on a handful of named seeds after each cure, doors.sh, iterate.sh, bytes.mjs, gates.sh, push.sh. Two wrappers of my own, outside the repository: a per-pool reader over the render's `.draws.json` and records (eligible, drawn, the record's forces, magic level, arcane houses), and a cycle script (doors, iterate, bytes, the byte test again, gates on the touched files). The fast set at the base: the 7 reds of `base-reds.txt` exactly, and only those at every commit after.
+
+## B: the 16 lines of my blocks, line by line
+| pool | variant | position | state | commit | read in |
+|---|---|---|---|---|---|
+| DS-GEN-17 GREAT HOUSE: monastery | v1 | middle | DECLARED off siege (fifth seat) | 13c6618e0 | (its guard) |
+| DS-GEN-17 GREAT HOUSE: monastery | v3 | middle | DECLARED off siege (fifth seat) | 13c6618e0 | (its guard) |
+| DS-GEN-18 BOUGHT-IN | v1, v9 | middle | REWORDED (fifth seat) | 17be3ddc4 | |
+| DS-GEN-18 BOUGHT-IN | v4 | middle | REWORDED, agreement (fifth seat) | d56c896f8 | |
+| DS-GEN-18 STALLED | v2 | middle | REWORDED (fifth seat) | 329a77963 | |
+| DS-POW-6 ADVANCING | v7 | middle | DECLARED off revolt (fifth seat); now also RE-SAID ("has a watch": true of a watch on paper) | 06e1f067d, 97d85ad8e | w5-city-plague_onset-3, w5-metropolis-famine-1, w5-town-plague_onset-2 |
+| DS-POW-5 FLAG: crimeIsGovt | v4 | last | RE-SAID true in both capture states (not struck: v2, v3 would take its towns and overclaim the same way) | 988b0465b | w5-town-under_siege-104, w5-town-wartime-4, w5-town-religious_conversion-1 |
+| DS-POW-6 ADVANCING | v6 | middle | RE-SAID (the maxim gone) | 97d85ad8e | w5-metropolis-wartime-4 (the only town of 762 it reaches) |
+| DS-POW-6 GM ADVISORY: the commander | v4 | middle | RE-SAID ("Nothing the {seat} orders ... goes ahead if {faction} refuses it") | 3f20c349e | w5-thorp-politically_fractured-102, w5-city-famine-5 |
+| DS-POW-6 GM ADVISORY: the commander | v5 | last | KEPT AS TRUE (true by the key: competitive = military power above 1.2 x the governing; the label is the record's) | 3f20c349e (body) | w5-village-occupied-1, w5-metropolis-under_siege-101 |
+| DS-FTH-4 heresySuppression: hunted | v3 | middle | RE-SAID (no "keep it even from their kin"), with v1 and v4 of the same fault | b5265d245 | rww-city-calm-1, w5-metropolis-monster_pressure-2, w5-hamlet-monster_pressure-3, w5-town-under_siege-3, w5-metropolis-under_siege+famine-103, w5-town-famine-2, w5-hamlet-infiltrated-102 |
+| DS-FTH-4 heresySuppression: preached | v3 | middle | RE-SAID ("The faithful at X hold ..."), with v5 of the same fault | b5265d245 | w5-metropolis-occupied-102, w5-metropolis-slave_revolt-2 (the only two of 762) |
+| DS-GEN-18 BOUGHT-IN | v10 | last | STRUCK (v7 says it of the same towns) | a77ea19d1 | rww-city-under_siege-1, rww-thorp-under_siege-1, w5-metropolis-under_siege+famine-102, w5-village-under_siege-3, w5-town-under_siege-101 |
+| DS-SUP-2 UPSTREAM WEAK | v1 | middle | RE-SAID the right way round ({chain} is the upstream chain in trouble) | 4a124b1c7 | w5-city-under_siege+famine-103, rww-metropolis-famine-1, w5-metropolis-recently_betrayed-101 |
+| DS-SUP-2 UPSTREAM WEAK | v2 | last | RE-SAID, not struck (the pool has two rows; both now print true) | 4a124b1c7 | w5-town-calm-1, w5-metropolis-occupied-1, w5-metropolis-famine-1 |
+
+Also cured in the same reading (a sibling found false in a pool B touched): **DS-POW-6 GM ADVISORY v3 DECLARED off an occupation** (cc494ecd8; "Occupation Authority answers to the Military Council in name only"; guard row `w5-town-occupied-101`, by record, red first, executed).
+
+**Of the 16: 7 already handled by the fifth seat; of my 9, struck 1 (BOUGHT-IN v10), re-said 7 (crimeIsGovt v4, ADVANCING v6, GM v4, hunted v3, preached v3, UPSTREAM v1, v2), kept as true 1 (GM v5).** Beyond the list, the same faults in the same pools: re-said 4 (ADVANCING v7, hunted v1, v4, preached v5), declared 1 (GM v3).
+
+What prints after, by pool: crimeIsGovt v2, v3, v4 as before (no draw moved). ADVANCING v1 to v10 as before. GM ADVISORY: in an occupied town v4 or v5 (v1, v2 where a garrison stands); elsewhere as before. Heresy hunted and preached: all five each, as before. BOUGHT-IN under a siege: v7 or v8 (it was {7, 8, 10} in all 67 siege towns of the 762). UPSTREAM WEAK: v1, v2. No pool went silent where it printed something true.
+
+## ⚠ For the main seat before it merges
+- **DS-SUP-2 moves `economy.generated.js`.** The generator's desk split projects DS-ECO- and DS-SUP- into one leaf (`scripts/generate-dossier-state-prose.mjs :: DESKS`), so commit 4a124b1c7 changes that file: two text lines, both inside DS-SUP-2. The brief gives this seat the DS-SUP blocks; THE MERGE's check 7 ("the generated diff names only that side's desks' files") reads it as a mismatch. It is its own commit, the last of B, so the merge can take it (the regeneration is from the source, and the ECO side's DS-ECO lines are untouched) or drop it. My recommendation: take it, and read check 7 as "touches only its own blocks inside a shared leaf".
+- The guard file has one appended row (`w5-town-occupied-101`, GM ADVISORY v3).
+- The pins moved, each through its door with its cause: the byte baseline rows (every commit), the wiring census (97d85ad8e, cc494ecd8, a77ea19d1), proseEntryContradiction trailing-coordinate 385 -> 384 (988b0465b), proseMoveGrammar CONTROL 4 uniform segments 563 -> 564 and its share 0.658 -> 0.659 by hand (b5265d245), and the strike's counts 2961 -> 2960 with the histogram and the shift register (a77ea19d1). The merge re-derives all of them.
+
+## Named, not the corpus's (with the file)
+- `{good}` = "capital": `src/domain/display/stateProse/generalStateProse.js :: boughtGood` takes the first `primaryImports[]` row `bareCommonFill` passes, and "Capital" passes; it now prints through BOUGHT-IN v7 ("Panteakra bought its capital from outside", rww-city-under_siege-1).
+- The faction label "Military/Guard" in the GM ADVISORY lines: the record's faction name (`src/generators/factionDynamics.js`); other towns print real names there (War Council, Occupation Authority).
+- crimeIsGovt: the flag (`src/generators/priorityHelpers.js`) and the capture state `equilibrium` (`factionDynamics.js`) disagree about one town; v2 and v3 follow the flag ("holds the title and little else") and read against a watch that "competes with" the gang. No registered condition reads the capture state.
+- Heresy: "Questions of what is sanctioned magic and what is heresy remain deliberately unresolved." (`src/generators/power/factionStanding.js`) prints beside the hunted and preached lines in four towns: two lines disagreeing, which no census sees. The Magic tab's religious acceptance "indifferent" beside the flag (the read's r2s-wartime-hamlet-2).
+- An arcane house worked in the open (an Alchemist quarter, a Wizard's tower, a Mages' district) in 12 of the 17 heresy towns: no registered condition reads one; the heresy lines were re-said to what the flag holds. A line that would claim concealment waits on the parked word "practitioner".
+
+## Found while reading, for C to E
+- DS-FTH-4 hunted v2 "can bring armed men to the door" reaches w5-village-under_siege+famine-101, a town with no force on its record (E).
+- DS-GEN-18 BOUGHT-IN v8 "carts" at a port or an isolated village (the read's LOW; E).
+- The seven faith pools that name a church or a temple (note ii), as I read them; NOT touched: DS-FTH-4 `FLAG: crusaderSynthesis`, `FLAG: heresySuppression: hunted`, `FLAG: heresySuppression: preached`, `FLAG: religiousFraud`, `FLAG: mageTheocracy`, `ENDOWED`, and DS-GEN-17 `GREAT HOUSE: cathedral`.
+
+## C, D, E, F
+Not begun.
