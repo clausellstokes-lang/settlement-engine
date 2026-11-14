@@ -2532,9 +2532,9 @@ own entailment and licenses nothing about who runs it.
 4. `[ledger · dm-only · colour]` Criminal money finds little purchase at {settlement}: the town is doing well, and its officials have little reason to sell.
 
 **capture reached an AGENT of a faction** *(every variant `dm-only`; print-deferred)* {colour}
-1. `[ledger · dm-only]` Someone low down in {faction} at {settlement} is being paid to pass on what they hear. They decide nothing, but they hear a great deal.
+1. `[ledger · dm-only]` Someone in {faction} at {settlement} is being paid to pass on what they hear. Whoever it is, they hear a great deal.
 2. `[street · dm-only]` Somebody at {settlement} is a little too well informed about {faction}'s business and a little too easy about money, and nobody has connected the two.
-3. `[counterforce · dm-only]` Someone has bought a minor member of {faction} at {settlement}. It buys news and small favours, not decisions.
+3. `[counterforce · dm-only]` Someone has bought a member of {faction} at {settlement}: news of {faction}'s business now goes where it should not.
 
 **capture reached a LEADER** *(every variant `dm-only`; print-deferred)* {colour}
 1. `[ledger · dm-only]` The person who speaks for {faction} at {settlement} will not speak against one particular interest. No minute of any meeting shows why, and whatever that interest wants passes unopposed.

@@ -3188,7 +3188,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "Someone low down in {faction} at {settlement} is being paid to pass on what they hear. They decide nothing, but they hear a great deal.",
+          "text": "Someone in {faction} at {settlement} is being paid to pass on what they hear. Whoever it is, they hear a great deal.",
           "slots": [
             "faction",
             "settlement"
@@ -3212,7 +3212,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "Someone has bought a minor member of {faction} at {settlement}. It buys news and small favours, not decisions.",
+          "text": "Someone has bought a member of {faction} at {settlement}: news of {faction}'s business now goes where it should not.",
           "slots": [
             "faction",
             "settlement"

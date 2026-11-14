@@ -36399,7 +36399,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [
         "power.criminalCaptureState"
@@ -71277,7 +71277,7 @@
       "subject": "capture reached an AGENT of a faction",
       "fields": [],
       "readingFunction": "capturePoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {faction, settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {faction, settlement}"
     },
     {
       "tier": "COVERED",
