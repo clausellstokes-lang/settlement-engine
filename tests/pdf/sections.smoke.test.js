@@ -497,27 +497,31 @@ describe('institution label — screen↔print parity', () => {
     expect(text, 'the second processing institution must survive the seam').toContain('Blacksmith');
   });
 
+  // EXPORTS-B3 (2026-11-14, re-keyed by identity): a worked row now names no house (the tab's Full card names none: the
+  // chair's ruling on EXPORTS-MEASURE-1 B3), so the join this arm guards is the one the slice still makes: an Unexploited
+  // row's houses still needed, under the tab's word "Needs:", on a roster holding neither house.
   test('the resources slice joins DISPLAY names, because the chapter can no longer unjoin them', () => {
     const fixture = {
       ...villageSettlement,
+      institutions: [],
       resourceAnalysis: {
         ...(villageSettlement.resourceAnalysis || {}),
         exploitation: {
-          fullyExploited: [{
+          fullyExploited: [],
+          partiallyExploited: [],
+          unexploited: [{
             rawResource: 'wool',
             processingInstitutions: ['Parish church', 'Blacksmith'],
             finalProducts: ['broadcloth'],
           }],
-          partiallyExploited: [],
-          unexploited: [],
         },
       },
     };
     const rows = resourcesSlice(fixture).chainRows;
     expect(rows, 'the slice built no chain row to judge').toHaveLength(1);
-    expect(rows[0].processing).toBe('House of worship, Blacksmith');
+    expect(rows[0].processing).toBe('Needs: House of worship, Blacksmith');
     // ⭐ AND THE MODEL UNDER IT IS UNMOVED — the seam reads, it never migrates.
-    expect(fixture.resourceAnalysis.exploitation.fullyExploited[0].processingInstitutions[0])
+    expect(fixture.resourceAnalysis.exploitation.unexploited[0].processingInstitutions[0])
       .toBe('Parish church');
   });
 });
