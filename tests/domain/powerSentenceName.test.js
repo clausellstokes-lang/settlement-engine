@@ -16,14 +16,16 @@ import { FACTION_VERB_PHRASES } from '../../src/domain/worldPulse/factionCompeti
 
 describe('powerSentenceName / powerPossessive', () => {
   it('a slashed label reads as its first name, and a bloc\'s plural takes a bare apostrophe', () => {
-    expect(powerSentenceName('Military/Guard')).toBe('Military');
+    // POWERS-16 (the chair's ruling (r2), re-keyed by identity): the catalogue label's prose form is a name a sentence holds,
+    // "The Guard" (display/powerSentenceName.js :: PROSE_FORMS); a slashed label NOT in the table keeps the first-name rule
+    expect(powerSentenceName('Military/Guard')).toBe('The Guard');
     expect(powerSentenceName('Monster Hunters / Adventurers')).toBe('Monster Hunters');
     expect(powerSentenceName('Weavers/Textile workers')).toBe('Weavers');
     expect(powerSentenceName('Town Council')).toBe('Town Council');
     expect(powerPossessive('Religious Authorities')).toBe("Religious Authorities'");
     expect(powerPossessive('Merchant Guilds')).toBe("Merchant Guilds'");
     expect(powerPossessive('Monster Hunters / Adventurers')).toBe("Monster Hunters'");
-    expect(powerPossessive('Military/Guard')).toBe("Military's");
+    expect(powerPossessive('Military/Guard')).toBe("The Guard's");
     expect(powerPossessive('Elder Council')).toBe("Elder Council's");
     expect(powerPossessive("Headman's Authority")).toBe("Headman's Authority's");
     expect(powerPossessive('The Peerage')).toBe("The Peerage's");

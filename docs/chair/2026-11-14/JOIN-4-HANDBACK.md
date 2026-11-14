@@ -15,6 +15,7 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF (the chair's messages are not on the br
 - **13:38 UTC (on the r2-code-b stop):** the stop is right and accepted: DO NOT LAND THAT LANE NOW. RULED: both cures stand, each in its own case (a roster healer: the template; the cast's stand-in where one is minted: the lane's line; the data lane's slot-less twin only where the cast holds nobody): the LANE'S OWN SEAT merges the joined line into its lane, makes it there and re-keys its pins; the chair sends "LAND: lane/r2-code-b-2026-11-13 at <hash>" when it reports. GO ON: coherence-upkeep, the two join lanes, item 3 (build, grid, count), item 5's message. ONE MORE POINT AFTER THE ELEVEN, by the chair's own change of the brief's "not merged" for this one branch: "LAND: lane/upkeep-monotone-2026-11-14 at 0ca0bbe94" (the defence rating's rebuild), by the same laws; its declared moves shift goldens and pins: LISTED, not re-keyed by this seat.
 - **14:19 UTC:** TWO POINTS MORE, after item 3 and the rebuild's point, in this order: "LAND: lane/coherence-upkeep-2026-11-12 at 2d8aadb19" and "LAND: lane/join-surfaces-2026-11-14 at e6cb445db". If the count will not hold all three points and the hand-back: the hand-back first, the points not made named in its first line. One line back for each point made.
 - **14:20 UTC:** "LAND: lane/r2-code-b-2026-11-13 at a86646b84" (its seat merged the joined line 0a296575c, made the plague hook as ruled, re-keyed its pins, 39/39 on the three files); if the three files are not green after the merge: STOP for it again with the titles. BEFORE the other points.
+- **14:38 UTC:** ONE POINT MORE after the four: "LAND: lane/powers-follow-up-2026-11-13 at d2ffdbb07". Item 5's message: one message when the points are in, with the joined line's tip (the item-5 message had already gone at 14:40; a closing message follows the points).
 
 ## 2. The landings
 
@@ -31,6 +32,10 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF (the chair's messages are not on the br
 | 9 | coherence-upkeep-2026-11-12 | 660cb0893 (13:38) | 26474cda9 | 0537f92f3 | none | clean-both: `src/pdf/lib/viewModelBodySlices.js` |
 | 10 | join-nolane-2026-11-14 | 3ccdc0711 (13:48; the brief's hash, equal to origin's tip) | — | 333f91edc | none | — |
 | 11 | join-surfaces-2026-11-14 | 9e47f912a (13:51) | — | 0a296575c | none | — |
+| P1 | r2-code-b-2026-11-13 (the chair's 14:20 point) | a86646b84 (14:42; the lane's tip then 08e43c072) | 30ed925ee | 9618e0319 | none | clean-both: `src/domain/summary/tonightSheet.js` (item 4 and the lane's `castWantFactsOf`/`scarceOf`, both stand); the three files of the stop 39/39; `tonightOwnGoal` 6/7, red at the lane's tip too |
+| P2 | upkeep-monotone-2026-11-14 (the chair's 13:38 point) | 0ca0bbe94 (14:46; the lane's tip then 2ff1dffe9) | — | 65dc92af9 | 2 registers | `.lighting-census-baseline.json`, `.tuning-inventory.json`; lane-only: `tests/lint/.tuning-register.json`; its goldens `generatorGoldenMaster`, `espionageDormancyFence` (red and named by the lane) and its re-keyed pins: LISTED |
+| P3 | coherence-upkeep-2026-11-12 (the chair's 14:19 point) | 2d8aadb19 (14:56; equal to the lane's tip) | 660cb0893 (merge 9) | b61143029 | none | — |
+| P4 | join-surfaces-2026-11-14 (the chair's 14:19 point) | e6cb445db (15:00; the lane's tip then c66333f0c) | 9e47f912a (merge 11) | c7dc0f526 | none | — |
 
 Every merge: `verify.sh` no mismatch; lint-staged changed nothing; the hook's gates green at every push (type ratchet 167/167, strict-domain 1113/1113, eslint 0 errors).
 
@@ -102,5 +107,5 @@ A worktree at origin's tip (`git worktree add /home/user/j4wt -b join4 <tip>`, `
 
 ## 9. WHAT IS LEFT (line by line)
 
-1. The message to the chair (item 5).
-2. The points, in the chair's order: r2-code-b at a86646b84 (its three files run after the merge); upkeep-monotone at 0ca0bbe94; coherence-upkeep at 2d8aadb19; join-surfaces at e6cb445db. One line back for each.
+1. (Item 5's message sent 14:40; points 1 and 2 made: 9618e0319, 65dc92af9.)
+2. The point left: powers-follow-up at d2ffdbb07 (points 3 and 4 made: b61143029, c7dc0f526). One line back for each; then one closing message with the tip.

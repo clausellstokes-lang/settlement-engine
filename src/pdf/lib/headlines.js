@@ -13,6 +13,7 @@ import { cap, humanize, label as labelOf } from './format.js';
 import { coverageRatioPct } from './foodCoverage.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { plotHookSourcePage } from '../../domain/dossier/plotHooks.js';
+import { withPowerSentenceNames } from '../../domain/display/powerSentenceName.js';
 
 // ── Shared plain-word helpers (the owner's style law of 2026-11-07: the label stays as the
 // first word, the machinery leaves, the town's own nouns fill the slots) ──────────────────
@@ -390,7 +391,8 @@ export function npcsHeadline(npcs) {
   // Council"); "(power N)" was machinery, and the struck variant's "the fisherman" is never written — the
   // card's own title is.
   // the first rank only: a card backed by two powers prints "first of A · member of B"; the headline keeps the first.
-  const who = [top.title, String(top.powerLine || '').split(' · ')[0]].filter(Boolean).join(', ');
+  // POWERS-16 (the chair's ruling (r2)): the rank line set in this sentence names its power in the prose form, from one leaf
+  const who = [top.title, withPowerSentenceNames(String(top.powerLine || '').split(' · ')[0])].filter(Boolean).join(', ');
   const named = `${top.name}${who ? `, ${who},` : ''}`;
   if (total === 1) return `One person worth knowing: ${named.replace(/,$/, '')}.`;
   const count = capFirst(countWord(total));
