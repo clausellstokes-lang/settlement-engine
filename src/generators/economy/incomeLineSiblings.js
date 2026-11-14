@@ -15,8 +15,10 @@ export const GRAIN_OWN_FIELDS_LINE = 'Grain from local fields sold within the se
 
 /** The metalwork line where coal stands and no iron does (COHERENCE-AGREE cure 7); it says the iron is bought in. */
 export const LOCAL_COAL_LINE = 'Local coal fires the forges, but the iron is bought in; this income stream leans on the trade route.';
-/** Its twin where the roster holds no forge house (COHERENCE-AGREE-8, REVIEW-AGREE-3 T3): no forge here burns the coal. */
-export const LOCAL_COAL_SOLD_LINE = 'Coal is dug here and sold to the forges of other towns; no forge here burns it, so this income stream leans on the trade route.';
+/** Its twin where the roster holds no forge house (COHERENCE-AGREE-8, REVIEW-AGREE-3 T3). UPKEEP-10 (the row banked at
+ * point 49, `after-base: defence`): it names no forge, here or elsewhere; it says what its gate makes true (coal among
+ * the exports, no siege: `trueIncomeDesc`). */
+export const LOCAL_COAL_SOLD_LINE = 'Coal is dug here and sold on to other towns, so this income stream leans on the trade route.';
 /** The roster's forge houses, as a name word (the census's "metal house"): the coal line's gate. */
 export const FORGE_HOUSE_WORDS = Object.freeze(['smith', 'forge', 'foundr', 'smelt', 'metal', 'armor', 'armour', 'weapon']);
 

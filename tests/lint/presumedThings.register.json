@@ -813,9 +813,7 @@
    ["market", "after-release", "Trade is what this settlement lives on. The markets are busy at all hours, and the guilds have a hand in every craft.", "a217ca67520254b0"]
   ],
   "src/generators/economy/viability.js": [
-   ["bank", "after-release", "Banking institutions exist but the economy priority is very low.", "794bb23543dd590c"],
    ["bank", "after-release", "Banking Without Economic Focus", "c0a7c888f796e84d"],
-   ["bank", "after-release", "Raise Economy priority or remove Banking institutions", "507ed54bca42e42b"],
    ["temple", "after-release", "Add a house of worship, a temple or a monastery", "12760e6b967021f0"],
    ["watch", "after-release", "Add Thieves' Guild, Black Market, or City Watch", "653197f17b02acd7"]
   ],

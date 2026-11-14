@@ -78,7 +78,7 @@ describe('the law, over births of every crisis the lines print under', () => {
       for (const d of lines(s)) {
         if (/alchemi/i.test(d)) { alch++; expect(has(/alchemist/), `${seed}: ${d}`).toBe(true); }
         if (d === ALCHEMY_TRADE_LINE) expect(siege || impaired(/^(?:Alchemy|Herbalism)\b/), `${seed}: ${d}`).toBe(false);
-        if (siege) { siegeRows++; expect(/\b(?:imported|bought|purchased|sold to the forges of other towns|regional export|regional builders|across the region|surrounding settlements)\b/.test(d), `${seed}: ${d}`).toBe(false); }
+        if (siege) { siegeRows++; expect(/\b(?:imported|bought|purchased|sold to the forges of other towns|sold on to other towns|regional export|regional builders|across the region|surrounding settlements)\b/.test(d), `${seed}: ${d}`).toBe(false); }
         if (/feeds the smithy/.test(d)) expect(has(/smith/), `${seed}: ${d}`).toBe(true);
         if (/^Local quarry\b/.test(d)) expect(has(/quarr/), `${seed}: ${d}`).toBe(true);
         if (d === FISH_EXPORT_LINE) expect(has(/fisher|fishing/), `${seed}: ${d}`).toBe(true);
