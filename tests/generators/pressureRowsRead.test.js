@@ -1,0 +1,56 @@
+/**
+ * tests/generators/pressureRowsRead.test.js — R2-CODE-A-6, CENSUS-2's writers in this lane's files
+ * (`narrativeText.js :: PRESSURE_SENTENCES`, the hand-back's step 4 row): four rows said what the town lacks.
+ * - wartime (losing)[2] "a workshop closed for want of a master" where the roster holds no house of craft: the
+ *   workshop only where one stands (genPressureDetail's hasWorkshop; an "Access to" row is not one); a branch
+ *   inside the drawn row.
+ * - succession_void[5] "whoever the merchants and the creditors decide" where the roster holds no market: `market`.
+ * - insurgency (criminal)[1] "The streets of X have gone quiet" and slave_revolt[0] "the enslaved hold whole
+ *   districts" below the middling band: `population: ≥ middling` (the chair's ruling (f)).
+ * A declared row refused resolves draw-free to the next admitted one (generatePressureSentence).
+ */
+import { beforeAll, describe, expect, it } from 'vitest';
+import { PRESSURE_SENTENCES } from '../../src/generators/narrativeText.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { createPRNG } from '../../src/kernel/prng.js';
+import { clearActiveRng, setActiveRng } from '../../src/kernel/rngContext.js';
+
+describe('A1 the rows declare what they name', () => {
+  it('the workshop only where a house of craft stands', () => {
+    const losing = { name: 'X', compound: { militaryEffective: 10, economyOutput: 10 } };
+    expect(String(PRESSURE_SENTENCES.wartime({ ...losing, hasWorkshop: true })[2])).toContain('(a workshop closed for want of a master,');
+    expect(String(PRESSURE_SENTENCES.wartime({ ...losing, hasWorkshop: false })[2])).toContain('(a trade left without its master,');
+  });
+  it('the merchants need a market; streets and districts need the middling band', () => {
+    const prev = setActiveRng(createPRNG('pressureRowsRead'));
+    try { expect(/** @type {any} */ (PRESSURE_SENTENCES.succession_void({ name: 'X' })[5]).needs).toEqual(['market']); } finally { clearActiveRng(prev); }
+    const crim = PRESSURE_SENTENCES.insurgency({ name: 'X', compound: { criminalEffective: 60, militaryEffective: 10, economyOutput: 10 } });
+    expect(/** @type {any} */ (crim[1]).needs).toEqual(['population: ≥ middling']);
+    expect(/** @type {any} */ (PRESSURE_SENTENCES.slave_revolt({ name: 'X' })[0]).needs).toEqual(['population: ≥ middling']);
+  });
+});
+
+describe('A2 the census towns, born in the census shape', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+  /** @param {string} seed */
+  const born = (seed) => { const m = /** @type {RegExpMatchArray} */ (seed.match(/^r2s-(\w+)-(thorp|hamlet|village|town|city|metropolis)-\d+$/)); return /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, selectedStresses: [m[1]], selectedStressesRandom: false, settType: m[2] }), null, { seed, customContent: {} })); };
+  it.each([
+    ['r2s-wartime-thorp-3', /a workshop/],
+    ['r2s-succession_void-thorp-2', /merchants/],
+    ['r2s-insurgency-thorp-0', /streets/],
+    ['r2s-slave_revolt-hamlet-3', /districts/],
+  ])('guard town %s: the line does not say what the town lacks', (seed, words) => {
+    expect(born(seed).pressureSentence).not.toMatch(words);
+  });
+  it.each([
+    ['r2s-wartime-city-3', /a workshop closed/],
+    ['r2s-succession_void-metropolis-3', /the merchants and the creditors/],
+    ['r2s-insurgency-city-3', /^The streets of/],
+    ['r2s-slave_revolt-metropolis-0', /whole districts/],
+  ])('%s keeps its row where the record bears it out', (seed, words) => {
+    expect(born(seed).pressureSentence).toMatch(words);
+  });
+});

@@ -763,12 +763,14 @@
         {
           "lineId": "PRESSURE_SENTENCES.succession_void[5]",
           "text": "The succession in ${name} will be settled by the ${commodity} more than by any claim of blood or law: whoever the merchants and the creditors decide to deal with becomes, retroactively, the legitimate successor.",
-          "needs": [],
+          "needs": [
+            "market"
+          ],
           "excludes": [],
           "crisis": [
             "succession_void"
           ],
-          "colour": true,
+          "colour": false,
           "stop": []
         }
       ]
@@ -890,12 +892,14 @@
         {
           "lineId": "PRESSURE_SENTENCES.insurgency(street)[1]",
           "text": "The streets of ${name} have gone quiet, and everyone is waiting for something to break. ${govFaction} gives orders that are heard and not obeyed, and each one weakens it further.",
-          "needs": [],
+          "needs": [
+            "population: ≥ middling"
+          ],
           "excludes": [],
           "crisis": [
             "insurgency"
           ],
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
@@ -1188,7 +1192,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.wartime(losing)[2]",
-          "text": "Every capable pair of hands ${name} could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (a workshop closed for want of a master, a field unsown for want of a back) while ${govFaction} reports the settlement loyal and does not report the rest.",
+          "text": "Every capable pair of hands ${name} could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (${workshop ? 'a workshop closed for want of a master' : 'a trade left without its master'}, a field unsown for want of a back) while ${govFaction} reports the settlement loyal and does not report the rest.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -1306,7 +1310,9 @@
         {
           "lineId": "PRESSURE_SENTENCES.slave_revolt[0]",
           "text": "The revolt in ${name} is too big to put down by force alone: the enslaved hold whole districts and are organised, and the governing power has not committed what crushing them would take. The slave trade has stopped. What is left to settle is what ${name} becomes afterwards, and who decides.",
-          "needs": [],
+          "needs": [
+            "population: ≥ middling"
+          ],
           "excludes": [],
           "crisis": [
             "slave_revolt"
