@@ -347,6 +347,21 @@ export const TIME_BANDS = Object.freeze([
   Object.freeze({ id: 'older_than_bearers', maxWeeks: Infinity, attributive: null, span: null, since: null, predicate: 'older than anyone living' }),
 ]);
 
+/**
+ * THE SIXTH BAND'S LIVING FLOOR (R3-CODE-C-8, the reader's L01; the chair's ruling (a) of 2026-11-14,
+ * vetoable by the owner). The band starts at sixty years, but the record's people reach their seventies
+ * (npcData.js, the elder ages: "seventies"), so "older than anyone living" printed of a siege 61 years
+ * gone with its "61y ago" on the same tab. The predicate is said only at ninety years and over, older
+ * than every age a person of the record carries; from sixty to ninety the band says what only the
+ * oldest remember. The band keeps its id and its three null columns either side of the floor (the
+ * pools keyed on the id, FOUNDED-OLD and ANCHORED-OLD, and the herald's index do not move); only the
+ * predicate column reads the floor.
+ */
+export const LIVING_FLOOR = Object.freeze({ floorWeeks: 52 * 90, predicate: 'older than all but the oldest alive' });
+/** The sixth band as it prints under its living floor: the same band, its predicate the floor's. */
+const SIXTH_BAND_UNDER_FLOOR = /** @type {typeof TIME_BANDS[number]} */ (/** @type {unknown} */ (
+  Object.freeze({ ...TIME_BANDS[TIME_BANDS.length - 1], predicate: LIVING_FLOOR.predicate })));
+
 /** The four print positions a time band may occupy. */
 export const TIME_BAND_POSITIONS = Object.freeze(['attributive', 'span', 'since', 'predicate']);
 
@@ -363,7 +378,10 @@ export function timeBandOf(sinceTicks, intervalWeeks = 1) {
   const ticks = Number.isFinite(sinceTicks) ? Math.max(0, Number(sinceTicks)) : 0;
   const per = Number.isFinite(intervalWeeks) && Number(intervalWeeks) > 0 ? Number(intervalWeeks) : 1;
   const weeks = ticks * per;
-  for (const band of TIME_BANDS) if (weeks <= band.maxWeeks) return band;
+  for (const band of TIME_BANDS) {
+    if (weeks > band.maxWeeks) continue;
+    return band.id === 'older_than_bearers' && weeks < LIVING_FLOOR.floorWeeks ? SIXTH_BAND_UNDER_FLOOR : band;
+  }
   return TIME_BANDS[TIME_BANDS.length - 1];
 }
 
