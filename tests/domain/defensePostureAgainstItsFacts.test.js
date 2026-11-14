@@ -127,16 +127,30 @@ const UNWATCHED = 'rr3-town-slave_revolt-rand-5 with no watch or garrison';
 const offTheRoster = (s) => ({ ...s, institutions: (s.institutions || []).filter((inst) => {
   const f = standingDefenseForces({ ...s, institutions: [inst] }); return !f.watch.present && !f.garrison.present;
 }) });
+/**
+ * R3-TABS-5, the chair's ruling (e) on the second reader's R3 (LOW): the 'no walls' arm could not red on its own fault
+ * (on the 1,536 every unwalled strong town is taken first by a later strike). Its made record: the walled keeper's own
+ * record with ONLY its walls taken off the roster, so that 'no walls' alone keeps the line off: its watch stands, no
+ * siege, no occupation, the guard not on paper, its supply not short. The plant ('no walls' off) reds it.
+ */
+const UNWALLED_MADE = 'rr3-town-monster_pressure-rand-4 with its walls taken off the roster';
+const wallsOffTheRoster = (s) => ({ ...s, institutions: (s.institutions || []).filter((inst) => !standingDefenseForces({ ...s, institutions: [inst] }).walls.present) });
+const recordSeed = (seed) => (seed === UNWATCHED ? UNWATCHED_FROM : seed === UNWALLED_MADE ? WALLED_KEEPS : seed);
 describe('a posture line that names works or a watch reads the roster (F3)', () => {
   beforeAll(() => {
     for (const seed of [...UNWALLED, WALLED_KEEPS, UNWATCHED_FROM]) TOWNS[seed] = TOWNS[seed] || birth(seed);
     TOWNS[UNWATCHED] = offTheRoster(TOWNS[UNWATCHED_FROM]);
+    TOWNS[UNWALLED_MADE] = wallsOffTheRoster(TOWNS[WALLED_KEEPS]);
   }, 300000);
+  test('the made record differs from its keeper by its walls alone', () => {
+    const made = standingDefenseForces(TOWNS[UNWALLED_MADE]); const kept = standingDefenseForces(TOWNS[WALLED_KEEPS]);
+    expect([made.walls.present, made.watch.present || made.garrison.present, kept.walls.present]).toEqual([false, true, true]);
+  });
   test('no unwalled town, and none without a watch or a garrison, is told its works are kept up', () => {
-    const failures = collectSeedFailures([...UNWALLED, UNWATCHED], (seed) => {
+    const failures = collectSeedFailures([...UNWALLED, UNWALLED_MADE, UNWATCHED], (seed) => {
       const s = TOWNS[seed]; const f = standingDefenseForces(s);
       if (seed === UNWATCHED ? (!f.walls.present || f.watch.present || f.garrison.present) : f.walls.present) throw new Error('premise');
-      const line = defensePostureProse(s, { seed: seed === UNWATCHED ? UNWATCHED_FROM : seed }).posture?.beside || '';
+      const line = defensePostureProse(s, { seed: recordSeed(seed) }).posture?.beside || '';
       if (NAMES_WORKS.test(line)) throw new Error(`${seed === UNWATCHED ? 'no watch or garrison' : 'no walls'}: ${line}`);
     });
     expectNoSeedFailures(failures, 'the works read from the roster');
