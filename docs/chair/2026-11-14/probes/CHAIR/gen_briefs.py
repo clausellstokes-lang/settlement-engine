@@ -6338,6 +6338,90 @@ SEATS2['W2-C-LEAVES-13'] = dict(
 )
 
 
+SEATS2['W2-WRITE-14'] = dict(
+    title="W2-WRITE-14 · the corpus lane, the DEFENCE, POWER and FAITH pools: the sweep's measured batch landed pool by pool, the council in a headman's town reworded, three red tests",
+    branch='lane/w2-write-2026-11-13', tip='6632c925', statement=False,
+    intro=("You are W2-WRITE-14, the fourteenth seat on the corpus lane of the settlement-engine integration program (lane/w2-write-2026-11-13). The "
+           "lane holds the dossier's written lines: ONE source document (docs/content/RECEIPT_POOLS_DOSSIER_STATE.md) from which "
+           "src/data/dossierStateProse/*.generated.js are generated; a line is cured by a declaration or by rewording, never by striking a "
+           "middle row. YOURS are the pools whose ids begin DS-DEF, DS-POW, DS-FTH and DS-CND (a second seat on a side branch holds DS-ECO, "
+           "DS-GEN and DS-SUP: you edit none of those sections). The thirteenth seat cured the reader's HIGH line under hunger (29 towns to "
+           "0) and WROTE THE SWEEP OF ITS CLASS AS ONE SCRIPT: every pool, every condition some variants carry and a sibling lacks: 108 "
+           "live rows in your pools. It read them, made 34 declarations, MEASURED AND GUARDED THE WHOLE BATCH, and could not land it: the "
+           "batch stops at two gates, and it reached its count. The batch is kept as a patch. Yours: land it, pool by pool, under the "
+           "rulings below; then the HIGH line carried; then the list. The lane lands as points on the joined line: NO whole suite."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/W2-WRITE-HANDBACK-13.md WHOLE (178 lines, some very long: by script): the item as made; "
+          "THE SWEEP OF THE CLASS (its table by block; the rows of your pools as READ, each with the declaration it takes; THE BATCH: "
+          "what it moves, the inheritors read, the 30 guard rows; THE STOPS: the two gates and the stale row); the registers named "
+          "stale; the guards owed; WHAT IS LEFT (YOUR LIST: steps 1 to 5); FOR THE JOIN; how the instruments are re-made "
+          "(docs/chair/2026-11-14/probes/W2-WRITE-13/: sweep.mjs, vt.mjs, declare.py, replay.mjs, moved.mjs, after.sh, "
+          "SWEEP-CURES-WIP.patch). And of W2-WRITE-HANDBACK-12.md ONLY \"What is left\" (the rows the thirteenth seat's steps point to) "
+          "and of W2-WRITE-HANDBACK-10.md ONLY \"How the instruments are re-made\".\n"
+          "3. THE READER'S FILES, for a row you are curing (`git fetch origin lane/review-w2-write-2-2026-11-14`): "
+          "docs/chair/2026-11-14/REVIEW-W2-WRITE-2-LINES-READ.md (under \"Every line\" only the sections of YOUR pools) and the verdict's "
+          "findings table."),
+    first=("FIRST ACT. FULL HISTORY (`git fetch --depth=2147483647 origin lane/w2-write-2026-11-13 lane/join-2026-11-14 "
+           "lane/integration-2026-11-07`; `git rev-parse --is-shallow-repository` prints false). Read your lane's tip back from origin: it "
+           "was 6632c9258 when this was written; any difference is a stop: tell the chair. THEN MERGE THE JOINED LINE'S TIP INTO YOUR LANE "
+           "(`git merge --no-ff origin/lane/join-2026-11-14`: say which tip): every lane's cures are landed there (the thirteenth seat "
+           "read that the joined line changes the source document in one line and adds a field to four pool metas: no line of the "
+           "batch). A conflict in the source document keeps BOTH sides' lines; a generated leaf is REBUILT through the corpus's own "
+           "door, never merged by hand; a register, a baseline or a bundle that conflicts takes THE JOINED LINE'S side. After it: the "
+           "fast set: a test red after the merge and green on both sides before it is A COMPOSED RED: one message to the chair with "
+           "the two intents; go on meanwhile."),
+    work=("THE CHAIR'S RULINGS ON THE THIRTEENTH SEAT'S STOPS (2026-11-14; each vetoable by the owner; copy them into your hand-back), "
+          "beside the rulings its file copies, which stand:\n"
+          "(r1) NO CEILING IS RAISED, AND A FALSE LINE IS NOT PARKED BEHIND ONE. The projection contract's authoring bill counts the "
+          "states in which a pool is MUTE; three of the batch's cures add a mute state and take the bill over its ceiling (30 against "
+          "28). A STATE A CURE WOULD LEAVE MUTE IS ANSWERED BY A TWIN TRUE IN THAT STATE: for \"neither walls nor force\" where a hired "
+          "company stands: a line that says the town has no wall and no force of its own, and names the hired company as what stands "
+          "between it and trouble; for the Economic Survival STRONG pool in a Poor or Struggling town: a line true of money laid by "
+          "against a poor year's earnings, or, if no true line can be said of that state, the STATE IS SAID IMPOSSIBLE by its "
+          "declaration (measure: how many births reach it). Each twin read in three towns of its state and listed for the owner's "
+          "veto. The bill ends AT OR UNDER its ceiling by your own run.\n"
+          "(r2) THE ALIVENESS SWEEP (\"all twenty-six pools speak\" in a fact-free town): a pool whose every line now carries an "
+          "exclusion falls mute THERE: trace each such pool: if it speaks in every state the product can reach (by the replay over "
+          "the births), the test's premise for that pool is re-keyed BY IDENTITY to a state it speaks in, its cause in the note; if "
+          "it is mute in a state the product reaches: (r1): a twin.\n"
+          "(r3) THE COUNCIL IN A HEADMAN'S TOWN (the reader's HIGH, carried: DS-POW-5 council v1, v2, v4: \"slow because the whole "
+          "Headman's Authority must agree\" beside one member). The thirteenth seat measured that no fact atom tells a body of one from "
+          "a body of many, and no new word is added for it. RULED: THE LINES ARE REWORDED TO CLAIM NO PLURALITY: true of a headman "
+          "and of a council alike (the decision waits on the governing body's word; nothing is said of many having to agree), read "
+          "in a headman's town, an elder council's and a household council's; the slot's label stays the power's own name. No line "
+          "is silenced for it; no word is added.\n"
+          "(r4) BATCH NOTHING: the thirteenth seat's batch stopped whole at the gates: land POOL BY POOL: one pool's declarations, "
+          "its guard rows, the fast set, the push; then the next. The patch is your source; a declaration whose inheritor you have "
+          "not read in the towns it moves is not landed.\n"
+          "(r5) REGISTERS ARE RE-DERIVED ONCE, AT THE CLOSE (as the thirteenth seat's file has it): the byte baseline, the wiring "
+          "census and the shift register stay NAMED; the presumed-things register's stale row leaves through its own door in its own "
+          "commit, as its file says; a pin your cure moves is re-keyed BY IDENTITY.\n"
+          "THE WORK, in this order, measured first, red first where a guard town exists, pushed as made:\n"
+          "1. THE BATCH, by (r1), (r2), (r4): apply the patch in a scratch tree to see the gates as the thirteenth seat saw them; then "
+          "land it pool by pool, widest moves first (the walls, the gates, the frontier's deterrence lines, CRITICAL and WEAK under an "
+          "occupation, INTERNAL PRESSURE), each with the inheritor READ in the cured towns. ONE MESSAGE TO THE CHAIR when the batch is "
+          "in (the tip; how many of the 34 landed; the twins written; the bill and the aliveness test by your run), then THE COUNT.\n"
+          "2. (r3) the council lines; then the thirteenth seat's step 2 remainder (DS-DEF-2 v7 read at the reader's town; HIGH 1's "
+          "guard row: teach the guard's births the reader's town by identity; the sister-pool sweep for \"all the town has\", "
+          "\"only\", \"nothing but\" a force).\n"
+          "3. Its steps 3, 4 and 5 as written (the three red test files; DEF-2 v4 and v6; STRONG v3 and v12; the last read's rows "
+          "still false, by width; the slash label \"Military/Guard\" in DS-POW-4 and DS-POW-6: LIST the lines; the words come from the "
+          "chair when the powers lane's seat reports them).\n"
+          "FOR EVERY CURE: the pool's draws per variant before and after (replay.mjs and moved.mjs: no render is needed for a "
+          "declaration); A RE-GATE READS THE LINE THAT INHERITS ITS TOWNS; a new or reworded line is read where it prints on every "
+          "surface in three towns, a siege, a famine or an occupation among them, the smallest and the largest size it reaches.\n"
+          "AFTER EVERY POOL: after.sh (the generated pools rebuilt and checked, the presumed door's `--check` against the lane's 23, "
+          "the pool guard, the grid, the three fast gates, the fast set): NO register re-taken.\n"
+          "THE THIRTEENTH SEAT REACHED ITS COUNT IN AN HOUR: the sweep and its reads are DONE and are not repeated: you render "
+          "nothing whole; you replay. If the count's field reads 0 or stands still: judge by time and hand back by file at about "
+          "ninety minutes of work, before a pool you cannot finish.\n"
+          "THE HAND-BACK, kept current after every pool: docs/chair/2026-11-13/W2-WRITE-HANDBACK-14.md in the form of the thirteenth's."),
+    merges='; the merge of the joined line into YOUR lane that the first act names',
+    when="for a stop that blocks everything you have left, for a composed red after the merge, when the batch is in (the tip; the counts; the twins; the two gates by your run), and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
