@@ -217,9 +217,9 @@ function ChainCard({ chain, town, instNames = [] }) { const shown = chainPrintNa
   // — which already routes the same field through the seam — said 'House of worship'. The
   // seam goes BEFORE humanize so an unmapped institution still gets its casing.
   const flow = [
-    // R2-CODE-B round 3, ruling (d) (#804): no ground the record says is absent (chainHouses.js), read on the source the
-    // town's access prints (COHERENCE-AGREE-6 F1), as the screen's card reads it: chainFlowFacts({ ...chain, ...shown }).
-    chainSourceOf({ ...chain, ...shown }) ? humanize(label(chainSourceOf({ ...chain, ...shown }))) : null,
+    // R2-CODE-B round 3, ruling (d) (#804): no ground the record says is absent (chainHouses.js); with the town, a toll
+    // renamed by its access names that access (COHERENCE-AGREE-6 F1), as the screen's card reads it (R2-CODE-B-7).
+    chainSourceOf(chain, shown) ? humanize(label(chainSourceOf(chain, shown))) : null,
     // R2-CODE-B item 1: the houses by the seam's house label, each once (domain/display/chainHouses.js),
     // the screen's chain card's own read: no rank's count range the roster does not hold.
     // Ruling (e): the roster is read, so a house held only as a road to elsewhere is named as the page names it.

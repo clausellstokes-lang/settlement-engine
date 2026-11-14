@@ -123,14 +123,17 @@ const OutputNode = ({ label, isExport }) => {
  *
  * @param {object} chain an `economicState.activeChains[]` row
  * @param {ReadonlyArray<string>} instNames the settlement's institution names, raw
+ * @param {{ resource?: unknown } | null} [printed] chainPrintName(chain, town): the source a toll prints under the town's
+ *   access (chainSourceOf, composed with COHERENCE-AGREE-6 F1)
  * @returns {{resource: string|null, resourceDepleted: boolean,
  *   institutions: Array<{name: string, present: boolean}>, importedUpstream: string[],
  *   upstreamNote: null}}
  */
-export function chainFlowFacts(chain, instNames = []) {
+export function chainFlowFacts(chain, instNames = [], printed = null) {
   return {
-    // R2-CODE-B round 3, ruling (d) (#804): no ground the record says is absent (domain/display/chainHouses.js).
-    resource: chainSourceOf(chain),
+    // R2-CODE-B round 3, ruling (d) (#804): no ground the record says is absent (domain/display/chainHouses.js);
+    // with the town, a toll renamed by its access names that access (R2-CODE-B-7, composed with F1).
+    resource: chainSourceOf(chain, printed),
     resourceDepleted: !!chain?.resourceDepleted,
     // Which processing institutions are actually present? R2-CODE-B item 1: each named once, by the
     // seam's house label (domain/display/chainHouses.js), never a rank's count range the roster lacks.

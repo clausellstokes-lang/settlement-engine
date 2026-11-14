@@ -166,7 +166,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
           // T2-6: the facts the retired Supply Chains diagram alone carried (resource node,
           // missing houses, upstream imports, the upstream note) — one derivation, shared
           // with the Compendium's ChainRow.
-          const shown = chainPrintName(chain, town), facts = chainFlowFacts({ ...chain, ...shown }, instNames); // COHERENCE-AGREE-6 (F1): what a chain prints reads the town's access; the income keyword above stays on the record's label (logic)
+          const shown = chainPrintName(chain, town), facts = chainFlowFacts(chain, instNames, shown); // COHERENCE-AGREE-6 (F1): what a chain prints reads the town's access (its source through chainSourceOf with it: R2-CODE-B-7); the income keyword above stays on the record's label (logic)
           // X-50 (BOILERPLATE ONCE): generation gives every chain of a settlement the same impact
           // sentence, so it prints on the first card that carries it; each card keeps its need.
           const impact = chain.dependency?.impact || '';

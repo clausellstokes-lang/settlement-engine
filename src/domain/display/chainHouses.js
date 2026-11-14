@@ -75,14 +75,22 @@ export function chainHousesOf(patterns, instNames) {
  * stays where the card already says it (its imports, its entrepôt line). A depleted ground is still the
  * town's and keeps its "(depleted)" (the card's own read). A record older than the condition field reads the
  * input's own flag the same way: no input here, and not depleted. Pure: no draw, no write.
- * @param {unknown} chain an active chain
+ * COMPOSED WITH COHERENCE-AGREE-6 F1 (R2-CODE-B-7, at the merge of the line 976db5b19): `printed` is what the page's
+ * one rename leaf says the chain prints under (chainPrintName.js :: chainPrintName(chain, town)). Where it renamed the
+ * source (a toll's "Harbour traffic" on a port), the record's condition belongs to the catalogue's ground it replaced
+ * (crossroads_position, `absent` off a crossroads), and the access the rename names is the town's own (the leaf
+ * renames only where the town has it): the source is that access. Given nothing printed, or nothing renamed, the
+ * ruling above reads the record, unchanged.
+ * @param {unknown} chain an active chain, as the record holds it (never one already renamed by the leaf)
+ * @param {{ resource?: unknown } | null} [printed] chainPrintName(chain, town) of the same chain
  * @returns {string | null} the resource to print as the chain's source, or null
  */
-export function chainSourceOf(chain) {
+export function chainSourceOf(chain, printed = null) {
   if (!chain || typeof chain !== 'object') return null;
   const c = /** @type {{ resource?: unknown, resourceCondition?: unknown, resourceInputAvailable?: unknown, resourceDepleted?: unknown }} */ (chain);
   const resource = typeof c.resource === 'string' && c.resource ? c.resource : null;
   if (!resource) return null;
+  if (printed && printed.resource !== resource) return typeof printed.resource === 'string' && printed.resource ? printed.resource : null;
   if (c.resourceCondition === 'absent') return null;
   if (c.resourceCondition == null && c.resourceInputAvailable === false && !c.resourceDepleted) return null;
   return resource;

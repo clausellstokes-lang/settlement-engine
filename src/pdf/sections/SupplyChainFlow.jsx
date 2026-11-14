@@ -115,12 +115,12 @@ function ChainRow({ chain, instNames, primaryExports, town }) { const shown = ch
       }}
     >
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
-        {/* R2-CODE-B round 3, ruling (d) (#804): no ground the record says is absent (chainHouses.js), read on the source
-            the town's access prints (COHERENCE-AGREE-6 F1), as the screen's card reads it: chainFlowFacts({ ...chain, ...shown }). */}
-        {chainSourceOf({ ...chain, ...shown }) ? (
+        {/* R2-CODE-B round 3, ruling (d) (#804): no ground the record says is absent (chainHouses.js); with the town, a
+            toll renamed by its access names that access (COHERENCE-AGREE-6 F1), as the screen's card reads it (R2-CODE-B-7). */}
+        {chainSourceOf(chain, shown) ? (
           <>
             <Node color={st.color} bg={st.bg} border={st.border}>
-              {safe(chainSourceOf({ ...chain, ...shown }))}{chain.resourceDepleted ? ' (depleted)' : ''}
+              {safe(chainSourceOf(chain, shown))}{chain.resourceDepleted ? ' (depleted)' : ''}
             </Node>
             <Connector />
           </>

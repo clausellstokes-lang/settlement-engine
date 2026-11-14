@@ -8,6 +8,7 @@
 import { describe, expect, test } from 'vitest';
 import { chainSourceOf } from '../../src/domain/display/chainHouses.js';
 import { chainFlowFacts } from '../../src/components/new/SupplyChainsPanel.jsx';
+import { chainPrintName } from '../../src/domain/display/chainPrintName.js';
 
 const FURS = { chainId: 'furs_north', resource: 'Hunting grounds', resourceCondition: 'absent', resourceInputAvailable: false, entrepot: true, processingInstitutions: [] };
 const DEPLETED = { chainId: 'fishing', resource: 'Fishing grounds', resourceCondition: 'depleted', resourceInputAvailable: false, resourceDepleted: true, processingInstitutions: [] };
@@ -31,5 +32,30 @@ describe('ruling (d): the chain card\'s "From" names only a ground the town has'
     expect(chainFlowFacts(FURS, []).resource).toBeNull();
     expect(chainFlowFacts(DEPLETED, []).resource).toBe('Fishing grounds');
     expect(chainFlowFacts(DEPLETED, []).resourceDepleted).toBe(true);
+  });
+});
+
+// R2-CODE-B-7, at the merge of the line (976db5b19): ruling (d) COMPOSED WITH COHERENCE-AGREE-6 F1. The toll's record
+// keeps the catalogue's ground (crossroads_position), which is `absent` off a crossroads; the page prints the toll under
+// the town's own access (chainPrintName), and that access IS here (the rename is made only where the town has it).
+const TOLL = { chainId: 'crossroads_trade', label: 'Strategic Crossroads Toll', resource: 'Strategic Crossroads', resourceKey: 'crossroads_position',
+  needKey: 'trade_entrepot', resourceCondition: 'absent', resourceInputAvailable: false, entrepot: true, processingInstitutions: [] };
+
+describe('ruling (d) with F1: the "From" of a toll renamed by the town\'s access names that access', () => {
+  test('a river or a port prints its own traffic; a crossroads with the ground absent prints none', () => {
+    expect(chainSourceOf(TOLL, chainPrintName(TOLL, 'port'))).toBe('Harbour traffic');
+    expect(chainSourceOf(TOLL, chainPrintName(TOLL, { config: { tradeRouteAccess: 'river' } }))).toBe('River traffic');
+    expect(chainSourceOf(TOLL, chainPrintName(TOLL, 'crossroads'))).toBeNull();
+    expect(chainSourceOf(TOLL)).toBeNull();
+  });
+
+  test('a chain the leaf does not rename keeps the record\'s condition under any access', () => {
+    expect(chainSourceOf(FURS, chainPrintName(FURS, 'port'))).toBeNull();
+    expect(chainSourceOf(DEPLETED, chainPrintName(DEPLETED, 'river'))).toBe('Fishing grounds');
+  });
+
+  test('the page\'s chain card reads it with the town', () => {
+    expect(chainFlowFacts(TOLL, [], chainPrintName(TOLL, 'port')).resource).toBe('Harbour traffic');
+    expect(chainFlowFacts(TOLL, []).resource).toBeNull();
   });
 });
