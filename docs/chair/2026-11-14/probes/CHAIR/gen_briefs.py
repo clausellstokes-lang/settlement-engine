@@ -2636,6 +2636,88 @@ SEATS2['POWERS-13'] = dict(
 )
 
 
+VEIL_BYTES_13 = (
+    "supabase/migrations/211_server_side_share_veil.sql eface6d093933170b9541fe630068c26e5bd41477e95e913ae7168e373be0b01 and "
+    "supabase/rollback/211_server_side_share_veil.down.sql ce8474ffc251b4c4bd6005d5a409d4a15bd20fef6b507534ef6338d3bd49712f: FROZEN, never changed by "
+    "anyone; 212 (supabase/migrations/212_share_veil_later_cures.sql) 949fed809db32e19151ca0d1ff5e7d45e88894e54a84d5ed2d01aa18658bd459, its rollback "
+    "(supabase/rollback/212_share_veil_later_cures.down.sql) 15c91a3e5e20c172fbdf2c0b905e28794c23be94993d40972a6b223edbd617fd: NOT final (computed by the "
+    "chair from origin at 07:40 UTC on 2026-11-14)"
+)
+
+SEATS2['VEIL-13'] = dict(
+    title="VEIL-13 · the share veil: the covert tie's four strings closed first, the impression re-ruled, then the findings and the design's rest",
+    branch='lane/coherence-veil-2026-11-11', tip='2937f9ac', statement=False, mark='300,000',
+    intro=("You are VEIL-13, the thirteenth seat on the share-veil lane of the settlement-engine integration program (lane/coherence-veil-2026-11-11). THE "
+           "VEIL: when an owner shares a town, whatever the owner hid (a house, a person, an event, a power, a single field) must not reach the reader, in "
+           "the page OR in the data the server sends. The cure lives in two migrations and in the client's twin. MIGRATION 211 IS FROZEN and is the "
+           "owner's to apply. MIGRATION 212 holds every later cure, is NOT final, and is applied by nobody until a fresh security reader has cleared its "
+           "final bytes. The twelfth seat cured the security reader's HIGH (the boundary rule, inverted) and built the impression's rule clause by "
+           "clause, and handed back at its count with the rest in order. TODAY'S LIVE SERVER TELLS A COVERT TIE through the prominent relationship (2 of "
+           "240 born towns): 212 is to close it, and that item is now FIRST. Yours: the items, in the order below, one at a time, to a green acceptance "
+           "run at ONE checksum."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane: docs/chair/2026-11-14/COHERENCE-VEIL-HANDBACK-PART13.md WHOLE (134 lines: the rulings; the twelfth seat's three calls; the "
+          "bytes; the two cures as built; WHAT IS LEFT, in order; how the instruments are re-made) and, in "
+          "docs/chair/2026-11-14/COHERENCE-VEIL-HANDBACK-PART12.md, sections 0 and 0b (the rulings in force), SECTION 7 (THE DESIGNS READY: ruling (5) "
+          "and R2 first) and section 8 (the list), by line range, by script.\n"
+          "3. For each item you read ONLY the helpers of 212 and the functions of the twin that the item touches, whole, before you change them.\n"
+          "4. THE SECURITY READER'S FILE, for the findings you answer: on origin/lane/review-veil-3-2026-11-12 (72a3bb24f): "
+          "docs/chair/2026-11-14/REVIEW-VEIL-212-8-2026-11-14.md, the sections of V8-3, V8-9, V8-2, V8-4 and V8-5 only, and its plants beside it; the "
+          "library docs/chair/2026-11-13/probes/REVIEW-VEIL-7/ on the same branch (run-all.sh; born/run-born.sh): copy them out with git archive; "
+          "never commit them to your lane."),
+    first=("FIRST ACT. Read the lane's tip back from origin: it was 2937f9ac when this was written; any difference is a stop: tell the chair. Prove the four "
+           "checksums: " + VEIL_BYTES_13 + "."),
+    work=("THE CHAIR ON THE TWELFTH SEAT'S THREE CALLS (2026-11-14 07:42 UTC; each vetoable by the owner; into the pack in plain words). CALL 1 (which "
+          "letters block a name: the letters and digits of Latin, Greek, Cyrillic, Armenian and Georgian and the ASCII digits; the letters of scripts "
+          "that glue particles to their nouns are boundaries): ACCEPTED: it fails toward withholding. CALL 2 (a symbol whose compatibility form is a "
+          "letter or a digit is a boundary, padded by the name search only): ACCEPTED. CALL 3, AND RULING (2) ITSELF, RE-RULED ON THE SEAT'S EXECUTED "
+          "CONSEQUENCE (d): a guard asserting that a hidden appearance's wording ARRIVES through the impression, because an amendment moved a clause's "
+          "edge, is not a rule this lane can hand a security reader. THE CHAIR'S \"CLAUSE BY CLAUSE\" IS WITHDRAWN. THE IMPRESSION IS A FLOOR FIELD and is "
+          "not tied to the appearance by identity (that part of ruling (2) stands: 464 born impressions are not withheld for an eye they do not "
+          "repeat); IT GOES WITH ITS PERSON'S SHUT APPEARANCE WHERE THE TWO SHARE A RUN: any run of TWELVE CODE POINTS OR MORE, in the one fold, that "
+          "stands in both strings, wherever it begins and ends: no cut at any mark, so no edge an amendment can move. One test, the same in both "
+          "engines (a window of twelve at every code point of the shorter string, sought in the other; or an equal form you prove equal on the basic "
+          "plane). Every other words-rule keeps its pieces: they tie a COPY to its source, and a copy is verbatim. THE GUARD'S ARM IS RE-KEYED TO THIS "
+          "RULING: Saltmere's row amended by appending with no mark is WITHHELD again, the reader's e06 is withheld, a row rewritten wholly arrives, a "
+          "shared run of eleven arrives. COUNTED ON BORN TOWNS: of the 464 impressions with every appearance eye shut, how many share a run of twelve "
+          "with their own appearance by chance (stock phrases): say the count and five of the runs; over 23 (one in twenty): tell the chair before you "
+          "push (the bound may rise to sixteen). The cost law holds: the test runs only for a person whose appearance eye is shut.\n"
+          "THE WORK, ONE ITEM AT A TIME, each its own commit, red first, pushed, with the new checksums of 212 and its rollback in the commit message:\n"
+          "1. RULING (5) ON ALL FOUR STRINGS, FIRST: IT CLOSES WHAT TODAY'S LIVE SERVER TELLS. As PART 12's section 7 designs it (by identity in "
+          "`_gallery_apply_member_overrides` and the twin's galleryPayloadFor; the pressure sentence by its two ends and by the words; the hand rows "
+          "veil-probe-11/hand/town-p.json and town-pc.json; the reader's own hand row REVIEW-VEIL-8/hand/town-g.json, its gcov1 to gcov3 strings, must "
+          "go). The born count before and after on the 240 (2 told before; 0 after), by run, server and twin. ONE LINE TO THE CHAIR when it is pushed "
+          "(the checksums; the born count).\n"
+          "2. THE IMPRESSION BY A SHARED RUN (above), replacing the clause cut in 212's impression arm and in the twin's withholdImpression; "
+          "`_gallery_veil_clauses` and clausePieces leave if nothing else reads them (the rollback's drops follow).\n"
+          "3. R2 (the processor match lowered as the engine lowers; its hand row), as PART 12's section 7 designs it.\n"
+          "4. V8-3 (one pass; the reader's row within twice the frozen 211: the cost8 rows stood at 2.0 to 2.5 times BEFORE the twelfth seat: this item "
+          "owns them); V8-9 (no unbounded pattern; the closed answer at any bound, never an error; the lookarounds kept on every batch and the "
+          "cut-out's mark alone); then V8-2, V8-4, V8-5 (each one commit by identity, else written in the pack under WHAT 212 DOES NOT CLOSE with its "
+          "reason).\n"
+          "5. B (V7-5: the trace by positive account, the acceptance run's a07; count what it also drops), C (V7-8: every existence flag by the engine's "
+          "own getInstFlags, d06; the booleans agreed between server and twin; R3 goes with it; if it cannot be done in SQL, say exactly why, show by a "
+          "plant what the difference lets a reader infer, and STOP for the chair on that row), D (the income row by its house).\n"
+          "6. E: THE ACCEPTANCE RUN: run-all.sh exits 0 AND born/run-born.sh green at ONE named checksum of 212, the cost law met (no more than twice "
+          "the frozen 211 on the reader's 300 KB row, on its V8-3 row and on the largest born town; a read never fails where 211 serves). WHEN E IS "
+          "GREEN: ONE message to the chair (the tip, both checksums, what the reader must read) and 212 is not changed again until the chair answers: "
+          "a fresh security reader then reads the final bytes.\n"
+          "7. F AND G, ONLY AFTER THE CHAIR ANSWERS E, as PART 12's section 8 gives them (the pin re-keyed by identity; the planted run on both stored "
+          "shapes; the rehearsal: 212 twice, its rollback back to the frozen 211's catalogue exactly, 212 again; the pack rebuilt for the FINAL bytes, "
+          "handed to NOBODY by you).\n"
+          "HOW TO KEEP YOUR COUNT: YOUR CONTEXT HOLDS THE LIST, THE RULINGS AND THE DIFFS, NOT THE FILES. Give each item to A BUILDER INSIDE YOUR "
+          "SESSION (a helper agent with a fresh context and a WRITTEN sub-brief in the form of veil-probe-10/briefs/: the item, its ruling whole, the "
+          "helpers it touches, the laws of the lane, red first, no push); then YOU READ ITS DIFF LINE BY LINE (the SQL and the twin), run the guards "
+          "and run-all.sh yourself, and push. Read your count BEFORE you start a builder and WHEN IT RETURNS (end your turn THE COUNT's way after "
+          "every pushed item). At 300,000: a new file docs/chair/2026-11-14/COHERENCE-VEIL-HANDBACK-PART14.md, begun with the rulings (this brief's "
+          "re-ruling copied whole), kept current after every item, and hand back. An item half built is not pushed: its builder's work is described "
+          "in PART 14 and left.\n" + VEIL_LAWS),
+    merges="; a local database cluster in your container",
+    when="for a stop that blocks everything you have left, for the cost law if it cannot be met (the numbers), when item 1 is pushed (one line: the checksums; the born count), for the born count of item 2 if it is over 23, when the acceptance run is green at a named checksum, and for a hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
