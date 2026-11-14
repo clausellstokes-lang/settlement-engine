@@ -19,12 +19,12 @@ import { DEFENSE_BUCKET_KEYWORDS } from '../../domain/institutions/defenseInstit
 const SMALL_TIERS = Object.freeze(['thorp', 'hamlet', 'village']);
 // POWERS-11 (REVIEW-POWERS-3 L2): a rung names no council, no merchant capital and no leading merchant its own roster
 // makes false. The context it reads: the power itself, the roster as the multipliers left it, the seat's name.
-/** @typedef {{ self: Record<string, any>, factions: Array<Record<string, any>>, governing: string, names: string[] }} RungContext */
+/** @typedef {{ self: Record<string, any>, roster: Array<Record<string, any>>, governing: string, names: string[] }} RungContext */
 /** @typedef {{ claim: string | RegExp, minor: (tier: string, ctx: RungContext) => string | null, suppressed: (tier: string, ctx: RungContext) => string | null }} ClaimRung */
 const MERCHANT_POWER = /merchant|trade|commerc|consortium|mercantile/i;
 const COUNCIL_SEAT = /council|assembly|senate|parliament|moot/i;
 /** The roster's merchant powers other than this one. @param {RungContext} ctx */
-const merchantsBeside = (ctx) => ctx.factions.filter((x) => x !== ctx.self && MERCHANT_POWER.test(String(x?.faction || '')));
+const merchantsBeside = (ctx) => ctx.roster.filter((x) => x !== ctx.self && MERCHANT_POWER.test(String(x?.faction || '')));
 // POWERS-12 (REVIEW-POWERS-3 M1): a watch stands, read by the defence bucket's own words (the fact the ladder's watch
 // lines are declared against), never by /watch/ (a watchtower is no watch). @param {RungContext} ctx
 const watchStands = (ctx) => ctx.names.some((n) => DEFENSE_BUCKET_KEYWORDS.watch.some((kw) => String(n).includes(kw)));
@@ -124,7 +124,7 @@ export function settleClaimsToLabel(factions, tier, instNames = []) {
     const rung = CLAIM_RUNGS.find((r) => spanOf(r.claim) > 0);
     if (!rung) continue;
     const end = spanOf(rung.claim);
-    /** @type {RungContext} */ const ctx = { self: f, factions, governing, names: instNames };
+    /** @type {RungContext} */ const ctx = { self: f, roster: factions, governing, names: instNames };
     const line = label === 'Minor' ? rung.minor(tier, ctx) : rung.suppressed(tier, ctx);
     if (line === null) continue;
     f.desc = line + desc.slice(end);

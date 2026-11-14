@@ -19,6 +19,7 @@ import { settleClaimsToLabel } from '../../../src/generators/power/claimStanding
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 
 const CHURCH_HOSPITAL = 'Major church institutions hold structural influence. Land grants, hospital networks, and moral authority give them leverage across multiple civic domains.';
 const CHURCH_CHARITY = 'Major church institutions hold structural influence. Land grants, charity, and moral authority give them leverage across multiple civic domains.';
@@ -63,8 +64,7 @@ describe('POWERS-12 · the five commanding claims take their rung beside Minor o
         // a merchant power beside them (the fold may drop it after the call): the rung names no merchant capital
         const f = roster('Royal Authority', [['Noble Families', 12, label, desc], ['Merchant Guilds', 20, 'Suppressed']]);
         settleClaimsToLabel(f, tier);
-        expect(descOf(f, 'Noble Families'), `${tier} ${label}`).toBe(LESSER);
-        expect(descOf(f, 'Noble Families')).not.toMatch(/merchant capital/);
+        expect(descOf(f, 'Noble Families'), `${tier} ${label}`).toBe(LESSER); // the exact rung: it names no merchant capital
       }
     }
   });
@@ -100,13 +100,12 @@ describe('POWERS-12 · the guard towns (the census\'s 720 shape)', () => {
     ['r2r-metropolis-36', 'metropolis', undefined, 'Military/Guard', WELL_FUNDED],
   ];
   it('one town of each claim\'s cells reads its rung where the claim printed, and no power of the five prints a claim beside Minor or Suppressed', () => {
-    for (const [seed, tier, stress, power, rung] of TOWNS) {
+    expectNoSeedFailures(collectSeedFailures(TOWNS, ([seed, tier, stress, power, rung]) => {
       const factions = born(tier, seed, stress).powerStructure.factions;
       expect(String(factions.find((f) => f.faction === power)?.desc).startsWith(rung), `${seed} ${power}`).toBe(true);
-      for (const f of factions) {
-        if (f.powerLabel !== 'Minor' && f.powerLabel !== 'Suppressed') continue;
-        for (const claim of CLAIMS) expect(String(f.desc).startsWith(claim), `${seed} ${f.faction}`).toBe(false);
-      }
-    }
+      const claimed = factions.filter((f) => (f.powerLabel === 'Minor' || f.powerLabel === 'Suppressed')
+        && CLAIMS.some((claim) => String(f.desc).startsWith(claim))).map((f) => f.faction);
+      expect(claimed, `${seed}: a claim beside Minor or Suppressed`).toEqual([]);
+    }), 'the five guard towns');
   }, 240_000);
 });
