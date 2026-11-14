@@ -1,0 +1,48 @@
+{"id":"27424","town":"r2s-succession_void-town-3","sev":"MED","kind":"PAIR","why":"says offices are filled and seals real; CRISIS is Leadership void, overview says no one holds the seat of power","other":"13726"}
+{"id":"HEADER","town":"r2s-succession_void-town-3","sev":"MED","kind":"RECORD","why":"DEFENCE says hired: none, yet HOUSES lists Hired blades and PEOPLE has a blade captain at Hired blades","other":""}
+{"id":"00763","town":"r2s-succession_void-town-3","sev":"LOW","kind":"LACKS","why":"'the residential district' presumes districts in a town of 321","other":""}
+{"id":"00748","town":"r2s-indebted-town-1","sev":"MED","kind":"LACKS","why":"'lower districts', 'street by street', 'whole quarters' in a town of 357; HOUSES has no districts or quarters","other":""}
+{"id":"13909","town":"r2s-indebted-town-1","sev":"MED","kind":"STATE","why":"'the seat itself in dispute': crisis is debt, Corrupt Council governs, QUARRELS none; Reiko Inoue is craft-guild master, no council seat shown","other":""}
+{"id":"11833","town":"r2s-infiltrated-town-1","sev":"MED","kind":"LACKS","why":"'overland fairs' organize exchange; HOUSES has only a Weekly market, no fair","other":""}
+{"id":"06434","town":"r2s-insurgency-town-1","sev":"LOW","kind":"LACKS","why":"'dense neighborhoods' and 'monumental public space' with canals/reservoirs in a hill town of 648; HOUSES lists none","other":""}
+{"id":"31696","town":"r2s-insurgency-town-1","sev":"LOW","kind":"TAG","why":"'broad and busy open plaza' with a ceremonial precinct; tag reaches plague towns where people do not gather as usual","other":""}
+{"id":"17196","town":"r2s-slave_revolt-town-1","sev":"MED","kind":"STATE","why":"claims money enough to ride out a long crisis and pay defenders; STATE prosperity is Poor, safety Critical","other":""}
+{"id":"32800","town":"r2s-religious_conversion-town-0","sev":"MED","kind":"LACKS","why":"'ward gates' presumes wards and gates; town of 474 has walls: none and HOUSES lists no wards","other":""}
+{"id":"13923","town":"r2s-indebted-town-2","sev":"MED","kind":"STATE","why":"calls Tomoko Sato of Town Mayor 'a member of the merchants' power'; PEOPLE has them as master smith at Blacksmiths under Town Mayor; mayor holds the seat","other":""}
+{"id":"07923","town":"r2r-town-7","sev":"MED","kind":"LACKS","why":"'dense bazaar streets, occupational quarters' in a town of 723; HOUSES has only a weekly market and square, no bazaar or quarters","other":""}
+{"id":"25434","town":"r2r-town-7","sev":"LOW","kind":"LACKS","why":"'monastery' and 'crowded sacred landscape'; HOUSES has only Parish churches, no monastery or temples","other":""}
+{"id":"10551","town":"r2r-town-7","sev":"MED","kind":"LACKS","why":"'watch towers, elephant or cavalry yards, fortified precincts'; DEFENCE has only walls and a watch, garrison/militia none, defence Vulnerable","other":""}
+{"id":"34074","town":"r2r-town-7","sev":"LOW","kind":"BROKEN","why":"Quick Reference row prints an empty power column for the jeweller","other":""}
+{"id":"17189","town":"r2r-town-36","sev":"MED","kind":"STATE","why":"claims money enough to ride out a long crisis and pay defenders; STATE prosperity is Poor, legitimacy crisis","other":""}
+{"id":"30485","town":"r2r-town-36","sev":"LOW","kind":"LACKS","why":"'ward leaders' and 'military societies'; town of 440 has no wards, garrison none, militia none","other":""}
+{"id":"25477","town":"r2r-town-36","sev":"MED","kind":"LACKS","why":"'fortified heights, organized military orders' shape defense; DEFENCE shows only walls and a watch, garrison none, militia none","other":""}
+{"id":"31197","town":"r2r-town-36","sev":"MED","kind":"STATE","why":"'Wild Magic' event/power with a 'merchants' quarter'; PAST records no Wild Magic (only an Arcane Incident), GOVERNMENT lists no such power","other":""}
+{"id":"07251","town":"r2r-town-36","sev":"LOW","kind":"STATE","why":"'all his making' but the cooper Ixquil Puc is female (PEOPLE)","other":""}
+{"id":"29542","town":"r2r-town-36","sev":"MED","kind":"LACKS","why":"performers 'come for the fairs'; HOUSES has no Annual fair, only a weekly market","other":""}
+{"id":"32842","town":"r2r-town-36","sev":"LOW","kind":"BROKEN","why":"Quick Reference row prints an empty power column for the alchemist","other":""}
+{"id":"35321","town":"r2r-town-36","sev":"LOW","kind":"BROKEN","why":"Quick Reference row prints an empty power column for the troupe leader","other":""}
+{"id":"03630","town":"r2r-town-5","sev":"LOW","kind":"LACKS","why":"'wards laid out on either side' of a planned civic axis and administrative compound; HOUSES lists only a Town hall","other":""}
+{"id":"06891","town":"r2r-town-5","sev":"LOW","kind":"LACKS","why":"'timber yards and sawpits'; HOUSES has no sawmill or timber house and LAND has no woodland resource","other":""}
+{"id":"35014","town":"r2r-town-5","sev":"LOW","kind":"BROKEN","why":"Quick Reference row prints an empty power column for the scroll scribe","other":""}
+{"id":"07278","town":"r2s-infiltrated-town-2","sev":"MED","kind":"STATE","why":"'on Toghrul Jirgin's watch': PEOPLE has Toghrul as veterans' lodge master; the watch captain is Walun Borjigin","other":""}
+{"id":"14618","town":"r2s-mass_migration-town-0","sev":"LOW","kind":"STATE","why":"says it sends out leather; TRADE exports list no leather or hides (hides are imported)","other":""}
+{"id":"29354","town":"r2s-mass_migration-town-0","sev":"MED","kind":"STATE","why":"'no formal government in place'; GOVERNMENT names Church Council as governing power with Dominant strength","other":""}
+{"id":"07861","town":"r2s-succession_void-town-0","sev":"LOW","kind":"STATE","why":"'the barracks is all that stands guard'; DEFENCE also lists a Town watch","other":""}
+{"id":"33967","town":"r2s-succession_void-town-2","sev":"LOW","kind":"BROKEN","why":"Quick Reference row prints an empty power column for the hiring master","other":""}
+{"id":"29543","town":"r2s-succession_void-town-2","sev":"MED","kind":"LACKS","why":"'The fairs bring bards, jugglers, and acrobats'; HOUSES has no Annual fair, only a weekly market","other":""}
+{"id":"15355","town":"r2r-town-13","sev":"LOW","kind":"BROKEN","why":"two sentences run together with no stop: 'financial leverage Still ahead of merchant interests'","other":""}
+{"id":"15357","town":"r2r-town-27","sev":"LOW","kind":"STATE","why":"'the council works alongside them'; GOVERNMENT is a Feudal Appointee and HOUSES has no council","other":""}
+{"id":"HEADER","town":"r2s-monster_pressure-town-2","sev":"LOW","kind":"RECORD","why":"DEFENCE says hired: none, yet HOUSES lists a Free company hall with a company captain in PEOPLE","other":""}
+{"id":"00674","town":"r2r-town-25","sev":"LOW","kind":"LACKS","why":"'harbour and coastal districts' and 'whole districts' burned; no districts in HOUSES, town of 1,655 with one harbour office and docks","other":""}
+{"id":"29541","town":"r2s-politically_fractured-town-0","sev":"MED","kind":"LACKS","why":"performers 'visit during fairs'; HOUSES has no Annual fair, only a weekly market","other":""}
+{"id":"31879","town":"r2s-monster_pressure-town-1","sev":"LOW","kind":"LACKS","why":"'caravan courts' and 'the merchant quarter'; HOUSES has no caravanserai or quarters, trade access is plain road, town of 1,295","other":""}
+{"id":"32833","town":"r2s-monster_pressure-town-1","sev":"LOW","kind":"BROKEN","why":"Quick Reference row prints an empty power column for the abbot","other":""}
+{"id":"02759","town":"r2s-politically_fractured-town-2","sev":"LOW","kind":"STATE","why":"'the council works alongside them'; GOVERNMENT is a Feudal Appointee and HOUSES has no council","other":""}
+{"id":"HEADER","town":"r2s-politically_fractured-town-2","sev":"LOW","kind":"RECORD","why":"DEFENCE says hired: none, yet HOUSES lists Hired blades and a Hireling hall with a blade captain in PEOPLE","other":""}
+{"id":"34181","town":"r2s-recently_betrayed-town-2","sev":"MED","kind":"STATE","why":"Omkara Mehta is male (PEOPLE) but titled 'the madam'; title does not fit sex","other":""}
+{"id":"HEADER","town":"r2r-town-27","sev":"LOW","kind":"RECORD","why":"DEFENCE walls and HOUSES carry the template label 'Gates (if walled)' as if it were a house or gate the town has","other":""}
+{"id":"11672","town":"r2s-religious_conversion-town-2","sev":"MED","kind":"STATE","why":"'Great Flood ... reshaped the lower districts': PAST records no flood (Arcane Incident, Succession Crisis, Occupation, Siege); a mountain pass town has no lower districts","other":""}
+{"id":"07926","town":"r2r-town-57","sev":"MED","kind":"LACKS","why":"'dense street blocks', arcades, fountains and 'monumental precincts' in a town of 1,144; HOUSES has a market square and a citadel only","other":""}
+{"id":"HEADER","town":"r2s-religious_conversion-town-2","sev":"LOW","kind":"RECORD","why":"walls and HOUSES carry the template label 'Gates (if walled)'; DEFENCE says hired: none yet HOUSES lists Hired blades and a Free company hall","other":""}
+{"id":"HEADER","town":"r2r-town-57","sev":"LOW","kind":"RECORD","why":"walls and HOUSES carry the template label 'Gates (if walled)' as if it were a gate the town has","other":""}
+{"id":"DONE","lines":2245,"blocks":32,"flags":47}
