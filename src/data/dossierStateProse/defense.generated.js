@@ -709,7 +709,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no threat",
             "crisis: any"
           ],
-          "text": "There is very little in the country around {settlement} and there are substantial works facing it; whatever the walls here are for, it is not the creatures.",
+          "text": "The country around {settlement} holds very little in the way of creatures; whatever the town's works are for, it is not them.",
           "slots": [
             "settlement"
           ],
@@ -721,7 +721,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no threat",
             "crisis: any"
           ],
-          "text": "{settlement} is comfortably over-provided against beasts. The pressures that matter to this town are internal, and its defensive spending does not reflect that.",
+          "text": "Few beasts come out of the settled country around {settlement}, and the town's works see little of them.",
           "slots": [
             "settlement"
           ],
@@ -734,7 +734,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "crisis: any",
             "no crisis: unrest"
           ],
-          "text": "You notice the perimeter at {settlement} chiefly for how relaxed the people on it are: there is little out in the country for them to guard against.",
+          "text": "You notice {settlement}'s works more than anything beyond them: the settled country around the town holds few creatures.",
           "slots": [
             "settlement"
           ],
@@ -746,7 +746,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "threat",
             "crisis: any"
           ],
-          "text": "{settlement} built more against the country than the country ever asked for, and the threat now at hand is spending that margin.",
+          "text": "{settlement}'s works were seldom tested by the settled country around it, and the threat now at hand is testing them in earnest.",
           "slots": [
             "settlement"
           ],

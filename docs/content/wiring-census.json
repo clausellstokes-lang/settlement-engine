@@ -951,7 +951,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 5,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [
         {
           "field": "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)",
@@ -54794,7 +54794,7 @@
         "DS-DEF-2 :: Beasts & Monsters: settled, nothing organized"
       ],
       "variants": 28,
-      "grammars": 11,
+      "grammars": 10,
       "blocks": [
         "DS-DEF-2"
       ]
@@ -66416,7 +66416,7 @@
         "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "BEASTS_ROW_POOL",
-      "count": "5 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

@@ -2847,10 +2847,10 @@ supplies the ancestry.
 3. `[street]` People at {settlement} can drive off what attacks but cannot stop it arriving, so every season the town loses something before its fighters get there.
 
 **`Beasts & Monsters`: `settled`, defenses beyond the need** {crisis-scoped}
-1. `[counterforce · no threat · crisis: any]` There is very little in the country around {settlement} and there are substantial works facing it; whatever the walls here are for, it is not the creatures.
-2. `[ledger · no threat · crisis: any]` {settlement} is comfortably over-provided against beasts. The pressures that matter to this town are internal, and its defensive spending does not reflect that.
-3. `[visitor · no threat · crisis: any · no crisis: unrest]` You notice the perimeter at {settlement} chiefly for how relaxed the people on it are: there is little out in the country for them to guard against.
-4. `[ledger · threat · crisis: any]` {settlement} built more against the country than the country ever asked for, and the threat now at hand is spending that margin.
+1. `[counterforce · no threat · crisis: any]` The country around {settlement} holds very little in the way of creatures; whatever the town's works are for, it is not them.
+2. `[ledger · no threat · crisis: any]` Few beasts come out of the settled country around {settlement}, and the town's works see little of them.
+3. `[visitor · no threat · crisis: any · no crisis: unrest]` You notice {settlement}'s works more than anything beyond them: the settled country around the town holds few creatures.
+4. `[ledger · threat · crisis: any]` {settlement}'s works were seldom tested by the settled country around it, and the threat now at hand is testing them in earnest.
 5. `[visitor · threat · crisis: any]` You find {settlement}'s works manned in earnest now; what was built against nothing in particular is being held against something real.
 
 **`Beasts & Monsters`: `settled`, nothing organized** {crisis-scoped}
