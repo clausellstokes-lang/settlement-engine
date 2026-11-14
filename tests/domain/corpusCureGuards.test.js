@@ -68,6 +68,7 @@ const GUARDS = [
   { seed: 'w5-thorp-famine-2', pool: 'DS-DEF-12::CAPACITY: enough', vid: 2, why: 'a famine: "What X raises covers an ordinary year ... one bad harvest would leave it short" where it is short now (W2-WRITE-8 C, #58)' },
   { seed: 'w5-village-under_siege-6', pool: 'DS-DEF-12::CAPACITY: enough', vid: 1, why: 'a siege with a food deficit: "enough for an ordinary year" (W2-WRITE-8 C)' },
   { seed: 'w5-thorp-plague_onset-2', pool: 'DS-DEF-12::CAPACITY: enough', vid: 2, why: 'a food record that depends on imports: "What X raises covers an ordinary year" (W2-WRITE-8 C)' },
+  { seed: 'rv2-hamlet-famine-2', pool: 'DS-DEF-12::CAPACITY: enough', vid: 3, why: 'a famine: "make do with what they have; a good year is comfortable and a bad one is lean" beside "Rationing has begun" (REVIEW-W2-WRITE-2 H2; a twin takes its siblings\' `food: ≥ pressured`, W2-WRITE-13)' },
   { seed: 'w5-town-occupied-101', pool: 'DS-POW-6::GM ADVISORY: the commander is a political actor', vid: 3, by: 'record', why: 'an occupation: "Occupation Authority answers to the Military Council in name only" of an occupier that answers to nobody here (W2-WRITE-SIDE-REST; the read\'s LOW at r2s-occupied-city-0)' },
   { seed: 'w5-metropolis-occupied-101', pool: 'DS-GEN-17::GARRISONED', vid: 1, why: 'an occupation: "The metropolis keeps people under arms for its defence" of a town its occupiers hold (W2-WRITE-SIDE-REST C, the fourth seat\'s #1033 re-read)' },
   { seed: 'w5-city-occupied-101', pool: 'DS-GEN-17::GARRISONED', vid: 2, why: 'an occupation: "the money is found every season" beside "The occupiers take the revenue" (W2-WRITE-SIDE-REST C)' },
@@ -138,6 +139,13 @@ const GUARDS = [
   { seed: 'w5-town-occupied-3', pool: 'DS-DEF-2::Economic Survival: STRONG', vid: 3, why: 'an occupation: "its defenders are still paid from it" of a defence the occupiers hold' },
   { seed: 'w5-city-occupied-101', pool: 'DS-DEF-2::Economic Survival: STRONG', vid: 12, why: 'an occupation: "its defenders are still paid on time" (v3\'s twin)' },
   { seed: 'w5-city-under_siege-103', pool: 'DS-DEF-2::Economic Survival: STRONG', vid: 9, why: 'a Struggling town: "paying it from money it had put by" off the two lowest prosperity rungs (the chair\'s ruling on BAR-0 #205)' },
+  { seed: 'w5-city-under_siege+famine-1', pool: 'DS-DEF-5::walls PRESENT', vid: 1, why: 'a siege: "a stranger enters where the town intends him to" (v2 v4 v5 v7\'s condition) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
+  { seed: 'rww-metropolis-under_siege-1', pool: 'DS-DEF-5::walls PRESENT', vid: 3, why: 'a siege: "arranges its day around the gates without noticing that it does" beside "gates are shut and barred" (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
+  { seed: 'w5-city-under_siege+famine-1', pool: 'DS-DEF-5::FIXTURE: gates', vid: 4, why: 'a siege: "Whatever reaches X by road reaches it at a gate" (v1-v3\'s `no crisis: under_siege`) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
+  { seed: 'w5-city-monster_pressure-104', pool: 'DS-DEF-2::Beasts & Monsters: frontier, credible deterrence', vid: 1, why: 'a threat at hand: "The tally of raids ... is short" (v3\'s `no crisis: threat`) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
+  { seed: 'rww-metropolis-under_siege-1', pool: 'DS-DEF-2::Beasts & Monsters: frontier, credible deterrence', vid: 2, why: 'a siege: "ordinary rather than anxious" (v3\'s `no crisis: threat`) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
+  { seed: 'w5-city-occupied-1', pool: 'DS-DEF-2::Beasts & Monsters: frontier, credible deterrence', vid: 4, why: 'an occupation: "so far they are holding" of a town already taken (the inheritor of v1 v2, read before the push) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
+  { seed: 'w5-hamlet-famine-103', pool: 'DS-DEF-8::override: INTERNAL PRESSURE (famine)', vid: 3, why: 'nobody paid to keep order: "the less its defenders can do" (HANDBACK-12 #278) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
 ];
 
 /** @param {string} seed */

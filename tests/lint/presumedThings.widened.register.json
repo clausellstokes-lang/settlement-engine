@@ -2411,12 +2411,6 @@
    [
     "armedForce",
     "family",
-    "The longer the hunger lasts at {settlement}, the less its defenders can do, and nothing is filling the stores again yet.",
-    "64af7f8fa3304a8e"
-   ],
-   [
-    "armedForce",
-    "family",
     "The occupiers' troops at {settlement} protect it from everyone except the people who sent them.",
     "0847527bfbd9f884"
    ],
