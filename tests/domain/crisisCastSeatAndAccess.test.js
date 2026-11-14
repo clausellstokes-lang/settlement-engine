@@ -96,6 +96,7 @@ describe('ROUND THREE · the crisis cast reads the empty seat, the roster and th
     const cast = { nature: 'social', rank: 1, roles: [row], absent: [], stakes: [], levers, ifNothingIsDone: { residualEffects: [] }, playersSeeFirst: [], links: [] };
     const hooks = crisisHooksOf({ name: 'Albamunicipium', npcs: [], institutions: [] }, { type: 'insurgency', cast });
     expect(hooks.map((h) => h.bound)).toEqual(['lever']);
+    // anchored: the line above proves the collection is live (it holds exactly the one lever hook)
     expect(hooks.map((h) => h.text).join(' ')).not.toMatch(/houses of worship is/i);
     const pair = { ...cast, roles: [{ ...row, id: 'Inns and taverns (district)', name: 'Inns and taverns (district)' }] };
     expect(crisisHooksOf({ name: 'Albamunicipium', npcs: [], institutions: [] }, { type: 'insurgency', cast: pair }).map((h) => h.bound)).toEqual(['lever']);
