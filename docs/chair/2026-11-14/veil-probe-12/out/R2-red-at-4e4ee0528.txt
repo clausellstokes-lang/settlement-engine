@@ -1,0 +1,20 @@
+RULING (2), THE IMPRESSION BY ITS WORDS, CLAUSE BY CLAUSE: RED FIRST, at the base's bytes (git archive of 4e4ee0528,
+node_modules linked; 212 e879358592e20f0eaeebb994a7a49038181315785168d69636a80ca32cf216ad, down 4b96fa6c...8afb86;
+211 eface6d0...be0b01 / ce8474ff...49712f), this commit's tests/security/galleryVeilHandRows.pglite.test.js copied in
+== V7-2 THE FIVE HOMES, re-keyed (vitest -t 'V7-2 THE FIVE HOMES', VEIL_HAND_OUT): 1 failed; 48 rows red, 0 paths server against twin
+  Saltmere, Hale's impression, the appearance amended by appending (no clause mark): withheld, wanted ARRIVING: 8 reads
+  Saltmere, Hale's impression, the appearance rewritten wholly: withheld, wanted ARRIVING: 8 reads
+  the clauses, ARRIVING, rewritten wholly (Latin): withheld in 8 reads
+  the clauses, ARRIVING, Greek, rewritten wholly: withheld in 8 reads
+  the clauses, ARRIVING, a shared clause of eleven code points: withheld in 8 reads
+  the clauses, ARRIVING, a shared run that crosses a comma and holds no whole clause of twelve: withheld in 8 reads
+  (each read: veil and dm x gallery, link, import, client: 6 rows each)
+  THE CLAUSES ARE ONE: red as absent (function public._gallery_veil_clauses(jsonb) does not exist)
+  green at the base, as the identity rule withholds every impression whose appearance is shut: the 14 WITHHELD rows
+  (e06 as born, appended, prefixed, lower-cased, upper-cased, reversed; Greek with U+0130 and a sharp s, the same six,
+  the last cut at U+037E; Han cut at U+FF0C; a shared clause of twelve) and Saltmere as born, prefixed, lower- and
+  upper-cased; the controls (the appearance open: 14 of 14 arrive; another person's impression, the appearance open,
+  holding a shut person's whole appearance: arrives; the pressure sentence, the narrative and an open event's annotation
+  that share only a comma-clause with a shut source: arrive)
+== the acceptance run (REVIEW-VEIL-7/run-all.sh on the archive): checks 37 | PASS 35 | FAIL 2 (a07, d06: items B and C);
+   e06 PASS (by identity); the twin 15 of 15

@@ -713,7 +713,7 @@ export function applyVeil(publicSettlement, veil) {
       const own = byId?.get(id);
       /** @type {string[]} */
       const drops = [...[...(cls || [])].filter(f => !exceptions.has(`field:${kindName}:${id}:${f}`)), ...(own || [])];
-      // V5-1 (the impression), by identity since COHERENCE-VEIL-10 (V7-2): the impression goes with its person's appearance eye
+      // V5-1 (the impression), by its words, clause by clause, since COHERENCE-VEIL-12 (ruling (2)): it goes with its person's shut appearance where a clause of the one stands inside the other
       if (kindName === 'npc' && drops.includes('physical')) withholdImpression(card);
       for (const f of drops) dropField(card, kind, f);
     }

@@ -91,6 +91,17 @@
 --       separate their words by spaces (_gallery_veil_name_bound, gallerySecondHomes.js :: NAME_BOUND); every other
 --       neighbour is a boundary, judged as written: a character whose compatibility form would block (the trade-mark
 --       sign is TM) is written between spaces before the search's preparation (_gallery_veil_name_pad; section 4c).
+--   (23) THE IMPRESSION BY ITS WORDS, CLAUSE BY CLAUSE (COHERENCE-VEIL-12; ruling (2), the chair's ruling on PART 12's
+--       section 6): the composer never builds an impression from the appearance (npcGenerator.js: the presentation is
+--       drawn whole from the title's or the category's table, the appearance from four others), so no identity ties
+--       them, and (20)'s "by its person" withheld every impression of a person whose appearance eye was shut. An
+--       impression now goes with a shut appearance only where one's words hold the other's: a clause of the appearance
+--       inside the impression, or a clause of the impression inside the appearance. A clause is a string or a run of it
+--       between the sentence stops, the dashes, the comma, the semicolon and the colon, cut IN THE ONE FOLD (so a
+--       full-width or small form of the three marks and the Greek question mark, which the fold writes as the ASCII
+--       mark, cut too), of 12 code points or more (_gallery_veil_clauses, gallerySecondHomes.js :: clausePieces). The
+--       record keeps one wording of each, so the current is the stored. Every other words-rule keeps its sentence
+--       pieces (_gallery_veil_pieces, _embeds unchanged).
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -102,14 +113,14 @@
 --       Reveal-DM projection of the gallery read and the import, beside 211's decrees and dmLayer; before, every
 --       reader and every importer of such a share received both.
 --
--- NEW: twenty-eight helpers (_gallery_veil_pieces, _embeds, _case_fold, _fold, _hidden_name, _sources, _tie_pieces,
+-- NEW: twenty-nine helpers (_gallery_veil_pieces, _clauses, _embeds, _case_fold, _fold, _hidden_name, _sources, _tie_pieces,
 -- _second_homes, _member_revealed, _roster_members, _tie_roles, _roster_splice; and the name search's sixteen: _name_sep, _name_bound,
 -- _name_pad, _name_case, _name_prep, _name_fold, _name_needle, _name_search, _name_ready, _name_hits, _name_hit, _named, _name_near,
 -- _name_floor, _name_taken, _name_sweep). RESTATED, each as 211's statement plus the cure:
 -- _gallery_veil_card, _gallery_veil_apply, _gallery_apply_member_overrides, get_gallery_dossier and
 -- import_gallery_dossier (their grants restated as 211 states them). No helper of 211 changes its
 -- signature, so nothing 211 created is left behind. 211's section 7 is restated last: no _gallery_veil*
--- helper is callable by public, anon or authenticated (68 in all). NOT CHANGED: get_unlisted_dossier,
+-- helper is callable by public, anon or authenticated (69 in all). NOT CHANGED: get_unlisted_dossier,
 -- get_gallery_map and every other function. No table, column, constraint, policy or row.
 --
 -- COUPLED CLIENT TWIN: src/domain/display/gallerySecondHomes.js (the second homes, (9); the name search, (19)), called
@@ -146,13 +157,19 @@ begin
     own := byid -> id;
   end if;
   drops := drops || array(select jsonb_array_elements_text(coalesce(own, '[]')));
-  -- V5-1 (COHERENCE-VEIL-6, the impression), BY IDENTITY since COHERENCE-VEIL-10 (REVIEW-VEIL-7's V7-2; the chair's
-  -- record 418: the impression by its person): the impression on a person's face goes with THAT PERSON's appearance
-  -- eye, whole, whatever the appearance now says. Before, it went only where it held a sentence of the appearance as
-  -- that now stands, so an appearance amended after the birth left its born wording on the face
-  -- (gallerySecondHomes.js :: withholdImpression)
+  -- V5-1 (COHERENCE-VEIL-6, the impression), BY ITS WORDS, CLAUSE BY CLAUSE since COHERENCE-VEIL-12 (ruling (2), the
+  -- chair's ruling on PART 12's section 6): the composer never builds an impression from the appearance, so no identity
+  -- ties them (COHERENCE-VEIL-10's "by its person", V7-2, withheld every impression whose person's appearance eye was
+  -- shut). The impression on a person's face goes with THAT PERSON's shut appearance, whole, where one's words hold the
+  -- other's: a clause of the appearance inside the impression, or a clause of the impression inside the appearance
+  -- (_gallery_veil_clauses: each string and each run of it between the sentence stops, the dashes, the comma, the
+  -- semicolon and the colon, in the one fold, of 12 code points or more; a whole string is among them, so "inside the
+  -- other" is inside one of its clauses). The record keeps one wording of each (gallerySecondHomes.js :: withholdImpression)
   if kind = 'npc' and 'physical' = any(drops) and jsonb_typeof(c -> 'presentation') = 'object' then
-    c := jsonb_set(c, '{presentation}', (c -> 'presentation') - 'impression');
+    if exists (select 1 from unnest(public._gallery_veil_clauses(c -> 'physical')) a, unnest(public._gallery_veil_clauses(c #> '{presentation,impression}')) b
+                where position(a in b) > 0 or position(b in a) > 0) then
+      c := jsonb_set(c, '{presentation}', (c -> 'presentation') - 'impression');
+    end if;
   end if;
   -- SERVER ONLY (COHERENCE-VEIL-4, V4-2; the chair's ruling 331): a person stored by master's client
   -- carries `factionGoal` and `linkedFactionIds`, which master's goals and ties eyes governed
@@ -186,7 +203,9 @@ end $$;
 --   pressureSentence                         the tie WHOSE TWO ENDS IT NAMES, as the phrasing; and, where nothing in
 --                                            the record accounts for it otherwise (no stress on the town, whose line the
 --                                            composer writes first; not the power structure's recentConflict), any tie
---   <a person>.presentation.impression       ITS PERSON: the appearance eye (_gallery_veil_card)
+--   <a person>.presentation.impression       NOT BY IDENTITY (COHERENCE-VEIL-12, ruling (2): its composer never builds it
+--                                            from the appearance): its person's appearance eye, where a CLAUSE of the one
+--                                            stands inside the other, either way (_gallery_veil_card, _gallery_veil_clauses)
 -- A copy whose source the record does not name (an entry with no such event, a prominentRelationship with no such tie)
 -- follows EVERY event's, EVERY tie's eye: closed. WHERE ONLY THE WORDS TIE A COPY TO ITS SOURCE (a pressureSentence
 -- that names no tie's two ends in a town under a stress; an annotation against another event's strings or its own
@@ -249,6 +268,25 @@ begin
     into cv, cc from string_to_table(public._gallery_veil_name_case(), ' ') with ordinality x(g, o);
   return replace(translate(translate(public._gallery_veil_name_prep(t), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), cv, cc), chr(223), 'ss');
 end $$;
+
+-- [212: NEW] public._gallery_veil_clauses
+-- clausePieces (COHERENCE-VEIL-12; ruling (2), the chair's ruling on PART 12's section 6: the impression's words are
+-- compared clause by clause): each string leaf of a value IN THE ONE FOLD (_gallery_veil_case_fold), trimmed, and each
+-- run of it between the sentence stops, the dashes (U+2014), the comma, the semicolon and the colon, of 12 code points
+-- or more. Cut AFTER the fold, so a mark the fold writes as one of these is one (the full-width, small and vertical
+-- forms, U+FF0C, U+FF1B, U+FF1A, U+FE50, U+FE54, U+FE55, U+FE10, U+FE14, U+FE13; the Greek question mark U+037E, which
+-- NFKD writes ';'; the full-width and small sentence stops). The impression's call ALONE (_gallery_veil_card): every
+-- other words-rule keeps the sentence pieces of _gallery_veil_pieces.
+create or replace function public._gallery_veil_clauses(v jsonb)
+returns text[] language sql immutable as $$
+  select coalesce(array_agg(t), '{}') from (
+    select btrim(p, E' \t\n\r') as t
+      from jsonb_path_query(coalesce(v, 'null'), 'lax $.**') x(j)
+      cross join lateral (select case when jsonb_typeof(x.j) = 'string' then public._gallery_veil_case_fold(x.j #>> '{}') end as f) y
+      cross join lateral (select y.f union all select regexp_split_to_table(y.f, '[.!?,;:' || chr(8212) || ']+')) z(p)
+     where y.f is not null) q
+   where char_length(t) >= 12
+$$;
 
 -- [212: NEW] public._gallery_veil_fold
 -- THE CATALOGUE IDENTITY'S FOLD (COHERENCE-VEIL-8, -9): lower case, every run of characters that are not an ASCII
