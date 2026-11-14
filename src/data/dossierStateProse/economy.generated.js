@@ -139,7 +139,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "no crisis: under_siege"
+            "no crisis: under_siege",
+            "no crisis: plague_onset"
           ],
           "text": "Some trade comes past {settlement}, and little of it stops. The town is poor, and its people say so to anyone who asks.",
           "slots": [
@@ -151,7 +152,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "angle": "visitor",
           "marks": [
             "market",
-            "no crisis: under_siege"
+            "no crisis: under_siege",
+            "no crisis: plague_onset"
           ],
           "text": "{settlement}'s market sells little, though the {access} is busy; most of the traffic does not stop, and the traders here are poor.",
           "slots": [
@@ -186,7 +188,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "angle": "visitor",
           "marks": [
             "no market",
-            "no crisis: under_siege"
+            "no crisis: under_siege",
+            "no crisis: plague_onset"
           ],
           "text": "There is no market at {settlement} to hold the trade that passes by, and the town stays poor while the trade goes on its way.",
           "slots": [

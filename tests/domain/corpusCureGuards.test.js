@@ -65,6 +65,9 @@ const GUARDS = [
   { seed: 'w5-city-plague_onset-3', pool: 'DS-ECO-9::HOW THE NEED IS MET: much of it brought in', vid: 1, why: 'a plague\'s quarantine: "Food carts come into X most days" beside "Nobody comes into X and nobody leaves"' },
   { seed: 'w5-city-plague_onset-3', pool: 'DS-ECO-9::HOW THE NEED IS MET: much of it brought in', vid: 2, why: 'a plague\'s quarantine: "the rest comes in from the farms around it and from trade" beside "Nobody comes into X and nobody leaves"' },
   { seed: 'w5-city-plague_onset-3', pool: 'DS-ECO-9::HOW THE NEED IS MET: much of it brought in', vid: 3, why: 'a plague\'s quarantine: "everyone knows when the next load is due" beside "Nobody comes into X and nobody leaves"' },
+  { seed: 'w5-city-plague_onset-3', pool: 'DS-ECO-1::COMBINATION C4: a low rung on a working approach', vid: 2, why: 'a plague\'s quarantine: "Some trade comes past X, and little of it stops" beside "Nobody comes into X and nobody leaves" (round three #212; v1 carries the same mark)' },
+  { seed: 'w5-city-plague_onset-3', pool: 'DS-ECO-1::COMBINATION C4: a low rung on a working approach', vid: 3, why: 'a plague\'s quarantine: "the {access} is busy; most of the traffic does not stop" beside "Nobody comes into X and nobody leaves" (round three #212; v1 carries the same mark)' },
+  { seed: 'w5-thorp-plague_onset-1', pool: 'DS-ECO-1::COMBINATION C4: a low rung on a working approach', vid: 6, why: 'a plague\'s quarantine: "the trade that passes by" beside "Nobody comes into X and nobody leaves" (round three #212; v1 carries the same mark)' },
 ];
 
 /** @param {string} seed */
