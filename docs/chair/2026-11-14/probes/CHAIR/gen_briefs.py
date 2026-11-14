@@ -2316,6 +2316,40 @@ READERS['REVIEW-R3-TABS-3'] = dict(
 )
 
 
+READERS['REVIEW-R3-CODE-C-2'] = dict(
+    at="where the lane's tenth seat handed back; the lane has no builder working on it now",
+    title="REVIEW-R3-CODE-C-2 · round three's code lane: a first reader's unfinished steps, and the eighth to tenth seats' cures read cold",
+    lane='lane/r3-code-c-2026-11-13', own='lane/review-r3-code-c-2-2026-11-14', base='fb8b24fb', tip='da0f201e',
+    what=("round three's code lane: cures in the economy's generators and their narrative (chains, resources, foodways, the crisis "
+          "summaries, a town's age and culture lines)"),
+    before=("the tip the reader before the last read. A FIRST READER OF THIS STAGE read every line of the part up to b6bd3a3c1 where it "
+            "prints, ran some of the measured steps, and HANDED BACK AT ITS COUNT with its steps 2, 3, 6 and 8 and its verdict undone. "
+            "Since b6bd3a3c1 three more seats have cured twelve rows on top"),
+    stmt='docs/chair/2026-11-13/R3-CODE-C-HANDBACK.md (the statement and the parts headed THE SEVENTH SEAT to THE TENTH SEAT: by heading, never whole)',
+    tools=("`origin/lane/review-r3-code-c-2026-11-14` (7a3ad98e2: `git fetch origin lane/review-r3-code-c-2026-11-14`): THE FIRST READER'S "
+           "FILES: docs/chair/2026-11-14/REVIEW-R3-CODE-C-LINES-READ.md (its step 1, pushed cold: it STANDS for the part up to b6bd3a3c1: "
+           "you do not read those lines again) and REVIEW-R3-CODE-C-2026-11-14.md (its findings, ranked; the steps it did; WHAT IS LEFT, "
+           "line by line; how its instruments are re-made), with its probes under docs/chair/2026-11-14/probes/REVIEW-R3-CODE-C/ (births "
+           "of 1,722 towns, page lines, field diff, set diff, plants): copy them out with git archive and run them from outside every "
+           "repository tree. These files are a READER's, not the lane's: you may open them at once."),
+    extra=("8. YOUR STEP 1 IS ONLY THE LINES NEW OR REWORDED IN b6bd3a3c1..da0f201e (the eighth, ninth and tenth seats: a town's age "
+           "line; \"Complete production chain in place\"; the noble subordinate line; a foodways line under a famine and beside a "
+           "fished-out water; the faith's say in the hall; a grain row's beer; a hunted underworld; a culture sentence's herding; the "
+           "famine's official lines handed the record's facts; a partial chain's missing house), read cold where they print. YOUR STEPS 2 "
+           "TO 8 COVER THE WHOLE STAGE fb8b24fb to da0f201e, beginning from the first reader's list of what is left (where you would "
+           "rule differently from the chair's rulings in the statement, say so, row by row). 9. THE TENTH SEAT STATES JUDGMENTS FOR THE "
+           "OWNER'S VETO: read each: (b) a catch named beside a fished-out water is cured by reading the economy's chains because the "
+           "tab hands the reader no resource analysis: is the reading true in the 98 towns, and what of the 2 left? In all 98 THE FOOD "
+           "RECORD STILL COUNTS THE CATCH: say what that leaves false on the page (a figure, a row), with a count. (c) the famine's lines "
+           "\"handed the facts\": the function takes an optional argument that only another lane's caller passes: say plainly what prints "
+           "TODAY on this lane's tree for the Tonight sheet and the Overview (the cure is half of a pair). 10. THE CHAIR'S RULING OF "
+           "2026-11-14 ON REGISTERS: a lane's seat no longer re-takes a census or a baseline after a cure: a register its cure makes "
+           "stale is NAMED in its hand-back and re-derived once, at the close. So for step 5 and the registers: check that every "
+           "register the stage left stale IS NAMED (the tenth seat names two goldens' reds: A4 37 and A7 6, of declared moves): a stale "
+           "register that is not named is a finding; one that was banked or raised by hand is a HIGH finding."),
+)
+
+
 SEATS2['R2-CODE-B-7'] = dict(
     title="R2-CODE-B-7 · round two's second code lane: the line's merge and the final statement",
     branch='lane/r2-code-b-2026-11-13', tip='c40da4ec', statement=True,
@@ -5438,6 +5472,199 @@ SEATS2['POWERS-16'] = dict(
           "what is left, line by line."),
     merges='',
     when="for a stop that blocks everything you have left, after the first three cures of step 2 (the tip; the table; the prose words; the counts), for a power re-drawn beyond a row's towns, and with your hand-back",
+    turns='',
+)
+
+
+SEATS2['CENSUS-3'] = dict(
+    title="CENSUS-3 · the worklist by width: every false line a script can find, at the landed tip, on the tabs, the PDF and the journal, each traced to its writer",
+    branch='lane/census-3-2026-11-14', checkout='lane/join-2026-11-14', tip='b6a5f97a', statement=False, mark='400,000',
+    intro=("You are CENSUS-3, a MEASURING seat of the settlement-engine integration program. YOU BUILD NOTHING ON ANY LANE. The program "
+           "cures false sentences on generated town pages; the release is held until thirty fresh towns read cold show no high and no "
+           "medium false sentence. On 2026-11-13 a measuring seat (CENSUS-2) made ONE COMMAND that births 720 towns, renders every view of "
+           "each as its owner sees it, counts eight kinds of fault a script can check against the town's own record, and traces every hit "
+           "to the file and function that wrote it, at nine in ten precision. Since then: ten lanes have cured for a day; the chair has "
+           "ruled some thirty laws, many of which a script can check; a first cold read against the bar (ten towns, 300 rows) and a dozen "
+           "readers' lists exist; and the exports (the PDF and the Foundry journal) were found to be the widest false surface, and are not "
+           "in that census. A merge seat is landing every lane's tip on the joined line now. THE CHAIR ROUTES CURES BY WIDTH, AND TODAY "
+           "DOES IT FROM LISTS THAT ARE A DAY OLD. Yours: THE WORKLIST BY WIDTH AT THE LANDED TIP: what still prints false, in how many "
+           "towns, on which surface, written by which file and function, held by which lane."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) at your checkout.\n"
+          "2. CENSUS-2 (`git fetch origin lane/census-2-2026-11-13`): docs/chair/2026-11-13/CENSUS-2-2026-11-13.md: \"THE HEADLINE\" and "
+          "\"How I counted\" (its first 35 lines) and \"What the render covers, and what I did not measure\" (by heading; NOT the writers' "
+          "lists); CENSUS-2-HANDBACK.md whole (2 KB); and its probes under docs/chair/2026-11-13/probes/CENSUS-2/ copied out with git "
+          "archive: census2.sh's header (the command), patterns.mjs and patterns-dh.mjs (the eight kinds as code), count2.mjs, recall.mjs, "
+          "sample.mjs, writers2.mjs, holders.mjs: THE CODE IS THE DOCUMENTATION; you EXTEND it, you do not rewrite it.\n"
+          "3. THE READERS' SCALE (`git fetch origin lane/round-3-cut-2026-11-13`): docs/chair/2026-11-13/probes/REVIEW-R2-STAGES/READER-BRIEF.md, "
+          "its section \"What you do\": the kinds, the three severities, what is NOT a fault: a precision read uses this scale.\n"
+          "4. THE BAR'S FIRST READ, the freshest cold list (`git fetch origin lane/review-bar-0-2026-11-14 lane/chair-2026-11-08`): "
+          "docs/chair/2026-11-14/REVIEW-BAR-0-LIST.json on the reader's branch (every row: town, tab, sentence, kind, mechanism, "
+          "severity, fact, source) with its probes (docs/chair/2026-11-14/probes/REVIEW-BAR-0/: how its ten towns are born; part A's "
+          "placer of a known list); and `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-14/bar-0-rows/README.md` (the rows by "
+          "lane). AND THE JOIN'S TABLE (`git fetch origin lane/join-rows-2026-11-14`): docs/chair/2026-11-14/JOIN-ROWS.json (191 rows "
+          "other seats named, each with a sentence and a writer).\n"
+          "5. FOR THE PDF'S AND THE JOURNAL'S TEXT (`git fetch origin lane/join-surfaces-2026-11-14`): docs/chair/2026-11-14/SURFACES-HANDBACK.md, "
+          "ONLY its part on how the three surfaces' text was taken for a town (the instruments), and tests/pdf/chainStateThreeSurfaces.test.jsx "
+          "(a working extraction of all three)."),
+    first=("FIRST ACT. FULL HISTORY (`git fetch --depth=2147483647 origin lane/join-2026-11-14 lane/integration-2026-11-07`; `git rev-parse "
+           "--is-shallow-repository` prints false). Read the joined line's tip back from origin: it was b6a5f97ab when this was written; A "
+           "MERGE SEAT IS PUSHING MERGES ON IT NOW: a later tip is not a stop. Build and prove your instrument at the tip you read; THE "
+           "TABLE IS TAKEN AT THE LANDED TIP, which the chair sends you (\"LANDED: <hash>\"). YOUR OWN BRANCH: `git worktree add -b "
+           "lane/census-3-2026-11-14 <scratch>/own <the tip you read>`: it holds your report, your JSON and your probes ONLY (under "
+           "docs/chair/2026-11-14/ and docs/chair/2026-11-14/probes/CENSUS-3/): add BY NAME."),
+    work=("THE LAWS OF THIS SEAT: you commit nothing to any lane and change no file under src/, tests/ or scripts/ on any branch; your "
+          "instrument lives under your probes directory and runs from OUTSIDE every repository tree (git archive it out, as CENSUS-2's "
+          "does). A PATTERN FINDS CANDIDATES: a hit is a fault only when read: every pattern carries a PRECISION by your own read "
+          "(thirty distinct lines drawn by a fixed stride, twenty for a kind with fewer than sixty distinct lines; then its ten widest "
+          "writers each read once: a draw by distinct line can miss a writer that prints one false line in 200 towns), on the readers' "
+          "scale; a pattern under eight in ten is tightened or reported as WEAK and kept out of the ranked table. EXECUTED is told from "
+          "PLAUSIBLE in every figure. Rendered pages and dumps stay OUT of your context: a script prints counts and at most three "
+          "quoted lines a pattern. Long runs write to files outside every tree; never end your turn over a run in flight.\n"
+          "THE WORK, in this order:\n"
+          "1. THE COMMAND AS IT STANDS, at the tip you read: `sh <probes>/census2.sh <tree> <out> 4` (births and render of the 720: about "
+          "ten minutes). Its eight kinds beside CENSUS-2's headline at the line on 2026-11-13 (towns of 720: a 712, b 70, c 301, d 382, e "
+          "60, f 720, g 720, h 20): THE FIRST FALL TABLE. Commit it and push.\n"
+          "2. TWO SURFACES MORE. For the same seeds, the PDF's text and the Foundry journal's text, taken as the surfaces seat's guard "
+          "takes them (item 5 of your reading): dumps beside the tab dumps, the surface named on every line. If the PDF's text for 720 "
+          "towns takes more than twenty minutes, take a fixed third (every third seed: 240) and SAY SO in every figure. The eight kinds "
+          "counted on each surface; AND A NINTH KIND, (i) THE SURFACES DISAGREE: one fact printed differently on the tab, the PDF and "
+          "the journal of the same town: a chain's state word; a chain's outputs; the food word; the span of the stores; the governing "
+          "modifier's words; a house's label; the trade lists. Per fact: the towns where two surfaces differ, and which pair.\n"
+          "3. NEW PATTERNS FOR THE CHAIR'S LAWS (2026-11-13 to 14; each vetoable by the owner). For each law below that a script can "
+          "check against the record or against another line of the same page, a pattern (its trigger; the fact it reads), added to the "
+          "instrument as its own kind id, with its precision read. A law a script cannot check is LISTED AS SUCH in one line: do not "
+          "force a weak pattern.\n"
+          "   L1 A LINE CLAIMS NO VERDICT THAT A BAND ON ITS OWN PAGE CAN DENY (a line that says the town would hold, see off, or is "
+          "well defended, beside a Weak or Critical bar of that threat; \"Strong\" beside \"Desperate\" in one row). L2 NO SURFACE PRINTS A "
+          "CATALOGUE NAME'S BRACKET (a count range, \"(if walled)\", \"(word of mouth)\", \"(commercial)\" where it is not the house's own "
+          "name), A STORED KEY (snake_case or camelCase words, a key in brackets such as \"(entrepot)\"), A SLASH LABEL INSIDE A SENTENCE "
+          "(\"Military/Guard\", \"gold/silver ore\", \"Palace/government complex\"), OR THE MACHINERY OF A RATING. L3 TWO THINGS A PAGE SAYS "
+          "ARE SET APART (labels or sentences run together: a lower-case letter or a full stop followed at once by a capital with no "
+          "space; a chip glued to a sentence). L4 UNDER A SIEGE NOTHING COMES IN OR GOES OUT BY ROAD, GATE OR WATER (carts, caravans, "
+          "travellers, coaches, fairs, imports arriving, exports leaving, a market heard trading, a walk to the next village); a magic "
+          "channel the record holds may be said. L5 UNDER A FAMINE NO LINE OFFERS THE FOOD THAT FAILED (fresh produce, full granaries, "
+          "plenty, a second harvest lost where the town has neither grain nor mill). L6 UNDER AN OCCUPATION no line says the hall decides "
+          "for itself, and the posture row is silent. L7 A SIZE WORD: quarters, districts and wards belong to a town or larger; plural "
+          "streets to a village or larger; a council that must agree, a vote or a majority needs a body of more than one and, for a "
+          "vote between powers, two powers. L8 A COUNT WORD READS THE ROSTER (\"two burial grounds\"; \"Institutions behind this power "
+          "(N)\" against the rows printed under it; \"both\", \"three guilds\"). L9 A LINE THAT NAMES A HOUSE READS THE ROSTER, where "
+          "kind a's words do not yet reach: a court and its hearings; a guild at war or negotiating; a wharf, docks, a harbour; a "
+          "sawmill, a smelter, a forge running; a healer; a granary; a bridge. L10 A LINE NAMES NO SEX THE RECORD DOES NOT HOLD (a "
+          "title word against the person's recorded sex: alewife, madam, mother, abbess, lord, lady, king, queen). L11 ONE FOUNDER ON A "
+          "PAGE, AND ONE FOUNDING (two different founders or founding stories on one town's pages). L12 A FACTION OR A GOOD NAMED IN A "
+          "SENTENCE TAKES ITS PROSE FORM (L2's slash labels counted by label, so that one cure can be sized). L13 A SLOT IS NOT MADE THE "
+          "SUBJECT OF A VERB IT DOES NOT AGREE WITH (\"The plague years is\", \"its days of legal\": a plural noun phrase before a singular "
+          "verb; a slot filled with the wrong kind of word). L14 THE PAGE'S FOOD WORD HAS ONE HOME (the food word differs between two "
+          "tabs of the same town: Foundations against the Tonight sheet against Economics). L15 A LINE ABOUT MONEY LAID BY OR OWED "
+          "READS THE RECORD'S PROSPERITY AND ITS CRISIS (reserves \"enough for a long crisis\" in a Poor or Struggling town; \"paid late\" "
+          "where the defence is fully funded). L16 THE CAST OF A CRISIS: the collaborator is never the occupier or the crisis's own "
+          "face; the one who holds the lever does not bear the brunt; a minted stand-in's role claims no office the page denies "
+          "(\"Healer\" beside \"No healer is kept here\"; \"Grain Steward\" beside \"No granary\").\n"
+          "4. RECALL, of the whole instrument: the bar's first read (REVIEW-BAR-0-LIST.json: its ten towns born by its own probes at the "
+          "tree you count): of its HIGH and MEDIUM rows whose sentence STILL PRINTS in its own town, how many does a pattern fire on, "
+          "by kind and by severity? The rows no pattern catches, grouped by mechanism, are your list of what only a reader finds: "
+          "name the five largest groups.\n"
+          "5. THE KNOWN ROWS, PLACED (the burn-down): for every row of the bar's list and of the join's table (JOIN-ROWS.json) that "
+          "carries a town and a sentence: does the sentence still print in its own town at the tree you count (the bar's own placer; "
+          "names and figures folded)? Per source list and severity: printing / gone. For the join's rows with no town: the fixed run of "
+          "the sentence counted on the 720.\n"
+          "6. AT THE LANDED TIP (the chair's \"LANDED: <hash>\"; if none has come when 1 to 5 are done, tell the chair in one line and "
+          "run at the joined line's newest tip, saying which): everything once more there (`--reuse` is not valid across trees: births "
+          "and renders again), and THE WORKLIST: ONE TABLE, a row a WRITER (file :: function or pool id, as writers2.mjs names it), "
+          "with, per kind and law: the towns of the 720 with a hit; the estimate of false towns (hits by the pattern's precision); the "
+          "surfaces; one example town and its sentence; THE HOLDER (holders.mjs at the lanes' tips as landed; where several lanes "
+          "changed the file, the lane whose own hunks hold the function); and whether the bar's list or the join's table already names "
+          "it. SORTED BY FALSE TOWNS. The whole table as JSON; its first sixty rows in the report.\n"
+          "7. THE REPORT: docs/chair/2026-11-14/CENSUS-3-2026-11-14.md on your branch (the headline: kinds and laws, towns then and now, "
+          "recall, precision; the fall table; the surfaces; the worklist's first sixty rows; the burn-down; what a script cannot find; "
+          "HOW THE COMMAND IS RUN, in one line, by a seat that has never seen it, with `--files` for one seat's files), CENSUS-3.json, "
+          "the probes. ONE MESSAGE TO THE CHAIR: your branch's tip read back from origin; the kinds' towns then and now in one line; "
+          "the fifteen widest writers with their holders; the burn-down in one line; recall.\n"
+          "IF YOUR COUNT RUNS SHORT: items 1, 6 (the eight kinds only) and 7 come before items 2 to 5: the chair needs the worklist "
+          "more than the new patterns. Hand back by file with what is left, line by line."),
+    merges='',
+    when="for something that blocks the whole measure, when item 1's fall table is pushed (one line), to ask for the landed tip if none has come, and with the report (item 7)",
+    turns='',
+)
+
+
+SEATS2['SURFACES-2'] = dict(
+    title="SURFACES-2 · one reader for one fact on every surface: the food word first (three homes for one word), then the PDF's deficit, its other spellings, the brackets",
+    branch='lane/join-surfaces-2026-11-14', tip='24251bd8', statement=False,
+    intro=("You are SURFACES-2, the second seat of the surfaces lane of the settlement-engine integration program "
+           "(lane/join-surfaces-2026-11-14, cut from the joined line). THE LAW OF THE LANE: ONE READER FOR ONE FACT ON EVERY SURFACE: what a "
+           "tab says of a fact, the PDF and the Foundry journal say through the same function the tab calls; no surface re-derives a fact "
+           "from the raw record or prints a stored key; a surface with no room prints less, never something else. The first seat measured "
+           "every such fact on 772 births and cured the two widest (a chain's state: the PDF differing from the tab in 241 towns, to 0; a "
+           "chain's outputs: 756 towns, to 0), then handed back at its count BEFORE the third: THE FOOD WORD, which the next thirty-town "
+           "read against the release bar is waiting for. Yours: the food word FIRST, then its list in order. The lane lands as points on "
+           "the joined line: NO whole suite."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-14/SURFACES-HANDBACK.md WHOLE (147 lines): the law; the rulings; item 0's table (every "
+          "fact, its surface, its towns); items 1 and 2 as cured (THE FORM OF A CURE HERE: one leaf, one call line a surface, a guard "
+          "that renders all three surfaces, each arm red alone); THE FOOD WORD as measured (its table of sites and the cure the first "
+          "seat would make); found, not cured; WHAT IS LEFT (items 0 to 8: YOUR LIST); how the instruments are re-made "
+          "(docs/chair/2026-11-14/probes/SURFACES-1/).\n"
+          "3. THE READERS THEMSELVES, whole, before you call one from a new place: src/domain/summary/tonightSheet.js (the food band's "
+          "home), src/domain/display/chainStateShown.js, src/domain/display/tradeListDisplay.js; tests/pdf/chainStateThreeSurfaces.test.jsx "
+          "(the guard whose sibling you write).\n"
+          "4. Nothing else: not the older briefs, not the chair's handoffs, not another lane's hand-back."),
+    first=("FIRST ACT. FULL HISTORY (`git fetch --depth=2147483647 origin lane/join-surfaces-2026-11-14 lane/join-2026-11-14 "
+           "lane/integration-2026-11-07`; `git rev-parse --is-shallow-repository` prints false). Read your lane's tip back from origin: it "
+           "was 24251bd88 when this was written; any difference is a stop: tell the chair. THEN MERGE THE JOINED LINE'S TIP INTO YOUR LANE "
+           "(`git merge --no-ff origin/lane/join-2026-11-14`, the tip as you read it: A MERGE SEAT IS LANDING EVERY LANE'S NEW COMMITS ON "
+           "IT NOW, so it moves every few minutes: take what stands, say which, and MERGE IT AGAIN before the food word's push and before "
+           "your hand-back): a code conflict in a file of yours keeps BOTH sides' cures (read the file whole); a register, a baseline, a "
+           "generated file or a bundle that conflicts takes THE JOINED LINE'S side. THE LIGHTING CENSUS IS NOT RE-TAKEN (item 0 of the "
+           "hand-back's list is changed by the chair's ruling below): it stays a NAMED RED."),
+    work=("THE CHAIR'S RULINGS SINCE THE FIRST SEAT'S COPY (2026-11-14; each vetoable by the owner; copy them into the hand-back):\n"
+          "(r1) REGISTERS ARE RE-DERIVED ONCE, AT THE CLOSE, ON THE FINAL TREE: you re-take no census and no baseline after a cure and "
+          "rebuild no bundle; a register your cure makes stale is NAMED in the hand-back (file; the title that reds; your commit); never "
+          "banked, never raised, never hand-edited. The three fast gates, the presumed-things walker (its fresh hits compared with the "
+          "base's) and the test files that name your touched files are run after every cure.\n"
+          "(r2) THE FOOD WORD HAS ONE HOME, AND IT IS MEASURED BEFORE IT IS TRUSTED. The home the chair named is the food band the "
+          "Tonight sheet, Daily Life and the quick guide already print (tonightSheet.js :: foodBandOf of the food record). BEFORE THE "
+          "CURE, READ TEN of the 159 towns where the stored label says one thing and the band another (a thorp, a hamlet, a village, a "
+          "town, a city; a calm one, a siege, a famine among them): which word is TRUE of the town by its own page (its stores, its "
+          "sources, its food sentences, the crisis in force)? If the band is the false side in more than two of the ten: STOP with the "
+          "table (the home is then to be re-ruled). Else the cure as the first seat wrote it: ONE display leaf of this lane, called by "
+          "ONE line at the Overview's Food Security row, the Substrate tab's Foundations row and the PDF's Identity block; the Identity "
+          "block's own second vocabulary (Deficit, Surplus, Balanced) GOES: it prints the band's word or nothing. The colour beside the "
+          "word follows the word. A guard that renders the Overview, the Substrate row, the PDF's Identity and its Tonight page and the "
+          "journal in a siege town, a famine town and an occupied town, each arm red alone. ONE MESSAGE TO THE CHAIR when it is pushed: "
+          "the tip; the ten towns' reading in a line; the three counts before and after.\n"
+          "(r3) THE OTHER SPELLING (165 towns: the PDF and the journal print \"River fisheries\" where the tab prints \"River fish\"): "
+          "THE TAB'S WORD GOVERNS: the PDF and the journal print the pill through the leaf the tab prints it with.\n"
+          "(r4) \"Abundant\" under a siege (56 of 56 besieged towns; a group the tab's Resources does not print): THE PDF PRINTS THE "
+          "GROUPS THE TAB PRINTS, through the tab's reader; a group the tab does not print is not printed.\n"
+          "(r5) THE DEFENCE CHAPTER'S TWINS, named by the tabs lane's seat: src/pdf/sections/DefenseSecurity.jsx prints a force's name "
+          "raw (\"Gates (if walled)\") and a provenance chip (REQ, FORCED) that the Defense tab no longer prints: the same two cures "
+          "there, through the leaves the tab calls. And the PDF's medical line (\"Major monasteries (5-10).\"): through the house-label "
+          "leaf.\n"
+          "(r6) The History tab's and the Overview's tension rows print a stored text with a catalogue bracket (\"Taverns (5-20)\", one "
+          "town as measured): through `houseLabelsInText`, as the PDF's History already does.\n"
+          "THE WORK, in this order, each cause its own commit, measured first on the first seat's 772 births (count before and after), "
+          "red first (a guard that renders the surfaces; each arm shown able to red by a plant you do not commit, made in a tree no "
+          "suite or render is running in), pushed as made:\n"
+          "1. THE FOOD WORD, by (r2). Nothing narrower before it.\n"
+          "2. The hand-back's item 2 (the PDF's deficit against the tab's Short, 253 towns: the PDF's block reads the leaf the tab "
+          "calls); item 3 by (r3); item 4 by (r4); (r5); item 5 by (r6); item 6 (the stores' unit, 6 towns); item 7 (the trade "
+          "connectivity row: measure it with a system state first; a difference is cured the same way).\n"
+          "3. A SWEEP, once, at the end: with the first seat's measure script, every fact of its table re-taken at your tip after the "
+          "last merge of the joined line (the lanes' landed cures move the tabs: does every surface still agree?): the table in the "
+          "hand-back; a new disagreement is cured if it is one call line, else NAMED with its count.\n"
+          "EVERY SURFACE A CURE CHANGES IS READ before it is pushed: the PDF's text, the journal and the tab of three towns of the "
+          "cure's cells, a siege, a famine or an occupation among them, the smallest and the largest size it reaches; the towns and "
+          "what printed in the commit body. YOU CHANGE A FILE ANOTHER LANE ALSO CHANGED ONLY AFTER YOUR MERGE OF THE JOINED LINE HOLDS "
+          "THAT LANE'S CHANGE (check by content: `git log --oneline -3 -- <file>`), and then you keep its cure whole.\n"
+          "AFTER EVERY CURE: the strict-domain gate, the type ratchet and eslint on the touched files; the presumed-things walker; the "
+          "twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop; a fall is NAMED); the test files that name "
+          "the files you touched.\n"
+          "THE HAND-BACK, kept current after every item: a part \"# SURFACES-2\" at the end of the lane's hand-back file, in the first "
+          "seat's form: the rulings copied; the table re-taken; each fact as cured; EVERY NEW OR CHANGED WORD ON A SURFACE with the "
+          "towns it was read in (the owner's veto list, and the next reader's); THE REGISTERS NAMED STALE; what is left, line by line."),
+    merges='; the merges of the joined line into YOUR lane that the first act names',
+    when="for a stop that blocks everything you have left, for the ten towns' table if the band is the false side, when the food word is pushed (the tip; the reading; the three counts), and with your hand-back",
     turns='',
 )
 
