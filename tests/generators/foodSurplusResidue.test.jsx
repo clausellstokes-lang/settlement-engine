@@ -61,7 +61,11 @@ describe('the food-surplus residue', () => {
     // now prints the food record's own word, the Overview's (`economicState.foodSecurity.label`), so this
     // food-short place reads its record's "Secure" where the causal ladder's capped "Adequate" stood. The
     // pin's point stands: not Surplus.
+    // RE-KEYED BY IDENTITY AGAIN (SURFACES-2 item 1, the chair's ruling (r2) of 2026-11-14): the food word has one
+    // home on every surface, the food band (domain/display/foodWordShown.js), so this place, which grows less than
+    // it eats and leaves a share of its need unmet, reads the band's "Pressured" where its stored "Secure" stood.
     expect(s.economicState.foodSecurity.label).toBe('Secure');
-    expect(text).toMatch(/^Food\nSecure$/m);
+    expect(s.economicState.foodSecurity.foodRecord.gapPct).toBeGreaterThan(0);
+    expect(text).toMatch(/^Food\nPressured$/m);
   });
 });
