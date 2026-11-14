@@ -1,0 +1,76 @@
+RED FIRST: tests/security/galleryVeilHandRows.pglite.test.js, the three V7-2 arms, at the bytes of 1e5832dda (212 = 715009bdce20c719bef5139a2e08257d87b95e7ea44e1d3a7b464bfa4245e751; the twin as committed there).
+Run: npx vitest run tests/security/galleryVeilHandRows.pglite.test.js -t "V7-2" (the guard as extended in this commit, the migration and the twin not yet changed). Verdict lines; the full print was 604 lines.
+     × V7-2 THE FIVE HOMES: the legacy annotation, the siege narrative, prominentRelationship's copies, pressureSentence and a person's impression go with their source's eye, with the source as born, amended by appending, by a prefix, rewritten wholly, lower-cased and upper-cased; what is open stays 1046ms
+     × V7-2 THE PRESSURE SENTENCE, which the record ties to no one tie: it goes by the two ends it names; where no stress and no recentConflict accounts for it; and by the words, current and stored, in both directions. The stress's line, recentConflict and the open tension itself stay 1574ms
+     × V7-2 NO EVENT, NO TIE: an annotation in the older spelling goes by its event's name; one whose event was renamed, by its type and years; one with no event at all, and a copy that names no tie, follow every event's and every tie's eye (closed), and arrive where none is shut 269ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+AssertionError: expected [ …(240) ] to deeply equal []
+AssertionError: expected [ …(168) ] to deeply equal []
+AssertionError: expected [ …(120) ] to deeply equal []
+ Test Files  1 failed (1)
+      Tests  3 failed | 6 skipped (9)
+
+What was red, by kind (count of lines over the two veiled shares and the four reads; no control line among them: nothing that must stay was missing at the base):
+      8 "BY ITS ENDS, under a stress too: the two names, the gloss, the tension; the tie rewritten wholly: the sentence is sent
+      8 "BY ITS ENDS, under a stress too: the two names, the gloss, the tension; the tie rewritten wholly: value $.pressureSentence
+      8 "BY ITS ENDS, under a stress too: the two names, the gloss, the tension; the tie rewritten wholly: value $.prominentRelationship.phrasing
+      8 "BY ITS ENDS: the bare tension, which names both ends; the tie rewritten wholly: the sentence is sent
+      8 "BY ITS ENDS: the bare tension, which names both ends; the tie rewritten wholly: value $.pressureSentence
+      8 "BY ITS ENDS: the bare tension, which names both ends; the tie rewritten wholly: value $.prominentRelationship.phrasing
+      8 "NO OTHER ACCOUNT, the tie rewritten wholly: the sentence is sent
+      8 "NO OTHER ACCOUNT, the tie rewritten wholly: value $.pressureSentence
+      8 "NO OTHER ACCOUNT, the tie rewritten wholly: value $.prominentRelationship.phrasing
+      8 "NO OTHER ACCOUNT: a sentence written by hand that names neither end in full; no stress, no recentConflict; the tie amended: the sentence is sent
+      8 "NO OTHER ACCOUNT: a sentence written by hand that names neither end in full; no stress, no recentConflict; the tie amended: value $.pressureSentence
+      8 "NO OTHER ACCOUNT: a sentence written by hand that names neither end in full; no stress, no recentConflict; the tie amended: value $.prominentRelationship.phrasing
+      8 "THE WORDS, the copy inside the source: the same, its source amended by a prefix: the sentence is sent
+      8 "THE WORDS, the copy inside the source: the same, its source amended by a prefix: value $.pressureSentence
+      8 "THE WORDS, the copy inside the source: under a stress, a born tension that names one end, its source amended by appending: the sentence is sent
+      8 "THE WORDS, the copy inside the source: under a stress, a born tension that names one end, its source amended by appending: value $.pressureSentence
+      8 "THE WORDS, the stored wording: under a stress, the description as born kept in prominentRelationship.full, the tie rewritten wholly: the sentence is sent
+      8 "THE WORDS, the stored wording: under a stress, the description as born kept in prominentRelationship.full, the tie rewritten wholly: value $.pressureSentence
+      8 "amended by a prefix: history.legacyAnnotations.0.annotation is sent
+      8 "amended by a prefix: history.siegeNarrative is sent
+      8 "amended by a prefix: pressureSentence is sent
+      8 "amended by a prefix: prominentRelationship.phrasing is sent
+     16 "amended by a prefix: the born wording of 'insult' arrives
+      8 "amended by a prefix: the born wording of 'levy' arrives
+      8 "amended by a prefix: the born wording of 'palm' arrives
+      8 "amended by a prefix: the born wording of 'toll' arrives
+      8 "amended by a prefix: the impression is sent
+      8 "amended by appending: history.legacyAnnotations.0.annotation is sent
+      8 "amended by appending: history.siegeNarrative is sent
+      8 "amended by appending: pressureSentence is sent
+      8 "amended by appending: prominentRelationship.phrasing is sent
+     16 "amended by appending: the born wording of 'insult' arrives
+      8 "amended by appending: the born wording of 'levy' arrives
+      8 "amended by appending: the born wording of 'palm' arrives
+      8 "amended by appending: the born wording of 'toll' arrives
+      8 "amended by appending: the impression is sent
+      8 "rewritten wholly: history.legacyAnnotations.0.annotation is sent
+      8 "rewritten wholly: history.siegeNarrative is sent
+      8 "rewritten wholly: pressureSentence is sent
+      8 "rewritten wholly: prominentRelationship.phrasing is sent
+     16 "rewritten wholly: the born wording of 'insult' arrives
+      8 "rewritten wholly: the born wording of 'levy' arrives
+      8 "rewritten wholly: the born wording of 'palm' arrives
+      8 "rewritten wholly: the born wording of 'toll' arrives
+      8 "rewritten wholly: the impression is sent
+      8 "shut: annotation 0 is sent
+      8 "shut: annotation 2 is sent
+      8 "shut: annotation 3 is sent
+      8 "shut: annotation 4 is sent
+      8 "shut: the copy with no tie keeps full
+      8 "shut: the copy with no tie keeps phrasing
+      8 "shut: the copy with no tie keeps tension
+      8 "shut: value $.history.legacyAnnotations[0].annotation
+      8 "shut: value $.history.legacyAnnotations[2].annotation
+      8 "shut: value $.history.legacyAnnotations[3].annotation
+      8 "shut: value $.history.legacyAnnotations[4].annotation
+      8 "shut: value $.pressureSentence
+      8 "shut: value $.prominentRelationship.full
+      8 "shut: value $.prominentRelationship.phrasing
+      8 "shut: value $.prominentRelationship.tension
+      8 "the description's eye alone shut: the two names, the gloss and the tension go (the record cannot tell that head from one written by hand): the sentence is sent
+      8 "the description's eye alone shut: the two names, the gloss and the tension go (the record cannot tell that head from one written by hand): value $.pressureSentence
+      8 "the description's eye alone shut: the two names, the gloss and the tension go (the record cannot tell that head from one written by hand): value $.prominentRelationship.phrasing

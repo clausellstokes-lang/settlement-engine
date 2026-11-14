@@ -18,6 +18,7 @@ door, no pull request. **Nothing is applied anywhere but those local databases.*
 | 212 at 7d99e9b8e (PART 10's last) | `a222b83dc0d05a03d0de88106be2e573f8ebf4a3ca5b08a1a871c4c143ed78f3` / down `5e85b349…c4c01` |
 | 212 after V7-3 | `02e00643e418856f4f16e517a256a2c62835d589d6cab6e0136dd9737b7adfa6` / down unchanged `5e85b349b82305ef3033ea8bfc0abc51dcfac0a81113458504223a4a5b2c4c01` |
 | 212 after V7-1 (the name search rebuilt) | `715009bdce20c719bef5139a2e08257d87b95e7ea44e1d3a7b464bfa4245e751` / down `d99237b4b71e2c734f83b8b5cda15f201a85e4902ab05a7e4503d51620458a7b` (its drops are 212's twenty-five helpers, by signature) |
+| 212 after V7-2 (a second home by identity) | `70810c2a1839a3534370ccf091bdb13eb41b0a95f7c096369651b5e40313ef1e` / down unchanged `d99237b4b71e2c734f83b8b5cda15f201a85e4902ab05a7e4503d51620458a7b` (no helper added, removed or re-signed) |
 
 **Not final. The owner's pack `veil-212/` still describes old bytes: do not use it.**
 
@@ -41,6 +42,7 @@ large rows fail** (3,000 deep: `stack depth limit exceeded` where 211 serves in 
 |---|---|---|---|
 | **V7-3** a house hidden whole is removed whole BY ITS ID ALONE | `_gallery_veil_apply`: the removal no longer asks the class a second time of the trimmed card | `galleryVeil.js :: applyVeil`, the same | `tests/security/galleryVeilHandRows.pglite.test.js` (new: rows written by hand, three shares, gallery, link, import and the twin as a read of its own), arm V7-3: `out/hand-V7-3-red.txt` (nameless `{"category": ...}` records left by every read) -> `out/hand-V7-3-after.txt` (1 of 1) |
 | **V7-1** the name search rebuilt, with what turns on it: **V7-4** (a key, a join, an id, camel case, squeezed, the name without its qualifier, a plural), **V7-6** (the cost), **V7-7** (what is not hidden stays), **V7-9** (U+0130; a label with no name), **V7-10** (no call a level; the bound) | section 4c, fourteen helpers `_gallery_veil_name_*` and `_gallery_veil_named`; `_gallery_veil_second_homes` asks the whole text once and walks only on a hit; `_gallery_veil_apply` hands over the labels. Gone: `_gallery_veil_folded_name`, `_names`, `_sweep`, the prefilter | `gallerySecondHomes.js`, THE NAME SEARCH (`buildNameSearch`, `sweepHiddenNames`, `nameFold`, the three tables); `applyVeil` hands over the labels. Gone: `foldedHolds`, `namesText`, `sweepNames` | `galleryVeilHandRows.pglite.test.js`, five new arms of the builder's own plants (EVERY SCRIPT, THE FORMS, WHAT IS NOT HIDDEN STAYS, THE BOUND, THE TABLES; server against twin on each: 0 paths) and `gallerySecondHomes.pglite.test.js` 'THE TWO FOLDS ARE ONE' re-keyed: `out/hand-V7-1-red-at-4f7c60cbb.txt` (5 of 6 red), `out/folds-arm-red-at-4f7c60cbb.txt` -> `out/guards-green-V7-1.txt` (both files, 11 of 11; the three gates) |
+| **V7-2** a second home follows its source's eye BY IDENTITY, never by matching text (section 9) | `_gallery_veil_card` (the impression), `_gallery_veil_sources` (every tie with its two eyes, any shut tension, every event with its lasting-effects eye), `_gallery_veil_second_homes` (the composed homes), `_gallery_veil_embeds` (the words, both directions): restated, none re-signed | `gallerySecondHomes.js` (`withholdImpression`, `annotationEventShut`, `secondHomeSources`, `withholdSecondHomes`, `embedsAny`), rule for rule | `galleryVeilHandRows.pglite.test.js`, three new arms of the builder's own plants (THE FIVE HOMES, THE PRESSURE SENTENCE, NO EVENT NO TIE; server against twin on each: 0 paths): `out/hand-V7-2-red-at-1e5832dda.txt` (3 of 3 red: 240, 168 and 120 lines, no control among them) -> `out/guards-green-V7-2.txt` (the three guard files, 46 of 46; the three gates) |
 
 V7-3, said plainly: the set of ids removed whole is decided before any eye runs (211's rule, unchanged: a card address
 on a house the data puts in the class), and the list is then filtered by that set alone. Plants: in the class by a
@@ -151,7 +153,8 @@ touched. **The owner's pack `veil-212/` names the eighth seat's helpers: more ou
 PART 9 section 3's rows stand as PART 10 left them (C1, C3 pending the measure the brief orders for the trace's
 camel-case token, C4, C5, the joined role word, the five rows of REVIEW-VEIL-6 section 2.5). New here: V7-3's shared-id
 row (section 3); and section 4's rows for the owner's veto and its list outside the law (the name search as built),
-first among them the ruling owed on a shown power whose name is a hidden house's.
+first among them the ruling owed on a shown power whose name is a hidden house's. And section 9's: the rows where only
+the words tie a copy to its source, the prices and faults of the identity rule for the owner's veto, and its limits.
 
 ## 6. The rulings worked to
 
@@ -173,6 +176,9 @@ the acceptance run ruled ("THE SECURITY READ OF 212 FILED"); BRIEF-VEIL-9 as thi
   builder's own claims that the seat did not repeat: the fold equal for all 1,112,063 code points; the rollback
   rehearsal (0 lines); gallerySecondHomes 5 of 5; the born-town comparison. A successor's first act is to read 212
   section 4c and `gallerySecondHomes.js :: THE NAME SEARCH` whole.
+- V7-2 (section 9) was built by a second builder the seat started the same way (the sub-brief `SUB-BRIEF-V7-2.md`);
+  every figure of section 9 is that builder's, EXECUTED by it unless the line says otherwise. What the seat itself has
+  run or read of it is the seat's to add here.
 - galleryServerVeil: the builder reports the same six arms red as at 4f7c60cbb, with ONE PRINTED PATH MOVED in town-2
   (its cause, a role "the fence", is PLAUSIBLE, not executed): to be classed at item 3 (a) before the pin is re-keyed.
 
@@ -193,3 +199,74 @@ string of `simulationTrace[]` that spells a house name of any of those towns whe
   will also drop such entries on a Reveal-DM share that hides some house whole: to be counted when it is built.
 - `downstreamEffects[].target = "institution.<snake>"`: mixed (smelter 51 / 74, mill 5 / 63, sawmill 2 / 82): a join
   to a house where one stands; the name search takes it where that house is hidden whole.
+
+## 9. THE SECOND HOMES, BY IDENTITY, AS BUILT (design (i); V7-2; the chair's record 418)
+
+The earlier rules asked whether a home's WORDS still held the hidden sentence, so a source amended after the birth left
+its born wording in the home. Each composed home now follows the eye of the source its composer built it from, found
+by what the record says, in migration 212 and in the twin alike. Nothing of the name search, the derived lists, the
+flags, the income rows or the trace is touched. The measure is `out/second-homes-cost-V7-2.txt` (the twin, base
+1e5832dda against these bytes; probes in `measure/second-homes-*.{probe.jsx,diff.mjs}`): **guard** = the four born
+towns of `gallerySecondHomes.pglite.test.js :: TOWNS`, both stored shapes, the reveal off and on (16 projections);
+**wide** = 240 born towns, new shape, reveal off. With the DEFAULT veil no home's count moves (guard and wide: 0).
+
+| Home | What its composer builds it from | Its identity and its rule | Every eye shut: sent before -> after (wide; guard) |
+|---|---|---|---|
+| `history.legacyAnnotations[].annotation` | `legacyGenerator.js :: annotationBody`: its event's name and years (floor), fixed words by the event's type, and the event's FIRST lasting effect | ITS ENTRY'S EVENT (the entry keeps `eventName`, `eventType`, `yearsAgo`; the record register keys it so): the event of the same name (`event` in an older spelling); none, the one of the same type and years; none, every event (closed). Withheld when that event's lasting-effects eye is shut. And by the words, both directions, against every shut string of any event | 105 -> 4; 12 -> 0. 370 of 475 went before by the words. PRICE 101 (12): entries that hold no lasting effect at all (their event has none) |
+| `history.siegeNarrative` | `siegeCapability.js`: a recent event's name (floor) and the FIRST current tension's description | no mark of which tension: withheld when ANY current tension's description eye is shut (the words can add nothing) | 0 -> 0; 0 -> 0 |
+| `prominentRelationship.full / .tension / .phrasing` | `settlementNarrative.js :: genRelNarrative`: ONE tie: its two ends and type, its description, its tension, a phrasing written from the tension (125 of 125) or from the description's tail | ITS TIE: the same two ends and type, or a copy still equal to its text; none, every tie (closed). `full` by the description eye, `tension` by the tension eye, `phrasing` by either unless it IS the tension as that stands with its eye open | 9 -> 0 each; 0 -> 0: the 9 are ORPHANS (below) |
+| `pressureSentence` | `generatePressureSentence`: the first of the stress's line, the succession line, a tie's phrasing (a draw of its own: ANY tie), `powerStructure.recentConflict`, a small place's line | the record ties it to no one tie. (1) BY ITS ENDS: the tie whose two names it holds (26 of the 27 born from a tie), as the phrasing. (2) NO OTHER ACCOUNT: it names no tie's two ends, the town is under no stress and it is not `recentConflict`: any tie's shut eye. (3) THE WORDS, both directions, on the ties as they stand and on the stored wording (`prominentRelationship.full / .tension`, the tie's text as born) | 213 -> 208; 16 -> 16. FAULT 5: the succession line of a town under no stress |
+| `<person>.presentation.impression` | `npcGenerator.js`: a line of the title's own pool, else of the category's: NOTHING of the card | ITS PERSON: withheld when that person's appearance eye is shut | 7,010 -> 0; 928 -> 0. PRICE: all of them |
+
+**Where only the words tie a copy to its source (listed, with counts on the 240):**
+- a `pressureSentence` that names no tie's two ends in a town under a stress (169) or equal to `recentConflict` (39):
+  208 of 240. None of them is a tie's phrasing as born (0 of 208). Matched in both directions, current and stored.
+- an annotation against its own event's description and hooks and against another event's strings (the default veil
+  shuts every event's hooks: 0 of 475 annotations go by it).
+- an impression against ANOTHER person's appearance is not matched at all (PART 7's row, unchanged).
+
+**For the owner's veto (each a count on born towns):**
+1. THE IMPRESSION: every impression (7,010 of 7,011; guard 928 of 928) goes where its person's appearance eye is shut,
+   and the composer never builds it from the appearance (1 of 7,011 holds a string of its own person's appearance).
+   Built as ruled (the impression by its person). The other reading, the words alone in both directions, keeps them
+   and leaves the reader's e06 red.
+2. An annotation that holds no lasting effect goes with its event's eye: 101 of 105.
+3. `pressureSentence` with no other account: 5 of 240 towns lose a succession line where any tie's eye is shut.
+   Without that rule the reader's e05 stays red (its sentence names neither end in full; the record gives it no tie).
+   The rule "any shut tie takes the sentence" alone would take 213 of 240.
+4. THE DESCRIPTION'S EYE ALONE (the ties' description switch, the tension open): a phrasing in the composer's third
+   form (the two names, the type's gloss, then the tension) goes though it was built from the open tension: 23 of 125
+   `prominentRelationship.phrasing` (guard: the one town that has it), 9 of the 27 tie-built sentences (a tenth, which
+   names one end, goes by rule (2)); the phrasing that IS the tension stays (93; 17). The record cannot tell that head from one written by hand (the owner edits both
+   fields: `settlementPendingEdits.js`). The cure, not built: the engine's gloss table (`settlementNarrative.js ::
+   TIE_GLOSS`, 18 glosses and a default) carried by both engines; a drifted copy would only withhold more.
+5. The narrative goes with ANY shut tension: 11 of the 26 towns that have one have more than one tension, so a
+   per-card eye on another tension than the first takes a narrative whose own tension is open.
+6. A copy whose source the record does not name follows every event's, every tie's eye.
+
+**Limits (outside the law, listed):** a person renamed after the birth whose tie is then rewritten (the sentence keeps
+the old names: words only); an open event later given a hidden event's birth name takes that entry; a stress put on a
+town after its birth, where the sentence was a tie's and names one end; `yearsAgo` beyond a double's precision (the
+engines compare numbers differently there); an anonymous legacy event (the server reads it closed, the twin by its
+hash: as before).
+
+**FOUND BY THE MEASURE, NOT TOUCHED (not the veil's):** on a PUBLIC projection the sanitiser drops a tie flagged
+`covert` from `relationships[]` (`publicSafe.js`, COVERT DROP), and `prominentRelationship` still tells that tie: its
+two names, its type, its description, its tension and the phrasing: 9 of the 125 born towns that have one (types seen:
+"The Patron No One Names", "Silent Partnership"). With the default veil it is sent as before this commit; where any
+tie's eye is shut the closed rule now takes it (the 9 above). EXECUTED on the twin's projection; the server's
+sanitiser is PLAUSIBLY the same (not run).
+
+**The editor (read, not run):** the owner edits `pressureSentence` and `prominentRelationship.phrasing` by hand; no
+writer recomposes a second home when its source is edited; a history reroll mints the narrative and the annotations
+again (`settlementRegenAction.js`).
+
+**At these bytes:** the acceptance run (`out/run-all-after-V7-2.txt`): 37 checks, **35 pass, 2 fail**: a07 (V7-5) and
+d06 (V7-8), the next commits'; e01 to e07 pass; the twin differs on 0 of 15 shares; 3,000 deep 38 ms on 211 against
+43 ms; 200 x 5,000: 387 against 376 ms; 600 x 10,000: 1,298 against 1,230 ms. The guards (`out/guards-green-V7-2.txt`):
+galleryVeilHandRows 9 of 9, gallerySecondHomes 5 of 5, galleryVeilCures 32 of 32; gates `typecheck:domain:strict` 0
+(1,113), `typecheck:ratchet` 0 (167), eslint 0, each through `scripts/gate-tail.sh`. The rollback, rehearsed
+(`out/rollback-rehearsal-V7-2.txt`): 212 twice, its down file twice, 212 again: 0 lines of the catalogue differ at each
+step; 65 helpers, 65 immutable, none a definer, none callable by a reader role. The lane's pins (`out/pins-V7-2.txt`):
+galleryServerVeil the same six arms red (every one of its 17 printed paths a tie's role copy or its "(order or value)"
+line), not touched; twelve other files green.

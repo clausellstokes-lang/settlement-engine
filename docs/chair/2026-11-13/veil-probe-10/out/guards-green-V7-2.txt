@@ -1,0 +1,24 @@
+THE GUARDS at 212 = 70810c2a1839a3534370ccf091bdb13eb41b0a95f7c096369651b5e40313ef1e (V7-2), verdict lines.
+npx vitest run tests/security/galleryVeilHandRows.pglite.test.js tests/security/gallerySecondHomes.pglite.test.js tests/security/galleryVeilCures.pglite.test.js --maxWorkers=3
+ Test Files  3 passed (3)
+      Tests  46 passed (46)
+   Duration  529.29s (transform 7.20s, setup 359ms, import 811ms, tests 883.28s, environment 0ms)
+exit 0
+by file (its tests): galleryVeilHandRows 9 (six as before, three new: V7-2 THE FIVE HOMES, THE PRESSURE SENTENCE, NO EVENT NO TIE), gallerySecondHomes 5, galleryVeilCures 32.
+the hand-row guard alone, first green run after the change:
+ Test Files  1 passed (1)
+      Tests  9 passed (9)
+server against twin on every V7-2 share: 0 paths (the arms assert it).
+
+THE GATES, each through scripts/gate-tail.sh:
+-- strict
+[domain-strict] ✓ no strict-type regressions (1113 errors, ceiling 1113).
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+exit 0
+-- ratchet
+[typecheck-ratchet] OK — no type regressions (167 error(s), ceiling 167).
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+exit 0
+-- eslint
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+exit 0

@@ -69,6 +69,15 @@
 --       record 418): the set of ids is decided before the eyes trim anything and is not tested again (_gallery_veil_apply).
 --       211's statement tested the class a second time on the trimmed card, so a house in the class by a declared facet
 --       or as an illegal brokerage alone stayed listed (by name on 211 alone). 211's two files are not touched.
+--   (20) A SECOND HOME FOLLOWS ITS SOURCE'S EYE BY IDENTITY, NEVER BY MATCHING TEXT (COHERENCE-VEIL-10; REVIEW-VEIL-7's
+--       V7-2; the chair's record 418): (9)'s composed homes and (13)'s annotation asked whether the home's words still
+--       held the hidden sentence, so a source amended after the birth left its born wording in the home. Each now goes
+--       with the eye of the source its composer built it from, found by what the record says: the legacy annotation by
+--       its entry's event, the siege narrative with any shut tension, prominentRelationship's copies by their tie,
+--       pressureSentence by the tie whose two ends it names (and by any tie where no stress and no recentConflict
+--       accounts for it), a person's impression by its person. Where only the words tie a copy to its source they are
+--       matched in both directions, on the current and the stored wording (section 4b states each rule; no helper is
+--       added, removed or re-signed: _gallery_veil_card, _embeds, _sources and _second_homes are restated).
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -124,10 +133,12 @@ begin
     own := byid -> id;
   end if;
   drops := drops || array(select jsonb_array_elements_text(coalesce(own, '[]')));
-  -- V5-1 (COHERENCE-VEIL-6, the impression): a sentence of the appearance the eye shuts goes with it from the
-  -- card's face, whole (gallerySecondHomes.js :: withholdImpression)
-  if kind = 'npc' and 'physical' = any(drops) and jsonb_typeof(c -> 'presentation') = 'object'
-     and public._gallery_veil_embeds(c #> '{presentation,impression}', public._gallery_veil_pieces(c -> 'physical')) then
+  -- V5-1 (COHERENCE-VEIL-6, the impression), BY IDENTITY since COHERENCE-VEIL-10 (REVIEW-VEIL-7's V7-2; the chair's
+  -- record 418: the impression by its person): the impression on a person's face goes with THAT PERSON's appearance
+  -- eye, whole, whatever the appearance now says. Before, it went only where it held a sentence of the appearance as
+  -- that now stands, so an appearance amended after the birth left its born wording on the face
+  -- (gallerySecondHomes.js :: withholdImpression)
+  if kind = 'npc' and 'physical' = any(drops) and jsonb_typeof(c -> 'presentation') = 'object' then
     c := jsonb_set(c, '{presentation}', (c -> 'presentation') - 'impression');
   end if;
   -- SERVER ONLY (COHERENCE-VEIL-4, V4-2; the chair's ruling 331): a person stored by master's client
@@ -146,8 +157,29 @@ end $$;
 -- ── 4b. THE SECOND HOMES (COHERENCE-VEIL-6; the fifth review's V5-1) ───────────────────────────
 -- The stored town keeps some facts a second time, at a path no card list walks; each goes WITH THE EYE
 -- THAT GOVERNS ITS SOURCE, and nothing else goes (gallerySecondHomes.js :: withholdSecondHomes, whose header
--- lists the homes). A copy loses the hidden key; a composed sentence that embeds a hidden string is
--- withheld whole; a list loses the hidden name and nothing else.
+-- lists the homes). A copy loses the hidden key; a composed sentence is withheld whole; a list loses the hidden
+-- name and nothing else.
+-- BY IDENTITY, NEVER BY MATCHING TEXT (COHERENCE-VEIL-10; REVIEW-VEIL-7's V7-2; the chair's record 418). The earlier
+-- rules asked whether a home's words still held the hidden sentence, so a source amended after the birth left its born
+-- wording in the home. Each home now follows the eye of the source ITS COMPOSER BUILT IT FROM, found by what the
+-- record says of it, whatever either says today:
+--   history.legacyAnnotations[].annotation   its entry's EVENT (the entry carries the event's name, type and years):
+--                                            that event's lasting-effects eye (legacyGenerator.js :: annotationBody)
+--   history.siegeNarrative                   ANY current tension whose description eye is shut (the composer tells of
+--                                            the first tension; the record keeps no mark of which it was)
+--   prominentRelationship.full/.tension/.phrasing   its TIE (the same two ends and type): the description eye, the
+--                                            tension eye, and for the phrasing either (the composer writes it from one
+--                                            or the other), unless it IS the tension as that stands with its eye open
+--   pressureSentence                         the tie WHOSE TWO ENDS IT NAMES, as the phrasing; and, where nothing in
+--                                            the record accounts for it otherwise (no stress on the town, whose line the
+--                                            composer writes first; not the power structure's recentConflict), any tie
+--   <a person>.presentation.impression       ITS PERSON: the appearance eye (_gallery_veil_card)
+-- A copy whose source the record does not name (an entry with no such event, a prominentRelationship with no such tie)
+-- follows EVERY event's, EVERY tie's eye: closed. WHERE ONLY THE WORDS TIE A COPY TO ITS SOURCE (a pressureSentence
+-- that names no tie's two ends in a town under a stress; an annotation against another event's strings or its own
+-- event's description and hooks), the words are matched IN BOTH DIRECTIONS (a piece of the source inside the copy, or a
+-- piece of the copy inside the source) on the CURRENT wording and on the STORED one (prominentRelationship keeps its
+-- tie's description and tension as born). PART 11 section 9 lists those rows with their counts.
 
 -- [212: NEW] public._gallery_veil_pieces
 -- secondHomePieces: each string leaf of a hidden value, trimmed, and each run of it between sentence
@@ -164,11 +196,16 @@ returns text[] language sql immutable as $$
 $$;
 
 -- [212: NEW] public._gallery_veil_embeds
--- embedsAny: the text holds one of the pieces, in any case (COHERENCE-VEIL-8: a composer that lower-cases the
--- first letter of what it embeds, legacyGenerator.js :: annotationBody, still embeds it).
+-- embedsAny: THE WORDS, IN BOTH DIRECTIONS, in any case (COHERENCE-VEIL-8: a composer that lower-cases the first
+-- letter of what it embeds, legacyGenerator.js :: annotationBody, still embeds it). The text holds one of the pieces
+-- (a piece of the source inside the copy), or (COHERENCE-VEIL-10, V7-2) one of the text's own pieces stands inside one
+-- of them (a piece of the copy inside the source: a source amended by appending or by a prefix still holds its born
+-- wording). The fallback where the record gives a copy no identity; never the first rule.
 create or replace function public._gallery_veil_embeds(txt jsonb, pieces text[])
 returns boolean language sql immutable as $$
-  select jsonb_typeof(txt) = 'string' and exists (select 1 from unnest(pieces) p where position(lower(p) in lower(txt #>> '{}')) > 0)
+  select jsonb_typeof(txt) = 'string' and (
+    exists (select 1 from unnest(pieces) p where position(lower(p) in lower(txt #>> '{}')) > 0)
+    or exists (select 1 from unnest(public._gallery_veil_pieces(txt)) c, unnest(pieces) p where position(lower(c) in lower(p)) > 0))
 $$;
 
 -- [212: NEW] public._gallery_veil_fold
@@ -663,9 +700,11 @@ returns boolean language sql immutable as $$
 $$;
 
 -- [212: NEW] public._gallery_veil_sources
--- What each second home's source said, read BEFORE the eyes run: the ties with a shut eye
--- [{n1, n2, ty, d, t, ds, ts}], the pieces of every shut tension description, each house's shut
--- eyes by name {name: {desc, fn}}, and (COHERENCE-VEIL-8) the pieces of every shut string of an event.
+-- What each second home's source IS and said, read BEFORE the eyes run. COHERENCE-VEIL-10 (V7-2), by identity:
+-- EVERY tie with its two eyes [{n1, n2, ty, d, t, ds, ts}] (a copy is its tie's whether that tie is shut or open);
+-- whether ANY current tension's description eye is shut (tension_shut); every event with its lasting-effects eye
+-- [{n, ty, y, le}] (an annotation is its event's). And for the words: each house's shut eyes by name
+-- {name: {desc, fn}}, and (COHERENCE-VEIL-8) the pieces of every shut string of an event.
 create or replace function public._gallery_veil_sources(s jsonb, fields jsonb, classes jsonb, excj jsonb)
 returns jsonb language sql immutable as $$
   with shut(kind, id, eye, card) as (
@@ -703,9 +742,10 @@ returns jsonb language sql immutable as $$
   select jsonb_build_object(
     'ties', coalesce((select jsonb_agg(jsonb_build_object('n1', card -> 'npc1Name', 'n2', card -> 'npc2Name', 'ty', card -> 'typeName',
                                                           'd', card -> 'description', 't', card -> 'tension', 'ds', ds, 'ts', ts) order by ord)
-                        from ties where ds or ts), '[]'),
-    'tension_pieces', coalesce((select to_jsonb(array_agg(p)) from eyes, unnest(public._gallery_veil_pieces(jsonb_build_array(card -> 'description', card -> 'desc'))) p
-                                 where kind = 'tension' and is_shut), '[]'),
+                        from ties), '[]'),
+    'tension_shut', coalesce((select bool_or(is_shut) from eyes where kind = 'tension'), false),
+    'events', coalesce((select jsonb_agg(jsonb_build_object('n', card -> 'name', 'ty', card -> 'type', 'y', card -> 'yearsAgo', 'le', is_shut))
+                          from evs where eye = 'lastingEffects'), '[]'),
     'event_pieces', coalesce((select to_jsonb(array_agg(p)) from evs,
                                      unnest(public._gallery_veil_pieces(case eye when 'description' then jsonb_build_array(card -> 'description', card -> 'desc')
                                                                                  when 'lastingEffects' then card -> 'lastingEffects' else card -> 'plotHooks' end)) p
@@ -716,7 +756,7 @@ returns jsonb language sql immutable as $$
 $$;
 
 -- [212: NEW] public._gallery_veil_tie_pieces
--- The pieces of the shut eyes of some ties.
+-- The pieces of the shut eyes of some ties, as those ties now stand (a tie with no shut eye gives none).
 create or replace function public._gallery_veil_tie_pieces(ties jsonb)
 returns text[] language sql immutable as $$
   select coalesce(array_agg(p), '{}') from jsonb_array_elements(coalesce(ties, '[]')) t,
@@ -733,6 +773,15 @@ declare
   houses jsonb := coalesce(src -> 'houses', '{}');
   pr jsonb;
   own jsonb;
+  ps jsonb;
+  pst text;
+  stored text[] := '{}';
+  ps_named boolean;
+  ps_ends boolean;
+  any_shut boolean;
+  stressed boolean;
+  evs jsonb := coalesce(src -> 'events', '[]');
+  ev_pieces text[];
   k text;
   v jsonb;
   open_names text[];
@@ -757,7 +806,12 @@ declare
   ent jsonb;
   j int;
 begin
+  -- COHERENCE-VEIL-10 (V7-2): THE COMPOSED HOMES, BY IDENTITY (the section's header states each rule)
   if jsonb_array_length(ties) > 0 then
+    -- prominentRelationship is ONE tie's copy (settlementNarrative.js :: genRelNarrative: npc1, npc2 and type are that
+    -- tie's two ends and type; full its description; tension its tension; phrasing a line written from one of the two):
+    -- its tie is the one with the same two ends and type, or whose text a copy still equals. A copy that names no tie
+    -- follows every tie's eyes (closed)
     pr := s -> 'prominentRelationship';
     if jsonb_typeof(pr) = 'object' then
       select coalesce(jsonb_agg(t), '[]') into own from jsonb_array_elements(ties) t
@@ -765,28 +819,83 @@ begin
               and public._gallery_veil_str(t -> 'ty') = public._gallery_veil_str(pr -> 'type'))
           or (public._gallery_veil_str(pr -> 'full') <> '' and t -> 'd' = pr -> 'full')
           or (public._gallery_veil_str(pr -> 'tension') <> '' and t -> 't' = pr -> 'tension');
-      if jsonb_array_length(own) > 0 then
-        if exists (select 1 from jsonb_array_elements(own) t where (t ->> 'ds')::boolean) then pr := pr - 'full'; end if;
-        if exists (select 1 from jsonb_array_elements(own) t where (t ->> 'ts')::boolean) then pr := pr - 'tension'; end if;
-        if public._gallery_veil_embeds(pr -> 'phrasing', public._gallery_veil_tie_pieces(own)) then pr := pr - 'phrasing'; end if;
-        s := jsonb_set(s, '{prominentRelationship}', pr);
+      if jsonb_array_length(own) = 0 then own := ties; end if;
+      -- THE STORED WORDING: what the copies that go said (the tie's description and tension as born), read before they go
+      stored := public._gallery_veil_pieces(jsonb_build_array(
+        case when exists (select 1 from jsonb_array_elements(own) t where coalesce((t ->> 'ds')::boolean, false)) then pr -> 'full' end,
+        case when exists (select 1 from jsonb_array_elements(own) t where coalesce((t ->> 'ts')::boolean, false)) then pr -> 'tension' end));
+      -- the phrasing goes with either eye, unless it IS the tension as that now stands with its eye open (then it
+      -- sends nothing the open eye does not)
+      if exists (select 1 from jsonb_array_elements(own) t
+                  where coalesce((t ->> 'ts')::boolean, false)
+                     or (coalesce((t ->> 'ds')::boolean, false)
+                         and not coalesce(jsonb_typeof(pr -> 'phrasing') = 'string' and (t -> 't') = (pr -> 'phrasing'), false))) then
+        pr := pr - 'phrasing';
+      end if;
+      if exists (select 1 from jsonb_array_elements(own) t where coalesce((t ->> 'ds')::boolean, false)) then pr := pr - 'full'; end if;
+      if exists (select 1 from jsonb_array_elements(own) t where coalesce((t ->> 'ts')::boolean, false)) then pr := pr - 'tension'; end if;
+      s := jsonb_set(s, '{prominentRelationship}', pr);
+    end if;
+    -- pressureSentence is the first of: the stress's line, the succession line, A TIE'S PHRASING (a draw of its own:
+    -- any tie), the power structure's recentConflict, a small place's line (narrativeGenerator.js ::
+    -- generatePressureSentence). The record keeps no mark of which. (1) BY ITS ENDS: it names the two ends of a tie
+    -- (a tie's phrasing does: 26 of the 27 born from a tie on 240 towns): that tie's eyes, as the phrasing.
+    -- (2) NO OTHER ACCOUNT: it names no tie's two ends, the town is under no stress and it is not recentConflict:
+    -- it may be any tie's, so any tie's shut eye takes it. (3) THE WORDS, both directions, current and stored
+    ps := s -> 'pressureSentence';
+    if jsonb_typeof(ps) = 'string' then
+      pst := ps #>> '{}';
+      select coalesce(bool_or(q.named), false),
+             coalesce(bool_or(q.named and (q.ts or (q.ds and q.t is distinct from ps))), false),
+             coalesce(bool_or(q.ds or q.ts), false)
+        into ps_named, ps_ends, any_shut
+        from (select public._gallery_veil_str(t -> 'n1') <> '' and public._gallery_veil_str(t -> 'n2') <> ''
+                     and position(public._gallery_veil_str(t -> 'n1') in pst) > 0 and position(public._gallery_veil_str(t -> 'n2') in pst) > 0 as named,
+                     coalesce((t ->> 'ds')::boolean, false) as ds, coalesce((t ->> 'ts')::boolean, false) as ts, t -> 't' as t
+                from jsonb_array_elements(ties) t) q;
+      stressed := (jsonb_typeof(s -> 'stress') = 'object' and public._gallery_veil_str(s #> '{stress,type}') <> '')
+                  or exists (select 1 from jsonb_array_elements(case when jsonb_typeof(s -> 'stress') = 'array' then s -> 'stress' else '[]' end) x
+                              where jsonb_typeof(x) = 'object' and public._gallery_veil_str(x -> 'type') <> '');
+      if ps_ends
+         or (any_shut and not ps_named and not stressed
+             and not coalesce(jsonb_typeof(s #> '{powerStructure,recentConflict}') = 'string' and (s #> '{powerStructure,recentConflict}') = ps, false))
+         or public._gallery_veil_embeds(ps, public._gallery_veil_tie_pieces(ties) || stored) then
+        s := s - 'pressureSentence';
       end if;
     end if;
-    if public._gallery_veil_embeds(s -> 'pressureSentence', public._gallery_veil_tie_pieces(ties)) then s := s - 'pressureSentence'; end if;
   end if;
-  if jsonb_typeof(s -> 'history') = 'object'
-     and public._gallery_veil_embeds(s #> '{history,siegeNarrative}', array(select jsonb_array_elements_text(coalesce(src -> 'tension_pieces', '[]')))) then
+  -- history.siegeNarrative tells of a current tension (siegeCapability.js: the first one's description): it goes with
+  -- ANY current tension whose description eye is shut, whatever that tension now says (the words can add nothing: they
+  -- were the shut tensions' own)
+  if coalesce((src ->> 'tension_shut')::boolean, false) and jsonb_typeof(s -> 'history') = 'object' then
     s := s #- '{history,siegeNarrative}';
   end if;
-  -- COHERENCE-VEIL-8 (T1): the legacy annotation embeds its event's first lasting effect, its first letter
-  -- lower-cased (legacyGenerator.js :: annotationBody); a shut string of an event inside it takes the annotation
-  -- with it (the entry's event name, type and years, which are the event card's floor, stay)
+  -- the legacy annotation is built from ITS EVENT's first lasting effect (legacyGenerator.js :: annotationBody; the
+  -- entry carries the event's name, type and years): it goes with that event's lasting-effects eye. Its event: the
+  -- one of the same name (`eventName`; `event` in an older spelling); none, the one of the same type and years (an
+  -- event renamed since); none at all, every event (closed). And by the words (COHERENCE-VEIL-8, T1), both
+  -- directions: a shut string of any event inside it. The entry's event name, type and years, the event card's
+  -- floor, stay
   if jsonb_typeof(s -> 'history') = 'object' and jsonb_typeof(s #> '{history,legacyAnnotations}') = 'array'
-     and jsonb_array_length(coalesce(src -> 'event_pieces', '[]')) > 0 then
+     and (jsonb_array_length(coalesce(src -> 'event_pieces', '[]')) > 0
+          or exists (select 1 from jsonb_array_elements(evs) e where coalesce((e ->> 'le')::boolean, false))) then
+    ev_pieces := array(select jsonb_array_elements_text(coalesce(src -> 'event_pieces', '[]')));
     s := jsonb_set(s, '{history,legacyAnnotations}', (
-      select coalesce(jsonb_agg(case when jsonb_typeof(a) = 'object'
-                                       and public._gallery_veil_embeds(a -> 'annotation', array(select jsonb_array_elements_text(src -> 'event_pieces')))
-                                     then a - 'annotation' else a end order by o), '[]')
+      select coalesce(jsonb_agg(case when jsonb_typeof(a) = 'object' and (
+                 coalesce((select case when bool_or(m.by_name) then bool_or(m.by_name and m.le)
+                                       when bool_or(m.by_type) then bool_or(m.by_type and m.le)
+                                       else bool_or(m.le) end
+                             from (select nm.v <> '' and public._gallery_veil_str(e -> 'n') = nm.v as by_name,
+                                          ty.v <> '' and public._gallery_veil_str(e -> 'ty') = ty.v
+                                            and coalesce(jsonb_typeof(a -> 'yearsAgo') = 'number' and jsonb_typeof(e -> 'y') = 'number' and (e -> 'y') = (a -> 'yearsAgo'), false) as by_type,
+                                          coalesce((e ->> 'le')::boolean, false) as le
+                                     from jsonb_array_elements(evs) e,
+                                          (select case when public._gallery_veil_str(a -> 'eventName') <> '' then public._gallery_veil_str(a -> 'eventName')
+                                                       else public._gallery_veil_str(a -> 'event') end as v) nm,
+                                          (select case when public._gallery_veil_str(a -> 'eventType') <> '' then public._gallery_veil_str(a -> 'eventType')
+                                                       else public._gallery_veil_str(a -> 'type') end as v) ty) m), false)
+                 or public._gallery_veil_embeds(a -> 'annotation', ev_pieces))
+               then a - 'annotation' else a end order by o), '[]')
         from jsonb_array_elements(s #> '{history,legacyAnnotations}') with ordinality x(a, o)));
   end if;
 

@@ -1,0 +1,8 @@
+THE ROLLBACK REHEARSAL at 212 = 70810c2a1839a3534370ccf091bdb13eb41b0a95f7c096369651b5e40313ef1e, down = d99237b4b71e2c734f83b8b5cda15f201a85e4902ab05a7e4503d51620458a7b (V7-2; PostgreSQL 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1), local cluster, a copy of the acceptance run's 001..212 chain)
+the catalogue: every function of schema public: its signature, md5 of its definition, volatility, definer, grants, settings
+001..212: 505 functions; 001..211: 480 functions
+212 applied again on 001..212: lines that differ from 001..212: 0
+then its down file: lines that differ from 001..211: 0
+the down file again: lines that differ from 001..211: 0
+212 again: lines that differ from 001..212: 0
+_gallery_veil* helpers | immutable | definer | callable by public, anon or authenticated: 65|65|0|0

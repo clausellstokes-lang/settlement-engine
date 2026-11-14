@@ -28,6 +28,20 @@
  *                        name below level 64 does not arrive (the container at the bound is withheld whole).
  *         THE TABLES     the fold, the needle and the three tables are the same in both engines.
  *         On every arm: the paths at which the gallery read and the client's twin differ, zero.
+ *   V7-2  A SECOND HOME FOLLOWS ITS SOURCE'S EYE BY IDENTITY, NEVER BY MATCHING TEXT (PART 11 section 9; the chair's
+ *         record 418). Three arms, the plants this file's own:
+ *         THE FIVE HOMES   the legacy annotation (by its entry's event), the siege narrative (with any shut tension),
+ *                        prominentRelationship's copies (by the tie), pressureSentence (by the tie whose two ends it
+ *                        names) and a person's impression (by its person), each with its hidden source as born,
+ *                        amended by appending, amended by a prefix, rewritten wholly, lower-cased and upper-cased; and
+ *                        what must STILL ARRIVE: another event's annotation, another tie's copies, another person's
+ *                        impression, a narrative with no shut tension, the events' names, the people, the tie's ends.
+ *         THE PRESSURE SENTENCE   the one home the record gives no tie for: by the two ends it names; where nothing
+ *                        else accounts for it (no stress on the town, not the power structure's recentConflict); and,
+ *                        where only the words tie it, on the current and the stored wording, in both directions. What
+ *                        stays: the stress's line, recentConflict, another tie's sentence, the open tension itself.
+ *         NO EVENT, NO TIE   an entry in the older spelling, an entry whose event was renamed (by its type and years),
+ *                        an entry with no event and a copy with no tie (closed: every event's, every tie's eye).
  */
 import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
@@ -473,5 +487,255 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
       'STRASSENRAUBER GILDE', 'stra\u00dfenr\u00e4uber gilde', 'KELPIE COURT', 'kelpie courts', 'full width', 'FINE FLOUR', 'fine flour first', 'Glass', 'glasses', 'all brackets',
       'ECOLE', 'E\u0301COLE', 'masse', 'Ma\u00dfe', '100 pure gold', 'a', 'A.', 'ΣΙΣΥΦΟΣ', 'σίσυφοσ', 'ǆungla', 'Ǆungla', 'X\ud83d\ude00Y', 'small', 'Small', 'AB OUTLINED', 'line\u000ablack\u0009market', 'say "black market" twice',
       'back\u005cblack market', '\uff02black market\uff02']);
+  }, ARM_TIMEOUT_MS);
+
+  // ── V7-2: a second home follows its source's eye BY IDENTITY, never by matching text (PART 11 section 9) ──────────
+
+  /** The born wording of each hidden source (one sentence each, so no piece of it is a shorter sentence), and its rewriting. */
+  const BORN = Object.freeze({
+    levy: 'Salt weights are still checked twice at the north gate by order of the old levy',
+    toll: 'The ferry guild has been turning away the upriver barges until its toll is doubled',
+    favour: 'Hale Dunmore carried Wren Ashby across the flood for nothing and has never let the favour drop',
+    insult: 'Wren Ashby has started paying the ferry toll in full and Hale Dunmore reads it as an insult',
+    palm: 'A rope burn across the right palm that never quite healed',
+  });
+  const REWRITTEN = Object.freeze({
+    levy: 'Nothing of that season is spoken of at the gate any more',
+    toll: 'An old quarrel between two crews has flared again this month',
+    favour: 'Two neighbours who keep their own counsel about an old winter',
+    insult: 'Something between them has soured lately and neither will name it',
+    palm: 'An old injury kept out of sight under a glove',
+  });
+  /** A phrase of each born wording that must not arrive once its source's eye is shut, whatever the source now says. */
+  const NEEDLE = Object.freeze({ levy: 'checked twice at the north gate', toll: 'turning away the upriver barges', favour: 'across the flood for nothing',
+    insult: 'paying the ferry toll in full', palm: 'rope burn across the right palm' });
+  const AMENDED = Object.freeze({
+    'as born': (k) => BORN[k],
+    'amended by appending': (k) => `${BORN[k]} (or so the harbour clerk has it)`,
+    'amended by a prefix': (k) => `By every account worth hearing, ${BORN[k]}`,
+    'rewritten wholly': (k) => REWRITTEN[k],
+    'lower-cased': (k) => BORN[k].toLowerCase(),
+    'upper-cased': (k) => BORN[k].toUpperCase(),
+  });
+  const lowerFirst = (t) => t.charAt(0).toLowerCase() + t.slice(1);
+  const FROST_EFFECT = 'The orchard terraces above the weir were never replanted';
+  const FROST_ANNOTATION = `As of the founding survey, the Long Frost (12 years ago) hit the settlement hard, and it has since recovered: the present calm was partly built in the rebuilding that followed. What it left behind (${lowerFirst(FROST_EFFECT)}) is still part of the place.`;
+  const NET_LOFT = 'Odo Pell and Sib Marrow have shared one net loft since their fathers quarrelled';
+  const NET_MENDING = 'Sib Marrow has been mending nets for the rival boat and Odo Pell has noticed';
+  const WREN_IMPRESSION = 'Quick hands and a chipped front tooth, worn without shame.';
+  const fieldEye = (kind, card, eye) => ({ address: `field:${kind}:${veil.CARD_KINDS[kind].idOf(card)}:${eye}`, hidden: true });
+  const at = (doc, path) => path.reduce((c, k) => (c === null || c === undefined ? undefined : c[k]), doc);
+  const person = (doc, name) => (Array.isArray(doc?.npcs) ? doc.npcs : []).find(n => isRec(n) && n.name === name);
+
+  /**
+   * SALTMERE: a town whose five second homes were composed from the BORN wording (each as the engine's own composer
+   * frames it), with each hidden source as `now` says it stands. `shut`: which sources' eyes the share shuts by hand.
+   * Two events, two ties and two people carry the controls (the second of each is open).
+   */
+  function saltmere(now, { shut = ['levy', 'toll', 'tieA', 'palm'], prominentOf = 'A', pressure, stress, recentConflict, favourBorn = BORN.favour, insultBorn = BORN.insult, extra = {} } = {}) {
+    const hale = { id: 'npc.hale', name: 'Hale Dunmore', role: 'Ferryman', physical: { feature: now('palm'), build: 'Broad in the shoulder' },
+      presentation: { impression: `Weathered and slow to speak, with ${lowerFirst(BORN.palm)}.`, disposition: 'guarded' } };
+    const wren = { id: 'npc.wren', name: 'Wren Ashby', role: 'Chandler', physical: { feature: 'A chipped front tooth, worn without shame' }, presentation: { impression: WREN_IMPRESSION, disposition: 'open' } };
+    const levy = { id: 'event.salt-levy', name: 'The Salt Levy', type: 'economic', yearsAgo: 31, severity: 'major', lastingEffects: [now('levy')] };
+    const frost = { id: 'event.long-frost', name: 'The Long Frost', type: 'disaster', yearsAgo: 12, severity: 'major', lastingEffects: [FROST_EFFECT] };
+    const ferry = { id: 'tension.ferry', type: 'guild_conflict', severity: 'high', description: now('toll') };
+    const tieA = { id: 'tie.hale-wren', from: 'npc.hale', to: 'npc.wren', npc1Name: 'Hale Dunmore', npc2Name: 'Wren Ashby', type: 'debtor_creditor', typeName: 'Outstanding Debt',
+      description: now('favour'), tension: now('insult') };
+    // the second tie as the deployed client stored it (master's shape: npc1Id / npc2Id, no id)
+    const tieB = { npc1Id: 'npc.odo', npc2Id: 'npc.sib', npc1Name: 'Odo Pell', npc2Name: 'Sib Marrow', type: 'rival', typeName: 'Professional Rivalry', description: NET_LOFT, tension: NET_MENDING };
+    const town = { name: 'Saltmere', tier: 'town',
+      institutions: [{ name: 'Net loft', category: 'Economy', desc: 'Nets.' }],
+      npcs: [hale, wren, { id: 'npc.odo', name: 'Odo Pell', role: 'Netmaker' }, { id: 'npc.sib', name: 'Sib Marrow', role: 'Netmaker' }],
+      relationships: [tieA, tieB],
+      prominentRelationship: prominentOf === 'A'
+        ? { npc1: 'Hale Dunmore', npc2: 'Wren Ashby', type: 'Outstanding Debt', phrasing: `Hale Dunmore and Wren Ashby are tied by a debt not yet paid. ${insultBorn}.`, full: favourBorn, tension: insultBorn }
+        : { npc1: 'Odo Pell', npc2: 'Sib Marrow', type: 'Professional Rivalry', phrasing: NET_MENDING, full: NET_LOFT, tension: NET_MENDING },
+      pressureSentence: pressure === undefined ? `Hale Dunmore and Wren Ashby are tied by a debt not yet paid. ${insultBorn}.` : pressure,
+      history: {
+        historicalEvents: [levy, frost],
+        legacyAnnotations: [
+          { annotation: `As of the founding survey, the Salt Levy (31 years ago) set up ways of doing things that have since changed: the merchants have mattered here ever since, and their power today was built up slowly over the years. What it left behind (${lowerFirst(BORN.levy)}) is still part of the place.`,
+            eventType: 'economic', yearsAgo: 31, severity: 'major', eventName: 'The Salt Levy' },
+          { annotation: FROST_ANNOTATION, eventType: 'disaster', yearsAgo: 12, severity: 'major', eventName: 'The Long Frost' },
+        ],
+        currentTensions: [ferry],
+        siegeNarrative: `The Long Frost is still present in living memory: ${BORN.toll}.`,
+      },
+      ...(stress ? { stress } : {}), ...(recentConflict ? { powerStructure: { recentConflict, factions: [] } } : {}), ...extra };
+    const deltas = [
+      ...(shut.includes('levy') ? [fieldEye('event', levy, 'lastingEffects')] : []),
+      ...(shut.includes('toll') ? [fieldEye('tension', ferry, 'description')] : []),
+      ...(shut.includes('tieA') ? [fieldEye('relationship', tieA, 'description'), fieldEye('relationship', tieA, 'tension')] : []),
+      ...(shut.includes('tieA.description') ? [fieldEye('relationship', tieA, 'description')] : []),
+      ...(shut.includes('palm') ? [fieldEye('npc', hale, 'physical')] : []),
+    ];
+    return { town, deltas };
+  }
+  /** What every read of Saltmere must still carry, whatever is shut: the events' names, the people, the ties' ends, the open tie, the open person. */
+  function saltmereFloor(tag, doc) {
+    const bad = [];
+    const want = (path, value) => { if (JSON.stringify(at(doc, path)) !== JSON.stringify(value)) bad.push(`${tag}: ${path.join('.')} is ${String(JSON.stringify(at(doc, path))).slice(0, 90)}, not ${JSON.stringify(value).slice(0, 60)}`); };
+    want(['history', 'historicalEvents', 0, 'name'], 'The Salt Levy'); want(['history', 'historicalEvents', 1, 'name'], 'The Long Frost');
+    want(['history', 'historicalEvents', 1, 'lastingEffects'], [FROST_EFFECT]);
+    want(['history', 'legacyAnnotations', 0, 'eventName'], 'The Salt Levy'); want(['history', 'legacyAnnotations', 0, 'yearsAgo'], 31);
+    want(['history', 'legacyAnnotations', 1, 'annotation'], FROST_ANNOTATION);
+    want(['history', 'currentTensions', 0, 'type'], 'guild_conflict');
+    want(['relationships', 0, 'npc1Name'], 'Hale Dunmore'); want(['relationships', 0, 'npc2Name'], 'Wren Ashby'); want(['relationships', 0, 'typeName'], 'Outstanding Debt');
+    want(['relationships', 1, 'description'], NET_LOFT); want(['relationships', 1, 'tension'], NET_MENDING);
+    for (const name of ['Hale Dunmore', 'Wren Ashby', 'Odo Pell', 'Sib Marrow']) if (!person(doc, name)) bad.push(`${tag}: ${name} is gone`);
+    if (person(doc, 'Hale Dunmore')?.presentation?.disposition !== 'guarded') bad.push(`${tag}: the rest of the hidden person's presentation is gone`);
+    if (person(doc, 'Wren Ashby')?.presentation?.impression !== WREN_IMPRESSION) bad.push(`${tag}: another person's impression is gone`);
+    return bad;
+  }
+
+  it('V7-2 THE FIVE HOMES: the legacy annotation, the siege narrative, prominentRelationship\'s copies, pressureSentence and a person\'s impression go with their source\'s eye, with the source as born, amended by appending, by a prefix, rewritten wholly, lower-cased and upper-cased; what is open stays', async () => {
+    const bad = []; const differs = []; let reads = 0;
+    const HOMES = [['history', 'legacyAnnotations', 0, 'annotation'], ['history', 'siegeNarrative'], ['prominentRelationship', 'full'], ['prominentRelationship', 'tension'],
+      ['prominentRelationship', 'phrasing'], ['pressureSentence']];
+    for (const [how, amend] of Object.entries(AMENDED)) {
+      const { town, deltas } = saltmere(amend);
+      const r = await sharesOf(town, deltas);
+      differs.push(...twinDiffers(r).map(d => `${how}: ${d}`));
+      for (const { tag, doc } of each(r)) {
+        reads += 1;
+        const t = `${how}, ${tag}`;
+        expect(isRec(doc), t).toBe(true);
+        for (const path of HOMES) if (at(doc, path) !== undefined) bad.push(`${t}: ${path.join('.')} is sent: ${JSON.stringify(at(doc, path)).slice(0, 110)}`);
+        if (person(doc, 'Hale Dunmore')?.presentation?.impression !== undefined) bad.push(`${t}: the impression is sent: ${JSON.stringify(person(doc, 'Hale Dunmore').presentation.impression).slice(0, 110)}`);
+        for (const [k, needle] of Object.entries(NEEDLE)) bad.push(...arrivals(doc, needle).map(a => `${t}: the born wording of '${k}' arrives: ${a}`));
+        bad.push(...saltmereFloor(t, doc));
+        // the tie's ends in its copy are its floor: they stay
+        for (const [k, v] of [['npc1', 'Hale Dunmore'], ['npc2', 'Wren Ashby'], ['type', 'Outstanding Debt']]) if (at(doc, ['prominentRelationship', k]) !== v) bad.push(`${t}: prominentRelationship.${k} is gone`);
+      }
+    }
+    expect(reads).toBe(6 * 8);
+    // THE CONTROLS, as born. (1) No tension shut: the narrative arrives. (2) The prominent tie is the OPEN one, and the
+    // sentence names the open tie's two ends, while the other tie is shut: its three copies and the sentence arrive.
+    // (3) Nothing shut by hand at all: every home arrives as stored.
+    const c1 = saltmere(AMENDED['as born'], { shut: ['levy', 'tieA', 'palm'] });
+    const r1 = await sharesOf(c1.town, c1.deltas);
+    differs.push(...twinDiffers(r1).map(d => `no tension shut: ${d}`));
+    for (const { tag, doc } of each(r1)) {
+      if (at(doc, ['history', 'siegeNarrative']) !== c1.town.history.siegeNarrative) bad.push(`no tension shut, ${tag}: the narrative is ${JSON.stringify(at(doc, ['history', 'siegeNarrative']))}`);
+      bad.push(...saltmereFloor(`no tension shut, ${tag}`, doc));
+    }
+    const openSentence = `Odo Pell and Sib Marrow are rivals in the same line of work. ${NET_MENDING}.`;
+    const c2 = saltmere(AMENDED['rewritten wholly'], { prominentOf: 'B', pressure: openSentence });
+    const r2 = await sharesOf(c2.town, c2.deltas);
+    differs.push(...twinDiffers(r2).map(d => `another tie: ${d}`));
+    for (const { tag, doc } of each(r2)) {
+      if (differ(doc.prominentRelationship, c2.town.prominentRelationship).length) bad.push(`another tie, ${tag}: its copies are ${JSON.stringify(doc.prominentRelationship).slice(0, 160)}`);
+      if (doc.pressureSentence !== openSentence) bad.push(`another tie, ${tag}: its sentence is ${JSON.stringify(doc.pressureSentence)}`);
+      bad.push(...saltmereFloor(`another tie, ${tag}`, doc));
+    }
+    const c3 = saltmere(AMENDED['amended by appending'], { shut: [] });
+    const r3 = await sharesOf(c3.town, c3.deltas);
+    differs.push(...twinDiffers(r3).map(d => `nothing shut: ${d}`));
+    for (const { tag, doc } of each(r3)) {
+      for (const path of HOMES) if (JSON.stringify(at(doc, path)) !== JSON.stringify(at(c3.town, path))) bad.push(`nothing shut, ${tag}: ${path.join('.')} is ${String(JSON.stringify(at(doc, path))).slice(0, 90)}`);
+      if (person(doc, 'Hale Dunmore')?.presentation?.impression !== c3.town.npcs[0].presentation.impression) bad.push(`nothing shut, ${tag}: the impression is gone`);
+    }
+    expect(bad).toEqual([]);
+    expect(differs).toEqual([]);
+  }, ARM_TIMEOUT_MS);
+
+  it('V7-2 THE PRESSURE SENTENCE, which the record ties to no one tie: it goes by the two ends it names; where no stress and no recentConflict accounts for it; and by the words, current and stored, in both directions. The stress\'s line, recentConflict and the open tension itself stay', async () => {
+    const bad = []; const differs = [];
+    const rewritten = AMENDED['rewritten wholly'];
+    const FAMINE = 'The granaries of Saltmere are a week from empty and everyone on the quay can count';
+    const WARDENS = 'The harbour wardens want the night ferry stopped and the chandlers will not hear of it';
+    const CALL_IN = 'Wren Ashby is about to call the old favour in';              // a tension that names ONE end (the prominent tie is the other one there: no stored wording)
+    const STRANGER = 'Hale Dunmore once carried a stranger across the flood for nothing and has never let the favour drop'; // a description that names one end
+    /** [what, the town's options, the source's wording now, GONE (a needle that must not arrive) or the sentence that must arrive] */
+    const CASES = [
+      ['BY ITS ENDS: the bare tension, which names both ends; the tie rewritten wholly', { pressure: `${BORN.insult}.` }, rewritten, { gone: NEEDLE.insult }],
+      ['BY ITS ENDS, under a stress too: the two names, the gloss, the tension; the tie rewritten wholly', { stress: { type: 'famine' } }, rewritten, { gone: NEEDLE.insult }],
+      ['NO OTHER ACCOUNT: a sentence written by hand that names neither end in full; no stress, no recentConflict; the tie amended',
+        { pressure: 'Word on the quay: somebody has started paying the ferry toll in full, and the ferryman reads it as an insult.' }, AMENDED['amended by appending'], { gone: NEEDLE.insult }],
+      ['NO OTHER ACCOUNT, the tie rewritten wholly', { pressure: 'Word on the quay: somebody has started paying the ferry toll in full, and the ferryman reads it as an insult.' }, rewritten, { gone: NEEDLE.insult }],
+      ['THE WORDS, the copy inside the source: under a stress, a born tension that names one end, its source amended by appending',
+        { stress: { type: 'famine' }, pressure: `${CALL_IN}.`, prominentOf: 'B' }, (k) => (k === 'insult' ? `${CALL_IN}, and soon (or so the harbour clerk has it)` : AMENDED['as born'](k)), { gone: 'call the old favour in' }],
+      ['THE WORDS, the copy inside the source: the same, its source amended by a prefix',
+        { stress: { type: 'famine' }, pressure: `${CALL_IN}.`, prominentOf: 'B' }, (k) => (k === 'insult' ? `By every account worth hearing, ${CALL_IN}` : AMENDED['as born'](k)), { gone: 'call the old favour in' }],
+      ['THE WORDS, the stored wording: under a stress, the description as born kept in prominentRelationship.full, the tie rewritten wholly',
+        { stress: { type: 'famine' }, pressure: `They still tell it on the quay: ${STRANGER}.`, favourBorn: STRANGER }, rewritten, { gone: 'carried a stranger across the flood' }],
+      // WHAT STAYS, the tie's two eyes shut and the tie rewritten wholly
+      ['STAYS: the stress\'s line, in a town under a stress', { stress: { type: 'famine' }, pressure: FAMINE }, rewritten, { stays: FAMINE }],
+      ['STAYS: the stress\'s line, the stress stored as a list', { stress: [{ type: 'famine' }], pressure: FAMINE }, rewritten, { stays: FAMINE }],
+      ['STAYS: the power structure\'s recentConflict', { recentConflict: WARDENS, pressure: WARDENS }, rewritten, { stays: WARDENS }],
+      // the description's eye alone shut: the sentence that IS the open tension stays; the composer's third form goes
+      ['STAYS: the tension itself, its eye open, the description\'s eye alone shut', { shut: ['tieA.description'], pressure: BORN.insult }, AMENDED['as born'], { stays: BORN.insult }],
+      ['the description\'s eye alone shut: the two names, the gloss and the tension go (the record cannot tell that head from one written by hand)', { shut: ['tieA.description'] }, AMENDED['as born'], { gone: 'tied by a debt not yet paid' }],
+    ];
+    for (const [what, opts, now, expected] of CASES) {
+      const { town, deltas } = saltmere(now, opts);
+      const r = await sharesOf(town, deltas);
+      differs.push(...twinDiffers(r).map(d => `${what}: ${d}`));
+      for (const { tag, doc } of each(r)) {
+        expect(isRec(doc), `${what}, ${tag}`).toBe(true);
+        if (expected.gone !== undefined) {
+          if (doc.pressureSentence !== undefined) bad.push(`${what}, ${tag}: the sentence is sent: ${JSON.stringify(doc.pressureSentence).slice(0, 110)}`);
+          bad.push(...arrivals(doc, expected.gone, { notAt: /^\$\.relationships\[0\]\.tension$/ }).map(a => `${what}, ${tag}: ${a}`));
+        } else if (doc.pressureSentence !== expected.stays) bad.push(`${what}, ${tag}: the sentence is ${JSON.stringify(doc.pressureSentence)}`);
+        bad.push(...saltmereFloor(`${what}, ${tag}`, doc));
+      }
+      // the description's eye alone: the copy that IS the open tension stays with it (prominentRelationship.phrasing), the description's copy goes
+      if (opts.shut && opts.shut.includes('tieA.description')) {
+        const pr = saltmere(now, { ...opts, extra: { prominentRelationship: { npc1: 'Hale Dunmore', npc2: 'Wren Ashby', type: 'Outstanding Debt', phrasing: BORN.insult, full: BORN.favour, tension: BORN.insult } } });
+        const r2 = await sharesOf(pr.town, pr.deltas);
+        differs.push(...twinDiffers(r2).map(d => `${what} (the copies): ${d}`));
+        for (const { tag, doc } of each(r2)) {
+          if (differ(doc.prominentRelationship, { npc1: 'Hale Dunmore', npc2: 'Wren Ashby', type: 'Outstanding Debt', phrasing: BORN.insult, tension: BORN.insult }).length) {
+            bad.push(`${what}, ${tag}: the copies are ${JSON.stringify(doc.prominentRelationship).slice(0, 200)}`);
+          }
+        }
+      }
+    }
+    expect(bad).toEqual([]);
+    expect(differs).toEqual([]);
+  }, ARM_TIMEOUT_MS);
+
+  it('V7-2 NO EVENT, NO TIE: an annotation in the older spelling goes by its event\'s name; one whose event was renamed, by its type and years; one with no event at all, and a copy that names no tie, follow every event\'s and every tie\'s eye (closed), and arrive where none is shut', async () => {
+    const bad = []; const differs = [];
+    const MINT = 'The mint mark on the old coin is still refused at the fish stalls';
+    const WALL = 'The east wall was rebuilt two courses lower than the charter allows';
+    const extraHistory = (now) => {
+      const base = saltmere(now).town.history;
+      const mint = { id: 'event.mint', name: 'The Clipped Coin', type: 'political', yearsAgo: 44, lastingEffects: [REWRITTEN.levy] };
+      // renamed after its birth: the entry still says 'The Wall Riot'
+      const wall = { id: 'event.wall', name: 'The Quiet Rebuilding', type: 'military', yearsAgo: 57, lastingEffects: [REWRITTEN.toll] };
+      return { events: { mint, wall }, history: { ...base, historicalEvents: [...base.historicalEvents, mint, wall],
+        legacyAnnotations: [...base.legacyAnnotations,
+          { event: 'The Clipped Coin', type: 'political', yearsAgo: 44, annotation: `The Clipped Coin left its mark: ${lowerFirst(MINT)}.` },
+          { annotation: `As of the founding survey, the Wall Riot (57 years ago): what it left behind (${lowerFirst(WALL)}) is still part of the place.`, eventType: 'military', yearsAgo: 57, eventName: 'The Wall Riot' },
+          { annotation: 'As of the founding survey, the Drowned Fair (90 years ago): what it left behind (the fair ground is still marked on no map of the town) is still part of the place.', eventType: 'magical', yearsAgo: 90, eventName: 'The Drowned Fair' },
+        ] } };
+    };
+    const orphanCopies = { npc1: 'Hale of the Ferry', npc2: 'Wren the Chandler', type: 'An Old Debt', phrasing: `It is an open secret: ${BORN.insult}.`, full: BORN.favour, tension: BORN.insult };
+    // (1) the events' lasting effects shut by the switch; the tie's two eyes shut by hand; every source rewritten wholly
+    const h1 = extraHistory(AMENDED['rewritten wholly']);
+    const s1 = saltmere(AMENDED['rewritten wholly'], { shut: ['tieA'], extra: { history: h1.history, prominentRelationship: orphanCopies } });
+    // (the switch on every event's lasting effects, and one event excepted from it by hand: the Long Frost stays open)
+    const r1 = await sharesOf(s1.town, [...s1.deltas, { address: 'class:event:lastingEffects', hidden: true }, { address: 'field:event:event.long-frost:lastingEffects', hidden: false }]);
+    differs.push(...twinDiffers(r1).map(d => `shut: ${d}`));
+    for (const { tag, doc } of each(r1)) {
+      for (const i of [0, 2, 3, 4]) if (at(doc, ['history', 'legacyAnnotations', i, 'annotation']) !== undefined) bad.push(`shut, ${tag}: annotation ${i} is sent: ${JSON.stringify(at(doc, ['history', 'legacyAnnotations', i, 'annotation'])).slice(0, 90)}`);
+      for (const needle of [NEEDLE.levy, 'still refused at the fish stalls', 'two courses lower than the charter', 'marked on no map']) bad.push(...arrivals(doc, needle).map(a => `shut, ${tag}: ${a}`));
+      for (const k of ['full', 'tension', 'phrasing']) if (at(doc, ['prominentRelationship', k]) !== undefined) bad.push(`shut, ${tag}: the copy with no tie keeps ${k}`);
+      for (const needle of [NEEDLE.favour, NEEDLE.insult]) bad.push(...arrivals(doc, needle).map(a => `shut, ${tag}: ${a}`));
+      // the entries keep their floor, and the open event (the switch excepted on it by hand) keeps its annotation
+      for (const [i, nm] of [[2, 'The Clipped Coin'], [3, 'The Wall Riot'], [4, 'The Drowned Fair']]) if ((at(doc, ['history', 'legacyAnnotations', i, 'eventName']) ?? at(doc, ['history', 'legacyAnnotations', i, 'event'])) !== nm) bad.push(`shut, ${tag}: entry ${i} lost its event's name`);
+      bad.push(...saltmereFloor(`shut, ${tag}`, doc));
+    }
+    // (2) no event's eye and no tie's eye shut (a person's appearance alone): every entry and the copy arrive as stored
+    const s2 = saltmere(AMENDED['rewritten wholly'], { shut: ['palm'], extra: { history: h1.history, prominentRelationship: orphanCopies } });
+    const r2 = await sharesOf(s2.town, s2.deltas);
+    differs.push(...twinDiffers(r2).map(d => `open: ${d}`));
+    for (const { tag, doc } of each(r2)) {
+      if (differ(at(doc, ['history', 'legacyAnnotations']), s2.town.history.legacyAnnotations).length) bad.push(`open, ${tag}: the entries are ${JSON.stringify(at(doc, ['history', 'legacyAnnotations'])).slice(0, 160)}`);
+      if (differ(doc.prominentRelationship, orphanCopies).length) bad.push(`open, ${tag}: the copy is ${JSON.stringify(doc.prominentRelationship).slice(0, 160)}`);
+    }
+    expect(bad).toEqual([]);
+    expect(differs).toEqual([]);
   }, ARM_TIMEOUT_MS);
 });

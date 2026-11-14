@@ -5,13 +5,29 @@
  *
  * The veil (galleryVeil.js :: applyVeil) hides a fact at its one address. The stored town keeps some facts a
  * second time, at a path no card list walks. Each such home goes WITH THE EYE THAT GOVERNS ITS SOURCE, and
- * nothing else goes: a copy loses the hidden key; a composed sentence that embeds a hidden string is withheld
- * WHOLE (never a sentence with a hole in it, no new prose); a list loses the hidden name and nothing else.
- * The homes, from the review's §2 (by planted marker and by sentence search):
- *   prominentRelationship.full / .tension / .phrasing   a tie's description and tension (its source tie: the
- *                                                       same two names and type, or the same text)
- *   pressureSentence                                    a tie's description or tension, embedded
- *   history.siegeNarrative                              a current tension's description, embedded
+ * nothing else goes: a copy loses the hidden key; a composed sentence is withheld WHOLE (never a sentence with
+ * a hole in it, no new prose); a list loses the hidden name and nothing else.
+ *
+ * BY IDENTITY, NEVER BY MATCHING TEXT (COHERENCE-VEIL-10; REVIEW-VEIL-7's V7-2; the chair's record 418). The
+ * earlier rules asked whether a home's words still held the hidden sentence, so a source amended after the birth
+ * left its born wording in the home. A composed home now follows the eye of the source ITS COMPOSER BUILT IT
+ * FROM, found by what the record says of it, whatever either says today:
+ *   history.legacyAnnotations[].annotation              its entry's EVENT (the entry carries the event's name, type
+ *                                                       and years): that event's lasting-effects eye
+ *   history.siegeNarrative                              ANY current tension whose description eye is shut (the
+ *                                                       composer tells of the first; the record keeps no mark of it)
+ *   prominentRelationship.full / .tension / .phrasing   its TIE (the same two ends and type, or a copy still equal
+ *                                                       to its text): the description eye, the tension eye, and for
+ *                                                       the phrasing either, unless it IS the open tension
+ *   pressureSentence                                    the tie WHOSE TWO ENDS IT NAMES, as the phrasing; and any
+ *                                                       tie where nothing accounts for it otherwise (no stress on
+ *                                                       the town, not the power structure's recentConflict)
+ *   <a person>.presentation.impression                  ITS PERSON: the appearance eye
+ * A copy whose source the record does not name (an entry with no such event, a prominentRelationship with no such
+ * tie) follows EVERY event's, EVERY tie's eye: closed. WHERE ONLY THE WORDS TIE A COPY TO ITS SOURCE they are
+ * matched IN BOTH DIRECTIONS (a piece of the source inside the copy, or a piece of the copy inside the source), on
+ * the CURRENT wording and on the STORED one (prominentRelationship keeps its tie's text as born): PART 11 section 9
+ * lists those rows. The other homes, from the review's §2:
  *   defenseProfile.institutions.<slot>[]                a house's copy, by name: its description and function;
  *                                                       the whole entry for a house hidden whole
  *   economicState.activeChains[]                        a house hidden whole: each processing name it answers
@@ -24,7 +40,6 @@
  *   simulationTrace[]                                   a house hidden whole: each cause or effect that holds
  *                                                       one of those names; an entry that holds one elsewhere,
  *                                                       whole
- *   <a person>.presentation.impression                  a sentence of the appearance (`physical`) embedded
  *
  * SQL TWIN, rule for rule: migration 212 :: _gallery_veil_pieces, _gallery_veil_embeds, _gallery_veil_sources,
  * _gallery_veil_tie_pieces, _gallery_veil_second_homes, the impression arm of _gallery_veil_card, and THE NAME SEARCH
@@ -51,6 +66,7 @@ import { isMaterializedCustomContent } from '../content/customContentSemanticAut
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {{ card: Rec, desc: boolean, tension: boolean }} TieSource */
+/** @typedef {{ name: string, type: string, yearsAgo: unknown, shut: boolean }} EventSource an event and its lasting-effects eye */
 
 /** @param {unknown} v @returns {v is Rec} */
 function isRec(v) {
@@ -487,27 +503,53 @@ function sweepHiddenNames(s, search) {
 }
 
 /**
- * The text holds one of the pieces, in any case (COHERENCE-VEIL-8: a composer that lower-cases the first letter of
- * what it embeds, legacyGenerator.js :: annotationBody, still embeds it). SQL twin: _gallery_veil_embeds.
+ * THE WORDS, IN BOTH DIRECTIONS, in any case (COHERENCE-VEIL-8: a composer that lower-cases the first letter of what
+ * it embeds, legacyGenerator.js :: annotationBody, still embeds it). The text holds one of the pieces (a piece of the
+ * source inside the copy), or (COHERENCE-VEIL-10, V7-2) one of the text's own pieces stands inside one of them (a piece
+ * of the copy inside the source: a source amended by appending or by a prefix still holds its born wording). The
+ * fallback where the record gives a copy no identity; never the first rule. SQL twin: _gallery_veil_embeds.
  * @param {unknown} text @param {string[]} pieces @returns {boolean}
  */
-const embedsAny = (text, pieces) => typeof text === 'string' && pieces.some(p => text.toLowerCase().includes(p.toLowerCase()));
+const embedsAny = (text, pieces) => typeof text === 'string' && (pieces.some(p => text.toLowerCase().includes(p.toLowerCase()))
+  || secondHomePieces(text).some(c => pieces.some(p => p.toLowerCase().includes(c.toLowerCase()))));
 
 /**
- * The impression on a person's face loses a sentence of the appearance its eye shuts (whole). Called on a
- * card whose `physical` eye is shut, before the eye removes `physical`.
+ * THE IMPRESSION GOES BY ITS PERSON (COHERENCE-VEIL-10, V7-2; the chair's record 418): the impression on a person's
+ * face goes with THAT PERSON's appearance eye, whole, whatever the appearance now says (before: only where it held a
+ * sentence of the appearance as that now stands). Called on a card whose `physical` eye is shut. SQL twin: the
+ * impression arm of _gallery_veil_card.
  * @param {Rec} card
  */
 export function withholdImpression(card) {
   const pres = card.presentation;
-  if (!isRec(pres) || !embedsAny(pres.impression, secondHomePieces(card.physical))) return;
+  if (!isRec(pres)) return;
   const next = { ...pres };
   delete next.impression;
   card.presentation = next;
 }
 
 /**
- * What each second home's source said, read BEFORE the eyes run.
+ * Is the lasting-effects eye of an annotation's EVENT shut? Its event: the one of the same name (`eventName`; `event`
+ * in an older spelling); none, the one of the same type and years (an event renamed since); none at all, every event
+ * (closed). SQL twin: the annotation rule of _gallery_veil_second_homes.
+ * @param {Rec} a @param {ReadonlyArray<EventSource>} events @returns {boolean}
+ */
+function annotationEventShut(a, events) {
+  const name = str(a.eventName) !== '' ? str(a.eventName) : str(a.event);
+  const type = str(a.eventType) !== '' ? str(a.eventType) : str(a.type);
+  const byName = events.filter(e => name !== '' && e.name === name);
+  if (byName.length) return byName.some(e => e.shut);
+  const years = a.yearsAgo;
+  const byType = events.filter(e => type !== '' && e.type === type && typeof years === 'number' && typeof e.yearsAgo === 'number' && e.yearsAgo === years);
+  if (byType.length) return byType.some(e => e.shut);
+  return events.some(e => e.shut);
+}
+
+/**
+ * What each second home's source IS and said, read BEFORE the eyes run. COHERENCE-VEIL-10 (V7-2), by identity: EVERY
+ * tie with its two eyes (a copy is its tie's whether that tie is shut or open), whether ANY current tension's
+ * description eye is shut, every event with its lasting-effects eye; and for the words, the pieces of every shut
+ * string of an event. SQL twin: _gallery_veil_sources.
  * @param {Rec} s
  * @param {(kind: string, id: string, eye: string) => boolean} eyeShut
  * @param {(s: Rec, kind: string) => Rec[]} cardsOf
@@ -520,11 +562,7 @@ export function secondHomeSources(s, eyeShut, cardsOf, idOf) {
     return { card: { npc1Name: card.npc1Name, npc2Name: card.npc2Name, typeName: card.typeName, description: card.description, tension: card.tension },
       desc: eyeShut('relationship', id, 'description'), tension: eyeShut('relationship', id, 'tension') };
   });
-  /** @type {string[]} */
-  const tensionPieces = [];
-  for (const card of cardsOf(s, 'tension')) {
-    if (eyeShut('tension', idOf('tension', card), 'description')) secondHomePieces([card.description, card.desc], tensionPieces);
-  }
+  const tensionShut = cardsOf(s, 'tension').some(card => eyeShut('tension', idOf('tension', card), 'description'));
   /** @type {Map<string, { desc: boolean, fn: boolean }>} house name -> its shut eyes */
   const houses = new Map();
   for (const card of cardsOf(s, 'institution')) {
@@ -539,13 +577,16 @@ export function secondHomeSources(s, eyeShut, cardsOf, idOf) {
   // COHERENCE-VEIL-8 (T1): the pieces of every shut string of an event (its description, lasting effects, hooks)
   /** @type {string[]} */
   const eventPieces = [];
+  /** @type {EventSource[]} */
+  const events = [];
   for (const card of cardsOf(s, 'event')) {
     const id = idOf('event', card);
+    events.push({ name: str(card.name), type: str(card.type), yearsAgo: card.yearsAgo, shut: eyeShut('event', id, 'lastingEffects') });
     if (eyeShut('event', id, 'description')) secondHomePieces([card.description, card.desc], eventPieces);
     if (eyeShut('event', id, 'lastingEffects')) secondHomePieces(card.lastingEffects, eventPieces);
     if (eyeShut('event', id, 'hooks')) secondHomePieces(card.plotHooks, eventPieces);
   }
-  return { ties, tensionPieces, houses, eventPieces };
+  return { ties, tensionShut, houses, eventPieces, events };
 }
 
 /** @param {TieSource} t @param {string[]} out @returns {string[]} */
@@ -566,29 +607,53 @@ function tiePieces(t, out) {
  * @param {Set<string>} [labels] the label of each house removed whole that has no name (COHERENCE-VEIL-10, V7-9)
  */
 export function withholdSecondHomes(s, src, gone, openNames, houseFields, births = new Set(), labels = new Set()) {
-  const shutTies = src.ties.filter(t => t.desc || t.tension);
-  if (shutTies.length) {
+  // COHERENCE-VEIL-10 (V7-2): THE COMPOSED HOMES, BY IDENTITY (the header states each rule)
+  const ties = src.ties;
+  if (ties.length) {
+    /** @type {string[]} THE STORED WORDING: what the copies that go said (the tie's text as born) */
+    const stored = [];
+    // prominentRelationship is ONE tie's copy (settlementNarrative.js :: genRelNarrative): its tie is the one with the
+    // same two ends and type, or whose text a copy still equals; a copy that names no tie follows every tie's eyes
     const pr = s.prominentRelationship;
     if (isRec(pr)) {
-      const own = shutTies.filter(t => (str(t.card.npc1Name) === str(pr.npc1) && str(t.card.npc2Name) === str(pr.npc2) && str(t.card.typeName) === str(pr.type))
+      const named = ties.filter(t => (str(t.card.npc1Name) === str(pr.npc1) && str(t.card.npc2Name) === str(pr.npc2) && str(t.card.typeName) === str(pr.type))
         || (str(pr.full) !== '' && t.card.description === pr.full) || (str(pr.tension) !== '' && t.card.tension === pr.tension));
-      if (own.length) {
-        const next = { ...pr };
-        if (own.some(t => t.desc)) delete next.full;
-        if (own.some(t => t.tension)) delete next.tension;
-        if (embedsAny(next.phrasing, own.flatMap(t => tiePieces(t, [])))) delete next.phrasing;
-        s.prominentRelationship = next;
-      }
+      const own = named.length ? named : ties;
+      const ds = own.some(t => t.desc);
+      const ts = own.some(t => t.tension);
+      secondHomePieces([ds ? pr.full : null, ts ? pr.tension : null], stored);
+      const next = { ...pr };
+      // the phrasing goes with either eye, unless it IS the tension as that now stands with its eye open
+      if (own.some(t => t.tension || (t.desc && !(typeof pr.phrasing === 'string' && t.card.tension === pr.phrasing)))) delete next.phrasing;
+      if (ds) delete next.full;
+      if (ts) delete next.tension;
+      s.prominentRelationship = next;
     }
-    if (embedsAny(s.pressureSentence, shutTies.flatMap(t => tiePieces(t, [])))) delete s.pressureSentence;
+    // pressureSentence: (1) BY ITS ENDS, the tie whose two ends it names, as the phrasing; (2) NO OTHER ACCOUNT (it
+    // names no tie's two ends, the town is under no stress, it is not recentConflict): any tie's shut eye; (3) THE
+    // WORDS, both directions, current and stored (narrativeGenerator.js :: generatePressureSentence)
+    const ps = s.pressureSentence;
+    if (typeof ps === 'string') {
+      const naming = ties.filter(t => str(t.card.npc1Name) !== '' && str(t.card.npc2Name) !== '' && ps.includes(str(t.card.npc1Name)) && ps.includes(str(t.card.npc2Name)));
+      const byEnds = naming.some(t => t.tension || (t.desc && t.card.tension !== ps));
+      const stress = s.stress;
+      const stressed = Array.isArray(stress) ? stress.some(x => isRec(x) && str(x.type) !== '') : (isRec(stress) && str(stress.type) !== '');
+      const power = recAt(s, 'powerStructure');
+      const recent = !!power && typeof power.recentConflict === 'string' && power.recentConflict === ps;
+      if (byEnds || (ties.some(t => t.desc || t.tension) && !naming.length && !stressed && !recent)
+        || embedsAny(ps, [...ties.flatMap(t => tiePieces(t, [])), ...stored])) delete s.pressureSentence;
+    }
   }
+  // history.siegeNarrative tells of a current tension (siegeCapability.js: the first one's description): it goes with
+  // ANY current tension whose description eye is shut, whatever that tension now says
   const hist = recAt(s, 'history');
-  if (hist && embedsAny(hist.siegeNarrative, src.tensionPieces)) delete hist.siegeNarrative;
-  // T1: the legacy annotation embeds its event's first lasting effect, first letter lower-cased; a shut string of an
-  // event inside it takes the annotation (the entry's event name, type and years stay)
-  if (hist && Array.isArray(hist.legacyAnnotations) && src.eventPieces.length) {
+  if (hist && src.tensionShut) delete hist.siegeNarrative;
+  // the legacy annotation is built from ITS EVENT's first lasting effect (legacyGenerator.js :: annotationBody): it goes
+  // with that event's lasting-effects eye (annotationEventShut); and by the words (T1), both directions: a shut string of
+  // any event inside it. The entry's event name, type and years, the event card's floor, stay
+  if (hist && Array.isArray(hist.legacyAnnotations) && (src.eventPieces.length || src.events.some(e => e.shut))) {
     hist.legacyAnnotations = hist.legacyAnnotations.map((a) => {
-      if (!isRec(a) || !embedsAny(a.annotation, src.eventPieces)) return a;
+      if (!isRec(a) || !(annotationEventShut(a, src.events) || embedsAny(a.annotation, src.eventPieces))) return a;
       const next = { ...a };
       delete next.annotation;
       return next;
