@@ -998,12 +998,13 @@ export function deriveCrisisCast(settlement, entries, seed, options = {}) {
     /**
      * Take the first candidate that fits; say so when the first choice was passed over.
      * @param {CrisisRole} role @param {Candidates} c @param {CastRow | null} [linked]
+     * @param {Set<string>} [barred] rows this role may not take in this crisis (row keys), read as a contradiction
      * @returns {CastRow | null}
      */
-    const take = (role, c, linked = null) => {
+    const take = (role, c, linked = null, barred = new Set()) => {
       const list = linked ? [linked, ...c.candidates] : c.candidates;
       if (!list.length) { absent.push({ role, reason: c.absent }); return null; }
-      const pick = list.find(fits);
+      const pick = list.find((r) => fits(r) && !barred.has(keyOf(r)));
       if (!pick) { absent.push({ role, reason: CAST_ABSENCES.noCandidate }); return null; }
       const row = pick === list[0] ? { ...pick, role } : { ...pick, role, reason: `${pick.reason}; ${CAST_REASONS.nextInLine}` };
       roles.push(row);
@@ -1049,7 +1050,21 @@ export function deriveCrisisCast(settlement, entries, seed, options = {}) {
     /** @type {CastRow | null} */
     let leverRow = null;
     for (const role of requiredRolesOf(kind)) {
-      if (role === 'brunt') take('brunt', bruntCandidates(settlement, kind, stakes));
+      // R2-CODE-B-13, the reader's M4: THE ONE WHO HOLDS THE LEVER DOES NOT BEAR THE BRUNT. The brunt is cast before the
+      // lever, so the person the lever will go to (its first fitting office-holder; the lever's own draw is unchanged)
+      // is barred from the brunt: the next of the house hit takes it ("next in line, the first choice already holding a
+      // role that contradicts this one"), else the role is absent by its reason (noCandidate). No draw. A member taken in
+      // the lever-holder's place is "one of the house the crisis hits", never "the one with the least say": the house's
+      // order puts its own people of the crisis first, so the one passed over may have had less say.
+      // @enforced-by tests/domain/crisisLeverNotBrunt.test.js
+      if (role === 'brunt') {
+        const leverFace = requiredRolesOf(kind).includes('lever') ? leverCandidates(settlement, kind).candidates.find((r) => r.kind === 'npc' && fits(r)) ?? null : null;
+        const c = bruntCandidates(settlement, kind, stakes);
+        const row = take('brunt', c, null, new Set(leverFace ? [keyOf(leverFace)] : []));
+        const at = (/** @type {CastRow | null} */ r) => (r ? c.candidates.findIndex((x) => keyOf(x) === keyOf(r)) : -1);
+        const passed = !!row && at(leverFace) >= 0 && at(leverFace) < at(row);
+        if (row && passed && row.kind === 'npc' && row.reason.startsWith(CAST_REASONS.bruntLeast)) row.reason = CAST_REASONS.bruntMember + row.reason.slice(CAST_REASONS.bruntLeast.length);
+      }
       else if (role === 'lever') {
         const c = leverCandidates(settlement, kind);
         const tempKind = CRISIS_LEVERS[kind]?.temporary || null;

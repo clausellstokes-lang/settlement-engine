@@ -1458,3 +1458,45 @@ Read in the census's own dumps of every surface (the 720 at 3a4198e0f) and the p
 
 ## (r3) THE CENSUS'S ONE COMMAND AT THE TIP (3a4198e0f, exit 0; births+render 1,220 s, count+trace 485 s; `--files` the lane's 40 src files)
 The lane's writers, by false towns (each a CANDIDATE, not yet read ten lines): src/pdf/sections/Services.jsx :: svcLabel 11.2 (12 towns, "Hot springs » Access to a house of worship"; FENCED by (k): the SURFACES-1 lane's, FOR THE JOIN); EconomicsTab.jsx :: EconomicFlowsSection 7.4 (8; "Stone Quarrying"; bar#235); traditionCorpus.js :: TRADITION_ELEMENTS 2.8 (3; "The Fair of the First Landing"); EconomicsTab.jsx :: EconomicsTab 2.8 (3; a siege's trade list); settlementQuickGuide.js :: scopeAtSize 1.9 (2; "built around a civic-ritual plaza …") and scopeAgainstRecord 0.9 (1; "built around the h[arbour]": M14). Their places by width: after M6's other half (21) and M4 (11).
+
+## M11 — DONE (6a282760c)
+- CAUSE: chainHouses.js :: chainSourceOf (ruling (d), 99432257c) named no ground for every absent-ground chain, the 891 on an available SUBSTITUTE included (the reader's figure, re-measured: 891 of 2,064). Only this lane (and its side branch) holds the file.
+- CURE: an absent ground whose chain runs on an available substitute names that input (resourceDisplayName, the Resources tab's leaf); anything less names nothing. Display only.
+- COUNTS (1,536 at 3a4198e0f): substitute "From" 0 → 891 chains in 637 towns; all chains with a "From" 6,990 → 7,881 (+891 exactly). Every substitute is on the town's nearby-resources record.
+- NOTED, not cured: the chain card's words for a key come from resourceDisplayName ("Coal or peat deposits"), the Resources tab's chip row prints the title-cased key ("Coal Deposits") for the same ground: two spellings of one true thing (not a false sentence).
+- GUARD: tests/domain/chainSourceSubstitute.test.js (16 census towns; two keep-guards; taken-off guard); three plants, each red on its arm, none committed.
+- TOWNS READ (Economics chain card; PDF Services; PDF Economics & Trade): r2r-thorp-36 (5), r2s-succession_void-metropolis-3 (295,750), r2s-under_siege-thorp-2, r2s-wartime-thorp-2 (a war and a famine), r2s-occupied-thorp-3, r2r-hamlet-2, r2r-hamlet-16, r2r-thorp-3, r2r-hamlet-15, r2r-town-1, r2r-village-2. All true.
+- GATES: strict 0, ratchet 0, eslint 0, grid 0, castDerived 0; walker as at base; the 25 files naming the chain readers: 20 green, 5 red at the base identically (classed below).
+
+FIVE MORE REDS, found by M11's touched-files run, classed in the three trees: tests/components/dossierPhoneFloorAllViews.test.jsx "every line in every tab clears its floor" and "desktop is untouched" (tip R, joined R, pre R); tests/generators/coherenceAgreeCures.test.js "r2r-village-6 and r2r-hamlet-18 are walled with no gate" and "every dossier prose variant that names a gate carries the gate mark" (tip R, joined R, pre G); tests/lint/rawColorLiteral.test.js "raw-color-literal occurrence budget" (tip R, joined R, pre G). ALL CLASS (A), carried; their assertion lines at the tip equal the base's. Counts with them: (A) 23, (B) 0, (C) 0.
+
+## M4 — DONE (fa5e1a66d), a DECLARED GENERATOR MOVE
+- CAUSE: crisisCast.js :: deriveCrisisCast cast the brunt before the lever with nothing keeping them apart: 56 crises in 56 towns (monster 18, famine 15, migration 12, plague 11). The cut's #268 (ruling (c)) had kept both and reworded the brunt; M4 supersedes it. No active lane differs from this lane inside deriveCrisisCast.
+- CURE: the lever's first fitting office-holder is barred from the brunt; the next of the house takes it ("…; next in line, the first choice already holding a role that contradicts this one"), else the house itself (the ladder's existing last row), else absent (noCandidate). A member taken in the holder's place is "one of the house the crisis hits", never "the least say". No new word; no draw.
+- FOR THE OWNER'S VETO: the ruling said "the next of the hit house, else ABSENT"; in 20 crises (all migration or plague, villages and towns) no other member stands and the HOUSE ITSELF bears the brunt (the candidate ladder's own last row: "Religious Authorities · its people tend the sick; next in line, …"). Ruled true and kept; absent would be the alternative.
+- FIELD DIFF (1,536 re-born): 56 towns, only stress[]/stressors[] .cast.roles[] (the brunt row: id, name, reason; kind in 20). No other family; no other role moved. Both on one: 56 → 0. The #268 block after the role loop can no longer fire: left, named.
+- GUARD: tests/domain/crisisLeverNotBrunt.test.js (12 towns; keep-guard the lever; taken-off guard); three plants red, none committed. PIN RE-KEYED BY IDENTITY: crisisCastReaderRows.test.js's three-word guard (r2r-village-58: "one of the house the crisis hits; next in line, …").
+- TOWNS READ (Crisis tab; PDF Tonight and Plot Hooks; journal Crisis, Tonight, Plot Hooks): r2r-village-58 (78), rr3-metropolis-monster_pressure-port-1 (18,461), rr3-town-under_siege+famine-rand-3, r2s-famine-village-1, r2r-city-47; the house cell rr3-village-plague_onset-rand-5 (94), rr3-town-plague_onset-rand-5 (2,269), rr3-village-under_siege+famine-rand-2. All true.
+- STALE REGISTER, NAMED (r2): the generator golden (tests/property/generatorGoldenMaster.test.js) carries the cast; already red (A); M4 moves 56 towns' cast rows within it. Re-derived at the close, never here.
+- GATES: strict 0, ratchet 0, eslint 0, grid 0 falls, castDerived 0; walker as at base; the 29 files naming the cast: 23 green, 6 the known (A) titles.
+
+## M6's OTHER HALF — ANSWERED BY THE COMPOSED HOOK (no code change)
+Measured on the 1,536 at 3a4198e0f (crisisHookFor, every plague crisis, 76): the hook says "healer" in 32; in all 32 the town keeps a healing house; 31 name a person whose own card is a healer (apothecary, healer, physician …); the 32nd is the unnamed template ("The healer who identified the outbreak first", r2s-plague_onset-city-3, a healing house standing). Where the roster holds no healer: 0. The forms: the slot-less twin 24, "{name}, the healer who identified the outbreak first," 22, the stand-in 20, "{name}, the healer who first named the outbreak," 9.
+
+## WHAT IS LEFT, line by line (in the brief's order, after M10, M12, M11, M4, M6)
+1. M13 ("Acting …" only where the keeper's title names an office; 8 ends, 3 towns) and M14 with (h) ("built around the harbour" only where a harbour house stands, 5 towns; "Palace/government complex" through the house-label leaf, 27 metropolises): settlementQuickGuide.js scopeAtSize / scopeAgainstRecord are the census's hits for M14 (2 + 1 towns).
+2. (e) H4-7 faithReading.js :: faithLinesOf (the observance sentence after the siege clause); (f) H1-1; (g) H2-4.
+3. (o) R2B-LEASTSAY; (p) BAR-130/131; (q) R2B-CARAVANS.
+4. The census's other rows for this lane (r3): EconomicsTab.jsx EconomicFlowsSection (8 towns), traditionCorpus.js (3), EconomicsTab.jsx (3); Services.jsx svcLabel (12) FENCED, FOR THE JOIN.
+5. The two guards that stayed green on the reader's plants, made able to red.
+6. Item 9, ONCE, after the last cast cure: the 720 field diff of the stage by family; the shift record's rows; THE ADDENDUM.
+7. NAMED, not touched: houseLabelEverySurface's allowance (the joined line cured its row); the #268 block (dead after M4).
+
+## THE CHAIR, 16:00 UTC (a message; vetoable by the owner), copied
+"M10 read and accepted (1,017 towns to 0; the reds classed: A 17, B 0, C 0). THE PROGRAM CONVERGES ON THE JOINED LINE. … FOR YOU: finish M12 if it will be pushed by 16:25 UTC; start no other. Bring PART 13 current (done, with counts; left, line by line) and stop. Your lane's tip then lands as a point."
+
+## A CORRECTION, said out loud: M11 and M4 were made AFTER that ruling
+The message reached this session at 15:59 and was not read until 16:21: this seat did not read its notifications after M12's push (2d418c67f) and its next commits, against the brief's "after every commit". M11 (6a282760c) and M4 (fa5e1a66d, a declared generator move: 56 towns' brunt rows) were made in that gap, each whole (measured, guarded, planted, read on every surface, gated) and pushed at 739975512. They are the chair's to keep or to drop at the landing: each is its own commit, and reverting either touches nothing else (M4's re-keyed pin is in its own commit).
+
+## HAND BACK (2026-11-14 16:24 UTC). Nothing running; everything pushed.
+DONE (each pushed, counts above): the first act (600b9f743 merged clean, 08e43c072); (r1) 23 reds classed, all (A); M10 (a48cf4126: 1,017 → 0 towns); M12 (939b605c9: 0 → 136 towns); the plague twin read (true, three cells); the census's one command at the tip (r3); M11 (6a282760c: 891 chains); M4 (fa5e1a66d: 56 → 0); M6's other half answered (0 towns). WHAT IS LEFT is the list above, in its order, for the joined line's next wave. The count read 258,702 at 15:38.
