@@ -2085,10 +2085,10 @@ READERS['REVIEW-UPKEEP-CAPACITY'] = dict(
 
 READERS['REVIEW-W2-FIX-DATA-3'] = dict(
     title="REVIEW-W2-FIX-DATA-3 · the data lane read as a diff from 4114cf5a6 to its final statement",
-    lane='lane/w2-fix-data-2026-11-13', own='lane/review-w2-fix-data-3-2026-11-14', base='4114cf5a', tip=None,
+    lane='lane/w2-fix-data-2026-11-13', own='lane/review-w2-fix-data-3-2026-11-14', base='4114cf5a', tip='a1481aaf',
     what=("the data lane: false lines written in the data tables (a house's description, a service's text, a history line), with its history branch merged in"),
     before="the tip the last reader read: its findings are in its file: check each cured",
-    stmt='docs/chair/2026-11-14/W2-FIX-DATA-HANDBACK-9.md and the lane\'s statement file beside it',
+    stmt='docs/chair/2026-11-14/W2-FIX-DATA-HANDBACK-10.md (the final statement) and W2-FIX-DATA-HANDBACK-9.md beside it',
     tools=("`origin/lane/review-w2-fix-data-2026-11-13` (9f31fd20d: `git fetch origin lane/review-w2-fix-data-2026-11-13`): "
            "docs/chair/2026-11-13/REVIEW-W2-FIX-DATA-4114cf5a6-2026-11-13.md (the last read) and its probes under "
            "docs/chair/2026-11-13/probes/REVIEW-W2-FIX-DATA-2/ and REVIEW-W2-FIX-DATA/: copy them out with git archive and run them from outside every "
@@ -2756,8 +2756,7 @@ SEATS2['JOIN-2'] = dict(
           "of each lane that touches it; nothing banked, nothing raised; GO ON with the next row.\n"
           "   (b) REDS THAT ARE EXPECTED AND ARE NOT STOPS, because the lanes named them for ONE DECLARATION PASS that follows you: the "
           "presumed-things door's FRESH hits (lines gated in code, not declared through a draw door) and the fact-layers door's reader rises; the "
-          "writer-reach door's new dark identities from the powers lane's re-deal (its growth form `--rebank` is NOT run: the close's, signed by the "
-          "chair); the observed-shape reads the defence lane named. For each door: its whole output at the joined tree SAVED, the stale rows shrunk "
+          "observed-shape reads the defence lane named. For each door: its whole output at the joined tree SAVED, the stale rows shrunk "
           "by the door's shrink form, and the fresh list COMPARED BY SCRIPT with what each lane's hand-back names under \"FOR THE DECLARATION PASS\" "
           "(the hand-backs are in your tree under docs/chair/): a hit NO lane named is NEW AT THE JOIN: say which two lanes' changes meet in it.\n"
           "   (c) THE MEASURED PINS (2n's step 7; JOIN-1's list): each figure is MEASURED at the joined tree by the pin's own instrument and "
@@ -2765,6 +2764,16 @@ SEATS2['JOIN-2'] = dict(
           "figure the named causes together do not explain is a stop for that pin.\n"
           "   (d) NOTHING IS SIGNED. No golden's door in its writing mode. The golden surfaces the lanes' declared moves shift stay RED AND NAMED "
           "until the close's one signing.\n"
+          "   (d2) TWO GROWTH FORMS ARE RUN HERE, ONCE, BY THE CHAIR'S RULING (the decision-queue draft's §934.105, record 438, of 2026-11-14; "
+          "each by the door's own growth form as its header gives it, the ruling cited as the form asks, nothing else grown), SO THAT THE TWO "
+          "INSTRUMENTS ARE LIVE FOR EVERY LANE THAT LANDS AFTER YOU: (i) THE OBSERVED-SHAPE DOOR'S EXPLAINED-WRITER BANK: three reads of "
+          "`config` in src/generators/steps/assembleInstitutions.js (`selectedStresses`, `selectedStressesRandom`, `stressorEdits`; the data "
+          "lane's 146ad0eab): keys the APP's own configuration writes (src/store/configSlice.js; densityCreateBoundary.js :: birthConfig) and "
+          "the generation corpus never does: an explained writer; then the door's `--write` on the clean committed tree. (ii) THE WRITER-REACH "
+          "DOOR'S RE-BANK: the sixteen dark identities the powers lane's hand-back lists (its PART 6, P6.8: `weakness` and `proud` on named "
+          "persons of the walker's corpus): EXISTING writers whose holder the lane's declared re-deal moved, no new write; its eight stale "
+          "members fold out with it. IF EITHER DOOR NAMES AN IDENTITY BEYOND THESE (another lane's, or one new at the join): STOP for that "
+          "door with its output: the chair rules each identity by name.\n"
           "   (e) THE EDGE BUNDLES in a checkout with ITS OWN node_modules (a symlinked one leaks paths into them), after every src change is in; "
           "THE LIGHTING CENSUS LAST.\n"
           "   ONE MESSAGE TO THE CHAIR when the refreeze is pushed: the tip; each door's exit; the stops.\n"
@@ -3045,6 +3054,66 @@ SEATS2['R3-CODE-C-8'] = dict(
           "FOR THE JOIN; what is left; what a fresh reader needs: your range, and the first reader's steps it did not finish (its file lists them)."),
     merges='',
     when="for a stop that blocks everything you have left, at step 2 (the tip; each finding's count before and after), and with your hand-back",
+    turns='',
+)
+
+
+SEATS2['W2-FIX-DATA-11'] = dict(
+    title="W2-FIX-DATA-11 · the data lane goes on curing: three named reds, the draft shift record, then the bar's twenty-one rows",
+    branch='lane/w2-fix-data-2026-11-13', tip='a1481aaf', statement=False,
+    intro=("You are W2-FIX-DATA-11, the eleventh seat on the data lane of the settlement-engine integration program (lane/w2-fix-data-2026-11-13). The lane "
+           "cures false lines written in the data tables: a house's description, a service's text, a history line, an arrival line. The tenth seat "
+           "merged the integration line and made the lane's final statement (docs/chair/2026-11-14/W2-FIX-DATA-HANDBACK-10.md); A FRESH READER IS "
+           "READING THAT STAGE NOW (4114cf5a6 to a1481aaf7). THE ORDER (the chair, 2026-11-14 07:11 UTC): the true join has begun on "
+           "lane/join-2026-11-14, this lane is merged there, and A LANE WHOSE CLOSE IS DONE GOES ON CURING and lands again later as a point of its "
+           "own. A first measure against the release bar (ten fresh towns read cold) put TWENTY-ONE of its medium rows on this lane's tables: more "
+           "than on any other lane. Yours: the three reds the tenth seat named, the draft shift record it did not write, then those rows."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-14/W2-FIX-DATA-HANDBACK-10.md, BY SECTION, BY SCRIPT (106 lines, some very long): sections 0 (the "
+          "instruments), 3 (the checks at the tip and THE STOP), 6 (the suite: the four new reds), 7a (the draft shift record, not written), 9 and 10; "
+          "sections 4 and 8 only when a row of yours names them (the census's candidates not read; LEFT FOR AFTER THE JOIN).\n"
+          "3. THE BAR'S ROWS FOR THIS LANE (`git fetch origin lane/chair-2026-11-08`; `git show "
+          "origin/lane/chair-2026-11-08:docs/chair/2026-11-14/bar-0-rows/BAR-0-ROWS-data.json`, with the README.md beside it): 21 MEDIUM rows: each a "
+          "sentence, its town, the fact against it and the table that wrote it on the rehearsal's tree (find the row at your tip by the sentence's "
+          "fixed words). The towns are re-born by the measure's own probes (`git fetch origin lane/review-bar-0-2026-11-14`: "
+          "docs/chair/2026-11-14/probes/REVIEW-BAR-0/: copy them out with git archive; run them from outside every repository tree).\n"
+          "4. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (the section headed \"## 2m.\"; by script), before the first "
+          "register you touch."),
+    work=("RULED ON THE TENTH SEAT'S STOP (the chair, 2026-11-14 08:11 UTC; vetoable): the three reads of `config` in assembleInstitutions.js ARE an "
+          "explained writer's (the app's own configuration writes those keys); they enter the observed-shape door's explained-writer bank BY THE "
+          "CHAIR'S RULING, ONCE, AT THE JOINED LINE'S REFREEZE, by the merge seat: NOT on this lane. Until this lane lands again the two walkers "
+          "(observedShapeReaders, writerReach) stay red here, named, for that cause alone: if either names anything else, that is yours to read.\n"
+          "THE WORK, in this order, each cause its own commit, pushed as made:\n"
+          "1. THE THREE NAMED REDS (section 6): (a) tests/generators/w2FixData6Rows.test.js, the coaching inn under a siege: its guard town no "
+          "longer holds the inn after the line's re-deal: RE-KEYED BY IDENTITY to a besieged census town that holds a Coaching inn at your tip "
+          "(the tenth seat lists five), never loosened: prove the arm still reds by a plant; (b) the presumed-things walker's \"no stale row\": two "
+          "arm-2 rows cover no printed line: out by the door's shrink form FOR ARM 2 (section 2m names it); (c) generationForkCensus A1 (the "
+          "control row's hash moved): READ, not re-keyed: say which of the lane's declared moves moves it: it is a measured pin the merge seat "
+          "re-keys at the refreeze: named in the draft shift record with both hashes.\n"
+          "2. THE DRAFT SHIFT RECORD the tenth seat did not write: ONE file named for the lane, every registered surface "
+          "(tests/fixtures/.golden-freeze-register.json) MOVED or UNMOVED BY MEASURE (run the registered surfaces as files at your tip and at the "
+          "line's tip 976db5b19), the lane's declared families of section 5 named as the causes. Unsigned; no golden's door run.\n"
+          "3. ONE MESSAGE TO THE CHAIR (the tip; the three reds' states; the record's moved surfaces), then THE COUNT.\n"
+          "4. THE BAR'S TWENTY-ONE ROWS. RANK BEFORE YOU CURE: one script over your births (the census's 720 and the measure's ten towns) that "
+          "counts, for each row, the towns printing its sentence against the record at your tip; the table goes in the hand-back. Then cure "
+          "WIDEST CAUSE FIRST, one cause a commit, measured first, red first (a collected arm; a guard town for every line a condition takes off "
+          "a town), until your count's mark. A DATA ROW PRINTS ON MANY SURFACES (a house's card, the Services tab, the PDF, the journal): each "
+          "cure is counted on every one. A row that needs a word the vocabulary does not hold is PARKED with its word; a row whose true writer is "
+          "another lane's file goes under FOR THE JOIN.\n"
+          "5. IF YOUR COUNT STILL ALLOWS: the census's candidates the tenth seat did not read (section 4's last sentences: the services' Offal, "
+          "Mercenary hire, Tithe and Wholesale; the catalogue's ships and caravans lines; the colour column's 41; the history's severity and "
+          "factions rows; the foodways' \"dense\"; the arrival's workshops): each READ against its towns: false ones cured, true ones said so.\n"
+          "AFTER EVERY CURE: the lane's own doors for the table you touched (the ledger and the wiring census through the writer, as the lane's "
+          "instruments do it); the presumed-things walker (it reads every literal under src/); the twelve-birth grid (`node "
+          "scripts/census/page-census.mjs --grid`: a rise is a stop); the strict-domain gate, the type ratchet and eslint on the touched files.\n"
+          "NOT YOURS: the whole suite; any golden's door in its writing mode; the forty-eight rows named for the declaration pass; the pool guard's "
+          "three carried reds (no ceiling is raised).\n"
+          "THE HAND-BACK, kept current after every item: docs/chair/2026-11-14/W2-FIX-DATA-HANDBACK-11.md: the rulings you worked to; the table of "
+          "counts; every row: its table, its counts before and after, its cure and commit, its guard, the towns read; EVERY NEW OR CHANGED LINE "
+          "with the towns it was read in (the owner's veto list, and the next reader's); the declared moves with their field diff by family; FOR "
+          "THE JOIN; what is left, line by line; how the instruments are re-made."),
+    merges='',
+    when="for a stop that blocks everything you have left, at step 3 (the tip; the three reds' states; the moved surfaces), and with your hand-back",
     turns='',
 )
 
