@@ -243,7 +243,20 @@ change had landed), 333f91edc (c63241707, before the food word's push). Every me
 ## What is left, line by line
 
 1. (the Safety row: measured, no fault, above.)
-2. Item 2: the PDF's deficit against the tab's Short (253) and the journal's Economics "Food:" row (729).
+2. Item 2: the PDF's deficit against the tab's Short (253) and the journal's Economics "Food:" row (729). READ, NOT
+   BEGUN (handed back before it, at 365,828, as the cure could not be pushed inside the mark): the tab prints
+   `foodRowShown(s, !!carriersOf(s, eco))` (`EconomicsTab.jsx:330`); `carriersOf` is a module const of the TAB FILE
+   (`EconomicsTab.jsx:803`, reading `tradeAccess`, `hasInstitution(r,'docks')`, `tradeStoppedHere`, the roster's
+   ferry/barge/boat), so the PDF cannot call the same line without it. THE CURE I WOULD MAKE: move `carriersOf` whole
+   into a display leaf (e.g. `domain/display/foodCarrier.js`, imported back by the tab: one line), then ONE call line in
+   `EconomicsTrade.jsx` (`FoodBalanceBlock fb={foodRowShown(settlement, !!carriersOf(settlement, eco))?.fb ?? e.foodBalance}`,
+   line 227; read the block whole first: it prints `fb.production`/`fb.need`, the leaf gives `dailyProduction`/
+   `dailyNeed`, so the block's two reads are the ones to map) and ONE in `journalPages.js :: economicsPage` (line 331,
+   `fb.display`: the row's words from the same leaf, and no Surplus/Balanced word of its own: the band word is
+   Tonight's). Holders by content before each file (EconomicsTrade.jsx and journalPages.js are touched by many lanes:
+   check `git log <joined>..<lane> -- <file>` on the 11-13/11-14 lanes, as item 1 did). Guard: a sibling of
+   `foodWordEverySurface.test.jsx` (the tab's Short against the PDF block and the journal row, r2r-thorp-32 pdf 2 / tab
+   1, a siege where the tab carries no import, a famine). Count with `measure.sh` + `agg.mjs` (row "3 food block").
 3. (r3) the other spelling (165); (r4) "Abundant" under a siege (56); (r5); (r6); item 6 the stores' unit (6); item 7
    the connectivity row (with a system state).
 4. THE SWEEP, once, at the end, at the tip after the last merge of the joined line.
