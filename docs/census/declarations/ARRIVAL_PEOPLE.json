@@ -75,19 +75,23 @@
         {
           "lineId": "ARRIVAL_PEOPLE.latin[0]",
           "text": "A patron moves through the crowd with clients at their heels, greeting people by name.",
-          "needs": [],
+          "needs": [
+            "tier: ≥ town"
+          ],
           "excludes": [],
           "crisis": "any",
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
           "lineId": "ARRIVAL_PEOPLE.latin[1]",
           "text": "A notary's clerk hurries past with a satchel of contracts.",
-          "needs": [],
+          "needs": [
+            "tier: ≥ town"
+          ],
           "excludes": [],
           "crisis": "any",
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
@@ -197,9 +201,11 @@
           "lineId": "ARRIVAL_PEOPLE.arabic[1]",
           "text": "Travellers are offered water before anyone asks their business.",
           "needs": [],
-          "excludes": [],
+          "excludes": [
+            "crisis: under_siege"
+          ],
           "crisis": null,
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
@@ -524,7 +530,7 @@
         },
         {
           "lineId": "ARRIVAL_PEOPLE.steppe[1]",
-          "text": "Felt tents stand beside the timber houses, and their owners seem at home in either.",
+          "text": "Felt tents stand beside the houses, and their owners seem at home in either.",
           "needs": [],
           "excludes": [],
           "crisis": "any",

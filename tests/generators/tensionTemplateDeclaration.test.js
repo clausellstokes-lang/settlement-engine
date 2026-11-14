@@ -58,8 +58,11 @@ describe('the tension template declaration (R-AL)', () => {
  * template's DATED words stand in (historyData.js `byMemory.dated`). Draw-free.
  */
 describe('URBAN-FIX D-1 — a tension\'s words follow its own event\'s age', () => {
-  /** Flagged at the parent: thorp, hamlet, village, town, city, metropolis (the Occupation), the Great Fire, the Tyranny. */
-  const FLAGGED = [108, 217, 128, 207, 28, 47, 353, 539];
+  /** Flagged at the parent: thorp, hamlet, village, town, city, metropolis (the Occupation), the Great Fire, the Tyranny.
+   * RE-KEYED BY IDENTITY (W2-FIX-DATA-5 item 1, ROUND-3 #1003): the thorp 108 and the town 207 held their dated
+   * Occupation tension under an occupation IN FORCE, where the template is now false and set aside; the thorp 552 and
+   * the town 219 hold a dated Occupation tension under a siege (the same template, the same memory words). */
+  const FLAGGED = [552, 217, 128, 219, 28, 47, 353, 539];
   /** The twelve (soak1k-0 … 11). */
   const TWELVE = Array.from({ length: 12 }, (_, i) => i);
 
@@ -119,7 +122,9 @@ describe('URBAN-FIX D-1 — a tension\'s words follow its own event\'s age', () 
   it('D-1b: a tension whose own event is ABSENT from the timeline names no past event (the template\'s lasting effects)', async () => {
     await ensureLaws();
     // births below city (and one city, one metropolis) holding an occupation tension with no Occupation on the timeline
-    const UNANCHORED = [24, 37, 38, 27, 142, 71];
+    // RE-KEYED BY IDENTITY (W2-FIX-DATA-5 item 1, ROUND-3 #1003): 37 and 27 held the tension under an occupation IN
+    // FORCE, where it is now set aside; the hamlet 91 and the town 105 hold it unanchored under a siege.
+    const UNANCHORED = [24, 91, 38, 105, 142, 71];
     const failures = collectSeedFailures(UNANCHORED, (i) => {
       const s = birth(i).settlement;
       const t = s.history.currentTensions.find((x) => x.type === 'occupation_legacy');

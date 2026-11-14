@@ -189,6 +189,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "official",
+          "marks": [
+            "crisis: occupied"
+          ],
           "text": "{settlement}'s taxes go to the occupier before the town sees them, and its officials take their orders from outside.",
           "slots": [
             "settlement"
@@ -198,7 +201,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "walls"
+            "walls",
+            "garrison"
           ],
           "text": "The garrison is quartered inside the walls, and the town's business is conducted around it.",
           "slots": [],
@@ -222,6 +226,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "crisis: occupied"
+          ],
           "text": "{settlement} runs as before, but the occupier's officers sit in on its business and make no secret of it.",
           "slots": [
             "settlement"
@@ -231,7 +238,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "no walls"
+            "no walls",
+            "crisis: occupied"
           ],
           "text": "The occupiers are quartered inside the town, and the town's business is conducted around them.",
           "slots": [],
@@ -768,6 +776,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "crisis: wartime"
+          ],
           "text": "{settlement} is at war, and the war has reached the town as absence: the men, the carts, and the ordinary expectation of next year.",
           "slots": [
             "settlement"

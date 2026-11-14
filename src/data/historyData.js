@@ -1137,8 +1137,8 @@ export const HISTORICAL_EVENTS_DATA = [
     ],
     plotHooks: [
       "A would-be heir approaches outsiders to investigate a rival's past",
-      { text: 'The ailing ruler wants a final errand completed before naming a successor', excludes: ['ruler: council'] }, // CENSUS-3d unit 6
-      { text: 'Someone is poisoning the ruler slowly, and the physician knows', excludes: ['ruler: council'] }, // CENSUS-3d unit 6
+      { text: 'The ailing ruler wants a final errand completed before naming a successor', excludes: ['ruler: council', 'crisis: succession_void'] }, // CENSUS-3d unit 6; W2-FIX-DATA-5 (ww-544): no living ruler while the seat stands empty
+      { text: 'Someone is poisoning the ruler slowly, and someone in the household knows', excludes: ['ruler: council', 'crisis: succession_void'] }, // CENSUS-3d unit 6; W2-FIX-DATA-5 (ww-545's sibling): the same
     ],
     severity: ['minor', 'major'],
   },
@@ -1181,8 +1181,8 @@ export const HISTORICAL_EVENTS_DATA = [
       "One guild's charter was revoked and never fully restored",
     ],
     plotHooks: [
-      "A guild master's records have gone missing ahead of an audit",
-      'A journeyman denied mastership has proof the exam was rigged',
+      { text: "A guild master's records have gone missing ahead of an audit", needs: ['guild'] }, // W2-FIX-DATA: the guild homed (facts/guild.js)
+      { text: 'A journeyman denied mastership has proof the exam was rigged', needs: ['guild'] }, // W2-FIX-DATA: no mastership without a guild (c10)
       { text: 'Someone is sabotaging both guilds to destabilize the market for a third party', needs: ['market'] }, // CENSUS-3d unit 6
     ],
     severity: ['minor', 'major'],
@@ -1227,7 +1227,7 @@ export const HISTORICAL_EVENTS_DATA = [
     ],
     plotHooks: [
       'The crime wave is coordinated. Someone is directing it to create a pretext',
-      { text: 'A guard captain is on the payroll of the criminal network', needs: ['guardPresence'] }, // CENSUS-3d unit 6
+      { text: 'A guard captain is on the payroll of the criminal network', needs: ['watch'] }, // CENSUS-3d unit 6; W2-FIX-DATA: a captain of the guard needs a watch, not a household levy (c04)
       'The vigilantes have begun targeting innocents based on bad information',
     ],
     severity: ['minor', 'major'],
@@ -1308,9 +1308,9 @@ export const HISTORICAL_EVENTS_DATA = [
     // URBAN-FIX D-1: the tension's words when its own event sits on the timeline older than 80 years (historyGenerator.js :: tensionByMemory)
     byMemory: { dated: { description: 'The occupation ended long ago, but the families who collaborated and the families who resisted still keep apart', factions: ['Collaborator families', 'Resistance families', 'Those who want it forgotten'] },
       // URBAN-FIX D-1b: the words when the timeline holds no occupation at all: the template's own lasting effects, naming no past event
-      unanchored: { description: 'Collaborator and resistance families still keep to separate quarters, and old property seizures remain legally unresolved', factions: ['Collaborator families', 'Resistance families', 'Those who want it forgotten'] } },
+      unanchored: { description: 'Collaborator and resistance families still keep apart, and old property seizures remain legally unresolved', factions: ['Collaborator families', 'Resistance families', 'Those who want it forgotten'] } },
     lastingEffects: [
-      'Collaborator and resistance families still keep to separate quarters',
+      'Collaborator and resistance families still keep apart',
       'Wartime property seizures remain legally unresolved',
     ],
     plotHooks: [
@@ -1469,7 +1469,7 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       'The evidence that convicted the heretic was fabricated, and a witness is finally willing to say so',
       "The condemned doctrine is quietly practised still, by more of the town's leaders than would admit it",
-      { text: 'A relic seized during the trial never reached the temple vault it was bound for', needs: ['institution: temple'] }, // CENSUS-3d unit 6
+      { text: 'A relic seized during the trial never reached the vault it was bound for', needs: ['institution: temple'] }, // CENSUS-3d unit 6
     ],
     severity: ['minor', 'major'],
   },
@@ -1644,3 +1644,60 @@ export const historyDescription = (eventTemplate, seed) => {
     ? pickVariant([eventTemplate.description, ...variants], seed)
     : eventTemplate.description;
 };
+
+// ─── W2-FIX-DATA-2 item 1 (2026-11-13; the REVIEW-W2B cold list, rows 3, 7, 29, 204, 282): THE HISTORY'S PLACE WORDS ───
+// The place a flood, a fire or a surge of magic touched was named by districts and quarters in a thorp of six, and by a
+// waterfront in a town with no water. Each word now declares what makes it false; a place of village size or smaller
+// takes a small-place word in its stead. No roll is added: the timeline's one pick of `{quarter}` is kept, and a
+// refused word resolves through the declared door (its twin, else the hash argmax over the admitted words).
+
+/**
+ * THE TIMELINE'S `{quarter}` (generateEventNarrative's default, printed by wild_magic): the four words in their
+ * drawn order, each declaring the size and the house it presumes; each twin, reached only by resolution, is a
+ * small-place word (VETOABLE wording, the owner's).
+ */
+export const HISTORY_QUARTER_WORDS = Object.freeze([
+  Object.freeze({ text: "the merchants' quarter", needs: Object.freeze(['market', 'tier: ≥ town']) }),
+  Object.freeze({ text: 'the residential district', needs: Object.freeze(['tier: ≥ town']) }),
+  Object.freeze({ text: 'the waterfront', needs: Object.freeze(['navigable', 'tier: ≥ village']) }),
+  Object.freeze({ text: 'the temple district', needs: Object.freeze(['institution: temple', 'tier: ≥ town']) }),
+  Object.freeze({ text: 'the low ground', twinOf: "the merchants' quarter", needs: Object.freeze(['tier: ≤ village']) }),
+  Object.freeze({ text: 'the houses', twinOf: 'the residential district', needs: Object.freeze(['tier: ≤ village']) }),
+  Object.freeze({ text: 'the edge of the fields', twinOf: 'the waterfront', needs: Object.freeze(['tier: ≤ village']) }),
+  Object.freeze({ text: 'the yards behind the houses', twinOf: 'the temple district', needs: Object.freeze(['tier: ≤ village']) }),
+]);
+
+/**
+ * THE ROUTE'S PLACE WORD AT VILLAGE SIZE AND BELOW (`historyRouteContext.js :: smallPlaceWordsOf`): the route
+ * context names the harbour districts, the riverside quarter, the mill and lumber district or the lower districts;
+ * a place of village size or smaller takes the word of its water in their stead (`{location}` and `{quarter}`).
+ * Keyed by the route context's `disasterProfile`; every other profile reads `inland`. VETOABLE wording.
+ */
+export const HISTORY_SMALL_PLACE_WORDS = Object.freeze({
+  coastal: Object.freeze({ text: 'the houses nearest the shore', needs: Object.freeze(['coast', 'tier: ≤ village']) }),
+  river: Object.freeze({ text: 'the houses nearest the river', needs: Object.freeze(['river', 'tier: ≤ village']) }),
+  inland: Object.freeze({ text: 'the low ground', needs: Object.freeze(['tier: ≤ village']) }),
+});
+
+/**
+ * W2-FIX-DATA-5 (2026-11-13; ROUND-3-CUT #331): THE HISTORY TEXTS THAT PRESUME A PLACE'S SIZE, AND THEIR SMALL-PLACE TWINS
+ * (`historyGenerator.js :: sizedHistoryText`, at the timeline's description and the tension's). The great fire burns
+ * "across whole districts", "across entire districts", "street by street until whole quarters were gone", through
+ * warehouses and wharves: districts, quarters and streets are a size error in a place of village size or smaller (the
+ * chair's ruling of 2026-11-13). Keyed by the raw template text; each twin names no district, street or building type.
+ * VETOABLE wording (the owner's).
+ */
+export const HISTORY_DESC_SIBLINGS = Object.freeze({
+  "A fire that began in {location} consumed {building_type} across whole districts before it could be checked": Object.freeze([
+    Object.freeze({ text: "A fire that began in {location} consumed {building_type} across whole districts before it could be checked", needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: "A fire that began in {location} burned through the houses and their outbuildings before it could be checked", twinOf: "A fire that began in {location} consumed {building_type} across whole districts before it could be checked", needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  "A fire out of {location} spread through {building_type} across entire districts before anyone could bring it under control": Object.freeze([
+    Object.freeze({ text: "A fire out of {location} spread through {building_type} across entire districts before anyone could bring it under control", needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: "A fire out of {location} spread from roof to roof before anyone could bring it under control", twinOf: "A fire out of {location} spread through {building_type} across entire districts before anyone could bring it under control", needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  "Beginning in {location}, the blaze took {building_type} street by street until whole quarters were gone": Object.freeze([
+    Object.freeze({ text: "Beginning in {location}, the blaze took {building_type} street by street until whole quarters were gone", needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: "Beginning in {location}, the blaze took house after house before it was put out", twinOf: "Beginning in {location}, the blaze took {building_type} street by street until whole quarters were gone", needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+});

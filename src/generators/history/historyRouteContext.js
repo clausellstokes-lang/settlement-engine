@@ -1,3 +1,6 @@
+import { resolveDeclared } from '../../domain/facts/drawDeclared.js';
+import { HISTORY_SMALL_PLACE_WORDS } from '../../data/historyData.js';
+
 /**
  * Project canonical water-route capabilities into history-safe vocabulary.
  *
@@ -75,4 +78,20 @@ export function deriveHistoryChallengeRoute(route, worldLaw) {
   )
     ? 'river'
     : route;
+}
+
+/**
+ * W2-FIX-DATA-2 item 1 (the REVIEW-W2B cold list, rows 3, 7, 29): THE ROUTE'S PLACE WORD AT VILLAGE SIZE AND BELOW.
+ * The route context's `disasterLocation` and `disasterQuarter` name districts and quarters; at village size or
+ * smaller the place takes its water's small-place word (`historyData.js :: HISTORY_SMALL_PLACE_WORDS`), read
+ * through the declared door against the history's facts. A town keeps its words. Draw-free.
+ * @param {{ disasterProfile?: string } | null | undefined} context the history context
+ * @param {object | (() => object) | null} facts the history's facts (`hookFacts`)
+ * @returns {{ disasterLocation?: string, disasterQuarter?: string }}
+ */
+export function smallPlaceWordsOf(context, facts) {
+  if (!context) return {};
+  const row = HISTORY_SMALL_PLACE_WORDS[/** @type {'coastal'|'river'} */ (context.disasterProfile)] ?? HISTORY_SMALL_PLACE_WORDS.inland;
+  const r = resolveDeclared(row, { facts, poolId: 'historyData:HISTORY_SMALL_PLACE_WORDS', surface: 'history', drawKind: 'T' });
+  return r.resolvedBy === 'drawn' && typeof r.text === 'string' ? { disasterLocation: r.text, disasterQuarter: r.text } : {};
 }

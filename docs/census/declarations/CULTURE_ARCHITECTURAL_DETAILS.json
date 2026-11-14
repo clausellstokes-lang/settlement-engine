@@ -77,10 +77,12 @@
         {
           "lineId": "CULTURE_PROFILES.latin.architecturalDetails[1]",
           "text": "warm tile roofs and enclosed courtyards break up the stone streets",
-          "needs": [],
+          "needs": [
+            "tier: ≥ town"
+          ],
           "excludes": [],
           "crisis": null,
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
@@ -205,10 +207,12 @@
         {
           "lineId": "CULTURE_PROFILES.norse.architecturalDetails[0]",
           "text": "carved roof beams and long hall ridges dominate the older quarter",
-          "needs": [],
+          "needs": [
+            "tier: ≥ town"
+          ],
           "excludes": [],
           "crisis": null,
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
@@ -346,7 +350,9 @@
         {
           "lineId": "CULTURE_PROFILES.mesoamerican.architecturalDetails[0]",
           "text": "a raised ceremonial precinct overlooks a broad and busy open plaza",
-          "needs": [],
+          "needs": [
+            "tier: ≥ town"
+          ],
           "excludes": [],
           "crisis": null,
           "colour": false,
@@ -495,14 +501,12 @@
         },
         {
           "lineId": "CULTURE_PROFILES.greek.architecturalDetails[1]",
-          "text": "whitewashed courts and stone stairs climb toward a fortified high precinct",
+          "text": "whitewashed courts and stone steps catch the light between the houses",
           "needs": [],
           "excludes": [],
           "crisis": null,
           "colour": false,
-          "stop": [
-            "fortified high precinct (an inner fortification, not the perimeter)"
-          ]
+          "stop": []
         },
         {
           "lineId": "CULTURE_PROFILES.greek.architecturalDetails[2]",
