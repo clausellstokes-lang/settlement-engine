@@ -77,7 +77,7 @@ both imports, the card, more-by-creator).
 | reads / raised / births that threw | 1,536 / 0 / 0 | 1,536 / 0 / 0 |
 | a marker in a list that takes no slug | 0 | 0 |
 | marker rows that arrive | the earlier review's classes A (notes on a house, a power, the tabs; Reveal DM only), B (one structural-issues row restated by the viability block), C (the receipt's copies of open strings), D (two people drawing one phrase): nothing new | A, B, C: nothing new |
-| a hidden house's name in any form (`names-anyform.mjs`: every string and KEY, folded and squeezed) | the two schema keys (`hasBlackMarket`, `arcaneBlackMarket`) and **the trace's `target: "blackMarket"`** on Reveal-DM reads, 2 towns (V7-4); the lower-cased list entries, the `targetId`, the roles and the income labels of the last review are gone | (running as this is written; step 2 has it) |
+| a hidden house's name in any form (`names-anyform.mjs`: every string and KEY, folded and squeezed) | the two schema keys (`hasBlackMarket`, `arcaneBlackMarket`) and **the trace's `target: "blackMarket"`** on Reveal-DM reads, 2 towns (V7-4); the lower-cased list entries, the `targetId`, the roles and the income labels of the last review are gone | the same: the schema keys and the trace's `target: "blackMarket"` on Reveal-DM reads, 2 towns; nothing else (finished after the cold pass was pushed; `out/names-anyform-cm212.txt`) |
 | hidden text in any case (`text-anyform.mjs`) | the legacy annotation in 23 towns, which is the instrument's own marker acting as a later edit (V7-2, with its control); a goal's inner reference to an open person's id; class D | |
 | a role or title the person's own card withholds, anywhere else (`roles-census.mjs`, mine) | 0 copies for 1,300 (person, read) pairs | master's cards keep the role: 0 pairs |
 | a `has…` flag sent true that the listed houses do not raise (`flags-census.mjs`, mine, by the engine's own `getInstFlags`) | 0 | 0 |
@@ -275,8 +275,7 @@ section 7.2 to 7.5 (the read-first, the check-after, the visitor's walk) is the 
   leaves outside the law, each judged; its three limits (the rename, the fold, the booleans' table) against the
   chair's rulings; the chair's line row by row at the final bytes (my cold view of it is section 1.5).
 - The lane's guards under planted faults (the earlier reader's `faults/plant.py`); the lane's owner pack for 212.
-- The born-town run and every census again at the final bytes (`born/run-born.sh`); master's shape through the
-  any-form name search (still running when this was written; its other censuses are in section 1.2).
+- The born-town run and every census again at the final bytes (`born/run-born.sh`).
 - Timing on born towns (211 alone against 212 on the heaviest stored share); readers in flight; the release order.
 - The page, the PDF, the exports, the map's inspector; a town advanced by the world pulse or edited in the editor.
 - A hidden PERSON's or EVENT's plants beyond what section 1.2 and `town-e` hold: only a house can be hidden whole
