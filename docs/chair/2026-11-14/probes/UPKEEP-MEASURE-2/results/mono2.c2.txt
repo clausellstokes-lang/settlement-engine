@@ -1,0 +1,48 @@
+### THE READER'S SET (mono.mjs's houses and pairs): changes with a fall 61; births with a fall 35
+  add: houses/renames with a fall 7; score-falls by score {'military': 36, 'monster': 3, 'internal': 3}
+    Courthouse                                           births   12  mili:12  worst -6
+    Small prison/stocks                                  births   12  mili:12  worst -6
+    Town hall                                            births   12  mili:12  worst -6
+    Druid Circle                                         births    3  mons:3  worst -2
+    Alchemist quarter                                    births    1  inte:1  worst -2
+    Alchemist shop                                       births    1  inte:1  worst -2
+    Apothecary district                                  births    1  inte:1  worst -2
+  enlarge: houses/renames with a fall 1; score-falls by score {'military': 16, 'monster': 6, 'internal': 8, 'economic': 4, 'readiness': 18}
+    Monastery or friary -> Multiple monasteries          births   19  mili:16 mons:6 inte:8 econ:4 read:18  worst -8
+### THE WIDENED SET (every catalogue house at the tier or one around; every ladder pair): changes with a fall 2463; births with a fall 496
+  add: houses/renames with a fall 26; score-falls by score {'military': 36, 'monster': 3, 'internal': 2193, 'economic': 10, 'readiness': 1471}
+    Smuggling waypoint                                   births  425  inte:425 read:353  worst -18
+    Front businesses                                     births  210  inte:210 read:170  worst -18
+    Gambling den                                         births  207  inte:207 read:169  worst -18
+    Smuggling operation                                  births  207  inte:207 read:169  worst -18
+    Street gang                                          births  207  inte:207 read:169  worst -18
+    Palisade or earthworks                               births  150  inte:148 econ:4  worst -3
+    Black market                                         births  111  inte:111 read:91  worst -18
+    Multiple criminal factions                           births  111  inte:111 read:91  worst -18
+    Palisade                                             births  111  inte:110 econ:3  worst -3
+    Smuggling network                                    births  111  inte:111 read:91  worst -18
+    Thieves' guild chapter                               births  111  inte:111 read:91  worst -18
+    Citadel                                              births   39  inte:38 econ:1  worst -3
+    Gates (if walled)                                    births   39  inte:38 econ:1  worst -3
+    Town walls                                           births   39  inte:38 econ:1  worst -3
+    Assassins' guild                                     births   29  inte:29 read:19  worst -12
+    Black market bazaar                                  births   29  inte:29 read:19  worst -12
+    Thieves' guild (powerful)                            births   29  inte:29 read:19  worst -12
+    Underground city                                     births   29  inte:29 read:19  worst -12
+    Courthouse                                           births   12  mili:12  worst -6
+    Small prison/stocks                                  births   12  mili:12  worst -6
+    Town hall                                            births   12  mili:12  worst -6
+    Druid Circle                                         births    3  mons:3  worst -2
+    Teleportation circle                                 births    2  inte:2 read:1  worst -7
+    Alchemist quarter                                    births    1  inte:1  worst -2
+    Alchemist shop                                       births    1  inte:1  worst -2
+    Apothecary district                                  births    1  inte:1  worst -2
+  enlarge: houses/renames with a fall 8; score-falls by score {'military': 203, 'monster': 136, 'internal': 65, 'economic': 14, 'magical': 3, 'readiness': 149}
+    Citizen militia -> Professional city watch           births   66  mili:66 mons:65 read:16  worst -17
+    Citizen militia -> Town watch                        births   66  mili:66 mons:65 read:46  worst -20
+    Lord's steward -> Lord's appointee                   births   34  mili:32 inte:31 econ:4 magi:1 read:32  worst -9
+    Monastery or friary -> Multiple monasteries          births   19  mili:16 mons:6 inte:8 econ:4 read:18  worst -8
+    Village reeve -> Town council                        births   18  mili:16 inte:13 econ:6 read:18  worst -9
+    Fence (word of mouth) -> Black market                births   13  inte:13 read:12  worst -16
+    Wizard's tower -> Mages' guild                       births    7  mili:7 read:7  worst -6
+    Traveling hedge wizard -> Hedge wizard               births    2  magi:2  worst -2

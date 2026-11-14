@@ -1,0 +1,74 @@
+## garrison
+  Barracks [to] 1/3=0.80
+  Garrison [ci] 2/3=1.00
+  Multiple garrisons [me] 3/3=1.20
+## militia
+  Household levy [th] 1/2=0.80
+  Citizen militia [ha,vi] 2/2=1.20
+## watch
+  Village watch [vi] 1/3=0.80
+  Town watch [to] 2/3=1.00
+  Professional city watch [ci,me] 3/3=1.20
+## court
+  Town hall [to] 1/2=0.80
+  Courthouse [to] 1/3=0.80
+  Democratic assembly [ci,me] 2/3=1.00
+  City hall [ci,me] 2/2=1.20
+  Multiple courthouses [ci] 2/3=1.00
+  Multiple court buildings [me] 3/3=1.20
+## prison
+  Small prison/stocks [to] 1/3=0.80
+  Large prison [ci] 2/3=1.00
+  Massive prison [me] 3/3=1.20
+## wardens
+  Warden's Lodge [to] 1/1=1.00
+## company
+  Free company hall [to] 1/2=0.80
+  Mercenary quarter [ci,me] 2/2=1.20
+## charter
+  Adventurers' charter hall [ha,vi,to] 1/2=0.80
+  Hireling hall [to,ci,me] 1/2=0.80
+  Multiple adventurers' guilds [ci,me] 2/2=1.20
+## clergy
+  Parish church [vi] 1/4=0.80
+  Parish churches (2-5) [to] 2/4=0.93
+  Monastery or friary [to] 1/2=0.80
+  Parish churches (10-30) [ci] 3/4=1.07
+  Cathedral (10,000+ only) [ci] 1/2=0.80
+  Parish churches (50-100+) [me] 4/4=1.20
+  Great cathedral [me] 2/2=1.20
+## druids
+  Druid Circle [vi] 1/2=0.80
+  Elder Grove Council [to,ci,me] 2/2=1.20
+## market
+  Periodic market [ha] 1/4=0.80
+  Fish market [vi,to,ci,me] 1/3=0.80
+  Weekly market [vi,to] 2/4=0.93
+  Market square [to] 1/2=0.80
+  Annual fair [to] 1/2=0.80
+  Merchant guilds (3-8) [to] 1/3=0.80
+  Caravaneer's post [to] 1/3=0.80
+  Carriers' guild [to] 1/3=0.80
+  Auction house [to,ci,me] 1/3=0.80
+  Cobbler's guild [to,ci,me] 1/3=0.80
+  Tailor's guild [to,ci,me] 1/3=0.80
+  Furrier's district [ci,me] 2/3=1.00
+  Daily markets [ci] 3/4=1.07
+  Multiple market squares [ci,me] 2/2=1.20
+  Major annual fairs [ci,me] 2/2=1.20
+  Merchant guilds (15-40) [ci] 2/3=1.00
+  District markets (5-10) [me] 4/4=1.20
+  International trade center [me] 4/4=1.20
+  Merchant guilds (50-100+) [me] 3/3=1.20
+## hospital
+  Healer (divine, 1st level) [vi] 1/3=0.80
+  Monastery or friary [to] 1/3=0.80
+  Small hospital [to] 1/3=0.80
+  Multiple monasteries [ci] 2/3=1.00
+  Major hospital [ci] 2/3=1.00
+  Major monasteries (5-10) [me] 3/3=1.20
+  Hospital network [me] 3/3=1.20
+## alchemists
+  Alchemist shop [to] 1/2=0.80
+  Apothecary district [ci,me] 2/2=1.20
+  Alchemist quarter [ci,me] 2/2=1.20

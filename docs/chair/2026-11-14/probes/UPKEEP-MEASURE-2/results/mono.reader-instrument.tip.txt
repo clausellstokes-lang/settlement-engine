@@ -1,0 +1,49 @@
+falls (rows) 1206 births with a fall 265
+== add: births falling per score: {'military': 297, 'monster': 38, 'internal': 3, 'economic': 835, 'readiness': 1}
+  Healer (divine, 1st level)                              births  213  military:10 economic:208  worst -21
+  Druid Circle                                            births  164  military:18 monster:3 economic:143  worst -19
+  Alchemist shop                                          births  134  military:7 monster:5 internal:1 economic:125  worst -23
+  Monastery or friary                                     births   93  military:5 economic:89  worst -21
+  Elder Grove Council                                     births   79  military:25 monster:2 economic:56  worst -15
+  Alchemist quarter                                       births   75  military:10 monster:9 internal:1 economic:67 readiness:1  worst -6
+  Small hospital                                          births   61  military:7 economic:56  worst -3
+  Multiple monasteries                                    births   41  military:9 economic:35  worst -3
+  Major hospital                                          births   41  military:9 economic:35  worst -3
+  Small prison/stocks                                     births   40  military:40  worst -6
+  Large prison                                            births   38  military:38  worst -2
+  Apothecary district                                     births   35  military:8 monster:6 internal:1 economic:21  worst -4
+  City hall                                               births   28  military:28  worst -2
+  Warden's Lodge                                          births   20  military:20  worst -1
+  Democratic assembly                                     births   16  military:16  worst -1
+  Multiple courthouses                                    births   16  military:16  worst -1
+  Town hall                                               births   12  military:12  worst -6
+  Courthouse                                              births   12  military:12  worst -6
+  Multiple market squares                                 births    2  military:1 monster:1  worst -1
+  Major annual fairs                                      births    2  military:1 monster:1  worst -1
+  Periodic market                                         births    1  monster:1  worst -1
+  Fish market                                             births    1  monster:1  worst -1
+  Weekly market                                           births    1  monster:1  worst -1
+  Market square                                           births    1  monster:1  worst -1
+  Annual fair                                             births    1  monster:1  worst -1
+  Merchant guilds (3-8)                                   births    1  monster:1  worst -1
+  Caravaneer's post                                       births    1  monster:1  worst -1
+  Carriers' guild                                         births    1  monster:1  worst -1
+  Auction house                                           births    1  monster:1  worst -1
+  Cobbler's guild                                         births    1  monster:1  worst -1
+  Tailor's guild                                          births    1  monster:1  worst -1
+  Daily markets                                           births    1  military:1  worst -1
+  Adventurers' charter hall                               births    1  military:1  worst -1
+  Hireling hall                                           births    1  military:1  worst -1
+  Multiple adventurers' guilds                            births    1  military:1  worst -2
+  Parish churches (10-30)                                 births    1  military:1  worst -1
+== enlarge: births falling per score: {'military': 59, 'monster': 15, 'internal': 8, 'economic': 16, 'readiness': 18}
+  Town hall -> City hall                                  births   28  military:28  worst -2
+  Monastery or friary -> Multiple monasteries             births   19  military:17 monster:13 internal:8 economic:10 readiness:18  worst -7
+  Courthouse -> Multiple courthouses                      births    6  military:6  worst -1
+  Alchemist shop -> Alchemist quarter                     births    5  military:1 economic:5  worst -1
+  Small prison/stocks -> Large prison                     births    3  military:3  worst -1
+  Market square -> Multiple market squares                births    2  military:1 monster:1  worst -1
+  Small hospital -> Major hospital                        births    2  military:1 economic:1  worst -1
+  Weekly market -> Daily markets                          births    1  military:1  worst -1
+  Annual fair -> Major annual fairs                       births    1  monster:1  worst -1
+  Parish churches (2-5) -> Parish churches (10-30)        births    1  military:1  worst -1

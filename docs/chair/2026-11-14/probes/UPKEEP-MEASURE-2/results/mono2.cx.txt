@@ -1,0 +1,140 @@
+### THE READER'S SET (mono.mjs's houses and pairs): changes with a fall 1652; births with a fall 272
+  add: houses/renames with a fall 36; score-falls by score {'military': 249, 'monster': 32, 'economic': 852, 'magical': 636, 'readiness': 1}
+    Healer (divine, 1st level)                           births  251  mili:8 econ:212 magi:80  worst -21
+    Druid Circle                                         births  164  mili:18 econ:146 magi:1  worst -19
+    Monastery or friary                                  births  151  mili:3 econ:98 magi:80  worst -21
+    Alchemist shop                                       births  140  mili:5 mons:4 econ:121 magi:13  worst -23
+    Small hospital                                       births  115  mili:5 econ:58 magi:88  worst -5
+    Major hospital                                       births   99  mili:7 econ:36 magi:95  worst -7
+    Multiple monasteries                                 births   87  mili:4 econ:29 magi:84  worst -6
+    Alchemist quarter                                    births   86  mili:10 mons:11 econ:71 magi:9 read:1  worst -6
+    Elder Grove Council                                  births   77  mili:24 mons:1 econ:56 magi:2  worst -15
+    Apothecary district                                  births   73  mili:7 mons:4 econ:25 magi:41  worst -4
+    Large prison                                         births   37  mili:37  worst -2
+    Major annual fairs                                   births   37  mili:2 magi:36  worst -1
+    Multiple market squares                              births   37  mili:2 magi:36  worst -1
+    Warden's Lodge                                       births   33  mili:33  worst -1
+    Small prison/stocks                                  births   30  mili:30  worst -2
+    City hall                                            births   26  mili:26  worst -2
+    Daily markets                                        births   12  mili:2 magi:10  worst -1
+    Democratic assembly                                  births   11  mili:11  worst -1
+    Multiple courthouses                                 births   11  mili:11  worst -1
+    Auction house                                        births    7  mons:1 magi:7  worst -3
+    Caravaneer's post                                    births    7  mons:1 magi:7  worst -3
+    Carriers' guild                                      births    7  mons:1 magi:7  worst -3
+    Cobbler's guild                                      births    7  mons:1 magi:7  worst -3
+    Fish market                                          births    7  mons:1 magi:7  worst -3
+    Tailor's guild                                       births    7  mons:1 magi:7  worst -3
+    Weekly market                                        births    5  mons:1 magi:5  worst -3
+    Annual fair                                          births    3  mons:1 magi:3  worst -2
+    Market square                                        births    3  mons:1 magi:3  worst -2
+    Merchant guilds (3-8)                                births    3  mons:1 magi:3  worst -2
+    Periodic market                                      births    3  mons:1 magi:3  worst -2
+    Parish churches (10-30)                              births    2  mili:1 mons:1  worst -1
+    Adventurers' charter hall                            births    1  mili:1  worst -1
+    Furrier's district                                   births    1  magi:1  worst -1
+    Hireling hall                                        births    1  mili:1  worst -1
+    Merchant guilds (15-40)                              births    1  magi:1  worst -1
+    Multiple adventurers' guilds                         births    1  mili:1  worst -2
+  enlarge: houses/renames with a fall 11; score-falls by score {'military': 42, 'monster': 1, 'economic': 6, 'magical': 63}
+    Market square -> Multiple market squares             births   37  mili:2 magi:36  worst -1
+    Town hall -> City hall                               births   26  mili:26  worst -2
+    Weekly market -> Daily markets                       births   13  mili:2 magi:11  worst -1
+    Annual fair -> Major annual fairs                    births    9  magi:9  worst -1
+    Small hospital -> Major hospital                     births    6  mili:1 econ:1 magi:4  worst -1
+    Alchemist shop -> Alchemist quarter                  births    5  mili:2 econ:5  worst -1
+    Courthouse -> Multiple courthouses                   births    4  mili:4  worst -1
+    Monastery or friary -> Multiple monasteries          births    3  mili:1 magi:2  worst -1
+    Small prison/stocks -> Large prison                  births    3  mili:3  worst -1
+    Parish churches (2-5) -> Parish churches (10-30)     births    2  mili:1 mons:1  worst -1
+    Merchant guilds (3-8) -> Merchant guilds (15-40)     births    1  magi:1  worst -1
+### THE WIDENED SET (every catalogue house at the tier or one around; every ladder pair): changes with a fall 4708; births with a fall 592
+  add: houses/renames with a fall 67; score-falls by score {'military': 305, 'monster': 77, 'internal': 1816, 'economic': 1823, 'magical': 661, 'readiness': 1479}
+    Smuggling waypoint                                   births  425  inte:425 read:353  worst -18
+    Healer (divine, 1st level)                           births  251  mili:8 econ:212 magi:80  worst -21
+    Front businesses                                     births  210  inte:210 read:171  worst -18
+    Gambling den                                         births  207  inte:207 read:170  worst -18
+    Smuggling operation                                  births  207  inte:207 read:170  worst -18
+    Street gang                                          births  207  inte:207 read:170  worst -18
+    Druid Circle                                         births  164  mili:18 econ:146 magi:1  worst -19
+    Monastery or friary                                  births  151  mili:3 econ:98 magi:80  worst -21
+    Alchemist shop                                       births  140  mili:5 mons:4 econ:121 magi:13  worst -23
+    Small hospital                                       births  115  mili:5 econ:58 magi:88  worst -5
+    Golem workforce                                      births  113  mili:9 mons:10 econ:108 magi:4  worst -11
+    Undead labor                                         births  113  mili:9 mons:10 econ:108 magi:4  worst -11
+    Black market                                         births  111  inte:111 read:92  worst -18
+    Multiple criminal factions                           births  111  inte:111 read:92  worst -18
+    Smuggling network                                    births  111  inte:111 read:92  worst -18
+    Thieves' guild chapter                               births  111  inte:111 read:92  worst -18
+    Teleportation circle                                 births  101  mili:7 mons:8 econ:97 magi:3  worst -9
+    Major hospital                                       births   99  mili:7 econ:36 magi:95  worst -7
+    Village scribe                                       births   99  mili:5 mons:2 econ:96 magi:2  worst -3
+    Multiple monasteries                                 births   87  mili:4 econ:29 magi:84  worst -6
+    Alchemist quarter                                    births   86  mili:10 mons:11 econ:71 magi:9 read:1  worst -6
+    Wayside shrine                                       births   83  mili:3 econ:81 magi:1  worst -2
+    Hedge wizard                                         births   80  mili:1 econ:79 magi:1  worst -13
+    Elder Grove Council                                  births   77  mili:24 mons:1 econ:56 magi:2  worst -15
+    Apothecary district                                  births   73  mili:7 mons:4 econ:25 magi:41  worst -4
+    Traveling hedge wizard                               births   72  econ:72  worst -14
+    Apothecary                                           births   62  mili:3 mons:1 econ:60 magi:1  worst -3
+    Apothecary (established)                             births   62  mili:3 mons:1 econ:60 magi:1  worst -3
+    Mages' guild                                         births   62  mili:5 mons:2 econ:60 magi:2  worst -11
+    Scroll scribe                                        births   54  mili:2 mons:1 econ:52 magi:2  worst -10
+    Wizard's tower                                       births   54  mili:4 mons:2 econ:52 magi:2  worst -11
+    Enchanter's shop                                     births   43  mili:5 mons:3 econ:41 magi:2  worst -9
+    Large prison                                         births   37  mili:37  worst -2
+    Major annual fairs                                   births   37  mili:2 magi:36  worst -1
+    Multiple market squares                              births   37  mili:2 magi:36  worst -1
+    Warden's Lodge                                       births   33  mili:33  worst -1
+    Small prison/stocks                                  births   30  mili:30  worst -2
+    Assassins' guild                                     births   29  inte:29 read:19  worst -12
+    Black market bazaar                                  births   29  inte:29 read:19  worst -12
+    Thieves' guild (powerful)                            births   29  inte:29 read:19  worst -12
+    Underground city                                     births   29  inte:29 read:19  worst -12
+    City hall                                            births   26  mili:26  worst -2
+    Daily markets                                        births   12  mili:2 magi:10  worst -1
+    Democratic assembly                                  births   11  mili:11  worst -1
+    Multiple courthouses                                 births   11  mili:11  worst -1
+    Auction house                                        births    7  mons:1 magi:7  worst -3
+    Caravaneer's post                                    births    7  mons:1 magi:7  worst -3
+    Carriers' guild                                      births    7  mons:1 magi:7  worst -3
+    Cobbler's guild                                      births    7  mons:1 magi:7  worst -3
+    Fish market                                          births    7  mons:1 magi:7  worst -3
+    Tailor's guild                                       births    7  mons:1 magi:7  worst -3
+    Weekly market                                        births    5  mons:1 magi:5  worst -3
+    Annual fair                                          births    3  mons:1 magi:3  worst -2
+    Market square                                        births    3  mons:1 magi:3  worst -2
+    Merchant guilds (3-8)                                births    3  mons:1 magi:3  worst -2
+    Periodic market                                      births    3  mons:1 magi:3  worst -2
+    Parish churches (10-30)                              births    2  mili:1 mons:1  worst -1
+    Adventurers' charter hall                            births    1  mili:1  worst -1
+    Dragon resident                                      births    1  mons:1 econ:1  worst -1
+    Dream parlors (high magic)                           births    1  mons:1 econ:1  worst -1
+    Furrier's district                                   births    1  magi:1  worst -1
+    Hireling hall                                        births    1  mili:1  worst -1
+    Merchant guilds (15-40)                              births    1  magi:1  worst -1
+    Message network (high magic)                         births    1  mons:1 econ:1  worst -1
+    Multiple adventurers' guilds                         births    1  mili:1  worst -2
+    Planar embassy                                       births    1  mons:1 econ:1  worst -1
+    Planar traders                                       births    1  mons:1 econ:1  worst -1
+  enlarge: houses/renames with a fall 20; score-falls by score {'military': 231, 'monster': 132, 'internal': 57, 'economic': 22, 'magical': 99, 'readiness': 98}
+    Citizen militia -> Professional city watch           births   66  mili:66 mons:65 read:6  worst -15
+    Citizen militia -> Town watch                        births   66  mili:66 mons:65 read:24  worst -15
+    Market square -> Multiple market squares             births   37  mili:2 magi:36  worst -1
+    Lord's steward -> Lord's appointee                   births   34  mili:32 inte:31 econ:5 magi:1 read:32  worst -9
+    Apothecary (established) -> Apothecary district      births   30  mili:2 mons:1 magi:29  worst -3
+    Town hall -> City hall                               births   26  mili:26  worst -2
+    Village reeve -> Town council                        births   18  mili:16 inte:13 econ:7 magi:1 read:18  worst -9
+    Fence (word of mouth) -> Black market                births   13  inte:13 read:11  worst -16
+    Weekly market -> Daily markets                       births   13  mili:2 magi:11  worst -1
+    Annual fair -> Major annual fairs                    births    9  magi:9  worst -1
+    Wizard's tower -> Mages' guild                       births    7  mili:7 econ:3 magi:3 read:7  worst -6
+    Small hospital -> Major hospital                     births    6  mili:1 econ:1 magi:4  worst -1
+    Alchemist shop -> Alchemist quarter                  births    5  mili:2 econ:5  worst -1
+    Courthouse -> Multiple courthouses                   births    4  mili:4  worst -1
+    Monastery or friary -> Multiple monasteries          births    3  mili:1 magi:2  worst -1
+    Small prison/stocks -> Large prison                  births    3  mili:3  worst -1
+    Parish churches (2-5) -> Parish churches (10-30)     births    2  mili:1 mons:1  worst -1
+    Traveling hedge wizard -> Hedge wizard               births    2  magi:2  worst -2
+    Mages' guild -> Mages' district                      births    1  econ:1  worst -2
+    Merchant guilds (3-8) -> Merchant guilds (15-40)     births    1  magi:1  worst -1

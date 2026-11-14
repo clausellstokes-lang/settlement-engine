@@ -1,0 +1,98 @@
+diff --git a/src/domain/institutions/defenseInstitutionBuckets.js b/src/domain/institutions/defenseInstitutionBuckets.js
+index 73f490461..865d6ca68 100644
+--- a/src/domain/institutions/defenseInstitutionBuckets.js
++++ b/src/domain/institutions/defenseInstitutionBuckets.js
+@@ -204,9 +204,9 @@ export function standingDefenseForces(settlement) {
+ export const DEFENSE_TRADITION_KEYWORDS = Object.freeze({
+   arcane: Object.freeze(['wizard', 'mages', 'arcane', 'enchant', 'spellcasting', 'academy of magic', "mages' district", 'mage', 'scroll scribe']), // UPKEEP-CAPACITY C6 (G5): the casters, with no alchemist
+   arcaneGuild: Object.freeze(["mages' guild", "wizard's tower", 'arcane academy', "mages' district", 'academy of magic']),
+-  divine: Object.freeze(['cathedral', 'monastery', 'great cathedral', 'parish church']),
++  divine: Object.freeze(['cathedral', 'monastery', 'monasteries', 'great cathedral', 'parish church']), // UPKEEP-MEASURE-2 X5: the monastery's ladder (L4)
+   divineShrine: Object.freeze(['temple', 'friary']), // UPKEEP-CAPACITY C4b (the chair's G3s): a wayside shrine has no clergy
+-  divineStrong: Object.freeze(['cathedral', 'monastery', 'great cathedral']),
++  divineStrong: Object.freeze(['cathedral', 'monastery', 'monasteries', 'great cathedral']),
+   druid: Object.freeze(['druid circle', 'grove shrine', 'elder grove', 'sacred grove']),
+   wardens: Object.freeze(["warden's lodge"]), // a ranger post, defence in every world (J31)
+   alchemy: Object.freeze(['alchemist', 'apothecary district', 'alchemist quarter']),
+@@ -214,7 +214,7 @@ export const DEFENSE_TRADITION_KEYWORDS = Object.freeze({
+   teleport: Object.freeze(['teleportation', 'teleport']),
+   elders: Object.freeze(['reeve', 'steward', 'elder', 'household council', 'free elder']),
+   criminalDen: Object.freeze(['fence', 'smuggl', 'gang', 'outlaw']),
+-  actualMagic: Object.freeze(['healer', 'monastery', 'cathedral', 'divine', 'healing', 'druid', 'wizard', 'mage', 'arcane', 'enchant']),
++  actualMagic: Object.freeze(['healer', 'monastery', 'monasteries', 'cathedral', 'divine', 'healing', 'druid', 'wizard', 'mage', 'arcane', 'enchant']),
+ });
+ 
+ /**
+diff --git a/src/generators/defenseGenerator.js b/src/generators/defenseGenerator.js
+index 1debbec42..9099ac25d 100644
+--- a/src/generators/defenseGenerator.js
++++ b/src/generators/defenseGenerator.js
+@@ -122,8 +122,10 @@ const crisisPointsOf = (has, t, magPri) => {
+   const out = [];
+   if (has('under_siege')) {
+     const c = C.under_siege; let e = c.sup, i = c.int;
++    // UPKEEP-MEASURE-2 X3: each relief is its own (a teleport circle eases supply, a guild eases order); one never
++    // takes the other's away, so adding the circle to a guild town never raises what the siege takes from order.
+     if (t.hasArcane && magPri >= c.teleportFrom && t.hasTeleport) e = Math.round(e * c.teleportEco);
+-    else if (t.hasArcaneGuild && magPri >= c.guildFrom) i = Math.round(i * c.guildInt);
++    if (t.hasArcaneGuild && magPri >= c.guildFrom) i = Math.round(i * c.guildInt);
+     if (t.hasDivineStrong) i = Math.round(i * c.strongInt);
+     if (t.hasDruid && magPri >= c.druidFrom) e = Math.round(e * c.druidEco);
+     out.push(['under_siege', { sup: e, int: i }]);
+@@ -316,8 +318,10 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
+   };
+   const A = W.arcane;
+   const arcMon = t.hasArcane ? Math.round(A.mon + Math.min(A.monMax, (magPri - G.arcane) * A.monPerDial)) : 0;
+-  // R2: the three traditions together count at most 35 against monsters (one job, once).
+-  const tradF = Math.min(1, W.traditionsMonsterMax / Math.max(1, arcMon + (t.hasDivine ? W.clergy.mon : 0) + (t.hasDruid ? W.druids.mon : 0)));
++  // R2: the three traditions together count at most 35 against monsters (one job, once). UPKEEP-MEASURE-2 X2: held on
++  // the points they COUNT (each house's scale and the casters' pay already in), after the three are added below, so one
++  // more tradition never lowers the beasts score (the weights' share left the scaled and paid points out).
++  const tradF = 1;
+   const hasStanding = inst.hasGarrison || inst.hasMilitia || inst.hasWatch;
+   const hired = inst.hasMercenary || inst.hasCharterHall;
+   const law = inst.hasCourtSystem || inst.hasPrison || inst.hasGarrison || inst.hasWatch;
+@@ -375,6 +379,14 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
+     });
+   }
+   if (t.hasDruid) add('STANDS', 'druids', { mon: W.druids.mon * tradF });
++  {
++    const trad = parts.filter((q) => q.id === 'arcane' || q.id === 'clergy' || q.id === 'druids');
++    const mon = trad.reduce((a, q) => a + (q.dims.mon || 0), 0);
++    if (mon > W.traditionsMonsterMax) {
++      const k = W.traditionsMonsterMax / mon;
++      for (const q of trad) if (q.dims.mon) { q.dims.mon *= k; q.raw.mon *= k; }
++    }
++  }
+   // SUSTAINS: what keeps the force going. The stores were laid by at the standing share by their writer.
+   const months = fs?.storageMonths ?? (inst.hasGranary ? W.stores.granaryMonths : W.stores.noGranaryMonths);
+   add('SUSTAINS', 'stores', { sup: storesPointsOf(months) }, 1, { months: tenths(months) });
+@@ -441,14 +453,23 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
+   const sumOf = (dims) => Object.entries(dims).reduce((a, [d, v]) => a + (d === 'mag' && !magicExists ? 0 : v), 0);
+ 
+   // R13: the will counts for no more than the armed bodies that carry it, where something is built or standing.
++  // UPKEEP-MEASURE-2 X1: SCORE BY SCORE: the will's points on each score count for no more than the armed bodies' points
++  // on that score (its military to their military, its order to their order), so a will that rises on one score (a
++  // court's law) never lowers it on another. X4: and never below the will the same place has with nothing built or
++  // standing (the base configuration's own rate, unheld), so a wall never lowers the will.
+   let willHeld = 0;
+   if (bos) {
+-    const armed = parts.filter((q) => ARMED.has(q.id)).reduce((a, q) => a + sumOf(q.dims), 0);
++    const armedParts = parts.filter((q) => ARMED.has(q.id));
+     const will = parts.find((q) => q.id === 'will');
+-    if (will && sumOf(will.dims) > armed) {
+-      const k = armed > 0 ? armed / sumOf(will.dims) : 0;
+-      willHeld = (sumOf(will.dims) - armed) / n;
+-      for (const d of Object.keys(will.dims)) will.dims[d] *= k;
++    if (will) {
++      const before = sumOf(will.dims);
++      const unheld = { mil: Math.round(dial * (hired ? D.none + D.hiredExtra : D.none)), int: Math.round(dial * (law ? D.int : D.intNoLaw)) };
++      for (const d of Object.keys(will.dims)) {
++        const armedOn = armedParts.reduce((a, q) => a + Math.max(0, q.dims[d] || 0), 0);
++        const floor = Math.min(will.dims[d], Object.hasOwn(unheld, d) ? /** @type {any} */ (unheld)[d] : 0);
++        will.dims[d] = Math.max(floor, Math.min(will.dims[d], armedOn));
++      }
++      willHeld = (before - sumOf(will.dims)) / n;
+     }
+   }
+ 

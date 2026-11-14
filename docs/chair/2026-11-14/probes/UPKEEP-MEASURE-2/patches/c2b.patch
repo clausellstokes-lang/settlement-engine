@@ -1,0 +1,27 @@
+diff --git a/src/generators/defenseGenerator.js b/src/generators/defenseGenerator.js
+index 1debbec42..1dddadf6a 100644
+--- a/src/generators/defenseGenerator.js
++++ b/src/generators/defenseGenerator.js
+@@ -457,13 +457,15 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
+   const groupSum = (g) => parts.filter((p) => p.group === g).reduce((a, p) => a + p.points, 0);
+   const sustains = groupSum('SUSTAINS');
+   const force = groupSum('STANDS');
+-  // Limit 1: what sustains a force counts for no more than the force (the parts scaled together).
+-  let sustainsHeld = 0;
+-  if (sustains > force) {
+-    const k = sustains > 0 ? Math.max(0, force) / sustains : 0;
+-    for (const q of parts) if (q.group === 'SUSTAINS') { for (const d of Object.keys(q.dims)) q.dims[d] *= k; q.points *= k; }
+-    sustainsHeld = groupSum('SUSTAINS') - sustains;
+-  }
++  // Limit 1, SUPPLY ALONE (UPKEEP-MEASURE-2, a rival to P2): "Stores and supply can carry no more than the force can
++  // use" holds the SUPPLY score's sustaining points to the force (its whole points, on the supply scale), those parts
++  // held together; magic, the hospital's beasts points and the provisions are not stores and supply and are not held. A
++  // part's negative points count in full.
++  const forcePts = Math.max(0, force) * n;
++  const on = parts.filter((q) => q.group === 'SUSTAINS' && (q.dims.sup || 0) > 0);
++  const held = on.reduce((a, q) => a + q.dims.sup, 0);
++  if (held > forcePts) for (const q of on) { q.dims.sup *= forcePts / held; q.points = sumOf(q.dims) / n; }
++  const sustainsHeld = groupSum('SUSTAINS') - sustains;
+   // R2 (the owner's rule; the lane writer's ruling of 2026-11-13): a hired-only place's military never reads
+   // above the same place with a watch in its hired force's stead — that place's REAL military, run through
+   // this same code (the pay, the terrain, the crises, R13's hold, limit 1). Where it would, the hired parts'

@@ -1,0 +1,49 @@
+diff --git a/src/generators/defenseGenerator.js b/src/generators/defenseGenerator.js
+index 1debbec42..7be8cec64 100644
+--- a/src/generators/defenseGenerator.js
++++ b/src/generators/defenseGenerator.js
+@@ -457,13 +457,22 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
+   const groupSum = (g) => parts.filter((p) => p.group === g).reduce((a, p) => a + p.points, 0);
+   const sustains = groupSum('SUSTAINS');
+   const force = groupSum('STANDS');
+-  // Limit 1: what sustains a force counts for no more than the force (the parts scaled together).
+-  let sustainsHeld = 0;
+-  if (sustains > force) {
+-    const k = sustains > 0 ? Math.max(0, force) / sustains : 0;
+-    for (const q of parts) if (q.group === 'SUSTAINS') { for (const d of Object.keys(q.dims)) q.dims[d] *= k; q.points *= k; }
+-    sustainsHeld = groupSum('SUSTAINS') - sustains;
++  // Limit 1, SCORE BY SCORE (UPKEEP-MEASURE-2, the chair's P2 candidate): on each score, what sustains the force counts
++  // for no more than the force (the force's whole points, on that score's scale); the sustaining parts of that ONE score
++  // are held together, so a part on another score never lowers it. A part's negative points (provisions short, food
++  // processing broken) are not sustaining: they count in full, never relieved by the hold.
++  const forcePts = Math.max(0, force) * n;
++  /** @type {Record<string, number>} */
++  const sustPos = {};
++  for (const d of SCORE_KEYS) {
++    const on = parts.filter((q) => q.group === 'SUSTAINS' && (q.dims[d] || 0) > 0);
++    const held = on.reduce((a, q) => a + q.dims[d], 0);
++    const k = held > forcePts ? forcePts / held : 1;
++    if (k < 1) for (const q of on) q.dims[d] *= k;
++    sustPos[d] = held * k;
+   }
++  for (const q of parts) if (q.group === 'SUSTAINS') q.points = sumOf(q.dims) / n;
++  let sustainsHeld = groupSum('SUSTAINS') - sustains;
+   // R2 (the owner's rule; the lane writer's ruling of 2026-11-13): a hired-only place's military never reads
+   // above the same place with a watch in its hired force's stead — that place's REAL military, run through
+   // this same code (the pay, the terrain, the crises, R13's hold, limit 1). Where it would, the hired parts'
+@@ -504,7 +513,14 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
+   const full = Object.fromEntries(Object.entries(dims).map(([d, v]) => [d, Math.min(100, Math.max(0, v))]));
+   const size = Object.hasOwn(W.size, tier) ? W.size[tier] : 0;
+   const danger = Object.hasOwn(W.threat.penalty, threat) ? W.threat.penalty[threat] : 0;
+-  const raw = Object.values(full).reduce((a, v) => a + v, 0) / n + size - danger;
++  // P2's second hold: READINESS's sustaining total counts for no more than the force. The scores' sum (each full at 100)
++  // is held to the same sum without what sustains, plus the force; both sides only rise when a house is added, so their
++  // least only rises. It is carried on limit 1's own line (no new word).
++  const fullSum = Object.values(full).reduce((a, v) => a + v, 0) / n;
++  const bare = Object.entries(dims).reduce((a, [d, v]) => a + Math.min(100, Math.max(0, v - (sustPos[d] || 0))), 0) / n;
++  const readinessHeld = Math.max(0, fullSum - (bare + Math.max(0, force)));
++  sustainsHeld -= readinessHeld;
++  const raw = fullSum - readinessHeld + size - danger;
+   const total = Math.min(100, Math.max(0, raw));
+ 
+   return { parts, crises, n, dims, full, size, danger, raw, total, willHeld, sustainsHeld, wallsFull, wallsPart,

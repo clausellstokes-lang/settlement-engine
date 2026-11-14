@@ -1,0 +1,40 @@
+diff --git a/src/data/defenceWeights.js b/src/data/defenceWeights.js
+index e7b645f84..359054e0e 100644
+--- a/src/data/defenceWeights.js
++++ b/src/data/defenceWeights.js
+@@ -15,6 +15,7 @@ export const DEFENCE_TUNING = Object.freeze({
+   walls: Object.freeze({ mil: 30, mon: 20 }),
+   wallKind: Object.freeze({ stone: 1, palisade: 0.6 }),
+   houseScale: Object.freeze({ least: 0.8, greatest: 1.2 }), // UPKEEP-CAPACITY C1 (the chair's ruling B): a house counts by its rung on its own ladder
++  people: Object.freeze({ milPerHead: 1 }), // UPKEEP-MEASURE-2 P4: the military score is full at the people times this (a force is no greater than its people); the starting value, for the owner's veto
+   garrison: Object.freeze({ mil: 28, mon: 20, int: 15 }),
+   militia: Object.freeze({ mil: 10, mon: 12, int: 8 }),
+   watch: Object.freeze({ mil: 7, int: 18 }),
+@@ -86,6 +87,7 @@ export const WATCH_IN_STEAD = Object.freeze({ hasMercenary: false, hasCharterHal
+ export const DEFENCE_WEIGHT_REASONS = Object.freeze({
+   walls: 'the largest built defence; holds against raiders and beasts alike',
+   wallKind: 'a stone wall at its full value; a palisade counts for less (the roster\'s "Palisade or earthworks", and any earthwork, reads as a palisade; the starting weight, for the owner\'s veto)',
++  people: 'a force is no greater than its people: the military score is full at the place\'s people times `milPerHead` (never above 100), the rest held in reserve (UPKEEP-MEASURE-2 P4; the starting value, for the owner\'s veto)',
+   houseScale: 'a house counts by its rung on its own ladder (the catalogue\'s scale tiers of the same function): the least rung at `least`, the greatest at `greatest`, evenly between, the middle at today\'s points; a one-rung ladder at 1; a part reads its greatest house (the owner: "a single alchemist should not have the same influence as an alchemist district"; the chair\'s ruling B)',
+   garrison: 'a standing professional force; it also keeps order',
+   militia: 'citizens under arms: less than soldiers, good against beasts',
+diff --git a/src/generators/defenseGenerator.js b/src/generators/defenseGenerator.js
+index 1debbec42..9fb9275ba 100644
+--- a/src/generators/defenseGenerator.js
++++ b/src/generators/defenseGenerator.js
+@@ -501,7 +501,14 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
+   const dims = {};
+   for (const q of parts) for (const [d, v] of Object.entries(q.dims)) if (!(d === 'mag' && !magicExists)) dims[d] = (dims[d] || 0) + v;
+   // R1: each score full at 100 (the rest held in reserve) and never below nothing.
+-  const full = Object.fromEntries(Object.entries(dims).map(([d, v]) => [d, Math.min(100, Math.max(0, v))]));
++  // UPKEEP-MEASURE-2 P4: A FORCE IS NO GREATER THAN ITS PEOPLE. The military score is full at its people's measure (the
++  // people times `W.people.milPerHead`, and never above 100); what stands and is built beyond it is held in reserve, on
++  // the fullness line's own words. A record with no population keeps the 100.
++  const pop = Number(settlement.population);
++  /** @type {Record<string, number>} */
++  const top = { mil: Number.isFinite(pop) && pop > 0 ? Math.min(100, pop * W.people.milPerHead) : 100 };
++  const topOf = (/** @type {string} */ d) => (Object.hasOwn(top, d) ? top[d] : 100);
++  const full = Object.fromEntries(Object.entries(dims).map(([d, v]) => [d, Math.min(topOf(d), Math.max(0, v))]));
+   const size = Object.hasOwn(W.size, tier) ? W.size[tier] : 0;
+   const danger = Object.hasOwn(W.threat.penalty, threat) ? W.threat.penalty[threat] : 0;
+   const raw = Object.values(full).reduce((a, v) => a + v, 0) / n + size - danger;
