@@ -1,0 +1,23 @@
+{"id":"22663","town":"r2r-metropolis-11","sev":"MED","kind":"STATE","why":"says the stone lies unworked; TRADE 'made here' lists stone and Resources shows a Stone Quarry","other":""}
+{"id":"13566","town":"r2r-metropolis-35","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"03961","town":"r2r-metropolis-48","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Palace/government complex' used as a name in the sentence","other":""}
+{"id":"13322","town":"r2r-metropolis-48","sev":"LOW","kind":"BROKEN","why":"'Merchant Guilds works ... pays ... it wants': plural subject with singular verbs and pronoun","other":""}
+{"id":"20963","town":"r2r-metropolis-3","sev":"MED","kind":"LACKS","why":"names a mages' quarter; HOUSES has no Mages' district, only a Wizard's tower","other":""}
+{"id":"21062","town":"r2r-metropolis-53","sev":"MED","kind":"STATE","why":"military commanders pushing against a Grand Military Council 'losing ground'; GOVERNMENT has it Dominant, Endorsed","other":"01317"}
+{"id":"HEADER","town":"r2r-metropolis-16","sev":"MED","kind":"RECORD","why":"stability 'Rigid (militant theocracy)' under a Democratic assembly with Religious Authorities Minor; safety Very Safe beside monsters plagued","other":""}
+{"id":"16602","town":"r2r-metropolis-16","sev":"MED","kind":"STATE","why":"prints 'militant theocracy'; GOVERNMENT is a Democratic assembly, Religious Authorities only Minor","other":""}
+{"id":"HEADER","town":"r2r-metropolis-42","sev":"MED","kind":"RECORD","why":"stability 'Rigid (militant theocracy)' under a City-State Council with Religious Authorities Minor","other":""}
+{"id":"29616","town":"r2r-metropolis-42","sev":"LOW","kind":"BROKEN","why":"house-list qualifier printed as a name: 'Thieves' guild (powerful)'","other":""}
+{"id":"HEADER","town":"r2r-metropolis-36","sev":"MED","kind":"RECORD","why":"stability 'Rigid (militant theocracy)' under a City-State Council with Religious Authorities Minor","other":""}
+{"id":"HEADER","town":"r2r-metropolis-56","sev":"MED","kind":"RECORD","why":"trade access isolated, mountain, yet HOUSES has Docks/port facilities and exports waterborne freight, toll revenue and pass transit trade","other":""}
+{"id":"04037","town":"r2r-metropolis-20","sev":"MED","kind":"STATE","why":"says no one in the metropolis supplies stone; HOUSES lists a Stone quarry","other":""}
+{"id":"HEADER","town":"r2r-metropolis-24","sev":"MED","kind":"RECORD","why":"stability 'Stable (theocratic governance)' under a Grand Guild Consortium; Religious Authorities only Significant","other":""}
+{"id":"15019","town":"r2r-metropolis-30","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Palace/government complex' used as a name in the sentence","other":""}
+{"id":"04987","town":"r2r-metropolis-54","sev":"LOW","kind":"BROKEN","why":"'Merchant Guilds needs ... its contracts': plural subject with singular verb and pronoun","other":""}
+{"id":"HEADER","town":"r2r-metropolis-43","sev":"MED","kind":"RECORD","why":"mountain town with road access only, yet HOUSES has Docks/port facilities and exports waterborne freight (cargo, pilotage)","other":""}
+{"id":"HEADER","town":"r2r-metropolis-37","sev":"MED","kind":"RECORD","why":"stability 'Rigid (militant theocracy)' under a City-State Council with Religious Authorities Minor","other":""}
+{"id":"HEADER","town":"r2r-metropolis-57","sev":"MED","kind":"RECORD","why":"stability 'Rigid (militant theocracy)' under a Democratic assembly with Religious Authorities Minor","other":""}
+{"id":"21061","town":"r2r-metropolis-47","sev":"MED","kind":"STATE","why":"Grand Merchant Oligarchy 'losing ground' to military commanders; GOVERNMENT has it Strong, Endorsed, and Military/Guard only Minor","other":"16806"}
+{"id":"HEADER","town":"r2r-metropolis-41","sev":"MED","kind":"RECORD","why":"forest town with road access only, yet HOUSES has Docks/port facilities and Harbour master's office; exports waterborne freight","other":""}
+{"id":"HEADER","town":"r2r-metropolis-12","sev":"MED","kind":"RECORD","why":"desert town with road access only, yet HOUSES has Docks/port facilities and Harbour master's office; exports waterborne freight","other":""}
+{"id":"DONE","lines":1411,"blocks":38,"flags":22}
