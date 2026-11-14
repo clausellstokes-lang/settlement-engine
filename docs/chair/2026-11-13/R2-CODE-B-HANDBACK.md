@@ -515,3 +515,23 @@ THE EXACT NEXT STEP, in this order: (1) read the two unread COMPOSED reds (defen
 
 ## Instruments (outside the tree; lost with the container)
 - /home/user/wt-b7 (the working worktree, branch b7-work), frozen trees /home/user/wt-line (976db5b19), /home/user/wt-base (e969a75b7), /home/user/wt-lane0 (c40da4ec6), node_modules symlinked; /home/user/b7/suite (the six shard reports s1-6.json, fails.mjs, cmp.mjs, classed.txt, classed2.txt, the classing reports cls-line/base/lane0.json), /home/user/b7: seeds800.txt; births-m (the merged tree's 800); c2 (CENSUS-2 at 2686272b1); m/toll.mjs (the toll's From with and without the printed name), m/read.test.jsx (the Economics card read from the corpus), m/ibp.test.js (institutionBudgetPromise's own loop, the factor forced to 1), m/leaf.mjs (the moved seeds' leaves by family); chk/ (each door's output).
+
+# PART 8 — R2-CODE-B-8, the eighth seat (the two composed reds; the twenty-seven classed; CENSUS-2; the shift record; the final statement)
+
+**Seat:** R2-CODE-B-8 (session_01ACmDYawEQFDbM8JwGmhXUT); **the chair:** session_01ACmDYZrFEVXyZEUg1NDxxC. **Brief:** docs/chair/2026-11-14/briefs/BRIEF-R2-CODE-B-8.md on lane/chair-2026-11-08. **Tip read back at start:** 327035149 (as the brief); the line's tip 976db5b19 (unchanged).
+
+## The brief's rulings, copied
+- The work in order: (1) the two unread COMPOSED reds; (2) the twenty-seven, each in ONE class by reading its failure: (a) a golden or pin a DECLARED move shifts (the draft shift record; no golden's door in its writing mode), (b) a walker, manifest or register this lane's files red (cured through its own door now, or named with the merge seat's door), (c) the edge bundles' three (step 6); (3) CENSUS-2 at the tip against PART 6 ROW 2, then the 720 field diff by family; (4) ONE draft shift record; (5) the gathering (FOR THE JOIN, THE NEW WORDS, FOR THE DECLARATION PASS as re-ruled, LEFT FOR AFTER THE JOIN); (6) the edge bundles last; (7) the final statement. NO new cure of a page line beyond what the checks ask; only files this lane holds.
+- THE QUICK GUIDE RE-RULED (the chair, 2026-11-14 06:40 UTC, vetoable): (i) the harbour needs no new word (the Greek member of QUICK_GUIDE_SIBLINGS declares `navigable`; ruling 5 stands; "parked with its word" of 04:58 WITHDRAWN); (ii) the struck variants are NOT made twins now (that moves HOW the variant is chosen: class (3), for the pass); all eighteen stay RED AND NAMED; (iii) each quick-guide row's wording in the statement says (a) a replace()'s FIRST or SECOND argument, (b) whether the frame's member already declares the atom (a SHAPE ROW), (c) else the code condition and the atom it would need. The fact-layers reader's row stays as ruled.
+
+## The chair's rulings received by this seat (notifications, copied)
+- (none yet)
+
+## Items (this seat)
+| item | commit | measured |
+|---|---|---|
+| step 1: defenceFactReaders.walker, crisisCast.js 3 -> 2 | e990583dc | a FALL: the line banked the base's three reads; this lane's item 4c (90bafc4d1) retired the house fallback's regex to the defence home (partitionDefenseInstitutions). Row lowered by the register's own form (a row falls the commit its reader retires). |
+| step 1: proseNumerics, Services.jsx `{flow}` 245 -> 246 | 3c59ceaab | a PURE LINE MOVE: the file's one `{flow}` at l. 240 on the line, 245 at c40da4ec6, 246 merged; snippet/category/path identical; one -/+ pair. Both files 51/51 green. |
+
+## Instruments (outside the tree; lost with the container)
+- /home/user/wt-b8 (working worktree, branch b8-work); /home/user/b8 (dfr.mjs: the defence walker's count per line at any rev; owners.sh: the other current lanes that changed a file; others.txt: the 41 lanes dated 11-12..11-14).
