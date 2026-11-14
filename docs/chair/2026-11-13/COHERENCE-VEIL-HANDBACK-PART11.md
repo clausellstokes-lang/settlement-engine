@@ -296,3 +296,18 @@ line), not touched; twelve other files green.
 - **LEFT, in the brief's order:** the design's rest: V7-5 with the trace by positive account (a07) and V7-8, every
   existence flag (d06); the income row by its house; item 2 of BRIEF-VEIL-9 (the booleans' derivation agreed between
   server and twin); then the acceptance run to exit 0 and `born/run-born.sh`; BRIEF-VEIL-9's item 3 (a) to (e); the pack.
+
+## 11. HANDED BACK AT THE COUNT (2026-11-14 04:20 UTC by the clock)
+
+At the brief's first named point (after V7-3, V7-1 and V7-2 together) the seat read its own count: **408,637 tokens**,
+past this lane's mark of 300,000 (the brief's reading list, then two builders' turns waited out in one unbroken turn).
+It hands back here, with nothing running and everything pushed. The seat's count was past the mark while it reviewed
+and pushed V7-1 and V7-2: section 7 and section 10 say what it executed itself and what it did not read.
+
+**For the successor.** Sections 10's LEFT list is the order. The two sub-briefs the builders worked to are in
+`veil-probe-10/briefs/` (the form a next builder's brief can take; their scratch paths are this container's and are
+gone). The reader's library is `lane/review-veil-3-2026-11-12` at 61a253a79 (`git archive`, never committed here);
+`run-all.sh` needs a local cluster on a unix socket (`PGHOST`) and a folder with `npm i pg@8.13.1` (`RV6_PGMOD`).
+What the next commits must turn green: a07 (the trace by positive account: section 8's counts say what it will also
+drop) and d06 (every existence flag by the houses still listed, by the engine's own `getInstFlags`); then the born run.
+THE FIRST ACT: read 212's sections 4b and 4c and `gallerySecondHomes.js` WHOLE, since this seat did not.
