@@ -566,3 +566,28 @@ The tip is this file's commit; the code tip bbeb95b73. NOT STARTED, nothing chan
    and THE LANE'S ONE FINAL STATEMENT (the whole suite once in six vitest shards, each to its own file outside the tree;
    everything BRIEF-R3-CODE-C-4 item 5 lists). Changed bundled sources since the third seat: crisisSummaryVantage.js
    (bbeb95b73) is in the edge bundles' sources (the third seat named it there): re-emit last and alone.
+
+### After the hand-back: the chair's exception of 02:10Z (copied), and the two items it allowed (EXECUTED)
+
+- 02:10Z, the chair: the count read and the hand-back at 530c7546c accepted; ONE EXCEPTION TO THE MARK: "GO ON for items
+  (1) and (2) ONLY: the 'keep {name} safe' pass ... and CENSUS-2 at the new tip. Then bring the hand-back current, push,
+  send ONE message (the tip, the counts) and END for good: do NOT take point 49's merge or the final statement: a fresh
+  seat takes them from your file."
+- **(1) DONE, b0be6de8d.** The four lines reworded to name no keepers (recently_betrayed, monster_pressure, wartime and
+  departures defence.official; each distinct from the siege's and the infiltration's wording): on the 960, 35 prints of
+  "keep {name} safe", 19 with no force, -> 0. Each read where it prints, 12 of 12 true (thorps of 7 to a metropolis of
+  122,759). Display only (240 byte-identical); red first 2, guard town r2s-wartime-thorp-70; 548 of 548 governing; gates
+  green. The new wording is in the commit body (for the owner's veto).
+- **(2) DONE, CENSUS-2 at b0be6de8d** (from scratch, EXIT 0, 720 of 720): the lane's files per kind, hits (towns):
+  a 63 (61), b 7 (7), c 11 (11), d 1 (1), e 0, f 26 (26), g 0, h 0. IDENTICAL to b45d9154b, hit for hit (kind, town,
+  writer). So the statement's base -> tip is: a 102 -> 63; b 7 -> 7; c 13 -> 11; d 0 -> 1; e 0 -> 0; f 6 -> 26;
+  g 54 -> 0; h 0 -> 0 (the d and f rises: officialsInPay.js via the merge, exposure). Limits: the dossier's views only
+  (the PDF, the journal and the Tonight sheet, where the vantage table's cover, overview and Tonight lines print, are
+  not rendered by it); it cannot see two lines disagreeing.
+
+**WHAT THE FRESH SEAT TAKES (this seat ENDS here, as the chair ruled):** item 3 of the list above: on the chair's word,
+point 49's merge (a plain merge commit of the named tip; the eight edge bundles by `npm run build:edge-shared`), the
+instrument's findings on this lane's lines cured or declared, and THE LANE'S ONE FINAL STATEMENT (BRIEF-R3-CODE-C-4
+item 5, whole suite in six shards). The census base and tip above serve the statement unless the merge changes the
+lane's files' prints (re-run CENSUS-2 after the merge if it does). crisisSummaryVantage.js (bbeb95b73, b0be6de8d) is a
+bundled source: the edge bundles re-emitted last and alone.
