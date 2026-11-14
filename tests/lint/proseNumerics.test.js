@@ -163,6 +163,11 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // lines above its two banked relationship rows (the COHERENCE-POWERS lane, 04334d6ef and 859c11ff8), so
 // `{rel.strength}` 155 -> 157 and `{rel.tension}` 161 -> 163; path, category and snippet byte-identical; the whole
 // baseline diff is two -/+ pairs. ADDRESS ROT; no ceiling moved.
+// COHERENCE-POWERS-7 (2026-11-13) — FIVE PURE LINE MOVES: the legitimacy breakdown chips left the Power tab and the
+// PDF's Power chapter (the owner: ratings, never the machinery), above five banked rows: PowerTab.jsx
+// `{Math.round(instab*100)}` 510 -> 490 (twice) and `{Math.round(rung.standing*100)}` 536 -> 516; PowerStructure.jsx
+// `{p.criminalCapture.score}` 102 -> 101 and `{f.power}` 236 -> 235; path, category and snippet byte-identical; the
+// whole baseline diff is five -/+ pairs. ADDRESS ROT; no ceiling moved.
 // The census ends at 227 against a 227 ceiling — the seven additions net out against nothing,
 // because they were cured rather than counted. No ceiling moved in either direction.
 // TAIL-F · W-FAITH LANDING (the F5c->F6c->F7c consist) — ONE ROW THAT WAS NEVER DEBT, CURED

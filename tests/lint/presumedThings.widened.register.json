@@ -15,7 +15,8 @@
   "after-base: powers": "another lane's line, written after the instrument's base: its holder declares it when its lane joins the line (banked BY HAND at STYLE-2-MERGE point 49 under the chair's ruling on STOP 49a (ii)/(iii), record 405, against the letter of the door's base rule; holder: the powers lane)",
   "after-base: leaves-3": "another lane's line, written after the instrument's base: its holder declares it when its lane joins the line (banked BY HAND at STYLE-2-MERGE point 49 under the chair's ruling on STOP 49a (ii)/(iii), record 405, against the letter of the door's base rule; holder: the third leaves lane)",
   "after-base: defence": "another lane's line, written after the instrument's base: its holder declares it when its lane joins the line (banked BY HAND at STYLE-2-MERGE point 49 under the chair's ruling on STOP 49a (ii)/(iii), record 405, against the letter of the door's base rule; holder: the defence lane)",
-  "after-base: after-merges": "another lane's line, written after the instrument's base: its holder declares it when its lane joins the line (banked BY HAND at STYLE-2-MERGE point 49 under the chair's ruling on STOP 49a (ii)/(iii), record 405, against the letter of the door's base rule; holder: the seat after the merges (its lane, W2-A-LEAVES, landed already))"
+  "after-base: after-merges": "another lane's line, written after the instrument's base: its holder declares it when its lane joins the line (banked BY HAND at STYLE-2-MERGE point 49 under the chair's ruling on STOP 49a (ii)/(iii), record 405, against the letter of the door's base rule; holder: the seat after the merges (its lane, W2-A-LEAVES, landed already))",
+  "after-base: r3-code-c": "this lane's truer rewording of a line the line had banked (same file, same slot; its old row shrunk out at acee99f3a), true wherever it prints by a key or a branch no draw door reads: the crisis kind of the vantage table, the fort-and-force branch of the validator (banked BY HAND under the chair's ruling of 2026-11-14 04:05Z on R3-CODE-C-6's STOP, against the letter of section 2m, as point 49's seven; held true by tests/generators/r3cRekeyedLinesTrue.test.js; owed FOR THE JOIN: the vantage table and the validator's reasons go through a draw door, and the rows leave by --shrink)"
  },
  "arm1": {
   "src/components/AccountPage.jsx": [
@@ -1428,36 +1429,6 @@
     "6398129f0b224671"
    ],
    [
-    "smith",
-    "family",
-    ", and the place plainly lives by its forges.",
-    "8f91b1ce5da5666f"
-   ],
-   [
-    "smith",
-    "family",
-    "Forge smoke hangs over everything here, and the ring of the anvils never quite stops.",
-    "09f57d3e1f553d7e"
-   ],
-   [
-    "smith",
-    "family",
-    " lives by its forges: the clang of iron is in every lane.",
-    "a73477bf04bfc2ec"
-   ],
-   [
-    "smith",
-    "family",
-    "Every forge you pass is making something meant for a war, and the carts on the road out are full of it.",
-    "60e737b9057c3861"
-   ],
-   [
-    "smith",
-    "family",
-    "A smith tests a new blade against a post, frowns, and sends it back to the fire.",
-    "10a9b2a486fdbe7e"
-   ],
-   [
     "house: tannery",
     "family",
     "The tannery makes itself known long before you reach it.",
@@ -1474,12 +1445,6 @@
     "family",
     "A dyer walks past with hands stained to the wrist.",
     "bc5e3a2806bf3e02"
-   ],
-   [
-    "streets",
-    "family",
-    " answer one another across the roofs, and the streets slow for them.",
-    "a2d0c882339b71aa"
    ],
    [
     "house: carpenter",
@@ -1554,12 +1519,6 @@
    [
     "quarters",
     "word",
-    "Shared waterworks, fermentation, and intensive garden production structure urban food supply.",
-    "d7f8b171e69c5ea3"
-   ],
-   [
-    "quarters",
-    "word",
     "Any armed service, levied or paid, is organized through districts and administrative chains.",
     "138f5f20b739abb6"
    ],
@@ -1596,18 +1555,6 @@
    [
     "streets",
     "family",
-    "Public ovens, neighborhood vendors, and shared dining customs make food distribution visibly civic.",
-    "e17c83864ec2f0c6"
-   ],
-   [
-    "streets",
-    "family",
-    "warm tile roofs and enclosed courtyards break up the stone streets",
-    "fbba514388f9c67b"
-   ],
-   [
-    "streets",
-    "family",
     "Kinship and neighborhood obligations carry legal force, while poets, judges, and mediators preserve public memory.",
     "100245cbdb055a0b"
    ],
@@ -1640,12 +1587,6 @@
     "family",
     "Neighborhood, household, legal, charitable, and commercial obligations intersect in streets and courtyards.",
     "eec2399d72abf8d4"
-   ],
-   [
-    "streets",
-    "family",
-    "shaded arcades and latticed upper windows soften the market streets",
-    "b4b555afb9320ab1"
    ],
    [
     "house: fishing",
@@ -1746,12 +1687,6 @@
    [
     "streets",
     "family",
-    "causeways and managed water divide the settlement into organized neighborhoods",
-    "ce02e0152086543b"
-   ],
-   [
-    "streets",
-    "family",
     "Dense bazaar streets, occupational quarters, courtyard homes, shrines, tanks, and shaded arcades interlock.",
     "1172ee2055a094dc"
    ],
@@ -1784,12 +1719,6 @@
     "family",
     "A fortified high precinct overlooks the market, theater, and workshops; where geography permits, it also overlooks a wor",
     "23824ee5fefef5bf"
-   ],
-   [
-    "streets",
-    "family",
-    "workshops, shrines, and meeting halls crowd the approaches to the agora",
-    "1763371ab47c124d"
    ],
    [
     "shrine",
@@ -2054,30 +1983,6 @@
     "498cfc75c90d5834"
    ],
    [
-    "quarters",
-    "word",
-    "Patrols at {settlement} have changed their routes, and some districts are closed to anyone without business there.",
-    "5c20597434a2b64a"
-   ],
-   [
-    "quarters",
-    "word",
-    "Some districts of {settlement} are closed off now, and whatever happens there goes unrecorded and unpunished.",
-    "5f8d6934d29fb438"
-   ],
-   [
-    "quarters",
-    "word",
-    "Which power holds a district of {settlement} decides which rules apply there.",
-    "2fe7494f83abfe50"
-   ],
-   [
-    "quarters",
-    "word",
-    "Each power at {settlement} keeps its own list of offences, so a wrong punished in one district goes unpunished in the ne",
-    "cb2c18ff89ae6733"
-   ],
-   [
     "plague",
     "word",
     "{settlement} has no dedicated healers. Wounds take what they take, and a plague here runs until it has finished.",
@@ -2118,36 +2023,6 @@
     "word",
     "{settlement} counts a few practitioners of the arcane among its defenders, though no muster roll lists them and none is ",
     "9a729b1c0beb9823"
-   ],
-   [
-    "practitioner",
-    "word",
-    "{settlement} runs on arcane work. What the town produces, and in some measure what the town eats, depends on practitione",
-    "aeb8b241032c410f"
-   ],
-   [
-    "practitioner",
-    "word",
-    "{settlement} leans on its practitioners; a hard season for them (a feud, a sickness, a falling-out with the hall) is a h",
-    "43ee1250202c3af8"
-   ],
-   [
-    "practitioner",
-    "word",
-    "{settlement} does better than its ground and roads would explain, and the reason is its few practitioners.",
-    "7c8a20d3e3d5469c"
-   ],
-   [
-    "practitioner",
-    "word",
-    "{settlement}'s trade in {good} rests on a few practitioners, not on the land.",
-    "9a61f72877533def"
-   ],
-   [
-    "practitioner",
-    "word",
-    "There is magic at {settlement} and the town does not rest on it. Losing every practitioner here would be a loss and not ",
-    "2082a51afbef8994"
    ],
    [
     "practitioner",
@@ -2218,12 +2093,6 @@
    [
     "armedForce",
     "family",
-    "{settlement}'s garrison roll puts paid soldiers on every stretch of its walls, so raiders stay away and an army would pa",
-    "a0136f7c15a9f92d"
-   ],
-   [
-    "armedForce",
-    "family",
     "Approaching {settlement}, you see the walls and the soldiers who belong on them, and any attacker would think again abou",
     "4981288dbf0ebe5c"
    ],
@@ -2238,24 +2107,6 @@
     "family",
     "{settlement}'s accounts have money in hand: the town can keep its defenders paid and buy what a bad season needs without",
     "f5ff1370e1e6dfb1"
-   ],
-   [
-    "armedForce",
-    "family",
-    "{settlement}'s pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to t",
-    "bfdeca17a4563143"
-   ],
-   [
-    "armedForce",
-    "family",
-    "The supply book for {settlement}'s defenders balances: the town's own trades feed and equip them, so a call to arms does",
-    "bc87122ce3dac14b"
-   ],
-   [
-    "armedForce",
-    "family",
-    "The trades that feed and equip {settlement}'s defenders are busy and well stocked, and the defenders know it.",
-    "d6f8fca2c085060a"
    ],
    [
     "armedForce",
@@ -2304,12 +2155,6 @@
     "family",
     "People at {settlement} can nurse their sick but have no grain put by, so one bad harvest would leave the town hungry the",
     "e05cb0084fe4350f"
-   ],
-   [
-    "streets",
-    "family",
-    "Visitors to {settlement} are told which few streets to avoid, and the advice turns out to be right.",
-    "99536e85ef3c594e"
    ],
    [
     "streets",
@@ -2438,12 +2283,6 @@
     "2fe8b75f4c2640c5"
    ],
    [
-    "openTrade",
-    "family",
-    "Traffic in and out of {settlement} goes through its gates, and that is where anyone arriving is first seen.",
-    "b7f57bb7bc66d87b"
-   ],
-   [
     "house: wizard's tower",
     "family",
     "The wizard's tower at {settlement} is where the town turns when a threat is beyond its ordinary defences.",
@@ -2454,36 +2293,6 @@
     "family",
     "The town's defence against magic rests on the wizard's tower at {settlement}, and no muster roll lists it: if the wizard",
     "a7bbaa4c685e7078"
-   ],
-   [
-    "house: mages' guild",
-    "family",
-    "The mages' guild at {settlement} keeps the town's wards and answers hostile spells.",
-    "523da53a968dc8dd"
-   ],
-   [
-    "house: mages' guild",
-    "family",
-    "{settlement}'s magical defence sits in the mages' guild's books, not the town's: the guild can withdraw it, and the town",
-    "23ff5c2c388f5f47"
-   ],
-   [
-    "house: alchemist",
-    "family",
-    "The magical help at {settlement} comes from its alchemists, who brew for the defenders.",
-    "1366532ce65b83b7"
-   ],
-   [
-    "armedForce",
-    "family",
-    "The magical help at {settlement} comes from its alchemists, who brew for the defenders.",
-    "1366532ce65b83b7"
-   ],
-   [
-    "house: alchemist",
-    "family",
-    "{settlement} buys its magical support from its alchemists by the batch, and the town's accounts carry it as a purchase, ",
-    "3f3c713516f9fa62"
    ],
    [
     "clergy",
@@ -2722,18 +2531,6 @@
     "06577da4a386b68b"
    ],
    [
-    "smallMargin",
-    "word",
-    "{settlement} feeds itself with a small margin. The counts come out ahead by a little, every season, without much drama.",
-    "5565ec2b8e02ad20"
-   ],
-   [
-    "onlyJust",
-    "word",
-    "{settlement} is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
-    "4328e4b3cddcd11b"
-   ],
-   [
     "religiousHouses",
     "word",
     "Faith carries real weight in {settlement}'s money. What the religious houses take in and spend is a large part of the to",
@@ -2774,24 +2571,6 @@
     "family",
     "{settlement} lives on a {complexity} and ends each year with money to spare, and the traffic on its {access} keeps it th",
     "3440f868ce21318d"
-   ],
-   [
-    "openTrade",
-    "family",
-    "Traffic moves along {settlement}'s {access} every day, and little of its money stays. The place earns less than it spend",
-    "472826d2eb1651fb"
-   ],
-   [
-    "openTrade",
-    "family",
-    "Plenty passes through {settlement}, and little of it stops. The town is poor, and its people say so to anyone who asks.",
-    "d2c3ac745df1f735"
-   ],
-   [
-    "openTrade",
-    "family",
-    "{settlement}'s market sells little, though the {access} is busy; most of the traffic does not stop, and the traders here",
-    "454b6651da5aacfc"
    ],
    [
     "openTrade",
@@ -2932,12 +2711,6 @@
     "41758bfab11ee934"
    ],
    [
-    "openTrade",
-    "family",
-    "The carts feed this town as much as the fields do. Everybody knows what day they come and what it means if they do not.",
-    "e9ed40da1f16a117"
-   ],
-   [
     "famine",
     "family",
     "A substantial part of what {settlement} eats is bought, and under the hunger the bought part comes short. The stores cov",
@@ -2956,12 +2729,6 @@
     "76b4b52212951b49"
    ],
    [
-    "openTrade",
-    "family",
-    "Bread at {settlement} is as likely to come from somebody else's fields as from the town's own, and everyone knows which ",
-    "241e1ace193d6b21"
-   ],
-   [
     "house: library",
     "family",
     "DS-SUP-2: LADDER › canonical supply-chain status + the break-cause clause library · `deriveSupplyChainState(chain, settl",
@@ -2972,12 +2739,6 @@
     "family",
     "The export list at {settlement} is longer than the town's own trades would explain, and the difference is what passes th",
     "46613010b6caad7a"
-   ],
-   [
-    "famineToCome",
-    "family",
-    "{settlement} lives off its {good} and little else. One bad year for the {good} would be a hungry year for the whole town",
-    "c116c26e7a8afe1f"
    ]
   ],
   "src/data/dossierStateProse/general.generated.js": [
@@ -2998,24 +2759,6 @@
     "word",
     "{settlement} is under siege and has earned almost nothing since the gates shut; the town is living on what it made befor",
     "fe7d8b0a912b59dd"
-   ],
-   [
-    "occupation",
-    "word",
-    "{settlement} is under occupation; the streets are quiet because soldiers hold them, not because the town is at peace.",
-    "c6c53056134c456b"
-   ],
-   [
-    "occupation",
-    "word",
-    "{settlement} is quiet under occupation: no unrest, and nobody doing anything they were not told to.",
-    "f7aba2e3cae3483a"
-   ],
-   [
-    "occupation",
-    "word",
-    "{settlement} was occupied and gave nothing up that mattered; what the occupier took, the town had already moved.",
-    "28a6234a83faf399"
    ],
    [
     "powersCount",
@@ -3266,12 +3009,6 @@
    [
     "openTrade",
     "family",
-    "{settlement}'s market lives off through-traffic; the town sells to the road as much as to itself.",
-    "9e822479d614eae4"
-   ],
-   [
-    "openTrade",
-    "family",
     "{settlement}'s market serves the town itself; little passes through that was not always coming here.",
     "45116905c9070836"
    ],
@@ -3346,12 +3083,6 @@
     "family",
     "{institution} at {settlement} eats what the carts bring; the town's crafts begin at the weighbeam, not the field.",
     "6e3572f2fdd3cf3b"
-   ],
-   [
-    "openTrade",
-    "family",
-    "Carts bring {settlement} what its workshops need, and carry the worked {good} away again.",
-    "0db406b36bc96e2b"
    ],
    [
     "temple",
@@ -3454,18 +3185,6 @@
    [
     "streets",
     "family",
-    "Criminal money is reaching the officials of {settlement} one at a time, because the town is poor and its streets are bad",
-    "f56ad1489f992762"
-   ],
-   [
-    "streets",
-    "family",
-    "Each season it gets easier to buy an official at {settlement}: the town stays poor, the streets stay badly guarded, and ",
-    "17c032777b79aa94"
-   ],
-   [
-    "streets",
-    "family",
     "The criminals at {settlement} are losing their grip on the hall: the town is doing well again and its streets are guarde",
     "633cf13452d62962"
    ],
@@ -3489,24 +3208,6 @@
    ]
   ],
   "src/data/dossierStateProse/stressors.generated.js": [
-   [
-    "occupation",
-    "word",
-    "{settlement}'s taxes go to the occupier before the town sees them, and its officials take their orders from outside.",
-    "e8297d14fd6c1813"
-   ],
-   [
-    "occupation",
-    "word",
-    "{settlement} runs as before, but the occupier's officers sit in on its business and make no secret of it.",
-    "ba9926bada6b9a34"
-   ],
-   [
-    "occupation",
-    "word",
-    "The occupiers are quartered inside the town, and the town's business is conducted around them.",
-    "71cfd98ad4c329cd"
-   ],
    [
     "famine",
     "word",
@@ -4211,12 +3912,6 @@
    [
     "temple",
     "implied",
-    "The church in {settlement} hunts heresy openly. Anyone suspected of working magic against the faith is denounced from th",
-    "08e811a8581b6109"
-   ],
-   [
-    "temple",
-    "implied",
     "The church in {settlement} watches for heresy: a charm sold in the street or a spell worked behind a shutter can bring a",
     "009f169bc17f7ef9"
    ],
@@ -4525,30 +4220,6 @@
     "04c88a01db03a3cd"
    ],
    [
-    "physician",
-    "family",
-    "Someone is poisoning the ruler slowly, and the physician knows",
-    "1acc20c35a94b6d3"
-   ],
-   [
-    "house: warehouse",
-    "family",
-    "A warehouse full of the scarce goods is being kept off the market on purpose",
-    "5f516feb76a38f25"
-   ],
-   [
-    "guardCaptain",
-    "family",
-    "A guard captain is on the payroll of the criminal network",
-    "c09b42a937c55fd3"
-   ],
-   [
-    "temple",
-    "implied",
-    "A relic seized during the trial never reached the temple vault it was bound for",
-    "33ad8c61c23cfe16"
-   ],
-   [
     "housesCount",
     "word",
     "Someone is sabotaging both guilds to destabilize the market for a third party",
@@ -4579,14 +4250,6 @@
     "family",
     "A wave of crime outpaced the guards, and citizens started taking justice into their own hands",
     "56ebc6f4c9cbbd11"
-   ]
-  ],
-  "src/data/inlandDescriptions.js": [
-   [
-    "openTrade",
-    "family",
-    "An open stall or small roofed market selling salted and smoked fish brought in by cart. The barrels keep, so the price h",
-    "735e41052db815c1"
    ]
   ],
   "src/data/institutionDescVariants.js": [
@@ -4677,12 +4340,6 @@
    [
     "quarters",
     "word",
-    "Houses of worship in the hundreds, across every district. No neighbourhood is without the faith.",
-    "a0344f4a1c23402c"
-   ],
-   [
-    "quarters",
-    "word",
     "The metropolitan cathedral, seat of the region's highest prelate and a draw for pilgrims.",
     "ec915038daabf5cc"
    ],
@@ -4751,18 +4408,6 @@
     "word",
     "A house of worship to every quarter.",
     "d61d190fb75f9d10"
-   ],
-   [
-    "religiousHouses",
-    "word",
-    "Houses of worship in the hundreds, across every district. No neighbourhood is without the faith.",
-    "a0344f4a1c23402c"
-   ],
-   [
-    "religiousHouses",
-    "word",
-    "Hundreds of quarters, one house of worship to each, so that faith runs through every part of the city.",
-    "0905ec72abb6e586"
    ],
    [
     "practitioner",
@@ -4859,12 +4504,6 @@
     "implied",
     "The grounds inside the walls filled generations back, so the dead are lifted when their term is up and their bones stack",
     "12d7735de3aed0b5"
-   ],
-   [
-    "walls",
-    "implied",
-    "Carts go out at dusk to ground bought beyond the walls, and the charnel house holds what the old plots gave up. What a f",
-    "49e06569c78afdc1"
    ],
    [
     "market",
@@ -5041,30 +4680,6 @@
     "da4a4733fa1eede8"
    ],
    [
-    "house: alchemist",
-    "family",
-    "Herbal medicines, poultices, and everyday remedies for sale. Not to be confused with the alchemist. Nothing magical here",
-    "0a8d25383d1f1cc3"
-   ],
-   [
-    "house: alchemist",
-    "family",
-    "Sells poultices, common cures, and medicines drawn from herbs. Where the alchemist deals in magical compounds and acid, ",
-    "41bbf78045e696de"
-   ],
-   [
-    "house: baker",
-    "family",
-    "Turns malted grain into ale by the barrel. After the bakers, no trade eats more grain. It supplies both alehouses and ho",
-    "3315baf4a1f09949"
-   ],
-   [
-    "house: alehouse",
-    "family",
-    "Turns malted grain into ale by the barrel. After the bakers, no trade eats more grain. It supplies both alehouses and ho",
-    "3315baf4a1f09949"
-   ],
-   [
     "house: alehouse",
     "family",
     "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. Alehouses and households ",
@@ -5153,30 +4768,6 @@
     "family",
     "Charcoal from woodland kilns feeds the smelters, the smithies, and the bake ovens. At this pace of metalwork, a forest l",
     "e61ccc3b0c33d8df"
-   ],
-   [
-    "house: mine",
-    "family",
-    "A shaft or adit worked by hired crews with winding gear and ore carts. Where the deposits go deep, the mine is why the p",
-    "cbfafce5d6a34432"
-   ],
-   [
-    "house: mine",
-    "family",
-    "Hired crews, winding gear, and ore carts work a shaft into the deposits. Where they run deep, the settlement grew around",
-    "6cc3030f75723117"
-   ],
-   [
-    "mason",
-    "family",
-    "A quarry with yards of dressed stone and its own masons. Half the region's walls and churches were cut here.",
-    "49b8183f1c7b76ba"
-   ],
-   [
-    "mason",
-    "family",
-    "Masons dress the stone in yards beside the working face. The quarry supplies walls and churches across half the region.",
-    "751ea10e721a6c4e"
    ],
    [
     "armedForce",
@@ -5305,46 +4896,10 @@
     "36da3a879b87a032"
    ],
    [
-    "smith",
-    "family",
-    "Charcoal furnaces reduce raw ore to refined metal. It stands between the mine and the smithy.",
-    "36da3a879b87a032"
-   ],
-   [
     "house: mine",
     "family",
     "Refines crude ore into workable metal over charcoal fire. The industrial step from what the mine yields to what the smit",
     "f3d81ba2b93c4691"
-   ],
-   [
-    "smith",
-    "family",
-    "Refines crude ore into workable metal over charcoal fire. The industrial step from what the mine yields to what the smit",
-    "f3d81ba2b93c4691"
-   ],
-   [
-    "house: druid",
-    "family",
-    "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold th",
-    "7e789768b3f2ba3d"
-   ],
-   [
-    "streets",
-    "family",
-    "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold th",
-    "7e789768b3f2ba3d"
-   ],
-   [
-    "house: druid",
-    "family",
-    "A council of elder druids charged with their circle's standing in the city: sometimes tending a concealed grove below th",
-    "be25fb111c91b082"
-   ],
-   [
-    "streets",
-    "family",
-    "A council of elder druids charged with their circle's standing in the city: sometimes tending a concealed grove below th",
-    "be25fb111c91b082"
    ],
    [
     "house: lord's appointee",
@@ -5527,12 +5082,6 @@
     "d10ef5aa51c2e6e7"
    ],
    [
-    "openTrade",
-    "family",
-    "Carts go out at dusk to ground bought beyond the walls, and the charnel house holds what the old plots gave up. What a f",
-    "49e06569c78afdc1"
-   ],
-   [
     "prisoner",
     "family",
     "Holds debtors, criminals, and political prisoners alike.",
@@ -5591,18 +5140,6 @@
     "family",
     "Criminal operations screened behind honest-looking warehouses, taverns, and shops.",
     "28b56b071175ae71"
-   ],
-   [
-    "house: assassins' guild",
-    "family",
-    "A lone hand or small cell, in a place too small to keep an assassins guild. Work comes through criminal go-betweens: les",
-    "10ad4b2be9cdbc90"
-   ],
-   [
-    "house: assassins' guild",
-    "family",
-    "One killer, or a handful, in a place too small to keep an assassins guild. Contracts arrive by way of criminal intermedi",
-    "75125265355ecc80"
    ],
    [
     "house: gambling",
@@ -6597,12 +6134,6 @@
    [
     "clergy",
     "family",
-    "Funeral rites and burial. The priest manages the graveyard.",
-    "b8e3f0f840768486"
-   ],
-   [
-    "clergy",
-    "family",
     "Private confession to the priest. The fault is heard and released.",
     "bc8919772b1da8b4"
    ],
@@ -6650,12 +6181,6 @@
    ]
   ],
   "src/data/institutionalCatalog.js": [
-   [
-    "market",
-    "carrier",
-    "A covered fish market under the market wardens. The morning's catch or the week's salted barrels, sold by weight and ins",
-    "1629a5565489f3d5"
-   ],
    [
     "market",
     "carrier",
@@ -6761,12 +6286,6 @@
    [
     "quarters",
     "word",
-    "Hundreds of houses of worship across all districts. The faith is woven into every neighbourhood.",
-    "deea25107eac4f95"
-   ],
-   [
-    "quarters",
-    "word",
     "Metropolitan cathedral. Seat of the highest regional religious authority. Pilgrimage destination.",
     "c6fded0acf9197fb"
    ],
@@ -6781,12 +6300,6 @@
     "word",
     "A circle of druids tied to the land. They regulate the seasons, mediate disputes with wild creatures, and know which str",
     "a1341a2138ac7bee"
-   ],
-   [
-    "quarters",
-    "word",
-    "A council of senior druids who govern their circle's relationship with the city. They may maintain a hidden grove beneat",
-    "6d43c6c588682f72"
    ],
    [
     "quarters",
@@ -6841,12 +6354,6 @@
     "word",
     "Several houses of worship within town.",
     "aa5b45f094c5f4d2"
-   ],
-   [
-    "religiousHouses",
-    "word",
-    "Hundreds of houses of worship across all districts. The faith is woven into every neighbourhood.",
-    "deea25107eac4f95"
    ],
    [
     "religiousHouses",
@@ -6959,20 +6466,8 @@
    [
     "house: mine",
     "family",
-    "A worked shaft or adit with hired crews, winding gear, and ore carts. Where the deposits run deep, the mine is the reaso",
-    "c353bba9315c5285"
-   ],
-   [
-    "house: mine",
-    "family",
     "Mine (open cast)",
     "ea6b8fe5e6f0a539"
-   ],
-   [
-    "mason",
-    "family",
-    "A working quarry with dressed-stone yards and a crew of masons. Builds the walls and churches of half the region.",
-    "782528dd40031aa5"
    ],
    [
     "resource: salt_flats",
@@ -7257,12 +6752,6 @@
     "1e163d68cda8c479"
    ],
    [
-    "house: alchemist",
-    "family",
-    "Sells herbal medicines, poultices, and common remedies. Distinct from the alchemist. No magical compounds, no acid flask",
-    "5f2e8e190e189e53"
-   ],
-   [
     "house: tavern",
     "family",
     "Commercial-scale ale and beer production supplying taverns and regional distribution. Major grain consumer and employer.",
@@ -7317,18 +6806,6 @@
     "3c27cb53dcc50109"
    ],
    [
-    "house: mine",
-    "family",
-    "Converts raw ore to refined metal using charcoal-fueled furnaces. The industrial intermediate between mine and smithy.",
-    "d3537bad8b5539cb"
-   ],
-   [
-    "smith",
-    "family",
-    "Converts raw ore to refined metal using charcoal-fueled furnaces. The industrial intermediate between mine and smithy.",
-    "d3537bad8b5539cb"
-   ],
-   [
     "clergy",
     "family",
     "Can read and write. Copies letters, draws up simple contracts, reads documents for the illiterate. Often the priest's as",
@@ -7363,12 +6840,6 @@
     "family",
     "One per neighborhood.",
     "5217b6c8ffe7555a"
-   ],
-   [
-    "streets",
-    "family",
-    "Hundreds of houses of worship across all districts. The faith is woven into every neighbourhood.",
-    "deea25107eac4f95"
    ],
    [
     "clergy",
@@ -7411,18 +6882,6 @@
     "family",
     "Elder Grove Council",
     "e9653e761f668349"
-   ],
-   [
-    "house: druid",
-    "family",
-    "A council of senior druids who govern their circle's relationship with the city. They may maintain a hidden grove beneat",
-    "6d43c6c588682f72"
-   ],
-   [
-    "streets",
-    "family",
-    "A council of senior druids who govern their circle's relationship with the city. They may maintain a hidden grove beneat",
-    "6d43c6c588682f72"
    ],
    [
     "house: lord's steward",
@@ -7705,12 +7164,6 @@
   ],
   "src/data/narrativeData.js": [
    [
-    "quarters",
-    "word",
-    " looks prosperous in the merchant quarter: new paint, loaded carts, a market stall with produce. It is only when you wal",
-    "f884a3314afbfb48"
-   ],
-   [
     "occupation",
     "word",
     "'s street signs have been repainted in two languages, the local one second. The new lettering is neat, official, and eve",
@@ -7723,28 +7176,10 @@
     "c7008f79e01034fe"
    ],
    [
-    "quarters",
-    "word",
-    "The merchant district of ",
-    "f532a63d6a02a34e"
-   ],
-   [
-    "quarters",
-    "word",
-    " looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for the merchant distr",
-    "662e9e0f1bc99685"
-   ],
-   [
     "housesCount",
     "word",
     "Two temples face each other across ",
     "411613139f212ed0"
-   ],
-   [
-    "quarters",
-    "word",
-    "'s streets under cloth, and the people carrying them are not mourners but labourers doing grim, fast work. The rising th",
-    "f79ada5e9837264a"
    ],
    [
     "siege",
@@ -7861,12 +7296,6 @@
     "c031692c7a8a0038"
    ],
    [
-    "mason",
-    "family",
-    "The masons of ",
-    "8ad99b8beca7fbe8"
-   ],
-   [
     "streets",
     "family",
     "'s streets, but they move in pairs and do not linger. The people watch them pass with the particular blankness of a plac",
@@ -7877,12 +7306,6 @@
     "family",
     " is prosperous in a way that feels wrong. The forges work past dark, the warehouses are full, the coin is moving, and al",
     "33cd6edee138e74a"
-   ],
-   [
-    "mason",
-    "family",
-    "The mason's yard in ",
-    "3b1b70f5190004a7"
    ],
    [
     "streets",
@@ -7903,18 +7326,6 @@
     "f79ada5e9837264a"
    ],
    [
-    "streets",
-    "family",
-    "The founders built for a few families who knew each other. Now newcomers crowd the streets, and half the faces are stran",
-    "db03e952d014f60b"
-   ],
-   [
-    "streets",
-    "family",
-    "The settlement was laid out for the families that founded it. Its streets and wells were never meant for this many peopl",
-    "db1d6edbec495fa0"
-   ],
-   [
     "temple",
     "implied",
     "Two temples face each other across ",
@@ -7927,12 +7338,6 @@
     "word",
     "Identify the source of unexplained magical disturbances in the northern district",
     "81a2b72bebd767e6"
-   ],
-   [
-    "quarters",
-    "word",
-    "They've been quietly buying up property in a district that hasn't been announced as a development site. Yet.",
-    "d3a7fa9d85e96b93"
    ],
    [
     "quarters",
@@ -9281,20 +8686,8 @@
    [
     "house: reeve",
     "family",
-    "The strongest armed household is pushing for authority over disputes that the reeve used to handle.",
-    "d7ad8916ef37ddc0"
-   ],
-   [
-    "house: reeve",
-    "family",
     "The church wants approval rights over market day activities. The village reeve disagrees.",
     "e836596fd75d7b87"
-   ],
-   [
-    "house: reeve",
-    "family",
-    "The church wants approval rights over who may trade and when. The village reeve disagrees.",
-    "34d22323ae3f4ba7"
    ],
    [
     "house: headman",
@@ -10005,12 +9398,6 @@
     "family",
     "The relationship predates the siege. They've been using it to buy time, but the council would not accept the distinction",
     "dd4157e803c19033"
-   ],
-   [
-    "siege",
-    "family",
-    "Has been skimming from the {commodity} reserves to pay a personal debt that predates the siege",
-    "99a6c4fddd758589"
    ],
    [
     "house: smuggling",
@@ -12163,12 +11550,6 @@
    [
     "war",
     "root",
-    "Those who keep {name} safe have fewer hands than before, with men called away to the war.",
-    "8059513c6e5dbfbe"
-   ],
-   [
-    "war",
-    "root",
     "In wartime {name}'s trade follows the army: what the war needs sells, and the rest waits.",
     "fccbb77b9c7d2b3c"
    ],
@@ -12189,12 +11570,6 @@
     "word",
     "Newcomers to {name} are questioned by the occupiers' officials before any local will say a word to them.",
     "a13f285e5bf20641"
-   ],
-   [
-    "occupation",
-    "word",
-    "Everything sold in {name} pays the occupiers their due first, and the merchants keep their prices and their opinions to ",
-    "b934ea0f127cb9f8"
    ],
    [
     "occupation",
@@ -12317,46 +11692,16 @@
     "050d2d3627066975"
    ],
    [
-    "armedForce",
-    "family",
-    "In {name} the food stores are under guard, and the guards are as hungry as everyone else.",
-    "7fc28a00e7f9150b"
+    "occupation",
+    "after-base: r3-code-c",
+    "Everything sold in {name} pays the occupiers their due first, and those who sell keep their prices and their opinions to",
+    "e77ca269515be2ef"
    ],
    [
-    "streets",
-    "family",
-    "People in {name} avoid the streets where one power's ground meets another's, most of all after dark.",
-    "b419f415cc33afb5"
-   ],
-   [
-    "streets",
-    "family",
-    "The creditor's agents walk {name}'s streets as if they owned them, and in a way they do: the place owes more than it can",
-    "a9630f0a8cc79c3b"
-   ],
-   [
-    "streets",
-    "family",
-    "The quarantine in {name} is kept in some streets and ignored in others, and the sickness goes where it likes.",
-    "2ab6283007a9281f"
-   ],
-   [
-    "streets",
-    "family",
-    "There is no fighting in {name}'s streets; the danger is quieter, officials who will not act and orders that go nowhere.",
-    "f7fcde2bc90d0af4"
-   ],
-   [
-    "streets",
-    "family",
-    "{name}'s faith is in dispute: you hear two kinds of prayer in its streets, and people are careful which one they join.",
-    "68348afaef26a3c9"
-   ],
-   [
-    "streets",
-    "family",
-    "With so many gone from {name}, whole streets are dark at night and nobody watches them.",
-    "d54c1121d5b3e1d8"
+    "war",
+    "after-base: r3-code-c",
+    "With men called away to the war, {name} has fewer hands than before to see to its own safety.",
+    "7e7367a3ed3f5004"
    ]
   ],
   "src/domain/customContentSchema.js": [
@@ -22901,12 +22246,6 @@
     "root",
     "Stores: a granary, ",
     "5e42deadb696f612"
-   ],
-   [
-    "granary",
-    "implied",
-    "No granary; a few weeks in the larder.",
-    "5a180024efea6ed4"
    ]
   ],
   "src/domain/supplyChainState.js": [
@@ -26615,14 +25954,6 @@
     "0270c1f61d445a48"
    ]
   ],
-  "src/generators/defenseGenerator.js": [
-   [
-    "house: academy",
-    "family",
-    "academy of magic",
-    "8f8aa8b21d5ed32c"
-   ]
-  ],
   "src/generators/demandProfile.js": [
    [
     "house: mine",
@@ -26705,12 +26036,6 @@
     "fb93ea0888247706"
    ],
    [
-    "house: alchemist",
-    "family",
-    "Herbal remedies, minor alchemical preparations, and potion sales. The local alchemist supplements conventional trade.",
-    "876dfe3c4ebb2b12"
-   ],
-   [
     "house: mages' guild",
     "family",
     "Enchanting contracts, magical research commissions, and the licensing of spellcasting practitioners. The mages' guild co",
@@ -26733,24 +26058,6 @@
     "family",
     "Smuggling, contraband and protection rackets",
     "211c6d1af7975a2e"
-   ],
-   [
-    "house: fuller",
-    "family",
-    "Local flocks provide raw wool; weavers and fullers convert it to cloth sold across the region.",
-    "3e37b2807cf9474a"
-   ],
-   [
-    "smith",
-    "family",
-    "Local ore feeds the smithy directly. Metalwork income is not trade-route dependent.",
-    "ab7a101ef0ffa943"
-   ],
-   [
-    "mason",
-    "family",
-    "Stone masons work imported material; the quarrying income notation reflects processing margin only.",
-    "2a5cd329ae915b0a"
    ],
    [
     "house: human trafficking",
@@ -26778,12 +26085,6 @@
    ]
   ],
   "src/generators/economy/foodBalance.js": [
-   [
-    "plague",
-    "word",
-    "The plague has killed or sickened many who work the fields. Those still standing face a short harvest and a hard winter.",
-    "9518a09ef4bec6a8"
-   ],
    [
     "occupation",
     "word",
@@ -26869,12 +26170,6 @@
     "family",
     "Local coal fires the forges, but the iron is bought in; this income stream leans on the trade route.",
     "782b0b74db43359b"
-   ],
-   [
-    "smith",
-    "after-base: defence",
-    "Coal is dug here and sold to the forges of other towns; no forge here burns it, so this income stream leans on the trade",
-    "8577339c884f8447"
    ]
   ],
   "src/generators/economy/outlookHookSiblings.js": [
@@ -27119,24 +26414,6 @@
    [
     "quarters",
     "word",
-    "the merchants' quarter",
-    "0b20b35cf5d9f7e9"
-   ],
-   [
-    "quarters",
-    "word",
-    "the residential district",
-    "d21c40d805c216b2"
-   ],
-   [
-    "quarters",
-    "word",
-    "the temple district",
-    "3a3da5b46e268323"
-   ],
-   [
-    "quarters",
-    "word",
     "A catastrophic or transformative event tied to the local ley line concentration occurred, permanently altering a distric",
     "4f6fa1145b7e6e27"
    ],
@@ -27157,12 +26434,6 @@
     "family",
     "the orthodox clergy",
     "be45a8f50efae9df"
-   ],
-   [
-    "house: merchant guild",
-    "family",
-    "After years of disputed grain prices, the major farming families and the merchant guilds negotiated a formal compact reg",
-    "4db6189132ac7faf"
    ]
   ],
   "src/generators/historyTemplate.js": [
@@ -27241,18 +26512,6 @@
   ],
   "src/generators/narrative/settlementOriginProse.js": [
    [
-    "docks",
-    "implied",
-    ". It has no wharf of its own.",
-    "2efa0ba77dd14506"
-   ],
-   [
-    "docks",
-    "implied",
-    "; the place has no wharf.",
-    "78cabd2126c9e5a2"
-   ],
-   [
     "openTrade",
     "family",
     "Founded roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what stop",
@@ -27328,18 +26587,6 @@
    ]
   ],
   "src/generators/narrativeText.js": [
-   [
-    "starving",
-    "word",
-    " is two bad weeks from genuine starvation; ",
-    "afb92e0eeda6b80c"
-   ],
-   [
-    "powersCount",
-    "word",
-    " holds the power, and at least three powers are fighting over the stores.",
-    "0b3eb9a38e8f0c0d"
-   ],
    [
     "occupation",
     "word",
@@ -28087,12 +27334,6 @@
     "word",
     "Claims legitimate authority through different means; controls a distinct district or institution.",
     "e36c05d0c1828251"
-   ],
-   [
-    "powersCount",
-    "word",
-    "An external interest with embedded assets in at least two powers. Its presence is not known to the settlement.",
-    "7d4ca375ebf971f9"
    ],
    [
     "succession",
@@ -29165,6 +28406,12 @@
     "family",
     "A river settlement should exploit its water access: mills, docks, or fishmongers.",
     "42b0b9c83c65fd57"
+   ],
+   [
+    "armedForce",
+    "after-base: r3-code-c",
+    "Embattled region. Infrastructure exists on paper, but the defences are so underfunded that they are barely maintained an",
+    "d58d6c2b46cc28f7"
    ]
   ]
  },
@@ -29523,11 +28770,6 @@
    "src/generators/aiLayer.js",
    "[ ...(via.plotHooks || []), ...(hist.historicalEvents || []).flatMap(e => e?.plotHooks || []), ]",
    "not-a-draw"
-  ],
-  [
-   "src/generators/foodGenerator.js",
-   "CULTURE_PROFILES[/** @type {keyof typeof CULTURE_PROFILES} */ (config.cultureProfileKey)]?.foodways",
-   "strip-before-draw"
   ],
   [
    "src/generators/generationCoherence.js",

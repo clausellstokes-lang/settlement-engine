@@ -57,7 +57,9 @@ describe('stress factions take the role pool\'s first unused name', () => {
     expect(added).toEqual([expect.objectContaining({
       faction: FACTION_DESCRIPTORS.other[0], category: 'other', power: 15, hidden: true,
       // Re-keyed by identity 2026-11-09 (SW-8 RENAME-POWERS C9-6, the owner's map Appendix X): the same desc, "two powers".
-      desc: 'An external interest with embedded assets in at least two powers. Its presence is not known to the settlement.',
+      // Re-keyed by identity again (COHERENCE-POWERS-8, row #640): no birth gives the infiltrator assets in two powers;
+      // the same row, its description claiming only the people it has.
+      desc: 'An external interest with its own people placed inside the settlement. Its presence is not known to the settlement.',
     })]);
   });
 

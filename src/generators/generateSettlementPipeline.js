@@ -48,6 +48,7 @@ import { createGenerationContext } from './generationContext.js';
 // Side-effect: registers all pipeline steps
 import './steps/index.js';
 import { takeAllegianceReceipts } from '../domain/people/allegiance.js';
+import { styledTitleOf } from '../data/faceHonorifics.js';
 
 /**
  * Generate a complete settlement using the pipeline.
@@ -225,7 +226,7 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
  * Ids are never touched, so every edge still resolves.
  *
  * @param {Array<Record<string, unknown>>} relationships
- * @param {Array<{id?: string, name?: string, role?: string}>} npcs
+ * @param {Array<{id?: string, name?: string, role?: string, gender?: string}>} npcs
  * @param {unknown} [institutions] the place's roster, for the tie lines' force words (F1)
  * @returns {Array<Record<string, unknown>>}
  */
@@ -243,9 +244,9 @@ function refreshRelationshipProjections(relationships, npcs, institutions) {
     const next = {
       ...rel,
       npc1Name: first?.name  ?? rel.npc1Name,
-      npc1Role: first?.role  ?? rel.npc1Role,
+      npc1Role: first?.role != null ? styledTitleOf(first.role, first.gender) : rel.npc1Role, // COHERENCE-POWERS-8 (R2): the styled title, one home
       npc2Name: second?.name ?? rel.npc2Name,
-      npc2Role: second?.role ?? rel.npc2Role,
+      npc2Role: second?.role != null ? styledTitleOf(second.role, second.gender) : rel.npc2Role,
     };
     // Directed order matters: the generator built these as desc(npc1, npc2).
     // A legacy edge carrying no archetypeKey keeps the prose it shipped with.

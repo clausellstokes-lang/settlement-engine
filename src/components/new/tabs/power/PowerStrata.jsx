@@ -129,7 +129,7 @@ export function ThePowers({ settlement, powers, factionSupport, showCoupChip = t
   if (!powers.length) return null;
 
   return (
-    <Section title={`The Powers (${powers.length})`} collapsible defaultOpen accent="#8b6a1a">
+    <Section title={seatListTitle(powers)} collapsible defaultOpen accent="#8b6a1a">
       <div style={{ fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, marginBottom: 8, lineHeight: 1.4 }}>
         Who holds and who contests the seat. Open a power to see the institutions behind it.
       </div>
@@ -416,6 +416,22 @@ export function TheWeb({ groups }) {
       </div>
     </Section>
   );
+}
+
+// ── The seat's heading ───────────────────────────────────────────────────────
+
+/**
+ * A COUNT READS THE LIST IT HEADS (R2-CODE-B-SIDE item 4; round three's #562 #712 #806 and ten more): ThePowers lists
+ * the seat and those who contest it, and TheFactions lists every power the record holds, and both were headed
+ * "The Powers (N)" with two counts (282 of the census's 720 towns). This list's heading names what it lists; "The
+ * Powers (N)" heads the whole roster alone. Declared below its one caller so no line above moves.
+ * @param {ReadonlyArray<{ role?: string }>} powers
+ * @returns {string}
+ */
+function seatListTitle(powers) {
+  const held = powers.some((p) => p.role === 'ruler');
+  if (!held) return `Contenders for the Seat (${powers.length})`;
+  return powers.length > 1 ? `The Seat and Its Contenders (${powers.length})` : 'The Seat';
 }
 
 // ── Composed strata block ────────────────────────────────────────────────────

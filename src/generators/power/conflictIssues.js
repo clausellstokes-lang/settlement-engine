@@ -30,7 +30,7 @@ const RULE = Object.freeze(['governing', 'government', 'council']);
 
 /**
  * @typedef {object} ConflictIssue
- * @property {string} id the issue's stable id in the draw's ledger (its text)
+ * @property {string} id the issue's stable id in the draw's ledger (its text, or the text it was first written with)
  * @property {string} issue the issue, as the record stores it
  * @property {string} stakes what is at stake, as the record stores it
  * @property {string | null} flag a stress flag the issue waits on, or none
@@ -226,7 +226,9 @@ export const BASE_ISSUES = Object.freeze(/** @type {Array<Omit<ConflictIssue, 'i
     'Notice of the new levy has been torn down every morning this week.',
     'A household that refused the levy has had its door marked, and wants to know who marked it.',
   ] },
-  { issue: 'A ruling one power refuses to obey', stakes: 'Authority', flag: null, cast: [[...RULE]], hooks: [
+  // COHERENCE-POWERS-8 (round three #337, HIGH: "A ruling one power refuses to obey" lacked its "that"): the issue reads
+  // whole; its id stays the old text, so the draw's ledger and the quarrel's hook hash (conflicts.js) keep their key
+  { id: 'A ruling one power refuses to obey', issue: 'A ruling that one power refuses to obey', stakes: 'Authority', flag: null, cast: [[...RULE]], hooks: [
     'The ruling was given in writing, and the copy that was posted is not the one that was signed.',
     'A man sent to enforce the ruling was turned away, and has asked for others to go with him.',
   ] },

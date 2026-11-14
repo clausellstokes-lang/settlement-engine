@@ -39,6 +39,7 @@ import { random as _rng } from '../../kernel/rngContext.js';
 import { onStream, seatHouseOf, SEAT_CARD_ID } from './representatives.js';
 import { birthFactsOf } from '../../domain/facts/factsOf.js';
 import { tieArchetype } from '../npc/tieKind.js';
+import { styledTitleOf } from '../../data/faceHonorifics.js';
 
 /** The keyed fork family the ties draw under (declared in the fork census). */
 export const TIES_FORK_LABEL = 'people-ties';
@@ -179,8 +180,8 @@ export function drawTies(cards, place, rng, only = {}) {
         strength,
         npc1Name: from.name,
         npc2Name: to.name,
-        npc1Role: from.role,
-        npc2Role: to.role,
+        npc1Role: styledTitleOf(from.role, from.gender), // COHERENCE-POWERS-8 (R2): the role word her card styles her by
+        npc2Role: styledTitleOf(to.role, to.gender),
         archetypeKey,
         proseVariant,
         flagDriven: stressFlags.anyActive && FLAG_DRIVEN.has(archetype),

@@ -92,9 +92,11 @@
      "lineId": "ARRIVAL_SENSES.smiths.dominant[2]",
      "text": "Racks of new ironwork stand outside the workshops, waiting for the carts.",
      "needs": [],
-     "excludes": [],
+     "excludes": [
+      "crisis: under_siege"
+     ],
      "crisis": null,
-     "colour": true,
+     "colour": false,
      "stop": []
     },
     {
@@ -519,10 +521,13 @@
     {
      "lineId": "ARRIVAL_SENSES.fish.lines[1]",
      "text": "A fishmonger shouts a price over the slap of wet baskets.",
-     "needs": [],
+     "needs": [
+      "fish",
+      "market"
+     ],
      "excludes": [],
      "crisis": null,
-     "colour": true,
+     "colour": false,
      "stop": []
     },
     {
@@ -1082,9 +1087,11 @@
      "lineId": "ARRIVAL_SENSES.timber.dominant[1]",
      "text": "Stacks of seasoning planks line the road in, taller than the carts that wait for them.",
      "needs": [],
-     "excludes": [],
-     "crisis": null,
-     "colour": true,
+     "excludes": [
+      "crisis: under_siege"
+     ],
+     "crisis": "any",
+     "colour": false,
      "stop": []
     },
     {

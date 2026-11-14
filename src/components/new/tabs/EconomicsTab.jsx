@@ -24,7 +24,7 @@ import { economyDeskRead } from '../economyDeskRead.js'; // the desk's ONE calle
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { generalDeskLines } from '../generalDeskRead.js'; // DS-GEN-18 · the general desk's ONE caller
 import Button from '../../primitives/Button.jsx';
-import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
+import { institutionDisplayName, institutionHouseLabel } from '../../../domain/display/institutionDisplayName.js';
 import { tradeListsAsPrinted, tradeMarksOnPage, revenuesOffTheLists, chainOutputsShown } from '../../../domain/display/tradeListDisplay.js'; // CENSUS-3b unit 3 — the trade lists' one display reader (kind A, filterDeclared)
 import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js'; // §934.22 item 2 — the native-resource label seam (the Imports pills)
 import { edged } from '../../../design/edgedBox.js';
@@ -166,7 +166,7 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
           // T2-6: the facts the retired Supply Chains diagram alone carried (resource node,
           // missing houses, upstream imports, the upstream note) — one derivation, shared
           // with the Compendium's ChainRow.
-          const shown = chainPrintName(chain, town), facts = chainFlowFacts({ ...chain, ...shown }, instNames), outs = chainOutputsShown(chain, town); // COHERENCE-AGREE-6 (F1): what a chain prints reads the town's access; the income keyword above stays on the record's label (logic)
+          const shown = chainPrintName(chain, town), facts = chainFlowFacts(chain, instNames, shown), outs = chainOutputsShown(chain, town); // COHERENCE-AGREE-6 (F1): what a chain prints reads the town's access (its source through chainSourceOf with it: R2-CODE-B-7); the income keyword above stays on the record's label (logic)
           // X-50 (BOILERPLATE ONCE): generation gives every chain of a settlement the same impact
           // sentence, so it prints on the first card that carries it; each card keeps its need.
           const needFirst = !filtered.slice(0, i).some(prev => chainNeedLine(prev, town)); // the shared clause on the first card only
@@ -270,7 +270,7 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
                   {((svcImpaired) => <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:svcImpaired?FLOW_STATUS.impaired.color:swatch.inkMag3,background:svcImpaired?`${FLOW_STATUS.impaired.color}15`:swatch['#EDE3CC'],padding:'0 5px',marginLeft:'auto'}}>{svcImpaired?FLOW_STATUS.impaired.label:'○ Operational'}</span>)(serviceStateShown(svc.institutions, impairedHouses) === 'impaired')}
                 </div>
                 <div style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag2}}>
-                  <span style={{color:MUTED,marginRight:4}}>Via:</span>{svc.institutions.map(institutionDisplayName).join(' · ')}
+                  <span style={{color:MUTED,marginRight:4}}>Via:</span>{svc.institutions.map(institutionHouseLabel).join(' · ')}
                 </div>
                 <div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3,marginTop:1}}>{svc.output}</div>
               </div>
@@ -403,7 +403,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       <NarrativeNote note={narrativeNote} />
 
       {/* ── PROSPERITY HEADER (the tab's glance surface; the campaign tiles close the page) ── */}
-      <EconomicsGlance eco={eco} prosColor={prosColor} tradeLabel={tradeLabel} ecoScore={ecoScore}
+      <EconomicsGlance eco={eco} settlement={s} prosColor={prosColor} tradeLabel={tradeLabel} ecoScore={ecoScore}
         headerRung={deskProse.prosperityHeader} economyRung={deskProse.prosperityRung} />
 
       {/* ── INCOME SOURCES ──────────────────────────────────────────────── */}

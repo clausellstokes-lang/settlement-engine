@@ -36,7 +36,7 @@ import { CAST_REASONS, effectiveCastOf, requiredRolesOf } from './crisisCast.js'
 import { resolveDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
-import { institutionDisplayName } from '../display/institutionDisplayName.js';
+import { institutionHouseLabel } from '../display/institutionDisplayName.js';
 import { pluralPowerName } from '../display/governanceAccount.js';
 
 /** @typedef {import('./crisisCast.js').CrisisCast} CrisisCast */
@@ -49,24 +49,9 @@ import { pluralPowerName } from '../display/governanceAccount.js';
  * @typedef {{ text: string, bound: 'cast' | 'lever', link: { kind: 'npc' | 'faction' | 'institution', id: string, label: string } | null }} CrisisHook
  */
 
-/** The noun each kind is spoken of by ("In the siege, …"). PROPOSAL N1 (the lane's report). */
-export const CRISIS_NOUN = Object.freeze(/** @type {Record<string, string>} */ ({
-  under_siege: 'siege',
-  famine: 'famine',
-  occupied: 'occupation',
-  politically_fractured: 'split between the powers',
-  indebted: 'debt crisis',
-  recently_betrayed: 'betrayal',
-  infiltrated: 'infiltration',
-  plague_onset: 'outbreak',
-  succession_void: 'succession crisis',
-  monster_pressure: 'raids',
-  insurgency: 'insurgency',
-  religious_conversion: 'conversion',
-  slave_revolt: 'revolt',
-  wartime: 'war',
-  mass_migration: 'migration',
-}));
+/** The noun each kind is spoken of by: its one home is the leaf `crisisNoun.js` (COHERENCE-UPKEEP-7), re-exported here. */
+export { CRISIS_NOUN } from './crisisNoun.js';
+import { CRISIS_NOUN } from './crisisNoun.js';
 
 /** The noun of last resort: an unknown kind, or a noun the record contradicts. */
 const PLAIN_NOUN = 'crisis';
@@ -82,7 +67,10 @@ const PLURAL_NOUNS = Object.freeze(new Set(['raids']));
  * @param {string} name @returns {string}
  */
 export function houseInProse(name) {
-  const label = institutionDisplayName(name).replace(/\s*\((?:\d+(?:\s*[-–]\s*\d+)?|district)\)\s*$/i, '').trim();
+  // ROUND THREE, ruling (a): the house's label first (the one display leaf: no count range, household
+  // range or floor, gate or condition; "(50-100+)" was missed by this function's own pattern), then the
+  // district tag a sentence does not speak.
+  const label = institutionHouseLabel(name).replace(/\s*\(district\)\s*$/i, '').trim();
   return /^[A-Z][^A-Z]*$/.test(label) ? label[0].toLowerCase() + label.slice(1) : label;
 }
 
@@ -135,7 +123,21 @@ function holderWords(s, row) {
     const house = str(firstRankMembershipOf(npc, powerOrderOf(s))?.power);
     return house ? `${row.name} of ${house}` : row.name;
   }
-  return row.kind === 'institution' ? `the ${row.name}` : row.name;
+  // ROUND THREE item 4 (the chair's ruling): a hook names a house through houseInProse, never raw.
+  return row.kind === 'institution' ? `the ${houseInProse(row.name)}` : row.name;
+}
+
+/**
+ * ROUND THREE item 4, ruling (c) (the third seat's named twin: "the houses of worship is stirring it"): every
+ * LINE_ROLE_CLAUSE verb is singular, so a house whose label is a plural ("Houses of worship", "Inns and taverns") holds
+ * no clause: the cast hook is not written for it (the lever hook is unchanged). The head is the label before " of ", and a
+ * pair joined by "and" is plural; the head word's plural is the powers' own reader (`pluralPowerName`). No draw.
+ * @param {CastRow} row @returns {boolean}
+ */
+function pluralHouseHolder(row) {
+  if (row.kind !== 'institution') return false;
+  const head = houseInProse(row.name).split(/\s+of\s+/i)[0];
+  return /\sand\s/i.test(head) || pluralPowerName(head);
 }
 
 /** @param {CastRow} row */
@@ -240,7 +242,7 @@ export function crisisHooksOf(settlement, entry, facts = settlementHookFacts(set
       facts: () => factsOf(settlement), poolId: `LINE_ROLE_CLAUSE.${holder.role}`, surface: 'crisis',
     }).line)
     : null;
-  if (holder && clauseOf && str(holder.reason)) {
+  if (holder && clauseOf && str(holder.reason) && !pluralHouseHolder(holder)) {
     const text = speakTrue((n) => castSentence(n, clauseOf(holderWords(s, holder)), holder.reason), noun, facts);
     if (text) out.push({ text, bound: 'cast', link: linkOf(holder) });
   }

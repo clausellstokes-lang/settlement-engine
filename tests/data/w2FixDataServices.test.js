@@ -1,0 +1,39 @@
+/**
+ * W2-FIX-DATA (2026-11-13) — the service lines the REVIEW-W2B cold list read false
+ * (`docs/chair/2026-11-13/REVIEW-W2B-COLD-LIST.json`, rows in `src/data/institutionServices.js`), resolved
+ * through the real site (`services/serviceRollMaterialization.js :: resolveServiceRow`) with the facts a birth
+ * hands it: under a siege no line says the roads are open, and calm towns keep the line as written.
+ */
+import { describe, expect, it } from 'vitest';
+import { INSTITUTION_SERVICES } from '../../src/data/institutionServices.js';
+import { resolveServiceRow } from '../../src/generators/services/serviceRollMaterialization.js';
+import { birthFactsOf } from '../../src/domain/facts/factsOf.js';
+
+const facts = (/** @type {string[]} */ stress) => () => birthFactsOf({ institutions: [], config: { stressTypes: stress }, tier: 'town' }, { portKind: 'none' });
+const row = (/** @type {string} */ inst, /** @type {string} */ svc) => ({ ...(/** @type {any} */ (INSTITUTION_SERVICES)[inst][svc]), name: svc, institution: inst, svcKey: inst });
+
+describe('W2-FIX-DATA: a service line prints only where it is true', () => {
+  for (const [inst, svc, falseUnderSiege] of [
+    ['Access to external mill', 'Grain milling (a day away)', /carted to a mill outside/i],
+    ['Daily markets', 'Fresh produce', /available every morning/i],
+    ["Carriers' guild", 'Freight haulage', /^Organised road transport for goods between towns\. Reliable/],
+  ]) {
+    it(`${inst} / ${svc}: under siege it says the roads are cut, and calm it is as written (c02, c22, c17)`, () => {
+      const besieged = resolveServiceRow(row(inst, svc), facts(['under_siege']));
+      expect(besieged).not.toBeNull();
+      expect(String(resolveServiceRow(row(inst, svc), facts([]))?.desc)).toMatch(falseUnderSiege);
+      // anchored: the same row, calm, is asserted to print the line on the line above; only the siege takes it away
+      expect(String(besieged?.desc)).not.toMatch(falseUnderSiege);
+    });
+  }
+  it('the last rites name no priest keeping a graveyard the hamlet has none of (c09, c10)', () => {
+    expect(row('Access to parish church', 'Last rites').desc).toMatch(/parish priest/);
+    // anchored: the same definition's desc is asserted present on the line above
+    expect(row('Access to parish church', 'Last rites').desc).not.toMatch(/manages the graveyard/i);
+  });
+  it('the village reeve answers to no lord the village lacks (c12)', () => {
+    expect(row('Village reeve', 'Administrative oversight').desc).toMatch(/Allocate strips and common access/);
+    // anchored: the same definition's desc is asserted present on the line above
+    expect(row('Village reeve', 'Administrative oversight').desc).not.toMatch(/on behalf of the lord/i);
+  });
+});

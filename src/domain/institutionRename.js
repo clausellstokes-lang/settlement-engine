@@ -230,6 +230,13 @@ export const NON_CASCADED_SURFACES = Object.freeze([
     why: 'the same needs-vocabulary on the economy chains' },
   { path: 'structuralSuggestions[].suggested[]', kind: 'catalogue', readable: false,
     why: 'the structural validator AUTHORED advice, rendered as a Consider line: a statement about what the town should build, never a reference to what it has' },
+  // UPKEEP-9 (2026-11-14, at the capacity merge c448bb3a0): the defence profile's force entries are the roster's own
+  // institution objects, so they carry the house's catalogue id. Once the professional city watch left the garrison
+  // bucket (UPKEEP-CAPACITY C2, the chair's G1), most garrison entries are a house named "Garrison" whose id is
+  // "garrison", and the walk's normalised arm reads the id as the name: a CATALOGUE-SHAPE crossing (the test's sentence
+  // (a)), not a missing cascade. A rename changes the house's name, never its catalogue id.
+  { path: 'defenseProfile.institutions.garrison[].catalogId', kind: 'catalogue', readable: false,
+    why: 'the house\'s CATALOGUE ID (src/data/institutionalCatalog.js :: catalogIdForName), copied with the roster object into the defence bucket: the catalogue\'s identity, not the roster\'s name; it equals a name only where the house still bears its catalogue name' },
   { path: 'economicState.compound.inst.names[]', kind: 'frozen-stamp', readable: false,
     why: 'the LOWERCASED roster stamped once beside the booleans it produced and never recomputed on advance, owner-gated: rewriting the names would make them disagree with their own flags inside a frozen structure nothing reads' },
   // The faction ledger's other homes for that same name (src/domain/factionRename.js

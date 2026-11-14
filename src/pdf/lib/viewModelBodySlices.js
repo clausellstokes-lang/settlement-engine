@@ -25,11 +25,16 @@ import { stressArray, foodCore, avgScore } from './viewModelPrimitives.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { resourceGapLines, exploitationGroupsShown, housesStillNeeded } from '../../domain/display/validationOnPage.js';
 import { crisisSummaryForSurface } from '../../domain/crisis/crisisSummaryVantage.js';
+import { deriveProsperityPosture } from '../../domain/display/dossierViewModel.js';
 
 // Pull the human resource name off an exploitation chain entry (engine stores
 // it as `rawResource`; tolerate a few legacy shapes + bare strings).
 export const exploitName = (c) =>
   typeof c === 'string' ? c : (c?.rawResource || c?.resource || c?.chainKey || c?.name || '');
+
+// UPKEEP-14 (the bar's carried HIGH, the chair's ruling (j)): a chain prints under the name its record holds, through the
+// leaf every print site of a chain's name reads; the import sits beside its one reader.
+import { chainPrintName } from '../../domain/display/chainPrintName.js';
 
 export function economicsSlice(active) {
   const s = active || {};
@@ -39,8 +44,10 @@ export function economicsSlice(active) {
   const sp = ec?.safetyProfile || {};
 
   // Economic flows / chains
-  const chains = (ec?.activeChains || []).map(c => ({
-    name: c?.name || c?.chainName || 'Chain',
+  // UPKEEP-14 (j): the name is the record's label as the page prints it (`chainPrintName`), never a stand-in; a chain
+  // with no name is not printed (the Foundry journal prints each row's name: "- **Chain**" named none of them).
+  const chains = (ec?.activeChains || []).filter((c) => chainPrintName(c, s).label).map(c => ({
+    name: String(chainPrintName(c, s).label),
     status: c?.status || 'productive',
     processingInstitutions: c?.processingInstitutions || c?.processing || [],
     outputs: c?.outputs || [],
@@ -60,6 +67,7 @@ export function economicsSlice(active) {
 
   return {
     prosperity:         ec.prosperity || null,
+    prosperityInCrisis: deriveProsperityPosture(s).inCrisis, // ruling 1(a): the label's ordinary-years sentence, or null
     economicComplexity: ec.economicComplexity || null,
     economyOutput:      ec.compound?.economyOutput ?? null,
     tradeAccess:        ec.tradeAccess || s?.config?.tradeRouteAccess || null,

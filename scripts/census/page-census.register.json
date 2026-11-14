@@ -1,7 +1,8 @@
 {
  "_law": "W2-A-LEAVES (2026-11-12): THE RENDERED-DOSSIER ARM'S REGISTER. One row per pattern of the second wave's census, read by src/domain/coherence/pageCensusFindings.js over the census's own corpus (720 births, prefix r2: tests/components/pageCensusWalk.shared.mjs :: censusPlan) rendered as the owner sees it. master and integration are the census's two columns (db832c892, master before the integration; 8866a0ddd, the integration's tip), counted by the census's counter and mapped to these rows (row 14 joins the counter's P14 and P14district; 18 joins P18npc and P18rec; F4 joins P12ore/coal/quarry/saw; NEW1 joins NEW1 and NEW1b; 8 joins P8any and P8houses). master is NOT a measurement for 5a, 8 and 16a: their page did not exist there. banked is this arm's count on the corpus at the lane's base deb1544eb (per seed equal to the census counter's own run there, all 25 rows); it ONLY FALLS, through scripts/census/page-census.mjs --shrink. EVERY ROW'S BAR IS ZERO. grid: the suite walker's twelve births (tests/components/pageCensus.walker.test.jsx), each seed's rows exactly; a cure lowers them in the same commit. A row the chair re-defines is RETIRED BY NAME under `retired`, with its two columns, its count when retired and its reason, beside the row that replaced it; a new row carries no census column (master and integration null: the census did not count it) and states `base`, its count at deb1544eb, beside `banked`.",
  "_notes": {
-  "2026-11-13-style-2-merge-48": "RE-BASED AT THE MERGED MEASURE (STYLE-2-MERGE-12, point 48: W2-A-LEAVES 817980b33 merged onto the line at aac79b808): the chair's ruling at point 48, records 380 and 383. The cause: the line's generation since the lane's base deb1544eb (points 44-47; record 47 moved the gm corpus 525 of 525) re-deals the census's 720 births under this instrument; the lane's tip reads every row EQUAL to its banked count. The door has no arm that raises a row, so this hand-edit is the door by that ruling, verified by the door's own run (before: exit 1, ROSE on P8any, P11, NEW2; after: exit 0). Rows: P4 106 -> 96; P6need 642 -> 641; P7a 128 -> 125; P8any 220 -> 221; P9 149 -> 148; P11 410 -> 448; F4 245 -> 202; P16three 331 -> 179; P16powers 291 -> 281; P17 680 -> 671; NEW2 3 -> 6. Grid: r2r-city-0: P11,P16powers,P17,P18,P1b,P4,P6need,P7a -> P11,P13,P16powers,P17,P18,P1b,P6need,P7a; r2r-hamlet-0: P16three,P17,P6need,P8any -> P17,P6need,P8any; r2s-indebted-village-0: F4,NEW2,P11,P14,P17,P6need -> NEW2,P11,P14,P17,P6need; r2s-insurgency-metropolis-0: P16powers,P17,P18,P1b,P6need,P7a -> P16powers,P16three,P17,P18,P1b,P6need,P7a; r2s-occupied-hamlet-0: P11,P16three,P17,P6need,P8any,P9 -> P11,P17,P6need,P8any,P9; r2s-under_siege-thorp-0: F4,P13,P16three,P17,P6need,P8any -> F4,P13,P17,P6need,P8any. The rises are charged: P11 to the third leaves lane (the flow card prints a resource only where the chain carries it), NEW2 and P8any to round three."
+  "2026-11-13-style-2-merge-48": "RE-BASED AT THE MERGED MEASURE (STYLE-2-MERGE-12, point 48: W2-A-LEAVES 817980b33 merged onto the line at aac79b808): the chair's ruling at point 48, records 380 and 383. The cause: the line's generation since the lane's base deb1544eb (points 44-47; record 47 moved the gm corpus 525 of 525) re-deals the census's 720 births under this instrument; the lane's tip reads every row EQUAL to its banked count. The door has no arm that raises a row, so this hand-edit is the door by that ruling, verified by the door's own run (before: exit 1, ROSE on P8any, P11, NEW2; after: exit 0). Rows: P4 106 -> 96; P6need 642 -> 641; P7a 128 -> 125; P8any 220 -> 221; P9 149 -> 148; P11 410 -> 448; F4 245 -> 202; P16three 331 -> 179; P16powers 291 -> 281; P17 680 -> 671; NEW2 3 -> 6. Grid: r2r-city-0: P11,P16powers,P17,P18,P1b,P4,P6need,P7a -> P11,P13,P16powers,P17,P18,P1b,P6need,P7a; r2r-hamlet-0: P16three,P17,P6need,P8any -> P17,P6need,P8any; r2s-indebted-village-0: F4,NEW2,P11,P14,P17,P6need -> NEW2,P11,P14,P17,P6need; r2s-insurgency-metropolis-0: P16powers,P17,P18,P1b,P6need,P7a -> P16powers,P16three,P17,P18,P1b,P6need,P7a; r2s-occupied-hamlet-0: P11,P16three,P17,P6need,P8any,P9 -> P11,P17,P6need,P8any,P9; r2s-under_siege-thorp-0: F4,P13,P16three,P17,P6need,P8any -> F4,P13,P17,P6need,P8any. The rises are charged: P11 to the third leaves lane (the flow card prints a resource only where the chain carries it), NEW2 and P8any to round three.",
+  "2026-11-14-join-2": "RE-BASED BY HAND AT THE JOINED TREE (JOIN-2, the true join of 2026-11-14): the chair's ruling of 09:49 UTC, record 440, in the book's 48c form. ONE ROW: NEW1 11 -> 12. The cause, EXPOSURE NOT ORIGIN: the defence lane's declared rating move (coherence-upkeep 26474cda9) puts three more towns, r2r-city-9, r2r-town-59 and r2r-village-8, under a carried false line whose writer is the powers lane's governanceNarrative.js (a second ladder for the defence word); that lane's own statement named it, and its cure is assigned to the powers lane's seat. Measured by the census's own render of NEW1's twelve towns at every tree: the line and eight lanes fire 9 of them, the defence lane all 12, as the join does (docs/chair/2026-11-14/probes/JOIN/j2-31-*). The door has no arm that raises a row, so this hand edit is the door by that ruling, verified by the door's own run (before: exit 1, ROSE on NEW1). Nothing else re-based; every fall is then lowered by --shrink."
  },
  "corpus": {
   "prefix": "r2",
@@ -14,14 +15,14 @@
    "reader": "SECOND",
    "master": 0,
    "integration": 57,
-   "banked": 57
+   "banked": 0
   },
   "P1b": {
    "label": "1b \"a small margin\" beside a quarter or more bought in",
    "reader": "SECOND",
    "master": 64,
    "integration": 64,
-   "banked": 64
+   "banked": 0
   },
   "P2siege": {
    "label": "2 a siege figure in the indicative outside a siege",
@@ -44,7 +45,7 @@
    "reader": "SECOND",
    "master": 0,
    "integration": 106,
-   "banked": 96
+   "banked": 0
   },
   "P5false": {
    "label": "5a a crime line the town's facts make false: bought officials where none is in pay, none bought where one is, a grip on a hall no agent holds",
@@ -74,63 +75,63 @@
    "reader": "GLANCE",
    "master": 128,
    "integration": 127,
-   "banked": 125
+   "banked": 116
   },
   "P7b": {
    "label": "7b a harbour origin where no wharf stands",
    "reader": "CROSS",
    "master": 0,
    "integration": 27,
-   "banked": 27
+   "banked": 0
   },
   "P8any": {
    "label": "8 no church, and worship in the economy",
    "reader": "CROSS",
    "master": 0,
    "integration": 220,
-   "banked": 129
+   "banked": 123
   },
   "P9": {
    "label": "9 a weak beasts grade over settled-country text",
    "reader": "GLANCE",
    "master": 148,
    "integration": 149,
-   "banked": 148
+   "banked": 103
   },
   "P10": {
    "label": "10 \"hold the gates\" with no walls",
    "reader": "SECOND",
    "master": 18,
    "integration": 17,
-   "banked": 17
+   "banked": 0
   },
   "P11": {
    "label": "11 a flow card naming a resource the town lacks",
    "reader": "CROSS",
    "master": 396,
    "integration": 411,
-   "banked": 448
+   "banked": 0
   },
   "F4": {
    "label": "F4 an income line naming a working the roster lacks",
    "reader": "CROSS",
    "master": 274,
    "integration": 245,
-   "banked": 202
+   "banked": 0
   },
   "P13": {
    "label": "13 \"… and go on.\" doubled",
    "reader": "GLANCE",
    "master": 173,
    "integration": 172,
-   "banked": 172
+   "banked": 0
   },
   "P14": {
    "label": "14 size words in small places",
    "reader": "SECOND",
    "master": 183,
    "integration": 167,
-   "banked": 167
+   "banked": 23
   },
   "P16three": {
    "label": "16a \"the ruling three\" over fewer",
@@ -144,7 +145,7 @@
    "reader": "GLANCE",
    "master": 0,
    "integration": 291,
-   "banked": 281
+   "banked": 0
   },
   "P17": {
    "label": "17 non-goods produced locally",
@@ -158,7 +159,7 @@
    "reader": "GLANCE",
    "master": 337,
    "integration": 360,
-   "banked": 360
+   "banked": 341
   },
   "P19": {
    "label": "19 a diagnostic printed as a tension",
@@ -179,7 +180,7 @@
    "reader": "SECOND",
    "master": 10,
    "integration": 11,
-   "banked": 11
+   "banked": 12
   },
   "NEW2": {
    "label": "NEW-2 magic income, and no practitioner on the rolls",
@@ -191,89 +192,44 @@
  },
  "grid": {
   "r2r-thorp-0": [
-   "F4",
-   "P13",
-   "P14",
-   "P6need",
    "P8any",
    "P9"
   ],
-  "r2s-under_siege-thorp-0": [
-   "F4",
-   "P13",
-   "P17",
-   "P6need",
-   "P8any"
-  ],
-  "r2r-hamlet-0": [
-   "P17",
-   "P6need",
-   "P8any"
-  ],
-  "r2s-occupied-hamlet-0": [
-   "P11",
-   "P17",
-   "P6need",
-   "P8any",
-   "P9"
-  ],
+  "r2s-under_siege-thorp-0": [],
+  "r2r-hamlet-0": [],
+  "r2s-occupied-hamlet-0": [],
   "r2r-village-0": [
    "P17",
-   "P6need",
    "P9"
   ],
   "r2s-indebted-village-0": [
    "NEW2",
-   "P11",
-   "P14",
-   "P17",
-   "P6need"
+   "P17"
   ],
   "r2r-town-0": [
-   "P16powers",
    "P17",
-   "P18",
-   "P6need"
+   "P18"
   ],
   "r2s-infiltrated-town-0": [
    "P17",
-   "P18",
-   "P4",
-   "P6need"
+   "P18"
   ],
   "r2r-city-0": [
-   "P11",
-   "P13",
-   "P16powers",
    "P17",
-   "P18",
-   "P1b",
-   "P6need",
    "P7a"
   ],
   "r2s-succession_void-city-0": [
-   "P11",
-   "P16powers",
    "P16three",
    "P17",
-   "P18",
-   "P1b",
-   "P6need"
+   "P18"
   ],
   "r2r-metropolis-0": [
-   "P16powers",
-   "P17",
-   "P18",
-   "P1b",
-   "P6need"
+   "P17"
   ],
   "r2s-insurgency-metropolis-0": [
-   "P16powers",
    "P16three",
    "P17",
    "P18",
-   "P1b",
-   "P6need",
    "P7a"
   ]
  },

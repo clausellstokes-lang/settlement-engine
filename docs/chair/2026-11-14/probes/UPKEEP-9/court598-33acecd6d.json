@@ -1,0 +1,239 @@
+{
+ "towns": 76,
+ "townsHit": 73,
+ "by": {
+  "== Summary/Overview == :: The market stands where carts always stopped. Its merchant guild sets the terms of trade and its members carry the town's dealings outward. The town keeps its o": [
+   "r2r-town-1"
+  ],
+  "== Systems/Services == :: Hears civil pleas in the town court": [
+   "r2r-town-1",
+   "r2r-town-16",
+   "r2r-town-19",
+   "r2r-town-23",
+   "r2r-town-28",
+   "r2r-town-29",
+   "r2r-town-41",
+   "r2r-town-49",
+   "r2r-town-57",
+   "r2s-famine-town-3",
+   "r2s-infiltrated-town-0",
+   "r2s-infiltrated-town-3",
+   "r2s-plague_onset-town-1",
+   "r2s-monster_pressure-town-1",
+   "r2s-monster_pressure-town-3",
+   "r2s-religious_conversion-town-2",
+   "r2s-slave_revolt-town-2",
+   "r2s-mass_migration-town-0"
+  ],
+  "== Systems/Defense == :: Bring a complaint at Karakabad and it goes to a court and gets a hearing, not a favour.": [
+   "r2r-town-1"
+  ],
+  "== Systems/Defense == :: Courts without detention. Fines and exile only.": [
+   "r2r-town-4",
+   "r2r-town-6",
+   "r2r-town-7",
+   "r2r-town-8",
+   "r2r-town-10",
+   "r2r-town-16",
+   "r2r-town-19",
+   "r2r-town-20",
+   "r2r-town-21",
+   "r2r-town-22",
+   "r2r-town-23",
+   "r2r-town-24",
+   "r2r-town-26",
+   "r2r-town-27",
+   "r2r-town-28",
+   "r2r-town-29",
+   "r2r-town-30",
+   "r2r-town-33",
+   "r2r-town-36",
+   "r2r-town-38",
+   "r2r-town-45",
+   "r2r-town-46",
+   "r2r-town-48",
+   "r2r-town-49",
+   "r2r-town-50",
+   "r2r-town-51",
+   "r2r-town-55",
+   "r2r-town-57",
+   "r2s-under_siege-town-0",
+   "r2s-under_siege-town-1",
+   "r2s-famine-town-2",
+   "r2s-famine-town-3",
+   "r2s-occupied-town-2",
+   "r2s-politically_fractured-town-0",
+   "r2s-politically_fractured-town-3",
+   "r2s-indebted-town-1",
+   "r2s-indebted-town-2",
+   "r2s-indebted-town-3",
+   "r2s-recently_betrayed-town-2",
+   "r2s-recently_betrayed-town-3",
+   "r2s-infiltrated-town-0",
+   "r2s-infiltrated-town-1",
+   "r2s-infiltrated-town-2",
+   "r2s-infiltrated-town-3",
+   "r2s-plague_onset-town-0",
+   "r2s-plague_onset-town-1",
+   "r2s-plague_onset-town-3",
+   "r2s-succession_void-town-0",
+   "r2s-succession_void-town-1",
+   "r2s-succession_void-town-3",
+   "r2s-monster_pressure-town-0",
+   "r2s-monster_pressure-town-1",
+   "r2s-monster_pressure-town-3",
+   "r2s-insurgency-town-0",
+   "r2s-religious_conversion-town-0",
+   "r2s-religious_conversion-town-1",
+   "r2s-slave_revolt-town-3",
+   "r2s-wartime-town-2",
+   "r2s-wartime-town-3",
+   "r2s-mass_migration-town-0",
+   "r2s-mass_migration-town-1",
+   "r2s-mass_migration-town-3"
+  ],
+  "== Systems/Defense == :: Neuheim's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2r-town-6"
+  ],
+  "== Systems/Power == :: Church institutions hold direct temporal power; tithes, land, and courts are all ecclesiastical. The institution's charitable work among new arrivals has dramat": [
+   "r2r-town-8",
+   "r2s-mass_migration-town-1"
+  ],
+  "== Summary/Overview == :: A merchant argues with a carter on the road into Madinatchowk about the size of a load. Nobody else pays them any attention. This is clearly a daily occurrence.": [
+   "r2r-town-10"
+  ],
+  "== Summary/Overview == :: Visitors find Aristoakra's market without asking. Each craft at Aristoakra keeps a guild of its own that sets the rules for its work. A merchant at Aristoakra c": [
+   "r2r-town-15"
+  ],
+  "== Systems/Power == :: Angelina Argyros, the consortium speaker, holds the seat of the Guild Council. The Guild Council governs Aristoakra. Aristoakra tolerates the Guild Council, and": [
+   "r2r-town-15"
+  ],
+  "== Systems/Power == :: Sabah ibn Tufayl, the first councillor, holds the seat of the Church Council. The Church Council governs Birkhel. Safety and strong defences have won the Church": [
+   "r2r-town-16"
+  ],
+  "== Systems/Defense == :: Birkhel's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2r-town-16"
+  ],
+  "== Systems/Power == :: The Church Council governs Altaikum. Its seat is held by Otgontuya Mangghud, the first councillor. Poverty and weak defences have cost the Church Council its st": [
+   "r2r-town-19"
+  ],
+  "== Systems/Defense == :: Sübeteikhurel's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2r-town-20"
+  ],
+  "== Systems/Defense == :: Campoplenum's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2r-town-21"
+  ],
+  "== Systems/Defense == :: Qaryatfort's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2r-town-23"
+  ],
+  "== Systems/Defense == :: Anorema's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2r-town-24"
+  ],
+  "== Systems/Defense == :: Offenders at Brahmamandal are arrested, tried and held, and each case is written into the court's lists, so people expect a hearing, not a beating.": [
+   "r2r-town-25"
+  ],
+  "== Systems/Power == :: Ingivik is governed by the Military Council. Rind Styrkarsson, the first councillor, holds its seat. Prosperity has earned the Military Council the approval of ": [
+   "r2r-town-28"
+  ],
+  "== Systems/Defense == :: Velikoev's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2r-town-29"
+  ],
+  "== Systems/Services == :: Commercial disputes resolved outside the courts: faster, cheaper, and more reliably enforced.": [
+   "r2r-town-45",
+   "r2r-town-51",
+   "r2s-infiltrated-town-0",
+   "r2s-religious_conversion-town-1",
+   "r2s-wartime-town-3"
+  ],
+  "== Systems/Defense == :: Varanand's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2r-town-45"
+  ],
+  "== Systems/Defense == :: Saraibuurt's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2r-town-50"
+  ],
+  "== Systems/Power == :: Church institutions hold direct temporal power; tithes, land, and courts are all ecclesiastical. They operate in the shadow of Feudal Appointee but not comforta": [
+   "r2r-town-54"
+  ],
+  "== Systems/Defense == :: Pianoium's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2r-town-57"
+  ],
+  "== Systems/Power == :: Church institutions hold direct temporal power; tithes, land, and courts are all ecclesiastical. The gap between them and the governing council is narrow. A sin": [
+   "r2s-under_siege-town-0"
+  ],
+  "== Systems/Defense == :: Offenders at Yekehiid are arrested, tried and held, and each case is written into the court's lists, so people expect a hearing, not a beating.": [
+   "r2s-under_siege-town-2"
+  ],
+  "== Summary/Overview == :: Visitors find Rathwell's market without asking. Townsfolk at Rathwell keep their savings at the bank and go there when they need to borrow. The town keeps its o": [
+   "r2s-under_siege-town-3"
+  ],
+  "== Systems/Defense == :: Offenders at Rathwell are arrested, tried and held, and each case is written into the court's lists, so people expect a hearing, not a beating.": [
+   "r2s-under_siege-town-3"
+  ],
+  "== Systems/Defense == :: Offenders at Sundnes are arrested, tried and held, and each case is written into the court's lists, so people expect a hearing, not a beating.": [
+   "r2s-occupied-town-1"
+  ],
+  "== Systems/Defense == :: Xiaba's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2s-indebted-town-1"
+  ],
+  "== Systems/Defense == :: Kamalabari's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2s-indebted-town-3"
+  ],
+  "== Systems/Defense == :: Umanagar's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2s-recently_betrayed-town-2"
+  ],
+  "== Systems/Defense == :: Tighwood's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2s-infiltrated-town-0"
+  ],
+  "== Systems/Defense == :: Padmagiri's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2s-infiltrated-town-3"
+  ],
+  "== Systems/Power == :: Landed Gentry live under the rule of Military Council but keep enough rights of their own (land, courts, levies) to bargain, not simply obey.": [
+   "r2s-plague_onset-town-0"
+  ],
+  "== Systems/Defense == :: Ainkarez's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2s-plague_onset-town-0"
+  ],
+  "== Systems/Defense == :: Olymparion's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2s-plague_onset-town-1"
+  ],
+  "== Systems/Defense == :: Ringford's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2s-plague_onset-town-3"
+  ],
+  "== Systems/Defense == :: Uaymtitlan's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2s-succession_void-town-1"
+  ],
+  "== Systems/Defense == :: Skaldtun's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2s-succession_void-town-3"
+  ],
+  "== Systems/Defense == :: Al-mandi's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2s-monster_pressure-town-1"
+  ],
+  "== Systems/Defense == :: Al-para's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2s-insurgency-town-0"
+  ],
+  "== Summary/Overview == :: Tzulxochitl's market lives off through-traffic. An outside trader at Tzulxochitl either accepts its merchant guild's terms or sells to the guild's members at th": [
+   "r2s-insurgency-town-1"
+  ],
+  "== Systems/Defense == :: Bring a complaint at Tzulxochitl and it goes to a court and gets a hearing, not a favour.": [
+   "r2s-insurgency-town-1"
+  ],
+  "== Systems/Defense == :: Donggou's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2s-religious_conversion-town-0"
+  ],
+  "== Summary/Overview == :: Warmthal's religious community has formally split. Both sides hold services, keep records, and claim the legitimate succession. Every legal document that requir": [
+   "r2s-religious_conversion-town-2"
+  ],
+  "== Systems/Defense == :: Offenders at Warmthal are arrested, tried and held, and each case is written into the court's lists, so people expect a hearing, not a beating.": [
+   "r2s-religious_conversion-town-2"
+  ],
+  "== Systems/Defense == :: Bring a complaint at Ripaplenum and it goes to a court and gets a hearing, not a favour.": [
+   "r2s-slave_revolt-town-2"
+  ],
+  "== Systems/Defense == :: Zhongba's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2s-slave_revolt-town-3"
+  ],
+  "== Systems/Defense == :: Schwarzsteig's court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.": [
+   "r2s-wartime-town-3"
+  ]
+ }
+}

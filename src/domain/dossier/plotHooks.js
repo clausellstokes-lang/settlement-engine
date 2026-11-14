@@ -40,8 +40,8 @@ const EVENT_LABELS = Object.freeze({
   religious: 'Religious',
   magical: 'Magical',
   demographic: 'Demographic',
-  exile_return: 'Exile & Return',
-  occupation_infiltration: 'Occupation',
+  exile_return: 'Occupation Legacy',
+  occupation_infiltration: 'Infiltration Fear',
 });
 
 export const PLOT_HOOK_CATEGORIES = Object.freeze({

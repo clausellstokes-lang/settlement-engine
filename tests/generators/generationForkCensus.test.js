@@ -237,6 +237,13 @@ const CENSUS_ROW = {
 /** The seed the mint census sees minted FOUR times, and the vias that convict a blind wrapper. */
 const REPEATED_SEED = `${CENSUS_ROW._seed}::generatePower::power-structure`;
 const REPEATED_VIAS = ['fork', 'direct', 'direct', 'direct'];
+// RE-KEYED 2026-11-12 (COHERENCE-UPKEEP, ruling 6, 05ec9b601): the stores are laid by at the label's share on a
+// SECOND call of the stores' writer after prosperity (economicState.js :: generateEconomicState), and that writer's one
+// draw is the label-keyed fork `food.cropFortune`, so the probe row mints it twice, both by fork: the second call draws
+// the same crop fortune BY DESIGN (no stream moves). Measured by A5: repeatedSeeds = cropFortune x2 [fork|fork] ;
+// power-structure x4. The power-structure quartet is unmoved.
+const STORES_SEED = `${CENSUS_ROW._seed}::generateEconomy::food.cropFortune`;
+const STORES_VIAS = ['fork', 'fork'];
 // 2026-10-01, the urban band (ODQ §934.86): 96 -> 107 pickVariant calls on the probe row (+11, measured; the institution
 // registry rebuild changed what the same seed assembles); every call is still a real choice with its own seed.
 // 2026-10-31, tension variety (GS-1, ODQ §934.101): 107 -> 69 pickVariant calls and 6 -> 15 external fnv1a32 calls
@@ -288,6 +295,15 @@ const PICK_VARIANT_CALLS = 31;
 // RE-KEYED 2026-11-11 (COHERENCE-QUARREL cure 2): 15 -> 17, MEASURED. The probe row's two quarrels each
 // take one fnv1a32 for their plot hook (power/conflicts.js :: buildConflictPlotHooks: one hash of the seed, the
 // parties and the issue picks the hook and the offer's wording, draw-free). The register's fnv1a32External moves with it.
+// RE-KEYED 2026-11-12 (COHERENCE-UPKEEP, ruling 6, 05ec9b601): 17 -> 18, MEASURED by A6 and traced: the stores' second
+// call (above, STORES_SEED) composes the foodways line again, one more fnv1a32 (domain/foodways.js ::
+// composeFoodwaysLine, `foodways|<identity>`). The register's fnv1a32External moves with it.
+// RE-KEYED 2026-11-12 (COHERENCE-UPKEEP, ruling 4 under (A), c19e96e23): 18 -> 42, MEASURED by A6 and traced: the
+// services keep each bought row by a draw-free roll after the seeded ones, one fnv1a32 of
+// `<seed>|upkeep|<institution>|<service>` per bought row evaluated while the place's share is below 1
+// (services/serviceRollMaterialization.js :: upkeepRoll). The probe row is Comfortable, so every bought row rolls:
+// 24 calls, counted on the probe row by a counter in a scratch tree (lodging 3, food 4, equipment 9, healing 3,
+// transport 3, commercial legal 2; every row kept). The register's fnv1a32External moves with it.
 // RE-KEYED 2026-11-13 (STYLE-2-MERGE point 46, the COHERENCE-POWERS merge, the chair's ruling on STOP 46b): 17 -> 16,
 // MEASURED by A6 and CONFIRMED caller by caller (a probe recording each external fnv1a32 caller's first src frame on
 // this probe row, at 3575cf061 against the merge): buildConflictPlotHooks 2 = 2, composeFoodwaysLine 1 = 1,
@@ -296,7 +312,22 @@ const PICK_VARIANT_CALLS = 31;
 // 1 -> 0: the base's 'mutual_leverage::npc_town_watch>npc_town_hall' tie key is no longer resolved, the dual hat having
 // re-dealt the probe row's cast and ties. No call site left the code (no changed line under src names fnv1a32); the
 // figure is the probe row's runtime count. The register's fnv1a32External moves with it.
-const FNV_EXTERNAL_CALLS = 16;
+// RE-KEYED 2026-11-14 (UPKEEP-10, THE MERGE of lane/integration-2026-11-07 at 976db5b19 into the defence lane): 24,
+// MEASURED by A6 at the merged tree and attributed caller by caller (a scratch dump of the hashed strings): foodways 3,
+// fingerprintPowerEconomyInput 6, upkeep rolls 6, the tie prose 7, the faction conflicts 2. THE TWO SIDES' CAUSES: the
+// line's 17 -> 16 above (resolveTieKey 1 -> 0); the lane's own 42 was never re-keyed after it moved, and measures 25 at
+// the lane's tip f943c9772, bisected on its first parent: 42 -> 24 at 44cddb372 (UPKEEP-5 F2: a house's own service is
+// never scaled, so 18 bought rows no longer roll: upkeep 24 -> 6), 24 -> 25 at 0c950f06c (UPKEEP-5 R3: one more
+// composeFoodwaysLine, foodways 2 -> 3). The merge: 25 - 1 = 24, no third cause. The register moves with it.
+// RE-KEYED 2026-11-14 (JOIN-3, THE TRUE JOIN on lane/join-2026-11-14 at 7d12b40cb; the book's 2h.7 (c): a FALL with its caller
+// named): 24 -> 23, MEASURED by A6 at the joined tree and attributed BY IDENTITY (a probe dumping each external fnv1a32 string
+// with its first src frame, at the joined tree, the line 976db5b19 and every lane's merged tip): foodways 3 and the upkeep rolls
+// 6 are the defence lane's strings exactly (its tip 26474cda9: 24); the tie prose's per-archetype offset
+// (power/relationshipArchetypes.js, via people/ties.js :: drawTies) 6 is the powers lane's strings exactly (its tip 77d7bcace:
+// 15; its cast re-deals the probe row's ties: 'Adela Hoffmann>Wolfger Dietrich::peer_rivalry' and 'Wolfger Dietrich>Volker
+// Becker::mutual_leverage' gone, 'Adela Hoffmann>Gunter Schwarz::peer_rivalry' new); fingerprintPowerEconomyInput 6 and the
+// faction conflicts 2 the line's. No other lane moves a string. The register moves with it.
+const FNV_EXTERNAL_CALLS = 23;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
@@ -553,7 +584,17 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     // 2026-11-09, MERGE-TRAIN record 9 (the ALLEGIANCE-CAR4 merge, this arm's census at the merged tree): 118 -> 138, car 4's A9
     // (03ff59084, people/goals.js :: dealGoals): one `people-goals` family fork and one keyed fork per card on this row (+20);
     // direct 4, foreign 0. Re-keyed to the measured figure, never above it.
-    expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(138);
+    // 2026-11-14, POWERS-15 on the powers lane (the chair's ruling: a fork a lane adds is declared or it is a finding; a
+    // RISE goes back to the lane, the merge book's 2h.7 (c)): 138 -> 139, measured by this arm at the lane's tip 0eb30242f
+    // (the line at 976db5b19 reads 134 under the same bound). DECLARED by COHERENCE-POWERS-6 item 1 (9fae351e1, the
+    // chair's ruling of 2026-11-13: a noble power that does not govern is faced by a lord of that body, minted and
+    // named), whose commit names the five: the row's Landed Gentry is faced by a minted lord, and the five new mints are
+    // all keyed to that card, none lost and no other moved (line -> tip, seed by seed): people-powers::mint::landed_gentry
+    // (the lord's own mint), people-powers::people-hooks::npc_power_landed_gentry (its hook),
+    // people-allegiance::npc_power_landed_gentry (its allegiance), people-ties::npc_power_landed_gentry (its tie),
+    // people-goals::npc_power_landed_gentry (its goals). Total 139, direct 4, via fork 135, foreign 0. The control hash
+    // (C1) moves with the generator master's re-record through the signed door at the join, not on this lane.
+    expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(139);
     expect(viaFork.length, 'STOP-6: mints via the re-implemented fork').toBeGreaterThanOrEqual(31);
     expect(foreign.map((record) => record.seed), 'every minted seed is root-prefixed').toEqual([]);
   }, 120_000);
@@ -580,7 +621,10 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     expect(fresh.rows.length, 'anti-vacuity: the pair set is real before any equality is claimed').toBeGreaterThan(70);
     expect(fresh.steps.length, 'every registered step was perturbed').toBe(getStepOrder().length);
     // ALLEGIANCE-CAR1 (2026-11-08, J-2): 13 -> 12, MEASURED — corruptionPass, a drawing step, retired (its roll is the seam's)
-    expect(fresh.drawingSteps.length, 'steps that draw at all').toBe(12);
+    // R2-CODE-B-4 (ROUND THREE item 4, a DECLARED MOVE): 12 -> 13, MEASURED — resolveCrisisCast draws where an "Access to …"
+    // row was a famine's only lever house (record 375: never a lever): the cast's own rule mints its one temporary person,
+    // named on the step's own fork (rng.fork('resolveCrisisCast')), so no other step's stream moves.
+    expect(fresh.drawingSteps.length, 'steps that draw at all').toBe(13);
     process.stdout.write(`\n[A3e] corpus=${fresh.corpusRows} pairs=${fresh.rows.length}`
       + ` wall=${fresh.wallMs}ms drawingSteps=${fresh.drawingSteps.length}\n`);
 
@@ -684,7 +728,8 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     // [direct|direct|direct]; the fork-minted member of the quartet is exactly what the
     // re-implementation buys, so the via list alone convicts a mock that did not take.
     expect(bySeed.get(REPEATED_SEED), `${REPEATED_SEED} vias`).toEqual(REPEATED_VIAS);
-    expect(repeated.map(([seed]) => seed), 'exactly one seed is minted more than once').toEqual([REPEATED_SEED]);
+    expect(bySeed.get(STORES_SEED), `${STORES_SEED} vias`).toEqual(STORES_VIAS);
+    expect(repeated.map(([seed]) => seed), 'exactly these two seeds are minted more than once').toEqual([STORES_SEED, REPEATED_SEED]);
   }, 120_000);
 
   it('A6 — the hash channel: 69 distinct pickVariant seeds, sixteen external fnv1a32 calls, and two censuses disjoint by construction', () => {

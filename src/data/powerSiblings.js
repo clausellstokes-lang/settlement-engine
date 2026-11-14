@@ -23,10 +23,10 @@ export const BASELINE_CONFLICT_SIBLINGS = Object.freeze({
   // not guarantee. Each twin is the chair's ruling (R-G; recorded with its share in
   // docs/CENSUS_5_LANE_2026-11-04.md, "CENSUS-5b"); this site is a T lookup, so a twin moves only
   // the births whose record refuses the original. The militia captain's branch is reached with NO
-  // military institution, and the two market lines' branches with no market-named house.
+  // military institution, and the two market lines' branches with no market-named house. R2-CODE-A item 5 (P3): a twin names no office or house its site's facts (the roster's names) cannot verify.
   'The village militia captain is pushing for authority over disputes that the reeve used to handle.': Object.freeze([
     Object.freeze({ text: 'The village militia captain is pushing for authority over disputes that the reeve used to handle.', needs: Object.freeze(['militia']) }),
-    Object.freeze({ text: 'The strongest armed household is pushing for authority over disputes that the reeve used to handle.', twinOf: 'The village militia captain is pushing for authority over disputes that the reeve used to handle.', excludes: Object.freeze(['militia']) }),
+    Object.freeze({ text: 'The strongest armed household is pushing for authority over disputes the community used to settle for itself.', twinOf: 'The village militia captain is pushing for authority over disputes that the reeve used to handle.', excludes: Object.freeze(['militia']) }),
   ]),
   'The miller and the largest farming household are in dispute over prices and access.': Object.freeze([
     Object.freeze({ text: 'The miller and the largest farming household are in dispute over prices and access.', needs: Object.freeze(['institution: mill']) }),
@@ -42,7 +42,7 @@ export const BASELINE_CONFLICT_SIBLINGS = Object.freeze({
   ]),
   'The church wants approval rights over market day activities. The village reeve disagrees.': Object.freeze([
     Object.freeze({ text: 'The church wants approval rights over market day activities. The village reeve disagrees.', needs: Object.freeze(['market']) }),
-    Object.freeze({ text: 'The church wants approval rights over who may trade and when. The village reeve disagrees.', twinOf: 'The church wants approval rights over market day activities. The village reeve disagrees.', excludes: Object.freeze(['market']) }),
+    Object.freeze({ text: 'The most devout households want a say over who may trade and when, and not everyone here agrees.', twinOf: 'The church wants approval rights over market day activities. The village reeve disagrees.', excludes: Object.freeze(['market']) }),
   ]),
 });
 

@@ -886,7 +886,9 @@
     {
       "id": "plague_onset#2.secret",
       "text": "The quarantine order they're enforcing doesn't apply to shipments from a specific merchant they have a financial relationship with",
-      "needs": [],
+      "needs": [
+        "market"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -894,7 +896,9 @@
     {
       "id": "plague_onset#2.stakes",
       "text": "That merchant's last shipment arrived four days ago",
-      "needs": [],
+      "needs": [
+        "market"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false

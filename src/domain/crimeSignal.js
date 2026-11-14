@@ -72,3 +72,26 @@ export function withoutCriminalGuild(text) {
     .replace(/on (?:the )?thieves['’]? guild payroll/gi, 'on the payroll of a powerful outside interest')
     .replace(new RegExp(CRIMINAL_GUILD, 'gi'), 'a powerful outside interest')));
 }
+
+/**
+ * A minted face's secret (COHERENCE-POWERS-7, the brief's leftover 1; R2-CODE-A item 7's rule, given its home
+ * here beside F4's): a thieves' or criminal guild the town does not have is never named. With no crime at all,
+ * F4's "a powerful outside interest" (`withoutCriminalGuild`); where crime stands without such a guild, "the
+ * local underworld". A criminal power's NAME is never written in: a power can be hidden by hand, and a name a
+ * user can hide is never written into a stored, composed sentence (the law of record 331). A town whose crime
+ * faction, criminal powers or criminal houses include a thieves' or criminal guild keeps the line. Draw-free.
+ * @template T
+ * @param {T} text
+ * @param {CrimeSignal | null | undefined} signal the town's crime signal (`crimeSignalOf`)
+ * @param {string | null} [crimeFaction] the roster's crime faction by name, as `mergeNPCLists` reads it
+ * @returns {T}
+ */
+export function withTownsOwnUnderworld(text, signal, crimeFaction = null) {
+  if (typeof text !== 'string' || !new RegExp(CRIMINAL_GUILD, 'i').test(text)) return text;
+  const named = [crimeFaction, ...(signal?.factions || []), ...(signal?.houses || [])];
+  if (named.some((n) => /thie|criminal guild/i.test(String(n || '')))) return text;
+  if (!crimeFaction && !signal?.present) return withoutCriminalGuild(text);
+  return /** @type {T} */ (/** @type {unknown} */ (text
+    .replace(/on (?:the )?thieves['’]? guild payroll/gi, 'on the payroll of the local underworld')
+    .replace(new RegExp(CRIMINAL_GUILD, 'gi'), 'the local underworld')));
+}

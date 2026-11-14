@@ -1,0 +1,9 @@
+ FAIL  tests/data/foundingWorldBones.test.js > every Founding World keeps every promise on its card > every promise holds in at least 19 of 20 forks at the card's dials
+ FAIL  tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A1 reconstructs the exact four-family AO-0 corpus twice from one build
+ FAIL  tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A2 rejects malformed selector axes while retaining nulls and projected nested gaps
+ FAIL  tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A3 freezes all 58 identities counts bytes digest and movement polarities
+ FAIL  tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A5 closes twelve pulse-history records and pins overlapping headline aliases
+ FAIL  tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A6 reaches the regional audit log while proving its selected prose zero
+ Test Files  2 failed | 26 passed (28)
+      Tests  6 failed | 527 passed (533)
+EXIT 1

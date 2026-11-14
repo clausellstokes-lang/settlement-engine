@@ -15,7 +15,7 @@ import { generateConflicts } from '../powerGenerator.js'; import { resolveFactio
 // (step 3) rolled them 16 steps ago with an empty name and stashed the
 // rng-derived choice in each entry's `summaryRoll`; we re-render here now that
 // the name exists.
-import { renderStressSummary } from '../stressNarrative.js'; import { factsOf } from '../../domain/facts/factsOf.js'; // CENSUS-2c: one line, so no cited line moves
+import { renderStressSummary } from '../stressNarrative.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { STRESS_TYPE_SIBLINGS } from '../../data/stressTypes.js'; // CENSUS-2c: one line, so no cited line moves (W2-FIX-DATA-7: the catalogue cells' declared sets join it)
 import { generatePressureSentence, generateArrivalScene, generateCoherence } from '../narrativeGenerator.js';
 import { generateDefenseProfile } from '../defenseGenerator.js';
 import { settleCrimeLinesToSignal } from '../safetyProfile.js';
@@ -217,6 +217,13 @@ registerStep('assembleSettlement', {
       if (e && typeof e === 'object'
           && Object.prototype.hasOwnProperty.call(e, 'summaryRoll')) {
         e.summary = renderStressSummary(e.type, settlement.name, e.summaryRoll, e.direction, factsOf(settlement)); // WIRING-W0: the entry's own direction; CENSUS-2c: declared sentences resolve (stressNarrative.js :: STRESS_SUMMARY_SIBLINGS) — MERGE-R2: both
+        // W2-FIX-DATA-7 (CENSUS-2 kind a; brief 5's ruling: this function only): the catalogue's own hook and note, stored
+        // on the entry, resolve through their declared sets (stressTypes.js :: STRESS_TYPE_SIBLINGS), draw-free. A hook
+        // with no admitted twin is kept and noted (the template the cast fills); a note with none is left off (nothing
+        // false is printed in its place). The hook stays the template: a twin carries no holder's name.
+        const cellOpts = { facts: factsOf(settlement), poolId: 'stressTypes:STRESS_TYPE_SIBLINGS', surface: 'crisis', drawKind: /** @type {'T'} */ ('T') };
+        if (typeof e.crisisHook === 'string') e.crisisHook = resolveSibling(e.crisisHook, STRESS_TYPE_SIBLINGS, cellOpts);
+        if (typeof e.viabilityNote === 'string') { const note = resolveSibling(e.viabilityNote, STRESS_TYPE_SIBLINGS, { ...cellOpts, dropRefused: true }); if (note == null) delete e.viabilityNote; else e.viabilityNote = note; }
         delete e.summaryRoll;
       }
     }
@@ -232,7 +239,7 @@ registerStep('assembleSettlement', {
   // drawn (its relationship branch reads them; it runs on its own named child, so the move shifts
   // no other draw).
   settlement.arrivalScene     = inAssemblySubstream(rng, 'arrival-scene', () => generateArrivalScene(settlement));
-  settlement.defenseProfile   = generateDefenseProfile(settlement);
+  settlement.defenseProfile   = generateDefenseProfile(settlement, keepOfRecord(settlement.economicState)); settlement.economicState = withGuardPaidFromDefence(settlement); // COHERENCE-UPKEEP-5 (R3): pay reads the standing label; COHERENCE-UPKEEP-6 (ruling A): the guard's purse clause from the profile just written
 
   // The final-economy pass already proved that power consumed the final
   // prosperity/safety/food tuple. Assert that proof before applying the one
@@ -476,3 +483,20 @@ registerStep('assembleSettlement', {
   // GENERATION-stamped twins the stressor promotion just minted.
   return { settlement: reapplyEventConditions(promoteStressorsToConditions(normalizeSettlement(settlement))) };
 });
+import { keepOfRecord } from '../../domain/facts/keep.js'; // at the END on purpose: this file's writes are cited by LINE (COHERENCE-UPKEEP)
+import { keptGuardLine, purseWordOfBand } from '../safetyProfile.js'; import { economicSurvivalBandOf } from '../../domain/display/defenseScoreBands.js'; import { standingLabelOf } from '../../domain/facts/keep.js'; // at the END for the same reason (COHERENCE-UPKEEP-6)
+
+/**
+ * THE GUARD ASSESSMENT SAYS WHAT THE TOWN CAN PAY FROM ONE HOME (COHERENCE-UPKEEP-6, the chair's ruling A on the
+ * third read): the Economic Survival band of the defence profile just written (`economicSurvivalBandOf`), so it is
+ * resolved here, after the profile. It reads defence; nothing defence reads is written by it (the power
+ * fingerprint reads the safety label, not this text). At the END of the file so no cited line moves.
+ * @param {any} settlement @returns {any} the economic state, its guard assessment resolved
+ */
+function withGuardPaidFromDefence(settlement) {
+  const es = settlement.economicState;
+  const safety = es?.safetyProfile;
+  if (!safety || typeof safety.guardEffectivenessDesc !== 'string') return es;
+  const pay = purseWordOfBand(economicSurvivalBandOf(settlement), standingLabelOf(es));
+  return { ...es, safetyProfile: { ...safety, guardEffectivenessDesc: keptGuardLine(safety.guardEffectivenessDesc, settlement.institutions || [], pay, { forceScore: settlement.defenseProfile?.scores?.military, tradeDependencies: es.tradeDependencies }) } }; // UPKEEP-8: the guard line's two readings of the record
+}

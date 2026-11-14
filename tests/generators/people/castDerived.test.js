@@ -46,7 +46,9 @@ const startsWithAny = (reason, list) => list.some((r) => reason === r || reason.
 function relationFor(row) {
   const r = row.reason;
   const stake = (want) => (p, f, k) => want.includes(k);
-  if (startsWithAny(r, [CAST_REASONS.bruntLeast, ...Object.values(CAST_REASONS.bruntBase)])) return stake(['loses', 'split', undefined]);
+  // re-keyed by identity (R2-CODE-B round 3, ruling (c)): the brunt's member rows read "the only one in …" in a house of
+  // one and "one of …" beside the lever; the same rows, drawn from the same house.
+  if (startsWithAny(r, [CAST_REASONS.bruntLeast, CAST_REASONS.bruntOnly, CAST_REASONS.bruntMember, ...Object.values(CAST_REASONS.bruntBase)])) return stake(['loses', 'split', undefined]);
   // re-keyed by identity (SW-9b-B E-3, the chair's ruling 02:2x): the backed instigator is drawn from a power that gains.
   if (startsWithAny(r, [CAST_REASONS.instigatorGains, CAST_REASONS.instigatorBacked, CAST_REASONS.exploiterTrait, CAST_REASONS.exploiterPower, CAST_REASONS.collaboratorAmbition])) return stake(['gains']);
   if (startsWithAny(r, [CAST_REASONS.waverer])) return stake(['split']);

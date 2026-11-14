@@ -329,6 +329,9 @@ export function reconcilePowerStructure(
   powerStructure.governingName = projected.governingName;
   powerStructure.government = projected.government;
   powerStructure.publicLegitimacy = projected.publicLegitimacy;
+  // POWERS-14 (the chair's ruling of 2026-11-14, NEW1): the stability label's defence word reads the record's readiness
+  // label, which only this replay holds (`defenseLabel`); the first pass's label stood before and could contradict it
+  powerStructure.stability = projected.stability;
   powerStructure.factionRelationships = projected.factionRelationships;
   powerStructure.powerProjectionVersion = projected.powerProjectionVersion;
   powerStructure.economyInputFingerprint =

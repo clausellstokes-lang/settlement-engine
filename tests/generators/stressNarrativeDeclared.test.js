@@ -114,6 +114,44 @@ describe('wartime (loss): "Food prices have doubled." needs hunger (CENSUS-2d un
   });
 });
 
+describe('wartime (loss): no caravans pass through an isolated place (R2-CODE-B-6 item 0; the chair\'s ruling)', () => {
+  const CARAVANS = 'Supply caravans pass through on crown requisition.';
+  /** a war on a deficit food record, on the trade route `route` */
+  const warOn = (route) => ({ ...recordOf(['wartime'], 'deficit'), config: { tradeRouteAccess: route } });
+  it('an isolated place\'s loss text leaves the caravans sentence out (r2s-wartime-thorp-1, -hamlet-3)', () => {
+    const text = renderStressSummary('wartime', 'Avel', { profit: false }, undefined, factsOf(warOn('isolated')));
+    // anchored: the next assertion pins the whole paragraph, the clause left out and its neighbours joined by one space
+    expect(text).not.toContain(CARAVANS);
+    expect(text).toBe('Avel is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. Food prices have doubled. The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.');
+  });
+  it('the profit coin refused in an isolated place resolves to the same loss text, without the caravans', () => {
+    const text = renderStressSummary('wartime', 'Avel', { profit: true }, undefined, factsOf(warOn('isolated')));
+    // anchored: the next assertion pins the paragraph's head, the loss text's
+    expect(text).not.toContain(CARAVANS);
+    expect(text.startsWith('Avel is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. Food prices have doubled.')).toBe(true);
+  });
+  it('the guard town: a place on a road keeps the caravans sentence', () => {
+    for (const route of ['road', 'river', 'crossroads', 'port', 'mountain_pass']) {
+      expect(renderStressSummary('wartime', 'Avel', { profit: false }, undefined, factsOf(warOn(route)))).toContain(CARAVANS);
+    }
+  });
+  it('an isolated place on a fed record: the price line\'s twin ("the road") is left out too (the chair\'s ruling; r2s-wartime-thorp-1, -3)', () => {
+    const fed = { ...recordOf(['wartime'], 'secure'), config: { tradeRouteAccess: 'isolated' } };
+    const text = renderStressSummary('wartime', 'Avel', { profit: false }, undefined, factsOf(fed));
+    // anchored: the next assertion pins the whole paragraph, both clauses left out and its neighbours joined by one space
+    expect(text).not.toContain('the road');
+    expect(text).toBe('Avel is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.');
+  });
+  it('the guard town: a fed place on a road keeps the twin', () => {
+    const fed = { ...recordOf(['wartime'], 'secure'), config: { tradeRouteAccess: 'road' } };
+    expect(renderStressSummary('wartime', 'Avel', { profit: false }, undefined, factsOf(fed))).toContain('The army has the carts and the road, and the fields are short of hands.');
+  });
+  it('an unread record (no facts, or no route) keeps the sentence as it always read', () => {
+    expect(renderStressSummary('wartime', 'Avel', { profit: false })).toContain(CARAVANS);
+    expect(renderStressSummary('wartime', 'Avel', { profit: false }, undefined, factsOf(recordOf(['wartime'], 'deficit')))).toContain(CARAVANS);
+  });
+});
+
 describe('slave_revolt: the summary presumes only slaves and a revolt (CENSUS-2d unit 1; the chair\'s answer 2, R-U)', () => {
   it('names no slave market (no fact home; listed under "needs a home")', () => {
     const text = renderStressSummary('slave_revolt', 'Avel', null, undefined, factsOf(recordOf(['slave_revolt'], 'secure')));

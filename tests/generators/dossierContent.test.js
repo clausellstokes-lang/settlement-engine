@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
-import { INSTITUTION_DESC_VARIANTS } from '../../src/data/institutionDescVariants.js';
+import { DESC_VARIANT_SIBLINGS, INSTITUTION_DESC_VARIANTS } from '../../src/data/institutionDescVariants.js';
 import { INLAND_DESCRIPTIONS } from '../../src/data/inlandDescriptions.js';
 import { HISTORY_DESC_VARIANTS } from '../../src/data/historyDescVariants.js';
 import { HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
@@ -111,7 +111,9 @@ describe('institution desc variety at generation (draw-free fnv select)', () => 
         // whole pool speaks of water takes the row's authored inland text (src/data/inlandDescriptions.js).
         const noun = tierNounFor(s.tier);
         const inland = INLAND_DESCRIPTIONS[key];
-        const pool = [...canonsFor(inst.category, inst.name), ...variants, ...(inland ? [inland] : [])]
+        const drawn = [...canonsFor(inst.category, inst.name), ...variants, ...(inland ? [inland] : [])];
+        // W2-FIX-DATA (2026-11-13): a member the record refuses resolves to its declared twin (DESC_VARIANT_SIBLINGS), an authored line of the same pool
+        const pool = [...drawn, ...drawn.flatMap((t) => (DESC_VARIANT_SIBLINGS[t] || []).filter((l) => l.twinOf === t).map((l) => l.text))]
           .map((line) => speakTierNoun(line, noun));
         expect(pool, `${key} desc from its pool`).toContain(inst.desc);
       }
@@ -201,14 +203,14 @@ describe('AMENDMENT B — sentence-start faction interpolations are capitalised 
   it('a lowercase faction value opens a sentence-start pool entry capitalised', () => {
     const r = { name: 'Ashholt', govFaction: 'the town council', topFaction: 'the merchant guild', commodity: 'grain', compound: { criminalEffective: 70, militaryEffective: 20, economyOutput: 40 } };
     // famine[4] and the insurgency compound[0] both OPEN a sentence on govFaction.
-    expect(PRESSURE_SENTENCES.famine(r)[4]).toMatch(/^The town council of Ashholt/);
+    expect(PRESSURE_SENTENCES.famine(r)[4].text).toMatch(/^The town council of Ashholt/); // R2-CODE-A-3 (#40): famine[4] is now a declared row (needs a granary); its text is read
     expect(PRESSURE_SENTENCES.insurgency(r)[0]).toMatch(/have stopped obeying\. The town council still holds/); // W4 second seat: re-keyed to the re-worded line (row 217)
     // indebted[1] OPENS on topFaction.
     expect(PRESSURE_SENTENCES.indebted(r)[1]).toMatch(/^The merchant guild took the loans/);
   });
   it('capFirst is idempotent — an already-capitalised faction value is unchanged', () => {
     const r = { name: 'Ashholt', govFaction: 'The Governing Council', commodity: 'grain' };
-    expect(PRESSURE_SENTENCES.famine(r)[4]).toMatch(/^The Governing Council of Ashholt/);
+    expect(PRESSURE_SENTENCES.famine(r)[4].text).toMatch(/^The Governing Council of Ashholt/); // R2-CODE-A-3 (#40): as above
   });
   it('mid-sentence faction interpolations stay lowercase (not over-capitalised)', () => {
     const r = { name: 'Ashholt', govFaction: 'the town council', commodity: 'grain' };
