@@ -20,6 +20,8 @@
  *     church" and no church), prints NO state (`NO_STATE_SHOWN`): the roads to that house are cut, and the siege's
  *     own note stands on the tab (W2-C-LEAVES-4 item 1, the chair's ruling of 2026-11-13; no new state word);
  *   · a port's sea grounds are not field work a land siege takes (`seaOpenTo`): its fishing keeps its state.
+ *   · outside a siege too, a chain whose only house is reached through an "Access to ..." row prints no state on its
+ *     card: it is not run here (`chainStateShown`, W2-C-LEAVES-7 item 9, record 375).
  *
  * Pure: no randomness, no clock, no write.
  */
@@ -45,9 +47,9 @@ const SHOWN_WORKING = new Set(['running', 'operational', 'entrepot']);
 /**
  * @param {unknown} chain one of `economicState.activeChains`
  * @param {unknown} record the settlement record
- * @returns {string} the state the card prints (a key of the flow card's status table)
+ * @returns {string} the state a crisis leaves (a key of the flow card's status table); the card prints `chainStateShown`
  */
-export function chainStateShown(chain, record) {
+export function chainCrisisStateShown(chain, record) {
   const c = chain && typeof chain === 'object'
     ? /** @type {{ status?: unknown, resourceInputKey?: unknown, entrepot?: unknown, needKey?: unknown }} */ (chain)
     : {};
@@ -68,6 +70,21 @@ export function chainStateShown(chain, record) {
     if (runsOnlyThroughAccess(chain, record)) return NO_STATE_SHOWN;
   }
   return status;
+}
+
+/**
+ * THE STATE A CHAIN CARD PRINTS (W2-C-LEAVES-7 item 9, record 375): the crisis state above, and NO state where the
+ * chain's only house is reached through an "Access to ..." row, siege or none: it is not run here (a River Mill card
+ * printed "✓ Running" where the only mill is "Access to external mill", r2r-hamlet-18, -29). The goods pills read the
+ * crisis state alone (`chainCrisisStateShown`): the land a chain's raw good comes from is worked here though its mill
+ * is a neighbour's (a thorp's grain fields beside "Access to external mill" still grow grain).
+ * @param {unknown} chain one of `economicState.activeChains`
+ * @param {unknown} record the settlement record
+ * @returns {string}
+ */
+export function chainStateShown(chain, record) {
+  const state = chainCrisisStateShown(chain, record);
+  return SHOWN_WORKING.has(state) && runsOnlyThroughAccess(chain, record) ? NO_STATE_SHOWN : state;
 }
 
 /**
@@ -94,7 +111,7 @@ const SEA_GROUNDS = new Set(['fishing_grounds', 'deep_harbour']);
 function runsOnlyThroughAccess(chain, record) {
   const houses = chain && typeof chain === 'object' && Array.isArray(/** @type {{ processingInstitutions?: unknown }} */ (chain).processingInstitutions)
     ? /** @type {ReadonlyArray<unknown>} */ (/** @type {{ processingInstitutions: unknown[] }} */ (chain).processingInstitutions) : [];
-  const roster = liveInstitutionNames(/** @type {any} */ (record)).map((n) => n.toLowerCase());
+  const roster = liveInstitutionNames(/** @type {Parameters<typeof liveInstitutionNames>[0]} */ (record)).map((n) => n.toLowerCase());
   const heads = houses.map((h) => String(h).toLowerCase().split(/[\s(]/)[0]).filter(Boolean);
   const met = (/** @type {boolean} */ access) => heads.some((w) => roster.some((n) => ACCESS_ONLY.test(n) === access && n.includes(w)));
   return heads.length > 0 && met(true) && !met(false);
@@ -136,3 +153,20 @@ export function serviceStateShown(serviceHouses, impairedHouses) {
   const houses = (serviceHouses || []).map((h) => String(h).toLowerCase());
   return houses.length > 0 && houses.every((h) => impairedHouses.has(h)) ? 'impaired' : 'operational';
 }
+
+/**
+ * THE CHAIN AS ITS CARD PRINTS IT (W2-C-LEAVES-7 item 9: the Economics tab's own reader, `EconomicsTab.jsx ::
+ * shownStateOf`, moved here whole, so the tab, the Foundry journal's chain line and the PDF's chain flow read ONE
+ * reader): the state a crisis left (`chainStateShown`) and the magic note whose tradition the town holds
+ * (`magicProvisionShown.js :: magicNoteShown`, W2-C-LEAVES-5 item 5). The record is not touched: the chain itself is
+ * returned where nothing differs, else a copy.
+ * @template {{ status?: unknown, magicNote?: unknown }} C
+ * @param {C} chain one of `economicState.activeChains`
+ * @param {unknown} record the settlement record
+ * @returns {C & { status?: unknown, magicNote?: unknown }}
+ */
+export function chainAsShown(chain, record) {
+  const status = chainStateShown(chain, record), magicNote = magicNoteShown(chain, record);
+  return status === chain?.status && magicNote === chain?.magicNote ? chain : { ...chain, status, magicNote };
+}
+import { magicNoteShown } from './magicProvisionShown.js';

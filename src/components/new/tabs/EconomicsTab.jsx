@@ -116,7 +116,7 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
   // and white-screen the whole tab — in the live generate flow this section is
   // rendered without an error boundary around it. Filter to entries we can
   // safely .toLowerCase() before the .some/.find matching below.
-  const safeIncome = incomeSources.filter(inc => typeof inc?.source === 'string'); const chains = chainsAsRead.map(c => shownStateOf(c, town)); // W2-C-LEAVES item 4(c): the state a crisis left (chainStateShown.js)
+  const safeIncome = incomeSources.filter(inc => typeof inc?.source === 'string'); const chains = chainsAsRead.map(c => chainAsShown(c, town)); // W2-C-LEAVES item 4(c): the state a crisis left (chainStateShown.js)
   const impairedCount   = chains.filter(c => c.status === 'impaired').length;
   const vulnerableCount = chains.filter(c => c.status === 'vulnerable').length;
   const entrepotCount   = chains.filter(c => c.entrepot).length;
@@ -846,15 +846,9 @@ function NeedsNotMet({ needs, mobile }) {
  * the carrier, the food record) and the Institutions tab's impaired houses (`tabHelpers.js :: computeChainSets`); the
  * record is not touched. At the end of the file, so no line-keyed row above moves.
  */
-import { chainStateShown, serviceStateShown } from '../../../domain/display/chainStateShown.js';
+import { chainAsShown, serviceStateShown } from '../../../domain/display/chainStateShown.js'; // W2-C-LEAVES-7 item 9: the card's reader lives in the leaf
 import { chainNeedLine } from '../../../domain/display/chainNeedShown.js'; // W2-C-LEAVES-6 item 6
-import { magicNoteShown } from '../../../domain/display/magicProvisionShown.js'; // W2-C-LEAVES-5 item 5
 import { computeChainSets } from '../tabHelpers.js';
-/** @param {any} chain @param {unknown} town @returns {any} the chain with the state its card prints */
-function shownStateOf(chain, town) {
-  const status = chainStateShown(chain, town), magicNote = magicNoteShown(chain, town); // W2-C-LEAVES-5 item 5: the note's tradition held
-  return status === chain?.status && magicNote === chain?.magicNote ? chain : { ...chain, status, magicNote };
-}
 /** @param {unknown} town @returns {Set<string>} the houses the Institutions tab marks impaired, lower case */
 function impairedHousesOf(town) {
   return new Set([...computeChainSets(/** @type {any} */ (town) || {}).impaired].map((h) => String(h).toLowerCase()));

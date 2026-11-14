@@ -39,6 +39,7 @@ import { institutionDisplayName } from '../domain/display/institutionDisplayName
 import { resourceDisplayName } from '../domain/display/resourceDisplayName.js';
 import { tradeListsAsPrinted, revenuesOffTheLists } from '../domain/display/tradeListDisplay.js';
 import { foodwaysLineOf } from '../domain/foodways.js';
+import { chainAsShown } from '../domain/display/chainStateShown.js';
 import {
   overviewHeadline, powerHeadline, economicsHeadline, defenseHeadline,
   servicesHeadline, resourcesHeadline, viabilityHeadline, historyHeadline,
@@ -326,8 +327,9 @@ function economicsPage(vm) {
       `- ${esc(label(s.source) || s.source)}: ${esc(Math.round(s.percentage))}%`)) : null,
     // CENSUS-3c (R-P 2): the revenues that left the trade lists, where the record holds their fact.
     revenuesOffTheLists(vm.raw).length ? kv('Also earned (no share recorded)', revenuesOffTheLists(vm.raw).map((r) => r.text).join(', ')) : null,
-    (e.chains || []).length ? md('', '## Supply chains', e.chains.map(c =>
-      `- **${esc(c.name)}** *(${esc(c.status)})*${c.description ? `: ${esc(c.description)}` : ''}`)) : null,
+    // W2-C-LEAVES-7 item 9: the state the tab's card prints (chainStateShown.js :: chainAsShown; none: no state written).
+    (e.chains || []).length ? md('', '## Supply chains', e.chains.map((c, i) => { const st = vm.raw?.economicState?.activeChains?.[i] ? String(chainAsShown(vm.raw.economicState.activeChains[i], vm.raw).status ?? '') : c.status;
+      return `- **${esc(c.name)}**${st ? ` *(${esc(st.replace(/_/g, ' '))})*` : ''}${c.description ? `: ${esc(c.description)}` : ''}`; })) : null,
   );
 }
 

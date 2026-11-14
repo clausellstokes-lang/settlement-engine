@@ -386,7 +386,7 @@ function pillAsPrinted(raw, side, settlement) {
     .map((i) => String(/** @type {{ name?: unknown }} */ (i)?.name ?? '').toLowerCase()).filter(Boolean);
   const own = roster.filter((n) => !n.startsWith('access to'));
   /** @param {{ status?: unknown }} c */
-  const works = (c) => WORKING_CHAIN_STATUSES.includes(String(chainStateShown(c, settlement)));
+  const works = (c) => WORKING_CHAIN_STATUSES.includes(String(chainCrisisStateShown(c, settlement)));
   const houseRe = MADE_GOOD_HOUSES.get(good);
   const makerStands = !!houseRe && own.some((n) => houseRe.test(n));
   const grounds = TRADE_GOOD_GROUNDS.get(good) || [];
@@ -436,7 +436,7 @@ function landFailed(settlement, grounds) {
 function rawWorkedNow(settlement, keys, item) {
   if (!chainWorksResource(settlement, keys, item) || landFailed(settlement, keys)) return false;
   const chains = chainsWorking(settlement, keys, item);
-  return chains.length === 0 || chains.some((c) => WORKING_CHAIN_STATUSES.includes(String(chainStateShown(c, settlement))));
+  return chains.length === 0 || chains.some((c) => WORKING_CHAIN_STATUSES.includes(String(chainCrisisStateShown(c, settlement))));
 }
 
 /** The outputs an entrepôt offers as a house's service (a bank, a warehouse, a market), not goods carried through. */
@@ -503,7 +503,7 @@ export function exportsAsPrinted(settlement) {
     .filter((x) => x !== null && !seen.has(fold(tradeMarkOf(x).label)) && !!seen.add(fold(tradeMarkOf(x).label)))
     .map(String);
 }
-import { chainStateShown, failedGroundsOf } from './chainStateShown.js';
+import { chainCrisisStateShown, failedGroundsOf } from './chainStateShown.js';
 import { chainCarrierOf } from '../facts/chainCarrier.js';
 
 /**
