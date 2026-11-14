@@ -79,8 +79,14 @@ function isGoodsList(sentence, goods) {
     named += 1;
     rest = rest.split(good).join(' ');
   }
-  return named > 0 && rest.replace(/[\s,;·|.]+/g, '') === '';
+  return named > 0 && rest.replace(PAGE_TRADE_MARKS, ' ').replace(/[\s,;·|.]+/g, '') === '';
 }
+/**
+ * The trade marks the lists print after a good (`domain/display/tradeListDisplay.js :: tradeMarkOf`; the transit mark the
+ * Economics tab's reader adds to an entrepôt's carried good, `pillAsPrinted`, which the journal's row reads since
+ * W2-C-LEAVES-7 item 8): no words of a sentence. Any other bracket is still read.
+ */
+const PAGE_TRADE_MARKS = /\((?:transit|naval route only|taxed by occupation)\)/gi;
 
 /** @param {unknown} settlement @returns {string[]} the export goods, longest first */
 function exportGoodsOf(settlement) {
