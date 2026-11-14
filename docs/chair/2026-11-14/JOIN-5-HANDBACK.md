@@ -34,11 +34,13 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF: none so far.
 | (g) | THE CORPUS'S DOOR at b4dad83e4 | `node scripts/generate-dossier-state-prose.mjs --check` | — | — | — | **exit 0**: 69 state blocks / 2951 variants verified; the census not stale, no leaf stale; nothing re-taken, nothing rebuilt |
 | 5 | w2-c-leaves-2026-11-13 | 5f95bf473 (16:04) | 9ac076d5e (JOIN-4 merge 7) | 770e20190 | none | — ((g) `--check` re-run after it: exit 0) |
 | 6 | r2-code-b-2026-11-13 | 2d418c67f (16:07) | a86646b84 (JOIN-4 point 1) | f7288399f | none | — (5 files staged: M10 the journal force tag, M12 the faith contender; law (h): the lane lands first) |
+| 7 | join-surfaces-2026-11-14 | f9d40e3de (16:12) | e6cb445db (JOIN-4 point 4) | f0ce831b5 | none | clean-both code: `src/foundry/journalPages.js`, `EconomicsTab.jsx` (§3) |
 
 ## 3. Every code resolution
 
 No code conflict so far. Merged clean though both sides moved them (each read in both sides' diffs from the merge base; independent lines; both stand):
 - Merge 4: `tests/lint/proseComposed.walker.test.js` (joined: relations 165 -> 169; lane: corpus 2950 -> 2951); `tests/lint/proseWiringCensus.walker.test.js` (joined: resolved 492 / unresolved 364, relations 169, the draft 19 · 5 · 83 · 43, SOURCE-UNRESOLVED 857; lane: variants 2951 and the histogram 4: 147, 5: 45); `tests/domain/corpusCureGuards.test.js`; `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md`. Each pin moved by one side at its own line: stands by (d); the close measures.
+- Merge 7: `src/foundry/journalPages.js` (joined: R2-CODE-B-13 M10 in `defensePage`, the force without its provenance tag; lane: SURFACES-3 in `economicsPage`, `tradePillWord` and `foodWordShown`); `src/components/new/tabs/EconomicsTab.jsx` (joined: W2-C-LEAVES-13 `plainGoodName` in `NeedsNotMet`; lane: SURFACES-3 `tradePillWord` on the pills, `carriersOf` moved whole to `domain/display/foodCarrier.js`).
 
 ## 4. THE LIST FOR THE CLOSE
 
