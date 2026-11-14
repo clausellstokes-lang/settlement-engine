@@ -1,0 +1,75 @@
+bytes: 212 377cc61daf0916fb… 211 eface6d093933170… at 6692efdda
+built x212 spec 212
+built x211 spec 211
+== the hand towns: expected results (server: gallery, link, import; client: the twin)
+FAIL | a01 | V7-4 key | hidden name as an object KEY
+       8 hit(s) in 8 responses; first: veil/gallery KEY s[0].institutionLoad.Thieves' guild (powerful) = "Thieves' guild (powerful)" ;; veil/link KEY s[0].institutionLoad.Thieves' guild (powerful) = "Thieves' guild (powerful)" ;; veil/import KEY s[0].institutionLoad.Thieves' guild (powerful) = "Thieves' guild (powerful)"
+FAIL | a02 | V7-4 join | hidden house's id as a join (from / to)
+       8 hit(s) in 8 responses; first: veil/gallery value $.economicState.activeChains[0].links[0].from = "institution.thieves_guild_powerful" ;; veil/link value $.economicState.activeChains[0].links[0].from = "institution.thieves_guild_powerful" ;; veil/import value $.economicState.activeChains[0].links[0].from = "institution.thieves_guild_powerful"
+FAIL | a03 | V7-4 id | hidden name spelled in an id beside a name
+       16 hit(s) in 8 responses; first: veil/gallery value $.economicState.activeChains[0].offers[0].id = "thieves_guild_powerful.fence" ;; veil/gallery value $.economicState.activeChains[0].offers[1].id = "thieves_guild_powerful.safehouse" ;; veil/link value $.economicState.activeChains[0].offers[0].id = "thieves_guild_powerful.fence"
+FAIL | a04 | V7-4 camel | hidden name camel-cased or squeezed
+       16 hit(s) in 8 responses; first: veil/gallery value $.npcs[0].title = "Voice of the ThievesGuildPowerful" ;; veil/gallery value $.economicState.primaryExports[1] = "thievesguildpowerful ledgers" ;; veil/link value $.npcs[0].title = "Voice of the ThievesGuildPowerful"
+PASS | a05 | (a) | hidden name anywhere else, any spelling (nested arrays, a JSON string, the list)
+FAIL | a06 | V7-4 qualifier, plural | the name without its bracketed qualifier, and its plural
+       56 hit(s) in 8 responses; first: veil/gallery value $.npcs[0].title = "Voice of the ThievesGuildPowerful" ;; veil/gallery value $.economicState.activeChains[0].links[0].from = "institution.thieves_guild_powerful" ;; veil/gallery value $.economicState.activeChains[0].offers[0].id = "thieves_guild_powerful.fence"
+FAIL | a07 | V7-5 | a renamed hidden house's birth name (list, trace target, trace cause)
+       14 hit(s) in 8 responses; first: veil/gallery value $.economicState.compound.inst.names[1] = "smuggling network" ;; veil/link value $.economicState.compound.inst.names[1] = "smuggling network" ;; veil/import value $.economicState.compound.inst.names[1] = "smuggling network"
+FAIL | a08 | V7-4 id | hidden 'Black market' in any spelling, outside the open 'Black market bazaar' and the schema key
+       8 hit(s) in 8 responses; first: veil/gallery value $.npcs[2].id = "npc.black_market_broker" ;; veil/link value $.npcs[2].id = "npc.black_market_broker" ;; veil/import value $.npcs[2].id = "npc.black_market_broker"
+PASS | a09 | (a) | a hidden name with % _ ' ( [ . *
+PASS | a10 | V7-1 | a hidden name with no ASCII letter, beside others
+PASS | a11 | (a) | hidden 'Assassins' guild' in the derived list
+FAIL | a12 | V7-7 | KEEP: the open house 'Black market bazaar' keeps its name
+       8 hit(s) in 8 responses; first: veil/gallery missing "Black market bazaar" ;; veil/link missing "Black market bazaar" ;; veil/import missing "Black market bazaar"
+FAIL | a13 | V7-7 | KEEP: the shown power 'Assassins' Guild' keeps its name
+       8 hit(s) in 8 responses; first: veil/gallery missing "Assassins' Guild" ;; veil/link missing "Assassins' Guild" ;; veil/import missing "Assassins' Guild"
+PASS | a14 | keep | KEEP: the open 'Fish market' (card, list, chain, nested entry) and 'Market Taxes'
+PASS | a15 | (b) | hasThievesGuild and hasSmuggling false (only hidden houses raised them)
+PASS | a16 | (b) keep | KEEP: hasBlackMarket, hasCriminalInst (the open bazaar raises them) and hasMarket true
+PASS | a17 | keep | KEEP on Reveal DM: an open person's goal and the open house's trace entry
+FAIL | b01 | V7-1 | a hidden name with no ASCII letter, as written and lower-cased
+       15 hit(s) in 8 responses; first: veil/gallery value $.economicState.situationDesc = "The Гильдия теней taxes every stall on the quay." ;; veil/gallery value $.economicState.primaryExports[1] = "Гильдия теней contraband" ;; veil/link value $.economicState.situationDesc = "The Гильдия теней taxes every stall on the quay."
+PASS | b02 | keep | KEEP: 'Fish market', 'Salt fish'
+PASS | c01 | V7-9 | U+212A in a hidden name (any case)
+FAIL | c02 | V7-9 | U+0130 in a hidden name (any case)
+       12 hit(s) in 8 responses; first: veil/gallery value $.economicState.compound.inst.names[0] = "i̇stanbul den" ;; veil/gallery value $.economicState.primaryExports[1] = "i̇stanbul den silk" ;; veil/link value $.economicState.compound.inst.names[0] = "i̇stanbul den"
+FAIL | c03 | V7-9 | a hidden house with a label and no name
+       24 hit(s) in 8 responses; first: veil/gallery value $.npcs[0].role = "Fence of the Label Only Lodge" ;; veil/gallery value $.economicState.compound.inst.names[1] = "label only lodge" ;; veil/gallery value $.economicState.primaryExports[2] = "Label Only Lodge dice"
+PASS | c04 | keep | KEEP: 'Fish market', 'Salt fish', every listed house has a name
+PASS | d01 | V7-3 | a clandestine house by facet alone: its name (the unmarked link too)
+PASS | d02 | V7-3 | … its name on every read
+FAIL | d03 | V7-3 | … no record without a name left in institutions[]; exactly one house listed
+       16 hit(s) in 8 responses; first: veil/gallery $.institutions holds 2, want 1 ;; veil/gallery a record with no name: {"category":"Religious"} ;; veil/link $.institutions holds 2, want 1
+FAIL | d04 | V7-4 qualifier | 'Thieves' Guild' (the name without its qualifier): the income label, a summary sentence
+       16 hit(s) in 8 responses; first: veil/gallery value $.economicState.incomeSources[0].source = "Thieves' Guild Revenue" ;; veil/gallery value $.economicState.situationDesc = "The Thieves' Guild sets the price of everything." ;; veil/link value $.economicState.incomeSources[0].source = "Thieves' Guild Revenue"
+PASS | d05 | (b) | hasCriminalInst and hasThievesGuild false
+FAIL | d06 | V7-8 (for a ruling) | hasGuild and hasChurch not true (only hidden houses raise them)
+       16 hit(s) in 8 responses; first: veil/gallery $.economicState.compound.inst.hasGuild is true ;; veil/gallery $.economicState.compound.inst.hasChurch is true ;; veil/link $.economicState.compound.inst.hasGuild is true
+PASS | d07 | keep | KEEP: 'Fish market', 'Market Taxes', hasMarket
+PASS | e01 | (d) control | an event's hidden lasting effect in the legacy annotation, source as born
+FAIL | e02 | V7-2 | … the same, source amended after the birth
+       8 hit(s) in 8 responses; first: veil/gallery value $.history.legacyAnnotations[0].annotation = "The Iron Dispute left its mark. The lasting consequence (iro" ;; veil/link value $.history.legacyAnnotations[0].annotation = "The Iron Dispute left its mark. The lasting consequence (iro" ;; veil/import value $.history.legacyAnnotations[0].annotation = "The Iron Dispute left its mark. The lasting consequence (iro"
+FAIL | e03 | V7-2 | a hidden tension's description in the siege narrative, amended
+       8 hit(s) in 8 responses; first: veil/gallery value $.history.siegeNarrative = "When the walls were last tested, the granary master is quiet" ;; veil/link value $.history.siegeNarrative = "When the walls were last tested, the granary master is quiet" ;; veil/import value $.history.siegeNarrative = "When the walls were last tested, the granary master is quiet"
+FAIL | e04 | V7-2 | a hidden tie's description in prominentRelationship.phrasing, amended
+       8 hit(s) in 8 responses; first: veil/gallery value $.prominentRelationship.phrasing = "Everyone knows they quarrel over the mill race every spring." ;; veil/link value $.prominentRelationship.phrasing = "Everyone knows they quarrel over the mill race every spring." ;; veil/import value $.prominentRelationship.phrasing = "Everyone knows they quarrel over the mill race every spring."
+FAIL | e05 | V7-2 | a hidden tie's tension in pressureSentence, amended
+       8 hit(s) in 8 responses; first: veil/gallery value $.pressureSentence = "Underneath it all, Ana has sworn to dam the race before harv" ;; veil/link value $.pressureSentence = "Underneath it all, Ana has sworn to dam the race before harv" ;; veil/import value $.pressureSentence = "Underneath it all, Ana has sworn to dam the race before harv"
+FAIL | e06 | V7-2 | a hidden appearance in the impression, amended
+       8 hit(s) in 8 responses; first: veil/gallery value $.npcs[0].presentation.impression = "Soot-stained apron, and a burn scar across the left forearm." ;; veil/link value $.npcs[0].presentation.impression = "Soot-stained apron, and a burn scar across the left forearm." ;; veil/import value $.npcs[0].presentation.impression = "Soot-stained apron, and a burn scar across the left forearm."
+PASS | e07 | keep | KEEP: the events' names, the people, the tie's ends
+checks 37 | PASS 17 | FAIL 20
+== server against twin, paths that differ (0 wanted on every row)
+rv7b-veil: differ: 2
+rv7b-dm: differ: 2
+rv7c-veil: differ: 5
+rv7c-dm: differ: 5
+== the deep document and the large row (V7-10, V7-6): the frozen 211 alone against 212
+3,000 deep, Reveal DM | x211 | ok | houses listed 1 | exports back 100 | 33 ms | x212 | ERROR stack depth limit exceeded | 657 ms
+FAIL | V7-10 | 212 raises where 211 serves
+200 hidden houses, 5000 strings | x211 | ok | houses listed 1 | exports back 5000 | 327 ms | x212 | ok | houses listed 1 | exports back 5000 | 5639 ms
+FAIL | V7-6 | more than three times 211's cost on the same row
+600 hidden houses, 10000 strings | x211 | ok | houses listed 1 | exports back 10000 | 1159 ms | x212 | ok | houses listed 1 | exports back 10000 | 33596 ms
+FAIL | V7-6 | more than three times 211's cost on the same row
+run-all: 60 s; responses in /home/user/wt/out/plants; exit 1

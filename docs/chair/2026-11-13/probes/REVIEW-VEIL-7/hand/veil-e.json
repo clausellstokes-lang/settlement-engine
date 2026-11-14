@@ -1,0 +1,4 @@
+{"$veil":{"v":1,"mode":"live","deltas":[
+ {"address":"class:event:lastingEffects","hidden":true},{"address":"class:tension:description","hidden":true},
+ {"address":"class:relationship:description","hidden":true},{"address":"class:relationship:tension","hidden":true},
+ {"address":"class:npc:physical","hidden":true}]}}

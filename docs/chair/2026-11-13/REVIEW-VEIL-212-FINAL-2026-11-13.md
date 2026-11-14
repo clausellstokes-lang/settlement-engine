@@ -1,4 +1,4 @@
-VERDICT SO FAR (the cold pass only, at the lane's tip 6692efdda; the final verdict waits for the tip the chair names): **NOT CLEAR** for migration 212 at sha256 `377cc61daf0916fbc769bd34fb5d4383aebf5f630d43f9e0207bb14f937e0733` (rollback `6a642ad048d1a5f6b73a7e9380a8349d05ccf922af016e647735c03068fbc66d`) and for the client's twin: two findings HIGH by the law, both executed, both narrow in reach, both curable in 212 and the twin (V7-1, V7-3)
+**NOT CLEAR** for migration 212 at sha256 `377cc61daf0916fbc769bd34fb5d4383aebf5f630d43f9e0207bb14f937e0733` (rollback `6a642ad048d1a5f6b73a7e9380a8349d05ccf922af016e647735c03068fbc66d`) and for the client's twin, at the lane's tip 6692efdda: two findings HIGH by the law, both executed, both narrow in reach (V7-1, V7-3). THIS IS NOT THE FINAL VERDICT: the chair has ruled that 212's sweep is rebuilt and that a fresh security reader gives the verdict on the final bytes; this file is what that reader stands on (section 8 says what is left). The frozen 211 (`eface6d0…be0b01`) is untouched and, on these findings, may still be applied alone (section 1.7).
 
 # REVIEW-VEIL-7 — migration 212, its rollback and the client's twin (`lane/coherence-veil-2026-11-11`)
 
@@ -28,7 +28,7 @@ changed lines), the earlier reader's review and probes, and three commit subject
 |---|---|---|---|---|
 | **V7-1** | **HIGH** by the law; narrow | **A hidden house whose name has no ASCII letter or digit is sent in its own spelling.** The sweep's prefilter is built from the first `[a-z0-9]+` run of each folded name; such a name folds to nothing, so the string is never shown to the exact compare. | `hand/town-b.json` (house "Гильдия теней", Criminal, hidden whole), 001..212 and 203+211+212, link, gallery, import, reveal off and on: `economicState.situationDesc` = "The Гильдия теней taxes every stall on the quay."; `primaryExports[1]` = "Гильдия теней contraband". Reveal-DM reads also send `npcs[0].goal.short` = "Rule the гильдия теней" | the SERVER sends both exact strings; the TWIN removes them (it has no prefilter) and is right. BOTH send the lower-cased form (the fold makes every non-ASCII letter a separator) |
 | **V7-3** | **HIGH** by the law; narrow; in the frozen 211's rule and the twin alike | **A house hidden whole that is in the hideable class by a declared facet or as an illegal brokerage alone is not removed.** The `function` eye (shut by the default veil with the card) strips `tags`, `facets`, `serviceKeys`; the removal then tests the class again on the trimmed card. | `hand/town-d.json` ({"name":"Hidden shrine of the Drowned","category":"Religious","tags":["facet:clandestine:clandestine"]}, hidden by hand and by default), link, gallery, import: on **001..211** `institutions[]` holds `{"name":"Hidden shrine of the Drowned","category":"Religious"}`; on **001..212** it holds `{"category":"Religious"}` (the sweep takes the name; a nameless record and its category stay) | both engines, 0 paths differ. Not on my 48 born towns (every house of the class is in it by category; 0 stubs in 384 link reads): custom content and edited houses |
-| V7-2 | MEDIUM | **The text cures match a hidden sentence word for word**, so a source edited after the birth leaves its birth wording in the second home. | Hartdorf (born, new shape), link: the event's lasting effect as stored + 9 characters, its eye shut: the legacy annotation is sent, "…What it left behind (iron production rights still legally contested in some records) is still part of the place."; the same row unedited: withheld. 24 new-shape towns with " (as amended)" appended to the hidden sources: `history.siegeNarrative`, withheld as stored, is sent again in 5; the annotation in 23 (`out/edited-after-birth-ct212.txt`). `prominentRelationship.full` and `.tension` hold (they go by the tie's identity) | both (same rule). Whether the editor recomposes a second home on an edit I did not trace |
+| V7-2 | MEDIUM | **The text cures match a hidden sentence word for word**, so a source edited after the birth leaves its birth wording in the second home. | Hartdorf (born, new shape), link: the event's lasting effect as stored + 9 characters, its eye shut: the legacy annotation is sent, "…What it left behind (iron production rights still legally contested in some records) is still part of the place."; the same row unedited: withheld. 24 new-shape towns with " (as amended)" appended to the hidden sources: `history.siegeNarrative`, withheld as stored, is sent again in 5; the annotation in 23 (`out/edited-after-birth-ct212.txt`). `prominentRelationship.full` and `.tension` hold (they go by the tie's identity). On a hand row (`hand/town-e.json`, each source amended by a few words): the annotation, the siege narrative, `prominentRelationship.phrasing`, `pressureSentence` and the impression are all sent, and the unamended control annotation is withheld | both (same rule). Whether the editor recomposes a second home on an edit I did not trace |
 | V7-4 | MEDIUM | **Forms of a hidden name the fold and the sweep do not reach**: a KEY; an `id` beside a `name`, and the joins `from` / `to`; a camel-cased or squeezed spelling; the name without its bracketed qualifier; a plural. | Born towns, Reveal-DM gallery read and import, 2 towns a shape with "Black market" hidden whole (Vatannuur, Khutulunkum): `simulationTrace[].downstreamEffects[].target` = "blackMarket". `hand/town-a.json`, link: `activeChains[0].institutionLoad` key "Thieves' guild (powerful)"; `links[0].from` = "institution.thieves_guild_powerful"; `offers[].id` = "thieves_guild_powerful.fence" (its `name` swept, its `id` kept); `npcs[0].title` = "Voice of the ThievesGuildPowerful"; `primaryExports` "thievesguildpowerful ledgers"; `situationDesc` "…the thieves' guilds of the coast…". `hand/town-d.json` (the two criminal groupings opened by exception, the house hidden): `incomeSources[0].source` = "Thieves' Guild Revenue" with its 19% sentence, `situationDesc` = "The Thieves' Guild sets the price of everything." | both, equal. The key, id and join rows are hand rows: no born town of 48 carries one |
 | V7-5 | MEDIUM until the ruled cure lands | **A renamed hidden house's birth name** stays in the two derived lists and the trace. | `hand/town-a.json` (born "Smuggling network", now "The Velvet Hand", hidden): link `compound.inst.names` holds "smuggling network"; Reveal-DM gallery `simulationTrace[0].targetId` = "institution.smuggling_network", cause "smuggling network absorbed rivals" | both. The chair has ruled the positive account; not in these bytes |
 | V7-6 | MEDIUM (availability) | **The sweep costs strings × hidden names.** | `hand/deep-cost.sql`, gallery read as anon of one stored row of about 300 KB (600 houses hidden whole, 10,000 short strings that pass the prefilter): 1,081 ms on 001..211, **32,611 ms** on 001..212; 200 × 5,000: 302 → 5,644 ms; 50 × 2,000: 69 → 605 ms | server. A reader's statement time limit bounds one call; the row is the sharer's own |
@@ -158,3 +158,149 @@ The deployed client carries V7-3's rule already (`galleryVeil.js`, the same re-t
 sweep, so its page shows both today; 211 alone takes strings off the wire and puts none on the page. On these two
 findings the earlier review's sentence stands: 211 alone makes nothing worse. Limits: four hand rows; the page MODEL,
 not a browser.
+
+## 2. The plant library, as one command (the chair's narrowed list, item 1)
+
+`sh probes/REVIEW-VEIL-7/run-all.sh <worktree of the bytes under test> [outdir]` — **60 seconds** on four cores at
+6692efdda (`npm ci` done in that worktree; a local scratch cluster; `out/run-all-at-6692efdda.txt` is its print).
+It builds 001..212 and 001..211 from the worktree's own migrations, stores the five hand towns three times each (no
+veil record, the veil, the veil with Reveal DM), reads each by gallery, link and import, runs the client's twin over
+the same rows, and prints one line a check from `hand/expected.json`: PASS or FAIL, with the first bytes that arrived.
+Exit 0 only when every check passes. **At 6692efdda: 37 checks, 17 pass, 20 fail; server and twin differ on 4 of 15
+shares (towns b and c); the deep document and both large rows fail.** A FAIL is red by design today; the table is the
+expected state for the final bytes.
+
+| Checks | The form | Town | Must not arrive | Must still arrive |
+|---|---|---|---|---|
+| a01 to a04 | a key; a join (`from`); an id beside a name; camel case and a squeezed spelling | a | "Thieves' guild (powerful)" in any spelling at those paths | |
+| a05, a09, a11 | nested arrays, a string that is JSON, the derived list; a name with `% _ ' ( [ . *` | a | the name, any spelling | (pass today) |
+| a06, d04 | the name without its bracketed qualifier; a plural | a, d | "Thieves' guild" / "Thieves' Guild", any spelling but the schema key | |
+| a07 | a renamed house | a | "smuggling network" (the list, the trace's target and cause) | |
+| a08, a12 | a hidden name that is a substring of an open house's | a | "Black market" outside "…bazaar" | the open house's own `name` "Black market bazaar" |
+| a13 | a shown power named as a hidden house is | a | | the power's `faction` "Assassins' Guild" |
+| a14, a16, a17, b02, c04, d07, e07 | what is open | all | | "Fish market" on its card, in the list, the chain and a nested entry; "Market Taxes"; an open person's goal and an open house's trace entry on Reveal DM; `hasMarket`, and `hasBlackMarket` / `hasCriminalInst` where an open house raises them |
+| a15, d05 | the five booleans | a, d | true where only a hidden house raised it | |
+| d06 | a boolean outside the five (for a ruling) | d | `hasGuild`, `hasChurch` true | |
+| a10, b01 | a name in another script (beside others; alone) | a, b | "Гильдия теней" as written and lower-cased | |
+| c01, c02, c03 | U+212A; U+0130; a label with no name | c | the name in any case | every listed house has a name |
+| d01 to d03 | a house in the class by facet alone | d | its name (the unmarked link too); a record with no name; a second record | exactly one house listed |
+| e01 | a hidden lasting effect in the legacy annotation, source as born (the control) | e | the clause | (pass today) |
+| e02 to e06 | the same and four more homes, source amended after the birth | e | the birth wording in the annotation, the siege narrative, `phrasing`, `pressureSentence`, the impression | the events' names, the people |
+| V7-10 | a document 3,000 deep, Reveal DM | (`hand/deep-cost.sql`) | an error where 211 alone serves | |
+| V7-6 | 200 × 5,000 and 600 × 10,000 (hidden houses × strings that pass the prefilter) | | more than three times 211's time on the same row (today 17 and 29 times) | every string back |
+
+**The born towns** are `born/run-born.sh <worktree> <master's worktree>`: the earlier reader's planted run in both
+shapes (24 towns and 192 shares a shape, eight reads each, reveal off and on, live, frozen, narrated) and every census
+of section 1.2, with the expected green written in its header. About 75 minutes on four cores. I ran and timed each of
+its parts apart at these bytes; the one file that strings them together was not run end to end. What it printed at
+6692efdda is section 1.2 and `out/`.
+
+## 3. The split at the present bytes (item 2)
+
+- **The frozen 211 is the reviewed file**: sha256 `eface6d0…be0b01`, rollback `ce8474ff…49712f`, both as the
+  earlier review recorded them at 333b33973. Run alone here: on 203 + 211, 36 responses of the hand towns are each a
+  strict subset of 203's (section 1.7), and 001..211 serves the deep and large rows of section 2 as the table shows.
+- **212 over the frozen 211, and its rollback** (`../REVIEW-VEIL-6/split/rollback212.sh`, each file as `begin;` +
+  the file + `commit;`; `out/rollback212-at-6692efdda.txt`):
+
+| | full chain | 203 + 211 + 212 |
+|---|---|---|
+| 212's down file, against the frozen 211's chain | **0** of 2,842 lines | **0** of 2,839 |
+| the down file a second time | 0 | 0 |
+| then 212 again; 212 a second time over itself | 0; 0 | 0; 0 |
+| `begin; 212; commit;` by hand on 203 + 211, against the chain built file by file | | 0 |
+| 212 on a chain at 203 without 211 | | fails on its first statement; 0 lines changed |
+| 211's down file while 212 is applied | | applies; 50 lines differ (212's helpers left behind): the order is 212's rollback FIRST |
+| both rollbacks in order, then 203's party-link read, against a chain at 203 | | 0 |
+
+  The catalogue is every function's body, arguments, volatility, definer, settings, owner and ACL, and the relations',
+  as the earlier reader's `catalog2.sql` prints them. On 001..212: 54 `_gallery_veil*` helpers, 0 callable by a
+  reader role, 0 definer, 54 immutable; the six reads `security definer` with `search_path=public, pg_temp`.
+- Not repeated here: readers in flight during an apply or a rollback; the release order (204..210 after the early
+  step); the equality of the responses, share by share, against the lane's earlier single file.
+
+## 7. FOR THE OWNER (as far as it can be written on 2026-11-14; nothing here was run against a hosted database)
+
+**Where things stand.** There are two files. Migration 211 is frozen and reviewed, and you hold its pack. Migration
+212 is still being built. **Do not apply 212 as it stands today** (the file whose checksum begins `377cc61d`); the
+reasons are below. Nobody applies 212 until a security reader says CLEAR on its final checksum.
+
+**What 211 alone does.** When you share a town, the server itself stops sending what you (or the default veil) hid,
+at the place the page reads it: a hidden house's card, a hidden field of a person, an event, a power or a
+relationship, the hidden groupings. Before 211 the server sends everything and only the page hides it.
+
+**What 211 alone does not close** (each is also true today, without it):
+- copies of a hidden fact kept elsewhere in the town: a hidden relationship's words in the "most notable
+  relationship" and the pressure line, a hidden tension inside the siege history, a hidden event's lasting effect in
+  the legacy note, a hidden house's name in the economy's chains, lists, income labels and simulation notes;
+- a house hidden whole that is "clandestine" only by a declared tag and not by a Criminal category (custom content):
+  it stays listed by name (V7-3);
+- the public chronicle, and the notes on a Reveal-DM share (the earlier reviews).
+
+**May 211 be applied now? Yes.** I checked the two new serious findings against it by run (section 1.7): with 211
+alone the server sends strictly less than it sends today in every response I compared (36 of 36), and the page your
+deployed site would draw holds nothing it does not hold today (12 of 12 shares). 211 makes neither worse. Limits: four
+towns written by hand; the page's data, not a browser. Its own step and rollback are in its own review (section 7 of
+REVIEW-VEIL-211-333b33973).
+
+**What 212 is meant to add.** It withholds the copies listed above, the author's custom-content library on a
+Reveal-DM share, a switched-off person inside a power's member list, a hidden house's name wherever else it is
+written, and the five "has a criminal house" flags where only a hidden house raised them.
+
+**Why 212 is not to be applied as it stands.**
+1. It still sends a hidden house's name, exactly as you wrote it, when the name has no English letter or digit (a
+   name in Cyrillic, Greek, Chinese…) (V7-1).
+2. A tagged-clandestine house hidden whole is left in the list as a nameless entry showing its category (V7-3).
+3. If you edit a hidden sentence after the town was generated, the older wording kept elsewhere is still sent (V7-2).
+4. It can take away things you did NOT hide: an open house whose name contains a hidden house's name loses its own
+   name on the page, and so does a shown power with the same name as a hidden house (V7-7).
+5. On a very large or very deep town of a sharer's own making it is up to thirty times slower than 211, or fails
+   where 211 answers (V7-6, V7-10).
+6. The builder is rebuilding the part that causes 1, 4 and 5. Applying today's file would mean applying twice.
+None of these makes a reader see MORE than with 211 alone; 212 as it stands is incomplete and in places heavy-handed,
+not harmful to secrecy. On towns as the generator makes them (48 towns, 3,072 reads) it behaved correctly.
+
+**The order, when 212 is cleared.** 211 first (its pack). Then 212, once, as one transaction: if any statement fails
+nothing changes; run twice it changes nothing (rehearsed). To undo: 212's rollback FIRST, then 211's; never 211's
+rollback while 212 is applied (rehearsed: it leaves 212's helpers behind and the site reads as before 211). Each
+leaves the catalogue exactly as it was (0 lines differ). No table, row or policy is touched by either file.
+
+**What to look at before and after** will be the final reader's section 7 at the final checksum; the earlier review's
+section 7.2 to 7.5 (the read-first, the check-after, the visitor's walk) is the shape it will take.
+
+## 8. What the fresh reader must do that I did not, and what I would tell the builder first
+
+**Not done here** (my step 4, and parts of 2 and 3):
+- PART 9 and PART 8 were never opened: each home's claimed cure and proof by the reader's own run; the rows the lane
+  leaves outside the law, each judged; its three limits (the rename, the fold, the booleans' table) against the
+  chair's rulings; the chair's line row by row at the final bytes (my cold view of it is section 1.5).
+- The lane's guards under planted faults (the earlier reader's `faults/plant.py`); the lane's owner pack for 212.
+- The born-town run and every census again at the final bytes (`born/run-born.sh`); master's shape through the
+  any-form name search (still running when this was written; its other censuses are in section 1.2).
+- Timing on born towns (211 alone against 212 on the heaviest stored share); readers in flight; the release order.
+- The page, the PDF, the exports, the map's inspector; a town advanced by the world pulse or edited in the editor.
+- A hidden PERSON's or EVENT's plants beyond what section 1.2 and `town-e` hold: only a house can be hidden whole
+  (211's grammar), so a person or an event is hidden field by field and its name stays by design.
+
+**For the builder, before the sweep is rewritten** (shapes, not bytes):
+1. **Decide once what is gone, before anything is trimmed, and remove by identity.** The set of houses removed whole
+   (ids and names) is fixed before the eyes run; the list is filtered by id alone (V7-3); every structured reference
+   goes by that set: a join, a `targetId`, an `institution.<snake>` value, a key equal to a name (V7-4).
+2. **Positive account wherever the record allows it** (ruled for the two lists): the lists and EVERY `has…` flag as
+   the listed houses give them (V7-5, V7-8); a second home by its source's identity, not its words (V7-2).
+3. **Free text: one test a string, not one a name.** Today each string that passes the prefilter is tested against
+   each hidden name with two regular-expression folds and a loop over the open names: strings × names (V7-6). Fold a
+   string ONCE and test it against ONE alternation built from every hidden name's folded form; and ask the question
+   first of the document's text as a whole (as 211's hook walk does), so that a town where nothing matches (47 of my
+   48) is not walked at all. Then the cost is the document's length, whatever a sharer stores.
+4. **Walk without calling yourself once a level** (V7-10): 211's `_gallery_veil_drop_hooks` already has the shape
+   (only the nodes on the way to a hit are rebuilt, by a recursive query; a text pass past 64 levels).
+5. **One fold, the same in both engines, for every script** (V7-1, V7-9): letters and digits of any script kept; no
+   reliance on `lower()` and `toLowerCase()` agreeing outside ASCII (U+0130 differs today). A prefilter is a proven
+   superset or is not there. Give the exact compare the same open-name exception and word boundary as the folded one,
+   or drop it once the fold covers every script (V7-7).
+6. **A card's own name is its floor**: an open house, a shown power or a person is never left without its `name` by
+   the sweep; whether a PERSON whose own name contains a hidden house's name loses it is a row for the chair.
+7. **Keys as well as values**; the name without its bracketed qualifier and the engine's processor name as forms of
+   the name (the earlier review's 2.4); the engine's word `blackMarket` in a trace effect for a ruling.
+8. Run `run-all.sh` red first: 20 of its 37 checks and its three timed rows are red at 6692efdda.

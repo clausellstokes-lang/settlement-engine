@@ -1,0 +1,18 @@
+{"name":"Amendwick","tier":"town",
+ "institutions":[{"name":"Fish market","category":"Economy","desc":"Fish."}],
+ "npcs":[
+  {"id":"npc.ana","name":"Ana Reed","role":"Smith","physical":{"feature":"A burn scar across the left forearm, lately bandaged"},"presentation":{"impression":"Soot-stained apron, and a burn scar across the left forearm."}},
+  {"id":"npc.bo","name":"Bo Marsh","role":"Miller"}],
+ "relationships":[{"id":"tie.ana_bo","from":"npc.ana","to":"npc.bo","npc1Name":"Ana Reed","npc2Name":"Bo Marsh","type":"rival","typeName":"Rivals",
+   "description":"They quarrel over the mill race every spring, by all accounts","tension":"Ana has sworn to dam the race before harvest, people say"}],
+ "prominentRelationship":{"npc1":"Ana Reed","npc2":"Bo Marsh","type":"Rivals","phrasing":"Everyone knows they quarrel over the mill race every spring."},
+ "pressureSentence":"Underneath it all, Ana has sworn to dam the race before harvest.",
+ "history":{
+  "historicalEvents":[
+   {"id":"event.iron","name":"The Iron Dispute","type":"economic","yearsAgo":26,"lastingEffects":["Iron production rights still legally contested in some records to this day"]},
+   {"id":"event.flood","name":"The Great Flood","type":"disaster","yearsAgo":40,"lastingEffects":["The lower ward was never rebuilt on its old footings"]}],
+  "legacyAnnotations":[
+   {"event":"The Iron Dispute","type":"economic","yearsAgo":26,"annotation":"The Iron Dispute left its mark. The lasting consequence (iron production rights still legally contested in some records) remains."},
+   {"event":"The Great Flood","type":"disaster","yearsAgo":40,"annotation":"The Great Flood changed the town. The lasting consequence (the lower ward was never rebuilt on its old footings) remains."}],
+  "currentTensions":[{"id":"tension.grain","name":"Grain shortage","type":"scarcity","description":"The granary master is quietly selling the reserve to river traders, it is whispered"}],
+  "siegeNarrative":"When the walls were last tested, the granary master is quietly selling the reserve to river traders was already an open secret."}}
