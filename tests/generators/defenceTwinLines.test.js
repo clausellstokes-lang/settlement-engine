@@ -34,7 +34,13 @@ import { BASELINE_CONFLICT_SIBLINGS } from '../../src/generators/power/governanc
 const DEFENCE_ATOMS = new Set(['walls', 'garrison', 'soldiers']);
 const defenceSetsOf = (/** @type {Record<string, ReadonlyArray<any>>} */ table) => Object.fromEntries(
   Object.entries(table).filter(([, set]) => (set[0].needs || []).some((/** @type {string} */ a) => DEFENCE_ATOMS.has(a))));
-const DEFENCE_SIBLINGS = { ...SERVICE_DESC_SIBLINGS, ...DESC_VARIANT_SIBLINGS, ...POLITICAL_FLAVOR_SIBLINGS, ...CAST_REASON_SIBLINGS, ...NPC_GOAL_SIBLINGS, ...defenceSetsOf(BASELINE_CONFLICT_SIBLINGS) };
+// W2-FIX-DATA (2026-11-13, re-keyed by that cause): the two description tables also carry twins for a tavern, a
+// forest, docks, a bank, a siege, a famine, a metropolis and navigable water (the REVIEW-W2B cold list), so the defence
+// pins read from them only the sets whose twin is the complement of the original's defence atom (the F10 twins).
+const defenceTwinSetsOf = (/** @type {Record<string, ReadonlyArray<any>>} */ table) => Object.fromEntries(
+  Object.entries(table).filter(([, set]) => (set[0].needs || []).some((/** @type {string} */ a) => DEFENCE_ATOMS.has(a)
+    && (set.find((/** @type {any} */ l) => l.twinOf)?.excludes || []).includes(a))));
+const DEFENCE_SIBLINGS = { ...defenceTwinSetsOf(SERVICE_DESC_SIBLINGS), ...defenceTwinSetsOf(DESC_VARIANT_SIBLINGS), ...POLITICAL_FLAVOR_SIBLINGS, ...CAST_REASON_SIBLINGS, ...NPC_GOAL_SIBLINGS, ...defenceSetsOf(BASELINE_CONFLICT_SIBLINGS) };
 const twinOf = (/** @type {string} */ line) => DEFENCE_SIBLINGS[line].find((l) => l.twinOf === line).text;
 const OPTS = (/** @type {any} */ facts) => ({ facts, poolId: 'test', drawKind: /** @type {'T'} */ ('T') });
 

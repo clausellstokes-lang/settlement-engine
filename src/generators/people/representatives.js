@@ -48,11 +48,13 @@ import { governingFactionOf, nameOf } from '../../domain/rulingPower.js';
 import { drawPersonHook, generateSingleNPC } from '../npcGenerator.js';
 import { NPC_FACTION_LOYALTY, NPC_HOOK_SIBLINGS } from '../../data/npcData.js';
 import { lineText, resolveDeclared, resolveSibling } from '../../domain/facts/drawDeclared.js';
-import { factsOf } from '../../domain/facts/factsOf.js';
+import { birthFactsOf, factsOf } from '../../domain/facts/factsOf.js';
 import { deriveTradeCommodity } from '../tradeCommodity.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { disambiguateNPCDisplayNames } from '../npcDisplayNames.js';
-import { hookPoolFor, poolFor, seatPoolFor } from './poolMap.js';
+import { hookPoolFor, poolFor, seatPoolFor, settleTitleLines } from './poolMap.js';
+
+import { resolveGenerationContentProfile } from '../../domain/generationContentProfile.js';
 import { seatMintTitleFor } from './mintTitles.js';
 import { CIVIC_OFFICE_BY_SIZE, OFFICE_TITLES } from '../../data/officeTitles.js';
 import { backingArchetypeOf, RULER_KINDS } from '../../domain/dossier/powerSupport.js';
@@ -472,6 +474,9 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
   // The settlement-scoped anti-repetition registry (see generateNPCs): one loyalty string, one
   // beat, one tell, one speech pattern, one goal, one secret per roster.
   const hookRegistry = { titles: new Set(), themes: new Set(), tells: new Set(), speech: new Set(), goals: new Set(), secrets: new Set() };
+  // COHERENCE-POWERS-7: the town as a title line's declaration reads it (the water home through the world law's port kind;
+  // the content settings' governed topics), and the secrets the roster holds so far
+  const titleTown = { facts: birthFactsOf({ institutions, config, tier }, worldLaw), boundaries: resolveGenerationContentProfile(config).boundaries, held: hookRegistry.secrets };
   const taken = new Set();
   /** @type {Array<Record<string, any>>} */
   const cards = [];
@@ -498,6 +503,7 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
     // MERGE-234 (the chair's ruling of 10:4x UTC): a magic-swapped face draws its hook from the pool its
     // EFFECTIVE category maps to after the swap (`other` has its own loyalty list, so no further fallback)
     hookPools.set(id, category !== pool.category ? hookPoolFor(title, null, { category }).pool : hookPool);
+    settleTitleLines(card, title, titleTown); // COHERENCE-POWERS-7: a title line the town makes false takes its next admitted line, draw-free
     card.id = id;
     card.title = title;
     // M-1b (the owner, 07:1x UTC): the faction roles dissolve — a representative's ROLE is its

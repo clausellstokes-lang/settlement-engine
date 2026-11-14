@@ -117,7 +117,10 @@ describe('a generated crisis adds the hooks its cast derives', () => {
   }, 240000);
 
   it('the crisis hook is stored as the catalog\'s sentence (its template) and filled with the holder where it is read', () => {
-    const s = gen('slot-plague_onset-0', 'town', ['plague_onset']);
+    // W2-FIX-DATA-7: re-keyed by identity, slot-plague_onset-0 -> -1: the hook's healer is declared (stressTypes.js ::
+    // STRESS_TYPE_SIBLINGS, needs: healer) and now resolves where it is stored, so -0, a town with no healer, stores the
+    // twin, which carries no slot; -1 has a healer and stores the template this pin reads.
+    const s = gen('slot-plague_onset-1', 'town', ['plague_onset']);
     const plague = entriesOf(s)[0];
     const lever = plague.cast.roles.find((r) => r.role === 'lever');
     expect(lever.kind).toBe('npc');
@@ -133,7 +136,7 @@ describe('a generated crisis adds the hooks its cast derives', () => {
   });
 
   it('a DM\'s cast edit renames the holder in the printed crisis hook: the Crisis page (tab, print chapter, journal) and the print view model', () => {
-    const s = gen('slot-plague_onset-0', 'town', ['plague_onset']);
+    const s = gen('slot-plague_onset-1', 'town', ['plague_onset']); // W2-FIX-DATA-7: re-keyed by identity from -0 (no healer: the stored hook is the slot-less twin), as above
     const entry = entriesOf(s)[0];
     const engine = entry.cast.roles.find((r) => r.role === 'lever');
     const other = s.npcs.find((n) => !n.temporary && n.name && n.name !== engine.name);

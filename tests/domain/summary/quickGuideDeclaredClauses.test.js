@@ -18,7 +18,8 @@ const meso = (institutions) => ({
 
 describe('row 95: the scope clause is read against the record', () => {
   it('a mesoamerican place WITH a market prints its market-and-waterworks scope', () => {
-    expect(cultureScopeLine(meso([{ name: 'Market square', category: 'Economy' }]))).toMatch(/market-and-waterworks/);
+    // R2-CODE-B-SIDE item 5: the waterworks are a house the roster holds, so the original is read with one.
+    expect(cultureScopeLine(meso([{ name: 'Market square', category: 'Economy' }, { name: 'Aqueduct or water system' }]))).toMatch(/market-and-waterworks/);
   });
   // CENSUS-2g unit 7 (the chair's ruling of 09:29): the slot takes a twin that presumes nothing —
   // re-keyed by cause; the false market is still never printed.

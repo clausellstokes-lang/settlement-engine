@@ -1,0 +1,39 @@
+    NEW      masons on chains — 1 read(s); this file has no frozen row for it (ceiling 0)
+    NEW      mil on arcane — 1 read(s); this file has no frozen row for it (ceiling 0)
+    NEW      milMax on arcane — 1 read(s); this file has no frozen row for it (ceiling 0)
+    NEW      milPerDial on arcane — 1 read(s); this file has no frozen row for it (ceiling 0)
+    NEW      mon on arcane — 1 read(s); this file has no frozen row for it (ceiling 0)
+    NEW      monMax on arcane — 1 read(s); this file has no frozen row for it (ceiling 0)
+    NEW      monPerDial on arcane — 1 read(s); this file has no frozen row for it (ceiling 0)
+    NEW      provisioned on chains — 1 read(s); this file has no frozen row for it (ceiling 0)
+    NEW      tower on arcane — 1 read(s); this file has no frozen row for it (ceiling 0)
+    NEW      unmended on chains — 1 read(s); this file has no frozen row for it (ceiling 0)
+    NEW      unprovisioned on chains — 1 read(s); this file has no frozen row for it (ceiling 0)
+  A guarded read of a key the real generator never writes cannot throw — it
+  degrades to a default, and the arm behind it is dead on every generated world.
+  A NEW row means a fresh one landed even if this file's TOTAL did not move: the
+  inventory is addressed by finding IDENTITY, not by count, so a swap cannot hide.
+  TO COMPLY: read a key the producer actually writes, or delete the dead arm.
+    The authority is a real run, not a typedef: `node scripts/check-observed-shape-readers.mjs --report`
+    prints the shape and the keys it was observed carrying.
+  TO SHRINK: fixed a site? From a clean committed tree, run the governed
+    `node scripts/check-observed-shape-readers.mjs --write` re-freeze. It re-derives
+    every row and may only lower or delete ordinary debt; never hand-edit this baseline.
+    Never raise a number, never add a file, never add an identity.
+src/generators/economy/incomeLineSiblings.js: read(s) of a key no writer produces, outside the frozen inventory:
+    NEW      chainId on chains — 1 read(s); this file has no frozen row for it (ceiling 0)
+    NEW      status on chains — 1 read(s); this file has no frozen row for it (ceiling 0)
+  A guarded read of a key the real generator never writes cannot throw — it
+  degrades to a default, and the arm behind it is dead on every generated world.
+  A NEW row means a fresh one landed even if this file's TOTAL did not move: the
+  inventory is addressed by finding IDENTITY, not by count, so a swap cannot hide.
+  TO COMPLY: read a key the producer actually writes, or delete the dead arm.
+    The authority is a real run, not a typedef: `node scripts/check-observed-shape-readers.mjs --report`
+    prints the shape and the keys it was observed carrying.
+  TO SHRINK: fixed a site? From a clean committed tree, run the governed
+    `node scripts/check-observed-shape-readers.mjs --write` re-freeze. It re-derives
+    every row and may only lower or delete ordinary debt; never hand-edit this baseline.
+    Never raise a number, never add a file, never add an identity.
+STALE ROW — src/domain/worldPulse/applyWorldPulse.js: "recallTargetId on metadata" is GONE against a frozen count of 2 — run the governed --write re-freeze on a clean committed tree; it will delete the derived row. Never hand-edit the baseline; schema 42 permits no dormant headroom.
+STALE ROW — src/generators/defenseGenerator.js: "_foodSecurity on config" is GONE against a frozen count of 1 — run the governed --write re-freeze on a clean committed tree; it will delete the derived row. Never hand-edit the baseline; schema 42 permits no dormant headroom.
+STALE ROW — src/generators/defenseGenerator.js: "_institutions on config" is GONE against a frozen count of 1 — run the governed --write re-freeze on a clean committed tree; it will delete the derived row. Never hand-edit the baseline; schema 42 permits no dormant headroom.

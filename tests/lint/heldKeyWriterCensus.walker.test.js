@@ -241,8 +241,15 @@ const DISCOVERY_EXEMPT = Object.freeze([
   { symbol: 'recordTrace', reason: 'appends a receipt to `simulationTrace` through the run\'s deterministic clock, the sanctioned cross-cutting ledger, never a held key.' },
   { symbol: 'takeAllegianceReceipts', reason: 'takes (and forgets) the receipts the seam left in a module WeakMap keyed by the settlement; it writes no key on the record.' },
   { symbol: 'factsOf', reason: 'a pure READ of the record\'s declared facts, handed to renderStressSummary as its facts bag; it returns a new object and writes nothing at all.' },
+  { symbol: 'resolveSibling', reason: 'W2-FIX-DATA-7: resolves a stress entry\'s stored catalogue hook and note through their declared sets (stressTypes.js :: STRESS_TYPE_SIBLINGS), draw-free; touches `stress`, a READING, never a held key.' },
   // URBAN-FIX C-1 (935c961fd), composed at STYLE-2-MERGE point 25: the food record's composed line, read for the stored foodways.
   { symbol: 'foodwaysLineOf', reason: 'a pure READ of economicState.foodSecurity.foodRecord.foodwaysLine (trimmed, or null); it writes nothing at all.' },
+  // COHERENCE-UPKEEP (d7d7f7787, the keep home), named at the lane's whole-suite run 2026-11-12.
+  { symbol: 'economicSurvivalBandOf', reason: 'a pure READ of the defence profile just written (defenseProfile.scores.economic, its Economic Survival band), handed to the guard line; it writes nothing (COHERENCE-UPKEEP-6, the chair\'s ruling A: one home for pay).' },
+  { symbol: 'keptGuardLine', reason: 'a pure function from the guard assessment\'s text, the roster and a purse word to the same text with its purse clause; it writes nothing itself (the assembly\'s withGuardPaidFromDefence puts the text back on the economic state; COHERENCE-UPKEEP-6, ruling A).' },
+  { symbol: 'purseWordOfBand', reason: 'a pure map from the Economic Survival band to the purse word the guard lines are declared on; it writes nothing (COHERENCE-UPKEEP-6, ruling A).' },
+  { symbol: 'standingLabelOf', reason: 'a pure READ of the standing prosperity label (else the printed one), the guard line\'s fallback where a record has no band; it writes nothing (COHERENCE-UPKEEP-6).' },
+  { symbol: 'keepOfRecord', reason: 'a pure READ of the standing prosperity label (economicState.prosperityStanding, else the label) into what the place can keep up ({ bought, funded }, domain/facts/keep.js), handed to generateDefenseProfile; it writes nothing at all (COHERENCE-UPKEEP-5, R3).' },
   // COHERENCE-POWERS-3 (F1, F2), classed by COHERENCE-POWERS-4 (2026-11-12), each read from its own body.
   { symbol: 'seatFacesFoldedByDualHat', reason: 'a pure READ over the record (0 or 1: the seat\'s face the dual hat folded), handed to the density law as part of the mass; it writes nothing at all.' },
   { symbol: 'standingRosterOf', reason: 'a pure READ: the roster the standing sentences were written on, copied before the resize; it returns a new array and writes nothing.' },

@@ -69,6 +69,21 @@ export const scoreBand = (n) =>
       : n >= SCORE_BAND_CUTS.weak ? 'WEAK' : 'CRITICAL';
 
 /**
+ * WHAT THE TOWN CAN PAY IN A CRISIS: THE ONE HOME (COHERENCE-UPKEEP-6, the chair's ruling A on the third read):
+ * the Economic Survival row's band, the band its bar, its badge and the Defense tab's line read. The row's
+ * score is itself paid at the standing label (`keep.js :: keepOfRecord`, the score's pay), so one label speaks
+ * for pay through it. Every sentence that says what the town can pay reads this: the PDF's money line
+ * (`threatAssessment.js`) and the guard assessment's purse clauses (`safetyProfile.js :: keptGuardLine`,
+ * written after the defence profile). Null where the record has no defence profile.
+ * @param {{ defenseProfile?: { scores?: { economic?: unknown } | null } | null } | null | undefined} record
+ * @returns {string | null} 'STRONG' | 'ADEQUATE' | 'WEAK' | 'CRITICAL', or null
+ */
+export function economicSurvivalBandOf(record) {
+  const n = record?.defenseProfile?.scores?.economic;
+  return typeof n === 'number' && Number.isFinite(n) ? scoreBand(n) : null;
+}
+
+/**
  * THE OVERALL DEFENCE SCORE — the rounded mean of the numeric score values, and the ONE
  * derivation of it.
  *

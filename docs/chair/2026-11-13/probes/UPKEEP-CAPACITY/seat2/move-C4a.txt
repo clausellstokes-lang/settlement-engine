@@ -1,0 +1,18 @@
+== C4 (tree of 8aacc4e15) vs C3: births 3756; records differ 1054
+READINESS moved 674 (up 106, down 568); mean all -0.35; min -8 max 2; bands 107 {('Vulnerable', 'Undefended'): 40, ('Lightly Defended', 'Vulnerable'): 56, ('Defensible', 'Lightly Defended'): 4, ('Undefended', 'Vulnerable'): 3, ('Lightly Defended', 'Defensible'): 1, ('Vulnerable', 'Lightly Defended'): 1, ('Well-Defended', 'Defensible'): 2}
+  fresh6: moved 120, band 21
+  thorp      moved  218 mean -0.96 min -8 max +2 bands 41
+  hamlet     moved  234 mean -1.06 min -8 max +2 bands 56
+  village    moved  122 mean -0.20 min -1 max +0 bands 4
+  town       moved   90 mean -0.12 min -1 max +0 bands 6
+  city       moved   10 mean -0.01 min -1 max +0 bands 0
+  metropolis moved    0 mean +0.00 min +0 max +0 bands 0
+  military  moved   73 (up 12, down 61) mean -0.07 min -10 max +1; bands 6 {('ADEQUATE', 'WEAK'): 2, ('WEAK', 'ADEQUATE'): 1, ('STRONG', 'ADEQUATE'): 2, ('WEAK', 'CRITICAL'): 1}
+  monster   moved 1028 (up 117, down 911) mean -1.31 min -27 max +4; bands 237 {('STRONG', 'ADEQUATE'): 4, ('WEAK', 'CRITICAL'): 179, ('ADEQUATE', 'WEAK'): 13, ('CRITICAL', 'WEAK'): 39, ('WEAK', 'ADEQUATE'): 2}
+  internal  moved  510 (up 92, down 418) mean -0.24 min -7 max +2; bands 37 {('WEAK', 'CRITICAL'): 28, ('CRITICAL', 'WEAK'): 4, ('ADEQUATE', 'WEAK'): 3, ('STRONG', 'ADEQUATE'): 2}
+  economic  moved  152 (up 2, down 150) mean -0.11 min -20 max +4; bands 21 {('WEAK', 'CRITICAL'): 14, ('ADEQUATE', 'WEAK'): 4, ('STRONG', 'ADEQUATE'): 3}
+  magical   moved   56 (up 0, down 56) mean -0.02 min -2 max +0; bands 1 {('WEAK', 'CRITICAL'): 1}
+  disaster  moved    0 (up 0, down 0) mean +0.00 min +0 max +0; bands 0 {}
+  MAGIC AGAINST THE PAGE: made 0 [], cured 0
+  AI THREATS: births changed 4 {('gained', 'Economic fragility'): 4}
+  COUPLING: power structure changed 87 (of which band changed 87), a power appears or vanishes 0, legitimacy label changed 1

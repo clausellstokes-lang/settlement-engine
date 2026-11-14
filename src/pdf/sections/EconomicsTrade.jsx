@@ -30,9 +30,10 @@ import {
 import { statusCase } from '../../domain/display/labelCase.js';
 import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js'; // §934.22 item 2 — the EXPORTS/IMPORTS lists
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js'; // §934.22 item 1(b) — the PROC row
+import { chainHousesOf } from '../../domain/display/chainHouses.js'; // R2-CODE-B item 1b (ruling R1): the PROC row's houses
 import { SupplyChainFlow } from './SupplyChainFlow.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
-import { revenuesOffTheLists } from '../../domain/display/tradeListDisplay.js'; // CENSUS-3c R-P 2 — the revenues that left the trade lists
+import { revenuesOffTheLists, tradeListsAsPrinted } from '../../domain/display/tradeListDisplay.js'; // CENSUS-3c R-P 2 — the revenues that left the trade lists; W2-C-LEAVES-7 item 8 — the tab's trade lists
 
 function renderedTradeLabel(economy, direction, item) {
   // §934.22 item 2 — A PRINT GOES THROUGH THE SEAM, A MATCH NEVER DOES. The ownership read
@@ -83,6 +84,11 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
           { label: 'Trade', value: cap(e.tradeAccess) || '–' },
         ]}
       />
+      {/* The Prosperity tile's label, where a crisis in force lowered it, says what the place is in
+          ordinary years (the chair's ruling 1(a), REVIEW-UPKEEP-2): the vm's one sentence. */}
+      {e.prosperityInCrisis && (
+        <Text style={{ ...type.italic, color: palette.second, fontSize: pt['9'], marginBottom: space.sm }}>{prosperityInCrisisLed(e.prosperityInCrisis)}</Text>
+      )}
 
       {/* ── Income sources ─────────────────────────────────────── */}
       {e.incomeSources?.length > 0 && (
@@ -121,7 +127,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
       })()}
 
       {/* ── Trade flows ───────────────────────────────────────── */}
-      {(e.primaryExports?.length > 0 || e.primaryImports?.length > 0 || e.localProduction?.length > 0) && (
+      {(() => { const trade = tradeListsAsPrinted(settlement); return (trade.exports.length > 0 || trade.imports.length > 0 || trade.local.length > 0) && ( /* W2-C-LEAVES-7 item 8: the tab's lists, one reader (a siege that stops trade: no IMPORTS) */
         <>
       <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
         TRADE FLOWS
@@ -131,7 +137,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
           <View>
             <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.good }}>EXPORTS</Text>
             <BulletList
-              items={e.primaryExports}
+              items={trade.exports}
               tone="good"
               emptyText="None significant"
               itemRender={(item) => renderedTradeLabel(e, 'exports', item)}
@@ -140,11 +146,11 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
         }
         b={
           <View>
-            <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.warn }}>IMPORTS</Text>
+            {!trade.tradeStopped && <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.warn }}>IMPORTS</Text>}
             <BulletList
-              items={e.primaryImports}
+              items={trade.imports}
               tone="warn"
-              emptyText="None significant"
+              emptyText={trade.tradeStopped ? undefined : 'None significant'}
               itemRender={(item) => renderedTradeLabel(e, 'imports', item)}
             />
           </View>
@@ -153,7 +159,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
           <View>
             <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted }}>LOCAL PRODUCTION</Text>
             <BulletList
-              items={e.localProduction}
+              items={trade.local}
               tone="muted"
               emptyText="None recorded"
               itemRender={(item) => label(item)}
@@ -162,7 +168,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
         }
       />
         </>
-      )}
+      ); })()}
 
       {/* Entrepôt + necessity flags */}
       {(e.isEntrepot || e.necessityImports) && (
@@ -244,7 +250,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
               status={c.status}
               statusLabel={cap(c.status)}
               meta={[
-                c.processingInstitutions?.length ? { label: 'PROC', value: c.processingInstitutions.map((n) => label(institutionDisplayName(n))).filter(Boolean).join(', ') } : null,
+                c.processingInstitutions?.length ? { label: 'PROC', value: chainHousesOf(c.processingInstitutions, []).map((h) => label(h.name)).filter(Boolean).join(', ') } : null,
                 c.outputs?.length ? { label: chainYieldRefused(settlement?.economicState?.activeChains?.[i]) ? NORMALLY_YIELDS.toUpperCase() : 'OUT', value: c.outputs.map(label).filter(Boolean).join(', ') } : null,
                 c.dependency ? { label: 'DEP', value: depText(c.dependency) } : null,
                 c.incomeContribution != null ? { label: 'INC', value: smart(c.incomeContribution) } : null,
@@ -265,7 +271,8 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
             CUSTOM SUPPLY CHAINS · {e.customChains.length}
           </Text>
           {e.customChains.map((c, i) => {
-            const flow = [c.resource, ...(c.processingInstitutions || []), ...(c.outputs || [])]
+            // R2-CODE-B item 1b (ruling R1): the houses by the seam's house label, each once (chainHouses.js).
+            const flow = [c.resource, ...chainHousesOf(c.processingInstitutions, []).map((h) => h.name), ...(c.outputs || [])]
               .filter(Boolean)
               .map((n) => label(institutionDisplayName(n) || n) || String(n))
               .join(' » ');
@@ -587,3 +594,4 @@ function crisisYieldWords(mod) {
 
 // COHERENCE-AGREE-4 (item 3′): at the end of the file so no line-keyed register row above it moves.
 import { NORMALLY_YIELDS, chainYieldRefused } from '../../domain/chainYield.js';
+import { prosperityInCrisisLed } from '../../domain/display/prosperityInCrisis.js'; // COHERENCE-UPKEEP-6 (ruling D(iii)): the sentence led by the word it explains

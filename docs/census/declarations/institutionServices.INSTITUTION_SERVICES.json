@@ -1997,7 +1997,9 @@
     {
       "id": "Brewer|Ale (barrel)",
       "text": "Bulk supply to alehouses. Priced by barrel.",
-      "needs": [],
+      "needs": [
+        "institution: tavern"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -2816,7 +2818,9 @@
       "id": "Coaching inn|Lodging",
       "text": "Beds, meals, and stabling for travelers on the road. Priced by quality.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
       "colour": false
     },
@@ -2824,7 +2828,9 @@
       "id": "Coaching inn|Horse change",
       "text": "Fresh relay horses for coaches and dispatch riders. Reduces travel time significantly.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
       "colour": false
     },
@@ -3049,7 +3055,9 @@
     {
       "id": "River boatyard|Barge construction",
       "text": "Flat-bottomed cargo barges for river transport. Simpler than sea vessels.",
-      "needs": [],
+      "needs": [
+        "river"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -3057,7 +3065,9 @@
     {
       "id": "River boatyard|Boat repair",
       "text": "Hull patching, oar replacement, caulking. River traffic takes constant punishment.",
-      "needs": [],
+      "needs": [
+        "river"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -3170,7 +3180,9 @@
       "id": "Mine (open cast)|Raw extraction",
       "text": "Surface-level ore extraction. Lower yield than shaft mining but cheaper to operate.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "tier: ≥ town"
+      ],
       "crisis": [],
       "colour": false
     },
@@ -3466,7 +3478,9 @@
       "id": "Annual fair|Seasonal trading",
       "text": "Once-a-year market drawing merchants from across the region.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
       "colour": false
     },
@@ -4048,7 +4062,9 @@
       "id": "Carriers' guild|Freight haulage",
       "text": "Organised road transport for goods between towns. Reliable, guild-backed.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
       "colour": false
     },
@@ -4439,7 +4455,9 @@
       "id": "Daily markets|Fresh produce",
       "text": "Fruit, vegetables, dairy, and eggs. Available every morning.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
       "colour": false
     },
@@ -6190,7 +6208,9 @@
     {
       "id": "River ferry|River crossing",
       "text": "Transport foot travelers and small goods across the river.",
-      "needs": [],
+      "needs": [
+        "river"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -6198,7 +6218,9 @@
     {
       "id": "River ferry|Small cargo",
       "text": "Move small amounts of cargo across the river.",
-      "needs": [],
+      "needs": [
+        "river"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -6777,7 +6799,7 @@
     },
     {
       "id": "Village reeve|Administrative oversight",
-      "text": "Manage village affairs on behalf of the lord. Allocate strips and common access.",
+      "text": "Manage the village's affairs day to day. Allocate strips and common access.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -7407,7 +7429,7 @@
     },
     {
       "id": "Access to parish church|Last rites",
-      "text": "Funeral rites and burial. The priest manages the graveyard.",
+      "text": "Funeral rites, said by the parish priest, who comes or is sent for.",
       "needs": [],
       "excludes": [],
       "crisis": [],

@@ -39,7 +39,9 @@ function lift(text) {
  * @returns {string | undefined}
  */
 export function drawInstitutionDesc(texts, seedKey, facts, poolKey) {
-  const drawnText = pickVariant(/** @type {string[]} */ ([...texts]), /** @type {string} */ (seedKey));
+  // W2-FIX-DATA-4 item 3: a pool of one text is that text; no hash is read (the cascade's rows resolve here, and the
+  // fork census's hash channel counts only real choices).
+  const drawnText = texts.length === 1 ? texts[0] : pickVariant(/** @type {string[]} */ ([...texts]), /** @type {string} */ (seedKey));
   const pool = texts.map(lift);
   if (!pool.some((l) => typeof l !== 'string')) return drawnText;
   const at = texts.indexOf(/** @type {string} */ (drawnText));

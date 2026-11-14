@@ -1,0 +1,38 @@
+births base 720 tip 720 missing 0; leaf diffs 746937; towns moved 720
+family institutions: 617 towns
+family generationCoherenceReceipt: 611 towns
+family npcs: 607 towns
+family simulationTrace: 602 towns
+family history: 599 towns
+family relationships: 576 towns
+family powerStructure: 458 towns
+family economicState: 416 towns
+family prominentRelationship: 347 towns
+family culturalIdentity: 320 towns
+family conflicts: 269 towns
+family availableServices: 249 towns
+family stress: 240 towns
+family stressors: 240 towns
+family arrivalScene: 229 towns
+family resourceAnalysis: 208 towns
+family pressureSentence: 200 towns
+family defenseProfile: 178 towns
+family config: 173 towns
+family economicViability: 69 towns
+family culturalNotes: 38 towns
+family spatialLayout: 17 towns
+family coherenceNotes: 6 towns
+family isolationSupport: 1 towns
+family activeConditions: 1 towns
+  617	.institutions[].desc	 e.g. w2fd8r-thorp-0
+  595	.generationCoherenceReceipt.judgments[].evidence[].evidence	 e.g. w2fd8r-thorp-1
+  591	.npcs[].goal.short	 e.g. w2fd8r-thorp-3
+  590	.npcs[].goal.long	 e.g. w2fd8r-thorp-3
+  585	.npcs[].goal.intent.short.kind	 e.g. w2fd8r-thorp-3
+  585	.npcs[].goal.intent.long.kind	 e.g. w2fd8r-thorp-3
+  581	.simulationTrace[].causes[].effect	 e.g. w2fd8r-thorp-2
+  576	.npcs[].role	 e.g. w2fd8r-thorp-3
+  576	.npcs[].secret.what	 e.g. w2fd8r-thorp-3
+  575	.npcs[].title	 e.g. w2fd8r-thorp-3
+  575	.npcs[].goal.intent.short.key	 e.g. w2fd8r-thorp-3
+  575	.npcs[].secret.stakes	 e.g. w2fd8r-thorp-3

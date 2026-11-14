@@ -11,7 +11,9 @@
 import { random as rng, getActiveRng } from '../../kernel/rngContext.js';
 import { getInstFlags } from '../helpers.js';
 import { classifyService } from './serviceClassifier.js';
-import { getServiceTierInfo } from './serviceAvailability.js';
+import { getServiceTierInfo, serviceDomainOf } from './serviceAvailability.js';
+import { keepOf, boughtShare } from '../../domain/facts/keep.js';
+import { fnv1a32 } from '../../kernel/proseHash.js';
 import { getServicesForInstitution } from './institutionServices.js';
 import {
   clearCustomDefinitionIdentity,
@@ -146,6 +148,41 @@ function availableServiceIdentityKey(service) {
 }
 
 /**
+ * COHERENCE-UPKEEP (the chair's ruling 4 of 2026-11-12): the service categories a place buys
+ * outright. With the commercial services (`serviceDomainOf` 'commercial'), each keeps
+ * `boughtShare('services', keepOf(prosperity))` of its rows — 0.82 at Struggling, the identity at
+ * Prosperous and Wealthy.
+ */
+const BOUGHT_CATEGORIES = new Set(['healing', 'lodging', 'food', 'equipment', 'transport']);
+
+/**
+ * COHERENCE-UPKEEP-5 (the review's F2; the proposal's §c.6 "never scaled: … a vocation"): A HOUSE'S
+ * OWN SERVICE IS NEVER SCALED. A burial ground buries, a market square holds its market, a temple
+ * keeps its rites; only what a house offers beyond its vocation is kept as far as the place can pay.
+ * Its own service is every row its catalogue GUARANTEES (`p >= 1`: offered at every tier, by the
+ * catalogue's own word) and every rite (`serviceDomainOf` 'religion').
+ * @param {any} service @param {string} institutionName @returns {boolean}
+ */
+const isOwnService = (service, institutionName) => Number(service.p) >= 1
+  || serviceDomainOf(service.name, institutionName) === 'religion';
+
+/**
+ * The draw-free upkeep roll, 0..1, keyed on the birth seed, the institution and the service (FNV-1a
+ * with an avalanche finalizer). It consumes NO PRNG draw, so the step's seeded stream and every
+ * roll above it are untouched.
+ * @param {string} seed @param {string} institutionName @param {string} serviceName @returns {number}
+ */
+function upkeepRoll(seed, institutionName, serviceName) {
+  let h = fnv1a32(`${seed}|upkeep|${institutionName}|${serviceName}`);
+  h ^= h >>> 16;
+  h = Math.imul(h, 0x85ebca6b);
+  h ^= h >>> 13;
+  h = Math.imul(h, 0xc2b2ae35);
+  h ^= h >>> 16;
+  return (h >>> 0) / 4294967296;
+}
+
+/**
  * @param {{
  *   buckets:Record<string, Array<Record<string, unknown>>>,
  *   tier:string,
@@ -158,6 +195,7 @@ function availableServiceIdentityKey(service) {
  *     allowsService:(service:unknown,provider?:unknown,category?:string)=>boolean,
  *     portKind?:'maritime'|'river'|'none',
  *   },
+ *   upkeep?:{ prosperity?:unknown, seed?:string }|null,
  * }} input
  * @returns {{criminalEffective:number,seen:Set<string>}}
  */
@@ -186,12 +224,47 @@ export function materializeInstitutionServiceRolls(input) {
   // terrain, the world law's water and magic law), read lazily, for the declared rows. Draw-free.
   const facts = () => birthFactsOf({ institutions, config, tier }, worldLaw);
 
+  // COHERENCE-UPKEEP (ruling 4): what the place can pay for, from the one home.
+  const keep = keepOf(input.upkeep?.prosperity);
+  const upkeepSeed = String(input.upkeep?.seed || '');
+
   for (const institution of filteredInstitutions) {
     const services = getServicesForInstitution(
       institution,
       tier,
       mergedOpts,
     );
+    // The floor (ruling 4): a standing institution keeps at least one row. The first row the upkeep
+    // roll held back is kept for it if every other row of its own was held back too.
+    let placedRows = 0;
+    /** @type {{ row: any, category: string, identityKey: string, customService: boolean, service: any } | null} */
+    let heldBack = null;
+    /** @param {any} row @param {string} category @param {string} identityKey @param {boolean} customService @param {any} service */
+    const place = (row, category, identityKey, customService, service) => {
+      const projected = projectAvailableService(
+        row,
+        String(institution.name || ''),
+      );
+      buckets[category].push(projected);
+      materializedByIdentity.set(identityKey, [projected]);
+      placedRows += 1;
+
+      // Cross-list, do not move. Lodging provisions still prove the
+      // settlement has food, preventing a contradictory notable absence.
+      if (
+        !customService
+        && category === 'lodging'
+        && /food|drink|provision|meal/i.test(String(service.name || ''))
+      ) {
+        const foodProjection = projectAvailableService(
+          row,
+          String(institution.name || ''),
+        );
+        buckets.food.push(foodProjection);
+        const tracked = materializedByIdentity.get(identityKey);
+        if (tracked) tracked.push(foodProjection);
+      }
+    };
     for (const service of services) {
       if (!worldLaw.allowsService(
         service,
@@ -271,29 +344,20 @@ export function materializeInstitutionServiceRolls(input) {
         // CENSUS-1f (site 15): resolved AFTER the rolls, so no roll moves.
         const row = resolveServiceRow(service, facts);
         if (!row) continue;
-        const projected = projectAvailableService(
-          row,
-          String(institution.name || ''),
-        );
-        buckets[category].push(projected);
-        materializedByIdentity.set(identityKey, [projected]);
-
-        // Cross-list, do not move. Lodging provisions still prove the
-        // settlement has food, preventing a contradictory notable absence.
-        if (
-          !customService
-          && category === 'lodging'
-          && /food|drink|provision|meal/i.test(String(service.name || ''))
-        ) {
-          const foodProjection = projectAvailableService(
-            row,
-            String(institution.name || ''),
-          );
-          buckets.food.push(foodProjection);
-          const tracked = materializedByIdentity.get(identityKey);
-          if (tracked) tracked.push(foodProjection);
+        // COHERENCE-UPKEEP (ruling 4): a bought service is kept as far as the place can pay, by a
+        // draw-free roll; the seeded rolls above are untouched.
+        const bought = !customService && !isOwnService(service, String(institution.name || '')) && (BOUGHT_CATEGORIES.has(category)
+          || serviceDomainOf(service.name, institution.name) === 'commercial');
+        const share = bought ? boughtShare('services', keep) : 1;
+        if (share < 1 && upkeepRoll(upkeepSeed, String(institution.name || ''), String(service.name || '')) >= share) {
+          if (!heldBack) heldBack = { row, category, identityKey, customService, service };
+          continue;
         }
+        place(row, category, identityKey, customService, service);
       }
+    }
+    if (placedRows === 0 && heldBack) {
+      place(heldBack.row, heldBack.category, heldBack.identityKey, heldBack.customService, heldBack.service);
     }
   }
 

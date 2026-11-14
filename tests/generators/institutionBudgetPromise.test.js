@@ -124,67 +124,85 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 // (6fce6e3d180fc1be -> 0b896078cabcb3c9) gains one `power_economic` coherence note, its only moved leaves
 // (.coherenceNotes.0: type, severity, tab, note); the line's tip 9e57f5023 reproduces the old hash. Red at the lane's own
 // tip and base for the agreement lane's cause, so the lane could not see it. Re-captured at the merge, the probe and this loop.
+// RE-KEYED BY IDENTITY 2026-11-14 (R2-CODE-B-7, the merge 0aa0cce00 of the line 976db5b19 into lane/r2-code-b-2026-11-13):
+// 9 of 60 moved against the line's sixty, none by the budget (densityFactor still forced to 1; src/data/institutionBudget.js
+// unchanged on both sides): seeds 2, 13, 20, 27, 36, 43, 48, 49, 51, by THIS LANE's declared generator moves (R2-CODE-B-4
+// item 4, the crisis cast's reasons and the empty seat; R2-CODE-B-6 items 0 and 0b, the wartime summary), measured leaf by
+// leaf against a frozen tree of the line's tip: `stress` 34 leaves and `stressors` 34 leaves in the nine, `npcs` 3 leaves in
+// seeds 13, 43, 49; nothing else. Against the lane's own pin (c40da4ec6) all 60 moved, by the line's points 47-49.
+// Re-captured at the merged tip e285c603f (whose generation is 0aa0cce00's: the commits after it are display only) with the
+// factor forced to 1.0, this file's own loop (an untracked probe), twice and equal.
+// RE-KEYED BY IDENTITY 2026-11-14 (JOIN-3, THE TRUE JOIN on lane/join-2026-11-14, nine lanes merged over the line 976db5b19):
+// 60 of 60 moved against the pin (the r2-code-b lane's sixty, taken whole at the join), none by the budget (densityFactor still
+// forced to 1; src/data/institutionBudget.js unchanged by every lane). MEASURED, this file's own loop (an untracked probe hashing
+// each record and its leaves two levels down) at the line and at each lane's merged tip: the line reads its own sixty; a lane's
+// tip moves, of the line's sixty: r3-code-c 28, r2-code-a 37, powers-follow-up 53, w2-fix-data 60, r2-code-b 9 (exactly its pin),
+// coherence-upkeep 60; r3-tabs, w2-write and w2-c-leaves none. At the join all 60 move, and on every seed every moved leaf is a
+// leaf that some lane moving that seed moves at its own tip: no seed and no leaf moved by the join alone. Each mover is a lane's
+// DECLARED generation move (the generator golden's re-record in each lane's drafted shift record; the powers lane's draft names
+// this pin among the digests its writers re-take). Re-captured at the joined tree e663b2b80 with the factor forced to 1.0, twice
+// and equal.
 const BEFORE = Object.freeze([
-  '5846eb303e8ba516', // 0
-  '4995df767a612f94', // 1
-  '5d33c4fdc59d7f54', // 2
-  '92058181fabb379a', // 3
-  'fe63bd3821950b4a', // 4
-  '249ba08c1ca0ec02', // 5
-  'f31d6451479eb329', // 6
-  '029d750b2334bb07', // 7
-  'e186f30d21203608', // 8
-  '193d6286570ea98c', // 9
-  '786563116be92224', // 10
-  'e5c3de10fc7c175e', // 11
-  '292591d34a813144', // 12
-  '9b5e1d1469351341', // 13
-  'f5f10a7fcff76dcd', // 14
-  'ea102a6c9253a407', // 15
-  '1413b1473f378700', // 16
-  '2e2d2299b1dae456', // 17
-  'a6383fa022c4e283', // 18
-  'df7521324a6f5454', // 19
-  'e705e4fa503944a0', // 20
-  'ef7721cf7fb643ed', // 21
-  'd2b5134667e49da4', // 22
-  '343d2bc95388df18', // 23
-  '281e20ca5bfd1a29', // 24
-  'c4ac235f46933a9e', // 25
-  '75854a2e5961a709', // 26
-  '266fcb74c48a99e8', // 27
-  'f9224e0ed4d3bc5d', // 28
-  '7983caa001eee7da', // 29
-  '712ad4f148b53607', // 30
-  '98bab608996c9883', // 31
-  '61de1e198ead9183', // 32
-  '22ce1afc5e775697', // 33
-  '18703c4fb3f9e229', // 34
-  '27457d262f44c5b1', // 35
-  'ef693b7b839585ae', // 36
-  'a342a643fda176a3', // 37
-  'f1ef4fc4047259fc', // 38
-  '07015de5e6b7cffe', // 39
-  'caad5676d4326a51', // 40
-  '0b896078cabcb3c9', // 41
-  '7aeabecf762d9569', // 42
-  '7e44d8330739caeb', // 43
-  '00bac639c8e3061f', // 44
-  '07d65c0a80c9ed19', // 45
-  '8ad4cc8130b6d3ab', // 46
-  'e7cb33a42a3ab4fb', // 47
-  '4fe39e5407bffd9f', // 48
-  '9270867ba13a3544', // 49
-  '8f7d4ea8f6a7fb78', // 50
-  'efd1558c0bba487e', // 51
-  '884f68d1963e4adb', // 52
-  'a0939636e94032a4', // 53
-  '55efbde5e39ea54c', // 54
-  'e0f1b369eb044ed4', // 55
-  'dfcabc726908a708', // 56
-  '83f39ca5ae1d03cc', // 57
-  '27d71132630829a6', // 58
-  '7593b8429756cab7', // 59
+  'b89f4e15558adb9d', // 0
+  '1b49d8aa24217d97', // 1
+  'c08fde0b05256ea0', // 2
+  '186f21c8c00e1bcd', // 3
+  '1f4191fdb58dee79', // 4
+  '4141725551a16c28', // 5
+  '4f024d5aeaa959ad', // 6
+  '5e022d6e76d13817', // 7
+  'feaecd1fefa0e4e9', // 8
+  'b93bd034f949fc44', // 9
+  '066eaf9be7abaf99', // 10
+  '083cd5acc1206766', // 11
+  'caefb2da701ba354', // 12
+  '255c5499aafc65ac', // 13
+  'fdbd869ce938b82e', // 14
+  '75f70b63ac7fb0f0', // 15
+  '82b587febd2622fb', // 16
+  '730020228dac830a', // 17
+  'da0fb338514a495f', // 18
+  'd45d0a8c57a19695', // 19
+  '9cd89a208c8387f7', // 20
+  '53f91753deb4f701', // 21
+  '7932ab9f8a5469e3', // 22
+  '746112109fa938ae', // 23
+  '9fb7d4a47a91e3e1', // 24
+  '95937ea08a5575e8', // 25
+  'f15dda8487d472a0', // 26
+  '23b77359a1e1b5f2', // 27
+  'f3a389e137b07189', // 28
+  '5c1e6d7ec8f15040', // 29
+  '929bd0e86a9acc97', // 30
+  '48625768380d533c', // 31
+  '517b9e18f3e03515', // 32
+  '57ed78a7e02687f8', // 33
+  '195140cbbd951b3d', // 34
+  'ea7dec5e55fedcba', // 35
+  '4e152b01ca007685', // 36
+  '7f20ae0b82f626a2', // 37
+  'e1522102d02f24fd', // 38
+  'eddfcf44e9dbef7a', // 39
+  '7a416764ca346893', // 40
+  '62ed790648b7b128', // 41
+  '4e2c0e4536bb7c6c', // 42
+  '6b000036e331a377', // 43
+  '37f84b9dc5854f76', // 44
+  '581b32bd08ccb9f5', // 45
+  '41aef79f7e8f8e8d', // 46
+  '6985122da96d7710', // 47
+  '3f310eb3be3f3911', // 48
+  'ebd6c1f1fc6bd4eb', // 49
+  'c2e8b0fda1220d59', // 50
+  '863fb5c9e7ce3825', // 51
+  '352d250339d758fa', // 52
+  'c9ef08f6d067da7a', // 53
+  '06d7242063ab67cb', // 54
+  'ec40890c3d31aa8e', // 55
+  'e1e7284ce85bd796', // 56
+  '6b80c4f6121944ac', // 57
+  'c95d6412ee41de9c', // 58
+  'd90f80f2c5fa1737', // 59
 ]);
 
 const hashOf = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex').slice(0, 16);

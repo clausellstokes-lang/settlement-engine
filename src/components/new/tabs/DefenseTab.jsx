@@ -15,12 +15,13 @@ import { statusCase } from '../labelLadder.js';
 import { defenseDeskRead, criminalRingNoteRead } from '../defenseDeskRead.js';
 import { criminalStructureOf } from '../deskHostArgs.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
-import { truncateAtWord } from '../../../lib/text.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { edged } from '../../../design/edgedBox.js';
 import { isVeiled } from '../../../domain/display/galleryVeil.js';
 import { crisisSummaryForSurface } from '../../../domain/crisis/crisisSummaryVantage.js';
+// THE FORCE CARD PRINTS A HOUSE AS THE ROSTER DOES (R3-TABS-5, the chair's ruling (a)): through the label seam.
+import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 // THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18). Every position on this tab used to
 // map its drawn sentences to one `<p>` EACH, so a five-lens position printed five paragraphs
 // that each opened on the town's name. The DRAW is unchanged: the lines handed over are the
@@ -159,6 +160,23 @@ export function sentencesNotIn(text, printed) {
   const sentences = t.split(/(?<=[.!?])\s+/);
   const kept = sentences.filter((x) => !(x.trim().split(/\s+/).length >= 8 && p.includes(x.trim())));
   return kept.length === sentences.length ? t : kept.join(' ');
+}
+
+/**
+ * ⛔ THE PAGE NEVER CUTS A SENTENCE IN THE MIDDLE (R3-TABS, the chair's ruling of 2026-11-13; round three's cut
+ * #1274 #1389 #718 #817 #1174 #1082). The crime-pattern rows were cut with `truncateAtWord(desc, 200)` and printed
+ * "The settlement's gates and walls are…" (339 of 1,657 rows on 884 births at 9e57f5023). `text` up to its last
+ * whole sentence within `maxChars`; the whole text where no sentence ends within it.
+ * @param {unknown} text @param {number} maxChars
+ * @returns {string}
+ */
+export function wholeSentencesWithin(text, maxChars) {
+  const t = typeof text === 'string' ? text.trim() : '';
+  if (t.length <= maxChars) return t;
+  const head = t.slice(0, maxChars + 1);
+  const ends = [...head.matchAll(/[.!?][\x22\x27)\]]?(?=\s|$)/g)]; // the closing quotes as \x22 \x27: a bare quote in this literal opened a string for the source scan of the mount walker
+  const last = ends[ends.length - 1];
+  return last ? t.slice(0, last.index + last[0].length) : t;
 }
 
 export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false, playerView = false}) {
@@ -334,16 +352,18 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   const foodEndurance = foodEnduranceLine(r);
   const defViolations = deriveDefenseVulnerabilities(r);
 
-  // Force card component
+  // Force card component. ⛔ NO PROVENANCE BADGE (R3-TABS, the chair's ruling b1, 2026-11-13): the
+  // card printed "REQ" for a 'required' source and "FORCED" for every other source but 'generated'
+  // ('coherence_repair', 'cascade', 'faction_boost', 'forced'), so a wall the coherence pass raised
+  // read as forced by the user. Both are the generator's provenance, which the page never shows; the
+  // Institutions tab's badge says who put a house there.
+  // ⛔ NO SURFACE PRINTS A CATALOGUE NAME'S BRACKET (R3-TABS-5, the chair's ruling (a) of 2026-11-14 on H3-T2): the
+  // card printed the catalogue key raw, "Gates (if walled)" (14 of 1,536 births at 301572583, every one walled). The
+  // name now goes through the seam the roster prints a house with; the dedupe below and every match keep the raw key.
   const ForceCard = ({inst:i,accent}) => (
     <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:`3px solid ${accent||'#6b5340'}`,padding:'9px 12px',marginBottom:6}}>
-      <div style={{display:'flex',alignItems:'flex-start',gap:8}}>
-        <div style={{flex:1}}>
-          <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,marginBottom:i.desc?2:0}}>{i.name}</div>
-          {i.desc&&<div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{i.desc}</div>}
-        </div>
-        {i.source&&i.source!=='generated'&&<span style={{fontSize:chromeFontSize(FS.micro, isMobile),fontWeight:700,color:swatch['#A0762A'],background:swatch['#F0E4C0'],padding:'1px 5px',letterSpacing:'0.04em',flexShrink:0}}>{i.source==='required'?'REQ':'FORCED'}</span>}
-      </div>
+      <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,marginBottom:i.desc?2:0}}>{institutionDisplayName(i)}</div>
+      {i.desc&&<div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{i.desc}</div>}
     </div>
   );
 
@@ -501,10 +521,13 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
             </div>
           </div>}
 
-          {/* The criminal faction as ONE coupled line, name and band (T2-20): its description
-              lives on Power's roster and the capture state is Power's. */}
+          {/* The criminal faction as ONE line, by name (T2-20): its description lives on Power's
+              roster and the capture state is Power's. ⛔ AND SO DOES ITS STRENGTH (R3-TABS, cut #816,
+              the chair's ruling (c)): the band printed here was the faction's stored `powerLabel`,
+              stale against the faction's own figure on 1,105 of 3,247 factions at aac79b808 ("Thieves'
+              Guild · Minor" beside the Power tab's 18, which the generators' ladder calls Significant). */}
           {crimFaction&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #e8b0b0',borderLeft:'3px solid #8b1a1a',padding:'7px 13px',fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:swatch.danger}}>
-            Underworld: {crimFaction.faction}{crimFaction.powerLabel?` · ${crimFaction.powerLabel}`:''}
+            Underworld: {crimFaction.faction}
           </div>}
 
           {/* Crime types — as enforcement challenges, not economic statistics */}
@@ -520,7 +543,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
                 return (
                 <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',padding:'7px 10px'}}>
                   <div style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:swatch.inkMag2,marginBottom:desc?2:0}}>{ct.type}</div>
-                  {desc&&<div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{truncateAtWord(desc, 200)}</div>}
+                  {desc&&<div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{wholeSentencesWithin(desc, 200)}</div>}
                 </div>
                 );
               })}

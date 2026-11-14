@@ -198,7 +198,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "walls"
+            "walls",
+            "garrison"
           ],
           "text": "The garrison is quartered inside the walls, and the town's business is conducted around it.",
           "slots": [],
@@ -1037,7 +1038,10 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           7
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "declares": [
+          "crisis: occupied"
+        ]
       },
       "POLITICALLY FRACTURED": {
         "role": "spine",
@@ -1283,7 +1287,10 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           6
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "declares": [
+          "crisis: wartime"
+        ]
       },
       "MASS MIGRATION": {
         "role": "spine",
@@ -2893,6 +2900,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "DIRECTION: worsening · CRISIS: famine": [
         {
           "angle": "local",
+          "marks": [
+            "tier: ≥ village"
+          ],
           "text": "The famine in {settlement} is getting worse: the rations shrink each week, and the queues for them grow longer.",
           "slots": [
             "settlement"
@@ -2901,7 +2911,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "official",
-          "text": "Each week {settlement} has more hungry mouths and less to give them, and those in charge have no grain left to promise.",
+          "text": "Each week more people in {settlement} go hungry, and those in charge have not stopped it.",
           "slots": [
             "settlement"
           ],

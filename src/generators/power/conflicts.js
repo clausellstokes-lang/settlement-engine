@@ -23,7 +23,7 @@ import { BASE_ISSUES, STRESS_ISSUES, castFilled, kindsOfPower } from './conflict
 //   facts              — the town's facts, for a hook that declares a thing
 const buildConflictPlotHooks = (factionA, factionB, conflict, instFlags, stressFlags, facts = null) => {
   // ONE HASH PER QUARREL: it picks the hook and the offer's wording, so no other draw moves.
-  const seedKey = `${getActiveRng()?.seed ?? ''}::${factionA.name}>${factionB.name}::${conflict?.issue}`;
+  const seedKey = `${getActiveRng()?.seed ?? ''}::${factionA.name}>${factionB.name}::${conflict?.id ?? conflict?.issue}`; // COHERENCE-POWERS-8 (#337): the issue's stable id (its text, for every issue but a reworded one)
   const seedHash = fnv1a32(seedKey);
   const flagHooks = [];
   if (stressFlags.merchantCriminalBlur)

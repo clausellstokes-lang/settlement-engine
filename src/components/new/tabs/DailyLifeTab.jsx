@@ -14,6 +14,7 @@ import { economyDeskRead } from '../economyDeskRead.js';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
 import { edged } from '../../../design/edgedBox.js';
+import { foodBandOf } from '../../../domain/summary/tonightSheet.js'; // the food label's one home (ROUND THREE item 2b)
 
 const INK = swatch['#1C1409'], MUTED = swatch['#9C8068'], SECOND = swatch['#6B5340'],
       BORDER = swatch['#E0D0B0'], PARCH = swatch['#FDF8F0'], _CARD = swatch['#FFFBF5'];
@@ -72,7 +73,11 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
   // as the narrative layer). Local-dev mock remains ungated.
   const dailyLifeEnabled = isConfigured ? !!saveId : true;
 
-  const ctx = extractSettlementContext(r);
+  // R2-CODE-B item 4 (the cold list REVIEW-W2A-3 #848: the tile read "Surplus" beside a record that
+  // reads secure): whether the place has food to spare is the food record's band
+  // (`foodSecurity.foodRecord.band`, data/bandLadders.js :: foodSecurityBandKeyOf), the home the
+  // Overview's Food Security reads; the context's own percent stands only for a record with no band.
+  const ctx = withRecordSurplus(extractSettlementContext(r), r);
   // THE ECONOMY DESK, through its one caller. DS-ECO-8 — the prosperity rung read ON ITS
   // OWN — speaks HERE, and this is the only page-set position where it does.
   const deskProse = economyDeskRead(r, { publicDossier, playerView, publicSite: 'economy:daily_life', tier: r?.tier });
@@ -121,13 +126,17 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
   const displayNarrative = narrative || (aiDailyLife ? formatDailyLifeResult(aiDailyLife) : null);
   const hasContent = !!displayNarrative;
 
-  const foodLabel     =
+  // ROUND THREE item 2b (the cut's #843 #1102 #1297: "Strained" under an active famine, "Tightening" beside "Secure"):
+  // the tile prints the food label's ONE home (tonightSheet.js :: foodBandOf), the word the Tonight sheet and the Crisis
+  // page print; its own percent ladder stands only for a record with no band.
+  const foodBand      = foodBandOf(r?.economicState?.foodSecurity?.foodRecord);
+  const foodLabel     = foodBand ? foodBand.label :
     ctx.foodDeficit > 35 ? 'Severe' :
     ctx.foodDeficit > 20 ? 'Serious' :
     ctx.foodDeficit > 10 ? 'Strained' :
     ctx.foodDeficit > 0  ? 'Tightening' :
-    ctx.foodSurplus > 10 ? 'Surplus' : 'Adequate';
-  const foodColor     =
+    ctx.hasSurplus ? 'Surplus' : 'Adequate';
+  const foodColor     = foodBand ? foodBand.color :
     ctx.foodDeficit > 35 ? '#5a0a0a' :
     ctx.foodDeficit > 20 ? '#8b1a1a' :
     ctx.foodDeficit > 10 ? '#8a4010' :
@@ -314,6 +323,16 @@ function listText(items, fallback) {
 // CENSUS-2f, R-AH: food, order and paragraphs write `crisis: any` on every line; only the stress pool holds a calm line.
 export const DAILY_LIFE_LOCAL_CRISIS_SCOPED = Object.freeze(['localNarrative.stress']);
 
+/**
+ * The context with `hasSurplus`: the food record's band where the record has one, else the context's
+ * own percent over its old cut (a record written before the band).
+ * @param {ReturnType<typeof extractSettlementContext>} ctx @param {any} r @returns {ReturnType<typeof extractSettlementContext> & { hasSurplus: boolean }}
+ */
+function withRecordSurplus(ctx, r) {
+  const band = r?.economicState?.foodSecurity?.foodRecord?.band;
+  return { ...ctx, hasSurplus: typeof band === 'string' && band ? band === 'surplus' : ctx.foodSurplus > 10 };
+}
+
 function buildLocalDailyLifeNarrative(ctx) {
   const terrain = humanize(ctx.terrain) || 'mixed terrain';
   const trade = humanize(ctx.tradeRoute) || 'road access';
@@ -322,7 +341,7 @@ function buildLocalDailyLifeNarrative(ctx) {
     ? { text: 'bread is dear and the poorest households plan every meal carefully', crisis: ['any'] }
     : ctx.foodDeficit > 0
       ? { text: 'food is adequate for most families, though prices are watched closely', excludes: ['famine', 'crisis: famine'], crisis: ['any'] }
-      : ctx.foodSurplus > 10
+      : ctx.hasSurplus
         ? { text: 'granaries and kitchen gardens give the town a little breathing room', needs: ['institution: granary'], crisis: ['any'] }
         : { text: 'the food supply is ordinary, practical, and never taken for granted', excludes: ['crisis: hunger'], crisis: ['any'] });
 

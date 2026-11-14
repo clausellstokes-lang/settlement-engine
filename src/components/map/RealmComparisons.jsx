@@ -30,6 +30,7 @@ import { chromeFontSize } from '../../design/proseScale.js';
 const WAR_SEGMENTS = Object.freeze([
   { clause: 'at peace', color: GREEN, word: 'at peace' },
   { clause: 'with its armies in the field', color: GOLD, word: 'afield' },
+  { clause: 'at war', color: SECOND, word: 'at war' }, // COHERENCE-UPKEEP-7, 2b: the town's own war, the map silent
   { clause: 'under siege', color: RED, word: 'under siege' },
 ]);
 const EXHAUSTION_BANDS = Object.freeze(['near peace', 'war-weary', 'exhausted']);

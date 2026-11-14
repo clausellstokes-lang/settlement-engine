@@ -44,6 +44,7 @@ import { deriveAllCapacities, CAPACITY_NAMES } from './capacityModel.js';
 import { deriveHistoryBeats } from './historyBeats.js';
 import { deriveAllNpcProfiles } from './npcProfile.js';
 import { deriveCausalState } from './causalState.js';
+import { powerPossessive } from './display/powerSentenceName.js';
 
 // ── Local typedefs ───────────────────────────────────────────────────────
 
@@ -286,7 +287,8 @@ function deriveChildWarnings(s, ctx) {
   if (top.length === 0) {
     text = 'Children are warned about the usual things: the deep well, the strangers\' road, the woods at twilight.';
   } else {
-    const parts = top.map(t => threatWarning(t));
+    // R3-CODE-C (the chair's C-L4): two threats of one kind give one warning, said once ("the road past sundown; …; the road past sundown").
+    const parts = [...new Set(top.map(t => threatWarning(t)))];
     text = `Children are warned about ${parts.join('; ')}.`;
     for (const t of top) refs.push({ id: t.id, label: t.label, type: 'threat' });
   }
@@ -379,7 +381,8 @@ function deriveOutsiderImpressions(s, ctx) {
 
   const parts = [];
   if (dominantFaction) {
-    parts.push(`${dominantFaction.name}'s mark is on every door that matters`);
+    // R3-CODE-C (the chair's C-L4): the possessive through the one leaf that forms a power's ("Merchant Guilds's" → "Merchant Guilds'").
+    parts.push(`${powerPossessive(dominantFaction.name)} mark is on every door that matters`);
     refs.push({ id: dominantFaction.id, label: dominantFaction.name, type: 'faction' });
   }
   if (top && top.severityBand !== 'low') {
@@ -427,8 +430,9 @@ function deriveUnspokenTopics(s, ctx) {
     refs.push({ id: corruption.id, label: corruption.label, type: 'condition' });
   }
 
-  const text = topics.length
-    ? `Locals will not openly discuss ${topics.join('; or ')}.`
+  const said = [...new Set(topics)]; // R3-CODE-C (C-L4): a topic said once
+  const text = said.length
+    ? `Locals will not openly discuss ${said.join('; or ')}.`
     : 'Locals are happy to discuss most things; the usual private subjects stay private.';
 
   return slot('unspoken_topics', text, 'hidden threats + unresolved history wound + active corruption', refs);
@@ -466,8 +470,11 @@ function deriveRecentChanges(s, ctx) {
     refs.push({ id: t.id, label: t.label, type: 'threat' });
   }
 
-  const text = changes.length
-    ? `Recent changes: ${changes.join('; ')}.`
+  // R3-CODE-C (the chair's C-L4): the slot's label is "Recent changes" and every reader prints it beside the text
+  // ("Recent changes: Recent changes: …"), so the text does not repeat it; a change is said once.
+  const said = [...new Set(changes)].join('; ');
+  const text = said
+    ? `${said[0].toUpperCase()}${said.slice(1)}.`
     : 'The last few seasons have run their usual course. No notable shifts in the rhythm of the place.';
 
   return slot('recent_changes', text, 'history.recentDisruption + new conditions + acute threats', refs);

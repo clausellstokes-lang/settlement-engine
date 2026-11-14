@@ -46,7 +46,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the master of the hunt": ["Huntmaster", "Master of the Hunt"],
   "the pawnbroker": ["Pawnbroker", "Pawnmaster"],
   "the innkeeper": ["Innkeeper", "Landlord", "Host"],
-  "the alewife": ["Alewife", "Brewster"],
+  "the alewife": [{ male: "Brewster", female: "Alewife" }, "Brewster"], // POWERS-9 (ROUND-3-CUT-INCREMENT pf#250): no Alewife of a man; the pool's own "Brewster" (a man's "Brewer" named a brewery the town lacks: the census's kind a, 10 villages)
   "the caravanserai keeper": ["Caravanserai Keeper", "Host"],
   "the horse-coper": ["Horse-Coper", "Horse-Dealer"],
   "the stable keeper": ["Stablekeeper", "Ostler"],
@@ -83,7 +83,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the brickmaker": ["Brickmaker", "Master Brickmaker"],
   "the cobbler": ["Cobbler", "Master Cobbler"],
   "the tailor": ["Tailor", "Master Tailor"],
-  "the midwife": ["Midwife", "Goodwife"],
+  "the midwife": [{ male: "Goodman", female: "Midwife" }, { male: "Goodman", female: "Goodwife" }], // COHERENCE-POWERS-7 (cold list #543 #569 #593 #657): a man is no Goodwife; POWERS-9 (pf#288, the chair's ruling): nor a Midwife
   "the woodcarver": ["Woodcarver", "Master Carver"],
   "the scribe": ["Scribe", "Clerk"],
   "the cartographer": ["Cartographer", "Mapmaker"],
@@ -163,7 +163,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the troupe leader": ["Troupe Leader", "Troupe Master"],
   "the theatre manager": ["Theatre Manager", "Manager"],
   "the house boss": ["Boss"],
-  "the madam": ["Madam"],
+  "the madam": [{ male: "Master", female: "Madam" }], // POWERS-9 (the chair's row: "Madam" on a man): the style follows the person
   "the pit boss": ["Pit Boss"],
   "the lanista": ["Lanista"],
   "the fortune teller": ["Fortune-Teller", "Seer"],
@@ -197,7 +197,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the ringleader": ["Ringleader"],
   "the trafficker": ["Trafficker"],
   "the college master": ["Master", "Master of the College"],
-  "the district madam": ["Madam"],
+  "the district madam": [{ male: "Master", female: "Madam" }], // POWERS-9: as "the madam"
   "the golem-master": ["Golem-Master"],
   "the necromancer-overseer": ["Overseer"],
   "the exchange master": ["Exchange Master", "Master of the Exchange"],
@@ -368,4 +368,27 @@ export function honorificOfTitle(title, gender, seed, place = {}) {
   if (head) return `Head of ${head[1]}`;
   const bare = t.replace(/^the\s+/i, '');
   return bare.charAt(0).toUpperCase() + bare.slice(1);
+}
+
+/**
+ * THE STYLED TITLE (COHERENCE-POWERS-8, the chair's R2 from REVIEW-POWERS-FU F2): one home for the title a person is called
+ * by in words ("the lord", "the lady"), read by every row that names a person by role. A title whose registry form is
+ * gendered ({ male, female }) and whose last word is the masculine form's last word takes the feminine's for a woman:
+ * "the lord" → "the lady", "the abbot" → "the abbess", "the high priest" → "the high priestess" — the word her card's
+ * honorific already gives her. Any other title, every man's, and a value that is no title (missing, not a string) is
+ * returned as it is, so a row keeps exactly what it copied before. Pure, draw-free.
+ * @template T @param {T} title @param {unknown} gender @returns {T | string}
+ */
+export function styledTitleOf(title, gender) {
+  if (gender !== 'female' || typeof title !== 'string' || !title) return title;
+  const t = title;
+  const pool = FACE_HONORIFICS[t.trim()];
+  const form = (pool || []).find((h) => typeof h !== 'string');
+  if (!form || typeof form === 'string') return t;
+  const male = form.male.split(' ').at(-1) || ''; const female = form.female.split(' ').at(-1) || '';
+  const words = t.split(' ');
+  const last = words.at(-1) || '';
+  if (!male || male.toLowerCase() === female.toLowerCase() || last.toLowerCase() !== male.toLowerCase()) return t;
+  words[words.length - 1] = female.toLowerCase();
+  return words.join(' ');
 }

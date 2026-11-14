@@ -101,8 +101,10 @@
  * R | l | chains          | direct  | src/components/TradeDynamicsPanel.jsx
  * R | l | chains          | direct  | src/domain/compendium/institutionFacts.js
  * R | l | chains          | surface | src/domain/display/institutionProfile.js
+ * R | l | identity        | surface | src/domain/display/tradeListDisplay.js
  * R | l | identity+chains | surface | src/domain/display/validationOnPage.js
  * R | l | identity        | direct  | src/domain/edit/pools.js
+ * R | l | identity        | surface | src/domain/facts/chainWorking.js
  * R | l | identity        | direct  | src/domain/facts/registeredWords.js
  * R | l | identity        | surface | src/domain/resourceSites.js
  * R | l | none            | member  | src/domain/undercity/monotoneComponents.js

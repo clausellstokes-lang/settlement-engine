@@ -20,6 +20,7 @@
  * Pure and headless. No generator, store, or React dependency.
  */
 import { textOf } from '../domain/facts/textOf.js';
+import { declarationAdmits, declarationOf } from '../domain/facts/factVocabulary.js';
 
 const freezeList = (values) => Object.freeze([...values]);
 
@@ -88,7 +89,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     architecturalDetails: [
       'half-timbered upper floors project above the busier lanes',
-      'steep roofs, enclosed craft yards, and carved lintels mark the older wards',
+      { text: 'steep roofs, enclosed craft yards, and carved lintels mark the older wards', needs: ['tier: ≥ town'] }, // W2-FIX-DATA-HISTORY item D: a size word of a larger place (its small-place twin in CULTURE_LINE_SIBLINGS)
       'one broad street leading up to the hall organizes the settlement center',
     ],
     institutionBias: {
@@ -115,7 +116,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     foodways: [
       'Bread grains, pulses, garden produce, oil or rendered fats, wine, and preserved fish form the staple pattern.',
-      'Public ovens, neighborhood vendors, and shared dining customs make food distribution visibly civic.',
+      { text: 'Public ovens, market vendors, and shared dining customs make food distribution visibly civic.', needs: ['market'] }, // W2-FIX-DATA-HISTORY item B (CENSUS-2 kind c): the vendors are the market's (domain/foodways.js :: MARKET_WORDS), so a place with none, and the neighbourhoods a thorp lacks, never read it; was "neighborhood vendors"
     ],
     sacredLife: [
       { text: 'Shrines, processions, confraternities, and formal priesthoods share the public religious calendar.', needs: ['institution: temple'] },
@@ -130,9 +131,9 @@ export const CULTURE_PROFILES = Object.freeze({
       'Squares and courts make politics unusually public even when decisions are settled through private patronage.',
     ],
     architecturalDetails: [
-      { text: 'arcaded market fronts define the principal square', needs: ['market'] },
-      'warm tile roofs and enclosed courtyards break up the stone streets',
-      'fountains, steps, and reused columns give the civic center a layered age',
+      { text: 'arcaded market fronts define the principal square', needs: ['market', 'tier: ≥ village'] }, // W2-FIX-DATA-HISTORY item D: a size word of a larger place (its small-place twin in CULTURE_LINE_SIBLINGS)
+      { text: 'warm tile roofs and enclosed courtyards break up the stone streets', needs: ['tier: ≥ town'] }, // W2-FIX-DATA-2 item 4: stone streets are a town's
+      { text: 'fountains, steps, and reused columns give the civic center a layered age', needs: ['tier: ≥ village'] }, // W2-FIX-DATA-HISTORY item D: a size word of a larger place (its small-place twin in CULTURE_LINE_SIBLINGS)
     ],
     institutionBias: {
       categories: { Government: 1.08, Economy: 1.06, Infrastructure: 1.05 },
@@ -158,7 +159,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     foodways: [
       'Oats or barley, dairy, cattle products, woodland foods, fish, and seasonal preserves shape the table.',
-      'Herding and mixed farming produce a strongly seasonal food calendar.',
+      'Herds and field grain set a strongly seasonal food calendar.', // W2-FIX-DATA-HISTORY item B (ww-10, ww-345): the herds and the grain in the foodways reader's own source words (domain/foodways.js :: SOURCE_WORDS), so it stands only where both feed the place; was "Herding and mixed farming produce ..."
     ],
     sacredLife: [
       'Sacred enclosures, wells, groves, learned keepers, and household observances form a layered ritual landscape.',
@@ -216,9 +217,9 @@ export const CULTURE_PROFILES = Object.freeze({
       'Hospitality, reputation, contract, and access to mediation are practical forms of social capital.',
     ],
     architecturalDetails: [
-      { text: 'shaded arcades and latticed upper windows soften the market streets', needs: ['market'] },
+      { text: 'shaded arcades and latticed upper windows soften the market streets', needs: ['market', 'tier: ≥ village'] }, // W2-FIX-DATA-HISTORY item D: a size word of a larger place (its small-place twin in CULTURE_LINE_SIBLINGS)
       'courtyard gates reveal planted interiors and carefully managed water',
-      'caravan courts and covered lanes make movement through the merchant quarter deliberate',
+      { text: 'caravan courts and covered lanes make movement through the merchant quarter deliberate', needs: ['market', 'tier: ≥ town'] }, // W2-FIX-DATA-HISTORY item D: a size word of a larger place (its small-place twin in CULTURE_LINE_SIBLINGS)
     ],
     institutionBias: {
       categories: { Economy: 1.1, Infrastructure: 1.08 },
@@ -259,7 +260,7 @@ export const CULTURE_PROFILES = Object.freeze({
       'Seasonal scarcity makes storage, mutual aid, and dependable leadership visibly political.',
     ],
     architecturalDetails: [
-      'carved roof beams and long hall ridges dominate the older quarter',
+      { text: 'carved roof beams and long hall ridges dominate the older quarter', needs: ['tier: ≥ town'] }, // W2-FIX-DATA-2 item 4: a quarter is a town's
       { text: 'turf roofs and timber sheds gather behind the working waterfront', needs: ['navigable'] },
       { text: 'the assembly ground sits between the principal hall and the landing', needs: ['navigable'] },
     ],
@@ -304,7 +305,7 @@ export const CULTURE_PROFILES = Object.freeze({
     architecturalDetails: [
       'painted timber fronts and enclosed garden plots line the older lanes',
       { text: 'a communal green, bathhouse, and well bind several household compounds together', needs: ['institution: bathhouse'] },
-      { text: 'palisade lines and river stairs reveal successive stages of expansion', needs: ['palisade', 'river'] },
+      { text: 'palisade lines and river stairs reveal successive stages of expansion', needs: ['palisade', 'river', 'tier: ≥ town'] }, // W2-FIX-DATA-HISTORY item D: a size word of a larger place (its small-place twin in CULTURE_LINE_SIBLINGS)
     ],
     institutionBias: {
       categories: { Agriculture: 1.08, Infrastructure: 1.04 },
@@ -330,7 +331,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     foodways: [
       'Rice or millet, wheat foods, soy or pulse products, vegetables, tea, fish, and preserved condiments vary by ecology.',
-      'Shared waterworks, fermentation, and intensive garden production structure urban food supply.',
+      'Fermentation, careful use of water, and intensive garden plots shape the food supply.', // W2-FIX-DATA-HISTORY item B (CENSUS-2 kinds a and c): no waterworks and no town presumed; was "Shared waterworks, fermentation, and intensive garden production structure urban food supply."
     ],
     sacredLife: [
       'Temple, shrine, household, ancestor, philosophical, and state observances coexist without a single institutional center.',
@@ -346,8 +347,8 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     architecturalDetails: [
       'tiled rooflines and enclosed courts create a measured rhythm along the main axis',
-      'ward gates, shop fronts, and planted courtyards divide public from household space',
-      'the main street ends at the administrative precinct',
+      { text: 'ward gates, shop fronts, and planted courtyards divide public from household space', needs: ['tier: ≥ town'] }, // W2-FIX-DATA-HISTORY item D: a size word of a larger place (its small-place twin in CULTURE_LINE_SIBLINGS)
+      { text: 'the main street ends at the administrative precinct', needs: ['tier: ≥ town'] }, // W2-FIX-DATA-HISTORY item D: a size word of a larger place (its small-place twin in CULTURE_LINE_SIBLINGS)
     ],
     institutionBias: {
       categories: { Government: 1.08, Infrastructure: 1.08, Crafts: 1.06 },
@@ -388,9 +389,9 @@ export const CULTURE_PROFILES = Object.freeze({
       'Civic labor and festival obligations make the settlement a visibly collective project.',
     ],
     architecturalDetails: [
-      'a raised ceremonial precinct overlooks a broad and busy open plaza',
+      { text: 'a raised ceremonial precinct overlooks a broad and busy open plaza', needs: ['tier: ≥ town'] }, // W2-FIX-DATA-3 (REVIEW-W2A-3 #33): a precinct over a busy plaza is a town's (a thorp of twelve printed it)
       'terraces, plastered platforms, and residential compounds step with the terrain',
-      'causeways and managed water divide the settlement into organized neighborhoods',
+      { text: 'causeways and managed water divide the settlement into organized neighborhoods', needs: ['tier: ≥ village'] }, // W2-FIX-DATA-HISTORY item D: a size word of a larger place (its small-place twin in CULTURE_LINE_SIBLINGS)
     ],
     institutionBias: {
       categories: { Religious: 1.08, Economy: 1.07, Agriculture: 1.07 },
@@ -432,8 +433,8 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     architecturalDetails: [
       { text: 'shaded bazaar fronts open toward tanks, wells, and neighborhood shrines', needs: ['market', 'institution: temple'] },
-      'carved stone, plastered courtyards, and workshop lanes layer sacred and commercial space',
-      'occupational quarters cluster around shared wells and water channels',
+      { text: 'carved stone, plastered courtyards, and workshop lanes layer sacred and commercial space', needs: ['market', 'tier: ≥ village'] }, // W2-FIX-DATA-HISTORY item D: a size word of a larger place (its small-place twin in CULTURE_LINE_SIBLINGS)
+      { text: 'occupational quarters cluster around shared wells and water channels', needs: ['tier: ≥ town'] }, // W2-FIX-DATA-HISTORY item D: a size word of a larger place (its small-place twin in CULTURE_LINE_SIBLINGS)
     ],
     institutionBias: {
       categories: { Economy: 1.08, Religious: 1.06, Crafts: 1.08, Infrastructure: 1.06 },
@@ -489,8 +490,8 @@ export const CULTURE_PROFILES = Object.freeze({
     label: 'Greek-inspired',
     scope: 'An agora at the centre, civic associations, and houses climbing the hillside.',
     builtForm: [
-      { text: 'Stone and plaster courtyard houses rise around an agora, stoas, shrines, and steep connecting lanes.', needs: ['market'] },
-      { text: 'A fortified high precinct overlooks the market, theater, and workshops; where geography permits, it also overlooks a working harbor.', needs: ['market'] },
+      { text: 'Stone and plaster courtyard houses rise around an agora, stoas, shrines, and steep connecting lanes.', needs: ['market', 'tier: ≥ town'] }, // W2-FIX-DATA-2 item 4
+      { text: 'A fortified high precinct overlooks the market, theater, and workshops; where geography permits, it also overlooks a working harbor.', needs: ['market', 'tier: ≥ town'] }, // W2-FIX-DATA-2 item 4
     ],
     civicPattern: [
       'Assemblies, magistrates, councils, patrons, sanctuaries, and civic associations compete through public office.',
@@ -517,15 +518,106 @@ export const CULTURE_PROFILES = Object.freeze({
       { text: 'The market and assembly make disagreement public, while wealth and networks shape who is heard.', needs: ['market'] },
     ],
     architecturalDetails: [
-      { text: 'a colonnaded market edge frames the busiest civic ground', needs: ['market'] },
-      'whitewashed courts and stone stairs climb toward a fortified high precinct',
-      { text: 'workshops, shrines, and meeting halls crowd the approaches to the agora', needs: ['market', 'institution: temple'] },
+      { text: 'a colonnaded market edge frames the busiest civic ground', needs: ['market', 'tier: ≥ village'] }, // W2-FIX-DATA-HISTORY item D: a size word of a larger place (its small-place twin in CULTURE_LINE_SIBLINGS)
+      'whitewashed courts and stone steps catch the light between the houses', // W2-FIX-DATA-2 item 4 (cold list rows 2, 17): reworded to presume nothing; was "whitewashed courts and stone stairs climb toward a fortified high precinct"
+      { text: 'workshops, shrines, and meeting halls crowd the approaches to the agora', needs: ['market', 'institution: temple', 'tier: ≥ village'] }, // W2-FIX-DATA-HISTORY item D: a size word of a larger place (its small-place twin in CULTURE_LINE_SIBLINGS)
     ],
     institutionBias: {
       categories: { Government: 1.08, Economy: 1.06, Entertainment: 1.06 },
       keywords: { council: 1.08, market: 1.08, theater: 1.12, dock: 1.08, academy: 1.06 },
     },
   }),
+});
+
+/**
+ * W2-FIX-DATA-2 item 4 (2026-11-13; the REVIEW-W2B cold list, rows 2, 17, 253, 268, 298): A CULTURE LINE'S SMALL-PLACE
+ * TWIN. The culture named stone streets, an older quarter and a fortified high precinct in thorps, hamlets and villages.
+ * A line that presumes a town now declares its size, and its twin, in the same voice, says what a place of village size
+ * or smaller has. A twin stands outside its list, so the materializer's one pick over the list is the base's; it is
+ * reached only by resolution, at the materializer, which knows the tier (VETOABLE wording, the owner's).
+ * The greek detail ("… climb toward a fortified high precinct") is REWORDED instead: the arrival scene's redraw reads the
+ * detail lists, and a declared greek row would leave a small place without a market no line there, so that draw would
+ * be skipped and every later beat of the arrival re-dealt (measured: c01, c11). The greek built form, which the arrival
+ * does not read, declares and twins.
+ * @type {Readonly<Record<string, ReadonlyArray<Readonly<{ text: string, needs: ReadonlyArray<string>, twinOf?: string }>>>>}
+ */
+export const CULTURE_LINE_SIBLINGS = Object.freeze({
+  'Stone and plaster courtyard houses rise around an agora, stoas, shrines, and steep connecting lanes.': Object.freeze([
+    Object.freeze({ text: 'Stone and plaster courtyard houses rise around an agora, stoas, shrines, and steep connecting lanes.', needs: Object.freeze(['market', 'tier: ≥ town']) }),
+    Object.freeze({ text: 'Stone and plaster houses with whitewashed courts stand close together.', twinOf: 'Stone and plaster courtyard houses rise around an agora, stoas, shrines, and steep connecting lanes.', needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  'A fortified high precinct overlooks the market, theater, and workshops; where geography permits, it also overlooks a working harbor.': Object.freeze([
+    Object.freeze({ text: 'A fortified high precinct overlooks the market, theater, and workshops; where geography permits, it also overlooks a working harbor.', needs: Object.freeze(['market', 'tier: ≥ town']) }),
+    Object.freeze({ text: 'Whitewashed stone and plaster houses look out over the fields around them.', twinOf: 'A fortified high precinct overlooks the market, theater, and workshops; where geography permits, it also overlooks a working harbor.', needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  'warm tile roofs and enclosed courtyards break up the stone streets': Object.freeze([
+    Object.freeze({ text: 'warm tile roofs and enclosed courtyards break up the stone streets', needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: 'warm tile roofs and enclosed yards keep close together', twinOf: 'warm tile roofs and enclosed courtyards break up the stone streets', needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  'carved roof beams and long hall ridges dominate the older quarter': Object.freeze([
+    Object.freeze({ text: 'carved roof beams and long hall ridges dominate the older quarter', needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: 'carved roof beams and a long hall ridge stand above the other roofs', twinOf: 'carved roof beams and long hall ridges dominate the older quarter', needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  // W2-FIX-DATA-3 (REVIEW-W2A-3 #33): the mesoamerican precinct and plaza are a town's. VETOABLE wording (the owner's).
+  'a raised ceremonial precinct overlooks a broad and busy open plaza': Object.freeze([
+    Object.freeze({ text: 'a raised ceremonial precinct overlooks a broad and busy open plaza', needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: 'plastered house platforms face one another across a swept open yard', twinOf: 'a raised ceremonial precinct overlooks a broad and busy open plaza', needs: Object.freeze(['tier: ≤ village']) }),
+  ]),  // W2-FIX-DATA-HISTORY item D (2026-11-13; the review of the data lane, L4; CENSUS-2 kind c): wards and quarters below a town,
+  // neighbourhoods, a principal square, market streets, a civic centre of columns, an agora, an administrative precinct
+  // in thorps and hamlets (the chair's size ruling). Each twin names nothing its size makes false and presumes no house.
+  // VETOABLE wording (the owner's).
+  'steep roofs, enclosed craft yards, and carved lintels mark the older wards': Object.freeze([
+    Object.freeze({ text: 'steep roofs, enclosed craft yards, and carved lintels mark the older wards', needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: 'steep roofs, enclosed yards, and carved lintels mark the older houses', twinOf: 'steep roofs, enclosed craft yards, and carved lintels mark the older wards', needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  'arcaded market fronts define the principal square': Object.freeze([
+    Object.freeze({ text: 'arcaded market fronts define the principal square', needs: Object.freeze(['market', 'tier: ≥ village']) }),
+    Object.freeze({ text: 'deep eaves shade the open ground between the houses', twinOf: 'arcaded market fronts define the principal square', needs: Object.freeze(['tier: ≤ hamlet']) }),
+  ]),
+  'fountains, steps, and reused columns give the civic center a layered age': Object.freeze([
+    Object.freeze({ text: 'fountains, steps, and reused columns give the civic center a layered age', needs: Object.freeze(['tier: ≥ village']) }),
+    Object.freeze({ text: 'a well, worn steps, and an old carved stone give the houses a layered age', twinOf: 'fountains, steps, and reused columns give the civic center a layered age', needs: Object.freeze(['tier: ≤ hamlet']) }),
+  ]),
+  'shaded arcades and latticed upper windows soften the market streets': Object.freeze([
+    Object.freeze({ text: 'shaded arcades and latticed upper windows soften the market streets', needs: Object.freeze(['market', 'tier: ≥ village']) }),
+    Object.freeze({ text: 'latticed windows look out on the lane between the houses', twinOf: 'shaded arcades and latticed upper windows soften the market streets', needs: Object.freeze(['tier: ≤ hamlet']) }),
+  ]),
+  'caravan courts and covered lanes make movement through the merchant quarter deliberate': Object.freeze([
+    Object.freeze({ text: 'caravan courts and covered lanes make movement through the merchant quarter deliberate', needs: Object.freeze(['market', 'tier: ≥ town']) }),
+    Object.freeze({ text: 'covered lanes and shaded gateways make movement between the houses deliberate', twinOf: 'caravan courts and covered lanes make movement through the merchant quarter deliberate', needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  'palisade lines and river stairs reveal successive stages of expansion': Object.freeze([
+    Object.freeze({ text: 'palisade lines and river stairs reveal successive stages of expansion', needs: Object.freeze(['palisade', 'river', 'tier: ≥ town']) }),
+    Object.freeze({ text: 'painted gables and fenced garden plots face the lane', twinOf: 'palisade lines and river stairs reveal successive stages of expansion', needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  'ward gates, shop fronts, and planted courtyards divide public from household space': Object.freeze([
+    Object.freeze({ text: 'ward gates, shop fronts, and planted courtyards divide public from household space', needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: 'gates, low walls, and planted courtyards divide public from household space', twinOf: 'ward gates, shop fronts, and planted courtyards divide public from household space', needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  'the main street ends at the administrative precinct': Object.freeze([
+    Object.freeze({ text: 'the main street ends at the administrative precinct', needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: 'a straight lane runs between the houses to the oldest courtyard', twinOf: 'the main street ends at the administrative precinct', needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  'causeways and managed water divide the settlement into organized neighborhoods': Object.freeze([
+    Object.freeze({ text: 'causeways and managed water divide the settlement into organized neighborhoods', needs: Object.freeze(['tier: ≥ village']) }),
+    Object.freeze({ text: 'a raised path and a water channel run between the house compounds', twinOf: 'causeways and managed water divide the settlement into organized neighborhoods', needs: Object.freeze(['tier: ≤ hamlet']) }),
+  ]),
+  'carved stone, plastered courtyards, and workshop lanes layer sacred and commercial space': Object.freeze([
+    Object.freeze({ text: 'carved stone, plastered courtyards, and workshop lanes layer sacred and commercial space', needs: Object.freeze(['market', 'tier: ≥ village']) }),
+    Object.freeze({ text: 'plastered courtyards and shaded doorways stand among the houses', twinOf: 'carved stone, plastered courtyards, and workshop lanes layer sacred and commercial space', needs: Object.freeze(['tier: ≤ hamlet']) }),
+  ]),
+  'occupational quarters cluster around shared wells and water channels': Object.freeze([
+    Object.freeze({ text: 'occupational quarters cluster around shared wells and water channels', needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: 'households cluster around shared wells and water channels', twinOf: 'occupational quarters cluster around shared wells and water channels', needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  'a colonnaded market edge frames the busiest civic ground': Object.freeze([
+    Object.freeze({ text: 'a colonnaded market edge frames the busiest civic ground', needs: Object.freeze(['market', 'tier: ≥ village']) }),
+    Object.freeze({ text: 'a low wall and a shade tree mark the open ground between the houses', twinOf: 'a colonnaded market edge frames the busiest civic ground', needs: Object.freeze(['tier: ≤ hamlet']) }),
+  ]),
+  'workshops, shrines, and meeting halls crowd the approaches to the agora': Object.freeze([
+    Object.freeze({ text: 'workshops, shrines, and meeting halls crowd the approaches to the agora', needs: Object.freeze(['market', 'institution: temple', 'tier: ≥ village']) }),
+    Object.freeze({ text: 'a shade tree and a worn bench mark the ground where people meet', twinOf: 'workshops, shrines, and meeting halls crowd the approaches to the agora', needs: Object.freeze(['tier: ≤ hamlet']) }),
+  ]),
 });
 
 export const CULTURE_PROFILE_KEYS = Object.freeze(Object.keys(CULTURE_PROFILES));
@@ -550,37 +642,81 @@ export function resolveCultureProfileKey(value) {
 }
 
 /**
+ * @typedef {object} KnownFacts what the configuration answers before the roster exists (W2-FIX-DATA-2 item 4)
+ * @property {(row: unknown) => boolean} refuses true when an atom the row declares is ANSWERED false by those facts (the
+ *   tier); an atom they cannot answer (walls, a market, a house) is not a refusal here: the print side reads it
+ */
+
+/**
  * @param {readonly (string | { text: string })[]} values a profile list (a row may be declared: R-C)
  * @param {{ pick?: (values: readonly any[]) => any } | null | undefined} rng
+ * @param {KnownFacts | null} [known]
  * @returns {string}
  */
-function choose(values, rng) {
+function choose(values, rng, known = null) {
   if (!values.length) return '';
   // R-C (CENSUS-2d): a declared row `{ text, needs?, excludes? }` gives back its text; the pick is
   // over the same array, so no roll moves. CENSUS-1e's wiring enforces the declarations.
-  if (rng?.pick) return textOf(rng.pick(values) || values[0]);
-  return textOf(values[0]);
+  const drawn = rng?.pick ? (rng.pick(values) || values[0]) : values[0];
+  return textOf(known ? resolveKnown(drawn, values, known) : drawn);
+}
+
+/**
+ * W2-FIX-DATA-2 item 4: a pick the known facts refuse resolves DRAW-FREE: its small-place twin
+ * (`CULTURE_LINE_SIBLINGS`) if admitted, else the next admitted row of its list (wrapping), else the pick as drawn.
+ * @param {unknown} drawn @param {readonly unknown[]} values @param {KnownFacts} known @returns {unknown}
+ */
+function resolveKnown(drawn, values, known) {
+  if (!known.refuses(drawn)) return drawn;
+  const twin = (CULTURE_LINE_SIBLINGS[textOf(/** @type {any} */ (drawn))] || []).find((l) => typeof l.twinOf === 'string');
+  if (twin && !known.refuses(twin)) return twin;
+  const at = values.indexOf(drawn);
+  for (let k = 1; k < values.length; k++) {
+    const row = values[(at + k) % values.length];
+    if (!known.refuses(row)) return row;
+  }
+  return drawn;
 }
 
 /**
  * @param {string} key
  * @param {{ pick?: (values: readonly string[]) => string } | null | undefined} rng
  */
-function materializeOne(key, rng) {
+function materializeOne(key, rng, known = null) {
   const source = CULTURE_PROFILES[key] || CULTURE_PROFILES.germanic;
   return Object.freeze({
     key: source.key,
     label: source.label,
     scope: source.scope,
-    builtForm: choose(source.builtForm, rng),
-    civicPattern: choose(source.civicPattern, rng),
-    exchangePattern: choose(source.exchangePattern, rng),
-    foodways: choose(source.foodways, rng),
-    sacredLife: choose(source.sacredLife, rng),
-    defensePattern: choose(source.defensePattern, rng),
-    socialTexture: choose(source.socialTexture, rng),
-    architecturalDetail: choose(source.architecturalDetails, rng),
+    builtForm: choose(source.builtForm, rng, known),
+    civicPattern: choose(source.civicPattern, rng, known),
+    exchangePattern: choose(source.exchangePattern, rng, known),
+    foodways: choose(source.foodways, rng, known),
+    sacredLife: choose(source.sacredLife, rng, known),
+    defensePattern: choose(source.defensePattern, rng, known),
+    socialTexture: choose(source.socialTexture, rng, known),
+    architecturalDetail: choose(source.architecturalDetails, rng, known),
   });
+}
+
+/**
+ * W2-FIX-DATA-12 item 2 (the lane reader's C02 C05 C08 C15, HIGH): THE ONE READING of the materialized architectural
+ * detail. It was chosen in resolveConfig, where only the tier is known (`KnownFacts`: "the print side reads it"); a
+ * printing surface holds the row it came from to its own declaration against the whole record (a market, a palisade, a
+ * river, a bathhouse). The arrival's sight beat and the PDF's Architecture row both ask here; a refused detail prints
+ * nowhere (silence, never a redraw). A detail with no declared row (a plain row, a small-place twin, a mixed blend) is
+ * not refused.
+ * @param {unknown} detail the record's `culturalIdentity.architecturalDetail`
+ * @param {string} profileKey the culture profile it was drawn from
+ * @param {() => unknown} facts the record's facts, read only when the detail's row declares
+ * @returns {boolean}
+ */
+export function architecturalDetailRefused(detail, profileKey, facts) {
+  const materialized = typeof detail === 'string' ? detail.trim() : '';
+  const details = CULTURE_PROFILES[profileKey]?.architecturalDetails || [];
+  const row = materialized ? details.find((d) => typeof d === 'object' && d !== null && String(textOf(d)).trim() === materialized) : undefined;
+  return row !== undefined
+    && !declarationAdmits(declarationOf(row), /** @type {any} */ (facts()), { crisisScoped: false }).admitted;
 }
 
 /**
@@ -588,18 +724,22 @@ function materializeOne(key, rng) {
  * expected to be a named child stream, so adding a prose variant here cannot
  * shift unrelated generation decisions.
  *
+ * W2-FIX-DATA-2 item 4: `known` is what the configuration answers here (the generator hands the tier); a row it refuses
+ * resolves draw-free (`resolveKnown`). Absent, nothing is refused, as before.
+ *
  * @param {unknown} culture
  * @param {{ pick?: (values: readonly string[]) => string } | null} [rng]
+ * @param {KnownFacts | null} [known]
  */
-export function materializeCulturalIdentity(culture, rng = null) {
+export function materializeCulturalIdentity(culture, rng = null, known = null) {
   const resolvedKey = resolveCultureProfileKey(culture);
-  if (resolvedKey !== 'mixed') return materializeOne(resolvedKey, rng);
+  if (resolvedKey !== 'mixed') return materializeOne(resolvedKey, rng, known);
 
   const firstKey = choose(CULTURE_PROFILE_KEYS, rng) || 'germanic';
   const remaining = CULTURE_PROFILE_KEYS.filter((key) => key !== firstKey);
   const secondKey = choose(remaining, rng) || 'latin';
-  const first = materializeOne(firstKey, rng);
-  const second = materializeOne(secondKey, rng);
+  const first = materializeOne(firstKey, rng, known);
+  const second = materializeOne(secondKey, rng, known);
 
   return Object.freeze({
     key: 'mixed',

@@ -1,0 +1,5 @@
+[gate-tail] start:  08:59:38 up 34 min,  0 user,  load average: 0.22, 0.76, 0.95 · cores: 4
+[dossier-prose] seats: 856 sentence / 0 clause over 856 state pools (not-a-modifier 856)
+[dossier-prose] section targets: 124 blocks declare one over 10 sections; 2 name none (DS-GEN-10, DS-HK-1)
+[dossier-prose] verified 69 state blocks / 2948 variants across 6 desks, 78 causal families / 468 variants
+[gate-tail] end:  08:59:38 up 34 min,  0 user,  load average: 0.22, 0.76, 0.95

@@ -1,0 +1,207 @@
+births 3756; fresh6 720
+houses by rung and tier (scaled parts):
+  alchemists Alchemist quarter                  2/2    0    0    0    0  413  112
+  alchemists Alchemist shop                     1/2    0    0    0  108    0    0
+  alchemists Apothecary district                1/1    0    0    0    0  625  549
+  charter    Adventurers' charter hall          1/2    0   62   78  226    0    0
+  charter    Hireling hall                      1/1    0    0    0  108   82    6
+  charter    Multiple adventurers' guilds       2/2    0    0    0    0  612  545
+  clergy     Access to parish church            1/5  398  540    0    0    0    0
+  clergy     Cathedral (10,000+ only)           1/2    0    0    0    0  118    0
+  clergy     Great cathedral                    2/2    0    0    0    0    0  410
+  clergy     Monastery or friary                1/1    0    0    0  137    0    0
+  clergy     Parish church                      2/5    0    0  620    0    0    0
+  clergy     Parish churches (10-30)            4/5    0    0    0    0  752    0
+  clergy     Parish churches (2-5)              3/5    0    0    0  752    0    0
+  clergy     Parish churches (50-100+)          5/5    0    0    0    0    0  552
+  company    Free company hall                  1/2    0    0    0   90    0    0
+  company    Mercenary quarter                  2/2    0    0    0    0  439  434
+  court      City hall                          2/2    0    0    0    0  752  552
+  court      Courthouse                         1/3    0    0    0  304    0    0
+  court      Democratic assembly                1/1    0    0    0    0   33   39
+  court      Multiple court buildings           3/3    0    0    0    0    0  552
+  court      Multiple courthouses               2/3    0    0    0    0  752    0
+  court      Town hall                          1/2    0    0    0  752    0    0
+  druids     Druid Circle                       1/1    0    0   24    0    0    0
+  druids     Elder Grove Council                1/1    0    0    0   52  223  325
+  garrison   Barracks                           1/3    0    0    0  182    0    0
+  garrison   Garrison                           2/3    0    0    0    0  752    0
+  garrison   Multiple garrisons                 3/3    0    0    0    0    0  552
+  garrison   Professional city watch            1/1    0    0    0    0  752  552
+  hospital   Healer (divine, 1st level)         1/1    0    0   40    0    0    0
+  hospital   Hospital network                   3/3    0    0    0    0    0  451
+  hospital   Major hospital                     2/3    0    0    0    0  381    0
+  hospital   Major monasteries (5-10)           3/3    0    0    0    0    0  418
+  hospital   Monastery or friary                1/3    0    0    0  137    0    0
+  hospital   Multiple monasteries               2/3    0    0    0    0  420    0
+  hospital   Small hospital                     1/3    0    0    0  100    0    0
+  market     Annual fair                        1/2    0    0    0  232    0    0
+  market     Auction house                      1/1    0    0    0   21  266  372
+  market     Caravaneer's post                  1/1    0    0    0  156    0    0
+  market     Carriers' guild                    1/1    0    0    0  217    0    0
+  market     Cobbler's guild                    1/1    0    0    0  228  577  495
+  market     Daily markets                      3/4    0    0    0    0  752    0
+  market     District markets (5-10)            4/4    0    0    0    0    0  552
+  market     Fish market                        1/1    0    0   84  335  593  510
+  market     Furrier's district                 1/1    0    0    0    0  458  480
+  market     International trade center         1/1    0    0    0    0    0  466
+  market     Major annual fairs                 2/2    0    0    0    0  494  429
+  market     Market square                      1/2    0    0    0  752    0    0
+  market     Merchant guilds (15-40)            2/3    0    0    0    0  664    0
+  market     Merchant guilds (3-8)              1/3    0    0    0  456    0    0
+  market     Merchant guilds (50-100+)          3/3    0    0    0    0    0  520
+  market     Multiple market squares            2/2    0    0    0    0  752  552
+  market     Periodic market                    1/4    0   35    0    0    0    0
+  market     Tailor's guild                     1/1    0    0    0  240  556  500
+  market     Weekly market                      2/4    0    0  146  752    0    0
+  militia    Citizen militia                    1/1    0  126  130    0    0    0
+  prison     Large prison                       2/3    0    0    0    0  487    0
+  prison     Massive prison                     3/3    0    0    0    0    0  540
+  prison     Small prison/stocks                1/3    0    0    0  150    0    0
+  wardens    Warden's Lodge                     1/1    0    0    0   97    0    0
+  watch      Professional city watch            3/3    0    0    0    0  752  552
+  watch      Town watch                         2/3    0    0    0  752    0    0
+  watch      Village watch                      1/3    0    0   37    0    0    0
+
+======== E against base (each seed born three times, the factor through the whole pipeline) ========
+READINESS: moved 79 (up 0, down 79); mean all -0.19, movers -8.87; min -23 max 0; bands 40 {('Well-Defended', 'Defensible'): 13, ('Defensible', 'Lightly Defended'): 18, ('Lightly Defended', 'Vulnerable'): 6, ('Fortress', 'Well-Defended'): 1, ('Defensible', 'Vulnerable'): 2}
+  fresh6: moved 13 of 720, band 6
+  thorp      n  540 moved    0 mean  +0.00 min   +0 max   +0 band    0  mean  19.3 ->  19.3
+  hamlet     n  540 moved    0 mean  +0.00 min   +0 max   +0 band    0  mean  17.0 ->  17.0
+  village    n  620 moved    0 mean  +0.00 min   +0 max   +0 band    0  mean  15.4 ->  15.4
+  town       n  752 moved   59 mean  -0.82 min  -23 max   +0 band   38  mean  40.5 ->  39.7
+  city       n  752 moved   20 mean  -0.11 min   -9 max   +0 band    2  mean  71.3 ->  71.2
+  metropolis n  552 moved    0 mean  +0.00 min   +0 max   +0 band    0  mean  77.7 ->  77.7
+SCORES (the page band: STRONG >=65, ADEQUATE >=40, WEAK >=20, CRITICAL):
+  military  moved   63 (up 0, down 63) mean -0.27 min -28 max +0; band changes 36 {('STRONG', 'ADEQUATE'): 20, ('ADEQUATE', 'WEAK'): 10, ('ADEQUATE', 'CRITICAL'): 1, ('WEAK', 'CRITICAL'): 5}
+             by tier, mean move: thor +0.00 haml +0.00 vill +0.00 town -1.24 city -0.10 metr +0.00
+  monster   moved   79 (up 0, down 79) mean -0.33 min -25 max +0; band changes 34 {('ADEQUATE', 'WEAK'): 13, ('WEAK', 'CRITICAL'): 8, ('STRONG', 'ADEQUATE'): 13}
+             by tier, mean move: thor +0.00 haml +0.00 vill +0.00 town -1.31 city -0.35 metr +0.00
+  internal  moved   46 (up 0, down 46) mean -0.04 min -7 max +0; band changes 7 {('ADEQUATE', 'WEAK'): 4, ('WEAK', 'CRITICAL'): 1, ('STRONG', 'ADEQUATE'): 2}
+             by tier, mean move: thor +0.00 haml +0.00 vill +0.00 town -0.17 city -0.02 metr +0.00
+  economic  moved   42 (up 0, down 42) mean -0.19 min -32 max +0; band changes 28 {('STRONG', 'ADEQUATE'): 17, ('ADEQUATE', 'WEAK'): 9, ('ADEQUATE', 'CRITICAL'): 1, ('STRONG', 'WEAK'): 1}
+             by tier, mean move: thor +0.00 haml +0.00 vill +0.00 town -0.89 city -0.04 metr +0.00
+  magical   moved   39 (up 0, down 39) mean -0.11 min -25 max +0; band changes 20 {('ADEQUATE', 'WEAK'): 10, ('WEAK', 'CRITICAL'): 9, ('STRONG', 'ADEQUATE'): 1}
+             by tier, mean move: thor +0.00 haml +0.00 vill +0.00 town -0.52 city -0.00 metr +0.00
+  disaster  moved    0 (up 0, down 0) mean +0.00 min +0 max +0; band changes 0 {}
+             by tier, mean move: thor +0.00 haml +0.00 vill +0.00 town +0.00 city +0.00 metr +0.00
+MAGIC AGAINST THE PAGE: reliance relied-upon/integral beside Magical WEAK/CRITICAL: base 500, E 503; made 3, cured 0; reliance reading changed 0
+AI PROMPT THREATS from defence: births changed 19; {('gained', 'Magical instability'): 10, ('gained', 'Economic fragility'): 11, ('gained', 'Civic stability at risk'): 1}
+COUPLING: band changed 40: power structure changed 40, a power appears or vanishes 0, legitimacy label changed 6, rest of record changed 38
+          band unchanged 3716: power structure changed 0, power appears/vanishes 0, rest of record changed 3
+          ALL: power structure changed 40, power appears/vanishes 0; by tier thor 0/0 haml 0/0 vill 0/0 town 38/0 city 2/0 metr 0/0
+          powers in/out: []
+
+======== BE against base (each seed born three times, the factor through the whole pipeline) ========
+READINESS: moved 2674 (up 1282, down 1392); mean all +0.22, movers +0.31; min -25 max 9; bands 375 {('Vulnerable', 'Undefended'): 28, ('Lightly Defended', 'Vulnerable'): 63, ('Defensible', 'Lightly Defended'): 61, ('Well-Defended', 'Defensible'): 43, ('Defensible', 'Well-Defended'): 34, ('Well-Defended', 'Fortress'): 135, ('Well-Defended', 'Lightly Defended'): 2, ('Fortress', 'Well-Defended'): 5, ('Defensible', 'Vulnerable'): 3, ('Lightly Defended', 'Defensible'): 1}
+  fresh6: moved 477 of 720, band 66
+  thorp      n  540 moved  187 mean  -0.35 min   -2 max   +0 band   10  mean  19.3 ->  19.0
+  hamlet     n  540 moved  246 mean  -0.54 min   -3 max   +0 band   18  mean  17.0 ->  16.5
+  village    n  620 moved  218 mean  -0.47 min   -4 max   +0 band   31  mean  15.4 ->  15.0
+  town       n  752 moved  730 mean  -3.26 min  -25 max   +0 band  146  mean  40.5 ->  37.2
+  city       n  752 moved  745 mean  +2.48 min   -7 max   +5 band   89  mean  71.3 ->  73.8
+  metropolis n  552 moved  548 mean  +3.96 min   +0 max   +9 band   81  mean  77.7 ->  81.7
+SCORES (the page band: STRONG >=65, ADEQUATE >=40, WEAK >=20, CRITICAL):
+  military  moved  773 (up 263, down 510) mean -0.38 min -28 max +14; band changes 86 {('ADEQUATE', 'WEAK'): 22, ('STRONG', 'ADEQUATE'): 51, ('ADEQUATE', 'STRONG'): 4, ('ADEQUATE', 'CRITICAL'): 1, ('WEAK', 'CRITICAL'): 8}
+             by tier, mean move: thor +0.00 haml -0.12 vill -0.30 town -2.95 city +0.45 metr +1.25
+  monster   moved 1811 (up 538, down 1273) mean -0.71 min -29 max +16; band changes 354 {('WEAK', 'CRITICAL'): 220, ('STRONG', 'ADEQUATE'): 53, ('ADEQUATE', 'WEAK'): 68, ('ADEQUATE', 'STRONG'): 13}
+             by tier, mean move: thor -1.65 haml -2.25 vill -1.47 town -3.88 city +1.97 metr +3.27
+  internal  moved 2428 (up 1299, down 1129) mean +2.57 min -14 max +17; band changes 619 {('WEAK', 'CRITICAL'): 87, ('ADEQUATE', 'WEAK'): 85, ('STRONG', 'ADEQUATE'): 33, ('ADEQUATE', 'STRONG'): 254, ('WEAK', 'ADEQUATE'): 124, ('CRITICAL', 'WEAK'): 36}
+             by tier, mean move: thor -0.34 haml -0.38 vill -0.43 town -5.10 city +8.34 metr +14.23
+  economic  moved 1284 (up 644, down 640) mean -0.14 min -36 max +8; band changes 84 {('ADEQUATE', 'WEAK'): 29, ('STRONG', 'ADEQUATE'): 37, ('WEAK', 'CRITICAL'): 6, ('ADEQUATE', 'CRITICAL'): 1, ('ADEQUATE', 'STRONG'): 9, ('STRONG', 'WEAK'): 2}
+             by tier, mean move: thor -0.01 haml -0.10 vill -0.16 town -2.95 city +1.79 metr +0.92
+  magical   moved  351 (up 18, down 333) mean -0.26 min -26 max +10; band changes 47 {('WEAK', 'CRITICAL'): 21, ('ADEQUATE', 'WEAK'): 23, ('ADEQUATE', 'STRONG'): 1, ('STRONG', 'ADEQUATE'): 2}
+             by tier, mean move: thor +0.00 haml +0.00 vill -0.04 town -1.35 city +0.03 metr +0.06
+  disaster  moved    0 (up 0, down 0) mean +0.00 min +0 max +0; band changes 0 {}
+             by tier, mean move: thor +0.00 haml +0.00 vill +0.00 town +0.00 city +0.00 metr +0.00
+MAGIC AGAINST THE PAGE: reliance relied-upon/integral beside Magical WEAK/CRITICAL: base 500, BE 507; made 7, cured 0; reliance reading changed 0
+AI PROMPT THREATS from defence: births changed 304; {('gained', 'Civic stability at risk'): 52, ('gained', 'Economic fragility'): 32, ('lost', 'Civic stability at risk'): 203, ('gained', 'Magical instability'): 23}
+COUPLING: band changed 375: power structure changed 369, a power appears or vanishes 7, legitimacy label changed 42, rest of record changed 353
+          band unchanged 3381: power structure changed 0, power appears/vanishes 0, rest of record changed 111
+          ALL: power structure changed 369, power appears/vanishes 7; by tier thor 4/0 haml 18/0 vill 31/0 town 146/0 city 89/3 metr 81/4
+          powers in/out: [(('out', 'The Independent Bloc'), 2), (('in', 'Noble Houses'), 1), (('out', 'Merchant Guilds'), 1), (('in', 'The Landed Bloc'), 1), (('in', 'Noble Families'), 1), (('out', 'The Holy Compact'), 1), (('in', 'Arcane Orders'), 1), (('in', 'The Free Alliance'), 1), (('out', 'The Hidden Hand'), 1), (('in', 'The Tower Alliance'), 1), (('out', 'The Commercial Circle'), 1), (('in', 'Religious Authorities'), 1)]
+
+======== THE COUNT LAW (each house dropped alone; two HOUSE parts moving on one score) ========
+  base: births with a house feeding one score through two parts: 670; derived (gate/multiplier) moves: {'terrain': 6076, 'will': 538, 'crime': 315}
+       262  ('Access to parish church', 'int', 'clergy+parish')
+       197  ('Elder Grove Council', 'mon', 'arcane+clergy+druids')
+        92  ('Parish churches (10-30)', 'mon', 'arcane+clergy')
+        64  ('Elder Grove Council', 'mon', 'arcane+druids')
+        49  ('Parish churches (10-30)', 'mon', 'arcane+clergy+druids')
+        34  ('Parish churches (2-5)', 'mon', 'arcane+clergy')
+        24  ('Alchemist shop', 'mon', 'arcane+clergy')
+        19  ('Hedge wizard', 'mon', 'arcane+clergy')
+        11  ("Mages' guild", 'mon', 'arcane+clergy')
+         9  ("Wizard's tower", 'mon', 'arcane+clergy')
+         7  ('Hedge wizard', 'mon', 'arcane+clergy+druids')
+         6  ('Parish church', 'mon', 'arcane+clergy')
+         5  ('Alchemist quarter', 'mon', 'arcane+clergy')
+         5  ('Hedge wizard', 'mon', 'arcane+druids')
+         4  ('Alchemist quarter', 'mon', 'arcane+clergy+druids')
+         4  ("Wizard's tower", 'mon', 'arcane+clergy+druids')
+         4  ('Parish churches (2-5)', 'mon', 'arcane+clergy+druids')
+         3  ('Alchemist shop', 'mon', 'arcane+clergy+druids')
+         2  ('Scroll scribe', 'mon', 'arcane+clergy')
+         1  ('Access to parish church', 'mon', 'arcane+clergy')
+  E: births with a house feeding one score through two parts: 636; derived (gate/multiplier) moves: {'terrain': 6034, 'will': 538, 'crime': 315}
+       262  ('Access to parish church', 'int', 'clergy+parish')
+       190  ('Elder Grove Council', 'mon', 'arcane+clergy+druids')
+        87  ('Parish churches (10-30)', 'mon', 'arcane+clergy')
+        64  ('Elder Grove Council', 'mon', 'arcane+druids')
+        45  ('Parish churches (10-30)', 'mon', 'arcane+clergy+druids')
+        19  ('Hedge wizard', 'mon', 'arcane+clergy')
+        17  ('Parish churches (2-5)', 'mon', 'arcane+clergy')
+        16  ("Mages' guild", 'mon', 'arcane+clergy')
+        10  ("Wizard's tower", 'mon', 'arcane+clergy')
+         7  ("Wizard's tower", 'mon', 'arcane+clergy+druids')
+         7  ('Hedge wizard', 'mon', 'arcane+clergy+druids')
+         6  ('Parish church', 'mon', 'arcane+clergy')
+         5  ('Hedge wizard', 'mon', 'arcane+druids')
+         5  ('Scroll scribe', 'mon', 'arcane+clergy')
+         2  ("Mages' guild", 'mon', 'arcane+clergy+druids')
+         1  ('Access to parish church', 'mon', 'arcane+clergy')
+         1  ('Traveling hedge wizard', 'mon', 'arcane+clergy')
+         1  ('Druid Circle', 'mon', 'arcane+clergy+druids')
+         1  ('Parish churches (50-100+)', 'mon', 'arcane+clergy')
+         1  ('Scroll scribe', 'mon', 'arcane+clergy+druids')
+  BE: births with a house feeding one score through two parts: 636; derived (gate/multiplier) moves: {'terrain': 6481, 'will': 538, 'crime': 315}
+       262  ('Access to parish church', 'int', 'clergy+parish')
+       190  ('Elder Grove Council', 'mon', 'arcane+clergy+druids')
+        87  ('Parish churches (10-30)', 'mon', 'arcane+clergy')
+        64  ('Elder Grove Council', 'mon', 'arcane+druids')
+        45  ('Parish churches (10-30)', 'mon', 'arcane+clergy+druids')
+        19  ('Hedge wizard', 'mon', 'arcane+clergy')
+        17  ('Parish churches (2-5)', 'mon', 'arcane+clergy')
+        16  ("Mages' guild", 'mon', 'arcane+clergy')
+        10  ("Wizard's tower", 'mon', 'arcane+clergy')
+         7  ("Wizard's tower", 'mon', 'arcane+clergy+druids')
+         7  ('Hedge wizard', 'mon', 'arcane+clergy+druids')
+         6  ('Parish church', 'mon', 'arcane+clergy')
+         5  ('Hedge wizard', 'mon', 'arcane+druids')
+         5  ('Scroll scribe', 'mon', 'arcane+clergy')
+         2  ("Mages' guild", 'mon', 'arcane+clergy+druids')
+         1  ('Access to parish church', 'mon', 'arcane+clergy')
+         1  ('Traveling hedge wizard', 'mon', 'arcane+clergy')
+         1  ('Druid Circle', 'mon', 'arcane+clergy+druids')
+         1  ('Parish churches (50-100+)', 'mon', 'arcane+clergy')
+         1  ('Scroll scribe', 'mon', 'arcane+clergy+druids')
+
+  STATIC (a house that opens two parts sharing a score, both parts standing; the weights' scores, not the birth's): births 2157
+      1304  ('Professional city watch', 'mil', 'garrison+watch')
+      1304  ('Professional city watch', 'int', 'garrison+watch')
+       463  ('Access to parish church', 'mil', 'clergy+parish')
+       463  ('Access to parish church', 'int', 'clergy+parish')
+       280  ('Parish church', 'mil', 'clergy+parish')
+       280  ('Parish church', 'int', 'clergy+parish')
+       110  ('Monastery or friary', 'mon', 'clergy+hospital')
+
+======== THE COUNT LAW, split: the house's OWN parts (a double feed) | a part it does not open (side effect) ========
+  base: births with a house feeding one score through two of ITS OWN parts: 262
+     own    262  ('Access to parish church', 'int', 'clergy+parish')
+     side effects (not a double feed): 544 rows; top: [(('Elder Grove Council', 'mon', 'arcane+clergy+druids'), 197), (('Parish churches (10-30)', 'mon', 'arcane+clergy'), 92), (('Elder Grove Council', 'mon', 'arcane+druids'), 64), (('Parish churches (10-30)', 'mon', 'arcane+clergy+druids'), 49)]
+  E: births with a house feeding one score through two of ITS OWN parts: 262
+     own    262  ('Access to parish church', 'int', 'clergy+parish')
+     side effects (not a double feed): 487 rows; top: [(('Elder Grove Council', 'mon', 'arcane+clergy+druids'), 190), (('Parish churches (10-30)', 'mon', 'arcane+clergy'), 87), (('Elder Grove Council', 'mon', 'arcane+druids'), 64), (('Parish churches (10-30)', 'mon', 'arcane+clergy+druids'), 45)]
+  BE: births with a house feeding one score through two of ITS OWN parts: 262
+     own    262  ('Access to parish church', 'int', 'clergy+parish')
+     side effects (not a double feed): 487 rows; top: [(('Elder Grove Council', 'mon', 'arcane+clergy+druids'), 190), (('Parish churches (10-30)', 'mon', 'arcane+clergy'), 87), (('Elder Grove Council', 'mon', 'arcane+druids'), 64), (('Parish churches (10-30)', 'mon', 'arcane+clergy+druids'), 45)]

@@ -4,7 +4,7 @@
  * Extracted from helpers.js to keep it focused.
  */
 
-import {clamp} from './helpers.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { hasMarketInstitution } from '../domain/facts/market.js';
+import {clamp} from './helpers.js'; import { DEFENCE_TUNING } from '../data/defenceWeights.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { hasMarketInstitution } from '../domain/facts/market.js';
 import {
   isMaterializedCustomContent,
   nativeSemanticNames,
@@ -22,6 +22,20 @@ export const getPriorities = (config = {}) => ({
   magic:    config.priorityMagic    ?? 50,
   criminal: config.priorityCriminal ?? 50,
 });
+
+/**
+ * THE NEIGHBOUR FACTOR on a town's will to arms (COHERENCE-UPKEEP-5, the chair's R14): the
+ * neighbour relationship's type, read by name, against the weight table's row
+ * (`DEFENCE_TUNING.neighbour`, checked in its order: hostile or rival, cold war, tense, allied,
+ * trade partner). 1 with no neighbour. One home: `militaryEffective` below and the defence
+ * profile's martial will both read it here.
+ * @param {any} [config] @returns {number}
+ */
+export const neighbourMilitaryFactorOf = (config = {}) => {
+  const neighborType = (config?.neighborRelationship?.relationshipType || '').toLowerCase();
+  for (const [kind, factor] of Object.entries(DEFENCE_TUNING.neighbour)) if (neighborType.includes(kind)) return factor;
+  return 1;
+};
 
 // ─── Institution classification ──────────────────────────────────────────────
 
@@ -48,8 +62,12 @@ const getInstitutionNames = (institutions = []) => {
   const home = defenseFactsOf({ institutions });
   return {
     hasMilitaryInst:  hasAny(names, ['garrison','barracks','guard','watch','citadel','walls','militia','mercenary','navy','charter hall']),
-    hasGarrison:      hasAny(names, ['garrison','barracks','professional guard',PROFESSIONAL_CITY_WATCH,'multiple garrison']),
-    hasMilitia:       hasAny(names, ['citizen militia','militia']),
+    // UPKEEP-CAPACITY C2 (the chair's G1): the professional city watch is the watch, the top of the watch's ladder,
+    // and not a garrison: it opens the watch alone (`hasWatch`), on every home (the defence buckets read the same).
+    hasGarrison:      hasAny(names, ['garrison','barracks','professional guard','multiple garrison']),
+    // UPKEEP-CAPACITY C3 (the chair's G2): the thorp's Household levy is its militia (the catalogue's militia family
+    // row at the thorp), as the defence bucket and the facts home already read it: the rating counts the force the page shows.
+    hasMilitia:       hasAny(names, ['citizen militia','militia','household levy']),
     hasWatch:         hasAny(names, ['town watch','city watch',PROFESSIONAL_CITY_WATCH,'village watch']), // F1: the village rung
     // COHERENCE-AGREE: a hired company and a gate are the defence home's answers (defenseFactsOf):
     // this list counted a hireling hall and a veteran's lodge as a company, and a palisade as gates.
@@ -82,7 +100,8 @@ const getInstitutionNames = (institutions = []) => {
     hasThievesGuild:  hasAny(names, ["thieves' guild chapter","thieves' guild (powerful)"]),
     hasBlackMarket:   hasAny(names, ['black market','black market bazaar']),
     hasSmuggling:     hasAny(names, ['smuggling network','smuggling operation']),
-    hasGangInfra:     hasAny(names, ['street gang','multiple criminal factions','front business']),
+    // UPKEEP-9 (#1082): a gang is a gang house (the two GANG_HOUSES_OF counts); a criminal front is not a gang.
+    hasGangInfra:     hasAny(names, ['street gang','multiple criminal factions']),
     names,
   };
 };
@@ -275,6 +294,7 @@ export const evaluateWaterDependency = (config = {}, institutions = []) => {
  * @param {Array}  institutions  - Settlement institution objects
  * @returns {{
  *   criminalEffective: number,
+ *   criminalPreStress: number,
  *   militaryEffective: number,
  *   economyOutput:     number,
  *   religionInfluence: number,
@@ -361,14 +381,15 @@ export const getInstFlags = (config = {}, institutions = []) => {
   const religionSuppressCrime = Math.max(0.72, 1 - (pri.religion - 50) / 290);
   const criminalInstMult      = inst.hasCriminalInst ? 1.0 : 0.55;
 
-  const criminalEffective = Math.max(2, clamp(
+  // The crime reading BEFORE the stress multiplier (COHERENCE-UPKEEP-6, the chair's ruling 3 on REVIEW-UPKEEP-2):
+  // defence's Crime part reads this, and each crisis's effect on crime is a row of defence's one crisis table.
+  const criminalPreStress =
     pri.criminal      *
     militarySuppressCrime *
     economyModCrime   *
     religionSuppressCrime *
-    criminalInstMult  *
-    crimeStressMult
-  ));
+    criminalInstMult;
+  const criminalEffective = Math.max(2, clamp(criminalPreStress * crimeStressMult));
 
   // ── Military effective score (0–100) ─────────────────────────────────────
   // Garrison quality scales with economic investment; high crime degrades effectiveness.
@@ -380,12 +401,7 @@ export const getInstFlags = (config = {}, institutions = []) => {
   const militaryInstMult     = inst.hasMilitaryInst ? 1.0 : 0.4;
 
   const neighborType = (config.neighborRelationship?.relationshipType || '').toLowerCase();
-  const neighborMilMult =
-    (neighborType.includes('hostile') || neighborType.includes('rival')) ? 1.20 :
-     neighborType.includes('cold_war')      ? 1.18 :
-     neighborType.includes('tense')         ? 1.10 :
-     neighborType.includes('allied')        ? 0.92 :
-     neighborType.includes('trade_partner') ? 0.96 : 1.0;
+  const neighborMilMult = neighbourMilitaryFactorOf(config); // COHERENCE-UPKEEP-5 (R14): the one reading, shared with defence
 
   const militaryEffective = clamp(
     pri.military         *
@@ -444,6 +460,7 @@ export const getInstFlags = (config = {}, institutions = []) => {
 
   return {
     criminalEffective,
+    criminalPreStress,
     militaryEffective,
     economyOutput,
     religionInfluence,

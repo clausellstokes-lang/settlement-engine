@@ -51,10 +51,35 @@ function born(seed) {
 
 /** The seat's rows' opening, a literal. */
 const HOLDS = /Holds the seat\b/;
-/** Every row that places its holder under the seat, an office or a greater house (the review's C1 list and its kin). */
-const SUBORDINATE = /Heads an old family while the seat|Serves the faith under its leaders|Belongs to a lesser|Runs a smaller house|Leads a squad|Works spells under|Holds an office|Holds a place/;
+/**
+ * A STRUCTURAL LINE THAT SUBORDINATES ITS CARD — one that places the holder under the seat, an office, a greater house or a
+ * senior (COHERENCE-POWERS-6, item 4; REVIEW-POWERS-2 G1). The first group is the opening word of every subordinate position
+ * the pools carry (data/npcStructure NPC_STRUCTURE, the `subordinate` rows); the second is the subordinating MARKER a clause
+ * may carry wherever it sits (a position, a constraint or a goal), drawn from the same pools' tails ("under its leaders",
+ * "behind the leading", "only as strong as the seat", "without the seniors' leave") and widened to the plants in §G1. None
+ * of the six government-dominant holder triples (position, constraint, goal) matches it (proved by the plant arm's control).
+ */
+const SUBORDINATE = new RegExp([
+  'Heads an old family while the seat', 'Serves the faith under its leaders', 'Belongs to a lesser', 'Runs a smaller house',
+  'Leads a squad', 'Works spells under', 'Holds an office', 'Holds a place',
+  'under (its|the|a) (leaders|senior casters|seat|crew)', 'behind the leading', 'a lesser (old )?family', 'smaller house',
+  'takes orders from', 'only as strong as the seat', 'without the seniors\'? leave', 'has little say',
+  'decides? what it (may|can) do', 'offices that run things', 'truly runs? the seat', 'say (slowly )?shrinks',
+].join('|'));
 /** The office's band at each size: the dots the seat's own face draws (poolMap.js :: SEAT_ROLE_BY_TIER), literals. */
 const OFFICE_DOTS = Object.freeze({ thorp: 1, hamlet: 1, village: 3, town: 3, city: 3, metropolis: 3 });
+
+/**
+ * The holder's structural lines on its rendered card (COHERENCE-POWERS-6, item 4): the position (its italic paragraph), the
+ * constraint ("Constraint: …") and the goal ("Wants …"), read in full — NOT one paragraph (G1: the old guard found the first
+ * paragraph matching HOLDS or SUBORDINATE and inspected that alone, so a subordinating constraint, goal or clause beyond the
+ * position passed). @param {HTMLElement} el the card's node @returns {string[]}
+ */
+function holderStructuralLines(el) {
+  const ps = [...el.querySelectorAll('p')].map((p) => p.textContent || '');
+  const wants = [...el.querySelectorAll('div')].map((d) => d.textContent || '').filter((t) => /^Wants\b/.test(t.trim()));
+  return [...ps.filter((t) => HOLDS.test(t) || SUBORDINATE.test(t) || /^Constraint:/.test(t.trim())), ...wants];
+}
 
 /** Open every closed disclosure (the groups, then every card), as the owner reads the list. @param {HTMLElement} root */
 function openAll(root) {
@@ -80,8 +105,9 @@ function pageMissesOf(s, key) {
     const text = el.textContent || '';
     if (card.name === name) {
       if (!HOLDS.test(text)) out.push(`${key}: the holder ${name}'s card does not say they hold the seat`);
-      const position = [...el.querySelectorAll('p')].map((p) => p.textContent || '').find((t) => HOLDS.test(t) || SUBORDINATE.test(t)) || '';
-      if (SUBORDINATE.test(position)) out.push(`${key}: the holder ${name}'s card reads as a subordinate: "${position}"`);
+      // COHERENCE-POWERS-6 (item 4; G1): read EVERY structural line, not the first matching paragraph
+      const sub = holderStructuralLines(el).find((t) => SUBORDINATE.test(t));
+      if (sub) out.push(`${key}: the holder ${name}'s card reads as a subordinate: "${sub.trim()}"`);
       const dots = (el.querySelector('button')?.textContent || '').match(/●+/)?.[0].length || 0;
       if (dots < OFFICE_DOTS[s.tier]) out.push(`${key}: the holder ${name}'s card reads ${dots} dot(s) under a ${OFFICE_DOTS[s.tier]}-dot office`);
     } else if (HOLDS.test(text)) {
@@ -101,6 +127,39 @@ describe('COHERENCE-POWERS-5 — the seat-holder on the rendered page (the guard
       'r2s-occupied-town-0', 'r2s-politically_fractured-village-0', 'r2r-thorp-1']) misses.push(...pageMissesOf(born(seed), seed));
     expect(misses).toEqual([]);
   }, 300_000);
+
+  // COHERENCE-POWERS-6 (item 4; REVIEW-POWERS-2 G1): the plants, each outside the cured sites — a subordinating line is
+  // written over the holder's own structural field on a real holder town, and the guard must catch it. Each plant reddens
+  // check (2) alone. The old guard (first matching paragraph; the narrow SUBORDINATE vocabulary) missed all three; the
+  // widened guard (holderStructuralLines + the subordinating markers) catches each. The control (no plant) stays green.
+  const PLANTS = Object.freeze([
+    { field: 'structuralPosition', line: 'Holds the seat, though the guild masters decide what it may do.' },
+    { field: 'activeConstraint', line: 'The family\'s say slowly shrinks beside the offices that run things.' },
+    { field: 'goal', line: 'Keep their place in the good graces of the guild masters who truly run the seat.' },
+  ]);
+  /** The holder card's subordinate misses on the rendered page, with the holder's structural field overwritten. @param {any} s @param {string} key @param {{field: string, line: string} | null} plant */
+  function holderSubordinateMiss(s, key, plant) {
+    const name = rulingChainOf(s).npc?.name || null;
+    const npcs = s.npcs.map((c) => (c.name === name && plant
+      ? { ...c, ...(plant.field === 'goal' ? { goal: { ...(c.goal || {}), short: plant.line } } : { [plant.field]: plant.line }) }
+      : c));
+    const list = render(<NPCsTab npcs={npcs} settlement={{ ...s, npcs }} narrativeNote={null} pinnedIds={new Set()} />).container;
+    openAll(list);
+    const el = list.querySelector(`[id="${entityAnchor('npc', npcs.find((c) => c.name === name))}"]`);
+    const sub = el ? holderStructuralLines(el).find((t) => SUBORDINATE.test(t)) : null;
+    cleanup();
+    return sub || null;
+  }
+
+  it('G1 — each planted subordinating line (a position clause, a constraint, a goal) reddens check (2); the control is clean', () => {
+    const seed = 'r2r-town-1';
+    const s = born(seed);
+    expect(rulingChainOf(s).npc?.name, 'the control town has a seat-holder').toBeTruthy();
+    expect(holderSubordinateMiss(s, seed, null), 'the real holder reads no subordinate line').toBeNull();
+    for (const plant of PLANTS) {
+      expect(holderSubordinateMiss(s, seed, plant) ?? '', `the plant "${plant.line}" is caught`).toContain(plant.line);
+    }
+  }, 120_000);
 
   it('at six sizes on random dials and under every crisis forced, every town reads the four ways', () => {
     const misses = [];
