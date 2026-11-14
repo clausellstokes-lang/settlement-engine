@@ -1181,6 +1181,76 @@ SEATS2['POWERS-12'] = dict(
 )
 
 
+SEATS2['UPKEEP-11'] = dict(
+    title="UPKEEP-11 · the defence lane's close, finished: the instrument's checks, the packet row, the declarations, the final statement",
+    branch='lane/coherence-upkeep-2026-11-12', tip='78bbebcd', statement=True,
+    intro=("You are UPKEEP-11, the eleventh seat on the defence lane of the settlement-engine integration program (lane/coherence-upkeep-2026-11-12). The lane "
+           "holds the derived defence rating, the money a town can spend on it, and the safety, economy and outlook lines that speak of them. ITS LIST IS "
+           "DONE AND THE INTEGRATION LINE IS MERGED INTO IT (ef9f38e80: point 49, the instrument lane; three registers re-derived). The tenth seat handed back "
+           "inside the close with its state written out line by line. Yours: the rest of the close, whole: the instrument's checks on this lane's lines, "
+           "one row of the packet estate, the lane's declarations, and the lane's ONE final statement. NO NEW CURE OF A PAGE LINE IS YOURS: what the "
+           "checks do not ask for is LEFT FOR AFTER THE JOIN."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-12/UPKEEP-HANDBACK.md, BY LINE RANGE, BY SCRIPT (the file is 1,280 lines; open only these): THE TENTH SEAT'S "
+          "PART WHOLE (the top of the file down to the first line of three dashes, about seventy long lines: what it did; \"WHERE THE CLOSE STANDS, AND WHAT "
+          "IS LEFT, LINE BY LINE\": THAT IS YOUR LIST; how the instruments are re-made) and, in THE NINTH SEAT'S PART below it, the sections \"FOR THE "
+          "JOIN\", \"LEFT\" (its instruments paragraph) and the table \"What this seat did, in commit order\". Older parts only where step 4 or 5 below "
+          "names a heading.\n"
+          "3. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (docs/INTEGRATION_STYLE_2_2026-11-09.md, the section headed "
+          "\"## 2m.\": about forty lines; by script) and the instrument's rule book tests/lint/presumedThings.shared.mjs (what a draw door and a carrier "
+          "are; the strip shapes), BEFORE the first change of step 1."),
+    work=("THE WORK, in this order, pushed as made:\n"
+          "1. THE PRESUMED-THINGS DOOR (`node scripts/presumed-things-door.mjs --check`: at 2c7123ade fresh 28, stale 5, first-register stale 2, strips "
+          "fresh 1 and stale 1; the tenth seat classed them). RULED BY THE CHAIR, class by class: (a) A LITERAL THAT STANDS IN A CONSTANT WHILE ITS SET "
+          "ALREADY DECLARES THE ATOM (incomeLineSiblings.js: the siege, temple and market lines; and the four the eighth seat MOVED there from "
+          "economicState.js: alchemist, fuller, smith, mason): A SHAPE CURE: the literal moves into the member that declares it, in the form the rule book "
+          "reads, the output BYTE-IDENTICAL on the lane's 1,490 (round three's code lane did the same at 92557fa6b); a moved line whose set declares "
+          "nothing yet is DECLARED with the atom its own condition already reads (trueIncomeDesc reads the roster for that house). (b) THE LANE'S OTHER "
+          "LINES (src/data/defenceWeights.js 9; src/generators/safetyProfile.js 9; viability.js \"Traveling hedge wizard\"; threatAssessment.js \" and a "
+          "citizen militia to hold it.\"): each DECLARED (the atom a draw door reads, where the line already prints only under that condition) or CURED "
+          "(it stops naming what the town may lack); a string no page prints and no code reads is not kept as a literal: say which. (c) THE STALE ROWS "
+          "leave by `--shrink` in the commit that cured them. (d) THE STRIP in foodGenerator.js (`filterDeclared([...rows], ...)`, the foodways cure): if "
+          "the site reads THROUGH the draw door and the walker still reds, that is a gap of the rule, not of the lane: STOP to the chair with the output. "
+          "(e) THE ONE ROW BANKED AGAINST THIS LANE (\"smith\", the coal line, `after-base: defence`, in "
+          "tests/lint/presumedThings.widened.register.json; 2m's part (3)): cured and shrunk out as 2m gives it. NOTHING IS BANKED BY HAND AND NO WALKER'S "
+          "LIST IS WIDENED: a line you can neither cure nor declare through a door goes to the chair in ONE message (file, line, why): the chair rules by "
+          "name. DONE WHEN: `--check` exits 0 and tests/lint/presumedThings.walker.test.js is green.\n"
+          "2. THE REST OF SECTION 2m's CHECKS at that tip: the page census (`node scripts/census/page-census.mjs --workers=2`, the 720, about twenty "
+          "minutes, to a file; and `--grid`), the fact layers (`node scripts/fact-layers-door.mjs`), the observed shapes "
+          "(`node scripts/check-observed-shape-readers.mjs`), writer reach (`node scripts/check-writer-reach.mjs`): a rise or a red on THIS lane's lines "
+          "is cured through its door; a fall is lowered by the door's shrink form in the same commit; a red of the line's own or of another lane's file is "
+          "NAMED with its owner.\n"
+          "3. ONE ROW OF THE PACKET ESTATE (the rehearsal of the join found it): `node scripts/implementation-packets.mjs validate` (one second) reds at "
+          "this lane's tip: \"EM-R0d.requiredSymbols[2].symbol is missing from src/generators/defenseGenerator.js: const computeDefenseReadiness = (scores, "
+          "threat, tier, magicExists = true) =>\". CAUSE: the fifth seat's 82c639b44 replaced that function by the derived form (the owner's design), and "
+          "the estate's law (scripts/implementation-packets.mjs, its section on THE RETIREMENT PATH) asks such a removal for a `retiredBy` on the landed "
+          "row. THE CURE, ONE COMMIT: docs/implementation/PACKET_MANIFEST.json, EM-R0d.requiredSymbols[2] gains \"retiredBy\": \"§934.105 (the owner's "
+          "design of 2026-11-13: defence is the sum of its parts; COHERENCE-UPKEEP-5 V3 at 82c639b44 replaced computeDefenseReadiness by the derived "
+          "form)\" (three rows of the manifest already show the form); THAT ROW ONLY, surgically (never a blanket sed: the diff shows one row); the same on "
+          "EM-R0d's changeManifest row if the validator asks it. The validator red before, EXIT 0 after, both in the commit body.\n"
+          "4. THE LANE'S DECLARATIONS (nothing built), as the tenth seat's part lists them under Step 6: (i) the posture line's ladder against the badge's "
+          "band, measured at your tip as docs/chair/2026-11-13/probes/UPKEEP-6/one-ladder.txt shows, written FOR THE JOIN (defenseStateProse.js is another "
+          "lane's: not touched); (ii) the Services and Magic tabs keep the shown label this release: LISTED; (iii) the first read's corpus lines (M1, M2, "
+          "M3, M5, L2) and the fourth read's C-M1 six births declared as EXPOSURE, town by town, at your tip (find each label in the older parts by "
+          "script).\n"
+          "5. THE LANE'S ONE FINAL STATEMENT in the form below, with what the tenth seat's part lists under Step 7: the base is 69b53decd; the measuring "
+          "command at the base and at your final tip (run it in a tree nobody edits); the whole suite once in six shards, each red FILE re-run at the base "
+          "to class it (generationForkCensus's other arms were red at the lane's tip before the merge: class them); EVERY RATING MOVE of the lane with its "
+          "count and its bands, gathered by script from the parts' tables (the eighth, ninth and tenth seats' \"What this seat did\"; the seventh's W1 "
+          "and W3; the capacity branch's cumulative move; the fork census's and the institution table's pins as MEASURED at the merge); #608's "
+          "one-band-apart count re-measured, \"the word alone everywhere\" as the owner's open choice; THE EIGHT TOWNS at your final tip under a new "
+          "heading in docs/chair/2026-11-13/UPKEEP-CAPACITY-EIGHT-TOWNS.md, in plain words (the readiness figure and band word, the five scores; what "
+          "moved since and why; no machinery); every new or changed reader sentence of the whole lane with its town, gathered from each seat's part; FOR "
+          "THE JOIN gathered whole (#869's PDF row; the stored siege sentence's and the chain suggestions' house labels; #598's writers; the arcane "
+          "defence's two homes; the one ladder); LEFT FOR AFTER THE JOIN; the packet validator's exit at the final tip; the edge bundles last and alone. "
+          "Then ONE message to the chair: the tip, the suite's reds by class, where the statement is. A fresh reader then reads the lane, the capacity "
+          "commits as their own stage: leave it what it needs (the walker change 1dac1ca25 and the monotonicity claims are its first acts)."),
+    merges='',
+    when="for a stop that blocks everything you have left, for step 1's list of lines you can neither cure nor declare (once, together), when steps 1 to 3 are pushed (the tip; each door's exit), and with your final statement or hand-back",
+    turns='',
+)
+
+
 SEATS2['W2-WRITE-9'] = dict(
     title="W2-WRITE-9 · the corpus lane's main seat: the HIGH rows left, then THE MERGE of the three, the line's merge and the final statement",
     branch='lane/w2-write-2026-11-13', tip='f737c96e', statement=True,
