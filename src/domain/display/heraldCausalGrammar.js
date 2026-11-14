@@ -324,11 +324,19 @@ export const CHAIN_END_BANNED = Object.freeze([
 // ── §0d THE TIME-BAND FAMILY ─────────────────────────────────────────────────
 
 /**
- * The six canonical bands in four print positions. "Older than its bearers" is
+ * The six canonical bands in four print positions. "Older than anyone living" is
  * PREDICATE-ONLY: it is a comparison, not a quantity, and it cannot be made to sit
  * before a noun, after a preposition, or alone — the other three columns are null
  * and a mold needing one of them falls back to §3's bare connective rather than
  * printing a broken phrase.
+ *
+ * THE PREDICATE NAMES NO BEARER (R3-CODE-C-2, ROUND-3-CUT-INCREMENT #ww-470). It was "older
+ * than its bearers", a phrase for a grudge: its "its" needs a thing that is borne. The one
+ * filler of the column (generalStateProse.js :: timebandAgeFill) puts it after any subject
+ * and in the legacy molds' apposition, so the page printed "Jalaliin came through the
+ * siege, older than its bearers; …" of a siege 77 years gone, and "{settlement} is older
+ * than its bearers". The comparison the band makes (past sixty years: nobody living saw it)
+ * is said of no one in particular, so it reads after a town, a ruin, a calamity or a grudge.
  */
 export const TIME_BANDS = Object.freeze([
   Object.freeze({ id: 'this_season', maxWeeks: 13, attributive: "this season's", span: 'this season', since: 'this season', predicate: 'of this season' }),
@@ -336,7 +344,7 @@ export const TIME_BANDS = Object.freeze([
   Object.freeze({ id: 'years_on', maxWeeks: 52 * 10, attributive: "years'", span: 'years', since: 'years on', predicate: 'years old' }),
   Object.freeze({ id: 'a_decade', maxWeeks: 52 * 25, attributive: "a decade's", span: 'a decade', since: 'a decade on', predicate: 'a decade old' }),
   Object.freeze({ id: 'a_generation', maxWeeks: 52 * 60, attributive: "a generation's", span: 'a generation', since: 'a generation on', predicate: 'a generation old' }),
-  Object.freeze({ id: 'older_than_bearers', maxWeeks: Infinity, attributive: null, span: null, since: null, predicate: 'older than its bearers' }),
+  Object.freeze({ id: 'older_than_bearers', maxWeeks: Infinity, attributive: null, span: null, since: null, predicate: 'older than anyone living' }),
 ]);
 
 /** The four print positions a time band may occupy. */

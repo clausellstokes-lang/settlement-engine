@@ -45,6 +45,8 @@ const WAR_STATES_REFUSED = Object.freeze(['war: front', 'war: aggressor', 'war: 
 export const TIMBER_RAFT_HOOK = 'The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other for what is left in the yards.';
 export const MODERATE_GAP_TWIN = 'The settlement grows less food than it eats, and a merchant has offered to make up the difference at a price the settlement cannot pay in coin.';
 const STARVING_HOOK = 'The settlement is starving. Its hungriest are turning to banditry, and a merchant has offered to supply food at a price the settlement cannot pay in coin.';
+/** Where no merchant can come: an isolated route, or a siege on the roads (R3-CODE-C-2, CENSUS-2 kind a). */
+const NO_MERCHANT_COMES = Object.freeze(['route: isolated', 'crisis: under_siege']);
 export const OUTLOOK_HOOK_SIBLINGS = Object.freeze({
   "Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?": declaredSet(
     "Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?", ['navigable'],
@@ -74,11 +76,22 @@ export const OUTLOOK_HOOK_SIBLINGS = Object.freeze({
   // of the 1,000); the moderate gap (Import-Dependent / Pressured, the chair's ruling 1 of
   // 2026-11-03) takes one twin with no famine words; a fed place DROPS the refused original at the
   // site (R-AU, CENSUS-1h; the hook-truth pass stays as defence in depth).
+  // R3-CODE-C-2 (CENSUS-2, kind a: "a merchant" in 45 of 720 towns, read town by town): a merchant who
+  // offers food must be able to come. Where the route is isolated or a siege holds the roads, both
+  // merchant lines are refused; a famine there reads the merchant-free twin, and a moderate gap
+  // there has no hook (the moderate grade is keyed on MODERATE_GAP_TWIN alone, foodBalance.js).
+  // (STARVING_SHUT_TWIN is named a twin for what it answers; it is declared as a member.)
   [STARVING_HOOK]: Object.freeze([
-    Object.freeze({ text: STARVING_HOOK, needs: Object.freeze(['food: ≤ deficit']) }),
+    Object.freeze({ text: STARVING_HOOK, needs: Object.freeze(['food: ≤ deficit']), excludes: NO_MERCHANT_COMES }),
     Object.freeze({
       text: MODERATE_GAP_TWIN,
-      twinOf: STARVING_HOOK, excludes: Object.freeze(['food: ≤ deficit']), needs: Object.freeze(['food: ≤ pressured']),
+      twinOf: STARVING_HOOK, excludes: Object.freeze(['food: ≤ deficit', ...NO_MERCHANT_COMES]), needs: Object.freeze(['food: ≤ pressured']),
     }),
+    // not a twin: drawDeclared tries one twin, then the admitted members; this one is reached only when both refuse.
+    // The famine line where no merchant can come: the same famine, no merchant in it. Its text stands in the member
+    // that declares it (R3-CODE-C-6: the presumed-things walker credits a declaration only around its literal).
+    Object.freeze({ text: 'The settlement is starving, and its hungriest are turning to banditry.', needs: Object.freeze(['food: ≤ deficit']) }),
   ]),
 });
+/** The famine line where no merchant can come (the starving set's third member, read from where it is declared). */
+export const STARVING_SHUT_TWIN = OUTLOOK_HOOK_SIBLINGS[STARVING_HOOK][2].text;

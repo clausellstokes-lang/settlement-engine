@@ -43,7 +43,6 @@
   {"thing": "mercenary", "path": ".institutions[].desc", "text": "retired soldiers and sellswords", "reason": "past", "note": "retired: their service is past", "towns": 12},
   {"thing": "mercenary", "path": ".powerStructure.recentConflict", "text": "whether to raise a levy or hire mercenaries", "reason": "hedge", "note": "\"whether to … hire\": not yet hired", "towns": 5},
   {"thing": "mercenary", "path": ".pressureSentence", "text": "whether to raise a levy or hire mercenaries", "reason": "hedge", "note": "\"whether to … hire\": not yet hired", "towns": 2},
-  {"thing": "walls", "path": ".history.historicalEvents[].plotHooks[]", "text": "sealed inside the walls during construction", "reason": "past", "note": "a past event", "towns": 5},
   {"thing": "walls", "path": ".institutions[].desc", "text": "walls and churches of half the region", "reason": "hedge", "note": "the region's walls, not this town's", "towns": 7},
   {"thing": "walls", "path": ".npcs[].presentation.impression", "text": "The walls are covered with charts", "reason": "ruling-3", "note": "a room's walls, not the perimeter", "towns": 8},
   {"thing": "walls", "path": ".npcs[].secret.what", "text": "the walls built with them crumble", "reason": "ruling-3", "note": "the walls of any building, not the perimeter", "towns": 6},
@@ -1010,7 +1009,6 @@
   ],
   "src/generators/structuralValidator.js": [
    ["docks", "after-release", "A river settlement should exploit its water access: mills, docks, or fishmongers.", "42b0b9c83c65fd57"],
-   ["garrison", "after-release", "/100. Infrastructure exists on paper but this level of underfunding means the defences are barely maintained and the gar", "56b5ca09a750dc85"],
    ["garrison", "after-release", "A garrison without walls is untenable in an embattled region. Defenders have nowhere to make a stand.", "41ae8eb216e3d279"],
    ["garrison", "after-release", "A metropolis requires multiple garrisons or a professional guard force of hundreds. A single garrison cannot secure a ci", "f2c6f010c53fdd20"],
    ["garrison", "after-release", "Embattled region with no military force. Walls without defenders are a convenient funnel. A garrison, militia, or mercen", "3f2a2ef94ca3d2f0"],

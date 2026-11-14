@@ -48,8 +48,16 @@ export const SOURCE_WORDS = Object.freeze({
 /** A market named as the place's own ("markets", "market tolls"); a black market is not one. */
 export const MARKET_WORDS = /(?<!black )\bmarkets?\b/i;
 
+/**
+ * Sellers a line names as the place's own ("neighborhood vendors", stalls, hawkers): a market's people, so they stand
+ * only where a market does (R3-CODE-C-3, ROUND-3-CUT-INCREMENT #ww-707, rww-thorp-monster_pressure-1: "Public ovens,
+ * neighborhood vendors, and shared dining customs make food distribution visibly civic." in a thorp of 28 whose
+ * Overview says "No market or fair stands").
+ */
+const SELLER_WORDS = /\b(?:vendors?|stalls?|hawkers?)\b/i;
+
 /** May a culture line stand in a place with (or without) a market? @param {string} line @param {boolean | undefined} market */
-const marketFits = (line, market) => market !== false || !MARKET_WORDS.test(line);
+const marketFits = (line, market) => market !== false || !(MARKET_WORDS.test(line) || SELLER_WORDS.test(line));
 
 /** @param {string} s */
 const capital = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
