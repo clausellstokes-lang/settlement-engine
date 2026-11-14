@@ -1243,7 +1243,86 @@ RECOMMENDATION: the printed three (chainNeedShown's siege line and the two defen
 `filterDeclared` with their crisis atoms, by this seat or the next; the eight unprinted literals ruled by the chair
 (their home is a comment, or the walker's not-printed site list, which no lane may widen).
 
+## The chair's rulings received after the merge (copied in; the messages are not on the branch)
+- 04:52 UTC (READ BY THIS SEAT ONLY AT 05:28, A SLIP: notifications were not read after the merge's commits, against the
+  brief's "after every commit"): the rising row is EXPOSURE, not origin; a2eaf6a6a changed round two B's files
+  (serviceComponents.jsx, ServicesTab.jsx, servicesImpactOnce.test.jsx), which that lane already cured (f2c77472c,
+  e878a1367). RULED: one plain `git revert` of a2eaf6a6a, its body quoting the ruling; the row DECLARED as exposure
+  (chainNeedShown.js kind d 0 -> 13 at this lane's tip, cured at the join by f2c77472c); FOR THE JOIN: "count the '·
+  covers' run-on on the joined tree: 0 expected"; a row whose true writer is another lane's file is NAMED under FOR THE
+  JOIN (file, function, the one-line change) and left.
+- 04:58 UTC, FOR EVERY CLOSING LANE: the instrument's fresh hits after the merge: (1) a stale row leaves by the shrink
+  form; (2) a literal apart from a table that already declares it: the shape cure, output byte-identical; (3) a line
+  GATED IN CODE but not declared through a draw door: NOT banked, keyed, reworded or re-routed now: RED AND NAMED under
+  FOR THE DECLARATION PASS (file, text, the gating condition, the atom, any new word); one pass after the join for every
+  lane; (4) a line false somewhere: a cure now. The same for a fact-layers rise that is only a reworded condition. The
+  two rows banked against this lane stay this lane's as 2m gives them. No stop needed for classes 1-3.
+- 05:12 UTC: (1) the revert is still owed: one plain `git revert` after the merge; (2) chainPrintSites.walker red on
+  src/domain/display/tradeListDisplay.js (red at 71624aad0): this lane's, cured at its cause or through a door.
+- 05:28 UTC, ON THIS SEAT'S STOP: (1) the three printed lines (chainNeedShown's siege line, the two banked
+  defenseDisplay.js rows): YES, declared through filterDeclared, the output byte-identical on the 720; the two banked
+  rows then leave by the shrink form. (2) A FIFTH CLASS: a literal no page prints: if no code reads it, removed or a
+  comment; if code reads it, RED AND NAMED under FOR THE DECLARATION PASS as "NOT PRINTED", with the proof (every
+  reader of the field; 0 on the 720's views, the PDF's and the journal's text); never banked or reworded now. (3) Not
+  a stop any more: go on to the statement. (4) Say whether the revert is made and chainPrintSites' exit.
+
+## Done after the merge (EXECUTED; pushed)
+- bb2002626 the revert of a2eaf6a6a (plain, no conflict; the probe svc8 goes with it).
+- 36a6dfccd chainPrintSites: madeHere reads a chain's name and source through chainPrintName (no list widened); the
+  strings differ in 109 of 900 towns (tolls), what prints does not (importsAsPrinted + tradeListsAsPrinted
+  byte-identical on the 720 and the fresh 180). The walker green.
+- c5dadd358 class 5: chainWorking.js's eight `cause` literals (no reader) are comments; presumed-things fresh 11 -> 3.
+- The page census at 3598a6d5f (`node scripts/census/page-census.mjs --workers=2`): EXIT 0, nothing rose
+  ("the banked corpus reads at or under the register"); TWO ROWS FELL: P8any banked 221 -> now 129, P17 671 -> 395:
+  NOT YET SHRUNK (`--shrink` at the final code tip, its own register commit).
+
+## HAND-BACK (this seat at its count: about 350,000 by its own estimate, the field stale at 205,055 inside the turn)
+WHAT IS LEFT, line by line, in this order (the lane's tip at the hand-back is this commit's):
+1. THE THREE PRINTED LINES (05:28 ruling (1)), each through `filterDeclared` (src/domain/facts/drawDeclared.js; the
+   declaration form is `{ text, needs: [...] }` / `excludes`, as DailyLifeTab.jsx :: 87, 324-327 and goals.js :: 361
+   use it; `facts: factsOf(record)` from src/domain/facts/factsOf.js), output byte-identical on the 720 (measure
+   before and after, by town):
+   a. src/domain/display/chainNeedShown.js, the siege form of chainNeedLine (" from outside, which the siege has cut
+      off."), gated by chainStateShown.js :: tradeStoppedHere; registeredWords.js's `siege`: kinds ['under_siege']
+      (its absent test: !inForce(f, 'under_siege')). Fresh hit 5d34d3194b63134f.
+   b. src/domain/display/defenseDisplay.js :: foodEnduranceLine (line ~618): 'under siege the outlying fields would
+      be lost' (the hypothetical, beside 'the siege has taken the outlying fields' for end.besieged); banked
+      dbd691c1c6f9171f, `after-base: leaves-3`.
+   c. defenseDisplay.js :: ORGANIZED_RING_NOTES[1] (line ~668), "Crime here answers to one ring. It keeps the streets
+      quiet ..."; registeredWords.js's `streets`: a size word, bands tier village..metropolis, absent in a thorp or a
+      hamlet: where a thorp's or a hamlet's ring would draw it, the line is FALSE (class 4: a cure, not byte-identical
+      there; count them first). Banked 2ad05ec341eede64.
+   Then `node scripts/presumed-things-door.mjs --check` (b and c STALE), `--shrink`, `--check` exit 0 bar the two
+   NOT PRINTED rows below, and tests/lint/presumedThings.walker.test.js.
+2. THE PAGE CENSUS's two falls: `node scripts/census/page-census.mjs --shrink` at the final code tip (~20 min).
+3. THE EDGE BUNDLES: `npm run build:edge-shared`, alone, last; committed alone if they differ (the merge took the
+   line's side).
+4. THE FINAL STATEMENT (brief step 7): CENSUS-2 at the tip (the command in PART 7; c2files.txt there), the first
+   census's counter at 4534ea5e3 and the tip, the whole suite once in six shards at the tip, each red file re-run at
+   4534ea5e3; the shift record draft docs/chair/2026-11-13/W2-C-LEAVES-SHIFT-RECORD-DRAFT.md; the new words; FOR THE
+   JOIN gathered from every part; LEFT FOR AFTER THE JOIN.
+
+## FOR THE DECLARATION PASS (05:28 ruling (2), "NOT PRINTED"; red and named, not banked)
+- src/domain/display/tradeListDisplay.js :: SERVICE_OUTPUTS (line ~444): "international banking services"
+  (93b4989065b31dd8, word `bank`) and "magical item market" (f6c2f8cec0187fcb, word `market`): matchers of import names
+  that are no goods; READ by code (the set is tested against the record's imports), never printed by it. The proof of
+  0 on the 720's views, the PDF and the journal: NOT RUN by this seat.
+
+## FOR THE JOIN (this seat)
+- Count the "· covers" run-on on the joined tree: 0 expected (round two B's f2c77472c; this lane's cut reverted).
+- The phone chrome floor's three rows were re-measured at this lane's merge (620 / 863 / 665): the join re-measures.
+
+## LEFT FOR AFTER THE JOIN (the brief's list, not reached: the time-box closed after item 1)
+- 2. The court rows (record 422): the 33 "Legal Infrastructure · Court only" rows beside a Town hall with a drawn
+  "Dispute arbitration" (defenseDisplay.js :: courtOnRoster counts a drawn court service): the page names a court only
+  where a courthouse stands; otherwise the town hall's or the council's hearings, or nothing; display only.
+- 3. The four added rows (PART 7's STATUS 2 (a)-(d)): #1013 the lone gambling house (12 towns); Arcane "None" beside
+  an arcane power or a named mage; the PDF's "Abundant" kicker under a siege (ResourcesProduction.jsx, shared, one
+  line); the charcoal burner's four "timber" pills.
+- 4. CENSUS-2's other hits on the lane's writers (PART 7's table), ranked by towns.
+
 ## STATUS (kept current)
-- Item 1 DONE a2eaf6a6a. Time-box closed after it. Row 5 DONE (verified, nothing moved). The line's merge DONE
-  baa4b707d; 2m: three doors cured (10755758f, 0b49820c9, 3598a6d5f); presumed things STOPPED (above); page census
-  running. Count by this seat's estimate about 280,000 (get_session stale at 205,055 inside a turn).
+- Item 1 a2eaf6a6a REVERTED bb2002626 (the chair's ruling: round two B's files; exposure, cured at the join). Row 5
+  DONE. The line's merge DONE baa4b707d. 2m: observed shapes, fact layers, writer reach cured; chainPrintSites cured;
+  presumed things 11 -> 3 fresh (the STOP above is superseded by the 05:28 ruling); page census exit 0 (two falls owed
+  a shrink). HANDED BACK at the count: WHAT IS LEFT above, 1 to 4.
