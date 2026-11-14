@@ -1304,3 +1304,40 @@ worktree /home/user/wt/p12m (branch p12m, from a5402c006), and detached /home/us
   - NO NEW unread write by new code of this lane: no `weakness` or `proud` write is added in e969a75b7..a5402c006.
   - The 8 stale bank members (lastTargetedBy, lastTargetedTick, proud and weakness on osr004 to osr013) are the same move seen from the
     other side.
+
+# PART 7 — POWERS-13, the lane's eighth seat: the lane goes on curing (kept current after every item)
+
+The lane was read back from origin at **3909655c3** before the first act, equal to the brief's. The builder is POWERS-13 (the chair is
+session_01ACmDYZrFEVXyZEUg1NDxxC; brief docs/chair/2026-11-14/briefs/BRIEF-POWERS-13.md on the chair's lane). Scratch worktree
+/home/user/p13 (branch p13, `npm ci` once; it wrote `core.hookspath=.husky/_` as for every seat before), and detached /home/user/wtbase
+(a5402c006, the code tip before the merge; node_modules linked from p13, used for reading only). Long runs go to /home/user/runs/.
+Pushes by /home/user/runs/push.sh (POWERS-11's, pointed at p13).
+
+## P7.0 The rulings worked to (the brief's; the chair's messages copied below as they arrive)
+- THE LIST, in order: (1) the lane's two red tests; (2) the page census's 720 door; (3) the bar's two HIGH rows (#272 THE RAW MODIFIER,
+  #291 "debating market levies"); (4) one message to the chair, then the count; (5) the bar's seven medium rows and P6.6's rows, widest
+  first. NO whole suite, NO final statement. Never rewrite a commit at or below 3909655c3.
+- THE RAW MODIFIER, RULED: an identifier is never printed; a modifier prints in plain words only where the town's own record bears it
+  out (an arcane house stands; a force stands; the faith is not subordinate to the seat), else nothing. The cure is at DISPLAY unless
+  nothing else reads it; a modifier STORED where the record does not bear it out is a second finding: counted, and cured at its writer
+  as a declared move only if the count is small and the family is one this lane declares; else named with its count.
+- #291: a line that names a market, a court, a guild, a temple or a force READS THE ROSTER: every such line of that table is read.
+- A floor or a guard town the line's change moved is re-keyed BY IDENTITY with its cause named, never loosened.
+- #312 and ww#656 stay FOR THE JOIN; a row needing the owner's words stays PARKED.
+
+## P7.1 Item by item
+- **(1) THE LANE'S TWO TESTS RED SINCE THE MERGE: DONE, 1d5bbf43f and 6dada2454** (tests only; no src/ touched).
+  - styledTitleOnRows, "expected 9 to be >= 10". In its own towns at the tip and at a5402c006 (probe gend.mjs): the six fresh births
+    read 12 ends before the merge, 9 after. The only mover is p8-city-10: the merge 835cce92c re-dealt its roster and ties (68 -> 66
+    cards), and Volkera Wolf (the senior abbess) keeps 2 of her 5 rows. The correctness arm (every end reads the card's styled title)
+    stayed green: no fault composed. RE-KEYED: p8-city-3 added (Yasmeen ibn Sina, 3 rows), the first town of the file's own scan
+    (p8-<size>-1..12) at 3909655c3 with the exposure the list lacked. Floor kept at 10; it reads 12.
+  - mintedFaceUnderworld, r2s-succession_void-city-2 "the lord". In its own town: after the merge The Peerage and The Landed Bloc are
+    no longer minted there; its minted lords draw other secrets; no face names a guild the town lacks. RE-KEYED: r2r-metropolis-213
+    (the lord of Noble Houses, "the local underworld", no guild), the first such town of a scan of 660 fresh seeds at 3909655c3
+    (r2r-city/metropolis-71..250, r2s-<crisis>-city/metropolis-10..19; probe mintscan.mjs, exposure only). On the 720 at the tip the
+    other three guard towns are the only minted faces with the line and no guild.
+  - Red first: plants in faceHonorifics.js :: styledTitleOf and crimeSignal.js :: withTownsOwnUnderworld (in p13, no suite running)
+    red 7 of 9, naming p8-city-3 and r2r-metropolis-213; restored, 9 of 9 green.
+  - Holders by content (probe holders.sh: the 48 lanes with a tip on or after 2026-11-13, a copy differing from the line's AND from
+    this lane's): none for either file.
