@@ -1177,6 +1177,63 @@ SEATS2['POWERS-12'] = dict(
 )
 
 
+SEATS2['W2-C-LEAVES-8'] = dict(
+    title="W2-C-LEAVES-8 · the third leaves lane's close: its own rising row, the court rows, the added rows, the line's merge, the final statement",
+    branch='lane/w2-c-leaves-2026-11-13', tip='4576cfc6', statement=True,
+    intro=("You are W2-C-LEAVES-8, the eighth seat on the third leaves lane of the settlement-engine integration program (lane/w2-c-leaves-2026-11-13). The "
+           "lane cures false lines the display leaves write: the Economics tab's chain cards, goods pills and food sentences, the PDF's and the Foundry "
+           "journal's trade lists, and the Defense tab's supporting rows. The seventh seat made the three surfaces print one trade list and one chain state, "
+           "ran the measuring seat's command at both ends and handed back at its context mark with its list written out. Yours: a short list inside a "
+           "time-box, and THE LANE'S CLOSE."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/W2-C-LEAVES-HANDBACK.md, BY LINE RANGE, BY SCRIPT (the file is 1,130 lines; open only these): PART 7 WHOLE "
+          "(from the line \"# PART 7\" to the end: the rulings in force, items 8 and 9, the calls taken, FOR THE JOIN, CENSUS-2's counts at both ends and "
+          "ITS RISING ROW, STATUS with WHAT IS LEFT line by line, the instruments); in PART 6 the section \"STATUS AT THE HAND-BACK\" (its row 5); in PART "
+          "5 the section of the chair's rulings (the four added rows in their own words).\n"
+          "3. At THE CLOSE: the merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (docs/INTEGRATION_STYLE_2_2026-11-09.md, the "
+          "section headed \"## 2m.\": about forty lines; by script)."),
+    work=(CLOSE_NOW % '180,000' + "\n"
+          "THE LIST, in this order, each cause its own commit, measured first on the 720 and the fresh 180, red first (a collected arm, never a bare seed "
+          "loop), pushed as made:\n"
+          "1. THE LANE'S OWN RISING ROW (PART 7's census: chainNeedShown.js, kind d, 0 -> 13 towns, every one under a siege: \"Operating at minimal capacity "
+          "or shut down.· covers Grain, Livestock / game, ...\"). A rising row of the lane's own origin is cured before anything else: READ IT WHERE IT "
+          "PRINTS first. RULED: the page shows no chip row of machinery (\"covers X, Y\" is one): where the need box prints the record's impact sentence, "
+          "nothing is run on to it; if \"covers\" is a line the tab means the owner to read, it is its own line in plain words, true of the town.\n"
+          "2. THE COURT ROWS (record 422, ruled): the 33 \"Legal Infrastructure · Court only\" rows beside a Town hall with a drawn \"Dispute arbitration\" "
+          "(defenseDisplay.js :: courtOnRoster counts a drawn court service). THE PAGE NAMES A COURT ONLY WHERE A COURTHOUSE STANDS ON THE ROSTER: where "
+          "none stands the row speaks of the town hall's or the council's hearings, read where it prints in three towns, or it is not written; display "
+          "only; a guard town; the new words listed for the owner's veto.\n"
+          "3. THE FOUR ADDED ROWS, as PART 7's STATUS lists them: (a) #1013, the lone gambling house; (b) Arcane \"None\" beside an arcane power or a named "
+          "mage; (c) the PDF's \"Abundant\" kicker under a siege (src/pdf/sections/ResourcesProduction.jsx is shared: ONE line, named in the commit); (d) "
+          "the charcoal burner's four \"timber\" pills read, cured or named.\n"
+          "4. CENSUS-2's OTHER HITS on the lane's writers (PART 7's table; the out-dirs are lost: re-run it only at your tip, at THE CLOSE): RANK the "
+          "lane's writers by towns hit; read the widest; cure or name, while the time-box lasts.\n"
+          "THE CLOSE, each step its own commit or commits:\n"
+          "5. PART 6's row 5 (the second merge's registers verified by their doors).\n"
+          "6. THE MERGE OF THE LINE (the word is given): full history first (`git fetch --depth=2147483647 origin lane/integration-2026-11-07 "
+          "lane/w2-c-leaves-2026-11-13`; `git rev-parse --is-shallow-repository` prints false; `git merge-base --all origin/lane/integration-2026-11-07 HEAD` "
+          "prints TWO bases, 817980b33 and 69b53decd); the line's tip as you read it back (976db5b19 when this was written; a plain merge; say which commit "
+          "and what conflicted). BY THE CHAIR'S TRIAL MERGE OF 4576cfc6: 11 conflicted files. CODE, by hand at the cause, the file read whole, both sides' "
+          "cures standing: src/domain/goods.schema.js ONLY. THE REST (docs/content/wiring-census.json, tests/components/phoneChromeFloor.census.test.js, the "
+          "edge bundles and their meta files): each taken from ONE side and re-derived through its own door or script (the bundles by `npm run "
+          "build:edge-shared`, alone, last), never merged by hand; a conflict outside this list means the base is wrong or a side moved. THEN every check "
+          "section 2m lists; THE TWO ROWS BANKED AGAINST THIS LANE in defenseDisplay.js (2m's part (3): the siege line \"under siege the outlying fields "
+          "would be lost\"; the crime desk's ring line with \"streets\"; reason `after-base: leaves-3`) cured and shrunk out as 2m gives it; the page census "
+          "on this lane's lines (2m's door, the 720). A door's refusal you cannot cure is a STOP to the chair with the door's output: nothing is banked by "
+          "hand.\n"
+          "7. THE LANE'S ONE FINAL STATEMENT in the form below (the lane's base is 4534ea5e3; the stage a reader has not read begins at d79ea4c70): CENSUS-2 "
+          "per kind at the base and at your final tip (PART 7 holds the base's counts: re-run the tip); the first census's counter at both, its own exit "
+          "read; the whole suite ONCE at the tip in six shards, each red FILE re-run at the base to class it; the draft record "
+          "docs/chair/2026-11-13/W2-C-LEAVES-SHIFT-RECORD-DRAFT.md brought current; the new words of the whole lane; FOR THE JOIN gathered whole from "
+          "every part (the house-label leaf's call sites; SupplyChainFlow.jsx's ChainRow; EconomicsTab.jsx and EconomicsTrade.jsx's shared lines; the "
+          "arcane defence's two homes); LEFT FOR AFTER THE JOIN (every row not reached; each part's \"Found, not mine\"). A fresh reader then reads the lane "
+          "from d79ea4c70: leave it what it needs."),
+    merges="; the merge of the integration line's tip named in step 6",
+    when="for a stop that blocks everything you have left, when the list's time-box closes (one line: the tip; what was cured, what is left), when the line's merge and its registers are pushed, and with your final statement or hand-back",
+    turns='',
+)
+
+
 SEATS2['R2-CODE-A-8'] = dict(
     title="R2-CODE-A-8 · round two's first code lane's close: the widest rows left, its own reds, the line's merge, the final statement",
     branch='lane/r2-code-a-2026-11-13', tip='ae12d68d', statement=True,
