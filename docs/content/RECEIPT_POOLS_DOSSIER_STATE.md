@@ -1574,10 +1574,9 @@ note that carries it on the six wired surfaces.
 4. `[trade · no crisis: under_siege · no crisis: famine]` The carts that leave {settlement} carry several kinds of goods, not one.
 5. `[local · colour]` People in {settlement} work at more than one trade that sells beyond the town.
 6. `[newcomer · no crisis: under_siege · no crisis: famine]` A merchant who comes to {settlement} for one thing usually leaves with two or three.
-7. `[ledger · crisis: under_siege]` {settlement} had several trades sending goods out before the siege, and none of them can send anything now.
+7. `[ledger · crisis: under_siege]` {settlement} had several trades selling outward before the siege, and none of them can reach a buyer now.
 8. `[unfolding · crisis: famine]` {settlement} has more than one trade sending goods out, and the famine has made every one of them harder to keep going.
 9. `[street · crisis: famine]` With the famine on, every trade {settlement} sells outward is judged by one thing: what it can bring back to eat.
-10. `[visitor · crisis: under_siege]` {settlement} has several kinds of goods to sell outward, and the siege has shut every one of them in.
 
 **SCARCITY: `shortage`**
 1. `[ledger · market]` {good} is scarce in {settlement} and its price has risen.
