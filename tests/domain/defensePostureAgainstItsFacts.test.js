@@ -75,10 +75,39 @@ describe('the posture line against the facts beside it (F1, both directions of L
     });
     expectNoSeedFailures(failures, 'the posture within its facts');
   });
+  // R3-TABS-5, the chair's ruling (c) of 2026-11-14 on the second reader's R1: RE-KEYED BY IDENTITY. Ingili's own
+  // record (occupied, a Weak bar) pinned the ADEQUATE fallback, a false line two rows above "Keeping order … is the
+  // occupiers' business now"; under an occupation the row is now silent. Its record with the occupation lifted
+  // still draws the line tip's pool beside the Weak bar, so the reverse guard keeps its own arm.
   test('beside a Weak bar the posture draws the line tip\'s pool; a Well-Defended town at peace keeps the strong pool', () => {
-    expect(postureOf('rr3-metropolis-occupied-rand-2')?.rung?.provenance?.poolKey).toBe('readiness ADEQUATE');
+    expect(postureOf('rr3-metropolis-occupied-rand-2')?.beside ?? null).toBe(null);
     expect(postureOf(LIFTED)?.rung?.provenance?.poolKey).toBe('readiness ADEQUATE');
     expect(postureOf(KEEPS)?.rung?.provenance?.poolKey).toBe('readiness STRONG');
+  });
+});
+
+/**
+ * R3-TABS-5, the chair's ruling (c) of 2026-11-14 on the second reader's R1 (MEDIUM) and the carried C3: UNDER AN
+ * OCCUPATION THE POSTURE ROW IS SILENT, beside any bar. The occupation strike runs before the fallback, and before
+ * every pool: "People at Muulcoba expect to hold against the usual trouble" stood two rows above "Keeping order in
+ * Muulcoba is the occupiers' business now … the arms in the town are theirs". RED-FIRST at b5a335a46 on the second
+ * reader's 1,536 births: a posture line in 64 of the 76 occupied towns (adequate, weak and critical pools). The towns
+ * below hold every bar band and every pool that printed; the badge and the Guard assessment are not this arm's.
+ */
+const OCCUPIED = ['rr3-town-occupied-rand-1', 'rr3-metropolis-occupied-rand-2', 'rr3-city-occupied-rand-2', 'rr3-village-occupied-rand-0',
+  'rr3-thorp-occupied-rand-1', 'rr3-city-occupied-rand-0'];
+describe('under an occupation the posture row is silent (ruling (c))', () => {
+  beforeAll(() => { for (const seed of OCCUPIED) TOWNS[seed] = TOWNS[seed] || birth(seed); }, 300000);
+  test('the premise: each town is occupied, and the arm spans the bar bands', () => {
+    expect(OCCUPIED.filter((seed) => !types(TOWNS[seed]).includes('occupied'))).toEqual([]);
+    expect(new Set(OCCUPIED.map(barOf)).size).toBeGreaterThan(2);
+  });
+  test('no posture line prints under an occupation, beside any bar', () => {
+    const failures = collectSeedFailures(OCCUPIED, (seed) => {
+      const posture = postureOf(seed);
+      if (posture?.beside) throw new Error(`${posture.rung?.provenance?.poolKey} beside a ${barOf(seed)} bar: ${posture.beside}`);
+    });
+    expectNoSeedFailures(failures, 'the posture under an occupation');
   });
 });
 

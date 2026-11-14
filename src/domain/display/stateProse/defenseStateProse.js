@@ -922,6 +922,18 @@ function noStrongBesideAWeakBar(poolKey, readinessScore, militaryScore) {
 }
 
 /**
+ * ⛔ UNDER AN OCCUPATION THE POSTURE ROW IS SILENT, BESIDE ANY BAR (R3-TABS-5; the chair's ruling (c) of 2026-11-14 on
+ * the second reader's R1 and the carried C3). Every pool speaks of what the town's own people can hold against, two
+ * rows above the banner "Keeping order in … is the occupiers' business now … the arms in the town are theirs": "People
+ * at Muulcoba expect to hold against the usual trouble" there was the fallback above (2 towns) and the badge's own
+ * adequate pool (12), and the weak and critical pools spoke the same way. The strike runs FIRST, before the fallback:
+ * 64 of the second reader's 76 occupied towns printed a posture line at b5a335a46, none after. The badge and the
+ * Guard assessment stay; the banner names the occupation.
+ * @param {string|null} poolKey @param {unknown} stress @returns {string|null}
+ */
+const silentUnderAnOccupation = (poolKey, stress) => (stressList(stress).some((entry) => entry?.type === 'occupied') ? null : poolKey);
+
+/**
  * DS-DEF-1 lens 1 — THE READINESS BAND.
  *
  * ⭐ Reads `defenseProfile.readiness.score`, NOT `avgScore(scores)`. See the header: the
@@ -1010,7 +1022,7 @@ export function defensePostureProse(settlement, options = {}) {
   };
 
   return Object.freeze({
-    posture: projected(withinTheBar(noStrongBesideAWeakBar(posturePoolKey(settlement?.defenseProfile?.readiness?.score),
+    posture: projected(withinTheBar(noStrongBesideAWeakBar(silentUnderAnOccupation(posturePoolKey(settlement?.defenseProfile?.readiness?.score), settlement?.stress),
       settlement?.defenseProfile?.readiness?.score, settlement?.defenseProfile?.scores?.military), settlement?.defenseProfile?.scores?.military,
     ), corpusAdmittingPostureLines(CORPUS, settlement)),
     terrain: projected(terrainDefencePoolKey(terrain)),
