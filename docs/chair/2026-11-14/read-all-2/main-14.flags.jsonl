@@ -1,0 +1,171 @@
+{"id":"21097","town":"r2r-city-7","sev":"LOW","kind":"BROKEN","why":"prints roster disambiguator '(the chief magistrate)' inside the person's name in prose","other":""}
+{"id":"18702","town":"r2r-city-7","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"12900","town":"r2r-city-7","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"06975","town":"r2r-city-7","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"25564","town":"r2r-city-7","sev":"LOW","kind":"LACKS","why":"names a power 'The Guard'; GOVERNMENT lists no such power (only Military/Guard)","other":""}
+{"id":"HEADER","town":"r2s-insurgency-city-1","sev":"MED","kind":"RECORD","why":"QUARRELS has Ecclesiastical Council vs Military/Guard high conflict, yet the same pair is 'symbiotic, stable'","other":""}
+{"id":"HEADER","town":"r2s-insurgency-city-1","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Tserenpuntsag Nogai (f) the title 'lord'; Timetei Kyrgyz (m) 'district madam'","other":""}
+{"id":"06676","town":"r2s-insurgency-city-1","sev":"MED","kind":"PAIR","why":"shows Ecclesiastical Council and Military/Guard as stable partners; QUARRELS has them in high conflict","other":"06667"}
+{"id":"00896","town":"r2s-insurgency-city-1","sev":"MED","kind":"STATE","why":"PEOPLE gives Otgontuya Besud only as watch commander; 'The Guard' is no listed power; a 'share' in a guard","other":""}
+{"id":"01607","town":"r2s-insurgency-city-1","sev":"MED","kind":"STATE","why":"PEOPLE gives Otgontuya Besud only as watch commander, not third of Ecclesiastical Council; 'The Guard' is no listed power","other":""}
+{"id":"HEADER","town":"r2s-slave_revolt-city-1","sev":"MED","kind":"RECORD","why":"HOUSES has a Stone quarry with a quarry master, but LAND has no stone resource and TRADE imports stone","other":""}
+{"id":"11589","town":"r2s-slave_revolt-city-1","sev":"MED","kind":"STATE","why":"City Council's seat given to the Merchant Guilds' master; GOVERNMENT has Merchant Guilds Suppressed, in quarrel with City Council; 'Lord Mayor' unrostered","other":""}
+{"id":"29513","town":"r2s-slave_revolt-city-1","sev":"LOW","kind":"BROKEN","why":"lists a person (the wizard of Wizard's tower) among supplying houses, doubling the tower","other":""}
+{"id":"15403","town":"r2s-slave_revolt-city-1","sev":"LOW","kind":"STATE","why":"Reed & Marsh Harvest draws on Marshlands (depleted); 'forest management' describes a forest, not a marsh","other":""}
+{"id":"11049","town":"r2s-indebted-city-2","sev":"MED","kind":"STATE","why":"PEOPLE puts Wiglaf Asgersson in Merchant Guilds, in high quarrel with City Council, not 'of City Council'; ends in fragment 'holds the seat'","other":""}
+{"id":"04487","town":"r2s-mass_migration-city-3","sev":"MED","kind":"STATE","why":"says the assembly cannot keep people fed; FOOD word Secure, gap 1%, 9 months stored","other":""}
+{"id":"12585","town":"r2s-mass_migration-city-3","sev":"LOW","kind":"BROKEN","why":"subject and verb do not agree: 'Merchant Guilds works'","other":""}
+{"id":"06154","town":"r2s-mass_migration-city-3","sev":"LOW","kind":"BROKEN","why":"subject and verb do not agree: 'Religious Authorities tells'","other":""}
+{"id":"25990","town":"r2s-slave_revolt-city-1","sev":"LOW","kind":"STATE","why":"PEOPLE gives Secunda Opimius as lanista of the Gladiatorial school, not a member of The Martial Alliance","other":""}
+{"id":"06148","town":"r2s-mass_migration-city-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"HEADER","town":"r2s-wartime-city-0","sev":"MED","kind":"RECORD","why":"'made here' lists medicinal herbs while LAND gives Wild Foraging Areas depleted and TRADE imports herbs (gathering exhausted)","other":""}
+{"id":"28918","town":"r2s-wartime-city-0","sev":"MED","kind":"STATE","why":"lists medicinal herbs as made here; LAND gives Wild Foraging Areas depleted, Herbalism vulnerable, herbs imported","other":""}
+{"id":"19199","town":"r2s-wartime-city-0","sev":"LOW","kind":"BROKEN","why":"pronoun does not agree: 'its precious metal veins, and it will not come back'","other":""}
+{"id":"22461","town":"r2s-wartime-city-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"02905","town":"r2s-wartime-city-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"21447","town":"r2s-wartime-city-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"26105","town":"r2s-wartime-city-0","sev":"LOW","kind":"STATE","why":"PEOPLE gives Huda al-Isfahani as charter master of the adventurers' guilds, not a voice of War Council","other":""}
+{"id":"25993","town":"r2s-wartime-city-0","sev":"LOW","kind":"STATE","why":"PEOPLE gives Kasim al-Dimashqi as the miller, not a member of The Peerage","other":""}
+{"id":"29519","town":"r2s-wartime-city-2","sev":"LOW","kind":"BROKEN","why":"lists a person (Gisela Graf, wizard of the Wizard's tower) among supplying houses, doubling the tower","other":""}
+{"id":"26566","town":"r2s-wartime-city-2","sev":"LOW","kind":"LACKS","why":"names a power 'The Guard'; GOVERNMENT lists no such power (only Military/Guard)","other":""}
+{"id":"25130","town":"r2s-wartime-city-2","sev":"LOW","kind":"LACKS","why":"names a power 'The Guard'; GOVERNMENT lists no such power (only Military/Guard)","other":""}
+{"id":"25345","town":"r2s-wartime-city-2","sev":"LOW","kind":"LACKS","why":"names a power 'The Guard'; GOVERNMENT lists no such power (only Military/Guard)","other":""}
+{"id":"23633","town":"r2s-wartime-city-2","sev":"LOW","kind":"LACKS","why":"names a power 'The Guard'; GOVERNMENT lists no such power (only Military/Guard)","other":""}
+{"id":"HEADER","town":"r2s-monster_pressure-city-3","sev":"MED","kind":"RECORD","why":"'made here' lists medicinal herbs while Wild Foraging Areas depleted and herbs imported; Fish market while River Fisheries depleted","other":""}
+{"id":"11588","town":"r2s-monster_pressure-city-3","sev":"LOW","kind":"STATE","why":"gives Terentia Cato (f) the male title 'Lord Burgomaster'","other":""}
+{"id":"12879","town":"r2s-monster_pressure-city-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"04935","town":"r2s-monster_pressure-city-3","sev":"LOW","kind":"LACKS","why":"names a power 'The Guard'; GOVERNMENT lists no such power (only Military/Guard)","other":""}
+{"id":"29395","town":"r2s-monster_pressure-city-3","sev":"LOW","kind":"BROKEN","why":"lists a person (Marcella Piso, wizard of the Wizard's tower) among supplying houses, doubling the tower","other":""}
+{"id":"15684","town":"r2s-monster_pressure-city-3","sev":"MED","kind":"STATE","why":"says conjured fish supplement River Fishing; FOOD shows by magic 0% and the chain is vulnerable on a depleted fishery, not magically sustained","other":""}
+{"id":"25350","town":"r2s-monster_pressure-city-3","sev":"LOW","kind":"LACKS","why":"names a power 'The Guard'; GOVERNMENT lists no such power (only Military/Guard)","other":""}
+{"id":"26573","town":"r2s-monster_pressure-city-3","sev":"LOW","kind":"LACKS","why":"names a power 'The Guard'; GOVERNMENT lists no such power (only Military/Guard)","other":""}
+{"id":"26036","town":"r2s-monster_pressure-city-3","sev":"LOW","kind":"STATE","why":"presumes Albina Gratus is in The Commercial Circle; PEOPLE gives her as wharfinger of the docks","other":""}
+{"id":"23663","town":"r2s-monster_pressure-city-3","sev":"LOW","kind":"LACKS","why":"names a power 'The Guard'; GOVERNMENT lists no such power (only Military/Guard)","other":""}
+{"id":"26342","town":"r2s-monster_pressure-city-3","sev":"LOW","kind":"LACKS","why":"names a power 'The Guard'; GOVERNMENT lists no such power (only Military/Guard)","other":""}
+{"id":"21142","town":"r2s-succession_void-city-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"00873","town":"r2s-succession_void-city-0","sev":"MED","kind":"STATE","why":"PEOPLE gives Oda Gruber only as Bardic college master, not third of Ecclesiastical Council or a Noble Families shareholder","other":""}
+{"id":"01581","town":"r2s-succession_void-city-0","sev":"MED","kind":"STATE","why":"PEOPLE gives Oda Gruber only as Bardic college master, not third of Ecclesiastical Council or a Noble Families shareholder","other":""}
+{"id":"22526","town":"r2s-succession_void-city-0","sev":"LOW","kind":"LACKS","why":"names a power 'The Guard'; GOVERNMENT lists no such power (only Military/Guard)","other":""}
+{"id":"25121","town":"r2s-succession_void-city-0","sev":"LOW","kind":"LACKS","why":"names a power 'The Guard'; GOVERNMENT lists no such power (only Military/Guard)","other":""}
+{"id":"26564","town":"r2s-succession_void-city-0","sev":"LOW","kind":"LACKS","why":"names a power 'The Guard'; GOVERNMENT lists no such power (only Military/Guard)","other":""}
+{"id":"19173","town":"r2s-succession_void-city-0","sev":"MED","kind":"STATE","why":"church and garrison 'act as one'; QUARRELS has Ecclesiastical Council ~ Military/Guard tense, escalating","other":""}
+{"id":"HEADER","town":"r2r-city-56","sev":"MED","kind":"RECORD","why":"exports wild honey, candles and wax, makes foraged goods; LAND has Beekeeping and Foraging vulnerable, their resource absent","other":""}
+{"id":"14081","town":"r2r-city-56","sev":"MED","kind":"PAIR","why":"'neither side pushes the other'; QUARRELS has Thieves' Guild vs Merchant Guild Council in moderate conflict","other":"21877"}
+{"id":"29472","town":"r2r-city-56","sev":"LOW","kind":"BROKEN","why":"lists a person (Ottilia Fischer, golem-master) after her own Golem workforce among supplying houses","other":""}
+{"id":"03975","town":"r2r-city-56","sev":"MED","kind":"STATE","why":"says coal shortfall made up by magic; LAND gives Fuel & Heating vulnerable, not magically sustained; TRADE imports coal","other":""}
+{"id":"HEADER","town":"r2s-politically_fractured-city-1","sev":"MED","kind":"RECORD","why":"LAND has Livestock & Dairy magically sustained on depleted grazing, yet FOOD gives by magic 0%","other":""}
+{"id":"00740","town":"r2s-politically_fractured-city-1","sev":"LOW","kind":"BROKEN","why":"subject and verb do not agree: 'Merchant Guilds controls'","other":""}
+{"id":"21091","town":"r2s-politically_fractured-city-1","sev":"LOW","kind":"STATE","why":"says the mayor and council is run by Naoki Hayashi; PEOPLE gives him to the Mages' guild and nobody to Mayor and council","other":""}
+{"id":"06794","town":"r2s-politically_fractured-city-1","sev":"LOW","kind":"STATE","why":"'elected civic council' with full apparatus; GOVERNMENT is an Arcane Council, Fractured, with no stable authority","other":""}
+{"id":"25958","town":"r2s-politically_fractured-city-1","sev":"LOW","kind":"STATE","why":"PEOPLE gives Xu Huang as mint master, not a member of Arcane Council","other":""}
+{"id":"27325","town":"r2s-politically_fractured-city-1","sev":"LOW","kind":"STATE","why":"PEOPLE gives Xu Huang as mint master, not a member of Arcane Council","other":""}
+{"id":"HEADER","town":"r2r-city-46","sev":"MED","kind":"RECORD","why":"exports mineral salts, alum, sulfur while gaps say mineral hot springs are not being processed; 'city' of 2,578","other":""}
+{"id":"25973","town":"r2r-city-46","sev":"LOW","kind":"STATE","why":"PEOPLE gives Dorbei Kiyad as mint master, not a member of Military City Council","other":""}
+{"id":"22727","town":"r2r-city-46","sev":"LOW","kind":"STATE","why":"presumes Dorbei Kiyad directs Military City Council's business; PEOPLE gives him only as mint master","other":""}
+{"id":"27335","town":"r2r-city-46","sev":"LOW","kind":"STATE","why":"PEOPLE gives Dorbei Kiyad as mint master, not a member of Military City Council","other":""}
+{"id":"HEADER","town":"r2r-city-38","sev":"MED","kind":"RECORD","why":"exports shipbuilding timber with Shipbuilding running, yet gaps say timber is not being processed; a 'city' of 2,853","other":""}
+{"id":"12587","town":"r2r-city-38","sev":"LOW","kind":"BROKEN","why":"subject and verb do not agree: 'Merchant Guilds works'","other":""}
+{"id":"00895","town":"r2r-city-38","sev":"MED","kind":"STATE","why":"PEOPLE gives Metztli Uc only as master weaver, not third of Ecclesiastical Council or a Merchant Guilds shareholder","other":""}
+{"id":"01606","town":"r2r-city-38","sev":"MED","kind":"STATE","why":"PEOPLE gives Metztli Uc only as master weaver, not third of Ecclesiastical Council or a Merchant Guilds shareholder","other":""}
+{"id":"HEADER","town":"r2r-city-39","sev":"MED","kind":"RECORD","why":"exports and makes dates while Date Palms depleted and dates imported (orchards unproductive); fish market in a desert with no fishery","other":""}
+{"id":"29119","town":"r2r-city-39","sev":"MED","kind":"STATE","why":"lists dates as yielded by the land; LAND gives Date Palms and Orchards depleted, chain impaired","other":""}
+{"id":"24233","town":"r2r-city-39","sev":"MED","kind":"STATE","why":"says the caravanserai runs well; gaps say it lacks camel herds and Caravan & Overland Trade is vulnerable","other":""}
+{"id":"HEADER","town":"r2r-city-31","sev":"LOW","kind":"RECORD","why":"exports glassware with no Glassmakers in HOUSES; exports enchanting with no enchanter","other":""}
+{"id":"02087","town":"r2r-city-31","sev":"MED","kind":"STATE","why":"City Council's seat given to the Craft Guilds' master; QUARRELS has City Council vs Craft Guilds in moderate conflict","other":""}
+{"id":"00816","town":"r2r-city-31","sev":"MED","kind":"STATE","why":"Craft Guilds' wishes 'go straight to the top'; QUARRELS has City Council vs Craft Guilds in moderate conflict","other":"04724"}
+{"id":"01855","town":"r2r-city-31","sev":"MED","kind":"STATE","why":"City Council's head lends Craft Guilds weight; QUARRELS has City Council vs Craft Guilds in moderate conflict","other":"04724"}
+{"id":"28195","town":"r2r-city-45","sev":"MED","kind":"STATE","why":"PEOPLE gives Otgontuya Qatagin to the Smuggling network; Front businesses' head is Rashid Cumans","other":""}
+{"id":"00875","town":"r2r-city-45","sev":"MED","kind":"STATE","why":"PEOPLE gives Yesüi Naiman only as Bardic college master; Arcane Orders are Suppressed and in quarrel with Arcane Council","other":""}
+{"id":"01584","town":"r2r-city-45","sev":"MED","kind":"STATE","why":"PEOPLE gives Yesüi Naiman only as Bardic college master, not third of Arcane Council or an Arcane Orders shareholder","other":""}
+{"id":"19805","town":"r2r-city-45","sev":"LOW","kind":"BROKEN","why":"subject and verb do not agree: 'The heresy trials is'","other":""}
+{"id":"HEADER","town":"r2r-city-24","sev":"MED","kind":"RECORD","why":"makes salt with no salt resource or salt works; makes ale and beer with no Brewery in HOUSES","other":""}
+{"id":"28447","town":"r2r-city-24","sev":"MED","kind":"STATE","why":"lists salt as made here; LAND has no salt resource and HOUSES no salt works","other":""}
+{"id":"29184","town":"r2r-city-24","sev":"MED","kind":"STATE","why":"lists salt among the land's yield; LAND has no salt resource","other":""}
+{"id":"29483","town":"r2r-city-24","sev":"LOW","kind":"BROKEN","why":"lists a person (Christofora Lekapenos, golem-master) after her own Golem workforce among supplying houses","other":""}
+{"id":"17694","town":"r2r-city-49","sev":"MED","kind":"STATE","why":"says arcane stone-shaping offsets depleted extraction; LAND gives Stone & Construction vulnerable, not magically sustained; dressed stone imported","other":""}
+{"id":"01217","town":"r2r-city-49","sev":"MED","kind":"STATE","why":"casts Vergilius Ravilla as keeper of a church; PEOPLE gives him as hospital's master (the dean is Gratus Aquila)","other":""}
+{"id":"01376","town":"r2r-city-49","sev":"MED","kind":"STATE","why":"gives Vergilius Ravilla an altar; PEOPLE gives him as hospital's master, not a cleric","other":""}
+{"id":"HEADER","town":"r2r-city-57","sev":"LOW","kind":"RECORD","why":"exports glassware with no Glassmakers in HOUSES; makes foraged goods while Foraging & Smallholding's resource is absent","other":""}
+{"id":"29498","town":"r2r-city-57","sev":"LOW","kind":"BROKEN","why":"lists a person (Marta Smirnov, wizard of the Wizard's tower) among supplying houses, doubling the tower","other":""}
+{"id":"25992","town":"r2r-city-57","sev":"LOW","kind":"STATE","why":"PEOPLE gives Vsevolod Jovanović as mercenary company captain, not a member of The Order of the Watch","other":""}
+{"id":"HEADER","town":"r2r-city-28","sev":"MED","kind":"RECORD","why":"founded both 'by a noble house' and 'by a disbanded military unit'; Democratic assembly vs Military/Guard high quarrel yet 'symbiotic'","other":""}
+{"id":"28570","town":"r2r-city-28","sev":"MED","kind":"STATE","why":"lists medicinal herbs as made here; LAND gives Wild Foraging Areas depleted and herbs are imported (gathering exhausted)","other":""}
+{"id":"00888","town":"r2r-city-28","sev":"MED","kind":"STATE","why":"PEOPLE gives Ekaterini Chomatenos only as prison warden; 'The Guard' is no listed power","other":""}
+{"id":"01598","town":"r2r-city-28","sev":"MED","kind":"STATE","why":"PEOPLE gives Ekaterini Chomatenos only as prison warden, not third of Democratic assembly; 'The Guard' is no listed power","other":""}
+{"id":"04930","town":"r2r-city-28","sev":"LOW","kind":"LACKS","why":"names a power 'The Guard'; GOVERNMENT lists no such power (only Military/Guard)","other":""}
+{"id":"29510","town":"r2r-city-28","sev":"LOW","kind":"BROKEN","why":"lists a person (Ioannes Comnenus, wizard of the Wizard's tower) among supplying houses, doubling the tower","other":""}
+{"id":"HEADER","town":"r2r-city-8","sev":"MED","kind":"RECORD","why":"'made here' lists salt; LAND has no salt resource and HOUSES no salt works","other":""}
+{"id":"28439","town":"r2r-city-8","sev":"MED","kind":"STATE","why":"lists salt as made here; LAND has no salt resource and HOUSES no salt works","other":""}
+{"id":"29205","town":"r2r-city-8","sev":"MED","kind":"STATE","why":"lists salt among the land's yield; LAND has no salt resource","other":""}
+{"id":"04713","town":"r2r-city-8","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"00881","town":"r2r-city-8","sev":"MED","kind":"STATE","why":"PEOPLE gives Khutulun Merkit only as castellan of the Citadel, not third of City Council; 'The Guard' is no listed power","other":""}
+{"id":"01589","town":"r2r-city-8","sev":"MED","kind":"STATE","why":"PEOPLE gives Khutulun Merkit only as castellan of the Citadel, not third of City Council; 'The Guard' is no listed power","other":""}
+{"id":"04928","town":"r2r-city-8","sev":"LOW","kind":"LACKS","why":"names a power 'The Guard'; GOVERNMENT lists no such power (only Military/Guard)","other":""}
+{"id":"HEADER","town":"r2r-city-54","sev":"MED","kind":"RECORD","why":"TRADE both exports and imports sulfur and alum; stone 'not being processed' while Stone & Construction runs; fish market with no fishery","other":""}
+{"id":"00876","town":"r2r-city-54","sev":"MED","kind":"STATE","why":"PEOPLE gives Valentinus Gratus only as mercenary company captain, not third of Arcane Council; 'The Guard' is no listed power","other":""}
+{"id":"01585","town":"r2r-city-54","sev":"MED","kind":"STATE","why":"PEOPLE gives Valentinus Gratus only as mercenary company captain, not third of Arcane Council; 'The Guard' is no listed power","other":""}
+{"id":"29392","town":"r2r-city-54","sev":"LOW","kind":"BROKEN","why":"lists a person (Scaeva Salinator, golem-master) after his own Golem workforce among supplying houses","other":""}
+{"id":"10910","town":"r2r-city-54","sev":"MED","kind":"STATE","why":"implies magic props up the reed harvest; LAND gives Reed & Marsh Harvest vulnerable on depleted marsh, not magically sustained","other":""}
+{"id":"15402","town":"r2r-city-54","sev":"MED","kind":"STATE","why":"says arcane fabrication supplies Reed & Marsh Harvest; LAND gives the chain vulnerable, not magically sustained","other":""}
+{"id":"HEADER","town":"r2r-city-20","sev":"MED","kind":"RECORD","why":"trade access isolated, yet exports pass transit trade and toll revenue; makes fine wool cloth and aged cheese while pasture chains vulnerable","other":""}
+{"id":"HEADER","town":"r2r-city-29","sev":"MED","kind":"RECORD","why":"exports wild honey, candles, wax while Beekeeping's resource is absent; makes ale and beer with no Brewery; a Mine with no ore resource","other":""}
+{"id":"HEADER","town":"r2r-city-9","sev":"LOW","kind":"RECORD","why":"exports shipbuilding timber with Shipbuilding running, yet gaps say timber is not being processed","other":""}
+{"id":"25970","town":"r2r-city-9","sev":"LOW","kind":"STATE","why":"PEOPLE gives Jiro Kang as chief magistrate, not a member of Merchant Guild Council","other":""}
+{"id":"27332","town":"r2r-city-9","sev":"LOW","kind":"STATE","why":"PEOPLE gives Jiro Kang as chief magistrate, not a member of Merchant Guild Council","other":""}
+{"id":"HEADER","town":"r2r-city-14","sev":"LOW","kind":"RECORD","why":"FOUNDING reason is 'None'; a Coastal town whose trade access is river","other":""}
+{"id":"12825","town":"r2r-city-14","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"12583","town":"r2r-city-14","sev":"LOW","kind":"BROKEN","why":"subject and verb do not agree: 'Merchant Guilds works'","other":""}
+{"id":"29518","town":"r2r-city-14","sev":"LOW","kind":"BROKEN","why":"lists a person (Octavius Pansa, wizard of the Wizard's tower) among supplying houses, doubling the tower","other":""}
+{"id":"26643","town":"r2r-city-14","sev":"LOW","kind":"STATE","why":"presumes Fabius Cato leads The Merchant Bloc; PEOPLE gives him only as barge master","other":""}
+{"id":"23998","town":"r2r-city-14","sev":"LOW","kind":"LACKS","why":"names a power 'The Guard'; GOVERNMENT lists no such power (only Military/Guard)","other":""}
+{"id":"02095","town":"r2r-city-26","sev":"MED","kind":"STATE","why":"City-State Council's seat given to the Merchant Guilds' master; QUARRELS has City-State Council vs Merchant Guilds in high conflict","other":"04789"}
+{"id":"HEADER","town":"r2r-city-42","sev":"MED","kind":"RECORD","why":"makes salt with no salt resource; makes honey, wax and medicinal herbs while Wild Foraging depleted and herbs imported","other":""}
+{"id":"28448","town":"r2r-city-42","sev":"MED","kind":"STATE","why":"lists salt and medicinal herbs as made here; LAND has no salt resource, Wild Foraging depleted, herbs imported","other":""}
+{"id":"29175","town":"r2r-city-42","sev":"MED","kind":"STATE","why":"lists salt among the land's yield; LAND has no salt resource","other":""}
+{"id":"29512","town":"r2r-city-42","sev":"LOW","kind":"BROKEN","why":"lists a person (Noriko Ito, wizard of the Wizard's tower) among supplying houses, doubling the tower","other":""}
+{"id":"29511","town":"r2r-city-34","sev":"LOW","kind":"BROKEN","why":"lists a person (Ek Ixim, wizard of the Wizard's tower) among supplying houses, doubling the tower","other":""}
+{"id":"26719","town":"r2r-city-34","sev":"LOW","kind":"BROKEN","why":"PEOPLE has two men named Cipactli Yax (lanista and cobbler); the sentence does not say which","other":""}
+{"id":"03656","town":"r2r-city-32","sev":"LOW","kind":"BROKEN","why":"subject and verb do not agree: 'Merchant Guilds needs'","other":""}
+{"id":"19803","town":"r2r-city-32","sev":"LOW","kind":"BROKEN","why":"subject and verb do not agree: 'The heresy trials is'","other":""}
+{"id":"12597","town":"r2r-city-0","sev":"LOW","kind":"BROKEN","why":"subject and verb do not agree: 'Merchant Guilds works'","other":""}
+{"id":"12402","town":"r2r-city-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"25986","town":"r2r-city-15","sev":"LOW","kind":"STATE","why":"PEOPLE gives Erdenebayar Geniges as scroll scribe, not a member of The Enlightened","other":""}
+{"id":"23988","town":"r2r-city-22","sev":"LOW","kind":"LACKS","why":"names a power 'The Guard'; GOVERNMENT lists no such power (only Military/Guard)","other":""}
+{"id":"25468","town":"r2r-city-22","sev":"LOW","kind":"LACKS","why":"names a power 'The Guard'; GOVERNMENT lists no such power (only Military/Guard)","other":""}
+{"id":"22781","town":"r2r-city-22","sev":"LOW","kind":"LACKS","why":"names a power 'The Guard'; GOVERNMENT lists no such power (only Military/Guard)","other":""}
+{"id":"HEADER","town":"r2r-city-55","sev":"LOW","kind":"RECORD","why":"exports glassware with no Glassmakers in HOUSES; Religious Authorities Suppressed yet pilgrimage exported","other":""}
+{"id":"26078","town":"r2r-city-55","sev":"MED","kind":"STATE","why":"has Heracles Komnenos speaking for the Merchant oligarchy; PEOPLE puts him in Merchant Guilds, in high quarrel with it","other":""}
+{"id":"01440","town":"r2r-city-13","sev":"MED","kind":"STATE","why":"gives Lopamudra Pillai a hired guard company; PEOPLE has her as watch commander, the company captain being Hemavati Pillai","other":""}
+{"id":"01442","town":"r2r-city-13","sev":"MED","kind":"STATE","why":"gives Lopamudra Pillai a company guarding wagons; PEOPLE has her as watch commander, the company captain being Hemavati Pillai","other":""}
+{"id":"01441","town":"r2r-city-13","sev":"MED","kind":"STATE","why":"gives Rajesh Sharma a company taking private clients; PEOPLE has him as garrison commander, not a mercenary captain","other":""}
+{"id":"00919","town":"r2r-city-13","sev":"MED","kind":"STATE","why":"PEOPLE gives Rakesh Prasad only as sage, not third of Merchant Guild Council or a Religious Authorities shareholder","other":""}
+{"id":"01629","town":"r2r-city-13","sev":"MED","kind":"STATE","why":"PEOPLE gives Rakesh Prasad only as sage, not third of Merchant Guild Council or a Religious Authorities shareholder","other":""}
+{"id":"HEADER","town":"r2r-city-27","sev":"LOW","kind":"RECORD","why":"HOUSES has a Mine with a mine captain, but LAND lists no ore, metal, gem or coal resource","other":""}
+{"id":"HEADER","town":"r2r-city-35","sev":"MED","kind":"RECORD","why":"FOOD says 79% grown, yet floodplain, fisheries, hunting and foraging are all depleted and no grain or grazing land is listed","other":""}
+{"id":"02102","town":"r2r-city-35","sev":"MED","kind":"STATE","why":"Merchant City Council's seat given to the Merchant Guilds' master; QUARRELS has the two in high conflict","other":"12411"}
+{"id":"03982","town":"r2r-city-35","sev":"MED","kind":"STATE","why":"says river fish shortfall made up by magic; FOOD by magic 0%, River Fishing vulnerable not magically sustained, salted fish imported","other":""}
+{"id":"26621","town":"r2r-city-35","sev":"LOW","kind":"STATE","why":"presumes Gallus Flaccus leads Merchant City Council; PEOPLE gives him only as mint master","other":""}
+{"id":"00886","town":"r2r-city-50","sev":"MED","kind":"STATE","why":"PEOPLE gives Caecilia Macer only as circle-keeper of the Teleportation circle, not third of Corrupt City Council","other":""}
+{"id":"01596","town":"r2r-city-50","sev":"MED","kind":"STATE","why":"PEOPLE gives Caecilia Macer only as circle-keeper of the Teleportation circle, not third of Corrupt City Council","other":""}
+{"id":"26600","town":"r2r-city-50","sev":"LOW","kind":"BROKEN","why":"PEOPLE has two men named Laenas Sabinus (guild archmage and warehouse factor); the sentence does not say which","other":""}
+{"id":"HEADER","town":"r2r-city-6","sev":"MED","kind":"RECORD","why":"Livestock & Dairy magically sustained yet FOOD by magic 0%; makes salt with no salt resource","other":""}
+{"id":"28459","town":"r2r-city-6","sev":"MED","kind":"STATE","why":"lists salt as made here; LAND has no salt resource and HOUSES no salt works","other":""}
+{"id":"29167","town":"r2r-city-6","sev":"MED","kind":"STATE","why":"lists salt among the land's yield; LAND has no salt resource","other":""}
+{"id":"25592","town":"r2r-city-6","sev":"LOW","kind":"BROKEN","why":"PEOPLE has two women named Teamhair MacIntyre (dean and innkeeper); the sentence does not say which","other":""}
+{"id":"HEADER","town":"r2r-city-52","sev":"MED","kind":"RECORD","why":"City-State Council vs Military/Guard high quarrel yet 'symbiotic, stable'; makes salt while Salt Flats depleted and salt imported","other":""}
+{"id":"29020","town":"r2r-city-52","sev":"MED","kind":"STATE","why":"lists salt as made here; LAND gives Salt Flats depleted, Salt & Preservation impaired, salt imported","other":""}
+{"id":"28285","town":"r2r-city-52","sev":"MED","kind":"STATE","why":"lists salt among the land's yield; LAND gives Salt Flats depleted","other":""}
+{"id":"04805","town":"r2r-city-52","sev":"MED","kind":"PAIR","why":"shows City-State Council and Military/Guard as stable partners; QUARRELS has them in high conflict over an unpaid debt","other":"04757"}
+{"id":"04757","town":"r2r-city-52","sev":"MED","kind":"STATE","why":"Council orders, Military/Guard obeys, each needs the other; QUARRELS has them in high conflict (unpaid debt); slash label as name","other":""}
+{"id":"29508","town":"r2r-city-52","sev":"LOW","kind":"BROKEN","why":"lists a person (Zoran Medvedev, wizard of the Wizard's tower) among supplying houses, doubling the tower","other":""}
+{"id":"HEADER","town":"r2r-city-43","sev":"MED","kind":"RECORD","why":"makes and exports grain with no grain fields (Brewing, Food Processing: grain absent); makes honey and herbs with no foraging and grove depleted","other":""}
+{"id":"28633","town":"r2r-city-43","sev":"MED","kind":"STATE","why":"lists grain, honey, medicinal herbs as made here; LAND has no grain fields or foraging, Ancient Grove depleted","other":""}
+{"id":"28274","town":"r2r-city-43","sev":"MED","kind":"STATE","why":"lists grain among the land's yield; LAND has no grain fields (grain chains: resource absent)","other":""}
+{"id":"22792","town":"r2r-city-43","sev":"LOW","kind":"LACKS","why":"names a power 'The Guard'; GOVERNMENT lists no such power (only Military/Guard)","other":""}
+{"id":"HEADER","town":"r2r-city-5","sev":"LOW","kind":"RECORD","why":"makes foraged goods and exports wild honey, candles, wax while Foraging and Beekeeping chains have their resource absent","other":""}
+{"id":"24542","town":"r2r-city-5","sev":"LOW","kind":"LACKS","why":"names a power 'The Guard'; GOVERNMENT lists no such power (only Military/Guard)","other":""}
+{"id":"25991","town":"r2r-city-5","sev":"LOW","kind":"STATE","why":"PEOPLE gives Wadih ibn Rushd as beast master, not a member of The Merchant Bloc","other":""}
+{"id":"14930","town":"r2r-city-41","sev":"MED","kind":"STATE","why":"says the day's catch fills the winter; LAND lists no fisheries and no fishing chain","other":""}
+{"id":"24843","town":"r2r-city-41","sev":"LOW","kind":"BROKEN","why":"PEOPLE has two men named Tserenpuntsag Jirgin (coaching-inn keeper and master carpenter); the sentence does not say which","other":""}
+{"id":"23899","town":"r2r-city-41","sev":"LOW","kind":"BROKEN","why":"PEOPLE has two men named Tserenpuntsag Jirgin (coaching-inn keeper and master carpenter); the sentence does not say which","other":""}
+{"id":"DONE","lines":2578,"blocks":49,"flags":170}
