@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "7ea3dfee284e965e6d4b663b8beb617c866c2c76",
-  "measuredBy": "R2-CODE-B-2",
-  "date": "2026-11-13",
-  "note": "round three: three new red-first test files (houseLabelEveryForm, houseLabelEverySurface, chainSourceAbsent)",
-  "files": 3239,
+  "measuredAtSha": "3b7a826e5401b1448669eb52dacfb7b4f58a9c48",
+  "measuredBy": "R2-CODE-B-SIDE",
+  "date": "2026-11-14",
+  "note": "five red-first test files of R2-CODE-B-SIDE items 1, 4, 5, 6 and 7 (chainCardTruth, powerSeatHeading, quickGuideScopeRoster, traditionsTabForgeRow, faithAccessUnderSiege) and 7b (faithNativeIdentity)",
+  "files": 3245,
   "parked": 398,
-  "credited": 2841,
-  "titles": 29255,
-  "suiteTitles": 7921
+  "credited": 2847,
+  "titles": 29287,
+  "suiteTitles": 7931
 }
