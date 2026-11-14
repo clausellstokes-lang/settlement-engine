@@ -2219,6 +2219,60 @@ READERS['REVIEW-W2-FIX-DATA-4'] = dict(
            "yours."),
 )
 
+READERS['REVIEW-UPKEEP-MONOTONE'] = dict(
+    at="where the branch's first seat handed its build back with every ruled item built; a second seat is closing the build on top of it, and those later commits are not yours",
+    title="REVIEW-UPKEEP-MONOTONE · the defence rating rebuilt so that a house never lowers a score: the side branch read as its own stage",
+    lane='lane/upkeep-monotone-2026-11-14', own='lane/review-upkeep-monotone-2026-11-14', base='26474cda', tip='8bd8e307',
+    what=("the side branch on which the defence rating's arithmetic was rebuilt after a reader's finding and a measuring seat's proof: adding a house "
+          "or raising a house's rung never lowers a score or the readiness; a place's strength in war is bounded by its people"),
+    before="where the side branch was cut from the defence lane: no reader has read this branch",
+    stmt='docs/chair/2026-11-14/UPKEEP-MONOTONE-BUILD.md',
+    tools=("`origin/lane/review-upkeep-capacity-2026-11-14` (`git fetch origin lane/review-upkeep-capacity-2026-11-14`): the last defence reader's "
+           "instrument under docs/chair/2026-11-14/probes/REVIEW-UPKEEP-CAPACITY/ (its 972 births `all.seeds`; `render5.mjs`, which renders every "
+           "surface; `plus.py`, the page lines a birth prints at the tip and not at the base; `agree.py`; its field diff) and its "
+           "REVIEW-UPKEEP-CAPACITY-LINES-READ.md as the pattern for a stage that WRITES NO SENTENCE; and `origin/lane/upkeep-measure-2-2026-11-14` "
+           "(d21c7f18b): the measuring seat's harness under docs/chair/2026-11-14/probes/UPKEEP-MEASURE-2/ that adds a house or raises a rung on a born "
+           "town and re-scores it (its written measure, docs/chair/2026-11-14/UPKEEP-MONOTONE-MEASURE.md on that branch, is a claim: open it only "
+           "after step 1 is pushed). Copy them out with git archive and run them from outside every repository tree."),
+    extra=("8. THIS STAGE WRITES NO SENTENCE: IT MOVES SCORES AND BANDS. So step 1's \"lines\" are EVERY EXISTING LINE THAT NOW PRINTS IN A TOWN "
+           "WHERE IT DID NOT, because a score, a band, a flag or a bucket moved: born at the base and at the tip on the 972 births, every surface, "
+           "the lines the tip prints and the base does not, by family; each family read against the record by script in every town and by eye in "
+           "three. A band chip or a label is a line. INSIDE THE RANGE THE BRANCH MERGED THE DEFENCE LANE'S ffe0750d4 (b42be5de9: the label reads "
+           "the roster, another seat's cure): to isolate this stage, your base is a tree of 26474cda9 WITH THAT MERGE'S CHANGE (the commit "
+           "b42be5de9 itself), and your range's own commits are `git log --first-parent --no-merges b42be5de9..8bd8e307`. YOUR FIRST ACTS AFTER STEP "
+           "1: (a) THE CLAIM ITSELF, by births of your own and by the measuring seat's harness: over every born town, adding any one house the "
+           "catalogue offers at its size, or raising any one house a rung, lowers NO score and NOT the readiness: the count of falls at the base "
+           "(the measuring seat counted 292 of 972 births with a fall) and at the tip (the build says 0). A single fall at the tip is a HIGH "
+           "finding. Plant against the guard tests/generators/defenceMonotone.test.js: does it red on a fall, and only on one? (b) THE MOVE THE "
+           "BUILD DECLARES (bands moved in how many births, by size; powers re-drawn; persons, ties and quarrels re-drawn): by your own field diff "
+           "on the census's 720 and the 972. (c) P4, A PLACE'S STRENGTH IN WAR IS BOUNDED BY ITS PEOPLE (one point a person): read every born "
+           "town in which the bound binds (thorps and hamlets): is \"Invasion & War\" now true beside the page's own count of people and its "
+           "force lines? and does the bound ever bind in a town with a paid garrison larger than the rule assumes? (d) THE ARCANE BUCKET'S TWO NEW "
+           "HOUSES (a scroll scribe, an enchanter's shop): the seven births the row names, and every other birth it moves. (e) THE PULSE, which "
+           "no reader of this lane has measured: the defence scores feed the world's wars. On the worlds the repository's own pulse tests and "
+           "the writer-reach instrument's corpus play (`node scripts/check-writer-reach.mjs --report-to=<a path outside the repository>` at the "
+           "base and at the tip: compare the two dark and stale lists; it writes nothing), say which wars' outcomes, sieges, occupations or "
+           "returns MOVE between the base and the tip, and that each is the consequence of a declared score move, none of a changed rule of war. "
+           "(f) THE PRINTED FIGURES: every score the page prints is the record's, on every surface, at the tip (the build changed where figures "
+           "round). KNOWN AT THIS TIP, AND THE NEXT SEAT'S FIRST ITEMS (name them; do not count them against the stage a second time; but say "
+           "whether births or made records of your own show the same fall, or OTHERS): five red titles of the build's own: "
+           "tests/generators/magicCountOnce.test.js, three titles (a larger monastery now feeds the monster score through two parts); "
+           "tests/generators/defenseEconomicGate.test.js, \"a healthy economy with identical buildings scores meaningfully higher\" (74 is "
+           "not above 74) and \"divine + druid famine mitigation is at least as good as druid alone\" (27 against 28): A FALL on a hand "
+           "fixture outside the guard's set. A builder seat is curing that fall on top of this tip NOW and will name the births its cure "
+           "moves: the chair sends you that list: re-check your step 1 for exactly those births."),
+    rulings=("(the chair, 2026-11-14 08:58 UTC, on the measuring seat's proof) BUILT ALL TOGETHER on a side branch: limit 1 held score by score, "
+             "and the readiness's sustaining total held on limit 1's own line; a house on no ladder of a laddered part counts as the least rung "
+             "the catalogue offers at its size or above; a place's strength in war is bounded by its people at ONE point a person (two was "
+             "shown to the owner as the alternative); the will's hold taken score by score and never below the will with nothing built; the "
+             "traditions' cap taken after the three are added; under a siege the teleport circle's and the guild's reliefs each kept; the "
+             "monastery's ladder keeps its clergy; printed figures read at hundredths before the whole point. NOT BUILT, by ruling: an order "
+             "ACROSS ladders (named for a later measure); the charter hall's line under a Critical band (the score stands, the line moves: "
+             "another seat's); the criminal houses (they lower order by design); six renames across functions. THE LABEL (another seat's, "
+             "merged in): a town whose roster holds walls or a force is never labelled Undefended."),
+)
+
+
 SEATS2['R2-CODE-B-7'] = dict(
     title="R2-CODE-B-7 · round two's second code lane: the line's merge and the final statement",
     branch='lane/r2-code-b-2026-11-13', tip='c40da4ec', statement=True,
@@ -4393,6 +4447,77 @@ SEATS2['POWERS-15'] = dict(
           "it was read in; the declared moves; FOR THE JOIN; what is left, line by line; `git diff --stat 0ea65f574..HEAD -- src/` file by file."),
     merges='',
     when="for a stop that blocks everything you have left, after the toll (the tip; the six titles' state), and with your hand-back",
+    turns='',
+)
+
+
+SEATS2['UPKEEP-15'] = dict(
+    title="UPKEEP-15 · the defence rating's rebuild finished on its side branch: one fall still standing, four red tests traced, the final measure, the statement",
+    branch='lane/upkeep-monotone-2026-11-14', tip='8bd8e307', statement=False,
+    intro=("You are UPKEEP-15, the second seat on the SIDE BRANCH lane/upkeep-monotone-2026-11-14 of the settlement-engine integration program's "
+           "defence lane. A reader found the defence rating could FALL when a town gained a house; a measuring seat proved a set of cures; the "
+           "chair ruled them built all together; the first seat of this branch (UPKEEP-13) built every one, each beside the measure (its guard "
+           "over 972 births reads 0 falls, against 1,751 at the base), and handed back at its count with its close undone. Yours: the close of "
+           "the build: FIVE RED TESTS of the build's own, each TRACED before anything is re-keyed, ONE OF THEM A FALL STILL STANDING; the lane's "
+           "tip merged in; the final measure; the declaration; the eight towns for the owner; the branch's statement. AN INDEPENDENT READER IS "
+           "READING THE BUILD AT 8bd8e3078 NOW, side by side with you: whatever you change in the ARITHMETIC after that tip is told to the chair "
+           "at once with the births it moves. You do not merge this branch into the lane: a later seat does, after the reader."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your branch, docs/chair/2026-11-14/UPKEEP-MONOTONE-BUILD.md WHOLE (122 lines): the rulings worked to; the instruments and how they "
+          "are re-made; the commits, each one cause, with the guard's and the measure's figures; LEFT, line by line (THAT IS YOUR LIST); what a "
+          "reader needs; named, not built.\n"
+          "3. THE MEASURE, for the parts a row of yours names (`git fetch origin lane/upkeep-measure-2-2026-11-14`; `git show "
+          "origin/lane/upkeep-measure-2-2026-11-14:docs/chair/2026-11-14/UPKEEP-MONOTONE-MEASURE.md`, by heading, by script) and its probes "
+          "(docs/chair/2026-11-14/probes/UPKEEP-MEASURE-2/: `dims.mjs`, `why3.mjs`, `born.mjs`, `mono2`): copied out with git archive and run "
+          "from outside every repository tree.\n"
+          "4. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (the section headed \"## 2m.\"; by script), before the first "
+          "register you touch."),
+    work=("THE LAW OF THIS BRANCH (the chair, 2026-11-14 08:58 UTC): ADDING A HOUSE, OR RAISING A HOUSE A RUNG, NEVER LOWERS A SCORE OR THE "
+          "READINESS; outside it by ruling: the thirteen criminal houses (order falls by design) and six renames across functions. THE CHAIR'S "
+          "RULINGS ON THE FIVE RED TESTS (2026-11-14; each vetoable by the owner; copy them into the build file):\n"
+          "(a) THE FALL, FIRST: tests/generators/defenseEconomicGate.test.js, \"divine + druid famine mitigation is at least as good as druid "
+          "alone\": 27 against 28: adding the divine to the druid LOWERS a score by one, on a hand fixture outside the guard's set. THE LAW IS "
+          "BROKEN THERE. Trace it (which part, which limit, which rounding: the measure's dims.mjs and why3.mjs), cure it AT ITS CAUSE in the "
+          "arithmetic, NEVER by loosening the test; and WIDEN THE GUARD so that its class is inside it: the guard holds made records as well "
+          "as births: every crisis the generator knows beside every kind of relief (divine, druid, arcane, a granary, a teleport circle, a "
+          "guild), one added at a time. Whatever the widened guard then reds is a fall too: each traced and cured, or brought to the chair "
+          "with its table if its cure is not small. THEN ONE MESSAGE TO THE CHAIR AT ONCE: the cause; the cure's commit; THE BIRTHS IT MOVES "
+          "on the 972 and the 3,756 (by seed, as a file on your branch): the reader's list is re-checked for exactly those.\n"
+          "(b) \"a healthy economy with identical buildings scores meaningfully higher\" (74 is not above 74): TRACE FIRST. If the cause is the "
+          "people's bound (both economies full at the same people's measure): the test keeps its claim and is re-keyed BY IDENTITY to a place "
+          "the bound does not bind, and gains an arm that states the bound's own case (at the bound, the two are equal, and neither is above "
+          "it). If the cause is anything else: it is a finding: tell the chair.\n"
+          "(c) tests/generators/magicCountOnce.test.js, three titles (\"Multiple monasteries\" now feeds the monster score through the clergy and "
+          "the hospital): A LARGER RUNG OF A NAMED TWO-JOB HOUSE IS THE SAME HOUSE: if the single \"Monastery or friary\" is already named "
+          "among the two-job houses, its ladder's rungs are named beside it, re-keyed by identity with the monastery's ladder as the cause. "
+          "If the single monastery is NOT named there: the build made one house count twice: STOP with the table.\n"
+          "(d) THE TWO GOLDENS red at the base already (the generator's golden master; the espionage fence's driven golden) are NOT yours to "
+          "write: no golden's door in its writing mode: they stay RED AND NAMED: the build is a declared move.\n"
+          "THE WORK, in this order, each cause its own commit, measured first, red first, pushed as made:\n"
+          "1. (a). The message. THE COUNT.\n"
+          "2. (b), (c). The build's kin (the 27 test files the build file names) at your tip: every red classed: the two goldens, or yours.\n"
+          "3. MERGE THE DEFENCE LANE'S TIP AS IT STANDS ON ORIGIN WHEN YOU REACH THIS STEP (lane/coherence-upkeep-2026-11-12: a display seat is "
+          "curing there in files this branch does not touch; the hash in the merge's subject; a conflict in one of the arithmetic files is a "
+          "STOP). THEN THE FINAL MEASURE: the guard (0); the widened set; on the 3,756 and the census's 720: readiness moved, bands moved (by "
+          "size), the five scores' bands, powers re-drawn, persons, ties and quarrels re-drawn, against the merged base: the table in the "
+          "build file.\n"
+          "4. THE DECLARATION: the field diff by family on the 720 (base: the lane's tip you merged; tip: yours): only the declared families "
+          "move; the tuning inventory by its own ritual (one row: the people's measure), read its header first; section 2m's doors, each "
+          "exit (shrink forms only; a rise is a stop; the writer-reach door is NOT written: the chair banks it once, at the close); the "
+          "registered golden surfaces run AS FILES for one draft shift record (moved or unmoved, by measure).\n"
+          "5. THE EIGHT TOWNS FOR THE OWNER: docs/chair/2026-11-13/UPKEEP-CAPACITY-EIGHT-TOWNS.md is the form (the owner's eight example "
+          "towns, each before and after, with a plain \"why\"): a new file docs/chair/2026-11-14/UPKEEP-MONOTONE-EIGHT-TOWNS.md: the same "
+          "eight towns at the lane's tip and at yours: every figure from a birth, every \"why\" true, in plain words; and three towns where "
+          "the people's bound binds, said plainly (a hamlet's strength in war is held to its people).\n"
+          "6. THE STATEMENT: the build file finished: every commit's cause and measure; the declared move's tables; the reds named; the lines "
+          "that newly print because a band moved are the READER's to list (say so); named, not built; what is left.\n"
+          "AFTER EVERY ARITHMETIC CHANGE: the guard (about two minutes), the lane's derived-rating walker "
+          "(tests/lint/defenceDerived.walker.test.js), tests/generators/defenceParts.test.js, the strict-domain gate, the type ratchet and "
+          "eslint on the touched files, the twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop).\n"
+          "NOT YOURS: any line the page says (the display seat's and the reader's); the cross-ladder order; the merge of this branch into "
+          "the lane."),
+    merges="; the merge INTO your branch of lane/coherence-upkeep-2026-11-12 at its tip (step 3)",
+    when="AT ONCE after (a) (the cause, the commit, the births it moves), for a stop under (b) or (c), for a fall the widened guard finds whose cure is not small, after the final measure (the table's headline figures), and with the statement",
     turns='',
 )
 
