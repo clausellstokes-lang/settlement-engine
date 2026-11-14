@@ -1491,3 +1491,12 @@ Measured on the 1,536 at 3a4198e0f (crisisHookFor, every plague crisis, 76): the
 5. The two guards that stayed green on the reader's plants, made able to red.
 6. Item 9, ONCE, after the last cast cure: the 720 field diff of the stage by family; the shift record's rows; THE ADDENDUM.
 7. NAMED, not touched: houseLabelEverySurface's allowance (the joined line cured its row); the #268 block (dead after M4).
+
+## THE CHAIR, 16:00 UTC (a message; vetoable by the owner), copied
+"M10 read and accepted (1,017 towns to 0; the reds classed: A 17, B 0, C 0). THE PROGRAM CONVERGES ON THE JOINED LINE. … FOR YOU: finish M12 if it will be pushed by 16:25 UTC; start no other. Bring PART 13 current (done, with counts; left, line by line) and stop. Your lane's tip then lands as a point."
+
+## A CORRECTION, said out loud: M11 and M4 were made AFTER that ruling
+The message reached this session at 15:59 and was not read until 16:21: this seat did not read its notifications after M12's push (2d418c67f) and its next commits, against the brief's "after every commit". M11 (6a282760c) and M4 (fa5e1a66d, a declared generator move: 56 towns' brunt rows) were made in that gap, each whole (measured, guarded, planted, read on every surface, gated) and pushed at 739975512. They are the chair's to keep or to drop at the landing: each is its own commit, and reverting either touches nothing else (M4's re-keyed pin is in its own commit).
+
+## HAND BACK (2026-11-14 16:24 UTC). Nothing running; everything pushed.
+DONE (each pushed, counts above): the first act (600b9f743 merged clean, 08e43c072); (r1) 23 reds classed, all (A); M10 (a48cf4126: 1,017 → 0 towns); M12 (939b605c9: 0 → 136 towns); the plague twin read (true, three cells); the census's one command at the tip (r3); M11 (6a282760c: 891 chains); M4 (fa5e1a66d: 56 → 0); M6's other half answered (0 towns). WHAT IS LEFT is the list above, in its order, for the joined line's next wave. The count read 258,702 at 15:38.
