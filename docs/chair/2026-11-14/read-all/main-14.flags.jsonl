@@ -1,0 +1,82 @@
+{"id":"19716","town":"r2r-metropolis-50","sev":"MED","kind":"PAIR","why":"says Merchant Guilds take Grand Council's orders no longer; 09852 calls Grand Council×Merchant Guilds stable; also 'Military/Guard' slash label as name","other":"09852"}
+{"id":"13628","town":"r2r-metropolis-50","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"13591","town":"r2r-metropolis-50","sev":"MED","kind":"STATE","why":"says Military/Guard has grown stronger than Grand Council; GOVERNMENT gives both strength Minor; slash label as name","other":""}
+{"id":"13596","town":"r2r-metropolis-50","sev":"MED","kind":"STATE","why":"says Military/Guard has the strength; GOVERNMENT gives it and Grand Council equal strength Minor; slash label as name","other":""}
+{"id":"07409","town":"r2r-metropolis-50","sev":"LOW","kind":"BROKEN","why":"ends mid-clause at 'Mac'; surnames split across sentences (also 16182,18871,03526,16243,12266,12263 and their tails)","other":""}
+{"id":"03831","town":"r2s-indebted-metropolis-0","sev":"MED","kind":"BROKEN","why":"both slots filled with Arcane Senate, so 'a distinction that has not gone unnoticed' contrasts a body with itself","other":""}
+{"id":"07549","town":"r2s-indebted-metropolis-0","sev":"MED","kind":"STATE","why":"speaks of a power vacuum; CRISIS is debt and Arcane Senate (Strong) holds the seat","other":""}
+{"id":"HEADER","town":"r2s-indebted-metropolis-0","sev":"MED","kind":"RECORD","why":"desert town with commercial sawmill, carpenters and vintner, yet timber and grapes neither grown nor imported (14364)","other":"14364"}
+{"id":"09968","town":"r2s-monster_pressure-metropolis-0","sev":"MED","kind":"PAIR","why":"High tension Grand Merchant Senate vs Military/Guard; 09980/09953 call the pair stable, each needing the other","other":"09980"}
+{"id":"09967","town":"r2s-monster_pressure-metropolis-0","sev":"MED","kind":"PAIR","why":"plot hook of Senate vs Military/Guard conflict; 09980 says the pair is stable and cooperating","other":"09980"}
+{"id":"24514","town":"r2s-monster_pressure-metropolis-0","sev":"MED","kind":"PAIR","why":"presumes a supplier of precious metals; TRADE imports none and 14222 says gold/silver ore is not brought in","other":"14222"}
+{"id":"HEADER","town":"r2s-monster_pressure-metropolis-0","sev":"LOW","kind":"RECORD","why":"vintner on HOUSES but grapes neither made nor imported (14222 lists grapes as not brought in)","other":"14222"}
+{"id":"10600","town":"r2s-monster_pressure-metropolis-0","sev":"MED","kind":"PAIR","why":"High tension Grand Merchant Senate vs Military/Guard; 09980/09953 call the pair stable and mutually reliant","other":"09980"}
+{"id":"HEADER","town":"r2s-recently_betrayed-metropolis-3","sev":"LOW","kind":"RECORD","why":"TRADE 'made here' lists 'trade access' and 'luxury' as goods: category keys, not products","other":""}
+{"id":"15018","town":"r2s-religious_conversion-metropolis-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Palace/government complex' used as a name in a sentence","other":""}
+{"id":"09917","town":"r2s-religious_conversion-metropolis-1","sev":"LOW","kind":"BROKEN","why":"singular 'Grand Merchant Oligarchy' with plural 'find'; also 'winning faith' though stability says the creed is still contested","other":""}
+{"id":"09931","town":"r2s-religious_conversion-metropolis-1","sev":"MED","kind":"PAIR","why":"High tension Oligarchy vs Military/Guard; 09948/09914 call the pair stable, Guard carrying out orders","other":"09948"}
+{"id":"09930","town":"r2s-religious_conversion-metropolis-1","sev":"MED","kind":"PAIR","why":"plot hook of Oligarchy vs Military/Guard conflict; 09948 says the pair is stable","other":"09948"}
+{"id":"10594","town":"r2s-religious_conversion-metropolis-1","sev":"MED","kind":"PAIR","why":"High tension Oligarchy vs Military/Guard; 09914 says Guard carries out its orders, each needing the other","other":"09914"}
+{"id":"06101","town":"r2s-religious_conversion-metropolis-1","sev":"MED","kind":"STATE","why":"blames crime for mere toleration; GOVERNMENT lists no criminal power and stability blames the contested creed","other":""}
+{"id":"03046","town":"r2s-religious_conversion-metropolis-1","sev":"MED","kind":"STATE","why":"gives New Faith Community a voice in affairs; GOVERNMENT lists it Suppressed","other":""}
+{"id":"13597","town":"r2s-wartime-metropolis-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"13609","town":"r2s-wartime-metropolis-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"01055","town":"r2s-wartime-metropolis-1","sev":"MED","kind":"PAIR","why":"says town no longer sure the Senate rules; legitimacy Approved and 16050 says it has the town's approval","other":"16050"}
+{"id":"06241","town":"r2s-wartime-metropolis-1","sev":"MED","kind":"STATE","why":"says War Council functions smoothly, authority uncontested; GOVERNMENT lists War Council Suppressed","other":""}
+{"id":"HEADER","town":"r2r-metropolis-44","sev":"MED","kind":"RECORD","why":"trade access isolated, forest, yet toll bridge, customs house, docks/port facilities and waterborne freight exports","other":""}
+{"id":"HEADER","town":"r2r-metropolis-44","sev":"LOW","kind":"RECORD","why":"vintner, potter and brickmaker on HOUSES while 14294 says grapes and clay are neither made nor brought in","other":"14294"}
+{"id":"04025","town":"r2r-metropolis-44","sev":"MED","kind":"PAIR","why":"says iron comes by carts; 12535 says iron comes by magic because no trade road reaches the isolated town","other":"12535"}
+{"id":"28860","town":"r2r-metropolis-44","sev":"MED","kind":"PAIR","why":"guards usually beat the Consortium; GOVERNMENT has Consortium Significant, Military/Guard Minor, and 09877 says Consortium outweighs everyone","other":"09877"}
+{"id":"HEADER","town":"r2s-indebted-metropolis-2","sev":"LOW","kind":"RECORD","why":"TRADE 'made here' lists 'luxury' as a good (a category key) and nothing behind exported glassware, books","other":""}
+{"id":"15010","town":"r2s-monster_pressure-metropolis-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Palace/government complex' used as a name in a sentence","other":""}
+{"id":"HEADER","town":"r2s-recently_betrayed-metropolis-2","sev":"LOW","kind":"RECORD","why":"vintner on HOUSES while 14224 says grapes are neither made nor brought in","other":"14224"}
+{"id":"23280","town":"r2s-religious_conversion-metropolis-3","sev":"MED","kind":"LACKS","why":"speaks of the town's precious metals mining; HOUSES has no mine","other":""}
+{"id":"09883","town":"r2s-religious_conversion-metropolis-3","sev":"MED","kind":"PAIR","why":"High tension Consortium vs Military/Guard; 09893 calls the pair stable","other":"09893"}
+{"id":"10588","town":"r2s-religious_conversion-metropolis-3","sev":"MED","kind":"PAIR","why":"High tension Consortium vs Military/Guard; 09893 calls the pair stable","other":"09893"}
+{"id":"13580","town":"r2s-religious_conversion-metropolis-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence (also 13608)","other":""}
+{"id":"HEADER","town":"r2r-metropolis-25","sev":"LOW","kind":"RECORD","why":"vintner on HOUSES while 14273 says grapes are neither made nor brought in","other":"14273"}
+{"id":"15277","town":"r2r-metropolis-25","sev":"MED","kind":"STATE","why":"says order kept by trading houses' private army; DEFENCE lists a professional city watch and multiple garrisons; assembly is Strong","other":""}
+{"id":"04095","town":"r2r-metropolis-25","sev":"MED","kind":"LACKS","why":"presumes usual work yields game meat; desert town, TRADE neither makes nor exports game meat and no hunting is listed","other":""}
+{"id":"01495","town":"r2r-metropolis-25","sev":"LOW","kind":"LACKS","why":"names a soup kitchen; HOUSES has none","other":""}
+{"id":"14674","town":"r2r-metropolis-8","sev":"LOW","kind":"BROKEN","why":"singular 'Noble Claimant (Senior Line)' with plural 'live... keep'","other":""}
+{"id":"20375","town":"r2s-indebted-metropolis-3","sev":"MED","kind":"STATE","why":"says enforcement goes where the creditors' agent directs; GOVERNMENT lists Crown Creditors Suppressed","other":""}
+{"id":"21220","town":"r2s-insurgency-metropolis-3","sev":"MED","kind":"STATE","why":"says the opposition means to inherit, not take by force; CRISIS is an insurgency with rebellion contesting authority","other":""}
+{"id":"06903","town":"r2s-insurgency-metropolis-3","sev":"MED","kind":"PAIR","why":"High tension Ducal Governorship vs Military/Guard; 06928/06881 call the pair stable, Guard carrying out orders","other":"06928"}
+{"id":"10575","town":"r2s-insurgency-metropolis-3","sev":"MED","kind":"PAIR","why":"High tension Ducal Governorship vs Military/Guard; 06881 says each needs the other and Guard obeys","other":"06881"}
+{"id":"06885","town":"r2s-insurgency-metropolis-3","sev":"LOW","kind":"BROKEN","why":"slot misfit: 'drawn up names under whether to open back-channel negotiations' does not parse","other":""}
+{"id":"HEADER","town":"r2s-monster_pressure-metropolis-2","sev":"MED","kind":"RECORD","why":"hills town with road access only, yet docks/port facilities, harbour master's office and waterborne freight exports","other":""}
+{"id":"15394","town":"r2s-monster_pressure-metropolis-2","sev":"MED","kind":"STATE","why":"calls Monster Hunters / Adventurers temporarily powerful; GOVERNMENT lists them Suppressed","other":""}
+{"id":"11439","town":"r2s-monster_pressure-metropolis-2","sev":"MED","kind":"LACKS","why":"presumes game meat production falling short; TRADE neither makes, exports nor imports game meat","other":""}
+{"id":"HEADER","town":"r2s-infiltrated-metropolis-0","sev":"LOW","kind":"RECORD","why":"TRADE 'made here' lists 'luxury' as a good: a category key, not a product","other":""}
+{"id":"28453","town":"r2s-wartime-metropolis-2","sev":"MED","kind":"PAIR","why":"War Council could take the hall; GOVERNMENT has it Minor vs Ducal Governorship Significant, and 06882 says it carries out DG's orders","other":"06882"}
+{"id":"14783","town":"r2r-metropolis-39","sev":"MED","kind":"STATE","why":"says Noble Houses keep rights enough to bargain, not obey; GOVERNMENT lists Noble Houses Suppressed","other":""}
+{"id":"HEADER","town":"r2s-religious_conversion-metropolis-0","sev":"MED","kind":"RECORD","why":"sawmill, carpenters, potter, brickmaker, vintner on HOUSES, but 14357 says timber, clay and grapes are neither made nor brought in","other":"14357"}
+{"id":"HEADER","town":"r2s-slave_revolt-metropolis-0","sev":"MED","kind":"RECORD","why":"plains road town with a harbour master's office; exports iron ore with no mine; sawmill and vintner with timber, grapes not brought in (14375)","other":"14375"}
+{"id":"15011","town":"r2s-slave_revolt-metropolis-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Palace/government complex' used as a name in a sentence","other":""}
+{"id":"13635","town":"r2s-slave_revolt-metropolis-2","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence (also 16704)","other":""}
+{"id":"HEADER","town":"r2s-succession_void-metropolis-3","sev":"LOW","kind":"RECORD","why":"vintner, potter, brickmaker on HOUSES while 14283 says grapes and clay are neither made nor brought in","other":"14283"}
+{"id":"HEADER","town":"r2s-wartime-metropolis-0","sev":"LOW","kind":"RECORD","why":"TRADE 'made here' lists 'trade access' and 'luxury' as goods: category keys, not products","other":""}
+{"id":"HEADER","town":"r2r-metropolis-58","sev":"MED","kind":"RECORD","why":"stability says the creditors have a say in every decision, yet GOVERNMENT lists Creditor's Representative Suppressed","other":""}
+{"id":"15014","town":"r2r-metropolis-58","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Palace/government complex' used as a name in a sentence","other":""}
+{"id":"06102","town":"r2r-metropolis-58","sev":"MED","kind":"STATE","why":"blames crime for mere toleration; GOVERNMENT lists no criminal power and stability blames the creditors","other":""}
+{"id":"14787","town":"r2r-metropolis-2","sev":"MED","kind":"STATE","why":"says Noble Houses keep rights enough to bargain, not obey; GOVERNMENT lists Noble Houses Suppressed","other":""}
+{"id":"HEADER","town":"r2r-metropolis-51","sev":"MED","kind":"RECORD","why":"hills town with road access only, yet docks/port facilities, harbour master's office and waterborne freight exports","other":""}
+{"id":"06043","town":"r2s-succession_void-metropolis-1","sev":"MED","kind":"STATE","why":"blames crime for mere toleration; GOVERNMENT lists no criminal power and stability blames the succession void","other":""}
+{"id":"HEADER","town":"r2r-metropolis-59","sev":"LOW","kind":"RECORD","why":"TRADE 'made here' lists 'trade access' as a good: a category key, not a product","other":""}
+{"id":"00980","town":"r2s-wartime-metropolis-3","sev":"MED","kind":"LACKS","why":"says 'the crown is paying'; GOVERNMENT is a Democratic assembly and lists no royal or crown power","other":""}
+{"id":"02989","town":"r2s-wartime-metropolis-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard's' used as a name in a sentence (also 23483)","other":""}
+{"id":"HEADER","town":"r2s-wartime-metropolis-3","sev":"LOW","kind":"RECORD","why":"TRADE 'made here' lists 'trade access' and 'maritime access' as goods: category keys, not products","other":""}
+{"id":"HEADER","town":"r2s-politically_fractured-metropolis-1","sev":"MED","kind":"RECORD","why":"hills town with road access only, yet docks/port facilities, harbour master's office and waterborne freight exports","other":""}
+{"id":"HEADER","town":"r2s-mass_migration-metropolis-3","sev":"LOW","kind":"RECORD","why":"plains town with road access only has a harbour master's office; 'made here' lists 'luxury' as a good","other":""}
+{"id":"00062","town":"r2s-mass_migration-metropolis-3","sev":"LOW","kind":"BROKEN","why":"opening double quote never closed","other":""}
+{"id":"06737","town":"r2s-mass_migration-metropolis-3","sev":"LOW","kind":"BROKEN","why":"'Mac'-surnames split across sentences: 'Donald are allies...', 'Lean (the midwife)', 14162,12442,12618,18875,04530 end mid-clause at 'Mac'","other":""}
+{"id":"HEADER","town":"r2s-succession_void-metropolis-2","sev":"MED","kind":"RECORD","why":"plains crossroads town on no water, yet docks/port facilities, harbour master's office and waterborne freight exports; 'trade access' listed as made","other":""}
+{"id":"04415","town":"r2s-indebted-metropolis-1","sev":"LOW","kind":"STATE","why":"claims druidic forest management sustains timber yield; TRADE imports timber because local managed woodland is cleared","other":""}
+{"id":"HEADER","town":"r2s-mass_migration-metropolis-2","sev":"LOW","kind":"RECORD","why":"vintner on HOUSES while 14226 says grapes are neither made nor brought in; 'trade access' listed as made","other":"14226"}
+{"id":"HEADER","town":"r2r-metropolis-38","sev":"MED","kind":"RECORD","why":"founded to exploit mineral deposits, exports precious metals and coin, makes gems, yet HOUSES has no mine","other":""}
+{"id":"03962","town":"r2r-metropolis-38","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Palace/government complex' used as a name in a sentence","other":""}
+{"id":"14935","town":"r2r-metropolis-38","sev":"MED","kind":"STATE","why":"says enough in hand to ride out a lean year; STATE food ledger shows a 5% deficit even now","other":""}
+{"id":"12599","town":"r2r-metropolis-23","sev":"LOW","kind":"BROKEN","why":"'Mac'-surnames split across sentences: 'Lean believes...', 'Intyre a debt...', 'Cormack and Líadan Johnston has', 16194 ends at 'Mac'","other":""}
+{"id":"HEADER","town":"r2r-metropolis-23","sev":"LOW","kind":"RECORD","why":"TRADE 'made here' lists 'trade access' and 'maritime access' as goods: category keys, not products","other":""}
+{"id":"HEADER","town":"r2r-metropolis-9","sev":"MED","kind":"RECORD","why":"isolated hills town, yet docks/port facilities, harbour master's office, toll bridge, customs house and waterborne freight exports","other":""}
+{"id":"DONE","lines":2689,"blocks":50,"flags":81}
