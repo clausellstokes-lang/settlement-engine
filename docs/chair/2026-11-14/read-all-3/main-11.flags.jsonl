@@ -1,0 +1,166 @@
+{"id":"34932","town":"r2r-town-20","sev":"MED","kind":"STATE","why":"gives the ropemaker a Military Council seat; PEOPLE brackets show no council seat, only the Ropemaker house","other":""}
+{"id":"33517","town":"r2r-town-20","sev":"MED","kind":"STATE","why":"gives the town crier a Military Council seat; PEOPLE brackets show no council seat, only the Town crier house","other":""}
+{"id":"35349","town":"r2r-town-20","sev":"LOW","kind":"STATE","why":"gives the warden a Military Council seat; PEOPLE brackets show none, only Warden's Lodge","other":""}
+{"id":"15673","town":"r2r-town-44","sev":"MED","kind":"STATE","why":"says the barracks is all that stands guard; DEFENCE also lists a Town watch","other":""}
+{"id":"32856","town":"r2r-town-10","sev":"MED","kind":"STATE","why":"almoner shown as Merchant oligarchy; PEOPLE brackets show no council seat, only Almshouse","other":""}
+{"id":"33731","town":"r2r-town-10","sev":"MED","kind":"STATE","why":"foundling-mother shown as Merchant oligarchy; PEOPLE brackets show no council seat, only Foundling home","other":""}
+{"id":"34535","town":"r2r-town-10","sev":"MED","kind":"STATE","why":"midwife shown as Merchant oligarchy; PEOPLE brackets show no council seat, only Midwife house","other":""}
+{"id":"05970","town":"r2r-town-10","sev":"MED","kind":"LACKS","why":"a baker raises bread; HOUSES has no bakers or bakery (butchers, mills only)","other":""}
+{"id":"18993","town":"r2r-town-10","sev":"LOW","kind":"STATE","why":"gives Ghalib al-Aziz duties in Craft Guilds; PEOPLE shows him only at Tailor's guild, no brackets","other":""}
+{"id":"00725","town":"r2r-town-10","sev":"LOW","kind":"LACKS","why":"names a residential district in a town of 754","other":""}
+{"id":"26757","town":"r2r-town-19","sev":"MED","kind":"LACKS","why":"names Vigilantes; not in HOUSES, DEFENCE (militia none) or GOVERNMENT powers (only Religious Authorities, Church Council)","other":""}
+{"id":"21333","town":"r2r-town-19","sev":"MED","kind":"LACKS","why":"lists Vigilantes as a party; not a house or power here; QUARRELS is none, so no conflict between parties","other":"26757"}
+{"id":"33804","town":"r2r-town-19","sev":"MED","kind":"STATE","why":"garrison commander shown as Church Council; PEOPLE brackets show no council seat, only Barracks","other":""}
+{"id":"34000","town":"r2r-town-19","sev":"MED","kind":"STATE","why":"hospitaller shown as Church Council; PEOPLE brackets show no council seat, only Small hospital","other":""}
+{"id":"00672","town":"r2r-town-19","sev":"MED","kind":"LACKS","why":"fire spread through barges, warehouses, wharf works and entire districts; HOUSES has no docks or warehouses; town of 1590 holds no districts","other":""}
+{"id":"29818","town":"r2r-town-18","sev":"MED","kind":"STATE","why":"Vintner shown producing; gaps say Vintner exists but lacks access to grapes","other":""}
+{"id":"05280","town":"r2r-town-18","sev":"MED","kind":"STATE","why":"calls the garrison commander third of Corrupt Council; PEOPLE brackets show Kumar Mishra at Barracks with no council seat","other":""}
+{"id":"34319","town":"r2r-town-18","sev":"MED","kind":"STATE","why":"fishmonger shown as Corrupt Council; PEOPLE brackets show no council seat, only Fish market","other":""}
+{"id":"35434","town":"r2r-town-30","sev":"MED","kind":"STATE","why":"watcher shown as Guild Council; PEOPLE brackets show no council seat, only Listening post","other":""}
+{"id":"19744","town":"r2r-town-30","sev":"MED","kind":"STATE","why":"lists a Defended Pass; DEFENCE has no garrison, militia, wall or hired force, only a Town watch; GOVERNMENT calls it underdefended","other":""}
+{"id":"00487","town":"r2r-town-41","sev":"MED","kind":"STATE","why":"calls Storm Kab Mayor, first of Town Council; PEOPLE gives only master smith @ Blacksmiths, no council bracket; GOVERNMENT lists no mayor","other":""}
+{"id":"35395","town":"r2r-town-41","sev":"MED","kind":"STATE","why":"watch captain shown as Town Council; PEOPLE brackets show no council seat, only Town watch","other":""}
+{"id":"34844","town":"r2r-town-41","sev":"MED","kind":"STATE","why":"printer shown as Town Council; PEOPLE brackets show no council seat, only Printing house","other":""}
+{"id":"33524","town":"r2r-town-41","sev":"MED","kind":"STATE","why":"crier shown as Town Council; PEOPLE brackets show no council seat, only Town crier","other":""}
+{"id":"30486","town":"r2r-town-41","sev":"LOW","kind":"LACKS","why":"names ward membership structuring public life; a town of 745 holds no wards","other":""}
+{"id":"07590","town":"r2r-town-41","sev":"LOW","kind":"LACKS","why":"names ward membership structuring public life; a town of 745 holds no wards","other":"30486"}
+{"id":"05258","town":"r2r-town-50","sev":"MED","kind":"STATE","why":"calls company captain first of Merchant Guilds; PEOPLE puts Tuyaa Borjigin at Free company hall, no brackets; Merchant guilds' master is Vachir Merv","other":""}
+{"id":"34129","town":"r2r-town-50","sev":"MED","kind":"STATE","why":"lodge master shown as Guild Council; PEOPLE brackets show no council seat, only Veteran's lodge","other":""}
+{"id":"26392","town":"r2r-town-50","sev":"MED","kind":"STATE","why":"hook of a condemned doctrine (Heresy Trial); PAST records no religious or heresy event here","other":""}
+{"id":"00673","town":"r2r-town-50","sev":"LOW","kind":"LACKS","why":"fire across entire districts from a riverside quarter; a town of 1118 holds no districts","other":""}
+{"id":"02882","town":"r2r-town-6","sev":"MED","kind":"TAG","why":"claims a busy market for spell services; false in tagged towns under siege (S), famine or plague (P), where trade and gathering stop","other":""}
+{"id":"00558","town":"r2r-town-6","sev":"MED","kind":"STATE","why":"calls Uta Klein Archmage, first of Arcane Council; PEOPLE gives only wizard @ Wizard's tower with no council bracket","other":""}
+{"id":"35494","town":"r2r-town-6","sev":"MED","kind":"STATE","why":"wizard shown as Arcane Council; PEOPLE brackets show no council seat, only Wizard's tower","other":""}
+{"id":"00555","town":"r2r-town-21","sev":"MED","kind":"STATE","why":"calls Caecilia Varro Alderman, first of Guild Council; PEOPLE gives only wharfinger @ Docks, no council bracket","other":""}
+{"id":"34739","town":"r2r-town-21","sev":"MED","kind":"STATE","why":"pit boss shown as Merchant Guilds; PEOPLE brackets show no council seat, only Fighting pits","other":""}
+{"id":"33141","town":"r2r-town-59","sev":"MED","kind":"STATE","why":"brickmaker shown as Feudal Appointee; PEOPLE brackets show no council seat, only Brickmaker","other":""}
+{"id":"00542","town":"r2r-town-33","sev":"MED","kind":"STATE","why":"calls Meadhbh Kennedy Captain-Mayor, first of Military Council; PEOPLE gives only watch captain @ Town watch, no council bracket","other":""}
+{"id":"34892","town":"r2r-town-33","sev":"MED","kind":"STATE","why":"quarry master shown as Military Council; PEOPLE brackets show no council seat, only Stone quarry","other":""}
+{"id":"34493","town":"r2r-town-33","sev":"MED","kind":"STATE","why":"master weaver shown as Military Council; PEOPLE brackets show no council seat, only Weavers/Textile workers","other":""}
+{"id":"24743","town":"r2r-town-33","sev":"MED","kind":"STATE","why":"tavern keeper called third of Military Council; PEOPLE brackets show no council seat, only Taverns","other":""}
+{"id":"05370","town":"r2r-town-42","sev":"MED","kind":"STATE","why":"calls the watch captain member of Town Mayor; PEOPLE brackets show Subramanya Prasad at Town watch only, no council seat","other":""}
+{"id":"35101","town":"r2r-town-42","sev":"MED","kind":"STATE","why":"senior guild master shown as Town Mayor; PEOPLE brackets show no council seat, only Merchant guilds","other":""}
+{"id":"34760","town":"r2r-town-42","sev":"MED","kind":"STATE","why":"post's master shown as Town Mayor; PEOPLE brackets show no council seat, only Caravaneer's post","other":""}
+{"id":"34219","town":"r2r-town-42","sev":"MED","kind":"STATE","why":"magistrate shown as Town Mayor; PEOPLE brackets show no council seat, only Courthouse","other":""}
+{"id":"02758","town":"r2r-town-42","sev":"LOW","kind":"BROKEN","why":"label 'Held Over Them' printed with no content after it","other":""}
+{"id":"19869","town":"r2r-town-42","sev":"MED","kind":"STATE","why":"lists a Defended Pass; DEFENCE has no wall, garrison, militia or hired force, only a Town watch; defence word is Lightly Defended","other":""}
+{"id":"11052","town":"r2r-town-56","sev":"MED","kind":"STATE","why":"puts Dubravka Solovyov second in Guild Council; PEOPLE gives only granary reeve @ Town granary, no council bracket","other":""}
+{"id":"19000","town":"r2r-town-56","sev":"LOW","kind":"STATE","why":"gives Cveta Korolev duties in Guild Council; PEOPLE shows her only at Merchant guilds, no brackets","other":""}
+{"id":"35347","town":"r2r-town-26","sev":"MED","kind":"STATE","why":"warden shown as Guild Council; PEOPLE brackets show no council seat, only Warden's Lodge","other":""}
+{"id":"09814","town":"r2r-town-17","sev":"MED","kind":"LACKS","why":"names Reformers and Complicit beneficiaries as parties; GOVERNMENT lists only Feudal Appointee, Merchant Guilds, Landed Gentry, Religious Authorities, Craft Guilds","other":""}
+{"id":"21273","town":"r2r-town-17","sev":"MED","kind":"LACKS","why":"lists Reformers and Complicit beneficiaries as parties; GOVERNMENT has no such powers; QUARRELS names only Feudal Appointee vs Merchant Guilds","other":"09814"}
+{"id":"33207","town":"r2r-town-17","sev":"MED","kind":"STATE","why":"castellan shown as Feudal Appointee; PEOPLE brackets show no council seat, only Citadel","other":""}
+{"id": "05340", "town": "r2r-town-39", "sev": "MED", "kind": "STATE", "why": "calls Penelope Komnenos Mayor, first of Town Mayor; PEOPLE gives only mine captain @ Mine, no council bracket", "other": ""}
+{"id": "34635", "town": "r2r-town-39", "sev": "MED", "kind": "STATE", "why": "mine captain shown as Town Mayor; PEOPLE brackets show no council seat, only Mine", "other": ""}
+{"id": "34498", "town": "r2r-town-39", "sev": "MED", "kind": "STATE", "why": "master weaver shown as Town Mayor; PEOPLE brackets show no council seat, only Weavers/Textile workers", "other": ""}
+{"id": "34349", "town": "r2r-town-39", "sev": "MED", "kind": "STATE", "why": "master fishmonger shown as Town Mayor; PEOPLE brackets show no council seat, only Fish market", "other": ""}
+{"id": "34070", "town": "r2r-town-39", "sev": "MED", "kind": "STATE", "why": "innkeeper shown as Town Mayor; PEOPLE brackets show no council seat, only Inn", "other": ""}
+{"id": "35248", "town": "r2r-town-39", "sev": "MED", "kind": "STATE", "why": "tavern keeper shown as Town Mayor; PEOPLE brackets show no council seat, only Taverns", "other": ""}
+{"id": "35320", "town": "r2r-town-39", "sev": "MED", "kind": "STATE", "why": "toll-keeper shown as Town Mayor; PEOPLE brackets show no council seat, only Toll bridge", "other": ""}
+{"id": "35383", "town": "r2r-town-39", "sev": "MED", "kind": "STATE", "why": "warehouse factor shown as Town Mayor; PEOPLE brackets show no council seat, only Merchant warehouses", "other": ""}
+{"id": "34252", "town": "r2r-town-39", "sev": "MED", "kind": "STATE", "why": "master baker shown as Town Mayor; PEOPLE brackets show no council seat, only Bakers", "other": ""}
+{"id": "33396", "town": "r2r-town-39", "sev": "MED", "kind": "STATE", "why": "cobbler shown as Town Mayor; PEOPLE brackets show no council seat, only Cobbler's guild", "other": ""}
+{"id": "34282", "town": "r2r-town-39", "sev": "MED", "kind": "STATE", "why": "master butcher shown as Town Mayor; PEOPLE brackets show no council seat, only Butchers", "other": ""}
+{"id": "34937", "town": "r2r-town-39", "sev": "MED", "kind": "STATE", "why": "ropemaker shown as Town Mayor; PEOPLE brackets show no council seat, only Ropemaker", "other": ""}
+{"id": "19001", "town": "r2r-town-47", "sev": "LOW", "kind": "STATE", "why": "gives Ashoka Nair duties in Guild Council; PEOPLE shows him only at Merchant guilds, no brackets", "other": ""}
+{"id": "34192", "town": "r2r-town-47", "sev": "MED", "kind": "STATE", "why": "madam shown as Guild Council; PEOPLE brackets show no council seat, only Brothel", "other": ""}
+{"id": "34192", "town": "r2r-town-47", "sev": "LOW", "kind": "RECORD", "why": "title 'madam' given to Manish Khanna (m); title does not fit the person's sex", "other": "HEADER"}
+{"id": "34719", "town": "r2r-town-47", "sev": "MED", "kind": "STATE", "why": "pawnbroker shown as Guild Council; PEOPLE brackets show no council seat, only Pawnbroker", "other": ""}
+{"id": "22340", "town": "r2r-town-53", "sev": "MED", "kind": "STATE", "why": "says raw gemstones are exported; TRADE exports only Cut gemstones, raw gemstones appear only under made here", "other": ""}
+{"id": "10860", "town": "r2r-town-53", "sev": "MED", "kind": "STATE", "why": "says gem appraisal is exported; TRADE exports list only Cut gemstones; gem appraisal is not in exports or made here", "other": "22340"}
+{"id": "35274", "town": "r2r-town-53", "sev": "MED", "kind": "STATE", "why": "theatre manager shown as Guild Council; PEOPLE brackets show no council seat, only Theaters", "other": ""}
+{"id": "34086", "town": "r2r-town-48", "sev": "MED", "kind": "STATE", "why": "lanista shown as Landed Gentry; PEOPLE brackets show no power seat, only Gladiatorial school", "other": ""}
+{"id": "34645", "town": "r2r-town-48", "sev": "MED", "kind": "STATE", "why": "mint master shown as Feudal Appointee; PEOPLE brackets show no power seat, only Mint", "other": ""}
+{"id": "34753", "town": "r2r-town-48", "sev": "MED", "kind": "STATE", "why": "post's master shown as Feudal Appointee; PEOPLE brackets show no power seat, only Caravaneer's post", "other": ""}
+{"id": "19196", "town": "r2r-town-31", "sev": "LOW", "kind": "STATE", "why": "gives Elke Keller a place in Thieves' Guild; PEOPLE shows her only at Fence (word of mouth), no brackets", "other": ""}
+{"id": "34754", "town": "r2r-town-31", "sev": "MED", "kind": "STATE", "why": "post's master shown as Guild Council; PEOPLE brackets show no council seat, only Caravaneer's post", "other": ""}
+{"id": "32970", "town": "r2r-town-31", "sev": "MED", "kind": "STATE", "why": "barge master shown as Guild Council; PEOPLE brackets show no council seat, only Barge and river transport company", "other": ""}
+{"id": "11673", "town": "r2r-town-31", "sev": "MED", "kind": "STATE", "why": "Great Flood drowned the riverside quarter; PAST records no flood or disaster, only Arcane Incident, Economic Divide, Occupation, Succession Crisis", "other": ""}
+{"id": "HEADER", "town": "r2r-town-31", "sev": "LOW", "kind": "RECORD", "why": "FOUNDING reason is None: an unfilled slot", "other": ""}
+{"id": "17874", "town": "r2r-town-9", "sev": "LOW", "kind": "STATE", "why": "gives Ulf Ulfsson a problem left standing in Guild Council; PEOPLE shows him only at Merchant guilds, no brackets", "other": ""}
+{"id": "17891", "town": "r2r-town-9", "sev": "LOW", "kind": "STATE", "why": "gives Orm Gunnarsson a problem left in The Guard; PEOPLE shows him only at Citadel, no brackets", "other": ""}
+{"id": "00539", "town": "r2r-town-58", "sev": "MED", "kind": "STATE", "why": "calls Saba al-Malik Burgomaster, first of Merchant Council; PEOPLE gives only warehouse factor @ Merchant warehouses, no council bracket", "other": ""}
+{"id": "34475", "town": "r2r-town-58", "sev": "MED", "kind": "STATE", "why": "master weaver shown as Craft Guilds; PEOPLE brackets show no power seat, only Weavers/Textile workers", "other": ""}
+{"id": "33513", "town": "r2r-town-58", "sev": "MED", "kind": "STATE", "why": "crier shown as Merchant Council; PEOPLE brackets show no power seat, only Town crier", "other": ""}
+{"id": "34087", "town": "r2r-town-58", "sev": "MED", "kind": "STATE", "why": "lanista shown as Merchant Guilds; PEOPLE brackets show no power seat, only Gladiatorial school", "other": ""}
+{"id": "32953", "town": "r2r-town-58", "sev": "MED", "kind": "STATE", "why": "banker shown as Merchant Council; PEOPLE brackets show no power seat, only Money changers", "other": ""}
+{"id": "34755", "town": "r2r-town-58", "sev": "MED", "kind": "STATE", "why": "post's master shown as Merchant Council; PEOPLE brackets show no power seat, only Caravaneer's post", "other": ""}
+{"id": "16521", "town": "r2r-town-29", "sev": "MED", "kind": "LACKS", "why": "names a Popular candidate as a party; GOVERNMENT lists no such power; PAST records only a siege", "other": ""}
+{"id": "21212", "town": "r2r-town-29", "sev": "LOW", "kind": "TAG", "why": "says parcels are transported between relay points; false in tagged towns under siege (S) or plague (P), where nothing moves by road", "other": ""}
+{"id": "21299", "town": "r2r-town-29", "sev": "MED", "kind": "LACKS", "why": "lists a Popular candidate as a party; GOVERNMENT has no such power; QUARRELS pairs only Merchant Council, Merchant Guilds, Craft Guilds", "other": "16521"}
+{"id": "33881", "town": "r2r-town-29", "sev": "MED", "kind": "STATE", "why": "grove elder shown as Merchant Council; PEOPLE brackets show no council seat, only Elder Grove Council", "other": ""}
+{"id": "33525", "town": "r2r-town-40", "sev": "MED", "kind": "STATE", "why": "crier shown as Town Mayor; PEOPLE brackets show no council seat, only Town crier", "other": ""}
+{"id": "32912", "town": "r2r-town-40", "sev": "MED", "kind": "STATE", "why": "assayer shown as Town Mayor; PEOPLE brackets show no council seat, only Assay office", "other": ""}
+{"id": "07747", "town": "r2r-town-54", "sev": "LOW", "kind": "BROKEN", "why": "service row ends after Cooper with no products listed; other rows give an output after the last arrow", "other": ""}
+{"id": "05342", "town": "r2r-town-54", "sev": "MED", "kind": "STATE", "why": "calls the mine captain second of Feudal Appointee; PEOPLE gives Börte Taichiud only at Mine, no council bracket", "other": ""}
+{"id": "17462", "town": "r2r-town-54", "sev": "LOW", "kind": "STATE", "why": "puts Vangchug Arlat second in Religious Authorities; PEOPLE shows only abbot @ Monastery or friary, no brackets", "other": ""}
+{"id": "18396", "town": "r2r-town-54", "sev": "LOW", "kind": "STATE", "why": "gives Toragana Khwarezm a place in Craft Guilds; PEOPLE shows only carriers' master @ Carriers' guild, no brackets", "other": ""}
+{"id": "35499", "town": "r2r-town-54", "sev": "MED", "kind": "STATE", "why": "woodcarver shown as Craft Guilds; PEOPLE brackets show no power seat, only Woodcarver", "other": ""}
+{"id": "04865", "town": "r2r-town-49", "sev": "MED", "kind": "LACKS", "why": "names Reformers and Complicit beneficiaries as parties; GOVERNMENT lists only Arcane Council, Military/Guard, Merchant Guilds, Religious Authorities", "other": ""}
+{"id": "21248", "town": "r2r-town-49", "sev": "MED", "kind": "LACKS", "why": "lists Reformers and Complicit beneficiaries as parties; not powers in GOVERNMENT; QUARRELS has Arcane Council vs Merchant Guilds", "other": "04865"}
+{"id": "17914", "town": "r2r-town-49", "sev": "MED", "kind": "STATE", "why": "puts Jai Naidu second in Merchant Guilds; PEOPLE gives him only senior craft-guild master @ Craft guilds, no brackets", "other": ""}
+{"id": "33495", "town": "r2r-town-49", "sev": "MED", "kind": "STATE", "why": "crier shown as Arcane Council; PEOPLE brackets show no council seat, only Town crier", "other": ""}
+{"id": "33755", "town": "r2r-town-49", "sev": "MED", "kind": "STATE", "why": "fuller shown as Arcane Council; PEOPLE brackets show no council seat, only Fuller", "other": ""}
+{"id": "35509", "town": "r2r-town-49", "sev": "MED", "kind": "STATE", "why": "workhouse master shown as Arcane Council; PEOPLE brackets show no council seat, only Workhouse", "other": ""}
+{"id": "34723", "town": "r2r-town-14", "sev": "MED", "kind": "STATE", "why": "pawnbroker shown as Merchant Guilds; PEOPLE brackets show no power seat, only Pawnbroker", "other": ""}
+{"id": "33216", "town": "r2r-town-14", "sev": "MED", "kind": "STATE", "why": "castellan shown as Merchant Council; PEOPLE brackets show no power seat, only Citadel", "other": ""}
+{"id": "35153", "town": "r2r-town-14", "sev": "MED", "kind": "STATE", "why": "stable master shown as Merchant Council; PEOPLE brackets show no power seat, only Stable district", "other": ""}
+{"id": "34811", "town": "r2r-town-14", "sev": "MED", "kind": "STATE", "why": "potter shown as Merchant Council; PEOPLE brackets show no power seat, only Potter", "other": ""}
+{"id": "34488", "town": "r2r-town-14", "sev": "MED", "kind": "STATE", "why": "master weaver shown as Merchant Council; PEOPLE brackets show no power seat, only Weavers/Textile workers", "other": ""}
+{"id": "00678", "town": "r2r-town-14", "sev": "LOW", "kind": "LACKS", "why": "fire across whole districts from the lower districts; a town of 1359 holds no districts", "other": ""}
+{"id": "17873", "town": "r2r-town-15", "sev": "LOW", "kind": "STATE", "why": "gives Akakisa Chomatenos a problem left in Guild Council; PEOPLE shows her only at Merchant warehouses, no brackets", "other": ""}
+{"id": "34907", "town": "r2r-town-15", "sev": "LOW", "kind": "BROKEN", "why": "power column printed empty in the NPC table; the column always carries a value", "other": ""}
+{"id": "00553", "town": "r2r-town-52", "sev": "MED", "kind": "STATE", "why": "calls the watch captain second of The Guard; PEOPLE gives Ukon Liu only at Town watch, no brackets", "other": ""}
+{"id": "15773", "town": "r2r-town-52", "sev": "MED", "kind": "STATE", "why": "puts Tomoko Zhang second in Guild Council; PEOPLE gives only harbour master @ Harbour master's office, no council bracket", "other": ""}
+{"id": "35471", "town": "r2r-town-52", "sev": "MED", "kind": "STATE", "why": "wharfinger shown as Merchant Guilds; PEOPLE brackets show no power seat, only Docks/port facilities", "other": ""}
+{"id": "34200", "town": "r2r-town-28", "sev": "MED", "kind": "STATE", "why": "madam shown as Military Council; PEOPLE brackets show no council seat, only Brothel", "other": ""}
+{"id": "34200", "town": "r2r-town-28", "sev": "LOW", "kind": "RECORD", "why": "title 'madam' given to Floki Dagsson (m); title does not fit the person's sex", "other": "HEADER"}
+{"id": "00529", "town": "r2r-town-51", "sev": "MED", "kind": "STATE", "why": "calls Fuamnach Hayes First Magnate, first of Merchant oligarchy; PEOPLE gives only senior guild master @ Merchant guilds, no bracket", "other": ""}
+{"id": "34623", "town": "r2r-town-51", "sev": "MED", "kind": "STATE", "why": "mine captain shown as Merchant oligarchy; PEOPLE brackets show no council seat, only Mine", "other": ""}
+{"id": "33933", "town": "r2r-town-51", "sev": "MED", "kind": "STATE", "why": "harbour master shown as Merchant oligarchy; PEOPLE brackets show no council seat, only Harbour master's office", "other": ""}
+{"id": "33899", "town": "r2r-town-45", "sev": "LOW", "kind": "BROKEN", "why": "power column printed empty in the NPC table; the column always carries a value", "other": ""}
+{"id": "33353", "town": "r2r-town-45", "sev": "MED", "kind": "STATE", "why": "coaching-inn keeper shown as Merchant oligarchy; PEOPLE brackets show no council seat, only Coaching inn", "other": ""}
+{"id": "01056", "town": "r2r-town-34", "sev": "MED", "kind": "STATE", "why": "shows a Pilgrim Trade share of 5%; TRADE lists no pilgrimage or pilgrim trade and LAND has no pilgrimage chain", "other": ""}
+{"id": "01055", "town": "r2r-town-34", "sev": "MED", "kind": "STATE", "why": "names Pilgrim Trade; TRADE lists no pilgrimage trade and LAND has no pilgrimage chain", "other": "01056"}
+{"id": "00828", "town": "r2r-town-34", "sev": "LOW", "kind": "LACKS", "why": "flood reshaped the lower districts; a town of 2074 holds no districts", "other": ""}
+{"id": "10717", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "LACKS", "why": "says every district has a temple; HOUSES has no temple, only Parish churches (10-30), and no per-district temples", "other": ""}
+{"id": "06145", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "burial outside the gates; CRISIS is a siege, so nothing goes out by gate or road; HOUSES gives Burial grounds and charnel house", "other": ""}
+{"id": "29444", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "claims large-scale brokerage across regional markets; CRISIS is a siege, nothing comes in or goes out by road", "other": ""}
+{"id": "07431", "town": "r2s-under_siege-city-1", "sev": "LOW", "kind": "STATE", "why": "letters of credit honored across the entire trade network; CRISIS is a siege, the network is cut off", "other": ""}
+{"id": "08780", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "TAG", "why": "claims live music and games at multiple venues nightly; false in plague (P) and siege towns, where people do not gather as usual", "other": ""}
+{"id": "12299", "town": "r2s-under_siege-city-1", "sev": "LOW", "kind": "STATE", "why": "retail of rare spices and luxury goods from across the world; CRISIS is a siege, nothing arrives by road", "other": ""}
+{"id": "26310", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "exile as a penalty; CRISIS is a siege, so nobody can leave by gate or road", "other": ""}
+{"id": "05272", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "calls Clodia Dentatus Lord Warden, first of Ecclesiastical Council; PEOPLE gives only dean @ Parish churches, no council bracket", "other": ""}
+{"id": "00880", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "gives Clodia Dentatus (Lord Warden) the seat; PEOPLE gives only dean @ Parish churches, no council bracket", "other": "05272"}
+{"id": "29934", "town": "r2s-under_siege-city-1", "sev": "LOW", "kind": "LACKS", "why": "names charcoal depots in the outer rings; HOUSES has no charcoal burner and coal is depleted", "other": ""}
+{"id": "33568", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "dean shown as Ecclesiastical Council; PEOPLE brackets show no power seat, only Parish churches", "other": ""}
+{"id": "33828", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "garrison commander shown as The Martial Alliance; PEOPLE brackets show no power seat, only Garrison", "other": ""}
+{"id": "35417", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "watch commander shown as Military/Guard; PEOPLE brackets show no power seat, only Professional city watch", "other": ""}
+{"id": "33023", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "beast master shown as Military/Guard; PEOPLE brackets show no power seat, only Beast trainers", "other": ""}
+{"id": "34040", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "innkeeper shown as Ecclesiastical Council; PEOPLE brackets show no power seat, only Inns and taverns", "other": ""}
+{"id": "34392", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "master of granaries shown as Ecclesiastical Council; PEOPLE brackets show no power seat, only City granaries", "other": ""}
+{"id": "35359", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "warehouse factor shown as Ecclesiastical Council; PEOPLE brackets show no power seat, only Warehouse district", "other": ""}
+{"id": "34567", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "miller shown as Ecclesiastical Council; PEOPLE brackets show no power seat, only Mills", "other": ""}
+{"id": "34796", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "potter shown as Ecclesiastical Council; PEOPLE brackets show no power seat, only Potter", "other": ""}
+{"id": "35076", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "senior guild master shown as Ecclesiastical Council; PEOPLE brackets show no power seat, only Merchant guilds", "other": ""}
+{"id": "32943", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "banker shown as Ecclesiastical Council; PEOPLE brackets show no power seat, only Banking houses", "other": ""}
+{"id": "34294", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "master carpenter shown as Ecclesiastical Council; PEOPLE brackets show no power seat, only Carpenters", "other": ""}
+{"id": "35213", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "tanner shown as Ecclesiastical Council; PEOPLE brackets show no power seat, only Tanners", "other": ""}
+{"id": "33274", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "chief magistrate shown as Ecclesiastical Council; PEOPLE brackets show no power seat, only Multiple courthouses", "other": ""}
+{"id": "33581", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "district madam shown as Ecclesiastical Council; PEOPLE brackets show no power seat, only Red light district", "other": ""}
+{"id": "34263", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "master butcher shown as Ecclesiastical Council; PEOPLE brackets show no power seat, only Butchers", "other": ""}
+{"id": "34356", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "master furrier shown as Ecclesiastical Council; PEOPLE brackets show no power seat, only Furrier's district", "other": ""}
+{"id": "35178", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "tailor shown as Ecclesiastical Council; PEOPLE brackets show no power seat, only Tailor's guild", "other": ""}
+{"id": "34176", "town": "r2s-under_siege-city-1", "sev": "LOW", "kind": "BROKEN", "why": "power column printed empty in the NPC table; the column always carries a value", "other": ""}
+{"id": "16398", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "Clodia Dentatus listed as member of Ecclesiastical Council; PEOPLE brackets show no council seat, only Parish churches", "other": "05272"}
+{"id": "24789", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "Standing: Lord Warden, first of Ecclesiastical Council; PEOPLE gives only dean @ Parish churches, no council bracket", "other": "05272"}
+{"id": "16450", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "member of The Martial Alliance; PEOPLE brackets show no power seat for the garrison commander, only Garrison", "other": ""}
+{"id": "24839", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "Standing: first of The Martial Alliance; PEOPLE gives only garrison commander @ Garrison, no power bracket", "other": "16450"}
+{"id": "17043", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "says well-funded watch keeping order reliably; STATE says Struggling, siege, deficit 82%, legitimacy 15, stability Critical", "other": ""}
+{"id": "25907", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "describes The Martial Alliance as a well-funded city watch keeping order reliably; the city watch is its own house; STATE says Struggling under siege", "other": "17043"}
+{"id": "15450", "town": "r2s-under_siege-city-1", "sev": "LOW", "kind": "LACKS", "why": "names charcoal depots in the outer rings; HOUSES has no charcoal burner and coal is depleted", "other": "29934"}
+{"id": "07705", "town": "r2s-under_siege-city-1", "sev": "LOW", "kind": "TAG", "why": "standing markets open every day; false in tagged towns under siege, famine or plague where markets close or people do not gather", "other": ""}
+{"id": "16716", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "STATE", "why": "says merchant guilds are a force in politics; GOVERNMENT lists no Merchant Guilds power, only Military/Guard, Ecclesiastical Council, The Martial Alliance", "other": ""}
+{"id": "14229", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "TAG", "why": "inn districts catering to travelers and visitors; false in tagged towns under siege (S), occupation or plague, where no one arrives", "other": ""}
+{"id": "06145", "town": "r2s-under_siege-city-1", "sev": "MED", "kind": "PAIR", "why": "burial outside the gates contradicts the charnel house taking the newly dead because roads are cut", "other": "06133"}
+{"id": "DONE", "lines": 2100, "blocks": 37, "flags": 165}
