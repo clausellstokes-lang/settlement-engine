@@ -159,3 +159,37 @@ The brief (BRIEF-VEIL-10.md, on the chair's lane) carries them whole: THE DESIGN
 of 2026-11-14 00:18 UTC, "THE SECURITY READER'S WRITTEN ANSWER"); the work's order (V7-3, V7-1, V7-2, then the rest);
 the acceptance run ruled ("THE SECURITY READ OF 212 FILED"); BRIEF-VEIL-9 as this seat's own brief; records 411, 414,
 418, 420 (CHAIR-HANDOFF-FOURTH section 4). No ruling has reached this seat by message.
+
+## 7. How this seat worked, and what it has and has not verified itself
+
+- V7-3 was built by the seat. V7-1 (5abf99906) was built by a builder the seat started inside its own session, with a
+  fresh context and a written sub-brief (the design of section 4 as first written, the laws of the lane, no push); the
+  seat pushed its commit. The harness reports that builder used 589 thousand tokens in all (122 tool calls, 93 minutes).
+- EXECUTED BY THE SEAT on 5abf99906's bytes: the four checksums; the reader's `run-all.sh`
+  (`out/run-all-seat-at-5abf99906.txt`: 37 checks, 30 pass, 7 fail, namely a07, d06, e02 to e06; server against twin
+  equal on 15 of 15 shares; 3,000 deep 31 ms on 211 against 38 ms; 200 x 5,000: 386 against 412 ms; 600 x 10,000:
+  1,241 against 1,305 ms); the hand-row guard, 6 of 6.
+- **NOT DONE BY THE SEAT: the builder's SQL and twin were not read line by line by the seat** (its context mark). The
+  builder's own claims that the seat did not repeat: the fold equal for all 1,112,063 code points; the rollback
+  rehearsal (0 lines); gallerySecondHomes 5 of 5; the born-town comparison. A successor's first act is to read 212
+  section 4c and `gallerySecondHomes.js :: THE NAME SEARCH` whole.
+- galleryServerVeil: the builder reports the same six arms red as at 4f7c60cbb, with ONE PRINTED PATH MOVED in town-2
+  (its cause, a role "the fence", is PLAUSIBLE, not executed): to be classed at item 3 (a) before the pin is re-keyed.
+
+## 8. The measure the brief orders for V7-4's trace token (executed by the seat; `out/trace-token-240-born.txt`)
+
+240 towns born at this tip (six sizes, calm and infiltrated, 20 seeds each; `measure/trace-token.probe.jsx`), every
+string of `simulationTrace[]` that spells a house name of any of those towns when squeezed:
+- `simulationTrace[].downstreamEffects[].target = "blackMarket"` (the bare token): **68 towns; in 23 the roster holds
+  a house "Black market", in 45 it does not.** It appears with no such house, so by the chair's ruling it is the
+  engine's name for a quantity: OUTSIDE the law, listed with both counts. AS BUILT, the name search takes it where a
+  house "Black market" is hidden whole (its squeezed spelling), and nowhere else: more than the law asks, and what the
+  reader's born run expects as green (its `names-anyform` allows the two schema keys only). For the chair's veto.
+- `targetId = "institution.<snake>"`: for the criminal houses always with its house (black_market 30 / 0,
+  smuggling_network 66 / 0, assassins_guild 23 / 0, thieves_guild_powerful 16 / 0, ...): the house's own entry, by
+  identity. But NOT every `targetId` has a house on the roster: `institution.black_market_bazaar` 21 with / 15
+  without, `institution.rookery` 10 / 27 (an entry for a house the birth weighed and did not keep). So the trace BY
+  POSITIVE ACCOUNT (the only rule that answers V7-5's renamed house, whose record keeps nothing of its birth name)
+  will also drop such entries on a Reveal-DM share that hides some house whole: to be counted when it is built.
+- `downstreamEffects[].target = "institution.<snake>"`: mixed (smelter 51 / 74, mill 5 / 63, sawmill 2 / 82): a join
+  to a house where one stands; the name search takes it where that house is hidden whole.

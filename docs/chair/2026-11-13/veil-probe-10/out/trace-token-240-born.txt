@@ -1,0 +1,275 @@
+towns born 240; with a trace 240; distinct house names (squeezed) 273
+token (squeezed) | towns where the roster holds the house | towns where it does not | path = value: with / without
+smelter | 81 | 74 | simulationTrace[].downstreamEffects[].target = institution.smelter: 51/74 ;; simulationTrace[].targetId = institution.smelter: 81/0
+mills25 | 120 | 0 | simulationTrace[].targetId = institution.mills_2_5: 120/0
+mill | 40 | 63 | simulationTrace[].downstreamEffects[].target = institution.mill: 5/63 ;; simulationTrace[].targetId = institution.mill: 40/0
+fishmarket | 92 | 0 | simulationTrace[].targetId = institution.fish_market: 92/0 ;; simulationTrace[].causes[].source = institution.fish_market: 1/0
+butchers38 | 91 | 0 | simulationTrace[].targetId = institution.butchers_3_8: 91/0
+sawmill | 8 | 82 | simulationTrace[].downstreamEffects[].target = institution.sawmill: 2/82 ;; simulationTrace[].targetId = institution.sawmill: 8/0
+weaverstextileworkers | 90 | 0 | simulationTrace[].targetId = institution.weavers_textile_workers: 90/0
+carpenter | 8 | 81 | simulationTrace[].downstreamEffects[].target = institution.carpenter: 3/81 ;; simulationTrace[].targetId = institution.carpenter: 8/0
+cooper | 87 | 0 | simulationTrace[].targetId = institution.cooper: 87/0
+blacksmiths310 | 86 | 0 | simulationTrace[].targetId = institution.blacksmiths_3_10: 86/0
+bakers515 | 86 | 0 | simulationTrace[].targetId = institution.bakers_5_15: 86/0
+carpenters515 | 86 | 0 | simulationTrace[].targetId = institution.carpenters_5_15: 86/0
+brickmaker | 82 | 0 | simulationTrace[].targetId = institution.brickmaker: 82/0
+tailorsguild | 81 | 0 | simulationTrace[].targetId = institution.tailor_s_guild: 81/0
+garrison | 40 | 40 | simulationTrace[].downstreamEffects[].target = institution.garrison: 8/40 ;; simulationTrace[].targetId = institution.garrison: 40/0
+subsistencefarming | 80 | 0 | simulationTrace[].targetId = institution.subsistence_farming: 80/0
+accesstoexternalmill | 80 | 0 | simulationTrace[].targetId = institution.access_to_external_mill: 80/0
+burialground | 80 | 0 | simulationTrace[].targetId = institution.burial_ground: 80/0
+watersource | 80 | 0 | simulationTrace[].targetId = institution.water_source: 80/0
+commongrazingland | 80 | 0 | simulationTrace[].targetId = institution.common_grazing_land: 80/0
+multiplewatersources | 80 | 0 | simulationTrace[].targetId = institution.multiple_water_sources: 80/0
+potter | 79 | 1 | simulationTrace[].targetId = institution.potter: 79/0 ;; simulationTrace[].downstreamEffects[].target = institution.potter: 2/1
+multiplemarketsquares | 80 | 0 | simulationTrace[].targetId = institution.multiple_market_squares: 80/0
+innsandtavernsdistrict | 80 | 0 | simulationTrace[].targetId = institution.inns_and_taverns_district: 80/0
+warehousedistrict | 80 | 0 | simulationTrace[].targetId = institution.warehouse_district: 80/0
+cityhall | 80 | 0 | simulationTrace[].targetId = institution.city_hall: 80/0
+professionalcitywatch | 80 | 0 | simulationTrace[].targetId = institution.professional_city_watch: 80/0
+publicbathhouse | 77 | 0 | simulationTrace[].targetId = institution.public_bathhouse: 77/0
+mine | 30 | 46 | simulationTrace[].downstreamEffects[].target = institution.mine: 20/46 ;; simulationTrace[].targetId = institution.mine: 30/0
+sawmillcommercial | 76 | 0 | simulationTrace[].targetId = institution.sawmill_commercial: 76/0
+chandler | 76 | 0 | simulationTrace[].targetId = institution.chandler: 76/0
+bowyersfletchersguild | 76 | 0 | simulationTrace[].targetId = institution.bowyers_fletchers_guild: 76/0
+apothecarydistrict | 76 | 0 | simulationTrace[].targetId = institution.apothecary_district: 76/0
+blackmarket | 30 | 45 | simulationTrace[].downstreamEffects[].target = blackMarket: 23/45 ;; simulationTrace[].targetId = institution.black_market: 30/0
+dyer | 74 | 0 | simulationTrace[].targetId = institution.dyer: 74/0
+brewery | 74 | 0 | simulationTrace[].targetId = institution.brewery: 74/0
+cobblersguild | 74 | 0 | simulationTrace[].targetId = institution.cobbler_s_guild: 74/0
+ropemaker | 74 | 0 | simulationTrace[].targetId = institution.ropemaker: 74/0
+multipleadventurersguilds | 74 | 0 | simulationTrace[].targetId = institution.multiple_adventurers_guilds: 74/0
+midwife | 72 | 0 | simulationTrace[].targetId = institution.midwife: 72/0
+specializedmetalworkers | 72 | 0 | simulationTrace[].targetId = institution.specialized_metalworkers: 72/0
+luxurygoodsquarter | 72 | 0 | simulationTrace[].targetId = institution.luxury_goods_quarter: 72/0
+stabledistrict | 71 | 0 | simulationTrace[].targetId = institution.stable_district: 71/0
+accesstoparishchurch | 70 | 0 | simulationTrace[].targetId = institution.access_to_parish_church: 70/0
+fuller | 69 | 0 | simulationTrace[].targetId = institution.fuller: 69/0
+beasttrainers | 69 | 0 | simulationTrace[].targetId = institution.beast_trainers: 69/0
+customshouse | 69 | 0 | simulationTrace[].targetId = institution.customs_house: 69/0
+frontbusinesses | 68 | 0 | simulationTrace[].targetId = institution.front_businesses: 68/0
+cartographersguild | 68 | 0 | simulationTrace[].targetId = institution.cartographer_s_guild: 68/0
+tollbridge | 67 | 0 | simulationTrace[].targetId = institution.toll_bridge: 67/0
+sagesquarter | 66 | 0 | simulationTrace[].targetId = institution.sage_s_quarter: 66/0
+smugglingnetwork | 66 | 0 | simulationTrace[].targetId = institution.smuggling_network: 66/0
+coachinginn | 65 | 0 | simulationTrace[].targetId = institution.coaching_inn: 65/0
+hirelinghall | 9 | 56 | simulationTrace[].targetId = institution.hireling_hall: 9/56
+furriersdistrict | 64 | 0 | simulationTrace[].targetId = institution.furrier_s_district: 64/0
+majorannualfairs | 63 | 0 | simulationTrace[].targetId = institution.major_annual_fairs: 63/0
+wizardstower | 20 | 42 | simulationTrace[].targetId = institution.wizard_s_tower: 20/42
+almshouse | 11 | 49 | simulationTrace[].targetId = institution.almshouse: 11/49
+woodcarver | 59 | 0 | simulationTrace[].targetId = institution.woodcarver: 59/0
+glassmakers | 59 | 0 | simulationTrace[].targetId = institution.glassmakers: 59/0
+thatcher | 5 | 53 | simulationTrace[].downstreamEffects[].target = institution.thatcher: 1/53 ;; simulationTrace[].targetId = institution.thatcher: 5/0
+vintner | 58 | 0 | simulationTrace[].targetId = institution.vintner: 58/0
+charcoalburner | 56 | 1 | simulationTrace[].targetId = institution.charcoal_burner: 56/1
+tannerestablished | 57 | 0 | simulationTrace[].targetId = institution.tanner_established: 57/0
+alchemistquarter | 34 | 22 | simulationTrace[].targetId = institution.alchemist_quarter: 34/22
+stonequarry | 55 | 0 | simulationTrace[].targetId = institution.stone_quarry: 55/0
+pawnbroker | 55 | 0 | simulationTrace[].targetId = institution.pawnbroker: 55/0
+citadel | 55 | 0 | simulationTrace[].targetId = institution.citadel: 55/0
+caravanmastersexchange | 28 | 27 | simulationTrace[].targetId = institution.caravan_masters_exchange: 28/27
+bardiccollege | 52 | 0 | simulationTrace[].targetId = institution.bardic_college: 52/0
+weeklymarket | 51 | 0 | simulationTrace[].targetId = institution.weekly_market: 51/0
+towncrier | 50 | 0 | simulationTrace[].targetId = institution.town_crier: 50/0
+charlatanfortunetellers | 50 | 0 | simulationTrace[].targetId = institution.charlatan_fortune_tellers: 50/0
+postrelaystation | 50 | 0 | simulationTrace[].targetId = institution.post_relay_station: 50/0
+mintofficial | 50 | 0 | simulationTrace[].targetId = institution.mint_official: 50/0 ;; simulationTrace[].causes[].source = institution.mint_official: 30/0
+scrollscribe | 49 | 0 | simulationTrace[].targetId = institution.scroll_scribe: 49/0
+dungeondelvingsupplydistrict | 49 | 0 | simulationTrace[].targetId = institution.dungeon_delving_supply_district: 49/0
+riverboatyard | 39 | 9 | simulationTrace[].targetId = institution.river_boatyard: 39/9
+auctionhouse | 48 | 0 | simulationTrace[].targetId = institution.auction_house: 48/0
+whispermarket | 47 | 0 | simulationTrace[].targetId = institution.whisper_market: 47/0 ;; simulationTrace[].causes[].source = institution.whisper_market: 27/0
+printinghouse | 20 | 27 | simulationTrace[].targetId = institution.printing_house: 20/27
+riverferry | 46 | 0 | simulationTrace[].targetId = institution.river_ferry: 46/0
+hiredblades | 27 | 19 | simulationTrace[].targetId = institution.hired_blades: 27/19
+workhouse | 44 | 0 | simulationTrace[].targetId = institution.workhouse: 44/0
+docksportfacilities | 43 | 0 | simulationTrace[].targetId = institution.docks_port_facilities: 43/0
+tanners | 42 | 0 | simulationTrace[].targetId = institution.tanners: 42/0
+eldergrovecouncil | 42 | 0 | simulationTrace[].targetId = institution.elder_grove_council: 42/0
+enchantersshop | 41 | 0 | simulationTrace[].targetId = institution.enchanter_s_shop: 41/0
+mercenaryquarter | 41 | 0 | simulationTrace[].targetId = institution.mercenary_quarter: 41/0
+dwellings18 | 40 | 0 | simulationTrace[].targetId = institution.dwellings_1_8: 40/0
+dwellings525 | 40 | 0 | simulationTrace[].targetId = institution.dwellings_5_25: 40/0
+farmland | 40 | 0 | simulationTrace[].targetId = institution.farmland: 40/0
+parishchurch | 40 | 0 | simulationTrace[].targetId = institution.parish_church: 40/0
+graveyard | 40 | 0 | simulationTrace[].targetId = institution.graveyard: 40/0
+priestresident | 40 | 0 | simulationTrace[].targetId = institution.priest_resident: 40/0
+dwellings15100 | 40 | 0 | simulationTrace[].targetId = institution.dwellings_15_100: 40/0
+marketsquare | 40 | 0 | simulationTrace[].targetId = institution.market_square: 40/0
+innmultiple | 40 | 0 | simulationTrace[].targetId = institution.inn_multiple: 40/0
+taverns520 | 40 | 0 | simulationTrace[].targetId = institution.taverns_5_20: 40/0
+towngranary | 40 | 0 | simulationTrace[].targetId = institution.town_granary: 40/0
+craftguilds515 | 40 | 0 | simulationTrace[].targetId = institution.craft_guilds_5_15: 40/0
+parishchurches25 | 40 | 0 | simulationTrace[].targetId = institution.parish_churches_2_5: 40/0
+parishburialgrounds | 40 | 0 | simulationTrace[].targetId = institution.parish_burial_grounds: 40/0
+housing75650households | 40 | 0 | simulationTrace[].targetId = institution.housing_75_650_households: 40/0
+townhall | 40 | 0 | simulationTrace[].targetId = institution.town_hall: 40/0
+townwatch | 40 | 0 | simulationTrace[].targetId = institution.town_watch: 40/0
+listeningpost | 16 | 24 | simulationTrace[].targetId = institution.listening_post: 16/24
+assayoffice | 10 | 30 | simulationTrace[].targetId = institution.assay_office: 10/30
+dailymarkets | 40 | 0 | simulationTrace[].targetId = institution.daily_markets: 40/0
+citygranaries | 40 | 0 | simulationTrace[].targetId = institution.city_granaries: 40/0
+craftguilds3080 | 40 | 0 | simulationTrace[].targetId = institution.craft_guilds_30_80: 40/0
+parishchurches1030 | 40 | 0 | simulationTrace[].targetId = institution.parish_churches_10_30: 40/0 ;; simulationTrace[].causes[].source = institution.parish_churches_10_30: 1/0
+burialgroundsandcharnelhouse | 40 | 0 | simulationTrace[].targetId = institution.burial_grounds_and_charnel_house: 40/0
+housing5004000households | 40 | 0 | simulationTrace[].targetId = institution.housing_500_4000_households: 40/0
+aqueductorwatersystem | 40 | 0 | simulationTrace[].targetId = institution.aqueduct_or_water_system: 40/0
+multiplecourthouses | 40 | 0 | simulationTrace[].targetId = institution.multiple_courthouses: 40/0
+sewagesystem | 40 | 0 | simulationTrace[].targetId = institution.sewage_system: 40/0
+citywallsandgates | 40 | 0 | simulationTrace[].targetId = institution.city_walls_and_gates: 40/0 ;; simulationTrace[].causes[].source = institution.city_walls_and_gates: 1/0
+multiplecriminalfactions | 40 | 0 | simulationTrace[].targetId = institution.multiple_criminal_factions: 40/0
+redlightdistrict | 40 | 0 | simulationTrace[].targetId = institution.red_light_district: 40/0
+districtmarkets510 | 40 | 0 | simulationTrace[].targetId = institution.district_markets_5_10: 40/0
+stategranarycomplex | 40 | 0 | simulationTrace[].targetId = institution.state_granary_complex: 40/0
+craftguilds100150 | 40 | 0 | simulationTrace[].targetId = institution.craft_guilds_100_150: 40/0
+parishchurches50100 | 40 | 0 | simulationTrace[].targetId = institution.parish_churches_50_100: 40/0
+cemeterynetwork | 40 | 0 | simulationTrace[].targetId = institution.cemetery_network: 40/0
+housing3500households | 40 | 0 | simulationTrace[].targetId = institution.housing_3500_households: 40/0
+advancedwaterinfrastructure | 40 | 0 | simulationTrace[].targetId = institution.advanced_water_infrastructure: 40/0
+palacegovernmentcomplex | 40 | 0 | simulationTrace[].targetId = institution.palace_government_complex: 40/0
+multiplecourtbuildings | 40 | 0 | simulationTrace[].targetId = institution.multiple_court_buildings: 40/0
+massiveprison | 40 | 0 | simulationTrace[].targetId = institution.massive_prison: 40/0
+massivewallsandfortifications | 40 | 0 | simulationTrace[].targetId = institution.massive_walls_and_fortifications: 40/0 ;; simulationTrace[].causes[].source = institution.massive_walls_and_fortifications: 2/0
+multiplegarrisons | 40 | 0 | simulationTrace[].targetId = institution.multiple_garrisons: 40/0
+gamblingdistrict | 40 | 0 | simulationTrace[].targetId = institution.gambling_district: 40/0
+veteranslodge | 39 | 0 | simulationTrace[].targetId = institution.veteran_s_lodge: 39/0
+multipletheaters | 39 | 0 | simulationTrace[].targetId = institution.multiple_theaters: 39/0
+fightingpits | 18 | 19 | simulationTrace[].targetId = institution.fighting_pits: 18/19
+harbourmastersoffice | 37 | 0 | simulationTrace[].targetId = institution.harbour_master_s_office: 37/0
+rookery | 10 | 27 | simulationTrace[].targetId = institution.rookery: 10/27 ;; simulationTrace[].downstreamEffects[].target = Rookery: 8/0
+merchantguilds1540 | 37 | 0 | simulationTrace[].targetId = institution.merchant_guilds_15_40: 37/0
+brothelredlightdistrict | 37 | 0 | simulationTrace[].targetId = institution.brothel_red_light_district: 37/0
+chroniclersexchange | 36 | 0 | simulationTrace[].targetId = institution.chroniclers_exchange: 36/0 ;; simulationTrace[].causes[].source = institution.chroniclers_exchange: 24/0
+merchantguilds50100 | 36 | 0 | simulationTrace[].targetId = institution.merchant_guilds_50_100: 36/0
+blackmarketbazaar | 21 | 15 | simulationTrace[].targetId = institution.black_market_bazaar: 21/15
+gladiatorialschool | 35 | 0 | simulationTrace[].targetId = institution.gladiatorial_school: 35/0 ;; simulationTrace[].causes[].source = institution.gladiatorial_school: 19/0
+contractkiller | 15 | 20 | simulationTrace[].targetId = institution.contract_killer: 15/20
+hospitalnetwork | 35 | 0 | simulationTrace[].targetId = institution.hospital_network: 35/0 ;; simulationTrace[].causes[].source = institution.hospital_network: 32/0
+greatlibrary | 35 | 0 | simulationTrace[].targetId = institution.great_library: 35/0 ;; simulationTrace[].causes[].source = institution.great_library: 27/0
+internationaltradecenter | 34 | 0 | simulationTrace[].targetId = institution.international_trade_center: 34/0 ;; simulationTrace[].causes[].source = institution.international_trade_center: 27/0
+mint | 3 | 30 | simulationTrace[].downstreamEffects[].target = institution.mint: 0/30 ;; simulationTrace[].targetId = institution.mint: 3/0
+foundlinghome | 7 | 26 | simulationTrace[].targetId = institution.foundling_home: 7/26
+saltworks | 31 | 0 | simulationTrace[].targetId = institution.salt_works: 31/0
+greatcathedral | 31 | 0 | simulationTrace[].targetId = institution.great_cathedral: 31/0
+bankingdistrict | 31 | 0 | simulationTrace[].targetId = institution.banking_district: 31/0
+bankinghouses | 30 | 0 | simulationTrace[].targetId = institution.banking_houses: 30/0
+majormonasteries510 | 30 | 0 | simulationTrace[].targetId = institution.major_monasteries_5_10: 30/0
+undergroundnetwork | 29 | 0 | simulationTrace[].targetId = institution.underground_network: 29/0
+operahouse | 29 | 0 | simulationTrace[].targetId = institution.opera_house: 29/0
+colosseumarena | 29 | 0 | simulationTrace[].targetId = institution.colosseum_arena: 29/0
+academyofmagic | 28 | 0 | simulationTrace[].targetId = institution.academy_of_magic: 28/0 ;; simulationTrace[].causes[].source = institution.academy_of_magic: 2/0
+fisherslanding | 27 | 0 | simulationTrace[].targetId = institution.fisher_s_landing: 27/0
+largeprison | 27 | 0 | simulationTrace[].targetId = institution.large_prison: 27/0
+shipyard | 10 | 16 | simulationTrace[].downstreamEffects[].target = institution.shipyard: 10/16 ;; simulationTrace[].targetId = institution.shipyard: 10/0
+waysideshrine | 26 | 0 | simulationTrace[].targetId = institution.wayside_shrine: 26/0
+majorhospital | 26 | 0 | simulationTrace[].targetId = institution.major_hospital: 26/0 ;; simulationTrace[].causes[].source = institution.major_hospital: 21/0
+magesdistrict | 26 | 0 | simulationTrace[].targetId = institution.mages_district: 26/0 ;; simulationTrace[].causes[].source = institution.mages_district: 23/0
+townwalls | 25 | 0 | simulationTrace[].targetId = institution.town_walls: 25/0 ;; simulationTrace[].causes[].source = institution.town_walls: 1/0
+gamblinghalls | 25 | 0 | simulationTrace[].targetId = institution.gambling_halls: 25/0
+cityadministration | 24 | 0 | simulationTrace[].targetId = institution.city_administration: 24/0
+undergroundcity | 24 | 0 | simulationTrace[].targetId = institution.underground_city: 24/0
+multiplemonasteries | 23 | 0 | simulationTrace[].targetId = institution.multiple_monasteries: 23/0
+assassinsguild | 23 | 0 | simulationTrace[].targetId = institution.assassins_guild: 23/0 ;; simulationTrace[].causes[].source = institution.assassins_guild: 22/0
+alehouse | 20 | 2 | simulationTrace[].targetId = institution.alehouse: 8/2 ;; simulationTrace[].targetId = institution.ale_house: 12/0
+teleportationcircle | 18 | 4 | simulationTrace[].targetId = institution.teleportation_circle: 18/0 ;; simulationTrace[].causes[].source = institution.teleportation_circle: 0/4
+magesguild | 22 | 0 | simulationTrace[].targetId = institution.mages_guild: 22/0 ;; simulationTrace[].causes[].source = institution.mages_guild: 12/0
+bargeandrivertransportcompany | 22 | 0 | simulationTrace[].targetId = institution.barge_and_river_transport_company: 22/0
+adventurerscharterhall | 21 | 0 | simulationTrace[].targetId = institution.adventurers_charter_hall: 21/0
+merchantguilds38 | 21 | 0 | simulationTrace[].targetId = institution.merchant_guilds_3_8: 21/0
+golemworkforce | 21 | 0 | simulationTrace[].targetId = institution.golem_workforce: 21/0
+apothecaryestablished | 19 | 0 | simulationTrace[].targetId = institution.apothecary_established: 19/0
+theaters | 18 | 0 | simulationTrace[].targetId = institution.theaters: 18/0
+palisadeorearthworks | 17 | 0 | simulationTrace[].targetId = institution.palisade_or_earthworks: 17/0
+citizenmilitia | 16 | 1 | simulationTrace[].targetId = institution.citizen_militia: 16/1
+thievesguildpowerful | 16 | 0 | simulationTrace[].targetId = institution.thieves_guild_powerful: 16/0 ;; simulationTrace[].causes[].source = institution.thieves_guild_powerful: 15/0
+householdelder | 15 | 0 | simulationTrace[].targetId = institution.household_elder: 15/0
+informalelderconsensus | 15 | 0 | simulationTrace[].targetId = institution.informal_elder_consensus: 15/0
+planarembassy | 11 | 4 | simulationTrace[].targetId = institution.planar_embassy: 11/4
+planartraders | 11 | 4 | simulationTrace[].targetId = institution.planar_traders: 11/4
+messagenetworkhighmagic | 15 | 0 | simulationTrace[].targetId = institution.message_network_high_magic: 15/0
+caravanserai | 11 | 3 | simulationTrace[].downstreamEffects[].target = institution.caravanserai: 6/3 ;; simulationTrace[].targetId = institution.caravanserai: 11/1
+villageheadman | 14 | 0 | simulationTrace[].targetId = institution.village_headman: 14/0
+cartographersworkshop | 14 | 0 | simulationTrace[].targetId = institution.cartographer_s_workshop: 14/0
+merchantwarehouses | 14 | 0 | simulationTrace[].targetId = institution.merchant_warehouses: 14/0
+dreamparlorshighmagic | 14 | 0 | simulationTrace[].targetId = institution.dream_parlors_high_magic: 14/0
+stablemaster | 13 | 0 | simulationTrace[].targetId = institution.stable_master: 13/0
+mayorandcouncil | 13 | 0 | simulationTrace[].targetId = institution.mayor_and_council: 13/0
+undeadlabor | 13 | 0 | simulationTrace[].targetId = institution.undead_labor: 13/0
+airshipdockinghighmagic | 13 | 0 | simulationTrace[].targetId = institution.airship_docking_high_magic: 13/0
+woodcutterscamp | 8 | 4 | simulationTrace[].targetId = institution.woodcutter_s_camp: 8/4
+guildconsortium | 12 | 0 | simulationTrace[].targetId = institution.guild_consortium: 12/0
+fishingcommunity | 11 | 0 | simulationTrace[].targetId = institution.fishing_community: 11/0
+shepherd | 11 | 0 | simulationTrace[].targetId = institution.shepherd: 11/0
+dairyfarmer | 11 | 0 | simulationTrace[].targetId = institution.dairy_farmer: 11/0
+hunterslodge | 10 | 1 | simulationTrace[].targetId = institution.hunter_s_lodge: 10/1
+blacksmith | 11 | 0 | simulationTrace[].targetId = institution.blacksmith: 11/0
+streetgang | 11 | 0 | simulationTrace[].targetId = institution.street_gang: 11/0
+noblegovernor | 11 | 0 | simulationTrace[].targetId = institution.noble_governor: 11/0
+thievesguildchapter | 11 | 0 | simulationTrace[].targetId = institution.thieves_guild_chapter: 11/0
+merchantoligarchy | 11 | 0 | simulationTrace[].targetId = institution.merchant_oligarchy: 11/0
+shepherdcollective | 10 | 0 | simulationTrace[].targetId = institution.shepherd_collective: 10/0
+courthouse | 10 | 0 | simulationTrace[].targetId = institution.courthouse: 10/0
+caravaneerspost | 10 | 0 | simulationTrace[].targetId = institution.caravaneer_s_post: 10/0
+palisade | 8 | 1 | simulationTrace[].targetId = institution.palisade: 8/1 ;; simulationTrace[].causes[].source = institution.palisade: 1/0
+householdlevy | 8 | 1 | simulationTrace[].targetId = institution.household_levy: 8/1
+communalrootcellar | 9 | 0 | simulationTrace[].targetId = institution.communal_root_cellar: 9/0
+packanimaltrader | 8 | 1 | simulationTrace[].targetId = institution.pack_animal_trader: 8/1
+mineopencast | 9 | 0 | simulationTrace[].targetId = institution.mine_open_cast: 9/0
+fencewordofmouth | 9 | 0 | simulationTrace[].targetId = institution.fence_word_of_mouth: 9/0
+travelersinn | 9 | 0 | simulationTrace[].targetId = institution.travelers_inn: 9/0
+villagereeve | 9 | 0 | simulationTrace[].targetId = institution.village_reeve: 9/0
+carriersguild | 9 | 0 | simulationTrace[].targetId = institution.carriers_guild: 9/0
+glassblower | 3 | 6 | simulationTrace[].downstreamEffects[].target = institution.glassblower: 0/6 ;; simulationTrace[].targetId = institution.glassblower: 3/0
+monasteryorfriary | 9 | 0 | simulationTrace[].targetId = institution.monastery_or_friary: 9/0
+travelingperformers | 7 | 1 | simulationTrace[].targetId = institution.traveling_performers: 7/1
+headofhouseholdconsensus | 7 | 0 | simulationTrace[].targetId = institution.head_of_household_consensus: 7/0
+carpenterparttime | 5 | 2 | simulationTrace[].targetId = institution.carpenter_part_time: 5/2
+lordssteward | 7 | 0 | simulationTrace[].targetId = institution.lord_s_steward: 7/0
+brewer | 7 | 0 | simulationTrace[].targetId = institution.brewer: 7/0
+annualfair | 7 | 0 | simulationTrace[].targetId = institution.annual_fair: 7/0
+citystategovernment | 7 | 0 | simulationTrace[].targetId = institution.city_state_government: 7/0
+fishmonger | 4 | 2 | simulationTrace[].targetId = institution.fishmonger: 4/2
+apothecary | 6 | 0 | simulationTrace[].targetId = institution.apothecary: 6/0
+lordsappointee | 6 | 0 | simulationTrace[].targetId = institution.lord_s_appointee: 6/0
+waysideinn | 4 | 1 | simulationTrace[].targetId = institution.wayside_inn: 4/1
+villageelder | 5 | 0 | simulationTrace[].targetId = institution.village_elder: 5/0
+hedgewizard | 5 | 0 | simulationTrace[].targetId = institution.hedge_wizard: 5/0
+smallprisonstocks | 5 | 0 | simulationTrace[].targetId = institution.small_prison_stocks: 5/0
+smugglingoperation | 5 | 0 | simulationTrace[].targetId = institution.smuggling_operation: 5/0
+barracks | 5 | 0 | simulationTrace[].targetId = institution.barracks: 5/0
+cathedral10000only | 5 | 0 | simulationTrace[].targetId = institution.cathedral_10_000_only: 5/0
+stableyard | 3 | 1 | simulationTrace[].targetId = institution.stable_yard: 3/1
+peatcutter | 4 | 0 | simulationTrace[].targetId = institution.peat_cutter: 4/0
+maltster | 4 | 0 | simulationTrace[].targetId = institution.maltster: 4/0
+villagewatch | 4 | 0 | simulationTrace[].targetId = institution.village_watch: 4/0
+bowyerfletcher | 4 | 0 | simulationTrace[].targetId = institution.bowyer_fletcher: 4/0
+wardenslodge | 4 | 0 | simulationTrace[].targetId = institution.warden_s_lodge: 4/0
+jeweller | 4 | 0 | simulationTrace[].targetId = institution.jeweller: 4/0
+towncouncil | 4 | 0 | simulationTrace[].targetId = institution.town_council: 4/0
+alchemistshop | 4 | 0 | simulationTrace[].targetId = institution.alchemist_shop: 4/0
+democraticassembly | 4 | 0 | simulationTrace[].targetId = institution.democratic_assembly: 4/0
+localfence | 3 | 0 | simulationTrace[].targetId = institution.local_fence: 3/0
+periodicmarket | 3 | 0 | simulationTrace[].targetId = institution.periodic_market: 3/0
+banditaffiliate | 3 | 0 | simulationTrace[].targetId = institution.bandit_affiliate: 3/0
+tannery | 3 | 0 | simulationTrace[].targetId = institution.tannery: 3/0
+smugglingwaypoint | 3 | 0 | simulationTrace[].targetId = institution.smuggling_waypoint: 3/0
+guildgovernance | 3 | 0 | simulationTrace[].targetId = institution.guild_governance: 3/0
+smallhospital | 3 | 0 | simulationTrace[].targetId = institution.small_hospital: 3/0
+gamblingden | 3 | 0 | simulationTrace[].targetId = institution.gambling_den: 3/0
+freecompanyhall | 3 | 0 | simulationTrace[].targetId = institution.free_company_hall: 3/0
+moneychangers | 3 | 0 | simulationTrace[].targetId = institution.money_changers: 3/0
+royalseat | 3 | 0 | simulationTrace[].targetId = institution.royal_seat: 3/0
+lordsreeve | 2 | 0 | simulationTrace[].targetId = institution.lord_s_reeve: 2/0
+outlawshelter | 2 | 0 | simulationTrace[].targetId = institution.outlaw_shelter: 2/0
+residentsmithparttime | 2 | 0 | simulationTrace[].targetId = institution.resident_smith_part_time: 2/0
+healerdivine1stlevel | 2 | 0 | simulationTrace[].targetId = institution.healer_divine_1st_level: 2/0
+waystation | 2 | 0 | simulationTrace[].targetId = institution.waystation: 2/0
+villagescribe | 1 | 0 | simulationTrace[].targetId = institution.village_scribe: 1/0
+villagemusician | 1 | 0 | simulationTrace[].targetId = institution.village_musician: 1/0
+tailor | 1 | 0 | simulationTrace[].targetId = institution.tailor: 1/0
+carriershiringhall | 1 | 0 | simulationTrace[].targetId = institution.carriers_hiring_hall: 1/0
+druidcircle | 1 | 0 | simulationTrace[].targetId = institution.druid_circle: 1/0
+brothel | 1 | 0 | simulationTrace[].targetId = institution.brothel: 1/0
+gatesifwalled | 1 | 0 | simulationTrace[].targetId = institution.gates_if_walled: 1/0
+dragonresident | 1 | 0 | simulationTrace[].targetId = institution.dragon_resident: 1/0

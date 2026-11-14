@@ -1,0 +1,47 @@
+bytes: 212 715009bdce20c719… 211 eface6d093933170… at 5abf99906
+PASS | a01 | V7-4 key | hidden name as an object KEY
+PASS | a02 | V7-4 join | hidden house's id as a join (from / to)
+PASS | a03 | V7-4 id | hidden name spelled in an id beside a name
+PASS | a04 | V7-4 camel | hidden name camel-cased or squeezed
+PASS | a05 | (a) | hidden name anywhere else, any spelling (nested arrays, a JSON string, the list)
+PASS | a06 | V7-4 qualifier, plural | the name without its bracketed qualifier, and its plural
+FAIL | a07 | V7-5 | a renamed hidden house's birth name (list, trace target, trace cause)
+PASS | a08 | V7-4 id | hidden 'Black market' in any spelling, outside the open 'Black market bazaar' and the schema key
+PASS | a09 | (a) | a hidden name with % _ ' ( [ . *
+PASS | a10 | V7-1 | a hidden name with no ASCII letter, beside others
+PASS | a11 | (a) | hidden 'Assassins' guild' in the derived list
+PASS | a12 | V7-7 | KEEP: the open house 'Black market bazaar' keeps its name
+PASS | a13 | V7-7 | KEEP: the shown power 'Assassins' Guild' keeps its name
+PASS | a14 | keep | KEEP: the open 'Fish market' (card, list, chain, nested entry) and 'Market Taxes'
+PASS | a15 | (b) | hasThievesGuild and hasSmuggling false (only hidden houses raised them)
+PASS | a16 | (b) keep | KEEP: hasBlackMarket, hasCriminalInst (the open bazaar raises them) and hasMarket true
+PASS | a17 | keep | KEEP on Reveal DM: an open person's goal and the open house's trace entry
+PASS | b01 | V7-1 | a hidden name with no ASCII letter, as written and lower-cased
+PASS | b02 | keep | KEEP: 'Fish market', 'Salt fish'
+PASS | c01 | V7-9 | U+212A in a hidden name (any case)
+PASS | c02 | V7-9 | U+0130 in a hidden name (any case)
+PASS | c03 | V7-9 | a hidden house with a label and no name
+PASS | c04 | keep | KEEP: 'Fish market', 'Salt fish', every listed house has a name
+PASS | d01 | V7-3 | a clandestine house by facet alone: its name (the unmarked link too)
+PASS | d02 | V7-3 | … its name on every read
+PASS | d03 | V7-3 | … no record without a name left in institutions[]; exactly one house listed
+PASS | d04 | V7-4 qualifier | 'Thieves' Guild' (the name without its qualifier): the income label, a summary sentence
+PASS | d05 | (b) | hasCriminalInst and hasThievesGuild false
+FAIL | d06 | V7-8 (for a ruling) | hasGuild and hasChurch not true (only hidden houses raise them)
+PASS | d07 | keep | KEEP: 'Fish market', 'Market Taxes', hasMarket
+PASS | e01 | (d) control | an event's hidden lasting effect in the legacy annotation, source as born
+FAIL | e02 | V7-2 | … the same, source amended after the birth
+FAIL | e03 | V7-2 | a hidden tension's description in the siege narrative, amended
+FAIL | e04 | V7-2 | a hidden tie's description in prominentRelationship.phrasing, amended
+FAIL | e05 | V7-2 | a hidden tie's tension in pressureSentence, amended
+FAIL | e06 | V7-2 | a hidden appearance in the impression, amended
+PASS | e07 | keep | KEEP: the events' names, the people, the tie's ends
+checks 37 | PASS 30 | FAIL 7
+(all 15 equal)
+3,000 deep, Reveal DM | x211 | ok | houses listed 1 | exports back 100 | 31 ms | x212 | ok | houses listed 1 | exports back 100 | 38 ms
+PASS | V7-10 | a document 211 serves is served
+200 hidden houses, 5000 strings | x211 | ok | houses listed 1 | exports back 5000 | 386 ms | x212 | ok | houses listed 1 | exports back 5000 | 412 ms
+PASS | V7-6 | within three times 211's cost
+600 hidden houses, 10000 strings | x211 | ok | houses listed 1 | exports back 10000 | 1241 ms | x212 | ok | houses listed 1 | exports back 10000 | 1305 ms
+PASS | V7-6 | within three times 211's cost
+run-all: 27 s; responses in /var/tmp/v10/out/runall-seat-5abf; exit 1
