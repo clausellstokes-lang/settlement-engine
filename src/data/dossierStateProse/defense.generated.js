@@ -72,7 +72,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no crisis: occupied",
             "guardPresence"
           ],
-          "text": "The danger at {settlement} is real, and so is what the town has to meet it: its people under arms and its works are both in good order.",
+          "text": "Danger has come to {settlement}, and the town meets it strongly defended.",
           "slots": [
             "settlement"
           ],
@@ -85,7 +85,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "crisis: any",
             "no crisis: occupied"
           ],
-          "text": "{settlement} is being tested now, and so far its defences are holding.",
+          "text": "People at {settlement} take the danger seriously, and they trust the town's defences to hold.",
           "slots": [
             "settlement"
           ],
