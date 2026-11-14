@@ -1,0 +1,68 @@
+30	L21a sea: maritime	r2r-town-37 (maritime) r2r-city-19 (maritime) r2s-plague_onset-thorp-1 (maritime) rr3-thorp-plague_onset-rand-5 (maritime)
+13	L21b fish: water river	r2r-thorp-41 (forest/river) rr3-thorp-plague_onset-rand-2 (forest/river) rr3-village-plague_onset-rand-0 (riverside/river) rr3-town-plague_onset-rand-5 (riverside/river)
+1	L22 buys from outside: imp false siege false channel -	rr3x-thorp-slave_revolt-mountain_pass-2
+199	L22 buys from outside: imp true siege false channel -	r2r-hamlet-16 r2r-village-50 r2r-village-58 r2r-city-44
+26	L22 buys from outside: imp true siege true channel -	r2s-under_siege-town-2 r2s-under_siege-city-0 r2s-under_siege-metropolis-3 rr3-town-under_siege-port-0
+141	L22 merchants: market	r2r-city-44 r2s-under_siege-town-2 r2s-under_siege-city-0 r2s-under_siege-metropolis-3
+85	L22 whoever: no market	r2r-hamlet-16 r2r-village-50 r2r-village-58 r2s-famine-thorp-0
+192	L23 hoard: siege true imp false	r2r-thorp-45 r2r-hamlet-0 r2r-village-21 r2r-village-55
+432	L23 importer: grain imported	r2r-hamlet-16 r2r-hamlet-28 r2r-town-13 r2r-town-17
+76	L24 rafts: siege false route port	r2r-city-2 r2r-city-37 r2r-metropolis-13 r2r-metropolis-21
+12	L24 rafts: siege false route river	r2r-city-31 r2r-city-44 r2r-city-55 r2s-indebted-metropolis-1
+16	L24 rafts: siege true route port	r2s-under_siege-city-0 r2s-under_siege-metropolis-1 rr3-city-under_siege-port-0 rr3-metropolis-under_siege-port-0
+1	L24 rafts: siege true route river	rr3-city-under_siege-rand-5
+538	L25 Origin names a founder (drawn)	r2r-thorp-4 (was founded by a disbanded military unit that like / a single extended family who came and never left) r2r-thorp-10 (was founded by a disbanded military unit that like / a single extended family who came and never left) r2r-thorp-18 (was founded by a disbanded military unit that like / a single extended family who came and never left) r2r-thorp-21 (was founded by religious hermits seeking isolation / a healer who stopped to treat a traveller and found the location too useful to leave)
+10	L25 reason empty	r2r-town-3 r2r-city-14 r2s-indebted-hamlet-1 rr3-thorp-monster_pressure-rand-2
+1179	L25 row tested, final record true	r2r-thorp-7 (was founded to exploit rich mineral deposits) r2r-thorp-16 (was founded to exploit rich mineral deposits) r2r-thorp-22 (started as a seasonal camp for deep-water fishers who stoppe) r2r-thorp-24 (was established to exploit the natural harbour)
+801	L26 founder tested, final record true	r2r-town-0 (merchants recognising economic potential before an) r2r-town-3 (religious authorities who wanted a centre for thei) r2r-town-4 (religious authorities who wanted a centre for thei) r2r-town-8 (a merchant consortium that needed a waypoint and d)
+5	L29 store: granary false reserves-path true	r2s-wartime-thorp-1 rr3-thorp-under_siege-rand-5 rr3x-thorp-politically_fractured-isolated-0 rr3x-thorp-indebted-isolated-2
+18	L29 store: granary true reserves-path true	rr3-city-under_siege+famine-rand-3 rr3-metropolis-under_siege-rand-4 rr3x-town-under_siege-isolated-0 rr3x-town-under_siege-isolated-1
+92	L29/30 holds: siege false imp false route isolated	r2r-thorp-17 (what it produces itself) r2r-thorp-23 (what it produces itself) r2r-thorp-38 (what it produces itself) r2r-thorp-46 (what it produces itself)
+36	L29/30 holds: siege true imp false route isolated	r2r-village-43 (what it produces itself) r2s-under_siege-thorp-2 (what it produces itself) r2s-under_siege-village-2 (what it produces itself) rr3-thorp-under_siege-rand-3 (what it produces itself)
+7	L29/30 holds: siege true imp true route isolated	rr3-city-under_siege+famine-rand-3 (what it has in store and what it produces itself) rr3-metropolis-under_siege-rand-4 (what it has in store and what it produces itself) rr3x-town-under_siege-isolated-0 (what it has in store and what it produces itself) rr3x-city-under_siege+famine-isolated-0 (what it has in store and what it produces itself)
+4	L31 caravans	r2r-town-9 (institution:Caravanserai) r2r-town-54 (institution:Caravanserai|institution:Stable district) rr3-village-politically_fractured-rand-1 (institution:Travelers' inn|institution:Caravanserai|institution:Waystation) rr3-metropolis-famine-rand-3 (institution:Caravanserai|institution:Stable district)
+3	L31 channels: imp false siege false	rr3x-hamlet-politically_fractured-isolated-0 rr3x-hamlet-politically_fractured-isolated-2 rr3x-hamlet-indebted-isolated-2
+181	L31 channels: imp true siege false	r2r-village-0 r2r-village-8 r2r-village-23 r2r-village-29
+47	L31 hinterland carts	r2r-village-0 r2r-village-8 r2r-village-23 r2r-village-29
+58	L31 magic: magicExists true path true	r2r-town-12 r2r-town-54 r2r-city-20 r2r-city-48
+93	L31 patron	r2r-town-9 r2r-town-54 r2r-city-20 r2r-city-49
+180	L31 tracks	r2r-village-0 r2r-village-8 r2r-village-23 r2r-village-29
+11	L32 journeys: tier hamlet tavern false	r2r-hamlet-32 r2r-hamlet-45 r2r-hamlet-59 r2s-monster_pressure-hamlet-0
+27	L32 journeys: tier town tavern true	r2r-town-8 r2r-town-27 r2r-town-33 r2s-famine-town-3
+10	L32 journeys: tier village tavern false	r2r-village-32 r2r-village-49 r2s-famine-village-2 rr3-village-infiltrated-rand-1
+8	L32 journeys: tier village tavern true	r2r-village-4 r2r-village-30 r2r-village-44 r2s-insurgency-village-3
+57	L33 metro: siege true	r2r-metropolis-14 r2s-under_siege-metropolis-0 r2s-under_siege-metropolis-1 r2s-under_siege-metropolis-2
+2	L35 who: City-State Council	rr3-metropolis-under_siege+famine-rand-2 rr3x-metropolis-under_siege+famine-river-2
+9	L35 who: Headman's Authority	r2r-village-21 r2s-under_siege-hamlet-1 rr3-village-under_siege+famine-rand-3 rr3x-hamlet-under_siege-isolated-1
+2	L35 who: X Authority	rr3x-city-under_siege+famine-port-0 rr3x-metropolis-under_siege-crossroads-0
+3	L35 who: X City Council	rr3-city-under_siege-rand-4 rr3x-city-under_siege-road-0 rr3x-city-under_siege+famine-crossroads-1
+30	L35 who: X Council	r2s-under_siege-village-3 rr3-thorp-under_siege-rand-4 rr3-thorp-under_siege-rand-5 rr3-thorp-under_siege+famine-rand-0
+3	L35 who: X Elder Council	rr3-hamlet-under_siege-rand-4 rr3x-hamlet-under_siege-crossroads-0 rr3x-hamlet-under_siege+famine-mountain_pass-0
+1	L35 who: X Governorship	rr3x-metropolis-under_siege+famine-isolated-0
+1	L35 who: X Guidance	rr3x-village-under_siege-isolated-0
+5	L35 who: X Guild Consortium	r2s-under_siege-metropolis-2 rr3-metropolis-under_siege-rand-0 rr3-metropolis-under_siege+famine-port-0 rr3x-metropolis-under_siege-road-1
+1	L35 who: X Guild Council	rr3-city-under_siege-port-1
+1	L35 who: X Mayor	rr3-town-under_siege+famine-port-0
+1	L35 who: X Merchant Senate	r2s-under_siege-metropolis-3
+2	L35 who: X Reeve	rr3-village-under_siege-rand-4 rr3x-village-under_siege-port-0
+3	L35 who: X Stewardship	rr3-hamlet-under_siege+famine-rand-4 rr3x-hamlet-under_siege+famine-river-2 rr3x-hamlet-under_siege+famine-crossroads-1
+2	L35 who: X Theocratic Council	r2s-under_siege-metropolis-0 rr3x-metropolis-under_siege-river-1
+4	L35 who: X oligarchy	rr3x-city-under_siege-crossroads-1 rr3x-city-under_siege-mountain_pass-0 rr3x-city-under_siege+famine-river-2 rr3x-city-under_siege+famine-crossroads-2
+9	L36 bakers: bakers	r2s-famine-city-2 rr3-city-famine-rand-4 rr3-metropolis-famine-rand-1 rr3-metropolis-famine-rand-5
+15	L39 trade-twin	r2r-thorp-11 r2r-thorp-16 r2s-wartime-thorp-3 r2s-wartime-hamlet-0
+38	L39 workshop	r2r-metropolis-4 r2s-wartime-village-0 r2s-wartime-city-3 rr3-village-wartime-rand-0
+12	L40 courts: court on roster	r2s-religious_conversion-city-0 rr3-city-religious_conversion-rand-0 rr3-metropolis-religious_conversion-port-0 rr3x-town-religious_conversion-road-0
+2	L40 gov: Corrupt Council	rr3x-town-religious_conversion-mountain_pass-0 rr3x-town-religious_conversion-port-2
+3	L40 gov: Elder Council	rr3-thorp-religious_conversion-rand-2 rr3x-village-religious_conversion-road-1 rr3x-village-religious_conversion-port-2
+1	L40 gov: Elected Reeve	rr3x-village-religious_conversion-isolated-0
+1	L40 gov: Household Council	rr3x-village-religious_conversion-mountain_pass-0
+1	L40 gov: Merchant Council	rr3-town-religious_conversion-rand-4
+1	L40 gov: Military Council	rr3x-town-religious_conversion-crossroads-1
+2	L40 gov: Priestly Guidance	rr3x-village-religious_conversion-crossroads-0 rr3x-village-religious_conversion-port-1
+1	L40 gov: Town Council	r2s-religious_conversion-town-2
+3	L44 underworld: crime diffuse thieves false	r2r-town-26 rr3x-village-occupied-mountain_pass-2 rr3x-town-slave_revolt-isolated-0
+63	L44 underworld: crime organized thieves false	r2r-city-3 r2r-city-10 r2r-city-24 r2r-city-30
+16	L44 underworld: crime semi-organized thieves false	r2r-town-51 r2r-city-27 r2r-city-57 r2s-politically_fractured-town-1
+24	L47 famine true tier hamlet	r2r-hamlet-16 r2r-hamlet-28 r2s-famine-hamlet-0 r2s-famine-hamlet-1
+31	L47 famine true tier thorp	r2r-thorp-17 r2r-thorp-38 r2s-famine-thorp-0 r2s-famine-thorp-1
+2	L47 famine true tier village	rr3-village-famine-rand-3 rr3x-village-famine-river-2

@@ -1,0 +1,884 @@
+[
+ {
+  "line": "L02",
+  "town": "r2r-town-43",
+  "tab": "Summary/Overview",
+  "sentence": "The river carries the sounds of Svetoka to you around the bend before the buildings appear: a mill wheel, the knock of boats against a jetty, someone calling a tally across the water.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "route river; water river navigable; houses Mills (2-5), Docks/port facilities, River boatyard"
+ },
+ {
+  "line": "L02",
+  "town": "r2r-metropolis-20",
+  "tab": "Summary/Overview",
+  "sentence": "The river carries the sounds of Anba to you around the bend before the buildings appear: a mill wheel, the knock of boats against a jetty, someone calling a tally across the water.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "route river; water river navigable; Mills (2-5), Docks/port facilities"
+ },
+ {
+  "line": "L02",
+  "town": "r2r-city-41",
+  "tab": "Summary/Overview",
+  "sentence": "The river carries the sounds of Nokhoiabad to you around the bend before the buildings appear: a mill wheel, the knock of boats against a jetty, someone calling a tally across the water.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "route river; water river navigable; Mills (2-5), Docks/port facilities, River ferry"
+ },
+ {
+  "line": "L02",
+  "town": "rr3-city-calm-rand-1",
+  "tab": "Summary/Overview",
+  "sentence": "The river carries the sounds of Evangeopolis to you around the bend before the buildings appear: a mill wheel, the knock of boats against a jetty, someone calling a tally across the water.",
+  "verdict": "FALSE",
+  "kind": "a",
+  "severity": "MED",
+  "fact": "water {kind:maritime, coast:true, river:false}, terrain coastal; page line 3 'built around the agora and the harbour, on the coast' and 'Coastal'. Only route='river' and the River boatyard/Barge company houses support a river; a river 'bend' is not in the water record"
+ },
+ {
+  "line": "L02",
+  "town": "rr3-metropolis-calm-rand-4",
+  "tab": "Summary/Overview",
+  "sentence": "The river carries the sounds of Lidosinum to you around the bend before the buildings appear: a mill wheel, the knock of boats against a jetty, someone calling a tally across the water.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "route river; water river navigable; Mills (2-5), Docks/port facilities"
+ },
+ {
+  "line": "L03",
+  "town": "r2r-hamlet-20",
+  "tab": "Summary/Overview",
+  "sentence": "A merchant argues with a carter on the road into Jómsmark about the size of a load. Nobody else pays them any attention. This is clearly a daily occurrence.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "market true (Periodic market); page: 'Jómsmark's market lives off through-traffic'; route road"
+ },
+ {
+  "line": "L03",
+  "town": "r2r-hamlet-20",
+  "tab": "Summary/Overview",
+  "sentence": "Turf roofs and timber sheds gather behind the working waterfront.",
+  "verdict": "FALSE",
+  "kind": "a",
+  "severity": "HIGH",
+  "fact": "water {kind:none, coast:false, river:false}, terrain hills, route road; no landing or dock on the 13-house roster",
+  "neighbour": true
+ },
+ {
+  "line": "L03",
+  "town": "r2r-hamlet-20",
+  "tab": "Summary/Overview",
+  "sentence": "The smell of incense drifts out into the press of the lane.",
+  "verdict": "FALSE",
+  "kind": "d",
+  "severity": "LOW",
+  "fact": "hamlet pop 99, Dwellings (5-25): no 'press' of a lane",
+  "neighbour": true
+ },
+ {
+  "line": "L03",
+  "town": "r2r-metropolis-43",
+  "tab": "Summary/Overview",
+  "sentence": "A merchant argues with a carter on the road into Hochstift about the size of a load. Nobody else pays them any attention. This is clearly a daily occurrence.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "market true; District markets, Coaching inn, Stable district"
+ },
+ {
+  "line": "L03",
+  "town": "r2r-town-10",
+  "tab": "Summary/Overview",
+  "sentence": "A merchant argues with a carter on the road into Madinatchowk about the size of a load. Nobody else pays them any attention. This is clearly a daily occurrence.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "market true; Weekly market, Market square, Annual fair"
+ },
+ {
+  "line": "L03",
+  "town": "r2r-town-10",
+  "tab": "Summary/Overview",
+  "sentence": "Caravan courts and covered lanes make movement through the merchant quarter deliberate.",
+  "verdict": "FALSE",
+  "kind": "d",
+  "severity": "LOW",
+  "fact": "town pop 754, 27 houses, no caravan house (no Caravanserai / Caravan masters' exchange / Caravaneer's post): 'Caravan courts' and 'the merchant quarter' oversize it",
+  "neighbour": true
+ },
+ {
+  "line": "L03",
+  "town": "r2r-town-55",
+  "tab": "Summary/Overview",
+  "sentence": "A merchant argues with a carter on the road into Skálaker about the size of a load. Nobody else pays them any attention. This is clearly a daily occurrence.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "market true; Weekly market, Market square"
+ },
+ {
+  "line": "L03",
+  "town": "r2r-city-23",
+  "tab": "Summary/Overview",
+  "sentence": "A merchant argues with a carter on the road into Benhurst about the size of a load. Nobody else pays them any attention. This is clearly a daily occurrence.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "market true; Daily markets, Caravan masters' exchange"
+ },
+ {
+  "line": "L04",
+  "town": "r2s-famine-city-3",
+  "tab": "Summary/Overview",
+  "sentence": "Vatanabad looks prosperous in the merchant quarter: new paint, loaded carts, a market stall with produce. It is only when you walk further in that the other version of the settlement appears: shuttered houses, people sitting on doorsteps with no particular purpose.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "city 11818, Merchant guilds (15-40), Luxury goods quarter; famine summary 'the wealthy are hoarding' fits the contrast"
+ },
+ {
+  "line": "L04",
+  "town": "rr3x-town-famine-mountain_pass-1",
+  "tab": "Summary/Overview",
+  "sentence": "Lidomunicipium looks prosperous in the merchant quarter: new paint, loaded carts, a market stall with produce. It is only when you walk further in that the other version of the settlement appears: shuttered houses, people sitting on doorsteps with no particular purpose.",
+  "verdict": "FALSE",
+  "kind": "d",
+  "severity": "LOW",
+  "fact": "town pop 570, 19 houses, one 'Weekly market; Market square', no merchant guild or merchant house (powers Church Council 82, Grain Holders 18): a 'merchant quarter' is a stretch for this size"
+ },
+ {
+  "line": "L04",
+  "town": "rr3x-metropolis-famine-mountain_pass-2",
+  "tab": "Summary/Overview",
+  "sentence": "Rajikund looks prosperous in the merchant quarter: new paint, loaded carts, a market stall with produce. It is only when you walk further in that the other version of the settlement appears: shuttered houses, people sitting on doorsteps with no particular purpose.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "metropolis 68087, Merchant guilds (50-100+), District markets; 'the wealthy are hoarding'"
+ },
+ {
+  "line": "L04",
+  "town": "rr3-town-famine-port-1",
+  "tab": "Summary/Overview",
+  "sentence": "Eleftakra looks prosperous in the merchant quarter: new paint, loaded carts, a market stall with produce. It is only when you walk further in that the other version of the settlement appears: shuttered houses, people sitting on doorsteps with no particular purpose.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "town 1159, Merchant guilds (3-8), Weekly market, Docks; 'the wealthy are hoarding'"
+ },
+ {
+  "line": "L04",
+  "town": "rr3-city-famine-rand-5",
+  "tab": "Summary/Overview",
+  "sentence": "Frosthavn looks prosperous in the merchant quarter: new paint, loaded carts, a market stall with produce. It is only when you walk further in that the other version of the settlement appears: shuttered houses, people sitting on doorsteps with no particular purpose.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "city 11520, Merchant guilds (15-40), Luxury goods quarter, Warehouse district"
+ },
+ {
+  "line": "L05",
+  "town": "rr3x-village-indebted-mountain_pass-2",
+  "tab": "Summary/Overview",
+  "sentence": "The merchant district of Xochicoatl looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years.",
+  "verdict": "FALSE",
+  "kind": "a",
+  "severity": "HIGH",
+  "fact": "village pop 353, market false, no merchant house; same page line 27: 'No market or fair stands in Xochicoatl: what trade the village does is done house to house and on the road.' (also g, d)"
+ },
+ {
+  "line": "L05",
+  "town": "r2r-metropolis-7",
+  "tab": "Summary/Overview",
+  "sentence": "The merchant district of Ulancaravansarai looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "metropolis 47918, Merchant guilds (50-100+), Luxury goods quarter; crisis indebted, prosperity Poor"
+ },
+ {
+  "line": "L05",
+  "town": "r2r-village-47",
+  "tab": "Summary/Overview",
+  "sentence": "The merchant district of Mahapat looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years.",
+  "verdict": "FALSE",
+  "kind": "a",
+  "severity": "HIGH",
+  "fact": "village pop 375, isolated, market false, no merchant house; same page line 27: 'No market or fair stands in Mahapat: what trade the village does is done house to house and on the road.' (also g, d)"
+ },
+ {
+  "line": "L05",
+  "town": "r2s-indebted-city-2",
+  "tab": "Summary/Overview",
+  "sentence": "The merchant district of Víkli looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "city 13996, Merchant guilds (15-40), Banking houses, Luxury goods quarter"
+ },
+ {
+  "line": "L05",
+  "town": "rr3-town-indebted-rand-0",
+  "tab": "Summary/Overview",
+  "sentence": "The merchant district of Leontphoros looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "town 840, Merchant oligarchy, Merchant guilds (3-8), Merchant warehouses"
+ },
+ {
+  "line": "L06",
+  "town": "rr3-town-succession_void-rand-0",
+  "tab": "Summary/Overview",
+  "sentence": "Building has stopped mid-job across Vikfjord; scaffolding stands empty on dressed stone. Work that fine waits on a patron, and the town is not currently sure who that is.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "tier town; crisis succession_void ('last strong leader died recently with no clear heir'); page 'Multi-story timber and stone buildings', masonry walls"
+ },
+ {
+  "line": "L06",
+  "town": "rr3x-metropolis-succession_void-river-2",
+  "tab": "Summary/Overview",
+  "sentence": "Building has stopped mid-job across Navakota; scaffolding stands empty on dressed stone. Work that fine waits on a patron, and the metropolis is not currently sure who that is.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "metropolis; Stone quarry 'with yards of dressed stone and its own masons'"
+ },
+ {
+  "line": "L06",
+  "town": "r2s-succession_void-town-0",
+  "tab": "Summary/Overview",
+  "sentence": "Building has stopped mid-job across Shivamandal; scaffolding stands empty on dressed stone. Work that fine waits on a patron, and the town is not currently sure who that is.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "town; succession_void; page 'Timber and stone, raised to more than one floor' (no quarry or masons on roster, but stone building is on the page)"
+ },
+ {
+  "line": "L06",
+  "town": "rr3-town-succession_void-port-0",
+  "tab": "Summary/Overview",
+  "sentence": "Building has stopped mid-job across Dagaker; scaffolding stands empty on dressed stone. Work that fine waits on a patron, and the town is not currently sure who that is.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "town; succession_void; page 'Timber and stone, raised to more than one floor'"
+ },
+ {
+  "line": "L06",
+  "town": "rr3-city-succession_void-rand-1",
+  "tab": "Summary/Overview",
+  "sentence": "Building has stopped mid-job across Tenotzin; scaffolding stands empty on dressed stone. Work that fine waits on a patron, and the city is not currently sure who that is.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "city; Stone quarry chain 'provides dressed stone'"
+ },
+ {
+  "line": "L07",
+  "town": "r2s-religious_conversion-village-3",
+  "tab": "Summary/Overview",
+  "sentence": "Archodion is observing a holy day, and you cannot tell which one. Some shops are shut and draped; others are pointedly open. Two processions are forming in different quarters, and the people watching each are counting who watches the other.",
+  "verdict": "FALSE",
+  "kind": "d",
+  "severity": "HIGH",
+  "fact": "village pop 351 (Dwellings 15-100), market false: 'different quarters' and 'Some shops are shut and draped; others are pointedly open' vs page line 27 'No market or fair stands in Archodion ... The village keeps few institutions and needs few.' (also g)"
+ },
+ {
+  "line": "L07",
+  "town": "rr3-metropolis-religious_conversion-rand-3",
+  "tab": "Summary/Overview",
+  "sentence": "Sanctapagus is observing a holy day, and you cannot tell which one. Some shops are shut and draped; others are pointedly open. Two processions are forming in different quarters, and the people watching each are counting who watches the other.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "metropolis 335604, Parish churches (50-100+)"
+ },
+ {
+  "line": "L07",
+  "town": "r2s-religious_conversion-metropolis-2",
+  "tab": "Summary/Overview",
+  "sentence": "Eisnes is observing a holy day, and you cannot tell which one. Some shops are shut and draped; others are pointedly open. Two processions are forming in different quarters, and the people watching each are counting who watches the other.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "metropolis 44185, Parish churches, Great cathedral"
+ },
+ {
+  "line": "L07",
+  "town": "rr3-town-religious_conversion-rand-2",
+  "tab": "Summary/Overview",
+  "sentence": "Stormmo is observing a holy day, and you cannot tell which one. Some shops are shut and draped; others are pointedly open. Two processions are forming in different quarters, and the people watching each are counting who watches the other.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "town 1599, Parish churches (2-5), Weekly market"
+ },
+ {
+  "line": "L07",
+  "town": "rr3-metropolis-religious_conversion-rand-4",
+  "tab": "Summary/Overview",
+  "sentence": "Kamennick is observing a holy day, and you cannot tell which one. Some shops are shut and draped; others are pointedly open. Two processions are forming in different quarters, and the people watching each are counting who watches the other.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "metropolis 39428, Parish churches (50-100+)"
+ },
+ {
+  "line": "L08",
+  "town": "rr3x-village-religious_conversion-isolated-1",
+  "tab": "Summary/Overview",
+  "sentence": "The bells of Bhagaabad ring twice for every hour: one set of chimes, then another from a different quarter, a beat later and out of tune. Nobody in the street looks up.",
+  "verdict": "FALSE",
+  "kind": "a",
+  "severity": "MED",
+  "fact": "village pop 356 with ONE 'Parish church' (and a Druid Circle) - no second bell-house; crisis 'A new faith is gaining ground... The old house keeps its buildings'; 'another from a different quarter' also a size stretch (d) for Dwellings (15-100)"
+ },
+ {
+  "line": "L08",
+  "town": "rr3x-metropolis-religious_conversion-river-1",
+  "tab": "Summary/Overview",
+  "sentence": "The bells of Aquasaltus ring twice for every hour: one set of chimes, then another from a different quarter, a beat later and out of tune. Nobody in the street looks up.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "metropolis, Parish churches (50-100+), Great cathedral"
+ },
+ {
+  "line": "L08",
+  "town": "r2s-religious_conversion-town-0",
+  "tab": "Summary/Overview",
+  "sentence": "The bells of Donggou ring twice for every hour: one set of chimes, then another from a different quarter, a beat later and out of tune. Nobody in the street looks up.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "town 474, Parish churches (2-5); crisis 'Both hold services. Both have a priest'"
+ },
+ {
+  "line": "L08",
+  "town": "rr3-city-religious_conversion-rand-1",
+  "tab": "Summary/Overview",
+  "sentence": "The bells of Cobaitza ring twice for every hour: one set of chimes, then another from a different quarter, a beat later and out of tune. Nobody in the street looks up.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "city 4688, Parish churches (10-30)"
+ },
+ {
+  "line": "L08",
+  "town": "rr3-metropolis-religious_conversion-rand-0",
+  "tab": "Summary/Overview",
+  "sentence": "The bells of Qaryatsaray ring twice for every hour: one set of chimes, then another from a different quarter, a beat later and out of tune. Nobody in the street looks up.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "metropolis, Parish churches (50-100+), Great cathedral"
+ },
+ {
+  "line": "L09",
+  "town": "rr3x-thorp-religious_conversion-road-2",
+  "tab": "Summary/Overview",
+  "sentence": "The busiest work in Medinabazaar is on its holy symbols: one set coming down, another going up, and the same three workmen paid for both. They no longer joke about it.",
+  "verdict": "FALSE",
+  "kind": "d",
+  "severity": "LOW",
+  "fact": "thorp pop 11, Dwellings (1-8), Subsistence farming; only sacred house 'Plain wayside shrine for prayer. Unstaffed.' - 'the busiest work' and 'three workmen paid' oversize a thorp of 11"
+ },
+ {
+  "line": "L09",
+  "town": "rr3x-thorp-religious_conversion-road-2",
+  "tab": "Summary/Overview",
+  "sentence": "The smell of incense drifts out into the press of the lane.",
+  "verdict": "FALSE",
+  "kind": "d",
+  "severity": "MED",
+  "fact": "thorp pop 11, Dwellings (1-8)",
+  "neighbour": true
+ },
+ {
+  "line": "L09",
+  "town": "rr3x-metropolis-religious_conversion-road-0",
+  "tab": "Summary/Overview",
+  "sentence": "The busiest work in Jinji is on its holy symbols: one set coming down, another going up, and the same three workmen paid for both. They no longer joke about it.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "metropolis, Parish churches (50-100+)"
+ },
+ {
+  "line": "L09",
+  "town": "r2r-village-18",
+  "tab": "Summary/Overview",
+  "sentence": "The busiest work in Weikou is on its holy symbols: one set coming down, another going up, and the same three workmen paid for both. They no longer joke about it.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "village 225, Parish church, Priest (resident), Carpenter, Blacksmith"
+ },
+ {
+  "line": "L09",
+  "town": "r2s-religious_conversion-town-1",
+  "tab": "Summary/Overview",
+  "sentence": "The busiest work in Pantelimani is on its holy symbols: one set coming down, another going up, and the same three workmen paid for both. They no longer joke about it.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "town 909, Parish churches (2-5)"
+ },
+ {
+  "line": "L09",
+  "town": "rr3-thorp-religious_conversion-rand-5",
+  "tab": "Summary/Overview",
+  "sentence": "The busiest work in Beloburg is on its holy symbols: one set coming down, another going up, and the same three workmen paid for both. They no longer joke about it.",
+  "verdict": "FALSE",
+  "kind": "d",
+  "severity": "LOW",
+  "fact": "thorp pop 22, Dwellings (1-8), Subsistence farming; only a Wayside shrine - 'busiest work' and 'three workmen paid' oversize a thorp of 22"
+ },
+ {
+  "line": "L10",
+  "town": "rr3-village-slave_revolt-rand-1",
+  "tab": "Summary/Overview",
+  "sentence": "There are bodies being carried through Bab-al-shahr's streets under cloth, and the people carrying them are not mourners but labourers doing grim, fast work. The rising that did this is not finished; you can hear it, somewhere in the lower districts, still going on.",
+  "verdict": "FALSE",
+  "kind": "d",
+  "severity": "HIGH",
+  "fact": "village pop 350, Dwellings (15-100); page line 27 'The village keeps few institutions and needs few.' - no 'streets'/'lower districts' in a village"
+ },
+ {
+  "line": "L10",
+  "town": "r2s-slave_revolt-metropolis-2",
+  "tab": "Summary/Overview",
+  "sentence": "There are bodies being carried through Weichfeld's streets under cloth, and the people carrying them are not mourners but labourers doing grim, fast work. The rising that did this is not finished; you can hear it, somewhere in the lower districts, still going on.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "metropolis 127443; crisis slave_revolt"
+ },
+ {
+  "line": "L10",
+  "town": "r2s-slave_revolt-town-0",
+  "tab": "Summary/Overview",
+  "sentence": "There are bodies being carried through Novafossae's streets under cloth, and the people carrying them are not mourners but labourers doing grim, fast work. The rising that did this is not finished; you can hear it, somewhere in the lower districts, still going on.",
+  "verdict": "UNSURE",
+  "kind": "d",
+  "severity": "LOW",
+  "fact": "town pop 1243, Housing (75-650 households), no district house on roster: 'the lower districts' is a stretch for a town this size; record cannot settle"
+ },
+ {
+  "line": "L10",
+  "town": "rr3-town-slave_revolt-rand-1",
+  "tab": "Summary/Overview",
+  "sentence": "There are bodies being carried through Dharmapeta's streets under cloth, and the people carrying them are not mourners but labourers doing grim, fast work. The rising that did this is not finished; you can hear it, somewhere in the lower districts, still going on.",
+  "verdict": "UNSURE",
+  "kind": "d",
+  "severity": "LOW",
+  "fact": "town pop 1860, Housing (75-650 households), no district house: 'the lower districts' is a stretch for a town; record cannot settle"
+ },
+ {
+  "line": "L10",
+  "town": "rr3-city-slave_revolt-rand-5",
+  "tab": "Summary/Overview",
+  "sentence": "There are bodies being carried through Altaripa's streets under cloth, and the people carrying them are not mourners but labourers doing grim, fast work. The rising that did this is not finished; you can hear it, somewhere in the lower districts, still going on.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "city 12212; crisis slave_revolt"
+ },
+ {
+  "line": "L11",
+  "town": "rr3-thorp-slave_revolt-rand-0",
+  "tab": "Summary/Overview",
+  "sentence": "One building in Mikropetra is shuttered and scorched, the only burned one in sight, which tells you the fire was a statement, not an accident.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "crisis slave_revolt; nothing on the roster or page contradicts one burned building"
+ },
+ {
+  "line": "L11",
+  "town": "rr3-thorp-slave_revolt-rand-0",
+  "tab": "Summary/Overview",
+  "sentence": "A patron stands drinks at a wine shop, and makes sure everyone knows who is paying.",
+  "verdict": "FALSE",
+  "kind": "a",
+  "severity": "HIGH",
+  "fact": "thorp pop 8, isolated, 7 houses: Subsistence farming; Access to external mill; Access to parish church; Burial ground; Household elder; Dwellings (1-8); Water source - no wine shop, tavern or patron",
+  "neighbour": true
+ },
+ {
+  "line": "L11",
+  "town": "r2s-slave_revolt-metropolis-3",
+  "tab": "Summary/Overview",
+  "sentence": "One building in Anoarion is shuttered and scorched, the only burned one in sight, which tells you the fire was a statement, not an accident.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "crisis slave_revolt"
+ },
+ {
+  "line": "L11",
+  "town": "r2s-slave_revolt-thorp-2",
+  "tab": "Summary/Overview",
+  "sentence": "One building in Fenggang is shuttered and scorched, the only burned one in sight, which tells you the fire was a statement, not an accident.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "crisis slave_revolt"
+ },
+ {
+  "line": "L11",
+  "town": "r2s-slave_revolt-thorp-2",
+  "tab": "Summary/Overview",
+  "sentence": "Each lane seems to keep to its own trade, and each trade to its own lane.",
+  "verdict": "FALSE",
+  "kind": "d",
+  "severity": "HIGH",
+  "fact": "thorp pop 21, Dwellings (1-8), 7 houses (Subsistence farming; Fishing community; ...) - no lanes of separate trades",
+  "neighbour": true
+ },
+ {
+  "line": "L11",
+  "town": "r2s-slave_revolt-city-1",
+  "tab": "Summary/Overview",
+  "sentence": "One building in Magnasinum is shuttered and scorched, the only burned one in sight, which tells you the fire was a statement, not an accident.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "crisis slave_revolt"
+ },
+ {
+  "line": "L11",
+  "town": "rr3-village-slave_revolt-rand-0",
+  "tab": "Summary/Overview",
+  "sentence": "One building in Ormmark is shuttered and scorched, the only burned one in sight, which tells you the fire was a statement, not an accident.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "crisis slave_revolt"
+ },
+ {
+  "line": "L12a",
+  "town": "rr3-thorp-mass_migration-port-0",
+  "tab": "World/History",
+  "sentence": "The founders built for a few families who knew each other. Now newcomers crowd in, and half the faces are strangers.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "page 'Founded by: a single extended family who came and never left'; crisis mass_migration"
+ },
+ {
+  "line": "L12a",
+  "town": "r2s-mass_migration-metropolis-2",
+  "tab": "World/History",
+  "sentence": "The founders built for a few families who knew each other. Now newcomers crowd in, and half the faces are strangers.",
+  "verdict": "FALSE",
+  "kind": "g",
+  "severity": "MED",
+  "fact": "same History tab, lines above: 'Origin: developed around an important river ford' / 'Founded by: a dynastic decision that this crossroads would anchor the realm' - not 'a few families who knew each other' (metropolis 139708)"
+ },
+ {
+  "line": "L12a",
+  "town": "r2r-village-28",
+  "tab": "World/History",
+  "sentence": "The founders built for a few families who knew each other. Now newcomers crowd in, and half the faces are strangers.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "'Founded by: refugees fleeing war or persecution who found the location defensible'"
+ },
+ {
+  "line": "L12a",
+  "town": "rr3-thorp-mass_migration-rand-0",
+  "tab": "World/History",
+  "sentence": "The founders built for a few families who knew each other. Now newcomers crowd in, and half the faces are strangers.",
+  "verdict": "FALSE",
+  "kind": "g",
+  "severity": "LOW",
+  "fact": "same tab: 'Founded by: a healer who stopped to treat a traveller and found the location too useful to leave' / 'Origin: developed where herders gathered seasonally' - one founder, not families; a stretch"
+ },
+ {
+  "line": "L12a",
+  "town": "rr3-village-mass_migration-port-0",
+  "tab": "World/History",
+  "sentence": "The founders built for a few families who knew each other. Now newcomers crowd in, and half the faces are strangers.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "'Founded by: refugees fleeing war or persecution'"
+ },
+ {
+  "line": "L12b",
+  "town": "r2s-mass_migration-thorp-3",
+  "tab": "World/History",
+  "sentence": "The settlement was laid out for the families that founded it. Its houses and its water were never meant for this many people.",
+  "verdict": "FALSE",
+  "kind": "g",
+  "severity": "LOW",
+  "fact": "same tab: 'Founded by: a discharged soldier who liked the view and had nowhere better to be' - one founder, not 'the families that founded it'; also 'this many people' beside population 7"
+ },
+ {
+  "line": "L12b",
+  "town": "rr3x-metropolis-mass_migration-mountain_pass-0",
+  "tab": "World/History",
+  "sentence": "The settlement was laid out for the families that founded it. Its houses and its water were never meant for this many people.",
+  "verdict": "FALSE",
+  "kind": "g",
+  "severity": "MED",
+  "fact": "same tab: 'Founded by: imperial decree and the systematic forced relocation of skilled populations' - not laid out 'for the families that founded it'; metropolis 208651 with 'Advanced water infrastructure'"
+ },
+ {
+  "line": "L12b",
+  "town": "r2r-town-8",
+  "tab": "World/History",
+  "sentence": "The settlement was laid out for the families that founded it. Its houses and its water were never meant for this many people.",
+  "verdict": "FALSE",
+  "kind": "g",
+  "severity": "MED",
+  "fact": "same tab: 'Origin: began as a toll collection point that became a permanent post' / 'Founded by: a merchant consortium that needed a waypoint and decided to own it' - not founding families"
+ },
+ {
+  "line": "L12b",
+  "town": "r2s-mass_migration-town-1",
+  "tab": "World/History",
+  "sentence": "The settlement was laid out for the families that founded it. Its houses and its water were never meant for this many people.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "'Founded by: military veterans given land grants who brought their skills with them'"
+ },
+ {
+  "line": "L12b",
+  "town": "rr3-village-mass_migration-rand-0",
+  "tab": "World/History",
+  "sentence": "The settlement was laid out for the families that founded it. Its houses and its water were never meant for this many people.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "'Founded by: escaped serfs seeking a place beyond the reach of their former masters'"
+ },
+ {
+  "line": "L13",
+  "town": "r2s-wartime-thorp-3",
+  "tab": "World/History",
+  "sentence": "The founders built a place to trade. Now the army takes what the settlement used to sell.",
+  "verdict": "FALSE",
+  "kind": "g",
+  "severity": "MED",
+  "fact": "same tab line 386 'Origin: grew at a strategic mountain pass'; thorp of 6, isolated, market false, exports []; page line 27 'No market or fair stands in Madinatsaray: what trade the thorp does is done house to house' - nothing 'used to sell'"
+ },
+ {
+  "line": "L13",
+  "town": "rr3x-metropolis-wartime-crossroads-2",
+  "tab": "World/History",
+  "sentence": "The founders built a place to trade. Now the army takes what the settlement used to sell.",
+  "verdict": "FALSE",
+  "kind": "g",
+  "severity": "LOW",
+  "fact": "same tab: 'Origin: began as a grain storage depot for a larger city that no longer exists' - a depot, not 'a place to trade'; a stretch"
+ },
+ {
+  "line": "L13",
+  "town": "r2r-thorp-16",
+  "tab": "World/History",
+  "sentence": "The founders built a place to trade. Now the army takes what the settlement used to sell.",
+  "verdict": "FALSE",
+  "kind": "g",
+  "severity": "MED",
+  "fact": "same tab line 461 'Origin: was founded to exploit rich mineral deposits'; thorp of 10, market false"
+ },
+ {
+  "line": "L13",
+  "town": "r2s-wartime-city-2",
+  "tab": "World/History",
+  "sentence": "The founders built a place to trade. Now the army takes what the settlement used to sell.",
+  "verdict": "FALSE",
+  "kind": "g",
+  "severity": "LOW",
+  "fact": "same tab line 2568 'Origin: developed where herders gathered seasonally until the gathering became permanent' - a seasonal gathering may be read as trade; a stretch"
+ },
+ {
+  "line": "L13",
+  "town": "rr3-town-wartime-rand-4",
+  "tab": "World/History",
+  "sentence": "The founders built a place to trade. Now the army takes what the settlement used to sell.",
+  "verdict": "FALSE",
+  "kind": "g",
+  "severity": "MED",
+  "fact": "same tab line 777 'Origin: was built around a single family's shipwright operation that outlasted the family'"
+ },
+ {
+  "line": "L45",
+  "town": "r2s-under_siege-city-2",
+  "tab": "Summary/Overview",
+  "sentence": "Andronarion's gates are shut and barred. The guards on them are professional about it, which makes it worse: nobody comes near without being challenged, and nothing is let through. Professional means they expect this to last.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "'Defence: City walls and gates, Professional city watch, Garrison'; siege 'nothing comes in by road'"
+ },
+ {
+  "line": "L45",
+  "town": "r2s-under_siege-city-2",
+  "tab": "Summary/Overview",
+  "sentence": "Stacks of seasoning planks line the road in, taller than the carts that wait for them.",
+  "verdict": "FALSE",
+  "kind": "c",
+  "severity": "MED",
+  "fact": "siege: 'Enemies are camped around Andronarion, and nothing comes in by road'; 'Field work and trade have stopped' - carts waiting on the road in presume normal trade",
+  "neighbour": true
+ },
+ {
+  "line": "L45",
+  "town": "rr3-town-under_siege+famine-rand-4",
+  "tab": "Summary/Overview",
+  "sentence": "Hochbrunn's gates are shut and barred. The guards on them are professional about it, which makes it worse: nobody comes near without being challenged, and nothing is let through. Professional means they expect this to last.",
+  "verdict": "FALSE",
+  "kind": "g",
+  "severity": "LOW",
+  "fact": "gates TRUE ('Masonry walls pierced by gates'), but the watch is 'Part-time guards who walk the night and hold the gates.' (page line 217) - 'professional ... Professional means they expect this to last' leans on a professional force the town lacks"
+ },
+ {
+  "line": "L45",
+  "town": "rr3-metropolis-under_siege-rand-3",
+  "tab": "Summary/Overview",
+  "sentence": "Khānpur's gates are shut and barred. The guards on them are professional about it, which makes it worse: nobody comes near without being challenged, and nothing is let through. Professional means they expect this to last.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "Massive walls and fortifications, Professional city watch, Multiple garrisons, Citadel; 'gatehouses at every stage'"
+ },
+ {
+  "line": "L45",
+  "town": "rr3-metropolis-under_siege-rand-3",
+  "tab": "Summary/Overview",
+  "sentence": "Travellers are offered water before anyone asks their business.",
+  "verdict": "FALSE",
+  "kind": "g",
+  "severity": "MED",
+  "fact": "same block: 'nothing is let through'; siege 'nothing comes in by road' - no travellers arrive",
+  "neighbour": true
+ },
+ {
+  "line": "L45",
+  "town": "rr3-town-under_siege+famine-port-1",
+  "tab": "Summary/Overview",
+  "sentence": "Grímhammer's gates are shut and barred. The guards on them are professional about it, which makes it worse: nobody comes near without being challenged, and nothing is let through. Professional means they expect this to last.",
+  "verdict": "FALSE",
+  "kind": "g",
+  "severity": "LOW",
+  "fact": "'Watchmen serving part-time. Night patrols and gate duty.' (line 222); 'It keeps a watch, which is a matter of order rather than of war' (706); '12 institutions critically impaired by siege: ... Town walls, Town watch' (754)"
+ },
+ {
+  "line": "L45",
+  "town": "rr3-town-under_siege+famine-port-1",
+  "tab": "Summary/Overview",
+  "sentence": "The clatter of looms follows you through Grímhammer, from one shutter to the next.",
+  "verdict": "FALSE",
+  "kind": "g",
+  "severity": "LOW",
+  "fact": "page line 754: '12 institutions critically impaired by siege: ... Weavers/Textile workers ...'",
+  "neighbour": true
+ },
+ {
+  "line": "L45",
+  "town": "rr3-city-under_siege+famine-rand-3",
+  "tab": "Summary/Overview",
+  "sentence": "Palaioousa's gates are shut and barred. The guards on them are professional about it, which makes it worse: nobody comes near without being challenged, and nothing is let through. Professional means they expect this to last.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "'Defence: City walls and gates, Professional city watch, Garrison, Mercenary quarter'"
+ },
+ {
+  "line": "L46",
+  "town": "r2s-under_siege-town-3",
+  "tab": "Summary/Overview",
+  "sentence": "From outside, Rathwell still seems itself: smoke from cookfires, the noise of a market. It is the gate that gives it away: shut fast, the guards' faces set, their talk stopping dead when strangers come in sight.",
+  "verdict": "FALSE",
+  "kind": "g",
+  "severity": "MED",
+  "fact": "same page line 824: '9 institutions critically impaired by siege: Weekly market, Market square, ...'; siege viability 'Field work and trade have stopped' - 'the noise of a market' presumes trade (c)"
+ },
+ {
+  "line": "L46",
+  "town": "r2s-under_siege-town-3",
+  "tab": "Summary/Overview",
+  "sentence": "Racks of new ironwork stand outside the workshops, waiting for the carts.",
+  "verdict": "FALSE",
+  "kind": "c",
+  "severity": "LOW",
+  "fact": "siege: 'nothing comes in by road', 'Field work and trade have stopped' - ironwork waiting for carts presumes outbound trade",
+  "neighbour": true
+ },
+ {
+  "line": "L46",
+  "town": "rr3-town-under_siege+famine-rand-1",
+  "tab": "Summary/Overview",
+  "sentence": "From outside, Shivabari still seems itself: smoke from cookfires, the noise of a market. It is the gate that gives it away: shut fast, the guards' faces set, their talk stopping dead when strangers come in sight.",
+  "verdict": "FALSE",
+  "kind": "g",
+  "severity": "MED",
+  "fact": "same page line 736: '6 institutions critically impaired by siege: Weekly market, Market square, ...'; siege+famine, 'Field work and trade have stopped'"
+ },
+ {
+  "line": "L46",
+  "town": "rr3-town-under_siege+famine-rand-1",
+  "tab": "Summary/Overview",
+  "sentence": "Each lane of stalls has someone who speaks for it, and they are all speaking at once.",
+  "verdict": "FALSE",
+  "kind": "g",
+  "severity": "MED",
+  "fact": "page line 736: 'critically impaired by siege: Weekly market, Market square'; town pop 667 under siege+famine",
+  "neighbour": true
+ },
+ {
+  "line": "L46",
+  "town": "rr3x-metropolis-under_siege+famine-isolated-0",
+  "tab": "Summary/Overview",
+  "sentence": "From outside, Unterhain still seems itself: smoke from cookfires, the noise of a market. It is the gate that gives it away: shut fast, the guards' faces set, their talk stopping dead when strangers come in sight.",
+  "verdict": "FALSE",
+  "kind": "g",
+  "severity": "MED",
+  "fact": "same page line 43: 'Settlement is under active siege... Current effective trade is likely zero or severely restricted.'; 'District markets (5-10) REQ Economy Impaired'"
+ },
+ {
+  "line": "L46",
+  "town": "rr3-town-under_siege-rand-3",
+  "tab": "Summary/Overview",
+  "sentence": "From outside, Radhapat still seems itself: smoke from cookfires, the noise of a market. It is the gate that gives it away: shut fast, the guards' faces set, their talk stopping dead when strangers come in sight.",
+  "verdict": "FALSE",
+  "kind": "g",
+  "severity": "MED",
+  "fact": "same page line 848: '9 institutions critically impaired by siege: Weekly market, Market square, ...'"
+ },
+ {
+  "line": "L46",
+  "town": "rr3-town-under_siege-rand-3",
+  "tab": "Summary/Overview",
+  "sentence": "The hammering echoes through all of Radhapat, and the place plainly lives by its forges.",
+  "verdict": "FALSE",
+  "kind": "g",
+  "severity": "MED",
+  "fact": "page line 848: 'critically impaired by siege: ... Blacksmiths, Carpenters ...'",
+  "neighbour": true
+ },
+ {
+  "line": "L46",
+  "town": "rr3-city-under_siege-rand-1",
+  "tab": "Summary/Overview",
+  "sentence": "From outside, Al-nagar still seems itself: smoke from cookfires, the noise of a market. It is the gate that gives it away: shut fast, the guards' faces set, their talk stopping dead when strangers come in sight.",
+  "verdict": "FALSE",
+  "kind": "g",
+  "severity": "MED",
+  "fact": "same page line 1413: '12 institutions critically impaired by siege: Daily markets, Multiple market squares, ...'"
+ }
+]

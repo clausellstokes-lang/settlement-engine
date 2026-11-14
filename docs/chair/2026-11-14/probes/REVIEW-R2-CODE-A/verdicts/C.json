@@ -1,0 +1,752 @@
+[
+ {
+  "line": "L21a",
+  "town": "rr3-thorp-plague_onset-rand-5",
+  "tab": "Systems/Outlook",
+  "sentence": "The sickness is spreading among those who crew the boats, and the ones still at sea face a thin catch and a hard winter.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "water maritime/coast; Fishing community; food source fish; crisis plague_onset"
+ },
+ {
+  "line": "L21a",
+  "town": "rr3-metropolis-plague_onset-rand-1",
+  "tab": "Summary/Overview + Systems/Outlook + World/History",
+  "sentence": "The sickness is spreading among those who crew the boats, and the ones still at sea face a thin catch and a hard winter.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "maritime coast; Shipyard, Docks, Fish market; source fish; plague_onset; imports note \"local sea fisheries exhausted\" supports thin catch"
+ },
+ {
+  "line": "L21a",
+  "town": "r2r-town-37",
+  "tab": "Summary/Overview + Systems/Outlook + World/History",
+  "sentence": "The sickness is spreading among those who crew the boats, and the ones still at sea face a thin catch and a hard winter.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "maritime coast; Shipyard, Docks; source fish; page Economics \"lives off its fishing\""
+ },
+ {
+  "line": "L21a",
+  "town": "rr3-thorp-plague_onset-port-1",
+  "tab": "Summary/Overview + Systems/Outlook + World/History",
+  "sentence": "The sickness is spreading among those who crew the boats, and the ones still at sea face a thin catch and a hard winter.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "maritime coast; Fishing community, boat-headman on page; source fish"
+ },
+ {
+  "line": "L21a",
+  "town": "rr3-village-plague_onset-port-0",
+  "tab": "Systems/Outlook",
+  "sentence": "The sickness is spreading among those who crew the boats, and the ones still at sea face a thin catch and a hard winter.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "maritime coast; Fisher's landing, boat-headman; source fish"
+ },
+ {
+  "line": "L21b",
+  "town": "r2r-thorp-41",
+  "tab": "Summary/Overview + Systems/Outlook + World/History",
+  "sentence": "The sickness is spreading among those who fish, and the ones still working face a thin catch and a hard winter.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "river water, navigable; Fishing community; source fish"
+ },
+ {
+  "line": "L21b",
+  "town": "rr3-metropolis-plague_onset-rand-0",
+  "tab": "Summary/Overview + Systems/Outlook + World/History",
+  "sentence": "The sickness is spreading among those who fish, and the ones still working face a thin catch and a hard winter.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "river; river_fish resource; Fish market, River boatyard; source fish"
+ },
+ {
+  "line": "L21b",
+  "town": "rr3-thorp-plague_onset-rand-2",
+  "tab": "Summary/Overview + Systems/Outlook + World/History",
+  "sentence": "The sickness is spreading among those who fish, and the ones still working face a thin catch and a hard winter.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "river; Fishing community; source fish"
+ },
+ {
+  "line": "L21b",
+  "town": "rr3-village-plague_onset-rand-0",
+  "tab": "Summary/Overview + Systems/Outlook + World/History",
+  "sentence": "The sickness is spreading among those who fish, and the ones still working face a thin catch and a hard winter.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "river; Fisher's landing; sources fish, mill"
+ },
+ {
+  "line": "L21b",
+  "town": "rr3-town-plague_onset-rand-5",
+  "tab": "Summary/Overview + Systems/Outlook + World/History",
+  "sentence": "The sickness is spreading among those who fish, and the ones still working face a thin catch and a hard winter.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "river; Fish market, River boatyard; sources fish, mill"
+ },
+ {
+  "line": "L22a",
+  "town": "rr3-city-under_siege+famine-rand-1",
+  "tab": "Summary/Plot Hooks",
+  "sentence": "The fishing failed here this year, and what food can still be bought from outside costs more every week. The settlement must decide what it can still afford to import, and the merchants are watching it decide.",
+  "verdict": "UNSURE",
+  "kind": "c",
+  "severity": "LOW",
+  "fact": "under_siege+famine; Crisis tab \"nothing comes in by road\"; Economics \"Current effective trade is likely zero\"; record foodSecurity.chains \"Trade & imports\": false; but port, exports tagged \"(naval route only)\" and Food Security \"+2,700 imported\", so food by sea is arguable. Failed source fish matches \"fishing failed\"; market true, merchants stand."
+ },
+ {
+  "line": "L22a",
+  "town": "r2r-hamlet-16",
+  "tab": "Summary/Plot Hooks",
+  "sentence": "The fishing failed here this year, and what food can still be bought from outside costs more every week. The settlement must decide what it can still afford to import, and whoever brings the food in is watching it decide.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "famine, failed fish; no market so \"whoever brings the food in\"; page \"+14 imported\", carts bring about half the rest; imports Grain"
+ },
+ {
+  "line": "L22a",
+  "town": "rr3x-thorp-famine-road-0",
+  "tab": "Summary/Plot Hooks",
+  "sentence": "The crops failed here this year, and what food can still be bought from outside costs more every week. The settlement must decide what it can still afford to import, and whoever brings the food in is watching it decide.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "famine; record failed null but page Crisis \"lost its harvest for a second season\" and Overview \"The crops failed\"; page \"+2 imported\"; no market twin"
+ },
+ {
+  "line": "L22a",
+  "town": "rr3-metropolis-famine-rand-5",
+  "tab": "Summary/Plot Hooks",
+  "sentence": "The crops failed here this year, and what food can still be bought from outside costs more every week. The settlement must decide what it can still afford to import, and the merchants are watching it decide.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "famine; page \"+94,648 imported\", carts bring about half the rest; market true, Merchant guilds (50-100+); crops failed per Crisis tab"
+ },
+ {
+  "line": "L22a",
+  "town": "r2s-famine-metropolis-2",
+  "tab": "Summary/Plot Hooks",
+  "sentence": "The herds failed here this year, and what food can still be bought from outside costs more every week. The settlement must decide what it can still afford to import, and the merchants are watching it decide.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "famine, failed livestock = \"herds failed\"; importCoverage 28631; market true"
+ },
+ {
+  "line": "L22b",
+  "town": "r2s-under_siege-town-2",
+  "tab": "Summary/Plot Hooks",
+  "sentence": "A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still afford to import, and the merchants are watching it decide.",
+  "verdict": "FALSE",
+  "kind": "c",
+  "severity": "HIGH",
+  "fact": "crisis under_siege, route isolated, mountain, no water; Crisis tab \"Enemies are camped around Yekehiid, and nothing comes in by road\"; Economics \"Current effective trade is likely zero or severely restricted\"; record foodSecurity.chains \"Trade & imports\": false. The hook presumes normal grain buying on the market under a siege that cuts every road."
+ },
+ {
+  "line": "L22b",
+  "town": "r2s-occupied-village-1",
+  "tab": "Summary/Plot Hooks",
+  "sentence": "A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still afford to import, and whoever brings the food in is watching it decide.",
+  "verdict": "UNSURE",
+  "kind": "c",
+  "severity": "LOW",
+  "fact": "occupied, at war, isolated; page Imports \"Incense and votive candles, Livestock, Metals, Salt\" (no grain); food \"+14 imported\". A grain price spike elsewhere touches a town that imports no grain only loosely."
+ },
+ {
+  "line": "L22b",
+  "town": "rr3x-thorp-slave_revolt-mountain_pass-2",
+  "tab": "Summary/Plot Hooks",
+  "sentence": "A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still afford to import, and whoever brings the food in is watching it decide.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "not famine; record importCoverage 0 but page Food Security \"+ 1 imported ... carts bring in a little of the rest\"; no market so \"whoever brings the food in\""
+ },
+ {
+  "line": "L22b",
+  "town": "rr3x-metropolis-plague_onset-mountain_pass-0",
+  "tab": "Summary/Plot Hooks",
+  "sentence": "A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still afford to import, and the merchants are watching it decide.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "plague, not famine; imports Bulk grain; page \"+153,240 imported\"; market true"
+ },
+ {
+  "line": "L22b",
+  "town": "r2r-village-50",
+  "tab": "Summary/Plot Hooks",
+  "sentence": "A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still afford to import, and whoever brings the food in is watching it decide.",
+  "verdict": "UNSURE",
+  "kind": "c",
+  "severity": "LOW",
+  "fact": "not famine; page Imports \"Charcoal and fuel, Medicinal herbs, Quality textiles, Raw cloth, Salt, Sandalwood and camphor\" (no grain) though Food Security \"+155 imported\"; the grain price hook fits only if that food is grain"
+ },
+ {
+  "line": "L23",
+  "town": "r2r-thorp-45",
+  "tab": "Summary/Plot Hooks",
+  "sentence": "No food comes in by trade now, and what is left here is in a few hands; those who hold it have quadrupled the price, and the locals are arguing over whether to pay, wait it out, or take it.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "under_siege; page \"No food comes into Weißgasse by trade\"; importCoverage 0; pop 20 (a few households)"
+ },
+ {
+  "line": "L23",
+  "town": "r2r-hamlet-16",
+  "tab": "Summary/Plot Hooks",
+  "sentence": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "imports Grain (page Imports \"Grain\"); \"+14 imported\"; deficit 10"
+ },
+ {
+  "line": "L23",
+  "town": "r2s-occupied-city-0",
+  "tab": "Summary/Plot Hooks",
+  "sentence": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "imports \"Bulk grain (local grain fields depleted)\"; \"+4,480 imported\"; short 620"
+ },
+ {
+  "line": "L23",
+  "town": "rr3-thorp-under_siege-rand-4",
+  "tab": "Summary/Plot Hooks",
+  "sentence": "No food comes in by trade now, and what is left here is in a few hands; those who hold it have quadrupled the price, and the locals are arguing over whether to pay, wait it out, or take it.",
+  "verdict": "FALSE",
+  "kind": "d",
+  "severity": "LOW",
+  "fact": "thorp of 5 people (Dwellings 1-8, Household Council 100): \"what is left here is in a few hands; those who hold it have quadrupled the price, and the locals are arguing\" presumes holders and buyers among a population of five. No food in by trade is true (page \"No food comes into Prabhaagam by trade\")."
+ },
+ {
+  "line": "L23",
+  "town": "rr3x-metropolis-plague_onset-crossroads-0",
+  "tab": "Summary/Plot Hooks",
+  "sentence": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+  "verdict": "FALSE",
+  "kind": "d",
+  "severity": "LOW",
+  "fact": "metropolis of 340,784; page \"+338,228 imported\" lbs/day, Merchant guilds (50-100+), International trade center: \"One importer now brings in all the grain\" for half the food of a city this size is a stretch. Grain is imported (Bulk grain)."
+ },
+ {
+  "line": "L24",
+  "town": "r2s-under_siege-city-0",
+  "tab": "Summary/Plot Hooks",
+  "sentence": "The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other for what is left in the yards.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "imports \"Shipbuilding timber (local shipbuilding stands cleared)\"; Shipyard; under siege, so the rafts twin"
+ },
+ {
+  "line": "L24",
+  "town": "r2r-city-44",
+  "tab": "Summary/Plot Hooks",
+  "sentence": "The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other for what is left in the yards.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "page Imports \"Timber (for large vessels)\"; River boatyard, Sawmill (commercial)"
+ },
+ {
+  "line": "L24",
+  "town": "rr3-city-occupied-port-0",
+  "tab": "Summary/Plot Hooks",
+  "sentence": "The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other for what is left in the yards.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "imports Timber; Shipyard, Carpenters"
+ },
+ {
+  "line": "L24",
+  "town": "rr3x-village-politically_fractured-port-1",
+  "tab": "Summary/Plot Hooks",
+  "sentence": "The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other for what is left in the yards.",
+  "verdict": "FALSE",
+  "kind": "a",
+  "severity": "MED",
+  "fact": "village of 83; roster (10): Farmland; Common grazing land; Fisher's landing; Mill; Parish church; Graveyard; Priest; Dwellings; Multiple water sources; Sawmill. No Shipyard or boatyard, so no shipwrights and no yards for them to bid in (page Imports does list \"Timber (for large vessels)\", \"Mountain timber\")."
+ },
+ {
+  "line": "L24",
+  "town": "r2r-metropolis-13",
+  "tab": "Summary/Plot Hooks",
+  "sentence": "The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other for what is left in the yards.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "imports Shipbuilding timber; Shipyard, Carpenters"
+ },
+ {
+  "line": "L35",
+  "town": "r2r-village-21",
+  "tab": "Summary/Overview",
+  "sentence": "Rotbrücke is surrounded. Supply lines are cut, morale is fracturing, and Headman's Authority is deciding whether to negotiate terms or hold out for relief that may not be coming.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "under_siege; page \"No food comes into Rotbrücke by trade\"; governingName Headman's Authority (bare label, no article: awkward, not listed)"
+ },
+ {
+  "line": "L35",
+  "town": "rr3-thorp-under_siege+famine-rand-0",
+  "tab": "Summary/Overview",
+  "sentence": "Birdarya is surrounded. Supply lines are cut, morale is fracturing, and Elder Council is deciding whether to negotiate terms or hold out for relief that may not be coming.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "under_siege+famine; importCoverage 0; governingName Elder Council"
+ },
+ {
+  "line": "L35",
+  "town": "rr3-thorp-under_siege-rand-4",
+  "tab": "Summary/Overview",
+  "sentence": "Prabhaagam is surrounded. Supply lines are cut, morale is fracturing, and Household Council is deciding whether to negotiate terms or hold out for relief that may not be coming.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "under_siege; importCoverage 0; governingName Household Council"
+ },
+ {
+  "line": "L35",
+  "town": "r2s-under_siege-metropolis-3",
+  "tab": "Summary/Overview",
+  "sentence": "Andronrion is surrounded. Supply lines are cut, morale is fracturing, and Grand Merchant Senate is deciding whether to negotiate terms or hold out for relief that may not be coming.",
+  "verdict": "FALSE",
+  "kind": "g",
+  "severity": "LOW",
+  "fact": "\"Supply lines are cut\" agrees with the Crisis tab and record chains \"Trade & imports\": false, but the same page Food Security says \"+22,719 imported ... boats bring in a little of the rest\" (record importCoverage 22760). The two places disagree; the food line is more likely the wrong one. governingName Grand Merchant Senate matches."
+ },
+ {
+  "line": "L35",
+  "town": "rr3-hamlet-under_siege+famine-rand-4",
+  "tab": "Summary/Overview",
+  "sentence": "Khāndarya is surrounded. Supply lines are cut, morale is fracturing, and Feudal Stewardship is deciding whether to negotiate terms or hold out for relief that may not be coming.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "under_siege+famine; importCoverage 0; governingName Feudal Stewardship, Lord's steward"
+ },
+ {
+  "line": "L36",
+  "town": "r2r-thorp-54",
+  "tab": "Summary/Overview",
+  "sentence": "What people eat in Forteripa is being stretched with things that are not food; everyone can taste it, and the fact that nobody complains is the most alarming part.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "famine; page \"No food comes into Forteripa by trade ... hunger is already here\"; no bakers, generic twin"
+ },
+ {
+  "line": "L36",
+  "town": "rr3x-thorp-famine-road-0",
+  "tab": "Summary/Overview",
+  "sentence": "What people eat in Ventoforum is being stretched with things that are not food; everyone can taste it, and the fact that nobody complains is the most alarming part.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "famine; short 4 of 10 lbs/day; no bakers, generic twin"
+ },
+ {
+  "line": "L36",
+  "town": "rr3-metropolis-famine-rand-5",
+  "tab": "Summary/Overview",
+  "sentence": "The bakers of Nishiyuan have started cutting the bread with things that are not flour; everyone can taste it, and the fact that nobody complains is the most alarming part.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "famine; Bakers (5-15) on roster"
+ },
+ {
+  "line": "L36",
+  "town": "r2s-recently_betrayed-hamlet-2",
+  "tab": "Summary/Overview",
+  "sentence": "What people eat in Nikephrion is being stretched with things that are not food; everyone can taste it, and the fact that nobody complains is the most alarming part.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "recently_betrayed+famine; no food by trade, short 69 of 172; no bakers, generic twin"
+ },
+ {
+  "line": "L36",
+  "town": "rr3-village-famine-port-1",
+  "tab": "Summary/Overview",
+  "sentence": "What people eat in Radhatala is being stretched with things that are not food; everyone can taste it, and the fact that nobody complains is the most alarming part.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "famine, failed fish; short 64; no bakers, generic twin"
+ },
+ {
+  "line": "L37",
+  "town": "rr3x-hamlet-succession_void-crossroads-1",
+  "tab": "Summary/Overview",
+  "sentence": "The succession in Tarkhanobo will be settled by the trade more than by any claim of blood or law: whoever the merchants and the creditors decide to deal with becomes, retroactively, the legitimate successor.",
+  "verdict": "FALSE",
+  "kind": "c",
+  "severity": "LOW",
+  "fact": "hamlet of 42; Free Elder Council 100 is the only power; only a Periodic market, no merchant guild, bank or lender on the roster: \"whoever the merchants and the creditors decide to deal with\" gives the succession to a class the record does not have"
+ },
+ {
+  "line": "L37",
+  "town": "r2s-succession_void-metropolis-3",
+  "tab": "Summary/Overview",
+  "sentence": "The succession in Erdenbalik will be settled by the trade more than by any claim of blood or law: whoever the merchants and the creditors decide to deal with becomes, retroactively, the legitimate successor.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "Merchant Guilds 17, Grand Merchant Senate governs; markets, Banking district"
+ },
+ {
+  "line": "L37",
+  "town": "r2r-village-57",
+  "tab": "Summary/Overview",
+  "sentence": "The succession in Tlalche will be settled by the salt more than by any claim of blood or law: whoever the merchants and the creditors decide to deal with becomes, retroactively, the legitimate successor.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "Merchant Guilds 48 (top power); Weekly market; exports Mineral salts first, so \"the salt\""
+ },
+ {
+  "line": "L37",
+  "town": "r2s-succession_void-town-3",
+  "tab": "Summary/Overview",
+  "sentence": "The succession in Skaldtun will be settled by the trade more than by any claim of blood or law: whoever the merchants and the creditors decide to deal with becomes, retroactively, the legitimate successor.",
+  "verdict": "FALSE",
+  "kind": "c",
+  "severity": "LOW",
+  "fact": "powers Military/Guard 38, Landed Gentry 36, Corrupt Council 26 (governing): no merchant or creditor power, no merchant guild or bank on the roster; only Weekly market. \"Settled by the trade ... whoever the merchants and the creditors decide\" is not this town's balance of power."
+ },
+ {
+  "line": "L37",
+  "town": "rr3-city-succession_void-rand-4",
+  "tab": "Summary/Overview",
+  "sentence": "The succession in Nandagrad will be settled by the wool more than by any claim of blood or law: whoever the merchants and the creditors decide to deal with becomes, retroactively, the legitimate successor.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "Merchant Guilds top, Merchant City Council governs; Banking houses; exports Raw wool first, livestock source"
+ },
+ {
+  "line": "L38",
+  "town": "rr3-town-insurgency-rand-2",
+  "tab": "Summary/Overview",
+  "sentence": "The streets of Morkvik have gone quiet, and everyone is waiting for something to break. Feudal Appointee gives orders that are heard and not obeyed, and each one weakens it further.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "town 988, streets fit; governingName Feudal Appointee"
+ },
+ {
+  "line": "L38",
+  "town": "rr3-metropolis-insurgency-rand-2",
+  "tab": "Summary/Overview",
+  "sentence": "The streets of Terrapolis have gone quiet, and everyone is waiting for something to break. Royal Authority gives orders that are heard and not obeyed, and each one weakens it further.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "governingName Royal Authority, Royal seat"
+ },
+ {
+  "line": "L38",
+  "town": "r2s-insurgency-city-3",
+  "tab": "Summary/Overview",
+  "sentence": "The streets of Achilambelos have gone quiet, and everyone is waiting for something to break. Noble Governorship gives orders that are heard and not obeyed, and each one weakens it further.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "governingName Noble Governorship, Noble governor"
+ },
+ {
+  "line": "L38",
+  "town": "rr3-town-insurgency-rand-1",
+  "tab": "Summary/Overview",
+  "sentence": "The streets of Ulancaravansarai have gone quiet, and everyone is waiting for something to break. Church Council gives orders that are heard and not obeyed, and each one weakens it further.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "town 1564; governingName Church Council"
+ },
+ {
+  "line": "L38",
+  "town": "rr3-town-insurgency-port-0",
+  "tab": "Summary/Overview",
+  "sentence": "The streets of Strathton have gone quiet, and everyone is waiting for something to break. Feudal Appointee gives orders that are heard and not obeyed, and each one weakens it further.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "town 1996; governingName Feudal Appointee, Lord's appointee"
+ },
+ {
+  "line": "L39",
+  "town": "rr3x-thorp-wartime-river-2",
+  "tab": "Summary/Overview",
+  "sentence": "Every capable pair of hands Ravenli could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (a trade left without its master, a field unsown for want of a back) while Household Council reports the settlement loyal and does not report the rest.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "wartime; no workshop, so trade twin; Subsistence farming for the field; governingName Household Council"
+ },
+ {
+  "line": "L39",
+  "town": "rr3x-metropolis-wartime-isolated-0",
+  "tab": "Summary/Overview",
+  "sentence": "Every capable pair of hands Neuholz could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (a workshop closed for want of a master, a field unsown for want of a back) while City-State Council reports the settlement loyal and does not report the rest.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "workshops (Blacksmiths, Carpenters...); governingName City-State Council"
+ },
+ {
+  "line": "L39",
+  "town": "r2r-thorp-11",
+  "tab": "Summary/Overview",
+  "sentence": "Every capable pair of hands Muulcoba could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (a trade left without its master, a field unsown for want of a back) while Household Council reports the settlement loyal and does not report the rest.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "no workshop, trade twin; governingName Household Council"
+ },
+ {
+  "line": "L39",
+  "town": "r2s-wartime-city-3",
+  "tab": "Summary/Overview",
+  "sentence": "Every capable pair of hands Tikalche could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (a workshop closed for want of a master, a field unsown for want of a back) while Merchant Guild Council reports the settlement loyal and does not report the rest.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "workshops; governingName Merchant Guild Council"
+ },
+ {
+  "line": "L39",
+  "town": "rr3-village-wartime-port-0",
+  "tab": "Summary/Overview",
+  "sentence": "Every capable pair of hands Petencoatl could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (a workshop closed for want of a master, a field unsown for want of a back) while Headman's Authority reports the settlement loyal and does not report the rest.",
+  "verdict": "UNSURE",
+  "kind": "a",
+  "severity": "LOW",
+  "fact": "village 216; the only house of craft is the Mill (page \"MillREQCrafts\"; page also \"Not available for a village: Goods & Crafts\"): \"a workshop closed for want of a master\" stands only if the mill counts as a workshop. governingName Headman's Authority matches."
+ },
+ {
+  "line": "L40",
+  "town": "rr3-thorp-religious_conversion-rand-2",
+  "tab": "Summary/Overview",
+  "sentence": "Tumenkhurel's religious community has formally split. Both sides hold services, keep records, and claim the legitimate succession. Every legal document that required religious sanction is now in a grey zone that Elder Council is not equipped to resolve quickly.",
+  "verdict": "UNSURE",
+  "kind": "a",
+  "severity": "LOW",
+  "fact": "thorp of 16, isolated; faith houses only Wayside shrine and Access to parish church (no church of its own, no record-keeping house): \"Both sides hold services, keep records ... Every legal document that required religious sanction\" presumes institutions the thorp lacks. governingName Elder Council matches."
+ },
+ {
+  "line": "L40",
+  "town": "rr3x-metropolis-religious_conversion-road-1",
+  "tab": "Summary/Overview",
+  "sentence": "Tikalkin's religious community has formally split. Both sides hold services, keep records, and claim the legitimate succession. Every legal document that required religious sanction is now in a grey zone that the courts are not equipped to resolve quickly.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "Multiple court buildings on roster, so \"the courts\""
+ },
+ {
+  "line": "L40",
+  "town": "r2s-religious_conversion-town-2",
+  "tab": "Summary/Overview",
+  "sentence": "Warmthal's religious community has formally split. Both sides hold services, keep records, and claim the legitimate succession. Every legal document that required religious sanction is now in a grey zone that Town Council is not equipped to resolve quickly.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "no court house; governingName Town Council"
+ },
+ {
+  "line": "L40",
+  "town": "rr3-town-religious_conversion-rand-4",
+  "tab": "Summary/Overview",
+  "sentence": "Khirbetqila's religious community has formally split. Both sides hold services, keep records, and claim the legitimate succession. Every legal document that required religious sanction is now in a grey zone that Merchant Council is not equipped to resolve quickly.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "no court house; governingName Merchant Council"
+ },
+ {
+  "line": "L40",
+  "town": "rr3x-village-religious_conversion-isolated-0",
+  "tab": "Summary/Overview",
+  "sentence": "Saltoium's religious community has formally split. Both sides hold services, keep records, and claim the legitimate succession. Every legal document that required religious sanction is now in a grey zone that Elected Reeve is not equipped to resolve quickly.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "no court; governingName Elected Reeve"
+ },
+ {
+  "line": "L41",
+  "town": "rr3x-town-slave_revolt-crossroads-1",
+  "tab": "Summary/Overview",
+  "sentence": "The revolt in Unterhausen is too big to put down by force alone: the enslaved hold whole districts and are organised, and the governing power has not committed what crushing them would take. The slave trade has stopped. What is left to settle is what Unterhausen becomes afterwards, and who decides.",
+  "verdict": "FALSE",
+  "kind": "d",
+  "severity": "LOW",
+  "fact": "town of 655 (Housing 75-650 households): \"the enslaved hold whole districts\" is a size the town does not have; the page repeats \"contested districts\" elsewhere, so the page agrees with itself"
+ },
+ {
+  "line": "L41",
+  "town": "rr3x-metropolis-slave_revolt-river-1",
+  "tab": "Summary/Overview",
+  "sentence": "The revolt in Palaioanthi is too big to put down by force alone: the enslaved hold whole districts and are organised, and the governing power has not committed what crushing them would take. The slave trade has stopped. What is left to settle is what Palaioanthi becomes afterwards, and who decides.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "metropolis 160,951"
+ },
+ {
+  "line": "L41",
+  "town": "r2s-slave_revolt-city-2",
+  "tab": "Summary/Overview",
+  "sentence": "The revolt in Somanagar is too big to put down by force alone: the enslaved hold whole districts and are organised, and the governing power has not committed what crushing them would take. The slave trade has stopped. What is left to settle is what Somanagar becomes afterwards, and who decides.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "city 5,009"
+ },
+ {
+  "line": "L41",
+  "town": "rr3-town-slave_revolt-port-0",
+  "tab": "Summary/Overview",
+  "sentence": "The revolt in Qaryahdarya is too big to put down by force alone: the enslaved hold whole districts and are organised, and the governing power has not committed what crushing them would take. The slave trade has stopped. What is left to settle is what Qaryahdarya becomes afterwards, and who decides.",
+  "verdict": "UNSURE",
+  "kind": "d",
+  "severity": "LOW",
+  "fact": "town of 1,264 (Housing 75-650 households): \"whole districts\" is borderline for this size"
+ },
+ {
+  "line": "L41",
+  "town": "rr3-metropolis-slave_revolt-port-0",
+  "tab": "Summary/Overview",
+  "sentence": "The revolt in Edznaitza is too big to put down by force alone: the enslaved hold whole districts and are organised, and the governing power has not committed what crushing them would take. The slave trade has stopped. What is left to settle is what Edznaitza becomes afterwards, and who decides.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "metropolis 50,615"
+ },
+ {
+  "line": "L42",
+  "town": "rr3x-metropolis-under_siege+famine-river-0",
+  "tab": "Summary/Overview + World/History",
+  "sentence": "\"A settlement whose identity was built on commerce. The Iron Dispute didn't create the merchant class here, but it defined what the merchant class could become\"",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "market true; Merchant guilds (50-100+), International trade center; The Iron Dispute (major, 136y) in history"
+ },
+ {
+  "line": "L42",
+  "town": "r2s-famine-town-0",
+  "tab": "Summary/Overview + World/History",
+  "sentence": "\"A settlement whose identity was built on commerce. The Iron Dispute didn't create the merchant class here, but it defined what the merchant class could become\"",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "market; Guild Council governs, Merchant Guilds 29; The Iron Dispute (major, 118y)"
+ },
+ {
+  "line": "L42",
+  "town": "rr3x-town-mass_migration-crossroads-2",
+  "tab": "Summary/Overview + World/History",
+  "sentence": "\"A settlement whose identity was built on commerce. The Economic Divide didn't create the merchant class here, but it defined what the merchant class could become\"",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "market, Merchant guilds (3-8), Merchant Guilds 10; The Economic Divide (minor, 122y); identity-on-commerce is soft for a Military Council town but not contradicted"
+ },
+ {
+  "line": "L42",
+  "town": "r2r-city-45",
+  "tab": "Summary/Overview + World/History",
+  "sentence": "\"A settlement whose identity was built on commerce. The Crash didn't create the merchant class here, but it defined what the merchant class could become\"",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "founded by a merchant coalition; The Crash (major, 174y)"
+ },
+ {
+  "line": "L42",
+  "town": "r2r-city-59",
+  "tab": "Summary/Overview + World/History",
+  "sentence": "\"A settlement whose identity was built on commerce. The Economic Divide didn't create the merchant class here, but it defined what the merchant class could become\"",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "founded by a merchant coalition; The Economic Divide (major, 61y)"
+ },
+ {
+  "line": "L47",
+  "town": "r2r-thorp-17",
+  "tab": "Summary/Overview",
+  "sentence": "Since the hunt failed, food is power in Chichich, and every household is watching what the others eat.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "famine, failed game = \"the hunt failed\"; importCoverage 0, deficit 14"
+ },
+ {
+  "line": "L47",
+  "town": "r2s-succession_void-thorp-0",
+  "tab": "Summary/Overview",
+  "sentence": "Since the harvest failed, food is power in Qingmen, and every household is watching what the others eat.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "famine; record failed null but page Crisis \"lost its harvest\" and \"The crops failed\"; short 6 of 16, no food by trade"
+ },
+ {
+  "line": "L47",
+  "town": "rr3x-village-famine-river-2",
+  "tab": "Summary/Overview",
+  "sentence": "Since the harvest failed, food is power in Jalalbalik, and every household is watching what the others eat.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "famine, failed grain; short 103"
+ },
+ {
+  "line": "L47",
+  "town": "rr3-thorp-famine-port-0",
+  "tab": "Summary/Overview",
+  "sentence": "Since the harvest failed, food is power in Brahmakund, and every household is watching what the others eat.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "famine; page short 4 of 22 lbs/day, Crisis \"lost its harvest\""
+ },
+ {
+  "line": "L47",
+  "town": "rr3-hamlet-famine-port-1",
+  "tab": "Summary/Overview",
+  "sentence": "Since the harvest failed, food is power in Khirbetpatan, and every household is watching what the others eat.",
+  "verdict": "TRUE",
+  "kind": "",
+  "severity": "",
+  "fact": "famine; page short 9 of 78, \"Some households still go short\"; Crisis \"lost its harvest\""
+ }
+]

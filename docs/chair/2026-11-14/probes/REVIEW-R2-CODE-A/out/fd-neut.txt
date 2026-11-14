@@ -1,0 +1,13 @@
+births base 3048 tip 3048 missing 0; leaf diffs 7575; towns moved 874
+family history: 436 towns
+family npcs: 274 towns
+family settlementReason: 230 towns
+family generationCoherenceReceipt: 3 towns
+  436	.history.founding.reason	 e.g. r2r-thorp-0 r2r-thorp-8 r2r-thorp-16
+  274	.npcs[].plotHooks[]	 e.g. r2r-village-5 r2r-village-18 r2r-village-39
+  230	.settlementReason[]	 e.g. r2r-thorp-5 r2r-thorp-13 r2r-thorp-14
+  3	.generationCoherenceReceipt.judgments[].findings[]	 e.g. r2r-thorp-39 r2s-recently_betrayed-village-1 rr3-thorp-monster_pressure-rand-4
+  2	.generationCoherenceReceipt.judgments[].findings[].evidence	 e.g. r2r-thorp-39 r2s-recently_betrayed-village-1
+  1	.generationCoherenceReceipt.judgments[].findings[].detail	 e.g. r2s-recently_betrayed-village-1
+  1	.generationCoherenceReceipt.judgments[].status	 e.g. rr3-thorp-monster_pressure-rand-4
+NEW/GONE KEY rows 0 []

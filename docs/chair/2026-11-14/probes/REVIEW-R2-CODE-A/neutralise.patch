@@ -1,0 +1,39 @@
+diff --git a/src/generators/narrative/foundingRowAdmits.js b/src/generators/narrative/foundingRowAdmits.js
+index a58aef802..a5cbbca0f 100644
+--- a/src/generators/narrative/foundingRowAdmits.js
++++ b/src/generators/narrative/foundingRowAdmits.js
+@@ -164,7 +164,7 @@ export const foundingStateOf = (config, economicContext, worldLaw) => {
+  * @param {ReadonlySet<string> | null} [passOver] rows a resolution never lands on (a row DRAWN as one stands)
+  * @returns {T | null}
+  */
+-export const admittedRow = (pool, drawn, admits, state, passOver = null) => {
++export const admittedRow = (pool, drawn, admits, state, passOver = null) => { if (process.env.NEUT) return drawn;
+   if (!state) return drawn;
+   const at = pool.indexOf(drawn);
+   if (at < 0) return drawn;
+diff --git a/src/generators/narrative/settlementOriginProse.js b/src/generators/narrative/settlementOriginProse.js
+index 3a7e305c6..297df458f 100644
+--- a/src/generators/narrative/settlementOriginProse.js
++++ b/src/generators/narrative/settlementOriginProse.js
+@@ -309,7 +309,7 @@ export const ORIGIN_ROW_ADMITS = Object.freeze({
+  * @param {{ siege?: boolean, tier?: string|null, hasTravellerHouse?: boolean }} state
+  * @returns {number}
+  */
+-const admittedIndex = (arm, pool, at, state) => {
++const admittedIndex = (arm, pool, at, state) => { if (process.env.NEUT) return at;
+   const admits = ORIGIN_ROW_ADMITS[arm];
+   if (!admits) return at;
+   for (let k = 0; k < pool.length; k++) {
+diff --git a/src/generators/npcGenerator.js b/src/generators/npcGenerator.js
+index dab11fcd5..43f150920 100644
+--- a/src/generators/npcGenerator.js
++++ b/src/generators/npcGenerator.js
+@@ -523,7 +523,7 @@ const generatePlotHook = (category = 'other', config = {}, hookRegistry, facts =
+     const biasedCategories = [...new Set(stresses.map(s => STRESS_TO_CATEGORY[s]).filter(Boolean))];
+     if (biasedCategories.length > 0) {
+       const biasedCat = pickFromArray(biasedCategories);
+-      if (NPC_FACTION_LOYALTY[biasedCat]) { const drawn = drawLoyalty(NPC_FACTION_LOYALTY[biasedCat], hookRegistry, facts), trueOfAny = biasedCat === 'military' ? MILITARY_HOOKS_TRUE_OF_ANY_HOLDER : biasedCat === 'religious' ? RELIGIOUS_HOOKS_TRUE_OF_ANY_HOLDER : null; return trueOfAny && category !== biasedCat && !trueOfAny.has(drawn) ? ownPoolHook(drawn, category, hookRegistry, facts, biasedCat) : drawn; } // R2-CODE-A-2: a soldier's line is the military's own; R2-CODE-A-3 (round three #518–#524, #1322–#1334): and a priest's the religious pool's; one line, so no cited line moves
++      if (NPC_FACTION_LOYALTY[biasedCat]) { const drawn = drawLoyalty(NPC_FACTION_LOYALTY[biasedCat], hookRegistry, facts), trueOfAny = biasedCat === 'military' ? MILITARY_HOOKS_TRUE_OF_ANY_HOLDER : (biasedCat === 'religious' && !process.env.NEUT) ? RELIGIOUS_HOOKS_TRUE_OF_ANY_HOLDER : null; return trueOfAny && category !== biasedCat && !trueOfAny.has(drawn) ? ownPoolHook(drawn, category, hookRegistry, facts, biasedCat) : drawn; } // R2-CODE-A-2: a soldier's line is the military's own; R2-CODE-A-3 (round three #518–#524, #1322–#1334): and a priest's the religious pool's; one line, so no cited line moves
+     }
+   }
+ 

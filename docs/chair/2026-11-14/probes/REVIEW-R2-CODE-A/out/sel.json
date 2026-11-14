@@ -1,0 +1,494 @@
+{
+ "L01": {
+  "n": 0,
+  "pick": []
+ },
+ "L02": {
+  "n": 7,
+  "pick": [
+   "r2r-town-43",
+   "r2r-metropolis-20",
+   "r2r-city-41",
+   "rr3-city-calm-rand-1",
+   "rr3-metropolis-calm-rand-4"
+  ]
+ },
+ "L03": {
+  "n": 16,
+  "pick": [
+   "r2r-hamlet-20",
+   "r2r-metropolis-43",
+   "r2r-town-10",
+   "r2r-town-55",
+   "r2r-city-23"
+  ]
+ },
+ "L04": {
+  "n": 22,
+  "pick": [
+   "r2s-famine-city-3",
+   "rr3x-town-famine-mountain_pass-1",
+   "rr3x-metropolis-famine-mountain_pass-2",
+   "rr3-town-famine-port-1",
+   "rr3-city-famine-rand-5"
+  ]
+ },
+ "L05": {
+  "n": 20,
+  "pick": [
+   "rr3x-village-indebted-mountain_pass-2",
+   "r2r-metropolis-7",
+   "r2r-village-47",
+   "r2s-indebted-city-2",
+   "rr3-town-indebted-rand-0"
+  ]
+ },
+ "L06": {
+  "n": 16,
+  "pick": [
+   "rr3-town-succession_void-rand-0",
+   "rr3x-metropolis-succession_void-river-2",
+   "r2s-succession_void-town-0",
+   "rr3-town-succession_void-port-0",
+   "rr3-city-succession_void-rand-1"
+  ]
+ },
+ "L07": {
+  "n": 21,
+  "pick": [
+   "r2s-religious_conversion-village-3",
+   "rr3-metropolis-religious_conversion-rand-3",
+   "r2s-religious_conversion-metropolis-2",
+   "rr3-town-religious_conversion-rand-2",
+   "rr3-metropolis-religious_conversion-rand-4"
+  ]
+ },
+ "L08": {
+  "n": 19,
+  "pick": [
+   "rr3x-village-religious_conversion-isolated-1",
+   "rr3x-metropolis-religious_conversion-river-1",
+   "r2s-religious_conversion-town-0",
+   "rr3-city-religious_conversion-rand-1",
+   "rr3-metropolis-religious_conversion-rand-0"
+  ]
+ },
+ "L09": {
+  "n": 39,
+  "pick": [
+   "rr3x-thorp-religious_conversion-road-2",
+   "rr3x-metropolis-religious_conversion-road-0",
+   "r2r-village-18",
+   "r2s-religious_conversion-town-1",
+   "rr3-thorp-religious_conversion-rand-5"
+  ]
+ },
+ "L10": {
+  "n": 16,
+  "pick": [
+   "rr3-village-slave_revolt-rand-1",
+   "r2s-slave_revolt-metropolis-2",
+   "r2s-slave_revolt-town-0",
+   "rr3-town-slave_revolt-rand-1",
+   "rr3-city-slave_revolt-rand-5"
+  ]
+ },
+ "L11": {
+  "n": 63,
+  "pick": [
+   "rr3-thorp-slave_revolt-rand-0",
+   "r2s-slave_revolt-metropolis-3",
+   "r2s-slave_revolt-thorp-2",
+   "r2s-slave_revolt-city-1",
+   "rr3-village-slave_revolt-rand-0"
+  ]
+ },
+ "L12a": {
+  "n": 78,
+  "pick": [
+   "rr3-thorp-mass_migration-port-0",
+   "r2s-mass_migration-metropolis-2",
+   "r2r-village-28",
+   "rr3-thorp-mass_migration-rand-0",
+   "rr3-village-mass_migration-port-0"
+  ]
+ },
+ "L12b": {
+  "n": 74,
+  "pick": [
+   "r2s-mass_migration-thorp-3",
+   "rr3x-metropolis-mass_migration-mountain_pass-0",
+   "r2r-town-8",
+   "r2s-mass_migration-town-1",
+   "rr3-village-mass_migration-rand-0"
+  ]
+ },
+ "L13": {
+  "n": 50,
+  "pick": [
+   "r2s-wartime-thorp-3",
+   "rr3x-metropolis-wartime-crossroads-2",
+   "r2r-thorp-16",
+   "r2s-wartime-city-2",
+   "rr3-town-wartime-rand-4"
+  ]
+ },
+ "L14": {
+  "n": 749,
+  "pick": [
+   "r2r-metropolis-14",
+   "r2s-famine-city-0",
+   "r2s-occupied-town-3",
+   "rr3x-hamlet-occupied-river-1",
+   "rr3x-metropolis-succession_void-river-2"
+  ]
+ },
+ "L15": {
+  "n": 491,
+  "pick": [
+   "r2s-under_siege-metropolis-2",
+   "r2r-city-44",
+   "r2s-occupied-town-0",
+   "rr3-village-politically_fractured-rand-0",
+   "rr3x-metropolis-succession_void-river-2"
+  ]
+ },
+ "L16": {
+  "n": 519,
+  "pick": [
+   "r2r-metropolis-14",
+   "r2s-famine-city-3",
+   "r2s-occupied-village-0",
+   "rr3x-metropolis-succession_void-river-2",
+   "r2r-village-34"
+  ]
+ },
+ "L17": {
+  "n": 481,
+  "pick": [
+   "r2s-under_siege-metropolis-0",
+   "rr3-town-famine-port-1",
+   "r2s-occupied-town-3",
+   "rr3x-village-politically_fractured-port-1",
+   "rr3x-metropolis-succession_void-river-2"
+  ]
+ },
+ "L18": {
+  "n": 636,
+  "pick": [
+   "r2r-metropolis-14",
+   "r2s-famine-village-1",
+   "r2s-occupied-metropolis-0",
+   "rr3-village-indebted-rand-0",
+   "rr3x-metropolis-succession_void-river-2"
+  ]
+ },
+ "L20": {
+  "n": 96,
+  "pick": [
+   "r2s-plague_onset-hamlet-1",
+   "rr3x-metropolis-plague_onset-crossroads-0",
+   "r2r-town-37",
+   "r2s-plague_onset-metropolis-2",
+   "rr3-city-plague_onset-rand-3"
+  ]
+ },
+ "L21a": {
+  "n": 30,
+  "pick": [
+   "rr3-thorp-plague_onset-rand-5",
+   "rr3-metropolis-plague_onset-rand-1",
+   "r2r-town-37",
+   "rr3-thorp-plague_onset-port-1",
+   "rr3-village-plague_onset-port-0"
+  ]
+ },
+ "L21b": {
+  "n": 13,
+  "pick": [
+   "r2r-thorp-41",
+   "rr3-metropolis-plague_onset-rand-0",
+   "rr3-thorp-plague_onset-rand-2",
+   "rr3-village-plague_onset-rand-0",
+   "rr3-town-plague_onset-rand-5"
+  ]
+ },
+ "L22a": {
+  "n": 119,
+  "pick": [
+   "rr3-city-under_siege+famine-rand-1",
+   "r2r-hamlet-16",
+   "rr3x-thorp-famine-road-0",
+   "rr3-metropolis-famine-rand-5",
+   "r2s-famine-metropolis-2"
+  ]
+ },
+ "L22b": {
+  "n": 107,
+  "pick": [
+   "r2s-under_siege-town-2",
+   "r2s-occupied-village-1",
+   "rr3x-thorp-slave_revolt-mountain_pass-2",
+   "rr3x-metropolis-plague_onset-mountain_pass-0",
+   "r2r-village-50"
+  ]
+ },
+ "L23": {
+  "n": 624,
+  "pick": [
+   "r2r-thorp-45",
+   "r2r-hamlet-16",
+   "r2s-occupied-city-0",
+   "rr3-thorp-under_siege-rand-4",
+   "rr3x-metropolis-plague_onset-crossroads-0"
+  ]
+ },
+ "L24": {
+  "n": 105,
+  "pick": [
+   "r2s-under_siege-city-0",
+   "r2r-city-44",
+   "rr3-city-occupied-port-0",
+   "rr3x-village-politically_fractured-port-1",
+   "r2r-metropolis-13"
+  ]
+ },
+ "L27": {
+  "n": 120,
+  "pick": [
+   "r2s-under_siege-hamlet-1",
+   "r2s-famine-hamlet-0",
+   "r2s-occupied-hamlet-0",
+   "rr3x-hamlet-famine-crossroads-2",
+   "r2r-hamlet-3"
+  ]
+ },
+ "L28": {
+  "n": 303,
+  "pick": [
+   "r2s-under_siege-thorp-1",
+   "r2r-hamlet-28",
+   "r2r-thorp-24",
+   "rr3-thorp-wartime-port-0",
+   "rr3x-village-calm-port-2"
+  ]
+ },
+ "L29": {
+  "n": 92,
+  "pick": [
+   "r2r-thorp-17",
+   "r2s-occupied-thorp-1",
+   "rr3x-thorp-succession_void-isolated-1",
+   "r2r-hamlet-24",
+   "r2s-succession_void-thorp-0"
+  ]
+ },
+ "L30": {
+  "n": 48,
+  "pick": [
+   "r2r-village-43",
+   "rr3-thorp-under_siege-rand-3",
+   "r2s-under_siege-thorp-2",
+   "rr3x-metropolis-under_siege+famine-isolated-1",
+   "rr3-thorp-under_siege+famine-rand-1"
+  ]
+ },
+ "L31": {
+  "n": 184,
+  "pick": [
+   "r2s-famine-village-3",
+   "r2s-occupied-village-0",
+   "rr3x-hamlet-politically_fractured-isolated-2",
+   "rr3x-metropolis-plague_onset-isolated-2",
+   "r2r-village-0"
+  ]
+ },
+ "L33": {
+  "n": 57,
+  "pick": [
+   "r2r-metropolis-14",
+   "rr3-metropolis-under_siege+famine-rand-0",
+   "rr3-metropolis-under_siege-port-0",
+   "rr3-metropolis-under_siege-rand-3",
+   "rr3-metropolis-under_siege+famine-rand-3"
+  ]
+ },
+ "L34": {
+  "n": 0,
+  "pick": []
+ },
+ "L35": {
+  "n": 70,
+  "pick": [
+   "r2r-village-21",
+   "rr3-thorp-under_siege+famine-rand-0",
+   "rr3-thorp-under_siege-rand-4",
+   "r2s-under_siege-metropolis-3",
+   "rr3-hamlet-under_siege+famine-rand-4"
+  ]
+ },
+ "L36": {
+  "n": 34,
+  "pick": [
+   "r2r-thorp-54",
+   "rr3x-thorp-famine-road-0",
+   "rr3-metropolis-famine-rand-5",
+   "r2s-recently_betrayed-hamlet-2",
+   "rr3-village-famine-port-1"
+  ]
+ },
+ "L37": {
+  "n": 19,
+  "pick": [
+   "rr3x-hamlet-succession_void-crossroads-1",
+   "r2s-succession_void-metropolis-3",
+   "r2r-village-57",
+   "r2s-succession_void-town-3",
+   "rr3-city-succession_void-rand-4"
+  ]
+ },
+ "L38": {
+  "n": 17,
+  "pick": [
+   "rr3-town-insurgency-rand-2",
+   "rr3-metropolis-insurgency-rand-2",
+   "r2s-insurgency-city-3",
+   "rr3-town-insurgency-rand-1",
+   "rr3-town-insurgency-port-0"
+  ]
+ },
+ "L39": {
+  "n": 53,
+  "pick": [
+   "rr3x-thorp-wartime-river-2",
+   "rr3x-metropolis-wartime-isolated-0",
+   "r2r-thorp-11",
+   "r2s-wartime-city-3",
+   "rr3-village-wartime-port-0"
+  ]
+ },
+ "L40": {
+  "n": 24,
+  "pick": [
+   "rr3-thorp-religious_conversion-rand-2",
+   "rr3x-metropolis-religious_conversion-road-1",
+   "r2s-religious_conversion-town-2",
+   "rr3-town-religious_conversion-rand-4",
+   "rr3x-village-religious_conversion-isolated-0"
+  ]
+ },
+ "L41": {
+  "n": 29,
+  "pick": [
+   "rr3x-town-slave_revolt-crossroads-1",
+   "rr3x-metropolis-slave_revolt-river-1",
+   "r2s-slave_revolt-city-2",
+   "rr3-town-slave_revolt-port-0",
+   "rr3-metropolis-slave_revolt-port-0"
+  ]
+ },
+ "L42": {
+  "n": 8,
+  "pick": [
+   "rr3x-metropolis-under_siege+famine-river-0",
+   "r2s-famine-town-0",
+   "rr3x-town-mass_migration-crossroads-2",
+   "r2r-city-45",
+   "r2r-city-59"
+  ]
+ },
+ "L43": {
+  "n": 4,
+  "pick": [
+   "rr3x-village-famine-crossroads-0",
+   "r2r-village-12",
+   "rr3x-village-politically_fractured-isolated-0",
+   "rr3x-village-politically_fractured-river-1"
+  ]
+ },
+ "L44": {
+  "n": 82,
+  "pick": [
+   "rr3-town-under_siege-port-1",
+   "rr3x-metropolis-famine-river-0",
+   "rr3-metropolis-occupied-rand-2",
+   "rr3x-village-occupied-mountain_pass-2",
+   "rr3-metropolis-politically_fractured-rand-2"
+  ]
+ },
+ "L45": {
+  "n": 14,
+  "pick": [
+   "r2s-under_siege-city-2",
+   "rr3-town-under_siege+famine-rand-4",
+   "rr3-metropolis-under_siege-rand-3",
+   "rr3-town-under_siege+famine-port-1",
+   "rr3-city-under_siege+famine-rand-3"
+  ]
+ },
+ "L46": {
+  "n": 18,
+  "pick": [
+   "r2s-under_siege-town-3",
+   "rr3-town-under_siege+famine-rand-1",
+   "rr3x-metropolis-under_siege+famine-isolated-0",
+   "rr3-town-under_siege-rand-3",
+   "rr3-city-under_siege-rand-1"
+  ]
+ },
+ "L47": {
+  "n": 57,
+  "pick": [
+   "r2r-thorp-17",
+   "r2s-succession_void-thorp-0",
+   "rr3x-village-famine-river-2",
+   "rr3-thorp-famine-port-0",
+   "rr3-hamlet-famine-port-1"
+  ]
+ },
+ "L25": {
+  "n": 436,
+  "pick": [
+   "r2r-thorp-0",
+   "r2r-thorp-8",
+   "r2r-hamlet-1",
+   "r2r-hamlet-4",
+   "r2r-village-10",
+   "r2r-village-11",
+   "r2r-town-3",
+   "r2r-town-10",
+   "r2r-city-3",
+   "r2r-city-14"
+  ]
+ },
+ "L32": {
+  "n": 230,
+  "pick": [
+   "r2r-thorp-5",
+   "r2r-thorp-13",
+   "r2r-hamlet-9",
+   "r2r-hamlet-36",
+   "r2r-village-55",
+   "r2r-city-1",
+   "r2r-city-3",
+   "r2r-metropolis-1",
+   "r2r-metropolis-4",
+   "r2s-under_siege-town-0"
+  ]
+ },
+ "L49": {
+  "n": 274,
+  "pick": [
+   "r2r-village-5",
+   "r2r-village-18",
+   "r2r-town-37",
+   "r2r-city-19",
+   "r2r-metropolis-59",
+   "r2s-plague_onset-thorp-3",
+   "r2s-plague_onset-hamlet-3",
+   "r2s-plague_onset-town-0",
+   "r2s-plague_onset-city-0",
+   "r2s-plague_onset-metropolis-0"
+  ]
+ }
+}
