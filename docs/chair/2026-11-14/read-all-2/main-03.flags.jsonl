@@ -1,0 +1,125 @@
+{"id":"05271","town":"r2s-insurgency-thorp-0","sev":"LOW","kind":"STATE","why":"title 'Headman' given to Rónán Ryan, who PEOPLE lists as (f)","other":""}
+{"id":"28778","town":"r2r-thorp-16","sev":"LOW","kind":"LACKS","why":"'defended pass': DEFENCE has no garrison, watch or hired force, only a palisade and household levy","other":""}
+{"id":"00521","town":"r2r-thorp-16","sev":"MED","kind":"STATE","why":"'cannot feed itself' contradicts FOOD word Secure (and band secure); tag also reaches towns where food is not import-fed","other":""}
+{"id":"07294","town":"r2s-politically_fractured-thorp-2","sev":"MED","kind":"STATE","why":"says fights between powers break out; QUARRELS none and relations between powers none","other":""}
+{"id": "00791", "town": "r2r-thorp-44", "sev": "MED", "kind": "STATE", "why": "'reserves deep enough to ride out most of what could happen': FOOD stores 2 months, no granary; defence Vulnerable", "other": ""}
+{"id": "15297", "town": "r2r-thorp-14", "sev": "MED", "kind": "STATE", "why": "plague/quarantine history; PAST lists only Arcane Incident, Occupation, Trade Collapse, no plague", "other": ""}
+{"id": "19069", "town": "r2r-thorp-14", "sev": "MED", "kind": "STATE", "why": "plague/quarantine history; PAST lists only Arcane Incident, Occupation, Trade Collapse, no plague", "other": ""}
+{"id": "09823", "town": "r2r-thorp-14", "sev": "MED", "kind": "STATE", "why": "plague/quarantine history; PAST lists only Arcane Incident, Occupation, Trade Collapse, no plague", "other": ""}
+{"id": "14868", "town": "r2r-thorp-14", "sev": "MED", "kind": "STATE", "why": "plague/quarantine history; PAST lists only Arcane Incident, Occupation, Trade Collapse, no plague", "other": ""}
+{"id": "14869", "town": "r2r-thorp-14", "sev": "MED", "kind": "STATE", "why": "plague/quarantine history; PAST lists only Arcane Incident, Occupation, Trade Collapse, no plague", "other": ""}
+{"id": "20279", "town": "r2r-thorp-14", "sev": "MED", "kind": "STATE", "why": "plague/quarantine history; PAST lists only Arcane Incident, Occupation, Trade Collapse, no plague", "other": ""}
+{"id": "20558", "town": "r2r-thorp-14", "sev": "MED", "kind": "STATE", "why": "plague/quarantine history; PAST lists only Arcane Incident, Occupation, Trade Collapse, no plague", "other": ""}
+{"id": "19259", "town": "r2r-thorp-23", "sev": "MED", "kind": "STATE", "why": "popular uprising/rebels; PAST lists Migration, Succession Crisis, Religious Conflict, no uprising", "other": ""}
+{"id": "08924", "town": "r2r-thorp-23", "sev": "MED", "kind": "STATE", "why": "popular uprising/rebels; PAST lists Migration, Succession Crisis, Religious Conflict, no uprising", "other": ""}
+{"id": "20687", "town": "r2r-thorp-23", "sev": "MED", "kind": "STATE", "why": "popular uprising/rebels; PAST lists Migration, Succession Crisis, Religious Conflict, no uprising", "other": ""}
+{"id": "21980", "town": "r2r-thorp-23", "sev": "MED", "kind": "STATE", "why": "popular uprising/rebels; PAST lists Migration, Succession Crisis, Religious Conflict, no uprising", "other": ""}
+{"id": "14921", "town": "r2r-thorp-23", "sev": "MED", "kind": "STATE", "why": "popular uprising/rebels; PAST lists Migration, Succession Crisis, Religious Conflict, no uprising", "other": ""}
+{"id": "21354", "town": "r2r-thorp-23", "sev": "MED", "kind": "STATE", "why": "popular uprising/rebels; PAST lists Migration, Succession Crisis, Religious Conflict, no uprising", "other": ""}
+{"id": "02414", "town": "r2r-thorp-23", "sev": "MED", "kind": "STATE", "why": "popular uprising/rebels; PAST lists Migration, Succession Crisis, Religious Conflict, no uprising", "other": ""}
+{"id": "14924", "town": "r2r-thorp-23", "sev": "MED", "kind": "STATE", "why": "popular uprising/rebels; PAST lists Migration, Succession Crisis, Religious Conflict, no uprising", "other": ""}
+{"id": "02678", "town": "r2r-thorp-23", "sev": "MED", "kind": "STATE", "why": "popular uprising/rebels; PAST lists Migration, Succession Crisis, Religious Conflict, no uprising", "other": ""}
+{"id": "02690", "town": "r2r-thorp-23", "sev": "MED", "kind": "STATE", "why": "popular uprising/rebels; PAST lists Migration, Succession Crisis, Religious Conflict, no uprising", "other": ""}
+{"id": "21355", "town": "r2r-thorp-23", "sev": "MED", "kind": "STATE", "why": "popular uprising/rebels; PAST lists Migration, Succession Crisis, Religious Conflict, no uprising", "other": ""}
+{"id": "HEADER", "town": "r2r-thorp-36", "sev": "MED", "kind": "RECORD", "why": "pop 5 thorp makes flour, textiles, coal, religious services and basic education: more than five people can hold", "other": ""}
+{"id": "00708", "town": "r2r-thorp-36", "sev": "LOW", "kind": "STATE", "why": "'approach by road': trade access is river only", "other": ""}
+{"id": "27508", "town": "r2r-thorp-37", "sev": "MED", "kind": "STATE", "why": "flood/redrawn boundaries; PAST lists Pilgrimage, Succession Crisis, Migration, no flood", "other": ""}
+{"id": "06235", "town": "r2r-thorp-37", "sev": "MED", "kind": "STATE", "why": "flood/redrawn boundaries; PAST lists Pilgrimage, Succession Crisis, Migration, no flood", "other": ""}
+{"id": "11823", "town": "r2r-thorp-37", "sev": "MED", "kind": "STATE", "why": "flood/redrawn boundaries; PAST lists Pilgrimage, Succession Crisis, Migration, no flood", "other": ""}
+{"id": "21987", "town": "r2r-thorp-37", "sev": "MED", "kind": "STATE", "why": "flood/redrawn boundaries; PAST lists Pilgrimage, Succession Crisis, Migration, no flood", "other": ""}
+{"id": "09553", "town": "r2r-thorp-37", "sev": "MED", "kind": "STATE", "why": "flood/redrawn boundaries; PAST lists Pilgrimage, Succession Crisis, Migration, no flood", "other": ""}
+{"id": "09557", "town": "r2r-thorp-37", "sev": "MED", "kind": "STATE", "why": "flood/redrawn boundaries; PAST lists Pilgrimage, Succession Crisis, Migration, no flood", "other": ""}
+{"id": "20181", "town": "r2r-thorp-37", "sev": "MED", "kind": "STATE", "why": "flood/redrawn boundaries; PAST lists Pilgrimage, Succession Crisis, Migration, no flood", "other": ""}
+{"id": "HEADER", "town": "r2r-thorp-37", "sev": "MED", "kind": "RECORD", "why": "pop 6 thorp makes gems, religious services and basic education: more than six people can hold", "other": ""}
+{"id": "05629", "town": "r2r-thorp-42", "sev": "MED", "kind": "LACKS", "why": "corrals and 'permanent halls': HOUSES has no hall; no herd or livestock made here, only woodcutter's camp", "other": ""}
+{"id": "27533", "town": "r2r-thorp-42", "sev": "LOW", "kind": "BROKEN", "why": "'Weak defences keeps': subject-verb disagreement", "other": ""}
+{"id": "19807", "town": "r2r-thorp-42", "sev": "LOW", "kind": "BROKEN", "why": "'The heresy trials is': subject-verb disagreement", "other": ""}
+{"id": "HEADER", "town": "r2r-thorp-59", "sev": "MED", "kind": "RECORD", "why": "pop 7 thorp makes iron and metalwork and offers pilgrim hospitality and bottled healing waters; no inn or smith in HOUSES", "other": ""}
+{"id": "00096", "town": "r2r-thorp-9", "sev": "HIGH", "kind": "STATE", "why": "'Little has happened here worth writing down' contradicts PAST: The Uprising, catastrophic, 113 years ago", "other": "21352"}
+{"id": "05736", "town": "r2r-thorp-9", "sev": "LOW", "kind": "LACKS", "why": "'shaded gateways': DEFENCE has no walls or gates", "other": ""}
+{"id": "17828", "town": "r2r-thorp-9", "sev": "MED", "kind": "STATE", "why": "fire and rebuilding; PAST records only The Uprising, no fire", "other": ""}
+{"id": "15372", "town": "r2r-thorp-9", "sev": "MED", "kind": "STATE", "why": "fire and rebuilding; PAST records only The Uprising, no fire", "other": ""}
+{"id": "21951", "town": "r2r-thorp-9", "sev": "MED", "kind": "STATE", "why": "fire and rebuilding; PAST records only The Uprising, no fire", "other": ""}
+{"id": "09552", "town": "r2r-thorp-9", "sev": "MED", "kind": "STATE", "why": "fire and rebuilding; PAST records only The Uprising, no fire", "other": ""}
+{"id": "15373", "town": "r2r-thorp-9", "sev": "MED", "kind": "STATE", "why": "fire and rebuilding; PAST records only The Uprising, no fire", "other": ""}
+{"id": "09556", "town": "r2r-thorp-9", "sev": "MED", "kind": "STATE", "why": "fire and rebuilding; PAST records only The Uprising, no fire", "other": ""}
+{"id": "19499", "town": "r2r-thorp-9", "sev": "MED", "kind": "STATE", "why": "fire and rebuilding; PAST records only The Uprising, no fire", "other": ""}
+{"id": "02417", "town": "r2r-thorp-9", "sev": "MED", "kind": "STATE", "why": "fire and rebuilding; PAST records only The Uprising, no fire", "other": ""}
+{"id": "15374", "town": "r2r-thorp-9", "sev": "MED", "kind": "STATE", "why": "fire and rebuilding; PAST records only The Uprising, no fire", "other": ""}
+{"id": "02944", "town": "r2r-thorp-20", "sev": "MED", "kind": "STATE", "why": "tyrant/regime history; PAST lists only Succession Crisis (minor) and Migration, no tyranny", "other": ""}
+{"id": "14403", "town": "r2r-thorp-20", "sev": "MED", "kind": "STATE", "why": "tyrant/regime history; PAST lists only Succession Crisis (minor) and Migration, no tyranny", "other": ""}
+{"id": "21989", "town": "r2r-thorp-20", "sev": "MED", "kind": "STATE", "why": "tyrant/regime history; PAST lists only Succession Crisis (minor) and Migration, no tyranny", "other": ""}
+{"id": "04252", "town": "r2r-thorp-20", "sev": "MED", "kind": "STATE", "why": "tyrant/regime history; PAST lists only Succession Crisis (minor) and Migration, no tyranny", "other": ""}
+{"id": "22268", "town": "r2r-thorp-20", "sev": "MED", "kind": "STATE", "why": "tyrant/regime history; PAST lists only Succession Crisis (minor) and Migration, no tyranny", "other": ""}
+{"id": "21347", "town": "r2r-thorp-20", "sev": "MED", "kind": "STATE", "why": "tyrant/regime history; PAST lists only Succession Crisis (minor) and Migration, no tyranny", "other": ""}
+{"id": "02537", "town": "r2r-thorp-20", "sev": "MED", "kind": "STATE", "why": "tyrant/regime history; PAST lists only Succession Crisis (minor) and Migration, no tyranny", "other": ""}
+{"id": "17430", "town": "r2r-thorp-20", "sev": "MED", "kind": "STATE", "why": "tyrant/regime history; PAST lists only Succession Crisis (minor) and Migration, no tyranny", "other": ""}
+{"id": "21348", "town": "r2r-thorp-20", "sev": "MED", "kind": "STATE", "why": "tyrant/regime history; PAST lists only Succession Crisis (minor) and Migration, no tyranny", "other": ""}
+{"id": "02538", "town": "r2r-thorp-20", "sev": "MED", "kind": "STATE", "why": "tyrant/regime history; PAST lists only Succession Crisis (minor) and Migration, no tyranny", "other": ""}
+{"id": "22442", "town": "r2r-thorp-28", "sev": "LOW", "kind": "LACKS", "why": "'somebody keeps it that way': DEFENCE has no garrison, watch, militia or hired force", "other": ""}
+{"id": "21181", "town": "r2r-thorp-31", "sev": "MED", "kind": "STATE", "why": "'bread of the local grain': LAND gives Grain & Bread vulnerable with its resource Grain fields absent; no mill of its own", "other": ""}
+{"id": "21058", "town": "r2r-thorp-35", "sev": "MED", "kind": "LACKS", "why": "'working waterfront': HOUSES has no docks or fishing community; forest woodcutters' camp only", "other": ""}
+{"id": "19397", "town": "r2r-thorp-47", "sev": "MED", "kind": "STATE", "why": "'The debt': PAST records no debt or credit event (Trade Collapse, Religious Conflict, Wild Magic)", "other": ""}
+{"id": "15115", "town": "r2r-thorp-53", "sev": "MED", "kind": "STATE", "why": "magical controversy/accident/sealed thing; PAST records only The Trade Collapse", "other": ""}
+{"id": "03548", "town": "r2r-thorp-53", "sev": "MED", "kind": "STATE", "why": "magical controversy/accident/sealed thing; PAST records only The Trade Collapse", "other": ""}
+{"id": "15453", "town": "r2r-thorp-53", "sev": "MED", "kind": "STATE", "why": "magical controversy/accident/sealed thing; PAST records only The Trade Collapse", "other": ""}
+{"id": "12134", "town": "r2r-thorp-53", "sev": "MED", "kind": "STATE", "why": "magical controversy/accident/sealed thing; PAST records only The Trade Collapse", "other": ""}
+{"id": "02853", "town": "r2r-thorp-53", "sev": "MED", "kind": "STATE", "why": "magical controversy/accident/sealed thing; PAST records only The Trade Collapse", "other": ""}
+{"id": "17488", "town": "r2r-thorp-53", "sev": "MED", "kind": "STATE", "why": "magical controversy/accident/sealed thing; PAST records only The Trade Collapse", "other": ""}
+{"id": "02854", "town": "r2r-thorp-53", "sev": "MED", "kind": "STATE", "why": "magical controversy/accident/sealed thing; PAST records only The Trade Collapse", "other": ""}
+{"id": "17489", "town": "r2r-thorp-53", "sev": "MED", "kind": "STATE", "why": "magical controversy/accident/sealed thing; PAST records only The Trade Collapse", "other": ""}
+{"id": "11462", "town": "r2r-thorp-53", "sev": "MED", "kind": "STATE", "why": "'founded to trade by water': FOUNDING reason is a seasonal camp for deep-water fishers", "other": ""}
+{"id":"02415","town":"r2r-thorp-50","sev":"MED","kind":"STATE","why":"'concession won in the revolt': PAST lists Occupation, Religious Conflict, Wild Magic; no revolt or uprising","other":""}
+{"id": "27530", "town": "r2r-thorp-13", "sev": "LOW", "kind": "BROKEN", "why": "'Weak defences keeps': subject-verb disagreement", "other": ""}
+{"id": "01912", "town": "r2r-thorp-6", "sev": "LOW", "kind": "STATE", "why": "'the head shepherd and Headman': title Headman for Sulpicia Maximus, PEOPLE (f)", "other": ""}
+{"id": "20720", "town": "r2r-hamlet-0", "sev": "MED", "kind": "STATE", "why": "'rite waits for a priest passing through': under siege nobody passes; besiegers let nobody through", "other": "22046"}
+{"id": "14698", "town": "r2s-under_siege-hamlet-0", "sev": "MED", "kind": "STATE", "why": "'Headman's Authority is safe in the hall': legitimacy score 3, Legitimacy Crisis, stability Critical; HOUSES has no hall", "other": ""}
+{"id": "15828", "town": "r2s-under_siege-hamlet-1", "sev": "MED", "kind": "STATE", "why": "runs cattle or goats for milk: LAND gap says Dairy farmer lacks access to livestock", "other": ""}
+{"id": "17989", "town": "r2s-under_siege-hamlet-1", "sev": "MED", "kind": "STATE", "why": "dairy as dependable fat and protein: LAND gap says Dairy farmer lacks access to livestock", "other": ""}
+{"id": "16820", "town": "r2s-under_siege-hamlet-1", "sev": "MED", "kind": "STATE", "why": "fresh milk service: LAND gap says Dairy farmer lacks access to livestock", "other": ""}
+{"id": "09031", "town": "r2s-under_siege-hamlet-1", "sev": "MED", "kind": "STATE", "why": "fresh milk service: LAND gap says Dairy farmer lacks access to livestock", "other": ""}
+{"id": "10633", "town": "r2s-under_siege-hamlet-1", "sev": "MED", "kind": "STATE", "why": "'keeps you away from the byre': Dairy farmer has no livestock per LAND gap", "other": ""}
+{"id": "21513", "town": "r2s-under_siege-hamlet-1", "sev": "LOW", "kind": "STATE", "why": "dairy work 'heaviest in summer': Dairy farmer lacks livestock per LAND gap", "other": ""}
+{"id": "05205", "town": "r2s-under_siege-hamlet-1", "sev": "LOW", "kind": "STATE", "why": "title 'Dairyman' for Radmila Bogdanov, PEOPLE (f)", "other": ""}
+{"id": "05970", "town": "r2s-under_siege-hamlet-1", "sev": "LOW", "kind": "STATE", "why": "title 'Dairyman' for Radmila Bogdanov, PEOPLE (f)", "other": ""}
+{"id": "15590", "town": "r2s-under_siege-hamlet-1", "sev": "MED", "kind": "STATE", "why": "maltster 'requires grain surplus': FOOD Deficit, grown 40%, no grain fields; nothing comes in under siege", "other": ""}
+{"id": "10688", "town": "r2s-under_siege-hamlet-1", "sev": "MED", "kind": "STATE", "why": "maltster 'sells malt to anyone who pays': under siege nobody arrives; FOOD Deficit, no grain to malt", "other": ""}
+{"id": "02898", "town": "r2s-under_siege-hamlet-1", "sev": "MED", "kind": "STATE", "why": "catch landed and cured: LAND has no fishing resource and TRADE makes no fish", "other": ""}
+{"id": "16324", "town": "r2s-under_siege-hamlet-1", "sev": "LOW", "kind": "LACKS", "why": "'the barricade across the main approach': DEFENCE has no walls or works at all", "other": ""}
+{"id": "19765", "town": "r2s-under_siege-hamlet-2", "sev": "MED", "kind": "STATE", "why": "'would go on if the arcane went away': FOOD by magic 23%, Import-Dependent; contradicts 14205 'would go shorter without it'", "other": "14205"}
+{"id": "02952", "town": "r2s-under_siege-hamlet-3", "sev": "MED", "kind": "STATE", "why": "maltster 'only runs when grain is in surplus' feeding alehouses: FOOD Deficit, gap 61%, no surplus; nothing comes in under siege", "other": ""}
+{"id": "11634", "town": "r2s-under_siege-hamlet-3", "sev": "MED", "kind": "STATE", "why": "dairy farmer keeps cattle/goats for milk: LAND gap says Dairy farmer lacks access to livestock", "other": ""}
+{"id": "20202", "town": "r2s-under_siege-hamlet-3", "sev": "MED", "kind": "STATE", "why": "dairy farmer keeps cattle/goats for milk: LAND gap says Dairy farmer lacks access to livestock", "other": ""}
+{"id": "16106", "town": "r2s-under_siege-hamlet-3", "sev": "MED", "kind": "STATE", "why": "dairy farmer's herd: LAND gap says Dairy farmer lacks access to livestock", "other": ""}
+{"id": "10584", "town": "r2s-under_siege-hamlet-3", "sev": "MED", "kind": "STATE", "why": "dairy farmer's herd: LAND gap says Dairy farmer lacks access to livestock", "other": ""}
+{"id": "13214", "town": "r2s-under_siege-hamlet-3", "sev": "MED", "kind": "STATE", "why": "'monthly or seasonal trading day' under siege: no trade comes by road; besiegers let nobody through", "other": ""}
+{"id": "07162", "town": "r2s-under_siege-hamlet-3", "sev": "MED", "kind": "STATE", "why": "'traveler's horses during stays': under siege no travellers arrive", "other": ""}
+{"id": "12717", "town": "r2s-under_siege-hamlet-3", "sev": "MED", "kind": "STATE", "why": "'mid-route settlements profit from the trade': under siege trade is cut and TRADE exports none", "other": ""}
+{"id": "11776", "town": "r2s-under_siege-hamlet-3", "sev": "LOW", "kind": "LACKS", "why": "'barricade across the main approach': DEFENCE has no walls or works; defence Undefended", "other": ""}
+{"id": "14699", "town": "r2s-famine-hamlet-3", "sev": "MED", "kind": "STATE", "why": "'Household Council is safe in the hall': legitimacy score 1, Legitimacy Crisis, stability Desperate; HOUSES has no hall", "other": ""}
+{"id": "01444", "town": "r2s-occupied-hamlet-0", "sev": "MED", "kind": "LACKS", "why": "'the arms in the hamlet are theirs': DEFENCE lists no garrison or other force at all", "other": ""}
+{"id": "28109", "town": "r2s-occupied-hamlet-0", "sev": "LOW", "kind": "LACKS", "why": "'defended pass': DEFENCE has no force; defence Undefended", "other": ""}
+{"id": "08818", "town": "r2s-famine-hamlet-1", "sev": "MED", "kind": "STATE", "why": "'less of it comes in': FOOD brought in 0%, imports none, isolated trade access; nothing comes in", "other": ""}
+{"id": "11073", "town": "r2s-famine-hamlet-1", "sev": "LOW", "kind": "STATE", "why": "'the only one in the house the crisis hits': famine hits the whole hamlet (grown 34%, stores 0.1 months)", "other": ""}
+{"id": "29106", "town": "r2s-insurgency-hamlet-0", "sev": "LOW", "kind": "LACKS", "why": "'defended pass': DEFENCE has no force; defence Undefended", "other": ""}
+{"id": "27699", "town": "r2s-wartime-hamlet-3", "sev": "MED", "kind": "LACKS", "why": "'practitioners charge for, and what they buy': HOUSES has no arcane or practitioner house; TRADE imports none", "other": ""}
+{"id": "15064", "town": "r2s-famine-hamlet-0", "sev": "MED", "kind": "STATE", "why": "preserved fish offered: FOOD failed source is fish; no line should offer the food that failed", "other": ""}
+{"id": "13370", "town": "r2s-famine-hamlet-0", "sev": "MED", "kind": "STATE", "why": "fish as 'the chief source of protein': FOOD failed source is fish under famine", "other": ""}
+{"id": "11070", "town": "r2r-hamlet-16", "sev": "MED", "kind": "STATE", "why": "'Jade Ek of Elder Council': PEOPLE places Jade Ek (f) at Citizen militia; nobody on the roster belongs to Elder Council", "other": ""}
+{"id": "07359", "town": "r2r-hamlet-16", "sev": "MED", "kind": "STATE", "why": "'catch landed and sold fresh or preserved': FOOD failed source is fish under famine; no line should offer the failed food", "other": ""}
+{"id": "14695", "town": "r2r-hamlet-16", "sev": "MED", "kind": "STATE", "why": "'Elder Council is safe in the hall': legitimacy score 3, Legitimacy Crisis, stability Desperate; HOUSES has no hall", "other": ""}
+{"id": "02540", "town": "r2s-occupied-hamlet-2", "sev": "MED", "kind": "STATE", "why": "'free hamlet with no lord's representative': GOVERNMENT lists an Occupation Authority (Dominant) with an occupying governor, Irene Schäfer", "other": ""}
+{"id": "04655", "town": "r2s-occupied-hamlet-3", "sev": "MED", "kind": "STATE", "why": "cheese offered: LAND gap says Dairy farmer lacks access to livestock", "other": ""}
+{"id": "03260", "town": "r2s-occupied-hamlet-3", "sev": "MED", "kind": "STATE", "why": "cheese offered: LAND gap says Dairy farmer lacks access to livestock", "other": ""}
+{"id": "14389", "town": "r2s-occupied-hamlet-3", "sev": "LOW", "kind": "STATE", "why": "cheese as household staple: LAND gap says Dairy farmer lacks access to livestock", "other": ""}
+{"id": "05274", "town": "r2s-plague_onset-hamlet-2", "sev": "LOW", "kind": "STATE", "why": "title 'Headman' for Sunita Balan, PEOPLE (f)", "other": ""}
+{"id": "20827", "town": "r2s-plague_onset-hamlet-2", "sev": "LOW", "kind": "STATE", "why": "title 'Headman' for Sunita Balan, PEOPLE (f)", "other": ""}
+{"id": "01760", "town": "r2s-plague_onset-hamlet-2", "sev": "LOW", "kind": "STATE", "why": "title 'Headman' for Sunita Balan, PEOPLE (f)", "other": ""}
+{"id": "05269", "town": "r2s-monster_pressure-hamlet-0", "sev": "LOW", "kind": "STATE", "why": "title 'Headman' for Dyrfinna Thorsson, PEOPLE (f)", "other": ""}
+{"id": "20809", "town": "r2s-monster_pressure-hamlet-0", "sev": "LOW", "kind": "STATE", "why": "title 'Headman' for Dyrfinna Thorsson, PEOPLE (f)", "other": ""}
+{"id": "01668", "town": "r2s-monster_pressure-hamlet-0", "sev": "LOW", "kind": "STATE", "why": "title 'Headman' for Dyrfinna Thorsson, PEOPLE (f)", "other": ""}
+{"id": "21819", "town": "r2r-hamlet-34", "sev": "LOW", "kind": "LACKS", "why": "'telling the guard': DEFENCE has no garrison or watch, only a citizen militia", "other": ""}
+{"id": "20559", "town": "r2r-hamlet-35", "sev": "MED", "kind": "STATE", "why": "'quarrel among Sundoy's powers grows sharper': QUARRELS none and relations between powers none", "other": ""}
+{"id": "01051", "town": "r2r-hamlet-35", "sev": "MED", "kind": "STATE", "why": "'split between rival powers, a quarrel can turn into a brawl': QUARRELS none, relations none", "other": ""}
+{"id": "11289", "town": "r2r-hamlet-35", "sev": "MED", "kind": "STATE", "why": "'metal is smelted or worked here': LAND has no iron ore or Iron & Metalwork chain; TRADE makes no metal", "other": ""}
+{"id": "DONE", "lines": 2934, "blocks": 67, "flags": 124}
