@@ -18,7 +18,7 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1345
+    "producerIndexFiles": 1350
   },
   "totals": {
     "pools": 856,
@@ -60,7 +60,7 @@
     "branchGrainRows": 455,
     "functionGrainRows": 401,
     "customReachableRows": 28,
-    "relationRows": 165,
+    "relationRows": 169,
     "relationRowsJoinable": 0,
     "ratifiedAliases": 3,
     "tableRungRowsWithoutAbsence": 174,
@@ -65160,7 +65160,7 @@
         "via": "CAUSE_SIGNAL predicate source"
       },
       {
-        "a": "src/generators/defenseGenerator.js::econOutput",
+        "a": "src/generators/defenseGenerator.js::fundedGate",
         "b": "economicGates.military",
         "relation": "consequence",
         "source": "c",
@@ -65168,7 +65168,15 @@
         "via": "src/generators/defenseGenerator.js economicGates literal, two alias hops"
       },
       {
-        "a": "src/generators/defenseGenerator.js::econOutput",
+        "a": "src/generators/defenseGenerator.js::upkeep",
+        "b": "economicGates.military",
+        "relation": "consequence",
+        "source": "c",
+        "direction": "a->b",
+        "via": "src/generators/defenseGenerator.js economicGates literal, two alias hops"
+      },
+      {
+        "a": "src/generators/defenseGenerator.js::fundedGate",
         "b": "economicGates.monster",
         "relation": "consequence",
         "source": "c",
@@ -65176,7 +65184,15 @@
         "via": "src/generators/defenseGenerator.js economicGates literal, two alias hops"
       },
       {
-        "a": "src/generators/defenseGenerator.js::econOutput",
+        "a": "src/generators/defenseGenerator.js::upkeep",
+        "b": "economicGates.monster",
+        "relation": "consequence",
+        "source": "c",
+        "direction": "a->b",
+        "via": "src/generators/defenseGenerator.js economicGates literal, two alias hops"
+      },
+      {
+        "a": "src/generators/defenseGenerator.js::fundedGate",
         "b": "economicGates.internal",
         "relation": "consequence",
         "source": "c",
@@ -65184,7 +65200,15 @@
         "via": "src/generators/defenseGenerator.js economicGates literal, two alias hops"
       },
       {
-        "a": "src/generators/defenseGenerator.js::econOutput",
+        "a": "src/generators/defenseGenerator.js::upkeep",
+        "b": "economicGates.internal",
+        "relation": "consequence",
+        "source": "c",
+        "direction": "a->b",
+        "via": "src/generators/defenseGenerator.js economicGates literal, two alias hops"
+      },
+      {
+        "a": "src/generators/defenseGenerator.js::fundedGate",
         "b": "economicGates.economic",
         "relation": "consequence",
         "source": "c",
@@ -65192,7 +65216,15 @@
         "via": "src/generators/defenseGenerator.js economicGates literal, two alias hops"
       },
       {
-        "a": "src/generators/defenseGenerator.js::instFlags",
+        "a": "src/generators/defenseGenerator.js::upkeep",
+        "b": "economicGates.economic",
+        "relation": "consequence",
+        "source": "c",
+        "direction": "a->b",
+        "via": "src/generators/defenseGenerator.js economicGates literal, two alias hops"
+      },
+      {
+        "a": "src/generators/defenseGenerator.js::fundedGate",
         "b": "economicGates.disaster",
         "relation": "consequence",
         "source": "c",
@@ -65200,7 +65232,7 @@
         "via": "src/generators/defenseGenerator.js economicGates literal, two alias hops"
       },
       {
-        "a": "src/generators/defenseGenerator.js::economyOutput",
+        "a": "src/generators/defenseGenerator.js::upkeep",
         "b": "economicGates.disaster",
         "relation": "consequence",
         "source": "c",
@@ -65219,20 +65251,20 @@
       ],
       [
         "c",
-        6
+        10
       ]
     ],
     "byDirection": [
       [
         "a->b",
-        165
+        169
       ]
     ],
     "join": {
       "strictBoth": 0,
       "strictEither": 0,
       "leafBoth": 0,
-      "leafEither": 2,
+      "leafEither": 3,
       "leafRows": [],
       "deskRoots": 108,
       "deskSegments": 276
