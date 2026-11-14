@@ -33,6 +33,7 @@ import { TERRAIN_NARRATIVE_HOOKS } from '../../data/narrativeData.js';
  * @typedef {object} FoundingState
  * @property {any} facts `birthFactsOf` over the roster, the config and the tier at the founding draw
  * @property {ReadonlySet<string>} resources the town's own resource keys
+ * @property {ReadonlyArray<string>} [names] the roster's institution names, lowercased (R2-CODE-A-12: a crossing)
  */
 
 /** The resource keys that answer a row (keys of `data/resourceData.js :: RESOURCE_DATA`). */
@@ -54,8 +55,15 @@ const holds = (st, ...atoms) => declarationAdmits({ needs: atoms, excludes: [], 
 const isPort = (st) => holds(st, 'route: port');
 /** @param {FoundingState} st */
 const atSea = (st) => st.facts.water?.kind === 'maritime';
+/** @param {FoundingState} st the roster holds a bridge (the native catalogue's "Toll bridge") */
+const bridged = (st) => (st.names || []).some((n) => /\bbridge\b/.test(n));
 /** @param {FoundingState} st */
 const onRiver = (st) => st.facts.water?.kind === 'river' || st.facts.terrain === 'riverside';
+
+/** The tests of the commodity rows that name a founder of their own (R2-CODE-A-12: tagged, so no row is copied). */
+const NAMING = new WeakSet();
+/** @param {(st: FoundingState) => boolean} test @returns {(st: FoundingState) => boolean} */
+const naming = (test) => (NAMING.add(test), test);
 
 /**
  * The Origin rows' tests, keyed by the row as written (`TERRAIN_NARRATIVE_HOOKS` and the commodity hooks).
@@ -68,6 +76,8 @@ export const FOUNDING_REASON_ADMITS = Object.freeze({
   'grew from a seasonal fair that became year-round as traders chose to winter here': (st) => holds(st, 'market'),
   // river: a mill is the roster's
   'began as a riverside mill settlement': (st) => holds(st, 'institution: mill'),
+  // R2-CODE-A-12 (ruling (2), the bar's #300): a crossing that "became the first bridge" reads the roster's crossing
+  'grew around a ferry crossing that became the first bridge only three generations ago': bridged,
   'was established by a family granted mill rights by a distant lord who never visited': (st) => holds(st, 'institution: mill'),
   // port (the coastal terrain's pool): the route is the home of "this is a port"; the roster of what stands
   'was founded as a coastal trading port': isPort,
@@ -82,30 +92,38 @@ export const FOUNDING_REASON_ADMITS = Object.freeze({
   'was built where two rival mining operations agreed to share infrastructure': (st) => near(st, DIGGINGS) || holds(st, 'institution: mine'),
   // forest: the grove is the town's own resource
   'developed around a sacred grove that attracted religious settlement': (st) => near(st, ['ancient_grove']),
+  // R2-CODE-A-12 (ruling (2): every row a walk can land on carries its own test): a logging camp reads the timber
+  'grew from a logging camp': (st) => near(st, TIMBER),
   // plains: a market centre is no hamlet's, and its market is the roster's; the soil's crop is its own
   'grew as an agricultural market center': (st) => holds(st, 'market', 'tier: ≥ village'),
+  // R2-CODE-A-12 (ruling (2), the reader's MEDIUM (c): 95 landings, 81 with no crop): farmland is the crop's
+  'was founded on rich farmland granted to a favoured noble': (st) => near(st, CROP),
+  // R2-CODE-A-12 (ruling (2)): where the farmland row is refused the walk lands on the herders: grazing is theirs
+  'developed where herders gathered seasonally until the gathering became permanent': (st) => near(st, PASTURE),
+  'began as a grain storage depot for a larger city that no longer exists': (st) => near(st, CROP),
   'grew because the local soil produces something that cannot easily be grown elsewhere': (st) => near(st, CROP),
   // the commodity hooks: the first export's good, read against what the town has of its own
-  'grew from a single logging operation whose owner refused to leave when the contract ended': (st) => near(st, TIMBER),
-  'was founded when foresters discovered that the surrounding woodland was three times richer than the maps showed': (st) => near(st, TIMBER),
-  'began when a failed soldier received a land grant and discovered the soil was worth more than any battlefield': (st) => near(st, CROP),
+  'grew from a single logging operation whose owner refused to leave when the contract ended': naming((st) => near(st, TIMBER)),
+  'was founded when foresters discovered that the surrounding woodland was three times richer than the maps showed': naming((st) => near(st, TIMBER)),
+  'began when a failed soldier received a land grant and discovered the soil was worth more than any battlefield': naming((st) => near(st, CROP)),
+  'was established on farmland that three generations of the same family refused to sell, and eventually others settled around them': naming((st) => near(st, CROP)), // R2-CODE-A-12
   'started as a seasonal camp for deep-water fishers who stopped bothering to go home between seasons': atSea,
   'grew around a natural harbour that fish seemed to prefer. Nobody knows why, and nobody questions it': (st) => atSea(st) && isPort(st),
   'grew around fishing weirs and a sheltered barge landing where the river catch could be salted and sold': (st) => onRiver(st) && holds(st, 'institution: docks'),
   'started as a seasonal camp beside a dependable river fishery and became permanent when traders began stopping there': onRiver,
   'was founded the week someone hit iron three feet below the surface and word reached the nearest city': (st) => near(st, ['iron_deposits']),
-  'grew around a smithing operation that discovered the local ore was unusually pure and refused to share the location': (st) => near(st, ['iron_deposits']),
-  'began when quarry workers sent to extract stone for a distant cathedral decided the site was worth keeping for themselves': (st) => near(st, ['stone_quarry']),
+  'grew around a smithing operation that discovered the local ore was unusually pure and refused to share the location': naming((st) => near(st, ['iron_deposits'])),
+  'began when quarry workers sent to extract stone for a distant cathedral decided the site was worth keeping for themselves': naming((st) => near(st, ['stone_quarry'])),
   "was established because the local stone cuts cleanly and doesn't crack in frost: a property worth more than it sounds": (st) => near(st, ['stone_quarry']),
   "was founded the day a shepherd's child found a stone in a streambed that turned out to be worth more than the flock": (st) => near(st, GEMS),
   "grew from a prospectors' camp into something permanent when the gems didn't run out as quickly as expected": (st) => near(st, GEMS),
-  'began when a merchant realised the local sheep produced finer wool than anything available on the open market': (st) => near(st, PASTURE),
-  'grew around a sheep run whose owner had the rare good sense to also build a mill and a market': (st) => near(st, PASTURE) && holds(st, 'institution: mill', 'market'),
+  'began when a merchant realised the local sheep produced finer wool than anything available on the open market': naming((st) => near(st, PASTURE)),
+  'grew around a sheep run whose owner had the rare good sense to also build a mill and a market': naming((st) => near(st, PASTURE) && holds(st, 'institution: mill', 'market')),
   'began as a seasonal gathering point for cattle traders that became permanent when someone built an inn': (st) => holds(st, 'institution: tavern'),
-  'was established to control a salt deposit that the local lord considered more valuable than the surrounding farmland combined': (st) => near(st, SALT),
+  'was established to control a salt deposit that the local lord considered more valuable than the surrounding farmland combined': naming((st) => near(st, SALT)),
   'grew around salt workings that made everything they touched last longer: including the settlement itself': (st) => near(st, SALT),
-  'began when a wandering alchemist settled here specifically because of what grows along the river margins': onRiver,
-  'was founded when a group of skilled artisans pooled resources to build a permanent workshop district away from guild restrictions': (st) => holds(st, 'population: ≥ middling'),
+  'began when a wandering alchemist settled here specifically because of what grows along the river margins': naming((st) => onRiver(st)),
+  'was founded when a group of skilled artisans pooled resources to build a permanent workshop district away from guild restrictions': naming((st) => holds(st, 'population: ≥ middling')),
   "grew because the local clay and water made the finest ceramic work in the region: a reputation that preceded the settlement's name": (st) => near(st, ['river_clay']),
 });
 
@@ -120,6 +138,13 @@ const H = TERRAIN_NARRATIVE_HOOKS;
  */
 export const NAMES_A_FOUNDER = Object.freeze(new Set([
   H.river[4], H.port[4], H.port[5], H.road[4], H.road[5], H.isolated[0], H.isolated[4], H.forest[1], H.forest[4], H.plains[4],
+  // R2-CODE-A-12 (ruling (2), the whole table read): every other row that names who founded the place, a person,
+  // a family or household, a company (a grant to a favoured noble; a noble's lodge; a herbalist; a counting house's
+  // merchant family; a household others joined; a soldier's grant; a family that would not sell; a merchant; a
+  // logging operation's owner, foresters, quarry workers, a smithing operation; a sheep run's owner; a lord; an
+  // alchemist; a company of artisans: the commodity rows, by their tagged tests). A refused row never resolves onto one.
+  H.plains[1], H.forest[3], H.forest[5], H.crossroads[4], H.isolated[5],
+  ...Object.keys(FOUNDING_REASON_ADMITS).filter((row) => NAMING.has(FOUNDING_REASON_ADMITS[row])),
 ]));
 
 /**
@@ -148,7 +173,8 @@ export const foundingStateOf = (config, economicContext, worldLaw) => {
   if (!Array.isArray(institutions)) return null;
   const tier = config?.tier || config?.settType;
   const resources = new Set(Array.isArray(config?.nearbyResources) ? config.nearbyResources.map(String) : []);
-  return { facts: birthFactsOf({ institutions, config, tier }, worldLaw), resources };
+  const names = institutions.map((i) => String(i?.name ?? '').toLowerCase());
+  return { facts: birthFactsOf({ institutions, config, tier }, worldLaw), resources, names };
 };
 
 /**
