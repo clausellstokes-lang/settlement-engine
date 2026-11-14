@@ -13,7 +13,7 @@
     "weightFloor": 0.25,
     "soakWeightCap": 0.5,
     "cellsTested": 207,
-    "cellsKept": 87,
+    "cellsKept": 89,
     "cellsUntestable": 39,
     "cellsUnderSampled": 0
   },
@@ -204,7 +204,7 @@
       "bucket": "city",
       "coBucket": "low",
       "n": 56,
-      "effect": -0.27,
+      "effect": -0.24,
       "weight": 0.5,
       "source": "soak"
     },
@@ -214,7 +214,7 @@
       "bucket": "city",
       "coBucket": "moderate",
       "n": 56,
-      "effect": 0.27,
+      "effect": 0.24,
       "weight": 0.5,
       "source": "soak"
     },
@@ -224,7 +224,7 @@
       "bucket": "hamlet",
       "coBucket": "low",
       "n": 72,
-      "effect": 0.19,
+      "effect": 0.15,
       "weight": 0.5,
       "source": "soak"
     },
@@ -234,7 +234,7 @@
       "bucket": "hamlet",
       "coBucket": "moderate",
       "n": 72,
-      "effect": -0.19,
+      "effect": -0.15,
       "weight": 0.5,
       "source": "soak"
     },
@@ -244,7 +244,7 @@
       "bucket": "metropolis",
       "coBucket": "low",
       "n": 63,
-      "effect": -0.34,
+      "effect": -0.31,
       "weight": 0.5,
       "source": "soak"
     },
@@ -254,7 +254,7 @@
       "bucket": "metropolis",
       "coBucket": "moderate",
       "n": 63,
-      "effect": 0.34,
+      "effect": 0.31,
       "weight": 0.5,
       "source": "soak"
     },
@@ -264,7 +264,7 @@
       "bucket": "thorp",
       "coBucket": "low",
       "n": 61,
-      "effect": 0.19,
+      "effect": 0.16,
       "weight": 0.5,
       "source": "soak"
     },
@@ -274,7 +274,7 @@
       "bucket": "thorp",
       "coBucket": "moderate",
       "n": 61,
-      "effect": -0.19,
+      "effect": -0.16,
       "weight": 0.5,
       "source": "soak"
     },
@@ -284,7 +284,7 @@
       "bucket": "village",
       "coBucket": "low",
       "n": 67,
-      "effect": 0.26,
+      "effect": 0.29,
       "weight": 0.5,
       "source": "soak"
     },
@@ -294,7 +294,7 @@
       "bucket": "village",
       "coBucket": "moderate",
       "n": 67,
-      "effect": -0.26,
+      "effect": -0.29,
       "weight": 0.5,
       "source": "soak"
     },
@@ -435,7 +435,7 @@
       "coBucket": "high",
       "n": 62,
       "effect": 0.12,
-      "weight": 0.33,
+      "weight": 0.34,
       "source": "soak"
     },
     {
@@ -495,7 +495,7 @@
       "coBucket": "moderate",
       "n": 75,
       "effect": 0.12,
-      "weight": 0.3,
+      "weight": 0.31,
       "source": "soak"
     },
     {
@@ -504,7 +504,7 @@
       "bucket": "isolated",
       "coBucket": "low",
       "n": 69,
-      "effect": -0.17,
+      "effect": -0.16,
       "weight": 0.5,
       "source": "soak"
     },
@@ -514,7 +514,7 @@
       "bucket": "isolated",
       "coBucket": "moderate",
       "n": 69,
-      "effect": 0.17,
+      "effect": 0.16,
       "weight": 0.5,
       "source": "soak"
     },
@@ -524,7 +524,7 @@
       "bucket": "port",
       "coBucket": "low",
       "n": 65,
-      "effect": 0.35,
+      "effect": 0.39,
       "weight": 0.5,
       "source": "soak"
     },
@@ -534,7 +534,27 @@
       "bucket": "port",
       "coBucket": "moderate",
       "n": 65,
-      "effect": -0.35,
+      "effect": -0.39,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.resourcePressure",
+      "bucket": "road",
+      "coBucket": "low",
+      "n": 75,
+      "effect": -0.18,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.resourcePressure",
+      "bucket": "road",
+      "coBucket": "moderate",
+      "n": 75,
+      "effect": 0.18,
       "weight": 0.5,
       "source": "soak"
     },
@@ -614,7 +634,7 @@
       "bucket": "city",
       "coBucket": "Magic",
       "n": 56,
-      "effect": 0.28,
+      "effect": 0.29,
       "weight": 0.5,
       "source": "soak"
     },
@@ -824,7 +844,7 @@
       "bucket": "town",
       "coBucket": "Magic",
       "n": 81,
-      "effect": -0.18,
+      "effect": -0.2,
       "weight": 0.5,
       "source": "soak"
     },

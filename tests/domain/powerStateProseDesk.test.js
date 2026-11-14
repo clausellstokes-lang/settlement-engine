@@ -721,12 +721,28 @@ describe('DS-POW-6 — the capture pools are COVERT, and that is the kernel work
   it('pressure direction reads the CANONICAL contributions, and a mixed pair is silence', () => {
     expect(capturePoolKey('equilibrium', { safety: -12, prosperity: -10 }))
       .toBe('capture pressure ADVANCING (weak security, poor prosperity)');
-    expect(capturePoolKey('none', { safety: 8, prosperity: 15 }))
+    // re-keyed (W2-A-LEAVES 5a, 2026-11-12): the RECOVERING pool's state is one that has met the criminals
+    // ('adversarial': "Fighting the criminals"), never 'none', where the hall reads "Free of the criminals"
+    expect(capturePoolKey('adversarial', { safety: 8, prosperity: 15 }))
       .toBe('capture pressure RECOVERING (strong security, prosperity)');
     // Mixed and flat are neither direction — the corpus wrote no sentence for them.
-    expect(capturePoolKey('none', { safety: -12, prosperity: 15 })).toBeNull();
-    expect(capturePoolKey('none', { safety: 0, prosperity: 0 })).toBeNull();
+    expect(capturePoolKey('adversarial', { safety: -12, prosperity: 15 })).toBeNull();
+    expect(capturePoolKey('adversarial', { safety: 0, prosperity: 0 })).toBeNull();
     expect(capturePoolKey('none', null)).toBeNull();
+  });
+
+  it('5a RE-RULED (W2-A-LEAVES-2, REVIEW-W2A F3): the blanket silence at none is withdrawn — the pressure pools draw again', () => {
+    // The first seat returned null at 'none' and 288 lines left the page, most of them true. Each line is now struck
+    // only where the town makes it false (crimeLineDisqualifiers.js); the key keeps its direction at every rung
+    // below `corrupted`.
+    expect(capturePoolKey('none', { safety: -12, prosperity: -10 })).toBe('capture pressure ADVANCING (weak security, poor prosperity)');
+    expect(capturePoolKey('none', { safety: 8, prosperity: 15 })).toBe('capture pressure RECOVERING (strong security, prosperity)');
+    expect(capturePoolKey('equilibrium', { safety: -12, prosperity: -10 })).toBe('capture pressure ADVANCING (weak security, poor prosperity)');
+    expect(capturePoolKey('adversarial', { safety: -12, prosperity: -10 })).toBe('capture pressure ADVANCING (weak security, poor prosperity)');
+    expect(capturePoolKey(undefined, { safety: -12, prosperity: -10 })).toBe('capture pressure ADVANCING (weak security, poor prosperity)');
+    // the DM's desk at none, with no official in a criminal's pay, prints the one ADVANCING line that presumes none
+    const drawn = powerStateProse(underside(BREAK({ prosperity: -10, safety: -12 }), 'none'), {}, { seed: 'a', audience: 'dm' });
+    expect(drawn.captureReading?.sentence).toMatch(/^Each season it gets easier to buy an official/);
   });
 });
 
@@ -771,7 +787,10 @@ describe('DS-POW-6 — the reading lens TILES with DS-POW-1 rather than overlapp
       underside(null, 'none'),
       underside(BREAK({}), 'none'),
       underside(BREAK({ prosperity: -10, safety: -12 }), 'equilibrium'),
-      underside(BREAK({ prosperity: 15, safety: 8 }), 'none'),
+      // re-keyed from 'none' (W2-A-LEAVES 5a), then from 'adversarial' (W2-A-LEAVES-2, F3): with no cast and no watch
+      // fact, RECOVERING's one line true at adversarial ("the approach … did not take") declares a watch; at
+      // equilibrium its "losing their grip on the hall" is true
+      underside(BREAK({ prosperity: 15, safety: 8 }), 'equilibrium'),
       underside(BREAK({ prosperity: -10, safety: -12 }), 'corrupted'),
       underside(BREAK({ prosperity: -10, safety: -12 }), 'capture'),
       ...['Black Market Ring', 'Smuggling Operation', 'Gambling Den', 'Front Business',

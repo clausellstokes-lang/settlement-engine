@@ -101,14 +101,21 @@ describe('the outlook hooks carry their declarations beside the branches that pr
     expect(printed.includes('export const OUTLOOK_HOOK_SIBLINGS'), 'the printer carries no table of its own').toBe(false);
     // The old path still answers (scripts/lib/table-pools.mjs enrols the channel at foodBalance.js).
     expect((await import('../../src/generators/economy/foodBalance.js')).OUTLOOK_HOOK_SIBLINGS).toBe(OUTLOOK_HOOK_SIBLINGS);
-    expect(Object.keys(OUTLOOK_HOOK_SIBLINGS).length).toBe(3);
+    // COHERENCE-AGREE (2026-11-11): the timber line's second event, the war line, its three events in peace, the starving set.
+    expect(Object.keys(OUTLOOK_HOOK_SIBLINGS).map((k) => k.split(' ').slice(0, 4).join(' '))).toEqual([
+      'Something is killing the', 'War has taken the', 'The timber rafts stopped', 'The iron merchants have',
+      'The iron carts are', 'A new toll on', 'The settlement is starving.']);
     for (const [key, set] of Object.entries(OUTLOOK_HOOK_SIBLINGS)) {
       expect(printed.includes(key), key.slice(0, 40)).toBe(true);
       expect(set[0].text).toBe(key);
       for (const a of set[0].needs) expect(assertDeclarable(a).dimension, a).toBeTruthy();
       if (set[1]) {
         expect(set[1].twinOf).toBe(key);
-        expect(set[1].excludes).toEqual(set[0].needs);
+        // RE-SPELLED 2026-11-12 (COHERENCE-AGREE-3, REVIEW-AGREE F4), stricter, not looser: a twin answers its
+        // original's needs AND keeps its original's refusals (the war line's twin asserts the war too, so it
+        // refuses the peace as its original does). For every set whose original refuses nothing — all but the
+        // war line and the three peace events — this is the assertion it was.
+        expect(set[1].excludes).toEqual([...set[0].needs, ...(set[0].excludes || [])]);
       }
     }
     // the [sea] case: the timber twin says no ships

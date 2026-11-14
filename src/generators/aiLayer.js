@@ -139,7 +139,7 @@ export function extractFullContext(s) {
     // Economy
     prosperity:   via.summary?.split('—')[0]?.trim() || null,
     econScore:    Math.round(eco.compound?.economyOutput ?? scores.economic ?? 50),
-    chains:       chains.map(c => `${c.label || c.chainId} (${c.status || 'ok'})`).slice(0, 8),
+    chains:       chains.map(c => `${chainPrintName(c, s).label || c.chainId} (${c.status || 'ok'})`).slice(0, 8), // COHERENCE-AGREE-6 (F1): the printed name
     // incomeSources live on economicState (economicGenerator's return), NOT
     // on the viability report — via.incomeSources never exists, so this
     // always rendered 'Income sources: 0'. via kept as a legacy fallback.
@@ -428,3 +428,4 @@ export async function runTemplateNarrative(settlement, onProgress) {
     ],
   };
 }
+import { chainPrintName } from '../domain/display/chainPrintName.js'; // COHERENCE-AGREE-6 (F1): what a chain prints under

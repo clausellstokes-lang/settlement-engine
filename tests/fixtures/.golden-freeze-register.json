@@ -205,11 +205,11 @@
       "suite": "tests/domain/townCartographyCalibration.test.js",
       "recordEnv": "UPDATE_CARTOGRAPHY_CALIBRATION",
       "proofForm": null,
-      "sha256": "d9dd31114a330858f9a15ee9a77190c255512504341f3d1fe5e9376ff4f7bde8",
+      "sha256": "98f7254262e160180eb0e263262dca1b1c9098e1089b96cc80c5df380d13ea6c",
       "rows": 504,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the wave MERGE-WAVE, 2026-11-08)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair, re-confirmed to the new chair 2026-11-13); the ODQ draft's entries 'AN OUTSIDE CRITIQUE OF ONE GENERATED TOWN, MEASURED', 'THE CRITIQUE READ AS CLASSES' and 'THE OWNER: FIXED BEFORE THE RELEASE — THE COHERENCE WAVE' (docs/chair/2026-11-07/ODQ-934.105-DRAFT.md, 2026-11-11); the charter docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md §2; the chair's food-sources ruling of 2026-11-11 (variant S, cultivated sources)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
@@ -288,11 +288,11 @@
         "PRE_COUPLING_CORPUS_SHA"
       ],
       "frozenConstants": null,
-      "sha256": "dba4f5bc754676fe499edfc3207320849c3dcacf4ddbbf5b49d59695fc8a8d32",
+      "sha256": "13fd7c7799822d359661a9213f9ef5a849bbf114d0eeaf16ba09a185c9d8e7ca",
       "rows": null,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair); the owner's order of 2026-11-11 on the outside critique (ODQ-934.105 draft: THE OWNER: FIXED BEFORE THE RELEASE — THE COHERENCE WAVE, 2026-11-11 21:41 UTC), the chair's COHERENCE-POWERS charter (docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md §0, §5)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair, re-confirmed to the new chair 2026-11-13); the ODQ draft's entries 'AN OUTSIDE CRITIQUE OF ONE GENERATED TOWN, MEASURED', 'THE CRITIQUE READ AS CLASSES' and 'THE OWNER: FIXED BEFORE THE RELEASE — THE COHERENCE WAVE' (docs/chair/2026-11-07/ODQ-934.105-DRAFT.md, 2026-11-11); the charter docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md §2; the chair's food-sources ruling of 2026-11-11 (variant S, cultivated sources)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON.",
       "governance": "Charter §1.1 row 15 / §1.1a. Its header carries a hand-maintained enumeration of chartered movement windows which the freeze act retires into one sentence. Implementation-leave: the fence itself is not rebuilt."
     },
@@ -342,11 +342,11 @@
       "suite": "tests/property/generatorGoldenMaster.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "5ef18089839047b430fc851614b49210ac01988cbf19a1a6cd42f5bcc30b0256",
+      "sha256": "7b7089fd5e5c45e1f0a5fc247a249c80aa72df0f99dcb3a83946256300ceebb5",
       "rows": 525,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair); the owner's order of 2026-11-11 on the outside critique (ODQ-934.105 draft: THE OWNER: FIXED BEFORE THE RELEASE — THE COHERENCE WAVE, 2026-11-11 21:41 UTC), the chair's COHERENCE-POWERS charter (docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md §0, §5)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair, re-confirmed to the new chair 2026-11-13); the ODQ draft's entries 'AN OUTSIDE CRITIQUE OF ONE GENERATED TOWN, MEASURED', 'THE CRITIQUE READ AS CLASSES' and 'THE OWNER: FIXED BEFORE THE RELEASE — THE COHERENCE WAVE' (docs/chair/2026-11-07/ODQ-934.105-DRAFT.md, 2026-11-11); the charter docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md §2; the chair's food-sources ruling of 2026-11-11 (variant S, cultivated sources)",
       "note": "RE-RECORDED THROUGH THE SIGNED DOOR at the genesis freeze 2026-09-16 (owner: 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); 525 rows moved since the em-dash wave e3f6029b2 (banked §901); the key set unchanged."
     },
     {
@@ -498,11 +498,11 @@
       "suite": "tests/pdf/goldenViewModel.test.js",
       "recordEnv": null,
       "proofForm": null,
-      "sha256": "e1b25cce1c55e9516de9ada8ce019751e1e13f3b398fb74001212d681a15cfce",
+      "sha256": "91422b8fef03a9688f3adfaae87e6ea1e549f146ee99096d855f180cb3ac8f59",
       "rows": null,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair); the owner's order of 2026-11-11 on the outside critique (ODQ-934.105 draft: THE OWNER: FIXED BEFORE THE RELEASE — THE COHERENCE WAVE, 2026-11-11 21:41 UTC), the chair's COHERENCE-POWERS charter (docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md §0, §5)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair, re-confirmed to the new chair 2026-11-13); the ODQ draft's entries 'AN OUTSIDE CRITIQUE OF ONE GENERATED TOWN, MEASURED', 'THE CRITIQUE READ AS CLASSES' and 'THE OWNER: FIXED BEFORE THE RELEASE — THE COHERENCE WAVE' (docs/chair/2026-11-07/ODQ-934.105-DRAFT.md, 2026-11-11); the charter docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md §2; the chair's food-sources ruling of 2026-11-11 (variant S, cultivated sources)",
       "governance": "THE WRITER IS VITEST ITSELF, NOT REPO SOURCE. This surface is a vitest toMatchSnapshot() file; its lawful re-record path is `vitest -u`. That path carries no env spelling and no writeFileSync, so no source scan can see it and THE DOOR CANNOT REFUSE IT. The walker can only CONVICT the result after the fact via the byte arm. This asymmetry is real and is written here rather than discovered at the freeze: for this one surface the machinery detects but does not prevent. Ruling on whether to convert it to a door-written manifest belongs to the freeze act.",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON. Charter §1.1 row 6. The only __snapshots__ file in the estate."
     },
@@ -850,11 +850,11 @@
       "suite": "tests/property/heraldKnowledgeDeskGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "899a7ee27ee43cba09ad9cf06846ea004979e1fad4b39e4d33c61b612950b6cb",
-      "rows": 440,
+      "sha256": "b3097c91576f65c857d660254fc2403fdddcd2526ed59e3c993ed57a1833b47c",
+      "rows": 446,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair); the owner's order of 2026-11-11 on the outside critique (ODQ-934.105 draft: THE OWNER: FIXED BEFORE THE RELEASE — THE COHERENCE WAVE, 2026-11-11 21:41 UTC), the chair's COHERENCE-POWERS charter (docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md §0, §5)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair, re-confirmed to the new chair 2026-11-13); the ODQ draft's entries 'AN OUTSIDE CRITIQUE OF ONE GENERATED TOWN, MEASURED', 'THE CRITIQUE READ AS CLASSES' and 'THE OWNER: FIXED BEFORE THE RELEASE — THE COHERENCE WAVE' (docs/chair/2026-11-07/ODQ-934.105-DRAFT.md, 2026-11-11); the charter docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md §2; the chair's food-sources ruling of 2026-11-11 (variant S, cultivated sources)",
       "note": "ENROLLED 2026-09-24 by lane FP-I5 (IN-5) under the FP chair's dispatch, record docs/shift-records/2026-09-24-in5-herald-knowledge-desk.json (action enroll, chair-signed). THE NON-OMNISCIENT HERALD GOLDEN of the belief_misjudgment refile (J-INF-6), captured FIRST at the clean base 57b52b510 before the routing table moved: the reader corpus full_simulation row rr-fresh-full after one year, read through buildHeraldFeed campaign lens. Keys: <row>|contentSha256 (every item's content except its desk, sorted by id), <row>|itemCount, and <row>|section|<id> (the desk at capture). tests/property/heraldKnowledgeDeskGolden.test.js holds the digest and count byte-stable and asserts every desk equals its captured desk except the declared refile set, which reads the knowledge desk: the one-time shift, recorded. The single producer is tests/helpers/heraldDeskGolden.js, imported by the suite; the capture ran it byte-identical from outside the tree so the door's clean-tree refusal held."
     }
   ]

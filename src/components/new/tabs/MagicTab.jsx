@@ -10,7 +10,7 @@
  * only — no store reads, no worldState, no leak surface.
  */
 
-import { deriveMagicPosture, deriveMagicRelianceView } from '../../../domain/display/dossierViewModel.js';
+import { deriveMagicPosture, deriveMagicRelianceView, deriveMagicSupplyView } from '../../../domain/display/dossierViewModel.js';
 import { describeDeityEffects } from '../../../domain/display/deityEffects.js';
 import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, SLATE, sans, SP } from '../../theme.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
@@ -86,6 +86,9 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
   // reading (relied-upon or integral ⇒ true), and the block's own fallback reads the same.
   // The siege/famine/plague flag no longer decides anything on this tab.
   const reliance = deriveMagicRelianceView(settlement);
+  // ROW 3 (W2-A-LEAVES, 2026-11-12, the chair's ruling): the reliance line names where the magic comes from, read
+  // from the leaf (`facts/magicSource.js`); where nothing on the record supplies it, the line does not print.
+  const supply = deriveMagicSupplyView(settlement);
   // THE PUBLIC BRANCH (STYLE-RULINGS-2 B10(a), SW-B7b): a shared page prints the lens the
   // owner's player view drew, shipped at the save (`magic`); unstamped, SILENT (magicDeskRead.js).
   const magicProse = magicDeskRead(settlement, { publicDossier, playerView });
@@ -136,9 +139,10 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
               background: CARD_HDR, padding: `${SP.sm}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`,
             }}>Roles</div>
             <div style={{ padding: `${SP.xs}px ${SP.md}px` }} data-testid="magic-roles">
-              {reliance.shown && (
+              {reliance.shown && supply.statable && (
                 <div data-testid="magic-reliance" style={{ fontSize: proseFontSize(FS.sm, mobile), color: INK, fontWeight: 700, padding: `${SP.xs}px 0` }}>
                   Reliance on magic: {reliance.word}
+                  {supply.supply && <span data-testid="magic-reliance-source" style={{ fontWeight: 400 }}> · supplied by {supply.supply}</span>}
                 </div>
               )}
               {posture.roleLines.map((line, i) => (
@@ -166,7 +170,7 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
                 </p>}
               {magicFrozen && (settlement.economicState?.activeChains || []).filter(c => c.magicNote).map((c, i) => (
                 <div key={i} style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, marginTop: 6, paddingLeft: 8, borderLeft: `2px solid ${BORDER}`, fontStyle: 'italic' }}>
-                  {c.label}: {c.magicNote}
+                  {chainPrintName(c, settlement).label}: {c.magicNote}
                 </div>
               ))}
             </div>
@@ -193,3 +197,4 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
     </div>
   );
 }
+import { chainPrintName } from '../../../domain/display/chainPrintName.js'; // COHERENCE-AGREE-6 (F1): what a chain prints under

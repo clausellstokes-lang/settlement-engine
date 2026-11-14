@@ -103,7 +103,7 @@ export function Services({ settlement, narrativeMode, vm, stateProse }) {
             ACTIVE SUPPLY CHAINS · {s.activeChains.length}
           </Text>
           {s.activeChains.map((chain, i) => (
-            <ChainCard key={`chain-${i}`} chain={chain} instNames={(settlement?.institutions || []).map((x) => x?.name)} />
+            <ChainCard key={`chain-${i}`} chain={chain} town={settlement} instNames={(settlement?.institutions || []).map((x) => x?.name)} />
           ))}
         </View>
       )}
@@ -189,7 +189,7 @@ function CategoryCard({ cat }) {
   );
 }
 
-function ChainCard({ chain, instNames = [] }) {
+function ChainCard({ chain, town, instNames = [] }) { const shown = chainPrintName(chain, town); // COHERENCE-AGREE-6 (F1): the name and the source printed read the town's access
   // Honor the chain's own disruption status first — the card used to label
   // trade-impaired/vulnerable chains 'Active', contradicting the web panel.
   const status = String(chain.status || '').toLowerCase();
@@ -217,13 +217,14 @@ function ChainCard({ chain, instNames = [] }) {
   // — which already routes the same field through the seam — said 'House of worship'. The
   // seam goes BEFORE humanize so an unmapped institution still gets its casing.
   const flow = [
-    // R2-CODE-B round 3, ruling (d) (#804): no ground the record says is absent (chainHouses.js).
-    chainSourceOf(chain) ? humanize(label(chainSourceOf(chain))) : null,
+    // R2-CODE-B round 3, ruling (d) (#804): no ground the record says is absent (chainHouses.js), read on the source the
+    // town's access prints (COHERENCE-AGREE-6 F1), as the screen's card reads it: chainFlowFacts({ ...chain, ...shown }).
+    chainSourceOf({ ...chain, ...shown }) ? humanize(label(chainSourceOf({ ...chain, ...shown }))) : null,
     // R2-CODE-B item 1: the houses by the seam's house label, each once (domain/display/chainHouses.js),
     // the screen's chain card's own read: no rank's count range the roster does not hold.
     // Ruling (e): the roster is read, so a house held only as a road to elsewhere is named as the page names it.
     chainHousesOf(chain.processingInstitutions, instNames).map((h) => humanize(h.name)).join(' + ') || null,
-    (chain.outputs || []).map(humanize).slice(0, 4).join(', ') || null,
+    ((outputs) => (outputs && chainYieldRefused(chain) ? `${NORMALLY_YIELDS}: ${outputs}` : outputs))((chain.outputs || []).map(humanize).slice(0, 4).join(', ') || null),
   ].filter(Boolean).join(' \u00bb ');
 
   const meta = [
@@ -237,7 +238,7 @@ function ChainCard({ chain, instNames = [] }) {
   return (
     <StatusCard
       compact
-      name={chain.label || chain.chainId || 'Chain'}
+      name={shown.label || chain.chainId || 'Chain'}
       status={statusLabel}
       statusLabel={statusLabel}
       tone={tone}
@@ -280,3 +281,7 @@ function svcLabel(svc) {
 }
 
 export default Services;
+
+// COHERENCE-AGREE-4 (item 3′): at the end of the file so no line-keyed register row above it moves.
+import { NORMALLY_YIELDS, chainYieldRefused } from '../../domain/chainYield.js';
+import { chainPrintName } from '../../domain/display/chainPrintName.js';

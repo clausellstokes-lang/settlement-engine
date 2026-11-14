@@ -45,6 +45,12 @@ export const SOURCE_WORDS = Object.freeze({
   game: /\b(?:game|venison|hunters?(?:')?)\b/i,
 });
 
+/** A market named as the place's own ("markets", "market tolls"); a black market is not one. */
+export const MARKET_WORDS = /(?<!black )\bmarkets?\b/i;
+
+/** May a culture line stand in a place with (or without) a market? @param {string} line @param {boolean | undefined} market */
+const marketFits = (line, market) => market !== false || !MARKET_WORDS.test(line);
+
 /** @param {string} s */
 const capital = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
 
@@ -67,7 +73,7 @@ export function sourcesNamedIn(sentence) {
  * `FOODWAYS.FRAMES.<one|two|more>` / `FOODWAYS.SOURCE_PHRASES.<source>`. `input.facts` answers a
  * declared line (a birth in progress hands `birthFactsOf`; none = a declared line is refused).
  * @param {{ sources: ReadonlyArray<string>, cultureLines?: ReadonlyArray<string> | null, identity: string,
- *   facts?: object|null|(() => object|null) }} input
+ *   facts?: object|null|(() => object|null), market?: boolean }} input the market home's answer in `market`
  * @returns {string}
  */
 export function composeFoodwaysLine(input) {
@@ -76,13 +82,15 @@ export function composeFoodwaysLine(input) {
   const offset = fnv1a32(`foodways|${input.identity}`);
   const held = new Set(sources);
   // The culture's flavour: one of its own sentences, drawn without a draw, kept only when it
-  // names no source the place lacks (a fish word only where fish is a source).
-  const fitting = cultureLines.filter((line) => sourcesNamedIn(line).every((s) => held.has(s)));
+  // names no source the place lacks (a fish word only where fish is a source), and — COHERENCE-AGREE-3
+  // (REVIEW-AGREE F6) — no market where the market home says there is none (`input.market === false`;
+  // a caller that does not say keeps every line, as before).
+  const fitting = cultureLines.filter((line) => sourcesNamedIn(line).every((s) => held.has(s)) && marketFits(line, input.market));
   const flavour = fitting.length ? fitting[offset % fitting.length] : '';
   // No source of its own: the culture's sentence only if it claims none; otherwise a plain
   // sentence that claims nothing about what the place grows.
   if (!sources.length) {
-    const claimless = cultureLines.filter((line) => sourcesNamedIn(line).length === 0);
+    const claimless = cultureLines.filter((line) => sourcesNamedIn(line).length === 0 && marketFits(line, input.market));
     return claimless.length ? claimless[offset % claimless.length] : 'Meals follow the season and what the household has put by.';
   }
   const frameKey = sources.length === 1 ? 'one' : sources.length === 2 ? 'two' : 'more';

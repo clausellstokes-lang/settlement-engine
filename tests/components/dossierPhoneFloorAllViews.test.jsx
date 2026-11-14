@@ -620,6 +620,13 @@ const desktopShape = (perView) => Object.fromEntries(
 // carries its seat line on the card (World/NPCs +1 prose); no later commit moves a count; no token moved; the floors arm
 // reads zero violations.
 // Desktop: NPCs 281 -> 282.
+// ── RE-MEASURED 2026-11-13 (STYLE-2-MERGE point 47, the COHERENCE-AGREE merge 22cc9ef7d; §2f's NAMED CLASS 1, its three checks):
+// no token moved; the floors arm reads zero violations and every sub-12 count reads 0, mobile and desktop. Only views that print
+// a leaf the lane declares move, each in the declared direction and by EXACTLY the lane's own movement at its tip 69b53decd
+// (measured there against its base): Summary/Overview +1 prose, Summary/Plot Hooks +2 prose, Systems/Economics -1 chrome,
+// World/History +1 prose — views that print families the draft declares (the summary's economy and situation, the plot hooks,
+// the trade cards, the history); the single lines themselves are not traced here.
+// Desktop: Overview 14 -> 15, Plot Hooks 87 -> 89, Economics 47 -> 46, History 15 -> 16.
 const DESKTOP_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 220 -> 284, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -629,7 +636,7 @@ const DESKTOP_BASELINE = Object.freeze({
   // (8dff691f3: World/NPCs 23 -> 220, World/Relationships 61 -> 178, Summary/Plot Hooks 37 -> 88 with the car's one hook per face)
   // and the wave's lines (Systems/Power 22 -> 30, Services 109 -> 104, Resources 2 -> 1, Outlook 1 -> 2; World/Daily Life 1 -> 0,
   // WAVE-RULINGS #37). Per-view attribution to single lanes is PLAUSIBLE (not bisected per view). No desktop FS token moved.
-  "Summary/Overview":    { measured: 14, sub14: 13 },
+  "Summary/Overview":    { measured: 15, sub14: 14 },
   // T2-25 measured it at 1 under Systems/Causes; X-12 moves it here (BUILD-T1), same count.
   "Summary/Foundations": { measured: 1, sub14: 1 },
   // 37 -> 38 (2026-10-31, the G2 + W2-LINKS composition at the integration merge): one conflict line more in
@@ -637,15 +644,11 @@ const DESKTOP_BASELINE = Object.freeze({
 // ── RE-MEASURED 2026-11-10 (STYLE-2-MERGE-4, point 24; SW-8 RENAME-POWERS C9-6 d12e20112, the power generators):
 // Plot Hooks 88 -> 89 on both arms. Red on SW-8's own tip b951ce7da and unkeyed there; bisected over the lane: green at
 // c85fd3f85, red at d12e20112 (the conflict hooks reworded). No token moved; sub12 0.
-  "Summary/Plot Hooks":  { measured: 87, sub14: 87 },
+  "Summary/Plot Hooks":  { measured: 89, sub14: 89 },
   "Systems/Services":    { measured: 104, sub14: 104 },
   "Systems/Institutions": { measured: 72, sub14: 72 }, // T1-14, measured 2026-10-30 by this walk; 62 → 71 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine face rows each gain the "Connection:" label, a line of its own
   // 47 -> 40 (2026-10-30, UX consolidation U1, RULINGS-T2 T2-1..T2-8): no desktop token moved; the page lost
   // its duplicates (Economy/Food tiles, the Supply Chains rows, the Resource Exploitation chips, the plot hooks).
-  // 47 -> 48 (R2-CODE-B-3 item 2a, the stores' span contains its figure): no token moved; the fixture city's stores line
-  // "Stores: a granary, nine months of grain." (40 characters) reads "about nine months" and crosses the measured length.
-  // then 48 -> 46 at the merge of the side branch (R2-CODE-B-5, 2026-11-14), the two moves composed: 47 -> 45 (2026-11-13, R2-CODE-B-SIDE items 1 and 2, 2ed36a430 and a245e05fb): the chain card's upstream note
-  // (47 -> 46, measured at 2ed36a430) and its From line of "Import: <a chain's label>" left the card; no token moved.
   "Systems/Economics":   { measured: 46, sub14: 46 },
   // 28 -> 22 (2026-10-30, UX consolidation U5, T2-17..T2-19): Current Tensions, Active Conflicts and the
   // duplicate governing rows left the page; no token moved.
@@ -671,10 +674,10 @@ const DESKTOP_BASELINE = Object.freeze({
   // 0 -> 4 (2026-11-03, lane MAGIC, chair ruling 2): the dependence block reads the one reliance reading
   // instead of the siege/famine/plague flag, so the fixture's block renders on the public walk: its title
   // (chrome), its static explanation and its chain notes (prose). No token moved.
-  "Systems/Magic":       { measured: 4, sub14: 4 },
-  // 282 -> 280 (2026-11-13, R2-CODE-B item 1): two NPC card lines name their house by the seam's house label
-  // ("Merchant guilds", not "Merchant guilds (15-40)"), and the shorter line falls under the walk's MIN_CHARS. No token moved.
-  "World/NPCs":          { measured: 280, sub14: 280 },
+  // 4 -> 5 (2026-11-12, W2-A-LEAVES, census row 3): the reliance line names its source (" · supplied by …"), so it
+  // crosses the walk's forty-five characters and is measured; its 700 weight judges it chrome. No token moved.
+  "Systems/Magic":       { measured: 5, sub14: 5 },
+  "World/NPCs":          { measured: 282, sub14: 282 },
   // 60 -> 61 / 58 -> 59 and mobile 58 -> 59 (2026-10-31, G3 at the merge, GS-1): the eight-variant tie lines wrap one
   // line longer in the fixture; no token moved.
   "World/Relationships": { measured: 174, sub14: 172 },
@@ -683,7 +686,7 @@ const DESKTOP_BASELINE = Object.freeze({
   "World/Rumors & News": { measured: 1, sub14: 1 }, // X-7a launch teaser (BUILD-T1 registers it always)
   "World/War":           { measured: 1, sub14: 1 }, // X-7a launch teaser, same
   "World/Traditions":    { measured: 1, sub14: 1 },
-  "World/History":       { measured: 15, sub14: 15 },
+  "World/History":       { measured: 16, sub14: 16 },
   "Notes/Chronicle":     { measured: 0, sub14: 0 }, // 1 -> 0: the empty-state pitch cut (BUILD-T3 U4)
 });
 
@@ -778,6 +781,13 @@ const DESKTOP_BASELINE = Object.freeze({
 // carries its seat line on the card (World/NPCs +1 prose); no later commit moves a count; no token moved; the floors arm
 // reads zero violations.
 // Mobile: World/NPCs prose 280 -> 281.
+// ── RE-MEASURED 2026-11-13 (STYLE-2-MERGE point 47, the COHERENCE-AGREE merge 22cc9ef7d; §2f's NAMED CLASS 1, its three checks):
+// no token moved; the floors arm reads zero violations and every sub-12 count reads 0, mobile and desktop. Only views that print
+// a leaf the lane declares move, each in the declared direction and by EXACTLY the lane's own movement at its tip 69b53decd
+// (measured there against its base): Summary/Overview +1 prose, Summary/Plot Hooks +2 prose, Systems/Economics -1 chrome,
+// World/History +1 prose — views that print families the draft declares (the summary's economy and situation, the plot hooks,
+// the trade cards, the history); the single lines themselves are not traced here.
+// Mobile: Overview prose 12 -> 13, Plot Hooks prose 86 -> 88, Economics chrome 8 -> 7 (sub14 8 -> 7), History prose 15 -> 16.
 const MOBILE_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 219 -> 283, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -786,17 +796,14 @@ const MOBILE_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-WAVE's GREEN-BASE point (2026-11-08, GREEN-BASE §4.4), the same walk at 375px: the people car's
   // rows (8dff691f3) and GREEN-BASE's 27b858fd9 (the car's rows on the PROSE floor) with the wave's lines; World/Relationships
   // chrome 3 -> 39 (the car's tie cards' chrome rows, all >= 12px). sub12 stays 0 in every view; the floors arm reads 0 violations.
-  "Summary/Overview":    { prose: 12, chrome: 2, sub14: 1, sub12: 0 },
+  "Summary/Overview":    { prose: 13, chrome: 2, sub14: 1, sub12: 0 },
   "Summary/Foundations": { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   // 37 -> 38 and Relationships 57 -> 58 (2026-10-31, the G2 + W2-LINKS composition at the merge): one conflict
   // line more (X-26a); both sub-floor counts stay where they were.
-  "Summary/Plot Hooks":  { prose: 86, chrome: 1, sub14: 1, sub12: 0 },
+  "Summary/Plot Hooks":  { prose: 88, chrome: 1, sub14: 1, sub12: 0 },
   "Systems/Services":    { prose: 103, chrome: 1, sub14: 0, sub12: 0 },
   "Systems/Institutions": { prose: 71, chrome: 1, sub14: 0, sub12: 0 }, // 61 → 70 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine "Connection:" labels, each at the prose floor
   // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
-  // prose 39 -> 40 (R2-CODE-B-3 item 2a): the stores line "Stores: a granary, about nine months of grain." crosses the
-  // measured length at the prose floor; chrome and both sub-floor counts hold.
-  // then 40/8 -> 39/7 at the merge of the side branch (R2-CODE-B-5, 2026-11-14), the two moves composed: 39/8 -> 38/7 (2026-11-13, R2-CODE-B-SIDE items 1 and 2, 2ed36a430 and a245e05fb): the chain card's upstream note (prose) and its From line of "Import: <a chain's label>" (chrome) left the card; no token moved.
   "Systems/Economics":   { prose: 39, chrome: 7, sub14: 7, sub12: 0 },
   // prose 27 -> 21 (2026-10-30, UX consolidation U5): tensions, conflicts and the duplicate rows left.
   "Systems/Power":       { prose: 33, chrome: 1, sub14: 0, sub12: 0 }, // 29 -> 28 OWNER-WORDS-DOSSIER item 3 (2026-11-09): the governance block is one paragraph
@@ -819,17 +826,17 @@ const MOBILE_BASELINE = Object.freeze({
   // prose 1, chrome 0 -> 1 (2026-10-30, UX consolidation): the dependence block's line and its title.
   // prose 0 -> 3, chrome 0 -> 1 (2026-11-03, lane MAGIC, chair ruling 2): the dependence block reads the one
   // reliance reading; its title is the 12px chrome line, its explanation and chain notes take the prose floor.
-  "Systems/Magic":       { prose: 3, chrome: 1, sub14: 1, sub12: 0 },
-  // prose 281 -> 279 (2026-11-13, R2-CODE-B item 1): the same two NPC card lines, shorter by the count range,
-  // fall under MIN_CHARS; sub12 stays 0 and the floors arm reads 0 violations.
-  "World/NPCs":          { prose: 279, chrome: 1, sub14: 0, sub12: 0 },
+  // chrome 1 -> 2 (2026-11-12, W2-A-LEAVES, census row 3): the reliance line names its source, crosses the walk's
+  // forty-five characters and is measured, chrome by its 700 weight at the prose size (sub14 and sub12 hold).
+  "Systems/Magic":       { prose: 3, chrome: 2, sub14: 1, sub12: 0 },
+  "World/NPCs":          { prose: 281, chrome: 1, sub14: 0, sub12: 0 },
   "World/Relationships": { prose: 138, chrome: 36, sub14: 36, sub12: 0 },
   "World/Faith":         { prose: 2, chrome: 0, sub14: 0, sub12: 0 },
   "World/Daily Life":    { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Rumors & News": { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   "World/War":           { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Traditions":    { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
-  "World/History":       { prose: 15, chrome: 0, sub14: 0, sub12: 0 },
+  "World/History":       { prose: 16, chrome: 0, sub14: 0, sub12: 0 },
   "Notes/Chronicle":     { prose: 0, chrome: 0, sub14: 0, sub12: 0 }, // 1 -> 0: the pitch cut (BUILD-T3 U4)
 });
 

@@ -16,6 +16,7 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
+import { NO_FOOD_CHAINS_LINE, OWN_PLOTS_LINE } from '../../src/generators/foodLand.js';
 
 /** @type {Array<{ key: string, s: any }>} */
 const births = [];
@@ -54,13 +55,40 @@ describe('ONE FOOD-SOURCE COUNT (R-W7 c, cause 4b)', () => {
   });
 
   it('activeChainsCount, the chains it marks live and the diversity note are the record foodSources\' own types', () => {
-    const NOTE = ['no established food chains', 'single food source', 'two food source types', 'three food source types', 'highly diversified diet'];
-    const disagree = births.filter(({ s }) => {
+    // With no source type the note is the declared pair's (COHERENCE-AGREE-3, Part B (i), e4a897c2a): its own plots
+    // where the roster works its own land, else no chains. COHERENCE-AGREE-6 (REVIEW-AGREE-2 F7, the chair's ruling of
+    // 2026-11-12): the expectation is a LITERAL per fixed row, never a call into the writer's own predicate
+    // (`foodLand.js :: foodLandOf(...).worksOwnLand`), so a wrong predicate reddens it. Taken at the generator of
+    // COHERENCE-AGREE-6's item 5; a row whose food sources move is re-keyed here with its cause.
+    const NOTE = [null, 'single food source', 'two food source types', 'three food source types', 'highly diversified diet'];
+    const ZERO_NOTE = {
+      'thorp|norse|forest|isolated|civilized|golden-master-v3': OWN_PLOTS_LINE,
+      'thorp|greek|mountain|road|civilized|golden-master-v3': OWN_PLOTS_LINE,
+      'hamlet|germanic|desert|road|civilized|golden-master-v3': OWN_PLOTS_LINE,
+      'hamlet|mesoamerican|forest|isolated|civilized|golden-master-v3': OWN_PLOTS_LINE,
+      'village|latin|mountain|road|civilized|golden-master-v3': OWN_PLOTS_LINE,
+      'village|arabic|desert|road|civilized|golden-master-v3': OWN_PLOTS_LINE,
+      'village|greek|forest|isolated|civilized|golden-master-v3': OWN_PLOTS_LINE,
+      'town|east_asian|desert|road|civilized|golden-master-v3': NO_FOOD_CHAINS_LINE,
+      'city|latin|forest|isolated|civilized|golden-master-v3': NO_FOOD_CHAINS_LINE,
+      'city|steppe|desert|road|civilized|golden-master-v3': NO_FOOD_CHAINS_LINE,
+      'metropolis|germanic|plains|road|civilized|golden-master-v3': NO_FOOD_CHAINS_LINE,
+      'metropolis|celtic|hills|road|civilized|golden-master-v3': NO_FOOD_CHAINS_LINE,
+      'metropolis|norse|forest|isolated|civilized|golden-master-v3': NO_FOOD_CHAINS_LINE,
+      'metropolis|greek|mountain|road|civilized|golden-master-v3': NO_FOOD_CHAINS_LINE,
+    };
+    const zeroKeys = births.filter(({ s }) => typesOf(s.economicState.foodSecurity.foodRecord.foodSources).size === 0).map(({ key }) => key);
+    expect(zeroKeys.sort(), 'the rows with no food source are the literal table\'s rows').toEqual(Object.keys(ZERO_NOTE).sort());
+    const zeroNote = (key) => ZERO_NOTE[key];
+    const noteCount = (line) => births.filter(({ s }) => s.economicState.foodSecurity.diversityNote === line).length;
+    expect(noteCount(OWN_PLOTS_LINE), 'the slice carries the own-plots twin').toBeGreaterThan(0);
+    expect(noteCount(NO_FOOD_CHAINS_LINE), 'and the no-chains line, so the zero arm reads both').toBeGreaterThan(0);
+    const disagree = births.filter(({ key, s }) => {
       const fs = s.economicState.foodSecurity;
       const n = typesOf(fs.foodRecord.foodSources).size;
       return fs.activeChainsCount !== n
         || fs.activeChains.length !== n
-        || fs.diversityNote !== NOTE[Math.min(n, 4)]
+        || fs.diversityNote !== (n === 0 ? zeroNote(key) : NOTE[Math.min(n, 4)])
         || fs.chains['Trade & imports'] !== false;
     }).map(({ key, s }) => `${key}: ${s.economicState.foodSecurity.activeChainsCount} vs ${s.economicState.foodSecurity.foodRecord.foodSources.join('+')}`);
     expect(disagree).toEqual([]);

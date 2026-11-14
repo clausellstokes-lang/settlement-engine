@@ -10,8 +10,11 @@ import { describe, expect, it } from 'vitest';
 import { deriveSupplyRiskAnalysis, OUTLOOK_HOOK_SIBLINGS } from '../../src/generators/economy/foodBalance.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 
-const TIMBER = Object.keys(OUTLOOK_HOOK_SIBLINGS).find((t) => t.includes('shipbuilding'));
-const TWIN = OUTLOOK_HOOK_SIBLINGS[TIMBER].find((l) => l.twinOf).text;
+// COHERENCE-AGREE (2026-11-11): the timber line has two events, each with its navigable original and
+// its twin; a place draws one by its size. Re-keyed by identity: every navigable original, every twin.
+const TIMBER_SETS = Object.values(OUTLOOK_HOOK_SIBLINGS).filter((set) => set[0].needs?.includes('navigable'));
+const ORIGINALS = TIMBER_SETS.map((set) => set[0].text);
+const TWINS = TIMBER_SETS.map((set) => set.find((l) => l.twinOf).text);
 const INSTITUTIONS = [{ name: 'Sawmill', category: 'Crafts' }];
 const BALANCE = { deficit: 0, dailyProduction: 10, dailyNeed: 10 };
 const hooksFor = (config) => deriveSupplyRiskAnalysis(800, { mustImport: ['timber'] }, INSTITUTIONS, config,
@@ -20,13 +23,14 @@ const hooksFor = (config) => deriveSupplyRiskAnalysis(800, { mustImport: ['timbe
 describe('the outlook hooks resolve (CENSUS-1f unit 3)', () => {
   it('a plains road town is not told its shipbuilding stalls', () => {
     const hooks = hooksFor({ tradeRouteAccess: 'road', terrainType: 'plains', tier: 'town' });
-    expect(hooks).toContain(TWIN);
-    expect(hooks).not.toContain(TIMBER); // anchored: the same hooks are proven to carry the twin on the line above
+    expect(TIMBER_SETS).toHaveLength(2);
+    expect(hooks.filter((h) => TWINS.includes(h))).toHaveLength(1);
+    expect(hooks.filter((h) => ORIGINALS.includes(h))).toEqual([]); // anchored: the same hooks are proven to carry one twin on the line above
   });
 
   it('a coastal port keeps the shipbuilding line', () => {
     const hooks = hooksFor({ tradeRouteAccess: 'port', terrainType: 'coastal', tier: 'town' });
-    expect(hooks).toContain(TIMBER);
+    expect(hooks.filter((h) => ORIGINALS.includes(h))).toHaveLength(1);
   });
 });
 

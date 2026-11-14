@@ -68,7 +68,7 @@ function Connector() {
   return <Text style={{ fontSize: pt['8'], color: palette.muted, marginRight: 2, marginBottom: 2 }}>&gt;</Text>;
 }
 
-function ChainRow({ chain, instNames, primaryExports }) {
+function ChainRow({ chain, instNames, primaryExports, town }) { const shown = chainPrintName(chain, town); // COHERENCE-AGREE-6 (F1): the source node prints under the town's access
   const st = getStatus(chain.status);
   const def = CHAIN_DEFS[chain.chainId] || {};
   const isExportable = chain.exportable && !chain.entrepot;
@@ -99,6 +99,8 @@ function ChainRow({ chain, instNames, primaryExports }) {
     };
   });
 
+  const refused = chainYieldRefused(chain);
+
   return (
     <View
       wrap={false}
@@ -113,11 +115,12 @@ function ChainRow({ chain, instNames, primaryExports }) {
       }}
     >
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
-        {/* R2-CODE-B round 3, ruling (d) (#804): no ground the record says is absent (chainHouses.js). */}
-        {chainSourceOf(chain) ? (
+        {/* R2-CODE-B round 3, ruling (d) (#804): no ground the record says is absent (chainHouses.js), read on the source
+            the town's access prints (COHERENCE-AGREE-6 F1), as the screen's card reads it: chainFlowFacts({ ...chain, ...shown }). */}
+        {chainSourceOf({ ...chain, ...shown }) ? (
           <>
             <Node color={st.color} bg={st.bg} border={st.border}>
-              {safe(chainSourceOf(chain))}{chain.resourceDepleted ? ' (depleted)' : ''}
+              {safe(chainSourceOf({ ...chain, ...shown }))}{chain.resourceDepleted ? ' (depleted)' : ''}
             </Node>
             <Connector />
           </>
@@ -141,7 +144,18 @@ function ChainRow({ chain, instNames, primaryExports }) {
           </View>
         ))}
 
-        {outputs.length > 0 ? (
+        {outputs.length > 0 && refused ? (
+          <>
+            <Connector />
+            {/* COHERENCE-AGREE-4 (item 3′): a chain the exporter refuses draws its table's outputs in the missing
+                style, as what it yields when whole; nothing is marked exported. */}
+            {outputs.map((o, i) => (
+              <Node key={`o-${i}`} {...MISSING} dashed italic>
+                {i === 0 ? `${NORMALLY_YIELDS}: ` : ''}{safe(o.label)}
+              </Node>
+            ))}
+          </>
+        ) : outputs.length > 0 ? (
           <>
             <Connector />
             {outputs.map((o, i) => (
@@ -179,7 +193,7 @@ function Legend() {
   );
 }
 
-function CategoryGroup({ needLabel, needKey, chains, instNames, primaryExports }) {
+function CategoryGroup({ needLabel, needKey, chains, instNames, primaryExports, town }) {
   const impaired = chains.filter((c) => c.status === 'impaired' || c.status === 'broken').length;
   const vulnerable = chains.filter((c) => c.status === 'vulnerable').length;
   return (
@@ -211,13 +225,13 @@ function CategoryGroup({ needLabel, needKey, chains, instNames, primaryExports }
         </Text>
       </View>
       {chains.map((c, i) => (
-        <ChainRow key={c.chainId || i} chain={c} instNames={instNames} primaryExports={primaryExports} />
+        <ChainRow key={c.chainId || i} chain={c} instNames={instNames} primaryExports={primaryExports} town={town} />
       ))}
     </View>
   );
 }
 
-export function SupplyChainFlow({ chains, instNames = [], primaryExports = [], tier = 'village' }) {
+export function SupplyChainFlow({ chains, instNames = [], primaryExports = [], tier = 'village', town = null }) {
   const list = (chains || []).filter((c) => c && c.status !== 'unexploited');
   if (!list.length) return null;
 
@@ -244,7 +258,7 @@ export function SupplyChainFlow({ chains, instNames = [], primaryExports = [], t
       <View>
         <Legend />
         {sorted.map((g) => (
-          <CategoryGroup key={g.needKey} {...g} instNames={instNames} primaryExports={primaryExports} />
+          <CategoryGroup key={g.needKey} {...g} instNames={instNames} primaryExports={primaryExports} town={town} />
         ))}
       </View>
     );
@@ -254,10 +268,14 @@ export function SupplyChainFlow({ chains, instNames = [], primaryExports = [], t
     <View>
       <Legend />
       {list.map((c, i) => (
-        <ChainRow key={c.chainId || i} chain={c} instNames={instNames} primaryExports={primaryExports} />
+        <ChainRow key={c.chainId || i} chain={c} instNames={instNames} primaryExports={primaryExports} town={town} />
       ))}
     </View>
   );
 }
 
 export default SupplyChainFlow;
+
+// COHERENCE-AGREE-4 (item 3′): at the end of the file so no line-keyed register row above it moves.
+import { NORMALLY_YIELDS, chainYieldRefused } from '../../domain/chainYield.js';
+import { chainPrintName } from '../../domain/display/chainPrintName.js';
