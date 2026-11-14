@@ -707,6 +707,71 @@ SEATS2['R2-CODE-B-6'] = dict(
 )
 
 
+CORPUS2 = (
+    "THE CORPUS, AND ITS OWN LAWS (binding; they add to the laws below). The corpus is the dossier's written lines: ONE source document, "
+    "docs/content/RECEIPT_POOLS_DOSSIER_STATE.md, from which src/data/dossierStateProse/*.generated.js are generated. The source is edited; the generated files "
+    "are regenerated ONLY by the doors, never by hand. The files every corpus commit moves (the wiring census, the prose shift register, the byte baseline, the "
+    "count pins, the projection contract's silent lists) move through their own doors with every commit, as the lane's instruments do it (iterate.sh, doors.sh, "
+    "bytes.mjs, push.sh: docs/chair/2026-11-13/probes/W2-WRITE-5/README.md on the lane: copy the folder out with git archive as the README says and run them "
+    "from there; pin the directory in every helper; the main checkout's `git status` stays empty). In tests/domain/corpusCureGuards.test.js you only APPEND rows. "
+    "A MIDDLE ROW OF A POOL IS NEVER STRUCK (the kernel pins ids to rows): it is reworded true in its case or declared off where false; only a pool's LAST rows "
+    "are struck. NO DRAW ADDED OR MOVED; no new key in the record, no change of its shape. THE CORPUS METHOD, beside the method below: a line that names a "
+    "house, a role, a force, a good or a place reads the record through a REGISTERED condition; a slot never prints a catalogue label and never breaks "
+    "agreement; a line that says how the model works is not written; a line true somewhere is declared off the towns that make it false; a case left empty "
+    "gets a line only if read true in three towns; every disqualifier cure has its guard, a fixed town in which the cured line must not print, its row added "
+    "red BEFORE the cure in the same commit. RULED, the lane's list: parked rows stay parked (a row that waits on a word the vocabulary does not hold: "
+    "practitioner, worked-here, capture, a council's member count, a chain's status, the survival band, the wayside shrine: listed with its word and left); "
+    "every sentence that says what a town can pay reads ONE home, the economic survival row's band; never \"at peace\" of a town whose own pages say it is "
+    "fighting; a force is a garrison, a militia (a household levy is one), a watch or a contracted company: \"no force\" where one stands is false; the "
+    "hired-only place is another lane's reader: do not write round it; under a siege nothing comes in or goes out by road; the size words (plural streets, a "
+    "square, quarters, districts) are an error in a small place; THE PAGE NAMES A COURT ONLY WHERE A COURTHOUSE STANDS ON THE ROSTER; plain words, never the "
+    "machinery; every new or changed line goes on the lane's list of new lines with its towns. A walker that refuses a declaration is not routed round: the "
+    "line is reworded, as the seventh seat did."
+)
+
+SEATS2['W2-WRITE-8'] = dict(
+    title="W2-WRITE-8 · the corpus lane's main seat: the DS-DEF block's parts B to F, then the merge of the three and the final statement",
+    branch='lane/w2-write-2026-11-13', tip='8e3526be', statement=True,
+    intro=("You are W2-WRITE-8, the eighth seat on the corpus lane of the settlement-engine integration program (lane/w2-write-2026-11-13). The lane cures the "
+           "false lines an independent reader found in the dossier's written corpus (59 of 151 new lines were false where they print). It is SPLIT BY BLOCK among "
+           "three seats: YOU, the main seat, hold the DS-DEF block; two side seats hold DS-ECO and every other block, each on its own branch cut from dcd4759b0. "
+           "The seventh seat cured eight of the ten rows left of part B and handed back at its context mark with its list written out. Yours: the rest, and later, "
+           "on the chair's word, THE MERGE of the three and the lane's ONE final statement."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane: docs/chair/2026-11-13/W2-WRITE-HANDBACK-6.md WHOLE (95 lines: B's 27 against what is done; the seventh seat's items with their "
+          "towns; WHAT IS LEFT, line by line; how the instruments are re-made; \"Found while reading\"); docs/chair/2026-11-13/probes/W2-WRITE-5/README.md (the "
+          "instruments); and, only when a part needs it: W2-WRITE-HANDBACK-4.md's items 4 and 5 (part C's rows); W2-WRITE-HANDBACK-5.md's section THE MERGE "
+          "(part G, on the chair's word: not before).\n"
+          "3. THE LISTS: `git fetch origin lane/round-3-cut-2026-11-13`: docs/chair/2026-11-13/ROUND-3-CUT.json and ROUND-3-CUT-INCREMENT.json (key `lines`: each "
+          "line's town, sentence, fact, writer; query by script, never print): a row is YOURS where its writer's file is "
+          "src/data/dossierStateProse/defense.generated.js, or where its true writer is a DS-DEF pool."),
+    work=("YOUR BLOCK: the `### DS-DEF-…` sections of the source document, and the generated twin defense.generated.js. You change NO other block's text.\n"
+          "THE WORK, in this order, each cause its own commit, red first, pushed as made:\n"
+          "B. THE TWO ROWS LEFT of the 27 (HANDBACK-6): #19 DS-DEF-9 NAMED chain v1 (the seventh seat's plan is in the file; v2 and v3 read with it) and #27 "
+          "DS-DEF-2 neither walls nor force v8 (the style point). Then ONE line to the chair: B pushed (lines struck, reworded, declared, kept as true, over "
+          "both seats).\n"
+          "C. RE-READ UNDER THE METHOD the fourth seat's unreviewed rewordings in your block, as HANDBACK-6 lists them (HANDBACK-4's items 4 and 5; commit "
+          "30895bb67's CHAIN defence supplied v1 to v3 and v5): a line that fails is cured.\n"
+          "D. ROUND THREE'S REST in your block: the cut's rows in defense.generated.js (about forty, nine of them HIGH: the high first; #1075 and #1170 if they "
+          "are DS-DEF's), by pool, the widest pool first. WITH THEM the two the seventh seat found while reading: DS-DEF-5 NO organized force at all v1 to v3 "
+          "under an occupation; DS-DEF-11 WALLED-STRAINED v2 under an occupation, its slot printing a catalogue label.\n"
+          "E. THE NEWLY FOUND LINES in your block: the increment's rows in defense.generated.js (about 23, three HIGH), and the measuring seat's candidates in "
+          "DS-DEF (DS-DEF-3 Moderate v3 is the widest): for every pool you touch, ALL its firing variants are read. The cut's writer is a script's trace: find "
+          "the true writer first; a line whose true writer is not the corpus (a selector, a renderer, a slot filler) is NAMED with its file and left.\n"
+          "F. The measuring seat's command over defense.generated.js at dcd4759b0 and at your tip (the form below gives the command): every hit read against "
+          "its town, cured or named.\n"
+          "G. THEN ONE MESSAGE TO THE CHAIR AND WAIT. The two side seats hand their tips to the chair; the chair then gives the word for THE MERGE of both, "
+          "exactly as HANDBACK-5's section THE MERGE gives it (eight steps; the proof that every pool's ids and draws equal the side that holds its block; the "
+          "check that each side moved no block but its own), then the merge of the integration line's tip, then THE SEVEN FAITH POOLS the merge seat re-based by "
+          "name at point 49 (DS-GEN-7 power_economic temple economy, DS-GEN-17 cathedral, DS-FTH-4 crusaderSynthesis, heresySuppression hunted and preached, "
+          "religiousFraud, mageTheocracy: they must read the faith reading; the merge book's section 2k.5 on the line; the layer walker's REBASED_49D list is "
+          "shrink-only: each pool leaves it as it is cured), then THE LANE'S ONE FINAL STATEMENT in the form below. " + POINT49 + "\n" + CORPUS2),
+    merges="; on the chair's word, the merges of lane/w2-write-side-eco-2026-11-13, lane/w2-write-side-rest-2026-11-13 and the integration line's tip",
+    when="for a stop that blocks everything you have left, when B is pushed (one line), at step G, and for a hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = SEATS2[seat]
     head = (
