@@ -1326,3 +1326,37 @@ WHAT IS LEFT, line by line, in this order (the lane's tip at the hand-back is th
   DONE. The line's merge DONE baa4b707d. 2m: observed shapes, fact layers, writer reach cured; chainPrintSites cured;
   presumed things 11 -> 3 fresh (the STOP above is superseded by the 05:28 ruling); page census exit 0 (two falls owed
   a shrink). HANDED BACK at the count: WHAT IS LEFT above, 1 to 4.
+
+# PART 9 — the ninth seat (W2-C-LEAVES-9, 2026-11-14, from 3a425f2bd)
+
+**Seat:** the Claude Code session session_01ACmDYb2zBKNhdMuqmNFP1p; the chair is session_01ACmDYZrFEVXyZEUg1NDxxC.
+Assignment: docs/chair/2026-11-14/briefs/BRIEF-W2-C-LEAVES-9.md on lane/chair-2026-11-08 (self-contained: PART 8's
+HAND-BACK items 1-4, then the one final statement). Origin read back at the start: 3a425f2bd (the brief's). Scratch
+worktree <scratchpad>/wt (local branch w9); corpora born there at 3a425f2bd: the 720 (SECOND-WAVE-CENSUS/births.mjs) and
+the fresh 180 (probes/W2-C-LEAVES-4/birthsR.mjs, fresh.txt), 0 errors. EXECUTED = run and read; PLAUSIBLE = read from code.
+
+## Items (this seat)
+| item | commit | measured (3a425f2bd → after) | guard |
+|---|---|---|---|
+| 1a chainNeedShown.js's siege form declared (`crisis: under_siege`, filterDeclared) | e9662f970 | byte-identical by town, the 720 (154 lines / 13 towns) and the fresh 180 (336 / 29); births identical | the door: fresh 3 → 2 |
+| 1c the ring's streets vantage declared (`tier: ≥ village`, filterDeclared; refused → the table's own note) | 9c0f12347 | COUNTED FIRST: 0 of 900 thorps/hamlets hold an organised ring (134 + 34 rings, the vantage 45 + 10, all village+): byte-identical by town on both, births identical | tests/domain/display/ringNoteStreetsSmallPlace.test.js (red at 3a425f2bd); the row stale → `--shrink` |
+
+The probe: docs/chair/2026-11-14/probes/W2-C-LEAVES-9/lines9.mjs (`TREE=<tree> node lines9.mjs <corpus.ndjson.gz>`: per town
+the criminal structure's note, the food endurance sentence, every chain's need line both ways, the two siege readers).
+The crime fact's leaf (factsOf.crime → deriveCriminalStructure) reads the tier for 1c's declaration: its row in
+src/domain/facts/factLayers.js declares `tier` beside the `_seed` it declared for the same note (factLayers.walker red
+without it). The door after 1c: `--check` fresh 2 (the two NOT PRINTED below), stale 0, exit 1 by ruling;
+presumedThings.walker: 1 red title, exactly those two literals.
+
+## Item 1b NOT MADE: the writer is the defence lane's (FOR THE JOIN)
+`defenseDisplay.js :: foodEnduranceLine` (and `monthsInWords`) are lane/coherence-upkeep-2026-11-12's by the chair's
+ruling of 2026-11-13 22:42, quoted in that lane's 1a7a02927 (UPKEEP-8 step 4): "makes ... foodEnduranceLine and
+monthsInWords this lane's (the rest of the file stays the third leaves lane's; SHARED, named)". That commit rewrote the
+function's body around the very literal (`end.besieged`, `would`, the stored months); this lane's copy is W2-A-LEAVES'
+87af7e045 from the line. By the brief's law (a fault whose writer is a file another lane has changed is NAMED and
+left) this seat did not touch it. And the literal cannot be declared truly through the door as the rule book reads it:
+"under siege the outlying fields would be lost" prints ONLY where no siege is in force (a hypothetical); the walker
+reads it as NAMING the siege, so a declaration it accepts (`needs: crisis: under_siege`) would print it nowhere, and no
+hypothetical sense stands in the rule book. Row dbd691c1c6f9171f stays banked (`after-base: leaves-3`), unchanged.
+RECOMMENDATION: at the join, the declaration pass rules the hypothetical (a sense of the rule book, the chair's) on the
+defence lane's text; then the holder's `--check` / `--shrink`.
