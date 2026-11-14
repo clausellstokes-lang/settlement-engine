@@ -1,0 +1,7 @@
+> node scripts/check-domain-strict.mjs
+
+[domain-strict] ✓ no strict-type regressions (1113 errors, ceiling 1113).
+[gate-tail] end:  00:43:33 up 13 min,  0 user,  load average: 1.38, 1.05, 0.65
+[gate-tail] full log: /tmp/gate-tail.1053.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+rc 0

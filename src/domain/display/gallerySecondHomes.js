@@ -32,8 +32,18 @@
  * every eye shut, the whole payload of the four reads searched as text, both stored shapes), and the twin's
  * parity by tests/security/galleryServerVeil.pglite.test.js and galleryVeilCures.pglite.test.js.
  *
+ * A HOUSE BY EVERY NAME (COHERENCE-VEIL-9; the chair's ruling on PART 9's limits): a house's name in any spelling
+ * includes the name it was BORN with. The rename's writer (institutionRename.js) moves `name` only; a stamped house
+ * keeps its catalogue identity, `catalogId`, which is the fold of its birth name (institutionalCatalog.js ::
+ * catalogIdForName; 519 of 519 catalogue names). So the two derived name lists are sent BY POSITIVE ACCOUNT (an entry
+ * stays only where a native house still listed accounts for it, each house for one entry: a stamped house by its
+ * catalogue identity, an unstamped one by its name), the five booleans read from the entries that stay, and every
+ * birth name of a house removed whole is searched with its current name.
+ *
  * Pure; works in place on applyVeil's own clone only.
  */
+
+import { isMaterializedCustomContent } from '../content/customContentSemanticAuthority.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {{ card: Rec, desc: boolean, tension: boolean }} TieSource */
@@ -94,10 +104,29 @@ export function secondHomePieces(v, out = []) {
 
 /**
  * A name in ANOTHER SPELLING (COHERENCE-VEIL-8; REVIEW-VEIL-6's twelfth): lower case, every run of characters
- * that are not a letter or a digit one '_', none at either end. SQL twin: migration 212 :: _gallery_veil_fold.
+ * that are not a letter or a digit one '_', none at either end. SQL twin: migration 212 :: _gallery_veil_fold, which
+ * gives the same string for every input (COHERENCE-VEIL-9): the only characters outside A-Z whose lower case holds a
+ * letter a-z are U+0130 and U+212A (every code point measured), and the SQL spells both out.
  * @param {unknown} t @returns {string}
  */
 export const foldName = (t) => String(t ?? '').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+
+/** A custom house (customContentSemanticAuthority.js), read as a plain answer. @param {unknown} v @returns {boolean} */
+const isCustomHouse = (v) => isMaterializedCustomContent(v);
+
+/** A-Z to a-z and nothing else: the same in both engines whatever their locale (SQL: translate). @param {string} t */
+const asciiLower = (t) => t.replace(/[A-Z]/g, c => c.toLowerCase());
+
+/**
+ * The engine's processor match by a stamped house's catalogue identity, on the fold (computeActiveChains.js ::
+ * institutionMatchesProcessor is id-first: the house answers by the name it was born with): the fold of the pattern's
+ * first SECOND_HOME_LIMITS.processorPrefix characters inside the identity. SQL twin: _gallery_veil_hidden_name.
+ * @param {string} cid @param {string} x @returns {boolean}
+ */
+function answersByBirth(cid, x) {
+  const f = foldName(Array.from(x).slice(0, SECOND_HOME_LIMITS.processorPrefix).join(''));
+  return f !== '' && cid.includes(f);
+}
 
 /**
  * The text, folded, holds the name, folded, between '_' boundaries, outside every open name (folded) that holds
@@ -187,8 +216,9 @@ function tiePieces(t, out) {
  * @param {Set<string>} gone names of houses removed whole
  * @param {ReadonlyArray<string>} openNames the names of the houses the projection still lists
  * @param {Readonly<Record<string, ReadonlyArray<string>>>} houseFields the house's eyes and the keys each removes
+ * @param {Set<string>} [births] the catalogue identities of the houses removed whole (COHERENCE-VEIL-9)
  */
-export function withholdSecondHomes(s, src, gone, openNames, houseFields) {
+export function withholdSecondHomes(s, src, gone, openNames, houseFields, births = new Set()) {
   const shutTies = src.ties.filter(t => t.desc || t.tension);
   if (shutTies.length) {
     const pr = s.prominentRelationship;
@@ -232,12 +262,31 @@ export function withholdSecondHomes(s, src, gone, openNames, houseFields) {
       });
     }
   }
-  if (!gone.size) return;
-  // the chair's ruling (b): a flag only a house removed whole raised reads false (never true where it was false)
+  if (!gone.size && !births.size) return;
+  // COHERENCE-VEIL-9: the houses still listed that the engine read (native: priorityHelpers.js :: getInstitutionNames
+  // stamps nativeSemanticNames, so a custom house is in neither list nor any flag), each with its identity
+  const accountants = (Array.isArray(s.institutions) ? s.institutions : []).filter(isRec).filter(i => !isCustomHouse(i))
+    .map(i => ({ cid: typeof i.catalogId === 'string' && i.catalogId !== '' ? i.catalogId : null, low: asciiLower(str(i.name)) }));
+  // THE TWO DERIVED NAME LISTS, BY POSITIVE ACCOUNT (REVIEW-VEIL-6's twelfth; the chair's ruling on PART 9's limits):
+  // the engine's lower-cased roster, stamped once at birth, keeps an entry only where a native house still listed
+  // accounts for it, each house for one entry, in the list's order: a stamped house by its catalogue identity (the fold
+  // of the name it was born with), an unstamped one by its name. A hidden house's birth name cannot outlive a rename,
+  // and no difference between two engines' case folds can leave a spelling behind. The chair's ruling (b): a flag only a
+  // house removed whole raised reads false (never true where it was false)
   const listed = openNames.map(n => n.toLowerCase());
   const econF = recAt(s, 'economicState');
   for (const inst of [recAt(recAt(econF || {}, 'compound') || {}, 'inst'), recAt(recAt(recAt(econF || {}, 'safetyProfile') || {}, 'compound') || {}, 'inst')]) {
     if (!inst) continue;
+    if (Array.isArray(inst.names)) {
+      const used = accountants.map(() => false);
+      inst.names = inst.names.filter((x) => {
+        if (typeof x !== 'string') return false;
+        const k = accountants.findIndex((a, j) => !used[j] && (a.cid !== null ? a.cid === foldName(x) : a.low === x));
+        if (k < 0) return false;
+        used[k] = true;
+        return true;
+      });
+    }
     for (const [flag, words] of Object.entries(HOUSE_FLAG_NAMES)) {
       if (inst[flag] === true && !listed.some(l => words.some(w => l.includes(w)))) inst[flag] = false;
     }
@@ -248,10 +297,15 @@ export function withholdSecondHomes(s, src, gone, openNames, houseFields) {
   // whole answers to, and no house left open does, is that house's name.
   /** @param {string} name @param {string} x @returns {boolean} */
   const answers = (name, x) => name === x || name.toLowerCase().includes(x.toLowerCase().slice(0, SECOND_HOME_LIMITS.processorPrefix));
+  // COHERENCE-VEIL-9: a house answers by its birth name too (a stamped house, by its catalogue identity), and an open
+  // house answers as the engine reads it: a stamped one by its identity, an unstamped one by its name
+  const openHouses = (Array.isArray(s.institutions) ? s.institutions : []).filter(isRec)
+    .map(i => (typeof i.catalogId === 'string' && i.catalogId !== '' ? { cid: i.catalogId, name: null } : { cid: null, name: str(i.name) }));
   /** @param {unknown} x @returns {boolean} */
-  const hiddenName = (x) => [...gone].some(g => answers(g, str(x))) && !openNames.some(o => answers(o, str(x)));
-  /** every name of a house removed whole: its own, and each processing name only it answers to */
-  const named = new Set(gone);
+  const hiddenName = (x) => ([...gone].some(g => answers(g, str(x))) || [...births].some(b => answersByBirth(b, str(x))))
+    && !openHouses.some(o => (o.cid !== null ? answersByBirth(o.cid, str(x)) : answers(/** @type {string} */ (o.name), str(x))));
+  /** every name of a house removed whole: its own, the one it was born with, and each processing name only it answers to */
+  const named = new Set([...gone, ...births]);
   const econ0 = recAt(s, 'economicState');
   for (const c of (econ0 && Array.isArray(econ0.activeChains) ? econ0.activeChains : []).filter(isRec)) {
     for (const x of Array.isArray(c.processingInstitutions) ? c.processingInstitutions : []) if (typeof x === 'string' && hiddenName(x)) named.add(x);
@@ -260,7 +314,7 @@ export function withholdSecondHomes(s, src, gone, openNames, houseFields) {
   // hidden name with the open names that hold it (blanked before a folded search: an open name is not the hidden one)
   const ps = recAt(s, 'powerStructure');
   const powers = (ps && Array.isArray(ps.factions) ? ps.factions : []).filter(f => isRec(f) && f.hidden !== true).map(f => `${str(f.faction)} `);
-  const openFolds = [...openNames, ...powers].map(foldName).filter(Boolean);
+  const openFolds = [...openNames, ...powers, ...openHouses.flatMap(o => (o.cid !== null ? [o.cid] : []))].map(foldName).filter(Boolean);
   const forms = [...named].map((g) => {
     const f = foldName(g);
     return { g, f, opens: [...new Set(openFolds.filter(o => o !== f && `_${o}_`.includes(`_${f}_`)))] };
@@ -274,14 +328,7 @@ export function withholdSecondHomes(s, src, gone, openNames, houseFields) {
     if (isRec(v)) return Object.values(v).some(names);
     return false;
   };
-  // REVIEW-VEIL-6's twelfth: the engine's two rosters of house names (lower-cased at birth) lose every entry that
-  // is such a name (an entry an open house or a shown power answers to stays)
-  const namedFolds = new Set(forms.map(h => h.f));
-  const openSet = new Set(openFolds);
   const sp0 = recAt(econ0 || {}, 'safetyProfile');
-  for (const inst of [recAt(recAt(econ0 || {}, 'compound') || {}, 'inst'), recAt(recAt(sp0 || {}, 'compound') || {}, 'inst')]) {
-    if (inst && Array.isArray(inst.names)) inst.names = inst.names.filter(x => !(typeof x === 'string' && namedFolds.has(foldName(x)) && !openSet.has(foldName(x))));
-  }
   // N4: the name inside the economy's fixed prose: an income source whose label names it is withheld whole, one
   // whose description names it loses the description, the safety profile's description that names it goes
   if (econ0 && Array.isArray(econ0.incomeSources)) {

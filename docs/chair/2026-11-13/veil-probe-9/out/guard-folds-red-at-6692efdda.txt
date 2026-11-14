@@ -1,0 +1,38 @@
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.0.lock.shared as PID 956 after 0 poll(s); 1 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.8 /home/user/veil9-base
+
+ ❯ tests/security/gallerySecondHomes.pglite.test.js (5 tests | 1 failed | 4 skipped) 7216ms
+     × THE TWO FOLDS ARE ONE (VEIL-9): the server's _gallery_veil_fold gives the client's foldName for every character of the basic plane, alone and inside a name, whatever the database's lower() does 484ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/gallerySecondHomes.pglite.test.js > COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sent (V5-1) > THE TWO FOLDS ARE ONE (VEIL-9): the server's _gallery_veil_fold gives the client's foldName for every character of the basic plane, alone and inside a name, whatever the database's lower() does
+AssertionError: expected [ '41 62 130 43 64 20 71', …(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "41 62 130 43 64 20 71",
++   "130 6c 76 61 72 6b 20 212a 6d 61 72 6b 65 74",
++ ]
+
+ ❯ tests/security/gallerySecondHomes.pglite.test.js:486:20
+    484|     const differ = probes.filter((t, i) => server[i] !== foldName(t)).…
+    485|     expect(server.length).toBe(probes.length);
+    486|     expect(differ).toEqual([]);
+       |                    ^
+    487|     // and the database's own lower() is not the client's (the limit t…
+    488|     const low = (await LIVE.db.query('select lower($1) as l', ['\u0130…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 4 skipped (5)
+   Start at  00:42:54
+   Duration  7.53s (transform 2.82s, setup 96ms, import 108ms, tests 7.22s, environment 0ms)
+
+exit 1

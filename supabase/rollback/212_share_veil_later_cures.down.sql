@@ -353,7 +353,7 @@ grant execute on function public.import_gallery_dossier(text) to authenticated;
 drop function if exists public._gallery_veil_embeds(jsonb, text[]);
 drop function if exists public._gallery_veil_fold(text);
 drop function if exists public._gallery_veil_folded_name(text, text, jsonb);
-drop function if exists public._gallery_veil_hidden_name(jsonb, jsonb, text[]);
+drop function if exists public._gallery_veil_hidden_name(jsonb, jsonb, text[], jsonb);
 drop function if exists public._gallery_veil_member_revealed(jsonb, jsonb, boolean, boolean, boolean);
 drop function if exists public._gallery_veil_names(jsonb, jsonb);
 drop function if exists public._gallery_veil_pieces(jsonb);

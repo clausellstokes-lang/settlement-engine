@@ -156,6 +156,8 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
   /** @type {any} */ let LIVE; /** @type {any} */ let veil; /** @type {any} */ let gallery; /** @type {any} */ let gen;
   /** @type {any} */ let compose; /** @type {any} */ let birthConfig; /** @type {any} */ let DEFAULT_CONFIG; /** @type {any} */ let factionIdFromName;
   /** @type {any} */ let matchesProcessor; /** @type {any} */ let instFlags;
+  /** @type {any} */ let renameHouse; /** @type {any} */ let isHideableHouse; /** @type {any} */ let isCustom;
+  /** @type {Map<string, string>} */ const BIRTH = new Map(); // catalogue id -> the catalogue's name (the name a stamped house was born with)
   let n = 0;
 
   beforeAll(async () => {
@@ -171,6 +173,11 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
     ({ factionIdFromName } = await import('../../src/lib/entities.js'));
     ({ institutionMatchesProcessor: matchesProcessor } = await import('../../src/generators/computeActiveChains.js'));
     ({ getInstFlags: instFlags } = await import('../../src/generators/priorityHelpers.js'));
+    ({ applyInstitutionRenameToSettlement: renameHouse } = await import('../../src/domain/institutionRename.js'));
+    ({ isHideableHouse } = await import('../../src/domain/people/cardVeil.js'));
+    ({ isMaterializedCustomContent: isCustom } = await import('../../src/domain/content/customContentSemanticAuthority.js'));
+    const { institutionalCatalog, catalogIdForName } = await import('../../src/data/institutionalCatalog.js');
+    for (const tier of Object.values(institutionalCatalog)) for (const g of Object.values(tier)) for (const nm of Object.keys(g)) if (!BIRTH.has(catalogIdForName(nm))) BIRTH.set(catalogIdForName(nm), nm);
   }, PGLITE_BOOT_TIMEOUT_MS);
 
   /** The marker planter: every string an eye or a grouping governs, at the step it first exists after. */
@@ -278,6 +285,11 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
         const goneCards = (record.institutions || []).filter((i) => isRec(i) && typeof i.name === 'string' && !listed.has(i.name));
         const openCards = (record.institutions || []).filter((i) => isRec(i) && typeof i.name === 'string' && listed.has(i.name));
         const gone = goneCards.map((i) => i.name).filter((x) => x.length >= 6);
+        // VEIL-9 (the chair's ruling on PART 9's limits): a house's name in any spelling includes the name it was BORN
+        // with, which a stamped house keeps as its catalogue identity (the rename's writer, institutionRename.js, moves
+        // `name` only): it is searched too, and an open house's own birth name is blanked like its name
+        const birthOf = (i) => (typeof i.catalogId === 'string' && BIRTH.has(i.catalogId) ? BIRTH.get(i.catalogId) : null);
+        for (const i of goneCards) { const b = birthOf(i); if (b && b.length >= 6 && !gone.includes(b)) gone.push(b); }
         // the names a chain gives a hidden house, by the ENGINE's own processor match (computeActiveChains.js ::
         // institutionMatchesProcessor, id-first): a processing name only hidden houses answer to is that house's name
         for (const c of (isRec(record.economicState) && Array.isArray(record.economicState.activeChains) ? record.economicState.activeChains : []).filter(isRec)) {
@@ -286,7 +298,7 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
           }
         }
         // each hidden name in its own spelling and folded; an open house whose name holds it is blanked first
-        const openFold = openCards.map((i) => foldTrim(i.name)).filter(Boolean);
+        const openFold = [...openCards.map((i) => foldTrim(i.name)), ...openCards.map(birthOf).filter(Boolean).map(foldTrim)].filter(Boolean);
         const names = gone.map((nm) => ({ nm, f: foldTrim(nm), re: new RegExp(`(^|_)${foldTrim(nm)}(_|$)`) }));
         // COHERENCE-VEIL-8 (T1): every event's lasting effects, shut by hand here, in ANY case (a composer lower-cases
         // the first letter of what it embeds: legacyGenerator.js :: annotationBody). The marker rides the list as an
@@ -323,9 +335,26 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
           const FIVE = ['hasCriminalInst', 'hasThievesGuild', 'hasBlackMarket', 'hasSmuggling', 'hasGangInfra'];
           const settled = (v) => (Array.isArray(v) ? v.flatMap(settled) : isRec(v) ? [...(isRec(v.economicState) ? [v] : []), ...Object.values(v).filter((x) => x !== v.economicState).flatMap(settled)] : []);
           for (const t of settled(body)) {
-            const listed = instFlags({}, (Array.isArray(t.institutions) ? t.institutions : []).filter(isRec)).inst;
+            // (VEIL-9: by each listed house's identity, the name it was born with, which is the name the engine read)
+            const listed = instFlags({}, (Array.isArray(t.institutions) ? t.institutions : []).filter(isRec).map((i) => (birthOf(i) ? { ...i, name: birthOf(i) } : i))).inst;
             for (const at2 of [t.economicState?.compound?.inst, t.economicState?.safetyProfile?.compound?.inst]) {
               if (isRec(at2)) for (const f of FIVE) if (at2[f] === true && !listed[f]) sent.push(`${label} dm=${dm} ${mode} ${read}: the boolean ${f}, raised only by a house the response does not list`);
+            }
+            // VEIL-9 (iii): every entry of the two name lists that a house the response STILL LISTS was stamped with is
+            // still sent. The record's lists are the engine's lower-cased native roster in the roster's own order
+            // (priorityHelpers.js :: getInstitutionNames), so entry k is the k-th native house of the record, whatever it
+            // is called now (a rename moves `name` only); a list that is not that roster's length is counted, not read
+            const nativeRec = (Array.isArray(record.institutions) ? record.institutions : []).filter((i) => isRec(i) && !isCustom(i));
+            const listedNow = (Array.isArray(t.institutions) ? t.institutions : []).filter(isRec).map((i) => i.name);
+            for (const [pth, sentInst] of [[['economicState', 'compound', 'inst'], t.economicState?.compound?.inst], [['economicState', 'safetyProfile', 'compound', 'inst'], t.economicState?.safetyProfile?.compound?.inst]]) {
+              const recList = at(record, [...pth, 'names']);
+              if (!Array.isArray(recList) || !isRec(sentInst)) continue;
+              if (recList.length !== nativeRec.length) { sent.push(`${label} ${read}: a stored name list is not the roster's length (${recList.length} of ${nativeRec.length})`); continue; }
+              const left = [...listedNow];
+              const owed = [];
+              nativeRec.forEach((h, k) => { const j = left.indexOf(h.name); if (j >= 0) { left.splice(j, 1); owed.push(recList[k]); } });
+              const got = Array.isArray(sentInst.names) ? [...sentInst.names] : [];
+              for (const e of owed) { const j = got.indexOf(e); if (j >= 0) got.splice(j, 1); else sent.push(`${label} dm=${dm} ${mode} ${read}: a listed house's entry "${e}" left ${pth.join('.')}.names`); }
             }
             for (const r of Array.isArray(t.economicState.incomeSources) ? t.economicState.incomeSources : []) {
               if (mode !== 'houses' && isRec(r) && r.isCriminal === true) sent.push(`${label} dm=${dm} ${mode} ${read}: a criminal income row (${r.source}), its groupings shut`);
@@ -400,6 +429,64 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
     // five of the six reads carry the town (the map's party link, get_unlisted_map, carries no member town at all),
     // and the client's twin does (COHERENCE-VEIL-8)
     expect(found.length).toBe(4 * 6);
+  }, TOWN_TIMEOUT_MS);
+
+  it('A HOUSE BY EVERY NAME (VEIL-9; the chair\'s ruling on PART 9\'s limits): a house renamed after birth and hidden whole is sent by neither name; a hidden name the two engines fold differently is not sent lower-cased; every entry of a house still listed, a renamed one included, still is', async () => {
+    const sent = []; const planted = [];
+    for (const t of [TOWNS[0], TOWNS[2]]) {
+      const born = birth(t);
+      const nativeRec = (born.institutions || []).filter((i) => isRec(i) && !isCustom(i));
+      const stamped = (i) => typeof i.catalogId === 'string' && foldTrim(i.name) === i.catalogId;
+      const hide = nativeRec.filter((i) => stamped(i) && isHideableHouse(i));
+      const open = nativeRec.filter((i) => stamped(i) && !isHideableHouse(i));
+      expect(hide.length).toBeGreaterThanOrEqual(2);
+      const [h1, h2] = hide; const h3 = open[open.length - 1];
+      const [b1, b2, b3] = [h1.name, h2.name, h3.name];
+      // (i) the rename's own writer, after the birth (institutionRename.js moves `name`; the house keeps its catalogue
+      // identity, the fold of the name it was born with), then hidden whole by the share
+      expect(renameHouse(born, b1, 'Qorvath hall').changed).toBe(true);
+      // (iii) a house the share leaves open, renamed the same way: the entry it was stamped with is still owed
+      expect(renameHouse(born, b3, 'Brannoch yard').changed).toBe(true);
+      // (ii) a hidden name holding a dotted capital I and the Kelvin sign, whose lower-cased copy, as the engine stamps it
+      // (JavaScript's toLowerCase), stands in both lists at the house's own place in the roster
+      const odd = '\u0130lvark \u212Amarket';
+      expect(renameHouse(born, b2, odd).changed).toBe(true);
+      const k2 = nativeRec.indexOf(h2);
+      for (const inst of [born.economicState?.compound?.inst, born.economicState?.safetyProfile?.compound?.inst]) {
+        expect(inst.names[k2]).toBe(b2.toLowerCase());
+        inst.names[k2] = odd.toLowerCase();
+      }
+      planted.push(`${t.seed}: "${b1}" renamed "Qorvath hall" and hidden; "${b2}" renamed "${odd}" and hidden; "${b3}" renamed "Brannoch yard", open`);
+      for (const [shape, record] of Object.entries(shapes(born))) {
+        const r = await sharesOf(record, `${t.seed} ${shape} by-every-name`);
+        sent.push(...r.sent);
+      }
+    }
+    expect(planted.length).toBe(2);
+    expect([...new Set(sent)]).toEqual([]);
+  }, TOWN_TIMEOUT_MS);
+
+  it('THE TWO FOLDS ARE ONE (VEIL-9): the server\'s _gallery_veil_fold gives the client\'s foldName for every character of the basic plane, alone and inside a name, whatever the database\'s lower() does', async () => {
+    const { foldName } = await import('../../src/domain/display/gallerySecondHomes.js');
+    // the only characters outside A-Z whose JavaScript lower case holds a letter a-z (the SQL spells these out)
+    const special = [];
+    for (let cp = 1; cp <= 0x10ffff; cp += 1) {
+      if (cp >= 0xd800 && cp <= 0xdfff) continue;
+      const c = String.fromCodePoint(cp);
+      if (!/[A-Za-z0-9]/.test(c) && /[a-z0-9]/.test(c.toLowerCase())) special.push(cp);
+    }
+    expect(special).toEqual([0x130, 0x212a]);
+    const probes = [];
+    for (let cp = 1; cp <= 0xffff; cp += 1) if (cp < 0xd800 || cp > 0xdfff) probes.push(String.fromCodePoint(cp), `Ab${String.fromCodePoint(cp)}Cd q`);
+    probes.push('\u0130lvark \u212Amarket', "Thieves' Guild (Powerful)", 'institution.thieves_guild_powerful', '\u{1F600}Zz\u{10400}');
+    const r = await LIVE.db.query('select coalesce(jsonb_agg(public._gallery_veil_fold(t) order by o), \'[]\') as f from jsonb_array_elements_text($1::jsonb) with ordinality x(t, o)', [JSON.stringify(probes)]);
+    const server = r.rows[0].f;
+    const differ = probes.filter((t, i) => server[i] !== foldName(t)).map((t) => [...t].map((c) => c.codePointAt(0).toString(16)).join(' '));
+    expect(server.length).toBe(probes.length);
+    expect(differ).toEqual([]);
+    // and the database's own lower() is not the client's (the limit this cures)
+    const low = (await LIVE.db.query('select lower($1) as l', ['\u0130\u212A'])).rows[0].l;
+    expect(low === '\u0130\u212A'.toLowerCase()).toBe(false);
   }, TOWN_TIMEOUT_MS);
 
   it('THE SAME-STEP CLASS (the limit the marker cannot reach): the composed homes of a tie and a person\'s impression, written from marked sources, are not sent', async () => {

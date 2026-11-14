@@ -657,6 +657,8 @@ export function applyVeil(publicSettlement, veil) {
   const goneHouses = new Set();
   /** @type {Set<string>} ids of houses removed whole */
   const goneIds = new Set();
+  /** @type {Set<string>} the catalogue identities of houses removed whole: the names they were born with (COHERENCE-VEIL-9) */
+  const goneBirths = new Set();
   if (cardHides.size) {
     for (const inst of cardsOf(s, 'institution')) {
       const id = instKind.idOf(inst);
@@ -664,6 +666,7 @@ export function applyVeil(publicSettlement, veil) {
       if (isHideableHouse(inst)) {
         goneIds.add(id);
         if (str(inst.name)) goneHouses.add(str(inst.name));
+        if (str(inst.catalogId)) goneBirths.add(str(inst.catalogId));
         continue;
       }
       if (!fields.has('institution')) fields.set('institution', new Map());
@@ -746,7 +749,7 @@ export function applyVeil(publicSettlement, veil) {
   }
 
   // V5-1: each second home goes with the eye that governs its source.
-  withholdSecondHomes(s, sources, goneHouses, cardsOf(s, 'institution').map(i => str(i.name)), houseEyes);
+  withholdSecondHomes(s, sources, goneHouses, cardsOf(s, 'institution').map(i => str(i.name)), houseEyes, goneBirths);
 
   // Groupings last (a tab remover sees the cards already trimmed).
   for (const g of groupings) GROUPING_REMOVERS[g](s);
