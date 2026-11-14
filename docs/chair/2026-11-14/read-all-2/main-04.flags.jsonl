@@ -1,0 +1,109 @@
+{"id":"09572","town":"r2s-politically_fractured-hamlet-3","sev":"MED","kind":"STATE","why":"says run by civic association; GOVERNMENT is Headman's Authority, stability Fractured with no stable authority","other":""}
+{"id":"00397","town":"r2s-politically_fractured-hamlet-3","sev":"MED","kind":"STATE","why":"rivals in same line of work; PEOPLE: one is the carpenter, the other the bloc's speaker","other":""}
+{"id":"00706","town":"r2s-politically_fractured-hamlet-3","sev":"MED","kind":"STATE","why":"carpenter hiring away a political speaker's best assistant; their roles are different trades","other":"00397"}
+{"id":"00792","town":"r2s-politically_fractured-hamlet-3","sev":"LOW","kind":"STATE","why":"continues the hired-assistant rivalry; the bloc's speaker has no trade assistants per PEOPLE","other":"00706"}
+{"id":"00404","town":"r2s-politically_fractured-hamlet-3","sev":"MED","kind":"STATE","why":"bid for same contracts; one is a political speaker, not a contractor; PEOPLE roles differ","other":""}
+{"id":"29878","town":"r2s-slave_revolt-hamlet-3","sev":"MED","kind":"STATE","why":"checks Glass and gems and Salt trade; LAND gaps say gemstones and desert salt are raw, not processed","other":""}
+{"id":"06984","town":"r2s-slave_revolt-hamlet-3","sev":"MED","kind":"LACKS","why":"people who could keep order have gone to fight; DEFENCE has no garrison, militia, watch or hired force","other":""}
+{"id":"16151","town":"r2s-succession_void-hamlet-3","sev":"MED","kind":"LACKS","why":"removing records from the archive; HOUSES lists no archive or records house","other":""}
+{"id":"09729","town":"r2s-succession_void-hamlet-3","sev":"MED","kind":"LACKS","why":"records removed from the archive; HOUSES has no archive","other":"16151"}
+{"id":"20821","town":"r2s-politically_fractured-hamlet-3","sev":"LOW","kind":"STATE","why":"gives the title Headman to Eirenaion Chrysoberges, who PEOPLE lists as (f)","other":""}
+{"id":"01725","town":"r2s-politically_fractured-hamlet-3","sev":"LOW","kind":"STATE","why":"title Headman for Eirenaion Chrysoberges, listed (f) in PEOPLE","other":""}
+{"id":"05273","town":"r2s-politically_fractured-hamlet-3","sev":"LOW","kind":"STATE","why":"Headman for Eirenaion Chrysoberges, listed (f) in PEOPLE","other":""}
+{"id":"09581","town":"r2s-wartime-hamlet-1","sev":"LOW","kind":"STATE","why":"says run by civic association; GOVERNMENT lists only Household Council","other":""}
+{"id":"03092","town":"r2s-wartime-hamlet-1","sev":"LOW","kind":"LACKS","why":"calls the caravanserai a walled waystation; DEFENCE says walls: none","other":""}
+{"id":"29880","town":"r2s-wartime-hamlet-1","sev":"MED","kind":"STATE","why":"checks Salt trade; LAND gap says desert_salt is raw resource not being processed","other":""}
+{"id":"14745","town":"r2r-hamlet-33","sev":"MED","kind":"STATE","why":"plague years weigh on quarrels the hamlet is having now; QUARRELS: none","other":""}
+{"id":"04630","town":"r2r-hamlet-9","sev":"MED","kind":"STATE","why":"charcoal smoke lingers; LAND gap says the charcoal burner lacks access to mountain timber and 13441 says it is not brought in","other":"13441"}
+{"id":"09748","town":"r2r-hamlet-9","sev":"LOW","kind":"LACKS","why":"shepherd is a mainstay of the cloth trade; TRADE exports and makes no cloth or wool","other":""}
+{"id":"15824","town":"r2r-hamlet-9","sev":"MED","kind":"STATE","why":"says the seat fails; Elder Council is Dominant and the threat is monsters, no seat failing or QUARRELS","other":""}
+{"id":"21119","town":"r2r-hamlet-9","sev":"LOW","kind":"STATE","why":"succession crisis a decade old; PAST says 15 years ago","other":""}
+{"id":"02022","town":"r2s-indebted-hamlet-3","sev":"LOW","kind":"STATE","why":"title Headman for Nott Gunnarsson, listed (f) in PEOPLE","other":""}
+{"id":"00729","town":"r2s-mass_migration-hamlet-0","sev":"MED","kind":"STATE","why":"says quarrels between old residents and newcomers are common; QUARRELS: none and relations between powers: none","other":""}
+{"id":"18708","town":"r2s-mass_migration-hamlet-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":""}
+{"id":"12894","town":"r2s-mass_migration-hamlet-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":""}
+{"id":"07230","town":"r2s-mass_migration-hamlet-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":""}
+{"id":"12857","town":"r2s-mass_migration-hamlet-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":""}
+{"id":"28129","town":"r2s-mass_migration-hamlet-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":""}
+{"id":"16344","town":"r2s-mass_migration-hamlet-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":""}
+{"id":"16345","town":"r2s-mass_migration-hamlet-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":"16344"}
+{"id":"16645","town":"r2s-mass_migration-hamlet-3","sev":"MED","kind":"STATE","why":"informant whose report triggered a purge; PAST records only an Occupation 5 years ago, no purge","other":""}
+{"id":"22349","town":"r2s-succession_void-hamlet-3","sev":"LOW","kind":"PAIR","why":"says no leader until one is found; 03171 says Acting Elder Pulvillus Nero keeps the seat meanwhile","other":"03171"}
+{"id":"20966","town":"r2s-recently_betrayed-hamlet-1","sev":"MED","kind":"STATE","why":"says the settlement's living is timber and carting; TRADE exports peat, iron ore, tools, reeds; no timber or woodland resource","other":""}
+{"id":"14754","town":"r2s-recently_betrayed-hamlet-1","sev":"MED","kind":"STATE","why":"succession crisis weighs on the quarrels the hamlet is having now; QUARRELS: none","other":""}
+{"id":"10689","town":"r2s-religious_conversion-hamlet-1","sev":"MED","kind":"STATE","why":"dairy farmer sells milk, butter and cheese; LAND gap says Dairy farmer lacks access to livestock","other":""}
+{"id":"16107","town":"r2s-religious_conversion-hamlet-1","sev":"MED","kind":"STATE","why":"grazing the herd at night; LAND gap says the dairy farmer lacks access to livestock","other":"10689"}
+{"id":"06988","town":"r2s-succession_void-hamlet-2","sev":"MED","kind":"PAIR","why":"says the seat is empty; 03208 says Acting Steward Berta Braun keeps the seat meanwhile","other":"03208"}
+{"id":"27943","town":"r2s-succession_void-hamlet-2","sev":"MED","kind":"PAIR","why":"no one in the seat so nobody can order defence; 03208 has an Acting Steward and the militia captain exists","other":"03208"}
+{"id":"20723","town":"r2s-succession_void-hamlet-2","sev":"LOW","kind":"PAIR","why":"calls the seat empty; 03208 says Acting Steward Berta Braun keeps the seat","other":"03208"}
+{"id":"27797","town":"r2s-succession_void-hamlet-2","sev":"LOW","kind":"STATE","why":"hamlet depended on mountain trade that failed; trade access isolated, no exports or imports, hamlet founded 34 years ago as the collapse fell","other":""}
+{"id":"15826","town":"r2r-hamlet-32","sev":"MED","kind":"STATE","why":"smaller house selling to both sides in the fight for the seat; QUARRELS none, Household Council Dominant and holds the seat","other":""}
+{"id":"05495","town":"r2r-hamlet-32","sev":"LOW","kind":"STATE","why":"to both sides there is no fight for the seat; QUARRELS: none","other":"15826"}
+{"id":"19695","town":"r2r-hamlet-5","sev":"MED","kind":"PAIR","why":"names a commander whose agreement the hall seeks; 29842 says the War Council has no one captain and PEOPLE lists no commander","other":"29842"}
+{"id":"29842","town":"r2r-hamlet-5","sev":"MED","kind":"PAIR","why":"War Council sat by householders in turns; 05914 calls it a crown-appointed emergency body","other":"05914"}
+{"id":"22024","town":"r2s-insurgency-hamlet-3","sev":"MED","kind":"STATE","why":"timber, charcoal wood and hauling keep the place alive; TRADE exports herbs, honey, sacred wood only and imports salt and arms","other":""}
+{"id":"16461","town":"r2s-insurgency-hamlet-3","sev":"MED","kind":"LACKS","why":"tokens that buy only from the foreman's own store; HOUSES lists no store or shop","other":""}
+{"id":"19794","town":"r2s-politically_fractured-hamlet-2","sev":"MED","kind":"STATE","why":"a working kiln's heat; LAND gap says the charcoal burner lacks access to mountain_timber, and 13576 says timber is not brought in","other":"13576"}
+{"id":"22261","town":"r2s-religious_conversion-hamlet-2","sev":"MED","kind":"STATE","why":"kilns burn wood down to charcoal; LAND gap says the charcoal burner lacks access to mountain_timber","other":""}
+{"id":"10676","town":"r2s-religious_conversion-hamlet-2","sev":"MED","kind":"STATE","why":"sells charcoal by the sack; LAND gap says the charcoal burner lacks access to mountain_timber","other":"22261"}
+{"id":"14615","town":"r2s-slave_revolt-hamlet-0","sev":"MED","kind":"LACKS","why":"the hamlet's arms turned inward against the risen; DEFENCE has no garrison, militia, watch or hired force","other":""}
+{"id":"04243","town":"r2s-slave_revolt-hamlet-1","sev":"LOW","kind":"LACKS","why":"behind its walls; DEFENCE says walls: none","other":""}
+{"id":"29920","town":"r2s-slave_revolt-hamlet-1","sev":"MED","kind":"STATE","why":"checks Salt trade; LAND gap says desert_salt raw resource is not being processed","other":""}
+{"id":"16996","town":"r2s-slave_revolt-hamlet-2","sev":"LOW","kind":"LACKS","why":"several gangs competing in a hamlet of 98; pop cannot hold several gangs, and the sentence tags reach hamlets","other":""}
+{"id":"05134","town":"r2s-succession_void-hamlet-1","sev":"LOW","kind":"STATE","why":"title Acting Headman for Dagny Magnusson, listed (f) in PEOPLE","other":""}
+{"id":"03187","town":"r2s-succession_void-hamlet-1","sev":"LOW","kind":"STATE","why":"title Acting Headman for Dagny Magnusson, listed (f) in PEOPLE","other":""}
+{"id":"03188","town":"r2s-succession_void-hamlet-1","sev":"LOW","kind":"STATE","why":"title Acting Headman for Dagny Magnusson, listed (f) in PEOPLE","other":""}
+{"id":"11633","town":"r2r-hamlet-38","sev":"MED","kind":"STATE","why":"dairy farmer keeps a herd for milk, butter and cheese; LAND gap says Dairy farmer lacks access to livestock","other":""}
+{"id":"10986","town":"r2r-hamlet-38","sev":"MED","kind":"STATE","why":"dairy is the only fat and protein in a bad year; LAND gap says Dairy farmer lacks access to livestock","other":"11633"}
+{"id":"00045","town":"r2r-hamlet-38","sev":"LOW","kind":"STATE","why":"Debt Crisis is recent; PAST gives it 37 years ago","other":""}
+{"id":"04629","town":"r2s-infiltrated-hamlet-1","sev":"MED","kind":"STATE","why":"charcoal kilns tended day and night; LAND gap says the charcoal burner lacks mountain_timber, and 13831 says no timber reaches it","other":"13831"}
+{"id":"27728","town":"r2s-infiltrated-hamlet-1","sev":"MED","kind":"STATE","why":"what the charcoal burner makes feeds the hottest fires; LAND gap says it lacks access to mountain_timber","other":"13831"}
+{"id":"28093","town":"r2s-infiltrated-hamlet-1","sev":"LOW","kind":"STATE","why":"lists a defended pass; DEFENCE has no walls, garrison, militia, watch or hired force and defence is Undefended","other":""}
+{"id":"26915","town":"r2s-monster_pressure-hamlet-2","sev":"LOW","kind":"STATE","why":"settles a share of the debt; header has Beast & Raider crisis and PAST has no debt event","other":""}
+{"id":"06894","town":"r2s-politically_fractured-hamlet-1","sev":"MED","kind":"STATE","why":"salt works evaporates local brine; LAND gap says Salt works runs on imported desert_salt, no local brine resource","other":""}
+{"id":"22413","town":"r2s-politically_fractured-hamlet-1","sev":"MED","kind":"STATE","why":"says viable only with local brine supply; LAND gap says the salt works runs on imported desert_salt","other":"06894"}
+{"id":"11003","town":"r2s-recently_betrayed-hamlet-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":""}
+{"id":"12899","town":"r2s-recently_betrayed-hamlet-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":""}
+{"id":"10308","town":"r2s-recently_betrayed-hamlet-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":""}
+{"id":"12860","town":"r2s-recently_betrayed-hamlet-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":""}
+{"id":"06893","town":"r2r-hamlet-53","sev":"MED","kind":"STATE","why":"salt works evaporates brine; LAND says Salt & Preservation is entrepot with salt flats absent, so no local brine","other":""}
+{"id":"21518","town":"r2r-hamlet-53","sev":"MED","kind":"STATE","why":"works operates only with strong local brine; LAND has Salt flats absent yet the works stands, so no local source","other":"06893"}
+{"id":"10954","town":"r2s-insurgency-hamlet-1","sev":"MED","kind":"LACKS","why":"rents uncollected and men sent to enforce; DEFENCE has no garrison, militia, watch or hired force, HOUSES has no landlord or steward","other":""}
+{"id":"06981","town":"r2s-insurgency-hamlet-1","sev":"LOW","kind":"LACKS","why":"says who takes a cut changes by street; a hamlet of 75 has no streets","other":""}
+{"id":"11285","town":"r2s-wartime-hamlet-0","sev":"MED","kind":"STATE","why":"Iron & Metalwork income stream from coal; LAND has no Iron & Metalwork chain and iron ore is absent","other":""}
+{"id":"16142","town":"r2s-wartime-hamlet-0","sev":"LOW","kind":"LACKS","why":"paying a health official; HOUSES lists no health office or official in a hamlet of 75","other":""}
+{"id":"04703","town":"r2s-indebted-hamlet-0","sev":"MED","kind":"STATE","why":"churned butter on offer; LAND gap says Dairy farmer lacks access to livestock","other":""}
+{"id":"16648","town":"r2s-indebted-hamlet-2","sev":"MED","kind":"STATE","why":"waters the milk before market; LAND gap says Dairy farmer lacks access to livestock, and HOUSES has no market","other":""}
+{"id":"05204","town":"r2s-indebted-hamlet-2","sev":"LOW","kind":"STATE","why":"title Cunning-Man for Liesel Schäfer, listed (f) in PEOPLE","other":""}
+{"id":"08988","town":"r2s-infiltrated-hamlet-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":""}
+{"id":"13232","town":"r2s-mass_migration-hamlet-1","sev":"LOW","kind":"LACKS","why":"guards spend their days on the crowds; a hamlet of 60 holds no crowds and has only a citizen militia","other":""}
+{"id":"14746","town":"r2s-mass_migration-hamlet-1","sev":"MED","kind":"STATE","why":"the purge weighs on the quarrels the hamlet is having now; QUARRELS: none","other":""}
+{"id":"27845","town":"r2s-politically_fractured-hamlet-0","sev":"LOW","kind":"LACKS","why":"which one you drink in implies several drinking places; HOUSES has one Alehouse","other":""}
+{"id":"16543","town":"r2s-politically_fractured-hamlet-0","sev":"MED","kind":"STATE","why":"sold butter from a sick cow; LAND gap says Dairy farmer lacks access to livestock","other":""}
+{"id":"04301","town":"r2s-recently_betrayed-hamlet-0","sev":"MED","kind":"STATE","why":"salt works boils local brine; LAND gap says Salt works runs on imported desert_salt, no local salt resource","other":""}
+{"id":"11476","town":"r2s-recently_betrayed-hamlet-0","sev":"MED","kind":"STATE","why":"works only with local salt supply; LAND gap says it runs on imported desert_salt","other":"04301"}
+{"id":"03823","town":"r2s-recently_betrayed-hamlet-0","sev":"MED","kind":"STATE","why":"the hamlet's present quarrels raise the land dispute; QUARRELS: none and PAST gives the dispute as 20 years ago","other":""}
+{"id":"11125","town":"r2r-hamlet-10","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":""}
+{"id":"20578","town":"r2r-hamlet-10","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":""}
+{"id":"18707","town":"r2r-hamlet-10","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":""}
+{"id":"12895","town":"r2r-hamlet-10","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":""}
+{"id":"08994","town":"r2r-hamlet-10","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":""}
+{"id":"12858","town":"r2r-hamlet-10","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":""}
+{"id":"21195","town":"r2r-hamlet-45","sev":"MED","kind":"STATE","why":"textile trade leans on him; the head shepherd is Zorana Petrov (f) in PEOPLE, and TRADE lists no textiles or wool","other":""}
+{"id":"00814","town":"r2s-succession_void-hamlet-0","sev":"LOW","kind":"LACKS","why":"leaves a copy with a notary; HOUSES lists no notary or legal office","other":""}
+{"id":"29640","town":"r2s-succession_void-hamlet-0","sev":"LOW","kind":"STATE","why":"title the lord for Zenobia Cicero, listed (f) in PEOPLE; 29636 calls the same role the lady","other":"29636"}
+{"id":"14330","town":"r2s-succession_void-hamlet-0","sev":"MED","kind":"PAIR","why":"says the seat is empty and fought over; 03174 says Acting Elder Titia Caesar keeps the seat meanwhile","other":"03174"}
+{"id":"19801","town":"r2s-succession_void-hamlet-0","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'The heresy trials is a generation old'","other":""}
+{"id":"12892","town":"r2r-hamlet-27","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":""}
+{"id":"06726","town":"r2r-hamlet-27","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":""}
+{"id":"12846","town":"r2r-hamlet-27","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":""}
+{"id":"12819","town":"r2r-hamlet-27","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":""}
+{"id":"28150","town":"r2r-hamlet-27","sev":"LOW","kind":"BROKEN","why":"slash-joined label Military/Guard used as a name in prose","other":""}
+{"id":"27532","town":"r2r-hamlet-13","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'Weak defences keeps'","other":""}
+{"id":"06743","town":"r2r-hamlet-31","sev":"LOW","kind":"LACKS","why":"names a merchant class as the council's base; a hamlet of 27 with only a maltster has none","other":""}
+{"id":"21019","town":"r2r-hamlet-46","sev":"MED","kind":"STATE","why":"hamlet built in the years after the siege; hamlet is 108 years old and the siege was 39 years ago","other":""}
+{"id":"09790","town":"r2r-hamlet-22","sev":"LOW","kind":"LACKS","why":"names a merchant class as the headman's base; a hamlet with only a stable yard has none","other":""}
+{"id":"05282","town":"r2r-hamlet-22","sev":"LOW","kind":"STATE","why":"title Headman for Midori Yang, listed (f) in PEOPLE","other":""}
+{"id":"20903","town":"r2r-hamlet-22","sev":"LOW","kind":"STATE","why":"title Headman for Midori Yang, listed (f) in PEOPLE","other":""}
+{"id":"11593","town":"r2r-hamlet-22","sev":"LOW","kind":"STATE","why":"title Headman for Midori Yang, listed (f) in PEOPLE","other":""}
+{"id":"DONE","lines":2897,"blocks":57,"flags":108}
