@@ -13,6 +13,8 @@ Seat JOIN-4 (session `session_01ACmDYZUoeEdTG4RGs1hdRD`), brief `docs/chair/2026
 
 THE CHAIR'S RULINGS SENT AFTER THE BRIEF (the chair's messages are not on the branch; copied):
 - **13:38 UTC (on the r2-code-b stop):** the stop is right and accepted: DO NOT LAND THAT LANE NOW. RULED: both cures stand, each in its own case (a roster healer: the template; the cast's stand-in where one is minted: the lane's line; the data lane's slot-less twin only where the cast holds nobody): the LANE'S OWN SEAT merges the joined line into its lane, makes it there and re-keys its pins; the chair sends "LAND: lane/r2-code-b-2026-11-13 at <hash>" when it reports. GO ON: coherence-upkeep, the two join lanes, item 3 (build, grid, count), item 5's message. ONE MORE POINT AFTER THE ELEVEN, by the chair's own change of the brief's "not merged" for this one branch: "LAND: lane/upkeep-monotone-2026-11-14 at 0ca0bbe94" (the defence rating's rebuild), by the same laws; its declared moves shift goldens and pins: LISTED, not re-keyed by this seat.
+- **14:19 UTC:** TWO POINTS MORE, after item 3 and the rebuild's point, in this order: "LAND: lane/coherence-upkeep-2026-11-12 at 2d8aadb19" and "LAND: lane/join-surfaces-2026-11-14 at e6cb445db". If the count will not hold all three points and the hand-back: the hand-back first, the points not made named in its first line. One line back for each point made.
+- **14:20 UTC:** "LAND: lane/r2-code-b-2026-11-13 at a86646b84" (its seat merged the joined line 0a296575c, made the plague hook as ruled, re-keyed its pins, 39/39 on the three files); if the three files are not green after the merge: STOP for it again with the titles. BEFORE the other points.
 
 ## 2. The landings
 
@@ -61,18 +63,29 @@ Pins (joined side kept inside the hunk): `tests/lint/proseWiringCensus.walker.te
 
 Merged clean though both sides moved them (for the close to re-derive or measure by its door): `tests/lint/presumedThings.register.json` (3, 6); `tests/lint/presumedThings.widened.register.json` (5, 6); `tests/generators/generationForkCensus.test.js` (4, the mint bound A1); `src/data/dossierStateProse/defense.generated.js` (6, generated); `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` (6); the pins of merge 6's four tests (§3). `docs/content/prose-shift-register.json` moved by w2-write alone (6): taken from the lane.
 
-## 5. The count (CENSUS-2, `census2.sh <tree> <out> 4`, 720 seeds)
+## 5. Item 3 at the landed tip 600b9f743 (each run to a file in /home/user/j4out, read by its tail)
 
-| kind | b6a5f97ab (before the merges; `/home/user/j4base`) | the landed tip |
+- `npm run build`: **exit 0**.
+- The twelve-birth grid (`node scripts/census/page-census.mjs --grid`): 12 dossiers rendered, **0 falls, exit 0**.
+- The test files naming a file in which a code conflict was resolved: none (no code conflict was resolved; every code file both sides moved merged clean at independent lines, §3). The governing tests of item 4's file: §5a.
+- THE COUNT (CENSUS-2, `census2.sh <tree> <out> 4`, 720 seeds; exit 0 both times):
+
+| kind | b6a5f97ab (before the merges; `/home/user/j4base`) | 600b9f743 (the landed tip) |
 |---|---|---|
-| a | towns 516 · hits 1037 · lines 211 | — |
-| b | towns 46 · hits 86 · lines 42 | — |
-| c | towns 43 · hits 46 · lines 21 | — |
-| d | towns 22 · hits 24 · lines 8 | — |
-| e | towns 15 · hits 15 · lines 14 | — |
-| f | towns 309 · hits 2280 · lines 53 | — |
-| g | towns 0 · hits 0 | — |
-| h | towns 2 · hits 2 · lines 2 | — |
+| a | towns 516 · hits 1037 · lines 211 | towns 503 · hits 957 · lines 170 |
+| b | towns 46 · hits 86 · lines 42 | towns 41 · hits 80 · lines 39 |
+| c | towns 43 · hits 46 · lines 21 | towns 43 · hits 46 · lines 21 |
+| d | towns 22 · hits 24 · lines 8 | towns 22 · hits 24 · lines 8 |
+| e | towns 15 · hits 15 · lines 14 | towns 15 · hits 15 · lines 14 |
+| f | towns 309 · hits 2280 · lines 53 | towns 305 · hits 2269 · lines 52 |
+| g | 0 | 0 |
+| h | towns 2 · hits 2 · lines 2 | towns 2 · hits 2 · lines 2 |
+
+A count falling is not a cure: these are candidates, a hit a line to read against the record (the instrument's own words).
+
+### 5a. Item 4, made (600b9f743)
+
+Both halves were in: `crisisSummaryVantage.js :: crisisSummaryForSurface(entry, name, surface, facts)` (r3-code-c, landed at merge 1). Held by content: `src/domain/summary/tonightSheet.js` differs from the line on the joined tree and on r2-code-b's tip only (r2-code-b's pending hunks at :104, :156, :579, none on the head line or the imports). The caller's change: `crisisOf` (composeTonightSheet's head) hands `factsOf(source)`, with the import, cast to the parameter's own type (the strict domain gate measured +1 without the cast: factsOf's frozen return against `FactsLike`'s `hasOtherNpc`). Red first: `tests/domain/summary/tonightFamineLineReadsGrain.test.js` on 44 births (r2s famine village/town/city 0-5, rr3 famine thorp/town/metropolis 0-5, rr3 siege+famine thorp/metropolis 0-3): 1 failed without, 2/2 with. Five no-grain towns now print the twin, two grain towns keep the harvest line (guard), the siege towns lead with the siege. The 29 test files naming tonightSheet: the same 12 red with and without the change (writer reach ×6; r3c10 herding ×2; tonightOwnGoal; storesSpanFigure; famineStoresOneRounding; houseLabelEverySurface), at the joined tree: NAMED, not classed here (the whole check is JOIN-3's at b6a5f97ab). FOR THE JOIN: `src/pdf/lib/viewModel.js` :: the Overview's `crisisSummaryForSurface(x, s?.name, 'overview')` hands no facts (r3c10's header names it the other caller; the brief named only the Tonight sheet).
 
 ## 6. Stops
 
@@ -85,8 +98,9 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 
 ## 8. How the instruments are re-made
 
-A worktree at origin's tip (`git worktree add /home/user/j4wt -b join4 <tip>`, `npm ci`, `git config rerere.enabled true`). `merge.sh <n> <lane-branch>` (fetch full depth, read the tip into `tip.<n>`, `git merge --no-ff --no-commit <full hash>`, list unmerged paths); a register `git checkout --ours` then `git add`; a pinned hunk kept by dropping the incoming side inside the markers only; `verify.sh <hash>` (each staged-changed file the joined side had not moved since the merge base equals the lane's blob; the both-moved files named); `commit.sh <msg>` (the tree before the hook equals the commit's); `push.sh` (fetch, tripwire, non-empty rev-list, plain push, refs and config compared).
+A worktree at origin's tip (`git worktree add /home/user/j4wt -b join4 <tip>`, `npm ci`, `git config rerere.enabled true`). `merge.sh <n> <lane-branch>` (fetch full depth, read the tip into `tip.<n>`, `git merge --no-ff --no-commit <full hash>`, list unmerged paths); a register `git checkout --ours` then `git add`; a pinned hunk kept by dropping the incoming side inside the markers only; `verify.sh <hash>` (each staged-changed file the joined side had not moved since the merge base equals the lane's blob; the both-moved files named); `commit.sh <msg>` (the tree before the hook equals the commit's); `push.sh` (fetch, tripwire, non-empty rev-list, plain push, refs and config compared). The remerge patches: `docs/chair/2026-11-14/probes/JOIN-4/NN-<lane>.remerge.patch`, `git show --remerge-diff <merge> -- . ':(exclude)<each listed register, baseline and bundle>'`; only merge 2's carries a hunk (the docblock pin kept); the rest are empty headers (git's own merge, nothing resolved by hand). The count: `census2.sh <tree> <out-dir> 4` with the CENSUS-2 probe archived from `origin/lane/census-2-2026-11-13` to `/home/user/j4out/c2`; the frozen tree before the merges `/home/user/j4base` (since used at r2-code-b's tip for the stop's class).
 
 ## 9. WHAT IS LEFT (line by line)
 
-r2-code-b (stopped, §6) waits on the chair's LAND; the build, the grid, the conflict files' tests and the count at the landed tip; item 4 (the Tonight sheet's famine line) if both halves are in; the remerge patches; the message to the chair; then the point LAND: lane/upkeep-monotone-2026-11-14 at 0ca0bbe94 (the chair's 13:38 ruling), one line back.
+1. The message to the chair (item 5).
+2. The points, in the chair's order: r2-code-b at a86646b84 (its three files run after the merge); upkeep-monotone at 0ca0bbe94; coherence-upkeep at 2d8aadb19; join-surfaces at e6cb445db. One line back for each.

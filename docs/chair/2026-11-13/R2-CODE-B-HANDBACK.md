@@ -797,3 +797,597 @@ WHAT IS LEFT, in this order (the successor's list):
 ## Instruments (outside the tree; lost with the container)
 - /home/user/wt-b8 (working worktree, branch b8-work); frozen trees /home/user/wt-base (e969a75b7) and /home/user/wt-line (976db5b19), node_modules symlinked from wt-b8; /home/user/b8: dfr.mjs (the defence walker's count per line at any rev), owners.sh + others.txt (the other current lanes, dated 11-12..11-14, that changed a file beyond the line), fails.mjs (a vitest JSON report's reds with messages), red27.txt/json (the 24 red files re-run), seedloop.py, c2/ (CENSUS-2 at 2686272b1), c2tip/ (the tip's census: counts.txt, hits.json, corpus.ndjson.gz), births-base/ and births-line/ (births.mjs only), fdiff.mjs (the field diff of two corpora by family), sec.awk + join/words/left.md (step 5's extraction).
 - RE-MADE: the census as the brief's form; births only: `TREE=<tree> OUT=<dir> SEEDS=<c2>/…/seeds.txt node <c2>/…/births.mjs` with node_modules linked into OUT; fdiff.mjs walks every leaf of two corpus.ndjson.gz files keyed by seed and counts leaves and towns per top-level key (about thirty lines; its counting is described in step 3).
+
+# PART 9 — R2-CODE-B-9, the ninth seat (the person minted whole; the plague slot; the re-measures; the final statement)
+
+**Seat:** R2-CODE-B-9 (session_01ACmDYYVFQGSVcyPRiiveGr); **the chair:** session_01ACmDYZrFEVXyZEUg1NDxxC. **Brief:** docs/chair/2026-11-14/briefs/BRIEF-R2-CODE-B-9.md on lane/chair-2026-11-08. **Tip read back at start:** 30ed925ee (as the brief); the line 976db5b19 (unchanged).
+
+## Items (this seat; each pushed)
+| item | commit | measured |
+|---|---|---|
+| 1: the temporary person minted whole (the chair's 07:32 ruling) | ef0b6208d | mintTemporary stamps `importance: 'minor'` and `structuralRank: 'unaffiliated'` (the roster's own rules for a face of no power: castPowers.js, membership.js :: structuralStandingOf; 1,982 of 1,982 born no-membership cards carry exactly these on the 720); where a person is minted, the coherence receipt is written again by its own writer over the final roster (no count edited). THE SIX REDS GREEN. 720: 57 towns mint (the line's 20 + the lane's 37; 26 thorps, 26 hamlets, 5 villages), the density cap holds in all; tip→cure 57 towns, npcs 114 leaves (importance 57, structuralRank 57) + generationCoherenceReceipt 57 (the finalGraph count only); line→cure stress 442/127, stressors 442/127, npcs 77/57, receipt 57/57. Four towns read in every dossier view and the Tonight sheet: byte-identical. |
+| 2: the plague slot reads its holder's role | 9a12e5411 | CRISIS_HOOK_SLOTS gains `holds` (the holder's own roster role the fill names); slotCrisisHook reads the record's npcs. Of the five slots only the plague's fill names a role: 26 towns fill, 8 of a holder with another role (the dean 4, the priest 4), now the catalog's own words; 18 healers named still. Records 0 of 720 changed (a reader). Red first r2r-town-37; guards r2s-plague_onset-thorp-0 (Healer), r2r-city-19 (apothecary). resolveCrisisCast.test.js's DM-edit pin (which asserted the false line) re-keyed by identity. |
+| register: the lighting census | d3d94961d | its ritual on the committed 9a12e5411: titles 29532 -> 29536, suiteTitles 8015 -> 8016 |
+
+## FOR THE JOIN (this seat)
+- tests/generators/resolveCrisisCast.test.js is held by W2-FIX-DATA (w2-fix-data-2026-11-13, W2-FIX-DATA-7; on join-2026-11-14) too: it re-keyed the two plague tests' seed to slot-plague_onset-1 (its cure: the plague sentence's healer declared `needs: healer` at the source, stressTypes.js :: STRESS_TYPE_SIBLINGS). This lane's 9a12e5411 leaves that line untouched; its arms hold at either seed. The two cures are of two faults and compose.
+- src/domain/crisis/crisisHooks.js is held by COHERENCE-UPKEEP (and its copies) in a disjoint hunk (CRISIS_NOUN to crisisNoun.js, l. 52-69).
+
+## Item 3, PART DONE (measured at 5764b04c4; its src is 9a12e5411's)
+- CENSUS-2 at the tip (2686272b1; `census2.sh <wt> <scratch>/c2tip 4 --files <the lane's 39 src files: git diff --name-only 976db5b19 HEAD -- src>`; its own exit 0; births+render 738 s, count+trace 149 s). Kinds (towns · distinct lines), the eighth seat's tip fd9c09f42 -> THIS TIP: a 678·524 -> 678·523; b 70·101 -> 70·101; c 276·155 -> 276·155; d 350·15 -> 350·15; e 60·20 -> 60·20; f 309·53 -> 309·53; g 720·14 -> 720·14; h 2·2 -> 2·2. The one line gone: the plague slot's (crisisHooks.js a 1 -> 0, row gone).
+- THE LANE'S FILES with hits (towns): EconomicsTab.jsx g 720, a 6, b 29, f 213; InstitutionsTab.jsx f 303; PowerStrata.jsx f 298; WhoRunsThisTownPanel.jsx f 13; institutionDisplayName.js f 7; traditionCorpus.js a 3; settlementQuickGuide.js a 3 (r2s-indebted-village-3 docks, scopeAgainstRecord l. 294; r2s-insurgency-town-1 waterworks and r2s-mass_migration-hamlet-1 docks, scopeAtSize l. 354/357: the scope lines item 4 rows; "on the coast" / the plaza printed true by their code conditions). These three print BYTE-IDENTICAL at 30ed925ee (re-rendered there, the same harbour/plaza lines): not a rise of this seat's. PART 8 read "a 2 -> 0" for this file at fd9c09f42 (the same src): the two counts disagree; the successor reads the hits at the base by the same command before ruling.
+- THE PLAGUE SENTENCE'S OWN WORDS now hit in 3 towns (a, "healer" with no healer on the roster: r2r-thorp-41, r2r-town-37, r2s-plague_onset-hamlet-3), traced to src/data/stressTypes.js l. 103 (STRESS_TYPE_MAP.plague_onset.crisisHook): NOT a lane file; it is W2-FIX-DATA-7's cure at the source (FOR THE JOIN above: the slot-less twin where no healer stands).
+- THE 720 FIELD DIFF, the line 976db5b19 against the tip: 136 of 720 towns; FOUR families, each declared: stress 442 / 127 and stressors 442 / 127 (the lane's cast, as PART 8), npcs 77 / 57 (the 37 whole persons and the line's 20 made whole, item 1), generationCoherenceReceipt 57 / 57 (the finalGraph count, item 1). 9a12e5411 moved no record (0 of 720).
+
+## HAND BACK (2026-11-14 ~09:35 UTC, by judgement before the count's mark: the seat's own count by get_session at 09:07 was 334,088; the census and the field diff above took the margin). Nothing running; everything pushed.
+WHAT IS LEFT, in order (the successor's list):
+1. Item 3's rest: the draft shift record's rows re-measured (docs/chair/2026-11-13/R2-CODE-B-shift-record.DRAFT.json; the goldens and pins of class (a) moved again with the mint: editCorpusRatchet A7 now [672, 269, 2185] (measured at ef0b6208d); generatorGoldenMaster, espionageDormancyFence, dmLayerGoldenIsolation A7, the pin seams' A1s, hookThemeDraws, rosterDuplicateDraws, x46NpcBand: re-read each failure at the tip, JSON to a file); the test files that name the files this seat touched (resolveCrisisCast.js: tests/domain/worldFactRederive, tests/generators/{generationForkCensus,people/ties,pipelinePinnedChoosers,resolveCrisisCast}, tests/lint/{chooserRecordPathRegistry,generationForkRegistry.contract,heldKeyWriterCensus,observedShapeSentinel,transientChooserRegistry}; crisisHooks.js: tests/architecture/engineCoreLazyEdge, tests/components/publicCrisisHookLabel, tests/domain/{crisisCastSeatAndAccess,crisisHooks,facts/displayDrawSites}, tests/generators/resolveCrisisCast) at the tip AND at 30ed925ee, no red new on this seat's commits. Already measured by this seat: the six reds green and the step's files green at ef0b6208d (pipelinePinnedChoosers A1 the one class-(a) red); the crisisHooks set at 9a12e5411 red only on presumedThings (red at ef0b6208d, the same door output) and the lighting census (re-taken, d3d94961d).
+2. Item 4, the declaration-pass rows; 5, the edge bundles (PLAUSIBLE, not measured: both bundles carry crisis-hook code, `crisisHook` greps in supabase/functions/_shared/engineBundle.js and aiGroundingBundle.js, so they likely differ); 6, validate, THE FINAL STATEMENT, one message: as the brief and PART 8's HAND BACK give them.
+
+
+## Instruments (outside the tree; lost with the container)
+- <scratch>/wt (branch b9-work), wt-line (976db5b19), wt-tip0 (30ed925ee), wt-tip1 (ef0b6208d), node_modules symlinked from wt; <scratch>/c2 (CENSUS-2 at 2686272b1); births-line/, births-tip0/, births-cure1/ (ef0b6208d), births-cure2/ (9a12e5411): the 720 by births.mjs; tools/: fdiff.mjs (the field diff by family; re-made as PART 8 describes), rdiff.mjs (one family's differing leaves with an example), minted.mjs, npckeys.mjs, npcvals.mjs, counts.mjs (stored roster counts), slots.mjs (each slot's fills by holder role), plague.mjs, tonight.mjs (composeTonightSheet per town).
+
+# PART 10 — R2-CODE-B-10, the tenth seat (the record re-measured; the touched tests; the declaration rows; the edge bundles; THE LANE'S ONE FINAL STATEMENT)
+
+**Seat:** R2-CODE-B-10 (session_01ACmDYY2433jsUYaeB9fos7); **the chair:** session_01ACmDYZrFEVXyZEUg1NDxxC. **Brief:** docs/chair/2026-11-14/briefs/BRIEF-R2-CODE-B-10.md on lane/chair-2026-11-08 (self-contained; read whole). **Tip read back at start:** ac8168c8c (as the brief); the line 976db5b19. **Nothing under src/ is changed by this seat** (a fresh reader reads the lane at ac8168c8c): `git diff --stat ac8168c8c..HEAD -- src/` prints nothing.
+
+## The chair's rulings received by this seat (notifications)
+- None queued at any read (after every commit) through this part's last commit.
+
+## Items (this seat; each pushed)
+| step | commit | measured |
+|---|---|---|
+| 1: the draft shift record re-measured at the tip | 750b7a612 | the 51 registered suites and the eleven pin files, run as files at the line 976db5b19 and at the tip ac8168c8c (vitest JSON to files outside the tree): line 493 tests / 4 red, tip 493 / 19 red. generator-golden-master MOVED (36 of 525, green at the line); espionage-dormancy-fence MOVED (483e4786c1f33ff8… against the pinned 05f70cf9…; 2e5ba810… at fd9c09f42); dossier-prose-manifest CARRIED (the same 3 reds at both); the other 48 UNMOVED (green at both). The pins named, NOT re-keyed: hookThemeDraws 2107 -> 2109; rosterDuplicateDraws 853 -> 889; x46NpcBand 7 dark worlds (6 at fd9c09f42); editCorpusRatchet A7 [682, 269, 2181] -> [672, 269, 2185]; institutionBudgetPromise 3 of 60 ([13, 43, 49]); the pin seams' A1s (nameHeldThroughAssembly A1, rosterFinalUnderHeldRoster A1, pipelinePinnedChoosers A1, pipelinePinnedMode A1/A2/A5, powerEconomyFreshness A4: 3 golden rows each) and dmLayerGoldenIsolation A7 (36) read the moved golden. editCorpusRatchet A5 red at BOTH trees (a timeout, ~685 s under two concurrent runs on four cores): carried. |
+| 2: the test files that name the files the ninth seat touched, at 30ed925ee and at the tip | (this part) | the sixteen files (src/generators/steps/resolveCrisisCast.js and src/domain/crisis/crisisHooks.js named by: tests/architecture/engineCoreLazyEdge, tests/components/publicCrisisHookLabel, tests/domain/{crisisCastSeatAndAccess,crisisHooks,facts/displayDrawSites,worldFactRederive}, tests/generators/{generationForkCensus,people/ties,pipelinePinnedChoosers,resolveCrisisCast}, tests/lint/{chooserRecordPathRegistry.walker,generationForkRegistry.contract,heldKeyWriterCensus.walker,observedShapeSentinel,transientChooserRegistry.walker}; and tests/lint/.lighting-census-baseline.json's reader tests/lint/sovereigntyLightingContract.walker), vitest JSON to files: 30ed925ee 166 tests / 2 red; the tip 170 / 2 red (crisisHooks.test.js gains its 4). THE SAME TWO REDS AT BOTH, none new on the ninth seat's commits: pipelinePinnedChoosers A1 (class (a), the moved golden, step 1) and generationForkCensus A3e (STACK_TRACE_ERROR at ~250 s at both trees: a timeout under the concurrent run; carried). No message to the chair (no red new). |
+| 3: the declaration-pass rows worded | (this part) | below, "Step 3". |
+## Step 3: FOR THE DECLARATION PASS, the rows worded as the chair re-ruled (PART 8's HAND BACK item 4; the chair's 06:40 ruling (iii))
+Measured at the tip ac8168c8c by `node scripts/presumed-things-door.mjs --check` (writes nothing; exit 1: `fresh 18 · stale 0 · first-register stale 0 · banked 4719 · strips fresh 0 stale 0 banked 107`): the fifteen quick-guide hits and the faith reading's three, the same eighteen as PART 7's 9e8d2af22. Each literal read in src/domain/summary/settlementQuickGuide.js itself, by line (the line numbers are the tip's: the literals sit at l. 352-364 in scopeAtSize and l. 412-416 in scopeAgainstRoster; PART 7's ranges are older). FIRST = the replace()'s first argument, a matcher of text the frame holds (the page prints the whole frame where the gate does not strike it); SECOND = the replace()'s second argument, text a page prints. A SHAPE ROW is a literal standing apart from a QUICK_GUIDE_SIBLINGS member (l. 952 on) that already declares its atom: the shape cure moves it into its declaring member as a twin, the output byte-identical. Every other row: the code condition that gates it and the atom it would declare. No new word is needed by any row.
+
+| # | line | atom (the matcher's) | the literal | arg | the row |
+|---|---|---|---|---|---|
+| 1 | 352 | streets | "built in masonry around a civic square, and run by" | FIRST (the Latin frame, SCOPE_PHRASE.latin) | CODE CONDITION: struck where `tiny` (TINY_TIERS: thorp, hamlet; scopeAtSize l. 351); the Latin frame declares nothing in QUICK_GUIDE_SIBLINGS. Atom: `streets` (a civic square, masonry), the frame's own need where not tiny. |
+| 2 | 354 (and 413 as FIRST) | market | "built on tribute, market and waterworks" | SECOND at 354 (prints in a tiny Mesoamerican place); FIRST at 413 (matched where no waterworks house) | SHAPE ROW: the Mesoamerican member declares `needs: ['market']` (l. 961); the struck variant stands apart from it. |
+| 3 | 357 | docks | "built around the agora and the harbour" | FIRST (the Greek frame) | SHAPE ROW: the Greek member declares `needs: ['navigable']` (l. 968), and the harbour's gate is scopePhrase's water branch (WATERSIDE_SCOPES, isLandlocked) with scopeAgainstRecord l. 290 striking the harbour where `water !== 'maritime'`. |
+| 4 | 357 | streets | "built around the agora and the harbour" (the same literal) | FIRST | CODE CONDITION: struck to "built around the harbour" where `tiny \|\| noMarket` (l. 356; noMarket = a roster and factsOf(s).market === false). Atom: `streets` (the agora); the Greek member declares only `navigable`. |
+| 5 | 357 | docks | "built around the harbour" | SECOND (prints in a tiny or marketless maritime Greek place) | SHAPE ROW: the Greek member's `navigable` (l. 968), reached only where l. 290 left the harbour standing (`water === 'maritime'`). |
+| 6 | 358 | streets | "built around the agora, and run by" | FIRST (the Greek frame after l. 290 and the ground's replace, l. 293-296, where the terrain names no ground) | CODE CONDITION: `tiny \|\| noMarket` (l. 356). Atom: `streets` (the agora). |
+| 7 | 359 | streets | "built around the agora, " | FIRST (the Greek frame with its ground, inland or not) | CODE CONDITION: `tiny \|\| noMarket` (l. 356). Atom: `streets` (the agora). |
+| 8 | 362 | quarters | "built around kin districts and an assembly ground" | FIRST (the Celtic frame) | CODE CONDITION: struck to "built around kin" where `small` (l. 361: populationBandOf(s) === 'small' or SMALL_TIERS thorp, hamlet, village; NOT TINY_TIERS, as PART 8's item 4 wrote: the code reads `small` for the quarters lines). The Celtic frame declares nothing. Atom: `quarters`. |
+| 9 | 363 | streets | ", in quarters by trade and kin" | FIRST (the South-Asian twin "built around the tank, in quarters by trade and kin", l. 966, which declares nothing itself) | CODE CONDITION: `small` (l. 361). Atom: `streets` as the matcher names it (the quarters by trade). |
+| 10 | 364 | streets | ", in quarters by trade," | FIRST (the South-Asian frame) | CODE CONDITION: `small` (l. 361). The South-Asian member declares `market` and `institution: temple` (l. 965), not this atom: not a shape row. Atom: `streets`. |
+| 11 | 412 | market | "tribute, and market-and-waterworks" | FIRST (the Mesoamerican frame) | SHAPE ROW: the Mesoamerican member's `market` (l. 961). |
+| 12 | 412 | market | "tribute and market" | SECOND (prints where the roster holds no waterworks house) | SHAPE ROW: the Mesoamerican member's `market` (l. 961). |
+| 13 | 413 | market | "built on tribute and market" | SECOND (prints in a tiny Mesoamerican place with no waterworks house) | SHAPE ROW: the Mesoamerican member's `market` (l. 961). |
+| 14 | 416 | temple | ", under temple and guild" | FIRST (the South-Asian frame) | SHAPE ROW: the South-Asian member declares `institution: temple` (l. 965). |
+| 15 | 416 | temple | ", under the temple" | SECOND (prints where the roster holds no guild house, GUILD_HOUSE) | SHAPE ROW: the South-Asian member's `institution: temple` (l. 965). |
+
+Fifteen: SHAPE ROWS 8 (#2, 3, 5, 11-15: the market 4, the harbour 2, the temple 2); CODE-CONDITION rows 7 (#1, 4, 6-10: `streets` 6, `quarters` 1). A shape cure is output byte-identical by the ruling's own form; it is the declaration pass's, after the join, not made here.
+
+The faith reading's three (src/domain/dossier/faithReading.js, read by line at the tip), class (3), code-gated:
+- l. 385 `shrine`, ", and the shrines answer to no named god." FIRST (quietOf's matcher; the whole line prints, l. 341/379/381, where `shrine`, the reading's own shrine on the roster, holds): CODE CONDITION `shrine`; atom `shrine`.
+- l. 426 `siege` and `temple`, "… has no church of its own, and the siege keeps its people from the next village's parish church." PRINTED (a template the page prints): CODE CONDITION `!reading.hasChurch && reading.accessOnly && reading.roadBarred` (the siege in force, R2-CODE-B-SIDE item 7); atoms `siege` and the church's absence (`temple`).
+
+THE FACT-LAYERS READER'S ROW (STOP 2; `node scripts/fact-layers-door.mjs` at the tip, exit 1, "1 rise(s), 1 fall(s)", REFUSED: shrink-only; it wrote nothing): src/domain/summary/settlementQuickGuide.js `guild`, a reader's reworded condition, both contents —
+- banked (FALL): `if (roster && out.includes('run by guild and estate') && !factsOf( (source)).guild) {`
+- the tree (RISE, l. 278): `if (roster && out.includes('run by guild and estate') && !rosterHolds(source, GUILD_HOUSE)) {` (R2-CODE-B-SIDE item 5, 66a4f587c: a guild only with a guild HOUSE). Nothing re-keyed, nothing banked.
+
+## Step 4: THE EDGE BUNDLES (6923a7d47, committed alone)
+`npm run build:edge-shared` (exit 0) in the scratch worktree with its own node_modules (npm ci; not symlinked; `grep` of the scratch path in every bundle: 0). engineBundle.js and aiGroundingBundle.js differ (their sourceHash 9efe8877… -> 51c2a04a…, ad4aac80… -> 99b941ba…); the other four bundles' meta carry only a new generatedAt and are committed with them (edgeSharedBundleReproducibility's single-build-window title reds when they are left out: measured, 46,912 s spread). The eleven test files that read the bundles (tests/build/{engineBundleReplay,engineServiceCore,engineServiceStoreParity}, tests/domain/deityTemperConsumerCensus.walker, tests/edgeFunctions/{aiCharterBundle.freshness,aiGroundingBundle.freshness,aiGroundingContract,edgeSharedBundleReproducibility,intentAtlasBundle.freshness}, tests/lib/{engineRemoteTransport,generationClient}): at 750b7a612 (before) 262 tests / 5 red: THE THREE EDGE TITLES (aiGroundingBundle.freshness "the current source tree matches the recorded hash"; edgeSharedBundleReproducibility's aiGroundingBundle.meta and engineBundle.meta dirty-build titles) and engineBundleReplay's two (the golden corpus 36 of 525, the fence 50 of 360: the stale bundle against the in-process pipeline); at 6923a7d47 (after, re-run after lint-staged's eslint pass on the commit) 262 / 0 red.
+
+## Step 5: VALIDATE
+`node scripts/implementation-packets.mjs validate` at 6923a7d47 (through gate-tail): exit 0, "valid: 257 packets (0 READY)". No symbol this lane retired is required by a landed packet (no `retiredBy` row needed).
+
+## Also measured (step 1's pin, read at the ninth seat's base)
+tests/generators/institutionBudgetPromise.test.js, run as a file at 30ed925ee: GREEN (1 test); at the tip red ([13, 43, 49] of its sixty sealed record hashes). It is not a file that names the ninth seat's files (step 2's set) but it IS red new on the ninth seat's commit ef0b6208d: class (a), a pin moved by the ruled mint (the chair's 07:32 ruling: the person minted whole moves `npcs` and the receipt), as x46NpcBand's seventh world and editCorpusRatchet A7's 672. Named, not re-keyed (the merge seat's). The shift record's row says so.
+
+# THE LANE'S ONE FINAL STATEMENT — R2-CODE-B (lane/r2-code-b-2026-11-13), composed by R2-CODE-B-10
+
+**The final tip:** the commit that carries this statement; its src/ and bundles are 6923a7d47's (`git diff --stat ac8168c8c..HEAD -- src/` prints nothing: the src/ a fresh reader reads at ac8168c8c is the final src/). **Base:** e969a75b7. **The line:** 976db5b19 (merged at 0aa0cce00). **The stage a reader has not read** begins at 80b960171. Composed from PARTS 6 to 10; the sections below marked COPIED are copied by script (sed over this file at ac8168c8c, headings demoted two levels), not re-read or re-measured by this seat. The whole suite was NOT run by this seat (the brief): its classing is the seventh seat's (PART 7, at 9e8d2af22), brought current by the eighth's (PART 8 step 2), the ninth's (PART 9) and this seat's (PART 10) measures.
+
+## S1. THE COUNTS (CENSUS-2), before and after
+- The instrument: CENSUS-2, the measuring seat's command (`git fetch origin lane/census-2-2026-11-13`; `git archive origin/lane/census-2-2026-11-13 docs/chair/2026-11-13/probes/CENSUS-2 | tar -x -C <scratch>/c2`; `sh <scratch>/c2/docs/chair/2026-11-13/probes/CENSUS-2/census2.sh <tree root> <an out-dir outside the repository> 4 --files <the lane's src files, comma-separated>`), at 2686272b1.
+- On the merged tree: COPIED, PART 6 ROW 2, below. At the eighth seat's tip: COPIED, PART 8 Step 3, below. AT THE FINAL SRC (5764b04c4, src = 9a12e5411 = ac8168c8c = the final tip's): COPIED, PART 9 Item 3, below. Kinds (towns · distinct lines), fd9c09f42 -> the final src: a 678·524 -> 678·523; b 70·101 -> 70·101; c 276·155 -> 276·155; d 350·15 -> 350·15; e 60·20 -> 60·20; f 309·53 -> 309·53; g 720·14 -> 720·14; h 2·2 -> 2·2 (the one line gone: the plague slot's, crisisHooks.js a 1 -> 0).
+- ITS LIMITS, beside every zero: it sees the dossier's views only; it cannot see two lines disagreeing. A hit is a candidate, read against its town (PART 9 Item 3 reads the lane's files' hits).
+- FRESH SEEDS: no census on seeds outside the 720 is recorded in PARTS 6 to 9, and this seat ran none (the brief: measure only what it names). LEFT, named: the counts on fresh seeds are not in this statement.
+
+## S2. THE 720-BIRTH FIELD DIFF, by family (each family one the lane declares)
+- The line 976db5b19 against the final src (PART 9): 136 of 720 towns; FOUR families, each declared: `stress` 442 leaves / 127 towns and `stressors` 442 / 127 (the lane's crisis cast and stress summaries), `npcs` 77 / 57 (the temporary person minted whole: the lane's 37 and the line's 20 made whole), `generationCoherenceReceipt` 57 / 57 (its finalGraph count, re-written by its own writer over the final roster). 9a12e5411 moved no record. No other family.
+- The base e969a75b7 against the merged tip (PART 6): COPIED below (the line's own moves composed; the lane's share is the line-to-tip diff above).
+
+## S3. THE DRAFT SHIFT RECORD
+docs/chair/2026-11-13/R2-CODE-B-shift-record.DRAFT.json, re-measured at ac8168c8c (PART 10 step 1): the 51 registered surfaces by measure — generator-golden-master MOVED (36 of 525), espionage-dormancy-fence MOVED (483e4786… for the pinned 05f70cf9…), dossier-prose-manifest CARRIED (the line's 3 reds), the other 48 UNMOVED (green at the line and the tip); THE SIX: those three, pdf-golden-view-model-snapshot's suite, herald-knowledge-desk-golden and preset-lighting-witness UNMOVED. The pins NAMED with their new figures (hookThemeDraws 2109; rosterDuplicateDraws 889; x46NpcBand 7 worlds; editCorpusRatchet A7 [672, 269, 2185]; institutionBudgetPromise [13, 43, 49]; the pin seams' 3 rows; dmLayerGoldenIsolation A7 36). UNSIGNED: `seat` and the merge commit are the merge seat's; no golden door was run in its writing mode by any seat of this lane.
+
+## S4. THE REDS, BY CLASS, at the final tip (each red classed against the line's own failing set at 976db5b19 and the lane's base)
+- (a) GOLDENS AND PINS MOVED BY THE LANE'S DECLARED FAMILIES (red at the tip, green at the line; the merge seat's to sign and re-key by identity): generatorGoldenMaster; espionageDormancyFence THE DRIVEN GOLDEN; dmLayerGoldenIsolation A7; nameHeldThroughAssembly A1; rosterFinalUnderHeldRoster A1; pipelinePinnedChoosers A1; pipelinePinnedMode A1, A2, A5; powerEconomyFreshness A4; hookThemeDraws pin:no-hook-is-lost; rosterDuplicateDraws the corpus is live; x46NpcBand sixty seeds; editCorpusRatchet A7; institutionBudgetPromise (red new on ef0b6208d, the ruled mint; PART 10). Measured by this seat as files at both trees (PART 10 step 1).
+- (b) CURED by the lane (PART 8: negativeAssertionAnchor.walker, seedLoopTotality.walker, joins/fieldManifest, mutationCoverageManifest; PART 9: STOP 1's six, green at ef0b6208d).
+- (c) THE EDGE BUNDLES: CURED (6923a7d47; PART 10 step 4: 5 red -> 0 on the eleven files).
+- THE LANE'S WALKERS, RED AND NAMED, for the declaration pass (the chair's 04:58 ruling; not banked, keyed, reworded or re-routed): presumed-things (`node scripts/presumed-things-door.mjs --check` at ac8168c8c: exit 1, fresh 18, stale 0) and fact-layers (`node scripts/fact-layers-door.mjs`: exit 1, 1 rise, 1 fall, refused, wrote nothing). THE LANE'S, named: the rows in S6.
+- THE LINE'S, CARRIED (red at 976db5b19 too): dossierProseManifest's 3 (the seventh seat's classing).
+- LOAD TIMEOUTS, red at both trees measured (not the lane's): editCorpusRatchet A5 (~685 s; red at the line too) and generationForkCensus A3e (~250 s; red at 30ed925ee too), both under two concurrent runs on four cores; the whole suite in six shards on the joined tree classes them.
+- The whole suite's own classing: COPIED, PART 7's shards and PART 8 Step 2, below.
+
+## S5. THE NEW WORDS, for the owner's veto
+COPIED: PART 8 Step 5's "THE NEW WORDS, gathered" and "THE NEW WORDS in the lane's commit bodies", below. The ninth seat and this seat add no word (PART 9 names none; this seat wrote no line).
+
+## S6. FOR THE DECLARATION PASS
+PART 10 Step 3 above: the fifteen quick-guide rows (8 SHAPE ROWS: market 4, the harbour 2, the temple 2; 7 CODE-CONDITION rows: `streets` 6, `quarters` 1), the faith reading's three, and the fact-layers reader's row with both contents. No row needs a new word.
+
+## S7. FOR THE JOIN
+COPIED: PART 8 Step 5's "FOR THE JOIN, gathered" and "added by PART 7's next step and the brief", and PART 9's FOR THE JOIN, below. This seat adds none (nothing under src/ changed).
+
+## S8. THE EDGE BUNDLES, checked last: committed alone, 6923a7d47 (PART 10 step 4).
+
+## S9. EXITS
+`node scripts/implementation-packets.mjs validate` at the final src: exit 0 (257 packets, 0 READY). Presumed-things `--check`: 1 (S4, S6). Fact-layers door: 1 (S4, S6). The edge files: 0 red. Step 2's sixteen files: the same 2 reds at 30ed925ee and the tip, none new.
+
+## S10. LEFT
+COPIED: PART 8 Step 5's "LEFT, gathered", below (each row's state is the parts' that follow it: PART 8's steps 1-5, PART 9's items 1-3 and this PART's steps 1-5 mark what they did; this seat did not re-mark the rows one by one, as the brief forbids reading the gathering). LEFT AFTER THIS STATEMENT: the merge seat's signing of S3's record and the re-keying of S4 (a)'s pins by identity; the declaration pass (S6) on the joined tree; the whole suite in six shards on the joined tree; the counts on fresh seeds (S1); the bar's rows (the brief's step 6), by this seat only if its count allows.
+
+---
+## COPIED BY SCRIPT (from this file at ac8168c8c)
+
+### COPIED — PART 6 ROW 2 (lines 436,446 at ac8168c8c)
+#### ROW 2: CENSUS-2 ONCE ON THE MERGED TREE (lane/census-2-2026-11-13 at 2686272b1; `census2.sh <tree> <out> 2 --files <the lane's 37 src files, base to tip>`, the census's 720; both runs exit 0, read)
+- Trees: the lane's base e969a75b7 (frozen worktree) and the tip ba83c09da (clean worktree).
+- Kinds over the 720 (towns · distinct lines), base -> tip: a 716·619 -> 688·531; b 70·99 -> 70·99; c 292·296 -> 260·153; d 381·39 -> 349·14; e 60·20 -> 60·20; f 720·345 -> 306·52; g 720·14 -> 720·14; h 21·68 -> 2·2. NEW 0 on both (no cold lists joined: "unjoined").
+- The lane's files with hits, base -> tip: settlementQuickGuide.js c 158 / a 59 towns -> a 2; crisisCast.js a 18 -> 0; stressNarrative.js a 8 -> 0; crisisHooks.js f 6 -> 0; EconomicsTab.jsx a 498 -> 6, f 307 -> 206; InstitutionsTab.jsx f 720 -> 300; PowerStrata.jsx f 720 -> 296; WhoRunsThisTownPanel.jsx f 81 -> 13; traditionCorpus.js a 3 -> 3; institutionDisplayName.js f 0 -> 6 (its label now reaches the Outlook line; ruled-kept qualifier).
+- EVERY HIT AT THE TIP IN THE LANE'S FILES, READ (a hit is a candidate):
+  - f, all five writers (InstitutionsTab, PowerStrata, WhoRunsThisTownPanel, institutionDisplayName, EconomicFlowsSection): "Bowyers & fletchers (guild)", "Inns and taverns (district)": the ruled-KEPT in-world qualifiers (ruling (a)). Kept.
+  - traditionCorpus.js a, 3 towns: "The Fair of the First Landing" with no fair: the side seat's FAIR stop (FOR THE JOIN). Named.
+  - settlementQuickGuide.js a, 2 towns (r2s-indebted-village-3, r2s-mass_migration-hamlet-1): the Greek scope's "built around the harbour" on a coastal place whose roster holds no docks. The scope's harbour gate is the record's water (`navigable`, ruling 5); the census reads a harbour as a house. NAMED, NOT CURED (a ruled gate; whether a coast's harbour needs a docks house is a ruling).
+  - EconomicsTab.jsx (the third leaves lane's file, as the side seat's brief says: not this lane's to change): g 720 towns "Agriculture modifier: 69%" (machinery on the page); a 6 "ships bring in most of the rest" with no ships on the roster (r2r-thorp-24); b 25 "a bad season would bring real hunger" under a famine (shortWords; r2r-hamlet-16); b 1 "No recorded imports." while the roads are cut (r2s-under_siege-thorp-2). NAMED with their owner.
+- LIMITS: the dossier's page views only (no PDF, Foundry, Tonight, exports); it cannot see two lines disagreeing.
+
+
+### COPIED — PART 6 THE 720 FIELD DIFF (lines 447,449 at ac8168c8c)
+#### THE 720 FIELD DIFF, base e969a75b7 against the tip ba83c09da (the two censuses' own births, every leaf; /home/user/b6/m/fdiff.mjs)
+- 129 towns, 929 leaves, THREE families, each one this lane declares: `stress` 446 leaves / 129 towns and `stressors` 446 / 129 (the cast: roles' reason / id / name / kind / temporary, levers, stakes in 113 towns: item 4 and the least-say reasons; the summary in 53 towns: famine 42 (item 6's grain twin), wartime 13 (item 6's prosperity refusal, the fifth seat's market refusal, items 0 and 0b)); `npcs` 37 leaves / 37 towns (whole entries, item 4's). Nothing else moved.
+
+
+### COPIED — PART 7 THE WHOLE SUITE (lines 499,505 at ac8168c8c)
+#### THE WHOLE SUITE, ONCE, IN SIX SHARDS (at 9e8d2af22; `npx vitest run --exclude='tests/build/**' --shard=<i>/6 --reporter=json`, each to its own file outside the tree; the ledger ref fetched first)
+- 3204 files, 38,750 tests: 41 failed, 17 skipped/todo; each shard's own exit 1; refs and local config snapshotted before and after every shard and every classing run: all equal.
+- CLASSED by re-running the 30 red files on frozen trees of the line 976db5b19, the lane's base e969a75b7 and the lane's own pre-merge tip c40da4ec6 (JSON per tree):
+  - CARRIED, red on the line too (10; the line's, named, not touched): tests/lint/proseFamilyContract.walker.test.js 5; tests/property/dossierProseManifest.test.js 3; tests/data/foundingWorldBones.test.js 1; tests/lint/siteCoherenceRatchet.test.js 1.
+  - THE LANE'S, red at its own tip c40da4ec6 before the merge, green on the line and at the base (27): tests/domain/recordInvariants.test.js; tests/domain/recordMerge.test.js; tests/edgeFunctions/aiGroundingBundle.freshness.test.js; tests/edgeFunctions/edgeSharedBundleReproducibility.test.js ×2; tests/generators/densityLaw.test.js; tests/generators/hookThemeDraws.test.js; tests/generators/nameHeldThroughAssembly.test.js; tests/generators/pipelinePinnedChoosers.test.js; tests/generators/pipelinePinnedMode.test.js ×3; tests/generators/powerEconomyFreshness.test.js; tests/generators/rosterDuplicateDraws.test.js; tests/generators/rosterFinalUnderHeldRoster.test.js; tests/generators/x46NpcBand.test.js; tests/joins/fieldManifest.test.js; tests/lint/mutationCoverageManifest.test.js; tests/lint/negativeAssertionAnchor.walker.test.js; tests/lint/recordRegisterTotality.walker.test.js; tests/lint/seedLoopTotality.walker.test.js; tests/property/dmLayerGoldenIsolation.test.js; tests/property/editCorpusRatchet.test.js ×3; tests/property/espionageDormancyFence.test.js; tests/property/generatorGoldenMaster.test.js. (The goldens and pins its declared moves shift, signed at the merge point; the edge bundles, rebuilt last; the walkers among them to be read against the fifth and sixth seats' classing.)
+  - COMPOSED, red only at the merge (4): tests/lint/presumedThings.walker.test.js "every source literal … declares it, or has its row" (ruled class (3): FOR THE DECLARATION PASS, below); tests/lint/factLayers.walker.test.js READERS (ruled the same, below); tests/lint/defenceFactReaders.walker.test.js "every file reads exactly its banked count" and tests/lint/proseNumerics.test.js "legacy debt moved/fell" (193 rows): NOT YET READ by this seat (the next step's first row).
+
+
+### COPIED — PART 8 Step 2 (lines 540,554 at ac8168c8c)
+#### Step 2: THE TWENTY-SEVEN, CLASSED BY READING EACH FAILURE (re-run at 327035149, JSON to a file: 24 files, 496 tests, 29 red = the same 27 + the two ruled reds; the set did not change at the merge or by the seventh seat's cures)
+| class | file :: test | the failure read |
+|---|---|---|
+| (a) golden | tests/property/generatorGoldenMaster.test.js | 36 configs differ from the golden master |
+| (a) golden | tests/property/espionageDormancyFence.test.js :: THE DRIVEN GOLDEN | the 360-settlement hash moved (2e5ba810… for 05f70cf9…) |
+| (a) golden | tests/property/dmLayerGoldenIsolation.test.js :: A7 | 36 rows: the dormant re-derivation is the moved golden |
+| (a) golden | tests/generators/nameHeldThroughAssembly.test.js :: A1; rosterFinalUnderHeldRoster.test.js :: A1; pipelinePinnedChoosers.test.js :: A1; pipelinePinnedMode.test.js :: A1, A2, A5; powerEconomyFreshness.test.js :: A4 | each "a golden row moved with no pin bag": 3 rows of the golden corpus, the same 3 in each (the pin seams' null-change checks read the committed golden) |
+| (a) pin | tests/generators/hookThemeDraws.test.js :: pin:no-hook-is-lost | the NPC denominator 2107 -> 2109 (two temporary persons in its corpus) |
+| (a) pin | tests/generators/rosterDuplicateDraws.test.js :: the corpus is live | births with rosters of two or more 853 -> 889 of 1,000 |
+| (a) pin | tests/generators/x46NpcBand.test.js :: sixty seeds | 6 dark worlds differ from their digests (x46-dark-thorp-005, …) |
+| (a) pin | tests/property/editCorpusRatchet.test.js :: A7 | the honesty figures [682, 269, 2181] -> [674, 269, 2185] |
+| (b) cured | negativeAssertionAnchor.walker, seedLoopTotality.walker, joins/fieldManifest, mutationCoverageManifest | the four commits above |
+| (c) edge | aiGroundingBundle.freshness; edgeSharedBundleReproducibility ×2 | the recorded source hashes: step 6 |
+| STOP 1 | tests/generators/densityLaw.test.js :: hamlet (R-P5); tests/lint/recordRegisterTotality.walker.test.js :: A6; tests/domain/recordInvariants.test.js :: EM-R0b A1; tests/domain/recordMerge.test.js :: A1; tests/property/editCorpusRatchet.test.js :: A1, A8 | ONE CAUSE, read in each: the crisis cast's TEMPORARY PERSON. This lane's ROUND THREE item 4 (77ed210af, ruling (a), a DECLARED move: 47 of 800 towns gain exactly one temporary person in `npcs`) reaches the mint in src/generators/steps/resolveCrisisCast.js (l. 76-86, unchanged since the base, on no lane): the minted entry has NO `importance` (densityLaw: `expected [minor, notable, key, pillar] to include undefined` for npc_temp_healer in a dens-e2e hamlet; recordRegisterTotality: "card-standing: importance missing from an npcs[] entry") and is appended AFTER the coherence receipt's graph evidence counted the roster (recordInvariants and editCorpusRatchet A8: V-EVIDENCE-ROSTER, "the receipt's graph evidence names roster sizes the record's own rosters do not carry", on exactly the golden-master-v3 thorps and hamlets that carry a temporary person; recordMerge A1 and editCorpusRatchet A1: merge(record, X, X) is not the record on the same two). Not a golden, not a pin, not a register of this lane's files: a record-integrity law the declared move breaks. NOT CURED (the brief: a red that fits none of the three is a STOP). RECOMMENDATION: a cure at the mint, red first, as a declared move of `npcs` (the temporary person stamped `importance: 'minor'` by the roster's own rule, and the receipt's roster evidence taken after the cast step, or the person counted in it), its field diff confined to `npcs` and the receipt; then the goldens of class (a) re-measured, since they move again. |
+
+
+### COPIED — PART 8 Step 3 CENSUS-2 (lines 555,561 at ac8168c8c)
+#### Step 3: CENSUS-2 AT THE TIP (lane/census-2-2026-11-13 at 2686272b1; `sh <c2>/census2.sh /home/user/wt-b8 /home/user/b8/c2tip 4 --files <the lane's 38 src files: the 37 base..c40da4ec6 and the seventh seat's two cures' files>` at fd9c09f42 (b8b0f2971's tree + docs), the census's 720; its own exit 0; births+render 708 s, count+trace 118 s; counts.txt 1975 rows, read)
+- THE BASE'S COUNTS are PART 6 ROW 2's, the same instrument (2686272b1) and the same 720 at e969a75b7: not re-run (no base file changed). Kinds (towns · distinct lines) base -> the sixth seat's tip ba83c09da -> THIS TIP: a 716·619 -> 688·531 -> 678·524; b 70·99 -> 70·99 -> 70·101; c 292·296 -> 260·153 -> 276·155; d 381·39 -> 349·14 -> 350·15; e 60·20 -> 60·20 -> 60·20; f 720·345 -> 306·52 -> 309·53; g 720·14 -> 720·14 -> 720·14; h 21·68 -> 2·2 -> 2·2.
+- THE LANE'S FILES with hits at this tip (towns): EconomicsTab.jsx g 720, a 6, b 29, f 213; InstitutionsTab.jsx f 303; PowerStrata.jsx f 298; WhoRunsThisTownPanel.jsx f 13; institutionDisplayName.js f 7; traditionCorpus.js a 3; crisisHooks.js a 1 (by the hit's trace); settlementQuickGuide.js a 2 -> 0 (the Greek harbour hits gone).
+- THE RISES, READ: c (+16 towns) and d (+1) are in no file of the lane's (the line's merged writers). f in the lane's files (+3 InstitutionsTab, +2 PowerStrata, +7 EconomicsTab, +1 institutionDisplayName: the siege's "critically impaired" list now names "Inns and taverns (district)" in 6 sieged cities and metropolises): every one the ruled-KEPT in-world qualifier ("Inns and taverns (district)", "Bowyers & fletchers (guild)", ruling (a)). b in EconomicsTab.jsx 26 -> 29 (famine "hunger-later" 23 towns: "grows about a third … Many households go short", and siege trade lists 4): the third leaves lane's food and trade writers (NAMED with their owner by the sixth seat), composed with the line's W2-A-LEAVES-2 F1 (04bab40c6, "the gap lines print again"). traditionCorpus a 3: the side seat's FAIR stop (FOR THE JOIN).
+- ONE FRESH FALSE LINE IN A LANE FILE (class (4) of the 04:57 ruling, a cure; NOT YET MADE by this seat, see LEFT): r2r-town-37, Summary/Crisis: "Maisa ibn Battuta, the healer who identified the outbreak first, has gone quiet." Maisa is the dean of the town's Parish churches (2-5); no healer stands on the roster. The writer: src/domain/crisis/crisisHooks.js :: CRISIS_HOOK_SLOTS.plague_onset (l. 301), whose slot fills the plague's LEVER person into "the healer who identified the outbreak first" without reading the person's role; at the line 976db5b19 the town's plague cast has no npc lever, at this tip its lever is the dean (the lane's lever rule composed with the line's roster). The cure (method rule 3: a line that names a role reads the roster): the slot fills only a holder whose own role is a healer's, else the sentence keeps its own words; red first on r2r-town-37, a guard town with a healer lever.
+- LIMITS: the dossier's page views only (no PDF, Foundry, Tonight, exports); it cannot see two lines disagreeing.
+
+
+### COPIED — PART 8 Step 3 FIELD DIFF (lines 562,565 at ac8168c8c)
+#### Step 3: THE 720 FIELD DIFF (the census's own births; /home/user/b8/fdiff.mjs, every leaf, family = the record's top key)
+- THE LINE 976db5b19 AGAINST THE TIP (the lane's share on the merged tree): 127 of 720 towns; THREE families, each one the lane declares: `stress` 442 leaves / 127 towns (cast.roles 296, summary 51, cast.levers 46, cast.stakes 37, cast.absent 12), `stressors` the same 442 / 127 (the alias), `npcs` 37 leaves / 37 towns (one whole temporary person each, ROUND THREE item 4). Nothing else moved (the receipt did not: STOP 1). Against the sixth seat's pre-merge 446 / 129 and 37 / 37: the line's own cast and summary changes compose in two towns.
+- THE BASE e969a75b7 AGAINST THE TIP: 716 of 720 towns, 22 families: the line's own moves merged (npcs 99,773 leaves / 177 towns, economicState 46,822 / 637, simulationTrace 46,574 / 308, relationships 43,192 / 88, institutions 23,312 / 87, …): the lane's share is the line-to-tip diff above.
+
+
+### COPIED — PART 8 Step 5 THE GATHERING (lines 569,786 at ac8168c8c)
+#### Step 5: GATHERED BY SCRIPT from the parts' own paragraphs (/home/user/b8/sec.awk over the hand-back at 327035149; the commit bodies' new-word paragraphs of e969a75b7..c40da4ec6 by git show; nothing from memory). The statement's FOR THE JOIN, THE NEW WORDS and LEFT FOR AFTER THE JOIN are built from these.
+
+##### FOR THE JOIN, gathered (PARTS 2, 3, 5, 6, copied whole)
+
+<!-- from the hand-back, l. 161 -->
+#### FOR THE JOIN (the chair's ruling of 21:13 UTC: not touched here; cured when the lanes are joined, by calling this lane's leaf)
+The leaf: `src/domain/display/institutionDisplayName.js :: institutionHouseLabel(nameOrInst)` (and `houseLabelsInText(text, settlement.institutions)` for a stored sentence). The test that reds on each once the leaf is present: `tests/components/houseLabelEverySurface.test.jsx` — strike its `DEFENCE_ALLOWANCE` row (town-under_siege-rand-1: Defense tab 1, each PDF variant 1) and it reds until the three call sites below read the leaf; over the 740, the scratchpad's held-house census (`mycensus.mjs`) pointed at the same surfaces gives 16 page / 12 + 12 PDF for "Gates (if walled)" and 3 + 3 for the healer note (deduced at d1c8612b1 from the 740 run at cf676399d; re-measure at the join).
+1. `src/components/new/tabs/DefenseTab.jsx :: DefenseTab`, inner `ForceCard` (line ~342): `{i.name}` -> `{institutionHouseLabel(i)}` ("Gates (if walled)" -> "Town gates").
+2. `src/pdf/sections/DefenseSecurity.jsx :: DefenseSecurity` (line ~188): `{force.name}` -> `{institutionHouseLabel(force.name)}`.
+3. `src/domain/display/defenseDisplay.js :: deriveSupportingCapabilities` (line ~411, Medical Readiness): `` `${facts.healerName}. Wounds and fevers …` `` -> `` `${institutionHouseLabel(facts.healerName)}. Wounds and fevers …` `` ("Major monasteries (5-10). Wounds and fevers…", 3 metropolises in the 720). `facts.healerName` is `src/domain/defense/defenseFacts.js :: defenseFactsOf`'s roster name (a match: keep it raw there).
+4. The Foundry journal's Defense page (`src/foundry/journalPages.js :: defensePage`) already reads the leaf for the force NAME (2af8bdfa9); its "(required)", "(faction_boost)", "(coherence_repair)" provenance tag after each force is class (b) machinery, left for the defence surfaces' holder.
+
+**THE STORED STOCKPILE SENTENCE (Overview and History, one town: r2r-town-9, isolated).** True writer: `src/generators/economy/viability.js :: generateEconomicViability`, the trade-dependency branch (line ~515: `` `${critical.length} institution… operating on stockpiles only (isolated trade): ` + critical.map((d) => institutionDisplayName(d.institution)).join(', ') ``; the siege variant "critically impaired by siege" is the same expression). It is copied at birth into `history.currentTensions[]` by `src/generators/historyGenerator.js` (the "Priority-add: economic viability issues → resource_scarcity" block, line ~431). Cure at the writer: `institutionHouseLabel` in place of `institutionDisplayName` in that `.map` (RECORDS MOVE: `economicViability.issues[].description` and the copied tension, in isolated and besieged towns). This lane read it at display on the Outlook, the PDF and the journal (4b11e3910, d1c8612b1); the page's Overview (`OverviewTab.jsx`, upkeep lanes', pin X-37) and `HistoryTab.jsx` (another seat's) print it raw.
+
+
+<!-- from the hand-back, l. 200 -->
+#### FOR THE JOIN — the empty seat's keeper (the chair's ruling of 22:19 UTC, read AFTER 535e654d6 and f09e55042 were pushed)
+This seat's two commits do NOT build a styled name of their own: they read the existing leaf on this tree, `src/domain/people/seatKeeper.js :: keeperFormOf` / `seatKeeperOf` (the powers lane's file, read, not changed), and print the keeper's form in place of the bare office:
+- `src/domain/summary/tonightSheet.js :: peopleOf`, the person's `role` (was `clean(npc.role || npc.title)`; now `roleOf(npc)`, the keeper's form for the keeper of an empty seat) — #pf-84, #pf-720.
+- `src/components/new/npcComponents.jsx :: NPCRelCard2`, the role line `{npc1Role} · {strength} · {npc2Role}` (now `roleShown(rel.from|rel.to, …)`) — #pf-717, #pf-718.
+AT THE JOIN, where the ruled one home is `seatKeeper.js :: seatKeeperStyledNameOf(settlement)` (powers lane 96a6ced46, fb4561b03): the join seat replaces `keeperFormOf(source)` in those two expressions by the leaf's styled form (or reverts the two commits if the leaf prints the name with the form, since both rows already print the name beside the role). The test that reds on the four towns: render rpf-metropolis-succession_void-13 and rpf-village-succession_void+famine-13 (app shape) and assert the Tonight person and the relationship role line never print the bare "First Magnate" / "Headman" for the keeper (read here at f09e55042: "Acting First Magnate", "Acting Headman"). Not written by this seat (context limit).
+
+---
+
+
+<!-- from the hand-back, l. 241 -->
+#### FOR THE JOIN (this seat)
+- THE WARTIME SUMMARY'S ONE PATH: the cure is in stressNarrative.js :: RENDERERS.wartime, which `assembleSettlement.js :: rerenderStressSummary` calls through renderStressSummary on this tree AND on the data lane (lane/w2-fix-data-2026-11-13, read): no second path was built; at the join the data lane's door renders the cured text. Named, not cured (not ruled): the loss text's "Supply caravans pass through on crown requisition" prints in the 4 isolated wartime towns of the 800 (r2s-wartime-thorp-1 and -hamlet-3 among them); RECOMMENDATION: a declared twin of that sentence excluding `route: isolated`, the crisis lane's or the seat after the merges.
+- ServicesTab.jsx's `impactCovers` (the X-50 plan's `covers` list) is read by nothing once this lane's ServiceItem is in: it goes at the join (the tabs lane's file).
+- The food label's one home is `src/domain/summary/tonightSheet.js :: foodBandOf(foodRecord)`. Two surfaces still print the generator's label raw and disagree with the sheet in the 160 "Pressured" towns: the Overview's Food Security (OverviewTab.jsx, `eco.foodSecurity.label`, the upkeep lanes') and the Quick Guide's food line (settlementQuickGuide.js :: the `economy.foodSecurity?.label` read, the side seat's). Each takes `foodBandOf(eco.foodSecurity.foodRecord)?.label`.
+- The Defence tab's endurance line says "about three months at full rations" where the record holds 1.5 months (rpf-thorp-under_siege-13): defenseDisplay.js's own arithmetic (the first seat's #883), the defence lanes'.
+
+
+<!-- from the hand-back, l. 356 -->
+#### FOR THE JOIN (this seat)
+- THE WARTIME SUMMARY'S ONE PATH: the cure is in stressNarrative.js :: RENDERERS.wartime, which `assembleSettlement.js :: rerenderStressSummary` calls through renderStressSummary on this tree AND on the data lane (lane/w2-fix-data-2026-11-13, read): no second path was built; at the join the data lane's door renders the cured text. Named, not cured (not ruled): the loss text's "Supply caravans pass through on crown requisition" prints in the 4 isolated wartime towns of the 800 (r2s-wartime-thorp-1 and -hamlet-3 among them); RECOMMENDATION: a declared twin of that sentence excluding `route: isolated`, the crisis lane's or the seat after the merges.
+- THE STORES' SPAN HAS TWO HOMES that disagree on one figure: this lane's `tonightSheet.js :: storesSpanWords` ("about N days" to ten days, "about N weeks", months to the half below three: "about a month and a half") and the defence lane's `defenseDisplay.js :: monthsInWords` on lane/coherence-upkeep-2026-11-12 ("a day or two", "a few days", "a week or two", "a few weeks" to 31 days, "about a month" to six weeks, then the nearest whole month: 1.5 months reads "about two months", the words item 2a ruled false). RECOMMENDATION: ONE HOME at the join: the endurance line's span reads `storesSpanWords` (its own comment already names that switch as owed); the join seat measures both on the 720 first. On this lane's tree the Defence tab's older monthsInWords prints "a few weeks" in 36 towns (the defence lane's file; cured on its lane).
+
+
+<!-- from the hand-back, l. 420 -->
+#### FOR THE JOIN (this seat, kept current)
+- THE QUICK GUIDE'S COMPOSER PRINTS NOWHERE ON THIS TREE (the chair's ruling of 03:02, as found): no file under src/ or supabase/functions calls `composeSettlementQuickGuide` (its identity sentence, its three truths with row 1d's food word, its pressure, people and entry point); only tests read it. What does print the quick guide's lines: `src/components/new/overviewIdentity.js` imports `cultureScopeLine` (the culture scope line: the side seat's item 5) and `governsLine` (who governs), the Overview's identity strip. The composer's header still names Summary, Table View, Session Mode and the PDF; none of them calls it here.
+
+
+##### FOR THE JOIN, added by PART 7's next step and the brief (named, not touched)
+- This lane's lines in src/components/new/tabs/EconomicsTab.jsx (l. 169, chainFlowFacts(chain, instNames, shown), the seventh seat) and src/components/new/EconomicsTrade.jsx (the PROC row's chainHousesOf), which the third leaves lane also changes.
+- The tests' git helper that must clear the inherited git environment (tests/scripts/implementationPackets.test.js, implementationSession.test.js run git against the real repository from a linked worktree inside the pre-push hook: the chair's hazard of 04:37).
+- (this seat) EconomicsTab.jsx's food and trade b-lines and the a 'ships bring in' line (CENSUS-2 at the tip, 29 and 6 towns): the third leaves lane's writers, named with their owner.
+
+##### THE NEW WORDS, gathered (the parts' sections, copied whole)
+
+<!-- from the hand-back, l. 92 -->
+#### New words (for the owner's veto)
+- Items 1a/1b remove words; the house label is the existing label minus its bracket.
+- Item 3: the stores span "less than a day", "about a day", "about N days", "about N weeks".
+- Item 4a: "No neighbours or ties between people are recorded for this settlement." (the old line less its last claim).
+- Item 4c: "the defence of the place, with no one named to lead it"; "a member of the merchants' power, with the seat itself in dispute".
+- Item 5: "run by patronage and law" standing alone; "built on tribute and the ritual calendar"; "built on tribute, market and waterworks"; "built around kin and an assembly ground"; "kin by kin"; "built around courtyards".
+- Item 6a: "{name} has gone short of food for a second season."
+- Item 6b: "…, and no god is named here." 
+
+---
+
+
+<!-- from the hand-back, l. 195 -->
+#### New words (this seat, for the owner's veto)
+- (c): "the only one in the house the crisis hits" (thorp-calm-rand-1, thorp-famine-rand-1); "one of the house the crisis hits" (village-famine-rand-1).
+- (a): "Inns" for "Inn (multiple)" (town-calm-rand-1, town-indebted-port-1, town-plague_onset-rand-1, town-under_siege-rand-1). Otherwise words removed only.
+- (b): the roster's help pill loses "history," ("The badge says who put it here: you, the living world, or a dependency.").
+
+
+<!-- from the hand-back, l. 247 -->
+#### New words (this seat, for the owner's veto)
+- Item 2a: "about a month and a half" (rpf-thorp-occupied-13, rpf-thorp-succession_void-13, rpf-thorp-under_siege-13), "about two and a half months" (2.25–2.75 months), and "about" before every span of a month and more ("about two months", rww-village-indebted-1; "about nine months", r2r-city-7; "about 13 months", r2s-famine-metropolis-2).
+- Item 2b: none (the band ladder's own "Pressured" and "Deficit"); the Daily Life tile's own words "Severe/Serious/Strained/Tightening/Adequate" print only for a record with no band.
+- Item 1 and the added HIGH: none.
+
+
+##### THE NEW WORDS in the lane's commit bodies (each commit whose body names new words, with the towns its body says the words were read in; an entry saying 'no new word' is kept as said)
+- fc7514261 fix(R2-CODE-B-6 row 1d): the quick guide's food word reads its one home, tonightSheet.js :: foodBandOf
+  - words: are unchanged. No new word. 
+
+- e06c1a429 fix(R2-CODE-B-5, the chair's second added row): the wartime profit summary names merchants only where a market or a merchant house
+  - words: the pick resolves as before to the loss text: no line added, the coin's draw unchanged, no new word. 
+
+- 77ed210af fix(R2-CODE-B-4, ROUND THREE item 4): the crisis cast reads the empty seat, the roster and the road; a hook names a house in prose
+
+
+- 8b27458cd fix(R2-CODE-B-SIDE item 7): no walk to the next village's church under a siege that bars the road
+  - words: church." (new wording, for the owner's veto; read in r2s-under_siege-thorp-0..3, r2s-under_siege-hamlet-0/1, r2r-thorp-58 and r2r-hamlet-0). The first seat's item 6b (ffe89ab39) REACHES rww-thorp-famine-1: at 0570b3441 that thorp prints no walk (its only "Access to" row is the mill's); pinned in the same file. 
+
+- 87c541620 fix(R2-CODE-B-3 item 3): a hidden allegiance names a handler only of the house the person answers to; the card's badge and a confl
+
+
+- d94638185 fix(R2-CODE-B-3 item 2b): the food label reads one home on the Tonight sheet and the Daily Life tile, and a label of plenty never 
+  - words: band. The ladder's own words only: no new word. 
+
+- 66a4f587c fix(R2-CODE-B-SIDE item 5): the scope line reads the roster and the size in every frame
+
+
+- f719dbb38 fix(R2-CODE-B-3 item 2a): the stores' span in words contains its figure — "about a month and a half", never "two months" for 1.5
+
+
+- 305210087 fix(R2-CODE-B-SIDE item 4): the seat's list is headed by what it lists, not "The Powers (N)" twice
+
+
+- e878a1367 fix(R2-CODE-B-3, the chair's added HIGH): a Services row's need and the sentence after it print apart — never "Needs TimberSuppl
+
+
+- 48ddf7685 fix(R2-CODE-B-3 item 1): the Tonight sheet voices a cast person with the card's own goal, and a role's line only where the card ha
+
+
+- 5ea26f677 fix(R2-CODE-B round 3, the chair's ruling (e)): a chain run only through an "Access to …" row names that row, not a house the to
+
+
+- 57395ee18 fix(R2-CODE-B round 3, increment): the Faith tab never calls a contender "the real political weight" where another power governs
+  - words: function already holds, "A voice in {place}’s affairs belongs to the {power}." (no new words). A governing religious power and one where no power governs read as before. The reading is composed at read: no record moves (the 22 increment towns' records byte-equal before and after). 
+  - read in: Measured first and read where it prints (record 386; app shape): six towns lose the false line, every one with another power governing: rww-town-under_siege-1 (a siege; Corrupt Council governs), rww-village- under_siege-1 (a siege; Feudal Stewardship governs at 39, the Religious Authorities 31), rpf-village-succession_void+famine-13 (a famine), rww-village-calm-1 (Headman's Authority governs at 52, the Religious Authorities 37), rpf-town-succession_void-13, rpf-village-succession_void-13. In each the Faith tab now reads "A voice in the town’s / village’s affairs belongs to the Religious Authorities.": true, a contending power with a say. Smallest tier it reaches here: village; largest: t
+
+- f09e55042 fix(R2-CODE-B round 3, increment): a relationship card styles an empty seat's keeper as the Power tab does
+
+  - read in: Measured first and read where it prints (record 386; app shape, the reader's rpf towns): rpf-metropolis-succession_void-13 (largest): "Acting First Magnate · substantial · the postmaster", "the lord · minor · Acting First Magnate"; rpf-village-succession_void+famine-13 (famine): "Acting Headman · minor · the midwife"; rpf-village-succession_void-13: "the lord · minor · Acting Elder"; rpf-thorp-succession_void-13 (smallest): "Acting Elder · substantial · the outlaw host". Each is the Power tab's own keeper, whose seat stands empty. A held seat's tie is unchanged. New words: none. 
+
+- 535e654d6 fix(R2-CODE-B round 3, increment): the Tonight sheet styles an empty seat's keeper as the Power tab does ("Acting Headman")
+
+  - read in: Measured first and read where it prints (record 386: three towns, a famine among them, the smallest and largest tier it reaches; the reader's own render shape, rpf seeds born in the app's shape): - rpf-metropolis-succession_void-13 (the largest): the Tonight person "First Magnate" -> "Acting First   Magnate" (Li Song, first of the Grand Merchant Oligarchy, whose seat the Power tab says "Stands empty …   Acting First Magnate Li Song … keeps the seat meanwhile"). True. - rpf-village-succession_void+famine-13 (a famine): "Headman" -> "Acting Headman" (Achilles Bryennios,   the miller; the Power tab: "Acting Headman Achilles Bryennios, the miller, keeps the seat meanwhile"). - rpf-thorp-succ
+
+- 99432257c fix(R2-CODE-B round 3, ruling (d)): a chain card names no ground the record says is absent (#804), page and PDF
+  - words: entrepôt line), unchanged; no new words. 
+
+- 24ab15c9b fix(R2-CODE-B round 3, ruling (c)): the crisis cast's "the one with the least say" only in a house of more than one, and never bes
+
+
+- ffe89ab39 fix(R2-CODE-B item 6b): the faith line walks to a parish church only where the record gives that access
+
+
+- 111e8b152 fix(R2-CODE-B item 6a): the famine and wartime summaries say no harvest where no grain grows, and no profit where the town is poor
+  - words: not have (no new word in the vocabulary file). 
+
+- 922fe5141 fix(R2-CODE-B item 5): the culture scope line speaks at the place's size
+
+
+- 742ff4e43 fix(R2-CODE-B item 4d): a Market tradition prints only where a market stands
+  - words: new word in the vocabulary. The tab's filter (kind A: a filter over the list, no weight and no roll moves) leaves the row out where no market stands; a DM's authored tradition is printed as authored, as before. genesis.js reads no declaration: NO RECORD MOVES (births field diff over the 740, before against after this commit: 0 of 740 differ). NAMED, NOT MADE: the PDF's Traditions chapter (src/pdf/sections/Traditions.jsx) prints the `settlement.traditions` mirror unfiltered, for the water elements as for this one; it is lit only in the deep presets. The switch: the same filterDeclared over ELEMENT_NEEDS. 
+
+- 90bafc4d1 fix(R2-CODE-B item 4c): the crisis cast reads the defence home the Tonight sheet reads, and says "a merchant" only of a trader
+
+
+- 49a6ad244 fix(R2-CODE-B item 4a): the empty Relationships line never denies a conflict the record holds
+
+
+- aaf314475 fix(R2-CODE-B item 3): the span of the stores in words has one home, true at days, weeks and months
+
+
+
+##### LEFT, gathered (the parts' stops and rows not reached, copied whole: the statement marks each row done, ruled or LEFT FOR AFTER THE JOIN)
+
+<!-- from the hand-back, l. 42 -->
+#### Stops and parked items (with recommendation)
+- **#939** — "11 institutions critically impaired by siege: …, Taverns (5-20), …": written by `viability.js :: issues` (`critical.map(d => institutionDisplayName(d.institution))`). The switch: read `institutionHouseLabel` (or `houseInProse` in a sentence). Recommend: the lane that next holds viability.js takes it.
+
+- **#883** — the Defence tab's food endurance ("carries the town for a few weeks at full rations, a few weeks on half" at three days of stores): `defenseDisplay.js :: monthsInWords` (the third leaves seat's file). The switch: for a span under a month, read `tonightSheet.js :: storesSpanWords` (the one home, item 3).
+
+
+<!-- from the hand-back, l. 170 -->
+#### Rows NOT reached by this seat (for a successor, line by line)
+- The increment's MED rows in this lane's files (ROUND-3-CUT-INCREMENT.json at fe6d5b741, class NEW, `at.line` set), not begun: tonightSheet.js — #pf "Wants to hold the line through the war with fewer hands…" (rpf-metropolis-wartime-13, CAST_WANTS vs the person's own goal), "Wants to keep the pressure on until the seat gives way…" (rpf-city-succession_void+politically_fractured-13), "Wants to use this crisis to take the seat…" (rpf-village-politically_fractured-13): CAST_WANTS printed over the card's own goal; "No granary; two months in household stores" where storageMonths is 1.5 (rpf-thorp-under_siege-13, rpf-thorp-succession_void-13, rpf-thorp-occupied-13: `foodStoresWords` rounds 1.5 up; the stores-span home, item 3) and "Food Secure" beside a deficit. npcComponents.jsx — "Merchant guilds (3-8) · Burgomaster, first of Merchant Council · first of Merchant Guilds" (rpf-town-occupied-13: the range is cured by (a); the seat-holder-also-contender clause is not), "Madam" / "Goodwife" honorifics for male cards (rpf-city-occupied-13, rpf-village-succession_void+famine-13; the honorific table is data/faceHonorifics.js, not this lane's), "Mill · second of The Highborn Circle" (rpf-village-succession_void-13: a card with no house given a house door). crisisCast.js — "already carries more weight than whoever holds the seat" where no one holds the seat (rpf-town-succession_void-13, rpf-village-succession_void-13; CAST_REASONS.instigatorRival: needs `isSeatVacant`). WhoRunsThisTownPanel.jsx — "handled by … (Multiple criminal factions)" under another house's boss (rpf-metropolis-politically_fractured-13: the label is cured by (a) to "Rival gangs"; the handler-under-the-wrong-guild is patronage.js, the powers lane's) and "Housing (75-650 households)" (cured by (a)). traditionCorpus.js — "The Long Forge Fair" with no forge (rww-hamlet-calm-1), "The Lesser Landfall Fair" where no fair stands (rww-thorp-under_siege-1): item 4d's market disqualifier extended to forges and fairs. faithReading.js — "walk to the next village’s parish church" with no access row (rww-thorp-famine-1; item 6b's cure, check it reaches this town) and under a siege that bars the road (rww-thorp-under_siege-1). settlementQuickGuide.js — "built in wards and courtyards, ordered by bureaux" in a hamlet of 31 (rww-hamlet-succession_void-1; item 5's size rule, a frame it did not cover) and CENSUS-2's QUICK_GUIDE_SIBLINGS (38 small places). RelationshipsTab.jsx — "No neighbours, ties between people or conflicts are recorded" (rpf-thorp-calm-13; item 4a's cure, check it reaches this town). NPCsTab.jsx — "1 high influence ·" dangling separator (rpf-hamlet-succession_void-13).
+- The cut's own MED rows in this lane's files not of classes (a)-(c): DailyLifeTab food tile "Strained"/"Tightening" against the food record (#843 #1102 #1297); PowerStrata "The Powers (3)" against the 5 or 6 the record holds (#562 #712 #806) and "RulerElder Council…Strong" (#85); WhoRuns "answers to Black market through …" a whisper broker (#944 #946 #1077: patronage.js, the powers lane's); viability.js's slider lines ("Military slider is high…", "Raise Economy priority…", #576 #823 #824 #825: machinery, a stored sentence, records move); crisisCast STAKE_REASONS "Grain Holders gains · holds what the crisis makes scarce" (#864); the quick guide's scope phrases #1 #234 #513; npcComponents #389 (ungrammatical conflict issue), #510, #967 #968 (hidden allegiance through the other market's broker), #978 #979 #1097.
+- #1049 ("Needs Grain · affects: meals, ale, lodging" on Economics): the chair names it "your Economics line of record 371"; record 371's text is not in the chair's records this seat could reach (docs/chair on lane/chair-2026-11-08). PARKED: needs record 371's ruling and EconomicsTab.jsx beyond its "Via:" line.
+
+
+<!-- from the hand-back, l. 268 -->
+#### Rows NOT reached by this seat (line by line)
+1. Item 4: class the five reds above, then commit the patch (one commit), gates, push.
+2. Item 5: RelationshipsTab.jsx "No neighbours, ties between people or conflicts are recorded" on rpf-thorp-calm-13 (check item 4a's cure reaches it: base dump); NPCsTab.jsx "1 high influence ·" dangling separator (rpf-hamlet-succession_void-13).
+3. Item 6: the second seat's FOR THE JOIN note (0570b3441) read; nothing to add.
+4. The page re-count of items 3–5 on the 800 (one tip render: CENSUS-2's census2.sh --count-only on a frozen tip worktree).
+5. The lighting census re-freeze through its own door at a clean tip (LIGHTING_CENSUS_REFREEZE; the estate's file count 3239 -> 3242 by this seat's new test files: tonightOwnGoal, storesSpanFigure, npcCardAllegianceHandler, + crisisCastSeatAndAccess with item 4); the sovereignty walker reds until then.
+6. Item 7: CENSUS-2 at the final tip and at 62e30c7e7 (--files the lane's files; read the counter's own exit and counts.txt).
+7. Item 8 (on the chair's word only): merge the side branch; THE ONE FINAL STATEMENT as part 2's EXACT NEXT STEP item 2 gives it.
+
+
+<!-- from the hand-back, l. 277 -->
+#### Stops and parked items (with recommendation)
+- #693 and inc #14 (and the craft-in-noble-power rows): PARK to the powers lane (memberships / the Power tab's contender label).
+- #389's words, #979, #510's goal fill: name to their writers' lanes (above).
+- The Overview and Quick Guide food labels: FOR THE JOIN (above).
+
+
+
+<!-- from the hand-back, l. 316 -->
+#### Rows NOT reached (line by line; kept current)
+1. Item 5 (RelationshipsTab, NPCsTab), the chair's added row (WhoRunsThisTownPanel + its PDF twin), the trait chips.
+2. The page re-count (`--count-only`) of items 3-5 and this seat's.
+3. The lighting census re-freeze (own commit).
+4. CENSUS-2 at the tip and at 62e30c7e7 over the lane's files.
+5. The message to the chair; then, on the chair's word, the merge, the quick guide's food line, THE FINAL STATEMENT.
+
+
+
+<!-- from the hand-back, l. 383 -->
+#### Rows NOT reached (line by line; kept current)
+1. STEP 2, what is left: (a) the raw-colour budget (tests/lint/rawColorLiteral.test.js, BUDGET; the side seat banked 1224 -> 1221 on its branch): run it on the merged tip; if it reds, re-bank through its door (the BUDGET constant, its comment naming e6f006eff and this merge) in its own commit. (b) the phone chrome floor routes (tests/components/phoneChromeFloor.census.test.js ROUTE_BASELINE; the side floored /create /settlements /compendium /gallery by -2, 4b80f7cea): run it on the merged tip; re-floor only through its own measure, own commit. (c) the dossier phone floors: done in the merge (above) — re-run tests/components/dossierPhoneFloorAllViews.test.jsx at the tip to confirm it still reads 2/2. (d) THE QUICK GUIDE'S FOOD LINE: src/domain/summary/settlementQuickGuide.js, the `economy.foodSecurity?.label` read, takes `foodBandOf(economy.foodSecurity?.foodRecord)?.label` (import from ./tonightSheet.js), so it agrees with the Tonight sheet and the Daily Life tile in the 160 "Pressured" towns: measure first on the 800 (the quick guide's food word against foodBandOf, per town), red first (a test of the label in a Secure band with a gap), the governing tests of settlementQuickGuide.js, the three gates; display only, the 720 field diff 0. (e) then ONE message to the chair: the tip, the merge's conflicts, and that the wartime summary built no second path (the data lane's rerenderStressSummary calls the cured renderer).
+2. STEP 3: CENSUS-2 once on the merged tree over both seats' files at the lane's base (e969a75b7, the line's base; the third seat used 0570b3441 and 62e30c7e7) and at the tip: `sh <c2>/docs/chair/2026-11-13/probes/CENSUS-2/census2.sh <tree> <out-dir outside the repo> 4 --files <both seats' files, comma-separated>` (about 12 minutes each; its own exit and counts.txt read); every hit in the lane's files read, cured or named; the count per kind. THE 720 FIELD DIFF, base against tip, by family: births by CENSUS-2's births.mjs in both trees, a leaf diff (this seat's /home/user/m/fd.mjs: load both corpora, compare every leaf path, count towns and paths by top-level key); expected families: the least-say reasons (49 towns), item 4 (94 towns: stress/stressors cast, npcs 47), the wartime summary (1 town), nothing else.
+3. STEP 4: one message to the chair and WAIT FOR POINT 49; on the chair's word the merge of the line's tip, the instrument's page census on this lane's lines, THE ONE FINAL STATEMENT (the whole suite once in six vitest shards, `npx vitest run --shard=<i>/6 --maxWorkers=2`, each to its own file outside the tree; every red classed against the lane's base; ONE draft shift record; the edge bundles last, alone). The side seat's stops (the fair's act, the PDF's Traditions chapter, items 1 and 2 at the join) NAMED under FOR THE JOIN, not built.
+
+
+<!-- from the hand-back, l. 417 -->
+#### Stops and parked items (with recommendation)
+- (cured: the price line's twin "the road" in two isolated thorps, item 0b, on the chair's ruling of 03:02.)
+
+
+<!-- from the hand-back, l. 450 -->
+#### Rows NOT reached (line by line; kept current)
+1. (done: row 1 (a)-(d); the message to the chair with the tip follows this push.)
+2. (done: row 2, above.)
+3. Row 3, THE WORD GIVEN (03:08) — THE EXACT NEXT STEP for the successor, in this order: (i) deepen as above if the clone is shallow, check the base is e969a75b7; (ii) in a scratch worktree at the lane's tip, `git merge origin/lane/integration-2026-11-07` (read the tip back first; 976db5b19 at 03:40); resolve the three PDF sections by hand AT THE CAUSE (read each whole: the side seat's items 1-3 removed the upstream note, the "Import: <chain label>" From line and the template house list from SupplyChainFlow.jsx and Services.jsx; keep the line's point 47/48 changes and this lane's removals), take each of the six registers from ONE side; commit the merge naming the commit and what conflicted; (iii) run 2m's checks, then re-derive each register through its door (wiring census, writer reach, lighting census, tuning inventory, dossier phone floors, institutionBudgetPromise's pin), each its own commit; (iv) the page census on this lane's lines (2m's door, the 720); (v) THE ONE FINAL STATEMENT: merge lane/integration-2026-11-07 at its tip as read back (976db5b19 at 03:08; plain; say what conflicted); read section 2m of the merge book first; the instrument's page census on this lane's lines; THE ONE FINAL STATEMENT in the brief's form (the whole suite once in six shards, every red classed against the lane's base; ONE draft shift record; FOR THE JOIN; the edge bundles last, alone).
+
+
+### COPIED — PART 9 FOR THE JOIN (lines 812,815 at ac8168c8c)
+#### FOR THE JOIN (this seat)
+- tests/generators/resolveCrisisCast.test.js is held by W2-FIX-DATA (w2-fix-data-2026-11-13, W2-FIX-DATA-7; on join-2026-11-14) too: it re-keyed the two plague tests' seed to slot-plague_onset-1 (its cure: the plague sentence's healer declared `needs: healer` at the source, stressTypes.js :: STRESS_TYPE_SIBLINGS). This lane's 9a12e5411 leaves that line untouched; its arms hold at either seed. The two cures are of two faults and compose.
+- src/domain/crisis/crisisHooks.js is held by COHERENCE-UPKEEP (and its copies) in a disjoint hunk (CRISIS_NOUN to crisisNoun.js, l. 52-69).
+
+
+### COPIED — PART 9 Item 3 (lines 816,821 at ac8168c8c)
+#### Item 3, PART DONE (measured at 5764b04c4; its src is 9a12e5411's)
+- CENSUS-2 at the tip (2686272b1; `census2.sh <wt> <scratch>/c2tip 4 --files <the lane's 39 src files: git diff --name-only 976db5b19 HEAD -- src>`; its own exit 0; births+render 738 s, count+trace 149 s). Kinds (towns · distinct lines), the eighth seat's tip fd9c09f42 -> THIS TIP: a 678·524 -> 678·523; b 70·101 -> 70·101; c 276·155 -> 276·155; d 350·15 -> 350·15; e 60·20 -> 60·20; f 309·53 -> 309·53; g 720·14 -> 720·14; h 2·2 -> 2·2. The one line gone: the plague slot's (crisisHooks.js a 1 -> 0, row gone).
+- THE LANE'S FILES with hits (towns): EconomicsTab.jsx g 720, a 6, b 29, f 213; InstitutionsTab.jsx f 303; PowerStrata.jsx f 298; WhoRunsThisTownPanel.jsx f 13; institutionDisplayName.js f 7; traditionCorpus.js a 3; settlementQuickGuide.js a 3 (r2s-indebted-village-3 docks, scopeAgainstRecord l. 294; r2s-insurgency-town-1 waterworks and r2s-mass_migration-hamlet-1 docks, scopeAtSize l. 354/357: the scope lines item 4 rows; "on the coast" / the plaza printed true by their code conditions). These three print BYTE-IDENTICAL at 30ed925ee (re-rendered there, the same harbour/plaza lines): not a rise of this seat's. PART 8 read "a 2 -> 0" for this file at fd9c09f42 (the same src): the two counts disagree; the successor reads the hits at the base by the same command before ruling.
+- THE PLAGUE SENTENCE'S OWN WORDS now hit in 3 towns (a, "healer" with no healer on the roster: r2r-thorp-41, r2r-town-37, r2s-plague_onset-hamlet-3), traced to src/data/stressTypes.js l. 103 (STRESS_TYPE_MAP.plague_onset.crisisHook): NOT a lane file; it is W2-FIX-DATA-7's cure at the source (FOR THE JOIN above: the slot-less twin where no healer stands).
+- THE 720 FIELD DIFF, the line 976db5b19 against the tip: 136 of 720 towns; FOUR families, each declared: stress 442 / 127 and stressors 442 / 127 (the lane's cast, as PART 8), npcs 77 / 57 (the 37 whole persons and the line's 20 made whole, item 1), generationCoherenceReceipt 57 / 57 (the finalGraph count, item 1). 9a12e5411 moved no record (0 of 720).
+
+
+# PART 10, STEP 6 — THE BAR'S ROWS FOR THIS LANE (a stage AFTER the statement; the count read 217,819 at 10:21 UTC, under 250,000)
+Source: `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-14/bar-0-rows/BAR-0-ROWS-r2b.json` (five MEDIUM rows) with its README. The towns re-born at the tip 8239f088c (src = ac8168c8c) by the probes' own config (origin/lane/review-bar-0-2026-11-14, docs/chair/2026-11-14/probes/REVIEW-BAR-0/: `cfgFor`'s bar0 branch, verbatim, in <scratch>/bar/born.mjs) and rendered by the probes' own harness (`sh render2.sh <wt> <out> <seeds> 2 render.bar0.jsx`, exit 0, both towns). Each row read in its town at the tip; the holders checked BY CONTENT, three-way (`git diff --stat $(git merge-base <the line> <lane>) <lane> -- <file>`: the four lanes whose copies of crisisCast.js and PowerStrata.jsx differ from the line's, upkeep-capacity and the three w2-*-side, branch below the line and never changed either file: false holders).
+
+| row(s) | town(s) | read at the tip | ruling |
+|---|---|---|---|
+| 181, 215, 220 "Food: Pressured." / "Food Pressured." (Crisis page; Tonight sheet) — the widest: 3 rows, 2 towns, 2 surfaces | bar0-town-occupied-rand-1 (Longyuan, town 1,571), bar0-hamlet-calm-rand-1 (Saltosinum, hamlet 87) | REPRODUCED, and the lane's line is TRUE by its ruled one home: both records hold `foodRecord.band: 'secure'` with `gapPct: 3` (a share of the need unmet), which tonightSheet.js :: foodBandOf (ROUND THREE item 2b, the chair's ruling) reads "Pressured"; the quick guide and the Tonight sheet both read it. The homes that disagree print the generator's stored label: the Overview's "Food Security" row ("Food SecuritySecure", src/components/new/tabs/OverviewTab.jsx, the Systems-health block, `statusCase(eco.foodSecurity.label)` and `eco.foodSecurity.color`) and, on the rehearsal tree only, Foundations (at this tip Foundations prints "FoodAdequate", the causal score's own band; src/components/new/tabs/SubstrateTab.jsx). | NOT CURED HERE: the false home is not this lane's file. OverviewTab.jsx is held by COHERENCE-UPKEEP (lane/coherence-upkeep-2026-11-12, branched AT the line 976db5b19; its copies upkeep-capacity, upkeep-monotone and join-2026-11-14 carry the same change, 7+/2-); SubstrateTab.jsx by R3-TABS (46+/8-, branched at the line). NAMED FOR THE JOIN below. |
+| 199 "Institutions behind this power (4)" with no institution beneath (Systems/Power) | bar0-town-occupied-rand-1 | NOT REPRODUCED: powerSupport.js :: deriveFactionSupport gives Occupation Authority four edges ("Town watch", "Free company hall", "Adventurers' charter hall", "Town walls", basis "In the service of this command"), each on the roster, and PowerStrata.jsx :: ThePowers renders each as an InstitutionLink under the caption. The rendered Power view prints all four, EARLIER in the same view (under the merchant oligarchy's 17 and the Free company hall at the view's 34th line): the probe's dump keeps "a repeated line once per view" (render.bar0.jsx's own header), so the four names were dropped from the dump beneath the second heading, not from the page. | A PROBE ARTIFACT, not a page fault: no cure. (Recommendation for the instrument: dump a repeated line once per BLOCK, or mark the dropped repeats, before a reader reads a list as empty.) |
+| 179 "collaborates: Ruixiang He · the most ambitious of a power that gains" (Summary/Crisis) | bar0-town-occupied-rand-1 | REPRODUCED: stress `occupied`, cast.roles `face` and `collaborator` are the same id npc_power_occupation_authority (Ruixiang He, "the occupying governor"; the face's reason "leads the occupying power"). The writer is src/domain/crisis/crisisCast.js :: collaboratorCandidates (Rule 9): its second arm takes the most ambitious member of ANY faction whose stake `gains`, and in an occupation the occupying power itself gains, so the occupier's own governor is cast as the town's collaborator. This lane holds the file (r2-code-b-side's 59+/7-, merged; the other "holders" are false). | LEFT, measured and designed (the cure is a DECLARED MOVE in generator code: stress[].cast and its stressors alias move, so the golden master, the espionage fence and the class (a) pins move again and the shift record is re-measured after it; it does not fit this seat's remaining count with its measures, and a half-made generator cure is not pushed). THE CURE: in collaboratorCandidates, for the occupation kinds (`occupied`, `infiltrated`: occasionalRolesOf already narrows the role to them), exclude from BOTH arms every member of the power the crisis brings (the face's own faction: the id the face row is drawn from), and never cast the face's own id; where no local remains, the role is ABSENT by its own reason, never a false line. Red first on bar0-town-occupied-rand-1; a guard town whose collaborator is a local who gains; the 720 field diff confined to `stress` and `stressors` (cast.roles collaborator rows, cast.absent), with counts; three towns read where it prints, an occupation among them. |
+
+## FOR THE JOIN (this seat's step 6)
+- src/components/new/tabs/OverviewTab.jsx (COHERENCE-UPKEEP's file), the Systems-health block's Food Security row: read the ONE food home, `foodBandOf(eco.foodSecurity?.foodRecord)` (src/domain/summary/tonightSheet.js), for its label and colour, falling back to `eco.foodSecurity.label` where the record has no band, as composeMaterialTruth already does. The one-line change: `const foodBand = foodBandOf(eco.foodSecurity?.foodRecord); … statusCase(foodBand?.label || eco.foodSecurity.label)` (and the bar's colour the same). Without it a "Secure" band with an unmet share prints "Secure" on the Overview beside "Pressured" on the Crisis page and the Tonight sheet (rows 181, 215, 220; both bar towns).
+- src/components/new/tabs/SubstrateTab.jsx (R3-TABS'), the Foundations food row: on the rehearsal's joined tree it printed "FoodSecure" beside "Pressured" (the row's fact); at this lane's tip it prints the causal score's band ("FoodAdequate"). The joining seat reads the joined tree's Foundations word against foodBandOf in the two bar towns before ruling.
+
+## HAND BACK (2026-11-14 ~10:35 UTC, by judgement before the count's mark: the seat's own count by get_session at 10:33 was 281,473; row 179's cure is a declared generator move whose measures — crisisCast.js read whole, red first, the 720 field diff, the goldens and the shift record re-measured, three towns read — do not fit what is left, and a half-made generator cure is not pushed). Nothing running; everything pushed (tip 6de1c39e5 before this commit).
+DONE (this seat, each pushed): step 1 the shift record re-measured (750b7a612); step 4 the edge bundles (6923a7d47); steps 2, 3, 5 and THE LANE'S ONE FINAL STATEMENT (8239f088c); step 6 the bar's five rows read (6de1c39e5). `git diff --stat ac8168c8c..HEAD -- src/` prints nothing.
+WHAT IS LEFT, in order (the successor's list):
+1. ROW 179, THE CURE AS DESIGNED in step 6's table (src/domain/crisis/crisisCast.js :: collaboratorCandidates, Rule 9; its caller the occasional-roles loop, `role === 'collaborator'`, with linkedRow('collaboratorFromExploiter')): in the occupation kinds, no member of the power the crisis brings (the face's own faction) and never the face's own id; else ABSENT by its reason. Read the file whole first; the linked row (the famine's exploiter) is read the same way. Red first on bar0-town-occupied-rand-1 (born by <scratch>/bar/born.mjs, the probes' cfgFor). A DECLARED MOVE: the 720 field diff (the line 976db5b19 against the cure) confined to `stress` and `stressors`, counts given; then the shift record's rows re-measured (generator-golden-master, espionage-dormancy-fence and the class (a) pins, as step 1 did: the 51 suites and the eleven pin files as files at the line and the cure); the edge bundles re-built LAST and committed alone (engineBundle.js carries crisisCast.js); the statement's S2, S3, S4 and S8 brought current in an addendum (the statement itself is not rewritten).
+2. FOR THE JOIN rows of step 6 (OverviewTab.jsx; SubstrateTab.jsx): named, not touched; the joining seat's.
+3. The statement's LEFT (S10): the merge seat's signing and re-keying; the declaration pass; the whole suite in six shards on the joined tree; the counts on fresh seeds.
+
+## Instruments (outside the tree; lost with the container)
+- <scratch>/wt (branch b10, own node_modules by npm ci), wt-line (976db5b19), wt-tip0 (30ed925ee), wt-pre (750b7a612), node_modules symlinked from wt. <scratch>/tools: cmp.mjs (two vitest JSON runs, per file: tests, reds, NEW@B, GREEN@B), fails.mjs (each failed title with its message), shift.mjs (the shift record's rows from two runs). <scratch>/bar: born.mjs (a bar0 town by the probes' cfgFor), support.mjs (deriveFactionSupport per power); <scratch>/p0 (the REVIEW-BAR-0 probes, by git archive) and its render2.sh/render.bar0.jsx for the rendered views. Re-made from this description in minutes.
+
+# PART 11 — R2-CODE-B-11, the eleventh seat (a new stage on top of the statement: the bar's row 179, the fresh reader's rows; an ADDENDUM, the statement not rewritten)
+
+Brief: origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-R2-CODE-B-11.md. Tip read back from origin at the start: 045d19ac1 (as the brief named). Scratch worktree <scratch>/../wt-b11 (branch b11, own node_modules by npm ci); the base tree wt-b11-base (detached, node_modules symlinked). The reader's file: origin/lane/review-r2-code-b-2026-11-14:docs/chair/2026-11-14/REVIEW-R2-CODE-B-LINES-READ.md; its 1,536 births re-born by its own births.mjs and seeds1536.txt (copied out by git archive), at every tree measured.
+
+## THE CHAIR'S RULINGS (2026-11-14; each vetoable by the owner), copied
+(a) THE BAR'S ROW 179: THE COLLABORATOR IS NEVER THE OCCUPIER. In the occupation kinds no member of the power the crisis brings (the face's own faction) is cast as collaborator, and never the face's own id; where no local remains the role is ABSENT by its own reason, never a false line. The linked row (the famine's exploiter) is read the same way.
+(b) H2-1, H2-2, H2-3: THE BRUNT AND THE STAKES READ ONE FACT. The brunt is drawn only from a house whose stake the record holds as a loss; where the town's one power has no stake or gains, nobody of it bears the brunt: the role is ABSENT by its own reason (the one-power fallback goes).
+(c) H2-14, H2-16, H1-3: A MINTED STAND-IN IS A WHOLE PERSON, AND ITS WORDS CLAIM NO OFFICE, HOUSE OR FORCE THE PAGE DENIES. The stand-in's role names what they DO in the crisis, in lay words, wherever the record holds no such office; the lever's want names a scarce thing the town HAS (guards only where a force stands). New words read on the NPCs tab, the Crisis tab, the hooks, the Tonight sheet, the PDF and the journal, and listed for the owner's veto.
+(d) H2-15: the Foundry journal's power slot prints a power or says none, for every card with no power ("Member of: civic", and the exporter's "other"/"criminal" fallback). journalPages.js held by three lanes BY CONTENT: change only inside this lane's own hunks, else STOP with the line.
+(e) H4-7: where the siege clause prints, the observance sentence after it does not say folk attend: a twin true under the siege, or silence.
+(f) H1-1: THE CAST AND THE GOAL AGREE: a person whose own goal answers the crisis is not cast as its instigator or exploiter: the next candidate, else ABSENT by its reason.
+(g) H2-4: "no one named to lead it" only where no roster person faces the house; else that person defends. The hook's "the palisade leads the defence": reworded in the same commit if one line.
+(h) HIGH, carried, outside the family: "built around the Palace/government complex" (27 metropolises; seatIntoPhrase): this lane's or no lane's BY CONTENT → the seat named through the house-label leaf; else NAMED for its lane with the count.
+(j) THE CHAIR, 11:38 UTC: TWO THINGS A PAGE SAYS ARE SET APART, in the page and in the text taken from it: the Services row's need and its sentence ("Needs TimberSupply route severed.", the reading list's 163, 427, 497, 891); the "· covers" chip counted to 0 on every surface; its own commit, a guard on the rendered text.
+(k) THE CHAIR, 11:42 UTC, A FENCE: src/pdf/sections/SupplyChainFlow.jsx and src/pdf/sections/Services.jsx are NOT this lane's from that message on (the SURFACES-1 lane); a row needing them is NAMED under FOR THE JOIN. journalPages.js: only inside this lane's hunks, and nothing in its economics page.
+(l) THE CHAIR, 11:58 UTC, on castDerived's floor: A FLOOR IS NOT LOWERED. A floor of WITNESSES: the corpus gains births in its own idiom until the floor holds; the note names the cause; tests only, its own commit.
+(m) THE CHAIR, 12:19 UTC: NO SURFACE PRINTS A CATALOGUE NAME'S BRACKET ("Fence (word of mouth)", 24 towns on the joined 720; origin/lane/join-nolane-2026-11-14, docs/chair/2026-11-14/NOLANE-HANDBACK.md, "Still false: A LANE'S", DATA-ROW7 pf-702): list by script every catalogue name whose bracket the house-label leaf does not strip (a count range, an "(if …)", a "(word of mouth)", a "(commercial)" where it is not the house's own name) and what each prints as; cure the leaf for those not part of a name; measure on the births before and after. After (c) and (d); one line in the hand-back.
+(n) THE CHAIR, 12:27 UTC: THE READER'S VERDICT, NOT CLEAR at ac8168c8c (origin/lane/review-r2-code-b-2026-11-14, docs/chair/2026-11-14/REVIEW-R2-CODE-B-2026-11-14.md: section 9's M1-M14, section 4 for the plants). The brief already holds M2, M3, M5, M6's minted healer, M7, M9 and M8's half; M1 is another lane's. SIX NEW, ruled, in this order after the rows above: M10 (1,017 towns) the journal's provenance tag on a force ("… (required)") goes off the line this lane rewrote; M12 (150 towns) "Real political weight rests with the Religious Authorities" returns where the contender outweighs the governor (A LINE IS IN ITS POOL UNLESS THE TOWN MAKES IT FALSE), read from the two powers' standing; M11 a substitute chain whose own input is present NAMES that input (18 of 30 removed grounds were true); M4 (11 rows) THE ONE WHO HOLDS THE LEVER DOES NOT BEAR THE BRUNT: the next of the hit house, else ABSENT; M6's other half (21 towns) the plague hook names a healer only where the roster holds one; M13, M14 "Acting …" only where the keeper's title names an office, "built around the harbour" only where a harbour house stands (with (h)). And the TWO GUARDS that stayed green on the reader's plants: made able to red.
+(i) THE CHAIR, 11:22 UTC (a message): the Tonight famine line "has lost a second harvest" (54 of 58 towns without grain or mill): EACH LANE MAKES ITS OWN HALF: this lane's is the Tonight caller (src/domain/summary/tonightSheet.js) passing the record's facts to crisisSummaryForSurface as an optional argument (ignored on this lane today: the pages byte-identical, proved on the births); the r3-code-c lane makes the function read it. Its own commit, after (a) and (b); one line under FOR THE JOIN.
+
+## (a) ROW 179 — DONE (05cd22366, its follow-up 5996dd9da; census f98b63def)
+- CAUSE: crisisCast.js :: collaboratorCandidates (Rule 9) took the most ambitious member of any power that gains; in an occupation the occupier gains, so its governor was cast as its own collaborator.
+- CURE: no member of an occupying power (isOccupier) in either arm; the linked famine exploiter refused when the face or an occupier's member. ABSENT reason: CAST_ABSENCES.occupierOnly "no one is named: no local power gains" where every gainer is an occupier; else the old noGains.
+- COUNTS (1,536 births, 045d19ac1 → 5996dd9da): collaborator = the face 28 (1 by the link) → 0; an occupier's member 6 → 0; locals 9 → 13; 30 ABSENT by the new reason; infiltrated unchanged. Field diff: 34 towns, `stress` 69 / `stressors` 69 leaves, nothing else.
+- CORRECTION (said in 5996dd9da's body): 05cd22366 shipped the wording "no local is named: none of the town's own powers gains", never born whole before its push (its body's field diff was measured on an earlier wording); the record stores the raw reason and the coherence battery flagged "town" for a hamlet (r2s-occupied-hamlet-0's receipt pass → needs_review: a leaf outside the family, 1 town). 5996dd9da cured it; the receipt is unmoved at 5996dd9da.
+- GUARD AND PLANT: tests/domain/crisisCastReaderRows.test.js (a): collected over 22 towns (bar0-town-occupied-rand-1 and 21 of the reader's 34) red 22/22 at 045d19ac1; the keep-guard (r2s-occupied-city-1) red under a plant emptying the local roster; the taken-off guard r2r-thorp-24; the link r2s-occupied-hamlet-0.
+- TOWNS READ: Crisis tab absent line in r2r-thorp-24 (thorp 20), r2s-occupied-hamlet-0 (hamlet 20), r2s-occupied-village-1 (village 132), r2s-occupied-city-3 (city 4,671), rr3-metropolis-occupied-rand-3 (metropolis 301,467); the recast locals on the Crisis tab, its hook and the journal in r2s-occupied-town-3 (town 2,018), r2s-occupied-metropolis-1 (105,466), rr3-metropolis-occupied-rand-4 (96,635); the bar's town (1,571): Sujin Ma, the dean of a gaining church. All TRUE.
+
+## (b) H2-1, H2-2, H2-3 — DONE (27c39b750; census 48db164ff)
+- CAUSE: bruntCandidates' one-power fallback (the only power whatever its stake) and its losers set (every stake but 'gains').
+- CURE: losers = 'loses' or the gains-and-loses 'split'; the fallback gone; ABSENT by noBase "no house's base is hit" (no new word).
+- COUNTS (5996dd9da → 27c39b750): no-loss brunt rows 45 + 20 + 1 → 0; 66 roles ABSENT; brunt rows on losing houses unchanged. Field diff: 66 towns, `stress` 526 / `stressors` 526, nothing else.
+- GUARD AND PLANT: (b) arms: collected over 31 of the 66, red 31/31 at 5996dd9da; the keep-guard (three words, r2r-thorp-17, r2r-hamlet-16, r2r-village-58) red under a plant emptying the losers; the taken-off guard r2r-thorp-10.
+- TOWNS READ (before/after, Crisis tab, hooks, Tonight, journal Tonight/Crisis/Plot Hooks): r2r-thorp-10 (10), r2r-hamlet-36 (74), r2s-plague_onset-thorp-0 (14), r2s-monster_pressure-village-3 (207, the largest), rr3-thorp-monster_pressure-rand-0 (5, the smallest), rr3-thorp-plague_onset-rand-3 (16, a famine beside: the famine's brunt kept). Newly silent: the brunt row, its hook, the Tonight person and the clause "The worst of it falls on …"; the Tonight line falls to the lever ("… holds the key to it."), whole.
+- RED BY THE DECLARED MOVE, NAMED (not loosened): tests/generators/people/castDerived.test.js "every person a cast names is on the roster; …": the corpus floor "draws people from powers" > 500 now 497 (correctness arm green).
+
+## (l) THE FLOOR — DONE (fa85c6592)
+- tests/generators/people/castDerived.test.js: the soak 1,000's seeds 300-319 added (825 -> 845 births); "the corpus draws people from powers" 497 -> 516 (read by a throw-away plant); the floor's 500 unmoved; the six tests green; the lighting census unmoved (34 passed). The cause named in the file's header: the 96 false roles made absent.
+
+## (i) THE TONIGHT FAMINE CALLER — STOPPED, NAMED FOR THE JOIN (nothing committed)
+- The one-line change (src/domain/summary/tonightSheet.js, composeTonightSheet's head line): `crisisSummaryForSurface(lead, place, 'tonight', factsOf(source))` with `import { factsOf } from '../facts/factsOf.js'`. Made and measured, then reverted: ALONE it reds the strict-domain gate (tonightSheet.js 1 error, baseline 0: TS2554, a fourth argument the function on this lane does not declare). A cast round the type would route round the gate's refusal, so it is not done. It lands WITH the r3-code-c half (crisisSummaryVantage.js :: crisisSummaryForSurface taking the optional `facts`), at the join, in one change: the joining seat applies both lines together.
+
+## (j) THE SERVICES RUN-TOGETHER — ALREADY CURED ON THIS LANE, MEASURED (no code change)
+- e878a1367 (R2-CODE-B-3) set the need and its sentence apart in serviceComponents.jsx :: ServiceItem (two elements; a full stop and a space); f2c77472c removed the "· covers" chip; the guard on the rendered text is tests/components/servicesRowMachinery.test.jsx (that commit's).
+- MEASURED by a throw-away render of ServicesTab (jsdom; never committed) over the census's 360 r2r- towns, per need paragraph: the line 976db5b19 run-together 5 (5 towns: r2r-hamlet-34, r2r-village-8, r2r-village-23, … "Needs IronNo …"), "· covers" 2 (2 towns); THIS TIP 0 and 0. The chip's words stand nowhere in src/ but one comment (Grep). A whole-tab textContent shows "Needs TimberGeneral trade" in 2 towns: two separate block rows (a need with no sentence, then the next row's name) glued by textContent alone; the page and copied text set them apart.
+- The reading list's four rows were read on a tree without this lane's cure (the tabs lane's); at the join the cure arrives with this lane.
+
+## EVERY NEW OR CHANGED LINE (for the owner's veto)
+- "collaborates: no one is named: no local power gains" (Crisis tab only; 30 of the 1,536) — read in the five towns of (a).
+
+## FOR THE JOIN
+- (i) the Tonight famine line: BOTH halves in one change at the join (above): tonightSheet.js passes `factsOf(source)`; crisisSummaryVantage.js reads the optional `facts` (r3-code-c's item 7). This lane's half alone reds the strict gate.
+- (k) the fence: no row of this seat's needed SupplyChainFlow.jsx or Services.jsx.
+
+## WHAT IS LEFT, line by line (the successor's list, in order)
+1. (c) H2-14, H2-16, H1-3: the minted stand-in's role in lay words where the record holds no such office (resolveCrisisCast.js's mint: the "Healer"/"Grain Steward"/"Warden" role field; counts at the tip: 141 towns, 57 of the 720; the reader's 10 false "Healer" beside "No healer is kept here", 62 "Grain Steward" beside "No granary", 34 "decide who gets the guards" beside "No walls and no standing force"); the lever's want (tonightSheet.js :: castWantOf, SCARCE_OF_KIND) names a scarce thing the town HAS. A DECLARED MOVE (npcs[] of the minted person: the 720 field diff). New words read on the NPCs tab, Crisis tab, hooks, Tonight, PDF and journal; listed for veto.
+2. (d) H2-15: journalPages.js's power slot ("Member of: civic", 141 towns; the exporter's "other"/"criminal" fallback): ONLY inside this lane's hunks (`git diff $(git merge-base origin/lane/integration-2026-11-07 HEAD) HEAD -- src/foundry/journalPages.js`), else STOP with the line; nothing in its economics page (k).
+3. (m) the label leaf's catalogue brackets (after (c) and (d)).
+4. (e) H4-7 faithReading.js :: faithLinesOf: the observance sentence after the siege clause (38 of 39 towns).
+5. (f) H1-1: an instigator/exploiter whose own goal answers the crisis is passed over (3 of 1,065), next candidate else ABSENT.
+6. (g) H2-4: "no one named to lead it" only where no roster person faces the house (2 towns; the chartermaster); the hook's "the palisade leads the defence" (5, LOW) reworded if one line.
+7. (h) seatIntoPhrase's "Palace/government complex" (27 metropolises): holders by content first; with M14.
+8. (n) M10, M12, M11, M4, M6's other half, M13/M14, and the two guards made able to red, in the chair's order.
+9. ONCE, AFTER THE LAST CAST CURE: the 720 field diff (976db5b19 against the tip) by family (a leaf outside `stress`, `stressors`, the minted person and what reads them is a STOP); the draft shift record's rows re-measured as PART 10 step 1 did (castDerived's floor held by fa85c6592 is green; note it); the edge bundles re-built LAST and committed alone (engineBundle.js carries crisisCast.js, now moved by (a) and (b)); THE ADDENDUM to the statement (S2, S3, S4, S5, S8 brought current; the statement not rewritten).
+10. FOR THE JOIN: (i)'s two lines applied together (above).
+
+## HAND BACK (2026-11-14 ~12:35 UTC, by judgement before the count's mark: get_session read 345,226 at 12:29; row (c) is a declared generator move with words read on six surfaces and its measures, which do not fit what is left, and a half-made generator cure is not pushed). Nothing running; everything pushed.
+DONE (this seat, each pushed): (a) 05cd22366 + 5996dd9da (the CORRECTION said in both bodies) + census f98b63def; (b) 27c39b750 + census 48db164ff; the floor fa85c6592; (i) STOPPED, named for the join; (j) measured, already cured (no code change); the hand-back 69b410c3b, bf14b9592 and this commit.
+Reds at the tip known to this seat: the presumed-things walker ARM 1 (fresh 18, as at 045d19ac1, the lane's, named for the declaration pass); the goldens and pins of PART 10's S4 (a), now ALSO moved by (a) and (b) (stress/stressors): not run by this seat (no whole suite); the shift record's re-measure (item 9) classes them.
+How the instruments are re-made: a scratch worktree on the lane tip with npm ci; a base worktree with node_modules symlinked; the reader's births.mjs and seeds1536.txt by git archive of origin/lane/review-r2-code-b-2026-11-14; the tools below (each a few lines) written again from their one-line descriptions. Births of the 1,536 take ~2 minutes; a throw-away jsdom render of a tab is a test file planted uncommitted in a tree no suite is running in, removed after.
+
+## `git diff --stat 045d19ac1..HEAD -- src/`
+- src/domain/crisis/crisisCast.js: (a) collaboratorCandidates + the collaboratorFromExploiter link + CAST_ABSENCES.occupierOnly; (b) bruntCandidates' losers and the fallback.
+
+## Instruments (outside the tree; lost with the container)
+<scratch>/tools: births.mjs (the reader's), load.mjs, holders.sh (the lanes whose copy of a file differs from the line's, three-way), svcMeasure/svcPeek (throw-away jsdom renders of ServicesTab), ab.mjs (rows (a)/(b) counts), fdiff.mjs (leaves by family), rdiff.mjs (cast rows changed; receipt judgments), surf.mjs (a needle on the Crisis tab, hooks, Tonight and the journal's three variants), peek.mjs, speak.mjs, bar.mjs (a bar0 town), co.mjs/fam.mjs. Re-made from this description in minutes.
+
+# PART 12 — R2-CODE-B-12, the twelfth seat (the stage goes on; an ADDENDUM at the end, the statement not rewritten)
+
+Brief: origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-R2-CODE-B-12.md. Tip read back from origin at the start: 3357f950c (as the brief named). Scratch worktree wt-b12 (branch b12, own node_modules by npm ci); the base tree wt-b12-base (detached at 3357f950c, node_modules symlinked). The reader's births.mjs and seeds1536.txt by git archive of origin/lane/review-r2-code-b-2026-11-14.
+
+## THE CHAIR'S RULINGS SINCE PART 11 (each vetoable by the owner), copied
+(i, settled) THE TONIGHT FAMINE CALLER IS NOT THIS LANE'S: both lines land together on the joined line, by another seat.
+(k, widened) No file under src/pdf/sections/; in src/foundry/journalPages.js only inside this lane's own hunks (`git diff -U0 $(git merge-base origin/lane/integration-2026-11-07 HEAD) HEAD -- src/foundry/journalPages.js`), never its economics page; a row needing more is NAMED under FOR THE JOIN with its measure.
+(o) R2B-LEASTSAY: re-measure at the tip; if it still prints where the person named is the house's head or its only member, the reason is said only where the house holds someone with more say.
+(p) BAR-130, BAR-131: A COUNT WORD READS THE ROSTER: the number is the count of the rows printed under it; measure how often the two differ, and why.
+(q) R2B-CARAVANS: no caravan passes through a town the record holds as isolated.
+(r) THE CHAIR, 12:52 UTC: REGISTERS ARE RE-DERIVED ONCE, AT THE CLOSE, ON THE FINAL TREE. After a cure no census or baseline is re-taken: the lighting census is NOT re-taken where a guard file is added, and the edge bundles are NOT rebuilt (item 9's "rebuilt LAST" withdrawn); a register a cure makes stale is NAMED here (file; the title that reds; the commit). Still run after every cure: the three fast gates, the presumed-things walker, the grid, the test files naming the touched files, castDerived's floor. A pin a cure moves is re-keyed BY IDENTITY in the same commit.
+(s) THE CHAIR, 13:06 UTC: "Gates (if walled)" still prints raw (1) in the Foundry journal with its provenance tag (the M10 line) and (2) on the Crisis tab's Levers list: RULED as (m): both through the house-label leaf ("Town gates", the Defense card's words); one commit with (m) where one cause serves; counted on the births before and after, each surface. The PDF's Defence chapter twin is another lane's.
+
+## (c) H2-14, H2-16, H1-3, M6's minted half — DONE (3a6de5c7b)
+- CAUSE: resolveCrisisCast.js's mint gave the stand-in an office word by lever kind (Healer / Grain Steward / Warden) where the record holds no such house or office-holder; tonightSheet.js :: SCARCE_OF_KIND gave the raids "guards" whatever the town keeps; the plague slot filled "{holder}, the healer who …" off the minted "Healer".
+- CURE: crisisCast.js :: STAND_IN_ROLE (by the crisis minted for): famine "Rations the food", plague "Tends the sick", migration "Takes charge of the migration", raids "Rallies the neighbours", fallback "Stepped in for the crisis"; tonightSheet.js :: scarceOf + castWantFactsOf (guards only where a garrison, watch, militia or free company stands, else shelter; the battery's re-derivation reads the same facts); crisisHooks.js: the plague slot's second fill "{holder}, who identified the outbreak first," for a stand-in.
+- COUNTS (1,536 births, 3357f950c → 3a6de5c7b): minted office roles 141 → 0; the want's "guards" 36 → 0 (shelter 23 → 59); plague hooks naming a stand-in "the healer" 20 → 0; want_not_role 0 → 0.
+- FIELD DIFF BY FAMILY: 141 towns, `npcs[minted].role` 141 leaves, nothing else.
+- GUARD AND PLANTS: tests/domain/crisisStandInWords.test.js (collected over 12 census towns; the want with its keep-guard; the hook with its keep-guard r2r-city-19). Six plants, each red on its arm, none committed. Pins re-keyed: crisisHooks.test.js, tonightOwnGoal.test.js.
+- TOWNS READ, six surfaces: rr3-thorp-monster_pressure-rand-0 (5), r2r-thorp-5, rr3-village-monster_pressure-rand-5 (383); rr3-thorp-under_siege+famine-rand-2 (a siege), r2s-wartime-thorp-2 (a war), r2r-hamlet-24; rr3-thorp-plague_onset-rand-5, r2s-plague_onset-thorp-0, rr3-hamlet-plague_onset-rand-5; r2s-mass_migration-thorp-3, -hamlet-0, -hamlet-1. All TRUE.
+
+## (m) with (s) — DONE (1a3505705)
+- CAUSE: the house-label leaf's machinery pattern took count ranges, "(if walled)" and "(high magic)" only; four catalogue GRADES printed on every surface that reads the leaf.
+- CURE: CATALOGUE_MACHINERY_BRACKET takes "(word of mouth)", "(commercial)", "(powerful)" and "(<kind>, <n>th level)". Display only; no record leaf moves.
+- LISTED BY SCRIPT: 43 bracketed house names on the 1,536; 14 kept their bracket; the four grades stripped (Fence 38 towns, Sawmill 458, Thieves' guild 106, Healer (divine, 1st level) 16: 618 → 0); the ten in-world qualifiers kept: (official), (established) ×2, (part-time) ×2, (resident), (guild), (district), (open cast), (red light district).
+- RENDERED (11 towns, every surface, before/after): 107 → 16. The 16 left: the Defense tab and PDF healer lines (12, defenseDisplay.js, FOR THE JOIN) and a Services row's own title "Fence (word of mouth)" (4, a service name: LEFT, below).
+- (s) at this tip: "Gates (if walled)" 0 in the journal, 0 on the Crisis tab's Levers list (its one lever town, r2s-monster_pressure-town-3); raw on the Defense tab and the PDF (another lane's).
+- GUARD: houseLabelEveryForm.test.js's new arm (+ three keep-guards); the floor "kept > 10" RE-KEYED BY IDENTITY to the exact ten kept forms (the catalogue holds no other house names to grow it by; never lowered). Plant: three arms red.
+- TOWNS READ: r2s-succession_void-hamlet-3, r2r-town-15, r2s-famine-village-3, rr3-village-succession_void-rand-1, rr3-village-occupied-rand-3, rr3-village-under_siege+famine-rand-0, r2s-succession_void-town-3, r2r-metropolis-8, rr3-town-occupied-rand-2, rr3-metropolis-under_siege-port-0, r2r-city-44. All TRUE.
+
+## THE LANDING STOP (the chair, 13:38) — DONE (merge e4520f77c, cure a412fc3b2)
+- RULING (copied): BOTH CURES STAND, EACH IN ITS OWN CASE: a roster healer where one stands (the template); THE CAST'S STAND-IN, named without "healer", where the cast minted one; the data lane's slot-less twin ONLY where the cast holds nobody for the slot. Merge the joined line's tip INTO the lane (a conflicting register, baseline, generated file or bundle takes THE JOINED LINE'S side; code keeps both cures); pins re-keyed BY IDENTITY; from then the lane holds every lane's cures: RE-TAKE THE BASE COUNTS ONCE.
+- MERGE e4520f77c: origin/lane/join-2026-11-14 at 0a296575c; nine conflicts, all bundles and the lighting census baseline: the joined line's side.
+- CURE a412fc3b2: the plague slots on the twin's phrase "The first person to name the outbreak": a roster healer "{holder}, the healer who first named the outbreak," and the stand-in "{holder}, the first to name the outbreak,". Pins re-keyed (four). 39/39 in the three files.
+- NOT DONE (the count's mark): the base counts re-taken on the merged tree; the new twin lines read on six surfaces in three towns (r2s-plague_onset-thorp-0 read through crisisHookFor only); the 15 reds after the merge CLASSED against origin/lane/join-2026-11-14 itself (run each file there: a red there too is the joined line's): generationForkCensus x3, editCorpusRatchet x4, pipelinePinnedChoosers x2 (A1 red at 3357f950c too), editWorldFactResources x2, generatorGoldenMaster, worldFactRederive, hallDecidesUnderOccupation, w2FixData6Rows.
+
+## EVERY NEW OR CHANGED LINE (for the owner's veto)
+- The landing: "{name}, the first to name the outbreak, has gone quiet. Their last message suggested the disease is not natural. Reaching them means crossing a quarantine …" (a stand-in where no healer stands) and "{name}, the healer who first named the outbreak, has gone quiet. …" (a roster healer where no healer house stands). These supersede (c)'s "{name}, who identified the outbreak first," wherever the twin is stored.
+- (m): the house labels "Fence", "Sawmill", "Thieves' guild", "Healer" (each with its catalogue grade dropped) on every surface reading the leaf (618 town-occurrences).
+- The stand-in's role (NPCs tab card, PDF Notable Figures and Tonight, the journal's NPC Quick Reference and Tonight, the Tonight sheet): "Rations the food" (62 towns), "Tends the sick" (20), "Takes charge of the migration" (23), "Rallies the neighbours" (36); "Stepped in for the crisis" never printed.
+- The raids' lever want where no force stands: "decide who gets the shelter, and not be blamed by those who go without." / "share out the shelter without being crushed between those who want it." (36 towns).
+- The plague hook (Crisis tab, Plot Hooks, PDF, journal Overview): "{name}, who identified the outbreak first, has gone quiet. Their last message suggested the disease is not natural. …" (20 towns).
+
+## STALE REGISTERS, NAMED (ruling (r))
+- tests/lint/.lighting-census-baseline.json: sovereigntyLightingContract.walker "THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed" reds by the new file tests/domain/crisisStandInWords.test.js (3a6de5c7b).
+
+## REDS KNOWN AT THE TIP, CLASSED
+- tests/generators/pipelinePinnedChoosers.test.js A1 (the golden corpus, three golden-master-v3 rows): red identically at 3357f950c (the lane's known golden move, PART 10's S4 (a)).
+- The presumed-things walker ARM 1: fresh 18, the lane's 18.
+
+## (d) H2-15 — STOPPED, NAMED FOR THE JOIN (nothing committed)
+- The journal's two "Member of" lines (src/foundry/journalPages.js:193 npcQuickRefPage, :203 notableNpcPage) are NOT inside this lane's hunks (its only hunk there is :204, the House line), and their value's writer is src/pdf/lib/viewModel.js (the npc row, `const factionRefName = labelOfFactionRef(firstPower || n?.faction || n?.category);`), a file this lane never changed and the r3-tabs and upkeep lanes hold BY CONTENT. Ruling (d): STOP with the line.
+- MEASURED (1,536 births at 3a6de5c7b, buildViewModel): a card with no membership and no faction prints its CATEGORY as its power: 4,395 cards. "other" 2,105 cards / 752 towns, "criminal" 947 / 402, "religious" 425 / 339, "economy" 407 / 229, "magic" 357 / 202, "civic" 141 / 141 (every minted stand-in), "military" 13 / 11. The NPCs tab files these cards "In no power".
+
+## FOR THE JOIN (carried)
+- (i) the Tonight famine line: both halves in one change at the join (PART 11).
+- (m) THE DEFENSE TAB'S HEALER LINES: src/domain/display/defenseDisplay.js (Medical Readiness note `${facts.healerName}. Wounds and fevers …`, Arcane Support `${practitioners…}. Detection, wards, counterspell.`) print the raw catalogue name ("Healer (divine, 1st level)"); the one-line change: each name through institutionHouseLabel. 12 prints in 11 towns read (tab + PDF twin). Whose: the lane holding defenseDisplay.js (upkeep / w2-c-leaves).
+- (d) THE POWER SLOT: viewModel.js's npc row drops the category fallback, `labelOfFactionRef(firstPower || n?.faction)`, and the journal's two "Member of" lines print "In no power" (the NPCs tab's own words) where `factionLabel` is empty; the PDF readers of `factionLabel` / `factionAffiliation` read the same way. 4,395 cards on the 1,536 (above). Whose: the lane that holds viewModel.js at the join (r3-tabs / upkeep), with journalPages.js's two lines.
+
+## WHAT IS LEFT, line by line
+1. (d) STOPPED, named for the join (above).
+2. (m) DONE (1a3505705); LEFT from it: a Services row whose own SERVICE name carries a grade ("Fence (word of mouth)", 4 prints in 11 towns; serviceComponents.jsx, this lane's): a ruling whether a service title reads the house-label leaf.
+3. FIRST, THE LANDING'S REMAINDER (above): classify the 15 reds against the joined line; re-take the base counts once on the merged tree; read the twin's two new lines on six surfaces.
+4. (e) H4-7; 4. (f) H1-1; 5. (g) H2-4; 6. (h) with M14; 7. (n): M10, M12, M11, M4, M6's other half, M13, M14, the two guards made able to red; 8. (o), (p), (q); 9. item 9 (the 720 field diff of the stage by family, the shift record's rows, the ADDENDUM; registers re-derived once at the close by ruling (r)).
+
+## How the instruments are re-made (scratch, outside the tree; lost with the container)
+- births.mjs + seeds1536.txt (the reader's, git archive); load.mjs (stream the ndjson.gz); mint.mjs (minted roles against defenseFactsOf, the Tonight want, the plague hook); want.mjs (every Tonight want's scarce word + crisisCastSenseFindings want_not_*); fdiff.mjs (leaves by family, npcs split minted/other); memberof.mjs (buildViewModel's factionLabel for powerless cards); brackets.mjs (every bracketed house name through institutionHouseLabel); holders.sh (lanes whose copy differs from their merge base with integration); surf.census.jsx + surf.sh (a throw-away vitest render planted in the tree and removed: the walked OutputContainer tabs, the PDF via a @react-pdf/renderer mock to DOM + renderToStaticMarkup, buildJournalPages canon_dossier, composeTonightSheet); readsurf.mjs (the lines naming the minted person per surface). Each a few lines; re-made from this description in minutes.
+
+## HAND BACK (2026-11-14 ~14:25 UTC, at the count's mark: get_session read 342,054 at 13:57, and the landing stop took the rest). Nothing running; everything pushed.
+DONE (this seat, each pushed): (c) 3a6de5c7b; (d) stopped and named for the join; (m) with (s) 1a3505705; the landing stop e4520f77c + a412fc3b2; the hand-back 9c4ef0b93, b23b48613, ba87ebe2d and this commit. WHAT IS LEFT is the list above, in its order.
+

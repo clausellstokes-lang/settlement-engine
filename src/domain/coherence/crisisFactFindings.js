@@ -33,9 +33,8 @@
  * receipt runs never sees them, so no receipt moves. Pure: no clock, no seed, no draw.
  */
 
-import { composeTonightSheet, castWantOf, hasOwnGoal, DAYS_PER_MONTH } from '../summary/tonightSheet.js';
+import { composeTonightSheet, castWantOf, castWantFactsOf, hasOwnGoal, DAYS_PER_MONTH } from '../summary/tonightSheet.js';
 import { governingFactionOf } from '../rulingPower.js';
-import { isSeatVacant } from '../people/seatKeeper.js';
 
 /** A want compared in one form: lower-cased, unclosed, spaces folded. @param {unknown} v @returns {string} */
 const bareWant = (v) => (typeof v === 'string' ? v : '').replace(/\s+/g, ' ').trim().replace(/[.!?]$/, '').toLowerCase();
@@ -211,7 +210,7 @@ export function crisisCastSenseFindings(settlement, surfaces = {}) {
     // (want_not_own); a person with none wants their role's line, re-derived through the writer's own fill (the role,
     // the person, the crisis, the person's house, the seat) and compared by EXACT equality (want_not_role, SW-6 #40).
     // A secret or a temperament (`says`) is not a want and is not read here.
-    const seatEmpty = isSeatVacant(settlement);
+    const wantFacts = castWantFactsOf(settlement);
     for (const p of sheet.people || []) {
       if (p.why !== 'cast' || p.sameAs || (p.says && p.says !== 'want') || !str(p.line)) continue;
       const role = ROLE_OF_LABEL[str(p.castLabel)] || str(p.castLabel);
@@ -222,7 +221,7 @@ export function crisisCastSenseFindings(settlement, surfaces = {}) {
         continue;
       }
       const house = str(firstRankMembershipOf(npc, powerOrderOf(settlement))?.power);
-      const want = castWantOf(role, str(p.castId), str(p.castKind), '', house, { seatEmpty });
+      const want = castWantOf(role, str(p.castId), str(p.castKind), '', house, wantFacts);
       if (!want || str(p.line) !== want) out.push({ surface: 'tonight', quote: `${p.name} (${p.castLabel}): ${p.line}`, detail: `want_not_role:${role}` });
     }
     // target_runs_plot: a crisis's target voiced with that crisis's own secret.
