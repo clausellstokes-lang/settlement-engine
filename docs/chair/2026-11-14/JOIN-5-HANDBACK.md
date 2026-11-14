@@ -21,7 +21,8 @@ The changes (copied from the brief):
 (h) ONE LINE CURED TWICE, the chair's own fault: the Foundry journal's provenance tag on an armed force was cured on lane/r2-code-b-2026-11-13 (a48cf4126) AND on lane/exports-b24-2026-11-14 (2779a3d6d). The lane lands first. If the builder's branch then conflicts in those lines: THE LANE'S LINES STAND and the builder's hunk yields (that is not a choice between behaviours: both remove the tag); the builder's guard test is kept if it is green on the merged tree, else left out of the merge and NAMED. Any other conflict among the three exports branches and the surfaces lane (all four edit src/pdf/ and src/foundry/): law (b): the file read whole, BOTH CURES STAND, or a stop for that branch.
 (i) A LANE THAT HOLDS A MERGE OF THE JOINED LINE (most now do) merges as any other; its re-taken wiring census, if both sides moved the register, is the joined side's by (c) and (g) decides whether the door still opens.
 
-THE CHAIR'S RULINGS SENT AFTER THE BRIEF: none so far.
+THE CHAIR'S RULINGS SENT AFTER THE BRIEF:
+- **16:16 UTC:** the lanes are stopping; the next wave is cut from the joined line. After the brief's order, THE SECOND POINTS at each seat's FINAL tip: "LAND: lane/w2-fix-data-2026-11-13 at 78dd629bd". Final as merged: w2-c-leaves 5f95bf473; the exports' three (b6f3266f8, a6dc3d16d, 34d1880ae), join-surfaces f9d40e3de, join-nolane-2 1b78763ae. Still to come by 16:50: the corpus, its side branch, r2-code-a, r2-code-b. AFTER THE LAST POINT: the build, the grid and the corpus door's check once more, and ONE message with the landed tip.
 
 ## 2. The landings
 
@@ -37,10 +38,13 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF: none so far.
 | 7 | join-surfaces-2026-11-14 | f9d40e3de (16:12) | e6cb445db (JOIN-4 point 4) | f0ce831b5 | none | clean-both code: `src/foundry/journalPages.js`, `EconomicsTab.jsx` (§3) |
 | 8 | exports-b1-2026-11-14 | b6f3266f8 (16:15) | — (base c66333f0c) | 06a1ea994 | none | — |
 | 9 | exports-b3-2026-11-14 | a6dc3d16d (16:17) | — (base c66333f0c) | f4bb5f70c | none | — |
+| 10 | exports-b24-2026-11-14 | 34d1880ae (16:22; final, the chair 16:16) | — (base c66333f0c) | d81721e1e | 1 code (law (h)): `journalPages.js` the comment above the force bullet; the lane's stands | — (guard `tests/foundry/journalForcesNoProvenance.test.js` kept: green) |
 
 ## 3. Every code resolution
 
-No code conflict so far. Merged clean though both sides moved them (each read in both sides' diffs from the merge base; independent lines; both stand):
+ONE CODE CONFLICT (merge 10, law (h)): `src/foundry/journalPages.js` :: `defensePage`, the armed forces' bullet. Both sides removed the provenance tag with the identical code line (merged clean); the conflict was the comment above it: the joined side's R2-CODE-B-13 M10 comment (with its `@enforced-by tests/pdf/journalForceNoProvenance.test.js`) STANDS; the builder's EXPORTS-B24 B4 comment yields. The builder's guard `tests/foundry/journalForcesNoProvenance.test.js` is KEPT (green on the merged tree: with the lane's guard and `cultureBlockTwoSurfaces`, 3 files 11/11). Its B2 (`cultureOnPage` for the Cultural notes) merged clean and stands.
+
+Merged clean though both sides moved them (each read in both sides' diffs from the merge base; independent lines; both stand):
 - Merge 4: `tests/lint/proseComposed.walker.test.js` (joined: relations 165 -> 169; lane: corpus 2950 -> 2951); `tests/lint/proseWiringCensus.walker.test.js` (joined: resolved 492 / unresolved 364, relations 169, the draft 19 · 5 · 83 · 43, SOURCE-UNRESOLVED 857; lane: variants 2951 and the histogram 4: 147, 5: 45); `tests/domain/corpusCureGuards.test.js`; `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md`. Each pin moved by one side at its own line: stands by (d); the close measures.
 - Merge 7: `src/foundry/journalPages.js` (joined: R2-CODE-B-13 M10 in `defensePage`, the force without its provenance tag; lane: SURFACES-3 in `economicsPage`, `tradePillWord` and `foodWordShown`); `src/components/new/tabs/EconomicsTab.jsx` (joined: W2-C-LEAVES-13 `plainGoodName` in `NeedsNotMet`; lane: SURFACES-3 `tradePillWord` on the pills, `carriersOf` moved whole to `domain/display/foodCarrier.js`).
 
