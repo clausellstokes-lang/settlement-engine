@@ -1,0 +1,160 @@
+{"id":"14770","town":"r2s-wartime-hamlet-2","sev":"LOW","kind":"STATE","why":"says food comes from fishing and little else; HOUSES has subsistence farming, common grazing, and foraging chain runs","other":""}
+{"id":"05327","town":"r2s-wartime-hamlet-2","sev":"MED","kind":"STATE","why":"gives Daniyya Caan a seat 'second of Headman's Authority'; PEOPLE shows no bracketed power for her/him","other":""}
+{"id":"14125","town":"r2s-wartime-hamlet-2","sev":"MED","kind":"LACKS","why":"'office of the guard' and 'of Headman's Authority'; DEFENCE garrison and watch none, PEOPLE shows no power seat","other":""}
+{"id":"14787","town":"r2r-hamlet-32","sev":"LOW","kind":"STATE","why":"food 'from hunting and little else'; HOUSES has subsistence farming, grazing, shepherd; food grown 110%","other":""}
+{"id":"05339","town":"r2r-hamlet-32","sev":"MED","kind":"STATE","why":"gives Metellus Corvinus 'Household Elder, first of Household Council'; PEOPLE brackets show no council seat","other":""}
+{"id":"34619","town":"r2r-hamlet-32","sev":"MED","kind":"STATE","why":"table puts Metellus Corvinus in Household Council; PEOPLE brackets show he sits on no power","other":""}
+{"id":"32849","town":"r2r-hamlet-32","sev":"MED","kind":"STATE","why":"table puts Tertullian Aurelius in Household Council; PEOPLE brackets show no power seat","other":""}
+{"id":"33184","town":"r2r-hamlet-32","sev":"MED","kind":"STATE","why":"table puts Severus Flavius in Household Council; PEOPLE brackets show no power seat","other":""}
+{"id":"24740","town":"r2r-hamlet-32","sev":"MED","kind":"STATE","why":"'third of Household Council' for a person whose PEOPLE brackets show no council seat","other":""}
+{"id":"34041","town":"r2r-hamlet-5","sev":"MED","kind":"STATE","why":"table puts Dionysios Chomatenos in Elder Council; PEOPLE brackets show no power seat","other":""}
+{"id":"06998","town":"r2s-insurgency-hamlet-3","sev":"MED","kind":"STATE","why":"puts Anna Chrysoberges in Elder Council; PEOPLE brackets show no power seat for her","other":""}
+{"id":"10621","town":"r2s-politically_fractured-hamlet-2","sev":"LOW","kind":"STATE","why":"says Independent Bloc presses 'close behind' Free Elder Council; GOVERNMENT gives Bloc Significant and the Council only Minor","other":""}
+{"id":"33424","town":"r2s-politically_fractured-hamlet-2","sev":"MED","kind":"STATE","why":"table puts Kari Thorsson in Free Elder Council; PEOPLE brackets show no power seat","other":""}
+{"id":"33252","town":"r2s-politically_fractured-hamlet-2","sev":"MED","kind":"STATE","why":"table puts Hrolf Magnusson in Free Elder Council; PEOPLE brackets show no power seat","other":""}
+{"id":"06925","town":"r2s-religious_conversion-hamlet-2","sev":"MED","kind":"STATE","why":"presents Charcoal burner as producing coal; LAND gaps say the burner lacks access to its timber input","other":""}
+{"id":"06926","town":"r2s-religious_conversion-hamlet-2","sev":"MED","kind":"STATE","why":"presents Charcoal burner as producing coal and peat fuel; LAND gaps say the burner lacks its timber input","other":""}
+{"id":"21452","town":"r2s-religious_conversion-hamlet-2","sev":"MED","kind":"STATE","why":"lists Peat fuel as an EXPORT; TRADE exports are Sacred wood, Ritual components, Coal, Flour and meal only","other":""}
+{"id":"33181","town":"r2s-religious_conversion-hamlet-2","sev":"MED","kind":"STATE","why":"table puts Yasmeen ibn Khalid in Feudal Stewardship; PEOPLE brackets show no power seat","other":""}
+{"id":"00470","town":"r2s-slave_revolt-hamlet-0","sev":"MED","kind":"STATE","why":"gives Milena Alexeyev 'second of Headman's Authority'; PEOPLE brackets show no power seat","other":""}
+{"id":"14065","town":"r2s-slave_revolt-hamlet-0","sev":"HIGH","kind":"STATE","why":"says Bogdan Kozlov holds the seat of Headman's Authority; PEOPLE brackets show no power seat, and the village headman office has nobody","other":""}
+{"id":"00506","town":"r2s-slave_revolt-hamlet-1","sev":"MED","kind":"STATE","why":"gives Suresh Acharya 'Household Elder, first of Household Council'; PEOPLE brackets show no council seat","other":""}
+{"id":"06315","town":"r2s-slave_revolt-hamlet-1","sev":"LOW","kind":"LACKS","why":"'Behind its walls' shelter; DEFENCE says walls none","other":""}
+{"id":"00732","town":"r2s-slave_revolt-hamlet-1","sev":"MED","kind":"LACKS","why":"'the major farming families and the guilds' in a hamlet of 36; no guild in HOUSES","other":""}
+{"id":"09846","town":"r2s-slave_revolt-hamlet-2","sev":"LOW","kind":"STATE","why":"says Revolt Leadership presses 'close behind' Feudal Stewardship; GOVERNMENT gives Revolt Leadership Strong, Stewardship only Significant","other":""}
+{"id":"32584","town":"r2s-succession_void-hamlet-1","sev":"MED","kind":"LACKS","why":"names a principal hall and a landing; HOUSES has neither (no hall, no fisher's landing)","other":""}
+{"id":"34220","town":"r2s-succession_void-hamlet-1","sev":"MED","kind":"STATE","why":"table puts Dagny Magnusson in Headman's Authority; PEOPLE brackets show no power seat","other":""}
+{"id":"24762","town":"r2s-succession_void-hamlet-1","sev":"HIGH","kind":"STATE","why":"names an Acting Headman, first of Headman's Authority; PEOPLE brackets give nobody that seat, and the crisis is a succession void","other":""}
+{"id":"14638","town":"r2r-hamlet-36","sev":"MED","kind":"STATE","why":"says it sends out pig iron and iron bars; TRADE exports list none, and the tag S reaches sieges where nothing goes out","other":""}
+{"id":"05250","town":"r2r-hamlet-36","sev":"MED","kind":"STATE","why":"gives Ghalia al-Jabbar 'second of Free Elder Council'; PEOPLE brackets show no power seat","other":""}
+{"id":"33182","town":"r2r-hamlet-36","sev":"MED","kind":"STATE","why":"table puts Ghalia al-Jabbar in Free Elder Council; PEOPLE brackets show no power seat","other":""}
+{"id":"34733","town":"r2r-hamlet-36","sev":"MED","kind":"STATE","why":"table puts Lina ibn Rashid in Free Elder Council; PEOPLE brackets show no power seat","other":""}
+{"id":"27503","town":"r2r-hamlet-38","sev":"MED","kind":"LACKS","why":"names a creditor's representative; GOVERNMENT lists only Headman's Authority, no creditor power","other":""}
+{"id":"07710","town":"r2r-hamlet-38","sev":"LOW","kind":"STATE","why":"says the dairy farmer keeps a herd for milk; LAND gaps say the dairy farmer lacks access to livestock","other":""}
+{"id":"33972","town":"r2r-hamlet-4","sev":"MED","kind":"STATE","why":"table puts Barlas Jadaran in Headman's Authority; PEOPLE brackets show no power seat","other":""}
+{"id":"33254","town":"r2r-hamlet-4","sev":"MED","kind":"STATE","why":"table puts Temür Ongut in Headman's Authority; PEOPLE brackets show no power seat","other":""}
+{"id":"11946","town":"r2s-indebted-hamlet-1","sev":"MED","kind":"LACKS","why":"names the creditor's representative; GOVERNMENT lists only Free Elder Council, no creditor power","other":""}
+{"id":"13895","town":"r2s-indebted-hamlet-1","sev":"MED","kind":"STATE","why":"says Laith al-Amin of Free Elder Council holds the seat; PEOPLE brackets show no council seat for the boat-headman","other":""}
+{"id":"33971","town":"r2s-indebted-hamlet-1","sev":"MED","kind":"STATE","why":"table puts Imad ibn Rashid in Free Elder Council; PEOPLE brackets show no power seat","other":""}
+{"id":"05242","town":"r2s-monster_pressure-hamlet-1","sev":"MED","kind":"STATE","why":"gives Alyona Pavlov 'Elder, first of Free Elder Council'; PEOPLE brackets show no council seat","other":""}
+{"id":"34044","town":"r2s-monster_pressure-hamlet-1","sev":"MED","kind":"STATE","why":"table puts Tomislav Alexeyev in Free Elder Council; PEOPLE brackets show no power seat","other":""}
+{"id":"24736","town":"r2s-monster_pressure-hamlet-1","sev":"MED","kind":"STATE","why":"'third of Free Elder Council' for a person whose PEOPLE brackets show no council seat","other":""}
+{"id":"14739","town":"r2s-infiltrated-hamlet-1","sev":"LOW","kind":"STATE","why":"says nothing comes in to make up the food gap; FOOD ledger shows 1% brought in","other":""}
+{"id":"14620","town":"r2s-infiltrated-hamlet-1","sev":"MED","kind":"STATE","why":"says it sends out cut gems; LAND gaps say gemstones limited to intermediate products, and TRADE exports list no gems","other":""}
+{"id":"19442","town":"r2s-infiltrated-hamlet-1","sev":"LOW","kind":"LACKS","why":"names a 'Defended Pass'; DEFENCE is none everywhere and defence word is Undefended","other":""}
+{"id":"28041","town":"r2s-monster_pressure-hamlet-2","sev":"LOW","kind":"LACKS","why":"'The smiths' plural; HOUSES has one part-time resident smith","other":""}
+{"id":"33179","town":"r2s-monster_pressure-hamlet-2","sev":"MED","kind":"STATE","why":"table puts Chagatai Kiyad in Elder Council; PEOPLE brackets show no power seat","other":""}
+{"id":"00495","town":"r2s-politically_fractured-hamlet-1","sev":"MED","kind":"STATE","why":"makes Mais al-Rahman 'member of Household Council'; PEOPLE brackets show no power seat","other":""}
+{"id":"28039","town":"r2s-politically_fractured-hamlet-1","sev":"LOW","kind":"LACKS","why":"'The smiths' plural; HOUSES has one part-time resident smith","other":""}
+{"id":"34553","town":"r2s-politically_fractured-hamlet-1","sev":"MED","kind":"STATE","why":"table puts Mais al-Rahman in Household Council; PEOPLE brackets show no power seat","other":""}
+{"id":"34986","town":"r2s-politically_fractured-hamlet-1","sev":"MED","kind":"STATE","why":"table puts Aziz al-Farabi in Household Council; PEOPLE brackets show no power seat","other":""}
+{"id":"33563","town":"r2s-politically_fractured-hamlet-1","sev":"MED","kind":"STATE","why":"table puts Nadia ibn Khalid in Household Council; PEOPLE brackets show no power seat","other":""}
+{"id":"24870","town":"r2s-politically_fractured-hamlet-1","sev":"MED","kind":"STATE","why":"'member of Household Council' for a person whose PEOPLE brackets show no power seat","other":""}
+{"id":"05570","town":"r2s-recently_betrayed-hamlet-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"12954","town":"r2s-recently_betrayed-hamlet-3","sev":"LOW","kind":"STATE","why":"says Military/Guard presses 'close behind'; GOVERNMENT has it Strong, above Council Significant, and relations escalating; also slash-joined name","other":""}
+{"id":"05328","town":"r2s-recently_betrayed-hamlet-3","sev":"MED","kind":"STATE","why":"gives Seanchán Walsh 'second of The Guard'; PEOPLE brackets show no power seat; power is named Military/Guard","other":""}
+{"id":"13793","town":"r2s-recently_betrayed-hamlet-3","sev":"MED","kind":"STATE","why":"puts Clothra MacDonald 'of Military/Guard'; PEOPLE brackets show no power seat for the master of the hunt; slash-joined name","other":""}
+{"id":"16970","town":"r2s-recently_betrayed-hamlet-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"34411","town":"r2s-recently_betrayed-hamlet-3","sev":"MED","kind":"STATE","why":"table puts Clothra MacDonald in Military/Guard; PEOPLE brackets show no power seat","other":""}
+{"id":"24900","town":"r2s-recently_betrayed-hamlet-3","sev":"MED","kind":"STATE","why":"'second of Military/Guard' seat; PEOPLE brackets show none; slash-joined name","other":""}
+{"id":"18995","town":"r2s-religious_conversion-hamlet-0","sev":"LOW","kind":"STATE","why":"names Galeria Cato's duties in Elder Council; PEOPLE brackets show no council seat for the quarry master","other":""}
+{"id":"06927","town":"r2s-insurgency-hamlet-1","sev":"MED","kind":"STATE","why":"presents Charcoal burner as producing coal; LAND gaps say the burner lacks access to its timber input","other":""}
+{"id":"06924","town":"r2s-insurgency-hamlet-1","sev":"MED","kind":"STATE","why":"presents Charcoal burner as producing coal and peat fuel; LAND gaps say the burner lacks its timber input","other":""}
+{"id":"05246","town":"r2s-insurgency-hamlet-1","sev":"MED","kind":"STATE","why":"gives Ilse Hoffmann 'Elder, first of Free Elder Council'; PEOPLE brackets show no council seat","other":""}
+{"id":"13971","town":"r2s-insurgency-hamlet-1","sev":"MED","kind":"STATE","why":"says Ilse Hoffmann of Free Elder Council holds the seat; PEOPLE brackets show no council seat for the camp foreman","other":""}
+{"id":"33163","town":"r2s-insurgency-hamlet-1","sev":"MED","kind":"STATE","why":"table puts Ilse Hoffmann in Free Elder Council; PEOPLE brackets show no power seat","other":""}
+{"id":"00504","town":"r2s-wartime-hamlet-0","sev":"MED","kind":"STATE","why":"gives Wu Gao 'Elder, first of Free Elder Council'; PEOPLE brackets show no council seat","other":""}
+{"id":"11953","town":"r2s-wartime-hamlet-0","sev":"LOW","kind":"LACKS","why":"names a health official; GOVERNMENT and HOUSES list no such office in a hamlet","other":""}
+{"id":"34610","town":"r2s-wartime-hamlet-0","sev":"MED","kind":"STATE","why":"table puts Wu Gao in Free Elder Council; PEOPLE brackets show no power seat","other":""}
+{"id":"34878","town":"r2s-wartime-hamlet-0","sev":"MED","kind":"STATE","why":"table puts Reiko Guo in Free Elder Council; PEOPLE brackets show no power seat","other":""}
+{"id":"24861","town":"r2s-wartime-hamlet-0","sev":"MED","kind":"STATE","why":"'member of Free Elder Council' for a person whose PEOPLE brackets show no power seat","other":""}
+{"id":"06161","town":"r2s-indebted-hamlet-0","sev":"LOW","kind":"STATE","why":"offers churned butter; LAND gaps say the dairy farmer lacks access to livestock","other":""}
+{"id":"14629","town":"r2s-indebted-hamlet-0","sev":"MED","kind":"STATE","why":"says it sends out lumber and planks; TRADE exports list only charcoal, sacred wood, ritual components; LAND says timber limited to intermediate products","other":""}
+{"id":"05319","town":"r2s-indebted-hamlet-0","sev":"MED","kind":"STATE","why":"gives Sorghaghtani Taichiud 'third of Free Elder Council'; PEOPLE brackets show no council seat","other":""}
+{"id":"34551","town":"r2s-indebted-hamlet-0","sev":"MED","kind":"STATE","why":"table puts Sorghaghtani Taichiud in Free Elder Council; PEOPLE brackets show no power seat","other":""}
+{"id":"05337","town":"r2s-indebted-hamlet-2","sev":"MED","kind":"STATE","why":"gives Diemoda Klein 'Elder, first of Free Elder Council'; PEOPLE brackets show no council seat","other":""}
+{"id":"10619","town":"r2s-infiltrated-hamlet-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"16989","town":"r2s-infiltrated-hamlet-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"17038","town":"r2s-infiltrated-hamlet-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"17065","town":"r2s-mass_migration-hamlet-1","sev":"MED","kind":"STATE","why":"lists Milled lumber as an EXPORT; TRADE exports are only Shipbuilding timber and Barrels and containers","other":""}
+{"id":"00494","town":"r2s-mass_migration-hamlet-1","sev":"MED","kind":"STATE","why":"makes Hierotheos Bryennios 'member of Headman's Authority'; PEOPLE brackets show no power seat","other":""}
+{"id":"34734","town":"r2s-mass_migration-hamlet-1","sev":"MED","kind":"STATE","why":"table puts Petros Botaneiates in Headman's Authority; PEOPLE brackets show no power seat","other":""}
+{"id":"35136","town":"r2s-mass_migration-hamlet-1","sev":"MED","kind":"STATE","why":"table puts Komnenissa Chrysoberges in Headman's Authority; PEOPLE brackets show no power seat","other":""}
+{"id":"24868","town":"r2s-mass_migration-hamlet-1","sev":"MED","kind":"STATE","why":"'member of Headman's Authority' for a person whose PEOPLE brackets show no power seat","other":""}
+{"id":"24739","town":"r2s-mass_migration-hamlet-1","sev":"MED","kind":"STATE","why":"'third of Headman's Authority' for a person whose PEOPLE brackets show no power seat","other":""}
+{"id":"05323","town":"r2s-politically_fractured-hamlet-0","sev":"MED","kind":"STATE","why":"makes Hristina Sidorov 'member of Headman's Authority'; PEOPLE brackets show no power seat","other":""}
+{"id":"34408","town":"r2s-politically_fractured-hamlet-0","sev":"MED","kind":"STATE","why":"table puts Ivan Bogdanov in Headman's Authority; PEOPLE brackets show no power seat","other":""}
+{"id":"09840","town":"r2s-recently_betrayed-hamlet-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label names Reformers and Complicit beneficiaries, which GOVERNMENT does not list as powers (only Military Party, Feudal Stewardship)","other":""}
+{"id":"09843","town":"r2s-recently_betrayed-hamlet-0","sev":"LOW","kind":"STATE","why":"says Military Party presses 'close behind' Feudal Stewardship; GOVERNMENT has Military Party Strong and Stewardship only Minor","other":""}
+{"id":"00510","town":"r2s-recently_betrayed-hamlet-0","sev":"MED","kind":"STATE","why":"gives Alexios II Comnenus 'second of Feudal Stewardship'; PEOPLE brackets show no power seat","other":""}
+{"id":"21275","town":"r2s-recently_betrayed-hamlet-0","sev":"LOW","kind":"STATE","why":"lists parties as Feudal Stewardship vs Reformers vs Complicit beneficiaries; GOVERNMENT powers are Military Party and Feudal Stewardship, no Reformers","other":""}
+{"id":"13789","town":"r2s-recently_betrayed-hamlet-0","sev":"MED","kind":"STATE","why":"puts Michael Bryennios 'of Military Party'; PEOPLE brackets show no power seat for the charter master","other":""}
+{"id":"34609","town":"r2s-recently_betrayed-hamlet-0","sev":"MED","kind":"STATE","why":"table puts Alexios II Comnenus in Feudal Stewardship; PEOPLE brackets show no power seat","other":""}
+{"id":"34732","town":"r2s-recently_betrayed-hamlet-0","sev":"MED","kind":"STATE","why":"table puts Irini Chrysoberges in Feudal Stewardship; PEOPLE brackets show no power seat","other":""}
+{"id":"33162","town":"r2s-recently_betrayed-hamlet-0","sev":"MED","kind":"STATE","why":"table puts Basileios Alexios in Feudal Stewardship; PEOPLE brackets show no power seat","other":""}
+{"id":"33258","town":"r2s-recently_betrayed-hamlet-0","sev":"MED","kind":"STATE","why":"table puts Michael Bryennios in Military Party; PEOPLE brackets show no power seat","other":""}
+{"id":"34977","town":"r2s-recently_betrayed-hamlet-0","sev":"MED","kind":"STATE","why":"table puts Niketas Alexios in Feudal Stewardship; PEOPLE brackets show no power seat","other":""}
+{"id":"16925","town":"r2s-recently_betrayed-hamlet-0","sev":"MED","kind":"LACKS","why":"describes an armed patrol of residents; DEFENCE shows militia none, watch none, garrison none","other":""}
+{"id":"30561","town":"r2r-hamlet-10","sev":"MED","kind":"LACKS","why":"'Watch rotations are thin'; DEFENCE says watch: none","other":""}
+{"id":"14039","town":"r2r-hamlet-10","sev":"LOW","kind":"BROKEN","why":"garbled clause 'one of the house the crisis hits; next in line, the first choice already holding a role that contradicts this one'; slash-joined 'Military/Guard'","other":""}
+{"id":"27683","town":"r2r-hamlet-10","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"16987","town":"r2r-hamlet-10","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"33259","town":"r2r-hamlet-10","sev":"MED","kind":"STATE","why":"table puts Lavinia Bassus in Military/Guard; PEOPLE brackets show no power seat for the charter master","other":""}
+{"id":"34978","town":"r2r-hamlet-10","sev":"MED","kind":"STATE","why":"table puts Valerianus Varro in Free Elder Council; PEOPLE brackets show no power seat","other":""}
+{"id":"34984","town":"r2r-hamlet-45","sev":"MED","kind":"STATE","why":"table puts Zorana Popov in Headman's Authority; PEOPLE brackets show no power seat","other":""}
+{"id":"01244","town":"r2s-succession_void-hamlet-0","sev":"LOW","kind":"STATE","why":"says Highborn Circle presses 'close behind' Free Elder Council; GOVERNMENT has the Circle Strong, the Council only Significant","other":""}
+{"id":"00489","town":"r2s-succession_void-hamlet-0","sev":"MED","kind":"STATE","why":"gives Zenobia Silanus 'third of Free Elder Council'; PEOPLE brackets show no council seat","other":""}
+{"id":"34600","town":"r2s-succession_void-hamlet-0","sev":"MED","kind":"STATE","why":"table puts Titia Caesar in Free Elder Council; PEOPLE brackets show no power seat","other":""}
+{"id":"34412","town":"r2s-succession_void-hamlet-0","sev":"MED","kind":"STATE","why":"table puts Portia Caesar in The Highborn Circle; PEOPLE brackets show no power seat","other":""}
+{"id":"33557","town":"r2s-succession_void-hamlet-0","sev":"MED","kind":"STATE","why":"table puts Scaevola Nero in Free Elder Council; PEOPLE brackets show no power seat","other":""}
+{"id":"34871","town":"r2s-succession_void-hamlet-0","sev":"MED","kind":"STATE","why":"table puts Rufus Cato in Free Elder Council; PEOPLE brackets show no power seat","other":""}
+{"id":"33951","town":"r2s-succession_void-hamlet-0","sev":"MED","kind":"STATE","why":"table puts Gnaeus Cicero in The Highborn Circle; PEOPLE brackets show no power seat","other":""}
+{"id":"24724","town":"r2s-succession_void-hamlet-0","sev":"MED","kind":"STATE","why":"'third of Free Elder Council' for a person whose PEOPLE brackets show no council seat","other":""}
+{"id":"24751","town":"r2s-succession_void-hamlet-0","sev":"MED","kind":"STATE","why":"'third of The Highborn Circle'; only the lord is attached to the Circle in PEOPLE, with no brackets for anyone else","other":""}
+{"id":"00909","town":"r2s-succession_void-hamlet-0","sev":"MED","kind":"STATE","why":"says no lord stands over the elders; PEOPLE has Zenobia Cicero 'the lord' of The Highborn Circle, a Strong power","other":""}
+{"id":"08662","town":"r2r-hamlet-27","sev":"LOW","kind":"STATE","why":"says Military/Guard presses 'close behind' Elder Council; GOVERNMENT has Military/Guard Dominant over Council Strong; slash-joined name","other":""}
+{"id":"00499","town":"r2r-hamlet-27","sev":"MED","kind":"STATE","why":"gives Alaa ibn Ahmed 'second of The Guard'; PEOPLE brackets show no power seat; power is named Military/Guard","other":""}
+{"id":"16991","town":"r2r-hamlet-27","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"08653","town":"r2r-hamlet-31","sev":"MED","kind":"STATE","why":"heads the town with a three-way contest (Elder Council / Popular candidate / merchant class); CRISIS none, one power only, QUARRELS none, stability Stable","other":""}
+{"id":"21268","town":"r2r-hamlet-31","sev":"LOW","kind":"LACKS","why":"names 'the merchant class' and a popular candidate as parties; GOVERNMENT lists only Elder Council, HOUSES has no trade house, population 27","other":""}
+{"id":"00581","town":"r2r-hamlet-31","sev":"MED","kind":"STATE","why":"gives Fang Wang 'Elder, first of Elder Council'; PEOPLE brackets show no council seat for the maltster","other":""}
+{"id":"02944","town":"r2r-hamlet-31","sev":"MED","kind":"STATE","why":"says 'the current shortage' makes the clause valuable; CRISIS none, FOOD Secure with 28% surplus, PAST records no present shortage","other":""}
+{"id":"34221","town":"r2r-hamlet-31","sev":"MED","kind":"STATE","why":"table puts Fang Wang in Elder Council; PEOPLE brackets show no power seat","other":""}
+{"id":"09610","town":"r2r-hamlet-46","sev":"LOW","kind":"LACKS","why":"names 'the war party'; GOVERNMENT lists only Household Council and no war power","other":""}
+{"id":"12103","town":"r2r-hamlet-22","sev":"MED","kind":"STATE","why":"heads the town with a three-way contest (Headman's Authority / Popular candidate / merchant class); CRISIS none, one power only, QUARRELS none, stability Stable","other":""}
+{"id":"00584","town":"r2r-hamlet-22","sev":"MED","kind":"STATE","why":"makes Midori Yang 'Headman, first of Headman's Authority'; PEOPLE has her as stable keeper with no brackets, and the village headman office is empty","other":""}
+{"id":"21288","town":"r2r-hamlet-22","sev":"LOW","kind":"LACKS","why":"names 'the merchant class' and a popular candidate as parties; GOVERNMENT lists only Headman's Authority, HOUSES has no trade house","other":""}
+{"id":"11662","town":"r2r-hamlet-44","sev":"MED","kind":"STATE","why":"recounts a Great Fire; PAST records only The Migration","other":""}
+{"id":"05267","town":"r2r-hamlet-12","sev":"MED","kind":"STATE","why":"makes Tornikes Dalassenos 'Headman, first of Headman's Authority'; HOUSES has no village headman, PEOPLE has him as dairy farmer with no brackets","other":""}
+{"id":"HEADER","town":"r2r-hamlet-39","sev":"MED","kind":"RECORD","why":"STATE says defence 'Lightly Defended'; DEFENCE lists no walls, garrison, militia, watch, hired, charter or magic","other":""}
+{"id":"10616","town":"r2r-hamlet-39","sev":"MED","kind":"STATE","why":"heads the town with a contest (Free Elder Council / Popular candidate); CRISIS none, one power only, QUARRELS none, stability Stable","other":""}
+{"id":"21278","town":"r2r-hamlet-39","sev":"LOW","kind":"LACKS","why":"names a Popular candidate as a party against Free Elder Council; GOVERNMENT lists only the Council","other":""}
+{"id":"00582","town":"r2r-hamlet-39","sev":"MED","kind":"STATE","why":"gives Portia Aurelius 'Elder, first of Free Elder Council'; PEOPLE brackets show no council seat for the peat-reeve","other":""}
+{"id":"03686","town":"r2r-hamlet-39","sev":"LOW","kind":"LACKS","why":"refers to 'the vault' a relic never reached; HOUSES lists no vault or treasury","other":""}
+{"id":"05343","town":"r2r-hamlet-40","sev":"MED","kind":"STATE","why":"gives Huitzilxochitl Chan 'second of Feudal Stewardship'; PEOPLE brackets show no power seat","other":""}
+{"id":"34550","town":"r2r-hamlet-40","sev":"MED","kind":"STATE","why":"table puts Wind Batab in Feudal Stewardship; PEOPLE brackets show no power seat","other":""}
+{"id":"05298","town":"r2r-hamlet-42","sev":"MED","kind":"STATE","why":"gives Rong Liu 'second of Elder Council'; PEOPLE brackets show no council seat for the head shepherd","other":""}
+{"id":"04661","town":"r2r-hamlet-42","sev":"LOW","kind":"LACKS","why":"says an oversight office was established to audit officials; GOVERNMENT and HOUSES list no such office","other":""}
+{"id":"19742","town":"r2r-hamlet-42","sev":"LOW","kind":"LACKS","why":"names a 'Defended Pass'; DEFENCE lists nothing and the defence word is Vulnerable","other":""}
+{"id":"05325","town":"r2r-hamlet-51","sev":"MED","kind":"STATE","why":"gives Andrei Ivanov 'second of Elder Council'; PEOPLE brackets show no council seat for the militia captain","other":""}
+{"id":"29930","town":"r2r-hamlet-51","sev":"MED","kind":"LACKS","why":"names a standing arbitration council settling wage disputes; GOVERNMENT lists only Elder Council and HOUSES has no such body in a hamlet of 68","other":""}
+{"id":"00399","town":"r2r-hamlet-1","sev":"MED","kind":"STATE","why":"gives Alexei Volkov 'second of Headman's Authority'; PEOPLE brackets show no power seat for the alewife","other":""}
+{"id":"00428","town":"r2r-hamlet-14","sev":"MED","kind":"STATE","why":"gives Muluc Balam 'third of Feudal Stewardship'; PEOPLE brackets show no power seat for the dairy farmer","other":""}
+{"id":"33170","town":"r2r-hamlet-14","sev":"MED","kind":"STATE","why":"table puts Xiuhcoatl Balam in Feudal Stewardship; PEOPLE brackets show no power seat","other":""}
+{"id":"25328","town":"r2r-hamlet-25","sev":"LOW","kind":"STATE","why":"gives Leonhard Schulz duties in Elder Council; PEOPLE brackets show no council seat for the innkeeper","other":""}
+{"id":"26384","town":"r2r-hamlet-25","sev":"MED","kind":"STATE","why":"heresy-trial story ('condemned doctrine'); PAST lists Purge, Pilgrimage, Siege, Arcane Incident and no heresy trial","other":""}
+{"id":"00498","town":"r2r-hamlet-41","sev":"MED","kind":"STATE","why":"gives Dokuz Naiman 'second of Headman's Authority'; PEOPLE brackets show no power seat for the militia captain","other":""}
+{"id":"05468","town":"r2r-hamlet-41","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"12129","town":"r2r-hamlet-41","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"05326","town":"r2r-hamlet-55","sev":"MED","kind":"STATE","why":"gives Xiao Li 'second of Free Elder Council'; PEOPLE brackets show no council seat for the militia captain","other":""}
+{"id":"HEADER","town":"r2r-hamlet-57","sev":"MED","kind":"RECORD","why":"STATE says defence 'Lightly Defended'; DEFENCE lists no walls, garrison, militia, watch, hired, charter or magic","other":""}
+{"id":"26869","town":"r2r-hamlet-57","sev":"LOW","kind":"STATE","why":"says little food of its own but herds; HOUSES has subsistence farming and FOOD shows 122% grown with 22% surplus","other":""}
+{"id":"00429","town":"r2r-hamlet-57","sev":"MED","kind":"STATE","why":"gives Otgontuya Ongut 'Elder, first of Free Elder Council'; PEOPLE brackets show no council seat for the dairy farmer","other":""}
+{"id":"HEADER","town":"r2r-hamlet-59","sev":"MED","kind":"RECORD","why":"STATE says defence 'Lightly Defended'; DEFENCE lists no walls, garrison, militia, watch, hired, charter or magic","other":""}
+{"id":"05255","town":"r2r-hamlet-59","sev":"MED","kind":"STATE","why":"gives Ubbi Sigmundsson 'Household Elder, first of Household Council'; PEOPLE brackets show no council seat for the collier","other":""}
+{"id":"33429","town":"r2r-hamlet-59","sev":"MED","kind":"STATE","why":"table puts Ubbi Sigmundsson in Household Council; PEOPLE brackets show no power seat","other":""}
+{"id":"32850","town":"r2r-hamlet-59","sev":"MED","kind":"STATE","why":"table puts Yrsa Eriksson in Merchant Guilds; PEOPLE brackets show no power seat for the alewife","other":""}
+{"id":"16419","town":"r2r-hamlet-59","sev":"MED","kind":"STATE","why":"'Member of: Merchant Guilds' for a person whose PEOPLE brackets show no power seat; only collier and alewife are listed","other":""}
+{"id":"24899","town":"r2r-hamlet-59","sev":"MED","kind":"STATE","why":"'second of Merchant Guilds'; PEOPLE brackets show no power seat for anyone","other":""}
+{"id":"16695","town":"r2r-hamlet-59","sev":"LOW","kind":"STATE","why":"calls Merchant Guilds 'Dominant'; GOVERNMENT gives Merchant Guilds Strong and Household Council Dominant","other":""}
+{"id":"DONE","lines":2426,"blocks":57,"flags":159}
