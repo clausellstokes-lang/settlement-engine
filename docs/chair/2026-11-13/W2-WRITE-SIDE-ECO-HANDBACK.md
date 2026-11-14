@@ -42,7 +42,7 @@ None found in the first seat's commits: its one ruling (00:23 UTC) is copied int
 | row | line | state | commit |
 |---|---|---|---|
 | C1 | DS-ECO-10 POSTURE established v5 | FALSE beside the one-trade income line (49 of 103 draws) and under a siege: reworded with v1 v3 (D #309 #245, E ww902 ww1497 ww1527), v5 `no crisis: under_siege` (guard rww-city-under_siege-1) | 5132da377 |
-| C2 | DS-ECO-9 HOW THE NEED IS MET much of it brought in v3 | open (D #1369, E ww1180 name its earlier wording) | |
+| C2 | DS-ECO-9 HOW THE NEED IS MET much of it brought in v3 | FALSE (bread where no grain is imported; carts at a river or port; under a quarantine): reworded; v1 v2 v3 `no crisis: plague_onset` (guard w5-city-plague_onset-3, three rows) (D #1369, E ww1180) | see git log |
 | C3 | DS-ECO-9 HOW THE NEED IS MET part of it by magic v2, v3 | open: the key reads foodRecord.magicPct, which includes "divine provision"; v3 "it is there by magic" beside "Reliance on magic: None" (E ww503, ww843, ww972, ww1466; D #174) | |
 | C4 | DS-ECO-1 C3 the middle rungs v2 | open (D #686 names its earlier wording) | |
 | C5 | DS-ECO-6 TIER a large share off the books v2 (dm-only) | open (D #804 names its earlier wording) | |
@@ -58,4 +58,4 @@ None found in the first seat's commits: its one ruling (00:23 UTC) is copied int
 `git worktree add -b <local> <dir> origin/lane/w2-write-side-eco-2026-11-13`; `npm ci` there, then `git config --local --unset core.hooksPath` in the main clone (npm ci writes it); `git archive <tip> docs/chair/2026-11-13/probes/W2-WRITE-5 | tar -x -C <H>`; `OUT` outside the repo. The base render: `sh $H/render.sh <tree> $OUT/r-base $H/seeds-w5a.txt 3` (about 45 minutes); a read: the same with a short seeds file. Every commit: edit the source, `sh $H/doors.sh`, a guard row red first where a mark is added, `sh $H/iterate.sh "<cause>"` twice around `node $H/bytes.mjs`, the proseMoveGrammar shares by hand only if CONTROL 4 stays red (restore the file if the integers end where they began), `gates.sh`, `npm run lint`, fetch, `push.sh`.
 
 ## The state
-B: DONE, 15 of 15 (11 by the first seat, 4 by the second), and D #1200 taken with item 9. C: 1 of 5 rows (C1). Tip 5132da377 before this file's commit.
+B: DONE, 15 of 15 (11 by the first seat, 4 by the second), and D #1200 taken with item 9. C: 2 of 5 rows (C1, C2). Tip 5132da377 before this file's commit.
