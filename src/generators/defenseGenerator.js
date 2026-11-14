@@ -316,8 +316,10 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
   };
   const A = W.arcane;
   const arcMon = t.hasArcane ? Math.round(A.mon + Math.min(A.monMax, (magPri - G.arcane) * A.monPerDial)) : 0;
-  // R2: the three traditions together count at most 35 against monsters (one job, once).
-  const tradF = Math.min(1, W.traditionsMonsterMax / Math.max(1, arcMon + (t.hasDivine ? W.clergy.mon : 0) + (t.hasDruid ? W.druids.mon : 0)));
+  // R2: the three traditions together count at most 35 against monsters (one job, once). UPKEEP-MEASURE-2 X2: held on
+  // the points they COUNT (each house's scale and the casters' pay already in), after the three are added below, so one
+  // more tradition never lowers the beasts score (the weights' share left the scaled and paid points out).
+  const tradF = 1;
   const hasStanding = inst.hasGarrison || inst.hasMilitia || inst.hasWatch;
   const hired = inst.hasMercenary || inst.hasCharterHall;
   const law = inst.hasCourtSystem || inst.hasPrison || inst.hasGarrison || inst.hasWatch;
@@ -375,6 +377,14 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
     });
   }
   if (t.hasDruid) add('STANDS', 'druids', { mon: W.druids.mon * tradF });
+  {
+    const trad = parts.filter((q) => q.id === 'arcane' || q.id === 'clergy' || q.id === 'druids');
+    const mon = trad.reduce((a, q) => a + (q.dims.mon || 0), 0);
+    if (mon > W.traditionsMonsterMax) {
+      const k = W.traditionsMonsterMax / mon;
+      for (const q of trad) if (q.dims.mon) { q.dims.mon *= k; q.raw.mon *= k; }
+    }
+  }
   // SUSTAINS: what keeps the force going. The stores were laid by at the standing share by their writer.
   const months = fs?.storageMonths ?? (inst.hasGranary ? W.stores.granaryMonths : W.stores.noGranaryMonths);
   add('SUSTAINS', 'stores', { sup: storesPointsOf(months) }, 1, { months: tenths(months) });
