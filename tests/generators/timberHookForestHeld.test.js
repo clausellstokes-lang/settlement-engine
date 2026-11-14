@@ -20,9 +20,11 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 
 const TIMBER = /the forest the timber comes from/;
+/** Composed at the merge of the line (976db5b19): the timber branch draws the forest sentence or the line's rafts sentence by `pick` (population + institutions, no roll); a population of 801 beside one sawmill draws the forest one. */
+const TIMBER_HOOK = /the forest the timber comes from|The timber rafts stopped coming/;
 const SAWMILL = [{ name: 'Sawmill', category: 'Crafts' }];
 const BALANCE = { deficit: 0, dailyProduction: 10, dailyNeed: 10 };
-const timberFor = (/** @type {any} */ config, balance = BALANCE) => deriveSupplyRiskAnalysis(800, { mustImport: ['timber'] }, SAWMILL, { tradeRouteAccess: 'road', terrainType: 'plains', tier: 'town', ...config }, balance)
+const timberFor = (/** @type {any} */ config, balance = BALANCE) => deriveSupplyRiskAnalysis(801, { mustImport: ['timber'] }, SAWMILL, { tradeRouteAccess: 'road', terrainType: 'plains', tier: 'town', ...config }, balance)
   .plotHooks.some((h) => TIMBER.test(h.hook));
 
 describe('the timber line names a forest only where the record holds one', () => {
@@ -52,6 +54,8 @@ function born(seed) {
   return /** @type {any} */ (generateSettlementPipeline(birthConfig(cfg), null, { seed, customContent: {} }));
 }
 /** @param {any} s */
+const printsTimberHook = (s) => (s.economicViability?.plotHooks || []).some((/** @type {any} */ h) => TIMBER_HOOK.test(h.hook));
+/** @param {any} s */
 const printsTimber = (s) => (s.economicViability?.plotHooks || []).some((/** @type {any} */ h) => TIMBER.test(h.hook));
 /** @param {any} s */
 const forestHeld = (s) => availableNativeResourceKeys(s.config).some((k) => /^(managed_forest|shipbuilding_timber|mountain_timber)$/.test(k));
@@ -63,8 +67,8 @@ describe('the cut\'s towns and their guard, born as the app births them', () => 
     const falseForest = towns.filter(({ s }) => !forestHeld(s) && printsTimber(s)).map(({ seed }) => seed);
     expect(falseForest).toEqual([]);
   });
-  it('the guard towns, with a forest standing, keep the line (a calm city with a managed forest; a village by shipbuilding timber)', () => {
+  it('the guard towns, with a forest standing, keep the timber hook, whichever sentence the draw of the line gives (a calm city with a managed forest; a village by shipbuilding timber)', () => {
     const towns = ['r2r-city-26', 'r2r-village-11'].map((seed) => ({ seed, s: born(seed) }));
-    expect(towns.map(({ seed, s }) => [seed, forestHeld(s), printsTimber(s)])).toEqual(towns.map(({ seed }) => [seed, true, true]));
+    expect(towns.map(({ seed, s }) => [seed, forestHeld(s), printsTimberHook(s)])).toEqual(towns.map(({ seed }) => [seed, true, true]));
   });
 });
